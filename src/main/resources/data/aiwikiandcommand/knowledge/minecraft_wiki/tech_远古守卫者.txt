@@ -1,0 +1,450 @@
+# 页面: 远古守卫者
+# 来源: https://zh.minecraft.wiki/w/%E8%BF%9C%E5%8F%A4%E5%AE%88%E5%8D%AB%E8%80%85
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 基岩版独有信息, 实体, 敌对生物, 水生生物, 需要信息
+# 抓取时间: 2026-07-14 17:37:04
+# 原始 Wikitext 内容:
+
+{{about|Minecraft中守卫者的加强变种|基岩版中用于渲染的“鬼影”的实体|远古守卫者幽灵|Minecraft Dungeons中的生物|MCD:远古守卫者|或|MCD:上古守卫者||守卫（消歧义）}}
+{{Infobox entity
+|image=Elder Guardian.gif
+|imagesize=280px
+|invimage=Elder Guardian Spawn Egg
+|health={{hp|80}}
+|behavior=敌对生物
+|classification=水生生物
+|damage=
+'''直接伤害（激光）{{only|je|short=1}}：'''<br>{{AutoDmg|8}}<br>
+'''直接伤害（激光）{{only|be|short=1}}：'''<br>{{AutoDmg|5}}<br>
+'''魔法（激光）：'''<br>{{AutoDmg|3|d3=7.5}}<br>
+'''魔法（尖-{}-刺）{{only|je|short=1}}：'''<br>{{AutoDmg|2}}<br>
+'''魔法（尖-{}-刺）{{only|be|short=1}}：'''<br>{{AutoDmg|d1=2|d2=2|d3=2}}
+|size=高度：1.9975格<br>宽度：1.9975格
+|spawn={{EnvLink|Ocean Monument}}
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{quote|潜伏的远古守卫者会将挖掘疲劳施加于你身上，使你无力举起手中的镐。你必须在迷宫中寻找并逐一杀死它们以免受其影响。另外，奶桶是一种有用的并且常见的状态解除剂——确保你准备了几桶！|[[Marsh Davies]]<ref name="minecraft.net">{{article|temples-beneath-sea|Temples beneath the sea|November 28, 2016|Marsh Davies}}</ref>||Marsh Davies Mojang avatar.png}}
+
+'''远古守卫者（Elder Guardian）'''是一种生成于[[海底神殿]]的敌对生物。它是[[守卫者]]更强大的变种。
+
+== 生成 ==
+在每座[[海底神殿]]的生成过程中会有3只远古守卫者随之生成：一只在顶部房间，另两只则分别位于神殿的两个侧翼。
+
+远古守卫者只能在世界生成的过程中被生成，在最初生成之后不会再次生成，因此在每个世界中其数量是有限的。
+
+== 掉落物 ==
+{{DropTable|name=Elder Guardian
+|{{DropLine|name=Wet Sponge|notes=player}}
+|{{DropLine|name=Tide Armor Trim|multiplychance=1/5}}
+|{{DropLine|name=Prismarine Shard|quantity=0-2|lootingquantity=0-1}}
+|{{DropLine|name=Prismarine Crystals|lootingquantity=0-1|multiplychance=2/6}}
+|{{DropLine|name=Raw Cod|notes=je_not_player,je_not_burn|lootingquantity=0-1|multiplychance=3/6}}
+|{{DropLine|name=Raw Cod|edition=java|notes=player,je_not_burn|lootingquantity=0-1|multiplychance=3/6
+|independent={{DropLine|dropchance=2.5%|lootingchance=1%|multiplychance=60%}}}}
+|{{DropLine|name=Cooked Cod|edition=java|notes=je_not_player,burn|lootingquantity=0-1|multiplychance=3/6}}
+|{{DropLine|name=Cooked Cod|edition=java|notes=player,burn|lootingquantity=0-1|multiplychance=3/6
+|independent={{DropLine|dropchance=2.5%|lootingchance=1%|multiplychance=60%}}}}
+|{{DropLine|name=Raw Salmon|edition=java|notes=player,je_not_burn|dropchance=2.5%|lootingchance=1%|multiplychance=25%}}
+|{{DropLine|name=Cooked Salmon|edition=java|notes=player,burn|dropchance=2.5%|lootingchance=1%|multiplychance=25%}}
+|{{DropLine|name=Pufferfish|edition=java|notes=player|multiplychance=13%|dropchance=2.5%|lootingchance=1%}}
+|{{DropLine|name=Tropical Fish|edition=java|notes=player|dropchance=2.5%|lootingchance=1%|multiplychance=2%}}
+|notes=
+je_not_player.java = 僅當'''不'''被[[玩家]]或玩家馴服的[[狼]]殺死時。
+je_not_burn.java => not_burn_or_fire_aspect
+}}
+
+* {{xp|10}}，当被玩家或驯服的狼杀死时。
+
+== 行为 ==
+远古守卫者在水中和陆地上的多数行为与[[守卫者]]的行为相同。像[[守卫者]]一样，远古守卫者也会主动攻击[[玩家]]、[[鱿鱼]]、[[发光鱿鱼]]和[[美西螈]]。与守卫者不同的是：
+
+* 远古守卫者在空闲时不会四处游动（当被移动到自己的生成点之外时会试图游回自己的生成点）。
+* 远古守卫者在被目标玩家接近时不会游开。
+
+远古守卫者的眼睛会跟随并紧盯附近的玩家，而且会直直地盯着正在攻击的目标。它们的眼睛能够跟随拥有[[隐身]]效果且没有穿任何[[盔甲]]（即完全“看不见”）的玩家。远古守卫者也会攻击具有同样效果的其他目标。它们的眼睛似乎只会单纯地跟踪最近的玩家，即使这个玩家处于[[旁观模式]]。
+
+与多数敌对生物不同，远古守卫者永远不会自然消失，在不死亡的情况下会永远保留在世界中。但在和平难度下，远古守卫者会像多数敌对生物一样被移除。
+
+远古守卫者有两种攻击方法：发射激光和用于防御的尖-{}-刺攻击。它们还能给予玩家[[挖掘疲劳]]状态效果。
+
+远古守卫者可以坐在矿车上，但不能坐在船上。
+
+远古守卫者不能被拴绳牵引。
+
+=== 生物族群 ===
+{{main|水生生物}}
+
+远古守卫者是水生生物，{{in|java}}被具有[[穿刺]]魔咒的武器近战攻击，或被具有穿刺魔咒的[[三叉戟]]弹射物命中时会受到额外的伤害。
+
+=== 攻击 ===
+[[File:Elder Guardian laser.png|thumb|遠古深海守衛發射雷射]]
+远古守卫者有2种攻击方式：发射激光和伸出防御性的尖-{}-刺（与[[荆棘]]魔咒类似）。与多数敌对生物不同，远古守卫者没有追逐行为，不会尝试靠近或远离目标。若目标跑出它们的视线，它们会一直游荡直至目标再次进入视线，然后开始激光充能进行攻击。
+
+远古守卫者会主动攻击[[玩家]]、[[美西螈]]、[[鱿鱼]]和[[发光鱿鱼]]。除这些生物以外，远古守卫者并不会使用激光反击攻击它的生物（如铁傀儡），但它的尖-{}-刺仍可对这些攻击者造成伤害。
+
+;激光
+激光需要几秒钟的充能时间，在充能期间没有任何伤害。正在蓄能的激光会从紫色逐渐变成亮黄色，能量充满后，激光就会突然消失并对目标造成两次伤害。远古守卫者在再次攻击前会游动3秒。如果在激光充能时接近远古守卫者，充能会被取消，远古守卫者会退到一个合适的距离后再继续进行攻击。激光不能躲避或使用[[盾牌]]抵挡。激光的最大射程约为14格。若玩家跑出激光的射程或激光被固体方块（包括透明固体方块，如玻璃）阻挡，远古守卫者会停止充能，不造成任何伤害。
+
+远古守卫者的激光消失时，会按照顺序先后造成两次伤害：
+* 在简单、普通、困难难度下分别造成{{AutoDmg|3|d3=7.5|join=、|info=}}魔法伤害，不会被护甲值降低。
+* 在简单、普通、困难难度下分别造成{{AutoDmg|8|join=、|info=}}{{only|JE}}/{{AutoDmg|5|join=、|info=}}{{only|BE}}生物伤害，会被护甲值降低。由于[[受击后伤害免疫]]，此攻击伤害会被削减到此次伤害和上次伤害的差值，此差值经过[[盔甲机制|护甲值计算]]后才会对生物造成真正的对应伤害。
+
+;尖-{}-刺
+每次近战攻击伸出尖-{}-刺的远古守卫者会受到{{hp|2}}点伤害（{{only|je|for=普通难度}}/{{only|be|for=所有难度}}），类似于[[荆棘]]魔咒，且会导致与荆棘魔咒一致的[[生命#死亡|死亡消息]]。与荆棘魔咒不同，这一效果只对近战攻击有效。接近远古守卫者时尖-{}-刺总是伸出的，因为它们不会游开。
+
+=== 造成挖掘疲劳 ===
+[[File:BigEffect.png|缩略图|250px|远古守卫者给予玩家挖掘疲劳III效果时出现的“鬼影”]]
+{{quote|在开发海底神殿的过程中，我遇到了一个问题。我希望这座金字塔像迷宫一样，因此你必须走对路才能获得宝藏。好巧不巧，在Minecraft里你可以肆意挖掘、建造。所以解谜方法总是变成挖开一条路。但我又不想让这座金字塔坚不可摧，因为这在Minecraft中也不好玩。因此在几番思考后，我们决定加入一只守卫者首领，它拥有可以减缓一切的魔咒。 |[[Jens Bergensten]]<ref name="meet-elder-guardian">{{article|meet-elder-guardian|Meet the Elder Guardian|November 6, 2017|Emily Richardson}}</ref>||Jens Bergensten Mojang avatar.png}}
+
+{{only|je|for=每分钟}}或{{only|be|for=每隔几秒钟<ref>{{bug|MCPE-60692}}</ref>{{info needed|具体时间}}}}，远古守卫者会搜寻一次半径50格内没有被1分钟或更久的[[挖掘疲劳]]状态效果影响的玩家，被发现的玩家将会被给予5分钟的[[挖掘疲劳]]III效果。一幅远古守卫者“鬼影”会出现在玩家面前，还带有特定音效。这一行为可以透过方块瞄准玩家，哪怕与玩家之间的区域均被[[固体方块]]阻挡（例如：玩家在地下时），甚至可以作用于带有[[隐身]]效果且没有穿任何盔甲的玩家。
+
+{{in|je}}远古守卫者的“鬼影”是一种粒子效果，它可以用命令{{cmd|particle minecraft:elder_guardian}}生成。
+
+{{IN|bedrock}}远古守卫者“鬼影”可用{{cmd|summon elder_guardian_ghost}}生成，因而可认为是一种实体，详见[[远古守卫者幽灵]]。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound = Elder Guardian idle1.ogg
+|sound2 = Elder Guardian idle2.ogg
+|sound3 = Elder Guardian idle3.ogg
+|sound4 = Elder Guardian idle4.ogg
+|subtitle = {{tp|subtitles.entity.elder_guardian.ambient}}
+|source = 敌对生物
+|description=在水中空闲时随机播放此声音
+|id = entity.elder_guardian.ambient
+|translationkey = subtitles.entity.elder_guardian.ambient
+}}
+{{Sound table
+|sound = Guardian land idle1.ogg
+|sound2 = Guardian land idle2.ogg
+|sound3 = Guardian land idle3.ogg
+|sound4 = Guardian land idle4.ogg
+|subtitle = {{tp|subtitles.entity.elder_guardian.ambient_land}}
+|source = 敌对生物
+|description= 在陆地上空闲时随机播放此声音
+|id = entity.elder_guardian.ambient_land
+|translationkey = subtitles.entity.elder_guardian.ambient.land
+}}
+{{Sound table
+|sound = Elder Guardian curse.ogg
+|subtitle = {{tp|subtitles.entity.elder_guardian.curse}}
+|source = 敌对生物
+|description=给予挖掘疲劳效果
+|id = entity.elder_guardian.curse
+|translationkey = subtitles.entity.elder_guardian.curse
+}}
+{{Sound table
+|sound = Elder Guardian death.ogg
+|subtitle = {{tp|subtitles.entity.elder_guardian.death}}
+|source = 敌对生物
+|description=在水中死亡
+|id = entity.elder_guardian.death
+|translationkey = subtitles.entity.elder_guardian.death
+}}
+{{Sound table
+|sound = Guardian land death.ogg
+|subtitle = {{tp|subtitles.entity.elder_guardian.death}}
+|source = 敌对生物
+|description=在陆地上死亡
+|id = entity.elder_guardian.death_land
+|translationkey = subtitles.entity.elder_guardian.death
+}}
+{{Sound table
+|sound = Guardian flop1.ogg
+|sound2 = Guardian flop2.ogg
+|sound3 = Guardian flop3.ogg
+|sound4 = Guardian flop4.ogg
+|subtitle = {{tp|subtitles.entity.elder_guardian.flop}}
+|description=在陆地上扑腾
+|source = 敌对生物
+|id = entity.elder_guardian.flop
+|translationkey = subtitles.entity.elder_guardian.flop
+}}
+{{Sound table
+|sound = Elder Guardian hit1.ogg
+|sound2 = Elder Guardian hit2.ogg
+|sound3 = Elder Guardian hit3.ogg
+|sound4 = Elder Guardian hit4.ogg
+|subtitle = {{tp|subtitles.entity.elder_guardian.hurt}}
+|source = 敌对生物
+|description=在水中受伤
+|id = entity.elder_guardian.hurt
+|translationkey = subtitles.entity.elder_guardian.hurt
+}}
+{{Sound table
+|sound = Guardian land hit1.ogg
+|sound2 = Guardian land hit2.ogg
+|sound3 = Guardian land hit3.ogg
+|sound4 = Guardian land hit4.ogg
+|subtitle = {{tp|subtitles.entity.elder_guardian.hurt}}
+|source = 敌对生物
+|description=在陆地上受伤
+|id = entity.elder_guardian.hurt_land
+|translationkey = subtitles.entity.elder_guardian.hurt
+}}
+{{Sound table
+|sound = Guardian attack loop.ogg
+|subtitle = {{tp|subtitles.entity.guardian.attack}}
+|source = 敌对生物
+|description=激光射击
+|id = entity.guardian.attack
+|translationkey = subtitles.entity.guardian.attack
+|foot = 1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.land_idle1.wav
+|sound2=mob.guardian.land_idle2.wav
+|sound3=mob.guardian.land_idle3.wav
+|sound4=mob.guardian.land_idle4.wav
+|source=敌对生物
+|description=在陆地上空闲时随机播放此声音
+|id=mob.guardian.land_idle
+|typeid=ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.land_hit1.wav
+|sound2=mob.guardian.land_hit2.wav
+|sound3=mob.guardian.land_hit3.wav
+|sound4=mob.guardian.land_hit4.wav
+|source=敌对生物
+|description=在陆地上受伤
+|id=mob.guardian.land_hit
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.elder_death.wav
+|source=敌对生物
+|description=在陆地上死亡
+|id=mob.elderguardian.death
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.elder_idle1.wav
+|sound2=mob.guardian.elder_idle2.wav
+|sound3=mob.guardian.elder_idle3.wav
+|sound4=mob.guardian.elder_idle4.wav
+|source=敌对生物
+|description=在水中空闲时随机播放此声音
+|id=mob.elderguardian.idle
+|typeid=ambient.in.water
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.elder_hit1.wav
+|sound2=mob.guardian.elder_hit2.wav
+|sound3=mob.guardian.elder_hit3.wav
+|sound4=mob.guardian.elder_hit4.wav
+|source=敌对生物
+|description=在水中受伤
+|id=mob.elderguardian.hit
+|typeid=hurt.in.water
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.elder_death.wav
+|source=敌对生物
+|description=在水中死亡
+|id=mob.elderguardian.death
+|typeid=death.in.water
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.flop1.wav
+|sound2=mob.guardian.flop2.wav
+|sound3=mob.guardian.flop3.wav
+|sound4=mob.guardian.flop4.wav
+|source=敌对生物
+|description=在陆地上扑腾
+|id=mob.guardian.flop
+|typeid=guardian.flop
+|soundvolume
+|soundpitch=1.0
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.curse.wav
+|source=敌对生物
+|description=给予挖掘疲劳效果
+|id=mob.elderguardian.curse
+|typeid=elderguardian.curse
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Guardian attack loop.ogg
+|source=敌对生物
+|description=激光射击
+|id=mob.guardian.attack_loop
+|typeid=attack.loop
+|soundvolume
+|soundpitch
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Elder Guardian
+|spritetype=entity
+|nameid=elder_guardian
+|showentitytags=1|entitytags={{GameTag|entity|elder_guardian}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Elder Guardian
+|spritetype=entity
+|nameid=elder_guardian
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+
+远古守卫者有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|monster-hunter;the-deep-end;it-spreads}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.kill_a_mob;adventure.kill_all_mobs;adventure.kill_mob_near_sculk_catalyst}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w25a|[[File:Elder Guardian JE1 BE1.png|42px]] 加入了远古守卫者。}}
+|{{HistoryLine|||dev=14w26a|守卫者和远古守卫者不再免疫火和熔岩。}}
+|{{HistoryLine||1.9|dev=15w43a|更改了远古守卫者掉落生鱼和海晶砂粒的概率。
+|在此之前，远古守卫者死亡时有33%的概率掉落生鱼，如果没有掉落生鱼，则33%掉落海晶砂粒，抢夺魔咒影响两者的概率。现在是40%生鱼，40%海晶砂粒和20%两者不掉落，抢夺魔咒会影响两者的数量。
+|远古守卫者在任何死亡方式下都会掉落干海绵。}}
+|{{HistoryLine|||dev=15w43b|再次改变掉落生鱼和海晶砂粒的概率。现在是50%生鱼，33%海晶砂粒和16.7%两者不掉落。}}
+|{{HistoryLine|||dev=15w43c|海绵掉落恢复到需要是玩家杀死的，但仍然是干而不是湿的。}}
+|{{HistoryLine||1.10|dev=16w20a|加入了远古守卫者刷怪蛋。}}
+|{{HistoryLine|||dev=pre2|移除了远古守卫者刷怪蛋。}}
+|{{HistoryLine||1.11|dev=16w32a|重新加入了远古守卫者刷怪蛋。
+|远古守卫者的实体ID由<code>Guardian</code>更改为<code>elder_guardian</code>，并移除了<code>Elder</code>标签。
+|远古守卫者的游戏内名称现在为“远古守卫者”而非原来的“守卫者”。}}
+|{{HistoryLine|||dev=16w33a|现在远古守卫者被玩家杀死时会掉落湿海绵，而不是干海绵。}}
+|{{HistoryLine|||dev=16w38a|现在远古守卫者被火杀死后会掉落[[熟鱼]]而不是[[生鱼]]。<ref name="raw-fish">{{bug|MC-70738|||Fixed}}</ref>}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Elder Guardian JE2 BE2.png|42px]] 更改了远古守卫者的纹理。}}
+|{{HistoryLine||1.15|dev=19w34a|远古守卫者现在会受到[[岩浆块]]的伤害。<ref>{{bug|MC-102267|||Fixed}}</ref>}}
+|{{HistoryLine||1.16|dev=20w14a|现在完成“资深怪物猎人”[[进度]]需要杀死远古守卫者。}}
+|{{HistoryLine||1.17|dev=20w51a|远古守卫者现在会主动攻击[[美西螈]]。}}
+|{{HistoryLine|||dev=21w11a|[[File:Elder Guardian tailfin change 21w11a.gif|42px]] 略微更改了远古守卫者的纹理，以移除纹理中多余的像素。}}
+|{{HistoryLine|||dev=21w13a|再次修复了被火杀死的远古守卫者掉落的是生鱼而非熟鱼的漏洞。<ref name="raw-fish"/>}}
+|{{HistoryLine||1.19.4|dev=23w04a|exp=update_1_20|现在远古守卫者死亡时有概率掉落1个[[潮汐盔甲纹饰锻造模板]]。}}
+|{{HistoryLine||1.20|dev=23w12a|23w04a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|[[File:Elder Guardian JE1 BE1.png|42px]] 加入了远古守卫者。在这个版本里它们被认为是Boss生物。<ref>{{cite|url=http://mojang.com/2016/08/sneak-peek-boss-update-is-coming-to-pocket-and-windows-10|title=Sneak Peek Boss Update is Coming to Pocket and Windows 10!|website=Mojang.com}}</ref>但是它们的行为与在Java版中的相同。}}
+|{{HistoryLine|||dev=build 5|加入了远古守卫者刷怪蛋。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.1.0|远古守卫者的实体ID由<code>guardian.elder</code>更改为<code>elder_guardian</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.6.0|dev=1.6.0.5|远古守卫者现在被玩家杀死时会掉落[[湿海绵]]，而不是干的。{{more info|此前是否一直掉落干海绵？}}}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Elder Guardian JE2 BE2.png|42px]] 更改了远古守卫者的纹理。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.50|[[File:Elder Guardian tailfin change 21w11a.gif|42px]] 略微更改了远古守卫者的纹理，移除纹理中多余的像素。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.20|远古守卫者现在会主动攻击[[美西螈]]。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|exg=1.20|现在远古守卫者死亡时有概率掉落1个[[潮汐盔甲纹饰锻造模板]]。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|1.19.80.21中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|switch=1.0.1|[[File:Elder Guardian JE1 BE1.png|42px]] 加入了远古守卫者。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Elder Guardian JE2 BE2.png|42px]] 更改了远古守卫者的纹理。}}
+|{{HistoryLine|new3ds}}
+|{{HistoryLine||1.3.12|[[File:Elder Guardian JE1 BE1.png|42px]] 加入了远古守卫者。}}
+}}
+
+== 你知道吗 ==
+* 远古守卫者的眼睛实际上是生物模型的“头部”。这造成了动态眼睛的错觉。
+* 游戏《[[wzh:龙与地下城|{{tr|龙与地下城|龍與地下城|魔域奇遇}}]]》中的[https://forgottenrealms.fandom.com/wiki/Beholder 眼魔]是远古守卫者的灵感来源之一。<ref name="story">{{ytl|gs-rMm5luB8|Why are their eyes so big? <nowiki>|</nowiki> The Story Of The Elder Guardian|Minecraft}}</ref>
+* 远古守卫者被[[Jeb]]称作“小型Boss”（Miniboss），<ref name="story"/>在设计之初也被定位为Boss，<ref name="meet-elder-guardian"/>但它不属于真正的[[Boss生物]]。
+* 据[[Jeb]]所述，远古守卫者的存在是为了鼓励玩家解出海底神殿的迷宫，而不是直接挖穿它。<ref name="minecraft.net"/>
+** 另外，他表示远古守卫者的“鬼影”旨在暗示玩家[[挖掘疲劳]]效果的来源，造成{{w|突发惊吓}}是无意的。<ref name="minecraft.net"/>
+* 据Jeb所述，远古守卫者之所以掉落[[湿海绵]]，是为了确保玩家能从不含海绵房的[[海底神殿]]中获取湿海绵。<ref>https://bsky.app/profile/jebox.bsky.social/post/3lrb26wj5fc2w</ref>
+* 在Java版的愚人节版本[[Java版3D Shareware v1.34|3D Shareware v1.34]]中，远古守卫者会掉落蓝色钥匙。
+
+== 画廊 ==
+<gallery>
+File:Elder Guardian in Monument.png|海底神殿内的远古守卫者
+File:Guardian In Full View.png|海底神殿外的远古守卫者
+File:GaurdianAttack.png|远古守卫者在用激光攻击
+File:ElderGuardianInside.png|远古守卫者模型的内部
+File:ElderGuardainCurseShowsFullModel.png|远古守卫者的“鬼影”图像通常展示了它们的整个模型
+File:Axolotl Army.png|一群[[美西螈]]正在攻击一个远古守卫者
+File:Elder Guardian (texture) JE1 BE1.png|远古守卫者在[[纹理更新]]前的纹理文件，可以在右下角看到[[jeb]]字样
+</gallery>
+
+=== 艺术作品 ===
+<gallery>
+File:Elder Guardian Artwork.png|远古守卫者的艺术作品
+</gallery>
+
+=== 其他媒体 ===
+<gallery>
+File:BossUpdatePE.png|携带版[[Boss更新]]官方宣传图中的远古守卫者
+File:Elder Guardian Mobestiary.jpg|[[Minecraft丛书#我的世界生物图鉴|Minecraft生物图鉴]]中的远古守卫者
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|mobs}}
+
+[[Category:敌对生物]]
+[[Category:水生生物]]
+
+[[de:Großwächter]]
+[[en:Elder Guardian]]
+[[es:Guardián anciano]]
+[[fr:Grand gardien]]
+[[it:Guardiano antico]]
+[[ja:エルダーガーディアン]]
+[[ko:엘더 가디언]]
+[[nl:Oude bewaker]]
+[[pl:Prastrażnik]]
+[[pt:Guardião-Mestre]]
+[[ru:Древний страж]]
+[[uk:Стародавній вартовий]]

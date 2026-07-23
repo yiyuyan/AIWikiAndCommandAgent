@@ -1,0 +1,146 @@
+# 页面: Java版17w13a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8817w13a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:17
+# 原始 Wikitext 内容:
+
+{{Dangerous version|使用配方书时，如果物品在副手或盔甲槽上会导致游戏崩溃。<ref>{{bug|MC-114936|||Fixed}}</ref>}}{{Infobox version
+|title=17w13a
+|image=17w13a.png
+|image2=Java Edition 17w13a Simplified.png\Java Edition 17w13a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2017年3月30日
+|downloads=
+; 原始版本
+: [https://piston-data.mojang.com/mc/game/17w13a/client/84867afe218d806aee91c2036cbc7b0d1ce19e99/client.jar 客户端]（[https://vault.omniarchive.uk/versions/java/client/release/1.12/pre/17w13a-0805/17w13a-0805.json .json]）
+: [https://piston-data.mojang.com/mc/game/17w13a/server/9230038e59d214a2e5764c3c889e23241c183a8e/server.jar 服务端]
+; 重新上传
+: {{dl|8a11edbdd3d8be019b3eb85089f2f5d97ec3ac4e|client}}（{{dl|ec0d9ff2917f223b24725b259d7aea1249f4a07c|json|name=17w13a}}）
+: {{dl|d3806f89b9c90cbfb78919a3bcc010ad2e5d6ebb|server}}
+|parent=1.12
+|prevparent=1.11.2
+|prev=17w06a
+|next=17w13b
+|nextparent=1.12.1
+}}<onlyinclude>
+
+'''17w13a'''是[[Java版1.12]]的第2个快照，发布于2017年3月30日<ref>{{snap|17w13a|March 30, 2017}}</ref>，添加了鹦鹉、知识之书和配方书等内容，移除[[成就/Java版|旧版成就]]并以[[进度]]替代，把玩家启动游戏所需的最低Java版本提升到[https://www.oracle.com/java/technologies/downloads/#java8 Java 8]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 物品 ===
+'''[[刷怪蛋]]'''
+* 加入了[[鹦鹉]]刷怪蛋。
+
+'''[[知识之书]]'''
+* 目前只能通过使用{{cmd|give <玩家名称> knowledge_book}}命令获得。
+* 一本带着<code>Recipes</code> NBT标签的知识之书，包含着物品ID列表，当玩家{{control|使用}}它时就会被消耗并解锁指定物品的配方。
+** 当游戏规则<code>doLimitedCrafting</code>的值设为true时会很有用。
+
+=== 生物 ===
+'''[[鹦鹉]]'''
+* 可用[[曲奇]]驯服。
+* 会四处飞，“累”的时候会坐下。
+* 会跟随并聚集在其他生物周围。
+* 能模仿其他生物发出的声音。
+* 鼠标右键点击已驯服的鹦鹉可使它停靠在驯服者的肩膀上。
+** 若驯服者跳跃可使鹦鹉离开肩膀。
+** 会跟随正在使用[[鞘翅]]飞行的玩家。
+* 拥有{{hp|6}}的生命值。
+* 拥有红色、蓝色、绿色和青色的变种。
+
+=== 常规 ===
+'''[[进度]]'''
+* 取代[[成就/Java版|成就]]。
+* 可通过JSON文件自定义。
+* 多标签界面。
+** 支持大量标签但是原版只使用4-5个：“挖掘&制作”、“下界”、“末地”、“战斗”与“工程”。
+** 不同标签有不同背景图案，现在暂时是由小图案平铺形成。
+** 基于数据的界面，包括位置与布局。
+
+'''[[配方书]]'''
+* 达到条件时解锁的合成配方目录
+* 当点击一个已解锁的配方，配方将在合成方格中出现；如果材料足够则可以制作。
+
+'''[[复述功能]]'''
+* 按下{{key|Ctrl+B}}激活，可以自动阅读玩家的聊天文字，包括发出信息的玩家的名称。
+* 复述功能不会阅读命令或命令的输出，也不会阅读使用了{{cmd|me}}的消息。
+
+'''NBT标签'''
+* <code>ShoulderEntityLeft</code> / <code>ShoulderEntityRight</code>：包含了在玩家左右肩膀上的实体的实体数据。
+* <code>seenCredits</code>：如果玩家从传送门离开末地时变为1。
+* <code>recipeBook</code>：包含配方列表的字符串，玩家已经看到像JSON文件那样格式化。
+* <code>Recipes</code>：玩家带着知识之书时，点击右键来解锁的合成配方列表。
+** 如果未指定NBT标签，知识之书不会被消耗。
+
+=== 命令 ===
+'''[[命令]]'''
+* 加入{{cmd|recipe <give{{!}}take> [玩家] <名称{{!}}*>}}。
+** 可为指定的玩家解锁或上锁指定的合成配方。
+** 当指定为<code>*</code>时，会为玩家解锁或上锁所有合成配方。
+* 加入了{{cmd|advancement <grant{{!}}revoke{{!}}test> <''玩家''> <''进度''> [''规则'']}}。
+** 可以授予、测试或剥夺进度，或者给指定的玩家修改某个进度的规则。
+
+=== 游戏内容 ===
+* 加入游戏规则<code>doLimitedCrafting</code>。
+** 默认关闭。
+** 开启后只允许玩家合成用已解锁的配方合成。
+
+== 更改 ==
+=== 方块 ===
+[[File:TerracottaSnapshotComparison.png|缩略图|右|250px|带釉陶瓦纹理改变的对比图]]
+
+'''[[带釉陶瓦]]'''
+* 更改了青色、品红色、橙色和白色带釉陶瓦的纹理。<ref>https://www.reddit.com/r/Minecraft/comments/5sspmk/minecraft_snapshot_17w06a/ddhjm42/?context=1</ref>
+
+'''[[信标]]'''
+* 当鼠标指针正对它时会显示其名称。
+
+'''[[附魔台]]'''
+* 当鼠标指针正对它时会显示其名称。
+
+=== 物品 ===
+'''[[钓鱼竿]]'''
+* 更改了钓鱼竿拋出浮漂的音效。
+
+=== 常规 ===
+'''[[成就/Java版|成就]]'''
+* 被移除，并被[[进度]]取代。
+
+'''[[合成]]'''
+* 当关闭合成界面时，其上的物品将不再掉落，取而代之的是物品被自动放入到物品栏。
+
+'''Java版本'''
+* 升级至Java 8。<ref name="java 8">{{tweet|Dinnerbone|847408242233704448}}</ref>
+
+'''后退动作'''
+* 玩家后退时身体面向正前方。<ref>{{bug|MC-114900||{{ctrl|向后移动}}看起来很奇怪（还有披风）|WAI}}</ref><ref>{{reddit|66s2px/in_17w16b_players_can_now_run_backwards_without|dglwcfv|It actually is a bug, it tries to rotate the body to the direction you are walking, but it can only do it so far, that is also why it basically picks a 'random direction'. Now it can actually understand when it is walking backwards and it stopped doing that weird behavior.|_Grum|April 22, 2017}}</ref>
+** 这个快照之前，玩家后退时身体会转向一侧，看起来好像在用交叉步行走。
+
+== 修复 ==
+{{fixes|fixedin=17w13a|prefix=Minecraft|showdesc=1
+|;previous
+|113377|新方块里面的图案像卐。
+|113844|白色带釉陶瓦上的图案像匈牙利纳粹党的符号。
+}}</onlyinclude>
+
+== 重新上传 ==
+该版本于09:32（UTC）被重新上传，以修复macOS平台上的崩溃漏洞。<ref>{{tweet|Dinnerbone|847369277380337664|Having reports of it not running on Mac OS - a hotfix will be out in about 7 minutes.|March 30, 2017}}</ref></onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[Category:重新上传过的版本]]
+
+[[de:17w13a]]
+[[en:Java Edition 17w13a]]
+[[es:Java Edition 17w13a]]
+[[fr:Édition Java 17w13a]]
+[[it:Java Edition 17w13a]]
+[[ja:Java Edition 17w13a]]
+[[nl:17w13a]]
+[[pt:Edição Java 17w13a]]
+[[ru:17w13a (Java Edition)]]

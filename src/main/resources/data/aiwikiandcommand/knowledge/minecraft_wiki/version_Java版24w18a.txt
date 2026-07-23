@@ -1,0 +1,676 @@
+# 页面: Java版24w18a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w18a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{tr|画|繪畫|畫|mode=H}}
+{{Infobox version
+|title=24w18a
+|image=24w18a.png
+|image2=Java Edition 24w18a Simplified.png\Java Edition 24w18a Traditional.png\Java Edition 24w18a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年5月3日
+|jsonhash=870185f824de25941d0687e2b264d480c5f4250d
+|clienthash=96a3d9cf921ac4e9f804b59562b27d2635e3b3e6
+|clientmap=b257021b6b34731ca9d3a40035509d6c976400e4
+|serverhash=22618c686c86be630601e5d9fcf581674105c899
+|servermap=0469fa703be270956360ee9a9d08f4473a939d7b
+|parent=1.21
+|prevparent=1.20.6
+|prev=
+|next=24w19a
+|nextparent=1.21.1
+}}<onlyinclude>
+
+'''24w18a'''是[[Java版1.21]]的首个快照，发布于2024年5月3日<ref>{{snap|24w18a|May 3, 2024}}</ref>，加入了20幅新的[[画]]、3张新的[[音乐唱片]]、9首新的[[音乐]]曲目和9种[[属性]]，使画的变种和[[魔咒]]由数据包驱动，将“{{tr|1.21更新|1.21 更新}}”[[实验性内容]]正式加入到游戏内，更换了[[全景图]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 物品 ===
+'''[[音乐唱片]]'''
+* 加入了3张音乐唱片：
+** Aaron Cherof - Precipice
+*** 可罕见地从普通[[宝库]]获得。
+*** 能通过[[红石比较器]]输出13格红石信号。
+** Lena Raine - Creator
+*** 可罕见地从不祥宝库获得。
+*** 能通过[[红石比较器]]输出12格红石信号。
+** Lena Raine - Creator（八音盒）
+*** 可罕见地从[[试炼密室]]的[[饰纹陶罐]]中获得。
+*** 能通过[[红石比较器]]输出11格红石信号。
+
+=== 非生物实体 ===
+'''[[画]]'''
+* 加入了5幅由[[Sarah Boeving]]创作的画：
+** Baroque
+** Humble
+** Meditative
+** Prairie Ride
+** Unpacked
+* 加入了15幅由[[Kristoffer Zetterstrand]]创作的画：
+** Backyard
+** Bouquet
+** Cavebird
+** Changing
+** Cotan
+** Endboss
+** Fern
+** Finding
+** Lowmist
+** Orb
+** Owlemons
+** Passage
+** Pond
+** Sunflowers
+** Tides
+
+=== 游戏内容 ===
+'''[[音乐]]'''
+* 加入了9首音乐曲目，作者为[[Lena Raine]]、[[Aaron Cherof]]和[[谷冈久美]]。
+** Featherfall
+*** 在[[恶地]]、[[樱花树林]]、[[繁花森林]]和[[繁茂洞穴]]生物群系播放。
+** Deeper
+*** 在[[深暗之域]]和[[溶洞]]生物群系播放。
+** Eld Unknown
+*** 在[[溶洞]]、[[雪林]]、[[尖峭山峰]]和[[裸岩山峰]]生物群系播放。
+** Endless
+*** 在[[溶洞]]、[[雪林]]、[[尖峭山峰]]和[[裸岩山峰]]生物群系播放。
+** pokopoko
+*** 在[[溶洞]]、[[雪林]]、[[尖峭山峰]]和[[积雪山坡]]生物群系播放。
+** 以下音乐会在无指定音乐的主世界生物群系中随机播放：
+*** komorebi
+*** Puzzlebox
+*** Watcher
+*** yakusoku
+** 所有新曲目都会在[[主菜单]]中播放。
+
+=== 常规 ===
+'''[[属性]]'''
+* 加入了<code>generic.burning_time</code>，控制实体着火时长的倍率。
+** 默认值为1，最小值为0，最大值为1024。
+** 为0时移除着火时长，大于1时着火时间延长。
+* 加入了<code>generic.explosion_knockback_resistance</code>，控制实体所受爆炸击退的降低率。
+** 默认值为0，最小值为0，最大值为1。
+** 为0时受到爆炸不降低击退，为1时受到爆炸无击退。
+* 加入了<code>generic.movement_efficiency</code>，控制实体无视地形减速影响的比率。
+** 默认值为0，最小值为0，最大值为1。
+* 加入了<code>generic.water_movement_efficiency</code>，控制实体无视水下减速影响的比率。
+** 默认值为0，最小值为0，最大值为1。
+* 加入了<code>generic.oxygen_bonus</code>，控制实体在水中不耗尽氧气的概率。
+** 默认值为0，最小值为0，最大值为1024。
+** 大于0时，耗尽氧气的概率为<code>1 / (oxygen_bonus + 1)</code>。
+* 加入了<code>player.sneaking_speed</code>，控制玩家潜行时的速度倍率。
+** 默认值为0.3，最小值为0，最大值为1。
+** 为0时不能在潜行状态下移动，为1时潜行和走路一样快。
+* 加入了<code>player.mining_efficiency</code>，控制玩家持有方块的有效挖掘工具时额外增加的挖掘效率。
+** 默认值为0，最小值为0，最大值为1024。
+* 加入了<code>player.submerged_mining_speed</code>，控制玩家的水下挖掘效率。
+** 默认值为0.2，最小值为0，最大值为20。
+* 加入了<code>player.sweeping_damage_ratio</code>，控制玩家横扫攻击的伤害转移到被横扫实体上的比率。
+** 默认值为0，最小值为0，最大值为1。
+** 横扫攻击总有基础伤害<code>1</code>，因此总伤害为<code>attack_damage * sweeping_damage_ratio + 1</code>。
+
+'''[[数据包]]'''
+* 实现了[[画]]变种的数据驱动。
+* 实现了[[魔咒]]的数据驱动。
+** 可见由[[Slicedlime]]提供的[[示例数据包#数据驱动魔咒数据包|数据包示例]]。
+* 当前在游戏中的魔咒由魔咒提供器控制。
+* 魔咒的强制占用性现在由[[Java版标签|标签]]控制。
+* 加入了{{filepath|enchantment}}文件夹，作为[[魔咒]]的注册表。
+* 加入了{{filepath|enchantment_provider}}文件夹，用于为物品提供魔咒。
+
+'''[[伤害类型]]'''
+* 加入了从<code>in_fire</code>中分离的伤害类型<code>campfire</code>。
+
+'''画变种'''
+* 画变种注册表现在可以通过数据包和资源包加载。
+* 在数据包中加入了{{filepath|painting_variant}}文件夹，用于注册[[画]]的变种。
+** {{filepath|-{}-data/<''命名空间''>/painting_variant/<id>.json}}文件内含有3个参数：
+*** {{nbt|int|width}}：（大于等于1且小于等于16）画的宽度，以方块为单位。
+*** {{nbt|int|height}}：（大于等于1且小于等于16）画的高度，以方块为单位。
+*** {{nbt|string|asset_id}}：资源包<code>paintings</code>图集内的精灵图的ID。
+
+'''数值提供器'''
+* 加入了从魔咒等级参数获取数值的数值提供器<code>enchantment_level</code>。
+** <code>amount</code>：基于魔咒等级给予数值的等级依赖函数。
+
+'''[[魔咒提供器]]'''
+* 以下是可选的魔咒提供器：
+** 用于生成装备的魔咒提供器，包含以下文件：
+*** {{filename|mob_spawn_equipment}}：为自然生成生物的附魔装备提供魔咒。
+*** {{filename|pillager_spawn_crossbow}}：为[[掠夺者]]的附魔[[弩]]提供魔咒。
+*** {{filepath|-{}-raid/<''魔咒提供器ID''>}}：为部分波次的[[袭击]]生物提供魔咒增幅。
+**** {{filename|pillager_post_wave_3}}：为袭击3波后的掠夺者的附魔弩提供魔咒增幅。
+**** {{filename|pillager_post_wave_5}}：为袭击5波后的掠夺者的附魔弩提供魔咒增幅。
+**** {{filename|vindicator}}：为袭击中的[[卫道士]]的附魔斧提供魔咒增幅。
+**** {{filename|vindicator_post_wave_5}}：为袭击5波后的卫道士的附魔斧提供魔咒增幅。
+** 用于末影人战利品的魔咒提供器，包含以下文件：
+*** {{filename|enderman_loot_drop}}：[[末影人]]被杀死后，使用其搬运方块的战利品表生成战利品时生效的魔咒。可视作为“假工具”提供魔咒。
+** 用于“村民交易的平衡性调整”的魔咒提供器，为[[交易]]中的装备提供魔咒。
+*** 仅在“村民交易的平衡性调整”[[实验性内容]]启用时生效，按以下格式存储：
+**** {{filepath|-{}-trades/<''生物群系''>_<''村民职业''>_<''装备类型''>_<''等级''>}}
+**** 例如{{filepath|trades/desert_armorer_helmet_4}}和{{filepath|trades/taiga_armorer_chestplate_5}}。
+* 魔咒提供器遵循以下格式：
+<div class="treeview">
+:* {{nbt|compound}}：父标签。
+:** {{nbt|string|type}}：魔咒提供器类型的枚举值。
+:** {{nbt condition|类型为<code>minecraft:single</code>时，还含有以下参数：}}
+:** {{nbt|string|enchantment}}：魔咒ID。
+:** {{nbt|int}}{{nbt|compound|level}}：（整型数值提供器）魔咒等级。
+:** {{nbt condition|类型为<code>minecraft:by_cost</code>时，还含有以下参数：}}
+:** {{nbt|string}}{{nbt|list|enchantments}}：可以为单个魔咒ID、魔咒列表或带有<code>#</code>前缀的魔咒标签。
+:** {{nbt|int}}{{nbt|compound|cost}}：（整型数值提供器）附魔过程中的花费。
+:** {{nbt condition|类型为<code>minecraft:by_cost_with_difficulty</code>时，还含有以下参数：}}
+:** {{nbt|string}}{{nbt|list|enchantments}}：可以为单个魔咒ID、魔咒列表或带有<code>#</code>前缀的魔咒标签。
+:** {{nbt|int|min_cost}}：（大于0）可能的最低花费。
+:** {{nbt|int|max_cost_span}}：（不小于0）影响随机的因素达到最大时，花费随机范围的差值。
+</div>
+
+'''[[魔咒数据格式|魔咒]]'''
+* 魔咒现在可通过数据包配置。魔咒是一系列以等级范围和魔咒花费等为核心的属性，再加上一些效果。大多数的效果都支持一系列的条件，使得仅当在达到某些标准时才有可能应用它们。所有的原版魔咒都可以在服务端或客户端jar文件的原版数据包中找到。
+* 魔咒文件可用字段：
+** {{cd|description}}：该魔咒的名称，以文本组件表示。将作为该魔咒的文本显示在物品提示框中。
+** {{cd|exclusive_set}}：（可选，若省略，则当前的互斥集为空）该魔咒的互斥集。
+*** 若一个魔咒在另一个魔咒的互斥集中，则2个魔咒一定不能在同一物品里共存，
+*** 为一个魔咒ID，一个魔咒ID列表或一个带有<code>#</code>前缀的魔咒标签。
+** {{cd|supported_items}}：该魔咒的适用物品类型。
+*** 物品命名空间ID，物品命名空间ID列表或带有<code>#</code>前缀的物品标签。
+** {{cd|primary_items}}：该魔咒会在附魔台中和交易中的此装备上出现。
+*** 物品命名空间ID，物品命名空间ID列表或者以<code>#</code>前缀的物品标签。
+*** 必须为<code>supported_items</code>的子集。
+** {{cd|weight}}：（正整数）与所有可用魔咒的总权值（<code>weight</code>）相比，该魔咒出现的频率有多高。值越大表示出现频率越高。
+** {{cd|max_level}}：（正整数）该魔咒的等级上限。
+*** 所有的魔咒等级范围都应在1至其最大等级内。
+** {{cd|d=pretty|min_cost|max_cost}}：在附魔台中，该魔咒的经验花费范围（同时也定义了被祛魔后所返还的经验值）。
+*** 最小和最大花费值均使用一个线性公式（<math>base+perLevelAboveFirst*(level-1)</math>）来描述：
+**** {{cd|base}}：魔咒等级为1时的基础花费。
+**** {{cd|per_level_above_first}}：当魔咒等级大于1后每级的增量值。
+** {{cd|anvil_cost}}：（非负数）该魔咒在铁砧上的经验花费。
+*** 当魔咒被添加到书中时，该值减半。
+*** 实际费用为该值乘以相应的附魔等级。
+** {{cd|slots}}：该魔咒要发挥作用所处的槽位列表。
+*** 每一项可以为{{cd|d=pretty|any|hand|mainhand|offhand|armor|feet|legs|chest|head|body}}中的任意值。
+** {{cd|effects}}：一个[[魔咒效果组件]]映射表。
+
+'''魔咒效果条件'''
+* 大多数的魔咒效果都可在某种限制条件得约束（与战利品表中的类型相同，即战利品表谓词）下运作。这使得每种效果都能够针对不同的情况来触发。魔咒效果组件定义了魔咒效果条件—，即哪些参数可以被传入并参与效果计算——这通过战利品上下文参数集来实现，很多参数集都有效，而其中的一些仅对一些特定效果的参数集有效。
+
+* 每一个效果组件都确定了在其效果下的可用参数。在魔咒效果组件列表中可以查询每个效果组件的可用参数。
+
+* 伤害参数
+** 实体：{{cd|d=pretty|this|attacker|direct_attacker}}
+** 魔咒等级
+** 源位
+** 伤害来源
+
+* 物品参数
+** 工具
+** 魔咒等级
+
+* 位置参数
+** 实体：{{cd|this}}
+** 魔咒等级
+** 源位
+** 魔咒生效状态
+
+* 实体参数
+** 实体：{{cd|this}}
+** 魔咒等级
+** 源位
+
+'''[[魔咒效果组件]]'''
+* 魔咒中的{{cd|effects}}字段是一个魔咒效果组件类型名到效果列表的映射。大多数的效果组件都是一个列表，这意味着可对任意魔咒效果组件添加任意数量的效果。每个效果一般包括一个指定的条件上下文和效果类型。但注意有些效果会偏离这种格式。
+
+* 在上文所属的情况下，若指定了一个条件上下文和效果，那么魔咒效果组件就是一个列表。在这个列表中，每一项都有一个叫{{cd|effect}}的字段，表示当前列表项所使用的效果类型。每一项也可以包含一个名叫{{cd|requirements}}的可选字段以指定条件参数，之后将使用记录的上下文计算。
+
+'''魔咒效果'''
+* 魔咒效果用以处理由魔咒效果组件过滤后的参数，这些参数在经过魔咒效果处理，或触发魔咒效果后将会直接传递影响到当前世界——即产生魔咒的实际效果。
+
+'''[[魔咒数据格式/等级依赖函数|等级依赖函数]]'''
+* 很多时候，魔咒的实际效果取决于魔咒的等级。为了处理这些依赖于等级的字段，'''等级依赖函数'''应运而生。等级依赖函数可以是一个浮点常数——这是其最基础的格式——你可以理解为它实际上与等级无关，因为对所有等级来说它都是个定值。
+* 除了浮点数，等级依赖函数还可以是一个带有<code>type</code>（类型）字段的对象。<code>type</code>的可能取值如下所示。
+
+* <code>linear</code>：一种最普通的等级依赖函数。一个线性等级依赖函数可附带以下两个字段：
+** <code>base</code>：一个基值，对所有等级都生效。
+** <code>per_level_above_first</code>：一个数值，在等级大于等于2后累计该值。
+* 实际上，<code>linear</code>（线性）等级依赖函数所产生的值可以表述为公式：<math>base + perLevelAboveFirst * (level - 1)</math>
+
+* <code>clamped</code>：钳制函数。将某一个值约束在最小值和最大值之间。附带以下字段：
+** <code>value</code>：一个等级依赖函数，将作为该等级依赖函数的输入。
+** <code>min</code>：一个浮点数，表示输出值的最小值。
+** <code>max</code>：一个浮点数，表示输出值的最大值。
+
+* <code>fraction</code>：分数函数。表示由两个值组成的分数。附带以下字段：
+** <code>numerator</code>：一个等级依赖函数，将作为分子。
+** <code>denominator</code>：一个等级依赖函数，将作为分母。
+
+* <code>levels_squared</code>：等级平方函数。等价于对等级取平方值后再加上一个数。附带以下字段：
+** <code>added</code>：一个浮点数，将与等级的平方相加。
+* 在实际效果上，等级平方函数可以表示为公式：<math>level^2 + added</math>
+
+'''[[魔咒数据格式#值效果|值效果]]类型'''
+* '''值效果'''可以被理解为一种用于操纵游戏中''某些东西''的数值的效果。
+
+* <code>add</code>：加效果。对处理结果增加一个值。附带字段：
+** <code>value</code>：（支持负数）一个等级依赖函数，用以决定添加多少的值。
+
+* <code>all_of</code>：全应效果。将会按照顺序运行多个效果。当多个效果有共有的前置条件时，建议使用该效果。附带字段：
+** <code>effects</code>：一个效果列表，表示要运行的所有效果。
+
+* <code>multiply</code>：乘效果。将处理值乘以一个给定的因子。附带字段：
+** <code>factor</code>：一个等级依赖函数，将作为被乘上的因子。
+
+* <code>remove_binomial</code>：二项分布效果。将会运行一个二项分布系列检查，对于所有成功的检查，将会对输入值减1。附带字段：
+** <code>chance</code>：一个等级依赖函数，表示落在一个输入值上的概率。
+*** 概率空间在0到1之间，0表示没有概率落在输入值中，而1表示落在所有的输入值上。
+
+* <code>set</code>：置值效果。将会以一个指定的等级依赖函数值覆盖输入值。附带字段：
+** <code>value</code>：等级依赖函数，将作为输出结果。
+
+'''[[魔咒数据格式#属性效果|属性效果]]'''
+* 属性效果利用了属性系统，使得当被附魔物品被正确装备后，对其所在物品应用一个属性修饰符。属性效果类型是不变的——它们的类型都是相同的。附带字段：
+** <code>name</code>：要添加的属性修饰符名称。
+** <code>attribute</code>：要修改的属性ID。
+** <code>operation</code>：该属性修饰符的操作。
+*** 可以为：{{cd|d=pretty|add_value|add_multiplied_base|add_multiplied_total}}。
+** <code>amount</code>：等级依赖函数，表示要修改的数值。
+** <code>uuid</code>：一个字符串，表示一个用于属性修饰符的UUID。
+*** 必须唯一，以避免不同的魔咒（或其他系统间）相互干扰。
+
+'''[[魔咒数据格式#实体效果|实体效果]]类型'''
+* 实体效果是一种通用的对一个在某一个事件中的实体做一些事情的魔咒效果。实体被影响，取决于其所配置的特定的组件。
+
+* <code>all_of</code>：全应效果。该实体效果可以运行一系列的其他实体效果。当一组拥有相同条件的效果要应用时，建议使用该效果。附带字段：
+** <code>effects</code>：效果列表，表示要运行的实体效果。
+
+* <code>apply_mob_effect</code>：生物状态效果效果。该实体效果可以应用一个随机的生物状态效果给受影响的生物，效果将从一系列的选项中选择。状态效果的持续时间和放大倍数都在一个指定的概率空间中随机选取。指定比最小值还要大的最大值的效果是未定义的。附带字段：
+** <code>to_apply</code>：要应用的状态效果选项。
+*** 一个状态效果ID，一个状态效果列表，或者一个状态效果标签。
+** <code>min_duration</code>、<code>max_duration</code>：等级依赖函数，表示状态效果的持续时间的最小值和最大值（以秒为单位）。
+** <code>min_amplifier</code>、<code>max_amplifier</code>：等级依赖函数，表示最小和最大的放大倍数。
+
+* <code>damage_entity</code>：实体伤害效果。该实体效果将使被伤害实体受到一个伤害。伤害的数值在指定的概率空间中随机选取。指定一个比最小值还要大的最大值是未定义的。附带字段：
+** <code>damage_type</code>：要使用的伤害类型的ID。
+** <code>min_damage</code>、<code>max_damage</code>：等级依赖函数，表示最小和最大的伤害值。
+
+* <code>damage_item</code>；物品伤害效果。该实体效果将应用伤害到一个附魔物品上。
+
+* <code>explode</code>：爆炸效果。该实体效果将产生一个爆炸。附带字段：
+** <code>attribute_to_user</code>：一个布尔值，决定该爆炸是否应该归因于使用该附魔物品的使用-{}-者。
+** <code>damage_type</code>：（可选，默认爆炸不造成伤害）爆炸的伤害类型。
+** <code>immune_blocks</code>：（可选）为一个方块或方块列表或方块标签，以指定完全阻挡爆炸的方块。
+** <code>knockback_multiplier</code>：一个经验依赖函数，决定爆炸的击退乘数。
+** <code>offset</code>：（包含3个整数的列表，分别表示X、Y和Z偏移量，默认为[0,0,0]）一个位置偏移量，表示爆炸发生的位置。
+** <code>radius</code>：等级依赖函数，表示爆炸半径。
+** <code>create_fire</code>：布尔值，表示爆炸点周围是否会生成火焰。
+** <code>block_interaction</code>：爆炸于方块是如何交互的。可以为如下之一：
+*** <code>none</code>：无效果。
+*** <code>block</code>：如同一个方块引发了该爆炸。<code>blockExplosionDropDecay</code>游戏规则将影响方块被爆炸影响时的掉落概率。
+*** <code>mob</code>：如同一个生物造成了爆炸。<code>mobExplosionDropDecay</code>游戏规则将影响爆炸时的掉落概率。
+*** <code>tnt</code>：如同一个TNT造成了爆炸。<code>tntExplosionDropDecay</code>游戏规则将影响爆炸时的掉落概率。
+*** <code>trigger</code>：触发可被红石激活的方块。
+** <code>small_particle</code>：爆炸所散发的最小粒子。
+** <code>large_particle</code>：爆炸所散发的最大粒子。
+** <code>sound</code>：爆炸所产生的声音事件。
+
+* <code>ignite</code>：点燃效果。该实体效果将会对实体施加给定时间的燃烧效果。附带字段：
+** <code>duration</code>：一个等级以来函数，表示燃烧的火焰所持续的秒数。
+
+* <code>play_sound</code>：声音播放效果。该实体效果将会播放一段声音。附带字段：
+** <code>sound</code>：一个要播放的声音事件ID。
+** <code>volume</code>：一个浮点提供器，数值应在0.00001和10.0之间，指定了声音音量。
+** <code>pitch</code>：一个浮点提供器，数值应在0.00001和2.0之间，指定了声音的音调。
+
+* <code>replace_block</code>：方块替换效果。该实体效果可以替换世界中的方块。附带字段：
+** <code>block_state</code>：一个方块状态提供器，以提供要设置的方块状态。
+** <code>offset</code>：（可选，默认为[0, 0, 0]）一个位置偏移量，将从事件发生位置开始，到要放置的方块位置。
+*** 格式为代表X、Y和Z轴偏移量的包含三个整数的列表。
+** <code>predicate</code>：（可选，默认所有类型的方块都可以被替换）一个世界生成样式的方块谓词，用以决定方块是否应该被替换。
+
+* <code>replace_disc</code>：盘状替换效果。该实体效果将会以圆盘或圆柱形态替换世界中的方块。附带字段：
+** <code>block_state</code>：方块状态提供器，以指定要设置的方块状态。
+** <code>radius</code>：一个等级依赖函数，表示圆柱的半径。
+** <code>height</code>：一个等级依赖函数，表示圆柱的高。
+** <code>offset</code>：（可选，默认为[0, 0, 0]）一个位置偏移量，从事件发生位置开始，到圆柱的中心。
+*** 格式为代表X、Y和Z轴偏移量的包含三个整数的列表。
+** <code>predicate</code>：（可选，默认所有类型的方块都可以被替换）一个世界生成样式的方块谓词，用以决定方块是否应该被替换。
+
+* <code>run_function</code>：函数执行效果。该实体效果可以执行命令函数。该效果所执行的执行实体使用{{cd|@s}}表示，{{cd|~ ~ ~}}表示事件的发生位置。附带字段：
+** <code>function</code>：命名空间ID，表示要执行的命令函数。
+
+* <code>set_block_properties</code>：方块属性设置效果。该效果可以设置方块的属性。附带字段：
+** <code>properties</code>：属性键到属性值的映射（与<code>minecraft:block_state</code>物品组件的格式相同）。
+** <code>offset</code>：（可选，默认为[0, 0, 0]）一个位置偏移量，从事件发生位置开始，到圆柱的中心。
+
+* <code>spawn_particles</code>：粒子生成效果。该实体效果可以在被施加影响的实体周围生成粒子。附带字段：
+** <code>particle</code>：粒子类型。
+** <code>horizontal_position</code>、<code>vertical_position</code>：决定生成粒子的水平和垂直生成位置。附带字段：
+*** <code>type</code>：指定坐标选择类型。可以为<code>entity_position</code>（基于实体坐标生成粒子）、<code>in_bounding_box</code>（基于实体边界框中的随机位置生成粒子）。
+*** <code>offset</code>：（可选，默认为0）浮点数，表示从来源坐标的偏移。
+*** <code>scale</code>：（可选，默认为1）浮点数，表示放大比例因子。仅当类型为<code>in_bounding_box</code>时该字段才有效。
+** <code>horizontal_velocity</code>、<code>vertical_velocity</code>：决定生成粒子的初始速度。附带字段：
+*** <code>base</code>：（可选，默认为0）一个浮点数提供器，给出沿给定轴的基本速度。
+*** <code>movement_scale</code>：（可选，默认为0）沿给定轴应用于实体速度的浮点放大比例因子。
+
+* <code>summon_entity</code>：生物召唤效果。该实体效果可以召唤一个新的生物，召唤时将现场从一组实体类型中随机选择。附带字段：
+** <code>entity</code>：对要召唤的实体选项：
+*** 可以是一个实体类型ID，一个实体类型列表或者一个实体标签。
+** <code>join_team</code>：一个布尔值，决定召唤的实体是否加入到附魔物品所有者所在的队伍中。
+
+'''[[魔咒数据格式#位置依赖效果|位置依赖效果]]类型'''
+* 位置依赖效果是一种特殊的效果，它会根据附魔物品所有者移动到的位置进行激活或关闭。仅当当前物品被初次装备，且随后，拥有该物品的实体在方块网格中移动到一个新的空间后，位置依赖效果才会被激活——即，当它们的坐标整数位变化为另一个整数时。
+
+* 所有的实体效果类型也都可以被用做位置依赖效果，另外，{{cd|attribute}}字段可指定一个属性效果来作为一个位置依赖效果。
+
+'''[[战利品表谓词]]'''
+* 加入了只在魔咒条件下生效的{{nbt|string|condition}}参数<code>enchantment_active_check</code>。
+** 需要[[战利品上下文]]参数<code>enchantment_active</code>。
+** 字段仅有{{nbt|bool|active}}，用于检查对生效或未生效的匹配是否成功。
+
+'''移动谓词'''
+* 一种在实体谓词的<code>movement</code>字段中可用的子谓词。包含以下字段：
+** {{nbt|compound|x}}、{{nbt|compound|y}}、{{nbt|compound|z}}：（单位为“格/秒”）沿特定坐标轴移动速度的极值，需要{{nbt|float|min}}（最小值）和{{nbt|float|max}}（最大值）。
+** {{nbt|compound|speed}}：（单位为“格/秒”）整体移动速度的极值，需要{{nbt|float|min}}和{{nbt|float|max}}。
+** {{nbt|compound|horizontal_speed}}：（单位为“格/秒”）实体移动的水平速度分量的极值，需要{{nbt|float|min}}和{{nbt|float|max}}。
+** {{nbt|compound|vertical_speed}}：（单位为“格/秒”）实体移动的垂直速度分量的极值，需要{{nbt|float|min}}和{{nbt|float|max}}。
+** {{nbt|compound|fall_distance}}：（单位为“格/秒”）实体摔落距离的极值，需要{{nbt|float|min}}和{{nbt|float|max}}。
+
+'''周期刻'''
+* 一种在实体谓词的<code>periodic_ticks</code>字段中可用的子谓词，是一个正整数。
+* 在实体生命周期的每''n''刻，这个子谓词为<code>true</code>。
+
+'''世界生成样式的方块谓词'''
+* <code>unobstructed</code>
+** {{nbt|list|offset}}：（可选，未指定时默认为<code>[0,0,0]</code>）3个整型偏移坐标的列表，指定要检测的原始位置的偏移量。
+** 如果所指定方块是无阻塞的（此方块空间中没有实体），此谓词通过检测。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下魔咒标签：
+** 控制魔咒功能的标签：
+*** {{cd|#curse}}：{{cd|d=pretty|binding_curse|vanishing_curse}}。
+**** 在[[提示框]]中以红色显示且不可被祛魔的魔咒。
+*** {{cd|#prevents_bee_spawns_when_mining}}：{{cd|silk_touch}}。
+**** 允许工具将[[蜂巢（方块）|蜂巢]]和[[蜂箱]]连带其中的[[蜜蜂]]一起挖掘的魔咒。
+*** {{cd|#prevents_decorated_pot_shattering}}：{{cd|silk_touch}}。
+**** 使工具不会打破[[饰纹陶罐]]的魔咒。
+*** {{cd|#prevents_ice_melting}}：{{cd|silk_touch}}。
+**** 使工具不会将[[冰]]打破为[[水]]的魔咒。
+*** {{cd|#prevents_infested_spawns}}：{{cd|silk_touch}}。
+**** 允许工具破坏[[虫蚀方块]]而不生成其中生物的魔咒。
+*** {{cd|#smelts_loot}}：{{cd|fire_aspect}}。
+**** 使掉落的战利品经过烧炼的魔咒。
+** 控制魔咒可用性的标签：
+*** {{cd|#tradeable}}：{{cd|d=pretty|#non_treasure|binding_curse|vanishing_curse|frost_walker|mending}}。
+**** 会出现在[[交易]]中的[[附魔书]]上的魔咒。
+*** {{cd|#on_traded_equipment}}：{{cd|#non_treasure}}。
+**** 会出现在交易中的附魔装备上的魔咒。
+*** {{cd|#double_trade_price}}：{{cd|#treasure}}。
+**** 需要花费双倍[[绿宝石]]交易的魔咒。
+*** {{cd|#in_enchanting_table}}：{{cd|#non_treasure}}。
+**** 会出现在[[附魔台]]里的魔咒。
+*** {{cd|#on_mob_spawn_equipment}}：{{cd|#non_treasure}}。
+**** 会出现在随机生成生物所穿装备上的魔咒。
+*** {{cd|#on_random_loot}}：{{cd|d=pretty|#non_treasure|binding_curse|vanishing_curse|frost_walker|mending}}。
+**** 会出现在战利品箱子内的战利品上的魔咒。
+** 控制魔咒兼容性的标签：
+*** {{cd|#exclusive_set/armor}}：{{cd|d=pretty|protection|blast_protection|fire_protection|projectile_protection}}。
+**** 不能在盔甲上共存的魔咒。
+*** {{cd|#exclusive_set/boots}}：{{cd|d=pretty|frost_walker|depth_strider}}。
+**** 不能在靴子上共存的魔咒。
+*** {{cd|#exclusive_set/bow}}：{{cd|d=pretty|infinity|mending}}。
+**** 不能在弓上共存的魔咒。
+*** {{cd|#exclusive_set/crossbow}}：{{cd|d=pretty|multishot|piercing}}。
+**** 不能在弩上共存的魔咒。
+*** {{cd|#exclusive_set/damage}}：{{cd|d=pretty|sharpness|smite|bane_of_arthropods|impaling|density|breach}}。
+**** 不能共存的伤害增幅类魔咒。
+*** {{cd|#exclusive_set/mining}}：{{cd|d=pretty|fortune|silk_touch}}。
+**** 不能共存的挖掘类魔咒。
+*** {{cd|#exclusive_set/riptide}}：{{cd|d=pretty|loyalty|channeling}}。
+**** 不能与[[激流]]共存的魔咒。
+** 用于交易平衡性调整的魔咒标签：
+*** {{cd|-{}-#trades/<''生物群系''>_common}}，村民职业等级较低时所交易的魔咒。
+*** {{cd|-{}-#trades/<''生物群系''>_special}}，村民职业等级最高时所交易的魔咒。
+* 加入了以下伤害类型标签：
+** {{cd|#burn_from_stepping}}：{{cd|d=pretty|campfire|hot_floor}}。
+*** 站在某物上会造成的伤害类型，也是可由[[冰霜行者]]魔咒免疫的伤害类型。
+
+== 更改 ==
+=== 方块 ===
+'''[[铜门]]和[[铜活板门]]'''
+* 现在合成它们需要[[铜锭]]，而非[[铜块]]，因此不再能用对应变种的铜块合成它们的[[氧化]]变种。
+* 所有的[[氧化]]变种仍可以与[[蜜脾]]合成为它们的涂蜡变种。
+
+'''[[试炼刷怪笼]]'''
+* 将[[腐肉]]从补给战利品表中移除。
+* 不祥试炼刷怪笼中的生物如果不能穿戴装备，则会在试炼过程中以总数的2倍生成。
+** 试炼中，这些刷怪笼也会生成一种额外的生物。
+* 不祥试炼刷怪笼不再会使[[不祥之物生成器]]投掷[[附魔之瓶]]。
+* 难度为[[和平]]或游戏规则<code>doMobSpawning</code>为<code>false</code>时，试炼刷怪笼将保持“等待玩家”而非“未激活”状态。
+
+'''[[不祥宝库]]'''
+* 适用于[[重锤]]的魔咒会有更大的概率出现。
+
+=== 物品 ===
+'''[[重锤]]'''
+* 现在不会击退被自己驯服的生物。
+* 将基础攻击伤害降低至{{hp|6}}。
+* 将攻击速度降低至0.5。
+* 将耐久度从250点提高至500点。
+* 普通攻击和暴击都不再消耗耐久。<ref>{{bug|MC-271532|||Fixed}}</ref>
+* 不再能附上火焰附加魔咒。<ref>{{bug|MC-271436|||Fixed}}</ref>
+* 降低了猛击伤害：
+** 对于前3格下落高度，每格造成{{hp|4}}伤害。
+** 对于第4-8格下落高度，每格造成{{hp|2}}伤害。
+** 对于其余的下落高度，每格造成{{hp|1}}伤害。
+
+'''[[斧]]'''
+* 现在在副手有盾时优先持盾而非{{ctrl|使用}}斧。
+
+'''[[探险家地图]]'''
+* 将“试炼密室地图”重命名为“试炼探险家地图”。
+
+=== 非生物实体 ===
+'''[[弹射物]]'''
+* 弹射物造成的击退不再基于其发射者的位置。
+** 箭类和火球类弹射物会按其运动方向击退。
+** 喷溅药水类和烟花火箭类弹射物会从其中心向周围击退。
+** [[发射器]]发射的弹射物现在也会击退。
+* 在箭类弹射物数据中加入了<code>weapon</code>字段，其中包含一个物品堆叠，表示此弹射物是由哪种武器发射的。
+* 在箭类弹射物数据中移除了<code>ShotFromCrossbow</code>字段。
+
+'''[[风弹（实体）|风弹]]'''
+* 不再在<code>mobGriefing</code>[[游戏规则]]为<code>false</code>时改变方块状态。
+
+=== 世界生成 ===
+'''[[试炼密室]]'''
+* 更改了一些试炼刷怪笼的分类：
+** [[蜘蛛]]试炼刷怪笼从“小型近战型”（<code>small_melee</code>）移至“近战型”（<code>melee</code>）。
+** [[史莱姆]]试炼刷怪笼从“近战型”移至“小型近战型”。
+* 加入了新的入口结构{{cd|d=pretty|entrance_2|entrance_3}}，以及{{cd|d=pretty|entrance_1|entrance_2}}独有的附加结构{{cd|d=pretty|display_1|display_2|display_3}}（小型造景）。
+* 为决斗室{{cd|assembly}}加入了附加结构{{cd|d=pretty|cover_7|hanging_5}}，同时移除了附加结构{{cd|spawner_trap_1}}（[[TNT]]陷阱）。
+* 移除了决斗室中的{{cd|d=pretty|10x15_pathway_3|10x15_rise|10x15_stacked_pathway|c3_side_walkway_1|c3_side_walkway_2|closed_side_walkway|corner_room_1|full_column_ranged_spawner|lower_walkway_platform|middle_column_ranged_spawner|middle_walkway|platform_with_space|side_walkway|stairs_with_space|stairs_with_space_2|walkway_extension}}附加结构。
+* 在决斗室中加入了新型发射器机关。
+* 在决斗室入口处加入了空箱子。
+* 更改了交叉口和柱廊的各种布局。
+* 修复了柱廊中各种缺失的拼图连接，并使接缝更加合理。
+* 修复了各种缺失和错误的拼图数据。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* “[[进度#advancements-anchor-nether.all_potions|{{Advancement name|nether.all_potions|zh|rev=1}}]]”现在还需要[[寄生]]、[[渗浆]]、[[盘丝]]和[[蓄风]]状态效果。
+* “[[进度#advancements-anchor-nether.all_effects|{{Advancement name|nether.all_effects|zh|rev=1}}]]”现在还需要寄生、渗浆、盘丝、蓄风、[[袭击之兆]]和[[试炼之兆]]状态效果。
+* “[[进度#advancements-anchor-adventure.trim_with_any_armor_pattern|{{Advancement name|adventure.trim_with_any_armor_pattern|zh|rev=1}}]]”现在也可以通过合成带有[[涡流盔甲纹饰]]和[[镶铆盔甲纹饰]]的盔甲来获取。
+
+'''[[魔咒]]'''
+* [[横扫之刃]]不再对不应受到[[亡灵杀手]]和[[节肢杀手]]额外伤害的生物造成这些伤害。
+* 现在[[致密]]与[[穿刺]]、[[锋利]]、亡灵杀手和节肢杀手互不兼容，[[破甲]]也与穿刺、锋利、亡灵杀手和节肢杀手互不兼容。
+** 致密和破甲仍相互兼容。<ref>{{bug|MC-271404|||Fixed}}</ref>
+* 致密每级增加的每格伤害由{{hp|1}}下调至{{hp|0.5}}。
+* [[火焰附加]]现在可以将方块为<code>false</code>的<code>lit</code>方块状态改为<code>true</code><ref>{{bug|MC-271442|||Fixed}}</ref>，且可使被横扫攻击击中的生物着火。
+* [[盾牌]]现在可以阻止火焰附加使持盾生物着火。
+* [[荆棘]]现在会对[[羊驼]]、[[行商羊驼]]、[[山羊]]、[[唤魔者]]、[[猫]]、[[豹猫]]、[[守卫者]]、[[杀手兔]]正常生效。
+* [[精准采集]]现在与[[抢夺]]和[[海之眷顾]]兼容。
+* [[灵魂疾行]]现在会正确地改变玩家在[[灵魂沙]]或[[灵魂土]]上的速度和视场角（FOV）。
+* 灵魂疾行现在不会因为在有效方块上跳跃和骑乘[[矿车]]消耗耐久。
+* [[多重射击]]现在会随魔咒等级增加额外射出的箭数。<ref>{{bug|MC-271746|||WAI}}</ref>
+* [[风爆]]现在又可在任何物品上生效，也再可对非生物实体生效了。
+** 现在任何物品上的风爆均只在下落1.5格后生效。
+* 现在带有[[水下速掘]]、[[爆炸保护]]、[[深海探索者]]、[[效率]]、[[火焰保护]]、[[水下呼吸（魔咒）|{{tr|水下呼吸|水中呼吸}}]]、横扫之刃和[[迅捷潜行]]魔咒的装备会在其物品[[提示框]]中显示魔咒所应用的[[属性修饰符]]。
+
+'''[[创造模式物品栏]]'''
+* 现在[[画]]的变种按画的尺寸和ID排序。
+* 现在[[附魔书]]按其中魔咒ID排序。
+
+=== 常规 ===
+'''[[属性]]'''
+* <code>generic.attack_knockback</code>现在也对玩家生效。
+
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|42}}。
+* 将“{{tr|1.21更新|1.21 更新}}”中的[[实验性内容]]加入到游戏内。
+* 修改了[[谓词]]和[[战利品表函数]]。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|33}}。
+* 为[[音乐唱片]]添加了新的音乐和纹理。
+* 重新命名了不祥[[试炼刷怪笼]]激活和环境音效的声音事件。
+
+'''[[全景图]]'''
+* 更改了全景图以适配[[棘巧试炼]]。
+
+'''[[Realms]]'''
+* Realms中的确认屏幕现在会以弹窗形式显示。
+
+'''[[崩溃]]'''
+* 崩溃报告中的内存大小单位由“MB”改为了“MiB”，计算方式不变。
+* 崩溃报告现在会包含JNA临时目录、LWJGL临时目录、netty的原生库目录和系统临时目录的可用空间及总空间。
+
+'''[[物品堆叠组件]]'''
+* 在{{cmd|give}}、{{cmd|item}}和{{cmd|loot}}命令中的物品参数中，可使用<code>!</code>前缀来移除指定的物品默认组件。
+** 比如：{{cmd|/give @s diamond_pickaxe[!tool]}}将会给予执行者一把不带{{cd|tool}}物品堆叠组件的[[钻石镐]]。
+
+'''[[战利品表谓词]]'''
+* {{nbt|string|condition}}中，一些目标实体名称被重命名，以使其更通用：
+** 将<code>killer</code>重命名为<code>attacker</code>。
+** 将<code>direct_killer</code>重命名为<code>direct_attacker</code>。
+** 将<code>killer_player</code>重命名为<code>attacking_player</code>。
+* {{nbt|string|condition}}为<code>random_chance</code>时，其{{nbt|float|chance}}字段现在是一个数值提供器。
+* 将{{nbt|string|condition}}的枚举值<code>random_chance_with_looting</code>重命名为<code>random_chance_with_enchanted_bonus</code>。
+** 移除了{{nbt|float|looting_multiplier}}。
+** {{nbt|float|chance}}现在为[[魔咒数据格式/等级依赖函数|等级依赖函数]]。
+** 加入了新字段{{nbt|string|enchantment}}，表示魔咒的命名空间ID。
+
+'''[[战利品表函数]]'''
+* <code>enchanted_count_increase</code>
+** 由<code>looting_enchant</code>重命名，为其加入了一个新字段：
+*** {{nbt|string|enchantment}}：用于增加产量的魔咒的[[命名空间ID]]。
+* <code>enchant_randomly</code>
+** 移除了{{nbt|list|enchantments}}，取而代之的是{{nbt|string}}{{nbt|list|options}}，可以为单个魔咒、魔咒列表或带有<code>#</code>前缀的魔咒标签。
+** 加入了{{nbt|bool|only_compatible}}，（可选，默认为<code>true</code>）表示是否仅允许适用于此物品的魔咒。
+*** 如果为<code>true</code>，则只允许与该物品兼容的魔咒。
+*** 各种[[书]]被视为与所有魔咒兼容。
+* <code>enchant_with_levels</code>
+** 移除了{{nbt|bool|treasure}}，取而代之的是{{nbt|string}}{{nbt|list|options}}，可以为单个魔咒、魔咒列表或带有<code>#</code>前缀的魔咒标签。
+* <code>copy_name</code>
+** 重命名了{{nbt|string|source}}的枚举值：
+*** 将<code>killer</code>重命名为<code>attacking_entity</code>。
+*** 将<code>killer_player</code>重命名为<code>last_damage_player</code>。
+
+'''魔咒谓词'''
+* 移除了<code>enchantment</code>字段，取而代之的是可以为单一魔咒、魔咒列表或带有<code>#</code>前缀的魔咒标签的<code>enchantments</code>字段。
+** 指定魔咒列表或标签时，如果有任一魔咒符合，此谓词也将通过检测。
+** 如果不指定<code>enchantments</code>字段，任意符合<code>levels</code>的魔咒都可通过检测。
+** 如果<code>enchantments</code>和<code>levels</code>都不存在，谓词会匹配带有任意魔咒的物品。
+
+'''实体标志谓词'''
+* 现在支持新字段：
+** {{nbt|bool|is_on_ground}}：（可选）用于匹配实体的“落地”状态。
+** {{nbt|bool|is_flying}}：（可选）用于匹配实体是否飞行，包括使用[[鞘翅]]滑翔和在[[创造模式]]下飞行。
+
+'''位置信息谓词'''
+* 现在支持新字段：
+** {{nbt|bool|can_see_sky}}：（可选）用于精确匹配位置的最大天空光照等级。
+** {{nbt|string|weather}}：（可选）用于匹配维度某位置的天气，可以为：{{cd|d=pretty|clear|raining|thunder}}。
+
+== 修复 ==
+{{fixes|fixedin=24w18a|veralias=1|showdesc=1
+|;old
+|44280|由发射器射出的弹射物不会击退生物。
+|59626|箭被卸载时会失去冲击魔咒属性。
+|76104|守卫者不受荆棘魔咒影响。
+|93669|使用火焰附加魔咒进行横扫攻击不会使其他生物着火。
+|99411|冰霜行者的霜冰不完全受<code>randomTickSpeed</code>游戏规则影响。
+|116643|精准采集不兼容抢夺或海之眷顾。
+|117361|用横扫之刃攻击受影响的生物时，生物类型特化伤害魔咒（亡灵杀手、节肢杀手）会影响附近所有实体。
+|131637|当在副手持有节肢杀手魔咒时，可以对实体赋予缓慢效果。
+|137018|用抢夺和火焰附加杀死兔子只会在某些时候掉落熟兔肉。
+|158245|即使持盾格挡，生物的火焰附加魔咒也能让你着火。
+|175729|带着深海探索者和灵魂疾行在水下的灵魂土上行走不会显示灵魂粒子。
+|177965|站在灵魂沙/土上穿上/脱下灵魂疾行靴子不会加速。
+|182606|当带着灵魂疾行在灵魂沙或灵魂土方块（会更加明显）潜行并走近熔岩，会生成过多灵魂粒子。
+|188693|在灵魂沙上使用灵魂疾行后骑乘生物，此时FOV不会恢复。
+|189365|玩家可以通过跨方块来保留灵魂疾行效果。
+|193343|切换到旁观模式后，灵魂疾行效果仍然存在。
+|200899|当用间接的横扫攻击穿着荆棘盔甲的实体时，玩家不受到荆棘伤害。
+|200991|在矿车中，灵魂疾行消耗耐久。
+|213349|某些能近战攻击的生物不能使用火焰附加魔咒。
+|215144|“默认”世界重新创建后拥有“自定义”世界类型。
+|223301|山羊向已装备的荆棘盔甲发起攻击时不受其伤害。
+|224743|在灵魂沙上跳跃会消耗灵魂疾行靴子的耐久。
+|225312|使用唤魔者尖牙的唤魔者不受荆棘魔咒影响。
+|232770|烟花火箭爆炸会对其发射者造成击退。
+|234162|在调整滑动条的过程中，若在移开鼠标指针后松开鼠标，<code>minecraft:ui.button.click</code>音效就不会播放。
+|234880|羊驼（及行商羊驼）不受荆棘影响。
+|237057|使用附有灵魂疾行魔咒的靴子时，<code>minecraft:particle.soul_escape</code>音效极少被其他玩家听见。
+|237063|使用附有灵魂疾行魔咒的靴子造成的粒子与其他玩家所显示地不一致。
+|248272|{{cd|d=pretty|Enchantment::doPostHurt|Enchantment::doPostAttack}}被玩家调用两次。
+|253457|猫和豹猫免疫荆棘伤害。
+|258967|由喷溅药水造成的击退取决于你投掷药水时面朝的方向。
+|259987|伤害命令只在由实体执行时才会造成击退。
+|261701|在世界中首次打开创造模式物品栏时延迟激增。
+|265088|“{{tr|复述|朗讀}}功能”按钮未在按下{{key|Ctrl+B}}时更新。
+|266556|试炼刷怪笼不能在和平难度中被激活。
+|267154|使用末影之眼会将<code>minecraft:entity.ender_eye.launch</code>音效事件播放两次。
+|267441|玩家的<code>generic.step_height</code>属性大于2时，如果高于2格的方块上空还有方块，则尝试走上此方块可能会失败。
+|268347|将<code>gravity</code>设至大于0.84会允许玩家跳上一格方块。
+|268367|在旋风人上反复弹跳的箭发出噪声。
+|268551|风弹被发射器发射时，发出“{{tr|物品：被射出|物品射出|物品被射出}}”音效而非“{{tr|风弹：飞行|風彈飛行|風彈飛行}}”音效。
+|268564|实体被旋风人反射的弹射物击中时受到方向不一致的击退。
+|269881|涡流和镶铆盔甲纹饰不会赋予“{{Advancement name|adventure.trim_with_any_armor_pattern|zh|rev=1}}”进度。
+|269958|新效果不在“{{Advancement name|nether.all_effects|zh|rev=1}}”进度的需求中。
+|269966|“{{Advancement name|nether.all_potions|zh|rev=1}}”进度不需要新药水效果。
+|269969|对不祥宝库使用普通试炼钥匙也能获得“{{Advancement name|adventure.under_lock_and_key|zh|rev=1}}”进度。
+|269978|<code>eruption</code>试炼密室中的中心发射器缺少一个水桶。
+|270021|在生存模式下饮用单个的不祥之瓶不会以正确倍率赋予不祥之兆。
+|270031|由不祥试炼刷怪笼生成的箭可以被捡起。
+|270047|使用斧刮削铜的优先级高于持盾。
+|270216|重锤猛击粒子不能通过粒子设置减少。
+|270278|使用缓降时，“{{Advancement_name|adventure.who_needs_rockets|zh|rev=1}}”在低于8格的高度被赋予。
+|270379|按钮和拉杆被风弹切换时不发出音效。
+|270499|副手中的激流三叉戟应用主手中重锤的效果。
+|270588|击打风弹和火球不发出音效。
+|270682|<code>modify_contents</code>物品修饰器可以创造过量堆叠的物品。
+|270791|重锤猛击会击退被驯服的生物。
+|270849|<code>mobGriefing</code>为<code>false</code>时，旋风人能熄灭点燃的蜡烛。
+|270934|缺失试炼密室结构<code>minecraft:trial_chambers/chamber/addon/c6</code>。
+|270974|<code>mobGriefing</code>被禁用时，旋风人风弹能改变红石元件是否激活的方块状态。
+|270977|旋风人不发出反弹声。
+|271039|升级到1.20.5导致带有无命名空间的“横扫之刃”魔咒的物品中的所有魔咒均被移除。
+|271157|“{{tr|遥测已禁用。|遙測資料已停用。|遙測已停用。}}”提示框不随客户端的区域变化而更新。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:24w18a]]
+[[en:Java Edition 24w18a]]
+[[es:Java_Edition_24w18a]]
+[[fr:Édition Java 24w18a]]
+[[ja:Java Edition 24w18a]]
+[[pt:Edição Java 24w18a]]
+[[ru:24w18a (Java Edition)]]
+[[uk:24w18a (Java Edition)]]

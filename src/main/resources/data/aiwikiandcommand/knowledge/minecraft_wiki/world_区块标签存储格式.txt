@@ -1,0 +1,49 @@
+# 页面: 区块标签存储格式
+# 来源: https://zh.minecraft.wiki/w/%E5%8C%BA%E5%9D%97%E6%A0%87%E7%AD%BE%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:20:51
+# 原始 Wikitext 内容:
+
+{{redirect|chunks.dat|[[携带版Alpha 0.9.0]]前的区块存储文件|基岩版存档格式/历史#chunks.dat}}
+{{exclusive|je}}
+
+'''区块标签存储文件'''是游戏存储每个维度区块标签所用的文件。
+
+== 存储格式 ==
+区块标签存储文件位于{{filepath|-{}-<''维度根目录''>/data/minecraft/chunk_tickets.dat}}。例如，主世界的区块标签存储文件位于{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/overworld/data/minecraft/chunk_tickets.dat}}，下界的位于{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/the_nether/data/minecraft/chunk_tickets.dat}}。
+
+区块标签存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|list|tickets|existonsave=1|required=1}}：区块标签数据。
+**** {{nbt|compound}}：一个区块标签。
+***** {{nbt|int array|chunk_pos|existonsave=1|required=1}}：区块标签所处的区块位置。其中第一个整型元素代表区块的X坐标，第二个整型元素代表区块的Z坐标。
+***** {{nbt|int|level|existonsave=1|required=1}}：区块标签的等级。具体为加载等级还是计算等级，或是两者都是，取决于区块标签类型。
+***** {{nbt|long|ticks_left}}：（当区块标签类型永不超时时不存在）区块标签还有多少[[游戏刻]]的存活时间。设置为0时代表永不超时。
+***** {{nbt|string|type|existonsave=1|required=1}}：[[区块#标签|区块标签]]的类型。当区块标签类型无效时，这个区块标签数据无效，游戏静默删除此数据。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此区块标签存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+游戏只会保存可被持久化的区块标签，即区块标签类型是可持久化的区块标签。目前，只有强制加载区块标签（forced）和传送门标签（portal）可被持久化，其他标签都无法持久化。如果修改此文件为此文件添加了不可持久化的区块标签，游戏仍能正常加载此文件，且会将不可持久化的区块标签作为有效数据进行加载，区块标签也能正常生效，但在下一次游戏保存时这些数据无法被存储，当服务端重启后这些区块标签就会消失。
+
+当游戏加载存档时，游戏在加载出生点区块后会立刻读取每个维度内的区块标签存储文件，并将内部指定的所有区块标签添加到指定的区块以加载这些区块。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13.1|dev=18w31a|加入了强制加载区块存储文件。}}
+|{{HistoryLine||1.21.5|dev=25w02a|现在此文件不仅用于存储强制加载区块数据，而是用于存储所有可持久化的区块标签数据。在此之前，{{nbt|compound|data|existonsave=1|required=1}}标签内只有一个{{nbt|long-array|Forced|existonsave=1|required=1}}保存所有强制加载区块。}}
+|{{HistoryLine|||dev=25w05a|区块位置数据现在以{{nbt|int-array|整型数组}}保存，而不再以{{nbt|long|长整型}}保存。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将主世界的区块标签数据从{{filepath|<''存档根目录''>/data/chunks.dat}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/overworld/data/minecraft/chunk_tickets.dat}}。
+|将下界的区块标签数据从{{filepath|<''存档根目录''>/DIM-1/data/chunks.dat}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_nether/data/minecraft/chunk_tickets.dat}}。
+|将末地的区块标签数据从{{filepath|<''存档根目录''>/DIM1/data/chunks.dat}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_end/data/minecraft/chunk_tickets.dat}}。
+|将其他维度的区块标签数据从{{filepath|<''维度根目录''>/data/chunks.dat}}移动到{{filepath|<''维度根目录''>/data/minecraft/chunk_tickets.dat}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

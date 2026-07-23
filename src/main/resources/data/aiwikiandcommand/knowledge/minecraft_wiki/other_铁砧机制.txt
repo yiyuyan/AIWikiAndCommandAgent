@@ -1,0 +1,281 @@
+# 页面: 铁砧机制
+# 来源: https://zh.minecraft.wiki/w/%E9%93%81%E7%A0%A7%E6%9C%BA%E5%88%B6
+# 分类: 
+# 抓取时间: 2026-07-14 17:37:46
+# 原始 Wikitext 内容:
+
+{{about|当前版本的铁砧机制|[[Java版1.8]]之前的铁砧机制|铁砧机制/Java版1.8前}}
+{{update}}
+{{Filetr|Anvil2.png|thumb|铁砧的交互界面}}
+
+本页面将阐述在[[铁砧]]上进行的操作的机制。铁砧下落和受损的机制不在本文中讨论。
+
+== 功能 ==
+放置铁砧后，{{control|使用}}铁砧即可打开其交互界面。
+
+铁砧主要用来修复工具、盔甲和武器，同时保留[[魔咒]]。铁砧还用来合并两件物品的魔咒、给物品命名。在铁砧上进行物品操作都需要耗费[[经验]]等级，有的还需要消耗材料。
+
+通过访问铁砧的交互界面，铁砧具有以下基本功能：
+* 重命名任何物品，包括[[方块物品]]。注意，方块数据中不存储方块名称的方块被放置后会失去其名称，而熔爐或箱子等可交互方块名字会显示在打开的交互界面的左上角，替换掉这些界面原本的名字。{{Anvil|1=Iron Sword|3=[超级剑]Iron Sword|title=超级剑}}
+* 使用其合成原料修复受损的物品。例如，可以使用[[铁锭]]修复铁质[[工具]]和[[盔甲]]。可修复物品的默认名称应具有与修复材料相对应的品质前缀；例外情况为[[铁锭]]修复[[链甲]]、[[旋风棒|旋風棒]]修復[[重锤|重錘]]、[[幻翼膜]]修复[[鞘翅]]以及[[犰狳鳞甲]]修复[[狼铠]]。{{Anvil|1=Damaged Iron Sword|2=Iron Ingot,2|3=Iron Sword}}
+* 合并两个类型和品质相同、都有[[耐久度]]机制的物品，例如[[镐]]、[[弓]]、[[剪刀]]等。[[耐久度]]的合并与使用工作台合并相似，物品上的魔咒则遵循后文所述的规律结合。{{Anvil|1=Damaged Iron Sword|2=Damaged Iron Sword|3=Iron Sword}}
+* 将[[工具]]与[[附魔书]]结合，将魔咒转移到工具上。相比于合并两个相似物品上的魔咒，使用[[附魔书]]花费更少，且能让物品获得在[[附魔台]]上无法得到的魔咒。、
+重命名物品可在修理或合并物品的同一步骤进行，只要经验花费不太高。
+
+在铁砧上操作时，产生的经验等级花费会显示为“{{tp|container.repair.cost|''<等级>''}}”。{{Anvil|1=Damaged Iron Sword|2=Damaged Iron Sword|3=Iron Sword|cost=2}}
+
+在[[生存模式]]和[[冒险模式]]中，铁砧单次只能进行耗费最高39级经验等级的操作。如果要消耗40级或更多经验等级时，铁砧将提示“{{tp|container.repair.expensive}}”并拒绝进行操作。[[创造模式]]中没有这个限制。{{Anvil|1=Damaged Iron Sword|2=Damaged Iron Sword|crossed=true|cost=expensive}}
+在[[创造模式]]中，如果进行需要消耗超过2147483647级经验等级的操作，则不会显示附魔花费，无法取出“操作完成”的物品，尽管其会被展示出来，合成箭头上也不会有红色交叉。
+
+== 累积惩罚 ==
+在铁砧上进行任何非仅重命名的操作，都会为物品增加“累积惩罚”，其以后在铁砧上进行操作的经验花费，会因物品先前曾在铁砧上的操作而获得的累积惩罚而增加。对于一件从未放上铁砧的物品，其累积惩罚为0。仅重命名不会增加累积惩罚。
+
+一个物品每次在铁砧上操作过后（不包括重命名），其当前累积惩罚都会在前一次基础上乘2再加1。如此一来，一个在铁砧上进行非仅重命名操作n次的物品，其累积惩罚是2<sup>n</sup>-1。非仅重命名操作的次数达到6时，累积惩罚是63级，此时生存模式下无法再对此物品进行仅重命名以外的操作。非仅重命名操作的次数达到31时，惩罚等级是2147483647（32位有符号整数的最大值）级，此时在任何模式下都不能进行任何的操作。
+
+当合并两个物品时，玩家会同时受到两件物品的累积惩罚。合并后物品的累积惩罚根据先前两个物品中较高者计算。例如，合并两个累积惩罚分别是3和7的物品，合并后的物品的累积惩罚是15。
+
+{| class="wikitable" data-description="非仅重命名操作的次数与累积惩罚"
+|-
+! 非仅重命名操作的次数 !! 累积惩罚
+|-
+| 0 || 0
+|-
+| 1 || 1
+|-
+| 2 || 3
+|-
+| 3 || 7
+|-
+| 4 || 15
+|-
+| 5 || 31
+|-
+| 6 || 63
+|-
+|n
+|2<sup>n</sup>-1
+|}
+
+使用[[砂轮]]进行的[[物品修复]]操作可将累积惩罚设为2<sup>诅咒魔咒的数量</sup>-1，但如果使用合成方格进行物品修复，则累积惩罚会被重置为0，这两种物品修复操作方式都会丢失所有非诅咒魔咒。
+
+== 重命名 ==
+重命名会产生1经验等级的重命名花费，与合并魔咒花费和累积惩罚叠加。重命名不会增加累积惩罚。
+
+如果仅重命名物品，不作修复和合并魔咒，即使累积惩罚超过38级，花费也不会超过39级。然而，一旦累积惩罚达到或超过2147483647，就无法再重命名，重命名完成的物品会被展出，但无法被取出。
+
+可堆叠物品可以成组一起重命名，且只花费1级经验等级。注意重命名的物品无法和普通物品堆叠在一组。
+
+[[箱子]]、[[陷阱箱]]、[[木桶]]、[[潜影盒]]、[[熔炉]]、[[高炉]]、[[烟熏炉]]、[[发射器]]、[[投掷器]]、[[合成器]]、[[酿造台]]、[[附魔台]]被重命名后，其交互界面会使用重命名的名称替换掉通常的标题，被破坏后掉落的方块物品也会保留名称；其他方块在放置后会丢失其名称。
+
+== 原材料修复 ==
+部分损坏的物品可以使用特定的原材料来修复。此时，每使用1份原材料都会恢复25%的总[[耐久度]]，并花费1级经验等级，最后再加上累积惩罚带来的额外花费，即为此次修复消耗的总经验等级。
+* 修复不同种类的物品所需的原材料都是特定的，详见下表。
+* 无法以这种方式修复的常见工具有[[弓]]、[[打火石]]、[[剪刀]]、[[钓鱼竿]]、[[胡萝卜钓竿]]、[[诡异菌钓竿]]和[[刷子]]。
+* 如果修复用材料的堆叠被重命名过，则无论使用几份材料来修复，其累积惩罚只算一次。
+* 由于每次修复造成的累积惩罚的快速增加，通常来讲每次将物品使用到几乎损坏的程度再用4个原材料一次修满耐久度（或是通过[[#合并物品|合并]]一个新合成的相同的物品）会更加经济。
+{{/可修复物品}}
+
+== 合并物品 ==
+铁砧可以合并相同种类、相同[[品质]]的两个物品，或一个物品与一本附魔书。合并物品仅针对有[[耐久度]]的物品：剑、工具、盔甲，再加上附魔书。铁砧界面中第一格/左边的物品称为'''目标'''物品；第二格/右边的物品称为'''牺牲'''物品——合并后会消失。合并物品的操作会进行下述两个操作的至少其中之一。这两个操作都将耗费经验等级，但如果在一次操作中同时完成，可以节省一部分共享耗费：
+* 目标物品将被修复，其耐久度会加上牺牲物的耐久度，再加最大耐久度的12%，且最终耐久度不会超过最大耐久度。如果目标物品没有损耗，则不会产生花费；花费为2级经验等级。
+* 如果牺牲物品附有魔咒，铁砧会同时试图将牺牲物品的魔咒合并至目标物品上。无论目标物品上的魔咒是否产生实际变化，铁砧都将根据目标物品与牺牲物品上的魔咒收取玩家的等级耗费。对于牺牲物品上的每个魔咒来说：
+** 如果目标物品也拥有相同的魔咒：
+*** 当牺牲物品的魔咒等级'''较高'''时，目标物品魔咒的等级将上升至牺牲物品上的等级。
+*** 当牺牲物品的魔咒等级'''相同'''时，目标物品上魔咒的等级将提升1级，除非其等级已为最高。
+*** 当牺牲物品的魔咒等级'''较低'''时，目标物品上该魔咒的等级不变。
+** 如果目标物品'''没有'''该魔咒，则将获得与牺牲物品上等级相同的魔咒，除非目标物品已经拥有一个与之互斥的魔咒。下列各组中的魔咒皆为互斥：
+***'''剑、斧、矛、重锤：'''[[锋利]]<ref group=注>锋利无法用于[[重锤]]。</ref>、[[亡灵杀手]]、[[节肢杀手]]、[[致密]]、[[破甲]]<ref group=注>致密和破甲仅能用于重锤。</ref>
+*** '''锄、锹、镐、斧：'''[[时运]]、[[精准采集]]
+*** '''盔甲：'''[[保护]]、[[火焰保护]]、[[弹射物保护]]、[[爆炸保护]]
+*** '''靴子：'''[[冰霜行者]]、[[深海探索者]]
+*** '''弓：'''[[无限]]、[[经验修补]]
+*** '''三叉戟：'''[[激流]]、[[忠诚]]、[[引雷]]（忠诚与引雷可以共存）
+*** '''弩：'''[[多重射击]]、[[穿透]]
+{{notelist|注}}
+
+合并物品的'''总花费'''将是下列费用之和：
+* 目标物品和牺牲物品的[[#累积惩罚|累积惩罚]]'''之和'''。
+* 如果同时进行[[#重命名|重命名]]，则额外产生重命名的费用。
+* 如果目标物品耐久度未满，则耗费2级用于维修。
+* 如果牺牲物品拥有魔咒，则产生[[#合并魔咒的花费|合并魔咒费用]]。
+
+如果牺牲物品是一本附魔书，则不会产生维修费用，铁砧会尝试将书本上的魔咒合并至目标物品上。亦可同时对目标物品进行重命名。此时的合并魔咒花费一般会少于合并两个类似物品的费用。
+
+=== 合并魔咒的花费 ===
+{{see also|教程:最佳附魔指南}}
+（这里仅展示合并魔咒的花费。花费总和请见[[#合并物品|合并物品]]。）
+* 对于牺牲物品中的每一个魔咒来说：
+** 忽略无法适用于目标物品的魔咒（例如：保护魔咒与剑）。
+** {{in|je}}目标物品中的每有一个互斥魔咒，合并魔咒花费增加1级。
+** 若待附魔咒与目标物品的现有魔咒相容，则花费再根据下表增加。
+*** {{in|je}}增加乘以下表中乘数的输出物品上该魔咒最终等级。
+*** {{in|be}}增加乘以下表中乘数的目标物品上最终等级与初始等级的差额。
+
+{| class="wikitable sortable" style="text-align:center" data-description="合并魔咒花费乘数表"
+|-
+! colspan="6" | 合并魔咒花费乘数表
+|-
+! ID !! class="unsortable" | 魔咒 !! class="unsortable" | 最高等级 !! class="unsortable" | 适用物品 !! 来自物品的乘数 !! 来自书的乘数
+|-
+| 0 || [[保护]]<ref group="注" name="combine-protection">这些不同类型的保护类魔咒相互排斥。</ref> || IV || {{simpleGrid|Netherite Helmet}}{{simpleGrid|Netherite Chestplate}}{{simpleGrid|Netherite Leggings}}{{simpleGrid|Netherite Boots}}{{simpleGrid|Turtle Shell}} || 1 || 1
+|-
+| 1 || [[火焰保护]]<ref group="注" name="combine-protection"/> || IV || {{simpleGrid|Netherite Helmet}}{{simpleGrid|Netherite Chestplate}}{{simpleGrid|Netherite Leggings}}{{simpleGrid|Netherite Boots}}{{simpleGrid|Turtle Shell}} || 2 || 1
+|-
+| 2 || [[摔落缓冲]] || IV || {{simpleGrid|Netherite Boots}} || 2 || 1
+|-
+| 3 || [[爆炸保护]]<ref group="注" name="combine-protection"/> || IV || {{simpleGrid|Netherite Helmet}}{{simpleGrid|Netherite Chestplate}}{{simpleGrid|Netherite Leggings}}{{simpleGrid|Netherite Boots}}{{simpleGrid|Turtle Shell}} || 4 || 2
+|-
+| 4 || [[弹射物保护]]<ref group="注" name="combine-protection"/> || IV || {{simpleGrid|Netherite Helmet}}{{simpleGrid|Netherite Chestplate}}{{simpleGrid|Netherite Leggings}}{{simpleGrid|Netherite Boots}}{{simpleGrid|Turtle Shell}} || 2 || 1
+|-
+| 5 || [[荆棘]] || III || {{simpleGrid|Netherite Helmet}}{{simpleGrid|Netherite Chestplate}}{{simpleGrid|Netherite Leggings}}{{simpleGrid|Netherite Boots}}{{simpleGrid|Turtle Shell}} || 8 || 4
+|-
+| 6 || [[水下呼吸（魔咒）|{{tr|水下呼吸|水中呼吸}}]] || III || {{simpleGrid|Netherite Helmet}}{{simpleGrid|Turtle Shell}} || 4 || 2
+|-
+| 7 || [[深海探索者]]<ref group="注" name="combine-walkers">深海探索者与冰霜行者互斥。</ref> || III || {{simpleGrid|Netherite Boots}} || 4 || 2
+|-
+| 8 || [[水下速掘]] || I || {{simpleGrid|Netherite Helmet}}{{simpleGrid|Turtle Shell}} || 4 || 2
+|-
+| 9 || [[锋利]]<ref group="注" name="combine-weapon-damage">锋利、节肢杀手、亡灵杀手、破甲和致密之间互相排斥。</ref> || V || {{simpleGrid|Netherite Sword}}{{simpleGrid|Netherite Axe}}{{simpleGrid|Netherite Spear}} || 1 || 1
+|-
+| 10 || [[亡灵杀手]]<ref group="注" name="combine-weapon-damage"/> || V || {{simpleGrid|Netherite Sword}}{{simpleGrid|Netherite Axe}}{{simpleGrid|Netherite Spear}}{{simpleGrid|Mace}} || 2 || 1
+|-
+| 11 || [[节肢杀手]]<ref group="注" name="combine-weapon-damage"/> || V || {{simpleGrid|Netherite Sword}}{{simpleGrid|Netherite Axe}}{{simpleGrid|Netherite Spear}}{{simpleGrid|Mace}} || 2 || 1
+|-
+| 12 || [[击退]] || II || {{simpleGrid|Netherite Sword}}{{simpleGrid|Netherite Spear}} || 2 || 1
+|-
+| 13 || [[火焰附加]] || II || {{simpleGrid|Netherite Sword}}{{simpleGrid|Netherite Spear}}{{simpleGrid|Mace}} || 4 || 2
+|-
+| 14 || [[抢夺]] || III || {{simpleGrid|Netherite Sword}}{{simpleGrid|Netherite Spear}} || 4 || 2
+|-
+| 15 || [[效率]] || V || {{simpleGrid|Netherite Pickaxe}}{{simpleGrid|Netherite Shovel}}{{simpleGrid|Netherite Axe}}{{simpleGrid|Netherite Hoe}}{{simpleGrid|Shears}} || 1 || 1
+|-
+| 16 || [[精准采集]]<ref group="注" name="combine-tool-special">精准采集与时运互斥。</ref> || I || {{simpleGrid|Netherite Pickaxe}}{{simpleGrid|Netherite Shovel}}{{simpleGrid|Netherite Axe}}{{simpleGrid|Netherite Hoe}}{{only|for={{simpleGrid|Shears}}|BE}} || 8 || 4
+|-
+| 17 || [[耐久]] || III || {{simpleGrid|Netherite Pickaxe}}{{simpleGrid|Netherite Shovel}}{{simpleGrid|Netherite Axe}}{{simpleGrid|Fishing Rod}}{{simpleGrid|Netherite Helmet}}{{simpleGrid|Netherite Chestplate}}{{simpleGrid|Netherite Leggings}}{{simpleGrid|Netherite Boots}}{{simpleGrid|Netherite Sword}}{{simpleGrid|Netherite Spear}}{{simpleGrid|Bow}}{{simpleGrid|Netherite Hoe}}{{simpleGrid|Shears}}{{simpleGrid|Flint and Steel}}{{simpleGrid|Brush}}{{simpleGrid|Carrot on a Stick}}{{simpleGrid|Warped Fungus on a Stick}}{{simpleGrid|Shield}}{{simpleGrid|Elytra}}{{simpleGrid|Turtle Shell}}{{simpleGrid|Trident}}{{simpleGrid|Crossbow}}{{simpleGrid|Mace}} || 2 || 1
+|-
+| 18 || [[时运]]<ref group="注" name="combine-tool-special"/> || III || {{simpleGrid|Netherite Pickaxe}}{{simpleGrid|Netherite Shovel}}{{simpleGrid|Netherite Axe}}{{simpleGrid|Netherite Hoe}} || 4 || 2
+|-
+| 19 || [[力量（魔咒）|{{tr|力量|強力}}]] || V || {{simpleGrid|Bow}} || 1 || 1
+|-
+| 20 || [[冲击]] || II || {{simpleGrid|Bow}} || 4 || 2
+|-
+| 21 || [[火矢]] || I || {{simpleGrid|Bow}} || 4 || 2
+|-
+| 22 || [[无限]] <ref group="注" name="combine-bow-enchants">经验修补与无限互斥。</ref> || I || {{simpleGrid|Bow}} || 8 || 4
+|-
+| 23 || [[海之眷顾]] || III || {{simpleGrid|Fishing Rod}} || 4 || 2
+|-
+| 24 || [[饵钓]] || III || {{simpleGrid|Fishing Rod}} || 4 || 2
+|-
+| 25 || [[冰霜行者]]<ref group="注" name="combine-walkers"/> || II || {{simpleGrid|Netherite Boots}} || 4 || 2
+|-
+| 26 || [[经验修补]] <ref group="注" name="combine-bow-enchants"/> || I || {{simpleGrid|Netherite Pickaxe}}{{simpleGrid|Netherite Shovel}}{{simpleGrid|Netherite Axe}}{{simpleGrid|Fishing Rod}}{{simpleGrid|Netherite Helmet}}{{simpleGrid|Netherite Chestplate}}{{simpleGrid|Netherite Leggings}}{{simpleGrid|Netherite Boots}}{{simpleGrid|Netherite Sword}}{{simpleGrid|Netherite Spear}}{{simpleGrid|Bow}}{{simpleGrid|Netherite Hoe}}{{simpleGrid|Shears}}{{simpleGrid|Flint and Steel}}{{simpleGrid|Brush}}{{simpleGrid|Carrot on a Stick}}{{simpleGrid|Warped Fungus on a Stick}}{{simpleGrid|Shield}}{{simpleGrid|Elytra}}{{simpleGrid|Turtle Shell}}{{simpleGrid|Trident}}{{simpleGrid|Crossbow}}{{simpleGrid|Mace}} || 4 || 2
+|-
+| 27 || [[绑定诅咒]] || I || {{simpleGrid|Netherite Helmet}}{{simpleGrid|Netherite Chestplate}}{{simpleGrid|Netherite Leggings}}{{simpleGrid|Netherite Boots}}{{simpleGrid|Elytra}}{{simpleGrid|Carved Pumpkin}}{{simpleGrid|Head}}{{simpleGrid|Turtle Shell}} || 8 || 4
+|-
+| 28 || [[消失诅咒]] || I || {{simpleGrid|Netherite Pickaxe}}{{simpleGrid|Netherite Shovel}}{{simpleGrid|Netherite Axe}}{{simpleGrid|Fishing Rod}}{{simpleGrid|Netherite Helmet}}{{simpleGrid|Netherite Chestplate}}{{simpleGrid|Netherite Leggings}}{{simpleGrid|Netherite Boots}}{{simpleGrid|Netherite Sword}}{{simpleGrid|Netherite Spear}}{{simpleGrid|Bow}}{{simpleGrid|Netherite Hoe}}{{simpleGrid|Shears}}{{simpleGrid|Flint and Steel}}{{simpleGrid|Brush}}{{simpleGrid|Carrot on a Stick}}{{simpleGrid|Warped Fungus on a Stick}}{{simpleGrid|Shield}}{{simpleGrid|Elytra}}{{simpleGrid|Carved Pumpkin}}{{simpleGrid|Head}}{{simpleGrid|Turtle Shell}}{{simpleGrid|Trident}}{{simpleGrid|Crossbow}}{{simpleGrid|Compass}}{{simpleGrid|Mace}}{{only|for={{simpleGrid|Recovery Compass}}|BE}} || 8 || 4
+|-
+| 29 || [[穿刺]] || V || {{simpleGrid|Trident}} || {{only|je|for=4}}<br>{{only|be|for=2}} || {{only|je|for=2}}<br>{{only|be|for=1}}
+|-
+| 30 || [[激流]]<ref group="注" name="combine-trident-enchants">激流与忠诚或引雷互斥。</ref> || III || {{simpleGrid|Trident}} || 4 || 2
+|-
+| 31 || [[忠诚]]<ref group="注" name="combine-trident-enchants"/> || III || {{simpleGrid|Trident}} || 1 || 1
+|-
+| 32 || [[引雷]]<ref group="注" name="combine-trident-enchants"/> || I || {{simpleGrid|Trident}} || 8 || 4
+|-
+| 33 || [[多重射击]]<ref group="注" name="combine-crossbow-enchants">多重射击与穿透互斥。</ref> || I || {{simpleGrid|Crossbow}} || 4 || 2
+|-
+| 34 || [[穿透]]<ref group="注" name="combine-crossbow-enchants" /> || IV || {{simpleGrid|Crossbow}} || 1 || 1
+|-
+| 35 || [[快速装填]] || III || {{simpleGrid|Crossbow}} || 2 || 1
+|-
+| 36 || [[灵魂疾行]] || III || {{simpleGrid|Netherite Boots}} || 8 || 4
+|-
+| 37 || [[迅捷潜行]] || III || {{simpleGrid|Netherite Leggings}} || 8 || 4
+|-
+| 38 || [[风爆]] || III || {{simpleGrid|Mace}} || 4 || 2
+|-
+| 39 || [[致密]]<ref group="注" name="combine-weapon-damage"/> || V || {{simpleGrid|Mace}} || 2 || 1
+|-
+| 40 || [[破甲]]<ref group="注" name="combine-weapon-damage"/> || IV || {{simpleGrid|Mace}} || 4 || 2
+|-
+| 41 || [[突进]] || III || {{simpleGrid|Netherite Spear}} || 4 || 2 
+|-
+| N/A || {{only|je|for=[[横扫之刃]]}} || III || {{simpleGrid|Netherite Sword}} || 4 || 2 
+|}
+
+;例子：
+* 处理相同等级的魔咒时：
+** 第一格内的目标物品是一把剑，附有锋利III、[[击退]]II和[[抢夺]]III。
+** 第二格内的牺牲物品是一把剑，附有锋利III和抢夺III。
+** 对于牺牲物品中的锋利III魔咒：由于目标物品具拥相同等级的魔咒，因此目标物品中的锋利魔咒将增加一级，成为锋利IV。合并魔咒花费由于锋利IV而增加4（乘数1乘以等级4）。
+** 对于牺牲物品中的抢夺III魔咒：由于抢夺魔咒的最大等级是III，因此目标物品维持抢夺III。但是合并魔咒花费仍将增加12（乘数4乘以等级3）。
+** 因此，合并魔咒花费总共为16等级。而该次使用铁砧的附魔花费还可能会包括累积惩罚、维修费用和重命名费用。
+** 如果采用另一种顺序合并（将拥有3个魔咒的剑作为牺牲物品），则击退II魔咒会再花费4（等级2乘以乘数2），合并魔咒的附魔花费变为20等级。
+* 处理不同等级的魔咒时：
+** 第一格内的目标物品是一把剑，附有锋利III、击退II和抢夺I。
+** 第二格内的牺牲物品是一把剑，附有锋利I和抢夺III。
+** 对于牺牲物品中的锋利I魔咒：由于目标物品中的等级较高，因此目标物品保留锋利III。但是合并魔咒花费仍将增加3（乘数1乘以等级3）。
+** 对于牺牲物品中的抢夺III魔咒：由于目标物品中的等级较低，因此该魔咒将升级至抢夺III。在合并魔咒花费增加12（乘数4乘以等级3）。
+** 因此，合并魔咒花费总共为15。而该次使用铁砧的附魔花费还可能会包括累积惩罚、维修费用和重命名费用。
+** 如果采用另一种顺序合并（将拥有3个魔咒的剑作为牺牲物品），由于增加了击退II魔咒，因此将再花费4（等级2乘以乘数2），合并魔咒的附魔花费变为19等级。
+* 处理互相排斥的魔咒时：
+** 第一格内的目标物品是一把剑，附有[[锋利]]II和抢夺II。
+** 第二格内的牺牲物品是一把剑，附有亡灵杀手V和抢夺II。
+** 对于牺牲物品中的亡灵杀手V魔咒：由于[[亡灵杀手]]与锋利互相排斥，所以花费增加1。目标物品保留锋利II。
+** 对于牺牲物品中的抢夺II魔咒：由于目标物品具有相同等级的魔咒，因此目标物品中的抢夺魔咒将提升1级，成为抢夺III。合并魔咒花费由于抢夺III而增加12（乘数4乘以等级3）。
+** 因此，合并魔咒花费总共为13。而该次使用铁砧的附魔花费还可能会包括累积惩罚、维修费用和重命名费用。
+** 如果采用另一种顺序合并（锋利魔咒的剑作为牺牲物品），合并魔咒的花费仍然是13级，但魔咒合并的结果是亡灵杀手V和抢夺III。
+* 使用附魔书：
+** 第一格内的目标物品是一把剑，附有抢夺II。
+** 第二格内的牺牲物品是一本附魔书，附有保护III，锋利I，和抢夺II。
+** 对于牺牲物品中的保护III魔咒：由于保护魔咒不是剑所能够拥有的魔咒，因此直接忽略。
+** 对于牺牲物品中的锋利I魔咒：由于目标物品没有锋利魔咒，所以目标物品获得锋利I，合并魔咒花费增加1（等级1乘以乘数1）。
+** 对于牺牲物品中的抢夺II魔咒：由于目标物品中有着相同等级的抢夺魔咒，该魔咒等级增加1级，变为抢夺III。合并魔咒花费增加6（等级3乘以乘数2）。
+** 因此，合并魔咒的花费总共为7。而由于使用附魔书不会修复物品，该次使用铁砧的附魔花费只可能会包括累积惩罚和重命名费用。
+
+{{in|be}}合并魔咒花费计算时由目标物品与生成物品间魔咒等级差值进行计算，未产生差值的魔咒不增加合并魔咒花费，例如：
+* 第一格内的目标物品是一把剑，附有锋利II和抢夺II。
+* 第二格内的牺牲物品是一把剑，附有亡灵杀手 V和抢夺II。
+* 对于牺牲物品中的亡灵杀手 V魔咒：由于亡灵杀手与锋利互相排斥，目标物品保留锋利II，而亡灵杀手未产生差值，故合并魔咒花费不增加。
+* 对于牺牲物品中的抢夺II魔咒：由于目标物品具有相同等级的魔咒，因此目标物品中的抢夺魔咒将提升1级，成为抢夺III。合并魔咒花费由于抢夺III而增加 4（乘数4乘以等级差值1）。
+* 因此，合并魔咒花费总共为4。而该次使用铁砧的附魔花费还可能会包括累积惩罚、维修费用和重命名费用。
+* 如果采用另一种顺序合并（锋利魔咒的剑作为牺牲物品），合并魔咒的花费仍然是4级，但魔咒合并的结果是亡灵杀手 V和抢夺III。
+
+使用附魔书：
+* 第一格内的目标物品是一把剑，附有抢夺II。
+* 第二格内的牺牲物品是一本附魔书，附有保护III，锋利I，和抢夺II。
+* 对于牺牲物品中的保护III魔咒：由于保护魔咒不是剑所能够拥有的魔咒，因此直接忽略。
+* 对于牺牲物品中的锋利I魔咒：由于目标物品没有锋利魔咒，所以目标物品获得锋利I，合并魔咒花费增加1（等级差值1乘以乘数1）。
+* 对于牺牲物品中的抢夺II魔咒：由于目标物品中有着相同等级的抢夺魔咒，该魔咒等级增加1级，变为抢夺III。合并魔咒花费增加2（等级差值1乘以乘数2）。
+* 因此，合并魔咒的花费总共为3。而由于使用附魔书不会修复物品，该次使用铁砧的附魔花费只可能会包括累积惩罚和重命名费用。
+
+== 视频 ==
+{{bv|BV1ZW4y187vU}}
+
+== 历史 ==
+{{empty section}}
+
+== 你知道吗 ==
+* 使用原材料修复物品时，原材料上的魔咒（例如附有[[锋利]]Ⅲ的[[铁锭]]）会被忽略，不会添加到目标物品上。
+* 由于每次重命名操作都会花费累积惩罚，最经济的重命名时机是进行进一步修复和合并魔咒操作之前，如此可以将重命名的花费降至最低。
+* 惩罚等级为2147483647级的物品几乎不能再进行任何铁砧操作。这是因为计算得到的费用溢出，因而变为负值。使用这种物品进行操作的一种办法是，将两个耐久度不满的这种物品合并并重命名，此时费用为1（合并两个这种物品惩罚相加溢出变为-2，合并维修费用增加2变为0，重命名增加1，最终费用为1）。
+* 如果先将附魔书互相附魔，再一起和装备一起进行一次附魔，则只会统计一次惩罚等级。
+* 如果将一件物品直接重命名为其他语言对应的物品名称将命名失败，但可以通过先改变物品原有名称来绕过此限制。比如将[[剪刀]]重命名为"Shears"时，可以先将其重命名为“刀”，再重命名为“Shears”。
+
+== 注释 ==
+{{Notelist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:机制]]
+
+[[de:Schmieden]]
+[[en:Anvil mechanics]]
+[[es:Mecánicas del yunque]]
+[[fr:Mécanique d'enclume]]
+[[ja:金床の仕組み]]
+[[ko:모루 작동 원리]]
+[[pt:Mecânica da bigorna]]
+[[ru:Механика наковальни]]

@@ -1,0 +1,54 @@
+# 页面: 属性/额外氧气
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E9%A2%9D%E5%A4%96%E6%B0%A7%E6%B0%94
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:31
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox attribute}}
+
+'''额外氧气（Oxygen Bonus）'''是控制生物氧气值消耗的[[属性]]。
+
+== 行为 ==
+{{main|呼吸}}
+
+生物不能[[呼吸]]时，游戏会每[[游戏刻]]尝试降低氧气值，当氧气值为-20时生物将受到溺水伤害或脱水伤害，并将氧气值重置为0。
+
+当此属性计算值''e''为0时，游戏尝试降低氧气值一定成功；而此属性计算值''e''不为0时，游戏尝试降低氧气值只有{{frac|1|e+1}}的概率成功。
+
+假设默认情况下（此属性计算值为0）时生物在浸入水中''n''游戏刻后受到伤害，那么在此属性计算值为''e''时平均<math>n(e+1)</math>游戏刻后才会受到伤害。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| 所有生物
+| 0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| enchantment.respiration/head
+| add_value (Op0)
+| ''等级''
+| 否
+| [[水下呼吸（魔咒）|{{tr|水下呼吸|水中呼吸}}]]魔咒，{{tr|应用|套用}}于<code>head</code>（头盔）槽位
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21|dev=24w18a|加入了额外氧气属性，ID为<code>generic.oxygen_bonus</code>。}}
+|{{HistoryLine|||dev=24w21a|水下呼吸魔咒修饰符的ID现在是<code>enchantment.respiration/head</code>，此前为<code>07A65791-F64D-4E79-86C7-F83932F007EC</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|额外氧气属性的ID从<code>generic.oxygen_bonus</code>重命名为<code>oxygen_bonus</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

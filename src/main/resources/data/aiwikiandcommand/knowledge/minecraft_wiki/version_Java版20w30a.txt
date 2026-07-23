@@ -1,0 +1,191 @@
+# 页面: Java版20w30a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8820w30a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:26
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=20w30a
+|image=20w30a.jpg
+|image2=Java Edition 20w30a Simplified.png\Java Edition 20w30a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2020年7月22日
+|jsonhash=97b01440f8964c8eee644953ea9eecc3d83b2c64
+|clienthash=60762a56f1552578d27b91df594ba2a8953dabcc
+|clientmap=a5a8ae491becf7fa134e2962f8abaeb277d200e6
+|serverhash=db5da41d9c5f6c0d839661269d70f5b8c1ff7d0a
+|servermap=bd3035b7f4004634f3a79a388a0a2c7f5130f1cb
+|parent=1.16.2
+|prevparent=1.16.1
+|prev=20w29a
+|next=1.16.2-pre1
+|nextparent=1.16.3
+}}<onlyinclude>
+
+'''20w30a'''是[[Java版1.16.2]]的第4个，也是最后一个快照，发布于2020年7月22日<ref name="20w30a">{{snap|20w30a|July 22, 2020}}</ref>，将[[灯笼]]更改为可含水方块，更改了堡垒遗迹的宝藏生成机制，并修复了一些漏洞。
+
+== 更改 ==
+=== 方块 ===
+'''[[灯笼]]和[[灵魂灯笼]]'''
+* 现在可以含水。
+
+'''[[告示牌]]'''
+* 现在，使用第三方工具重新编辑告示牌时，将使用现有告示牌文本初始化告示牌编辑屏幕。
+
+=== 生物 ===
+'''[[恼鬼]]'''
+*修改了无装备恼鬼的攻击动画。
+
+=== 世界生成 ===
+'''[[堡垒遗迹]]'''
+* 更改了箱子的战利品表。
+** 提高了战利品的总体价值。提高了稀有物品的权重，同时也增加了很多物品的数量。许多随机池的抽取次数也变多。
+** 移除了所有“空”的战利品项。
+** 大部分有耐久度的物品，其平均耐久度现在增加。
+** 向多个战利品表内加入了附魔的金斧、金胡萝卜和铁块。
+** 疣猪兽棚结构内的箱子现可能包含一把附魔的钻石镐。
+** 从宝箱中移除了铁粒。
+** 宝箱中未附魔的钻石盔甲现在不再有耐久度损失了。
+* 堡垒遗迹内的宝箱现在更有可能生成在[[镶金黑石]]上。
+
+=== 命令格式 ===
+'''{{cmd|summon}}'''
+* 为尝试生成重复UUID的实体加入了一条错误提示：“UUID重复，无法召唤实体”。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 现在可以修改空白进度页面描述下方的“:(”了（本地化键名为{{cd|advancements.sad_label}}）。
+* 将[[进度]]“{{Advancement name|nether.create_beacon|zh}}”的英文名“Bring Home the Beacon”中的“Beacon”的大小写修正为“beacon”。
+* 将[[进度]]“{{Advancement name|nether.use_lodestone|zh}}”的英文描述中的指南针“Compass”的大小写修正为“compass”。
+
+'''[[死亡消息]]'''
+* 将被头颅击中的死亡{{tr|信息|訊息}}从“<玩家名> was shot by a <实体名>'s skull”改为“<玩家名> was shot by a skull from <实体名>”。
+
+'''[[重生]]'''
+* 修改了[[床]]和[[重生锚]]确定重生位置的机制。
+** 重生锚现在优先选择东南西北四个基本方向，而不是斜对角。
+** 床现在优先选择玩家进入床的一侧，其次是从床尾到床头一圈的空间。
+** 重生的玩家会朝向重生的方块。
+** 当可能时会避免将玩家放置到危险的方块上。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 修改了一部分GUI文本字符串。
+** 将“Errors in currently selected datapacks prevented world from loading.[换行] You can either try to load only with vanilla datapack (‘safe mode’) or go back to title screen and fix it manually.”改为“Errors in currently selected datapacks prevented '''the''' world from loading.[换行] You can either try to load '''it with''' only the vanilla data pack (‘safe mode’), or go back to '''the''' title screen and fix it manually.”。
+** 修正了一些语法。
+*** 将“This pack was made for a newer version of Minecraft and may {{fc|#FF0000|#feeec8|'''no longer'''}} work correctly.”更改为“This pack was made for a newer version of Minecraft and may {{fc|#FF0000|#AAFFAA|'''not'''}} work correctly.”（{{cd|pack.incompatible.confirm.new}}）。
+*** 将“Do you want to add following packs to Minecraft?”更改为“Do you want to add {{fc|#FF0000|#AAFFAA|'''the'''}} following packs to Minecraft?”（{{cd|pack.dropConfirm}}）。 
+
+'''[[Crowdin#翻译|文本翻译]]'''
+* 将一些字符串变成大写。
+** 将“Back to title screen”更改为“Back to Title Screen”（{{cd|gui.toTitle}}）。
+** 将“Back to server list”更改为“Back to Server List”（{{cd|gui.toList}}）。
+** 将“Game paused”更改为“Game Paused”（{{cd|menu.paused}}）。
+** 将“Optimize world”更改为“Optimize World”（{{cd|optimizeWorld.confirm.title}}）。
+** 将“Now playing: <record>”更改为“Now Playing: <record>”（{{cd|record.nowPlaying}}）。
+** 将“Continue without support”更改为“Continue without Support”（{{cd|options.graphics.warning.accept}}）。
+** 将“Take me back”更改为“Take me Back”（{{cd|options.graphics.warning.cancel}}）。
+** 将“Spectate world”更改为“Spectate World”（{{cd|deathScreen.spectate}}）。
+** 将“Title screen”更改为“Title Screen”（{{cd|deathScreen.titleScreen}}）。
+** 将“You died!”更改为“You Died!”（{{cd|deathScreen.title}}）。
+** 将“Game over!”更改为“Game Over!”（{{cd|deathScreen.title.hardcore}}）。
+** 将“Level requirement: <level>”更改为“Level Requirement: <level>”（{{cd|container.enchant.level.requirement}}）。
+** 将“Save mode - write to file”更改为“Save Mode - Write to File”（{{cd|structure_block.mode_info.save}}）。
+** 将“Load mode - load from file”更改为“Load mode - Load from File”（{{cd|structure_block.mode_info.load}}）。
+** 将“Data mode - game logic marker”更改为“Data mode - Game Logic Marker”（{{cd|structure_block.mode_info.data}}）。 
+** 将“Corner mode - placement and size marker”更改为“Corner Mode - Placement and Size Marker”（{{cd|structure_block.mode_info.corner}}）。
+** 将“Show invisible blocks:”更改为“Show Invisible Blocks:”（{{cd|structure_block.show_air}}）。
+** 将“Show bounding box:”更改为“Show Bounding Box:”（{{cd|structure_block.show_boundingbox}}）。
+** 将“Target pool:”更改为“Target Pool:”（{{cd|jigsaw_block.pool}}）。
+** 将“Target name:”更改为“Target Name:”（{{cd|jigsaw_block.target}}）。
+** 将“Joint type:”更改为“Joint Type:”（{{cd|jigsaw_block.joint_label}}）。
+** 将“Raiders remaining: <number>”更改为“Raiders Remaining: <number>”（{{cd|event.minecraft.raid.raiders_remaining}}）。
+** 将“Press <{{ctrl|dismount}}> to dismount”更改为“Press <{{ctrl|dismount}}> to Dismount”（{{cd|mount.onboard}}）。 
+** 将“When in main hand:”更改为“When in Main Hand:”（{{cd|item.modifiers.mainhand}}）。
+** 将“When in off hand:”更改为“When in Off Hand:”（{{cd|item.modifiers.offhand}}）。
+** 将“When on feet:”更改为“When on Feet:”（{{cd|item.modifiers.feet}}）。
+** 将“When on legs:”更改为“When on Legs:”（{{cd|item.modifiers.legs}}）。
+** 将“When on body:”更改为“When on Body:”（{{cd|item.modifiers.body}}）。
+** 将“When on head:”更改为“When on Head:”（{{cd|item.modifiers.head}}）。
+** 将“World updates”更改为“World Updates”（{{cd|gamerule.category.updates}}）。
+* 修正了一些字符串中的标点使用。
+** 将极佳图像品质的描述“''Fabulous!'' graphics uses screen shaders for drawing weather, clouds and particles behind translucent blocks and water.[换行]This may severely impact performance for portable devices and 4K displays.”更改为“''Fabulous!'' graphics uses screen shaders for drawing weather, clouds{{fc|#FF0000|#feeec8|''',''' }} and particles behind translucent blocks and water.[换行]This may severely impact performance for portable devices and 4K displays.”。
+** 将高品质图像品质的描述“Fancy graphics balances performance and quality for the majority of machines.[换行]Weather, clouds and particles may not appear behind translucent blocks or water.”更改为“Fancy graphics balances performance and quality for the majority of machines.[换行]Weather, clouds{{fc|#FF0000|#feeec8|''',''' }}and particles may not appear behind translucent blocks or water.”。
+** 将“Multiplayer is disabled, please check your launcher settings.”更改为“Multiplayer is disabled{{fc|#FF0000|#feeec8|'''. P'''}}lease check your launcher settings.”（{{cd|title.multiplayer.disabled}}）。
+** 将“Unable to switch gamemode{{fc|#FF0000|#feeec8|''', '''}}no permission”更改为“Unable to switch gamemode{{fc|#FF0000|#AAFFAA|'''; '''}}no permission”（{{cd|debug.creative_spectator.error}}）。
+** 将“Unable to open game mode switcher{{fc|#FF0000|#feeec8|''', '''}}no permission”更改为“Unable to open game mode switcher{{fc|#FF0000|#AAFFAA|'''; '''}}no permission”（{{cd|debug.gamemodes.error}}）。 
+** 将“Reload failed{{fc|#FF0000|#feeec8|''', '''}}keeping old data”更改为“Reload failed{{fc|#FF0000|#AAFFAA|'''; '''}}keeping old data”（{{cd|commands.reload.failure}}）。
+* 将多人模式警告信息中的“Mojang”改为“Mojang Studios”。
+* 将“流畅”图像品质描述中的“tree-leaves”改为“leaves”。
+
+'''[[配方书]]'''
+* 将一些字符串变成大写。
+** 将“Right Click for more”更改为“Right Click for More”。
+** 将“Showing all”更改为“Showing All”。
+** 将“Showing craftable”更改为“Showing Craftable”。
+** 将“Showing smeltable”更改为“Showing Smeltable”。
+** 将“Showing blastable”更改为“Showing Blastable”。
+** 将“Showing smokable”更改为“Showing Smokable”。
+
+'''[[字幕]]'''
+* 将一些英文字幕变成大写。
+** 将“Turtle shell thunks”更改为“Turtle Shell thunks”（{{cd|subtitles.item.armor.equip_turtle}}）。
+
+'''[[Java版标签|标签]]'''
+* 现在可以使用<code>"required": false</code>将标签内的每一项标记为可选。
+** 例如，<code>values: ["#minecraft:beds", "minecraft:stone"]</code>允许所有[[床]]和[[石头]]拥有此标签。也可写成<code>values: [{id: "#minecraft:beds", "required": true}, {id: "minecraft:stone", "required": true}]</code>。将<code>"required"</code>设置为<code>false</code>将使任一项成为可选项。
+
+== 修复 ==
+{{Fixes|fixedin=20w30a|showdesc=1
+|;1.16前正式版的漏洞
+|35765|从右向左书写的语言（比如阿拉伯语）在游戏语言设置为从左向右书写的语言（比如中文或英文等大多数语言）时显示连字出现连不起来的问题。
+|57869|一些工具提示使用<code>§</code>以改变文本颜色，导致使用从右向左书写的语言时文本显示不正确。
+|93024|从骷髅陷阱中获得的弓上会出现两次同种魔咒。
+|116857|进度提示中一些用语被不必要地大写。
+|148447|村民们尝试同时通过门时会卡住。
+|149060|村民有时会“滥用”（十分快速地开关）门。
+|153195|生物可以掉落拥有重复附魔的物品。
+|158767|玩家在熔岩边的床上醒来时会落入熔岩。
+|181925|无装备的恼鬼在攻击时依然使用铁剑的动画。
+|;1.16的漏洞
+|187344|流畅图像品质的悬浮提示中的“tree-leaves”拼写不正确。
+|187379|本地化键名为<code>pack.incompatible.confirm.new</code>的字符串有问题。
+|187380|本地化键名为<code>pack.dropConfirm</code>的字符串的英语（美国）翻译有语法错误。
+|188389|本地化键名为<code>datapackFailure.title</code>的字符串的几个小问题。
+|188390|四个字符串中存在逗号粘连问题。
+|188392|被凋灵之首射杀的死亡消息在一些情况下存在语法问题。
+|188621|制作人员名单中Mojang“产品经理”一栏的缩进比别的栏长一些。
+|188880|骑在鸡身上幼年僵尸猪灵的显示位置不正确。
+|189918|多人游戏警告中仍然使用“Mojang”而非“Mojang Studios”。
+|190102|一些UI文本的大小写不一致。
+|190288|极佳和高品质图像品质的悬浮提示缺失逗号。
+|191441|从右向左书写的语言文本在某些情况下会倒过来渲染。
+|;1.16.1的漏洞
+|191562|在向Realms上传世界时，“取消”按钮覆盖在“完成”按钮上，导致用户无法上传世界。
+|192296|从刷怪笼矿车中生成的蜘蛛骑士会导致崩溃：<code>java.lang.IllegalStateException: Entity is already tracked</code>。
+|193276|玩家在骑乘炽足兽时的位置稍微往上浮动了一些。
+|193339|在rcon启用且没有设置密码时，关闭服务器会导致<code>NullPointerException</code>错误。
+|;dev
+|194273|新的下界生物群系的存档信息在将世界升级到20w28a以上版本时会丢失。
+|194350|在数据包中的一些地形特征设置并不会被载入（<code>java.lang.IllegalArgumentException: value already present: clh@77f95e19</code>）。
+|;previous
+|195052|{{cmd|spawnpoint|link=none}}命令的参数<code>angle</code>不使用<code>rotation</code>解析器。
+|195119|“经典平坦”超平坦预设中不再生成村庄。
+|195582|在聊天栏中输入命令表示一个函数/物品/方块等（即输入需要<code>minecraft:something</code>的地方）时打两个冒号或在一个斜杠后打一个冒号会导致游戏崩溃（比如{{cmd|function :example:|link=none}}，{{cmd|clear @s minecraft/:|link=none}}或{{cmd|execute as @e[type{{=}}minecraft::|link=none}}）。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:20w30a]]
+[[en:Java Edition 20w30a]]
+[[es:Java Edition 20w30a]]
+[[fr:Édition Java 20w30a]]
+[[ja:Java Edition 20w30a]]
+[[pt:Edição Java 20w30a]]
+[[ru:20w30a (Java Edition)]]
+[[uk:20w30a (Java Edition)]]

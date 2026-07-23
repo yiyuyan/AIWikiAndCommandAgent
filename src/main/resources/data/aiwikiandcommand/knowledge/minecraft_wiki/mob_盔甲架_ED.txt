@@ -1,0 +1,72 @@
+# 页面: 盔甲架/ED
+# 来源: https://zh.minecraft.wiki/w/%E7%9B%94%E7%94%B2%E6%9E%B6/ED
+# 分类: 实体数据值页面
+# 抓取时间: 2026-07-14 17:32:40
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt inherit/living entity}}
+** {{nbt|int|DisabledSlots|required=1|existonsave=1}}：用于禁用某个部位的放置、替换和移除。此值使用按位或进行数据的保存，不同二进制位的含义在下方列出。比如，把值设为<samp>16191（0x3F3F）</samp>或<samp>4144896（0x3F3F00）</samp>会禁用所有盔甲的放置、移除和替换。
+** {{nbt|bool|Invisible|required=1|existonsave=1}}：表示盔甲架是否隐形。隐形不会影响盔甲架身上物品的显示。
+** {{nbt|bool|Marker}}：（默认为<code>false</code>）盔甲架是否被当作“标记”。如果为<samp>true</samp>，盔甲架的碰撞箱会消失，且无法与之进行任何交互。
+** {{nbt|bool|NoBasePlate|required=1|existonsave=1}}：表示盔甲架是否不会显示下面的基座。
+** {{nbt|compound|Pose|required=1|existonsave=1}}：盔甲架的不同部位的旋转角度，每个身体部分都有三个{{nbt|float|单精度浮点数}}组成的列表按顺序保存XYZ轴的旋转角度。
+*** {{nbt|list|Body}}：（默认为<code>[0f, 0f, 0f]</code>）躯干的角度。
+*** {{nbt|list|Head}}：（默认为<code>[0f, 0f, 0f]</code>）头部的角度。
+*** {{nbt|list|LeftArm}}：（默认为<code>[-10f, 0f, -10f]</code>）左臂的角度。
+*** {{nbt|list|LeftLeg}}：（默认为<code>[-1f, 0f, -1f]</code>）左腿的角度。
+*** {{nbt|list|RightArm}}：（默认为<code>[-15f, 0f, 10f]</code>）右臂的角度。
+*** {{nbt|list|RightLeg}}：（默认为<code>[1f, 0f, 1f]</code>）右腿的角度。
+** {{nbt|bool|ShowArms|required=1|existonsave=1}}：表示盔甲架是否会显示其手臂。如果其手臂不存在，玩家不能对其手持的物品互动。
+** {{nbt|bool|Small|required=1|existonsave=1}}：表示盔甲架是否是小型盔甲架。
+</div>
+
+{| class="wikitable mw-collapsed mw-collapsible"
+|-
+! 二进制 !! 整数 !! 效果
+|-
+| 2^0 || 1 || 禁用添加或改变主手物品
+|-
+| 2^1 || 2 || 禁用添加或改变靴子物品
+|-
+| 2^2 || 4 || 禁用添加或改变护腿物品
+|-
+| 2^3 || 8 || 禁用添加或改变胸甲物品
+|-
+| 2^4 || 16 || 禁用添加或改变头盔物品
+|-
+| 2^5 || 32 || 禁用添加或改变副手物品
+|-
+| 2^8 || 256 || 禁用移除或改变主手物品
+|-
+| 2^9 || 512 || 禁用移除或改变靴子物品
+|-
+| 2^10 || 1024 || 禁用移除或改变护腿物品
+|-
+| 2^11 || 2048 || 禁用移除或改变胸甲物品
+|-
+| 2^12 || 4096 || 禁用移除或改变头盔物品
+|-
+| 2^13 || 8192 || 禁用移除或改变副手物品
+|-
+| 2^16 || 65536 || 禁用添加主手物品
+|-
+| 2^17 || 131072 || 禁用添加靴子物品
+|-
+| 2^18 || 262144 || 禁用添加护腿物品
+|-
+| 2^19 || 524288 || 禁用添加胸甲物品
+|-
+| 2^20 || 1048576 || 禁用添加头盔物品
+|-
+| 2^21 || 2097152 || 禁用添加副手物品
+|}<noinclude>
+[[Category:实体数据值页面]]
+
+[[en:Armor Stand#Entity data]]
+[[fr:Porte-armure/ED]]
+[[ja:防具立て/ED]]
+[[nl:Harnashouder/ED]]
+[[ru:Стойка для брони/ДС]]
+</noinclude>

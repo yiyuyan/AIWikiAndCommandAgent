@@ -1,0 +1,64 @@
+# 页面: 命令/swing
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/swing
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+{{Infobox command
+|name=swing
+|oplevel=2
+}}
+
+控制[[实体]]的手臂挥动。
+
+== 语法 ==
+: <code>swing <targets> [mainhand|offhand]</code>
+:: 挥动实体的指定手臂。
+: <code>swing [<targets>]</code>
+:: 挥动实体的主手。
+
+== 参数 ==
+{{argument|targets|entity}}
+: 指定挥臂的实体，默认为命令的执行者。
+: 只有[[生物]]才具有挥臂这一行为，且客户端只会在特定的生物上渲染挥臂动作。
+: {{arg desc|je=entity|amount=multiple|type=entities}}
+<code>mainhand|offhand</code>
+: 指定挥动的手臂，默认为{{cd|mainhand}}。
+: {{cd|mainhand}}为主手，{{cd|offhand}}为副手。
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|未选中实体，或选中的实体不包含任何[[生物]]|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|<code><targets></code>选中生物的数量}}
+{{Output table}}
+
+== 示例 ==
+[[File:Living Entity Swing Animation.gif|thumb|[[命令方块]]上的五个实体正在轮流挥动主手和副手]]
+
+* 令周围6格范围内的所有非玩家实体挥动主手：{{cmd|1=swing @e[type=!player,distance=..6] mainhand|link=none}}
+* 令周围6格范围内的所有非玩家实体挥动副手：{{cmd|1=swing @e[type=!player,distance=..6] offhand|link=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||26.1|dev=snapshot-1|加入了{{cmd|swing|link=none}}命令。}}
+|{{HistoryLine|||dev=snapshot-3|两个参数不再必选，默认为<code>@s</code>和<code>mainhand</code>。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/swing]]
+[[en:Commands/swing]]
+[[es:Comandos/swing]]
+[[ja:コマンド/swing]]
+[[pt:Comandos/swing]]
+[[ru:Команды консоли/swing]]

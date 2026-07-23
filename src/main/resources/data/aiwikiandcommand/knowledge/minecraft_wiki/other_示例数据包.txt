@@ -1,0 +1,354 @@
+# 页面: 示例数据包
+# 来源: https://zh.minecraft.wiki/w/%E7%A4%BA%E4%BE%8B%E6%95%B0%E6%8D%AE%E5%8C%85
+# 分类: 
+# 抓取时间: 2026-07-14 17:33:06
+# 原始 Wikitext 内容:
+
+示例数据包是由[[Slicedlime]]创建的用于展示游戏更新的[[数据包]]，目前共有两个数据包：
+* [https://github.com/slicedlime/examples/tree/master/datapacks/v16demo 第16版（23w31a）数据包演示数据包]
+* [https://github.com/slicedlime/examples/tree/master/datapacks/enchantments 数据驱动魔咒数据包]
+
+== 第16版数据包演示数据包 ==
+此数据包共含有8个函数，用于展示在[[23w31a]]里添加的新内容。
+
+=== 宏函数 ===
+==== set_time.mcfunction ====
+<syntaxhighlight lang=mcfunction>
+# 将时间设定为 $(time)
+$time set $(time)
+</syntaxhighlight>
+
+==== eval.mcfunction ====
+<syntaxhighlight lang=mcfunction>
+# 运行储存于 $(command) 的命令
+$$(command)
+</syntaxhighlight>
+注：{{cd|$(command)}}是函数的一部分，所以存储的命令不带前导正斜杠{{cd|/}}。
+
+==== concat.mcfunction ====
+<syntaxhighlight lang=mcfunction>
+# 连接 $(string1) 和 $(string2)，将结果储存至存储 $(id) 的 $(path) 
+$data modify storage $(id) $(path) set value "$(string1)$(string2)"
+</syntaxhighlight>
+
+=== 函数返回值 ===
+==== fails.mcfunction ====
+<syntaxhighlight lang=mcfunction>
+# 无返回值的函数会返回失败
+setblock ~ ~-1 ~ stone
+</syntaxhighlight>
+注：此函数可以正常执行；实际表现为无返回值，不改变已有的数据。
+
+==== fails2.mcfunction ====
+<syntaxhighlight lang=mcfunction>
+# 返回值为 0 的函数会返回失败
+return 0
+</syntaxhighlight>
+
+==== succeeds.mcfunction ====
+<syntaxhighlight lang=mcfunction>
+# 返回值不为 0 的函数会返回成功
+return 1
+</syntaxhighlight>
+
+==== get_player_health.mcfunction ====
+<syntaxhighlight lang=mcfunction>
+# 如果目标是玩家，返回生命值
+execute if entity @s[type=player] run return run data get entity @s Health
+
+# 为非玩家返回 0
+return 0
+</syntaxhighlight>
+
+=== 换行承接 ===
+==== line_continuation.mcfunction ====
+<syntaxhighlight lang=mcfunction>
+scoreboard players operation @a result \
+    += @e[type=marker,limit=1,tag=source] value
+</syntaxhighlight>
+用于展示使用反斜杠{{cd|\}}承接命令的功能。
+
+== 数据驱动魔咒数据包 ==
+此数据包共含有14个[[魔咒]]，用于展示在[[24w18a]]里添加的魔咒数据驱动支持。
+
+=== Curse of Annoyance ===
+{{Infobox enchantment
+|title=Curse of Annoyance
+|primary-item=''无''
+|support-item-id=消失诅咒
+|cost=I级：25 – 50
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=I
+|weight=1
+|enchantment-id-raw=example:annoyance
+|nobe=1
+}}
+'''Curse of Annoyance'''是一种使持有者在击中方块时有概率收到“猫的事实（Cat Facts）”的诅咒型魔咒。
+
+持有者主手持有附有此魔咒的物品时，每次击中方块都有20%的概率从11条消息中选择一条发送给持有者。所有消息如下：
+* Cat Facts: Thanks for signing up for Cat Facts! You now will receive fun daily facts about CATS! >o<
+* Cat Facts: Cats use their tails for balance and have nearly 30 individual bones in them! <To cancel Daily Cat Facts, reply ‘cancel’>
+* Cat Facts: In ancient Egypt, killing a cat was a crime punishable by death.  Thank you for choosing Cat Facts!
+* Cat Facts: Did you know that the first cat show was held in 1871 at the Crystal Palace in London?  Mee-wow!
+* Cat Facts: Did you know there are about 100 distinct breeds of domestic cat?  Plenty of furry love!
+* Cat Facts: Cats bury their feces to cover their trails from predators.  <To cancel Cat Facts, reply catfactscancel>
+* Cat Facts: A cat has two vocal chords, and can make over 100 sounds.
+* Cat Facts: <Command not recognized> To unsubscribe, please reply ‘catfactscancel’
+* Cat Facts: A cat will spend nearly 30% of her life grooming herself. <To cancel Cat Facts, reply catfactscancel>
+* Cat Facts: Recent studies have shown that cats can see blue and green. There is disagreement as to whether they can see red.
+* Cat Facts: A domestic cat can sprint at about 31 miles per hour. <To cancel Cat Facts, reply catfactscancel>
+
+{{clear}}
+=== Boom Boom ===
+{{Infobox enchantment
+|title=Boom Boom
+|primary-item=''无''
+|support-item={{ItemSprite|Bow|link=弓}}
+|cost=
+I级：15 – 65<br>
+II级：24 – 74<br>
+III级：33 – 83
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=III
+|weight=2
+|enchantment-id-raw=example:boom_boom
+|nobe=1
+}}
+'''Boom Boom'''是一种使射出的箭在击中方块时产生半径为2的爆炸的魔咒。
+
+魔咒等级不影响实际效果。
+{{clear}}
+=== Claw ===
+{{Infobox enchantment
+|title=Claw
+|primary-item=''无''
+|support-item-id=消失诅咒
+|cost=
+I级：10 – 40<br>
+II级：20 – 50<br>
+III级：30 – 60<br>
+IV级：40 – 70<br>
+V级：50 – 80
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=V
+|weight=2
+|enchantment-id-raw=example:claw
+|nobe=1
+}}
+'''Claw'''是一种增加方块交互距离的魔咒。
+
+每级魔咒增加2点方块交互距离。
+{{clear}}
+=== Cowbow ===
+{{Infobox enchantment
+|title=Cowbow
+|primary-item=''无''
+|support-item={{ItemSprite|Crossbow|link=弩}}
+|cost=I级：12 – 50
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=I
+|weight=5
+|enchantment-id-raw=example:cowbow
+|nobe=1
+}}
+'''Cowbow'''是一种使弩的装填音效变为[[牛]]的音效的魔咒。
+
+附有该魔咒时，弩的装填时音效变为牛的空闲音效；装填完毕的音效变为牛的受伤音效。
+{{clear}}
+=== Diminishing ===
+{{Infobox enchantment
+|title=Diminishing
+|primary-item=''无''
+|support-item-id=水下速掘
+|cost=
+I级：10 – 40<br>
+II级：20 – 50<br>
+III级：30 – 60
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=III
+|weight=2
+|enchantment-id-raw=example:diminishing
+|nobe=1
+}}
+'''Diminishing'''是一种使穿戴者变小的魔咒。
+
+每级魔咒增加20%的缩小比例。
+{{clear}}
+=== Fire Walker ===
+{{Infobox enchantment
+|title=Fire Walker
+|primary-item=''无''
+|support-item-id=冰霜行者
+|cost=
+I级：10 – 25<br>
+II级：20 – 35
+|flag=仅创造模式或命令
+|incompatible=[[深海探索者]]、[[冰霜行者]]
+|max-level=II
+|weight=2
+|enchantment-id-raw=example:fire_walker
+|nobe=1
+}}
+'''Fire Walker'''是一种在[[熔岩]]上行走可以产生[[黑曜石]]的魔咒。
+
+在地上行走（不处于掉落、跳跃或飞行状态）时，以当前方块位置为圆心，等级+2为半径的区域内的所有暴露在空气下，且与玩家站着的方块高度相同的熔岩源方块都会变为黑曜石，其中有10%的概率变为[[哭泣的黑曜石]]。等级达到14时覆盖范围达到最大，更高的等级将不会提升其覆盖范围。如果将要替换的熔岩源方块中有生物、船或玩家等实体，则该方块不会变成黑曜石。
+
+此魔咒能消除[[细雪]]造成的伤害。
+{{clear}}
+=== Fishy ===
+{{Infobox enchantment
+|title=Fishy
+|primary-item=''无''
+|support-item={{ItemSprite|Fishing Rod|link=钓鱼竿}}
+|cost=I级：25 – 50
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=I
+|weight=1
+|enchantment-id-raw=example:fishy
+|nobe=1
+}}
+'''Fishy'''是一种手持时有概率生成[[蠹虫]]的魔咒。
+
+手持附有该魔咒的物品时，每刻以0.1%的概率尝试在使用-{}-者的位置生成1只蠹虫。
+{{clear}}
+
+=== Curse of Fragility ===
+{{Infobox enchantment
+|title=Curse of Fragility
+|primary-item=''无''
+|support-item-id=耐久
+|cost=I级：25 – 50
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=I
+|weight=1
+|enchantment-id-raw=example:fragility_curse
+|nobe=1
+}}
+'''Curse of Fragility'''是一种有概率额外消耗物品耐久度的诅咒型魔咒，可以缩短物品的使用寿命。
+
+每次击中方块、进行攻击或受到攻击时有3%的概率触发效果。触发效果后，若为击中方块和受到攻击则损失64点耐久度；若为进行攻击则损失256点耐久度。
+{{clear}}
+=== Galaxy Brain ===
+{{Infobox enchantment
+|title=Galaxy Brain
+|primary-item=''无''
+|support-item-id=抢夺
+|cost=
+I级：15 – 65<br>
+II级：24 – 74<br>
+III级：33 – 83
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=III
+|weight=2
+|enchantment-id-raw=example:galaxy_brain
+|nobe=1
+}}
+'''Galaxy Brain'''是一种在击杀生物后额外获得100点[[经验]]的魔咒。
+
+魔咒等级不影响实际效果。
+{{clear}}
+=== Multi-Multishot ===
+{{Infobox enchantment
+|title=Multi-Multishot
+|primary-item=''无''
+|support-item={{ItemSprite|Bow|link=弓}}
+|cost=
+I – III 级：20 – 50<br>
+|flag=仅创造模式或命令
+|incompatible=[[多重射击]]、[[穿透]]
+|max-level=III
+|weight=2
+|enchantment-id-raw=example:multi_multi_shot
+|nobe=1
+}}
+'''Multi-Multishot'''是一种能够一次射出大量[[箭]]的魔咒。
+
+其效果与多重射击类似，但每级魔咒会额外装填20只箭。
+{{clear}}
+=== Curse of Pollen Allergy ===
+{{Infobox enchantment
+|title=Curse of Pollen Allergy
+|primary-item=''无''
+|support-item-id=保护
+|cost=
+I级：10 – 40<br>
+II级：20 – 50<br>
+III级：30 – 60
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=III
+|weight=2
+|enchantment-id-raw=example:pollen_allergy_curse
+|nobe=1
+}}
+'''Curse of Pollen Allergy'''是一种在森林类生物群系时有概率伤害自己的诅咒型魔咒。
+
+穿戴附有该魔咒的物品时，若穿戴者位于森林类生物群系，每刻以0.5%的概率尝试对穿戴者造成{{health|1}}点荆棘伤害。
+
+魔咒等级不影响实际效果。
+{{clear}}
+=== Roulette ===
+{{Infobox enchantment
+|title=Roulette
+|primary-item=''无''
+|support-item-id=耐久
+|cost=I级：5 – 55
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=I
+|weight=5
+|enchantment-id-raw=example:roulette
+|nobe=1
+}}
+'''Roulette'''是一种以小概率损毁工具为代价，使工具不消耗耐久的魔咒。
+
+使用附有该魔咒的工具不消耗耐久；每次使用有1%的概率额外消耗2000点耐久，这会使得除下界合金质工具（会剩余31点耐久）外的所有满耐久物品直接损毁。
+{{clear}}
+=== Sparkles! ===
+{{Infobox enchantment
+|title=Sparkles!
+|primary-item=''无''
+|support-item-id=保护
+|cost=I级：10 – 40
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=I
+|weight=2
+|enchantment-id-raw=example:sparkles
+|nobe=1
+}}
+'''Sparkles!'''是一种使穿戴者持续生成粒子的魔咒。
+
+生成的粒子为{{code|ominous_spawning}}。
+{{clear}}
+=== Thor ===
+{{Infobox enchantment
+|title=Thor
+|primary-item=''无''
+|support-item={{ItemSprite|Mace|link=重锤}}
+|cost=I级：15 – 65
+|flag=仅创造模式或命令
+|incompatible=''无''
+|max-level=I
+|weight=2
+|enchantment-id-raw=example:thor
+|nobe=1
+}}
+'''Thor'''是一种使持有者在[[雷暴]]天气对伤害免疫的魔咒。
+{{clear}}
+
+== 外部链接 ==
+* https://github.com/slicedlime/examples/tree/master/datapacks
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]

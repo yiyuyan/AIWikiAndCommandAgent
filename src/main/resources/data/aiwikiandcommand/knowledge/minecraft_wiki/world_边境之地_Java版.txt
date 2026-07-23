@@ -1,0 +1,112 @@
+# 页面: 边境之地/Java版
+# 来源: https://zh.minecraft.wiki/w/%E8%BE%B9%E5%A2%83%E4%B9%8B%E5%9C%B0/Java%E7%89%88
+# 分类: 待扩充页面, 边境之地, 过时内容, 非官方名称
+# 抓取时间: 2026-07-14 17:36:52
+# 原始 Wikitext 内容:
+
+{{for|基岩版的边境之地|边境之地/基岩版}}
+{{stub}}{{outdated|edition=java}}
+
+本文介绍[[Java版Beta 1.8|Beta 1.8]]后的边境之地。由于地形生成算法的改变，边境之地不再在“默认”世界类型中生成。
+
+== 结构 ==
+在[[Java版1.13|1.13]]前，可以通过[[自定义/Java版1.13前|自定义世界]]来生成边境之地。
+
+=== 边境之地 ===
+在自定义世界中，将{{tr|平面比例|橫向座標比例}}设置得非常高可以生成边境之地。
+
+==== 边境之墙 ====
+[[File:1.12.2 Farlands16.png|缩略图|边境之墙的起始处，注意左侧的破碎地形]]
+
+与[[边境之地/Java版/Infdev 20100327至Beta 1.7.3的现象|Beta 1.8之前的边境之墙]]原理一致，边境之墙会在X/Z = <math>\pm\frac{2^{63}}{\frac{k}{4}}</math>处生成（k代表{{tr|平面比例|橫向座標比例}}），但与前者不同的是后者高达Y=256而非Y=128。
+
+理论上其外形应与Beta 1.8之前的边境之墙一致，但由于未知原因{{Fn|若平面缩放比例过大，则会导致正常地形范围内出现大量破碎地形，原因未知。}}，其外形看上去发生了较大的改变。
+
+值得一提的是，X轴上的边境之墙似乎比Z轴上的边境之墙更完整一些。
+
+<gallery>
+File:1.12.2 Farlands7.png|另一平面比例的边境之墙
+File:1.12.2 Farlands9.png|Z轴上的边境之墙开始生成处
+File:1.12.2 Farlands10.png|Z轴上的边境之墙
+File:1.12.2 64bit Farlands.png|边境之墙的内部
+</gallery>
+
+{{-}}
+
+==== 边境之角 ====
+[[File:1.12.2 Farlands11.png|缩略图|边境之角]]
+
+两座边境之墙的交汇处即为边境之角。与边境之墙一样，边境之角高达Y=256而非Y=128。
+
+<gallery>
+File:1.12.2 Farlands8.png|边境之角
+</gallery>
+
+=== 遥远之地 ===
+{{Conjecture|section=1}}
+[[File:1.12.2 Farlands17.png|缩略图|遥远之地]]
+
+由于过高的平面缩放比例扭曲了地形细节，'''遥远之地（Farther Lands）'''的外形相对边境之地没有明显变化。
+
+<gallery>
+File:1.12.2 64bit Farther lands.png|遥远之地内部
+File:1.12.2 64bit Corner Farther lands.png|遥远之角
+</gallery>
+{{-}}
+
+=== 边缘之地 ===
+{{Conjecture|section=1}}
+[[File:1.12.2 Fringe Lands.png|缩略图|边缘之地]]
+
+与常规的边境之地一样，'''边缘之地（Fringe Lands）'''同样需要将平面比例设置得非常高才可以生成，但该值通常要更高一些。
+
+{{-}}
+
+=== 天空边境之地 ===
+{{conjecture|section=1|type=漏洞}}
+[[File:Far lands on Y.png|缩略图|天空边境之地]]
+自定义世界的“{{tr|高度比例|縱向高度比例}}”设置缩放Y轴高度可以使天空边境之地在正常世界内生成。
+
+<gallery>
+File:1.12.2 SkyFarlands1.png|从天空边境之地上有很多沙砾落下
+File:1.12.2 SkyFarlands2.png|天空边境之地的顶端
+File:1.12.2 SkyFarlands3.png|在天空边境之地下方生成的村庄
+File:1.12.2 SkyFarlands4.png|从下方看天空边境之地
+File:1.12.2 SkyFarlands5.png|天空边境之地的鸟瞰图
+</gallery>
+
+{{-}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100227-1414|由于世界生成器的溢出，边境之地第一次出现。}}
+|{{HistoryLine||20100313|地形不会在X/Z{{=}}±32,000,000之后生成，这导致边境之地被“移除”了。}}
+|{{HistoryLine||20100327|由于地形生成机制发生了更改，边境之地的经典版本开始在X/Z{{=}}±12,550,821至±32,000,000的区域内生成。}}
+|{{HistoryLine||20100420|由于噪声生成器的变化，边境之地的地形变得更加锐利。}}
+|{{HistoryLine||20100624|边境之地现在会出现坏区块和坐标错误。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.2.0|边境之地现在会在X/Z{{=}}±32,000,000之后的[[世界界限#假区块|假区块]]中生成。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.6||边境之地现在会造成严重卡顿。}}
+|{{HistoryLine||1.8|dev=pre1|由于地形生成算法的改变，边境之地被移除了。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w17a|由于加入了自定义世界，使得边境之地可以再次在游戏中生成。}}
+|{{HistoryLine||1.13|dev=18w06a|移除了自定义世界，致使边境之地再次无法生成。}}
+}}
+
+== 参见 ==
+{{#lst:边境之地|far-land-nav}}
+
+== 注释 ==
+{{Fnlist}}
+
+== 导航 ==
+{{Navbox environment}}
+{{Navbox removed features}}
+
+[[Category:边境之地]]
+
+[[en:Far Lands (Java Edition)]]
+[[es:Tierras lejanas de Java Edition]]
+[[pt:Far Lands (Edição Java)]]

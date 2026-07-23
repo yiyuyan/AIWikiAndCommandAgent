@@ -1,0 +1,193 @@
+# 页面: 海带
+# 来源: https://zh.minecraft.wiki/w/%E6%B5%B7%E5%B8%A6
+# 分类: Java版独有信息, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 基岩版独有信息, 方块, 植物, 物品, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:30:14
+# 原始 Wikitext 内容:
+
+{{about|海带方块|相关食物|干海带|相关方块|干海带块}}
+{{Infobox block
+|image = Kelp.gif
+|invimage = Kelp
+|light = 0
+|block-id-raw='''海带'''：kelp<br>'''海带植株'''：kelp_plant
+}}
+{{relevant tutorial|海带种植}}
+{{Quote|海带是第一种有动画效果的植物。在这之前有动画效果的只有粒子、熔岩、水和一些固体方块。我们还没试过在植物上使用动画效果。<br>这是对于Minecraft的风格的新挑战 - 鉴于以前没有做过，我们没有现成的东西以供参考 - 所以我们必须去探索。|[[Jasper Boerstra]]<ref>{{article|how-we-ruin-ed-minecraft|How We Ruin-ed Minecraft|March 5, 2018}}</ref>||Jasper Boerstra Mojang avatar.png}}
+
+'''海带（Kelp）'''是一种生成于大部分[[海洋]]生物群系的可生长的非固体[[植物]]方块。其物品形式可以被烹饪成[[干海带]]。
+
+{{only|je|for='''海带植株（Kelp Plant）'''}}是海带下方的茎杆部分。
+
+== 生成 ==
+海带能够生成海带和海带植株（见{{slink||生长}}）。
+
+=== 自然生成 ===
+海带和海带植株会自然生成于除[[暖水海洋]]、[[冻洋]]和[[冰冻深海]]外的所有[[海洋]]生物群系，常和[[海草]]一起生成。每一个[[区块]]有{{frac|1|18}}的概率自然生成海带植物。
+
+{{Block distribution|海带, 海带植株}}
+
+== 获取 ==
+=== 交易 ===
+{{Trade sources}}
+
+== 破坏 ==
+海带和海带植株被挖掘时会立刻被破坏，用于挖掘的工具的耐久度不会下降。
+
+{{Breaking table|海带, 海带植株}}
+
+海带和海带植株被破坏后会掉落1个海带。
+
+== 用途 ==
+海带可以被放置于上表面[[判定箱#方块支撑形状|方块支撑形状]]完整（[[岩浆块]]除外）的方块上。玩家放置的海带拥有0到{{only|for=19|bedrock}}或{{only|for=24|java}}间随机的<code>age</code>值。海带只能被放置于水源或向下流动的水中，不能放在水平流动的水中。
+
+除了作为装饰外，海带可以把向下流动的水转换成水源。
+
+破坏海带植株会摧毁植株其上方所有海带植株和海带。
+
+=== 烧炼材料 ===
+将海带放入[[熔炉]]、[[烟熏炉]]、[[营火]]或[[灵魂营火]]中烹饪，可以获得[[干海带]]。
+{{smelting
+|showname=1
+|Kelp
+|Dried Kelp
+|0.1
+}}
+
+=== 堆肥 ===
+将海带放入[[堆肥桶]]中，会有30%的概率增加一层堆肥层。
+
+=== 生长 ===
+{{see also|作物机制#多层作物}}
+海带可在多种方块上种植，但必须在水下，其上方一格为水源或流动的水时才会生长。当其上方一格为流动的水时，海带会在生长至这一格时将其转化为水源。玩家或发射器皆不能移除生长有海带的水方块，除非先破坏其内的海带。
+
+海带的生长没有光照等级的要求，它们可以在完全黑暗的环境中生长。它们也不需要露天的空间。对海带{{ctrl|使用}}骨粉可使其生长一格。
+
+自然生成的海带拥有20-23的{{cd|age}}值，玩家放置的海带拥有{{only|for=0-19|bedrock}}或{{only|for=0-24|java}}的{{cd|age}}值，使用命令放置的海带的{{cd|age}}默认为0，{{only|for=该值可以使用{{key|F3}}来查看|JE}}。海带生长时，新长出的海带的{{cd|age}}值增加1，海带{{cd|age}}值为25时不再生长，也就说海带可以生长的长度介于2（当底部海带的{{cd|age}}值为24）至26（当底部海带的{{cd|age}}值为0）之间。
+
+当海带被破坏时，其下方的海带植株会变为随机<code>age</code>值的海带。
+
+海带每次接受[[刻#区块刻|随机刻]]尝试生长时会有14%的概率成功。
+
+=== 种植 ===
+{{Main|Tutorial:海带种植}}
+尽管海带必须种植在水中，但其自动化种植与[[甘蔗]]十分相似。由于物品会在水中上浮，其自动化收集更加简单。
+
+=== 阻止生长 ===
+对海带的顶部{{Ctrl|使用}}[[剪刀]]可使海带的{{only|for=<code>age</code>|JE}}或{{only|for=<code>kelp_age</code>|BE}}状态变为25，阻止其继续生长。
+
+== 音效 ==
+{{Sound table/Block/Wet grass}}
+
+{{el|be}}：
+{{Sound table/Block/Grass/BE}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Kelp
+|spritetype=block
+|nameid=kelp
+|showblocktags=je
+|blocktags={{GameTag|block|kelp,kelp_plant}}
+|blocktagsmerge=2
+}}
+{{ID table
+|Kelp Plant
+|spritetype=block
+|nameid=kelp_plant
+|foot=1
+}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Kelp
+|spritetype=block
+|translationkey=tile.kelp.name
+|nameid=kelp
+}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Kelp
+|spritetype=item
+|nameid=kelp
+|foot=1}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table|海带, 海带植株|海带}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年5月21日|link={{notch|110762705/my-list-on-tile-types-so-far}}|[[Notch]]对加入“海藻”方块表示感兴趣。}}
+|{{HistoryLine||2017年11月18日|link=https://www.youtube.com/watch?v=mAapz_nIC_Y|[[MineCon Earth]]展示中出现了海带植株。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=18w07a|[[File:Kelp JE1 BE1.gif|32px]] [[File:Kelp (item) JE1 BE2.png|32px]] 加入了海带和海带植株。}}
+|{{HistoryLine|||dev=18w07b|海带表现得更加符合水，这意味着生物不会在水下植物处生成并且不能通过在那里换气了。}}
+|{{HistoryLine|||dev=18w10a|[[File:Kelp JE2.gif|32px]] 海带顶部的纹理被大幅修改。}}
+|{{HistoryLine|||dev=18w14a|[[File:Kelp JE3 BE2.gif|32px]] 稍微向下移动了海带的纹理。
+|更改了海带的生成规则，它现在主要生成于[[冷水海洋]]，不再生成于[[暖水海洋]]。}}
+|{{HistoryLine|||dev=18w20a|将海带的ID从{{cd|kelp_top}}改为{{cd|kelp}}，海带植株的ID从{{cd|kelp}}改为{{cd|kelp_plant}}。}}
+|{{HistoryLine|||dev=pre2|海带现在不再会被[[海绵]]破坏。<ref>{{bug|MC-127111|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=pre6|针对海带加入了5种新[[音效]]： {{cd|d=pretty|block.wet_grass.break|block.wet_grass.fall|block.wet_grass.hit|block.wet_grass.place| block.wet_grass.step}}。}}
+|{{HistoryLine||1.14|dev=19w03a|现在将海带放入[[堆肥桶]]时有10%的概率使堆肥层数增加1。}}
+|{{HistoryLine|||dev=19w05a|现在将海带放入[[堆肥桶]]时有30%的概率使堆肥层数增加1。}}
+|{{HistoryLine||1.16|dev=20w11a|现在可以使用[[骨粉]]加速海带生长。}}
+|{{HistoryLine||1.18|dev=21w37a|现在可以对海带使用[[剪刀]]以阻止其生长。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|[[File:Kelp JE1 BE1.gif|32px]] [[File:Kelp (item) BE1.png|32px]] 加入了海带。}}
+|{{HistoryLine|||dev=1.2.20.1|[[File:Kelp (item) JE1 BE2.png|32px]] 更改了物品形式的海带的纹理，使其与Java版相匹配。}}
+|{{HistoryLine||1.5.0|dev=1.5.0.4|[[File:Kelp JE3 BE2.gif|32px]] 更改了海带顶部的纹理。}}
+|{{HistoryLine||1.6.0|dev=1.6.0.5|现在海带能够放置在绝大部分上表面方块支撑形状完整的方块上，而不仅只有[[泥土]]、[[沙子]]和[[沙砾]]。<ref>{{bug|MCPE-33747|||Fixed}}</ref>}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|现在可以以3个[[绿宝石]]的价格与[[流浪商人]]购买海带。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|海带现在可以用来填充[[堆肥桶]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.25|现在海带不再有深色着色。<ref>{{bug|MCPE-169713|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.60|dev=1.21.60.21|现在对海带的顶部{{Ctrl|使用}}[[剪刀]]可阻止其生长，以同步{{el|je}}。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU69|ps3=1.76|psvita=1.76|ps4=1.76|wiiu=Patch 38|[[File:Kelp JE3 BE2.gif|32px]] [[File:Kelp (item) JE1 BE2.png|32px]] 加入了海带。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:Kelp in ocean.jpg|海洋生物群系中自然生成的海带
+File:Kelp on shoreline.png|近海的自然生成的海带
+File:Kelp on Land.png|在[[18w10c]]之前，用{{cmd|setblock}}在地面上生成的海带
+File:Ocean life.png|海中能遥遥望见的海带
+File:Waterless kelp.png|周围没有水的海带的样子（通过[[数据包]]移除了水）
+File:Coral reef at night.png|[[珊瑚礁]]中的海带
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|natural blocks}}
+{{Navbox items|Others}}
+
+[[Category:植物]]
+
+[[de:Seetang]]
+[[en:Kelp]]
+[[es:Alga]]
+[[fr:Algue]]
+[[it:Alga]]
+[[ja:コンブ]]
+[[ko:켈프]]
+[[nl:Kelp]]
+[[pl:Wodorost]]
+[[pt:Alga]]
+[[ru:Ламинария]]
+[[th:สาหร่ายทะเล]]
+[[uk:Ламінарія]]

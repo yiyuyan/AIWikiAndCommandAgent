@@ -1,0 +1,141 @@
+# 页面: 月亮
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%88%E4%BA%AE
+# 分类: Java版独有信息, 基岩版独有信息, 嵌入Bilibili视频的页面, 环境
+# 抓取时间: 2026-07-14 17:28:33
+# 原始 Wikitext 内容:
+
+{{about|一种天体|愚人节快照中的月球维度及生物群系|月球}}
+
+[[File:Moon Phases.gif|缩略图|月亮的所有月相（从东边的天空看）]]
+
+'''月亮（Moon）'''是出现在[[主世界]]夜空的天体。
+
+== 夜晚 ==
+{{main|昼夜更替}}
+
+当[[太阳]]从西边完全落下，月亮从东方升起时，便进入了夜晚。随着时间流逝，月亮会向西慢慢划过天空。总体而言，[[昼夜更替#夜晚|夜晚]]持续约7分钟（现实时间）。[[玩家]]可用[[时钟]]观测月亮在天空中的位置。
+
+在夜晚期间，月光如阳光一般覆盖地表，不过[[亮度]]等级最低仅有4。这种情况允许常规敌对[[生物]]（如[[僵尸]]和[[苦力怕]]）生成。将[[难度]]设为和平或关闭[[昼夜更替]]系统可以避免。
+
+[[草方块]]和[[树苗]]不会在月光下生长，但也不会枯萎，在夜间生长需要如[[火把]]之类的外部光源。不过，[[农作物]]方块会照常生长，即便没有火把点亮。
+
+只要附近没有[[怪物]]存在，使用[[床]]可以跳过夜晚。
+
+== 月相 ==
+[[File:Moon.png|缩略图|满月]]
+月亮共有8种[[wzh:月相|月相]]变化，每次日出后月相都会改变。
+
+月相包括（以游戏内出现顺序排序，按真实月相方向）：
+
+# {{EnvSprite|full-moon|scale=2}} 满月
+# {{EnvSprite|waning-gibbous-moon|scale=2}} 亏凸月
+# {{EnvSprite|last-quarter-moon|scale=2}} 下弦月
+# {{EnvSprite|waning-crescent-moon|scale=2}} 残月
+# {{EnvSprite|new-moon|scale=2}} 新月
+# {{EnvSprite|waxing-crescent-moon|scale=2}} 蛾眉月
+# {{EnvSprite|first-quarter-moon|scale=2}} 上弦月
+# {{EnvSprite|waxing-gibbous-moon|scale=2}} 盈凸月
+
+游戏中没有直接修改月相的[[命令]]；使用命令{{cmd|time add 24000}}可以将时间直接增加一天，从而将月相跳至下一相。要跳至上一相，可使用命令{{cmd|time add 168000}}将时间增加7天，从而到达下一月相周期中的上一相。
+
+可以用公式<math>\text{phase} = (\text{日期} \bmod 8) + 1</math>计算任意一天的月相，计算结果对应上面列出的月相编号。{{in|je}}日期可以通过[[调试屏幕]]得到；{{in|be}}日期可通过在[[设置]]中启用“{{tr|显示游玩的天数|顯示遊玩天數}}”得到。
+
+=== 月亮亮度 ===
+{{exclusive|je|section=y}}
+'''月亮亮度（Moon Brightness）'''用于衡量月亮的盈亏程度，是月相参与游戏计算的数据。
+
+月亮亮度随月相周期性变化。越接近满月值越大，越接近新月值越小。
+
+{| class=wikitable
+! 月相
+| {{EnvSprite|full-moon}} 满月
+| {{EnvSprite|waning-gibbous-moon}} 亏凸月
+| {{EnvSprite|last-quarter-moon}} 下弦月
+| {{EnvSprite|waning-crescent-moon}} 残月
+| {{EnvSprite|new-moon}} 新月
+| {{EnvSprite|waxing-crescent-moon}} 蛾眉月
+| {{EnvSprite|first-quarter-moon}} 上弦月
+| {{EnvSprite|waxing-gibbous-moon}} 盈凸月
+|-
+! 月亮亮度
+| 1
+| 0.75
+| 0.5
+| 0.25
+| 0
+| 0.25
+| 0.5
+| 0.75
+|}
+
+月亮亮度只影响区域难度和生物生成，不影响实际的[[亮度]]。
+
+=== 影响 ===
+[[File:SlimesAtNight.png|缩略图|右|250px|满月时分生成于沼泽的史莱姆]]
+
+* 月相越圆，生成的[[骷髅]]、僵尸等敌对生物的武装程度越高，即它们能捡起物品的概率、自带[[装备]]的概率和装备[[附魔（物品修饰）|附魔]]的概率都会有所提高。{{in|je}}满月也会提高[[蜘蛛]]自带[[状态效果]]的概率。
+* 月相越圆，史莱姆在Y=51-69的[[沼泽]]与[[红树林沼泽]]中的生成概率越大；新月时，其完全不会生成。
+* 在满月时，村庄中才能生成[[黑猫]]。
+
+== 视频 ==
+{{bv|BV19K4y1v7dq}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||20100211-2327|加入了[[昼夜更替]]，此时月亮从北方升起，而非东方。<ref>{{Tweet|notch|88155424880201728}}</ref>这是一个漏洞，但当时没有立即修复。<ref>{{tweet|notch|115331778968944640}}</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre4|月亮现在从东方升起，而非北方。<ref>{{tweet|notch|124414532847284224}}</ref>
+|月亮现在有8个月相。
+|月亮从正方形变得稍具弧度。<ref>{{tweet|notch|124398932376817664}}</ref>}}
+|{{HistoryLine|||dev=Beta 1.9-pre6|月亮被恢复成方形，月相也恢复成方形。}}
+|{{HistoryLine||1.3.1|dev=12w21a|更新了星星纹理，更小更亮。}}
+|{{HistoryLine||1.5|dev=13w02a|在此之前，月亮的纹理存放于{{filename|minecraft.jar}}的{{filepath|/terrain}}文件夹内。现在存放于{{filepath|/environment}}文件夹内。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.7.3|加入了月亮。|月亮目前暂时是从北方升起的。}}
+|{{HistoryLine||0.10.0|dev=build 1|夜晚的天空现在呈深蓝色而非黑色。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|太阳、月亮、星星现在东升西落。此前是从北方升起。}}
+}}
+
+== 你知道吗 ==
+* Minecraft中的一个月相周期（从满月到下一个满月）持续2小时40分钟的现实时间。这意味着，现实中的1天（24小时）包含了大约9个游戏内月相周期。
+* 在现实中，月亮的运动相对于其他天体而言是独立的；但在游戏中，月亮与[[星星]]的相对距离是固定的。
+** 因此，Minecraft中不可能出现日食。
+** 同时，从技术上来说月食（也被称为红月亮）每天晚上都会发生。
+* 月亮绕着玩家转，而不是绕着地图转。
+* 如果玩家处于距离地表以上约1.4×渲染距离的高度上时，月亮与太阳会同时出现，此时像是进入了太空。
+* 月亮反射的太阳光看上去是从月亮的北方或南方射入的，但实际上''应该''从东方或西方射入（太阳所在的相对位置）。
+** 如果要认真计较的话，月亮''应该''时时刻刻都是满月，且每晚的午夜都应该出现月全食。
+
+== 画廊 ==
+<gallery>
+File:Moon Phases.png|Minecraft中的几种月相<ref>{{tweet|notch|131408724043628544}}</ref>
+File:NewStars.png|夜空中的月亮和星星
+File:ForestMoonRise.png|森林中的月出
+File:ForestNighttime.png|月光透过黑森林的树冠
+File:CrescentMoonRise.png|一轮蛾眉月探出山丘
+File:MoonInCave.png|透过洞穴开口的月亮
+File:Moon Phases Revision 1.png|[[Java版Beta 1.9-pre4|Beta 1.9-pre4]]和[[Java版Beta 1.9-pre5|Beta 1.9-pre5]]中的每种月相
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[cs:Měsíc]]
+[[de:Mond]]
+[[en:Moon]]
+[[es:Luna]]
+[[fr:Lune]]
+[[ja:月]]
+[[ko:달]]
+[[lzh:月]]
+[[nl:Maan]]
+[[pl:Księżyc]]
+[[pt:Lua]]
+[[ru:Луна]]
+[[th:ดวงจันทร์]]
+[[uk:Місяць]]

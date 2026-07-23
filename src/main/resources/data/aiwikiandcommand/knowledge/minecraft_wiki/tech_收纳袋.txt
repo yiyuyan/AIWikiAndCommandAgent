@@ -1,0 +1,537 @@
+# 页面: 收纳袋
+# 来源: https://zh.minecraft.wiki/w/%E6%94%B6%E7%BA%B3%E8%A2%8B
+# 分类: Java版即将到来/26.3, Java版独有信息, 储物, 可再生资源, 基岩版即将到来/26.40, 基岩版独有信息, 物品, 过长的自动值输出
+# 抓取时间: 2026-07-14 17:27:29
+# 原始 Wikitext 内容:
+
+{{Infobox item
+|group1=未染色
+|1-1=Bundle.png
+|1-2=Bundle Open.png
+|group2=白色
+|2-1=White Bundle.png
+|2-2=White Bundle Open.png
+|group3=淡灰色
+|3-1=Light Gray Bundle.png
+|3-2=Light Gray Bundle Open.png
+|group4=灰色
+|4-1=Gray Bundle.png
+|4-2=Gray Bundle Open.png
+|group5=黑色
+|5-1=Black Bundle.png
+|5-2=Black Bundle Open.png
+|group6=棕色
+|6-1=Brown Bundle.png
+|6-2=Brown Bundle Open.png
+|group7=红色
+|7-1=Red Bundle.png
+|7-2=Red Bundle Open.png
+|group8=橙色
+|8-1=Orange Bundle.png
+|8-2=Orange Bundle Open.png
+|group9=黄色
+|9-1=Yellow Bundle.png
+|9-2=Yellow Bundle Open.png
+|group10=黄绿色
+|10-1=Lime Bundle.png
+|10-2=Lime Bundle Open.png
+|group11=绿色
+|11-1=Green Bundle.png
+|11-2=Green Bundle Open.png
+|group12=青色
+|12-1=Cyan Bundle.png
+|12-2=Cyan Bundle Open.png
+|group13=淡蓝色
+|13-1=Light Blue Bundle.png
+|13-2=Light Blue Bundle Open.png
+|group14=蓝色
+|14-1=Blue Bundle.png
+|14-2=Blue Bundle Open.png
+|group15=紫色
+|15-1=Purple Bundle.png
+|15-2=Purple Bundle Open.png
+|group16=品红色
+|16-1=Magenta Bundle.png
+|16-2=Magenta Bundle Open.png
+|group17=粉红色
+|17-1=Pink Bundle.png
+|17-2=Pink Bundle Open.png
+|*-1caption=常规
+|*-2caption=拿取物品时
+|invimage1=Bundle
+|invimage2=Half Filled Bundle
+|invimage3=Filled Bundle
+|invimage4=----
+|invimage5=White Bundle
+|invimage6=Light Gray Bundle
+|invimage7=Gray Bundle
+|invimage8=Black Bundle
+|invimage9=Brown Bundle
+|invimage10=Red Bundle
+|invimage11=Orange Bundle
+|invimage12=Yellow Bundle
+|invimage13=Lime Bundle
+|invimage14=Green Bundle
+|invimage15=Cyan Bundle
+|invimage16=Light Blue Bundle
+|invimage17=Blue Bundle
+|invimage18=Purple Bundle
+|invimage19=Magenta Bundle
+|invimage20=Pink Bundle
+|autovalue-id=收纳袋;染色收纳袋
+}}
+
+'''收纳袋（Bundle）'''是一种用于存储其他物品以便管理的物品，但不能直接打开，在物品栏里点击可以取出其中的物品。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+  |head=1
+  |B1=String
+  |B2=Leather    
+  |Output=Bundle
+  |type= Miscellaneous}}
+{{Crafting
+ |Any Bundle
+ |Matching Dye
+ |custom=1
+ |Output=Matching Bundle
+ |type=Tool
+ |foot=1
+}}
+
+=== 箱子战利品 ===
+{{LootChestItem|bundle|loot_tables/chests/village/village_bundle.json}}
+{{Loot notelist}}
+
+== 用途 ==
+{{Filetr|BundleUsage.png|thumb|一个占用了{{frac|1|2}}的容量的收纳袋}}
+收纳袋可以在物品栏中收集储存杂物，不能储存[[潜影盒]]。
+
+收纳袋拥有1的容量，不同的物品占用不同的容量：
+* {{in|je}}每个装有[[蜜蜂]]的[[蜂巢（方块）|蜂巢]]、[[蜂箱]]或拥有不为空的<code>bees</code>[[物品堆叠组件]]的任意物品占用1的容量。
+* {{in|be}}每个装有[[蜜蜂]]的[[蜂巢（方块）|蜂巢]]或[[蜂箱]]占用{{frac|1|64}}的容量。
+* 每个收纳袋{{note|{{in|je}}可以为拥有<code>bundle_contents</code>物品堆叠组件的任意物品。}}占用容量为自身已用容量加{{frac|1|16}}的容量。
+* 上述物品外的每个物品占用{{frac|1|最大堆叠数量}}的容量。
+** 每个最大堆叠64个的物品占用{{frac|1|64}}的容量。
+** 每个最大堆叠16个的物品占用{{frac|1|16}}的容量。
+** 每个最大堆叠1个的物品占用1的容量。
+** {{in|je}}通过命令获得的<code>[[数据组件#max_stack_size|max_stack_size]]</code>为其他值的物品会按照上述公式正常占用容量。
+
+若尝试将物品放入收纳袋时物品数量超过收纳袋容量，会尽可能放入物品，无法放入的物品留在原处。
+
+收纳袋以类似[[wzh:堆栈|{{tr|栈|堆疊}}]]的方式储存物品，向收纳袋中添加一个可以和其中其他物品合并的物品时，合并后的整组物品都会被移动到顶部。
+
+收纳袋的物品提示框中按照以下方式展示其中的物品：
+* 顶部每增加一个物品时，若最顶一{{tr|行|列}}未满，则由右至左{{tr|添加|新增}}该物品至最顶一{{tr|行|列}}，否则在上方新增一{{tr|行|列}}并置于该{{tr|行|列}}最右方。若{{tr|行|列}}数超过3，则超出的{{tr|行|列}}将被隐藏。
+** 即：首先计算要展示的物品数，如果收纳袋内只有12种以内的物品，则展示全部物品，否则只展示前<math>11 - ((4 - (n \mod 4)) \mod 4)</math>种物品，其中<math>n</math>为物品种类总数。最后从右到左，从下到上依反序{{tr|渲染|顯示}}收纳袋中最顶部该种类数的物品。
+* 如果未展示所有物品，最下一{{tr|行|列}}最右一位将显示为文字“+ ''未展示物品数量''”。
+
+物品预览部分下方具有指示容量使用情况的容量条，收纳袋未满时为蓝色，装满时为红色；收纳袋为空或已满时，容量条上会额外显示“{{tp|item.minecraft.bundle.empty}}”“{{tp|item.minecraft.bundle.full}}”的提示文字。
+
+在物品栏中，装有物品的收纳袋下方会显示类似耐久条的容量条，其进度与颜色的决定方式与物品提示框中的容量条一致。
+
+使用'''键鼠控制'''时，通过以下方式可以和收纳袋交互：
+* 当光标放在收纳袋上时，
+** 移动：左键点击将拿起收纳袋。
+** 取出：右键点击收纳袋会从中取出最后放入的一组物品。
+** 取出：使用鼠标滚轮选中收纳袋可见的槽位，并右键取出选中的一组物品。
+* 拿起收纳袋时，
+** 收纳：左键点击物品会将其放入收纳袋。
+** 取出：右键点击空槽位会将收纳袋内最后放入的一组物品放在这一位置。
+* 拿起物品时，
+** 收纳：左键点击收纳袋会将物品放入收纳袋。
+
+使用'''Xbox One控制器控制'''时，通过以下方式可以和收纳袋交互：
+* 当光标放在收纳袋上时，
+** 移动：按下{{xbtn|A}}键将拿起收纳袋。
+** 取出：按下{{xbtn|X}}键点击收纳袋会从中取出最后放入的一组物品。
+** 取出：使用右摇杆选中收纳袋可见的槽位，再按下{{xbtn|X}}键取出选中的一组物品。
+* 拿起收纳袋时，
+** 收纳：按下{{xbtn|A}}键点击物品会将其放入收纳袋。
+** 取出：按下{{xbtn|X}}键点击空槽位会将收纳袋内最后放入的一组物品放在这一位置。
+* 拿起物品时，
+** 收纳：按下{{xbtn|A}}键点击收纳袋会将其放入收纳袋。
+
+使用'''触摸控制'''时，通过以下方式可以和收纳袋交互：
+* 点击打开收纳袋时，
+** 移动：点击空槽位会移动收纳袋。
+** 收纳：点击物品会将其放入收纳袋。
+** 取出：点击收纳袋可见的物品槽位，选中的一组物品会显示于收纳袋所在槽位中，同时收纳袋物品提示框关闭。此时点击空槽位会取出选中的物品。
+** 关闭：点击收纳袋物品提示框右上角或点击收纳袋所在槽位即可将其关闭。
+* 点击选中物品时，
+** 收纳：点击收纳袋会将其放入收纳袋。
+
+在快捷栏中选中收纳袋时，{{Ctrl|使用}}收纳袋会向玩家面向的方向扔出最后放入其中的一组物品。
+
+若收纳袋的[[物品实体]]受到[[伤害]]而被摧毁，其内容物会以物品实体的形式被释放出来。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Bundle_drop_contents1.ogg
+|sound2=Bundle_drop_contents2.ogg
+|sound3=Bundle_drop_contents3.ogg
+|subtitle={{tp|subtitles.item.bundle.drop_contents}}
+|translationkey=subtitles.item.bundle.drop_contents
+|source=玩家
+|description=倒空物品
+|id=item.bundle.drop_contents
+}}
+{{Sound table
+|sound=Bundle_insert1.ogg
+|sound2=Bundle_insert2.ogg
+|sound3=Bundle_insert3.ogg
+|subtitle={{tp|subtitles.item.bundle.insert}}
+|translationkey=subtitles.item.bundle.insert
+|source=玩家
+|description=加入物品
+|id=item.bundle.insert
+}}
+{{Sound table
+|sound=Bundle_insert_fail.ogg
+|subtitle={{tp|subtitles.item.bundle.insert_fail}}
+|translationkey=subtitles.item.bundle.insert_fail
+|source=玩家
+|description=试图向收纳袋放入超过容量的物
+|id=item.bundle.insert_fail
+}}
+{{Sound table
+|sound=Bundle_remove_one1.ogg
+|sound2=Bundle_remove_one2.ogg
+|sound3=Bundle_remove_one3.ogg
+|subtitle={{tp|subtitles.item.bundle.remove_one}}
+|translationkey=subtitles.item.bundle.remove_one
+|source=玩家
+|description=移除物品
+|id=item.bundle.remove_one
+|foot=1
+}}
+
+{{edition|bedrock}}:
+{{Sound table
+|bedrock=1
+|sound =Bundle drop contents1.ogg
+|sound2=Bundle drop contents2.ogg
+|sound3=Bundle drop contents3.ogg
+|source=玩家
+|description=倒空物品
+|id=bundle.drop_contents
+|typeid=bundle.drop_contents
+|soundvolume
+|soundpitch=1.0/0.95<ref group="音效">这里代表2条音效文件分别以2种不同的音高播放。</ref>
+}}
+{{Sound table
+|sound= Bundle insert1.ogg
+|sound2=Bundle insert2.ogg
+|sound3=Bundle insert3.ogg
+|source=玩家
+|description=加入物品
+|id=bundle.insert
+|typeid=bundle.insert
+|soundvolume
+|soundpitch=0.95/1.0/1.05<ref group="音效" name="3pitch">这里代表3条音效文件分别以3种不同的音高播放。</ref>
+}}
+{{Sound table
+|sound=Bundle insert fail.ogg
+|source=玩家
+|description=试图向收纳袋放入超过容量的物品
+|id=bundle.insert_fail
+|typeid=bundle.insert_fail
+|soundvolume
+|soundpitch
+}}
+{{Sound table
+|sound=Bundle remove one1.ogg
+|sound2=Bundle remove one2.ogg
+|sound3=Bundle remove one3.ogg
+|source=玩家
+|description=移除物品
+|id=bundle.remove_one
+|typeid=bundle.remove_one
+|soundvolume
+|soundpitch=1.0/1.05/1.1<ref group="音效" name="3pitch"/>
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Bundle
+|nameid=bundle
+|spritetype=item
+|showitemtags=je
+|rowspan=17|itemtags={{GameTag|item|bundle,white_bundle,light_gray_bundle,gray_bundle,black_bundle,brown_bundle,red_bundle,orange_bundle,yellow_bundle,lime_bundle,green_bundle,cyan_bundle,light_blue_bundle,blue_bundle,purple_bundle,magenta_bundle,pink_bundle}}
+}}
+{{ID table
+|White Bundle
+|nameid=white_bundle
+|spritetype=item}}
+{{ID table
+|Light Gray Bundle
+|nameid=light_gray_bundle
+|spritetype=item}}
+{{ID table
+|Gray Bundle
+|nameid=gray_bundle
+|spritetype=item}}
+{{ID table
+|Black Bundle
+|nameid=black_bundle
+|spritetype=item}}
+{{ID table
+|Brown Bundle
+|nameid=brown_bundle
+|spritetype=item}}
+{{ID table
+|Red Bundle
+|nameid=red_bundle
+|spritetype=item}}
+{{ID table
+|Orange Bundle
+|nameid=orange_bundle
+|spritetype=item}}
+{{ID table
+|Yellow Bundle
+|nameid=yellow_bundle
+|spritetype=item}}
+{{ID table
+|Lime Bundle
+|nameid=lime_bundle
+|spritetype=item}}
+{{ID table
+|Green Bundle
+|nameid=green_bundle
+|spritetype=item}}
+{{ID table
+|Cyan Bundle
+|nameid=cyan_bundle
+|spritetype=item}}
+{{ID table
+|Light Blue Bundle
+|nameid=light_blue_bundle
+|spritetype=item}}
+{{ID table
+|Blue Bundle
+|nameid=blue_bundle
+|spritetype=item}}
+{{ID table
+|Purple Bundle
+|nameid=purple_bundle
+|spritetype=item}}
+{{ID table
+|Magenta Bundle
+|nameid=magenta_bundle
+|spritetype=item}}
+{{ID table
+|Pink Bundle
+|nameid=pink_bundle
+|spritetype=item
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Bundle
+|nameid=bundle
+|spritetype=item}}
+{{ID table
+|White Bundle
+|nameid=white_bundle
+|spritetype=item}}
+{{ID table
+|Light Gray Bundle
+|nameid=light_gray_bundle
+|spritetype=item}}
+{{ID table
+|Gray Bundle
+|nameid=gray_bundle
+|spritetype=item}}
+{{ID table
+|Black Bundle
+|nameid=black_bundle
+|spritetype=item}}
+{{ID table
+|Brown Bundle
+|nameid=brown_bundle
+|spritetype=item}}
+{{ID table
+|Red Bundle
+|nameid=red_bundle
+|spritetype=item}}
+{{ID table
+|Orange Bundle
+|nameid=orange_bundle
+|spritetype=item}}
+{{ID table
+|Yellow Bundle
+|nameid=yellow_bundle
+|spritetype=item}}
+{{ID table
+|Lime Bundle
+|nameid=lime_bundle
+|spritetype=item}}
+{{ID table
+|Green Bundle
+|nameid=green_bundle
+|spritetype=item}}
+{{ID table
+|Cyan Bundle
+|nameid=cyan_bundle
+|spritetype=item}}
+{{ID table
+|Light Blue Bundle
+|nameid=light_blue_bundle
+|spritetype=item}}
+{{ID table
+|Blue Bundle
+|nameid=blue_bundle
+|spritetype=item}}
+{{ID table
+|Purple Bundle
+|nameid=purple_bundle
+|spritetype=item}}
+{{ID table
+|Magenta Bundle
+|nameid=magenta_bundle
+|spritetype=item}}
+{{ID table
+|Pink Bundle
+|nameid=pink_bundle
+|spritetype=item
+|foot=1}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+在默认组件的基础上，收纳袋使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt transclude|编码格式/DataComponent|codec_bundle_contents_component}}
+</div>
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2020年10月3日|link={{ytl|DBvZ2Iqmm3M|t=1846s}}|[[File:Bundle JE1.png|32px]] [[File:Bundle Filled JE1.png|32px]] 收纳袋首次出现在[[Minecraft Live 2020]]。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=20w45a|[[File:Bundle JE1.png|32px]] [[File:Bundle Filled JE1.png|32px]] 加入了收纳袋。
+|此时收纳袋使用[[兔子皮]]与[[线]]合成。
+{{CollapseH|合成配方：}}
+{{Crafting Table
+  |A1=String     |B1=Rabbit Hide |C1=String
+  |A2=Rabbit Hide            |C2=Rabbit Hide
+  |A3=Rabbit Hide |B3=Rabbit Hide |C3=Rabbit Hide
+  |Output=[收纳袋]Bundle Revision 3
+  |Olink=none
+  |ignoreusage=1
+}}{{CollapseE}}}}
+|{{HistoryLine|||dev=20w46a|[[File:Bundle JE2.png|32px]][[File:Bundle Filled JE2.png|32px]] 更改了收纳袋的纹理。
+|现在将光标移动到收纳袋上会显示它的内容物。如果还未装满，会有一个额外的槽位显示+号。}}
+|{{HistoryLine|||dev=20w48a|现在当高级提示框启用时，收纳袋的提示框会以分数显示其容量。}}
+|{{HistoryLine|||dev=20w49a|现在无论是否启用高级提示框，收纳袋的提示框都会以分数显示其容量。}}
+|{{HistoryLine|||dev=20w51a|现在当收纳袋以[[物品实体]]的形式被摧毁时，其内容物会被释放。}}
+|{{HistoryLine|||dev=21w05a|现在当收纳袋第一次出现在玩家的物品栏里时，玩家会收到收纳袋的[[教学提示]]。}}
+|{{HistoryLine|||dev=21w19a|从[[创造模式物品栏]]移除了收纳袋。
+|移除了收纳袋的合成配方并整合到[[洞穴与山崖预览数据包]]中。}}
+|{{HistoryLine||1.18|dev=exp1|重新将收纳袋加入到了创造模式物品栏中。
+|重新加入了收纳袋的合成配方。}}
+|{{HistoryLine|||dev=21w37a|再次从[[创造模式物品栏]]移除了收纳袋。
+|再次移除了收纳袋的合成配方。}}
+|{{HistoryLine||2021年10月16日|link=https://clips.twitch.tv/AffluentEncouragingOryxPeteZaroll-cd8pIapkfD4PRHxO|Minecraft开发者Ulraf称，收纳袋不会出现在“洞穴与山崖”第二部分中。}}
+|{{HistoryLine||2021年11月17日|link=https://www.minecraft.net/article/caves---cliffs-update-part-ii-coming|收纳袋被宣布在[[荒野更新]]以后加入。}}
+|{{HistoryLine||1.19.3|dev=22w42a|exp=bundle|重新加入了收纳袋的合成配方，并重新将收纳袋加入到创造模式物品栏。}}
+|{{HistoryLine||1.21.2|dev=24w33a|exp=bundle|将收纳袋从没有启用[[实验性内容|收纳袋]]的世界中的物品栏中移除，现在收纳袋完全属于[[实验性内容]]。
+|收纳袋现在具有新的提示框GUI。
+|更改了配方，收纳袋现在需要1个线和1个[[皮革]]来合成。
+|[[File:Bundle JE3 BE2.png|32px]][[File:Bundle Open JE1 BE1.png|32px]][[File:Bundle Open Back_JE1 BE1.png|32px]][[File:Bundle Open Front_JE1 BE1.png|32px]]更改了收纳袋的纹理和模型。
+|试图向已满的收纳袋放入物品时，现在会播放音效。
+|更改了-{存取}-物品的方式，现在可以乱序取出其中的物品。}}
+|{{HistoryLine|||dev=24w34a|现在收纳袋物品提示框最多显示3行物品而非2行，使得折叠部分物品的收纳袋至少能展示8种物品。}}
+|{{HistoryLine|||dev=24w35a|不再能通过数字键选择提示框中展示的物品。
+|收纳袋的容量条现在具有新的独立纹理，可以在[[资源包]]中修改。}}
+|{{HistoryLine|||dev=24w36a|现在在快捷栏中使用收纳袋时只会最多放出一组物品，不再会清空收纳袋内所有物品。}}
+|{{HistoryLine|||dev=24w38a|[[File:White Bundle JE1 BE1.png|32px]][[File:Light Gray Bundle JE1 BE1.png|32px]][[File:Gray Bundle JE1 BE1.png|32px]][[File:Black Bundle JE1 BE1.png|32px]][[File:Brown Bundle JE1 BE1.png|32px]][[File:Red Bundle JE1 BE1.png|32px]][[File:Orange Bundle JE1 BE1.png|32px]][[File:Yellow Bundle JE1 BE1.png|32px]][[File:Lime Bundle JE1 BE1.png|32px]][[File:Green Bundle JE1 BE1.png|32px]][[File:Cyan Bundle JE1 BE1.png|32px]][[File:Light Blue Bundle JE1 BE1.png|32px]][[File:Blue Bundle JE1 BE1.png|32px]][[File:Purple Bundle JE1 BE1.png|32px]][[File:Magenta Bundle JE1 BE1.png|32px]][[File:Pink Bundle JE1 BE1.png|32px]]<br>[[File:White Bundle Open JE1 BE1.png|32px]] [[File:Light Gray Bundle Open JE1 BE1.png|32px]] [[File:Gray Bundle Open JE1 BE1.png|32px]] [[File:Black Bundle Open JE1 BE1.png|32px]] [[File:Brown Bundle Open JE1 BE1.png|32px]] [[File:Red Bundle Open JE1 BE1.png|32px]] [[File:Orange Bundle Open JE1 BE1.png|32px]] [[File:Yellow Bundle Open JE1 BE1.png|32px]] [[File:Lime Bundle Open JE1 BE1.png|32px]] [[File:Green Bundle Open JE1 BE1.png|32px]] [[File:Cyan Bundle Open JE1 BE1.png|32px]] [[File:Light Blue Bundle Open JE1 BE1.png|32px]] [[File:Blue Bundle Open JE1 BE1.png|32px]] [[File:Purple Bundle Open JE1 BE1.png|32px]] [[File:Magenta Bundle Open JE1 BE1.png|32px]] [[File:Pink Bundle Open JE1 BE1.png|32px]] 为收纳袋加入了染色变种。}}
+|{{HistoryLine|||exp=none|dev=24w39a|收纳袋不再属于[[实验性内容]]。}}
+|{{HistoryLine|||dev=24w40a|现在收纳袋不再能够使用与其自身相同颜色的染料进行染色了。}}
+|{{HistoryLine||1.21.4|dev=24w46a|[[File:Bundle Open JE2 BE2.png|32px]] [[File:White Bundle Open JE2 BE2.png|32px]] [[File:Light Gray Bundle Open JE2 BE2.png|32px]] [[File:Gray Bundle Open JE2 BE2.png|32px]] [[File:Black Bundle Open JE2 BE2.png|32px]] [[File:Brown Bundle Open JE2 BE2.png|32px]] [[File:Red Bundle Open JE2 BE2.png|32px]] [[File:Orange Bundle Open JE2 BE2.png|32px]] [[File:Yellow Bundle Open JE2 BE2.png|32px]] [[File:Lime Bundle Open JE2 BE2.png|32px]] [[File:Green Bundle Open JE2 BE2.png|32px]] [[File:Cyan Bundle Open JE2 BE2.png|32px]] [[File:Light Blue Bundle Open JE2 BE2.png|32px]] [[File:Blue Bundle Open JE2 BE2.png|32px]] [[File:Purple Bundle Open JE2 BE2.png|32px]] [[File:Magenta Bundle Open JE2 BE2.png|32px]] [[File:Pink Bundle Open JE2 BE2.png|32px]] 修改了收纳袋打开时前半部分的纹理。<ref>{{bug|MC-276986|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.5|dev=25w07a|现在收纳袋可以在[[村庄]]的战利品箱子中被找到。}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在收纳袋可以在[[废弃营地]]的[[箱子]]或[[木桶]]中找到。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.18.10|dev=1.18.10.22|[[File:Bundle JE2.png|32px]][[File:Bundle Filled JE2.png|32px]] 加入了收纳袋，但仅限于开发者版本使用。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.21|在原版资源包里加入了收纳袋的GUI。}}
+|{{HistoryLine||2024年6月29日|link=https://www.youtube.com/watch?v=weJ9ghpYbGI|收纳袋被宣布即将加入到基岩版。}}
+|{{HistoryLine||1.21.30|exg=bundles|dev=1.21.30.23|加入了收纳袋。
+|[[File:Bundle BE1.png|32px]][[File:Bundle Open JE1 BE1.png|32px]][[File:Bundle Open Back_JE1 BE1.png|32px]][[File:Bundle Open Front_JE1 BE1.png|32px]] 更改了收纳袋的纹理和模型，但与{{el|je}}的纹理不一致。<ref name="MCPE-185519">{{bug|MCPE-185519|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=1.21.30.24|现在收纳袋物品提示框最多显示3行物品而非2行，使得折叠部分物品的收纳袋至少能展示8种物品。}}
+|{{HistoryLine||1.21.40|dev=1.21.40.20|exg=bundles|现在在快捷栏中使用收纳袋时只会最多放出一组物品，不再会清空收纳袋内所有物品。}}
+|{{HistoryLine|||dev=1.21.40.21|现在被重命名的收纳袋会在提示框中以斜体的形式显示其名称。}}
+|{{HistoryLine|||dev=1.21.40.22|[[File:White Bundle JE1 BE1.png|32px]][[File:Light Gray Bundle JE1 BE1.png|32px]][[File:Gray Bundle JE1 BE1.png|32px]][[File:Black Bundle JE1 BE1.png|32px]][[File:Brown Bundle JE1 BE1.png|32px]][[File:Red Bundle JE1 BE1.png|32px]][[File:Orange Bundle JE1 BE1.png|32px]][[File:Yellow Bundle JE1 BE1.png|32px]][[File:Lime Bundle JE1 BE1.png|32px]][[File:Green Bundle JE1 BE1.png|32px]][[File:Cyan Bundle JE1 BE1.png|32px]][[File:Light Blue Bundle JE1 BE1.png|32px]][[File:Blue Bundle JE1 BE1.png|32px]][[File:Purple Bundle JE1 BE1.png|32px]][[File:Magenta Bundle JE1 BE1.png|32px]][[File:Pink Bundle JE1 BE1.png|32px]]<br>[[File:White Bundle Open JE1 BE1.png|32px]] [[File:Light Gray Bundle Open JE1 BE1.png|32px]] [[File:Gray Bundle Open JE1 BE1.png|32px]] [[File:Black Bundle Open JE1 BE1.png|32px]] [[File:Brown Bundle Open JE1 BE1.png|32px]] [[File:Red Bundle Open JE1 BE1.png|32px]] [[File:Orange Bundle Open JE1 BE1.png|32px]] [[File:Yellow Bundle Open JE1 BE1.png|32px]] [[File:Lime Bundle Open JE1 BE1.png|32px]] [[File:Green Bundle Open JE1 BE1.png|32px]] [[File:Cyan Bundle Open JE1 BE1.png|32px]] [[File:Light Blue Bundle Open JE1 BE1.png|32px]] [[File:Blue Bundle Open JE1 BE1.png|32px]] [[File:Purple Bundle Open JE1 BE1.png|32px]] [[File:Magenta Bundle Open JE1 BE1.png|32px]] [[File:Pink Bundle Open JE1 BE1.png|32px]] 为收纳袋加入了染色变种。}}
+|{{HistoryLine|||exg=none|dev=1.21.40.23|收纳袋不再属于[[实验性玩法]]。
+|[[File:Bundle JE3 BE2.png|32px]] 更改了未染色的收纳袋的纹理，以匹配{{el|je}}。<ref name="MCPE-185519"/>}}
+|{{HistoryLine||1.21.50|dev=1.21.50.28|[[File:Bundle item background BE1.png|32px]] 为收纳袋提示框中的物品加入了灰色背景。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.24|[[File:Bundle Open JE2 BE2.png|32px]] [[File:White Bundle Open JE2 BE2.png|32px]] [[File:Light Gray Bundle Open JE2 BE2.png|32px]] [[File:Gray Bundle Open JE2 BE2.png|32px]] [[File:Black Bundle Open JE2 BE2.png|32px]] [[File:Brown Bundle Open JE2 BE2.png|32px]] [[File:Red Bundle Open JE2 BE2.png|32px]] [[File:Orange Bundle Open JE2 BE2.png|32px]] [[File:Yellow Bundle Open JE2 BE2.png|32px]] [[File:Lime Bundle Open JE2 BE2.png|32px]] [[File:Green Bundle Open JE2 BE2.png|32px]] [[File:Cyan Bundle Open JE2 BE2.png|32px]] [[File:Light Blue Bundle Open JE2 BE2.png|32px]] [[File:Blue Bundle Open JE2 BE2.png|32px]] [[File:Purple Bundle Open JE2 BE2.png|32px]] [[File:Magenta Bundle Open JE2 BE2.png|32px]] [[File:Pink Bundle Open JE2 BE2.png|32px]] 修改了收纳袋打开时前半部分的纹理。<ref>{{bug|MCPE-188355|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.70|dev=1.21.70.23|现在收纳袋可以在[[村庄]]的战利品箱子中被找到。}}
+|{{HistoryLine||26.40|exg=y_2026_drop_3|dev=26.40.27|现在收纳袋可以在[[废弃营地]]的[[箱子]]或[[木桶]]中找到。}}
+}}
+
+=== Java版1.21.2前的收纳袋 ===
+{{Filetr|Full Bundle Contents.png|缩略图|一个装满了各种[[花]]的收纳袋}}
+在[[Java版1.21.2]]前，收纳袋拥有64点容量，可以在物品栏中收集储存杂物。不同的物品会消耗不同数量的容量：
+* 能够堆叠64个的物品占用1点容量。
+* 能够堆叠16个的物品占用4点容量。
+* 不能堆叠的物品占用64点容量。
+* 装有蜜蜂的蜂巢或蜂箱占用64点容量。
+* 收纳袋占用4点容量并加上自身已用的容量。
+
+收纳袋可以用于储存收纳袋，每个收纳袋最多可以放入16个空的收纳袋。
+
+收纳袋没有交互界面，不能直接打开。通过以下方式可以和收纳袋交互：
+* 点击并拿起收纳袋时，右键点击空格子会将收纳袋内的一组物品（若有）放在这一位置。
+* 点击并拿起收纳袋时，右键点击物品会将其收入收纳袋。
+* 点击并拿起物品时，右键点击收纳袋会将其收入收纳袋。
+* 没有拿起任何物品时，右键点击收纳袋会从中取出一组物品（若有）。
+* 拿起收纳袋时右键点击收纳袋，会将格子中的收纳袋装入拿起的收纳袋中。
+
+收纳袋的提示框会显示它的内容物，被高亮的第一个物品（若有）表示尝试从收纳袋中取出物品时会被取出的物品。如果还未装满，则会在末尾显示数个空格子；若已经装满，则会在末尾显示数个打叉的灰色格子。
+
+== 你知道吗 ==
+* 收纳袋的灵感来源于古罗马的[[wikipedia:coin purse|钱袋]]。<ref>{{ytl|ocayRQ-JwHw|BUNDLES ARE FINALLY IN MINECRAFT!|Minecraft|Oct 23, 2024|t=1m12s}}</ref>
+
+== 画廊 ==
+<gallery>
+JE 1.17 Development Bundle.png|[[Minecraft Live 2020]]展示的收纳袋及其UI
+Colorful bundles.jpg|地面上的各种染色收纳袋
+Bundles of Bravery Secondary Key Art.jpg|收纳袋的官方艺术作品
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox items|Tools & Utilities}}
+
+[[Category:储物]]
+
+[[de:Bündel]]
+[[en:Bundle]]
+[[es:Saco]]
+[[fr:Sac]]
+[[it:Sacchetto]]
+[[ja:バンドル]]
+[[lzh:皮囊]]
+[[pl:Sakwa]]
+[[pt:Trouxa]]
+[[ru:Мешок]]
+[[uk:Мішечок]]

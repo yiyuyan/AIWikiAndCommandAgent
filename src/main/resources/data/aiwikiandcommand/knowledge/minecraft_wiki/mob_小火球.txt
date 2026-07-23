@@ -1,0 +1,142 @@
+# 页面: 小火球
+# 来源: https://zh.minecraft.wiki/w/%E5%B0%8F%E7%81%AB%E7%90%83
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 实体, 需要信息
+# 抓取时间: 2026-07-14 17:25:22
+# 原始 Wikitext 内容:
+
+{{about|烈焰人或发射器发射的弹射物|恶魂发射的弹射物|火球||火球（消歧义）}}
+{{Infobox entity
+|title=小火球
+|image=Fire Charge.png
+|imagesize=75px
+|size='''{{el|je}}'''：<br>高度：0.3125格<br>宽度：0.3125格<br>'''{{el|be}}'''：<br>高度：0.31格<br>宽度：0.31格
+|spawn=[[发射器]]或[[烈焰人]]发射
+}}
+
+'''小火球（Small Fireball）'''是由[[烈焰人]]发射或由[[发射器]]使用[[火焰弹]]发射的[[弹射物]]。
+
+== 生成 ==
+[[烈焰人]]会向其攻击目标发射小火球。
+
+[[发射器]]使用[[火焰弹]]时会向其面向的方向发射小火球。
+
+== 行为 ==
+小火球拥有不受重力影响的无限远的直线弹道，但会在1分钟后消失。
+
+与[[火球]]不同，小火球的弹道不能被偏转。
+
+{{ctrl|使用}}[[盾牌]]可以阻挡其有效角度内来袭的小火球。
+
+由[[烈焰人]]或[[发射器]]发射的小火球具有加速度。
+
+=== 造成伤害 ===
+小火球在直接击中实体时，会对其造成{{hp|5}}伤害，并设置实体的剩余着火时间为{{convert|100|tick}}。
+
+小火球命中实体造成的伤害同时属于弹射物伤害和火焰伤害，并同时受到[[弹射物保护]]和[[火焰保护]]的减免，也会被[[抗火]]效果无效化。
+
+=== 着火 ===
+小火球默认是着火的。{{in|je}}小火球始终是[[着火]]的，穿过[[雨]]、[[水]]或[[细雪]]时会保持着火，即使修改其实体数据<code>Fire</code>也不能将其熄灭。
+
+小火球可以激活[[TNT]]，可以点燃熄灭的[[营火]]，可以破坏其穿过的细雪，击中方块时，会在击中的位置生成[[火]]。
+
+=== 与方块交互 ===
+小火球是一种[[弹射物]]，可以触发其击中的[[标靶]]，可以敲响[[钟]]。
+
+小火球可以激活[[木质压力板]]。{{in|java}}小火球可以触发[[绊线]]和[[探测铁轨]]（探测铁轨需要使用[[Tutorial:比较器更新感应器|比较器更新感应器]]检测）。当小火球穿过这些方块时，这些开关会保持开启状态。其他开关则不受小火球的影响。由于小火球不能像[[箭]]或[[三叉戟]]一样插在方块上，通常很难令其保持一个开关的长时间开启。通过命令生成的静止不动的小火球会一直保持其位置的开关开启。
+
+== 音效 ==
+{{edition|java}}：
+{{Sound table
+|sound=Ghast fireball4.ogg
+|description=发射器或烈焰人发射小火球
+|id=entity.blaze.shoot
+|source=敌对生物
+|subtitle={{tp|subtitles.entity.blaze.shoot}}
+|translationkey=subtitles.entity.blaze.shoot
+|foot=1}}
+
+{{edition|bedrock}}：
+{{Sound table
+|bedrock=1
+|sound=Ghast fireball4.ogg
+|source=主音量
+|description=发射器或烈焰人发射小火球
+|id=mob.blaze.shoot
+|typeid=shoot
+|soundvolume=3.0
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Small Fireball
+|spritetype=entity
+|nameid=small_fireball
+|showentitytags=1|entitytags={{GameTag|entity|small_fireball}}
+|foot=1}}
+
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Small Fireball
+|spritetype=entity
+|nameid=small_fireball
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+
+小火球有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 进度 ==
+{{load advancements|story.deflect_arrow}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.2.1|dev=12w04a|[[File:Fire Charge JE1 BE1.png|32px]] 加入了小火球。}}
+|{{HistoryLine||1.8|dev=14w31a|更改了发射小火球时的音效，此音效与发射器发射小火球时的音效相同。{{info needed}}}}
+|{{HistoryLine||1.9|dev=15w33c|现在在发射器中被射出的小火球以龙息的样子出现。}}
+|{{HistoryLine|||dev=15w44b|现在在发射器被射出的小火球再次以15w33c之前的样子出现。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID从<code>SmallFireball</code>变成了<code>small_fireball</code>。}}
+|{{HistoryLine||1.11|dev=16w40a|从小火球的[[实体数据格式#弹射物|实体数据]]中移除了<code>xTile</code>、<code>yTile</code>、<code>zTile</code>、<code>inTile</code>和<code>inGround</code>标签。
+|<code>life</code>标签不再被使用，但仍能够被保存/读取。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Fire Charge JE2 BE2.png|32px]] 更改了小火球的纹理。}}
+|{{HistoryLine||1.21.2|dev=24w33a|小火球现在会在撞击[[世界边界]]时破裂。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.15.0|dev=build 1|[[File:Fire Charge JE1 BE1.png|32px]] 加入了小火球。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Fire Charge JE2 BE2.png|32px]] 更改了小火球的纹理。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU9|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|[[File:Fire Charge JE1 BE1.png|32px]] 加入了小火球。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|[[File:Fire Charge JE2 BE2.png|32px]] 更改了小火球的纹理。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|[[File:Fire Charge JE1 BE1.png|32px]] 加入了小火球。}}
+}}
+
+== 你知道吗 ==
+* [[火焰弹]]、小火球、[[火球]]使用了相同的纹理。
+
+== 画廊 ==
+<gallery>
+Natural Fire Charge.png|着火的小火球
+</gallery>
+
+== 导航 ==
+{{Navbox entities|Non-mobs}}
+
+[[en:Small Fireball]]
+[[pt:Bola de Fogo Pequena]]
+[[ru:Малый огненный шар]]

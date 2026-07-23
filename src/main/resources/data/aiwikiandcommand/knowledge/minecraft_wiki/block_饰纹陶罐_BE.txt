@@ -1,0 +1,30 @@
+# 页面: 饰纹陶罐/BE
+# 来源: https://zh.minecraft.wiki/w/%E9%A5%B0%E7%BA%B9%E9%99%B6%E7%BD%90/BE
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, 方块实体页面
+# 抓取时间: 2026-07-14 17:39:00
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 方块实体数据
+** {{nbt inherit/blockentity}}
+** {{nbt|compound|item}}：（当{{nbt|string|LootTable}}不存在时存在并有效）饰纹陶罐存储的物品。此项方块实体数据会被视为数据组件[[数据组件#container|<code>container</code>]]。
+*** {{nbt inherit/itemnoslot}}
+** {{nbt|string|LootTable}}：决定饰纹陶罐被破坏时，生成战利品所用的[[战利品表]]的[[命名空间ID]]。此项将在战利品生成之后被删除。
+** {{nbt|long|LootTableSeed}}：（当{{nbt|string|LootTable}}存在时有效）生成战利品使用的种子，0或不输入将使用[[随机序列]]。此项将在战利品生成之后被删除。
+** {{nbt|list|sherds}}{{until|je 26.3}}：饰纹陶罐各个面的陶片样式，4个面按照后左右前排列。如果此项不存在则全部默认为红砖。此项方块实体数据会被视为数据组件[[数据组件#pot_decorations|<code>pot_decorations</code>]]。
+*** {{nbt|string}}：陶片的[[命名空间ID]]。如果此面没有陶片样式，则此值为<code>minecraft:brick</code>（红砖）。
+** {{nbt|compound|sherds}}{{upcoming|je 26.3}}：饰纹陶罐各个面的陶片样式。如果对应面的物品不存在[[数据组件#provides_pottery_pattern|<code>provides_pottery_pattern</code>]]组件，则此面没有额外样式。此项方块实体数据会被视为数据组件[[数据组件#pot_decorations|<code>pot_decorations</code>]]。
+*** {{nbt|string}}{{nbt|compound|back}}：背面陶片样式。
+**** {{Nbt inherit/item template}}
+*** {{nbt|string}}{{nbt|compound|left}}：左面陶片样式。
+**** {{Nbt inherit/item template}}
+*** {{nbt|string}}{{nbt|compound|right}}：右面陶片样式。
+**** {{Nbt inherit/item template}}
+*** {{nbt|string}}{{nbt|compound|front}}：正面陶片样式。
+**** {{Nbt inherit/item template}}
+</div><noinclude>
+[[Category:方块实体页面]]
+[[en:Decorated Pot/BE]]
+[[ja:飾り壺/BE]]
+[[pt:Vaso decorado/BE]]
+</noinclude>

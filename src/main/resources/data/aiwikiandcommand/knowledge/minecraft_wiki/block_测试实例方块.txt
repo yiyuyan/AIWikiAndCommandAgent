@@ -1,0 +1,142 @@
+# 页面: 测试实例方块
+# 来源: https://zh.minecraft.wiki/w/%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B%E6%96%B9%E5%9D%97
+# 分类: 
+# 抓取时间: 2026-07-14 17:30:11
+# 原始 Wikitext 内容:
+
+{{distinguish|测试方块}}
+{{exclusive|je}}
+{{Infobox block
+|image=Test Instance Block.png
+|invimage=Test Instance Block
+|light=0
+|nobe=1
+}}
+'''测试实例方块（Test Instance Block）'''是一种用于运行、控制世界中的[[游戏测试]]的技术性方块，无法在[[生存模式]]中获得。
+
+== 生成 ==
+测试实例方块不会生成在世界中。
+
+== 获取 ==
+{{see also|Tutorial:获取任意物品}}
+测试实例方块无法在未开启[[作弊]]的[[生存模式]]的世界中获取。使用[[创造模式]]或启用[[作弊]]，测试实例方块可以通过[[创造模式物品栏]]（需要启用“{{tp|options.operatorItemsTab}}”，或“{{tp|itemGroup.hotbar}}”中有测试实例方块）、[[创造模式]]中使用{{ctrl|选取方块}}或[[命令]]等方式获得。
+
+== 破坏 ==
+测试实例方块不能被挖掘破坏。
+
+[[权限等级]]不足<code>2</code>的玩家，即使处于创造模式也不能破坏测试实例方块。
+
+{{Breaking table}}
+
+测试实例方块被破坏后不会掉落。
+
+== 用途 ==
+{{See also|遊戲測試}}
+{{Filetr|Test Instance Block GUI.png|thumb|测试实例方块的界面}}
+放置测试实例方块后可以打开其界面，其界面仅在玩家处于创造模式且权限等级为<code>2</code>或更高时可以打开。
+
+根据测试状态，该方块产生类似于[[信标]]的光束，颜色为{{color|#808080}}时表示运行中的测试，颜色为{{color|#00ff00}}时表示测试成功，颜色为{{color|#ff0000}}时表示测试失败，颜色为{{color|#ff8000}}时表示运行测试失败时运行的可选测试。不同于信标，测试实例方块所产生的光束可以穿透所有方块，而其颜色不受[[染色玻璃]]和[[染色玻璃板]]改变。
+
+当玩家输入了有效的测试实例ID后，界面中间会显示此测试实例的部分信息。测试失败时还会以红色文本在界面中间的顶部显示测试失败的原因。
+
+目前游戏中只有一个测试实例，其ID为<code>always_pass</code>，测试行为是：启动测试时就立刻判定测试成功。
+
+若这个测试是一个{{tp|test_instance.type.block_based}}，则显示为：
+* {{tp|test_instance.description.type|{{tp|test_instance.type.block_based}}}}
+* {{tp|test_instance.description.structure|<''测试结构ID''>}}
+* {{tp|test_instance.description.batch|<''测试环境ID''>}}（未指定测试环境ID时，显示为“{{tp|test_instance.description.batch|[unregistered]}}”）
+
+若这个测试是一个{{tp|test_instance.type.function}}，则显示为：
+* {{tp|test_instance.description.type|{{tp|test_instance.type.function}}}}
+* {{tp|test_instance.description.function|<''测试函数ID''>}}
+* {{tp|test_instance.description.structure|<''测试结构ID''>}}
+* {{tp|test_instance.description.batch|<''测试环境ID''>}}（未指定测试环境ID时，显示为“{{tp|test_instance.description.batch|[unregistered]}}”）
+
+测试实例方块的界面还具有以下选项：
+
+; 测试结构大小
+: 测试结构X、Y、Z方向上的大小。以测试实例方块的坐标（x，y，z）为基准，测试结构占据的空间即从方块坐标（x，y+1，z+1）至方块坐标（x+X-1，y+Y，z+Z）。
+
+; 旋转角度
+: 对测试结构进行旋转。
+:: 选项包括{{cd|d=、|0|90|180|270}}，默认为<code>0</code>。
+:: 旋转的方向为以Y轴为旋转轴时俯瞰的顺时针。
+:: 测试相对坐标计算的坐标原点也会一起旋转，故相对于整个测试结构而言不会影响测试的相对坐标，但是会影响{{cmd|test pos}}的相对坐标。
+
+; 实体
+: 是否加载和保存测试结构内的实体。
+:: 选项包括“关”和“开”，默认为“开”。
+
+; {{tp|test_instance.action.reset}}
+: 重置并加载测试结构。
+
+; {{tp|test_instance.action.save}}
+: 保存测试结构。
+:: 测试结构会保存到{{filepath|-{}-<''存档名称''>/generated/<''命名空间''>/structure/<''路径''>.nbt}}中，命名空间和路径来自测试结构ID。若有同名文件则覆盖。
+
+; {{tp|test_instance.action.run}}
+: 重置、加载测试结构，并立刻运行游戏测试。
+
+; 完成
+: 退出界面，保存玩家在界面的修改。
+
+; 取消
+: 退出界面，不保存玩家在界面的修改。
+
+=== 保存错误标记 ===
+{{Filetr|GameTest error markers.png|thumb|错误标记}}
+如果测试抛出了属于<samp>net.minecraft.gametest.framework.GameTestAssertPosException</samp>的异常，则会在失败位置上放置一个错误标记，除非测试的失败由实体引起，此时游戏会将实体的坐标视为相对坐标，再次转化为世界坐标时几乎不可能是导致测试失败的实体的位置。
+
+测试实例方块负责了错误标记的保存，每个错误标记都包括失败位置和失败原因等信息。错误标记会在运行测试或重置测试时被移除。如果单个批次内多次测试失败，则测试实例方块会保存每次测试失败时的错误标记，而非在重新运行时删除先前的错误标记。
+
+== 音效 ==
+{{Sound table/Block/Stone/JE}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=java
+|Test Instance Block
+|spritetype=block
+|nameid=test_instance_block
+|showblocktags=je
+|blocktags={{GameTag|block|test_instance_block}}
+|foot=1
+}}
+{{ID table
+|displayname=方块实体
+|spritename=test-instance-block
+|spritetype=block
+|nameid=test_instance_block
+|foot=1
+}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+测试实例方块有包含方块附加数据的方块实体。
+
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.5|dev=25w03a|[[File:Test Instance Block JE1.png|32px]] 加入了测试实例方块。}}
+|{{HistoryLine|||dev=25w10a|[[File:Test Instance Block JE2.png|32px]] 更改了测试实例方块的纹理。}}
+|{{HistoryLine||1.21.9|dev=25w37a|现在会在世界重载期间保存错误标记。}}
+|{{HistoryLine||26.1|dev=snapshot-6|现在保存测试结构的目录由{{filepath|-{}-<''存档名称''>/generated/<''命名空间''>/structures/}}更改为{{filepath|-{}-<''存档名称''>/generated/<''命名空间''>/structure/}}。}}
+}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[de:Testinstanzblock]]
+[[en:Test Instance Block]]
+[[es:Bloque de caso de prueba]]
+[[fr:Bloc d'instance de test]]
+[[it:Blocco istanza di collaudo]]
+[[ja:テストインスタンスブロック]]
+[[ko:테스트 인스턴스 블록]]
+[[pt:Bloco de Instância de Teste]]
+[[ru:Блок-тестер экземпляра]]
+[[uk:Блок тестового примірника]]

@@ -1,0 +1,106 @@
+# 页面: 命令/gamemode
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/gamemode
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{upcoming in draft}}
+{{about|命令|控制[[玩家]]进行游戏的方式的系统|游戏模式}}
+{{Infobox command
+|name=gamemode
+|oplevel=2\1
+|becheat=1
+|others=非[[基岩版编辑器|编辑器]]{{only|be}}
+}}
+
+设置玩家的[[游戏模式]]。
+
+== 语法 ==
+* '''Java版'''
+: <code>gamemode <gamemode> [<target>]</code>
+
+* '''基岩版'''
+: <code>gamemode <gameMode: GameMode> [player: target]</code>
+: <code>gamemode <gameMode: int> [player: target]</code>
+
+== 参数 ==
+{{el|je|short=1}}：{{argument|gamemode|gamemode}}<br>
+{{el|be|short=1}}：{{argument|be=1|gameMode: GameMode|enum}}和{{argument|be=1|gameMode: int|int}}
+: 指定玩家的新游戏模式，必须为以下其中之一：
+:* <code>survival</code>（{{IN|be}}可简写为{{cd|s}}或{{cd|0}}）代表[[生存模式]]
+:* <code>creative</code>（{{IN|be}}可简写为{{cd|c}}或{{cd|1}}）代表[[创造模式]]
+:* <code>adventure</code>（{{IN|be}}可简写为{{cd|a}}或{{cd|2}}）代表[[冒险模式]]
+:* <code>default</code>（可简写为{{cd|d}}或{{cd|5}}）代表世界默认模式{{only|be}}
+:* <code>spectator</code>代表[[旁观模式]]
+: [[极限模式]]不是一个有效选项，因为它作用于世界，而不是玩家。
+
+{{argument|target|entity|player: target|CommandSelector<Actor>}}
+: 指定要被修改游戏模式的玩家。如果未指定，默认为命令执行者。
+: {{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><target></code>或<code>player: target</code>未指定且命令执行者不是玩家|fail|fail}}
+{{Result table|<code><target></code>或<code>player: target</code>未能选中一个或多个在线玩家}}
+{{Result table|<code>gameMode: int</code>非有效模式ID|N/A}}
+{{Result table|<code>player: target</code>非玩家目标选择器}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|游戏模式更新的玩家数量}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|指定的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 使执行者进入创造模式：
+*: <code>gamemode creative</code>
+*: <code>gamemode c</code>{{only|bedrock}}
+*: <code>gamemode 1</code>{{only|bedrock}}
+
+* 使所有玩家进入生存模式：
+*: <code>gamemode survival @a</code>
+*: <code>gamemode s @a</code>{{only|bedrock}}
+*: <code>gamemode 0 @a</code>{{only|bedrock}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了{{cd|-{}-gamemode <''玩家''> <''游戏模式''>}}。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w16a|{{cmd|gamemode|link=none}}现在能在单人游戏中使用。
+|语法更改为{{cd|-{}-gamemode <''游戏模式''> [''玩家'']}}，玩家参数是可选（默认是自身）的，模式参数可以是数字和<code>survival</code>/<code>creative</code>/<code>s</code>/<code>c</code>。}}
+|{{HistoryLine|||dev=12w30a|{{cmd|gamemode 3|link=none}}更改为{{cmd|gamemode 0|link=none}}（生存模式）}}
+|{{HistoryLine||1.8|dev=14w05a|加入了{{cd|spectator}}（旁观模式）。}}
+|{{HistoryLine||1.9|dev=15w43a|现在{{cmd|gamemode|link=none}}会在聊天栏中显示玩家更改为的游戏模式。}}
+|{{HistoryLine||1.13|dev=17w45a|现在{{cmd|gamemode|link=none}}不再支持简写。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|gamemode|link=none}}命令。
+|只能使用创造和生存模式。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了{{cd|adventure}}参数。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.30|dev=1.17.30.20|加入了{{cd|default}}参数。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.20|加入了{{cd|6}}参数，用于[[旁观模式]]。}}
+|{{HistoryLine||1.18.31|加入了{{cd|spectator}}参数，用于旁观模式。}}
+|{{HistoryLine||1.19.30|dev=1.19.30.20|移除了{{cd|6}}参数。}}
+}}
+
+== 参见 ==
+* {{cmd|defaultgamemode}}{{only|java}} – 设置加入世界玩家的初始游戏模式
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/gamemode]]
+[[en:Commands/gamemode]]
+[[es:Comandos/gamemode]]
+[[ja:コマンド/gamemode]]
+[[ko:명령어/gamemode]]
+[[pt:Comandos/gamemode]]
+[[ru:Команды консоли/gamemode]]
+[[uk:Команди консолі/gamemode]]

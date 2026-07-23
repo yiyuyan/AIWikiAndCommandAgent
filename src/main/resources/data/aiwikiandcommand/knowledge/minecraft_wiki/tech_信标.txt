@@ -1,0 +1,478 @@
+# 页面: 信标
+# 来源: https://zh.minecraft.wiki/w/%E4%BF%A1%E6%A0%87
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 功能方块, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 教育版独有信息, 方块, 环境, 结构, 需要测试
+# 抓取时间: 2026-07-14 17:20:09
+# 原始 Wikitext 内容:
+
+{{for}}
+{{Infobox block
+|image1=Beacon.png
+|image1caption={{el|je}}
+|image2=Beacon BE.png
+|image2caption={{el|be}}
+|invimage=Beacon
+|invimage2=----
+|invimage3=Beacon BE
+|light=15
+}}
+
+{{quote|{{ruby|信标|Beacon}}！不，不是“{{ruby|培根|Bacon}}”，而是能让你的城堡更加酷炫的一道光！|骇人更新宣传海报标语}}
+
+'''信标（Beacon）'''是一种特殊的功能型[[方块]]，它被激活时可以向天空发射光柱，并持续对周围玩家施加临时的[[状态效果]]。
+
+== 生成 ==
+信标不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Glass
+|B1= Glass
+|C1= Glass
+|A2= Glass
+|B2= Nether Star
+|C2= Glass
+|A3= Obsidian
+|B3= Obsidian
+|C3= Obsidian
+|Output= Beacon 
+|type= Miscellaneous
+}}
+
+== 破坏 ==
+没有工具可以加速对信标的挖掘。
+
+{{Breaking table}}
+
+信标被破坏后会掉落自身。
+
+被[[爆炸]]破坏的信标总是会掉落。
+
+== 用途 ==
+信标无法被活塞移动。
+
+当被“激活”时，信标可提供两种功能：
+* 一条直射云端的地标性光柱，可以在很远的距离外看到。
+* 增益效果，信标赋予处于特定范围内的玩家正面的状态效果。
+
+{{in|be}}信标可以[[含水]]。
+
+=== 激活 ===
+[[File:Beacon multitype pyramid.gif|缩略图|信标基座可以由不同的矿物方块组成]]
+要激活一个信标，信标必须达成以下条件：
+* 信标的上方直至建筑高度限制处不能有除[[基岩]]外的[[遮挡形状|完全固体渲染方块]]，[[遮光玻璃]]也被视为遮挡方块。
+* 信标要在由[[铁块]]、[[金块]]、[[绿宝石块]]、[[钻石块]]或[[下界合金块]]组成的金字塔结构的顶部。
+
+==== 金字塔 ====
+[[File:Beacon Pyramid.png|缩略图|右|四种有效的金字塔结构，复杂度从右到左逐渐增加]]
+
+金字塔是激活信标的所需建筑。金字塔有4个不同的等级。金字塔层数越多，在信标界面中可选择的效果选项就会越多，作用范围也会更广。组成金字塔的矿物方块可以相同也可以不同，这不会影响信标的功能。若金字塔受损，信标会失效，但信标会保存其增益效果的设置状态，并在金字塔修复后信标重新激活时便会恢复，不需要重新消耗物品。
+{| class="wikitable" data-description="Pyramid materials"
+|+ 单个信标金字塔
+|-
+! 等级
+! 所需方块数量
+! 所需矿物数量
+! style="min-width: 125px" | 每层组成<br>（从左到右，由下至上）
+|-
+| 1
+| 9个
+| {{ItemAmount|1|17}}
+| 3×3，信标
+|-
+| 2
+| 34个
+| {{ItemAmount|4|50}}
+| 5×5，3×3，信标
+|-
+| 3
+| {{ItemAmount|1|19}}
+| {{ItemAmount|11|43}}
+| 7×7, 5×5, 3×3, 信标
+|-
+| 4
+| {{ItemAmount|2|36}}
+| {{ItemAmount|23|4}}
+| 9×9，7×7，5×5，3×3，信标
+|}
+[[File:Efficient beacon.png|缩略图|右|200px|多信标金字塔示例，这个有6个信标的金字塔使用了尽可能少的矿物方块建造的结构提供了所有6种效果]]
+多个信标可以重复利用其底下的矿物方块。合并的金字塔不需要对称。示例图片中展示了一个有6（2×3）个信标的金字塔。建造它需要244个矿物方块，它的基座为10×11。
+
+{| class="wikitable" data-description="Pyramid materials"
+|+ 2×3六联信标金字塔
+|-
+! 等级
+! 所需方块数量
+! 所需矿物数量
+! 每层组成<br>（从左到右，由下至上）
+|-
+| 1
+| 20
+| {{ItemAmount|2|52}}
+| 4×5，信标（2×3）
+|-
+| 2
+| 62
+| {{ItemAmount|8|46}}
+| 6×7，4×5，信标（2×3）
+|-
+| 3
+| {{ItemAmount|2|6}}
+| {{ItemAmount|18|54}}
+| 8×9，6×7，4×5，信标（2×3）
+|-
+| 4
+| {{ItemAmount|3|52}}
+| {{ItemAmount|34|20}}
+| 10×11，8×9，6×7，4×5，信标（2×3）
+|}
+
+=== 光柱 ===
+如果信标满足激活条件，则信标会出现垂直光柱。{{in|je}}最后一种颜色的光柱的高度是2048格。{{in|be}}光柱会渲染至Y=2048。玩家离光柱越远，光柱将渲染得越厚。
+
+光柱的可见距离与客户端设置的渲染距离相同。在渲染距离允许的情况下，光柱最远可在{{only|for=512格|je}}或{{only|for=1536格|be}}外看见。
+
+光柱只是一种视觉效果，并不影响周围的实际[[亮度]]。
+
+通过在信标方块上面放置[[染色玻璃]]、[[染色玻璃板]]、{{only|BE|EE|for=[[染色强化玻璃]]、[[染色强化玻璃板]]}}或{{only|JE|for=另一个信标（可以视为白色染色玻璃）}}可改变光柱的颜色。光柱将会根据它上方的玻璃的颜色而改变它自己的颜色：第一个染色玻璃设置光柱的初始颜色，接下来的染色玻璃会把射入的光柱颜色与自身颜色进行等比例混合向下取整并射出，颜色值与它们对应的[[染料#颜色|染料纹理漫反射颜色]]相同。若一个信标光柱的染色玻璃颜色从下到上RGB向量为<math>\{\vec{c_0},\vec{c_1},\vec{c_2},\dots,\vec{c_k}\}</math>，则最终射出的光柱颜色为<math>2^{-k}\vec{c_0}+\sum_{i=1}^k2^{i-k-1}\vec{c_i}</math>（此公式可能略有偏差，因为游戏每个步骤中都会进行向下取整，使得最终值的3个分量都小于等于此公式计算值，但每个分量的偏差至多为1）。光柱颜色总数为4928458。
+
+信标光柱不能穿过大多数[[完整方块]]，但可以穿过[[基岩]]（以允许在[[下界]]使用信标）、[[末地传送门框架]]和其他信标。
+
+{{Calculator|beaconColor}}
+
+=== 增益效果 ===
+{{see also|状态效果}}
+
+{{Filetr|Beacon GUI.png|缩略图|右|230px|信标的界面}}
+
+信标发出光柱后，玩家可以按{{ctrl|使用}}键打开其界面，通过消耗[[铁锭]]、[[金锭]]、[[绿宝石]]、[[钻石]]或[[下界合金锭]]来为一定距离内的玩家提供增益效果，每次修改效果都需要消耗1份上述矿物。消耗的物品种类不会对提供的增益效果造成影响。
+
+在界面里，放置矿物耗材到空槽里，然后通过点击显示的选项来选择一个主效果。位于4级金字塔上的信标会显示辅助效果，点击辅助效果会提供一个额外的同时存在的加成。当点击“完成”按钮（绿色的✓标志）时，矿物会被消耗，然后激活增益效果。若点击“取消”按钮（红色的×标志）则会关闭信标的界面，矿物会返还到玩家的物品栏，选定的效果也不会激活。
+
+5种主效果分别是：
+* [[迅捷]]I：增加移动速度。
+* [[挖掘加速]]I：增加破坏方块的速度。
+* [[抗性提升]]I：减少外来几乎所有的伤害（需要2级金字塔）。
+* [[跳躍提升]]I：增加跳跃距离和高度（需要2级金字塔）。
+* [[力量（狀態效果）|力量]]I：增加近战伤害（需要3级金字塔）。
+
+信标金字塔为4级时，还能够从下列两种辅助效果当中额外选择一个激活：
+* [[生命恢复]]I：恢复生命值。
+* 增加主效果等级至等级 II。
+
+==== 范围 ====
+信标的作用范围是以信标自身为中心的一片长方体区域。这个区域向下和向水平各个方向延伸的距离取决于金字塔的大小（见下表），计算公式为：<code>-{}-信标等级 × 10 + 10</code>。{{only|JE|for=向上延伸的距离为<code>-{}-效果半径 + 所在维度世界高度</code>格<ref>在主世界为384格{{needs testing|与en不一致}}，在下界、末地为256格。</ref>}}或{{only|BE|for=无限格}}。
+
+如果玩家在信标的作用范围内，信标每4秒会将被选定的状态效果按一个固定的时长给予玩家，或者将玩家已有的状态效果的剩余时长重设为此时长，1级信标中此时长为11秒，金字塔每增加一级，此时长增加2秒。计算公式为：<code>-{}-9 + 信标等级 × 2</code>。
+
+玩家与信标之间的距离不会影响效果的强度。
+
+{{el|je}}：
+
+{| class="wikitable" data-description="Pyramid effects"
+! 金字塔大小
+! style="min-width: 175px" | 效果半径（不含信标）
+! 效果持续时间（秒）
+|-
+| 1级 || 20 || 11
+|-
+| 2级 || 30 || 13
+|-
+| 3级 || 40 || 15
+|-
+| 4级 || 50 || 17
+|}
+
+{{el|be}}：
+
+{| class="wikitable" data-description="Pyramid effects"
+! rowspan="2" |金字塔大小
+! colspan="2" style="text-align: center; min-width: 175px" | 效果半径（不含信标）
+! rowspan="2" |效果持续时间（秒）
+|-
+! 向东&向南
+! 向西&向北
+|-
+| 1级 || 20 || 21 || 10
+|-
+| 2级 || 30 || 31 || 12
+|-
+| 3级 || 40 || 41 || 14
+|-
+| 4级 || 50 || 51 || 16
+|}
+
+=== 光源 ===
+信标会发出[[亮度]]等级为15的光。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table/Block/Stone/JE|continue=1}}
+{{Sound table
+|sound=Beacon activate.ogg
+|subtitle={{tp|subtitles.block.beacon.activate}}
+|id=block.beacon.activate
+|description=信标被激活
+|translationkey=subtitles.block.beacon.activate
+|source={{tp|soundCategory.block}}
+}}
+{{Sound table
+|sound=Beacon ambient.ogg
+|subtitle={{tp|subtitles.block.beacon.ambient}}
+|id=block.beacon.ambient
+|description=激活后的循环音效
+|translationkey=subtitles.block.beacon.ambient
+|source={{tp|soundCategory.block}}
+}}
+{{Sound table
+|sound=Beacon deactivate.ogg
+|subtitle={{tp|subtitles.block.beacon.deactivate}}
+|id=block.beacon.deactivate
+|translationkey=subtitles.block.beacon.deactivate
+|description=信标失效或在激活时被破坏
+|source={{tp|soundCategory.block}}
+}}
+{{Sound table
+|sound=Beacon power1.ogg
+|sound2=Beacon power2.ogg
+|sound3=Beacon power3.ogg
+|subtitle={{tp|subtitles.block.beacon.power_select}}
+|id=block.beacon.power_select
+|translationkey=subtitles.block.beacon.power_select
+|description=选择信标的效果
+|source={{tp|soundCategory.block}}
+|foot=1}}
+
+
+{{el|be}}：
+{{Sound table/Block/Glass/BE|continue=1}}
+{{Sound table
+|bedrock=1
+|sound=block.beacon.activate.wav
+|source=方块
+|description=信标被激活
+|id=beacon.activate
+|typeid=beacon.activate
+|soundvolume
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=block.beacon.ambient.wav
+|source=方块
+|description=激活后的循环音效
+|id=beacon.ambient
+|typeid=beacon.ambient
+|soundvolume
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=block.beacon.deactivate.wav
+|source=方块
+|description=信标失效或在激活时被破坏
+|id=beacon.deactivate
+|typeid=beacon.deactivate
+|soundvolume
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=block.beacon.power1.wav
+|sound2=block.beacon.power2.wav
+|sound3=block.beacon.power3.wav
+|source=方块
+|description=选择信标的效果
+|id=beacon.power
+|typeid=beacon.power
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+; 方块
+{{ID table
+|generatetranslationkeys=java
+|Beacon
+|spritetype=block
+|nameid=beacon
+|blocktags={{GameTag|block|beacon}}
+|showblocktags=je
+|foot=1}}
+
+; 方块实体
+{{ID table
+|Beacon
+|spritetype=block
+|nameid=beacon
+|foot=1}}
+
+{{el|be}}：
+; 方块
+{{ID table
+|generatetranslationkeys=bedrock
+|Beacon
+|spritetype=block
+|nameid=beacon
+|foot=1}}
+
+; 方块实体
+{{ID table
+|Beacon
+|spritetype=block
+|nameid=Beacon |notnamespaced=1
+|foot=1}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+信标有与其相关联的方块实体，它保存了关于信标的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{load achievements|the-beaconator}}
+
+== 进度 ==
+{{load advancements|prefix=nether|create_beacon;all_potions;create_full_beacon;all_effects}}
+
+== 视频 ==
+{{bv|BV19t411T7do}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w32a|[[File:Beacon JE1.png|32px]] 加入了“Work in Progress”（建设中）方块。
+|[[File:Beacon pyramid revision 1.png|48px]] 此时“Work in Progress”方块已经有了和现在的信标几乎一样的作用。
+|由于漏洞，此时可以只用1个信标获得2个不同的主效果。<ref name="MC-174630"/>}}
+|{{HistoryLine|||dev=12w34a|从创造模式物品栏中移除了“Work in Progress”方块。}}
+|{{HistoryLine|||dev=12w36a|将“Work in Progress”方块重命名为“Beacon”（信标），并将其重新加入了创造模式物品栏，也可以合成来获得它。
+|[[File:Beacon JE2.gif|32px]] 更改了信标的纹理。}}
+|{{HistoryLine|||dev=12w38a|[[File:Beacon JE3.png|32px]] 再次更改了信标的纹理。
+|[[File:Beacon pyramid revision 3.gif|48px]] 更改了信标光柱的纹理，从一个半透明的平滑光柱变成一个不透明的纹理。}}
+|{{HistoryLine|||dev=12w40a|[[File:Beacon JE4.png|32px]] 再次更改了信标的纹理。
+|[[File:Beacon pyramid revision 4.gif|48px]] 再次更改了信标光柱的纹理。}}
+|{{HistoryLine|||dev=12w40b|信标光柱不再在小而短的渲染距离处出现故障。}}
+|{{HistoryLine||1.5|dev=13w05a|信标作用范围从16/24/32/40格增加到20/30/40/50格。
+|信标效果向上延伸到世界高度限制（Y{{=}}256）。}}
+|{{HistoryLine||1.6.1|dev=13w23a|生命恢复效果被稍微削弱，因此信标给予的生命恢复效果也被削弱了。}}
+|{{HistoryLine|||dev=13w24a|在12w36a到12w37a中使用的信标水晶纹理随着资源包更新被删除。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入成就“信标工程师”，该成就可以通过在4级的矿物方块金字塔上放置一个信标来获得。}}
+|{{HistoryLine||1.8|dev=14w29a|信标现在会显示破坏动画。}}
+|{{HistoryLine|||dev=2014年8月5日|slink={{tweet|Dinnerbone|496649440896503808}}|Dinnerbone在推特上发布了一张展示了有颜色的信标光柱的截图。这种颜色似乎是在信标光柱通过染色玻璃时形成的。}}
+|{{HistoryLine|||dev=14w32a|信标光柱现在通过[[染色玻璃]]时，其颜色会发生改变。}}
+|{{HistoryLine|||dev=2014年8月7日|slink={{tweet|Dinnerbone|497367641900609536}}|Dinnerbone在推特上表示，信标光柱现在可以穿过那些只能稍微挡住光线的方块了。}}
+|{{HistoryLine|||dev=14w32b|信标光柱现在可穿过不是100%挡住光线的方块。这使得信标光柱可以穿过水和熔岩。
+|下界和末地的信标只检查Y{{=}}127以下的方块，同时信标光柱也只渲染到这个高度。}}
+|{{HistoryLine||1.8.2|dev=pre5|基岩不再阻挡信标的激活和光柱。
+|下界和末地的信标光柱不再只渲染到世界高度（Y{{=}}127），而是建筑高度限制（Y{{=}}255）。}}
+|{{HistoryLine||1.9|dev=15w31a|信标现在在[[末地船]]中生成。}}
+|{{HistoryLine|||dev=15w32c|信标不再出现在末地船中，取而代之的是[[南瓜]]。}}
+|{{HistoryLine|||dev=15w47a|新增标签{{cd|PaymentItem}}以存储改变信标效果使用的消耗品。
+|现在当信标被破坏或退出交互界面时，不再掉落放入的消耗品。
+|信标现在可以和漏斗交互。}}
+|{{HistoryLine|||dev=15w47b|效果时长与金字塔等级相关（之前是固定9秒）。}}
+|{{HistoryLine|||dev=15w49a|回退了15w47a中的所有更改。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID由{{cd|Beacon}}变为{{cd|beacon}}。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]前，方块的数字ID为138。}}
+|{{HistoryLine|||dev=18w19a|信标现在有了音效。}}
+|{{HistoryLine|||dev=18w21a|信标的稀有度从常见改为稀有。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Beacon JE5.png|32px]] 更改了信标的纹理。}}
+|{{HistoryLine|||dev=18w44a|[[File:Beacon JE6.png|32px]] 再次更改了信标的纹理。}}
+|{{HistoryLine|||dev=19w02a|现在[[旁观模式]]下的玩家不再可以与信标交互。<ref>{{bug|MC-73604|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=19w14a|信标光柱不再停留在建筑高度限制处。}}
+|{{HistoryLine||1.15|dev=19w41a|信标光柱现在不再从内部可见。}}
+|{{HistoryLine||1.16|dev=20w07a|下界合金块现在可以激活信标，如同钻石块、绿宝石块、金块和铁块一样。
+|下界合金锭现在可以用来修改信标的效果。}}
+|{{HistoryLine|||dev=20w10a|由于[[灵魂沙]]可以通过与[[猪灵]]以物易物来获得，信标成为可再生资源。}}
+|{{HistoryLine||1.17|dev=21w07a|将信标光柱的最远渲染距离由256格提升至1343格，但其仍然受制于渲染距离。}}
+|{{HistoryLine||1.20.2|dev=23w32a|修改了信标的保存状态效果的格式，状态效果现在不再使用数字ID。}}
+|{{HistoryLine||1.21|dev=24w21a|修改了信标光柱的着色算法。在此之前，光柱颜色以浮点数计算，总数为500万左右<ref>使用整数取整减少计算量可得出数量下限为4928458，使用凸包检测法可得出数量上限为5043528。</ref>。}}
+|{{HistoryLine||1.21.5|dev=25w05a|信标及其光柱的渲染距离现在可以超过16个区块，直到客户端设置的渲染距离。
+|玩家离光柱越远，光柱将渲染得越厚，以使在远处也能发现光柱。
+|信标光柱的最大渲染高度从1024格提升到了2048格。}}
+|{{HistoryLine||26.2|dev=pre-1|现在不再可以只用1个信标获得2个不同的主效果。<ref name="MC-174630">{{bug|MC-174630|||Fixed}}</ref>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 4|[[File:Beacon BE1.png|32px]] 加入了信标。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|穿过[[染色玻璃]]或[[染色玻璃板]]的信标光柱现在会变更颜色。}}
+|{{HistoryLine||1.5.0|dev=1.5.0.4|信标现在有了音效。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Beacon BE2.png|32px]] 更改了信标的纹理。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|下界合金块现在可以激活信标，如同钻石块、绿宝石块、金块和铁块一样。
+|下界合金锭现在可以用来修改信标的效果。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.20|信标现在所给予的状态效果产生的粒子效果是半透明的。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.21|信标的稀有度由常见改为稀有。}}
+|{{HistoryLine|||dev=1.21.30.23|现在信标不再是红石导体。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.21|现在信标光柱的最大渲染高度为2048格。}}
+|{{HistoryLine|||dev=1.21.90.26|现在已加载的区块中的信标发出的光柱总是可见。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|[[File:Beacon JE4.png|32px]] 加入了信标。}}
+|{{HistoryLine||xbox=TU25|xbone=CU14|ps3=1.17|psvita=1.17|ps4=1.17|穿过[[染色玻璃]]或[[染色玻璃板]]的信标光柱现在会变更颜色。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|调整作用范围的垂直距离以与水平距离一致。}}
+|{{HistoryLine||xbox=TU69|ps3=1.76|psvita=1.76|ps4=1.76|wiiu=Patch 38|信标现在有了音效。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Beacon JE6.png|32px]] 更改了信标的纹理。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||1.3.12|[[File:Beacon JE4.png|32px]] 加入了信标。}}
+}}
+
+== 你知道吗 ==
+* 信标纹理大小是16×16，但只渲染中间10×10的区域。
+* 可以在激活的信标的下面看到信标的光柱。这现象最初被报告为一个漏洞，但这个漏洞被标记为“不予修复”，尽管已经提供了对该漏洞的修复-{}-方法。<ref>{{bug|MC-106124|||Won't Fix}}</ref>
+* 选择信标的效果所发出的音效听起来像是慢倍速的使用附魔台附魔物品的音效。
+
+== 画廊 ==
+<gallery>
+File:Beacon BlockTower.png|信标矿物块塔
+File:Two beacons front.png|两个用不同矿物块搭建的信标基座
+File:Two beacons top.png|前一张图的俯视图
+File:BeaconTopMIME.png|信标光柱顶部
+File:BeaconLightChange.png|使用品红色染色玻璃改变信标光柱的颜色
+</gallery>
+
+=== 纹理更新前 ===
+<gallery>
+File:Beacon Display.png|12w40a至纹理更新前的信标纹理
+File:Looking up a beacon's beam.png|Java版纹理更新前和基岩版信标光柱里的视角
+File:Beam passing through glass and beacon.png|从1个信标延伸出来的两道光柱，一道穿过玻璃，另外一道穿过一个信标方块
+File:Red Sandstone Coloured Beacon.png|Nathan Adams发布的关于彩色信标光柱的第一张照片
+File:Beacon Spectrum.png|由彩色信标光柱创建的完整的可见的信标光柱颜色光谱
+File:Beacon Greyscale.png|一个信标光柱灰度谱
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks}}
+{{Navbox environment}}
+
+[[Category:功能方块]]
+[[Category:结构]]
+
+[[cs:Maják]]
+[[de:Leuchtfeuer]]
+[[el:Φάρος]]
+[[en:Beacon]]
+[[es:Faro]]
+[[fr:Balise]]
+[[hu:Jelzőfény]]
+[[it:Faro]]
+[[ja:ビーコン]]
+[[ko:신호기]]
+[[lzh:烽火臺]]
+[[nl:Baken]]
+[[pl:Magiczna latarnia]]
+[[pt:Sinalizador]]
+[[ru:Маяк]]
+[[uk:Маяк]]

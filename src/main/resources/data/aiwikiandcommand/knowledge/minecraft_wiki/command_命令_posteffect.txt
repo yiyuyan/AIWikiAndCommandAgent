@@ -1,0 +1,63 @@
+# 页面: 命令/posteffect
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/posteffect
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Added in development|jev=26.3}}
+{{Infobox command
+|name=posteffect
+|oplevel=2
+}}
+
+管理[[玩家]]使用的[[着色器#后处理管线|后处理效果]]。
+
+== 语法 ==
+: {{cmd|posteffect add <targets> <posteffect>|link=none|/=0}}
+:: 添加后处理效果。
+: {{cmd|posteffect clear <targets>|link=none|/=0}}
+:: 清除所有后处理效果。
+: {{cmd|posteffect list <target>|link=none|/=0}}
+:: 列出所有后处理效果。
+: {{cmd|posteffect remove <targets> <posteffect>|link=none|/=0}}
+:: 移除后处理效果。
+
+== 参数 ==
+{{argument|targets|entity}}
+: 指定单个或多个玩家。
+: {{arg desc|je=entity|amount=multiple|type=player}}
+{{argument|target|entity}}
+: 指定单个玩家。
+: {{arg desc|je=entity|amount=single|type=player}}
+{{argument|posteffect|resource_location}}
+: 指定后处理效果，游戏内已有{{cd|minecraft:blur}}（模糊）、{{cd|minecraft:creeper}}（苦力怕）、{{cd|minecraft:entity_outline}}（实体轮廓）、{{cd|minecraft:invert}}（颜色反转）和{{cd|minecraft:spider}}（蜘蛛）。
+: {{arg desc|je=resource_location}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|{{cd|<target>}}或{{cd|<targets>}}未能选中至少一个在线玩家|fail}}
+{{Result table|cmd=/... add ...|玩家已有指定的{{cd|<posteffect>}}}}
+{{Result table|cmd=/... clear ...|玩家没有任何后处理效果}}
+{{Result table|cmd=/... remove ...|玩家没有指定的{{cd|<posteffect>}}}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/... list ...|执行成功|1|1|玩家拥有的后处理效果数}}
+{{Output table|cmd=other|执行成功|1|1|影响的玩家数}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||26.3|dev=snapshot-3|加入了{{cmd|posteffect|link=none}}命令。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[en:Commands/posteffect]]
+[[ru:Команды консоли/posteffect]]

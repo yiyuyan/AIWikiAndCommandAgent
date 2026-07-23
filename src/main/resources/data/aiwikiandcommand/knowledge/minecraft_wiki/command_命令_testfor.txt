@@ -1,0 +1,63 @@
+# 页面: 命令/testfor
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/testfor
+# 分类: 命令, 基岩版独有特性, 教育版独有特性, 过时内容
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock|education}}
+{{outdated|edition=java}} 
+{{Infobox command
+|name=testfor
+|oplevel=1
+|cheat=1
+}}
+
+检测并统计符合指定条件的实体（玩家、生物、物品等）。
+
+== 语法 ==
+: <code>testfor <victim: target></code>
+
+== 参数 ==
+{{argument|be=1|victim: target|CommandSelector<Actor>}}
+: 指定计数的目标。
+: {{arg desc|be=CommandSelector<Actor>}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|<code>victim: target</code>未能选中一个或多个实体（指定的玩家必须在线上）||fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|执行失败|0}}
+{{Output table|执行成功|指定实体的数量}}
+{{Output table}}
+
+== 示例 ==
+* 检测Alice是否在线上：{{cmd|testfor Alice|link=none}}
+* 统计圆心为(0,64,0)、半径为3米的区域内的生存玩家数量：{{cmd|testfor <nowiki>@a[x=0,y=64,z=0,r=3,m=0]</nowiki>|link=none}}
+* 统计圆心为(0,64,0)、半径为20米的区域内的僵尸数量：{{cmd|testfor <nowiki>@e[x=0,y=64,z=0,r=20,type=zombie]</nowiki>|link=none}}
+* 检测掉落物：{{cmd|testfor <nowiki>@e[type=item]</nowiki>|link=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w03a|加入了{{cmd|testfor|link=none}}。}}
+|{{HistoryLine||1.8|dev=14w02a|加入了{{cd|dataTag}}变量。
+|{{cmd|testfor|link=none}}不再为命令方块独用。}}
+|{{HistoryLine||1.13|dev=17w45a|移除了{{cmd|testfor|link=none}}，并加入{{cmd|execute if entity}}取代其功能。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|testfor|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/testfor]]
+[[en:Commands/testfor]]
+[[es:Comandos/testfor]]
+[[ja:コマンド/testfor]]
+[[pt:Comandos/testfor]]
+[[ru:Команды консоли/testfor]]

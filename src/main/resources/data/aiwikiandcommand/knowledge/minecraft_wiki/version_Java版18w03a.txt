@@ -1,0 +1,86 @@
+# 页面: Java版18w03a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8818w03a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:20
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=18w03a
+|image=18w03a.png
+|image2=Java Edition 18w03a Simplified.png\Java Edition 18w03a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2018年1月17日
+|jsonhash=fd5fb7fae09fac64397224517ab529e3bbfa3e70
+|clienthash=b9e9cfa4e6019fa1d4aa7b368366b9d8979db2a1
+|serverhash=713a291a4da5cad056964c1fcda8c888e154eb73
+|parent=1.13
+|prevparent=1.12.2
+|prev=18w02a
+|next=18w03b
+|nextparent=1.13.1
+}}<onlyinclude>
+
+'''18w03a'''是[[Java版1.13]]的第14个快照，发布于2018年1月17日<ref>{{snap|18w03a|January 17, 2018}}</ref>，更新了游戏内的翻译文件，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''翻译'''
+* 使用了Crowdin的新翻译。
+
+== 更改 ==
+=== 生物 ===
+'''[[马]]'''
+* 再次更新了马的模型。
+
+=== 命令格式 ===
+'''常规'''
+* 改善了命令的解析与数据包的载入。
+* 改善了命令的执行。
+
+'''{{cmd|debug}}'''
+* 加入了{{cmd|debug}}。
+'''{{cmd|data get}}'''
+* {{cmd|data get}}的<code>-{}-标签路径</code>现在也可以非数字标签使用。
+** 查询字串将回传该字串的字元数量作为命令的<code>result</code>。
+** 查询列表将回传该列表的元素数量作为命令的<code>result</code>。
+** 查询复合标签将回传该复合标签的标签数量作为命令的<code>result</code>。
+'''{{cmd|particle}}'''
+* 加入了{{cmd|particle <粒子名称> <目标位置>}}作为该命令的一个简写。
+** <code>指定位置</code>、<code>-{}-飞行速度</code>和<code>-{}-粒子数量</code>将预设为0。
+
+== 修复 ==
+{{fixes|fixedin=18w03a|prefix=Minecraft|showdesc=1
+|;dev
+|122196|语言选项一片空白。
+|123285|使用调试用途的{{cd|log4j}}配置启动游戏时游戏崩溃。
+|124072|{{cmd|execute|link=none}}命令的性能问题。
+|;previous
+|124113|末影龙Boss栏上显示的名字不正确。
+|124115|{{cmd|summon|link=none}}命令的候选提示中会出现<code>minecraft:player</code>和<code>minecraft:fishing_bobber</code>。
+|124116|执行{{cmd|execute positioned as <entity> run <command>|link=none}}命令时返回意外错误。
+|124120|执行{{cmd|execute rotated as|link=none}}命令时返回意外错误。
+|124122|{{cd|.zip}}格式的数据包不能被加载。
+|124124|{{cmd|teleport ... facing ...|link=none}}命令不能正常工作。
+|124138|在带<code>facing</code>参数的{{cmd|execute|link=none}}命令中使用局部坐标（例如：<code>^ ^ ^5</code>）依旧需要指定实体。
+|124150|与实体相关的服务器警告消息输出的是<code>TextComponent</code>或<code>TranslatableComponent</code>对象而不是实体名称。
+|124179|翻译文本显示的是经UTF-8编码后的内容。
+|124222|每次执行只包含<code>run</code>子命令的{{cmd|execute store|link=none}}命令或{{cmd|execute (if/unless) score|link=none}}时，其实体选择器都至少会选中一个实体。
+|124256|<code>reducedDebugInfo</code>游戏规则需要重新登录才能生效。
+|124286|以NBT作为数据的<code>show_entity</code>的悬停事件（Hover event）会导致游戏崩溃。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:18w03a]]
+[[en:Java Edition 18w03a]]
+[[es:Java Edition 18w03a]]
+[[fr:Édition Java 18w03a]]
+[[ja:Java Edition 18w03a]]
+[[nl:18w03a]]
+[[pt:Edição Java 18w03a]]
+[[ru:18w03a (Java Edition)]]

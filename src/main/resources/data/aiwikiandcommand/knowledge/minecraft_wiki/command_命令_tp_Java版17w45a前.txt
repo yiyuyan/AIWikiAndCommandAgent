@@ -1,0 +1,83 @@
+# 页面: 命令/tp/Java版17w45a前
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/tp/Java%E7%89%8817w45a%E5%89%8D
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{for|[[Java版1.13]]及以后的命令|命令/teleport}}{{missing information|缺少输出}}
+{{move|命令/tp/Java版1.13前}}
+{{outdated feature|edition=java}}
+{{Infobox command
+|name=tp
+|oplevel=2
+}}
+
+传送实体（玩家、生物等）到指定位置，并可选地修改其朝向。
+
+此命令与{{cmd|teleport}}之间的主要差别是：{{cmd|tp|link=none}}使用基于传送目标当前位置的相对坐标，而{{cmd|teleport|link=none}}使用基于命令执行位置的相对坐标。
+并且，大多数命令只能影响已经生成的区块，但是{{cmd|tp|link=none}}却可以将实体传送到尚未生成的区块中。若被传送的目标是玩家，则传送后玩家所在的区块及附近的区块会自动开始生成。
+
+== 语法 ==
+: <code>-{}-tp <''目的地实体''></code>
+: <code>-{}-tp <''传送目标''> <''目的地实体''></code>
+: <code>-{}-tp <''x''> <''y''> <''z''> [<''Y旋转角度''> <''X旋转角度''>]</code>
+: <code>-{}-tp <''传送目标''> <''x''> <''y''> <''z''> [<''Y旋转角度''> <''X旋转角度''>]</code>
+
+== 参数 ==
+<code>-{}-''传送目标''</code>
+: 指定要传送的实体。必须为玩家名称、[[目标选择器]]或[[UUID]]。
+: 若被指定的待传送实体之中，存在所处维度与目的地处世界维度不相同的情况，则这一部分实体的传送会失败，其余实体传送成功。
+
+<code>-{}-''目的地实体''</code>
+: 指定传送的目的地实体。必须为玩家名称、[[目标选择器]]或[[UUID]]。
+
+<code>''x y z''</code>
+: 传送目标至指定坐标。指定坐标的<code>''x''</code>和<code>''z''</code>必须位于-30,000,000至30,000,000之间（不含），<code>''y''</code>必须位于-4096至4096（包含）。可以使用波浪号（<code>~</code>）来指定基于传送目标当前位置的[[相对坐标]]——这是一种特殊情况，大多数情况下，波浪号使用基于命令执行位置的相对坐标。如果需要基于命令执行位置的传送，可以使用{{cmd|teleport}}命令。
+
+<code>-{}-''Y旋转角度''</code>
+: 指定水平旋转角度（正北方为-180.0，正东为-90.0，正南为0.0，正西为90.0，正北以西为179.9，之后回到-180.0）。可以使用波浪号（<code>~</code>）指定基于当前旋转角度的相对偏移。
+
+<code>''-{}-X旋转角度''</code>
+: 指定垂直旋转角度（竖直上方为-90.0，至竖直下方90.0）。可以使用波浪号（<code>~</code>）指定基于当前旋转角度的相对偏移。
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|<code>-{}-''传送目标''</code>未能选中至少一个实体（指定的玩家必须在线）|fail}}
+{{Result table|<code>-{}-''目的地实体''</code>未能选中单个实体（指定的玩家必须在线）}}
+{{Result table|目的地坐标的''x''或''z''超出[-30000000, 30000000)或''y''超出(-20000000, 20000000]||success}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 示例 ==
+: 将执行实体传送到Alice的位置： <code>tp @s Alice</code>
+: 将所有距执行实体10格内的实体传送到自身上方第5格的位置，且向左旋转25度：<code>tp @e[r=10] ~ ~5 ~ ~-25 ~</code>
+: 将所有玩家传送到执行实体的位置： <code>tp @a @s</code>
+: 将执行实体传送到自身上方第200格的位置：<code>tp ~ ~200 ~</code>
+: 将执行实体传送到x=100、z=100处，高度为传送前位置上方第3格：<code>tp 100 ~3 100</code>
+: 将距执行实体最近的玩家在其当前位置处向右旋转10度：<code>tp @p ~ ~ ~ ~10 ~</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.18a|加入了{{cmd|teleport|link=none}}。}}
+|{{HistoryLine||服务器1.7|link=Java版Classic服务器1.7|加入了{{cmd|tp|link=none}}，是{{cmd|teleport|link=none}}的别称。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|移除了所有命令。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.16_01|重新加入了{{cmd|tp|link=none}}。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w25a|现在允许玩家传送至指定坐标。}}
+|{{HistoryLine||1.8|dev=14w03a|加入了朝向参数。}}
+|{{HistoryLine||1.9.3|dev=pre1|{{cmd|tp|link=none}}不再能将玩家传送到Y{{=}}-512到512以外的地方。}}
+|{{HistoryLine||1.10|dev=16w21b|Y轴限制现在增加到-4096到4096。
+|相对坐标现在基于命令执行者，而非受传送实体。}}
+|{{HistoryLine|||dev=pre1|将行为恢复到16w20a及其以前版本的。}}
+|{{HistoryLine||1.13|dev=17w45a|{{cmd|tp|link=none}}与{{cmd|teleport}}不再不同，并且成为{{cmd|teleport}}的别称。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[en:Commands/tp/Before_Java_Edition_17w45a]]
+[[ja:コマンド/tp/Java Edition 17w45a以前]]

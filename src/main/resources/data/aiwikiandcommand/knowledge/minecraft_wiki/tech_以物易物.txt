@@ -1,0 +1,159 @@
+# 页面: 以物易物
+# 来源: https://zh.minecraft.wiki/w/%E4%BB%A5%E7%89%A9%E6%98%93%E7%89%A9
+# 分类: Java版独有信息, 基岩版独有信息, 机制, 游戏内容, 需要验证
+# 抓取时间: 2026-07-14 17:20:02
+# 原始 Wikitext 内容:
+
+{{for|适用于[[村民]]的物品交换机制|交易}}
+{{Filetr|Minecraft Bartering Guide.png|right|400px}}
+{{relevant tutorial|以物易物}}
+'''以物易物（Bartering）'''是玩家用[[金锭]]与[[猪灵]]交换物品的交互机制。
+
+== 机制 ==
+玩家对不处于[[猪灵#敌对状态的程度|重度敌对]]且不在端详物品的成年猪灵{{ctrl|使用}}金锭，或使成年猪灵捡起金锭的[[物品实体]]，可与其进行以物易物。成年猪灵会先手持金锭端详{{only|for=6秒|je|short=1}}或{{only|for=8秒|be|short=1}}，再丢出交换物，随后即可进行下一次以物易物。
+
+成年猪灵也会捡起并端详其他和金有关的物品，但只有金锭才能触发以物易物。幼年猪灵无法进行以物易物，它们只会在捡起并端详金锭后将其收起来并逃走。[[猪灵蛮兵]]不会捡起{{only|je|for=除[[金斧]]外的}}任何金质物品，也不能进行以物易物。[[僵尸猪灵]]不会被金质物品吸引，也不能进行以物易物。
+
+猪灵在端详金锭时不会逃离[[灵魂火]]及相关方块、[[僵尸疣猪兽]]和[[僵尸猪灵]]。如在此过程中被攻击，猪灵将会直接收起金锭停止以物易物且不会给予任何物品，此时要在短时间的等待之后才能再次进行以物易物。
+
+如果猪灵在以物易物的过程中转化为僵尸猪灵，其手中的金锭会{{only|je|for=掉落}}或{{only|be|for=保留在手中}}。
+
+{{in|be}}如果在猪灵端详金锭时因检查到特定方块（例如[[箱子]]、[[下界金矿石]]）的变化（摧毁、被[[活塞]]或[[黏性活塞]]移动等）而被激怒，其会立刻完成以物易物。
+
+以物易物机制由<code>minecraft:gameplay/piglin_bartering</code>的[[战利品表]]控制。若将[[游戏规则]]{{gamerule|mob_griefing|mobGriefing}}设置为<code>false</code>，玩家将只能通过对猪灵{{ctrl|使用}}金锭来与之进行以物易物。
+
+{{Anchor|猪灵}}
+
+=== 交换物品 ===
+猪灵拿到金锭端详完毕后，会按照一定概率向玩家（若距离玩家{{verify|for=过远}}或视线被遮挡，则向随机方向）扔出以下物品之一：
+
+{| class="wikitable sortable" style="text-align:center" data-description="Piglin barters"
+|-
+! 物品
+! 数量
+! 概率
+! 每件物品所需金锭<br>（平均值）{{note|<math>\frac{1}{0.5 \times (\text{数量最小值} + \text{数量最大值}) \times \text{概率}}</math>}}
+|-
+| {{ItemLink|Enchanted Book}}{{note|附有随机等级的[[灵魂疾行]]魔咒。|name=enchantment}}
+| rowspan="6" | 1
+| {{frac|5|469}}<br>（~1.07%）
+|93.8
+|-
+| {{ItemLink|Iron Boots}}{{note|name=enchantment}}
+| rowspan = 3 | {{frac|8|469}}<br>（~1.7%）
+| rowspan="3" |58.625
+|-
+| {{ItemLink|Splash Potion of Fire Resistance}}
+|-
+| {{ItemLink|Potion of Fire Resistance}}
+|-
+| {{ItemLink|Water Bottle}}
+| rowspan="4" |{{frac|10|469}}<br>（~2.13%）
+| rowspan="2" |46.9
+|-
+| {{BlockLink|Dried Ghast}}
+|-
+| {{ItemLink|Iron Nugget}}
+| 10–36
+|2.039
+|-
+| {{ItemLink|Ender Pearl}}
+| 2–4
+|15.63
+|-
+| {{ItemLink|String}}
+| 3–9
+| rowspan="2" |{{frac|20|469}}<br>（~4.26%）
+|3.908
+|-
+| {{ItemLink|Nether Quartz}}
+| 5–12
+|2.759
+|-
+| {{BlockLink|Obsidian}}
+| 1
+| rowspan="9" |{{frac|40|469}}<br>（~8.53%）
+|11.725
+|-
+| {{BlockLink|Crying Obsidian}}
+| 1–3
+|5.8625
+|-
+| {{ItemLink|Fire Charge}}
+| 1
+|11.725
+|-
+| {{ItemLink|Leather}}
+| 2–4
+|3.908
+|-
+| {{BlockLink|Soul Sand}}
+| rowspan="2" | 2–8
+| rowspan="2" |2.345
+|-
+| {{ItemLink|Nether Brick}}
+|-
+| {{only|Je|for={{ItemLink|Spectral Arrow}}}}<br>{{only|be|for={{ItemLink|Arrow}}}}
+| 6–12
+|1.303
+|-
+| {{BlockLink|Gravel}}
+| rowspan="2" | 8–16
+| rowspan="2" |0.977
+|-
+| {{BlockLink|Blackstone}}
+|}
+{{notelist}}
+
+== 历史 ==
+{{see also|以物易物/旧战利品表}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w07a|加入了以物易物。}}
+|{{HistoryLine|||dev=20w09a
+|为战利品表加入了哭泣的黑曜石、线、[[抗火药水]]和[[下界合金锄]]，移除了[[灵魂沙]]、[[蘑菇]]、[[绯红菌]]、[[燧石]]、[[腐肉]]和[[生猪排]]。
+|调整了以物易物的战利品的获得概率。
+|由于漏洞，每次以物易物所得的物品都以1-5个为一组。<ref>{{bug|MC-173165|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=20w10a|以物易物现在会给予正确数量的物品。
+|为战利品表加入了[[铁粒]]和[[灵魂沙]]，移除了[[诡异菌岩]]、[[诡异菌]]和[[菌光体]]。
+|再次调整了以物易物的战利品获得概率。}}
+|{{HistoryLine|||dev=20w11a|为战利品表加入了带有[[灵魂疾行]]魔咒的[[附魔书]]及[[铁靴子]]。}}
+|{{HistoryLine|||dev=20w13a|轻微上调了[[灵魂疾行]]附魔物品的获得概率。}}
+|{{HistoryLine|||dev=20w20a|从战利品表中移除了[[下界合金锄]]。}}
+|{{HistoryLine||1.16.2|dev=20w28a|为战利品表加入[[黑石]]、[[光灵箭]]和[[水瓶]]，移除了[[荧石粉]]和[[岩浆膏]]。
+|调整了交换物的概率和数量。}}
+|{{HistoryLine||1.21.6|dev=25w18a|为战利品表加入了[[失水恶魂]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|加入了以物易物。
+|此时，手持金锭与成年猪灵互动只会获得[[黑曜石]]或[[打火石]]，而把金锭扔给成年猪灵只会获得[[下界疣块]]。}}
+|{{HistoryLine|||dev=1.16.0.57|更新了以物易物的战利品表以与Java版相统一。
+|成年猪灵现在会在端详完金锭后再给予玩家交换物，而不再会在捡起金锭时立即将交换物丢出。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.54|调整了一些物品的权重使其和[[Java版1.16.2]]的相匹配，除了[[光灵箭]]。
+|[[黑石]]、[[箭]]、[[水瓶]]和[[下界砖]]现在可以通过以物易物获得。
+|[[下界合金锄]]、[[荧石粉]]、[[岩浆膏]]和[[下界砖块]]不再能通过以物易物获得。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.21|[[失水恶魂]]现在可以通过以物易物获得。}}
+}}
+
+== 参见 ==
+* [[Tutorial:以物易物]]
+* [[猪灵]]
+* [[金锭]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:机制]]
+
+[[en:Bartering]]
+[[es:Trueque]]
+[[fr:Piglin#Troc]]
+[[it:Baratto]]
+[[ja:物々交換]]
+[[ko:물물교환]]
+[[lzh:易]]
+[[pt:Troca]]
+[[ru:Товарообмен]]
+[[uk:Бартер]]

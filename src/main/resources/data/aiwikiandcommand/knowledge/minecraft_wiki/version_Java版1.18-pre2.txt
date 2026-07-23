@@ -1,0 +1,104 @@
+# 页面: Java版1.18-pre2
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.18-pre2
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:28
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=1.18-pre2
+|image=1.18-pre2.png
+|image2=Java Edition 1.18-pre2 Simplified.png\Java Edition 1.18-pre2 Traditional.png\Java Edition 1.18-pre2 Traditional HK.png
+|edition=Java
+|type=Pre-release
+|date=2021年11月16日
+|jsonhash=4b41cd8c3f89ad1a212e24e31a498c205ed7fdb1
+|clienthash=6b88f1734c80775f59416db3599c2a4333558ca4
+|clientmap=05dd4363ea8e18e8f6eb57a43e1a6e01b3a651da
+|serverhash=c203586f5d2c02b417f0e104b65a8e5e7625b2f8
+|servermap=e1599803356325af029e806eb7db716c5047fc52
+|parent=1.18
+|prevparent=1.17.1
+|prev=1.18-pre1
+|next=1.18-pre3
+|nextparent=1.18.1
+}}<onlyinclude>
+
+'''1.18-pre2'''是[[Java版1.18]]的第2个预发布版，发布于2021年11月16日<ref>{{article|minecraft-1-18-pre-release-2|Minecraft 1.18 Pre-Release 2|November 16, 2021}}</ref>，把启动游戏所需Java版本从16提升至17，并修复了一些漏洞。
+
+== 更改 ==
+=== 非生物实体 ===
+'''[[矿车]]'''
+* 移除了底部多余的棕色纹理。
+
+=== 常规 ===
+'''[[闪烁标语]]'''
+* 将“Now Java 16!”闪烁标语改为“Java 16 + 1 = 17!”。
+
+'''Java版本'''
+* 现在启动游戏要求的最低Java版本为17。
+
+== 修复 ==
+{{fixes|fixedin=1.18 Pre-release 2|showdesc=1
+|;old
+|32813|游戏中会出现浮空水和洞穴上的浮空熔岩/洞穴雕刻器不会更新水。
+|206303|矿车的底部有旧纹理。
+|217038|溶洞的大型结构可以生成在溶洞外。
+|217056|一些高速度粒子会导致游戏卡顿或卡死。
+|220061|画的背面纹理是镜像的。
+|223917|着火的山羊不会尝试寻路到水中。
+|226689|制作人员名单中，Albert Pastore的名字是灰色的，且缩进不正确。
+|227163|制作人员名单中，“IT Managers”写成了“IT Manager”。
+|227204|新制作人员名单中，“Explore, dream, discover”这句引言不再被显示。
+|227206|制作人员名单中，有一些名字中使用的单引号或双引号使用的是全角符号。
+|227231|制作人员名单中，Steven Silvester的名字可能被拼错了。
+|227239|制作人员名单中，Elizabeth Batson的公司名称被不正确大写。
+|227329|制作人员名单中，“Inc”一词的用法和标点仍然不一致。
+|231782|制作人员名单中，Frank Criscione的那一行缺少了一个左括号。
+|237608|如果服务器启动过程中，客户端连接失败，服务器地址会被显示出来。
+|;dev
+|236756|生物群系独有生物的生成率降低。
+|236858|会使玩家出生在海洋中间的种子会导致卡顿。
+|237275|用自定义生物群系创建单一生物群系世界时游戏崩溃/空指针异常崩溃：不能调用<code>bze.a()</code>，因为<code>bzg.a(int, int, int)</code>的返回值为null。
+|238049|被动生物（鸡、牛、猪和羊）有时不生成。
+|238076|区块文件中的<code>UpgradeData</code>字段没有被迁移到新的世界高度。
+|238375|世界边界中心点在3千万格外时，保存世界会导致游戏崩溃，和/或数据损坏。
+|238587|飞入方块时疾跑会导致视角快速放大和缩小。
+|239423|制作人员名单中，谷冈久美没有被列在“作曲家”一栏中。
+|239856|升级旧存档会使藤蔓的方块状态有误。
+|239857|升级旧存档会使栅栏、铁栏杆和玻璃板的方块状态有误。
+|239884|旧区块中的水体不会流到新区块中。
+|239899|升级旧存档后，之前已连在一起的红石不连在一起。
+|239994|坐标0 0 0处方块为非基岩方块时，新地形不会在旧区块下方生成。
+|240030|21w43a起，升级最初于Infdev或Alpha版创建的旧存档会使其低于0的位置生成很多孔洞。
+|240494|新洞穴生成机制会生成重复的废弃矿井（区块原有的与新生成的在水平方向上重叠）。
+|240507|本应在结构中生成的生物不在1.18前的旧结构中生成。
+|240570|旧区块升级后，旧的生物群系数据不会被复制到Y{{=}}0下方生成的新洞穴处。
+|240610|“允许列入服务器玩家列表”选项设置不会被保存。
+|240783|细雪不减少或抵消坠落伤害。
+|241111|一些Mojang员工的名字没有被写在制作人员名单中。
+|;previous
+|241191|升级旧存档后，绊线钩有时会出现错误的方块状态。
+|241194|空指针异常崩溃：不能调用<code>ddm.a(cao, cps, java.util.Random, gh)</code>，因为<code>java.util.function.Supplier.get()</code>的返回值为null。
+|241199|升级旧存档会使大箱子的方块状态有误。
+|241204|每次加载世界时，特定的区块会被重置。
+|241208|升级旧存档会使被充能的按钮、压力板和绊线钩永久保持充能状态。
+|241231|村庄中有浮空营火。
+|241234|化石会在区块边界处被截断。
+|241413|峡谷周围会生成浮空水。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:1.18-pre2]]
+[[en:Java Edition 1.18 Pre-release 2]]
+[[es:Java Edition 1.18 Pre-release 2]]
+[[fr:Édition Java 1.18 Pre-release 2]]
+[[ja:Java Edition 1.18 Pre-release 2]]
+[[lzh:爪哇版一點一八之預二]]
+[[pt:Edição Java 1.18 Pre-release 2]]
+[[ru:1.18 Pre-release 2 (Java Edition)]]
+[[th:รุ่น Java 1.18 Pre-release 2]]

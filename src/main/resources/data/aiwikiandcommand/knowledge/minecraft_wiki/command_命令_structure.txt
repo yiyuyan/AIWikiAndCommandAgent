@@ -1,0 +1,109 @@
+# 页面: 命令/structure
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/structure
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{distinguish|生成结构}}
+{{exclusive|bedrock|education}}
+{{Infobox command
+|name=structure
+|oplevel=1
+|cheat=y
+}}
+
+用于在不使用[[结构方块]]的情况下保存或加载结构。
+
+== 语法 ==
+: <code>structure save <name: string> <from: x y z> <to: x y z> [saveMode: StructureSaveMode]</code>
+: <code>structure save <name: string> <from: x y z> <to: x y z> [includeEntities: Boolean] [saveMode: StructureSaveMode] [includeBlocks: Boolean]</code>
+:: 保存一个结构。
+: <code>structure load <name: string> <to: x y z> [rotation: Rotation] [mirror: Mirror] [includeEntities: Boolean] [includeBlocks: Boolean] [waterlogged: Boolean] [integrity: float] [seed: string]</code>
+: <code>structure load <name: string> <to: x y z> [rotation: Rotation] [mirror: Mirror] [animationMode: StructureAnimationMode] [animationSeconds: float] [includeEntities: Boolean] [includeBlocks: Boolean] [waterlogged: Boolean] [integrity: float] [seed: string]</code>
+:: 加载一个结构。
+: <code>structure delete <name: string></code>
+:: 删除某个储存的结构文件。
+
+== 参数 ==
+{{main|结构方块}}
+
+{{argument|be=1|name: string|basic_string}}
+: 指定结构名称。格式应为<code>name</code>或<code>namespace:name</code>。如果未指定命名空间，则默认为<code>mystructure:</code>。
+: {{arg desc|be=basic_string}}
+{{argument|be=1|from: x y z|CommandPosition}}和{{argument|be=1|to: x y z|CommandPosition}}（保存结构用法）
+: 定义源区域的两组对角方块坐标。可以使用相对坐标和局部坐标来指定命令执行地的相对距离。
+: {{arg desc|be=CommandPosition}}
+{{argument|be=1|to: x y z|CommandPosition}}（加载结构用法）
+: 定义目标区域的西北方向较低（即在各轴上坐标值最小）的点的坐标。
+: {{arg desc|be=CommandPosition}}
+{{argument|be=1|saveMode: StructureSaveMode|enum}}
+: 指定结构的存储位置。必须为以下其中之一：
+:* <code>memory</code> - 保存在内存中（默认）
+:* <code>disk</code> - 保存至磁盘
+{{argument|be=1|includeEntities: Boolean|enum}}
+: 指定是否加载（或保存）结构中的实体，默认为<code>false</code>。
+: {{arg desc|be=bool}}
+{{argument|be=1|includeBlocks: Boolean|enum}}
+: 指定加载（或保存）时是否包括方块，默认为<code>true</code>。
+: {{arg desc|be=bool}}
+{{argument|be=1|rotation: Rotation|enum}}
+: 指定结构旋转的角度。必须为以下其中之一：
+:* <code>0_degrees</code> - 不旋转（默认）
+:* <code>90_degrees</code> - 按顺时针旋转90度
+:* <code>180_degrees</code> - 按顺时针旋转180度
+:* <code>270_degrees</code>- 按顺时针旋转270度
+{{argument|be=1|mirror: Mirror|enum}}
+: 指定结构的镜像模式。必须为以下其中之一：
+:* <code>none</code> - 无（默认）
+:* <code>x</code> - 沿x轴翻转
+:* <code>z</code> - 沿z轴翻转
+:* <code>xz</code> - 沿x及z轴翻转
+{{argument|be=1|animationMode: StructureAnimationMode|enum}}
+: 指定生成结构使用的动画。必须为<code>block_by_block</code>或<code>layer_by_layer</code>。
+{{argument|be=1|animationSeconds: float|float}}
+: 指定动画的时长。
+: {{arg desc|be=float}}
+{{argument|be=1|integrity: float|float}}
+: 指定结构的完整性（每个方块被加载的概率），根据种子进行加载。
+: {{arg desc|be=float}}且应在0到100之间（含）。
+{{argument|be=1|seed: string|basic_string}}
+: 指定种子。如果未指定，则为一个随机值。
+: {{arg desc|be=basic_string}}
+{{argument|be=1|waterlogged: Boolean|enum}}
+: 指定生成的含水结构是否正确含水，默认为<code>false</code>。
+: {{arg desc|be=bool}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|指定的区域处于已卸载的或在世界外的区块中||fail}}
+{{Result table|cmd=/structure save ...|选定的区域大于64 * 384 * 64个方块}}
+{{Result table|cmd=/structure load ...<br>/structure delete ...|指定的结构不存在}}
+{{Result table|cmd=/structure load ...|<code>integrity: float</code>小于0或大于100}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.100|dev=1.16.100.52|加入了{{cmd|structure|link=none}}。}}
+|{{HistoryLine|||dev=1.16.100.60|加入了对结构放置过程添加动画的支持。}}
+|{{HistoryLine||1.16.210|dev=1.16.210.54|{{cmd|structure|link=none}}现在可以删除已保存结构列表。}}
+|{{HistoryLine||1.19.30|dev=1.19.30.21|加入了<code>waterlogged: Boolean</code>参数。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/structure]]
+[[en:Commands/structure]]
+[[es:Comandos/structure]]
+[[ja:コマンド/structure]]
+[[pt:Comandos/structure]]
+[[ru:Команды консоли/structure]]

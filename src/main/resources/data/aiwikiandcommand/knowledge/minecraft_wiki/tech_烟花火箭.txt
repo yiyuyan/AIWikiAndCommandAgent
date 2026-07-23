@@ -1,0 +1,376 @@
+# 页面: 烟花火箭
+# 来源: https://zh.minecraft.wiki/w/%E7%83%9F%E8%8A%B1%E7%81%AB%E7%AE%AD
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用DynamicPageList4的页面, 可再生资源, 基岩版即将到来/26.40, 基岩版独有信息, 实体, 实验性内容/2026 年第 3 次更新, 物品, 需要验证/基岩版
+# 抓取时间: 2026-07-14 17:31:28
+# 原始 Wikitext 内容:
+
+{{redirect|烟花}}{{tr|mode=H|箭|箭矢}}{{redirect|火-{箭}-|着火的箭|箭#着火|魔咒|火矢}}{{tr|mode=-|箭|箭矢}}
+{{Infobox item
+|image=Firework Rocket.png
+|invimage=Firework Rocket
+|size=高度：0.25格<br>宽度：0.25格
+}}
+
+'''烟花火箭（Firework Rocket）'''是一种能够生成大量[[粒子]]、能对生物造成伤害的[[物品]]和[[实体]]，可以用作[[弩]]的弹药或用来加速正在使用[[鞘翅]]滑翔的玩家。
+
+== 生成 ==
+当[[袭击]]以胜利结束时，[[村民]]会在露天处发射有1级飞行时间和1个“喷发状”随机颜色的[[烟火之星]]的烟花火箭来庆祝。
+
+== 获取 ==
+烟花火箭能通过合成和[[命令]]获取。没有爆裂效果的烟花火箭也可在[[创造模式物品栏]]中获得。
+
+=== 合成 ===
+{{Crafting
+|head=1
+|custom=1
+|showname=0
+|showdescription=1
+|Paper
+|Gunpowder; Gunpowder; Gunpowder
+|; Gunpowder; Gunpowder
+|; ; Gunpowder
+|Output=Firework Rocket,3
+|description=火药的数量（1-3）决定烟花的飞行时间。<br>如果用这种方法合成，火箭燃放后不会有任何爆裂效果。
+}}
+
+{{Crafting
+|custom=1
+|Any Firework Star
+|Paper
+|Gunpowder; Gunpowder; Gunpowder
+|; Gunpowder; Gunpowder
+|; ; Gunpowder
+|Output= Firework Rocket,3
+|description=火药的数量（1-3）决定烟花的飞行时间。<br>合成时可以使用多个烟火之星，燃放时所有效果将会同时出现。<br>烟火之星按从左到右、从上到下的顺序录入烟花火箭的数据中；其他物品的位置对合成结果没有影响。
+|foot=1
+}}
+
+=== 箱子战利品 ===
+{{in dev|drop 3 2026|section=1}}
+{{LootChestItem|firework_rocket}}
+
+== 用途 ==
+=== 发射烟花 ===
+烟花火箭可以在方块上按下{{control|使用}}键进行燃放，也可被[[发射器]]和[[弩]]发射。
+
+=== 滑翔 ===
+当玩家使用[[鞘翅]]滑翔时，手持烟花火箭按下{{control|使用}}键可以加快滑翔速度。加速的持续时间和强度取决于烟花火箭的飞行时间。如果所用的烟花火箭合成时使用了[[烟火之星]]，烟花火箭会爆裂，使玩家受到伤害。
+
+{{in|je}}滑翔的玩家使用烟花火箭后会生成一个不可见的烟花火箭实体，此烟花火箭实体始终位于玩家持有烟花火箭的手的一侧，玩家会和其同步移动。
+
+=== 弩 ===
+玩家可以使用[[弩]]来发射烟花火箭进行远程攻击，但如果烟花火箭没有爆裂效果，它不会造成任何伤害。用多个烟火之星进行合成可以增加伤害。附魔[[多重射击]]的弩可以单次射出3支效果相同的烟花火箭，但[[穿透]]魔咒并不能使烟花火箭穿过实体。
+
+{{in|java}}如果由弩发射的烟花火箭击中实体，烟花火箭会无视飞行持续时间而瞬间爆裂。{{in|bedrock}}这样做只会让烟花火箭穿过实体而爆裂<ref>{{bug|MCPE-52675}}</ref>，且撞到方块时会在其上滑行，因此玩家需要精准把控烟花火箭的飞行时间和与目标的距离。
+
+== 行为 ==
+{{see also|烟火之星#效果}}
+
+烟花火箭点燃后会向上飞。它的飞行轨迹在水平方向上会随机偏移。没有烟火之星的烟花火箭在飞行[[#持续时间和方向|一段时间]]或{{only|JE|for=碰到实体}}后会消失，碰到方块上会在方块上继续滑行，但在碰到方块的同时碰到实体不会消失；有烟火之星的烟花在飞行[[#持续时间和方向|一段时间]]或{{Only|JE|for=碰到实体或方块}}后会爆裂，并根据合成材料的不同产生各种色彩缤纷的爆裂效果。如果合成时使用多个烟火之星，所有效果将会同时出现。
+
+烟花火箭的爆裂会对附近[[生物]]造成{{HpRange|5|6}}伤害和击退。烟花火箭合成时每增加一个烟火之星，就会额外造成{{HpRange|1|2}}伤害。一个烟花火箭最多能加入七个烟火之星，此时能造成{{hp|18}}点伤害。{{in|je}}尽管并非[[爆炸]]现象，烟花火箭造成[[伤害#爆炸伤害|爆炸伤害]]，会受到[[爆炸保护]]的伤害减少效果，但其伤害值不像爆炸那样总是受到难度影响。{{in|be}}烟花火箭造成伤害类型为{{cd|fireworks}}的伤害。
+
+烟花火箭引爆一段时间后玩家才会听到声音，以此来模拟真实的烟花效果，但这声音的传播速度比现实的声音慢得多。<ref>{{tweet|jeb_|277075644804907009}}</ref><ref>{{tweet|jeb_|277075517226762242}}</ref>
+
+烟花火箭的爆裂不会摧毁方块、点燃[[TNT]]或摧毁[[末地水晶]]。
+
+烟花粒子最多只能有4000个。如果超出了限制，在出现新的粒子之前会移除最旧的粒子，导致烟花的质量或持续时间被降低。一个烟花火箭最多只能有3个踪迹，超过3个会浪费钻石、烟火之星或其他烟花火箭。以下是每个烟花的粒子：
+
+{| class="wikitable"
+|-
+! 形状 !! 普通 !! 踪迹
+|-
+| 小型球状 || 98 || ~1300
+|-
+| 大型球状 || 387 || 4000+
+|-
+| 星形 || 122 || ~1600
+|-
+| 苦力怕状 || 266 || ~3500
+|-
+| 喷发状 || 72 || ~930
+|}
+
+闪烁效果增加2个粒子。
+
+就像大部分的实体，烟花火箭会被[[水]]或[[爆炸]]移动。烟花火箭飞行时触碰到[[下界传送门]]可能会传送。
+
+=== 持续时间和方向 ===
+合成烟花火箭时加入越多火药，烟花火箭的平均飞行距离就会越远，每次合成最多加入三份火药。火药的数量在物品的信息栏中标记为“飞行时间”，飞行时间的单位为秒（20刻）。烟花飞行的距离会根据其使用的火药量在一个射程范围中随机判定。
+
+在这个射程范围中，烟花火箭的爆裂点分布概率存在以下规律：若把射程四等分，通常在前三个部分都有一个范围的概率明显高于其他范围，也就是其爆裂概率类似于波函数图像。第一部分、第二部分和第三部分各有一个波峰，其中第二部分波峰最高，另外两个波峰高度近似，第四部分概率渐归于零。
+
+简单来说，烟花火箭较容易在其1/4，2/4，3/4射程处爆裂，其中2/4射程处爆裂概率最高，3/4射程以外概率越来越低。
+
+{{in|java}}烟花火箭飞行的距离在加入1个火药时是8.40-19.84格，2个火药时是18.60-34.44格，3个火药时是32.80-53.04格。
+
+{{in|be}}烟花火箭的飞行距离遵循以下规律：
+
+* 加入1个火药时为14-30格，其中1/4处波峰为14-16格，2/4处波峰为18-22格，3/4处波峰为24-26格；
+* 加入2个火药时为29-63格，其中1/4处波峰为31-35格，2/4处波峰为39-44格，3/4处波峰为50-52格；{{verify|疑似还有一个波峰，54-56格|bedrock=1}}
+* 加入3个火药时为67-116格。
+
+当烟花火箭生成时，它会具有0.05的垂直速度和一个随机的X轴和Z轴的运动速度（数值接近零，标准偏差为0.001）。飞行过程中，每经过一刻，烟花的X轴和Z轴的横向运动速度就会变为上一刻1.15倍，{{only|Java|for=而垂直速度将会增加0.04}}。烟花的生命周期为<code>-{}-10 &times; (''合成时所用的火药'' + 1) + ''0至5的随机数'' + ''0至6的随机数''</code>[[刻]]。生命周期结束后，烟花火箭会立即爆裂。
+
+在流动的水下燃放的烟花火箭会朝不同方向飞行，随后其运动方向会迅速地朝水平方向弯曲，传播距离会增加到比高度更远的一点。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Firework blast1.ogg
+|subtitle={{tp|subtitles.entity.firework_rocket.blast}}
+|description=在近处爆裂
+|source=环境
+|id=entity.firework_rocket.blast
+|translationkey=subtitles.entity.firework_rocket.blast
+}}
+{{Sound table
+|sound=Firework blast far1.ogg
+|subtitle={{tp|subtitles.entity.firework_rocket.blast}}
+|source=环境
+|description=在远处爆裂
+|id=entity.firework_rocket.blast_far
+|translationkey=subtitles.entity.firework_rocket.blast
+}}
+{{Sound table
+|sound=Firework largeblast1.ogg
+|subtitle={{tp|subtitles.entity.firework_rocket.blast}}
+|source=环境
+|description=大型球状烟花在近处爆裂
+|id=entity.firework_rocket.large_blast
+|translationkey=subtitles.entity.firework_rocket.blast
+}}
+{{Sound table
+|sound=Firework largeblast far1.ogg
+|subtitle={{tp|subtitles.entity.firework_rocket.blast}}
+|source=环境
+|description=大型球状烟花在远处爆裂
+|id=entity.firework_rocket.large_blast_far
+|translationkey=subtitles.entity.firework_rocket.blast
+}}
+{{Sound table
+|sound=Firework launch1.ogg
+|subtitle={{tp|subtitles.entity.firework_rocket.launch}}
+|source=环境
+|description=发射升空
+|id=entity.firework_rocket.launch
+|translationkey=subtitles.entity.firework_rocket.launch
+}}
+{{Sound table
+|sound=Bow shoot.ogg
+|subtitle={{tp|subtitles.entity.firework_rocket.launch}}
+|source=环境
+|description=发射器发射
+|id=entity.firework_rocket.shoot
+|translationkey=subtitles.entity.firework_rocket.launch
+}}
+{{Sound table
+|sound=Firework twinkle1.ogg
+|subtitle={{tp|subtitles.entity.firework_rocket.twinkle}}
+|source=环境
+|description=在近处爆裂后的闪烁效果
+|id=entity.firework_rocket.twinkle
+|translationkey=subtitles.entity.firework_rocket.twinkle
+}}
+{{Sound table
+|sound=Firework twinkle far1.ogg
+|subtitle={{tp|subtitles.entity.firework_rocket.twinkle}}
+|source=环境
+|description=在远处爆裂后的闪烁效果
+|id=entity.firework_rocket.twinkle_far
+|translationkey=subtitles.entity.firework_rocket.twinkle
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Firework blast1.ogg
+|source=环境
+|description=爆裂
+|id=firework.blast
+|typeid=blast
+}}
+{{Sound table
+|bedrock=1
+|sound=Firework largeblast1.ogg
+|source=环境
+|description=大型球状烟花爆裂
+|id=firework.large_blast
+|typeid=large.blast
+}}
+{{Sound table
+|bedrock=1
+|sound=Firework launch1.ogg
+|source=环境
+|description=发射
+|id=firework.launch
+|typeid=launch
+}}
+{{Sound table
+|bedrock=1
+|sound=Bow shoot.ogg
+|source=环境
+|description=未使用的声音事件
+|id=firework.shoot
+|typeid=-
+}}
+{{Sound table
+|bedrock=1
+|sound=Firework twinkle1.ogg
+|source=环境
+|description=爆裂后的闪烁效果
+|id=firework.twinkle
+|typeid=twinkle
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|firstcolumnname=物品
+|generatetranslationkeys=java
+|Firework Rocket
+|spritetype=item
+|nameid=firework_rocket
+|foot=1}}
+{{ID table
+|firstcolumnname=实体
+|generatetranslationkeys=java
+|Firework Rocket
+|spritetype=entity
+|nameid=firework_rocket
+|showentitytags=1|entitytags={{GameTag|entity|firework_rocket}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|firstcolumnname=物品
+|showaliasids=y
+|generatetranslationkeys=bedrock
+|Firework Rocket
+|spritetype=item
+|nameid=firework_rocket
+|aliasid=fireworks
+|translationkey=item.fireworks.name
+|foot=1}} 
+{{ID table
+|firstcolumnname=实体
+|generatetranslationkeys=bedrock
+|Firework Rocket
+|spritetype=entity
+|nameid=fireworks_rocket
+|foot=1}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+在默认组件的基础上，烟花火箭使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt transclude|编码格式/DataComponent|codec_fireworks_component}}
+</div>
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+
+烟花火箭有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 进度 ==
+{{load advancements|prefix=adventure|bullseye}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2012年11月24日|link=none|[[Jeb]]在Minecon 2012上提到可能会在未来版本中加入庆祝新年用的烟花。}}
+|{{HistoryLine||2012年12月5日|link={{tweet|jeb_|276367442362630144}}|Jeb公布了第一张烟花的截图。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.6|dev=12w49a|[[File:Firework Rocket JE1 BE1.png|32px]] 加入了烟花火箭。}}
+|{{HistoryLine|||dev=12w50a|为烟花火箭添加了音效。}}
+|{{HistoryLine||1.9|dev=15w32a|现在使用烟花火箭会播放手部动画。}}
+|{{HistoryLine||1.10|dev=16w20a|烟花火箭在工作台合成的产量由1个变成了3个。}}
+|{{HistoryLine||1.11|dev=16w32a|烟花火箭的实体ID从<code>FireworksRocketEntity</code>变为<code>fireworks_rocket</code>。}}
+|{{HistoryLine||1.11.1|dev=16w50a|烟花火箭现在可以推进正在使用[[鞘翅]]飞行的玩家。
+|烟花火箭现在可以对爆炸半径内的实体造成伤害。}}
+|{{HistoryLine||1.13|dev=17w47a|烟花火箭的物品ID从<code>fireworks</code>变为<code>firework_rocket</code>。
+|现在可以通过将烟火之星与染料结合来添加对烟花的淡化效果。
+|现在“无效果”的烟花火箭可在创造模式物品栏的“杂项”下获取。}}
+|{{HistoryLine|||dev=pre5|烟花火箭的实体ID再次变为<code>firework_rocket</code>。}}
+|{{HistoryLine||1.14|dev=18w43a|现在烟花火箭可以被[[弩]]发射。
+|[[File:Firework Rocket JE2 BE2.png|32px]] 更改了烟花火箭的纹理。}}
+|{{HistoryLine|||dev=19w13a|[[村民]]现在会在袭击胜利后发射烟花火箭以庆祝。}}
+|{{HistoryLine||1.15|dev=19w36a|发射器发射的烟花火箭现在会沿发射方向飞行了。}}
+|{{HistoryLine||1.16|dev=20w15a|现在使用包含[[烟火之星]]合成的烟花火箭爆裂时会对附近[[生物]]产生击退。<ref>{{bug|MC-111493|||Fixed}}</ref>}}
+|{{HistoryLine||1.17|dev=20w45a|只由1份火药合成的普通烟花火箭现在可通过配方书合成。}}
+|{{HistoryLine||1.21.2|dev=24w33a|烟花火箭现在会在撞击[[世界边界]]时沿着边界飞行。}}
+|{{HistoryLine||1.21.5|dev=25w06a|现在烟花火箭的提示框会尝试合并相同的烟火之星信息。}}
+|{{HistoryLine||1.21.6|dev=25w16a|现在玩家滑翔时，对方块{{ctrl|放置}}烟花火箭只会为玩家助推，而不是在方块上点燃烟花。
+|现在在滑翔时使用烟花火箭会立即导致玩家牵引的所有生物或实体断开连接。}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在烟花火箭可以在[[废弃营地]]的[[箱子]]中找到。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|[[File:Firework Rocket JE1 BE1.png|32px]] 加入了烟花火箭。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.10|现在烟花火箭可以放在副手。
+|现在烟花火箭可以被[[弩]]发射。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Firework Rocket JE2 BE2.png|32px]] 更改了烟花火箭的纹理。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.56|烟花火箭的物品ID从<code>fireworks</code>变为<code>firework_rocket</code>。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.21|村民现在会在袭击胜利后发射烟花火箭以庆祝。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.27|现在玩家滑翔时，对方块{{ctrl|放置}}烟花火箭只会为玩家助推。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.20|现在在滑翔时使用烟花火箭会立即导致玩家牵引的所有生物或实体断开连接。}}
+|{{HistoryLine||26.40|exg=y_2026_drop_3|dev=26.40.27|现在烟花火箭可以在[[废弃营地]]的[[箱子]]中找到。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|switch=1.0.1|[[File:Firework Rocket JE1 BE1.png|32px]] 加入了烟花火箭。}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|更新了合成界面以允许玩家合成烟火之星和烟花火箭。}}
+|{{HistoryLine||xbox=TU53|xbone=CU43|ps3=1.49|psvita=1.49|ps4=1.50|wiiu=Patch 23|switch=1.0.3|烟花火箭现在可以推进正在使用[[鞘翅]]飞行的玩家。}}
+|{{HistoryLine||xbox=TU56|xbone=CU47|ps3=1.55|psvita=1.55|ps4=1.55|wiiu=Patch 26|switch=1.0.6|烟花火箭在工作台的产量由1个变成了3个。}}
+|{{HistoryLine|PS4}}
+|{{HistoryLine||1.90|[[File:Firework Rocket JE2 BE2.png|32px]] 更改了烟花火箭的纹理。}}
+}}
+
+== 你知道吗 ==
+* 在[[木质压力板]]上点燃烟花火箭时，压力板会激活。由发射器弹到木质压力板上然后发射的烟花火箭不会激活压力板。
+* [[Jeb]]加入烟花的灵感来源于2012新年。<ref>{{tweet|jeb|277080498814189568|@SPvs_TheWorld New Year's Eve|December 7, 2012}}</ref>
+* {{in|be}}如果把一个烟花火箭射入[[传送门]]，被传送的烟花火箭将失去爆裂性并横着飞上去消失。
+* 一共有约2&times;10{{^|136}}种不同的烟花火箭，这个数字远比Java版和基岩版的世界种子数加起来还要多。
+
+== 画廊 ==
+<gallery>
+File:Firework jeb twitter.jpg|[[Jeb]]公布的烟花的第一张截图，也展示了发射器，暗示烟花可能是由发射器发射的
+File:1.4.6.png|烟花火箭在Java版1.4.6燃放的图片
+File:Flatexplosion.png|{{in|je}}一个烟花爆裂的粒子
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox items|Tools & Utilities|Combat}}
+{{Navbox entities|Non-mobs}}
+
+[[cs:Rachejtle]]
+[[de:Feuerwerksrakete]]
+[[en:Firework Rocket]]
+[[es:Cohete de fuegos artificiales]]
+[[fr:Fusée de feu d'artifice]]
+[[hu:Tűzijáték rakéta]]
+[[it:Razzo pirotecnico]]
+[[ja:ロケット花火]]
+[[ko:폭죽 로켓]]
+[[nl:Vuurpijl]]
+[[pl:Fajerwerk]]
+[[pt:Fogo de Artifício]]
+[[ru:Пиротехническая ракета]]
+[[th:จรวดพลุ]]
+[[uk:Феєрверкова ракета]]

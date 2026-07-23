@@ -1,0 +1,51 @@
+# 页面: 山羊角乐器定义格式
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%B1%E7%BE%8A%E8%A7%92%E4%B9%90%E5%99%A8%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:35
+# 原始 Wikitext 内容:
+
+{{about|数据包中定义山羊角乐器的格式|原版中的山羊角乐器|山羊角#物品数据}}
+{{exclusive|java}}
+'''山羊角乐器'''，也作'''乐器（Instrument）'''，决定了玩家吹奏[[山羊角]]的行为。'''山羊角乐器定义文件'''是山羊角乐器在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+山羊角乐器定义数据在游戏内使用{{cd|INSTRUMENT}}注册表，数据包路径为{{filepath|instrument}}，即所有山羊角乐器定义文件都需要在{{filepath|-{}-data/<''命名空间''>/instrument}}目录内定义，山羊角乐器标签则需要在{{filepath|-{}-data/<''命名空间''>/tags/instrument}}目录内定义。
+
+山羊角乐器定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象<section begin="codec_instrument"/>
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|description|required=1}}：（[[文本组件]]）乐器的名称。
+** {{nbt|string}}{{nbt|compound|sound_event|required=1}}：吹奏时播放的[[声音事件]]。可以为一个声音事件注册名，或直接定义声音事件的详细数据。
+*** {{nbt inherit/sound event}}
+** {{nbt|int|durability_damage}}{{upcoming|je 26.3}}：（{{interval|left=0}}）玩家每吹奏一次后，物品消耗的[[耐久度]]。
+** {{nbt|float|range|required=1}}：（{{interval|left_open=0}}）吹奏声音能传播的最远距离。
+** {{nbt|float|use_duration|required=1}}：（{{interval|left_open=0}}{{until|je 26.3}}{{interval|left=0}}{{upcoming|je 26.3}}）吹奏时间，单位为秒，影响物品冷却速度。
+<section end="codec_instrument"/></div>
+
+== 定义行为 ==
+山羊角乐器定义数据仅在服务端启动时被加载一次，使用{{cmd|reload}}命令不可以使山羊角乐器定义被重新加载，而必须重启服务端。
+
+当玩家吹奏带有<code>instrument</code>[[物品堆叠组件]]的山羊角时，游戏会读取组件内的山羊角乐器信息，并进行播放。
+
+山羊角播放的声音归属<code>record</code>（{{tp|soundCategory.record}}）分类，声音实例音量为{{nbt|float|range|required=1}}的16分之一，实例音高为1，立刻播放，音量线性衰减。玩家能听到山羊角声音的最远距离（假设声音播放期间没有移动）为声音事件引用{{nbt|string|sound_id}}定义的{{nbt|int|attenuation_distance}}值、山羊角乐器定义内的{{nbt|float|range|required=1}}值和声音事件中的{{nbt|float|range}}值中的最小值。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19|dev=22w18a|加入了<code>INSTRUMENT</code>固有注册表，此时山羊角乐器不能使用数据包定义。}}
+|{{HistoryLine||1.21.2|dev=24w33a|<code>INSTRUMENT</code>变为可写注册表，加入了山羊角乐器定义格式。
+|此前，<code>instrument</code>组件的内联定义不需要{{nbt|string}}{{nbt|compound}}{{nbt|list|description}}字段，且{{nbt|float|use_duration|required=1}}单位为刻。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了{{nbt|int|durability_damage}}字段。
+|现在{{nbt|float|use_duration}}字段的最小值允许为0。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Bockshorninstrumentendefinition]]
+[[en:Instrument definition]]
+[[fr:Définition d'instrument de corne de chèvre]]
+[[pt:Definição de instrumento de chifre de cabra]]

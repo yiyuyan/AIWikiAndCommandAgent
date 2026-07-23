@@ -1,0 +1,518 @@
+# 页面: 流浪商人
+# 来源: https://zh.minecraft.wiki/w/%E6%B5%81%E6%B5%AA%E5%95%86%E4%BA%BA
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用DynamicPageList4的页面, 友好生物, 基岩版即将到来/26.40, 基岩版独有信息, 实体, 实验性内容/2026 年第 3 次更新, 需要验证
+# 抓取时间: 2026-07-14 17:30:11
+# 原始 Wikitext 内容:
+
+{{Infobox entity
+|image=Wandering Trader.png
+|imagesize=150px
+|invimage=Wandering Trader Spawn Egg
+|health={{hp|20}} 
+|behavior=友好生物
+|size='''{{el|je}}'''：<br>
+高度：1.95格<br>宽度：0.6格<br>
+'''{{el|be}}'''：<br>
+高度：1.9格<br>宽度：0.6格
+|spawn=见{{slink||生成}}
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{relevant tutorial|流浪商人陷阱}}
+{{quote|一个不知从何处冒出来的蓝衣村民！你倒吸了一口凉气，丢下你的手柄，跪倒在地。你的脑袋里满是疑问：“它是怎么来到这里的？”“它为何试图与我交易？”“为什么村民会出现在[[村庄]]以外的地方？这到底是什么情况？！”<br>冷静点，朋友！没什么大不了的。你只是碰巧遇见了Minecraft中最新加入也是最老道的推销员——流浪商人！|[[Per Landin]]<ref name=meet-it>{{article|meet-wandering-trader|Meet the Wandering Trader|Mar 22, 2019}}</ref>||Mojavatar-Per-Landin.png}}
+
+'''流浪商人（Wandering Trader）'''是一种类似于[[村民]]的友好生物。
+
+== 生成 ==
+在[[主世界]]中，流浪商人会随机地在[[玩家]]或[[村庄#会合点|村庄会合点]]{{note|并非所有[[钟]]都可以作为生成点，只有[[钟#村庄|被认领的钟]]才会被视为村庄的会合点。}}附近生成。流浪商人自然生成时会牵着两只一同生成的[[行商羊驼]]。{{in|be}}用[[刷怪蛋]]或[[命令]]生成流浪商人时，行商羊驼也会一并生成。
+
+在世界创建的{{convert|24000|刻|分钟}}后，游戏将开始尝试生成流浪商人，并在此后每24000刻进行一次尝试。{{note|以Java版为例，如果世界是从旧版本升级至[[19w05a]]及以上版本的，计时器将从上次世界保存的时间开始。例如，某个世界是在正午被保存然后升级的，则算法将尝试在每天正午生成流浪商人。}}尝试生成时，游戏将先尝试寻找玩家附近半径48格球体范围内的村庄会合点，若有则以该位置为基础位置，否则以玩家位置为基础位置，在[[切比雪夫距离]]48格范围内寻找可生成的位置。初次尝试将有2.5%的概率成功；如果失败则会在下次尝试中以5%的概率生成；如果再次失败，则之后的尝试都将保持7.5%的最高概率，直到成功生成后重置该循环。平均下来，大约每14.325个游戏日（286.5分钟）会生成一个流浪商人。
+
+自然生成的流浪商人会在{{convert|48000|刻|分}}{{note|打开交易界面的时间不计入。}}后消失，而它拴着的行商羊驼比它早1刻消失。使用[[命名牌]]为其命名或将其载入载具也不能阻止其消失。{{in|je}}通过刷怪蛋或命令生成的流浪商人不会消失。{{in|be}}通过刷怪蛋或命令生成的流浪商人存在{{convert|48000|刻|分}}后仍会消失。
+
+{{In|java|nc=1}}将{{gamerule|spawn_wandering_traders}}设置为<code>false</code>或{{In|bedrock|nc=1}}将[[生成事件]]<code>minecraft:wandering_trader_event</code>设置为<code>false</code>可阻止流浪商人自然生成。
+
+== 掉落物 ==
+流浪商人被杀死时，它牵着的行商羊驼会被解除牵引状态并掉落[[拴绳]]。
+
+若流浪商人在饮用[[隐身药水]]或饮用奶时被击杀，则它有{{only|for=8.5%|je|short=1}}/{{only|for=25%|be|short=1}}（[[抢夺]]魔咒每级增加1%）的概率掉落隐身药水或[[奶桶]]。
+
+{{in|be}}当流浪商人手持物品时杀死流浪商人，有概率会掉落其手中物品。
+
+杀死流浪商人不会掉落任何[[经验]]。
+
+== 行为 ==
+流浪商人会躲避[[僵尸]]及其变种、[[僵尸疣猪兽]]、[[灾厄村民]]和[[恼鬼]]，并与它们保持至少8格距离。
+
+流浪商人会在黄昏时喝下隐身药水，并在黎明时饮奶来解除[[隐身]]效果。
+
+{{in|be}}流浪商人受到除玩家以外的[[生物]]造成的[[近战攻击|近战伤害]]、[[魔法伤害]]和[[弹射物伤害]]或在躲避僵尸及其变种、僵尸疣猪兽、灾厄村民和恼鬼时也会喝下隐身药水。
+
+和村民一样，流浪商人在乘坐矿车或船时，看起来是站着的，这是开发者有意为之的。<ref>{{bug|MC-161106|||WAI}}</ref>
+
+和村民不同，流浪商人被僵尸杀死时不会转变为[[僵尸村民]]<ref>{{bug|MC-143747|||Won't Fix}}</ref>，被[[闪电]]劈中后也不会转变为[[女巫]]<ref>{{bug|MC-151572|||Invalid}}</ref>。
+
+== 交易 ==
+流浪商人拥有与[[村民]]相似的交易系统。对流浪商人按{{control|使用}}键会打开交易界面，在左侧的交易列表可查看所有其他交易。
+
+流浪商人的交易系统相较于村民有以下差异：
+* 流浪商人有9个随机的交易选项，依次为2个收购选项、2个特殊售货选项和5个普通售货选项，交易后不会升级也不会解锁新的选项。
+* 在一个交易被重复1-12次后，流浪商人将永久锁定该交易。
+** 若所有交易选项都被锁定，那么流浪商人将无法再进行任何交易。
+
+和村民一样，{{in|be}}当玩家手持绿宝石走到流浪商人附近时，流浪商人会手持自己能够交易的物品，每几秒更换一次手上的物品。
+<section begin="trades"/>
+{{TradeTable|profession=wandering-trader<includeonly>|ignoreUsage=1</includeonly>
+|{{TradeLine|lvl=Purchase|slot=1-2|slotDraws=2|want=Water Bottle|maxTrades=2}}
+|{{TradeLine|lvl=Purchase|slot=1-2|slotDraws=2|want=Water Bucket|give=Emerald|giveQuant=2|maxTrades=2}}
+|{{TradeLine|lvl=Purchase|slot=1-2|slotDraws=2|want=Milk Bucket|give=Emerald|giveQuant=2|maxTrades=2}}
+|{{TradeLine|lvl=Purchase|slot=1-2|slotDraws=2|want=Fermented Spider Eye|give=Emerald|giveQuant=3|maxTrades=2}}
+|{{TradeLine|lvl=Purchase|slot=1-2|slotDraws=2|want=Baked Potato|wantQuant=4|maxTrades=2}}
+|{{TradeLine|lvl=Purchase|slot=1-2|slotDraws=2|want=Hay Bale|maxTrades=2}}
+|{{TradeLine|lvl=Special|slot=3-4|slotDraws=2|give=Packed Ice|maxTrades=6}}
+|{{TradeLine|lvl=Special|slot=3-4|slotDraws=2|give=Gunpowder|giveQuant=4|maxTrades=2}}
+|{{TradeLine|lvl=Special|slot=3-4|slotDraws=2|giveSprite=Pale Oak Log|giveText=任意<br>{{InvSprite|Oak Log|size=16}}{{InvSprite|Spruce Log|size=16}}{{InvSprite|Birch Log|size=16}}{{InvSprite|Jungle Log|size=16}}{{InvSprite|Acacia Log|size=16}}{{InvSprite|Dark Oak Log|size=16}}{{InvSprite|Mangrove Log|size=16}}{{InvSprite|Cherry Log|size=16}}|give=Log|giveQuant=8|maxTrades=4|weight=9}}
+|{{TradeLine|lvl=Special|slot=3-4|slotDraws=2|give=Podzol|giveQuant=3|wantQuant=3|maxTrades=6}}
+|{{TradeLine|lvl=Special|slot=3-4|slotDraws=2|give=Potion of Invisibility|giveNoteText=实际上是延长版隐身药水，可提供时长为8:00的[[隐身]]状态效果。|wantQuant=5|maxTrades=1}}
+|{{TradeLine|lvl=Special|slot=3-4|slotDraws=2|give=Blue Ice|wantQuant=6|maxTrades=6}}
+|{{TradeLine|lvl=Special|slot=3-4|slotDraws=2|give=Enchanted Iron Pickaxe|giveNoteText=物品进行了5–19级[[附魔（物品修饰）|附魔]]，不能提供[[宝藏型魔咒]]（{{in|JE}}由标签{{TagLink|enchantment|on_traded_equipment}}控制）。|wantQuant=6-20|maxTrades=1}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Fern|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Sugar Cane|maxTrades=8}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Pumpkin|maxTrades=4}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Dandelion|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Poppy|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Allium|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Azure Bluet|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Red Tulip|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Orange Tulip|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=White Tulip|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Pink Tulip|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Oxeye Daisy|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Cornflower|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Blue Orchid|maxTrades=8}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Golden Dandelion|wantQuant=2|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Lily of the Valley|maxTrades=7}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Open Eyeblossom|maxTrades=7}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Wheat Seeds|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Beetroot Seeds|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Pumpkin Seeds|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Melon Seeds|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Any color Dye|giveQuant=3|maxTrades=12|weight=16|giveNote=item|giveNoteText=每种物品都有相等的概率被选中，且可能同时提供多种物品的交易项。左侧概率为至少出现一项的概率。}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Vines|giveQuant=3|maxTrades=4}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Brown Mushroom|giveQuant=3|maxTrades=4}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Red Mushroom|giveQuant=3|maxTrades=4}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Shelf Mushroom|giveQuant=3|maxTrades=4{{only|je}}或12{{only|be}}|giveNoteText={{in update|drop 3 2026}}}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Pale Hanging Moss|giveQuant=3|maxTrades=4}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Lily Pad|giveQuant=5|maxTrades=2}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Small Dripleaf|giveQuant=2|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Sand|giveQuant=8|maxTrades=8}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Red Sand|giveQuant=4|maxTrades=6}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Pointed Dripstone|giveQuant=2|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Sulfur Spike|giveQuant=2|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Rooted Dirt|giveQuant=2|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Moss Block|giveQuant=2|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Pale Moss Block|giveQuant=2|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Wildflowers|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Tall Dry Grass|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Name Tag|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Sea Pickle|wantQuant=2|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Glowstone|wantQuant=2|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Bucket of Pufferfish|wantQuant=3|maxTrades=4}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Bucket of Tropical Fish|wantQuant=3|maxTrades=4}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Kelp|wantQuant=3|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Cactus|wantQuant=3|maxTrades=8}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Coral Blocks|giveSprite=Horn Coral Block|giveText=任意<br>{{InvSprite|Tube Coral Block|size=16}}{{InvSprite|Brain Coral Block|size=16}}{{InvSprite|Bubble Coral Block|size=16}}{{InvSprite|Fire Coral Block|size=16}}|wantQuant=3|maxTrades=8|weight=5|giveNote=item}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Firefly Bush|wantQuant=3|maxTrades=12}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Slimeball|wantQuant=4|maxTrades=5}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Saplings|giveSprite=Pale Oak Sapling|giveText=任意<br>{{InvSprite|Oak Sapling|size=16}}{{InvSprite|Spruce Sapling|size=16}}{{InvSprite|Birch Sapling|size=16}}{{InvSprite|Jungle Sapling|size=16}}{{InvSprite|Acacia Sapling|size=16}}{{InvSprite|Dark Oak Sapling|size=16}}{{InvSprite|Cherry Sapling|size=16}}{{InvSprite|Poplar Sapling|size=16}}|wantQuant=5|maxTrades=8|weight=8|giveNote=item}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Mangrove Propagule|wantQuant=5|maxTrades=8}}
+|{{TradeLine|lvl=Ordinary|slot=5-9|slotDraws=5|give=Nautilus Shell|wantQuant=5|maxTrades=5}}
+}}<section end="trades"/>
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound = Wandering Trader idle1.ogg
+|sound2 = Wandering Trader idle2.ogg
+|sound3 = Wandering Trader idle3.ogg
+|sound4 = Wandering Trader idle4.ogg
+|sound5 = Wandering Trader idle5.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.ambient}}
+|source = 友好生物
+|description = 空闲时随机播放此音效
+|id = entity.wandering_trader.ambient
+|translationkey = subtitles.entity.wandering_trader.ambient
+}}
+{{Sound table
+|sound = Wandering Trader death.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.death}}
+|source = 友好生物
+|description = 死亡
+|id = entity.wandering_trader.death
+|translationkey = subtitles.entity.wandering_trader.death
+}}
+{{Sound table
+|sound = Wandering Trader hurt1.ogg
+|sound2 = Wandering Trader hurt2.ogg
+|sound3 = Wandering Trader hurt3.ogg
+|sound4 = Wandering Trader hurt4.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.hurt}}
+|source = 友好生物
+|description = 受伤
+|id = entity.wandering_trader.hurt
+|translationkey = subtitles.entity.wandering_trader.hurt
+}}
+{{Sound table
+|sound = Wandering Trader deny1.ogg
+|sound2 = Wandering Trader deny2.ogg
+|sound3 = Wandering Trader deny3.ogg
+|sound4 = Wandering Trader deny4.ogg
+|sound5 = Wandering Trader deny5.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.no}}
+|source = 友好生物
+|description = 交易失败
+|id = entity.wandering_trader.no
+|translationkey = subtitles.entity.wandering_trader.no
+}}
+{{Sound table
+|sound = Wandering Trader trade1.ogg
+|sound2 = Wandering Trader trade2.ogg
+|sound3 = Wandering Trader trade3.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.trade}}
+|source = 友好生物
+|description = 打开交易GUI
+|id = entity.wandering_trader.trade
+|translationkey = subtitles.entity.wandering_trader.trade
+}}
+{{Sound table
+|sound = Wandering Trader accept1.ogg
+|sound2 = Wandering Trader accept2.ogg
+|sound3 = Wandering Trader accept3.ogg
+|sound4 = Wandering Trader accept4.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.yes}}
+|source = 友好生物
+|description = 交易成功
+|id = entity.wandering_trader.yes
+|translationkey = subtitles.entity.wandering_trader.yes
+}}
+{{Sound table
+|sound = Wandering Trader drink milk1.ogg
+|sound2 = Wandering Trader drink milk2.ogg
+|sound3 = Wandering Trader drink milk3.ogg
+|sound4 = Wandering Trader drink milk4.ogg
+|sound5 = Wandering Trader drink milk5.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.drink_milk}}
+|source = 友好生物
+|description = 饮奶
+|id = entity.wandering_trader.drink_milk
+|translationkey = subtitles.entity.wandering_trader.drink_milk
+}}
+{{Sound table
+|sound = Drink.ogg
+|sound2 = Wandering Trader drink potion.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.drink_potion}}
+|source = 友好生物
+|description = 饮用药水
+|id = entity.wandering_trader.drink_potion
+|translationkey = subtitles.entity.wandering_trader.drink_potion
+}}
+{{Sound table
+|sound = Wandering Trader disappeared1.ogg
+|sound2 = Wandering Trader disappeared2.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.disappeared}}
+|source = 友好生物
+|description = 饮用隐身药水后隐身
+|id = entity.wandering_trader.disappeared
+|translationkey = subtitles.entity.wandering_trader.disappeared
+}}
+{{Sound table
+|sound = Wandering Trader reappeared1.ogg
+|sound2 = Wandering Trader reappeared2.ogg
+|subtitle = {{tp|subtitles.entity.wandering_trader.reappeared}}
+|source = 友好生物
+|description = 饮奶后现身
+|id = entity.wandering_trader.reappeared
+|translationkey = subtitles.entity.wandering_trader.reappeared
+|foot = 1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=mob.wandering_trader.idle1.wav
+|sound2=mob.wandering_trader.idle2.wav
+|sound3=mob.wandering_trader.idle3.wav
+|sound4=mob.wandering_trader.idle4.wav
+|sound5=mob.wandering_trader.idle5.wav
+|source=友好生物
+|description=空闲时随机播放此音效
+|id=mob.wanderingtrader.idle
+|typeid=ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wandering_trader.death.wav
+|source=友好生物
+|description=死亡
+|id=mob.wanderingtrader.death
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wandering_trader.disappeared1.wav
+|sound2=mob.wandering_trader.disappeared2.wav
+|source=友好生物
+|description=饮用隐身药水后隐身
+|id=mob.wanderingtrader.disappeared
+|typeid=disappeared
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Wandering Trader drink milk1.ogg
+|sound2=Wandering Trader drink milk2.ogg
+|sound3=Wandering Trader drink milk3.ogg
+|sound4=Wandering Trader drink milk4.ogg
+|sound5=Wandering Trader drink milk5.ogg
+|source=友好生物
+|description=饮奶
+|id=mob.wanderingtrader.drink_milk
+|typeid=drink
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Drink.ogg
+|sound2=mob.wandering_trader.drink_potion.wav
+|source=友好生物
+|description=饮用药水
+|id=mob.wanderingtrader.drink_potion
+|typeid=drink
+|soundvolume=0.65/0.7<ref group="音效" name="volume">这里代表2条音效文件依次以所述音量播放</ref>
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wandering_trader.haggle1.wav
+|sound2=mob.wandering_trader.haggle2.wav
+|sound3=mob.wandering_trader.haggle3.wav
+|source=友好生物
+|description=打开交易GUI
+|id=mob.wanderingtrader.haggle
+|typeid=haggle
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wandering_trader.yes1.wav
+|sound2=mob.wandering_trader.yes2.wav
+|sound3=mob.wandering_trader.yes3.wav
+|sound4=mob.wandering_trader.yes4.wav
+|source=友好生物
+|description=交易成功
+|id=mob.wanderingtrader.yes
+|typeid=haggle.yes
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wandering_trader.no1.wav
+|sound2=mob.wandering_trader.no2.wav
+|sound3=mob.wandering_trader.no3.wav
+|sound4=mob.wandering_trader.no4.wav
+|sound5=mob.wandering_trader.no5.wav
+|source=友好生物
+|description=交易失败
+|id=mob.wanderingtrader.no
+|typeid=haggle.no
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wandering_trader.hurt1.wav
+|sound2=mob.wandering_trader.hurt2.wav
+|sound3=mob.wandering_trader.hurt3.wav
+|sound4=mob.wandering_trader.hurt4.wav
+|source=友好生物
+|description=受伤
+|id=mob.wanderingtrader.hurt
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wandering_trader.reappeared1.wav
+|sound2=mob.wandering_trader.reappeared2.wav
+|source=友好生物
+|description=饮奶后现身
+|id=mob.wanderingtrader.reappeared
+|typeid=reappeared
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Wandering Trader
+|spritetype=entity
+|nameid=wandering_trader
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Wandering Trader
+|spritetype=entity
+|nameid=wandering_trader
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+流浪商人有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|star-trader;the-haggler}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.trade;adventure.trade_at_world_height}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=19w05a|[[File:Wandering Trader JE1 BE2.png|32px]] 加入了流浪商人。}}
+|{{HistoryLine|||dev=19w06a|流浪商人现在会在黄昏时喝下隐身[[药水]]，在黎明时饮奶以解除效果。
+|流浪商人现在能打开门。}}
+|{{HistoryLine|||dev=19w09a|为流浪商人加入了喝下隐身药水与[[奶]]的音效。}}
+|{{HistoryLine||1.15|dev=19w40a|现在流浪商人不会在水平范围小于3*3方块或净高小于3方块的空间内生成。}}
+|{{HistoryLine||1.15.2|dev=pre1|现在可以使用[[游戏规则]]<code>doTraderSpawning</code>来控制流浪商人生成与否。}}
+|{{HistoryLine||1.17|dev=21w05a|流浪商人现在会出售[[小型垂滴叶]]。}}
+|{{HistoryLine|||dev=21w13a|流浪商人现在会出售[[滴水石锥]]、[[缠根泥土]]和[[苔藓块]]。}}
+|{{HistoryLine||1.19|dev=22w15a|流浪商人现在会出售[[红树胎生苗]]。}}
+|{{HistoryLine||1.19.4|dev=23w07a|exp=update_1_20|流浪商人现在会出售[[樱花树苗]]。}}
+|{{HistoryLine||1.20|dev=23w12a|23w07a的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.20.2|dev=23w31a|exp=trade_rebalance|降低了流浪商人的交易价格，且增加了每组物品数量。同时，加入了[[23w31a#流浪商人|更多交易选项]]，流浪商人现在会收购物品。}}
+|{{HistoryLine||1.21.4|dev=24w44a|流浪商人现在会出售[[张开的眼眸花]]、[[苍白橡树树苗]]、[[苍白苔藓块]]和[[苍白垂须]]。}}
+|{{HistoryLine||1.21.5|dev=25w07a|23w31a中的变更不再属于[[实验性内容]]。
+|现在流浪商人会出售[[红树原木]]、[[苍白橡木原木]]、[[野花簇]]、[[高枯草丛]]和[[萤火虫灌木丛]]。}}
+|{{HistoryLine|||dev=25w08a|将用[[水瓶]]、[[水桶]]、[[奶桶]]、[[发酵蛛眼]]、[[烤马铃薯]]和[[干草捆]]与其交易以换取[[绿宝石]]的最大[[交易]]次数由1提升到了2。}}
+|{{HistoryLine||26.1|dev=snapshot-5|流浪商人现在会出售[[金蒲公英]]。}}
+|{{HistoryLine|||dev=snapshot-11|流浪商人現在會出售[[命名牌]]。}}
+|{{HistoryLine||26.2|dev=snapshot-6|现在流浪商人会出售[[硫黄尖锥]]。<ref>{{bug|MC-307560|||Fixed}}</ref>}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在流浪商人会出售[[杨树树苗]]和[[层孔菇]]。}}
+|{{HistoryLine|||dev=snapshot-2|现在流浪商人会出售[[杨木原木]]。<ref>{{bug|MC-309082|||Fixed}}</ref>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|exg=1|[[File:Wandering Trader BE1.png|32px]] 加入了流浪商人。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.3|[[File:Wandering Trader JE1 BE2.png|32px]] 现在流浪商人的腿部纹理是对称的。
+|流浪商人现在会在黄昏时喝下隐身药水。
+|流浪商人现在会在[[僵尸]]及其变种、[[灾厄村民]]和[[恼鬼]]逼近时喝下隐身药水。
+|如果玩家手持[[绿宝石]]，流浪商人现在会手持它们愿意进行交易的物品。}}
+|{{HistoryLine|||dev=1.11.0.4|流浪商人不再属于[[实验性玩法]]。
+|现在流浪商人结束全部交易后会更快消失。
+|流浪商人现在会有六种随机的交易而不是四种。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|为流浪商人加入了音效。
+|流浪商人现在能打开门。}}
+|{{HistoryLine|||dev=1.12.0.3|现在流浪商人会以3个绿宝石的价格出售1个[[珊瑚块]]，此前为1个绿宝石的价格出售3个。
+|现在流浪商人一次会出售3个[[灰化土]]，而不是1个。}}
+|{{HistoryLine||1.17.0|dev=1.16.230.54|流浪商人现在会出售小型垂滴叶、滴水石锥、缠根泥土和苔藓块。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.26|玩家与流浪商人[[交易]]时流浪商人头顶不再会出现绿宝石图标。
+|更改了流浪商人的交易選項以匹配{{el|je}}：現在不再会出售[[向日葵]]、[[丁香]]、[[玫瑰丛]]和[[牡丹]]}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|流浪商人不再能够打开或关闭门。
+|更改了流浪商人饮用药水和饮用奶的音效以匹配{{el|je}}。}}
+|{{HistoryLine|||dev=1.19.0.24|流浪商人现在会出售红树胎生苗。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.21|流浪商人现在会远离[[僵尸疣猪兽]]。
+|流浪商人现在会在黎明时饮奶以解除隐身效果。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.20|现在玩家获得村庄英雄状态效果时，流浪商人会降低交易价格。<ref>{{bug|MCPE-190255}}</ref>}}
+|{{HistoryLine||1.20.30|dev=1.20.20.20|流浪商人现在会出售樱花树苗。
+|移除了独立交易选项中的[[小麦种子]]、[[甜菜种子]]、[[南瓜种子]]和[[西瓜种子]]。}}
+|{{HistoryLine|||dev=1.20.20.21|流浪商人现在会出售[[蓝色染料]]、[[棕色染料]]、[[白色染料]]和[[黑色染料]]，而不是[[青金石]]、[[可可豆]]、[[骨粉]]和[[墨囊]]。}}
+|{{HistoryLine|||dev=1.20.30.20|exg=villager_trades_rebalance|降低了流浪商人的交易价格，且增加了每组物品数量。同时，加入了[[基岩版1.20.30.20#流浪商人|更多交易选项]]，流浪商人现在会收购物品。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.26|流浪商人现在会出售[[张开的眼眸花]]、[[苍白橡树树苗]]、[[苍白苔藓块]]和[[苍白垂须]]。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.23|1.20.30.20中的变更不再属于[[实验性玩法]]。
+|现在流浪商人会出售[[红树原木]]、[[苍白橡木原木]]、[[野花簇]]、[[高枯草丛]]和[[萤火虫灌木丛]]。}}
+|{{HistoryLine|||dev=1.21.70.25|将用[[水瓶]]、[[水桶]]、[[奶桶]]、[[发酵蛛眼]]、[[烤马铃薯]]和[[干草捆]]与其交易以换取[[绿宝石]]的最大[[交易]]次数由1提升到了2。}}
+|{{HistoryLine||26.10|dev=26.10.23|流浪商人现在会出售[[金蒲公英]]。}}
+|{{HistoryLine|||dev=26.10.25|流浪商人现在会出售[[命名牌]]。}}
+|{{HistoryLine||26.30|dev=26.30.25|现在流浪商人会出售[[硫黄尖锥]]。}}
+|{{HistoryLine||26.40|dev=26.40.27|exg=y_2026_drop_3|现在流浪商人会出售[[杨树树苗]]和[[层孔菇]]。}}
+|{{HistoryLine|PS4}}
+|{{HistoryLine||1.91|[[File:Wandering Trader JE1 BE2.png|32px]] 加入了流浪商人。{{verify|纹理正确吗}}}}
+}}
+
+== 画廊 ==
+<gallery>
+File:19w05a.jpg|[[19w05a]]更新横幅里的流浪商人和行商羊驼
+File:Trader and llama.png|流浪商人和行商羊驼
+File:Wandering Trader Drinking Potion.png|流浪商人正在喝隐身药水
+</gallery>
+
+=== 概念设计 ===
+<gallery>
+File:Wandering Trader concept 1.jpg|流浪商人的一个早期设计，戴着礼帽<ref name=meet-it/>
+File:Wandering Trader concept 2.jpg|另一个早期设计，没有戴兜帽
+File:Wandering Trader concept 3.jpg|另一个早期设计
+</gallery>
+
+=== 艺术作品 ===
+<gallery>
+File:Wandering Trader Artwork.jpg|流浪商人的官方艺术作品
+File:Wandering Trader Art.jpg|包含背景的流浪商人官方艺术作品
+</gallery>
+
+== 注释 ==
+{{notelist|注}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|Mobs}}
+
+[[Category:友好生物]]
+
+[[de:Fahrender Händler]]
+[[en:Wandering Trader]]
+[[es:Vendedor ambulante]]
+[[fr:Marchand ambulant]]
+[[it:Mercante ambulante]]
+[[ja:行商人]]
+[[ko:떠돌이 상인]]
+[[lzh:行商]]
+[[pl:Wędrowny handlarz]]
+[[pt:Vendedor Ambulante]]
+[[ru:Странствующий торговец]]
+[[th:พ่อค้าเร่ร่อน]]
+[[uk:Мандрівний крамар]]

@@ -1,0 +1,134 @@
+# 页面: Java版24w05a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w05a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w05a
+|image=24w05a.png
+|image2=Java Edition 24w05a Simplified.png\Java Edition 24w05a Traditional.png\Java Edition 24w05a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年1月31日
+|jsonhash=ed586ec8f42b680a52a2b381aa2452e4a1b9813d
+|clienthash=314fbbdb6a7872889d7b8cc673bd43c2d64604b1
+|clientmap=f73510891fb691fe15918eeb2917594b787d9677
+|serverhash=cc0f01e6406fa8a2b50c3c06edef74e7a7bf74de
+|servermap=5c1132d3b66299cec90da0536d4f5c7fcfeae90f
+|parent=1.20.5
+|prevparent=1.20.4
+|prev=24w04a
+|next=24w05b
+|nextparent=1.20.6
+}}<onlyinclude>
+
+'''24w05a'''是[[Java版1.20.5]]的第6个快照，发布于2024年1月31日<ref>{{snap|24w05a|January 31, 2024}}</ref>，在内置实验性数据包中加入了[[宝库]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 游戏内容 ===
+'''[[盔甲材料]]'''
+* 加入了犰狳鳞甲质（<code>Armadillo</code>）材料以用于狼铠。
+
+=== 常规 ===
+'''[[粒子]]'''
+* 加入了{{cd|vault_connection}}粒子。
+
+'''[[区域文件]]'''
+* 为第三方服务器添加了保留压缩ID，用于自定义压缩实现方式。
+** 压缩ID<code>127</code>现在可以用于自定义区域文件压缩实现。
+** 使用版本ID时，必须后接带有命名空间的字符串，表示所使用的自定义算法。
+
+'''<samp>[[server.properties]]</samp>'''
+* 在专用服务器配置属性<code>region-file-compression</code>中加入第三个枚举值：
+** <code>none</code>，不压缩数据。尽管CPU占用量较少，这会消耗更多的空间，并且需要大量的时间进行读写。与文件系统配合压缩存档文件更有意义。
+
+'''[[Java版标签|标签]]'''
+* 加入了下列物品标签：
+** {{cd|#dyeable}}：{{cd|d=pretty|leather_helmet|leather_chestplate|leather_leggings|leather_boots|leather_horse_armor}}。
+
+== 更改 ==
+=== 物品 ===
+'''[[马铠]]'''
+* 现在使用盔甲材料，因此物品[[提示框]]中包含[[属性/护甲值|护甲值]]及[[属性/盔甲韧性|盔甲韧性]]信息。
+
+'''[[狼铠]]'''
+* 现在使用盔甲材料，因此物品提示框中包含护甲值信息。
+
+=== 实体 ===
+'''常规'''
+* 对已有<code>HandItems</code>和<code>ArmorItems</code>NBT标签的所有实体新增了<code>body_armor_item</code>和<code>body_armor_drop_chance</code>参数，处理效果与<code>HandItems</code>和<code>ArmorItems</code>相同。
+* 马的<code>ArmorItem</code>、羊驼的<code>DecorItem</code>和狼的<code>armor</code>现改为使用<code>body_armor_item</code>和<code>body_armor_drop_chance</code>参数。
+* 在命令中移除了<code>horse.armor</code>槽位参数，以适用于所有生物的<code>armor.body</code>槽位参数替代。
+
+=== 常规 ===
+'''[[调试屏幕]]'''
+* 现在允许服务器管理员查看专用服务器的TPS调试图表。
+
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>30</code>。
+* 物品或实体中存储的[[药水效果]]不再编码默认值。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>25</code>。
+
+'''[[着色器]]'''
+* 移除了核心着色器定义中未使用的属性数组。
+* 移除了未使用的{{cd|d=pretty|position_color_normal|position_tex_lightmap_color}}着色器。
+* 将仅用于云的{{cd|position_tex_color_normal}}着色器替换为{{cd|rendertype_clouds}}。
+* 移除了<code>IViewRotMat</code>uniform，实体的<code>Position</code>属性现在位于（相对于摄影机的）世界空间中。
+* 灯光方向uniforms不再与视图矩阵预先相乘。
+
+== 新内容（实验性） ==
+=== 方块 ===
+'''[[宝库]]'''
+* 生成在[[试炼密室]]的入口和决斗室结构中。
+* 一种锁着战利品的方块，需要{{ctrl|使用}}[[试炼钥匙]]解锁才会喷出奖励。
+** 方块内部有循环展示其战利品表的[[物品实体]]，但喷出的物品随机。
+** 当前暂时使用试炼密室内奖励箱的战利品表，这将随开发被完全修改。
+* 世界中的每名玩家都有一次解锁某一个宝库的机会。
+** 附近4格内有任一玩家未解锁过该宝库时，其锁孔打开，并产生橙色粒子。
+** 若附近4.5格内的玩家都解锁过该宝库，其锁孔闭合，无法{{ctrl|使用}}试炼钥匙。
+* [[硬度]]为50，没有合适挖掘工具，无法被常规的爆炸破坏，被破坏后不会掉落。
+
+== 更改（实验性） ==
+=== 物品 ===
+'''[[试炼钥匙]]'''
+* 更改了纹理。
+* 现在可用于解锁宝库。
+
+=== 世界生成 ===
+'''[[试炼密室]]'''
+* 将{{cd|trial_chambers/reward/default}}结构中的[[箱子]]替换为宝库。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 向{{cd|#features_cannot_replace}}方块标签加入了{{cd|vault}}。
+
+== 修复 ==
+{{fixes|fixedin=24w05a|showdesc=1
+|;old
+|187616|不死图腾使用后1秒渲染过暗。
+|193656|旗帜方向导致其破坏纹理位移或反复水平翻转。
+|225170|在某些情况下正常矩阵缩放损坏。
+|239084|物品拾取动画比实际的物品模型更暗。
+|260099|嗅探兽在嗅探时的鼻子阴影发生变化。
+|264821|实体所穿盔甲上的雾出现得太早。
+|;dev
+|267922|狼铠在装备时丢失自定义显示名称和其他NBT数据。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:24w05a]]
+[[en:Java Edition 24w05a]]
+[[es:Java Edition 24w05a]]
+[[fr:Édition Java 24w05a]]
+[[ja:Java Edition 24w05a]]
+[[pt:Edição Java 24w05a]]
+[[ru:24w05a (Java Edition)]]
+[[uk:24w05a (Java Edition)]]

@@ -1,0 +1,1843 @@
+# 页面: 掉落物
+# 来源: https://zh.minecraft.wiki/w/%E6%8E%89%E8%90%BD%E7%89%A9
+# 分类: Java版即将到来/26.3, Java版独有信息, 基岩版即将到来/26.40, 基岩版独有信息, 实验性内容/2026 年第 3 次更新, 教育版独有信息, 游戏内容, 需要补充的条目
+# 抓取时间: 2026-07-14 17:26:48
+# 原始 Wikitext 内容:
+
+{{for|掉落物的实体属性值|物品（实体）|用刷子刷扫可疑的方块产生的掉落物|考古战利品|英文名为“Drop”的游戏版本类型|小更新}}
+{{redirect|-{掉落}-|实体滞空时从一定高度落到平面上的现象|摔落}}
+[[File:Two_Arrows_and_Bone_Drops.gif|缩略图|300px|[[骷髅]]死后典型的掉落物：[[箭]]和[[骨头]]]]
+'''掉落物（Drops）'''是大多数[[方块]]被破坏、[[生物]]或其他[[实体]]死亡后出现的[[物品实体]]。
+
+== 掉落物种类 ==
+=== 常见掉落物 ===
+'''常见掉落物（Common drops）'''会在生物受到[[生命#死亡|致死伤害]]时出现在其所在的地点。多数生物在被杀死时所能掉落的物品是固定的。某些常见掉落物，譬如[[皮革]]，并不总是掉落，但掉落概率很高（至少为50%，取决于掉落范围）。如果生物不是由玩家杀死（包括驯服的狼）的话，某些常见掉落物，如[[烈焰棒]]，就不会掉落。
+
+对以上每一种物品，其掉落数量都会随机（[[wzh:离散型均匀分布|均匀]]）的分布；这种分布使用“掉落范围”来描述。举个例子，一头[[牛]]会掉落0-2份[[皮革]]物品与1-3份[[生牛肉]]物品。由于上述皮革的掉落范围包括0，因此有{{frac|1|3}}的概率不会掉落。
+
+幼年[[友好生物]]死亡后不会掉落常见掉落物。
+
+==== 抢夺魔咒 ====
+当生物被[[抢夺]]魔咒击杀时，某些常见掉落物与少见掉落物的掉落数量会随着魔咒等级的增加而增加。就机制上来说，游戏会随机在0到魔咒等级的区间中随机产生一个分数，并将其四舍五入为最接近的整数，这就是额外掉落的物品数量。
+
+下表是不同魔咒等级对应不同上限增加量的概率：
+
+{| class="wikitable"
+|+抢夺魔咒影响下的额外掉落数量
+|-
+!魔咒等级
+!掉落数量+0
+!掉落数量+1
+!掉落数量+2
+!掉落数量+3
+|-
+|抢夺I
+|{{frac|1|2}}
+|{{frac|1|2}}
+|0
+|0
+|-
+|抢夺II
+|{{frac|1|4}}
+|{{frac|1|2}}
+|{{frac|1|4}}
+|0
+|-
+|抢夺III
+|{{frac|1|6}}
+|{{frac|1|3}}
+|{{frac|1|3}}
+|{{frac|1|6}}
+|}
+
+{{in|je}}[[流浪者]]和[[沼骸]]的药箭是特殊情况：抢夺魔咒会尝试增加药箭的掉落数量，但最终掉落量上限为1。因此，抢夺魔咒增加的是箭掉落的概率，最多达抢夺III的{{frac|11|12}}，而不是箭掉落的数量。
+
+=== 稀有掉落物 ===
+'''稀有掉落物（Rare drops）'''只会在怪物被玩家或驯服的狼击杀时出现，但某些稀有掉落物也可以通过其他方式获得。稀有掉落物最多只会掉落1个，且可能会跟普通掉落物一起掉落。是否为稀有掉落物由生物的[[战利品表]]中的<code>random_chance_with_looting</code>属性决定。
+
+典型的稀有掉落物掉落概率为2.5%，且武器上的[[抢夺]]魔咒每1级会额外增加1%（上限为抢夺III的5.5%）。唯一的例外情况是[[兔子]]的[[兔子脚]]掉落概率为10%，每1级抢夺魔咒额外增加3%（上限为抢夺III时的19%）。
+
+{{in|bedrock}}[[凋灵骷髅]]的[[凋灵骷髅头颅]]掉落概率是2.5%，每1级抢夺魔咒额外增加2%（上限为抢夺III时的8.5%）；而[[溺尸]]的[[铜锭]]掉落概率是11%，每1级抢夺魔咒额外增加2%（上限为抢夺III时的17%）。
+
+请注意，某些生物有多个稀有掉落物（[[守卫者]]和[[僵尸]]类生物），则2.5%会平均分配给每个稀有掉落物，而不是独立计算。
+
+[[潜影贝]]掉落的[[潜影壳]]技术上来说也是稀有掉落物，它每次仅掉落1个，但它并不需要玩家杀死才掉落，也有着不是很稀有的50%掉落概率。{{in|je}}每1级抢夺魔咒额外增加6.25%（上限为抢夺III时的68.75%）。
+
+=== 装备物 ===
+[[File:Power Bow Rare Drop.png|缩略图|250px|骷髅掉落的附魔弓]]
+
+====掉落概率====
+当生物被玩家或驯服的[[狼]]击杀时，会有一定概率掉落其生成时附带的装备（武器，工具或盔甲）。怪物生成时附带的每一件装备有{{only|for=8.5%|je|short=1}}/{{only|for=25%|be|short=1}}的概率掉落。掉落概率由生物的<code>drop_chances</code>标签决定。[[抢夺]]魔咒每1级增加1%概率（{{in|je}}最高为抢夺III时的11.5%，{{in|be}}最高为抢夺III时的28%）。每件装备的掉落概率都是独立计算的，这意味着怪物死亡时有可能掉落多件装备。
+
+某些装备物一定不会掉落：
+
+* {{in|je}}[[万圣节]]时怪物自然装备的[[雕刻南瓜]]、[[南瓜灯]]不会掉落。<ref>{{bug|MC-203219|||WAI}}</ref>
+* [[恼鬼]]手上的[[铁剑]]不会掉落。
+* [[村民]]手持的物品不会掉落。
+* {{in|je}}由不祥试炼额外生成的装备不会掉落。
+
+某些装备物一定会掉落：
+
+* 生物生成后捡起的所有物品都一定会掉落，就算不是被玩家击杀也一样，对幼年[[僵尸]]亦成立。
+** 只对敌对生物成立。命令添加的物品不会掉落。
+* [[不祥旗帜]]总会在[[袭击队长]]死亡时掉落。
+* 玩家为[[马]]、[[驴]]、[[骡]]、{{only|for=[[骷髏馬]]|java}}、[[殭屍馬]]、[[羊驼]]、[[猪]]、[[炽足兽]]、[[骆驼]]、[[駱駝屍殼]]、[[快乐恶魂]]、[[鸚鵡螺]]和[[殭屍鸚鵡螺]]装备的物品都会掉落，如[[鞍]]、[[箱子]]、[[地毯]]、[[挽具]]、[[馬鎧]]和[[鸚鵡螺鎧]]。
+* [[狐狸]]叼着（主手中）的物品必定掉落。
+* {{in|be}}[[尸壳]]在水下转化为[[僵尸]]，僵尸在水下转化成[[溺尸]]的过程中会掉落所有装备。
+* 溺尸副手持着的任何物品都必定掉落，包括用命令添加的物品。
+* [[铜傀儡]]死亡时必定掉落其手持的物品。
+* [[硫方怪]]死亡时必定会掉落其身体内部的[[方块]]。
+
+====掉落物耐久====
+{{main|物品耐久#掉落物耐久}}
+
+{{in|je}}生物掉落的物品、工具和盔甲会有0至最大耐久的随机耐久，且越低的耐久度出现的可能性越高。这也是耐久为0的物品唯一的出现方式。
+
+{{in|be}}生物掉落的物品、工具和盔甲会至少有25耐久度（金质为26），且越低的耐久度出现的可能性越高。
+
+=== 经验球 ===
+{{Main|经验球}}
+
+'''经验球（Experience Orb）'''只有在生物受到玩家或驯服的[[狼]]的攻击（近战、弓、雪球、蛋、以及造成瞬间伤害的药水、荆棘魔咒、玩家点燃的TNT爆炸和玩家反弹的弹射物）之后5秒内死亡时才会掉落。同一种生物掉落的所有经验球的价值总和也总是与杀死该生物所应得的经验总值相等。
+
+{{in|be}}经验球的掉落与其他掉落物如[[物品（实体）|物品]]不同，生物尸体化为烟雾消失之时经验球才出现在其尸体所在的位置。
+
+== 掉落物列表 ==
+=== 生物掉落物 ===
+{| class="wikitable" data-description="Mob drops"
+|-
+!生物
+!经验值
+!常见掉落物
+!稀有掉落物
+!可能装备物
+!备注
+!受抢夺魔咒影响
+|-
+! colspan="7" |友好生物
+|-
+|{{EntityLink|Allay}}
+| style="text-align:center" |0
+|无
+|无
+|玩家给的任意物品
+|
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Armadillo}}
+| style="text-align:center" |1-3
+|无
+|无
+|无
+|对其使用[[刷子]]会掉落1{{ItemLink|Armadillo Scute}}。<br>每5-10分钟掉落1{{ItemLink|Armadillo Scute}}。
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Axolotl}}
+| style="text-align:center" |1-3
+|无
+|无
+|无
+|
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Sulfur Cube}}
+| style="text-align:center" |0（小型）<br>1-2（中型）
+|无
+|无
+|身体内部的方块（若玩家对硫方怪{{Control|使用}}部分方块，或者硫方怪拾取了部分方块物品）
+|硫方怪死亡时总会掉落其身体内部的方块。
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Bat}}
+| style="text-align:center" |0
+|无
+|无
+|无
+|
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Bee}}
+| style="text-align:center" |1-3
+|无
+|无
+|无
+|
+| {{Tc|n/a}}
+|- 
+|{{EntityLink|Camel}}
+| style="text-align:center" |1-3
+|无
+|无
+|1{{ItemLink|Saddle}} 若被上鞍
+|玩家对装备鞍的骆驼{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Camel Husk}}
+| style="text-align:center" |1-3
+|2-3{{ItemLink|Rotten Flesh}}
+|无
+|1{{ItemLink|Saddle}} 若被上鞍
+|玩家对装备鞍的骆驼尸壳{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}
+| {{tc|yes}}
+|-
+|{{EntityLink|Cat}}
+| style="text-align:center" |1-3
+|0-2{{ItemLink|String}}
+|无
+|无
+|驯服的猫会在玩家起床后给予玩家礼物：
+
+* {{ItemLink|Feather}}<br>
+* {{ItemLink|Phantom membrane}}<br>
+* {{ItemLink|Rabbit's foot}}<br>
+* {{ItemLink|Rabbit hide}}<br>
+* {{ItemLink|Rotten flesh}}<br>
+* {{ItemLink|Raw chicken}}<br>
+* {{ItemLink|String}}
+| {{Tc|yes}}
+|- 
+|{{EntityLink|Chicken}}
+| style="text-align:center" |1-3<br>{{only|je|for=10（若作为鸡骑士的一部分生成）}}
+|0-2{{ItemLink|Feather}}<br>1{{ItemLink|Raw Chicken}}<br>或1{{ItemLink|Cooked Chicken}}
+|无
+|无
+|着火下死亡时，肉变为熟肉。
+羽毛和肉的掉落均受抢夺魔咒影响。
+
+同时每5-10分钟产下1颗{{ItemLink|Egg}}。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Cod}}
+| style="text-align:center" |1-3
+|1{{ItemLink|Raw Cod}}或1{{ItemLink|Cooked Cod}}
+|{{only|for=0-2{{ItemLink|Bone}}（25%）|bedrock|short=1}}<br>{{only|for={{ItemLink|Bone Meal}}（5%）|java|short=1}}
+|无
+|着火下死亡时，肉变为熟肉。
+| {{Tc|partial|仅骨头和骨粉}}
+|-
+|{{EntityLink|Copper Golem}}
+| style="text-align:center" |0
+|1-3个{{ItemLink|Copper Ingot}}
+|无
+|从[[铜箱子]]中拾取的物品<br>1{{BlockLink|Poppy}} 若其头上插有虞美人
+|死亡时总会掉落其手持的物品。
+| {{Tc|no}}
+|-
+|{{EntityLink|Cow}}
+| style="text-align:center" |1-3
+|0-2{{ItemLink|Leather}}<br>1-3{{ItemLink|Raw Beef}}或1-3{{ItemLink|Steak}}
+|无
+|无
+|着火下死亡时，肉变为熟肉。
+对其使用空桶可得到{{ItemLink|Milk bucket}}。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Dolphin}}
+| style="text-align:center" |0
+|0-1{{ItemLink|Raw Cod}}
+|无
+|无
+|
+| {{Tc|yes}}
+|- 
+|{{EntityLink|Donkey}}<br>{{EntityLink|Mule}}
+| style="text-align:center" |1-3
+|0-2{{ItemLink|Leather}}
+|无
+|1{{ItemLink|Saddle}} 若被上鞍
+1{{BlockLink|Chest}} 若被装备
+|同时掉落箱子的内容物<br>玩家对装备鞍的驴{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}
+| {{Tc|yes}}
+|-
+|{{EntityLink|Fox}}
+| style="text-align:center" |{{only|for=1-2|Java}}<br>{{only|for=1-3|bedrock}}
+|无
+|无
+|
+{{ItemLink|Egg}}<br>{{ItemLink|Emerald}}<br>{{ItemLink|Feather}}<br>{{ItemLink|Leather}}<br>{{ItemLink|Rabbit Hide}}<br>{{ItemLink|Rabbit's Foot}}<br>{{ItemLink|Wheat}}
+|狐狸死亡后总会掉落它们叼着的物品。
+| {{Tc|N/A}}
+|- 
+|{{EntityLink|Frog}}
+| style="text-align:center" |1-3
+|无
+|无
+|无
+|
+| {{Tc|N/A}}
+|- 
+|{{EntityLink|Glow Squid}}
+| style="text-align:center" |1-3
+|1-3{{ItemLink|Glow Ink Sac}}
+|无
+|无
+|
+| {{Tc|yes}}
+|- 
+|{{EntityLink|Goat}}
+| style="text-align:center" |1-3
+|无
+|无
+|无
+|仅撞击到[[石头]]、[[浮冰]]、[[铁矿石]]、[[煤矿石]]、[[铜矿石]]、[[绿宝石矿石]]或[[原木]]时掉落1个{{ItemLink|Goat Horn}}，每只成年山羊最多掉落2个{{ItemLink|Goat Horn}}。
+| {{Tc|N/A}}
+|-
+|{{EntityLink|Happy Ghast}}
+| style="text-align:center" |1-3
+|无
+|无
+|其身上装备的[[挽具]]
+|玩家对装备挽具的快乐恶魂{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Harness}}
+| {{Tc|n/a}}
+|- 
+|{{EntityLink|Horse}}
+| style="text-align:center" |1-3
+|0-2{{ItemLink|Leather}}
+|无
+|1{{ItemLink|Saddle}} 若被上鞍
+1{{ItemLink|id=iron-horse-armor|马铠}} 若被装备
+|玩家对装备鞍或马铠的马{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}或1{{ItemLink|id=iron-horse-armor|马铠}}
+| {{Tc|yes}}
+|-
+|{{EntityLink|Iron Golem}}
+| style="text-align:center" |0
+|3-5{{ItemLink|Iron Ingot}}<br>0-2{{BlockLink|Poppy}}
+|无
+|无
+|
+| {{Tc|no}}
+|-
+|{{EntityLink|Llama}}<br>{{EntityLink|Trader llama}}
+| style="text-align:center" |1-3
+|0-2{{ItemLink|Leather}}
+|无
+|1{{BlockLink|Carpets}} 若被装备
+1{{BlockLink|Chest}} 若被装备
+|同时掉落箱子的内容物<br>玩家对装备地毯的羊驼或行商羊驼{{Control|使用}}[[剪刀]]会掉落1{{BlockLink|Carpets}}
+| {{Tc|yes}}
+|-
+|{{EntitySprite|brown mooshroom}}{{EntityLink|Mooshroom}}
+| style="text-align:center" |1-3
+|0-2{{ItemLink|Leather}}<br>1-3{{ItemLink|Raw Beef}}或1-3{{ItemLink|Steak}}
+|无
+|无
+|着火下死亡时，肉变为熟肉。<br>对其使用剪刀掉落对应的5{{BlockLink|Mushrooms}}，并将其转化成普通牛。此过程无法逆转。<br>对其使用空桶可得到{{ItemLink|Milk bucket}}。<br>
+对其使用空碗可得到{{ItemLink|Mushroom Stew}}。<br>对棕色哞菇喂食花后，下次对其使用空碗可得到{{ItemLink|suspicious stew}}。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Nautilus}}
+| style="text-align:center" |1-3
+|无
+|1{{ItemLink|Nautilus Shell}} （当被玩家或驯服的狼杀死时5%概率掉落）
+|1{{ItemLink|Saddle}}若被上鞍<br>1{{ItemLink|Nautilus Armor}}若被装备
+|玩家对装备鞍或鹦鹉螺铠的鹦鹉螺{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}或1{{ItemLink|Nautilus Armor}}
+| {{Tc|no}}
+|-
+|{{EntityLink|Ocelot}}
+| style="text-align:center" |1-3
+|无
+|无
+|无
+|
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Panda}}
+| style="text-align:center" |1-3
+|{{only|for=0-2{{ItemLink|Bamboo}}|bedrock}}<br>{{only|for=1{{ItemLink|Bamboo}}|java}}
+|无
+|无
+|体弱的熊猫和幼年熊猫在打喷嚏后会掉落{{ItemLink|slimeball}}
+| {{Tc|yes}}{{only|be}}
+|- 
+|{{EntityLink|Parrot}}
+| style="text-align:center" |1-3
+|1-2{{ItemLink|Feather}}
+|无
+|无
+|
+| {{Tc|yes}}{{only|je}}
+|-
+|{{EntityLink|Pig}}
+| style="text-align:center" |1-3
+|1-3{{ItemLink|Raw Porkchop}}或1-3{{ItemLink|Cooked Porkchop}}
+|无
+|1{{ItemLink|Saddle}} 若被上鞍
+|着火下死亡时，肉变为熟肉。<br>玩家对装备鞍的猪{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}
+| {{Tc|yes}}
+|-
+|{{EntityLink|Polar Bear}}
+| style="text-align:center" |1-3
+|0-2{{ItemLink|Raw Cod}}（{{frac|3|4}}概率）<br>0-2{{ItemLink|Raw Salmon}}（{{frac|1|4}}概率）
+|无
+|无
+|着火下死亡时，鱼变为熟鱼。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Pufferfish}}
+| style="text-align:center" |1-3
+|1{{ItemLink|link=Pufferfish|Pufferfish}}
+|{{only|for=1-2{{ItemLink|Bone}}（25%）|bedrock|short=1}}<br>{{only|for={{ItemLink|Bone Meal}}（5%）|java|short=1}}
+|无
+|无
+| {{Tc|partial|仅骨头和骨粉}}
+|-
+|{{EntityLink|Rabbit}}
+| style="text-align:center" |1-3
+|{{only|for=0-1{{ItemLink|Raw Rabbit}}或0-1{{ItemLink|Cooked Rabbit}}|be|short=1}}<br>{{only|for=1{{ItemLink|Raw Rabbit}}或1{{ItemLink|Cooked Rabbit}}|je|short=1}}<br>0-1{{ItemLink|Rabbit Hide}}
+|{{ItemLink|Rabbit's Foot}}（10%）
+|无
+|着火下死亡时，肉变为熟肉。
+| {{Tc|yes}}
+|-
+
+|-
+|{{EntityLink|Salmon}}
+| style="text-align:center" |1-3
+|1{{ItemLink|Raw Salmon}}或1{{ItemLink|Cooked Salmon}}
+|{{only|for=0-2{{ItemLink|Bone}}（25%）|bedrock|short=1}}<br>{{only|for={{ItemLink|Bone Meal}}（5%）|java|short=1}}
+|无
+|{{in|be}}小型和正常的鲑鱼掉落0-2根骨头，大型的掉落1-2根骨头。<br>着火下死亡时，肉变为熟肉。
+| {{Tc|partial|仅骨头和骨粉}}
+|-
+|{{EntityLink|Sheep}}
+| style="text-align:center" |1-3
+|1{{BlockLink|Wool}} 如果未被剪毛<br>1-2{{ItemLink|Raw Mutton}}或1-2{{ItemLink|Cooked Mutton}}
+|无
+|无
+|羊毛的掉落不受抢夺魔咒影响。<br>使用剪刀修剪羊毛掉落1-3{{BlockLink|Wool}}，若绵羊天生有色或后天染色，则剪下的羊毛亦有颜色。<br>着火下死亡时，肉变为熟肉。
+| {{Tc|partial|仅肉}}
+|-
+|{{EntityLink|Skeleton Horse}}
+| style="text-align:center" |1-3
+|0-2{{ItemLink|Bone}}
+|无
+|{{only|JE|for=1{{ItemLink|Saddle}}若被上鞍}}
+|{{only|JE|for=玩家对装备鞍的骷髅马{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}}}
+| {{Tc|yes}}
+|-
+|{{EntityLink|Sniffer}}
+| style="text-align:center" |1-3
+|无
+|无
+|无
+|
+| {{Tc|N/A}}
+|-
+|{{EntityLink|Snow Golem}}
+| style="text-align:center" |0
+|0-15{{ItemLink|Snowball}}
+|无
+|无
+|玩家对戴着雕刻南瓜的雪傀儡{{Control|使用}}[[剪刀]]会掉落1{{BlockLink|Carved Pumpkin}}
+| {{Tc|no}}
+|-
+|{{EntityLink|Squid}}
+| style="text-align:center" |1-3
+|1-3{{ItemLink|Ink Sac}}
+|无
+|无
+|
+| {{Tc|yes}}
+|-
+|{{EntityLink|Strider}}
+| style="text-align:center" |1-2
+|2-5{{ItemLink|String}}
+|无
+|1{{ItemLink|Saddle}} 若被上鞍
+|玩家对装备鞍的炽足兽{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}
+| {{Tc|yes}}
+|-
+|{{EntityLink|Tadpole}}
+| style="text-align:center" |0
+|无
+|无
+|无
+|
+| {{Tc|N/A}}
+|-
+|{{EntityLink|Tropical Fish}}
+| style="text-align:center" |1-3
+|1{{ItemLink|Tropical Fish}}
+|{{only|for=1-2{{ItemLink|Bone}}（25%）|bedrock|short=1}}<br>{{only|for={{ItemLink|Bone Meal}}（5%）|java|short=1}}
+|无
+|
+| {{Tc|partial|仅骨头和骨粉}}
+|-
+|{{EntityLink|Turtle}}
+| style="text-align:center" |1-3
+|0-2{{BlockLink|Seagrass}}<br>1{{itemLink|bowl}} 被闪电杀死时
+|无
+|无
+|当其长大时掉落1个{{ItemLink|Turtle Scute}}。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Wolf}}
+| style="text-align:center" |1-3
+|无
+|无
+|1{{ItemLink|Wolf Armor}} 若被装备
+|狼的主人对装备了狼铠的狼{{Control|使用}}剪刀会掉落1{{ItemLink|Wolf Armor}}。
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Zombie Horse}}
+| style="text-align:center" |1-3
+|2-3{{ItemLink|Rotten Flesh}}
+|无
+|1{{ItemLink|Saddle}} 若被上鞍<br>1{{ItemLink|horse armor}} 若被装备
+|玩家对装备鞍或马铠的僵尸马{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}或1{{ItemLink|horse armor}}
+| {{Tc|yes}}
+|-
+|{{EntityLink|Zombie Nautilus}}
+| style="text-align:center" |1-3
+|0-3{{ItemLink|Rotten Flesh}} {{only|for=若被玩家或驯服的狼杀死|je}}
+|无
+|1{{ItemLink|Saddle}}若被上鞍<br>1{{ItemLink|Nautilus Armor}}若被装备
+|玩家对装备鞍或鹦鹉螺铠的僵尸鹦鹉螺{{Control|使用}}[[剪刀]]会掉落1{{ItemLink|Saddle}}或1{{ItemLink|Nautilus Armor}}
+| {{Tc|yes}}
+|-
+! colspan="7" |敌对生物
+|-
+|{{EntityLink|Blaze}}
+| style="text-align:center" |10
+|0-1{{ItemLink|Blaze Rod}} 若被玩家或驯服的[[狼]]击杀
+|无
+|无
+|
+| {{Tc|yes}}
+|-
+|{{EntityLink|Breeze}}
+| style="text-align:center" |10
+|1-2{{ItemLink|Breeze Rod}} 若被玩家或驯服的[[狼]]击杀
+|无
+|无
+|
+| {{Tc|yes}}
+|-
+|{{EntityLink|Bogged}}
+| style="text-align:center" |5<br>+ 1-3 如果有{{only|je|for=装备}}或{{only|be|for=盔甲}}
+|0-2{{ItemLink|Bone}}<br>0-2{{ItemLink|Arrow}}
+|{{ItemLink|Arrow of Poison}}（50%），若被玩家或玩家驯服的狼杀死
+|无
+|玩家对带有蘑菇的沼骸{{Control|使用}}[[剪刀]]会掉落2任意种类的{{BlockLink|Mushroom}}
+| {{Tc|yes}}
+|-
+|{{EntityLink|Parched}}
+| style="text-align:center" |5<br>+ 1-3 如果有{{only|je|for=装备}}或{{only|be|for=盔甲}}
+|0-2{{ItemLink|Bone}}<br>0-2{{ItemLink|Arrow}}
+|{{ItemLink|Arrow of Weakness}}（50%），若被玩家或玩家驯服的狼杀死
+|无
+|
+| {{Tc|yes}}
+|-
+|{{EntityLink|Cave Spider}}<br>{{EntityLink|Spider}}
+| style="text-align:center" |5
+|0-2{{ItemLink|String}}<br>0-1{{ItemLink|Spider Eye}} 若被玩家{{only|je|for=或驯服的狼}}击杀
+|无
+|无
+|
+| {{Tc|yes}}
+|-
+|{{EntityLink|Creaking}}
+| style="text-align:center" |0
+|无
+|无
+|无
+|
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Creeper}}
+| style="text-align:center" |5
+|0-2{{ItemLink|Gunpowder}}<br>1{{ItemLink|Music Discs}} 若被骷髅、流浪者、沼骸、焦骸或{{only|je|for=凋灵骷髅}}击杀<br>1{{BlockLink|Creeper Head}} 若被闪电苦力怕的爆炸炸死
+|无
+|无
+|
+| {{Tc|yes}}
+|-
+|{{EntityLink|Drowned}}
+| style="text-align: center" |5<br>12 若其为幼年状态<br>{{only|je|for=+ 1-3 若其携带三叉戟}}
+|0-2{{ItemLink|Rotten Flesh}}
+|11%的概率掉落：<br>{{ItemLink|Copper Ingot}}
+|{{ItemLink|Trident}}<br>{{ItemLink|Fishing Rod}}<br>{{ItemLink|Nautilus Shell}} （仅副手）<br>
+|{{in|be}}从罕见掉落物中增加掉落三叉戟的概率，且铜锭只会在三叉戟掉落失败时掉落。<br>始终将鹦鹉螺壳从副手掉落。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Elder Guardian}}
+| style="text-align:center" |10
+|0-2{{ItemLink|Prismarine Shard}}<br>0-1{{ItemLink|Prismarine Crystals}}（{{frac|1|3}}概率）<br>0-1{{ItemLink|Raw Cod}}（{{frac|1|2}}概率）
+{{Only|for=或 0-1{{ItemLink|Cooked Cod}}（{{frac|1|2}}概率）若被火烧死|Java}}
+<br>1{{BlockLink|Wet Sponge}}<br>1{{ItemLink|Tide Armor Trim Smithing Template}}（{{frac|1|5}}概率） 若被玩家或驯服的狼击杀
+|{{only|je|for={{ItemLink|Raw Cod}}（60%）<br>{{ItemLink|Raw Salmon}}（25%）<br>{{ItemLink|Pufferfish}}（13%）<br>{{ItemLink|Tropical fish}} （2%）若其被玩家或驯服的狼击杀}}
+|无
+|海晶砂粒仅会在掉落生鳕鱼失败时掉落。<br>生鳕鱼既是常见掉落物也是稀有掉落物。<br>{{in|je}}被火烧死时会掉落熟鲑鱼而不是生鲑鱼。
+| {{Tc|partial|除湿海绵和潮汐盔甲纹饰锻造模板外所有掉落物}}
+|-
+|{{only|bedrock|for={{EntityLink|Elder Guardian Ghost}}}}
+| style="text-align:center" |0
+|无
+|无
+|无
+|
+| {{Tc|N/A}}
+|-
+|{{EntityLink|Ender Dragon}}
+| style="text-align:center" |12,000或500
+|无
+|无
+|无
+|若其是第一次被杀死，经验值掉落分为10个价值1000的经验球和1个价值2000的经验球。<br>激活返回传送门：<br>生成4个{{BlockLink|Torch}}<br>1{{BlockLink|Dragon Egg}}（仅第一次）在返回传送门柱上。<br>
+被第二次击杀后仅会掉落价值为500的经验球。<br>前20次击杀末影龙会生成[[末地折跃门]]。
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Enderman}}
+| style="text-align:center" |5
+|0-1{{ItemLink|Ender Pearl}}
+|无
+|无
+|当其持有方块时方块也会掉落。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Endermite}}
+| style="text-align:center" |3
+|无
+|无
+|无
+|
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Evoker}}
+| style="text-align:center" |10
+|{{ItemLink|Totem of Undying}} <br>0-1{{ItemLink|Emerald}}
+|无
+|{{only|for=1{{BlockLink|Ominous Banner}} 若其为袭击队长|java}}<!-- evoker in bedrock never spawn as raid captain-->
+|不死图腾总会在被杀死时掉落。<br>袭击队长总会掉落不祥旗帜。
+| {{Tc|partial|仅绿宝石}}
+|-
+|{{EntityLink|Ghast}}
+| style="text-align:center" |5
+|0-1{{ItemLink|Ghast Tear}}<br>0-2{{ItemLink|Gunpowder}}<br>1{{ItemLink|Music Disc Tears|''Tears''音乐唱片}}若被[[恶魂火球]]杀死
+|无
+|无
+|
+| {{Tc|partial|仅火药和恶魂之泪}}
+|-
+|{{only|for={{EntityLink|Giant}}|java}}
+| style="text-align:center" |5
+|无
+|无
+|无
+|
+| {{Tc|N/A}}
+|-
+|{{EntityLink|Guardian}}
+| style="text-align:center" |10
+|0-2{{ItemLink|Prismarine Shard}}<br>0-1{{ItemLink|Prismarine Crystals}}（{{frac|2|5}}概率）<br>0-1{{ItemLink|Raw Cod}}（{{frac|2|5}}概率）
+{{only|for=或 0-1{{ItemLink|Cooked Cod}}（{{frac|2|5}}概率）若其被火烧死|java}}
+|{{only|je|for={{ItemLink|Raw Cod}}（60%）<br>{{ItemLink|Raw Salmon}}（25%）<br>{{ItemLink|Pufferfish}}（13%）<br>{{ItemLink|Tropical fish}}（2%）若其被玩家或驯服的狼击杀}}
+|无
+|海晶砂粒仅会在其掉落生鳕鱼失败时掉落。<br>生鳕鱼既是常见掉落物也是罕见掉落物。<br>{{in|je}}熟鳕鱼会在其被火烧死时代替生鳕鱼掉落。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Hoglin}}
+| style="text-align:center" |5<br>{{only|je|for=5}}或{{only|be|for=3}} 若为幼年个体<br>
+|2-4{{ItemLink|Raw Porkchop}}或2-4{{ItemLink|Cooked Porkchop}}<br>0-2{{ItemLink|Leather}}
+|无
+|无
+|着火下死亡时，肉变为熟肉。<br>幼年疣猪兽只掉落经验。
+| {{Tc|yes}}
+|-
+|{{only|for={{EntityLink|Illusioner}}|java}}
+| style="text-align:center" |5<br>+ 1-3（弓）
+|无
+|无
+|{{ItemLink|Bow}}<br>{{BlockLink|Ominous Banner}} 若其为袭击队长
+|袭击队长被杀死时总会掉落不祥旗帜。
+| {{Tc|partial|仅增加掉落弓的概率}}
+|-
+|{{EntityLink|Magma Cube}}
+| style="text-align:center" |1（小型）<br>2（中型）<br>4（大型）
+|0-1{{ItemLink|Magma Cream}} 如果其大小>1<br>1{{BlockLink|Froglights}} 若被青蛙击杀
+|无
+|无
+|无
+| {{Tc|yes}}
+|-
+|{{EntityLink|Phantom}}
+| style="text-align:center" |5
+|0-1{{ItemLink|Phantom Membrane}} 若其被玩家{{only|je|for=或驯服的狼}}击杀
+|无
+|无
+|
+| {{Tc|Yes}}
+|-
+|{{EntityLink|Piglin}}
+| style="text-align:center" |<br>5<br>{{only|je|for=5}}或{{only|be|for=1}} 若为幼年个体<br>+ 1-3 如果有{{only|je|for=装备}}或{{only|be|for=盔甲}}
+|1{{BlockLink|Piglin Head}} 若其被闪电苦力怕炸死
+|掉落装备和捡起的物品
+|{{ItemLink|Golden Sword}}<br>{{ItemLink|Golden Spear}}<br>{{ItemLink|Crossbow}}<br>{{ItemLink|id=golden-chestplate|盔甲|随机金盔甲}}
+|捡起的装备和物品必然掉落，自然生成的装备掉落概率为{{only|je|for=8.5%}}或{{only|be|for=25%}}，受抢夺魔咒影响。<br>装备可能会是附魔过的。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Piglin Brute}}
+| style="text-align:center" |20<br>{{only|je|for=+ 1-3（金斧）}}
+|无
+|{{only|je|for=8.5%}}或{{only|be|for=25%}}概率掉落{{ItemLink|golden axe}}
+|{{ItemLink|golden axe}}
+|
+|{{Tc|Yes}}
+|-
+|{{EntityLink|Pillager}}
+| style="text-align:center" |5<br>{{only|je|for=+ 1-3（弩）}}
+|{{only|for=0-2{{ItemLink|Arrow}}|bedrock}}<br>1{{ItemLink|Ominous Bottle}} 若其为袭击队长
+|无
+|{{ItemLink|Crossbow}}<br>1{{BlockLink|Ominous Banner}} 若其为袭击队长
+|弩可能是附魔的。<br>袭击队长被杀死时总会掉落不祥旗帜。<br>每一级抢夺魔咒增加1%概率掉落弩。<br>{{In|Bedrock}}袭击中生成的掠夺者可以掉落：<br>
+
+* 0-1{{ItemLink|Emerald}}
+
+额外掉落会受到难度的影响，简单和普通的概率为65%，困难为80%。<br>
+
+* 0-1{{ItemLink|Emerald}}（{{frac|10|39}}概率）<!-- or {{frac|20|78}}--><br>
+* 2-3{{ItemLink|Emerald}}（{{frac|5|39}}概率）<!-- or {{frac|10|78}}--><br>
+* 4-5{{ItemLink|Emerald}}（{{frac|2|39}}概率）<!-- or {{frac|4|78}}--><br>
+* 1{{ItemLink|Enchanted Book}}（{{frac|2|39}}概率）<!-- or {{frac|4|78}}--><!-- empty {{frac|5|78}} （actually an iron_pick（not iron_pickaxe） but due the name is invalid causing to drop nothing）--><br>
+* 1{{ItemLink|Iron Axe}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Shovel}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Sword}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Helmet}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Chestplate}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Leggings}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Boots}}（{{frac|5|78}}概率）<br>
+
+从袭击者掉落的铁装备有50%的概率为附魔过的。<br>
+从袭击者掉落的铁装备总是严重损坏的。<br>
+抢夺魔咒会增加或提升掉落绿宝石的概率。<br>
+绿宝石仅会在附魔书或铁装备为掉落失败时掉落。
+| {{Tc|partial|{{only|for=所有但不包括袭击队长的掉落物|bedrock}}}}
+|-
+|{{EntityLink|Ravager}}
+| style="text-align:center" |20
+|1{{ItemLink|Saddle}} {{only|be|for=若被玩家杀死}}
+|无
+|无
+|
+| {{Tc|no}}
+|-
+|{{EntityLink|Shulker}}
+| style="text-align:center" |5
+|0-1{{ItemLink|Shulker Shell}}
+|无
+|无
+|
+| {{Tc|yes}}
+|-
+|{{EntityLink|Silverfish}}
+| style="text-align:center" |5
+|无
+|无
+|无
+|
+| {{Tc|n/a}}
+|-
+|{{EntityLink|Skeleton}}
+| style="text-align:center" |5<br>+ 1-3 如果有{{only|je|for=装备}}或{{only|be|for=盔甲}}
+|0-1{{ItemLink|bone}}<br>0-2{{ItemLink|arrow}}<br>{{BlockLink|skeleton skull}} 若被闪电苦力怕炸死
+|无
+|{{ItemLink|Bow}}<br>{{ItemLink|id=iron-chestplate|盔甲|随机皮革、铁、锁-{}-链、金或钻石盔甲}}
+|装备可能被附魔。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Slime}}
+| style="text-align:center" |1（小型）<br>2（中型）<br>4（大型）
+|0-2{{ItemLink|Slimeball}} 若其大小 = 1
+|无
+|无
+|
+| {{Tc|yes}}
+|-
+|{{EntityLink|Stray}}
+| style="text-align:center" |5<br>+ 1-3 如果有{{only|je|for=装备}}或{{only|be|for=盔甲}}
+|0-1{{ItemLink|bone}}<br>0-2{{ItemLink|Arrow}}
+|0-1{{ItemLink|arrow of slowness}} 若被玩家或驯服的狼杀死
+|{{ItemLink|Bow}}<br>{{ItemLink|id=iron-chestplate|盔甲|随机皮革、铁、锁-{}-链、金或钻石盔甲}}
+|装备可能被附魔。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Vex}}
+| style="text-align:center" |{{only|je|for=3}}<br>{{only|be|for=5}}<br>{{only|je|for=+ 1-3（铁剑）}}
+|无
+|无
+|{{ItemLink|iron sword}}
+|铁剑始终不会掉落。
+| {{Tc|no}}
+|-
+|{{EntityLink|Vindicator}}
+| style="text-align:center" |5<br>{{only|je|for=+ 1-3（铁斧）}}
+|0-1{{ItemLink|Emerald}}
+|无
+|{{ItemLink|Iron Axe}}<br>{{BlockLink|Ominous Banner}} 若其为袭击队长
+|仅被玩家杀死时掉落战利品。<br>铁斧可能是附魔过的。<br>袭击队长被杀死时总会掉落不祥旗帜。<br>{{In|Bedrock}}卫道士可以在袭击中掉落：<br>
+
+*0-1{{ItemLink|Emerald}}
+
+额外掉落会受到难度的影响，简单和普通的概率为65%，困难为80%。<br>
+
+* 0-1{{ItemLink|Emerald}}（{{frac|10|39}}概率）<!-- or {{frac|20|78}}--><br>
+* 2-3{{ItemLink|Emerald}}（{{frac|5|39}}概率）<!-- or {{frac|10|78}}--><br>
+* 4-5{{ItemLink|Emerald}}（{{frac|2|39}}概率）<!-- or {{frac|4|78}}--><br>
+* 1{{ItemLink|Enchanted Book}}（{{frac|2|39}}概率）<!-- or {{frac|4|78}} --><!-- empty {{frac|5|78}} （actually an iron_pick（not iron_pickaxe） but due the name is invalid causing to drop nothing）--><br>
+* 1{{ItemLink|Iron Axe}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Shovel}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Sword}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Helmet}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Chestplate}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Leggings}}（{{frac|5|78}}概率）<br>
+* 1{{ItemLink|Iron Boots}}（{{frac|5|78}}概率）<br>
+
+从袭击者掉落的铁装备有50%的概率为附魔过的。<br>
+从袭击者掉落的铁装备总是严重损坏的。<br>
+抢夺魔咒会增加或提升掉落绿宝石的概率。<br>
+绿宝石既是常规掉落物也是额外掉落物。<br>
+绿宝石仅会在附魔书或铁装备为掉落失败时掉落。<br>
+卫道士可以掉落两条斧头，一条来自自然装备，另一条来自袭击者额外掉落。
+| {{Tc|partial|所有但不包括不祥旗帜的袭击者的掉落物{{only|bedrock}}}}
+|-
+|{{EntityLink|Warden}}
+| style="text-align:center" |5
+|1{{BlockLink|Sculk Catalyst}}
+|无
+|无
+|
+| {{Tc|no}}
+|-
+|{{EntityLink|Witch}}
+| style="text-align:center" |5<br>{{only|je|for=+ 1-3（药水）}}
+|0-6{{ItemLink|Glass Bottle}}<br>0-6{{ItemLink|Glowstone Dust}}<br>0-6{{ItemLink|Gunpowder}}<br>4-8{{ItemLink|Redstone}}<br>0-6{{ItemLink|Spider Eye}}<br>0-6{{ItemLink|Stick}}<br>0-6{{ItemLink|Sugar}}
+
+1{{ItemLink|Potion}} 当在饮用药水时被杀死
+|无
+|{{ItemLink|id=Potion-of-Healing|Potions|治疗药水}}<br>{{ItemLink|id=Potion-of-Fire-Resistance|Potions|抗火药水}}<br>{{ItemLink|id=Potion-of-Swiftness|Potions|迅捷药水}}<br>{{ItemLink|id=Potion-of-Water-Breathing|Potions|水肺药水}}<br>它们有{{only|je|for=8.5%}}或{{only|be|for=25%}}的概率掉落。
+|当死亡时，女巫可能会掉落1-3种物品，每个为0-2个。可以多次掉落相同的物品，因此有可能会掉落6个相同的物品。木棍掉落的概率是其他常见掉落物的2倍。药水仅在女巫喝药水时被杀死掉落。
+| {{Tc|yes}}
+|-
+|{{EntityLink|Wither}}
+| style="text-align:center" |50
+|1{{ItemLink|Nether Star}}
+|无
+|无
+|
+| {{Tc|no}}
+|-
+|{{EntityLink|Wither Skeleton}}
+| style="text-align:center" |5<br>{{only|je|for=+ 1-3（石剑）}}
+|0-1{{ItemLink|Coal}}<br>0-2{{ItemLink|Bone}}{{BlockLink|Wither Skeleton Skull}} 若其被闪电苦力怕炸死
+|{{BlockLink|Wither Skeleton Skull}}（2.5%）若其被玩家或驯服的狼杀死
+|{{ItemLink|Stone Sword}}
+|
+| {{Tc|yes}}
+|-
+|{{EntityLink|Zoglin}}
+| style="text-align:center" |5
+|1-3{{ItemLink|Rotten Flesh}}
+|无
+|无
+|
+|{{Tc|yes}}
+|-
+|{{EntityLink|Zombie}}<br>{{EntityLink|Zombie Villager}}<br>{{EntityLink|Husk}}
+| style="text-align:center" |5<br>12 若其为幼年状态<br>+ 1-3 若其有{{only|je|for=装备}}或{{only|be|for=盔甲}}
+|0-2{{ItemLink|Rotten Flesh}}<br>1{{BlockLink|Zombie Head}} 若其被闪电苦力怕炸死（仅普通的僵尸）<br>1{{ItemLink|Music Disc Lava Chicken|''Lava Chicken''音乐唱片}}若僵尸、{{only|be|for=僵尸村民和尸壳}}为幼年形态且骑着[[鸡]]被玩家或玩家驯服的狼杀死<br>0-1{{BlockLink|Red Mushroom}}仅当僵尸骑乘僵尸马时<br>0-1{{ItemLink|Rabbit's Foot}}仅当尸壳骑乘骆驼尸壳时
+|2.5%的概率掉落：<br>{{ItemLink|Iron Ingot}}或<br>{{ItemLink|Carrot}}或<br>{{ItemLink|Potato}}（{{only|for={{ItemLink|baked Potato}} 若在着火下死亡|java}}）
+|{{ItemLink|Iron Shovel}}<br>{{ItemLink|Iron Sword}}<br>{{ItemLink|Iron Spear}}（{{only|be|for=僵尸村民除外}}）<br>{{ItemLink|id=iron-chestplate|盔甲|随机皮革、铁、锁-{}-链、金或钻石盔甲}}
+|{{only|for=僵尸村民生成时永远不会持有武器，也不会装备盔甲。|be}}<br>装备可能会是附魔过的。
+| {{Tc|partial|除''Lava Chicken''音乐唱片}}
+|-
+|{{EntityLink|Zombified Piglin}}
+| style="text-align:center" |5<br>12 若其为幼年状态<br>{{only|je|for=+ 1-3（金剑或金矛）}}
+|0-1{{ItemLink|Rotten Flesh}}<br>0-1{{ItemLink|Gold Nugget}}
+|{{ItemLink|Gold Ingot}}（2.5%）若被玩家或驯服的狼击杀
+|{{ItemLink|Golden Sword}}<br>{{ItemLink|Golden Spear}}
+|金剑和金矛可能会是附魔过的。
+| {{Tc|yes}}
+|-
+! colspan="7" |NPC
+|-
+|{{only|for={{EntityLink|Agent}}<br>|bedrock|education}}
+| style="text-align:center" |0
+|无
+|无
+|无
+|
+| {{Tc|n/a}}
+|-
+
+|{{only|for={{EntityLink|NPC}}<br>|bedrock|education}}
+| style="text-align:center" |0
+|无
+|无
+|无
+|
+| {{Tc|n/a}}
+|-
+
+|{{EntityLink|Villager}}
+| style="text-align:center" |0
+|无
+|无
+|无
+|村民死亡时不会掉落它们物品栏中的物品或手持的物品。
+村民分享时可将食物扔向其他村民，而其他村民可以捡起它们：{{ItemLink|Bread}}、{{ItemLink|Carrot}}、{{ItemLink|Potato}}、{{ItemLink|Beetroot}}
+{{collapseH|{{In|Java}}村民还可以在袭击事件取-{}-得胜利后取决于自身职业给予玩家礼物：}}
+{{EntitySprite|villager-armorer}}盔甲匠：
+{{flatlist|indent=1|
+* {{ItemLink|Chainmail Helmet}}
+* {{ItemLink|Chainmail Chestplate}}
+* {{ItemLink|Chainmail Leggings}}
+* {{ItemLink|Chainmail Boots}}
+}}
+{{EntitySprite|villager-butcher}}屠夫：
+{{flatlist|indent=1|
+* {{ItemLink|Cooked Chicken}}
+* {{ItemLink|Cooked Mutton}}
+* {{ItemLink|Cooked Porkchop}}
+* {{ItemLink|Cooked Rabbit}}
+* {{ItemLink|Steak}}
+}}
+{{EntitySprite|villager-cartographer}}制图师：
+{{flatlist|indent=1|
+* {{ItemLink|Paper}}
+* {{ItemLink|Empty Map}}
+}}
+{{EntitySprite|villager-cleric}}牧师：
+{{flatlist|indent=1|
+* {{ItemLink|Lapis Lazuli}}
+* {{ItemLink|Redstone Dust}}
+}}
+{{EntitySprite|villager-farmer}}农民：
+{{flatlist|indent=1|
+* {{ItemLink|Bread}}
+* {{ItemLink|Cookie}}
+* {{ItemLink|Pumpkin Pie}}
+}}
+{{EntitySprite|villager-fisherman}}渔夫：
+{{flatlist|indent=1|
+* {{ItemLink|Raw Cod}}
+* {{ItemLink|Raw Salmon}}
+}}
+{{EntitySprite|villager-fletcher}}制箭师
+{{flatlist|indent=1|
+* {{ItemLink|Arrow}}
+* {{ItemLink|Arrow of Fire Resistance}}
+* {{ItemLink|Arrow of Harming}}
+* {{ItemLink|Arrow of Healing}}
+* {{ItemLink|Arrow of Invisibility}}
+* {{ItemLink|Arrow of Leaping}}
+* {{ItemLink|Arrow of Night Vision}}
+* {{ItemLink|Arrow of Poison}}
+* {{ItemLink|Arrow of Regeneration}}
+* {{ItemLink|Arrow of Slowness}}
+* {{ItemLink|Arrow of Strength}}
+* {{ItemLink|Arrow of Swiftness}}
+* {{ItemLink|Arrow of Water Breathing}}
+* {{ItemLink|Arrow of Weakness}}
+}}
+{{EntitySprite|villager-leatherworker}}皮匠：
+{{flatlist|indent=1|
+* {{ItemLink|Leather}}
+}}
+{{EntitySprite|villager-librarian}}图书管理员：
+{{flatlist|indent=1|
+* {{ItemLink|Book}}
+}}
+{{EntitySprite|villager-mason}}石匠：
+{{flatlist|indent=1|
+* {{BlockLink|Clay}}
+}}
+{{EntitySprite|villager-shepherd}}牧羊人：
+{{flatlist|indent=1|
+* {{BlockLink|Wool}}
+}}
+{{EntitySprite|villager-toolsmith}}工具匠：
+{{flatlist|indent=1|
+* {{ItemLink|Stone Axe}}
+* {{ItemLink|Stone Hoe}}
+* {{ItemLink|Stone Pickaxe}}
+* {{ItemLink|Stone Shovel}}
+}}
+{{EntitySprite|villager-weaponsmith}}武器匠：
+{{flatlist|indent=1|
+* {{ItemLink|Stone Axe}}
+* {{ItemLink|Iron Axe}}
+* {{ItemLink|Golden Axe}}
+}}
+{{EntitySprite|villager}}幼年村民：
+{{flatlist|indent=1|
+* {{BlockLink|Poppy}}
+}}
+{{EntitySprite|villager-nitwit}}{{EntitySprite|villager}}傻子或失业：
+{{flatlist|indent=1|
+* {{ItemLink|Wheat Seeds}}
+}}{{collapseE|}}
+| {{Tc|no}}
+|-
+|{{EntityLink|Wandering Trader}}
+| style="text-align:center" |0
+|1{{ItemLink|Potion}}或{{ItemLink|Milk bucket}} 如果在饮用时被杀死
+|无
+|{{ItemLink|Potion of Invisibility}}<br>{{ItemLink|Milk bucket}}<br>它们有{{only|je|for=8.5%}}或{{only|be|for=25%}}的概率掉落。
+|药水和奶桶只可在流浪商人在饮用药水或奶时杀死得到。<br>当被杀死时，若{{ItemLink|lead}}依然系在行商羊驼时则会解绑并掉落。
+| {{Tc|yes|增加掉落概率}}
+|-
+! colspan="7" |盔甲架
+|-
+|{{EntityLink|Armor Stand}}
+| style="text-align:center" |0
+|0-1{{ItemLink|Armor Stand}}
+|无
+|盔甲架本身配有的物品。
+|{{in|bedrock}}如果被火、熔岩、营火、瞬间伤害或凋零效果杀死，则不会掉落本身，而其配有的装备与工具会被视为是自然生成，因此会有8.5%的概率掉落，如果掉落的是装备或工具，那么它们会是严重损坏的。<ref>{{bug|MCPE-24341}}</ref>
+| {{Tc|no}}
+|-  
+|}
+
+=== 非生物实体掉落物 ===
+{| class="wikitable" data-description="Entity drops"
+|-
+!实体名称
+!掉落物
+!备注
+|-
+! colspan="3" |物体
+|-
+|{{EntityLink|Bottle o' Enchanting}}
+|3-11{{EntityLink|id=experience-orb|经验值}}
+|
+|-
+|{{EntityLink|Egg}}
+|0、1或4{{EntityLink|Chicken|幼年鸡}} ''生成''
+|鸡蛋击中物体并破裂后，有{{fraction|1|8}}的概率生成一只幼年鸡。如果能够生成幼年鸡，则其又有{{fraction|1|32}}的概率额外再生成3只幼年鸡。因其他因素消失的鸡蛋不会生成鸡。
+|-
+|{{EntityLink|Ender Pearl}}
+|0-1{{EntityLink|endermite}}
+|使用末影珍珠有5%的概率生成一只末影螨。
+|-
+|{{EntityLink|Ominous Item Spawner}}
+|1 与展示物品对应的弹射物<br>用于展示的等量{{EnvLink|Items}}
+|如果物品存在对应弹射物，则只生成弹射物。
+|-
+! colspan="3" |建筑
+|-
+|{{EntityLink|Cushion}}{{in update|drop 3 2026}}
+|1对应颜色的{{ItemLink|Cushion}}
+|
+|-
+|{{EntityLink|Ender Crystal}}
+|''无''
+|破坏的时候会爆炸，比TNT的威力大50%
+|-
+|{{only|for={{EntityLink|Item Frame}}|java}}
+|1{{ItemLink|Item Frame}}
+|掉落其本身和它本身包含的东西。
+|-
+|{{only|for={{EntityLink|Glow Item Frame}}|java}}
+|1{{ItemLink|Glow Item Frame}}
+|掉落其本身和它本身包含的东西。
+|-
+|{{EntityLink|Painting}}
+|1{{ItemLink|Painting}}
+|
+|-
+! colspan="3" |载具
+|-
+|{{EntityLink|Boats}}
+|1 {{ItemSprite|oak-boat}}{{ItemSprite|spruce-boat}}{{ItemSprite|birch-boat}}{{ItemSprite|jungle-boat}}{{ItemSprite|acacia-boat}}{{ItemSprite|dark-oak-boat}}{{ItemSprite|Mangrove-Boat}}{{ItemSprite|Cherry-Boat}}{{ItemSprite|Bamboo Raft}}对应种类的船
+|
+|-
+|{{EntityLink|Boat with chest}}
+|1 {{ItemSprite|oak-boat-with-chest}}{{ItemSprite|spruce-boat-with-chest}}{{ItemSprite|birch-boat-with-chest}}{{ItemSprite|jungle-boat-with-chest}}{{ItemSprite|acacia-boat-with-chest}}{{ItemSprite|dark-oak-boat-with-chest}}{{ItemSprite|Mangrove-Boat-with-chest}}{{ItemSprite|Cherry-Boat-with-chest}}{{ItemSprite|Bamboo Raft-with-chest}}对应种类的运输船
+|同时掉落箱子的内容物。
+|-
+|{{EntityLink|Minecart}}
+|1{{ItemLink|Minecart}}
+|
+|-
+|{{EntityLink|Minecart with Chest}}
+|1{{ItemLink|Minecart with Chest}}
+|同时掉落箱子的内容物。
+|-
+|{{EntityLink|Minecart with Command Block}}
+|1{{ItemLink|Minecart}}
+|
+|-
+|{{only|for={{EntityLink|Minecart with Furnace}}|java}}
+|1{{ItemLink|Minecart with Furnace}}
+|
+|-
+|{{EntityLink|Minecart with Hopper}}
+|1{{ItemLink|Minecart with Hopper}}
+|同时掉落其内容物。
+|-
+|{{only|for={{EntityLink|Minecart with Monster Spawner}}|java}}
+|1{{ItemLink|Minecart}}
+|
+|-
+|{{EntityLink|Minecart with TNT}}
+|1{{ItemLink|Minecart with TNT}}
+|如果TNT被激活或者毁于爆炸将不会掉落任何东西。
+|}
+
+=== 方块掉落物 ===
+大多数方块被摧毁后掉落其本身。以下列出方块的所有特殊掉落。“精准采集”一列表示方块自身是否可以通过[[精准采集]]魔咒收集；“时运”一列表示是否受[[时运]]魔咒影响。
+
+{| class="wikitable" data-description="Block drops"
+|-
+!方块名称
+!经验值
+!掉落物
+![[精准采集]]
+![[时运]]
+!备注
+|-
+! colspan="6" |材料和建筑方块
+|-
+|{{BlockLink|id=amethyst-bud|Amethyst Bud}}
+| style="text-align:center" |—
+| ''无''
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Amethyst Cluster}}
+| style="text-align:center" |—
+| 2或4{{ItemLink|Amethyst Shard}}
+| {{tc|yes}}
+| {{Tc|yes}}
+|没有被具有[[精准采集]]的工具挖掘破坏时，紫水晶簇被破坏后会掉落4个[[紫水晶碎片]]，没有使用镐时则是2个，挖掘工具的[[时运]]魔咒会增加紫水晶碎片的掉落，时运I有概率掉落2倍（{{frac|1|3}}概率），时运II有概率掉落2或3倍（各{{frac|1|4}}概率），时运III有概率掉落2、3或4倍（各{{frac|1|5}}概率）。
+|-
+|{{BlockLink|Budding Amethyst}}
+| style="text-align:center" |—
+| ''无''
+| {{tc|no}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Bookshelf}}
+| style="text-align:center" |—
+|3{{ItemLink|Book}}
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Campfire}}
+| style="text-align:center" |—
+|2{{ItemLink|charcoal}}
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Chiseled Bookshelf}}
+| style="text-align:center" |—
+|''所有内容物''
+| {{tc|yes}}
+| {{Tc|N/A}}
+|被附有精准采集魔咒的工具破坏时还会掉落其内容物。
+|-
+|{{BlockLink|Clay}}
+| style="text-align:center" |—
+|4{{ItemLink|Clay ball}}
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Cobweb}}
+| style="text-align:center" |—
+|被剑打破时掉落1{{ItemLink|String}}
+被剪刀破坏时掉落自身
+| {{tc|partial}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Decorated Pot}}
+| style="text-align:center" |—
+|用于合成的4个{{itemLink|Pottery Sherd}}或{{itemLink|Brick}}和其内容物（使用没有精准采集的工具挖掘，或是被弹射物击毁时，{{only|for=或方块状态<code>cracked</code>为<code>true</code>时|JE}}）
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|id=double-smooth-stone-slab|Slabs|双台阶}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+|2{{BlockLink|id=stone-slab|Slabs}}
+| {{tc|no}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Farmland}}
+| style="text-align:center" |—
+|1{{BlockLink|Dirt}}
+| {{tc|no}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Glass}}
+| style="text-align:center" |—
+|''无''
+| {{tc|yes}}
+| {{tc|n/a}}
+|
+|-
+|{{BlockLink|Glass Pane}}
+| style="text-align:center" |—
+|''无''
+| {{tc|yes}}
+| {{tc|n/a}}
+|
+|-
+|{{BlockLink|Glowstone}}
+| style="text-align:center" |—
+|2-4{{ItemLink|Glowstone Dust}}
+| {{tc|yes}}
+| {{Tc|yes|是，上限为4}}
+|
+|-
+|{{BlockLink|Grass Block}}<br>{{BlockLink|Mycelium}}<br>{{BlockLink|Podzol}}
+| style="text-align:center" |—
+|1{{BlockLink|Dirt}}
+| {{Tc|yes}}
+| {{tc|no}}
+|
+|-
+| rowspan="2" |{{BlockLink|Dirt Path}}
+| rowspan="2" style="text-align:center" |—
+| rowspan="2" |1{{BlockLink|Dirt}}
+| {{tc|no}}{{only|java}}
+| {{Tc|no}}
+| rowspan="2" |
+|-
+| {{Tc|yes}}{{Only|bedrock}}
+| {{tc|no}}
+|-
+|{{BlockLink|Gravel}}
+| style="text-align:center" |—
+|1{{BlockLink|Gravel}} ''或'' 1{{ItemLink|Flint}}
+| {{tc|yes}}
+| {{Tc|partial|增加概率}}
+|10%概率掉落燧石。<br>[[时运]]增加燧石掉落概率，时运I时概率增至14%，时运II增至25%，时运III增至100%。
+|-
+|{{BlockLink|Bee Nest}}
+| style="text-align:center" |—
+| 0-3{{EntityLink|Bee}}
+| {{tc|yes}}
+| {{tc|n/a}}
+|假如不使用精准采集挖掘，蜜蜂在蜂巢被破坏后会被激怒，无论蜂巢下是否有放置营火。
+|-
+|{{BlockLink|Ice}}
+| style="text-align:center" |—
+|''无''
+| {{tc|yes}}
+| {{tc|n/a}}
+|若冰块之下有另一（固体或流体）方块相邻，则冰块被破坏时产生水。在[[下界]]时不成立。
+|-
+|{{BlockLink|Packed Ice}}<br>{{BlockLink|Blue Ice}}
+| style="text-align:center" |—
+|''无''
+| {{tc|yes}}
+| {{tc|n/a}}
+|
+|-
+|{{BlockLink|Frosted Ice}}
+| style="text-align:center" |—
+| ''无''
+| {{tc|no}}
+| {{tc|n/a}}
+| 若冰块之下有另一（固体或流体）方块相邻，则冰块被破坏时产生水。在下界时不成立。
+|-
+|{{BlockLink|Sea Lantern}}
+| style="text-align:center" |—
+|2-3{{ItemLink|Prismarine Crystals}}
+| {{tc|yes}}
+| {{Tc|Yes}}{{only|je}}
+|{{in|je}}时运魔咒每级使掉落数量最大值增加1，直至上限5。时运III提高掉落更多物品的概率。{{in|be}}其掉落数量不受时运魔咒影响。<ref>{{bug|MCPE-179273}}</ref>
+|-
+|{{BlockLink|Snow Block}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+|4{{ItemLink|Snowball}}
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Snow}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+|1-8{{ItemLink|Snowball}}
+| {{tc|no}}
+| {{Tc|no}}
+|每层雪1个雪球。
+|-
+|{{BlockLink|Stone}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+|1{{BlockLink|Cobblestone}}
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Deepslate}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+|1{{BlockLink|Cobbled Deepslate}}
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Coral Blocks}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+|1{{BlockLink|Dead Coral Blocks}}
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Crimson Nylium}}<sup>[[#notes|T]]</sup><br>{{BlockLink|Warped Nylium}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+|1{{BlockLink|Netherrack}}
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Sculk}}
+| style="text-align:center" |1
+|无
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Sculk Catalyst}}<br>{{BlockLink|Sculk Sensor}}<br>{{BlockLink|Sculk Shrieker}}
+| style="text-align:center" |5
+|无
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Sculk Vein}}
+| style="text-align:center" |—
+|无
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Soul Campfire}}
+| style="text-align:center" |—
+|1{{BlockLink|Soul Sand}}
+| {{tc|yes}}
+| {{Tc|no}}
+|
+|-
+! colspan="6" |矿石
+|-
+|{{BlockLink|Coal Ore}}<sup>[[#notes|T]]</sup><br>{{BlockLink|Deepslate Coal Ore}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |0-2
+|1{{ItemLink|Coal}}
+| {{tc|yes}}
+| {{Tc|yes}}
+|
+|-
+|{{BlockLink|Diamond Ore}}<sup>[[#notes|T]]</sup><br>{{BlockLink|Deepslate Diamond Ore}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |3-7
+|1{{ItemLink|Diamond}}
+| {{tc|yes}}
+| {{Tc|yes}}
+|
+|-
+|{{BlockLink|Emerald Ore}}<sup>[[#notes|T]]</sup><br>{{BlockLink|Deepslate Emerald Ore}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |3-7
+|1{{ItemLink|Emerald}}
+| {{tc|yes}}
+| {{Tc|yes}}
+|
+|-
+|{{BlockLink|Lapis Lazuli Ore}}<sup>[[#notes|T]]</sup><br>{{BlockLink|Deepslate Lapis Lazuli Ore}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |2-5
+|4-9{{ItemLink|Lapis Lazuli}}
+| {{tc|yes}}
+| {{Tc|yes}}
+|
+|-
+|{{BlockLink|Nether Quartz Ore}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |2-5
+|1{{ItemLink|Nether Quartz}}
+| {{tc|yes}}
+| {{Tc|yes}}
+|
+|-
+|{{BlockLink|Nether Gold Ore}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |0-1
+| 2-6{{ItemLink|Gold Nugget}}
+| {{tc|yes}}
+| {{tc|yes}}
+|
+|-
+|{{BlockLink|Redstone Ore}}<sup>[[#notes|T]]</sup><br>{{BlockLink|Deepslate Redstone Ore}} <sup>[[#notes|T]]</sup>
+| style="text-align:center" |1-5
+|4-5{{ItemLink|Redstone}}
+| {{tc|yes}}
+| {{Tc|yes}}
+|
+|-
+! colspan="6" |植物
+|-
+|{{BlockLink|Beetroots|link=Beetroot Seeds}}
+| style="text-align:center" |—
+|1{{ItemLink|Beetroot Seeds}} ''若未成熟''<br>{{only|for=1-4|java|short=1}}/{{only|for=0-3|bedrock|short=1}}{{ItemLink|Beetroot Seeds}} ''若完全成熟''<br>{{only|for=1|java|short=1}}/{{only|for=1-2|bedrock|short=1}}{{ItemLink|Beetroot}} ''若完全成熟''
+| {{tc|no}}
+| {{Tc|partial|仅成熟}}
+|
+|-
+|{{BlockLink|Carrots}}
+| style="text-align:center" |—
+|1{{ItemLink|Carrot}} ''若未成熟''<br>{{only|for=2-5|java|short=1}}/{{only|for=1-4|bedrock|short=1}}{{ItemLink|Carrot}} ''若完全成熟''
+| {{tc|no}}
+| {{Tc|partial|仅成熟}}
+|
+|-
+|{{BlockLink|Cave Vines}}
+| style="text-align:center" |—
+|1{{ItemLink|Glow Berries}} ''若成熟''
+| {{tc|no}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Chorus Plant}}
+| style="text-align:center" |—
+|0-1{{ItemLink|Chorus Fruit}}
+| {{tc|no}}
+| {{tc|no}}
+|
+|-
+|{{BlockLink|Cocoa}}
+| style="text-align:center" |—
+|1{{ItemLink|Cocoa Beans}} ''若未成熟''<br>3{{ItemLink|Cocoa Beans}} ''若完全成熟''
+| {{tc|no}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Dead Bush}}
+| style="text-align:center" |—
+|0-2{{ItemLink|Stick}}
+| {{tc|no}}
+| {{Tc|no}}
+|使用[[剪刀]]采集时掉落自身。
+|-
+|{{BlockLink|Grass}}<br>{{BlockLink|Grass|Tall Grass}}<br>{{BlockLink|id=fern|Fern}}<br>{{BlockLink|id=fern|Large Fern}}
+| style="text-align:center" |—
+|0-1{{ItemLink|wheat Seeds}}
+| {{tc|no}}
+| {{Tc|yes}}
+|使用[[剪刀]]采集时掉落自身（一格高），或2个小型草丛（两格高）。<br>种子的掉落概率为12.5%。<br>每级[[时运]]魔咒增加2最大掉落数量。
+|-
+|{{BlockLink|Mushroom Blocks}}
+| style="text-align:center" |—
+| 0-2{{BlockLink|Mushrooms}}
+| {{tc|partial}}
+| {{Tc|no}}
+|80%概率不掉落蘑菇，分别有10%的概率掉落1个或2个蘑菇。每个方块平均掉落0.3个蘑菇。{{in|je}}蘑菇柄不会掉落蘑菇。<br>精准采集魔咒掉落的方块所有的面都显示为默认的蘑菇纹理，有红色斑点纹理，棕色纹理和蘑菇柄纹理。
+|-
+|{{BlockLink|Leaves}}
+| style="text-align:center" |—
+|0-1{{BlockLink|Saplings}} ''红树树叶除外''<br>0-2{{ItemLink|Stick}}<br>0-1{{ItemLink|Apple}} ''仅橡树及深色橡树树叶''<br>0-1{{BlockLink|Azalea}} ''仅杜鹃树叶''<br>0-1{{BlockLink|Flowering Azalea}} ''仅盛开的杜鹃树叶''
+| {{tc|yes}}
+| {{Tc|yes}}
+|使用剪刀破坏时，方块同时掉落本身及其掉落物。<br>丛林树苗的掉落概率为2.5%；其余所有树苗（红树胎生苗除外）、杜鹃花丛和盛开的杜鹃花丛掉落概率为5%。<br>苹果掉落概率为0.5%。<br>时运魔咒增加所有掉落物的概率。
+|-
+|{{BlockLink|Melon}}
+| style="text-align:center" |—
+|3-7{{ItemLink|Melon Slice}}
+| {{tc|yes}}
+| {{Tc|yes}}
+|时运魔咒每级使掉落数量最大值增加1，直至上限9。时运III提高掉落更多物品的概率。
+|-
+|{{BlockLink|id=melon-stem|西瓜茎}}
+| style="text-align:center" |—
+|0-3{{ItemLink|Melon Seeds}}
+| {{tc|no}}
+| {{Tc|no}}
+|3颗可能的种子均单独执行掉落判定，概率取决于生长阶段，范围从7%（刚种下）至53%（完全成熟）。
+|-
+|{{BlockLink|Nether Wart}}
+| style="text-align:center" |—
+|1{{ItemLink|Nether Wart}} ''若未成熟''<br>2-4{{ItemLink|Nether Wart}} ''若完全成熟''
+| {{tc|no}}
+| {{Tc|partial|仅成熟}}
+|
+|-
+|{{BlockLink|Potatoes}}
+| style="text-align:center" |—
+|1{{ItemLink|Potato}} ''若未成熟''<br>{{only|for=2-5|java|short=1}}/{{only|for=1-4|bedrock|short=1}}{{ItemLink|Potato}} ''若完全成熟''<br>0-1{{ItemLink|Poisonous Potato}} ''若完全成熟''
+| {{tc|no}}
+| {{Tc|partial|仅成熟}}
+|毒马铃薯掉落概率为2%。
+|-
+|{{BlockLink|id=pumpkin-stem|南瓜茎}}
+| style="text-align:center" |—
+|0-3{{ItemLink|Pumpkin Seeds}}
+| {{tc|no}}
+| {{Tc|yes}}
+|3颗可能的种子均单独执行掉落判定，概率取决于生长阶段，范围从7%（刚种下）至53%（完全成熟）。
+|-
+|{{BlockLink|Sweet Berry Bush}}
+| style="text-align:center" |—
+|1-2{{ItemLink|Sweet Berries}} ''第三阶段''<br>2-3{{ItemLink|Sweet Berries}} ''第四阶段''
+| {{tc|no}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Wheat|link=小麦}}
+| style="text-align:center" |—
+|1{{ItemLink|wheat Seeds}} ''若未成熟''<br>{{only|for=1-4|java|short=1}}/{{only|for=0-3|bedrock|short=1}}{{ItemLink|wheat Seeds}} ''若完全成熟''<br>1{{ItemLink|Wheat}} ''若完全成熟''
+| {{tc|no}}
+| {{Tc|partial|仅成熟}}
+|完全成熟时，[[时运]]魔咒增加种子掉落。
+|-
+! colspan="6" |其他
+|-
+|{{BlockLink|Cake}}
+| style="text-align:center" |—
+|''无''
+| {{tc|no}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Ender Chest}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+|8{{BlockLink|Obsidian}}
+| {{tc|yes}}
+| {{Tc|no}}
+|不会掉落其内容物。
+|-
+|{{BlockLink|Fire}}
+| style="text-align:center" |—
+|''无''
+| {{tc|no}}
+| {{tc|n/a}}
+|
+|-
+|{{BlockLink|Infested Blocks}}
+| style="text-align:center" |—
+|1{{EntityLink|Silverfish}} ''生成''
+| {{tc|partial}}
+| {{Tc|no}}
+|虫蚀方块在被[[精准采集]]魔咒采集时，掉落怪物蛋所伪装的方块（亦即石头、圆石或石砖），不会生成蠹虫。
+|-
+|{{BlockLink|Spawner}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |15-43
+|''无''
+| {{tc|no}}
+| {{tc|n/a}}
+|
+|-
+|{{BlockLink|Trial Spawner}}
+| style="text-align:center" |—
+|''无''
+| {{tc|no}}
+| {{tc|n/a}}
+|
+|-
+|{{BlockLink|Vault}}
+| style="text-align:center" |—
+|''无''
+|{{tc|no}}
+|{{tc|n/a}}
+|
+|-
+|{{only|for={{BlockLink|Inverted Daylight Detector}}|be}}
+| style="text-align:center" |—
+|1{{BlockLink|Daylight Detector}}
+| {{tc|no}}
+| {{Tc|no}}
+|
+|-
+|{{BlockLink|Turtle Egg}}
+| style="text-align:center" |—
+| ''无''
+| {{Tc|yes}}
+| {{Tc|n/a}}
+|
+|-
+|{{BlockLink|Coral}}<br>{{BlockLink|Dead Coral}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+| ''无''
+| {{Tc|yes}}
+| {{Tc|n/a}}
+|
+|-
+|{{BlockLink|Coral Fans}}<br>{{BlockLink|Dead Coral Fans}}<sup>[[#notes|T]]</sup>
+| style="text-align:center" |—
+| ''无''
+| {{Tc|yes}}
+| {{Tc|n/a}}
+|
+|}
+
+<span id="notes">注：</span>
+
+* 有“T”标志的物品需要使用指定的工具破坏才会掉落物品（包括[[经验值]]）。[[精准采集]]魔咒也不能绕过此限制。
+* 如上表所述，[[时运]]魔咒可以提高掉落数量，或倍增掉落数量。提高数量只会简单地额外给予0-魔咒等级的物品。倍增具有以下可能性：
+** 时运I：有33%的概率掉落数量×2（平均增加33%）
+** 时运II：25%的概率×2，25%的概率×3（平均增加75%）
+** 时运III：20%的概率×2，20%的概率×3，20%的概率×4（平均增加120%）
+* 容器方块（[[酿造台]]、[[箱子]]、[[发射器]]、[[投掷器]]、[[花盆]]、[[熔炉]]、[[漏斗]]、[[唱片机]]、[[陷阱箱]]和[[合成器]]等）被破坏时掉落自身及其内容物。
+* 所有未在表格中列出的方块被破坏时均掉落自身。时运魔咒不影响掉落数量。
+
+== 历史 ==
+{{Incomplete section|Java版、基岩版、原主机版、New Nintendo 3DS版缺失部分历史}}
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.25|[[猪]]会掉落[[蘑菇]]。
+|杀掉[[骷髅]]会掉落[[箭]]。}}
+|{{HistoryLine||2009年10月25日|link={{notch|223096913/hit-once-produce-cloth-hit-more-produce-food}}|[[绵羊]]会掉落红色布料和蘑菇。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||20100219|现在绵羊不会掉落物品了。
+|猪会掉落[[生猪排]]而不是蘑菇。
+|[[苦力怕]]会掉落[[火药]]。
+|[[蜘蛛]]会掉落[[线]]。
+|[[僵尸]]会掉落[[羽毛]]。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.14|加入了[[鸡]]，死亡时会掉落[[羽毛]]。}}
+|{{HistoryLine||v1.1.0|绵羊现在掉落1-3块布料而不是2块。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.2|骷髅会掉落[[骨头]]。
+|灰色、浅灰色和黑色的绵羊被加入，它们会掉落对应颜色的[[羊毛]]。
+|加入了[[鱿鱼]]，并会掉落新物品[[墨囊]]。}}
+|{{HistoryLine||1.5|当猪被烧死时掉落[[熟猪排]]。}}
+|{{HistoryLine||1.7|现在不可以打一下绵羊来获得羊毛了，要使用[[剪刀]]为它剪毛或将它杀死才能获得羊毛。}}
+|{{HistoryLine||1.8|dev=pre1|僵尸的掉落物从羽毛变成[[腐肉]]。
+|由玩家杀死生物后产生的经验球现在可以添加到经验栏里。
+|加入了[[末影人]]，并会掉落[[末影珍珠]]。
+|现在鸡死亡时还会掉落生鸡肉。
+|现在[[牛]]死亡时会掉落生牛肉，被烧死则掉落牛排。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|加入了[[烈焰棒]]，作为[[烈焰人]]的掉落物。
+|加入了[[恶魂之泪]]，作为[[恶魂]]的掉落物。
+|加入了[[金粒]]，作为[[僵尸猪人]]的掉落物。
+|加入了[[雪傀儡]]，它会掉落雪球。
+|加入了[[哞菇]]，死亡时会掉落皮革和生牛肉，对其使用剪刀会掉落蘑菇。}}
+|{{HistoryLine|||dev=Beta 1.9-pre2|蜘蛛现在掉落[[发酵蛛眼]]了。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了抢夺、时运和精准采集魔咒。击杀生物或者破坏方块时可以取得更多掉落物或者掉落方块本身。}}
+|{{HistoryLine||1.1|dev=11w50a|除了“11”以外的所有的唱片现在都能够通过让一只苦力怕被骷髅射杀得到，这之前只有“13”和“cat”两种唱片可以。}}
+|{{HistoryLine|||dev=release|[[岩浆怪]]死亡后可以掉落[[岩浆膏]]了。}}
+|{{HistoryLine||1.2.1|dev=12w04a|加入了[[猫]]，死亡时会掉落线。}}
+|{{HistoryLine||1.2.1|dev=12w06a|[[僵尸]]现在有很小的概率会掉落一个[[铁锭]]、铁头盔、铁锹或者铁剑了。
+|[[骷髅]]现在有很小的概率会掉落一把弓，且这把弓可能被[[附魔]]过。
+|僵尸猪人现在有很小的概率会掉落一个[[金头盔]]、[[金锭]]或一把[[金剑]]，同样有可能被附魔过。}}
+|{{HistoryLine|||dev=12w07a|降低了生物掉落稀有掉落物的概率。}}
+|{{HistoryLine|||dev=12w08a|加入了[[铁傀儡]]，它会掉落[[玫瑰]]和[[铁锭]]。}}
+|{{HistoryLine||1.3.1|dev=12w25a|猪现在会掉落1-3个猪排而不再是0-2个了。}}
+|{{HistoryLine||1.4.2|dev=12w32a|新的[[游戏规则]]{{cd|doMobLoot}}可以控制[[生物]]是否掉落物品了。
+|现在僵尸、骷髅和僵尸猪人有时会带上装备了，它们有很小的概率会掉落这些装备。}}
+|{{HistoryLine|||dev=12w34a|僵尸现在有时会掉落[[胡萝卜]]和[[马铃薯]]了。}}
+|{{HistoryLine|||dev=12w36a|[[凋灵]]死亡时会掉落[[下界之星]]了。
+|加入了[[凋灵骷髅]]，一般会掉落骨头、[[煤炭]]。如果是被玩家杀死的话有小概率会掉落石剑或[[凋灵骷髅头颅]]。
+|现在带有鞍的猪死后一定会掉落[[鞍]]了。}}
+|{{HistoryLine|||dev=12w38a|加入了[[女巫]]，其在饮用[[药水]]时被杀死后有概率掉落药水。}}
+|{{HistoryLine|||dev=12w38b|现在女巫可以掉落药水的原材料、木棍以及它们死亡时手中持有的物品了。}}
+|{{HistoryLine||1.4.4|dev=1.4.3-pre|唱片“11”与其他唱片一样可以从苦力怕处获得了。}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了[[马]]、[[驴]]和[[骡]]，死亡时会掉落[[皮革]]和装备的[[马鞍]]，马若装备了[[马铠]]也会掉落，驴和骡若装备了[[箱子]]也会掉落。}}
+|{{HistoryLine||1.8|dev=14w04a|抢夺魔咒现在每级可以增加稀有物品掉落率1%而不是0.5%了。}}
+|{{HistoryLine|||dev=14w25a|加入了[[守卫者]]和[[远古守卫者]]，掉落海晶碎片和海晶砂粒，且稀有掉落鱼和湿海绵。}}
+|{{HistoryLine|||dev=14w27a|加入了[[兔子]]，它有一定概率掉落[[兔子皮]]、[[生兔肉]]（或者杀死了着火的兔子获得[[熟兔肉]]）以及很小的概率获得[[兔子脚]]。
+|[[绵羊]]现在在死亡时会与[[羊毛]]一同掉落[[生羊肉]]（或者杀死了着火的绵羊获得[[熟羊肉]]）。}}
+|{{HistoryLine||1.9|dev=15w47a|[[潜影贝]]现在掉落经验值。}}
+|{{HistoryLine||1.10|dev=16w20a|加入了[[北极熊]]，掉落生鱼和生鲑鱼。
+|加入了[[流浪者]]。除了骷髅的掉落物之外，它还有50%的概率掉落迟缓之箭。
+|加入了[[尸壳]]，掉落物跟僵尸一样。}}
+|{{HistoryLine||1.11|dev=16w39a|加入了[[羊驼]]，掉落皮革及其装备物。
+|加入了[[卫道士]]，掉落0-1个绿宝石，偶尔掉落铁斧。
+|加入了[[唤魔者]]，总是掉落[[不死图腾]]，掉落0-1个绿宝石。
+|加入了[[恼鬼]]，被玩家使用抢夺魔咒的武器杀死时有小概率掉落铁剑。
+|潜影贝现在掉落[[潜影壳]]。}}
+|{{HistoryLine||1.12|dev=17w13a|加入了[[鹦鹉]]，掉落1-2根羽毛。}}
+|{{HistoryLine|||dev=17w16a|加入了[[幻术师]]，有小概率掉落其手持的弓。}}
+|{{HistoryLine||1.13|dev=18w07a|加入了[[海龟]]，掉落[[海草]]且幼年海龟长大后掉落[[鳞甲]]。
+|加入了[[幻翼]]，会掉落皮革。}}
+|{{HistoryLine|||dev=18w08b|加入了三种生物[[鱼]]：鳕鱼、鲑鱼和河豚，分别掉落其对应物品形式的鱼。}}
+|{{HistoryLine|||dev=18w11a|加入了[[溺尸]]，掉落腐肉，稀有掉落[[金锭]]。溺尸有概率手持[[三叉戟]]和[[钓鱼竿]]生成，被杀死后有概率掉落。}}
+|{{HistoryLine|||dev=18w14a|幻翼现在死后会掉落[[幻翼膜]]而不是皮革。}}
+|{{HistoryLine|||dev=18w15a|加入了[[海豚]]，掉落[[生鳕鱼]]。
+|现在溺尸有概率手持[[鹦鹉螺壳]]生成，死亡时总会掉落。}}
+|{{HistoryLine||1.13.1|dev=18w31a|现在鱼死亡时有5%的概率掉落骨粉。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了[[熊猫]]，当熊猫死亡时可能会掉落[[竹子]]。
+|加入了[[掠夺者]]，其可能会在死亡时掉落[[弩]]和[[绿宝石]]。
+|加入了[[劫掠兽]]，其会在死亡时掉落[[鞍]]。
+|[[苦力怕]]现在会在被流浪者杀死时掉落[[音乐唱片]]了。}}
+|{{HistoryLine|||dev=18w44a|现在驯服的猫会跟玩家一起睡觉，并在早上醒来时给予玩家礼物。}}
+|{{HistoryLine|||dev=18w46a|掠夺者不再会掉落绿宝石。}}
+|{{HistoryLine|||dev=19w05a|加入了[[流浪商人]]，如果其在饮用完[[牛奶]]或[[隐身药水]]之前被杀死其会掉落为物品。}}
+|{{HistoryLine|||dev=19w07a|加入了[[狐狸]]，死亡时会掉落嘴里的物品。}}
+|{{HistoryLine||1.15|dev=19w37a|现在恼鬼被玩家使用抢夺魔咒的武器杀死时不再会掉落铁剑。}}
+|{{HistoryLine||1.16|dev=20w06a|加入了[[疣猪兽]]，其可能会在被杀死时掉落[[腐肉]]。}}
+|{{HistoryLine|||dev=20w07a|疣猪兽现在可能会在被杀死时掉落[[生猪排]]和[[皮革]]了。
+|加入了[[猪灵]]，其可能会在死亡时掉落其自然生成时装备的弩或金剑或随机金盔甲。}}
+|{{HistoryLine|||dev=20w13a|加入了[[炽足兽]]，会掉落[[线]]。}}
+|{{HistoryLine|||dev=20w14a|加入了[[僵尸疣猪兽]]，掉落腐肉。}}
+|{{HistoryLine||1.16.2|dev=20w27a|加入了[[猪灵蛮兵]]，其在死亡时可能会掉落[[金斧]]。}}
+|{{HistoryLine||1.17|dev=21w03a|加入了[[发光鱿鱼]]，其在死亡时可能会掉落[[荧光墨囊]]。}}
+|{{HistoryLine|||dev=21w05a|[[溺尸]]的金锭掉落物改为[[铜锭]]。}}
+|{{HistoryLine|||dev=21w13a|加入了[[山羊]]，其在撞击到[[石头]]、[[浮冰]]、[[铁矿石]]、[[煤矿石]]、[[铜矿石]]、[[绿宝石矿石]]或[[原木]]时会掉落[[山羊角]]。
+|现在北极熊被火烧死时会掉落[[熟鳕鱼]]和[[熟鲑鱼]]。}}
+|{{HistoryLine||1.17.1|dev=pre1|溺尸掉落铜锭的概率由5%提高到11%，每级[[抢夺]]魔咒增加的概率由1%提高到2%，以与{{el|be}}相匹配。}}
+|{{HistoryLine||1.19|dev=22w13a|加入了[[悦灵]]，其死亡时会掉落手持物品。}}
+|{{HistoryLine|||dev=22w17a|现在[[监守者]]在死亡时会掉落1个[[幽匿催发体]]。}}
+|{{HistoryLine||1.19.3|exp=update_1_20|dev=22w42a|加入了[[骆驼]]，死亡时会掉落装备的鞍。}}
+|{{HistoryLine|||dev=22w46a|现在猪灵被闪电苦力怕炸死时会掉落[[猪灵的头]]。}}
+|{{HistoryLine||1.20|dev=23w12a|猪灵的头和骆驼不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.20.5|dev=23w51a|加入了[[犰狳]]，其可被刷扫或自然掉落[[犰狳鳞甲]]。}}
+|{{HistoryLine|||exp=update_1_21|dev=24w06a|现在[[旋风人]]死亡时会掉落4-6个[[风弹]]。}}
+|{{HistoryLine|||dev=24w07a|加入了[[沼骸]]。除了骷髅的掉落物之外，它还可能会掉落[[剧毒之箭]]。}}
+|{{HistoryLine|||dev=24w09a|现在沼骸可被剪刀剪下头上的蘑菇，并掉落2个随机颜色的蘑菇。}}
+|{{HistoryLine|||dev=24w11a|现在旋风人死亡时会掉落1-2个[[旋风棒]]而不再掉落风弹。}}
+|{{HistoryLine||1.21|dev=24w18a|24w06a-24w11a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine|||dev=24w20a|现在女巫死亡时总会掉落4-8个红石粉。}}
+|{{HistoryLine||1.21.5|dev=25w02a|加入了热带猪和寒带猪，掉落物与原先的猪相同。}}
+|{{HistoryLine|||dev=25w05a|加入了热带牛和寒带牛，掉落物与原先的牛相同。}}
+|{{HistoryLine|||dev=25w06a|加入了寒带鸡和热带鸡，会下蓝色鸡蛋和棕色鸡蛋。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了[[快乐恶魂]]，死亡时会掉落装备的[[挽具]]。}}
+|{{HistoryLine|||dev=25w20a|现在恶魂被玩家反弹的火球击杀时会掉落1个Tears[[音乐唱片]]。}}
+|{{HistoryLine||1.21.7|dev=rc1|现在骑乘在鸡上的幼年僵尸被玩家或玩家驯服的狼杀死时会掉落一个''Lava Chicken''[[音乐唱片]]。}}
+|{{HistoryLine||1.21.9|dev=25w31a|加入了[[铜傀儡]]，死亡时会掉落铜锭和手持物品。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了[[鹦鹉螺]]，被杀死时有概率会掉落一个鹦鹉螺壳。
+|加入了[[僵尸鹦鹉螺]]，被杀死时会掉落腐肉。
+|现在僵尸马死亡时会掉落2-3个腐肉。
+|现在僵尸有概率骑乘僵尸马生成，该僵尸被杀死时有概率掉落红色蘑菇。}}
+|{{HistoryLine|||dev=25w44a|加入了[[焦骸]]。除了骷髅的掉落物之外，它还可能掉落会掉落[[虚弱之箭]]。
+|加入了[[骆驼尸壳]]，死亡时会掉落腐肉。
+|现在尸壳有概率骑乘骆驼尸壳生成，该尸壳被杀死时有概率掉落兔子脚。}}
+|{{HistoryLine|||dev=25w45a|现在骆驼尸壳死亡时掉落的腐肉受抢夺魔咒影响。}}
+|{{HistoryLine|||dev=pre4|现在僵尸鹦鹉螺死亡时掉落的腐肉受抢夺魔咒影响。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了[[硫方怪]]，会掉落其身体内部的方块。}}
+|{{HistoryLine||26.3|dev=snapshot-3|加入了[[坐垫]]，会掉落对应颜色的坐垫物品。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.2.0|加入了猪，会掉落生猪排。}}
+|{{HistoryLine||0.3.3|加入了骷髅，会掉落弓、骨头和箭。
+|加入了蜘蛛，会掉落线。
+|加入了苦力怕，会掉落火药。
+|现在鸡在死亡时会掉落羽毛。}}
+|{{HistoryLine||0.4.0|现在鸡在死亡时会掉落生鸡肉。
+|现在牛死亡时会掉落生牛肉，被烧死则掉落牛排。
+|现在僵尸在死亡时会掉落羽毛。}}
+|{{HistoryLine||0.5.0|加入了僵尸猪人，掉落羽毛和金锭。}}
+|{{HistoryLine||0.6.0|牛现在能掉落皮革。}}
+|{{HistoryLine||0.7.0|现在鸡会下蛋。}}
+|{{HistoryLine||0.8.0|dev=build 1|僵尸现在有时会掉落胡萝卜和马铃薯了。}}
+|{{HistoryLine||0.9.0|dev=build 1|加入了哞菇，死亡时会掉落皮革和生牛肉，对其使用剪刀会掉落蘑菇。}}
+|{{HistoryLine||0.9.2|僵尸猪人现在有时会掉落胡萝卜和马铃薯了。}}
+|{{HistoryLine||0.11.0|dev=build 1|僵尸和僵尸猪人的掉落物从羽毛变成腐肉。
+|僵尸猪人不再掉落胡萝卜和马铃薯。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了[[猫]]，死亡时会掉落线。
+|加入了雪傀儡，它会掉落雪球。
+|加入了铁傀儡，它会掉落玫瑰和铁锭。
+|加入了凋灵骷髅，掉落骨头或煤炭。被玩家杀死后有概率会掉落石剑或凋灵骷髅头颅。
+|现在僵尸、骷髅和僵尸猪人有时会带上装备了，它们有概率会掉落这些装备。
+|现在僵尸猪人可以掉落金粒了。}}
+|{{HistoryLine|||dev=build 7|现在恶魂会掉落火药和恶魂之泪。}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了女巫，死亡时会掉落药水的原材料，其在饮用药水时被杀死后总是会掉落药水。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了[[马]]、[[驴]]和[[骡]]，死亡时会掉落[[皮革]]和装备的[[鞍]]，马若装备了[[马铠]]也会掉落，驴和骡若装备了[[箱子]]也会掉落。
+|加入了北极熊，掉落生鱼和生鲑鱼。
+|加入了流浪者，除了骷髅的掉落物之外，它还可能掉落缓慢之箭。
+|加入了尸壳，掉落物跟僵尸一样。}}
+|{{HistoryLine||0.16.0|dev=build 4|加入了凋灵，死亡时掉落下界之星。}}
+|{{HistoryLine||0.16.2|猪现在会掉落1-3个猪排而不再是0-2个了。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|现在末影人会掉落末影珍珠。}}
+|{{HistoryLine|||dev=1.0.0.1|潜影贝现在掉落潜影壳。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了羊驼，掉落皮革及其装备物。
+|加入了卫道士，掉落0-1个绿宝石，偶尔掉落铁斧。
+|加入了唤魔者，总是掉落不死图腾，掉落0-1个绿宝石。
+|加入了恼鬼，被玩家使用抢夺魔咒的武器杀死时有小概率掉落铁剑。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了鹦鹉，掉落1-2根羽毛。
+|现在女巫死亡时不再总是会掉落其饮用的药水，而是有概率掉落。}}
+|{{HistoryLine||1.2.13|exg=1|dev=1.2.13.8|加入了溺尸，掉落腐肉，稀有掉落金锭和海绵。溺尸有概率手持三叉戟和钓鱼竿生成，被杀死后有概率掉落。}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|加入了鳕鱼、鲑鱼、热带鱼和河豚，它们死亡时分别掉落生鳕鱼、生鲑鱼、热带鱼和河豚，它们也有25%概率会掉落骨头。}}
+|{{HistoryLine|||dev=1.2.20.2|现在海豚会掉落生鳕鱼。}}
+|{{HistoryLine|||exg=1|dev=1.2.20.2|现在溺尸有概率手持鹦鹉螺壳生成，死亡时总会掉落。}}
+|{{HistoryLine||1.5.0|dev=1.5.0.0|溺尸不再属于[[实验性玩法]]。
+|溺尸不再掉落海绵。}}
+|{{HistoryLine|||dev=1.5.0.4|加入了海龟，掉落海草且幼年海龟长大后掉落鳞甲。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|加入了熊猫，其在死亡时可能会掉落竹子。
+|现在驯服的猫会跟玩家一起睡觉，并在早上醒来时给予玩家礼物。}}
+|{{HistoryLine||1.9.0|dev=1.9.0.0|加入了掠夺者，其在死亡时可能会掉落弩，偶尔还会掉落箭。}}
+|{{HistoryLine||1.10.0|exg=1|dev=1.10.0.3|加入了劫掠兽，其会在死亡时掉落鞍。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.3|劫掠兽不再属于[[实验性玩法]]。
+|现在流浪商人在饮用隐身药水时被杀死后有概率掉落隐身药水。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.1|加入了狐狸，死亡时会掉落嘴里的物品。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|加入了疣猪兽，死亡时会掉落生猪排和皮革。
+|加入了猪灵，其可能会在死亡时掉落其自然生成时装备的弩或金剑或随机金盔甲，偶尔还会掉落箭。}}
+|{{HistoryLine|||dev=1.16.0.57|现在猪灵不再会掉落箭。
+|加入了炽足兽，会掉落线。
+|加入了僵尸疣猪兽，掉落腐肉。}}
+|{{HistoryLine||1.16.20|dev=1.16.20.50|加入了猪灵蛮兵，其在死亡时可能会掉落金斧。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.54|现在幼年僵尸疣猪兽会掉落腐肉。}}
+|{{HistoryLine||1.16.210|exg=caves_and_cliffs_en|dev=1.16.210.57|现在溺尸会掉落铜锭，而不是金锭。}}
+|{{HistoryLine|||dev=1.16.210.59|加入了发光鱿鱼，死亡时会掉落荧光墨囊。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.52|发光鱿鱼不再属于[[实验性玩法]]。
+|1.16.210.57中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.18.30|exg=wild_update|dev=1.18.30.22|加入了悦灵，死亡时会掉落手持物品。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|悦灵不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.19.0.28|现在监守者在死亡时会掉落1个幽匿催发体。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.21|流浪商人现在会在黎明时饮奶以解除隐身效果，其在饮奶时被杀死后有概率会掉落奶桶。}}
+|{{HistoryLine||1.19.50|exg=1.20|dev=1.19.50.21|加入了骆驼，死亡时会掉落装备的鞍。}}
+|{{HistoryLine||1.19.60|exg=1.20|dev=1.19.60.20|现在猪灵被闪电苦力怕炸死时会掉落猪灵的头。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|骆驼不再属于[[实验性玩法]]。
+|1.19.60.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.20.60|exg=armadillo|dev=1.20.60.23|加入了犰狳，可被刷扫或自然掉落犰狳鳞甲。}}
+|{{HistoryLine||1.20.70|exg=1.21|dev=1.20.70.24|加入了沼骸。除了骷髅的掉落物之外，它还可能会掉落[[剧毒之箭]]。
+|现在旋风人被杀死后会掉落4-6个风弹。}}
+|{{HistoryLine||1.20.80|dev=1.20.80.20|犰狳不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||exg=1.21|dev=1.20.80.21|现在沼骸可被剪刀剪下头上的蘑菇，并掉落2个随机颜色的蘑菇。}}
+|{{HistoryLine|||dev=1.20.80.22|现在旋风人被杀死后会掉落1-2个旋风棒而不再掉落风弹。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|1.20.70.24-1.20.80.22中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.0.26|现在恼鬼被玩家使用抢夺魔咒的武器杀死时不再会掉落铁剑。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.20|现在女巫死亡时总会掉落4-8个红石粉。}}
+|{{HistoryLine||1.21.40|dev=1.21.40.20|现在北极熊被火烧死时会掉落熟鳕鱼和熟鲑鱼。}}
+|{{HistoryLine||1.21.60|exg=y_2025_drop_1|dev=1.21.60.25|加入了热带猪和寒带猪，掉落物与原先的猪相同。}}
+|{{HistoryLine||1.21.70|exg=y_2025_drop_1|dev=1.21.70.20|加入了热带牛和寒带牛，掉落物与原先的牛相同。}}
+|{{HistoryLine|||dev=1.21.70.22|加入了寒带鸡和热带鸡，会下蓝色鸡蛋和棕色鸡蛋。}}
+|{{HistoryLine|||exg=none|dev=1.21.70.23|热带猪、寒带猪、热带牛、寒带牛、寒带鸡和热带鸡不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.80|exg=y_2025_drop_2|dev=1.21.80.25|加入了[[快乐恶魂]]，死亡时会掉落装备的[[挽具]]。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.20|快乐恶魂不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.90.25|现在恶魂被玩家反弹的火球击杀时会掉落1个Tears音乐唱片。}}
+|{{HistoryLine||1.21.93|现在骑乘在鸡上的幼年僵尸、幼年僵尸村民和幼年尸壳被玩家杀死时会掉落一个''Lava Chicken''音乐唱片。}}
+|{{HistoryLine||1.21.100|exg=y_2025_drop_3|dev=1.21.100.23|加入了[[铜傀儡]]，死亡时会掉落铜锭和手持物品。}}
+|{{HistoryLine||1.21.111|dev=1.21.110.20|铜傀儡不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.110.22|现在铜傀儡总是掉落手持物品，而不再是有概率掉落。}}
+|{{HistoryLine||1.21.120|dev=1.21.120.20|现在骑乘在鸡上的幼年僵尸、幼年僵尸村民和幼年尸壳被驯服的狼杀死时也会掉落''Lava Chicken''音乐唱片。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.20|加入了[[鹦鹉螺]]，被杀死时有概率会掉落一个鹦鹉螺壳。
+|加入了[[僵尸鹦鹉螺]]，被杀死时会掉落腐肉。
+|现在僵尸马死亡时会掉落2-3个腐肉。
+|现在僵尸有概率骑乘僵尸马生成，该僵尸被杀死时有概率掉落红色蘑菇。}}
+|{{HistoryLine|||dev=1.21.130.24|加入了[[焦骸]]。除了骷髅的掉落物之外，它还可能掉落会掉落[[虚弱之箭]]。
+|加入了[[骆驼尸壳]]，死亡时会掉落腐肉。}}
+|{{HistoryLine|||dev=1.21.130.27|现在骆驼尸壳死亡时掉落的腐肉受抢夺魔咒影响。
+|现在骑乘骆驼尸壳生成的尸壳被杀死时有概率掉落兔子脚而不再是腐肉，并受抢夺魔咒影响。}}
+|{{HistoryLine||26.20|exg=y_2026_drop_2|dev=26.20.23|加入了[[硫方怪]]，会掉落其身体内部的方块。}}
+|{{HistoryLine||26.30|dev=26.30.20|硫方怪不再属于[[实验性玩法]]。}}
+|{{HistoryLine||26.40|exg=y_2026_drop_3|dev=26.40.30|加入了坐垫，会掉落对应颜色的坐垫物品。}}
+}}
+
+== 参见 ==
+* [[物品（实体）]]
+* [[箱子战利品]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[de:Drop]]
+[[en:Drops]]
+[[es:Recompensas]]
+[[fr:Récompenses]]
+[[it:Rilasci]]
+[[ja:ドロップ]]
+[[ko:노획물]]
+[[nl:Drops]]
+[[pl:Łupy]]
+[[pt:Drops]]
+[[ru:Дроп]]
+[[th:ดรอป]]
+[[uk:Дроп]]

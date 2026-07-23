@@ -1,0 +1,83 @@
+# 页面: 命令/music
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/music
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{about|命令|其他音乐|音乐（消歧义）}}
+{{exclusive|bedrock|education}}
+{{Infobox command
+|name=music
+|oplevel=1
+|cheat=y
+}}
+
+允许玩家控制[[音乐]]。
+
+== 语法 ==
+: <code>music play <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]</code>
+:: 播放音乐。
+: <code>music queue <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]</code>
+:: 将音乐添加到队列中。
+: <code>music stop [fadeSeconds: float]</code>
+:: 停止播放音乐。
+: <code>music volume <volume: float></code>
+:: 调整音乐音量。
+
+== 参数 ==
+{{argument|be=1|trackName: string|basic_string}}
+: 指定播放音乐名。
+: 必须是单个单词（不含空格）或带引号的字符串。
+: 必须为音乐名或为Json路径指向的 <samp><a_resource_pack>/sounds/sound_definitions.json</samp> 文件中的 <code>"record.<music_name>"</code> 或 <code>"music.game.<music_name>"</code> （例如使用 <code>record.cat</code> 来播放音乐唱片cat）
+
+{{argument|be=1|volume: float|float}}
+: 调整音乐音量
+: 必须为浮点数，最小值为0，最大值为1.00。
+
+{{argument|be=1|fadeSeconds: float|float}}
+: 调整音乐淡入/淡出时间
+: 必须为浮点数，最小值为0，最大值为10。
+
+{{argument|be=1|repeatMode: MusicRepeatMode|enum}}
+: 指定是否循环播放音乐，默认为<code>play_once</code>。
+: 所取值必须为 <code>loop</code> 与 <code>play_once</code> 中的一个。
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|cmd=/music play ...|淡入/淡出时间超过10秒||fail}}
+{{Result table|音量大于1.00}}
+{{Result table|cmd=/music queue ...|正在播放的音乐被设置为 <code>loop</code>}}
+{{Result table|音量大于1.00}}
+{{Result table|淡入/淡出时间超过10秒}}
+{{Result table|cmd=/music stop ...|没有正在播放的音乐}}
+{{Result table|淡入/淡出时间超过10秒}}
+{{Result table|cmd=/music volume ...|音量大于1.00}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|edition=be|失败|0}}
+{{Output table|成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 循环播放音乐唱片Pigstep：<code>/music play record.pigstep 0.5 0 loop</code>
+* 将音乐唱片Stal添加到播放列表且仅播放一次：<code>/music queue record.stal 0.5 0 play_once</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.100|dev=1.16.100.58|加入了{{cmd|music|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/music]]
+[[en:Commands/music]]
+[[ja:コマンド/music]]
+[[lzh:令/music]]
+[[pt:Comandos/music]]
+[[ru:Команды консоли/music]]

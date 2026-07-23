@@ -1,0 +1,94 @@
+# 页面: Java版1.15-pre4
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.15-pre4
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:21
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=1.15-pre4
+|image=1.15-pre4.png
+|image2=Java Edition 1.15-pre4 Simplified.png\Java Edition 1.15-pre4 Traditional.png
+|edition=Java
+|type=Pre-release
+|date=2019年12月3日
+|jsonhash=a6f2fc4ad5a0c5331de5ef041fb344f0a5eed8cd
+|clienthash=6868a5c87243707f7936c21a4e52d076e3d73234
+|clientmap=dbe86214786e8558e1d82a917b4fc0f2528c7b59
+|serverhash=8f9e23414a01d21e2cd313b2595b164ccfda56aa
+|servermap=c6a72d934d21f5f40a6cb7230602aa1e581198dc
+|parent=1.15
+|prevparent=1.14.4
+|prev=1.15-pre3
+|next=1.15-pre5
+|nextparent=1.15.1
+}}<onlyinclude>
+
+'''1.15-pre4'''是[[Java版1.15]]的第4个预发布版，发布于2019年12月3日<ref>{{article|minecraft-1-15-pre-release-1|Minecraft 1.15 Pre-Release 4|December 3, 2019}}</ref>，优化了游戏性能，并修复了许多与坐标精度有关的漏洞。
+
+== 更改 ==
+=== 常规 ===
+'''性能'''
+* 性能优化。
+
+'''精度'''
+* 将应用于部分[[粒子]]生成的浮点精度从32位（单精度）提升至64位（双精度）。这使得高数值坐标（特别是绝对值在2{{^|24}}以上的坐标）下的精度错误得以修复，让粒子显示在了正确的位置，而不再令其产生偏移，只生成在坐标值为偶数的位置上。得到修复的有以下粒子：
+** 钓鱼粒子<ref>{{bug|MC-161991|||Fixed}}</ref>
+** 鱿鱼墨汁粒子<ref>{{bug|MC-161994|||Fixed}}</ref>
+** 末地折跃门粒子<ref>{{bug|MC-161999|||Fixed}}</ref>
+** 潮涌核心粒子<ref>{{bug|MC-161993|||Fixed}}</ref>
+** 实体跌落粒子<ref name="thebigone">{{bug|MC-76810|||Fixed}}</ref>
+** 横扫攻击粒子<ref name="thebigone"/>
+** 攻击时产生的心形粒子<ref name="thebigone"/>
+** 命令{{cmd|particle}}产生的粒子<ref name="thebigone"/>
+** 菌丝体粒子<ref name="thebigone"/>
+** 水下粒子<ref name="thebigone"/>
+** 下界传送门粒子<ref name="thebigone"/>
+** 酿造台粒子<ref name="thebigone"/>
+** 刷怪蛋粒子<ref name="thebigone"/>
+** 屏障粒子<ref name="thebigone"/>
+** 盔甲架损坏粒子<ref name="thebigone"/>
+** 受重力影响的方块在悬浮时产生的粒子<ref name="thebigone"/>
+* 提高了被激活的TNT实体在高数值坐标下生成的精度，<ref>{{bug|MC-125638|||Fixed}}</ref>但被其他爆炸激活的TNT仍存在漏洞。<ref>{{bug|MC-167047|||Fixed}}</ref>
+* 提高了附魔台上的书本检测玩家的精度，<ref>{{bug|MC-161888|||Fixed}}</ref>但书本仍存在不会及时打开的问题。<ref>{{bug|MC-167044|||Fixed}}</ref>
+
+== 修复 ==
+{{fixes|fixedin=1.15 Pre-Release 4|showdesc=1
+|;old
+|81970|旋转的盔甲架有摇晃的基座。
+|125638|TNT在高数值坐标下激活会产生偏移。
+|146194|在同一游戏刻中的{{cmd|summon|link=none}}命令和实体旋转（<code>Rotation</code>）不起作用。
+|155520|比较器更新异常。
+|157426|本应排序的命令输出没有排序。
+|161888|玩家离世界原点较远时，附魔台无法正确定位玩家。
+|161991|浮点精度错误：钓鱼的粒子效果在高坐标下失去精度。
+|161993|浮点精度错误：潮涌核心的粒子在远距离下被错误地吸引至潮涌核心。
+|161994|浮点精度错误：鱿鱼墨汁粒子在高坐标下失去精度。
+|161999|浮点精度错误：末地传送门散发的粒子被吸引至一个在高坐标下失去精度的点。
+|166047|已驯服的狼会攻击已驯服的鹦鹉。
+|;dev
+|161394|骷髅和凋灵骷髅头颅内侧纹理不可见。
+|164704|在玻璃下方观察的蜂蜜块和黏液块渲染错误。
+|164712|云被渲染在区块边界内部。
+|165704|天空颜色不再随生物群系和高度改变。
+|165977|方块因爆炸而落在了错误的位置。
+|166300|熊猫有时候会攻击试图喂养它的玩家。
+|166667|物品展示框在未探索区域中不渲染。
+|;previous
+|166716|三叉戟和盾牌在物品栏中渲染过暗。
+|166800|使用<code>DisabledSlots</code>从盔甲架移除物品导致视觉错误。
+|167000|物品栏中的玩家模型会在快捷栏有物品时反光。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:1.15-pre4]]
+[[en:Java Edition 1.15 Pre-release 4]]
+[[es:Java Edition 1.15 Pre-release 4]]
+[[fr:Édition Java 1.15 Pre-release 4]]
+[[ja:Java Edition 1.15 Pre-release 4]]
+[[pt:Edição Java 1.15 Pre-release 4]]
+[[ru:1.15 Pre-release 4 (Java Edition)]]

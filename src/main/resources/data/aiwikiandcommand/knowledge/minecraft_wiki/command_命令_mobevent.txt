@@ -1,0 +1,62 @@
+# 页面: 命令/mobevent
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/mobevent
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock|education}}
+{{Infobox command
+|name=mobevent
+|oplevel=1
+|cheat=1
+}}
+
+控制或查询允许运行的生物事件。
+
+== 语法 ==
+: <code>mobevent <event: MobEvent> [value: Boolean]</code>
+
+== 参数 ==
+{{argument|be=1|event: MobEvent|enum}}
+: 指定要控制或查询的事件。可以是以下之一：
+:*<code>minecraft:ender_dragon_event</code> 用于初次进入末地时生成[[末影龙]]。
+:*<code>minecraft:pillager_patrols_event</code> 用于生成[[灾厄巡逻队]]。
+:* <code>minecraft:wandering_trader_event</code> 用于生成[[流浪商人]]。
+:* <code>events_enabled</code> 用于事件子系统。禁用此选项时，不会发生任何事件；启用此选项时，只会发生启用的事件。
+
+{{argument|be=1|value: Boolean|enum}}
+: 如果指定，则<code>true</code>启用事件，<code>false</code>禁用事件。如果忽略，则显示当前启用状态。
+: {{arg desc|be=bool}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 禁用所有事件：<code>mobevent events_enabled false</code>
+* 允许生成流浪商人（在启用事件子系统时）：<code>mobevent minecraft:wandering_trader_event true</code>
+* 查询灾厄巡逻队生成的状态：<code>mobevent minecraft:pillager_patrols_event</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.11.0|dev=1.11.0.3|加入了{{cmd|mobevent|link=none}}。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.59|加入了<code>minecraft:ender_dragon_event</code>。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/mobevent]]
+[[en:Commands/mobevent]]
+[[ja:コマンド/mobevent]]
+[[pt:Comandos/mobevent]]
+[[ru:Команды консоли/mobevent]]

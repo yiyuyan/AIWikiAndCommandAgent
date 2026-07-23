@@ -1,0 +1,306 @@
+# 页面: Java版24w11a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w11a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w11a
+|image=24w11a.png
+|image2=Java Edition 24w11a Simplified.png\Java Edition 24w11a Traditional.png\Java Edition 24w11a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年3月14日
+|jsonhash=9bc42da3c197d0532c34636d370451b3d09cbba1
+|clienthash=4e969a3079409732a39aa722ea61d03876c41367
+|clientmap=85283b9708072cada19de2a29955957939af2127
+|serverhash=00cab0438130dc3e6ae91f53387bb96ae7986d31
+|servermap=a5e08ee736fb987f2920b98d25961245aac087bc
+|parent=1.20.5
+|prevparent=1.20.4
+|prev=24w10a
+|next=24w12a
+|nextparent=1.20.6
+}}<onlyinclude>{{tr|mode=H|应用|套用}}
+
+'''24w11a'''是[[Java版1.20.5]]的第12个快照，发布于2024年3月14日<ref>{{snap|24w11a|March 14, 2024}}</ref>，加入了新的[[战利品表函数]]，在内置实验性数据包中加入了[[重锤]]、[[旋风棒]]、[[沉重核心]]、2种新的[[锻造模板]]和[[旗帜图案]]、3种新的[[陶片]]，修改了内置实验性数据包中[[试炼密室]]的结构及[[旋风人]]和[[宝库]]的[[战利品表]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[战利品表函数]]'''
+* {{cd|set_fireworks}}：设置<code>minecraft:fireworks</code>组件详细内容的新函数。
+<div class="treeview">
+:** {{nbt|list|conditions}}：（默认为<code>[]</code>）一个[[战利品表谓词]]列表。当其中的条件全部符合时才会应用此物品修饰器。
+:** {{nbt|int|flight_duration}}：（可选，不小于0且不大于255）火药的数量，用于衡量飞行时长。如果忽略此值，则物品飞行时长不改变；如果应用此物品修饰器前对应组件不存在，则使用<code>0</code>。
+:** {{nbt|list|explosions}}：<code>firework_explosion</code>数据的列表，与<code>minecraft:fireworks</code>组件中的<code>explosion</code>格式相同。
+:** {{nbt|string|mode}}：决定爆裂列表数据的模式的枚举值。
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|replace_all}}，则用此物品修饰器定义的爆裂列表替换整个爆裂列表数据，没有附加标签。}}
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|replace_section}}，则用此物品修饰器定义的爆裂列表替换爆裂列表中的一个区间内元素的数据，并带有下列附加标签：}}
+:** {{nbt|int|offset}}：（可选，不小于0）替换列表的起始下标。如果被省略，则为<code>0</code>。
+:** {{nbt|int|size}}：（可选，不小于0）替代列表的长度。如果被省略，则使用{{nbt|list|explosions}}列表的长度。
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|append}}，则将此物品修饰器定义的爆裂列表附加到原烟花火箭爆裂列表后，没有附加标签。}}
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|insert}}，则将此物品修饰器定义的爆裂列表插入到原爆裂列表内，并带有下列附加标签：}}
+:** {{nbt|int|offset}}：（可选，不小于0）列表的插入位置下标。如果被省略，则为<code>0</code>（即在第一个爆裂数据前）。
+</div>
+* {{cd|set_firework_explosion}}：设置<code>minecraft:firework_explosion</code>组件详细内容的新函数。
+<div class="treeview">
+:** {{nbt|list|conditions}}：（默认为<code>[]</code>）一个战利品表谓词列表。当其中的条件全部符合时才会应用此物品修饰器。
+:** {{nbt|string|shape}}：（可选）爆炸形状。如果忽略此值，则原来的形状不改变；如果应用此物品修饰器前对应组件不存在，则使用<code>small_ball</code>。
+:** {{nbt|int-array|colors}}：（可选，RGB值）替代目标爆炸数据的初始粒子颜色的数组。如果忽略此值，则原来的颜色不改变；如果应用此物品修饰器前对应组件不存在，则使用<code>[]</code>。
+:** {{nbt|int-array|fade_colors}}：（可选，RGB值）替代目标爆炸数据的淡出粒子颜色的数组。如果忽略此值，则原来的颜色不改变；如果应用此物品修饰器前对应组件不存在，则使用<code>[]</code>。
+:** {{nbt|bool|trail}}：（可选）设置爆炸是否带有拖尾。如果忽略此值，则原来的<code>has_trail</code>不改变；如果应用此物品修饰器前对应组件不存在，则使用<code>false</code>。
+:** {{nbt|bool|twinkle}}：（可选）设置爆炸是否闪烁。如果忽略此值，则原来的<code>has_twinkle</code>不改变；如果应用此物品修饰器前对应组件不存在，则使用<code>false</code>。
+</div>
+* {{cd|set_book_cover}}：覆盖<code>minecraft:written_book_content</code>组件详细内容的新函数，不会更改[[成书]]的任何一页。
+<div class="treeview">
+:** {{nbt|list|conditions}}：（默认为<code>[]</code>）一个战利品表谓词列表。当其中的条件全部符合时才会应用此物品修饰器。
+:** {{nbt|string|title}}：（可选，可过滤文本）设置成书的标题，与<code>minecraft:written_book_content</code>组件中的<code>title</code>格式相同。如果忽略此值，则原标题不改变；如果应用此物品修饰器前对应组件不存在，则使用空字符串。
+:** {{nbt|string|author}}：（可选）设置成书的作者。如果忽略此值，则原标题不改变；如果应用此物品修饰器前对应组件不存在，则使用空字符串。
+:** {{nbt|int|generation}}：（可选，不小于0且不大于3）设置成书的复制次数。如果忽略此值，则原值不改变；如果应用此物品修饰器前对应组件不存在，则使用<code>0</code>。
+</div>
+* {{cd|set_writable_book_pages}}：设置<code>minecraft:writable_book_content</code>组件页面的新函数。
+<div class="treeview">
+:** {{nbt|list|conditions}}：（默认为<code>[]</code>）一个战利品表谓词列表。当其中的条件全部符合时才会应用此物品修饰器。
+:** {{nbt|list|pages}}：页面列表，与<code>minecraft:writable_book_content</code>组件中的<code>pages</code>格式相同。
+:** {{nbt|string|mode}}：决定[[书与笔]]页面数据的模式的枚举值。
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|replace_all}}，则用此物品修饰器定义的页面列表替换整个书页列表数据，没有附加标签。}}
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|replace_section}}，则用此物品修饰器定义的页面列表替换书页列表中的一个区间内元素的数据，并带有下列附加标签：}}
+:** {{nbt|int|offset}}：（可选，不小于0）替换列表的起始下标。如果被省略，则为<code>0</code>。
+:** {{nbt|int|size}}：（可选，不小于0）替代列表的长度。如果被省略，则使用{{nbt|list|pages}}列表的长度。
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|append}}，则将此物品修饰器定义的书页列表附加到原书与笔书页列表后，没有附加标签。}}
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|insert}}，则将此物品修饰器定义的书页列表插入到原书与笔书页列表内，并带有下列附加标签：}}
+:** {{nbt|int|offset}}：（可选，不小于0）列表的插入位置下标。如果被省略，则为<code>0</code>（即在第一页前）。
+</div>
+* {{cd|set_written_book_pages}}：设置<code>minecraft:written_book_content</code>组件页面的新函数，不会更改封面数据。这些页面文本组件将在玩家下次打开成书时解析。
+<div class="treeview">
+:** {{nbt|list|conditions}}：（默认为<code>[]</code>）一个战利品表谓词列表。当其中的条件全部符合时才会应用此物品修饰器。
+:** {{nbt|list|pages}}：书页列表，必须为可过滤的[[文本组件格式]]。
+:** {{nbt|string|mode}}：决定成书书页数据的模式的枚举值。
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|replace_all}}，则用此物品修饰器定义的书页列表替换整个书页列表数据，没有附加标签。}}
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|replace_section}}，则用此物品修饰器定义的书页列表替换书页列表中的一个区间内元素的数据，并带有下列附加标签：}}
+:** {{nbt|int|offset}}：（可选，不小于0）替换列表的起始下标。如果被省略，则为<code>0</code>。
+:** {{nbt|int|size}}：（可选，不小于0）替代列表的长度。如果被省略，则使用{{nbt|list|pages}}列表的长度。
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|append}}，则将此物品修饰器定义的书页列表附加到原成书书页列表后，没有附加标签。}}
+:** {{nbt condition|若{{nbt|string|mode}}为{{cd|insert}}，则将此物品修饰器定义的书页列表插入到原成书书页列表内，并带有下列附加标签：}}
+:** {{nbt|int|offset}}：（可选，不小于0）列表的插入位置下标。如果被省略，则为<code>0</code>（即在第一页前）。
+</div>
+
+== 更改 ==
+=== 物品 ===
+'''[[狼铠]]'''
+* 更改了开裂纹理。
+
+=== 生物 ===
+'''[[蜜蜂]]和[[鹦鹉]]'''
+* 优化了飞行AI，现在上下飞行幅度不会太大。
+
+'''[[狼]]'''
+* 不再会攻击[[盔甲架]]。
+* 现在于下列[[生物群系]]中使用[[刷怪蛋]]或{{cmd|summon}}召唤的狼不再为{{EntityLink|Pale Wolf}}。
+** [[丛林]]和[[竹林]]中召唤的狼为{{EntityLink|Rusty Wolf}}。
+** [[热带草原]]和[[风袭热带草原]]中召唤的狼为{{EntityLink|Spotted Wolf}}。
+** [[恶地]]和[[风蚀恶地]]中召唤的狼为{{EntityLink|Striped Wolf}}。
+
+=== 命令格式 ===
+'''{{cmd|weather}}'''
+* 现在执行环境为自定义维度也可以生效。
+
+'''谓词'''
+* 删除了实体子谓词<code>any</code>。
+* 现在指定组件的物品谓词属性被移动到<code>predicates</code>字段中。
+* 为[[物品展示框]]、[[物品展示实体]]等仅有单个槽位的实体加入了槽位名称<code>contents</code>。
+* 现在实体数据<code>item</code>被<code>contents</code>包含。
+* 现在部分物品谓词字段被移入可选字段<code>predicates</code>中，它们的格式与[[物品堆叠组件]]相似。
+** 这为未来添加谓词提供便利，且让子谓词与其匹配的组件更相似。
+** 将以下谓词移动为子谓词：
+*** <code>enchantments</code> → <code>minecraft:enchantments</code>
+*** <code>stored_enchantments</code> → <code>minecraft:stored_enchantments</code>
+*** <code>potions</code> → <code>minecraft:potion_contents</code>
+*** <code>custom_data</code> → <code>minecraft:custom_data</code>
+** <code>durability</code>被扩展为谓词<code>minecraft:damage</code>。
+*** 现在会对拥有<code>minecraft:damage</code>组件的任意物品生效；如果物品没有<code>minecraft:damage</code>组件，它将永不匹配。
+*** 现在不再能检测物品是否含有{{cd|minecraft:unbreakable}}组件，而需获取该组件的值。
+*** 格式：
+<div class="treeview"> 
+:::* {{nbt|compound|minecraft:damage}}
+:::** {{nbt|int|damage}}：（可选）{{cd|minecraft:damage}}组件的精确值。
+:::** {{nbt|int|durability}}：（可选）耐久的精确值，为最大损伤值减{{cd|minecraft:damage}}的值。
+</div>
+:* 谓词{{cd|d=pretty|minecraft:enchantments|minecraft:stored_enchantments|minecraft:potion_contents|minecraft:damage}}现在需要物品具有匹配的组件。
+:** 具有默认值的组件可能总是符合条件。
+:* 示例：
+:: <syntaxhighlight lang="json">{
+	"item": {
+		"predicates": {
+			"minecraft:enchantments": [
+				{
+					"enchantment": "minecraft:silk_touch",
+					"levels": {
+						"min": 1
+					}
+				}
+			]
+		}
+	}
+}</syntaxhighlight>
+
+=== 常规 ===
+'''[[背景图]]'''
+* 现在[[命令方块]]、[[结构方块]]、[[拼图方块]]、[[告示牌]]和悬挂式告示牌背景不再与暂停界面共用纹理，也不再模糊化。
+* 优化了背景模糊，使其更高效。
+
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>35</code>。
+* 加入了新的战利品表函数。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>29</code>。
+* 加入了{{cd|d=pretty|gui/inworld_menu_background|gui/inworld_menu_list_background|gui/inworld_header_separator|gui/inworld_footer_separator textures}}纹理来区分[[游戏菜单]]和[[主菜单]]。
+* 加入了{{cd|gui/tab_header_background}}纹理，渲染于[[创建新的世界]]选项卡按钮后侧。
+* 加入了{{cd|misc/credits_vignette}}纹理，渲染于[[胜利屏幕]]后侧。
+* 将<code>blur</code>后处理着色器重命名为<code>box_blur</code>。
+* 加入了后处理过程可选字段{{nbt|bool|use_linear_filter}}。
+** 为<code>true</code>时，此过程的纹理采样模式由最近邻采样切换到线性插值。
+* 加入了后处理着色器{{cd|entity_outline_box_blur}}。
+
+'''[[粒子]]'''
+* 状态效果粒子不再混合为一种颜色，现在多个状态效果的粒子会分别渲染。
+* 降低了实体发出状态效果粒子的频率。
+
+== 新内容（实验性） ==
+=== 方块 ===
+'''[[沉重核心]]'''
+* 一种[[碰撞箱]]不完整且不[[含水]]<ref>{{bug|MC-269419|||Fixed}}</ref>的方块。
+* 可从[[试炼密室]]的[[宝库]]或柱廊入口密室的奖励箱获得。
+* 具有金属音效。
+* [[硬度]]和[[爆炸抗性]]均为30，没有合适的[[挖掘]]工具，不能被任何工具加速挖掘，但被非创造模式玩家破坏时总会掉落。
+* 不可被[[活塞]]推拉，被活塞推动时会被破坏。
+* 会被水流破坏。
+* 用于合成[[重锤]]。
+
+=== 物品 ===
+'''[[旋风棒]]'''
+* 由[[旋风人]]掉落。
+* 可以合成为4个[[风弹（物品）|风弹]]，也可以与沉重核心合成重锤。
+
+'''[[重锤]]'''
+* 一种重型武器。
+* 使用1个沉重核心和1个[[旋风棒]]合成。
+* 可以加速破坏任意方块。<ref>{{bug|MC-269403|||Fixed}}</ref>
+** 与[[剑]]和[[三叉戟]]一样，创造模式下主手持重锤的玩家不能破坏方块。
+* 击中生物前，玩家<ref>{{bug|MC-269428|||Fixed}}</ref>的摔落高度越大，造成的伤害越高。
+** 如果成功击中目标，则会抵消累积的摔落伤害，并会击退目标周围的其他实体。
+* 具有250点[[耐久度]]，可以在[[铁砧]]上使用旋风棒修复。
+* 在非创造模式下无法添加魔咒。<ref>{{bug|MC-269353|||Invalid}}</ref>
+
+'''[[旗帜图案]]'''
+* 加入了涡流和旋风2种旗帜图案。
+** 可从试炼密室的宝库获得。
+
+'''[[锻造模板]]'''
+* 加入了镶铆和涡流2种盔甲纹饰锻造模板。
+** 可从试炼密室的宝库获得。
+** 镶铆盔甲纹饰锻造模板可使用[[铜块]]复制。
+** 涡流盔甲纹饰锻造模板可使用[[旋风棒]]复制。
+
+'''[[陶片]]'''
+* 加入了涡流、旋风和刮削3种纹样陶片。
+** 试炼密室中会生成带有这些纹样的[[饰纹陶罐]]。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 加入了下列旗帜图案标签：
+** {{cd|#pattern_item/flow}}：{{cd|flow}}。
+** {{cd|#pattern_item/guster}}：{{cd|guster}}。
+
+== 更改（实验性） ==
+=== 方块 ===
+'''[[宝库]]'''
+* 将其战利品表拆分为<code>reward_common</code>（普通）、<code>reward_rare</code>（稀有）和<code>reward_unique</code>（独有）。
+** 每次解锁时从普通战利品表抽取1-3次，另有80%的概率从稀有战利品表抽取1次（20%概率从普通战利品表抽取1次），另有25%的概率从独有战利品表抽取1次（75%概率不抽取）。
+** 从战利品表中移除了[[马铠]]和[[鞍]]。
+** 向战利品表中添加了以下物品：
+*** [[箭]]、[[剧毒之箭]]、[[蜂蜜瓶]]、[[风弹（物品）|风弹]]（普通战利品）
+*** [[绿宝石块]]（稀有战利品）
+*** 镶铆和涡流盔甲纹饰[[锻造模板]]、涡流和旋风[[旗帜图案]]、[[沉重核心]]（独有战利品）
+
+=== 生物 ===
+'''[[旋风人]]'''
+* 被玩家或驯服的狼杀死时不再掉落[[风弹（物品）|风弹]]，现在会掉落1-2个[[旋风棒]]，受[[抢夺]]魔咒影响。
+
+=== 世界生成 ===
+'''[[试炼密室]]'''
+* 加入了新的决斗室{{cd|d=pretty|pedestal|slanted}}，以及它们独有的附加结构，同时移除了决斗室{{cd|d=pretty|chamber_3|chamber_9}}。
+* 现在其中的[[饰纹陶罐]]会按结构池中的<code>decor.json</code>随机附有涡流、旋风或刮削纹样陶片。
+* 现在柱廊的[[试炼刷怪笼]]生成得更频繁。
+* 将[[宝库]]、补给箱的底座方块由[[涂蜡的铜块]]和[[涂蜡的雕纹铜块]]更改为[[磨制安山岩]]和[[雕纹凝灰岩砖]]。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 向{{cd|d=pretty|#decorated_pot_ingredients|#decorated_pot_sherds}}物品标签加入了{{cd|d=pretty|flow_pottery_sherd|guster_pottery_sherd|scrape_pottery_sherd}}。
+* 向{{cd|#trim_templates}}物品标签加入了{{cd|d=pretty|flow_armor_trim_smithing_template|bolt_armor_trim_smithing_template}}。
+
+== 修复 ==
+{{fixes|fixedin=24w11a|veralias=1|showdesc=1
+|;old
+|153329|在重载世界前，被拴住的铁傀儡寻路异常。
+|165948|蜜蜂会被引诱到危险的方块处。
+|168407|蜜蜂会被灯笼困住。
+|170000|以第一人称视角环顾四周，手上或持有物品的亮度会发生剧烈变化。
+|172047|狼试图攻击盔甲架。
+|173303|重载世界时，被拴住的宠物会传送到玩家身边。
+|186626|{{cmd|link=none|weather}}在自定义维度中无效。
+|208528|喂食已驯服的幼年狼、猫会切换其站起/坐下状态。
+|221754|为狼解开拴绳后，它不再攻击。
+|229919|蜜蜂不能识别下方有营火、上方有方块的蜂箱或蜂巢。
+|232560|为已驯服的狼解开栅栏上的拴绳后，它的速度降低。
+|260921|使用键盘在统计页面导航时，数据总是最后被选中的。
+|263873|统计信息菜单内的元素不在使用{{key|Tab}}键时按顺序选中。
+|;1.20.4的漏洞
+|268624|“{{tr|保存世界中|正在儲存世界}}”文本渲染于暂停菜单背景底部而非其顶部。
+|269279|Realms玩家界面内的“普通玩家”按钮英文大小写错误。
+|;dev
+|267923|关闭告示牌UI不会取消选中“完成”按钮，这导致输入空格很麻烦。
+|267930|使用键盘打开统计页面不会选中任何元素。
+|268110|删除世界中止于文件目录报错。
+|268282|铁桶舀水、熔岩或细雪时可能不同步。
+|268405|风弹以不同寻常的方式移动。
+|268408|卸载“1.21更新”数据包后，风弹击中实体导致游戏崩溃。
+|268582|面朝的方向不再影响第一人称视角手臂的阴影。
+|268796|暂停时，“{{tr|保存世界中|正在儲存世界}}”文本被模糊化了。
+|268805|<code>panorama_overlay.png</code>不再生效。
+|268811|点击语言设置中的“完成”不能切换语言，而要通过双击语言选项应用更改。
+|268812|启用Programmer Art资源包时用于暂停界面的泥土背景出现于某些其他界面，启用高对比度资源包时的黑色背景也有同样的问题。
+|268816|启用非默认资源包后鸣谢名单背景纹理不再滚动。
+|268819|Programmer Art、高对比度及其他资源包：“创建新的世界”界面顶部透明而非泥土。
+|268855|在{{cmd|link=none|function}}命令后添加空格导致内部服务器关闭。
+|268862|启用“高对比度”资源包后，无天空光照的区域非常暗。
+|268902|可见的模糊菜单背景导致FPS降低。
+|268908|使用{{key|tab}}键不能打开“字体设置”界面而会离开“语言”界面。
+|268953|切换全屏模式或改变分辨率会破坏“游戏规则”界面布局。
+|268956|命令方块、结构方块和拼图方块的背景使用了<code>menu_background.png</code>。
+|268967|夜视在启用高对比度时不起作用。
+|269032|菜单背景模糊程度为0%时模糊着色器仍在运行。
+|269077|编辑告示牌界面使用<code>menu_background.png</code>。
+|269081|主菜单中，一些Realms图标渲染于按钮后而非根本不渲染。
+|269122|编辑告示牌的背景也被模糊。
+|;prev
+|269134|幼年狼不再能通过喂食加速成长。
+|269136|命令建议<code>weapon.*</code>异常。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:24w11a]]
+[[en:Java Edition 24w11a]]
+[[es:Java Edition 24w11a]]
+[[fr:Édition Java 24w11a]]
+[[ja:Java Edition 24w11a]]
+[[lzh:爪哇版二四週一一甲]]
+[[pt:Edição Java 24w11a]]
+[[ru:24w11a (Java Edition)]]
+[[uk:24w11a (Java Edition)]]

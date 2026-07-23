@@ -1,0 +1,320 @@
+# 页面: Java版指南/追逐天空
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%8C%87%E5%8D%97/%E8%BF%BD%E9%80%90%E5%A4%A9%E7%A9%BA
+# 分类: 
+# 抓取时间: 2026-07-14 17:15:22
+# 原始 Wikitext 内容:
+
+{{for|基岩版版本的指南|基岩版指南/追逐天空}}
+{{Infobox guide
+| edition = Java版
+| name = 追逐天空
+|vers = 
+* {{vl|je 1.21.6}}
+* {{vl|je 1.21.7}}
+* {{vl|je 1.21.8}}
+| prev = 春意盎然
+| next = 铜器时代
+}}
+这篇指南简要概述了[[追逐天空]]小更新（[[Java版1.21.6]]-[[Java版1.21.8|1.21.8]]）的所有非[[实验性内容]]。本指南假定读者对[[春意盎然]]（[[Java版1.21.5]]）更新的内容有基本了解。
+
+== 生物 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Mobs}}
+|-
+| [[快乐恶魂]]
+| {{Animate|Happy Ghast.gif;Harnessed Happy Ghast.gif;Leashed Happy Ghast.gif;Happy Ghast White Harness Goggles Down BE1.gif|84px}}
+[[File:Ghastling.gif|56px]]
+|
+* 不会自然生成。
+* 在[[水]]浸泡[[失水恶魂]]后生成其幼年形态。
+|
+* {{xp|1|3}}（由玩家或驯服的狼杀死）
+* 其佩戴的{{ItemLink|Harness}}
+|
+* 幼年形态被称为小恶魂。
+* 快乐恶魂和小恶魂会每{{convert|600}}自然恢复{{hp|1}}。在[[主世界]]中，处于[[雨]]或[[降雪|雪]]中时或飞行高度与[[云]]的高度（Y=192至196）相同时则会每{{convert|20}}自然恢复{{hp|1}}。
+* 小恶魂会在生成{{convert|24000||分}}后成长为快乐恶魂，对其喂食[[雪球]]可以加快生长进度，每次喂食可减少约10%的剩余生长时间。
+* 玩家可对快乐恶魂{{control|使用}}挽具，使其可被骑乘，并在无玩家骑乘时使用[[剪刀]]将挽具移除。也可使用[[发射器]]为其装备挽具。
+** 快乐恶魂最多可以承载4名玩家，座位分别位于其上表面的四个边缘。第一个骑乘快乐恶魂的玩家会坐在前部，后来骑乘的玩家会坐在其余侧面的槽位上，以第一个骑乘的玩家开始顺时针排序。
+** 只有坐在前部的玩家可以控制快乐恶魂。当该玩家移动视角时，快乐恶魂会在短暂延迟后以自身（而不是该玩家）为中心在水平方向上旋转至与该玩家视角相同的方向。控制飞行时，{{control|前进}}和{{control|后退}}键分别使快乐恶魂沿着控制者面向的方向（包括垂直方向）前进或后退，{{control|向左}}和{{control|向右}}会使其直接在水平方向上平移。按下{{control|跳跃}}可以使其垂直上升，但上升速度略慢于在视角垂直向上时按下{{control|前进}}。
+** 按下{{control|潜行}}可以脱离乘坐，这时玩家会站在快乐恶魂的上表面。
+** 快乐恶魂完全被水浸泡时会使所有乘客脱离骑乘。
+* 快乐恶魂能为在其上方的玩家以及除[[弹射物]]外的实体提供支撑，此时快乐恶魂不会移动。
+* 使用[[拴绳]]将[[船]]、[[运输船]]、[[马]]、[[驴]]、[[骡]]、[[骷髅马]]、[[僵尸马]]、[[骆驼]]和[[嗅探兽]]拴在快乐恶魂上时，会有四条类似拴绳的线从快乐恶魂下方的四个角连接到被拴住的实体上（只是视觉效果，实际只需一条拴绳）。如果快乐恶魂装备了挽具，快乐恶魂身上还会出现特殊的纹理。
+** 如果有玩家骑乘与快乐恶魂相连接的可骑乘实体并且能够控制它，该实体将不会跟随快乐恶魂飞行，而会受到重力影响开始下坠，并可能导致断开连接。如果船中坐有装备了鞍的猪或炽足兽，且玩家坐在它们上面而不是船上面，上述效果就不会触发。
+* 快乐恶魂会主动跟随半径16格内手持雪球的玩家。未装备挽具的快乐恶魂也会跟随手持挽具的玩家。若附近没有合适的可跟随生物，快乐恶魂会在其原点位置64格内游荡，已装备挽具时则会在原点位置32格内游荡。
+
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Mobs}}
+|-
+| [[恶魂]]
+| {{Animate|Ghast JE3 BE3.gif;Ghast shooting JE3.png|84px}}
+|
+* 更改了纹理。
+|-
+| [[狼]]、[[猪]]和[[绵羊]]
+| {{Animate|Wolf JE2 BE2.png;Pig JE4 BE2.png;White Sheep JE6.png|84px}}
+|
+* 更改了腿部纹理使其镜像对称。
+|-
+| [[猪灵]]
+| [[File:Piglin.png|frameless|84px]]
+|
+* 现在可以在以物易物中获得失水恶魂。
+|-
+| [[马]]、[[驴]]和[[骡]]
+| {{Animate|Creamy Horse.png;Donkey.png;Mule.png|84px}}
+|
+* 现在可以用[[胡萝卜]]治疗、喂食和提升成长速度。
+|-
+| [[玩家]]
+|
+|
+* 骑乘或旁观恶魂、[[末影龙]]和[[巨人]]时，第三人称相机现在会离玩家更远。
+|}
+
+== 方块 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=追逐天空新增方块
+|rows=1
+| 0=Dried Ghast }}
+|追逐天空新增方块一览
+}}
+{|{{Simple Guide table|New Blocks}}
+|-
+| [[失水恶魂]]
+| [[File:Dried Ghast.png|84px]]
+|
+* 生成于[[下界化石]]结构，也可以通过[[以物易物]]获得。
+{{Crafting
+|A1 = Ghast Tear
+|A2 = Ghast Tear
+|A3 = Ghast Tear
+|B1 = Ghast Tear
+|B2 = Soul Sand
+|B3 = Ghast Tear
+|C1 = Ghast Tear
+|C2 = Ghast Tear
+|C3 = Ghast Tear
+|Output = Dried Ghast
+|ignoreusage = 1
+}}
+| 任何
+|
+* 含水的失水恶魂会逐渐“湿润”，持续含水20分钟后生成小恶魂。
+* 不再含水时，失水恶魂会逐渐恢复到“干枯”状态。
+* 改变湿润状态会发出频率为11的振动。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Blocks}}
+|-
+| [[萤火虫灌木丛]]
+| [[File:Firefly Bush JE1 BE1.gif|84px]]
+|
+* 现在会产生持续更久的粒子。
+|-
+| [[陶瓦]]
+| [[File:Terracotta JE2 BE2.png|84px]]
+|
+* 不再发出环境音效。
+|-
+| [[沙子]]和[[红沙]]
+| {{Animate|Sand JE5 BE3.png;Red Sand JE3 BE2.png|84px}}
+|
+* 发出的环境音效不再包括“风声”。
+* 发出环境音效的条件不再包括露天。
+|}
+
+== 物品 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=追逐天空新增物品
+|rows=3
+| 0=Black Harness | Blue Harness | Brown Harness | Cyan Harness | Gray Harness | Green Harness | Light Blue Harness | Light Gray Harness | Lime Harness | Magenta Harness | Orange Harness | Pink Harness | Purple Harness | Red Harness | White Harness | Yellow Harness | Happy Ghast Spawn Egg | Music Disc Tears | Music Disc Lava Chicken}}
+|追逐天空新增物品一览
+}}
+{|{{Simple Guide table|New Items}}
+|-
+| [[挽具]]
+| {{Animate|White Harness JE1 BE1.png;Light Gray Harness JE1 BE1.png; Gray Harness JE1 BE1.png;Black Harness JE1 BE1.png; Brown Harness JE1 BE1.png;Red Harness JE1 BE1.png;Orange Harness JE1 BE1.png;Yellow Harness JE1 BE1.png;Lime Harness JE1 BE1.png;Green Harness JE1 BE1.png;Cyan Harness JE1 BE1.png;Light Blue Harness JE1 BE1.png;Blue Harness JE1 BE1.png;Purple Harness JE1 BE1.png;Magenta Harness JE1 BE1.png;Pink Harness JE1 BE1.png|84px}}
+|
+{{Crafting
+|head=1
+|A1=Leather |B1=Leather  |C1=Leather
+|A2=Glass   |B2=Matching Wool |C2=Glass
+|Output=Matching Harness
+}}
+{{Crafting
+|Any Harness
+|Matching Dye
+|Output=Matching Harness
+|foot=1
+}}
+|
+* 可以将其装载于[[快乐恶魂]]以骑乘。
+* 使用剪刀将其从快乐恶魂上移除。
+|-
+| [[快乐恶魂刷怪蛋]]
+| [[File:Happy Ghast Spawn Egg JE1 BE1.png|84px]]
+|
+* 从创造模式物品栏获得。
+|
+* 用于生成快乐恶魂。
+|-
+| [[音乐唱片Tears]]
+| [[File:Music Disc Tears JE1 BE1.png|84px]]
+|使用恶魂火球击杀恶魂时掉落。
+|会播放音乐''Tears''
+[[File:Tears.ogg]]
+|-
+| [[音乐唱片Lava Chicken]]
+| [[File:Music Disc Lava Chicken JE1 BE1.png|84px]]
+|
+* 由玩家或玩家驯服的[[狼]]杀死正在骑乘[[鸡]]的幼年[[僵尸]]掉落。
+|
+* 会播放音乐''Lava Chicken''
+[[File:Lava Chicken.ogg]]
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Items}}
+|-
+| [[刷怪蛋]]
+| {{Animate|Blaze Spawn Egg JE4 BE3.png;Breeze Spawn Egg JE3 BE3.png;Mooshroom Spawn Egg JE4 BE3.png|84px}}
+|
+* 调整了烈焰人和旋风人刷怪蛋的纹理大小。
+* 更改了哞菇刷怪蛋的纹理。
+|-
+| [[拴绳]]
+| [[File:Lead JE2 BE2.png|84px]]
+|
+* 现在可以拴住两个生物。
+* 将合成配方中的[[黏液球]]改为了[[线]]。
+{{Crafting
+|A1=String |B1=String
+|A2=String |B2=String
+|C3=String
+|Output=Lead,2
+|ignoreusage = 1
+}}
+* 加入了新的音效。
+|-
+| [[烟花火箭]]
+| [[File:Firework Rocket JE2 BE2.png|84px]]
+|
+* 现在在滑翔时对方块{{ctrl|使用}}总会助推。
+|-
+| [[喷溅药水]]
+| [[File:Splash Water Bottle JE2 BE3.png|84px]]
+|
+* 喷溅药水到受影响实体的距离现在取决于实体碰撞箱和它着陆的喷溅药水碰撞箱之间的最近距离。
+|-
+| [[皮革]]
+| [[File:Leather JE2 BE2.png|84px]]
+|
+* 现在会在[[刷怪房]]、[[远古城市]]、[[沙漠神殿]]、[[丛林神殿]]和[[要塞]]的奖励箱中生成1-5个。
+|-
+| [[鞍]]
+| [[File:Saddle JE2 BE2.png|84px]]
+|
+* 现在可以{{ctrl|使用}}剪刀从生物上去除，同时会发出振动频率为6的振动。
+* 鞍不再能在[[刷怪房]]、[[远古城市]]、[[沙漠神殿]]、[[丛林神庙]]和[[要塞]]的奖励箱中找到了。
+* 加入了合成配方。
+{{Crafting
+|B1 = Leather
+|A2 = Leather
+|B2 = Iron Ingot
+|C2 = Leather
+|Output = Saddle
+}}
+|-
+| [[剪刀]]
+| [[File:Shears JE2 BE2.png|84px]]
+|
+* 现在可用于从除劫掠兽外的可骑乘生物上移除[[鞍]]、[[马铠]]、[[挽具]]和[[地毯]]。
+* 加入了移除物品时对应的声音，包括：
+** <code>mob/horse/armor_unequip</code>
+** <code>mob/horse/saddle_unequip</code>
+** <code>mob/llama/unequip</code>
+|}
+
+== 非生物实体 ==
+=== 新内容 ===
+{|{{Simple Guide table|Changed Non-mob entities}}
+|-
+| [[画]]
+| [[File:Dennis (texture) JE1 BE2.png|192px]]
+|
+* 加入了由[[Sarah Boeving]]创作的画''Dennis''。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Non-mob entities}}
+|-
+| [[弹射物]]
+|
+|
+* 弹射物现在具有随时间变化的目标容忍范围。
+|}
+
+== 结构 ==
+=== 更改 ===
+{|{{Simple Guide table|Changed Structures}}
+|-
+| [[林地府邸]]
+| [[File:Woodland_Mansion.png|256px]]
+|
+* 现在会生成“盆栽房”。
+|}
+
+== 游戏内容 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Gameplay}}
+|-
+| [[定位栏]]
+|
+* 用于在多人游戏中定位其他玩家。
+* 如果目标偏离相机视域过远，会用箭头指示上下方向。
+* 路径点大小随与目标的距离变化。
+* 处于潜行状态、佩戴[[生物头颅]]或[[雕刻南瓜]]和拥有[[隐身]]效果的玩家不可见。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Gameplay}}
+|-
+| [[旁观模式]]
+|
+* 旁观者现在将与移动到其他维度的实体一起传送，但会导致停止旁观该生物。
+|-
+| [[云]]
+|
+* 云的纹理文件不再支持彩色像素。
+* 大部分情况下，现在云层能一直渲染到地平线。
+* 现在可以独立于世界渲染距离来配置云渲染距离。
+* 更改了云的纹理。
+|-
+| [[迷雾]]
+|
+* 改善了迷雾的氛围。
+* 现在[[降雨]]和[[雷暴]]天气会有明显的迷雾。
+|}
+
+== 进度 ==
+=== 新内容 ===
+{{Load advancements|adventure.heart_transplanter;husbandry.place_dried_ghast_in_water}}
+
+== 导航 ==
+{{Navbox guides|je}}
+
+[[en:Java Edition guides/Chase the Skies]]
+[[ja:ガイド/Java Edition/チェイス・ザ・スカイ]]
+[[lzh:爪哇版指南/魄飛戾天]]
+[[pt:Guias da Edição Java/Chase the Skies]]

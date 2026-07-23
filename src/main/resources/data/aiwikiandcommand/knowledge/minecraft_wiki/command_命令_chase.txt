@@ -1,0 +1,77 @@
+# 页面: 命令/chase
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/chase
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}{{debug feature warning}}
+{{Infobox command
+|oplevel=0
+|others=仅启用[[调试工具#CHASE_COMMAND|调试工具{{cd|MC_DEBUG_CHASE_COMMAND}}]]
+}}
+
+同步不同游戏实例的玩家的移动。
+
+== 用法 ==
+此命令需要在至少两个独立的游戏实例上执行，单个游戏实例内没有任何作用。<ref>{{ytl|a2dVp0A3uwM}}</ref>
+
+{{cmd|link=none|chase lead}}将创建一个chase服务端，{{cmd|link=none|chase follow}}将创建一个chase客户端。游戏会尝试连接chase服务端与chase客户端。
+
+连接完毕后，游戏会将chase服务端玩家列表的首个玩家的移动同步到chase客户端玩家列表的首个玩家上。当chase服务端的玩家的位置或朝向改变时，游戏实际上会将chase客户端的玩家传送到chase服务端玩家的位置（包含朝向），本质上就是chase客户端玩家以权限等级4执行命令{{cmd|execute in %s run tp @s <''目标X坐标''> <''目标Y坐标''> <''目标Z坐标''> <''目标偏航角''> <''目标俯仰角''>}}。
+
+== 语法 ==
+: <code>chase follow [<host>] [<port>]</code>
+:: 创建chase客户端，将作为被同步移动的一方。
+
+: <code>chase lead [<bind_address>] [<port>]</code>
+:: 创建chase服务端，将作为发出同步移动的一方。
+
+: <code>chase stop</code>
+:: 停止chase客户端或停止chase服务端。
+
+== 参数 ==
+{{argument|host|string}}
+: 指定chase客户端的地址，默认为<code>localhost</code>。
+: {{arg desc|je=string}}
+
+{{argument|port|integer}}（在<code>/chase follow</code>中）
+: 指定chase客户端的端口，默认为<code>10000</code>。
+: {{arg desc|je=integer|min=1|max=65535}}
+
+{{argument|port|integer}}（在<code>/chase lead</code>中）
+: 指定chase服务端的端口，默认为<code>10000</code>。
+: {{arg desc|je=integer|min=1024|max=65535}}
+
+{{argument|bind_address|string}}
+: 指定chase服务端的地址，默认为<code>0.0.0.0</code>。
+: {{arg desc|je=string}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/chase lead ...|chase服务端启动失败<br>chase服务端或chase客户端已创建|fail}}
+{{Result table|cmd=/chase follow...|chase客户端或chase服务端已创建}}
+{{Result table|cmd=/chase stop|没有chase服务端或chase客户端被关闭}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|edition=je|执行成功|1|0|0}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.9|dev=25w37a|加入了{{cmd|chase|link=none}}命令，仅在启用[[调试工具#CHASE_COMMAND|调试工具{{cd|MC_DEBUG_CHASE_COMMAND}}]]时可用。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/chase]]
+[[en:Commands/chase]]

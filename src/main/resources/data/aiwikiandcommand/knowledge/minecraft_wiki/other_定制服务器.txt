@@ -1,0 +1,306 @@
+# 页面: 定制服务器
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9A%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8
+# 分类: Java版, Java版独有特性, 服务器, 来源请求, 自定义软件, 需要验证
+# 抓取时间: 2026-07-14 17:25:13
+# 原始 Wikitext 内容:
+
+{{about|非官方Java版服务器软件|其他用法|服务器（消歧义）}}
+{{Disclaimer}}
+{{exclusive|Java}}
+
+'''定制服务器（Custom Server）'''是由第三方开发、不由官方发布的Minecraft服务端软件。这类软件在不同程度上重写、修改或替代了官方服务端的实现方式，并不受[[Mojang Studios]]维护。{{cn}}
+
+定制服务器作为原始服务器的替代品，添加了一些附加特性，如游戏内容上的改变、延迟的优化等。定制服务器必须与[[客户端]]保持更新，因为可能存在某些协议上的变化。由Mojang提供的并由Minecraft实施的协议在每个版本中都会发生改变，所以定制服务器的创建和维护需要面临适应这些变化的额外的挑战。
+
+== 特性 ==
+定制服务器拓展了游戏内容，管理功能，甚至是一些此前从未在原始服务器中考虑过的东西。
+
+=== 多世界 ===
+多世界是一种可以在定制服务器中用到的Minecraft客户端特性。第一个有着这个特性的服务器是Myne。
+
+通常在这些服务器中有一个主世界，可以通过传送门或命令将玩家移动到其他的地图中。可以创建一个新的世界并分配各种不同的属性，例如限制可以进入或在某一世界建造的人。这使得可以在展示旧地图的同时依然有地图可以让公众在其中建造。同样可以授予更多的私人领地来阻止破坏者。
+
+=== 颜色代码 ===
+{{main|格式化代码}}
+
+游戏使用一种特殊的符号“§”来标识颜色代码。原版的Minecraft客户端不允许插入这个符号到聊天栏，所以很多自定义服务器使用了“&”符号或“%”符号来代替。
+
+从服务器发往客户端的信息可以具有颜色代码。
+
+如果玩家发送包含颜色代码的信息到服务器（使用修改版客户端或旧版客户端），一部分服务器（包括原版服务器）将会踢出该玩家并无视聊天信息。
+
+信息开头的颜色代码只会在玩家ID少于127字节时有效，当玩家ID超过127字节，游戏会自动在信息开头添加&e使其变为黄色。但是，在第一个字符后面的颜色代码仍然有效。如果玩家的ID少于127字节，游戏不会自动添加颜色代码，因此可以正常使用。
+
+重要的一点是，在信息末尾的不跟16进制数字的&符号会使所有接收到这条信息的客户端崩溃，所以一定要检查来自客户端的信息。{{verify|在某些情况下不会发生。}}
+
+== 对照 ==
+这个列表为所有已知的[[Java版]]定制服务端软件。
+
+=== 官方服务端软件 ===
+每次游戏版本更新时，Mojang都会同时发行官方服务端软件。
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="Java版服务端软件列表"
+|-style="background:#eee"
+!style="width: 078px" | 名称
+!style="width: 200px" | 主要开发者
+!style="width: 092px" | 最新支持版本
+!style="width: 056px" | [[wzh:程序设计语言|程序设计语言]]
+|-
+| [https://minecraft.net/en-us/download/server/ Java版服务端]
+| Mojang Studios
+| style="background:light-dark(#c0eece, #314d3a)" | 最新
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+|}
+
+=== 支持插件的服务器 ===
+一些非官方服务端软件支持在游戏中原生地运行插件。这些插件与运行它们的服务端软件并不受Mojang Studios的维护。
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="支持插件的服务端软件列表"
+|-style="background:#eee"
+!style="width: 078px" | 名称
+!style="width: 200px" | 主要开发者
+!style="width: 092px" | 最新支持版本
+!style="width: 056px" | [[wzh:程序设计语言|程序设计语言]]
+!style="width: 240px" | 备注
+|-
+| [https://spigotmc.org/ Spigot]
+| SpigotMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Spigot是CraftBukkit的续作。其正受到活跃的维护，且为插件开发者提供了更多的功能与服务器修复和配置。
+|-
+| [https://papermc.io/ Paper]
+| PaperMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Paper是Spigot的一个更注重于性能的分支。其为开发者提供了更多的API与服务器配置，同时也包含了一些对游戏的漏洞修复。
+|-
+| [https://papermc.io/software/folia Folia]
+| PaperMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Folia是Paper的一个新分支，其为服务器添加了区域化多线程。
+|-
+| [https://github.com/Spottedleaf/Tuinity Tuinity]
+| SpottedLeaf
+| style="background:light-dark(#CCCCCB, #535353)" | {{verlink|Java版1.17.1|1.17.1}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Tuinity是Paper的一个更注重于优化多玩家服务器的分支。
+|-
+| [https://www.spongepowered.org SpongeVanilla]
+| Sponge
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.21.10|1.21.10}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| 该服务器使用了Sponge API，与以上使用Bukkit API的服务器不同。同时包含一些针对性能与服务器配置的优化。
+|-
+| [https://bukkit.org CraftBukkit]
+| SpigotMC，此前为The Bukkit Project 
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| CraftBukkit为Minecraft添加了插件支持，同时允许更大程度的服务器配置。该项目被BukkitDev团队废弃后由SpigotMC接管了开发以使其跟上最新版本。
+|-
+| [https://purpurmc.org Purpur]
+| PurpurMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Purpur是Paper和Tuinity的一个更注重于提供新且有趣的服务器配置的分支。这使它能创造出独有的游戏体验。
+|-
+|[https://yatopiamc.org/ Yatopia]
+| YatopiaMC
+| style="background:light-dark(#CCCCCB, #535353)" | {{verlink|Java版1.17|1.17}}
+| style="background:light-dark(#d2befa, #5a4f73)" | [[wzh:Kotlin|Kotlin]]
+| Yatopia是很多上游服务端软件的分支，包括Purpur、Akarin、Empirecraft、Origami和Tuinity，提供了对于它们的一些改动。
+|-
+| [https://cuberite.org/ Cuberite]
+| FakeTruth，其原始名称为“MCServer”
+| {{verlink|Java版1.12.2|1.12.2}}
+| style="background:light-dark(#b9d7f7, #4b5867)" | [[wzh:C++|C++]]
+| Cuberite由FakeTruth于2010年末创建，其原始名称为“MCServer”，是轻巧的Minecraft服务器替代品。后来由于它是开源的，其他几个开发人员也开始做出贡献。
+|-
+| [https://luminolsuki.moe Luminol]
+| LuminolMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.21.11|1.21.11}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Luminol是一个基于Folia的分支，具有许多有用的优化、可配置的原版特性和更多的API支持，它专为生存和无政府服务器设计。
+|-
+| [https://leavesmc.org/software/leaves Leaves]
+| LeavesMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.21.10|1.21.10}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Leaves是基于Paper的Minecraft服务端，旨在修复被破坏的原版特性。
+|-
+| [https://leavesmc.org/software/lumina Lumina]
+| LeavesMC
+| style="background:light-dark(#CCCCCB, #535353)" | {{verlink|Java版1.21.6|1.21.6}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Lumina是Folia的分支，旨在遵循原版生电特性的同时引入区域化多线程。
+|-
+|[https://www.leafmc.one Leaf]
+| LeafMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.21.11|1.21.11}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Leaf是Paper的分支，专注于寻找性能优化和稳定之间的平衡，为大型网络，密集和高承载量场景设计。
+|}
+
+=== 支持加载器Mod的服务器 ===
+一些非官方服务端软件支持运行装载了Mod的游戏。这些Mod与运行它们的服务端软件并不受Mojang Studios的维护。
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="支持Mod的服务端软件列表"
+|-style="background:#eee"
+!style="width: 078px" | 名称
+!style="width: 200px" | 主要开发者
+!style="width: 092px" | 最新支持版本
+!style="width: 056px" | [[wzh:程序设计语言|程序设计语言]]
+!style="width: 240px" | 备注
+|-
+| [https://minecraftforge.net Forge]
+| MinecraftForge
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Forge是一种基于[[辅助程序与编辑器/Minecraft Coder Pack|MCP]]的服务器软件。客户端与服务端必须同时运行相应的Mod。
+|-
+| [https://neoforged.net/ NeoForge]
+| NeoForged
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| NeoForge是Forge的一个新分支，除1.20.1外其余版本均不兼容仅Forge的Mod。
+|-
+| [https://fabricmc.net/ Fabric]
+| FabricMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| 与Forge不同，Fabric并不基于[[辅助程序与编辑器/Minecraft Coder Pack|MCP]]。这允许Fabric更容易地更新至快照版本。Fabric与Forge不兼容。
+|-
+| [https://quiltmc.org/ Quilt]
+| QuiltMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Quilt是基于Fabric的服务器软件，与Fabric的大多数Mod兼容。
+|}
+
+=== 同时支持插件和Mod的服务器 ===
+一些服务端软件支持同时使用插件和Mod。Mod、插件与运行它们的服务端软件并不受Mojang Studios的维护。
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="支持Mod和插件的服务端软件列表"
+|-style="background:#eee"
+!style="width: 078px" | 名称
+!style="width: 200px" | 主要开发者
+!style="width: 092px" | 主要支持版本
+!style="width: 056px" | [[wzh:程序设计语言|程序设计语言]]
+!style="width: 240px" | 备注
+|-
+| [https://www.spongepowered.org SpongeForge]
+| Sponge
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.21.10|1.21.10}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| SpongeForge允许你在一个服务器上同时运行SpongeVanilla插件和Forge Mod。
+|-
+| [https://www.spongepowered.org SpongeNeo]
+| Sponge
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.21.10|1.21.10}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| 与SpongeForge类似，SpongeNeo允许你在一个服务器上同时运行SpongeVanilla插件和NeoForge Mod。
+|-
+| [https://magmafoundation.org/ Magma]
+| MagmaFoundation
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.21.1|1.21.1}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Magma支持同时使用NeoForge Mod和Bukkit插件，同时附带了一些性能优化。
+|-
+|[https://mohistmc.com/ Mohist]
+| MohistMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.12.2|1.12.2}}到{{verlink|Java版1.21.1|1.21.1}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Mohist是一个实现了Paper、Spigot和Bukkit API的Minecraft Forge混合服务端软件。
+|-
+| [https://github.com/IzzelAliz/Arclight Arclight]
+| IzzelAliz
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.16.5|1.16.5}}到{{verlink|Java版1.21.1|1.21.1}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Arclight是一个使用Mixin并实现了Bukkit API的Minecraft服务端软件。
+|-
+| [https://github.com/LoliServer-MC/LoliServer1.16 LoliServer]
+| Loli-Server
+| style="background:light-dark(#CCCCCB, #535353)" | {{verlink|Java版1.16.5|1.16.5}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| LoliServer是CatServer的后续开发版本，允许大多数Mod和插件稳定运行。
+|-
+| [https://github.com/Luohuayu/CatServer CatServer]
+| Luohuayu
+| {{verlink|Java版1.16.5|1.16.5}}和{{verlink|Java版1.12.2|1.12.2}}
+| style="background:light-dark(#f8e1c3, #634f36)" |[[wzh:Java|Java]]
+| CatServer实现了Bukkit和Spigot API，允许大多数Mod和插件稳定运行。
+|}
+
+=== 代理 ===
+一些非官方软件将服务器串联为一整个网络，并允许玩家在服务器之间转移，在大型服务器网络下十分常见。这些代理服务端软件并不受Mojang Studios的维护。
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="服务端代理列表"
+|- style="background:#eee"
+! style="width: 078px" | 名称
+! style="width: 200px" | 主要开发者
+! style="width: 092px" | 支持版本
+! style="width: 056px" | [[wzh:程序设计语言|程序设计语言]]
+! style="width: 240px" | 备注
+|-
+| [https://www.spigotmc.org/wiki/bungeecord/ BungeeCord]
+| SpigotMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.8|1.8}}到{{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| BungeeCord是一个允许玩家在服务器间切换的简单代理软件。
+|-
+| [https://papermc.io/downloads/waterfall Waterfall]
+| PaperMC
+| style="background:light-dark(#CCCCCB, #535353)" | {{verlink|Java版1.8|1.8}}到{{verlink|Java版1.21|1.21}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Waterfall是BungeeCord的一个分支，提供了更佳的性能。Waterfall已不再被开发者支持，并被建议迁移至Velocity。
+|-
+| [https://papermc.io/software/velocity Velocity]
+| PaperMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版1.7.2|1.7.2}}到{{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Velocity是更加现代和高性能的代理，拥有自己的插件生态系统，并被用于替代Waterfall。它同时也支持BungeeCord的转发。
+|}
+
+=== 协议转换器 ===
+一些非官方软件支持对不同版本的Minecraft进行协议转换，让使用[[Java版]]和[[基岩版]]的玩家能够在同一台服务器上游玩。一些软件也支持让多个不同版本的[[Java版]]客户端连接到与其[[协议版本]]不一致的服务器，实现多版本兼容。这些协议转换器软件并不受Mojang Studios的维护。
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="协议转换器列表"
+|- style="background:#eee"
+! style="width: 078px" | 名称
+! style="width: 200px" | 主要开发者
+! style="width: 092px" | 支持版本
+! style="width: 056px" | [[wzh:程序设计语言|程序设计语言]]
+! style="width: 240px" | 备注
+|-
+| [https://geysermc.org/ GeyserMC]
+| GeyserMC
+| style="background:light-dark(#c0eece, #314d3a)" | {{v|java}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| Geyser允许[[基岩版]]玩家加入[[Java版]]服务器，提供多个服务端的插件，也可以独立作为任意[[Java版]]服务器的协议转换器运行。
+|-
+| [https://viaversion.com/ ViaProxy]
+| ViaVersion
+| style="background:light-dark(#c0eece, #314d3a)" | {{verlink|Java版Classic 0.0.15a|Classic 0.0.15a}}到{{v|java}}、{{verlink|Java版3D Shareware v1.34|3D Shareware v1.34}}、{{verlink|Java版20w14∞|20w14∞}}、{{verlink|Java版25w14craftmine|25w14craftmine}}和{{verlink|Java版Combat Test 8c|Combat Test 8c}}
+| style="background:light-dark(#f8e1c3, #634f36)" | [[wzh:Java|Java]]
+| ViaProxy是独立运行的代理服务器，基于ViaVersion插件和多个附属。它允许不同[[协议版本]]的[[Java版]]客户端连接到版本不一致的服务器。
+|-
+| [https://github.com/BigBrotherTeam/BigBrother BigBrother]
+| BigBrotherTeam，此前为Shoghi Cervantes
+| style="background:light-dark(#CCCCCB, #535353)" | {{verlink|Java版1.12.2|1.12.2}}和{{verlink|Java版1.16.5|1.16.5}}
+| style="background:light-dark(#dedfea, #444553)" |[[wzh:PHP|PHP]]
+| 允许[[Java版]]玩家加入[[基岩版]]服务器，需要支持基岩版的PocketMine-MP服务端软件。
+|}
+
+== 参见 ==
+* [https://wiki.vg/Server_List Minecraft服务端软件列表]
+
+== 导航 ==
+{{Navbox Java Edition|collapsed=1}}
+
+[[Category:服务器]]
+[[Category:自定义软件]]
+
+[[de:Programme und Editoren/Server-Software]]
+[[en:Java Edition server software]]
+[[es:Servidores personalizados]]
+[[fr:Serveurs personnalisés]]
+[[hu:Egyéni szerverek]]
+[[it:Server personalizzati]]
+[[ja:カスタムサーバー]]
+[[nl:Aangepaste servers]]
+[[pt:Software de servidor da Edição Java]]

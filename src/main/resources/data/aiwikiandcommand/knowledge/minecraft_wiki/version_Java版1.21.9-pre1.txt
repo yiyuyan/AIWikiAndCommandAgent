@@ -1,0 +1,165 @@
+# 页面: Java版1.21.9-pre1
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.21.9-pre1
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:49
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=1.21.9-pre1
+|image=1.21.9-pre1.png
+|image2=Java Edition 1.21.9-pre1 Simplified.png\Java Edition 1.21.9-pre1 Traditional.png\Java Edition 1.21.9-pre1 Traditional HK.png
+|edition=Java
+|type=Pre-release
+|date=2025年9月16日
+|jsonhash=dbe195916b498642f24c14ca7cf60d2e55f8b694
+|clienthash=ba686b582fab3dbdafa8ae26274b687e9ceac455
+|clientmap=929aec0b5ef4baae2c728559531ac8ddf894c23f
+|serverhash=151da8959852dfbd1b20efbad31645b95cc8ba31
+|servermap=0e4436763c5b44671215a344ef35563bdafb221d
+|parent=1.21.9
+|prevparent=1.21.8
+|prev=25w37a
+|next=1.21.9-pre2
+|nextparent=1.21.10
+}}<onlyinclude>
+
+'''1.21.9-pre1'''是[[Java版1.21.9]]的首个预发布版，发布于2025年9月16日<ref>{{article|minecraft-1-21-9-pre-release-1|Minecraft 1.21.9 Pre-Release 1|Sep 16, 2025}}</ref>，修复了一些漏洞。
+
+== 新内容 ==
+=== 生物 ===
+'''[[玩家模型]]'''
+* 加入了如下字段：
+<div class="treeview">
+:* {{nbt|compound}} 父标签
+:** {{nbt|string|pose}}：（默认为<code>standing</code>）玩家模型的姿势。可以为{{cd|d=pretty|standing|crouching|swimming|fall_flying|sleeping}}之一。
+:** {{nbt|bool|immovable}}：（默认为<code>false</code>）玩家模型是否不能被移动。
+:** {{nbt|bool|hide_description}}：（默认为<code>false</code>）玩家模型不显示描述。
+:** {{nbt|compound|description}}：（[[文本组件]]，默认为“NPC”，即<code>entity.minecraft.mannequin.label</code>）在玩家的<code>below_score</code>记分板显示位置处显示的文本。
+</div>
+
+=== 常规 ===
+'''[[玩家数据格式]]'''
+* 在{{nbt|compound|respawn}}{{tr|对象|物件}}中加入了必选字段{{nbt|float|pitch}}。
+
+'''[[数据组件]]'''
+* 向<code>profile</code>组件中加入了新的字段：
+<div class="treeview">
+:* {{nbt|compound}} 父标签
+:** {{nbt|string|texture}}：（[[命名空间ID]]）皮肤纹理，会解析为{{filepath|textures/<''texture''>.png}}。例如<code>entity/player/wide/steve</code>会使用宽型Steve皮肤。
+:** {{nbt|string|cape}}：（命名空间ID）披风纹理，解析行为同{{nbt|string|texture}}。
+:** {{nbt|string|elytra}}：（命名空间ID）鞘翅纹理，解析行为同{{nbt|string|texture}}。玩家模型穿着鞘翅时，如果此字段不存在或没有被覆写，将会使用披风的纹理；如果{{nbt|string|cape}}字段也不存在，将会使用默认的鞘翅纹理。
+:** {{nbt|string|model}}：可以为<code>wide</code>或<code>slim</code>。
+</div>
+
+'''[[调试工具]]'''
+* 加入了<code>MC_DEBUG_DEV_COMMANDS</code>，以允许启用之前仅能在IDE环境下执行的{{cmd|raid}}、{{cmd|debugmobspawning}}、{{cmd|debugpath}}、{{cmd|warden_spawn_tracker}}、{{cmd|spawn_armor_trims}}和{{cmd|serverpack}}以及需要在专用服务器上才可启用的{{cmd|debugconfig}}命令。
+* 加入了<code>MC_DEBUG_VERBOSE_COMMAND_ERRORS</code>，以记录命令抛出的异常。
+
+== 更改 ==
+=== 生物 ===
+'''[[铜傀儡]]'''
+* 如果正在骑乘实体，其只会尝试打开邻近的箱子。
+
+'''[[玩家模型]]'''
+* 现在刷怪蛋中的<code>profile</code>组件可以对玩家模型生效。
+* 现在可以修改描述文本。
+* 更改了数据格式。
+** {{nbt|string}}{{nbt|compound|profile}}字段现在与<code>profile</code>数据组件具有相同的格式（即已扩展且允许覆写），且默认为<code>{}</code>（即{{cd|d=pretty|id|name}}均不存在的静态游戏档案）。
+
+=== 命令格式 ===
+'''{{cmd|setworldspawn}}'''
+* 移除了可选参数{{cd|<angle>}}，并以可选参数{{cd|<rotation>}}代替。
+** 现在可以在此设置玩家重生时面朝的垂直角度。
+* 现在可以在主世界以外的[[维度]]执行。
+
+'''{{cmd|spawnpoint}}'''
+* 移除了可选参数{{cd|<angle>}}，并以可选参数{{cd|<rotation>}}代替。
+** 现在可以在此设置玩家重生时面朝的垂直角度。
+
+'''{{cmd|fetchprofile}}'''
+* 现在会输出可点击文本，点击之后可以生成带有相应档案的玩家模型。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|87.1}}。
+
+'''[[服务端管理协议]]'''
+* 通知现在使用<code>minecraft:notification/</code>而不是<code>notification:</code>前缀。
+
+'''[[命令]]'''
+* 现在服务端命令会在出生点所在的维度执行，而不总是在主世界执行。
+
+'''[[数据组件]]'''
+* 更改了<code>minecraft:profile</code>组件。
+** 现在可以有额外的字段，可以替换用于渲染的多种值。
+** 如果省略了任何字段，将会使用已解析的组件的值，即便这是默认皮肤的。
+
+'''[[玩家数据格式]]'''
+* 更改了{{nbt|compound|respawn}}：
+** <code>angle</code>被重命名为<code>yaw</code>，且现在是必选字段。
+** <code>dimension</code>现在是必选字段。
+
+'''[[战利品表函数]]'''
+* <code>minecraft:copy_name</code>的<code>source</code>字段现在接受新的值：
+** <code>direct_attacker</code>
+** <code>target_entity</code>
+** <code>interacting_entity</code>
+* <code>minecraft:copy_components</code>的<code>source</code>字段现在接受新的值：
+** <code>this</code>
+** <code>attacker</code>
+** <code>direct_attacker</code>
+** <code>attacking_player</code>
+** <code>target_entity</code>
+** <code>interacting_entity</code>
+** <code>tool</code>
+
+== 修复 ==
+{{fixes|fixedin=1.21.9 Pre-Release 1|showdesc=1|new=1
+|;old
+|160528|末地传送门不减免摔落伤害。
+|243759|与实体眼部距离为0的爆炸不会伤害该实体。
+|;dev
+|300257|闪电不会重置铜傀儡的氧化程度。
+|300294|铜傀儡到箱子的寻路异常。
+|300687|创造模式物品栏中，铜链和铜栏杆未正确排列。
+|300881|皮肤举报屏幕中的皮肤预览不再可交互。
+|301409|火球和风弹的加速能力在其被爆炸改变方向时减半。
+|301414|刮削/为大型箱子除锈不会在未直接受到交互的一半箱子处产生粒子。
+<!--|301424|资源包中的<code>entity_data</code>物品组件检测损坏了。 Reopened-->
+|301541|矿车中的铜傀儡不再整理物品。
+|301569|铜箱子与其所有变种的音效过于安静，且质量与之前相比听起来较低。
+|301573|跨维度的相对传送不一致。
+|301798|铜傀儡不会打开上方存在特定透明或不完整方块的箱子。
+|301814|<code>CustomNameVisible</code>对玩家模型无效（指名称而非“NPC”注释）。
+|301815|使用刷怪蛋时，玩家模型数据偶尔丢失。
+|301819|玩家模型的名称标签在处于队伍中和骑乘时可见。
+|301862|在聊天中点击命令建议时，偶尔只会选中半截新词。
+|301883|穿过传送门的实体会在<code>Motion</code>的单个方向轴速度大于10时重置其<code>Motion</code>标签。
+|301893|铜傀儡在被玩家牵引时变为铜傀儡像后不会掉落拴绳。
+|301951|服务端管理协议文档中，<code>operator_user_permission_level</code>的描述具有误导性。
+|;prev
+|301979|铜傀儡不再正常检测箱子。
+|301984|将玩家原地传送现在会使其抖动或卡顿。
+|301991|{{filename|deprecated.json}}有一些重命名的键指向文本值而非新键。
+|302032|除非提供了ID或名称，否则静态游戏档案不再解析纹理数据。
+|302089|在调试模式中、飞行生物开始寻路时，游戏崩溃。
+|302092|将楼梯加入到<code>#bars</code>标签并将铁栏杆放置于楼梯旁时，游戏崩溃。
+|302094|将方块加入<code>#copper_chests</code>并将其放置于真正的铜箱子旁时，游戏崩溃。
+|302095|将方块加入<code>#lightning_rods</code>并在之上生成一道闪电后，游戏崩溃。
+|302096|将方块加入<code>#wooden_shelves</code>，将其放置于木质展示架旁，然后游戏在展示架充能后崩溃。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:1.21.9-pre1]]
+[[en:Java Edition 1.21.9 Pre-Release 1]]
+[[es:Java Edition 1.21.9 Pre-Release 1]]
+[[fr:Édition Java 1.21.9 Pre-Release 1]]
+[[ja:Java Edition 1.21.9 Pre-Release 1]]
+[[pt:Edição Java 1.21.9 Pre-Release 1]]
+[[ru:1.21.9 Pre-Release 1 (Java Edition)]]
+[[uk:1.21.9 Pre-Release 1 (Java Edition)]]

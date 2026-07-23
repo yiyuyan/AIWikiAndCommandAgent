@@ -1,0 +1,127 @@
+# 页面: 快速进入游戏
+# 来源: https://zh.minecraft.wiki/w/%E5%BF%AB%E9%80%9F%E8%BF%9B%E5%85%A5%E6%B8%B8%E6%88%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:26:05
+# 原始 Wikitext 内容:
+
+'''快速进入游戏（Quick Play）'''是[[Minecraft启动器]]的一项功能，允许玩家跳过屏幕和菜单从而直接加入[[单人游戏]]世界或[[多人游戏]]服务器。<ref>{{mcnet|quick-play-coming-java-and-bedrock-edition|Quick Play is coming to Java and Bedrock Edition|February 12, 2024}}</ref>
+
+== 用途 ==
+[[File:Launcher Quick Play.jpg|thumb|启动器首页顶部的快速进入游戏栏]]
+
+快速进入游戏对[[Java版]]和[[基岩版]]均有效，启动器会为单人游戏世界、多人游戏服务器和Realms创建条目。
+
+快速进入游戏条目会在你游玩一个世界或服务器后自动创建，在启动器主页的顶部中间显示所有版本条目的图标或在Java版和基岩版标签页的右上角显示各自版本的条目图标。条目从最近玩过的世界（左侧）到最早玩过的世界（右侧）排序。
+
+启动器主页最多显示5个条目。当已有5个条目时，游玩一个新的世界或服务器后最早的条目会被移出，新的条目会被加入。你可以通过[[#选项|固定]]条目来避免其被移出，但仍会占用条目位置。但在Java版和基岩版标签页中仍可以分别显示5个条目，即使一些条目不在主页中的快速启动游戏栏中显示。
+
+=== 禁用快速启动游戏 ===
+[[File:Launcher settings Quick Play.png|thumb|快速启动游戏的相关设置]]
+
+快速进入游戏可以在启动器设置中开启或关闭。禁用它并不会移除已创建的快捷条目，所以再次启用后会显示先前保存的条目。
+
+若需要真正删除快速启动游戏条目，你可以点击设置中“删除所有快速启动游戏条目”按钮。在弹出的窗口点击“是，删除”，当前账户保存的所有条目都会被删除。
+
+== 选项 ==
+[[File:Edit Quick Play Homepage.png|thumb|主页的编辑窗口]]
+
+点击快速进入游戏栏右边的“&vellip;”可以自定义条目。
+
+条目的图标可以更改。对于Java版，这些图标与安装使用的3D渲染图标相同。对于基岩版，这些图标是2D方形图标。你也可以自定义一个图标，但其必须是128&times;128像素的png文件。
+
+勾选“显示标题首字”后，若条目为版本，则在图标上显示其配置名称的第一个字符；若条目为存档，则在图标上显示存档名称的第一个字符。此外，由于使用Minecraft Ten字体显示，英文字符会始终显示为大写。
+
+勾选“固定到快速启动游戏栏”后，条目会被移到最左侧并始终显示。在编辑屏幕中，固定条目与未固定条目被一条竖线分隔。你可以取消固定并重新固定条目来调整固定条目的顺序。
+
+== 命令行参数 ==
+{{exclusive|java|section=1}}
+
+下表描述了用于直接启动游戏并进入世界的命令行参数。
+
+{| class="wikitable" data-description="命令行参数"
+|-
+! 参数
+! 描述
+! 示例
+|-
+| {{cd|quickPlayPath}}
+| 指定包含世界加入信息的文件路径，相对于[[.minecraft|运行目录]]。
+| {{cd|--quickPlayPath "quickPlay/log.json"}}（解析为{{cd|.minecraft/quickPlay/log.json}}）
+|-
+| {{cd|quickPlaySingleplayer}}
+| 指定代表世界文件夹名称的标识符。
+| {{cd|--quickPlaySingleplayer "New World"}}
+|-
+| {{cd|quickPlayMultiplayer}}
+| 指定代表服务器IP地址与端口（冒号分隔）的标识符。
+| {{cd|--quickPlayMultiplayer "localhost:25565"}}
+|-
+| {{cd|quickPlayRealms}}
+| 指定代表Realms服务器ID的标识符。
+| {{cd|--quickPlayRealms "1234"}}
+|}
+
+== JSON格式 ==
+以下是位于<samp>[[.minecraft]]</samp>目录根目录下<samp>launcher_quick_play.json</samp>文件的JSON格式。
+
+快速进入游戏功能的相关数据仅本地存储于游戏运行目录中。
+
+<div class="treeview">
+* {{nbt|compound}}：根对象。
+** {{nbt|compound|quickPlayData:}}
+*** {{nbt|list|<remoteId>}}：快速进入游戏条目列表。字段名是微软账户的唯一远程ID。
+**** {{nbt|string|customizedIcon}}：（如适用）自定义图标的图像数据。
+**** {{nbt|long|epochLastPlayedTimeMs}}：上次游玩该世界或服务器的时间戳。
+**** {{nbt|string|id}}：条目的ID。对于单人游戏，为世界文件夹名称。对于多人游戏，为服务器的IP地址。若{{nbt|string|source}}为{{cd|Launcher}}，此值似乎始终为{{cd|bedrock-retail}}。
+**** {{nbt|string|name}}：条目的名称，即用户定义的世界或服务器名称。
+**** {{nbt|string|source}}：条目的来源。可为{{cd|Java}}（Java版）、{{cd|Bedrock}}（基岩版）或{{cd|Launcher}}（启动器）。其余字段取决于此字段的值。
+**** {{nbt|int|pinnedIndex}}：若条目被固定，此值表示其在固定列表中的索引位置。
+**** {{nbt condition|若{{cd|source}}值为{{cd|Java}}，则存在以下附加字段：}}
+**** {{nbt|compound|javaInstance}}：表示一个Java版快速进入游戏条目的对象。
+***** {{nbt|string|configId}}：[[launcher_profiles.json|启动器档案文件]]的ID。
+***** {{nbt|compound|game}}
+****** {{nbt|string|gamemode}}：世界的默认[[游戏模式]]。可为{{cd|adventure}}、{{cd|creative}}、{{cd|spectator}}或{{cd|survival}}。
+****** {{nbt|string|type}}：世界的类型。可为{{cd|singleplayer}}、{{cd|multiplayer}}或{{cd|realms}}。{{verify|无法验证Realms相关情况}}
+**** {{nbt condition|若{{cd|source}}值为{{cd|Bedrock}}，则存在以下附加字段：}}
+**** {{nbt|compound|bedrockInstance}}：表示一个基岩版快速进入游戏条目的对象。
+***** {{nbt|string|gamemode}}：世界的默认[[游戏模式]]。可为{{cd|Adventure}}、{{cd|Creative}}、{{cd|Spectator}}或{{cd|Survival}}。
+***** {{nbt|compound|local}}
+****** {{nbt|string|levelId}}：世界的唯一ID。
+****** {{nbt|string|name}}：用户定义的世界名称。
+***** {{nbt|string|type}}：世界的类型。可为 {{cd|singleplayer}}、{{cd|multiplayer}}或{{cd|realms}}。{{verify|无法验证Realms相关情况}}
+***** {{nbt|string|versionId}}：条目的版本ID。似乎始终为{{cd|retail}}（正式版）。
+**** {{nbt condition|若{{cd|source}}值为{{cd|Launcher}}，则存在以下附加字段：}}
+**** {{nbt|compound|productQuickPlay}}：表示一个启动器条目的对象。此类条目不会显示在启动器中。
+***** {{nbt|string|productId}}：产品ID。似乎始终为{{cd|bedrock}}。
+***** {{nbt|string|versionId}}：条目的版本ID。似乎始终为{{cd|retail}}（正式版）。
+** {{nbt|int|version}}：文件的版本号。
+</div>
+
+== 历史 ==
+
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20|dev=23w14a|加入了对快速进入游戏的支持，添加了允许游戏直接启动并进入世界的新命令行参数。}}
+|{{HistoryLine|launcher}}
+|{{HistoryLine||2.7.12|link=启动器2.7.12|作为实验性特性为[[Java版]]添加了快速进入游戏功能，默认关闭。<ref>[https://feedback.minecraft.net/hc/en-us/community/posts/18189595004173 Java Quick Play in the Launcher] —— 2023年8月15日</ref>}}
+|{{HistoryLine||2.17.13|link=启动器2.17.13|为[[基岩版]]添加了快速进入游戏功能，并默认开启。
+|[[Java版]]的快速进入游戏功能不再属于实验性特性，并现已默认开启。}}
+|{{HistoryLine||2.19.2|link=启动器2.19.2|基岩版的快速进入游戏功能已被暂时关闭。}}
+|{{HistoryLine||?|基岩版的快速进入游戏功能被重新开启。{{info needed|在哪个版本恢复的？}}}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{Navbox Bedrock Edition}}
+
+[[Category:Minecraft]]
+[[Category:游戏内容]]
+[[Category:游戏术语]]
+
+[[de:Schnellspiel]]
+[[en:Quick Play]]
+[[fr:Partie rapide]]
+[[pt:Partida rápida]]

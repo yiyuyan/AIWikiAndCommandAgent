@@ -1,0 +1,87 @@
+# 页面: 计算器/爆炸实体影响
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%A1%E7%AE%97%E5%99%A8/%E7%88%86%E7%82%B8%E5%AE%9E%E4%BD%93%E5%BD%B1%E5%93%8D
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+此交互式工具计算爆炸对实体造成的速度和伤害。
+<onlyinclude>
+{| class="wikitable calculator-container calculatorgadget-enabled"
+! colspan=4 | 位置
+|-
+! 爆炸X轴
+| {{Simplecalc|type=number|id=ex|size=20|default=0.0}}
+! 实体X轴
+| {{Simplecalc|type=number|id=px|size=20|default=1.0}}
+|-
+! 爆炸Y轴
+| {{Simplecalc|type=number|id=ey|size=20|default=0.061250001192092896}}
+! 实体Y轴
+| {{Simplecalc|type=number|id=py|size=20|default=0.0}}
+|-
+! 爆炸Z轴
+| {{Simplecalc|type=number|id=ez|size=20|default=0.0}}
+! 实体Z轴
+| {{Simplecalc|type=number|id=pz|size=20|default=0.0}}
+{{Simplecalc|type=hidden|id=dx|formula=px-ex|default=1.0}}
+{{Simplecalc|type=hidden|id=dy|formula=py-ey|default=-0.061250001192092896}}
+{{Simplecalc|type=hidden|id=dz|formula=pz-ez|default=0.0}}
+{{Simplecalc|type=hidden|id=distance|formula=sqrt(dx*dx + dy*dy + dz*dz)|default=1.001874025337533}}
+|-
+! colspan=4 | 爆炸接触率
+|-
+! 实体[[边界箱|宽度]]
+| {{Simplecalc|type=number|id=w|size=20|default=0.9800000190734863}}
+! 实体[[边界箱|高度]]
+| {{Simplecalc|type=number|id=h|size=20|default=0.9800000190734863}}
+|-
+! 布局
+| <code>{{Simplecalc|type=plain|id=expx|formula=ceil(2*w+1)|default=3}}×{{Simplecalc|type=plain|id=expy|formula=ceil(2*h+1)|default=3}}×{{Simplecalc|type=plain|id=expz|formula=ceil(2*w+1)|default=3}}</code>
+! 间距
+| <code>{{Simplecalc|type=plain|id=expxs|formula=w/(2*w+1)|default=0.33108108325802205}}</code> × <code>{{Simplecalc|type=plain|id=expys|formula=h/(2*h+1)|default=0.33108108325802205}}</code> × <code>{{Simplecalc|type=plain|id=expzs|formula=w/(2*w+1)|default=0.33108108325802205}}</code>
+|-
+! 负角
+| <code>{{Simplecalc|type=plain|id=expxn|formula=(1-floor(2*w+1)/(2*w+1))/2|default=0.1621621665160441}}</code>, <code>0</code>, <code>{{Simplecalc|type=plain|id=expzn|formula=(1-floor(2*w+1)/(2*w+1))/2|default=0.1621621665160441}}</code>
+! 正角
+| <code>{{Simplecalc|type=plain|id=expxp|formula=expxn+expxs*(expx-1)|default=0.8243243330320882}}</code>, <code>{{Simplecalc|type=plain|id=expyp|formula=expys*(expy-1)|default=0.6621621665160441}}</code>, <code>{{Simplecalc|type=plain|id=expzp|formula=expzn+expzs*(expz-1)|default=0.8243243330320882}}</code>
+|-
+! colspan=4 | 对实体的影响
+|-
+! 威力
+| {{Simplecalc|type=number|id=power|size=20|default=4.0}}
+! 爆炸接触率
+| {{Simplecalc|type=number|id=exposureNumerator|size=9|default=27}}/{{Simplecalc|type=plain|id=etotal|formula=expx*expy*expz|default=27}} {{Simplecalc|type=hidden|id=exposure|formula=exposureNumerator/(expx*expy*expz)|default=1.0}}
+|-
+! 击退倍率
+| {{Simplecalc|type=number|id=knockbackmult|size=20|default=1.0}}
+! [[边界箱|眼睛高度]]
+| {{Simplecalc|type=number|id=eyeheight|size=20|default=0.0}}
+{{Simplecalc|type=hidden|id=diry|formula=(py+eyeheight)-ey|default=-0.061250001192092896}}
+{{Simplecalc|type=hidden|id=dirmag|formula=sqrt(dx*dx + diry*diry + dz*dz)|default=1.001874025337533}}
+|-
+! [[击退抗性]]
+| {{Simplecalc|type=number|id=knockbackres|size=20|default=0.0}}
+! X轴速度
+| {{Simplecalc|type=plain|id=vx|formula=dx/dirmag*speed|default=0.8731294800642211}}格/[[游戏刻]]
+|-
+! 速度大小
+| {{Simplecalc|type=plain|id=speed|formula=(1-distance/(2*power))*exposure*knockbackmult*(1-knockbackres)|default=0.8747657468328084}}格/[[游戏刻]]
+! Y轴速度
+| {{Simplecalc|type=plain|id=vy|formula=diry/dirmag*speed|default=-0.053479181694784994}}格/[[游戏刻]]
+|-
+! [[伤害]]
+| {{Simplecalc|type=plain|id=damage|formula=(speed*speed + speed)/2 * 7*(2*power) + 1|default=46.9375}}
+! Z轴速度
+| {{Simplecalc|type=plain|id=vz|formula=dz/dirmag*speed|default=0.0}}格/[[游戏刻]]
+|}
+</onlyinclude>
+
+== 导航 ==
+{{Navbox calculators}}
+
+[[en:Calculators/Explosion entity influence]]
+[[es:Calculadoras/Efecto de explosión sobre entidades]]
+[[ja:計算機/爆発の影響]]
+[[ko:계산기/폭발에 의한 개체 영향]]
+[[pt:Calculadoras/Efeito da explosão sobre entidades]]
+[[uk:Калькулятори/Вплив вибуху на сутність]]

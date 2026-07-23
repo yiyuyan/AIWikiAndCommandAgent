@@ -1,0 +1,189 @@
+# 页面: 激活铁轨
+# 来源: https://zh.minecraft.wiki/w/%E6%BF%80%E6%B4%BB%E9%93%81%E8%BD%A8
+# 分类: Java版独有信息, 使用简单计算器的页面, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 方块, 有未知版本的History模板的页面/Java版, 红石
+# 抓取时间: 2026-07-14 17:31:15
+# 原始 Wikitext 内容:
+
+{{for|其他种类的铁轨|铁轨（消歧义）}}
+{{Infobox block
+|group1=未激活
+|1-1=Activator Rail.png
+|group2=激活
+|2-1=Powered Activator Rail.png
+|invimage=Activator Rail
+}}
+
+'''激活铁轨（Activator Rail）'''是一种可以引发[[矿车]]特殊功能的铁轨。
+
+== 生成 ==
+激活铁轨不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Iron Ingot |B1= Stick          |C1= Iron Ingot
+|A2= Iron Ingot |B2= Redstone Torch |C2= Iron Ingot
+|A3= Iron Ingot |B3= Stick          |C3= Iron Ingot
+|Output= Activator Rail,6
+|type= Transportation
+}}
+
+=== 战利品箱 ===
+{{LootChestItem|activator_rail}}
+
+== 破坏 ==
+挖掘激活铁轨的合适工具是镐。
+
+{{Breaking table}}
+
+激活铁轨被破坏后会掉落自身。
+
+== 用途 ==
+{{see also|铁轨|教程:矿车}}
+
+激活铁轨是铁轨和[[红石元件]]。一系列相连的铁轨（包括普通[[铁轨]]、[[动力铁轨]]、[[探测铁轨]]和激活铁轨）被称作'''轨道'''。
+
+激活铁轨会在没有合适方块（见{{slink||放置}}）支撑或{{only|for=[[水]]流过|bedrock}}时[[掉落]]为[[物品]]。
+
+{{in|be}}如果熔岩流过激活铁轨，激活铁轨将会被摧毁且不会掉落物品。
+
+=== 生物 ===
+{{in|je}}除了玩家和[[监守者]]以外的所有生物在寻路时不会将激活铁轨视为可以走上或跨越的方块，除非它们正站在任意类型的铁轨上。
+
+=== 放置 ===
+{{main|动力铁轨#放置}}
+[[File:All linked rails.png|thumb|铁轨可能连接到的所有位置，图中以普通铁轨为基准]]
+
+激活铁轨只能放置在上表面[[方块支撑形状|边缘完整]]的方块上。
+
+激活铁轨可以和水平方向上相邻一格的铁轨相连，也可以和这些相邻铁轨上方或下方一格的铁轨相连。激活铁轨可以和其他种类的[[铁轨（消歧义）|铁轨]]相连。
+
+=== 铁轨 ===
+{{main|矿车#行为}}
+
+激活铁轨（和其他铁轨）用作供[[矿车]]通行的铁路。从激活铁轨两头进入的矿车会继续移动，只会失去一点速度（可由[[动力铁轨]]再次提升速度）。从侧面进入激活铁轨的矿车会转向东边或南边（取决于激活铁轨的朝向），而进入倾斜的激活铁轨的矿车会向下移动。
+
+=== 红石元件 ===
+{{see also|红石电路}}
+
+激活铁轨可影响途经激活铁轨的矿车。
+
+; 激活
+激活铁轨是[[红石元件#机械元件|机械元件]]，它可被下列方式激活：
+* 毗邻的开启的'''[[红石元件#电源|电源]]'''（例外：[[侦测器]]只会激活指向的激活铁轨）。
+* 毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻的指向激活铁轨且激活的[[红石中继器]]、[[红石比较器]]或[[红石线]]；毗邻但未指向激活铁轨的红石线不会让激活铁轨激活。
+
+[[File:Activator rail signal bifurcation.png|thumb|{{el|je}}中89个被激活的激活铁轨]]
+激活的激活铁轨亦可激活邻近并与其连接的其他激活铁轨，从原始激活源开始至多能传递8格。激活的激活铁轨不会激活邻近的不与其连接的激活铁轨，但能激活自己不连接的、逆信号传递方向与其单向连接的激活铁轨，使信号分叉。因此单个激活源可激活至多{{only|be|for=17}}或{{only|je|for=89}}个激活铁轨（中间1个和两边各{{only|be|for=8}}或{{only|je|for=44}}个）。
+
+; 行为
+激活铁轨会视矿车类型以不同效果影响矿车。矿车{{only|je|for=位于激活铁轨上}}或{{only|be|for=中心位于激活铁轨内及上一格<ref>{{bug|MCPE-122593}}</ref>}}时激活铁轨生效。
+
+'''激活'''的激活铁轨会：
+* 摇晃普通矿车：令其中的生物（含玩家）离开，犹如玩家按下了{{ctrl|潜行}}键离开矿车那样（默认为移动中的矿车的右边一格，至多为上方两格，除非被阻挡）。
+* 重复激活[[命令方块矿车]]：每隔{{only|for=4游戏刻|je}}或{{only|for=设定的游戏刻|bedrock}}使命令方块矿车执行其包含的命令。
+* 锁定[[漏斗矿车]]——被锁定的漏斗矿车不再在矿车运行时捡起物品，直到该漏斗矿车被'''未激活的'''激活铁轨解锁（或直到它被破坏或被重新放置）。
+* 激活[[TNT矿车]]——激活的TNT矿车在经过激活铁轨的1秒后爆炸，爆炸威力与速度成正比。
+
+'''未激活'''的激活铁轨会：
+* 解锁[[漏斗矿车]]：被解锁的漏斗矿车会在矿车运行时捡起物品，直到该漏斗矿车被'''激活的'''激活铁轨锁定。
+
+== 音效 ==
+{{Sound table/Block/Metal}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table|generatetranslationkeys=java
+|Activator Rail|spritetype=block|nameid=activator_rail
+|showblocktags=je
+|showitemtags=je
+|blocktags={{GameTag|blocks|activator_rail}}
+|itemtags={{GameTag|items|activator_rail}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table|generatetranslationkeys=bedrock
+|Activator Rail|spritetype=block|nameid=activator_rail|showblocktags=be|blocktags={{GameTagBE|block|activator_rail}}|foot=1}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+激活铁轨的方块数据储存着它的朝向和激活状态：
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+== 视频 ==
+{{bv|BV1M4411z7wd}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w02a|[[File:Activator Rail (NS) JE1 BE1.png|32px]] [[File:Powered Activator Rail (NS) JE1 BE1.png|32px]] 加入了激活铁轨。}}
+|{{HistoryLine|||dev=13w02b|向激活铁轨的合成配方加入了[[木棍]]和[[红石火把]]。在此之前只需要6块[[铁锭]]。}}
+|{{HistoryLine|||dev=13w04a|已激活的激活铁轨现在会暂停[[漏斗矿车]]的物品移送。
+|现在所有生物都不会主动走上激活铁轨。}}
+|{{HistoryLine||1.7.2|dev=13w39a|已激活的激活铁轨现在会激活[[命令方块矿车]]。}}
+|{{HistoryLine||1.8|dev=14w05a|已激活的激活铁轨现在会使玩家和生物从[[矿车]]上弹出。}}
+|{{HistoryLine||1.9|dev=15w38a|倾斜激活铁轨的判定箱高度从{{frac|10|16}}格降低到{{frac|5|32}}格。}}
+|{{HistoryLine|||dev=15w39a|现在激活铁轨上的下车位置是可预见的。生物将在载具（[[船]]、[[矿车]]、[[马]]）行进方向的右侧下车。如果右侧位置被占用，那么将会以：右侧、左侧、右后方、左后方、右前方、左前方、正后方、正前方的顺序检测可用位置。}}
+|{{HistoryLine|||dev=15w44a|激活铁轨现在可以在[[废弃矿井]]内的[[运输矿车]]中找到。}}
+|{{HistoryLine||1.10|dev=16w21a|倾斜激活铁轨的判定箱高度从{{frac|5|32}}格降低到1格。}}
+|{{HistoryLine||1.11|dev=16w32b|倾斜激活铁轨的判定箱高度都从1格减少到了0.5格。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，激活铁轨的数字ID为157。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Activator Rail (NS) JE2 BE2.png|32px]] [[File:Powered Activator Rail (NS) JE2 BE2.png|32px]] 更改了激活铁轨的纹理。}}
+|{{HistoryLine|||dev=19w12b|激活铁轨现在可以放置在[[玻璃]]、[[冰]]、[[荧石]]和[[海晶灯]]上。}}
+|{{HistoryLine||1.15|dev=19w39a|放置未连接到其他铁轨的激活铁轨现在会朝向玩家面向的方向，而不再总是南北朝向。}}
+|{{HistoryLine||1.17|dev=20w45a|激活铁轨现在可[[含水]]。
+|激活铁轨现在不会被水流和熔岩流冲毁。}}
+|{{HistoryLine||?|现在载有海豚的矿车经过激活铁轨时海豚不会下车。<ref name="MC-302628">{{bug|MC-302628|||Fixed}}</ref>}}
+|{{HistoryLine||26.2|dev=snapshot-1|现在载有海豚的矿车经过激活铁轨时，海豚会正确下车。<ref name="MC-302628"/>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|[[File:Activator Rail (NS) JE1 BE1.png|32px]] [[File:Powered Activator Rail (NS) JE1 BE1.png|32px]] 加入了激活铁轨。}}
+|{{HistoryLine||0.14.0|dev=build 1|激活铁轨现在可以在[[废弃矿井]]内的[[运输矿车]]中找到。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|激活铁轨现在可以放置在水下。}}
+|{{HistoryLine||1.7.0|dev=1.7.0.2|激活铁轨现在会被水流破坏。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Activator Rail (NS) JE2 BE2.png|32px]] [[File:Powered Activator Rail (NS) JE2 BE2.png|32px]] 更改了激活铁轨的纹理。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|激活铁轨的硬度由0.5改为0.7。
+|激活铁轨的爆炸抗性由0.5改为0.7。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.10|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Activator Rail (NS) JE1 BE1.png|32px]] [[File:Powered Activator Rail (NS) JE1 BE1.png|32px]] 加入了激活铁轨。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|已激活的激活铁轨会使玩家和生物从[[矿车]]上弹出。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Activator Rail (NS) JE2 BE2.png|32px]] [[File:Powered Activator Rail (NS) JE2 BE2.png|32px]] 更改了激活铁轨的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Activator Rail (NS) JE1 BE1.png|32px]] [[File:Powered Activator Rail (NS) JE1 BE1.png|32px]] 加入了激活铁轨。}}
+}}
+
+== 画廊 ==
+<gallery>
+Shaking minecart.png|一辆矿车在激活的激活铁轨上摇晃
+</gallery>
+
+== 参见 ==
+* [[铁轨]]
+* [[动力铁轨]]
+* [[探测铁轨]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks|others}}
+{{Navbox redstone}}
+
+[[de:Aktivierungsschiene]]
+[[en:Activator Rail]]
+[[es:Raíl activador]]
+[[fr:Rails déclencheurs]]
+[[it:Binario]]
+[[ja:アクティベーターレール]]
+[[ko:활성화 레일]]
+[[nl:Activatiespoor]]
+[[pl:Tory aktywacyjne]]
+[[pt:Trilho ativador]]
+[[ru:Активирующие рельсы]]

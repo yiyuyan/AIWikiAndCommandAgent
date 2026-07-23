@@ -1,0 +1,67 @@
+# 页面: 命令/jfr
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/jfr
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+{{Infobox command
+|name=jfr
+|oplevel=4
+}}
+使用[https://openjdk.java.net/jeps/328 Java Flight Recorder]分析数据和某些自定义事件。
+
+== 用法 ==
+分析包含以下几种自定义事件：
+* <code>minecraft.ServerTickTime</code>：采样事件，反映服务器平均TPS。
+* <code>minecraft.ChunkGeneration</code>：生成单个区块阶段所需的时间。
+* <code>minecraft.PacketReceived</code>或<code>minecraft.PacketSent</code>：网络流量。
+* <code>minecraft.NetworkSummaryEvent</code>：网络数据包的数量等信息。
+* <code>minecraft.WorldLoadFinishedEvent</code>：初始化世界加载耗费的时间。
+* <code>minecraft.ChunkRegionRead</code>和<code>minecraft.ChunkRegionWrite</code>：区块文件的写入和读取。
+* <code>minecraft.StructureGeneration</code>：结构生成。
+* <code>minecraft.ClientFps</code>：客户端FPS。
+
+分析的结果摘要会以JSON格式写入日志以及<samp>debug</samp>文件夹中。
+
+此外，以<samp>.jfr</samp>格式保存的记录文件会保存于<samp>debug</samp>文件夹中，可使用如[https://github.com/openjdk/jmc JMC]及其他支持此格式的工具做进一步分析。
+
+== 语法 ==
+<code>jfr start</code>
+: 开始JFR分析。
+
+<code>jfr stop</code>
+: 结束JFR分析。
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整|unparseable}}
+{{Result table|cmd=/jfr start|已开始JFR分析|fail}}
+{{Result table|cmd=/jfr stop|未开始JFR分析}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.18|dev=21w37a|加入了{{cmd|jfr|link=none}}。}}
+|{{HistoryLine||1.20.5|dev=24w06a|加入了JFR事件<code>ChunkRegionRead</code>和<code>ChunkRegionWrite</code>。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了JFR事件<code>ClientFps</code>。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/jfr]]
+[[en:Commands/jfr]]
+[[es:Comandos/jfr]]
+[[fr:Commandes/jfr]]
+[[ja:コマンド/jfr]]
+[[lzh:令/jfr]]
+[[pt:Comandos/jfr]]

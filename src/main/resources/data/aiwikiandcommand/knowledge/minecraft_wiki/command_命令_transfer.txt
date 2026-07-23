@@ -1,0 +1,81 @@
+# 页面: 命令/transfer
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/transfer
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{for|{{el|be}}中已移除的具有相同功能的命令|命令/transferserver|{{el|ee}}中已移除的同名命令|命令/transfer（教育版）}}
+{{Infobox command
+|name=transfer
+|oplevel=3\4
+|becheat=1
+|serveronly=1
+}}
+
+将玩家转移到另一个服务器上。
+
+{{in|je}}此命令只会发出转移请求，能否转移成功取决于目标服务器是否接受转移登录，即服务端配置文件中[[服务端配置文件格式#accepts-transfers|{{code|accepts-transfers}}]]属性是否设置为<code>true</code>。
+
+== 语法 ==
+* '''Java版'''
+: <code>transfer <hostname> [<port>] [<players>]</code>
+
+* '''基岩版'''
+: <code>transfer <pfidOrMSA: string> <server: string> <port: int></code>
+
+== 参数 ==
+{{el|be|short=1}}：{{argument|be=1|pfidOrMSA: string|basic_string}}
+: 要转移的玩家，可以为Microsoft账户名称（玩家名），或PlayFab ID（当玩家加入或断开与服务器的连接时显示）。
+: {{arg desc|be=string}}
+
+{{argument|hostname|string|server: string|basic_string}}
+: 要连接到的服务器的主机名。
+: {{arg desc|je=string|type=phrase|be=string}}
+
+{{argument|port|integer|port: int|int}}
+: 要连接到的服务器的端口编号。{{in|java}}若省略则为{{cd|25565}}。
+: {{arg desc|je=integer|min=1|max=65535|be=int}}{{in|be}}应在0和65535之间（含）。
+
+{{el|je|short=1}}：{{argument|players|entity}}
+: 要转移的玩家，若省略则为执行者玩家。
+: {{arg desc|je=entity|type=players|amount=multiple}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|当命令执行者不是玩家并且<code><players></code>未指定|fail|N/A}}
+{{Result table|<code><players></code>无法选中至少1个玩家}}
+{{Result table|在当前服务器中无法找到指定的玩家|N/A|fail}}
+{{Result table|端口小于0或大于65535}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/transfer <hostname> <port>|执行成功|1|1|1}}
+{{Output table|cmd=/transfer <hostname> <port> <players>|执行成功|1|1|被转移的玩家数}}
+{{Output table}}
+
+== 示例 ==
+* {{in|java}}将自己转移到服务器{{cd|localhost}}的{{cd|1630}}端口上：{{cd|/transfer localhost 1630}}。
+* {{in|java}}将Steve转移到服务器{{cd|minecraft.server.example:25565}}：{{cd|/transfer minecraft.server.example 25565 Steve}}。
+* {{in|bedrock}}将Steve转移到服务器{{cd|minecraft.server.example:19132}}：{{cd|/transfer Steve minecraft.server.example 19132}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|dev=24w04a|加入了{{cmd|link=none|transfer}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.30|dev=1.20.30.22|加入了{{cmd|link=none|transfer}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/transfer]]
+[[en:Commands/transfer]]
+[[ja:コマンド/transfer]]
+[[lzh:令/transfer]]
+[[pt:Comandos/transfer]]
+[[ru:Команды консоли/transfer (Java Edition)]]

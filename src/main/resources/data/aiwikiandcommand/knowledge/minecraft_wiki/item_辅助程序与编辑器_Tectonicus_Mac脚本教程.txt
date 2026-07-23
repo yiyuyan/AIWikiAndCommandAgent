@@ -1,0 +1,300 @@
+# 页面: 辅助程序与编辑器/Tectonicus/Mac脚本教程
+# 来源: https://zh.minecraft.wiki/w/%E8%BE%85%E5%8A%A9%E7%A8%8B%E5%BA%8F%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8/Tectonicus/Mac%E8%84%9A%E6%9C%AC%E6%95%99%E7%A8%8B
+# 分类: 地图查看工具
+# 抓取时间: 2026-07-14 17:36:44
+# 原始 Wikitext 内容:
+
+{{disclaimer}}
+Tectonicus可编写脚本在任何Linux或基于BSD的操作系统（包括macOS）上运行，这便于系统管理员无需手动操作就能按计划生成地图。
+
+要实现这一功能，需两样东西：一个脚本和一条cron条目。
+
+== 示例脚本 ==
+脚本用于执行实际操作以启动Tectonicus渲染，包含Tectonicus命令及其他所需内容。以下示例脚本会触发Tectonicus，并通过rsync将生成的地图、各操作耗时及输出日志文件上传至web服务器。
+
+脚本如下：
+
+<pre>
+# Script to run Tectonicus 2.02 on Minecraft map data and send results to web server
+# 
+# The script will terminate with the following result codes:
+# 0 - success
+# 3 - Tectonicus terminated with some kind of error
+# 4 - rsync terminated with some kind of error
+#
+# Let's make some variables!
+#
+# Log file where we track the progress of this script:
+LOG="/Users/You/Applications/minecraft-server/tectonicusnightly-log.txt"
+#
+# Previous run's log file:
+LOGOLD="/Users/You/Applications/minecraft-server/tectonicusnightly-log.old"
+#
+# Location of map files:
+WORLDWORKDIR="/Users/You/Applications/minecraft-server/world"
+#
+# Location of current Tectonicus build:
+TECTJAR="/Users/You/Applications/minecraft-server/Tectonicus_v2.02.jar"
+#
+# Location of current Tectonicus config files:
+TECTCONFIG="/Users/You/Applications/minecraft-server/tectonicus.xml"
+#
+# Places where Tectonicus writes its output files (set in tectonicus.xml file):
+TECTOUTPUT="/Users/You/Applications/minecraft-server/tectonicus"
+#
+# FQDN of the web server where the finished map will live and be available:
+WEBSERVER=whatever.something.com
+#
+# Service account for logging onto the web server:
+WEBSVC=yourwebserveraccount
+#
+# Finished map's location on the web server:
+WEBSERVERPATH=/var/www/tectonicus-map
+#
+#
+#
+#
+# Storing the starting time in a variable, which we'll use to figure out how long the script runs
+#
+STARTTIME="$(date +%s)"
+#
+# Setting up a log file to watch over all of this:
+if [ -f $LOG ]
+then
+	mv -f $LOG $LOGOLD
+	echo "Previous log found and backed up to tectonicusnightly-log.old" >> $LOG
+	echo "Starting run at $(date)" >> $LOG
+else
+	echo "No previous log found! Creating log..." >> $LOG
+	touch $LOG
+	echo "Starting run at $(date)" >> $LOG
+fi
+#
+#
+#
+#
+# Invoking Tectonicus and running it for the map, making sure it completes OK:
+#
+echo "$(date +"%T") - Now running Tectonicus to generate maps..." >> $LOG
+java -jar $TECTJAR config=$TECTCONFIG
+if [ "$?" -ne "0" ]; then
+        echo "$(date +"%T") - Tectonicus maps failed to complete--check TectonicusLog.txt for details" >> $LOG
+	echo "$(date +"%T") - Aborting" >> $LOG
+        exit 3
+else
+        echo "$(date +"%T") - ...Tectonicus finished rendering maps" >> $LOG
+fi
+#
+#
+#
+#
+# Finally, we need to get the results up onto the web server.  Rsync is the best tool, and will make sure
+# we don't have to transfer the entire set of map files every time.  Rather than running the rsync daemon
+# on the server, we'll just push the rsync traffic through ssh.  You'll need to enable ssh key authentication,
+# to make this work seamlessly. We also do this using the web service account so that the ownership of the
+# files is correct on the web server.
+#
+echo "$(date +"%T") - Transferring new and changed map files to web server via rsync..." >> $LOG
+rsync --delete --force -aPe ssh --exclude 'Cache' $TECTOUTPUT/* $WEBSVC@$WEBSERVER:$WEBSERVERPATH
+if [ "$?" -ne "0" ]; then
+        echo "$(date +"%T") - Error transferring map files -- aborting" >> $LOG
+        exit 4
+else
+        echo "$(date +"%T") - ...rsync of map files to web server completed successfully" >> $LOG
+fi
+#
+#
+#
+#
+# Recording the time now in another variable, so we can measure the script's execution time.
+#
+STOPTIME="$(date +%s)"
+ELAPSEDTIME="$(expr $STOPTIME - $STARTTIME)"
+#
+#
+#
+#
+# We don't really have any temp files or anything to clean up, so we can do our time math and stop here.
+#
+echo "Nightly run completed successfully at $(date)" >> $LOG
+# OS X date
+echo "Total time elapsed: $(date -ur $ELAPSEDTIME +%H:%M:%S)" >> $LOG
+# Linux date
+#echo "Total time elapsed: $(date -u -d @$ELAPSEDTIME +%H:%M:%S)" >> "$LOG"
+#
+# All done!
+exit 0
+</pre>
+
+== 示例脚本分解 ==
+这可能看起来像一大段复杂的文字，尤其对从未接触过脚本的人而言，下面我们来深入探究脚本的每个部分。
+
+=== 退出状态 ===
+脚本最顶端列出了可能的[[wzh:退出状态|退出状态]]，脚本报告状态后便会停止运行。
+
+<pre>
+# The script will terminate with the following result codes:
+# 0 - success
+# 3 - Tectonicus terminated with some kind of error
+# 4 - rsync terminated with some kind of error
+</pre>
+
+退出状态为0意味着没有错误需要报告，其他数字则表示Tectonicus自身出错或rsync过程出错。这些退出状态数字可用于确定遇到错误时的下一步操作，例如若脚本返回退出代码3，可重新触发Tectonicus，不过本脚本不会进行额外操作。
+
+=== 变量 ===
+示例脚本的下一部分是设置变量供后续脚本使用。你可以通过修改这些变量（如Tectonicus jar文件或工作文件的位置），而无需编辑脚本的主要部分。
+<pre>
+# Log file where we track the progress of this script:
+LOG="/Users/You/Applications/minecraft-server/tectonicusnightly-log.txt"
+#
+# Previous run's log file:
+LOGOLD="/Users/You/Applications/minecraft-server/tectonicusnightly-log.old"
+#
+# Location of map files:
+WORLDWORKDIR="/Users/You/Applications/minecraft-server/world"
+#
+# Location of current Tectonicus build:
+TECTJAR="/Users/You/Applications/minecraft-server/Tectonicus_v2.02.jar"
+#
+# Location of current Tectonicus config files:
+TECTCONFIG="/Users/You/Applications/minecraft-server/tectonicus.xml"
+#
+# Places where Tectonicus writes its output files (set in tectonicus.xml file):
+TECTOUTPUT="/Users/You/Applications/minecraft-server/tectonicus"
+#
+# FQDN of the web server where the finished map will live and be available:
+WEBSERVER=whatever.something.com
+#
+# Service account for logging onto the web server:
+WEBSVC=yourwebserveraccount
+#
+# Finished map's location on the web server:
+WEBSERVERPATH=/var/www/tectonicus-map
+</pre>
+你需要在每个变量中填写自己的信息，它们分别是：
+
+* '''LOG'''：脚本记录自身运行进度的日志文件，是一个简单的文本文档，记录脚本的运行情况及失败原因，更重要的是记录脚本的运行过程。
+* '''LOGOLD'''：之前日志文件的名称，该名称会随时更改。指定LOGOLD可保留旧日志文件，避免被新日志覆盖。
+* '''WORLDWORKDIR'''：Minecraft地图数据文件的位置，设置为你希望Minecraft地图在电脑上的存储位置。若地图在其他服务器上运行，请先将其复制到本地电脑。
+* '''TECTJAR'''：当前Tectonicus jar文件的位置，由于Tectonicus会更新，你需要将该变量修改为新jar文件的位置。
+* '''TECTCONFIG'''：Tectonicus XML配置文件的位置，Tectonicus可拥有多个配置文件，可通过不同变量名称列出，然后多次触发Tectonicus查看不同地图。
+* '''TECTOUTPUT'''：Tectonicus放置生成地图的位置，你可将此处的地图复制到Web服务器，甚至是互联网上的某个位置。
+* '''WEBSERVER'''：Tectonicus通过rsync上传地图的服务器的完全限定域名。
+* '''WEBSVC'''：使用rsync登录到web服务器的账号。注意此过程需安全无漏洞，你需要在脚本中指定该账号的密码。[https://help.ubuntu.com/community/SSH/OpenSSH/Keys 这里是如何]建立基于SSH的身份验证。
+* '''WEBSERVERPATH'''：Tectonicus上传地图文件到web服务器的地址，该地址可替换，以便在互联网上提供服务。
+
+=== 日志 ===
+下一段是设置另一个变量'''STARTTIME'''，用于记录脚本启动的时间：
+<pre>
+STARTTIME="$(date +%s)"
+</pre>
+
+时间格式为[[wzh:Unix时间|Unix时间]]，即从协调世界时1970年1月1日00:00起经过的秒数。在脚本末尾，Unix时间会存储到另一个变量中，用于记录运行脚本所用的时间。记录秒数便于通过数学方法计算时间，避免多次进行小时/分钟/秒的转换。
+
+下一步是设置脚本的日志文件：
+<pre>
+if [ -f $LOG ]
+then
+	mv -f $LOG $LOGOLD
+	echo "Previous log found and backed up to tectonicusnightly-log.old" >> $LOG
+	echo "Starting run at $(date)" >> $LOG
+else
+	echo "No previous log found! Creating log..." >> $LOG
+	touch $LOG
+	echo "Starting run at $(date)" >> $LOG
+</pre>
+
+首先检查指定路径是否已存在日志文件，若存在，通过mv命令将其重命名并存储到'''LOGOLD'''变量中。之后，会在日志文件中添加备注，表明旧日志已备份，并记录脚本开始运行的时间。
+
+若日志文件不存在，脚本会新建一个，并记录启动时间。
+
+=== 运行Tectonicus ===
+下一段是启动Tectonicus并等待地图构建完成后再继续操作。
+
+<pre>
+echo "$(date +"%T") - Now running Tectonicus to generate maps..." >> $LOG
+java -jar $TECTJAR config=$TECTCONFIG
+if [ "$?" -ne "0" ]; then
+        echo "$(date +"%T") - Tectonicus maps failed to complete--check TectonicusLog.txt for details" >> $LOG
+	echo "$(date +"%T") - Aborting" >> $LOG
+        exit 3
+else
+        echo "$(date +"%T") - ...Tectonicus finished rendering maps" >> $LOG
+</pre>
+
+日志文件中的第一行备注记录了Tectonicus的实际启动时间，下一行则启动Tectonicus，通过一开始设置的变量指定Tectonicus jar和配置文件的位置。
+
+接下来的“IF”语句用于监测Java运行结束时的退出状态。若Tectonicus顺利运行且无错误，Java会在完成时返回退出状态0。脚本监测非0的退出状态（即“if $? -ne 0”部分——若退出代码不为0），若监测到非0状态，会向日志文件输出错误信息并终止运行。
+
+若Java返回0退出代码（表明Tectonicus成功运行），我们就可以继续看下一部分了。
+
+=== 用Rsync传输地图 ===
+[[wikimedia:zh:Rsync|Rsync]]是一款强大的多用途文件传输工具，此处我们关注它的这一能力：查找源位置与目标位置的大量文件差异，并仅传输不同的文件。Tectonicus会生成大量文件，每晚只传输有新内容的地图比传输整个地图节省很多时间。
+<pre>
+echo "$(date +"%T") - Transferring new and changed map files to web server via rsync..." >> $LOG
+rsync --delete --force -aPe ssh --exclude 'Cache' $TECTOUTPUT/* $WEBSVC@$WEBSERVER:$WEBSERVERPATH
+if [ "$?" -ne "0" ]; then
+        echo "$(date +"%T") - Error transferring map files -- aborting" >> $LOG
+        exit 4
+else
+        echo "$(date +"%T") - ...rsync of map files to web server completed successfully" >> $LOG
+fi
+</pre>
+
+日志文件中的第一行备注记录了Rsync开始传输的时间，第二行运行Rsync。命令行各参数的作用如下：
+* '''--delete'''：删除源中已移除但目标位置仍存在的文件，保持整洁。
+* '''--force'''：确保源中已移除文件在目标位置的对应文件被删除，再次保持整洁。
+* '''-aPe'''：包含三个选项：
+** '''a'''：告诉rsync使用“archive”预设，将需复制的文件夹（包括子目录）完整复制到服务器，并保留文件的布局和属性。
+** '''P'''：告诉rsync保持已传输文件不变，复制文件时显示进度，便于脚本运行时查看状态。
+** '''e ssh'''：告诉rsync通过SSH连接远程计算机执行命令。
+* '''--exclude 'Cache''''：让rsync跳过复制Tectonicus的缓存目录。缓存目录可能很大，包含成千上万个文件，不传输可节省大量时间。
+* '''$TECTOUTPUT/* $WEBSVC@$WEBSERVER:$WEBSERVERPATH'''：告诉rsync将Tectonicus输出目录的内容复制到web服务器的目标位置，并使用指定账户登录。脚本运行时会替换为一开始定义的变量值。
+
+=== 时间和完成 ===
+最后两段用于测量脚本实际运行的时间，将其记录到日志文件中，报告运行成功后退出。
+
+<pre>
+# Recording the time now in another variable, so we can measure the script's execution time.
+#
+STOPTIME="$(date +%s)"
+ELAPSEDTIME="$(expr $STOPTIME - $STARTTIME)"
+#
+#
+#
+#
+# We don't really have any temp files or anything to clean up, so we can do our time math and stop here.
+#
+echo "Nightly run completed successfully at $(date)" >> $LOG
+# OS X date
+echo "Total time elapsed: $(date -ur $ELAPSEDTIME +%H:%M:%S)" >> $LOG
+# Linux date
+#echo "Total time elapsed: $(date -u -d @$ELAPSEDTIME +%H:%M:%S)" >> "$LOG"
+#
+# All done!
+exit 0
+</pre>
+
+当前Unix时间记录在'''STOPTIME'''变量中，通过简单的数学运算，用'''STOPTIME'''减去'''STARTTIME'''得到脚本运行时间。将该值转换为小时/分钟/秒后记录到日志文件中（经测试，'''date -ur'''在OS X上可正常工作，在Linux上则不行）。最后，报告0退出状态，脚本结束。
+
+对于Linux机器，请尝试替换“Total time elapsed”行。
+
+== 使用Cron让Tectonicus自动运行 ==
+要实现这一功能，在OS X上最好使用[[wikipedia:Launchd]]安排计划，但本教程针对cron编写，因为cron可在OS X、Linux和其他基于BSD的操作系统上运行。
+
+要让cron在夜间运行此脚本（无论用户是否登录），需编辑系统crontab文件，该文件位于/etc/crontab（OS X 10.6.x可能没有此文件，若没有可自行创建）。编辑文件并粘贴以下内容：
+
+<pre>
+0 1 * * * root <path to your script> &> /dev/null
+</pre>
+
+确保将路径替换为Tectonicus脚本的实际路径。前两个数值分别表示分钟和小时，即cron在24小时制中的定时运行时间，因此这行表示每晚01:00执行脚本。若要改为03:30，将前两个数值改为“30 3”（不含双引号）即可。
+
+== 总结 ==
+该脚本只是自动运行Tectonicus的一种示例方式，可进行大量修改，包括运行多个Tectonicus实例，或在串行端口、并行端口上工作。
+
+本文可能对使用cron创建计划任务有帮助，由于我的cron工作正常，因此未花时间研究如何使用launchd。
+
+[[Category:地图查看工具]]
+
+[[en:Tutorial:Programs and editors/Tectonicus/Mac Scripting Tutorial]]

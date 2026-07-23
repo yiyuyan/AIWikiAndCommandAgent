@@ -1,0 +1,99 @@
+# 页面: Java版18w05a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8818w05a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:20
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=18w05a
+|image=18w05a.png
+|image2=Java Edition 18w05a Simplified.png\Java Edition 18w05a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2018年1月31日
+|jsonhash=a9e94f4c88dd7905aa475f04ba3bfc134b70754a
+|clienthash=bc3c321006bd1864a9e3dfea8c351927c44519c6
+|serverhash=a4029c808cef57bed3228a51dcb7f68edd018a77
+|parent=1.13
+|prevparent=1.12.2
+|prev=18w03b
+|next=18w06a
+|nextparent=1.13.1
+}}<onlyinclude>
+
+'''18w05a'''是[[Java版1.13]]的第16个快照，发布于2018年1月31日<ref>{{snap|18w05a|January 31, 2018}}</ref>，为命令{{cmd|execute}}加入了新的参数，加入了新的命令{{cmd|bossbar}}，更新了命令UI和翻译文件，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|bossbar}}'''
+* {{cmd|bossbar create <boss栏> <显示名称>}}可创建一个Boss栏。
+** <code>-{}-boss栏</code>用来指定Boss栏<code>namespace:name</code>，例：<code>foo:bar</code>。如果没有<code>namespace</code>则默认为<code>minecraft</code>。
+** <code>-{}-显示名称</code>是Boss栏的显示名称，只接受JSON语法。
+* {{cmd|bossbar set <目标boss栏> name <显示名称>}}可以更改Boss栏的名字。
+* {{cmd|bossbar set <目标boss栏> color <!-- 此为颜色代码，请勿翻译 -->(blue{{!}}green{{!}}pink{{!}}purple{{!}}red{{!}}white{{!}}yellow)}}可用来更改Boss栏与该名称的颜色（修改文字颜色只限于当没有在文字格式中指定它的颜色时），默认为<code>white</code>。
+* {{cmd|bossbar set <目标boss栏> style (notched_10{{!}}notched_12{{!}}notched_20{{!}}notched_6{{!}}progress)}}能改变boss栏的样式，默认为<code>progress</code>。
+** 可以设为以下的样式：<code>notched_6</code>、<code>notched_10</code>、<code>notched_12</code>、<code>notched_20</code>或<code>progress</code>。
+** <code>notched</code>会设定boss栏在视觉上的分段数。
+** <code>progress</code>会设置为1段，也就是直长条。
+* {{cmd|bossbar set <目标boss栏> value <当前值>}}会改变boss栏的当前值，默认为<code>0</code>。
+* {{cmd|bossbar set <目标boss栏> max <最大值>}}会设置boss栏的最大值，默认为<code>100</code>。
+* {{cmd|bossbar set <目标boss栏> visible <visible>}}会设定boss栏是否可见，默认为<code>true</code>。
+* {{cmd|bossbar set <目标boss栏> players <目标玩家>}}会设定那些玩家可以看见boss栏，默认为无人可看见。
+* {{cmd|bossbar remove <目标boss栏>}}会把整个目标boss栏给移除。
+* {{cmd|bossbar list}}会显示所有存在的boss栏。
+* {{cmd|bossbar get <指定boss栏> (max{{!}}players{{!}}value{{!}}visible)}}会回传值作为命令的 <code>result</code>
+'''{{cmd|execute store}}'''
+* 新的子命令{{cmd|execute store}}：{{cmd|execute store (result{{!}}success) bossbar <目标boss栏> (value{{!}}max) <连锁子命令>}}。
+** 将会储存指定运行命令的<code>result</code>或<code>success</code>为boss栏的<code>value</code>当前值或<code>max</code>最大值设定。
+'''常规'''
+* 为命令UI增加了基本的目标选择器。
+
+== 更改 ==
+=== 常规 ===
+'''[[Crowdin]]'''
+* 更新了翻译。
+
+== 修复 ==
+{{fixes|fixedin=18w05a|prefix=Minecraft|showdesc=1
+|;old
+|2399|透明方块在视觉上使用的是其临近方块的更亮的光照等级。
+|4923|打火石和火焰弹可以在无效位置上点火。
+|5037|骑着猪或马时，披风的表现不符合预期。
+|8471|方块不能被放置在玩家相邻的方块上。
+|55710|在载具内执行{{cmd|tp|link=none}}命令时，相对位置的基点是离开载具时落地的位置。
+|57332|所有命令中的数字参数都是整型值。
+|58556|破坏一个正在被活塞移动的方块时会产生缺失纹理的粒子。
+|60117|玩家站在下半台阶上时，不能在此方块以上两格高处放置上半台阶。
+|64919|玩家可以在站立于T形玻璃板、铁栏杆和栅栏的判定箱内时，透过它们放置方块。
+|65774|摔落在头颅上时，粒子不显示。
+|88674|生长在除沙子和红沙以外的方块上的仙人掌会掉落两个物品，而不是被破坏。
+|89634|{{cmd|spreadplayers|link=none}}命令更倾向于把玩家分散到负坐标处。
+|105591|用打火石或火焰弹点火而没点着火时，打火石的耐久或火焰弹会被消耗。
+|120296|{{key|F3+T}}不能重载{{filename|pack.mcmeta}}中的数据。
+|;dev
+|123460|数据包和资源包的{{filename|pack.mcmeta}}文件在解析时{{tr|抛出|丟擲|投擲}}的JSON解析异常没有被正确捕获。
+|124048|在{{cmd|advancement|link=none}}命令（或任意命令？）最后有空格时按{{key|Tab}}键补全会发生错误。
+|124056|{{cmd|scoreboard|link=none}}和{{cmd|team|link=none}}命令的成员/目标/多个目标的参数不能用{{key|Tab}}键补全玩家名称。
+|;previous
+|124360|指定<code>scale</code>参数时，{{cmd|data get|link=none}}命令的回显使用了操作系统的区域设置。
+|124379|数据包加载的函数不可靠。
+|124384|触发器类型的记分项是默认被启用的。
+|124499|缺失成功触发触发器的命令回显。
+|124616|{{cmd|setidletimeout|link=none}}命令的建议以秒为单位，但实际是以分钟为单位。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:18w05a]]
+[[en:Java Edition 18w05a]]
+[[es:Java Edition 18w05a]]
+[[fr:Édition Java 18w05a]]
+[[hu:18w05a]]
+[[ja:Java Edition 18w05a]]
+[[nl:18w05a]]
+[[pt:Edição Java 18w05a]]
+[[ru:18w05a (Java Edition)]]

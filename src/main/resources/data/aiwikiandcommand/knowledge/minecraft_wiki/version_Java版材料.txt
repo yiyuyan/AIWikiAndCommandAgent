@@ -1,0 +1,155 @@
+# 页面: Java版材料
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%9D%90%E6%96%99
+# 分类: Java版, 游戏内容, 过时内容, 需要信息
+# 抓取时间: 2026-07-14 17:15:25
+# 原始 Wikitext 内容:
+
+{{about|Java版中方块的材料|基岩版中的材料|基岩版材料|制作盔甲所用的材料|盔甲材料|工具和武器的材料|工具材料}}
+{{outdated|edition=je}}
+'''材料（Material）'''将[[方块]]分成了许多不同的种类，并赋予方块各种属性与行为。
+
+== 材料列表 ==
+以下是在Minecraft中存在的材料。每一种材料都会赋予方块特定的属性，不过这些行为都能被方块自己的定义的属性覆盖。
+; 材料列表（于[[Java版1.20|1.20]]失效）
+* 内部名称：材料在游戏源代码中定义的名称。
+* 名称：材料的名称。
+* 地图颜色：该材料的默认[[地图基色]]。
+* 是否为液体：{{info needed}}。
+* 是否为固体：如果是，一些附着性方块可以放在其上。此项也会影响液体的传播。
+* 是否固体阻挡：如果是，则铁傀儡可能在其上生成。此项也影响红石导体的判断。
+* 是否阻止运动：{{info needed}}。
+* 是否可以被替换：如果是，可以直接在该方块的位置放置其他方块。
+* 熔岩可燃性：只用来指定熔岩是否能在该方块上生成火，与火的传播无关。
+* 活塞推动行为：如果是“推动”，该方块会被活塞推动；如果是“阻挡”，该方块会阻止活塞运动；如果是“破坏”，该方块会被活塞破坏；如果是“替换”，该方块会被活塞头替换。
+
+{{/table1}}
+
+; 材料列表（[[23w16a]]）
+* 内部名称：材料在游戏源代码中定义的名称。
+* 地图颜色：该材料的默认[[地图基色]]。
+* 是否固体阻挡：如果是，则铁傀儡可能在其上生成。此项也影响红石导体的判断。
+{| class="wikitable sortable" data-description="材料列表"
+! 内部名称
+! class="unsortable" colspan=2 | 地图颜色
+! 是否固体阻挡
+|-
+| PLANT
+| style="background-color: rgb(0,124,0);" | &nbsp;&nbsp;
+| 0,124,0
+| {{Tc|no}}
+|-
+| DEPRECATED
+| &nbsp;&nbsp;
+| 无
+| {{Tc|yes}}
+|-
+| DEPRECATED_NONSOLID
+| &nbsp;&nbsp;
+| 无
+| {{Tc|no}}
+|}
+
+== 方块 ==
+{{/table2}}
+
+== 作用 ==
+=== 窒息生物 ===
+{{main|窒息}}
+[[File:Suffocating.png|在金矿石内窒息时的情景|thumb]]
+绝大多数[[碰撞箱]]完整且由阻止运动材料组成的方块会使头部在其中的生物窒息，下列方块是例外：
+* {{BlockLink|Glass}}、{{BlockLink|Stained Glass}}、{{BlockLink|Tinted Glass}}、{{BlockLink|Mangrove Roots}}、{{BlockLink|Leaves}}和{{BlockLink|Moving Piston}}不会使生物窒息。
+* {{BlockLink|Dirt Path}}、{{BlockLink|Farmland}}、{{BlockLink|Mud}}、{{BlockLink|Soul Sand}}会使生物窒息。
+* {{BlockSprite|Shulker Boxes}}{{BlockLink|Shulker Box}}在关闭时会使生物窒息，在开启时不会。
+* {{BlockLink|Piston}}和{{BlockLink|Sticky Piston}}在未伸出时会使生物窒息，在伸出时不会。
+
+=== 遮挡视野 ===
+类似于窒息方块，有些方块当玩家头部在其中时视野会被完全遮挡，屏幕变暗，并且暗色的方块纹理会遮挡整个屏幕。
+
+所有窒息方块都是遮挡视野方块，8层{{BlockLink|Snow}}也是遮挡视野方块。
+
+=== 红石导体 ===
+[[File:Redstone Solid Block.png|非红石导体（荧石）和红石导体（草方块）|thumb]]
+{{main|红石电路/充能与激活}}
+红石导体拥有可被充能、允许[[红石比较器]]检测后方方块、阻止箱子开启、“压断”红石线等属性。绝大多数碰撞箱完整且由固体阻挡材料组成的方块都是红石导体，但下列方块是例外：
+* {{BlockLink|Glass}}、{{BlockLink|Stained Glass}}、{{BlockLink|Tinted Glass}}、{{BlockLink|Piston}}、{{BlockLink|Sticky Piston}}、{{BlockLink|Moving Piston}}、{{BlockLink|Observer}}、{{BlockLink|Block of Redstone}}和{{BlockLink|Beacon}}不是红石导体。
+* {{BlockLink|Soul Sand}}和{{BlockLink|Mud}}是红石导体。
+
+=== 可替换方块 ===
+[[File:Replacable Block.png|几种可替换方块：空气、结构空位、熔岩、水、雪、藤蔓、蕨、枯萎的灌木、草丛和火|thumb]]
+所有由可替换材料组成的方块都是可替换方块。当玩家按{{ctrl|使用}}键放置方块时会直接覆盖该方块而不是放置在其毗邻，就如空气方块那样。
+
+如果[[下落的方块|受重力影响的方块]]下方是一个可替换的方块，那么它可以在接受[[方块更新#PP更新|PP更新]]后掉落。如果[[下落的方块]]落地时，落地的位置是可替换方块，那么该方块变为下落的方块对应的方块，否则下落的方块会掉落为对应的物品。
+
+=== 固体方块 ===
+[[File:SolidLiquid.png|固体方块[[石头]]和液体方块[[水]]的对比|thumb]]
+'''固体方块（Solid Block）'''是指所有使用固体材料的方块。这些方块无法被替换，实体也不能自然生成在其内部。
+
+固体方块使得一些方块可以依附在其上，包括：
+{{flatlist|
+* {{ItemLink|Cake}}
+* {{ItemLink|Painting}}
+* {{ItemLink|Item frame}}
+* {{ItemLink|glow item frame}}
+* {{ItemLink|Signs}}
+* {{BlockLink|id=Banners|Banner}}
+}}
+
+固体方块会破坏侧面的[[仙人掌]]，使下面的[[耕地]]和[[土径]]退化。
+
+水和熔岩的扩散判定依靠材料是否为固体。
+
+=== 其他作用 ===
+* [[末影人]]会根据材料是否阻止运动来瞬移。它在瞬移时会随机选择X和Z坐标，然后从上到下依次寻找阻止运动的材料，并尝试传送至其上。
+** 类似地，一些生成或传送到“地表”的生物依靠材料是否阻止运动来寻找表面。
+* 玩家[[重生]]的阻挡检查依靠材料是否为固体或流体，但玩家可以重生在旗帜、压力板或告示牌里。
+* 仙人掌的破坏取决于四周方块是否为熔岩以及材料是否为固体，上方方块的材料是否为液体。
+* 使用[[铁桶]]倒液体时，目标位置的材料可替代或者材料不是固体，并且不是末地传送门方块或末地折跃门方块，才会尝试倒出液体。
+* 村民召唤[[铁傀儡]]时，铁傀儡可以在空气材料或液体材料中生成，下面的方块必须是固体阻挡的材料且上表面碰撞箱完整。
+* {{cmd|spreadplayers}}命令会尝试避免将玩家传送到液体材料或火材料中。
+* 当冰被破坏时，如果下方方块的材料阻止运动或是液体，它会变成水。
+* 熔岩会检查周围是否有可燃材料并生成火。但火有单独的可燃列表，所以熔岩附近的方块旁边常常会有火，但可能不会烧毁方块。
+* [[睡莲]]只能被放置在下面材料有冰材料或水的空气材料方块中。
+* 雨和雪穿过非流体且不阻止运动的材料。
+* [[音符盒]]检测下方方块或其材料来决定发出的声音。它检查石头、沙子、玻璃和木头材料，对应的乐器分别是大鼓、小军鼓、击鼓沿和低音提琴。
+* 具有不同材料变体的各种方块会检查材料以确定要播放的声音。
+* 游戏通常根据木头或金属材料来区分木质或铁质的门和活板门。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w06a|加入了下界木质材料。}}
+|{{HistoryLine||1.16.2|dev=pre2|加入了可替换抗火植物材料。}}
+|{{HistoryLine||1.17|dev=20w45a|加入了紫水晶材料。}}
+|{{HistoryLine|||dev=20w46a|加入了细雪材料。}}
+|{{HistoryLine|||dev=20w49a|加入了幽匿材料。}}
+|{{HistoryLine|||dev=21w05a|现在细雪材料不再被活塞推动而破坏。}}
+|{{HistoryLine|||dev=21w11a|现在紫水晶材料不再被活塞推动而破坏。}}
+|{{HistoryLine|||dev=21w13a|移除了珊瑚材料。
+|加入了苔藓材料。}}
+|{{HistoryLine|||dev=21w20a|现在紫水晶材料变为固体阻挡的材料了。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了青蛙卵材料。}}
+|{{HistoryLine|||dev=22w16a|加入了蛙明灯材料。}}
+|{{HistoryLine||1.19.4|dev=23w07a|加入了饰纹陶罐材料。}}
+|{{HistoryLine||1.20|dev=23w12a|加入了易碎的蛋材料。}}
+|{{HistoryLine|||dev=23w13a|材料不再控制方块是否被熔岩点燃和方块在被活塞推动时的行为。
+|易碎的蛋改为坚固的蛋。}}
+|{{HistoryLine|||dev=23w14a|材料不再控制方块是否是液体。
+|大部分材料被重新命名和合并。}}
+|{{HistoryLine|||dev=23w16a|材料不再控制方块是否为固体、是否固体阻挡、是否可替换这三种属性。
+|材料再次被合并，只剩下{{cd|PLANT|DEPRECATED_NONSOLID|DEPRECATED|d=pretty}}三种材料。}}
+|{{HistoryLine|||dev=23w17a|材料系统被移除。}}
+}}
+
+== 导航 ==
+{{Navbox gameplay}}
+{{Navbox Java Edition}}
+
+[[cs:Materiály]]
+[[en:Materials]]
+[[fr:Matériaux]]
+[[ja:材料]]
+[[ko:재료]]
+[[nl:Materialen]]
+[[pt:Materiais]]
+[[ru:Материалы]]
+[[uk:Матеріали]]

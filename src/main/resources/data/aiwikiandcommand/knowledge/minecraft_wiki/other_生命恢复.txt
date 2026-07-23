@@ -1,0 +1,264 @@
+# 页面: 生命恢复
+# 来源: https://zh.minecraft.wiki/w/%E7%94%9F%E5%91%BD%E6%81%A2%E5%A4%8D
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:15
+# 原始 Wikitext 内容:
+
+{{for|Minecraft Dungeons里的魔咒|MCD:生命恢复}}
+{{about|状态效果|恢复生命的机制|治疗}}
+{{Redirect|再生|不使用漏洞和作弊情况下可以无限获得的资源|可再生资源}}
+{{Infobox effect
+|image=Regeneration.png	
+|invimage=Potion of Regeneration
+|invimage2=Splash Potion of Regeneration
+|invimage3=Lingering Potion of Regeneration
+|invimage4=Arrow of Regeneration
+|invimage5=----
+|invimage6=Potion of Regeneration Extended
+|invimage7=Splash Potion of Regeneration Extended
+|invimage8=Lingering Potion of Regeneration Extended
+|invimage9=Arrow of Regeneration Extended
+|invimage10=----
+|invimage11=Potion of Regeneration Enhanced
+|invimage12=Splash Potion of Regeneration Enhanced
+|invimage13=Lingering Potion of Regeneration Enhanced
+|invimage14=Arrow of Regeneration Enhanced
+}}
+'''生命恢复（Regeneration）'''是一种能够为生物持续恢复生命值的[[状态效果]]。
+
+== 效果 ==
+受影响生物每隔一段时间恢复{{hp|1}}生命值，间隔取决于效果等级。
+
+{| class="wikitable" style="text-align:right"
+ ! 等级 !! 治疗周期 !! 每秒治疗量
+ |-
+ | 1 || {{convert|50}} || {{hp|0.4}}
+ |-
+ | 2 || {{convert|25}} || {{hp|0.8}}
+ |-
+ | 3 || {{convert|12}} || {{hp|1.6}}
+ |-
+ | 4 || {{convert|6}} || {{hp|3.33}}
+ |-
+ | 5 || {{convert|3}} || {{hp|6.67}}
+ |-
+ | 6+ || {{convert|1}} || {{hp|20}}
+|}
+
+当效果的剩余时间的游戏刻数是周期的整倍数时，执行一次效果。如果效果的剩余时间被持续设置，会导致治疗会持续进行或不进行。
+
+由于[[信标]]每{{convert|80}}给予一次效果，如果玩家一直在信标范围内，生命恢复效果的时长在{{convert|260}}到{{convert|340}}浮动，而260和340之间唯一一个50的整倍数是300，并导致玩家的实际治疗周期从50游戏刻变为80游戏刻。<ref name="MC-30946">{{bug|MC-30946}}</ref>
+
+玩家具有该效果时，生命条会周期性抖动。
+
+如果被赋予效果倍率值0-31（对应等级1-32）范围以外的值，实际生效的倍率值则取[[wikipedia:Modulo_operation|模除]]32后的值。
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+ ! 来源
+ ! 效果等级
+ ! 时长
+ ! 治疗总量
+ ! 备注
+ |-
+ | {{ItemLink|Potion of Regeneration}}
+ | I
+ | 0:45
+ |{{hp|18}}
+ | 
+ |-
+ | {{ItemLink|Potion of Regeneration}}（延长版）
+ | I
+ | 1:30{{only|JE|short=1}}<br>2:00{{only|BE|short=1}}
+ | {{hp|36}}{{only|JE|short=1}}<br>{{hp|48}}{{only|BE|short=1}}
+ |
+ |-
+ | {{ItemLink|Potion of Regeneration}}（增强版）
+ | II
+ | 0:22
+ | {{hp|17}}
+ |
+ |-
+ | {{ItemLink|Splash Potion of Regeneration}}
+ | I
+ | 0:45
+ | {{hp|18}}
+ | 袭击中的[[女巫]]会向生命值大于{{hp|4}}的除女巫之外的[[袭击者]]投掷此药水。{{in|BE}}袭击中的女巫反击其他袭击者（正在参与或参与过袭击）时也会投掷此药水。
+ |-
+ | {{ItemLink|Splash Potion of Regeneration}}（延长版）
+ | I
+ | 1:30{{only|JE|short=1}}<br>2:00{{only|BE|short=1}}
+ | {{hp|36}}{{only|JE|short=1}}<br>{{hp|48}}{{only|BE|short=1}}
+ |
+ |-
+ | {{ItemLink|Splash Potion of Regeneration}}（增强版）
+ | II
+ | 0:22
+ | {{hp|17}}
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Regeneration}}
+ | I
+ | 0:11
+ | {{hp|4}}
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Regeneration}}（延长版）
+ | I
+ | 0:22{{only|je|short=1}}<br>0:30{{only|be|short=1}}
+ | {{hp|8}}{{only|je|short=1}}<br>{{hp|12}}{{only|be|short=1}}
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Regeneration}}（增强版）
+ | II
+ | 0:05
+ | {{hp|4}}
+ |
+ |-
+ | {{ItemLink|Arrow of Regeneration}}
+ | I
+ | 0:05
+ | {{hp|2}}
+ | 
+ |-
+ | {{ItemLink|Arrow of Regeneration}}（延长版）
+ | I
+ | 0:11{{only|je|short=1}}<br>0:15{{only|be|short=1}}
+ | {{hp|4}}{{only|je|short=1}}<br>{{hp|6}}{{only|be|short=1}}
+ | 
+ |-
+ | {{ItemLink|Arrow of Regeneration}}（增强版）
+ | II
+ | 0:02
+ | {{hp|1}}
+ | 
+ |-
+ | {{BlockLink|Beacon}}设为生命恢复
+ | I
+ | 0:17
+ | 不定
+ | 信标等级需要到达4级，在信标范围内每{{convert|80}}使玩家获得一次此效果。但是由于信标会持续刷新效果的持续时间，信标给予的生命恢复效果平均每{{convert|80}}恢复一次生命。<ref name="MC-30946" />
+ |- 
+ | {{ItemLink|Suspicious Stew}}
+ | I
+ | 0:07
+ | {{hp|2}}
+ | 必须使用{{BlockLink|Oxeye Daisy}}合成
+ |- 
+ | {{ItemLink|Golden Apple}}
+ | II
+ | 0:05
+ | {{hp|4}}
+ | 
+ |- 
+ | {{ItemLink|Enchanted Golden Apple}}
+ | II
+ | 0:20{{only|je|short=1}}<br>0:30{{only|be|short=1}}
+ | {{hp|16}}{{only|je|short=1}}<br>{{hp|24}}{{only|be|short=1}}
+ | 
+ |-
+ | {{ItemLink|Totem of Undying}}
+ | II
+ | 0:45
+ | {{hp|36}}
+ | 激活时获得
+ |-
+ | 自然生成{{only|JE}}
+ | I
+ | 无限
+ | 不定
+ | 只对困难难度中的{{EntityLink|spider}}有效
+ |-
+ | [[交易]]
+ | I
+ | 0:10
+ | {{hp|4}}
+ | 只对解锁新交易的{{EntityLink|Villager}}有效
+ |-
+ | 受到伤害
+ | I
+ | 0:10
+ | {{hp|4}}
+ | 只对[[美西螈#装死|装死]]的{{EntityLink|Axolotl}}有效
+ |-
+ | 击杀{{EntityLink|Axolotl}}的攻击目标
+ | I
+ | 0:05
+ |{{hp|2}}
+ | 效果时长可叠加，叠加次数由附近的{{EntityLink|Axolotl}}数量决定。{{in|je}}时长叠加上限为2:00；{{in|be|nc=1}}没有上限。
+ |}
+
+== 数据值 ==
+=== ID ===
+{{el|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Regeneration
+|spritetype=effect
+|nameid=regeneration
+|foot=1}}
+
+{{el|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Regeneration
+|spritetype=effect
+|nameid=regeneration
+|showaliasids=1
+|aliasid=10
+|foot=1}}
+
+== 进度 ==
+{{load advancements|prefix=nether|all_potions;all_effects}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了生命恢复。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|[[File:Regeneration JE1 BE1.png|32px]] 加入了生命恢复的图标。
+|现在饮用[[奶]]会移除生命恢复效果。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[再生药水]]和[[喷溅型再生药水]]，可以提供生命恢复。}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了“Work in Progress”方块，可以为玩家提供生命恢复效果。}}
+|{{HistoryLine|||dev=12w36a|“Work in Progress”方块被重命名为[[信标]]，可以为玩家提供生命恢复效果。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了[[再生之箭]]，可以提供生命恢复。}}
+|{{HistoryLine|||dev=15w33a|加入了[[滞留型再生药水]]，可以提供生命恢复。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Regeneration JE3 BE2.png|32px]] 更改了图标纹理。
+|现在可通过食用[[谜之炖菜]]获得生命恢复效果。}}
+|{{HistoryLine||1.17|dev=20w51a|现在[[美西螈]]会装死以获得生命恢复效果。}}	
+|{{HistoryLine||1.20.2|dev=23w32a|在此版本前，生命恢复的存档ID是10。}}
+|{{HistoryLine||1.21.4|dev=24w45a|现在食用谜之炖菜获得的生命恢复效果的持续时间由8秒降低至7秒，以匹配{{el|be}}。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Regeneration JE1 BE1.png|32px]] 加入了生命恢复，目前无法获得。}}
+|{{HistoryLine||0.12.1|dev=build 1|生命恢复现在可以通过[[金苹果]]、[[附魔金苹果]]和[[再生药水]]及其[[喷溅药水]]获得。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了[[再生之箭]]，会使目标获得生命恢复效果。}}
+|{{HistoryLine||0.16.0|dev=build 4|现在生命恢复可通过[[信标]]获得。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|现在生命恢复可通过[[滞留药水]]获得。}}
+|{{HistoryLine||1.0.4|dev=1.0.4.0|现在村民在解锁新交易时会获得生命恢复。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|现在生命恢复可通过[[不死图腾]]获得。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.11.0|dev=1.11.0.5|[[File:Regeneration JE3 BE2.png|32px]] 更改了图标纹理。}} 
+|{{HistoryLine||1.13.0|dev=1.13.0.9|现在可通过食用[[谜之炖菜]]获得生命恢复效果。}}
+|{{HistoryLine||1.17.0|exg=caves_and_cliffs_en|dev=1.16.230.52|现在[[美西螈]]会装死以获得生命恢复效果。}}
+|{{HistoryLine|||exg=none|dev=1.17.0.52|1.16.230.52中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.40|dev=1.21.40.20|现在食用[[附魔金苹果]]后给予的生命恢复效果等级由V降低至II。<ref>{{bug|MCPE-103061|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.80|dev=1.21.80.20|现在不死图腾给予的生命恢复Ⅱ效果时长由40秒提升至45秒，以匹配{{el|je}}。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Regeneration]]
+[[en:Regeneration]]
+[[es:Regeneración]]
+[[fr:Régénération]]
+[[it:Rigenerazione]]
+[[ja:再生能力]]
+[[ko:재생]]
+[[lzh:復甦]]
+[[pt:Regeneração]]
+[[ru:Регенерация]]

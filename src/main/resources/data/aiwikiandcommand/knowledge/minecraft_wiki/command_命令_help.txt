@@ -1,0 +1,95 @@
+# 页面: 命令/help
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/help
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{redirect|?}}
+{{Infobox command 
+|name=help
+|alias={{cmd|link=none|?}}{{only|be}}
+|oplevel=0
+}}
+
+获取可用命令列表或单个命令的帮助信息。
+
+== 用法 ==
+命令执行者无法使用的命令（因为权限等级不足或其他限制）不会被显示。
+
+{{in|je}}对一些复杂命令可能只会显示基本的语法，可以通过添加更具体的参数来获取附加信息。
+
+{{in|je}}重定向命令节点（如{{cmd|help xp|link=none}}）不会显示内容。
+
+== 语法 ==
+* '''Java版'''
+: <code>help</code>
+:: 列出所有可用命令。
+: <code>help <command></code>
+:: 显示指定命令的语法帮助。
+
+* '''基岩版'''
+: <code>help <command: CommandName></code>
+: <code>? <command: CommandName></code>
+:: 显示指定命令的语法帮助。
+: <code>help [page: int]</code>
+: <code>? [page: int]</code>
+:: 列出所有可用命令。
+
+== 参数 ==
+{{argument|command|string|command: CommandName|basic_string}}
+: {{arg desc|je=string|type=greedy|be=string}}必须为一个英文单词（不含空格）。
+: 指定要提供帮助的命令名称。{{IN|java}}还可以进一步提供该命令更精确的参数来获取更精确的信息。
+
+{{el|be|short=1}}：{{argument|be=1|page: int|int}}
+: {{arg desc|be=int}}
+: 指定要展示的命令列表的页码。小于1的数字会被视为1，大于总页数会被默认为展示最后一页。
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数不正确|unparseable|unparseable}}
+{{Result table|cmd=/help <command><br>/help <command: CommandName><br>/? <command: CommandName>|<code><command></code>或<code>command: CommandName</code>无效|fail}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|列出的命令用法的数量}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 显示命令列表（{{only|be|for=第一页}}）：<code>/help</code>
+* 显示{{cmd|give}}命令的语法帮助：<code>/help give</code>
+* 显示{{cmd|scoreboard}}命令中{{cd|add}}子命令的语法帮助：<code>/help scoreboard add</code>{{only|je}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w17a|加入了{{cmd|help|link=none}}命令。}}
+|{{HistoryLine||1.9|dev=16w02a|在命令方块中运行{{cmd|help|link=none}}命令时，会在“上一个输出”中随机显示诙谐的语句。}}
+|{{HistoryLine||1.13|dev=17w45a|运行{{cmd|help|link=none}}命令时不再显示诙谐的语句。<ref>{{bug|MC-124295}}</ref>
+|{{cmd|help|link=none}}不再拆分成独立的页面。
+|移除了别名{{cmd|?|link=none}}。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|help|link=none}}命令。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/help]]
+[[en:Commands/help]]
+[[es:Comandos/help]]
+[[fr:Commandes/help]]
+[[ja:コマンド/help]]
+[[ko:명령어/help]]
+[[lzh:令/help]]
+[[nl:Opdrachten/help]]
+[[pt:Comandos/help]]
+[[ru:Команды консоли/help]]
+[[uk:Команди консолі/help]]

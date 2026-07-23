@@ -1,0 +1,191 @@
+# 页面: Java版25w33a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8825w33a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:36
+# 原始 Wikitext 内容:
+
+{{undecided translation|cn=1|tw=1|hk=1}}
+{{Infobox version
+|title=25w33a
+|image=25w33a.png
+|image2=Java Edition 25w33a Simplified.png\Java Edition 25w33a Traditional.png\Java Edition 25w33a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2025年8月12日
+|jsonhash=668fe51f971b2e5d55c17b8a39d59a924728d383
+|clienthash=7ea8455dd98248a23868bde948d9aeddd0d6f7fa
+|clientmap=bf18cc9f67108efb2369f15f42358165b7c9f3ee
+|serverhash=83027f72aa7957837aeeaef499c67105583d0928
+|servermap=503dad3066e73e0761a2ce27bc9e2a954b0df496
+|parent=1.21.9
+|prevparent=1.21.8
+|prev=25w32a
+|next=25w34a
+|nextparent=1.21.10
+}}<onlyinclude>
+
+'''25w33a'''是[[Java版1.21.9]]的第3个快照，发布于2025年8月12日<ref>{{snap|25w33a|Aug 12, 2025}}</ref>，加入了[[末地闪光]]和聊天草稿，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[展示架]]'''
+* 加入了<code>align_items_to_bottom</code>方块状态，控制展示架中物品是否向底部对齐，默认为<code>false</code>。
+** 为<code>false</code>时，物品会忽略<code>on_shelf</code>物品渲染变换的竖直平移而纵向居中。
+** 为<code>true</code>时，物品会根据<code>on_shelf</code>物品渲染变换的从展示架底部向上的竖直平移渲染。
+
+=== 世界生成 ===
+'''[[末地闪光]]'''
+* 出现于末地的天空，表现为不定时出现的紫色光芒。
+** 出现时，末地的天空光照随之增长。
+** 此为即将到来的{{pa|Vibrant Visuals|}}的一部分特性。
+
+=== 常规 ===
+'''[[选项]]'''
+* 在“聊天设置”中加入了“{{tr|保存未发送的聊天消息|儲存未傳送的聊天訊息}}”选项，默认为关。
+** 启用时，未发送的消息会在玩家主动关闭聊天框时保存。
+
+'''[[Java版标签|标签]]'''
+* 加入了下列实体类型标签：
+** {{cd|#accepts_iron_golem_gift}}：{{cd|copper_golem}}。
+*** 会将铁傀儡的赠礼戴到头上的实体。
+** {{cd|#candidate_for_iron_golem_gift}}：{{cd|d=pretty|villager|#accepts_iron_golem_gift}}。
+*** 会被铁傀儡赠予虞美人的实体。
+** {{cd|#cannot_be_pushed_onto_boats}}：{{cd|d=pretty|player|guardian|elder_guardian|cod|pufferfish|salmon|tropical_fish|dolphin|squid|glow_squid|tadpole|creaking}}。
+*** 不会被推进[[船]]的实体。
+* 加入了下列物品标签：
+** {{cd|#shearable_from_copper_golem}}：{{cd|poppy}}。
+*** 可从铜傀儡头部剪下的物品。
+* 向{{cd|#cluster_max_harvestables}}物品标签中加入了{{cd|copper_pickaxe}}。
+
+'''[[魔咒效果]]'''
+* 向<code>explode</code>魔咒效果中加入了{{nbt|list|block_particles}}{{note|更新日志中称为<code>block_effects</code>。}}字段，以指定爆炸时产生的每种方块粒子。
+** 格式如下：
+<div class="treeview">
+::* {{nbt|list|block_particles}}
+::** {{nbt|compound}}：一种方块粒子。
+::*** {{nbt|int|weight|required=1}}：（{{interval|left_open=0}}）此项被随机选中的权重。
+::*** {{nbt|compound|particle|required=1}}：要渲染的粒子。
+::*** {{nbt|float|scaling}}：（默认为<code>1.0</code>）爆炸中心和方块位置间距离的乘数。
+::*** {{nbt|float|speec}}{{sic}}{{note|更新日志中称为<code>speed</code>，但实际上需为<code>speec</code>，见{{bug|MC-300983}}。}}：（默认为<code>1.0</code>）粒子的速度乘数。
+</div>
+
+'''[[模型#渲染变换|模型渲染变换]]'''
+* 加入了<code>on_shelf</code>渲染变换，用于模型在展示架上的变换。
+
+'''[[纹理]]'''
+* 加入了纹理<code>environment/end_flash.png</code>。
+
+'''[[声音事件]]'''
+* 加入了声音事件{{cd|d=pretty|entity.copper_golem.shear|weather.end_flash}}。
+
+== 更改 ==
+=== 方块 ===
+'''[[展示架]]'''
+* 回退了上个快照关于物品位置的更改。
+* 更新了展示架中部分物品的大小和位置，以贴合展示架。
+
+=== 生物 ===
+'''[[铁傀儡]]'''
+* 现在会将[[虞美人]]赠予附近的铜傀儡，接受的铜傀儡会将其戴到头上。
+
+'''[[铜傀儡]]'''
+* 现在头盔槽位的虞美人可用[[剪刀]]剪下。
+* 现在头盔槽位中的[[方块物品]]会被渲染。
+** 除了[[生物头颅]]，其他绝大部分方块均渲染于避雷针顶部。
+* 现在穿戴的装备会在变为[[铜傀儡像]]时掉落。
+
+'''[[末影人]]'''
+* 随末地天空光照变化更新了[[寻路]]AI，现在不会趋向移动到暗处。
+
+=== 非生物实体 ===
+'''[[动力矿车]]'''
+* 手中没有可作为燃料的物品或动力矿车燃料充足时，按{{ctrl|使用}}键与其交互不再使动力矿车方向改变为玩家点击时的方向。
+
+=== 世界生成 ===
+'''[[末地]]'''
+* 现在具有天空光照和环境光照。
+* 怪物生成位置的最大天空光照现在为15。
+
+=== 游戏内容 ===
+'''[[爆炸]]'''
+* 现在爆炸时会与[[Java版1.15-pre1|1.15-pre1]]前一样生成{{cd|d=pretty|poof|smoke}}[[Java版粒子|粒子]]。
+
+=== 常规 ===
+'''[[聊天]]'''
+* 现在可以在[[下界传送门]]中打开聊天。
+* 玩家传送到其他维度后，之前打开的聊天仍会保持开启且保留内容。
+* 聊天被强制（例如死亡或打开对话框时）而非主动关闭时，未发送的聊天内容现在会以聊天草稿形式保存。
+** 下次聊天打开时，聊天草稿会被填入消息框。
+** 草稿文本在完全恢复前呈灰色，通过如下任一交互可使草稿恢复为普通文本：
+*** 输入附加文本
+*** 使用方向键移动光标
+*** 点击文本
+*** 选取文本，使文本高亮
+** 草稿恢复前，按下{{key|Enter}}可发送此消息。
+** 草稿恢复前，按下{{key|Backspace}}会删除此消息。
+
+'''[[社交屏幕]]'''
+* 现在在服务器中见过的玩家总会在社交屏幕中显示，即使他们处于离线状态。
+
+'''[[文本组件]]'''
+* <code>run_command</code>文本组件：
+** 命令为{{cd|d=pretty|/say|/me|/msg|/tell|/w|/teammsg|/tm}}这类署名命令时，现在会显示一个窗口，以允许玩家将此命令输入到聊天窗口，或在无法打开聊天窗口时将此命令复制到剪贴板。
+
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|83.1}}。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|65.2}}。
+
+== 修复 ==
+{{fixes|fixedin=25w33a|showdesc=1|new=1
+|;old
+|26334|死亡时，聊天界面被强制清空。
+|46503|在旁观实体时执行{{cmd|kill|link=none}}命令可保留实体着色器效果。
+|69216|钓鱼时切换到旁观模式会保留鱼线。
+|98322|由旁观模式切换到创造模式后保持飞行。
+|99785|能在旁观模式中牵引实体。
+|119417|玩家上床并切换到旁观模式后卧床不起。
+|165991|自1.15-pre1起，TNT爆炸不再显示更多烟雾粒子。
+|173730|持水桶对可含水方块{{key|Shift}}+右键单击不会在此方块旁边放置水。
+|183784|缩放窗口后，游戏模式切换器调试菜单存在视觉漏洞。
+|187850|若聊天被隐藏，成书中的<code>run_command</code>点击事件无效。
+|191669|玩家向方块或普通障碍物疾跑时，将游戏模式切换到旁观模式会取消疾跑。
+|232968|旁观模式与非旁观模式玩家同时查看箱子或木桶的内容能禁用其关闭动画。
+|238146|在睡觉期间切换到旁观模式后，夜晚永不跳过。
+|259571|玩家死亡或游戏重载后，玩家上次的游戏模式不会被保存。
+|270172|被勾住的玩家将游戏模式切换到旁观模式时，客户端与服务端失去同步。
+|297898|进入对话框会暂时关闭聊天并清除玩家当前正在输入的内容。
+|299548|若聊天被隐藏，<code>run_command</code>对话框行为不会生效。
+|;1.21.8的漏洞
+|299823|Minecraft着色器引发C7050警告。
+|299873|对话框中纯文本消息的选择框会被切断。
+|300034|海豚会上船。
+|300457|{{cd|d=或|action|exit_action}}被设为<code>run_command</code>且设置了一条会产生署名的聊天消息的命令时无法退出对话框。
+|;dev
+|300057|在和平难度中使用刷怪蛋生成敌对生物时，敌对生物仍会在1刻内生成。
+|300417|铜镐不属于{{cd|#cluster_max_harvestables}}物品标签。
+|;prev
+|300722|漏斗从展示架吸取物品时似乎会随机停止工作。
+|300732|<code>enderPearlsVanishOnDeath</code>为<code>true</code>时，若是首次浏览终末之诗后的鸣谢名单，已加载的末影珍珠会被删除。
+|300739|生成包含展示架方块的自定义结构时，服务端崩溃。
+|300746|Copper Wall Torch<!--倾向保留原文-->缺少翻译。
+|300747|看不见史莱姆背后村民的职业着装图层。
+}}</onlyinclude>
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[en:Java Edition 25w33a]]
+[[es:Java Edition 25w33a]]
+[[fr:Édition Java 25w33a]]
+[[ja:Java Edition 25w33a]]
+[[pt:Edição Java 25w33a]]
+[[ru:25w33a (Java Edition)]]
+[[uk:25w33a (Java Edition)]]

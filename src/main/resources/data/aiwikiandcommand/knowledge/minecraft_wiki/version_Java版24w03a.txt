@@ -1,0 +1,284 @@
+# 页面: Java版24w03a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w03a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w03a
+|image=24w03a.png
+|image2=Java Edition 24w03a Simplified.png\Java Edition 24w03a Traditional.png\Java Edition 24w03a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年1月17日
+|jsonhash=fc0a8da14b74f4cfb22ff9e1e740e961caacd4ba
+|clienthash=723cca5ce4684d04a259a7860a41e75856a5c08a
+|clientmap=52babc798f62bb24156e66199193f568f0e56c53
+|serverhash=730a3ef2f99f6a822aa504bfee2eb5372d826293
+|servermap=9bd7bc1702cc33db9baf44b7ff081e420d65aebf
+|parent=1.20.5
+|prevparent=1.20.4
+|prev=23w51b
+|next=24w03b
+|nextparent=1.20.6
+}}<onlyinclude>
+
+'''24w03a'''是[[Java版1.20.5]]的第3个快照，发布于2024年1月17日<ref>{{snap|24w03a|January 17, 2024}}</ref>，更改了[[出生点区块]]的默认大小，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[游戏规则]]'''
+* 加入了<code>spawnChunkRadius</code>游戏规则，用于控制出生点区块的大小。
+** 默认值为<code>2</code>，取值为<code>0</code>至<code>32</code>。
+*** 设置为<code>0</code>表示完全禁用出生点区块，设置为<code>10</code>可以与之前版本的出生点区块大小保持一致。
+
+'''协议'''
+* 加入了转移数据包。
+** 自定义服务器现在可以请求客户端使用转移数据包连接到另一个服务器。
+** 客户端转移时，将使用新的转移意图（ID<code>3</code>）连接到目标服务器，且可以使用新标志跳过身份验证。
+** 默认情况下，[[服务器]]不会接受转移，并会断开与客户端的连接，但可以通过将配置文件<code>server.properties</code>中的<code>accepts-transfers</code>设置为<code>true</code>来启用此功能。
+** 转移过程中维持资源包。
+* 加入了Cookie数据包。
+** Cookie数据包允许自定义服务器在客户端请求和存储数据。在登录、配置和游戏阶段可能请求Cookie，但只有在配置和游戏阶段可以存储数据。
+** Cookie只会在玩家在线时被服务器持续传输。
+** 每个Cookie大小可达5KiB。
+** 这允许服务器将诸如身份验证或自定义游戏数据之类的信息传递给新服务器。
+
+'''<samp>[[server.properties]]</samp>'''
+* 加入了<code>accepts-transfers</code>，默认为<code>false</code>，用于设置服务端是否接受转移数据包作为登录请求。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下方块标签：
+** {{cd|#armadillo_spawnable_on}}：{{cd|d=pretty|#animals_spawnable_on|#terracotta|red_sand|coarse_dirt}}。
+*** [[犰狳]]可以在这些方块上生成。
+* 加入了以下物品标签：
+** {{cd|#chest_armor}}：{{cd|d=pretty|leather_chestplate|chainmail_chestplate|golden_chestplate|iron_chestplate|diamond_chestplate|netherite_chestplate}}。
+*** 属于胸部[[盔甲]]（[[胸甲]]）的物品。
+** {{cd|#foot_armor}}：{{cd|d=pretty|leather_boots|chainmail_boots|golden_boots|iron_boots|diamond_boots|netherite_boots}}。
+*** 属于脚部盔甲（[[靴子]]）的物品。
+** {{cd|#head_armor}}：{{cd|d=pretty|leather_helmet|chainmail_helmet|golden_helmet|iron_helmet|
+diamond_helmet|netherite_helmet|turtle_helmet}}。
+*** 属于头部盔甲（[[头盔]]）的物品。
+** {{cd|#leg_armor}}：{{cd|d=pretty|leather_leggings|chainmail_leggings|golden_leggings|iron_leggings|diamond_leggings|netherite_leggings}}。
+*** 属于腿部盔甲（[[护腿]]）的物品。
+** {{cd|#skulls}}：{{cd|d=pretty|player_head|creeper_head|zombie_head|skeleton_skull|wither_skeleton_skull|dragon_head|piglin_head}}。
+*** 属于[[生物头颅]]的物品。
+** {{cd|#enchantable/armor}}：{{cd|d=pretty|#foot_armor|#leg_armor|#chest_armor|#head_armor}}。
+*** 可以附上适用于盔甲的[[魔咒]]的物品。
+** {{cd|#enchantable/bow}}：{{cd|bow}}。
+*** 可以附上适用于[[弓]]的魔咒的物品。
+** {{cd|#enchantable/chest_armor}}：{{cd|#chest_armor}}。
+*** 可以附上适用于胸甲的魔咒的物品。
+** {{cd|#enchantable/crossbow}}：{{cd|crossbow}}。
+*** 可以附上适用于[[弩]]的魔咒的物品。
+** {{cd|#enchantable/durability}}：{{cd|d=pretty|#foot_armor|#leg_armor|#chest_armor|#head_armor|elytra|shield|#swords|#axes|#pickaxes|#shovels|#hoes|bow|crossbow|trident|flint_and_steel|shears|brush|fishing_rod|carrot_on_a_stick|warped_fungus_on_a_stick}}。
+*** 可以附上影响[[耐久度]]的魔咒的物品。
+** {{cd|#enchantable/equippable}}：{{cd|d=pretty|#foot_armor|#leg_armor|#chest_armor|#head_armor|elytra|#skulls|carved_pumpkin}}。
+*** 可以附上可装备（Equippable）魔咒的物品。<!-- Curse of Binding -->
+** {{cd|#enchantable/fishing}}：{{cd|fishing_rod}}。
+*** 可以附上适用于[[钓鱼竿]]的魔咒的物品。
+** {{cd|#enchantable/foot_armor}}：{{cd|#foot_armor}}。
+*** 可以附上适用于靴子的魔咒的物品。
+** {{cd|#enchantable/head_armor}}：{{cd|#head_armor}}。
+*** 可以附上适用于头盔的魔咒的物品。
+** {{cd|#enchantable/leg_armor}}：{{cd|#leg_armor}}。
+*** 可以附上适用于护腿的魔咒的物品。
+** {{cd|#enchantable/mining}}：{{cd|d=pretty|#axes|#pickaxes|#shovels|#hoes|shears}}。
+*** 可以附上影响挖掘速度的魔咒的物品。<!-- Efficiency -->
+** {{cd|#enchantable/mining_loot}}：{{cd|d=pretty|#axes|#pickaxes|#shovels|#hoes}}。
+*** 可以附上影响挖掘[[掉落物]]的魔咒的物品。<!-- Silk Touch -->
+** {{cd|#enchantable/sword}}：{{cd|swords}}。
+*** 可以附上适用于[[剑]]的魔咒的物品。
+** {{cd|#enchantable/trident}}：{{cd|trident}}。
+*** 可以附上适用于[[三叉戟]]的魔咒的物品。
+** {{cd|#enchantable/vanishing}}：{{cd|d=pretty|#enchantable/durability|compass|carved_pumpkinskulls}}。
+*** 可以附上可使[[物品]]消失的魔咒的物品。<!-- Curse of Vanishing -->
+** {{cd|#enchantable/weapon}}：{{cd|d=pretty|#swords|#axes}}。
+*** 可以附上适用于武器的魔咒的物品。
+* 加入了以下实体类型标签：
+** {{cd|#aquatic}}：{{cd|d=pretty|turtle|axolotl|guardian|elder_guardian|cod|pufferfish|salmon|tropical_fish|dolphin|squid|glow_squid|tadpole}}。
+*** 被视为[[水生生物]]的实体。
+** {{cd|#arthropod}}：{{cd|d=pretty|bee|endermite|silverfish|spider|cave_spider}}。
+*** 被视为[[节肢生物]]的实体。
+** {{cd|#ignores_poison_and_regen}}：{{cd|#undead}}。
+*** 免疫[[中毒]]和[[生命恢复]]效果的实体。
+** {{cd|#illager}}：{{cd|d=pretty|evoker|illusioner|pillager|vindicator}}。
+*** 被视为[[灾厄村民]]的实体。
+** {{cd|#illager_friends}}：{{cd|#illager}}。
+*** 被灾厄村民视为盟友的实体（不包括在其他队伍中的）。
+** {{cd|#inverted_healing_and_harm}}：{{cd|#undead}}。
+*** [[瞬间治疗]]和[[瞬间伤害]]会对其产生相反效果的实体。
+** {{cd|#not_scary_for_pufferfish}}：{{cd|d=pretty|turtle|guardian|elder_guardian|cod|pufferfish|salmon|tropical_fish|dolphin|squid|glow_squid|tadpole}}。
+*** 不会使[[河豚]]膨胀的实体。
+** {{cd|#sensitive_to_bane_of_arthropods}}：{{cd|#arthropod}}。
+*** [[节肢杀手]]魔咒会对其产生额外伤害的实体。
+** {{cd|#sensitive_to_impaling}}：{{cd|#aquatic}}。
+*** [[穿刺]]魔咒会对其产生额外伤害的实体。
+** {{cd|#wither_friends}}：{{cd|#undead}}。
+*** 不被[[凋灵]]视为目标，也不会对凋灵造成伤害的实体。
+
+== 更改 ==
+=== 物品 ===
+'''[[犰狳鳞甲]]、[[狼铠]]和[[犰狳刷怪蛋]]'''
+* 更改了纹理。
+
+=== 生物 ===
+'''[[犰狳]]'''
+* 更改了纹理。
+* 现在会生成于[[恶地]]、[[疏林恶地]]和[[风蚀恶地]]。
+
+'''[[蜘蛛]]和[[洞穴蜘蛛]]'''
+* 现在会远离未蜷缩的犰狳。
+
+'''[[狼]]'''
+* 更改了狼身上的项圈和[[狼铠]]的纹理。
+
+=== 常规 ===
+'''[[属性]]'''
+* 将{{cd|generic.block_interaction_range}}重命名为{{cd|player.block_interaction_range}}。
+* 将{{cd|generic.entity_interaction_range}}重命名为{{cd|player.entity_interaction_range}}。
+
+'''[[附魔机制|附魔]]'''
+* 现在[[斧]]可以通过附魔获得[[锋利]]、[[亡灵杀手]]、[[节肢杀手]]。
+* 现在[[头盔]]、[[护腿]]、[[靴子]]可以通过附魔获得[[荆棘]]。
+
+'''[[进度触发器]]'''
+* 加入了触发器<code>default_block_use</code>，当玩家与方块进行默认交互时触发，例如打开一扇门。
+* 加入了触发器<code>any_block_use</code>，当玩家与方块进行任何交互时触发，例如对着方块{{ctrl|使用}}物品或进行默认交互。
+
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>28</code>。
+
+'''[[实体数据格式]]'''
+* 在[[村民]]的交易项NBT标签中加入了<code>ignore_tags</code>NBT标签。若设置为<code>true</code>，此项[[交易]]将不检查物品的NBT标签是否与预期物品的NBT标签一致。
+
+'''[[菜单屏幕]]'''
+* 现在使用{{key|Tab}}或方向键导航进入或退出任意菜单时都会设置默认焦点。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>24</code>。
+* 调整了<code>ttf</code>字体提供器的转换功能，使其具有更合理的默认值。
+** <code>shift</code>不再被双重应用，而以直接在游戏UI中显示一些像素替代。
+** 现在字体的字身框与游戏UI的像素大小所匹配，而不再匹配字体的升降部（字面框）之间的距离。
+** 现在字体基线的位置与默认字体一致（低于顶线<code>7</code>像素）。
+
+'''[[出生点区块]]'''
+* 出生点区块的大小从10（19×19强加载区块）更改为2（3×3强加载区块），以降低内存使用和CPU负荷，减少加载时间。
+
+'''[[横扫之刃]]'''
+* ID由<code>sweeping</code>改为<code>sweeping_edge</code>。
+
+'''[[Java版标签|标签]]'''
+* 将{{cd|#trimmable_armor}}物品标签的值替换为{{cd|d=pretty|#chest_armor|#foot_armor|#head_armor|#leg_armor}}。
+
+'''常规'''
+* 当[[实体]]离开或进入[[末地]]时，其到达的区域将保持加载状态<code>15</code>秒，以与[[下界传送门]]的行为相匹配。
+
+== 更改（实验性） ==
+=== 方块 ===
+'''[[铜格栅]]'''
+* 现在使用[[切石机]]将[[铜块]]加工为铜格栅时会输出1个铜格栅，而不是4个。
+
+'''[[合成器]]'''
+* 更改了模型UV映射，现在顶面纹理不再反转。
+
+=== 生物 ===
+'''[[旋风人]]'''
+* 现在会反弹所有[[弹射物]]，并且反弹的弹射物会朝发射者的方向重新射出。
+* 现在被玩家或驯服的狼杀死后会掉落{{xp|10}}，而不是{{xp|5}}。
+* 更改了杆的底面纹理，使之更契合相邻纹理的颜色。
+
+=== 游戏内容 ===
+'''[[交易]]'''
+* 现在针叶林盔甲匠收购的盔甲无视耐久度。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 将{{cd|d=pretty|#deflects_arrows|#deflects_tridents}}实体类型标签合并为{{cd|#deflects_projectiles}}。
+
+== 修复 ==
+{{fixes|fixedin=24w03a|showdesc=1
+|;old
+|155857|命令{{cmd|team|link=none}}不会影响灾厄村民和女巫的AI。
+|171981|燃料燃烧时间映射在每次物品被放入熔炉时都会重新创建，而不会被缓存。
+|187372|调试屏幕中FPS限制与垂直同步或图像品质间没有空格。
+|219967|当接收到无效ID的数据包时，会发生<code>IndexOutOfBoundsException</code>而不是“Bad packet ID”消息。
+|260889|玩家可以在放置距离外的方块上使用水桶和熔岩桶。
+|261596|工作台的“搜索”键盘快捷键无法使用。
+|265273|使用{{key|Tab}}键在创建世界屏幕的标签页列表中导航时，未通过突出显示或渲染边界来示明聚焦状态。
+|265520|切换连接协议有时会产生错误。
+|265749|按钮文本或字段的值改变时，提示框会闪烁。
+|266078|合成配方与切石配方输出的铜格栅不一致。
+|266532|旋风人会被某些弹射物击中。
+|267044|刻状态字符串中词语用法不一致。
+|267045|部分与刻有关的字符串缺少冠词，表述不清。
+|267086|通过{{cmd|tick|link=none}}冻结游戏后，指南针无法正确指示出生点位置。
+|267104|旋风人的杆的底面纹理不正确，与相邻颜色不契合。
+|267149|合成器顶面的UV纹理映射是反转的。
+|267433|光标持有相同物品时使用{{key|Shift}}双击不会转移物品。
+|267465|Realms上传世界错误：<code>Cannot invoke "ctt.c()" because "this.b" is null</code>。
+|;dev
+|267366|无法对幼年犰狳使用蜘蛛眼来加速成长。
+|267367|狼受到伤害时，狼铠也会闪烁。
+|267371|潜影贝判定箱的缩放比例不受<code>generic.scale</code>属性影响。
+|267377|对红树树叶使用骨粉时不再产生粒子。
+|267378|盔甲架判定点不随<code>generic.scale</code>属性改变。
+|267379|对缠根泥土使用骨粉时不再产生粒子。
+|267380|无法打开超出默认放置距离的容器的物品栏。
+|267456|对<code>item_used_on_block</code>进度准则的更改破坏了原有功能。
+|267809|狼铠字幕中“armor”一词大写不当。
+|;previous
+|267383|无法在属性<code>generic.block_interaction_range</code>扩展部分的范围内放置水和熔岩。
+|267384|未使用且重复的狼铠声音事件。
+|267385|属性<code>generic.entity_interaction_range</code>受限于<code>generic.block_interaction_range</code>。
+|267388|扫刷犰狳时的字幕与其他物品使用时的字幕不一致。
+|267389|犰狳在繁殖时，有时不会靠近彼此。
+|267392|玩家即便处于旁观模式，也会惊吓到犰狳。
+|267395|犰狳在受到摔落伤害后会恐慌。
+|267397|受食物吸引的犰狳和幼年犰狳距离玩家过远。
+|267398|犰狳展开时不会播放展开声音。
+|267402|搭乘船的犰狳在船转向时，头部渲染效果异常。
+|267404|受惊的犰狳被推上船后，仍会受乘船玩家惊吓。
+|267405|身上有乘客的犰狳在受惊后可以移动。
+|267406|犰狳的<code>Silent</code>NBT标签设为“1b”时仍播放落地和蜷缩音效。
+|267413|给犰狳喂食蜘蛛眼时，不会屏蔽玩家的进食操作。
+|267416|史莱姆产生的粒子不受属性<code>generic.scale</code>影响。
+|267417|属性<code>generic.scale</code>小于0.06时，站在非完整固体方块上会显示窒息覆盖图。
+|267418|监守者的音波攻击不受属性<code>generic.scale</code>属性影响。
+|267420|船的放置不受自定义后的属性<code>generic.block_interaction_range</code>影响。
+|267422|属性<code>entity_interaction_range</code>被分类为<code>generic</code>，却不对生物产生影响。
+|267427|实体睡眠时渲染的偏移量不受属性<code>generic.scale</code>影响。
+|267428|幻翼翅膀的粒子不受属性<code>generic.scale</code>影响。
+|267434|属性<code>generic.scale</code>的值较大的倒立生物显示在其碰撞箱上方。
+|267435|幼年犰狳不会一直紧跟其双亲。
+|267454|幼年炽足兽的大小看起来与普通炽足兽相同。
+|267470|从信标获得的生命恢复状态效果不再对玩家生效。
+|267479|物品栏显示尺寸受<code>generic.scale</code>属性影响。
+|267497|幼年犰狳在蜷缩过程中，发出声音的音调没有变高。
+|267536|狼铠侧面的像素不一致。
+|267538|将可放置方块塞入饰纹陶罐的同时也会放下方块。
+|267565|属性<code>generic.scale</code>的值过低使玩家在水下也能呼吸。
+|267588|将物品放入饰纹陶罐时不再播放手部动画。
+|267706|唤魔者和幻术师生成的粒子不受属性<code>generic.scale</code>影响。
+|267707|凋灵的粒子不受属性<code>generic.scale</code>影响。
+|267708|凋灵头颅弹射物攻击不受属性<code>generic.scale</code>影响。
+|267725|玩家经验等级不再于生命条和饥饿条上层渲染。
+|267726|对水下方块使用骨粉时不再产生粒子。
+|267806|光标持有相同物品时使用{{key|Shift}}单击会将物品堆叠。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:24w03a]]
+[[en:Java Edition 24w03a]]
+[[es:Java Edition 24w03a]]
+[[fr:Version Java 24w03a]]
+[[ja:Java Edition 24w03a]]
+[[lzh:二四週〇三甲]]
+[[pt:Edição Java 24w03a]]
+[[ru:24w03a (Java Edition)]]
+[[uk:24w03a (Java Edition)]]

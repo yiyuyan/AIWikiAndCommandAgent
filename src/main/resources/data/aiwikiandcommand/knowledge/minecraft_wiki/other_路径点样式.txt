@@ -1,0 +1,60 @@
+# 页面: 路径点样式
+# 来源: https://zh.minecraft.wiki/w/%E8%B7%AF%E5%BE%84%E7%82%B9%E6%A0%B7%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:37
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+'''路径点样式（Waypoint Style）'''是生物的路径点在[[定位栏]]上显示的指示器图标样式。
+
+== 定义格式 ==
+路径点样式定义文件都在[[资源包]]{{filepath|assets/<''命名空间''>/waypoint_style}}目录内，且均为JSON文件。
+
+此文件的格式如下：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|int|near_distance}}：（{{interval|left=0|right=60000000}}，默认为128）路径点样式使用{{nbt|list|sprites|required=1}}第一个纹理的距离的最大值。
+** {{nbt|int|far_distance}}：（{{interval|left=0|right=60000000}}，默认为332）路径点样式使用{{nbt|list|sprites|required=1}}最后一个纹理的距离的最小值，值必须大于{{nbt|int|near_distance}}。
+** {{nbt|list|sprites|required=1}}：（不能为空）路径点样式可用的纹理列表。
+*** {{nbt|string}}：（命名空间ID）一个纹理。
+</div>
+
+== 定义行为 ==
+路径点样式使用的纹理属于GUI纹理，由[[纹理图集]]<code>minecraft:gui</code>生成，游戏在渲染时将纹理解析为{{filepath|assets/<''命名空间''>/textures/gui/sprites/hud/locator_bar_dot/<''路径''>.png}}。
+
+路径点样式定义了指示器使用的图标纹理与距离变化的关系。假设玩家可以接收到路径点，且距离此路径点的距离为<math>d</math>，纹理列表{{nbt|list|sprites|required=1}}共<math>n</math>个元素。
+
+* 如果<math>d</math>小于{{nbt|int|near_distance}}，则使用纹理列表的第一个纹理。
+* 如果<math>d</math>大于{{nbt|int|far_distance}}，则使用纹理列表的最后一个纹理。
+* 如果<math>d</math>在{{nbt|int|near_distance}}与{{nbt|int|far_distance}}之间，则进行[[wzh:线性插值|线性插值]]保证纹理随距离均匀变化，即使用纹理列表的第（<math>\lfloor(\frac{d - neardistance}{fardistance - neardistance})\rfloor \times (n - 2) + 1</math>）个纹理。除非纹理列表的元素个数小于3，否则此距离区间永远不会使用纹理列表的第一个和最后一个纹理。
+
+== 内置样式 ==
+游戏内置了一些路径点样式。其中<code>default</code>为默认样式，即不指定路径点样式或使用命令{{cmd|waypoint ... style reset}}时使用的样式。
+
+{|class="wikitable"
+! 路径点样式 !! {{nbt|int|near_distance}} !! {{nbt|int|far_distance}} !! 图标变化距离
+|-
+| default || 128 || 332 || 128、230、332
+|-
+| bowtie || 64 || 332 || 64、153.33、242.66、332
+|}
+
+如果路径点样式不存在或加载失败，则游戏自动使用无效样式。无效样式是固定使用[[无效纹理]]的路径点样式，其被硬编码于游戏中且未分配ID。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.6|dev=25w17a|加入了路径点样式。}}
+|{{HistoryLine||1.21.9|dev=25w33a|现在游戏在插值区间选择纹理时，如果纹理列表的元素数量大于2，则会排除纹理列表的首个和最后一个纹理。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:资源包]]
+
+[[de:Wegpunktdarstellung]]
+[[en:Waypoint style]]
+[[ja:ウェイポイントのスタイル]]
+[[pt:Estilo do marcador]]

@@ -1,0 +1,204 @@
+# 页面: 砂轮
+# 来源: https://zh.minecraft.wiki/w/%E7%A0%82%E8%BD%AE
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 功能方块, 可再生资源, 基岩版独有信息, 方块
+# 抓取时间: 2026-07-14 17:32:57
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|image=Grindstone.png
+|invimage=Grindstone
+|invimage2=----
+|invimage3=Grindstone BE
+}}
+
+'''砂轮（Grindstone）'''是可用于修补损坏的物品并移除魔咒的方块。
+
+== 生成 ==
+=== 自然生成 ===
+[[File:Weaponsmith shelter.jpg|thumb|right|在针叶林村庄的武器匠铺内生成的砂轮]]
+砂轮会自然生成于[[村庄]]的武器匠铺里。
+
+砂轮还会自然生成于[[古迹废墟]]的独栋圆顶屋中。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Stick
+|B1=Stone Slab
+|C1=Stick
+|A2= Any Planks
+|C2= Any Planks
+|Output= Grindstone
+|type= Decoration block
+}}
+
+== 破坏 ==
+挖掘砂轮的合适工具是镐。砂轮需要木镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+砂轮被破坏后会掉落自身。
+
+== 用途 ==
+砂轮不能被[[活塞]]移动。
+
+{{in|BE}}砂轮会在附着方块移动、移除或被破坏的情况下被破坏并掉落自身。
+
+=== 修复和祛魔 ===
+{{Filetr|Grindstone GUI.png|352px|缩略图|右|砂轮的界面}}
+
+按{{ctrl|使用}}键可打开砂轮的界面，其有三个槽位：两个输入槽和一个产物槽。
+
+砂轮的两个输入物品槽位中，最上方的槽位放置'''目标物品'''，下方的槽位则放置'''牺牲物品'''。砂轮操作可以不需要牺牲物品。
+
+砂轮会对目标物品进行以下操作后生成'''产物'''：
+* 所有输入物品的所有非诅咒魔咒会被移除。计算所有被移除的魔咒的[[魔咒#魔咒属性|最小修正附魔等级]]之和，除以2后向上取整得到<code>x</code>，随后砂轮在取出产物时弹出<code>x + random.nextInt(x)</code>经验值。例如，移除火焰保护I将会提供5–9经验值。
+* 若提供了牺牲物品：
+** 目标物品会获得牺牲物品的剩余[[耐久度]]，然后再额外获得5%剩余耐久度。
+** 目标物品会获得牺牲物品的所有未被移除的魔咒，且无视添加魔咒通常会受到的限制<ref>{{bug|MC-274663}}</ref>。
+* 若目标物品的[[铁砧机制#累积惩罚|累积惩罚操作数]]高于物品上未被移除的魔咒数量，操作数会被降低到魔咒数量。
+* 目标物品中的所有其他物品数据都会被保留，如物品名称。
+* 若目标物品是[[附魔书]]，且所有魔咒都能被砂轮清除，则产物会变为[[书]]。
+
+在以下情况时，砂轮不能提供输出：
+* 输入单个没有魔咒{{only|be|for=且没有累积惩罚操作数}}的物品
+* 输入两个不同的物品
+* 输入两个物品都是附魔书
+* {{only|je|for=输入两个物品但目标物品无法破坏}}
+
+取出产物会确认砂轮的操作，并移除所有输入物品。
+
+若操作无效，砂轮会像[[铁砧]]一样，箭头上会出现一个红叉。
+
+=== 更改村民职业 ===
+如果一个砂轮没有被[[村民]]认领，则附近的任意一个失业村民有机会转变职业为[[武器匠]]。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Grindstone use1.ogg
+|sound2=Grindstone use2.ogg
+|sound3=Grindstone use3.ogg
+|subtitle={{tp|subtitles.block.grindstone.use}}
+|id=block.grindstone.use
+|source={{tp|soundCategory.block}}
+|description=使用砂轮
+|translationkey=subtitles.block.grindstone.use
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=block.grindstone.grindstone1.wav
+|sound2=block.grindstone.grindstone2.wav
+|sound3=block.grindstone.grindstone3.wav
+|source=方块
+|description=使用砂轮
+|id=block.grindstone.use
+|typeid=block.grindstone.use
+|soundvolume=0.5
+|soundpitch
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Grindstone
+|spritetype=block
+|nameid=grindstone
+|showblocktags=je
+|blocktags={{GameTag|blocks|grindstone}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Grindstone
+|spritetype=block
+|nameid=grindstone
+|showblocktags=be
+|blocktags={{GameTagBE|block|grindstone}}
+|foot=1
+}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+== 成就 ==
+{{load achievements|disenchanted}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w44a|[[File:Grindstone JE1 BE1.png|32px]] 加入了砂轮。
+|砂轮只能在[[创造模式物品栏]]内获得，且没有任何用途。}}
+|{{HistoryLine|||dev=18w45a|为砂轮的脚加入了cullface参数。}}
+|{{HistoryLine|||dev=18w48a|[[File:Grindstone JE2 BE2.png|32px]] 更改了砂轮的纹理。
+|加入了砂轮的合成配方。
+|砂轮现在会自然生成于平原村庄的武器匠铺内。
+|砂轮现在可以用于修复损坏的物品。
+|砂轮可以移除一个物品的所有非诅咒魔咒，移除魔咒时玩家会得到一些经验。}}
+|{{HistoryLine|||dev=18w49a|砂轮现在会自然生成于热带平原和积雪的冻原村庄内。}}
+|{{HistoryLine|||dev=18w50a|砂轮现在会自然生成于沙漠和针叶林村庄内。}}
+|{{HistoryLine|||dev=19w02a|现在砂轮的爆炸抗性从1200降低至6。<ref>{{bug|MC-140322|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=19w03a|为砂轮加入了音效。}}
+|{{HistoryLine|||dev=19w03c|砂轮现在有正确的{{cd|cullface}}参数。}}
+|{{HistoryLine|||dev=19w11a|砂轮现在可作为[[武器匠]]村民的工作站点方块。}}
+|{{HistoryLine||1.20|dev=23w16a|砂轮现在可以在[[古迹废墟]]中生成。}}
+|{{HistoryLine||1.20.5|dev=24w10a|砂轮现在不接受具有{{nbt|compound|unbreakable}}组件但没有魔咒的物品。
+|现在如果在砂轮中放入两个物品，则上方物品不能具有{{nbt|compound|unbreakable}}组件，输出物品不会继承下方物品的该组件。
+|砂轮现在不可同时为两本附魔书祛魔。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.9.0|exg=1|dev=1.9.0.2|[[File:Grindstone JE1 BE1.png|32px]] 加入了砂轮，但没有任何用途。}}
+|{{HistoryLine||1.10.0|exg=1|dev=1.10.0.3|砂轮现在会自然生成于村庄的武器匠铺内。
+|[[File:Grindstone JE2 BE2.png|32px]] 更改了砂轮的纹理。
+|加入了砂轮的合成配方。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|砂轮不再属于[[实验性玩法]]。
+|砂轮现在可以用于修复损坏的物品。
+|砂轮不再免疫爆炸。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.22|砂轮现在可以在[[古迹废墟]]中生成。}}
+|{{HistoryLine|PS4}}
+|{{HistoryLine||1.91|[[File:Grindstone JE1 BE1.png|32px]] 加入了砂轮。}}
+|{{HistoryLine||1.92|[[File:Grindstone JE2 BE2.png|32px]] 更改了砂轮的纹理。}}
+}}
+
+== 你知道吗 ==
+* 在砂轮加入之前，[[MINECON Earth 2017]]提出了一种不同的移除魔咒的方法：向被称为“[[MINECON Earth 2017#生物C|超级饥渴]]”的生物喂食物品，但该生物在生物投票中输给了[[幻翼]]。
+
+== 画廊 ==
+<gallery>
+PlacedGrindstones.png|在墙上、地上和天花板的砂轮
+Grindstones in village.png|村庄中生成的砂轮
+</gallery>
+
+== 參考 ==
+<references/>
+
+== 导航 ==
+{{Navbox blocks|functional blocks}}
+
+[[Category:功能方块]]
+
+[[cs:Brusný kámen]]
+[[de:Schleifstein]]
+[[en:Grindstone]]
+[[es:Afiladora]]
+[[fr:Meule]]
+[[it:Mola]]
+[[ja:砥石]]
+[[ko:숫돌]]
+[[lzh:礪]]
+[[pl:Kamień szlifierski]]
+[[pt:Rebolo]]
+[[ru:Точило]]
+[[th:หินลับมีด]]
+[[uk:Точило]]

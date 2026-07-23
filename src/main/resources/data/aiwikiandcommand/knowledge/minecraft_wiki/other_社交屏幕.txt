@@ -1,0 +1,106 @@
+# 页面: 社交屏幕
+# 来源: https://zh.minecraft.wiki/w/%E7%A4%BE%E4%BA%A4%E5%B1%8F%E5%B9%95
+# 分类: 
+# 抓取时间: 2026-07-14 17:33:06
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|举报|檢舉}}
+{{Exclusive|Java}}
+'''社交屏幕（Social Interactions screen）'''是用于屏蔽特定[[玩家]]发言及举报玩家的界面。
+
+== 用途 ==
+在多人游戏中，按下指定键（默认为{{keys|P}}）可以打开社交屏幕。“{{tp|gui.socialInteractions.tab_all}}”栏目展示所有玩家，“{{tp|gui.socialInteractions.tab_hidden}}”栏目显示了聊天记录被隐藏的玩家，“{{tp|gui.socialInteractions.tab_blocked}}”栏目显示了根据微软账户屏蔽的玩家。
+
+社交屏幕只能在[[多人游戏]]世界里打开，在单人游戏中尝试进入社交屏幕会回傳消息“{{tp|multiplayer.socialInteractions.not_available}}”。
+
+在社交屏幕中还可以举报其他玩家聊天中的不当发言、玩家皮肤和玩家名称。其中可供举报的聊天类型有：
+* {{tp|gui.abuseReport.reason.sexually_inappropriate}}
+** {{tp|gui.abuseReport.reason.sexually_inappropriate.description}}
+* {{tp|gui.abuseReport.reason.generic}}
+** {{tp|gui.abuseReport.reason.generic.description}}
+* {{tp|gui.abuseReport.reason.hate_speech}}
+** {{tp|gui.abuseReport.reason.hate_speech.description}}
+* {{tp|gui.abuseReport.reason.harassment_or_bullying}}
+** {{tp|gui.abuseReport.reason.harassment_or_bullying.description}}
+* {{tp|gui.abuseReport.reason.self_harm_or_suicide}}
+** {{tp|gui.abuseReport.reason.self_harm_or_suicide.description}}
+* {{tp|gui.abuseReport.reason.imminent_harm}}
+** {{tp|gui.abuseReport.reason.imminent_harm.description}}
+* {{tp|gui.abuseReport.reason.defamation_impersonation_false_information}}
+** {{tp|gui.abuseReport.reason.defamation_impersonation_false_information.description}}
+* {{tp|gui.abuseReport.reason.alcohol_tobacco_drugs}}
+** {{tp|gui.abuseReport.reason.alcohol_tobacco_drugs.description}}
+* {{tp|gui.abuseReport.reason.child_sexual_exploitation_or_abuse}}
+** {{tp|gui.abuseReport.reason.child_sexual_exploitation_or_abuse.description}}
+* {{tp|gui.abuseReport.reason.terrorism_or_violent_extremism}}
+** {{tp|gui.abuseReport.reason.terrorism_or_violent_extremism.description}}
+* {{tp|gui.abuseReport.reason.non_consensual_intimate_imagery}}
+** {{tp|gui.abuseReport.reason.non_consensual_intimate_imagery.description}}
+
+可附加评论以提供与举报相关的更多的细节和信息。
+
+[[Realms]]上的聊天在未被举报的情况下也会被自动监控。
+
+举报可能的处理结果有：
+* 不采取任何措施。
+* 临时或永久禁止多人游戏。
+* 禁止使用被举报的皮肤。
+* 禁止使用被举报的玩家名称。
+被封禁的玩家进入游戏后会收到封禁通知，告知该玩家被封禁的原因和封禁时长。如果皮肤被封禁，被举报玩家以及其他所有使用相同皮肤的玩家将会被重置为默认皮肤。如果玩家名称被封禁，被举报玩家会被禁止进行多人游戏，直到其更改名称。
+
+只有使用Mojang分发给Minecraft账户的密钥签名过的消息可被举报。这意味着玩家可以使用[[Mod]]发送未签名的消息来避免被举报。然而，这类未签名的消息会被客户端标记为“未经验证”，并可以通过在[[选项]]中的聊天设置中启用“{{tp|options.onlyShowSecureChat}}”隐藏这类消息；如果服务器在[[server.properties]]中启用了<code>enforce-secure-profile</code>，玩家无法发送未经验证的消息。此外，由于[[定制服务器|第三方服务器]]所用软件的技术原因（如更改聊天样式的[[Mod]]会将玩家消息转化为服务器消息），或者服务器管理员主动安装禁用举报的Mod等，大部分第三方服务器并未启用举报功能。这意味着这类服务器上所有玩家的消息都不能被举报，且“{{tp|options.onlyShowSecureChat}}”无法隐藏任何消息，因其并不能隐藏服务器消息。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16.4|dev=pre1|加入了社交屏幕。}}
+|{{HistoryLine|||dev=pre2|加入了社交屏幕下的“{{tr|已屏蔽|已封鎖}}”栏目。
+|玩家的状态现在会在社交屏幕自己的名称下列出。
+|已屏蔽的玩家发来的Realms邀请现在会被隐藏。
+|一些社交屏幕的UI元素纹理被修改或移除。}}
+|{{HistoryLine||1.19.1|dev=22w24a|现在可以在社交屏幕中举报玩家在聊天区中的不当发言。}}
+|{{HistoryLine|||dev=pre1|现在被举报的玩家经过{{tr|监督员|仲裁者|審核員}}审核并认定存在违规行为后会被封禁，从而无法进行[[多人游戏]]和加入[[Realms]]。
+|现在被封禁的玩家进入游戏后会收到封禁通知，告知该玩家被封禁的原因和封禁时长。}}
+|{{HistoryLine|||dev=pre2|未使用安全聊天系统签名或已被服务器篡改的消息现在会被标记。
+|消息的信任状态现在以彩色文本和图标显示。将鼠标悬停在该图标上可提供有关信任状态的更多信息。}}
+|{{HistoryLine|||dev=pre3|现在最近一个发送消息的玩家会被放在玩家列表的最上方。}}
+|{{HistoryLine|||dev=pre4|服务器里的不安全的联系信息现在会以{{cd|[不安全]}}前缀标记。
+|聊天信息的顺序现在是加密的。}}
+|{{HistoryLine|||dev=pre5|输入聊天消息时，显示的聊天消息的签名状态现在用彩色指示器显示。
+|当聊天信息预览等待签名时，聊天预览的背景会稍微变淡。}}
+|{{HistoryLine|||dev=pre6|调整了用于发送消息的签名指示器的颜色，以提高可访问性。}}
+|{{HistoryLine||1.19.3|dev=22w42a|移除了聊天预览。}}
+|{{HistoryLine||1.20.2|dev=23w32a|客户端接收到无效聊天消息时不再会断开连接，而是显示一条占位消息。}}
+|{{HistoryLine|||dev=23w33a|现在玩家可以举报其他玩家的皮肤和名称。
+|加入了“{{tr|我想举报该玩家|我想要檢舉此玩家|我想舉報此玩家}}”举报类型。
+|更改了部分举报类型的名称和描述。}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了“{{tr|性相关不当内容|性相關不當內容|性相關不當內容}}”举报类型。
+|移除了“{{tr|诽谤|誹謗|誹謗}}”和“{{tr|威胁伤害他人|恐嚇加害他人|威脅傷害他人}}”举报类型。}}
+|{{HistoryLine||1.21.9|dev=25w33a|现在在服务器中见过的玩家总会在社交屏幕中显示，即使他们处于离线状态。}}
+}}
+
+== 画廊 ==
+{{gallery|
+Social Interactions Screen.png|convert|社交屏幕的截图
+Social interactions screen hidden.png|convert|社交屏幕的“已隐藏”栏目
+Social interactions screen blocked.png|convert|社交屏幕的“已屏蔽”栏目
+Report Type.png|convert|选择举报类型
+Report Chat.png|convert|举报聊天
+Report Skin.png|convert|举报皮肤
+Report Player Name.png|convert|举报玩家名称
+}}
+
+== 参见 ==
+* [[聊天]]
+* [[服务器]]
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[de:Interaktionsfenster]]
+[[en:Social interactions]]
+[[es:Interacciones sociales]]
+[[fr:Interactions sociales]]
+[[ja:社交設定画面]]
+[[pt:Interações sociais]]
+[[ru:Экран социальных взаимодействий]]

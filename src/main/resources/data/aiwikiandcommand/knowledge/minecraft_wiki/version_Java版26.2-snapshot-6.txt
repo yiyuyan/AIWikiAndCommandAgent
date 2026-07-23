@@ -1,0 +1,186 @@
+# 页面: Java版26.2-snapshot-6
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8826.2-snapshot-6
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:39
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=26.2-snapshot-6
+|image=26.2-snapshot-6.jpg
+|image2=Java Edition 26.2-snapshot-6 Simplified.png\Java Edition 26.2-snapshot-6 Traditional.png\Java Edition 26.2-snapshot-6 Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2026年5月5日
+|jsonhash=6427e43fd34dd3d111fc084b8d933b9033dc27dd
+|clienthash=7926cea1792ec1065f006056dbd29d842a58c827
+|serverhash=8bdae5a048cd361668da1df06e81c4e590a36064
+|parent=26.2
+|prevparent=26.1.2
+|prev=26.2-snapshot-5
+|next=26.2-snapshot-7
+|nextparent=26.3
+}}<onlyinclude>
+'''26.2-snapshot-6'''是[[Java版26.2]]的第6个快照，发布于2026年5月5日<ref>{{article|minecraft-26-2-snapshot-6|Minecraft 26.2 Snapshot 6|May 05, 2026}}</ref>，加入了[[硫方怪]]的緩-{}-慢彈性原型及高温特殊原型，并修复了一些漏洞。
+
+== 新内容 ==
+=== 游戏内容 ===
+'''[[硫方怪原型]]'''
+* 加入了新的原型：
+** 緩-{}-慢彈性：低速度，高弹性，中等地面摩擦力和中等空气阻力。
+*** 吸收石{{tr|块|頭方塊}}和矿物{{tr|块|方塊|磚}}时使用。
+*** 具有浮力。
+* 加入了新的特殊原型：
+** 高温：与普通原型的属性相同，但是会像[[岩浆块]]一样伤害接触的实体。
+*** 吸收岩浆块时使用。
+*** 会对接触到的[[实体]]造成伤害。
+* 不再可以吸收红石块、沙砾、沙子和红沙。
+
+'''[[进度]]'''
+* 加入了1个新进度：
+** [[进度#advancements-anchor-husbandry.uh_oh|{{Advancement name|husbandry.uh_oh|zh|rev=1}}]]
+*** 让硫方怪吸收[[TNT]]获得。
+
+=== 常规 ===
+'''[[语言]]'''
+* 加入了加洛语、乌兹别克语和{{tr|沃罗语|佛羅語}}。
+
+'''[[Java版标签|标签]]'''
+* 物品标签：
+** 加入了下列标签：
+*** <code>#sulfur_cube_archetype/hot</code>
+*** <code>#sulfur_cube_archetype/slow_bouncy</code>
+
+== 更改 ==
+=== 世界生成 ===
+'''[[硫黄洞穴]]'''
+* 重新设计了所有[[硫黄涌泉]]地物的地表部分。
+* 更少生成于[[海洋]]、[[丘陵]]或[[山地]]下方。
+* 不再会生成[[花岗岩]]和[[凝灰岩]]。
+
+=== 方块 ===
+'''[[烈性硫黄]]'''
+* 现在间歇泉开始喷发和结束喷发时会被[[幽匿感测体]]检测到。
+* 更改了间歇泉喷发的音效。<!--官方写法有歧义，不用-->
+
+=== 生物 ===
+'''[[流浪商人]]'''
+* 现在会出售硫黄尖锥。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>105.0</code>。
+* 向<code>minecraft:sulfur_cube_archetype</code>注册表加入项目：
+** <code>hot</code>
+** <code>slow_bouncy</code>
+* 更新了<code>minecraft:sulfur_cube_archetype</code>注册表中的项目格式：
+** <code>explosion_fuse</code>已经被<code>explosion</code>取代：一个可选字段，如果存在，此原型的硫方怪会爆炸：
+*** <code>fuse</code>：正整数，爆炸的引燃时间。
+*** <code>power</code>：非负整数，爆炸威力。
+*** <code>causes_fire</code>：布尔值，爆炸是否产生火。
+** 加入了<code>contact_damage</code>：可选字段，如果存在，此原型的硫方怪会在实体尝试与其接触时造成伤害：
+*** <code>amount</code>：非负浮点数，造成的伤害大小。
+*** <code>damage_type</code>：伤害类型。
+*** <code>attribute_to_source</code>：布尔值，决定伤害是否由硫方怪造成。
+** 加入了<code>knockback_modifiers</code>：一个包含了多个修饰字段的字段，用于决定硫方怪被击退时的大小和方向。
+*** <code>horizontal_power</code>：浮点数，代表水平方向上的击退大小。
+*** <code>vertical_power</code>：浮点数，代表竖直方向上的击退大小。
+
+'''[[实体数据格式]]'''
+* 移除了生物的<code>HurtByTimestamp</code>标签，现在使用<code>ticks_since_last_hurt_by_mob</code>。
+
+'''[[表面规则]]'''
+* 修改了表面规则条件<code>noise_threshold</code>：
+** 加入了<code>is_3d</code>字段：布尔值，如果为<code>true</code>则表示在三维空间中评估噪声。
+*** 如果未指定，默认为<code>false</code>。
+* 移除了表面规则<code>noise_gradient</code>：
+** 现在可以被<code>noise_threshold</code>取代。
+
+'''[[已配置的地物]]'''
+* 加入了地物类型{{cd|weighted_random_selector}}：
+** 从给定的地物中按权重随机选择一个生成。
+** 格式：带有字段的对象：
+*** {{cd|features}}：地物和其权重的列表。
+* 修改了{{cd|large_dripstone}}：
+** 将{{cd|column_radius}}的最大值由{{cd|19}}减小到{{cd|16}}，以防止地物延伸到相邻区块。
+** 风速偏移现在会被钳制以保证整个滴水石（半径+风）保持在临近的区块中。
+* 修改了{{cd|root_system}}：
+** 加入了{{cd|level_test_distance}}字段，表示根系距离原点多远会检查现有地形。
+** 加入了{{cd|max_level_deviation}}字段，表示测试位置的地面高度和原始地面高度可以偏移多远。
+
+'''[[处理器列表]]'''
+* 修改了<code>minecraft:block_rot</code>结构处理器：
+** 现在会评估上一个方块处理器链处理后的方块状态，而不是总是使用结构的原始方块。
+*** 处理器链中的第一个处理器仍然始终对原始结构定义的方块进行评估。
+
+== 修复 ==
+{{fixes|fixedin=26.2 Snapshot 6|showdesc=1|new=1
+|;26.2前正式版的漏洞
+|248758|游戏日志记录到错误：{{cd|Detected setBlock in a far chunk}}。
+|302554|有发光效果的下落的方块不再显示发光轮廓线。
+|305239|正在向外扩展的世界边界会在重新进入世界时重置为其初始尺寸。
+|306778|夜晚天气改变时，夜视效果下的迷雾颜色不再平滑变化。
+|307043|在伤害生物的同时应用冰冻状态会导致{{cd|ticks_since_last_hurt_by_mob}}的值不正确。
+|307584|资源包或数据包选择屏幕中，选中包的边框会在按Enter时消失。
+|;dev
+|307281|{{cmd|item replace|link=none}}无法替换硫方怪槽位中的物品。
+|307297|硫方怪在细雪中时会颤抖但不会冰冻。
+|307310|烈性硫黄可能会不在水中生成。<!--
+|307323|硫黄洞穴会在地表生成。Reopened -->
+|307351|发射器射出的箭无法推动硫方怪。
+|307397|重锤击中硫方怪时，其效果不会生效。
+|307407|弹跳后的竖直速度没有考虑阻力。
+|307424|创造模式物品栏中雕纹朱砂和雕纹硫黄的位置不正确。
+|307482|吸收了方块的硫方怪不会被药箭施加状态效果。
+|307544|硫黄尖锥的地图基色不准确。
+|307560|流浪商人无法出售硫黄尖锥。
+|307667|发射器能让小型硫方怪吸收方块。
+|307673|硫黄洞穴的边缘为凝灰岩，使得它看起来小很多。
+|307674|击退魔咒对内含方块的硫方怪不起作用。
+|307684|被命名的硫方怪会在用铁桶装起并放出后消失。
+|307774|{{cd|bool(arg)}}SNBT操作对部分非零数值返回false。
+|307864|小型硫方怪重新开始生长后，喂食黏液球会使其在客户端长大。
+|;prev
+|307777|在某些情况下，旗帜上的图案不可见。
+|307778|激活吸收了TNT的硫方怪时不会播放手部的使用动画。
+|307779|烈性硫黄在世界生成后不再产生有毒气体。
+|307780|启用服务端管理协议时，服务端崩溃。
+|307782|硫黄涌泉间歇泉能推动飞行的创造模式玩家。
+|307783|被拴住的实体之间在视觉上有一条线。
+|307784|结构方块的旋转按钮没有正确禁用。
+|307785|间歇泉喷发时不产生游戏事件。
+|307797|玩家因硫方怪死亡时，{{cd|killed_by:sulfur_cube}}统计信息不增加。
+|307802|试图与内含点燃TNT的硫方怪交互时，玩家的手臂会挥动。
+|307803|硫方怪原型的{{cd|explosion_fuse}}被设为4以下的值时，硫方怪被爆炸激活会导致游戏崩溃。
+|307821|钟方块展示实体的钟架部分的发光轮廓总是白色。
+|307824|TNT爆炸被禁用时，试图点燃内含TNT的硫方怪不会显示提示信息。
+|307825|禁用TNT爆炸不会阻止已激活的内含TNT的硫方怪爆炸。
+|307829|{{cd|mob_griefing}}游戏规则设置为false时，吸收了TNT的硫方怪仍会爆炸。
+|307837|TNT爆炸被禁用时，试图激活内含TNT的硫方怪会消耗用于激活的物品。
+|307854|附魔了火焰附加武器无法激活内含TNT的硫方怪。
+|;private
+|1.|信标光束会渲染在下界雾的前方。（{{bug|MC-307517}}）
+}}</onlyinclude>
+
+== 影片 ==
+由[[slicedlime]]製作的影片：
+{{yt|sYyNYMwrotw}}
+{{yt|_43IURHB6DI}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|2026}}
+
+[[de:26.2-snapshot-6]]
+[[en:Java Edition 26.2 Snapshot 6]]
+[[es:Java Edition 26.2 Snapshot 6]]
+[[fr:Édition Java 26.2 Snapshot 6]]
+[[it:Java Edition 26.2 Snapshot 6]]
+[[ja:Java Edition 26.2 Snapshot 6]]
+[[lzh:爪哇版二六點二之快照六]]
+[[nl:26.2 Snapshot 6]]
+[[pt:Edição Java 26.2 Snapshot 6]]
+[[ru:26.2 Snapshot 6 (Java Edition)]]
+[[th:รุ่น Java 26.2 Snapshot 6]]
+[[uk:26.2 Snapshot 6 (Java Edition)]]

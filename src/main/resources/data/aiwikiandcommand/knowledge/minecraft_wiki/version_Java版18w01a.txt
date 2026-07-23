@@ -1,0 +1,137 @@
+# 页面: Java版18w01a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8818w01a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:20
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=18w01a
+|image=18w01a.png
+|image2=Java Edition 18w01a Simplified.png\Java Edition 18w01a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2018年1月3日
+|jsonhash=b1f57752ac2e0ead0fdd7434140bf2f5088cff40
+|clienthash=504f07f4a10f295522a57f2b1163298dc4a63103
+|serverhash=47a8d2bb4db5b5e3db6b7837c9f0fa17ea660448
+|parent=1.13
+|prevparent=1.12.2
+|prev=17w50a
+|next=18w02a
+|nextparent=1.13.1
+}}<onlyinclude>
+
+'''18w01a'''是[[Java版1.13]]的第12个快照，发布于2018年1月3日<ref>{{snap|18w01a|January 3, 2018}}</ref>，为命令{{cmd|teleport}}和{{cmd|time}}加入了新的参数，更新了数据包函数，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|teleport}}'''
+* 为{{cmd|teleport}}添加<code>facing</code>参数。
+** {{cmd|teleport [<目标>] (<位置>{{!}}<实体>) facing (<朝向实体>{{!}}<朝向方向>)}}
+** 会旋转实体来朝向另一个实体或方向。
+
+'''{{cmd|time set}}'''
+* 为{{cmd|time set}}添加<code>noon</code>和<code>midnight</code>参数。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 为战利品表加入<code>set_name</code>函数。
+* 有<code>minecraft:load</code>标签的函数会在（重新）加载后立即运行。
+
+== 更改 ==
+=== 常规 ===
+'''崩溃报告'''
+* 崩溃报告现在列出了启用的数据包。
+
+'''数据生成器'''
+* 数据生成器现在公开，可以在游戏中获取所有方块、物品、命令而不用打开。
+
+=== 命令格式 ===
+'''自定义名称'''
+* 更改了所有自定义名称（方块、物品、实体、方块实体）为可翻译的文本词条。
+
+'''[[NBT]]标签'''
+* [[物品（实体）|实体物品]]的<code>Thrower</code>和<code>Owner</code>NBT标签不再是字符串，而是由两个名为<code>L</code>和<code>M</code>的长整型组合。
+* [[雪球]]、[[鸡蛋]]和[[末影珍珠]]的<code>owner</code>NBT标签不再是字符串，而是由两个名为<code>L</code>和<code>M</code>的长整型组合。
+
+== 修复 ==
+{{fixes|fixedin=18w01a|prefix=Minecraft|showdesc=1
+|;old
+|2340|红石火把会在其不应该更新时安排更新，导致计时不可靠。
+|9194|红石比较器可以锁住红石中继器，但红石中继器看上去并没有被锁住。
+|64836|生物乘坐矿车时，可以“控制”矿车。
+|71401|{{key|Tab}}键列表会忽略玩家的初始显示名称。
+|76740|使用被重命名过的武器进行近战攻击的生物，其武器名称不会显示在玩家的死亡消息中。
+|112693|记分板队伍颜色使用的是原始<code>§</code>格式，而不是聊天组件。
+|112742|未命名村民的名字的渲染由<code>TeamColor</code>决定，而不是由记分板队伍的前缀和后缀决定。
+|112743|发光轮廓和旁观者GUI会使用<code>Prefix</code>中所定义的颜色，而不是使用<code>TeamColor</code>定义的。
+|115059|复述功能会读出玩家名称中的记分板队伍的颜色代码。
+|121719|即使实际帧率要更高，附魔台界面上书的开合动画仍以大约20帧左右渲染。
+|122053|鼠标滚轮或触摸板滚动量会被忽略。
+|123708|<code>clearCustomName()</code>和<code>hasDisplayName()</code>方法不一致。
+|;dev
+|121331|显示服务器断开连接的界面时最小化游戏会导致客户端崩溃。
+|121379|函数、进度和战利品表允许{{cd|.mcfunction}}和{{cd|.json}}以外的其他文件类型。
+|121827|选择器和记分板不能用于告示牌（书、{{cmd|tellraw|link=none}}和{{cmd|title|link=none}}命令正常）。
+|121842|局域网世界中，所有OP都可使用命令，但只有宿主机的那个可以使用UI和自动补全。
+|121913|因为Brigadier也会一直记录错误，导致日志文件非常大（5GB）。
+|121934|如下一条子命令为所有实体执行了至少一条命令时，{{cmd|execute|link=none}}子命令仅执行（对所有实体而言）。<!-- execute sub-commands only run (for each entity), if the next sub-command runs at least one command for each entity. -->
+|122057|{{cmd|teleport|link=none}}命令中的<code>x_rotation</code>和<code>y_rotation</code>参数位置被颠倒了。
+|122118|执行{{cmd|tp @s ~ ~ ~|link=none}}命令的效果就像绝对传送（Absolute Teleport），会使全部动量消失。
+|122188|原版结构文件尚未被更新，导致结构中方块缺失或有误。
+|122270|推动已与其他方块连接上的方块时，其方块状态不会被更新。
+|122272|生成新世界时游戏崩溃。
+|122409|树叶、荧石、海晶灯、冰和霜冰下的箱子不能被打开。
+|122431|无记分项被设置时，{{cmd|scoreboard players get|link=none}}命令回显中有<code>%s</code>出现。
+|122487|随机方块状态不应用完整模型。
+|122493|船与水稍稍接触时，船会下落，并穿过方块。
+|122503|在{{cmd|title|link=none}}或{{cmd|tellraw|link=none}}命令中使用带有假玩家的<code>score</code>组件的回显会显示“未找到实体”。
+|122602|用{{key|Tab}}切出全屏游戏时会被卡住。
+|122609|{{cmd|scoreboard players reset * objective|link=none}}命令不工作。
+|122724|带有2个模型选项的方块状态不能正常工作。
+|122782|橙色和黄色陶瓦动画在1.13快照17w48a中不工作。
+|122828|{{cmd|fill|link=none}}命令说32768为其处理的最大区域，但此数值本身不行。
+|122894|在函数中使用不带目标值的{{cmd|teleport|link=none}}命令时不使用原始位置。
+|122897|覆盖包含告示牌的结构时会{{tr|抛出|丟擲|投擲}}<code>InvalidArgumentException</code>异常。
+|122915|默认的方块或物品标签不会出现在{{key|Tab}}补全列表中。
+|123039|在创造模式物品栏搜索框中按按键会导致下方的滚动条被重置。
+|123067|附在墙上的旗帜和头颅会被当作完整方块。
+|123110|碗不能作为熔炉燃料。
+|;previous
+|123117|台阶、楼梯、草径或耕地会导致奇怪的光照出现。
+|123131|漏斗和漏斗矿车可捕获物品的范围过小或过低。
+|123135|站在半高方块、楼梯、草径和耕地上，天空会变暗，类似于洞穴中的效果。
+|123138|对着两格高草的下半部放另外的两格高草会导致草的上半部分消失。
+|123159|重力方块（例如沙子）下方的方块被活塞拉走后，重力方块不落下。
+|123162|在方块下放置草径会使其消失。
+|123168|高级提示框会隐藏地图编号。
+|123183|看向方块时不能食用可种植的物品。
+|123184|对空花盆{{ctrl|选取方块}}没有反应。
+|123222|物品展示框可被放置在低于0的高度处。
+|123304|单区块中有64个活塞会导致<code>Ticking block entity</code>空指针异常，游戏崩溃。
+|123305|JSON文本超过1024个字符时，JSON文本会{{tr|抛出|丟擲|投擲}}语法错误异常。
+|123322|由结构方块放置的结构不更新其结构内外的可连接方块。
+|123331|{{cmd|execute if/unless score|link=none}}命令在记分项未被设置时会将其设为0。
+|123360|{{cmd|teleport|link=none}}命令会尝试对Y轴进行中心校正。
+|123388|中间规模计算（Intermediate Scale Calculation）中，{{cmd|execute store|link=none}}命令处理双精度浮点数时使用浮点数的精度而不是双精度浮点数的精度。
+|123401|命令中，方块状态是在前值的末尾处后被尝试读取。
+|123459|读取数据包或资源包中的{{filename|pack.mcmeta}}文件时，如发生错误，显示的信息中有默认字符串。
+|123562|替换原版数据（除标签）在苹果设备上根本不起作用。
+|;private
+|121804|可以用命令方块执行{{cmd|publish|link=none}}命令。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:18w01a]]
+[[en:Java Edition 18w01a]]
+[[es:Java Edition 18w01a]]
+[[fr:Édition Java 18w01a]]
+[[ja:Java Edition 18w01a]]
+[[nl:18w01a]]
+[[pt:Edição Java 18w01a]]
+[[ru:18w01a (Java Edition)]]

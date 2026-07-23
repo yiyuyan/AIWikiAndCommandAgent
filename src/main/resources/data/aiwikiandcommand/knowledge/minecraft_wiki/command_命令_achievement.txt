@@ -1,0 +1,75 @@
+# 页面: 命令/achievement
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/achievement
+# 分类: 命令, 过时内容
+# 抓取时间: 2026-07-14 17:22:02
+# 原始 Wikitext 内容:
+
+{{about|管理成就的命令|成就系统|成就/Java版}}
+{{Outdated feature|edition=java|此命令已被[[Java版1.12]]加入的'''[[命令/advancement|/advancement]]'''取代。}}
+{{Infobox command
+|name=achievement
+|oplevel=2
+}}
+
+添加或移除玩家的[[成就/Java版|成就]]。
+
+== 语法 ==
+: <code>-{}-achievement (give|take) (<''名称''>|*) [''玩家'']</code>
+
+== 参数 ==
+{{cd|(give{{!}}take)}}
+: 定义修改方式。必须为下列之一：
+:* {{cd|give}}：给予成就。会一并给予前置成就。
+:* {{cd|take}}：删除成就。会一并移除下游成就。
+
+<code><-{}-''名称''></code>
+: 定义要修改的成就名。必须为下列之一：
+:* <code>-{}-achievement.''成就名''</code>，成就名须为有效的[[成就/Java版|成就]]标识符；
+:* <code>*</code>，表示'''所有'''成就。
+
+<code>[-{}-''玩家'']</code>
+: 必须是玩家名称或目标选择器。若未定义，默认为命令执行者。'''在命令方块上是必需参数'''。
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|参数未正确指定|fail}}
+{{Result table|<code>-{}-[''玩家'']</code>未能选中至少一个在线玩家}}
+{{Result table|没有任何玩家的成就被授予或移除}}
+{{Result table|cmd=|success}}
+{{Result table}}
+
+== 输出 ==
+命令执行失败时：
+* 影响的实体数为1。
+* 成功计数为0。
+* 不影响影响的方块数、影响的物品数、查询结果的值。
+
+命令执行成功时：
+* 影响的实体数为命令选中的玩家数。
+* 成功计数为命令执行成功影响的玩家数。
+* 不影响影响的方块数、影响的物品数、查询结果的值。
+
+== 示例 ==
+为自己添加成就“{{tr|赶尽杀绝|太殺了}}”（Overkill）：<code>/achievement give achievement.overkill</code>
+
+为Alice添加成就“{{tr|打开物品栏|盤點庫存}}”（Taking Inventory）：<code>/achievement give achievement.openInventory Alice</code>
+
+移除全部玩家的所有成就：<code>/achievement take * @a</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了{{cmd|achievement|link=none}}命令。}}
+|{{HistoryLine||1.9|dev=16w03a|{{cmd|achievement|link=none}}命令不再影响统计数据。}}
+|{{HistoryLine||1.12|dev=17w13a|移除了{{cmd|achievement|link=none}}命令。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/achievement]]
+[[en:Commands/achievement]]
+[[es:Comandos/achievement]]
+[[ja:コマンド/achievement]]
+[[pt:Comandos/achievement]]
+[[ru:Команды консоли/achievement]]

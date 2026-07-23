@@ -1,0 +1,87 @@
+# 页面: 命令/codebuilder
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/codebuilder
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{exclusive|education}}
+{{infobox command
+|name=codebuilder
+|oplevel=1
+|cheat=1
+}}
+控制指定玩家的[[代码构建器]]。
+
+== 语法 ==
+: <code>codebuilder code check code_status <status: CodeBuilderCodeStatus> <player: target></code>
+:: 检查代码构建器运行结果是否匹配。
+: <code>codebuilder navigate <player: target> <openCodeBuilderWindow: Boolean> <URL: text></code>
+:: 将代码构建器导向指定链接（仅限已支持平台）。
+: <code>codebuilder reset <player: target></code>
+:: 重置代码构建器。
+: <code>codebuilder runtime <action: CodeBuilderRuntime> <player: target></code>
+:: 控制代码构建器运行状态。
+: <code>codebuilder subscribe scoreboard <player: target> <objective: string></code>
+:: 将代码构建器关联记分项。
+: <code>codebuilder unsubscribe scoreboard <player: target> <objective: string></code>
+:: 将代码构建器取消关联记分项。
+
+== 参数 ==
+{{argument|be=1|status: CodeBuilderCodeStatus|Enum}}
+: 指定运行结果，必须为以下其中之一：
+:* {{cd|error}} — 错误运行
+:* {{cd|in_progress}} — 运行中
+:* {{cd|not_started}} — 未运行
+:* {{cd|paused}} — 已暂停
+:* {{cd|succeeded}} — 成功运行
+
+{{argument|be=1|player: target|CommandSelector<Player>}}
+: 指定要控制的玩家。
+: {{arg desc|be=CommandSelector<Player>}}
+
+{{argument|be=1|openCodeBuilderWindow: Boolean|Enum}}
+: 指定是否打开窗口。
+: {{arg desc|be=bool}}
+
+{{argument|be=1|URL: text|CommandRawText}}
+: 指定链接文本。
+: {{arg desc|be=CommandRawText}}
+
+{{argument|be=1|action: CodeBuilderRuntime|Enum}}
+: 指定运行状态，必须为以下其中之一：
+:* {{cd|pause}} — 暂停
+:* {{cd|start}} — 开始
+:* {{cd|stop}} — 终止
+
+{{argument|be=1|objective: string|basic_string}}
+: 指定记分项名称。
+: {{arg desc|be=basic_string}}
+
+== 结果 ==
+{{Result table|onlyee=1}}
+{{Result table|命令不完整或参数未正确指定||unparseable}}
+{{Result table|<code>player: target</code>未能选中一个或多个玩家||fail}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器}}
+{{Result table|记分项不存在}}
+{{Result table|success}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlyee=1}}
+{{Output table|执行成功|1}}
+{{Output table|执行失败|0}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|education}}
+|{{HistoryLine||?|加入了命令{{cmd|codebuilder|link=none}}。}}
+}}
+
+== 导航 ==
+{{navbox commands}}
+
+[[de:Befehl/codebuilder]]
+[[en:Commands/codebuilder]]
+[[ja:コマンド/codebuilder]]
+[[pt:Comandos/codebuilder]]

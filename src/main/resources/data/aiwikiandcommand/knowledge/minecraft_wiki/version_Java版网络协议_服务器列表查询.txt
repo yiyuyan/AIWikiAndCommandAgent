@@ -1,0 +1,281 @@
+# 页面: Java版网络协议/服务器列表查询
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2
+# 分类: Java版独有特性, 使用计算器的页面, 网络协议
+# 抓取时间: 2026-07-14 17:15:28
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|数据包|封包}}<!-- 全文中不会出现Data pack数据包，均代表网络数据包 -->
+{{exclusive|je}}
+<!-- 修改前须知：此条目因为具有高版本兼容性，不应该写历史章节，需要在正文部分提及所有历史，因此此条目内的历史内容均应保留 -->
+服务器列表查询协议是Java版网络协议的一部分，此协议用于客户端在[[服务器列表]]屏幕中获取服务端信息与延迟。
+
+== 协议内容 ==
+当客户端进入服务器列表屏幕，或者按下刷新按钮时，就会同时对所有服务端发起连接。
+
+{{Calculator|protocol|packets=handshaking/server/intention;status/server/status_request;status/client/status_response;status/server/ping_request;status/client/pong_response}}
+
+在连接的握手阶段时，客户端会发送意向数据包<code>intention</code>要求切换到服务器列表查询阶段。服务端接收到意向数据包后，如果<code>enableStatus</code>设置为<code>true</code>且服务端初始化完成，会立刻切换到服务器列表查询阶段。如果不满足上述条件，服务端将直接中止连接，客户端将无法获得服务端数据，并在日志中报错“{{tp|disconnect.ignoring_status_request}}”。
+
+客户端在切换阶段后，立刻发送<code>status_request</code>C2S包，服务端接收后会发送<code>status_response</code>S2C包返回服务端的基础数据。<code>status_response</code>S2C包中仅包含一个字符串字段，内部为JSON数据，具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON根标签
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|description}}：（默认为空字符串）服务器的MOTD（Message Of The Day）。原版服务端中此项只可能为字符串，但实际上客户端以[[文本组件]]解析。
+** {{nbt|string|favicon}}：服务端的图标信息。此数据为Data URL<ref>https://developer.mozilla.org/zh-CN/docs/Web/URI/Reference/Schemes/data</ref>，以<code>data:image/png;base64,</code>作为前缀，后续为原始PNG图片的[[wzh:Base64|Base64]]编码字符串。图片必须为64&times;64像素，否则客户端将拒绝渲染。
+** {{nbt|bool|enforcesSecureChat}}：（默认为<code>false</code>）服务端是否要求客户端必须建立安全的聊天信息交换协议。
+** {{nbt|compound|players}}：服务端当前在线玩家信息。此字段不存在时，客户端将在应显示为玩家数量的组件上渲染灰色的“{{tp|multiplayer.status.unknown}}”。
+*** {{nbt|int|max|required=1|existonsave=1}}：服务端最多可以容纳的玩家数量。
+*** {{nbt|int|online|required=1|existonsave=1}}：当前在线玩家数。
+*** {{nbt|list|sample}}：（默认为空列表）当前部分在线玩家的列表。如果[[服务端配置文件格式|服务端配置文件]]内设置<code>hide-online-players</code>为<samp>true</samp>，即使有玩家在线此列表也将为空。原版服务端默认最多随机挑选12个在线玩家信息。
+**** {{nbt|compound}}：一个在线玩家信息。如果在线玩家禁止被列出（对应[[客户端选项文件格式|客户端选项文件]]中的<code>options.allowServerListing</code>），玩家名称会被匿名为“{{tp|multiplayer.status.anonymous_player}}”（如果客户端版本低于[[25w36a]]，则只会显示为<code>Anonymous Player</code><ref>{{bug|MC-262370|||Fixed}}</ref>），UUID被匿名为全0UUID。
+***** {{nbt|string|name|required=1|existonsave=1}}：玩家名称。
+***** {{nbt|string|id|required=1|existonsave=1}}：带连字符的玩家[[UUID]]。
+** {{nbt|compound|version}}：服务端版本信息。如果此字段不存在，客户端将显示版本名称为“{{tp|multiplayer.status.old}}”并认为此服务端的协议版本为0。
+*** {{nbt|string|name|required=1|existonsave=1}}：版本名称。
+*** {{nbt|int|protocol|required=1|existonsave=1}}：服务端的[[协议版本]]。
+</div>
+
+如果服务端版本低于[[23w07a]]，在服务端初始化过程中将允许客户端查询服务端状态数据，但服务端在初始化完毕后才会生成服务端状态数据。如果客户端对低于23w07a正在启动的服务端进行查询，服务端会返回空的服务端状态数据，使得客户端无法获取{{nbt|compound|version}}信息，从而在服务端列表中显示为“{{tp|multiplayer.status.old}}”。
+
+客户端接收到<code>status_response</code>后，会立刻发送<code>ping_request</code>C2S包，服务端接收后立刻返回<code>pong_response</code>S2C包，客户端检测发出到接收两个数据包的时间计算出到服务端的延迟，并中止连接。此时整个查询流程结束。
+
+上述所有流程可以总结如下：
+# 客户端建立连接，发送意向数据包，切换阶段为服务器列表查询阶段。
+# 服务端接收意向数据包，切换阶段为服务器列表查询阶段。
+# 客户端发送<code>status_request</code>C2S包要求查询服务端状态。
+# 服务端接收<code>status_request</code>，发送<code>status_response</code>S2C包。
+# 客户端接收<code>status_response</code>，立刻发送<code>ping_request</code>C2S包。
+# 服务端接收<code>ping_request</code>，立刻发送<code>pong_response</code>S2C包，中止连接。
+# 客户端接收<code>pong_response</code>，中止连接。
+
+服务端在部分情况下在发送<code>pong_response</code>S2C包前就已经中止连接，导致客户端无法接收到此数据包。此时客户端仍然认为查询流程正常结束，但不会获得延迟数据。
+
+如果在查询流程中，服务端接收到了两次<code>status_request</code>C2S包，则会立刻中止连接。如果是客户端接收到两次<code>status_response</code>S2C包，客户端也会立刻中止连接，并认为查询流程出现错误，在日志中报错“{{tp|multiplayer.status.unrequested}}”。
+
+如果客户端发生查询流程错误，客户端都会在服务器列表屏幕显示此服务端{{tp|multiplayer.status.cannot_connect}}。如果客户端不是因为无法连接到服务端发生错误，而是因为查询流程中发送的数据包无法对应产生错误，客户端会再次尝试使用旧版兼容服务器列表查询对服务端发起连接。
+
+== 旧版兼容协议 ==
+为了对旧版服务器列表进行兼容，在当前版本的客户端和服务端仍然保持旧版兼容的服务器列表查询协议。
+
+旧版兼容协议全部不使用当前的标准协议数据包结构，且使用此协议建立连接时必须保证第一个数据包就是旧版兼容数据包，否则后续服务端会将此数据包识别为错误。
+
+当前版本的客户端在遇到无法正确解析的服务端查询协议时，会使用旧版兼容版本1协议，使用附带信息版本，以协议版本127发送到服务端重新查询数据，以获取旧版服务端的信息。当前版本的服务端如果检查到客户端使用旧版兼容协议连入，则会以协议版本127使用对应版本协议响应发送到客户端。
+
+=== 版本0协议 ===
+版本0协议是不高于[[12w42a]]的版本使用的服务器列表查询协议。在连接建立后，客户端需要立刻发出一个字节<code>0xFE</code>，服务端在收到此字节后会切换到旧版兼容协议，并确认无后续数据后，向客户端发送下列负载：
+
+{| class="wikitable"
+! 偏移（按字节计） !! 名称 !! 类型 !! 作用
+|-
+| 0 || 响应标头''Header'' || <code>0xFF</code> || 服务端响应识别标头
+|-
+| 1 || 数据长度''Length'' || 16位大端序无符号整数 || 数据字符串的字符数量
+|-
+| 3 || 数据字符串''Data'' || [[wzh:UTF-16|UTF-16]]大端序编码字符串 || 服务端数据拼接成的字符串
+|}
+
+数据字符串''Data''中包含3个数据，分别为服务端的MOTD、玩家数量和最大玩家数，这三个数据转换为字符串后按照顺序使用分节符<code>§</code>（U+00A7）拼接。
+
+=== 版本1协议 ===
+版本1协议是[[12w42b]]到[[13w39b]]所有版本使用的服务器列表查询协议。版本1协议又分为两个版本：
+* 无附带信息版本，用于12w42b到[[Java版1.6|1.6]]的版本。此版本协议需要客户端发送两个字节<code>FE 01</code>用于代表使用版本1协议。
+* 有附带信息版本，用于[[Java版1.6.1|1.6.1]]到13w39b的版本。此版本协议需要客户端按照下列结构发送数据：
+
+{| class="wikitable"
+! 偏移（按字节计） !! 名称 !! 类型 !! 作用
+|-
+| 0 || 协议标头''Header'' || <code>FE 01 FA</code> || 客户端请求标头，代表使用版本1协议，并确定使用有附带信息版本
+|-
+| 3 || 验证标头''Validate'' || <code>00 0B 00 4D 00 43 00 7C 00 50 00 69 00 6E 00 67<br>00 48 00 6F 00 73 00 74</code>|| 验证使用此协议，此部分是以UTF-16大端序编码的<code><nowiki>MC|PingHost</nowiki></code>
+|-
+| 27 || 数据长度''Length'' || 16位大端序无符号整数 || 不包含标头的客户端请求数据的长度
+|-
+| 29 || 协议版本''Protocol'' || 8位无符号整数 || 客户端的协议版本
+|-
+| 30 || 主机名长度''HostLen'' || 16位大端序无符号整数 || 连接服务端使用的主机名称的字符数量
+|-
+| 32 || 主机名''Host'' || UTF-16大端序编码字符串 || 连接服务端使用的主机名称
+|-
+| 32 + ''HostLen'' &times; 2 || 端口''Port'' || 32位大端序有符号整数 || 连接服务端使用的端口
+|}
+
+服务端接收到版本1协议负载后，无论是否带有附带信息，都会返回与版本0协议类似的结构数据。与版本0协议不同的仅有数据字符串''Data''的内容，在版本1中此项包含5个数据，分别为服务端协议版本、版本名称、MOTD、玩家数量和最大玩家数，各个数据转换为字符串后使用空字符（U+0000）分隔，并在头部添加三个字符<code>U+00A7 U+0031 U+0000</code>。
+
+== 局域网发现协议 ==
+局域网发现协议是对于服务端开放局域网世界时使用的服务器列表查询协议。客户端可以在不知道服务端地址的情况下，使用此协议发现局域网中的局域网世界服务端并获取服务端信息。
+
+局域网发现协议使用[[wzh:UDP|UDP]]协议，不属于常规网络协议的一部分。当服务端开放局域网世界时，每过1.5秒服务端就会向<code>224.0.2.60:4445</code>[[wzh:多播|多播]]发送一条以[[wzh:UTF-8|UTF-8]]编码的服务端信息字符串，格式为<code>-{}-[MOTD]<''服务端MOTD''>[/MOTD][AD]<''服务端端口''>[/AD]</code>。
+
+客户端进入服务器列表屏幕，或者按下刷新按钮时，会开始监听<code>224.0.2.60:4445</code>上的数据报。当客户端接收到数据报时，就可以解析出服务端的IP地址，并从数据报内容中提取出服务端信息字符串，获得服务端MOTD和端口信息。如果服务端信息字符串不标准，客户端允许MOTD无法正确读取，但端口要求必须可以正确读取。如果MOTD不能正常读取，客户端会将MOTD识别为<code>missing no</code>。如果在服务端信息字符串前后有多余字符，客户端将忽略这些字符进行正确解析。
+
+== GS4/UT3兼容查询协议 ==
+
+在常规Java版网络协议外，游戏还提供了一种不需要连接就能获取服务器信息的方式，即GameSpy 4/Unreal Tournament 3兼容查询协议<ref>https://wiki.unrealadmin.org/UT3_query_protocol</ref>，下文简称为GS4协议。
+
+GS4协议需要在[[服务端配置文件]]中手动开启，下列两项与GS4协议有关：
+* <code>enable-query</code>：（默认为<samp>false</samp>）是否开启GS4协议。
+* <code>query.port</code>：（默认为25565）GS4协议使用的端口。
+
+使用[https://github.com/rocketsciencegg/qstat qstat]可以通过GS4协议获取服务器信息。假设当前机器局域网IP为192.168.1.9，端口号为25565，则可以使用下列命令获取服务器信息：
+
+<syntaxhighlight lang="sh">
+$ qstat -ut3s 127.0.0.1:25565 -R -P
+$ qstat -gs4 127.0.0.1:25565 -R -P # 等价的写法
+ADDRESS           PLAYERS      MAP   RESPONSE TIME    NAME
+127.0.0.1:25565        0/20  0/0     world      0 / 0  SMP A Minecraft Server
+	gametype=SMP,game_id=MINECRAFT,version=1.21,plugins=,hostip=192.168.1.9
+</syntaxhighlight>
+
+GS4协议使用[[wzh:UDP|UDP]]协议，且数据报长度不允许超过1460字节。整个协议分为两个阶段：握手阶段和查询阶段。
+* 握手阶段服务端接收到客户端的请求，并随机生成一个挑战发送回客户端；
+* 查询阶段时客户端需要带有之前获得的挑战，并带有要求查询的内容发送到服务端，服务端验证挑战后将查询数据发送回客户端。
+
+从握手阶段开始到查询阶段结束不能超过30秒，如果超过30秒服务端将丢弃之前已经记录的会话使得客户端必须重新握手再次查询。
+
+如果服务端接收到了不满足要求的数据报，则会静默忽略，不返回任何数据。
+
+=== 握手阶段 ===
+
+握手阶段由查询客户端发送UDP数据报开始。由于UDP协议是无连接的，服务端为了识别每个查询客户端要求客户端需要携带一个会话ID。会话ID是一个4字节数据，在实际使用中可以随机生成，服务端只使用此ID作为每次会话的识别凭据，而不会对会话ID进行校验。
+
+握手阶段客户端初始数据报结构如下：
+
+{| class="wikitable"
+! 偏移（按字节计） !! 名称 !! 类型 !! 作用
+|-
+| 0 || 协议标头''Header'' || <code>FE FD</code> || 客户端GS4协议请求标头
+|-
+| 2 || 请求类型''Type'' || <code>09</code> || 客户端握手请求
+|-
+| 3 || 会话''SessionID'' || 4字节数据 || 本次查询会话的ID
+|}
+
+服务端在接收到此数据报后，会随机生成一个小于16777216的非负整数作为挑战，并以下文格式发回客户端。在查询阶段时，客户端需要以同样的会话ID和此挑战对服务端发起请求。
+
+{| class="wikitable"
+! 偏移（按字节计） !! 名称 !! 类型 !! 作用
+|-
+| 0 || 响应类型''Type'' || <code>09</code> || 服务端握手响应
+|-
+| 1 || 会话''SessionID'' || 4字节数据 || 本次查询会话的ID
+|-
+| 5 || 挑战''Challenge'' || 空终止字节字符串（Null-terminated string），UTF-8编码 || 本次会话后续查询时使用的挑战
+|}
+
+例如，客户端请求会话ID为<code>10 20 30 40</code>，服务端生成的随机挑战为15015135，则最终的数据报内容为：
+
+<pre>
+09 10 20 30 40 31 35 30 31 35 31 33 35 00         .. 0@15015135.
+</pre>
+
+=== 查询阶段 ===
+
+在查询阶段，查询客户端需要将上文的挑战以字符串方式读取，并解析为整数，发送下列数据报：
+
+{| class="wikitable"
+! 偏移（按字节计） !! 名称 !! 类型 !! 作用
+|-
+| 0 || 协议标头''Header'' || <code>FE FD</code> || 客户端GS4协议请求标头
+|-
+| 2 || 请求类型''Type'' || <code>00</code> || 客户端查询请求
+|-
+| 3 || 会话''SessionID'' || 4字节数据 || 本次查询会话的ID
+|-
+| 7 || 挑战''Challenge'' || 32位大端序有符号整数 || 服务端发回的挑战
+|-
+| 11 || 填充字节''Padding'' || <code>FF FF FF 01</code> || GS4/UT3协议中查询服务端规则和玩家列表的请求，但服务端不校验此填充字节，实际上可以指定任意4字节数据
+|}
+
+使用上方例子中的会话ID和挑战，客户端构建的查询数据报应为：
+
+<pre>
+FE FD 00 10 20 30 40 00 E5 1C DF FF FF FF 01      .... 0@........
+</pre>
+
+服务端接收到此数据包后会根据会话ID验证挑战。如果挑战不匹配，则不发回任何数据；如果挑战匹配，则发送下列数据报：
+
+{| class="wikitable"
+! 偏移（按字节计） !! 名称 !! 类型 !! 作用
+|-
+| 0 || 响应类型''Type'' || <code>00</code> || 服务端查询响应
+|-
+| 1 || 会话''SessionID'' || 4字节数据 || 本次查询会话的ID
+|-
+| 5 || 填充字节''Padding'' || <code>73 70 6C 69 74 6E 75 6D 00</code> || 空终止字节字符串<code>splitnum</code>
+|-
+| 14 || 报文数量''NumPackets'' || <code>80</code> || GS4/UT3协议中此字段最高比特位代表此数据报是最后一个报文，后7位则代表此报文的序号<br>由于MC总是以一个数据报返回数据，此值固定为128
+|-
+| 15 || 连续字节''Continuation'' || <code>00</code> || GS4/UT3协议中使用此字段拼接两个数据报中被分片的数据<br>由于MC总以一个数据报返回数据，此字段无作用
+|-
+| 16 || 服务端状态键值对''StatusKV'' || 不定长度，类型见下文 || 服务端状态数据
+|-
+| 16+len(''StatusKV'') || 玩家列表类型''FieldType'' || <code>01</code> || GS4/UT3协议中玩家名称列表类型为1
+|-
+| 17+len(''StatusKV'') || 玩家列表名称''FieldName'' || <code>70 6C 61 79 65 72 5F 00</code> || 空终止字节字符串<code>_player</code>
+|-
+| 25+len(''StatusKV'') || 填充字节''Padding2'' || <code>00</code> || 
+|-
+| 26+len(''StatusKV'') || 玩家列表''PlayerList'' || 空终止字节字符串列表，以空值字节<code>00</code>结束 || 服务端当前玩家列表
+|}
+
+服务端状态键值对''StatusKV''由一条条数据对组成，并以空值字节<code>00</code>代表整个列表结束。每个数据对由两个空终止字节字符串拼接而成。游戏共返回下列键值对：
+
+{| class="wikitable"
+! 名称 !! 作用
+|-
+| hostname || 服务端的MOTD（Message Of The Day）
+|-
+| gametype || 固定值<code>SMP</code>
+|-
+| game_id || 固定值<code>MINECRAFT</code>
+|-
+| version || 服务端版本
+|-
+| plugins || 服务端插件信息，原版中此值固定为空字符串，但第三方服务端可自行设置，常见格式为<code><服务端版本>: [<插件名>(,<版本>)[;<插件名>(,<版本>)]...]</code>
+|-
+| map || 存档名称
+|-
+| numplayers || 当前玩家数量
+|-
+| maxplayers || 最大玩家数量
+|-
+| hostport || 服务端主机端口
+|-
+| hostip || 服务端主机IP
+|}
+
+对于所有客户端请求，服务端每5秒刷新一次此响应，即服务端响应会缓存5秒。
+
+如果客户端发出的响应前11个字节正确，但总长度不为15，即填充字节不满足要求时，服务端返回另一种格式的响应。这种情况下，填充字节通常为9字节数据，内容为<code>06 01 06 05 08 0A 04 00 00</code>，满足GS4协议中查询仅查询状态的请求。服务端对此请求的响应没有缓存，且格式如下：
+
+{| class="wikitable"
+! 偏移（按字节计） !! 名称 !! 类型 !! 作用
+|-
+| 0 || 响应类型''Type'' || <code>00</code> || 服务端查询响应
+|-
+| 1 || 会话''SessionID'' || 4字节数据 || 本次查询会话的ID
+|-
+| 5 || 服务端名称''MOTD'' || 空终止字节字符串 || 与前文的<code>hostname</code>一致
+|-
+| 5+len(''MOTD'') || 游戏类型''GameType'' || <code>53 4D 50 00</code> || 空终止字节字符串<code>SMP</code>，与前文的<code>gametype</code>一致
+|-
+| 9+len(''MOTD'') || 存档名称''Map'' || 空终止字节字符串 || 与前文的<code>map</code>一致
+|-
+| 9+len(''MOTD'', ''Map'') || 当前玩家数量''NumPlayers'' || 空终止字节字符串 || 与前文的<code>numplayers</code>一致
+|-
+| 9+len(''MOTD'', ''Map'', ''NumPlayers'') || 最大玩家数量''MaxPlayers'' || 空终止字节字符串 || 与前文的<code>maxplayers</code>一致
+|-
+| 9+len(''MOTD'', ''Map'', ''NumPlayers'', ''MaxPlayers'') || 服务端主机端口''HostPort'' || 16位小端序有符号整数 || 与前文的<code>hostport</code>一致
+|-
+| 11+len(''MOTD'', ''Map'', ''NumPlayers'', ''MaxPlayers'') || 服务端主机IP''HostIP'' || 空终止字节字符串 || 与前文的<code>hostip</code>一致
+|}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox protocol}}
+
+[[Category:网络协议]]
+
+[[en:Java Edition protocol/Server List Ping]]

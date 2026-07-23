@@ -1,0 +1,122 @@
+# 页面: 命令/spreadplayers
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/spreadplayers
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=spreadplayers
+|oplevel=2\1
+|becheat=1
+}}
+
+把[[实体]]随机传送到区域内地表的某个位置。
+
+== 用法 ==
+{{IN|java}}实体总是会被传送到某个位置最顶部的非[[空气]]方块上。在<code>under</code>模式下，实体则被传送到指定的最大高度之下的、上方有两格空气的最高的非空气方块上。若没有所述方块，则此水平坐标位置无效。
+
+{{IN|bedrock}}实体总是会被传送到某个位置最顶部的固体方块上方距离一格的位置。若使用 <code>maxHeight: value</code>参数，实体则被传送到指定的最大高度之下的最高的固体方块上。若没有所述固体方块，则此水平坐标位置无效。若所述固体方块上方没有两格空气，则此水平坐标位置亦无效。
+
+[[熔岩]]、[[水]]、[[气泡柱]]或[[火]]上不是有效位置，实体不会被传送到其上。{{IN|bedrock}}除此之外，[[岩浆块]]、[[凋灵玫瑰]]、[[营火]]、[[灵魂营火]]、[[甜浆果丛]]、[[下界传送门（方块）|下界传送门]]、[[末地传送门（方块）|末地传送门]]和[[末地折跃门（方块）|末地折跃门]]也不是有效位置。
+
+{{in|je}}实体将在命令的执行维度扩散。{{in|be}}该命令仅更改实体的坐标，而不改变维度，但有效位置仍基于命令的执行维度判断。
+
+如果没任何有效位置，或有效位置无法满足最小间距（<code><spreadDistance></code>或<code>spreadDistance: float</code>）的要求，没有任何实体会被传送。
+
+== 语法 ==
+* '''Java版'''
+: <code>spreadplayers &lt;center&gt; <spreadDistance> <maxRange> <respectTeams> <targets></code>
+:: 随机传送指定实体到最顶部的非空气方块上。
+: <code>spreadplayers &lt;center&gt; <spreadDistance> <maxRange> under <maxHeight> <respectTeams> <targets></code>
+:: 随机传送指定实体到指定的最大高度（<code><maxHeight></code>）之下的最高的、上方有两格空气的非空气方块上。
+
+* '''基岩版'''
+: <code>spreadplayers <x: value> <z: value> <spreadDistance: float> <maxRange: float> <victim: target> [maxHeight: value]</code>
+
+== 参数 ==
+{{el|je|short=1}}：{{argument|center|vec2}}<br>
+{{el|be|short=1}}：{{argument|be=1|x: value|RelativeFloat}}和{{argument|be=1|z: value|RelativeFloat}}
+: 指定传送目的地区域的中心。
+: {{arg desc|je=vec2|be=RelativeFloat}}
+
+{{argument|spreadDistance|float|spreadDistance: float|float}}
+: 指定传送目标之间的最小间距。
+: {{arg desc|je=float|be=float|min=0.0}}{{in|be}}应该大于等于0.0。
+
+{{argument|maxRange|float|maxRange: float|float}}
+: 指定目标区域边界与区域中心在X和Z轴上的距离（因此区域是正方形而不是圆形）。
+: {{arg desc|je=float|min=1.0|be=float}}{{in|be}}应至少比<code>spreadDistance: float</code>大1.0。
+
+{{el|je|short=1}}：{{argument|respectTeams|bool}}
+: 同队成员在传送后会不会出现在一起。如果为<code>true</code>，同队的实体会被传送到同一个位置。
+: {{arg desc|je=bool}}
+
+{{el|je|short=1}}：{{argument|maxHeight|integer}}<br>
+{{el|be|short=1}}：{{argument|be=1|maxHeight: value|RelativeFloat}}
+: 若指定，限制传送位置的最大高度。
+: {{in|je}}{{arg desc|je=integer}}
+: {{in|be}}{{arg desc|be=RelativeFloat}}
+
+{{argument|targets|entity|victim: target|CommandSelector<Actor>}}
+: 指定需要随机传送的目标。
+: {{arg desc|je=entity|amount=multiple|type=entities|be=actor}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code>spreadDistance: float</code>小于0.0|N/A|fail}}
+{{Result table|<code>maxRange: float</code>小于<code>spreadDistance: float</code>+1的值}}
+{{Result table|<code><targets></code>或<code>player: target</code>未能选中至少一个实体（指定的玩家必须在线上）|fail}}
+{{Result table|没有任何有效位置}}
+{{Result table|实体过多以致有效位置无法满足最小间距（<code><spreadDistance></code>或<code>spreadDistance: float</code>）的要求||fail}}
+{{Result table|分散完的实体尝试加载X/Z在±33,552,992以外的区块（由于不合理的<code>center: vec2</code>值）|执行出错，且有可能崩溃|N/A}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/spreadplayers ... true ...|执行成功|1|1|目标所在的队伍数量}}
+{{Output table|cmd=/spreadplayers ... false ...|执行成功|1|1|目标实体的数量}}
+{{Output table|cmd=|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* {{in|java}}传送所有玩家到以(0,0)为中心，大小为1,000×1,000的区域中的一个随机的地点，同队的玩家聚集在一起，且每队之间最小的间隔为200格：
+:: <code>spreadplayers 0 0 200 500 true @a</code>
+
+* {{in|java}}从同一队伍（Red）中选取所有实体，传送至以(0,0)为中心，最大高度为80，大小为200×200的区域中，且该队伍实体之间最小的间隔为50格：
+:: <code>spreadplayers 0 0 50 100 under 80 false @e[team=Red]</code>
+
+* {{in|be}}把所有玩家传送到以(10,10)为中心的区域内，传送半径为10格，最小间距为1格，最大高度为100：
+:: <code>spreadplayers 10 10 1 10 @a 100</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w23a|加入了{{cmd|spreadplayers|link=none}}。}}
+|{{HistoryLine||1.16|dev=20w21a|加入了<code><maxHeight></code>参数。}}
+|{{HistoryLine||1.19.4|dev=22w03a|现在实体将在命令的执行维度扩散。<ref>{{Bug|MC-181832|||Fixed}}</ref>}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|spreadplayers|link=none}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.20|dev=1.21.10.23|加入了<code>maxHeight: value</code>参数。}}
+}}
+
+== 参见 ==
+* {{cmd|teleport}}（别名{{cmd|tp|link=none}}） — 传送实体到指定位置。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/spreadplayers]]
+[[en:Commands/spreadplayers]]
+[[fr:Commandes/spreadplayers]]
+[[ja:コマンド/spreadplayers]]
+[[pt:Comandos/spreadplayers]]
+[[ru:Команды консоли/spreadplayers]]
+[[uk:Команди консолі/spreadplayers]]

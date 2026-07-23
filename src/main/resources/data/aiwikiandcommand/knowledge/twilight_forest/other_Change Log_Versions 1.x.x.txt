@@ -1,0 +1,950 @@
+For versions 4.0.412 and newer, see Change Log.
+
+For versions 3.0.0 and newer, see Change Log/Versions 3.x.x.
+
+For versions 2.0.0 and newer, see Change Log/Versions 2.x.x.
+
+=Version 1.20.2 (November 11, 2013)=
+* Knight Phantoms
+** Changed model
+** Got formation synchronization code working again
+** Added special attacks for 3 different weapons
+** Added particle effects & other special effect
+** Added phantom armor
+** Treasure chest appears when defeated
+* Changed naga and hydra to not target creative mode players
+* Changed fiery pick over from hacky method of changing drops to Forge harvest event
+** Fixes a crash with silk touch
+* Fixed NPE with fiery armor and certain mod-added damage sources
+* Dark forest renovations
+** A changed, more autumnal color scheme
+** Tree changes for a slightly higher “ceiling”
+** Fixed so that mushglooms appear in the dark forest again
+** Added special dark-resistant grasses & dead bush blocks
+** Also pumpkins
+* Started to add new type of brick for stronghold
+* Fixed knightly armor model for sneaking
+** Still need to fix bow and holding item animation
+* Fixed mod initialization methods to use newer FML interfaces
+* Fixed a conflict between charms of keeping and Ars Magica’s soulbound enchantment
+* Fixed some texture map glitches with the minoshroomtaur’s horns
+* Re-added Thaumcraft integration for TC4, thanks to Auric245524 for the aspect suggestions
+** Have not done creatures yet
+* Renamed the new goblin stronghold brick to underbrick
+* Added language entries for new stuff
+
+=Version 1.20.1 (October 7, 2013)=
+* Aurora palace design & experiments
+* Mushroom tower experiments
+* Updated to Forge 916, which fixes a crucial bug in saving structure data
+** Fixed a bunch of my bugs that were exposed by the Forge bug fix
+** Added no-argument constructors to all structure pieces
+** Added save/load functionality to feature type in the structure
+** Added save/load to a bunch of structure component variables
+* Added aurora block & effects
+
+=Version 1.20.0 (September 22, 2013)=
+* Added names to all structure components
+* Biome stabilization should ensure that structures are better contained within the biome
+* Experiments with turning off the chunk relight flag
+* Fixed wraiths so that they will spawn properly
+* Updated Russian translation, thanks Sto3IV
+* Fixed a few rendering errors in converting to the latest minecraft version
+* Got magic maps rendering as maps in item frames
+** Also did ore maps
+* Fixed swarm spiders back to lower attack effectiveness
+
+=Version 1.19.2 (September 8, 2013)=
+* Dimension-specific respawn point set when the player arrives via portal
+* Fixed ghast-type monster health
+* Fixed wolf-type monster health
+* Fixed pinch beetle mechanics, no voluntary dismount, do not display mob health
+* Fixed & changed maze slime texture
+* Fixed ur-ghast damage-related behaviors
+* Cannot silk touch harvest special tower blocks, like reactor debris
+* Skipped 1.19.1 version number since some files in 1.19.0 were already tagged as 1.19.1
+
+=Version 1.19.0 (August 4, 2013)=
+* Updated to Minecraft 1.6.2
+* Many fixes and code changes related to the update
+** Most code relating to monster speed, health, and damage re-written
+** Entity rendering code refactored
+** Texture code updated to the new system
+
+=Version 1.18.2 (June 30, 2013)=
+* Changed stronghold shield to surround each room, and only be breakable from one direction
+* Knightly armor with some custom minor armor models
+* Goblin knight spear attack working, with effects, etc.
+* Some changes to stronghold decorations and treasure frequency
+* Started working on knight phantoms boss
+** Getting a frustrating bug, will come back to these
+* Drew inventory items and added code for knightly sword, pick. and axe
+* Added special effect for knightly sword, pick and axe
+* Added tooltips to the translation file
+* Reduced the frequency of goblin knights in the stronghold
+* Increased damage for block-and-chain goblin
+* Added recipes to combine 9 shards into a shard cluster, smelt the shard cluster into knightmetal, and make the knightly items out of knightmetal
+* Changed hedge block to inherit from BlockLeavesBase
+* Added impenetrable shield over the entrance pit
+* Fixed mangrove tree roots to not break the stronghold shield
+* Added or changed drops to armor shards for several stronghold creatures
+* Added enchanted books to treasure chests
+* Treasure chests are occasionally trapped
+* Added trophy pedestal to entrance that must be "unlocked" to gain access
+* Made upper stronghold parts more ruin-like in generation
+* Added code that stops dark tower generation from trying to place the urghast scenery & spawner above the world height limit
+* Possibly fixed java.lang.InstantiationException with fire jet tile entites
+* Limited wood root growth along the horizontal axis
+* Stopped wood roots from destroying important blocks
+* Added map icon for knight stronghold in the “little face” style
+* Added “Out of Order” sign to boss room
+* Added translation entry for Knight Phantom
+* Changed some spawn egg colors to be unique
+
+=Version 1.18.1 (May 27, 2013)=
+* Added dark forest strongholds with a variety of rooms and decorations
+* Strongholds are divided into upper and lower portions
+* Added Simplified Chinese (zh_CH) localization file, thanks crafteverywhere
+* Changed language loading to load any valid language file in the mod zip instead of just ones that are specifically programmed in
+* Fixed a bug in the expanded nearest feature finder
+* Reactivated old Thaumcraft API support
+
+=Version 1.18.0 (May 11, 2013)=
+* Rewrote naga segment code, improving the animation
+* Updated to Minecraft 1.5.2 codebase, MCP 7.51 and Forge 7.8.0.690
+* Fixed an issue where the game will generate twilight forest chunks until it can set a valid spawn point, regardless of whether this is useful behavior
+* Register our biomes with the Forge biome dictionary
+* Made fiery aura enchantment ID configurable
+* Experiments with wearable boss trophies
+** Not actually happening yet
+* Ore magnet now works on nether quartz ore and theoretically other nether ores
+* Re-animated magic tree leaves
+
+=Version 1.17.2 (April 29, 2013)=
+* Added block and chain goblin
+* Some efforts to reduce client-side lag
+** Make WorldProviderTwilightForest inherit from WorldProviderSurface
+** Disable firefly relight checks
+** Stop Forge biome foliage color event from firing
+* Small birds fly when startled
+* Fixed my monster spawn eggs to support naming mobs in the same way as vanilla eggs
+* Added goblin knight
+* Added helmet crab
+* Portal code refactor/rewrite
+* Fixed portal blocks not breaking completely if one block is broken
+* Allow other entities to pass through the portals
+* Worked on some new plants
+** Moss patch
+** Mayapple
+* Implemented new plant clumping technology
+* Fixed some bugs in the ore meter
+* Refactored stalactite generation in the hollow hills
+* Fixed an out of bounds error on sapling icons
+* Breaking the carminite builder blocks starts the bridge blocks collapsing
+* Carminite reactor effect should destroy fewer “unbreakable” blocks
+* Added maze wafer graphic
+* Added experiment 115, a food item similar to the maze wafer
+* Replaced maze wafers in the dark tower chests with experiment 115s
+* Added moss to fallen hollow log generation
+* Gave each of the twilight forest tree logs their own “cut” side texture
+* Added small fallen logs
+
+=Version 1.17.1 (March 30, 2013)=
+* Restored nagastone auto-connectivity
+* Ur-ghast rebalancing:
+** Changed from a set number of fireballs to switch phases into an amount of damage taken
+** Also leave tantrum mode after an amount of damage taken
+** In tantrum mode, only take 1/4 normal damage, to encourage trap use
+** Reduce minion health so that they are killed with one decent sword hit
+** Also remove minion loot, since they’re theoretically infinite and easily killed
+** Uncharged traps occasionally make little particles highlighting nearby ghastlings
+** Uncharged traps make a large amount of particles when ghastlings die
+** Uncharged traps make little beeping noises as their charge level rises
+* Reduce normal ghastling health to 15
+* Fixed magic tree effects and generation
+* Added dark tower reactor activation animation, effect, sounds
+* Added names in translation file for reactor effect blocks
+* Removed reactor core section from penultimate floor, since it does too much damage to the boss floor when activated
+* Fixed penguins not having a size value under some conditions
+* Fixed trophy rendering to allow showing “inside” polygon faces - fixes lich trophy
+* Fixed naga armor so that the game is looking in the correct directory for the texture
+* Removed roof decorations from dark tower entrance towers, since they poke through the forest canopy strangely
+* Redrew the magic tree saplings to look like saplings of the tree they grow
+* Redrew a few other saplings to look more like saplings and less like mini trees
+* Redrew magic log special blocks for on and off states
+* Allow turning magic trees off and on by clicking the special block
+* Mangroves ignore the check for water when grown from a sapling
+* Fixed tree of transformation so it grows the special block
+* Added redstone-activated smoke block
+* Added redstone-activated fire jet block
+* Added recipes for the new smoker and fire jet blocks
+* Added names in translation file for the new smoker and fire jet blocks
+* Added leaf dungeons in the hollow twilight oaks
+* Fixed zombies summoned with the zombie scepter to have a proper bounding box
+* Fixed recipes to use the new “match all damage values” value
+** This fixes the moonworm queen refill recipe, the maze/ore map crafting, and some ore dictionary declarations
+* Magic log “special” blocks turn into normal log blocks when harvested
+** You have to plant a new tree to get a new one
+* Gave the quest ram more health
+* Added some new ruins/minor features
+** Quest grove-like ruins (two types)
+** Twilight oak stump
+** Hollow log (in two directions)
+** Changed the minor feature generator from straight random to weighted random
+* Adjusted some weights for the minor features
+* Adjusted leaf dungeon rarity
+
+=Version 1.17.0 (March 21, 2013)=
+* Updated to Minecraft version 1.5.1
+* Fixed penguins to breed with fish again
+* Moved naga scale armor textures to the proper location in the file
+* Fixed a crash with the uncrafting table
+* Allow crafting a new maze/ore map with a blank maze map, not just a full one
+* Put carminite ghastling spawn egg back in
+
+=Version 1.16.1 (March 17, 2013)=
+* Fixed ‘mosaic’ typo
+* Fixed the chunk generator yet again to deal with strange biome values in strange places without errors
+* Expanded twilightforest/mapicons.png to have more icons
+* Magic map now occasionally checks and removes bad icons
+* Disabled much of the feature cache/biome marker system
+** The features are in a grid and they will stay that way for the foreseeable future, so let’s just make the code simple
+** Also got magic map working with this
+* Fixed pick block function on darkwood leaves
+* Changed wood root generation slightly to restrict how far they travel in the x or z direction
+* Fixed a crash when repairing unenchanted items at the uncrafting table
+* Made boss spawner for tower boss
+* New model & texture for carminite golem
+* Fixed a bug with the charm of life where carryover damage could throw off the calculations, causing an unprevented death
+* Fixed the enchanted books in tower chests so they work
+** Well, new ones will work anyways
+* Added a config option to disable Twilight Forest portal creation
+* Added a config option to disable the uncrafting function of the uncrafting table
+** A better option would be to allow only vanilla or other unexploitable recipes, but we don’t have the technology
+* Upgraded code to Minecraft 1.5
+* Changed minoshroomtaur texture so that the head doesn’t overlap the body
+* Moving all the textures to new locations, watch out texture pack makers
+* All blocks seem to have correct textures
+** Except the animated leaves, need to re-animate those
+* Made a food item class with methods to make it look like another food
+* All items seem to have correct textures
+* Moved sounds to the ‘mods/twilightforest/’ folder
+* Refactored the boss spawner block code
+* Changed redstone ore in dark tower experiment floors to redstone blocks
+* Fixed a particle bug with dark tower boss tears
+* Added dark tower boss spawner somewhere near the proper location
+* Updated Russian translation
+* Disabled Thaumcraft API check
+* Renamed boss to the Ur-ghast
+** Lots of boss revisions, basically making it functional
+* Updated trap textures to include a lid texture
+* Boss spawns a treasure chest when dead
+* Fixed charm effect rendering
+* Removed a bunch of debug messages
+* Added carminite and borer essence textures
+* Added recipes for
+** Carminite
+** Vanishing block
+** Encased towerwood
+** Reappearing block
+** Builder block
+** Carminite reactor block
+* Added textures for carminite reactor
+* Changed map icon for tower to have a tiny ur-ghast icon
+* Got trophies rendering for naga, lich, ur-ghast
+* Made icons for the new trophies
+* Old bosses drop the new trophies when killed
+* Added entries in the translation file for the new trophies
+* Set proper block bounds for new trophies
+* Set better spawn egg colors for a bunch of recent monsters
+* Went through creative menu, added some blocks, removed a few others
+
+=Version 1.15.4 (March 2, 2013)=
+* Fixed anti-builder so it will replace its own replacement blocks
+* Reappearing blocks respond to redstone pulses
+* Implemented a variety of tower room themes in the main towers
+* Several types of floors in the smaller towers as well
+* Added entrance floor
+* Fixed the fiery pickaxe so it can harvest obsidian.
+* Added russian translation (thanks Sto3IV)!
+* Hostile wolves and mistwolves are appropriately marked as enemies of the player and friendly iron golems, etc, will attack them
+* Fixed tower golems so they move their arms appropriately when not attacking
+* Gave tower golems more health and armor
+* Actually turned the new AI functions on for the tower golem, yay
+* Set tower golems to do regular type mob damage instead of iron golem mega random damage
+* Changed some internal values on the mini ghast model
+** Tentacles no longer poke through floor
+** Can now look up and down
+* Many revisions to the (renamed) carminite ghastspawn & carminite ghastguard ghasts
+* Redrew tower broodling skin (now named carminite broodling)
+* Optimized tower broodling spawning methods to spawn more
+* Changed some of the treasure tables
+* Fixed a bug putting some of the wrong items in “basement” treasure boxes
+* Added charcoal to ovens on the forge level
+* Added german translation (thanks Speedy1505)
+* Removed a few duplicate lines from the translation XML file (thanks again Speedy1505)
+* Shoved tower snowman into the “never happened” file
+* Changed anti-builder replacement blocks to be breakable like glass
+* Refactored tower ghasts to use some of the new AI I added for mini ghasts
+* Some experimental spawn rate adjustments to make up for the tower’s verticality
+* Set up some of the boss fight area
+* Added a boss placeholder
+* Stopped a crash in chunk generation due to erratic biome values
+* Prevented a few crashes when the naga thinks it has more segments than the maximum
+* Fixed a bug with the feature cache when the biome IDs are above 128
+* Finally figured out why I was getting blank major features every so often and changed them to small hills
+* Added squid ink to the “junk” list for generating treasure
+* Slight change in the floor at the top of a large tower to make the fourth door more accessible
+* Added recipe for towerwood planks
+* Added towerwood planks to the forge ore dictionary, so they can act as planks in most other recipes
+* Slightly changed reappearing block texture to differentiate it from vanishing block better
+* Added ‘timed-out’ texture to builder block
+* Renamed some tower monsters and took off some [WIP] tags
+* Revisions to king spider texture and AI
+* Fixed stray black pixel on mushgloom texture
+* Redrew tower key
+* Fixed quest ram noises & added sheep step sound
+* Made it so that tower keys return to the player’s inventory when the player dies
+** Not totally happy with this, but let’s try it
+* Ingredients with a container item (like bucket of milk) are marked as damaged in the uncrafting table and cannot be uncrafted
+* Also blocked UU-Matter from being uncrafted (need to test this)
+* Changed translucent tower block material to glass so that it blocks water flowing
+* Reappearing blocks briefly shed light like vanishing blocks when activating
+* Can’t harvest anti-builder blocks
+* Added temp versions of the blocks & items I foresee needing
+* Increased ghastguard health
+* Revised tower borer skin, AI, drops, other things
+* Fixed connection between large tower middle section and top floors
+* While recrafting at the the uncrafting table, check to see if each enchantment can be applied to the resulting item before transferring it
+
+=Version 1.15.3 (February 16, 2013)=
+* Refactored some tree/object generation code to contain less state
+* Fixed tree generation code to work at higher altitudes
+* Fixed dark forest tower generation to just deliver a warning if it can’t find four potential key towers instead of crashing
+* Rewrote some sections of the feature caching/determination
+** Now storing some info in the chunk NBT data instead of trying to mark it in bedrock metadata
+** Caching/retrieval should work better
+* Changed around mod initialization a little, moving some things from the pre-init section to the proper init section
+* We now check if Thaumcraft is loaded before we attempt to register values, hopefully saving some possible errors
+* Some changes to make dimension initialization more compatible
+** Changed default provider ID to -777, where hopefully it won’t conflict with anything ever
+** Moved dimension initialization into mod post-init phase
+** We now check if the configured dimension ID is being used, and if not, we move to a backup dimension ID (-777)
+** Obviously, this won’t work if there is another mod waiting until the last moment to initialize as well
+* The server now sends a packet with the dimension ID when a client is connecting. If the client has a different dimension ID set for the Twilight Forest, it is temporarily changed
+* Added some code to make a warning if a biome ID conflict is detected
+* Localization support
+* Changed some blocks, like the cicada, that only have one dropped item back to ItemBlock drops from ItemBlockTFMeta
+* Added a configuration option to change the twilight forest world seed
+* Removed some of the biome generator bad data warning messages since I am out of ideas on how to fix the bug
+* Fixed a possible crash in the chunk provider
+* Possibly fixed a crash in the uncrafting table, with certain types of ore recipes
+* Fixed pick block on twilight forest plants
+
+=Version 1.15.2 (February 10, 2013)=
+* Implemented new technology to give my structures multiple spawn lists
+** Turned off spawning on tower roofs
+** Turned off spawning in labyrinth treasure rooms
+*** Removed torches from dead end treasure rooms
+* Added tower ghasts that spawn outside the tower
+* Changed around tower wood hardness, resistance & flammability a little
+* When tower ghasts are near a tower, they will stay near that tower
+* Skeleton druids
+** Fixed a problem with the robe model
+** Changed the item they drop to torchberries
+** Made skeleton druids also drop bones when killed
+** Added undead attribute
+** Switched their AI / attacking methods to some more recent ones
+** Fixed their sounds to use newer skeleton sounds
+** Druid nature bolt now potentially bonemeals grass it hits
+** Fixed breaking animation on nature bolt impact
+* Added a few alternate tower wood textures
+* Used spawner NBT tags to restrict the amount of mini ghasts spawning in the wooden beam mazes
+* Potentially prevented a lich crash when it takes damage from a null entity
+* Added tower block builder
+* Added block builder obstacle course
+* Added un-builder blocks
+* Added redstone lamp cluster decorations
+* Revised floor/center ratio in the large towers
+* Added entrance towers
+* Invented a new technology which marks a certain number of the smallest towers to generate keys in their treasure
+* Cleaned up some recipe results, fixing a bug where crafted uncrafting tables would have a metadata value of 1 instead of 0
+* Made it so that the moonworm queen can be refilled after any amount of use
+* Added a dispenser behavior for my monster spawn eggs
+* Began adding treasure rooms to the dead-end towers
+* Some revisions to the monster spawn list
+* Added tower iron golems
+* Added tower broodling, like a stronger swarm spider
+* Added tower termites, very similar to stronghold silverfish
+* Infested towerwood now spews out termites
+* Mini ghasts now follow most normal mob spawning restrictions, instead of ghast restrictions
+* Fixed tower ghasts to properly stay near their tower
+* Minor refactoring to swarm spider & hedge spider spawn light level checking
+* Towers now properly generate a locked door going to the next tower
+* Added & implemented tower keys, which generate in the proper towers
+* Implemented mob skull size hydra trophy
+* Added reappearing blocks in the entrance tower doors
+* Tweaked tower map icon
+* Added several new types of dark tower roof decoration
+* Added tower balconies to some towers
+* Refactored door code a little to support multiple types of doors (vanishing, reappearing, locked)
+* Added temp skins to tower monsters
+* Marked tower monsters [wip]
+* Gave temp mob egg colors to tower monsters
+* Gave the tower key item a temporary icon
+* Marked inactive reappearing blocks as able to be harvested
+* Changed a few cases where I was returning null instead of an empty spawn list (thanks, Davidee)
+* Added a configuration option for admin-only portals
+* Stopped skeletal druid projectiles from transforming things they shouldn’t
+* Removed [NYI] tag from hydra trophy, since it’s there, and removed [WIP] tags from the tower device blocks I am happy with
+* Also removed [WIP] from wolf of the mists, since they’re working as intended
+
+=Version 1.15.1 (January 19, 2013)=
+* Lots more stairs in the dark forest towers
+* Beam parkour mazes in tower centers
+* Mini ghasts spawn in the beam mazes
+** Need tweaking/texturing still
+* Experiments with antennas/transmitters
+* Fixed a bug affecting magic maps on the server
+* Restructured some of the dark tower construction methods to remove some of the state from the StructureComponent object
+* Made tower wood blocks somewhat less hard
+* Fixed another glitch that would change one sapling into another
+
+=Version 1.15.0 (January 12, 2013)=
+* Lots of work on four "magic" trees, to be found as treasure
+** Still some glitchiness with the tree of transformation and sorting tree
+** Sorting tree can crash servers, need to extract private values to replace client-only getter method
+** Tree of transformation seems to interact strangely with tileentities
+** Still need a few final textures
+** Also would be nice to "turn off" the game effect, even if it means not having full trunk placement options for the special blocks
+* Fixed a bug (or two) where maps would get incorrect ID numbers and possibly overwrite existing maps or other weirdness
+* Fixed a bug where changing recipe sizes would leave leftover items able to be picked up on the uncrafting table
+* Added warning to [WIP] block tooltip
+* Added a few more valid internal values to the recharge recipe for the zombie scepter
+
+=Version 1.14.0 (December 21, 2012)=
+* Added new monsters into dark forest spawning, as a test
+* Added a moving firefly ambient mob, based loosely on the bat code
+* Dark forest towers
+** Lots of work on blocks, textures, structure, coding, etc.
+** Special door blocks mostly functional
+* Fixed dark forest canopy generation so that it does not get holes by feature markers
+* Removed the stone marker blocks from the feature biome markers
+* Made a new creative tab for twilight forest items
+** Aside from food
+* Several small updates to work properly with the current Forge and FML
+* Changed sounds for all the “insect” block interactions, like breaking and placing
+* Registered applicable wood, leaves & saplings with the “ore” dictionary
+* Disabled stronghold generation
+* Disabled nonexistant dark forest features from trying to generate
+* Temporary health/damage values on mistwolf and king spider
+* Removed breeding and player interact events for hostile wolves
+
+=Version 1.13.1 (November 26, 2012)=
+* Support Forge ore dictionary recipes in the uncrafting table
+* All tools/armor made of new materials should be repairable in the anvil with the appropriate ingots
+* Recrafting an item into a new material with the uncrafting table should add any innate enchantments onto the item
+* Made maze slimes slightly quieter
+* Replaced enderman spawners in size 3 hills with beetle spawners
+* Nerfed maze wafers to about half their previous effectiveness
+* Added visual effects for when the charms activate
+* Slime beetles attack roughly twice as often
+* Features now mark in the metadata of the bedrock as they are generated
+* Added map cloning recipes for all 3 maps
+* Allowed identical maps to stack
+* Turned off enchanted shimmer effect on ore map since it creates a glitch on the achievements page
+* Added map # to the tooltip on my custom maps
+* Removed map name from the in-hand map renderer for magic maps
+* Emerald ore shows up on the ore map
+* Hydra’s bombs use a newer method to destroy almost any block when they are set to destroy blocks
+* Large flame particles (hydra breath and fire jets) now do not clip through solid blocks
+* Lich tower tweaks
+** Added spawners on to stair crossings
+** Reduced the amount of space needed for a tower to make extra rooms at the top
+** Now there’s more rooms and less ceiling decorations
+** Allowed size 5 towers to make mini ceiling decorations
+** Added ceiling decorations in the stair portion of stair/room combo towers
+** Made treasure rooms friendly to size 5 towers
+** Added ladders to tower library treasure table
+** Bottom floor of the main tower should always get some sort of decoration now
+** Changed around planter plants
+** Replaced some more oak planks with birch planks in the tower
+** Main tower section now has paintings as well
+** Replaced fixed enchantments with random ones in the tower chests
+* Removed some of my code for enchanted item recipes, since the normal recipe code changed at some point to allow enchanted item results
+* Uncrafting table tweaks
+** Brought costs roughly in line with anvil costs
+** Ignore number of uses, instead charge/discount for material enchantability differences
+** Maximum number of damaged parts is now 4, so armor is easier to repair
+*** Does not seem to be working in this version
+** Now respects hidden repair cost meter and increments it for non-named items
+* Ore map will try to catch any mod-added block with “Ore” in its name and assign it a red color
+* Lich tweaks
+** Lich now mixes in a fireball with his regular attacks
+** Lich does not take damage while his shields are up, the shields take it instead
+** Shields need to take at least 1 heart of damage
+** Lich now teleports more when struck in phases 1 & 2
+** Lich hand sparkles now are blue for regular attack, red for fireball
+** Lich minions have random armor, for decoration
+*** Liches love decorations
+** Lich counts as undead
+** Added lich fireball explosion effects
+* Hedge blocks no longer damage creatures that don’t trigger pressure plates (bats)
+* Added a config file option for silent cicadas, for those having sound library problems, or otherwise finding them annoying
+
+=Version 1.13.0 (November 16, 2012)=
+* Updated to Minecraft 1.4.4 (also works with Minecraft 1.4.5)
+* Began revising treasure tables to include the new items
+* The three sizes of hollow hill now have different treasure tables
+* Added emerald ore to hollow hill ore stalactite generation
+* Changed maze slime texture to be more brick-like
+* Added new items on to lich tower treasure tables
+* Redrew and improved the sapling textures
+* Changed dark forest log texture
+* Marked all the beetles as arthropods, so the weapon enchantment will work
+* Removed ability to voluntarily “mount/dismount” pinch beetles, left in from debugging
+* Fixed bad ID in config for charm of keeping 1
+* Fixed a glitch with the redcap sapper causing normal redcaps to have ironwood picks
+* Drew icons for the 5 current charms
+
+=Version 1.12.3 (November 14, 2012)=
+* Added maze slimes
+* Added fire beetle
+* Added slime beetle
+* Added pinch beetle
+* Changed steeleaf sword enchantment from fortune to looting when crafted, thanks Slagr
+* Added moonworm with block, model & animations
+* Labyrinths should now spawn in the “clearing border” biome as well
+* I was feeling weird about the labyrinth entrance just standing out in a field by itself, so I put a hill on it. Now I’m happier.
+* Finalized icon and effects for moonworm queen
+* Finalized icon and effects for crumble horn
+* Finalized icon and effects for peacock feather fan
+* Fixed shift-click duplication bug with the uncrafting table
+* Fixed another shift-click bug involving uncrafting multiple items at a time with shift-click
+* Added redcap sappers
+* Redcaps now drop coal by default and have a chance of dropping their items similar to zombies/skeletons with equipment
+* Moved maze map token onto the rare drop list for redcaps & minotaurs
+* Revised minotaur equipment to use newer game mechanics, similar to redcaps
+* Fixed shift-click duplication bug with the uncrafting table
+* Fixed another shift-click bug involving uncrafting multiple items at a time with shift-click
+* Fixed wraith model so that crown is properly displayed
+* Fixed a bunch of monster damages being wrong due to bad deobfuscation
+* Fixed firefly jar renderer
+* Added particles and a sound on success to the transformation powder
+* Magic map focus now uses torchberries instead of blaze powder. Thus, easier to make.
+* Recipe for recharging moonworm queen added: depleted queen + 3 glowberries
+* Removed recipes for blanking out existing magic or maze maps, especially the maze/ore map
+* Ore magnet is programmed to ignore coal, but will otherwise work on any block with the word “Ore” in the name, so potential other mod support there
+* Added my wood logs to the forge ore dictionary, if there’s any recipes for logs ever
+* Charm of life I & II game effects added, still need icon and visual/sound effects
+* Charm of keeping I, II & III game effects added, still need icon and visual/sound effects
+* Added recipes to craft 4 charms into 1 of the next tier higher
+
+=Version 1.12.2 (November 5, 2012)=
+* Tower bridges should now clear terrain blocks out of the “inside” of the bridges while generating
+* Actually fixed monster spawning issue - previous fix contained copy/paste error
+* Temporary workaround to painting overpopulation in lich towers
+
+=Version 1.12.1 (November 1, 2012)=
+* Added new treasure item, ore magnet
+* Started work on treasure item, crumble horn
+* Updated minotaur sounds to current cow sounds
+* Started work on treasure item, peacock fan
+* Changed feature cache save location to grab the chunk save location from the server
+* Started work on treasure item, Moonworm queen
+* Fixed bug causing extra monster spawns in features
+* Added bat spawns to features and dark forest
+* Began work on charms
+* Discovered that painting overpopulation in lich towers is due to a bug in vanilla minecraft
+* Changed minotaur axe to look like diamond, since it is
+* Added dimension ID to config file
+* Fixed bugs in uncrafting table
+* Changed maze map view radius back to normal, I need to stop changing that
+* Removed some cache debugging messages
+* Added major feature structure regenerator into the appropriate function in the chunk provider
+* Added a logo to the Forge mod display screen
+
+=Version 1.12.0 (October 25, 2012)=
+* Fixed fiery sword recipe, oops
+* Ported to Minecraft 1.4 (with prerelease Forge and MCP)
+* Fixed Nagastone so that it only drops head or body blocks again
+* Re-did config file categories
+* Set bosses to use new generic boss health display, disabled my copy of the boss health bar code
+* Added blank magic map item
+* Added blank maze maps, with the mazes automatically centered
+* Updated boss renderers to send data to health bar display
+* Changed hydra healing timer to 50 seconds
+* Hydra will no longer fire bombs at targets above it
+* Made a little 1-room ruin on top of the labyrinth
+* Added 3 more block ids: sapling, more logs, more leaves
+* Switched a lot of the block item classes to a more generic one
+* Began implementing saplings
+* Feature caching using a file
+* Removed cow step sound from deer
+* Added cow step sound to minotaurs
+* Reduced meef drops from minotaurs from 0-2 to 0-1
+* Updated to minecraft 1.4.2 and Forge 6.0.1.331
+* Put torches in labyrinth treasure rooms
+* Fixed item colors - spawn egg and plant items
+* Implemented transformation powder and a bunch of transformations
+* Fixed summoned zombie sounds
+* Added strength II potions to zombie scepter recharge recipes
+* Changed bighorn sheep to use the new entity special initialization function
+* Updated my monster eggs to also call the entity special initialization function
+* Minoshroom is worth 100 xps
+* Smelting ironwood ingredients now gives 2 ironwood ingots, since you’re using 2 1/9 blocks for the * ingredients
+* Nerfed meef down to chicken food value levels since it’s so stringy and tough
+* Added item icons for blank magic map and blank maze map
+* Changed recipes to give a blank map where appropriate
+* Feature cache doesn’t save if nothing has been added since the last save
+* Skeleton druid model now inherits from ModelBiped, since ModelSkeleton is picky
+* Added transformation powder icon
+* Maze maps now show a dot for a player outside their y scan radius
+* Biome decorator should no longer decorate based on the feature biomes
+* Saplings kind of work
+* Mangrove sapling won’t grow since it’s not over water
+* Fixed Naga Armorer achievement
+
+=Version 1.11.11 (October 19, 2012)=
+* Labyrinths with a variety of rooms
+* Mazestone changed into a "real" block with a variety of textures
+* Changed how the treasure generator uses the RNG
+* Drew & programmed skins for fiery & steeleaf armor
+* Added steeleaf recipes and enchants
+* Added minotaur axe, with a damage bonus for charging
+* Added Mazebreaker pick, capable of mining mazestone 16x as fast as regular picks
+* Set mazestone to 2x obsidian hardness (blast resistance still intentionally terrible)
+* Changed max mosquito swarm spawn amount from 1-4 to 1
+* Removed nonfunctional smelting enchantment
+* Reduced minotaur health from 40 to 30
+* Filled out treasure tables for labyrinth room, dead end, & vault
+* Added some treasure table utility functions
+* Experiments with feature caching
+* Gave cow sounds to minotaurs
+* Added meef drops
+* Added meef cooking recipe
+* Stopped two non-functional items from generating, temporarily
+* A few more checks to try not to crash with an OOB exception when we get bad biome data
+* Disabled old maze generation under hollow hills
+
+=Version 1.11.10 (October 6, 2012)=
+* Changed how rarity is designated for TF items to avoid crashing servers
+* Suppressed error on event listener initialization for old forge versions
+* Achievements and fiery items won’t work properly, so update forge!
+* Removed some old [WIP] tags from hydra and questing ram, since they’re mostly working the way I want
+
+=Version 1.11.9 (October 6, 2012)=
+* Minotaurs with charging AI
+* Added fiery armor, pick, and sword
+* Added code to add automatic item enchantments into the creative pane
+* Tentative auto-smelt code for fiery pick
+* Made maze ruins a new feature, added mazes under them
+* Used some fancy reflection to try to get both byte and int versions of the map dimension field working.
+* Renamed magnetic blood to fiery blood
+* Added ingot and recipes to support fiery armor
+* Renamed “fire reactive” armor enchant to “fiery aura” & added to language registry
+* Added recipes for (2) fiery tools, using blaze rods for sticks
+* Marked all fiery items as rare
+* Fiery pickaxe now sets creatures on fire on hit
+* Particle animation for pickaxe auto-smelting and fire-setting
+* Moved maze ruins to the clearing biome, temporarily
+* Spawn a few ravens around the obsidian monoliths
+* Made a well-like maze entrance
+* Added temporary map icon for maze ruins
+* Minotaurs should now attack during their charge
+Hydra:
+* Removed some debug messages
+* Hydra now saves number of heads and restores them properly on load/save/dimension transfer
+* Hydra attacks with more heads and breathes more accurately on harder difficulty settings
+* Changed bite from excluding all other attacks to counting as three attacks for purposes of head activity
+* Launches extra destructive mortars at players hiding behind things
+* Never displays as burning, even if standing in fire
+* Heads should die after 60 seconds without a body
+* Misc hydra parts should also check incoming attacks and deny out-of-range ones
+* Restored rule that only one head can bite at a time, though other attacks are fair game
+Naga
+* Will ignore targets when they move outside of his courtyard
+* Does not despawn when moving outside the courtyard
+* Does not take damage from targets outside the courtyard
+* Begins healing if 30 seconds go by without taking damage
+* Including growing new segments
+* Revised segment code a little to fix some bugs
+
+=Version 1.11.8 (September 27, 2012)=
+* Fixed spawn eggs
+* Fixed a crash with placing ceiling-growing plants
+
+=Version 1.11.7 (September 26, 2012)=
+* Add an actual config file option for the nagastone block with a valid default value
+
+=Version 1.11.6 (September 25, 2012)=
+* Added nagastone
+* Reduced nagastone to just head and body blocks and set them to auto-connect with each other
+* Revised naga courtyard wall
+* Finally remembered to change deer item drop to venison instead of beef
+* Awkward solution to non-threadsafe particle crash - buffer the particles and add them during a safe time
+* Dark forest leaves can now catch fire individually, but with no chance for the fire to spread
+* Marked the whole dark forest biome as “high humidity” - discourages fire spreading
+* Changed stalagmite generation so that they need a base to hang from
+* Fire swamp features (lava, fire jets) don’t generate in the hydra’s lair
+* Fix for diamond/ingot block uncrafting bug
+* Fix for the initial “Twilight Portal” achievement never being granted. Apparently isIndependent() doesn’t mean what I thought it did.
+* Apparently it is considerably more difficult to stop other mods from doing world generation in the Twilight Forest under FML than under ModLoader
+* Updated to Forge 282
+* Used new Forge methods to set sky/star color appropriately for Optifine or other situations where the SkyProvider is not being called
+* Used new Forge method to allow sleep anywhere
+* Added feature marker data to bedrock under the center of a feature
+* Removed unnecessary meta number from nagastone names
+* Removed unnecessary fire jets from creative menu
+* Removed green tint from fire jet blocks in item form
+* Made hydra chops overpowered
+Hydra changes:
+* Hydra should engage secondary targets with side heads as long as they are not otherwise engaged
+* Slightly better logic for primary target switches
+* Added scales and box outlines to hydra skin
+* Reflected mortars now deal damage
+* Changed some of the fire attack types to actual fire (fire breath, mortar). They seem to still take armor off, only actual “on fire” damage does not
+* Increased damage for most of the hydra’s attacks a lot, so that it’s balanced for naga scale/diamond armor
+* Fixed some circumstances where the hydra would bite or breathe on itself
+* Standardized how the hydra takes attacks w/r/t its armor value3
+* Fixed body and tail bounding boxes
+* They now knock away creatures and break blocks
+* Refactored hydra code to handle more than 3 heads
+* Began adding heads 3 and 4 (aka heads 4 and 5)
+* And then heads 5 and 6! I can’t stop!
+* Added dead, dying, reborn and roaring states, and started animations
+* Rear heads now perform secondary attacks
+* Heads not currently connected are marked idle
+* Rear heads are allowed to make primary attacks
+* Heads cancel their attacks if they’re going to hit another head or neck
+* Heads have a damage counter and die when they reach a threshold
+* Two heads grow back for every one killed
+* Now starts slower target tracking during fire breath warm up. This stops the first tick of fire breath from being an almost automatic hit
+* Balancing experiments
+* Mortars call the normal explosion code, but at a low value that doesn’t seem to destroy blocks
+* Death animation where all the heads die
+* Made it so that the “base” entity doesn’t take mortar damage
+* Spawner now generates in the hydra lair and spawns the hydra properly
+* Hydra will now cheerfully roast small animals around it when it is idle
+* Crushes blocks beneath it until 80% are solid
+* Will only bite when there are 3 or more heads
+* Added loot
+
+=Version 1.11.5 (September 11, 2012)=
+* Added in venison, just for Honeydew. Same stats as beef, at the moment
+* Reduced the number of smoker blocks and fire jets in the fire swamp back to a reasonable number
+* Gave the hydra a map icon
+* Temporarily made the map icons blank for the areas where it wasn’t actually generating a landmark yet
+* Added a quick line of code to workaround a bug where experience levels were not displayed properly when switching dimensions
+* It looks like a bug in the hedge maze generator was setting the hedge blocks to meta 2. Fixed the generator and (temporarily) set the code to treat meta 2 blocks as meta 0 ones.
+* Disabled the vignette rendering in the Twilight Forest, since it was always on
+* Added a boss health bar to the naga, lich and hydra
+* Added “panic particles” to the kobolds when they flee, to make them more pathetic and make the animation more understandable
+* Fixed an internal block ID conflict that was causing some block IDs to be assigned to the very end of the available ID space
+* Fixed uncrafting table recipe
+
+=Version 1.11.4 (September 3, 2012)=
+* Fix for torchberry root block placement
+* Marked fire jet blocks [WIP]
+* Minor fix for kobold texture (that I swear I’ve done before) to the ragged edge of their shirt
+* Added kobold sounds
+* Fire jets now siphon from the lava reservoir under them as they go off
+* Fixed some display names for new creatures in certain circumstances
+* Slightly changed firefly glow rendering
+* Split apart the “complex” block into firefly jar, uncrafting table, and fire jet blocks
+* Re-enabled the ore meter (still WIP)
+* Changed the sky color to a deeper blue
+* Made the actual brightness level in the dimension slightly brighter
+* Changed the trigger code for the twilight arrival achievement so it seems to actually trigger now
+* Added new code to re-enable all the crafting achievements
+* Fixed NPE in goblin crafting table
+* Changed naga scale recipes to have specific enchants instead of random ones
+* Added mosquito swarms to the swamp spawn list, using the same tech as in the dark forest to restrict spawn rates
+* Implemented my own SkyRenderer
+* Added death tomes
+* Added mosquito swarms
+* Custom particle rendering for my custom particles
+
+=Version 1.11.3 (August 26, 2012)=
+* Added "CreatureCompatibility" option to fix spawners for people upgrading from 1.11.1
+
+=Version 1.11.2 (August 26, 2012)=
+* Disabled fire swamp in biome creation - temporary
+* Fixed armor rendering registration so that new armors show properly
+* Plant blocks (roots and torchberry plants) now placeable on ceilings again
+* Regular plant blocks (fiddleheads and mushglooms) now placeable on floors
+* Torchberry plants drop only the plant when sheared
+* Fiddlehead item icon now properly colored
+* Fixed Zombie wand recharge recipe - did potion IDs change?
+* Updated potion IDs in treasure tables
+* Fixed TF spawn egg names to pull from mod-specific entity list
+* Removed entity IDs from config file since there is now no way they can conflict
+* Pushed sound registration into client proxy to fix a dedicated server crash
+* Updated mob spawner names to contain the mod name (“TwilightForest.mobname”)
+* Attempted to re-enable the firefly & torchberry light value checker/updater
+* Disabled global entity registration
+* Ripped a lot of old code out of TFWorldClient that is apparently no longer necessary
+* Set up the flame jet blocks and their lifecycle
+* Tried out smoker blocks for fire swamp
+* Fixed a bug causing extra ferns not to generate in any of the biome dimensions
+* Added fire swamp biome - disabled from generating in this build
+* Added hydra lair - only generates in fire swamp, disabled
+
+=Version 1.11.1 (August 20, 2012)=
+* Changed default block and item IDs to ones even less likely to conflict in the future
+* Fixed crash on dedicated server startup
+* Fixed crash on penguin render
+
+=Version 1.11.0 (August 20, 2012)=
+* Removed some debug messages
+* Increased default entity tracking range and frequency to more closely match vanilla entities
+* Made it so that you appear on the edge of the portal pool after going through. This stops some problems with instant re-portalling
+* Changed pool detection so that the pool can be surrounded by either grass or dirt blocks, since it seems a lot of people had problems with that
+* Split up cicadas and firefly blocks again, since keeping their facing in the TileEntity was annoying and bug-prone (ha! pun!)
+* Updated chunk generation for full 4096 block id support
+* Moved root blocks into their own block ID
+* Made the 4 wood types work like the vanilla wood types, with sideways wood
+* Changed the trees so that they generate “normal” logs in the trunk and the branch blocks are entirely bark-textured
+* Added all blocks & items that we want to appear in creative mode into the proper tabs
+* Switched lich tower roof slabs to birch instead of default
+* Upgraded to Minecraft 1.3.2 and Forge 193
+* Re-did maze & magic map packets for the new forge
+* Moved block IDs around to fit in the new environment
+* Made the portal block instant transport for now (or permanently)
+* Refactored, moved, and re-wrote a lot of code for the new Forge & Minecraft version
+* Began porting to Forge 171 and minecraft 1.3.1
+* Changed portal creating logic so that instead of a list of blocks (flowers, grass, mushrooms), it just checks the material for Material.plants, Material.vines or Material.leaves. That should allow mod plants to work, assuming they’re coded properly
+* Quest Ram now fully operational
+* Added model and entity for Kobolds
+* Redcaps updated to new AI with new avoid frontal assault task
+* Code reorganizations for features
+
+=Version 1.10.0 (June 5, 2012)=
+* Fixed horizon rendering with the proper sea level in TFWorld
+* Changed many blocks to use the forge metadata methods to allow essentially several types of blocks in one ID
+* Caves are back - with a lot of dirt
+* Added root systems to all twilight forest trees
+* Also a ton of miscellaneous roots, some with ore
+* Turned on monster spawning underground
+* Added ironwood ingots, armor and tools
+* Added torchberries and recipes for torches
+* Goblin Tinkering Table
+* Fixed a strange bug in biome determination for features
+* Made ravines stop generating through my features where the decorations are disabled
+* Made new structure for the quest grove
+* Began stuffing all my code in packages, in (maybe) preparation for an API, or maybe just to make it easier to find things
+* Added tech that allows recipes to create enchanted items
+* Changed firefly jar into general purpose “complex” block and added goblin tinkering table to that block ID
+* Dark forest biome! With lots of code to support it
+* Converted fireflies and cicadas into a single block id, which can support more critters in the future
+* Moved the armor render index far away from the default values. Hopefully no more collisions
+* Somewhere in there, I added the enchanted forest biome too
+* Changed highlands to be less hilly, more high
+
+=Version 1.9.1 (June 3, 2012)=
+* Updated to the most recent Forge and MCP versions
+* Fixed an incompatibility with recent forge versions where the portal would get stuck teleporting you back and forth forever
+* Reduced the amount of animals spawning to a number more closely resembling vanilla minecraft
+* Requires Forge 3.1 (last version did anyways, for achievements)
+* Fixed a bug displaying the magic map when biomes were set above 127
+
+=Version 1.9.0 (May 1, 2012)=
+* Cut twilight forest woods now have the cut log look to them.
+* New maps! Magic map, maze map (and upgraded maze/ore map)
+* Set "rarity" colors for TF items
+* Re-drew some items, including naga armors
+* New fancy config file, which actually works on the server
+* New sounds. You will need Forge 3.1.3 for the sounds, which as of this writing, is not yet the recommended version.
+* Tiny birds (with 4 variations), squirrels, bunnies (3 variants), and ravens added
+* Doubled the amount of animals spawning since there's so many more varieties now
+* Attempted fix for ConcurrentModificationException in SMP
+* Achievement Page (not quite all working yet)
+* A few new items, which mostly serve as ingredients for the new maps
+
+=Version 1.8.1 (April 19, 2012)=
+* Renamed the wands to scepters, and finished all the code for them.
+* Naga scale armor is automagically enchanted when you craft it
+* Lich should no longer despawn until he's killed
+* Some revisions to hollow hill generation, with the goals of making them slightly more scenic and balancing monster/reward ratios
+* Crammed strongholds back underground where they belong
+* Added underhill mazes back. They're undecorated, and both monsters, treasure are only placeholder quality, but they're mazey!
+* Moved Skeletal Druid to new AI system, and their projectiles to EntityThrowable class
+* Adjusted Lich's model and yOffset to stop a weird jittering bug in SMP.
+* Made swarm spiders (and hedge spiders, for good measure) only able to ignore light levels for spawning in hedge mazes.
+* Removed custom swarm spider renderer in favor of just using the scaling methods made for cave spiders
+* Added a new targetTask to hostile wolves so that they once again target nearby players
+* Developed new technology so that players should only be hurt harvesting and walking on hedge maze blocks and not from incidental clicking.
+
+=Version 1.8.0 (April 8, 2012)=
+* Updated to minecraft 1.2.5 and the new forge modloadermp replacement
+* Added work-in-progress versions of several new items, including naga scale armor and new wands you will be able to acquire from the Lich boss.
+* Fixed a nasty issue with "overkilling" the naga causing a crash
+* Several other internal fixes
+
+=Version 1.7.2 (April 1, 2012)=
+* Added firefly jar decorative block. Shapeless recipe = firefly + glass bottle.
+* Added many attacks, abilities, and animations to the Lich boss. Still working on him, but he's playable now.
+* Added "natural" darkness-based monster spawning to hollow hills and mage towers
+* Many tower revisions: made them dark, made stairs rickety, added stair crossings, changed around some room layouts, added more and better treasure, tweaked generation to make the towers larger and more elaborate.
+* Added variant larger canopy tree.
+
+=Version 1.7 (March 8, 2012)=
+* No multiplayer in this release, sorry. On the plus side, you don't have to install ModLoaderMp. I'll update in a week or two with multiplayer.
+* One more bug fix to portal placement detection. It's really working well now.
+* Hydra (preliminary) and Lich (nearly final) models are in the game and you can spawn then in creative mode, but most of their AI isn't hooked up yet.
+* New region code changes the landscape generation into a series of biomes with rivers seperating them. Each region has one major feature, like a hollow hill, hedge maze, or boss fight. Some regions are rare.
+* Fireflies are now more aggressive about being lit. No more dark fireflies. If you catch any, look at them and they'll light up.
+* Ravines are now rarer and don't have lava bottoms in the Twilight Forest.
+* A ton of tweaks to biome settings. Ferns are back, bushes grow in some biomes, the swamp should have vines, and more.
+* Penguins for the glaciers!
+* Removed the top and bottom "cut wood" texture from all the Twilight Forest woods. Let me know if you think this makes it look stupid or "un-minecraft" because I think it looks great!
+
+=Version 1.6.1 (Jan 20, 2012)=
+* Added ModloaderMP to the dependencies. You need it even for single player.
+* Multiplayer is now working! Probably still a few bugs, but I think I got most of them.
+* Throwing a diamond in the water now makes the diamond fizzle if your pool is built wrong.
+* Fixed a dumb math bug that made the portal not work for some negative x and z values.
+* Added an option shouldOtherModsGenerateInTwlightForest defaulting to false.
+
+=Version 1.6 (Jan 20, 2012)=
+* Updated to Minecraft version 1.1
+* Added mob eggs in creative mode for all new mobs. I even included not-really-new mobs like the hostile wolves from the hedge mazes. Beware, nagas will grief your world hard.
+* Fixed the situation where the player would respawn in midair and fall
+* The world should have bedrock again
+* Other mods should no longer spawn features (like Millenaire villages) in the Twilight Forest that are supposed to only happen in the normal world
+* Updated a lot of features to support variable world height. You'll need another mod to change the height, but this mod should be compatible
+* Redid a lot of the generation code to support multiplayer better soon
+* Had to remove the mazes from under the hollow hills, as some of the code was too old to redo easily
+* Redid some of the monster code to better work with multiplayer
+
+=Version 1.5 (Nov 29, 2011)=
+* Updated a bunch of code to Minecraft version 1.0
+* Fixed all the animal models (deer, bighorn, boar) so that they support baby animals.
+* Changed the code that lets axes effect the new blocks so that it no longer crashes if mods have modified the axe class files (also this code seems unnecessary now that axes automatically effect all wood blocks).
+* Similarly changed the code that left fire effect the new blocks for better compatibility.
+* Reverted the spawn point changing code (so that it never changes the spawn point). Back to the drawing board.
+* Slightly changed the code that supports holding the new wood blocks as items.
+* Added bigger giant mushrooms that mesh into the canopy layer in mushroom biomes
+* Added swamp coloring. It's less intense than regular minecraft. There's still no good transition.
+
+=Version 1.4 (Nov 2, 2011)=
+* Wizards towers, the stronghold-equivalent of the Twilight Forest
+* Normal strongholds still generate, but steps have been taken to shove them back underground where they belong
+* Oceans have been mostly banished from the map, replaced with large, deep lakes.
+* Revised the generation table for "features" like the hollow hills, hedge mazes, naga courtyards, etc. There should be more forest space between features, and some features are rarer.
+* Naga adjustments! The naga now only takes lava, fire, or explosion damage from direct head hits. He can attack at a greater vertical range, so don't try to hide in holes. Finally, his health has been decreased, depending on the difficulty setting. Hard = 125 hearts, normal = 100 hearts, Easy = 60 hearts.
+* Naga scales can be used to make diamond armor (chestplate and leggings only). This is a placeholder. My intention is with the release of 1.9 to have naga scales make a custom armor type, which comes automatically enchanted with something appropriate.
+* Skeletal druid spells finally have effects. The druids still need a little more work, which could be the subject of a future update.
+* The players spawn in the twilight forest is set to the portal where they first enter.
+* The mod generates a config file in which the block IDs can be changed.
+* Axes and fire effect the new blocks, and they should properly have names.
+* Fireflies and cicadas fall off properly when the block they are on is destroyed.
+
+=Version 1.3 (Oct. 4, 2011)=
+* The first boss: The Naga, and his ruined temple courtyard.
+* Glaciers should appear rarely in the world, surrounded by snow biomes (currently without snow).
+* A new and unique portal-pool.
+* Fixed a bug where the player would be stuck underground in the normal world when loading or respawning in a Twilight Forest save game.
+* Fixed oceans to be slightly more forest-y. Still deciding about them.
+* Bighorn sheep no longer appear in white. Instead they have many colors (mostly brown).
+* Smoothed the transition between temple/maze platforms and the surrounding terrain.

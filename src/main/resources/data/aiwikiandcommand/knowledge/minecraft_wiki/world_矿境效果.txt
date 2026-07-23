@@ -1,0 +1,1044 @@
+# 页面: 矿境效果
+# 来源: https://zh.minecraft.wiki/w/%E7%9F%BF%E5%A2%83%E6%95%88%E6%9E%9C
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:54
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=25w14craftmine}}
+'''矿境效果（Mine Effects）'''，也称为'''世界效果'''，是控制[[矿境]]生成的机制，主要影响矿境内地形、出口位置、生物群系、生物生成等方面。
+
+== 监测 ==
+在矿境内，当前生效的矿境效果会在屏幕左上角标记出来。
+
+== 机制 ==
+每个矿境均会有自己的矿境效果。矿境将会遵循这些矿境效果生成地形、生物、替代石头生成的方块、生物群系，以及矿境出口结构。时间更替、天气效果、世界行为等亦会受部分矿境效果影响。
+
+通过[[矿境合成台]]创建矿境时，游戏会为该矿境随机赋予多个矿境效果，玩家亦可通过矿境合成台的界面选择自己所需要的矿境效果。
+
+=== 解锁矿境效果 ===
+玩家可通过以下途径解锁矿境效果：
+* 一小部分矿境效果默认解锁；
+* 通过完成特定事件获得包含矿境效果的矿境原料。将这些矿境原料带到矿境出口并离开矿境，或者对着矿境合成台{{ctrl|交互}}即可解锁；
+** 如果玩家已经解锁了矿境效果，或已在物品栏中获得对应的矿境原料，再次完成事件将不会获得矿境原料。
+* 完成包含特定矿境效果、或满足矿境效果解锁条件的矿境可直接解锁。
+* 部分矿境效果可以通过完成启用此效果的矿境来解锁。
+只有解锁的矿境效果才能在矿境合成台内使用。尚未解锁的矿境效果会显示在矿境合成台界面右侧，会提示相应矿境效果的解锁方法。
+
+游戏随机赋予的初始矿境效果不受解锁进度影响。此外，部分矿境效果即便解锁也不会在矿境合成台内显示，玩家无法手动选择这些矿境效果。
+
+=== 矿境效果分类 ===
+矿境效果可被分为4类：常规、友好生物、敌对生物、特殊。
+
+在提示框中，常规矿境效果是蓝色的，友好生物矿境效果是绿色的，敌对生物矿境效果是红色的，特殊矿境效果是紫色的。
+
+此外，有少部分矿境效果不遵循上述的颜色规则。
+
+=== 相互作用 ===
+部分影响同一机制的矿境效果不可共存，一个矿境内只会存在一系列矿境效果中的一个。玩家在矿境合成台内仍可选中与现有矿境效果不可共存的矿境效果，但是后选择的矿境效果将覆盖先前的不可共存矿境效果。
+
+部分矿境效果之间互不兼容，玩家无法在矿境合成台内选中与现有矿境效果不兼容的矿境效果。
+
+=== 经验加成 ===
+部分矿境效果具有经验加成，这类矿境效果生效时，玩家成功离开矿境时所获得的经验将会乘上对应的倍率。多个矿境效果的经验加成倍率可以叠加。
+
+== 矿境效果列表 ==
+=== 世界类型 ===
+{{tr|mode=H|通过|通過}}
+这些矿境效果控制了矿境内的世界基础地形如何生成。矿境必须包含其中一个效果，这些矿境效果'''不可共存'''。这些矿境效果无额外经验倍率，名称颜色均为蓝色。
+
+{| class="wikitable" width=100%
+! width=32px | 图标 !! width=150px | 矿境效果名 !! 矿境效果描述 !! 解锁方式描述 !! 实际效果 !! 实际解锁方式 !! 命名空间ID
+|-
+| [[File:Invicon Surface World.png|32px]]
+| Surface World<br>地表世界
+| World above the Mines. Like... an aboveworld<br>矿井之上的世界，也就是…上界
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock">默认解锁的矿境效果不存在解锁方式描述。</ref>
+| 基础地形以主世界的方式生成。
+| '''默认解锁'''。
+| <code>surface_world</code>
+|-
+| [[File:Invicon Floating Islands World.png|32px]]
+| Floating Islands<br>浮岛
+| How can it be a Mine if it's not even solid?<br>即使地面不实心，也能组成矿境吗？
+| Win a Mine<br>成功挑战一个矿境
+| 基础地形以[[浮岛世界类型]]的方式生成。
+| 成功通过一个矿境。
+| <code>floating_islands_world</code>
+|-
+| [[File:Invicon Amplified.png|32px]]
+| Amplified World<br>放大化世界
+| What... up THERE?<br>啥…那么高？
+| Place a block high up in the world<br>在世界高处放置方块
+| 基础地形以[[放大化世界]]的方式生成。
+| 放置一个Y>100的方块。<br>需已解锁效果“浮岛”。
+| <code>amplified</code>
+|-
+| [[File:Invicon Cave World.png|32px]]
+| Cave World<br>洞穴世界
+| And they call it a Mine? A Mine!<br>他们管这叫作矿井？应该是矿境！
+| Break a block deep down in the world<br>破坏世界深处的一个方块
+| 基础地形以[[洞穴世界类型]]的方式生成。<br>整个维度具有类似下界的特征，包括水桶无法放出水、熔岩流动地更远、猪灵不会僵尸化、具有环境光照。但仍然可以触发袭击。
+| 破坏一个Y<0的方块。<br>需已解锁效果“浮岛”。
+| <code>cave_world</code>
+|-
+| [[File:Invicon Shattered Blocks.png|32px]]
+| Shattered Blocks World<br>破碎方块世界
+| Shattered world made of big blocks with large gaps<br>破碎的世界，由大型方块和大型沟谷组成
+| Win a Special Encounter Mine<br>成功挑战一个特殊事件矿境
+| 在放大化世界的基础上，地表明显成方块堆状，地下不生成基本方块。
+| 成功通过一个特殊矿境。<br>需已解锁效果“浮岛”和“洞穴世界”。
+| <code>shattered_blocks_world</code>
+|-
+| [[File:Invicon Grid World.png|32px]]
+| Grid World<br>网格世界
+| Linear. Orderly.<br>线性、有序。
+| Win a Special Encounter Mine<br>成功挑战一个特殊事件矿境
+| 基础地形为单层的方块网格，网格宽度随机。
+| 成功通过一个特殊矿境。<br>需已解锁效果“破碎方块世界”。
+| <code>grid_world</code>
+|-
+| [[File:Invicon Dark Cave World.png|32px]]
+| Dark Cave World<br>黑暗洞穴世界
+| Hello? Who turned off the lights?<br>有人吗？谁把灯关掉了？
+| Win a Special Encounter Mine<br>成功挑战一个特殊事件矿境
+| 基础地形以[[洞穴世界类型]]的方式生成。
+| 成功通过一个特殊矿境。<br>需已解锁效果“网格世界”。
+| <code>dark_cave_world</code>
+|}
+
+=== 出口类型 ===
+这些矿境效果控制了[[矿境出口]]如何生成。矿境必须包含其中一个效果，这些矿境效果'''不可共存'''。这些矿境效果无额外经验倍率，名称颜色均为蓝色。
+
+{| class="wikitable" width=100%
+! width=32px | 图标 !! width=150px | 矿境效果名 !! 矿境效果描述 !! 解锁方式描述 !! 实际效果 !! 实际解锁方式 !! 命名空间ID
+|-
+| [[File:Invicon Surface Exits.png|32px]]
+| Surface Exits<br>地表出口
+| Mine Exits are found on the surface<br>矿境出口将在地表生成
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock"/>
+| 矿境出口在地表生成。
+| '''默认解锁'''。
+| <code>surface_exits</code>
+|-
+| [[File:Invicon Cave Exits.png|32px]]
+| Cave Exits<br>洞穴出口
+| Mine Exits are found in caves<br>矿境出口将在洞穴里生成
+| Unlock Cave Mines or test your luck with Deepslate<br>解锁洞穴矿境，或在深板岩中碰碰运气
+| 矿境出口在Y=0至Y=120之间生成。
+| 挖掘深板岩时1%概率掉落。<br>'''或'''：<br>已解锁“洞穴世界”效果。可随其解锁一同解锁。
+| <code>cave_exits</code>
+|-
+| [[File:Invicon Rare Surface Exits.png|32px]]
+| Rare Surface Exits<br>稀有的地表出口
+| Mine Exits are found on the surface, but it might be a trek to get to one<br>矿境出口将在地表生成，但这次不好找了
+| Craft an item that helps you locate Mine Exits<br>合成一个能帮助你定位矿境出口的物品
+| 矿境出口在地表生成，但生成概率大幅下降。
+| 从合成输出槽取下[[出口之眼]]。
+| <code>rare_surface_exits</code>
+|-
+| style="text-align:center;" {{tc|n/a}}
+| Event Mine<br>矿境事件
+| Complete the event to spawn the exit<br>完成事件可生成出口
+| style="text-align:center;" {{tc|n/a}}
+| 矿境出口随特定事件生成
+| style="text-align:center;" {{tc|n/a}}{{note|name=cannot_unlock|不可在矿境合成台上使用的矿境效果没有解锁方式。}}
+| <code>event_exit</code>
+|}
+
+=== 生物群系 ===
+这些矿境效果主要控制了矿境内可以生成何种生物群系。矿境必须至少包含其中一个效果，这些矿境效果'''可以共存'''。这些矿境效果无额外经验倍率，名称颜色均为蓝色。
+
+{| class="wikitable" width=100%
+! width=32px | 图标 !! width=150px | 矿境效果名 !! 矿境效果描述 !! 解锁方式描述 !! 实际效果 !! 实际解锁方式 !! 命名空间ID
+|-
+| [[File:Invicon Grass Block.png|32px]]
+| Plains Biomes<br>平原生物群系
+| Quite plain<br>平平无奇
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock"/>
+| 可生成生物群系：<br>{{BiomeLink|plains}}<br>{{BiomeLink|meadow}}<br>{{BiomeLink|sunflower plains}}
+| '''默认解锁'''。
+| <code>plains</code>
+|-
+| [[File:Invicon Acacia Sapling.png|32px]]
+| Savanna Biomes<br>热带草原生物群系
+| On the great wide savanna steppes...<br>在那广袤的热带草原上，有着…
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock"/>
+| 可生成生物群系：<br>{{BiomeLink|savanna}}<br>{{BiomeLink|savanna plateau}}<br>{{BiomeLink|windswept savanna}}
+| '''默认解锁'''。
+| <code>savannas</code>
+|-
+| [[File:Invicon Oak Sapling.png|32px]]
+| Forest Biomes<br>森林生物群系
+| Now with raised trees<br>现在有更茂密的树了
+| Search among the Leaves<br>在树叶中寻找
+| 可生成生物群系：<br>{{BiomeLink|birch forest}}<br>{{BiomeLink|cherry grove}}<br>{{BiomeLink|flower forest}}<br>{{BiomeLink|forest}}<br>{{BiomeLink|grove}}<br>{{BiomeLink|old growth birch forest}}
+| 树叶掉落物品时1%概率掉落。
+| <code>forests</code>
+|-
+| [[File:Invicon Spruce Sapling.png|32px]]
+| Taiga Biomes<br>针叶林生物群系
+| Don't step on the pine cones<br>不要踩到松果
+| Found somewhere in the trees<br>在树上的某处找到
+| 可生成生物群系：<br>{{BiomeLink|taiga}}<br>{{BiomeLink|old growth pine taiga}}<br>{{BiomeLink|old growth spruce taiga}}
+| 树叶掉落物品时1%概率掉落。
+| <code>taigas</code>
+|-
+| [[File:Invicon Jungle Sapling.png|32px]]
+| Jungle Biomes<br>丛林生物群系
+| In the Jungle, the Miney Jungle<br>在丛林之中，在矿境般的丛林之中
+| Do not leave the leaves alone!<br>不要抛下树叶！
+| 可生成生物群系：<br>{{BiomeLink|bamboo jungle}}<br>{{BiomeLink|jungle}}<br>{{BiomeLink|sparse jungle}}
+| 树叶掉落物品时1%概率掉落。
+| <code>jungles</code>
+|-
+| [[File:Invicon Snowball.png|32px]]
+| Snowy Biomes<br>雪原生物群系
+| Let it snow, let it snow, let it snow<br>下雪吧，下雪吧，下雪吧
+| Search cold Blocks<br>在寒冷的方块中寻找
+| 可生成生物群系：<br>{{BiomeLink|cold ocean}}<br>{{BiomeLink|deep cold ocean}}<br>{{BiomeLink|deep frozen ocean}}<br>{{BiomeLink|frozen ocean}}<br>{{BiomeLink|frozen peaks}}<br>{{BiomeLink|frozen river}}<br>{{BiomeLink|snowy beach}}<br>{{BiomeLink|snowy plains}}<br>{{BiomeLink|snowy slopes}}<br>{{BiomeLink|snowy taiga}}
+| 挖掘任意的雪或冰时5%概率掉落。
+| <code>snowy</code>
+|-
+| [[File:Invicon Sand.png|32px]]
+| Desert Biome<br>沙漠生物群系
+| It's getting hot in here<br>这里越来越热了
+| Play in the sand<br>玩沙子
+| 可生成生物群系：<br>{{BiomeLink|desert}}
+| 挖掘[[沙子]]或[[红沙]]时1%概率掉落。
+| <code>desert</code>
+|-
+| [[File:Invicon Gray Terracotta.png|32px]]
+| Badlands Biomes<br>恶地生物群系
+| Lands took a turn for the bad<br>土地开始恶化了
+| Play in the mud<br>玩泥巴
+| 可生成生物群系：<br>{{BiomeLink|badlands}}<br>{{BiomeLink|eroded badlands}}<br>{{BiomeLink|wooded badlands}}
+| 挖掘任意陶瓦或黏土时5%概率掉落。
+| <code>badlands</code>
+|-
+| [[File:Invicon Mangrove Roots.png|32px]]
+| Swamp Biomes<br>沼泽生物群系
+| Get ready to get your boots wet<br>准备好打湿你的靴子
+| Find the source of the smallest creature<br>找到最小生物的来源
+| 可生成生物群系：<br>{{BiomeLink|mangrove swamp}}<br>{{BiomeLink|swamp}}
+| 挖掘萤火虫灌木丛。
+| <code>swamps</code>
+|-
+| [[File:Invicon Creaking Heart.png|32px]]
+| Dark Forest Biomes<br>黑森林生物群系
+| Can't see the forests for all the trees<br>只见树木，不见森林
+| Again!? Search among the leaves!<br>又来！？在树叶中寻找！
+| 可生成生物群系：<br>{{BiomeLink|dark forest}}<br>{{BiomeLink|pale garden}}
+| 树叶掉落物品时1%概率掉落。<br>需已解锁效果“Forests Biomes”“Jungles Biomes”和“Taigas Biomes”。
+| <code>dark_forests</code>
+|-
+| [[File:Invicon Packed Ice.png|32px]]
+| Ice Spikes Biome<br>冰刺之地生物群系
+| Cool<br>冰凉舒爽
+| Win a snowy Mine<br>成功挑战一个积雪的矿境
+| 可生成生物群系：<br>{{BiomeLink|ice spikes}}
+| 成功通过带有矿境效果“雪原生物群系”的矿境
+| <code>ice_spikes</code>
+|-
+| [[File:Invicon Red Mushroom.png|32px]]
+| Mushroom Fields Biome<br>蘑菇岛生物群系
+| Mushroom islands, except not only islands<br>蘑菇岛，但不只是岛
+| Collect Mushrooms and you might get lucky<br>收集一些蘑菇，说不定能走运
+| 可生成生物群系：<br>{{BiomeLink|mushroom fields}}
+| 挖掘红色蘑菇或棕色蘑菇时10%概率掉落。
+| <code>mushroom_fields</code>
+|-
+| [[File:Invicon Netherrack.png|32px]]
+| Barren Nether Biomes<br>下界荒地生物群系
+| Things are heating up!<br>正在升温！
+| The Ice Bucket Challenge<br>冰桶挑战
+| 可生成生物群系：<br>{{BiomeLink|basalt deltas}}<br>{{BiomeLink|nether wastes}}<br>{{BiomeLink|soul sand valley}}<br>海平面降低64格。
+| 在物品栏中获得[[黑曜石]]。
+| <code>nether_barrens</code>
+|-
+| [[File:Invicon Warped Fungus.png|32px]]
+| Nether Forest Biomes<br>下界森林生物群系
+| Can't see the forest for the... fungi?<br>不见森林，只见…真菌？
+| Found while slaying Endermen<br>杀死末影人时可以找到
+| 可生成生物群系：<br>{{BiomeLink|crimson forest}}<br>{{BiomeLink|warped forest}}<br>海平面降低64格。
+| 杀死[[末影人]]时20%概率掉落。
+| <code>nether_forests</code>
+|-
+| [[File:Invicon Sculk.png|32px]]
+| Deep Dark Biome<br>深暗之域生物群系
+| The (maybe not so) Deep (and also maybe not entirely) Dark<br>（可能没那么）深（也可能没那么）暗的地方
+| Search among blocks in a dark place...<br>前往某个昏暗的地方，在方块中寻找…
+| 可生成生物群系：<br>{{BiomeLink|deep dark}}
+| 在周围1格范围内亮度为0时挖掘方块时10%概率掉落。
+| <code>deep_dark</code>
+|-
+| [[File:Invicon End Stone.png|32px]]
+| End Biomes<br>末地生物群系
+| How did we End up here?<br>为什么会走向末路呢？
+| What creatures do you usually kill to get to the end?<br>你通常要杀死什么生物才能去末地？
+| 可生成生物群系：<br>{{BiomeLink|end barrens}}<br>{{BiomeLink|end highlands}}<br>{{BiomeLink|end midlands}}<br>{{BiomeLink|the end}}<br>此矿境的海平面降低64格
+| 击杀烈焰人时5%概率掉落。
+| <code>end</code>
+|}
+
+=== 生物生成 ===
+以下矿境效果控制矿境中可自然生成的生物。这些矿境效果'''可以共存'''。
+
+==== 友好生物 ====
+这些矿境效果负责友好生物生成，名称颜色均为绿色。
+
+{| class="wikitable" width=100%
+! width=32px | 图标 !! width=150px | 矿境效果名 !! 矿境效果描述 !! 解锁方式描述 !! 实际效果 !! 实际解锁方式 !! 命名空间ID
+|-
+| [[File:Invicon Sheep Spawn Egg Revision 3.png|32px]]
+| Sheep<br>绵羊
+| Fluffy mine<br>毛绒绒的矿境
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock"/>
+| {{EntityLink|sheep}}可在矿境内生成
+| '''默认解锁'''。
+| <code>sheep</code>
+|-
+| [[File:Invicon Cow Spawn Egg Revision 3.png|32px]]
+| Cows<br>牛
+| Moo<br>哞
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock"/>
+| {{EntityLink|cow}}可在矿境内生成
+| '''默认解锁'''。
+| <code>cows</code>
+|-
+| [[File:Invicon Pig Spawn Egg Revision 3.png|32px]]
+| Pigs<br>猪
+| Pork-u-pines, except without the pines?<br>是豪猪，尽管一点都不豪？
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock"/>
+| {{EntityLink|pig}}可在矿境内生成
+| '''默认解锁'''。
+| <code>pigs</code>
+|-
+| [[File:Invicon Chicken Spawn Egg Revision 3.png|32px]]
+| Chickens<br>鸡
+| Who came first? Clearly the chicken, in this mine<br>先有谁？在这个矿境里，当然是先有鸡
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock"/>
+| {{EntityLink|chicken}}可在矿境内生成
+| '''默认解锁'''。
+| <code>chickens</code>
+|-
+| [[File:Invicon Frog Spawn Egg Revision 2.png|32px]]
+| Frogs<br>青蛙
+| Heralds of change<br>变化的前兆
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock"/>
+| {{EntityLink|frog}}可在矿境内生成
+| '''默认解锁'''。
+| <code>frogs</code>
+|-
+| [[File:Invicon Fox Spawn Egg Revision 2.png|32px]]
+| Foxes<br>狐狸
+| What does the fox say?<br>狐狸怎么叫？
+| Berries<br>浆果
+| {{EntityLink|fox}}可在矿境内生成
+| 在物品栏中获得[[甜浆果]]。
+| <code>foxes</code>
+|-
+| [[File:Invicon Goat Spawn Egg Revision 2.png|32px]]
+| Goats<br>山羊
+| Mischevious horned menace of the mountain<br>爱恶作剧的山地带角恶灵
+| Go mining in the mountains<br>前往山地采矿
+| {{EntityLink|goat}}可在矿境内生成
+| 挖掘Y>128处的方块有10%概率掉落。
+| <code>goats</code>
+|-
+| [[File:Invicon Ocelot Spawn Egg Revision 2.png|32px]]
+| Ocelots<br>豹猫
+| Kitty!<br>猫咪！
+| Whiskers!<br>胡须！
+| {{EntityLink|ocelot}}可在矿境内生成
+| 物品栏中获得线。
+| <code>ocelots</code>
+|-
+| [[File:Invicon Axolotl Spawn Egg Revision 2.png|32px]]
+| Axolotls<br>美西螈
+| Anybody got a bucket?<br>有人带桶了吗？
+| Slippery!<br>滑溜溜！
+| {{EntityLink|axolotl}}和{{BiomeLink|Lush Caves}}可在矿境内生成
+| 物品栏中获得[[美西螈桶]]。
+| <code>axolotls</code>
+|-
+| [[File:Invicon Armadillo Spawn Egg Revision 2.png|32px]]
+| Armadillos<br>犰狳
+| Careful, you might scare them<br>小心点，别把它们吓着了
+| They like being brushed<br>它们喜欢被刷扫
+| {{EntityLink|armadillo}}可在矿境内生成
+| 从合成输出栏获取[[刷子]]。
+| <code>armadillos</code>
+|-
+| [[File:Invicon Mooshroom Spawn Egg Revision 3.png|32px]]
+| Mooshrooms<br>哞菇
+| These mushrooms moo<br>蘑菇在哞哞叫
+| Go pick mushrooms<br>去采蘑菇
+| {{EntityLink|mooshroom}}可在矿境内生成
+| 挖掘红色蘑菇或棕色蘑菇有10%概率掉落。
+| <code>mooshrooms</code>
+|-
+| [[File:Invicon Panda Spawn Egg Revision 2.png|32px]]
+| Pandas<br>熊猫
+| Cute and clumsy<br>可爱又笨拙
+| Eat some bamboo<br>吃些竹子
+| {{EntityLink|panda}}可在矿境内生成
+| {{ctrl|食用}}[[竹子]]，不需要食用完毕。
+| <code>pandas</code>
+|-
+| [[File:Invicon Parrot Spawn Egg Revision 2.png|32px]]
+| Parrots<br>鹦鹉
+| Tssssss sharp<br>嘶嘶嘶升调版
+| Eat a cookie, the Parrot doesn't want it anyway<br>吃一块曲奇，反正鹦鹉不想吃
+| {{EntityLink|parrot}}可在矿境内生成
+| {{ctrl|食用}}[[曲奇]]，不需要食用完毕。
+| <code>parrots</code>
+|-
+| [[File:Invicon Rabbit Spawn Egg Revision 2.png|32px]]
+| Rabbits<br>兔子
+| Jumpy meals<br>跳跃的饭
+| Jump... from really high up<br>从很高的地方…跳下来
+| {{EntityLink|parrot}}可在矿境内生成<ref><code>net.minecraft.world.level.mines.WorldEffects</code>：<code>RABBITS = ....SpawnerData(EntityType.PARROT, 3, 5))...</code></ref>
+| 受到至少{{hp|11}}[[摔落伤害]]。
+| <code>rabbits</code>
+|-
+| [[File:Invicon Sniffer Spawn Egg Revision 2.png|32px]]
+| Sniffers<br>嗅探兽
+| Let the gentle giants roam the Mines once more<br>让这些温柔的大家伙再一次漫游矿境
+| They like flowers<br>它们喜欢花朵
+| {{EntityLink|sniffer}}可在矿境内生成
+| 花产生掉落物时有5%概率随之掉落。
+| <code>sniffers</code>
+|-
+| [[File:Invicon Strider Spawn Egg Revision 2.png|32px]]
+| Striders<br>炽足兽
+| You better make the mine have some warm cozy lava<br>矿境里最好有一些暖和舒适的熔岩
+| Prepare to go riding<br>准备骑行
+| {{EntityLink|strider}}可在矿境内生成
+| 物品栏中获得鞍。
+| <code>striders</code>
+|}
+
+==== 敌对生物 ====
+这些矿境效果负责敌对生物生成，名称颜色通常为红色，例外是矿境效果“蜜蜂”的名称颜色为浅绿色。
+
+{| class="wikitable" width=100%
+! width=32px | 图标 !! width=150px | 矿境效果名 !! 矿境效果描述 !! 解锁方式描述 !! 实际效果 !! 实际解锁方式 !! 命名空间ID
+|-
+| [[File:Invicon Zombie Spawn Egg Revision 3.png|32px]]
+| Zombies<br>僵尸
+| Braaaaaiiiinsss<br>吃——脑——子——
+| Go on a monster hunt!<br>开始猎杀怪物！
+| {{EntityLink|zombie}}可在矿境内生成
+| 杀死[[敌对生物]]有5%概率掉落。
+| <code>zombies</code>
+|-
+| [[File:Invicon Skeleton Spawn Egg Revision 3.png|32px]]
+| Skeletons<br>骷髅
+| Feel it in my bones<br>深入骨髓
+| A chance while slaying monsters<br>杀死怪物时有概率获得
+| {{EntityLink|skeleton}}可在矿境内生成
+| 杀死[[敌对生物]]有5%概率掉落。
+| <code>skeletons</code>
+|-
+| [[File:Invicon Spider Spawn Egg Revision 3.png|32px]]
+| Spiders<br>蜘蛛
+| So many years of bad luck from this one<br>这么多年的霉运都来自这儿
+| Slay Slay, slay...<br>杀、杀、杀…
+| {{EntityLink|spider}}可在矿境内生成
+| 杀死[[敌对生物]]有5%概率掉落。
+| <code>spiders</code>
+|-
+| [[File:Invicon Cave Spider Spawn Egg Revision 3.png|32px]]
+| Cave spiders<br>洞穴蜘蛛
+| Perilous Poisonous Pests<br>危险的有毒害虫
+| From Spiders<br>来自蜘蛛
+| {{EntityLink|cave spider}}可在矿境内生成
+| 杀死[[蜘蛛]]和[[洞穴蜘蛛]]有20%概率掉落。
+| <code>cave_spiders</code>
+|-
+| [[File:Invicon Creeper Spawn Egg Revision 3.png|32px]]
+| Creepers<br>苦力怕
+| Tssssssssss<br>嘶嘶嘶…
+| I sense a theme, found while slaying monsters!<br>我有预感，杀死怪物时可以找到！
+| {{EntityLink|creeper}}可在矿境内生成
+| 杀死[[敌对生物]]有5%概率掉落。
+| <code>creepers</code>
+|-
+| [[File:Invicon Slime Spawn Egg Revision 3.png|32px]]
+| Slimes<br>史莱姆
+| Get slimed!<br>世界变得黏滑了！
+| You guessed it - Slay monsters!<br>你猜对了——杀死这些怪物！
+| {{EntityLink|slime}}可在矿境内生成
+| 杀死[[敌对生物]]有5%概率掉落。
+| <code>slimes</code>
+|-
+| [[File:Invicon Enderman Spawn Egg Revision 3.png|32px]]
+| Endermen<br>末影人
+| Look at me when I'm talking to you! Actually, wait...<br>我对你讲话的时候要看着我！哎，等等…
+| How many monster do you have to Slay!?<br>你非要杀死这么多怪物吗！？
+| {{EntityLink|enderman}}可在矿境内生成
+| 杀死[[敌对生物]]有5%概率掉落。<br>需已解锁效果“僵尸”、“骷髅”、“苦力怕”和“蜘蛛”。
+| <code>endermen</code>
+|-
+| [[File:Invicon Witch Spawn Egg Revision 2.png|32px]]
+| Witches<br>女巫
+| Double, double toil and trouble<br>不惮辛劳不惮烦
+| You would have never guessed it! Slay monsters to find this one! :D<br>你绝对猜不到！杀死怪物可以找到这个东西！:D
+| {{EntityLink|witch}}可在矿境内生成
+| 杀死[[敌对生物]]有5%概率掉落。<br>需已解锁效果“僵尸”、“骷髅”、“苦力怕”和“蜘蛛”。
+| <code>witches</code>
+|-
+| [[File:Invicon Magma Cube Spawn Egg Revision 3.png|32px]]
+| Magma cubes<br>岩浆怪
+| Squishy and stompy and hot at the same time<br>很黏、很硬，同时还很烫
+| Get some Magma<br>获得一些岩浆膏
+| {{EntityLink|magma cube}}可在矿境内生成
+| 在物品栏中获得[[岩浆块]]或[[岩浆膏]]。
+| <code>magma_cubes</code>
+|-
+| [[File:Invicon Blaze Spawn Egg Revision 3.png|32px]]
+| Blazes<br>烈焰人
+| They're all the hotness right now!<br>它们现在可是人气火爆！
+| Go mining in a Nether biome<br>在下界生物群系采矿
+| {{EntityLink|blaze}}可在矿境内生成
+| 挖掘[[下界石英矿石]]或[[下界金矿石]]掉落。
+| <code>blazes</code>
+|-
+| [[File:Invicon Breeze Spawn Egg Revision 2.png|32px]]
+| Breezes<br>旋风人
+| These ones should be a breeze!<br>就是些弱不禁风的家伙！
+| Trial spawners might have something to unlock this<br>试炼刷怪笼里也许有解锁这个的东西
+| {{entityLink|breeze}}可在矿境内生成
+| 在物品栏中获得[[试炼钥匙]]。
+| <code>breezes</code>
+|-
+| [[File:Invicon Pillager Spawn Egg Revision 2.png|32px]]
+| Pillagers<br>掠夺者
+| Villager, Illager, Pillager - what's the difference?<br>村民、灾厄村民、掠夺者，有什么区别？
+| Buy it from a villager. The Lodestone will guide your way!<br>到村民那里购买。磁石会为你指引方向！
+| {{EntityLink|pillager}}可在矿境内生成
+| 从新手级叛徒村民购买。
+| <code>pillagers</code>
+|-
+| [[File:Invicon Vindicator Spawn Egg Revision 2.png|32px]]
+| Vindicators<br>卫道士
+| Here's Johnny!<br>Johnny来了！
+| Buy it from a villager. The Lodestone will guide your way!<br>到村民那里购买。磁石会为你指引方向！
+| {{EntityLink|vindicator}}可在矿境内生成
+| 从学徒级叛徒村民购买。
+| <code>vindicators</code>
+|-
+| [[File:Invicon Evoker Spawn Egg Revision 2.png|32px]]
+| Evokers<br>唤魔者
+| Wololo
+| Buy it from a villager. The Lodestone will guide your way!<br>到村民那里购买。磁石会为你指引方向！
+| {{EntityLink|evoker}}可在矿境内生成
+| 从老手级叛徒村民购买。
+| <code>evokers</code>
+|-
+| [[File:Invicon Ravager Spawn Egg Revision 2.png|32px]]
+| Ravagers<br>劫掠兽
+| Rawr<br>吼~
+| Buy it from a villager. The Lodestone will guide your way!<br>到村民那里购买。磁石会为你指引方向！
+| {{EntityLink|ravager}}可在矿境内生成
+| 从专家级叛徒村民购买。
+| <code>ravagers</code>
+|-
+| [[File:Invicon Illusioners.png|32px]]
+| Illusioners<br>幻术师
+| It's not even in the game<br>它甚至没在游戏内出现过
+| Buy it from a villager. The Lodestone will guide your way!<br>到村民那里购买。磁石会为你指引方向！
+| {{EntityLink|illusioner}}可在矿境内生成
+| 从大师级叛徒村民购买。
+| <code>illusioners</code>
+|-
+| [[File:Invicon Guardian Spawn Egg Revision 2.png|32px]]
+| Guardians<br>守卫者
+| Protectors of the deep<br>深海守护者
+| Slaying creatures of the water will anger the Guardians<br>杀死水生生物会激怒守卫者
+| {{EntityLink|guardian}}可在矿境内生成
+| 杀死[[水生生物]]掉落。
+| <code>guardians</code>
+|-
+| [[File:Invicon Endermite Spawn Egg Revision 2.png|32px]]
+| Endermites<br>末影螨
+| Literally bugs in the game<br>字面意义上的游戏bug
+| Found in the end stone<br>在末地石中找到
+| {{EntityLink|endermite}}可在矿境内生成
+| 挖掘末地石有10%概率掉落。
+| <code>endermites</code>
+|-
+| [[File:Invicon Shulker Spawn Egg Revision 3.png|32px]]
+| Shulkers<br>潜影贝
+| Box material<br>盒子材料
+| Stomp out bugs from their natural environment<br>踩死自然环境中的虫子
+| {{EntityLink|shulker}}可在矿境内生成
+| 击杀末影螨时有10%概率掉落。
+| <code>shulkers</code>
+|-
+| [[File:Invicon Ghast Spawn Egg Revision 3.png|32px]]
+| Ghasts<br>恶魂
+| No, they're not happy<br>不，它们并不快乐
+| Probably dried out among fossils<br>可能在化石中失水了
+| {{EntityLink|ghast}}可在矿境内生成
+| 挖掘骨块。
+| <code>ghasts</code>
+|-
+| [[File:Invicon Zombified Piglin Spawn Egg Revision 2.png|32px]]
+| Zombified piglins<br>僵尸猪灵
+| These pigs seem quite easily angered<br>这些猪看起来很容易被激怒
+| Somehow related to pigs in the fires of the nether<br>多少与下界之火洗礼过的猪有关
+| {{EntityLink|zombified piglin}}可在矿境内生成
+| 击杀着火的猪。
+| <code>zombified_piglins</code>
+|-
+| [[File:Invicon Piglin Spawn Egg Revision 2.png|32px]]
+| Piglins<br>猪灵
+| Pigs that love gold... and violence<br>这些猪喜欢黄金…还有暴力
+| Feed some gold to a pig<br>给猪喂些黄金
+| {{EntityLink|piglin}}和{{EntityLink|piglin brute}}可在矿境内生成<br>此矿境的维度类型{{nbt|boolean|piglin_safe}}为<code>true</code>
+| 喂猪吃金胡萝卜。
+| <code>piglins</code>
+|-
+| [[File:Invicon Zombified Piglin Spawn Egg Revision 2.png|32px]]<ref><code>net.minecraft.world.level.mines.WorldEffects</code>：<code>WITHER_SKELETONS = ....withItemModelOf(Items.ZOMBIFIED_PIGLIN_SPAWN_EGG)...</code></ref>
+| Wither skeletons<br>凋灵骷髅
+| Wither, Blister, Burn & Peel<br>凋零、脓疱、烧伤还有脱皮
+| Hidden among the regular Skeletons<br>隐藏在普通骷髅中
+| {{EntityLink|wither skeleton}}可在矿境内生成
+| 击杀骷髅有10%概率掉落。
+| <code>wither_skeletons</code>
+|-
+| [[File:Invicon Bee Spawn Egg Revision 3.png|32px]]
+| Bees<br>蜜蜂
+| No, not the bees! NOT THE BEES!<br>不！别蜂了！不要再蜂了！
+| You've killed their brother. Now they're out for revenge.<br>你杀死了它们的兄弟，现在它们来复仇了。
+| {{EntityLink|bee}}可在矿境内大量生成<br>蜜蜂遇到玩家时即对玩家发怒<br>蜜蜂不会失去蜇针
+| 击杀蜜蜂。
+| <code>bees</code>
+|-
+| [[File:Invicon Hoglin Spawn Egg Revision 3.png|32px]]
+| Hoglins<br>疣猪兽
+| The whole hog<br>大肥猪
+| Through the death of many Pigs<br>{{tr|通过|透過}}杀死大量猪获得
+| {{EntityLink|hoglin}}可在矿境内生成<br>此矿境的维度类型{{nbt|boolean|piglin_safe}}为<code>true</code>
+| 击杀猪时有1%概率掉落。
+| <code>hoglins</code>
+|-
+| [[File:Invicon Zoglin Spawn Egg Revision 2.png|32px]]
+| Zoglins<br>僵尸疣猪兽
+| So angry<br>非常生气
+| Kill a zombie on the turf of the Piglins<br>在猪灵的地盘上杀死一只僵尸
+| {{EntityLink|zoglin}}可在矿境内生成
+| 击杀站在诡异菌岩或绯红菌岩上的僵尸。
+| <code>zoglins</code>
+|}
+
+=== 基础岩石类型 ===
+这些矿境效果主要控制了矿境内世界生成使用的基础岩石。矿境必须至少包含其中一个效果，这些矿境效果'''不可共存'''。矿境效果的名称颜色均为蓝色。
+
+{| class="wikitable" width=100%
+! width=32px | 图标 !! width=150px | 矿境效果名 !! 矿境效果描述 !! 解锁方式描述 !! 实际效果 !! 实际解锁方式 !! 命名空间ID
+|-
+| [[File:Invicon Stone.png|32px]]
+| Base rock type: Stone<br>基础岩石类型：石头
+| The mountains are made of Stone<br>山体将由石头组成
+| style="text-align:center;" {{tc|n/a}}<ref group="注" name="default-unlock"/>
+| 矿境内绝大部分岩石由{{BlockLink|stone}}构成。
+| '''默认解锁'''。
+| <code>base_stone</code>
+|-
+| [[File:Invicon Blackstone.png|32px]]
+| Base rock type: Blackstone<br>基础岩石类型：黑石
+| The mountains are made of Blackstone<br>山体将由黑石组成
+| Mine Blackstone<br>挖掘黑石
+| 矿境内绝大部分岩石由{{BlockLink|blackstone}}构成。
+| 挖掘黑石时10%概率掉落。
+| <code>base_blackstone</code>
+|-
+| [[File:Invicon Diorite.png|32px]]
+| Base rock type: Diorite<br>基础岩石类型：闪长岩
+| The mountains are made of Diorite<br>山体将由闪长岩组成
+| Mine Diorite<br>挖掘闪长岩
+| 矿境内绝大部分岩石由{{BlockLink|diorite}}构成。
+| 挖掘闪长岩时10%概率掉落。
+| <code>base_diorite</code>
+|-
+| [[File:Invicon Andesite.png|32px]]
+| Base rock type: Andesite<br>基础岩石类型：安山岩
+| The mountains are made of Andesite<br>山体将由安山岩组成
+| Mine Andesite<br>挖掘安山岩
+| 矿境内绝大部分岩石由{{BlockLink|andesite}}构成。
+| 挖掘安山岩时10%概率掉落。
+| <code>base_andesite</code>
+|-
+| [[File:Invicon Granite.png|32px]]
+| Base rock type: Granite<br>基础岩石类型：花岗岩
+| The mountains are made of Granite<br>山体将由花岗岩组成
+| Mine Granite<br>挖掘花岗岩
+| 矿境内绝大部分岩石由{{BlockLink|granite}}构成。
+| 挖掘花岗岩时10%概率掉落。
+| <code>base_granite</code>
+|-
+| [[File:Invicon Tuff.png|32px]]
+| Base rock type: Tuff<br>基础岩石类型：凝灰岩
+| The mountains are made of Tuff<br>山体将由凝灰岩组成
+| Mine Tuff<br>挖掘凝灰岩
+| 矿境内绝大部分岩石由{{BlockLink|tuff}}构成。
+| 挖掘凝灰岩时10%概率掉落。
+| <code>base_tuff</code>
+|-
+| [[File:Invicon Deepslate.png|32px]]
+| Base rock type: Deepslate<br>基础岩石类型：深板岩
+| The mountains are made of Deepslate<br>山体将由深板岩组成
+| Mine Deepslate<br>挖掘深板岩
+| 矿境内绝大部分岩石由{{BlockLink|deepslate}}构成。
+| 挖掘深板岩时10%概率掉落。
+| <code>base_deepslate</code>
+|-
+| [[File:Invicon End Stone.png|32px]]
+| Base rock type: End Stone<br>基础岩石类型：末地石
+| The mountains are made of End Stone<br>山体将由末地石组成
+| Mine End Stone<br>挖掘末地石
+| 矿境内绝大部分岩石由{{BlockLink|end stone}}构成。
+| 挖掘末地石时10%概率掉落。
+| <code>base_end_stone</code>
+|}
+
+=== 其他 ===
+以下矿境效果影响矿境中各方各面的机制，包括方块表面效果、玩家属性、生物行为、时间与天气更替等。
+
+{| class="wikitable" width=100%
+! width=32px | 图标 !! width=150px | 矿境效果名 !! 矿境效果描述 !! 解锁方式描述 !! 名称颜色 !! 经验倍率 !! 实际效果 !! 实际解锁方式 !! 命名空间ID
+|-
+| [[File:Invicon Bucket.png|32px]]
+| Dry Land<br>旱地
+| Gronk thirsty. Gronk drink ALL water!<br>Gronk渴了。Gronk把水喝光了！
+| Try to get even warmer in the Badlands<br>试着在恶地变得更加温暖
+| 蓝色
+| style="text-align:center;" | -
+| 不再生成海洋、湖泊，含水层生成得更少。<br>[[涌泉]]仍会正常生成。[[水桶]]仍可正常使用。
+| 在原版<ref group="注">所有的非特殊矿境和部分特殊矿境中的生物群系均为数据包后添加的，ID格式如<code>minecraft:level<''序号''>/<''生物群系ID''></code></ref>恶地生物群系及其变种获得熔岩桶。
+| <code>dry_land</code>
+|-
+| [[File:Invicon Water Bucket.png|32px]]
+| Water World<br>水世界
+| Like the hit film from Cavin' Costner<br>就像凯文·科斯特纳拍的经典电影
+| Win a dry Mine<br>成功挑战一个干燥的矿境
+| 蓝色
+| style="text-align:center;" | -
+| 海平面上升至Y=127处。
+| 成功通过带有矿境效果“旱地”的矿境
+| <code>water_world</code>
+|-
+| [[File:Invicon Blue Ice.png|32px]]
+| Icy Surfaces<br>地表结冰
+| Might be a little slippery...<br>可能有点滑…
+| Take a boat ride<br>乘船出行
+| 蓝色
+| 2.0
+| 所有[[固体方块]]获得与[[蓝冰]]相同的[[阻力系数]]。
+| 使用船或运输船物品。
+| <code>icy</code>
+|-
+| [[File:Invicon Slime Block.png|32px]]
+| Bouncy Blocks<br>方块弹弹
+| Release your inner slime<br>释放你内心深处的黏液
+| Find and kill some Slime<br>找到并杀死一些史莱姆
+| 绿色
+| 2.0
+| 所有固体方块获得与[[黏液块]]相同的弹跳性。
+| 杀死[[史莱姆]]或岩浆怪掉落。
+| <code>bouncy</code>
+|-
+| [[File:Invicon Water Bottle.png|32px]]
+| One HP<br>一点生命值
+| There is only one heart.<br>只有一颗心。
+| Kill something while having only one heart<br>在只有一颗心的时候杀点什么生物
+| 品红色
+| 4.0
+| 玩家的[[最大生命值]]为{{hp|1}}。
+| 在[[生命值]]为{{hp|1}}时杀死任意[[生物]]。
+| <code>one_hp</code>
+|-
+| [[File:Invicon Frog Spawn Egg.png|32px]]
+| Wednesday Frogs<br>周三青蛙
+| Heralds of doom<br>末日的前兆
+| Might be trickier to find than you might think<br>比你想得还能藏
+| 品红色
+| 1.2
+| {{EntityLink|frog}}可以吃掉生存模式或冒险模式下的玩家。
+| 击杀青蛙。
+| <code>wednesday_frogs</code>
+|-
+| [[File:Invicon Rotten Flesh.png|32px]]
+| (Near) Universal Anger<br>（近乎）无差别愤怒
+| Every neutral mob is hostile<br>所有中立生物始终保持敌对
+| Win a mine with the "Bees" ingredient<br>成功挑战一个含有“蜜蜂”原料的矿境
+| 品红色
+| 2.0
+| {{EntityLink|iron-golem|text=自然生成的铁傀儡}}、{{EntityLink|polar-bear}}、{{EntityLink|wolf}}、{{EntityLink|enderman}}、{{EntityLink|zombified-piglin}}将始终与玩家敌对。<br>已驯服的狼仍不会攻击其主人。
+| 成功通过带有矿境效果“蜜蜂”的矿境
+| <code>universal_anger</code>
+|-
+| [[File:Invicon Lead.png|32px]]
+| Soul Link<br>心连心
+| Every player takes damage if one player is hurt<br>一名玩家受伤时，所有玩家都受到伤害
+| Win a mine with the "One HP" ingredient<br>成功挑战一个含有“一点生命值”原料的矿境
+| 品红色
+| 2.0
+| 玩家受到伤害时，其他玩家会受到无来源的等量的魔法伤害。<br>此效果造成的魔法伤害也会触发此效果，导致无限递归，进而使服务端因为堆栈溢出崩溃。
+| 成功通过带有矿境效果“一点生命值”的矿境。<br>仅限多人游戏，单人游戏中不会在矿境合成台中出现。
+| <code>soul_link</code>
+|-
+| [[File:Invicon Blue Dye.png|32px]]
+| Eternal Night<br>永恒之夜
+| It's dark in here isn't it?<br>这里很黑，不是吗？
+| Unlocked after a while, I guess?<br>过一会儿就能解锁了，吧？
+| 品红色
+| 5.0
+| 维度时间恒为午夜（18000）。
+| 共计解锁至少20个矿境效果后，完成启用了此效果的矿境。
+| <code>eternal_night</code>
+|-
+| [[File:Invicon Black Dye.png|32px]]
+| Eternal Rain<br>永恒之雨
+| Blimey rainy innit?!<br>哎呀，这雨到底能不能停？！
+| Win an eternally dark Mine<br>成功挑战一个永远黑暗的矿境
+| 品红色
+| 2.0
+| 维度天气恒为降雨。
+| 成功通过带有矿境效果“永恒之夜”的矿境
+| <code>eternal_rain</code>
+|-
+| [[File:Invicon Yellow Dye.png|32px]]
+| Eternal Lightning<br>永恒雷暴
+| Very, very frightening!<br>非常非常可怕！
+| Escape a Mine that will just not stop raining.<br>逃离一个不会停止降雨的矿境。
+| 品红色
+| 5.0
+| 维度天气恒为雷暴。<br>雷击频率大幅增加。
+| 成功通过带有矿境效果“永恒之雨”的矿境
+| <code>eternal_lightning</code>
+|-
+| [[File:Invicon Phantom Spawn Egg.png|32px]]
+| Insomniacs<br>失眠
+| No rest, no respite<br>无休，无眠
+| Win a Mine that never sees the light of day<br>成功挑战一个永不见天日的矿境
+| 红色
+| 2.0
+| 进入矿境时，将玩家的统计信息“{{tr|自上次入眠|距離上次睡覺|距離上次瞓覺}}”更改为{{convert|72000||游戏日}}。这将会导致幻翼在矿境中生成。
+| 成功通过带有矿境效果“永恒之夜”的矿境
+| <code>insomniacs</code>
+|-
+| [[File:Invicon Dirt.png|32px]]
+| No drops?<br>没有掉落物？
+| Who needs it?<br>谁会需要啊？
+| Found by chance<br>偶尔可以找到
+| 品红色
+| 5.0
+| 生物死亡时不会产生掉落物。
+| 共计解锁至少20个矿境效果后，完成启用了此效果的矿境。
+| <code>no_drops</code>
+|-
+| [[File:Invicon Lava Bucket.png|32px]]
+| Ultrawarm<br>超高温
+| It's getting hot in here<br>这里越来越热了
+| Stand in lava... if you dare<br>站在熔岩里…如果你胆子够大
+| 品红色
+| style="text-align:center;" | -
+| 维度内海洋和河流的水替换为熔岩。<br>此矿境的维度类型{{nbt|boolean|ultrawarm}}为<code>true</code>。
+| 受到[[熔岩]]伤害。
+| <code>ultrawarm</code>
+|-
+| [[File:Invicon TNT.png|32px]]
+| Explosive Traps<br>爆炸陷阱
+| Watch your step<br>注意脚下
+| Play a while..<br>玩一会儿…
+| 品红色
+| 1.5
+| 每经过一段时间，玩家脚下的方块会被替换为{{BlockLink|tnt|text=点燃的TNT}}。
+| 完成10个矿境。
+| <code>explosive_traps</code>
+|-
+| [[File:Invicon Tropical Fish.png|32px]]
+| Fish Out of Water<br>如鱼失水
+| Just keep swimming<br>坚持游泳
+| Fish!<br>钓鱼！
+| 品红色
+| 5.0
+| 玩家只能在水中[[呼吸]]。<br>游戏随机生成的矿境永远不会包含此矿境效果。
+| {{ctrl|使用}}[[钓鱼竿]]。
+| <code>fish_out_of_water</code>
+|}
+
+==== 特殊事件 ====
+以下矿境效果通常只用于特殊矿境且不可解锁。这些矿境效果无额外经验倍率，名称颜色均为蓝色。实际效果见下文。
+
+{| class="wikitable" width=100%
+! width=32px | 图标 !! width=150px | 矿境效果名 !! 矿境效果描述 !! 解锁方式描述 !! 实际效果 !! 实际解锁方式 !! 命名空间ID
+|-
+| [[File:Invicon Kuiper World.png|32px]]
+| Kuiper World<br>柯伊伯带世界
+| Igloo in spaaaaace!<br>太——空中的雪屋！
+| style="text-align:center;" {{tc|n/a}}
+| 见下文{{slink||kuiper_world}}
+| style="text-align:center;" {{tc|n/a}}{{note|name=cannot_unlock}}
+| <code>kuiper_world</code>
+|-
+| [[File:Invicon Ender Dragon Spawn Egg.png|32px]]
+| Ender Dragon Boss<br>末影龙Boss战
+| You already know this one<br>你知道的
+| Complete a Mine with an End biome<br>完成一个含有末地生物群系的矿境
+| 进入矿境时立刻启用末影龙战斗系统。<br>所有生物群系均可生成黑曜石平台。<br>末影龙死亡时，将在返回传送门上生成矿境传送方块。
+| style="text-align:center;" {{tc|n/a}}{{note|name=cannot_unlock}}
+| <code>ender_dragon_boss_fight</code>
+|-
+| [[File:Invicon Ghast Tear.png|32px]]
+| Angry Ghast Boss<br>愤怒恶魂Boss战
+| This one's not happy with you<br>这家伙对你没有好脸色
+| Give a Ghast a taste of its own medicine<br>让恶魂也尝尝火球的滋味
+| 进入矿境后，将在60秒后在玩家周围生成一个[[愤怒恶魂]]。
+| style="text-align:center;" {{tc|n/a}}{{note|name=cannot_unlock}}
+| <code>angry_ghast_boss_fight</code>
+|-
+| [[File:Invicon Ominous Bottle.png|32px]]
+| Raid!<br>袭击！
+| They're coming for your loot<br>它们为你的战利品而来
+| Slay a Pillager<br>杀死一名掠夺者
+| 进入矿境后，立刻在玩家出生点生成一个村庄，并给予玩家无限时长的不祥之兆效果。这会导致矿境发生袭击。
+| style="text-align:center;" {{tc|n/a}}{{note|name=cannot_unlock}}
+| <code>raid</code>
+|-
+| [[File:Invicon Wither Spawn Egg.png|32px]]
+| Wither Boss Fight<br>凋灵Boss战
+| They say this one's harder when it's standing on Bedrock<br>据说这家伙在基岩板{{sic}}上更难打
+| Obtain a Wither Skull<br>获得凋灵骷髅头颅
+| 进入矿境后，将在30秒后在玩家周围生成一个凋灵。
+| style="text-align:center;" {{tc|n/a}}{{note|name=cannot_unlock}}
+| <code>wither_boss_fight</code>
+|-
+| [[File:Invicon Ender Pearl.png|32px]]
+| The Enderman Boss Fight<br>末影人Boss战
+| THIS Enderman<br>这个末影人
+| Just play the game!<br>只需玩玩而已！
+| 进入矿境后，将在30秒后在玩家周围生成一个末影人。
+| style="text-align:center;" {{tc|n/a}}{{note|name=cannot_unlock}}
+| <code>the_enderman_boss_fight</code>
+|-
+| [[File:Invicon Skeleton Skull.png|32px]]
+| {{tc|n/a|Spooky Scary Skeletons}}{{note|name=spooky_scary_skeletons_boss_fight|此处有关内容是根据进度中的描述撰写的。语言文件中不存在该矿境效果的英文文本。}}<br>{{advancement name|nether.get_wither_skull|zh|rev=1}}
+| style="text-align:center;" {{tc|n/a}}{{note|语言文件中不存在该矿境效果描述的英文文本。}}
+| style="text-align:center;" {{tc|n/a}}
+| 见下文{{slink||spooky_scary_skeletons_boss_fight}}
+| style="text-align:center;" {{tc|n/a}}{{note|name=cannot_unlock}}
+| <code>spooky_scary_skeletons_boss_fight</code>
+|-
+| [[File:Invicon Warden Spawn Egg.png|32px]]
+| Warden Boss Fight<br>监守者Boss战
+| Warden wards off the competition<br>监守者稳守台柱
+| Walk on this block and give of a chime, it's a nice crystal but not even worth a dime<br>踏上此方块，清音随步响，晶莹虽美丽，价值却无两
+| 见下文{{slink||warden_boss_fight}}
+| 挖掘紫水晶块、紫水晶母岩、紫水晶芽、紫水晶簇时掉落。<br>游戏随机生成的矿境永远不会包含此矿境效果。
+| <code>warden_boss_fight</code>
+|-
+| [[File:Invicon Silverfish Spawn Egg.png|32px]]
+| Small But Deadly Boss Fight<br>小怪物大麻烦Boss战
+| Tiny (not so) friendly critters<br>（不太）友好的小家伙
+| Just play the game!<br>只需玩玩而已！
+| 见下文{{slink||small_but_deadly_boss_fight}}
+| style="text-align:center;" {{tc|n/a}}{{note|name=cannot_unlock}}
+| <code>small_but_deadly_boss_fight</code>
+|}
+
+'''{{text anchor|kuiper_world}}'''
+
+进入矿境时立刻设置时间为午夜，停止时间流逝。矿境生物群系为虚空，初始不生成任何方块。
+
+在玩家初始出生点（Y坐标为0）的<code>[x+15, y ,z-100]</code>至<code>[x+225, y ,z+100]</code>的区域内尝试生成150次，每次生成三个以冰雪为基底的小空岛，上面随机附有云杉、北极熊、狐狸或雪傀儡；并固定在<code>[x+200, y+180 ,z]</code>处生成矿境出口。
+
+在初始生成点处生成带有雪屋的大空岛，玩家将在此空岛上生成。雪屋类似于原版雪屋，但箱子内容固定：
+* 17 {{ItemLink|Potato}}
+* 1 {{ItemLink|Cooked Salmon}}
+* 1 {{ItemLink|Diamond Pickaxe}}
+* 1 {{ItemLink|Diamond Shovel}}
+* 1 {{ItemLink|Lava Bucket}}
+* 1 {{ItemLink|Water Bucket}}
+
+'''{{text anchor|spooky_scary_skeletons_boss_fight}}'''
+
+进入矿境后，将在30秒后生成3波敌人，每波次间隔30秒。
+* 第一波：10个骷髅。
+* 第二波：10个凋灵骷髅。
+* 第三波：20个骷髅和20个凋灵骷髅。
+
+'''{{text anchor|warden_boss_fight}}'''
+{{see also|监守者/25w14craftmine}}
+进入矿境前，玩家出生点的<code>[x+40, y ,z]</code>处会放置监守者Boss战舞台，舞台中央生成监守者，观众席生成32个无业[[村民]]（启用“永恒雷暴”效果时可能会被闪电转化为[[女巫]]）。监守者默认不攻击玩家，不给予玩家[[黑暗]]状态效果，不会感测振动。
+
+后台房间中有装着道具的箱子和红石装置。期间玩家的[[动作栏]]会出现观众的现场反应，玩家可以据其提示操作后台，配合监守者完成演出。若监守者受到伤害，或60秒后未能进入下一表演阶段，它的行为会变得与常规版本无异，此时只能通过击杀监守者以完成特殊矿境事件。
+
+以下的阶段名称直接对应监守者[[生物记忆]]<code>acting_stage</code>的值。此记忆不存在时即使此矿境效果生效监守者也会如同往常一样探测并攻击玩家。
+
+* 阶段{{cd|-1}}
+** 无活动，监守者躺在生成位置，观众会发出嘈杂的谈论声{{sound||crowd waiting.ogg}}。
+** 在此期间内，尝试吹奏[[山羊角]]动作栏会提示“Why are they trying to start the show now? We will get quiet when it's time!”（怎么现在就想开始演出了？到时间了我们自然会安静的！）。
+** 41秒后，动作栏提示“I wonder when they will "Go-at" (horn) the start of the fight?”（不知战斗的号角何时吹响呢？），并进入阶段0。
+* 阶段{{cd|0}}
+** 吹奏山羊角，监守者起身，观众发出示意安静的嘘声{{sound||crowd start.ogg}}。
+** 20秒后，动作栏提示“Where is the music? Isn't it supposed to start?”（音乐呢？不是该开始了吗？）。
+** 将[[音乐唱片]]插入[[唱片机]]播放，进入阶段1。
+** 若监守者恢复敌对状态，则动作栏提示“Even the Warden got too tired of waiting for the music to start...”（连监守者都等音乐等得不耐烦了……）。
+* 阶段{{cd|1}}
+** 监守者略微移动。
+** 10秒后，动作栏提示“The Warden is so ready to act, when does the lightshow start?”（监守者都准备就绪了，灯光秀什么时候开始呢？）。
+** 点亮[[铜灯]]开启舞台灯光，进入阶段2。
+* 阶段{{cd|2}}
+** 动作栏提示“IT'S DOING THE WORM! THE WORM!”（它在跳蠕虫舞！蠕虫舞！）。
+** 监守者躺在地上，蠕动到舞台边缘，并起立。
+** 10秒后，动作栏提示“We need another mob on stage! (Or a player who looks like a mob)”（我们还需要另一只生物上台!（一个看着像生物的玩家也行））。
+** 玩家戴上[[生物头颅]]，进入阶段3。
+* 阶段{{cd|3}}
+** 监守者一边进行嗅探一边移动到接近舞台中央的位置。
+** 60秒后未进入下一阶段，恢复敌对状态。
+** 发射[[烟花火箭]]，进入阶段4。
+* 阶段{{cd|4}}
+** 监守者钻回地面（但并不会直接消失），进入阶段5。
+* 阶段{{cd|5}}
+** 观众发出喝彩声{{sound||crowd cheer.ogg}}。
+** 动作栏提示“There should have been rewards, and flowers should come from the crowd, but you know... lol”（本该有奖励的，鲜花也该从观众席抛来，不过你懂的……哈哈）。
+** 生成[[红色混凝土粉末]]墙落幕，并给予玩家12800个[[玫瑰丛]]和5个[[钻石]]。
+
+演出结束或监守者死亡后，若当前矿境属于特殊矿境，监守者所在位置会出现一个出口；若当前矿境不属于特殊矿境，则需自行寻找现有出口。如果没有按照顺序执行上述步骤，则需要重复当前步骤才能完成事件。
+
+<gallery>
+Warden arena audience.png|观众席的村民观众
+Warden arena audience (eternal lightning mine, after world reload).png|观众席的女巫观众
+Warden arena, bleachers view.png|在看台上看到的舞台
+Warden arena, bleachers view 2.png|同前图
+Warden's worm dance.png|监守者表演蠕虫舞
+Warden's attacking performance.png|被激怒的监守者
+</gallery>
+
+'''{{text anchor|small_but_deadly_boss_fight}}'''
+
+进入矿境后，将在30秒后生成3波敌人，每波次间隔30秒。
+* 第一波：25个蠹虫。
+* 第二波：25个蠹虫和3个幼年僵尸。
+* 第三波：30个蠹虫、4个幼年僵尸和3个恼鬼。
+
+== 不共存效果 ==
+除了部分同类型矿境效果之间的不兼容性以外，部分矿境效果额外与某些矿境效果不兼容：
+* 世界类型“洞穴世界”和“黑暗洞穴世界”与出口类型“地表出口”和“稀有的地表出口”不兼容。
+* 世界类型“洞穴世界”和“黑暗洞穴世界”与需要露天才有实际影响的“永恒之夜”“永恒之雨”“永恒雷暴”以及“末影龙Boss战”不兼容。
+* “旱地”与“美西螈”“如鱼失水”和“水世界”不兼容。
+
+== 注释 ==
+{{Reflist|group=注}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox jokes|25w14craftmine}}
+
+[[Category:游戏内容]]

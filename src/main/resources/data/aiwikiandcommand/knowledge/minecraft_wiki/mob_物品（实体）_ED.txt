@@ -1,0 +1,24 @@
+# 页面: 物品（实体）/ED
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%EF%BC%88%E5%AE%9E%E4%BD%93%EF%BC%89/ED
+# 分类: 实体数据值页面
+# 抓取时间: 2026-07-14 17:31:59
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt inherit/entity}}
+** {{nbt|short|Age|required=1|existonsave=1}}：（默认为0）未被捡起的持续时间，当物品在{{convert|6000||分}}内没有被捡起时就会被删除。如果被设置为-32768，那么此值将不会增加，物品也不会自然删除或被合并。
+** {{nbt|short|Health|required=1|existonsave=1}}：（默认为5）物品实体的“生命值”，初始值为5。物品可以被火、熔岩、爆炸等伤害。当此值不大于0时物品实体被销毁而删除。
+** {{nbt|compound|Item}}：物品实体中包含的物品。如果此项不存在，或包含的物品是空气，那么物品实体会被立刻删除。
+*** {{nbt inherit/itemnoslot}}
+** {{nbt|int-array|Owner}}：只有对应[[UUID]]的玩家才能够捡起这个物品，用于防止{{cmd|give}}产生的物品实体被其他玩家吸取。
+** {{nbt|short|PickupDelay|existonsave=1}}：剩余的不能够被捡起的时间，初始值为{{convert|40}}，每游戏刻减少1直到为0，此时生物才能将此物品捡起。如果被设置为32767或负数，那么此值将不会减少，物品也永远不能被捡起。如果被设置为32767，则物品实体也不能被合并。如果此值不存在，游戏读取时默认为0。
+** {{nbt|int-array|Thrower}}：如果是玩家掉落的物品，则此值为掉落此物品的玩家的UUID。
+</div><noinclude>
+[[Category:实体数据值页面]]
+[[en:Item (entity)#Entity data]]
+[[fr:Objet (entité)/ED]]
+[[ja:アイテム (エンティティ)/ED]]
+[[pt:Item (entidade)/ED]]
+[[ru:Предмет (сущность)/ДС]]
+</noinclude>

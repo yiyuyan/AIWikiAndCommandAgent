@@ -1,0 +1,742 @@
+# 页面: 爆炸
+# 来源: https://zh.minecraft.wiki/w/%E7%88%86%E7%82%B8
+# 分类: Java版独有信息, 基岩版独有信息, 教育版独有信息, 有未知版本的History模板的页面/Java版, 有未知版本的History模板的页面/基岩版, 有未知版本的History模板的页面/携带版Alpha, 机制, 游戏内容
+# 抓取时间: 2026-07-14 17:31:37
+# 原始 Wikitext 内容:
+
+{{for|Minecraft Dungeons里的魔咒|MCD:爆炸}}
+[[File:Minecraft-tnt-explosion.gif|240px|thumb|[[TNT]]制造的爆炸]]
+{{Relevant tutorial|爆炸控制}}
+'''爆炸（Explosion）'''是一种在一定范围内破坏[[方块]]、冲击并伤害[[实体]]、并产生大量[[粒子]]的效果。
+
+== 爆炸机制 ==
+{{anchor|爆炸威力|爆炸抗性}}
+爆炸是一种有多种造成因素的效果，大多数具有破坏性。爆炸在发生时就会瞬间完成对方块和实体的状态变更，一次爆炸发生后，其不会持续造成更多的影响，但部分因素可能会持续地制造多次爆炸。
+
+爆炸会造成3种效果：影响方块，影响实体，以及生成粒子。这三种效果各自独立生效且实现并不一致，因此可能会出现反直觉的对生物的爆炸半径比对方块的爆炸半径更大的情况。
+
+影响爆炸强度的基本变量是爆炸的'''爆炸威力（Explosion power）'''。爆炸威力的强弱直接决定了这个爆炸能够覆盖多大的范围，能够破坏何种方块，以及对实体会造成多高的伤害。方块对抗爆炸破坏效果的基本属性是方块的'''爆炸抗性（Blast resistance）'''，爆炸抗性越高，方块阻挡爆炸的能力就越高。
+
+方块的爆炸抗性通常是一个固定值，但[[含水]]会使方块的爆炸抗性被提升为水的爆炸抗性，即100。这也包括总是含水的方块，如[[气泡柱]]、[[海草]]、[[海带]]，故它们原始的爆炸抗性不会体现。
+
+== 爆炸抗性 ==
+{{main|爆炸/爆炸抗性}}
+
+== 爆炸来源 ==
+{| class="wikitable" data-description="爆炸来源"
+! rowspan="2" | 来源
+! rowspan="2" | 爆炸威力
+! colspan="3" | 最大伤害（100%接触率）
+! rowspan="2" | 说明
+|-
+! data-sort-type="number" | 简单难度
+! data-sort-type="number" | 普通难度
+! data-sort-type="number" | 困难难度
+|-
+| {{only|for={{EntityLink|Minecart with TNT}}|java}}
+| align=center | '''4-11.5'''
+| {{AutoDmg|57|162|info=}}
+|
+* 爆炸威力受到多种因素修正。
+* 被[[激活铁轨]]激活而爆炸时，忽略各种[[铁轨（消歧义）|铁轨]]和铁轨下的方块。
+* 游戏规则{{gamerule|tnt_explosion_drop_decay}}为<code>false</code>（该游戏规则的默认值）时破坏的方块总是会掉落。
+|-
+| {{only|for={{EntityLink|Wither}}（生命值下降到一半时的冲撞攻击）|bedrock}}
+| align=center | '''8'''
+| - || - || -
+|
+* 爆炸不造成伤害，不生成爆炸粒子，不使用爆炸音效。
+* 受爆炸影响的方块（除了[[基岩]]、[[末地传送门方块]]、[[末地折跃门方块]]、[[末地传送门框架]]、[[命令方块]]、[[结构方块]]、[[结构空位]]和[[屏障]]）的爆炸抗性视为不超过0.8。
+* 游戏规则{{gamerule||mobGriefing}}为<code>false</code>时不影响方块。
+|-
+| {{EntityLink|Wither}}（在生成时、{{only|for=生命值下降到一半时或死亡时|bedrock}}）
+| align=center | '''7'''
+| {{AutoDmg|99|info=}}
+|
+* 游戏规则{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时不影响方块。
+|-
+| {{EntityLink|End crystal}}
+| align=center | '''6'''
+| {{AutoDmg|85|info=}}
+|
+* 因[[末影龙]]复活而爆炸时不影响方块。
+|-
+|{{EntityLink|id=Charged creeper|闪电苦力怕}}
+| align=center | '''6'''
+| {{AutoDmg|85|info=}}
+|
+* 被炸死的[[生物]]会掉落[[生物头颅]]。
+* 游戏规则{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时不影响方块。
+|-
+| {{BlockLink|Beds}}、{{BlockLink|Respawn Anchor}}
+| align=center | '''5'''
+| {{AutoDmg|71|info=}}
+|
+* 可以生成[[火]]。
+* 使用{{only|je|for=“{{tp|death.attack.badRespawnPoint.message|<u>'''死者'''</u>|[{{tp|death.attack.badRespawnPoint.link}}]}}”}}或{{only|be|for=“{{tr|<u>'''死者'''</u>被[Intentional Game Design]杀死了{{sic}}|<u>'''死者'''</u> 被 [蓄意遊戲設計] 殺死}}”}}的[[死亡消息]]。
+|-
+| {{BlockLink|TNT}}
+| align=center| '''4'''
+| {{AutoDmg|57|info=}}
+|
+* 游戏规则{{gamerule|tnt_explosion_drop_decay|tntExplosionDropDecay}}为<code>false</code>（该游戏规则的默认值）时破坏的方块总是会掉落。
+|-
+| {{only|for={{BlockLink|Underwater TNT}}|bedrock|education}}
+| align=center | '''4'''
+| {{AutoDmg|57|info=}}
+|
+* 爆炸计算时忽略范围内的[[水]]。
+* 游戏规则{{gamerule||tntExplosionDropDecay}}为<code>false</code>（该游戏规则的默认值）时破坏的方块总是会掉落。
+|-
+| {{only|for={{EntityLink|Minecart with TNT}}|bedrock}}
+| align=center| '''3'''
+| {{AutoDmg|43|info=}}
+|
+* 游戏规则{{gamerule||tntExplosionDropDecay}}为<code>false</code>（该游戏规则的默认值）时破坏的方块总是会掉落。
+|-
+| {{EntityLink|Creeper}}
+| align=center | '''3'''
+| {{AutoDmg|43|info=}}
+|
+* 游戏规则{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时不影响方块。
+|-
+| 吸收了TNT的{{EntityLink|Sulfur Cube}}
+| align=center | '''3'''
+| {{AutoDmg|43|info=}}
+|
+* 游戏规则{{gamerule|tnt_explosion_drop_decay|tntExplosionDropDecay}}为<code>false</code>（该游戏规则的默认值）时破坏的方块总是会掉落。
+|-
+| {{EffectLink|Wind Charged}}{{anchor|风爆}}
+| align=center | '''3-5'''
+| rowspan=4 | -
+| rowspan=4 | -
+| rowspan=4 | -
+| rowspan=3 |
+* 游戏规则{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时不影响方块。
+* 爆炸不造成伤害，且不破坏方块，生成狂风粒子。
+* 风爆范围内的部分方块可以响应此风爆，从而改变自身方块状态。
+|-
+| {{EntityLink|Wind Charge|text=旋风人风弹}}
+| align=center | '''3'''
+|-
+| {{ItemLink|Mace|link=风爆|text=风爆}}
+| align=center | '''3.5'''
+|-
+| {{EntityLink|Wind Charge|text=风弹物品风弹}}
+| align=center | '''1.2'''
+|
+* 游戏规则{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时不影响方块。
+* 爆炸不造成伤害，且不破坏方块，生成狂风粒子。
+* 风爆范围内的部分方块可以响应此风爆，从而改变自身方块状态。
+* 造成实体击退的速度增加10%。
+|-
+| {{EntityLink|Fireball}}
+| align=center | '''1''' 
+| {{AutoDmg|15|info=}}
+|
+* 可以生成[[火]]。
+* 游戏规则{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时不影响方块。
+|-
+| {{EntityLink|id=wither-skull|黑色凋灵之首}}
+| align=center | '''1'''
+| {{AutoDmg|15|info=}}
+|
+* 游戏规则{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时不影响方块。
+|-
+| {{EntityLink|id=dangerous-wither-skull|蓝色凋灵之首}}
+| align=center | '''1'''
+| {{AutoDmg|15|info=}}
+|
+* 受爆炸影响的方块（除了[[屏障]]、[[基岩]]、[[末地传送门方块]]、[[末地传送门框架]]、[[末地折跃门方块]]、[[命令方块]]、[[结构方块]]、[[结构空位]]、[[拼图方块]]、[[光源方块]]和[[强化深板岩]]）的爆炸抗性视为不超过0.8。
+* 游戏规则{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时不影响方块。
+|}
+
+== 爆炸对方块的效果 ==
+[[File:ExplosionComparison1.png|thumb|right|比较[[闪电苦力怕]]（左）、[[TNT]]（中）和[[苦力怕]]（右）的爆炸坑大小]]
+
+爆炸会影响附近的方块，可能将其破坏、改变状态或生成[[火]]。
+
+[[苦力怕]]、[[恶魂火球]]、[[凋灵]]、[[风弹]]造成的爆炸会因[[游戏规则]]{{gamerule|mob_griefing|mobGriefing}}被设置为<code>false</code>而不影响方块，对方块的破坏、改变方块状态、生成火的效果均不会生效。
+
+=== 破坏方块 ===
+[[File:ExplosionRay.png|right|thumb|射线从爆炸中心延伸到以此为中心的边长为2的立方体表面均匀分布的点处（此图仅表示射线方向，并不代表实际长度）]]
+[[File:Explosion outline.png|right|thumb|爆炸摧毁方块形成的大致球状结构]]
+
+爆炸可以破坏周围的[[方块]]。爆炸破坏方块的基本方式是从爆炸中心向周围发射出1352条向外延伸的射线，并清除射线上的方块。
+
+如右图所示，计算爆炸效果时，从爆炸中心发射出大量射线，每条射线分别计算对各个方块的爆炸影响。
+
+这里以<math>P</math>表示[[#爆炸威力|爆炸威力]]，<math>R</math>表示[[#爆炸抗性|爆炸抗性]]，<math>n</math>表示射线采样衰减的段数。下文同。
+
+# 假设围绕爆炸中心存在一个立方体，立方体外表面划分为16×16×16的网格。则爆炸中心到网格上每个交点都会形成一条射线，总计1352条射线。
+# 每条射线都有一个初始强度：<math>I_0 = (1.0 \pm 0.3)P</math>。
+# 射线沿自身方向每前进0.3格（一段），强度衰减0.225：<math>I_{n+1} = I_n - 0.3 \times 0.75 = I_n - 0.225</math>；<br>穿过非空气方块时，强度值进一步衰减：<math>I_{n+1} = I_n - [0.225 + 0.3(R + 0.3)] = I_n - 0.3R - 0.315</math>。
+# 任何衰减分段采样点上未能使射线强度衰减于0的方块都会被破坏。
+
+爆炸对方块的效果只考虑射线所在方块网格内方块的爆炸抗性，即使方块的形状或性质允许射线通过而不产生碰撞，如[[水]]、[[台阶]]和[[蜘蛛网]]。
+
+从以上过程，可以推导出下面的结论：
+* '''最大爆炸半径'''（假设没有方块吸收）<br>=<math>\lfloor \frac{1.3P}{0.225} \rfloor \times 0.3</math><ref group='注' name='floor'>其中⌊x⌋为[[wzh:取整函数|下取整]]函数。</ref><br>= 19.3（[[TNT矿车]]），13.9（[[凋灵]]，生命值下降到一半的冲撞攻击），12.1（[[凋灵]]），10.2（[[闪电苦力怕]]），8.7（[[床]]），6.9 （[[TNT]]），5.1 （[[苦力怕]]），1.5（[[恶魂火球]]）<br>例如，TNT爆炸可以摧毁7个方块外的[[火把]]。然而爆炸究竟能摧毁多少方块是不确定的，并且还取决于爆炸发生的具体位置。
+* 对于发生在空气中的爆炸，能够吸收最大爆炸强度的方块的'''最小爆炸抗性'''（即能够完全抵抗某种爆炸的最低爆炸抗性）<br>=<math>\frac{1.3P-0.225n}{0.3} - 0.3</math><br>为了不被破坏，方块需要在其内的第一个衰减分段采样点就吸收所有的爆炸强度。
+** n（衰减段数）取决于碰撞体积。在空气中的爆炸衰减段数至少为1。[[TNT]]和[[苦力怕]]的碰撞箱大小使它们的爆炸总是离最近方块0.49格和0.5格，即衰减段数至少为2；而火球爆炸可发生在任何地方，故衰减段数至少为1。
+** 因此，要完全抵抗相应的爆炸，方块的最小爆炸抗性分别为24.2（[[闪电苦力怕]]）、15.534（[[TNT]]）、11.2（[[苦力怕]]）、3.284（[[恶魂火球]]）。
+** 由上，[[水]]、静止的[[熔岩]]、[[黑曜石]]和[[基岩]]不能被一般的爆炸破坏，而[[栅栏]]等爆炸抗性更小的方块可以被[[恶魂火球]]摧毁。这些都是理论值，实际情况中爆炸抗性较小的方块并不总是被破坏。
+
+[[File:SamplePointsOfRays.png|thumb|TNT爆炸射线的采样点的视觉化效果（只展示了射线上采样点的第十次迭代时的长度，并非实际的射线长度）]]
+注意：
+* 多个的爆炸效果，无论爆炸时间差距怎样少，在一个方块上都是独立计算，并连续地为每次爆炸计算影响。而在爆炸的历史上，方块从没有过“临时生命”或类似的性质。这意味着爆炸对方块并没有累积性效应。
+* 虽然爆炸时获得“将会被影响的方块”被使用“射线上的方块”描述，但实际上获得“将会被影响的方块”的方式为：从爆炸中心开始，每间隔0.30000001192092896格进行一次采样，采样时将这个采样点的坐标向下取整以获得“将被影响的方块”。
+
+==== 方块掉落 ====
+被爆炸破坏的方块有一定概率不会掉落。
+
+被爆炸破坏的方块有{{frac|1|''P''}}（''P''表示[[#爆炸威力|爆炸威力]]）的概率使其[[谓词#survives_explosion|战利品表谓词<code>minecraft:survives_explosion</code>]]得到满足，否则方块不会掉落。例如普通[[苦力怕]]的爆炸威力为3，那么被它炸毁的方块将有{{frac|1|3}}的概率掉落，使其留下的爆炸坑很难被爆炸产生的方块掉落物填平。
+
+[[龙蛋]]、[[信标]]、[[潮涌核心]]、[[生物头颅]]和[[潜影盒]]总是在被炸毁后掉落，因为它们的掉落无需<code>minecraft:survives_explosion</code>，尽管这些掉落物可能被随后的爆炸所摧毁。
+
+多个[[游戏规则]]控制了什么类型爆炸的会导致方块有概率不掉落：
+* [[Java版]]中的{{gamerule|block_explosion_drop_decay}}：由方块引发的爆炸，包括床、重生锚的爆炸和吸收了TNT的[[硫方怪]]爆炸。默认为<code>true</code>。
+* [[Java版]]中的{{gamerule|mob_explosion_drop_decay}}：由生物引发的爆炸，如苦力怕的爆炸。默认为<code>true</code>。
+* {{gamerule|tnt_explosion_drop_decay|tntExplosionDropDecay}}：由TNT和TNT矿车引发的爆炸。默认为<code>false</code>。因此被[[TNT]]和[[TNT矿车]]炸毁的方块总是会掉落。
+
+=== 生成火 ===
+能够生成火的爆炸在摧毁一个方块后，若该位置下方是一个[[判定箱#遮挡形状|完全固体渲染方块]]，则这个有{{frac|1|3}}的概率在该位置生成[[火]]。
+
+[[恶魂]]的火球、床和重生锚造成的爆炸可以生成火。
+
+=== 更改方块状态 ===
+风爆可以更改下列方块的[[方块状态]]，模拟“被风吹动”的效果：
+* 开关{{BlockLink|Wooden doors}}和{{BlockLink|Copper doors}}
+* 开关{{BlockLink|Wooden trapdoors}}和{{BlockLink|Copper trapdoors}}
+* 开关{{BlockLink|Fence Gates}}
+* 按下{{BlockLink|Buttons}}
+* 开关{{BlockLink|Lever}}
+* 敲响{{BlockLink|Bell}}
+* 熄灭{{BlockLink|Candle}}和{{BlockLink|Candle Cake}}
+
+== 爆炸对实体的效果 ==
+[[File:SamplePointsTnt&ArmorStand.png|thumb|点燃的TNT的采样点与即将被其伤害的盔甲架的采样点]]
+爆炸对[[实体]]造成两个效果：造成爆炸伤害和增加实体向爆炸相反方向的动量。如果一个实体位于''爆炸伤害半径'' <math>r = P\times2</math>（<math>P</math>表示[[#爆炸威力|爆炸威力]]）中，它会被炸伤并弹开。
+
+爆炸对实体的“伤害半径”与爆炸对方块产生影响的“影响范围”是'''不同'''的。同时，爆炸对实体的效果无法被方块完全挡住，这意味着爆炸物可以在水中或隔着墙将实体炸伤并炸飞，很容易破坏墙后的{{only|for=[[物品展示框]]|JE}}和[[画]]。
+
+下文以<math>d</math>表示实体到爆炸中心的距离，<math>\alpha</math>表示''爆炸接触率''（见[[#爆炸接触率的计算|下文]]），<math>m</math>表示所有盔甲的最大[[爆炸保护]]魔咒等级。爆炸会对实体造成以下效果：
+
+# 对于每个距离爆炸中心''爆炸伤害半径''<math>r = 2P</math>之内的实体，定义爆炸击退力：<math>F = \left(1 - \frac{d}{r}\right)\alpha</math>
+# 对实体造成的伤害为<math>\left\lfloor 7\left(F^2 + F\right)P + 1 \right\rfloor</math>
+# 计算伤害后，''爆炸接触率''将减小：<math>\alpha_1 = \left(1 - 0.15m\right)\alpha</math>
+# 实体根据更新后的''爆炸接触率''沿着从爆炸中心到实体眼睛位置的方向被推动（速度加以重新计算的<math>F</math>）。
+
+最后，{{only|be|for=如果爆炸伤害不是玩家来源，}}爆炸对玩家造成的伤害总是会受到难度影响，无论是否有实体来源，若普通难度下受到的爆炸伤害為<math>D</math>，則在困难难度下為<math>1.5D</math>，在简单难度下為<math>\min\left(D,0.5D+1\right)</math>，在和平难度下会变为0{{only|je|for=并被玩家免疫}}。
+
+除风爆以外，爆炸对实体造成[[伤害#爆炸伤害|爆炸伤害]]，会受到[[抗性提升]]的减少，受到[[护甲值]]的减少，以及[[保护]]和[[爆炸保护]]魔咒提供对爆炸伤害的减少。
+
+从以上过程，可以推导出下面的结论：
+
+* 如果实体在伤害半径内，它们总是至少会受1点伤害（{{health|1|notag=1}}），不论其''爆炸接触率''大小。
+* 实体所可能承受的'''最大伤害'''（在爆炸中心与其100％接触，普通难度下）<br>=<math>\left\lfloor 7 \times \left(1^2 + 1\right)P + 1 \right\rfloor</math><br>= 99（刚生成的[[凋灵]]），85（[[闪电苦力怕]]），71（[[床]]在[[主世界]]以外的维度中被使用时），57（[[TNT]]），43（[[苦力怕]]），15（[[恶魂火球]]）
+* 当实体与爆炸中心有一定距离或有方块挡着，它们所受的伤害会比最大伤害小。
+* 在爆炸中心与其100％接触时，实体可获得在单次爆炸（不论爆炸威力）中能获得的'''最大加速'''，值为1。
+
+风爆不会对实体造成爆炸伤害。如果风爆的实体来源是由风弹物品发射的风弹，玩家将获得持续{{convert|40}}的摔落伤害减免，使在这段时间内落地的玩家的摔落伤害取决于低于受风爆高度的下落高度而非从最高点起的下落高度；反之，摔落伤害减免倒计时会被清零。
+
+{{anchor|爆炸击退}}爆炸对实体造成'''爆炸击退（Explosion Knockback）'''，该效果并非[[击退]]，在爆炸过程被直接添加而不是由伤害造成击退，因此不受[[受击后伤害免疫]]及其他伤害值修正影响，不受免疫伤害的影响。生物受到的爆炸击退会被其{{only|je|for=[[属性/爆炸击退抗性|爆炸击退抗性]]}}或{{only|be|for=[[属性/击退抗性|击退抗性]]}}降低。
+
+如果爆炸击退能给予玩家向上运动的趋势，玩家的下落高度就会被重置。因此，低伤害或无伤害爆炸也可用于降低摔落伤害。
+
+多个爆炸可以在同一刻发生，每一个爆炸都能对实体分别造成爆炸击退，而爆炸造成的多次伤害会因[[受击后伤害免疫]]而被大幅降低，这使密集地引爆爆炸物能够将实体弹射出非常远的距离。
+
+=== 爆炸接触率的计算 ===
+
+# 计算采样点数量。对于一个实体边界箱，总采样数为<math>\left\lceil 2l+1 \right\rceil\times\left\lceil 2w+1 \right\rceil\times\left\lceil 2h+1 \right\rceil</math>，其中''l''为实体的长度，''w''为实体的宽度，''h''为实体的高度。
+# 计算采样点间隔。水平方向采样点间隔为<math>\frac{l}{2l+1}</math>和<math>\frac{w}{2w+1}</math>，垂直方向采样点间隔为<math>\frac{h}{2h+1}</math>。
+# 计算采样网格偏移，以保证网格水平中心对称，垂直方向紧贴实体边界箱底面。水平方向偏移<math>\frac{1}{2}\left(1-\frac{\left\lfloor 2l+1 \right\rfloor}{2l+1}\right)</math>和<math>\frac{1}{2}\left(1-\frac{\left\lfloor 2w+1 \right\rfloor}{2w+1}\right)</math>。
+# 对于网格的所有网格点，与爆炸中心进行连线。
+# 射线路径上没有被任何方块[[碰撞箱]]阻挡的射线占全部射线的百分比即为''爆炸接触率''。
+
+=== 典型伤害半径 ===
+1个、2个或4个TNT在同一位置同时爆炸，玩家所承受的爆炸伤害与其距爆炸中心的距离的关系如下图所示。每个圆上标记的数字分别代表玩家站在该圆上时承受的爆炸伤害。
+
+[[File:KillRadiiGrenade1.svg|300px]]
+[[File:KillRadiiGrenade2.svg|300px]]
+[[File:KillRadiiGrenade4.svg|300px]]
+
+== 爆炸的粒子效果 ==
+如果爆炸威力小于2，或者爆炸不影响方块，则在爆炸位置生成<code>[[粒子#explosion|explosion]]</code>粒子。
+
+如果爆炸威力大于等于2，并且爆炸会影响方块，则在爆炸位置生成<code>[[粒子#explosion_emitter|explosion_emitter]]</code>粒子。
+
+如果是风爆，则在爆炸位置生成<code>[[粒子#gust_emitter_small|gust_emitter_small]]</code>和<code>[[粒子#gust_emitter_large|gust_emitter_large]]</code>粒子。
+
+== 缺陷 ==
+=== 爆炸形状失真 ===
+[[File:ExplosionOversized.png|right|thumb|在高空中发生的大威力爆炸造成了形状奇怪的爆炸坑。注意爆炸破坏的分布与前文的射线分布是一致的]]
+; 爆炸射线间隙
+由于用于破坏方块的爆炸效果的本质是从爆炸中心发射出的1352条向外延伸的射线，所以随着爆炸威力与爆炸覆盖距离的增加，这些射线之间的距离会迅速超过1格，以至于能容纳下许多方块。这导致了爆炸在威力过高时呈现出的效果是极其糟糕的——它会留下一个反直觉的、形状类似于海胆的爆炸坑，而爆炸坑里的每一条洞井都能找到一条与之对应的从爆炸中心延伸出来的射线。
+
+; 爆炸射线夹角
+爆炸中心往16×16×16大小的立方体表面上的等间隔的点处延伸出爆炸射线，1352条射线得以生成。但以这种方式生成的爆炸射线的排布实际上是非常不均匀的，位于六个坐标轴周围的射线要比处于其他方向上的射线稀疏得多——这导致不同方向上的爆炸效果间产生了明显的差异。
+
+=== 算法存在漏洞 ===
+; 掠过部分方块夹角
+[[File:ExplosionPassedCorners.png|thumb|在特殊角度下，大约0.3格的采样间隙略过了不可摧毁的哭泣的黑曜石形成的夹角，导致红色染色玻璃将被炸毁]]
+由于约0.3格的采样间隙，在合适的角度下，采样点有可能掠过部分方块，造成反直觉的爆炸结果。
+
+; 射线被重复吸收
+被采样标记的方块不会被立即清除，而是被加入列表等待计算结束后一起清除。这导致一次爆炸中，几乎每一个方块都重复吸收了经过自身的爆炸射线携带的爆炸能量，使得射线无法达到理论上（被采样的方块被立即清除时）的破坏距离。
+
+=== 性能影响 ===
+爆炸是游戏中常见的会严重影响性能的效果。一次大威力的爆炸或连锁性的爆炸的影响范围内往往会有太多的方块或实体，这将导致游戏需要花费很长的时间去计算其将造成的效果，并显著影响游戏的正常运行。极端情况下，游戏可能会为了处理爆炸而持续处于未响应状态，使玩家最终不得不选择强制终止游戏的进程。
+
+除了处理爆炸本身的时间和性能成本，爆炸在处理完毕后产生的较多的“余波”也是一大问题，包括受爆炸影响的方块掉落成的[[物品]]、[[液体]]流动的变化、以及多出的爆炸坑等，它们都会增加渲染的工作量。同时，虽然掉落的物品实体理论上应在5分钟后自行消失，但如果由于游戏的运行速度被性能下降影响，导致其每秒能够完成的[[游戏刻]]低于20，这些物品实体的实际消失时间也会延长，并反过来继续影响游戏性能。
+
+设置某些规则或执行某些命令可以避免或减少爆炸的后续影响：设置[[游戏规则]]{{gamerule|block_drops|doTileDrops}}为<code>false</code>，可使被爆炸破坏的方块不再产生掉落物；执行命令{{cmd|kill @e[type{{=}}item]}}可清除所有掉落物。
+<!--
+== 方块的爆炸抗性 ==
+下表中列出了所有方块的爆炸抗性值。
+
+[<nowiki/>[[Special:EditPage/Module:Blast resistance values|编辑数据值]]]
+{| class="sortable" style="float:left;margin:0 2px 2px; border: 1px solid silver; text-align: left;" data-description="爆炸抗性数据"
+! 方块名称 !! 爆炸抗性
+{{/table|Barrier}}
+{{/table|Light Block}}
+{{/table|Bedrock}}
+{{/table|Command Blocks}}
+{{/table|End Gateway}}
+{{/table|End Portal}}
+{{/table|End Portal Frame}}
+{{/table|Jigsaw Block}}
+{{/table|Structure Block}}
+{{/table|Ancient Debris}}
+{{/table|Anvil}}
+{{/table|Block of Netherite}}
+{{/table|Crying Obsidian}}
+{{/table|Enchanting Table}}
+{{/table|Glowing Obsidian}}
+{{/table|Obsidian}}
+{{/table|Reinforced Deepslate}}
+{{/table|Respawn Anchor}}
+{{/table|Ender Chest}}
+{{/table|Bubble Column}}
+{{/table|Lava}}
+{{/table|Water}}
+{{/table|Dragon Egg}}
+{{/table|End Stone}}
+{{/table|End Stone Bricks}}
+{{/table|End Stone Brick Wall}}
+{{/table|End Stone Brick Slab}}
+{{/table|End Stone Brick Stairs}}
+{{/table|Andesite}}
+{{/table|Blackstone}}
+{{/table|Block of Coal}}
+{{/table|Block of Copper}}
+{{/table|Block of Diamond}}
+{{/table|Block of Emerald}}
+{{/table|Block of Gold}}
+{{/table|Block of Iron}}
+{{/table|Block of Redstone}}
+{{/table|Bricks}}
+{{/table|Brick Stairs}}
+{{/table|Chain}}
+{{/table|Chiseled Nether Bricks}}
+{{/table|Chiseled Polished Blackstone}}
+{{/table|Cobbled Deepslate}}
+{{/table|Cobblestone}}
+{{/table|Cobblestone Stairs}}
+{{/table|Copper Bulb}}
+{{/table|Copper Grate}}
+{{/table|Coral Blocks}}
+{{/table|Cracked Nether Bricks}}
+{{/table|Cracked Polished Blackstone Bricks}}
+{{/table|Cut Copper}}
+{{/table|Dark Prismarine}}
+{{/table|Deepslate}}
+{{/table|Deepslate Bricks}}
+{{/table|Deepslate Tiles}}
+{{/table|Diorite}}
+{{/table|Granite}}
+{{/table|Grindstone}}
+{{/table|Iron Bars}}
+{{/table|Jukebox}}
+{{/table|Mossy Cobblestone}}
+{{/table|Mossy Stone Bricks}}
+{{/table|Nether Bricks}}
+{{/table|Nether Brick Fence}}
+{{/table|Nether Brick Stairs}}
+{{/table|Prismarine}}
+{{/table|Purpur Block}}
+{{/table|Purpur Pillar}}
+{{/table|Purpur Slab}}
+{{/table|Purpur Stairs}}
+{{/table|Red Nether Bricks}}
+{{/table|Stone}}
+{{/table|Stone Bricks}}
+{{/table|Stone Brick Stairs}}
+{{/table|text=石质台阶（不包括末地石砖台阶）|link=Slab|Stone Slabs|sprite=slabs}}
+{{/table|Stone Wall|sprite=cobblestone-wall|text=石质墙（不包括末地石砖墙和砂岩墙）|link=墙}}
+{{/table|Tuff}}
+{{/table|Bell}}
+{{/table|Iron Door|item=1}}
+{{/table|Iron Trapdoor}}
+{{/table|Spawner}}
+{{/table|Hopper}}
+{{/table|Basalt}}
+{{/table|Terracotta}}
+{{/table|Cobweb}}
+{{/table|Blast Furnace}}
+{{/table|Crafter}}
+{{/table|Dispenser}}
+{{/table|Dropper}}
+{{/table|Furnace}}
+{{/table|Lantern}}
+{{/table|Lodestone}}
+{{/table|Smoker}}
+{{/table|Stonecutter}}
+{{/table|Bamboo Mosaic}}
+{{/table|Beacon}}
+{{/table|Block of Lapis Lazuli}}
+{{/table|Cocoa Beans|text=Cocoa|sprite=cocoa}}
+{{/table|Conduit}}
+{{/table|Lab Table}}
+{{/table|Mud Bricks}}
+{{/table|Packed Mud}}
+{{/table|Pointed Dripstone}}
+{{/table|Observer}}
+|}
+{| class="sortable" style="float:left;margin:0 2px 2px; border: 1px solid silver; text-align: left;" data-description="爆炸抗性数据"
+! 方块名称 !! 爆炸抗性
+{{/table|Coal Ore}}
+{{/table|Copper Ore}}
+{{/table|Diamond Ore}}
+{{/table|Emerald Ore}}
+{{/table|Gold Ore}}
+{{/table|Iron Ore}}
+{{/table|Lapis Lazuli Ore}}
+{{/table|Nether Quartz Ore}}
+{{/table|Redstone Ore}}
+{{/table|Planks}}
+{{/table|Wooden Fence|link=Fence|sprite=Fences|text=木质栅栏}}
+{{/table|Fence Gate|sprite=Fence Gates|text=木质栅栏门}}
+{{/table|Wooden Door|link=Door|sprite=Wooden Doors|text=木质门}}
+{{/table|link=Slab|Wooden Slabs}}
+{{/table|link=Stairs|Wooden Stairs}}
+{{/table|Wooden Trapdoor|link=Trapdoor|sprite=Wooden Trapdoors|text=木质活板门}}
+{{/table|Copper Door|link=Copper Door|sprite=Copper Doors}}
+{{/table|Copper Trapdoor|link=Copper Trapdoor|sprite=Copper Trapdoors}}
+{{/table|Sculk Catalyst}}
+{{/table|Sculk Shrieker}}
+{{/table|Blue Ice}}
+{{/table|Barrel}}
+{{/table|Cartography Table}}
+{{/table|Chest}}
+{{/table|Crafting Table}}
+{{/table|Dried Kelp Block}}
+{{/table|Fletching Table}}
+{{/table|Lectern}}
+{{/table|Loom}}
+{{/table|Smithing Table}}
+{{/table|Trapped Chest}}
+{{/table|Bone Block}}
+{{/table|Campfire}}
+{{/table|Cauldron}}
+{{/table|Compound Creator}}
+{{/table|Shulker Box}}
+{{/table|Wood}}
+{{/table|Concrete}}
+{{/table|Amethyst Cluster}}
+{{/table|Block of Amethyst}}
+{{/table|Bookshelf}}
+{{/table|Budding Amethyst}}
+{{/table|Calibrated Sculk Sensor}}
+{{/table|Chiseled Bookshelf}}
+{{/table|Sculk Sensor}}
+{{/table|Glazed Terracotta}}
+{{/table|Bamboo}}
+{{/table|Banner|text=旗帜|sprite=Banners}}
+{{/table|Dripstone Block}}
+{{/table|Jack o'Lantern}}
+{{/table|Melon}}
+{{/table|Head|text=Heads|sprite=Heads}}
+{{/table|Nether Wart Block|text=下界疣方块|sprite=wart-blocks}}
+{{/table|Pumpkin}}
+{{/table|Shroomlight}}
+{{/table|Sign|text=Signs|sprite=Signs}}
+{{/table|Block of Quartz}}
+{{/table|Note Block}}
+{{/table|Quartz Bricks}}
+{{/table|Quartz Stairs}}
+{{/table|Red Sandstone}}
+{{/table|Red Sandstone Stairs}}
+{{/table|Sandstone}}
+{{/table|Sandstone Stairs}}
+{{/table|Sandstone Wall|sprite=sandstone-wall|text=砂岩墙|link=墙}}
+{{/table|Wool}}
+{{/table|Calcite}}
+{{/table|Infested Block|sprite=Infested Blocks|text=虫蚀方块}}
+{{/table|Activator Rail}}
+{{/table|Detector Rail}}
+{{/table|Powered Rail}}
+{{/table|Rail}}
+{{/table|Mangrove Roots}}
+{{/table|Muddy Mangrove Roots}}
+{{/table|Dirt Path}}
+{{/table|Beehive}}
+{{/table|Clay|link=黏土}}
+{{/table|Composter}}
+{{/table|Farmland}}
+{{/table|Grass Block}}
+{{/table|Gravel}}
+{{/table|Honeycomb Block}}
+{{/table|Mycelium}}
+{{/table|Sponge}}
+{{/table|Wet Sponge}}
+{{/table|Brewing Stand}}
+{{/table|Button|sprite=Buttons|text=按钮}}
+{{/table|Cake}}
+{{/table|Coarse Dirt}}
+{{/table|Concrete Powder}}
+{{/table|Dirt}}
+{{/table|Frosted Ice}}
+{{/table|Hay Bale}}
+{{/table|Ice}}
+|}
+{| class="sortable" style="float:left;margin:0 2px 2px; border: 1px solid silver; text-align: left;" data-description="爆炸抗性数据"
+! 方块名称 !! 爆炸抗性
+{{/table|Lever}}
+{{/table|Magma Block}}
+{{/table|Mud}}
+{{/table|Packed Ice}}
+{{/table|Piston}}
+{{/table|Piston Head}}
+{{/table|Podzol}}
+{{/table|Pressure Plate|sprite=Wooden Pressure Plates|text=Pressure Plates}}
+{{/table|Sand}}
+{{/table|Sniffer Egg}}
+{{/table|Soul Sand}}
+{{/table|Soul Soil}}
+{{/table|Sticky Piston}}
+{{/table|Target}}
+{{/table|Turtle Egg}}
+{{/table|Pressure Plate|sprite=Weighted Pressure Plates|text=Weighted Pressure Plates}}
+{{/table|Cactus}}
+{{/table|Chorus Flower}}
+{{/table|Chorus Plant}}
+{{/table|Ladder}}
+{{/table|Netherrack}}
+{{/table|Nylium|sprite=nylium}}
+{{/table|Bee Nest}}
+{{/table|Froglight|sprite=froglight}}
+{{/table|Glass}}
+{{/table|Glass Pane}}
+{{/table|Glowstone}}
+{{/table|Redstone Lamp}}
+{{/table|Sea Lantern}}
+{{/table|Stained Glass}}
+{{/table|Stained Glass Pane|link=Glass Pane|sprite=Stained Glass Panes|text=Stained Glass Panes}}
+{{/table|Tinted Glass}}
+{{/table|Powder Snow}}
+{{/table|Suspicious Sand|sprite=Suspicious Sand|link=可疑的方块|text=可疑的方块}}
+{{/table|Bed|sprite=Beds|text=Beds}}
+{{/table|Daylight Detector}}
+{{/table|Glow Lichen}}
+{{/table|Leaves}}
+{{/table|Mushroom Block|sprite=Mushroom Blocks|text=Mushroom Blocks}}
+{{/table|Sculk}}
+{{/table|Sculk Vein}}
+{{/table|Snow Block}}
+{{/table|Vines}}
+{{/table|Big Dripleaf}}
+{{/table|Candle|sprite=Candle|text=Candles}}
+{{/table|Carpet|sprite=Carpets|text=Carpets}}
+{{/table|Moss Block}}
+{{/table|Moss Carpet}}
+{{/table|Rooted Dirt}}
+{{/table|Snow}}
+{{/table|Air}}
+{{/table|Azalea}}
+{{/table|Beetroot Seeds|sprite=Beetroots|text=Beetroots}}
+{{/table|Carrot|sprite=Carrots|text=Carrots}}
+{{/table|Cave Vines}}
+{{/table|Coral|text=珊瑚|link=珊瑚}}
+{{/table|Coral Fan|sprite=Coral Fans|text=珊瑚扇|link=珊瑚扇}}
+{{/table|Dead Bush}}
+{{/table|End Rod}}
+{{/table|Fire}}
+{{/table|Flower|sprite=Flowers|text=Flowers}}
+{{/table|Flower Pot}}
+{{/table|Flowering Azalea}}
+{{/table|Frogspawn}}
+{{/table|Grass}}
+{{/table|Hanging Roots}}
+{{/table|Honey Block}}
+{{/table|Kelp}}
+{{/table|Lily Pad}}
+{{/table|Locked chest}}
+{{/table|Melon Seeds|sprite=Melon Stem|text=Melon Stem}}
+{{/table|Moving Piston}}
+{{/table|Mushroom|sprite=Mushrooms|text=Mushrooms}}
+{{/table|Nether Portal|link=下界传送门方块}}
+{{/table|Nether Wart}}
+{{/table|Pink Petals}}
+{{/table|Pitcher Crop}}
+{{/table|Potato|sprite=Potatoes|text=Potatoes}}
+{{/table|Pumpkin Seeds|sprite=Pumpkin Stem|text=Pumpkin Stem}}
+{{/table|Redstone Dust}}
+{{/table|Redstone Comparator}}
+{{/table|Redstone Repeater}}
+{{/table|Redstone Torch}}
+{{/table|Sapling|sprite=Saplings|text=Saplings}}
+{{/table|Scaffolding}}
+{{/table|Seagrass}}
+{{/table|Sea Pickle}}
+{{/table|Slime Block}}
+{{/table|Small Dripleaf}}
+{{/table|Spore Blossom}}
+{{/table|Structure Void}}
+{{/table|Sugar Cane}}
+{{/table|Sweet Berry Bush}}
+{{/table|TNT}}
+{{/table|Torch}}
+{{/table|String|sprite=Tripwire|text=Tripwire}}
+{{/table|Tripwire Hook}}
+{{/table|Weeping Vines|sprite=weeping-vines-plant}}
+{{/table|Wheat Seeds|sprite=Wheat|text=Wheat}}
+|}
+{{-}}
+-->
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Explosion1.ogg
+|sound2=Explosion2.ogg
+|sound3=Explosion3.ogg
+|sound4=Explosion4.ogg
+|subtitle={{tp|subtitles.entity.generic.explode}}
+|source=方块
+|description=所有真爆炸
+|id=entity.generic.explode
+|translationkey=subtitles.entity.generic.explode
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=random.explode1.wav
+|sound2=random.explode2.wav
+|sound3=random.explode3.wav
+|sound4=random.explode4.wav
+|source=方块
+|description=所有真爆炸
+|id=random.explode
+|typeid=explode
+|soundvolume=4.0
+|soundpitch
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年5月21日|link={{notch|110762705/my-list-on-tile-types-so-far}}|[[Notch]]展示了加入爆炸性[[方块]]的兴趣。}}
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.24_SURVIVAL_TEST|加入了[[苦力怕]]。}}
+|{{HistoryLine||2009年10月24日|link={{notch|221308991/the-new-block-types-and-new-graphics-for-the-gold}}|展示了[[TNT]]。}}
+|{{HistoryLine||0.26_SURVIVAL_TEST|加入了TNT。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100122|改进了爆炸机制。}}
+|{{HistoryLine|||dev=20100124-2|现在爆炸当穿过硬质方块时，它的爆炸威力会被减弱。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.2.0|dev=preview|加入了[[恶魂]]，它可以发射击中物体会爆炸的恶魂火球。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|当苦力怕被闪电击中时会变成闪电苦力怕，它的爆炸威力和半径都增强了。}}
+|{{HistoryLine||1.6|现在玩家试图在[[下界]]使用[[床]]时，床会爆炸。}}
+|{{HistoryLine||1.8|dev=pre1|爆炸现在会产生冲击波粒子。
+|在此之前，爆炸只会产生烟雾粒子。}}
+|{{HistoryLine||Beta音效更新|link=Java版Beta音效更新|现在TNT爆炸会有一个新的音效。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre3|床和恶魂火球爆炸现在会产生火。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|现在玩家试图在[[末地]]使用床时，床会爆炸。
+|“爆炸保护”魔咒被加入了游戏，可以减弱爆炸对玩家的伤害。}}
+|{{HistoryLine|||dev=Beta 1.9-pre6|[[末地水晶]]被加入了游戏，是一种在一块基岩的上方飘浮的实体。当玩家去攻击它或者被弹射物击中时会产生爆炸。}}
+|{{HistoryLine||1.3.1|dev=12w24a|修复了爆炸不会推动玩家的漏洞。}}
+|{{HistoryLine|||dev=?|爆炸现在在不同的游戏难度下对玩家造成的伤害不同，如果玩家处在和平难度那么爆炸不会对玩家造成伤害。}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了[[游戏规则]]系统，其中游戏规则{{cd|mobGriefing}}会影响生物造成的爆炸是否能够破坏方块。}}
+|{{HistoryLine|||dev=12w34a|[[凋灵]]被加入了游戏，它可以发射黑色凋灵之首。}}
+|{{HistoryLine|||dev=12w37a|被玩家制造的凋灵在生成后回复满了生命值时，会发生一场大爆炸。|蓝色凋灵之首加入了游戏。}}
+|{{HistoryLine|||dev=12w38b|如果苦力怕从一定高度掉到玩家那里，它们会爆炸。}}
+|{{HistoryLine||1.5|dev=?|在爆炸中被炸毁的方块掉落物品概率现在更改为（100÷爆炸的威力）%，在此之前，在爆炸中被炸毁的方块掉落物品概率都是30%。}}
+|{{HistoryLine||1.8.2|dev=?|爆炸不再在不同的方向效果不同。}}
+|{{HistoryLine||1.14|dev=19w11a|由[[TNT]]或[[TNT矿车]]爆炸摧毁的方块现在会100%掉落为物品。}}
+|{{HistoryLine||1.15|dev=pre1|爆炸的性能得到优化。}}
+|{{HistoryLine||1.16|dev=20w12a|加入了[[重生锚]]，如果在非下界维度中使用，它会以类似于[[床]]的方式爆炸。}}
+|{{HistoryLine||1.19.3|dev=22w44a|加入了以下控制爆炸使方块不掉落的游戏规则：{{cd|blockExplosionDropDecay}}，{{cd|mobExplosionDropDecay}}和{{cd|tntExplosionDropDecay}}。}}
+|{{HistoryLine||1.21.9|dev=25w33a|现在爆炸时会与[[1.15-pre1]]前一样生成{{cd|d=pretty|poof|smoke}}粒子。<ref>{{bug|MC-165991|||Fixed}}</ref>}}
+|{{HistoryLine||26.2|dev=snapshot-5|现在[[硫方怪]]可以吸收TNT并被点燃产生爆炸。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|加入了TNT。}}
+|{{HistoryLine||0.2.1|TNT现在可以爆炸。}}
+|{{HistoryLine||0.11.0|dev=build 2|加入了[[恶魂]]，它会发射[[火球]]。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了[[闪电苦力怕]]。
+|加入了[[爆炸保护]]魔咒，它可让被附魔的[[盔甲]]抵抗爆炸。}}
+|{{HistoryLine|||dev=?|加入了爆炸[[粒子]]。
+|给予了[[TNT]]一个全新的爆炸[[音效]]。
+|现在玩家试图在[[下界]]使用[[床]]时，床会爆炸。}}
+|{{HistoryLine||0.13.0|TNT如果接收到红石信号的话会被点燃。}}
+|{{HistoryLine||0.14.0|错误的液体在炼药锅里混合会产生一个不摧毁方块、不伤害生物的爆炸。}}
+|{{HistoryLine||0.16.0|加入了[[凋灵]]。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了[[末地水晶]]。
+|现在玩家试图在[[末地]]使用床时，床会爆炸。}}
+|{{HistoryLine||1.0.7|发生在水中的爆炸将不再对玩家和生物造成伤害。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了[[游戏规则]]系统，其中游戏规则{{cd|mobGriefing}}会影响生物造成的爆炸是否能够破坏方块。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.20.1|在[[实验台]]中创造[[废物]]会播放爆炸声。
+|加入了[[水下TNT]]，可以在水下爆炸。}}
+|{{HistoryLine||?|删除了炼药锅的不破坏地形的爆炸效果，代之以嘶嘶声和烟雾。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|加入了重生锚，在下界以外的维度充能并使用会以类似于[[床]]的方式爆炸。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|更改了176个方块的爆炸抗性以同步{{el|je}}。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|加入了控制TNT和TNT矿车爆炸使方块不掉落的游戏规则{{cd|tntExplosionDropDecay}}。
+|现在由TNT和TNT矿车炸毁的方块默认总会掉落为物品。}}
+|{{HistoryLine||26.30|dev=26.30.25|现在硫方怪可以吸收TNT并被点燃产生爆炸。}}
+}}
+
+== 你知道吗 ==
+[[File:Bedrockbreak.png|right|thumb|要通过爆炸破坏一个[[基岩]]，需要足够大的爆炸威力]] 
+* 能够破坏基岩的爆炸需要至少1542860的爆炸威力，其爆炸半径超过3000万格。
+* 死亡但还未消失的生物可以被爆炸击退。
+* 激活的TNT在一个由石质方块组成的大而坚固的立方体中爆炸时，会形成一个精确的3×3×3的立方体坑洞。实验证实，TNT的爆炸会在任何爆炸抗性小于100（如[[水]]）、大于2.5（如[[工作台]]）的方块中产生一个3×3×3的洞。这意味着3×3×3是TNT爆炸不被完全抵消的最小可能结果。
+* 如果水中激活的TNT被[[下落的方块]]（如沙子）覆盖，它将不再处于水中，因而能够破坏掩埋了自身的方块和贴着该方块的方块。
+* 任何爆炸抗性大于4（如[[蜘蛛网]]）的方块都能阻挡恶魂的火球造成的爆炸。
+* 由于水和熔岩高达100的爆炸抗性，在水和熔岩中发生的常见爆炸都不能破坏任何方块，但仍然可以{{only|je|for=伤害}}<ref>{{bug|MCPE-89412}}</ref>和冲击实体。
+* 爆炸可以改变弹射物（如[[末影珍珠]]）的运动方向和运动速率。
+
+== 画廊 ==
+<gallery>
+Explosion comparasion.png|爆炸威力对比图，从左到右分别来自[[重生锚]]、[[闪电苦力怕]]、[[TNT]]和[[苦力怕]]
+</gallery>
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:机制]]
+
+[[de:Explosion]]
+[[en:Explosion]]
+[[es:Explosión]]
+[[fr:Explosion]]
+[[it:Esplosione]]
+[[ja:爆発]]
+[[ko:폭발]]
+[[nl:Explosie]]
+[[pl:Eksplozja]]
+[[pt:Explosão]]
+[[ru:Взрыв]]
+[[uk:Вибух]]

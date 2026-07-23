@@ -1,0 +1,54 @@
+# 页面: 属性/幸运值
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E5%B9%B8%E8%BF%90%E5%80%BC
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+{{Infobox attribute}}
+
+'''幸运值（Luck）'''是改变玩家获得高质量战利品概率的[[属性]]。
+
+== 行为 ==
+{{main|幸运}}
+高幸运值会使战利品表中<code>quality</code>值高的结果更可能出现，而<code>quality</code>值为负的结果更少出现，每次结果的新权重为<code>floor(base_weight + quality * luck)</code>；也会提高战利品表中<code>bonus_rolls</code>的出现概率。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Player}}
+| 0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| effect.luck
+| add_value（Op0）
+| ''等级''×1
+| 是
+| [[幸运]]状态效果
+|-
+| effect.unluck
+| add_value（Op0）
+| ''等级''×-1
+| 是
+| [[霉运]]状态效果
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w44b|加入了幸运值属性，ID为<code>generic.luck</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|幸运值属性的ID从<code>generic.luck</code>重命名为<code>luck</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

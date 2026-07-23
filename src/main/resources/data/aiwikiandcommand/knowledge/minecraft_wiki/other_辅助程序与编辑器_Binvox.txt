@@ -1,0 +1,241 @@
+# 页面: 辅助程序与编辑器/Binvox
+# 来源: https://zh.minecraft.wiki/w/%E8%BE%85%E5%8A%A9%E7%A8%8B%E5%BA%8F%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8/Binvox
+# 分类: 自定义软件
+# 抓取时间: 2026-07-14 17:36:44
+# 原始 Wikitext 内容:
+
+{{Disclaimer}}
+{{Infobox 3rd party tool
+| image = binvox.jpg
+| author = Patrick Min
+| platform = {{OS|Win|Linux|Mac}}
+| programming language = C++
+| version = binvox 1.17、viewvox 0.42 - 2012年11月11日
+| source available = 旧版本、0.4
+| date = 2010年9月
+| size = 0.8MB
+| license = N/A
+| minecraft version = N/A
+| website = http://www.patrickmin.com/minecraft/
+| forum = http://www.minecraftforum.net/topic/52282-converting-a-3d-model-to-building-plans
+}}
+'''Binvox'''是一个命令行程序，可将3D文件转换为.binvox构筑计划文件或.schematic文件，供MCEedit使用。.binvox输出文件可通过交互式“viewvox”OpenGL软件查看，这两个软件由同一作者开发。这些软件的主页位于[http://www.patrickmin.com/minecraft/ Patrick Min的网站上]。
+
+将3D多边形转换为方块的处理过程称为“voxelization”。Binvox负责voxelizes，viewvox用于展示结果。Voxelization并非完美的处理过程，因为它需要你做出很多决定。相较于其他输出决定，最重要的是关于如何填充像素模型，使其看起来“填满”。因此，有多种方式可以控制Binvox的结果。
+
+__TOC__
+{{-}}
+
+== 支持的系统 ==
+Binvox和viewvox可在Windows、Mac和Linux系统上运行。viewvox预览软件使用OpenGL和GLUT。
+
+== 下载 ==
+Windows：[http://realtimerendering.com/erich/minecraft/public/vox_package.zip vox_package.zip]。这个发行版可让你一次性下载所有所需内容，包括GLUT，还包含2个3D示例文件和用于渲染它们的.BAT文件。查看发行版中的README.txt可获取更多信息。
+
+个人软件可在此下载：[http://www.cs.princeton.edu/~min/binvox/download.php?id=2 binvox]、[http://www.cs.princeton.edu/~min/viewvox/download.php?id=2 viewvox]。
+
+另一个是[http://www.mediafire.com/?ady85yn1tmh4dyd Auto-Binvox.zip]，这是一个批处理文件，可简单处理任何文件的voxelising，且附带Binvox和Viewbox（其他版本可能不兼容Windows 7）。该批处理文件能让你处理文件夹中的3D模型，并在Binvox和Viewvox中进行转换。其缺点是无法轻松控制选项、Schematic的最大维度及方块种类。
+
+[http://www.opengl.org/resources/libraries/glut/ GLUT]库必须单独下载，以确保Viewvox正常运行。
+
+Mac（Snow Leopard，OS X 10.6.8）：[http://www.cs.princeton.edu/~min/binvox/download.php?id=6 binvox]、[http://www.cs.princeton.edu/~min/viewvox/download.php?id=4 viewvox]。
+
+Linux（Fedora 13，64位）：binvox[http://www.cs.princeton.edu/~min/binvox/download.php?id=4 64位]、[http://www.cs.princeton.edu/~min/binvox/download.php?id=7 32位]；viewvox[http://www.cs.princeton.edu/~min/viewvox/download.php?id=3 64位]或[http://www.cs.princeton.edu/~min/viewvox/download.php?id=5 32位]。
+
+== 文件格式 ==
+支持下列3D文件格式：
+Wavefront OBJ、VRML 2.0、UG、OFF、DXF、XGL、POV、BREP、PLY、JOT。这些格式中，大多数仅支持polygons（VRML 2.0则完全支持）。实际上，Wavefront OBJ可能是支持最广泛的格式。
+
+模型可在网页上创建，例如[http://www.turbosquid.com/3d Turbosquid网站]（提示：按成本排序）。若要将3DS格式转换为OBJ格式，可使用[http://meshlab.sourceforge.net/ MeshLab]之类的软件。
+
+默认输出格式为.binvox，可供viewvox软件预览。只需输入“viewvox <your_output_file>.binvox”即可生成预览。生成的.schmatic文件可通过[http://www.minecraftforum.net/topic/13807-mcedit-minecraft-world-editor-compatible-with-mc-beta-173/ MCEdit]导入到世界中。
+
+== 画廊 ==
+[https://picasaweb.google.com/112791664800738604413/BinvoxViewvoxForMinecraft# photo gallery of creations]由作者维护。如果你想参与画廊制作，可向他发送自己手动制作的照片（[http://www.patrickmin.com/minecraft/ 地址]），他可能会将其添加到画廊中。
+
+== Binvox命令 ==
+Binvox有以下选项（输入不带参数的“binvox”将会显示这些）：
+<pre>
+Usage: binvox [-d <voxel dimension>] [-t <voxel file type>] [-c] [-v] <model filespec>
+  -d: specify voxel grid size (default 256, max 1024)
+  -t: specify voxel file type (default binvox, also supported: hips, mira, vtk, raw, schematic)
+  -c: z-buffer based carving method only
+  -dc: dilated carving, stop carving 1 voxel before intersection
+  -v: z-buffer based parity voting method only (default is both -c and -v)
+  -e: exact voxelization (any voxel with part of a triangle gets set)(does not use graphics card)
+Additional parameters:
+  -bb <minx> <miny> <minz> <maxx> <maxy> <maxz>: force a different input model bounding box
+  -ri: remove internal voxels
+  -cb: center model inside unit cube
+  -rotx: rotate object 90 degrees ccw around x-axis before voxelizing
+  -rotz: rotate object 90 degrees ccw around z-axis before voxelizing
+    both -rotx and -rotz can be used multiple times
+  -aw: _also_ render the model in wireframe (helps with thin parts)
+  -fit: only write the voxels in the voxel bounding box
+  -bi <id>: when converting to schematic, use block ID <id>
+  -down: downsample voxels by a factor of 2 in each dimension (can be used multiple times)
+  -dmin <nr>: when downsampling, destination voxel is on if >= <nr> source voxels are (default 4)
+Supported 3D model file formats:
+  VRML V2.0: almost fully supported
+  UG, OBJ, OFF, DXF, XGL, POV, BREP, PLY, JOT: only polygons supported
+Example:
+binvox -c -d 200 -t mira plane.wrl
+</pre>
+
+== Viewvox 控制 ==
+提示：为了查看模型导入到地图后的结果，在Viewvox启动时输入“pannntsy”（可切换到远景视图、折叠可选颜色、展示底部网格、折叠透明网格、显示单片、显示模型最上方（设置视角从Y轴垂直向下看））。“j”和“k”会沿地图水平方向移动模型，且下方方块会显示为半透明灰白色。
+
+Viewvox控制：
+
+鼠标
+      左键=旋转
+      中键=摇动镜头
+      右键=缩放
+按键
+      r=重设视图
+      方向键=沿x（←、→）或y（↑、↓）方向移动1像素
+      =、-=沿z移动1像素（缩放到正面视图）
+
+      q=退出
+
+      a=隐藏可选颜色
+      p=隐藏正面和远景投影
+      X、Y、Z=设置视角到X、Y或Z轴
+      1=隐藏X、Y、Z坐标
+
+      s=显示单片
+      n=显示旁边的上/下/上下片
+      t=隐藏旁边的透明部分
+      j=向下移动一片
+      k=向上移动一片
+      g=隐藏显示片层的网格
+
+== 教程 ==
+[[File:Binvox teapot.jpg|缩略图|右|使用Binvox制作的第一个模型]]
+
+这里有一个[http://www.minecraftforum.net/topic/121015-%EF%A3%BF-3d-modeling-for-mac-tutorial-%EF%A3%BF/ Mac核心教程]。
+
+[http://www.minecraftforum.net/topic/52282-converting-a-3d-model-to-building-plans/#p981947 这里]是原始教程帖子。该教程被复制并在此更新，以便用户随时完善。
+
+获取软件和一些模型。为简化操作，本教程将使用最新的Binvox和Viewvox软件、GLUT DLL、2个模型以及用于渲染它们的2个批处理文件。可在[http://realtimerendering.com/erich/minecraft/public/vox_package.zip 这里]获取并解压。若不想查看本教程快速上手，可阅读README.TXT。[http://www.youtube.com/watch?v=WfuP-xuilhY Mondeus的视频]展示了软件的使用方法，或许能帮到你——主要是双击批处理文件，类似模型就会被转换并显示。
+
+若想从较复杂的方式开始，需确保获取最新版本，按以下步骤操作。你应了解[http://www.patrickmin.com/minecraft/ Patrick的Minecraft页面]。首先，将[http://www.cs.princeton.edu/~min/binvox/ binvox]和[http://www.cs.princeton.edu/~min/viewvox/ viewvox]下载到同一目录，比如桌面。你还需下载[http://www.xmission.com/~nate/glut.html GLUT]，并将DLL放入与binvox相同位置的zip文件中；若知道操作方法，也可将其放入Windows系统DLL文件夹（例如Windows 7的C:\Windows\SysWOW64）。
+
+第二步，找一个要转换的模型，为简便起见，将其放入Binvox文件夹。之前的帖子中有许多免费模型，还有更多可在其他平台找到，例如：[http://www.turbosquid.com/Search/Index.cfm?keyword=&file_type=119&sort_column=A5&sort_order=asc TurboSquid的]、[http://www.3dvia.com/ 3dvia的]、[http://shape.cs.princeton.edu/benchmark/index.cgi Princeton的]和[http://www.geeks3d.com/20100820/nasa-free-3d-models-library/ Nasa的]。你可使用以下格式的模型：VRML、OBJ、OFF、DXF、PLY和STL。
+
+若你有其他格式的模型，可使用[http://chumbalum.swissquake.ch/] Milkshape]、[http://www.blender.org/ Blender]或其他模型转换器，将其转换为Binvox可读取的格式。
+
+无论如何，让我们用一个不错的示例模型——[http://shapes.aim-at-shape.net/viewgroup.php?id=354# Aim*SHAPE]（一个手模型）来开始。你无需获取高分辨率模型，低分辨率网格就很好——之后它会变成方块。因此选择下方那列左边第三行第一个。下载后，解压到Binvox和Viewvox的位置（为方便操作）。你需要的唯一文件是gipshand2-3k.obj，实际上这个文件是保存模型数据的文本文档。
+
+现在，点击开始菜单按钮（屏幕左下角），在下方搜索框中输入：
+
+'''cmd'''
+
+会出现一个黑色文本窗口。转到你放置Binvox和模型的位置，例如桌面，输入：
+
+'''cd C:\Users\Eric\Desktop'''
+
+要运行Binvox，可输入：
+
+'''binvox gipshand2-3k.obj'''
+
+几分钟后，你会在屏幕左上角看到一组手动渲染画面，这是Binvox正在建模并寻找像素。这会创建一个名为gipshand2-3k.binvox的文件，窗口中会提及该文件，显示如下：
+
+  Voxels::print_filled_area
+    area filled: 185 x 92 x 243
+    integer bounding box: [6,6,7] - [190,97,249]
+  
+  writing voxel file...
+  VoxelFile::write_file(gipshand2-3k.binvox)
+  Wrote 426642 set voxels out of 16777216, in 148528 bytes
+
+第一行显示模型大小；第三个值是模型高度，即该模型高243方块。这对Minecraft世界来说太高了，但我们很快会调整到合适尺寸。
+
+''如果没有任何结果，确保所有文件在同一目录！也就是说，“cd”是“改变目录”——仔细查看教程中它的用法。若你不懂DOS命令，可简单地将binvox.exe软件（及依赖文件）和模型文件放在同一目录。这是人们运行Binvox时遇到的首个问题——Binvox找不到你的文件。''
+
+要查看输出文件，输入：
+
+'''viewvox gipshand2-3k.binvox'''
+
+提示：你可在CMD窗口使用↑键显示刚才输入的命令（可多次按下），使用←键、→键和Delete键修改命令内容。这样可避免重复输入“gipshand2-3k.obj”，只需按↑键，将“obj”改为“binvox”，“bin”改为“view”即可。
+
+你应该会看到类似这样的内容（为展示输入的命令，本教程截断了CMD窗口的部分内容）：
+
+[[File:Viewvox.jpg]]
+
+Viewvox会向Minecraft玩家显示一些有用信息，例如：
+
+  Voxels::remove_internal_voxels
+    removing 383513 voxels, which leaves 43129 voxels[/code]
+
+这会告诉你建造该模型所需的方块数量。要关闭viewvox窗口，点击CMD窗口并按下Ctrl+C。别问为什么，按下后你会看到“>”提示。
+
+然而，默认情况下，Binvox会将模型制作成256方块高（或长、深，取最大者）。我们想将其指定为64。现在，你''可以''键入：
+
+'''binvox gipshand2-3k.obj -d 64'''
+
+“-d 64”指定你想扫描的高度。技术说明：在Windows机器上，GLUT有个缺陷，窗口不能小于120像素（Linux无此问题）。我们会在内部添加一些代码来提高分辨率，再降低取样，使其效果一致。手动解决此问题的方法是：
+
+'''binvox gipshand2-3k.obj -down -down'''
+
+每个“-down”都会将分辨率减半。默认从256开始，除以2，再除以2，即除以4，得到64。解决此问题的另一种方法是使用“-e”选项，它会进行“精确”（任何重叠的体素都会被标记）体素化：
+
+'''binvox gipshand2-3k.obj -d 64 -e'''
+
+精确体素化可避免使用GPU渲染导致的任何精度问题。但这样做有个缺点，即无法进一步控制。''所有''被任何标记的多边形接触的体素都会被选中，这有时看起来不太好。有许多选项可控制密度、边缘强调度等。
+
+使用该命令后，会输出一个新的Binvox模型。在这个新模型上使用Viewvox时，你会注意到它名为gipshand2-3k_1.binvox。因此输入：
+
+'''viewvox gipshand2-3k_1.binvox'''
+
+你可使用鼠标控制模型视角：左键旋转、中键摇动镜头、右键缩放（采用一种巧妙的方式）。以下是旋转后的模型视角：
+
+[[File:Viewvox1.jpg]]
+
+看起来不错。Viewvox显示该模型有2471个方块，若每5秒渲染1个方块，需用时3.5小时。但是，该如何建造它呢？很简单（除了其他所有繁琐步骤）：
+
+第一步，按下{{key|S}}。这会隐藏整个模型并显示垂直剖面。仍很难数清方块数量，因此按下{{key|A}}，会显示纵横交错的颜色。想向上或向下查看？按下N隐藏相邻部分，再按下T使其半透明。按下1隐藏显示的坐标。注意：CMD窗口启动时会列出这些选项。
+
+以下是执行上述步骤后的视图，即模型中间的垂直剖面视图。
+
+[[File:Viewvox2.jpg]]
+
+专业技巧：启动Viewvox时，你总可以键入“antspy”（想想“ant spy”或“pantsy”，或许能帮你记住）。这会带你进入俯视图，显示1层，上下部分都变为透明。通常需按下{{key|N}}两次以上，只显示下方相邻的层。
+
+当然，你可能想从模型底部开始建造。按下{{key|J}}显示下一片，按下{{key|K}}显示上一片。你可在CMD窗口中看到当前所在的片编号（从0开始）。
+
+这是最基本的操作，在一切顺利时适用。首先，选择一个“不漏水”的模型，即填满后不会漏水且没有悬空边缘的模型。互联网上的大多数模型并非如此，它们通常通过粘合各个面来达到效果。因此，你需要尝试命令行的不同选项。以下是Binvox最重要的几个选项。
+
+'''-c''' - 若你的模型“漏水”，必须使用此选项。它的渲染速度实际上更快，但会丢失角落和裂缝。
+
+'''-dc''' - 体素化时可忽略的小功能，此选项会尝试模糊模型。
+
+'''-aw''' - 渲染模型的所有角落，这是另一个用于处理极薄部分的技术模糊特性。
+
+'''-dmin 1''' - 使用“-down”时，用更小的体素填充模型（若想填充更大模型），这是另一个技术模糊特性。
+
+'''-rotx''' - 沿X轴旋转模型90°。在Viewvox中，X轴为红色，Y轴为绿色，Z轴为蓝色（RGB）。可多次使用此操作。
+
+'''-rotz''' - 沿Y轴旋转模型90°，许多模型初始方向为“向上”，不符合Binvox的要求。只需尝试-rotx和-rotz命令以获得正确朝向。
+
+'''-cb''' - 这并非关键，但经常会用到（本教程为简便未使用）。模型通常会被移动，以显示左下角的立方体组成部分。此选项会将模型放在中间，使其更易读取坐标轴。是否使用此选项由你决定。
+
+'''-t schematic''' - 用.schematic文件输出代替.binvox文件输出。这种类型的文件可使用[http://www.minecraftforum.net/viewtopic.php?t=15522 MCEdit]或其他工具导入到世界中。
+
+只需键入“binvox”，你会看到更多命令行选项。排除这些繁琐选项后，体素化通常98%正确——只需对模型做小幅改动。
+
+以下是转换后的一个骑士模型：
+
+'''binvox chevalier.obj -d 536 -aw -c -dc -cb -dmin 1 -down -down -down'''
+
+[[File:Binvox chevi.jpg]]
+
+祝你好运！如有任何问题，请发布到[http://www.minecraftforum.net/topic/52282-converting-a-3d-model-to-building-plans/ 社区]上。
+
+若你想将模型正确导入Minecraft世界，可参阅[http://www.minecraftforum.net/viewtopic.php?f=3&t=55910&start=90#p1232529 这里]。
+
+Binvox和Viewvox的新版本及选项会频繁更新，因此要经常检查更新。你总能在键入“binvox”（不带参数）后，在CMD窗口中看到Binvox支持的选项和版本信息。
+
+[[Category:自定义软件]]
+
+[[en:Programs and editors/Binvox]]

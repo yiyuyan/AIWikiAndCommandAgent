@@ -1,0 +1,255 @@
+# 页面: Java版指南/霜炙更新
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%8C%87%E5%8D%97/%E9%9C%9C%E7%82%99%E6%9B%B4%E6%96%B0
+# 分类: Java版指南
+# 抓取时间: 2026-07-14 17:15:22
+# 原始 Wikitext 内容:
+
+{{Infobox guide
+|edition=Java版
+|name=霜炙更新
+|vers=
+* [[Java版1.10|1.10]]
+* [[Java版1.10.1|1.10.1]]
+* [[Java版1.10.2|1.10.2]]
+|prev=战斗更新
+|next=探险更新
+}}
+这篇指南是[[霜炙更新]]（Java版1.10.x）的简要概述。本指南假定读者对[[战斗更新]]（Java版1.9.x）的内容有基本了解。
+
+== 生物 ==
+=== 新内容 ===
+{| class = "wikitable"
+! 名称 !! 外观 !! 生成于 !! 掉落 !! 备注
+|-
+| {{EntityLink|Polar bear}} || [[File:Polar Bear JE1 BE1.png|84px|center]] ||
+* 北极熊生成于[[冰原]]、[[雪山|冰山]]和[[冰刺之地]]生物群系。
+||
+{{Drop|Item|Raw fish|0|2}}或{{Drop|Item|Raw salmon|0|2}}
+* {{xp|1|3}}
+||
+* 被攻击后，成年北极熊会攻击[[玩家]]，幼崽则会逃走。
+* 成年北极熊在幼崽周围时总是会攻击玩家。
+* 幼崽会跟随成年北极熊。
+* 在[[水]]中游得很快。
+|-
+|  {{EntityLink|Husk}} || [[File:Husk JE1 BE1.png|128px|center]] ||
+* 在[[沙漠]]、[[沙漠丘陵]]和[[沙漠M]]生物群系于天空下生成的[[僵尸]]有80%的機率被屍殼取代。
+|| 
+{{Drop|Item|Rotten flesh|0|2}}
+{{Drop|Item|Iron ingot|2.5%}}
+{{Drop|Item|Carrot|2.5%}} 
+{{Drop|Item|Potato|2.5%}}
+'''生成时装备'''
+{{Drop|Block|id=Carved pumpkin|南瓜}}
+{{Drop|Block|Jack o'Lantern}}
+{{Drop|Item|Iron Shovel}}
+{{Drop|Item|Iron Sword}}
+{{Drop|Item|id=Iron Chestplate|text=随机装备|盔甲}}
+||
+* 行为和普通的僵尸相似。
+* 不会在阳光下燃烧。
+* 攻击时会施加{{EffectLink|Hunger}}状态效果。
+** {{EffectLink|Hunger}}只会在尸壳空手时附加。
+|-
+|  {{EntityLink|Stray}} || [[File:Stray JE1 BE3.png|128px|center]] ||
+* 在[[冰原]]、[[雪山|冰山]]和[[冰刺之地]]生物群系于天空下生成的[[骷髅]]有80%的機率被流髑取代。
+|| 
+{{Drop|Item|Bone|0|2}}
+{{Drop|Item|Arrow|0|2}}
+{{Drop|Item|Arrow of Slowness|0|1}}
+'''生成时装备'''
+{{Drop|Block|id=Carved pumpkin|南瓜}}
+{{Drop|Block|Jack o'Lantern}}
+{{drop|item|Bow}}
+||
+* 行为和普通的骷髅相似。
+* 会向目标射出迟缓之箭（0:30）。
+|}
+
+=== 更改 ===
+{| class = "wikitable"
+! 名称 !! 更改
+|-
+| 所有[[生物]] ||
+* 生物现在可以在[[船]]上射击。
+|-
+| {{EntityLink|Enderman}} ||
+* 现在可以生成在[[下界]]。
+* 现在可以捡起[[下界岩]]。
+|-
+| {{EntityLink|Skeleton}} ||
+* 燃烧的骷髅现在有50%的概率射出燃烧的箭矢。
+|}
+
+== 方块 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=霜炙更新新增方块
+|rows=1
+| 0=Structure Void | Magma Block | Nether Wart Block | Red Nether Bricks | Bone Block
+}}
+|霜炙更新新增方块一览
+}}
+{| class = "wikitable"
+! 名称 !! 外观 !! 获得方法 !! 采集工具 !! 用途
+|-
+|{{BlockLink|Structure Void}}||[[File:Structure Void JE1.png|84px|center]]||
+* 只能通过创造模式物品栏获取。
+||结构空位可以使用任意工具或徒手采集。||
+* 用于标记加载结构时不替换某一位置的方块。
+|-
+| {{BlockLink|Bone block}} || [[File:Bone Block (UD) JE1 BE1.png|84px|center]] ||
+{{Crafting|A1=Bone Meal|B1=Bone Meal|C1=Bone Meal|A2=Bone Meal|B2=Bone Meal|C2=Bone Meal|A3=Bone Meal|B3=Bone Meal|C3=Bone Meal|Output=Bone Block}}
+* 作为化石的一部分生成。
+|| 可以使用镐采集。 ||
+* 可以重新合成为9个骨粉。
+|-
+| {{BlockLink|Magma block}} || [[File:Magma Block JE1 BE1.png|84px|center]] ||
+{{Crafting||A1=Magma Cream|A2=Magma Cream|B1=Magma Cream|B2=Magma Cream|Output=Magma Block}}
+* 可以在[[下界]]的Y=27和Y=36之间生成。
+|| 可以使用镐采集。 ||
+* 站在岩浆块上的生物和玩家每秒会受到{{hp|1}}点伤害。
+** 如果正在潜行、穿着附有[[冰霜行者]]的盔甲或在{{EffectLink|Fire Resistance}}状态效果下，它们不会受到伤害。
+* 会随机地移除顶部的水方块。
+|-
+| {{BlockLink|Nether wart block}} || [[File:Nether Wart Block JE1 BE1.png|84px|center]] ||
+{{Crafting|A1=Nether Wart|B1=Nether Wart|C1=Nether Wart|A2=Nether Wart|B2=Nether Wart|C2=Nether Wart|A3= Nether Wart|B3=Nether Wart|C3=Nether Wart|Output=Nether Wart Block}}
+|| 可以使用任何工具采集（包括空手）。 ||
+* 可用作装饰方块。
+* 下界疣块'''不能'''重新合成为下界疣。
+|-
+| {{BlockLink|Red nether bricks}} || [[File:Red Nether Bricks JE1 BE1.png|84px|center]] ||
+{{Crafting||A1=Nether Wart|B1=Nether Bricks|A2=Nether Bricks|B2=Nether Wart|Output=Red Nether Bricks}}
+|| 可以使用镐采集。 ||
+* 可用作装饰方块。
+|}
+
+=== 更改 ===
+{| class = "wikitable"
+! 名称 !! 更改
+|-
+| {{BlockLink|Dispenser}} ||
+* 现在可以给[[玩家]]装备[[盾牌]]。
+|-
+| {{BlockLink|id=Terracotta|染色粘土}} ||
+* 染色粘土从“<颜色>染色粘土”重命名为“<颜色>硬化粘土”。
+|}
+
+== 物品 ==
+=== 更改 ===
+{| class = "wikitable"
+! 名称 !! 更改
+|-
+| {{ItemLink|Chorus fruit}}和{{ItemLink|ender pearl}} ||
+* 它们现在可以将骑乘者从骑乘的生物上传送开。
+|-
+| {{ItemLink|Firework rocket}} ||
+* 配方现在产出量从1个增加至3个。
+|-
+| {{ItemLink|Fishing rod}} ||
+* 现在可以将[[物品]]拉给玩家。
+|}
+
+== 生物群系 ==
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+| {{BiomeLink|Plains}}和{{BiomeLink|sunflower plains}} ||
+* 现在可以生成少量的橡树。
+|-
+| {{BiomeLink|id=snowy-tundra|冰原}}、{{BiomeLink|id=snowy-mountains|link=雪山|冰山}}和{{BiomeLink|id=ice-spikes|冰刺之地}} ||
+* 现在不再生成除[[兔子]]和[[北极熊]]以外的任何被动生物。
+|-
+| {{BiomeLink|id=badlands|平顶山}} ||
+* 如果平顶山离海平面的高度超过15格，则[[硬化粘土]]的生成深度不再超过15格。
+* 除了在Y=32下方尝试生成2处[[金矿石]]矿脉外，还会在Y=32与Y=79之间尝试生成20处矿脉。
+|}
+
+== 结构 ==
+=== 新内容 ===
+{|class="wikitable"
+! 名称 !! 外观 !! 生成于 !! 包含 !! 描述
+|-
+| {{EnvLink|Fossil}} || [[File:FossilWithCoalAndStone.png|278x278px|center]] || 化石在会在[[沙漠]]、[[沼泽]]及它们的M和丘陵变种的地下生成。 ||
+* {{BlockLink|Bone block}}
+* {{BlockLink|Coal ore}}
+||
+* 外形类似于大型已灭绝生物的头颅和脊椎骨。
+|-
+| {{EnvLink|id=badlands mineshaft|link=废弃矿井|平顶山废弃矿井}} || [[File:GoldMine PA.png|278x278px|center]] || 生成于[[平顶山]]的[[废弃矿井]]将会成为平顶山废弃矿井。 ||
+* {{BlockLink|Dark oak planks}}
+* {{BlockLink|Dark oak fence}}
+* {{BlockLink|Rail}}
+* {{BlockLink|Torch}}
+* {{BlockLink|Cobweb}}
+* {{BlockLink|Dirt}}
+* {{BlockLink|id=spawner|link=刷怪笼|洞穴蜘蛛刷怪笼}}
+* {{EntityLink|id=Minecart with chest|link=废弃矿井#战利品|战利品运输矿车}}
+||
+* 平顶山废弃矿井的中心将会与海平面持平。
+* 使用深色橡木而不是橡木作为木质结构。
+|-
+| {{EnvLink|id=village|僵尸村庄}} || [[File:ZombieVillageBrightened.png|278x278px|center]] || 村庄在生成时有概率会成为僵尸村庄。 ||
+* {{BlockLink|id=all-logs|Log}}
+* {{BlockLink|Planks}}
+* {{BlockLink|Cobblestone}}
+* {{BlockLink|Glass pane}}
+* {{BlockLink|id=all-fences|Fence}}
+* {{EntityLink|Zombie villager}}
+||
+* [[僵尸村民]]将会替代所有生成的村民。这些僵尸村民不会消失。
+* 村庄里没有[[门]]或[[火把]]。
+|}
+
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+| {{EnvLink|abandoned mineshaft}} ||
+* 地面上生成的物体将会有所改变。
+** 天空亮度在8及以上时，[[刷怪笼|蜘蛛洞穴刷怪笼]]不再生成。
+** 天空亮度在8及以上时，木质结构不再生成。
+** 天空亮度在8以下时，矿道中的[[铁轨]]会更加完整。
+|-
+| {{EnvLink|Village}} ||
+* 村庄不再受[[生物群系]]边界限制，这意味着起始于有效生物群系的村庄现在可以扩展至无效的生物群系。
+* 现在在针叶林中（不包括变种）生成。
+* 村庄结构的木头类型现在由生物群系决定。
+* 在热带村庄中，金合欢木会替代圆石生成。
+* 铁匠铺和教堂的圆石现在不受生物群系影响。
+* 路径使用的材料现在取决于现有的地形。
+** 使用[[草径]]替换[[草方块]]。
+** 使用[[木板]]替换水和熔岩。
+*** 在沙漠村庄里，[[平滑砂岩]]会替代木板生成。
+** 使用铺在圆石上的沙砾替换沙子、砂岩和红砂岩。
+*** 在沙漠村庄里，砂岩会替代沙砾和圆石生成。
+|-
+| {{EnvLink|Huge mushroom}} ||
+* 现在有概率长为原来的两倍高。
+|-
+| {{EnvLink|Cave}} ||
+* 生成时不再将天花板上的[[沙子]]转化为[[砂岩]]。
+|-
+| {{EnvLink|End portal}} ||
+* 现在激活末地传送门框架时会替换所有内部的方块。
+|}
+
+== 其他 ==
+=== 新内容 ===
+{|class="wikitable"
+! 名称 !! 描述
+|-
+| [[选项#控制|自动跳跃]] ||
+* 向一格高的障碍跑去时，自动使玩家跳跃。
+|}
+
+== 导航 ==
+{{Navbox guides|je}}
+
+[[en:Java Edition guides/Frostburn Update]]
+[[es:Guías de Java Edition/Frostburn Update]]
+[[ja:ガイド/Java Edition/フロストバーン・アップデート]]
+[[ru:Обзоры версий Java Edition/Frostburn Update]]

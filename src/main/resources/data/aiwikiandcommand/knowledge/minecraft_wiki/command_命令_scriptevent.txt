@@ -1,0 +1,67 @@
+# 页面: 命令/scriptevent
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/scriptevent
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock|education}}
+{{Infobox command
+|name=scriptevent
+|oplevel=1
+|cheat=1
+}}
+
+通过ID和消息来触发-{}-脚本事件。
+
+== 语法 ==
+:<code>scriptevent <messageId: string> <message: message></code>
+
+== 参数 ==
+{{argument|messageId: string|string|be=1}}
+:指定触发脚本事件的消息ID。
+:{{arg desc|be=basic_string}}
+
+{{argument|message: message|CommandMessage|be=1}}
+:指定触发脚本事件的消息。
+:{{arg desc|be=CommandMessage}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|指定ID不存在或使用<code>minecraft</code>命名空间||fail}}
+{{Result table|消息长度超出256个字符}}
+{{Result table|<code>message: message</code>未指定<ref name="MCPE-185429">{{bug|MCPE-185429|||Fixed}}</ref>||success}}
+{{Result table|success}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 使用消息ID{{cd|foo:bar}}来触发脚本事件：<code>/scriptevent foo:bar</code>
+* 使用消息ID{{cd|foo:bar}}来触发脚本事件，并传入消息{{cd|baz}}：<code>/scriptevent foo:bar baz</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.60|dev=1.19.60.22|exg=gametest|加入了{{cmd|scriptevent|link=none}}。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.20|{{cmd|scriptevent|link=none}}不再属于[[实验性玩法]]。}}
+}}
+
+== 参见 ==
+* {{cite|website=Microsoft Learn|title=minecraft/server.ScriptEventCommandMessageAfterEventSignal Class|url=https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server/scripteventcommandmessageaftereventsignal}}{{note|{{cd|ScriptEventCommandMessageAfterEventSignal}}的实例可以在{{cd|System.afterEvents.scriptEventReceive}}{{tr|对象|物件}}获取。}}
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/scriptevent]]
+[[en:Commands/scriptevent]]

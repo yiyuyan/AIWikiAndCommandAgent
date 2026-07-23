@@ -1,0 +1,423 @@
+# 页面: 编码格式/CritereonPredicate
+# 来源: https://zh.minecraft.wiki/w/%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/CritereonPredicate
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:30
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+此条目记录了所有准则谓词/进度谓词（Critereon Predicate）。
+
+实体谓词因结构复杂，单独记录在[[实体谓词]]中。
+
+{{TOC|right}}
+
+本条目部分内容合并自其他页面，详见[[special:链入页面/编码格式/CritereonPredicate|本页面的链入页面]]。
+
+下列所有结构均需要与最新版本同步更新。
+
+{| class="wikitable"
+! 结构名称 !! 引用名称 !! 相关模板
+|-
+! colspan=3 | 基础谓词
+|-
+| 方块谓词 || <code>codec_block_predicate</code> || {{tl|nbt inherit/block predicate}}
+|-
+| 伤害谓词 || <code>codec_damage_predicate</code> || {{tl|nbt inherit/damage predicate}}
+|-
+| 伤害来源谓词 || <code>codec_damage_source_predicate</code> || {{tl|nbt inherit/damage source predicate}}
+|-
+| 距离谓词 || <code>codec_distance_predicate</code> || {{tl|nbt inherit/distance predicate}}
+|-
+| 物品堆叠谓词 || <code>codec_item_predicate</code> || {{tl|nbt inherit/item predicate}}
+|-
+| 位置信息谓词 || <code>codec_location_predicate</code> || {{tl|nbt inherit/location predicate}}
+|-
+| 数值界限范围 || <code>codec_min_max_bounds</code> || {{tl|nbt inherit/minmax bounds ints}}<br>{{tl|nbt inherit/minmax bounds doubles}}
+|-
+| 生物状态效果谓词 || <code>codec_mob_effects_predicate</code> || {{tl|nbt inherit/mob effects predicate}}
+|-
+! colspan=3 | 数据组件谓词
+|-
+| 属性修饰符集合内容谓词 || <code>codec_attribute_modifier_entry_predicate</code> || 嵌入
+|-
+| 集合谓词 || <code>codec_collection_predicate</code> || 嵌入
+|-
+| 烟火谓词 || <code>codec_firework_predicate</code> || 嵌入
+|}
+{| class="wikitable"
+|+已弃用
+! 结构名称 !! 引用名称 !! 相关模板
+|-
+! colspan="3" | 基础谓词
+|-
+| 实体谓词 || &ndash; || {{tl|nbt inherit/entity predicate}}
+|-
+! colspan=3 | 实体子谓词
+|-
+| 闪电束谓词 || <code>codec_lightning_bolt_predicate</code> || 嵌入
+|-
+| 浮漂谓词 || <code>codec_fishing_hook_predicate</code> || 嵌入
+|-
+| 玩家谓词 || <code>codec_player_predicate</code> || 嵌入
+|-
+| 史莱姆谓词 || <code>codec_slime_predicate</code> || 嵌入
+|-
+| 袭击者谓词 || <code>codec_raider_predicate</code> || 嵌入
+|-
+| 绵羊谓词 || <code>codec_sheep_predicate</code> || 嵌入
+|}
+
+== 准则谓词 ==
+=== 方块谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.predicates.BlockPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>BlockPredicate::CODEC</code><section begin="codec_block_predicate"/>
+** {{nbt|string}}{{nbt|list|blocks}}：匹配的[[方块]]。可以为以<code>#</code>开头的方块[[Java版标签|标签]]、一个方块ID的字符串、或以多个方块ID组成的字符串列表。
+** {{nbt|compound|components}}：检查[[数据组件#方块实体|方块实体的数据组件]]。当方块实体的组件内容与检测内容完全相同时测试成功。
+*** {{nbt|any|<''数据组件ID''>}}：一项组件及检测内容。
+** {{nbt|string}}{{nbt|compound|nbt}}：匹配方块实体的任意NBT数据。可以为复合标签或字符串包裹的SNBT，格式参见{{slink|NBT格式#测试NBT标签}}和{{slink|NBT格式|转换}}。
+** {{nbt|compound|predicates}}：检查方块实体的某个组件是否满足某种条件。
+*** {{nbt|any|<''数据组件谓词类型ID''>}}：一个组件的检查。具体格式详见[[数据组件谓词]]。
+** {{nbt|compound|state}}：匹配[[方块状态]]。
+*** {{nbt|string}}{{nbt|compound|<''方块属性''>}}：匹配指定方块属性。可以为精确匹配，也可以为范围匹配。为范围匹配时，若方块属性值为数字字符串，则直接比较数值；若为布尔值字符串，则<code>"true"</code>为较大值；其他方块属性值则按游戏内部顺序比较，例如拼图方块<code>orientation</code>方块属性的<code>"east_up"</code>大于<code>"up_north"</code>。
+**** {{nbt|string|min}}：方块属性值的最小值。
+**** {{nbt|string|max}}：方块属性值的最大值。
+<section end="codec_block_predicate"/>
+</div>
+
+=== 伤害谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.predicates.DamagePredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>DamagePredicate::CODEC</code><section begin="codec_damage_predicate"/>
+** {{nbt|boolean|blocked}}：检查伤害是否被成功阻挡。
+** {{nbt|double}}{{nbt|compound|dealt}}：检查在减少伤害前实体即将受到的伤害总量。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds doubles}}
+** {{nbt|compound|source_entity}}：检查伤害的[[伤害来源|来源实体]]。
+*** {{Nbt inherit/entity predicate}}
+** {{nbt|double}}{{nbt|compound|taken}}：检查在减少伤害后实体即将受到的伤害总量。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds doubles}}
+** {{nbt|compound|type}}：检查伤害类型。
+*** {{Nbt inherit/damage source predicate}}
+<section end="codec_damage_predicate"/>
+</div>
+
+=== 伤害来源谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.predicates.DamageSourcePredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>DamageSourcePredicate::CODEC</code><section begin="codec_damage_source_predicate"/>
+** {{nbt|compound|direct_entity}}：检查伤害的[[伤害来源|直接实体]]。
+*** {{nbt inherit/entity predicate}}
+** {{nbt|boolean|is_direct}}：检查伤害的来源实体是否是直接造成伤害的实体。
+** {{nbt|compound|source_entity}}：检查伤害的[[伤害来源|来源实体]]。
+*** {{nbt inherit/entity predicate}}
+** {{nbt|list|tags}}：检测伤害类型标签。
+*** {{nbt|compound}}：一项标签谓词。
+**** {{nbt|boolean|expected}}：检查此伤害类型是否在此标签内。
+**** {{nbt|string|id}}：（命名空间ID）一个伤害类型[[Java版标签|标签]]。
+<section end="codec_damage_source_predicate"/>
+</div>
+
+=== 距离谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.predicates.DistancePredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>DistancePredicate::CODEC</code><section begin="codec_distance_predicate"/>
+** {{nbt|double}}{{nbt|compound|absolute}}：检查绝对距离，以[[欧几里得距离]]计算。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds doubles}}
+** {{nbt|double}}{{nbt|compound|horizontal}}：检查水平方向的距离，以欧几里得距离计算。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds doubles}}
+** {{nbt|double}}{{nbt|compound|x}}：检查X轴上的距离。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds doubles}}
+** {{nbt|double}}{{nbt|compound|y}}：检查Y轴上的距离。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds doubles}}
+** {{nbt|double}}{{nbt|compound|z}}：检查Z轴上的距离。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds doubles}}
+<section end="codec_distance_predicate"/>
+</div>
+
+=== 物品堆叠谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.predicates.ItemPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>ItemPredicate::CODEC</code><section begin="codec_item_predicate"/>
+** {{nbt|compound|components}}：检查物品的[[物品堆叠组件]]。当物品的组件内容与检测内容完全相同时测试成功。
+*** {{nbt|any|<''物品堆叠组件ID''>}}：一项组件及检测内容。
+** {{nbt|int}}{{nbt|compound|count}}：检查物品堆叠的数量。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds ints}}
+** {{nbt|string}}{{nbt|list|items}}：匹配的物品。可以为以<code>#</code>开头的物品标签、一个物品ID的字符串、或以多个物品ID组成的字符串列表。
+** {{nbt|compound|predicates}}：检查物品的某个物品堆叠组件是否满足某种条件。
+*** {{nbt|any|<''数据组件谓词类型ID''>}}：一个组件的检查。具体格式详见[[数据组件谓词]]。
+<section end="codec_item_predicate"/>
+</div>
+
+=== 位置信息谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.predicates.LocationPredicate, FluidPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>LocationPredicate::CODEC</code><section begin="codec_location_predicate"/>
+** {{nbt|string}}{{nbt|list|biomes}}：检查此位置是否在某[[生物群系]]内。可以为以<code>#</code>开头的生物群系标签、一个生物群系ID的字符串、或以多个生物群系ID组成的字符串列表。
+** {{nbt|compound|block}}：检查此位置的方块。
+*** {{nbt inherit/block predicate}}
+** {{nbt|bool|can_see_sky}}：检查此位置是否可以直接看见天空，即[[亮度#天空光照|天空光照等级]]是否为15。
+** {{nbt|string|dimension}}：检查此位置的维度。需为一个维度的命名空间ID。
+** {{nbt|compound|fluid}}：检查此位置的[[流体]]。
+*** {{nbt|string}}{{nbt|list|fluids}}：匹配的流体。可以为以<code>#</code>开头的流体[[Java版标签|标签]]、一个流体ID的字符串、或以多个流体ID组成的字符串列表。
+*** {{nbt|compound|state}}：匹配流体状态。
+**** {{nbt|string}}{{nbt|compound|<''流体属性''>}}：匹配指定流体属性。可以为精确匹配，也可以为范围匹配。
+***** {{nbt|string|min}}：流体属性值的最小值。
+***** {{nbt|string|max}}：流体属性值的最大值。
+** {{nbt|compound|light}}：检查可见光照的光照等级。使用<code>-{}-max(''内部天空光照'',''方块光照'')</code>计算。
+*** {{nbt|int}}{{nbt|compound|light}}：光照等级。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds ints}}
+** {{nbt|compound|position}}：检查此位置的坐标。
+*** {{nbt|double}}{{nbt|compound|x}}：X坐标。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|y}}：Y坐标。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|z}}：Z坐标。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+** {{nbt|boolean|smokey}}：检查此位置是否位于一个[[营火]]或[[灵魂营火]]的上方，且高度不超过5格。
+** {{nbt|string}}{{nbt|list|structures}}：检查此位置是否在某[[结构]]范围内。可以为以<code>#</code>开头的结构标签、一个结构ID的字符串、或以多个结构ID组成的字符串列表。
+<section end="codec_location_predicate"/>
+</div>
+
+=== 数值界限范围 ===
+{{codec from source|type=json|net.minecraft.advancements.predicates.MinMaxBounds}}
+<div class="treeview">
+* {{nbt|compound}} <code>MinMaxBounds::createCodec</code><section begin="codec_min_max_bounds"/>
+** {{nbt|{{#var:type|any}}|min}}：数值的最小允许值。
+** {{nbt|{{#var:type|any}}|max}}：数值的最大允许值。
+<section end="codec_min_max_bounds"/>
+</div>
+
+=== 生物状态效果谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.predicates.MobEffectsPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>MobEffectsPredicate::Codec</code><section begin="codec_mob_effects_predicate"/>
+** {{nbt|compound|<''状态效果ID''>}}：要检查的一项[[状态效果]]。
+*** {{nbt|bool|ambient}}：检查状态效果是否为信标添加。
+*** {{nbt|int}}{{nbt|compound|amplifier}}：检查状态效果的倍率。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds ints}}
+*** {{nbt|int}}{{nbt|compound|duration}}：检查状态效果的持续时间，单位为刻。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds ints}}
+*** {{nbt|bool|visible}}：检查状态效果粒子是否可见。
+<section end="codec_mob_effects_predicate"/>
+</div>
+
+== 数据组件谓词 ==
+=== 属性修饰符集合内容谓词 ===
+{{codec from source|type=json|net.minecraft.core.component.predicates.AttributeModifiersPredicate.EntryPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>EntryPredicate::CODEC</code><section begin="codec_attribute_modifier_entry_predicate"/>
+** {{nbt|double}}{{nbt|compound|amount}}：匹配修饰值，或者检测修饰值是否在范围之间。
+*** {{nbt inherit/minmax bounds doubles}}
+** {{nbt|string}}{{nbt|list|attribute}}：匹配的[[属性]]。可以为以<code>#</code>开头的属性[[Java版标签|标签]]、一个属性ID的字符串、或以多个属性ID组成的字符串列表。
+** {{nbt|string|id}}：匹配属性修饰符的命名空间ID。
+** {{nbt|string|operation}}：匹配属性修饰符操作方法。取值必须从{{cd|add_value|add_multiplied_base|add_multiplied_total|d=pretty}}中任选其一。
+** {{nbt|string|slot}}：匹配属性修饰符生效的[[装备槽位组]]。
+<section end="codec_attribute_modifier_entry_predicate"/>
+</div>
+
+=== 集合谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.predicates.CollectionPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>CollectionPredicate::CODEC</code><section begin="codec_collection_predicate"/>
+** {{nbt|list|contains}}：检查是否有{{#var:name}}符合特定谓词。要求每个谓词都有至少一个{{#var:name}}符合，一个{{#var:name}}不必符合所有谓词。
+{{#switch:{{#var:type}}
+|=
+*** ''集合内容谓词''
+|compound=
+*** {{nbt|{{#var:type}}}}：一个谓词。
+**** {{nbt collapsed link|{{#var:condition}}|predicate}}
+|
+*** {{nbt|{{#var:type}}}}：一个谓词。{{#var:condition}}。
+}}
+** {{nbt|int}}{{nbt|compound|size}}：检查{{#var:name}}的数量。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds ints}}
+** {{nbt|list|count}}：统计并检查符合特定谓词的{{#var:name}}的数量。
+*** {{nbt|compound}}：一个谓词及要求匹配的数量。
+**** {{nbt|int}}{{nbt|compound|count}}：匹配一个精确值，或者检测数值是否在范围之间。
+***** {{nbt inherit/minmax bounds ints}}
+{{#switch:{{#var:type}}
+|=
+**** ''集合内容谓词''
+|compound=
+**** {{nbt|{{#var:type}}|test}}：一个谓词。
+***** {{nbt collapsed link|{{#var:condition}}|predicate}}
+|
+**** {{nbt|{{#var:type}}|test}}：一个谓词。{{#var:condition}}。
+}}
+<section end="codec_collection_predicate"/>
+</div>
+
+=== 烟火谓词 ===
+{{codec from source|type=json|net.minecraft.core.component.predicates.FireworkExplosionPredicate.FireworkPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>FireworkPredicate::CODEC</code><section begin="codec_firework_predicate"/>
+** {{nbt|boolean|has_trail}}：检测烟火是否有拖曳痕迹（使用[[钻石]]合成时）。
+** {{nbt|boolean|has_twinkle}}：检测烟火是否出现闪烁效果（使用[[荧石粉]]合成时）。
+** {{nbt|string|shape}}：检测烟火的爆裂形状是否为指定形状。可以为{{cd|small_ball|large_ball|star|creeper|burst|d=pretty}}。
+<section end="codec_firework_predicate"/>
+</div>
+
+== 已弃用 ==
+此段落因历史使用保留。
+
+=== 实体谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.critereon.EntityPredicate, EntityEquipmentPredicate, EntityFlagsPredicate, MovementPredicate, SlotsPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>EntityPredicate::CODEC</code><section begin="codec_entity_predicate"/>
+** {{nbt|compound|components}}：检查[[数据组件#实体|实体的数据组件]]。当从实体获取的组件内容与检测内容完全相同时测试成功。
+*** {{nbt|any|<''数据组件ID''>}}：一项组件及检测内容。
+** {{nbt|compound|distance}}：检查实体到执行位置的距离。
+*** {{nbt inherit/distance predicate}}
+** {{nbt|compound|effects}}：检查实体的状态效果。
+*** {{nbt inherit/mob effects predicate}}
+** {{nbt|compound|equipment}}：检查实体身上的装备。
+*** {{nbt|compound|body}}：检查动物身体槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|chest}}：检查胸甲槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|feet}}：检查靴子槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|head}}：检查头盔槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|legs}}：检查护腿槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|mainhand}}：检查主手槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|offhand}}：检查副手槽位物品。
+**** {{nbt inherit/item predicate}}
+** {{nbt|compound|flags}}：检查实体特质。
+*** {{nbt|bool|is_baby}}：检查该实体是否是幼体。如果该实体是盔甲架，则以是否是小型盔甲架来判断。
+*** {{nbt|bool|is_flying}}：检查该实体是否正在飞行。
+*** {{nbt|bool|is_on_ground}}：检查该实体是否正立在地面上。
+*** {{nbt|bool|is_on_fire}}：检查该实体是否正在着火。
+*** {{nbt|bool|is_sneaking}}：检查该实体是否正在潜行。
+*** {{nbt|bool|is_sprinting}}：检查该实体是否正在疾跑。
+*** {{nbt|bool|is_swimming}}：检查该实体是否正在游泳。
+*** {{nbt|bool|is_in_water}}：检查该实体是否正在接触水。对气泡柱等方块也有效。
+*** {{nbt|bool|is_fall_flying}}：检查该实体是否正在用鞘翅滑翔。
+** {{nbt|compound|location}}：检查实体的位置。
+*** {{nbt inherit/location predicate}}
+** {{nbt|compound|movement}}：检查实体的运动状况，所有速度单位均为米每秒。
+*** {{nbt|double}}{{nbt|compound|fall_distance}}：检查摔落高度。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|horizontal_speed}}：检查水平速度分量。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|speed}}：检查速度。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|vertical_speed}}：检查垂直速度分量绝对值。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|x}}：检查X轴运动向量分量。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|y}}：检查Y轴运动向量分量。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|z}}：检查Z轴运动向量分量。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+** {{nbt|compound|movement_affected_by}}：检查影响实体移动速度的方块位置，此位置最低不超过实体位置0.5格以下。
+*** {{nbt inherit/location predicate}}
+** {{nbt|string}}{{nbt|compound|nbt}}：匹配实体的任意NBT数据。可以为复合标签或字符串包裹的SNBT，格式参见{{slink|NBT格式#测试NBT标签}}和{{slink|NBT格式|转换}}。
+** {{nbt|compound|passenger}}：检查正在骑乘此实体的实体。
+*** {{nbt inherit/entity predicate}}
+** {{nbt|compound|predicates}}：检查实体的某个组件是否满足某种条件。
+*** {{nbt|any|<''数据组件谓词类型ID''>}}：一个组件的检查。具体格式详见[[数据组件谓词]]。
+** {{nbt|int|periodic_tick}}：（{{interval|left=0}}）根据实体已经加载的时间，按照指定的周期，一个周期内只可能检查成功一次。
+** {{nbt|compound|slots}}：检查实体某些槽位内的物品。
+*** {{nbt|compound|<[[参数类型#minecraft:item_slots|''槽位范围'']]>}}：检查对应槽位范围内的物品。
+**** {{nbt inherit/item predicate}}
+** {{nbt|compound|stepping_on}}：检查实体脚下的位置。
+*** {{nbt inherit/location predicate}}
+** {{nbt|compound|targeted_entity}}：检查实体正要瞄准攻击的实体。
+*** {{nbt inherit/entity predicate}}
+** {{nbt|string|team}}：匹配实体属于的[[记分板#队伍|队伍]]。
+** {{nbt|string}}{{nbt|list|type}}：匹配的实体类型。可以为以<code>#</code>开头的实体类型[[Java版标签|标签]]、一个实体类型ID的字符串、或以多个实体类型ID组成的字符串列表。
+** {{nbt|compound|type_specific}}：实体子谓词，检查某些实体的特定属性。如果检查实体不是实体子谓词要求的实体，则检查直接失败。
+*** 见[[实体子谓词]]。
+** {{nbt|compound|vehicle}}：检查此实体正在骑乘的实体。
+*** {{nbt inherit/entity predicate}}
+<section end="codec_entity_predicate"/>
+</div>
+
+=== 闪电束谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.critereon.LightningBoltPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>LightningBoltPredicate::CODEC</code><section begin="codec_lightning_bolt_predicate"/>
+** {{nbt|int}}{{nbt|compound|blocks_set_on_fire}}：检查被该闪电束点燃的方块数。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds ints}}
+** {{nbt|compound|entity_struck}}：检查被该闪电束击中的实体。
+*** {{nbt inherit/entity predicate}}
+<section end="codec_lightning_bolt_predicate"/>
+</div>
+
+=== 浮漂谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.critereon.FishingHookPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>FishingHookPredicate::CODEC</code><section begin="codec_fishing_hook_predicate"/>
+** {{nbt|boolean|in_open_water}}：检查浮漂是否位于[[钓鱼#垃圾与宝藏|开阔水域]]。
+<section end="codec_fishing_hook_predicate"/>
+</div>
+
+=== 玩家谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.critereon.PlayerPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>PlayerPredicate::CODEC</code><section begin="codec_player_predicate"/>
+** {{nbt|compound|advancements}}：匹配玩家获得的[[进度]]。
+*** {{nbt|bool}}{{nbt|compound|<''进度ID''>}}：可以为{{nbt|bool|布尔值}}以直接检查此进度是否获得，也可以为{{nbt|compound|对象}}格式检查此进度内部准则的达成情况。
+**** {{nbt|bool|<''进度准则ID''>}}：检查此项进度准则是否已达成。
+** {{nbt|list|gamemode}}：检查玩家的[[游戏模式]]，当玩家当前的游戏模式在此列表中时测试成功。
+*** {{nbt|string}}：一个游戏模式。必须是<code>survival</code>（生存模式）、<code>adventure</code>（冒险模式）、<code>creative</code>（创造模式）或<code>spectator</code>（旁观模式）。
+** {{nbt|int}}{{nbt|compound|level}}：检查玩家的经验等级。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds ints}}
+** {{nbt|compound|looking_at}}：检查玩家正在观察的实体，需要其可见且在100个方块内。
+*** {{nbt inherit/entity predicate}}
+** {{nbt|compound|recipes}}：匹配玩家获得的[[配方]]。
+*** {{nbt|boolean|<''配方ID''>}}：检查玩家是否获得此配方。
+** {{nbt|list|stats}}：匹配玩家的[[统计信息]]。
+*** {{nbt|compound}}：要检查的一项统计。统计类型与统计名称的取值及意义参见{{slink|统计信息|命名空间ID}}。
+**** {{nbt|string|type|required=1}}：统计类型。
+**** {{nbt|string|stat|required=1}}：统计名称。
+**** {{nbt|int}}{{nbt|compound|value}}：检查此项统计的值。匹配一个精确值，或者检测数值是否在范围之间。
+***** {{nbt inherit/minmax bounds ints}}
+** {{nbt|compound|input}}：检查玩家是否按下相应的控制按键。
+*** {{nbt|bool|forward}}：{{tp|key.forward}}。
+*** {{nbt|bool|backward}}：{{tp|key.back}}。
+*** {{nbt|bool|left}}：{{tp|key.left}}。
+*** {{nbt|bool|right}}：{{tp|key.right}}。
+*** {{nbt|bool|jump}}：{{tp|key.jump}}。
+*** {{nbt|bool|sneak}}：{{tp|key.sneak}}。
+*** {{nbt|bool|sprint}}：{{tp|key.sprint}}。
+** {{nbt|compound|food}}：检查玩家的[[饥饿#机制|食物数据]]。
+*** {{nbt|int}}{{nbt|compound|level}}：检查玩家的饥饿度等级。
+**** {{nbt inherit/minmax bounds ints}}
+*** {{nbt|double}}{{nbt|compound|saturation}}：检查玩家的饱和度。
+**** {{nbt inherit/minmax bounds doubles}}
+<section end="codec_player_predicate"/>
+</div>
+
+=== 史莱姆谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.critereon.SlimePredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>SlimePredicate::CODEC</code><section begin="codec_slime_predicate"/>
+** {{nbt|int}}{{nbt|compound|size}}：检查史莱姆或岩浆怪的[[史莱姆#实体数据|大小]]。匹配一个精确值，或者检测数值是否在范围之间。
+*** {{nbt inherit/minmax bounds ints}}
+<section end="codec_slime_predicate"/>
+</div>
+
+=== 袭击者谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.critereon.RaiderPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>RaiderPredicate::CODEC</code><section begin="codec_raider_predicate"/>
+** {{nbt|boolean|has_raid}}：（默认为<samp>false</samp>）检查袭击者是否正处于一场袭击中。
+** {{nbt|boolean|is_captain}}：（默认为<samp>false</samp>）检查袭击者是否是[[袭击队长]]。
+<section end="codec_raider_predicate"/>
+</div>
+
+=== 绵羊谓词 ===
+{{codec from source|type=json|net.minecraft.advancements.critereon.SheepPredicate}}
+<div class="treeview">
+* {{nbt|compound}} <code>SheepPredicate::CODEC</code><section begin="codec_sheep_predicate"/>
+** {{nbt|boolean|sheared}}：检查绵羊是否已被修剪羊毛。
+<section end="codec_sheep_predicate"/>
+</div>
+
+[[Category:顶级数据值页面]]
+[[Category:通过Nbt inherit加载的页面]]

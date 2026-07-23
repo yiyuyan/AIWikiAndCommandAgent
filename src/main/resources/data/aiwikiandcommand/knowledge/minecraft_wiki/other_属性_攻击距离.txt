@@ -1,0 +1,58 @@
+# 页面: 属性/攻击距离
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E6%94%BB%E5%87%BB%E8%B7%9D%E7%A6%BB
+# 分类: Combat Test, 停用自动值的页面, 属性, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{Combat Test}}
+{{Infobox attribute
+|autovalue-disabled-fields=attribute sentiment
+|attribute-default-value=3
+|attribute-range=0 – 6
+|attribute-id-raw=generic.attackReach}}
+
+'''攻击距离（Attack Reach）'''是控制玩家可以[[近战攻击]]实体的最远距离的[[属性]]。
+
+此属性在{{el|je}}的主分支上已被实现为{{attribute|entity_interaction_range}}。
+
+== 行为 ==
+此属性的计算值代表了玩家可以近战攻击实体的最远距离。此距离并非玩家到实体的最近距离，而是玩家的眼部位置到指定实体的碰撞箱底面中心点的距离。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Player}}
+| 3
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! 修饰符UUID
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| 26cb07a3-209d-4110-8e10-1010243614c8
+| add_value（Op0）
+| 0.5
+| 否
+| {{ItemLink|Sword}}，{{tr|应用|套用}}于<code>mainhand</code>（主手）槽位
+|-
+| 26cb07a3-209d-4110-8e10-1010243614c8
+| add_value（Op0）
+| 1
+| 否
+| {{ItemLink|Hoe}}、{{ItemLink|Trident}}，{{tr|应用|套用}}于<code>mainhand</code>（主手）槽位
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||Combat Test|dev=1.14.3 - Combat Test|加入了攻击距离，ID为<code>generic.attackReach</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

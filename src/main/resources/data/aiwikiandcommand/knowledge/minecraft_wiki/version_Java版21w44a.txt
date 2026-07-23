@@ -1,0 +1,169 @@
+# 页面: Java版21w44a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8821w44a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=21w44a
+|image=21w44a.png
+|image2=Java Edition 21w44a Simplified.png\Java Edition 21w44a Traditional.png\Java Edition 21w44a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2021年11月3日
+|jsonhash=fd990561a3502903a819815ca63b7ac13110a84c
+|clienthash=6bf2feca56785edfddf308cbeef0fc3331155685
+|clientmap=7e7ead13deb9d525c9764f933fb11cd76b7b79ae
+|serverhash=ae583fd57a8c07f2d6fbadce1ce1e1379bf4b32d
+|servermap=122dd671c989bd1f0247c0d2924f45ea41595c71
+|parent=1.18
+|prevparent=1.17.1
+|prev=21w43a
+|next=1.18-pre1
+|nextparent=1.18.1
+}}<onlyinclude>
+
+'''21w44a'''是[[Java版1.18]]的第8个，也是最后一个快照，发布于2021年11月3日<ref>{{snap|21w44a|November 3, 2021}}</ref>，改进了旧世界升级，加入了新选项，做了一些调整，并修复了一些漏洞。
+
+== 新内容 ==
+=== 世界生成 ===
+'''旧世界升级'''
+* 现在旧世界高度的区块升级到新世界高度时，其Y=0以下会按新世界生成机制生成。
+** 但由于漏洞，[[深板岩]]和[[基岩]]层暂时无法在这里生成。<ref>{{bug|MC-240481|||Fixed}}</ref>
+* [[巨型生物群系]]和[[放大化]]世界现在可以被升级，升级到新的地形系统时，会被保留更多的特征。
+
+=== 常规 ===
+'''[[选项]]'''
+* 加入了单独的“{{tr|在线选项|線上選項|線上選項}}”选项界面，位于原先主菜单上的“Realms的通知”选项以及多人游戏暂停菜单上的“难度”位置上。
+** “Realms的通知”被移入此界面。
+** 加入了“{{tr|允许列入服务器玩家列表|允許伺服器列出您的名字|允許列入伺服器玩家名單}}”选项，用于设置是否允许服务器将自己的ID公开展示在在线玩家列表中。
+** 加入了“{{tr|服务器难度|伺服器難易度|伺服器難易度}}”，用于显示当前的服务器难度。
+
+'''[[server.properties]]'''
+* 加入了<code>hide-online-players</code>，用于服务端收到客户端的状态请求时是否发送在线玩家列表。
+'''[[Java版标签|标签]]'''
+* 加入了以下方块标签，用于对应生物的生成判定：
+** {{cd|animals_spawnable_on}}
+** {{cd|axolotls_spawnable_on}}
+** {{cd|foxes_spawnable_on}}
+** {{cd|goats_spawnable_on}}
+** {{cd|mooshrooms_spawnable_on}}
+** {{cd|parrots_spawnable_on}}
+** {{cd|polar_bears_spawnable_on_in_frozen_ocean}}
+** {{cd|rabbits_spawnable_on}}
+** {{cd|wolves_spawnable_on}}
+
+== 更改 ==
+=== 世界生成 ===
+'''[[深板岩]]'''
+* 现在会在Y=1到Y=7之间过渡生成，而非之前的Y=-7到Y=-1。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* {{anchor|新增群系}}将主世界的所有50种生物群系都列入了进度[[进度#advancements-anchor-adventure.adventuring_time|{{Advancement name|adventure.adventuring_time|zh|rev=1}}]]的达成要求中，其中新增的19种生物群系如下表所示：
+:{| class="wikitable sortable collapsible"
+! 英文名称 !! ID !! 中文名称
+|-
+| Deep Ocean || <code>deep_ocean</code> || {{tr|深海|深海|深海}}
+|-
+| Dripstone Caves || <code>dripstone_caves</code> || {{tr|溶洞|鐘乳石洞窟|溶洞}}
+|-
+| Eroded Badlands || <code>eroded_badlands</code> || {{tr|风蚀恶地|侵蝕惡地|侵蝕惡地}}
+|-
+| Flower Forest || <code>flower_forest</code> || {{tr|繁花森林|繁花森林|繁花森林}}
+|-
+| Frozen Ocean || <code>frozen_ocean</code> || {{tr|冻洋|寒凍海洋|冰洋}}
+|-
+| Frozen Peaks || <code>frozen_peaks</code> || {{tr|冰封山峰|霜凍山峰|冰峯}}
+|-
+| Grove || <code>grove</code> || {{tr|雪林|雪林|雪林}}
+|-
+| Ice Spikes || <code>ice_spikes</code> || {{tr|冰刺之地|冰刺|冰刺之地}}
+|-
+| Jagged Peaks || <code>jagged_peaks</code> || {{tr|尖峭山峰|尖峭山峰|尖峯}}
+|-
+| Lush Caves || <code>lush_caves</code> || {{tr|繁茂洞穴|蒼鬱洞窟|茂盛洞穴}}
+|-
+| Meadow || <code>meadow</code> || {{tr|草甸|草甸|草甸}}
+|-
+| Ocean || <code>ocean</code> || {{tr|海洋|海洋|海洋}}
+|-
+| Old Growth Birch Forest || <code>old_growth_birch_forest</code> || {{tr|原始桦木森林|原生樺木森林|原始樺木森林}}
+|-
+| Old Growth Spruce Taiga || <code>old_growth_spruce_taiga</code> || {{tr|原始云杉针叶林|原生杉木針葉林|原始雲杉針葉林}}
+|-
+| Snowy Slopes || <code>snowy_slopes</code> || {{tr|积雪山坡|雪坡|雪坡}}
+|-
+| Stony Peaks || <code>stony_peaks</code> || {{tr|裸岩山峰|裸岩山峰|石峯}}
+|-
+| Sunflower Plains || <code>sunflower_plains</code> || {{tr|向日葵平原|向日葵平原|向日葵平原}}
+|-
+| Windswept Gravelly Hills || <code>windswept_gravelly_hills</code> || {{tr|风袭沙砾丘陵|風蝕礫質丘陵|風襲砂礫丘陵地}}
+|-
+| Windswept Savanna || <code>windswept_savanna</code> || {{tr|风袭热带草原|風蝕莽原|風襲熱帶稀樹草原}}
+|}
+
+'''[[天气]]'''
+* 睡觉现在只会在降雨或雷暴时重置天气变化过程。
+
+=== 常规 ===
+'''JFR分析'''
+* 现在当JFR分析从外部来源启动时，网络数据包有关的JFR事件会被合并在一起，而不是一个数据包对应一个事件。
+
+'''模拟距离'''
+* 现在方块和液体也会受到模拟距离的控制。
+* 将模拟距离[[选项]]的最小值从2个区块上调到5个区块。
+
+'''常规'''
+* 优化了实体碰撞。
+
+== 修复 ==
+{{fixes|fixedin=21w44a|showdesc=1
+|;old
+|63340|睡觉完成时，<code>rainTime</code>或<code>thunderTime</code>的值总是会被重置。
+|170551|狐狸不能在灰化土或砂土上生成。
+|187716|下界的地表生成器类型会错误地假定世界高度为128格高。
+|190285|<code>bedrock_roof_position</code>标签的值不代表高度，而是相对于默认高度的偏移值。
+|200494|废弃矿井中的火把可以被附着在其他方块上，而不是仅在木质方块上。
+|216432|废弃矿井可以出现有光亮但无火把的情况。
+|216561|火把不生成在Y{{=}}0以下的废弃矿井中。
+|238877|深海和海洋没有被计入进度“{{Advancement name|adventure.adventuring_time|zh|rev=1}}”的达成条件中。
+|238966|原始云杉针叶林和原始桦木森林没有被计入进度“{{Advancement name|adventure.adventuring_time|zh|rev=1}}”的达成条件中。
+|238968|风袭沙砾丘陵和风袭热带草原没有被计入进度“{{Advancement name|adventure.adventuring_time|zh|rev=1}}”的达成条件中。
+|;dev
+|236701|新的山地生物群系没有被计入进度“{{Advancement name|adventure.adventuring_time|zh|rev=1}}”的达成条件中。
+|236938|{{cmd|jfr stop|link=none}}命令输出的结果中不包含链接。
+|237986|与结构相关的生物不在其结构中生成。
+|238062|狐狸和狼不能生成在雪林中。
+|238761|新的洞穴生物群系没有被计入进度“{{Advancement name|adventure.adventuring_time|zh|rev=1}}”的达成条件中。
+|238900|默认世界生成设置中的噪声设置内含有<code>Infinity</code>值。
+|238912|细雪条带不能被暴露到地表。
+|238962|冰山会一路生成到海床上。
+|239280|血量低于或等于一半时，凋灵跟随玩家时不会向下移动。
+|239344|废弃矿井中的所有火把朝向不正确。
+|239359|凋灵骷髅只能生成在下界砖块上。
+|239689|噪声设置中的<code>amplified</code>布尔值不起作用。
+|;previous
+|239854|下界或洞穴类型世界中缺少基岩。
+|239858|下界装饰（Nether decoration）可以在基岩层上面生成。
+|239866|噪声设置中的地形塑造器（Terrain shaper）未被使用。
+|239876|被转换了的旧区块在地图上显示为灰色。
+|239882|升级存档后信标会失效。
+|239902|在21w43a中加载的1.17.1的洞穴和结构中会出现天气效果。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:21w44a]]
+[[en:Java Edition 21w44a]]
+[[es:Java Edition 21w44a]]
+[[fr:Édition Java 21w44a]]
+[[it:Java Edition 21w44a]]
+[[ja:Java Edition 21w44a]]
+[[pt:Edição Java 21w44a]]
+[[ru:21w44a (Java Edition)]]
+[[th:รุ่น Java 21w44a]]

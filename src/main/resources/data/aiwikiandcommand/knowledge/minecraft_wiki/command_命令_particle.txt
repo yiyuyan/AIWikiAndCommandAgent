@@ -1,0 +1,326 @@
+# 页面: 命令/particle
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/particle
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{about|命令|[[Minecraft]]中一种特殊的图形效果|粒子}}
+{{Infobox command
+|name=particle
+|oplevel=2\1
+|becheat=1
+}}
+
+在指定位置显示[[粒子效果]]。
+
+{{IN|bedrock}}不少原版粒子效果需要接收特定的上下文或变量才可正常显示，而{{cmd|particle|link=none}}命令无法向其传递上下文或变量，因此某些粒子效果在游戏中无法通过{{cmd|particle|link=none}}命令正常生成。而在ScriptAPI中则可以在调用时提供上下文。
+
+== 语法 ==
+* '''Java版'''
+: <code>particle <name> [<pos>]</code>
+: <code>particle <name> <pos> <delta> <speed> <count> [force|normal] [<viewers>]</code>
+
+* '''基岩版'''
+: <code>particle <effect: string> [position: x y z]</code>
+
+== 参数 ==
+{{argument|name|particle|effect: string|basic_string}}
+: 指定要生成的粒子的粒子类型。
+: {{arg desc|je=particle|be=basic_string}}
+
+{{argument|pos|vec3|position: x y z|CommandPositionFloat}}
+: 指定要显示粒子的位置。如果未指定，默认为命令的执行位置。
+: {{arg desc|je=vec3|be=CommandPositionFloat}}
+
+{{el|je|short=1}}: {{argument|count|integer}}
+: 指定创造的粒子的数量。0值有特殊作用，见下文。
+: {{arg desc|je=integer|min=0}}
+
+{{el|je|short=1}}: {{argument|delta|vec3}}——{{arg desc|je=vec3}}<br>
+{{el|je|short=1}}: {{argument|speed|float}}——{{arg desc|je=float|min=0.0}}
+: {{cd|<delta>}}和{{cd|<speed>}}这两个参数决定粒子的生成位置以及要传给粒子的参数（见下表[[#粒子所接收的参数|粒子所接收的参数]]）。根据{{cd|<count>}}是否为0，这两个参数有不同的含义。
+:* 若{{cd|<count>}}为0，则在{{cd|<pos>}}处生成单个粒子，将{{cd|<delta>}}中的三个值分别乘上{{cd|<speed>}}后作为三个参数传入粒子。
+:** 根据下表，大部分接收参数的粒子都会将传入的三个参数视作速度分量，故{{cd|<count>}}设为0时，粒子一般表现为从<code><pos></code>坐标处以<code><delta></code>速度方向移动。
+:* 若{{cd|<count>}}非0，则在随机位置生成指定数量的粒子，粒子在X、Y、Z方向上都服从正态分布。各方向上的正态分布以{{cd|<pos>}}所指定的坐标为均值，意味着粒子更有可能在靠近{{cd|<pos>}}的位置出现。各方向上的正态分布以{{cd|<delta>}}为标准差（例如<code>1 1 1</code>表示在X、Y、Z轴上都是标准正态分布，意味着粒子约有99.7%的概率位于以{{cd|<pos>}}为中心6×6×6的矩形区域内，<code>2 2 2</code>则意味着粒子约有99.7%的概率位于以{{cd|<pos>}}为中心12×12×12的矩形区域内）。{{cd|<delta>}}可以使用负数，但效果与正数相同（例如<code>-1 -1 -1</code>与<code>1 1 1</code>效果相同）。要传入粒子的参数为三个独立的随机值，这三个随机值也服从正态分布，其均值为0，标准差为{{cd|<speed>}}。
+: {{cd|<delta>}}可以使用[[坐标#命令|相对坐标与局部坐标]]，将会被转换为绝对坐标后使用绝对坐标的值，因此一般无实际用途。
+: 若未指定，{{cd|<delta>}}默认为<code>0 0 0</code>，{{cd|<speed>}}默认为<code>0</code>。
+
+{{el|je|short=1}}: {{cd|force{{!}}normal}}
+: 指定显示模式。可为<code>force</code>或<code>normal</code>。设置为<code>normal</code>将给32.0格以内的玩家显示粒子，若{{tp|options.videoTitle}}中的“{{tp|options.particles}}”选项设为“{{tp|options.particles.minimal}}”则可能不会显示（取决于粒子类型，有些粒子类型还会显示）。设置为<code>force</code>将给512.0格内的玩家显示粒子，并且即使玩家将“{{tp|options.particles}}”选项设为“{{tp|options.particles.minimal}}”也能够看到此粒子。默认为<code>normal</code>。
+
+{{el|je|short=1}}: {{argument|viewers|entity}}
+: 限制能看到粒子效果的玩家。
+: {{arg desc|je=entity|amount=multiple|type=players}}
+
+=== 粒子所接收的参数 ===
+{{exclusive|java|section=1}}
+接收参数的大多数粒子类型都将参数用于改变初速度，粒子初速度的单位为m/tick（方块/游戏刻）。
+
+注意，虽然可以使用参数指定初速度，但不同粒子类型有不同的阻力、重力，有的粒子类型还有碰撞检测，因此初速度相同的情况下，不同粒子类型的运动轨迹可能不一致。
+
+{| class="wikitable sortable"
+! ID
+! 注释
+! 参数
+|-
+|<code>bubble_pop</code>
+| rowspan=6 | —
+| rowspan=9 |接收三个参数，直接作为初速度。
+|-
+| <code>dragon_breath</code>
+|-
+|<code>end_rod</code>
+|-
+|<code>firework</code>
+|-
+|<code>fishing</code>
+|-
+|<code>glow_squid_ink</code>
+|-
+|<code>sculk_charge</code>
+|需要[[粒子数据格式#幽匿块充能粒子选项|幽匿块充能粒子选项]]。
+|-
+|<code>squid_ink</code>
+| rowspan=4 | —
+|-
+|<code>totem_of_undying</code>
+|-
+|<code>electric_spark</code>
+|接收三个参数，三个参数都乘上0.25后作为初速度。
+|-
+|<code>scrape</code>
+|接收三个参数，三个参数都乘上0.01后作为初速度。
+|-
+|<code>bubble</code>
+|寿命为8到40游戏刻之间的随机数，所在位置不是水方块会立即消失。
+| rowspan=2 |接收三个参数，三个参数分别加上随机偏差，结果再都乘以0.2，计算结果作为初速度。
+|-
+|<code>bubble_column_up</code>
+| rowspan=4 | —
+|-
+|<code>crit</code>
+| rowspan=3 |接收三个参数，三个参数都乘以0.4再分别加上随机偏差后作为初速度。
+|-
+|<code>damage_indicator</code>
+|-
+|<code>enchanted_hit</code>
+|-
+|<code>cloud</code>
+|当玩家在附近时会迅速下落。<ref name="MC-59138">{{bug|MC-59138}}</ref>
+| rowspan=14 |接收三个参数，三个参数分别加上随机偏差后作为初速度。
+|-
+|<code>flame</code>
+| —
+|-
+|<code>item</code>
+|需要[[粒子数据格式#物品粒子选项|物品粒子选项]]。
+|-
+|<code>large_smoke</code>
+| rowspan=5 | —
+|-
+|<code>poof</code>
+|-
+|<code>sculk_soul</code>
+|-
+|<code>small_flame</code>
+|-
+|<code>smoke</code>
+|-
+|<code>sneeze</code>
+|当玩家在附近时会迅速下落。<ref name="MC-59138"/>
+|-
+|<code>snowflake</code>
+| rowspan=5 | —
+|-
+|<code>soul</code>
+|-
+|<code>soul_fire_flame</code>
+|-
+|<code>spit</code>
+|-
+|<code>white_smoke</code>
+|-
+|<code>campfire_cosy_smoke</code>
+| rowspan=2 | 运动过程中，水平方向有轻微摆动。
+| rowspan=4 |接收三个参数，三个参数中第一、三个参数直接作为X、Z轴初速度，第二个参数加上正的随机偏差值后，作为Y轴初速度。
+|-
+|<code>campfire_signal_smoke</code>
+|-
+|<code>trial_spawner_detection</code>
+| rowspan=2 | —
+|-
+|<code>trial_spawner_detection_ominous</code>
+|-
+| <code>block</code>
+|需要[[粒子数据格式#方块粒子选项|方块粒子选项]]。
+| rowspan=9 |接收三个参数，指定初速度方向。参数绝对值越小，方向越随机；绝对值越大，方向越稳定。初速度大小为随机值，不受参数影响。
+|-
+|<code>composter</code>
+| rowspan=2 | —
+|-
+|<code>dolphin</code>
+|-
+|<code>dust</code>
+|需要[[粒子数据格式#粉末粒子选项|粉末粒子选项]]。
+|-
+|<code>dust_color_transition</code>
+|需要[[粒子数据格式#粉末颜色过渡选项|粉末颜色过渡选项]]。
+|-
+|<code>egg_crack</code>
+| rowspan=5 | —
+|-
+|<code>happy_villager</code>
+|-
+|<code>mycelium</code>
+|-
+|<code>sculk_charge_pop</code>
+|-
+|<code>effect</code>
+| rowspan=8 |接收三个参数，其中第二个参数主要影响水平方向上的初速度，整体上来说，第二个参数绝对值越大，水平初速度越小。第一、三个参数只有在都为0时才有影响，二者都为0时，X和Z轴初速度都乘上0.1。
+|-
+|<code>entity_effect</code>
+|需要[[粒子数据格式#颜色粒子选项|颜色粒子选项]]。
+|-
+|<code>glow</code>
+| rowspan=6 | —
+|-
+|<code>infested</code>
+|-
+|<code>instant_effect</code>
+|-
+|<code>raid_omen</code>
+|-
+|<code>trial_omen</code>
+|-
+|<code>witch</code>
+|-
+|<code>vault_connection</code>
+|粒子在相对于粒子生成位置的一个相对位置处出现。不会移动。寿命为30到40游戏刻之间的随机数，寿命经过四分之一时，逐渐变半透明。
+| rowspan=5 |接收三个参数，作为粒子出现的相对位置。
+|-
+|<code>enchant</code>
+| rowspan=2 |粒子在相对于粒子生成位置的一个相对位置处出现，并作为起点，以粒子生成位置的下方1.2格处为终点，在寿命内由起点运动到终点。无碰撞检测。
+|-
+|<code>nautilus</code>
+|-
+|<code>ominous_spawning</code>
+|粒子在相对于粒子生成位置的一个相对位置处出现，并作为起点，以粒子生成位置为终点，在寿命内由起点运动到终点。无碰撞检测。
+|-
+|<code>portal</code>
+|粒子在相对于粒子生成位置的一个相对位置处的上方一格处出现，并作为起点，以粒子生成位置为终点，在寿命内由起点运动到终点。无碰撞检测。
+|-
+|<code>splash</code>
+|寿命为8到40游戏刻之间的随机数，落在地面或落入液体会立即消失。
+|接收三个参数。如果第二个参数为0，而第一、三个参数中有非0值，则水平初速度为0，垂直初速度为0.1。否则初速度随机。
+|-
+|<code>dust_pillar</code>
+|需要[[粒子数据格式#方块粒子选项|方块粒子选项]]。
+|接收第二个参数，加上一个随机偏差后作为Y轴初速度。第一、三个参数无作用。水平方向有较小的随机初速度，不受参数影响。
+|-
+|<code>dust_plume</code>
+| rowspan=2 | —
+|接收三个参数，作为速度叠加在初速度上。默认初速度朝斜上方，垂直初速度较大，水平初速度较小。三个参数会叠加到默认初速度上作为实际的初速度。
+|-
+|<code>note</code>
+|接收第一个参数。其小数部分（<math>x - floor(x)</math>）对应[[音符盒#音符|音符盒的使用次数]]，得到对应的音符颜色。
+|-
+|<code>reverse_portal</code>
+|初速度为0，速度越来越快，最终在寿命到达时达到指定速度。
+|接收三个参数，作为运动的最终速度。
+|-
+|<code>wax_off</code>
+| rowspan=2 | —
+| rowspan=2 |接收三个参数，用以计算初速度。三个参数乘上0.01，水平方向再乘0.5，计算结果作为初速度。
+|-
+|<code>wax_on</code>
+|-
+|<code>explosion</code>
+|不会移动。
+|接收一个参数，影响粒子的缩放大小，粒子大小为<math>2 - x</math>，其中x为此参数。参数为2时粒子最小，不可见。大于2时粒子纹理翻转。例如，为4时与为0时大小相等，纹理相反。
+|-
+|<code>sweep_attack</code>
+|不会移动。
+|接收一个参数，影响粒子的缩放大小，粒子大小为<math>1 - x/2</math>，其中x为此参数。参数为2时粒子最小，不可见。大于2时粒子纹理翻转。例如，为4时与为0时大小相等，纹理相反。
+|-
+|<code>block_marker</code>
+|不会移动。需要[[粒子数据格式#方块粒子选项|方块粒子选项]]。
+|不接收参数。
+|-
+|<code>falling_dust</code>
+|需要[[粒子数据格式#方块粒子选项|方块粒子选项]]。
+|不接收参数。
+|-
+|<code>shriek</code>
+|延迟之后出现。垂直向上运动。需要[[粒子数据格式#尖啸粒子选项|尖啸粒子选项]]。
+|不接收参数。
+|-
+|<code>vibration</code>
+|在寿命内从生成位置移动到目标位置。需要[[粒子数据格式#振动粒子选项|振动粒子选项]]。
+|不接收参数。
+|-
+|<code>current_down</code>
+|寿命为30游戏刻到90游戏刻间的一个随机数。所在的方块中不是水或不含水会立即消失。
+|不接收参数。
+|-
+|其他粒子类型
+|—
+|不接收参数。
+|}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><viewers></code>未能选中至少一个在线的玩家|fail|N/A}}
+{{Result table|所有指定的玩家都远于粒子32.0格（<code>normal</code>模式）或512.0格（<code>force</code>模式）||success}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|在命令执行维度中，在粒子32.0格（<code>normal</code>模式）或512.0格（<code>force</code>模式）以内的玩家数量}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 在向东10米处创造一个静止的巨型爆炸粒子：<code>particle explosion_emitter ~10 ~ ~ 0 0 0 0 0</code>{{only|je}}
+* 在向东5米处创造一个普通的龙息粒子：<code>particle minecraft:dragon_breath_fire ~5 ~ ~ </code>{{only|be}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w04a|加入了{{cmd|particle|link=none}}命令。}}
+|{{HistoryLine|||dev=14w29a|加入了<code>force</code>参数。}}
+|{{HistoryLine||1.9|dev=15w32c|范围限制提高到了32个方块。}}
+|{{HistoryLine|||dev=15w49a|为{{cmd|particle|link=none}}命令加入了<code>''player''</code>和<code>''params''</code>参数。}}
+|{{HistoryLine||1.13|dev=17w47a|各种粒子类型被重命名。}}
+|{{HistoryLine|||dev=18w03a|加入了{{cmd|link=none|particle <name> <pos>}}作为该命令的一个简写。}}
+|{{HistoryLine||1.20.5|dev=24w12a|使用命令生成<code>entity_effect</code>粒子时需要使用颜色参数。}}
+|{{HistoryLine|||dev=pre1|现在，命令中使用[[粒子数据格式|粒子选项]]。
+{{Collapse|title='''此前的粒子参数'''|content={{:命令/particle/1.20.5-pre1前粒子参数}}}}}}
+
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|particle|link=none}}命令。}}
+|{{HistoryLine|||dev=1.0.5.3|移除了{{cmd|particle|link=none}}命令。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|重新加入了{{cmd|particle|link=none}}命令。}}
+|{{HistoryLine||1.17.20|dev=1.17.20.23|{{cmd|particle|link=none}}在执行成功时不再输出0。
+|{{cmd|particle|link=none}}命令的<code>position: x y z</code>现在可选。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/particle]]
+[[en:Commands/particle]]
+[[es:Comandos/particle]]
+[[fr:Commandes/particle]]
+[[ja:コマンド/particle]]
+[[ko:명령어/particle]]
+[[pt:Comandos/particle]]
+[[ru:Команды консоли/particle]]
+[[uk:Команди консолі/particle]]

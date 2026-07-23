@@ -1,0 +1,167 @@
+# 页面: 命令/replaceitem
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/replaceitem
+# 分类: 命令, 基岩版独有特性, 教育版独有特性, 过时内容
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{for|Java版中功能大致相同的命令|命令/item}}
+{{Exclusive|bedrock|education}}
+{{outdated|edition=java|此命令已于[[Java版1.17]]被{{cmd|item}}命令取代。}}
+{{Infobox command
+|name=replaceitem
+|oplevel=1
+|others=启用作弊
+}}
+
+替换方块（箱子、熔炉等）或实体（玩家或生物）物品栏内的物品。
+
+== 语法 ==
+: <code>replaceitem block <position: x y z> slot.container <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]</code>
+: <code>replaceitem block <position: x y z> slot.container <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]</code>
+: <code>replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]</code>
+: <code>replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]</code>
+
+== 参数 ==
+<!--
+物品栏：[ slot.weapon.mainhand ]
+槽位  ：[ slot.weapon.mainhand 槽位编号 ]
+-->
+<code>position: x y z</code>（仅<code>block</code>模式）
+: 指定要改变的方块的位置。可用[[坐标#相对坐标|波浪号]]（<code>~ ~ ~</code>）或[[坐标#局部坐标|脱字符]]（<code>^ ^ ^</code>）来指定一个相对于命令执行处的位置。
+
+<code>target: target</code>（仅<code>entity</code>模式）
+: 指定要改变的实体。必须为一个玩家名或[[目标选择器]]。
+
+<code>slotType: EntityEquipmentSlot</code>、<code>slot.container</code>和<code>slotId: int</code>
+: 指定要改变的物品栏槽位。有效值取决于要改变的方块或实体。
+
+: 对于方块，必须为<code>-{}-slot.container ''槽位编号''</code>，其中''槽位编号''用具体的槽位编号数值代替。
+:* [[箱子]]、[[发射器]]、[[投掷器]]、[[漏斗]]和[[陷阱箱]]左上角的槽位被编号为0，而后从左到右、从上到下递增（例如，箱子的第一行槽位被从左至右编号为0至8）。大型箱子与大型陷阱箱被视为一个整体，其槽位编号为0至53。
+:* [[酿造台]]底部槽位从左至右编号为0至2，而其顶部槽位为3。烈焰粉的槽位为4。
+:* [[熔炉]]的槽位中输入槽位编号为0，燃料槽位为1，而输出槽位为2。
+
+: 对于实体，必须为下列之一，其中''槽位编号''用具体的槽位编号数值代替：
+::{| class="wikitable" data-description="Slot information"
+! 槽位
+! 槽位编号
+! 限制
+|-
+| {{cd|-{}-slot.weapon.mainhand ''槽位编号''}}
+| rowspan="6" style="text-align: center;" | 任意值
+| rowspan="6" | 仅[[盔甲架]]、[[生物]]及[[玩家]]（虽然并非所有生物会显示或利用这些物品）
+|-
+| {{cd|-{}-slot.weapon.offhand ''槽位编号''}}
+|-
+| {{cd|-{}-slot.armor.head ''槽位编号''}}（头盔）
+|-
+| {{cd|-{}-slot.armor.chest ''槽位编号''}}（胸甲）
+|-
+| {{cd|-{}-slot.armor.legs ''槽位编号''}}（护腿）
+|-
+| {{cd|-{}-slot.armor.feet ''槽位编号''}}（靴子）
+|-
+| {{cd|-{}-slot.enderchest ''槽位编号''}}
+| style="text-align: center;" | 0至26
+| rowspan="2" | 仅[[玩家]]
+|-
+| {{cd|-{}-slot.hotbar ''槽位编号''}}
+| style="text-align: center;"|0至8
+|-
+| {{cd|-{}-slot.inventory ''槽位编号''}}
+| style="text-align: center;" | 0至物品栏的槽位上限
+| 仅[[玩家]]、[[村民]]、[[猪灵]]、[[熊猫]]、[[悦灵]]、[[漏斗矿车]]、[[运输矿车]]、[[命令方块矿车]]，以及驯服的[[马]]、[[驴]]、[[骡]]和[[羊驼]]
+|-
+| {{cd|-{}-slot.saddle ''槽位编号''}}
+| style="text-align: center;" | 任意值
+| 仅驯服的[[马]]、[[驴]]和[[骡]]；''物品名''必须为[[鞍]]或[[空气]]
+|-
+| {{cd|-{}-slot.armor ''槽位编号''}}
+| style="text-align: center;" | 0至1
+| 仅驯服的[[马]]；''物品名''必须属于[[马铠]]或[[空气]]
+|-
+| {{cd|-{}-slot.chest ''槽位编号''}}
+| style="text-align: center;" | 0至14
+| 仅驮箱子的[[驴]]和[[骡]]
+|-
+| {{cd|-{}-slot.equippable ''槽位编号''}}
+| style="text-align: center;" | 0至1仅[[目标选择器#物品|<code>hasitem</code>]]
+| 0：仅[[马]]、[[驴]]和[[骡]]；''物品名''必须为[[鞍]]或[[空气]]<br>1：仅[[马]]和[[羊驼]]；''物品名''必须属于[[马铠]]（马）、[[地毯]]（羊驼）或[[空气]]
+|}
+
+<code>itemName: Item</code>
+: 指定被放置于方块或实体的物品栏槽位内的物品。必须为[[基岩版数据值/物品ID|物品ID]]。
+
+<code>amount: int</code>（可选）
+: 指定被放置物品的数量。必须在1至64间（含），可以突破物品的堆叠限制。
+: 当该值突破某物品的堆叠限制时，命令仍会执行成功，但得到的总是该物品的最大堆叠数量（如执行<code>/replaceitem entity @a slot.weapon.mainhand 0 snowball 64</code>会将所有玩家的主手替换为16个雪球）。
+
+<code>data: int</code>（可选）
+: 指定被放置物品的物品数据。必须为一个在-2,147,483,648至2,147,483,647间（含，不输入逗号）的整数，且在对指定物品无效时被重置为0。若未指定，默认为0。
+
+<code>components: json</code>（可选）
+: 指定被放置物品的[[基岩版物品堆叠组件|物品堆叠组件]]。类似于[[NBT标签]]，但仅支持{{cd|minecraft:can_place_on|minecraft:can_destroy|minecraft:item_lock|minecraft:keep_on_death|d=、}}。
+
+<code>oldItemHandling: ReplaceMode</code>（可选）
+: 必须是下列之一：
+:* <code>destroy</code> - 忽略指定槽位中的原始物品，直接进行替换。
+:* <code>keep</code> - 如果一个物品占用了该槽位，则不进行替换。
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|<code>amount: int</code>小于1或大于64||fail}}
+{{Result table|cmd=/replaceitem block ...|指定的方块并非容器}}
+{{Result table|指定的方块没有指定的槽位}}
+{{Result table|cmd=/replaceitem entity ...|<code><target: target></code>未能选中至少一个实体（若指定玩家名则必须{{tr|在线|在線上}}）}}
+{{Result table|所有选中的实体均满足以下至少一个条件：
+* 目标实体没有指定的槽位（例如，僵尸没有<code>slot.armor</code>）
+* 指定槽位无法放入指定物品（例如玩家的<code>armor.chest</code>无法放入石头）}}
+{{Result table|cmd=/replaceitem ... keep|<code>keep</code>模式下指定的槽位已拥有物品}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|cmd=|edition=be|执行失败|0}}
+{{Output table|cmd=/replaceitem block ...|执行成功|1}}
+{{Output table|cmd=/replaceitem entity ...|执行成功|被成功替换物品的实体的数量}}
+{{Output table}}
+
+== 示例 ==
+* 将上方1格处的一个小型箱子右下角槽位内的物品替换成4棵[[云杉树苗]]：
+** <code>replaceitem block ~ ~1 ~ slot.container 26 minecraft:sapling 4 1</code>
+* 将自己的快捷栏最右槽位内的物品替换成4棵云杉树苗：
+** <code>replaceitem entity @s slot.hotbar 8 minecraft:sapling 4 1</code>
+* 将所有人的副手内的物品换成空气：
+** <code>replaceitem entity @a slot.weapon.offhand 0 air 1 0</code>
+* 把自己物品栏右下角槽位内的物品换成空气：
+** <code>replaceitem entity @s slot.inventory 26 air 1 0</code>
+* 给所有[[僵尸]]都戴上[[金头盔]]：
+** <code>replaceitem entity @e[type=zombie] slot.armor.head 0 golden_helmet</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w26a|加入了{{cmd|replaceitem|link=none}}命令。}}
+|{{HistoryLine||1.14|dev=18w43a|现在可以在[[物品展示框]]上使用。}}
+|{{HistoryLine||1.17|dev=20w46a|移除了{{cmd|replaceitem|link=none}}，并加入了{{cmd|item}}取代其功能。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|replaceitem|link=none}}命令。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|现在{{cmd|replaceitem|link=none}}命令支持<code>canplaceon</code>和<code>candestroy</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.55|为{{cmd|replaceitem|link=none}}加入了新参数{{cd|destroy}}和{{cd|keep}}来指定替换模式。}}
+}}
+
+== 参见 ==
+* {{cmd|data}} - 也能替换一个容器或实体物品栏中的物品，或改变盔甲与武器的掉落率。
+* {{cmd|give}} - 不指定具体槽位、不覆盖原有物品地给予玩家物品。
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/replaceitem]]
+[[en:Commands/replaceitem]]
+[[ja:コマンド/replaceitem]]
+[[pt:Comandos/replaceitem]]
+[[ru:Команды консоли/replaceitem]]
+[[uk:Команди консолі/replaceitem]]

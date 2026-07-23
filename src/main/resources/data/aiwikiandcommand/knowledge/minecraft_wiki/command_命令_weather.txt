@@ -1,0 +1,82 @@
+# 页面: 命令/weather
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/weather
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 有未知版本的History模板的页面/基岩版
+# 抓取时间: 2026-07-14 17:22:17
+# 原始 Wikitext 内容:
+
+{{about|命令|发生在世界中的全局性状态|天气}}
+{{Infobox command
+|name=weather
+|oplevel=2\1
+|becheat=1
+}}
+
+更改游戏中的[[天气]]。{{in|be}}也可用于显示当前天气。
+
+== 语法 ==
+* '''Java版'''
+: <code>weather (clear|rain|thunder) [<duration>]</code>
+
+* '''基岩版'''
+: <code>weather <nowiki><clear|rain|thunder></nowiki> [duration: int]</code>
+: <code>weather query</code>
+
+== 参数 ==
+{{cd|clear{{!}}rain{{!}}thunder}}
+:* <code>clear</code> - 将天气设为晴天，且晴天结束后将变为雷暴雨。
+:* <code>rain</code> - 将天气设为雨天（寒冷的生物群系会下雪），且结束后变为晴天。
+:* <code>thunder</code> - 将天气设为雷暴雨（寒冷的生物群系会下雷暴雪），且结束后变为晴天。
+
+{{argument|duration|time|duration: int|int}}
+: 指定天气的持续时间。
+: {{in|java}}若未指定，则为随机取值，取值范围与指定的天气种类有关：
+:* <code>clear</code> - 12000到180000之间（含），即10分钟到150分钟之间（含）。
+:* <code>rain</code> - 12000到24000之间（含），即10分钟到20分钟之间（含）。
+:* <code>thunder</code> - 3600到15600之间（含），即3分钟到13分钟之间（含）。
+: {{in|be}}指定的时间以游戏刻为单位。若为0或未指定，天气时长将6000到18000之间（含）随机取值，即5分钟到15分钟之间（含）。
+: {{arg desc|je=time|min=1|be=int}}且应在0到1000000之间（含）。
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code>duration: int</code>小于0或大于1000000|N/A|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行成功|1|1|指定的持续时间，以游戏刻为单位。若未指定<code>duration</code>则为-1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+: 将天气改为晴天，持续一个Minecraft日（20分钟）：{{cmd|link=none|weather clear 24000}}
+: 将天气改为下雨，且让其自行结束：{{cmd|link=none|weather rain}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了{{cmd|weather|link=none}}。}}
+|{{HistoryLine||1.19.4|dev=23w03a|现在，若{{cd|duration}}参数未指定，天气变化的持续时间会与游戏的常规天气周期相匹配。
+|将{{cd|duration}}参数的默认单位由秒改为游戏刻。
+|现在支持{{cd|duration}}参数值后加后缀表示单位。}}
+|{{HistoryLine||1.20.5|dev=24w11a|现在执行环境为非主世界维度也可以生效。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|weather|link=none}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.18.30|dev=?|参数<code>duration: int</code>现在以游戏刻为单位，而不是秒。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/weather]]
+[[en:Commands/weather]]
+[[es:Comandos/weather]]
+[[fr:Commandes/weather]]
+[[ja:コマンド/weather]]
+[[lzh:令/weather]]
+[[pt:Comandos/weather]]
+[[ru:Команды консоли/weather]]
+[[uk:Команди консолі/weather]]

@@ -1,0 +1,52 @@
+# 页面: 世界生成设置存储格式
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90%E8%AE%BE%E7%BD%AE%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:19:45
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+'''世界生成设置存储文件'''是游戏存储世界生成信息所用的文件。
+
+== 存储格式 ==
+世界生成设置存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/world_gen_settings.dat}}。
+
+世界生成设置存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|bool|bonus_chest|existonsave=1}}：玩家首次进入游戏时，是否在出生点附近生成[[奖励箱]]。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|compound|dimensions|existonsave=1|required=1}}：定义存档创建时包含的所有维度及其世界生成设置。
+**** {{nbt|compound|''<命名空间ID>''}}：一个维度和对应的数据。
+***** 见[[维度定义格式]]。
+*** {{nbt|bool|generate_structures|existonsave=1}}：世界是否生成结构。如果此项不存在游戏默认为<code>true</code>。
+*** {{nbt|string|legacy_custom_options}}：对世界生成不起到任何作用。存在此标签代表这个存档曾使用[[旧版自定义]]设置调整世界生成，在加载此存档时游戏会给出警告。
+*** {{nbt|long|seed|existonsave=1|required=1}}：数字形式的[[世界种子]]。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此世界生成设置存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+当游戏创建世界时，游戏会根据创建新的世界界面提供的世界种子、生成结构选项、奖励箱选项和[[世界预设]]构建世界生成设置存储文件，此后一般不再更改。世界生成设置存储文件会在服务端启动时保存。
+
+世界生成设置包含两部分：世界选项和维度。
+* 世界选项由世界生成设置存储文件提供，包括世界种子、生成结构选项、奖励箱选项和旧版自定义预设码。
+* 维度由世界生成设置存储文件和数据包提供。游戏会尝试合并两部分提供的维度，如果数据包提供的维度的ID与世界生成设置存储文件提供的维度的ID同名，则游戏优先使用数据包提供的维度。维度是在内存中动态加载的，即数据包启用状态也会影响最终的世界生成设置。
+
+如果游戏无法从世界生成设置存储文件加载数据，则游戏会报错<code>-{}-Unable to read or access the world gen settings file! Falling back to the default settings with a random world seed. <''世界生成设置存储文件路径''></code>，并重置世界选项为默认值，并正常加载由数据包提供的维度。
+
+在重建世界时，游戏会根据世界生成设置存储文件预先设置新世界，使世界生成设置在重建过程中被保留。但是游戏并不会默认选中旧存档使用的世界预设。
+
+== 历史 ==
+{{see also|存档基础数据存储格式/世界生成格式/1.16前|存档基础数据存储格式/世界生成格式/1.16-1.18.1}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w20a|将所有世界生成相关设置都集中到了{{nbt|compound|WorldGenSettings}}内。}}
+|{{HistoryLine||26.1|dev=snapshot-6|加入了单独的世界生成设置存储文件，世界生成设置数据信息不再存储于{{filename|[[level.dat]]}}中。
+|修改了维度保存的行为：现在由数据包提供的维度不再保存到存档中，而是每一次加载存档时动态加载。}}
+|{{HistoryLine|||dev=snapshot-8|现在世界生成设置存储文件加载无效时，游戏会重置为默认的世界生成设置，而非直接拒绝加载世界。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

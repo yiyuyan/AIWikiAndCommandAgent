@@ -1,0 +1,117 @@
+# 页面: 雕刻器定义格式
+# 来源: https://zh.minecraft.wiki/w/%E9%9B%95%E5%88%BB%E5%99%A8%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:38:19
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+'''已配置的雕刻器（Configured Carver）'''，或简称为'''雕刻器（Carver）'''，是游戏进行[[世界生成#地形雕刻|地形雕刻]]时使用的基本单元。'''已配置的雕刻器定义文件'''是已配置的雕刻器在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+已配置的雕刻器在游戏中使用<code>CONFIGURED_CARVER</code>注册表，数据包路径为{{filepath|worldgen/configured_carver}}，即所有的已配置的雕刻器定义文件都需要在{{filepath|data/<''命名空间''>/worldgen/configured_carver}}目录下定义，已配置的雕刻器标签则需要在{{filepath|data/<''命名空间''>/tags/worldgen/configured_carver}}目录下定义。
+
+雕刻器定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：（命名空间ID）雕刻器类型。
+** {{nbt|compound|config|required=1}}：此雕刻器的配置。
+*** {{nbt|float|probability|required=1}}：（{{interval|left=0.0|right=1.0}}）每个区块尝试生成此雕刻器的概率。
+*** {{nbt|string}}{{nbt|list|replaceable|required=1}}：雕刻器可以雕刻的方块。可以为一个方块ID或一个方块标签，或一个方块ID的列表。
+*** {{nbt|compound|y|required=1}}：雕刻器尝试生成的高度。
+**** {{nbt inherit/height_provider}}
+*** {{nbt|compound|lava_level|required=1}}：低于或等于此Y坐标的雕刻区域将尝试填充熔岩。
+**** {{nbt inherit/vertical_anchor}}
+*** {{nbt|compound|debug_settings}}：雕刻器的调试设置。
+**** {{nbt|bool|debug_mode}}：（默认为<code>false</code>）是否启用雕刻器的调试模式。
+**** {{nbt|compound|air_state}}：替换空气方块。默认为金合欢木按钮的默认方块状态。
+***** {{nbt inherit/block state}}
+**** {{nbt|compound|water_state}}：替换水。默认为蜡烛的默认方块状态，若指定的方块能含水则会含水。
+***** {{nbt inherit/block state}}
+**** {{nbt|compound|lava_state}}：替换熔岩。默认为橙色染色玻璃板的默认方块状态。
+***** {{nbt inherit/block state}}
+**** {{nbt|compound|barrier_state}}：替换[[世界生成#含水层|含水层的隔离方块]]。默认为玻璃的默认方块状态。
+***** {{nbt inherit/block state}}
+*** {{nbt|float}}{{nbt|compound|yScale|required=1}}：垂直缩放雕刻器洞穴。
+**** {{nbt inherit/float_provider}}
+*** 依雕刻器类型的额外字段，见{{slink||雕刻器类型}}。
+</div>
+
+=== 雕刻器类型 ===
+'''雕刻器类型（Carver Type）'''，也可简称为'''雕刻器'''，决定了雕刻器的行为。游戏共有三种雕刻器类型：
+
+* <code>cave</code> - 洞穴雕刻，雕刻出环状内庭和洞穴隧道，生成最常见的小型洞穴。
+* <code>canyon</code> - 峡谷雕刻，雕刻出一条[[峡谷]]。
+* <code>nether_cave</code> - 洞穴雕刻，类似于<code>cave</code>，但洞穴的竖直方向更大，不会计算含水层与表面规则，固定于<code>bottom_y + 32.0</code>高度下填充熔岩。
+
+洞穴雕刻配置如下：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|compound|config|required=1}}
+*** {{nbt|float}}{{nbt|compound|horizontal_radius_multiplier|required=1}}：水平缩放洞穴的隧道。
+**** {{nbt inherit/float_provider}}
+*** {{nbt|float}}{{nbt|compound|vertical_radius_multiplier|required=1}}：垂直缩放洞穴的隧道。
+**** {{nbt inherit/float_provider|required=1}}
+*** {{nbt|float}}{{nbt|compound|floor_level|required=1}}：（{{interval|left=0.0|right=1.0}}）改变洞穴水平地板的形状。如果为0.0，使用椭球体进行雕刻。若为1.0，使用上半椭球体进行雕刻，以得到水平的地面。
+**** {{nbt inherit/float_provider}}
+</div>
+
+峡谷雕刻配置如下：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|compound|config|required=1}}
+*** {{nbt|float}}{{nbt|compound|vertical_rotation|required=1}}：峡谷延伸垂直角度。
+**** {{nbt inherit/float_provider}}
+*** {{nbt|compound|shape|required=1}}：峡谷形状配置。
+**** {{nbt|float}}{{nbt|compound|distance_factor|required=1}}：缩放峡谷长度，值越大越长。
+***** {{nbt inherit/float_provider}}
+**** {{nbt|float}}{{nbt|compound|thickness|required=1}}：缩放峡谷长宽。
+***** {{nbt inherit/float_provider}}
+**** {{nbt|float}}{{nbt|compound|horizontal_radius_factor|required=1}}：缩放峡谷宽度，值越大越宽。
+***** {{nbt inherit/float_provider}}
+**** {{nbt|float|vertical_radius_default_factor|required=1}}：垂直缩放峡谷。值越大越深。
+**** {{nbt|float|vertical_radius_center_factor|required=1}}：根据到峡谷中心的距离缩放高度，值越大使峡谷中心越深。
+**** {{nbt|int|width_smoothness|required=1}}：（{{interval|left=1}}）值越高，峡谷的墙壁在垂直方向上越平滑。
+</div>
+
+== 定义行为 ==
+已配置的雕刻器定义数据仅在服务端启动时加载一次，使用{{cmd|reload}}命令不可以重新加载已配置的雕刻器定义，而必须重启服务端。
+
+在世界生成阶段，已配置的雕刻器会在指定位置上生成[[雕刻器洞穴]]。详细的生成方式参见{{slink|世界生成|地形雕刻}}。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16.2|dev=20w28a|为数据包中已配置的雕刻器加入了实验性支持。}}
+|{{HistoryLine|||dev=20w30a|将雕刻器类型字段{{nbt|string|name}}重命名为{{nbt|string|type}}。}}
+|{{HistoryLine|||dev=pre1|已配置的雕刻器从{{filepath|-{}-data/minecraft/worldgen/configured_carver/<命名空间>/<路径>}}移动到{{filepath|-{}-data/<命名空间>/worldgen/configured_carver/<路径>}}，和其他资源保持一致。}}
+|{{HistoryLine||1.17|dev=21w06a|移除了雕刻器类型<code>underwater_canyon</code>与<code>underwater_cave</code>。}}
+|{{HistoryLine|||dev=21w08a|为峡谷雕刻器<code>canyon</code>加入了配置字段。
+|加入了{{nbt|object|debug_settings}}可选字段，若{{nbt|boolean|debug_mode}}为<code>true</code>，雕刻器会用{{nbt|object|air_state}}提供的方块替换本该填充空气的方块。}}
+|{{HistoryLine|||dev=21w11a|重命名峡谷雕刻器字段<code>distanceFactor</code>为<code>distance_factor</code>。}}
+|{{HistoryLine|||dev=21w13a|移除了峡谷雕刻器的{{nbt|int|y_scale}}字段。
+|将峡谷雕刻器形状字段移动至{{nbt|object|shape}}子对象中。
+|为洞穴雕刻器{{cd|d=pretty|cave|nether_cave}}加入了配置字段。
+|加入了{{nbt|float}}{{nbt|object|yScale}}字段和{{nbt|object|lava_level}}垂直锚点字段。
+|将{{cd|d=pretty|bottom_inclusive|top_inclusive}}字段替换为{{nbt|object|y}}高度提供器字段，此前为两个垂直锚点字段。}}
+|{{HistoryLine|||dev=21w15a|重新加入了雕刻器类型{{cd|d=pretty|underwater_canyon|underwater_cave}}，配置字段格式与{{cd|d=pretty|canyon|cave}}相同。}}
+|{{HistoryLine|||dev=21w16a|加入了{{nbt|boolean|aquifers_enabled}}字段。
+|向<code>debug_settings</code>字段加入了{{cd|d=pretty|water_state|lava_state|barrier_state}}字段，格式与<code>air_state</code>一致。}}
+|{{HistoryLine||1.18|dev=21w38a|移除了<code>aquifers_enabled</code>字段。}}
+|{{HistoryLine|||dev=21w39a|再次移除了雕刻器类型{{cd|d=pretty|underwater_canyon|underwater_cave}}，此前这两种雕刻器默认填充水，Y{{=}}10填充黑曜石和岩浆块，Y<10填充熔岩。}}
+|{{HistoryLine||1.19|dev=22w15a|加入了{{nbt|string}}{{nbt|list|replaceable}}字段。}}
+|{{HistoryLine||1.21.9|dev=25w31a|将{{nbt|int|width_smoothness}}字段的下限由0改为1。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Erosionsdefinition]]
+[[en:Carver definition]]
+[[fr:Définition de sculpteur de terrain]]
+[[ja:洞窟開削機]]
+[[pt:Definição de cavernas]]

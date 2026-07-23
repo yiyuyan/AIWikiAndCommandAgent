@@ -1,0 +1,101 @@
+# 页面: Java版16w40a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8816w40a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:17
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=16w40a
+|image=16w40a.png
+|image2=Java Edition 16w40a Simplified.png\Java Edition 16w40a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2016年10月6日
+|jsonhash=53c8af9aa235a12b623fc6be9e02c4aafc1df3ad
+|clienthash=6e5f07830bbd10ab10b6cccdaaef17c6b589a6d7
+|serverhash=64a1a5ba3f347c5e03477b42ac13d10ee193b51c
+|parent=1.11
+|prevparent=1.10.2
+|prev=16w39c
+|next=16w41a
+|nextparent=1.11.1
+}}<onlyinclude>
+
+'''16w40a'''是[[Java版1.11]]的第10个快照，发布于2016年10月6日<ref>{{cite|url=http://mojang.com/2016/10/minecraft-snapshot-16w40a/|archive-url=1|archive=1|title=Minecraft snapshot 16w40a|author=LadyAgnes|website=Mojang.com|date=Oct 6, 2016}}</ref>，发布以修复[[16w39c]]中的一些漏洞与崩溃。
+
+== 更改 ==
+=== 方块 ===
+'''[[末地传送门方块]]'''
+* 中间的“星光”被改变以匹配末地传送门方块。它不再相对于玩家的视角而改变，而是相对于游戏屏幕保持静态。
+
+=== 生物 ===
+'''[[卫道士]]'''
+* [[卫道士#“Johnny”卫道士|“Johnny”卫道士]]现在也可以通过设置新的位元标签<code>Johnny</code>为<code>true</code>来生成，而不是重命名卫道士为“Johnny”。标签比名称的优先级更高。所以设置为<code>1b</code>的<code>Johnny</code>标签可允许卫道士在使用任意名称的同时具备“Johnny”特性，而设置为<code>0b</code>的<code>Johnny</code>标签能够让名字为“Johnny”的卫道士不具备“Johnny”特性。
+* 它们的[[斧]]现在属于它们的<code>HandItems</code>，不像原来完全只是视觉效果。这意味着其伤害现在能够破[[盾]]。
+* 卫道士的强度有了很大的提升 - 它们的攻击伤害在简单[[难度]]从{{hp|3}}提高到了{{hp|7}}，普通难度从{{hp|5}}提高到了{{hp|13}}，困难难度从{{hp|7}}提高到了{{hp|19}}。
+
+=== 命令格式 ===
+'''[[NBT标签]]'''
+* [[恶魂火球]]、[[小火球]]、[[末影龙火球]]和[[凋灵之首]]：
+** <code>xTile</code>、<code>yTile</code>、<code>zTile</code>、<code>inTile</code>和<code>inGround</code>标签被移除。
+** <code>life</code>标签不再被使用于任何弹射物上，但仍能被保存/读取。
+
+== 修复 ==
+{{fixes|fixedin=16w40a|prefix=Minecraft|showdesc=1
+|;old
+|3352|击中中继器、比较器、唱片机、命令方块、漏斗、阳光探测器的箭矢在方块更新后会播放箭矢击中方块的噪声。
+|4132|活塞在坐标超过16777217处的放置问题。
+|4789|沙砾和沙子掉落时穿过活塞。
+|84566|当发射器和投掷器被激活时，插在其周围的箭会掉落下来。
+|89030|活塞推动方块时所带动实体的距离过大。
+|93814|使用发射器装备南瓜头和生物头颅时会播放“物品：发射失败”的音效。
+|98093|世界边界处的活塞在伸出时活塞头会偏移。
+|105096|盾牌的动画漏洞。
+|106837|准星指向船时单击鼠标右键的功能不能正确生效。
+|106905|兔子在耕地及栅栏等方块上跳得更高。
+|107378|无法通过按{{key|Shift}}+鼠标左键将物品放入酿造台的材料槽中。
+|107998|动物在着火后不会受惊逃跑。
+|108021|部分生物在骑马时会悬浮在空中。
+|108188|骷髅不能发射光灵箭。
+|;dev
+|106706|改名的酿造台在被破坏后不会掉落物品。
+|106765|游戏规则<code>mobGriefing</code>为false时蠹虫不会移动。
+|107168|游戏规则{{cd|doWeatherCycle}}为false时睡觉仍能使天气发生变化。
+|107403|潜影盒和羊驼的音效没有字幕。
+|107674|装备在唤魔者和卫道士的头盔槽位及当前手持的物品不会显示。
+|107884|对无职业村民单击鼠标右键时统计项{{cd|stat.talkedToVillager}}的分数并未增加。
+|107891|卫道士的斧头不能造成伤害。
+|108123|带有{{cd|CanPickUpLoot}}标签的卫道士不会优先使用其物品栏内最好的武器。
+|;previous
+|107929|英语（美国）语言中淡灰色潜影盒的名称有错别字。（Light Gr'''<u>e</u>'''y Shulker Box）
+|107937|改名的潜影盒在使用发射器放置后其名称会丢失。
+|107954|站在潜影盒上并打开该潜影盒时视角会不停抖动。
+|107967|下落的方块的漏洞。
+|108029|末地传送门方块的纹理在主世界和下界中表现异常。
+|108055|拴绳结有时无法被破坏。
+|108079|通过交易或从熔炉内取得带有无效数据的地图会使游戏崩溃。
+|108084|创造模式下，生存模式物品栏内的物品在被丢弃后不会自动将该物品从物品栏中移除。
+|108085|卫道士及其他生物持斧攻击时不能禁用盾牌。
+|108105|在商队中的羊驼无法被驯服。
+|108225|未持有拴绳时不能将多个生物拴在同一个栅栏上。
+|108271|若多只羊驼被拴在同一个栅栏上，则该栅栏上的拴绳结无法被解开。
+}}</onlyinclude>
+
+== 你知道吗 ==
+* 此快照的博客文章使用的图片<ref>http://mojang.com/2016/10/minecraft-snapshot-16w40a/</ref>出现了两个身处[[潜影盒]]中的Minecraft角色，他们是[[Mojang Studios]]的游戏开发者[[Erik Broes|Erik "Grum" Broes]]和[[Maria Lemón]]。<ref>{{tweet|ladyagnes|784044371788369920|@MCKaleb01 @_grum It's actually @_grum  and @MiaLem_n :D|Oct 6, 2016}}</ref>
+* 此版本曾经在[[启动器]]中移除，但在2018年9月重新加入。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:16w40a]]
+[[en:Java Edition 16w40a]]
+[[es:Java Edition 16w40a]]
+[[fr:Édition Java 16w40a]]
+[[ja:Java Edition 16w40a]]
+[[nl:16w40a]]
+[[pt:Edição Java 16w40a]]
+[[ru:16w40a (Java Edition)]]

@@ -1,0 +1,445 @@
+# 页面: 注册表
+# 来源: https://zh.minecraft.wiki/w/%E6%B3%A8%E5%86%8C%E8%A1%A8
+# 分类: 
+# 抓取时间: 2026-07-14 17:30:05
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''注册表（Registry）'''是游戏内广泛使用的一种机制。
+
+== 分类 ==
+
+游戏内有几十种注册表，它们分别都有不同的作用。这些注册表中，可以分为2类：
+* '''固有注册表（Built-in Registry）'''：游戏硬编码的注册表，内部数据无法通过任何方式修改。这些注册表在各个世界中都通用。
+* '''可写注册表（Writable Registry）'''：游戏读取世界中的[[数据包]]获得这些注册表的信息，游戏代码内部并不存在这些注册表的数据。这些注册表与世界绑定，根据世界不同数据也有可能不同。
+
+由于游戏同时存在客户端和服务端，如果要保证数据传输无误，则需要注册表数据也被同步。游戏只同步部分注册表数据，因为并不是所有注册表数据对客户端都有作用（例如部分世界生成数据），而且部分注册表两边都不会被修改（即固有注册表），这些需要被同步的注册表称为'''网络同步注册表（Network Synchronized Registry）'''。所有同步注册表一定是可写注册表，它们在网络协议的配置阶段（Configuration）由服务端发向客户端的<code>registry_data</code>网络数据包进行同步。
+
+== 索引 ==
+
+注册表将同一类型的'''值（Value）'''按照一定的'''键（Key）'''统一组织起来。游戏内使用了两种键用于映射到注册表内-{}-存储的值：
+* [[命名空间ID]]：绝大多数情况下，游戏都以命名空间ID作为键映射到给定的值。例如，可以使用<code>grass_block</code>映射方块注册表（<code>BLOCK</code>）内的[[草方块]]。
+* 唯一数字ID：游戏可以使用一个单一的数字映射到一个值。因为游戏本身保有对旧版本的兼容性，数字ID具有很大的局限性，所以目前游戏仅在网络数据中使用数字ID以减少网络数据的长度。
+
+除了键与值的索引方式外，注册表还具有'''标签（Tag）'''用于映射到多个值。例如，方块注册表中的<code>#air</code>标签可以代表三个值，即<code>air</code>（[[空气]]）、<code>cave_air</code>（洞穴空气）和<code>void_air</code>（虚空空气）。标签可以被数据包定义，且无论是固有注册表还是可写注册表，标签都可以配置生效，因为游戏内标签不是被硬编码的。与注册表同步类似，部分标签也需要被同步到客户端，需要同步标签的注册表会在网络协议配置阶段或游戏阶段（Game）以服务端发向客户端的<code>update_tags</code>网络数据包进行同步。固有注册表一定进行标签同步，网络同步的可写注册表也会进行标签同步，其他注册表则不进行同步。
+
+== 结构 ==
+
+所有可写注册表均可使用数据包配置，而为了注册表数据可以被配置，每个可写注册表都有它们对应的'''数据反序列化器（Deserializer）'''将JSON数据转换为游戏可以使用的内存数据格式。例如，可写注册表<code>ENCHANTMENT</code>就对应了[[魔咒数据格式]]。
+
+每个注册表都有一个对应的'''数据包路径'''，用于收集注册数据。假设一个可写注册表的数据包路径是''P''，如果在数据包{{filepath|data/<''N''>/<''P''>}}路径下，有一个名为{{filename|<''I''>.json}}的文件，那么游戏在读取数据包时会将这个{{filepath|data/<''N''>/<''P''>/<''I''>.json}}文件解析，并以命名空间ID<code><''N''>:<''I''></code>映射到解析后的数据。例如，可写注册表<code>JUKEBOX_SONG</code>的数据包路径是{{filepath|jukebox_song}}，在原版数据包中{{filepath|data/minecraft/jukebox_song}}中有一个名为{{filename|5.json}}的文件，当游戏加载世界时这个文件就会被加载，反序列化后的数据会以<code>minecraft:5</code>的命名空间ID被注册，使用这个命名空间ID就可以使用它的数据。
+
+每个注册表也有它们自己的命名空间ID，即<code>-{}-minecraft:<''数据包路径''></code>。游戏内所有注册表本质上也被注册在了一个特殊的注册表内用于统一管理。
+
+除可写注册表可以被配置外，所有注册表的标签均可以使用数据包定义。假设一个注册表的数据包路径是''P''，如果在数据包{{filepath|data/<''N''>/tags/<''P''>}}路径下，有一个名为{{filename|<''I''>.json}}的文件，游戏就会为这个注册表添加标签<code>#<''N''>:<''I''></code>，并根据其中内容将注册表内的数据按照标签文件定义映射，具体的定义格式见[[Java版标签|标签]]。例如，注册表<code>BLOCK</code>的数据包路径是{{filepath|block}}，那么在这个路径下的所有文件名称都会称为方块注册表的标签，包括子目录下的所有文件，如{{filepath|data/minecraft/tags/block/mineable/axe.json}}会被转换为标签<code>#minecraft:mineable/axe</code>。
+
+== 可用注册表 ==
+
+游戏内无法添加或删除注册表，所有注册表{{tr|对象|物件}}都是被硬编码的。
+
+=== 固有注册表 ===
+
+{| class="wikitable sortable"
+! 字段名称 !! 数据包路径 !! 数据类型 !! 默认值 !! 作用
+|-
+| <code>ACTIVITY</code> || {{filepath|activity}} || <code>Activity</code> || - || [[生物AI]]活动
+|-
+| <code>ATTRIBUTE</code> || {{filepath|attribute}} || <code>Attribute</code> || - || [[属性]]
+|-
+| <code>ATTRIBUTE_TYPE</code>|| {{filepath|attribute_type}} || <code>AttributeType</code> || - || [[环境属性]]中的参数类型
+|-
+| <code>BIOME_SOURCE</code> || {{filepath|worldgen/biome_source}} || <code>MapCodec</code> || - || [[维度数据格式]]中的生物群系源类型
+|-
+| <code>BLOCK</code> || {{filepath|block}} || <code>Block</code> || <code>air</code> || [[方块]]
+|-
+| <code>BLOCK_ENTITY_TYPE</code> || {{filepath|block_entity_type}} || <code>BlockEntityType</code> || <code>furnace</code> || [[方块实体]]类型
+|-
+| <code>BLOCK_PREDICATE_TYPE</code> || {{filepath|block_predicate_type}} || <code>BlockPredicateType</code> || - || 世界生成相关方块谓词类型
+|-
+| <code>BLOCK_STATE_PROVIDER_TYPE</code> || {{filepath|worldgen/block_state_provider_type}} || <code>BlockStateProviderType</code> || - || 世界生成相关方块状态提供器类型
+|-
+| <code>BLOCK_TYPE</code> || {{filepath|block_type}} || <code>MapCodec</code> || - || 方块类型，当前未使用
+|-
+| <code>CARVER</code> || {{filepath|worldgen/carver}} || <code>WorldCarver</code> || - || [[雕刻器数据格式|雕刻器]]类型
+|-
+| <code>CHUNK_GENERATOR</code> || {{filepath|worldgen/chunk_generator}} || <code>MapCodec</code> || - || 维度数据格式中的区块生成器类型
+|-
+| <code>CHUNK_STATUS</code> || {{filepath|chunk_status}} || <code>ChunkStatus</code> || <code>empty</code> || 区块状态
+|-
+| <code>COMMAND_ARGUMENT_TYPE</code> || {{filepath|command_argument_type}} || <code>ArgumentTypeInfo</code> || - || 命令[[参数类型]]
+|-
+| <code>CONSUME_EFFECT_TYPE</code> || {{filepath|consume_effect_type}} || <code>ConsumeEffect.Type</code> || - || 消耗使用效果类型
+|-
+| <code>CREATIVE_MODE_TAB</code> || {{filepath|creative_mode_tab}} || <code>CreativeModeTab</code> || - || [[创造标签页]]
+|-
+| <code>CUSTOM_STAT</code> || {{filepath|custom_stat}} || <code>Identifier</code> || - || 通用[[统计信息]]
+|-
+| <code>DATA_COMPONENT_PREDICATE_TYPE</code> || {{filepath|data_component_predicate_type}} || <code>DataComponentPredicate.Type</code> || - || [[数据组件谓词]]类型
+|-
+| <code>DATA_COMPONENT_TYPE</code> || {{filepath|data_component_type}} || <code>DataComponentType</code> || - || [[数据组件]]类型
+|-
+| <code>DEBUG_SUBSCRIPTION</code> || {{filepath|debug_subscription}} || <code>DebugSubscription</code> || - || 调试订阅
+|-
+| <code>DECORATED_POT_PATTERN</code>{{until|je 26.3}} || {{filepath|decorated_pot_pattern}} || <code>DecoratedPotPattern</code> || - || [[饰纹陶罐]]陶片图案
+|-
+| <code>DENSITY_FUNCTION_TYPE</code> || {{filepath|worldgen/density_function_type}} || <code>MapCodec</code> || - || [[密度函数]]类型
+|-
+| <code>DIALOG_ACTION_TYPE</code> || {{filepath|dialog_action_type}} || <code>MapCodec</code> || - || 对话框操作类型
+|-
+| <code>DIALOG_BODY_TYPE</code> || {{filepath|dialog_body_type}} || <code>MapCodec</code> || - || 对话框主体类型
+|-
+| <code>DIALOG_TYPE</code> || {{filepath|dialog_type}} || <code>MapCodec</code> || - || [[对话框]]类型
+|-
+| <code>ENCHANTMENT_EFFECT_COMPONENT_TYPE</code> || {{filepath|enchantment_effect_component_type}} || <code>DataComponentType</code> || - || 魔咒效果组件类型
+|-
+| <code>ENCHANTMENT_ENTITY_EFFECT_TYPE</code> || {{filepath|enchantment_entity_effect_type}} || <code>MapCodec</code> || - || 魔咒[[魔咒数据格式#实体效果|实体效果]]类型
+|-
+| <code>ENCHANTMENT_LEVEL_BASED_VALUE_TYPE</code> || {{filepath|enchantment_level_based_value_type}} || <code>MapCodec</code> || - || 魔咒[[魔咒数据格式/等级依赖函数|等级依赖函数]]类型
+|-
+| <code>ENCHANTMENT_LOCATION_BASED_EFFECT_TYPE</code> || {{filepath|enchantment_location_based_effect_type}} || <code>MapCodec</code> || - || 魔咒[[魔咒数据格式#位置依赖效果|位置依赖效果]]类型
+|-
+| <code>ENCHANTMENT_PROVIDER_TYPE</code> || {{filepath|enchantment_provider_type}} || <code>MapCodec</code> || - || [[魔咒提供器]]类型
+|-
+| <code>ENCHANTMENT_VALUE_EFFECT_TYPE</code> || {{filepath|enchantment_value_effect_type}} || <code>MapCodec</code> || - || 魔咒[[魔咒数据格式#值效果|值效果]]类型
+|-
+| <code>ENVIRONMENT_ATTRIBUTE</code>|| {{filepath|environment_attribute}} || <code>EnvironmentAttribute</code> || - || 环境属性
+|-
+| <code>ENTITY_SUB_PREDICATE_TYPE</code> || {{filepath|entity_sub_predicate_type}} || <code>Codec</code> || - || [[实体子谓词]]类型
+|-
+| <code>ENTITY_TYPE</code> || {{filepath|entity_type}} || <code>EntityType</code> || <code>pig</code> || [[实体]]类型
+|-
+| <code>FEATURE</code> || {{filepath|worldgen/feature}}{{until|je 26.3}}{{filepath|worldgen/feature_type}}{{upcoming|je 26.3}} || <code>Feature</code>{{until|je 26.3}}<code>MapCodec</code>{{upcoming|je 26.3}} || - || [[已配置的地物#地物类型|地物类型]]
+|-
+| <code>FEATURE_SIZE_TYPE</code> || {{filepath|worldgen/feature_size_type}} || <code>FeatureSizeType</code> || - || 树地物中最小空间要求数据定义类型
+|-
+| <code>FLOAT_PROVIDER_TYPE</code> || {{filepath|float_provider_type}} || <code>MapCodec</code> || - || 世界生成相关浮点提供器类型
+|-
+| <code>FLUID</code> || {{filepath|fluid}} || <code>Fluid</code> || <code>empty</code> || [[流体]]类型
+|-
+| <code>FOLIAGE_PLACER_TYPE</code> || {{filepath|worldgen/foliage_placer_type}} || <code>FoliagePlacerType</code> || - || 树地物中树干放置器数据定义类型
+|-
+| <code>GAME_EVENT</code> || {{filepath|game_event}} || <code>GameEvent</code> || <code>step</code> || [[游戏事件]]类型
+|-
+| <code>GAME_RULE</code>|| {{filepath|game_rule}} || <code>GameRule</code> || - || [[游戏规则]]
+|-
+| <code>HEIGHT_PROVIDER_TYPE</code> || {{filepath|height_provider_type}} || <code>HeightProviderType</code> || - || 世界生成相关高度提供器类型
+|-
+| <code>INCOMING_RPC_METHOD</code> || {{filepath|incoming_rpc_methods}} || <code>IncomingRpcMethod</code> || - || [[服务端管理协议]]中的请求方法
+|-
+| <code>INPUT_CONTROL_TYPE</code> || {{filepath|input_control_type}} || <code>MapCodec</code> || - || 对话框中的输入控件类型
+|-
+| <code>INT_PROVIDER_TYPE</code> || {{filepath|int_provider_type}} || <code>MapCodec</code> || - || 世界生成相关整数提供器类型
+|-
+| <code>ITEM</code> || {{filepath|item}} || <code>Item</code> || <code>air</code> || [[物品]]
+|-
+| <code>SLOT_SOURCE_TYPE</code>|| {{filepath|slot_source_type}} || <code>MapCodec</code> || - || 槽位源类型
+|-
+| <code>LOOT_CONDITION_TYPE</code> || {{filepath|loot_condition_type}} || <code>MapCodec</code> || - || [[战利品表谓词]]类型
+|-
+| <code>LOOT_FUNCTION_TYPE</code> || {{filepath|loot_function_type}} || <code>MapCodec</code> || - || [[战利品表函数]]类型
+|-
+| <code>LOOT_NBT_PROVIDER_TYPE</code> || {{filepath|loot_nbt_provider_type}} || <code>MapCodec</code> || - || [[战利品表]]相关NBT源类型
+|-
+| <code>LOOT_NUMBER_PROVIDER_TYPE</code> || {{filepath|loot_number_provider_type}} || <code>MapCodec</code> || - || 战利品表相关数值提供器类型
+|-
+| <code>LOOT_POOL_ENTRY_TYPE</code> || {{filepath|loot_pool_entry_type}} || <code>MapCodec</code> || - || 战利品表抽取项类型
+|-
+| <code>LOOT_SCORE_PROVIDER_TYPE</code> || {{filepath|loot_score_provider_type}} || <code>MapCodec</code> || - || 战利品表分数提供器类型
+|-
+| <code>MAP_DECORATION_TYPE</code> || {{filepath|map_decoration_type}} || <code>MapDecorationType</code> || - || [[地图#地图图标|地图图标]]类型
+|-
+| <code>MATERIAL_CONDITION</code>{{until|je 26.3}}<code>MATERIAL_CONDITION_TYPE</code>{{upcoming|je 26.3}} || {{filepath|worldgen/material_condition}}{{until|je 26.3}}{{filepath|worldgen/material_condition_type}}{{upcoming|je 26.3}} || <code>MapCodec</code> || - || 表面规则条件类型{{until|je 26.3}}材料条件类型{{upcoming|je 26.3}}
+|-
+| <code>MATERIAL_RULE</code>{{until|je 26.3}}<code>MATERIAL_RULE_TYPE</code>{{upcoming|je 26.3}} || {{filepath|worldgen/material_rule}}{{until|je 26.3}}{{filepath|worldgen/material_rule_type}}{{upcoming|je 26.3}} || <code>MapCodec</code> || - || 表面规则类型{{until|je 26.3}}材料规则类型{{upcoming|je 26.3}}
+|-
+| <code>MEMORY_MODULE_TYPE</code> || {{filepath|memory_module_type}} || <code>MemoryModuleType</code> || <code>dummy</code> || [[生物记忆]]
+|-
+| <code>MENU</code> || {{filepath|menu}} || <code>MenuType</code> || - || 屏幕类型
+|-
+| <code>MOB_EFFECT</code> || {{filepath|mob_effect}} || <code>MobEffect</code> || - || [[状态效果]]
+|-
+| <code>NUMBER_FORMAT_TYPE</code> || {{filepath|number_format_type}} || <code>NumberFormatType</code> || - || [[记分板]]分数显示样式类型
+|-
+| <code>OUTGOING_RPC_METHOD</code> || {{filepath|outgoing_rpc_methods}} || <code>OutgoingRpcMethod</code> || - || 服务端管理协议中的通知方法
+|-
+| <code>PARTICLE_TYPE</code> || {{filepath|particle_type}} || <code>ParticleType</code> || - || [[粒子]]类型
+|-
+| <code>PLACEMENT_MODIFIER_TYPE</code> || {{filepath|worldgen/placement_modifier_type}} || <code>PlacementModifierType</code> || - || [[已放置的地物#放置修饰器|放置修饰器]]类型
+|-
+| <code>PERMISSION_CHECK_TYPE</code>|| {{filepath|permission_check_type}} || <code>MapCodec</code> || - || 命令中的权限检查类型
+|-
+| <code>PERMISSION_TYPE</code>|| {{filepath|permission_type}} || <code>MapCodec</code> || - || 命令中的权限类型
+|-
+| <code>POINT_OF_INTEREST_TYPE</code> || {{filepath|point_of_interest_type}} || <code>PoiType</code> || - || [[兴趣点]]类型
+|-
+| <code>POOL_ALIAS_BINDING</code> || {{filepath|worldgen/pool_alias_binding}} || <code>MapCodec</code> || - || 拼图结构模板池元素类型
+|-
+| <code>POSITION_SOURCE_TYPE</code> || {{filepath|position_source_type}} || <code>PositionSourceType</code> || - || 游戏事件系统中的位置源类型
+|-
+| <code>POS_RULE_TEST</code> || {{filepath|pos_rule_test}} || <code>PosRuleTestType</code> || - || 世界生成中的位置规则测试类型
+|-
+| <code>POTION</code> || {{filepath|potion}} || <code>Potion</code> || - || [[药水效果]]
+|-
+| <code>RECIPE_BOOK_CATEGORY</code> || {{filepath|recipe_book_category}} || <code>RecipeBookCategory</code> || - || [[配方书]]分类标签
+|-
+| <code>RECIPE_DISPLAY</code> || {{filepath|recipe_display}} || <code>RecipeDisplay.Type</code> || - || 预览配方类型
+|-
+| <code>RECIPE_SERIALIZER</code> || {{filepath|recipe_serializer}} || <code>RecipeSerializer</code> || - || [[配方]]序列化/反序列化器类型
+|-
+| <code>RECIPE_TYPE</code> || {{filepath|recipe_type}} || <code>RecipeType</code> || - || [[配方]]类型
+|-
+| <code>REGISTRY</code> || {{filepath|root}} || <code>WritableRegistry</code> || - || 所有注册表
+|-
+| <code>ROOT_PLACER_TYPE</code> || {{filepath|worldgen/root_placer_type}} || <code>RootPlacerType</code> || - || 树地物中的树根放置器类型
+|-
+| <code>RULE_TEST</code> || {{filepath|rule_test}} || <code>RuleTestType</code> || - || 世界生成中的规则测试类型
+|-
+| <code>RULE_BLOCK_ENTITY_MODIFIER</code> || {{filepath|rule_block_entity_modifier}} || <code>RuleBlockEntityModifierType</code> || - || 世界生成中的方块实体数据修饰器类型
+|-
+| <code>SENSOR_TYPE</code> || {{filepath|sensor_type}} || <code>SensorType</code> || - || 生物AI中的感受器类型
+|-
+| <code>SLOT_DISPLAY</code> || {{filepath|slot_display}} || <code>SlotDisplay.Type</code> || - || 预览槽位类型
+|-
+| <code>SOUND_EVENT</code> || {{filepath|sound_event}} || <code>SoundEvent</code> || - || 声音事件
+|-
+| <code>SPAWN_CONDITION_TYPE</code> || {{filepath|spawn_condition_type}} || <code>MapCodec</code> || - || 通用变种选择器类型
+|-
+| <code>STAT_TYPE</code> || {{filepath|stat_type}} || <code>StatType</code> || - || 统计类型
+|-
+| <code>STRUCTURE_PIECE</code> || {{filepath|worldgen/structure_piece}} || <code>StructurePieceType</code> || - || [[结构片段]]类型
+|-
+| <code>STRUCTURE_PLACEMENT</code> || {{filepath|worldgen/structure_placement}} || <code>StructurePlacementType</code>{{until|je 26.3}}<code>MapCodec</code>{{upcoming|je 26.3}} || - || 结构放置方式类型
+|-
+| <code>STRUCTURE_POOL_ELEMENT</code> || {{filepath|worldgen/structure_pool_element}} || <code>StructurePoolElementType</code> || - || 拼图结构模板池映射类型
+|-
+| <code>STRUCTURE_PROCESSOR</code> || {{filepath|worldgen/structure_processor}} || <code>MapCodec</code> || - || 结构处理器类型
+|-
+| <code>STRUCTURE_TYPE</code> || {{filepath|worldgen/structure_type}} || <code>StructureType</code> || - || 结构类型
+|-
+| <code>TEST_ENVIRONMENT_DEFINITION_TYPE</code> || {{filepath|test_environment_definition_type}} || <code>MapCodec</code> || - || 测试环境类型
+|-
+| <code>TEST_FUNCTION</code> || {{filepath|test_function}} || <code>Consumer</code> || - || 硬编码测试函数
+|-
+| <code>TEST_INSTANCE_TYPE</code> || {{filepath|test_instance_type}} || <code>MapCodec</code> || - || 测试实例类型
+|-
+| <code>TICKET_TYPE</code> || {{filepath|ticket_type}} || <code>TicketType</code> || - || 加载标签及计算标签类型
+|-
+| <code>TREE_DECORATOR_TYPE</code> || {{filepath|worldgen/tree_decorator_type}} || <code>TreeDecoratorType</code> || - || 树地物中的额外装饰器类型
+|-
+| <code>TRIGGER_TYPE</code> || {{filepath|trigger_type}} || <code>CriterionTrigger</code> || - || 准则触发器类型
+|-
+| <code>TRUNK_PLACER_TYPE</code> || {{filepath|worldgen/trunk_placer_type}} || <code>TrunkPlacerType</code> || - || 树地物中的树干放置器类型
+|-
+| <code>VILLAGER_PROFESSION</code> || {{filepath|villager_profession}} || <code>VillagerProfession</code> || <code>none</code> || [[村民]]职业
+|-
+| <code>VILLAGER_TYPE</code> || {{filepath|villager_type}} || <code>VillagerType</code> || <code>plain</code> || 村民类型
+|}
+
+=== 可写注册表 ===
+
+下表中网络同步与标签同步均被称为同步。
+
+{| class="wikitable sortable"
+! 字段名称 !! 数据包路径 !! 同步 !! 定义格式 !! 作用
+|-
+| <code>ADVANCEMENT</code> || {{filepath|advancement}} || {{tc|no|否}} || [[进度定义格式]] || 世界中可获得的进度
+|-
+| <code>BANNER_PATTERN</code> || {{filepath|banner_pattern}} || {{tc|yes|是}} || [[旗帜图案定义格式]] || 旗帜图案
+|-
+| <code>BIOME</code> || {{filepath|worldgen/biome}} || {{tc|yes|是}} || [[生物群系定义格式]] || 世界内可生成的生物群系
+|-
+| <code>CAT_SOUND_VARIANT</code> || {{filepath|cat_sound_variant}} || {{tc|yes|是}} || [[猫音效变种定义格式]] || 猫的音效变种类型
+|-
+| <code>CAT_VARIANT</code> || {{filepath|cat_variant}} || {{tc|yes|是}} || [[猫变种定义格式]] || 猫的变种类型
+|-
+| <code>CHAT_TYPE</code> || {{filepath|chat_type}} || {{tc|yes|是}} || [[聊天类型定义格式]] || 聊天类型
+|-
+| <code>CHICKEN_SOUND_VARIANT</code> || {{filepath|chicken_sound_variant}} || {{tc|yes|是}} || [[鸡音效变种定义格式]] || 鸡的音效变种类型
+|-
+| <code>CHICKEN_VARIANT</code> || {{filepath|chicken_variant}} || {{tc|yes|是}} || [[鸡变种定义格式]] || 鸡的变种类型
+|-
+| <code>CONFIGURED_CARVER</code> || {{filepath|worldgen/configured_carver}} || {{tc|no|否}} || [[雕刻器定义格式]] || 世界内可用的雕刻器
+|-
+| <code>CONFIGURED_FEATURE</code>{{until|je 26.3}}<code>FEATURE</code>{{upcoming|je 26.3}} || {{filepath|worldgen/configured_feature}}{{until|je 26.3}}{{filepath|worldgen/feature}}{{upcoming|je 26.3}} || {{tc|no|否}} || [[已配置的地物]] || 世界内可用的已配置的地物
+|-
+| <code>COW_SOUND_VARIANT</code> || {{filepath|cow_sound_variant}} || {{tc|yes|是}} || [[牛音效变种定义格式]] || 牛的音效变种类型
+|-
+| <code>COW_VARIANT</code> || {{filepath|cow_variant}} || {{tc|yes|是}} || [[牛变种定义格式]] || 牛的变种类型
+|-
+| <code>DAMAGE_TYPE</code> || {{filepath|damage_type}} || {{tc|yes|是}} || [[伤害类型定义格式]] || 伤害类型
+|-
+| <code>DECORATED_POT_PATTERN</code>{{upcoming|je 26.3}} || {{filepath|decorated_pot_pattern}} || {{tc|yes|是}} || [[饰纹陶罐图案定义格式]] || 饰纹陶罐样式
+|-
+| <code>DENSITY_FUNCTION</code> || {{filepath|worldgen/density_function}} || {{tc|no|否}} || [[密度函数]] || 世界生成中使用的密度函数
+|-
+| <code>DIALOG</code> || {{filepath|dialog}} || {{tc|yes|是}} || [[对话框定义格式]] || 对话框
+|-
+| <code>DIMENSION</code> || {{filepath|dimension}} || {{tc|no|否}} || - || <code>LEVEL_STEM</code>注册表的另一种仅在内存中使用的形式
+|-
+| <code>DIMENSION_TYPE</code> || {{filepath|dimension_type}} || {{tc|yes|是}} || [[维度类型]] || 世界中使用的维度类型
+|-
+| <code>ENCHANTMENT</code> || {{filepath|enchantment}} || {{tc|yes|是}} || [[魔咒数据格式]] || 可使用的魔咒
+|-
+| <code>ENCHANTMENT_PROVIDER</code> || {{filepath|enchantment_provider}} || {{tc|no|否}} || [[魔咒提供器]] || 魔咒挑选时使用的提供器
+|-
+| <code>FLAT_LEVEL_GENERATOR_PRESET</code> || {{filepath|worldgen/flat_level_generator_preset}} || {{tc|no|否}} || [[超平坦世界生成预设]] || 超平坦世界生成预设
+|-
+| <code>FROG_VARIANT</code> || {{filepath|frog_variant}} || {{tc|yes|是}} || [[青蛙变种定义格式]] || 青蛙的变种类型
+|-
+| <code>INSTRUMENT</code> || {{filepath|instrument}} || {{tc|yes|是}} || [[山羊角乐器]] || 乐器类型
+|-
+| <code>ITEM_MODIFIER</code> || {{filepath|item_modifier}} || {{tc|no|否}} || [[物品修饰器]] || 世界内可使用的物品修饰器
+|-
+| <code>JUKEBOX_SONG</code> || {{filepath|jukebox_song}} || {{tc|yes|是}} || [[唱片机曲目]] || 唱片机可播放的音乐
+|-
+| <code>LEVEL_STEM</code> || {{filepath|dimension}} || {{tc|no|否}} || [[维度定义格式]] || 世界中可以使用的维度
+|-
+| <code>LOOT_TABLE</code> || {{filepath|loot_table}} || {{tc|no|否}} || [[战利品表]] || 世界内可使用的战利品表
+|-
+| <code>MATERIAL_CONDITION</code>{{upcoming|je 26.3}} || {{filepath|worldgen/material_condition}} || {{tc|no|否}} || [[材料条件]] || 世界生成中放置方块的条件
+|-
+| <code>MATERIAL_RULE</code>{{upcoming|je 26.3}} || {{filepath|worldgen/material_rule}} || {{tc|no|否}}|| [[材料规则]] || 世界生成中放置方块的规则
+|-
+| <code>MULTI_NOISE_BIOME_SOURCE_<wbr>PARAMETER_LIST</code> || {{filepath|worldgen/multi_noise_biome_source_<wbr>parameter_list}} || {{tc|no|否}} || [[多噪声参数列表]] || 引用噪声参数列表
+|-
+| <code>NOISE</code> || {{filepath|worldgen/noise}} || {{tc|no|否}} || [[噪声]] || 噪声使用的参数
+|-
+| <code>NOISE_SETTINGS</code> || {{filepath|worldgen/noise_settings}} || {{tc|no|否}} || [[噪声设置]] || 维度相关的噪声数据集合
+|-
+| <code>NUMBER_PROVIDER</code>{{upcoming|je 26.3}} || {{filepath|number_provider}} || {{more info}} || [[数值提供器]] || 预定义的数值提供器
+|-
+| <code>PAINTING_VARIANT</code> || {{filepath|painting_variant}} || {{tc|yes|是}} || [[画变种定义格式]] || 画的变种类型
+|-
+| <code>PIG_SOUND_VARIANT</code> || {{filepath|pig_sound_variant}} || {{tc|yes|是}} || [[猪音效变种定义格式]] || 猪的音效变种类型
+|-
+| <code>PIG_VARIANT</code> || {{filepath|pig_variant}} || {{tc|yes|是}} || [[猪变种定义格式]] || 猪的变种类型
+|-
+| <code>PLACED_FEATURE</code> || {{filepath|worldgen/placed_feature}} || {{tc|no|否}} || [[已放置的地物]] || 世界内放置的地物
+|-
+| <code>PREDICATE</code> || {{filepath|predicate}} || {{tc|no|否}} || [[谓词]] || 世界内可使用的谓词
+|-
+| <code>PROCESSOR_LIST</code> || {{filepath|worldgen/processor_list}} || {{tc|no|否}} || [[处理器列表]] || 结构处理器列表
+|-
+| <code>RECIPE</code> || {{filepath|recipe}} || {{tc|no|否}} || [[配方]] || 世界内可使用的配方
+|-
+| <code>SLOT_SOURCE</code>{{upcoming|je 26.3}} || {{filepath|slot_source}} || {{tc|no|否}} || [[槽位源]] || 世界中可用的槽位源
+|-
+| <code>STRUCTURE</code> || {{filepath|worldgen/structure}} || {{tc|no|否}} || [[结构定义格式]] || 世界内可用的结构
+|-
+| <code>STRUCTURE_SET</code> || {{filepath|worldgen/structure_set}} || {{tc|no|否}} || [[结构集]] || 世界内结构的集合
+|-
+| <code>SULFUR_CUBE_ARCHETYPE</code> || {{filepath|sulfur_cube_archetype}} || {{tc|yes|是}} || [[硫方怪原型]] || [[硫磺史萊姆|硫方怪]]可用的原型
+|-
+| <code>TEMPLATE_POOL</code> || {{filepath|worldgen/template_pool}} || {{tc|no|否}} || [[结构池]] || 结构模板池数据
+|-
+| <code>TIMELINE</code>|| {{filepath|timeline}} || {{tc|yes|是}} || [[时间线定义格式]] || 时间线数据
+|-
+| <code>TEST_ENVIRONMENT</code> || {{filepath|test_environment}} || {{tc|yes|是}} || [[测试环境定义格式]] || 测试环境
+|-
+| <code>TEST_INSTANCE</code> || {{filepath|test_instance}} || {{tc|yes|是}} || [[测试实例定义格式]] || 测试实例
+|-
+| <code>TRADE_SET</code> || {{filepath|trade_set}} || {{tc|no|否}} || [[交易集定义格式]] || 交易集
+|-
+| <code>TRIAL_SPAWNER_CONFIG</code> || {{filepath|trial_spawner}} || {{tc|no|否}} || [[试炼刷怪笼配置定义格式]] || 试炼刷怪笼配置数据
+|-
+| <code>TRIM_MATERIAL</code> || {{filepath|trim_material}} || {{tc|yes|是}} || {{slink|盔甲纹饰定义格式|盔甲纹饰材料}} || 锻造原材料
+|-
+| <code>TRIM_PATTERN</code> || {{filepath|trim_pattern}} || {{tc|yes|是}} || {{slink|盔甲纹饰定义格式|盔甲纹饰图案}} || 盔甲纹饰图案
+|-
+| <code>VILLAGER_TRADE</code> || {{filepath|villager_trade}} || {{tc|no|否}} || [[村民交易定义格式]] || 村民交易
+|-
+| <code>WOLF_SOUND_VARIANT</code> || {{filepath|wolf_sound_variant}} || {{tc|yes|是}} || [[狼音效变种定义格式]] || 狼的音效变种类型
+|-
+| <code>WOLF_VARIANT</code> || {{filepath|wolf_variant}} || {{tc|yes|是}} || [[狼变种定义格式]] || 狼的变种类型
+|-
+| <code>WORLD_CLOCK</code> || {{filepath|world_clock}} || {{tc|yes|是}} || [[世界时钟定义格式]] || 世界时钟
+|-
+| <code>WORLD_PRESET</code> || {{filepath|worldgen/world_preset}} || {{tc|no|否}} || [[世界预设定义格式]] || 世界预设数据
+|-
+| <code>ZOMBIE_NAUTILUS_VARIANT</code>|| {{filepath|zombie_nautilus_variant}} || {{tc|yes|是}} || [[僵尸鹦鹉螺变种定义格式]] || 僵尸鹦鹉螺变种数据
+|}
+
+== 历史 ==
+
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.15|dev=19w41a|加入了树地物相关注册表。}}
+|{{HistoryLine||1.16|dev=20w13a|加入了<code>POS_RULE_TEST</code>注册表。}}
+|{{HistoryLine|||dev=20w14a|加入了<code>TRUNK_PLACER_TYPES</code>和<code>ATTRIBUTES</code>注册表。}}
+|{{HistoryLine|||dev=20w17a|加入了<code>FEATURE_SIZE_TYPES</code>注册表。}}
+|{{HistoryLine|||dev=20w20a|移除了<code>CHUNK_GENERATOR_TYPE</code>注册表。}}
+|{{HistoryLine|||dev=20w21a|重构注册表相关结构，使部分注册表可写。}}
+|{{HistoryLine|||dev=20w22a|加入了<code>DIMENSION</code>可写注册表和战利品表相关注册表。}}
+|{{HistoryLine||1.16.2|dev=20w28a|重新整理了世界生成相关注册表。}}
+|{{HistoryLine|||dev=20w29a|加入了<code>NOISE_GENERATOR_SETTINGS</code>可写注册表。}}
+|{{HistoryLine||1.17|dev=20w46a|加入了战利品表数据提供器相关注册表。}}
+|{{HistoryLine|||dev=20w49a|加入了游戏事件相关注册表。}}
+|{{HistoryLine|||dev=21w08a|加入了<code>FLOAT_PROVIDER_TYPES</code>注册表。}}
+|{{HistoryLine|||dev=21w13a|加入了高度、数字提供器相关注册表。}}
+|{{HistoryLine||1.18|dev=21w39a|加入了<code>BLOCK_PREDICATE_TYPES</code>注册表，移除了<code>BLOCK_PLACER_TYPES</code>注册表。}}
+|{{HistoryLine|||dev=21w42a|加入了<code>NOISE</code>可写注册表。}}
+|{{HistoryLine||1.18.2|dev=pre1|加入了<code>DENSITY_FUNCTION_TYPES</code>注册表。
+|加入了<code>STRUCTURE_SET</code>、<code>DENSITY_FUNCTION</code>可写注册表。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了<code>COMMAND_ARGUMENT_TYPE</code>、<code>STRUCTURE_TYPES</code>注册表。
+|加入了<code>STRUCTURE</code>、<code>WORLD_PRESET</code>可写注册表。
+|移除了<code>STRUCTURE_FEATURE</code>注册表。}}
+|{{HistoryLine|||dev=22w14a|加入了<code>ROOT_PLACER_TYPES</code>、<code>CAT_VARIANT</code>和<code>FROG_VARIANT</code>注册表。}}
+|{{HistoryLine|||dev=22w18a|加入了<code>CHAT_TYPE</code>、<code>BANNER_PATTERN</code>和<code>INSTRUMENT</code>注册表。}}
+|{{HistoryLine|||dev=22w19a|<code>CHAT_TYPE</code>注册表变为可写注册表。}}
+|{{HistoryLine||1.19.4|dev=23w04a|加入了<code>TRIM_MATERIAL</code>和<code>TRIM_MATERIAL</code>可写注册表。}}
+|{{HistoryLine|||dev=23w06a|加入了<code>DAMAGE_TYPE</code>可写注册表。}}
+|{{HistoryLine|||dev=23w07a|加入了<code>DECORATED_POT_PATTERNS</code>注册表。}}
+|{{HistoryLine|||dev=pre1|加入了<code>MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST</code>可写注册表。}}
+|{{HistoryLine||1.20|dev=23w12a|加入了<code>RULE_BLOCK_ENTITY_MODIFIER</code>注册表。}}
+|{{HistoryLine|||dev=23w16a|加入了<code>CREATIVE_MODE_TAB</code>注册表。}}
+|{{HistoryLine||1.20.3|dev=23w40a|加入了<code>BLOCK_TYPE</code>注册表。}}
+|{{HistoryLine|||dev=23w42a|加入了<code>POOL_ALIAS_BINDING</code>注册表。}}
+|{{HistoryLine|||dev=23w45a|加入了<code>TRIGGER_TYPE</code>注册表。}}
+|{{HistoryLine|||dev=23w46a|加入了<code>NUMBER_FORMAT_TYPE</code>注册表。}}
+|{{HistoryLine||1.20.5|dev=24w05a|加入了<code>ARMOR_MATERIAL</code>注册表。}}
+|{{HistoryLine|||dev=24w09a|加入了<code>DATA_COMPONENT_TYPE</code>注册表。}}
+|{{HistoryLine|||dev=24w10a|加入了<code>WOLF_VARIANT</code>可写注册表。}}
+|{{HistoryLine|||dev=24w11a|加入了物品及实体子谓词类型注册表。}}
+|{{HistoryLine|||dev=24w12a|加入了战利品表相关可写注册表和<code>MAP_DECORATION_TYPE</code>注册表。}}
+|{{HistoryLine||1.21|dev=24w18a|<code>PAINTING_VARIANT</code>注册表变为可写注册表。
+|加入魔咒效果组件相关注册表。}}
+|{{HistoryLine|||dev=24w21a|加入了{{cd|JUKEBOX_SONG|ADVANCEMENT|RECIPE|d=pretty}}3个可写注册表。}}
+|{{HistoryLine||1.21.2|dev=24w33a|<code>INSTRUMENT</code>注册表变为可写注册表。}}
+|{{HistoryLine|||dev=24w34a|加入了<code>CONSUME_EFFECT_TYPE</code>注册表。}}
+|{{HistoryLine|||dev=24w35a|加入了<code>TRIAL_SPAWNER_CONFIG</code>可写注册表。}}
+|{{HistoryLine|||dev=24w36a|移除了<code>ARMOR_MATERIAL</code>注册表。}}
+|{{HistoryLine|||dev=24w40a|加入了{{cd|d=pretty|RECIPE_DISPLAY|SLOT_DISPLAY}}注册表。}}
+|{{HistoryLine|||dev=pre1|加入了<code>RECIPE_BOOK_CATEGORY</code>注册表。}}
+|{{HistoryLine||1.21.5|dev=25w02a|加入了{{cd|PIG_VARIANT}}可写注册表和{{cd|TICKET_TYPE}}固有注册表。}}
+|{{HistoryLine|||dev=25w03a|加入了{{cd|TEST_ENVIRONMENT|TEST_INSTANCE|d=pretty}}可写注册表和{{cd|TEST_FUNCTION|TEST_ENVIRONMENT_DEFINITION_TYPE|TEST_INSTANCE_TYPE|d=pretty}}固有注册表。}}
+|{{HistoryLine|||dev=25w04a|{{cd|CAT_VARIANT|FROG_VARIANT|d=pretty}}变为可写注册表。
+|加入了{{cd|SPAWN_CONDITION_TYPE|DATA_COMPONENT_PREDICATE_TYPE|d=pretty}}固有注册表。
+|移除了{{cd|ITEM_SUB_PREDICATE_TYPE}}固有注册表。}}
+|{{HistoryLine|||dev=25w05a|加入了{{cd|COW_VARIANT}}可写注册表。}}
+|{{HistoryLine|||dev=25w06a|加入了{{cd|CHICKEN_VARIANT}}可写注册表。}}
+|{{HistoryLine|||dev=25w08a|加入了{{cd|WOLF_SOUND_VARIANT}}可写注册表。}}
+|{{HistoryLine||1.21.6|dev=25w20a|加入了{{cd|DIALOG}}可写注册表和{{cd|DIALOG_BODY_TYPE|DIALOG_TYPE|INPUT_CONTROL_TYPE|SUBMIT_METHOD_TYPE|d=pretty}}固有注册表。}}
+|{{HistoryLine|||dev=pre1|加入了{{cd|DIALOG_ACTION_TYPE}}固有注册表。
+|移除了{{cd|SUBMIT_METHOD_TYPE}}固有注册表。}}
+|{{HistoryLine||1.21.9|dev=25w35a|加入了{{cd|d=pretty|INCOMING_RPC_METHOD|OUTGOING_RPC_METHOD}}固有注册表。}}
+|{{HistoryLine|||dev=25w37a|加入了{{cd|DEBUG_SUBSCRIPTION}}固有注册表。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了{{cd|d=pretty|PERMISSION_TYPE|PERMISSION_CHECK_TYPE}}固有注册表。}}
+|{{HistoryLine|||dev=25w42a|加入了{{cd|d=pretty|ATTRIBUTE_TYPE|ENVIRONMENT_ATTRIBUTE}}固有注册表。}}
+|{{HistoryLine|||dev=25w44a|加入了{{cd|d=pretty|GAME_RULE|SLOT_SOURCE_TYPE}}固有注册表。}}
+|{{HistoryLine|||dev=25w45a|加入了{{cd|d=pretty|ZOMBIE_NAUTILUS_VARIANT|TIMELINE}}可写注册表。
+|移除了{{cd|SCHEDULE}}固有注册表。}}
+|{{HistoryLine||26.1|dev=snapshot-1|加入了<code>TRADE_SET</code>和<code>VILLAGER_TRADE</code>可写注册表。}}
+|{{HistoryLine|||dev=snapshot-3|加入了<code>WORLD_CLOCK</code>可写注册表。}}
+|{{HistoryLine|||dev=snapshot-7|加入了{{cd|d=pretty|PIG_SOUND_VARIANT|COW_SOUND_VARIANT|CHICKEN_SOUND_VARIANT|CAT_SOUND_VARIANT}}可写注册表。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了<code>SULFUR_CUBE_ARCHETYPE</code>可写注册表。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了{{cd|d=pretty|MATERIAL_CONDITION|MATERIAL_RULE|SLOT_SOURCE}}可写注册表。
+|将<code>FEATURE</code>、<code>MATERIAL_CONDITION</code>和<code>MATERIAL_RULE</code>固有注册表重命名为<code>FEATURE_TYPE</code>、<code>MATERIAL_CONDITION_TYPE</code>和<code>MATERIAL_RULE_TYPE</code>。
+|将<code>CONFIGURED_FEATURE</code>可写注册表重命名为<code>FEATURE</code>。
+|<code>DECORATED_POT_PATTERN</code>变为可写注册表。}}
+|{{HistoryLine|||dev=snapshot-3|加入了<code>NUMBER_PROVIDER</code>可写注册表。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Java Edition}}

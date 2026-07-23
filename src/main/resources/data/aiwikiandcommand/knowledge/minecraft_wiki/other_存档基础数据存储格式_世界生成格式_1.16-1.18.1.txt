@@ -1,0 +1,204 @@
+# 页面: 存档基础数据存储格式/世界生成格式/1.16-1.18.1
+# 来源: https://zh.minecraft.wiki/w/%E5%AD%98%E6%A1%A3%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90%E6%A0%BC%E5%BC%8F/1.16-1.18.1
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:10
+# 原始 Wikitext 内容:
+
+{{outdated|edition=java}}
+自[[Java版20w21a|20w21a]]起，游戏采用了统一的格式存储各个维度的世界生成数据，而非像[[存档基础数据存储格式/世界生成格式/1.16前|之前那样]]简单地记录主世界的世界类型。此存储格式也是被[[自定义]]世界类型所使用的格式。
+
+== 数据格式 ==
+<div class="treeview">
+* {{nbt|compound}} '''level.dat根标签'''
+** {{nbt|compound|Data}}
+*** {{nbt|compound|WorldGenSettings|existonsave=1|required=1}}：此存档的[[世界生成]]设置。
+**** {{nbt|bool|bonus_chest|existonsave=1}}：玩家首次进入游戏时，是否在出生点附近生成奖励箱。如果此项不存在游戏默认为<code>false</code>。
+**** {{nbt|compound|dimensions|existonsave=1|required=1}}：定义存档包含的所有维度及其世界生成设置。
+***** {{nbt|compound|''<维度命名空间ID>''}}：一个维度和对应的数据。
+****** {{nbt|string|type|existonsave=1}}：此维度的[[维度类型]]。
+****** {{nbt|compound|generator|existonsave=1}}：此维度的区块生成器设置。
+******* 见下文{{slink||区块生成器格式}}。
+**** {{nbt|bool|generate_features|existonsave=1}}：世界是否生成结构。如果此项不存在游戏默认为<code>true</code>。
+**** {{nbt|string|legacy_custom_options}}：对世界生成不起到任何作用。存在此标签代表这个存档曾使用旧版自定义设置调整世界生成，在加载此存档时游戏会给出警告。
+**** {{nbt|long|seed|existonsave=1|required=1}}：数字形式的[[世界种子]]。
+</div>
+
+=== 区块生成器格式 ===
+==== 调试型 ====
+调试型生成器格式：
+
+<div class="treeview">
+* {{nbt|compound|generator|existonsave=1}}：此维度的区块生成器设置。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:debug</code>
+</div>
+
+==== 平坦型 ====
+平坦型生成器格式：
+
+<div class="treeview">
+* {{nbt|compound|generator|existonsave=1}}：此维度的区块生成器设置。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:flat</code>
+** {{nbt|compound|settings|existonsave=1}}：生成器的设置。
+*** {{nbt|string|biome|existonsave=1}}：（命名空间ID）要生成的生物群系。
+*** {{nbt|boolean|features|existonsave=1}}：（默认为<code>false</code>）是否生成生物群系的地物，永远不会生成<code>UNDERGROUND_STRUCTURES</code>和<code>SURFACE_STRUCTURES</code>阶段的已放置的地物。若生物群系是虚空且所有层都不是空气层，则什么地物也不会生成。
+*** {{nbt|boolean|lakes|existonsave=1}}：（默认为<code>false</code>）是否生成湖泊。
+*** {{nbt|list|layers|existonsave=1}}：层设置。此列表中的元素将自上而下依次从世界底部向上生成。
+**** {{nbt|compound}}：超平坦的一个层。
+***** {{nbt|string|block|existonsave=1}}：（命名空间ID）这一层使用的方块。不存在时默认为空气。
+***** {{nbt|int|height|existonsave=1}}：这一层的高度。
+*** {{nbt|compound|structures|existonsave=1}}：结构地物生成设置。
+**** {{nbt|compound|stronghold|existonsave=1}}：要塞的生成设置。
+***** {{nbt|int|distance|existonsave=1}}：每一环的宽度加上每环间的间隙宽度，单位为6区块。
+***** {{nbt|int|count|existonsave=1}}：该维度尝试生成的总次数。
+***** {{nbt|int|spread|existonsave=1}}：最中心一环的结构尝试生成次数。
+**** {{nbt|compound|structures|existonsave=1}}：其他结构地物的生成设置。此复合标签内不存在的结构地物将无法生成。
+***** {{nbt|compound|<''结构地物类型命名空间ID''>}}：一项结构地物。
+****** {{nbt|int|salt|existonsave=1}}：影响随机数的[[wzh:盐 (密码学)|盐]]。
+****** {{nbt|int|spacing|existonsave=1}}：两个结构地物之间的平均距离，单位为区块。
+****** {{nbt|int|separation|existonsave=1}}：两个结构地物之间的最小距离，单位为区块。
+</div>
+
+==== 噪声型 ====
+噪声型生成器格式：
+
+<div class="treeview">
+* {{nbt|compound|generator|existonsave=1}}：此维度的区块生成器设置。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:noise</code>
+** {{nbt|compound|settings|existonsave=1}}：生成器的设置。
+*** {{nbt|compound|biome_source|existonsave=1}}：此区块生成器使用的生物群系源。
+**** 见{{slink||生物群系源格式}}。
+*** {{nbt|long|seed|existonsave=1}}：此区块生成器使用的种子，默认与世界种子一致。
+*** {{nbt|compound|settings|existonsave=1}}：此区块生成器使用的[[噪声设置]]。
+</div>
+
+=== 生物群系源格式 ===
+==== 棋盘型 ====
+棋盘型生物群系源格式：
+
+<div class="treeview">
+* {{nbt|compound|biome_source|existonsave=1}}：此区块生成器使用的生物群系源。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:checkerboard</code>
+** {{nbt|string}}{{nbt|list|biomes|existonsave=1}}：要生成的生物群系。
+** {{nbt|int|scale}}：（默认为2）棋盘格的大小。设定为0表示每个格子都是一个区块宽。每次{{nbt|int|scale}}增加时都会加倍。
+** {{nbt|long|seed|existonsave=1}}：此生物群系源使用的种子，默认与世界种子一致。
+</div>
+
+==== 固定型 ====
+固定型生物群系源格式：
+
+<div class="treeview">
+* {{nbt|compound|biome_source|existonsave=1}}：此区块生成器使用的生物群系源。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:fixed</code>
+** {{nbt|string|biome|existonsave=1}}：要生成的生物群系。
+</div>
+
+==== 多噪声型 ====
+多噪声型生物群系源格式：
+
+<div class="treeview">
+* {{nbt|compound|biome_source|existonsave=1}}：此区块生成器使用的生物群系源。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:multi_noise</code>
+** {{nbt|list|biomes|existonsave=1}}：（与{{nbt|string|preset}}二选一）要使用的生物群系参数。
+*** {{nbt|compound}}
+**** {{nbt|string|biome|existonsave=1}}：要生成的生物群系。
+**** {{nbt|compound|parameters|existonsave=1}}：此生物群系使用的参数。
+***** {{nbt|float}}{{nbt|list|temperature|existonsave=1}}：温度。
+****** {{nbt|float}}：（{{interval|left=-2|right=2}}）最小值。
+****** {{nbt|float}}：（{{interval|left=-2|right=2}}）最大值。
+***** {{nbt|float}}{{nbt|list|humidity|existonsave=1}}：湿度，格式与<code>temperature</code>相同。
+***** {{nbt|float}}{{nbt|list|continentalness|existonsave=1}}：大陆性，格式与<code>temperature</code>相同。
+***** {{nbt|float}}{{nbt|list|erosion|existonsave=1}}：侵蚀度，格式与<code>temperature</code>相同。
+***** {{nbt|float}}{{nbt|list|weirdness|existonsave=1}}：怪异度，格式与<code>temperature</code>相同。
+***** {{nbt|float}}{{nbt|list|depth|existonsave=1}}：深度，格式与<code>temperature</code>相同。
+***** {{nbt|float|offset|existonsave=1}}：偏移。
+** {{nbt|string|preset|existonsave=1}}：（命名空间ID，与{{nbt|list|biomes}}二选一）要使用的生物群系参数预设。
+** {{nbt|long|seed|existonsave=1}}：此生物群系源使用的种子，默认与世界种子一致。
+</div>
+
+'''1.16 &dash; 1.16.1'''
+{{collapseH}}
+<div class="treeview">
+* {{nbt|compound|biome_source|existonsave=1}}：此区块生成器使用的生物群系源。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:multi_noise</code>
+** {{nbt|list|biomes|existonsave=1}}：（与{{nbt|string|preset}}二选一）要使用的生物群系参数。
+*** {{nbt|compound}}
+**** {{nbt|string|biome|existonsave=1}}：要生成的生物群系。
+**** {{nbt|compound|parameters|existonsave=1}}：此生物群系使用的参数。
+***** {{nbt|float|temperature|existonsave=1}}：温度。
+***** {{nbt|float|humidity|existonsave=1}}：湿度。
+***** {{nbt|float|weirdness|existonsave=1}}：怪异度。
+***** {{nbt|float|altitude|existonsave=1}}：高度。
+***** {{nbt|float|offset|existonsave=1}}：偏移。
+** {{nbt|string|preset|existonsave=1}}：（命名空间ID，与{{nbt|list|biomes}}二选一）要使用的生物群系参数预设。
+** {{nbt|long|seed|existonsave=1}}：此生物群系源使用的种子，默认与世界种子一致。
+</div>
+{{collapseE}}
+
+'''1.16.2 &dash; 1.17.1'''
+{{collapseH}}
+<div class="treeview">
+* {{nbt|compound|biome_source|existonsave=1}}：此区块生成器使用的生物群系源。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:multi_noise</code>
+** {{nbt|compound|altitude_noise|existonsave=1}}：此生物群系源使用的高度噪声。
+*** {{nbt|int|firstOctave|existonsave=1}}：主倍频。
+*** {{nbt|list|amplitudes|existonsave=1}}：振幅列表。
+**** {{nbt|double}}：此倍频下的值。
+** {{nbt|list|biomes|existonsave=1}}：（与{{nbt|string|preset}}二选一）要使用的生物群系参数。
+*** {{nbt|compound}}
+**** {{nbt|string|biome|existonsave=1}}：要生成的生物群系。
+**** {{nbt|compound|parameters|existonsave=1}}：此生物群系使用的参数。
+***** {{nbt|float|temperature|existonsave=1}}：温度。
+***** {{nbt|float|humidity|existonsave=1}}：湿度。
+***** {{nbt|float|weirdness|existonsave=1}}：怪异度。
+***** {{nbt|float|altitude|existonsave=1}}：高度。
+***** {{nbt|float|offset|existonsave=1}}：偏移。
+** {{nbt|compound|humidity_noise|existonsave=1}}：此生物群系源使用的湿度噪声。
+*** {{nbt|int|firstOctave|existonsave=1}}：主倍频。
+*** {{nbt|list|amplitudes|existonsave=1}}：振幅列表。
+**** {{nbt|double}}：此倍频下的值。
+** {{nbt|string|preset|existonsave=1}}：（命名空间ID，与{{nbt|list|biomes}}二选一）要使用的生物群系参数预设。
+** {{nbt|compound|temperature_noise|existonsave=1}}：此生物群系源使用的温度噪声。
+*** {{nbt|int|firstOctave|existonsave=1}}：主倍频。
+*** {{nbt|list|amplitudes|existonsave=1}}：振幅列表。
+**** {{nbt|double}}：此倍频下的值。
+** {{nbt|long|seed|existonsave=1}}：此生物群系源使用的种子，默认与世界种子一致。
+** {{nbt|compound|weirdness_noise|existonsave=1}}：此生物群系源使用的怪异度噪声。
+*** {{nbt|int|firstOctave|existonsave=1}}：主倍频。
+*** {{nbt|list|amplitudes|existonsave=1}}：振幅列表。
+**** {{nbt|double}}：此倍频下的值。
+</div>
+{{collapseE}}
+
+==== 末地型 ====
+末地型生物群系源格式：
+
+<div class="treeview">
+* {{nbt|compound|biome_source|existonsave=1}}：此区块生成器使用的生物群系源。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:the_end</code>
+** {{nbt|long|seed|existonsave=1}}：此生物群系源使用的种子，默认与世界种子一致。
+</div>
+
+==== 原版分层 ====
+原版分层生物群系源格式：
+
+<div class="treeview">
+* {{nbt|compound|biome_source|existonsave=1}}：此区块生成器使用的生物群系源。
+** {{nbt|string|type|existonsave=1}}：<code>minecraft:vanilla_layered</code>
+** {{nbt|boolean|large_biomes|existonsave=1}}：（默认为<code>false</code>）是否为巨型生物群系。
+** {{nbt|boolean|legacy_biome_init_layer}}：（默认为<code>false</code>）是否使用旧版初始化层。
+** {{nbt|long|seed|existonsave=1}}：此生物群系源使用的种子，默认与世界种子一致。
+</div>
+
+旧版初始化层与默认的初始化层的区别在于，生物群系初始化时，温暖生物群系可挑选的生物群系为“沙漠”“沙漠”“沙漠”“热带草原”“热带草原”和“平原”，而旧版初始化层的温暖生物群系可挑选的生物群系为“沙漠”“沙漠”“山地”“沼泽”“平原”和“针叶林”。即：旧版初始化层不会生成热带草原及其变种生物群系，且沙漠的生成会更少。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w20a|将所有世界生成相关设置都集中到了{{nbt|compound|WorldGenSettings}}内。}}
+|{{HistoryLine||1.16.2|dev=20w30a|由于生物群系源的更改，现在存档会保存多噪声型生物群系源的噪声设置。}}
+|{{HistoryLine||1.18|dev=21w37a|存档不再保存多噪声型生物群系源的噪声设置。
+|移除了原版分层生物群系源，既有维度的会转换为主世界生物群系源。}}
+}}
+
+== 参见 ==
+* [[存档基础数据存储格式/世界生成格式/1.16前]]

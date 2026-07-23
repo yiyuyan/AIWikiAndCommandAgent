@@ -1,0 +1,99 @@
+# 页面: 欢迎屏幕
+# 来源: https://zh.minecraft.wiki/w/%E6%AC%A2%E8%BF%8E%E5%B1%8F%E5%B9%95
+# 分类: Java版独有信息, Minecraft, 基岩版独有信息, 非官方名称
+# 抓取时间: 2026-07-14 17:29:38
+# 原始 Wikitext 内容:
+
+{{Conjecture}}
+'''欢迎屏幕（Welcome Screen）'''是在首次运行Minecraft时进入的界面。
+
+== 说明 ==
+欢迎屏幕是否会在游戏启动后显示由[[options.txt]]中对应的值控制：
+* {{in|java|nc=1}}为{{code|onboardAccessibility}}，默认为{{samp|true}}。该值为{{samp|false}}时则不会在启动游戏后显示该屏幕。
+* {{in|be|nc=1}}为{{code|has_dismissed_new_player_flow}}，默认为{{samp|0}}。该值为{{samp|1}}时则不会在启动游戏后显示该屏幕。
+** 当{{filepath|minecraftWorlds}}中已存在世界时，该值会在游戏启动时自动更改为{{samp|1}}。
+
+== Java版 ==
+{{filetr|onboardAccessibility.png|thumb|辅助功能引导屏幕}}
+
+首次进入游戏时，游戏会进入辅助功能引导屏幕。
+
+此屏幕提供一些快捷辅助功能选项，如下：
+
+; {{tp|options.narrator}}
+: 切换复述功能的复述范围：{{tp|options.narrator.all}}、{{tp|options.narrator.chat}}、{{tp|options.narrator.system}}或{{tp|options.narrator.off}}。
+
+; {{tp|accessibility.onboarding.accessibility.button}}
+: 点击后会进入[[选项#accessibility|辅助功能设置]]界面。
+
+; {{tp|options.language}}
+: 点击后会进入[[语言]]选择界面。
+
+; {{tp|gui.continue}}
+: 点击后会进入[[主菜单]]。
+
+点击{{tp|gui.continue}}后，游戏会将{{code|onboardAccessibility}}设置为{{samp|false}}以防止在之后显示此屏幕。
+
+== 基岩版 ==
+{{filetr|new player flow.png|thumb|欢迎屏幕}}
+
+首次进入游戏时，游戏会进入欢迎屏幕，在简单介绍游戏玩法的同时引导玩家创建一个世界。
+
+; {{tr|开始|入門說明}}
+: 点击此按钮后，游戏会按顺序依次显示以下-{}-界面，供玩家按喜好选择。
+# “游戏模式”界面。用于选择游戏模式。
+# “生存难度”界面。用于选择游戏难度。
+#* 若选择了创造模式，则不会显示此界面，且游戏难度固定为普通。
+# “选择角色”界面。可以从9种[[皮肤#默认皮肤|默认皮肤]]中选择一个。
+# “{{tr|控制模式|控制方式}}”界面。用于选择[[控制#触控|触控模式]]。
+#* 此界面仅在使用触屏操控时显示。
+# “{{tr|准备游玩|準備好游玩}}”界面。简单介绍即将创建的世界。点击“游玩 Minecraft”即可创建该世界并进入。
+
+; 更多选项
+: 点击后会进入[[主菜单]]。
+
+进入世界或主菜单后，游戏会将{{code|has_dismissed_new_player_flow}}设置为{{samp|1}}以防止在之后显示此界面。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19.4|dev=23w03a|加入了辅助功能引导屏幕，会在玩家首次启动游戏时出现。}}
+|{{HistoryLine||1.20.3|dev=23w45a|现在辅助功能引导屏幕上的“{{tp|accessibility.onboarding.accessibility.button}}”按钮使用单独的本地化键名。<ref>{{bug|MC-261119|||Fixed}}</ref><ref>{{bug|MC-266256|||Fixed}}</ref>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.60|dev=1.20.60.23|加入了欢迎屏幕，会在玩家首次启动游戏时出现。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.26|将“{{tr|进入主菜单|開啟主功能表}}”更名为“更多选项”。
+|加入了“选择角色”和“{{tr|准备游玩|準備好游玩}}”界面。会在选择了游戏模式和难度后进入。
+|因为上述界面的加入，现在选择了游戏模式和难度后不会直接创建并进入世界了。}}
+}}
+
+== 你知道吗 ==
+* {{in|be}}登录提示会优先于此屏幕出现。
+* 部分第三方{{el|java}}启动器可能会在启动游戏前将{{code|onboardAccessibility}}修改为{{samp|false}}，因此游戏将不会显示该屏幕。
+
+== 画廊 ==
+=== Java版 ===
+{{gallery|
+onboardAccessibility.png|convert|辅助功能引导屏幕
+AccessibilitySettings.png|convert|“{{tp|options.accessibility.title}}”菜单
+Language settings.png|convert|“{{tp|options.language.title}}”菜单
+}}
+
+=== 基岩版 ===
+{{gallery|
+new player flow.png|convert|欢迎屏幕
+new player flow game mode.png|convert|“游戏模式”界面
+new player flow survival difficulty.png|convert|“生存难度”界面
+new player flow select character.png|convert|“选择角色”界面
+Ore UI - Settings Touch - Control Mode Screen Menu (Bedrock).png|convert|“{{tr|控制模式|控制方式}}”界面
+new player flow ready to play survival peaceful.png|convert|“{{tr|准备游玩|準備好游玩}}”界面。游戏模式为生存模式，难度为和平
+new player flow ready to play survival easy.png|convert|“{{tr|准备游玩|準備好游玩}}”界面。游戏模式为生存模式，难度为简单
+new player flow ready to play survival normal.png|convert|“{{tr|准备游玩|準備好游玩}}”界面。游戏模式为生存模式，难度为普通
+new player flow ready to play survival hard.png|convert|“{{tr|准备游玩|準備好游玩}}”界面。游戏模式为生存模式，难度为困难
+new player flow ready to play creative.png|convert|“{{tr|准备游玩|準備好游玩}}”界面。游戏模式为创造模式
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Minecraft}}

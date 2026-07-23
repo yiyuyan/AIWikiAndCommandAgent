@@ -1,0 +1,421 @@
+# 页面: 附魔台
+# 来源: https://zh.minecraft.wiki/w/%E9%99%84%E9%AD%94%E5%8F%B0
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 功能方块, 可再生资源, 基岩版独有信息, 方块, 需要图像的页面
+# 抓取时间: 2026-07-14 17:38:14
+# 原始 Wikitext 内容:
+
+{{More images|缺少单独的基岩版渲染图。}}
+{{Infobox block
+|image=Enchanting Table.gif
+|invimage1=Enchanting Table
+|invimage2=----
+|invimage3=Enchanting Table BE
+|light=7
+}}
+{{quote|啊，神奇的还不止这些！它会自动打开并转向靠近它的玩家。如果周围没有人，书会关上并缓慢旋转。|[[Notch]]<ref>https://www.reddit.com/r/Minecraft/comments/kwjnt/notch_twitter_its_an_enchantment_table/c2nsx1l</ref>||Notchface.png}}
+
+'''附魔台（Enchanting Table）'''是一种能够让玩家花费经验等级来为[[工具]]、[[武器]]、[[书]]和[[盔甲]]进行[[附魔（物品修饰）|附魔]]的[[方块]]。
+
+== 生成 ==
+附魔台不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|B1= Book
+|A2= Diamond
+|B2= Obsidian
+|C2= Diamond
+|A3= Obsidian
+|B3= Obsidian
+|C3= Obsidian
+|Output=Enchantment Table
+|type=Decoration block
+}}
+
+== 破坏 ==
+挖掘附魔台的合适工具是镐。附魔台需要木镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+附魔台被破坏后会掉落自身。
+
+== 用途 ==
+附魔台的高度为{{frac|3|4}}格。
+
+与[[台阶]]类似，将附魔台放在[[冰]]上时，附魔台的上表面会变得像冰一样滑，使得玩家能够在其上滑行。
+
+=== 附魔 ===
+{{See also|附魔（物品修饰）}}
+[[File:enchanting-grid.png|缩略图|附魔界面]]
+附魔台主要用于给未附魔的物品[[附魔（物品修饰）|附魔]]。附魔台可以为任何有[[附魔能力]]且没有[[魔咒]]的物品进行附魔；没有附魔能力的[[物品]]不能在附魔台上附魔。附魔台不会提供[[宝藏型魔咒]]。
+
+要附魔物品，首先需要{{control|使用}}世界中的附魔台以进入附魔界面，然后将若干[[青金石]]和接受附魔的物品放入输入[[槽位]]中。
+
+放入物品后，附魔台便会生成至多3个附魔选项，显示在附魔台的界面右侧。每个选项都包含了一个可以应用到该物品上的附魔结果，具体取决于该选项的附魔等级。每个选项中间出现的图案对附魔没有任何影响。悬停在一个选项上会显示其中的一个[[魔咒]]，但实际上可能包含多个魔咒。
+
+在附魔台上进行附魔时，附魔使用的随机数发生器会使用玩家的“附魔种子”（{{nbt|int|XpSeed}}）进行计算。玩家在附魔台上进行附魔后，会重新生成新的附魔种子。附魔种子的存在使玩家在不进行附魔的情况下，相同的物品在相同的有效方块时总是会得到相同的附魔选项。
+
+满足以下条件的选项才能被选择：
+* 玩家当前所持经验等级不低于选项右下角显示的数值，即'''附魔等级'''。
+* 青金石槽位上已放置青金石数量不低于选项左侧显示的数值，即'''经验等级消耗值'''。
+
+点击选项后，附魔台中的青金石堆叠数和玩家的经验等级都会减少等同于经验等级消耗值的数量，并发出回响的书页声，然后将该附魔结果中的魔咒应用到物品上。
+
+创造模式下使用附魔台仍然消耗经验等级。不过，当玩家没有足够的经验等级时，附魔台只会将其扣至0级，且视为等级足够而继续正常附魔。
+
+==== 生成附魔等级 ====
+当把一件可附魔的物品放上附魔台时，附魔台会计算三个选项的随机附魔等级，用于生成附魔结果。
+
+假设有效方块数量为''n''，如果''n''大于15，则设置为15。先计算一个附魔等级基数''b''：
+
+<math>b=\mathrm{randInt}(8)+1+\lfloor\frac{n}{2}\rfloor+\mathrm{randInt}(n+1)</math>
+
+其中，函数<math>\mathrm{randInt}(k)</math>的作用是在闭区间<math>[0,k-1]</math>中产生均匀分布的随机整数。
+
+{{in|je}}对于附魔台内的每一个选项，附魔台都会生成一次基数，即每个选项的基数可能是不同的。{{in|be}}在一次生成内，三个选项的基数是相同的。再根据选项的位置对基数进行调整，决定选项的附魔等级：
+* 第一行：<math>\max\left\{\lfloor\frac{b}{3}\rfloor,1\right\}</math>。
+* 第二行：<math>\lfloor\frac{2b}{3}\rfloor+1</math>。
+* 第三行：<math>\max\{b,2n\}</math>。
+
+下列为有效方块数量和每一行选项的附魔等级取值关系表：
+
+{| class="wikitable"
+! 有效方块数量
+| 0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 || 11 || 12 || 13 || 14 || 15
+|-
+! 第一行
+| 1-2 || 1-3 || 1-3 || 1-4 || 1-4 || 1-5 || 1-5 || 1-6 || 1-6 || 1-7 || 2-7 || 2-8 || 2-8 || 2-9 || 2-9 || 2-10
+|-
+! 第二行
+| 1-6 || 1-7 || 2-8 || 2-9 || 3-10 || 3-11 || 3-12 || 3-13 || 4-14 || 4-15 || 5-16 || 5-17 || 5-18 || 5-19 || 6-20 || 6-21
+|-
+! 第三行
+| 1-8 || 2-9 || 4-11 || 6-12 || 8-14 || 10-15 || 12-17 || 14-18 || 16-20 || 18-21 || 20-23 || 22-24 || 24-26 || 26-27 || 28-29 || 30
+|}
+
+如果第二行生成的附魔等级为1，则第二行会被删除。如果第三行生成的附魔等级小于3，则第三行会被删除。
+
+=== 有效方块 ===
+附魔台周围的'''有效方块'''数量会影响其附魔等级的生成。
+
+一个方块需要满足下列条件才可能被计算为有效方块：
+* {{in|je}}方块必须包含<code>#enchantment_power_provider</code>标签，默认为书架。{{in|be}}方块必须为书架。
+* 必须位于附魔台同一高度或比附魔台高一格，且与附魔台的水平[[切比雪夫距离]]为2。
+
+附魔台会生成<code>enchant</code>{{only|je}}或<code>enchanting_table_particle</code>{{only|be}}[[粒子]]，从有效方块处飘入附魔台。
+
+在下图中的所有书架都可能被计算为有效方块：
+{{layered blueprint|name=Valid Block Positions|default=1层
+|T=Enchantment Table+top|B=Bookshelf
+|----1层|
+BBBBB
+B   B
+B T B
+B   B
+BBBBB
+|----2层|
+BBBBB
+B   B
+B   B
+B   B
+BBBBB
+}}
+
+附魔台和这些有效方块位置之间不能被阻挡，否则这个位置就无法被识别为有效方块。{{in|je}}带有<code>#enchantment_power_transmitter</code>的方块（[[空气]]等可替代方块）不会阻挡有效方块的识别；{{in|be}}只有空气不会阻挡有效方块的识别。
+
+{{in|je}}根据阻挡方块相对于附魔台的位置，其阻挡有效方块的位置也不同：
+* 与附魔台同高度的阻挡方块不会阻挡高一格的有效方块，比附魔台高一格的阻挡方块也不会阻挡与附魔台同高度的有效方块。
+* 位于附魔台侧方的阻挡方块会阻挡它后方的3个有效方块位置。
+* 位于附魔台斜角方向上的阻挡方块会阻挡它后方斜角的1个有效位置。
+
+下图表示了{{el|je}}中阻挡方块的影响，其中[[石头]]代表阻挡方块，[[屏障]]代表被阻挡的有效方块位置，书架代表有效方块：
+{{layered blueprint|name=Block Positions JE|default=1层
+|T=Enchantment Table+top|B=Bookshelf|S=Stone|X=Barrier
+|----1层|
+BXXXB
+B S B
+B T B
+B  SB
+BBBBX
+|----2层|
+BBBBB
+X   B
+XS  B
+XS  B
+XBBBB
+}}
+
+{{in|be}}阻挡方块影响的范围与{{el|je}}不同：
+* 无论阻挡方块与附魔台同高度，还是比附魔台高一格，它都会同时影响上下两层的有效方块判定。
+* 位于附魔台侧方的阻挡方块会阻挡它正后方的2个有效方块位置。
+* 位于附魔台斜角方向上的阻挡方块会阻挡它后方斜角的6个有效位置。
+
+下图表示了{{el|be}}中阻挡方块的影响：
+{{layered blueprint|name=Block Positions BE|default=1层
+|T=Enchantment Table+top|B=Bookshelf|S=Stone|X=Barrier
+|----1层|
+BBXBB
+B S B
+X T B
+X  SX
+XXBXX
+|----2层|
+BBXBB
+B   B
+XS  B
+XS  X
+XXBXX
+}}
+
+下列三种方式都可以使得附魔台获得最大附魔等级：
+
+{| class="wikitable" style="align: center"
+! !! 方法1 !! 方法2 !! 方法3
+|-
+! 所需有效方块数
+| 15 || 16 || 16
+|-
+! 结构
+| 
+{{BlockGrid
+|B=Bookshelf|T=Enchantment Table+top
+|BBBBB
+|B   B
+|B T B
+|B   B
+|BB BB
+}}
+| style="width: calc(80px + 3em)" |
+{{layered blueprint|name=Bookshelf Placement 2|default=1层
+|T=Enchantment Table+top|B=Bookshelf
+|----1层|
+BB BB
+B   B
+  T  
+B   B
+BB BB
+|----2层|
+B   B
+     
+     
+     
+B   B
+}}
+| style="width: calc(80px + 3em)" |
+{{layered blueprint|name=Bookshelf Placement 3|default=1层
+|T=Enchantment Table+top|B=Bookshelf
+|----1层|
+BBBBB
+    B
+  T B
+    B
+     
+|----2层|
+BBBBB
+    B
+    B
+    B
+     
+}}
+|}
+
+=== 控制附魔 ===
+根据附魔台的机制，玩家可以通过多种方式控制物品附魔。
+
+==== 改变有效方块数量 ====
+有效方块的数量影响附魔等级，进而影响生成的魔咒。
+
+如果想要减少有效方块数从而减少附魔等级，可以在附魔台和有效方块之间放置[[火把]]、[[线]]等方块使部分有效方块无效。
+
+==== 进行任意附魔 ====
+对任意物品进行任意等级的附魔都会改变玩家的附魔种子，从而改变所有物品在所有附魔等级上的附魔选项。因此，如果针对某个工具没有称心如意的附魔选项，可以消耗1块青金石和1级经验等级随便附魔一本书或另一个工具来刷新附魔选项，或者在工具附魔后使用[[砂轮]]清除其魔咒。
+
+==== RNG附魔 ====
+{{exclusive|je|section=1}}
+RNG（Random Number Generator）即[https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html 随机数发生器]。附魔种子的生成使用实体自身的随机数发生器的结果。根据当前的魔咒列表和物品附上的魔咒，可以反推附魔种子，根据附魔种子又可以推得实体随机数发生器种子。通过丢弃物品等方式，可以使得实体随机数发生器更新。利用此项特性，可以使附魔种子“固定”到某一个可以获得指定魔咒的种子上，从而进行精准附魔。
+
+=== 符文 ===
+{{Redirect|符文|Minecraft Dungeons中的文字系统|Minecraft Dungeons:Illageralt}}
+{{For|该字体在游戏中的其他使用|字体#SGA}}
+[[File:Enchantment Table animated experience.gif|thumb|300px|符号文字从书架流入的动画]]
+神秘难解的符号文字从书架上浮现并飘进附魔台，并在附魔台的界面中显示，它们即[[wikipedia:en:Commander Keen#Legacy|标准银河字母]]（Standard Galactic Alphabet，SGA）——在《[[wzh:指挥官基恩|指挥官基恩]]》系列电子游戏中使用的一种简单的字母表替代密码。该效果仅在粒子效果启用时出现。
+
+[[File:Standard Galactic Alphabet.png|center]]
+
+如果将视频[[选项]]中的“{{tr|粒子效果|粒子密度}}”设置为“最少”，则无法看到这些符文字母。附魔名称会在以下的单词列表中随机构建：
+
+<blockquote>'''air animal baguette ball beast berata bless cold creature cthulhu cube curse darkness demon destroy dry earth elder elemental embiggen enchant fhtagn fiddle fire free fresh galvanize grow hot humanoid ignite imbue inside klaatu light limited mental mglwnafh niktu of other phnglui physical range rlyeh scrolls self shorten shrink snuff sphere spirit stale stretch the towards twist undead water wet wgahnagl xyzzy'''</blockquote>
+
+先从以上列表中选取三到五个词首尾组合生成魔咒名称，然后使用标准银河字母显示出来，以作装饰。这与各选项实际对应的魔咒并无关系。
+
+=== 自定义名称 ===
+附魔台操作界面中显示的名称是附魔，但该名称可以通过在[[铁砧]]上对附魔台进行重命名或使用{{cmd|data}}命令修改其{{code|CustomName}}标签来自定义。
+
+=== 光源 ===
+附魔台会发出[[亮度等级]]为7的光。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Enchanting Table enchant1.ogg
+|sound2=Enchanting Table enchant2.ogg
+|sound3=Enchanting Table enchant3.ogg
+|source={{tp|soundCategory.block}}
+|description=使用附魔台附魔了一个物品
+|id=block.enchantment_table.use
+|translationkey=subtitles.block.enchantment_table.use
+|subtitle={{tp|subtitles.block.enchantment_table.use}}
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=Enchanting Table enchant1.ogg
+|sound2=Enchanting Table enchant2.ogg
+|sound3=Enchanting Table enchant3.ogg
+|source=方块
+|description=使用附魔台附魔了一个物品
+|id=block.enchanting_table.use
+|typeid=block.enchanting_table.use
+|soundvolume=1.0
+|soundpitch=1.0
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table|generatetranslationkeys=java
+|Enchanting Table
+|showblocktags=je
+|blocktags={{GameTag|block|enchanting_table}}
+|spritetype=block|nameid=enchanting_table|foot=1}}
+{{ID table|displayname=方块实体|spritename=enchanting-table|spritetype=block|nameid=enchanting_table|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table|generatetranslationkeys=bedrock
+|Enchantment Table|spritetype=block|nameid=enchanting_table|showblocktags=be|blocktags={{GameTagBE|block|enchanting_table}}|foot=1}}
+{{ID table|notnamespaced=y|displayname=方块实体|spritename=enchanting-table|spritetype=block|nameid=EnchantTable|foot=1}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+附魔台有方块实体，储存方块拥有的额外数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{load achievements|enchanter;Librarian}}
+
+== 进度 ==
+{{load advancements|story.enchant_item}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2011年9月30日|link={{tweet|notch|119799522170912768}}|附魔台被首次提及。}}
+|{{HistoryLine||2011年9月30日|link=http://imgur.com/2NftV|[[File:Enchanting Table (pre-release).png|32px]] 根据Notch发布的一张附魔台的图片，附魔台原本是用[[圆石]]而不是[[黑曜石]]进行合成。}}
+|{{HistoryLine||2011年10月1日|link={{tweet|notch|120207632228298753}}|附魔界面的图像流出，魔咒使用“[[wikipedia:Standard Galactic Alphabet|标准银河字母]]”写就，第一条魔咒翻译为“Well Played Internets You Are Good”（网友们的表现不错！你做的很好！），第二条是“These Names Will Be Random And Confusing”（这些名字会随机且混乱），第三条是“Each Spell Costs Experience Levels”（每条魔咒都需要经验等级）。标准银河字母最初由Tom Hall发明并在电脑游戏《[[wikipedia:Commander Keen|指挥官基恩]]》中使用。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre3|[[File:Enchanting Table JE1 BE1.png|32px]] 加入了附魔台。
+|玩家可以直接使用附魔台的最高附魔等级，无需放置[[书架]]。
+|附魔台上的魔咒名称使用[[wikipedia:en:Commander Keen#Legacy|标准银河字母]]组成的随机单词命名。}}
+|{{HistoryLine||1.2.1|dev=12w05a|在创造模式下使用附魔台进行附魔不再需要经验。}}
+|{{HistoryLine||1.4.6|dev=12w49a|现在玩家可以对[[书]]进行附魔。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了[[海之眷顾]]和[[饵钓]]两种应用于[[钓鱼竿]]的魔咒，使得玩家能够在附魔台上对钓鱼竿进行附魔了。
+|[[盔甲]]现在可以通过附魔台获得[[耐久]]魔咒了。}}
+|{{HistoryLine||1.8|dev=14w02a|现在使用附魔台进行附魔还需要消耗[[青金石]]。
+|加入了“附魔预测”功能，在附魔台上附魔物品时可以通过选中一项魔咒来预测附魔结果。}}
+|{{HistoryLine||1.11|dev=16w32a|附魔台的方块实体ID从<code>EnchantTable</code>变为<code>enchanting_table</code>。}}
+|{{HistoryLine||1.13|dev=17w47a|附魔台的英文名称由“Enchantment Table”变为“Enchanting Table”。
+|现在可以在附魔台上附魔[[锄]]。
+|[[扁平化]]前，附魔台的数字ID为116。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Enchanting Table JE2.png|32px]] 更改了附魔台的纹理。}}
+|{{HistoryLine|||dev=18w44a|[[File:Enchanting Table JE3.png|32px]] 由于[[黑曜石]]的纹理进行了更改，附魔台的纹理也随之再次进行了更改。}}
+|{{HistoryLine|||dev=18w46a|附魔台的底部不再透明。}}
+|{{HistoryLine|||dev=18w50a|[[File:Enchanting Table JE4 BE2.png|32px]] 由于[[黑曜石]]的纹理再次进行了更改，附魔台的纹理也随之又一次进行了更改。}}
+|{{HistoryLine||1.18|dev=21w37a|附魔台现在会发出7级的光。}}
+|{{HistoryLine|||dev=21w41a|更改了附魔台界面中[[青金石]]槽的纹理，以匹配[[纹理更新]]后的青金石纹理。}}
+|{{HistoryLine|||dev=pre5|再次更改了附魔台界面中青金石槽的纹理。}}
+|{{HistoryLine||1.20|dev=23w14a|现在带有<code>enchantment_power_transmitter</code>标签的方块不会阻断[[书架]]对附魔台的附魔等级增益。}}
+|{{HistoryLine||1.20.2|dev=23w31a|回退了[[Java版1.18-pre5|1.18-pre5]]中对青金石槽纹理的更改，以与[[锻造台]]中青金石槽的纹理匹配。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|[[File:Enchanting Table JE1 BE1.png|32px]] 加入了附魔台。
+|附魔台现在会发出12级的光。
+|附魔台可以在[[切石机（MATTIS）|切石机]]上制作。
+|在创造模式物品栏中添加了附魔台。}}
+|{{HistoryLine|||dev=build 11|附魔台现在能在工作台而不是切石机合成。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Enchanting Table JE4 BE2.png|32px]] 更改了附魔台的纹理。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.21|附魔台不再会发光。}}
+|{{HistoryLine||1.17.30|dev=1.17.20.20|附魔台现在会发出7级的光。}}
+|{{HistoryLine||1.19.30|dev=1.19.30.20|现在附魔台会在附魔物品时发出音效。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|更新了附魔台界面中青金石槽的纹理，以与锻造台中青金石槽的纹理匹配。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.22|附魔台的英文名称由“Enchantment Table”更改为“Enchanting Table”，以匹配{{el|je}}。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.24|现在附魔台只会在使用镐挖掘时掉落。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU7|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|[[File:Enchanting Table JE1 BE1.png|32px]] 加入了附魔台。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Enchanting Table JE4 BE2.png|32px]] 更改了附魔台的纹理。}}
+|{{HistoryLine|new3ds}}
+|{{HistoryLine||0.1.0|[[File:Enchanting Table JE1 BE1.png|32px]] 加入了附魔台。}}
+}}
+
+== 你知道吗 ==
+[[File:Black Runes.png|200px|缩略图|附魔台将生成的粒子传送至书架内部，粒子纹理变为黑色]]
+
+* 书架发出的粒子是由附魔台生成的。粒子先是生成在附魔台内部，然后立即被传送到书架内部。
+* {{in|be}}附魔台会发光是为了解决附魔台上的书不能正确控制亮度的渲染缺陷。附魔台的亮度特性因[[趋同事项]]而加入了{{el|je}}。
+* 附魔台的高度介于整个方块和台阶之间，所以附魔台可以在[[TNT大炮]]中取代台阶或活板门，用作射程放大器。
+* [[隐身]]的玩家靠近附魔台时，台上的书仍会打开。
+* 用以生成附魔界面上用标准银河字母组成的说明文字的单词表中包含了几个玩笑：
+** 一种单词组合“the elder scrolls”可能意在讽刺开发''The Elder Scrolls''（《上古卷轴》）系列的Bethesda及其母公司Zenimax。后者曾起诉Mojang一款名为''Scroll''（《卷轴》）的游戏侵犯其权利。
+** 一种单词组合“klaatu berata niktu”引用了“[[wikipedia:Klaatu barada nikto|Klaatu barada nikto]]”，但有拼写错误。这是一个来源于1951年的电影''The Day the Earth Stood Stil''（《地球停转之日》）的短语。这条短语也经常被其他电影、卡通和游戏引用。
+** “xyzzy”是游戏''Colossal Cave Adventure''（《洞穴深处的冒险》）中的一条咒语。这条咒语也被其他许多游戏用作彩蛋或作弊码。
+** “embiggen”是''Simpsons''（《辛普森的一家》）中的一个虚构的词。原文是“A Noble Spirit Embiggens the Smallest Man”（高贵的心灵使矮小的人变得伟大）。
+* 附魔台必须通过[[宝库]]战利品才能实现可再生。这是因为可用于制造附魔台的[[钻石]]同样依赖宝库战利品实现可再生，而宝库可以被每个玩家打开无限次数<ref>{{bug|MC-274049|||WAI}}</ref>，且[[试炼钥匙]]和[[不祥试炼钥匙]]是[[可再生资源]]。
+
+== 画廊 ==
+{{gallery|
+File:Enchanting Table GUI.png|convert|附魔台界面
+File:YA2DD.png|使用旧纹理的附魔台界面
+File:PE Enchanting GUI.png|[[基岩版]]中附魔台的界面（无物品和有物品放置时）
+File:Enchanting table gui new texture.png|基岩版中的附魔台新版GUI纹理，青金石槽位使用新版纹理，但未被使用，以及还有附魔时所要消耗的青金石数量的纹理也未被使用
+File:Enchanting 1.8.png|附魔台界面的截图，显示其中一个选项
+File:Enchanting-Table.png|附魔台从附近的书架中“汲取知识”
+File:Books optimal.png|围绕附魔台放置15个[[书架]]可以使附魔台获得最高附魔等级
+File:Enchant Table with closed book.jpg|书本闭合且转动着的附魔台
+File:Enchantment Table Book Entity Texture Guide.png|书实体颜色编码的纹理
+File:Enchantment Table Book Entity Texture Guide Legend.png|书实体纹理的颜色编码图例
+File:Old Enchanting Table.png|附魔台早期开发时的外观
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks}}
+
+[[Category:功能方块]]
+
+[[de:Zaubertisch]]
+[[en:Enchanting Table]]
+[[es:Mesa de encantamientos]]
+[[fr:Table d'enchantement]]
+[[hu:Bűvölőasztal]]
+[[it:Tavolo per incantesimi]]
+[[ja:エンチャントテーブル]]
+[[ko:마법 부여대]]
+[[lzh:淬靈案]]
+[[nl:Betoveringstafel]]
+[[pl:Stół do zaklinania]]
+[[pt:Mesa de Encantamentos]]
+[[ru:Стол зачаровывания]]
+[[th:โต๊ะร่ายมนตร์]]
+[[uk:Стіл зачарування]]

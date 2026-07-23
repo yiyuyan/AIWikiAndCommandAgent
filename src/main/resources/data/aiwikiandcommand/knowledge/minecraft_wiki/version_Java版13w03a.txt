@@ -1,0 +1,157 @@
+# 页面: Java版13w03a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8813w03a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:05
+# 原始 Wikitext 内容:
+
+{{Dangerous version|漏斗矿车落入虚空会导致游戏崩溃。<ref>{{bug|MC-7619|||Fixed}}</ref>}}
+{{Lost version|pre-reupload}}{{Launcher unavailable}}
+{{Infobox version
+|title=13w03a
+|image=13w03a.png
+|image2=Java Edition 13w03a Simplified.png\Java Edition 13w03a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2013年1月17日
+|downloads=
+; 原始版本
+: <s>客户端</s>
+: [https://vault.omniarchive.uk/archive/java/server-release/1.5/pre/13w03a-1538.jar 服务端]（<s>.exe</s>）
+; 重新上传1
+: [https://vault.omniarchive.uk/archive/java/client-release/1.5/pre/13w03a-1613.jar 客户端]（[https://dn710009.ca.archive.org/0/items/Minecraft-JSONs/13w03a.json .json]）
+: <s>服务端</s>（<s>.exe</s>）
+; 重新上传2
+: [https://vault.omniarchive.uk/archive/java/client-release/1.5/pre/13w03a-1647.jar 客户端]（[https://dn710009.ca.archive.org/0/items/Minecraft-JSONs/13w03a.json .json]）
+: [https://vault.omniarchive.uk/archive/java/server-release/1.5/pre/13w03a-1647.jar 服务端]（[https://vault.omniarchive.uk/archive/java/server-release/1.5/pre/13w03a-1647.exe .exe]）
+|parent=1.5
+|prevparent=1.4.7
+|prev=13w02b
+|next=13w04a
+|nextparent=1.5.1
+}}<onlyinclude>
+
+'''13w03a'''是[[Java版1.5]]的第5个快照，发布于2013年1月17日<ref>{{cite|url=https://web.archive.org/web/20130119145655/http://www.mojang.com/2013/01/minecraft-snapshot-13w03a/|title=Minecraft Snapshot 13w03a|author=Dinnerbone|website=Mojang.com|date=Jan 17, 2013}}</ref>，加入了投掷器、漏斗矿车和命令{{cmd|testfor}}，更新了命令方块机制和生物AI，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[投掷器]]'''
+* 将物品置于其前面的容器中，如果没有容器，则不使用该物品。
+* [[发射器]]会朝玩家“发射”物品，而[[投掷器]]会朝玩家“投掷”物品。<ref name="DropperInfo">{{tweet|Dinnerbone|291942193969639425}}</ref>
+* 合成配方是7个[[圆石]]摆成∩形状，在中间放置一个[[漏斗]]并在底部放置一个[[红石粉]]。
+
+=== 非生物实体 ===
+'''[[漏斗矿车]]'''
+* 合成配方为[[矿车]]上方放置一个漏斗。
+* 只能通过一个漏斗倒空。
+* 倒空后才能捡起物品。
+
+=== 命令格式 ===
+'''{{cmd|testfor}}'''
+* 检测玩家，用比较器来获得表示玩家数量的红石信号。
+
+== 更改 ==
+=== 方块 ===
+'''[[石英柱]]'''
+* 石英柱现在能以任何方向摆放，方法与木头一样。
+
+'''[[命令方块]]'''
+* 放于隔壁的[[红石比较器]]能指出上一个命令是否运行成功。
+
+'''[[探测铁轨]]'''
+* 由它们充能的比较器会根据铁轨上的容器空满度输出信号。
+
+'''[[水]]'''
+* 创造无限水方块不再需要下方有方块，而是只需要有一个水源方块。
+** 这代表使用铁桶和在水上建筑不会把河流和海弄乱。
+
+=== 生物 ===
+'''[[骷髅]]'''
+* 现在更难地近身攻击。
+** 根据难度变更。
+** 目标越近，攻击速度越快。
+** 会攻击在一格外的玩家。
+
+'''[[僵尸]]'''
+* 现在更难被攻击。
+** 根据难度变更。
+** 会集中攻击单个目标。
+** 着火的僵尸会使玩家着火。
+** 如果在远方被击中，僵尸会向玩家移动。
+
+=== 非生物实体 ===
+'''[[TNT矿车]]'''
+* 当是通过激活铁轨引爆时，它们不再会将铁轨和支撑铁轨的方块炸毁。
+* 仍会炸毁红石材料。
+
+=== 常规 ===
+'''[[选项]]'''
+* 在多人游戏菜单中添加了新的聊天选项：“聚焦高度”、“淡化高度”和“宽度”。
+* 将[[主菜单]]的纹理包按钮移至选项中，以便在游戏内更改纹理包。
+
+== 修复 ==
+{{Fixes|fixedin=13w03a|prefix=Snapshot|showdesc=1
+|;old
+|547|箭无法正确着地。
+|592|为堆叠的皮革盔甲染色会导致皮革盔甲的数量不断增加。
+|916|水源块上方无法正确放置水源块。
+|1570|拉杆放置时的方向是随机的。
+|2582|斜坡上的动力铁轨和激活铁轨会一直保持充能和激活状态。
+|2711|唱片机在没有唱片的情况下破坏会导致游戏崩溃。
+|2989|拿着食物单击鼠标右键时，方块会被“重置”。
+|3169|凋灵在和平难度下生成时的漏洞。
+|3449|当手持的物品发生变化时，方块的破损状态会被重置。
+|4770|聊天选项中的“仅命令”设置不起作用。
+|;dev
+|5719|点击物品栏内的物品有时会出现延迟或不起作用。
+|5737|世界的某些部分会生成错误。
+|5744|即使下界没有昼夜之分，但阳光探测器仍然能够输出红石信号。
+|6757|当以物品形式渲染数据值为55（红石线）、64（橡木门方块）、71（铁门方块）和 95（上锁的箱子）的方块会导致游戏崩溃。
+|6833|多个TNT矿车爆炸会造成严重的卡顿（“核矿车”）。
+|6900|上锁的箱子会导致游戏崩溃。
+|7019|TNT矿车爆炸过快。
+|7111|西瓜梗和南瓜梗使用的是成熟阶段的纹理。
+|7119|蛋糕放置时侧面会显示为内部纹理。
+|;previous
+|7084|当查看带有可以使游戏崩溃的物品的箱子时，游戏会崩溃。
+|7085|调试文件{{filename|stitched_items.png}}会将其他纹理叠加在一起。
+|7108|漏斗可以吸取和将物品输出至未与其相连的箱子内。
+|7125|漏斗在放置后无法更新其激活状态。
+|7141|如果漏斗吸取的物品比其容纳量多，多余的物品可能会被复制。
+|7143|在末地停留几秒后游戏会崩溃：{{cd|NullPointerException}}。
+|7277|在macOS系统上无法加载纹理包。
+|7301|漏斗无法完全吸取大型陷阱箱内的物品。
+|7323|TNT矿车脱轨后会爆炸，即使其没有被激活。
+|7342|死亡消息中的实体名称显示的是其字符串。
+|7349|TNT矿车会导致游戏崩溃：{{cd|Ticking Entity}}。
+|;hotfix
+|7620|漏斗可以复制物品的漏洞。
+|7622|由于破坏甘蔗引起的崩溃。
+|7623|喷溅型药水内部的药水纹理丢失。
+|7625|无法用空手破坏方块。
+|7775|TNT矿车和激活铁轨没有名称。
+|;other
+|1.|死亡消息“[玩家]与[玩家/生物]不共戴天”无法显示。
+}}</onlyinclude>
+
+== 重新上传 ==
+该版本于16:13（UTC）被第一次重新上传，以修复[[投掷器]]能用于复制物品的漏洞。
+
+该版本于16:47（UTC）被第二次重新上传，以修复无法用空手打破方块，并在挖掘方块时随机崩溃的漏洞。<ref name="DropperInfo"/></onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.0}}
+
+[[Category:重新上传过的版本]]
+
+[[de:13w03a]]
+[[en:Java Edition 13w03a]]
+[[es:Java Edition 13w03a]]
+[[fr:Édition Java 13w03a]]
+[[ja:Java Edition 13w03a]]
+[[ko:Java Edition 13w03a]]
+[[pt:Edição Java 13w03a]]
+[[ru:13w03a (Java Edition)]]
+[[uk:13w03a (Java Edition)]]

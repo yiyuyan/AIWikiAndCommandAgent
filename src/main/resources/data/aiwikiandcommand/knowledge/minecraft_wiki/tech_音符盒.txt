@@ -1,0 +1,1396 @@
+# 页面: 音符盒
+# 来源: https://zh.minecraft.wiki/w/%E9%9F%B3%E7%AC%A6%E7%9B%92
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 教育版独有信息, 方块, 红石, 红石机制
+# 抓取时间: 2026-07-14 17:38:44
+# 原始 Wikitext 内容:
+
+{{About|播放单个音符的方块|播放[[音乐唱片]]的方块|唱片机}}
+{{Infobox block
+|image=Note Block.png
+|invimage=Note Block
+}}
+{{relevant tutorial|红石音乐}}
+'''音符盒（Note Block）'''是一种会在受到玩家{{ctrl|敲击}}或接受[[红石信号]]后发出声音的方块。
+
+== 生成 ==
+=== 自然生成 ===
+音符盒会在[[远古城市]]的冰窖建筑中作为“门铃”生成。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Any Planks |B1= Any Planks |C1= Any Planks
+|A2= Any Planks |B2= Redstone Dust   |C2= Any Planks
+|A3= Any Planks |B3= Any Planks |C3= Any Planks
+|Output= Note Block
+|type= Redstone
+}}
+
+== 破坏 ==
+挖掘音符盒的合适工具是斧。
+
+{{Breaking table}}
+
+音符盒被破坏后会掉落自身。
+
+== 用途 ==
+=== 奏乐 ===
+==== 音符 ====
+[[File:Note-Block.png|275px|缩略图|右|一个正在发出声音的音符盒]]
+
+当被玩家{{ctrl|敲击}}<ref group="注">{{in|be}}使用“{{tr|摇杆并点击进行互动|搖桿和點擊以進行互動}}”或“{{tr|方向键并点击进行互动|方向鍵和點擊以進行互動}}”控制模式时，可通过长按来敲击。</ref>或被红石信号激活，并且上方1格为[[空气]]时，音符盒会奏出彩色的音符。
+
+音符盒发出的声音最远能传播48格，音量随玩家与音符盒的距离增大而线性减小。
+
+每当音符盒发声时，其上部都会弹出一个音符的粒子效果；音符的颜色仅取决于发出声音的音高。
+
+每次{{control|使用}}音符盒都会让其下一个发出音符的音高提高半音。按照十二平均律，每个乐器总共有两个完整的八度音程（即从起始音到比其高两个八度的音），总共25个音。
+
+以钢琴的音域为准，贝斯和迪吉里杜管比标准音域低两个八度，吉他比标准音域低一个八度，长笛、牛铃比标准音域高一个八度，而铃铛、管钟和木琴比标准音域高两个八度；因此，玩家可以通过组合不同乐器来获得六个八度（72个半音）的音域。音域不同的根本原因是不同乐器的采样在不同的音域。也就是说，如果使用{{cmd|playsound}}命令来播放不同的音符声音，在音高参数相同时播放的音高其实是不一致的。
+
+标准音域的范围是F♯<sub>3</sub>～F♯<sub>5</sub>。在提高至F♯<sub>5</sub>后再次点击音符盒就会复位至发出F♯<sub>3</sub>的状态。下面是具体的音高列表。<ref>[http://www.minecraftforum.net/viewtopic.php?f=1020&t=136347 作者：cookingfat]</ref><ref>[http://www.minecraftforum.net/forums/mapping-and-modding/resource-packs/resource-pack-discussion/1255570 /playsound音高图表。作者：kwerti]</ref>
+
+{| data-description="音高参考"
+|-
+|
+{| class="wikitable"
+|-
+! 音高（第一八度）
+! 使用次数
+! 音高（{{Cmd|playsound}}）
+! Java版颜色（<abbr title="十六进制颜色代码">hex</abbr>）
+! 基岩版颜色（<abbr title="十六进制颜色代码">hex</abbr>）（修正后<ref name="MCPE-15116">{{bug|MCPE-15116|||Fixed}}</ref><ref name="MCPE-181954">{{bug|MCPE-181954}}</ref>）
+|-
+| F♯/G♭- Fi/Se
+| 0
+| 0.5
+| {{color|#77D700}}
+| {{color|#59E800}}
+|-
+| G - Sol
+| 1
+| 2{{^|-{{frac|11|12}}}} ≈ 0.529732
+| {{color|#95C000}}
+| {{color|#84CE00}}
+|-
+| G♯/A♭- Si/Le
+| 2
+| 2{{^|-{{frac|10|12}}}} ≈ 0.561231
+| {{color|#B2A500}}
+| {{color|#ACAC00}}
+|-
+| A - La
+| 3
+| 2{{^|-{{frac|9|12}}}} ≈ 0.594604
+| {{color|#CC8600}}
+| {{color|#CE8400}}
+|-
+| A♯/B♭- Li/Te
+| 4
+| 2{{^|-{{frac|8|12}}}} ≈ 0.629961
+| {{color|#E26500}}
+| {{color|#E85900}}
+|-
+| B - Ti
+| 5
+| 2{{^|-{{frac|7|12}}}} ≈ 0.667420
+| {{color|#F34100}}
+| {{color|#F92E00}}
+|-
+| C - Do
+| 6
+| 2{{^|-{{frac|6|12}}}} ≈ 0.707107
+| {{color|#FC1E00}}
+| {{color|#FF0606}}
+|-
+| C♯/D♭- Di/Ra
+| 7
+| 2{{^|-{{frac|5|12}}}} ≈ 0.749154
+| {{color|#FE000F}}
+| {{color|#F9002E}}
+|-
+| D - Re
+| 8
+| 2{{^|-{{frac|4|12}}}} ≈ 0.793701
+| {{color|#F70033}}
+| {{color|#E80059}}
+|-
+| D♯/E♭- Ri/Me
+| 9
+| 2{{^|-{{frac|3|12}}}} ≈ 0.840896
+| {{color|#E8005A}}
+| {{color|#CE0084}}
+|-
+| E - Mi
+| 10
+| 2{{^|-{{frac|2|12}}}} ≈ 0.890899
+| {{color|#CF0083}}
+| {{color|#AC00AC}}
+|-
+| F - Fa
+| 11
+| 2{{^|-{{frac|1|12}}}} ≈ 0.943874
+| {{color|#AE00A9}}
+| {{color|#8400CE}}
+|-
+| F♯/G♭- Fi/Se
+| 12
+| 1.0
+| {{color|#8600CC}}
+| {{color|#5900E8}}
+|}
+|
+{| class="wikitable"
+|-
+! 音高（第二八度）
+! 使用次数
+! 音高（{{Cmd|playsound}}）
+! Java版颜色（<abbr title="十六进制颜色代码">hex</abbr>）
+! 基岩版颜色（<abbr title="十六进制颜色代码">hex</abbr>）（修正后<ref name="MCPE-15116"/><ref name="MCPE-181954"/>）
+|-
+| F♯/G♭- Fi/Se
+| 12
+| 1.0
+| {{color|#8600CC}}
+| {{color|#5900E8}}
+|-
+| G - Sol
+| 13
+| 2{{^|{{frac|1|12}}}} ≈ 1.059463
+| {{color|#5B00E7}}
+| {{color|#2E00F9}}
+|-
+| G♯/A♭- Si/Le
+| 14
+| 2{{^|{{frac|2|12}}}} ≈ 1.122462
+| {{color|#2D00F9}}
+| {{color|#0606FF}}
+|-
+| A - La
+| 15
+| 2{{^|{{frac|3|12}}}} ≈ 1.189207
+| {{color|#020AFE}}
+| {{color|#002EF9}}
+|-
+| A♯/B♭- Li/Te
+| 16
+| 2{{^|{{frac|4|12}}}} ≈ 1.259921
+| {{color|#0037F6}}
+| {{color|#0059E8}}
+|-
+| B - Ti
+| 17
+| 2{{^|{{frac|5|12}}}} ≈ 1.334840
+| {{color|#0068E0}}
+| {{color|#0084CE}}
+|-
+| C - Do
+| 18
+| 2{{^|{{frac|6|12}}}} ≈ 1.414214
+| {{color|#009ABC}}
+| {{color|#00ACAC}}
+|-
+| C♯/D♭- Di/Ra
+| 19
+| 2{{^|{{frac|7|12}}}} ≈ 1.498307
+| {{color|#00C68D}}
+| {{color|#00CE84}}
+|-
+| D - Re
+| 20
+| 2{{^|{{frac|8|12}}}} ≈ 1.587401
+| {{color|#00E958}}
+| {{color|#00E859}}
+|-
+| D♯/E♭- Ri/Me
+| 21
+| 2{{^|{{frac|9|12}}}} ≈ 1.681793
+| {{color|#00FC21}}
+| {{color|#00F92E}}
+|-
+| E - Mi
+| 22
+| 2{{^|{{frac|10|12}}}} ≈ 1.781797
+| {{color|#1FFC00}}
+| {{color|#06FF06}}
+|-
+| F - Fa
+| 23
+| 2{{^|{{frac|11|12}}}} ≈ 1.887749
+| {{color|#59E800}}
+| {{color|#2EF900}}
+|-
+| F♯/G♭- Fi/Se
+| 24
+| 2.0
+| {{color|#94C100}}
+| {{color|#59E800}}
+|}
+|}
+
+图片版本：
+
+{{Filetr|Noteblock reference.png}}
+
+玩家也可以通过弹出音符的颜色大致的确定音高。
+
+[[File:large note colors.png]]
+
+{{in|je}}音高也可以打开[[调试屏幕]]时对着音符盒得知，值为0到24。
+
+==== 乐器 ====
+音符盒放出的乐器声取决于音符盒下方方块的[[方块基本属性#乐器|乐器方块基本属性]]。
+
+{| class="sortable wikitable list-style-none" data-description="Instruments & block materials"
+ ! rowspan="2" | 方块
+ ! rowspan="2" | 音色
+ ! rowspan="2" | {{tooltip|音域|按科学音高记法}}
+ ! colspan="2" | 声音事件名称
+ ! colspan="2" | 声音事件加入版本
+|-
+![[Java版声音事件]]
+![[基岩版声音事件]]
+!{{el|je}}
+!{{el|be}}
+|-
+ | 
+* {{BlockLink|Log}}
+* {{BlockLink|Stem}}
+* {{BlockLink|Block of Bamboo}}
+* {{BlockLink|Stripped Log}}
+* {{BlockLink|Stripped Stem}}
+* {{BlockLink|Block of Stripped Bamboo}}
+* {{BlockLink|Wood}}
+* {{BlockLink|Hyphae}}
+* {{BlockLink|Stripped Wood}}
+* {{BlockLink|Stripped Hyphae}}
+* {{BlockLink|Mangrove Roots}}{{only|je}}
+* {{BlockLink|Planks|木板或竹板}}
+* {{BlockLink|Bamboo Mosaic}}
+* {{BlockLink|Wooden Stairs|木楼梯或竹楼梯}}
+* {{BlockLink|Bamboo Mosaic Stairs}}
+* {{BlockLink|Wooden Slabs|木台阶或竹台阶}}
+* {{BlockLink|Bamboo Mosaic Slab}}
+* {{BlockLink|Wooden Doors|木门或竹门}}
+* {{BlockLink|Wooden Trapdoors|木质或竹质活板门}}
+* {{BlockLink|Wooden Pressure Plates|木质或竹质压力板}}
+* {{BlockLink|Wooden Buttons|木质或竹质按钮}}{{only|be}}
+* {{BlockLink|Wooden Fences|木质或竹质栅栏}}
+* {{BlockLink|Fence Gate}}
+* {{BlockLink|Sign}}
+* {{BlockLink|Hanging Sign}}
+* {{BlockLink|Shelf}}
+* {{BlockLink|Chest}}
+* {{BlockLink|Trapped Chest}}
+* {{BlockLink|Barrel}}
+* {{BlockLink|Crafting Table}}
+* {{BlockLink|Cartography Table}}
+* {{BlockLink|Fletching Table}}
+* {{BlockLink|Smithing Table}}
+* {{BlockLink|Loom}}
+* {{BlockLink|Campfire}}
+* {{BlockLink|Soul Campfire}}
+* {{BlockLink|Composter}}
+* {{BlockLink|Note Block|link=none}}
+* {{BlockLink|Jukebox}}
+* {{BlockLink|Bee Nest}}
+* {{BlockLink|Beehive}}
+* {{BlockLink|Bookshelf}}
+* {{BlockLink|Chiseled Bookshelf}}
+* {{BlockLink|Lectern}}
+* {{BlockLink|Banner}}
+* {{BlockLink|Mushroom Blocks}}
+* {{BlockLink|Creaking Heart}}{{only|be}}
+* {{BlockLink|Camera}}{{only|be|ee}}
+ | {{sound|贝斯|Note block bass.ogg}}
+ | style="text-align:center" | F♯<sub>1</sub>–F♯<sub>3</sub>
+ | <code>block.note_block.bass</code>
+ | <code>note.bass</code>
+ | Beta 1.2
+ | 0.13.0
+ |-
+ |
+* {{BlockLink|Sand}}
+* {{BlockLink|Red Sand}}
+* {{BlockLink|Gravel}}
+* {{BlockLink|Concrete Powder}}
+* {{BlockLink|Suspicious Sand}}
+* {{BlockLink|Suspicious Gravel}}
+* {{BlockLink|Heavy Core}}
+ | {{sound|小军鼓|Note block snare.ogg}}
+ | style="text-align:center" | —
+ | <code>block.note_block.snare</code>
+ | <code>note.snare</code>
+ | Beta 1.2
+ | 0.13.0
+ |-   
+ |
+* {{BlockLink|Glass}}
+* {{BlockLink|Stained Glass}}
+* {{BlockLink|Tinted Glass}}
+* {{BlockLink|Glass Pane}}
+* {{BlockLink|Stained Glass Pane}}
+* {{BlockLink|Sea Lantern}}
+* {{BlockLink|Conduit}}{{only|je}}
+* {{BlockLink|Hardened Glass}}{{only|be|ee}}
+* {{BlockLink|Hardened Stained Glass}}{{only|be|ee}}
+* {{BlockLink|Hardened Glass Pane}}{{only|be|ee}}
+* {{BlockLink|Hardened Stained Glass Pane}}{{only|be|ee}}
+ | {{sound|踩镲|Note block click.ogg}}
+ | style="text-align:center" | —
+ | <code>block.note_block.hat</code>
+ | <code>note.hat</code>
+ | Beta 1.2
+ | 0.13.0
+ |-
+ |
+* {{BlockLink|Stone}}及对应的台阶、楼梯和压力板
+* {{BlockLink|Cobblestone}}及对应的台阶、楼梯和墙
+* {{BlockLink|Mossy Cobblestone}}及对应的台阶、楼梯和墙
+* {{BlockLink|Smooth Stone}}及对应的台阶
+* {{BlockLink|Granite}}及对应的台阶、楼梯和墙
+* {{BlockLink|Polished Granite}}及对应的台阶和楼梯
+* {{BlockLink|Diorite}}及对应的台阶、楼梯和墙
+* {{BlockLink|Polished Diorite}}及对应的台阶和楼梯
+* {{BlockLink|Andesite}}及对应的台阶、楼梯和墙
+* {{BlockLink|Polished Andesite}}及对应的台阶和楼梯
+* {{BlockLink|Deepslate}}
+* {{BlockLink|Cobbled Deepslate}}及对应的台阶、楼梯和墙
+* {{BlockLink|Chiseled Deepslate}}
+* {{BlockLink|Polished Deepslate}}及对应的台阶、楼梯和墙
+* {{BlockLink|Reinforced Deepslate}}
+* {{BlockLink|Tuff}}及对应的台阶、楼梯和墙
+* {{BlockLink|Chiseled Tuff}}
+* {{BlockLink|Polished Tuff}}及对应的台阶、楼梯和墙
+* {{BlockLink|Sandstone}}及对应的台阶、楼梯和墙
+* {{BlockLink|Chiseled Sandstone}}
+* {{BlockLink|Smooth Sandstone}}及对应的台阶和楼梯
+* {{BlockLink|Cut Sandstone}}及对应的台阶和楼梯
+* {{BlockLink|Red Sandstone}}及对应的台阶、楼梯和墙
+* {{BlockLink|Chiseled Red Sandstone}}
+* {{BlockLink|Smooth Red Sandstone}}及对应的台阶和楼梯
+* {{BlockLink|Cut Red Sandstone}}及对应的台阶和楼梯
+* {{BlockLink|Prismarine}}及对应的台阶、楼梯和墙
+* {{BlockLink|Netherrack}}
+* {{BlockLink|Basalt}}
+* {{BlockLink|Smooth Basalt}}
+* {{BlockLink|Polished Basalt}}
+* {{BlockLink|Blackstone}}及对应的台阶、楼梯和墙
+* {{BlockLink|Gilded Blackstone}}
+* {{BlockLink|Polished Blackstone}}及对应的台阶、楼梯、墙和压力板
+* {{BlockLink|Chiseled Polished Blackstone}}
+* {{BlockLink|End Stone}}
+* {{BlockLink|Stone Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Cracked Stone Bricks}}
+* {{BlockLink|Chiseled Stone Bricks}}
+* {{BlockLink|Mossy Stone Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Deepslate Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Cracked Deepslate Bricks}}
+* {{BlockLink|Deepslate Tiles}}及对应的台阶、楼梯和墙
+* {{BlockLink|Cracked Deepslate Tiles}}
+* {{BlockLink|Tuff Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Chiseled Tuff Bricks}}
+* {{BlockLink|Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Mud Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Block of Resin}}{{only|je}}
+* {{BlockLink|Resin Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Chiseled Resin Bricks}}
+* {{BlockLink|Prismarine Bricks}}及对应的台阶和楼梯
+* {{BlockLink|Dark Prismarine}}及对应的台阶和楼梯
+* {{BlockLink|Nether Bricks}}及对应的台阶、楼梯、墙和栅栏
+* {{BlockLink|Cracked Nether Bricks}}
+* {{BlockLink|Chiseled Nether Bricks}}
+* {{BlockLink|Red Nether Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Polished Blackstone Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Cracked Polished Blackstone Bricks}}
+* {{BlockLink|End Stone Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Purpur Block}}及对应的台阶和楼梯
+* {{BlockLink|Purpur Pillar}}及对应的台阶和楼梯
+* {{BlockLink|Sulfur}}及对应的台阶、楼梯和墙
+* {{BlockLink|Polished Sulfur}}及对应的台阶、楼梯和墙
+* {{BlockLink|Sulfur Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Chiseled Sulfur}}
+* {{BlockLink|Potent Sulfur}}
+* {{BlockLink|Sulfur Spike}}
+* {{BlockLink|Cinnabar}}及对应的台阶、楼梯和墙
+* {{BlockLink|Polished Cinnabar}}及对应的台阶、楼梯和墙
+* {{BlockLink|Cinnabar Bricks}}及对应的台阶、楼梯和墙
+* {{BlockLink|Chiseled Cinnabar}}
+* {{BlockLink|Block of Quartz}}及对应的台阶和楼梯
+* {{BlockLink|Chiseled Quartz Block}}
+* {{BlockLink|Quartz Pillar}}及对应的楼梯
+* {{BlockLink|Smooth Quartz}}及对应的台阶和楼梯
+* {{BlockLink|Quartz Bricks}}及对应的楼梯
+* {{BlockLink|Crimson Nylium}}
+* {{BlockLink|Warped Nylium}}
+* {{BlockLink|Concrete}}
+* {{BlockLink|Terracotta}}
+* {{BlockLink|Dripstone Block}}
+* {{BlockLink|Block of Coal}}{{only|je}}
+* {{BlockLink|Block of Raw Copper}}
+* {{BlockLink|Block of Raw Iron}}
+* {{BlockLink|Block of Amethyst}}{{only|be}}
+* {{only|for=除[[远古残骸]]外的|je}}所有矿石
+* {{BlockLink|Magma Block}}
+* {{BlockLink|Obsidian}}
+* {{BlockLink|Crying Obsidian}}
+* {{BlockLink|Bedrock}}
+* {{BlockLink|Coral Block}}
+* {{BlockLink|Dead Coral Blocks}}
+* {{BlockLink|Coral Fan}}{{only|be}}
+* {{BlockLink|Dead Coral Fans}}
+* {{BlockLink|Coral}}{{only|be}}
+* {{BlockLink|Dead Coral}}{{only|be}}
+* {{BlockLink|Stone Button}}{{only|be}}
+* {{BlockLink|Polished Blackstone Button}}{{only|be}}
+* {{BlockLink|Pointed Dripstone}}{{only|je}}
+* {{BlockLink|Creaking Heart}}{{only|je}}
+* {{BlockLink|Dragon Egg}}{{only|be}}
+* {{BlockLink|Furnace}}
+* {{BlockLink|Smoker}}
+* {{BlockLink|Blast Furnace}}
+* {{BlockLink|Dispenser}}
+* {{BlockLink|Dropper}}
+* {{BlockLink|Crafter}}{{only|be}}
+* {{BlockLink|Observer}}
+* {{BlockLink|Respawn Anchor}}
+* {{BlockLink|Ender Chest}}
+* {{BlockLink|Stonecutter}}
+* {{BlockLink|Enchanting Table}}
+* {{BlockLink|Vault}}
+* {{BlockLink|Ominous Vault}}
+* {{BlockLink|End Portal Frame}}
+* {{BlockLink|Monster Spawner}}
+* {{BlockLink|Trial Spawner}}
+* {{BlockLink|Ominous Trial Spawner}}
+* {{BlockLink|Petrified Oak Slab}}
+* {{BlockLink|Invisible Bedrock}}{{only|be}}
+* {{BlockLink|Moving Piston}}{{only|be}}
+* {{BlockLink|Heat Block}}{{only|be|ee}}
+* {{BlockLink|Compound Creator}}{{only|be|ee}}
+* {{BlockLink|Element Constructor}}{{only|be|ee}}
+* {{BlockLink|Lab Table}}{{only|be|ee}}
+* {{BlockLink|Material Reducer}}{{only|be|ee}}
+* {{BlockLink|Border}}{{only|be|ee}}
+* {{BlockLink|Glowing Obsidian}}{{only|be|ee}}
+ | {{sound|底鼓|Note block bass drum.ogg}}
+ | style="text-align:center" | —
+ | <code>block.note_block.basedrum</code>
+ | <code>note.bd</code>
+ | Beta 1.2
+ | 0.13.0
+ |-
+ | 
+* {{BlockLink|Block of Gold}}
+ | {{sound|“铃铛”（钟琴）|Note block bell.ogg}}
+ | style="text-align:center" | F♯<sub>5</sub>–F♯<sub>7</sub>
+ | <code>block.note_block.bell</code>
+ | <code>note.bell</code>
+ | 1.12
+ | 1.13.0
+ |-
+ | 
+* {{BlockLink|Clay}}
+* {{BlockLink|Honeycomb Block}}{{only|be}}<ref>{{bug|MC-212976}}</ref>
+* {{BlockLink|Infested Stone}}{{only|be}}
+* {{BlockLink|Block of Resin}}{{only|be}}
+ | {{sound|长笛|Note block flute.ogg}}
+ | style="text-align:center" | F♯<sub>4</sub>–F♯<sub>6</sub>
+ | <code>block.note_block.flute</code>
+ | <code>note.flute</code>
+ | 1.12
+ | 1.13.0
+ |-
+ |
+* {{BlockLink|Packed Ice}}
+ | {{sound|管钟|Note block chime.ogg}}
+ | style="text-align:center" | F♯<sub>5</sub>–F♯<sub>7</sub>
+ | <code>block.note_block.chime</code>
+ | <code>note.chime</code>
+ | 1.12
+ | 1.13.0
+ |-
+ |
+* {{BlockLink|Wool}}
+ | {{sound|吉他|Note block guitar.ogg}}
+ | style="text-align:center" | F♯<sub>2</sub>–F♯<sub>4</sub>
+ | <code>block.note_block.guitar</code>
+ | <code>note.guitar</code>
+ | 1.12
+ | 1.13.0
+ |-
+ |
+* {{BlockLink|Bone Block}}
+ | {{sound|木琴|Note block xylophone.ogg}}
+ | style="text-align:center" | F♯<sub>5</sub>–F♯<sub>7</sub>
+ | <code>block.note_block.xylophone</code>
+ | <code>note.xylophone</code>
+ | 1.12
+ | 1.13.0
+ |-
+ |
+* {{BlockLink|Block of Iron}}
+ | {{sound|“铁木琴”（颤音琴）|Note block iron xylophone.ogg}}
+ | style="text-align:center" | F♯<sub>3</sub>–F♯<sub>5</sub>
+ | <code>block.note_block.iron_xylophone</code>
+ | <code>note.iron_xylophone</code>
+ | 1.14
+ | 1.13.0
+ |-
+ |
+* {{BlockLink|Soul Sand}}
+ | {{sound|牛铃|Note block cow bell.ogg}}
+ | style="text-align:center" | F♯<sub>4</sub>–F♯<sub>6</sub>
+ | <code>block.note_block.cow_bell</code>
+ | <code>note.cow_bell</code>
+ | 1.14
+ | 1.13.0
+ |-
+ | 
+* {{BlockLink|Pumpkin}}
+ | {{sound|迪吉里杜管|Note block didgeridoo.ogg}}
+ | style="text-align:center" | F♯<sub>1</sub>–F♯<sub>3</sub>
+ | <code>block.note_block.didgeridoo</code>
+ | <code>note.didgeridoo</code>
+ | 1.14
+ | 1.13.0
+ |-
+ | 
+* {{BlockLink|Block of Emerald}}
+ | {{sound|“芯片”（方波）|Note block bit.ogg}}
+ | style="text-align:center" | F♯<sub>3</sub>–F♯<sub>5</sub>
+ | <code>block.note_block.bit</code>
+ | <code>note.bit</code>
+ | 1.14
+ | 1.13.0
+ |-
+ | 
+* {{BlockLink|Hay Bale}}
+ | {{sound|班卓琴|Note block banjo.ogg}}
+ | style="text-align:center" | F♯<sub>3</sub>–F♯<sub>5</sub>
+ | <code>block.note_block.banjo</code>
+ | <code>note.banjo</code>
+ | 1.14
+ | 1.13.0
+ |-
+ | 
+* {{BlockLink|Glowstone}}
+ | {{sound|“扣弦”（电钢琴）|Note block pling.ogg}}
+ | style="text-align:center" | F♯<sub>3</sub>–F♯<sub>5</sub>
+ | <code>block.note_block.pling</code>
+ | <code>note.pling</code>
+ | 1.14
+ | 1.13.0
+ |-
+ |
+* {{BlockLink|block of copper}}
+* {{BlockLink|waxed block of copper}}
+* {{BlockLink|chiseled copper}}
+* {{BlockLink|waxed chiseled copper}}
+* {{BlockLink|cut copper}}
+* {{BlockLink|waxed cut copper}}
+* {{BlockLink|cut copper slab}}
+* {{BlockLink|waxed cut copper slab}}
+* {{BlockLink|cut copper stairs}}
+* {{BlockLink|waxed cut copper stairs}}
+ |{{sound|小号|Note block trumpet.ogg}}
+ | style="text-align:center" |F♯<sub>3</sub>–F♯<sub>5</sub>
+ |{{code|block.note_block.trumpet}}
+ |{{code|note.trumpet}}
+ | 26.1
+ | 26.10
+ |-
+ |
+* {{BlockLink|exposed copper}}
+* {{BlockLink|waxed exposed copper}}
+* {{BlockLink|exposed chiseled copper}}
+* {{BlockLink|waxed exposed chiseled copper}}
+* {{BlockLink|exposed cut copper}}
+* {{BlockLink|waxed exposed cut copper}}
+* {{BlockLink|exposed cut copper slab}}
+* {{BlockLink|waxed exposed cut copper slab}}
+* {{BlockLink|exposed cut copper stairs}}
+* {{BlockLink|waxed exposed cut copper stairs}}
+ |{{sound|小号（斑驳）|Note block trumpet exposed.ogg}}
+ | style="text-align:center" |F♯<sub>3</sub>–F♯<sub>5</sub>
+ |{{code|block.note_block.trumpet_exposed}}
+ |{{code|note.trumpet_exposed}}
+ | 26.1
+ | 26.10
+ |-
+ |
+* {{BlockLink|weathered copper}}
+* {{BlockLink|waxed weathered copper}}
+* {{BlockLink|weathered chiseled copper}}
+* {{BlockLink|waxed weathered chiseled copper}}
+* {{BlockLink|weathered cut copper}}
+* {{BlockLink|waxed weathered cut copper}}
+* {{BlockLink|weathered cut copper slab}}
+* {{BlockLink|waxed weathered cut copper slab}}
+* {{BlockLink|weathered cut copper stairs}}
+* {{BlockLink|waxed weathered cut copper stairs}}
+ |{{sound|小号（锈蚀）|Note block trumpet weathered.ogg}}
+ | style="text-align:center" |F♯<sub>2</sub>–F♯<sub>4</sub>
+ |{{code|block.note_block.trumpet_weathered}}
+ |{{code|note.trumpet_weathered}}
+ | 26.1
+ | 26.10
+ |-
+ |
+* {{BlockLink|oxidized copper}}
+* {{BlockLink|waxed oxidized copper}}
+* {{BlockLink|oxidized chiseled copper}}
+* {{BlockLink|waxed oxidized chiseled copper}}
+* {{BlockLink|oxidized cut copper}}
+* {{BlockLink|waxed oxidized cut copper}}
+* {{BlockLink|oxidized cut copper slab}}
+* {{BlockLink|waxed oxidized cut copper slab}}
+* {{BlockLink|oxidized cut copper stairs}}
+* {{BlockLink|waxed oxidized cut copper stairs}}
+ |{{sound|小号（氧化）|Note block trumpet oxidized.ogg}}
+ | style="text-align:center" |F♯<sub>2</sub>–F♯<sub>4</sub>
+ |{{code|block.note_block.trumpet_oxidized}}
+ |{{code|note.trumpet_oxidized}}
+ | 26.1
+ | 26.10
+ |-
+ |
+* {{BlockSprite|Air}} 其他方块，[[虚空|底层虚空]]
+ |{{sound|竖琴/钢琴|Note block harp.ogg}}
+ | style="text-align:center" | F♯<sub>3</sub>–F♯<sub>5</sub>
+ |<code>block.note_block.harp</code>
+ | <code>note.harp</code>
+ | Beta 1.2
+ | 0.13.0
+|}
+
+==== 生物音效 ====
+若音符盒顶面上放置了以下生物的[[生物头颅]]，玩家敲击或红石激活音符盒时，音符盒会随机播放对应音效（除苦力怕外均为生物的空闲音效）。
+
+{{in|BE}}播放任意生物音效时[[字幕]]均显示为“{{tr|音符盒播放|音階盒演奏}}”。
+
+{| class="wikitable"
+! 生物 !! 音效ID !! 音效 !! Java版字幕
+|-
+| {{EntityLink|Creeper}} || {{cd|block.note_block.imitate.creeper}}<br>（{{cd|entity.creeper.primed}}） || {{sound||Creeper fuse.ogg}} || {{tp|subtitles.entity.creeper.primed}}
+|-
+| {{EntityLink|Ender Dragon}} || {{cd|block.note_block.imitate.ender_dragon}}<br>（{{cd|entity.ender_dragon.ambient}}） || {{sound||Ender Dragon idle1.ogg|Ender Dragon idle2.ogg|Ender Dragon idle3.ogg|Ender Dragon idle4.ogg}} || {{tp|subtitles.entity.ender_dragon.ambient}}
+|-
+| {{EntityLink|Piglin}} || {{cd|block.note_block.imitate.piglin}}<br>（{{cd|entity.piglin.ambient}}） || {{sound||Piglin idle1.ogg|Piglin idle2.ogg|Piglin idle3.ogg|Piglin idle4.ogg|Piglin idle5.ogg}} || {{tp|subtitles.entity.piglin.ambient}}
+|-
+| {{EntityLink|Skeleton}} || {{cd|block.note_block.imitate.skeleton}}<br>（{{cd|entity.skeleton.ambient}}） || {{sound||Skeleton say1.ogg|Skeleton say2.ogg|Skeleton say3.ogg}} || {{tp|subtitles.entity.skeleton.ambient}}
+|-
+| {{EntityLink|Wither Skeleton}} || {{cd|block.note_block.imitate.wither_skeleton}}<br>（{{cd|entity.wither_skeleton.ambient}}） || {{sound||Wither Skeleton idle1.ogg|Wither Skeleton idle2.ogg|Wither Skeleton idle3.ogg}} || {{tp|subtitles.entity.wither_skeleton.ambient}}
+|-
+| {{EntityLink|Zombie}} || {{cd|block.note_block.imitate.zombie}}<br>（{{cd|entity.zombie.ambient}}） || {{sound||Zombie say1.ogg|Zombie say2.ogg|Zombie say3.ogg}} || {{tp|subtitles.entity.zombie.ambient}}
+|}
+
+没有与玩家的头相对应的专用音效ID。默认情况下，玩家的头不对应任何音效，但可通过方块NBT标签{{nbt|string|note_block_sound}}设置一个现存的音效ID，对应的字幕会在播放音效时显示。
+
+上述音效均由音符盒发出，并受{{tp|options.sounds.title}}中的“{{tp|soundCategory.record}}”滑块控制。
+
+==== 红石元件 ====
+[[File:Note Block with Clock Circult.png|275px|缩略图|连接着一个[[时钟电路]]的交替播放的一对音符盒]]
+
+音符盒是[[红石元件#机械元件|机械元件]]，可被下列形式激活：
+* 毗邻的开启的'''[[红石元件#电源|电源]]'''（例外：[[红石火把]]不会激活其所附着的音符盒，[[侦测器]]只会激活指向的音符盒）。
+* 毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻的指向音符盒且激活的[[红石中继器]]、[[红石比较器]]或[[红石粉]]（包括音符盒上方的红石粉）；毗邻但未指向音符盒的红石粉不会激活音符盒。
+
+{{in|je}}音符盒被点击、信号上升沿或下降沿后，其会立刻发出[[方块更新]]，并在[[活塞#启动延迟|启动延迟]]后发出声音。
+* 因此将音符盒和侦测器或[[Tutorial:方块更新感应器|方块更新检测器]]组合可构建一个可静音的“按钮”。
+
+音符盒上方为空气或生物头颅才能发声，在上方布置任意其他方块均会静音。
+
+音符盒是[[红石导体]]，因此可以充能音符盒，被充能的音符盒也能作为充能方块激活毗邻的其他元件。
+
+=== 悦灵 ===
+音符盒奏响时会向半径16格以内的所有[[悦灵]]发送<code>vibration</code>{{only|je}}或<code>vibration_signal</code>{{only|be}}[[粒子]]。在奏响后的30秒内，悦灵会在该音符盒周围搜寻物品，并将物品投掷到该音符盒而不是其信任的玩家处。
+
+音符盒向悦灵发送的信号可被[[羊毛]]阻断。
+
+=== 燃料 ===
+音符盒可以被用作[[熔炉]]、[[高炉]]或[[烟熏炉]]的[[燃料]]，每个音符盒可烧炼1.5个物品。
+
+== 音效 ==
+=== 方块 ===
+{{Sound table/Block/Wood}}
+
+=== 乐器 ===
+{{el|je}}：
+{{Sound table
+|sound=Note banjo.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=班卓琴
+|id=block.note_block.banjo
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note bass.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=贝斯
+|id=block.note_block.bass
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note basedrum.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=底鼓
+|id=block.note_block.basedrum
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note bell.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=铃铛（钟琴）
+|id=block.note_block.bell
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note bit.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=“芯片”（方波）
+|id=block.note_block.bit
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note cow bell.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=牛铃
+|id=block.note_block.cow_bell
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note didgeridoo.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=迪吉里杜管
+|id=block.note_block.didgeridoo
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note flute.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=长笛
+|id=block.note_block.flute
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note guitar.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=吉他
+|id=block.note_block.guitar
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note harp1.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=竖琴/钢琴
+|id=block.note_block.harp
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note hat.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=击鼓沿
+|id=block.note_block.hat
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note icechime.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=管钟
+|id=block.note_block.chime
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note iron xylophone.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=“铁木琴”（颤片琴）
+|id=block.note_block.iron_xylophone
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note pling.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=“扣弦”（电钢琴）
+|id=block.note_block.pling
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note trumpet.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=小号
+|id=block.note_block.trumpet
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note trumpet_exposed.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=小号（斑驳）
+|id=block.note_block.trumpet_exposed
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note trumpet_oxidized.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=小号（氧化）
+|id=block.note_block.trumpet_oxidized
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note trumpet_weathered.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=小号（锈蚀）
+|id=block.note_block.trumpet_weathered
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note snare.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=小军鼓
+|id=block.note_block.snare
+|translationkey=subtitles.block.note_block.note
+}}
+{{Sound table
+|sound=Note xylobone.ogg
+|subtitle={{tp|subtitles.block.note_block.note}}
+|source={{tp|soundCategory.record}}
+|description=木琴
+|id=block.note_block.xylophone
+|translationkey=subtitles.block.note_block.note
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=note.banjo.wav
+|source=唱片机/音符盒
+|description=班卓琴
+|id=note.banjo
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.bass.wav
+|source=唱片机/音符盒
+|description=贝斯
+|id=note.bass
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.bd.wav
+|source=唱片机/音符盒
+|description=底鼓
+|id=note.bd
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.bell.wav
+|source=唱片机/音符盒
+|description=铃铛（钟琴）
+|id=note.bell
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.bit.wav
+|source=唱片机/音符盒
+|description=“芯片”（方波）
+|id=note.bit
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.cow_bell.wav
+|source=唱片机/音符盒
+|description=牛铃
+|id=note.cow_bell
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.didgeridoo.wav
+|source=唱片机/音符盒
+|description=迪吉里杜管
+|id=note.didgeridoo
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.flute.wav
+|source=唱片机/音符盒
+|description=长笛
+|id=note.flute
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.guitar.wav
+|source=唱片机/音符盒
+|description=吉他
+|id=note.guitar
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.harp.wav
+|source=唱片机/音符盒
+|description=竖琴/钢琴
+|id=note.harp
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.hat.wav
+|source=唱片机/音符盒
+|description=击鼓沿
+|id=note.hat
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.icechime.wav
+|source=唱片机/音符盒
+|description=管钟
+|id=note.chime
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.iron_xylophone.wav
+|source=唱片机/音符盒
+|description=“铁木琴”（颤片琴）
+|id=note.iron_xylophone
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.pling.wav
+|source=唱片机/音符盒
+|description=“扣弦”（电钢琴）
+|id=note.pling
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.snare.wav
+|source=唱片机/音符盒
+|description=小军鼓
+|id=note.snare
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note trumpet BE2.wav
+|source=唱片机/音符盒
+|description=小号
+|id=note.trumpet
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note trumpet_exposed BE2.wav
+|source=唱片机/音符盒
+|description=小号（斑驳）
+|id=note.trumpet_exposed
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note trumpet_weathered BE2.wav
+|source=唱片机/音符盒
+|description=小号（锈蚀）
+|id=note.trumpet_weathered
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note trumpet_oxidized BE2.wav
+|source=唱片机/音符盒
+|description=小号（氧化）
+|id=note.trumpet_oxidized
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=note.xylobone.wav
+|source=唱片机/音符盒
+|description=木琴
+|id=note.xylophone
+|typeid=note
+|soundvolume=3.0
+|soundpitch=硬编码
+|sounddistance=48
+|foot=1
+}}
+
+=== 生物音效 ===
+{{el|je}}：
+{{Sound table
+|sound=Creeper fuse.ogg
+|subtitle={{tp|subtitles.entity.creeper.primed}}
+|source=唱片机/音符盒
+|description=苦力怕即将爆炸的音效
+|id=block.note_block.imitate.creeper
+|translationkey=subtitles.entity.creeper.primed
+}}
+{{Sound table
+|sound=Ender Dragon idle1.ogg
+|sound2=Ender Dragon idle2.ogg
+|sound3=Ender Dragon idle3.ogg
+|sound4=Ender Dragon idle4.ogg
+|subtitle={{tp|subtitles.entity.ender_dragon.ambient}}
+|source=唱片机/音符盒
+|description=末影龙的空闲音效
+|id=block.note_block.imitate.ender_dragon
+|translationkey=subtitles.entity.ender_dragon.ambient
+}}
+{{Sound table
+|sound=Piglin idle1.ogg
+|sound2=Piglin idle2.ogg
+|sound3=Piglin idle3.ogg
+|sound4=Piglin idle4.ogg
+|sound5=Piglin idle5.ogg
+|subtitle={{tp|subtitles.entity.piglin.ambient}}
+|source=唱片机/音符盒
+|description=猪灵的空闲音效
+|id=block.note_block.imitate.piglin
+|translationkey=subtitles.entity.piglin.ambient
+}}
+{{Sound table
+|sound=Skeleton say1.ogg
+|sound2=Skeleton say2.ogg
+|sound3=Skeleton say3.ogg
+|subtitle={{tp|subtitles.entity.skeleton.ambient}}
+|source=唱片机/音符盒
+|description=骷髅的空闲音效
+|id=block.note_block.imitate.skeleton
+|translationkey=subtitles.entity.skeleton.ambient
+}}
+{{Sound table
+|sound=Wither Skeleton idle1.ogg
+|sound2=Wither Skeleton idle2.ogg
+|sound3=Wither Skeleton idle3.ogg
+|subtitle={{tp|subtitles.entity.wither_skeleton.ambient}}
+|source=唱片机/音符盒
+|description=凋灵骷髅的空闲音效
+|id=block.note_block.imitate.wither_skeleton
+|translationkey=subtitles.entity.wither_skeleton.ambient
+}}
+{{Sound table
+|sound=Zombie say1.ogg
+|sound2=Zombie say2.ogg
+|sound3=Zombie say3.ogg
+|subtitle={{tp|subtitles.entity.zombie.ambient}}
+|source=唱片机/音符盒
+|description=僵尸的空闲音效
+|id=block.note_block.imitate.zombie
+|translationkey=subtitles.entity.zombie.ambient
+|foot=1
+}}
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Creeper fuse.ogg
+|source=唱片机/音符盒
+|description=苦力怕即将爆炸的音效
+|id=note.creeper
+|typeid=note
+|soundvolume
+|soundpitch
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=Ender Dragon idle1.ogg
+|sound2=Ender Dragon idle2.ogg
+|sound3=Ender Dragon idle3.ogg
+|sound4=Ender Dragon idle4.ogg
+|source=唱片机/音符盒
+|description=末影龙的空闲音效
+|id=note.enderdragon
+|typeid=note
+|soundvolume
+|soundpitch
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=Piglin idle1.ogg
+|sound2=Piglin idle2.ogg
+|sound3=Piglin idle3.ogg
+|sound4=Piglin idle4.ogg
+|sound5=Piglin idle5.ogg
+|source=唱片机/音符盒
+|description=猪灵的空闲音效
+|id=note.piglin
+|typeid=note
+|soundvolume
+|soundpitch
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=Skeleton say1.ogg
+|sound2=Skeleton say2.ogg
+|sound3=Skeleton say3.ogg
+|source=唱片机/音符盒
+|description=骷髅的空闲音效
+|id=note.skeleton
+|typeid=note
+|soundvolume
+|soundpitch
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=Wither Skeleton idle1.ogg
+|sound2=Wither Skeleton idle2.ogg
+|sound3=Wither Skeleton idle3.ogg
+|source=唱片机/音符盒
+|description=凋灵骷髅的空闲音效
+|id=note.witherskeleton
+|typeid=note
+|soundvolume
+|soundpitch
+|sounddistance=48
+}}
+{{Sound table
+|bedrock=1
+|sound=Zombie say1.ogg
+|sound2=Zombie say2.ogg
+|sound3=Zombie say3.ogg
+|source=唱片机/音符盒
+|description=僵尸的空闲音效
+|id=note.zombie
+|typeid=note
+|soundvolume
+|soundpitch
+|sounddistance=48
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Note Block
+|spritetype=block
+|nameid=note_block
+|showblocktags=je
+|blocktags={{GameTag|block|note_block}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Note Block
+|spritetype=block
+|nameid=noteblock
+|showblocktags=be
+|blocktags={{GameTagBE|block|noteblock}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=note-block
+|nameid=Music
+|spritetype=block
+|foot=1
+}}
+
+=== 方块实体 ===
+{{in|bedrock}}音符盒通过方块实体值附加字段来控制声音的音高。
+
+{{/BE}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+== 视频 ==
+{{bv|BV1k4411D7cn}}
+
+== 成就 ==
+{{load achievements|Birthday-Song}}
+
+== 进度 ==
+{{Load advancements|husbandry.allay_deliver_cake_to_note_block}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.2|[[File:Note Block JE1 BE1.png|32px]] 加入了音符盒。
+|此时有5种可用的音色：竖琴、贝斯、底鼓、小军鼓和击鼓沿。扣弦也加入了声音文件中，但未被使用。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w34a|音符盒的电源状态现在通过标签控制，因此无需红石信号也可以控制音符盒。}}
+|{{HistoryLine||1.11|dev=16w32a|音符盒的方块实体ID由<code>Music</code>更改为<code>noteblock</code>。}}
+|{{HistoryLine||1.12|dev=17w16a|加入了音符盒新音色（铃铛，管钟，长笛，吉他和木琴）的声音事件（并非音效本身）。}}
+|{{HistoryLine|||dev=17w17a|加入了音符盒上述新音色的具体音效。}}
+|{{HistoryLine||1.13|dev=17w47a|音符盒的ID名称由<code>noteblock</code>更改为<code>note_block</code>。
+|音符盒不再是方块实体，现在它由<code>pitch</code>、<code>powered</code>和<code>instrument</code>方块状态定义。
+|在[[扁平化]]之前，音符盒的数字ID是25。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Note Block JE2 BE2.png|32px]] 更改了音符盒的纹理。}}
+|{{HistoryLine|||dev=19w09a|为音符盒加入新的音色（铁木琴、牛铃、迪吉里杜管、芯片和班卓琴），并且“扣弦”被正式应用于游戏中。}}
+|{{HistoryLine||1.19|dev=22w13a|现在音符盒可以吸引[[悦灵]]。
+|现在只有[[羊毛]]和羊毛[[地毯]]可以阻止音符盒发声。此前音符盒上方的任何非空气方块都会阻止其发声。
+|现在音符盒会自然生成于[[远古城市]]中。}}
+|{{HistoryLine|||dev=22w15a|回退了22w13a中只有羊毛和羊毛地毯可以阻止音符盒发声的更改。}}
+|{{HistoryLine|||dev=22w17a|现在在悦灵附近奏响音符盒时会向其发送振动波粒子。}}
+|{{HistoryLine||1.19.3|exp=update_1_20|dev=22w46a|加入了音符盒与[[生物头颅]]间的交互方式。}}
+|{{HistoryLine||1.19.4|exp=update_1_20|dev=23w03a|现在可以在非潜行状态下将生物头颅放置到音符盒上方。}}
+|{{HistoryLine||1.20|dev=23w12a|22w46a和23w03a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine|||dev=23w13a|现在下界木质材料方块对应的音色不再是贝斯，而是竖琴/钢琴。}}
+|{{HistoryLine||26.1|dev=snapshot-7|为音符盒加入了新的小号音色。
+|现在放置在[[铜块]]、[[雕纹铜块]]、[[切制铜块]]、[[切制铜楼梯]]及[[切制铜台阶]]上的音符盒会发出小号的音色，而非竖琴/钢琴。}}
+|{{HistoryLine|||dev=snapshot-11|更改了小号音色的音效，由{{sound||Note trumpet JE1.ogg|Note trumpet exposed JE1.ogg|Note trumpet weathered JE1.ogg|Note trumpet oxidized JE1.ogg}}更改为{{sound||Note trumpet JE2.ogg|Note trumpet exposed JE2.ogg|Note trumpet weathered JE2.ogg|Note trumpet oxidized JE2.ogg}}。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|[[File:Note Block JE1 BE1.png|32px]] 加入了音符盒。
+|此时有5种可用的音色：竖琴、贝斯、底鼓、小军鼓和击鼓沿。}}
+|{{HistoryLine||0.15.0|dev=build 1|现在音符盒可被活塞推动。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Note Block JE2 BE2.png|32px]] 更改了音符盒的纹理。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.9|为音符盒加入了新的音色：铃铛，管钟，长笛，吉他、木琴、铁木琴、牛铃、迪吉里杜管、芯片、班卓琴和“扣弦”。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.22|现在音符盒可以吸引悦灵。
+|现在只有羊毛和羊毛地毯可以阻止音符盒发声。此前音符盒上方的任何非空气方块都会阻止其发声。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.26|现在音符盒会自然生成于[[远古城市]]中。
+|回退了1.18.30.22中只有羊毛和羊毛地毯可以阻止音符盒发声的更改。}}
+|{{HistoryLine||1.19.60|exg=1.20|dev=1.19.60.20|加入了音符盒与[[生物头颅]]间的交互方式。}}
+|{{HistoryLine|||dev=1.19.60.25|现在可以在非潜行状态下将生物头颅放置到音符盒上方。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|1.19.60.20和1.19.60.25中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|现在放置在[[沉重核心]]上的音符盒会发出小军鼓的音色，而非竖琴/钢琴。}}
+|{{HistoryLine||26.10|dev=26.10.23|为音符盒加入了新的小号音色。
+|现在放置在[[铜块]]、[[切制铜块]]和[[雕纹铜块]]上的音符盒会发出小号的音色，而非竖琴/钢琴。}}
+|{{HistoryLine||26.20|dev=26.20.20|现在放置在[[切制铜台阶]]和[[切制铜楼梯]]上的音符盒会发出小号的音色，而非竖琴/钢琴。}}
+|{{HistoryLine||26.30|dev=26.30.25|更改了小号音色的音效，由{{sound||Note trumpet BE1.wav|Note trumpet exposed BE1.wav|Note trumpet weathered BE1.wav|Note trumpet oxidized BE1.wav}}更改为{{sound||Note trumpet BE2.wav|Note trumpet exposed BE2.wav|Note trumpet weathered BE2.wav|Note trumpet oxidized BE2.wav}}。<ref>{{bug|MCPE-237578|||Fixed}}</ref>}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Note Block JE1 BE1.png|32px]] 加入了音符盒。}}
+|{{HistoryLine||xbox=TU53|xbone=CU43|ps3=1.49|psvita=1.49|ps4=1.50|wiiu=Patch 23|switch=1.0.3| 加入了音符盒的新音色。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Note Block JE2 BE2.png|32px]] 更改了音符盒的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Note Block JE1 BE1.png|32px]] 加入了音符盒。}}
+}}
+
+== 你知道吗 ==
+* 默认状态下音符盒的音符起于F♯，然而现实中F♯调的乐器极为罕见。
+* 音符盒上方有方块堵住时，玩家仍能给它调音，不过音符盒不会发声，也不会出现音符。
+
+== 画廊 ==
+<gallery>
+Note block redstone.png|红石粉连接了音符盒，按下按钮将会演奏一段简单的旋律
+Note Block Interacts with Allay.png|音符盒向悦灵发送的振动粒子
+</gallery>
+
+== 参见 ==
+* [[Tutorial:红石音乐]]
+* [[唱片机]]
+* [[辅助程序与编辑器/Note Block Studio|Note Block Studio]]——一个为Minecraft设计的音乐编辑器。
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:红石机制]]
+
+[[de:Notenblock]]
+[[en:Note Block]]
+[[es:Bloque musical]]
+[[fr:Bloc musical]]
+[[hu:Hangdoboz]]
+[[it:Blocco sonoro]]
+[[ja:音符ブロック]]
+[[ko:소리 블록]]
+[[lzh:絲竹匣]]
+[[nl:Nootblok]]
+[[pl:Blok dźwiękowy]]
+[[pt:Bloco Musical]]
+[[ru:Музыкальный блок]]
+[[uk:Нотний блок]]

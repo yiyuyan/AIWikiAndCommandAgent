@@ -1,0 +1,142 @@
+# 页面: 霜冰
+# 来源: https://zh.minecraft.wiki/w/%E9%9C%9C%E5%86%B0
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 功能方块, 基岩版独有信息, 待更新条目, 方块, 没有方块物品的方块
+# 抓取时间: 2026-07-14 17:38:28
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|group1=常规
+|1-1=Frosted Ice.png
+|group2=阶段1
+|2-1=Frosted Ice 1.png
+|group3=阶段2
+|3-1=Frosted Ice 2.png
+|group4=阶段3
+|4-1=Frosted Ice 3.png
+|invimage=Frosted Ice BE
+|invimage2=[霜冰（基岩版）]Frosted Ice 1 BE
+|invimage3=[霜冰（基岩版）]Frosted Ice 2 BE
+|invimage4=[霜冰（基岩版）]Frosted Ice 3 BE
+|noitem=1
+|light=0
+}}
+{{quote|Minecraft中其实存在着相当多的冰雪类方块。冰、雪、蓝冰、细雪和浮冰都与今日的主角方块——霜冰共存。这个方块与其他冰雪类方块的区别在于无论你如何苦苦搜寻，在主世界中都找不到自然生成的霜冰。因为它会融化。|[[Duncan Geere]]<ref>{{article|frosted-ice|Block of the Month: Frosted Ice|Jul 31, 2025}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''霜冰（Frosted ice）'''是[[水]]被[[冰霜行者]]魔咒转化而生成的方块。
+
+== 生成 ==
+霜冰不会生成在世界中。
+
+=== 冰霜行者 ===
+穿着带有[[冰霜行者]]魔咒的盔甲的生物在行走时会将附近的[[水]]变为霜冰。
+
+冰霜行者不能替换[[含水]]方块。{{in|je}}若水里有可推动实体，或水上方有方块阻挡，霜冰将不会生成。
+
+== 获取 ==
+{{in|java}}霜冰没有对应的物品形式。
+
+{{in|bedrock}}霜冰的物品形式不能在生存模式中正常获得。其亦不存在于[[创造模式物品栏]]中，但可以通过使用[[命令]]等方法获得。
+
+== 破坏 ==
+没有工具可以加速对霜冰的挖掘。<ref>{{bug|MC-144593}}</ref>
+
+{{Breaking table}}
+
+没有被具有[[精准采集]]的工具挖掘破坏时，霜冰被破坏后不会掉落，并且在下界{{note|{{in|je}}由环境属性[[环境属性#gameplay/water_evaporates|<code>gameplay/water_evaporates</code>]]控制。}}以外的维度中会变成[[水]]。
+
+被具有精准采集的工具挖掘破坏时，霜冰被破坏后仍不会掉落，但不会变成水。<ref>{{bug|MC-90578|||Fixed}}</ref><ref>{{bug|MC-90635|||Fixed}}</ref><ref>{{bug|MC-210476}}</ref>
+
+== 用途 ==
+霜冰有着和[[冰]]和[[浮冰]]一样的滑动阻力系数，可以让实体在上面滑行。
+
+霜冰在生成后会开始迅速融化。每一个霜冰有一个方块数据{{cd|age}}，起始为0。末地方块光照等级或其他维度的[[内部天空光照]]等级至少为{{cd|12-age}}时，每过1-2秒若某个霜冰周围有至少4个的霜冰，则该霜冰有{{frac|1|3}}的概率使{{cd|age}}增加1，否则{{cd|age}}直接增加1。如果{{cd|age}}为3，即将增加为4，则霜冰会变为水，且与其相邻的霜冰的{{cd|age}}增加1。
+
+由于霜冰需要亮度才能开始融化，在黑暗的环境如夜晚的河流或洞穴中，霜冰不会融化。
+
+当一个霜冰融化或被破坏时，若与其相邻的霜冰不超过1个则也会立刻融化。
+
+[[甘蔗]]可以种在霜冰旁边，[[睡莲]]可以放置于霜冰上，因此霜冰替换掉这些方块依赖的水时不会将其破坏。
+
+{{in|be}}霜冰在[[下界]]融化仍然会变为水。
+
+== 音效 ==
+{{Sound table/Block/Glass}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Frosted Ice
+|spritetype=block
+|nameid=frosted_ice
+|showblocktags=je
+|showitemforms=1
+|blocktags={{GameTag|blocks|frosted_ice}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Frosted Ice
+|spritetype=block
+|nameid=frosted_ice
+|foot=1}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+== 成就 ==
+{{load achievements|let-it-go}}
+
+== 历史 ==
+{{update|需要[[基岩版beta 1.2.0.2]]之前的霜冰渲染图。|section=1}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w42a|[[File:Ice JE1 BE1.png|32px]] [[File:Frosted Ice 1 JE1 BE1.png|32px]] [[File:Frosted Ice 2 JE1 BE1.png|32px]] [[File:Frosted Ice 3 JE1 BE1.png|32px]] 加入了霜冰。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，该方块的数字ID为212。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Frosted Ice JE2 BE2.png|32px]] [[File:Frosted Ice 1 JE2 BE2.png|32px]] [[File:Frosted Ice 2 JE2 BE2.png|32px]] [[File:Frosted Ice 3 JE2 BE2.png|32px]] 更改了霜冰的纹理。}}
+|{{HistoryLine||1.21.9|dev=25w34a|现在末地中的霜冰是否融化取决于方块光照而非内部天空光照。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|[[File:Ice BE2.png|32px]] [[File:Frosted Ice 1 JE1 BE1.png|32px]] [[File:Frosted Ice 2 JE1 BE1.png|32px]] [[File:Frosted Ice 3 JE1 BE1.png|32px]] 加入了霜冰。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|霜冰现在是透明的了。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Frosted Ice JE2 BE2.png|32px]] [[File:Frosted Ice 1 JE2 BE2.png|32px]] [[File:Frosted Ice 2 JE2 BE2.png|32px]] [[File:Frosted Ice 3 JE2 BE2.png|32px]] 更改了霜冰的纹理。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.21|方块相关的命令可以使用霜冰作为参数。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU43|xbone=CU33|ps3=1.36|psvita=1.36|ps4=1.36|wiiu=Patch 13|switch=1.0.1|[[File:Ice JE1 BE1.png|32px]] [[File:Frosted Ice 1 JE1 BE1.png|32px]] [[File:Frosted Ice 2 JE1 BE1.png|32px]] [[File:Frosted Ice 3 JE1 BE1.png|32px]] 加入了霜冰。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Frosted Ice JE2 BE2.png|32px]] [[File:Frosted Ice 1 JE2 BE2.png|32px]] [[File:Frosted Ice 2 JE2 BE2.png|32px]] [[File:Frosted Ice 3 JE2 BE2.png|32px]] 更改了霜冰的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||1.9.19|[[File:Ice JE1 BE1.png|32px]] [[File:Frosted Ice 1 JE1 BE1.png|32px]] [[File:Frosted Ice 2 JE1 BE1.png|32px]] [[File:Frosted Ice 3 JE1 BE1.png|32px]] 加入了霜冰。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:Frost Walker Dinnerbone.png|[[Dinnerbone]]公布的关于霜冰的截图<ref>{{tweet|Dinnerbone|653958416763887616}}</ref>
+File:FrostWalker.webp|带有冰霜行者魔咒的鞋子使水面生成霜冰
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[Category:功能方块]]
+
+[[de:Brüchiges Eis]]
+[[en:Frosted Ice]]
+[[es:Hielo escarchado]]
+[[fr:Glace givrée]]
+[[ja:薄氷]]
+[[ko:살얼음]]
+[[lzh:霜冰]]
+[[pl:Oszroniony lód]]
+[[pt:Gelo Fosco]]
+[[ru:Подмороженный лёд]]
+[[th:น้ำแข็งเย็นจัด]]
+[[uk:Талий лід]]

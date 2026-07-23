@@ -1,0 +1,266 @@
+# 页面: 加载器Mod
+# 来源: https://zh.minecraft.wiki/w/%E5%8A%A0%E8%BD%BD%E5%99%A8Mod
+# 分类: Java版独有信息, Mod, 基岩版独有信息, 待扩充段落
+# 抓取时间: 2026-07-14 17:20:48
+# 原始 Wikitext 内容:
+
+{{about|只能使用相应加载器才能运作的Mod|由Minecraft Wiki開發的Mod|Minecraft Wiki:Hey Wiki|广泛意义上修改游戏的行为|Mod（消歧义）}}
+{{Disclaimer}}
+{{msgbox|title=关于具体Mod作品的页面会被导入至[[ftb:Special:MyLanguage/FTB Wiki|FTB Wiki]]。|text=请勿在本Wiki加入任何未受官方认可的Mod内容。}}
+[[File:Indev World Generator.png|250px|缩略图|一个世界生成器Mod的示例（自定义[[Java版Indev|Indev]]地图生成器）]]
+[[File:Shading.png|250px|缩略图|“OptiFine”支持向游戏中添加仅改变游戏画面的“光影”。带有不同“光影”的游戏与原版的视觉差距可能很大]]
+
+'''Mod（Modifications的缩写）'''，也叫'''模组'''，通常是指修改现有原版游戏内容，或增添原版游戏内容之外的新内容的程序或文件。本条目介绍需要使用相应加载器的Mod。
+
+== 概述 ==
+Mod由社区玩家编写，用于在原版游戏基础上添加更多富含独创性的内容，例如改变游戏内事物的外观和玩法、为[[玩家]]提供更多的自定义内容，或者通过全新的冒险过程和游戏机制来扩展游戏内容。Mod能够控制游戏的许多方面，包括图形、物理效果、[[HUD|用户界面]]以及各种游戏玩法元素，也提供了添加或修改诸如[[实体]]、[[物品]]、[[方块]]、[[世界生成]]和[[维度]]等内容的自定义功能。
+
+有些Mod被用作辅助工具，旨在对游戏进行优化并使其与原版游戏保持高度相似。它们能够带来多种优化和性能提升，使游戏的运行速度更快，并为玩家提供更好的辅助功能。此外，这些Mod还能修复原版游戏中许多游戏机制上的错误和漏洞，比如[[Tutorial:方块和物品复制|方块和物品复制]]漏洞。
+
+Mod通常适用于游戏的特定版本。在理想情况下，Mod作者应跟随游戏更新而更新Mod，否则它可能无法在后续版本中正常运行。<ref name="rps-update-breaks-mod">{{cite|url=https://www.rockpapershotgun.com/minecrafts-new-faster-update-schedule-will-probably-fill-modders-with-both-despair-and-nostalgia|title=Minecraft's new faster update schedule will probably fill modders with both despair and nostalgia|author=Edwin Evans-Thirlwell|website=Rock Paper Shotgun|date=September 11, 2024}}</ref>
+
+在iOS系统上运行的{{el|be}}利用[https://mcpedl.com mcpedl]亦能安装Mod；安卓设备则可以使用例如[https://play.google.com/store/apps/details?id=net.zhuoweizhang.mcpelauncher&hl=en "BlockLauncher （停止更新）"]、[https://play.google.com/store/apps/details?id=com.groundhog.mcpemaster&hl=en "MCPE Master （停止更新）"]或是[https://play.google.com/store/apps/details?id=io.mrarm.mctoolbox&hl=en "Toolbox for Minecraft: PE （目前部分可用）"]安装Mod。[[原主机版]]上没有可用的Mod。
+
+安装任何Mod都有风险：运行来自其他人的程序，却不一定清楚它的行为。通过管理完善的网站获取Mod、检查Mod的源代码都有助于降低风险。请勿轻信Mojang官方人员之外的人。本Wiki不对安装Mod的任何后果负责。
+
+=== Mod支持 ===
+Java版Minecraft使用Java语言编写，并在JVM上运行。从技术上来说，这使得创建Mod相对容易，也造就了Java版相对活跃的Mod开发环境。基岩版Minecraft使用{{w|C++}}编写，并最终编译为{{w|机器代码|机器代码}}的形式运行，在技术上，这使得对其进行Mod化颇具挑战性。基岩版确实存在Mod，但它们的规模较小，复杂度也较低，这既是因为技术上的困难，也和社区兴趣不高以及官方附加包已经提供了添加新游戏内容的方式等原因有关。
+
+{{in|java}}Mod加载器用于将修改内容注入到游戏中。它们充当游戏与Mod代码之间的中介，Mod代码则提供了[[API]]和工具，供开发者创建新的Mod，并支持同时加载多个Mod，同时保持它们之间的兼容性。有许多知名的Mod加载器，例如[https://minecraftforge.net/ Forge]、[https://fabricmc.net/ Fabric]、[https://quiltmc.org/ Quilt]和[https://neoforged.net/ NeoForge]，它们各自支持不同Mod开发API。但也由于这种原因，为特定Mod加载器设计的Mod不太可能与另一个Mod加载器互操作。
+
+{{in|bedrock}}[[附加包]]充当了官方的Mod开发接口，能够为游戏添加新内容并修改现有功能和自定义设置。与Java版Mod相比，附加包在功能和自定义方面可能有所限制，但对开发者而言却更加友好且简单易用。<ref name="pcgamer-je-vs-be">{{cite|url=https://www.pcgamer.com/minecraft-java-vs-bedrock-windows/|title=Minecraft: Java Edition vs Bedrock Edition|author=Wesley Copeland|website=PC Gamer|date=February 27, 2024}}</ref>曾有针对Java版的官方Mod开发接口被提及，名为“Plugin API”（又称“Workbench”），但随后该接口被废弃，此后在[[Java版1.9]]之后再未提及或有进一步的发展（见{{slink|Java版提及特性|Workbench（插件API）}}）。
+
+在[[基岩版1.21.20]]中，Mojang从[[基岩版专用服务器]]中移除了调试信息（{{cd|bedrock_server.pdb}} 文件），这使得基岩版的Mod开发变得更加困难。<ref>{{cite|title=Did Mojang Just Remove Modding For Minecraft Bedrock?|section=Minecraft Bedrock 1.21.20 Update|author=Nathan Young|website=Apex Hosting|date=August 15, 2024|url=https://apexminecrafthosting.com/did-mojang-just-remove-modding-for-minecraft-bedrock/}}</ref>
+
+虽然[[资源包]]和[[数据包]]也可以改变Minecraft的游戏体验和内容，但其加载功能属于原版游戏的一部分，通常不被视为Mod行为。
+
+=== 与数据包协同运作 ===
+{{exclusive|java|section=1}}
+从历史上看，过去诸如[[进度]]、[[魔咒]]、[[维度]]或[[世界生成]]等内容的改变都需要使用Mod修改。然而，在游戏的后续版本中，[[数据包]]和[[资源包]]的添加与扩展使得这类特性能够直接在原版游戏中实现，并且无需添加或修改游戏源码。大多数现代Mod加载器也允许Mod协同数据包和资源包运作，以提供诸如[[模型]]或[[配方]]<ref name="fabric-custom-resources">{{Cite|title=Custom Data/Resource pack Resources|website=Fabric Wiki|url=https://wiki.fabricmc.net/tutorial:custom_resources}}</ref>等额外的数据和资源。
+
+== Mod的类型 ==
+=== 基于客户端 ===
+基于客户端的Mod主要是直接对Minecraft游戏文件进行修改的，但它们并非完全自定义，因为需要对[[client.jar]]文件进行修改。这些Mod需要使用诸如[http://files.minecraftforge.net/ Minecraft Forge]或[https://fabricmc.net/ Fabric]的加载器才能正常运作。当然也有少数可直接修改jar文件的Mod，但这种Mod极少并且和加载器Mod基本不兼容。
+
+由于Minecraft服务器软件会忽略客户端中的改动，大多数基于客户端的Mod不会在服务端里运作，除非在服务端里安装了相同的Mod。大部分Mod作者会提供同时兼容客户端和服务端的Mod。此外少数加载器或基于客户端的Mod（例如[[ftb:OptiFine|OptiFine]]和[[ftb:TooManyItems|TooManyItems]]）会直接对多人游戏产生效果，而不需要对服务端进行修改。
+
+=== 基于服务端 ===
+基于[[服务器]]的Mod会对Minecraft服务器软件进行修改。它们大部分都有着使得服务器管理变得更加便捷或提供更多命令权限等级（例如踢出或封禁用户）的功能。这些Mod大多数不会直接对服务器的{{cd|.jar}}文件进行修改，而是监视它的输出结果和发送命令。
+
+=== 整合包 ===
+整合包是已经添加了多个Mod并对其进行整合的Minecraft客户端或服务端。整合包通常都带有特定主题，例如科技、闯关和魔法元素。整合包通常会自带一个第三方启动器，用于更加便捷地安装和启动游戏，同时也提供了下载和安装Mod或整合包的功能。除了玩家自定义的整合包外，也存在部分诸如[[ftb:Feed The Beast|Feed The Beast]]、[[ftb:Tekkit|Tekkit]]、[[ftb:RLCraft|RLCraft]]和[[ftb:Hexxit|Hexxit]]这类受欢迎的整合包。
+
+=== 基岩版 ===
+基岩版的Mod较Java版不同：
+# 大多数为仅客户端Mod，不能在服务器上使用。
+# 基岩版有独立的官方Mod API。
+
+下列是基岩版Mod的格式种类：
+
+; 官方格式
+* [[附加包]]
+** [[附加包|资源包]]
+** [[行为包]]
+*** [[基岩版函数|函数]]
+*** [[Molang]]
+*** [[脚本API]]（前身是GameTest）
+* Mod SDK
+** Mod API（Python）
+
+; 非官方格式
+* 交换型
+** PTPMod
+* 解释型
+** ModPE
+** CoreEngine Mod
+** InnerCore Mod
+* 编译型
+** Native Mod
+* 混合型
+** InnerCore Native Mod
+** LeviLamina Native Mod
+
+== 加载器 ==
+=== Java版 ===
+许多Mod制作者制作适用Mod加载器的Mod以进行兼容。
+
+在Mod发展历史中，最开始实现概念的是ModLoader加载器，但其在[[Java版1.6.2|1.6.2]]后由于游戏更改了{{cd|.minecraft}}的目录结构而停止维护。之后较为流行且广泛使用的Mod加载器是[https://files.minecraftforge.net/net/minecraftforge/forge/ Forge]，一些轻量级Mod会选择使用LiteLoader进行加载。
+
+在[[Java版1.13|1.13]]，[[扁平化]]导致Forge进行了大重写，因此又产生了一些新的轻量型加载器。例如Rift、OpenModLoader、PaperModLoader等。在此中Rift广受欢迎。
+
+在[[Java版1.14|1.14]]发布后，又有新的[https://fabricmc.net/ Fabric]加载器面世。Fabric凭借其开发使用的Yarn反编译工程开放到公有领域、采用Sponge Mixin系统、模块化、无需大量更改即可完成版本兼容，也因为Forge跟随最新版本慢等方面的欠缺等而备受欢迎，也导致Rift等其他加载器停止维护，但其开发者投入到了Fabric的开发工作。
+
+Mojang自[[Java版1.21.11|1.21.11]]开始发布未混淆版本，[[Java版1.21.11|1.21.11]]成为Yarn最后支持的版本。
+
+Quilt是类似于Fabric的加载器，目前仍在测试阶段，可部分兼容Fabric模组。
+
+Forge与Fabric互不兼容。
+
+Cyan可以和Forge或Fabric兼容。
+
+NeoForge是Forge的一个分支。因为一些内部分歧，原ForgeCord团队发生变动，从而诞生了NeoForge这一项目<ref>https://neoforged.net/news/theproject/</ref>。NeoForge简化了模组的创建和开发过程，提供了一个方便的开发环境，部分Neoforge模组与Forge兼容。
+
+目前主流Mod有如下分类：
+# 继续使用Forge，但由于扁平化停留在[[Java版1.12.2|1.12.2]]
+# 弃用Forge，选择NeoForge和（或）Fabric为新版本的加载器
+# 认为Forge的慢速版本更新无所谓，继续使用Forge为Mod更新
+# 同时提供Forge和Fabric版的Mod，且具有类似或相同功能
+# 使用诸如Rift、Quilt等作为加载器的Mod
+<!--根据CurseForge的统计，目前适配Mod数量最多的游戏版本依次是[[Java版1.16.5|1.16.5]]、[[Java版1.18.2|1.18.2]]和[[Java版1.12.2|1.12.2]]。{{more info|数据来源}}-->
+
+=== 基岩版 ===
+{{Stub|section=9}}
+基岩版的加载器通常类似于“启动器”，使用一个外置应用对游戏进行修改。
+
+基岩版常用的加载器有：
+; 外置型
+* GenericLauncher
+* BlockLauncher
+* Toolbox
+* ModdedPE
+; 内嵌型
+* InnerCore
+* [https://github.com/LiteLDev/LeviLamina LeviLamina]
+** 具有众多扩展使其支持多种语言编写Mod，由于Mojang的部分原因，不支持1.21.10-1.21.40（不含）版本。
+* [https://github.com/FrederoxDev/Amethyst Amethyst]
+** 由于Mojang的部分原因，目前仅支持1.20.30-1.21.0之间的版本。
+* [[中国版]]
+; 实例型
+* Horizon
+
+==== 服务器 ====
+{{stub|section=10}}
+
+基岩版主流服务器Mod加载器有：
+
+; 完全重写类
+* mcpelauncher-server
+* mcpeserver
+* Naïve
+* PocketMine
+* PocketMine MP
+* Cobblestone Server
+** SSMod
+** SSJS
+* NukkitX
+** PowerNukkit
+
+; 修改[[基岩版专用服务器]]类
+* [https://github.com/LiteLDev/LiteLoaderBDS LiteLoaderBDS]
+** LeviLamina的前身
+** 通过LLSE（[https://github.com/LiteLDev/LegacyScriptEngine LegacyScriptEngine]的前身）支持JavaScript、Lua等语言
+* Bedrock Delicated Launcher
+** BDLMod
+* Element Zero（已停更）
+** 可使用多种语言编写Mod，因此另有EZDLL、EZJS等分支
+* 梦故启动器（已停更）
+** 可使用多种语言编写Mod，因此另有梦故DLL、梦故JSRunner等分支
+* BDX（已停更）
+** 可使用多种语言编写Mod，因此另有BDXJS、BDXCS、BDXDLL、BDXLua、BDXGLang等分支
+* [https://github.com/EndstoneMC/endstone endstone]
+** 可使用C++、Python等语言编写插件，提供类似Bukkit、Nukkit的API
+
+== 崩溃报告 ==
+{{see also|Tutorial:获取崩溃报告}}
+
+有些Mod可能会阻碍游戏正常运行。如果Minecraft崩溃了，被修改过的游戏会在崩溃报告里进行标记。
+
+崩溃报告文字将会在靠近底部的位置标注：
+
+ Is Modded: Probably not. Jar signature remains and client brand is untouched
+ Is Modded: Very likely; Jar signature invalidated
+ Is Modded: Definitely: client brand changed to (present loader, such as "fml,forge" or modloader)
+ Is Modded: Unknown (can't tell)
+
+参考译文：
+
+ -{}-是否修改：大概没有。Jar签名有效且客户端名未修改。
+ 是否修改：很有可能；Jar签名无效。
+ 是否修改：绝对修改过：客户端名修改为（当前的加载器，如“fml,forge”或Mod加载器）。
+ 是否修改：未知（不能辨别）。
+
+{{Collapse|title=下面是一个简短的示例崩溃报告：|content=
+ ---- Minecraft Crash Report ----
+ // Uh... Did I do that?
+ 
+ Time: 1/1/17 12:00 AM
+ Description: Manually triggered debug crash
+ 
+ A detailed walkthrough of the error, its code path and all known details is as follows:
+ ---------------------------------------------------------------------------------------
+ 
+ -- System Details --
+ Details:
+ 	Minecraft Version: 1.12
+ 	Operating System: Windows 10 (amd64) version 10.0
+ 	Java Version: 1.8.0_131, Oracle Corporation
+ 	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+ 	Memory: 524288000 bytes (500 MB) / 536870912 bytes (512 MB) up to 1073741824 bytes (1024 MB)
+ 	JVM Flags: 4 total; - 
+ XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump - 
+ XX:+DisableExplicitGC
+ 	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+ 	Launched Version: 1.12
+ 	LWJGL: 2.9.4
+ 	OpenGL: GeForce RTX 2080 Ti/PCIe/SSE2 GL version 4.6.0 NVIDIA 442.59, NVIDIA Corporation
+ 	GL Caps: Using GL 1.3 multitexturing.
+ Using GL 1.3 texture combiners.
+ Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+ Shaders are available because OpenGL 2.1 is supported.
+ VBOs are available because OpenGL 1.5 is supported.
+ 
+ 	Using VBOs: No
+ 	'''Is Modded: Probably not. Jar signature remains and client brand is untouched.'''
+ 	Type: Client (map_client.txt)
+ 	Resource Packs: 
+ 	Current Language: English (US)
+ 	Profiler Position: N/A (disabled)
+ 	CPU: 36x Intel(R) Core(TM) i9-10980XE CPU @ 9.99GHz
+}}
+
+客户端/服务端会进行自我检查，在检查到内部文件没有变化（通常把这些文件做“原版”）并且META-INF仍然还在时会显示“Probably not”。当META-INF不在但内部文件看起来还是原版文件时会显示“Very likely”，当检测到不是原版文件时， “Definitely”会加上客户端名字显示。例如：
+
+ Is Modded: Definitely: Client brand changed to 'fml,forge'
+
+== Mod库 ==
+有些网站专门设立了存放Minecraft Mod的区域。
+* [https://www.curseforge.com/minecraft/mc-mods CurseForge] - Overwolf拥有的资源网站。
+* [https://modrinth.com/mods Modrinth] - 于2020年创建的，由社区驱动的现代化资源网站。
+* [https://www.planetminecraft.com/mods Planet Minecraft] - 于2010年创建的，由社区驱动的资源网站。
+
+== 制作 ==
+以下是由中文玩家社区成员编写的Mod开发教程：
+* [https://web.archive.org/web/20210305165820/https://www.mcbbs.net/thread-850737-1-1.html 1.3.2-1.15.2 原版/FML CoreMod开发教程]
+* [https://harbinger.covertdragon.team/ Harbinger——面向中文社区的1.12.2 Forge Mod开发指南]
+* [https://item.jd.com/12684365.html 我的世界：Minecraft模组开发指南]
+* [https://fabricmc.net/wiki/zh_cn:start Fabric模组开发教程]
+
+== 你知道吗 ==
+* 模组.jar文件通常存放在{{filepath|.minecraft/mods}}文件夹中。对于启用了版本隔离功能的启动器，通常位于{{filepath|.minecraft/versions/版本名称/mods}}。
+
+== 参见 ==
+* [[附加包]]，基岩版中允许Mod作者可以更容易地向游戏添加内容。
+* [[辅助程序与编辑器/Mod工具]]，展示了安装和制作Mod的工具。
+
+== 参考 ==
+{{Reflist}}
+== 导航 ==
+{{Navbox mods}}
+
+[[Category:Mod]]
+
+[[de:Modifikation]]
+[[en:Mod]]
+[[es:Mod]]
+[[fr:Mods]]
+[[hu:Modok]]
+[[it:Mod]]
+[[ja:Mod]]
+[[ko:모드]]
+[[nl:Mods]]
+[[pl:Modyfikacje]]
+[[pt:Mods]]
+[[ru:Модификации]]
+[[th:ม็อด]]
+[[tr:Modlar]]
+[[uk:Модифікація]]

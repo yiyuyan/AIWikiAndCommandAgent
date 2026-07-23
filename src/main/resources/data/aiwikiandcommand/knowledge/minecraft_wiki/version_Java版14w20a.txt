@@ -1,0 +1,126 @@
+# 页面: Java版14w20a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w20a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:11
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=14w20a
+|image=Java Edition 14w20a Simplified.png\Java Edition 14w20a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年5月15日
+|jsonhash=a2af33f2a37beef83a8d10832a677072415a24fc
+|clienthash=9f3b303c1de10d3229353471e63e834339f3acbe
+|serverhash=4dfd82a84113cfb7e4b489c52caa68bc3f21198e
+|exehash=9214756d7f72407db88c5ec71c2d73cb92a76f66
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w19a
+|next=14w20b
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w20a'''是[[Java版1.8]]的第23个快照，发布于2014年5月15日<ref>{{cite|url=http://mojang.com/2014/05/minecraft-snapshot-14w20a/|archive-url=1|archive=1|title=Minecraft snapshot 14w20b|author=Dinnerbone|website=Mojang.com|date=May 15, 2014}}</ref>，加入了新的命令{{cmd|title}}和新的闪烁标语，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|title}}'''
+* 能让文本以标题或副标题的形式显示在玩家的屏幕上。
+* {{cmd|title <玩家> times <淡入时间> <持续时间> <淡出时间>}}
+** 设置标题的淡入、持续、和淡出时间。
+* {{cmd|title <玩家> title <纯json消息>}}
+** 设定并开始显示标题。
+* {{cmd|title <玩家> subtitle <纯json消息>}}
+** 设置并开始显示副标题。
+* {{cmd|title <玩家> clear}}
+** 立即清除标题。
+* {{cmd|title <玩家> reset}}
+** 将所有标题值设定为默认值（淡化时间）。
+
+=== 常规 ===
+'''[[闪烁标语]]'''
+* “Run, coward! I hunger!”
+* “Blue warrior shot the food!”
+* “Warning! A huge battleship "STEVE" is approaching fast!”
+* “Rise from your grave!”
+
+== 更改 ==
+=== 方块 ===
+'''常规'''
+* 方块不再拥有储存元数据的空间，腾出来的空间被用于储存方块ID（动态）。
+
+=== 生物 ===
+'''[[史莱姆]]'''
+* “史莱姆的大小是在生成后决定的，因此检测它是否可以生成时是根据原始大小而非最终大小而决定的。现在我们加入了二次确认来解决这个问题。”<ref>{{tweet|TheMogMiner|467014008986664960}}</ref><ref>{{tweet|TheMogMiner|467014110522376193}}</ref><ref>{{tweet|TheMogMiner|467014110522376193}}</ref>
+
+=== 世界生成 ===
+'''[[洞穴]]'''
+* 现在会在沙漠、恶地、大型针叶林和蘑菇岛生物群系的表面生成。
+
+'''[[世界边界]]'''
+* 在边界外的玩家可以自由的行走（但不可能从内部走到外面）。
+
+=== 命令格式 ===
+'''{{cmd|tellraw}}'''
+* 加入了<code>selector</code>参数。
+** 允许显示玩家的名字。
+** 示例：<code>/tellraw @a {selector:"@a[team=TeamRed]"}</code>将显示出所有在队伍TeamRed中的玩家。
+** 可与{{cmd|title}}协同工作。
+
+=== 游戏内容 ===
+'''[[旁观模式]]'''
+* 在旁观模式中飞行也能进行纵向速度调整了。
+
+'''玩家列表'''
+* 使其在展示生命值目标时更加稳定和更加美观。
+* 现在会将队伍放在一起。
+* 现在以玩家名排列。
+
+'''[[调试屏幕]]'''
+* 重新加入了“面向正/负X/Z轴”。
+
+== 修复 ==
+{{fixes|fixedin=14w20a|prefix=Minecraft|showdesc=1
+|;old
+|8881|生物将任意层数的雪都当做非固体。
+|26203|将初始分数设置为0时，玩家在记分板中不会出现。
+|33084|在玩家死亡但尚未复活时，使用{{cmd|give|link=none}}命令给予物品会使得物品以掉落物形式生成在玩家死亡地点（类似{{cmd|summon|link=none}}命令的效果）。
+|51776|命令方块的32000个字符限制实际上是16000个字符。
+|52881|击退距离不正确，取决于登录顺序。
+|;dev
+|44331|与无效的村民交互时，游戏崩溃。
+|45303|露天的地牢在生成时不包括刷怪笼、箱子以及大部分的地板。
+|46765|树叶、红石块、TNT以及荧石会造成窒息伤害。
+|48442|地牢生成时没有地板，有被破坏的箱子或者被覆盖了的刷怪笼。
+|48535|如果<code>mobGriefing</code>被设置为<code>false</code>，苦力怕的爆炸动画会消失。
+|49577|中型和大型史莱姆在生成时无视方块碰撞，导致方块可以包含在它们体内。
+|50275|拴绳在栅栏上不显示绳结，且无法右键单击。
+|50323|如果站的位置离上面放置了物品展示框的箱子太近时，箱子无法打开。
+|50852|{{cmd|scoreboard players reset * objective|link=none}}命令清除了其他记分项的侧边栏。
+|50974|放置在物品展示框中的被重命名过的物品在玩家重生后不显示其名字。
+|51125|矿车从铁轨的角落射出。
+|51155|矿车在已充能的动力铁轨上上升5-15格（垂直方向）距离时，运动方向会反转。
+|51216|堆叠生成的矿车会在铁轨上发生故障。
+|51368|矿车在对角线上全速行驶不会减慢速度。
+|53380|在边界外不能移动。
+|53435|调试屏幕中，<code>Facing towards</code>字段消失。
+|53469|滑块的值不正确，导致永远无法创建世界（<code>java.lang.IllegalArgumentException: n must be positive</code>）。
+|54164|<code>footstep</code>，<code>hugeexplosion</code>和<code>largeexplode</code>粒子不显示。
+|54381|{{cmd|scoreboard players operation|link=none}}命令对不在记分板上的玩家没有效果，但也有效果。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:14w20a]]
+[[en:Java Edition 14w20a]]
+[[es:Java Edition 14w20a]]
+[[fr:Édition Java 14w20a]]
+[[it:Java Edition 14w20a]]
+[[ja:Java Edition 14w20a]]
+[[pt:Edição Java 14w20a]]
+[[ru:14w20a (Java Edition)]]

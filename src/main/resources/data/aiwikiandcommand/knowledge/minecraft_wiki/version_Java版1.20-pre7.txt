@@ -1,0 +1,68 @@
+# 页面: Java版1.20-pre7
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.20-pre7
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:38
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=1.20-pre7
+|image=1.20-pre7.png
+|image2=Java Edition 1.20-pre7 Simplified.png\Java Edition 1.20-pre7 Traditional.png\Java Edition 1.20-pre7 Traditional HK.png
+|edition=Java
+|type=Pre-release
+|date=2023年5月29日
+|jsonhash=fb19ee01ac38901022d76bff8f80479fbb7d0ac1
+|clienthash=30d5c2f0f3b10ca0eb7df3ef566eab4fe3bed672
+|clientmap=dc4a2b8fb934fce713b82565067815722e3a27e7
+|serverhash=ed6ddd61aeb1f529ef626fae9bcb0a5f51491f71
+|servermap=3d30c709afce24c9a85daabb900640f2a042f76e
+|parent=1.20
+|prevparent=1.19.4
+|prev=1.20-pre6
+|next=1.20-rc1
+|nextparent=1.20.1
+}}<onlyinclude>
+
+'''1.20-pre7'''是[[Java版1.20]]的第7个，也是最后一个预发布版，发布于2023年5月29日<ref>{{article|minecraft-1-20-pre-release-7|Minecraft 1.20 Pre-Release 7|May 29, 2023}}</ref>，加入了适用于{{samp|world}}文件夹内符号链接的白名单机制，并修复了一个漏洞。
+
+== 更改 ==
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 向{{cd|#slabs}}方块和物品标签中加入了{{cd|bamboo_mosaic_slab}}。
+* 向{{cd|#stairs}}方块和物品标签中加入了{{cd|bamboo_mosaic_stairs}}。
+
+'''常规'''
+* 为提升安全性，游戏现在会检测{{cd|world}}文件夹内的{{w|符号链接}}。
+** 如果符号链接指向的目标不在用户配置的白名单内，游戏将不会加载世界。
+*** 世界文件夹自身可被链接。
+** 允许的符号链接目标存储于客户端或服务端文件夹顶层的{{cd|allowed_symlinks.txt}}文件里。
+** 此文件由符合以下格式的条目（每行一个）组成：
+*** {{cd|#}}起始的行是注释行，并会被忽略。
+*** 格式：{{cd|[type]pattern}}，{{cd|type}}可以是{{cd|glob}}、{{cd|regex}}或{{cd|prefix}}。
+**** {{cd|prefix}}可匹配上开头包含此字符串的路径。例如{{cd|/test}}可以匹配上{{cd|d=pretty|/test|/test/|/test/foo.txt}}这些路径。
+**** {{cd|regex}}将正则表达式与整个路径相匹配。
+**** {{cd|glob}}执行与操作系统有关的匹配模式。例如{{cd|*.txt}}通常可以匹配上所有扩展名为{{cd|txt}}的文件。
+**** 路径分隔符与系统有关。
+*** 格式：{{cd|pattern}}，默认类型为{{cd|prefix}}。
+
+== 修复 ==
+{{fixes|fixedin=1.20 Pre-release 7|showdesc=1
+|;old
+|257778|竹马赛克台阶和竹马赛克楼梯不属于{{cd|d=pretty|#slabs|#stairs}}方块和物品标签。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:1.20-pre7]]
+[[en:Java Edition 1.20 Pre-release 7]]
+[[es:Java Edition 1.20 Pre-release 7]]
+[[fr:Édition Java 1.20 Pre-release 7]]
+[[ja:Java Edition 1.20 Pre-release 7]]
+[[lzh:爪哇版一點二〇之預七]]
+[[pt:Edição Java 1.20 Pre-release 7]]
+[[ru:1.20 Pre-release 7 (Java Edition)]]
+[[uk:1.20 Pre-release 7 (Java Edition)]]

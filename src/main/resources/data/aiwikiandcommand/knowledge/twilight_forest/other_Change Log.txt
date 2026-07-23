@@ -1,0 +1,1715 @@
+For versions 3.11.1021 and older, see Change Log/Versions 3.x.x.
+
+For versions 2.4.3 and older, see Change Log/Versions 2.x.x.
+
+For versions 1.20.2 and older, see Change Log/Versions 1.x.x.
+
+__TOC__
+
+## Version 4.8.3344 (March 21st, 2026)
+ADDED:
+* Added Shika Senbei, a new food item that can also be fed to Deer. It can be found in fallen trunks and Druid Huts.
+* Traveller's Gloves now render in first-person on your player hand. This can be disabled via the client config if you would prefer to not have that.
+* Added an animation to the Traveller's Wings when performing a sidestep with its modifier namesake.
+* Added the Camp structure to the following biomes: forest, mushroom_forest, firefly_forest.
+* Helmet Crab improvements:
+** Added new Helmet Crab animations that look a little nicer now.
+** The texture was slightly tweaked. Most prominently the bottom of the helm no longer looks like solid Knightmetal.
+** The Helmet Crab's helmet will no longer turn red when hurt or rotate when they die.
+* Emperor's Cloth now works with an Elytra.
+* The Slimy Soles modifier can now be cancelled by holding the sneak key. It works the same as holding sneak while falling onto a Slime Block.
+* Added Miniature Labyrinth. (by Big)
+* Added Miniature Dark Tower. (by queenofants)
+
+CHANGED:
+* The Twilight Forest portal generation should overall be a lot safer now and consistently place you where you should be placed.
+* Additional safeguard for preventing portals from placing players into locked biomes or structures were also added.
+* Traveller's Gloves will now properly fit slim player models.
+* Adjusted small and medium bush generation to prevent them from floating in most cases of generating.
+* Blueberry Bushes can now generate in the Snowy Forest and Highlands biomes.
+* Blackberry Bush generation in the Swamp has been increased by a factor 2 and decreased in non-Swamp biomes by a factor of 4.
+* Removed the cooked meat into Leather recipe from Drying Racks.
+* Moonworms can once again be waterlogged by popular demand. Fireflies and Cicadas remain unwaterloggable.
+* Changed Zombies created from players to now display the player's nametag.
+* Adjusted the sounds for placing Snow and Grass in Hollow Logs.
+* Adjusted the sound for breaking Snow in Hollow Logs.
+* Updated the Japanese, Chinese, and Ukrainian translations.
+
+FIXED:
+* Fixed the Intel integrated graphics driver crash. Blame Intel, it was their bug we had to fix.
+* Fixed Double Jump able to be triggered while riding a vehicle such as Horses or Minecarts.
+* Fixed a bug where Traveller's Wings animations could desync in multiplayer.
+* Fixed a bug where Exanimate Essence and the Lich could crash a game with Candles from other mods. (by Narrik Synthfox)
+* Fixed potential crashes when there weren't any pieces in StructureStart in AvoidLandmarkModifier. (by Alex)
+* Fixed DarkTowerBerryBushBlock being able to grow when it has a snow layer.
+* Fixed some modifier strings displaying incorrectly when inserted/removed.
+* Fixed a bug where Oreberries and other underground plants could generate inside structures. (by Fywchis)
+* Fixed the annual breaking of Hedgemaze generation.
+* Fixed Chiseled Canopy Bookshelves allowing you to insert/extract items while in the spawning state.
+* Fixed climbable Hollow Logs not having properly tinted Vines.
+* Fixed Transformation Leaves particles always being bright white.
+* Fixed the bottom plane on the Yeti Chestplate model being too low.
+* Fixed the Sidestep cooldown sound playing for other players.
+* Fixed potential item loss when killing a boss with a high looting level.
+* Fixed the Snow Queen Trophy's crown not properly rotating when the JAPPA Pack is in use.
+
+## Version 4.8.3287 (December 30th, 2025)
+CHANGED:
+* Changed the Jerky hunger and saturation values. They now have a niche of less hunger but more saturation over regularly cooked meat which makes them slightly worse early-game and slightly better late-game.
+* Changed the break time and explosion resistance of Drying Racks to be half of wooden slabs of the corresponding type.
+* Changed Shears to be the suitable tool for Berry Bushes which will now break them faster. The Oreberry Bushes do not get broken faster by them, however, as they are too metallic.
+
+FIXED:
+* Fixed a bug where Class.forName was being called every tick. And frame. Many times over. This will improve overall performance.
+* Fixed a client-side memory leak with the menu entity renderer helper.
+* Fixed a crash related to the recently removed waterlogged state of Moonworms when using the Moonworm Queen.
+
+## Version 4.8.3281 (26th December, 2025)
+CHANGED:
+* Added a sound for inserting an item onto a Drying Rack.
+* Tweaked the Smoker and Fire Jet block models to make more sense visually.
+* Brittle and Greater Potion Flasks can now also be filled by right-clicking a potion in your inventory.
+* Changed CritterBlock to no longer be waterloggable.
+* Glass Bottles are now returned after using Tannin to craft.
+* Filled some Dirt around under Camp structure's tents.
+
+FIXED:
+* Fixed client Fortification icons now being properly synced with the server.
+* Fixed a bug where you could recraft enchantments onto un-enchantable items.
+* Fixed Arctic armor rendering as undyed when dyed.
+* Fixed Flow and Bolt trim patterns appearing as missing textures when used with TF's custom trim materials.
+* Taking item from Drying Racks now fills any incomplete stacks in your inventory before going into your hand.
+* Fixed mobs not avoiding Oreberry Bushes.
+* Smoker and Fire Jet blocks now make grass sounds instead of wood sounds.
+* Fixed Steeleaf making Moss Block sounds.
+* Fixed the UVs on the tentacles of the Ur-Ghast.
+* Fixed Knightmetal tools and Knight Phantoms completely bypassing enchantments and armor regardless of armor points.
+* Fixed the Crumble Horn's effect being shifted too far in the positive direction. This was, in fact, not very positive.
+* Fixed custom Arrow entities not inheriting Arrow effects. (Fixed by LShiftLess)
+* Fixed a crash happening when placing a Trollsteinn block on dedicated server. (Fixed by sbite0138)
+* Fixed Mason Jars not rendering Traveller's Gear modifier textures.
+* Fixed the Rabbit's Pocket Watch and the Traveller's Wings having their respective Jump Boost and Jump Boost II clash for supremacy in an epic, yet incredibly annoying battle.
+* Fixed a bug where TF Chests would lose their state of being and consequently your items if your world is from an older TF version.
+* Fixed Drying Racks destroying their held item instead of dropping it when broken. (Fixed by Fywchis)
+
+## Version 4.8.3260 (23rd December, 2025)
+ADDED:
+* Added Traveller's Gear, a blast from the past ready to double jump back into action!
+** It is an armor set made mostly for moving around more freely, not for combat!
+** As a tradeoff for its versatility, it cannot be enchanted.
+** This entails six items in total: Goggles, Vest, Wings, Boots, Belt, and Gloves.
+** The Goggles, Vest, Wings, and Boots can be upgraded with modifiers. Each piece has unique modifiers to enhance your experience with it.
+* Added the Traveller's Goggles:
+** Has the built-in ability Zoom, which lets you zoom in like Spyglasses.
+** There are 5 modifiers to choose from:
+*** Red Thread Vision: acts as if you have Red Thread in your hand.
+*** Item Display: lets you have a HUD that displays maps, time, and more!
+*** All-Night Goggles: Prevents Phantoms from spawning and Endermen from getting angry when stared at.
+*** Aquatic Agility: a mixture of Aqua Affinity and Respiration.
+*** Auto-Repair: speaks for itself.
+* Added the Traveller's Vest:
+** Has the built-in ability Swift Swim, which lets you swim faster.
+** There are 6 modifiers to choose from:
+*** Stealth: Sneak to hide!
+*** Perfect Dodge: a chance to dodge projectiles.
+*** Haste: we all know what that does.
+*** Arrow Magnetism: pulls back missed arrows to you.
+*** Efficient Eater: drastically lowers hunger drain from movement.
+*** Auto-Repair: speaks for itself.
+* Added the Traveller's Wings:
+** Has the built-in ability High Jump, which lets you jump higher.
+** There are 6 modifiers to choose from:
+*** Gradual Glide: Lets you glide by sneaking mid-air.
+*** Agile Ranger: lets you walk at normal speed when drawing a Bow.
+*** Double Jump: exactly what it sounds like!
+*** Sidestep: double tap your left or right strafe key to do a dash!
+*** Swap Hotbar: Allows you to store a second hotbar in your Wings.
+*** Auto-Repair: speaks for itself.
+** Worn in the leg slot.
+** Does not let you fly.
+* Added the Traveller's Boots:
+** Has the built-in ability Step-Up, which lets you walk up full-sized blocks.
+** There are 5 modifiers to choose from:
+*** Water Walk: lets you walk on water.
+*** Slimy Soles: Negates fall damage and lets you bounce while doing so.
+*** Straight Ahead: increases forward movement speed.
+*** Unrestrained: prevents any and all slowdown from blocks.
+*** Auto-Repair: speaks for itself.
+* Added the Traveller's Belt:
+** Lets you store a second hotbar inside of it.
+** A great companion for any builder!
+** Worn in the leg slot.
+** Has no durability and provides no armor.
+* Added the Traveller's Gloves:
+** They are a cosmetic item can be crafted with the Vest or worn separately if you like the look!
+** Does not take up a modifier slot.
+* Added 12 berry bushes!
+** Four of them can be found across the dimension.
+** Another four can be found somewhere nefarious.
+** The last four can be found underground.
+* Added Drying Racks!
+** Place meats and various items on them to dry them out.
+* New foods!
+** 8 types of berries:
+*** Raspberry
+*** Blueberry
+*** Blackberry
+*** Maloberry
+*** Blightberry
+*** Duskberry
+*** Skyberry
+*** Stingberry
+** 12 types of jerky:
+*** Beef Jerky
+*** Chicken Jerky!
+*** Pork Jerky
+*** Mutton Jerky
+*** Rabbit Jerky
+*** Meef Jerky
+*** Venison Jerky
+*** Monster Jerky
+*** Cod Jerky
+*** Salmon Jerky
+*** Tropical Fish Jerky
+*** Fugu Jerky
+** 2 types of edible slime:
+*** Gelatinous Slime Drop
+*** Gelatinous Maze Slime Drop
+** Berry Medley
+** Moss Soup
+* Added Maze Slimeballs
+* Added Maze Slime Blocks
+** This slime block will only stick to Mazestone blocks.
+* Added Tannin
+* Added Treated Leather
+* Added Tanned Leather
+* Added Iron, Gold, and Copper Oreberries
+* Added Concentrated Essence Berries
+* Added the /tf tp debug command. This teleports you directly to our dimension.
+* Added a new twilightforest:landmark structure type. Similar to the twilightforest:progression one, you can wrap any structure in it and define structure icons to show up on Magic Maps (also add the structure to the twilightforest:landmark tag to make it appear on Magic Maps).
+* Added custom underwater fog colors to better correspond with the water color.
+* Added a gamerule for portal delay.
+* Added a Sleepy Horse to the mod description. Hey! Wake up! We're releasing!
+
+CHANGED:
+* Endermen will no longer pick up blocks in our dimension.
+* Naga Courtyards can now have their spawner replaced by another structure in datapack customization
+* Stripped Logs and Woods are added to their respective c: tags, can now be used to craft Create's Andesite Casing and others.
+* Updated all TF structure configs to be a little more readable.
+* Updated twilightforest:progression to no longer require the biomes, spawn_overrides, step, and terrain_adaptation fields twice (once in the wrapped structure and once in the normal structure JSON). It will now pull these values directly from the wrapped version.
+* Hint creature definition is now optional in progression structure JSONs.
+* Decoration clearance is now optional in landmark structure JSONs.
+* Changed Moonworms to no longer "die" when failing to place. They now once again drop as an item.
+
+FIXED:
+* Fixed the Aurora Palace's entrance stairs acting like blockades to the doors. Will this be the last time this dungeon breaks? Probably not!
+* Fixed the Mist Wolf's transparency being broken for the 184th time.
+* Fixed Reappearing Blocks using the wrong sound when reappearing.
+* Fixed a Trollsteinn crash.
+* Fixed clients crashing when joining servers that don't have custom TF registries present.
+* Fixed the overhead animation of the Block and Chain Goblin being jittery.
+* Fixed it so we don't reduce the ItemStack if the player has infinite materials when the ItemStack is inserted inside a Mason Jar.
+* Fixed a bug where trapped chests didn't have the MINEABLE_WITH_AXE tag.
+* Fixed a bug where trapped chests didn't have the CHESTS_WOODEN tag.
+* Fixed a bug where Scepters could not be repaired when they should've been able to be.
+* Fixed mushroom canopies replacing Lich Tower blocks.
+* Thread-safe fixes for TFMaze (Hedge Maze, Labyrinth)
+* Fixed Moss and Clover Patches not being rotated when placed by Structure Templates.
+
+## Version 4.7.3196 (28th April, 2025)
+ADDED:
+* Added block tag support for create:chest_mounted_storage, create:passive_boiler_heaters, and create:tree_attachments.
+
+CHANGED:
+* Adjusted spawn rates of Medium Hollow Hills to make Redcap Sappers a little more common.
+
+FIXED:
+* Fixed a Candelabra crash if it was mined with a Silk Touch tool.
+* Fixed Keepsake Casket not being fluidloggable.
+* Fixed a packet crash on servers when hitting the Lich in phase 1.
+* Fixed Chiseled Canopy Bookshelves allowing hoppers to pull/push items through when in their spawner state.
+* Fixed generated Mushgloom clusters not obeying the laws of physics.
+* Fixed the Naga not rendering at the proper height when the JAPPA pack is enabled.
+* Fixed the Hydra's body rotation not properly synchronizing to clients.
+* Fixed the Troll Caves not being properly localized.
+
+## Version 4.7.3094 (4th April, 2025)
+FIXED:
+* Fixed players always logging into the Twilight Forest when newPlayersSpawnInTF config is enabled: Only on first login they will spawn in the TF.
+
+## Version 4.7.3040 (30th March, 2025)
+FIXED:
+* Fixed spawnkills in the dimension especially when newPlayersSpawnInTF is enabled in the config.
+* Fixed Charm of Keeping I crash.
+* Fixed Twilight Lich Trophy to match the Twilight Lich's name.
+* Updated translations from Crowdin.
+
+## Version 4.7.3032 (29th March, 2025)
+ADDED:
+* The Lich Tower Rework!
+* A large-scale rework of the Lich detailed fully at the bottom of this changelog (it's waaaay too long!).
+* New items:
+** Exanimate Essence
+*** Used for placing Ominous Fire and an alternative for recharging scepters.
+** Crown Splinter
+** Mystic Crown
+*** Slightly enhances scepter attributes.
+** Brittle Potion Flask
+*** Stores three potion doses. Breaks.
+** Greater Potion Flask
+*** Stores three potion doses. Doesn't break.
+** Wrought Iron Bar
+*** Can only be obtained by uncrafting blocks made of wrought iron. Used only to craft said wrought iron blocks.
+* New blocks:
+** Terrorcotta Lines
+** Terrorcotta Curves
+** Terrorcotta Arcs
+** Coronation Carpet
+** Candelabra
+** Wrought Iron Fence
+** Ominous Candle
+** Ominous Fire
+*** Turns the living undead.
+** Keepsake Casket
+*** Functions like your conventional gravestone mod as long as it's in your inventory. Limited durability.
+** Skull Chest
+** Sinister Spawner
+*** A more customizable version of the vanilla spawner.
+* Added a new enchantment called Renewal. It can be put on scepters to make them automatically recharge if the required items are in your inventory.
+* Added a new advancement: Full Mettle Alchemist.
+* Added crafting recipes for the Canopy Window and Canopy Window Pane blocks and removed their WIP status.
+* Added three new Naga Courtyard terraces and touched up the existing ones.
+* New developer commands! If you're the kind of person that likes poking at dev toys:
+** /twilightforest sinister_spawner subtree containing 4 commands for changing data in a Sinister Spawner block. These commands are helpers for setting its particles and loot table.
+** /twilightforest structure_util subtree containing 5 commands for structure development utility:
+*** /twilightforest structure_util display_pieces  generates block display entities distorted to fit each structure piece. All accompanied with labels for piece IDs.
+*** /twilightforest structure_util generator_radius  generates a grid of block display entities to match the chunks that the filtered nearby structure overlaps, for measuring.
+*** /twilightforest structure_util clear_display clears all display entities generated by the 2 above commands. Proxy for two /kill commands with specific entity filters.
+*** /twilightforest structure_util count_loot  Rolls every unopened loot table in a structure and then counts each item from every containers' inventories in the structure.
+*** /twilightforest structure_util count_template  Counts each template used by the pieces in the structure.
+
+CHANGED:
+* Changed the Death Tome's health from 30 to 20.
+* Changed the chain links on the Block and Chain to appear to be coming out of the player instead of coming out of the block part.
+* Updated compat for the Tips mod.
+* Separated Mining Core and Ore Magnet blacklists into separate tags.
+* Optimized getTerrainColumn(), leading to faster worldgen.
+* Optimized LazyArea for multithreading, resulting in faster worldgen on systems with many cores and threads.
+* Fallen Trunk changes:
+** Changed the Fallen Trunk mound shape, to only have one on each side, and their position to have a bias towards the middle of the trunk.
+** Changed the terrain around the Fallen Trunk to be more flat.
+** Changed the big Fallen Trunks to have a longer minimum length. It was cold outside, alright?
+** Changed the eroded ends to be shorter. It was 3, now it's 2.
+* Thorn Roses and Thorn Leaves when dropped will no longer be destroyed upon touching Thorns.
+
+FIXED:
+* Fixed the Carminite Golem's left shoulder having the wrong offset.
+* Fixed a dupe bug.
+* Fixed the Block and Chain's chain links not rendering if the block part is out of view.
+* Fixed the chain links on the Block and Chain to connect to the center of the block part instead of the lower edge.
+* Fixed the Block and Chain's block part turning to face you when being pulled back.
+* Fixed the Knight Stronghold surface ruins' height.
+* Fixed log spam related to terraformer and painting generators.
+* Fixed potential compat race condition involving Gamerule registration.
+* Fixed null blockstate crash during generation of mazes such as the Labyrinth.
+* Fixed missing magic cores on Timewood and Miningwood trees.
+* Fixed chest boats using the wrong names.
+* Fixed Beanstalk blocks not being flammable.
+* Fixed performance issues with rendering bugs and Braziers.
+* Fixed a performance issue from baking layers every frame for Knightmetal, Phantom, Arctic, Yeti, and Fiery armor.
+* Fixed a bug where Fallen Trunks could generate inside Druid Huts and other features.
+* The armor model cache now resets on resource reloading.
+* Fixed Chill Aura applying the Frosted effect for 4000 ticks (over 3 minutes) instead of 200 ticks (10 seconds).
+
+Twilight Lich Rework:
+* Renamed the Lich back to Twilight Lich.
+* Fixed the Lich's manlet status from previous porting errors.
+* Adjusted the visuals of the Lich's shadow clones in various ways like making their eyes glow and other touchups.
+* Un-hardcoded some of the Lich's values and turned them into attributes:
+** The amount of shadow clones the Lich can have is now in the clone_count attribute.
+** The amount of shields the Lich spawns in with is now in the max_shield_strength attribute.
+** The amount of zombie minions the Lich spawns before entering phase 3 is now in the minion_count attribute.
+* The Lich can now spawn baby zombie minions on hard. They've been removed from all other difficulties.
+** The maximum amount of baby zombies is proportional to the minion_count attribute at 1/3 of its value.
+* Changed the Lich's casting particles to glow in the dark.
+* Changed projectiles from the Lich and Scepter of Twilight to glow in the dark.
+* Changed the Lich to use the same sound effects a player does when using his scepters.
+* The Lich will now deflect any Scepter of Twilight bolts that are fired at it during phases 2 and 3.
+* The Lich will no longer randomly pause all movement during phase 3.
+* The Lich will now spawn in holding a Scepter of Fortification and produce it's sound as it gears up.
+* The Lich now has a higher likelihood to teleport away after each successful attack on him during phases 2 and 3.
+** During phase 2, the odds are: 1/3, then 2/3, and lastly 3/3.
+** During phase 3, the odds are: 1/6, then 2/6, then 3/6, etc..
+** After the teleportation, the odds are reset.
+** The odds are 0 if the Lich is killed in the attack.
+* The Lich once again strafes during phase 2 like he used to.
+* When teleporting, the Lich makes sure it's at least a few blocks away from his target.
+* When teleporting, the Lich will make sure to not teleport too far away from his initial spawn position.
+* The Lich should now more consistently teleport away if he is somehow stuck.
+* The Lich's zombie minions will once again be buffed with Speed and Strength when hit by the Lich's projectiles.
+* The Lich will now convert nearby Candelabras and Candles when first spawning in to be ominously lit and re-lights them to normal upon death.
+* The Lich will now produce particles that match the color of the Scepter of Life Draining when consuming his own minions.
+* The Lich will now destroy any Lich shadow clone that is somehow still present upon his death.
+* The Lich now creates purple flame particles instead of the usual Endermen ones when teleporting.
+* The Lich shadow clones now have scary evil red eyes that glow in the dark.
+* During phase 3, the Lich will now lower his left arm to appear less zombie-like.
+* Lich shadow clones no longer have shadows.
+* Lich shadow clones now leave smoke particles when teleporting.
+* The Lich death animation is now slightly longer.
+* Fortification shields now leave particles behind when destroyed. The particle is named shield_break.
+* Lich bombs now count as explosive damage.
+* Lich bombs will no longer destroy dropped items.
+* Lich bombs will no longer alter the trajectory of other Lich bombs when exploding.
+* Lich bombs now properly track the source of damage when applying it.
+* The Lich and his shadow clones will now briefly disappear when teleporting.
+* Updated the golden parts on the Lich's texture to have some depth.
+
+## Version 4.6.3003 (January 15th, 2025)
+FIXED:
+* Fixed the head of the baby Dwarf Rabbit's model floating above its body.
+* Fixed the baby Deer levitating above the ground.
+* Fixed various Questing Ram-related crashes.
+
+## Version 4.6.3000 (8th January, 2025)
+ADDED:
+* Reworked the fallen trunk setpieces.
+** They can now generate in three different sizes.
+** The largest size has a chance to be a dungeon.
+** The Superstitious Music Disc has been relocated from the leaf dungeon to the fallen trunk dungeon.
+* Re-implemented the "Getting in Fashion" advancement.
+
+CHANGED:
+* Restored the correct leaf blob shape of the Canopy trees from 1.7.10.
+* Restored the correct leaf blob shape of the mega Canopy trees from 1.4.7.
+* Protection for locked structures now depends on StructurePieces. The protection rain is rendered at the block if:
+** The block is in the bounding box of the structure piece + four blocks in every direction.
+** The block is not in the unprotected bounding box of the structure piece.
+** Server-side protection (what regenerates blocks, disallows entities to be hit, etc.) only works if the block is in the bounding box of the structure piece.
+** As a result of these changes, bugs where players couldn't mine in a normal cave, got stuck, etc. are now fixed.
+* The Questing Ram's required items to complete its quest is now fully data driven. You can find the file for reference here.
+* Removed Respawn Anchor functionality in the Twilight Forest dimension (I'm sorry, little Gizmo...).
+
+FIXED:
+* Fixed a bug where protection didn't render if there were 0 particles on screen and clouds were disabled.
+* Fixed the bounding boxes of StrongholdFoundryComponent, StrongholdDeadEndComponent, and IceTowerStairsComponent.
+* Fixed a memory leak with boat texture generation.
+* Fixed the Emperor's Cloth and Moonworm Queen repair recipes always showing up in recipe viewers even if the recipe was disabled via datapacks.
+* Fixed an oversight causing other mods to not be able to cancel mob effects.
+* Fixed biome blending not actually working on our leaves.
+* Fixed the "One Hit Wonder" advancement not being obtainable.
+* Fixed Fire Beetles inheriting the Creeper loot table, allowing them to drop Music Discs when killed by a Skeleton.
+* Fixed a lighting issue on Skull Candle items.
+* Fixed Skull Candles un-rendering the player's head when worn.
+* Fixed custom damage sources not properly crediting entities.
+* Fixed the protection overlay not properly rendering when trying to break blocks in a protected structure.
+
+## Version 4.6.2941 (12th December 2024)
+CHANGED:
+* Changed Death Tome hitboxes to be bigger and properly encompass the area you'd expect it to be.
+* Lowered the Scepter of Twilight/Lifedraining repair recipes to restore 9 durability per item.
+
+FIXED:
+* Fixed custom structure terraforming failing if YungsAPI is installed.
+* Fixed Jar lid reverting to the default lid when using a Mason Jar on a Firefly/Cicada to jar it.
+* Fixed Jar lid reverting to the default lid when un-jarring a bug.
+* Fixed the client de-syncing when trying to jar an item while in Creative mode.
+* Fixed a bug where Moss Patches wrongly checked the block below them for placing.
+* Fixed Moss Patches not rendering a texture on the bottom part.
+* Fixed Emperor's Cloth not working properly in newer versions of NeoForge.
+* Fixed Arctic Armor being the wrong default color.
+* Fixed the portal overlay appearing when standing on a locked portal.
+* Fixed Baby Loyal Zombies not getting a baby speed boost. I'm so sorry if you have to fight one of these.
+
+## Version 4.6.2856 (15th November, 2024)
+CHANGED:
+* The Enchanted Forest biome has been overhauled in the process of bringing back the 1.7.10 look and features:
+** Increased the density of Canopy trees.
+** Increased the density of Ferns and Tall Ferns.
+** Increased the size of enchanted rings to reduce the impact of Biome Blend.
+** Decreased the density of Short Grass.
+** Removed Mayapples from the biome.
+** Removed Tall Grass from the biome.
+** Added Vines back to the biome.
+** Added new placed feature DENSITY_WATER_LAKES.
+** The Quest Grove is now once again centered in the biome's rings.
+** Fixed a bug with feature placement near the Quest Grove.
+* A post is now created when a Wrought Iron Fence has all four connections.
+* Added collision to Wrought Iron Fence finials.
+* Changed Torchberry clusters to be more spread out.
+* Chest Boat texture files no longer feature the chest part of the model, but it can still be added in via a resource pack
+* Removed the Chest texture from our Chest Boat textures. These can still be changed via a resource pack.
+
+FIXED:
+* Fixed finials being able to be placed when a solid block is obstructing the top of a post.
+* Fixed finials being removed when it gets waterlogged.
+* Fixed Wrought Iron Fences not rotating properly when using things like WorldEdit.
+* Fixed ground vegetation not generating in the Troll Caves.
+* Fixed Mushglooms not generating on the Troll Cave walls.
+* Fixed a bug where Druid Hut chests didn't have loot.
+* Fixed a bug where Snow no longer generated under the trees in snowy_forest.
+* Fixed a bug where the leaves of the four magic trees were no longer rotated in specific ways related to their purpose.
+* Fixed Encased Fire Jets always being lit up, even when inactive.
+* Fixed Trapped Chests going invisible upon relogging.
+* Fixed EMI still showing the Uncrafting Table when it is disabled.
+* Fixed the Trollstein particle color to be purple. Again.
+
+## Version 4.6.2790 (2th September, 2024)
+FIXED:
+* Fixed a mod compatibility issue with player head visibility.
+
+## Version 4.6.2780 (September 6th, 2024)
+ADDED:
+* Added Mason Jars!
+** Lets you display any kind of block or item inside of them!
+** Features custom sounds! (Thank you, MrCompost!)
+** Craft one with 7 Glass and a Twilight Oak Log.
+** They can store one whole item stack.
+** The stopper can be changed by using any Twilight Forest or Vanilla log on it.
+** Items stay inside of them even when broken.
+** Stack count can be checked by shift-clicking with an empty hand.
+** Uses a custom item transform twilightforest:jarred, which defaults to fixed if not present in the item model
+* Reworked the Firefly and Cicada Jars.
+** They are now crafted by combining a Firefly/Cicada with a Mason Jar.
+** Just like a Mason Jar, the stopper can be changed to different kinds of logs.
+* Added new Magic Map icons for the Minoshroom and Alpha Yeti.
+* Re-added the old 1.7.10 Reactor Debris to Carminite Reactors. (Thank you, Sleepy Horse!)
+* Re-added water ponds to a handful of biomes.
+* Added a new structure type that allows datapacks to add progression-related stuff to any structure.
+* Added Charm of Keeping support for Cosmetic Armor (finally!).
+* Recipe viewers now list the required XP for uncrafting recipes.
+* Added support for the Crumble Horn crumbling the new 1.21 Copper blocks. (Thanks AriaElidove)
+* Re-added leaf bushes to a handful of biomes.
+
+CHANGED:
+* Lowered the top layer of Darkwood Leaves in the Dark Forest biome. This makes the Darkwood Tree leaf blobs on top be less uniform.
+* Further discouragement for mobs from walking on tops of Banisters. Stop it.
+* Skull Candles' Candle counts now read from BlockState instead of Block Entity NBT data.
+* Spooky Forest webbing now has a chance to replace leaves if there's air below the leaf block.
+* Magic Map biome colors and Ore Map ore colors can now be controlled via datapacks.
+* Structure jsons can now define what icon they use on the Magic Map.
+* Empty Maze Maps are now in the Labyrinth's loot tables.
+* Maze Maps now display the y level in the map tooltip.
+* Scepter repairing now uses a custom recipe type that allows you to repair them at any durability.
+* Cleaned up the WIP item tag and removed all WIP items from the Creative menu.
+* Minor readability improvement for the /tffeature center command.
+* Adjusted the Knight Phantom Trophy item render to be a little smaller.
+* Centered the Hydra Trophy render to be centered on the head instead of between the head and mouth.
+
+FIXED:
+* Significantly improved the Aurora Palace structure generation. The dungeon should now be properly navigable again without needing to break blocks (except for entering the boss room).
+* Fixed our giant Spruce trees not generating in the Snowy Forest.
+* Fixed the Firefly model missing its legs when viewed from below.
+* Fixed the glow on the Firefly model rendering weirdly when in front of water.
+* Fixed the Knight Stronghold bounding box being too tall.
+* Fixed Rope and Keepsake Caskets not properly rotating when placed by rotated templates.
+* Fixed Blank Maps not playing sounds when getting filled.
+* Fixed transformed Boars eating prior worn Saddles.
+* Fixed Candelabra Candle placement logic.
+* Fixed Twilight Forest portals not checking for clear blocks to place you in.
+* Fixed the Dark Tower generating balconies in entrance rooms.
+* Fixed the Dark Forest's flooring being bald. It now has its ground vegetation back.
+* Fixed XP values in smelting recipes not matching vanilla values.
+* Fixed the Crumble Horn crumbling more blocks than its durability should allow.
+* Fixed the Minewood Core and Timewood Clock being able to replace indestructible blocks upon them growing with their trees.
+* Fixed the Spooky Forest biome fog using hardcoded colors.
+* Fixed Twilight Forest wooden Fence Gates and Pressure Plates not blocking water.
+* Fixed Darkwood branches generating up too high on the trunk.
+* Fixed Painting placements via Structure Data Blocks in a particular Druid Hut basement.
+* Prevent the vines inside Giant Hollow Tree from replacing water when they generate in the Swamp.
+* Fixes the player inventory not properly resynchronizing after block right-click behaviors fail due to structure progression.
+
+## Version 4.5.2490 (June 20th, 2024)
+FIXED:
+* Fixed the server crashing on startup and on player join
+
+## Version 4.5.2472 (June 16th, 2024)
+ADDED:
+* Added a LOT of new sounds! (all made by the talented MrCompost!)
+** Trolls now have unique sounds.
+** And Penguins.
+** And Squirrels, too.
+** Pinch Beetles now have sounds for existing and pinching you. Yay! Agony!
+** Slime Beetles also got new sounds.
+** Don't forget about the Fire Beetles.
+** Helmet Crabs weren't left out either.
+** The Scepter of Twilight, Scepter of Life Draining, Zombie Scepter, and Scepter of Fortification now also have brand new unique sounds!
+* Added Canopy Windows and Canopy Window Panes.
+* Added the Chiseled Canopy Bookshelf.
+** Has all the expected functionality of the vanilla Chiseled Bookshelf.
+** Can be right-clicked with a spawn egg to turn it into a limited spawner.
+** The amount of books indicate how many more mobs the shelf can spawn before reverting back into a normal Canopy Chiseled Bookshelf.
+* Added a new death animation for Knight Phantoms.
+* Added a new block tag that dictates which blocks the Block and Chain is able to destroy.
+* Added recipe grouping to the Recipe Book. This means all wood block, Banister, and Fiery item recipes will now be grouped together for easier navigation of the Recipe Book.
+
+CHANGED:
+* The Rabbit's Pocket Watch now only prevents the player from gaining new instances of Mining Fatigue if held instead of clearing existing instances whenever the player wields it.
+* The health bars of bosses now have unique colors instead of being limited to the vanilla colors.
+* Squirrels and Tiny Birds now have slightly more HP.
+* The Lich can no longer pop bosses to heal himself.
+* The Rotten Flesh dropped by victims of the Scepter of Life Draining is no longer hardcoded. Instead, the drops are now set via the data/twilightforest/loot_tables/items/lifedrain_scepter_kill_bonus.json loottable.
+* Knight Phantoms now use the same loot system as normal entities. Their drops all get collected and deposited into a boss chest when the fight is over.
+* Changed Knight Phantom death particles from explosion to dust.
+* Changed the Banner Pattern's Magic Map Focus color to be accurate with the one currently used.
+* Glass Swords can no longer be made unbreakable or be given more durability by other mods.
+* Tiny Bird and Dwarf Rabbit variants can now be created with datapacks
+* The Knight Phantom boss fight title and boss spawner now refer to them in plural.
+* Uberous Soil now creates Bonemeal particles when used.
+* Uberous Soil now activates when placed below a bonemealable block or when it spreads below one.
+* Uberous Soil now Bonemeals stuff planted on it's bottom side as well
+* Changed Banisters to no longer cycle through their extended variants if a long banister is below them.
+* Change Banisters so that if you place one below an extended Banister, the later will automatically un-extend.
+* You can now shift right-click a Skull Candle to remove Candles one at a time.
+* Added a whitelist for blocks the Block and Chain should always break when enchanted with Destruction. This tag ignores the mining level requirement of the enchantment.
+* Changed huge oaks to generate with more Fireflies.
+* Trollsteinn now lights up in your inventory if in adequate lighting level.
+* Adjusted Rope placement logic (again).
+* Remove the WIP Empty Canopy Bookshelf in favor of the new Chiseled Canopy Bookself.
+
+FIXED:
+* Fixed Trophy Pedestals not allowing Creative mode players to place trophies if they don't meet progression requirements.
+* Fixed Huge Water Lilies and Huge Lily Pads being placeable on blocks other than water.
+* Fixed Huge Lily Pads surviving when Dirt was placed below them.
+* Fixed Huge Lily Pads not playing footstep sounds when walked on.
+* Fixed Huge Lily Pads sounding like grass instead of, well... Lily Pads.
+* Fixed portals created at a negative y coordinate in the Overworld not being detected by the code when trying to return, resulting in the creation of a new one.
+* Fixed coordinate scaling being ignored while creating a new portal after failing to find an existing one.
+* Fixed being teleported right back where you came from if you somehow get pushed back into the portal after using it. You will now simply stand inside it without it being activated.
+* Fixed typo in teh config file.
+* The Scepter of Life Draining particle trail now properly appears to come out of the scepter's orb while in first person.
+* The Scepter of Life Draining particle trail now only appears if the target is actually hit on server-side, alleviating odd cases of the trail appearing for no reason.
+* Fixed Scepter of Life Draining particle trail appearing when trying to hit a dead mob.
+* Fixed the Ur-Ghast and Alpha Yeti Trophy particles spawning off to the side.
+* Fixed the Questing Ram's culling by adjusting it so that it doesn't disappear when the player only has it's rear in view.
+* Fixed instances where the Rope or Chain that is supposed to have a Firefly Jar generating so low that extends into the ground without a Firefly Jar at its end.
+* Fixed Moonworm Queen's shot damage source not specifying the entity that fired it.
+* Fixed boss chests being able to replace block entities and blocks that can't be pushed by pistons.
+* Fixed Uberous Soil not decaying grass-like blocks below it.
+* Fixed hollow oak trees generating inside structure bounding boxes.
+* Fixed the Alpha Yeti going into rampage mode even if it wasn't actually hurt. What a crybaby.
+* Fixed an issue where killing a specific Knight Phantom would result in the boss bar duplicating on the screen.
+* Fixed enchantments carrying over during recrafting when even the armor pieces didn't match.
+* Fixed Hedge Mazes rarely generating without proper paths.
+* Fixed canopy trees sometimes failing to generate on corners in Hedge mazes.
+* Fixed Scepter of Twilight and Moonworm Queen not depleting all their charges in a dispenser.
+* Fixed Knight Phantoms not dropping loot when killed with commands.
+* Fixed boss health bars being full when loading in a boss during it's dying animation.
+* Fixed Scepter of Life Draining killing bosses without them spawning their boss chest.
+* Fixed being able to accidentally eating placed Experiment 115 when holding Experiment 115.
+* Fixed Hostile Wolves not targeting animals normal Wolves do.
+* Hostile Wolves now support Wolf variants. These can only be seen when spawned with commands or transforming vanilla Wolves. They will normally only spawn as the pale version.
+* Fixed the Block and Chain not smashing Decorated Pots.
+* Fixed Trollstein always placing in an active state regardless of the lighting conditions.
+* Fixed z-fighting on the Hostile Wolf.
+* Twilight Portal generation no longer breaks unbreakable blocks.
+
+## Version 4.4.2276 (May 6th, 2024)
+ADDED:
+* Re-implemented mega Canopy trees.
+** Can be grown by placing Canopy Saplings in a 2x2 pattern as you would with a mega jungle tree.
+** Naturally appear in the Forest, Dense Forest, Mushroom Forest, and Dense Mushroom Forest biomes.
+* Emperor's Cloth can now be removed from armor by right-clicking a filled Cauldron. The cloth is not refunded.
+* Added tooltip hints for buttons in the Uncrafting Table screen.
+* Magic Painting data has deeper configuration now, allowing a range of values for it's opacity settings, instead of just singular points.
+** Added an opacity modifier for storms for Magic Paintings.
+** Added two to the Magic Painting gallery.
+* Added the /tf map_locator    command for server operators to generate maps that can guide players to not yet generated structures.
+
+CHANGED:
+* Changed trolls to move a little slower. They were trolling too hard.
+* Lich clones no longer have shields.
+* Lich clones are once again slightly transparent.
+* 2x2 twilight oak trees are now named "mega oak" in the code.
+* Mega oaks and hollow oaks' leaves are now slightly less perfectly spherical.
+* Changed Canopy, Mangrove, Transformation, and Darkwood trees to use their respective wood types for their branches instead of logs.
+* Hollow oak leaf dungeons chests now generate in a random directon from the center instead of always the same.
+* Hanging Roots no longer generate in our biomes.
+* Modded dynamic tools that act as Shears can now drop our shearable blocks.
+* Removed stray pixels on the Lich entity texture.
+* Tweaked Banister tooltip text hint.
+* Adjusted rope placing logic. They can now be placed onto the ends of the hitbox.
+* Cached all of our config options.
+
+FIXED:
+* Fixed the Ore meter not properly wiping its info with left-click.
+* Fixed armor that already had Emperor's Cloth accepting more when smithing.
+* Fixed special recipes not working in the crafting section of the Uncrafting Table.
+* Fixed ghost recipes not rendering properly in the Uncrafting Table.
+* Fixed structure locators discovering already-generated Twilight Forest structures despite being specified to skip generated structures.
+* Fixed Moss Patch models having unsightly problems on select machines.
+* Restored the Item Capability Handler for chests made from Twilight Forest's wood.
+* Fixed Cloud blocks sometimes wrong generating inside of the Giant's house.
+* Fixed the Block & Chain from being operable outside the world border.
+* Moonworm Queen shot fixes:
+** They now use the same lootable as the placed version instead of dropping a hardcoded Lime Dye.
+** It now drops items when hitting a non-player entity, as if the Moonworm died.
+** Fixed the lack of sound playing when a Moonworm gets squished.
+** Fixed the Moonworm creating an air pocket when shot into water.
+** Fixed the Moonworm being able to land onto blocks it usually cannot be placed on.
+* Fixed Mangrove and Canopy tree branches generating too low.
+* Optimized Cloud event code to not create new block positions every loop.
+* Fixed JEI entity rendering conflicting with code from Tinker's Construct.
+* Fixed placed trophies slightly hovering off the ground.
+* Fixed bugs on hollow oaks sometimes replacing a log block, leaving a hole in the tree. They're Fireflies and Cicadas, not termites.
+* Fixed Hedge Maze chests always facing the same direction.
+* Fixed the vines inside of hollow oaks always being on the east side. West/north/south side represent!
+* Fixed the Lich's shields persisting if he he were to die during the first phase.
+
+## Version 4.4.2235 (March 14, 2024)
+ADDED:
+* Fully implemented the Ore Meter!
+** Right-click with the Ore Meter to detect nearby ore(s).
+** Shift right-click in the air to set the Ore Meter's chunk range (can be a 0-2 chunk radius).
+** Shift right-click a block to lock targeting to that block. The Ore Meter will only detect blocks of that type nearby. This behavior is controlled via a tag (ore_meter_targetable).
+** Left-click with the Ore Meter to wipe all its current data.
+* Added the Rabbit's Pocket Watch:
+** Equip it on your hotbar to get Speed and Jump Boost.
+** Hold it in your hand/off-hand slot to get Haste as well.
+** Never be late again, or it'll be off with your head!
+* Added Emperor's Cloth:
+** Emperor's Cloth can be applied to armor to prevent it from rendering on your player.
+** The cloth can be applied either through normal crafting or smithing. No template is required.
+** A tooltip will be applied to armors affected by the cloth so you can easily tell which ones will render invisible.
+** Equiping armor with Emperor's Cloth will render it invisible to mobs, too. This means having invisibility with said armor will make you fully invisible to all mobs.
+** NOTE: If a modded piece of armor doesn't work properly with the cloth, it's either not tagged properly or it uses a custom armor render layer which we can't support. Please let us know if any armors don't work and we can look into it.
+* Implemented Rope:
+** Can be crafted by using 3 Root Strands.
+** Found naturally generating in the woods being used to suspend Firefly Jars.
+** Can be placed on the bottom of blocks or on their sides.
+** It can also intersect with itself and works similarly to vanilla's Scaffolding block when placed and broken.
+* A small, red, X now shows up next to the structure icons on Magic Maps if the boss of that structure has been defeated.
+** The Quest Grove will also display as an X when its Questing Ram has gifted its rewards.
+* Added a new sound for fortification shields expiring and changed some of the other sounds.
+* Added an indicator for how many fortification shields are left on your player on the hotbar.
+* Added new texture variants for Red Thread.
+* Added particle animations to the Timewood Clock, Heart of Transformation and Minewood Core.
+* Datapacks can now control stalagmite/stalactite densities in Hollow Hills, Hydra Hills, and Yeti Caves.
+* Right-clicking Empty Canopy Bookshelves and Death Tome Spawner blocks with a Death Tome spawn egg item will now increase that block's amount of Death Tomes.
+* Implemented frames for Magic Paintings.
+* Added compat for the Tips mod. You can now see 64 unique messages related to Twilight Forest with it.
+* Added compat for REI.
+* Added compat for EMI.
+* Added Moonworm repairing support to recipe viewers.
+* Added Recipe Book support in Uncrafting Table menu.
+* Added a config option to disable ingredient cycling in the Uncrafting Table.
+* Added a config option to allow charms to play the Totem of Undying screen effect instead of our own.
+* Added a system that allows for multiplayer inclusive boss battles:
+** A new config option: multiplayerFightAdjuster. There are four values allowed here: NONE, MORE_LOOT, MORE_HEALTH, and MORE_LOOT_AND_HEALTH.
+** More loot will allow bosses to drop more items based on how many players participated in the fight. Exact chances can be found here.
+** Loot is also fully controllable via datapacks, done through two new loot functions and a tag. You can read more about the system here if youre interested in adding dynamic loot drops.
+** More health will increase a boss' health based on how players are nearby when the boss spawns. Easy adds 10 hearts per person, normal adds 20, and hard adds 30.
+
+CHANGED:
+* Updated the Ice Bomb:
+** Now travels 93% faster.
+** It now once again uses the correct particles.
+** The particle trail it leaves is now centered on the thrown bomb.
+** The Ice Bomb no longer stops in mid-air when colliding with an entity. It instead applies it's effect on it and keeps going.
+** It now lasts 5 seconds instead of 4.
+** Fixed the Ice Bomb not applying its effect on the first second.
+** The snow layer that the Ice Bomb makes is now slightly rounded, with a small additional second layer.
+** The Ice Bomb now remembers how much time it has left if it is unloaded.
+* Block and Chain updates:
+** Block and Chain chain links now act chain-like instead of stretching forward as the block travels.
+** The chain links on the Block and Chain are now part of the renderes instead of separate entities.
+* The Carminite block has been tweaked:
+** It now uses metal sounds (like a Block of Diamond).
+** It now has a hardness of 1.5 (like a Block of Amethyst).
+** It now requires a pickaxe to break.
+** It is no longer considered sticky by Pistons.
+* Many internal refactors for Twilight Forest dimension generation have been made:
+** Revamped cave generation.
+** Fixed chasms generating on the surface, more dirt for tunnel generation, and occasional big rooms.
+** Fully eliminated our custom chunk generator and split its functionality off to various sub-systems. We only use Vanilla's noise-based generator now. Expect improved compatibility for addon structures in the Twilight Forest dimension.
+** Terrain generation now uses a density function in the noise-based generator.
+** Specific Twilight Forest structures (Hollow Hills, Labyrinth, Hydra Lair, Yeti Caves) now modify noise-based generation in ways similar to how vanilla's structures modify the terrain. This will help compatibility when generated in new dimensions.
+** The Giant's House have been split off from the Troll Cave structure and are now their own structures. They still show as a singular icon on the Magic Map and are still gated behind defeating three specific bosses.
+** In singleplayer, Twilight Forest's biome generator now shows specialized info on the F3 debug overlay.
+** Re-implemented ferns into TF's world generation.
+* Changed how some items are held:
+** Lamp of Cinders, Ore Magnet, and Moonworm Queen no longer face the player when held in the left hand while in first-person view.
+** The way the Lamp of Cinders and Ore Magnet are held has been adjusted for third-person view to be more tool-like.
+** The Moonworm Queen third-person position has been shifted slightly.
+* Rewrote the weather rendering code. Locked weather effects are now much less harsh on the eyes and look closer to how the 1.7 effects look.
+* Block and Chain and Cube of Annihilation projectiles now filter blocks based on Vanilla Item Stack's CanDestroy nbt list if used in Adventure Mode.
+* Bug blocks may now be placed on leaves.
+* Marked Questing Ram banner as Not Yet Implemented.
+* Changed a pixel on the Timewood Clock texture.
+* Spiral Brick blocks can now be waterlogged.
+* Etched Nagastone no longer switches axis direction on placement if sneaking
+* Previously empty containers in Druid Huts now generate with junk items.
+* Changed the chest Knight Phantoms drop their loot in.
+* Minor changes to a few subtitles for scepters and Lich clones.
+* The floating text in the Final Castle gazebo can now be removed.
+* The Lich now teleports back to the boss room if it gets too far away.
+* The Lich now teleports back to the center of the boss room during phase 3 if it gets stuck trying to go down the stairs.
+* Nerfed the blizzard restriction a little bit to not start hurting you as quickly.
+* All passive animal tempt/breed items are now controlled via tags.
+* Updated all structure NBT files to use the proper data version. This will now be done automatically every Minecraft update.
+* Pinch Beetles will now drop you immediately when they die instead of when they get removed from the world.
+* The player's food bar will now render when riding a hostile "mount" like a Pinch Beetle or Yeti.
+* Revamped Ruined Foundations with some stairs, slabs, and fences.
+* Switched Transformation Powder and Crumble Horn interactions to use data maps instead of fake recipes. If you have a datapack that adds/changes either of these, they will no longer work. You can read about data maps here.
+* Transformation Powder transformations are located in data/twilightforest/data_maps/entity_type/transformation_powder.json, and Crumble Horn transformations are located in data/twilightforest/data_maps/block/crumble_horn.json.
+* Slightly reordered the item and equipment Creative tabs to account for new items.
+* Prevent Hedge contact damage for Skeleton Druid jockeys when their Swarm Spider idles on top of Hedge blocks.
+* The Crumble Horn now uses the horn tooting animation.
+* Made animal spawns happen a bit more often in the dimension.
+* Mining with a Fiery Pickaxe will now drop XP when smelting items.
+* Re-added back the Hydra death animation from earlier versions.
+* All of TF's damage types are now appropriately tagged with NeoForge's tags.
+* Trimmed magic tree core config.
+* Transferred Aurora Block model variants from its blockstate to a custom baked model. This fixes the pattern mismatching.
+* Changed the Final Boss Spawner to have an (NYI) tag.
+
+FIXED:
+* Structure Fixes:
+** Re-added the 3x3 Giant Hollow Oak trunk variant.
+** Moved Giant Hollow Oaks back to being structures.
+** Giant Hollow Oaks have had their wide and long branches restored and will no longer be cut off if larger than 3x3 chunks.
+** Fixed regressions with Hollow Oak giants.
+** Refurbished the Twilight Oak Stump features, restoring their roots and re-enabling them to replace the dirt floor within its hollow interior with wood.
+** Fixed Giant Clouds generating Fluffy Clouds instead of Wispy Clouds at its edges.
+** Nerfed the ore quantity generating in Hollow Hills stalactites.
+** Reduced the amount of stalagmites that form on hollow hill floors.
+** Made Speleothem placement a little more reliable inside various structures.
+** Fixed Stone Circle features being one block too low, they're now correctly three blocks tall again.
+** Stone Circle features now extend 2 blocks into the ground. This will prevent some of the pillars from floating if the feature generates on an incline.
+* Fixed the models & textures displaying wrongly for:
+** Block and Chain Goblin limb mirroring.
+** Deer head rotation point.
+** Helmet Crab's helmet.
+** Phantom Knight stray pixels.
+** Minotaur/Minoshroom horns.
+** Pinch Beetle pincers.
+** Slime Beetle leg mirroring.
+** Slime/Fire/Pinch Beetle antenna and legs.
+** Ghastling/Ghastguard tentacle positions.
+** Incorrect UVs on Wraith arms.
+* Fixed Shield rendering backs of cubes on Lich and from Scepters of Fortification.
+* Goblin Knights have renounced their recently found pacifism.
+* Fixed the Lich's shield rendering the backs of cubes on the Lich and Scepter of Fortification.
+* Fixed Lich and Scepter of Fortification shield renders being backwards.
+* Fixed missing particle texture for bug items.
+* Fixed Stronghold Shield placement logic.
+* Fixed dying Nagas still dealing damage to other entities.
+* Fixed Highlands world generation.
+* Fixed the holes in the Labyrinths Bedrock floors and walls by extending them by one block.
+* Fixed falling ice and Slide Traps not rendering
+* Fixed the Hydra not loading the proper number of heads on world load.
+* Fixed wall-placed Skull Candles rendering their flame at the wrong height.
+* The Lich will no longer lose track of his shadow clones.
+* Fixed ice-themed Twilight Forest mobs producing melting particles after death.
+* Fixed the Lich spamming particles when it fails to teleport.
+* Fixed the Knight Strongholds generating above ground. They will still occasionally be visible from the surface, but not as often.
+* Fixed a coloring issue with the Brittle Flask (NYI).
+* Fixed Block and Chain UVs.
+* Fixed the Sortingwood Door having transparent pixels on the sides.
+* Fixed the Questing Ram's wrong name.
+* Fixed a crash when placing down the plateau castle boss spawner.
+* Fixed Banisters z-fighting when extended downwards into a block.
+* Fixed Chill Aura being allowed on Yeti armor.
+* Fixed Hedges damaging you strangely when punching them.
+* Fixed blocks produced by the Carminite Reactor not decaying properly if the reactor was prematurely removed.
+* Fixed weather effects not freezing with /tick freeze enabled.
+* Fixed Yetis not getting angry after being hit.
+* Fixed a possible NPE in our custom arrows.
+* Fixed the Peacock Feather Fan not emitting particles for other players on a server when used.
+* Fixed Torchberry Plants not emitting any light.
+* Fixed Uberous Soil being considered a translucent block thus giving it the wrong outline when looked at.
+* Fixed mobs spawning in the surface part of the Knight Stronghold.
+* Fixed giant blocks rendering too bright.
+* Fixed caves not being exposed on Snowy Forest's surface ground.
+* Dark Forest canopies now avoid overextending above water.
+* Fixed the Snow Queen banner pattern having an outdated name and shield texture.
+* Fixed JEI still showing uncrafting recipes even if the disableUncraftingTable config option is set to true.
+* Fixed Carminite Ghastlings and Carminite Ghastguards not being immune to fire.
+* Fixed an issue where charms would not stack with the same charms after one was used.
+* Fixed Ore Magnets not pulling Ancient Debris.
+* Significantly sped up the Thornlands generation.
+* Slightly optimized Rainy Cloud code.
+* Fixed Trapped Chests being uncraftable.
+* Fixed Ice Sword not using other vanilla ice blocks for repairing.
+* Fixed Giant Leaves acting as solid blocks.
+* Fixed the side of the Magic Painting rendering the entire back texture. (NYI)
+* Once again fixed stone spikes generating on top of trees.
+* Fixed the Tri-bow's arrow velocity being lower on the top and bottom arrows.
+* Fixed the Tri-bow not working with the Power enchantment.
+* Fixed Swarm Spiders and Carminite Broodlings executing redundant code every tick.
+* Fixed Swarm Spiders multiplying when appearing as a result of using Transformation Powder.
+* Fixed items having different enchantments in Creative menus and crafting (Ironwood Sword, Steeleaf Helm, Steeleaf Hoe).
+* Fixed a bug where starting in the Twilight Forest without a portal would spawn the player in the air or on a tree.
+* Fixed the Lamp of Cinders' AOE burning blocks around the player instead of burning the blocks the player is facing.
+
+## Version 4.4.1977 (Dec 7, 2023)
+ADDED:
+* Added trapped versions of Twilight Forest chests.
+* Added the Pocket Watch item. (NYI)
+* Candelabra additions & changes. (NYI)
+** Candle colors can now be mixed.
+** Added a new "dim" lighting state.
+*** Right-click a lit Candelabra with redstone to make them dim.
+** Dim Candelabras power the block they're placed on.
+** Added a comparator reading system to Candelabras.
+*** Each candle adds one to the signal strength.
+*** Dim adds 3, ominous adds 6, normal adds 9.
+** Added Candelabra recipe (subject to change).
+* Added new textures for Red Thread.
+* A small red X now shows up next to the structure icons on Magic Maps if the boss of that structure has been defeated.
+** The Quest Grove will also display as an X when its Questing Ram has gifted its rewards.
+* Added particle animations to the Timewood Clock, Heart of Transformation and Minewood Core.
+* Datapacks can now control stalagmite/stalactite densities in Hollow Hills, Hydra Hills, and Yeti Caves.
+* Added back the Hydra death animation from earlier versions.
+* Right-clicking Empty Canopy Bookshelves and Death Tome Spawner blocks with a Death Tome spawn egg item will now increase that block's amount of Death Tomes.
+* Added Recipe Book support in Uncrafting Table menu.
+* Added sparse Mushgloom generation feature.
+
+CHANGED:
+* Block and Chain and Cube of Annihilation projectiles now filter blocks based on Vanilla Item Stack's `CanDestroy` nbt list if used in Adventure Mode.
+* Bug blocks may now be placed on leaves.
+* Marked Questing Ram banner as Not Yet Implemented.
+* Changed a pixel on the Timewood Clock texture.
+* Spiral Brick blocks can now be waterlogged.
+* Etched Nagastone no longer switches axis direction on placement if sneaking
+* Previously empty containers in Druid Huts now generate with junk items.
+* Changed the chest Knight Phantoms drop their loot in.
+* Minor changes to a few subtitles for scepters and Lich clones.
+
+FIXED:
+* Fixed Shield rendering backs of cubes on Lich and from Scepters of Fortification
+* Goblin Knights have renounced their recently found pacifism.
+* Fixed the Lich's shield rendering the backs of cubes on the Lich and Scepter of Fortification.
+* Fixed Lich and Scepter of Fortification shield renders being backwards.
+* Fixed missing particle texture for bug items.
+* Fixed Stronghold Shield placement logic.
+* Fixed dying Nagas still dealing damage to other entities.
+* Fixed Highlands world generation.
+* Fixed the holes in the Labyrinths Bedrock floors and walls by extending them by one block.
+* Fixed falling ice and Slide Traps not rendering
+* Fixed the Hydra not loading the proper number of heads on world load.
+* Fixed wall-placed Skull Candles rendering their flame at the wrong height.
+* The Lich will no longer lose track of his shadow clones.
+* Fixed bug items not using proper particles.
+
+## Version 4.3.1893 (Nov 14, 2023)
+ADDED:
+* Added new advancement criteria for uncrafting items
+* Added compatibility with some various mod tags (Aether, Alex's Caves, Ars Nouveau, Artifacts, Farmer's Delight, and Immersive Engineering)
+
+CHANGED:
+* TF bows now respect FOV settings
+* Carminite Reactors and Ghast Traps will no longer tick in debug worlds which will fix the sound and explosion spam they were doing
+* Lower goblin knights now play their muffled sounds when wearing armor instead of when ridden
+* Lower goblin knights will no longer swing their arms when wearing armor or when ridden by an upper goblin knight
+
+FIXED:
+* Fixed a bunch of missing texture warnings in the logs
+* Fixed an uncrafting table dupe
+* Fixed a strange crash that rarely happens when generating structures
+* Fixed fortification shields breaking in creative and spectator mode
+* Hopefully fixed an unstable ice core crash
+* Fixed structure mob spawns causing a lot of TPS lag in big modpacks that add lots of structures
+* Fixed a client lag issue regarding skull candles
+* Fixed the goals we add to vanilla mobs not respecting line of sight
+* Fixed name tags not working on multipart entities
+* Fixed mobs not dropping XP when killed by various TF projectiles
+* Fixed JEI showing shapeless uncrafting recipes even if they're disabled
+
+## Version 4.3.1860 (Oct 16, 2023)
+ADDED:
+* Added map atlas compatibility (thanks MehVahdJukaar!)
+
+CHANGED:
+* Removed the glass sword advancement reward for breaking your first one
+
+FIXED:
+* Fixed the uncrafting table not respecting recipes being marked as special
+* Fixed hollow cherry logs not having a recipe
+* Fixed TF armor items not rendering armor trims
+* Fixed a performance issue when checking for the JAPPA resource pack
+* Fixed boss loot tables not being properly seeded, meaning the loot was always the same when killing them
+* Fixed certain damage sources not having a source entity
+* Fixed CTM breaking certain block models
+
+## Version 4.3.1850 (Sep 17, 2023)
+FIXED:
+* Fixed Death Tome Models using data from the previous render while on a Lectern, this would cause them to bounce up and down when a non lectern Death Tome is in view. (Thank's Baguchan!)
+* Improved Aurora Shader performance
+* Prevent a Crash involved with the Aurora Shader when a bad mod prevents it from being registered properly
+
+## Version 4.3.1846 (Sep 7, 2023)
+ADDED:
+* Added a shader for Aurora to the Glacier biome. The biomes it appears in can be configured. If you're experiencing FPS problems it can be disabled in the config.
+* Added a config option to completely disable the Uncrafting Table. This removes the recipe and prevents it from showing up in loot tables.
+** Modpack makers, if you're going to completely disable the table despite it having more uses than just uncrafting, use this instead of kubejs scripts.
+* Added day time and sine wave opacity modifiers to special paintings.
+* Added a multiplier float value in the special paintings data that dictates at what speed the opacity changes.
+
+CHANGED:
+* Changed the Force Field block models from multipart models to custom baked model.
+** This fixes some issues with parts of the block rendering when they should be culled.
+
+FIXED:
+* Fixed the uncrafting and recrafting costs of the Uncrafting Table being slightly off.
+* Fixed Tiny Bird and Dwarf Rabbit variant registries not showing up in registryaccess.
+* Fixed the lack of a language entry for special paintings.
+* Fixed the special painting parallax being jumpy.
+
+## Version 4.3.1809 (Aug 20, 2023)
+ADDED:
+* Added precipitation to clouds!
+** Fluffy Clouds now mimic the weather of their current location, rain while it's raining, snow while its snowing.
+** Wispy Clouds are now ignored by weather. Rain and snow will fall right though them.
+** Cloud precipitation range can be configured both for common and client! (32 by default, crank it up if your machine can handle it, crank it down if it can't).
+* Added a new tag for cloud blocks.
+* Added Rainy Clouds!
+** Craft with 8 Fluffy Clouds and a Water Bucket.
+** These always rain, thus watering crops, hurting Endermen, increasing fishing rate, etc..
+* Added Snowy Clouds!
+** Craft with 8 Fluffy Clouds and a Powder Snow Bucket.
+** These always snow, placing Snow when possible!
+* Giant block outlines now render if the player is holding a Giant Pickaxe or a giant block.
+* Re-implemented old models for Giant items.
+* Players can now crawl by right-clicking the inside of any horizontal Hollow Log while crouching with an empty hand.
+* Added varied colors to firefly particles.
+* Added the ability to change the skin of Giants by using the client config.
+* Added preliminary support for data-driven special paintings.
+
+CHANGED:
+* Clouds now dampen fall damage.
+* Clouds now use Cloud particles instead of generic block breaking ones.
+* Effects for players entering progression-locked biomes are now data-driven through a Restrictions system.
+* Acid rain now has a custom damage type and death message.
+* Giants can now step over 1.2 blocks tall obstacles.
+* Made Giant Pickaxe logic work for potential addon custom Giant Pickaxes.
+* Giant Pickaxes now have a loot condition.
+* Rewrote uncrafting recipe datagen to look more like normal crafting recipes.
+** Tweaked how uncrafting recipe .jsons are formatted, make sure you update your recipes if you have any! You can find example recipes HERE.
+
+FIXED:
+* Fixed Torchberries having collison.
+* Fixed stone spikes generating on trees and open air.
+* Fixed features like wells and fallen logs being able to generate on Clouds.
+* Fixed acid rain rendering very dim if the player is standing at a lower altitude.
+* Fixed locked structure barrier rendering flickering on certain block positions.
+* Fixed locked structure barrier rendering visually skipping up and down if the player jumps.
+* Fixed progression barriers still rendering even after setting the associated gamerule to false.
+* Fixed the protection box rendering it's texture too small.
+* Fixed instances where the client would always mistakenly think the most UP-SOUTH-EAST block should be broken while mining with a Giant Pickaxe.
+* Fixed missing block breaking particles when breaking several blocks with a Giant Pickaxe.
+* Fixed giant blocks not using ambient occlusion.
+* Fixed the Knight Stronghold locked structure effect rendering too high in the Dark Forest.
+* Fixed the Questing Ram wandering too far from its grove again.
+* Fixed a couple small rendering issues with the Uncrafting Table.
+* Fixed the Uncrafting Table deleting items when recrafting in certain scenarios.
+* Fixed the inability to quick swap things in and out of the Uncrafting Table under certain conditions.
+* Fixed Grass placed into horizontal Hollow Cherry Logs missing it's color.
+* Fixed the Sortingwood Engine inserting items into slots they didn't belong.
+* Fixed Yetis not performing a grip check and dropping players instead of throwing them.
+* Fixed the Timewood Clock using the wrong config for it's range.
+* Fixed every sign added by Twilight Forest placing the Twilight Oak variant on walls instead of the appropriate one for their type.
+* Fixed all text disappearing from Hanging Signs added by Twilight Forest when they unload.
+* Fixed Signs in the Final Castle being blank.
+* Fixed lighting error on Banisters that extend downwards.
+* Fixed Stone Pillar connections not connecting properly.
+* Fixed Skull Candles not properly syncing candle amounts when on a dedicated server.
+* Fixed underground mobs spawning in structures after they were conquered.
+* Fixed lack of Yeti spawns in Yeti Caves. More Yeti for your buck!
+
+## Version 4.3.1750 (Jul 19, 2023)
+ADDED:
+* Added a new attack to the Naga that prevents it from getting stunned with a shield.
+** This attack wont have a chance to happen until the Naga is below 75% health, and is more likely to happen the lower its health gets.
+** The attack is indicated by stormcloud particles and a red overlay on its face
+** If you're holding up a shield when the Naga collides with you while executing this attack you will take 2 hearts of damage and your shield will be disabled for 10 seconds.
+* Added a config option for bosses to drop their items like normal mobs instead of putting them in chests
+
+CHANGED:
+* Locked to Forge version to 47.0.45 through 47.1.3
+* Optimized Item Renders for fancier models (Candled Heads, Keepsake Casket, Trophies)
+
+FIXED:
+* The Naga will no longer charge twice during its charge attack, meaning it wont wrap around behind you and try to strike again.
+* Fixed the Naga not speeding up as it loses segments (this has been broken for 6 years
+* Fixed a crash relating to Druid Projectiles
+* Fixed the Naga having weird hitboxes on its head and segements
+* Fixed spiral brick placement issues
+* Fixed courtyard walls having the wrong block rotations for spiral bricks
+* Fixed the ur-ghast having the wrong volume and pitch for its tantrum sound
+* Fixed the ur-ghast not properly flying around its arena
+* Fixed the Naga having a hardcoded speed, meaning other mods can now properly modify its speed
+
+## Version 4.3.1740 (Jul 10, 2023)
+CHANGED:
+* Updated various lang files
+
+FIXED:
+* Fixed bosses not dropping their drops into their chest on death
+
+## Version 4.3.1735 (Jul 10, 2023)
+ADDED:
+* Added support for armor trimming with our armors.
+* Added 6 new trim materials: Ironwood, Steeleaf, Knightmetal, Fiery, Naga Scale, and Carminite.
+* Added Hanging Signs for our wood types.
+* Added Cherry and Bamboo Banisters.
+* Added Hollow Cherry Log.
+* Added Piglin Skull Candle.
+* Added support for Museum Curator.
+* Added support for Randomium.
+* Added support for the upside down English language.
+* Added a command to generate hint books.
+* It's formatted as `/tffeature genbook [structure]`. If no structure is provided it will give all hint books.
+* This command requires a real player to use it. Command Blocks wont be able to use it.
+* Added a message that appears in chat when you enter the Final Plateau for the first time stating that the castle is not done yet.
+
+CHANGED:
+* Removed the new, incomplete textures. If you want to still use them, you can grab the resource pack here: JAPPA Pack
+* Trophies will now display at a 45 degree angle instead of freezing in place when pausing the game for better readability.
+* Corrected and reworded a bunch of advancements, subtitles, and death messages.
+* Made Vanishing Blocks crafted by players able to be broken.
+* Rebalanced falling ice damage to be a bit more forgiving.
+* Changed the Knight Phantom's hitbox to properly scale based on its visibility.
+
+FIXED:
+* Fixed the Minoshroom holding its axe incorrectly.
+* Fixed the Minoshroom's arms being incorrectly positioned.
+* Fixed the Minotaur's left arm beingincorrectly positioned.
+* Fixed Dark Forest tendrils visually jumping around when the player changes y level.
+* Fixed boss bars not properly setting to 0 on death.
+* Fixed hint books having a strangely formatted author.
+* Fixed Ur-Ghast tears not playing a sound when breaking on the ground (like they used to a long time ago).
+
+## Version 4.2.1696 (May 16, 2023)
+ADDED:
+* Added a custom death animation to the Ur-Ghast.
+* Added a custom death animation to the Lich.
+* Added a custom death animation to the Naga.
+
+CHANGED:
+* The Naga will now only break leaves when slithering around.
+* The Naga will now only break blocks other than leaves in the Naga Courtyard when it is charging or it has left the Naga Courtyard.
+* Leaves broken by the Naga will no longer drop Saplings and Sticks.
+* Removed the enchantment glint from Potion Flasks to keep vanilla parity.
+* Refactored the biome generator to refurbish the biome layer system into being datapack-modifiable.
+* Damage types that can destroy Lich shields are now controlled through the `twilightforest:breaks_lich_shields` damage type tag.
+* Blocks that skeleton druid projectiles will turn to leaves are now controlled by the tag `twilightforest:druid_projectile_replaceable`.
+* Added a bunch of TF blocks to `forge:relocaction_not_supported` and `forge:immovable`.
+
+FIXED:
+* Fixed the dimension being stuck on a seed value of 0
+* Exterminated Silverfish from the Fancy Well setpiece.
+* Fixed painting generation inside Druid Hut basements.
+* Fixed unplaceable paintings generating in the Lich Tower.
+* Fixed an issue where the sorting wood engine would put items in slots they didn't belong.
+* Fixed Hollow Oaks sometimes being too big, causing console spam about blocks being set outside loaded chunks.
+* Fixed the Naga's health not properly scaling with difficulty.
+* Fixed Lich clones not despawning after the Lich passes phase 1 if they are too far away.
+* Fixed held boss trophies being rendered too low form the first person perspective.
+* Fixed castle doors still using CTM's logic if its installed.
+* Fixed fortification shields being granted to the player after completing the Questing Ram for the first time.
+* Fixed Dark Tower Antibuilder mazes not always having a clear path.
+* Fixed knight phantoms not being counted as undead mobs.
+* Fixed a potential lag problem with our capabilities.
+* Fixed the Ice Sword's tier overwriting wood as the lowest. This was purely a visual issue with mods like WTHIT, it didnt affect gameplay in any capacity.
+* Fixed the skybox void showing up when above ground level & below y63.
+* Fixed hostile wolf spawners not functioning.
+* Fixed Wraiths not being able to damage players if theyre too close to them.
+* Fixed amethyst clusters not dropping more clusters with TF pickaxes.
+* Fixed some non-fleshy mobs dropping flesh when killed with the Lifedrain Scepter.
+* Fixed Redcap arms disconnecting from their bodies after attacking.
+
+## Version 4.2.1620 (Mar 3, 2023)
+ADDED:
+* Wells & Druid Huts randomized wood palettes are now data-driven
+* Added boats and chest boats to the dendrologist advancement
+* Auroralized glass will now color beacon beams similar to how aurora block colors look
+
+CHANGED:
+* Limited Hollow Hill mob spawns into a half-dome space around the physical Hollow Hills
+* Fallen Leaf Piles are now layerable
+* Improved datapack support
+* Removed unused json keys from various structure configurations
+* Portals now respect the dimension coordinate scale (8:1 by default for Twilight Forest)
+* Mushrooms no longer break when next to a portal
+* Redid how the Ur-Ghast detects ghast traps. It will now recognize when they are added or removed and change its wander path based on it
+* Changed charm of keeping curios rendering to be more resource pack friendly
+
+FIXED:
+* Fixed holding giant tools giving the player more reach for every interaction than just the tools themselves.
+* Fixed the UrGhast getting stuck in the ground when spawned from a spawn egg
+* Hedge Maze walls will replace failed attempts at generating trees
+* Fix orientations for decorative Jack'O'Lanterns outside the Hedge maze
+* Fixed chill aura only applying to players
+* Fixed an issue where you could plant multiple magic beans in the same block space
+* Fixed a crash if a painting failed to place during Lich Tower generation
+* Fixed the block and chain not being repairable in anvils
+* Fixed the block and chain not properly disabling shields
+* Fixed Courtyard floors not generating variants if structure loads after incomplete generation
+* Fixed sound related crashes with the life drain scepter
+
+## Version 4.2.1549 (Feb 12, 2023)
+ADDED:
+* Added Boats and Chest Boats for all Twilight Forest wood types.
+* Completely reorganized our Creative Tab. We now have three different tabs (Blocks, Items, and Equipment).
+* Added a boss bar for the Phantom Knights.
+* Added fog to the Dark Woods.
+* Re-added the Ur-Ghast causing rain to appear whenever it is in a tantrum (this is now client-side only instead of server-side).
+* Re-added the posibility of a tree generating in the Lich Tower main room.
+
+CHANGED:
+* Reworked the teleporter to have better linking capabilities.
+* Portals will now attempt to move towards the center of a Magic Map area if all safety checks fail.
+* Thorn Roses will now rotate to face away from the block face they're placed on.
+* Thorn Roses will now break if their supporting block is destroyed.
+* Thorn Roses will now generate rotated in various ways.
+* Thorn Roses are now in the small flower item tag.
+* Changed the colors of the Spooky Forest to better resemble autumn.
+* Increased the Stronghold boss room weight to hopefully fix the boss room very rarely not generating.
+* Randomized the index of the Hydra head that grows after a head is destroyed.
+* The Questing Ram should now be able to accept most modded wool.
+* Un-hardcoded the flowers that appear around a portal when generated by the game and made them into the tag 'twilightforest:portal/generated_decoration'.
+* Changed the config options for disabling uncrafting/repairing costs to be price multipliers instead.
+* Disabled uncrafting shapeless recipes by default due to volatility. A config option exists to re-enable this if you want.
+* Moved structure loot tables over to a 'chests/' folder instead of keeping them in a 'structures/' folder.
+* Updated zh_cn lang.
+* Made it so more ice cubes render on the entity, based on the level of frosted they're afflicted by.
+* Frosted entities now freeze and take frostbite damage, if they're not properly protected. (The rate of freezing and the frostbite damage scale along with the level of the effect)
+
+FIXED:
+* Fixed occasional fog flicker when entering or leaving the Spooky Forest.
+* Fixed the Ironwood Axe having the incorrect attack speed.
+* Fixed the portal teleport sometimes placing players inside structures when the dimension is generated for the first time.
+* Fixed the portal teleport losing its linkage when servers restart or worlds are reloaded.
+* Fixed Foliage colors not working.
+* Fixed an issue where Hollow Oak tree generation was not threadsafe. This affected the Fabric version.
+* Fixed an issue where re-crafting a piece of armor that already had enchantments on it (such as Steeleaf or Ironwood) would cause enchantments to illegally stack.
+* Fixed a rendering issue with Uncrafting Table tooltips.
+* Fixed a lot of desyncing issues with the uncrafting table on servers if the player's and the server's configs were different.
+* Fixed lag with uncrafting config sync for specific hardware (Including Apple Silicon).
+* Fixed an issue where the Uncrafting Table's button scrolling feature only worked visually.
+* Fixed uncrafting table giving barrier blocks for broken tags.
+* Fixed an unfortunate Uncrafting Table dupe.
+* Fixed an issue where the Ur-Ghast's fireballs could collide with each other.
+* Fixed a crash with mods that set the Naga's attack target to null.
+* Fixed the Legacy Texture Pack breaking entity models.
+* Fixed the inside parts of giant leaf blocks to properly cull.
+* Fixed flower pots always being empty in the Lich Tower.
+* Fixed the Structure Conquered Status
+* Fixed ice cubes not rendering on the player on the fabulous graphic settings
+
+## Version 4.2.1518 (Feb 10, 2023)
+FIXED:
+* Actually fixed the crash with the Final Castle this time, we promise.
+
+## Version 4.1.1494 (Jan 15, 2023)
+FIXED:
+* Fixed a rare ConcurrentModificationException crash on startup
+* Fixed a strange crash regarding the final castle.
+
+## Version 4.2.1493 (Jan 15, 2023)
+FIXED:
+* Fixed a strange crash regarding the final castle.
+
+## Version 4.2.1468 (Nov 9, 2022)
+ADDED:
+* Fully implemented Red Thread.
+* Red Thread now has a material color, allowing it to appear on Maps.
+* Red Thread now properly visually connects to other Red Thread blocks.
+* Added harvest levels to TF blocks.
+* Fallen Leaves can now generate and be manually placed onto Water.
+* Added a fancy animation for the Beanstalk growing.
+* All TF content should now respect vibrations and emit them for events.
+* Added an uncrafting recipe for tipped arrows.
+* Made all blocks that used fullbright stuff in CTM fullbright in the base mod instead.
+* Added support for Transformation Powder recipes in JEI.
+* Added support for Crumble Horn recipes in JEI.
+* Added a new config option to change the maximum size of a TF portal.
+* Added a new config option to disable the costs of uncrafting and recrafting.
+* Added new config options to disable each magic tree core and to change the radius of core functionalities.
+* Added a ✓ or ✗ that renders above your crosshair when looking at a Questing Ram with a piece of wool in your hand. This will indicate if the Questing Ram has eaten that color wool already. This can be disabled via the client config.
+* Added Jade compat for the Questing Ram. All wool colors that the Questing Ram has not eaten yet will show up under its name.
+* Added fancy Twilight Oak trees.
+* Rainbow Oak and Twilight Oak Saplings can now grow fancy versions of their respective trees.
+* Added compat for Botany Pots.
+* Added compat for The One Probe (thanks AlphaMode!).
+
+CHANGED:
+* Block and Chain quality of life changes:
+* Removed the Preservation and Block Strength enchantments.
+* The Block and Chain will no longer break blocks by default and now requires the Destruction enchantment to do so.
+* The Destruction enchantment now has 3 levels. Level 1 enables block breaking, higher levels increase its mining tier up to iron.
+* The Block and Chain will now use harvest levels to pick what blocks to mine instead of blast resistance.
+* Changed Beanstalk Leaves to use Azalea Leaves textures instead of Spruce Leaves.
+* Beanstalk Leaves now also grow on the inner-side of the Beanstalk spiral.
+* Beanstalk Leaves now decay if nearby Beanstalks are destroyed.
+* Thorns no longer connect to miscellaneous plant blocks.
+* Thorns hitboxes now match the visual model.
+* Updated Thorns models so that they appear more natural.
+* Thorn Leaves now decay when the Thorns it connects to are broken.
+* Block of Artic Fur and Cloud blocks now dampen vibrations.
+* Fixed Skull Candle blocks not dropping the candles when broken by non-direct means.
+* Skull Candles are now in the Forge "Heads" item tag.
+* Spooky forest water color has been slightly desaturated.
+* Farmland and dirt paths are now valid portal edge blocks.
+* Changed the Dark Forest progression effect from Blindness to Darkness.
+* Baby Deer and Bighorn Sheep no longer have fully grown horns/antlers.
+* Removed fire enchantments from ice-themed items. Ice Sword will no longer accept Fire Aspect and the Ice Bow no longer accept Flame.
+* The Mazebreaker is now guaranteed to generates in Labyrinth vaults.
+* Moved blocks that the Mazebreaker can break faster to the `twilightforest:mazebreaker_accelerated_mining` tag.
+* Reworked how the Peaccock Feather Fan calculates fall damage. Fall damage will now always be prevented until you hit the ground instead of being on a timer.
+* Double Chests in structures will now contain loot in both chests instead of only one.
+* Added a custom death message when you die after being thrown by a Yeti.
+* Added Transformation Powder to the Uncrafting Table blacklist tag.
+* Added a global cooldown for Yeti throwing. You should no longer become stuck in a loop of getting thrown around.
+* Right clicking bugs, Skull Candles, and Trophies with an empty helmet slot will equip them.
+* Removed most compat from the mod. They are slated to become seperate addons later.
+* The author and title of hint books are now translatable with language files.
+* Tiny Birds no longer flee from players who are in Creative Mode.
+* Pinch Beetles are now properly part of the arthropod family.
+* Changed transformation powder jsons a little. A "Reversible" boolean is now available for Transformation Powder JSONs. This lets the game know if the transformation works two ways or not.
+* Created an underground biome. This means that monsters spawns are no longer hardcoded to be underground.
+* Tiny Birds and Dwarf Rabbits can now have additional skins registered through a new registry.
+* The Naga now knocks players further back when hitting their shield.
+* Changed the Dark Forest to be more dense.
+* Fiddleheads are now replaceable like grass.
+* Items that the Uncrafting Table ignores when calculating the uncrafting cost are now a tag (`twilightforest:uncrafting_ignores_cost`).
+* Cicadas on your head will now play sounds (this can be disabled via config).
+* Added all of our bosses to the forge boss tag.
+* Root blocks and Trollsteinn blocks can now be overgrown by moss.
+* JEI will no longer show uncrafting if it is turned off in the config.
+* Castle Doors invert their colors when activated again.
+* Moved stalactite entries to a datapack.
+* Changed how the portal detects valid blocks on the bottom of the pool. As long as the top face is solid, it counts as a valid block.
+* Knight Phantoms are now harder to kill if their bodies arent visible.
+* Moved valid spawn blocks for Penguins and Giants to block tags.
+* The Peacock Feather Fan can now blow out candles.
+* Piercing arrows can now shoot through the Snow Queen's ice cloud.
+* Attacking a Goblin Knight with an axe will now disable their shield for 5 seconds.
+* Expanded on datapack support for Twilight Forest's chunk generator and structures.
+
+FIXED:
+* Mist Wolf Once again become transparent based on light level. lower light = lower transparency.
+* The beanstalk now remembers it's growth progress after being un-loaded and re-loaded.
+* Fixed Knight Phantom's thrown weapons rendering being rotated backwards.
+* Fixed bow FOV modifier snapping back after you finish using the bow.
+* Fixed fluids overriding other fluids when fluidlogging a Keepsake Casket.
+* Fixed Skeleton Druid projectiles not respecting mob griefing and limited what blocks they can replace.
+* Fixed items that use a 32x32 texture having an enchantment glint that stretched out of its slot.
+* Fixed the Ur-Ghast's home point. The loot chest will now correctly spawn after a world reload again.
+* Fixed Canopy Bookshelf recipe to not conflict with vanilla.
+* Fixed Huge Water Lily being solid blocks.
+* Fixed some strange Naga behavior when it left its courtyard.
+* Fixed the Pinch Beetle being able to hold players inside walls.
+* Fixed the Pinch Beetle still being able to suffocate the player from very specific angles.
+* Fixed Hydra fire not counting as fire damage.
+* Fixed Boars trying to equip saddles but eating them instead.
+* Fixed Web generation in the Spooky Forest.
+* Fixed Glass Sword playing the shattering sound every time it was used instead of when it breaks.
+* Fixed the falling icicle mechanic in the Alpha Yeti fight. A mechanic that has been broken for 7 years...
+* Fixed Blocks of Ironwood z-fighting from far away.
+* Fixed Castle Doors z-fighting from far away.
+* Fixed z-fighting on our Chests.
+* Fixed JEI not displaying the amount of items needed in a custom uncrafting recipe.
+* Fixed items not leaving behind remaining items when crafting with the Uncrafting Table (E.g., crafting a Cake would previously not leave 3 Empty Buckets behind).
+* Fixed JEI uncrafting compat not working.
+* Fixed Wraiths flying far away from Graveyards and Hollow Hills.
+* Fixed an override in vanilla dispenser behavior.
+* Fixed monster spawns in certain key biomes.
+* Fixed multiparts not working with the Glowing or Invisibility effects.
+* Fixed broken Parrot imitation sounds.
+* Fixed hint book entries having random underscores.
+* Fixed the Scepter of Life Draining causing players to horribly desync after killing them.
+* Fixed repairing items in the Uncrafting Table.
+* Fixed damaged item counts being way off in the Uncrafting Table.
+* Fixed Rising Zombies not dropping items.
+* Fixed an issue where turning biome blending off would result in black patches of grass in the Enchanted Forest.
+* Fixed a texture issue with spiral bricks.
+* Fixed an issue where Fireflies were able to generate on vines.
+* Fixed Hollow Logs not counting as furnace fuel.
+* Fixed the Frosted effect ice layer rendering strangely on small or really large mobs.
+* Fixed Unstable Ice Cores still breaking blocks even if the mob griefing gamerule was set to false.
+* Fixed the Questing Ram ignoring loot modifiers.
+* Fixed Giants not being able to hit you if you get all up in their face.
+* Fixed certain flowers almost never generating.
+* Fixed being able to break blocks with the Block and Chain while having the Mining Fatigue effect.
+* Fixed blocks being broken in a giant cube if the player held a Giant's Pickaxe in their main hand while breaking blocks with an item in the other.
+* Fixed the Block and Chain dropping blocks when hitting them while the player is in Creative Mode.
+* Fixed wrong sounds sometimes playing when breaking blocks with the Block and Chain.
+* Fixed the Dark Forest canopy generating too low to the ground.
+* Fixed the Naga hating shields to the point of over-breaking them (durability going below 0).
+* Mob home points are now properly saved. Bosses will no longer wander too far from home and their drop chest will always place where the spawner was. Wraiths will also no longer fly too far from where they spawned.
+* Fixed banisters not burning.
+* Fixed filled maps not stacking even if identical.
+* Fixed Fiery armor lighting targets on fire if you block them with a shield.
+* Fixed all Curios being kept without a Charm of Keeping.
+* Fixed jungle trees growing too tall in the Dark Tower.
+* Fixed Optifine warning screen button not working.
+* Fixed Slime Beetles not dropping anything.
+* Fixed boss chests overwriting items when overfilled.
+* Fixed giant block rendering.
+* Added a built-in connected texture system for Castle Doors.
+* Improved Torchberry Plant and Root Strand placing logic.
+* Fixed the block and chain being able to break blocks in item form.
+* Fixed the thrown Block and Chain's damage not scaling properly with enchantments.
+* Changed how the Block and Chain takes damage. Breaking blocks with it does up to 3, and hitting an entity does 1. It won't take damage if it only hits the ground.
+* Slightly improved Block and Chain block breaking and ricochet logic.
+* Fixed Red Thread being replaceable when right-clicking with other blocks.
+* Fixed the Hydra rendering as only a body when not a real entity. Meaning mods that call to render a "fake entity" Hydra (like JER) will now render it with 3 heads instead of none.
+* Fixed a memory leak related to Knight Phantoms.
+* Fixed Redcaps not rendering armor correctly.
+* Fixed a few issues with the legacy Redcap texture.
+* Fixed some expensive calls in Tiny Bird and Raven flight logic.
+* Fixed Magic Maps and Maze Maps breaking if left in an item frame when the server is shut down.
+* Optimized the portal advancement unlock code. The Code will no longer run if the advancement is invalid or empty, and the advancement will be parsed the first time the portal is touched by a player.
+
+## Version 4.1.1423 (Sep 20, 2022)
+FIXED:
+* Fixed a crash with Shader Bags on Mac systems.
+
+## Version 4.1.1397 (Aug 26, 2022)
+FIXED:
+* Fixed an incompatibility with Better Combat.
+* Fixed vanilla dispenser behavior for flint and steel and fire charges not functioning.
+* Fixed JEI uncrafting count with custom recipes
+
+## Version 4.1.1220 (July 27, 2022)
+FIXED:
+* Fixed the game crashing with the newest Immersive Engineering version.
+
+## Version 4.1.1184 (July 13, 2022)
+FIXED:
+* Fixed a possible crash when wearing armor with a Fire React enchantment, if the attacker was null.
+
+## Version 4.1.1181 (July 12, 2022)
+FIXED:
+* The input count requirement of custom uncrafting recipes would sometimes get ignored by the uncrafting table, letting you uncraft an item even if you didn't input enough copies of it.
+
+## Version 4.1.1172 (July 10, 2022)
+FIXED:
+* The input ingredient of custom uncrafting recipes is now properly displayed in JEI.
+
+## Version 4.1.1102 (June 12, 2022)
+FIXED:
+*  Items from other mods that are kept on death will no longer be deleted when TF tries to keep items for you.
+
+## Version 4.1.1096 (June 10, 2022)
+ADDED:
+* Added Red Thread. This string-like item can be placed on any side of a block. When held, it will glow fullbright and be visible through other blocks. Helpful for markers or finding your way back home.
+* Block and Chain Goblins have a new animation where they drop the ball on death.
+* Improvements and changes for the Lich.
+** The Lich will now pop nearby mobs listed in a tag list (defaults are zombies, skeletons, spiders, creepers, endermen, and swarm spiders).
+** This mechanic has existed for a long time but was very broken.
+*** Popping a mob will heal 1 heart.
+** The Lich will briefly hold the Scepter of Life Draining before popping a mob.
+** A stream of pink particles will connect the lich to the popped mob.
+** The Lich will now pop its minions in phase 2 if its health goes below 1/2.
+** Popped minions on phase 2 will heal the Lich the amount of health they had left.
+** A stream of purple particles will connect the lich to the popped minion.
+* Added red canopy mushroom variants.
+* Mushglooms can now be grown into their big variants when planted on Uberous Soil.
+* Brought back canopy oaks. These heavily populate the Dense Forests and can also be found in Oak Savannas.
+* Added a boss health bar for the Minoshroom.
+* Added a tag for ores the Ore Magnet should ignore.
+* Added a crafting recipes to clone Magic Maps and Maze Maps.
+* Added compatibility for Undergarden. You can now shoot our bugs from their slingshots!
+* Dispenders are now able to put Candles onto a skull to create a Skull Candle.
+* Added Curios compatibility for our charms, trophies, and bugs. This replaces the Baubles compatibility from previous versions.
+* zh_cn translation.
+* de_de translation.
+
+CHANGED:
+* The Sortingwood Engine has been reworked.
+* The Sortingwood Engine is now compatible with any block that uses the IItemHandler capability. It also works with entities with the same capability, but only if they are whitelisted with the sortable entities tag.
+** The Sortingwood Engine now takes items from chests in its vicinity (5x5x5 area around the block) as input and transfers it into any inventory it finds in a 33x33x33 radius around itself.
+** It will only sort items to inventories that have at least one copy of that item, prioritizing inventories that have the most.
+** Any item being moved is accompanied by a green particle entering the same inventory.
+* The Zombie Scepter has been massively improved.
+** Zombie Scepters will now properly swing the player's hand when used.
+** Zombie Scepters will now play a sound when spawning a loyal zombie
+** Zombie Scepters will now properly check if a loyal zombie will survive in the place youre trying to put them.
+** Loyal Zombies no longer take burning damage after the timer is up. Instead, they will take 1 heart of damage every second.
+** Loyal Zombies can now have their 30 second expiration timer reset by feeding them rotten flesh. The timer can not exceed 30 seconds by feeding it multiple times.
+** Loyal Zombies now display a new death message if their timer kills them.
+* The Scepter of Life Draining has also recieved a facelift.
+** Mobs now explode into flesh particles on death via the scepter.
+** Mobs that die from the scepter will now drop a couple pieces of rotten flesh, unless they are in the twilighforest:lifedrain_drops_no_flesh tag.
+** Mobs that die from the scepter will now properly play their death sound.
+* Particles emitted from the scepter properly originate at the top of the scepter rather than the middle of the screen.
+* The Crumble Horn's target blocks and Transformation Powder targets are no longer hardcoded and can now be changed via datapacks.
+* Wearing Fiery Boots will now make you immune to Block of Fiery Metal damage.
+* You can now use your scrollwheel to move through recipes in the Uncrafting Table. Move your mouse to the relevant buttons and scroll away!
+* Reworked how Experiment 115 handles Comparator output. Each slice adds 1, regenerating adds 7 to the total. Connecting redstone between the e115 and a comparator in subtract mode will invert the signal for the slices eaten.
+* The Seeker Bow can now target players and prioritizes mobs that are targeting you.
+* Bugs will now be randomly rotated when placed instead of always facing the same way.
+* Changed all bosses to be immune to water slowdown.
+* Hydra bites will now ignore Shield blocking and severely damage a Shield.
+* Reduced the sprawl of Knight Strongholds. This should fix several bugs related to generating outside of its bounds and the boss room.
+* Death Tomes now actually fly instead of simply hovering.
+* The Minoshroom recieved some adjustments.
+** The Minoshroom's ground smash attack now has a cooldown.
+** The Minoshroom will now only do his ground smash attack when you are a maximum of 3 blocks away (changed from 7).
+** Lowered the Minoshroom's reach.
+** The Minoshroom now prioritizes his charge attack when you're out of reach and it now has a cooldown.
+* Trophies and Skull Candles player head sized and will unrender the player's head when worn.
+* Overhauled forcefields. Connections and placement are much better now.
+* Force fields now have more blockstates.
+* Changed spiral brick placement. Place them and finally preserve your sanity to boot!
+* The Questing Ram will now stay inside the grove instead of wandering off.
+* Players now respawn in the Twilight Forest on death when the "start in Twilight Forest" config option is enabled.
+* Block and Chain Goblin now have a cooldown on their throw attack.
+* Dark towers will now only generate vanilla Anvils.
+* Removed magic shields as universal advancement rewards.
+* Adjusted Tinkers' Construct part values to be more in-line with the latest version's balance.
+
+FIXED:
+* Fixed the Ice Bow not being repairable.
+* Fixed Yetis being able to throw bosses.
+* Our wolved no longer extend vanilla wolves and will no longer break because of that.
+* Fixed bird wings being mistakenly clipped. They now properly fly again.
+* Items will no longer be lost on when pressing the Title Screen button on death when using the Charm of Keeping.
+* Fixed the Ender Bow not properly switching players and mounted mobs.
+* Fixed caskets not emitting light when lavalogged
+* The Knight Phantom advancement should now properly be granted after all are killed, not just one.
+* Fixed Liveroot stripping not swinging the player's hand.
+* kobolds eating bread will now properly display particles around their mouth instead of on top of their head.
+* Fixed the Cicada Jar sounds. Again.
+* Fixed The minoshroom sometimes spawning too early in the Labyrinth.
+* Fixed the Minoshroom's ground smash attack animation.
+* Fixed the root of the problem with tree root generation.
+* Fixed the Goblin Knight spear attack being broken in several ways.
+* Fixed the Questing Ram being unable to graze dropped wool off the ground.
+* Fixed Shears from other mods not working with our leaves.
+* Naga body segments now move fluidly along the ground and not through the ground.
+* Fixed Labyrinths missing some of their Bedrock walls.
+* The Protection Box render for structures is now once again a thing.
+* Fixed all maps crashing when mods invoke appendHoverText with a null level.
+* Fixed the canopy mushroom's blockstates.
+* Fixed a crash with Uberous Soil when attempting to grow a mushroom in bad conditions.
+* Fixed the Final Castle sometimes generating with an Oak Fence cage instead of a Violet Forcefield box.
+
+## Version 4.0.860 (Dec 10, 2021)
+ADDED:
+* All TF mobs, blocks, and items now have unique subtitles
+* New death messages for block/mob kills - about 50 of them
+* TF saplings, mayapples, fiddleheads, mushglooms, and thorns(creative only) can be put in flower pots
+* Added some recipes to the stonecutter
+* 6-sided wood variants now have recipes (same as vanilla)
+* Added Cicada Jars
+* Right click a bug with a Glass Bottle to make a Jar of it
+* Shift right click a placed jar to separate the bug and bottle
+* Lamp of Cinders burns mobs around it when used
+* Added tooltips to resource blocks that have functionality
+* Added TF wood signs
+* Certain things are now customizable through tags. These tags can be changed through a datapack. They are:
+** Portal edge blocks
+** Portal vegetation (the flowers that go around it)
+** Portal liquid
+** Valid trophy pedestal trophies
+** Fire jet fuel
+** Valid ore magnet ores
+** Cube of annihilation whitelist (adds things that normally cant be broken by it)
+** Antibuilder blacklist (things the antibuilder shouldnt mess with)
+** Carminite reactor blacklist (things the reactor cant replace)
+** Protected progression interaction (things that wont work while an area is protected by progression)
+** Special flower pots (used to tell the dark tower which potted plants wont generate in certain areas)
+* Added waterlogging to some non-full blocks
+* Added the Alpha Yeti Trophy
+* Added comparator support for the trophy pedestal
+* Added TF stripped logs and woods
+* Added baby skeleton druids: they will only spawn on swarm spiders. Your worst nightmare.
+* Added skull candles! right click a vanilla head to add a candle to it. You can light them, put them out, add up to 4, and pick them up with silk touch to keep the candles on it!  The inventory model and a tooltip will also reflect how many candles it has if picked up. Skull candles can also support player skins, and can be lit with a dispenser!
+* Added Keepsake Caskets!
+** Caskets will store your items on death if you have one in your inventory.
+** Works with charms, so charms will be used first and then the casket will store everything else
+** Caskets have a 15% chance to damage on death and will be reflected through the texture.
+** Caskets have 3 stages before they break
+** You can use repair a casket by 1 level by right clicking with a charm of keeping 3.
+** When your casket breaks, you'll be notified in your chat.
+** Caskets have a config option to lock death caskets. These locked ones will only be openable by the player with a matching UUID (or server operators). Players that don't match wont be able to interact with or break that casket. Off by default, but there if needed.
+** Caskets spawned on death will have your username in the title so you know its yours!
+** Due to some names being very long, only the first 12 characters of a name are shown.
+** Caskets that spawn with your name will revert when mined up.
+** Caskets can be waterlogged and lavalogged, and can also be encased in other blocks!
+** FluidLogged caskets interact much like how vanilla fluids do, so caskets can be encased in obsidian, stone, and basalt.
+** Encased caskets cannot be opened, the only way to get the items back from them is to mine them
+** You will also get the block its encased in when you mine the casket
+** Unique sounds for opening, closing, and repairing the casket
+** Caskets are immune to explosions, and wont be destroyed by the wither or ender dragon
+* Added stone pillars! a new decorative block designed for the lich tower rework. Addicting to play with
+* Added canopy bookshelves and empty bookshelves! Beautiful decorative blocks for your house
+* Added death tome spawners! A canopy bookshelf that spawns a certain amount of death tomes before turning into an empty bookshelf. This block can be heavily configured so you can do what you want with it!
+* Added firefly particles to many of the forest biomes. The hope is to create a more calm atmosphere and add more life to the dimension
+* Added a firefly particle spawner! So you like the new particles, eh? Well now you can add this effect to your own home! A new craftable jar which has a configurable block radius that spawns firefly particles. To change it, add or remove fireflies from the jar. The max radius is 10. Bring you house to life!
+* Added the ability to harvest torchberries from torchberry plants and ripe trollber, finally
+* Torchberries are now edible! While they dont restore any hunger or saturation, they have a chance to make you glow! Useful for finding your friends when playing together.
+* Added potion flasks! These flasks come in 2 different versions, brittle and greater. Brittle will shatter after it becomes empty after being filled. Greater is unbreakable. Potion flasks fold 4 kinds of one potion, so it allows for easier storage of all the potions you may find in the lich tower!
+* You can now climb up root strands and bonemeal them! Bonemealing can happen on any part of the plant, and will grow downwards by 1 for each bonemeal used. Once it touches the ground it'll stop accepting bonemeal.
+* Added the ability to pick up e115 slices off the ground. Just shift right click it with an empty hand to pick it up. Doesnt work on regenerating ones.
+* Added wooden banisters! Every builder's dream block, go make some fancy rails or something idk
+* Added kobold pacification. Throw a piece of bread to a kobold to pacify it for a short time
+* Added TF banner patterns! craft a trophy with a piece of paper to make a banner pattern for that boss!
+* Added candelabras! These fancy candle holders can be placed on walls and floors. Can also be lit with a dispenser.
+* Added new wells! Theres also a fancy well variant that has a chance to replace a normal well, with unique loot!
+** Basic wells also have a new loot table
+* Added recipes to turn waterlilies into magenta dye, and thorn roses into red
+* Added TF music discs! You can now play all your favorite tracks from the comfirt of your own home. These discs are randomly scattered throughout the TF, goo luck finisng them...
+* Added vanilla and TF mob interactions!
+** Cats and Ocelots will attack Dwarf Rabbits, Squirrels, and Tiny Birds.
+** Foxes will attack Dwarf Rabbits and Squirrels.
+** Wolves will attack Dwarf Rabbits, Squirrels, and Bighorns
+* Added a toast system to remind people that a biome is locked. This will hint to check your advancements. This toast will show up once after entering a locked biome then wont until you enter a new locked biome.
+* Added custom TF stats! The current stats are:
+** Bugs squished
+** Uncrafting table interactions
+** Trophy pedestals activated
+** E115 slices eaten
+** Torchberries harvested
+** Blocks crumbled
+** Charms of life activated
+** Charms of keeping activated
+** Skull candles made
+** Fortification shields broken
+* Added a way to lock TF portal creation behind an advancement! this is configureable via config, and is off by default.
+* Added mangrove roots!
+* Added a couple new advancement triggers!
+** `twilightforest:drink_from_flask`: you need to define the amount of doses and what potion you need to drink. Currently has to be done in 8 seconds or less
+** `twilightforest:kill_bug`: must define the bug. happens when a player squishes a bug with a projectile (anvils dont count! I cant read the player that placed them, sorry!)
+* Added cicada jars to worldgen. They will rarely replace firefly jars on trees and lampposts.
+* Added a method to get quartz in the TF! It has something to do with the dark tower...
+* Added TF wood chests! craft them by surrounding any other chest with the appropriate plank type to get 2 of them. These all have very unique textures!
+* Added hollow logs! These work as normal logs with placement but can be filled with various things! Horizontal ones take Snow, moss, grass, and can even be waterlogged! Vertical ones can take vines and ladders and can be waterlogged!
+* Added a more flexible system to the uncrafting table! You can now disable certain recipes, items from being in recipes, or items from being uncrafted. Recipes are a config option, while the other 2 are tags.
+* New enchantments! There are 5 new enchantments, all being loot exclusive. They are:
+** Fire React: has a chance to set the attacker on fire when worn. Incompatible with chill aura and thorns.
+** Chill Aura: has a chance to apply frosted to the attacker. Incompatible with fire react and thorns.
+** Preservation: for the block and chain. Allows for the block and chain to only be used as a weapon, disabling the ability to break blocks. Incompatible with Block Strength and Destruction.
+** Block Strength: allows the block and chain to break stronger blocks. Tier 1 allows you to break mazestone, and tier 3 allows you to break castle bricks. (this may change in the future!) Incompatible with Preservation and Destruction.
+** Destruction: allows the block and chain to break larger areas of blocks. Incompatible with Preservation and Block Strength.
+* Added JEI support for uncrafting recipes (thanks Jodlodi!)
+* Added custom particles to each boss spawner, making them more unique.
+* Added the underbrick floor as a stonecutting recipe
+* Added a config option to disable uncrafting all items from a specified mod if desired
+
+CHANGED:
+* Environment Overhaul - more flowers and trees, makes the forest feel more like a forest
+* TF materials can now be composted (info on wiki)
+* Peacock feather fan can now push mobs when in a dispenser
+* Crumble horn can crumble blocks when in a dispenser
+* Crumble horn received new blocks to crumble:
+** Blackstone Bricks to Cracked
+** Cracked Blackstone Bricks to Normal Blackstone
+** Castle Brick to Cracked
+** Underbrick to Cracked
+** Nagastone types to Cracked
+** Grass types to Dirt
+** Quartz Block to Sand
+** Nylium to Netherrack
+* Moonworm queen can fire moonworms when in a dispenser
+* Transformation powder works with dispensers
+* Twilight Scepter now works with dispensers
+* Trophies and bugs can be dispensed onto your head
+* Bugs can now squashed by shooting them
+* Bugs can now be waterlogged
+* Stone variants generate less frequently in caves (you can still find them though!)
+* TF music always plays in the TF, even in creative or underwater
+* Seeker bow prioritzes hostiles
+* Hoes now have enchantments since theyre more useful
+* The creative tab was reorganized a bit, hopefully it should be easier to navigate
+* Fiery, arctic and yeti armor prevent freezing
+* Questing ram rewards now sit in a bundle (minus the horn)
+* Hollow hills will no longer spawn as perfect, smooth hills, some unevenness will be applied to them
+* Mixed rooted and coarse dirt into cave ceilings
+* Made thorn roses able to be placed anywhere
+* Liveroots can now be stripped, leaving behind a root block and giving you a liveroot.
+* Changed how dark leaves function. Dark forest trees have remianed the same, hard to break with a high blast resistance. However, if you grow a darkwood tree, the leaves will decay and can be mined faster with a hoe! They still have the same strength and blast res as the other ones though, but it should be easier to farm darkwood now!
+* Updated TF leaves to use the azalea leaf sounds, as its so much nicer.
+* Beanstalks will now poke through clouds, and will leave a nice air pocket to allow for easier climbing.
+** Beanstalks will also ignore blocks that are blocking them so you wont get beanstalk discs. However they will still stop if they hit a cave wall or ceiling
+* Uberous soil will now sparkle if a player is holding magic beans, to indicate to use them there.
+* Mangrove leaves are now waterloggable
+* Phantom armor can now refuse enchants in a certain tag
+* Made beanstalks axis rotatable
+* Redid knightmetal tool bonus damage.
+** If an entity is wearing armor, deal 2 additional damage
+** For each additional piece of armor, deal 1 more damage
+** The axe will only work if the target has no armor of any kind. This includes internal armor values! So the axe wont deal the bonus on zombies.
+* Tripwired Chest Rooms in the Labyrinth host unstable TNT. Watch your fists!
+* Structures will now properly bury and deform terrain in a nice way. No more strange square edges around the naga courtyard!
+* Bugs will no longer die on your head
+* When bugs die their guts will spray everywhere. Gross!
+* Progression advancements will grant to every player who participated in the fight. Even if you die and respawn at home, as long as the boss took damage from you, you wills till gain the advancement! Hopefully this will help servers out.
+* The lich will absorb mobs in a tag now. This used to be hardcoded but can now be configured.
+* Completely redid fallen log generation! They can now generate with hollow logs, some versions are biome exclusive, and some will now generate on water, either sunken or floating! Sunken logs will generate sea grass instead of moss on top.
+* TF bosses will now place a chest containing their loot when killed. This change also allows looting to work on the ur-ghast!
+* Fortification shields now have a timer in between breaks. It follows the same rule as attack cooldown works on the player.
+* Ice bombs can now be shot from dispensers
+* Projectiles can now break burnt thorns
+* Ice bombs will now add snow layers to existing ones in the world
+* Redid the way the moonworm queen is repaired. Each torchberry will now add back 64 durability
+* Gave the trophy pedestal a bounding box that actually fits it
+
+FIXED:
+* A gazillion bugs!
+* Fixed Carminite Reactor being able to break blocks it shouldnt
+* Fixed darkwood saplings not being able to be grown below y=30
+* Fixed a nasty dupe with the uncrafting table
+* Fixed some tf items ignoring ftb chunk claiming
+* TF plants now have proper hitboxes, rather than taking up a full block
+* Removed the ability to enchant scepters
+* Fixed lifedrain scepters targeting armor stands
+* Banned enchants from moonworm queen, ore magnet, and the lamp of cinders
+* Cicadas will now shut up when theyre removed from the world
+* Seeker bow now prioritizes hostile mobs, and wont try to target things it couldnt possibly hit, like mobs behind walls
+* Fixed moss to make it like how it was in 1.7. The shape is now always random and will connect to other moss blocks nearby. This also apples to clover patches.
+* Legacy entity models are finally supported! changing to the legacy pack will now properly show the old entity models.
+* Castle brick runes will now glow without the need for CTM
+
+## Version 4.0.435 (April 23, 2021)
+Requires Forge version 36.1.0+ in order to run
+
+ADDED:
+* Added TF pots to flower pot tag.
+* Added TF wood signs.
+
+CHANGES:
+* Improved Multipart collision performance.
+* Made hoes effective on TF leaves.
+* Replaced netherrack with magma blocks in structures.
+
+FIXED:
+* Fixed trophy gui rotating and reimplemented backboards.
+* Partially fixed custom loading screen.
+* Fixed door x-raying.
+* Fiery sword sets mobs on fire again.
+* Snow guardian armor renders again.
+* Scepters can be recharged again.
+* Fixed Uncrafting table top face & Uberous Soil inventory renders.
+* Commands are now registered properly.
+* No more crashing when the protection box entity type is used by other mods.
+* Fixed paintings in the lich tower.
+* Fixed chest connections and rotations in structures.
+* Fixed structure piece and block rotations.
+* Fixed druid huts being so common and tied feature spawning to the config again.
+* Fixed blocks not requiring tools and set effective ones.
+* Got rid of casket console spam, still doesn't have a model though.
+* Got rid of darkwood roots, since they mess up the stronghold so bad.
+* Fixed giant blocks being offset in clouds.
+* Add back uberous soil patches on top of troll caves.
+
+## Version 4.0.426 (April 9, 2021)
+CHANGES:
+* Improved performance of multipart entities slightly.
+* Tweaked some Feature generation, should help Hollow Oaks to break less often.
+* Updated other lang files to include all the new keys.
+
+FIXED:
+* Fixed leaf generation of the Dark Forest.
+* Fixed Bighorn Sheep models.
+* Balanced the speed of Skeleton Druids.
+* Fixed various damage sources and shield blocking.
+* Fixed loot enchanting.
+* Fixed Block and Chain model.
+* Fixed logbook recipe.
+
+## Version 4.0.412 (April 5, 2021)
+* Ported to version 1.16.5.

@@ -1,0 +1,376 @@
+# 页面: 漏斗
+# 来源: https://zh.minecraft.wiki/w/%E6%BC%8F%E6%96%97
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 储物, 可再生资源, 基岩版独有信息, 待更新条目, 方块, 有未知版本的History模板的页面/Java版, 红石, 需要验证
+# 抓取时间: 2026-07-14 17:31:12
+# 原始 Wikitext 内容:
+
+{{about|方块|崩溃处理程序|崩溃#Hopper}}
+{{Infobox block
+|group1=向下输出
+|1-1=hopper.png
+|group2=向北输出
+|2-1=Hopper north.png
+|group3=向东输出
+|3-1=Hopper east.png
+|group4=向南输出
+|4-1=Hopper south.png
+|group5=向西输出
+|5-1=Hopper west.png
+|invimage=Hopper
+}}
+{{relevant tutorial|漏斗}}
+{{quote|你是否厌倦了手动给熔炉添加燃料？是否觉得在容器之间移动物品太麻烦？用堆肥桶时感到不耐烦？受够了老是要自己去捡鸡蛋？今天我要介绍一个神奇的装置来解决你的问题，它就是本月的月度方块——漏斗。|[[Duncan Geere]]<ref name="hopper">{{article|hopper|Block of the Month: Hopper|April 12, 2025}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''漏斗（Hopper）'''是一种可以用来捕捉物品实体或用来把[[物品]]传入或移出容器的[[方块]]。
+
+== 生成 ==
+=== 自然生成 ===
+漏斗会生成于[[试炼密室]]每个决斗室的入口，充当弃物装置。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Iron Ingot
+|C1= Iron Ingot
+|A2= Iron Ingot
+|B2= Chest
+|C2= Iron Ingot
+|B3= Iron Ingot
+|Output= Hopper
+|type= Redstone
+}}
+
+== 破坏 ==
+挖掘漏斗的合适工具是镐。漏斗需要木镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+漏斗被破坏后会掉落自身和内容物。
+
+== 用途 ==
+[[File:Hopper-Aligment.png|漏斗可朝向下或旁边|缩略图]]
+{{see also|Tutorial:漏斗}}
+
+漏斗可用作容器、合成材料以及红石元件。
+
+漏斗的底部有一个“输出”管，它可以朝向下或朝向侧边，可以直接看出漏斗输出方向。要放置漏斗，对着漏斗输出方向面对的方块表面{{ctrl|放置}}，即可使漏斗的输出管指向该方向。在一个可以{{ctrl|使用}}互动的方块表面放置漏斗时，还要按下{{ctrl|潜行}}键。对着方块下表面放置漏斗也会使漏斗朝向下。漏斗在放置后不能改变朝向，也不能“附着”它所朝向的容器。朝向的容器被破坏，漏斗也不会改变方向。
+
+尽管漏斗的[[方块支撑形状]]上表面不完整，但[[铁轨]]、[[红石粉]]、{{only|be|for=[[按钮]]、[[拉杆]]、[[火把]]}}可以放在漏斗上面。
+
+=== 容器 ===
+{{Filetr|Hopper GUI.png|thumb|展示了漏斗上方的5个物品槽以及下方的玩家物品栏的漏斗界面}}
+
+漏斗可用作容器，它有5个物品槽位。
+
+对漏斗按下{{ctrl|使用}}可以打开漏斗的界面。
+
+[[红石比较器]]可检测漏斗存储物品的数量。
+
+漏斗界面的标题默认为“漏斗”，可在放置前使用[[铁砧]]重命名来进行更改，{{in|je}}也可以通过使用{{cmd|data}}命令修改漏斗的<code>CustomName</code>标签进行更改（例如要把一个位于(0,64,0)的漏斗标记为“Alice的漏斗”，则使用{{cmd|data merge block 0 64 0 {CustomName:'"Alice的漏斗"'} }}）。
+
+{{in|je}}漏斗可被<code>lock</code>标签上锁。若漏斗的该标签不是空白的，那么这个漏斗必须使用符合该标签表示的物品谓词的物品打开。
+
+=== 合成材料 ===
+{{crafting usage|Hopper}}
+
+=== 红石元件 ===
+{{see also|红石电路}}
+
+漏斗可用来吸入在它上方的物品实体，或运输物品。
+
+漏斗是一种[[红石元件#机械元件|红石元件]]，它可通过下列方式激活：
+* 毗邻的开启的'''[[红石元件#电源元件|电源]]'''（例外：侦测器只会激活指向的漏斗，{{only|be|for=红石火把不会激活其所附着的漏斗}}）。
+* 毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻的指向漏斗且激活的[[红石中继器]]、[[红石比较器]]或红石粉（包括漏斗上方的红石粉）；毗邻但未指向漏斗的红石粉不会激活漏斗。
+
+{{in|be}}在同一红石刻内，电容器更新阶段前存在，但在电容器更新阶段被取消的信号无法激活漏斗。
+
+漏斗的行为与多数红石元件相反，它在'''未'''被激活时进行工作，在被激活时停止工作。因此，未激活的漏斗会被描述为'''开启'''，激活的漏斗会被描述为'''关闭'''。
+
+==== 开启的漏斗 ====
+开启的漏斗会尝试进行以下操作：
+* '''输出'''自己物品栏里的1个物品到朝向的容器。
+** 每次进行输出时，漏斗只会尝试输出1个物品，且优先尝试输出靠左槽位里的物品，并将其放在容器靠上一行中的靠左槽位里。
+** 若容器内所有槽位都有物品，但某种物品还未达到堆叠上限时，漏斗会在自己的物品栏里寻找一个能够与之堆叠的物品并尝试输出。
+* '''吸取'''上方容器中的1个物品到自己的物品栏。
+** 每次进行吸取时，漏斗只会尝试从上方容器中吸取1个物品，且优先尝试吸取容器靠上一行中的靠左槽位里的物品。
+** 若漏斗内所有槽位都有物品，但某种物品还未达到堆叠上限时，漏斗会在上方容器中寻找1个能够与之堆叠的物品并尝试吸取。
+* '''捕捉'''上方的1个[[物品实体]]到自己的物品栏。
+** 每次进行捕捉时，漏斗只会捕捉凹槽内以及上方1×1×1范围内的1个物品实体（无论其堆叠了多少个物品）。物品实体即使只有一部分在可捕捉位置（如位于漏斗上方[[碰撞箱]]不完整的方块上或位于漏斗边缘），也会被漏斗捕捉。
+** 漏斗还可以在[[熔岩]]摧毁物品实体之前或玩家捡起物品实体之前将其捕捉。
+** 若上方是容器{{only|be|for=（饰纹陶罐除外）}}或{{only|je|for=碰撞箱完整的方块（[[蜂巢（方块）|蜂巢]]和[[蜂箱]]除外）}}，漏斗就不会尝试检查和捕捉物品实体（可用于减少卡顿），但{{in|je}}凹槽内的物品实体会主动进入漏斗。
+** 若漏斗内所有槽位都有物品，但某种物品还未达到堆叠上限时：
+*** {{in|be}}由于不同的漏洞，漏斗此时可能无法再捕捉物品实体。
+*** {{in|je}}漏斗会在上方寻找一个能够与之堆叠的物品实体并尝试捕捉。
+** 若漏斗无法捕捉物品实体中的所有物品，该物品实体中剩余的物品将保持实体状态。
+
+漏斗总是尝试把吸取或捕捉的物品放在靠左的可用槽位里。
+
+在一个游戏刻内，漏斗会先尝试输出，然后尝试吸取，最后在上方没有容器{{only|je|for=或碰撞箱完整的方块（蜂巢和蜂箱除外）}}时尝试捕捉物品实体。在以上尝试完成后，只要有一个操作成功进行，漏斗就会进入“冷却时间”，即在等待{{convert|8}}之后才会进行下次操作。另外，当其他漏斗或投掷器将物品输入此漏斗{{only|je|for=或凹槽内的物品主动进入}}时，此漏斗也会进入{{convert|8}}的冷却时间。
+
+{{in|je}}在一些情况下，漏斗的冷却时间为{{convert|7}}而非{{convert|8}}：
+* 该漏斗正在向另一个漏斗输出物品。
+* 输出的漏斗内没有物品。
+* 输出的漏斗早于该漏斗接收游戏刻执行逻辑。
+* 输出的漏斗没有自定义冷却，即{{nbt|int|TransferCooldown}}不大于8。
+当满足上述所有条件时，输出的漏斗冷却时间会被设置为{{convert|7}}，以保证漏斗传输的时序一致。
+
+{{in|be}}若漏斗尝试向空漏斗传输物品，则空漏斗接收到该物品后的冷却时间为{{convert|8}}，否则没有冷却时间。
+
+漏斗不能与[[末影箱]]进行交互。
+
+不同容器与漏斗的交互方式可能有所不同：
+
+{| class="wikitable collapsible"
+! colspan=2 | 漏斗行为
+|-
+! 方块
+! 交互方式
+|-
+| {{BlockLink|Dispenser}}<br>{{BlockLink|Dropper}}<br>{{BlockLink|Barrel}}<br>{{BlockLink|Decorated Pot}}
+| 这些容器能与漏斗正常交互。
+|-
+| {{BlockLink|Brewing Stand}}
+| 指向酿造台顶面的漏斗会填充上面的材料槽，并且只填充酿造台允许的材料。<br>指向酿造台侧面的漏斗可填充[[玻璃瓶]]、[[水瓶]]和[[药水]]到下面的3个药水槽，或填充[[烈焰粉]]到燃料槽。<br>酿造台下方的漏斗会吸取酿造台下面3个药水槽的物品，'''无论酿造是否完成'''。
+|-
+| {{BlockLink|Chest}}<br>{{BlockLink|Trapped Chest}}
+| 大型箱子和大型陷阱箱都视为一个整体：指向大型箱子的漏斗会填充整个箱子，大型箱子下方的漏斗可吸取整个箱子的物品。<br>打开的陷阱箱会发出红石信号，毗邻的漏斗会因此关闭。
+|-
+| {{BlockLink|Chiseled Bookshelf}}
+| 雕纹书架能与漏斗正常交互，填充和取出的顺序与其他容器一致，'''但只能填充书类物品'''。
+|-
+| {{BlockLink|Shelf}}
+| 展示架能与漏斗正常交互，填充和取出的顺序与其他容器一致，同时渲染每一格是否有物品。
+|-
+| {{BlockLink|Composter}}
+| 指向堆肥桶顶面的漏斗只会将可用于堆肥的物品置入堆肥桶中，有概率增加堆肥桶的层数。<br>堆肥桶下方的漏斗可以在其堆肥层数达到第8层时吸取[[骨粉]]，并重置堆肥层数为0层。<br>指向堆肥桶侧面的漏斗不与之交互。
+|-
+| {{BlockLink|Crafter}}
+| 指向合成器的漏斗只会填充未禁用槽位，且从左上至右下依次填满空的未禁用槽位。若没有空的槽位，新物品则按左上至右下的顺序优先置入同类物品堆叠数最小的槽位。若新物品未能置入合适的槽位，按容器已满处理。<br>合成器下方的漏斗取出物品的顺序与其他容器一致。
+|-
+| {{BlockLink|Furnace}}<br>{{BlockLink|Blast Furnace}}<br>{{BlockLink|Smoker}}
+| 指向炉子顶面的漏斗会向烧炼槽置入任何物品，包括无法烧炼的物品。<br>指向炉子侧面的漏斗只会把可作为燃料的物品或[[铁桶]]置入燃料槽。<br>炉子下方的漏斗会从成品槽中吸取成品，或从燃料槽吸取空桶和水桶，若燃料槽与成品槽同时存在物品，会优先吸取{{only|je|for=成品槽}}或{{only|be|for=燃料槽}}。<br>通过漏斗取出炉子中的物品会使[[经验值]]“储存”在炉子里，直到炉子被破坏或玩家从炉子里取出至少一个成品。
+|-
+| {{BlockSprite|Hopper}} 漏斗
+| 漏斗能与漏斗正常传输物品。<br>每个漏斗单独计算物品传输。由于漏斗的方块实体会在每个游戏刻更新，漏斗与漏斗之间的更新顺序是不固定的。漏斗链中物品传输的延迟依具体情况而定。<br>{{in|je}}物品在漏斗中持续流动时，红石比较器可能检测不到，因为物品产生变动后2游戏刻红石比较器才会获取输入变化计算新的输出。
+|-
+| {{BlockLink|Jukebox}}
+| 指向唱片机的漏斗会置入唱片，'''该唱片会立即被播放'''。<br>唱片机下方的漏斗会吸取唱片机中的唱片。由于唱片机播放时会输出信号，会关闭毗邻的漏斗，因此漏斗只能在唱片播放完毕后吸取唱片。
+|-
+| {{EntityLink|Minecart with Chest}}<br>{{EntityLink|Minecart with Hopper}}<br>{{EntityLink|Boat with Chest}}
+| 若对应实体碰撞箱的任何部分位于漏斗上方的1×1×1空间内，漏斗就会吸取该实体中的物品。<br>若对应实体碰撞箱的任何部分位于漏斗指向的1×1×1空间内，漏斗就会向该实体填充物品。<br>若空间内有多个对应实体，漏斗会{{only|je|for=随机}}或{{only|be|for=按一定顺序}}<!--基岩版部分械电活塞门世界记录使用了基于该性质的“无限容量ROM”用于存储时序-->选择一个交互。
+|-
+| {{BlockLink|Shulker Box}}
+| 潜影盒能与漏斗正常交互，填充和取出的顺序与其他容器一致，'''但不能填充潜影盒物品'''。
+|}
+
+==== 关闭的漏斗 ====
+关闭的漏斗类似于一个普通的容器（如木桶），不会尝试进行任何操作，凹槽内的物品实体也不会主动进入漏斗。
+
+关闭的漏斗仍然可以：
+* 被其他漏斗、投掷器和合成器向自身输出物品。
+* 被下方的漏斗或漏斗矿车吸取自身的物品。
+
+尽管不会进行任何操作，但与开启的漏斗类似，成功向关闭的漏斗输出物品后，该漏斗也会进入冷却时间。
+
+== 音效 ==
+{{Sound table/Block/Metal}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|Hopper
+|generatetranslationkeys=java
+|spritetype=block
+|nameid=hopper
+|showblocktags=je
+|blocktags={{GameTag|block|hopper}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=hopper
+|spritetype=block
+|nameid=hopper
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|displayname=漏斗（方块）
+|Hopper
+|spritetype=block
+|translationkey=tile.hopper.name
+|nameid=hopper
+|showblocktags=be
+|blocktags={{GameTagBE|block|hopper}}
+}}
+{{ID table
+|displayname=漏斗（物品）
+|Hopper
+|spritetype=item
+|nameid=hopper
+|foot=1
+}}
+{{ID table
+|notnamespaced=1
+|displayname=方块实体
+|spritename=hopper
+|spritetype=block
+|nameid=Hopper
+|foot=1
+}}
+
+=== 方块数据值 ===
+{{see also|基岩版数据值}}
+
+在[[基岩版]]中，漏斗使用它的方块数据值来指定它的朝向和激活状态。
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+漏斗拥有与其相关联的方块实体，它保存了漏斗的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{load achievements|freight-station;smelt-everything}}
+
+== 历史 ==
+{{needs update|section=1|需要从英文wiki更新历史和渲染图。}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w01a|[[File:Hopper (D) JE1.png|32px]] 加入了漏斗。
+|此时漏斗使用与木板相同的音效。
+|[[File:Hopper (item) JE1.png|32px]] 漏斗在物品栏中的纹理是一个“Work in Progress”（开发中）的图标。
+|漏斗可使用1个[[箱子]]和5个[[石头]]合成。
+{{pipe escape|{| class{{=}}"collapsible collapsed"
+! 合成配方
+|-
+|
+{{Crafting Table
+  |A1= Stone
+  |C1= Stone
+  |A2= Stone
+  |B2= Chest
+  |C2= Stone
+  |B3= Stone
+  |Output= Hopper
+}}
+|}}}
+|[[File:Hopper (U) JE1.png|32px]] 数据值为1的漏斗的模型没有“指向”任何方向，而在功能上将物品向上传递，但行为不一致。}}
+|{{HistoryLine|||dev=13w01b|铁轨现在可放在漏斗上方。
+|漏斗不再会把物品装载到没有箱子的矿车里。}}
+|{{HistoryLine|||dev=13w02a|[[File:Hopper (item) JE2 BE1.png|32px]] 更改了漏斗的物品纹理。
+|[[File:Hopper (item) 13w02a.png|32px]] 当漏斗作为掉落物或放入[[物品展示框]]时，纹理会出现问题<ref>{{bug|MC-6737|||Fixed}}</ref>。
+|漏斗现在收到[[红石]]信号时会关闭，直到红石信号消失。
+|漏斗不再可以作为熔炉的燃料。
+|更改了漏斗的合成配方，现在使用[[铁锭]]而不是[[石头]]。
+{{pipe escape|{| class{{=}}"collapsible collapsed"
+! 合成配方
+|-
+|
+{{Crafting Table
+  |A1= Iron Ingot
+  |C1= Iron Ingot
+  |A2= Iron Ingot
+  |B2= Chest
+  |C2= Iron Ingot
+  |B3= Iron Ingot
+  |Output= Hopper
+}}
+|}}}
+|漏斗现在只会吸取熔炉输出槽里的物品。
+|漏斗在与[[红石比较器]]互动时每{{frac|1|3}}组（21个）物品会输出1个信号强度。
+|[[File:Hopper JE2 BE1.png|32px]] 更改了漏斗的纹理，现在漏斗使用单独的纹理而非[[炼药锅]]的纹理。
+|现在漏斗的合适挖掘工具是镐，而非斧。}}
+|{{HistoryLine|||dev=13w02b|漏斗现在能正确向大型箱子输出物品。
+|关闭的漏斗不再吸取其他容器里的物品。}}
+|{{HistoryLine|||dev=13w03a|漏斗现在可用于合成[[漏斗矿车]]。
+|漏斗现在可以清空一个[[漏斗矿车]]。}}
+|{{HistoryLine|||dev=13w04a|漏斗运输速率从1个物品/7游戏刻变成1个物品/8游戏刻（2.5个物品/秒）。}}
+|{{HistoryLine||1.5.1|dev=1.5.1-pre|现在漏斗会从熔炉的燃料槽取出[[空桶]]。}}
+|{{HistoryLine||1.7.2|dev=正式版|[[File:Hopper (U) JE3.png|32px]] 漏斗的UV有一部分被错误地镜像翻转了。}}
+|{{HistoryLine||1.7.4|dev=13w47a|[[File:Hopper (U) JE2.png|32px]] 修复了上述问题。}}
+<!--|{{HistoryLine|||dev=13w48a|修复了{{bug|MC-190}}，据称该问题自漏斗加入以来一直存在。然而对比13w02a与14w08a的漏斗UV并未发现明显区别，相关问题仍需更多研究。}}-->
+|{{HistoryLine||1.8|dev=?|漏斗在空闲时不再导致[[多人游戏]]延迟。}}
+|{{HistoryLine|||dev=14w02a|漏斗现在可以具有方块实体数据{{nbt|string|Lock}}，用于锁定漏斗。如该标签存在，该漏斗只能用自定义名称与该标签相同的物品打开。}}
+|{{HistoryLine|||dev=14w10a|[[File:Missing Model JE2.png|32px]] 现在数据值为1和9的漏斗没有模型。}}
+|{{HistoryLine|||dev=14w26a|移除了数据值为1和9的漏斗。}}
+|{{HistoryLine||1.9|dev=15w33c|漏斗现在作为[[末地船]]和[[末地城]]的一部分生成。}}
+|{{HistoryLine|||dev=15w41a|漏斗不会在末地船生成。}}
+|{{HistoryLine|||dev=15w43a|添加了战利品表，漏斗现在可以使用它。}}
+|{{HistoryLine|||dev=15w44a|[[File:Hopper_(D)_JE7.png|32px]] 更改了漏斗的纹理。}}
+|{{HistoryLine||1.9.1|dev=pre1|漏斗现在可以从上锁的[[箱子]]中吸取和输出物品。}}
+|{{HistoryLine||1.13|dev=17w47a|[[扁平化]]之前，漏斗的数字ID是154。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Hopper JE3 BE2.png|32px]] [[File:Hopper (item) JE3 BE2.png|32px]] 更改了漏斗的纹理。}}
+|{{HistoryLine|||dev=19w03c|漏斗现在有正确的{{cd|cullface}}参数，并删除了无用的面。}}
+|{{HistoryLine||1.19.3|exp=1.20 更新|dev=22w44a|现在漏斗可以与[[雕纹书架]]互动。}}
+|{{HistoryLine||1.19.4|dev=23w07a|现在漏斗可以与[[唱片机]]互动。}}
+|{{HistoryLine||1.20.5|dev=24w06a|现在漏斗上方有[[判定箱#碰撞箱|碰撞箱]]完整的方块时，不再检测[[物品实体]]。}}
+|{{HistoryLine|||dev=24w07a|现在漏斗上方为[[蜂巢（方块）|蜂巢]]或[[蜂箱]]时仍能吸取物品实体。<ref>{{bug|MC-268451|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.2|dev=24w33a|漏斗现在会在试炼密室决斗室入口生成。}}
+|{{HistoryLine|||dev=24w39a|将漏斗的方块实体数据{{nbt|string|Lock}}重命名为{{nbt|compound|lock}}，并支持物品谓词。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.14.0|dev=build 1|[[File:Hopper_JE2_BE1.png|32px]] [[File:Hopper (item) JE2 BE1.png|32px]] 加入了漏斗。}}
+|{{HistoryLine||0.15.0|dev=build 1|漏斗现在可被活塞推动。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Hopper_JE3_BE2.png|32px]] [[File:Hopper (item) JE3 BE2.png|32px]] [[File:Hopper (U) BE1.png|32px]] 更改了漏斗的纹理。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.20|移动了漏斗的吸取范围，漏斗现在能够吸入其上方高度低于1格的方块上的物品实体，但漏斗凹槽中的物品实体无法被吸取了。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.21|漏斗现在会在试炼密室决斗室入口生成。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.24|现在漏斗只会在使用镐挖掘时掉落。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|switch=1.0.1|[[File:Hopper JE2 BE1.png|32px]] 加入了漏斗。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|[[File:Hopper JE3 BE2.png|32px]] [[File:Hopper (item) JE3 BE2.png|32px]] 更改了漏斗的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Hopper JE2 BE1.png|32px]] 加入了漏斗。}}
+}}
+
+== 你知道吗 ==
+* 漏斗在每个游戏刻都会尝试捕捉物品实体，这会造成持续的性能负载。
+** 通过在漏斗上方放置容器（如[[投掷器]]和[[堆肥桶]]）{{only|je|for=或碰撞箱完整的方块}}会阻止其检测物品实体，可略微减小漏斗带来的负载。
+** 通过激活漏斗使其关闭，可显著减少漏斗带来的负载。
+* 尽管漏斗不能捕抓在其上方[[碰撞箱]]完整的方块上方的物品，{{only|for=只要该方块不会使漏斗停止吸取物品|JE}}，仍然可以用[[活塞]]将物品推入方块内来拾取物品。
+
+== 画廊 ==
+<gallery>
+File:Hopper screenshot 1.png|在13w01a中，物品形式的漏斗使用一个'WIP'图标，不过仍然叫做“漏斗”
+File:13w02a.png|在13w02a版本宣传图中有一个[[TNT矿车]]和一个漏斗
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:储物]]
+
+[[cs:Násypka]]
+[[de:Trichter]]
+[[en:Hopper]]
+[[es:Tolva]]
+[[fr:Entonnoir]]
+[[it:tramoggia]]
+[[ja:ホッパー]]
+[[ko:호퍼]]
+[[nl:Trechter]]
+[[pl:Lej]]
+[[pt:Funil]]
+[[ru:Загрузочная воронка]]
+[[uk:Лійка]]

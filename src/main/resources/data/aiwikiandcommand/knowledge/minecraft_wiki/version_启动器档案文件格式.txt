@@ -1,0 +1,107 @@
+# 页面: 启动器档案文件格式
+# 来源: https://zh.minecraft.wiki/w/%E5%90%AF%E5%8A%A8%E5%99%A8%E6%A1%A3%E6%A1%88%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性
+# 抓取时间: 2026-07-14 17:22:02
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{tr|mode=H|令牌|權杖}}
+{{tr|mode=H|档案文件|設定檔}}
+'''启动器档案文件'''包含了[[启动器]]的所有档案与配置文件、选中的用户和档案及缓存的用户信息。这份文件允许档案在旧版与新版启动器之间灵活地更新传输，避免了档案丢失的困扰。
+
+== 文件格式 ==
+启动器档案文件位于{{filepath|-{}-<''客户端根目录''>/launcher_profiles.json}}（在Minecraft Launcher for Windows中为{{filename|launcher_profiles_microsoft_store.json}}），使用JSON结构来保存及取出数据。下面列出了其中JSON键值的解释：
+<div class="treeview">
+* {{nbt|compound}}
+** {{nbt|compound|profiles}}：启动器的所有档案与配置文件。
+*** {{nbt|compound|<''序列号''>}}：一个游戏档案。
+**** {{nbt|string|created}}：使用[[wzh:ISO_8601|ISO 8601]]格式化的数据，用于表示档案的创建时间。如果是启动器一开始自动创建的最新快照和最新版本档案，此项为<code>1970-01-01T00:00:00.000Z</code>。
+**** {{nbt|string|gameDir}}：用于保存此档案内容的目录。可能不存在。
+**** {{nbt|string|icon}}：档案在档案菜单的图标。可以为特殊的枚举字符串，也可以使用[[wzh:Base64|Base64]]编码的图片。
+**** {{nbt|string|javaArgs}}：该档案的启动参数。可能不存在，默认为<code>-Xmx2G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M</code>。
+**** {{nbt|string|javaDir}}：用于游戏运行的Java目录。可能不存在，默认为系统的Java目录。
+**** {{nbt|string|lastUsed}}：使用[[wzh:ISO_8601|ISO 8601]]格式化的数据，用于表示档案的最后使用时间。如果这个档案在创建后从未被使用，则为<code>1970-01-01T00:00:00.000Z</code>。
+**** {{nbt|string|lastVersionId}}：档案的目标版本ID。可以为一个具体的版本号，也可以为<code>latest-release</code>（使用最新的稳定发布版）和<code>latest-snapshot</code>（使用最新的Minecraft快照）。
+**** {{nbt|string|name}}：档案的名称。可以包括字符、数字、标点符号和空格。
+**** {{nbt|compound|resolution}}：游戏启动时的分辨率。可能不存在。
+***** {{nbt|int|height}}：窗口高度。
+***** {{nbt|int|width}}：窗口宽度。
+**** {{nbt|string|type}}：档案类型。类型可以是<code>custom</code>（由用户手动创建）、<code>latest-release</code>（使用最新的稳定发布版）和<code>latest-snapshot</code>（使用最新的Minecraft构建）。
+**** {{nbt|string|logConfig}}：档案的日志配置的路径。如果<code>logConfigIsXML</code>为<code>true</code>，则应为XML文件。
+**** {{nbt|boolean|logConfigIsXML}}：日志配置文件是否为XML文件。
+** {{nbt|compound|settings}}：包含启动器的所有设置信息。
+*** {{nbt|bool|crashAssistance}}：表示是否在发生崩溃时将信息发送给Mojang。
+*** {{nbt|bool|enableAdvanced}}：表示是否在添加新的启动参数时启用更改高级Java设置。
+*** {{nbt|bool|enableAnalytics}}：表示是否启用分析用户{{tr|会话|session}}。这通常不能使用启动器直接控制。
+*** {{nbt|bool|enableHistorical}}：表示是否显示历史版本。
+*** {{nbt|bool|enableReleases}}：表示是否显示正式版档案。
+*** {{nbt|bool|enableSnapshots}}：表示是否显示快照版本。
+*** {{nbt|bool|keepLauncherOpen}}：表示是否在游戏启动时保持启动器打开。
+*** {{nbt|string|profileSorting}}：档案在档案菜单中排序方式。可选值有<code>ByName</code>（按字母顺序对它们进行排序）和<code>ByLastPlayed</code>（根据你最后使用的档案对它们进行排序）。
+*** {{nbt|bool|showGameLog}}：表示游戏启动时是否显示日志窗口。
+*** {{nbt|bool|showMenu}}：是否在Minecraft徽标下显示滑动菜单（包括“新闻”、“皮肤”、“设置”和“启动选项”）。
+*** {{nbt|bool|soundOn}}：{{info needed}}。
+** {{nbt|int|version}}：启动器版本。
+<!--** {{nbt|string|clientToken}}：当前登录的客户端令牌。
+** {{nbt|compound|authenticationDatabase}}：所有登录的帐户。
+*** {{nbt|compound}}：账户的哈希化UUID
+**** {{slink||身份验证数据库结构}}
+** {{nbt|compound|launcherVersion}}：包含现时的启动器开发名称、格式及档案格式。
+** {{nbt|string|analyticsToken}}：追踪分析器的最新令牌。 启动器在本地使用它们来管理和跟踪会话。
+** {{nbt|int|analyticsFailcount}}：追踪分析失败的次数{{info needed}}
+** {{nbt|compound|selectedUser}}：当前被选中用户的UUID。
+*** {{nbt|string|account}}：当前选中的账户的哈希化UUID。
+*** {{nbt|string|profile}}：当前选中的玩家的UUID。-->
+</div>
+
+<!--== 身份验证数据库结构 ==
+身份验证数据库被保存在'''authenticationDatabase'''部分中。下面是该结构的解释：
+
+身份验证数据库由所有已登录用户的'''哈希化UUID键'''组成。每个登录用户都有自己的键，用于在之后保存当前所选用户等内容。
+
+每个通过身份验证的键都包含几个值，在下表中解释：
+
+<div class="treeview">
+* {{nbt|compound|}}
+** {{nbt|string|accessToken}}：保存登录会话的令牌。
+** {{nbt|string|username}}：账号的电子邮箱。
+** {{nbt|compound|profiles}}：账号的档案。此map将包含账号的UUID及其显示名称。
+</div>
+
+== 启动器版本结构 ==
+启动器版本保存在JSON文件自己的部分中（'''launcherVersion'''）。它有几个包含有关当前使用的启动器构建的信息的值。 每次运行特定版本的启动器时，都会更新这些值以适应最新使用的启动器。此部分允许启动器版本和更新检查之间更好的兼容性。
+
+启动器版本键解释如下：
+<div class="treeview">
+* {{nbt|compound|}}
+** {{nbt|string|name}}：当前启动器构建的名称。
+** {{nbt|int|format}}：当前配置文件的格式版本。
+** {{nbt|int|profilesFormat}}：当前配置文件的<code>profiles</code>部分的格式版本。
+</div>-->
+<!--== 选中用户结构 ==
+所选用户部分存储的有关当前所选档案和所选帐户的信息。如上所述，帐户存储为哈希化UUID键，然后保存在这里。
+
+键在下表中解释：
+{| class="wikitable"
+|+
+!键
+!类型
+!说明
+|-
+|account
+|字符串（UUID）
+|当前选中账号的哈希化UUID。
+|-
+|profile
+|字符串（UUID）
+|当前选中玩家的UUID。
+|}-->
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[en:Launcher profiles.json]]
+[[fr:launcher_profiles.json]]
+[[ja:Launcher profiles.json]]

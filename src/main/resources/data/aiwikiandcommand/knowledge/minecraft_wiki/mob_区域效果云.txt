@@ -1,0 +1,133 @@
+# 页面: 区域效果云
+# 来源: https://zh.minecraft.wiki/w/%E5%8C%BA%E5%9F%9F%E6%95%88%E6%9E%9C%E4%BA%91
+# 分类: 
+# 抓取时间: 2026-07-14 17:20:51
+# 原始 Wikitext 内容:
+
+{{Infobox entity
+|image=Area Effect Cloud Render.png
+|imagesize=250px
+|size=见{{slink||行为}}<br>
+'''{{el|be}}：'''<br>
+高度：1.8格<br>
+宽度：0.7格<br>
+|spawn=见{{slink||生成}}
+}}
+
+'''区域效果云（Area Effect Cloud）'''是一种能为范围内生物施加[[状态效果]]的[[实体]]。
+
+== 生成 ==
+
+=== 滞留药水 ===
+[[滞留药水]]在撞击并破裂后，会在破裂位置生成一团具有对应效果的区域效果云。
+
+该区域效果云的半径为3格，在30秒内逐渐缩小到半径为0后消失，每次对生物造成效果后半径会缩小{{frac|1|2}}格且剩余持续时间减少5秒。
+
+=== 苦力怕 ===
+{{exclusive|je|section=1}}
+[[苦力怕]]在爆炸时如果具有任意[[状态效果]]，会在爆炸位置生成一个包含其所有状态效果的区域效果云，该区域效果云每一次给予效果时给予的效果的等级和时长都等于苦力怕爆炸时的数据。
+
+该区域效果云的半径为3格，在30秒内逐渐缩小到半径为0后消失，每次使用后半径会缩小{{frac|1|2}}格且剩余持续时间减少5秒。
+
+=== 末影龙火球 ===
+[[末影龙火球]]在撞击并爆炸后，会在该位置生成一团效果为[[瞬间伤害]]II、颜色为紫色的区域效果云。该区域效果云可以被收集为[[龙息]]。
+
+{{in|je}}末影龙火球接触[[方块]]时会爆炸，0.5秒后产生区域效果云，半径为3，在30秒内逐渐扩展到半径为5后消失。
+
+{{in|be}}末影龙火球碰撞到[[实体]]、方块时都会爆炸，立即产生区域效果云，半径为5，在120秒内逐渐减小直至消失。
+
+== 行为 ==
+区域效果云本身是一种不可见的实体，玩家只能通过其产生的大量粒子效果来注意到其存在。
+
+每个区域效果云有以下实体数据定义其行为：
+* 半径<code>Radius</code>
+* 持续时间<code>Duration</code>
+* 半径随时间变化的速率<code>RadiusPerTick</code>
+* 每次生效后的半径变化<code>RadiusOnUse</code>
+* 每次生效后的持续时间变化<code>DurationOnUse</code>
+
+在区域效果云消失之前，任何进入区域效果云且不免疫其效果的生物在一秒后会受到相应的效果，同时区域效果云的半径会立即改变，其剩余持续时间改变。
+
+方块不能阻止区域效果云扩散和产生效果。处于区域效果云中任何一处得到的效果都相同，且均为最大效果。
+
+=== 状态效果 ===
+如果区域效果云的效果不是即时生效效果，区域效果云每次生效赋予效果的持续时间是对应普通[[药水]]时长的{{frac|1|4}}。
+
+如果区域效果云的效果是一种即时生效效果，包括[[瞬间治疗]]、[[瞬间伤害]]和[[饱和]]，区域效果云每次生效的效力会减至对应普通药水的{{frac|1|2}}。
+
+=== 龙息 ===
+由末影龙或末影龙火球产生的区域效果云可以对其{{Control|使用}}[[玻璃瓶]]来获取[[龙息]]，同时半径缩小{{frac|1|2}}格。
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Area Effect Cloud
+|spritetype=entity
+|nameid=area_effect_cloud
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Area Effect Cloud
+|spritetype=entity
+|nameid=area_effect_cloud
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+区域效果云有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{load achievements|you-need-a-mint}}
+
+== 进度 ==
+{{load advancements|end.dragon_breath}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w33a|加入了滞留药水和区域效果云。}}
+|{{HistoryLine|||dev=15w44b|区域效果云现在可以将其中的[[箭]]转变为[[药箭]]。}}
+|{{HistoryLine|||dev=16w06a|区域效果云不再能将[[箭]]转变为[[药箭]]。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID由<code>AreaEffectCloud</code>更改为<code>area_effect_cloud</code>。}}
+|{{HistoryLine||1.20.2|dev=23w32a|修改了区域效果云的保存状态效果的格式，状态效果现在不再使用数字ID。}}
+|{{HistoryLine||1.21|dev=pre2|免疫区域效果云中状态的生物现在不再使区域效果云收缩。}}
+|{{HistoryLine||1.21.5|dev=25w02a|对区域效果云实体加入了{{nbt|float|potion_duration_scale}}标签控制药水效果时长的缩放倍率。}}
+|{{HistoryLine|||dev=25w09a|现在未指定<code>Duration</code>数据的区域效果云不再立刻消失。}}
+|{{HistoryLine||1.21.6|dev=25w15a|区域效果云的实体数据<code>Particle</code>字段现已重命名为<code>custom_particle</code>，需要为默认有色粒子<code>entity_effect</code>的精确覆盖，其粒子颜色（若有）也不再从药水效果中继承。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了滞留药水和区域效果云。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.0|dev=1.17.0.52|滞留型水瓶产生的区域效果云现在会对雪傀儡和炽足兽造成伤害。}}
+|{{HistoryLine||1.21.20|dev=1.21.20.21|免疫区域效果云中状态的生物现在不再使区域效果云收缩。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|加入了滞留药水和区域效果云。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||1.7.10|加入了滞留药水和区域效果云。}}
+}}
+
+== 画廊 ==
+<gallery>
+Area Effect Cloud.png|地上产生的区域效果云
+</gallery>
+
+== 导航 ==
+{{Navbox entities|Non-mobs}}
+
+[[de:Verweiltrank]]
+[[en:Lingering Potion]]
+[[fr:Potion persistante]]
+[[ko:잔류형 물약]]
+[[pl:Trwałe miotane mikstury]]
+[[pt:Poção prolongada]]
+[[ru:Оседающие зелья]]
+[[uk:Осідаючі зілля]]

@@ -1,0 +1,362 @@
+# 页面: 编码格式/Worldgen
+# 来源: https://zh.minecraft.wiki/w/%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/Worldgen
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:35
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+此条目记录了各种常用于世界生成的数据结构。
+
+{{TOC|right}}
+
+本条目部分内容合并自其他页面，详见[[special:链入页面/编码格式/Worldgen|本页面的链入页面]]。
+
+下列所有结构均需要与最新版本同步更新。
+
+{| class="wikitable"
+! 结构名称 !! 引用名称 !! 相关模板
+|-
+! colspan="3" | 世界生成
+|-
+| 方块谓词 || <code>codec_block_predicate</code> || {{tl|nbt inherit/block test}}
+|-
+| 方块状态提供器 || <code>codec_block_state_provider</code> || {{tl|nbt inherit/block state provider}}
+|-
+| 超平坦世界生成设置 || <code>codec_flat_level_generator_settings</code> || {{tl|nbt inherit/flat generator settings}}
+|-
+| 高度提供器 || <code>codec_height_provider</code> || {{tl|nbt inherit/height provider}}
+|-
+| 规则测试 || <code>codec_rule_test</code> || {{tl|nbt inherit/rule test}}
+|-
+| 垂直锚点 || <code>codec_vertical_anchor</code> || {{tl|nbt inherit/vertical anchor}}
+|-
+! colspan=3 | 数值提供器
+|-
+| 浮点提供器 || <code>codec_float_provider</code> || {{tl|nbt inherit/float provider}}
+|-
+| 整数提供器 || <code>codec_int_provider</code> || {{tl|nbt inherit/int provider}}
+|-
+! colspan="3" | 其他
+|-
+| 方块状态 || <code>codec_block_state</code> || {{tl|nbt inherit/block state}}
+|-
+| 整数范围 || <code>codec_int_inclusive_range</code> || {{tl|nbt inherit/int inclusive range}}
+|-
+| 生物群系参数 || <code>codec_climate_parameter_point</code> || {{tl|nbt inherit/parameter point}}
+|}
+
+== 世界生成 ==
+=== 方块谓词 ===
+{{codec from source|type=json|net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate}}
+
+<div class="treeview">
+* {{nbt|compound}} <code>BlockPredicate::CODEC</code><section begin="codec_block_predicate"/>
+** {{nbt|string|type|required=1}}：方块谓词类型。取值可以为<code>true</code>（永远成功）、<code>not</code>（不满足某个方块谓词）、<code>all_of</code>（所有谓词成功时才成功）、<code>any_of</code>（任一谓词成功时即成功）、<code>has_sturdy_face</code>（方块的某个方向具有完整的[[判定箱|方块支撑表面]]）、<code>inside_world_bounds</code>（Y轴坐标在世界界限内）、<code>matching_block_tag</code>（匹配方块标签）、<code>matching_blocks</code>（匹配方块ID）、<code>matching_fluids</code>（匹配流体ID）、<code>replaceable</code>（方块是否为[[可替代方块]]）、<code>solid</code>（方块是否为[[固体方块]]）、<code>would_survive</code>（方块是否可以放置在指定位置）、<code>unobstructed</code>（是否没有任何可碰撞的实体）或<code>matching_biomes</code>（匹配生物群系）。
+** {{nbt condition|如果<code>type</code>是<code>true</code>，没有附加字段。}}
+** {{nbt condition|如果<code>type</code>是<code>not</code>，附加字段如下：}}
+** {{nbt|compound|predicate|required=1}}：方块谓词，此谓词测试成功时测试失败。
+*** {{nbt inherit/block test}}
+** {{nbt condition|如果<code>type</code>是<code>all_of</code>，附加字段如下：}}
+** {{nbt|list|predicates|required=1}}：一个方块谓词列表，此列表所有测试成功时才测试成功。
+*** {{nbt|compound}}
+**** {{nbt inherit/block test}}
+** {{nbt condition|如果<code>type</code>是<code>any_of</code>，附加字段如下：}}
+** {{nbt|list|predicates|required=1}}：一个方块谓词列表，此列表任一测试成功时即测试成功。
+*** {{nbt|compound}}
+**** {{nbt inherit/block test}}
+** {{nbt condition|如果<code>type</code>是<code>matching_blocks</code>，附加字段如下：}}
+** {{nbt|string}}{{nbt|list|blocks|required=1}}：测试方块是否在此方块集合内。可以为方块ID、方块标签或一个方块ID的列表。
+** {{nbt|int array|offset}}：（默认为<code>[0, 0, 0]</code>）相对于当前方块的坐标，将测试该坐标上的方块。内部的三个整数依次对应X、Y、Z坐标，每个值的绝对值不允许超过16。
+** {{nbt condition|如果<code>type</code>是<code>matching_block_tag</code>，附加字段如下：}}
+** {{nbt|int array|offset}}：（默认为<code>[0, 0, 0]</code>）相对于当前方块的坐标，将测试该坐标上的方块。内部的三个整数依次对应X、Y、Z坐标，每个值的绝对值不允许超过16。
+** {{nbt|string|tag}}：测试方块是否属于此方块标签。应为不带<code>#</code>前缀的方块标签。
+** {{nbt condition|如果<code>type</code>是<code>matching_fluids</code>，附加字段如下：}}
+** {{nbt|string}}{{nbt|list|fluids|required=1}}：测试流体是否在此流体集合内。可以为流体ID、流体标签或一个流体ID的列表。
+** {{nbt|int array|offset}}：（默认为<code>[0, 0, 0]</code>）相对于当前方块的坐标，将测试该坐标上的方块。内部的三个整数依次对应X、Y、Z坐标，每个值的绝对值不允许超过16。
+** {{nbt condition|如果<code>type</code>是<code>has_sturdy_face</code>，附加字段如下：}}
+** {{nbt|string|direction|required=1}}：要测试的方向。取值只能为<code>up</code>（上）、<code>down</code>（下）、<code>north</code>（北）、<code>south</code>（南）、<code>west</code>（西）或<code>east</code>（东）。
+** {{nbt|int array|offset}}：（默认为<code>[0, 0, 0]</code>）相对于当前方块的坐标，将测试该坐标上的方块。内部的三个整数依次对应X、Y、Z坐标，每个值的绝对值不允许超过16。
+** {{nbt condition|如果<code>type</code>是<code>solid</code>、<code>replaceable</code>、<code>inside_world_bounds</code>、<code>unobstructed</code>，附加字段如下：}}
+** {{nbt|int array|offset}}：（默认为<code>[0, 0, 0]</code>）相对于当前方块的坐标，将测试该坐标上的方块。内部的三个整数依次对应X、Y、Z坐标，每个值的绝对值不允许超过16。
+** {{nbt condition|如果<code>type</code>是<code>would_survive</code>，附加字段如下：}}
+** {{nbt|int array|offset}}：（默认为<code>[0, 0, 0]</code>）相对于当前方块的坐标，将测试该坐标上的方块。内部的三个整数依次对应X、Y、Z坐标，每个值的绝对值不允许超过16。
+** {{nbt|compound|state}}：要放置的方块。注意：这只用于测试，例如指定树苗时若下方为石头则测试失败，为草方块则测试成功，游戏并不会真正放置方块。
+*** {{nbt inherit/block state}}
+** {{nbt condition|如果<code>type</code>是<code>matching_biomes</code>，附加字段如下：}}
+** {{nbt|string}}{{nbt|list|biomes|required=1}}：测试生物群系是否在此生物群系集合内。可以为生物群系ID、生物群系标签或一个生物群系ID的列表。
+<section end="codec_block_predicate"/></div>
+
+=== 方块状态提供器 ===
+{{codec from source|type=json|net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider}}
+
+<div class="treeview">
+* {{nbt|compound}} <code>BlockStateProvider::CODEC</code><section begin="codec_block_state_provider"/>
+** {{nbt|string|type|required=1}}：方块状态提供器类型。必须是{{cd|simple_state_provider}}（直接提供方块状态）、{{cd|rotated_block_provider}}（随机旋转轴向方块，如原木、铁链）、{{cd|weighted_state_provider}}（在加权列表中随机选取）、{{cd|randomized_int_state_provider}}（为整型的方块属性赋予随机值）、{{cd|noise_provider}}（根据噪声随机选取方块状态）、{{cd|dual_noise_provider}}（双噪声方块状态提供器）、{{cd|noise_threshold_provider}}（噪声阈限方块状态提供器）或<code>rule_based_state_provider</code>（基于规则的方块状态提供器）。
+** {{nbt condition|如果<code>type</code>是{{cd|simple_state_provider}}，附加参数如下：}}
+** {{nbt|compound|state|required=1}}：要放置的方块状态。
+*** {{nbt inherit/block_state}}
+** {{nbt condition|如果<code>type</code>是{{cd|rotated_block_provider}}，附加参数如下：}}
+** {{nbt|compound|state|required=1}}：要放置的方块状态。游戏会给方块属性<code>axis</code>随机取值。
+*** {{nbt inherit/block_state}}
+** {{nbt condition|如果<code>type</code>是{{cd|weighted_state_provider}}，附加参数如下：}}
+** {{nbt|list|entries|required=1}}：（不能为空）可供选择的方块状态列表。
+*** {{nbt|compound}}：一个选择。
+**** {{nbt|compound|data|required=1}}：一个方块状态。
+***** {{nbt inherit/block_state}}
+**** {{nbt|int|weight|required=1}}：该方块被选取的权重；更高的值将增加被选取的频率。
+** {{nbt condition|如果<code>type</code>是{{cd|randomized_int_state_provider}}，附加参数如下：}}
+** {{nbt|string|property|required=1}}：一项方块属性的名称。
+** {{nbt|int}}{{nbt|compound|values|required=1}}：方块属性的值。
+*** {{nbt inherit/int provider}}
+** {{nbt|compound|source|required=1}}：另一个方块状态提供器，用于指定方块状态的来源。
+*** {{nbt inherit/block state provider}}
+** {{nbt condition|如果<code>type</code>是{{cd|noise_provider}}，附加的参数如下：}}
+** {{nbt|long|seed|required=1}}：噪声的种子。
+** {{nbt|compound|noise|required=1}}：计算噪声值使用的[[噪声]]。只接受内联格式。
+*** {{nbt|int|firstOctave|required=1}}：主倍频。
+*** {{nbt|list|amplitudes|required=1}}：振幅列表。
+**** {{nbt|double}}：此倍频下的值。
+** {{nbt|float|scale|required=1}}：（{{interval|left_open=0}}）噪声的水平缩放。
+** {{nbt|list|states|required=1}}：（不能为空）可选方块状态的列表。
+*** {{nbt|compound}}：一个方块状态。
+**** {{nbt inherit/block_state}}
+** {{nbt condition|如果<code>type</code>是{{cd|dual_noise_provider}}，附加参数如下：}}
+** {{nbt|long|seed|required=1}}：噪声的种子。
+** {{nbt|compound|noise|required=1}}：计算噪声值使用的噪声。只接受内联格式。
+*** {{nbt|int|firstOctave|required=1}}：主倍频。
+*** {{nbt|list|amplitudes|required=1}}：振幅列表。
+**** {{nbt|double}}：此倍频下的值。
+** {{nbt|float|scale|required=1}}：（{{interval|left_open=0}}）噪声的水平缩放。
+** {{nbt|int}}{{nbt|list}}{{nbt|compound|variety|required=1}}：（{{interval|left=1|right=64}}）多样性，代表了在缓慢噪声选择后能留下候选的方块状态数量。
+*** {{nbt inherit/int inclusive range}}
+** {{nbt|compound|slow_noise|required-1}}：缓慢噪声，用于随机选择方块状态。只接受内联格式。
+*** {{nbt|int|firstOctave|required=1}}：主倍频。
+*** {{nbt|list|amplitudes|required=1}}：振幅列表。
+**** {{nbt|double}}：此倍频下的值。
+** {{nbt|float|slow_scale|required=1}}：（{{interval|left_open=0}}）缓慢噪声的水平缩放。
+** {{nbt|list|states|required=1}}：（不能为空）可选方块状态的列表。
+*** {{nbt|compound}}：一个方块状态。
+**** {{nbt inherit/block_state}}
+** {{nbt condition|如果<code>type</code>是{{cd|noise_threshold_provider}}，附加参数如下：}}
+** {{nbt|long|seed|required=1}}：噪声的种子。
+** {{nbt|compound|noise|required=1}}：计算噪声值使用的噪声。只接受内联格式。
+*** {{nbt|int|firstOctave|required=1}}：主倍频。
+*** {{nbt|list|amplitudes|required=1}}：振幅列表。
+**** {{nbt|double}}：此倍频下的值。
+** {{nbt|float|scale|required=1}}：（{{interval|left_open=0}}）噪声的水平缩放。
+** {{nbt|float|threshold|required=1}}：（{{interval|left=0|right=1}}）默认方块状态噪声值的下限，如果噪声值低于此值将选择{{cd|low_states}}中的方块状态。
+** {{nbt|float|high_chance|required=1}}：（{{interval|left=0|right=1}}）如果噪声值高于{{cd|threshold}}，将有将{{cd|high_chance}}大小的概率选择{{cd|high_states}}中的方块状态。
+** {{nbt|compound|default_state|required=1}}：默认方块状态。噪声值高于{{cd|threshold}}但根据概率{{cd|high_chance}}没有选中{{cd|high_states}}时，将使用此方块状态。
+*** {{nbt inherit/block_state}}
+** {{nbt|list|low_states|required=1}}：（不能为空）低噪声值可选方块状态列表。
+*** {{nbt|compound}}：一个方块状态。
+**** {{nbt inherit/block_state}}
+** {{nbt|list|high_states|required=1}}：（不能为空）高噪声值可选方块状态列表。
+*** {{nbt|compound}}：一个方块状态。
+**** {{nbt inherit/block_state}}
+** {{nbt condition|如果<code>type</code>是<code>rule_based_state_provider</code>，附加参数如下：}}
+*** {{nbt|compound|fallback}}：当所有规则都不满足时要使用的方块。如果此值不存在，则不使用任何方块。
+**** {{nbt inherit/block state provider}}
+*** {{nbt|list|rules|required=1}}：（可以为空）可放置的方块的规则列表。
+**** {{nbt|compound}}：一条规则。
+***** {{nbt|compound|if_true|required=1}}：方块谓词，决定方块在此处是否可以放置。
+****** {{nbt inherit/block test}}
+***** {{nbt|compound|then|required=1}}：此谓词通过时使用的方块。
+****** {{nbt inherit/block state provider}}
+<section end="codec_block_state_provider"/></div>
+
+=== 超平坦世界生成预设 ===
+{{codec from source|type=json|net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorSettings}}
+
+<div class="treeview">
+* {{nbt|compound}} <code>FlatLevelGeneratorSettings::CODEC</code><section begin="codec_flat_level_generator_settings"/>
+** {{nbt|list|layers|required=1}}：（可以为空）层设置。此列表中的元素将自上而下依次从世界底部向上生成。
+*** {{nbt|compound}}：超平坦的一个层。
+**** {{nbt|string|block}}：这一层使用的方块。不存在时默认为空气。
+**** {{nbt|int|height|required=1}}：（{{interval|left=0|right=4064}}）这一层的高度。
+** {{nbt|string|biome}}：要生成的生物群系，不存在时默认为[[平原]]。
+** {{nbt|boolean|lakes}}：（默认为<samp>false</samp>）是否生成湖泊。如果为<samp>true</samp>，则世界会生成[[熔岩湖]]<code>lake_lava_underground</code>和<code>lake_lava_surface</code>。
+** {{nbt|boolean|features}}：（默认为<samp>false</samp>）是否生成生物群系的地物，永远不会生成<code>UNDERGROUND_STRUCTURES</code>和<code>SURFACE_STRUCTURES</code>阶段的已放置的地物。若生物群系是虚空且所有层都不是空气层，则什么地物也不会生成。
+** {{nbt|string}}{{nbt|list|structure_overrides}}：指定要生成哪些[[结构集]]，此项不存在时游戏会尝试生成所有结构集。可以为结构集的ID、多个结构集ID的数组或一个结构集标签。
+<section end="codec_flat_level_generator_settings"/></div>
+
+=== 高度提供器 ===
+{{codec from source|type=json|net.minecraft.world.level.levelgen.heightproviders.HeightProvider}}
+
+<div class="treeview">
+* {{nbt|compound}} <code>HeightProvider::CODEC</code><section begin="codec_height_provider"/>
+**  {{nbt condition|（二选一）若直接指定恒定高度：}}
+** {{nbt inherit/vertical_anchor}}
+**  {{nbt condition|（二选一）若指定附加参数：}}
+** {{nbt|string|type|required=1}}：高度提供器的类型。可以是<code>constant</code>（恒定高度）、<code>uniform</code>（均匀分布）、<code>biased_to_bottom</code>（偏向底部）、<code>very_biased_to_bottom</code>（更加偏向底部）、<code>trapezoid</code>（梯形分布）或<code>weighted_list</code>（加权列表）。
+** {{nbt condition|如果<code>type</code>是<code>constant</code>，附加字段如下：}}
+** {{nbt|compound|value|required=1}}：作为恒定高度的垂直锚点。
+*** {{nbt inherit/vertical_anchor}}
+** {{nbt condition|如果<code>type</code>是<code>uniform</code>，附加字段如下：}}
+** {{nbt|compound|min_inclusive|required=1}}：作为最小高度的垂直锚点。
+*** {{nbt inherit/vertical_anchor}}
+** {{nbt|compound|max_inclusive|required=1}}：作为最大高度的垂直锚点。
+*** {{nbt inherit/vertical_anchor}}
+** {{nbt condition|如果<code>type</code>是<code>biased_to_bottom</code>或<code>very_biased_to_bottom</code>，附加字段如下：}}
+** {{nbt|compound|min_inclusive|required=1}}：作为最小高度的垂直锚点。
+*** {{nbt inherit/vertical_anchor}}
+** {{nbt|compound|max_inclusive|required=1}}：作为最大高度的垂直锚点。
+*** {{nbt inherit/vertical_anchor}}
+** {{nbt|int|inner}}：（默认为1）内部值。取值为大于等于1的整数。
+** {{nbt condition|如果<code>type</code>是<code>trapezoid</code>，附加字段如下：}}
+** {{nbt|compound|min_inclusive|required=1}}：作为最小高度的垂直锚点。
+*** {{nbt inherit/vertical_anchor}}
+** {{nbt|compound|max_inclusive|required=1}}：作为最大高度的垂直锚点。
+*** {{nbt inherit/vertical_anchor}}
+** {{nbt|int|plateau}}：（默认为0）梯形分布的上底长度。
+** {{nbt condition|如果<code>type</code>是<code>weighted_list</code>，附加字段如下：}}
+** {{nbt|list|distribution|required=1}}：（不能为空）一个加权随机池。
+*** {{nbt|compound}}：随机池中的一项。
+**** {{nbt|int|data|required=1}}：高度提供器。
+***** {{nbt inherit/height_provider}}
+**** {{nbt|int|weight|required=1}}：该项的权重。
+<section end="codec_height_provider"/></div>
+
+=== 规则测试 ===
+{{codec from source|type=json|net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest}}
+
+<div class="treeview">
+* {{nbt|compound}} <code>RuleTest::CODEC</code><section begin="codec_rule_test"/>
+** {{Nbt|string|predicate_type|required=1}}：规则测试类型。取值可以为{{upcoming|je 26.3|for=<code>all_of</code>（所有测试成功时才成功）}}、<code>always_true</code>（永远成功）、<code>block_match</code>（匹配方块ID）、<code>blockstate_match</code>（匹配方块状态）、<code>tag_match</code>（匹配方块标签）、{{upcoming|je 26.3|for=<code>height_match</code>（匹配方块高度）}}、<code>random_block_match</code>（匹配方块ID并概率成功）或<code>random_blockstate_match</code>（匹配方块状态并概率成功）。
+** {{nbt condition|{{inUpcoming|je 26.3}}如果<code>predicate_type</code>是<code>all_of</code>，附加字段如下：}}
+** {{nbt|list|rules|required=1}}：要进行的规则测试。
+*** {{nbt|compound}}：一个规则测试。
+**** {{nbt inherit/rule test}}
+** {{nbt condition|如果<code>predicate_type</code>是<code>block_match</code>，附加字段如下：}}
+** {{Nbt|string|block|required=1}}：方块ID。
+** {{nbt condition|如果<code>predicate_type</code>是<code>blockstate_match</code>，附加字段如下：}}
+** {{Nbt|compound|block_state|required=1}}：方块状态。
+*** {{Nbt inherit/block state}}
+** {{nbt condition|如果<code>predicate_type</code>是<code>tag_match</code>，附加字段如下：}}
+** {{Nbt|string|tag|required=1}}：方块标签。
+** {{nbt condition|{{inUpcoming|je 26.3}}如果<code>predicate_type</code>是<code>height_match</code>，附加字段如下：}}
+** {{nbt|int|min_inclusive}}：（默认为维度最低高度）方块位于此高度之上时测试成功。
+** {{nbt|int|max_inclusive}}：（默认为维度最大高度）方块位于此高度之下时测试成功。
+** {{nbt condition|如果<code>predicate_type</code>是<code>random_block_match</code>，附加字段如下：}}
+** {{Nbt|string|block|required=1}}：方块的ID。
+** {{Nbt|float|probability|required=1}}：若该方块匹配，则测试成功的概率。大于1则视为1，小于0则视为0。
+** {{nbt condition|如果<code>predicate_type</code>是<code>random_blockstate_match</code>，附加字段如下：}}
+** {{Nbt|compound|block_state|required=1}}：方块状态。
+*** {{Nbt inherit/block state}}
+** {{Nbt|float|probability|required=1}}：若该方块状态匹配，则测试成功的概率。大于1则视为1，小于0则视为0。
+<section end="codec_rule_test"/></div>
+
+=== 垂直锚点 ===
+{{codec from source|type=json|net.minecraft.world.level.levelgen.VerticalAnchor}}
+
+<div class="treeview">
+* {{nbt|compound}} <code>VerticalAnchor::CODEC</code><section begin="codec_vertical_anchor"/>
+** {{nbt|int|absolute}}：（三选一，{{interval|left=-2032|right=2031}}）绝对高度，也即调试屏幕中的Y坐标值。
+** {{nbt|int|above_bottom}}：（三选一，{{interval|left=-2032|right=2031}}）相对高度，从世界底部开始向上计算。世界底部高度是[[维度定义格式#区块生成器|区块生成器]]定义的允许生成地形的最低高度，而不是维度可以存在方块的最低高度。
+** {{nbt|int|below_top}}：（三选一，{{interval|left=-2032|right=2031}}）相对高度，从世界顶部开始向下计算。值越高则高度越低。同样使用区块生成器的高度计算世界顶部高度。
+<section end="codec_vertical_anchor"/></div>
+
+== 数值提供器 ==
+=== 浮点提供器 ===
+{{codec from source|type=json|net.minecraft.util.valueproviders.FloatProvider}}
+
+<div class="treeview">
+* {{nbt|float}}{{nbt|compound}} <code>FloatProvider::CODEC</code><section begin="codec_float_provider"/>
+** {{nbt|string|type|required=1}}：浮点提供器类型。取值可以为<code>constant</code>（固定值）、<code>uniform</code>（均匀分布）、<code>clamped_normal</code>（正态分布）或<code>trapezoid</code>（梯形分布）。
+** {{nbt condition|如果<code>type</code>是<code>constant</code>，附加字段如下：}}
+** {{nbt|float|value|required=1}}：固定值。
+** {{nbt condition|如果<code>type</code>是<code>uniform</code>，附加字段如下：}}
+** {{nbt|float|min_inclusive|required=1}}：最小值。
+** {{nbt|float|max_exclusive|required=1}}：最大值（不包含）。必须大于{{nbt|float|min_inclusive}}。
+** {{nbt condition|如果<code>type</code>是<code>clamped_normal</code>，附加字段如下：}}
+** {{nbt|float|mean|required=1}}：正态分布的平均数。
+** {{nbt|float|deviation|required=1}}：正态分布的离差。
+** {{nbt|float|min|required=1}}：最小值，如果计算结果小于此值则使用此值。
+** {{nbt|float|max|required=1}}：最大值，如果计算结果大于此值则使用此值。必须大于{{nbt|float|min}}。
+** {{nbt condition|如果<code>type</code>是<code>trapezoid</code>，附加字段如下：}}
+** {{nbt|float|min|required=1}}：最小值。
+** {{nbt|float|max|required=1}}：最大值。
+** {{nbt|float|plateau|required=1}}：梯形分布中均匀分布部分的范围，必须小于等于最大值与最小值之差。
+<section end="codec_float_provider"/></div>
+
+=== 整数提供器 ===
+{{codec from source|type=json|net.minecraft.util.valueproviders.IntProvider}}
+
+<div class="treeview">
+* {{nbt|int}}{{nbt|compound}} <code>IntProvider::CODEC</code><section begin="codec_int_provider"/>
+** {{nbt|string|type|required=1}}：整数提供器类型。取值可以为<code>constant</code>（固定值）、<code>uniform</code>（均匀分布）、<code>biased_to_bottom</code>（偏向最小值分布）、<code>clamped</code>（钳制输入值）、<code>clamped_normal</code>（正态分布）、<code>weighted_list</code>（加权列表）或<code>trapezoid</code>（梯形分布）。
+** {{nbt condition|如果<code>type</code>是<code>constant</code>，附加的参数如下：}}
+** {{nbt|int|value|required=1}}：固定值。
+** {{nbt condition|如果<code>type</code>是<code>uniform</code>或<code>biased_to_bottom</code>，附加的参数如下：}}
+** {{nbt|int|min_inclusive|required=1}}：最小值。
+** {{nbt|int|max_inclusive|required=1}}：最大值。不能小于{{Nbt|int|min_inclusive}}。
+** {{nbt condition|如果<code>type</code>是<code>clamped</code>，附加的参数如下：}}
+** {{nbt|int|min_inclusive|required=1}}：最小值，如果计算结果小于此值则使用此值。
+** {{nbt|int|max_inclusive|required=1}}：最大值，如果计算结果大于此值则使用此值。不能小于{{Nbt|int|min_inclusive}}。
+** {{nbt|int}}{{Nbt|compound|source}}：整数的来源。
+*** {{nbt inherit/int provider}}
+** {{nbt condition|如果<code>type</code>是<code>clamped_normal</code>，附加的参数如下：}}
+** {{nbt|int|min_inclusive|required=1}}：最小值，如果计算结果小于此值则使用此值。
+** {{nbt|int|max_inclusive|required=1}}：最大值，如果计算结果大于此值则使用此值。
+** {{nbt|float|mean|required=1}}：正态分布的平均数。
+** {{nbt|float|deviation|required=1}}：正态分布的离差。
+** {{nbt condition|如果<code>type</code>是<code>weighted_list</code>，附加的参数如下：}}
+** {{nbt|list|distribution|required=1}}：加权提供器列表。
+*** {{nbt|compound}}
+**** {{nbt|int|weight|required=1}}：该提供器被选取的权重，越高的值被选取的概率越高。
+**** {{nbt|int}}{{nbt|compound|data|required=1}}：一个整数。
+***** {{nbt inherit/int provider}}
+** {{nbt condition|如果<code>type</code>是<code>trapezoid</code>，附加字段如下：}}
+** {{nbt|int|min|required=1}}：最小值。
+** {{nbt|int|max|required=1}}：最大值。
+** {{nbt|int|plateau|required=1}}：梯形分布中均匀分布部分的范围，必须小于等于最大值与最小值之差。
+<section end="codec_int_provider"/></div>
+
+== 其他 ==
+=== 方块状态 ===
+{{codec from source|type=json|net.minecraft.world.level.block.state.BlockState}}
+
+<div class="treeview">
+* {{nbt|compound}} <code>BlockState::CODEC</code><section begin="codec_block_state"/>
+** {{nbt|string|Name|required=1}}：[[方块]]的命名空间ID。
+** {{nbt|compound|Properties}}：组成此[[方块状态]]的方块属性。只有本方块具有的方块属性才有实际效果，而未指定的方块属性使用默认值。
+*** {{nbt|string|<''方块属性''>}}：此项方块属性的值。
+<section end="codec_block_state"/></div>
+
+=== 整数范围 ===
+{{codec from source|type=json|net.minecraft.util.InclusiveRange}}
+
+<div class="treeview">
+* {{nbt|int}}{{nbt|compound}}{{nbt|list}} <code>InclusiveRange::codec</code> & <code>InclusiveRange::INT</code><section begin="codec_int_inclusive_range"/>
+** {{nbt condition|如果类型为{{nbt|int}}，则精确匹配。}}
+** {{nbt condition|如果类型为{{nbt|list}}，则规定了[下限,上限]（含）。下限不得大于上限。}}
+** {{nbt|int|required=1}}：闭区间下限。
+** {{nbt|int|required=1}}：闭区间上限。
+** {{nbt condition|如果类型为{{nbt|compound}}：}}
+** {{nbt|int|min_inclusive|required=1}}：匹配下限（含）。
+** {{nbt|int|max_inclusive|required=1}}：匹配上限（含）。
+<section end="codec_int_inclusive_range"/></div>
+
+=== 生物群系参数 ===
+{{codec from source|type=json|net.minecraft.world.level.biome.Climate.ParameterPoint}}
+
+<div class="treeview">
+* {{nbt|compound}} <code>Climate.ParameterPoint::CODEC</code><section begin="codec_climate_parameter_point"/>
+** {{nbt|float}}{{nbt|compound}}{{nbt|list|temperature|required=1}}：温度<!-- 英文原页面不需要对这个键进行简单解释，中文需要。-->。注意：这些值只用于世界生成，与生物群系的温度等同名参数无关联。
+*** {{nbt condition|如果类型为{{nbt|float}}，则直接指定某个值，取值在-2至2之间。}}
+*** {{nbt condition|如果类型为{{nbt|list}}，则指定一个区间：}}
+*** {{nbt|float}}：（{{interval|left=-2|right=2}}）最小值。
+*** {{nbt|float}}：（{{interval|left=-2|right=2}}）最大值。
+*** {{nbt condition|如果类型为{{nbt|compound}}，则指定一个范围，且游戏不会以此形式保存存档数据：}}
+*** {{nbt|float|min|required=1}}：（{{interval|left=-2|right=2}}）最小值。
+*** {{nbt|float|max|required=1}}：（{{interval|left=-2|right=2}}）最大值。必须大于等于{{nbt|float|min|required=1}}。
+** {{nbt|float}}{{nbt|compound}}{{nbt|list|humidity|required=1}}：湿度，格式与<code>temperature</code>相同。
+** {{nbt|float}}{{nbt|compound}}{{nbt|list|continentalness|required=1}}：大陆性，格式与<code>temperature</code>相同。在原版主世界，低大陆性对应于海洋地形，高大陆性对应于内陆地形。
+** {{nbt|float}}{{nbt|compound}}{{nbt|list|erosion|required=1}}：侵蚀度，格式与<code>temperature</code>相同。在原版主世界，高侵蚀度对应平坦地形。
+** {{nbt|float}}{{nbt|compound}}{{nbt|list|weirdness|required=1}}：怪异度，格式与<code>temperature</code>相同。在原版主世界，用于生物群系崎岖程度。
+** {{nbt|float}}{{nbt|compound}}{{nbt|list|depth|required=1}}：深度，格式与<code>temperature</code>相同。在原版主世界，只有此参数会随垂直位置改变：在XZ坐标不变的情况下，Y轴坐标越高，该值越高。
+** {{nbt|float|offset|required=1}}：（{{interval|left=0|right=1}}）偏移。类似于其他参数，但是偏移在任何地方都是0，因此若其他参数都相等，游戏更倾向选择偏移更小的值。
+<section end="codec_climate_parameter_point"/></div>
+
+[[Category:顶级数据值页面]]
+[[Category:通过Nbt inherit加载的页面]]

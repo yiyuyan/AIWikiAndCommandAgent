@@ -1,0 +1,93 @@
+# 页面: Java版网络协议/Cookie
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/Cookie
+# 分类: 
+# 抓取时间: 2026-07-14 17:15:25
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|数据包|封包}}<!-- 全文中不会出现Data pack数据包，均代表网络数据包 -->
+{{exclusive|je}}
+
+'''Cookie'''是Java版网络协议的一部分，用于服务端在客户端当前连接上下文中存储一小段二进制数据，并在之后的登录、[[Java版网络协议/配置|配置]]或游戏阶段向客户端请求取回。Cookie机制主要用于服务器转移流程，使客户端从一个服务端转移到另一个服务端时，可以携带前一个服务端写入的数据。
+
+Cookie并不会被保存到客户端本地文件中。原版客户端仅在当前连接及由此连接发起的服务器转移过程中保留Cookie；如果客户端断开连接而不是被服务端转移，Cookie数据就会丢失。
+
+== 协议内容 ==
+{{Calculator|protocol|packets=configuration/client/store_cookie;play/client/store_cookie;login/client/cookie_request;configuration/client/cookie_request;play/client/cookie_request;login/server/cookie_response;configuration/server/cookie_response;play/server/cookie_response}}
+
+Cookie协议由三个主要数据包组成：
+
+* <code>store_cookie</code>：服务端要求客户端存储Cookie。
+* <code>cookie_request</code>：服务端要求客户端返回指定键对应的Cookie。
+* <code>cookie_response</code>：客户端返回Cookie数据，或表示不存在对应Cookie。
+
+其中<code>cookie_request</code>和<code>cookie_response</code>可用于登录、配置和游戏阶段；<code>store_cookie</code>可用于配置和游戏阶段。
+
+=== 存储Cookie ===
+服务端可以向客户端发送<code>store_cookie</code>S2C包，使客户端存储一项Cookie数据。此数据包结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 键''Key'' || [[资源标识符]] || Cookie的键。
+|-
+| 负载''Payload'' || 字节数组 || Cookie存储的数据，最大长度为5120字节。
+|}
+
+客户端接收到<code>store_cookie</code>后，会以键''Key''为索引保存负载''Payload''。如果客户端此前已经保存了相同键的Cookie，则新数据会覆盖旧数据。
+
+Cookie的键使用资源标识符，因此不同服务端实现应使用自己的命名空间，以避免与其他服务端写入的Cookie冲突。
+
+=== 请求Cookie ===
+服务端可以向客户端发送<code>cookie_request</code>S2C包，请求客户端返回指定键对应的Cookie。此数据包结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 键''Key'' || 资源标识符 || 需要查询的Cookie键。
+|}
+
+客户端接收到<code>cookie_request</code>后，会立即发送<code>cookie_response</code>C2S包。此数据包结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 键''Key'' || 资源标识符 || 被查询的Cookie键。
+|-
+| 是否存在负载''Has Payload'' || 布尔值 || 客户端是否存储了对应键的Cookie。
+|-
+| 负载''Payload'' || 字节数组 || 仅在''Has Payload''为<code>true</code>时存在，最大长度为5120字节。
+|}
+
+如果客户端未存储对应键的Cookie，<code>cookie_response</code>中的''Has Payload''为<code>false</code>，且不包含''Payload''字段。
+
+=== 服务器转移 ===
+Cookie通常与服务器转移功能配合使用。服务端可以先向客户端发送一个或多个<code>store_cookie</code>S2C包保存数据，再发送<code>transfer</code>S2C包要求客户端连接到另一个服务端。客户端处理<code>transfer</code>后会断开当前连接，并将已经保存的Cookie带入新的连接流程。
+
+转移目标服务端可以在登录阶段发送<code>cookie_request</code>S2C包，请求客户端返回之前保存的Cookie。这样，多个服务端之间就可以通过客户端临时携带一段数据。
+
+整个流程可以总结如下：
+
+# 客户端连接服务端A。
+# 服务端A发送<code>store_cookie</code>S2C包，要求客户端保存Cookie。
+# 服务端A发送<code>transfer</code>S2C包，要求客户端转移到服务端B。
+# 客户端断开与服务端A的连接，并连接服务端B。
+# 服务端B在登录、配置或游戏阶段发送<code>cookie_request</code>S2C包。
+# 客户端发送<code>cookie_response</code>C2S包，返回对应Cookie或表示不存在。
+
+Cookie只会在客户端被服务器转移时继续保留。如果客户端正常断开连接，或重新从服务器列表连接服务器，则不会保留上一次连接中的Cookie。
+
+== 数据限制 ==
+
+Cookie负载是任意二进制数据，最大长度为5120字节。长度使用VarInt编码，并位于字节数组内容之前。
+
+如果服务端发送的<code>store_cookie</code>负载超过5120字节，或客户端发送的<code>cookie_response</code>负载超过5120字节，接收方会在解码字节数组时发生错误。
+
+== 原版行为 ==
+原版客户端会在内存中以资源标识符为键保存Cookie。收到<code>store_cookie</code>时，客户端会保存或覆盖对应键的数据；收到<code>cookie_request</code>时，客户端会从已保存的Cookie中查找对应键，并发送<code>cookie_response</code>。
+
+原版服务端目前不会主动发送<code>cookie_request</code>。如果原版服务端在未请求Cookie的情况下收到<code>cookie_response</code>C2S包，会将其视为意外的查询响应并中止连接。
+
+== 导航 ==
+{{Navbox protocol}}
+
+[[Category:网络协议]]

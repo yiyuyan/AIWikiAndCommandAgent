@@ -1,0 +1,101 @@
+# 页面: 计算器/挖掘速度
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%A1%E7%AE%97%E5%99%A8/%E6%8C%96%E6%8E%98%E9%80%9F%E5%BA%A6
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+该计算器可以计算[[破坏]]一个方块所需的时长。
+<onlyinclude>{{simplecalc ifenabled|scoped=1|refreshonload=1|enabled=
+<div style="border: 1px solid #ccc;border-radius: 4px; padding: 1em;">
+<div role="radiogroup" aria-labelledby="editionLabel" id="edition">
+{{simplecalc label|codex=1|label=版本|id=editionLabel}}
+{{Simplecalc codex radio|id=java|name=edition|label=Java版|default=1}}
+{{Simplecalc codex radio|id=bedrock|name=edition|label=基岩版}}
+</div>
+<div role="radiogroup" aria-labelledby="toolLabel" id="tool">
+{{simplecalc label|codex=1|label=挖掘工具|description=速度：{{Simplecalc|type=plain|id=baseSpeed|default=1|formula=or(and(tool1, 1), and(tool1p5, 1.5), and(tool2 +tool2b, 2), and(tool4, 4), and(tool5, 5), and(tool5b, 5), and(tool6, 6), and(tool8, 8), and(tool9, 9), and(tool12, 12), and(tool15 +tool15b, 15), and(toolinf, Infinity), toolcv)}}|id=toolLabel}}
+{{Simplecalc codex radio|id=tool1|name=tool|label=不使用对应的挖掘工具|default=1}}
+{{Simplecalc codex radio|id=tool2|name=tool|label=木质工具}}
+{{Simplecalc codex radio|id=tool4|name=tool|label=石质工具}}
+{{Simplecalc codex radio|id=tool5b|name=tool|label=铜质工具}}
+{{Simplecalc codex radio|id=tool6|name=tool|label=铁质工具}}
+{{Simplecalc codex radio|id=tool8|name=tool|label=钻石质工具}}
+{{Simplecalc codex radio|id=tool9|name=tool|label=下界合金质工具}}
+{{Simplecalc codex radio|id=tool12|name=tool|label=金质工具}}
+{{Simplecalc codex radio|id=tool2b|name=tool|label=剪刀}}
+{{Simplecalc codex radio|id=tool5|name=tool|label=剪刀挖掘[[羊毛]]}}
+{{Simplecalc codex radio|id=tool15|name=tool|label=剪刀挖掘[[树叶]]或[[蜘蛛网]]}}
+{{Simplecalc codex radio|id=tool1p5|name=tool|label=剑}}
+{{Simplecalc codex radio|id=tool15b|name=tool|label=剑挖掘[[蜘蛛网]]}}
+{{Simplecalc codex radio|id=toolinf|name=tool|label=剑挖掘[[竹子]]和[[竹笋]]}}
+{{Simplecalc codex radio|id=toolc|name=tool|label=自定义}}
+</div>
+{{simplecalc-hideifzero|block=1|formula=toolc|starthidden=1|1=
+{{simplecalc label|codex=1|基础速度|for=toolcv}} <div class="cdx-text-input">{{Simplecalc|id=toolcv|type=number|default=0|min=0|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+}}
+
+{{simplecalc label|codex=1|[[效率]]等级|for=efficiency|description=生存模式中只能取得最高5级的效率。}} <div class="cdx-text-input">{{Simplecalc|id=efficiency|type=number|default=0|min=0|max=32768|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+{{simplecalc label|codex=1|[[水下速掘]]等级|for=aqua|description=生存模式中只能取得最高1级的水下速掘。}} <div class="cdx-text-input">{{Simplecalc|id=aqua|type=number|default=0|min=0|max=32768|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+{{simplecalc label|codex=1|[[急迫]]或[[潮涌能量]]等级（取较高）|for=haste|description=生存模式中只能取得最高2级的急迫与1级的潮涌能量。}} <div class="cdx-text-input">{{Simplecalc|id=haste|type=number|default=0|min=0|max=256|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+{{simplecalc label|codex=1|[[挖掘疲劳]]等级|for=fatigue|description=生存模式中只能取得3级的挖掘疲劳。}} <div class="cdx-text-input">{{Simplecalc|id=fatigue|type=number|default=0|min=0|max=256|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+
+<div role="group" aria-labelledby="stateslable" id="states">
+{{simplecalc label|codex=1|for=states|label=状态|id=stateslable}}
+{{Simplecalc codex checkbox|id=drop|label=适合的挖掘工具（可掉落）|default=1}}
+{{Simplecalc codex checkbox|id=ground|label=接触地面|default=1}}
+{{Simplecalc codex checkbox|id=water|label=眼部浸入水中}}
+{{simplecalc-hideifzero|block=1|formula=java|{{Simplecalc codex checkbox|id=attributes|label=自定义属性}}}}
+</div>
+{{simplecalc-hideifzero|block=1|formula=and(java, attributes)|starthidden=1|1=
+{{simplecalc label|codex=1|{{tp|attribute.name.submerged_mining_speed}}|for=Asubmerged|description=submerged_mining_speed, 0-20, 默认值: 0.2}} <div class="cdx-text-input">{{Simplecalc|id=Asubmerged|type=number|default=0.2|min=0|max=20|step=0.1|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+{{simplecalc label|codex=1|{{tp|attribute.name.mining_efficiency}}|for=Aefficiency|description=mining_efficiency, 0-1024, 默认值: 0}} <div class="cdx-text-input">{{Simplecalc|id=Aefficiency|type=number|default=0|min=0|max=1024|step=0.1|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+{{simplecalc label|codex=1|{{tp|attribute.name.block_break_speed}}|for=Aspeed|description=block_break_speed, 0-1024, 默认值: 1}} <div class="cdx-text-input">{{Simplecalc|id=Aspeed|type=number|default=1|min=0|max=1024|step=0.1|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+}}
+
+{{simplecalc label|codex=1|方块硬度|for=hardness}} <div class="cdx-text-input">{{Simplecalc|id=hardness|type=number|default=1.5|min=-1|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+
+{{Simplecalc|type=hidden|id=error|formula=or(
+	ifgreater(0, baseSpeed), ifnan(baseSpeed),
+	efficiency%1, ifless(efficiency, 0), ifgreater(efficiency, 32767), ifnan(efficiency),
+	haste%1, ifless(haste, 0), ifgreater(haste, 256), ifnan(haste),
+	fatigue%1, ifless(fatigue, 0), ifgreater(fatigue, 256), ifnan(fatigue),
+	aqua%1, ifless(aqua, 0), ifgreater(aqua, 32767), ifnan(aqua),
+	and(java, or(
+		ifnan(Asubmerged), ifnan(Aefficiency), ifnan(Aspeed)
+	)),
+	and(ifless(hardness, 0), not(ifequal(hardness, -1))), ifnan(hardness)
+)}}{{Simplecalc|type=hidden|id=damage|formula=
+	ifzero(bedrock,
+		(baseSpeed +ifgreater(baseSpeed, 1, min(1024, max(0,
+				Aefficiency +ifzero(efficiency, 0, 1 +efficiency *efficiency)
+			))))
+			*(1 +0.2*haste)
+			*switch(fatigue, 0, 1, 1, 0.3, 2, 0.09, 3, 0.0027, 0.00081)
+			*ifzero(water, 1, min(20, max(0, Asubmerged *(1 +4 *aqua))))
+			*min(1024, max(0, Aspeed)),
+		(baseSpeed +ifgreater(baseSpeed, 1, ifzero(efficiency, 0, 1 +efficiency *efficiency)))
+			*(1 +0.2*haste)*pow(1.2, haste)
+			*pow(0.21, fatigue)
+			*ifzero(and(water, not(aqua)), 1, 0.2)
+	)/ifzero(ground, 5, 1)/ifzero(drop, 100, 30)
+}}
+----
+{{simplecalc-hideifzero|class=error|element=b|formula=error|starthidden=1|1=
+输入有误!
+}}{{simplecalc-hideifzero|formula=not(or(error, iffinite(time)))|starthidden=1|1=
+'''挖掘时长'''：永远
+}}{{simplecalc-hideifzero|block=1|formula=and(not(error), iffinite(time))|1=
+'''挖掘时长'''：{{Simplecalc|type=plain|id=time|formula=ifzero(or(ifzero(damage), ifequal(hardness, -1)), max(1, ceil(hardness/damage)), Infinity)}}刻 {{=}} {{Simplecalc|type=plain|id=sec|formula=time/20}}秒{{simplecalc-hideifzero|starthidden=1|formula=ifequal(time, 1)|（瞬间破坏）}}<br>计入挖掘冷却，{{Simplecalc|type=number|id=isec|size=6|formula=blocks*ifnan(avgsec, 1, avgsec)}}秒内可以挖{{Simplecalc|type=number|id=blocks|size=8|formula=isec/ifnan(avgsec, 1, avgsec)|decimals=5|default=10}}个方块，平均每个方块耗费{{Simplecalc|type=plain|id=avgsec|formula=(iffinite(time, time, NaN) +ifequal(time, 1, 0, 6))/20}}秒。
+}}</div>
+|disabled=不支持计算器小工具}}</onlyinclude>
+
+== 导航 ==
+{{Navbox calculators}}
+
+[[en:Calculators/Breaking speed]]
+[[fr:Calculateurs/Vitesse de minage]]
+[[ja:計算機/採掘速度]]
+[[pt:Calculadoras/Velocidade de quebra]]
+[[ru:Калькуляторы/Скорость добывания]]
+[[th:เครื่องคำนวณ/ความเร็วการทุบ]]
+[[uk:Калькулятори/Швидкість руйнування]]

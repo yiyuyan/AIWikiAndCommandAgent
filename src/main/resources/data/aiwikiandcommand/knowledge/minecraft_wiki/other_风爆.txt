@@ -1,0 +1,113 @@
+# 页面: 风爆
+# 来源: https://zh.minecraft.wiki/w/%E9%A3%8E%E7%88%86
+# 分类: 
+# 抓取时间: 2026-07-14 17:38:51
+# 原始 Wikitext 内容:
+
+{{for|同名的爆炸类型|爆炸#风爆|能产生同种爆炸的状态效果|蓄风|能产生同种爆炸的实体|风弹}}
+{{Infobox enchantment}}
+
+'''风爆（Wind Burst）'''是一种用于[[重锤]]的[[魔咒]]，可以使攻击后产生[[爆炸#风爆|风爆]]。
+
+== 获取 ==
+风爆是不可[[附魔（物品修饰）|附魔]]的魔咒，且无法通过以下方式以外的任何方式获取。
+
+[[不祥宝库]]可以提供风爆I附魔书。具有风爆II和风爆III的物品只能通过使用铁砧合并获得。
+
+== 用途 ==
+{{see also|重锤#下落攻击}}
+生物在[[摔落#下落高度|下落高度]]大于1.5格时使用具有风爆的物品进行[[近战攻击]]会在攻击者的位置产生[[爆炸#风爆|风爆]]，将攻击者和周围的生物向上弹起。生物处于滑翔状态时不能触发。
+
+通过此方式可以实现重锤的连续下落攻击，但是此魔咒产生的风爆会清零重锤原有的摔落伤害保护持续计时，导致生物受到全额摔落伤害<ref>{{bug|MC-270687|||WAI}}</ref>，因此从极高位置进行下落攻击有较大风险。
+
+若使用[[命令]]等方式将风爆应用于重锤以外的物品，或{{in|je|nc=1}}用重锤攻击非生物实体，由于没有下落攻击时所给予的滞空，风爆将攻击者弹起的效果将较小或不稳定。<ref>{{bug|MC-271920|||Won't Fix}}</ref>
+
+每魔咒等级会增加产生风爆的击退威力。
+
+风爆的击退威力如下表：
+
+{| class="wikitable"
+|-
+! 魔咒等级
+! I 
+! II
+! III
+! 更高
+|-
+! {{tooltip|minetip=1|击退威力|普通爆炸的击退威力为1}}
+| 1.2
+| 1.75
+| 2.2
+| 1.5+(''等级''-1)x0.35
+|}
+
+下表提供了各等级可将玩家弹起的大致高度，须注意由于风爆为爆炸，{{in|je|nc=1}}若穿着附有[[爆炸保护]]的盔甲，{{tp|attribute.name.generic.explosion_knockback_resistance}}也会削弱风爆的效果。{{in|be}}[[下界合金盔甲]]的{{tp|attribute.name.generic.knockback_resistance}}也会削弱风爆的效果。<ref>{{bug|MC-273831}}</ref>
+
+{| class="wikitable"
+|-
+! 魔咒等级
+! I 
+! II
+! III
+|-
+! 弹射高度
+| 8
+| 16
+| 24
+|}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|displayname=风爆
+|translationtype=enchantment
+|nameid=wind_burst
+|showenchantmenttags=1
+|enchantmenttags={{GameTag|enchantment|wind_burst}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|displayname=风爆
+|translationtype=enchantment
+|nameid=wind_burst
+|translationkey=enchantment.heavy_weapon.windburst
+|foot=1}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|dev=24w13a|加入了风爆。<ref>{{bug|MC-270954||所有加入于24w13a的魔咒和状态效果不启用实验性功能也能通过物品堆叠组件获取。|Won't Fix}}</ref>}}
+|{{HistoryLine|||dev=pre1|风爆不再对非生物实体生效。
+|风爆不再在剑、镐、斧、锹、锄、三叉戟和重锤以外的物品上生效。<ref>{{bug|MC-270612|||Won't Fix}}</ref>}}
+|{{HistoryLine||1.21|dev=24w18a|回退了1.20.5-pre1的两项变更。
+|现在任何物品上的风爆均只在下落1.5格后生效。}}
+|{{HistoryLine|||dev=pre1|更改了风爆的击退威力：现在I、II、III级击退威力分别为1.2、1.75和2.2，而更高等级的击退威力为<code>-{}-1.5+(''等级''-1)x0.35</code>。此前风爆的击退威力为<code>-{}-0.5+(''等级''-1)x0.25</code>。}}
+|{{HistoryLine|||dev=pre2|风爆现在只对近战攻击生效。此前，风爆可通过弹射物生效。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.21|加入了风爆。
+|风爆暂时无法在[[生存模式]]中正常获取。<ref name="MCPE-180499">{{bug|MCPE-180499|||Fixed}}</ref>}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|风爆不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.0.23|风爆附魔书现在可以通过解锁[[不祥宝库]]获取。<ref name="MCPE-180499"/>}}
+|{{HistoryLine||1.21.90|dev=1.21.90.21|增强了风爆造成的击退效果以匹配{{el|je}}。<ref>{{bug|MCPE-185829|||Fixed}}</ref>}}
+}}
+
+== 你知道吗 ==
+* 风爆附魔书必须通过[[不祥宝库]]战利品才能实现可再生。这是因为宝库可以被每个玩家打开无限次数<ref>{{bug|MC-274049|||WAI}}</ref>，且[[不祥试炼钥匙]]是[[可再生资源]]。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox enchantments}}
+
+[[de:Windstoß]]
+[[en:Wind Burst]]
+[[es:Aeroimpulso]]
+[[fr:Rafale de vent]]
+[[ja:ウィンドバースト]]
+[[pt:Rajada de Vento]]
+[[uk:Порив вітру]]

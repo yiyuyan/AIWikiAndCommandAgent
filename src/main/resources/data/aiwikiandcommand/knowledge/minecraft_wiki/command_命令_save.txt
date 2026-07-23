@@ -1,0 +1,130 @@
+# 页面: 命令/save
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/save
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 教育版独有信息
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+这些命令用于管理服务器的存档。
+
+== save-all ==
+{{Infobox command
+|name=save-all
+|oplevel=4
+|serveronly=1
+}}
+{{Exclusive|Java|section=1}}
+将存档保存至硬盘。
+
+=== 语法 ===
+:<code>save-all</code>
+:: 立即保存所有玩家数据，并将所有区块数据标记为待保存，这些区块数据会随时间陆续保存进硬盘。
+:<code>save-all flush</code>
+:: 立即保存所有玩家和区块数据，可能造成服务器冻结一段时间。
+
+=== 结果 ===
+{{Result table|onlyje=1}}
+{{Result table|命令不完整|Unparseable}}
+{{Result table|出现错误（如储存空间不足）|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+===输出===
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|1}}
+{{Output table}}
+
+== save-off ==
+{{Infobox command
+|name=save-off
+|oplevel=4
+|serveronly=1
+}}
+{{exclusive|java|section=1}}
+禁用服务器的对存档文件的写入（玩家、统计、进度数据除外），以便于从外部复制存档文件作为备份。所有的区块更改将会暂时进入队列等待保存。
+
+=== 语法 ===
+:<code>save-off</code>
+
+=== 结果 ===
+{{Result table|onlyje=1}}
+{{Result table|区块文件写入未启用|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+===输出===
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|1}}
+{{Output table}}
+
+== save-on ==
+{{Infobox command
+|name=save-on
+|oplevel=4
+|serveronly=1
+}}
+{{exclusive|java|section=1}}
+启用服务器对存档文件的写入。
+
+=== 语法 ===
+:<code>save-on</code>
+
+=== 结果 ===
+{{Result table|onlyje=1}}
+{{Result table|存档文件写入未禁用|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+===输出===
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|1}}
+{{Output table}}
+
+== save ==
+{{Infobox command
+|name=save
+|oplevel=4
+|serveronly=1
+|cheat=1
+}}
+{{Exclusive|bedrock|education|section=1}}
+用于在服务器运行期间为从外部复制备份作准备。
+
+=== 语法 ===
+: <code>save hold</code>
+:: 禁用服务器的对存档文件的写入（玩家、统计、进度数据除外），以便于从外部复制存档文件作为备份。
+
+: <code>save query</code>
+:: 显示每个存档文件的路径和其应被截断的字节量，以冒号分隔。
+
+: <code>save resume</code>
+:: 恢复启用服务器对存档文件的写入。
+
+=== 结果 ===
+{{Result table|onlybe=1}}
+{{Result table|命令不完整或参数未正确指定||unparseable}}
+{{Result table|cmd=/save hold|已经禁用文件写入||fail}}
+{{Result table|cmd=/save query|未禁用文件写入}}
+{{Result table|cmd=/save resume|未禁用文件写入}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.16_01|加入了{{cmd|save-all|link=none}}、{{cmd|save-on|link=none}}、{{cmd|save-off|link=none}}命令。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.6.1|加入了{{cmd|save|link=none}}命令。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/save-all]]
+[[en:Commands/save]]
+[[fr:Commandes#save]]
+[[ja:コマンド/save]]
+[[pt:Comandos/save]]
+[[ru:Команды консоли/save]]

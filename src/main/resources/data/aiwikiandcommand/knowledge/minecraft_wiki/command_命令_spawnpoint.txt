@@ -1,0 +1,93 @@
+# 页面: 命令/spawnpoint
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/spawnpoint
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{about|命令|玩家生成机制|出生点}}
+{{Infobox command
+|name=spawnpoint
+|oplevel=2\1
+|becheat=1
+}}
+
+为特定玩家设置出生点。
+
+== 语法 ==
+* '''Java版'''
+: <code>spawnpoint [<targets>] [<pos>] [<rotation>]</code>
+
+* '''基岩版'''
+: <code>spawnpoint [player: target] [spawnPos: x y z]</code>
+
+== 参数 ==
+{{argument|targets|entity|player: target|CommandSelector<Player>}}
+: 指定被更改出生点的玩家。如果没有指定，默认为命令执行者。
+: {{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+{{argument|pos|block_pos|spawnPos: x y z|CommandPositionFloat}}
+: 指定玩家新的出生点的坐标。若没有指定，默认为{{only|je|for=命令执行点}}或{{only|be|for=所指定玩家的位置}}。
+: {{IN|java}}<code><''x''></code>或<code><''z''></code>应在[-30000000, 30000000)区间内，<code><''y''></code>应在[-20000000, 20000000)区间内。
+: {{in|be}}大于30,000,000和小于-30,000,000的<code><''x''></code>和<code><''z''></code>值会分别被设置为30,000,000和-30,000,000，大于319和小于-64的<code><''y''></code>值会被分别设置为319和-64。
+: {{in|je}}{{arg desc|je=block_pos}}
+: {{in|be}}{{arg desc|be=CommandPositionFloat}}
+
+{{el|je|short=1}}：{{argument|rotation|rotation}}
+: 指定玩家重生时的旋转角，默认为{{cd|0 0}}。
+: {{arg desc|je=rotation}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器|N/A|fail}}
+{{Result table|<code><targets></code>或<code>player: target</code>无法选中至少一个在线的玩家|fail}}
+{{Result table|未指定<code><targets></code>或<code>player: target</code>且命令执行者不是玩家}}
+{{Result table|指定的<''x''>或<''z''>超出[-30000000, 30000000)或<''y''>超出[-20000000, 20000000)||success}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|失败时|0|0|0}}
+{{Output table|成功时|1|1|被设置重生点的玩家数量}}
+{{Output table|edition=be|失败时|0}}
+{{Output table|成功时|被设置重生点的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 设置所有玩家的出生点为<code>0 -60 0</code>：<code>/spawnpoint @a 0 -60 0</code>
+* 设置自己的出生点为<code>0 -60 0</code>并面朝北方：<code>/spawnpoint @s 0 -60 0 180 0</code>{{only|je}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了{{cmd|spawnpoint|link=none}}。}}
+|{{HistoryLine||1.16|dev=20w12a|现在该命令可以在任意维度使用。}}
+|{{HistoryLine||1.16.2|dev=20w29a|现在可以设置玩家重生时面朝的水平角度。}}
+|{{HistoryLine||1.17|dev=21w10a|{{cmd|spawnpoint|link=none}}现在不允许<''x''>或<''z''>超出[-30000000, 30000000)或<''y''>超出[-20000000, 20000000)。<ref>{{bug|MC-210408|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.9|dev=pre1|现在可以设置玩家重生时面朝的垂直角度。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|spawnpoint|link=none}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|现在该命令可以在下界使用。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.20|现在该命令可以在末地使用。}}
+}}
+
+== 参见 ==
+* {{cmd|clearspawnpoint}}
+* {{cmd|setworldspawn}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/spawnpoint]]
+[[en:Commands/spawnpoint]]
+[[es:Comandos/spawnpoint]]
+[[fr:Commandes/spawnpoint]]
+[[ja:コマンド/spawnpoint]]
+[[pt:Comandos/spawnpoint]]
+[[ru:Команды консоли/spawnpoint]]
+[[uk:Команди консолі/spawnpoint]]

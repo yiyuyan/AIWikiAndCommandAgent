@@ -1,0 +1,52 @@
+# 页面: 模板展示实体/ED
+# 来源: https://zh.minecraft.wiki/w/%E6%A8%A1%E6%9D%BF%E5%B1%95%E7%A4%BA%E5%AE%9E%E4%BD%93/ED
+# 分类: 
+# 抓取时间: 2026-07-14 17:29:23
+# 原始 Wikitext 内容:
+
+{{nbt collapsed source|展示实体共通标签|no-remove=1|
+** {{nbt|string|billboard|existonsave=1}}：（默认为<code>fixed</code>）展示实体面朝玩家渲染时的固定轴。可以为<code>fixed</code>（固定垂直和水平轴）、<code>vertical</code>（固定垂直轴）、<code>horizontal</code>（固定水平轴）和<code>center</code>（按照中心旋转跟随玩家视角）。
+** {{nbt|compound|brightness}}：使用指定值覆盖原来的渲染亮度值。如果未指定此标签，则使用当前实体所在位置的亮度。
+*** {{nbt|int|block}}：渲染使用的[[方块光照]]等级，取值为0-15。
+*** {{nbt|int|sky}}：渲染使用的天空光照等级，取值为0-15。
+** {{nbt|int|glow_color_override|existonsave=1}}：（默认为-1）覆盖发光边框颜色，如果为-1则使用展示实体所在队伍的颜色。格式为'''({{color|red|红}} &lt;&lt; 16) + ({{color|green|绿}} &lt;&lt; 8) + {{color|blue|蓝}}'''。
+** {{nbt|float|height|existonsave=1}}：（默认为0）展示实体的剔除判定箱高度。坐标满足<code>y</code>到<code>y+height</code>的部分作为剔除判定箱范围，如果玩家的视锥内无法与剔除判定箱相交，则实体会被剔除而不可见。如果设置为0则永远不进行剔除。
+** {{nbt|float|width|existonsave=1}}：（默认为0）展示实体的剔除判定箱宽度。水平方向上距离实体中心<code>width/2</code>部分作为剔除判定箱范围，如果玩家的视锥内无法与剔除判定箱相交，则实体会被剔除而不可见。如果设置为0则永远不进行剔除。
+** {{nbt|float|shadow_radius|existonsave=1}}：（可插值，默认为0）实体阴影半径。当值超过64时效果与64相同，小于等于0则不显示阴影。
+** {{nbt|float|shadow_strength|existonsave=1}}：（可插值，默认为1）控制实体阴影的不透明度。实体阴影透明度随玩家到方块表面的距离而变化。
+** {{nbt|int|start_interpolation}}：（不能导出和保存，仅可以加载或使用{{cmd|data}}修改）开始插值前的延时。在此标签被设置后才会开始插值。若为0，则立即开始插值。
+** {{nbt|int|interpolation_duration|existonsave=1}}：（默认为0）展示实体渲染变换发生改变时的插值时间，单位为[[游戏刻]]。
+** {{nbt|list}}{{nbt|compound|transformation|existonsave=1}}：（可插值，默认为单位变换）展示实体模型的渲染变换，以实体所在位置为原点。游戏存档时只使用分解形式。在定义此标签时必须写入此标签内的所有标签，否则此标签无效。
+*** {{nbt condition|若为{{nbt|list}}：使用矩阵形式。其中包含16个浮点数元素，描述一个{{tr|行主序（Row-major）|列主序（Row-major）}}矩阵：}}
+*** {{nbt|float}}：矩阵中的一个值。其中第13、第14、第15个值对于变换没有任何效果；第16个值会将前12个值进行缩放，即将前12个数字除以此数字。
+*** {{nbt condition|若为{{nbt|compound}}：使用分解形式。此标签必须包含下列所有标签，且各个标签按下方列出的顺序依次应用：}}
+*** {{nbt|list}}{{nbt|compound|right_rotation|required=1|existonsave=1}}：初始[[wzh:旋转矩阵#角-轴表示和四元数表示|旋转]]。此标签对应矩阵形式中矩阵左上角的3x3矩阵[[wzh:奇异值分解|奇异值分解]]后的右奇异向量矩阵。游戏存档时只使用四元数形式。
+**** {{nbt condition|若为{{nbt|list}}：使用[[wzh:四元数与空间旋转|四元数]]表示旋转（非单位四元数还会使模型缩放）。其中包含4个浮点数。}}
+**** {{nbt|float}}：四元数中的一个元素。
+**** {{nbt condition|若为{{nbt|compound}}：使用[[wzh:轴角|轴-角度形式]]表示旋转。必须包含下列所有标签：}}
+**** {{nbt|float|angle|required=1|existonsave=1}}：表示绕旋转轴的旋转角度（以弧度为单位）。
+**** {{nbt|list|axis|required=1|existonsave=1}}：（列表长度为3）一个3维向量，表示旋转轴。
+***** {{nbt|float}}：一个向量分量。
+*** {{nbt|list|scale|required=1|existonsave=1}}：以原点为中心缩放模型。此标签对应矩阵形式中的矩阵左上角的3x3矩阵奇异值分解后的奇异值。此标签为含有3个元素的浮点数列表：
+**** {{nbt|float}}：向量的一个分量。
+*** {{nbt|list}}{{nbt|compound|left_rotation|required=1|existonsave=1}}：再次旋转模型。此标签对应矩阵形式中矩阵左上角的3x3矩阵奇异值分解后的左奇异向量矩阵。游戏存档时只使用四元数形式。
+**** {{nbt condition|若为{{nbt|list}}：使用四元数表示旋转（非单位四元数还会使模型缩放）。其中包含4个浮点数。}}
+**** {{nbt|float}}：四元数中的一个元素。
+**** {{nbt condition|若为{{nbt|compound}}：使用轴-角度形式表示旋转。必须包含下列所有标签：}}
+**** {{nbt|float|angle|required=1|existonsave=1}}：表示绕旋转轴的旋转角度（以弧度为单位）。
+**** {{nbt|list|axis|required=1|existonsave=1}}：（列表长度为3）一个3维向量，表示旋转轴。
+***** {{nbt|float}}：一个向量分量。
+*** {{nbt|list|translation|required=1|existonsave=1}}：平移变换。此标签对应矩阵形式中的最后一{{tr|列|行}}的前3个元素。此标签为含有3个元素的浮点数列表：
+**** {{nbt|float}}：向量的一个分量。
+** {{nbt|float|view_range|existonsave=1}}：（默认为1）实体最大可视范围。当玩家距离展示实体超过<code>-{}-<''最大可视范围''>×<''[[Options.txt#Java版|entityDistanceScaling]]''>×64</code>时此实体不会进行渲染。
+}}
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt collapsed|{{tooltip|实体|Java类名：Entity}}共通标签|{{#lst:编码格式/Entity|codec_entity_23w13a_or_b}}|Entity}}
+** {{nbt collapsed link|{{Tooltip|展示实体|Java类名：Display}}共通标签|展示实体共通标签}}
+** {{nbt|int|lod|existonsave=1}}：（默认为0）模板展示实体的细节级别。
+** {{nbt|int|shape|existonsave=1}}：（默认为0）模板展示实体的模板形状。
+** {{nbt|int|color|existonsave=1}}：（默认为0xffffffff）模板展示实体的颜色，各颜色通道按ARGB排列。
+</div><noinclude>
+[[Category:实体数据值页面]]
+</noinclude>

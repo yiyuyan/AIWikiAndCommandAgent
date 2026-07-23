@@ -1,0 +1,1797 @@
+# 页面: 定义
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9A%E4%B9%89
+# 分类: 基岩版, 基岩版独有特性, 待更新条目
+# 抓取时间: 2026-07-14 17:25:13
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock}}
+'''定义（Definitions）'''是基岩版中[[实体]]NBT格式下的一个列表型NBT标签，用于确定该实体的实际行为。
+
+== 实现方式 ==
+实体的定义文件中定义了实体的组件、组件组。组件组是包含一系列组件的集合，可以在原版服务端附加包内的{{cd|entities}}文件夹内发现。每一个实体都有其对应的{{cd|.json}}文件，而文件内的{{cd|component_groups}}键值对即为该实体的具体定义组件。
+
+[[基岩版存档格式/实体格式|实体NBT格式]]里包含了一个名为{{nbt|list|definitions}}的列表型NBT标签，该NBT标签以“操作符+定义组件组ID”的方式来对单个实体的行为进行了详细的定义。
+
+操作符类型只有两种：{{cd|+}}和{{cd|-}}。{{cd|+}}操作符是用来定义目前的实体行为的。在实体行为得到更新后，原来的定义组件组ID不会直接移除，而是将操作符更改为{{cd|-}}以表示将该定义删除。
+
+若该实体没有任何定义组件组，则会给{{cd|definitions}}标签留下一个{{cd|"+"}}和它自身名称（例如{{cd|"+minecraft:player"}}）以作占位符。
+
+此外，某些定义组件组ID是互斥的，这意味着它们不可能同时存在。利用操作符可以控制哪种ID该实现或（暂时性地）删除。
+
+== ID列表 ==
+{{needs update|section=1|需要补充大多数ID。}}
+=== 生物 ===
+{| class="wikitable collapsible"
+! 名称 !! 定义组件组ID !! 解释
+|-
+| rowspan=2 | {{EntityLink|Allay}}
+| <code>pickup_item</code><!-- 原文无前缀 -->
+| 捡起物品
+|-
+| <code>pickup_item_delay</code><!-- 原文无前缀 -->
+| 捡起物品的延迟
+|-
+| rowspan=12 | {{EntityLink|Axolotl}}
+| <code>axolotl_adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>axolotl_baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>attack_cooldown</code><!-- 原文无前缀 -->
+| 攻击冷却
+|-
+| <code>axolotl_lucy</code><!-- 原文无前缀 -->
+| 粉红色
+|-
+| <code>axolotl_cyan</code><!-- 原文无前缀 -->
+| 青色
+|-
+| <code>axolotl_gold</code><!-- 原文无前缀 -->
+| 黄色
+|-
+| <code>axolotl_wild</code><!-- 原文无前缀 -->
+| 棕色
+|-
+| <code>axolotl_blue</code><!-- 原文无前缀 -->
+| 蓝色
+|-
+| <code>axolotl_in_water</code><!-- 原文无前缀 -->
+| 在水中
+|-
+| <code>axolotl_dried</code><!-- 原文无前缀 -->
+| 在陆地上干涸受伤
+|-
+| <code>axolotl_on_land</code><!-- 原文无前缀 -->
+| 在陆地上
+|-
+| <code>axolotl_on_land_in_rain</code><!-- 原文无前缀 -->
+| 下雨时在陆地上
+|-
+| rowspan=20 | {{EntityLink|Bee}}
+| <code>bee_adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>bee_baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>track_attacker</code><!-- 原文无前缀 -->
+| 追踪攻击者
+|-
+| <code>angry_bee</code><!-- 原文无前缀 -->
+| 愤怒状态
+|-
+| <code>escape_fire</code><!-- 原文无前缀 -->
+| 逃离着火的[[蜂巢（方块）|蜂巢]]或蜂箱
+|-
+| <code>countdown_to_perish</code><!-- 原文无前缀 -->
+| 即将死亡
+|-
+| <code>perish</code><!-- 原文无前缀 -->
+| 死亡
+|-
+| <code>take_nearest_target</code><!-- 原文无前缀 -->
+| 寻找最近目标
+|-
+| <code>track_attacker</code><!-- 原文无前缀 -->
+| 追踪攻击者
+|-
+| <code>look_for_food</code><!-- 原文无前缀 -->
+| 寻找花
+|-
+| <code>has_nectar</code><!-- 原文无前缀 -->
+| 沾有花粉
+|-
+| <code>return_to_home</code><!-- 原文无前缀 -->
+| 返回蜂巢或蜂箱
+|-
+| <code>find_hive</code><!-- 原文无前缀 -->
+| 寻找蜂巢或蜂箱
+|-
+| <code>hive_full</code><!-- 原文无前缀 -->
+| 蜂巢或蜂箱的蜂蜜已满
+|-
+| <code>shelter_detection</code><!-- 原文无前缀 -->
+| 寻找避雨的地方{{more info}}
+|-
+| <code>abort_shelter_detection</code><!-- 原文无前缀 -->
+| 离开避雨的地方{{more info}}
+|-
+| <code>easy_attack</code><!-- 原文无前缀 -->
+| 简单难度攻击
+|-
+| <code>normal_attack</code><!-- 原文无前缀 -->
+| 普通难度攻击
+|-
+| <code>hard_attack</code><!-- 原文无前缀 -->
+| 困难难度攻击
+|-
+| <code>default_sound</code><!-- 原文无前缀 -->
+| 默认音效
+|-
+| rowspan=5 | {{EntityLink|Camel}}
+| <code>minecraft:camel_adult</code>
+| 成年
+|-
+| <code>minecraft:camel_baby</code>
+| 幼年
+|-
+| <code>minecraft:camel_saddled</code>
+| 已装备鞍
+|-
+| <code>minecraft:camel_standing</code>
+| 站立
+|-
+| <code>minecraft:camel_sitting</code>
+| 坐下
+|-
+| rowspan=16 | {{EntityLink|Cat}}
+| <code>minecraft:cat_adult</code>
+| 成年
+|-
+| <code>minecraft:cat_baby</code>
+| 幼年
+|-
+| <code>minecraft:cat_wild</code>
+| 野生
+|-
+| <code>minecraft:cat_tame</code>
+| 已驯服
+|-
+| <code>minecraft:cat_gift_for_owner</code>
+| 送给主人的礼物
+|-
+| <code>minecraft:cat_white</code>
+| 白猫
+|-
+| <code>minecraft:cat_tuxedo</code>
+| 西服猫
+|-
+| <code>minecraft:cat_red</code>
+| 红虎斑猫
+|-
+| <code>minecraft:cat_siamese</code>
+| 暹罗猫
+|-
+| <code>minecraft:cat_british</code>
+| 英国短毛猫
+|-
+| <code>minecraft:cat_calico</code>
+| 花猫
+|-
+| <code>minecraft:cat_persian</code>
+| 波斯猫
+|-
+| <code>minecraft:cat_ragdoll</code>
+| 布偶猫
+|-
+| <code>minecraft:cat_tabby</code>
+| 虎斑猫
+|-
+| <code>minecraft:cat_black</code>
+| 黑猫
+|-
+| <code>minecraft:cat_jellie</code>
+| Jellie猫
+|-
+| rowspan=9 | {{EntityLink|Cave Spider}}
+| <code>minecraft:spider_jockey</code>
+| 被骷髅骑乘
+|-
+| <code>minecraft:spider_stray_jockey</code>
+| 被流浪者骑乘
+|-
+| <code>minecraft:spider_wither_jockey</code>
+| 被凋灵骷髅骑乘
+|-
+| <code>minecraft:spider_neutral</code>
+| 在日光下变为中立状态
+|-
+| <code>minecraft:spider_hostile</code>
+| 默认敌对状态
+|-
+| <code>minecraft:spider_angry</code>
+| 在日光下被攻击后恢复敌对
+|-
+| <code>minecraft:spider_poison_easy</code>
+| 简单难度下的中毒效果
+|-
+| <code>minecraft:spider_poison_normal</code>
+| 普通难度下的中毒效果
+|-
+| <code>minecraft:spider_poison_hard</code>
+| 困难难度下的中毒效果
+|-
+| rowspan=2 | {{EntityLink|Chicken}}
+| <code>minecraft:chicken_adult</code>
+| 成年
+|-
+| <code>minecraft:chicken_baby</code>
+| 幼年
+|-
+| rowspan=2 | {{EntityLink|Cow}}
+| <code>minecraft:cow_adult</code>
+| 成年
+|-
+| <code>minecraft:cow_baby</code>
+| 幼年
+|-
+| rowspan=5 | {{EntityLink|Creeper}}
+| <code>minecraft:exploding</code>
+| 常规苦力怕爆炸
+|-
+| <code>minecraft:charged_creeper</code>
+| 闪电苦力怕
+|-
+| <code>minecraft:charged_exploding</code>
+| 闪电苦力怕爆炸
+|-
+| <code>minecraft:forced_exploding</code>
+| 常规苦力怕被打火石点燃
+|-
+| <code>minecraft:forced_charged_exploding</code>
+| 闪电苦力怕被打火石点燃
+|-
+| rowspan=7 | {{EntityLink|Dolphin}}
+| <code>minecraft:dolphin_adult</code>
+| 成年
+|-
+| <code>minecraft:dolphin_baby</code>
+| 幼年
+|-
+| <code>minecraft:dolphin_angry</code>
+| 敌对状态
+|-
+| <code>minecraft:dolphin_dried</code>
+| 在陆地上干涸受伤
+|-
+| <code>minecraft:dolphin_swimming_navigation</code>
+| 寻找海底废墟或沉船
+|-
+| <code>minecraft:dolphin_on_land</code>
+| 在陆地上
+|-
+| <code>minecraft:dolphin_on_land</code>
+| 下雨时在陆地上
+|-
+| rowspan=7 | {{EntityLink|Donkey}}
+| <code>minecraft:donkey_adult</code>
+| 成年
+|-
+| <code>minecraft:donkey_baby</code>
+| 幼年
+|-
+| <code>minecraft:donkey_wild</code>
+| 野生
+|-
+| <code>minecraft:donkey_tamed</code>
+| 已驯服
+|-
+| <code>minecraft:donkey_unchested</code>
+| 未装备[[箱子]]
+|-
+| <code>minecraft:donkey_chested</code>
+| 已装备箱子
+|-
+| <code>minecraft:donkey_saddled</code>
+| 已装备鞍
+|-
+| rowspan=7 | {{EntityLink|Drowned}}
+| <code>minecraft:adult_drowned</code>
+| 成年
+|-
+| <code>minecraft:baby_drowned</code>
+| 幼年
+|-
+| <code>minecraft:mode_switcher</code>
+| 选择行为模式（见下方ID）
+|-
+| <code>minecraft:ranged_mode</code>
+| 使用[[三叉戟]]远程攻击
+|-
+| <code>minecraft:melee_mode</code>
+| 近战攻击
+|-
+| <code>minecraft:hunter_mode</code>
+| 定位并追逐生物
+|-
+| <code>minecraft:wander_mode</code>
+| 游荡
+|-
+| rowspan=3 | {{EntityLink|Ender Dragon}}
+| <code>minecraft:dragon_sitting</code>
+| 停留在返回传送门上
+|-
+| <code>minecraft:dragon_flying</code>
+| 飞行
+|-
+| <code>minecraft:dragon_death</code>
+| 死亡并播放死亡动画
+|-
+| rowspan=2 | {{EntityLink|Enderman}}
+| <code>minecraft:enderman_calm</code>
+| 中立状态
+|-
+| <code>minecraft:enderman_angry</code>
+| 敌对状态
+|-
+| rowspan=2 | {{EntityLink|Evoker}}
+| <code>minecraft:celebrate</code>
+| 庆祝
+|-
+| <code>minecraft:raid_configuration</code>
+| 定义袭击事件
+|-
+| rowspan=14 | {{EntityLink|Fox}}
+| <code>minecraft:fox_adult</code>
+| 成年
+|-
+| <code>minecraft:fox_baby</code>
+| 幼年
+|-
+| <code>minecraft:fox_with_item</code>
+| 叼着物品
+|-
+| <code>minecraft:trusting_fox</code>
+| 信任玩家
+|-
+| <code>minecraft:docile_fox</code>
+| 可使唤
+|-
+| <code>minecraft:defending_fox</code>
+| 逃离玩家或天敌
+|-
+| <code>minecraft:fox_red</code>
+| 红色狐狸
+|-
+| <code>minecraft:fox_arctic</code>
+| 白色狐狸
+|-
+| <code>minecraft:fox_thunderstorm</code>
+| 处于[[雷暴]]天气下
+|-
+| <code>minecraft:fox_day</code>
+| 处于白天状态下
+|-
+| <code>minecraft:fox_night</code>
+| 处于黑夜状态下
+|-
+| <code>minecraft:fox_ambient_normal</code>
+| 发出常规空闲声音
+|-
+| <code>minecraft:fox_ambient_sleep</code>
+| 发出睡觉空闲声音
+|-
+| <code>minecraft:fox_ambient_night</code>
+| 发出夜间空闲声音
+|-
+| rowspan=4 | {{EntityLink|Frog}}
+| <code>temperate_frog</code><!-- 原文无前缀 -->
+| 温带青蛙
+|-
+| <code>cold_frog</code><!-- 原文无前缀 -->
+| 寒带青蛙
+|-
+| <code>warm_frog</code><!-- 原文无前缀 -->
+| 热带青蛙
+|-
+| <code>pregnant</code><!-- 原文无前缀 -->
+| 准备产卵
+|-
+| {{EntityLink|Glow Squid}}
+| <code>minecraft:squid_baby</code>
+| 幼年（小型）
+|-
+| rowspan=9 | {{EntityLink|Goat}}
+| <code>goat_adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>goat_baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>goat_default</code><!-- 原文无前缀 -->
+| 常规变种
+|-
+| <code>goat_screamer</code><!-- 原文无前缀 -->
+| 尖叫变种
+|-
+| <code>interact_default</code><!-- 原文无前缀 -->
+| 常规变种交互
+|-
+| <code>interact_screamer</code><!-- 原文无前缀 -->
+| 尖叫变种交互
+|-
+| <code>ram_default</code><!-- 原文无前缀 -->
+| 常规变种冲撞
+|-
+| <code>ram_screamer</code><!-- 原文无前缀 -->
+| 尖叫变种冲撞
+|-
+| <code>attack_cooldown</code><!-- 原文无前缀 -->
+| 攻击冷却
+|-
+| rowspan=2 | {{EntityLink|Guardian}}
+| <code>minecraft:guardian_aggressive</code>
+| 敌对状态
+|-
+| <code>minecraft:guardian_passive</code>
+| 被动状态
+|-
+| rowspan=9 | {{EntityLink|Hoglin}}
+| <code>hoglin_adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>hoglin_baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>zombification_sensor</code><!-- 原文无前缀 -->
+| 僵尸化探测组件
+|-
+| <code>start_zombification</code><!-- 原文无前缀 -->
+| 开始僵尸化
+|-
+| <code>become_zombie</code><!-- 原文无前缀 -->
+| 变成僵尸疣猪兽
+|-
+| <code>angry_hoglin</code><!-- 原文无前缀 -->
+| 敌对状态
+|-
+| <code>attack_cooldown</code><!-- 原文无前缀 -->
+| 攻击冷却
+|-
+| <code>unhuntable_adult</code><!-- 原文无前缀 -->
+| 不可被狩猎
+|-
+| <code>huntable_adult</code><!-- 原文无前缀 -->
+| 可被狩猎
+|-
+| rowspan=17 | {{EntityLink|Horse}}
+| <code>minecraft:horse_baby</code>
+| 幼年
+|-
+| <code>minecraft:horse_adult</code>
+| 成年
+|-
+| <code>minecraft:horse_wild</code>
+| 野生
+|-
+| <code>minecraft:horse_tamed</code>
+| 已驯服
+|-
+| <code>minecraft:horse_saddled</code>
+| 已装备[[鞍]]
+|-
+| <code>minecraft:base_white</code>
+| 白色底
+|-
+| <code>minecraft:base_creamy</code>
+| 奶油色底
+|-
+| <code>minecraft:base_chestnut</code>
+| 栗色底
+|-
+| <code>minecraft:base_brown</code>
+| 棕色底
+|-
+| <code>minecraft:base_black</code>
+| 黑色底
+|-
+| <code>minecraft:base_gray</code>
+| 灰色底
+|-
+| <code>minecraft:base_darkbrown</code>
+| 深棕色底
+|-
+| <code>minecraft:markings_none</code>
+| 没有斑点（纯色）
+|-
+| <code>minecraft:markings_white_details</code>
+| 白色斑点
+|-
+| <code>minecraft:markings_white_fields</code>
+| 雪片白斑
+|-
+| <code>minecraft:markings_white_dots</code>
+| 白色斑点
+|-
+| <code>minecraft:markings_black_dots</code>
+| 黑色斑点
+|-
+| rowspan=7 | {{EntityLink|Husk}}
+| <code>minecraft:zombie_husk_jockey</code>
+| 作为骑士
+|-
+| <code>minecraft:zombie_husk_adult</code>
+| 成年
+|-
+| <code>minecraft:zombie_husk_baby</code>
+| 幼年
+|-
+| <code>minecraft:look_to_start_zombie_transformation</code>
+| 受到溺水伤害
+|-
+| <code>minecraft:start_zombie_transformation</code>
+| 开始转变为僵尸
+|-
+| <code>minecraft:convert_to_zombie</code>
+| 转变为僵尸
+|-
+| <code>minecraft:convert_to_baby_zombie</code>
+| 转变为幼年僵尸
+|-
+| rowspan=2 | {{EntityLink|Iron Golem}}
+| <code>minecraft:player_created</code>
+| 由玩家生成
+|-
+| <code>minecraft:village_created</code>
+| 自然生成于村庄
+|-
+| rowspan=16 | {{EntityLink|Llama}}
+| <code>minecraft:llama_adult</code>
+| 成年
+|-
+| <code>minecraft:llama_baby</code>
+| 幼年
+|-
+| <code>minecraft:llama_wandering_trader</code>
+| 行商羊驼
+|-
+| <code>-{}-minecraft:strength_<数字></code>
+| “强度”数据（数字为1-5）
+|-
+| <code>minecraft:llama_creamy</code>
+| 奶油色
+|-
+| <code>minecraft:llama_white</code>
+| 白色
+|-
+| <code>minecraft:llama_brown</code>
+| 棕色
+|-
+| <code>minecraft:llama_gray</code>
+| 灰色
+|-
+| <code>minecraft:llama_wild</code>
+| 野生
+|-
+| <code>minecraft:llama_tamed</code>
+| 已驯服
+|-
+| <code>minecraft:llama_unchested</code>
+| 未装备箱子
+|-
+| <code>minecraft:llama_chested</code>
+| 已装备箱子
+|-
+| <code>minecraft:llama_angry</code>
+| 敌对状态
+|-
+| <code>minecraft:llama_angry_wolf</code>
+| 对狼保持敌对状态
+|-
+| <code>minecraft:llama_defend_trader</code>
+| 保护流浪商人
+|-
+| <code>minecraft:in_caravan</code>
+| 结队同行
+|-
+| rowspan=5 | {{EntityLink|Magma Cube}}
+| <code>minecraft:slime_large</code>
+| 大型岩浆怪
+|-
+| <code>minecraft:slime_medium</code>
+| 中型岩浆怪
+|-
+| <code>minecraft:slime_small</code>
+| 小型岩浆怪
+|-
+| <code>minecraft:slime_calm</code>
+| 空闲状态
+|-
+| <code>minecraft:slime_aggressive</code>
+| 攻击状态
+|-
+| rowspan=16 | {{EntityLink|Mooshroom}}
+| <code>minecraft:mooshroom_become_cow</code>
+| 变成普通牛
+|-
+| <code>minecraft:cow_adult</code>
+| 成年
+|-
+| <code>minecraft:cow_baby</code>
+| 幼年
+|-
+| <code>minecraft:mooshroom_fed_nothing</code>
+| 棕色哞菇没有被喂食[[花]]
+|-
+| <code>minecraft:mooshroom_brown_fed_poppy</code>
+| 棕色哞菇被喂食虞美人
+|-
+| <code>minecraft:mooshroom_brown_fed_cornflower</code>
+| 棕色哞菇被喂食矢车菊
+|-
+| <code>minecraft:mooshroom_brown_fed_tulips</code>
+| 棕色哞菇被喂食郁金香
+|-
+| <code>minecraft:mooshroom_brown_fed_azure_bluet</code>
+| 棕色哞菇被喂食蓝花美耳草
+|-
+| <code>minecraft:mooshroom_brown_fed_lily_of_the_valley</code>
+| 棕色哞菇被喂食铃兰
+|-
+| <code>minecraft:mooshroom_brown_fed_dandelion</code>
+| 棕色哞菇被喂食蒲公英
+|-
+| <code>minecraft:mooshroom_brown_fed_blue_orchid</code>
+| 棕色哞菇被喂食兰花
+|-
+| <code>minecraft:mooshroom_brown_fed_allium</code>
+| 棕色哞菇被喂食绒球葱
+|-
+| <code>minecraft:mooshroom_brown_fed_oxeye_daisy</code>
+| 棕色哞菇被喂食滨菊
+|-
+| <code>minecraft:mooshroom_brown_fed_wither_rose</code>
+| 棕色哞菇被喂食凋灵玫瑰
+|-
+| <code>minecraft:mooshroom_red</code>
+| 红色哞菇
+|-
+| <code>minecraft:mooshroom_brown</code>
+| 棕色哞菇
+|-
+| rowspan=7 | {{EntityLink|Mule}}
+| <code>minecraft:mule_adult</code>
+| 成年
+|-
+| <code>minecraft:mule_baby</code>
+| 幼年
+|-
+| <code>minecraft:mule_wild</code>
+| 野生
+|-
+| <code>minecraft:mule_tamed</code>
+| 已驯服
+|-
+| <code>minecraft:mule_unchested</code>
+| 未装备箱子
+|-
+| <code>minecraft:mule_chested</code>
+| 已装备箱子
+|-
+| <code>minecraft:mule_saddled</code>
+| 已装备鞍
+|-
+| rowspan=5 | {{EntityLink|Ocelot}}
+| <code>minecraft:ocelot_adult</code>
+| 成年
+|-
+| <code>minecraft:ocelot_baby</code>
+| 幼年
+|-
+| <code>minecraft:ocelot_wild</code>
+| 野生（未取得信任）
+|-
+| <code>minecraft:ocelot_trusting</code>
+| 与玩家取得信任
+|-
+| <code>minecraft:ocelot_tame</code>
+| 已驯服（该ID已弃用）
+|-
+| rowspan=12 | {{EntityLink|Panda}}
+| <code>minecraft:panda_adult</code>
+| 成年
+|-
+| <code>minecraft:panda_baby</code>
+| 幼年
+|-
+| <code>minecraft:panda_lazy</code>
+| 懒惰的熊猫
+|-
+| <code>minecraft:panda_worried</code>
+| 忧郁的熊猫
+|-
+| <code>minecraft:panda_playful</code>
+| 顽皮的熊猫
+|-
+| <code>minecraft:panda_brown</code>
+| 棕色熊猫
+|-
+| <code>minecraft:panda_weak</code>
+| 体弱的熊猫
+|-
+| <code>minecraft:panda_worried</code>
+| 忧郁的熊猫
+|-
+| <code>minecraft:panda_sneezing</code>
+| 打喷嚏
+|-
+| <code>minecraft:panda_aggressive</code>
+| 好斗的熊猫
+|-
+| <code>minecraft:panda_angry</code>
+| 敌对状态
+|-
+| <code>minecraft:baby_scared</code>
+| 幼年熊猫处于惊慌状态
+|-
+| rowspan=8 | {{EntityLink|Parrot}}
+| <code>minecraft:parrot_adult</code>
+| 成年
+|-
+| <code>minecraft:parrot_red</code>
+| 红色鹦鹉
+|-
+| <code>minecraft:parrot_blue</code>
+| 蓝色鹦鹉
+|-
+| <code>minecraft:parrot_green</code>
+| 绿色鹦鹉
+|-
+| <code>minecraft:parrot_cyan</code>
+| 青色鹦鹉
+|-
+| <code>minecraft:parrot_silver</code>
+| 灰色鹦鹉
+|-
+| <code>minecraft:parrot_wild</code>
+| 野生
+|-
+| <code>minecraft:parrot_tame</code>
+| 已驯服
+|-
+| rowspan=5 | {{EntityLink|Pig}}
+| <code>minecraft:pig_adult</code>
+| 成年
+|-
+| <code>minecraft:pig_baby</code>
+| 幼年
+|-
+| <code>minecraft:pig_transform</code>
+| 转变为僵尸猪灵
+|-
+| <code>minecraft:pig_unsaddled</code>
+| 未装备鞍
+|-
+| <code>minecraft:pig_saddled</code>
+| 已装备鞍
+|-
+| rowspan=15 | {{EntityLink|Piglin}}
+| <code>piglin_adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>piglin_baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>zombification_sensor</code><!-- 原文无前缀 -->
+| 僵尸化探测组件
+|-
+| <code>start_zombification</code><!-- 原文无前缀 -->
+| 开始僵尸化
+|-
+| <code>become_zombie</code><!-- 原文无前缀 -->
+| 变成僵尸猪灵
+|-
+| <code>ranged_unit</code><!-- 原文无前缀 -->
+| 远程攻击
+|-
+| <code>melee_unit</code><!-- 原文无前缀 -->
+| 近战攻击
+|-
+| <code>angry</code><!-- 原文无前缀 -->
+| 敌对状态
+|-
+| <code>attack_cooldown</code><!-- 原文无前缀 -->
+| 攻击冷却
+|-
+| <code>interactable_piglin</code><!-- 原文无前缀 -->
+| 被[[金锭]]吸引
+|-
+| <code>hunter</code><!-- 原文无前缀 -->
+| 狩猎疣猪兽
+|-
+| <code>not_hunter</code><!-- 原文无前缀 -->
+| 不狩猎疣猪兽
+|-
+| <code>alert_for_attack_targets</code><!-- 原文无前缀 -->
+| 警戒状态
+|-
+| <code>take_target_as_response_to_block_break</code><!-- 原文无前缀 -->
+| 对破坏方块的生物保持敌对
+|-
+| <code>piglin_jockey</code><!-- 原文无前缀 -->
+| 作为骑士
+|-
+| rowspan=8 | {{EntityLink|Piglin Brute}}
+| <code>zombification_sensor</code><!-- 原文无前缀 -->
+| 僵尸化探测组件
+|-
+| <code>start_zombification</code><!-- 原文无前缀 -->
+| 开始僵尸化
+|-
+| <code>become_zombie</code><!-- 原文无前缀 -->
+| 变成僵尸猪灵
+|-
+| <code>melee_unit</code><!-- 原文无前缀 -->
+| 近战攻击
+|-
+| <code>angry</code><!-- 原文无前缀 -->
+| 敌对状态
+|-
+| <code>alert_for_attack_targets</code><!-- 原文无前缀 -->
+| 警戒状态
+|-
+| <code>take_target_as_response_to_block_break</code><!-- 原文无前缀 -->
+| 对破坏方块的生物保持敌对
+|-
+| <code>go_back_to_spawn</code><!-- 原文无前缀 -->
+| 返回[[堡垒遗迹]]
+|-
+| rowspan=7 | {{EntityLink|Pillager}}
+| <code>minecraft:celebrate</code>
+| 庆祝
+|-
+| <code>minecraft:ranged_attack</code>
+| 远程攻击
+|-
+| <code>minecraft:melee_attack</code>
+| 近战攻击
+|-
+| <code>minecraft:raid_configuration</code>
+| 定义袭击事件
+|-
+| <code>minecraft:illager_squad_captain</code>
+| [[袭击]]队伍的队长（未使用）
+|-
+| <code>minecraft:patrol_captain</code>
+| [[灾厄巡逻队]]的队长（未使用）
+|-
+| <code>minecraft:patrol_follower</code>
+| 灾厄巡逻队的队员
+|-
+| rowspan=3 | {{EntityLink|Player}}
+| <code>minecraft:add_bad_omen</code>
+| 获得[[不祥之兆]]
+|-
+| <code>minecraft:clear_bad_omen_spell_effect</code>
+| 清除不祥之兆
+|-
+| <code>minecraft:raid_trigger</code>
+| 触发袭击
+|-
+| rowspan=6 | {{EntityLink|Polar Bear}}
+| <code>minecraft:adult</code>
+| 成年
+|-
+| <code>minecraft:baby</code>
+| 幼年
+|-
+| <code>minecraft:baby_wild</code>
+| 幼年空闲状态
+|-
+| <code>minecraft:baby_scared</code>
+| 幼年惊慌状态
+|-
+| <code>minecraft:adult_wild</code>
+| 成年空闲状态
+|-
+| <code>minecraft:adult_hostile</code>
+| 成年敌对状态
+|-
+| rowspan=6 | {{EntityLink|Pufferfish}}
+| <code>minecraft:normal_puff</code>
+| 未膨胀
+|-
+| <code>minecraft:half_puff_inflate</code>
+| 从半膨胀到完全膨胀
+|-
+| <code>minecraft:half_puff_deflate</code>
+| 从半膨胀到未膨胀
+|-
+| <code>minecraft:start_deflate</code>
+| 开始收缩
+|-
+| <code>minecraft:full_puff</code>
+| 完全膨胀
+|-
+| <code>minecraft:deflate_sensor</code>
+| 探测生物
+|-
+| rowspan=8 | {{EntityLink|Rabbit}}
+| <code>minecraft:adult</code>
+| 成年
+|-
+| <code>minecraft:baby</code>
+| 幼年
+|-
+| <code>minecraft:coat_brown</code>
+| 棕色兔子
+|-
+| <code>minecraft:coat_white</code>
+| 白色兔子
+|-
+| <code>minecraft:coat_black</code>
+| 黑色兔子
+|-
+| <code>minecraft:coat_splotched</code>
+| 斑点兔子
+|-
+| <code>minecraft:coat_desert</code>
+| 黄色兔子
+|-
+| <code>minecraft:coat_salt</code>
+| 胡椒盐色色兔子
+|-
+| rowspan=11 | {{EntityLink|Ravager}}
+| <code>minecraft:celebrate</code>
+| 庆祝
+|-
+| <code>minecraft:pillager_rider</code>
+| 被掠夺者骑乘
+|-
+| <code>minecraft:pillager_rider_for_raid</code>
+| 在袭击中被掠夺者骑乘
+|-
+| <code>minecraft:evoker_rider_for_raid</code>
+| 在袭击中被唤魔者骑乘
+|-
+| <code>minecraft:pillager_captain_rider</code>
+| 被袭击队长骑乘（未使用）
+|-
+| <code>minecraft:vindicator_rider</code>
+| 被卫道士骑乘
+|-
+| <code>minecraft:vindicator_captain_rider</code>
+| 在袭击中被卫道士骑乘
+|-
+| <code>minecraft:raid_configuration</code>
+| 定义袭击事件
+|-
+| <code>minecraft:hostile</code>
+| 定义敌对行为
+|-
+| <code>minecraft:stunned</code>
+| 眩晕
+|-
+| <code>minecraft:roaring</code>
+| 咆哮
+|-
+| rowspan=3 | {{EntityLink|Salmon}}
+| <code>minecraft:scale_small</code>
+| 小型
+|-
+| <code>minecraft:scale_normal</code>
+| 常规尺寸
+|-
+| <code>minecraft:scale_large</code>
+| 大型
+|-
+| rowspan=15 | {{EntityLink|Sheep}}
+| <code>minecraft:sheep_adult</code>
+| 成年
+|-
+| <code>minecraft:sheep_baby</code>
+| 幼年
+|-
+| <code>minecraft:loot_sheared</code>
+| 定义剪掉的羊毛数量
+|-
+| <code>minecraft:loot_wooly</code>
+| 定义未剪毛杀死后掉落的羊毛数量
+|-
+| <code>minecraft:rideable_sheared</code>
+| 可被骑乘的已剪毛的羊
+|-
+| <code>minecraft:rideable_wooly</code>
+| 可被骑乘的未剪毛的羊
+|-
+| <code>minecraft:sheep_dyeable</code>
+| 染色
+|-
+| <code>minecraft:sheep_sheared</code>
+| 被剪掉羊毛
+|-
+| <code>minecraft:sheep_white</code>
+| 白色羊
+|-
+| <code>minecraft:sheep_brown</code>
+| 棕色羊
+|-
+| <code>minecraft:sheep_black</code>
+| 黑色羊
+|-
+| <code>minecraft:sheep_gray</code>
+| 灰色羊
+|-
+| <code>minecraft:sheep_light_gray</code>
+| 淡灰色羊
+|-
+| <code>minecraft:sheep_pink</code>
+| 粉红色羊
+|-
+| <code>minecraft:sheep_red</code>
+| 红色羊
+|-
+| rowspan=2 | {{EntityLink|Shulker}}
+| <code>minecraft:shulker_undyed</code>
+| 未染色
+|-
+| <code>-{}-minecraft:shulker_<颜色></code>
+| 已染色（16种颜色）
+|-
+| rowspan=2 | {{EntityLink|Silverfish}}
+| <code>minecraft:silverfish_calm</code>
+| 空闲状态
+|-
+| <code>minecraft:silverfish_angry</code>
+| 敌对状态
+|-
+| rowspan=3 | {{EntityLink|Skeleton}}
+| <code>minecraft:lightning_immune</code>
+| 对闪电免疫（骷髅陷阱）
+|-
+| <code>minecraft:ranged_attack</code>
+| 远程攻击
+|-
+| <code>minecraft:melee_attack</code>
+| 近战攻击
+|-
+| rowspan=5 | {{EntityLink|Skeleton Horse}}
+| <code>minecraft:skeleton_horse_r5_upgrade</code>
+| （未使用）{{more info}}
+|-
+| <code>minecraft:skeleton_horse_baby</code>
+| 幼年（未使用）
+|-
+| <code>minecraft:skeleton_horse_adult</code>
+| 成年
+|-
+| <code>minecraft:skeleton_trap</code>
+| 骷髅陷阱
+|-
+| <code>minecraft:lightning_immune</code>
+| 对闪电免疫（骷髅陷阱）
+|-
+| rowspan=5 | {{EntityLink|Slime}}
+| <code>minecraft:slime_large</code>
+| 大型史莱姆
+|-
+| <code>minecraft:slime_medium</code>
+| 中型史莱姆
+|-
+| <code>minecraft:slime_small</code>
+| 小型史莱姆
+|-
+| <code>minecraft:slime_calm</code>
+| 空闲状态
+|-
+| <code>minecraft:slime_aggressive</code>
+| 攻击状态
+|-
+| {{EntityLink|Snow Golem}}
+| <code>minecraft:snowman_sheared</code>
+| 被剪去[[南瓜]]头
+|-
+| rowspan=6 | {{EntityLink|Sniffer}}
+| <code>sniffer_adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>sniffer_baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>feeling_happy</code><!-- 原文无前缀 -->
+| 刨挖出种子以后站起
+|-
+| <code>stand_up</code><!-- 原文无前缀 -->
+| 站起
+|-
+| <code>pushable</code><!-- 原文无前缀 -->
+| 可被推动
+|-
+| <code>sniffer_search_and_dig</code><!-- 原文无前缀 -->
+| 嗅探并挖掘
+|-
+| rowspan=6 | {{EntityLink|Spider}}
+| <code>minecraft:spider_jockey</code>
+| 被骷髅骑乘
+|-
+| <code>minecraft:spider_stray_jockey</code>
+| 被流浪者骑乘
+|-
+| <code>minecraft:spider_wither_jockey</code>
+| 被凋灵骷髅骑乘
+|-
+| <code>minecraft:spider_neutral</code>
+| 在日光下变为中立状态
+|-
+| <code>minecraft:spider_hostile</code>
+| 默认敌对状态
+|-
+| <code>minecraft:spider_angry</code>
+| 在日光下被攻击后恢复敌对
+|-
+| {{EntityLink|Squid}}
+| <code>minecraft:squid_baby</code>
+| 幼年（小型）
+|-
+| rowspan=3 | {{EntityLink|Stray}}
+| <code>minecraft:revert_to_skeleton</code>
+| 转换为骷髅（未使用）
+|-
+| <code>minecraft:ranged_attack</code>
+| 远程攻击
+|-
+| <code>minecraft:melee_attack</code>
+| 近战攻击
+|-
+| rowspan=9 | {{EntityLink|Strider}}
+| <code>minecraft:strider_adult</code>
+| 成年
+|-
+| <code>minecraft:strider_baby</code>
+| 幼年
+|-
+| <code>minecraft:strider_saddled</code>
+| 已装备鞍
+|-
+| <code>minecraft:strider_unsaddled</code>
+| 未装备鞍
+|-
+| <code>minecraft:strider_piglin_jockey</code>
+| 被猪灵骑乘
+|-
+| <code>minecraft:strider_unsaddled</code>
+| 被幼年炽足兽骑乘
+|-
+| <code>minecraft:zombified_piglin_rider</code>
+| 被僵尸猪灵骑乘
+|-
+| <code>minecraft:start_suffocating</code>
+| 窒息探测组件
+|-
+| <code>minecraft:detect_suffocating</code>
+| 开始窒息
+|-
+| {{EntityLink|Tadpole}}
+| <code>grow_up</code><!-- 原文无前缀 -->
+| 长大成青蛙
+|-
+| rowspan=27 | {{EntityLink|Tropical Fish}}
+| <code>minecraft:tropicalfish_variant_a</code>
+| 瘦体型
+|-
+| <code>minecraft:tropicalfish_variant_b</code>
+| 胖体型
+|-
+| <code>-{}-minecraft:tropicalfish_variant_pattern_<数字></code>
+| 鱼的类别（数字为1-6）
+|-
+| <code>-{}-minecraft:tropicalfish_base_<颜色></code>
+| 鱼的底色（16种颜色）
+|-
+| <code>-{}-minecraft:tropicalfish_pattern_<颜色></code>
+| 鱼的斑纹色（16种颜色）
+|-
+| <code>minecraft:anenonme</code>
+| 海葵鱼
+|-
+| <code>minecraft:black_tang</code>
+| 黑刺尾鲷
+|-
+| <code>minecraft:black_tang</code>
+| 拟刺尾鲷
+|-
+| <code>minecraft:butterfly_fish</code>
+| 蝴蝶鱼
+|-
+| <code>minecraft:cichlid</code>
+| 丽鱼
+|-
+| <code>minecraft:clownfish</code>
+| 小丑鱼
+|-
+| <code>minecraft:cc_betta</code>
+| 五彩搏鱼
+|-
+| <code>minecraft:dog_fish</code>
+| 绣雀鲷
+|-
+| <code>minecraft:e_red_snapper</code>
+| 川纹笛鲷
+|-
+| <code>minecraft:goat_fish</code>
+| 拟羊鱼
+|-
+| <code>minecraft:moorish_idol</code>
+| 镰鱼
+|-
+| <code>minecraft:ornate_butterfly</code>
+| 华丽蝴蝶鱼
+|-
+| <code>minecraft:parrot_fish</code>
+| 鹦嘴鱼
+|-
+| <code>minecraft:queen_angel_fish</code>
+| 额斑刺蝶鱼
+|-
+| <code>minecraft:red_cichlid</code>
+| 红丽鱼
+|-
+| <code>minecraft:red_lipped_benny</code>
+| 红唇真蛇鳚
+|-
+| <code>minecraft:red_snapper</code>
+| 红边笛鲷
+|-
+| <code>minecraft:threadfin</code>
+| 马鲅
+|-
+| <code>minecraft:tomato_clown</code>
+| 白条双锯鱼
+|-
+| <code>minecraft:triggerfish</code>
+| 鳞鲀
+|-
+| <code>minecraft:yellow_tang</code>
+| 黄刺尾鲷
+|-
+| <code>minecraft:yellowtail_parrot</code>
+| 高鳍鹦嘴鱼
+|-
+| rowspan=4 | {{EntityLink|Turtle}}
+| <code>minecraft:adult</code>
+| 成年
+|-
+| <code>minecraft:baby</code>
+| 幼年
+|-
+| <code>minecraft:pregnant</code>
+| 寻找产卵地点
+|-
+| <code>minecraft:wants_to_lay_egg</code>
+| 挖沙以准备产卵
+|-
+| rowspan=20 | {{EntityLink|id=Villager|link=村民/村庄与掠夺前|村民}}
+| <code>adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>become_witch</code><!-- 原文无前缀 -->
+| 变成女巫
+|-
+| <code>become_villager_v2</code><!-- 原文无前缀 -->
+| 变成新版村民
+|-
+| <code>become_zombie</code><!-- 原文无前缀 -->
+| 变成僵尸村民
+|-
+| <code>behavior_peasant</code><!-- 原文无前缀 -->
+| 求爱行为
+|-
+| <code>behavior_non_peasant</code><!-- 原文无前缀 -->
+| 非求爱行为
+|-
+| <code>farmer</code><!-- 原文无前缀 -->
+| 农民
+|-
+| <code>fisherman</code><!-- 原文无前缀 -->
+| 渔夫
+|-
+| <code>shepherd</code><!-- 原文无前缀 -->
+| 牧羊人
+|-
+| <code>fletcher</code><!-- 原文无前缀 -->
+| 制箭师
+|-
+| <code>librarian</code><!-- 原文无前缀 -->
+| 图书管理员
+|-
+| <code>cartographer</code><!-- 原文无前缀 -->
+| 制图师
+|-
+| <code>librarian</code><!-- 原文无前缀 -->
+| 图书管理员
+|-
+| <code>cleric</code><!-- 原文无前缀 -->
+| 牧师
+|-
+| <code>armorer</code><!-- 原文无前缀 -->
+| 盔甲匠
+|-
+| <code>weaponsmith</code><!-- 原文无前缀 -->
+| 武器匠
+|-
+| <code>toolsmith</code><!-- 原文无前缀 -->
+| 工具匠
+|-
+| <code>butcher</code><!-- 原文无前缀 -->
+| 屠夫
+|-
+| <code>leatherworker</code><!-- 原文无前缀 -->
+| 皮匠
+|-
+| rowspan=49 | {{EntityLink|id=Villager|link=村民|新版村民}}
+| <code>adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>trade_resupply_component_group</code><!-- 原文无前缀 -->
+| 交易补给组件组
+|-
+| <code>become_witch</code><!-- 原文无前缀 -->
+| 变成女巫
+|-
+| <code>become_zombie</code><!-- 原文无前缀 -->
+| 变成僵尸村民
+|-
+| <code>work_schedule</code><!-- 原文无前缀 -->
+| 已就业村民的行程
+|-
+| <code>basic_schedule</code><!-- 原文无前缀 -->
+| 村民的常规行程
+|-
+| <code>child_schedule</code><!-- 原文无前缀 -->
+| 幼年村民的行程
+|-
+| <code>jobless_schedule</code><!-- 原文无前缀 -->
+| 失业村民的行程
+|-
+| <code>fisher_schedule</code><!-- 原文无前缀 -->
+| 渔夫的行程
+|-
+| <code>librarian_schedule</code><!-- 原文无前缀 -->
+| 图书管理员的行程
+|-
+| <code>farmer_schedule</code><!-- 原文无前缀 -->
+| 农民的行程
+|-
+| <code>job_specific_goals</code><!-- 原文无前缀 -->
+| 职业的特殊行为<ref group="注">这里提供了6个子组件：{{cd|minecraft:behavior.inspect_bookshelf|minecraft:behavior.harvest_farm_block|minecraft:behavior.explore_outskirts|minecraft:behavior.work|minecraft:behavior.mingle|minecraft:behavior.sleep|d=、}}。其中前三个分别被图书管理员、农民和渔夫使用，后三个被所有已就业的村民使用。</ref>
+|-
+| <code>minecraft:work_schedule_villager</code><!-- 原文无前缀 -->
+| 村民（图书管理员、农民和渔夫除外）的工作行程
+|-
+| <code>work_schedule_fisher</code><!-- 原文无前缀 -->
+| 渔夫的工作行程
+|-
+| <code>work_schedule_farmer</code><!-- 原文无前缀 -->
+| 农民的工作行程
+|-
+| <code>work_schedule_librarian</code><!-- 原文无前缀 -->
+| 图书管理员的工作行程
+|-
+| <code>play_schedule_villager</code><!-- 原文无前缀 -->
+| 幼年村民的行程
+|-
+| <code>play_schedule_villager</code><!-- 原文无前缀 -->
+| 幼年村民玩耍
+|-
+| <code>gather_schedule_villager</code><!-- 原文无前缀 -->
+| 村民聚集
+|-
+| <code>home_schedule_villager</code><!-- 原文无前缀 -->
+| 村民回家
+|-
+| <code>bed_schedule_villager</code><!-- 原文无前缀 -->
+| 村民睡觉
+|-
+| <code>wander_schedule_villager</code><!-- 原文无前缀 -->
+| 失业村民游荡
+|-
+| <code>behavior_peasant</code><!-- 原文无前缀 -->
+| 求爱行为
+|-
+| <code>behavior_non_peasant</code><!-- 原文无前缀 -->
+| 非求爱行为
+|-
+| <code>trade_components</code><!-- 原文无前缀 -->
+| 交易组件
+|-
+| <code>unskilled</code><!-- 原文无前缀 -->
+| 失业村民
+|-
+| <code>farmer</code><!-- 原文无前缀 -->
+| 农民
+|-
+| <code>fisherman</code><!-- 原文无前缀 -->
+| 渔夫
+|-
+| <code>shepherd</code><!-- 原文无前缀 -->
+| 牧羊人
+|-
+| <code>fletcher</code><!-- 原文无前缀 -->
+| 制箭师
+|-
+| <code>librarian</code><!-- 原文无前缀 -->
+| 图书管理员
+|-
+| <code>cartographer</code><!-- 原文无前缀 -->
+| 制图师
+|-
+| <code>librarian</code><!-- 原文无前缀 -->
+| 图书管理员
+|-
+| <code>cleric</code><!-- 原文无前缀 -->
+| 牧师
+|-
+| <code>armorer</code><!-- 原文无前缀 -->
+| 盔甲匠
+|-
+| <code>weaponsmith</code><!-- 原文无前缀 -->
+| 武器匠
+|-
+| <code>toolsmith</code><!-- 原文无前缀 -->
+| 工具匠
+|-
+| <code>butcher</code><!-- 原文无前缀 -->
+| 屠夫
+|-
+| <code>leatherworker</code><!-- 原文无前缀 -->
+| 皮匠
+|-
+| <code>mason</code><!-- 原文无前缀 -->
+| 石匠
+|-
+| <code>notwit</code><!-- 原文无前缀 -->
+| 傻子
+|-
+| <code>-{}-villager_skin_<数字></code><!-- 原文无前缀 -->
+| 村民的皮肤（数字为0-5）{{more info|似乎是随机产生的值}}
+|-
+| <code>desert_villager</code><!-- 原文无前缀 -->
+| 沙漠着装村民
+|-
+| <code>jungle_villager</code><!-- 原文无前缀 -->
+| 丛林着装村民
+|-
+| <code>savanna_villager</code><!-- 原文无前缀 -->
+| 热带草原着装村民
+|-
+| <code>snow_villager</code><!-- 原文无前缀 -->
+| 雪地着装村民
+|-
+| <code>swamp_villager</code><!-- 原文无前缀 -->
+| 沼泽着装村民
+|-
+| <code>taiga_villager</code><!-- 原文无前缀 -->
+| 针叶林着装村民
+|-
+| rowspan=8 | {{EntityLink|Vindicator}}
+| <code>minecraft:celebrate</code>
+| 庆祝
+|-
+| <code>minecraft:vindicator_aggro</code>
+| 攻击状态
+|-
+| <code>minecraft:vindicator_johnny</code>
+| 被命名为Johnny的卫道士
+|-
+| <code>minecraft:default_targeting</code>
+| 追踪攻击目标
+|-
+| <code>minecraft:raid_configuration</code>
+| 定义袭击事件
+|-
+| <code>minecraft:illager_squad_captain</code>
+| [[袭击]]队伍的队长（未使用）
+|-
+| <code>minecraft:patrol_captain</code>
+| [[灾厄巡逻队]]的队长（未使用）
+|-
+| <code>minecraft:patrol_follower</code>
+| 灾厄巡逻队的队员
+|-
+| rowspan=3 | {{EntityLink|Wandering Trader}}
+| <code>managed</code><!-- 原文无前缀 -->
+| 生成
+|-
+| <code>despawn</code><!-- 原文无前缀 -->
+| 消失
+|-
+| <code>minecraft:scared</code>
+| 躲避怪物
+|-
+| {{EntityLink|Warden}}
+| <code>emerging</code><!-- 原文无前缀 -->
+| 从地面出现
+|-
+| rowspan=2 | {{EntityLink|Witch}}
+| <code>minecraft:celebrate</code>
+| 庆祝
+|-
+| <code>minecraft:raid_configuration</code>
+| 定义袭击事件
+|-
+| rowspan=5 | {{EntityLink|Wolf}}
+| <code>minecraft:wolf_adult</code>
+| 成年
+|-
+| <code>minecraft:wolf_baby</code>
+| 幼年
+|-
+| <code>minecraft:wolf_wild</code>
+| 野生
+|-
+| <code>minecraft:wolf_angry</code>
+| 敌对状态
+|-
+| <code>minecraft:wolf_tame</code>
+| 已驯服
+|-
+| rowspan=2 | {{EntityLink|Zoglin}}
+| <code>zoglin_adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>zoglin_baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| rowspan=8 | {{EntityLink|Zombie}}
+| <code>minecraft:zombie_adult</code>
+| 成年
+|-
+| <code>minecraft:zombie_baby</code>
+| 幼年
+|-
+| <code>minecraft:look_to_start_drowned_transformation</code>
+| 受到溺水伤害
+|-
+| <code>minecraft:start_drowned_transformation</code>
+| 开始转变为溺尸
+|-
+| <code>minecraft:convert_to_drowned</code>
+| 转变为溺尸
+|-
+| <code>minecraft:convert_to_baby_drowned</code>
+| 转变为幼年溺尸
+|-
+| <code>minecraft:zombie_jockey</code>
+| 作为骑士
+|-
+| <code>minecraft:can_have_equipment</code>
+| 可捡起掉落物与穿戴盔甲
+|-
+| rowspan=2 | {{EntityLink|Zombie Horse}}
+| <code>minecraft:horse_adult</code>
+| 成年
+|-
+| <code>minecraft:horse_baby</code>
+| 幼年
+|-
+| rowspan=4 | {{EntityLink|Zombified Piglin}}
+| <code>minecraft:pig_zombie_adult</code>
+| 成年
+|-
+| <code>minecraft:pig_zombie_baby</code>
+| 幼年
+|-
+| <code>minecraft:pig_zombie_angry</code>
+| 敌对状态
+|-
+| <code>minecraft:pig_zombie_calm</code>
+| 中立状态
+|-
+| rowspan=4 | {{EntityLink|Zombie Villager}}
+| <code>become_zombie_villager_v2</code><!-- 原文无前缀 -->
+| 变成新版僵尸村民
+|-
+| <code>adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>jockey</code><!-- 原文无前缀 -->
+| 作为骑士
+|-
+| rowspan=28 | {{EntityLink|id=Zombie Villager|link=僵尸村民|新版僵尸村民}}
+| <code>adult</code><!-- 原文无前缀 -->
+| 成年
+|-
+| <code>baby</code><!-- 原文无前缀 -->
+| 幼年
+|-
+| <code>jockey</code><!-- 原文无前缀 -->
+| 作为骑士
+|-
+| <code>from_abandoned_village</code><!-- 原文无前缀 -->
+| 在废弃的村庄里生成
+|-
+| <code>to_villager</code><!-- 原文无前缀 -->
+| 转变为村民
+|-
+| <code>unskilled</code><!-- 原文无前缀 -->
+| 失业僵尸村民
+|-
+| <code>farmer</code><!-- 原文无前缀 -->
+| 农民
+|-
+| <code>fisherman</code><!-- 原文无前缀 -->
+| 渔夫
+|-
+| <code>shepherd</code><!-- 原文无前缀 -->
+| 牧羊人
+|-
+| <code>fletcher</code><!-- 原文无前缀 -->
+| 制箭师
+|-
+| <code>librarian</code><!-- 原文无前缀 -->
+| 图书管理员
+|-
+| <code>cartographer</code><!-- 原文无前缀 -->
+| 制图师
+|-
+| <code>librarian</code><!-- 原文无前缀 -->
+| 图书管理员
+|-
+| <code>cleric</code><!-- 原文无前缀 -->
+| 牧师
+|-
+| <code>armorer</code><!-- 原文无前缀 -->
+| 盔甲匠
+|-
+| <code>weaponsmith</code><!-- 原文无前缀 -->
+| 武器匠
+|-
+| <code>toolsmith</code><!-- 原文无前缀 -->
+| 工具匠
+|-
+| <code>butcher</code><!-- 原文无前缀 -->
+| 屠夫
+|-
+| <code>leatherworker</code><!-- 原文无前缀 -->
+| 皮匠
+|-
+| <code>mason</code><!-- 原文无前缀 -->
+| 石匠
+|-
+| <code>notwit</code><!-- 原文无前缀 -->
+| 傻子
+|-
+| <code>-{}-villager_skin_<数字></code><!-- 原文无前缀 -->
+| 僵尸村民的皮肤（数字为0-5）{{more info|似乎是随机产生的值}}
+|-
+| <code>desert_villager</code><!-- 原文无前缀 -->
+| 沙漠着装僵尸村民
+|-
+| <code>jungle_villager</code><!-- 原文无前缀 -->
+| 丛林着装僵尸村民
+|-
+| <code>savanna_villager</code><!-- 原文无前缀 -->
+| 热带草原着装僵尸村民
+|-
+| <code>snow_villager</code><!-- 原文无前缀 -->
+| 雪地着装僵尸村民
+|-
+| <code>swamp_villager</code><!-- 原文无前缀 -->
+| 沼泽着装僵尸村民
+|-
+| <code>taiga_villager</code><!-- 原文无前缀 -->
+| 针叶林着装僵尸村民
+|-
+|}
+
+=== 非生物实体 ===
+{| class="wikitable collapsible"
+! 名称 !! 定义组件组ID !! 解释
+|-
+| rowspan=3 | {{EntityLink|Arrow}}
+| <code>minecraft:hard_arrow</code>
+| 由满弦的弓射出的箭
+|-
+| <code>minecraft:player_arrow</code>
+| 由玩家射出的箭
+|-
+| <code>minecraft:pillager_arrow</code>
+| 由掠夺者射出的箭
+|-
+| rowspan=5 | {{EntityLink|Boat}}
+| <code>minecraft:floating</code>
+| 船浮在水面上
+|-
+| <code>minecraft:can_ride_default</code>
+| 定义可操控船的生物
+|-
+| <code>minecraft:can_ride_bamboo</code>
+| 定义可操控竹筏的生物
+|-
+| <code>minecraft:above_bubble_column_down</code>
+| 处于向下的气泡柱上
+|-
+| <code>minecraft:above_bubble_column_up</code>
+| 处于向上的气泡柱上
+|-
+| rowspan=5 | {{EntityLink|Boat with Chest}}
+| <code>minecraft:floating</code>
+| 船浮在水面上
+|-
+| <code>minecraft:can_ride_default</code>
+| 定义可操控船的生物
+|-
+| <code>minecraft:can_ride_bamboo</code>
+| 定义可操控竹筏的生物
+|-
+| <code>minecraft:above_bubble_column_down</code>
+| 处于向下的气泡柱里
+|-
+| <code>minecraft:above_bubble_column_up</code>
+| 处于向上的气泡柱里
+|-
+| rowspan=2 | {{EntityLink|Minecart with Command Block}}
+| <code>minecraft:command_block_active</code>
+| [[命令方块]]激活
+|-
+| <code>minecraft:command_block_inactive</code>
+| 命令方块未激活
+|-
+| {{EntityLink|End Crystal}}
+| <code>crystal_exploding</code><!-- 原文无前缀 -->
+| 爆炸
+|-
+| {{EntityLink|Ender Pearl}}
+| <code>minecraft:no_spawn</code>
+| 传送
+|-
+| {{EntityLink|Fireball}}
+| <code>minecraft:exploding</code>
+| 爆炸
+|-
+| {{EntityLink|Fishing Bobber}}
+| <code>loot_jungle</code><!-- 原文无前缀 -->
+| 在丛林钓鱼时的战利品表
+|-
+| rowspan=2 | {{EntityLink|Minecart with Hopper}}
+| <code>minecraft:hopper_active</code>
+| [[漏斗]]激活
+|-
+| <code>minecraft:hopper_inactive</code>
+| 漏斗未激活
+|-
+| rowspan=3 | {{EntityLink|Minecart with TNT}}
+| <code>minecraft:primed_tnt</code>
+| [[TNT]]激活
+|-
+| <code>minecraft:instant_explode_tnt</code>
+| TNT瞬间爆炸
+|-
+| <code>minecraft:inactive</code>
+| 未激活
+|-
+| {{EntityLink|Wither Skull}}
+| <code>minecraft:exploding</code>
+| 爆炸
+|-
+| {{EntityLink|Dangerous Wither Skull}}
+| <code>minecraft:exploding</code>
+| 爆炸
+|-
+|}
+
+== 注释 ==
+{{reflist|group=注}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}

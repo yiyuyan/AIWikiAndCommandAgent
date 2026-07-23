@@ -1,0 +1,46 @@
+# 页面: 秒表存储格式
+# 来源: https://zh.minecraft.wiki/w/%E7%A7%92%E8%A1%A8%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:33:09
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+
+'''秒表存储文件'''是游戏存储秒表所用的文件。
+
+== 存储格式 ==
+秒表存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/stopwatches.dat}}。
+
+秒表存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|compound|stopwatches|existonsave=1|required=1}}：秒表数据。
+**** {{nbt|long|<''秒表命名空间ID''>}}：一项秒表和秒表计时的时间，单位为毫秒。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此秒表存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 秒表 ==
+'''秒表（Stopwatch）'''可用来追踪独立于[[游戏刻]]的真实时间，只要服务端处于启动状态就会计时。其不受{{cmd|time}}和{{cmd|tick}}影响，不会因为客户端暂停而中止计时。
+
+技术上，游戏通过读取设备的时间，对比秒表创建的时间来记录秒表经过的时间。
+
+秒表由{{cmd|stopwatch}}命令直接管理，且可以被{{cmd|execute (if{{!}}unless) stopwatch ...}}命令调用。
+
+== 存储行为 ==
+加载存档时，如果不存在秒表存储文件，则游戏会自动生成新文件。游戏只会在保存存档时更新此文件。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了秒表存储文件。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将秒表数据从{{filepath|<''存档根目录''>/data/stopwatches.dat}}移动到{{filepath|<''存档根目录''>/data/minecraft/stopwatches.dat}}，且现在即使没有任何秒表也会被创建。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Stoppuhrdefinition]]

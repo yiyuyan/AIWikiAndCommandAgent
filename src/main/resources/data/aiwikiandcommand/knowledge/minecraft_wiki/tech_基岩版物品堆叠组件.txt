@@ -1,0 +1,53 @@
+# 页面: 基岩版物品堆叠组件
+# 来源: https://zh.minecraft.wiki/w/%E5%9F%BA%E5%B2%A9%E7%89%88%E7%89%A9%E5%93%81%E5%A0%86%E5%8F%A0%E7%BB%84%E4%BB%B6
+# 分类: 基岩版独有特性, 开发
+# 抓取时间: 2026-07-14 17:24:42
+# 原始 Wikitext 内容:
+
+{{for|Java版中的物品堆叠组件|数据组件}}
+{{exclusive|bedrock}}
+'''物品堆叠组件（Item Components）'''，是用于[[行为包]]中物品的[[JSON]]格式文件，可以改变物品在世界中的外观和功能。类似于[[NBT标签]]，但仅支持{{cd|minecraft:can_place_on}}、{{cd|minecraft:can_destroy}}、{{cd|minecraft:item_lock}}和{{cd|minecraft:keep_on_death}}。
+
+== 格式 ==
+<div class="treeview">
+* {{nbt|compound}}：根标签。
+** {{nbt|compound|can_place_on}}：控制此物品/方块（在冒险模式下）可以使用/放置在其上的方块类型。
+*** {{nbt|list|blocks}}：值。
+**** 方块的[[命名空间ID]]。
+** {{nbt|compound|can_destroy}}：控制此物品/方块（在冒险模式下）可以破坏的方块类型。此效果不会改变原本的破坏速度和破坏后掉落物。
+*** {{nbt|list|blocks}}：值。
+**** 方块的[[命名空间ID]]。
+** {{nbt|compound|item_lock}}：将该物品锁定在玩家的物品栏。需指定<code>mode</code>属性。
+*** {{nbt|string|mode}}：可以为{{cd|lock_in_inventory}}（锁定在物品栏内）或{{cd|lock_in_slot}}（锁定在槽位内）。<ref>{{cite|url=https://feedback.minecraft.net/hc/en-us/articles/360052592091-Minecraft-1-16-100-Bedrock-|title=Minecraft - 1.16.100 (Bedrock)|website=Minecraft Feedback|date=November 16, 2020}}</ref>
+** {{nbt|compound|keep_on_death}}：若指定则使该物品在玩家死亡时不会掉落。
+</div>
+
+== 示例 ==
+{{cmd|give @p iron_shovel 1 0 {"minecraft:can_destroy":{"blocks":["grass"]},"minecraft:item_lock":{"mode":"lock_in_slot"<nowiki>}}</nowiki>|long=1}}
+
+给最近的玩家一把只能挖草方块且不能从物品栏移动、移除、丢弃或用于合成的铁锹。
+
+{{cmd|give @p netherite_pickaxe 1 0 {"minecraft:keep_on_death":{<nowiki>}}</nowiki>|long=1}}
+
+给最近的玩家一把死亡后不会掉落的下界合金镐。
+
+{{cmd|replaceitem entity @s slot.hotbar 0 concrete 1 0 {"minecraft:can_place_on":{"blocks":["grass"]<nowiki>}}</nowiki>|long=1}}
+
+将自己的快捷栏最左槽替换为一个只能放置在草方块上（在冒险模式下）的混凝土。
+
+{{cmd|replaceitem entity @s slot.weapon.mainhand 0 spawn_egg 64 110 {"minecraft:item_lock":{"mode":"lock_in_inventory"<nowiki>}}</nowiki>|long=1}}
+
+将自己主手槽位替换为不能移除、丢弃或用于合成的一组溺尸刷怪蛋。
+
+{{cmd|replaceitem entity @s slot.hotbar 0 spawn_egg 5 51 {"minecraft:item_lock":{"mode":"lock_in_inventory"<nowiki>},"minecraft:can_place_on":{"blocks":["grass"]}}</nowiki>|long=1}}
+
+将自己的快捷栏最左槽替换为五个只能在草方块上放置且不能移除、丢弃或用于合成的NPC刷怪蛋。
+
+== 参考 ==
+{{Reflist}}
+
+[[Category:开发]]
+
+[[en:Item components]]
+[[ja:アイテムコンポーネント]]
+[[pt:Componentes de item]]

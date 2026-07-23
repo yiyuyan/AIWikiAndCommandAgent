@@ -1,0 +1,72 @@
+# 页面: 命令/script
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/script
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Exclusive|bedrock|education}}
+{{Infobox command
+|name=script
+|oplevel=2
+|cheat=1
+|nocmdblock=1
+}}
+
+调试GameTest框架选项。
+
+== 语法 ==
+:<code>script debugger close</code>
+::关闭调试器。
+:<code>script debugger connect [host: string] [port: int]</code>
+::将调试器的指定端口连接至指定主机。
+:<code>script debugger listen <port: int></code>
+::监听调试器的指定端口。
+:<code>script diagnostics startcapture</code>
+:<code>script diagnostics stopcapture</code>
+::开始或停止捕获诊断。
+:<code>script profiler start</code>
+:<code>script profiler stop</code>
+::启用或禁用跟踪脚本性能的分析器。
+
+== 参数 ==
+{{argument|host: string|string|be=1}}
+:指定主机的名称。
+:{{arg desc|be=basic_string}}
+
+{{argument|port: int|int|be=1}}
+:指定调试器的[[wzh:通讯埠|端口]]，可用端口范围为1024-65535。
+:{{arg desc|be=int}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|命令不完整或参数未正确指定||unparseable}}
+{{Result table|提供未知的命令模式{{info needed|指的是什么？}}||fail}}
+{{Result table|cmd=/script ... [host: string] ...|指定名称的主机不存在或不可用}}
+{{Result table|cmd=/script ... [port: int]<br>/script ... <port: int>|端口超出可用范围}}
+{{Result table|cmd=/script diagnostics stopcapture|诊断未开始捕获}}
+{{Result table|cmd=/script profiler stop|分析器未启用}}
+{{Result table|cmd=|success}}
+{{Result table}}
+
+== 示例 ==
+* 将调试器的8000端口连接至本地回环：<code>/script debugger connect 127.0.0.1 8000</code>
+* 监听调试器的8000端口：<code>/script debugger listen 8000</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.30|dev=1.17.30.23|exg=gametest_v1|加入了{{cmd|script|link=none}}。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.30|exg=gametest_v2|加入了<code>profiler</code>子命令。}}
+|{{HistoryLine||1.19.30|dev=1.19.30.22|exg=gametest_v2|加入了<code>exportstats</code>子命令。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.21|exg=gametest_v2|{{cmd|script|link=none}}现在需要加载脚本才可使用。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.26|exg=gametest|{{cmd|script|link=none}}现在无需加载脚本即可使用。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.21|{{cmd|script|link=none}}不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.23|移除了<code>exportstats</code>子命令。}}
+|{{HistoryLine|||dev=1.21.60.24|加入了<code>diagnostics</code>子命令。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/script]]
+[[en:Commands/script]]

@@ -1,0 +1,521 @@
+# 页面: 物品展示框
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%B1%95%E7%A4%BA%E6%A1%86
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 功能方块, 可再生资源, 基岩版独有信息, 实体, 方块, 物品, 过长的自动值输出
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|group1=物品展示框
+|1-1=Item Frame.png
+|1-2=Item Frame Map.png
+|group2=荧光物品展示框
+|2-1=Glow Item Frame.png
+|2-2=Glow Item Frame (map).png
+|*-1caption=展示其他物品
+|*-2caption=展示地图
+|invimage=Item Frame
+|invimage2=Glow Item Frame
+|size=高度：0.75格<br>宽度：0.0625格
+|itemframe=1
+|autovalue-id=物品展示框;荧光物品展示框
+}}
+{{quote|物品展示框在2012年10月的骇人更新中与命令方块、铁砧、南瓜派和凋灵一同加入Minecraft。物品展示框只有一个主要用途——炫耀物品。|[[Duncan Geere]]<ref>{{article|taking-inventory--item-frame|Taking Inventory: Item Frame|May 6, 2021}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''物品展示框（Item Frame）'''是一种可以把物品或方块放在其中展示的{{only|java|for=[[实体]]|short=1}}或{{only|bedrock|for=[[方块]]|short=1}}。
+
+'''荧光物品展示框（Glow Item Frame）'''是物品展示框的增亮变种。
+
+== 生成 ==
+荧光物品展示框不会生成在世界中。
+
+=== 自然生成 ===
+[[末地船]]的宝藏室中会生成一个物品展示框，里面放着[[鞘翅]]。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|head = 1
+|A1= Stick |B1= Stick   |C1= Stick
+|A2= Stick |B2= Leather |C2= Stick
+|A3= Stick |B3= Stick   |C3= Stick
+|Output= Item Frame
+|type= Decoration block
+}}
+{{Crafting
+|Item Frame 
+|Glow Ink Sac
+|Output= Glow Item Frame
+|type= Decoration block
+|foot = 1
+}}
+
+=== 交易 ===
+{{Trade sources}}
+
+== 破坏 ==
+{{in|je}}由于物品展示框属于[[实体]]，其受到[[伤害]]（例如被{{ctrl|敲击}}、被会造成伤害的弹射物击中）时会被瞬间破坏。
+
+{{in|be}}没有工具能够加速对物品展示框的挖掘。
+
+{{Breaking table}}
+
+物品展示框被破坏后会掉落自身。
+
+物品展示框中有物品时，则会先取下该物品。
+
+== 用途 ==
+=== 放置 ===
+[[File:Item Frame (Map screen shown).png|thumb|150px|展示部分填充的地图的物品展示框]]
+当物品展示框不满足放置条件（移除支撑方块，{{only|je|for=有方块或船<ref>{{bug|MC-154651|||Fixed}}</ref>与物品展示框发生碰撞}}）时，它会{{only|be|for=立刻}}/{{only|je|for=在{{convert|100}}内}}掉落。
+
+{{in|be}}物品展示框可以放在[[固体方块]]的侧面、顶部和底部。
+
+{{in|je}}由于物品展示框为实体，其放置行为与大多数方块不同：
+* 物品展示框可以放在固体方块的侧面、顶部和底部，也可以放置在[[红石比较器]]、[[红石中继器]]、[[幽匿脉络]]等方块的侧面。
+* 物品展示框不能和任何方块的[[碰撞箱]]产生碰撞。若一个方块的碰撞箱不完整，且不会和物品展示框产生碰撞，那么物品展示框和这个方块就可以在同一个方块位置上共存。
+* 物品展示框不能和其他悬挂实体（[[画]]、[[拴绳结]]和其他物品展示框）发生碰撞。一个方块位置内可以存在多个附着在不同方向上的物品展示框，因为它们不会相互碰撞。
+* 若物品展示框的{{nbt|bool|Fixed}}标签为<samp>true</samp>，则无视上方规则，可以单独存在。
+
+=== 展示 ===
+手持需要展示的物品对着物品展示框按下{{ctrl|使用}}键，即可将该物品放置到框里。物品会以自身的物品模型呈现，方块模型的大小会变得与方块对应物品实体的大小相同，并且完整方块会在展示框的前后两面各出现一半。若放入[[地图]]，则展示框的大小会拓展到完整的方块侧面以供展示，其{{only|je|for=[[边界箱]]}}和{{only|be|for=[[轮廓箱]]}}也会被扩大。
+
+{{in|be}}定位器地图会显示一个代表该物品展示框位置的绿色光标，且绿色光标也会出现在玩家手持的相同的定位器地图中。在下界进行该操作能看到绿色光标向四周随机旋转。
+
+若要展示的物品已被[[铁砧]]重命名，当玩家准星指向该物品时会显示其名字。
+
+在[[创造模式]]中，对着有物品的展示框按下{{ctrl|选取方块}}键将会在主手得到该物品。
+
+荧光物品展示框自带发亮效果，并且会使其展示的物品发亮。“发亮”仅反映在纹理上，不会影响[[光照等级]]。
+
+=== 旋转 ===
+{{animate|Item Frame with Item.png;Item Frame with rotated Item.png;Item Frame with Block.png;Item Frame with rotated Block.png|150px}}
+
+对着展示框中展示的物品按下{{ctrl|使用}}键可将其顺时针旋转。
+* 每次点击物品会将其旋转45°，共8种朝向。
+* 每次点击地图会将其旋转90°，共4种朝向。
+
+{{in|je}}只要物品展示框未被取下，它就会记忆最后一个放置在展示框上的物品的朝向，并作用于下一个放置在该展示框上的物品。
+
+=== 红石比较器 ===
+展示框中物品的朝向可以被[[红石比较器]]检测，根据旋转角度输出对应信号强度（1-8）的红石信号。
+
+== 音效 ==
+{{el|je}}：
+
+=== 普通变种 ===
+{{Sound table
+|sound=Item Frame add item1.ogg
+|sound2=Item Frame add item2.ogg
+|soumd3=Item Frame add item3.ogg
+|sound4=Item Frame add item4.ogg
+|subtitle={{tp|subtitles.entity.item_frame.add_item}}
+|source=友好生物
+|description=填充物品
+|id=entity.item_frame.add_item
+|translationkey=subtitles.entity.itemframe.add_item
+}}
+{{Sound table
+|sound=Item Frame break1.ogg
+|sound2=Item Frame break2.ogg
+|sound3=Item Frame break3.ogg
+|subtitle={{tp|subtitles.entity.item_frame.break}}
+|source=友好生物
+|description=破坏
+|id=entity.item_frame.break
+|translationkey=subtitles.entity.itemframe.break
+}}
+{{Sound table
+|sound=Item Frame place1.ogg
+|sound2=Item Frame place2.ogg
+|sound3=Item Frame place3.ogg
+|sound4=Item Frame place4.ogg
+|subtitle={{tp|subtitles.entity.item_frame.place}}
+|source=友好生物
+|description=放置
+|id=entity.item_frame.place
+|translationkey=subtitles.entity.itemframe.place
+}}
+{{Sound table
+|sound=Item Frame remove item1.ogg
+|sound2=Item Frame remove item2.ogg
+|sound3=Item Frame remove item3.ogg
+|sound4=Item Frame remove item4.ogg
+|subtitle={{tp|subtitles.entity.item_frame.remove_item}}
+|source=友好生物
+|description=清空物品
+|id=entity.item_frame.remove_item
+|translationkey=subtitles.entity.itemframe.remove_item
+}}
+{{Sound table
+|sound=Item Frame rotate item1.ogg
+|sound2=Item Frame rotate item2.ogg
+|sound3=Item Frame rotate item3.ogg
+|sound4=Item Frame rotate item4.ogg
+|subtitle={{tp|subtitles.entity.item_frame.rotate_item}}
+|source=友好生物
+|description=旋转物品
+|id=entity.item_frame.rotate_item
+|translationkey=subtitles.entity.itemframe.rotate_item
+|foot=1}}
+
+=== 荧光变种 ===
+{{Sound table
+|sound=Item Frame add item1.ogg
+|sound2=Item Frame add item2.ogg
+|soumd3=Item Frame add item3.ogg
+|sound4=Item Frame add item4.ogg
+|subtitle={{tp|subtitles.entity.glow_item_frame.add_item}}
+|source=友好生物
+|description=填充物品
+|id=entity.glow_item_frame.add_item
+|translationkey=subtitles.entity.glow_item_frame.add_item
+}}
+{{Sound table
+|sound=Item Frame break1.ogg
+|sound2=Item Frame break2.ogg
+|sound3=Item Frame break3.ogg
+|subtitle={{tp|subtitles.entity.glow_item_frame.break}}
+|source=友好生物
+|description=破坏
+|id=entity.glow_item_frame.break
+|translationkey=subtitles.entity.glow_item_frame.break
+}}
+{{Sound table
+|sound=Item Frame place1.ogg
+|sound2=Item Frame place2.ogg
+|sound3=Item Frame place3.ogg
+|sound4=Item Frame place4.ogg
+|subtitle={{tp|subtitles.entity.glow_item_frame.place}}
+|source=友好生物
+|description=放置
+|id=entity.glow_item_frame.place
+|translationkey=subtitles.entity.glow_item_frame.place
+}}
+{{Sound table
+|sound=Item Frame remove item1.ogg
+|sound2=Item Frame remove item2.ogg
+|sound3=Item Frame remove item3.ogg
+|sound4=Item Frame remove item4.ogg
+|subtitle={{tp|subtitles.entity.glow_item_frame.remove_item}}
+|source=友好生物
+|description=清空物品
+|id=entity.glow_item_frame.remove_item
+|translationkey=subtitles.entity.glow_item_frame.remove_item
+}}
+{{Sound table
+|sound=Item Frame rotate item1.ogg
+|sound2=Item Frame rotate item2.ogg
+|sound3=Item Frame rotate item3.ogg
+|sound4=Item Frame rotate item4.ogg
+|subtitle={{tp|subtitles.entity.glow_item_frame.rotate_item}}
+|source=友好生物
+|description=旋转物品
+|id=entity.glow_item_frame.rotate_item
+|translationkey=subtitles.entity.glow_item_frame.rotate_item
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=block.itemframe.place1.wav
+|sound2=block.itemframe.place2.wav
+|sound3=block.itemframe.place3.wav
+|sound4=block.itemframe.place4.wav
+|source=方块
+|description=方块作为物品使用时发出的声音
+|id=block.itemframe.place
+|typeid=item.use.on
+|soundvolume
+|soundpitch=0.8
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=block.itemframe.break1.wav
+|sound2=block.itemframe.break2.wav
+|sound3=block.itemframe.break3.wav
+|source=方块
+|description=破坏方块
+|id=block.itemframe.break
+|typeid=break
+|soundvolume
+|soundpitch=0.8-1
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=step.wood1.wav
+|sound2=step.wood2.wav
+|sound3=step.wood3.wav
+|sound4=step.wood4.wav
+|sound5=step.wood5.wav
+|sound6=step.wood6.wav
+|source=方块
+|description=挖掘方块
+|id=hit.wood
+|typeid=hit
+|soundvolume=0.22
+|soundpitch=0.5
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=block.itemframe.place1.wav
+|sound2=block.itemframe.place2.wav
+|sound3=block.itemframe.place3.wav
+|sound4=block.itemframe.place4.wav
+|source=方块
+|description=放置方块
+|id=block.itemframe.place
+|typeid=place
+|soundvolume
+|soundpitch=0.8-1
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Item Frame add item1.ogg
+|sound2=Item Frame add item2.ogg
+|soumd3=Item Frame add item3.ogg
+|sound4=Item Frame add item4.ogg
+|source=方块
+|description=填充物品
+|id=block.itemframe.add_item
+|typeid=block.itemframe.add_item
+|soundvolume
+|soundpitch=0.8-1
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Item Frame rotate item1.ogg
+|sound2=Item Frame rotate item2.ogg
+|sound3=Item Frame rotate item3.ogg
+|sound4=Item Frame rotate item4.ogg
+|source=方块
+|description=旋转物品
+|id=block.itemframe.rotate_item
+|typeid=block.itemframe.rotate_item
+|soundvolume
+|soundpitch=0.8-1
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Item Frame remove item1.ogg
+|sound2=Item Frame remove item2.ogg
+|sound3=Item Frame remove item3.ogg
+|sound4=Item Frame remove item4.ogg
+|source=方块
+|description=清空物品
+|id=block.itemframe.remove_item
+|typeid=block.itemframe.remove_item
+|soundvolume
+|soundpitch=0.8-1
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|firstcolumnname=物品
+|generatetranslationkeys=java
+|Item Frame
+|spritetype=item
+|nameid=item_frame}}
+{{ID table
+|generatetranslationkeys=java
+|Glow Item Frame
+|spritetype=item
+|nameid=glow_item_frame
+|foot=1}}
+{{ID table
+|firstcolumnname=实体
+|generatetranslationkeys=java
+|Item Frame
+|spritetype=entity
+|nameid=item_frame}}
+{{ID table
+|generatetranslationkeys=java
+|Glow Item Frame
+|spritetype=entity
+|nameid=glow_item_frame
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|firstcolumnname=物品展示框
+|generatetranslationkeys=bedrock
+|displayname=物品
+|spritename=item-frame
+|spritetype=item
+|nameid=frame}}
+{{ID table
+|displayname=方块
+|spritename=item-frame
+|spritetype=entity
+|nameid=frame
+|translationkey=tile.frame.name
+|form=block}}
+{{ID table
+|displayname=物品
+|spritename=glow-item-frame
+|spritetype=item
+|nameid=glow_frame
+|form=item}}
+{{ID table
+|displayname=方块
+|spritename=glow-item-frame
+|spritetype=entity
+|translationkey=tile.glow_frame.name
+|nameid=glow_frame
+|form=block
+|foot=1}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{exclusive|be|section=18}}
+{{Block states table|物品展示框,荧光物品展示框|only=be}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components|merge=1|item_frame|glow_item_frame}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+=== 实体数据 ===
+{{main|实体数据格式}}
+{{exclusive|java|section=1}}
+物品展示框拥有定义实体不同属性的实体数据。它们的实体ID是<code>item_frame</code>。
+
+{{/ED}}
+
+=== 方块实体数据 ===
+{{see also|基岩版存档格式/方块实体格式}}
+{{exclusive|bedrock|section=1}}
+
+== 成就 ==
+{{load achievements|map-room}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2012年8月16日|link={{tweet|Dinnerbone|235742974271700993}}|[[File:Item Frame (pre-release).png|32px]] [[File:Item Frame (item) (pre-release).png|32px]] [[Dinnerbone]]在Twitter中贴出了物品展示框的第一张截图。<ref>{{Tweet|Dinnerbone|235742974271700993}}</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w34a|[[File:Item Frame JE1 BE1.png|32px]][[File:Item Frame (item) JE1 BE1.png|32px]] 加入了物品展示框。
+|在[[多人游戏]]中试图放置物品展示框会导致服务器崩溃。}}
+|{{HistoryLine|||dev=12w34b|修复了上述漏洞。}}
+|{{HistoryLine|||dev=12w38a|物品展示框不再会在玩家远离20米以上时消失。}}
+|{{HistoryLine||1.7.2|dev=13w36a|被[[铁砧]]重命名后的物品会在准星指向时显示其名称。}}
+|{{HistoryLine|||dev=13w41a|物品展示框中的[[地图]]将会完整地覆盖方块的一个侧面，从此可实现多张连续地图的无缝展示，这会让没有探索的地图区域不可见。}}
+|{{HistoryLine|||dev=13w43a|[[File:Item Frame Map JE1 BE1.png|32px]] 未完全填充的地图放在物品展示框内会在其下面显示物品展示框的纹理。}}
+|{{HistoryLine||1.8|dev=14w04a|物品展示框中物品和方块可旋转的角度从90&deg;变成45&deg;
+|物品展示框现在可以被红石比较器检测内容物的旋转次数，并输出对应强度的红石信号。}}
+|{{HistoryLine|||dev=14w10a|多个物品展示框不能再在同一个方块侧面上堆叠放置。}}
+|{{HistoryLine||1.9|dev=15w41a|在[[末地船]]宝藏室会生成一个物品展示框，宝藏上面有[[潜影贝]]守护。物品展示框里面的物品是[[鞘翅]]。}}
+|{{HistoryLine|||dev=15w49a|物品展示框不能被闪电摧毁了。}}
+|{{HistoryLine|||dev=15w50a|为物品展示框加入了音效<code>entity.itemframe.add_item</code>、<code>entity.itemframe.break</code>、<code>entity.itemframe.place</code>、<code>entity.itemframe.remove_item</code> 和<code>entity.itemframe.rotate_item</code>。}}
+|{{HistoryLine||1.11|dev=16w32a|物品展示框的实体ID 从<code>ItemFrame</code>变为<code>item_frame</code>。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，物品展示框的数字ID是389。}}
+|{{HistoryLine|||dev=17w50a|物品展示框现在可以放置在地面和天花板上。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Item Frame JE2 BE2.png|32px]] [[File:Item Frame Map JE2 BE2.png|32px]] [[File:Item Frame (item) JE2 BE2.png|32px]] 更改了物品展示框的纹理。}}
+|{{HistoryLine||1.15|dev=19w38a|物品展示框现在有更暗的纹理（与窒息时的生物相同）。<ref>{{bug|MC-161283|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=19w39a|物品展示框现在有了正确的颜色。}}
+|{{HistoryLine||1.16|dev=20w10a|物品展示框有了2个新的NBT标签：{{cd|Invisible}}和{{cd|Fixed}}。}}
+|{{HistoryLine||1.17|dev=21w03a|[[File:Glow Item Frame JE1 BE3.png|32px]] [[File:Glow Item Frame (map) JE1 BE3.png|32px]] [[File:Glow Item Frame (item) JE1 BE1.png|32px]] 加入了荧光物品展示框。}}
+|{{HistoryLine||1.18|dev=21w41a|[[File:Item Frame (item) JE3 BE3.png|32px]] [[File:Glow Item Frame (item) JE2 BE2.png|32px]] 更改了物品展示框和荧光物品展示框的物品纹理。}}
+|{{HistoryLine||1.19|dev=22w15a|现在物品展示框的判定箱大小会随着地图的放入而变化。}}
+|{{HistoryLine|||dev=pre3|回退了22w15a中的更改。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.14.0|dev=build 1|[[File:Item Frame JE1 BE1.png|32px]] [[File:Item Frame Map JE1 BE1.png|32px]] [[File:Item Frame (item) JE1 BE1.png|32px]] 加入了物品展示框。
+|使用物品展示框时就会从实体类变成物品类。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|物品展示框现在会在末地船中自然生成。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Item Frame JE2 BE2.png|32px]] [[File:Item Frame Map JE2 BE2.png|32px]] [[File:Item Frame (item) JE2 BE2.png|32px]] 更改了物品展示框的纹理。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.4|物品展示框现在可以通过与制图师村民交易获得。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.9|物品展示框现在可以放置在方块的顶部和底部。}}
+|{{HistoryLine||1.16.210|exg=caves_and_cliffs_en|dev=1.16.210.59|[[File:Item Frame JE2 BE2.png|32px]] [[File:Item Frame Map JE2 BE2.png|32px]] [[File:Glow Item Frame (item) JE1 BE1.png|32px]] 加入了荧光物品展示框。}}
+|{{HistoryLine|||dev=1.16.210.60|由于崩溃而暂时移除了荧光物品展示框。}}
+|{{HistoryLine||1.16.220|exg=caves_and_cliffs_en|dev=1.16.220.50|重新加入了荧光物品展示框。}}
+|{{HistoryLine|||dev=1.16.220.52|[[File:Glow Item Frame BE2.png|32px]] [[File:Glow Item Frame (map) BE2.png|32px]] 由于一个漏洞，现在荧光物品展示框的展板使用数据更新方块的纹理。}}
+|{{HistoryLine||1.16.220|由于不存在“{{experiment|caves_and_cliffs_en|exg=1}}”选项，荧光物品展示框在该正式版中不可用。}}
+|{{HistoryLine||1.17.0|exg=caves_and_cliffs_en|dev=1.16.230.52|修复了1.16.220.52中的漏洞，荧光物品展示框的方块纹理恢复正常。}}
+|{{HistoryLine|||dev=1.17.0.50|[[File:Glow Item Frame JE1 BE3.png|32px]] [[File:Glow Item Frame (map) JE1 BE3.png|32px]] 更改了荧光物品展示框的方块纹理，以匹配{{el|je}}。
+|荧光物品展示框现在可以被红石比较器检测。}}
+|{{HistoryLine|||exg=none|dev=1.17.0.52|现在放置在荧光物品展示框中的[[地图]]会被增亮。
+|荧光物品展示框不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.20|[[File:Item Frame (item) JE3 BE3.png|32px]] [[File:Glow Item Frame (item) JE2 BE2.png|32px]] 更改了物品展示框和荧光物品展示框的物品纹理。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU9|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Item Frame JE1 BE1.png|32px]] [[File:Item Frame Map JE1 BE1.png|32px]] [[File:Item Frame (item) JE1 BE1.png|32px]] 加入了物品展示框。}}
+|{{HistoryLine||xbox=TU11|一个世界里同时存在的物品展示框的数目上限提高。添加了达到上限时的提示信息。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|展示框中物品和方块可旋转的角度从90°变成45°，并输出与角度对应的红石信号。}}
+|{{HistoryLine||xbox=TU43|xbone=CU33|ps3=1.36|psvita=1.36|ps4=1.36|wiiu=Patch 13|加入了物品展示框的音效。}}
+|{{HistoryLine||xbox=TU56|xbone=CU47|ps3=1.55|psvita=1.55|ps4=1.55|wiiu=Patch 26|switch=1.0.6|若物品展示框中的物品使用铁砧重命名过，其会在物品展示框上显示名字标签。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Item Frame JE2 BE2.png|32px]] [[File:Item Frame Map JE2 BE2.png|32px]] [[File:Item Frame (item) JE2 BE2.png|32px]] 更改了物品展示框的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Item Frame JE1 BE1.png|32px]] [[File:Item Frame Map JE1 BE1.png|32px]] [[File:Item Frame (item) JE1 BE1.png|32px]] 加入了物品展示框。}}
+}}
+
+== 你知道吗 ==
+* 物品展示框与[[末影箱]]、[[花盆]]一样，都是基于Reddit用户的创意。<ref>{{Tweet|dinnerbone|235747041286975488}}</ref>
+* 如果玩家通过{{Control|选取方块}}键获得物品展示框中的[[地图]]，则得到的地图的内容会与原地图同步更新，因为其[[地图#物品数据|编号]]是相同的。
+* {{in|je}}物品展示框是一种使用了方块[[模型]]的实体，它的边框使用的是白桦木板的纹理。
+* {{in|je}}由于物品展示框属于实体，[[旁观模式]]下的玩家可以进入物品展示框的视角。
+
+== 画廊 ==
+<gallery>
+File:Suggestion for itemframes.png|在Reddit中最初的建议加入花盆和物品展示框的图片
+File:12w34a.png|[[12w34a]]更新横幅中展示的物品展示框
+File:Slab Frame.png|一个位于台阶侧面的物品展示框
+File:ItemFrameBoxed.png|{{el|je}}中4个物品展示框挤在同一个方块空间内
+File:Item Frames Woodbase.png|物品展示框的边框纹理使用的是白桦木板
+File:Frame fireplace.png|Dinnerbone转推的一张“壁炉”截图<ref>{{Tweet|Dinnerbone|238696847496052736}}</ref>
+File:front-back-itemframe.png|物品展示框的正面和反面是一样的
+File:Item Frames Comparison.png|展示了铁剑的普通物品展示框（左）与荧光物品展示框（右）在黑暗中的对比
+File:Item Frames Map Comparison.png|展示了地图的普通物品展示框（左）与荧光物品展示框（右）在黑暗中的对比
+</gallery>
+
+=== 开发截图 ===
+<gallery>
+File:Item frame2.png|Dinnerbone发布的第一张关于物品展示框截图，展示了盔甲和武器
+File:Item frame3.png|Dinnerbone发布的第二张截图，展示了地图和指南针
+File:Item frame4.png|Dinnerbone发布的第三张截图
+File:FlowerPot.png|Dinnerbone发布的第四张截图
+File:Item frame1.png|Jeb发布的关于物品展示框的截图
+File:SOATPC.png|Dinnerbone放出的截图，展示了准星指向物品时物品自定义名字的显示<ref>{{Tweet|Dinnerbone|373390930461884416}}</ref>
+</gallery>
+
+== 参见 ==
+* [[画]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks}}
+{{Navbox items|Others}}
+{{Navbox entities|Non-mobs}}
+
+[[Category:功能方块]]
+
+[[cs:Rámeček]]
+[[de:Rahmen]]
+[[en:Item Frame]]
+[[es:Marco]]
+[[fr:Cadre]]
+[[hu:Eszköz keret]]
+[[it:Cornice]]
+[[ja:額縁]]
+[[ko:아이템 액자]]
+[[nl:Voorwerplijst]]
+[[pl:Ramka na przedmiot]]
+[[pt:Moldura]]
+[[ru:Рамка]]
+[[th:กรอบไอเทม]]
+[[uk:Рамка для предметів]]

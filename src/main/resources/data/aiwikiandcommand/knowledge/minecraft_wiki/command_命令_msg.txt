@@ -1,0 +1,94 @@
+# 页面: 命令/msg
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/msg
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|私信|私訊}}
+{{distinguish|命令/say|命令/tellraw}}
+{{Infobox command
+|name=msg<small>（{{el|je}}）</small>
+|alias=
+* {{cmd|tell}}
+* {{cmd|w}}
+|oplevel=0
+}}
+{{Infobox command
+|name=tell<small>（{{el|be}}）</small>
+|alias=
+* {{cmd|msg|link=none}}
+* {{cmd|w}}
+|oplevel=0
+}}
+
+将一条私聊消息发送给一个或多个玩家。
+
+== 语法 ==
+* '''Java版'''
+: <code>-{}-msg <targets> <message></code>
+: <code>-{}-tell <targets> <message></code>
+: <code>-{}-w <targets> <message></code>
+
+* '''基岩版'''
+: <code>tell <target: target> <message: message></code>
+: <code>msg <target: target> <message: message></code>
+: <code>w <target: target> <message: message></code>
+
+== 参数 ==
+{{argument|targets|entity|target: target|CommandSelector<Player>}}
+: 指定私聊消息的接收玩家。{{IN|java}}使用目标选择器要求[[权限等级]]不低于2。
+: {{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+{{argument|message|message|message: message|CommandMessage}}
+: 指定要发送的消息。
+: {{arg desc|je=message|be=CommandMessage}}
+: {{in|JE}}目标选择器只有在[[权限等级]]不低于2时才会被替换为选中的实体的名称。
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|命令执行权限低于2，但<code><targets></code>是目标选择器|fail|N/A}}
+{{Result table|<code><targets></code>或<code>target: target</code>无法选中至少一个在线玩家||fail}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器|N/A}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|指定的玩家数量}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|指定的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 私信告诉Alice“搞快点！”：{{cmd|msg Alice 搞快点！|link=none}}
+* 私信告诉自己附近5米内所有的玩家：{{cmd|1=msg @s @e[distance=..5,type=player]|link=none}}{{only|java}}{{cmd|1=msg @s @e[r=5,type=player]|link=none}}{{only|bedrock}}
+* 私信告诉Alice处于创造模式中的玩家：{{cmd|1=msg Alice @a[gamemode=creative]|link=none}}{{only|java}}{{cmd|1=msg Alice @a[m=1]|link=none}}{{only|bedrock}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.16_02|加入了{{cmd|msg|link=none}}、{{cmd|tell|link=none}}和{{cmd|w|link=none}}。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19|dev=22w18a|{{cmd|msg|link=none}}、{{cmd|tell|link=none}}和{{cmd|w|link=none}}命令发出的聊天信息现在会被签署。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|msg|link=none}}、{{cmd|tell|link=none}}和{{cmd|w|link=none}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.100|dev=1.21.100.20|现在{{cmd|msg|link=none}}、{{cmd|tell|link=none}}和{{cmd|w|link=none}}会在未指定{{cd|message: message}}时报错。<ref>{{bug|MCPE-185429|||Fixed}}</ref>}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/msg]]
+[[en:Commands/msg]]
+[[es:Comandos/msg]]
+[[fr:Commandes/msg]]
+[[ja:コマンド/msg]]
+[[nl:Opdrachten/msg]]
+[[pt:Comandos/msg]]
+[[ru:Команды консоли/msg]]

@@ -1,0 +1,79 @@
+# 页面: 命令/camerashake
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/camerashake
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock|education}}
+{{Infobox command
+|name=camerashake
+|oplevel=1
+|cheat=y
+}}
+对玩家视野施以一定强度和时间的摇晃效果（若玩家在无障碍设置中禁用了视角摇晃，则不会看到此效果）。
+
+== 语法 ==
+: <code>camerashake add <player: target> [intensity: float] [seconds: float] [shakeType: CameraShakeType]</code>
+:: 给玩家添加视野摇晃效果。
+: <code>camerashake stop [player: target]</code>
+:: 停止视野摇晃。
+
+== 参数 ==
+{{argument|be=1|player: target|CommandSelector<Player>}}
+: {{arg desc|type=players|be=player}}
+: 指定要施以视野摇晃效果的玩家。如果未指定，默认为命令执行者。
+
+{{argument|be=1|intensity: float|float}}
+: {{arg desc|be=float}}必须是0到4以内的数（包含0和4）。
+: 指定视野摇晃的强度。
+
+{{argument|be=1|seconds: float|float}}
+: {{arg desc|be=float}}
+: 指定视野摇晃的时长。以秒为单位。
+
+{{argument|be=1|shakeType: CameraShakeType|CameraShakeType}}
+: 必须为<code>positional</code>（坐标摇晃）或<code>rotational</code>（角度摇晃）。
+: 指定视野摇晃方向的种类。
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|{{cd|intensity: float}}小于0或大于4||fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|被选中的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+对最近的玩家施以5秒强度为0.25的坐标视野摇晃。
+* <code>/camerashake add @p 0.25 5 positional</code>
+
+对最近的玩家施以5秒强度为0.25的角度视野摇晃。
+* <code>/camerashake add @p 0.25 5 rotational</code>
+
+<gallery>
+File:Minecraft Bedrock Positional Camerashake.gif|坐标视野摇晃的示例
+File:Minecraft Bedrock Rotational Camerashake.gif|角度视野摇晃的示例
+</gallery>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.100|dev=1.16.100.57|加入了{{cmd|camerashake|link=none}}命令。}}
+|{{HistoryLine|||dev=1.16.100.59|加入了选择摇晃类型的功能。}}
+|{{HistoryLine||1.16.210|dev=1.16.210.54|加入了停止视野摇晃的命令。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/camerashake]]
+[[en:Commands/camerashake]]
+[[es:Comandos/camerashake]]
+[[ja:コマンド/camerashake]]
+[[pt:Comandos/camerashake]]
+[[ru:Команды консоли/camerashake]]

@@ -1,0 +1,285 @@
+# 页面: 重质测重压力板
+# 来源: https://zh.minecraft.wiki/w/%E9%87%8D%E8%B4%A8%E6%B5%8B%E9%87%8D%E5%8E%8B%E5%8A%9B%E6%9D%BF
+# 分类: 
+# 抓取时间: 2026-07-14 17:37:17
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|image=Heavy Weighted Pressure Plate.png
+|invimage=Heavy Weighted Pressure Plate
+}}
+
+'''重质测重压力板（Heavy Weighted Pressure Plate）'''是一种可以用来探测站在上方[[实体]]数量的[[方块]]。
+
+== 生成 ==
+重质测重压力板不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A2=Iron Ingot
+|B2=Iron Ingot 
+|Output= Heavy Weighted Pressure Plate
+|type=Redstone
+|foot=1
+}}
+
+== 破坏 ==
+重质测重压力板的合适工具是镐。
+
+{{Breaking table}}
+
+重质测重压力板被破坏后会掉落自身。
+
+== 用途 ==
+重质测重压力板必须{{ctrl|放置}}于[[方块支撑形状]]上表面中心完整或边缘完整的方块上方（包括[[漏斗]]、[[栅栏]]、[[侦测器]]等），不能放置于任何方块的侧面与底部。
+
+尝试在无效的表面放置重质测重压力板会使其附着到这块空间内最近的有效附着表面（如有）。如尝试在地面上的栅栏侧面放置重质测重压力板会使其附着到栅栏周围地面方块的顶部。
+
+当重质测重压力板附着的方块变动（移动、破坏、替代等），不再允许附着时或有[[活塞]]试图推动它或将方块推入其位置时，重质测重压力板会掉落为方块物品。
+
+[[沙子]]或[[沙砾]]这类受重力影响的方块正下方为重质测重压力板时不会开始下落。下落到重质测重压力板的位置时，它会掉落为方块物品。
+
+=== 红石元件 ===
+{{see also|红石元件}}
+{| class="wikitable floatright" id="behavior" style="text-align: center;"
+|+ 重质测重压力板信号强度与所需实体数对照表
+! 信号强度 !! 实体数量
+|-
+| 0 || 0
+|-
+| 1 || 1–10
+|-
+| 2 || 11–20
+|-
+| 3 || 21–30
+|-
+| 4 || 31–40
+|-
+| 5 || 41–50
+|-
+| 6 || 51–60
+|-
+| 7 || 61–70
+|-
+| 8 || 71–80
+|-
+| 9 || 81–90
+|-
+| 10 || 91–100
+|-
+| 11 || 101–110
+|-
+| 12 || 111–120
+|-
+| 13 || 121–130
+|-
+| 14 || 131–140
+|-
+| 15 || 141+
+|}
+
+==== 开启 ====
+重质测重压力板可以被{{only|je|for=除了[[蝙蝠]]以外的}}几乎所有实体（包括[[生物]]、[[物品（实体）|物品]]、[[箭]]、[[经验球]]、[[浮漂]]等）开启。
+
+重质测重压力板上方（具体为在重质测重压力板所在方块的（0.125,0,0.125）到（0.875,0.25,0.875）这个长方体区域内）有符合要求的实体时（即使实体的碰撞箱只有一小部分在其中），重质测重压力板会被'''开启'''。
+
+重质测重压力板开启时输出的信号强度取决于实体数量（见'''重质测重压力板信号强度与所需实体数对照表'''），不随实体类型而变化，而只是检测实体数量。堆叠的物品是单个实体，无论堆叠多少物品。当同种多个物品掉在一个重质测重压力板上时，它们最初可能是单独的实体，重质测重压力板将单独计数，但当它们堆叠后，信号强度可能会下降。
+
+重质测重压力板每10游戏刻更新一次状态。
+
+==== 行为 ====
+当开启时重质测重压力板会：
+* 激活毗邻的[[红石粉]]，四周背对重质测重压力板的[[红石比较器]]或[[红石中继器]]。
+* 强充能重质测重压力板下方任何[[红石导体]]至相应等级。
+* 激活毗邻的[[红石电路#机械元件|机械元件]]。
+
+重质测重压力板没有碰撞箱，不会阻碍实体移动。重质测重压力板附着的方块能在它下面提供一个固体阻碍（让生物走过，让物体落在上面等等），但重质测重压力板放置在碰撞箱较小（如栅栏）的方块上时，实体可能在开启重质测重压力板时穿过重质测重压力板。因此重质测重压力板可以用来探测实体而不阻碍它们的运动。
+
+重质测重压力板关闭时高0.0625个方块（方块的{{frac|1|16}}），开启时高0.03125个方块（方块的{{frac|1|32}}），但它没有碰撞箱，所以不会影响它上方的实体（如重质测重压力板上的玩家其实是站在它下面的方块上）。
+
+== 音效 ==
+{{Sound table/Block/Iron
+|suffix-je=
+{{Sound table
+|sound=Click pitch0.75.ogg
+|subtitle={{tp|subtitles.block.pressure_plate.click}}
+|source={{tp|soundCategory.block}}
+|description=重质测重压力板取消激活
+|id=block.metal_pressure_plate.click_off
+|translationkey=subtitles.block.pressure_plate.click
+|volume=0.3
+|pitch=0.65}}
+{{Sound table
+|sound=Click pitch0.9.ogg
+|subtitle={{tp|subtitles.block.pressure_plate.click}}
+|source={{tp|soundCategory.block}}
+|description=重质测重压力板激活
+|id=block.metal_pressure_plate.click_on
+|translationkey=subtitles.block.pressure_plate.click
+|volume=0.3
+|pitch=0.75
+|foot=1}}
+|prefix-be=
+{{Sound table
+|bedrock=1
+|sound=-
+|source=方块
+|description=方块作为物品使用时发出的音效
+|id=use.anvil
+|typeid=item.use.on
+|soundvolume
+|soundpitch=1.8
+|sounddistance
+}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=Click pitch0.75.ogg
+|source=方块
+|description=重质测重压力板激活
+|id=click_on.metal_pressure_plate
+|typeid=pressure_plate.click_on
+|soundvolume=0.3
+|soundpitch=0.75
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Click pitch0.75.ogg
+|source=方块
+|description=重质测重压力板取消激活
+|id=click_off.metal_pressure_plate
+|typeid=pressure_plate.click_off
+|soundvolume=0.3
+|soundpitch=0.75
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|Heavy Weighted Pressure Plate
+|generatetranslationkeys=java
+|spritetype=block
+|nameid=heavy_weighted_pressure_plate
+|showblocktags=je
+|blocktags={{GameTag|blocks|heavy_weighted_pressure_plate}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|Heavy Weighted Pressure Plate
+|generatetranslationkeys=bedrock
+|spritetype=block
+|nameid=heavy_weighted_pressure_plate
+|showblocktags=be
+|blocktags={{GameTagBE|block|heavy_weighted_pressure_plate}}
+|foot=1
+}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+压力板的数据值决定了其是否被开启：
+
+{{:压力板/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w01a|[[File:Heavy Weighted Pressure Plate JE1 BE1.png|32px]] 加入了重质测重压力板。
+|{{InvSprite|Heavy Weighted Pressure Plate Revision 1}} 重质测重压力板在物品栏中有更厚的模型。}}
+|{{HistoryLine||1.7.2|dev=13w36a|重新设置了重质测重压力板输出强度。
+|现在允许所有实体触发重质测重压力板。}}
+|{{HistoryLine||1.8|dev=正式版|重质测重压力板有自己的物品名称了。<ref>{{bug|MC-66247|||Fixed}}</ref>}}
+|{{HistoryLine||1.9|dev=15w31a|{{inventory icon|Heavy Weighted Pressure Plate Revision 1}} 重质测重压力板在物品栏中看起来更薄更靠下了。}}
+|{{HistoryLine|||dev=15w43a|重质测重压力板有了不同的、音调稍高的开启声，这使它们不再与石头压力板的声音相匹配。}}
+|{{HistoryLine|||dev=15w46a|生物不再生成于重质测重压力板上。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，重质侧重压力板的数字ID为148。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Heavy Weighted Pressure Plate JE2 BE2.png|32px]] 更改了重质测重压力板的纹理。}}
+|{{HistoryLine||1.14.3|dev=pre3|重质测重压力板现在可以放在[[铁栏杆]]和[[玻璃板]]上了。}}
+|{{HistoryLine||1.21.4|dev=24w44a|现在重质测重压力板不再需要木镐或品质更好的镐来挖掘。}}
+|{{HistoryLine||1.21.5|dev=25w02a|更改了重质测重压力板的破坏、放置、在上方移动、摔落和打击音效。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|[[File:Heavy Weighted Pressure Plate JE1 BE1.png|32px]] 加入了压力板和重质测重压力板。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|重质测重压力板现在可以含水。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Heavy Weighted Pressure Plate JE2 BE2.png|32px]] 更改了重质测重压力板的纹理。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.21|更改了重质测重压力板的激活和取消激活音效。}}
+|{{HistoryLine||1.19.80|exg=none|dev=1.19.80.20|再次更改了重质测重压力板的激活和取消激活音效以匹配{{el|je}}。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.22|重质测重压力板的英文名称由“Weighted Pressure Plate (Heavy)”更改为“Heavy Weighted Pressure Plate”，以匹配{{el|je}}。}}
+|{{HistoryLine|||dev=1.21.50.24|现在重质测重压力板不再需要木镐或品质更好的镐挖掘。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.25|更改了重质测重压力板的破坏、放置、在上方移动、摔落和打击音效。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|[[File:Heavy Weighted Pressure Plate JE1 BE1.png|32px]] 加入了重质测重压力板。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Heavy Weighted Pressure Plate JE2 BE2.png|32px]] 更改了重质测重压力板的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Heavy Weighted Pressure Plate JE1 BE1.png|32px]] 加入了重质测重压力板。}}
+}}
+
+=== 1.7.2之前的条件 ===
+在[[Java版1.7.2]]之前，重质测重压力板只能被[[掉落物]]开启，并且需要更多的掉落物数量。
+
+{| class="wikitable" style="text-align:center"
+|+ 所需实体的测重压力板信号强度表
+! rowspan ="2"| 信号强度 !! colspan = "3"|实体数量
+|-
+| 方块数量
+| 堆叠数量
+|-
+| 1  || 1–42    || 1方块-42方块
+|-
+| 2  || 43–85   || 43方块–1组21方块
+|-
+| 3  || 86–128  || 1组22方块–'''2组'''
+|-
+| 4  || 129–170 || 2组1方块–2组42方块
+|-
+| 5  || 171–213 || 2组43方块–3组21方块
+|-
+| 6  || 214–256 || 3组22方块–'''4组'''
+|-
+| 7  || 257–298 || 4组1方块–4组42方块
+|-
+| 8  || 299–341 || 4组43方块–5组21方块
+|-
+| 9  || 342–384 || 5组22方块–'''6组'''
+|-
+| 10 || 385–426 || 6组1方块–6组42方块
+|-
+| 11 || 427–469 || 6组43方块–7组21方块
+|-
+| 12 || 470–512 || 7组22方块–'''8组'''
+|-
+| 13 || 513–554 || 8组1方块–8组42方块
+|-
+| 14 || 555–597 || 8组43方块–9组21方块
+|-
+| 15 || 598+    || 9组22方块+
+|}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|building blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:机制]]
+
+[[Category:红石机制]]
+
+[[en:Heavy Weighted Pressure Plate]]
+[[fr:Plaque de pression pondérée lourde]]
+[[ja:重量用感圧板]]
+[[ko:중형 무게 압력판]]
+[[pt:Placa de Pressão de Pesagem Pesada]]

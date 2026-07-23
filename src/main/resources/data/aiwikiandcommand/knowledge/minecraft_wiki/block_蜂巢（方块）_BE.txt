@@ -1,0 +1,25 @@
+# 页面: 蜂巢（方块）/BE
+# 来源: https://zh.minecraft.wiki/w/%E8%9C%82%E5%B7%A2%EF%BC%88%E6%96%B9%E5%9D%97%EF%BC%89/BE
+# 分类: 
+# 抓取时间: 2026-07-14 17:35:39
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 方块实体数据
+** {{nbt|list|bees|required=1|existonsave=1}}：巢内目前存在的蜜蜂信息。此项方块实体数据会被视为数据组件[[数据组件#bees|<code>bees</code>]]。
+*** {{nbt|compound}}：一只蜜蜂的数据。
+**** {{nbt|compound|entity_data}}：蜜蜂的部分实体数据。如果保存的实体数据不是带有{{TagLink|entity|beehive_inhabitors}}的实体（默认为蜜蜂），则尝试放出此实体时实体不会被生成，其数据会被删除。
+***** {{nbt|string|id|required=1|existonsave=1}}：实体类型。
+***** 见[[实体数据格式]]。下列标签不会被保存，也不会被加载：{{nbt|short|Air}}、{{nbt|compound|drop_chances}}、{{nbt|compound|equipment}}、{{nbt|compound|Brain}}、{{nbt|bool|CanPickUpLoot}}、{{nbt|short|DeathTime}}、{{nbt|float|fall_distance}}、{{nbt|bool|FallFlying}}、{{nbt|short|Fire}}、{{nbt|int|HurtByTimestamp}}、{{nbt|short|HurtTime}}、{{nbt|bool|LeftHanded}}、{{nbt|list|Motion}}、{{nbt|bool|NoGravity}}、{{nbt|bool|OnGround}}、{{nbt|int|PortalCooldown}}、{{nbt|list|Pos}}、{{nbt|list|Rotation}}、{{nbt|int array|sleeping_pos}}、{{nbt|int|CannotEnterHiveTicks}}、{{nbt|int|TicksSincePollination}}、{{nbt|int|CropsGrownSincePollination}}、{{nbt|int-array|hive_pos}}、{{nbt|list|Passengers}}、{{nbt|int-array}}{{nbt|compound|leash}}、{{nbt|int-array|UUID}}。
+**** {{nbt|int|min_ticks_in_hive|required=1|existonsave=1}}：蜜蜂会在巢内滞留的最短时间。
+**** {{nbt|int|ticks_in_hive|required=1|existonsave=1}}：蜜蜂在巢内已滞留的时间。
+** {{nbt|int-array|flower_pos}}：储存花的位置，以便其他蜜蜂能够找到。内部的三个整数分别代表了位置的XYZ坐标值。
+</div><noinclude>
+[[Category:方块实体页面]]
+[[en:Beehive#Block data]]
+[[ja:養蜂箱/BE]]
+[[ko:벌통/BE]]
+[[pt:Colmeia/BE]]
+[[ru:Улей/БС]]
+[[uk:Вулик#Дані блока]]
+</noinclude>

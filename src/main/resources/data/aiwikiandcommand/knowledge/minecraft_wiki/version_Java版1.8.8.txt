@@ -1,0 +1,109 @@
+# 页面: Java版1.8.8
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.8.8
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:58
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=1.8.8
+|image=Java Edition 1.8.8 Simplified.png\Java Edition 1.8.8 Traditional.png
+|edition=Java
+|date=2015年7月28日
+|jsonhash=389ee2576f1c7ac6efe0edcec79f2e465d2a5278
+|clienthash=0983f08be6a4e624f5d85689d1aca869ed99c738
+|serverhash=5fafba3f58c40dc51b5c3ca72a98f62dfdae1db7
+|exehash=6c95fb4d56a7873ca30385640c546d89c1478b71
+|prevparent=1.8
+|prev=1.8.7
+|next=1.8.9
+|nextparent=1.9
+}}
+
+'''1.8.8'''是{{el|je}}的一次次要更新，发布于2015年7月28日<ref>{{cite|url=http://mojang.com/2015/07/minecraft-1-8-8-release/|archive-url=1|archive=1|title=Minecraft 1.8.8 Released|author=Dinnerbone|website=Mojang.com|date=Jul 27, 2015}}</ref>。它既修复了部分漏洞，又提高了有关[[Minecraft Realms]]的安全性能。此版本兼容1.8到1.8.7的服务端。
+
+1.8.8的预发布版发布于2015年7月27日<ref name="tweet_1.8.8">{{tweet|Dinnerbone|625636815941275648|Minecraft 1.8.8 pre-release is available for testing in the launcher! Not much to say. Bug fixes and improvements! https://mojang.com/2015/07/minecr …|Jul 27, 2015}}</ref>，但有着和正式版相同的更新内容。
+
+== 新内容 ==
+=== 常规 ===
+'''[[Realms]]'''
+* 由[http://youtube.com/SethBling SethBling]为[[Minecraft Realms]]加入了迷你游戏'''Splatter''' 。<ref>{{tweet|marc_irl|625634358381166593|"Splatter", by @SethBling, is now available as a Minecraft Realms minigame! https://www.youtube.com/watch?v{{=}}cG-asw …|Jul 27, 2015}}</ref>
+** “SethBling”在Wii U game之后有了最初的命名'''Splatoon'''，后因版权问题被Marc重命名。<ref>{{tweet|marc_irl|625635639703269376|Yes I renamed the map Splatter. For what I hoped were obvious reasons. :p|Jul 27, 2015}}</ref>
+* 加入了用于制作自定义地图和小游戏的泛Realm资源包。
+
+== 更改 ==
+=== 方块 ===
+'''[[旗帜]]'''
+* 一组[[旗帜]]中现在只包含16个旗帜。
+
+=== 常规 ===
+'''[[资源包]]'''
+* 如果资源包的版本不是{{cd|1}}，那么显示时就会出现误差。
+** 与版本不匹配的资源包现在需要用户确认才能使用。
+*** 被选择在不同版本的资源包现在会自动选择。
+
+== 修复 ==
+{{fixes|fixedin=1.8.8|prefix=Minecraft|showdesc=1
+|;1.8前正式版的漏洞
+|9739|{{cmd|say|link=none}}命令中对无效的选择器的处理有问题。
+|27699|不能使用命令方块得到染色皮革盔甲。
+|31158|在松开鼠标之前松开{{key|control}}键，表现的仍然是鼠标被按住时的样子（仅限Mac）。
+|31569|生成被堆叠的实体时，可以生成不合适的错误信息。
+|33450|不能在255格高的地方放置方块。
+|38041|在通过末地传送门时吃东西会导致在后面的鸣谢名单和游玩时，声音会一直播放。
+|43012|玻璃板与其自身的纹理之间出现斑驳（Z-fighting）现象。
+|46616|信标光束闪烁错误。
+|;1.8的漏洞
+|47585|脱轨的矿车会沉入地下。
+|47854|小牛无故进入一格高的地方，并窒息而亡。
+|48881|不能放置具有NBT数据的头颅。
+|51447|平滑光照下，自定义的3D模型有光照漏洞。
+|57677|世界生成时，水或熔岩的“泉眼”不会更新。
+|65621|盔甲架在掉落虚空时不会被清除。
+|66193|盔甲架落地的声音听起来像玩家落地的声音。
+|71938|{{cmd|testfor|link=none}}命令不能为队伍测试<code>ArmorStand</code>。
+|72554|放置矿车后，其位置错误。
+|73110|Realms的描述和名字不支持Unicode字符。
+|73731|<code>SkullOwner</code>为空的玩家头颅导致严重的渲染问题。
+|74471|服务器列表不能正确关闭已打开的连接。
+|76907|骑马时头向上能够够到的距离太短。
+|;1.8.1的漏洞
+|72217|<code>ownerName</code>标签不能被{{cmd|entitydata|link=none}}影响。
+|73269|1.8.1-pre2中掉落物的动画有问题。
+|74580|<code>Marker</code>标签不再能使得碰撞箱变得更小。
+|74729|漏斗的优先级有变化。
+|;1.8.2的漏洞
+|75908|以掉落物、展示框中放置等形式存在的自定义物品的模型都被显示的很小。
+|;1.8.3的漏洞
+|78967|玩家只能设置3个鼠标按键。
+|80817|服务器不能启动（关于OSHI以及JNA库）：<code>java.lang.UnsatisfiedLinkError</code>。
+|;1.8.7的漏洞
+|81080|客户端资源包会在断开连接时重载。
+|;hotfix
+|86894|当重置世界时，Realms备份会被替换。
+|87317|Realms中鼠标移到玩家上时，显示的不是应该显示的信息。
+|89108|Realms服务器的备份功能有漏洞。
+|91575|Realms：<code>Operation in progress in the server - 403</code>。
+|92837|Minecraft Realm：<code>Operation in progress 403</code>。
+|;private
+|75236|使用雪球击中身着荆棘盔甲的玩家导致游戏崩溃。<!--此漏洞本来不是未公开漏洞，但是根据2021.01.24时在漏洞追踪器的查询结果，此漏洞不公开或已被删除，且无法从编号相邻的漏洞上推知影响版本，故将此漏洞放入“未公开漏洞”中。(By Anterdc99, 21.01.24）-->
+|81018|潜在的服务器崩溃攻击。
+|81405|客户端崩溃攻击。
+|82629|可以利用旗帜进行卡顿攻击。
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:1.8.8]]
+[[en:Java Edition 1.8.8]]
+[[es:Java Edition 1.8.8]]
+[[fr:Édition Java 1.8.8]]
+[[hu:1.8.8]]
+[[it:Java Edition 1.8.8]]
+[[ja:Java Edition 1.8.8]]
+[[pl:1.8.8]]
+[[pt:Edição Java 1.8.8]]
+[[ru:1.8.8 (Java Edition)]]

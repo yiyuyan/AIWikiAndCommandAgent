@@ -1,0 +1,1087 @@
+# 页面: 选项
+# 来源: https://zh.minecraft.wiki/w/%E9%80%89%E9%A1%B9
+# 分类: Java版独有特性, Minecraft, UI, 实验性内容/矿车改进, 快照转换内容
+# 抓取时间: 2026-07-14 17:37:09
+# 原始 Wikitext 内容:
+
+{{for|{{el|be}}中功能相似的界面|设置|中国版中功能相似的界面|中国版:设置}}
+{{exclusive|je}}
+
+{{el|je}}的用户环境可以通过'''选项（Options）'''菜单配置。部分额外选项只能够通过{{filename|[[options.txt]]}}手动配置。
+
+== {{tp|options.title}}{{anchor|options}} ==
+在主菜单中可改变的选项：
+{| class="wikitable" border="1" width="100%" data-description="主菜单选项"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|options.fov}}
+| 控制屏幕中游戏世界的可见视角的值。
+
+在Minecraft中，视场角值表示玩家没有处在冲刺、飞行或状态效果等的情况下获得的垂直视场角度数。
+
+请注意，其他游戏的视场角设置可能代表不同的角度，这意味着在不同游戏中使用相同的视场角值可能会产生不同的结果。
+
+下表显示了Minecraft的视场角设置如何影响如何在不同的显示纵横比下影响水平视场角。
+{| class="wikitable"
+|+
+! rowspan="2" | 显示名称（默认为设置值）
+! rowspan="2" | 设置值（竖直视场角）
+! colspan="2" | 产生的水平视场角
+|-
+!长宽比
+4:3
+!长宽比
+16:9
+|-
+| rowspan="4" |
+|30
+|39.3°
+|50.9°
+|-
+|40
+|51.8°
+|65.8°
+|-
+|50
+|63.7°
+|79.3°
+|-
+|60
+|75.2°
+|91.5°
+|-
+|'''{{tp|options.fov.min}}'''
+|'''70'''
+|'''86.1°'''
+|'''102.4°'''
+|-
+| rowspan="3" |
+|80
+|96.4°
+|112.3°
+|-
+|90
+|106.3°
+|121.3°
+|-
+|100
+|115.6°
+|129.5°
+|-
+|'''{{tp|options.fov.max}}'''
+|'''110'''
+|'''124.6°'''
+|'''137.0°'''
+|}
+| style="text-align: center;" | {{tp|options.fov.min}}（70）
+|}
+
+== {{tp|options.worldOptions.button}}{{anchor|worldOptions}} ==
+仅在世界中可见；在[[主菜单]]时，将显示{{tp|options.online.title}}。
+{| class="wikitable" border="1" width="100%" data-description="worldOptions"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|options.difficulty}}
+| 可将[[难度]]设置为{{tp|options.difficulty.peaceful}}、{{tp|options.difficulty.easy}}、{{tp|options.difficulty.normal}}和{{tp|options.difficulty.hard}}。
+
+如果点击锁定图标并确认，则该世界的难度无法再更改，除非使用[[命令]]。（注意，在[[极限模式]]中不能改变难度。在服务器中，只能够通过命令或修改{{filename|[[server.properties]]}}文件更改难度。）
+
+| style="text-align: center;" | 随[[世界]]的设定而变化，在创建新的世界时默认为{{tp|options.difficulty.normal}}。 
+|-
+| style="font-size: larger;" | {{tp|editGamerule.inGame.button}}
+| 打开“{{tp|editGamerule.title}}”屏幕。
+
+可以通过“{{tp|editGamerule.title}}”屏幕中的选项来修改该世界的[[游戏规则]]。游戏规则的分类有“{{tp|gamerule.category.chat}}”、“{{tp|gamerule.category.drops}}”、“{{tp|gamerule.category.misc}}”、“{{tp|gamerule.category.mobs}}”、“{{tp|gamerule.category.player}}”、“{{tp|gamerule.category.spawning}}”、“{{tp|gamerule.category.updates}}”。
+| style="text-align: center;" | N/A
+|-
+| style="font-size: larger;" | {{tp|restrictions_screen.button}}
+| 打开“{{tp|restrictions_screen.title}}”屏幕。
+
+玩家可以在此查看自己聊天功能的限制。
+* 选项“{{tp|options.chat.visibility}}”为“{{tp|options.chat.visibility.hidden}}”时，玩家无法发送消息、接收玩家消息、发送命令和接收系统消息。
+* 选项“{{tp|options.chat.visibility}}”为“{{tp|options.chat.visibility.system}}”时，玩家无法发送消息和接收玩家消息。
+* 启动参数<code>disableChat</code>为<code>true</code>时，玩家无法发送消息和接收玩家消息。
+* 档案属性<code>onlineChat</code>为<code>false</code>时，玩家无法发送消息和接收玩家消息。
+| style="text-align: center;" | 随客户端设置、启动器设置和玩家档案而变化
+|}
+
+== {{tp|options.online.title}}{{anchor|online}} ==
+仅在主菜单或服务器中可见。在世界中时，将显示“{{tp|options.worldOptions.button}}”。
+{| class="wikitable" border="1" width="100%" data-description="在线选项"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|options.friendsList}}
+| 启用[[好友列表]]。仅在[[主菜单]]中可见。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.allowFriendRequests}}
+| 允许其他玩家向当前玩家发送好友请求。仅在[[主菜单]]中可见。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.inGameNotification}}
+| 在世界内显示好友列表通知。仅在[[主菜单]]中可见。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.sharePresence}}
+| 控制在[[好友列表]]中向好友展示的信息。仅在[[主菜单]]中可见。
+* '''{{tp|options.sharePresence.all}}：'''向好友展示你的在线状态及游戏活动。
+* '''{{tp|options.sharePresence.limited}}：'''只向好友展示你的在线状态。
+* '''{{tp|options.sharePresence.none}}：'''始终向好友展示“{{tr|离线|離線|離線}}”状态。
+| style="text-align: center;" | {{tp|options.sharePresence.all}}
+|-
+| style="font-size: larger;" | {{tp|options.online.xboxSettings}}
+| 打开Microsoft account privacy和online safety settings。仅在[[主菜单]]中可见。
+| style="text-align: center;" | N/A
+|-
+| style="font-size: larger;" | {{tp|options.realmsNotifications}}
+| 切换Realms通知。仅在[[主菜单]]中可见；当在[[世界]]或[[服务器]]中时，会显示难度选项。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.allowServerListing}}
+| 允许服务器将自己的ID公开展示在在线玩家列表中。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.difficulty.online}}
+| 显示当前服务器难度。仅在服务器中可见。
+| style="text-align: center;" | 随服务器上的设定而变化。
+|}
+
+== {{tp|options.skinCustomisation.title}}{{anchor|skinCustomisation}} ==
+{| class="wikitable" border="1" width="100%" data-description="自定义皮肤选项"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|options.modelPart.cape}}
+| 展示/隐藏[[披风]]。若设置为“{{tp|options.off}}”，则带有披风纹理的[[鞘翅]]也会停用。
+| style="text-align: center;" rowspan="7" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.modelPart.jacket}}
+| 展示/隐藏第二层皮肤。
+|-
+| style="font-size: larger;" | {{tp|options.modelPart.left_sleeve}}
+| 展示/隐藏左臂的第二层皮肤。
+|-
+| style="font-size: larger;" | {{tp|options.modelPart.right_sleeve}}
+| 展示/隐藏右臂的第二层皮肤。
+|-
+| style="font-size: larger;" | {{tp|options.modelPart.left_pants_leg}}
+| 展示/隐藏左脚的第二层皮肤。
+|-
+| style="font-size: larger;" | {{tp|options.modelPart.right_pants_leg}}
+| 展示/隐藏右脚的第二层皮肤。
+|-
+| style="font-size: larger;" | {{tp|options.modelPart.hat}}
+| 展示/隐藏头部的第二层皮肤。
+|-
+| style="font-size: larger;" | {{tp|options.mainHand}}
+| 切换主要使用的手是左手还是右手。
+| style="text-align: center;" | {{tp|options.mainHand.right}}
+|}
+
+== {{tp|options.sounds.title}}{{anchor|sounds}} ==
+{| class="wikitable" border="1" width="100%" data-description="音乐和声音选项"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|soundCategory.master}}
+| 所有声音的音量。
+| style="text-align: center;" rowspan="11" | 100%
+|-
+| style="font-size: larger;" | {{tp|soundCategory.music}}
+| [[音乐]]的音量。若设置为“关”，当前播放的音乐会停止。
+|-
+| style="font-size: larger;" | {{tp|soundCategory.record}}
+| [[音符盒]]和[[唱片机]]播放音效与音乐的音量。
+|-
+| style="font-size: larger;" | {{tp|soundCategory.weather}}
+| 雨声和雷声的音量。
+|-
+| style="font-size: larger;" | {{tp|soundCategory.block}}
+| 方块音量（铁砧、箱子、门等）。
+|-
+| style="font-size: larger;" | {{tp|soundCategory.hostile}}
+| 敌对[[生物]]的声音（[[史莱姆]]、[[岩浆怪]]除外）。
+|-
+| style="font-size: larger;" | {{tp|soundCategory.neutral}}
+| 友好[[生物]]、[[史莱姆]]、[[岩浆怪]]和非生物（[[矿车]]等）的声音。
+|-
+| style="font-size: larger;" | {{tp|soundCategory.player}}
+| 玩家的音量（丢/取物品、受伤音效等）。
+|-
+| style="font-size: larger;" | {{tp|soundCategory.ambient}}
+| 出入[[水]]和[[烟花火箭]]等[[环境音效]]的音量。
+|-
+| style="font-size: larger;" | {{tp|soundCategory.voice}}
+| Minecraft复述功能的音量。
+|-
+| style="font-size: larger;" | {{tp|soundCategory.ui}}
+| 界面交互操作音效（按钮单击等）的音量。
+|-
+| style="font-size: larger;" | {{tp|options.audioDevice}}
+| 切换音频输出设备。
+| style="text-align: center;" | {{tp|options.audioDevice.default}}
+|-
+| style="font-size: larger;" | {{tp|options.showSubtitles}}
+| 开启或关闭[[字幕]]。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.directionalAudio}}
+| 开启或关闭基于HRTF算法的定向环绕音频。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.music_frequency}}
+| 调整游戏世界中音乐连续播放的最大间隔。
+* '''{{tp|options.music_frequency.default}}'''：{{convert|20|分|}}
+* '''{{tp|options.music_frequency.frequent}}'''：{{convert|10|分|}}
+* '''{{tp|options.music_frequency.constant}}'''：无间隔（0游戏刻）
+| style="text-align: center;" | {{tp|options.music_frequency.default}}
+|-
+| style="font-size: larger;" |{{tp|options.musicToast}}
+| 开启或关闭显示目前播放歌曲的弹窗。歌曲开始播放或在游戏菜单中播放时，会在左上角显示[[弹窗]]。
+* '''{{tp|options.musicToast.never}}'''：{{tp|options.musicToast.never.tooltip}}
+* '''{{tp|options.musicToast.pauseMenu}}'''：{{tp|options.musicToast.pauseMenu.tooltip}}
+* '''{{tp|options.musicToast.pauseMenuAndToast}}'''：{{tp|options.musicToast.pauseMenuAndToast.tooltip}}
+| style="text-align: center;" | {{tp|options.musicToast.never}}
+|}
+
+== {{tp|options.videoTitle}}{{anchor|video}} ==
+{| class="wikitable" border="1" width="100%" data-description="视频设置选项1"
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+! align=center colspan=3|{{tp|options.video.display.header}}
+|-
+| style="font-size: larger;" | {{tp|options.fullscreen.resolution}}
+| 调整全屏模式下游戏的分辨率、帧率及色彩深度。
+| style="text-align: center;" | {{tp|options.fullscreen.current}}
+|-
+| style="font-size: larger;" | {{tp|options.framerateLimit}}
+| 限制FPS。限制帧率为[[玩家]]的显示器的刷新频率的倍数可以减少耗电量。
+| style="text-align: center;" | 120fps
+|-
+| style="font-size: larger;" | {{tp|options.vsync}}
+| 限制游戏的每秒的画面刷新率，这个值通常是60Hz或75Hz，部分显示器可以达到120~240Hz。使用垂直同步可以修复游戏画面的撕裂，但这也增加了游戏的延迟，可能会导致画面的严重掉帧。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.inactivityFpsLimit}}
+|
+* '''{{tp|options.inactivityFpsLimit.afk}}'''：若超过1分钟无操作，帧率将被限制至30。9分钟后进一步降至10。
+* '''{{tp|options.inactivityFpsLimit.minimized}}'''：仅在游戏窗口最小化时限制帧率。
+| style="text-align: center;" | {{tp|options.inactivityFpsLimit.afk}}
+|-
+| style="font-size: larger;" | {{tp|options.guiScale}}
+| 控制GUI（图形用户界面）的大小。这个设置也控制了HUD（[[平视显示器]]）的大小。注意，玩家可用的选项取决于游戏分辨率。“4”仅适用于1280×960 或更高的分辨率，“3”仅适用于960×720 或更高的分辨率，“2”仅适用于640×480 或更高的分辨率 ，“1”会适当放大，直到窗口分辨率为 310x250，但较小的分辨率会导致元素在屏幕外运行。Unicode字体在大小为奇数时不会正常渲染，因此启用“强制使用Unicode字体”选项时，奇数大小会与2或4的显示效果相同<ref>{{bug|MC-133435}}</ref>。“自动”将GUI比例设置为当前分辨率可用的最大值。
+| style="text-align: center;" | {{tp|options.guiScale.auto}}
+|-
+| style="font-size: larger;" | {{tp|options.fullscreen}}
+| 开启后Minecraft会进入全屏模式。关闭则会进入窗口模式。也可以通过按{{key|F11}}来快速进入全屏模式。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.exclusiveFullscreen}}
+| 开启后，全屏模式会完全控制整个显示器。对该选项的更改只会在游戏重启后生效。该选项可能会导致某些输入法无法正常使用。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.gamma}}
+| 调低或调高游戏画面的亮度，即使游戏画面完全黑暗。它对游戏内的[[亮度]]没有影响，只是一种视觉效果。适用于任何维度并影响[[夜视]]状态效果。
+| style="text-align: center;" | 50
+|-
+| style="font-size: larger;" | {{tp|options.graphicsApi}}
+| 用于选择渲染使用的图形API。对该选项的更改只会在游戏重启后生效。可选项包括“{{tp|options.graphicsApi.default}}”、“{{tp|options.graphicsApi.opengl}}”和“{{tp|options.graphicsApi.vulkan}}”。指定的图形API不可用时，会回退为另一个图形API。“{{tp|options.graphicsApi.default}}”选项目前相当于“{{tp|options.graphicsApi.opengl}}”选项。
+| style="text-align: center;" | {{tp|options.graphicsApi.default}}
+|-
+! align=center colspan=3|{{tp|options.video.quality.header}}
+|-
+| style="font-size: larger;" | {{tp|options.graphics.preset}}
+| 根据选择调整“{{tp|options.video.quality.header}}”中的默认值。
+| style="text-align: center;" | 取决于设备的图形预设和硬件
+|-
+| style="font-size: larger;" | {{tp|options.biomeBlendRadius}}
+| 设置生物群系之间颜色过渡的距离。
+| style="text-align: center;" | {{tp|options.biomeBlendRadius.5}}
+|-
+| style="font-size: larger;" | {{tp|options.renderDistance}}
+|
+渲染距离控制多少世界的[[区块]]立即可见。{{tr|渲染|可見}}的区块越少，每帧就渲染得越快，FPS因而更高。在单人游戏中，这也会影响被勾选的区块数量，因此较低的值能提供较高的FPS。
+
+最远的地形会淡化成天空的颜色，以避免视野中出现尖锐的边缘；所以该选项也称为“雾”。
+
+对于具有至少1GB内存的64位Java安装时，最大值为32，在所有其他情况下为16。
+
+'''注：''直径'' = ''半径 × 2 + 1'''''
+{| class="wikitable collapsible collapsed" style="text-align:center" data-description="渲染距离"
+! 名称 !! 可见范围半径<br>（方块） !! 区块数 !! 子区块数
+|- 
+| 32 区块（"最远"）
+| 512 || 4225 || 67,600
+|- 
+| 31 区块
+| 496 || 3969 || 63,504
+|- 
+| 30 区块
+| 480 || 3721 || 59,536
+|- 
+| 29 区块
+| 464 || 3481 || 55,696
+|- 
+| 28 区块
+| 448 || 3249 || 51,984
+|- 
+| 27 区块
+| 432 || 3025 || 48,400
+|- 
+| 26 区块
+| 416 || 2809 || 44,944
+|- 
+| 25 区块
+| 400 || 2601 || 41,616
+|- 
+| 24 区块
+| 384 || 2401 || 38,416
+|- 
+| 23 区块
+| 368 || 2209 || 35,344
+|- 
+| 22 区块
+| 352 || 2025 || 32,400
+|- 
+| 21 区块
+| 336 || 1849 || 29,584
+|- 
+| 20 区块
+| 320 || 1681 || 26,896
+|- 
+| 19 区块
+| 304 || 1521 || 24,336
+|- 
+| 18 区块
+| 288 || 1369 || 21,904
+|- 
+| 17 区块
+| 272 || 1225 || 19,600
+|- 
+| 16 区块 ("远")
+| 256 || 1089 || 17,424
+|- 
+| 15 区块
+| 240 || 961 || 15,376
+|-
+| 14 区块
+| 224 || 841 || 13,456
+|-
+| 13 区块
+| 208 || 729 || 11,664
+|-
+| 12 区块<br>（64位默认）
+| 192 || 625 || 10,000
+|-
+| 11 区块
+| 176 || 529 || 8464
+|-
+| 10 区块
+| 160 || 441 || 7056
+|-
+| 9 区块
+| 144 || 361 || 5776
+|-
+| 8 区块 （"一般"，<br>32位默认）
+| 128 || 289 || 4624
+|-
+| 7 区块
+| 112 || 225 || 3600
+|-
+| 6 区块
+| 96 || 169 || 2704
+|-
+| 5 区块
+| 80 || 121 || 1936
+|-
+| 4 区块（"近"）
+| 64 || 81 || 1296
+|-
+| 3 区块
+| 48 || 49 || 784
+|-
+| 2 区块（"很近"）
+| 32 || 25 || 400
+|}
+| style="text-align: center;" | 12个区块（64位Java）<br>8个区块（32位Java）
+|-
+| style="font-size: larger;" | {{tp|options.prioritizeChunkUpdates}}
+|
+用于确定在单个帧期间同步更新区块的哪些部分。
+* '''{{tp|options.prioritizeChunkUpdates.nearby}}'''即为1.18前的状况。
+** {{tp|options.prioritizeChunkUpdates.nearby.tooltip}}
+* '''{{tp|options.prioritizeChunkUpdates.byPlayer}}'''和'''{{tp|options.prioritizeChunkUpdates.none}}'''可用于减少放置或破坏方块时的卡顿。
+** '''{{tp|options.prioritizeChunkUpdates.byPlayer}}'''：{{tp|options.prioritizeChunkUpdates.byPlayer.tooltip}}
+** '''{{tp|options.prioritizeChunkUpdates.none}}'''：{{tp|options.prioritizeChunkUpdates.none.tooltip}}
+| style="text-align: center;" | {{tp|options.prioritizeChunkUpdates.none}}
+|-
+| style="font-size: larger;" | {{tp|options.simulationDistance}}
+|
+{{tp|options.simulationDistance}}类似于{{tp|options.renderDistance}}，但影响的是需要进行实体更新、计算方块刻和液体刻的区块数。与相同等级的{{tp|options.renderDistance}}相比，{{tp|options.simulationDistance}}对性能的影响会更大。除最小值为5个区块外，{{tp|options.simulationDistance}}取值范围与{{tp|options.renderDistance}}一样。更多内容见[[模拟距离]]。
+| style="text-align: center;" | 12个区块（64位Java）<br>8个区块（32位Java）
+|-
+| style="font-size: larger;" | {{tp|options.ao}}
+| [[光照]]在方块之间更平滑（即环境光遮蔽），或者每个方块有一个特别的[[光照]]等级。这个设置'''不会'''以任何方式改变游戏的玩法，但它对性能有细微的影响。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.renderClouds}}
+|
+* '''{{tp|options.clouds.fancy}}'''：显示立体的云。
+* '''{{tp|options.clouds.fast}}'''：显示平面的云。
+* '''{{tp|options.off}}'''：不显示云。
+| style="text-align: center;" | {{tp|options.clouds.fancy}}
+|-
+| style="font-size: larger;" | {{tp|options.particles}}
+| 影响部分粒子效果的显示数量，如疾跑粒子、摔落粒子和熔岩滴落粒子等等。破坏方块粒子不会受到这个设置的影响。此设置为“最少”时看不到爱心粒子。
+| style="text-align: center;" | {{tp|options.particles.all}}
+|-
+| style="font-size: larger;" | {{tp|options.mipmapLevels}}
+| Mipmap的级别越高，模型的纹理渲染就越平滑。有关四个Mipmap级别和无Mipmap的比较，见[[:File:Mipmap comparison.png]]。
+| style="text-align: center;" | 4
+|-
+| style="font-size: larger;" | {{tp|options.entityShadows}}
+| 选择实体的脚下是否有阴影。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.entityDistanceScaling}}
+| 调整实体的渲染距离为160个方块的百分比。
+{| class="wikitable collapsible collapsed" style="text-align:center" data-description="Entity distance"
+! rowspan="2" | 数值 !! colspan="2" | 实体渲染距离（半径）
+|-
+! 方块 !! 区块
+|-
+| 50% || 80 || 5
+|-
+| 75% || 120  || 8
+|-
+| 100%<br>（默认值） || 160 || 10
+|-
+| 125% || 180 || 12
+|-
+| 150% || 220 || 14
+|-
+| 175% || 240 || 15
+|-
+| 200% || 280 || 18
+|-
+| 225% || 360 || 23
+|-
+| 250% || 400 || 25
+|-
+| 275% || 440 || 28
+|-
+| 300% || 480 || 30
+|-
+| 325% || 520 || 32{{fn|大于32的数值无法在游戏内调出，只能通过编辑<samp>[[options.txt]]</samp>或使用[[辅助程序与编辑器|第三方程序]]进行修改。}}
+|-
+| 350% || 560 || 35
+|-
+| 375% || 600 || 38
+|-
+| 400% || 640 || 40
+|-
+| 425% || 680 || 43
+|-
+| 450% || 720 || 45
+|-
+| 475% || 760 || 48
+|-
+| 500% || 800 || 50
+|}
+{{fnlist}}<!--不是所有加载并且可见的区块实体都能被玩家看见。有三个条件会在视觉上隐藏实体。第一，如果实体与玩家的距离超出一定距离，则服务器不会向客户端发送有关实体的任何信息，该距离由 server.properties 文件中的“实体广播范围百分比”控制。第二，客户端不会根据“渲染距离”和“实体距离”视频设置来渲染实体。显然, 渲染距离 (以区块为单位) 乘以一个幻数(生物大约是8.5，物品是2)，并按“实3体距离”百分比缩放，得出玩家周围球体的方块半径，超出该半径实体将被隐藏。比方说，将渲染距离设置为10，并将实体可见性设置为100%，玩家离骷髅超过85格后，骷髅就会消失。不同类型的生物的幻数略有不同，比如蜘蛛和恶魂更大一些，尽管恶魂仍然经常从能见度范围之外攻击玩家。最后，客户端在水平方向上具有 128 个区块的硬性可见性限制，从而定义了另一个圆形列。仅当实体位于此球体和两个圆柱体的交点内时，才会显示实体。
+此段来自en的模拟距离，请整理后添加至正文，如果不符合事实或者与现有内容重复，请删除此段。-->
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | {{tp|options.accessibility.menu_background_blurriness}}
+| 用于{{tp|options.accessibility.menu_background_blurriness.tooltip}}
+| style="text-align: center;" | 5
+|-
+| style="font-size: larger;" | {{tp|options.renderCloudsDistance}}
+| 影响客户端的云层渲染距离，值域{{range|2|128}}，单位为区块。
+| style="text-align: center;" | 128
+|-
+| style="font-size: larger;" | {{tp|options.cutoutLeaves}}
+| 控制树叶是否可透视。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.improvedTransparency}}
+| 控制是否会在半透明方块和水后面渲染天气、云、粒子。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.textureFiltering}}
+| 控制在从一定角度或远处观察纹理时所采用的采样方法。
+| style="text-align: center;" | 取决于设备的图形预设和硬件
+|-
+| style="font-size: larger;" | {{tp|options.maxAnisotropy}}
+| 控制“{{tp|options.textureFiltering}}”设置为“{{tp|options.textureFiltering.anisotropic}}”时的级别。
+| style="text-align: center;" | 4×
+|-
+| style="font-size: larger;" | {{tp|options.weatherRadius}}
+| 控制雨雪效果的可见半径。
+| style="text-align: center;" | 10个方块
+|-
+! align=center colspan=3|{{tp|options.video.preferences.header}}
+|-
+| style="font-size: larger;" | {{tp|options.autosaveIndicator}}
+| 用于控制自动保存指示器是否要在屏幕的右下方显示。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.vignette}}
+| 控制是否显示游戏屏幕周围的细微纹理，包括减弱屏幕边缘亮度和警示世界边界。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.attackIndicator}}
+|
+* '''{{tp|options.off}}'''：无攻击指示器
+* '''{{tp|options.attack.crosshair}}'''：一个灰色半透明小条出现在十字准星下方显示攻击力量
+* '''{{tp|options.attack.hotbar}}'''：一个灰色小剑出现在快捷栏的一侧（和玩家的主手同侧）显示攻击力量
+| style="text-align: center;" | {{tp|options.attack.crosshair}}
+|-
+| style="font-size: larger;" | {{tp|options.chunkFade}}
+| 控制每个区块淡入效果的时长。
+| style="text-align: center;" | 0.75秒
+|}
+
+== {{tp|controls.title}}{{anchor|controls}} ==
+{{Main|控制}}
+
+需通过'''{{tp|options.mouse_settings}}'''或'''{{tp|controls.keybinds}}'''按钮进入'''{{tp|options.mouse_settings.title}}'''或'''{{tp|controls.keybinds.title}}'''页面配置鼠标或键盘控制。
+
+还有以下一些额外配置：
+{| class="wikitable" border="1" width="100%" data-description="控制"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|key.sneak}}
+| 使玩家能够在按下潜行键后保持潜行状态。
+| style="text-align: center;" | {{tp|options.key.hold}}
+|-
+| style="font-size: larger;" | {{tp|key.sprint}}
+| 使玩家能够在按下疾跑键后保持疾跑状态。
+| style="text-align: center;" | {{tp|options.key.hold}}
+|-
+| style="font-size: larger;" | 攻击/摧毁
+| 使玩家能够在按下攻击/摧毁键后保持攻击/摧毁。
+| style="text-align: center;" | {{tp|options.key.hold}}
+|-
+| style="font-size: larger;" | 使用物品/放置方块
+| 使玩家能够在按下使用物品/放置方块键后保持使用物品/放置。
+| style="text-align: center;" | {{tp|options.key.hold}}
+|-
+| style="font-size: larger;" | {{tp|options.autoJump}}
+| 开启后，当玩家移动方向的后一个方块的上方为任意空气时会触发自动跳跃。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | 疾跑间隔
+| 双击前进键激活疾跑的最大间隔，以刻为单位，最大为10，为“关”时无法通过双击前进键以疾跑。
+| style="text-align: center;" | 7
+|-
+| style="font-size: larger;" | {{tp|options.operatorItemsTab}}
+| 开启后，[[创造模式物品栏]]会显示{{tp|itemGroup.op}}类别。
+| style="text-align: center;" | {{tp|options.off}}
+|}
+
+=== {{tp|options.mouse_settings.title}}{{anchor|mouse_settings}} ===
+{| class="wikitable" border="1" width="100%" data-description="鼠标设置"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|options.sensitivity}}
+| 调整鼠标的灵敏度。
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | {{tp|options.mouseWheelSensitivity}}
+| 改变游戏内鼠标滚轮的灵敏度。大于1的值不影响快捷栏内的物品选择。
+| style="text-align: center;" | 1.00
+|-
+| style="font-size: larger;" | {{tp|options.discrete_mouse_scroll}}
+| 使游戏忽略系统接收到的滚轮一次操作的变化量，并按照-1与+1响应。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | 反转鼠标X轴
+| 控制鼠标是否水平反转。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | 反转鼠标Y轴
+| 控制鼠标是否垂直反转。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | 允许光标变化
+| 允许鼠标光标悬停在特定UI控件上时改变形状。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.rawMouseInput}}
+|使用鼠标而不是鼠标指针直接输入。此种输入方法可以使游戏内鼠标运动不受指针加速或缩放影响（如Windows自带的“提高指针精确度”“指针速度”选项）。
+| style="text-align: center;" | {{tp|options.on}}
+|}
+
+== {{tp|options.language.title}}{{anchor|language}} ==
+{{main|语言}}
+用以更改客户端的显示语言。
+
+=== {{tp|options.font.title}} ===
+{| class="wikitable list-style-none" border="1" width="100%" data-description="Font options"
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|options.forceUnicodeFont}}
+|
+* '''{{tp|options.on}}'''：总是使用Unicode字体
+* '''{{tp|options.off}}'''：使用ASCII字体，将Unicode字体作为{{tr|回退|遞補}}（fallback）字体
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.japaneseGlyphVariants}}
+| 在默认字体中为CJK字符使用日本字形。
+| style="text-align: center;" | 基于系统语言环境设置
+|}
+
+== {{tp|options.chat.title}}{{anchor|chat}} ==
+{| class="wikitable" border="1" width="100%" data-description="聊天设置"
+|-
+! width=125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|options.chat.visibility}}
+|
+* '''{{tp|options.chat.visibility.full}}'''：可以查看服务器上的聊天内容。
+* '''{{tp|options.chat.visibility.system}}'''：只查看聊天内容中的命令输出内容。
+* '''{{tp|options.chat.visibility.hidden}}'''：会把所有服务器上的聊天内容隐藏。
+| style="text-align: center;" | {{tp|options.chat.visibility.full}}
+|-
+| style="font-size: larger;" | {{tp|options.chat.color}}
+|
+* '''{{tp|options.on}}'''：可以看到不同颜色的聊天文字。
+* '''{{tp|options.off}}'''：禁用这个功能，只显示亮灰色的聊天文字。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.chat.links}}
+|
+* '''{{tp|options.on}}'''：可以在聊天中查看 URL 以及其他链接。
+* '''{{tp|options.off}}'''：禁用这个功能并拦截所有链接。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.chat.links.prompt}}
+|
+* '''{{tp|options.on}}'''：每当玩家点击URL时弹出提示框以确认是否退出Minecraft前往该网页。
+* '''{{tp|options.off}}'''：不显示提示。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.chat.opacity}}
+| 聊天文字的不透明度。
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | {{tp|options.accessibility.text_background_opacity}}
+| 文本背景的不透明度。
+| style="text-align: center;" | 50%
+|-
+| style="font-size: larger;" | {{tp|options.chat.scale}}
+| 调节聊天文字的大小。
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | {{tp|options.chat.line_spacing}}
+| 文本每行间的间距。
+| style="text-align: center;" | 0%
+|-
+| style="font-size: larger;" | 聊天延迟
+| 调节聊天的延迟。
+| style="text-align: center;" | 无
+|-
+| style="font-size: larger;" | {{tp|options.chat.width}}
+| 聊天文字的最大宽度。
+| style="text-align: center;" | 320px
+|-
+| style="font-size: larger;" | {{tp|options.chat.height.focused}}
+| 聊天文字在获得焦点时（输入框和聊天记录显示时）的最大高度。
+| style="text-align: center;" | 180px
+|-
+| style="font-size: larger;" | {{tp|options.chat.height.unfocused}}
+| 聊天文字在通常情况下（输入框和聊天记录隐藏时）的最大高度。
+| style="text-align: center;" | 90px
+|-
+| style="font-size: larger;" | {{tp|options.narrator}}
+|
+* '''{{tp|options.narrator.all}}'''：复述全部内容。
+* '''{{tp|options.narrator.chat}}'''：复述聊天框信息。
+* '''{{tp|options.narrator.system}}'''：复述系统内容。
+* '''{{tp|options.off}}'''：不复述。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.autoSuggestCommands}}
+| 调整命令提示是否显示，若不显示则玩家每次需按tab键使其显示。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.hideMatchedNames}}
+| 切换游戏是否尝试通过匹配信息中的文本的方式尝试隐藏聊天。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.reducedDebugInfo}}
+| 决定[[调试屏幕]]上的信息是否会被简化。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.onlyShowSecureChat}}
+| {{tp|options.onlyShowSecureChat.tooltip}}
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.chat.drafts}}
+| {{tp|options.chat.drafts.tooltip}}
+| style="text-align: center;" | {{tp|options.off}}
+|}
+
+== {{tp|resourcePack.title}}{{anchor|resourcePack}} ==
+允许启用和禁用[[资源包]]。
+
+== {{tp|options.accessibility.title}}{{Anchor|accessibility}} ==
+{| class="wikitable" border="1" width="100%" data-description="辅助功能设置"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|options.narrator}}
+| 切换复述功能的复述范围：{{tp|options.narrator.all}}，{{tp|options.narrator.chat}}，{{tp|options.narrator.system}}，或{{tp|options.narrator.off}}。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | 按键控制…
+| 见{{slink||按键控制}}。
+|
+|-
+| style="font-size: larger;" | {{tp|options.showSubtitles}}
+| 切换是否显示字幕。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.accessibility.high_contrast}}
+| {{tp|options.accessibility.high_contrast.tooltip}}
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" |  {{tp|options.accessibility.menu_background_blurriness}}
+| 菜单背景的模糊程度。
+| style="text-align: center;" | 50%
+|-
+| style="font-size: larger;" | {{tp|options.accessibility.text_background_opacity}}
+| 文本背景的不透明度。
+| style="text-align: center;" | 50%
+|-
+| style="font-size: larger;" | {{tp|options.accessibility.text_background}}
+| 切换文本背景是仅限于聊天内容使用还是全局都使用。
+| style="text-align: center;" | {{tp|options.accessibility.text_background.chat}}
+|-
+| style="font-size: larger;" | {{tp|options.chat.opacity}}
+| 聊天文本的不透明度。
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | {{tp|options.chat.line_spacing}}
+| 文本每行间的间距。
+| style="text-align: center;" | 0%
+|-
+| style="font-size: larger;" | 聊天延迟<!-- 此选项用不了sc -->
+| 调节聊天的延迟。
+| style="text-align: center;" | 无
+|-
+| style="font-size: larger;" | {{tp|options.notifications.display_time}}
+| {{tp|options.notifications.display_time.tooltip}}
+| style="text-align: center;" | 1.0x
+|-
+| style="font-size: larger;" | {{tp|options.viewBobbing}}
+| 切换玩家行走时画面是否摇晃。禁用它可能会提高性能。
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{tp|options.screenEffectScale}}
+| 调整[[反胃]]效果和进入[[下界传送门]]时的屏幕扭曲幅度。
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | {{tp|options.fovEffectScale}}
+| 影响玩家在疾跑、拉弓以及受到速度和{{tr|缓慢|緩速|緩慢}}状态效果影响等情况下的视场角变化幅度。
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | {{tp|options.darknessEffectScale}}
+| {{tp|options.darknessEffectScale.tooltip}}
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | {{tp|options.damageTiltStrength}}
+| {{tp|options.damageTiltStrength.tooltip}}
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | {{tp|options.glintSpeed}}
+| 用于{{tp|options.glintSpeed.tooltip}}
+| style="text-align: center;" | 50%
+|-
+| style="font-size: larger;" | {{tp|options.glintStrength}}
+| 用于{{tp|options.glintStrength.tooltip}}
+| style="text-align: center;" | 75%
+|-
+| style="font-size: larger;" | {{tp|options.hideLightningFlashes}}
+| 在打雷时不在屏幕上显示闪电的闪烁效果。闪电本身仍然可见。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.darkMojangStudiosBackgroundColor}}
+| 将Mojang Studios加载界面的背景颜色更改为黑色。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.accessibility.panorama_speed}}
+| 控制主菜单上全景图的旋转速度。
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | 隐藏闪烁标语
+| 是否隐藏主菜单上的黄色闪烁标语。
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.accessibility.narrator_hotkey}}
+| {{tp|options.accessibility.narrator_hotkey.tooltip}}
+| style="text-align: center;" | {{tp|options.on}}
+|-
+| style="font-size: larger;" | {{in exp|exp=矿车改进|for={{tp|options.rotateWithMinecart}}}}
+| {{tp|options.rotateWithMinecart.tooltip}}
+| style="text-align: center;" | {{tp|options.off}}
+|-
+| style="font-size: larger;" | {{tp|options.accessibility.high_contrast_block_outline}}
+| {{tp|options.accessibility.high_contrast_block_outline.tooltip}}
+| style="text-align: center;" | {{tp|options.off}}
+|}
+
+== {{tp|options.telemetry}}{{anchor|telemetry}} ==
+{| class="wikitable" border="1" width="100%" data-description="遥测数据"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|options.telemetry.button}}
+| 选择要发送数据的种类。
+* {{tp|options.telemetry.state.none}}：不发送任何数据。此选项只会在离线模式下出现，且不能被选择。
+* {{tp|options.telemetry.state.minimal}}：只发送必要数据（即包括在<code>WorldLoaded</code>和<code>WorldUnloaded</code>事件中的数据种类）。
+* {{tp|options.telemetry.state.all}}：除发送必要数据外，还发送包括在<code>PerformanceMetrics</code>和<code>WorldLoadTimes</code>事件中的数据种类。
+| style="text-align: center;" | {{tp|options.telemetry.state.minimal}}
+|}
+
+== {{tp|addServer.title}}{{anchor|addServer}} ==
+此选项需要通过多人游戏屏幕上的“{{tp|selectServer.edit}}”按钮进入。
+
+{| class="wikitable" border="1" width="100%" data-description="服务器设置"
+|-
+! width="125px" | 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tp|addServer.resourcePack}}
+| 允许Minecraft从服务器下载资源包并使用。
+| style="text-align: center;" | {{tp|addServer.resourcePack.prompt}}
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java classic}}
+|{{HistoryLine||0.0.12a|现在可以按{{key|F}}循环调整渲染距离。}}
+|{{HistoryLine||0.0.23a|加入了选项界面。
+|加入了自定义热键的选项。
+|加入了显示FPS选项。|在选项界面加入了迷雾距离选项。}}
+|{{HistoryLine||0.24_SURVIVAL_TEST|加入了视角摇晃选项。
+|加入了3D效果选项。}}
+|{{HistoryLine||0.26 SURVIVAL TEST|加入了限制帧率选项。}}
+|{{HistoryLine|java indev}}
+|{{HistoryLine||0.31|dev=20100205-1558|加入了[[难度]]选项。}}
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100615|加入了图像品质选项，目前只有[[云]]会受此影响。}}
+|{{HistoryLine||20100616-1808|现在[[树叶]]也受图像品质影响了。}}
+|{{HistoryLine|java alpha}}
+|{{HistoryLine||v1.1.1|移除了显示FPS选项。
+|加入了鼠标灵敏度选项。
+|音乐和声音选项现在由开关变为滑块。}}
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.3|加入了平滑光照选项。}}
+|{{HistoryLine||1.5|加入了界面尺寸选项。
+|加入了高级OpenGL设置。}}
+|{{HistoryLine||1.6.6|在视频设置中加入了性能选项，可以设置为最大FPS、平衡和节能。}}
+|{{HistoryLine||1.8|加入了亮度选项。<ref>{{tweet|notch|88364022612758528|1.8 has a brightness slider. Real miners play on the darkest setting, though.|July 5, 2011}}</ref>
+|现在攻击/摧毁和使用物品/放置方块的按键绑定可以自定义了。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre5|加入了云选项，现在可以关闭云的渲染（然而在之前的版本中，也可以使用[[纹理包]]来隐藏云的渲染）。}}
+|{{HistoryLine||1.3.1|dev=12w21a|调整了选项菜单，并增加了一个新的“聊天设置”菜单。}}
+|{{HistoryLine||1.4.2|dev=12w34a|加入了全屏选项。
+|在视频设置中加入了垂直同步选项。}}
+|{{HistoryLine|||dev=12w41a|“聊天设置”更名为“多人游戏设置”。
+|在皮肤设置中加入了“[[披风]]”选项。}}
+|{{HistoryLine||1.4.6|dev=1.4.6-pre|加入了触屏模式选项。}}
+|{{HistoryLine||1.5|dev=13w09b|将[[主菜单]]的纹理包选项移动至选项菜单中。}}
+|{{HistoryLine||1.7.2|dev=13w36a|修改了选项菜单，拥有一个全新的布局，并且重新调节了按键绑定。
+|“Super Secret Settings”按钮也被添加到选项菜单中。}}
+|{{HistoryLine|||dev=13w36b|现在点击“Super Secret Settings”按钮时会发出随机的声音。}}
+|{{HistoryLine|||dev=13w38a|现在“Super Secret Settings”按钮会按照以下顺序激活一个影响游戏显示的着色器：Notch、快速近似抗锯齿、美术、颠簸、淡化美术、素描、色彩卷积、分散、翻转、反色、NTSC、描画、磷光、枕形失真、索贝尔、字节、去色、绿、模糊、摇晃、斑点。
+|渲染距离选项现在由循环开关变为滑块，范围限定在2到16个区块。
+|限制帧率选项现在由开关变为滑块，并更名为“最大帧率”。
+|加入了Mipmap级别和各向异性过滤选项。}}
+|{{HistoryLine||1.7.4|dev=13w47a|加入了“Twitch 直播设置”和“Twitch 聊天设置”按钮。}}
+|{{HistoryLine||1.7.6|dev=1.7.6-pre1|加入了服务器资源包选项，有三个设置：提示、启用、禁用。}}
+|{{HistoryLine||1.8|dev=14w05a|掉落的[[物品（实体）|物品]]现在在流畅图像品质下也会在Y轴上面向玩家了，此前只会在X轴和Z轴上面向玩家。}}
+|{{HistoryLine|||dev=14w25a|移除了各向异性过滤选项。
+|掉落的物品现在在所有图像品质下都会以3D形式渲染了，此前只会在高品质图像下以3D形式渲染。
+|[[草方块]]的侧面纹理现在在所有图像品质下都会使用正确的颜色了。
+|移除了“流畅”图像品质下的树叶模型。现在流畅和高品质图像的树叶使用同一纹理。}}
+|{{HistoryLine|||dev=14w25b|现在图像品质为“流畅”时，树叶的透明部分是黑色而不是深绿色。}}
+|{{HistoryLine|||dev=14w28a|在视频设置中加入了“替选方块”选项。}}
+|{{HistoryLine|||dev=14w29a|在视频设置中加入了“使用顶点缓冲器”选项。
+|在多人游戏设置中加入了“简化调试信息”选项。}}
+|{{HistoryLine|||dev=14w30a|现在在运行64位的Java且拥有至少1GB内存的设备上，渲染距离最大可以达到32。}}
+|{{HistoryLine|||dev=14w30b|更改了3D效果，现在显示更加准确。}}
+|{{HistoryLine||1.8.1|dev=pre1|“多人游戏设置”的名称被重新改回“聊天设置”。}}
+|{{HistoryLine|||dev=pre4|实体阴影现在是单独的选项，不再受图像品质选项控制。
+|云的样式现在受“云”选项控制，而不再受“图像品质”选项控制。}}
+|{{HistoryLine||1.9|dev=15w31a|移除了Super Secret Settings和直播设置。
+|从视频设置中移除了“替选方块”选项。
+|在皮肤设置中加入了“主手”选项，可以切换主手为左手或右手。}}
+|{{HistoryLine|||dev=15w34a|在视频设置中加入了“攻击指示器”选项。}}
+|{{HistoryLine|||dev=16w02a|在音乐和声音设置中加入了“声音/语音”选项。}}
+|{{HistoryLine||1.10|dev=16w20a|在按键控制中加入了“自动跳跃”选项。}}
+|{{HistoryLine||1.13|dev=17w43a|移除了“3D效果”选项。
+|加入了调节全屏分辨率的选项。}}
+|{{HistoryLine|||dev=17w47a|在编辑世界屏幕中加入了备份世界和打开备份文件夹的选项。
+|在聊天设置中加入了“命令提示”选项，用于切换是否自动出现命令的补全提示（默认为开，否则按{{key|Tab}}才会出现）。}}
+|{{HistoryLine|||dev=18w21a|为遵从[[wikipedia:General Data Protection Regulation|《通用数据保护条例》（GDPR）]]，禁用了匿名信息反馈设置中的“允许匿名信息反馈”选项，现在该选项默认为关。<ref>{{bug|MC-130179#comment-455305}}</ref>
+|随着匿名信息反馈选项被禁用，显示的数据列表也显著地缩短了。}}
+|{{HistoryLine|||dev=pre6|移除了“强制使用Unicode字体”选项。}}
+|{{HistoryLine|||dev=pre8|重新加入了“强制使用Unicode字体”选项。}}
+|{{HistoryLine|||dev=pre10|将英文选项中<code>Fullscreen resolution</code>的第二个单词字母改为大写，即改为<code>Fullscreen Resolution</code>。}}
+|{{HistoryLine||1.14|dev=18w44a|移除了视频设置中的“启用顶点缓冲器”选项。顶点缓冲器现在保持启用状态。}}
+|{{HistoryLine|||dev=19w11a|移除了在[[18w21a]]后即无法使用的“匿名信息反馈设置”。现在该设置仅能通过[[options.txt]]来配置。
+|加入了辅助功能设置。}}
+|{{HistoryLine|||dev=19w11b|在辅助功能设置中加入了“自动跳跃”选项。}}
+|{{HistoryLine||1.14.4|dev=pre2|在鼠标设置中加入了“原始输入”选项。}}
+|{{HistoryLine||1.15|dev=19w41a|在辅助功能设置中加入了疾跑和潜行的按住/切换选项。}}
+|{{HistoryLine||1.16|dev=20w17a|在视频设置中加入了“实体渲染距离”选项。}}
+|{{HistoryLine|||dev=20w21a|在世界设置中加入了导入/导出世界设置的功能。}}
+|{{HistoryLine||1.16|dev=pre1|在视频设置中加入了“''{{tr|极佳！|極致！|極佳！}}''”图形选项。}}
+|{{HistoryLine|||dev=pre3|修改了“流畅”“{{tr|高品质|精緻|細緻}}”和“{{tr|极佳！|極致！|極佳！}}”三种图像品质[[提示框]]中的描述。}}
+|{{HistoryLine||1.16.2|dev=pre1|在视频设置和无障碍设置中加入了“{{tr|屏幕扭曲效果|畫面扭曲效果}}”和“{{tr|视场角效果|視角廣度效果}}”选项。}}
+|{{HistoryLine||1.16.4|dev=rc1|在聊天设置中加入了“隐藏{{tr|匹配|相符}}的名称”选项。}}
+|{{HistoryLine||1.17|dev=20w46a|视频设置中的“使用垂直同步”选项更名为“垂直同步”。}}
+|{{HistoryLine|||dev=21w13a|在辅助功能设置中加入了“黑白徽标”选项。}}
+|{{HistoryLine||1.18|dev=21w37a|在辅助功能设置中加入了“隐藏闪电的闪烁效果”选项。
+|在音乐和声音选项中加入了“设备”选项。
+|按键绑定设置被独立到一个单独的页面，此页面可以通过按键控制页面进入。
+|在视频设置中加入了“更新优先项”选项。}}
+|{{HistoryLine|||dev=21w38a|在视频设置中加入了“模拟距离”选项。}}
+|{{HistoryLine|||dev=21w39a|“亮度”选项的默认值由“昏暗”改为50。}}
+|{{HistoryLine|||dev=21w42a|在视频设置中加入了“自动保存指示器”选项。}}
+|{{HistoryLine|||dev=21w43a|视频设置中的“更新优先项”选项更名为“区块构建器”。其三个选项“邻近”“玩家影响”“无”分别更名为“全阻塞”“半阻塞”“线程化”，并分别新增了一条鼠标{{tr|悬停|暫留}}时的注释。}}
+|{{HistoryLine|||dev=21w44a|加入了单独的“在线选项”界面，包括从原位置移入的“Realms的通知”选项，和新的“允许列入服务器玩家列表”及“服务器难度”选项。}}
+|{{HistoryLine||1.19|dev=22w11a|在音乐和声音选项中加入了“定向音频”选项。用于启用基于HRTF算法的定向环绕音频。}}
+|{{HistoryLine|||dev=22w12a|在辅助功能选项中加入了“黑暗脉动效果”选项，用于控制玩家受黑暗效果影响时视野亮度降低的程度。}}
+|{{HistoryLine|||dev=22w19a|在聊天设置中加入了“聊天預覽”选项，用于启用聊天预览功能。
+|在聊天设置中加入了“{{tr|仅展示已签名的聊天|僅顯示已簽署的聊天|僅顯示已簽名嘅聊天}}”选项，用于将客户端设置为仅显示被签过名的原始聊天消息。}}
+|{{HistoryLine|||dev=pre1|将聊天选项“{{tr|仅展示已签名的聊天|僅顯示已簽署的聊天|僅顯示已簽名嘅聊天}}”改为“{{tr|仅显示安全的聊天|僅顯示已受保護的聊天內容|僅顯示安全嘅聊天}}”，相应的描述随之更改。}}
+|{{HistoryLine||1.19.1|dev=pre5|在“聊天预览”聊天设置选项中加入了“{{tr|发送时|送出時|傳送時}}”选项，用于仅在发送消息时更新聊天预览。而之前的“{{tr|开|開啟|開}}”选项被重命名为“{{tr|修改时|輸入時|修改時}}”。}}
+|{{HistoryLine|||dev=rc2|“聊天预览”聊天设置选项的{{tr|“修改时”选项的英文原文由“On Modified”重命名为“While Typing”|「輸入時」選項的英文原文由「On Modified」重新命名為「While Typing」|「修改時」（On Modified）選項重新命名為「輸入時」（While Typing）}}；{{tr|“发送时”选项的英文原文由“On Send”重命名为“When Sending”|「送出時」（On Send）選項重新命名為「傳送時」（When Sending）|「傳送時」選項的英文原文由「On Send」重新命名為「When Sending」}}。}}
+|{{HistoryLine||1.19.3|dev=22w42a|加入了“{{tr|全景图滚动速度|全景圖捲動速度|全景圖滾動速度}}”協助工具选项。
+|移除了“聊天预览”聊天设置选项。}}
+|{{HistoryLine|||dev=22w45a|加入了“管理员用品标签页”{{tr|按键控制|按鍵設定}}选项。}}
+|{{HistoryLine|||dev=22w46a|加入了“遥测{{tr|数据|資料|數據}}”屏幕。}}
+|{{HistoryLine|||dev=rc1|由于没有实际区别，将“{{tr|平滑光照|柔和光源}}”视频设置中“{{tr|最小|最小值}}”和“{{tr|最大|最大值}}”两个选项合并，只保留开与关两个状态。<ref>{{bug|MC-58668|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.4|dev=23w03a|加入了“通知显示时长”辅助功能选项。
+|自动跳跃选项现在默认关闭。}}
+|{{HistoryLine|||dev=23w05a|加入了“附魔光效闪烁速度”和“附魔光效闪烁强度”辅助功能选项。}}
+|{{HistoryLine|||dev=23w06a|加入了“受伤抖动效果”辅助功能选项。
+|在“按键绑定”屏幕中加入了按键冲突时的提示框。
+|通知显示时长辅助功能选项的英文名称由“Notification Display Time”改为“Notification Time”。
+|现在，若选项按钮文本过长，文本会滚动显示。}}
+|{{HistoryLine|||dev=pre1|加入了“高对比度”辅助功能选项，用于启用高对比度UI。
+|将“附魔光效闪烁强度”选项的默认值从100%降低至75%。
+|减小了选项按钮长文本的滚动幅度。}}
+|{{HistoryLine|||dev=pre4|加入了鸣谢与著作权说明按钮，用于查看[[鸣谢名单]]、{{tr|著作权说明|著作權|版權説明}}和许可协议。}}
+|{{HistoryLine||1.20.2|dev=23w33a|加入了“复述功能快捷键”辅助功能选项，用于启用切换复述功能的快捷键。}}
+|{{HistoryLine||1.20.5|dev=24w06a|在语言屏幕中加入了“字体设置”，包含“强制使用Unicode字体”选项和新增的“{{tr|日本字形变体|日文字形變體|日本字形變體}}”选项。}}
+|{{HistoryLine|||dev=24w09a|加入了“菜单背景模糊程度”辅助功能选项。}}
+|{{HistoryLine||1.21.2|exp=minecart_improvements|dev=24w33a|加入了“{{tr|同步矿车转动|隨著礦車轉動|跟隨礦車轉動}}”辅助功能选项。}}
+|{{HistoryLine|||exp=none|dev=24w40a|加入了“{{tr|高对比度方块轮廓|高對比度方塊輪廓}}”辅助功能选项。}}
+|{{HistoryLine||1.21.6|dev=25w17a|加入了“云层距离”视频设置选项。}}
+|{{HistoryLine|||dev=25w20a|加入了“{{tr|音乐播放频率|音樂頻率}}”和“{{tr|显示音乐弹窗|顯示音樂提示|顯示音樂通知}}”音乐和声音选项。}}
+|{{HistoryLine||1.21.9|dev=25w31a|将“显示字幕”选项重命名为“{{tr|隐藏式字幕|隱藏式字幕|隱閉式字幕}}”。
+|在“{{tr|辅助功能设置|協助工具設定|無障礙功能設定}}”界面中加入了“{{tr|按键控制…|按鍵設定...|按鍵設定⋯⋯}}”按钮。
+|在“{{tr|按键控制|按鍵設定}}”界面中加入了用于调整“{{tr|攻击/摧毁|攻擊／破壞}}”及“{{tr|使用物品/放置方块|使用物品／放置方塊}}”按键绑定模式（“按住”或“切换”）的按钮。
+|在“{{tr|按键控制|按鍵設定}}”界面中加入了“{{tr|疾跑间隔|跑步觸發間隔|跑步時間間隔}}”滑动条，控制双击前进键疾跑时双击有效的窗口期，单位为刻，最大为10，为“关”时无法通过双击前进键以疾跑。
+|在“鼠标设置”界面中加入了“{{tr|反转鼠标X轴|反轉滑鼠 X 軸}}”按钮。}}
+|{{HistoryLine|||dev=25w33a|加入了“{{tr|保存未发送的聊天消息|儲存未傳送的聊天訊息}}”聊天设置选项。}}
+|{{HistoryLine||1.21.11|dev=25w41a|更改了视频设置的布局，现在分为“显示”“{{tr|品质与性能|畫質與效能}}”和“界面”三部分。
+|从视频设置中移除了以下与辅助功能设置重复的选项：视角摇晃、附魔光效闪烁速度、附魔光效闪烁强度、视场角效果、屏幕扭曲效果。
+|原先的“流畅”“{{tr|高品质|精緻|細緻}}”和“{{tr|极佳！|極致！|極佳！}}”三种图像品质现在被同名的预设取代。
+|更改了按键绑定，现在调试功能按键、调试组合键和调试屏幕切换键、切换用户界面的按键、切换着色器的按键可以重新绑定。
+|现在使用鼠标移动滑块时，滑块会自动贴靠到最近的有效数值处。
+|现在使用键盘移动滑块时，滑块会自动移动到对应方向的下一个有效数值处，此前只会移动一个像素。}}
+|{{HistoryLine|||dev=25w44a|在视频设置中重新加入了各向异性过滤选项。}}
+|{{HistoryLine|||dev=25w46a|将“{{tr|显示音乐弹窗|顯示音樂提示|顯示音樂通知}}”重命名为“{{tp|options.musicToast}}”。
+|给“{{tp|options.musicToast}}”加入了新选项，可以只在游戏菜单显示音乐弹窗。}}
+|{{HistoryLine|||dev=pre1|在视频设置中加入了“{{tp|options.textureFiltering}}”选项。
+|现在“各向异性过滤”选项由“{{tp|options.textureFiltering}}”选项控制是否可用。}}
+|{{HistoryLine|||dev=pre2|现在“可透视树叶”选项为关时，树叶的透明部分是深绿色而不是黑色。}}
+|{{HistoryLine||26.1|dev=snapshot-3|加入了“{{tp|options.worldOptions.button}}”选项，在先前“{{tp|options.difficulty}}”选项的位置，包括“{{tp|options.difficulty}}”选项和“{{tp|editGamerule.inGame.button}}”选项。}}
+|{{HistoryLine|||dev=pre-2|加入了“{{tp|options.exclusiveFullscreen}}”选项，用来控制全屏模式是否应该完全控制整个显示器。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了“{{tp|options.graphicsApi}}”选项，用于选择渲染使用的图形API。}}
+|{{HistoryLine|||dev=snapshot-5|移除了触屏模式选项。}}
+|{{HistoryLine|||dev=snapshot-7||向“{{tp|options.online}}”中加入了“{{tp|options.friendsList}}”、“{{tp|options.allowFriendRequests}}”、“{{tp|options.inGameNotification}}”、“{{tp|options.sharePresence}}”和“{{tp|options.online.xboxSettings}}”选项。}}
+}}
+
+== 画廊 ==
+{{gallery|
+Settings Screen.png|convert|“{{tp|options.title}}”菜单
+Online Options.png|convert|“{{tp|options.online.title}}”菜单
+SkinCustomizationOptions.png|convert|“{{tp|options.skinCustomisation.title}}”菜单
+VideoSettings.png|convert|“{{tp|options.videoTitle}}”菜单
+Language settings.png|convert|“{{tp|options.language.title}}”菜单
+Font Settings.png|convert|“{{tp|options.font.title}}”菜单
+Select resource pack.png|convert|“{{tp|resourcePack.title}}”菜单
+Telemetry Data.png|convert|“{{tp|telemetry_info.screen.title}}”菜单
+Sound Options Screen.png|convert|“{{tp|options.sounds.title}}”菜单
+Controls.png|convert|“{{tp|controls.title}}”菜单
+MouseSettings.png|convert|“{{tp|options.mouse_settings.title}}”菜单
+Control Settings.png|convert|“{{tp|controls.keybinds.title}}”菜单
+ChatSettings.png|convert|“{{tp|options.chat.title}}”菜单
+AccessibilitySettings.png|convert|“{{tp|options.accessibility.title}}”菜单
+Credits and Attribution.png|convert|“{{tp|credits_and_attribution.screen.title}}”菜单
+Mipmap comparison.png|五个{{tp|options.mipmapLevels}}之间的比较
+Biome blend anim.gif|无{{tp|options.biomeBlendRadius}}和5×5生{{tp|options.biomeBlendRadius}}之间的比较
+Difficulty.png|convert|设置难度
+}}
+
+== 参见 ==
+* [[HUD]]
+* [[第三人称视角]]
+* [[调试屏幕]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Minecraft}}
+
+[[Category:UI]]
+
+[[de:Menü/Optionen]]
+[[en:Options]]
+[[es:Opciones]]
+[[fr:Options]]
+[[ja:設定]]
+[[ko:설정]]
+[[nl:Instellingen]]
+[[pl:Ustawienia]]
+[[pt:Opções]]
+[[ru:Настройки]]
+[[uk:Налаштування]]

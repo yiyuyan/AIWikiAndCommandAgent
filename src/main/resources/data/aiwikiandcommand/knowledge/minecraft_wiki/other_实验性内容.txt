@@ -1,0 +1,148 @@
+# 页面: 实验性内容
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9E%E9%AA%8C%E6%80%A7%E5%86%85%E5%AE%B9
+# 分类: Java版, Java版独有特性, 实验性内容
+# 抓取时间: 2026-07-14 17:25:16
+# 原始 Wikitext 内容:
+
+{{about|Java版创建世界时可选的实验性功能|基岩版中的类似功能|实验性玩法|Java版1.17-1.18的{{tr|外置|外部}}数据包|洞穴与山崖预览数据包}}
+{{Exclusive|Java}}
+'''实验性内容（Experiments）'''是{{el|je}}独有的游戏'''内置[[数据包]]'''，开启后玩家可以在世界中试用未完成开发或正在开发的实验性功能，这些功能最终可能会在未来版本中实现。<ref>{{article|testing-new-minecraft-features/feature-toggles-java-edition|测试新版Minecraft功能-在Java版中切换功能|Oct 24th, 2022|Staff}}</ref>
+
+== 启用 ==
+实验性内容的子选项可以在[[创建新的世界]]界面的“实验性内容”选项或“数据包”选项中启用，在创建世界后该选项将会无法关闭。已创建的世界也不能再次启用实验性内容。
+
+启用内置数据包将会启用功能开关所控制的硬编码游戏元素和数据包{{filepath|-{}-data/<''命名空间''>/datapacks/<''实验性内容ID''>/}}目录中的功能。
+
+在服务端中启用实验性内容需要修改{{filename|[[server.properties]]}}中的{{cd|d=pretty|initial-enabled-packs|initial-disabled-packs}}。
+
+== 警告 ==
+开启实验性内容后会启用一些尚未完成开发的实验性功能，这些功能可能会不适应未来版本，从而导致该世界在未来版本中崩溃、损坏或无法加载。因此，在实验性内容选项和数据包选项界面都会出现一则警告。
+{{filetr|Experiments Screen Warning.png|thumb|实验性内容选项界面的警告}}
+{{filetr|Data Packs Screen Warning.png|thumb|数据包选项界面的警告}}
+
+== 选项 ==
+{{tp|selectWorld.experimental.details.title}}界面有以下子选项：
+* {{tp|dataPack.minecart_improvements.name}}
+** {{tp|dataPack.minecart_improvements.description}}
+* {{tp|dataPack.redstone_experiments.name}}
+** {{tp|dataPack.redstone_experiments.description}}
+* {{tp|dataPack.trade_rebalance.name}}
+** {{tp|dataPack.trade_rebalance.description}}
+
+=== 正式版 ===
+截至{{v|java}}，“{{tp|dataPack.minecart_improvements.name}}”包含以下功能：
+; 游戏规则
+* {{gamerule|max_minecart_speed}}
+** 用于更改矿车的单坐标轴最大速度，默认为8，上限为1000，单位为格/秒
+
+; 选项
+* “{{tp|options.rotateWithMinecart}}”辅助功能选项
+** 允许玩家随矿车的轨道转动视角，默认为关
+
+; 所有[[矿车]]
+* 矿车现在具有惯性，在离开以上下坡为末端的轨道时会保留垂直动量，并在空中保持倾斜姿态
+* 矿车现在会与铁轨对齐
+
+截至{{v|java}}，“{{tp|dataPack.redstone_experiments.name}}”包含以下功能：
+; 常规
+* 关于[[红石线]]更新顺序的更改
+
+截至{{v|java}}，“{{tp|dataPack.trade_rebalance.name}}”包含以下功能：
+; 游戏内容
+* 对盔甲匠和图书管理员的[[交易]]的[[交易#交易选项（村民交易的平衡性调整）|平衡性调整]]<!--
+-->{{#if: {{v|java-snap}}|-{}-
+
+=== 快照 ===
+快照的实验性内容可能会在正式版基础之上有所改动。
+|}}
+
+== 功能开关 ==
+'''功能开关（Feature Flag）'''用于启用或禁用世界中特定组别的'''功能元素（Feature Element）'''。
+
+功能开关在物品、方块、实体、屏幕类型、[[药水]]和[[生物效果]]等多个[[注册表]]中过滤功能元素。具体而言，功能开关会产生以下影响：
+* 被过滤的方块不会被{{cmd|setblock}}、{{cmd|fill}}等命令识别，玩家不能直接对其{{ctrl|使用}}物品或{{ctrl|选取方块}}，其方块属性不会作为实体的一部分加载，其方块实体不会在结构或地物中生成。
+* 被过滤的实体不会被{{cmd|summon}}等命令识别，不会在世界中生成或加载，对应的刷怪蛋（包括通过[[发射器]]使用刷怪蛋）、刷怪笼不起作用。
+* 被过滤的物品不会被{{cmd|give}}、{{cmd|item}}和{{cmd|clear}}等命令识别，在创造模式物品栏中被隐藏，在物品提示框中显示“{{tp|item.disabled}}”红色文字，不能用于{{ctrl|攻击}}、与实体或方块{{ctrl|交互}}，配方和战利品表不会产生被禁用的物品。
+** 然而，被过滤的物品可以通过生成对应的[[物品实体]]获取。
+* 被过滤的游戏规则不会被{{cmd|gamerule}}识别。
+* 被过滤的状态效果不能由{{cmd|effect}}赋予。
+* 被过滤的魔咒不能由{{cmd|enchant}}赋予。
+* 被过滤的GUI界面不会被加载。
+* 被过滤的[[统计信息]]不会在统计屏幕中显示。
+* 被过滤的[[命令]]不会被解析。
+* 会修改原有机制的功能元素只会在功能开关开启时应用，否则运行旧版功能。
+
+一个功能开关组中最多包含64个功能开关。目前游戏中存在的功能开关有{{cd|vanilla}}、{{cd|d=pretty|trade_rebalance|redstone_experiments|minecart_improvements<!--|fd=、-->}}，其中<code>vanilla</code>被默认启用。
+
+启用了实验性内容的存档的{{Filename|[[level.dat]]}}会有{{nbt|list|enabled_features}}一项记录启用的功能开关。若存档未启用实验性内容，则不会有{{nbt|list|enabled_features}}这一项。
+
+== 数据值 ==
+{{/ID}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=21w15a|发布了[[洞穴与山崖预览数据包]]<ref>[https://feedback.minecraft.net/hc/en-us/articles/4402614709389-Caves-Cliffs-Prototype-Data-Pack-for-Minecraft-Java-Edition “Java版洞穴与山崖预览数据包”]，feedback.minecraft.net。</ref>，是内置实验性数据包的前身。}}
+|{{HistoryLine||1.19.3|dev=22w42a|加入了内置实验性数据包“{{tr|1.20更新|1.20 更新|1.20 更新}}”和“{{tr|收纳袋|束口袋|收納袋}}”。
+|加入了功能开关{{cd|d=pretty|vanilla|update_1_20|bundle}}。}}
+|{{HistoryLine|||exp=update_1_20|dev=22w42a|加入了[[竹马赛克]]、[[竹板]]、[[雕纹书架]]、[[悬挂式告示牌]]、[[竹筏]]、[[运输竹筏]]、[[骆驼]]及其[[刷怪蛋]]。}}
+|{{HistoryLine|||dev=22w45a|加入了[[竹块]]和[[去皮竹块]]。}}
+|{{HistoryLine|||dev=22w46a|加入了[[猪灵的头]]和[[音符盒]]与[[生物头颅]]的交互行为。}}
+|{{HistoryLine||1.19.4|exp=update_1_20|dev=23w04a|加入了[[锻造模板]]且更改了锻造机制。}}
+|{{HistoryLine|||exp=none|dev=23w06a|向[[创建新的世界]]菜单屏幕加入了“实验性内容”选项，可从“更多”和“游戏”（仅开发版本）标签页进入。}}
+|{{HistoryLine|||exp=update_1_20|dev=23w07a|加入了[[嗅探兽]]、[[樱花树林]]和[[考古]]相关内容。}}
+|{{HistoryLine||1.20|dev=23w12a|将内置实验性数据包“{{tr|1.20更新|1.20 更新|1.20 更新}}”中内容加入到游戏中。
+|移除了功能开关<code>update_1_20</code>。}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了内置实验性数据包“{{tr|村民交易的平衡性调整|重新平衡村民交易}}”。
+|加入了功能开关<code>trade_rebalance</code>。}}
+|{{HistoryLine|||exp=trade_rebalance|dev=23w31a|更改了[[流浪商人]]和[[图书管理员]]的[[交易]]机制。}}
+|{{HistoryLine|||dev=pre1|增加了[[远古城市]]、[[沙漠神殿]]、[[丛林神庙]]、[[废弃矿井]]和[[掠夺者前哨站]]中生成对应种类[[附魔书]]的概率，并更改了[[制图师]]和[[盔甲匠]]的交易机制。}}
+|{{HistoryLine||1.20.3|dev=23w42a|加入了内置实验性数据包“{{tr|1.21更新|1.21 更新|1.21 更新}}”。
+|加入了功能开关<code>update_1_21</code>。}}
+|{{HistoryLine|||exp=update_1_21|dev=23w42a|加入了[[合成器]]。}}
+|{{HistoryLine|||dev=23w43a|加入了[[铜块]]和[[凝灰岩]]的多个变种。}}
+|{{HistoryLine|||dev=23w45a|加入了[[试炼密室]]、[[试炼刷怪笼]]、[[旋风人]]和[[风弹（实体）|风弹]]。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w05a|加入了[[宝库]]。}}
+|{{HistoryLine|||dev=24w07a|加入了[[沼骸]]。}}
+|{{HistoryLine|||dev=24w11a|加入了[[重锤]]、[[旋风棒]]、[[沉重核心]]、2种新的锻造模板和旗帜图案、3种新的陶片。}}
+|{{HistoryLine|||dev=24w12a|加入了[[试炼密室地图]]和7个新进度。}}
+|{{HistoryLine|||dev=24w13a|加入了试炼刷怪笼和宝库的不祥状态、[[不祥试炼钥匙]]、[[不祥之瓶]]、3种用于重锤的魔咒以及6种状态效果，更改了[[不祥之兆]]的图标、音效和效果。}}
+|{{HistoryLine|||dev=pre1|加入了1个新进度。}}
+|{{HistoryLine||1.21|dev=24w18a|将内置实验性数据包“{{tr|1.21更新|1.21 更新|1.21 更新}}”中内容加入到游戏中。
+|移除了功能开关<code>update_1_21</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了内置实验性数据包“{{tr|红石实验性内容|紅石實驗性內容|紅石實驗性內容}}”和“{{tr|矿车改进|礦車改進|礦車改進}}”。
+|加入了功能开关{{cd|d=pretty|redstone_experiments|minecart_improvements}}。}}
+|{{HistoryLine|||exp=minecart_improvements|dev=24w33a|加入了{{cd|minecartMaxSpeed}}游戏规则。
+|加入了“{{tr|同步矿车转动|隨著礦車轉動|跟隨礦車轉動}}”辅助功能选项。}}
+|{{HistoryLine|||exp=bundle|dev=24w38a|加入了16种染色收纳袋，可使用任意收纳袋和任意染料合成。}}
+|{{HistoryLine|||exp=none|dev=24w39a|将内置实验性数据包“{{tr|收纳袋|束口袋|收納袋}}”中内容加入到游戏中。
+|移除了功能开关<code>bundle</code>。}}
+|{{HistoryLine|||dev=24w40a|加入了内置实验性数据包“冬季小更新”。
+|加入了功能开关{{cd|winter_drop}}。}}
+|{{HistoryLine||1.21.4|dev=24w44a|将内置实验性数据包“冬季小更新”中内容加入到游戏中。
+|移除了功能开关<code>winter_drop</code>。}}
+|{{HistoryLine||1.21.5|dev=25w07a|将内置实验性数据包“{{tr|村民交易的平衡性调整|重新平衡村民交易}}”中对制图师和流浪商人的交易的平衡性调整加入到游戏中。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了内置实验性数据包“{{tr|定位栏|定位條}}”。
+|加入了功能开关{{cd|locator_bar}}。}}
+|{{HistoryLine|||dev=25w17a|将内置实验性数据包“{{tr|定位栏|定位條}}”中内容加入到游戏中。
+|移除了功能开关{{cd|locator_bar}}。}}
+|{{HistoryLine||1.21.11|dev=25w44a|exp=minecart_improvements|将游戏规则minecartMaxSpeed重命名为max_minecart_speed。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Java Edition}}
+
+[[Category:实验性内容|*]]
+
+[[de:Experimentelle Spielelemente]]
+[[en:Experiments]]
+[[es:Juego experimental]]
+[[fr:Expérimentations]]
+[[it:Gioco sperimentale]]
+[[ja:実験的要素]]
+[[pt:Experimentos]]
+[[ru:Экспериментальный игровой процесс]]

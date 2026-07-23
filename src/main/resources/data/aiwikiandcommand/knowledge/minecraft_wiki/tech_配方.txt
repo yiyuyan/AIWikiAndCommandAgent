@@ -1,0 +1,1062 @@
+# 页面: 配方
+# 来源: https://zh.minecraft.wiki/w/%E9%85%8D%E6%96%B9
+# 分类: Java版即将到来/26.3, Java版独有信息, 基岩版, 基岩版独有信息, 数据包, 等待拆分, 附加包
+# 抓取时间: 2026-07-14 17:37:13
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|串列}}{{tr|mode=H|对象|物件}}
+{{About|配方系统|具体的合成配方|合成#完整配方清單|烧炼配方|烧炼#配方|药水配方|药水酿造#配方|命令|命令/recipe}}
+{{Split|配方;配方定义格式}}
+{{quote|在原版生存模式<ref group="*">我之所以说是原版生存模式，是因为这个功能是可以自定义的。例如，自定义地图可以要求你只能合成地图中提供的物品，其他的都不能做。在原版生存模式中，这个功能纯粹是为了帮助你记住不常用的配方，或者教你一些你可能不知道的新配方。</ref>中，配方的运作方式是这样的：当你手动合成一个配方，或者游戏认为“好了，现在你有了木棍，我们来教你怎么做镐”时，你就“发现”了这个配方。配方一经“发现”就会出现在配方书中，你可以选择在合成界面点击查看它。在那里你可以查看所有已发现的配方以及它们的合成方法，这样就不用再去查询合成形状和材料了。{{reflist|group=*}}|[[Dinnerbone]]|使用配方<ref>{{reddit|61n196/new_mob_idea_the_pillager|dfvhcex}}</ref>|Nathan Adams Mojang avatar.png}}
+{{relevant tutorial|配方}}
+
+'''配方（Recipe）'''是一种引导新玩家游玩Minecraft的方式，通过帮助玩家了解合成、烧炼以及其他的方块和物品转化方式来使玩家熟悉游戏。
+
+所有的[[合成]]、[[烧炼]]、[[高炉#用途|冶炼]]、[[营火#烹饪|营火烹饪]]、[[烟熏炉#烤制食物|烟熏]]、[[锻造]]、[[切石机#用途|切石]]、{{Upcoming|je 26.3|o=be|for=[[酿造]]}}配方都使用配方系统。{{in|be}}[[制图台#用途|制图]]也使用配方系统。配方大多数是数据驱动的，可被{{only|je|for=[[数据包]]}}或{{only|be|for=[[附加包]]}}配置。
+
+== 获取 ==
+配方可通过多种方式获得。使用一个配方会使玩家自动发现它。命令{{cmd|recipe}}可以直接给予玩家配方。当玩家达成某些条件，如获取到特定的物品时，也会解锁相应的配方。{{in|je}}使用[[知识之书]]也可以直接解锁配方。
+
+配方的条件解锁{{in|je|nc=1}}由[[进度]]控制，待达成进度后通过进度奖励赋予玩家配方；{{in|be|nc=1}}则由配方本身控制。
+
+一旦配方被发现，就将被加入玩家的配方书。已发现的配方储存在玩家的{{only|je|for={{nbt|compound|recipeBook}}}}或{{only|be|for={{nbt|compound|recipe_unlocking}}}}标签中。
+
+== 用途 ==
+{{main|配方书}}
+已发现的配方可在玩家的配方书中找到。然而，玩家并不需要发现配方来使用配方，除非开启游戏规则{{gamerule|limited_crafting|doLimitedCrafting}}。
+
+配方只会在玩家使用与当前配方类型所匹配的方块时显示。例如，烧炼配方将只在熔炉的界面中显示。当在背包中使用配方书时，只有能在玩家的2×2背包合成栏内使用的配方才会显示。
+
+== Java版 ==
+配方在游戏中使用<code>RECIPE</code>注册表，数据包路径为{{filepath|recipe}}，即所有配方定义文件都需要在{{filepath|data/<''命名空间''>/recipe}}目录下定义。与其他注册项不同，不存在“配方标签”，游戏不会加载{{filepath|data/<''命名空间''>/tags/recipe}}目录下的文件。
+
+配方定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：配方类型。
+** 依配方类型的额外字段，见下文。
+</div>
+
+{|class="wikitable"
+! 配方类型 !! 描述
+|-
+| blasting || [[#高炉配方|高炉配方]]
+|-
+| campfire_cooking || [[#营火配方|营火配方]]
+|-
+| crafting_shaped || 合成系统的[[#有序配方|有序配方]]
+|-
+| crafting_shapeless || 合成系统的[[#无序配方|无序配方]]
+|-
+| crafting_transmute || 合成系统的[[#类型转化配方|类型转化配方]]
+|-
+| crafting_dye || 合成系统的[[#染色配方|染色配方]]
+|-
+| crafting_imbue || 合成系统的[[#药染配方|药染配方]]
+|-
+| smelting || [[#熔炉配方|熔炉配方]]
+|-
+| smithing_transform || [[#锻造升级配方|锻造升级配方]]
+|-
+| smithing_trim || [[#盔甲纹饰配方|盔甲纹饰配方]]
+|-
+| smoking || [[#烟熏炉配方|烟熏炉配方]]
+|-
+| stonecutting || [[#切石机配方|切石机配方]]
+|-
+| brewing{{Upcoming|je 26.3}} || [[#酿造台配方|酿造台配方]]
+|-
+| colspan="2" | 其他配方类型见{{slink||定制配方}}
+|}
+
+=== 合成配方 ===
+==== 有序配方 ====
+代表合成的'''有序配方（Shaped Recipe）'''。游戏会自动认为左右对称的排列方式有效。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_shaped</code>。
+** {{nbt|string|group}}：（默认为空字符串）一个字符串，表示该配方的分组。同一组的合成配方将在[[配方书]]中合并显示。
+** {{nbt|string|category}}：（默认为<code>misc</code>）决定该配方出现在配方书中的哪个标签栏。有效值为：<code>building</code>（建筑）、<code>redstone</code>（红石）、<code>equipment</code>（装备）和<code>misc</code>（杂项）。
+** {{nbt|bool|show_notification}}：（默认为<code>true</code>）当前配方解锁后是否弹出[[弹窗]]提示。
+** {{nbt|compound|key|required=1}}：一个映射表，用于将字符与合成材料建立关联。字符将用于在{{nbt|list|pattern|required=1}}中指定合成图案。
+*** {{nbt|string}}{{nbt|list|''<键>''}}：表示<code>-{}-<''键''></code>所对应的合成材料，可以为单个物品ID、物品ID的列表或一个物品标签。<code>-{}-<''键''></code>只能为除了空格<code>&nbsp;</code>以外的单字符。
+** {{nbt|list|pattern|required=1}}：（最大长度为3，不允许空数组，其中所有字符串的长度应一致）合成方格中物品要摆放成的合成图案。其中的每个字符串代表合成方格中的一横行。
+*** {{nbt|string}}：（最大长度为3）一个字符串，字符串中的每个字符都应为之前所指定的一个<code>-{}-<''键''></code>，可以使用空格<code>&nbsp;</code>来表示一个空的合成槽位。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+{{collapseH|示例：}}
+<syntaxhighlight lang="json">
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:milk_bucket",
+    "B": "minecraft:sugar",
+    "C": "minecraft:wheat",
+    "E": "#minecraft:eggs"
+  },
+  "pattern": [
+    "AAA",
+    "BEB",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:cake"
+  }
+}
+</syntaxhighlight>
+
+{{Crafting
+|showname = 0
+|showdescription = 1
+|name =
+|A1= Milk Bucket
+|B1= Milk Bucket
+|C1= Milk Bucket
+|A2= Sugar 
+|B2= Any Egg   
+|C2= Sugar
+|A3= Wheat  
+|B3= Wheat  
+|C3= Wheat
+|Output= Cake
+|description = 配方图例。
+|ignoreusage=1
+}}
+{{collapseE}}
+
+==== 无序配方 ====
+代表合成的'''无序配方（Shapeless Recipe）'''。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_shapeless</code>。
+** {{nbt|string|group}}：（默认为空字符串）一个字符串，表示该配方的分组。同一组的合成配方将在[[配方书]]中合并显示。
+** {{nbt|string|category}}：（默认为<code>misc</code>）决定该配方出现在配方书中的哪个标签栏。有效值为：<code>building</code>（建筑）、<code>redstone</code>（红石）、<code>equipment</code>（装备）和<code>misc</code>（杂项）。
+** {{nbt|bool|show_notification}}：（默认为<code>true</code>）当前配方解锁后是否弹出[[弹窗]]提示。
+** {{nbt|list|ingredients|required=1}}：（{{interval|数组长度|left=1|right=9}}）该配方的原料物品。
+*** {{nbt|string}}{{nbt|list}}：一项原料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+若无序配方包含9个相同的原料，则游戏内部会认为它等同于一个有序配方，尽管此机制不会对游戏行为有明显影响。
+
+{{collapseH|示例：}}
+<syntaxhighlight lang="json">
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:iron_ingot",
+    "minecraft:flint"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:flint_and_steel"
+  }
+}
+</syntaxhighlight>
+
+{{Crafting
+|showname = 0
+|showdescription = 1
+|name =
+|Iron Ingot
+|Flint
+|Output= Flint and Steel
+|description = 配方图例。
+|ignoreusage=1
+}}
+{{collapseE}}
+
+==== 类型转化配方 ====
+<div style="float:right">
+{{Crafting Table
+|B2=Shulker Box;Any Shulker Box
+|A2=Matching Dye
+|Output=Matching Shulker Box
+|Olink=潜影盒
+|type=Decoration block
+}}
+[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/blue_shulker_box.json 查看JSON文件示例]
+</div>
+代表合成的'''类型转化配方（Transmute Recipe）'''。类型转化配方改变物品类型，保留其原有的组件修订，且可以对输出物品继续进行组件修订。
+* 当该配方匹配合成原料后，会先复制输入物品，然后修改其物品类型，以在输出中保留相应组件修订。
+* 如果指定了输出数量，则修改输出物品的数量。
+* 如果指定了组件修订，则在原有组件修订的基础上继续修订。
+* 当输入物品与输出物品相同时不生效。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_transmute</code>。
+** {{nbt|string|group}}：（默认为空字符串）一个字符串，表示该配方的分组。同一组的合成配方将在[[配方书]]中合并显示。
+** {{nbt|string|category}}：（默认为<code>misc</code>）决定该配方出现在配方书中的哪个标签栏。有效值为：<code>building</code>（建筑）、<code>redstone</code>（红石）、<code>equipment</code>（装备）和<code>misc</code>（杂项）。
+** {{nbt|bool|show_notification}}：（默认为<code>true</code>）当前配方解锁后是否弹出[[弹窗]]提示。
+** {{nbt|string}}{{nbt|list|input|required=1}}：输入物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|material|required=1}}：转变时所消耗的辅助材料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|int}}{{nbt|compound|material_count}}：（默认为<code>[1,1]</code>）辅助材料的数量范围。需为<code>[1,8]</code>的子区间。
+*** {{nbt inherit/minmax bounds ints}}
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+** {{nbt|boolean|add_material_to_result_count}}：（默认为<code>false</code>）如为<code>true</code>，将输出物品的堆叠数增加包含辅助物品的槽位的数目。
+</div>
+
+==== 染色配方 ====
+代表合成的'''染色配方（Dye Recipe）'''，用于给[[染料#盔甲|物品染色]]。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 合成方格至少需要有2个物品，否则什么也不会输出。
+** 依据合成方格的顺序，第一个<code>target</code>原料作为此配方的输入物品。如果有多个<code>target</code>原料，则什么也不会输出。
+** 合成方格中的其他物品必须符合<code>dye</code>原料的物品类型，且具有<code>dye</code>组件。
+* 合成行为：
+** 游戏先将<code>target</code>原料作为输入物品，并经过[[#类型转化配方|类型转化配方]]的处理方式转化为<code>result</code>指定的物品。
+** 转化完成后，根据既有的颜色和输入的染料颜色设置新的<code>dyed_color</code>组件，作为染色结果。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_dye</code>。
+** {{nbt|string|group}}：（默认为空字符串）一个字符串，表示该配方的分组。同一组的合成配方将在[[配方书]]中合并显示。
+** {{nbt|string|category}}：（默认为<code>misc</code>）决定该配方出现在配方书中的哪个标签栏。有效值为：<code>building</code>（建筑）、<code>redstone</code>（红石）、<code>equipment</code>（装备）和<code>misc</code>（杂项）。
+** {{nbt|bool|show_notification}}：（默认为<code>true</code>）当前配方解锁后是否弹出[[弹窗]]提示。
+** {{nbt|string}}{{nbt|list|target|required=1}}：表示将要被染色的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|dye|required=1}}：表示作为染料的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+==== 药染配方 ====
+<div style="float:right">
+{{Crafting Table
+|A1= Arrow
+|A2= Arrow
+|A3= Arrow
+|B1= Arrow
+|B2= Matching Lingering Potion
+|B3= Arrow
+|C1= Arrow
+|C2= Arrow
+|C3= Arrow
+|Output = Matching Tipped Arrow,8
+}}
+[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/tipped_arrow.json 查看JSON文件示例]
+</div>
+代表合成的'''药染配方（Imbue Recipe）'''，用于复制物品的药水效果和自定义状态效果。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 合成方格的中心必须是<code>source</code>原料，周围一圈8个物品必须是<code>material</code>原料。
+* 合成行为：
+** 将<code>source</code>原料的<code>potion_contents</code>组件复制到<code>result</code>结果物品。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_imbue</code>。
+** {{nbt|string|group}}：（默认为空字符串）一个字符串，表示该配方的分组。同一组的合成配方将在[[配方书]]中合并显示。
+** {{nbt|string|category}}：（默认为<code>misc</code>）决定该配方出现在配方书中的哪个标签栏。有效值为：<code>building</code>（建筑）、<code>redstone</code>（红石）、<code>equipment</code>（装备）和<code>misc</code>（杂项）。
+** {{nbt|bool|show_notification}}：（默认为<code>true</code>）当前配方解锁后是否弹出[[弹窗]]提示。
+** {{nbt|string}}{{nbt|list|source|required=1}}：表示提供药水效果的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|material|required=1}}：表示配方的辅助材料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+=== 定制配方 ===
+'''定制配方（Custom Recipe）'''，亦作'''特殊合成配方（Crafting Special Recipe）'''，是部分行为受游戏内部代码直接处理的配方，配方文件只能有限地修改这些配方的合成行为。这些配方不会显示在配方书中，不能被解锁，不受游戏规则{{gamerule|limited_crafting}}影响。
+
+{| class="wikitable"
+! 配方类型 !! 含义
+|-
+| <code>crafting_decorated_pot</code>
+| [[#饰纹陶罐配方|饰纹陶罐配方]]
+|-
+| <code>crafting_special_bannerduplicate</code>
+| [[#旗帜复制配方|旗帜复制配方]]
+|-
+| <code>crafting_special_bookcloning</code>
+| [[#成书复制配方|成书复制配方]]
+|-
+| <code>crafting_special_firework_rocket</code>
+| [[#烟花火箭配方|烟花火箭配方]]
+|-
+| <code>crafting_special_firework_star</code>
+| [[#烟火之星合成配方|烟火之星合成配方]]
+|-
+| <code>crafting_special_firework_star_fade</code>
+| [[#烟火之星色彩淡化配方|烟火之星色彩淡化配方]]
+|-
+| <code>crafting_special_mapextending</code>
+| [[#地图缩小配方|地图缩小配方]]
+|-
+| <code>crafting_special_repairitem</code>
+| [[#物品修复配方|物品修复配方]]
+|-
+| <code>crafting_special_shielddecoration</code>
+| [[#盾牌装饰配方|盾牌装饰配方]]
+|}
+
+==== 饰纹陶罐配方 ====
+<div style="float:right">
+{{Crafting Table
+|A1=                  |B1=Any Pottery Sherd |C1=
+|A2=Any Pottery Sherd |B2=                  |C2=Any Pottery Sherd
+|A3=                  |B3=Any Pottery Sherd |C3=
+|Output=Decorated Pot
+}}
+[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/decorated_pot.json 查看JSON文件示例]
+</div>
+代表合成的'''饰纹陶罐配方（Decorated Pot Recipe）'''，用于根据[[饰纹陶罐#合成|饰纹陶罐合成]]的规则合成物品。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 原料物品必须在合成方格指定的位置上。
+* 合成行为：
+** 游戏先获取<code>result</code>指定的物品，然后设置新的<code>pot_decorations</code>组件，组件的值来源于原料。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_decorated_pot</code>
+** {{nbt|string}}{{nbt|list|back|required=1}}：表示饰纹陶罐背面的物品，必须在合成方格第一{{tr|行|列}}第二{{tr|列|行}}的位置。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|left|required=1}}：表示饰纹陶罐左侧的物品，必须在合成方格第二{{tr|行|列}}第一{{tr|列|行}}的位置。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|right|required=1}}：表示饰纹陶罐右侧的物品，必须在合成方格第二{{tr|行|列}}第三{{tr|列|行}}的位置。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|front|required=1}}：表示饰纹陶罐前面的物品，必须在合成方格第三{{tr|行|列}}第二{{tr|列|行}}的位置。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+==== 旗帜复制配方 ====
+<div style="float:right">
+{{Crafting Table
+|B2=Matching Banner
+|A2=Matching Banner
+|Output=Matching Banner
+}}
+[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/blue_banner_duplicate.json 查看JSON文件示例]
+</div>
+代表合成的'''旗帜复制配方（Banner Duplicate Recipe）'''，用于根据[[旗帜#复制|旗帜复制]]的规则复制图案。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 合成方格只能有2个物品堆叠，否则什么也不会输出。
+** 依据合成方格的顺序，第一个原料作为提供旗帜图案的物品，第二个原料作为辅助材料。
+*** 如果原料不是旗帜物品，则什么也不会输出。
+*** 如果提供旗帜图案的旗帜颜色和辅助材料的旗帜颜色不同，则什么也不会输出。
+** 从提供旗帜图案的物品获取<code>banner_patterns</code>组件，如果此组件超过6层图案，则什么也不会输出。
+* 合成行为：
+** 游戏会根据[[#类型转化配方|类型转化配方]]的合成规则，将提供旗帜图案的物品视为输入物品，转化为<code>result</code>指定的输出物品。
+** 提供旗帜图案的原料被合成后会留在合成方格中而不会被消耗，但如果此原料存在合成后返还物品，则依旧会变成对应的物品。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_special_bannerduplicate</code>
+** {{nbt|string}}{{nbt|list|banner|required=1}}：表示配方原料。尽管所有物品都可以指定，但事实上只有旗帜物品才可以使此配方工作。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+==== 成书复制配方 ====
+<div style="float:right">
+{{Crafting Table
+|A1=;;;Book and Quill;Book and Quill;Book and Quill;Book and Quill;Book and Quill
+|A2=;;;;Book and Quill;Book and Quill;Book and Quill;Book and Quill
+|A3=;;;;;Book and Quill;Book and Quill;Book and Quill
+|B1=Book and Quill
+|B2=Written Book
+|B3=;;;;;;Book and Quill;Book and Quill
+|C1=;Book and Quill;Book and Quill;Book and Quill;Book and Quill;Book and Quill;Book and Quill;Book and Quill
+|C2=;;Book and Quill;Book and Quill;Book and Quill;Book and Quill;Book and Quill;Book and Quill
+|C3=;;;;;;;Book and Quill
+|Output= Written Book; Written Book,2; Written Book,3; Written Book,4; Written Book,5; Written Book,6; Written Book,7; Written Book,8
+}}
+[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/book_cloning.json 查看JSON文件示例]
+</div>
+代表合成的'''成书复制配方（Book Cloning Recipe）'''，用于根据[[成书#复制|成书复制]]的规则复制成书内容。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 合成方格至少有2个物品堆叠，否则什么也不会输出。
+** 依据合成方格的顺序，第一个<code>source</code>原料作为提供成书内容的物品，此物品必须具有<code>written_book_content</code>组件，否则什么也不会输出。
+* 合成行为：
+** 游戏先将<code>source</code>原料作为输入物品，并经过[[#类型转化配方|类型转化配方]]的处理方式转化为<code>result</code>指定的物品。
+** 转化完成后，设置新的<code>written_book_content</code>组件。
+*** 此组件的多数内容来自<code>source</code>原料，但{{nbt|int|generation}}会增加1。
+** 合成消耗掉的<code>material</code>原料的数量会增加到输出物品数量上。
+** 提供成书内容的<code>source</code>原料被合成后会留在合成方格中而不会被消耗，但如果此原料存在合成后返还物品，则依旧会变成对应的物品。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_special_bookcloning</code>
+** {{nbt|string}}{{nbt|list|source|required=1}}：表示提供成书内容的材料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|material|required=1}}：表示配方消耗的辅助材料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|int}}{{nbt|compound|allowed_generations|required=1}}：（默认为<code>[0, 1]</code>，必须是<code>[0, 2]</code>的子区间）对提供成书内容物品复制程度的检查。如果检查失败，则配方什么也不会输出。参考值：<code>0</code>（{{tp|book.generation.0}}），<code>1</code>（{{tp|book.generation.1}}），<code>2</code>（{{tp|book.generation.2}}），<code>3</code>（{{tp|book.generation.3}}）。
+*** {{nbt inherit/minmax bounds ints}}
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+==== 烟花火箭配方 ====
+<div style="float:right">
+{{Crafting Table
+|A1=Any Firework Star
+|A2=Paper
+|A3=Gunpowder; Gunpowder; Gunpowder
+|B1=; Gunpowder; Gunpowder
+|B2=; ; Gunpowder
+|Output= Firework Rocket,3
+}}
+[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/firework_rocket.json 查看JSON文件示例]
+</div>
+代表合成的'''烟花火箭配方（Firework Rocket Recipe）'''，用于根据[[烟花火箭#合成|烟花火箭合成]]的规则合成物品。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 合成方格至少有2个物品堆叠，否则什么也不会输出。
+** 必须有且只有一个<code>shell</code>原料作为烟花火箭的外壳。
+** 必须有数量不超过3的<code>fuel</code>原料作为烟花火箭的燃料，燃料数量控制了烟花火箭的飞行时间。
+* 合成行为：
+** 游戏先获取<code>result</code>指定的物品，然后设置新的<code>fireworks</code>组件。
+*** 此组件的值取决于对应的原料，其中{{nbt|list|explosions}}由<code>star</code>原料的<code>firework_explosion</code>组件提供，根据合成方格的顺序拼接，不存在此组件时静默忽略。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_special_firework_rocket</code>
+** {{nbt|string}}{{nbt|list|shell|required=1}}：表示提供烟花火箭外壳的材料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|fuel|required=1}}：表示增加烟花火箭飞行时间的材料，每有一个物品就会使{{nbt|byte|flight_duration}}增加1。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|star|required=1}}：表示提供烟火之星的材料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+==== 烟火之星合成配方 ====
+<div style="float:right">
+{{Crafting Table
+|A1=Gunpowder
+|A2=Matching Dye
+|A3=Head; Gold Nugget; Feather;Fire Charge
+|B1=Glowstone Dust
+|B2=Diamond
+|Output=Matching Firework Star
+}}
+[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/firework_star.json 查看JSON文件示例]
+</div>
+代表合成的'''烟火之星合成配方（Firework Star Recipe）'''，用于根据[[烟火之星#合成|烟火之星合成]]的规则合成物品。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 合成方格至少有2个物品堆叠，否则什么也不会输出。
+** 所有调整烟火之星效果的原料和<code>fuel</code>原料最多只能出现一次。
+** 符合<code>dye</code>原料的物品必须具有<code>dye</code>组件。
+* 合成行为：
+** 游戏先获取<code>result</code>指定的物品，然后设置新的<code>firework_explosion</code>组件。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_special_firework_star</code>
+** {{nbt|string}}{{nbt|list|trail|required=1}}：表示增加踪迹效果的物品。此原料不存在时游戏会正常输出物品，但不会设置踪迹效果。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|twinkle|required=1}}：表示增加闪烁效果的物品。此原料不存在时游戏会正常输出物品，但不会设置闪烁效果。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|fuel|required=1}}：表示一种原料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|dye|required=1}}：表示作为染料的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|compound|shapes|required=1}}：（默认为小型球状）表示烟火之星的形状。
+*** {{nbt|string}}{{nbt|list|small_ball}}：表示设置为小型球状的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+*** {{nbt|string}}{{nbt|list|large_ball}}：表示设置为大型球状的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+*** {{nbt|string}}{{nbt|list|burst}}：表示设置为喷发状的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+*** {{nbt|string}}{{nbt|list|star}}：表示设置为星形的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+*** {{nbt|string}}{{nbt|list|creeper}}：表示设置为苦力怕状的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+==== 烟火之星色彩淡化配方 ====
+<div style="float:right">
+{{Crafting Table
+|B2=Matching Firework Star
+|A2=Any Dye
+|Output=Matching Firework Star
+}}
+[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/firework_star_fade.json 查看JSON文件示例]
+</div>
+代表合成的'''烟火之星色彩淡化配方（Firework Star Fade Recipe）'''，用于根据[[烟火之星#合成|烟火之星色彩淡化]]的规则合成物品。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 合成方格至少有2个物品堆叠，否则什么也不会输出。
+** 依据合成方格的顺序，第一个<code>target</code>原料物品将作为输入物品。如果有多个<code>target</code>原料，则什么也不会输出。
+** 合成方格中的其他物品必须符合<code>dye</code>原料的物品类型，且具有<code>dye</code>组件。
+* 合成行为：
+** 游戏先将<code>target</code>原料作为输入物品，并经过[[#类型转化配方|类型转化配方]]的处理方式转化为<code>result</code>指定的物品。
+** 转化完成后，根据既有的颜色和输入的染料颜色设置<code>firework_explosion</code>组件的{{nbt|int array|fade_colors}}数据。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_special_firework_star_fade</code>
+** {{nbt|string}}{{nbt|list|target|required=1}}：表示将要被染色淡化的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|fuel|required=1}}：表示作为染料的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+==== 地图缩小配方 ====
+<div style="float:right">
+{{Crafting Table
+  |A1= Paper |B1= Paper |C1= Paper
+  |A2= Paper |B2= Map   |C2= Paper
+  |A3= Paper |B3= Paper |C3= Paper
+  |Output= Map
+}}
+[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/map_extending.json 查看JSON文件示例]
+</div>
+代表合成的'''地图缩小配方（Map Extending Recipe）'''，用于[[地图#比例缩小|缩小地图]]。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 合成方格的中心必须是<code>map</code>原料，周围一圈8个物品必须是<code>material</code>原料。
+** <code>map</code>原料物品必须具有<code>map_id</code>组件。
+** <code>map_id</code>组件对应的地图数据必须存在，且不能是探险家地图（依据地图图标判定），缩放等级不能是4。
+* 合成行为：
+** 游戏先将<code>map</code>原料作为输入物品，并经过[[#类型转化配方|类型转化配方]]的处理方式转化为<code>result</code>指定的物品。
+** 转化完成后，设置<code>map_post_processing</code>组件的值为1。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_special_mapextending</code>
+** {{nbt|string}}{{nbt|list|map|required=1}}：表示将要被缩小的地图物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|material|required=1}}：表示辅助材料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+==== 物品修复配方 ====
+<div style="float:right">
+{{FakeImage|
+{{Crafting Table
+ | A1 = Damaged Iron Pickaxe
+ | B1 = Damaged Iron Pickaxe
+ | Output = Iron Pickaxe
+ }}
+|[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/repair_item.json 查看JSON文件示例]}}
+</div>
+代表合成的'''物品修复配方（Repair Item Recipe）'''，用于[[物品修复]]。
+
+此配方需要两个物品，且这两个物品的物品类型必须相同，且均具有<code>damage</code>和<code>max_damage</code>组件。输出物品的最大耐久度取最大值，剩余耐久度取二者耐久度之和并额外增加5%。输出物品会保留两个原料的诅咒魔咒，所有魔咒取最高等级。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_special_repairitem</code>
+</div>
+
+==== 盾牌装饰配方 ====
+<div style="float:right">
+{{FakeImage|
+{{Crafting Table
+  |A1=Shield
+  |A2=Matching Banner
+  |Output=Matching Shield
+  |type=Combat
+}}
+|[https://github.com/misode/mcmeta/blob/data/data/minecraft/recipe/shield_decoration.json 查看JSON文件示例]}}
+</div>
+代表合成的'''盾牌装饰配方（Shield Decoration Recipe）'''，用于根据[[盾牌#添加图案|给盾牌添加图案的配方]]的规则合成物品。
+
+此配方拥有复杂的有效性检查和合成行为：
+* 有效性检查：
+** 合成方格有且只有2个物品堆叠，否则什么也不会输出。
+** <code>banner</code>原料物品必须是旗帜物品。
+** <code>target</code>原料物品的<code>banner_patterns</code>组件要么不存在，要么为空。
+* 合成行为：
+** 游戏先将<code>target</code>原料作为输入物品，并经过[[#类型转化配方|类型转化配方]]的处理方式转化为<code>result</code>指定的物品。
+** 转化完成后，根据旗帜物品设置新的<code>base_color</code>和<code>banner_patterns</code>组件。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>crafting_special_shielddecoration</code>
+** {{nbt|string}}{{nbt|list|banner|required=1}}：表示提供盾牌底色和图案的物品。尽管所有物品都可以指定，但事实上只有旗帜物品才可以使此配方工作。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|target|required=1}}：表示要设置图案的物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+=== 烧炼配方 ===
+烧炼配方使用了相似的格式，区别在与何种方块可接受此配方处理物品。
+
+<div class="treeview">
+* {{nbt|compound}} 烧炼配方共通字段
+{{nbt collapsed source|烧炼配方共通字段|visible=1|
+** {{nbt|string|group}}：（默认为空字符串）一个字符串，表示该配方的分组。同一组的合成配方将在[[配方书]]中合并显示。
+** {{nbt|string|category}}：（默认为<code>misc</code>）决定该配方出现在配方书中的哪个标签栏。有效值为：<code>food</code>（食物）、<code>blocks</code>（方块）或<code>misc</code>（杂项）。
+** {{nbt|bool|show_notification}}：（默认为<code>true</code>）当前配方解锁后是否弹出[[弹窗]]提示。
+** {{nbt|float|experience}}：（默认为0）该配方产生的[[经验值]]。
+** {{nbt|int|cookingtime}}：（对于<code>smelting</code>，默认为200；对于<code>blasting</code>、<code>smoking</code>和<code>campfire_cooking</code>，默认为100）以刻为单位的该配方的烧炼时间。
+** {{nbt|string}}{{nbt|list|ingredient|required=1}}：表示要被烧炼或烹饪的原料物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+}}
+</div>
+
+==== 高炉配方 ====
+代表[[高炉]]配方。
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>blasting</code>。
+** {{nbt collapsed link|烧炼配方共通字段}}
+</div>
+
+{{collapseH|示例：}}
+<syntaxhighlight lang="json">
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "group": "coal",
+  "ingredient": "minecraft:coal_ore",
+  "result": {
+    "id": "minecraft:coal"
+  }
+}
+</syntaxhighlight>
+{{Smelting
+|showname=1
+|Coal Ore
+|Coal
+|0,1
+|showdescription=1
+|description=配方图例。
+}}
+{{collapseE}}
+
+==== 营火配方 ====
+代表[[营火]]配方。对[[灵魂营火]]也有效。
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>campfire_cooking</code>。
+** {{nbt collapsed link|烧炼配方共通字段}}
+</div>
+默认烧炼时间是100刻，即5秒。但所有的原版营火配方都将烧炼时间修改为了600刻，即30秒。
+
+营火配方不会触发<code>recipe_unlocked</code>[[进度触发器]]。
+
+==== 熔炉配方 ====
+代表[[熔炉]]配方，也即'''熔炼（Smelting）'''配方。
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>smelting</code>。
+** {{nbt collapsed link|烧炼配方共通字段}}
+</div>
+
+==== 烟熏炉配方 ====
+代表[[烟熏炉]]配方。
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>smoking</code>。
+** {{nbt collapsed link|烧炼配方共通字段}}
+</div>
+
+=== 切石机配方 ===
+代表[[切石机]]配方。
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>stonecutting</code>。
+** {{nbt|bool|show_notification}}：（默认为<code>true</code>）当前配方解锁后是否弹出[[弹窗]]提示。
+** {{nbt|string}}{{nbt|list|ingredient|required=1}}：表示该配方的原料物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+{{collapseH|示例：}}
+<syntaxhighlight lang="json">
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cobbled_deepslate",
+  "result": {
+    "count": 1,
+    "id": "minecraft:cobbled_deepslate_stairs"
+  }
+}
+</syntaxhighlight>
+{{stonecutting
+|showname=0
+|showdescription=1
+| Cobbled Deepslate
+| Cobbled Deepslate Stairs
+|description=配方图例。
+|ignoreusage=1
+}}
+{{collapseE}}
+
+=== 酿造台配方 ===
+{{Added in development|jev=26.3|section=1}}
+
+代表[[酿造台]]配方。
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>brewing</code>。
+** {{nbt|compound|input|required=1}}：表示该配方的输入物品。
+*** {{nbt|string}}{{nbt|list|item|required=1}}：可以为单个物品ID、物品ID的列表或一个物品标签。
+*** {{nbt|compound|potion_contents}}：物品具有的[[数据组件#potion_contents|potion_contents]]物品堆叠组件。
+** {{nbt|string}}{{nbt|compound|output|required=1}}：该配方的输出物品。
+*** {{nbt inherit/item template}}
+** {{nbt|compound|reagent|required=1}}：表示该配方的原料物品。
+*** {{nbt|string}}{{nbt|list|item|required=1}}：可以为单个物品ID、物品ID的列表或一个物品标签。
+</div>
+
+{{collapseH|示例：}}
+<syntaxhighlight lang="json">
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "minecraft:potion",
+    "potion_contents": {
+      "potions": "minecraft:awkward"
+    }
+  },
+  "output": {
+    "components": {
+      "minecraft:potion_contents": {
+        "potion": "minecraft:night_vision"
+      }
+    },
+    "id": "minecraft:potion"
+  },
+  "reagent": {
+    "item": "minecraft:golden_carrot"
+  }
+}
+</syntaxhighlight>
+{{Brewing
+|showname=0
+|showdescription=1
+|Golden Carrot
+|Potion of Night Vision
+|description=配方图例。
+|ignoreusage=1
+}}
+{{collapseE}}
+
+=== 锻造配方 ===
+===== 锻造升级配方 =====
+代表[[锻造#升级|锻造升级]]配方，也即'''锻造转化（Smithing Transform）'''配方。
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>smithing_transform</code>。
+** {{nbt|bool|show_notification}}：（默认为<code>true</code>）当前配方解锁后是否弹出[[弹窗]]提示。
+** {{nbt|string}}{{nbt|list|template}}：表示基础物品升级时所需的[[锻造模板]]。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|base|required=1}}：表示要被锻造升级的基础物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|addition}}：表示升级基础物品时所需的锻造原材料。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|compound|result|required=1}}：该配方的输出物品。游戏会根据[[#类型转化配方|类型转化配方]]的合成规则，将基础物品视为输入物品，转化为此输出物品。
+*** {{nbt inherit/item template}}
+</div>
+
+{{collapseH|示例：}}
+<syntaxhighlight lang="json">
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#minecraft:netherite_tool_materials",
+  "base": "minecraft:diamond_axe",
+  "result": {
+    "id": "minecraft:netherite_axe"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}
+</syntaxhighlight>
+
+{{Smithing
+|head=1
+|Netherite Upgrade
+|Diamond Axe
+|Netherite Ingot
+|Netherite Axe
+|showdescription=1
+|description = 配方图例。
+|tail=1
+}}
+{{collapseE}}
+
+===== 盔甲纹饰配方 =====
+代表[[盔甲纹饰]]配方，也即'''锻造纹饰（Smithing Trim）'''配方。
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|type|required=1}}：<code>smithing_trim</code>。
+** {{nbt|bool|show_notification}}：（默认为<code>true</code>）当前配方解锁后是否弹出[[弹窗]]提示。
+** {{nbt|string}}{{nbt|list|template|required=1}}：表示为基础物品添加盔甲纹饰时所需的[[锻造模板]]。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|base|required=1}}：表示要被添加盔甲纹饰的基础物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+** {{nbt|string}}{{nbt|list|addition|required=1}}：表示为基础物品添加盔甲纹饰时所需的锻造原材料，可以为单个物品ID、物品ID的列表或一个物品标签。将由此物品的<code>provides_trim_material</code>物品堆叠组件确定添加到基础物品上的盔甲纹饰材料。
+** {{nbt|string}}{{nbt|compound|pattern|required=1}}：添加到基础物品上的盔甲纹饰图案。
+*** {{nbt inherit/trim pattern}}
+</div>
+
+== 基岩版 ==
+配方定义文件全部位于[[行为包]]的{{filepath|recipes}}目录下，且均为JSON文件。格式随配方类型不同而不同。大部分配方是数据驱动的，少部分配方是硬编码的。
+
+{|class="wikitable"
+! 名称 !! 描述
+|-
+| minecraft:recipe_shaped || 有序合成配方
+|-
+| minecraft:recipe_shapeless || 无序合成配方、切石机配方
+|-
+| minecraft:recipe_furnace || 烧炼配方
+|-
+| minecraft:recipe_brewing_container || rowspan="2" | 酿造配方
+|-
+| minecraft:recipe_brewing_mix
+|-
+| minecraft:recipe_smithing_transform || 锻造升级配方
+|-
+| minecraft:recipe_smithing_trim || 盔甲纹饰配方
+|-
+| minecraft:recipe_material_reduction || 材料分解器配方
+|}
+
+{{nbt collapsed source|输入物品|no-remove=1|
+** {{nbt|string|item}}：表示一个原料物品。
+** {{nbt|int}}{{nbt|string|data}}：物品的数据值。可以为一个[[Molang]]表达式。
+** {{nbt|string|tag}}：表示一个物品标签，该标签的所有物品都可作为原料。
+}}
+{{nbt collapsed source|输出物品|no-remove=1|
+** {{nbt|string|item}}：表示输出物品。
+** {{nbt|int}}{{nbt|string|data}}：物品的数据值。可以为一个[[Molang]]表达式。
+** {{nbt|int|count}}：输出物品的数量。
+}}
+
+=== recipe_shaped ===
+代表有序合成配方。
+<div class="treeview>
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|format_version}}：此配方文件的运行版本。
+** {{nbt|compound|minecraft:recipe_shaped|required=0|existonsave=0}}：配方的详细信息。
+*** {{nbt|compound|description}}
+**** {{nbt|string|identifier}}：此配方的标识符，用于区分不同的配方。
+*** {{nbt|string}}{{nbt|list|tags}}：此配方的标签。原版游戏下有效值只有<code>crafting_table</code>。
+*** {{nbt|string|group}}：未知。
+*** {{nbt|compound|key|required=0|existonsave=0}}：一个映射表，用于将字符与合成材料建立关联。字符将用于在{{nbt|list|pattern}}中指定合成图案。
+**** {{nbt|string}}{{nbt|compound|''<键>''}}：表示<code>-{}-<''键''></code>所对应的合成材料。<code>-{}-<''键''></code>只能为除了空格<code>&nbsp;</code>以外的单字符。
+***** {{nbt collapsed link|输入物品}}
+*** {{nbt|list|pattern|required=0|existonsave=0}}：合成方格中物品要摆放成的合成图案。其中的每个字符串代表合成方格中的一横行。
+**** {{nbt|string}}：一个字符串，字符串中的每个字符都应为之前所指定的一个<code>-{}-<''键''></code>，可以使用空格<code>&nbsp;</code>来表示一个空的合成槽位。
+*** {{nbt|string}}{{nbt|compound}}{{nbt|list|result|required=0|existonsave=0}}：该配方的输出物品。可以为单个物品，也可以为一个物品的列表。
+**** {{nbt collapsed link|输出物品}}
+*** {{nbt|boolean|assume_symmetry}}：（默认为<code>true</code>）此配方是否可以左右对称排列。
+*** {{nbt|int|priority}}：此配方的优先级，值越低优先级越大。未指定时将默认为0。
+*** {{nbt|compound}}{{nbt|list|unlock}}：此配方的解锁条件。
+**** {{nbt condition|若{{tr|类型|型別}}为{{nbt|list}}：}}
+**** {{nbt|compound}}：检查要获得的物品，必须至少包含一个物品或物品标签。
+***** {{nbt|string|item}}：一个物品。
+***** {{nbt|int}}{{nbt|string|data}}：物品的数据值。可以为一个Molang表达式。
+***** {{nbt|string|tag}}：一个物品标签。
+**** {{nbt condition|若{{tr|类型|型別}}为{{nbt|compound}}：}}
+**** {{nbt|string|context}}：取值可以为<code>AlwaysUnlocked</code>（默认解锁）、<code>PlayerInWater</code>（入水后解锁）或<code>PlayerHasManyItems</code>（物品栏有超过10个物品时解锁）。
+</div>
+
+=== recipe_shapeless ===
+代表无序合成配方。切石机也使用此系统。
+<div class="treeview>
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|format_version}}：此配方文件的运行版本。
+** {{nbt|compound|minecraft:recipe_shapeless|required=0|existonsave=0}}：配方的详细信息。
+*** {{nbt|compound|description}}
+**** {{nbt|string|identifier}}：此配方的标识符，用于区分不同的配方。
+*** {{nbt|string}}{{nbt|list|tags}}：此配方的标签。原版游戏下有效值只有<code>crafting_table</code>、<code>stonecutter</code>和<code>cartography_table</code>。
+*** {{nbt|string|group}}：未知。
+*** {{nbt|list|ingredients|existonsave=0|required=0}}：此配方的原料。
+**** {{nbt|string}}{{nbt|compound}}：一个原料物品。
+***** {{nbt collapsed link|输入物品}}
+*** {{nbt|string}}{{nbt|compound}}{{nbt|list|result|required=0|existonsave=0}}：该配方的输出物品。必须只有一个输出物品。
+**** {{nbt collapsed link|输出物品}}
+*** {{nbt|int|priority}}：此配方的优先级，值越低优先级越大。未指定时将默认为0。
+*** {{nbt|compound}}{{nbt|list|unlock}}：此配方的解锁条件。
+**** {{nbt condition|若{{tr|类型|型別}}为{{nbt|list}}：}}
+**** {{nbt|compound}}：检查要获得的物品，必须至少包含一个物品或物品标签。
+***** {{nbt|string|item}}：一个物品。
+***** {{nbt|int}}{{nbt|string|data}}：物品的数据值。可以为一个Molang表达式。
+***** {{nbt|string|tag}}：一个物品标签。
+**** {{nbt condition|若{{tr|类型|型別}}为{{nbt|compound}}：}}
+**** {{nbt|string|context}}：取值可以为<code>AlwaysUnlocked</code>（默认解锁）、<code>PlayerInWater</code>（入水后解锁）或<code>PlayerHasManyItems</code>（物品栏有超过10个物品时解锁）。
+</div>
+
+=== recipe_furnace ===
+代表烧炼配方。
+<div class="treeview>
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|format_version}}：此配方文件的运行版本。
+** {{nbt|compound|minecraft:recipe_furnace|existonsave=0|required=0}}：配方的详细信息。
+*** {{nbt|compound|description}}
+**** {{nbt|string|identifier}}：此配方的标识符，用于区分不同的配方。
+*** {{nbt|string}}{{nbt|list|tags}}：此配方的标签。原版游戏下有效值只有<code>furnace</code>、<code>blast_furnace</code>、<code>smoker</code>、<code>campfire</code>和<code>soul_campfire</code>。
+*** {{nbt|string|group}}：未知。
+*** {{nbt|string}}{{nbt|compound|input|required=0|existonsave=0}}：该配方的原料物品。
+**** {{nbt collapsed link|输入物品}}
+*** {{nbt|string}}{{nbt|compound|output|required=0|existonsave=0}}：该配方的输出物品。
+**** {{nbt collapsed link|输出物品}}
+</div>
+
+=== recipe_brewing_container ===
+代表[[酿造]]配方，用于转化物品类型。
+<div class="treeview>
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|format_version}}：此配方文件的运行版本。
+** {{nbt|compound|minecraft:recipe_brewing_container|required=0|existonsave=0}}：配方的详细信息。
+*** {{nbt|compound|description}}
+**** {{nbt|string|identifier}}：此配方的标识符，用于区分不同的配方。
+*** {{nbt|string}}{{nbt|list|tags}}：此配方的标签。原版游戏下有效值只有<code>brewing_stand</code>。
+*** {{nbt|string}}{{nbt|compound|input|required=0|existonsave=0}}：该配方的原料物品。
+**** {{nbt collapsed link|输入物品}}
+*** {{nbt|string}}{{nbt|compound|output|required=0|existonsave=0}}：该配方的输出物品。
+**** {{nbt collapsed link|输出物品}}
+*** {{nbt|string}}{{nbt|compound|reagent|required=0|existonsave=0}}：要添加的酿造材料。
+**** {{nbt collapsed link|输入物品}}
+</div>
+
+=== recipe_brewing_mix ===
+代表酿造配方，用于转化药水效果。
+<div class="treeview>
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|format_version}}：此配方文件的运行版本。
+** {{nbt|compound|minecraft:recipe_brewing_mix|required=0|existonsave=0}}：配方的详细信息。
+*** {{nbt|compound|description}}
+**** {{nbt|string|identifier}}：此配方的标识符，用于区分不同的配方。
+*** {{nbt|string}}{{nbt|list|tags}}：此配方的标签。原版游戏下有效值只有<code>brewing_stand</code>。
+*** {{nbt|string|input|required=0|existonsave=0}}：输入的药水效果。
+*** {{nbt|string|output|required=0|existonsave=0}}：输出的药水效果。
+*** {{nbt|string}}{{nbt|compound|reagent}}：要添加的酿造材料。
+**** {{nbt collapsed link|输入物品}}
+</div>
+
+=== recipe_smithing_transform ===
+代表锻造升级配方。
+<div class="treeview>
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|format_version}}：此配方文件的运行版本。
+** {{nbt|compound|minecraft:recipe_smithing_transform}}：配方的详细信息。
+*** {{nbt|compound|description}}
+**** {{nbt|string|identifier}}：此配方的标识符，用于区分不同的配方。
+*** {{nbt|string}}{{nbt|list|tags}}：此配方的标签。原版游戏下有效值只有<code>smithing_table</code>。
+*** {{nbt|string}}{{nbt|compound|template}}：表示锻造模板物品。物品必须具有<code>minecraft:trim_templates</code>标签才能被放置到锻造台中。
+**** {{nbt|string|item}}：表示一个原料物品。
+**** {{nbt|int}}{{nbt|string|data}}：物品的数据值。可以为一个Molang表达式。
+*** {{nbt|string}}{{nbt|compound|base}}：表示锻造的基础物品。物品必须具有<code>minecraft:trimmable_armors</code>标签才能被放置到锻造台中。
+**** {{nbt|string|item}}：表示一个原料物品。
+**** {{nbt|int}}{{nbt|string|data}}：物品的数据值。可以为一个Molang表达式。
+*** {{nbt|string}}{{nbt|compound|addition}}：表示锻造原材料物品。物品必须具有<code>minecraft:trim_materials</code>标签才能被放置到锻造台中。但唯一有效的物品只有下界合金锭。
+**** {{nbt|string|item}}：表示一个原料物品。
+**** {{nbt|int}}{{nbt|string|data}}：物品的数据值。可以为一个Molang表达式。
+*** {{nbt|string}}{{nbt|compound|result}}：该配方的输出物品。
+**** {{nbt collapsed link|输出物品}}
+</div>
+
+=== recipe_smithing_trim ===
+代表[[盔甲纹饰]]配方。
+<div class="treeview>
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|format_version}}：此配方文件的运行版本。
+** {{nbt|compound|minecraft:recipe_smithing_trim}}：配方的详细信息。
+*** {{nbt|compound|description}}
+**** {{nbt|string|identifier}}：此配方的标识符，用于区分不同的配方。
+*** {{nbt|string}}{{nbt|list|tags}}：此配方的标签。原版游戏下有效值只有<code>smithing_table</code>。
+*** {{nbt|string}}{{nbt|compound|template}}：表示锻造模板物品。物品必须具有<code>minecraft:trim_templates</code>标签才能被放置到锻造台中。
+**** {{nbt collapsed link|输入物品}}
+*** {{nbt|string}}{{nbt|compound|base}}：表示锻造的基础物品。物品必须具有<code>minecraft:trimmable_armors</code>标签才能被放置到锻造台中。
+**** {{nbt collapsed link|输入物品}}
+*** {{nbt|string}}{{nbt|compound|addition}}：表示锻造原材料物品。物品必须具有<code>minecraft:trim_materials</code>标签才能被放置到锻造台中。
+**** {{nbt collapsed link|输入物品}}
+</div>
+
+=== recipe_material_reduction ===
+{{education feature|section=1}}
+代表[[材料分解器]]配方。
+<div class="treeview>
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|format_version}}：此配方文件的运行版本。
+** {{nbt|compound|minecraft:recipe_material_reduction}}：配方的详细信息。
+*** {{nbt|compound|description}}
+**** {{nbt|string|identifier}}：此配方的标识符，用于区分不同的配方。
+*** {{nbt|string}}{{nbt|list|tags}}：此配方的标签。原版游戏下有效值只有<code>material_reducer</code>。
+*** {{nbt|string}}{{nbt|compound|input}}：该配方的原料物品。
+**** {{nbt collapsed link|输入物品}}
+*** {{nbt|string}}{{nbt|compound}}{{nbt|list|output}}：该配方的输出物品。可以为单个物品，也可以为一个物品的列表。输出物品不能超过9个。
+**** {{nbt collapsed link|输出物品}}
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=17w13a|为大多数合成配方加入了配方系统。}}
+|{{HistoryLine|||dev=17w16a|为配方加入了{{nbt|string|group}}字段。}}
+|{{HistoryLine||1.13|dev=17w47a|移除了配方原料和输出物品的{{nbt|int|data}}字段。}}
+|{{HistoryLine|||dev=17w48a|自定义配方现在可以加入数据包中。
+|加入了13种特殊配方类型，以将这些配方转换进配方系统。}}
+|{{HistoryLine|||dev=17w49a|为配方原料加入了{{nbt|string|tag}}字段。}}
+|{{HistoryLine|||dev=18w06a|熔炉配方现在使用配方系统。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了<code>crafting_special_suspiciousstew</code>配方类型。}}
+|{{HistoryLine||1.14|dev=18w48a|移除了{{cd|d=pretty|crafting_special_banneraddpattern|crafting_special_repairitem}}配方类型。}}
+|{{HistoryLine|||dev=18w50a|加入了<code>blasting</code>和<code>smoking</code>配方类型。}}
+|{{HistoryLine|||dev=19w02a|加入了<code>campfire_cooking</code>配方类型。}}
+|{{HistoryLine|||dev=19w04a|加入了<code>stonecutting</code>配方类型。}}
+|{{HistoryLine||1.14.3|dev=pre3|重新加入了<code>crafting_special_repairitem</code>配方类型。}}
+|{{HistoryLine||1.16|dev=pre1|加入了<code>smithing</code>配方类型。}}
+|{{HistoryLine||1.19.3|dev=22w42a|配方书中的分类和标签页现在可由配方定义控制。}}
+|{{HistoryLine|||dev=22w45a|调整了一些配方表的内部格式，使其更具一致性。
+|使用9个同种材料合成的合成表现在被视为无序合成表，此改动不体现在实际游戏中。}}
+|{{HistoryLine||1.19.4|dev=23w04a|加入了{{cd|d=pretty|smithing_transform|smithing_trim}}配方类型，用以替代<code>smithing</code>。}}
+|{{HistoryLine|||dev=23w07a|加入了<code>crafting_decorated_pot</code>配方类型。
+|加入了配方的<code>show_notification</code>字段，用于控制配方解锁时是否显示[[弹窗]]。}}
+|{{HistoryLine||1.20|dev=pre2|在配方原料中指定空气<code>"item": "minecraft:air"</code>可用于表示配方中会与空槽位匹配上的合成材料。}}
+|{{HistoryLine|||dev=pre6|空气不再能用于配方原料。
+|{{cd|d=pretty|smithing_trim|smithing_transform}}类型配方的多个字段现在支持以数组形式列出多种原材料。}}
+|{{HistoryLine||1.20.5|dev=24w10a|更改了{{cd|d=pretty|smelting|blasting|smoking|campfire_cooking}}的输出物品格式来让它们支持[[物品堆叠组件]]。
+|更改了{{cd|d=pretty|crafting_shaped|crafting_shapeless|stonecutting}}的{{nbt|compound|result}}至物品堆叠组件格式以支持{{nbt|compound|components}}。
+|更改了{{cd|smithing_transform}}的{{nbt|compound|result}}至物品堆叠组件格式以支持{{nbt|compound|components}}，但不能正常工作。<ref name="MC-269268">{{bug|MC-269268|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=24w12a|{{cd|smithing_transform}}中的{{nbt|compound|components}}现在能正常工作了。<ref name="MC-269268"/>}}
+|{{HistoryLine||1.21.2|dev=24w33a|移除了<code>crafting_special_suspiciousstew</code>配方类型。
+|简化了配方材料格式，现在它与接受物品列表（如物品谓词）的其他字段保持一致。
+|现在{{cd|d=pretty|smithing_transform|smithing_trim}}配方的字段都是可选的，且不接受空列表。}}
+|{{HistoryLine|||dev=24w38a|加入了配方类型<code>crafting_transmute</code>。
+|移除了配方类型<code>crafting_special_shulkerboxcoloring</code>。}}
+|{{HistoryLine|||dev=pre2|现在物品类型转化配方的输出物品不再可以是[[空气]]。}}
+|{{HistoryLine||1.21.5|dev=25w02a|现在物品类型转化配方的输出物品支持指定数量和附加组件以修改结果物品。
+|现在锻造升级配方的输出与类型转化配方一致。}}
+|{{HistoryLine|||dev=25w04a|现在<code>smithing_transform</code>配方的<code>base</code>字段是必选的，<code>smithing_trim</code>配方的所有字段都是必选的。
+|向<code>smithing_trim</code>配方加入新字段<code>pattern</code>，控制输出物品的纹饰图案。}}
+|{{HistoryLine|||dev=25w05a|现在物品类型转化配方不再要求输入与输出物品的物品类型不同，仅要求输入与输出物品不完全一致。<ref name="MC-279257">{{Bug|MC-279257|||Fixed}}</ref>}}
+|{{HistoryLine||26.1|dev=snapshot-3|现在所有的配方输出<code>result</code>都允许使用字符串直接指定物品ID。
+|此前，只有类型转化配方和锻造升级配方接受这种格式，且所有的烧炼配方不允许指定输出数量。}}
+|{{HistoryLine|||dev=snapshot-5|加入了配方类型<code>crafting_dye</code>，取代了<code>crafting_special_armordye</code>。
+|加入了配方类型<code>crafting_imbue</code>，取代了<code>crafting_special_tippedarrow</code>。
+|移除了配方类型<code>crafting_special_mapcloning</code>，其功能被整合到类型转化配方中。
+|现在所有的非定制配方都可以设定{{nbt|boolean|show_notification}}，此前只有有序合成配方可以设定。
+|移除了从未使用的切石机配方的<code>group</code>字段、定制配方的<code>category</code>字段。
+|为类型转化配方加入了<code>material_count</code>和<code>add_material_count_to_result</code>字段，以允许根据辅助材料数量增加输出数量。
+|除物品修复配方外，所有的定制配方现在均可以一定程度地控制输入与输出，之前只能配置毫无作用的<code>category</code>字段。
+|烧炼配方的产物数量现在会正确处理。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|将绝大多数合成配方引入配方系统。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.22|现在合成配方中的同类合成材料可以任意混合（如使用[[圆石]]和[[黑石]]合成[[石剑]]）。}}
+|{{HistoryLine||1.20.10|exg=recipe_unlocking|dev=1.20.10.21|加入了配方解锁机制。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|配方解锁机制不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.20.30.22|配方解锁机制现在默认开启。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Bedrock Edition}}
+
+[[Category:数据包]]
+[[Category:附加包]]
+
+[[de:Rezeptdefinition]]
+[[en:Recipe (Java Edition)]]
+[[es:Receta]]
+[[fr:Recette]]
+[[ja:レシピ]]
+[[lzh:方]]
+[[pl:Receptura]]
+[[pt:Receita]]
+[[ru:Рецепт]]

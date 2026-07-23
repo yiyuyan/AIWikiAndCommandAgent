@@ -1,0 +1,122 @@
+# 页面: 宠物鸡
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%A0%E7%89%A9%E9%B8%A1
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:19
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=25w14craftmine}}
+{{Infobox entity
+|group1=温带
+|1-1=Chicken JE2 BE2.png
+|1-2=Baby Chicken JE2 BE2.png
+|group2=寒带
+|2-1=Cold Chicken JE1 BE1.png
+|2-2=Baby Cold Chicken JE1 BE1.png
+|group3=热带
+|3-1=Warm Chicken JE1 BE1.png
+|3-2=Baby Warm Chicken JE1 BE1.png
+|*-1caption=成年
+|*-2caption=幼年
+|*-2size=100px
+| health = {{Hp|4}}
+| behavior = 友好生物
+| size = '''成年：'''<br>高度：1.95格<br>宽度：0.6格<br>
+'''幼年：'''<br>高度：0.35格<br>宽度：0.2格
+| spawn = 见{{slink||生成}}
+| usableitems = {{ItemLink|Lead}}<br>{{ItemLink|Name Tag}}
+| entity-id-raw = pet_chicken
+}}
+
+'''宠物鸡（Pet Chicken）'''是[[鸡]]在[[25w14craftmine]]愚人节版本中的[[宠物（25w14craftmine）|宠物]]变种。
+
+== 生成 ==
+解锁并激活可解锁项目“[[可解锁项目#pet chicken|宠物鸡（Pet Chicken）]]”后进入新的[[矿境]]或在矿境中解锁并激活该项目时会生成一只宠物鸡。
+
+== 掉落物 ==
+宠物鸡被杀死时不会掉落物品和[[经验]]。
+
+== 行为 ==
+宠物鸡与常规版本中的鸡类似，会漫无目的地游荡，也会下[[蛋]]，但有以下不同：
+* 玩家的近战攻击无法对宠物鸡造成伤害。
+* 宠物鸡不会被玩家手持的能吸引鸡的物品（如[[小麦种子]]）吸引，玩家也无法喂食宠物鸡。
+* 宠物鸡会摔死，尽管宠物鸡从高处落下时也会迅速扇动翅膀来减慢下落速度。
+
+== 音效 ==
+{{Sound table
+|sound=Chicken say1.ogg
+|sound2=Chicken say2.ogg
+|sound3=Chicken say3.ogg
+|subtitle={{tp|subtitles.entity.chicken.ambient}}
+|source=友好生物
+|description=空闲时随机播放此声音
+|id=entity.chicken.ambient
+|translationkey=subtitles.entity.chicken.ambient
+}}
+{{Sound table
+|sound=Chicken hurt1.ogg
+|sound2=Chicken hurt2.ogg
+|subtitle={{tp|subtitles.entity.chicken.death}}
+|source=友好生物
+|description=死亡
+|id=entity.chicken.death
+|translationkey=subtitles.entity.chicken.death
+}}
+{{Sound table
+|sound=Chicken plop.ogg
+|subtitle={{tp|subtitles.entity.chicken.egg}}
+|source=友好生物
+|description=下蛋
+|id=entity.chicken.egg
+|translationkey=subtitles.entity.chicken.egg
+}}
+{{Sound table
+|sound=Chicken hurt1.ogg
+|sound2=Chicken hurt2.ogg
+|subtitle={{tp|subtitles.entity.chicken.hurt}}
+|source=友好生物
+|description=受伤
+|id=entity.chicken.hurt
+|translationkey=subtitles.entity.chicken.hurt
+}}
+{{Sound table
+|sound=Chicken step1.ogg
+|sound2=Chicken step2.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=友好生物
+|description=行走
+|id=entity.chicken.step
+|translationkey=subtitles.block.generic.footsteps
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=java
+|Pet Chicken
+|spritetype=entity
+|nameid=pet_chicken
+|foot=1}}
+
+=== 实体数据 ===
+{{main|实体数据格式}}
+宠物鸡有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+{{#lst:宠物（25w14craftmine）|common}}
+** {{nbt|int|EggLayTime|existonsave=1}}：距离宠物鸡下一次下蛋的时间。宠物鸡会在此值为0的时候下蛋，然后该值会被随机重置到{{convert|6000||分}}到{{convert|12000||分}}之间。此值不存在时游戏读取时立刻重置此值。
+** {{nbt|bool|IsChickenJockey|required=1|existonsave=1}}：表示这只宠物鸡是否为幼年僵尸的载具。如果为<samp>true</samp>，这只宠物鸡可以被自然清除且不再下蛋，在被玩家击杀时会掉落10经验，而不是平时的1-3经验。无论此值为何，骑乘宠物鸡的幼年僵尸依然可以控制这只宠物鸡。
+** {{nbt|string|variant|required=1|existonsave=1}}：（[[命名空间ID]]）宠物鸡的变种。如果设置值无效则设置为<code>temperate</code>。
+</div>
+
+== 你知道吗 ==
+* 成年宠物鸡和幼年宠物鸡显示的大小是一样的，但[[判定箱]]的大小不同，成年、幼年宠物苦力怕分别与成年[[僵尸]]、幼年[[鸡]]的判定箱大小相同。
+
+== 导航 ==
+{{Navbox jokes|25w14craftmine}}
+
+[[Category:生物]]
+[[Category:实体]]
+
+[[en:Pet Chicken]]
+[[ja:Pet Chicken]]

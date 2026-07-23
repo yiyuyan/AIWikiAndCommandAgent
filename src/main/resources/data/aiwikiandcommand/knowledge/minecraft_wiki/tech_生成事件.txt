@@ -1,0 +1,2206 @@
+# 页面: 生成事件
+# 来源: https://zh.minecraft.wiki/w/%E7%94%9F%E6%88%90%E4%BA%8B%E4%BB%B6
+# 分类: 基岩版, 基岩版独有特性, 待扩充页面, 待更新条目, 缺少理由的待更新条目
+# 抓取时间: 2026-07-14 17:32:18
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock}}
+{{needs update}}
+{{stub|缺少补充说明和历史}}
+
+'''生成事件（Spawn event）'''严格来说叫作'''生物事件（Mob event）'''，是基岩版独有技术性标签，用于向指定一个[[生物]]或[[实体]]自定义选择其生成后的行为，可应用于命令{{cmd|summon}}和{{cmd|event}}以及创作[[附加包]]，使用json文件编辑。
+
+下列为目前版本的所有生物事件的词条：
+
+{| class="wikitable sortable" data-description="List of entity events (bedrock only)"
+! 事件
+! 说明
+! 可应用于
+|-
+| {{cd|abort_sheltering}}
+| 实体离开蜂巢
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|admire_item_started_event}}
+| 实体开始端详物品
+|{{flatlist|
+* {{EntityLink|piglin}}
+}}
+|-
+| {{cd|admire_item_stopped_event}}
+| 实体结束端详物品
+|{{flatlist|
+* {{EntityLink|piglin}}
+}}
+|-
+| {{cd|ageable_grow_up}}
+| 实体成年
+|{{flatlist|
+* {{EntityLink|dolphin}}
+* {{EntityLink|tadpole}}
+}}
+|-
+| {{cd|attack_cooldown_complete_event}}
+| 实体完成攻击后进入冷却
+|{{flatlist|
+* {{EntityLink|axolotl}}
+* {{EntityLink|goat}}
+* {{EntityLink|hoglin}}
+* {{EntityLink|piglin}}
+}}
+|-
+| {{cd|attacked}}
+| 实体攻击成功
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|become_angry}}
+| 实体开始生气
+|{{flatlist|
+* {{EntityLink|dolphin}}
+}}
+|-
+| {{cd|become_angry_event}}
+| 实体生气
+|{{flatlist|
+* {{EntityLink|hoglin}}
+* {{EntityLink|piglin}}
+* {{EntityLink|piglin-brute}}
+}}
+|-
+| {{cd|become_calm_event}}
+| 实体冷静
+|{{flatlist|
+* {{EntityLink|hoglin}}
+* {{EntityLink|piglin}}
+* {{EntityLink|piglin-brute}}
+}}
+|-
+| {{cd|become_cow}}
+| 实体变成牛
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|become_pregnant}}
+| 实体怀孕
+|{{flatlist|
+* {{EntityLink|frog}}
+}}
+|-
+| {{cd|become_stray_event}}
+| 实体变成流浪者
+|{{flatlist|
+* {{EntityLink|skeleton}}
+}}
+|-
+| {{cd|become_witch}}
+| 实体转换为女巫
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|become_zombie}}
+| 实体变成僵尸
+|{{flatlist|
+* {{EntityLink|pig}}
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|become_zombie_event}}
+| 实体变成僵尸变种
+|{{flatlist|
+* {{EntityLink|hoglin}}
+* {{EntityLink|piglin}}
+* {{EntityLink|piglin-brute}}
+}}
+|-
+| {{cd|calmed_down}}
+| 实体变冷静
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|change_to_skeleton}}
+| 实体转换为骷髅
+|{{flatlist|
+* {{EntityLink|stray}}
+}}
+|-
+| {{cd|collected_nectar}}
+| 实体已采蜜
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|countdown_to_perish_event}}
+| 实体进入死亡倒计时模式
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|dried_out}}
+| 实体已经缺水
+|{{flatlist|
+* {{EntityLink|axolotl}}
+* {{EntityLink|dolphin}}
+}}
+|-
+| {{cd|enter_water}}
+| 实体进入水中
+|{{flatlist|
+* {{EntityLink|axolotl}}
+}}
+|-
+| {{cd|escaped_event}}
+| 实体逃开
+|{{flatlist|
+* {{EntityLink|hoglin}}
+}}
+|-
+| {{cd|find_flower_timeout}}
+| 实体寻找花超时
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|find_hive_event}}
+| 实体寻找蜂巢
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|find_hive_timeout}}
+| 实体寻找蜂巢超时
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|from_egg}}
+| 实体来自鸡蛋
+|{{flatlist|
+* {{EntityLink|chicken}}
+}}
+|-
+| {{cd|from_explosion}}
+| 实体因爆炸产生
+|{{flatlist|
+* {{EntityLink|tnt}}
+}}
+|-
+| {{cd|from_village}}
+| 实体由村民转化产生
+|{{flatlist|
+* {{EntityLink|zombie-villager}}
+}}
+|-
+| {{cd|go_back_to_spawn_failed}}
+| 实体试图返回其出生点但失败
+|{{flatlist|
+* {{EntityLink|piglin-brute}}
+}}
+|-
+| {{cd|got_in_powder_snow}}
+| 实体进入细雪
+|{{flatlist|
+* {{EntityLink|skeleton}}
+}}
+|-
+| {{cd|got_out_of_powder_snow}}
+| 实体离开细雪
+|{{flatlist|
+* {{EntityLink|skeleton}}
+}}
+|-
+| {{cd|grow_up}}
+| 实体成年
+|{{flatlist|
+* {{EntityLink|rabbit}}
+}}
+|-
+| {{cd|hive_destroyed}}
+| 蜂巢被破坏
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|important_block_destroyed_event}}
+| 附近的金质方块被破坏
+|{{flatlist|
+* {{EntityLink|piglin}}
+* {{EntityLink|piglin-brute}}
+}}
+|-
+| {{cd|in_desert}}
+| 实体是沙漠皮肤
+|{{flatlist|
+* {{EntityLink|rabbit}}
+}}
+|-
+| {{cd|in_snow}}
+| 实体是雪地皮肤
+|{{flatlist|
+* {{EntityLink|rabbit}}
+}}
+|-
+| {{cd|killed_enemy_event}}
+| 实体杀死敌怪
+|{{flatlist|
+* {{EntityLink|axolotl}}
+}}
+|-
+| {{cd|laid_egg}}
+| 实体产下青蛙卵
+|{{flatlist|
+* {{EntityLink|frog}}
+}}
+|-
+| {{cd|minecraft:add_attributes}}
+| 实体被修改属性（如生命值、攻击力等）
+|{{flatlist|
+* {{EntityLink|llama}}
+* {{EntityLink|trader-llama}}
+}}
+|-
+| {{cd|minecraft:add_biome_and_skin}}
+| 实体根据生物群系更改皮肤
+|{{flatlist|
+* {{EntityLink|zombie-villager}}
+}}
+|-
+| {{cd|minecraft:ageable_grow_up}}
+| 实体可以成年
+|{{flatlist|
+* {{EntityLink|axolotl}}
+* {{EntityLink|bee}}
+* {{EntityLink|cat}}
+* {{EntityLink|chicken}}
+* {{EntityLink|cow}}
+* {{EntityLink|donkey}}
+* {{EntityLink|fox}}
+* {{EntityLink|goat}}
+* {{EntityLink|hoglin}}
+* {{EntityLink|horse}}
+* {{EntityLink|llama}}
+* {{EntityLink|mooshroom}}
+* {{EntityLink|mule}}
+* {{EntityLink|ocelot}}
+* {{EntityLink|panda}}
+* {{EntityLink|pig}}
+* {{EntityLink|polar-bear}}
+* {{EntityLink|sheep}}
+* {{EntityLink|strider}}
+* {{EntityLink|trader-llama}}
+* {{EntityLink|turtle}}
+* {{EntityLink|villager}}
+* {{EntityLink|wolf}}
+* {{EntityLink|zombie-horse}}
+}}
+|-
+| {{cd|minecraft:ageable_set_baby}}
+| 实体为幼年
+|{{flatlist|
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|minecraft:ambient_night}}
+| 实体表现睡觉环境的行为
+|{{flatlist|
+* {{EntityLink|fox}}
+}}
+|-
+| {{cd|minecraft:ambient_normal}}
+| 实体表现正常环境的行为
+|{{flatlist|
+* {{EntityLink|fox}}
+}}
+|-
+| {{cd|minecraft:ambient_sleep}}
+| 实体表现睡觉环境的行为
+|{{flatlist|
+* {{EntityLink|fox}}
+}}
+|-
+| {{cd|minecraft:as_adult}}
+| 成年实体
+|{{flatlist|
+* {{EntityLink|drowned}}
+* {{EntityLink|zoglin}}
+* {{EntityLink|zombie}}
+}}
+|-
+| {{cd|minecraft:as_baby}}
+| 幼年实体
+|{{flatlist|
+* {{EntityLink|drowned}}
+* {{EntityLink|zoglin}}
+* {{EntityLink|zombie}}
+}}
+|-
+| {{cd|minecraft:ate_allium}}
+| 实体吃下绒球葱
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:ate_bluet}}
+| 实体吃下蓝花美耳草
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:ate_cornflower}}
+| 实体吃下矢车菊
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:ate_daisy}}
+| 实体吃下滨菊
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:ate_dandelion}}
+| 实体吃下蒲公英
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:ate_lily}}
+| 实体吃下铃兰
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:ate_orchid}}
+| 实体吃下兰花
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:ate_poppy}}
+| 实体吃下虞美人
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:ate_rose}}
+| 实体吃下虞美人（旧版）
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:ate_tulip}}
+| 实体吃下郁金香
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:baby_on_calm}}
+| 实体是幼年的并且是冷静的
+|{{flatlist|
+* {{EntityLink|panda}}
+* {{EntityLink|polar-bear}}
+}}
+|-
+| {{cd|minecraft:become_aggressive}}
+| 实体变得具有侵略性
+|{{flatlist|
+* {{EntityLink|magma-cube}}
+* {{EntityLink|slime}}
+}}
+|-
+| {{cd|minecraft:become_aggro}}
+| 实体开始发疯
+|{{flatlist|
+* {{EntityLink|vindicator}}
+}}
+|-
+| {{cd|minecraft:become_anenonme}}
+| 实体变成海葵鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_angry}}
+| 生成生气的实体
+|{{flatlist|
+* {{EntityLink|cave-spider}}
+* {{EntityLink|enderman}}
+* {{EntityLink|llama}}
+* {{EntityLink|panda}}
+* {{EntityLink|silverfish}}
+* {{EntityLink|spider}}
+* {{EntityLink|trader-llama}}
+* {{EntityLink|wolf}}
+* {{EntityLink|zombie-pigman}}
+}}
+|-
+| {{cd|minecraft:become_armorer}}
+| 实体转换为盔甲商
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_black_tang}}
+| 实体变成黑刺尾鲷
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_blue_dory}}
+| 实体变成蓝色多莉
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_brown}}
+| 实体变成棕色种类
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:become_brown_adult}}
+| 实体是成年的并且变成棕色种类
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:become_butcher}}
+| 实体转换为屠夫
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_butterfly_fish}}
+| 实体变成蝴蝶鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_calm}}
+| 实体已经冷静
+|{{flatlist|
+* {{EntityLink|magma-cube}}
+* {{EntityLink|slime}}
+* {{EntityLink|spider}}
+* {{EntityLink|wandering-trader}}
+}}
+|-
+| {{cd|minecraft:become_cartographer}}
+| 实体转换为制图师
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_cc_betta}}
+| 实体变成五彩搏鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_charged}}
+| 生成闪电的实体
+|{{flatlist|
+* {{EntityLink|creeper}}
+}}
+|-
+| {{cd|minecraft:become_cichlid}}
+| 实体变成丽鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_cleric}}
+| 实体转换为牧师
+|{{flatlist|
+* {{EntityLink|villager}}
+* {{EntityLink|zombie-villager}}
+}}
+|-
+| {{cd|minecraft:become_clownfish}}
+| 实体变成小丑鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_dog_fish}}
+| 实体变成绣雀鲷
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_e_red_snapper}}
+| 实体变成川纹笛鲷
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_farmer}}
+| 实体转换为农民
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_fisherman}}
+| 实体转换为渔夫
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_fletcher}}
+| 实体转换为制箭师
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_goat_fish}}
+| 实体变成拟羊鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_hostile}}
+| 生成进入敌对状态的实体
+|{{flatlist|
+* {{EntityLink|cave-spider}}
+* {{EntityLink|spider}}
+}}
+|-
+| {{cd|minecraft:become_leatherworker}}
+| 实体转换为皮匠
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_librarian}}
+| 实体转换为图书管理员
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_mason}}
+| 实体转换为石匠
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_moorish_idol}}
+| 实体变成镰鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_neutral}}
+| 生成进入中立状态的实体
+|{{flatlist|
+* {{EntityLink|cave-spider}}
+* {{EntityLink|spider}}
+}}
+|-
+| {{cd|minecraft:become_ornate_butterfly}}
+| 实体变成华丽蝴蝶鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_parrot_fish}}
+| 实体变成鹦嘴鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_pregnant}}
+| 实体已怀孕
+|{{flatlist|
+* {{EntityLink|turtle}}
+}}
+|-
+| {{cd|minecraft:become_queen_angel_fish}}
+| 实体变成额斑刺蝶鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_red}}
+| 实体变成红色种类
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:become_red_adult}}
+| 实体是成年的并且变成红色种类
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:become_red_cichlid}}
+| 实体变成红丽鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_red_lipped_benny}}
+| 实体变成红唇真蛇鳚
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_red_snapper}}
+| 实体变成红边笛鲷
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_scared}}
+| 实体变得恐惧
+|{{flatlist|
+* {{EntityLink|wandering-trader}}
+}}
+|-
+| {{cd|minecraft:become_sheperd}}
+| 实体转换为牧羊人
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_stunned}}
+| 实体处于眩晕状态
+|{{flatlist|
+* {{EntityLink|ravager}}
+}}
+|-
+| {{cd|minecraft:become_threadfin}}
+| 实体变成马鲅
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_tomato_clown}}
+| 实体变成白条双锯鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_toolsmith}}
+| 实体转换为工具商
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_triggerfish}}
+| 实体变成鳞鲀
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_unskilled}}
+| 实体转换为无职业村民
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_weaponsmith}}
+| 实体转换为武器商
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:become_yellow_tail_parrot}}
+| 实体变成高鳍鹦嘴鱼
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:become_yellow_tang}}
+| 实体变成黄刺尾鲷
+|{{flatlist|
+* {{EntityLink|tropical-fish}}
+}}
+|-
+| {{cd|minecraft:born_default}}
+| 实体是普通山羊
+|{{flatlist|
+* {{EntityLink|goat}}
+}}
+|-
+| {{cd|minecraft:born_screamer}}
+| 实体是尖叫山羊
+|{{flatlist|
+* {{EntityLink|goat}}
+}}
+|-
+| {{cd|minecraft:calm}}
+| 实体是冷静的
+|{{flatlist|
+* {{EntityLink|pillager}}
+}}
+|-
+| {{cd|minecraft:cat_gifted_owner}}
+| 实体已给予主人礼物
+|{{flatlist|
+* {{EntityLink|cat}}
+}}
+|-
+| {{cd|minecraft:clear_add_bad_omen}}
+| 实体停止得到（消除）不祥之兆效果
+|{{flatlist|
+* {{EntityLink|player}}
+}}
+|-
+| {{cd|minecraft:command_block_activate}}
+| 实体激活命令方块
+|{{flatlist|
+* {{EntityLink|minecart-with-command-block}}
+}}
+|-
+| {{cd|minecraft:command_block_deactivate}}
+| 实体未激活命令方块
+|{{flatlist|
+* {{EntityLink|minecart-with-command-block}}
+}}
+|-
+| {{cd|minecraft:convert_to_drowned}}
+| 实体转变为溺尸
+|{{flatlist|
+* {{EntityLink|zombie}}
+}}
+|-
+| {{cd|minecraft:convert_to_zombie}}
+| 实体转变为僵尸
+|{{flatlist|
+* {{EntityLink|husk}}
+}}
+|-
+| {{cd|minecraft:crystal_explode}}
+| 实体爆炸
+|{{flatlist|
+* {{EntityLink|ender-crystal}}
+}}
+|-
+| {{cd|minecraft:defend_wandering_trader}}
+| 实体保护流浪商人
+|{{flatlist|
+* {{EntityLink|trader-llama}}
+}}
+|-
+| {{cd|minecraft:donkey_saddled}}
+| 实体已装备鞍
+|{{flatlist|
+* {{EntityLink|donkey}}
+}}
+|-
+| {{cd|minecraft:donkey_unsaddled}}
+| 实体未装备鞍
+|{{flatlist|
+* {{EntityLink|donkey}}
+}}
+|-
+| {{cd|minecraft:emerged}}
+| 实体钻出地面
+|{{flatlist|
+* {{EntityLink|warden}}
+}}
+|-
+| {{cd|minecraft:end_roar}}
+| 实体结束吼叫
+|{{flatlist|
+* {{EntityLink|ravager}}
+}}
+|-
+| {{cd|minecraft:entered_bubble_column_down}}
+| 实体钻出地面
+|{{flatlist|
+* {{EntityLink|boat}}
+* {{EntityLink|boat-with-chest}}
+}}
+|-
+| {{cd|minecraft:entered_bubble_column_up}}
+| 实体进入气泡柱后被弹起
+|{{flatlist|
+* {{EntityLink|boat}}
+* {{EntityLink|boat-with-chest}}
+}}
+|-
+| {{cd|minecraft:entity_born}}
+| 实体出生（幼年实体）
+|{{flatlist|
+* {{EntityLink|axolotl}}（蓝色变种）
+* {{EntityLink|bee}}
+* {{EntityLink|cat}}
+* {{EntityLink|chicken}}
+* {{EntityLink|cow}}
+* {{EntityLink|donkey}}
+* {{EntityLink|fox}}
+* {{EntityLink|goat}}
+* {{EntityLink|hoglin}}
+* {{EntityLink|horse}}
+* {{EntityLink|llama}}
+* {{EntityLink|mooshroom}}
+* {{EntityLink|mule}}
+* {{EntityLink|ocelot}}
+* {{EntityLink|panda}}
+* {{EntityLink|pig}}
+* {{EntityLink|piglin}}
+* {{EntityLink|polar-bear}}
+* {{EntityLink|rabbit}}
+* {{EntityLink|sheep}}
+* {{EntityLink|strider}}
+* {{EntityLink|trader-llama}}
+* {{EntityLink|turtle}}
+* {{EntityLink|villager}}
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|minecraft:entity_born_wild}}
+| 实体为野生
+|{{flatlist|
+* {{EntityLink|ocelot}}
+}}
+|-
+| {{cd|minecraft:entity_spawned}}
+| 实体自然生成
+|{{flatlist|
+* {{EntityLink|allay}}
+* {{EntityLink|arrow}}
+* {{EntityLink|axolotl}}
+* {{EntityLink|bee}}
+* {{EntityLink|blaze}}
+* {{EntityLink|cat}}
+* {{EntityLink|cave-spider}}
+* {{EntityLink|chicken}}
+* {{EntityLink|cow}}
+* {{EntityLink|dolphin}}
+* {{EntityLink|donkey}}
+* {{EntityLink|drowned}}
+* {{EntityLink|ender-dragon}}
+* {{EntityLink|ender-pearl}}
+* {{EntityLink|enderman}}
+* {{EntityLink|fishing-bobber}}
+* {{EntityLink|fox}}
+* {{EntityLink|frog}}
+* {{EntityLink|glow-squid}}
+* {{EntityLink|goat}}
+* {{EntityLink|hoglin}}
+* {{EntityLink|horse}}
+* {{EntityLink|husk}}
+* {{EntityLink|llama}}
+* {{EntityLink|magma-cube}}
+* {{EntityLink|minecart-with-command-block}}
+* {{EntityLink|minecart-with-hopper}}
+* {{EntityLink|minecart-with-tnt}}
+* {{EntityLink|mooshroom}}
+* {{EntityLink|mule}}
+* {{EntityLink|ocelot}}
+* {{EntityLink|panda}}
+* {{EntityLink|parrot}}
+* {{EntityLink|pig}}
+* {{EntityLink|piglin}}
+* {{EntityLink|piglin-brute}}
+* {{EntityLink|pillager}}
+* {{EntityLink|polar-bear}}
+* {{EntityLink|pufferfish}}
+* {{EntityLink|rabbit}}
+* {{EntityLink|ravager}}
+* {{EntityLink|salmon}}
+* {{EntityLink|sheep}}
+* {{EntityLink|shulker}}
+* {{EntityLink|silverfish}}
+* {{EntityLink|skeleton}}
+* {{EntityLink|skeleton-horse}}
+* {{EntityLink|slime}}
+* {{EntityLink|spider}}
+* {{EntityLink|squid}}
+* {{EntityLink|stray}}
+* {{EntityLink|strider}}
+* {{EntityLink|trader-llama}}
+* {{EntityLink|tropical-fish}}
+* {{EntityLink|turtle}}
+* {{EntityLink|villager}}
+* {{EntityLink|vindicator}}
+* {{EntityLink|warden}}
+* {{EntityLink|wither}}
+* {{EntityLink|wither-skeleton}}
+* {{EntityLink|wolf}}
+* {{EntityLink|zoglin}}
+* {{EntityLink|zombie}}
+* {{EntityLink|zombie-horse}}
+* {{EntityLink|zombie-pigman}}
+* {{EntityLink|zombie-villager}}
+}}
+|-
+| {{cd|minecraft:entity_transformed}}
+| 实体已转化
+|{{flatlist|
+* {{EntityLink|cow}}
+* {{EntityLink|frog}}
+* {{EntityLink|villager}}
+* {{EntityLink|zoglin}}
+* {{EntityLink|zombie-pigman}}
+* {{EntityLink|zombie-villager}}
+}}
+|-
+| {{cd|minecraft:exited_bubble_column}}
+| 实体离开气泡柱
+|{{flatlist|
+* {{EntityLink|boat}}
+* {{EntityLink|boat-with-chest}}
+}}
+|-
+| {{cd|minecraft:exited_disturbed_hive}}
+| 实体被激怒离开蜂巢
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|minecraft:exited_hive}}
+| 实体离开蜂巢
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|minecraft:exited_hive_on_fire}}
+| 实体被火熏出蜂巢
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|minecraft:explode}}
+| 实体爆炸
+|{{flatlist|
+* {{EntityLink|fireball}}
+* {{EntitySprite|wither-skull}} {{EntityLink|dangerous-wither-skull}}
+}}
+|-
+| {{cd|minecraft:flowerless}}
+| 实体未食用花朵
+|{{flatlist|
+* {{EntityLink|mooshroom}}
+}}
+|-
+| {{cd|minecraft:fox_configure_day}}
+| 实体有白天的行为
+|{{flatlist|
+* {{EntityLink|fox}}
+}}
+|-
+| {{cd|minecraft:fox_configure_defending}}
+| 实体正在防守
+|{{flatlist|
+* {{EntityLink|fox}}
+}}
+|-
+| {{cd|minecraft:fox_configure_docile_day}}
+| 实体被驯服（白天）
+|{{flatlist|
+* {{EntityLink|fox}}
+}}
+|-
+| {{cd|minecraft:fox_configure_docile_night}}
+| 实体被驯服（夜晚）
+|{{flatlist|
+* {{EntityLink|fox}}
+}}
+|-
+| {{cd|minecraft:fox_configure_night}}
+| 实体有夜晚的行为
+|{{flatlist|
+* {{EntityLink|fox}}
+}}
+|-
+| {{cd|minecraft:fox_configure_thunderstorm}}
+| 实体有雷暴天气的行为
+|{{flatlist|
+* {{EntityLink|fox}}
+}}
+|-
+| {{cd|minecraft:from_full_puff}}
+| style="text-align:center;" | &ndash;
+|{{flatlist|
+* {{EntityLink|pufferfish}}
+}}
+|-
+| {{cd|minecraft:from_player}}
+| 实体由玩家生成
+|{{flatlist|
+* {{EntityLink|iron-golem}}
+}}
+|-
+| {{cd|minecraft:from_village}}
+| 实体生成于村庄
+|{{flatlist|
+* {{EntityLink|iron-golem}}
+}}
+|-
+| {{cd|minecraft:from_wandering_trader}}
+| 实体由流浪商人生成
+|{{flatlist|
+* {{EntityLink|trader-llama}}
+}}
+|-
+| {{cd|minecraft:gain_bad_omen}}
+| 实体得到不祥之兆效果
+|{{flatlist|
+* {{EntityLink|player}}
+}}
+|-
+| {{cd|minecraft:go_lay_egg}}
+| 实体即将下蛋
+|{{flatlist|
+* {{EntityLink|turtle}}
+}}
+|-
+| {{cd|minecraft:has_target}}
+| 实体有攻击目标
+|{{flatlist|
+* {{EntityLink|drowned}}
+}}
+|-
+| {{cd|minecraft:hatch_cold}}
+| 实体由蓝色鸡蛋生成
+|{{flatlist|
+* {{EntityLink|chicken}}
+}}
+|-
+| {{cd|minecraft:hatch_warm}}
+| 实体由棕色鸡蛋生成
+|{{flatlist|
+* {{EntityLink|chicken}}
+}}
+|-
+| {{cd|minecraft:hive_full}}
+| 实体的目标蜂巢已满
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|minecraft:hopper_activate}}
+| 实体伴随激活的漏斗生成
+|{{flatlist|
+* {{EntityLink|minecart-with-hopper}}
+}}
+|-
+| {{cd|minecraft:hopper_deactivate}}
+| 实体伴随未激活的漏斗生成
+|{{flatlist|
+* {{EntityLink|minecart-with-hopper}}
+}}
+|-
+| {{cd|minecraft:horse_saddled}}
+| 实体已装备鞍
+|{{flatlist|
+* {{EntityLink|horse}}
+}}
+|-
+| {{cd|minecraft:horse_unsaddled}}
+| 实体未装备鞍
+|{{flatlist|
+* {{EntityLink|horse}}
+}}
+|-
+| {{cd|minecraft:join_caravan}}
+| 实体加入了商队
+|{{flatlist|
+* {{EntityLink|llama}}
+* {{EntityLink|trader-llama}}
+}}
+|-
+| {{cd|minecraft:laid_egg}}
+| 实体刚下过蛋
+|{{flatlist|
+* {{EntityLink|turtle}}
+}}
+|-
+| {{cd|minecraft:leave_caravan}}
+| 实体离开了商队
+|{{flatlist|
+* {{EntityLink|llama}}
+* {{EntityLink|trader-llama}}
+}}
+|-
+| {{cd|minecraft:lost_target}}
+| 实体丢失攻击目标
+|{{flatlist|
+* {{EntityLink|drowned}}
+}}
+|-
+| {{cd|minecraft:mad_at_wolf}}
+| 实体对狼仇恨
+|{{flatlist|
+* {{EntityLink|llama}}
+* {{EntityLink|trader-llama}}
+}}
+|-
+| {{cd|minecraft:make_black}}
+| 实体呈黑色
+|{{flatlist|
+* {{EntityLink|horse}}
+}}
+|-
+| {{cd|minecraft:make_brown}}
+| 实体呈褐色色
+|{{flatlist|
+* {{EntityLink|horse}}
+}}
+|-
+| {{cd|minecraft:make_chestnut}}
+| 实体呈栗色
+|{{flatlist|
+* {{EntityLink|horse}}
+}}
+|-
+| {{cd|minecraft:make_creamy}}
+| 实体呈奶白色
+|{{flatlist|
+* {{EntityLink|horse}}
+}}
+|-
+| {{cd|minecraft:make_darkbrown}}
+| 实体呈深棕色
+|{{flatlist|
+* {{EntityLink|horse}}
+}}
+|-
+| {{cd|minecraft:make_gray}}
+| 实体呈灰色
+|{{flatlist|
+* {{EntityLink|horse}}
+}}
+|-
+| {{cd|minecraft:make_white}}
+| 实体呈白色
+|{{flatlist|
+* {{EntityLink|horse}}
+}}
+|-
+| {{cd|minecraft:melee_mode}}
+| 实体使用近战攻击
+|{{flatlist|
+* {{EntityLink|pillager}}
+* {{EntityLink|skeleton}}
+* {{EntityLink|stray}}
+}}
+|-
+| {{cd|minecraft:mule_saddled}}
+| 实体已装备鞍
+|{{flatlist|
+* {{EntityLink|mule}}
+}}
+|-
+| {{cd|minecraft:mule_unsaddled}}
+| 实体未装备鞍
+|{{flatlist|
+* {{EntityLink|mule}}
+}}
+|-
+| {{cd|minecraft:on_anger}}
+| 实体正在生气
+|{{flatlist|
+* {{EntityLink|polar-bear}}
+}}
+|-
+| {{cd|minecraft:on_calm}}
+| 生成冷静的实体
+|{{flatlist|
+* {{EntityLink|cave-spider}}
+* {{EntityLink|enderman}}
+* {{EntityLink|llama}}
+* {{EntityLink|panda}}
+* {{EntityLink|polar-bear}}
+* {{EntityLink|silverfish}}
+* {{EntityLink|trader-llama}}
+* {{EntityLink|wolf}}
+* {{EntityLink|zombie-pigman}}
+}}
+|-
+| {{cd|minecraft:on_chest}}
+| 实体已装备箱子
+|{{flatlist|
+* {{EntityLink|donkey}}
+* {{EntityLink|llama}}
+* {{EntityLink|mule}}
+* {{EntityLink|trader-llama}}
+}}
+|-
+| {{cd|minecraft:on_deflate}}
+| 实体开始排气
+|{{flatlist|
+* {{EntityLink|pufferfish}}
+}}
+|-
+| {{cd|minecraft:on_eat_block}}
+| 实体吃完草方块
+|{{flatlist|
+* {{EntityLink|sheep}}
+}}
+|-
+| {{cd|minecraft:on_full_puff}}
+| 实体膨胀到最大
+|{{flatlist|
+* {{EntityLink|pufferfish}}
+}}
+|-
+| {{cd|minecraft:on_half_puff}}
+| 实体膨胀了一半
+|{{flatlist|
+* {{EntityLink|pufferfish}}
+}}
+|-
+| {{cd|minecraft:on_hurt_event}}
+| 实体受伤
+|{{flatlist|
+* {{EntityLink|blaze}}
+}}
+|-
+| {{cd|minecraft:on_instant_prime}}
+| 实体被激活并立刻爆炸
+|{{flatlist|
+* {{EntityLink|minecart-with-tnt}}
+}}
+|-
+| {{cd|minecraft:on_leash}}
+| 实体被拴绳拴住
+|{{flatlist|
+* {{EntityLink|ocelot}}
+}}
+|-
+| {{cd|minecraft:on_normal_puff}}
+| 实体未膨胀
+|{{flatlist|
+* {{EntityLink|pufferfish}}
+}}
+|-
+| {{cd|minecraft:on_not_riding_player}}
+| 实体未站在玩家肩上
+|{{flatlist|
+* {{EntityLink|parrot}}
+}}
+|-
+| {{cd|minecraft:on_prime}}
+| 实体被激活
+|{{flatlist|
+* {{EntityLink|minecart-with-tnt}}
+}}
+|-
+| {{cd|minecraft:on_riding_player}}
+| 实体站在玩家肩上
+|{{flatlist|
+* {{EntityLink|parrot}}
+}}
+|-
+| {{cd|minecraft:on_saddled}}
+| 实体已装备鞍
+|{{flatlist|
+* {{EntityLink|pig}}
+* {{EntityLink|strider}}
+}}
+|-
+| {{cd|minecraft:on_scared}}
+| 实体受到惊吓
+|{{flatlist|
+* {{EntityLink|panda}}
+* {{EntityLink|polar-bear}}
+}}
+|-
+| {{cd|minecraft:on_sheared}}
+| 实体被剪刀剪过
+|{{flatlist|
+* {{EntityLink|sheep}}
+* {{EntityLink|snow-golem}}
+}}
+|-
+| {{cd|minecraft:on_tame}}
+| 实体已驯服（用于狼会使实体呈现不正常颜色）
+|{{flatlist|
+* {{EntityLink|cat}}
+* {{EntityLink|donkey}}
+* {{EntityLink|horse}}
+* {{EntityLink|llama}}
+* {{EntityLink|mule}}
+* {{EntityLink|parrot}}
+* {{EntityLink|trader-llama}}
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|minecraft:on_trust}}
+| 实体对玩家信任
+|{{flatlist|
+* {{EntityLink|ocelot}}
+}}
+|-
+| {{cd|minecraft:on_unleash}}
+| 实体没有被拴住
+|{{flatlist|
+* {{EntityLink|ocelot}}
+}}
+|-
+| {{cd|minecraft:panda_aggressive}}
+| 实体的性格是好斗的
+|{{flatlist|
+* {{EntityLink|panda}}
+}}
+|-
+| {{cd|minecraft:panda_brown}}
+| 实体是棕色的（棕色熊猫）
+|{{flatlist|
+* {{EntityLink|panda}}
+}}
+|-
+| {{cd|minecraft:panda_lazy}}
+| 实体的性格是懒惰的
+|{{flatlist|
+* {{EntityLink|panda}}
+}}
+|-
+| {{cd|minecraft:panda_playful}}
+| 实体的性格是贪玩的
+|{{flatlist|
+* {{EntityLink|panda}}
+}}
+|-
+| {{cd|minecraft:panda_weak}}
+| 实体体格虚弱
+|{{flatlist|
+* {{EntityLink|panda}}
+}}
+|-
+| {{cd|minecraft:panda_worried}}
+| 实体的性格是忧虑的
+|{{flatlist|
+* {{EntityLink|panda}}
+}}
+|-
+| {{cd|minecraft:pet_slept_with_owner}}
+| 实体与主人睡过觉
+|{{flatlist|
+* {{EntityLink|cat}}
+}}
+|-
+| {{cd|minecraft:promote_to_illager_captain}}
+| 实体晋升成灾厄队长
+|{{flatlist|
+* {{EntityLink|pillager}}
+* {{EntityLink|vindicator}}
+}}
+|-
+| {{cd|minecraft:promote_to_patrol_captain}}
+| 实体晋升成巡逻队队长
+|{{flatlist|
+* {{EntityLink|pillager}}
+* {{EntityLink|vindicator}}
+}}
+|-
+| {{cd|minecraft:raid_expired}}
+| 实体因袭击停止而消失
+|{{flatlist|
+* {{EntityLink|evoker}}
+* {{EntityLink|pillager}}
+* {{EntityLink|ravager}}
+* {{EntityLink|vindicator}}
+* {{EntityLink|witch}}
+}}
+|-
+| {{cd|minecraft:ranged_mode}}
+| 实体使用远程攻击
+|{{flatlist|
+* {{EntityLink|pillager}}
+* {{EntityLink|skeleton}}
+* {{EntityLink|stray}}
+}}
+|-
+| {{cd|minecraft:remove_persistence}}
+| 实体仇恨消失
+|{{flatlist|
+* {{EntityLink|trader-llama}}
+}}
+|-
+| {{cd|minecraft:remove_raid_trigger}}
+| “触发袭击”已被移除
+|{{flatlist|
+* {{EntityLink|player}}
+}}
+|-
+| {{cd|minecraft:resupply_trades}}
+| 实体为其交易进行了补货
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:schedule_bed_villager}}
+| 实体计划寻找床
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:schedule_gather_villager}}
+| 实体计划集会
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:schedule_home_villager}}
+| 实体计划寻找家
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:schedule_play_villager}}
+| 实体计划玩耍
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:schedule_wander_villager}}
+| 实体计划四处走动
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:schedule_work_farmer}}
+| 实体计划成为农民
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:schedule_work_fisher}}
+| 实体计划成为渔夫
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:schedule_work_librarian}}
+| 实体计划成为图书管理员
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:schedule_work_pro_villager}}
+| 实体计划寻找工作
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:scheduled}}
+| 实体出现
+|{{flatlist|
+* {{EntityLink|wandering-trader}}
+}}
+|-
+| {{cd|minecraft:set_trap}}
+| 实体触发骷髅陷阱
+|{{flatlist|
+* {{EntityLink|skeleton-horse}}
+}}
+|-
+| {{cd|minecraft:sink}}
+| 实体沉入水中
+|{{flatlist|
+* {{EntityLink|boat}}
+* {{EntityLink|boat-with-chest}}
+}}
+|-
+| {{cd|minecraft:spawn_adult}}
+| 实体生成（成年）
+|{{flatlist|
+* {{EntityLink|chicken}}
+* {{EntityLink|cow}}
+* {{EntityLink|llama}}
+* {{EntityLink|pig}}
+* {{EntityLink|trader-llama}}
+}}
+|-
+| {{cd|minecraft:spawn_armorer}}
+| 实体作为盔甲商生成
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:spawn_as_illager_captain}}
+| 实体是灾厄队长
+|{{flatlist|
+* {{EntityLink|pillager}}
+* {{EntityLink|vindicator}}
+}}
+|-
+| {{cd|minecraft:spawn_as_patrol_follower}}
+| 实体是灾厄巡逻队成员
+|{{flatlist|
+* {{EntityLink|pillager}}
+* {{EntityLink|vindicator}}
+}}
+|-
+| {{cd|minecraft:spawn_as_strider_jockey}}
+| 实体作为炽足兽骑士生成
+|{{flatlist|
+* {{EntityLink|zombie-pigman}}
+}}
+|-
+| {{cd|minecraft:spawn_baby}}
+| 实体生成（幼年）
+|{{flatlist|
+* {{EntityLink|llama}}
+* {{EntityLink|trader-llama}}
+* {{EntityLink|happy-ghast}}
+}}
+|-
+| {{cd|minecraft:spawn_butcher}}
+| 实体作为屠夫生成
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:spawn_cleric}}
+| 实体作为牧师生成
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:spawn_emerging}}
+| 实体生成且从地里钻出
+|{{flatlist|
+* {{EntityLink|warden}}
+}}
+|-
+| {{cd|minecraft:spawn_farmer}}
+| 实体作为农民生成
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:spawn_for_raid}}
+| 实体来自袭击
+|{{flatlist|
+* {{EntityLink|evoker}}
+* {{EntityLink|pillager}}
+* {{EntityLink|ravager}}
+* {{EntityLink|vindicator}}
+* {{EntityLink|witch}}
+}}
+|-
+| {{cd|minecraft:spawn_for_raid_with_evoker_rider}}
+| 实体在袭击中产生且被唤魔者骑行
+|{{flatlist|
+* {{EntityLink|ravager}}
+}}
+|-
+| {{cd|minecraft:spawn_for_raid_with_pillager_rider}}
+| 实体在袭击中产生且被掠夺者骑行
+|{{flatlist|
+* {{EntityLink|ravager}}
+}}
+|-
+| {{cd|minecraft:spawn_from_village}}
+| 实体从村庄生成
+|{{flatlist|
+* {{EntityLink|cat}}
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:spawn_librarian}}
+| 实体作为图书管理员生成
+|{{flatlist|
+* {{EntityLink|villager}}
+}}
+|-
+| {{cd|minecraft:spawn_midnight_cat}}
+| 生成黑色实体
+|{{flatlist|
+* {{EntityLink|cat}}
+}}
+|-
+| {{cd|minecraft:spawn_skilled_adult}}
+| 实体生成带职业且成年的个体
+|{{flatlist|
+* {{EntityLink|zombie-villager}}
+}}
+|-
+| {{cd|minecraft:spawn_with_pillager_captain_rider}}
+| 实体被掠夺者队长骑行
+|{{flatlist|
+* {{EntityLink|ravager}}
+}}
+|-
+| {{cd|minecraft:spawn_with_pillager_rider}}
+| 实体被掠夺者骑行
+|{{flatlist|
+* {{EntityLink|ravager}}
+}}
+|-
+| {{cd|minecraft:spawn_with_vindicator_captain_rider}}
+| 实体被卫道士队长骑行
+|{{flatlist|
+* {{EntityLink|ravager}}
+}}
+|-
+| {{cd|minecraft:spawn_with_vindicator_rider}}
+| 实体被卫道士骑行
+|{{flatlist|
+* {{EntityLink|ravager}}
+}}
+|-
+| {{cd|minecraft:spring_trap}}
+| 实体作为骷髅陷阱生成
+|{{flatlist|
+* {{EntityLink|skeleton}}
+* {{EntityLink|skeleton-horse}}
+}}
+|-
+| {{cd|minecraft:start_celebrating}}
+| 实体开始庆祝
+|{{flatlist|
+* {{EntityLink|evoker}}
+* {{EntityLink|pillager}}
+* {{EntityLink|ravager}}
+* {{EntityLink|villager}}
+* {{EntityLink|vindicator}}
+* {{EntityLink|witch}}
+}}
+|-
+| {{cd|minecraft:start_death}}
+| 实体开始死亡
+|{{flatlist|
+* {{EntityLink|ender-dragon}}
+}}
+|-
+| {{cd|minecraft:start_despawn}}
+| 实体开始消失
+|{{flatlist|
+* {{EntityLink|wandering-trader}}
+}}
+|-
+| {{cd|minecraft:start_exploding}}
+| 实体开始爆炸
+|{{flatlist|
+* {{EntityLink|creeper}}
+}}
+|-
+| {{cd|minecraft:start_exploding_forced}}
+| 实体正在准备爆炸
+|{{flatlist|
+* {{EntityLink|creeper}}
+}}
+|-
+| {{cd|minecraft:start_fly}}
+| 实体开始飞行
+|{{flatlist|
+* {{EntityLink|ender-dragon}}
+}}
+|-
+| {{cd|minecraft:start_full_puff}}
+| style="text-align:center;" | &ndash;
+|{{flatlist|
+* {{EntityLink|pufferfish}}
+}}
+|-
+| {{cd|minecraft:start_half_puff}}
+| style="text-align:center;" | &ndash;
+|{{flatlist|
+* {{EntityLink|pufferfish}}
+}}
+|-
+| {{cd|minecraft:start_johnny}}
+| 实体开始转化为johnny
+|{{flatlist|
+* {{EntityLink|vindicator}}
+}}
+|-
+| {{cd|minecraft:start_land}}
+| 实体开始落地
+|{{flatlist|
+* {{EntityLink|ender-dragon}}
+}}
+|-
+| {{cd|minecraft:start_roar}}
+| 实体开始吼叫
+|{{flatlist|
+* {{EntityLink|ravager}}
+}}
+|-
+| {{cd|minecraft:start_transforming}}
+| 开始转变实体
+|{{flatlist|
+* {{EntityLink|husk}}
+* {{EntityLink|zombie}}
+}}
+|-
+| {{cd|minecraft:stop_aggro}}
+| 实体停止发疯
+|{{flatlist|
+* {{EntityLink|vindicator}}
+}}
+|-
+| {{cd|minecraft:stop_celebrating}}
+| 实体停止庆祝
+|{{flatlist|
+* {{EntityLink|evoker}}
+* {{EntityLink|pillager}}
+* {{EntityLink|ravager}}
+* {{EntityLink|villager}}
+* {{EntityLink|vindicator}}
+* {{EntityLink|witch}}
+}}
+|-
+| {{cd|minecraft:stop_exploding}}
+| 实体停止爆炸
+|{{flatlist|
+* {{EntityLink|creeper}}
+}}
+|-
+| {{cd|minecraft:stop_johnny}}
+| 实体停止转化为johnny
+|{{flatlist|
+* {{EntityLink|vindicator}}
+}}
+|-
+| {{cd|minecraft:stop_transforming}}
+| 停止转变实体
+|{{flatlist|
+* {{EntityLink|husk}}
+* {{EntityLink|zombie}}
+}}
+|-
+| {{cd|minecraft:switch_to_melee}}
+| 实体切换到近战攻击
+|{{flatlist|
+* {{EntityLink|drowned}}
+}}
+|-
+| {{cd|minecraft:switch_to_ranged}}
+| 实体切换到远程攻击
+|{{flatlist|
+* {{EntityLink|drowned}}
+}}
+|-
+| {{cd|minecraft:target_far_enough}}
+| 目标离实体足够远
+|{{flatlist|
+* {{EntityLink|guardian}}
+}}
+|-
+| {{cd|minecraft:target_too_close}}
+| 目标离实体过近
+|{{flatlist|
+* {{EntityLink|guardian}}
+}}
+|-
+| {{cd|minecraft:to_full_puff}}
+| style="text-align:center;" | &ndash;
+|{{flatlist|
+* {{EntityLink|pufferfish}}
+}}
+|-
+| {{cd|minecraft:trigger_raid}}
+| 实体触发袭击
+|{{flatlist|
+* {{EntityLink|player}}
+}}
+|-
+| {{cd|minecraft:turn_black}}
+| 实体变为黑色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_blue}}
+| 实体变为蓝色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_brown}}
+| 实体变为棕色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_cyan}}
+| 实体变为青色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_gray}}
+| 实体变为灰色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_green}}
+| 实体变为绿色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_light_blue}}
+| 实体变为浅蓝色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_lime}}
+| 实体变为黄绿色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_magenta}}
+| 实体变为品红色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_orange}}
+| 实体变为橙色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_pink}}
+| 实体变为粉红色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_purple}}
+| 实体变为紫色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_red}}
+| 实体变为红色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_silver}}
+| 实体变为浅灰色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_white}}
+| 实体变为白色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|minecraft:turn_yellow}}
+| 实体变为黄色
+|{{flatlist|
+* {{EntityLink|shulker}}
+}}
+|-
+| {{cd|navigation_off_land}}
+| 实体脱离陆上搁浅
+|{{flatlist|
+* {{EntityLink|dolphin}}
+}}
+|-
+| {{cd|navigation_on_land}}
+| 实体搁浅在陆上
+|{{flatlist|
+* {{EntityLink|dolphin}}
+}}
+|-
+| {{cd|on_calm}}
+| 实体发出声音
+|{{flatlist|
+* {{EntityLink|dolphin}}
+}}
+|-
+| {{cd|on_digging_event}}
+| 实体钻地
+|{{flatlist|
+* {{EntityLink|warden}}
+}}
+|-
+| {{cd|perish_event}}
+| 实体死亡
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|pickup_item_delay}}
+| 实体捡起物品的冷却开始
+|{{flatlist|
+* {{EntityLink|allay}}
+}}
+|-
+| {{cd|pickup_item_delay_complete}}
+| 实体捡起物品的冷却结束
+|{{flatlist|
+* {{EntityLink|allay}}
+}}
+|-
+| {{cd|recover_after_dried_out}}
+| 实体脱水后回复生命值
+|{{flatlist|
+* {{EntityLink|axolotl}}
+* {{EntityLink|dolphin}}
+}}
+|-
+| {{cd|roll_up}}
+| 实体蜷缩
+|{{flatlist|
+* {{EntityLink|armadillo}}
+}}
+|-
+| {{cd|seek_shelter}}
+| style="text-align:center;" | &ndash;
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|spawn_adult}}
+| 实体生成成年个体
+|{{flatlist|
+* {{EntityLink|hoglin}}
+* {{EntityLink|piglin}}
+* {{EntityLink|sheep}}
+* {{EntityLink|strider}}
+}}
+|-
+| {{cd|spawn_adult_melee}}
+| 实体生成成年近战个体（使用金斧）
+|{{flatlist|
+* {{EntityLink|piglin}}
+}}
+|-
+| {{cd|spawn_adult_melee_no_hunting}}
+| style="text-align:center;" | &ndash;
+|{{flatlist|
+* {{EntityLink|piglin}}
+}}
+|-
+| {{cd|spawn_adult_no_hunting}}
+| style="text-align:center;" | &ndash;
+|{{flatlist|
+* {{EntityLink|piglin}}
+}}
+|-
+| {{cd|spawn_adult_parent_jockey}}
+| 实体生成时被幼年炽足兽骑乘
+|{{flatlist|
+* {{EntityLink|strider}}
+}}
+|-
+| {{cd|spawn_adult_piglin_jockey}}
+| 实体生成时被僵尸猪灵骑乘
+|{{flatlist|
+* {{EntityLink|strider}}
+}}
+|-
+| {{cd|spawn_adult_ranged}}
+|实体生成成年远程攻击个体（使用弩）
+|{{flatlist|
+* {{EntityLink|piglin}}
+}}
+|-
+| {{cd|spawn_adult_ranged_no_hunting}}
+|
+|{{flatlist|
+* {{EntityLink|piglin}}
+}}
+|-
+| {{cd|spawn_adult_unhuntable}}
+|
+|{{flatlist|
+* {{EntityLink|hoglin}}
+}}
+|-
+| {{cd|spawn_baby}}
+| 实体生成幼年个体
+|{{flatlist|
+* {{EntityLink|hoglin}}
+* {{EntityLink|piglin}}
+* {{EntityLink|sheep}}
+* {{EntityLink|strider}}
+}}
+|-
+| {{cd|spawn_cold}}
+| 实体肤色为绿色
+|{{flatlist|
+* {{EntityLink|frog}}
+}}
+|-
+| {{cd|spawn_large}}
+| 实体作为大型个体生成
+|{{flatlist|
+* {{EntityLink|magma-cube}}
+* {{EntityLink|slime}}
+}}
+|-
+| {{cd|spawn_medium}}
+| 实体作为中型个体生成
+|{{flatlist|
+* {{EntityLink|magma-cube}}
+* {{EntityLink|slime}}
+}}
+|-
+| {{cd|spawn_small}}
+| 实体作为小型个体生成
+|{{flatlist|
+* {{EntityLink|magma-cube}}
+* {{EntityLink|slime}}
+}}
+|-
+| {{cd|spawn_temperate}}
+| 实体肤色为橙色
+|{{flatlist|
+* {{EntityLink|frog}}
+}}
+|-
+| {{cd|spawn_warm}}
+| 实体肤色为白色
+|{{flatlist|
+* {{EntityLink|frog}}
+}}
+|-
+| {{cd|start_drying_out}}
+| 实体开始脱水
+|{{flatlist|
+* {{EntityLink|axolotl}}
+}}
+|-
+| {{cd|start_dryingout}}
+| 实体开始脱水
+|{{flatlist|
+* {{EntityLink|dolphin}}
+}}
+|-
+| {{cd|start_event}}
+| 实体开始攻击
+|{{flatlist|
+* {{EntityLink|goat}}
+}}
+|-
+| {{cd|start_suffocating}}
+| 实体开始窒息
+|{{flatlist|
+* {{EntityLink|strider}}
+}}
+|-
+| {{cd|start_zombification_event}}
+| 实体开始僵尸化
+|{{flatlist|
+* {{EntityLink|hoglin}}
+* {{EntityLink|piglin}}
+* {{EntityLink|piglin-brute}}
+}}
+|-
+| {{cd|stop_drying_out}}
+| 实体停止脱水
+|{{flatlist|
+* {{EntityLink|axolotl}}
+}}
+|-
+| {{cd|stop_dryingout}}
+| 实体停止脱水
+|{{flatlist|
+* {{EntityLink|dolphin}}
+}}
+|-
+| {{cd|stop_panicking_after_fire}}
+| style="text-align:center;" | &ndash;
+|{{flatlist|
+* {{EntityLink|bee}}
+}}
+|-
+| {{cd|stop_suffocating}}
+| 实体停止窒息
+|{{flatlist|
+* {{EntityLink|strider}}
+}}
+|-
+| {{cd|stop_zombification_event}}
+| 实体停止僵尸化
+|{{flatlist|
+* {{EntityLink|hoglin}}
+* {{EntityLink|piglin}}
+* {{EntityLink|piglin-brute}}
+}}
+|-
+| {{cd|switch_to_melee}}
+| 实体使用近战攻击
+|{{flatlist|
+* {{EntityLink|blaze}}
+}}
+|-
+| {{cd|switch_to_ranged}}
+| 实体使用远程攻击
+|{{flatlist|
+* {{EntityLink|blaze}}
+}}
+|-
+| {{cd|villager_converted}}
+| 实体转变为村民
+|{{flatlist|
+* {{EntityLink|zombie-villager}}
+}}
+|-
+| {{cd|wololo}}
+| 实体被唤魔者由蓝色变成红色
+|{{flatlist|
+* {{EntityLink|sheep}}
+}}
+|-
+| {{cd|spawn_wild_pale}}
+| 实体变为苍狼
+|{{flatlist|
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|spawn_wild_black}}
+| 实体变为黑狼
+|{{flatlist|
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|spawn_wild_chestnut}}
+| 实体变为栗色狼
+|{{flatlist|
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|spawn_wild_rusty}}
+| 实体变为赭红狼
+|{{flatlist|
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|spawn_wild_snowy}}
+| 实体变为雪狼
+|{{flatlist|
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|spawn_wild_spotted}}
+| 实体变为斑点狼
+|{{flatlist|
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|spawn_wild_striped}}
+| 实体变为条纹狼
+|{{flatlist|
+* {{EntityLink|wolf}}
+}}
+|-
+| {{cd|spawn_wild_woods}}
+| 实体变为森林狼
+|{{flatlist|
+* {{EntityLink|wolf}}
+}}
+|}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+
+[[en:Spawn event]]
+[[ja:スポーンイベント]]
+[[pt:Evento de geração]]

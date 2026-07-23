@@ -1,0 +1,39 @@
+# 页面: 快捷栏存储格式
+# 来源: https://zh.minecraft.wiki/w/%E5%BF%AB%E6%8D%B7%E6%A0%8F%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:26:05
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+
+'''快捷栏存储文件'''用于记录创造模式下[[已保存的快捷栏]]。
+
+== 存储格式 ==
+快捷栏存储文件位于{{filepath|-{}-<''客户端根目录''>/hotbar.nbt}}，使用未压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|list|<''被保存的快捷栏下标''>|existonsave=1|required=1}}：一项被保存的快捷栏信息。下标从0开始计数直到8，共有9个可被保存的快捷栏。所有0-8快捷栏必须都存在，否则游戏将在日志中报错，但不会影响加载。
+*** {{nbt|compound}}：一个物品。列表中一共有9个物品，分别对应了快捷栏的1-9号槽位。列表必须有9个元素，否则游戏将不会读取这一整个快捷栏。
+**** {{nbt inherit/itemnoslot}}
+** {{nbt|int|DataVersion|existonsave=1}}：文件最后一次被保存时的[[数据版本]]。如果此项不存在则认为是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+当游戏启动时，如果快捷栏存储文件不存在，则游戏会默认没有保存的快捷栏。
+
+当游戏保存了一个快捷栏时，游戏会立刻写入此文件，如果此文件此时不存在游戏也会立刻创建。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=17w06a|加入了快捷栏存储文件。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[en:Saved Hotbars#File format]]
+[[fr:Format hotbar.nbt]]

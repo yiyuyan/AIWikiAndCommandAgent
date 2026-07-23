@@ -1,0 +1,122 @@
+# 页面: Java版1.19.3-pre1
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.19.3-pre1
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:35
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=1.19.3-pre1
+|image=1.19.3-pre1.png
+|image2=Java Edition 1.19.3-pre1 Simplified.png\Java Edition 1.19.3-pre1 Traditional.png\Java Edition 1.19.3-pre1 Traditional HK.png
+|edition=Java
+|type=Pre-release
+|date=2022年11月22日
+|jsonhash=c37872d2ed817ef3c76e8914e1b2c20662f3835c
+|clienthash=57a23e575a34f24aa84f3d54fbf4ddf9940a2c24
+|clientmap=a20bf6c75fb17e98812e01828c0ef47bf22e1c88
+|serverhash=046fee78cd174105cb9b958a8459c0405ab19959
+|servermap=b2cf842b08789a8ac4748969c2cec2eae48b6101
+|parent=1.19.3
+|prevparent=1.19.2
+|prev=22w46a
+|next=1.19.3-pre2
+|nextparent=1.19.4
+}}<onlyinclude>
+
+'''1.19.3-pre1'''是[[Java版1.19.3]]的首个预发布版，发布于2022年11月22日<ref>{{article|minecraft-1-19-3-pre-release-1|Minecraft 1.19.3 Pre-Release 1|November 22, 2022}}</ref>，加入了一些子谓词，放置在[[音符盒]]上的[[玩家头颅]]播放自定义音效的实验性功能和{{cmd|fillbiome}}命令的新语法，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|fillbiome}}'''
+* 加入了按条件替换生物群系的功能。
+** 使用此功能时的语法：{{cmd|link=none|fillbiome [<from>] [<to>] [<biome>] replace [<filter>]}}
+*** <code>filter</code>：需要被替换的生物群系ID或生物群系标签。
+
+=== 常规 ===
+'''[[谓词]]'''
+* 为以下具有不同变种的生物类型添加了以下子谓词：
+** <code>axolotl</code>
+*** <code>variant</code>，可用值有<code>lucy</code>、<code>wild</code>、<code>gold</code>、<code>cyan</code>和<code>blue</code>。
+** <code>boat</code>
+*** 对所有种类的[[船]]和[[运输船]]均生效。
+*** <code>variant</code>，可用值有<code>oak</code>、<code>spruce</code>、<code>birch</code>、<code>jungle</code>、<code>acacia</code>、<code>dark_oak</code>、<code>mangrove</code>和<code>bamboo</code>。
+** <code>fox</code>
+*** <code>variant</code>，可用值有<code>red</code>和<code>snow</code>。
+** <code>mooshroom</code>
+*** <code>variant</code>，可用值有<code>red</code>和<code>brown</code>。
+** <code>painting</code>
+*** <code>variant</code>，可用值见<code>painting_variant</code>注册表项。
+** <code>rabbit</code>
+*** <code>variant</code>，可用值有<code>brown</code>、<code>white</code>、<code>black</code>、<code>white_splotched</code>、<code>gold</code>、<code>salt</code>和<code>evil</code>。
+** <code>horse</code>
+*** <code>variant</code>，可用值有<code>white</code>、<code>creamy</code>、<code>chestnut</code>、<code>brown</code>、<code>black</code>、<code>gray</code>和<code>dark_brown</code>。
+*** 花纹是单独的值，不会被此值匹配上。
+** <code>llama</code>
+*** <code>variant</code>，可用值有<code>creamy</code>、<code>white</code>、<code>brown</code>和<code>gray</code>。
+** <code>villager</code>
+*** <code>variant</code>，可用值见<code>villager_type</code>注册表项。
+*** 也适用于[[僵尸村民]]。
+*** 职业和等级是单独的值，不会被此值匹配上。
+** <code>parrot</code>
+*** <code>variant</code>，可用值有<code>red_blue</code>、<code>blue</code>、<code>green</code>、<code>yellow_blue</code>和<code>gray</code>。
+** <code>tropical_fish</code>
+*** <code>variant</code>，可用值有<code>kob</code>、<code>sunstreak</code>、<code>snooper</code>、<code>dasher</code>、<code>brinely</code>、<code>spotty</code>、<code>flopper</code>、<code>stripey</code>、<code>glitter</code>、<code>blockfish</code>、<code>betty</code>和<code>clayfish</code>。
+
+'''[[闪烁标语]]'''
+* 加入了以下闪烁标语：
+** "Made with lave!"{{sic}}<ref>引用自{{bug|MC-257104}}。</ref>
+
+== 更改 ==
+=== 生物 ===
+'''[[恼鬼]]'''
+* 略微更改了纹理。
+
+== 更改（实验性） ==
+=== 方块 ===
+'''[[玩家的头]]'''
+* 加入了{{nbt|string|note_block_sound}}这一NBT标签，用于决定上方放置了玩家的头的[[音符盒]]被敲击时要播放的音效，必须是一个有效声音事件的[[命名空间ID]]。
+
+== 修复 ==
+{{fixes|fixedin=1.19.3 Pre-release 1|showdesc=1
+|;1.19前正式版的漏洞
+|156663|村民在水中不能正常寻路。
+|177596|武器匠工作时显示的字幕是“{{tr|砂轮：使用|使用砂輪}}”而不是“{{tr|武器匠：工作|武器匠工作|武器工匠工作}}”。
+|177676|盔甲匠工作时显示的字幕是“{{tr|高炉：噼啪作响|高爐劈啪聲}}”而不是“{{tr|盔甲匠：工作|製甲師工作|製甲工匠工作}}”。
+|245697|某些生物不能离开两格深的水。
+|;1.19.2的漏洞
+|255133|深暗之域中会生成额外的铜矿石。
+|;dev
+|256481|向雕纹书架中放书时，<code>-{}-minecraft.used:minecraft.<''书的种类''></code>统计值不增加。
+|256679|美西螈通常会在躲避危险时犹豫，并偶尔会向有危险的方向寻路。
+|256883|与之前版本相比，游戏菜单中的元素位置会略低一些。
+|257341|恼鬼不使用半透明纹理。
+|257349|恼鬼不再能正常地坐在船和矿车中。
+|257368|“{{tr|对局域网开放|在區網上公開|開放到 LAN}}”菜单中，输入的{{tr|端口号|通訊埠號碼}}小于1024时，“{{tr|端口无效|無效的連接埠|連接埠號碼無效}}”错误不显示。
+|257373|{{tr|端口号|通訊埠號碼}}输入框中的光标不闪烁。
+|257374|{{tr|端口号|通訊埠號碼}}英文“Port number”中的“number”一词没有大写。
+|257386|启用Programmer Art后，创造模式物品栏纹理错误。
+|257506|雕纹书架的顶部和底部纹理会由于放置方式的不同而旋转。
+|257525|22w42a及以上版本中，悦灵的运动AI有问题，导致它们有时会在半空中旋转。
+|;previous
+|257617|点击“遥测”屏幕中的“{{tr|打开我的数据|開啟我的統計資料|打開個人數據}}”或“{{tr|数据收集|資料收集|數據收集}}”按钮后无法使用鼠标滚轮滚动。
+|257618|<code>telemetry.event.world_loaded.description</code>字符串中的“pair”一词使用了不正确的动词形式。
+|257619|幼年猪灵和僵尸猪灵的-{}-头撞到方块时会受到伤害。
+|257625|敲击放置了猪灵的头的音符盒，播放的是猪灵愤怒时的音效，而不是其空闲时的。
+|257648|{{cmd|fillbiome|link=none}}命令可能导致新生物群系颜色与旧的交错出现。
+|257658|从雕纹书架中取书时，幽匿感测体不激活。
+|257663|因为点击社交屏幕上的“隐藏消息”按钮时，其状态会变化两次，所以现在不再能切换其状态。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:1.19.3-pre1]]
+[[en:Java Edition 1.19.3 Pre-release 1]]
+[[es:Java Edition 1.19.3 Pre-release 1]]
+[[fr:Édition Java 1.19.3 Pre-release 1]]
+[[ja:Java Edition 1.19.3 Pre-release 1]]
+[[pt:Edição Java 1.19.3 Pre-release 1]]
+[[ru:1.19.3 Pre-release 1 (Java Edition)]]

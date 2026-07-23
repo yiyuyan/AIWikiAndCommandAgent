@@ -1,0 +1,100 @@
+# 页面: Java版17w49a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8817w49a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:20
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=17w49a
+|image=17w49a.png
+|image2=Java Edition 17w49a Simplified.png\Java Edition 17w49a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2017年12月6日
+|jsonhash=6de4e269122102c9cdaa49ce1a65f9b185dcc86b
+|clienthash=a58ce444458ba9267973c31877a57eac5a5cbeda
+|serverhash=561fe37463ef30b4e1ab4c6b1da057d9e2b17801
+|parent=1.13
+|prevparent=1.12.2
+|prev=17w48a
+|next=17w49b
+|nextparent=1.13.1
+}}<onlyinclude>
+
+'''17w49a'''是[[Java版1.13]]的第9个快照，发布于2017年12月6日<ref>{{snap|17w49a|December 6, 2017}}</ref>，加入了标签，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''[[Java版标签|标签]]'''
+* 物品和方块可以用一个ID联结。
+** 方块标签可以用于检测世界内的方块。
+** 物品标签可以用于检测物品栏物品。
+* 标签创建于[[数据包]]的{{filepath|data/(命名空间)/tags/blocks}}或{{filepath|data/(命名空间)/tags/items}}。
+** 例如：{{filepath|data/(命名空间)/tags/blocks/foo.json}}
+** 这会创建名为<code>-{}-(命名空间):foo</code>的方块标签。
+** 此json文件包括所有要联结起来的方块的列表。
+* 有两种默认的标签，都能对应物品与方块形式： <code>minecraft:wool</code>对应所有羊毛，<code>minecraft:planks</code>对应所有木板方块。
+
+== 更改 ==
+=== 游戏内容 ===
+'''配方'''
+* 配方现在能指定标签而不仅是单个物品。
+
+== 修复 ==
+{{fixes|fixedin=17w49a|prefix=Minecraft|showdesc=1
+|;old
+|36191|多种方块缺失<code>stat.mineBlock</code>统计项（例如刷怪笼、炼药锅、床等）。
+|98823|药箭没有<code>stat.craftItem</code>统计项。
+|99321|第二个箱子被阻挡时，漏斗不能从大型箱子中取出物品。
+|;dev
+|121631|从创造模式物品栏的搜索结果中取出物品时不再重置搜索文本框。
+|121632|按{{ctrl|聊天}}键会选中创造模式物品栏中的搜索框或配方书，并输入字符。
+|121648|设置中的难度设置没有被翻译，且全部被小写。
+|121665|按键“无”显示为<code>key.keyboard.-1</code>。
+|121705|打开GUI并移动鼠标时，指针偏离鼠标的实际位置。
+|121709|用于排序统计菜单的可点击区域不在正确的位置上。
+|121718|玩家不能选择旁观者菜单。
+|121808|单个实体的命令参数验证在某些错误消息中表示的是玩家。<!-- Command argument validation for single entity says player in some error messages. -->
+|121873|信标GUI的暗色背景缺失。
+|122148|不显示方块、物品、生物、GUI和其他纹理，且不播放声音。
+|122173|由于<code>:</code>，无法创建统计的记分板项。
+|122295|专用服务器的备份文件夹会被创建在服务器文件夹外。
+|122309|{{cmd|gamerule gameLoopFunction|link=none}}命令无法{{key|Tab}}键补全函数名称。
+|122314|在以前版本中创建的地图现在都是一样的。
+|122355|破坏旗帜时崩溃：<code>java.lang.ClassCastException: arw cannot be cast to aru.</code>
+|122383|先前存在的箱子不可见且重叠。
+|122395|自定义玩家头颅被称为<code>block.minecraft.player_headnamed</code>。
+|122410|在{{key|Tab}}补全列表内，{{key|Shift+Tab}}键不能反方向选择。
+|122521|损坏的铁砧总朝向北方。
+|122536|战利品表中的<code>set_nbt</code>函数不会把NBT合并到物品上。
+|122558|带血量条件的记分板不再使用红心表示数值。
+|122573|由地毯和黏性活塞导致的崩溃问题。
+|122584|统计中，格式字符串的顺序不正确。
+|122666|<code>options.txt</code>中<code>lang:en_US</code>一行中的大写部分会阻止资源被加载。
+|;previous
+|122618|配方不能用{{key|Tab}}键补全。
+|122624|按{{key|Tab}}键不再能在可能的命令值中循环选择。
+|122639|不能在冰上放置睡莲。
+|122643|雪、地毯和阳光探测器会剔除相邻的上半台阶。
+|122644|数据包不能替换原版配方。
+|122646|玻璃板顶部和底部的剔除面不工作。
+|122650|玩家头颅不受升级路径影响，被重命名至<code>block.minecraft.player_headnamed</code>+头部纹理不显示，只在放置时显示。<!-- Player heads aren't affected by upgrade paths, renamed to "block.minecraft.player_headnamed" + head texture does not show, only when placed. -->
+|122718|“视频设置”菜单中，泥土边界对设置的侵占过多。
+|122907|巨大的图形复制自定义配方漏洞。<!-- An enormous graphical duplicating custom recipe bug. -->
+|122944|{{cmd|scoreboard objective|link=none}}命令不能更新显示名称。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:17w49a]]
+[[en:Java Edition 17w49a]]
+[[es:Java Edition 17w49a]]
+[[fr:Édition Java 17w49a]]
+[[ja:Java Edition 17w49a]]
+[[nl:17w49a]]
+[[pt:Edição Java 17w49a]]
+[[ru:17w49a (Java Edition)]]

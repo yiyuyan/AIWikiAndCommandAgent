@@ -1,0 +1,700 @@
+# 页面: 命令/scoreboard
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/scoreboard
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 需要整理, 需要验证
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{about|管理记分板的命令|记分板的具体特性|记分板}}
+{{Infobox command
+|name=scoreboard
+|oplevel=2\1
+|becheat=1
+}}
+{{relevant tutorial|记分板}}
+
+管理记分板中的{{tr|记分项|目標|記分項}}和分数持有者。
+
+== 语法 ==
+=== Java版 ===
+; 记分项命令
+: <code>scoreboard objectives '''list'''</code>
+:: 列出所有存在的[[记分板#记分项|记分项]]及其显示名称与准则。
+
+: <code>scoreboard objectives '''add''' <objective> <criteria> [<displayName>]</code>
+:: 创建一个具有指定的名称、准则和显示名称（可选）的记分项。
+
+: <code>scoreboard objectives '''remove''' <objective></code>
+:: 删除指定记分项及其所有有关内容。记分项、分数持有者的分数数据都会被删除。且如果记分项在显示位置上，该显示位置将会被清空。
+
+: <code>scoreboard objectives '''setdisplay''' <slot> [<objective>]</code>
+:: 在[[记分板#显示位置|指定位置]]显示指定记分项的分数信息。若未指定记分项，则对应显示位置将被清空（恢复到默认状态）。
+
+: <code>scoreboard objectives '''modify''' <objective> '''displayautoupdate''' (true|false)</code>
+:: 设置指定记分项中分数持有者名称是否会在分数更新时自动更新为相关的游戏名称（默认禁用，若分数持有者代表虚拟实体则无效）。
+
+: <code>scoreboard objectives '''modify''' <objective> '''displayname''' <displayName></code>
+:: 更改指定记分项的显示名称。
+: <code>scoreboard objectives '''modify''' <objective> '''numberformat'''</code>
+:: 更改指定记分项在显示位置中的默认数字格式。
+: <code>scoreboard objectives '''modify''' <objective> '''numberformat blank'''</code>
+:: 设置指定记分项的默认数字格式为空，即不显示分数。
+: <code>scoreboard objectives '''modify''' <objective> '''numberformat fixed''' <component></code>
+:: 设置指定记分项的默认数字格式为<code>fixed</code>类型，即直接将分数替换为指定的文本组件。
+: <code>scoreboard objectives '''modify''' <objective> '''numberformat styled''' <style></code>
+:: 设置指定记分项的默认数字格式为<code>styled</code>类型，即分数将以指定的文本组件修饰（指定分数的样式）。
+: <code>scoreboard objectives '''modify''' <objective> '''rendertype''' (hearts<nowiki>|</nowiki>integer)</code>
+:: 更改玩家列表中的分数显示格式，可指定为爱心（hearts）或数字（integer）格式。
+
+; 分数持有者命令
+: <code>scoreboard players '''list''' [<target>]</code>
+:: 列出记分板系统中以某种方式被追踪的全部[[记分板#记分项|分数持有者]]。可选参数<code><target></code>用于列出指定分数持有者的分数。
+
+: <code>scoreboard players '''get''' <target> <objective></code>
+:: 返回指定分数持有者在指定记分项中的分数。
+
+: <code>scoreboard players '''set''' <targets> <objective> &lt;score></code>
+:: 设置指定分数持有者在指定记分项中的分数。
+
+: <code>scoreboard players '''add''' <targets> <objective> &lt;score></code>
+:: 增加指定分数持有者在指定记分项中的分数值。若记分项不存在分数，则在增加前视为0分。不允许为负数。
+
+: <code>scoreboard players '''remove''' <targets> <objective> &lt;score></code>
+:: 减少指定分数持有者在指定记分项中的分数值。若记分项不存在分数，则在减少前视为0分。不允许为负数。
+
+: <code>scoreboard players '''reset''' <targets> [<objective>]</code>
+:: 删除指定分数持有者在指定记分项（若未指定<code><objective></code>则为其所有被追踪记分项）中的所有数据。若指定了<code><objective></code>参数，那么仅限该记分项被清空。否则，将清空所有关联的记分项。
+:: 注：这并不代表分数被设置为0，它会将指定分数持有者在某个（或全部）记分项中的数据完全从记分板系统中移除。
+:: 这也禁用了目标玩家使用{{cmd|trigger}}命令的能力（若指定了<code><objective></code>，则只针对<code><objective></code>对应的记分项）。
+
+: <code>scoreboard players '''enable''' <targets> <objective></code>
+:: 允许指定分数持有者能够使用{{cmd|trigger}}命令触发指定记分项。该命令接受非玩家实体，但仅玩家能够真正使用{{cmd|trigger}}命令。在该命令被执行前，玩家无法通过{{cmd|trigger}}命令触发指定记分项。玩家每次成功执行{{cmd|trigger}}命令后都将会再次禁用对应记分项。
+:: 注：若指定分数持有者在指定记分项中的分数不存在，该命令将会设置其分数为0。
+
+: <code>scoreboard players '''operation''' <targets> <targetObjective> <operation> &lt;source> <sourceObjective></code>
+:: 对目标分数持有者的目标记分项中的分数（<code><targets></code>与<code><targetObjective></code>）与来源分数持有者的来源记分项中的分数（<code>&lt;source&gt;</code>与<code><sourceObjective></code>）进行算术运算等操作，操作的结果将写入目标分数持有者对应记分项中的分数。若来源分数持有者及其对应的记分项中不存在分数，则视作0分处理。
+
+: <code>scoreboard players '''display name''' <targets> <objective></code>
+:: 重置指定分数持有者在指定记分项中的显示名称为默认状态。
+
+: <code>scoreboard players '''display name''' <targets> <objective> <text></code>
+:: 更改指定分数持有者在指定记分项中的显示名称。
+
+: <code>scoreboard players '''display numberformat''' <targets> <objective></code>
+:: 重置指定分数持有者在指定记分项中的数字格式为默认状态。
+
+: <code>scoreboard players '''display numberformat''' <targets> <objective> '''blank'''</code>
+:: 设置指定分数持有者在指定记分项中的数字格式为空，即不显示其分数。
+
+: <code>scoreboard players '''display numberformat''' <targets> <objective> '''fixed''' <contents></code>
+:: 设置指定分数持有者在指定记分项中的数字格式为<code>fixed</code>类型，即使用文本组件替换其分数。若目标所关联的记分项不存在分数，则先赋以0分后再使用文本组件替换。
+
+: <code>scoreboard players '''display numberformat''' <targets> <objective> '''styled''' <style></code>
+:: 设置指定分数持有者在指定记分项中分数格式为<code>styled</code>类型，即以由文本组件所定义的样式修饰该分数。
+
+=== 基岩版 ===
+; 记分项命令
+: <code>scoreboard objectives '''list'''</code>
+:: 列出所有存在的[[记分板#记分项|记分项]]、显示名称与准则。
+
+: <code>scoreboard objectives '''add''' <objective: string> dummy [displayName: string]</code>
+:: 创建一个具有指定名称、准则和显示名称（可选）的记分项。<code><objective: string></code>可以被引号包裹。<code><displayName: string></code>必须是非数字的纯文本。如果未指定，默认为<code><objective></code>。所有的参数均区分大小写。
+
+: <code>scoreboard objectives '''remove''' <objective: string></code>
+:: 从记分板系统中删除指定记分项及其所有有关内容。记分项、分数的数据都会被删除，且如果记分项在显示位置上，该显示位置将会被清空。
+
+: <code>scoreboard objectives '''setdisplay''' <list|sidebar> [objective: string] [ascending|descending]</code>
+: <code>scoreboard objectives '''setdisplay''' belowname [objective: string]</code>
+:: 在指定位置显示指定记分项的分数信息。合法的位置已在{{slink|记分板|显示位置}}里列出并描述。注意，若未指定记分项，则对应显示位置将被清空（恢复到默认状态）。若显示位置指定为<code>list</code>或<code>sidebar</code>，可使用额外的可选参数<code>ascending|descending</code>以指定排列顺序。
+
+; 分数持有者命令
+: <code>scoreboard players '''list''' [playername: target]</code>
+:: 显示所有被记分板系统追踪的实体。可选参数<code>[playername: target]</code>（实体名称）可用以显示指定实体的所有分数。
+
+:<code>scoreboard players '''set''' <player: target> <objective: string> <count: int></code>
+:: 设置指定分数持有者在指定记分项中的分数。
+
+: <code>scoreboard players '''add''' <player: target> <objective: string> <count: int></code>
+:: 增加指定分数持有者在给定记分项中的分数值。若指定分数持有者在记分项中不存在分数，则在增加前视为0分。若为负数，则将减去相应的分数。
+
+: <code>scoreboard players '''remove''' <player: target> <objective: string> <count: int></code>
+:: 减少指定分数持有者在给定记分项中的分数值。若记分项不存在分数，则在减少前视为0分。若为负数，则将增加相应分数。
+
+: <code>scoreboard players '''random''' <player: target> <objective: string> <min: int> <max: int></code>
+:: 设置指定分数持有者在指定记分项中的分数为一个在<code><min: int></code>（最小值）和<code><max: int></code>（最大值）之间的随机数（包含最小值和最大值）。
+
+: <code>scoreboard players '''reset''' <player: target> [objective: string]</code>
+:: 删除指定分数持有者在指定记分项（或其所有被追踪的记分项）中的分数。若指定了<code><objective></code>参数，那么仅限该记分项被清空。否则将清空所有关联的记分项。注：这并非将分数设为0，分数持有者的所有数据将从整个记分板（或指定记分项）中移除。
+
+: <code>scoreboard players '''test''' <player: target> <objective: string> <min: wildcard int> [max: wildcard int]</code>
+:: 检测目标分数是否在<code><min: wildcard int></code>（最小值）和<code><max: wildcard int></code>（最大值，默认为2,147,483,647）之间。
+
+: <code>scoreboard players '''operation''' <player: target> <targetObjective: string> <operation: operator> <selector: target> <objective: string></code>
+:: 对目标分数持有者的目标记分项中的分数（<code><player: target></code>与<code><targetObjective: string></code>）与来源分数持有者的来源记分项中的分数（<code><selector: target></code>与<code><objective: string></code>）进行算术运算等操作，操作的结果将写入目标分数持有者对应记分项中的分数。若来源分数持有者及其对应的记分项中不存在分数，则视作0分处理。
+
+== 参数 ==
+; 记分项命令
+{{argument|objective|objective|objective: string|basic_string}}
+: 表示记分项的名称。
+: {{arg desc|je=objective|be=basic_string}}
+
+{{argument|criteria|objective_criteria|dummy}}
+: 表示为新建记分项时要设定的准则。
+: {{arg desc|je=objective_criteria}} {{IN|bedrock}}<code>dummy</code>是当前唯一支持的准则。
+
+{{argument|displayName|component|displayName: string|basic_string}}
+: 表示记分项的显示名称，当未指定时，默认为<code><objective></code>。
+: {{IN|java}}必须为一个[[文本组件]]。{{IN|bedrock}}必须为一个完整的单词，不能为数字（允许的字符：{{cd|-|:|.|_|delimiter=,&#32;}}、{{cd|A|Z|delimiter=-}}、{{cd|a|z|delimiter=-}}和{{cd|0|9|delimiter=-}}）或一个被双引号包围的字符串。
+
+{{argument|slot|scoreboard_slot|<nowiki>list|sidebar|belowname</nowiki>}}
+: {{arg desc|je=scoreboard_slot}}合法的显示位置可参见：{{slink|记分板|显示位置}}。
+: {{arg desc|je=objective|be=basic_string}}
+
+{{el|be|short=1}}: <code>ascending|descending</code>
+: 表示排列顺序是升序还是降序。若未指定，默认为升序。
+
+{{el|je|short=1}}: {{argument|value|bool}}
+: 表示显示名称是否会自动更新。
+: {{arg desc|je=bool}}
+
+{{el|je|short=1}}: {{argument|displayName|component}}
+: 表示显示名称。
+: {{arg desc|je=component}}
+
+{{el|je|short=1}}: {{argument|component|component}}
+: 表示一个用于替换记分项显示文字的文本组件。
+: {{arg desc|je=component}}
+
+{{el|je|short=1}}: {{argument|style|style}}
+: 表示一个用于修饰记分项显示文字的样式（即颜色和格式等，与显示文字等内容无关）。
+: {{arg_desc|je=style}}
+
+{{el|je|short=1}}: <code>hearts|integer</code>
+: 表示分数的显示格式是心形（hearts）还是整数（integer）。
+
+; 分数持有者命令
+{{argument|target|score_holder|playername: target|WildcardCommandSelector<Actor>}}
+: 表示分数持有者。指定名称对应的玩家无需上线，且不必是一个真实存在的玩家名。
+: {{arg desc|je=score_holder|be=WildcardCommandSelector<Actor>}}
+: {{IN|java}}仅允许指定1个分数持有者。且<code>*</code>将失效。（{{bug|MC-136858}}）。{{IN|bedrock}}允许指定多个分数持有者。
+
+{{argument|targets|score_holder|player: target|WildcardCommandSelector<Actor>}}
+: 表示1个或多个分数持有者。指定名称对应的玩家无需上线，且不必是一个真实存在的玩家名。
+: {{arg desc|je=score_holder|be=WildcardCommandSelector<Actor>}}
+
+{{argument|objective|objective|objective: string|basic_string}}
+: 表示记分项名称。
+: {{arg desc|je=objective|be=basic_string}}
+
+{{argument|score|integer|count: int|int}}
+: 表示设置的分数（可能是增加量或减少量）。
+: {{arg desc|je=integer|be=int}}
+
+{{el|be|short=1}}: {{argument|min: int|int}}<br>{{el|be|short=1}}: {{argument|max: int|int}}
+: 表示最小值和最大值，用于产生在指定范围内的随机数。
+: {{arg desc|be=int}}
+
+{{el|be|short=1}}: {{argument|min: wildcard int|CommandWildcardInt}}<br>{{el|be|short=1}}: {{argument|max: wildcard int|int}}
+: 表示最小值和最大值，用于检测分数是否在指定范围内。
+: 必须为一个32位整型数字。且<code>min: wildcard int</code>可以用星号（<code>*</code>）代替，表示-2147483648。<code>max: wildcard</code>也可用星号（<code>*</code>）表示2147483647。
+
+{{argument|targetObjective|objective|targetObjective: string|basic_string}}
+: 表示目标记分项。
+: {{arg desc|je=objective|be=basic_string}}
+
+{{argument|source|score_holder|selector: target|WildcardCommandSelector<Actor>}}
+: 表示来源分数持有者——其分数将作为输入源。
+: {{arg desc|je=score_holder|be=WildcardCommandSelector<Actor>}}
+
+{{argument|sourceObjective|objective|objective: string|basic_string}}
+: 表示来源记分项。
+: {{arg desc|je=objective|be=basic_string}}
+
+{{argument|operation|operation|operation: operator|CommandOperator}}
+: 表示要应用的操作。
+: {{arg desc|je=operation|be=CommandOperator}}
+:* <code>=</code>赋值：将来源分数赋给目标分数。
+:* <code>+=</code>求和赋值：将目标分数和来源分数的和赋给目标分数。
+:* <code>-=</code>求差赋值：将目标分数和来源分数的差赋给目标分数。
+:* <code>*=</code>求积赋值：将目标分数和来源分数的积赋给目标分数。
+:* <code>/=</code>求商（整除）赋值：将目标分数和来源分数相除的结果{{only|je|for=向下取整}}或{{only|be|for=向零取整}}后赋给目标分数。
+:* <code>%=</code>{{tr|求余|求餘}}（取模）赋值：将目标分数和来源分数相除，取整数除法所得的余数（取除数{{only|je}}/被除数{{only|be}}的符号）赋给目标分数。
+:* {{cd|><}}交换：交换来源分数和目标分数。
+:* {{cd|<}}取较小值：仅当来源分数较小时，将来源分数赋给目标分数。
+:* {{cd|>}}取较大值：仅当来源分数较大时，将来源分数赋给目标分数。
+: 在除了{{cd|><}}的所有操作中，来源分数都保持不变，仅目标分数可能会被改变。若目标或来源未关联任何记分项，则将会在操作前先赋值为0并建立关联。若有1个以上的分数持有者作为来源，则将依次对每个来源的分数进行一次操作。若有1个以上的分数持有者作为目标，则将依次对每个目标进行一次操作。此操作默认按照命令执行者与目标分数持有者间的距离由近到远执行。
+: 对于<code>/=</code>和<code>%=</code>，如果来源分数为0（即除数为0），{{in|je}}命令将执行失败，而{{in|be}}命令执行成功，但目标分数不会发生变化。
+
+{{el|je|short=1}}: {{argument|text|component}}
+: 表示一个用于替换分数持有者名称的文本组件（<code>nbt</code>和<code>selector</code>等[[文本组件#文本组件内容|内容类型]]将无效）。
+: {{arg desc|je=component}}
+
+{{el|je|short=1}}: {{argument|contents|component}}
+: 表示一个用于替换分数的文本组件。
+: {{arg desc|je=component}}
+
+{{el|je|short=1}}: {{argument|style|style}}
+: 表示分数的样式（即颜色和格式等，与分数值等内容无关）。
+: {{arg_desc|je=style}}
+
+== 结果 ==
+; 记分项命令
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|cmd=... list|记分板系统中没有记分项|success|fail}}
+{{Result table|cmd=... add ...|<code><objective></code>已存在|fail}}
+{{Result table|cmd=... remove ...<br>... setdisplay ...<br>... modify ...|<code><objective></code>不存在}}
+{{Result table|cmd=... setdisplay <slot> <objective>|指定记分项的显示位置已为指定位置||success}}
+{{Result table|cmd=... setdisplay <slot>|指定位置本就是空的}}
+{{Result table|cmd=|success}}
+{{Result table}}
+; 分数持有者命令
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|cmd=... list|记分板系统中没有正在追踪的分数持有者|success|fail}}
+{{Result table|cmd=... list <targets>|指定的目标未能选中1个分数持有者|fail}}
+{{Result table|cmd=... list <targets><br>... list [playername: target]|没有记分项在追踪指定的分数持有者|success}}
+{{Result table|cmd=... get ...|记分项不存在|fail|N/A}}
+{{Result table|指定的目标未能选中1个分数持有者}}
+{{Result table|指定分数持有者在指定记分项中没有分数}}
+{{Result table|cmd=... set ...<br>... add ...<br>... reset ...<br>... enable ...<br>... display ...|记分项不存在||fail}}
+{{Result table|<code><targets></code>或<code>player: target</code>未能选中分数持有者}}
+{{Result table|指定记分项只读||N/A}}
+{{Result table|cmd=... random ...<br>... test ...|记分项不存在|N/A|fail}}
+{{Result table|<code>player: target</code>未能选中分数持有者}}
+{{Result table|cmd=... random ...|<code>max: int</code>不大于<code>min: int</code>}}
+{{Result table|cmd=... reset <player: target>|所有目标均未被任意记分项追踪}}
+{{Result table|cmd=... test ...|<code>max: int</code>小于<code>min: int</code>}}
+{{Result table|cmd=... enable ...|记分项的准则不是trigger|fail|N/A}}
+{{Result table|所有目标的分数均已启用}}
+{{Result table|cmd=... operation ...|<code><targets></code>、<code>&lt;source></code>或<code>player: target</code>、<code>selector: target</code>未能选中分数持有者||fail}}
+{{Result table|来源记分项或目标记分项不存在}}
+{{Result table|来源记分项（或目标记分项，当使用<code>&gt;&lt;</code>时）只读||N/A}}
+{{Result table|使用运算符<code>/{{=}}</code>或<code>%{{=}}</code>时，来源分数为0（即除数为0）||success}}
+{{Result table|cmd=|success}}
+{{Result table}}
+
+== 输出 ==
+; 记分项命令
+{{Output table}}
+{{Output table|edition=je|cmd=... list|执行成功|1|1|记分板系统中的记分项数量}}
+{{Output table|cmd=... add ...<br>... remove ...|执行成功|1|1|执行后，记分板系统中的记分项数量}}
+{{Output table|cmd=other|执行成功|1|1|0}}
+{{Output table|edition=be|cmd=|执行成功|记分板系统中的记分项数量}}
+{{Output table}}
+; 分数持有者命令
+{{Output table}}
+{{Output table|edition=je|cmd=... list <targets>|执行成功|1|1|指定分数持有者所追踪的记分项总数}}
+{{Output table|cmd=... get ...|执行成功|1|1|获取到的分数值}}
+{{Output table|cmd=... set ...|执行成功|1|1|设定分数乘以目标数量}}
+{{Output table|cmd=... add ...<br>... remove ...|执行成功|1|1|每个记分项分数增加/减少后的分数之和}}
+{{Output table|cmd=... reset ...|执行成功|1|1|目标数量}}
+{{Output table|cmd=... enable ...|执行成功|1|1|分数被第一次启用的目标数量}}
+{{Output table|cmd=... operation ...|执行成功|1|1|每个目标进行运算后的记分项分数之和}}
+{{Output table|cmd=other|执行成功|1|1|0}}
+{{Output table|edition=be|cmd=... list|执行成功|分数持有者的数量}}
+{{Output table|cmd=... list [playername: target]|执行成功|每个分数持有者所追踪的记分项总数}}
+{{Output table|cmd=... set ...<br>... add ...<br>... remove ...<br>... random ...|执行成功|1}}
+{{Output table|cmd=... reset ...|执行成功|被记分板（或指定记分项）所追踪的目标总数}}
+{{Output table|cmd=... test ...|执行成功|分数在最小值和最大值之间的指定分数持有者的数量}}
+{{Output table|cmd=... operation ...|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+{{cleanup|教程性内容|section=1}}
+
+=== Java版 ===
+; 示例1：创建和删除记分项
+创建名为{{cd|foo}}的记分项，记分项的准则为health：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives add foo health
+</syntaxhighlight>
+
+修改{{cd|foo}}记分项的显示名称为{{mcfont|&c❤}}：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives modify foo displayname {"text":"❤","color":"red"}
+</syntaxhighlight>
+
+也可以在创建记分板的同时指定显示名称。以下命令创建了一个名为{{cd|bar}}的记分项，记分项的准则为dummy，显示名称为Scoreboard：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives add bar dummy "Scoreboard"
+</syntaxhighlight>
+* 这里的显示名称Scoreboard必须符合JSON语法，在JSON中要表示一个字符串必须使用双引号包裹，所以应该写为{{cd|"Scoreboard"}}而非{{cd|Scoreboard}}。
+
+在不需要时可以随时移除某个记分项。以下命令将移除一个名为{{cd|bar}}的记分项：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives remove bar
+</syntaxhighlight>
+
+; 示例2：设置实体或虚拟实体的分数
+设置Alex在{{cd|bar}}记分项中的分数为100，设置Steve在{{cd|bar}}记分项中的分数为200：
+<syntaxhighlight lang="mcfunction">
+scoreboard players set Alex bar 100
+scoreboard players set Steve bar 200
+</syntaxhighlight>
+* 玩家Alex和Steve不存在的情况下也能设置成功。这是因为在使用玩家名作为{{cd|scoreboard players set}}之后的那一个参数时，记分板系统会直接在{{cd|bar}}记分项中添加相应的分数记录，不会检测相应玩家是否真实存在于游戏中。故这里的Alex和Steve也即“虚拟玩家”。
+
+设置执行者在{{cd|bar}}记分项中的分数为100：
+<syntaxhighlight lang="mcfunction">
+scoreboard players set @s bar 100
+</syntaxhighlight>
+* 若你在聊天栏执行该命令，执行者就是你自己。
+* 若{{cd|scoreboard players set}}之后的那一个参数符合选择器的语法，则游戏将根据选择器来搜索和筛选实体，若未找到符合选择器的实体，则命令执行失败，不会设置分数。
+
+; 示例3：获取分数持有者的分数
+可将所有在记分板中存有分数的实体统称为分数持有者。在使用{{cmd|scoreboard}}命令时，必须先找到1个分数持有者，然后才能获取到1个分数。
+
+获取名为Alex的玩家在{{cd|bar}}记分项中的分数：
+<syntaxhighlight lang="mcfunction">
+scoreboard players get Alex bar
+</syntaxhighlight>
+* 获取分数的前提是目标的分数必须在指定的记分项中存在。所以你一般无法获取某个实体在一个刚刚创建好的记分项中的分数。
+
+; 示例4：重置分数
+重置执行者在{{cd|bar}}记分项中的分数：
+<syntaxhighlight lang="mcfunction">
+scoreboard players reset @s bar 100
+</syntaxhighlight>
+* 该操作会删除执行者在{{cd|bar}}记分项中的分数。故执行后无法获取执行者的{{cd|bar}}分数。
+
+你也可以使用通配符{{cd|*}}来遍历当前记分板中的所有分数持有者。以下命令将删除记分板中所有分数持有者在{{cd|bar}}中的分数：
+<syntaxhighlight lang="mcfunction">
+scoreboard players reset * bar 100
+</syntaxhighlight>
+
+; 示例5：记分项和分数的显示
+[[File:Scoreboard.png|缩略图|400px|一个显示在屏幕右侧的记分项]]
+将上一步创建的{{cd|bar}}记分项显示在屏幕右侧：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives setdisplay sidebar bar
+</syntaxhighlight>
+* 若你没有设置{{cd|bar}}记分项的显示名称，则记分项将显示为其标识名{{cd|bar}}。否则将显示为所设定的显示名称。
+* 所显示的分数将被自动排序。较大者靠上，较小者靠下。
+
+清空屏幕右侧所显示的记分项：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives setdisplay sidebar
+</syntaxhighlight>
+* 该命令只会将{{cd|sidebar}}显示位置的显示内容清空，不会删除任何记分项。
+
+将之前创建的{{cd|foo}}记分项显示在玩家列表：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives setdisplay list foo
+</syntaxhighlight>
+
+修改{{cd|foo}}记分项的渲染类型为“心形”：
+[[File:Scoreboard Display List Hearts.gif|缩略图|200px|list显示位置的显示效果，渲染类型为hearts]]
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives modify foo rendertype hearts
+</syntaxhighlight>
+
+修改{{cd|foo}}记分项的渲染类型为“整型”：
+[[File:Scoreboard Display List Integer.png|缩略图|200px|list显示位置的显示效果，渲染类型integer]]
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives modify foo rendertype integer
+</syntaxhighlight>
+
+比较特殊的是，对于虚拟玩家，若带有{{cd|#}}前缀，则不会显示在任何位置。以下命令将拟玩家{{cd|#test}}在{{cd|bar}}中的分数设置为233，然后设置显示位置为侧边栏，发现其中并没有虚拟实体{{cd|-{}-#test的分数}}：
+<syntaxhighlight lang="mcfunction">
+scoreboard players set #test bar 233
+scoreboard objectives setdisplay sidebar bar
+</syntaxhighlight>
+
+; 示例6：列出记分板中的记分项、实体、实体分数信息
+列出当前存档中的所有记分项：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives list
+</syntaxhighlight>
+
+列出当前存档中所有被记分板追踪的实体：
+<syntaxhighlight lang="mcfunction">
+scoreboard players list
+</syntaxhighlight>
+
+列出当前执行者的所有分数信息（关联了哪些记分项，每个记分板中有多少分）：
+<syntaxhighlight lang="mcfunction">
+scoreboard players list @s
+</syntaxhighlight>
+
+; 示例7：对分数的修改
+只能修改非只读类型的分数，不能修改只读类型的分数。故之前所创建的{{cd|foo}}记分项不可用命令修改。
+
+先新建两个记分项{{cd|A}}和{{cd|B}}：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives add A dummy
+scoreboard objectives add B dummy
+</syntaxhighlight>
+
+对Steve在{{cd|A}}中的分数增加0：
+<syntaxhighlight lang="mcfunction">
+scoreboard players add Steve A 0
+</syntaxhighlight>
+* 若在执行前，Steve并没有在{{cd|A}}记分项中的分数，则该操作会先将其分数初始化为0再加0。故该操作可用来确保某个实体在记分项中的分数存在。
+* 以上这种在对分数操作前会自动进行初始化的行为被称为'''隐式初始化'''。
+
+将Steve在{{cd|B}}记分项中的分数赋值到其{{cd|A}}记分项：
+<syntaxhighlight lang="mcfunction">
+scoreboard players operation Steve A = Steve B
+</syntaxhighlight>
+* 执行之前，即使Steve在{{cd|B}}记分项中的分数并不存在，记分板系统也会进行隐式初始化，先将Steve在{{cd|B}}记分项中的分数设置为0，然后再赋值给Steve在{{cd|A}}记分项中的分数。
+
+将Steve在{{cd|A}}记分项中的分数减去其在{{cd|B}}记分项中的分数后再赋值到其{{cd|A}}记分项中：
+<syntaxhighlight lang="mcfunction">
+scoreboard players operation Steve A -= Steve B
+</syntaxhighlight>
+* 若在执行前，Steve在{{cd|A}}中的分数为10，在{{cd|B}}中的分数为20，则相当于{{cd|A{{=}}A-B}}，即{{cd|10-20}}，{{cd|A}}中的分数最终为-10。
+* 若Steve在{{cd|B}}中的分数不存在，在执行时也会被隐式初始化为0。
+
+要注意，对于求商和求余赋值，除数不能为0。若Steve在{{cd|B}}中的分数为0，以下命令会因为除数为0而执行失败：
+<syntaxhighlight lang="mcfunction">
+scoreboard players operation Steve A /= Steve B
+</syntaxhighlight>
+* 虽然提示除数不能为0，但是Steve在{{cd|B}}中的分数仍然会受到隐式初始化影响。
+
+; 示例8：求多个实体中的最小值
+
+先分别设置3个分数：
+<syntaxhighlight lang="mcfunction">
+scoreboard players set Steve A 2147483647
+scoreboard players set Alex A -2147483648
+scoreboard players set Minecraft_Wiki A 233
+</syntaxhighlight>
+* 这里将Steve在{{cd|A}}中的分数设置为整型最大值是为了方便后续存储最小值。
+
+以下命令将遍历记分板上的所有分数持有者，并将他们在{{cd|A}}记分项中的最小分数赋值给Steve在{{cd|A}}记分项中的分数。由于执行前Steve在{{cd|A}}记分项中的分数已经为整型最大值，除非所有分数持有者的分数均为整型最大值，否则其分数一定会在执行后变更为最小分数。
+<syntaxhighlight lang="mcfunction">
+scoreboard players operation Steve A < * A
+</syntaxhighlight>
+* 执行后，在{{cd|A}}记分项中，Steve的分数等于-2147483648，即Alex的分数。
+
+; 示例9：制作侧边栏公告
+
+创建一个{{cd|info}}记分项并显示在侧边栏：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives add info dummy
+scoreboard objectives modify info displayname {"text":"公告", "color":"yellow", "bold":true}
+scoreboard objectives setdisplay sidebar info
+</syntaxhighlight>
+
+修改数字格式为{{cd|blank}}，以消除数字显示。然后添加4个虚拟玩家，分别用来充当公告的4行。最后通过{{cmd|scoreboard players display name}}来设置这些虚拟玩家的显示名：
+{| class="wikitable" 
+| style="width:77%;" |
+<syntaxhighlight lang="mcfunction">
+scoreboard players set info4 info 4
+scoreboard players set info3 info 3
+scoreboard players set info2 info 2
+scoreboard players set info1 info 1
+scoreboard objectives modify info numberformat blank
+scoreboard players display name info4 info ""
+scoreboard players display name info3 info [{"text":"     欢迎来到    ","color":"green"}]
+scoreboard players display name info2 info [{"text":"   Minecraft Wiki!  ", "color":"green", "font":"minecraft:uniform"}]
+scoreboard players display name info1 info ""
+</syntaxhighlight>
+| 
+{| class="mw-code wikitable" style="background-color:#0006; font-size: larger; "
+| style="text-align:center;padding:0;border:0;" | {{mcfont|&e&l公告}}  
+|-
+| style="text-align:center;padding:0;border:0;" | &nbsp;
+|-
+| style="text-align:center;padding:0;border:0;" | <span style="color:#54FB54;margin: 32px;">欢迎来到</span>
+|-
+| style="text-align:center;padding:0;border:0;" | <span style="color:#54FB54;margin: 32px;">Minecraft Wiki!</span>
+|-
+| style="text-align:center;padding:0;border:0;" | &nbsp;
+|}
+|}
+
+=== 基岩版 ===
+;示例1：创建和删除记分项
+创建名为{{cd|foo}}的记分项，记分项的准则为dummy：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives add foo dummy
+</syntaxhighlight>
+
+在不需要时可以随时移除某个记分项。以下命令将移除一个名为{{cd|bar}}的记分项：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives remove bar
+</syntaxhighlight>
+
+; 示例2：设置实体或虚拟实体的分数
+设置Alex在{{cd|bar}}记分项中的分数为100，设置Steve在{{cd|bar}}记分项中的分数为200：
+<syntaxhighlight lang="mcfunction">
+scoreboard players set Alex bar 100
+scoreboard players set Steve bar 200
+</syntaxhighlight>
+* 玩家Alex和Steve不存在的情况下也能设置成功。这是因为在使用玩家名作为{{cd|scoreboard players set}}之后的那一个参数时，记分板系统会直接在{{cd|bar}}记分项中添加相应的分数记录，不会检测相应玩家是否真实存在于游戏中。故这里的Alex和Steve也即“虚拟玩家”。
+
+设置执行者在{{cd|bar}}记分项中的分数为100：
+<syntaxhighlight lang="mcfunction">
+scoreboard players set @s bar 100
+</syntaxhighlight>
+* 若你在聊天栏执行该命令，执行者就是你自己。
+* 若{{cd|scoreboard players set}}之后的那一个参数符合选择器的语法，则游戏将根据选择器来搜索和筛选实体，若未找到符合选择器的实体，则命令执行失败，不会设置分数。
+
+; 示例3：获取分数持有者的分数
+可将所有在记分板中存有分数的实体统称为分数持有者。在使用{{cmd|scoreboard}}命令时，必须先找到1个分数持有者，然后才能获取到1个分数。
+
+获取名为Alex的玩家在{{cd|bar}}记分项中的分数：
+<syntaxhighlight lang="mcfunction">
+scoreboard players get Alex bar
+</syntaxhighlight>
+
+; 示例4：重置分数
+重置执行者在{{cd|bar}}记分项中的分数：
+<syntaxhighlight lang="mcfunction">
+scoreboard players reset @s bar
+</syntaxhighlight>
+* 该操作会删除执行者在{{cd|bar}}记分项中的分数。故执行后无法获取执行者的{{cd|bar}}分数。
+
+; 示例5：记分项和分数的显示
+[[File:Scoreboard.png|缩略图|400px|一个显示在屏幕右侧的记分项]]
+将上一步创建的{{cd|bar}}记分项显示在屏幕右侧：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives setdisplay sidebar bar
+</syntaxhighlight>
+* 若你没有设置{{cd|bar}}记分项的显示名称，则记分项将显示为其标识名{{cd|bar}}。否则将显示为所设定的显示名称。
+* 你也可在指令最后用{{cd|ascending}}表示升序排列，用{{cd|descending}}表示降序排列。若未指定，默认为升序。
+
+清空屏幕右侧所显示的记分项：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives setdisplay sidebar
+</syntaxhighlight>
+* 该命令只会将{{cd|sidebar}}显示位置的显示内容清空，不会删除任何记分项。
+
+将之前创建的{{cd|foo}}记分项显示在玩家列表：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives setdisplay list foo
+</syntaxhighlight>
+
+修改{{cd|foo}}记分项的渲染类型为“整型”：
+[[File:Scoreboard Display List Integer.png|缩略图|200px|list显示位置的显示效果，渲染类型integer]]
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives modify foo rendertype integer
+</syntaxhighlight>
+
+比较特殊的是，对于虚拟玩家，若带有{{cd|#}}前缀，则不会显示在任何位置。以下命令将虚拟玩家{{cd|#test}}在{{cd|bar}}中的分数设置为233，然后设置显示位置为侧边栏，发现其中并没有虚拟实体{{cd|-{}-#test的分数}}：
+<syntaxhighlight lang="mcfunction">
+scoreboard players set #test bar 233
+scoreboard objectives setdisplay sidebar bar
+</syntaxhighlight>
+
+; 示例6：列出记分板中的记分项、实体、实体分数信息
+列出当前存档中的所有记分项：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives list
+</syntaxhighlight>
+
+列出当前存档中所有被记分板追踪的实体：
+<syntaxhighlight lang="mcfunction">
+scoreboard players list
+</syntaxhighlight>
+
+列出当前执行者的所有分数信息（关联了哪些记分项，每个记分板中有多少分）：
+<syntaxhighlight lang="mcfunction">
+scoreboard players list @s
+</syntaxhighlight>
+
+; 示例7：对分数的修改
+只能修改非只读类型的分数，不能修改只读类型的分数。故{{cd|dummy}}以外的记分板类型不可用命令直接修改。
+
+先新建两个记分项{{cd|A}}和{{cd|B}}：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives add A dummy
+scoreboard objectives add B dummy
+</syntaxhighlight>
+
+对Steve在{{cd|A}}中的分数增加0：
+<syntaxhighlight lang="mcfunction">
+scoreboard players add Steve A 0
+</syntaxhighlight>
+* 若在执行前，Steve并没有在{{cd|A}}记分项中的分数，则该操作会先将其分数初始化为0再加0。故该操作可用来确保某个实体在记分项中的分数存在。
+* 以上这种在对分数操作前会自动进行初始化的行为被称为'''隐式初始化'''。
+
+将Steve在{{cd|B}}记分项中的分数赋值到其{{cd|A}}记分项：
+<syntaxhighlight lang="mcfunction">
+scoreboard players operation Steve A = Steve B
+</syntaxhighlight>
+* 执行之前，即使Steve在{{cd|B}}记分项中的分数并不存在，记分板系统也会进行隐式初始化，先将Steve在{{cd|B}}记分项中的分数设置为0，然后再赋值给Steve在{{cd|A}}记分项中的分数。
+
+将Steve在{{cd|A}}记分项中的分数减去其在{{cd|B}}记分项中的分数后再赋值到其{{cd|A}}记分项中：
+<syntaxhighlight lang="mcfunction">
+scoreboard players operation Steve A -= Steve B
+</syntaxhighlight>
+* 若在执行前，Steve在{{cd|A}}中的分数为10，在{{cd|B}}中的分数为20，则相当于{{cd|A{{=}}A-B}}，即{{cd|10-20}}，{{cd|A}}中的分数最终为-10。
+* 若Steve在{{cd|B}}中的分数不存在，在执行时也会被隐式初始化为0。
+
+要注意，对于求商和求余赋值，除数不能为0。若Steve在{{cd|B}}中的分数为0，以下命令会因为除数为0而执行失败：
+<syntaxhighlight lang="mcfunction">
+scoreboard players operation Steve A /= Steve B
+</syntaxhighlight>
+* 虽然提示除数不能为0，但是Steve在{{cd|B}}中的分数仍然会受到隐式初始化影响。
+
+; 示例8：求多个实体中的最小值
+
+先分别设置3个分数：
+<syntaxhighlight lang="mcfunction">
+scoreboard players set Steve A 2147483647
+scoreboard players set Alex A -2147483648
+scoreboard players set Minecraft_Wiki A 233
+</syntaxhighlight>
+* 这里将Steve在{{cd|A}}中的分数设置为整型最大值是为了方便后续存储最小值。
+
+以下命令将遍历记分板上的所有分数持有者，并将他们在{{cd|A}}记分项中的最小分数赋值给Steve在{{cd|A}}记分项中的分数。由于执行前Steve在{{cd|A}}记分项中的分数已经为整型最大值，除非所有分数持有者的分数均为整型最大值，否则其分数一定会在执行后变更为最小分数。
+<syntaxhighlight lang="mcfunction">
+scoreboard players operation Steve A < * A
+</syntaxhighlight>
+* 执行后，在{{cd|A}}记分项中，Steve的分数等于-2147483648，即Alex的分数。
+
+; 示例9：制作侧边栏公告
+
+创建一个{{cd|info}}记分项并显示在侧边栏：
+<syntaxhighlight lang="mcfunction">
+scoreboard objectives add info dummy
+scoreboard objectives modify info displayname {"text":"公告", "color":"yellow", "bold":true}
+scoreboard objectives setdisplay sidebar info
+</syntaxhighlight>
+
+修改数字格式为{{cd|blank}}，以消除数字显示。然后添加4个虚拟玩家，分别用来充当公告的4行。最后通过{{cmd|scoreboard players display name}}来设置这些虚拟玩家的显示名：
+{| class="wikitable" 
+| style="width:77%;" |
+<syntaxhighlight lang="mcfunction">
+scoreboard players set info4 info 4
+scoreboard players set info3 info 3
+scoreboard players set info2 info 2
+scoreboard players set info1 info 1
+scoreboard objectives modify info numberformat blank
+scoreboard players display name info4 info ""
+scoreboard players display name info3 info [{"text":"     欢迎来到    ","color":"green"}]
+scoreboard players display name info2 info [{"text":"   Minecraft Wiki!  ", "color":"green", "font":"minecraft:uniform"}]
+scoreboard players display name info1 info ""
+</syntaxhighlight>
+| 
+{| class="mw-code wikitable" style="background-color:#0006; font-size: larger; "
+| style="text-align:center;padding:0;border:0;" | {{mcfont|&e&l公告}}  
+|-
+| style="text-align:center;padding:0;border:0;" | &nbsp;
+|-
+| style="text-align:center;padding:0;border:0;" | <span style="color:#54FB54;margin: 32px;">欢迎来到</span>
+|-
+| style="text-align:center;padding:0;border:0;" | <span style="color:#54FB54;margin: 32px;">Minecraft Wiki!</span>
+|-
+| style="text-align:center;padding:0;border:0;" | &nbsp;
+|}
+|}
+
+== 历史 ==
+{{#lsth:记分板|历史}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/scoreboard]]
+[[en:Commands/scoreboard]]
+[[es:Comandos/scoreboard]]
+[[fr:Commandes/scoreboard]]
+[[ja:コマンド/scoreboard]]
+[[pt:Comandos/scoreboard]]
+[[ru:Команды консоли/scoreboard]]
+[[uk:Команди консолі/scoreboard]]

@@ -1,0 +1,93 @@
+# 页面: Java版标签/游戏事件
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%A0%87%E7%AD%BE/%E6%B8%B8%E6%88%8F%E4%BA%8B%E4%BB%B6
+# 分类: 
+# 抓取时间: 2026-07-14 17:15:25
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+'''游戏事件标签（Game Event Tags）'''是[[游戏事件]]的组合。
+
+{{TOC|right}}
+
+== 使用 ==
+游戏事件标签不可被主动调用，它们被游戏用来控制振动系统中的各项检测条件。
+
+== 標籤清單 ==
+{{tag list|mode=missing|game_event}}<!--自动检查缺失的模板，请勿移除-->
+
+=== allay_can_listen ===
+* [[悦灵]]可以检测的游戏事件。
+* 添加其他游戏事件不影响悦灵的AI活动，默认游戏事件被移除后悦灵将不能被音符盒吸引。
+
+{{tag list|game_event|allay_can_listen}}
+
+=== ignore_vibrations_sneaking ===
+* 潜行的实体产生这些游戏事件时，不会被振动监听器检测。
+
+{{tag list|game_event|ignore_vibrations_sneaking}}
+
+=== shrieker_can_listen ===
+* [[幽匿尖啸体]]可以检测的游戏事件。
+
+{{tag list|game_event|shrieker_can_listen}}
+
+=== vibrations ===
+* [[幽匿感测体]]和[[校频幽匿感测体]]可以检测的游戏事件。
+* 游戏事件只能移除，游戏不会检测非默认的游戏事件。
+
+{{tag list|game_event|vibrations}}
+
+=== warden_can_listen ===
+* [[监守者]]可以检测的游戏事件。
+
+{{tag list|game_event|warden_can_listen}}
+
+== 已移除的标签 ==
+=== dampenable_vibrations ===
+{{Info needed}}
+
+添加于：[[22w13a]]。移除于：[[22w17a]]。
+
+{{tag list|type=game_event|id=dampenable_vibrations|mode=manual
+|hit_ground
+|step
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=20w49a|加入了{{cd|#ignore_vibrations_stepping_carefully|#vibrations|d=pretty}}。}}
+|{{HistoryLine|||dev=20w51a|从{{cd|#vibrations}}中移除了开始进食事件。}}
+|{{HistoryLine|||dev=21w05a|将{{cd|#ignore_vibrations_stepping_carefully}}重命名为{{cd|#ignore_vibrations_sneaking}}并加入了游泳事件。
+|{{cd|#vibrations}}里移除了武装盔甲架、结束进食、攻击实体和使用打火石事件并加入了方块变化、饮用完毕、进食、实体受伤、杀死实体、放置实体、装备物品、生物互动、矿车移动、引爆 、劫掠兽咆哮、鸣钟、剪切、潜影贝关闭和潜影贝打开事件。}}
+|{{HistoryLine||1.19|dev=exp1|加入了{{cd|#warden_events_can_listen}}。}}
+|{{HistoryLine|||dev=22w12a|在常规快照中加入了{{cd|#warden_events_can_listen}}，包含{{cd|#vibrations}}标签下除{{cd|flap}}的所有项目，以及{{cd|d=pretty|#sculk_sensor_tendrils_clicking|#shriek}}。
+|加入了{{cd|#ignore_vibrations_on_occluding_block}}。
+|更改了一些{{cd|d=pretty|#vibrations|#warden_events_can_listen}}中的游戏事件。}}
+|{{HistoryLine|||dev=22w14a|加入了{{cd|#shrieker_can_listen}}。
+|将{{cd|#warden_events_can_listen}}重命名为{{cd|#warden_can_listen}}，并移除了其中的{{cd|#sculk_sensor_tendrils_clicking}}，向其中加入了{{cd|#shrieker_can_listen}}。}}
+|{{HistoryLine|||dev=22w15a|将{{cd|#ignore_vibrations_on_occluding_block}}重命名为{{cd|#dampenable_vibrations}}。}}
+|{{HistoryLine|||dev=22w16a|加入了{{cd|#allay_can_listen}}。
+|移除了{{cd|#dampenable_vibrations}}。}}
+|{{HistoryLine|||dev=22w18a|从{{cd|d=pretty|#vibrations|#warden_can_listen}}中移除了{{cd|flap}}事件。}}
+|{{HistoryLine|||dev=pre1|向{{cd|#ignore_vibrations_sneaking}}中加入了{{cd|d=pretty|#item_interact_start|#item_interact_finish}}。
+|向{{cd|d=pretty|#vibrations|#warden_can_listen}}中加入了{{cd|#instrument_play}}。}}
+|{{HistoryLine|||dev=pre2|向{{cd|d=pretty|#vibrations|#warden_can_listen}}中加入了{{cd|teleport}}。}}
+|{{HistoryLine|||dev=pre3|从{{cd|d=pretty|#vibrations|#warden_can_listen}}中移除了{{cd|#item_interact_start}}。}}
+|{{HistoryLine||1.19.1|dev=22w24a|向{{cd|d=pretty|#vibrations|#warden_can_listen}}中加入了{{cd|d=pretty|#jukebox_play|#jukebox_stop_play}}。}}
+|{{HistoryLine|||dev=pre1|回退了上个版本作出的更改。}}
+|{{HistoryLine||1.20|dev=23w12a|对{{cd|d=pretty|#vibrations|#warden_can_listen}}进行了许多更改。}}
+|{{HistoryLine||1.20.2|dev=23w31a|从{{cd|d=pretty|#vibrations|#warden_can_listen}}中移除了{{cd|d=pretty|entity_roar|entity_shake}}，并加入了{{cd|entity_action}}。}}
+|{{HistoryLine|||dev=23w32a|向{{cd|d=pretty|#vibrations|#warden_can_listen}}中加入了{{cd|unequip}}。}}
+|{{HistoryLine||1.21|dev=24w19a|将{{filepath|game_events}}目录重命名为{{filepath|game_event}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[en:Game event tag (Java Edition)]]
+[[fr:Tag d'événement de jeu (Édition Java)]]
+[[pt:Marcação de evento de jogo (Edição Java)]]
+[[uk:Теґ ігрових подій (Java Edition)]]

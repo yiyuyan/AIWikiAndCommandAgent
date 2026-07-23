@@ -1,0 +1,361 @@
+# 页面: Java版网络协议/区块同步
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/%E5%8C%BA%E5%9D%97%E5%90%8C%E6%AD%A5
+# 分类: Java版独有特性, 使用计算器的页面, 网络协议
+# 抓取时间: 2026-07-14 17:15:28
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|数据包|封包}}
+{{exclusive|je}}
+
+'''区块同步'''是Java版网络协议中游戏阶段的一部分，用于服务端向客户端发送世界区块数据，使客户端可以渲染游戏世界。区块同步主要包括区块数据的传输、光照更新、缓存管理和客户端反馈机制。
+
+== 协议内容 ==
+
+区块同步由下列数据包组成：
+
+{| class="wikitable"
+! 数据包 !! 方向 !! 作用
+|-
+| <code>chunk_batch_start</code> || S2C || 标记区块批次传输开始。
+|-
+| <code>chunk_batch_finished</code> || S2C || 标记区块批次传输结束，并告知本批次包含的区块数量。
+|-
+| <code>level_chunk_with_light</code> || S2C || 发送单个区块的方块数据、方块实体和光照数据。
+|-
+| <code>chunks_biomes</code> || S2C || 批量更新已加载区块的群系数据。
+|-
+| <code>forget_level_chunk</code> || S2C || 要求客户端卸载指定区块。
+|-
+| <code>set_chunk_cache_center</code> || S2C || 设置客户端区块缓存中心位置。
+|-
+| <code>set_chunk_cache_radius</code> || S2C || 设置客户端区块缓存半径。
+|-
+| <code>light_update</code> || S2C || 独立更新指定区块的光照数据。
+|-
+| <code>section_blocks_update</code> || S2C || 更新区块内某个子区块的若干方块状态。
+|-
+| <code>chunk_batch_received</code> || C2S || 客户端反馈已处理的区块数量，并告知服务端期望的发送速率。
+|-
+| <code>debug/chunk_value</code> || S2C || 调试用途，向客户端发送区块调试数据。
+|}
+
+{{Calculator|protocol|packets=play/client/chunk_batch_start;play/client/chunk_batch_finished;play/client/level_chunk_with_light;play/client/chunks_biomes;play/client/forget_level_chunk;play/client/set_chunk_cache_center;play/client/set_chunk_cache_radius;play/client/light_update;play/client/section_blocks_update;play/server/chunk_batch_received}}
+
+== 区块批次传输 ==
+
+区块数据以批次形式发送，每个批次包含三个数据包以便区分边界。
+
+=== 批次开始 ===
+
+<code>chunk_batch_start</code>S2C包是空数据包，不包含任何负载。服务端在开始发送一批<code>level_chunk_with_light</code>之前发送此数据包。
+
+客户端接收后，会记录当前时间为批次开始时间，用于后续速率计算。
+
+=== 批次内容 ===
+
+批次开始后，服务端会连续发送一个或多个<code>level_chunk_with_light</code>S2C包。每个数据包携带一个区块的完整数据。
+
+=== 批次结束 ===
+
+<code>chunk_batch_finished</code>S2C包代表一次区块批次的结束。此数据包包含下列字段：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 批次大小''Batch Size'' || VarInt || 本批次中包含的<code>level_chunk_with_light</code>数据包数量。
+|}
+
+客户端接收后，会计算从批次开始到结束的经过时间，并使用此时间和批次大小更新期望的区块接收速率。
+
+=== 客户端反馈 ===
+
+客户端在完成处理区块批次后，会发送<code>chunk_batch_received</code>C2S包。此数据包包含下列字段：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 期望每刻区块数''Desired Chunks Per Tick'' || Float || 客户端根据处理能力计算出的期望每刻接收区块数量。
+|}
+
+客户端使用<code>ChunkBatchSizeCalculator</code>计算期望速率。计算器记录了每次批次的处理时间，使用加权平均计算平均每区块处理时间，并据此得出客户端每刻能处理的最大区块数。期望速率被限制在{{range|0.01|64.0}}之间。
+
+服务端接收后，会调整后续批次的发送速率。如果客户端期望速率较低，服务端会减少每批发送的区块数，避免阻塞客户端。
+
+== 区块数据包 ==
+
+=== 基本结构 ===
+
+<code>level_chunk_with_light</code>S2C包用于发送单个区块的完整数据。结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 区块X''Chunk X'' || Int || 区块的X坐标。
+|-
+| 区块Z''Chunk Z'' || Int || 区块的Z坐标。
+|-
+| 区块数据''Chunk Data'' || 结构体（见下文） || 区块的方块数据、高度图和方块实体。
+|-
+| 光照数据''Light Data'' || 结构体（见下文） || 区块的天空光照和方块光照数据。
+|}
+
+=== 区块数据格式 ===
+
+区块数据''Chunk Data''包含三个部分：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 高度图''Heightmaps'' || 映射表 || 键为高度图类型枚举。
+|-
+| 大小''Size'' || VarInt || 后续区块段数据的字节长度。
+|-
+| 区块段数据''Section Data'' || 字节数组 || 所有非空子区块连续写入的序列化数据。
+|-
+| 方块实体''Block Entities'' || 列表 || 方块实体数据列表。
+|}
+
+高度图映射表仅包含发送给客户端的高度图类型。高度图类型包括：{{cd|OCEAN_FLOOR|WORLD_SURFACE|MOTION_BLOCKING|MOTION_BLOCKING_NO_LEAVES|d=pretty}}。
+
+区块段数据''Section Data''由该区块所有子区块依次写入而成。每个子区块的序列化长度在序列化时由子区块内的方块调色板容器和群系调色板容器决定；客户端在解析时通过大小''Size''确定字节边界。
+
+=== 子区块格式 ===
+
+每个子区块序列化格式如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 非空方块数''Non-Empty Block Count'' || Short || 子区块中非空气的方块数量。
+|-
+| 流体计数''Fluid Count'' || Short || 子区块中特定流体的数量。
+|-
+| 方块状态''Block States'' || 调色板容器 || 子区块中方块状态的调色板编码数据。
+|-
+| 群系''Biomes'' || 调色板容器 || 子区块中4×4×4群系网格的调色板编码数据。
+|}
+
+方块状态使用全局调色板或局部调色板进行压缩。群系使用类似方式编码。每种调色板容器都包含调色板大小、调色板条目和索引数据。
+
+=== 方块实体格式 ===
+
+每个方块实体条目包含：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 打包XZ''Packed XZ'' || Byte || 低4位为子区块内Z坐标，高4位为子区块内X坐标。
+|-
+| Y''Y'' || Short || 方块实体在区块中的Y坐标。
+|-
+| 类型''Type'' || 方块实体类型注册表ID || 方块实体的类型。
+|-
+| 数据''Data'' || NBT || 方块实体的更新标签数据。
+|}
+
+=== 光照数据格式 ===
+
+光照数据''Light Data''结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 天空光照掩码''Sky Y Mask'' || BitSet || 标记哪些子区块包含非空天空光照数据。
+|-
+| 方块光照掩码''Block Y Mask'' || BitSet || 标记哪些子区块包含非空方块光照数据。
+|-
+| 空天空光照掩码''Empty Sky Y Mask'' || BitSet || 标记哪些子区块的天空光照数据全为零。
+|-
+| 空方块光照掩码''Empty Block Y Mask'' || BitSet || 标记哪些子区块的方块光照数据全为零。
+|-
+| 天空光照更新''Sky Updates'' || 字节数组列表 || 非空天空光照数据，每个子区块最多2048字节。
+|-
+| 方块光照更新''Block Updates'' || 字节数组列表 || 非空方块光照数据，每个子区块最多2048字节。
+|}
+
+光照掩码用于压缩传输：如果某子区块的光照数据全为零，则将其放入空掩码中，无需在更新列表中传输实际数据。只有非空掩码中标记的子区块才在更新列表中对应一个<code>byte[]</code>条目。
+
+=== 独立光照更新 ===
+
+<code>light_update</code>S2C包用于在不发送完整区块数据的情况下更新光照。结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 区块X''Chunk X'' || VarInt || 区块的X坐标。
+|-
+| 区块Z''Chunk Z'' || VarInt || 区块的Z坐标。
+|-
+| 光照数据''Light Data'' || 结构体 || 与<code>level_chunk_with_light</code>中的光照数据格式相同。
+|}
+
+此数据包通常用于区块加载后其他区块的光照传播更新，或方块变更引发的光照重新计算。
+
+== 群系更新 ==
+
+<code>chunks_biomes</code>S2C包用于批量更新已加载区块的群系数据，发生在世界生成阶段完成后。结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 区块群系数据''Chunk Biome Data'' || 列表 || 每个条目包含：
+
+* 区块坐标''ChunkPos''
+* 群系缓冲区''Buffer''
+|}
+
+群系缓冲区的序列化方式与区块数据中的子区块群系部分完全一致。客户端接收后会为每个已加载的区块替换其群系数据。
+
+== 区块内方块更新 ==
+
+<code>section_blocks_update</code>S2C包用于更新区块内某个子区块的若干方块。结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 子区块位置''Section Pos'' || SectionPos || 子区块位置，编码为子区块{{cd|X|Y|Z|d=pretty}}。
+|-
+| 更新数量''Count'' || VarInt || 更新的方块数量。
+|-
+| 更新条目''Entries'' || 列表 || 每条目的低12位为子区块内打包坐标，剩余位为方块状态注册表ID。
+|}
+
+子区块内打包坐标使用12位编码，其中{{cd|X|Y|Z|d=pretty}}各占4位，范围{{range|0|15}}。
+
+== 缓存管理 ==
+
+=== 设置缓存中心 ===
+
+<code>set_chunk_cache_center</code>S2C包用于设置客户端区块缓存视图的中心。结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 中心X''Center X'' || VarInt || 缓存视图中心的区块X坐标。
+|-
+| 中心Z''Center Z'' || VarInt || 缓存视图中心的区块Z坐标。
+|}
+
+=== 设置缓存半径 ===
+
+<code>set_chunk_cache_radius</code>S2C包用于设置客户端区块缓存的半径。结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 半径''Radius'' || VarInt || 区块缓存半径，以区块为单位。
+|}
+
+客户端接收后，会以缓存中心为圆心、缓存半径为范围确定可见区块集合。不在范围内的已加载区块会被卸载。缓存半径变化时，客户端会重新分配存储空间。
+
+=== 卸载区块 ===
+
+<code>forget_level_chunk</code>S2C包用于要求客户端卸载指定区块。结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 区块坐标''Chunk Pos'' || ChunkPos || 需要卸载的区块坐标。
+|}
+
+客户端接收后，如果该区块已加载且不在待发送列表中，会将其从区块缓存中移除。如果区块仍在待发送列表中，则会先从待发送列表移除，不再发送卸载包。
+
+== 区块状态 ==
+
+区块从生成到可发送经历多个状态阶段。服务端为每个区块追踪其状态：
+
+{| class="wikitable"
+! 状态 !! 说明
+|-
+| <code>empty</code> || 区块生成起点，无任何数据。
+|-
+| <code>structure_starts</code> || 已确定区块中的结构起始点。
+|-
+| <code>structure_references</code> || 已添加结构引用数据。
+|-
+| <code>biomes</code> || 已生成群系数据。
+|-
+| <code>noise</code> || 已通过噪声生成基础地形。
+|-
+| <code>surface</code> || 已构建地表层。
+|-
+| <code>carvers</code> || 已完成洞穴和峡谷雕刻。
+|-
+| <code>features</code> || 已放置地物。
+|-
+| <code>initialize_light</code> || 已开始光照初始化。
+|-
+| <code>light</code> || 已完成光照计算。
+|-
+| <code>spawn</code> || 已完成生物生成。
+|-
+| <code>full</code> || 区块完全就绪，可发送给客户端。
+|}
+
+只有达到<code>full</code>状态的区块才能被发送给客户端。低于<code>full</code>状态的区块为原型区块，不包含方块实体等完整运行时数据。
+
+== 服务端行为 ==
+
+服务端使用<code>PlayerChunkSender</code>管理每个玩家的区块发送。主要行为如下：
+
+* 服务端追踪每个玩家周围需要发送的区块。当区块达到<code>full</code>状态时，将其加入待发送集合。
+* 每刻检查是否有待发送区块。如果存在，且未确认的批次数未达上限（初始为1，最大为10），则开始一批新的区块发送。
+* 批次大小受客户端期望速率（<code>desiredChunksPerTick</code>，初始9.0）控制。服务端积累区块配额，每个批次最多发送<code>max(1.0, desiredChunksPerTick)</code>个区块。
+* 在非内存连接中，如果待发送区块数超过批次大小，会优先选择距离玩家最近的区块发送。
+* 发送完一批后，未确认批次数加1。服务端等待客户端返回<code>chunk_batch_received</code>后，减少未确认批次数并调整<code>desiredChunksPerTick</code>。
+* 如果未确认批次数达到上限，服务端会暂停发送新批次。
+* 玩家离开区块范围时，服务端发送<code>forget_level_chunk</code>要求客户端卸载对应区块。
+
+服务端还会在世界生成完成后，向已加载区块的玩家发送<code>chunks_biomes</code>更新群系数据。
+
+== 客户端行为 ==
+
+客户端使用<code>ClientChunkCache</code>管理已接收的区块数据。主要行为如下：
+
+* 客户端接收<code>set_chunk_cache_center</code>和<code>set_chunk_cache_radius</code>后确定可见区块范围。
+* 接收<code>chunk_batch_start</code>时记录批次开始时间。
+* 接收<code>level_chunk_with_light</code>后，解析区块数据、填充高度图、加载方块实体，并将区块存入缓存。
+* 接收<code>chunk_batch_finished</code>后，计算批次处理时间，通过<code>ChunkBatchSizeCalculator</code>更新期望每刻区块数，并发送<code>chunk_batch_received</code>。
+* 接收<code>forget_level_chunk</code>后，从缓存中移除对应区块。
+* 接收<code>section_blocks_update</code>后，直接在已加载区块的子区块中更新对应方块。
+* 接收<code>light_update</code>后，更新已加载区块的光照数据。
+* 接收<code>chunks_biomes</code>后，为每个已加载区块替换群系数据。
+
+期望速率计算使用加权平均：每次批次结束后，计算本批次的平均每区块处理时间。如果当前批次的速度偏离历史平均值超过3倍，则将其钳制在该范围内。每区块处理时间经过加权累加后，用于计算每刻期望处理的区块数。
+
+== 流程 ==
+
+区块同步的完整流程如下：
+
+# 服务端在配置阶段确定玩家出生点并加载出生点附近区块。
+# 进入游戏阶段后，服务端发送<code>set_chunk_cache_center</code>和<code>set_chunk_cache_radius</code>。
+# 服务端将玩家周围达到<code>full</code>状态的区块加入待发送列表。
+# 服务端发送<code>chunk_batch_start</code>。
+# 服务端连续发送多个<code>level_chunk_with_light</code>。
+# 服务端发送<code>chunk_batch_finished</code>。
+# 客户端解析区块数据，将区块存入缓存，更新世界渲染。
+# 客户端计算期望速率，发送<code>chunk_batch_received</code>。
+# 服务端根据期望速率调整后续批次的发送。
+# 玩家移动时，服务端发送新的<code>set_chunk_cache_center</code>，并发送<code>forget_level_chunk</code>卸载视野外区块。
+# 区块内方块变化时，服务端发送<code>section_blocks_update</code>更新已加载区块。
+# 光照变化时，服务端发送<code>light_update</code>更新已加载区块的光照。
+# 世界生成完成后，服务端发送<code>chunks_biomes</code>更新群系数据。
+
+== 调试数据包 ==
+
+<code>debug/chunk_value</code>S2C包用于调试目的。结构如下：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| 区块坐标''Chunk Pos'' || ChunkPos || 调试数据对应的区块坐标。
+|-
+| 更新数据''Update'' || DebugSubscription.Update || 调试订阅的更新数据。
+|}
+
+此数据包不参与常规区块同步流程，仅在调试功能启用时使用。
+
+== 导航 ==
+{{Navbox protocol}}
+
+[[Category:网络协议]]

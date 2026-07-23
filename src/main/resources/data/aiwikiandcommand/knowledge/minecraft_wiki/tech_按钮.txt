@@ -1,0 +1,142 @@
+# 页面: 按钮
+# 来源: https://zh.minecraft.wiki/w/%E6%8C%89%E9%92%AE
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有信息, 基岩版即将到来/26.40, 基岩版即将移除/26.40, 基岩版独有信息, 实验性内容/2026 年第 3 次更新, 方块, 红石, 红石机制
+# 抓取时间: 2026-07-14 17:26:48
+# 原始 Wikitext 内容:
+
+{{for|用户界面中的按钮|按钮（用户界面）}}
+[[File:All Buttons.png|thumb|所有种类的按钮{{in update|drop 3 2026|t=unt}}]]
+'''按钮（Button）'''是一种可提供短暂[[红石信号]]的非[[固体方块]]。
+
+== 方块列表 ==
+总共有以下{{in update|drop 3 2026|for=14|template=unt}}/{{in update|drop 3 2026|for=15}}种按钮：
+* [[木按钮]]
+** {{BlockLink|Oak Button}}
+** {{BlockLink|Spruce Button}}
+** {{BlockLink|Birch Button}}
+** {{BlockLink|Jungle Button}}
+** {{BlockLink|Acacia Button}}
+** {{BlockLink|Dark Oak Button}}
+** {{BlockLink|Mangrove Button}}
+** {{BlockLink|Cherry Button}}
+** {{BlockLink|Pale Oak Button}}
+** {{BlockLink|Poplar Button}}{{in update|drop 3 2026}}
+** {{BlockLink|Bamboo Button}}
+** {{BlockLink|Crimson Button}}
+** {{BlockLink|Warped Button}}
+* {{BlockLink|Stone Button}}
+* {{BlockLink|Polished Blackstone Button}}
+
+== 用途 ==
+按钮必须{{ctrl|放置}}于[[方块支撑形状]]表面中心完整的方块<!--需检查-->的表面。
+
+尝试在无效的表面放置按钮会使其附着到这块空间内最近的有效附着表面（如有）。如尝试在地面上的栅栏侧面放置按钮会使其附着到栅栏周围地面方块的顶部。<br>若将按钮放置在方块的顶部或底部，{{in|je|nc=1}}按钮可以朝向任何方向，而{{in|be|nc=1}}按钮总是朝向一个方向。
+
+当按钮附着的方块变动（移动、破坏、替代等），不再允许附着时或有[[活塞]]试图推动它或将方块推入其位置时，按钮会掉落为方块物品。
+
+[[沙子]]或[[沙砾]]这类受重力影响的方块正下方为按钮时不会开始下落。下落到按钮的位置时，它会掉落为方块物品。
+
+{{in|je}}若[[水]]流过按钮，按钮会被破坏并掉落为方块物品；若[[熔岩]]流过按钮，按钮会被破坏但不会掉落为方块物品。
+
+=== 红石元件 ===
+{{see also|红石元件}}
+按钮可用作单稳态[[红石元件#电源|电源]]（在被打开后很快自动变成关闭状态）。
+
+==== 开启 ====
+玩家{{ctrl|使用}}按钮或[[爆炸#风爆|风爆]]可将关闭状态的按钮开启。
+
+按钮开启后一段时间会自动关闭，石头按钮和磨制黑石按钮会开启{{convert|20}}，而木按钮会开启{{convert|30}}。
+
+==== 行为 ====
+按钮开启时会：
+* 为毗邻的[[红石线]]提供15点信号强度。
+* 为毗邻且朝向正确（主输入端面向按钮）的[[红石比较器]]和[[红石中继器]]提供15点信号强度。
+* 激活毗邻且朝向正确（若需要，如[[活塞]]）的任何[[红石元件#机械元件|机械元件]]。
+* '''[[强充能]]'''自身附着的[[红石导体]]至充能等级15。
+
+当按钮更改状态时，它会向其毗邻提供一个[[方块更新]]（{{In|je|nc=1}}同时提供PP更新和NC更新），以及向按钮附着方块的毗邻提供一个方块更新（{{In|je|nc=1}}为NC更新）。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.1|加入了石头按钮。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w34a|加入了木质按钮。}}
+|{{HistoryLine|||dev=12w34b|更改了石头按钮和木质按钮的合成配方。{{Collapse|title=旧合成配方|content=
+<div style="display:inline-block">{{Crafting Table
+|B2= Stone
+|B3 = Stone
+|Output= Button
+}}</div><div style="display:inline-block">
+{{Crafting Table
+|B2= Oak Planks
+|B3 = Oak Planks
+|Output= Wooden Button
+}}</div>
+}}}}
+|{{HistoryLine|||dev=12w37a|把按钮的红石信号输出时间从9红石刻变为12红石刻。}}
+|{{HistoryLine||1.8|dev=14w04a|按钮现在能够放在方块的顶部和底部。}}
+|{{HistoryLine||1.13|dev=17w47a|按钮现在有全部木材的六种变种。
+|木质按钮的ID从<code>wooden_button</code>重命名为<code>oak_button</code>。
+|按钮不能再被放置在[[活塞]]顶部了。
+|按钮现在有底部的纹理了。
+|在方块的顶部和底部放置按钮可以有4种朝向。
+|在[[扁平化]]前，方块的数字ID分别是77和143。}}
+|{{HistoryLine||1.16|dev=20w06a|加入了绯红和诡异木按钮。}}
+|{{HistoryLine|||dev=20w15a|加入了磨制黑石按钮。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了红树木按钮。}}
+|{{HistoryLine||1.19.3|exp=update_1_20|dev=22w42a|加入了竹按钮，有其独特的音效。}}
+|{{HistoryLine||1.19.4|exp=update_1_20|dev=23w07a|加入了樱花木按钮。}}
+|{{HistoryLine||1.20|dev=23w12a|樱花木按钮和竹按钮不再属于[[实验性内容]]。}}
+|{{HistoryLine|||dev=23w14a|更改了所有按钮的模型UV映射。<ref>{{bug|MC-249514|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.2|exp=winter_drop|dev=24w40a|加入了苍白橡木按钮。}}
+|{{HistoryLine||1.21.4|dev=24w44a|苍白橡木按钮不再属于[[实验性内容]]。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了杨木按钮。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|加入了木按钮和石头按钮。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|按钮现在有全部木材的六种变种。}}
+|{{HistoryLine|||dev=1.2.20.1|现在由橡木木板或石头合成的按钮会显示为“橡木按钮”或“石头按钮”，而不是“按钮”。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|按钮现在可以自然生成在沙漠村庄里了。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|加入了绯红和诡异木按钮。}}
+|{{HistoryLine|||dev=1.16.0.57|加入了磨制黑石按钮。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|加入了红树木按钮。}}
+|{{HistoryLine||1.19.50|exg=next_major_update|dev=1.19.50.21|加入了竹按钮，有其独特的音效。}}
+|{{HistoryLine||1.19.80|exg=next_major_update|dev=1.19.80.20|加入了樱花木按钮。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.20|按钮现在只能放置在完整方块面上。}}
+|{{HistoryLine|||dev=1.20.0.21|樱花木按钮和竹按钮不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|加入了苍白橡木按钮。}}
+|{{HistoryLine||26.40|dev=26.40.27|exg=y_2026_drop_3|加入了杨木按钮。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了石质按钮。}}
+|{{HistoryLine||xbox=TU9|加入了木质按钮。
+|更改了石质按钮的合成配方。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|按钮现在能够放在方块的顶部和底部。}}
+|{{HistoryLine||xbox=TU59|xbone=CU57|ps3=1.76|psvita=1.76|ps4=1.76|wiiu=Patch 38|按钮现在有全部木材的六种变种。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|加入了木按钮和石头按钮。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|building blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:红石机制]]
+
+[[de:Knopf]]
+[[en:Button]]
+[[es:Botón]]
+[[fr:Bouton]]
+[[hu:Gomb]]
+[[it:Pulsante]]
+[[ja:ボタン]]
+[[ko:돌 버튼]]
+[[nl:Knop]]
+[[pl:Przycisk]]
+[[pt:Botão]]
+[[ru:Кнопка]]
+[[tr:Buton]]
+[[uk:Кнопка]]

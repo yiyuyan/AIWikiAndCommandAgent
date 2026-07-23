@@ -1,0 +1,151 @@
+# 页面: RenderDragon
+# 来源: https://zh.minecraft.wiki/w/RenderDragon
+# 分类: 基岩版, 基岩版独有特性, 实验性内容/为创建者提供的渲染龙功能, 教育版独有特性, 未确定的译名
+# 抓取时间: 2026-07-14 17:17:48
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|设备|裝置}}{{tr|mode=H|支持|支援}}
+{{distinguish|末影龙}}
+{{exclusive|bedrock|education}}
+[[File:Render dragon logo from minecraft earth 0.28.png|缩略图|在Minecraft文件中找到的RenderDragon徽标]]
+'''RenderDragon'''是基于[https://github.com/bkaradzic/bgfx bgfx]的用于[[基岩版]]和[[教育版]]的跨平台渲染引擎，以取代老旧的HAL着色器。<ref name="Helen">{{tweet|HelenAngel|1141733503639232512|Someone doesn't watch our official livestreams! 😄 It's ok, I forgive you. 😉 We're still working on RenderDragon, the new graphics engine for Bedrock that also drives Minecraft Earth. Check the pic if you want proof that RenderDragon is still in development.|June 20, 2019}}</ref>
+[[File:RTX.png|缩略图]][[File:Rtx02.png|缩略图|市场上的地图光线追踪效果封面]]
+
+== 图形API ==
+不同的设备平台使用了不同的图形API，分别如下：
+* DirectX 11或12（Windows和Xbox版本）
+* OpenGL ES（Android版本）
+* Metal（iOS和iPadOS版本）
+* Vulkan（Nintendo Switch版本）
+* GNM（PlayStation版本）
+
+== 功能 ==
+作为视觉和性能升级的一部分，RenderDragon具有边缘高光和新的照明技术。它支持一系列图形功能，具体取决于设备的功能。
+
+RenderDragon虽然可以提升Minecraft在部分设备上的性能，但同时也降低了Minecraft在不少设备上的性能。<ref>{{bug|MCPE-142934|||WAI}}</ref>
+
+RenderDragon支持基于物理的渲染（PBR）管线，可用于光线追踪和延迟渲染。PBR纹理格式如下：
+* R通道存储'''金属度'''，0为非金属、255为完全金属。
+* G通道存储'''自发光值'''，0为完全不发光、255为最大发光。
+* B通道存储'''粗糙度'''，0为完全平滑、255为完全粗糙。
+* A通道存储'''次表面散射值'''（仅延迟渲染支持）。
+
+=== 第三方着色器 ===
+{{disclaimer|section=1}}
+
+目前RenderDragon暂未提供第三方[[着色器]]支持，亦不兼容基于HAL的着色器。但借助[https://github.com/dreamguxiang/BetterRenderDragon-xmake BetterRenderDragon-xmake]、[https://github.com/ddf8196/MaterialBinLoader MaterialBinLoader]或[https://github.com/faizul726/matject Matject]可修改.bin文件来应用适用于RenderDragon的第三方着色器。
+
+=== 光线追踪 ===
+{{for|愚人节玩笑快照中的同名生物|光线追踪（生物）}}
+{{message box
+| type = grey
+| title = 本段落所述内容已停止更新。<ref>{{cite|url=https://www.minecraft.net/article/ray-tracing|title=A new way to experience Minecraft|website=Minecraft.net|quote=There are no changes planned to ray tracing for Windows with the announcement of Vibrant Visuals. Ray tracing for Windows will continue to perform on all supported devices as before, even once Vibrant Visuals is released.}}</ref>
+| text = 其最终版本仍然可用，但已不再会收到任何修复和改进。
+| mini = 1
+}}
+
+RenderDragon支持任何兼容DXR 1.1的显卡使用光线追踪，官方声称支持光线追踪的图形设备有NVIDIA GeForce RTX系列和AMD Radeon RX 6000系列的显卡。但DXR API并不局限于这些显卡，因为已经证明RenderDragon的光线追踪可通过DXR仿真来实现。
+
+光线追踪可在满足配置需求且装载光线追踪资源包的世界中开启。
+
+{| class="wikitable"
+|+配置要求<ref>[https://help.minecraft.net/hc/en-us/articles/4408865164173-Minimum-Requirements-for-Ray-Tracing-in-Minecraft-Bedrock-Edition-for-Windows Minimum Requirements For Ray Tracing In Minecraft: Bedrock Edition For Windows]</ref>
+|-
+! 操作系统
+| Windows 64位
+|-
+! 设备
+| 仅支持PC
+|-
+! GPU
+| NVIDIA GeForce RTX 20系列或AMD Radeon RX 6000系列或更高版本
+|-
+! CPU
+| 英特尔酷睿 i5或同等/更高性能
+|-
+! RAM
+| 8GB或以上
+|-
+! Minecraft版本
+| [[基岩版1.16.200]]或更高
+|}
+
+=== 延迟渲染 ===
+{{main|{{pa|Vibrant Visuals|}}}}
+
+延迟渲染管线是一组实验性的图形自定义功能，创作者可在资源包中为其提供支持并自定义其效果。
+
+目前支持的功能有：PBR纹理、{{in exp|exg=deferred_technical_preview|for=点光源|short=1}}、体积雾、全局照明、阴影、光华、色调映射、次表面散射、屏幕空间反射等内容。
+
+延迟渲染管线可在符合配置需求的世界中开启，若未装载第三方PBR资源包则会使用[[Vibrant Visuals|游戏内置资源包]]。
+
+; 配置要求
+* 见{{slink|Vibrant Visuals|设备支持}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2019年6月20日|link={{tweet|HelenAngel|1141733503639232512}}|[[Helen Zbihlyj]]在推特上发布了一张在{{el|mce}}上使用RenderDragon v0.0.2的图像。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.13.0|dev=1.13.0.13|Xbox One平台启用了RenderDragon。<ref>{{ytl|tCMuu5F3m-Q|t=50m13s|What's New: Moar Beeeezzz! - Sept 12, 2019}}</ref>}}
+|{{HistoryLine||1.14.0|PlayStation 4平台启用了RenderDragon。}}
+|{{HistoryLine||RTX Beta|link=基岩版1.16.200|dev=1.15.0.8|Windows 10平台的RTX beta启用了RenderDragon。}}
+|{{HistoryLine|||dev=1.15.0.9|修复了与RenderDragon和RTX有关的漏洞。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.54|Windows 10平台启用了RenderDragon。}}
+|{{HistoryLine|||dev=1.16.100.55|Windows 10平台禁用了RenderDragon。}}
+|{{HistoryLine|||dev=1.16.100.59|Windows 10平台重新启用了RenderDragon。}}
+|{{HistoryLine|||dev=1.16.100.60|Windows 10平台再次禁用了RenderDragon。}}
+|{{HistoryLine||1.16.200|dev=1.16.200.51|Windows 10平台重新启用了RenderDragon。}}
+|{{HistoryLine|||dev=1.16.200.53|现在RenderDragon可在非RTX Beta中支持RTX。}}
+|{{HistoryLine||1.17.40|dev=1.17.40.20|Android平台（ARMv7）启用了RenderDragon。}}
+|{{HistoryLine|||dev=1.17.40.21|Android平台（ARMv7）禁用了RenderDragon。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.22|Android平台（所有设备）启用了RenderDragon。}}
+|{{HistoryLine|||dev=1.18.10.26|Android平台再次禁用了RenderDragon。}}
+|{{HistoryLine||1.18.30|dev=1.18.20.21|Android平台再次启用了RenderDragon。}}
+|{{HistoryLine|||dev=1.18.20.25|Android平台再次禁用了RenderDragon。}}
+|{{HistoryLine|||dev=1.18.30.20|Android平台再次启用了RenderDragon，同时为iOS/iPadOS平台启用了RenderDragon。}}
+|{{HistoryLine|||dev=正式版|Fire、Nintendo Switch平台和Windows 10 x86设备启用了RenderDragon。}}
+|{{HistoryLine||1.20.30|exg=deferred_technical_preview|dev=1.20.30.20|为Android、Xbox和Windows平台加入了延迟渲染功能。}}
+|{{HistoryLine|||dev=正式版|延迟渲染功能在正式版中不可用。}}
+|{{HistoryLine||1.20.70|exg=deferred_technical_preview|dev=1.20.70.21|为iOS设备启用了延迟渲染预览功能。
+|为延迟渲染加入了点光源阴影功能。}}
+|{{HistoryLine|||dev=正式版|延迟渲染功能在正式版中不可用。}}
+|{{HistoryLine||1.20.80|exg=deferred_technical_preview|dev=1.20.80.20|为延迟渲染加入了次表面散射功能。}}
+|{{HistoryLine||1.21.0|exg=deferred_technical_preview|dev=1.21.0.22|为延迟渲染功能加入了颜色分级、色调映射和光照预曝光功能。}}
+|{{HistoryLine||1.21.20|exg=deferred_technical_preview|dev=1.21.20.22|为延迟渲染功能加入了生物光学照明模型和屏幕空间反射功能。}}
+|{{HistoryLine||1.21.30|exg=deferred_technical_preview|dev=1.21.30.21|现在能够通过纹理集来数据驱动次表面散射功能。}}
+|{{HistoryLine|||dev=1.21.30.22|为延迟渲染功能加入了真实感波浪功能。}}
+|{{HistoryLine||1.21.51.01|由于一个漏洞，现在处理器架构为ARM64的Android设备未启用RenderDragon，而是启用了旧版本的HAL着色器。<!--Mojang发错了v8a的包体，v7a正常带有RenderDragon-->}}
+|{{HistoryLine||1.21.51.02|通过热更新修复了上述漏洞，现在所有符合上述条件的设备均会正确启用RenderDragon。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.21|现在光线追踪{{tr|图像模式|圖形模式}}完全损坏了，进入使用光线追踪模板创建的地图后也不会自动切换到光线追踪{{tr|图像模式|圖形模式}}。<ref>{{bug|MCPE-218532}}</ref>}}
+|{{HistoryLine|||exg=deferred_technical_preview|dev=1.21.60.23|为PlayStation平台启用了延迟渲染预览功能。}}
+|{{HistoryLine|||dev=正式版|延迟渲染功能在正式版中不可用。}}
+|{{HistoryLine||1.21.80|exg=deferred_technical_preview|dev=1.21.80.20|为延迟渲染功能加入了水的焦散功能。}}
+|{{HistoryLine||1.21.80|exg=none|dev=1.21.80.25|将图形模式“延迟技术预览”（Deferred Technical Preview）重命名为“{{tr|灵动视效|絢麗視覺}}”（Vibrant Visuals）。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.25|移除了使用{{key|;}}切换图形模式的功能。}}
+|{{HistoryLine||1.21.130|exg=deferred_technical_preview|dev=1.21.130.27|为延迟渲染功能加入了彩色静态方块光照功能。}}
+|{{HistoryLine|education}}
+|{{HistoryLine||1.18.32|dev=1.18.31.0|启用了RenderDragon。}}
+}}
+
+== 你知道吗 ==
+* [[Helen Zbihlyj]]声称RenderDragon起初是为[[Java版]]设计的引擎，尽管后来它没有在Java版中使用。<ref>{{tweet|HelenAngel|1164832802254143489|Only if the Java team implements Render Dragon. Render Dragon was designed as such that it could be used in the Java codebase as well just in case the Java team wanted to use it.|August 23, 2019}}</ref>但据[[Felix Jones]]所说，代码中没有任何内容可以证明这一点。<ref>{{tweet|Xilefian|1369694046847983623|From what I've seen so far, there's currently nothing in RenderDragon that indicates it is usable in the Java codebase. I'm not convinced it would be good for RenderDragon if Java Edition used it, for now it's best we don't pollute RenderDragon with Java Edition's many issues.|March 10, 2021}}</ref>
+
+== 画廊 ==
+<gallery>
+File:Render Dragon v0.0.2.jpg|由Helen Zbihlyj在Twitter上发布的RenderDragon v0.0.2的图片<ref name="Helen"/>
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+
+[[de:RenderDragon]]
+[[en:RenderDragon]]
+[[es:RenderDragon]]
+[[fr:RenderDragon]]
+[[ja:RenderDragon]]
+[[pl:RenderDragon]]
+[[pt:RenderDragon]]
+[[ru:Render Dragon]]

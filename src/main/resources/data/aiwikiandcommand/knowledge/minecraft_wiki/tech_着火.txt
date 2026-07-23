@@ -1,0 +1,216 @@
+# 页面: 着火
+# 来源: https://zh.minecraft.wiki/w/%E7%9D%80%E7%81%AB
+# 分类: Java版独有信息, 基岩版即将到来/26.40, 基岩版即将移除/26.40, 基岩版独有信息, 有未知版本的History模板的页面/携带版Alpha, 游戏内容, 需要测试
+# 抓取时间: 2026-07-14 17:32:43
+# 原始 Wikitext 内容:
+
+{{for|在熔炉中转化物品的过程|烧炼}}
+[[File:Zombie Death.png|thumb|日出会以施加着火效果的方式清除户外的亡灵生物]]
+'''着火（Burning）'''是一种常见的影响实体的效果，通常使实体受到火焰伤害。
+
+== 机制 ==
+当[[实体]]的剩余着火时间（实体数据<code>Fire</code>）高于0时，实体便会进入着火状态。
+
+=== 外观 ===
+着火的实体上会出现伪3D渲染的火纹理，着火的玩家的第一人称界面也会出现遮住界面的火纹理。
+
+{{in|bedrock}}着火的生物会变为橙色，在它们的身体附近发出大的火[[粒子]]，{{until|for=当玩家着火时动画会和[[Java版]]的不同（当向下看时它会被部分遮挡）|be 26.40}}。
+
+=== 剩余着火时间 ===
+当生物不再被增加剩余着火时间时，剩余着火时间会持续下降，生物的实体数据<code>Fire</code>每{{convert|1|tick}}减少1。
+
+一旦<code>Fire</code>不高于0，非[[玩家]]实体的<code>Fire</code>会被设置为-1，非[[旁观模式]]玩家的<code>Fire</code>会被设置为-20，而旁观模式玩家的<code>Fire</code>会保持在0。负数的着火时间可以提供短暂的对[[火]]或[[灵魂火]]的抵抗，使玩家短暂接触火时不会被长时间点燃。尝试使用命令或其他方式将生物的<code>Fire</code>设置到不高于0的任何值都不会有任何变化。{{Needs testing}}
+
+多种效果会影响剩余着火时间：
+* 装备具有[[火焰保护]]魔咒的物品会降低对着火时间最低值的设置，所有装备的魔咒等级的总和每有1级使设置的时间减少15%，达到7级时无法因[[火]]或[[灵魂火]]以外的因素着火。
+* {{in|bedrock}}具有[[抗火]]效果的生物不能着火。
+* [[僵尸猪灵]]、[[恶魂]]、[[凋灵骷髅]]、[[烈焰人]]、[[炽足兽]]、[[岩浆怪]]、[[潜影贝]]、[[僵尸疣猪兽]]、[[监守者]]、[[末影龙]]、[[凋灵]]、与[[嘎枝之心]]绑定的[[嘎枝]]、[[物品（实体）|下界合金质物品实体]]不能着火，不会出现着火的外观，其剩余着火时间不能高于0。
+* 处于[[创造模式]]或旁观模式的玩家剩余着火时间不能高于1。
+* 与[[水]]、[[雨]]接触的生物，其剩余着火时间不能高于0。
+* 与装有水的[[炼药锅]]接触的生物，其剩余着火时间不能高于0，并消耗一层水。
+* 与装有[[细雪]]的炼药锅接触的生物，其剩余着火时间不能高于0，并将炼药锅内的细雪融化成少一层的水。
+* 与细雪接触的生物，其剩余着火时间会被清除并回到最低值，并破坏这格细雪。
+
+== 着火效果 ==
+着火的[[实体]]每{{convert|1|秒}}会受到{{hp|1}}火焰伤害。
+
+着火的[[弹射物]]可以激活其撞击到的[[TNT]]，可以点燃熄灭的[[营火]]，也可摧毁其穿过的细雪。
+
+{{in|je}}着火的[[僵尸]]、[[僵尸村民]]、[[尸壳]]或[[溺尸]]的每次攻击有<code>-{}-[[区域难度]]×30%</code>的概率会导致被攻击的目标着火，设置其剩余着火时间为<code>-{}-floor(区域难度) × 40</code>游戏刻。{{in|be}}着火的僵尸、僵尸村民、尸壳或溺尸在普通或困难[[难度]]下总会使受到攻击的生物着火，持续时间为2秒。
+
+部分生物的部分掉落物会在该生物着火时死亡时转换为进行过[[烧炼]]配方的结果：
+
+{| class="wikitable"
+! 生物
+! 可烧炼的掉落物
+! 烧炼后的掉落物
+|-
+| {{EntityLink|Cow}}<br>{{EntitySprite|Mooshroom}} {{EntityLink|Brown Mooshroom|哞菇}}
+| {{ItemLink|Raw Beef}}
+| {{ItemLink|Steak}}
+|-
+| {{EntityLink|Pig}}<br>{{EntityLink|Hoglin}}
+| {{ItemLink|Raw Porkchop}}
+| {{ItemLink|Cooked Porkchop}}
+|-
+| {{EntityLink|Chicken}}
+| {{ItemLink|Raw Chicken}}
+| {{ItemLink|Cooked Chicken}}
+|-
+| {{EntityLink|Sheep}}
+| {{ItemLink|Raw Mutton}}
+| {{ItemLink|Cooked Mutton}}
+|-
+| {{EntityLink|Rabbit}}
+| {{ItemLink|Raw Rabbit}}
+| {{ItemLink|Cooked Rabbit}}
+|-
+| {{EntityLink|Salmon}}
+| {{ItemLink|Raw Salmon}}
+| {{ItemLink|Cooked Salmon}}
+|-
+| {{EntityLink|Cod}}<br>{{EntityLink|Dolphin}}
+| {{ItemLink|Raw Cod}}
+| {{ItemLink|Cooked Cod}}
+|-
+| {{EntityLink|Polar Bear}}<br>{{EntityLink|Guardian}}{{only|je|short=1}}<br>{{EntityLink|Elder Guardian}}{{only|je|short=1}}
+| {{ItemLink|Raw Cod}}<br>{{ItemLink|Raw Salmon}}
+| {{ItemLink|Cooked Cod}}<br>{{ItemLink|Cooked Salmon}}
+|-
+| {{EntityLink|Zombie}}{{only|je|short=1}}<br>{{EntityLink|Zombie Villager}}{{only|je|short=1}}<br>{{EntityLink|Husk}}{{only|je|short=1}}
+| {{ItemLink|Potato}}
+| {{ItemLink|Baked Potato}}
+|}
+
+能引发着火的伤害杀死与可以消除着火的环境接触的生物时（如使用带有[[火焰附加]]魔咒的武器杀死水中的鱼），{{el|je}}会掉落对应的熟食，{{el|be}}会掉落对应的生食。
+
+== 着火来源 ==
+下表中包含了所有会直接设置着火时间的最低值的效果：
+
+{| class="wikitable <!--sortable-->"
+! rowspan="2" | 来源
+! colspan="8" | 设置的剩余着火时间最低值
+|-
+! data-sort-type="number" | 无火焰保护<br>-0%
+! data-sort-type="number" | 火焰保护I<br>-15%
+! data-sort-type="number" | 火焰保护II<br>-30%
+! data-sort-type="number" | 火焰保护III<br>-45%
+! data-sort-type="number" | 火焰保护IV<br>-60%
+! data-sort-type="number" | 火焰保护V<br>-75%
+! data-sort-type="number" | 火焰保护VI<br>-90%
+! data-sort-type="number" | 火焰保护VII<br>-100%
+|-
+|
+* {{in|je|nc=1}}接触{{BlockLink|lava}}
+* {{in|je|nc=1}}接触{{BlockLink|lava cauldron}}的内部
+| {{convert|{{#expr: (300 * (1 - 0.15 * 0)) round 0 }}|tick}}
+| {{convert|{{#expr: (300 * (1 - 0.15 * 1)) round 0 }}|tick}}
+| {{convert|{{#expr: (300 * (1 - 0.15 * 2)) round 0 }}|tick}}
+| {{convert|{{#expr: (300 * (1 - 0.15 * 3)) round 0 }}|tick}}
+| {{convert|{{#expr: (300 * (1 - 0.15 * 4)) round 0 }}|tick}}
+| {{convert|{{#expr: (300 * (1 - 0.15 * 5)) round 0 }}|tick}}
+| {{convert|{{#expr: (300 * (1 - 0.15 * 6)) round 0 }}|tick}}
+| {{convert|0|tick}}
+|-
+|
+* 被具有[[火焰附加]]II魔咒的物品近战攻击
+* 接触{{BlockLink|fire}}，且剩余着火时间不低于0
+* {{EntityLink|Zombie}}、{{EntityLink|Zombie Villager}}、{{EntityLink|Drowned}}、{{EntityLink|Skeleton}}、{{EntityLink|Stray}}、{{EntityLink|Bogged}}、{{EntityLink|Phantom}}、{{EntityLink|Zombie Nautilus}}或{{EntityLink|Zombie Horse}}处于[[内部天空光照]]达到了12的位置
+* {{in|be|nc=1}}接触{{BlockLink|lava}}
+* {{in|be|nc=1}}接触{{BlockLink|lava cauldron}}的内部
+* {{in|be|nc=1}}被{{EntityLink|Lightning|闪电|link=闪电}}击中
+| {{convert|{{#expr: (160 * (1 - 0.15 * 0)) round 0 }}|tick}}
+| {{convert|{{#expr: (160 * (1 - 0.15 * 1)) round 0 }}|tick}}
+| {{convert|{{#expr: (160 * (1 - 0.15 * 2)) round 0 }}|tick}}
+| {{convert|{{#expr: (160 * (1 - 0.15 * 3)) round 0 }}|tick}}
+| {{convert|{{#expr: (160 * (1 - 0.15 * 4)) round 0 }}|tick}}
+| {{convert|{{#expr: (160 * (1 - 0.15 * 5)) round 0 }}|tick}}
+| {{convert|{{#expr: (160 * (1 - 0.15 * 6)) round 0 }}|tick}}
+| {{convert|0|tick}}
+|-
+|
+* 被着火的{{EntityLink|Arrow}}击中
+* 被{{EntityLink|Small Fireball}}击中
+* {{in|be|nc=1}}被{{EntityLink|fireball}}击中
+* {{EntityLink|Armor Stand}}接触{{BlockLink|fire}}
+| {{convert|{{#expr: (100 * (1 - 0.15 * 0)) round 0 }}|tick}}
+| {{convert|{{#expr: (100 * (1 - 0.15 * 1)) round 0 }}|tick}}
+| {{convert|{{#expr: (100 * (1 - 0.15 * 2)) round 0 }}|tick}}
+| {{convert|{{#expr: (100 * (1 - 0.15 * 3)) round 0 }}|tick}}
+| {{convert|{{#expr: (100 * (1 - 0.15 * 4)) round 0 }}|tick}}
+| {{convert|{{#expr: (100 * (1 - 0.15 * 5)) round 0 }}|tick}}
+| {{convert|{{#expr: (100 * (1 - 0.15 * 6)) round 0 }}|tick}}
+| {{convert|0|tick}}
+|-
+|
+* 被具有[[火焰附加]]I魔咒的物品近战攻击
+| {{convert|{{#expr: (80 * (1 - 0.15 * 0)) round 0 }}|tick}}
+| {{convert|{{#expr: (80 * (1 - 0.15 * 1)) round 0 }}|tick}}
+| {{convert|{{#expr: (80 * (1 - 0.15 * 2)) round 0 }}|tick}}
+| {{convert|{{#expr: (80 * (1 - 0.15 * 3)) round 0 }}|tick}}
+| {{convert|{{#expr: (80 * (1 - 0.15 * 4)) round 0 }}|tick}}
+| {{convert|{{#expr: (80 * (1 - 0.15 * 5)) round 0 }}|tick}}
+| {{convert|{{#expr: (80 * (1 - 0.15 * 6)) round 0 }}|tick}}
+| {{convert|0|tick}}
+|-
+|
+* 被着火的{{EntityLink|Zombie}}、{{EntityLink|Zombie Villager}}、{{EntityLink|Husk}}或{{EntityLink|Drowned}}近战攻击，{{only|je|for=每次[[区域难度]]×30%的概率}}/{{only|be|for=普通和困难难度下}}
+| 向下取整的[[区域难度]]×{{convert|{{#expr: (40 * (1 - 0.15 * 0)) round 0 }}|tick}}
+| 向下取整的[[区域难度]]×{{convert|{{#expr: (40 * (1 - 0.15 * 1)) round 0 }}|tick}}
+| 向下取整的[[区域难度]]×{{convert|{{#expr: (40 * (1 - 0.15 * 2)) round 0 }}|tick}}
+| 向下取整的[[区域难度]]×{{convert|{{#expr: (40 * (1 - 0.15 * 3)) round 0 }}|tick}}
+| 向下取整的[[区域难度]]×{{convert|{{#expr: (40 * (1 - 0.15 * 4)) round 0 }}|tick}}
+| 向下取整的[[区域难度]]×{{convert|{{#expr: (40 * (1 - 0.15 * 5)) round 0 }}|tick}}
+| 向下取整的[[区域难度]]×{{convert|{{#expr: (40 * (1 - 0.15 * 6)) round 0 }}|tick}}
+| {{convert|0|tick}}
+|}
+
+此外，[[火]]或[[灵魂火]]持续增加生物的剩余着火时间，无视生物的具有[[火焰保护]]魔咒的盔甲。
+* 当生物处于火或灵魂火中时，剩余着火时间不会下降。
+* 当生物的剩余着火时间不高于0时，剩余着火时间将会每{{convert|1|tick}}增加{{convert|1|tick}}。
+* 当生物的剩余着火时间高于0时，剩余着火时间将会每{{convert|20|tick}}增加{{convert|1|tick}}。
+* 当生物在火或灵魂火中移动时，剩余着火时间将会额外每{{convert|1|tick}}增加{{convert|1|tick}}。
+
+[[火球]]和[[小火球]]默认是着火的，{{in|je}}其着火状态不能被任何方式熄灭。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100110|加入了着火机制。[[火]]可以导致着火，所有的物品和生物现在可以着火。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.11|dev=16w32a|着火的[[骷髅]]或[[流浪者]]不再射出着火的箭。<ref>{{bug|MC-217397}}</ref>此前，如果[[区域难度]]数值大于等于3，着火的骷髅射出着火的箭的概率为50%。}}
+|{{HistoryLine||1.21|dev=24w18a|现在[[火焰保护]]通过[[属性/着火时间|着火时间]]属性修饰符对生物生效。}}
+|{{HistoryLine|||dev=24w21a|现在火焰保护的属性效果可在穿戴多个具有此魔咒的装备时叠加。}}
+|{{HistoryLine|||dev=pre4|现在火焰保护在每件盔甲上的着火时间减少量由<code>-{}-''等级''×15%</code>降低至<code>-{}-''等级''×3.75%</code>。}}
+|{{HistoryLine|||dev=rc1|回退了上个版本的更改。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.8.0|dev=build 1|着火的生物会变橙色并迸出大的火[[粒子]]。}}
+|{{HistoryLine|||dev=?|[[亡灵生物]]现在会在阳光下着火而不只是只受到伤害。}}
+|{{HistoryLine||0.11.0|dev=build 9|攻击着火的生物会使被攻击者自身着火。}}
+|{{HistoryLine|||dev=build 14|完全移除了[[创造模式]]中玩家的着火动画。}}
+|{{HistoryLine||0.12.1|dev=build 1|着火的生物在火熄灭后会发出一个极热的粒子的效果。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|移除了正在燃烧的生物的独特动画，并将其替换为竖直拉伸的Java版中的燃烧动画。}}
+|{{HistoryLine||1.20.30|dev=1.20.30.24|现在[[溺尸]]、[[尸壳]]、[[僵尸]]和[[僵尸村民]]在着火时攻击会使攻击目标着火。}}
+|{{HistoryLine||26.40|dev=26.40.22|更改了玩家在第一人称界面中着火时的火焰覆盖层，以近似匹配{{el|je}}。<ref>{{bug|MCPE-128988}}</ref>}}
+}}
+
+== 你知道吗 ==
+* {{in|je}}[[抗火]]效果使生物免疫火焰伤害，但不影响着火机制，具有抗火效果的生物仍然会着火，持续到抗火效果结束的着火状态会正常地造成伤害。
+* [[烈焰人]]的攻击使用与着火时一样的动画，使自身看上去像是着火了一样，尽管烈焰人实际上不能着火。
+* {{in|be}}一些对火焰伤害免疫的生物被[[闪电]]击中后仍然会出现着火的外观。
+* {{in|be}}玩家存档中不会保存着火信息。
+
+== 画廊 ==
+<gallery>
+File:LavaDamage.png|因接触[[熔岩]]而着火的生物
+File:Burning Zombie Pocket.jpg|在[[携带版]]中散发着独特的火粒子的着火的僵尸
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:游戏内容]]

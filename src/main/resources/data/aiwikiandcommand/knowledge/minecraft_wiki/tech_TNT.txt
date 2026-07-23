@@ -1,0 +1,383 @@
+# 页面: TNT
+# 来源: https://zh.minecraft.wiki/w/TNT
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 基岩版独有信息, 实体, 教育版独有信息, 方块, 红石
+# 抓取时间: 2026-07-14 17:18:25
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|激活|點燃}}{{about|普通TNT方块|Minecraft: Story Mode中的TNT|MCSM:TNT|Minecraft Dungeons中的消耗品|MCD:TNT|基岩版和教育版中的水下变种|水下TNT|Java版2.0中能爆炸的台阶|Etho台阶}}
+{{Infobox block
+|image=TNT.png
+|invimage=TNT
+|size=高度：0.98格<br>宽度：0.98格
+|entity-id=被激活的TNT
+}}
+{{relevant tutorial|TNT大炮|在水下利用TNT破坏方块}}
+{{quote|来啊，把它点着！还能出什么事不成？|[[Duncan Geere]]<ref>{{article|block-week-tnt-0|Block of the Week: TNT|Aug 11, 2017}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''TNT'''是一种能产生[[爆炸]]的方块，激活后为'''被激活的TNT（Primed TNT）'''。
+
+== 生成 ==
+=== 自然生成 ===
+[[沙漠神殿]]底部的陷阱竖井里会自然生成9个TNT，与自然生成的[[石头压力板]]相连。
+
+在[[林地府邸]]的秘密房间[[林地府邸/结构/战利品房间#伪末地传送门房|伪末地传送门房]]里会自然生成2个TNT，位于[[陷阱箱]]的两侧。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Gunpowder      |B1= Sand; Red Sand |C1= Gunpowder
+|A2= Sand; Red Sand |B2= Gunpowder      |C2= Sand; Red Sand
+|A3= Gunpowder      |B3= Sand; Red Sand |C3= Gunpowder
+|Output=TNT
+|type= Redstone
+}}
+
+=== 箱子战利品 ===
+{{LootChestItem|tnt}}
+
+=== 考古战利品 ===
+用[[刷子]]刷扫[[沙漠神殿]]里的[[可疑的沙子]]有概率掉落TNT。
+
+{{ArchaeologyLootItem|tnt}}
+
+=== 末影人 ===
+手中搬着TNT的[[末影人]]会在死亡时掉落TNT。
+
+== 破坏 ==
+TNT被挖掘时会立刻被破坏。
+
+{{Breaking table|TNT}}
+
+被爆炸破坏的TNT被破坏后会被激活，且引信时间为{{convert|10}}到{{convert|30}}。
+
+{{in|je}}方块状态<code>unstable</code>为<code>true</code>的TNT在生存模式被破坏后会被激活，且引信时间为{{convert|80}}。
+
+其他情况下，TNT被破坏后会掉落自身。
+
+== 用途 ==
+[[File:Minecraft-tnt-explosion.gif|有框|TNT[[爆炸]]]]
+
+TNT有多种方式被激活。一旦TNT被激活，就会消失并在TNT方块的中心（+0.5，+0.5，+0.5）生成一个被激活的TNT[[实体]]。
+
+TNT被以下方式激活时，会在{{convert|80}}后爆炸：
+* 玩家对其{{ctrl|使用}}[[打火石]]或[[火焰弹]]。
+* {{in|be}}被玩家{{ctrl|使用}}具有[[火焰附加]]魔咒的物品。
+* 被[[着火]]的[[弹射物]]击中。
+**击中TNT前未着火的[[箭]]和[[三叉戟]]附着在其上时着火不会引起激活。
+* 被[[红石信号]]激活（详见下文）。
+* 被[[发射器]]射出。
+* 被发射器中的打火石激活。
+* 被[[火]]烧毁，TNT被烧毁时会被激活而不是像其他方块那样直接消失。
+* {{in|je}}方块状态<code>unstable</code>为<code>true</code>时被破坏。
+
+TNT是[[红石元件#机械元件|机械元件]]，可被下列形式激活：
+* 毗邻的开启的'''[[红石元件#电源|电源]]'''（例外：[[红石火把]]不会激活其所附着的TNT，[[侦测器]]只会激活指向的TNT）。
+* 毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻的指向TNT且激活的[[红石中继器]]、[[红石比较器]]或[[红石粉]]（包括TNT上方的红石粉）；毗邻但未指向TNT的红石粉不会激活TNT。
+
+{{in|be}}TNT不具有“晋升为信号源”属性，因此TNT不能被[[红石电路/充能与激活|充能]]，但可以[[红石粉#形状|压线]]（即便TNT不为红石导体）。
+
+TNT被爆炸破坏时，会在{{convert|10}}到{{convert|29}}后爆炸。
+
+若TNT是被生物来源的因素激活的（如玩家使用打火石、有生物来源的弹射物、其他有生物来源的TNT），那么被激活的TNT也会是有生物来源的，造成的爆炸伤害会视为由该生物造成（见{{slink|伤害#造成伤害的生物}}）。
+
+=== 合成材料 ===
+{{crafting usage|TNT}}
+
+== 行为 ==
+被激活的TNT能够产生[[爆炸威力]]为4的[[爆炸]]。
+
+被激活的TNT的具有实体数据{{nbt|short|fuse}}，决定了TNT距离爆炸的剩余时间。
+
+被激活的TNT纹理会闪烁，它会在原始[[纹理]]与比前者亮度增加40%的纹理间不停切换。纹理每秒会闪烁2下。其上方会出现与[[火]]相似的烟雾效果。
+
+TNT方块被激活时，被激活的TNT会被得到0.2格/游戏刻的垂直速度，0.02格/游戏刻的随机方向的水平速度。若未被任何[[方块]]阻挡，它将会在平地上移动0.166格。当倒计时器计时完毕时，被激活的TNT就会爆炸。
+* {{in|be}}被激活的TNT若未被方块支撑，那么它至多会在爆炸前往下掉77格；
+* {{in|je}}被激活的TNT若不被阻挡会下落73.45格，若被上侧方块的下表面阻挡会下落79.84格。
+
+被激活的TNT的爆炸起始点位置相对于其实体坐标高0.06125格。
+
+被激活的TNT可以被[[水]]流或[[熔岩]]流推动，它能进入[[末地传送门]]、[[下界传送门]]和[[末地折跃门]]。传送后，被激活的TNT仍会继续闪烁，直至其在传送前的加载时间与传送后的加载时间之和达到其爆炸前的倒计时时间。
+
+{{in|je}}被激活的TNT会被[[矛]]的冲锋攻击击退，也会被带有[[击退]]魔咒的矛的戳刺攻击击退。{{in|be}}被激活的TNT不会因矛的攻击而被击退。
+
+{{in|je}}被激活的TNT被下界传送门、末地传送门或末地折跃门传送后不会破坏[[下界传送门方块]]，但若在被传送门传送后其所在区块被卸载或服务端被关闭，那么在区块重新加载后此被激活的TNT的爆炸仍然会破坏下界传送门方块。
+
+被激活的TNT在[[水]]、[[熔岩]]或[[含水]]的方块中爆炸时，由于此类方块爆炸抗性高达100，爆炸无法摧毁任何方块，{{only|je|for=但会伤害生物}}<ref>{{bug|MCPE-89412}}</ref>，产生冲击波，推动爆炸范围内的实体。利用这一点可以制造[[Tutorial:TNT大炮|TNT大炮]]。
+
+{{in|be}}在[[创造模式]]飞行中的玩家仍会被激活的TNT爆炸造成的冲击波推动。
+
+== 音效 ==
+{{Sound table/Block/Grass
+|suffix-je={{Sound table
+|sound=Fuse.ogg
+|subtitle={{tp|subtitles.entity.tnt.primed}}
+|source=方块
+|description=TNT被激活
+|id=entity.tnt.primed
+|translationkey=subtitles.entity.tnt.primed}}
+{{Sound table
+|sound=Explosion1.ogg
+|sound2=Explosion2.ogg
+|sound3=Explosion3.ogg
+|sound4=Explosion4.ogg
+|subtitle={{tp|subtitles.entity.generic.explode}}
+|source=方块
+|id=entity.generic.explode
+|translationkey=subtitles.entity.generic.explode
+|description=爆炸
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=random.fuse.wav
+|source=方块
+|description=TNT被激活
+|id=random.fuse
+|typeid=fuse
+|soundvolume=1.0
+|soundpitch
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=random.explode1.wav
+|sound2=random.explode2.wav
+|sound3=random.explode3.wav
+|sound4=random.explode4.wav
+|source=方块
+|description=爆炸
+|id=random.explode
+|typeid=explode
+|soundvolume=4.0
+|soundpitch
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+; 方块
+{{ID table
+|generatetranslationkeys=java |nocat=1
+|spritetype=block | TNT
+|nameid=tnt
+|showblocktags=je
+|blocktags={{GameTag|block|tnt}}
+|showitemtags=je
+|itemtags={{GameTag|item|tnt}}
+|foot=1
+}}
+
+; 实体
+{{ID table
+|generatetranslationkeys=java
+|spritetype=entity | Primed TNT
+|nameid=tnt
+|foot=1
+}}
+
+{{el|be}}：
+; 方块
+{{ID table
+|generatetranslationkeys=bedrock |nocat=1
+|spritetype=block | TNT
+|nameid=tnt
+|showitemtags=be
+|itemtags={{GameTagBE|item|tnt}}
+|foot=1
+}}
+
+; 实体
+{{ID table
+|generatetranslationkeys=bedrock |nocat=1
+|spritetype=entity | Primed TNT
+|nameid=tnt
+|foot=1
+}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+{{in|be}}TNT使用以下数据值：
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+被激活的TNT有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{load achievements|uh-oh}}
+
+== 进度 ==
+{{load advancements|prefix=husbandry|uh_oh}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年5月21日|link={{notch|110762705/my-list-on-tile-types-so-far}}|[[Notch]]表示对加入收到来自电线的脉冲时会爆炸的“炸药”感兴趣。}}
+|{{HistoryLine||2009年10月24日|link={{notch|221308991/the-new-block-types-and-new-graphics-for-the-gold}}|TNT在博客帖上被提及。}}
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.27 SURVIVAL TEST|[[File:TNT JE1.png|32px]] 加入了TNT。
+|玩家可以敲击TNT一次来激活它，但也可以再敲击一次来取消TNT的激活。
+|玩家在开始游戏时会获得10个TNT。}}
+|{{HistoryLine||0.28|[[File:TNT JE2 BE1.png|32px]] 更改了TNT的纹理。}}
+|{{HistoryLine||0.29|TNT现在可以在创造模式中使用，但是左键会直接破坏，无法通过正常方式激活。
+|玩家不再能够捡起已激活的TNT方块。}}
+|{{HistoryLine||0.30（生存模式）|现在敲击被点燃的TNT可以取消点燃并将其捡起来。
+|TNT[[爆炸]]时不再产生烟雾粒子。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20091223-0040|TNT不再能被激活。}}
+|{{HistoryLine||0.31|dev=20091231-2|TNT现在可以被激活。}}
+|{{HistoryLine||0.31|dev=20100125|现在TNT被点燃后会闪烁。
+|从点燃到爆炸的时间由2秒改为4秒。
+|加入了爆炸后产生的粒子。}}
+|{{HistoryLine||0.31|dev=20100130|现在能够合成TNT。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.6|dev=Test Build 3|TNT的纹理被旋转了。}}
+|{{HistoryLine||1.7|TNT不再能直接被玩家空手激活了。现在只能通过用[[打火石]]鼠标右键单击外或通过[[红石]]或其他装置来点燃TNT。空手敲击TNT只会破坏TNT方块并使TNT可以被捡起。
+|生物陷阱再也不能通过直接将[[压力板]]放在TNT上方来制作。
+|现在[[火把]]不能放在TNT上方，在此之前，TNT上可以放置火把，但火把会消失。}}
+|{{HistoryLine||1.8|现在TNT爆炸会产生冲击波粒子。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=rc1|更改了TNT的爆炸音效。}}
+|{{HistoryLine||1.3.1|dev=12w21a|TNT方块现在可以在[[沙漠神殿]]的藏宝室的陷阱里自然生成。这个陷阱由3×3的9个TNT，砂岩方块中间的[[压力板]]和下面的砂岩层之间组成。}}
+|{{HistoryLine|||dev=12w26a|TNT在创造模式下被破坏时不再掉落。}}
+|{{HistoryLine|||dev=1.3|TNT在[[和平]]难度中不再对玩家造成伤害。}}
+|{{HistoryLine||1.4.2|dev=12w34b|TNT现在可被[[火矢]]激活。}}
+|{{HistoryLine||1.5|dev=13w04a|TNT现在可被[[发射器]]发射。}}
+|{{HistoryLine||1.8|dev=14w27b|TNT的顶部纹理现在会随机旋转，作为方块模型数组的一部分。}}
+|{{HistoryLine|||dev=14w31a|更改了爆炸的物理性质，使TNT大炮的射程减少了。}}
+|{{HistoryLine||1.8.2|dev=pre1|回退了14w31a作出的更改。
+|爆炸力不再定向偏斜。}}
+|{{HistoryLine||1.9|dev=15w32c|TNT的引信时间最大值从127刻增加到32767刻。}}
+|{{HistoryLine|||dev=15w47a|TNT不再随机旋转顶部纹理。<ref>{{bug|MC-12959|||Fixed}}</ref>}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID由<code>PrimedTnt</code>更改为<code>tnt</code>。}}
+|{{HistoryLine|||dev=16w39a|现在会自然生成在[[林地府邸]]里。}}
+|{{HistoryLine||1.12|dev=17w18a|现在[[绊线钩]]可以放在TNT侧面，但会在收到[[方块更新]]时掉落。}}
+|{{HistoryLine|||dev=pre1|TNT上的绊线钩不再在收到方块更新时掉落。}}
+|{{HistoryLine||1.13|dev=17w47a|<code>tnt</code>ID的<code>explode</code>方块状态被移除。因此，打击TNT使其爆炸的行为不再运作。
+|在[[扁平化]]之前，方块的数字ID为46。}}
+|{{HistoryLine|||dev=18w10a|TNT现在生成在[[埋藏的宝藏]]箱子里。}}
+|{{HistoryLine|||dev=18w11a|TNT现在生成在[[沉船]]的宝箱里。}}
+|{{HistoryLine||1.13.1|dev=18w30a|为TNT加入了<code>unstable</code>方块状态，就像<code>explode</code>那样运作。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:TNT JE3 BE2.png|32px]] 更改了TNT的纹理。}}
+|{{HistoryLine|||dev=19w11a|由TNT爆炸所破坏的方块默认会有100%的概率掉落，而不是之前的25%。该概率可以在创建世界时、在世界的配置文件里或在世界中使用{{cmd|gamerule}}命令更改。}}
+|{{HistoryLine||1.15|dev=pre1|TNT爆炸产生的粒子得到修改以优化爆炸性能。}}
+|{{HistoryLine||1.16|dev=20w11a|现在TNT会在被任意着火的弹射物击中时激活。}}
+|{{HistoryLine||1.19|dev=22w17a|由玩家激活的TNT炸毁的[[矿石]]、[[幽匿]]类方块和[[刷怪笼]]现在会掉落经验。}}
+|{{HistoryLine||1.19.4|dev=23w07a|exp=1.20更新|现在TNT能通过刷扫[[沙漠神殿]]里的[[可疑的沙子]]获得。}}
+|{{HistoryLine||1.20|dev=23w12a|23w07a中的获取方式不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.20.3|dev=23w42a|被激活的TNT实体数据中的{{nbt|short|Fuse}}重命名为{{nbt|short|fuse}}，并加入了{{nbt|compound|block_state}}用于修改渲染的方块状态。}}
+|{{HistoryLine||1.21|dev=pre1|被激活的TNT现在可以穿过下界传送门。}}
+|{{HistoryLine|||dev=pre4|被激活的TNT穿过下界传送门后不再破坏下界传送门方块。}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了方块实体数据<code>explosion_power</code>。
+|现在碰撞箱接触水的TNT不会破坏物品实体、盔甲架、物品展示框和画等实体。<ref>{{bug|MC-3697|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.5|dev=25w09a|现在通过{{cmd|summon}}生成的被激活的TNT不再立刻爆炸。}}
+|{{HistoryLine||1.21.6|dev=25w19a|加入了{{nbt|int array|owner}}实体数据。}}
+|{{HistoryLine|||dev=25w20a|部分回退了24w33a中对{{bug|MC-3697}}的修复；现在，TNT在水中爆炸时再次会破坏物品实体和盔甲架，但仍不会破坏画和物品展示框等装饰性实体。}}
+|{{HistoryLine||1.21.9|dev=25w33a|回退了1.15对TNT爆炸粒子效果的修改，现在爆炸时会与1.15-pre1前一样生成方块粒子。}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在TNT不再能被冒险模式的玩家点燃。<ref>{{bug|MC-222818|||Fixed}}</ref>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||Demo|[[File:TNT JE2 BE1.png|32px]] 加入了TNT。
+|TNT只能通过修改器获得。将TNT修改进去后，点燃的TNT只会放出烟，然后消失。}}
+|{{HistoryLine||0.2.0|修改进游戏的TNT可以被正常激活并爆炸。}}
+|{{HistoryLine||0.4.0|TNT可以被正常激活爆炸。
+|TNT可以在[[生存模式]]下被[[合成#MATTIS|合成]]，但由于无法制作[[打火石]]，玩家无法在生存模式中点燃TNT。}}
+|{{HistoryLine||0.4.0 rev 2|TNT加入了创造模式物品栏。}}
+|{{HistoryLine||0.9.0|dev=build 1|改进了TNT的性能。
+|这个版本也加入了红沙，但是不能用于合成TNT。}}
+|{{HistoryLine||0.12.1|dev=build 10|现在TNT爆炸时的效果和音效与Java版相同了。}}
+|{{HistoryLine||0.16.0|dev=build 1|创造模式下，被炸毁的方块现在会有概率变成掉落物，就像在生存模式中那样。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|创造模式下，被炸毁的方块不再变成掉落物。}}
+|{{HistoryLine||1.0.7|在水中爆炸的TNT不再对玩家造成伤害。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|实体ID由<code>primedtnt</code>变为<code>tnt</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|TNT现在生成在[[沉船]]的宝箱里。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:TNT JE3 BE2.png|32px]] 更改了TNT的纹理。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.2|现在TNT可以使用[[红沙]]合成。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.23|exg=next_major_update|现在TNT能通过刷扫[[沙漠神殿]]里的[[可疑的沙子]]获得。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|exg=next_major_update|现在TNT能通过刷扫[[海底废墟]]里的[[可疑的方块]]获得。}}
+|{{HistoryLine|||dev=1.19.80.22|海底废墟里的可疑的方块不再能刷扫出TNT。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|1.19.70.23中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|现在由TNT炸毁的方块默认总会掉落为物品。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.23|拆分了TNT和水下TNT的ID{{cd|tnt}}，同时弃用了方块状态<code>allow_underwater_bit</code>。
+|现在TNT不再是红石导体。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.21|TNT爆炸时不再会闪烁为纯白色。<ref>{{bug|MCPE-51809|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.100|dev=1.21.100.22|TNT不再能被具有[[火焰附加]]的[[附魔书]]激活。<ref name="MCPE-100021">{{bug|MCPE-100021|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.130|dev=1.21.130.20|将[[埋藏的宝藏]]中TNT的数量由1-2个增加至1-5个，以匹配{{el|je}}。}}
+|{{HistoryLine||26.30|dev=26.30.29|现在TNT在被点燃时会产生烟雾粒子，以匹配{{el|je}}。<ref>{{bug|MCPE-238488|||Fixed}}</ref>}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:TNT JE2 BE1.png|32px]] 加入了TNT。}}
+|{{HistoryLine||xbox=TU3|TNT不能直接被玩家激活，除了通过用[[打火石]]鼠标右键单击外，还能通过[[红石]]或其他装置来激活。空手敲击TNT只会破坏TNT方块并使TNT可以被捡起。}}
+|{{HistoryLine||xbox=TU5|更改了TNT的爆炸声音。}}
+|{{HistoryLine||xbox=TU14|ps3=1.04|psvita=1.00|ps4=1.00|TNT在爆炸前会发出声音了。
+|TNT爆炸的伤害现在会根据难度决定了。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:TNT JE3 BE2.png|32px]] 更改了TNT的纹理。}}
+|{{HistoryLine|New 3DS}}
+|{{HistoryLine||0.1.0|[[File:TNT JE2 BE1.png|32px]] 加入了TNT。}}
+}}
+
+== 你知道吗 ==
+* “TNT”的全称是2,4,6-三硝基甲苯（[[wzh:三硝基甲苯|'''T'''ri'''n'''itro'''t'''oluene]]）。虽然游戏内TNT的合成配方是[[火药]]和[[沙子]]，但现实中TNT是由甲苯与浓硫酸和浓硝酸的混合物长时间加热反应得到的。
+* 被激活的TNT具有和[[下落的方块]]一样的尺寸。
+* 在流体中的TNT爆炸时无法摧毁方块，但可通过使用[[沙子]]或[[沙砾]]等受重力影响的方块“覆盖”TNT进行破坏。
+* {{InUntil|o=be|je 26.3}}尽管打火石在冒险模式中不能点火，但它仍可以激活TNT。
+* {{InUntil|je 26.3}}尽管火焰弹在冒险模式中不能点火，但它仍可以激活TNT。
+* 在[[树莓派版]]，TNT默认没有任何行为，但当数据值设为1时，它会在破坏时点燃自身。
+* [[矛]]的近战攻击可以击退被激活的TNT，甚至可以使用击退附魔让其被击退得更远。
+
+== 画廊 ==
+<gallery>
+TNT Item in c0.30.png|[[Java版Classic 0.30]]中的TNT的物品形式
+Obsidian Shield2.png|一个黑曜石防护盾的例子，加上一个拉杆启动一个有苦力怕脸造型的TNT组合
+Falling TNT.png|正在掉落的激活的TNT，展示激活的TNT的重力影响
+Creeper Migration.jpg|TNT和乘坐[[矿车]]的[[苦力怕]]的官方艺术作品
+</gallery>
+
+== 参见 ==
+* [[苦力怕]]
+* [[爆炸]]
+* [[火药]]
+* {{slink|Tutorial:陷阱|爆炸陷阱}}
+* [[Tutorial:TNT大炮]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks|others}}
+{{Navbox entities|Non-mobs}}
+{{Navbox redstone}}
+
+[[cs:TNT]]
+[[de:TNT]]
+[[en:TNT]]
+[[es:Dinamita]]
+[[fr:TNT]]
+[[hu:TNT]]
+[[it:TNT]]
+[[ja:TNT]]
+[[ko:TNT]]
+[[nl:TNT]]
+[[pl:TNT]]
+[[pt:TNT]]
+[[ru:ТНТ]]
+[[th:ระเบิดทีเอ็นที]]
+[[tr:TNT]]
+[[uk:Динаміт]]

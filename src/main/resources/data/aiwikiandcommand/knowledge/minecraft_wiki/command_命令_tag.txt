@@ -1,0 +1,92 @@
+# 页面: 命令/tag
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/tag
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{about|适用于单个实体的记分板标签|{{el|je}}中与注册表有关的标签文件|Java版標籤/實體類型}}
+{{Infobox command
+|name=tag
+|oplevel=2\1
+|becheat=1
+}}
+
+管理单个[[实体]]的[[目标选择器#记分板标签|记分板标签]]。{{in|je}}一个实体拥有的标签数不能超过1024个。
+
+== 语法 ==
+* '''Java版'''
+: <code>tag <targets> add <name></code>
+:: 为目标添加一个标签。
+: <code>tag <targets> remove <name></code>
+:: 移除目标的一个标签。
+: <code>tag <targets> list</code>
+:: 列出目标所拥有的所有标签。
+
+* '''基岩版'''
+: <code>tag <entity: target> add <name: string></code>
+:: 为目标添加一个标签。
+: <code>tag <entity: target> remove <name: string></code>
+:: 移除目标的一个标签。
+: <code>tag <entity: target> list</code>
+:: 列出目标所拥有的所有标签。
+
+== 参数 ==
+{{argument|targets|entity|entity: target|WildcardCommandSelector<Actor>}}
+: 指定要操作的实体目标。
+: {{in|java}}{{lcfirst:{{arg desc|je=entity|amount=multiple|type=entities}}}}
+: {{in|bedrock}}必须为一个[[目标选择器]]、一个玩家名，或者用一个{{cd|*}}来代表所有正被记分板跟踪的实体。
+
+{{argument|name|string|name: string|basic_string}}
+: 指定要被添加或被移除的标签名称。
+: {{arg desc|je=string|type=word|be=string}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><targets></code>或者<code>entity: target</code>未能选中至少一个实体（指定名称的玩家必须在线上）|fail|fail}}
+{{Result table|cmd=/tag ... add ...|指定的所有实体都满足以下条件中的至少一个：
+*已拥有指定标签
+*指定实体已拥有1024个标签{{only|java}}}}
+{{Result table|cmd=/tag ... remove ...|未能移除任何实体的标签}}
+{{Result table|cmd=/tag ... list ...|没有实体拥有标签||success}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/tag ... add ...|执行成功|1|1|得到新标签的实体数}}
+{{Output table|cmd=/tag ... remove ...|执行成功|1|1|被移除标签的实体数}}
+{{Output table|cmd=/tag ... list|执行成功|1|1|指定实体的标签数量}}
+{{Output table|cmd=|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 给执行者添加std标签：<code>/tag @s add std</code>
+* 给所有手持[[火焰弹]]的玩家添加std标签：
+** {{el|je}}：<code>/tag @a[nbt={SelectedItem:{id:"minecraft:fire_charge"}}] add std</code>
+** {{el|be}}：<code>/tag @a[hasitem={item=fire_charge,location=slot.weapon.mainhand}] add std</code>
+* 移除所有带有std标签的玩家的std标签：<code>/tag @a[tag=std] remove std</code>
+* 列出所有处于旁观模式的玩家拥有的标签：<code>/tag @a[gamemode=spectator] list</code>{{only|java}}或<code>/tag @a[m=spectator] list</code>{{only|bedrock}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=17w45a|加入了{{cmd|tag|link=none}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.9.0|dev=1.9.0.2|加入了{{cmd|tag|link=none}}。}}
+}}
+
+== 参见 ==
+* {{cmd|scoreboard}} - 管理记分板目标与玩家
+* {{cmd|team}} - 管理队伍{{only|java}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/tag]]
+[[en:Commands/tag]]
+[[ja:コマンド/tag]]
+[[pt:Comandos/tag]]
+[[ru:Команды консоли/tag]]

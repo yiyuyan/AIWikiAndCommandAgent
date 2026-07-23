@@ -1,0 +1,93 @@
+# 页面: 命令/datapack
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/datapack
+# 分类: Java版独有特性, 命令
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox command
+|name=datapack
+|oplevel=2<br>4（在{{cd|create}}中）
+|others=不在[[命令方块]]上执行（在{{cd|create}}中）
+}}
+
+管理[[数据包]]。
+
+注意，功能开关（Feature Flag）只有在创建新的世界时才可以使用数据包开关。若某开关未打开，则需要此功能开关的数据包无法使用该命令启用。
+
+原版数据包的<samp>datapacks</samp>目录下的子数据包若在创建世界时启用，不能使用该命令禁用。
+
+== 语法 ==
+: <code>datapack create <id> <description></code>
+:: 创建空数据包。创建的数据包默认为禁用状态。
+: <code>datapack disable <name></code>
+:: 禁用指定数据包。
+: <code>datapack enable <name></code>
+:: 启用指定数据包。
+: <code>datapack enable <name> (first|last)</code>
+:: 启用指定数据包，并将它置于所有数据包之前（即优先级最低）或之后（即优先级最高）。
+: <code>datapack enable <name> (before|after) <existing></code>
+:: 启用指定数据包，并将它置于指定数据包之前（即优先级低于之）或之后（即优先级高于之）。
+: <code>datapack list [available|enabled]</code>
+:: 列出所有数据包，或仅列出可用/已启用的数据包。将鼠标悬停于数据包名上将显示它们于<code>pack.mcmeta</code>中的描述。
+
+== 参数 ==
+{{argument|id|string}}
+: 指定要创建的数据包的名称。
+: {{arg desc|je=string|type=phrase}}
+
+{{argument|description|component}}
+: 指定要创建的数据包内[[数据包#pack.mcmeta|{{filename|pack.mcmeta}}]]中{{nbt|string}}{{nbt|compound|description}}的值。
+: {{arg desc|je=component}}
+
+{{argument|name|string}}
+: 指定数据包名称。
+: {{arg desc|je=string|type=phrase}}
+
+{{argument|existing|string}}
+: 指定一个已经存在并启用的数据包名称。
+: {{arg desc|je=string|type=phrase}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/datapack enable ...<br>/datapack disable ...|<code><name></code>不是一个有效的数据包|fail}}
+{{Result table|指定数据包已经被启用/禁用}}
+{{Result table|cmd=/datapack enable <name> ...|指定数据包要求一个功能开关开启，但创建世界时此开关未开启}}
+{{Result table|cmd=/datapack enable ... <existing>|<code><existing></code>不是一个存在并已启用的数据包}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/datapack list ...|执行成功|1|1|列出的数据包数量}}
+{{Output table|cmd=/datapack create ...|执行成功|1|1|1}}
+{{Output table|cmd=other|执行成功|1|1|命令执行后，启用的数据包数量}}
+{{Output table}}
+
+== 示例 ==
+* 列出所有数据包：{{cd|/datapack list}}
+* 禁用原版数据包，使数据包重新加载：{{cd|/datapack disable vanilla}}
+* 启用原版数据包，使数据包重新加载：{{cd|/datapack enable vanilla}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=17w46a|加入了{{cmd|datapack|link=none}}命令。}}
+|{{HistoryLine||1.19.3|dev=22w42a|加入了功能开关（Feature Flag）。若一个数据包需要某个功能开关，但此开关未打开，则该数据包无法使用该命令启用。}}
+|{{HistoryLine||1.20.5|dev=24w12a|原版数据包的<samp>datapacks</samp>目录下的子数据包若在创建世界时启用，不再能使用该命令禁用。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了{{cmd|datapack create|link=none}}子命令。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/datapack]]
+[[en:Commands/datapack]]
+[[es:Comandos/datapack]]
+[[fr:Commandes/datapack]]
+[[ja:コマンド/datapack]]
+[[pt:Comandos/datapack]]
+[[ru:Команды консоли/datapack]]
+[[th:คำสั่ง/datapack]]

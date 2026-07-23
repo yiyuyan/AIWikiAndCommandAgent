@@ -1,0 +1,32 @@
+# 页面: 物品堆叠组件/consumable
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%A0%86%E5%8F%A0%E7%BB%84%E4%BB%B6/consumable
+# 分类: 已弃用的模板
+# 抓取时间: 2026-07-14 17:31:52
+# 原始 Wikitext 内容:
+
+<noinclude>{{deprecated|type=模板|historical=1|text=请使用[[编码格式/DataComponent]]代替。}}</noinclude>
+<div class="treeview">
+** {{nbt|compound|minecraft:consumable}} 物品堆叠组件
+*** {{nbt|string|animation}}：（默认为<code>eat</code>）物品使用时的动画。可以为<code>none</code>（无动作）、<code>eat</code>（吃）、<code>drink</code>（饮用）、<code>block</code>（格挡）、<code>bow</code>（拉弓）、<code>brush</code>（清刷）、<code>crossbow</code>（弩上弦）、<code>spear</code>（三叉戟投掷）、<code>spyglass</code>（看望远镜）、<code>toot_horn</code>（吹山羊角）和<code>bundle</code>（使用收纳袋）。
+*** {{nbt|float|consume_seconds}}：（{{interval|left=0}}，默认为1.6）物品使用的时间，单位为秒。当此值为0时，物品立刻使用，不会像拉弓等操作需要等待时间。
+*** {{nbt|bool|has_consume_particles}}：（默认为<code>true</code>）物品在使用时是否产生物品破碎粒子。
+*** {{nbt|list|on_consume_effects}}：当物品被使用后，物品产生的效果。
+**** {{nbt|compound}}：一项物品效果。
+***** {{nbt|string|type|existonsave=1|required=1}}：物品效果类型。
+***** {{nbt condition|如果{{nbt|string|type}}为<code>apply_effects</code>，则对使用此物品的生物添加状态效果：}}
+***** {{nbt|list|effects|existonsave=1|required=1}}：物品使用后添加的状态效果。
+****** {{nbt|compound}}：一项状态效果。
+******* {{nbt inherit/effect}}
+***** {{nbt|float|probability}}：（{{interval|left=0|right=1}}，默认为1）食用后施加此状态效果的概率。
+***** {{nbt condition|如果{{nbt|string|type}}为<code>clear_all_effects</code>，则对使用此物品的生物移除所有状态效果。}}
+***** {{nbt condition|如果{{nbt|string|type}}为<code>play_sound</code>，则播放指定的声音：}}
+***** {{nbt|string}}{{nbt|compound|sound|existonsave=1|required=1}}：{{json ref|声音事件|Java版声音事件|inline=2}}要播放的声音。
+****** {{nbt inherit/sound event}}
+***** {{nbt condition|如果{{nbt|string|type}}为<code>remove_effects</code>，则对使用此物品的生物移除指定状态效果：}}
+***** {{nbt|string}}{{nbt|list|effects|existonsave=1|required=1}}：{{json ref|状态效果|tag=1|id_link=Java版数据值#状态效果|tag_link=标签#状态效果}}物品使用后要移除的状态效果。
+***** {{nbt condition|如果{{nbt|string|type}}为<code>teleport_randomly</code>，则对使用此物品的生物进行随机传送：}}
+***** {{nbt|float|diameter}}：（{{interval|left_open=0}}，默认为16）随机传送的半径，以传送前的位置作为原点。
+*** {{nbt|string}}{{nbt|compound|sound}}：（默认为<code>entity.generic.eat</code>）{{json ref|声音事件|Java版声音事件|inline=2}}使用物品时产生的声音。
+**** {{nbt inherit/sound event}}
+</div><noinclude>
+</noinclude>

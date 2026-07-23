@@ -1,0 +1,117 @@
+# 页面: Java版25w18a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8825w18a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:36
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=25w18a
+|image=25w18a.png
+|image2=Java Edition 25w18a Simplified.png\Java Edition 25w18a Traditional.png\Java Edition 25w18a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2025年4月29日
+|jsonhash=bd2117b93cd09033f0e0b377b4f7e00efd5a8bba
+|clienthash=d3dd4330832a796188a99c032bd0bdc6f18034c2
+|clientmap=1aaf5dbd73e37c32fd5dc8aa51d2ca64d4694ea9
+|serverhash=e69d69f1817f6c52f6ad2ca73ee1ef8a6903e560
+|servermap=63254635d6008f916e7db73a86ebc5c9441e1ea9
+|parent=1.21.6
+|prevparent=1.21.5
+|prev=25w17a
+|next=25w19a
+|nextparent=1.21.7
+}}<onlyinclude>
+
+'''25w18a'''是[[Java版1.21.6]]的第4个快照，发布于2025年4月29日<ref>{{snap|25w18a|Apr 29, 2025}}</ref>，更改了[[拴绳]]和[[失水恶魂]]的合成配方以及小恶魂的寻路机制，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[实体数据格式]]'''
+* 为所有[[AI生物]]加入了{{nbt|int-array|home_pos}}和{{nbt|int|home_radius}}字段。
+** 设置此值的大部分生物只会在“家”周围的限定范围内寻路。
+*** [[蝙蝠]]、[[史莱姆]]、[[岩浆怪]]、[[幻翼]]和[[末影龙]]可能忽略此影响。
+** [[骑乘]]或使用拴绳会改变部分生物的“家”位置。
+
+'''[[定位栏]]'''
+* 加入了<code>bowtie</code>[[路径点]]样式。
+
+== 更改 ==
+=== 方块 ===
+'''[[失水恶魂]]'''
+* 现在合成配方中的[[骨块]]被替换为[[灵魂沙]]。
+* 现在可以通过与[[猪灵]][[以物易物]]获得，概率为{{frac|10|469}}（≈2.13%）。
+
+=== 物品 ===
+'''[[拴绳]]'''
+* 现在合成配方中的[[黏液球]]被替换为[[线]]。
+
+=== 非生物实体 ===
+'''[[喷溅药水]]'''
+* 药水效果持续时间现在取决于生物碰撞箱与喷溅药水[[判定箱]]之间的距离。
+** 即现在直接被喷溅药水击中的生物能获得完整的药水效果。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|75}}。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|59}}。
+* {{cd|d=pretty|hud/locator_bar_arrow_up|hud/locator_bar_arrow_down}}精灵图现在也是动态纹理。
+
+'''[[字体]]'''
+* Unifont已更新至16.0.03。
+* 加入了新的内置字体<code>include/unifont_pua</code>，包含了Unifont中位于私用区的未编码字，这些字符由Under-CSUR（Under-ConScript Unicode Registry）管理码位。
+** 游戏文本默认不会使用该字体，但可以在[[文本组件]]等中指定该字体。
+
+'''[[自定义字体]]'''
+* 字形提供器<code>unihex</code>的{{nbt|list|size_overrides}}字段现在可选，且默认为空。
+
+'''[[JSON]]'''
+* 世界、包、配置等使用的JSON解析器现在均以严格模式解析文件。
+
+'''[[Java版标签|标签]]'''
+* 向实体类型标签<code>#followable_friendly_mobs</code>中加入了<code>happy_ghast</code>。
+
+== 修复 ==
+{{fixes|fixedin=25w18a|showdesc=1|new=1
+|;old
+|200925|恶魂不受投掷到头上的药水影响。
+|262268|键盘导航在书与笔GUI中无效。
+|264431|<code>#minecraft:sand</code>标签中包含两个<code>minecraft:suspicious_sand</code>。
+|278459|{{filename|unifont.json}}包含尾随逗号。
+|279284|掷出的附魔之瓶生成的经验球很容易卡进方块中。
+|;1.21.5的漏洞
+|279875|不能从悬空脚手架斜向爬上台阶。
+|280281|浮漂在勾上移动的实体时快速抖动。
+|280502|翻译键<code>snbt.parser.undescore_not_allowed</code>包含一处拼写错误。
+|295879|疾跑中攻击船并上此船致其陷入下方方块。
+|295914|战利品表文件接受无效JSON。
+|296784|“{{tr|欢迎进入Minecraft|歡迎遊玩 Minecraft|歡迎來到 Minecraft}}”屏幕缺少淡化。
+|296866|部分命名空间的谓词不能在{{cmd|execute|link=none}}中访问。
+|;dev
+|296354|快乐恶魂不受投掷到头上的药水影响。
+|296898|快乐恶魂的游荡原点会随时间略微偏移。
+|;prev
+|297112|{{key|Ctrl}}+数字键不能导航到Realms配置菜单中的选项卡。
+|297114|Realms菜单误显示Realms即将过期。
+|297115|“{{tr|这是……快照版Realm……|這是……快照版 Realm……|此為⋯⋯快相版 Realm⋯⋯}}”框的黑色背景不再显示。
+|297184|“mco.errorMessage.realmsService.configurationError”中的“Realms”是小写的。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:25w18a]]
+[[en:Java Edition 25w18a]]
+[[es:Java Edition 25w18a]]
+[[fr:Édition Java 25w18a]]
+[[ja:Java Edition 25w18a]]
+[[ko:Java Edition 25w18a]]
+[[lzh:爪哇版二五週一八甲]]
+[[pt:Edição Java 25w18a]]
+[[ru:25w18a (Java Edition)]]
+[[uk:25w18a (Java Edition)]]

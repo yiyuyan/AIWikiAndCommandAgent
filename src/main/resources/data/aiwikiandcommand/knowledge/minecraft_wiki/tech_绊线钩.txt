@@ -1,0 +1,317 @@
+# 页面: 绊线钩
+# 来源: https://zh.minecraft.wiki/w/%E7%BB%8A%E7%BA%BF%E9%92%A9
+# 分类: Java版独有信息, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 待更新条目, 方块, 机制, 红石, 红石机制, 需要验证
+# 抓取时间: 2026-07-14 17:34:23
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|group1=通常
+|1-1=Tripwire Hook.png
+|1-2=Tripwire Hook BE.png
+|group2=激活
+|2-1=Powered Tripwire Hook.png
+|2-2=Powered Tripwire Hook BE.png
+|group3=连接
+|3-1=Attached Tripwire Hook.png
+|3-2=Attached Tripwire Hook BE.png
+|group4=激活时连接
+|4-1=Powered Attached Tripwire Hook.png
+|4-2=Powered Attached Tripwire Hook BE.png
+|*-1caption={{el|je}}
+|*-2caption={{el|be}}
+|invimage=Tripwire Hook
+}}
+{{quote|没错，我们的本周物品就是绊线钩！这些狡猾的装置虽然只用了一点非常基础的材料，却非常适合用来给怪物<!--原文是mobs（生物），但由于动物也属于生物，故译为怪物-->、动物甚至其他玩家设下陷阱。要设置绊线，你需要将两个绊线钩面对面放置，并用线将它们连接起来。陷阱会一直处于预备状态，直到有玩家踩到绊线，此时你会听到“咔嗒”一声，绊线钩会发出红石脉冲。|[[Duncan Geere]]<ref>{{article|taking-inventory-tripwire-hook|Taking Inventory: Tripwire Hook|Nov 9, 2018}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''绊线钩（Tripwire Hook）'''是一种可用于在[[绊线]]线路中检测[[实体]]的[[方块]]。
+
+== 生成 ==
+=== 自然生成 ===
+[[丛林神庙]]中会生成4个绊线钩。
+
+[[试炼密室]]的柱廊结构及<code>encounter_4</code>结构中会生成绊线钩。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|B1= Iron Ingot
+|B2= Stick
+|B3= Any Planks
+|Output= Tripwire Hook,2
+|type= Redstone
+}}
+
+=== 钓鱼 ===
+{{main|钓鱼#垃圾与宝藏}}
+[[钓鱼]]时，绊线钩可作为[[钓鱼#垃圾与宝藏|垃圾]]被钓起。使用附有[[海之眷顾]]魔咒的钓鱼竿会降低该概率。
+
+=== 箱子战利品 ===
+{{LootChestItem|tripwire_hook}}
+
+== 破坏 ==
+绊线钩被挖掘时会立刻被破坏，用于挖掘的工具的耐久度不会下降。
+
+{{Breaking table}}
+
+绊线钩被破坏后会掉落自身。
+
+{{in|je}}绊线钩被破坏时（放置后立即被来自对侧绊线钩的[[方块更新]]破坏的除外）计算绊线线路当前的正确状态，并依次放置相应状态的对侧绊线钩和绊线，放置绊线时不检查绊线线路是否再次改变状态。
+
+== 用途 ==
+绊线钩可以用作合成材料或红石元件。
+
+绊线钩必须{{ctrl|放置}}于{{verify|for=[[方块支撑形状]]表面中心完整的方块的侧面表面}}。
+
+当绊线钩附着的方块变动（移动、破坏、替代等），不再允许附着时或有[[活塞]]试图推动它或将方块推入其位置时，绊线钩会掉落为方块物品。
+
+[[沙子]]或[[沙砾]]这类受重力影响的方块正下方为绊线钩时不会开始下落。下落到绊线钩的位置时，它会掉落为方块物品。
+
+{{in|je}}若[[水]]流过绊线钩，绊线钩会被破坏并掉落为方块物品；若[[熔岩]]流过绊线钩，绊线钩会被破坏但不会掉落为方块物品。
+
+=== 合成材料 ===
+{{crafting usage|Tripwire Hook}}
+
+=== 红石元件 ===
+{{see also|红石电路}}
+
+绊线钩可用于在大面积区域中检测生物、物品和其他[[实体]]。
+
+==== 绊线线路 ====
+绊线钩需要“绊线线路”才能正常工作。
+* 在两个互相面向的绊线钩中间使用[[绊线]]连接，最大距离40个方块（不包含绊线钩本身）。
+
+在无效绊线线路中的绊线钩会显现出“折叠”的样子，而在有效绊线线路中的绊线钩则会显现出“伸直”的样子。不同绊线线路的绊线可以并排放置，也可以上下堆叠，甚至可以交叉放置。
+
+{{in|je}}绊线钩被放置、被触发和结束触发时计算绊线线路当前的正确状态，并依次放置相应状态的对侧绊线钩、本侧绊线钩和绊线。放置本侧绊线钩和绊线时，不检查绊线线路是否再次改变状态（例如PP更新引起的绊线的连接方向改变）。
+
+==== 开启 ====
+在有效绊线线路中，特定[[实体]]（[[生物]]、[[物品（实体）|物品实体]]等）的[[边界箱]]与绊线的[[碰撞箱]]相交时，对应的绊线线路被触发，其中的绊线钩会被开启。
+
+不会触发绊线线路的实体包含[[箭]]、[[喷溅药水]]、[[掷出的末影珍珠]]和[[末影之眼]]等。
+
+绊线钩在绊线线路中的任何一个绊线被摧毁时会开启{{convert|10}}。但用[[剪刀]]摧毁绊线和破坏对侧的绊线钩都不会开启绊线钩。
+* 它们都会让绊线钩的方块状态（<code>attached</code>{{only|je}}或<code>attached_bit</code>{{only|be}}状态）从<code>true</code>变为 <code>false</code>，该变化可被[[侦测器]]检测。
+
+==== 行为 ====
+[[File:Tripwire hook as power source.png|缩略图|绊线钩开启时，输出信号并强充能其附着方块，绊线不会输出信号]]
+绊线钩开启时，模型会向下折叠，并会：
+* 为毗邻的[[红石线]]提供15点信号强度。
+* 为毗邻且朝向正确（主输入端面向绊线钩）的[[红石比较器]]和[[红石中继器]]提供15点信号强度。
+* 激活毗邻且朝向正确（若需要，如[[活塞]]）的任何[[红石元件#机械元件|机械元件]]。
+* '''[[强充能]]'''自身附着的[[红石导体]]至充能等级15。
+
+=== 交易 ===
+{{Trade uses}}
+
+== 音效 ==
+{{Sound table/Block/Wood
+|suffix-je=
+{{Sound table
+|sound=Click pitch0.7.ogg
+|subtitle={{tp|subtitles.block.tripwire.attach}}
+|id=block.tripwire.attach
+|translationkey=subtitles.block.tripwire.attach
+|source={{tp|soundCategory.block}}
+|description=线连接到绊线钩
+}}
+{{Sound table
+|sound=Click pitch0.5.ogg
+|subtitle={{tp|subtitles.block.tripwire.click}}
+|source={{tp|soundCategory.block}}
+|description=绊线钩解除触发
+|id=block.tripwire.click_off
+|translationkey=subtitles.block.tripwire.click}}
+{{Sound table
+|sound=Click pitch0.6.ogg
+|subtitle={{tp|subtitles.block.tripwire.click}}
+|id=block.tripwire.click_on
+|translationkey=subtitles.block.tripwire.click
+|source={{tp|soundCategory.block}}
+|description=绊线钩被触发
+}}
+{{Sound table
+|sound=Arrow hit1.ogg
+|sound2=Arrow hit2.ogg
+|sound3=Arrow hit3.ogg
+|soubd4=Arrow hit4.ogg
+|subtitle={{tp|subtitles.block.tripwire.detach}}
+|id=block.tripwire.detach
+|translationkey=subtitles.block.tripwire.detach
+|source={{tp|soundCategory.block}}
+|description=绊线钩被拆除
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=Click pitch0.7.ogg
+|source=方块
+|description=线连接到绊线钩
+|id=random.click
+|typeid=attach
+|soundvolume=0.2
+|soundpitch=0.7
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Click pitch0.6.ogg
+|source=方块
+|description=绊线钩被触发
+|id=random.click
+|typeid=power.on
+|soundvolume=0.2
+|soundpitch=0.6
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Click pitch0.5.ogg
+|source=方块
+|description=绊线钩解除触发
+|id=random.click
+|typeid=power.off
+|soundvolume=0.2
+|soundpitch=0.5
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=random.bowhit1.wav
+|sound2=random.bowhit2.wav
+|sound3=random.bowhit3.wav
+|sound4=random.bowhit4.wav
+|source=玩家
+|description=绊线钩被拆除
+|id=random.bowhit
+|typeid=detach
+|soundvolume=0.4
+|soundpitch=1.1-1.33
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Tripwire Hook
+|spritetype=block
+|nameid=tripwire_hook
+|showblocktags=je
+|blocktags={{GameTag|block|tripwire_hook}}
+|foot=1
+}}
+
+{{edition|bedrock}}：
+{{ID table|generatetranslationkeys=bedrock
+|Tripwire Hook|spritetype=block|nameid=tripwire_hook|foot=1}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+绊线钩的方块数据存储了其朝向、连接状态和激活状态：
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+== 视频 ==
+{{bv|BV13f4y1S7Kh}}
+
+== 历史 ==
+{{Needs update|section=1|缺少其他状态的绊线钩的渲染图历史}}
+{{HistoryTable
+|{{HistoryLine||2012年5月28日|link={{tweet|Dinnerbone|207154562711289856}}|[[Dinnerbone]]发表了一系列的推文，起初表示“我想我非常喜欢冒险地图，这意味着我要设计新的方块”。<ref>{{tweet|Dinnerbone|207087068013277185}}</ref>他展示了用剪刀来剪去绊线，<ref>{{tweet|Dinnerbone|207099061562642432}}</ref>并且在透露新方块名字前<ref>{{tweet|Dinnerbone|207154562711289856}}</ref>发布了一系列的图片。<ref name=t192>{{tweet|Dinnerbone|207141805265928192}}</ref><ref name=t155>{{tweet|Dinnerbone|207151964025393155}}</ref><ref name=t952>{{tweet|Dinnerbone|207154292593917952}}</ref>之后，他发布了一个视频<ref>https://www.youtube.com/watch?v=mWuvXIzYcTc</ref>来透露出绊线的功能，最后还向他的未婚妻MissMarzenia展示了他的主意。<ref>{{tweet|Dinnerbone|207168682634379264}}</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w22a|[[File:Tripwire Hook (S) JE1.png|32px]] [[File:Tripwire Hook (texture) JE1 BE1.png|32px]] 加入了绊线钩。}}
+|{{HistoryLine||1.5|dev=13w01a|绊线钩现在可以用来合成[[陷阱箱]]。}}
+|{{HistoryLine||1.7.2|dev=13w36a|绊线钩现在可以在钓鱼时作为“垃圾”被钓上来。}}
+|{{HistoryLine||1.8|dev=14w11a|[[File:Tripwire Hook (S) JE2.png|32px]] 更改了绊线钩的模型。
+|[[File:Oak_Planks_(texture)_JE4_BE2.png|32px]] 更改了绊线钩的物品纹理。}}
+|{{HistoryLine|||dev=14w17a|[[File:Tripwire Hook (S) JE3.png|32px]] 再次更改了绊线钩的模型。
+|[[File:Tripwire_Hook_(texture)_JE1_BE1.png|32px]] 再次更改了绊线钩的物品纹理。}}
+|{{HistoryLine||1.9|dev=15w49a|方块状态<code>suspended</code>从绊线钩里移除了。}}
+|{{HistoryLine||1.12|dev=17w18a|现在绊线钩可以放在[[TNT]]侧面，但会在收到[[方块更新]]时掉落。}}
+|{{HistoryLine|||dev=pre1|TNT上的绊线钩不再在收到方块更新时掉落。}}
+|{{HistoryLine|||dev=正式版|绊线钩现在可以被放置于[[南瓜灯]]上。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]前，绊线钩的数字ID为131。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Tripwire Hook (S) JE4.png|32px]] [[File:Tripwire_Hook_(texture)_JE2_BE2.png|32px]] 更改了绊线钩的纹理。
+|现在绊线钩可用于合成[[弩]]。}}
+|{{HistoryLine|||dev=18w47a|[[File:Tripwire Hook (S) JE5.png|32px]] 由于再次更改了[[橡木木板]]的纹理，绊线钩的木质部分纹理再次随之更改。}}
+|{{HistoryLine|||dev=19w13a|绊线钩能放在开启的[[活板门]]侧面。}}
+|{{HistoryLine||1.16|dev=20w10a|绊线钩现在可放置于[[红石块]]、[[侦测器]]和[[标靶]]上。<ref>{{bug|MC-146824|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.2|dev=23w33a|现在绊线钩使用木质方块的音效，而非石质方块。}}
+|{{HistoryLine||1.20.3|dev=23w45a|exp=update_1_21|绊线钩现在可以生成于[[试炼密室]]中。}}
+|{{HistoryLine||1.21|dev=24w18a|23w45a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|dev=24w33a|现在在计算绊线线路状态期间，绊线钩会在尝试放置本侧绊线钩、绊线时跳过空气。}}
+|{{HistoryLine|||dev=24w36a|现在在计算绊线线路状态期间，绊线钩会在尝试放置本侧绊线钩、绊线时跳过非绊线钩、绊线方块。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|[[File:Tripwire Hook (S) BE1.png|32px]] [[File:Tripwire Hook (texture) JE1 BE1.png|32px]] 加入了绊线钩，可用于合成[[陷阱箱]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.10|绊线钩现在可用于合成[[弩]]。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Tripwire Hook (S) BE2.png|32px]] [[File:Tripwire Hook (texture) JE2 BE2.png|32px]] 更改了绊线钩的纹理。
+|绊线钩现在可在[[掠夺者前哨站]]中的瞭望塔里找到。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.4|制箭师[[村民]]现在会[[交易|出售]]绊线钩。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.20|exg=updateAnnouncedLive2023|绊线钩现在可以生成于[[试炼密室]]中。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|1.20.60.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU14|xbone=CU1|ps3=1.04|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Tripwire Hook (S) JE3.png|32px]] 加入了绊线钩。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Tripwire Hook (S) JE5.png|32px]] 更改了绊线钩的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Tripwire Hook (S) JE3.png|32px]] 加入了绊线钩。}}
+}}
+
+== 你知道吗 ==
+* {{in|je}}绊线线路状态变化时，绊线钩先记录线路的状态，再依次设置对侧绊线钩和自身的状态以及绊线的{{cd|attached}}状态（若绊线钩的{{cd|attached}}状态有变化）；若绊线钩附着[[门]]或[[活板门]]，线路中绊线钩信号的变化可以激活或取消激活门或活板门，从而破坏附着在门上的绊线钩，并引起绊线钩和绊线状态的变化，但这些变化可以被先更新线路状态的绊线钩后续设置的状态覆盖。
+* {{in|je}}若绊线线路中的一个绊线被破坏后迅速插入一个绊线钩，线路东、北侧绊线钩和所有绊线的状态不会更新。
+
+== 画廊 ==
+<gallery>
+Tripwire in Jungle Pyramid.png|丛林神庙中生成的一个绊线钩
+Jungle Pyramid Trap1.png|丛林神庙中由绊线钩组成的陷阱
+Jungle Pyramid Trap2.png|丛林神庙中由绊线钩组成的另一处陷阱
+</gallery>
+
+=== 开发截图 ===
+<gallery>
+File:DinnerboneTripwireDev1.png|绊线钩的第一张截图<ref name=t192/>
+File:DinnerboneTripwireDev2.png|绊线钩的第二张截图<ref name=t155/>
+File:DinnerboneTripwireDev3.png|绊线钩的第三张截图<ref name=t952/>
+File:DinnerboneTripwireDev6.png|绊线钩与拉杆的对比图<ref>{{tweet|Dinnerbone|207274999118168064}}</ref>
+File:DinnerboneTripwireDev4.png|在夜晚测试一定距离外绊线的可见性<ref name="DBVisualTest">{{tweet|Dinnerbone|207294114398605312}}</ref>
+File:DinnerboneTripwireDev5.png|绊线在白天时的可见性<ref name="DBVisualTest"/>
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+
+[[Category:机制]]
+[[Category:红石机制]]
+
+[[de:Haken]]
+[[en:Tripwire Hook]]
+[[es:Gancho de cuerda]]
+[[fr:Crochet]]
+[[ja:トリップワイヤーフック]]
+[[ko:철사 덫 갈고리]]
+[[nl:Struikeldraadhaak]]
+[[pl:Zaczep na linkę]]
+[[pt:Gancho de Armadilha]]
+[[ru:Натяжной датчик]]
+[[uk:Гак для розтяжки]]

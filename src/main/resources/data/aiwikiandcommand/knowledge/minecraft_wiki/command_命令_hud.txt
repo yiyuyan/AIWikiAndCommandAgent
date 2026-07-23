@@ -1,0 +1,80 @@
+# 页面: 命令/hud
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/hud
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{about|命令|玩家用于检测自身状态的游戏方式|平视显示器}}
+{{Exclusive|bedrock|education}}
+{{Infobox command
+|name=hud
+|oplevel=1
+|cheat=1
+}}
+
+修改[[HUD]]的可见性。
+
+== 语法 ==
+:<code>hud <target: target> <visible: HudVisibility> [hud_element: HudElement]</code>
+
+== 参数 ==
+{{argument|target: target|CommandSelector<Player>|be=1}}
+:指定将被修改HUD可见性的目标。
+:{{arg desc|type=players|be=CommandSelector<Player>}}
+
+{{argument|visible: HudVisibility|enum|be=1}}
+:指定将对HUD可见性做出的修改。
+:必须为<code>hide</code>（隐藏）或<code>reset</code>（重置）。
+
+{{argument|hud_element: HudElement|enum|be=1}}
+:指定将被修改的HUD元素。
+:必须为以下之一：
+:* <code>air_bubbles</code> － [[氧气值]]
+:* <code>all</code> － 所有的HUD
+:* <code>armor</code> － [[护甲值]]
+:* <code>crosshair</code> － 屏幕上的十字准星
+:* <code>health</code> － [[生命值]]
+:* <code>horse_health</code> － 骑乘坐骑时坐骑的生命值
+:* <code>hotbar</code> － [[快捷栏]]
+:* <code>hunger</code> － [[饥饿值]]
+:* <code>item_text</code> － 物品文本
+:* <code>paperdoll</code> － [[HUD#纸娃娃|纸娃娃]]
+:* <code>progress_bar</code> － [[经验条]]
+:* <code>status_effects</code> － [[状态效果]]图标
+:* <code>tooltips</code> － [[提示框]]
+:* <code>touch_controls</code> － [[HUD#触屏按键|触控按键]]
+:如果未指定，默认为<code>all</code>。
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|<code>target: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器||fail}}
+{{Result table|<code>target: target</code>未能选中一个或多个在线玩家}}
+{{Result table|cmd=|success}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|edition=be|失败|0}}
+{{Output table|成功|被选中的玩家数}}
+{{Output table}}
+
+== 示例 ==
+* 隐藏所有玩家的所有HUD：<code>/hud @a hide all</code>
+* 使附近的[[生存模式]]玩家的生命值重新显示：<code>/hud @p[m=s] reset health</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.60|dev=1.20.60.23|exg=upcoming_creator_features|加入了{{cmd|hud|link=none}}。}}
+|{{HistoryLine||1.20.80|exg=upcoming_creator_features|dev=1.20.80.21|加入了新的可用HUD元素：{{cd|d=pretty|item_text|status_effects}}。}}
+|{{HistoryLine|||exg=none|dev=1.20.80.23|{{cmd|hud|link=none}}不再属于[[实验性玩法]]。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/hud]]
+[[en:Commands/hud]]
+[[ja:コマンド/hud]]
+[[pt:Comandos/hud]]

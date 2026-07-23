@@ -1,0 +1,81 @@
+# 页面: 测试环境定义格式
+# 来源: https://zh.minecraft.wiki/w/%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:30:14
+# 原始 Wikitext 内容:
+
+-{-|批次}-
+{{exclusive|je}}
+
+'''测试环境（Test Environment）'''是游戏运行各个[[测试实例]]的世界测试环境。'''测试环境定义文件'''是测试环境在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+测试环境在游戏内使用<code>TEST_ENVIRONMENT</code>注册表，数据包路径为<code>test_environment</code>，即所有测试环境定义文件都需要在{{filepath|-{}-data/<''命名空间''>/test_environment}}目录内定义，测试环境标签则需要在{{filepath|-{}-data/<''命名空间''>/tags/test_environment}}目录内定义。
+
+测试环境定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象<section begin="codec_test_environment"/>
+** {{nbt|string|type|required=1}}：测试环境行为的类型。
+** {{nbt condition|如果{{nbt|string|type}}为<code>all_of</code>，则执行所有子测试环境中的行为。}}
+** {{nbt|list|definitions|required=1}}：所有子测试环境。游戏将按照此列表顺序从上到下依次执行其进入和退出时的行为。
+*** {{nbt|string}}{{nbt|compound}}：（命名空间ID或直接定义）与此结构相同，递归定义。
+** {{nbt condition|如果{{nbt|string|type}}为<code>clock_time</code>，此测试环境会在进入时设置指定的[[世界时钟]]为指定时间，退出时重置为原来的时间。}}
+** {{nbt|string|clock|required=1}}：（命名空间ID）要设置的世界时钟。
+** {{nbt|int|time|required=1}}：（{{interval|left=0}}）设置当前世界时钟为指定时间。
+** {{nbt condition|如果{{nbt|string|type}}为<code>difficulty</code>，此测试环境会在进入时设置世界难度，退出时重置世界难度，即使世界难度被锁定也正常修改。}}
+** {{nbt|string|difficulty}}：要设置的难度。取值只能为{{cd|d=pretty|peaceful|easy|normal|hard}}。
+** {{nbt condition|如果{{nbt|string|type}}为<code>function</code>，此测试环境会在进入和退出时运行指定的[[Java版函数|函数]]。}}
+** {{nbt|string|setup}}：（命名空间ID）进入此测试环境时调用的函数。
+** {{nbt|string|teardown}}：（命名空间ID）退出此测试环境时调用的函数。
+** {{nbt condition|如果{{nbt|string|type}}为<code>game_rules</code>，此测试环境会在进入时设置指定的[[游戏规则]]，退出时重置指定的游戏规则为旧值。}}
+** {{nbt|compound|rules|required=1}}：设置游戏规则的值。
+*** {{nbt|any|<''游戏规则命名空间ID''>}}：一项游戏规则及其对应的值。
+** {{nbt condition|如果{{nbt|string|type}}为<code>timeline_attributes</code>，此测试环境会在进入时在服务端[[环境属性]]中增加[[时间线]]，退出时移除这些时间线。时间线的其他属性不起作用。}}
+** {{nbt|list|timelines|required=1}}：要加入的时间线，列表的内容应为时间线的命名空间ID。
+** {{nbt condition|如果{{nbt|string|type}}为<code>weather</code>，此测试环境会在进入时设置指定的[[天气]]，退出时重置天气循环。}}
+** {{nbt|string|weather|required=1}}：设置为指定的天气。可以为<code>clear</code>（晴天{{convert|100000}}）、<code>rain</code>（下雨{{convert|100000}}）和<code>thunder</code>（雷暴{{convert|100000}}）。
+<section end="codec_test_environment"/>
+</div>
+
+== 定义行为 ==
+
+测试环境定义数据仅在服务端启动时被加载一次，使用{{cmd|reload}}命令不可以使测试环境定义被重新加载，而必须重启服务端。 
+
+测试环境是所有测试实例运行前进行检查的流程，所有测试实例必须在测试环境进入后才能进行测试。
+
+游戏以批次运行测试实例，一个批次内的所有测试实例都会使用同一个测试环境。当游戏开始执行测试批次时，会读取当前批次要求的测试环境，并进入此测试环境；当此批次结束，准备运行下一批次前，游戏会检查下一批次的测试环境是否与结束批次的测试环境相一致（检查测试环境对象是否一致而非信息是否一致），如果不一致则退出上一个测试环境并进入下一个测试环境，否则不会退出当前测试环境而继续下一批次测试；当所有批次结束后，游戏退出最后一次进入的测试环境，测试结束。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.5|dev=25w03a|加入了测试环境定义文件及其对应的注册表。}}
+|{{HistoryLine|||dev=25w04a|将测试环境类型<code>raining</code>重命名为<code>weather</code>。}}
+|{{HistoryLine||1.21.11|dev=25w44a|修改了测试环境类型<code>game_rules</code>的格式。
+{{collapse|title=旧格式：|content=
+<div class="treeview">
+** {{nbt|list|bool_rules|required=1}}：设置指定的布尔型游戏规则。
+*** {{nbt|compound}}：一条布尔型游戏规则设置。
+**** {{nbt|string|rule|required=1}}：游戏规则的精确ID。
+**** {{nbt|bool|value|required=1}}：游戏规则的值。
+** {{nbt|list|int_rules|required=1}}：设置指定的整数型游戏规则。
+*** {{nbt|compound}}：一条整数型游戏规则设置。
+**** {{nbt|string|rule|required=1}}：游戏规则的精确ID。
+**** {{nbt|int|value|required=1}}：游戏规则的值。
+</div>
+}}}}
+|{{HistoryLine||26.1|dev=snapshot-1|现在测试环境类型<code>game_rules</code>退出时，会设置游戏规则为开始前的状态，而不是重置为默认值。}}
+|{{HistoryLine|||dev=snapshot-3|将测试环境类型<code>time_of_day</code>重命名为<code>clock_time</code>，并加入了{{nbt|string|clock}}字段，现在设置世界时钟而非昼夜时间。}}
+|{{HistoryLine|||dev=snapshot-11|加入了测试环境类型<code>timeline_attributes</code>。}}
+|{{HistoryLine||26.2|dev=pre-5|加入了测试环境类型<code>difficulty</code>。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Testumgebungsdefinition]]
+[[en:Test environment definition]]
+[[fr:Définition d'environnement de test]]
+[[pt:Definição do ambiente de teste]]

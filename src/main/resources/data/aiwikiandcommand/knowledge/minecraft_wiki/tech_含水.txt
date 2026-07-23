@@ -1,0 +1,828 @@
+# 页面: 含水
+# 来源: https://zh.minecraft.wiki/w/%E5%90%AB%E6%B0%B4
+# 分类: Java版独有信息, 基岩版独有信息, 待更新条目, 教育版独有信息, 有未知版本的History模板的页面/基岩版, 游戏内容, 需要信息
+# 抓取时间: 2026-07-14 17:21:19
+# 原始 Wikitext 内容:
+
+{{about|不完整方块中存在水的机制|基岩版的植物中存在雪的机制|含雪|洞穴地形特征中的含水层|洞穴#含水层}}
+[[File:Waterlogged Oak Fence.png|150px|thumb|含水的[[橡木栅栏]]]]
+方块的'''含水（Waterlogged）'''状态是指[[水源]]方块填充了不完整方块（即未完全充满其方块体积的方块，如门、梯子和植物）未充满体积的部分。
+
+== 机制 ==
+{{in|java}}特定的方块具有[[方块状态]]{{cd|waterlogged}}，该方块状态可以为{{cd|true}}或{{cd|false}}，可以通过[[调试棒]]调整；少数方块如[[海草]]、[[海带]]、[[气泡柱]]总是含水的。这只是一个临时性解决方案，完全实现方块和液体的区分仍在计划中。<ref>{{reddit|a11ig3/umm_wasnt_the_new_update_supposed_to_make_water|eamrmid|We are still working on this, though, and hope to have similar functionality one day.|Dinnerbone|November 28, 2018|context=4}}</ref>
+
+通常来说，含水方块被[[活塞]]或[[黏性活塞]]推拉后，其含水状态总会被取消，但{{in|java}}当被[[活塞]]推动的含水方块在2[[游戏刻]]内提前到位时，方块的含水状态将得以保留。
+
+{{in|bedrock}}几乎所有不完整方块都能含水。含水由游戏的“图层”系统处理，通过修改，任何方块都能含水。只有流动的水可以被直接替换。
+
+含水的不完整方块和水源方块占据相同体积。破坏含水方块不会对水源方块造成影响。
+
+所有含水方块都具有水源方块的大部分特性，且会覆盖这些方块原有的部分特性（例如，原本可燃烧的方块在含水后变得不可燃烧）。含水方块不会结[[冰]]。含水方块能将[[熔岩]]转变为[[黑曜石]]或[[圆石]]，而熔岩不会将含水方块转变为石头。{{in|je}}可以通过含水方块向玻璃瓶中装水。<ref>{{bug|MC-171629|||Won't Fix}}</ref>
+
+{{in|je}}若一个未含水的可含水方块在'''水平'''方向上紧挨着2个或更多个水方块或可以向这个方向流出水的含水方块（液相被该可含水方块的表面完全阻挡的'''除外'''，例如下半[[台阶]]的表面完全阻挡水平毗邻的含水上半台阶的液相。流动水一律视为'''完整'''的水方块），其中'''2个或更多个'''为'''水源'''或'''含水方块'''，且该可含水方块下方有一个[[固体方块]]、另一个水源方块或含水非固体方块，并且[[游戏规则]]{{gamerule|water_source_conversion}}为<samp>true</samp>，则满足上述要求（即液相未被阻挡）的水（可以是流动水）或含水方块计算流动方向时会将该可含水方块纳入流动范围，若决定向该方块流动，该方块将含水。
+
+== 行为 ==
+{{needs update|section=1|表格可能不完整}}
+下表展示了不同方块在不同版本中的含水情况。图例：
+* <span class="tc-no">红色</span>背景表示此方块不能放置在水中或被放置在水中后会移除所在格的水，标记“掉落”的还会被流动的水摧毁，其中可以掉落的方块会在被破坏时变成[[掉落物]]。
+* <span class="tc-partial">黄色</span>背景表示此方块必须放在水中。
+* <span class="tc-yes">绿色</span>背景表示此方块可以放在流动的水或水源中。
+* <span class="tc-planned">蓝色</span>背景表示此方块可以放在水源中。
+
+{| class="wikitable sortable stikitable"
+! 方块
+! [[Java版]]中可置入水中
+! [[基岩版]]中可置入水中
+! class="unsortable" | 注释
+|-
+| {{BlockLink|Activator Rail}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockSprite|Small Amethyst Bud}}{{BlockSprite|Medium Amethyst Bud}}{{BlockSprite|Large Amethyst Bud}}{{BlockLink|Amethyst Cluster}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Anvil}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Azalea}}
+| {{tc|No|掉落}}
+| {{tc|upcoming|水源}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Bamboo}}
+| {{tc|No}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Banners}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Barrier}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Beacon}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Beds}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+| 在含水的床上睡觉需要{{EffectLink|Water Breathing}}或{{EffectLink|Conduit Power}}。
+|-
+| {{BlockLink|Beetroots}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Bell}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Big Dripleaf}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| {{in|be|nc=1}}放下时会移除水。
+|-
+| {{BlockLink|Brewing Stand}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Bubble Column}}
+| {{tc|partial|必须}}
+| {{tc|partial|必须}}
+|-
+| {{BlockLink|Button}}
+| {{tc|no|掉落}}
+| {{tc|upcoming|水源}}
+| {{in|je|nc=1}}被流动的水摧毁。
+|-
+| {{BlockLink|Bush}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Cactus}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+| {{in|be|nc=1}}不能放置在水中，尽管本身可以含水。
+|-
+| {{BlockLink|Cactus Flower}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Cake}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Calibrated Sculk Sensor}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 激活时影响放置处的水的发光效果。水中不发声。
+|-
+| {{BlockLink|Campfire}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 含水时熄灭。
+|-
+| {{BlockLink|Candle}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 含水时熄灭。{{in|be|nc=1}}不能放置在水中，尽管本身可以含水。
+|-
+| {{BlockLink|Carpets}}
+| {{tc|no|掉落}}
+| {{tc|upcoming|水源}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Carrots}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Cauldron}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+| 含水的炼药锅会装满水。{{in|be}}如果含水时炼药锅装有[[药水]]，药水会被水替换。
+|-
+| {{BlockLink|Iron Chain}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Chest}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Chorus Flower}}
+| {{tc|No}}
+| {{tc|No}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Chorus Plant}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Cobweb}}
+| {{tc|no|掉落}}
+| {{tc|upcoming|水源}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Cocoa}}
+| {{tc|no|掉落}}
+| {{tc|yes|流动的水或水源}}
+| {{in|be|nc=1}}试图在水中放置可可果会失败，参见{{bug|MCPE-33360}}。
+|-
+| {{BlockLink|Composter}}
+| {{tc|no}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Conduit}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Copper Bars}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Copper Chain}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Copper Chest}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Copper Golem Statue}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Copper Grate}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Copper Lantern}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Copper Torch}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+|-
+| {{BlockLink|Coral}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| {{in|be|nc=1}}被流动的水摧毁。
+|-
+| {{BlockLink|Coral Fans}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| {{in|be|nc=1}}被流动的水摧毁。
+|-
+| {{BlockLink|Daylight Detector}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Dead Bush}}
+| {{tc|no|掉落}}
+| {{tc|upcoming|水源}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Dead Coral}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| {{in|be|nc=1}}被流动的水摧毁。
+|-
+| {{BlockLink|Dead Coral Fans}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| {{in|be|nc=1}}被流动的水摧毁。
+|-
+| {{BlockLink|Decorated Pot}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Detector Rail}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Doors}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Dragon Egg}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Dried Ghast}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 持续含水一段时间后会生成[[小恶魂]]。
+|-
+| {{BlockLink|Enchanting Table}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|End Portal Frame}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|End Rod}}
+| {{tc|no|掉落}}
+| {{tc|yes|流动的水或水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Ender Chest}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Fences}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Fence Gates}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Fern}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Firefly Bush}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Flower}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Flower Pot}}
+| {{tc|no|掉落}}
+| {{tc|upcoming|水源}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Flowering Azalea}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Frogspawn}}
+| {{tc|No|掉落}}
+| {{tc|No|掉落}}
+| {{in|be|nc=1}}完全无法放置在水中。
+|-
+| {{BlockLink|Fungus|id=Crimson Fungus}}
+| {{tc|No|掉落}}
+| {{tc|No|掉落}}
+| {{in|be|nc=1}}无法放在水中。
+|-
+| {{BlockLink|Glass Pane}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Glow Lichen}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Grass}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Grindstone}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Hanging Roots}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Heads}}
+| {{tc|no|掉落}}
+| {{tc|upcoming|水源}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Heavy Core}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Hopper}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Iron Bars}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+|{{EntityLink|Item Frame}}{{only|be|short=1}}
+| {{tc|N/A}}
+| {{tc|upcoming|水源}}
+| 仅{{in|be|nc=1}}作为方块处理。
+|-
+|{{EntityLink|Glow Item Frame}}{{only|be|short=1}}
+| {{tc|N/A}}
+| {{tc|upcoming|水源}}
+| 仅{{in|be|nc=1}}作为方块处理。
+|-
+| {{BlockLink|Kelp}}
+| {{tc|partial|必须}}
+| {{tc|partial|必须}}
+|-
+| {{BlockLink|Ladder}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Lantern}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Large Fern}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Leaf Litter}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Leaves}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Lectern}}
+| {{tc|no}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Lever}}
+| {{tc|no|掉落}}
+| {{tc|yes|流动的水或水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Lily Pad}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Light Block}}
+| {{tc|upcoming|水源}}
+| {{tc|yes|流动的水或水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Lightning Rod}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Mangrove Propagule}}
+| {{tc|upcoming|水源}}
+| {{tc|yes|流动的水或水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Mangrove Roots}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Mushrooms}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Nether Sprouts}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Nether Wart}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Pink Petals}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Piston}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+| {{in|be}}伸出的活塞头不会以这种方式含水，但可手动使其含水。
+|-
+| {{BlockLink|Pointed Dripstone}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 含水状态下仍可滴落熔岩，参见{{bug|MC-207419}}。
+|-
+| {{BlockLink|Potatoes}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Powered Rail}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Pressure Plates}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Rail}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Redstone Comparator}}
+| {{tc|no|掉落}}
+| {{tc|yes|流动的水或水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Redstone Dust}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Redstone Repeater}}
+| {{tc|no|掉落}}
+| {{tc|yes|流动的水或水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Redstone Torch}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Resin Clump}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Roots|id=Crimson Roots}}
+| {{tc|No|掉落}}
+| {{tc|No|掉落}}
+| {{in|be|nc=1}}完全不能放在水中。
+|-
+| {{BlockLink|Saplings}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Scaffolding}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Sculk Sensor}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 激活时影响放置处的水的发光效果。水中不发声。
+|-
+| {{BlockLink|Sculk Shrieker}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 水中不发声。
+|-
+| {{BlockLink|Sculk Vein}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Sea Pickle}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 被流动的水摧毁。只有含水的海泡菜能发光。
+|-
+| {{BlockLink|Seagrass}}
+| {{tc|partial|必须}}
+| {{tc|partial|必须}}
+|-
+| {{BlockLink|Shelf}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Shulker Box}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Short Dry Grass}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Signs}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Slabs}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Small Dripleaf}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Snow}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Soul Campfire}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+| 含水时熄灭。
+|-
+| {{BlockLink|Soul Lantern}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Soul Torch}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Spawner}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Spore Blossom}}
+| {{tc|No}}
+| {{tc|No}}
+| 不能放置在水中；被流动的水摧毁。
+|-
+| {{BlockLink|Stairs}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Stonecutter}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Structure Block}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Sugar Cane}}
+| {{tc|No}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Sulfur Spike}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Sweet Berry Bush}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Tall Dry Grass}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Tall Grass}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Tall Seagrass}}
+| {{tc|partial|必须}}
+| {{tc|partial|必须}}
+|-
+| {{BlockLink|Torch}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Trapdoors}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Trapped Chest}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Tripwire}}
+| {{tc|no|掉落}}
+| {{tc|yes|流动的水或水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Tripwire Hook}}
+| {{tc|no|掉落}}
+| {{tc|yes|流动的水或水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Turtle Egg}}
+| {{tc|No}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Twisting Vines}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中（上半台阶上方一格的水除外，放下时会移除水）。
+|-
+| {{BlockLink|Vines}}
+| {{tc|no|掉落}}
+| {{tc|upcoming|水源}}
+| 被流动的水摧毁。
+|-
+| {{BlockLink|Walls}}
+| {{tc|upcoming|水源}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Weeping Vines}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Wheat}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}不能放置在水中。
+|-
+| {{BlockLink|Wildflowers}}
+| {{tc|no|掉落}}
+| {{tc|no|掉落}}
+| {{in|be|nc=1}}被流动的水摧毁，不能放置在水中。
+|-
+| {{BlockLink|Camera}}{{only|Bedrock|Education|short=1}}
+| {{tc}}
+| {{tc|yes|流动的水或水源}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Chalkboard}}{{only|Education|short=1}}
+| {{tc|N/A}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Compound Creator}}{{only|Bedrock|Education|short=1}}
+| {{tc|N/A}}
+| {{tc|yes|流动的水}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Element Constructor}}{{only|Bedrock|Education|short=1}}
+| {{tc|N/A}}
+| {{tc|yes|流动的水}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Hardened Glass Pane}}{{only|Bedrock|Education|short=1}}
+| {{tc|N/A}}
+| {{tc|upcoming|水源}}
+|-
+| {{BlockLink|Lab Table}}{{only|Bedrock|Education|short=1}}
+| {{tc|N/A}}
+| {{tc|yes|流动的水}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Material Reducer}}{{only|Bedrock|Education|short=1}}
+| {{tc|N/A}}
+| {{tc|yes|流动的水}}
+| 放下时会移除流动的水，参见{{bug|MCPE-33345}}。
+|-
+| {{BlockLink|Underwater Torch}}{{only|Bedrock|Education|short=1}}
+| {{tc|N/A}}
+| {{tc|upcoming|水源}}
+|-
+| 所有其他[[方块]]
+| {{tc|No}}
+| {{tc|No}}
+|}
+
+可在{{bug|MC-125351}}获取Java版中含水机制的更多信息。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||2009年5月22日|link=wordofnotch:111386404|[[Notch]]指出“怪异形状”的方块将会似乎被空气充斥，并提出了可能的解决方案。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=18w07a|加入了[[气泡柱]]，可以含水。}}
+|{{HistoryLine|||dev=18w10c|加入了含水机制。
+|现在[[箱子]]、[[陷阱箱]]、[[楼梯]]、[[台阶]]、[[栅栏]]、[[圆石墙]]、[[铁栏杆]]以及[[玻璃板]]可以含水了。}}
+|{{HistoryLine|||dev=18w10d|现在[[末影箱]]、[[活板门]]、[[梯子]]以及[[告示牌]]可以含水了。}}
+|{{HistoryLine|||dev=18w14b|含水的方块现在不再在其被破坏时移除内部的水。<ref>{{bug|MC-125212|||Fixed}}</ref>}}
+|{{HistoryLine||1.14|dev=18w45a|加入了[[脚手架]]，可以含水。}}
+|{{HistoryLine|||dev=19w02a|加入了[[营火]]，可以含水。}}
+|{{HistoryLine|||dev=19w11a|现在含水木台阶、木楼梯、木栅栏和脚手架不再会被引燃烧毁。<ref>{{bug|MC-127016|||Fixed}}</ref>}}
+|{{HistoryLine||1.16|dev=20w15a|加入了[[灵魂营火]]，可以含水。}}
+|{{HistoryLine|||dev=20w18a|现在[[锁链]]可以含水了。}}
+|{{HistoryLine|||dev=20w21a|现在含水[[海泡菜]]、含水[[海草]]和含水高海草会遮挡天空光照。<ref>{{bug|MC-167076|||Fixed}}</ref>}}
+|{{HistoryLine||1.16.2|dev=20w30a|现在[[灯笼]]和[[灵魂灯笼]]可以含水了。}}
+|{{HistoryLine||2020年10月22日|link=https://web.archive.org/web/20201025215822/https://bugs.mojang.com/browse/MC-202638|一张泄露的截图被意外发布在一个漏洞报告中，该报告显示“waterlogged-rail”（含水的铁轨），后来被删除了。}}
+|{{HistoryLine||1.17|dev=20w45a|现在[[铁轨]]及其变种可以含水了。
+|加入了[[蜡烛]]和[[紫水晶簇]]，可以含水。}}
+|{{HistoryLine|||dev=20w48a|加入了[[滴水石锥]]，可以含水。}}
+|{{HistoryLine|||dev=20w49a|加入了[[幽匿感测体]]，可以含水。}}
+|{{HistoryLine|||dev=21w03a|加入了[[发光地衣]]，可以含水。}}
+|{{HistoryLine|||dev=21w05a|加入了[[小型垂滴叶]]和[[大型垂滴叶]]，可以含水。}}
+|{{HistoryLine|||dev=21w11a|现在[[避雷针]]可以含水了。}}
+|{{HistoryLine|||dev=21w17a|加入了[[垂根]]，可以含水。}}
+|{{HistoryLine||1.19|dev=exp1|加入了[[幽匿脉络]]和[[幽匿尖啸体]]，可以含水。}}
+|{{HistoryLine|||dev=22w11a|加入了[[红树根]]，可以含水。}}
+|{{HistoryLine|||dev=22w12a|现在[[树叶]]可以含水了。}}
+|{{HistoryLine||1.19.3|dev=22w45a|现在可以用水桶把水倒入含水方块了。<ref>{{bug|MC-127110|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.4|exp=update_1_20|dev=23w07a|加入了[[饰纹陶罐]]，可以含水。}}
+|{{HistoryLine||1.20|dev=23w12a|加入了[[校频幽匿感测体]]，可以含水。
+|饰纹陶罐不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.20.2|dev=23w31a|现在[[屏障]]可以含水了。}}
+|{{HistoryLine||1.20.3|exp=update_1_21|dev=23w46a|现在[[铜格栅]]可以含水了。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w12a|现在[[沉重核心]]可以含水了。}}
+|{{HistoryLine||1.21|dev=24w18a|23w46a和24w12a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.4|dev=24w46a|现在[[树脂团]]可以含水了。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了[[失水恶魂]]，可以含水。}}
+|{{HistoryLine||1.21.9|dev=25w31a|加入了[[铜箱子]]、[[铜傀儡像]]和[[展示架]]，可以含水。}}
+|{{HistoryLine|||dev=25w32a|加入了[[铜栏杆]]、[[铜链]]和[[铜灯笼]]，可以含水。}}
+|{{HistoryLine|||dev=25w33a|现在潜行时对可含水的方块{{ctrl|使用}}水桶会把水放置在这些方块旁边，而不是使这些方块含水。<ref>{{bug|MC-173730|||Fixed}}</ref>}}
+|{{HistoryLine||26.2|dev=snapshot-3|加入了[[硫黄尖锥]]，可以含水。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||2017年11月18日|link=https://www.youtube.com/watch?v=mAapz_nIC_Y&t=9m49s|展示了流动的水穿过橡木栅栏与草丛的图片，但可能不会实际加入游戏。}}
+|{{HistoryLine||1.2.13|dev=1.2.13.5|水可以与[[台阶]]、[[楼梯]]同处一个方块了。}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|水可以与大多数透明方块同处一个方块了，而不仅是台阶与楼梯。}}
+|{{HistoryLine||1.5.0|dev=1.5.0.4|加入了[[气泡柱]]，可以含水。}}
+|{{HistoryLine||?|大部分陆地植物不能再含水了。{{info needed|哪些？}}}}
+|{{HistoryLine||1.8.0|dev=?|铁轨及其变种不能含有流动的水了。}}
+|{{HistoryLine||1.9.0|dev=1.9.0.2|加入了[[砂轮]]和[[钟]]，可以含水。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|加入了[[切石机]]、[[营火]]和[[讲台]]，可以含水。}}
+|{{HistoryLine||1.16.0|dev=1.15.0.55|含水方块被[[活塞]]移动时将使其失去含水状态。}}
+|{{HistoryLine|||dev=1.16.0.57|加入了[[灵魂营火]]和[[锁链]]，可以含水。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.54|现在[[灯笼]]和[[灵魂灯笼]]可以含水了。}}
+|{{HistoryLine||1.16.210|exg=caves_and_cliffs_en|dev=1.16.210.56|加入了[[幽匿感测体]]，可以含水。}}
+|{{HistoryLine||1.16.220|exg=caves_and_cliffs_en|dev=1.16.220.52|现在[[避雷针]]可以含水了。}}
+|{{HistoryLine||1.17.0|exg=caves_and_cliffs_en|dev=1.16.230.50|加入了[[发光地衣]]，可以含水。}}
+|{{HistoryLine|||dev=1.17.0.50|加入了[[紫晶芽]]和[[紫水晶簇]]，可以含水。}}
+|{{HistoryLine|||exg=none|dev=1.17.0.52|1.16.220.52和1.17.0.50中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.20|[[垂根]]不再可含水。<ref name="MCPE-128957">{{bug|MCPE-128957|||Fixed}}</ref>}}
+|{{HistoryLine||1.18.0|exg=vanilla_experiments|dev=1.18.0.22|加入了[[幽匿脉络]]，可以含水。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|幽匿感测体和幽匿脉络不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.19.70|exg=next_major_update|dev=1.19.70.23|加入了[[饰纹陶罐]]，可以含水。}}
+|{{HistoryLine||1.19.80|exg=next_major_update|dev=1.19.80.22|加入了[[校频幽匿感测体]]，可以含水。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|校频幽匿感测体和饰纹陶罐不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.20.60|exg=updateAnnouncedLive2023|dev=1.20.60.21|现在[[铜格栅]]可以含水了。}}
+|{{HistoryLine||1.20.80|exg=updateAnnouncedLive2023|dev=1.20.80.22|加入了[[沉重核心]]，可以含水。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|1.20.60.21中的变更不再属于[[实验性玩法]]。
+|沉重核心不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.25|加入了[[树脂团]]，可以含水。}}
+|{{HistoryLine||1.21.80|exg=y_2025_drop_2|dev=1.21.80.25|加入了[[失水恶魂]]，可以含水。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.20|1.21.80.25中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.100|exg=y_2025_drop_3|dev=1.21.100.23|加入了[[铜箱子]]，可以含水。}}
+|{{HistoryLine||1.21.111|dev=1.21.110.20|1.21.100.23中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.110.22|现在[[展示架]]可以含水了。}}
+|{{HistoryLine|||dev=1.21.110.23|加入了[[铜栏杆]]、[[铜链]]和[[铜灯笼]]，可以含水。
+|现在[[铜傀儡像]]可以含水了。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.27|现在垂根再次可以含水。<ref name="MCPE-128957"/>}}
+|{{HistoryLine||26.30|dev=26.30.20|加入了[[硫黄尖锥]]，可以含水。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[en:Waterlogging]]
+[[es:Sumergimiento]]
+[[fr:Engorgement d'eau]]
+[[ja:水没]]
+[[ko:침수]]
+[[pt:Inundação]]
+[[ru:Затопляемость]]

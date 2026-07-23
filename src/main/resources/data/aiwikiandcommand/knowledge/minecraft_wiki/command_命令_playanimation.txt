@@ -1,0 +1,79 @@
+# 页面: 命令/playanimation
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/playanimation
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Missing information|用法和参数的详细描述}}{{exclusive|bedrock|education}}
+{{Infobox command
+|name=playanimation
+|oplevel=1
+|cheat=y
+}}
+在一个或多个实体上播放一次性[[动画]]。
+
+== 语法 ==
+:<code>playanimation <entity: target> <animation: string> [next_state: string] [blend_out_time: float] [stop_expression: string] [controller: string]</code>
+
+== 参数 ==
+{{argument|be=1|entity: target|CommandSelector<Actor>}}
+: 指定目标。
+: {{arg desc|be=CommandSelector<Actor>}}
+
+{{argument|be=1|animation: string|basic_string}}
+: 指定动画。
+: 由{{filepath|<''资源包''>/entity/<''实体名称''>.entity.json}}文件内<code>"minecraft:client_entity"."animations"</code>的参数定义。
+: {{arg desc|be=basic_string}}
+
+{{argument|be=1|next_state: string|basic_string}}
+: 指定动画播放完毕后的状态。
+: 由{{filepath|<''资源包''>/animation_controllers/<''控制器''>.json}}文件内<code>-{}-"animation_controllers"."<''控制器名称''>"."states"</code>的参数定义。
+: {{arg desc|be=basic_string}}
+
+{{argument|be=1|blend_out_time: float|float}}
+: 指定动画渐变的持续时间。
+: {{arg desc|be=float}}
+
+{{argument|be=1|stop_expression: string|basic_string}}
+: 指定动画播放终止的条件。
+: 应为[[基岩版Molang文档|Molang表达式]]。{{info needed}}
+: {{arg desc|be=basic_string}}
+
+{{argument|be=1|controller: string|basic_string}}
+: 指定动画控制器。
+: 由{{filepath|<''资源包''>/entity/<''实体名称''>.entity.json}}文件内<code>"minecraft:client_entity"."render_controllers"</code>的参数定义。
+: {{arg desc|be=basic_string}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|<code>entity: target</code>无法选中一个或多个实体（以名称指定的玩家必须上线）||fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* <code>/playanimation @p animation.player.attack.rotations none 1 "v.attack_body_rot_y=180;"</code>
+** 将最近玩家的身体翻转180度。
+* <code>/playanimation @p animation.armor_stand.riposte_pose</code>
+** 使最近的玩家开始盔甲架回刺反击动作的动画。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.100|dev=1.16.100.52|加入了{{cmd|playanimation|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/playanimation]]
+[[en:Commands/playanimation]]
+[[ja:コマンド/playanimation]]
+[[pt:Comandos/playanimation]]
+[[ru:Команды консоли/playanimation]]

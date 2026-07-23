@@ -1,0 +1,57 @@
+# 页面: Java版标签/函数
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%A0%87%E7%AD%BE/%E5%87%BD%E6%95%B0
+# 分类: 
+# 抓取时间: 2026-07-14 17:15:25
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+'''函数标签（Function Tags）'''是[[Java版函数|函数]]的组合。
+
+{{TOC|right}}
+
+== 使用 ==
+{{see also|Java版函数#通过函数标签}}
+
+函数标签可以在{{cmd|function}}命令中使用，该命令会按标签中首次出现的顺序运行标签中指定的所有函数。如果一个函数在标签及其子标签中被多次引用，它只会运行一次。
+
+游戏内部提供了两个特殊标签：
+* 在<code>#load</code>标签中列出的函数将在世界加载时或者服务器被启动时执行。每当数据包重载时，这些函数也将被执行。
+* 在<code>#tick</code>标签中列出的函数将在每一刻开始时执行。随着游戏刻递增，这些函数持续反复执行。
+
+原版数据包中没有使用这些函数标签。
+
+==示例==
+
+以下示例在<code>minecraft</code>命名空间下定义了<code>#load</code>标签，并加入<code>example:test</code>函数。
+
+{{file display|data/minecraft/tags/function/load.json|json|<nowiki>
+{
+  "values": [
+    "example:test"
+  ]
+}
+</nowiki>}}
+
+游戏将会在数据包加载时运行一次<code>example:test</code>函数。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=17w49b|加入了{{cd|#tick}}。}}
+|{{HistoryLine|||dev=18w01a|加入了{{cd|#load}}。}}
+|{{HistoryLine||1.14.1|dev=pre1|函数标签现在按照文件内排列的顺序执行。}}
+|{{HistoryLine||1.19.3|dev=22w46a|修复了<code>#tick</code>在<code>#load</code>前执行的漏洞。<ref>{{bug|MC-187539|||Fixed}}</ref>}}
+|{{HistoryLine||1.21|dev=24w21a|将{{filepath|functions}}目录重命名为{{filepath|function}}。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[en:Function tag (Java Edition)]]
+[[fr:Tag de fonction (Édition Java)]]
+[[uk:Теґ функцій (Java Edition)]]

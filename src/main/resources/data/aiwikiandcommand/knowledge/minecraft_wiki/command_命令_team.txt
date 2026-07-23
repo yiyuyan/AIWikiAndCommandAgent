@@ -1,0 +1,164 @@
+# 页面: 命令/team
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/team
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有特性, 命令
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{about|管理队伍的命令|队伍的具体特性|队伍}}{{exclusive|java}}
+{{Infobox command
+|name=team
+|oplevel=2
+}}
+
+管理队伍。
+
+== 语法 ==
+: <code>team list [<team>]</code>
+:: 列出所有队伍，同时列出显示名称与包含的实体。可选的<code><team></code>参数可指定 只列出一个队伍。
+: <code>team add <team> [<displayName>]</code>
+:: 以给予的名称和显示名称创建队伍。<code><displayName></code>在未指定时默认为<code><team></code>的值。
+: <code>team remove <team></code>
+:: 移除指定队伍。
+: <code>team empty <team></code>
+:: 将队伍内的所有实体移出。
+: <code>team join <team> [<members>]</code>
+:: 使指定实体加入指定队伍，若未指定实体，则将命令的执行者加入该队伍。
+: <code>team leave <members></code>
+:: 使指定实体离开其所在队伍。
+: <code>-{}-team modify <team> <''选项''> <''值''></code>
+:: 修改指定的队伍的选项，详见下。
+
+== 参数 ==
+{{argument|team|team}}（<code>list</code>、<code>remove</code>、<code>empty</code>、<code>join</code>和<code>modify</code>模式下）
+: 指定队伍的名称。
+: {{arg desc|je=team}}
+
+{{argument|team|string}}（<code>add</code>模式下）
+: 指定新队伍的名称。
+: {{arg desc|je=string|type=word}}
+
+{{argument|displayName|component}}
+: 指定队伍被显示时的名称。
+: {{arg desc|je=component}}
+
+{{argument|members|score_holder}}
+: 指定需要加入或离开的实体。
+: {{arg desc|je=score_holder|amount=multiple}}
+
+<code>-{}-<''选项''></code>
+:: 指定要更改的选项。
+:: 必须为以下内容之一：
+::*<code>displayName</code>：设置队伍被显示时的名称。
+::*<code>color</code>：决定队伍与玩家在聊天栏、头顶、Tab菜单、侧边栏的颜色，以及实体带有[[发光]]效果时的描边颜色。
+::*<code>friendlyFire</code>：启用/禁用同队伍玩家互伤。对队伍中的非玩家实体无效。
+::*<code>seeFriendlyInvisibles</code>：决定玩家观察同队伍的隐身玩家时，显示为半透明还是完全不可见。
+::*<code>nametagVisibility</code>：决定头上的名称标签是否可见。
+::*<code>deathMessageVisibility</code>：控制玩家死亡消息的可见性。
+::*<code>collisionRule</code>：控制队伍中实体的碰撞方式。
+::*<code>prefix</code>：修改玩家名称前缀。
+::*<code>suffix</code>：修改玩家名称后缀。
+
+<code><''值''></code>
+: 指定<code>-{}-<''选项''></code>要更改为的值。
+: 下为每个选项可用的值：
+:* 选项为<code>displayName</code>时：
+:** {{argument|displayName|component}} - 指定队伍被显示时的名称。{{arg desc|je=component}}
+:* 选项为<code>color</code>时：
+:** {{argument|value|color}} - {{arg desc|je=team_color}}
+:** <code>reset</code> - 默认的颜色与格式显示。
+:*** 默认为<code>reset</code>。
+:* 选项为<code>friendlyFire</code>时：
+:** {{argument|allowed|boolean}} - {{arg desc|je=bool}}
+:*** <code>true</code> - （默认）启用同队伍玩家互伤。
+:*** <code>false</code> - 禁用同队伍玩家互伤。
+:* 选项为<code>seeFriendlyInvisibles</code>时：
+:** {{argument|allowed|boolean}} - {{arg desc|je=bool}}
+:*** <code>true</code> - （默认）玩家观察同队伍的隐身玩家时显示为半透明。
+:*** <code>false</code> - 玩家无法看到同队伍的隐身玩家。
+:* 选项为<code>nametagVisibility</code>时：
+:** <code>never</code> - 玩家头上的名称对所有玩家隐藏。
+:** <code>hideForOtherTeams</code> - 玩家头上的名称只对同队伍玩家显示。
+:** <code>hideForOwnTeam</code> - 玩家头上的名称只对非同队玩家显示。
+:** <code>always</code> - （默认）玩家头上的名称对所有玩家显示。
+:* 选项为<code>deathMessageVisibility</code>时：
+:** <code>never</code> - 对所有玩家隐藏死亡消息。
+:** <code>hideForOtherTeams</code> - 对非同队玩家隐藏死亡消息。
+:** <code>hideForOwnTeam</code> - 对同队伍玩家隐藏死亡消息。
+:** <code>always</code> - （默认）死亡消息对所有玩家可见。
+:* 选项为<code>collisionRule</code>时：
+:** <code>always</code> - （默认）正常碰撞。
+:** <code>never</code> - 该队伍中的实体不可碰撞。
+:** <code>pushOtherTeams</code> - 该队伍中的实体只能与同队伍中的实体碰撞，与字面意义相反。<ref name="bug">{{bug|MC-87984}}</ref>
+:** <code>pushOwnTeam</code> - 该队伍中的实体只能与非同队的实体碰撞，与字面意义相反。<ref name="bug"></ref>
+:* 选项为<code>prefix</code>时：
+:**{{argument|prefix|component}} - 指定将显示的前缀。{{arg desc|je=component}}
+:* 选项为<code>suffix</code>时：
+:** {{argument|suffix|component}} - 指定将显示的后缀。{{arg desc|je=component}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/team list <team><br>/team remove ...<br>/team empty ...<br>/team join ...<br>/team modify ...|名为<code><team></code>的队伍不存在|fail}}
+{{Result table|cmd=/team add ...|已存在与<code><team></code>同名的队伍}}
+{{Result table|cmd=/team empty ...|<code><team></code>中已无实体}}
+{{Result table|cmd=/team join ...|<code><members></code>未被指定且命令的执行者不是实体}}
+{{Result table|<code><members></code>无法选中一个或多个实体}}
+{{Result table|cmd=/team leave ...|<code><members></code>无法选中一个或多个实体}}
+{{Result table|cmd=/team modify displayName ...<br>/team modify color ...<br>/team modify friendlyFire ...<br>/team modify seeFriendlyInvisibles ...<br>/team modify nametagVisibility ...<br>/team modify deathMessageVisibility ...<br>/team modify collisionRule ...|指定值与当前值一致}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/team list|执行成功|1|1|存在的队伍总数}}
+{{Output table|cmd=/team list <team>|执行成功|1|1|队伍<code><team></code>中的成员数量}}
+{{Output table|cmd=/team add ...<br>/team remove ...|执行成功|1|1|执行后存在的队伍总数}}
+{{Output table|cmd=/team empty ...|执行成功|1|1|执行前队伍中的成员总数}}
+{{Output table|cmd=/team join|执行成功|1|1|1}}
+{{Output table|cmd=/team join <members>|执行成功|1|1|指定的实体数量{{until|JE 26.3}}<br>受到影响的实体数量{{upcoming|JE 26.3}}}}
+{{Output table|cmd=/team leave ...|执行成功|1|1|指定的实体数量{{until|JE 26.3}}<br>受到影响的实体数量{{upcoming|JE 26.3}}}}
+{{Output table|cmd=/team modify displayName ...<br>/team modify color ...<br>/team modify friendlyFire ...<br>/team modify seeFriendlyInvisibles ...<br>/team modify nametagVisibility ...<br>/team modify deathMessageVisibility ...<br>/team modify collisionRule ...|执行成功|1|1|0}}
+{{Output table|cmd=/team modify prefix ...<br>/team modify suffix ...|执行成功|1|1|1}}
+{{Output table}}
+
+== 示例 ==
+
+* 创建新的队伍，ID为<code>my_team</code>：<code>/team add my_team</code>
+* 将所有玩家添加至<code>my_team</code>队伍中：<code>/team join my_team @a</code>
+* 列出<code>my_team</code>队伍中的所有成员：<code>/team list my_team</code>
+* 关闭<code>my_team</code>队伍的同队伍玩家互伤：<code>/team modify my_team friendlyFire false</code>
+* 将随机玩家移出其所在的队伍：<code>/team leave @r</code>
+* 清空<code>my_team</code>队伍中的所有成员：<code>/team empty my_team</code>
+* 删除队伍<code>my_team</code>：<code>/team remove my_team</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=17w45a|加入了{{cmd|team|link=none}}。}}
+|{{HistoryLine|||dev=18w20a|加入了{{cmd|team option <team> prefix <prefix>|link=none}}。
+|加入了{{cmd|team option <team> suffix <suffix>|link=none}}。}}
+|{{HistoryLine|||dev=pre8|{{cmd|team option|link=none}}现在为{{cmd|team modify|link=none}}。
+|加入了{{cmd|team modify <teamName> displayName|link=none}}。
+|队伍名称现在是文本组件，而不是原始字符串。}}
+|{{HistoryLine||1.18|dev=21w37a|移除了队伍名称16个字符、<code><member></code>参数40个字符的最大长度限制。}}
+|{{HistoryLine||1.21.5|dev=25w05a|现在{{cmd|team|link=none}}中的文本组件会以<code>@s</code>为执行者[[文本组件#组件解析|解析]]。}}
+|{{HistoryLine||26.2|dev=snapshot-5|颜色参数现在不再兼容非蛇形命名的颜色名称。}}
+|{{HistoryLine||26.3|dev=snapshot-1|<code>join</code>和<code>leave</code>子命令现在会输出实际受到影响的实体数目，不再计入队伍未改变的实体。}}
+}}
+
+== 参见 ==
+*{{cmd|scoreboard}} — 管理记分板
+*{{cmd|tag}} – 以字符串标记实体
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/team]]
+[[en:Commands/team]]
+[[ja:コマンド/team]]
+[[pt:Comandos/team]]
+[[ru:Команды консоли/team]]

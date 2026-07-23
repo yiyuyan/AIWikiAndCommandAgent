@@ -1,0 +1,527 @@
+# 页面: 大厅
+# 来源: https://zh.minecraft.wiki/w/%E5%A4%A7%E5%8E%85
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:01
+# 原始 Wikitext 内容:
+
+{{for|同名生物群系|大厅（生物群系）}}
+{{Joke feature|update=25w14craftmine|nowarn=1}}
+{{Infobox structure
+|image=none
+|biome={{EnvLink|Overworld}}
+|blocks=见{{slink||构成方块}}
+|canspawn=否
+}}
+
+'''大厅（Hub）'''结构是玩家的出生点，也是游戏玩法的核心房间。
+
+== 生成 ==
+大厅自然生成于[[主世界]]中。
+
+== 结构 ==
+[[File:Hub Center.png|thumb|300px|大厅中心房间]]
+大厅总体上包括主房间和小房间两部分。
+
+主房间包括中心房间和一条回忆长廊，主要由[[石头]]、[[天空（方块）|天空]]和[[淡灰色染色玻璃]]等方块构成，是推进游戏进度的核心场所。
+
+小房间不会主动生成，玩家需要使用[[微光钥匙]]打开[[微光之门]]以解锁小房间。
+
+=== 结构目录 ===
+大厅的所有结构均位于文件夹<samp>[[client.jar]]/data/minecraft/structure/hub</samp>中。
+
+{| class="collapsible collapsed collapse-button-none" data-description="结构目录"
+! 结构目录
+|-
+|<div class="file-hierarchy treeview">
+* hub
+** center_base.nbt
+** center_hat.nbt
+** corridor_base.nbt
+** corridor_hat.nbt
+** room
+*** barrels.nbt
+*** boiler.nbt
+*** carpet.nbt
+*** corridor_simple.nbt
+*** fountain.nbt
+*** grassy_h.nbt
+*** hanging.nbt
+*** house.nbt
+*** labyrinth.nbt
+*** pool.nbt
+*** ship.nbt
+*** simple.nbt
+*** stairs.nbt
+*** storage1.nbt
+*** storage2.nbt
+*** sugar_h.nbt
+*** test.nbt
+*** tree.nbt
+*** trophy.nbt
+*** tunnel.nbt
+*** useless.nbt
+*** wheat_h.nbt
+*** workshop.nbt
+</div>
+|}
+
+=== 构成 ===
+==== 主房间 ====
+中心房间的长廊部分与回忆长廊存在天空墙，天空墙向上无限延伸，直到世界高度限制下16格（默认为Y=303）。
+
+{| class="wikitable collapsible collapsed"
+! scope="col" style="width: 250px" | 结构名称 
+! scope="col" style="width: 250px" | 描述
+! scope="col" style="width: 250px" | 包含
+! scope="col" style="width: 250px" | 图片
+|-
+| <code>hub/center_base</code>
+| 大厅的中心房间。
+* 玩家进入世界或返回大厅时进入的房间。
+* 悬挂式云杉木告示牌正面的文字为“Memory”“Lane”（回忆长廊）。
+| 
+1895 {{BlockLink|Bedrock}}<br>
+594 {{BlockLink|Stone}}<br>
+180 {{BlockLink|Light Gray Stained Glass}}<br>
+6 {{BlockLink|id=Mine Revisitor|矿境回访器}}<br>
+2 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+1 {{BlockLink|id=Mine Crafter|矿境合成台}}<br>
+1 {{BlockLink|Spruce Hanging Sign}}
+| [[File:Hub Center Base.png|250px]]
+|-
+| <code>hub/center_hat</code>
+| 技术性结构，游戏会沿Y正方向不断生成拼接，形成天空墙的一部分。
+| 
+751 {{BlockLink|Bedrock}}<br>
+144 {{BlockLink|Stone}}<br>
+64 {{BlockLink|Light Gray Stained Glass}}
+| [[File:Hub Center Hat.png|250px]]
+|-
+| <code>hub/corridor_base</code>
+| 回忆长廊的片段，游戏会沿X负方向不断生成以拼接成无限的长廊。
+| 
+720 {{BlockLink|Bedrock}}<br>
+416 {{BlockLink|Stone}}<br>
+128 {{BlockLink|Light Gray Stained Glass}}<br>
+8 {{BlockLink|id=Mine Revisitor|矿境回访器}}
+| [[File:Hub Corridor Base.png|250px]]
+|-
+| <code>hub/corridor_hat</code>
+| 技术性结构，游戏会沿Y正方向不断生成拼接，形成天空墙的一部分。
+| 
+512 {{BlockLink|Bedrock}}<br>
+144 {{BlockLink|Stone}}<br>
+64 {{BlockLink|Light Gray Stained Glass}}
+| [[File:Hub Corridor Hat.png|250px]]
+|}
+
+游戏生成这些结构时，会将所有的基岩替换为天空。
+
+==== 小房间 ====
+{| class="wikitable collapsible collapsed"
+! scope="col" style="width: 300px" | 结构名称 
+! scope="col" style="width: 300px" | 描述
+! scope="col" style="width: 300px" | 包含<!--
+! scope="col" style="width: 200px" | 图片-->
+|-
+| <code>hub/room/barrels</code>
+| 地板有五个木桶的小房间。
+| 
+302 {{BlockLink|Bedrock}}<br>
+180 {{BlockLink|Light Gray Stained Glass}}<br>
+24 {{BlockLink|Dark Oak Planks}}<br>
+5 {{BlockLink|Barrel}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/boiler</code>
+| 拥有维度控制器的小房间。
+* 墙上的橡木告示牌正面写分别写有如下文字：
+** “Move”“Along”
+** “Authorized”“Personnel”“Only”
+** “Nothing”“To”“See”“Here”
+* 箱子里有7个[[天空盒]]，对应的天空分别为：
+** Overworld - 主世界效果
+** The End - 末地效果
+** Smol - 全景图
+** Hub（Classic） - 基岩纹理
+** Missing - 无效纹理
+** Bad Idea - 方块纹理图集纹理
+** True Sky - 天空物品纹理
+| 
+291 {{BlockLink|Bedrock}}<br>
+115 {{BlockLink|Block Of Copper}}<br>
+6 {{BlockLink|Iron Bars}}<br>
+3 {{BlockLink|Oak Wall Sign}}<br>
+2 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+1 {{BlockLink|Copper Door}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|id=Dimension Control|维度控制器}}
+|-
+| <code>hub/room/carpet</code>
+| 包含羊毛和全部音乐唱片的房间。
+* 在这个房间中的其中一个木桶内有游戏内全部的音乐唱片。
+| 
+890 {{BlockLink|Bedrock}}<br>
+44 {{BlockLink|Oak Planks}}<br>
+28 {{BlockLink|White Wool}}<br>
+24 {{BlockLink|White Carpet}}<br>
+16 {{BlockLink|Lime Carpet}}<br>
+12 {{BlockLink|Chain}}<br>
+8 {{BlockLink|Black Carpet}}<br>
+6 {{BlockLink|Iron Bars}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+4 {{BlockLink|Lantern}}<br>
+3 {{BlockLink|Barrel}}<br>
+1 {{BlockLink|Jukebox}}
+|-
+| <code>hub/room/corridor_simple</code>
+| 两侧有玻璃的小走廊。
+| 
+365 {{BlockLink|Bedrock}}<br>
+25 {{BlockLink|Stone}}<br>
+16 {{BlockLink|Glass}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/fountain</code>
+| 砂岩喷泉房间。
+| 
+890 {{BlockLink|Bedrock}}<br>
+73 {{BlockLink|Water}}<br>
+44 {{BlockLink|Sandstone}}<br>
+20 {{BlockLink|Sandstone Stairs}}<br>
+12 {{BlockLink|Chiseled Sandstone}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/grassy_h</code>
+| 长有草丛的草地房间。
+| 
+378 {{BlockLink|Bedrock}}<br>
+30 {{BlockLink|Grass Block}}<br>
+21 {{BlockLink|Short Grass}}<br>
+19 {{BlockLink|Block Of Copper}}<br>
+8 {{BlockLink|Tall Grass}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/hanging</code>
+| 悬挂着四个木桶的房间。
+| 
+890 {{BlockLink|Bedrock}}<br>
+44 {{BlockLink|Stone}}<br>
+17 {{BlockLink|Oak Planks}}<br>
+4 {{BlockLink|Barrel}}<br>
+4 {{BlockLink|Chain}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/house</code>
+| 一座小房子，里面的讲台上有写有文字的书与笔。
+* 书与笔的内容如下：
+:Dear Bob
+:I hope you are doing well!
+
+:I heard some disturbing news and I wanted to ask what happened to 
+| 
+1164 {{BlockLink|Bedrock}}<br>
+204 {{BlockLink|Cobblestone}}<br>
+97 {{BlockLink|Stone}}<br>
+45 {{BlockLink|Spruce Log}}<br>
+35 {{BlockLink|Spruce Trapdoor}}<br>
+29 {{BlockLink|Dirt}}<br>
+23 {{BlockLink|Spruce Wood}}<br>
+8 {{BlockLink|Spruce Fence}}<br>
+6 {{BlockLink|Dirt Path}}<br>
+5 {{BlockLink|Purple Carpet}}<br>
+5 {{BlockLink|Wall Torch}}<br>
+4 {{BlockLink|Glass Pane}}<br>
+4 {{BlockLink|Ladder}}<br>
+4 {{BlockLink|Large Fern}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+3 {{BlockLink|Poppy}}<br>
+2 {{BlockLink|Cobblestone Stairs}}<br>
+2 {{BlockLink|Spruce Door}}<br>
+1 {{BlockLink|Cobblestone Wall}}<br>
+1 {{BlockLink|Lectern}}<br>
+1 {{BlockLink|Potted Poppy}}<br>
+1 {{BlockLink|Spruce Planks}}<br>
+1 {{BlockLink|Torch}}<br>
+1 {{BlockLink|Water}}
+|-
+| <code>hub/room/labyrinth</code>
+| 小型迷宫房间。
+* 迷宫尽头的箱子内有18个等级为钻石、装有闪电束的生物奖杯。
+| 
+663 {{BlockLink|Bedrock}}<br>
+2 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+1 {{BlockLink|Chest}}
+|-
+| <code>hub/room/pool</code>
+| 带有深水池的房间。
+* 墙上的绯红木告示牌正面的文字分别为：
+** “•”
+** “nothing”
+| 
+1988 {{BlockLink|Bedrock}}<br>
+1825 {{BlockLink|Water}}<br>
+96 {{BlockLink|Prismarine}}<br>
+48 {{BlockLink|Sea Lantern}}<br>
+48 {{BlockLink|Prismarine Stairs}}<br>
+8 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+2 {{BlockLink|Crimson Wall Sign}}
+|-
+| <code>hub/room/ship</code>
+| 类似于末地船的模型房间。
+* 悬挂式丛林木告示牌正面的文字为“got”“footprints?”。 
+| 
+3383 {{BlockLink|Bedrock}}<br>
+553 {{BlockLink|Purpur Block}}<br>
+175 {{BlockLink|Purpur Stairs}}<br>
+97 {{BlockLink|Purpur Pillar}}<br>
+36 {{BlockLink|End Stone Bricks}}<br>
+26 {{BlockLink|Obsidian}}<br>
+14 {{BlockLink|Ladder}}<br>
+9 {{BlockLink|Warped Planks}}<br>
+7 {{BlockLink|Magenta Stained Glass}}<br>
+6 {{BlockLink|Chest}}<br>
+6 {{BlockLink|End Rod}}<br>
+5 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+1 {{BlockLink|Dragon Wall Head}}<br>
+1 {{BlockLink|Jungle Hanging Sign}}
+|-
+| <code>hub/room/simple</code>
+| 地板为红石块与绿宝石块的小型房间。<br>由于正常游戏流程不会提供解锁此结构的微光钥匙，故本结构无法正常生成。
+| 
+140 {{BlockLink|Bedrock}}<br>
+10 {{BlockLink|Block Of Emerald}}<br>
+8 {{BlockLink|Block Of Redstone}}<br>
+5 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/stairs</code>
+| 被楼梯环绕的房间。
+* 房间中心的生物奖杯等级为下界合金，装有带有光效的羊驼吐沫。需要连跳才能进入。
+| 
+1407 {{BlockLink|Bedrock}}<br>
+64 {{BlockLink|Brick Stairs}}<br>
+14 {{BlockLink|Ladder}}<br>
+8 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+4 {{BlockLink|Bricks}}<br>
+2 {{BlockLink|Brick Slab}}<br>
+1 {{BlockLink|id=Mob Trophy|生物奖杯}}
+|-
+| <code>hub/room/storage1</code>
+| 小型储物间。
+| 
+312 {{BlockLink|Bedrock}}<br>
+71 {{BlockLink|Oak Planks}}<br>
+16 {{BlockLink|Chest}}<br>
+16 {{BlockLink|Oak Stairs}}<br>
+12 {{BlockLink|Glass}}<br>
+8 {{BlockLink|Stone}}<br>
+2 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/storage2</code>
+| 更复杂的储物间，顶层有一个钻石块。
+* 白桦木告示牌正面的文字为“TODO”“fix this”“empty space”。
+* 橡木告示牌正面的文字分别为“whoops”“run out of time”“let's just”“cover it”和“tell you what”“I'll give you this”“block if you”“don't tell anyone”。
+| 
+478 {{BlockLink|Bedrock}}<br>
+174 {{BlockLink|Sandstone}}<br>
+84 {{BlockLink|Sandstone Stairs}}<br>
+71 {{BlockLink|Oak Planks}}<br>
+24 {{BlockLink|Glowstone}}<br>
+12 {{BlockLink|Chest}}<br>
+6 {{BlockLink|Chiseled Sandstone}}<br>
+2 {{BlockLink|Oak Sign}}<br>
+2 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+1 {{BlockLink|Birch Sign}}<br>
+1 {{BlockLink|Block Of Diamond}}
+|-
+| <code>hub/room/sugar_h</code>
+| 一块甘蔗田。
+| 
+378 {{BlockLink|Bedrock}}<br>
+19 {{BlockLink|Block Of Copper}}<br>
+15 {{BlockLink|Sugar Cane}}<br>
+15 {{BlockLink|Water}}<br>
+14 {{BlockLink|Coarse Dirt}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+1 {{BlockLink|Dirt}}
+|-
+| <code>hub/room/test</code>
+| 被屏障包围的房间，中间有一根柱子和一个箭头。<br>由于正常游戏流程不会提供解锁此结构的微光钥匙，故本结构无法正常生成。
+| 
+1300 {{BlockLink|Barrier}}<br>
+382 {{BlockLink|Bedrock}}<br>
+11 {{BlockLink|Birch Wood}}<br>
+5 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+1 {{BlockLink|Block Of Emerald}}<br>
+1 {{BlockLink|Block Of Redstone}}
+|-
+| <code>hub/room/tree</code>
+| 中间有一棵橡树的房间。
+| 
+890 {{BlockLink|Bedrock}}<br>
+53 {{BlockLink|Oak Leaves}}<br>
+44 {{BlockLink|Stone}}<br>
+8 {{BlockLink|Grass Block}}<br>
+6 {{BlockLink|Oak Log}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+1 {{BlockLink|Dirt}}
+|-
+| <code>hub/room/trophy</code>
+| 有圆石过道和空玻璃展柜的房间。
+| 
+700 {{BlockLink|Bedrock}}<br>
+88 {{BlockLink|Glass}}<br>
+51 {{BlockLink|Cobblestone}}<br>
+8 {{BlockLink|Glowstone}}<br>
+2 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/tunnel</code>
+| 一条笔直过道，上方有一条绊线。
+| 
+380 {{BlockLink|Bedrock}}<br>
+14 {{BlockLink|Smooth Stone}}<br>
+14 {{BlockLink|Tripwire}}<br>
+2 {{BlockLink|Tripwire Hook}}<br>
+2 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/useless</code>
+| 拥有不包含信标的3层金块底座的房间。
+| 
+890 {{BlockLink|Bedrock}}<br>
+83 {{BlockLink|Block Of Gold}}<br>
+44 {{BlockLink|Block Of Iron}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}
+|-
+| <code>hub/room/wheat_h</code>
+| 一块小麦田。
+| 
+378 {{BlockLink|Bedrock}}<br>
+26 {{BlockLink|Farmland}}<br>
+26 {{BlockLink|Wheat}}<br>
+19 {{BlockLink|Block Of Copper}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+4 {{BlockLink|Water}}
+|-
+| <code>hub/room/workshop</code>
+| 一个圆石房间。
+* 与[[20w14∞]]彩蛋维度的圆石房间相似。
+| 
+474 {{BlockLink|Bedrock}}<br>
+238 {{BlockLink|Cobblestone}}<br>
+16 {{BlockLink|Glass}}<br>
+4 {{ItemLink|id=Shimmering Door|微光之门}}<br>
+4 {{BlockLink|Wall Torch}}
+|}
+
+游戏生成这些结构时，会将所有的基岩替换为天空。
+
+=== 构成方块 ===
+{| class="wikitable collapsible collapsed"
+! 房间类型 !! 方块
+|-
+| 主房间
+| <div style="-moz-column-count: 3; -webkit-column-count: 3; column-count: 3;">
+* {{BlockLink|Light Gray Stained Glass}}
+* {{BlockLink|id=Mine Crafter|矿境合成台}}
+* {{BlockLink|id=Mine Revisitor|矿境回访器}}
+* {{ItemLink|id=Shimmering Door|微光之门}}
+* {{BlockLink|id=Sky|link=天空（方块）|天空}}
+* {{BlockLink|Spruce Hanging Sign}}
+* {{BlockLink|Stone}}
+</div>
+|-
+| 小房间
+| <div style="-moz-column-count: 3; -webkit-column-count: 3; column-count: 3;">
+* {{BlockLink|Barrel}}
+* {{BlockLink|Barrier}}
+* {{BlockLink|Black Carpet}}
+* {{BlockLink|Birch Sign}}
+* {{BlockLink|Block Of Copper}}
+* {{BlockLink|Block Of Diamond}}
+* {{BlockLink|Block Of Emerald}}
+* {{BlockLink|Block Of Gold}}
+* {{BlockLink|Block Of Iron}}
+* {{BlockLink|Block Of Redstone}}
+* {{BlockLink|Brick Slab}}
+* {{BlockLink|Brick Stairs}}
+* {{BlockLink|Birch Wood}}
+* {{BlockLink|Bricks}}
+* {{BlockLink|Chiseled Sandstone}}
+* {{BlockLink|Chain}}
+* {{BlockLink|Chest}}
+* {{BlockLink|Cobblestone}}
+* {{BlockLink|Cobblestone Stairs}}
+* {{BlockLink|Cobblestone Wall}}
+* {{BlockLink|Copper Door}}
+* {{BlockLink|Coarse Dirt}}
+* {{BlockLink|Crimson Wall Sign}}
+* {{BlockLink|Dark Oak Planks}}
+* {{BlockLink|id=Dimension Control|维度控制器}}
+* {{BlockLink|Dirt}}
+* {{BlockLink|Dirt Path}}
+* {{BlockLink|Dragon Wall Head}}
+* {{BlockLink|End Rod}}
+* {{BlockLink|End Stone Bricks}}
+* {{BlockLink|Farmland}}
+* {{BlockLink|Glass}}
+* {{BlockLink|Glass Pane}}
+* {{BlockLink|Glowstone}}
+* {{BlockLink|Grass Block}}
+* {{BlockLink|Jukebox}}
+* {{BlockLink|Jungle Hanging Sign}}
+* {{BlockLink|Iron Bars}}
+* {{BlockLink|Ladder}}
+* {{BlockLink|Lantern}}
+* {{BlockLink|Large Fern}}
+* {{BlockLink|Light Gray Stained Glass}}
+* {{BlockLink|Lime Carpet}}
+* {{BlockLink|Magenta Stained Glass}}
+* {{BlockLink|id=Mob Trophy|生物奖杯}}
+* {{BlockLink|Oak Leaves}}
+* {{BlockLink|Oak Log}}
+* {{BlockLink|Oak Planks}}
+* {{BlockLink|Oak Sign}}
+* {{BlockLink|Oak Stairs}}
+* {{BlockLink|Oak Wall Sign}}
+* {{BlockLink|Obsidian}}
+* {{BlockLink|Purple Carpet}}
+* {{BlockLink|Poppy}}
+* {{BlockLink|Potted Poppy}}
+* {{BlockLink|Prismarine}}
+* {{BlockLink|Prismarine Stairs}}
+* {{BlockLink|Purpur Block}}
+* {{BlockLink|Purpur Pillar}}
+* {{BlockLink|Purpur Stairs}}
+* {{BlockLink|Sandstone}}
+* {{BlockLink|Sandstone Stairs}}
+* {{BlockLink|Sea Lantern}}
+* {{ItemLink|id=Shimmering Door|微光之门}}
+* {{BlockLink|Short Grass}}
+* {{BlockLink|id=Sky|link=天空（方块）|天空}}
+* {{BlockLink|Smooth Stone}}
+* {{BlockLink|Spruce Door}}
+* {{BlockLink|Spruce Fence}}
+* {{BlockLink|Spruce Log}}
+* {{BlockLink|Spruce Planks}}
+* {{BlockLink|Spruce Trapdoor}}
+* {{BlockLink|Spruce Wood}}
+* {{BlockLink|Stone}}
+* {{BlockLink|Sugar Cane}}
+* {{BlockLink|Tall Grass}}
+* {{BlockLink|Torch}}
+* {{BlockLink|Tripwire}}
+* {{BlockLink|Tripwire Hook}}
+* {{BlockLink|Wall Torch}}
+* {{BlockLink|Warped Planks}}
+* {{BlockLink|Water}}
+* {{BlockLink|Wheat}}
+* {{BlockLink|White Wool}}
+* {{BlockLink|White Carpet}}
+</div>
+|}
+
+== 导航 ==
+{{Navbox jokes|25w14craftmine}}
+
+[[Category:环境]]
+[[Category:结构]]

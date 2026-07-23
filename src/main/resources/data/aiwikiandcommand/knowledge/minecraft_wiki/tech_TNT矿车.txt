@@ -1,0 +1,264 @@
+# 页面: TNT矿车
+# 来源: https://zh.minecraft.wiki/w/TNT%E7%9F%BF%E8%BD%A6
+# 分类: Java版独有信息, 储物, 可再生资源, 基岩版独有信息, 实体, 物品, 载具, 需要检查源代码
+# 抓取时间: 2026-07-14 17:18:25
+# 原始 Wikitext 内容:
+
+{{Infobox item
+|image=Minecart_with_TNT.png
+|invimage=Minecart with TNT
+|size=高度：0.7格<br>宽度：0.98格
+}}
+
+'''TNT矿车（Minecart with TNT）'''是一种装载着[[TNT]]的[[矿车]]，能够造成[[爆炸]]。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|TNT
+|Minecart
+|Output= Minecart with TNT
+|type= Transportation
+|foot=1
+}}
+
+== 用途 ==
+以下情况会激活TNT矿车，TNT矿车会在{{convert|80}}后发生爆炸：
+* 经过已激活的[[激活铁轨]]。
+* {{in|bedrock}}被玩家{{control|使用}}[[打火石]]<ref>{{bug|MC-108558}}</ref>或具有[[火焰附加]]魔咒的物品，包括[[附魔书]]。<ref>{{bug|MCPE-235016}}</ref>
+
+以下情况会激活TNT矿车，且爆炸时间设置为0到{{convert|38}}之间：
+* 在运行时被摧毁，除非伤害来源是创造模式的玩家。
+* {{in|java}}被[[小火球]]摧毁。
+* 被[[火]]、[[熔岩]]或爆炸摧毁。
+
+以下情况会导致TNT矿车无延迟地立即爆炸：
+* 下落超过3格后摔落，且没有着陆在任意种类的[[铁轨（消歧义）|铁轨]]上。
+* 以过快的速度{{ctc|多大的速度？}}过弯、撞上轨道旁的固体阻挡碰撞箱（在之前的移动方向上）。
+* 被[[着火]]的[[箭]]{{only|be|for=、[[三叉戟]]、[[鸡蛋]]或[[雪球]]}}击中。
+* 被推进方块或实体内部并具有速度。
+
+若TNT矿车被摧毁但没有触发爆炸，会掉落1个TNT矿车。
+
+{{in|java}}TNT矿车的爆炸可以携带伤害来源的标签，而{{in|bedrock}}则始终为无来源伤害。
+
+=== Java版 ===
+TNT矿车造成的爆炸的爆炸威力基础为4，并增加0到1.5倍''威力增加量''之间的一个随机值，但''威力增加量''不会超过5，随机范围上限最高不超过7.5。
+* 如果TNT矿车是被激活铁轨或伤害触发的，那么''威力增加量''是TNT矿车的米每秒垂直速度。
+* 如果TNT矿车是被着火的箭引爆的，''威力增加量''是箭的米每秒速度。
+* 如果TNT矿车是摔落而爆炸的，那么''威力增加量''是摔落距离的十分之一。
+
+TNT矿车最高能造成爆炸威力为11.5的爆炸，该爆炸威力下100%接触率时在简单、普通、困难难度分别能造成{{AutoDmg|162|info=|join=、}}爆炸伤害，是游戏中最致命的伤害来源之一。
+
+因为经过激活的[[激活铁轨]]而被引爆的TNT矿车爆炸范围内的全部种类[[铁轨（消歧义）|铁轨]]及下方承载这些铁轨的方块都不会被爆炸破坏，但爆炸仍会穿透并破坏铁轨和承载方块以外的方块。
+
+TNT矿车不能与[[动力矿车]]连接，并会排斥其他种类的矿车。
+
+=== 基岩版 ===
+TNT矿车造成的爆炸的爆炸威力固定为3，低于[[TNT]]。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Fuse.ogg
+|subtitle={{tp|subtitles.entity.tnt.primed}}
+|source=方块
+|description=TNT被激活
+|id=entity.tnt.primed
+|translationkey=subtitles.entity.tnt.primed}}
+{{Sound table
+|sound=Explosion1.ogg
+|sound2=Explosion2.ogg
+|sound3=Explosion3.ogg
+|sound4=Explosion4.ogg
+|subtitle={{tp|subtitles.entity.generic.explode}}
+|source=方块
+|id=entity.tnt.explode
+|translationkey=subtitles.entity.generic.explode
+|description=爆炸
+}}
+{{Sound table
+|sound=Minecart base.ogg
+|subtitle=MC-181831
+|source=友好生物<ref group="音效" name="oddcats">{{bug|MC-42132}}</ref>
+|description=矿车行进
+|id=entity.minecart.riding
+|translationkey=-
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Fuse.ogg
+|source=方块
+|description=TNT被激活
+|id=random.fuse
+|typeid=fuse
+|soundvolume=1.0
+|soundpitch
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Explosion1.ogg
+|sound2=Explosion2.ogg
+|sound3=Explosion3.ogg
+|sound4=Explosion4.ogg
+|source=方块
+|description=爆炸
+|id=random.explode
+|typeid=explode
+|soundvolume=4.0
+|soundpitch
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Minecart base.ogg
+|source=友好生物
+|description=矿车行进
+|id=minecart.base
+|typeid=minecart.base
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+; 物品
+{{ID table
+|generatetranslationkeys=java
+|spritetype=item | Minecart with TNT
+|nameid=tnt_minecart
+|foot=1
+}}
+
+; 实体
+{{ID table
+|generatetranslationkeys=java
+|spritetype=entity | Minecart with TNT
+|nameid=tnt_minecart
+|foot=1
+}}
+
+{{el|be}}：
+; 物品
+{{ID table
+|generatetranslationkeys=bedrock
+|spritetype=item | Minecart with TNT
+|nameid=tnt_minecart
+|foot=1
+}}
+
+; 实体
+{{ID table
+|generatetranslationkeys=bedrock
+|spritetype=entity | Minecart with TNT
+|nameid=tnt_minecart
+|foot=1
+}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+
+TNT矿车有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w02a|[[File:Minecart with TNT JE1 BE1.png|32px]] [[File:Minecart with TNT (item) JE1 BE1.png|32px]] 加入了TNT矿车。}}
+|{{HistoryLine|||dev=13w03a|TNT矿车现在不再摧毁附近的铁轨与铁轨承载方块。<ref>{{bug|MC-6833|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=13w04a|现在创造模式下攻击TNT矿车会使矿车直接消失而不会掉落，但[[重命名]]后的TNT矿车仍会掉落。}}
+|{{HistoryLine||1.8|dev=14w11a|TNT矿车产生的爆炸不能堆叠了。}}
+|{{HistoryLine|||dev=14w26a|TNT矿车现在被着火的箭射中时会爆炸。}}
+|{{HistoryLine||1.11|dev=16w32a|TNT矿车的实体ID从<code>MinecartTNT</code>变为<code>tnt_minecart</code>。}}
+|{{HistoryLine||1.12|dev=pre6|现在使用[[火焰弹]]不会使TNT矿车立即爆炸了，而是使其像被[[激活铁轨]]激活那样爆炸。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，TNT矿车的数字ID是407。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Minecart with TNT JE2 BE2.png|32px]] [[File:Minecart with TNT (item) JE2 BE2.png|32px]] 更改了TNT矿车的纹理。}}
+|{{HistoryLine|||dev=19w11a|TNT矿车现在爆炸破坏方块有100%的物品掉落概率。}}
+|{{HistoryLine||1.15|dev=pre1|[[File:Minecart with TNT 1.15-pre1.png|32px]] 更改了TNT矿车的模型。<ref>{{bug|MC-165971|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=pre3|[[File:Minecart with TNT JE2 BE2.png|32px]] 回退了上个版本对模型所做的更改。}}
+|{{HistoryLine||1.19|dev=22w13a|现在TNT矿车的合成配方是无序的。
+|现在TNT矿车被破坏时会掉落其自身，而不再会分解成矿车和TNT。}}
+|{{HistoryLine||1.20.3|dev=23w41a|现在创造模式下攻击TNT矿车又会使TNT矿车变为掉落物了。<ref>{{bug|MC-265747|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=23w45a|现在创造模式下攻击TNT矿车又会使矿车直接消失了，且重命名过的TNT矿车也会直接消失。}}
+|{{HistoryLine||1.21.2|dev=24w33a|为TNT矿车加入了字段<code>explosion_power</code>，目前没有任何效果。<ref>{{bug|MC-276263|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=24w37a|TNT矿车的爆炸威力现在会加上<code>explosion_power</code>。}}
+|{{HistoryLine||1.21.4|dev=24w44a|加入了可选字段<code>explosion_speed_factor</code>以控制随TNT矿车速度增加的爆炸威力，默认值为<code>1.0</code>。
+|将TNT矿车的数据字段<code>TNTFuse</code>重命名为<code>fuse</code>。}}
+|{{HistoryLine||1.21.5|dev=25w07a|移除了TNT矿车实体数据中的{{nbt|boolean|CustomDisplayTile}}字段，此前此项为<samp>false</samp>时TNT矿车不会展示自定义方块。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.14.0|dev=build 1|[[File:Minecart with TNT JE1 BE1.png|32px]] [[File:Minecart with TNT (item) JE1 BE1.png|32px]] 加入了TNT矿车。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|TNT矿车的实体ID从<code>minecarttnt</code>变为<code>tnt_minecart</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Minecart with TNT JE2 BE2.png|32px]] [[File:Minecart with TNT (item) JE2 BE2.png|32px]] 更改了TNT矿车的纹理。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.28|现在TNT矿车的合成配方是无序的。}}
+|{{HistoryLine|||dev=1.19.0.30|现在TNT矿车被破坏时会掉落其自身，而不再会分解成矿车和TNT。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|switch=1.0.1|[[File:Minecart with TNT JE1 BE1.png|32px]] [[File:Minecart with TNT (item) JE1 BE1.png|32px]] 加入了TNT矿车。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Minecart with TNT.png|32px]] [[File:Minecart with TNT (item) JE2 BE2.png|32px]] 更改了TNT矿车的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Minecart with TNT JE1 BE1.png|32px]] [[File:Minecart with TNT (item) JE1 BE1.png|32px]] 加入了TNT矿车。
+|TNT矿车被破坏时会冒烟。}}
+}}
+
+== 你知道吗 ==
+* 堆在同一位置的大量TNT矿车在被触碰或运动时会立刻因实体间碰撞而产生高额动能，能造成毁灭性的大范围破坏。
+** 3个TNT矿车互相重叠所造成的爆炸足以将一个满[[护甲值]]的[[玩家]]炸伤至只剩{{hp|1}}[[生命值]]。<ref>{{tweet|dinner|289532985340993536}}</ref>
+** 100个TNT矿车互相重叠所造成的爆炸足以在主世界的地表留下一个直径近百米的爆炸坑。
+
+== 画廊 ==
+<gallery>
+File:First TNT Minecart Image.jpg|由 Dinnerbone 发布的首张关于TNT矿车的截图<ref>{{tweet|dinner|288302629803683840}}</ref><ref>{{tweet|dinner|288304442560880643}}</ref>（TNT矿车在图片左手下方的角落里）
+File:First TNT Minecart Image ZOOM.jpg|缩放后的图片
+File:Minecart-with-tnt.png|TNT矿车和用于引爆的激活铁轨
+File:13w02a.png|13w02a版本宣传图，上面有TNT矿车和[[漏斗]]
+File:Dinnerbone safe boom1.jpg|Dinnerbone展示了如何控制TNT矿车爆炸<ref>{{tweet|dinner|291212723755307009}}</ref>
+File:Dinnerbone safe boom 2.png|即将爆炸的TNT矿车
+File:Dinnerbone safe boom 3.jpg|TNT矿车爆炸（注意爆炸没有摧毁铁轨及其下方的方块）
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox items|Tools & Utilities}}
+{{Navbox entities|Non-mobs}}
+
+[[Category:载具]]
+[[Category:储物]]
+
+[[cs:Vozík s TNT]]
+[[de:TNT-Lore]]
+[[en:Minecart with TNT]]
+[[es:Vagoneta con dinamita]]
+[[fr:Wagonnet à TNT]]
+[[it:Carrello da miniera]]
+[[ja:TNT付きトロッコ]]
+[[ko:TNT가 실린 광산 수레]]
+[[nl:Mijnkar met TNT]]
+[[pl:Wagonik z TNT]]
+[[pt:Carrinho de mina com dinamite]]
+[[ru:Вагонетка с ТНТ]]
+[[uk:Вагонетка з динамітом]]

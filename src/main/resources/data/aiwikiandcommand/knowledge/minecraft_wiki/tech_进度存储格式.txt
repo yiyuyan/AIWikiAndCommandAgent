@@ -1,0 +1,51 @@
+# 页面: 进度存储格式
+# 来源: https://zh.minecraft.wiki/w/%E8%BF%9B%E5%BA%A6%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:59
+# 原始 Wikitext 内容:
+
+{{distinguish|进度定义格式}}
+{{exclusive|je}}
+
+'''进度存储文件'''是存档保存所有玩家当前[[进度]]的文件。
+
+== 存储格式 ==
+进度存储文件位于{{filepath|<''存档根目录''>/players/advancements/<''玩家UUID''>.json}}。对于进入过此存档的所有[[玩家]]，每个玩家都对应一个进度存储文件。
+
+{{Calculator|playerUuid|player=MinecraftWiki}}
+
+进度存储文件以JSON文件格式保存，并具有下列JSON结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|compound|<''进度命名空间ID''>}}：对于某项进度的完成信息。
+*** {{nbt|compound|criteria}}：进度中包含的玩家已达成的[[进度定义格式#准则|进度准则]]及其达成时间信息。
+**** {{nbt|string|<''进度准则名称''>}}：达成此进度准则时的时间。时间格式为<code>yyyy-MM-dd HH:mm:ss Z</code>（可参考[https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/time/format/DateTimeFormatter.html 此文档]）。
+*** {{nbt|bool|done|existonsave=1}}：代表此进度是否已经完成。如果不存在此项游戏默认此进度已完成。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此进度存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+默认情况下，进度存储文件只会存储两种进度：
+* 已完成的进度。
+* 包含的进度准则中至少有一项达成的进度。
+
+== 存储行为 ==
+每个玩家都对应了一个进度存储文件。当玩家进入世界时，游戏会立刻读取玩家对应的进度存储文件：
+* 如果对应的进度存储文件不存在，则代表玩家可能是第一次进入这个世界，游戏静默处理。
+* 如果对应的进度存储文件存在，则加载对应文件。
+** 如果读取过程中产生了I/O异常，则游戏日志报错<code>-{}-Couldn't access player advancements in <''进度存储文件路径''></code>，且玩家进度全部丢失。
+** 如果文件无法转换为进度数据（例如文件格式错误），则游戏日志报错<code>-{}-Couldn't parse player advancements in <''进度存储文件路径''></code>，且玩家进度全部丢失。
+
+当玩家退出世界时，此文件会被立刻保存，而不是等待存档整体保存时一同保存。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w43a|加入了{{nbt|int|DataVersion}}保存最后一次保存此文件的游戏的数据版本。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将进度数据目录从{{filepath|<''存档根目录''>/advancements}}移动到{{filepath|<''存档根目录''>/players/advancements}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

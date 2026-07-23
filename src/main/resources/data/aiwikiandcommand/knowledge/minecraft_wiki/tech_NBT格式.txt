@@ -1,0 +1,422 @@
+# 页面: NBT格式
+# 来源: https://zh.minecraft.wiki/w/NBT%E6%A0%BC%E5%BC%8F
+# 分类: Java版, Java版独有信息, 基岩版, 基岩版独有信息, 开发, 有未知版本的History模板的页面/Java版, 需要信息
+# 抓取时间: 2026-07-14 17:16:28
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|串列}}{{tr|mode=H|对象|物件}}{{tr|mode=H|类型|型別}}
+{{about|NBT网络传输和文件格式|用文本表示的NBT结构|SNBT格式|在命令中检索特定NBT标签的方法|NBT路径}}
+'''NBT（Named Binary Tag，又称“二进制命名标签”）'''是一种用带名称的二进制标签表示的树状数据结构。
+
+== 概述 ==
+NBT将游戏中的数据结构转换成通用的二进制数据包，以便存储或传输。游戏的大量数据文件都使用NBT书写；游戏在网络通讯时也常会传输NBT标签而非直接传输程序对象。
+
+玩家在游戏中不会直接查看或修改NBT数据，而是在[[命令]]中通过[[SNBT]]这一文本形式的中介间接修改相应NBT数据。在游戏外，也可以用特制的程序直接查看或编辑NBT文件。
+
+=== 常见游戏对象NBT ===
+这里列出了游戏中可通过SNBT描述或允许被存储为NBT的常见游戏对象页面：
+* [[方块实体数据格式]]
+* [[实体数据格式]]
+* [[物品格式]]
+
+== 结构 ==
+NBT的基本结构是带名称的'''标签'''。标签可以大致分为数值标签和结构标签；前者表示单个值，后者则容纳其他标签，通过嵌套构建树状数据结构。
+
+除了结束标签以外，每个标签都由'''标签ID'''、'''标签名称'''和'''[[wzh:负载 (计算机)|负载]]'''组成。ID是表示该标签类型的字节；名称是一个带长字符串，包含一个按大端序{{only|je|short=1}}/小端序{{only|be|short=1}}存储的无符号短整型{{Info needed|尚未验证在Java版存储的NBT中，字符串标签的长度是否为无符号短整型}}/有符号短整型{{only|be|short=1}}长度，以及按Java使用的[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/DataInput.html#modified-utf-8 变种UTF-8（Modified UTF-8）编码]书写的名称；负载表示该标签所承载的数据，具体布局因标签而异。
+
+带名称标签的布局如下：
+
+{|class=wikitable
+!偏移
+!大小
+!内容
+!备注
+|-
+|0
+|1
+|标签ID
+|''详见[[#标签类型|标签类型]]''
+|-
+|1
+|2
+|标签名称的长度
+|其数值为''L''
+|-
+|3
+|''L''
+|标签名称
+|用变种UTF-8编码的字符串，''L''为0时不存在此内容
+|-
+|3+''L''
+|?
+|标签负载
+|''详见[[#标签类型|标签类型]]''
+|}
+
+结束标签不含名称与负载，仅由单字节ID构成。
+
+=== 标签类型 ===
+NBT共有13{{only|je|short=1}}或12{{only|be|short=1}}种标签类型（计入结束标签）。详见下表。
+
+{{in|be}}下表所列字节布局对应'''存储格式'''。传输格式中{{nbt|int|整型}}、{{nbt|long|长整型}}、各类长度字段以及{{nbt|int array|整型数组}}的元素采用变长编码，详见“[[#传输格式|传输格式]]”一节。
+{| class=wikitable
+! ID
+! ID（HEX）
+! 标签类型
+! 负载内容
+! 负载大小
+|-
+| 0
+| 00
+| 结束标签
+| &ndash;
+| &ndash;
+|-
+| 1
+| 01
+| {{nbt|byte|字节型}}
+| 单个有符号字节
+| 1
+|-
+| 2
+| 02
+| {{nbt|short|短整型}}
+| 单个有符号短整型，大端序{{only|je|short=1}}/小端序{{only|be|short=1}}
+| 2
+|-
+| 3
+| 03
+| {{nbt|int|整型}}
+| 单个有符号整型，大端序{{only|je|short=1}}/小端序{{only|be|short=1}}
+| 4
+|-
+| 4
+| 04
+| {{nbt|long|长整型}}
+| 单个有符号长整型，大端序{{only|je|short=1}}/小端序{{only|be|short=1}}
+| 8
+|-
+| 5
+| 05
+| {{nbt|float|单精度浮点型}}
+| 单个单精度浮点数（IEEE754），大端序{{only|je|short=1}}/小端序{{only|be|short=1}}
+| 4
+|-
+| 6
+| 06
+| {{nbt|double|双精度浮点型}}
+| 单个双精度浮点数（IEEE754），大端序{{only|je|short=1}}/小端序{{only|be|short=1}}
+| 8
+|-
+| 7
+| 07
+| {{nbt|byte array|字节数组}}
+| 按大端序{{only|je|short=1}}/小端序{{only|be|short=1}}存储的有符号整型长度，后跟相应个数的有符号字节
+| 4+<长度>
+|-
+| 8
+| 08
+| {{nbt|string|字符串标签}}
+| 一个带长字符串，包含按大端序{{only|je|short=1}}/小端序{{only|be|short=1}}存储的无符号短整型{{Info needed|尚未验证在Java版存储的NBT中，字符串标签的长度是否为无符号短整型}}/有符号短整型{{only|be|short=1}}长度。字符串是按[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/DataInput.html#modified-utf-8 变种UTF-8编码]{{only|je|short=1}}或标准UTF-8编码{{only|be|short=1}}书写的
+| 2+<长度>
+|-
+| 9
+| 09
+| {{nbt|list|列表}}
+| 列表中标签的标签ID，后跟按大端序{{only|je|short=1}}/小端序{{only|be|short=1}}存储的有符号整型长度，后跟相应个数的子标签'''负载'''
+| 5+<长度1>+<长度2>+...+<长度n>（n为包含的子标签数）
+|-
+| 10
+| 0A
+| {{nbt|compound|复合标签}}
+| 若干个子标签'''整体'''（ID、名称、负载），后跟空字节（可视为结束标签）
+| ?+1
+|-
+| 11
+| 0B
+| {{nbt|int array|整型数组}}
+| 按大端序{{only|je|short=1}}/小端序{{only|be|short=1}}存储的有符号整型长度，后跟相应个数的有符号整型
+| 4+<长度>×4
+|-
+| 12
+| 0C
+| {{nbt|long array|长整型数组}}{{only|je|short=1}}
+| 按大端序存储的有符号整型长度，后跟相应个数的有符号长整型
+| 4+<长度>×8
+|}
+
+=== 存储格式 ===
+NBT文件包含单个{{nbt|compound|复合标签}}或{{only|be|for={{nbt|list|列表}}}}（“根标签”），其包含单个子标签。该文件所存储的数据结构即在该子标签中。在NBT文件中，根标签可能未压缩、用GZip压缩或{{only|be|for=用Zlib压缩}}。具体采用何种压缩方式与数据类型有关，于相应数据类型的页面中注明。
+
+{{in|be}}所有以本格式存储的数值（包括标签ID/长度/数值标签的负载）均按小端序、定宽存储；字符串标签的长度为2字节有符号小端短整型，字符串本体为原始UTF-8字节序列（不进行Modified UTF-8转码）。
+
+{{in|be}}{{cd|level.dat}}文件并非直接由NBT构成，而是在文件起始处先有8字节头：4字节小端整型表示存储版本号，紧接着4字节小端整型表示之后NBT数据的字节数；再之后才是未压缩的NBT根复合标签。
+
+=== 传输格式 ===
+在网络上传输时，NBT以流式传输而不被压缩。传输的NBT数据形式上是单个NBT标签（“根标签”），为一个仅含单个子标签的{{nbt|compound|复合标签}}。
+
+{{in|je}}传输格式的NBT中，根标签的名称（包含长度和字符串）将被省略，也就是根标签的标签ID后直接跟负载。
+
+{{in|be}}传输格式的NBT与存储格式共用相同的标签结构与ID，但部分数值的物理编码不同。具体而言：
+
+* {{nbt|byte|字节型}}：1字节，与存储格式相同。
+* {{nbt|short|短整型}}：2字节有符号小端，与存储格式相同（'''不'''使用Varint）。
+* {{nbt|int|整型}}：使用[[w:Variable-length_quantity|变长整型]]（VarInt）编码，并以[[w:Variable-length_quantity#Zigzag_encoding|zigzag编码]]映射有符号整数，长1–5字节。
+* {{nbt|long|长整型}}：同上，使用变长64位整型（VarInt64）配合zigzag编码，长1–10字节。
+* {{nbt|float|单精度浮点型}}/{{nbt|double|双精度浮点型}}：4/8字节小端IEEE-754，与存储格式相同（'''不'''使用VarInt）。
+* {{nbt|string|字符串标签}}：使用'''无符号'''VarInt表示长度，后跟原始UTF-8字节（无zigzag）。
+* {{nbt|byte array|字节数组}}、{{nbt|int array|整型数组}}、{{nbt|list|列表}}的长度字段均为有符号32位整型，因此在传输格式下也走zigzag VarInt编码；{{nbt|int array|整型数组}}内的每个元素同样按zigzag VarInt编码。
+
+{{nbt|compound|复合标签}}的内部结构（子标签ID、名称、负载，以End标签结尾）在两种格式下完全一致；具体每一项数值/长度/字符串按上述规则各自编码。
+
+== 转换 ==
+=== 程序对象 ===
+游戏在运行时，有关数据直接存储在程序对象中，而非NBT结构中。在需要传输或存储时，以及玩家用[[命令]]修改时，游戏会根据相应数据的'''编码格式'''选择性地从程序对象生成相应的NBT结构，或从NBT重新构建相应程序对象。这种转换有复杂的规则，例如某些数据有意不写入NBT，或者在NBT中采用其他表示方法；这些规则因数据类型而异，在相应数据格式的页面下有所介绍。
+
+=== SNBT ===
+[[SNBT]]作为一种基于文本的数据结构，是NBT与玩家的中介。在使用部分[[命令]]修改、查看数据，或使用[[客户端核心文件]]中的数据生成器时，都涉及NBT与SNBT的转换。
+
+结构模板有特殊转换规则，见[[结构存储格式]]。
+
+'''SNBT转NBT'''
+
+SNBT包含了NBT的各种标签类型，但还包含了一些不直接属于NBT的标签类型。下面给出各种标签的转换规则。
+{| class=wikitable
+|+ 转换规则表
+! SNBT标签
+! NBT表示
+|-
+|
+{{nbt|compound|复合标签}}<br>
+{{nbt|byte array|字节数组}}<br>
+{{nbt|int array|整型数组}}<br>
+{{nbt|long array|长整型数组}}<br>
+有符号{{nbt|byte|字节型}}<br>
+有符号{{nbt|short|短整型}}<br>
+有符号{{nbt|int|整型}}<br>
+有符号{{nbt|long|长整型}}<br>
+{{nbt|float|单精度浮点数}}<br>
+{{nbt|double|双精度浮点数}}
+| 直接转换至相应NBT标签
+|-
+|
+无符号{{nbt|byte|字节型}}<br>
+无符号{{nbt|short|短整型}}<br>
+无符号{{nbt|int|整型}}<br>
+无符号{{nbt|long|长整型}}
+| 按补码解释，将无符号数转换成同种类型的有符号数标签
+|-
+| {{nbt|bool|布尔型}}
+| <samp>true</samp>转换为字节型<samp>1b</samp>，<samp>false</samp>转换为字节型<samp>0b</samp>
+|-
+| {{nbt|string|字符串}}
+| 执行所有转义后，按Java使用的[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/DataInput.html#modified-utf-8 变种UTF-8编码]存储
+|-
+| {{nbt|list|列表}}
+| 如列表元素类型相同，转换为元素类型为子标签唯一类型的列表。否则，转换为元素类型为复合标签的列表；列表元素中复合标签元素原样存储，非复合标签元素分别包装在<code>{"": <值>}</code>标签中存储
+|}
+
+'''NBT转SNBT'''
+
+NBT标签在SNBT中几乎都有对应物。在同一标签的多种表示形式中，转换得到的SNBT通常会选择固定的一种。
+{| class=wikitable
+|+ 转换规则表
+! NBT标签
+! SNBT表示
+! 备注
+|-
+| {{nbt|byte|字节型}}
+| <code><值>b</code>
+| rowspan=4 | <code><值></code>以十进制表示，不含下划线。
+|-
+| {{nbt|short|短整型}}
+| <code><值>s</code>
+|-
+| {{nbt|int|整型}}
+| <code><值></code>
+|-
+| {{nbt|long|长整型}}
+| <code><值>l</code>
+|-
+| {{nbt|float|单精度浮点型}}
+| <code><值>f</code>
+| rowspan=2 | <code><值></code>通过[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Float.html#toString(float) Float.toString]和[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Double.html#toString(double) Double.toString]方法转换为文本，可能为整数、小数或科学计数法。无穷数和NaN也会转换为相应的文本表示（<code>Infinity</code>和<code>NaN</code>），但不再能被SNBT推断为浮点型。<ref>{{Bug|MC-200070}}</ref>
+|-
+| {{nbt|double|双精度浮点型}}
+| <code><值>d</code>
+|-
+| {{nbt|byte array|字节数组}}
+| <code>[B;<值>B,...]</code>
+| rowspan=3 | <code><值></code>的转换与整型的规则一致。元素列表末尾不附加逗号。
+|-
+| {{nbt|int array|整型数组}}
+| <code>[I;<值>,...]</code>
+|-
+| {{nbt|long array|长整型数组}}
+| <code>[L;<值>L,...]</code>
+|-
+| {{nbt|string|字符串}}
+| <code>"<值>"</code>或<code>'<值>'</code>
+| 如文本中首个引号为双引号则使用单引号字符串，否则均使用双引号字符串。<code><值></code>中的反斜杠、同种引号、有[[SNBT格式#固定转义|固定转义序列]]的控制符以及码位在U+0000到U+001F的字符（使用<samp>\x</samp>转义）均会被转义。
+|-
+| {{nbt|list|列表}}
+| <code>[<值>,...]</code>
+| <code><值></code>按相应标签的规则转换。元素列表末尾不附加逗号。
+|-
+| {{nbt|compound|复合标签}}
+| <code>{<键>:<值>,...}</code>
+| 元素依键按字典序升序排列。<code><键></code>如能用无引号字符串表示（含忽略大小写的<samp>true</samp>或<samp>false</samp>），则会转换为无引号形式，否则按字符串标签的规则转换。<code><值></code>按相应标签的规则转换。元素列表末尾不附加逗号。
+|-
+| '''结束标签'''
+| <code>END</code>
+| 仅在不与{{nbt|compound|复合标签}}配对时出现。在聊天栏显示中不会输出。
+|}
+在聊天栏输出中，上述SNBT会进一步转换为带语法着色的[[文本组件]]，且会用<code><...></code>截断过长的列表、数组和复合标签。
+
+=== JSON ===
+[[JSON]]格式与NBT和SNBT完全不同；由于语法和基本类型不同，JSON与NBT并不兼容。要精确地在NBT中嵌入JSON对象，通常需要将JSON文本放在字符串里传入。
+
+游戏的部分数据，例如[[生物群系数据格式]]，以JSON格式存储，却需要转换为NBT格式。此时，游戏会试图在NBT与JSON之间转换，但这一过程会损失部分信息。
+
+'''JSON转NBT'''
+
+由于存在<code>null</code>值以及元素类型不同的列表，JSON转NBT不一定能够成功。
+{| class=wikitable
+|+ 转换规则表
+! JSON类型
+! NBT标签
+! 备注
+|-
+| JsonString
+| {{nbt|string|字符串}}
+|-
+| JsonBoolean
+| {{nbt|byte|字节型}}
+| <samp>true</samp>转换为<samp>1b</samp>，<samp>false</samp>转换为<samp>0b</samp>
+|-
+| JsonNumber
+|
+{{nbt|byte|字节型}}<br>
+{{nbt|short|短整型}}<br>
+{{nbt|int|整型}}<br>
+{{nbt|long|长整型}}<br>
+{{nbt|float|单精度浮点型}}<br>
+{{nbt|double|双精度浮点型}}
+| 按照数值范围从小到大（即所列顺序）依次尝试，如在该类型可表达的数值范围内即转换为该类型
+|-
+| JsonNull
+| 无法转换
+|-
+| JsonArray
+| 
+{{nbt|byte array|字节型数组}}<br>
+{{nbt|int array|整型数组}}<br>
+{{nbt|long array|长整型数组}}<br>
+{{nbt|list|列表}}
+| 先将列表中的元素按各自规则转换。随后，如元素转换得到的类型不同（即便相互兼容），则无法转换；否则，优先尝试转换成相应类型的数组，如不存在类型匹配的数组则转换成列表
+|-
+| JsonObject
+| {{nbt|compound|复合标签}}
+|}
+
+'''NBT转JSON'''
+
+NBT所支持的类型基本都可转换到JSON。但由于JSON的数字类型单一，转换过程会丢失NBT的数字类型信息。
+{| class=wikitable
+|+ 转换规则表
+! NBT标签
+! JSON类型
+|-
+|
+{{nbt|byte|字节型}}<br>
+{{nbt|short|短整型}}<br>
+{{nbt|int|整型}}<br>
+{{nbt|long|长整型}}<br>
+{{nbt|float|单精度浮点型}}<br>
+{{nbt|double|双精度浮点型}}
+| JsonNumber
+|-
+|
+{{nbt|byte array|字节型数组}}<br>
+{{nbt|int array|整型数组}}<br>
+{{nbt|long array|长整型数组}}<br>
+{{nbt|list|列表}}
+| JsonArray
+|-
+| {{nbt|string|字符串}}
+| JsonString
+|-
+| {{nbt|compound|复合标签}}
+| JsonObject
+|}
+
+== NBT程序对象 ==
+游戏在运行时其数据以程序对象而非NBT格式存在，通常游戏只会在构建程序对象或保存程序对象时进行转换，例如存档的读写，刷怪笼生成实体等。
+
+{{in|je}}可以通过命令等方式在游戏内主动进行程序对象与NBT格式的转换，例如命令{{cmd|data}}和[[目标选择器]]等。
+
+=== 基于NBT修改对象 ===
+{{exclusive|java|section=1}}
+在修改方块实体或实体等对象之前，游戏将传入的SNBT或JSON等转换为NBT实例后再进行修改。只有某些特定属性可以被传入的NBT修改，例如方块实体的坐标不可修改。传入不被程序对象使用的NBT属性会被丢弃，例如实体不会保存<code>nonExist</code>标签。向具有特定编码格式要求的NBT属性传入错误的数据会报错，例如实体自定义名称需要[[文本组件]]，尽管它以复合标签存储传输，但传入空标签会报错。
+
+若某属性需要一个[[命名空间ID]]，但传入了一个不带命名空间前缀的字符串，则该值将按照[[命名空间ID#字符串转换为命名空间ID|字符串到命名空间ID的转换]]规则进行转换。
+
+若某属性需要一个布尔值，但传入了数值类型的值，那么该值将则向下取整转换为字节型数字，若不是<code>0b</code>则为<code>1b</code>。
+
+若某属性需要一个布尔值，但传入了非数值也非布尔类型的值，那么此属性值为<code>0b</code>。
+
+若某属性需要某数值类型的数字作为其值，但传入了一个与之所需类型不符的数值类型标签，那么需要转换为所需要的类型。如果属性需要整型，则先向下取整后再转换。
+
+若某属性需要某数值类型的值，但传入了一个非数值类型的值，那么该属性将被赋值为0（具体数据类型与属性而异）。
+
+若某属性需要一个字符串，但传入了一个非字符串，那么该属性值将会是一个空字符串。
+
+若某属性需要一个列表或是某类型的数组，但传入的标签类型与需要的类型不符，则该属性值将为一个空列表或空数组。
+
+若某属性需要一个复合标签，但传入了一个非复合标签，则该属性值最终为一个空复合标签。
+
+=== 测试NBT标签 ===
+{{exclusive|java|section=1}}
+当游戏需要测试NBT标签，例如在[[目标选择器#实体的NBT标签|目标选择器中使用NBT标签]]筛选实体时，游戏会将传入的SNBT等转换为NBT对象，再从待测试的目标对象还原出另一个NBT对象，然后测试目标对象的NBT标签中是否具有提供的NBT标签。
+
+只要提供的标签确实存在于目标对象中，测试就会成功，也即无需真正完整提供目标对象所有的NBT属性。对于列表的测试也如此，只要提供的列表元素全部存在于目标对象的列表中，即使提供的列表中的元素顺序和元素数量不符合，游戏也会测试成功。
+
+例如，对于拥有NBT标签<code>Pos: [1d, 2d, 3d], data: {tag1: {name: test}}</code>的实体而言：
+* <code>@e[nbt={data: {}}]</code>可以选中，因为目标实体存在复合标签<code>data.tag1</code>。
+* <code>@e[nbt={Pos: [2d, 3d, 1d]}]</code>可以选中，因为列表匹配不考虑元素顺序。
+* <code>@e[nbt={Pos: [1d]}]</code>可以选中，因为目标实体的此列表中存在元素<code>1d</code>。
+* <code>@e[nbt={Pos: []}]</code>无法选中，因为'''空列表只能匹配空列表'''。
+
+在测试NBT标签的具体值时，提供的标签名称及数据类型必须与目标对象的相应标签及数据类型'''完全匹配'''，否则此测试无效。数组也在此范畴内，因此不能像列表一样忽略内部元素的个数和顺序。例如<code>1d</code>不会被<code>1</code>匹配，因为双精度浮点数无法与整数匹配；<code>[L; 1L, 3L]</code>不会被<code>[L; 3L]</code>或<code>[L; 3L, 1L]</code>匹配，因为数组要求完全匹配。
+
+SNBT向NBT的{{slink||转换}}依然会进行。这意味着若测试值是否是<code>1b</code>，在命令中提供<code>true</code>或<code>1ub</code>都会测试成功。但由于游戏会各自整理提供的NBT对象和目标对象的NBT对象，因此并不会执行上述{{slink||基于NBT修改对象}}的转换，因为这些转换需要目标对象的编码格式。一个典型的例子是测试命名空间ID，即使目标对象的命名空间ID使用<code>minecraft</code>命名空间，也必须在命令中提供此命名空间，因为游戏不会自动将字符串转换为符合命名空间ID格式的字符串，例如石头的物品实体不会被<code>@e[nbt={Item: {id: stone}}]</code>选中而会被<code>@e[nbt={Item: {id: "minecraft:stone"}}]</code>选中。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2011年9月28日|link={{tweet|notch|119296531592515584}}|Notch致力于“用物品实例来存储任意信息”。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||?|加入了NBT格式。}}
+|{{HistoryLine||1.12|dev=?|加入了{{nbt|long array}}长整型数组标签。}}
+|{{HistoryLine||1.16|dev=20w21a|加入了NBT格式和JSON格式文件的转换功能。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||0.2.0|加入了NBT格式。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{Navbox Bedrock Edition}}
+{{Navbox Java customizable}}
+
+[[Category:开发]]
+
+[[de:NBT]]
+[[en:NBT format]]
+[[es:Formato NBT]]
+[[fr:Format NBT]]
+[[ja:NBTフォーマット]]
+[[nl:NBT formaat]]
+[[pt:Formato NBT]]
+[[ru:Формат NBT]]

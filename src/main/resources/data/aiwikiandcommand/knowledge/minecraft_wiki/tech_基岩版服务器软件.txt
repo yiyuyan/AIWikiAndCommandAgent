@@ -1,0 +1,613 @@
+# 页面: 基岩版服务器软件
+# 来源: https://zh.minecraft.wiki/w/%E5%9F%BA%E5%B2%A9%E7%89%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BD%AF%E4%BB%B6
+# 分类: 基岩版, 基岩版独有特性, 失效链接, 服务器
+# 抓取时间: 2026-07-14 17:24:39
+# 原始 Wikitext 内容:
+
+{{about|非官方基岩版服务器软件|其他用法|服务器（消歧义）}}
+{{Disclaimer}}
+{{Exclusive|bedrock}}
+
+相比[[定制服务器|Java版服务器软件]]，非官方'''基岩版服务器软件'''通常缺少一些游戏中的原版特性。这些特性内置于基岩版客户端，并被游戏内的原版服务器使用。除了官方的[[基岩版专用服务器]]外，这些服务器软件都没有使用Mojang的源代码。它们的性能也因此能在应对大量玩家数据等情况下优于官方软件，并且能提供一些额外功能。除非另有说明，大多数基岩版服务器软件都是开源的，用户可以在许可证允许范围之内免费使用它们，甚至用作商业目的。
+
+包括[[精选服务器]]在内，大部分基岩版服务器都使用非官方软件。由于官方服务端第三方原生模组加载器的出现以及对完全原版特性的支持，基岩版官方服务器软件生态逐渐向好。
+
+== 官方服务器软件 ==
+在2018年9月11日，Mojang发布了基岩版服务器软件的早期alpha版本。<ref>{{tweet|jeb_|1039483667515625472|There is now a dedicated server available for Bedrock: https://minecraft.net/en-us/download/server/bedrock More details soon!|September 11, 2018}}</ref>
+
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="基岩版服务器软件列表"
+|-style="background:#eee"
+!style="width: 078px" |名称
+!style="width: 200px" |开发者
+!style="width: 092px" |支持版本
+!style="width: 056px" |编写语言
+!style="width: 068px" |支持平台
+!style="width: 384px" |备注
+|-
+|[[基岩版专用服务器]]
+ |[[Mojang Studios]]
+ |style="background:#c0eece" |最新（{{v|bedrock}}）
+ |style="background:#c6d9e7" |[[wzh:C++|C++]]
+ |{{OS|Win|Linux}}
+ |官方热切希望听取玩家对此版本的反馈意见，因此请通过[https://feedback.minecraft.net feedback.minecraft.net]告知。并且请务必在官方的[https://bugs.mojang.com/projects/BDS/issues/BDS 漏洞跟踪器]中汇报发现的任何漏洞。目前仅支持64位设备。原版不支持加载插件，但支持所有[[基岩版]]特性以及[[附加包]]。
+|}
+
+=== 第三方原生模组加载器 ===
+这些加载器直接连接到BDS，并以本地代码（即C++）或通过JavaScript等脚本语言提供更多API。
+
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="模组加载器"
+|- style="background:#eee"
+! style="width: 078px" |名称
+! style="width: 200px" |开发者
+! style="width: 092px" |支持版本
+! style="width: 056px" |编写语言
+! style="width: 068px" |支持平台
+! style="width: 240px" |备注
+|-
+|[https://github.com/LiteLDev/LeviLamina LeviLamina]
+|LiteLDev
+| style="background:#c0eece" |[[基岩版1.21.132|1.21.132]]
+| style="background:#dedfea" |
+[[wzh:C++|C++]]/[[wzh:JavaScript|JavaScript]]/[[wzh:Node.js|Node.js]]/[[wzh:Lua|Lua]]
+|{{OS|Win}}
+|曾被称为LiteLoaderBDS。<br>轻量级、模块化和多功能的基岩版模组加载器，它拥有全面的API，一系列的实用接口，一个强大的事件系统，以及对基本接口的全面支持。支持Windows版客户端和服务端。在Linux上使用需要Wine。
+|-
+|[https://github.com/EndstoneMC/endstone Endstone]
+|EndstoneMC
+| style="background:#c0eece" |[[基岩版1.21.130|1.21.130]]
+| style="background:#dedfea" |
+[[wzh:C++|C++]]/[[wzh:Python|Python]]
+|{{OS|Win}} {{OS|Linux}}
+|一个支持使用Python、C++编写插件的基岩版插件加载器。是目前唯一一个原生支持这两个平台的BDS 插件加载器，无需Wine。
+|}
+
+== 第三方服务器软件 ==
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="基岩版服务器软件列表"
+|- style="background:#eee"
+! style="width: 078px" |名称
+! style="width: 200px" |开发者
+! style="width: 092px" |支持版本
+! style="width: 056px" |编写语言
+! style="width: 068px" |支持平台
+! style="width: 080px" |分支自
+! style="width: 240px" |备注
+|-
+|[https://www.serenityjs.net Serenity]
+|[https://github.com/SerenityJS/ SerenityJS]
+|style="background:#c0eece" |[[基岩版26.0|26.0]]
+|style="background:#f8e1c3" |
+[[wzh:Rust|Rust]][[wzh:TypeScript|TypeScript]]
+|{{OS|Win|Mac|Linux|Android}}
+|无
+|提供完整的 API 和工具集，让开发者能够专注于创造独特的游戏体验，无需处理底层网络和协议细节。
+|-
+|[https://github.com/PowerNukkitX/PowerNukkitX/ PowerNukkitX]
+|[https://github.com/PowerNukkitX/ PNX Team]
+|style="background:#c0eece" |[[基岩版26.30|26.30]]
+|style="background:#f8e1c3" |
+[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+|{{tc|partial|Nukkit}}
+|支持更多方块和物品、更多api、性能更好的Nukkit分支版本。
+|-
+|[https://github.com/AllayMC/Allay/ Allay]
+|[https://github.com/AllayMC AllayMC]
+|style="background:#c0eece" |[[基岩版1.21.80|1.21.80]]-[[基岩版26.20|26.20]]
+|style="background:#f8e1c3" |
+[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux}}
+|无
+|可靠，快速，功能丰富的新一代基岩版服务器软件。
+
+|-
+|[https://github.com/df-mc/dragonfly Dragonfly]
+|[https://github.com/Sandertv Sandertv]、[https://twitter.com/randomness12232 T 14Raptor]、[https://twitter.com/imnottwisted TwistedAsylumMC]
+| style="background:#c0eece" |[[基岩版1.21.90|1.21.90]]
+| style="background:#29beb0" |
+[[wzh:Go|Go]]
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|n/a|无}}
+|轻量和现代的并发服务器软件，旨在独立使用或作为库使用。
+|-
+|[https://github.com/LucGamesYT/JukeboxMC JukeboxMC]
+|[https://github.com/LucGamesYT LucGamesYT]
+| style="background:#c0eece" |[[基岩版1.21.20|1.21.20]]
+| style="background:#f8e1c3" |
+[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|n/a|无}}
+|
+|-
+|[https://cloudburstmc.org/ Cloudburst Nukkit]
+|[https://github.com/CloudburstMC Cloudburst Team]/[https://github.com/opencollaboration Open Collaboration]
+| style="background:#c0eece" |
+[[基岩版1.21.50|1.21.50]]
+| style="background:#f8e1c3" |
+[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|partial|Nukkit}}
+|带有活跃的插件生态系统的Nukkit项目生产级的维护和延续。
+|-
+|[https://github.com/CloudburstMC/Server Cloudburst Server]
+|[https://github.com/CloudburstMC Cloudburst Team]/[https://github.com/opencollaboration Open Collaboration]
+| style="background:#c0eece" |[[基岩版1.21.50|1.21.50]]
+| style="background:#f8e1c3" |
+[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|partial|Cloudburst (Nukkit)}}
+|仍在早期开发阶段，具有许多功能增强、性能改进和开发人员优化的Bedrock-first{{sic}}服务器软件。
+|}
+
+== 历史项目 ==
+这些是不再积极维护或停止更新的历史项目。它们中的一些分支仍在上述的项目中被积极维护。
+
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="基岩版服务器软件列表"
+|- style="background:#eee"
+! style="width: 078px" |名称
+! style="width: 200px" |开发者
+! style="width: 092px" |支持版本
+! style="width: 056px" |编写语言
+! style="width: 068px" |支持平台
+! style="width: 080px" |分支自
+! style="width: 240px" |备注
+|-
+|[https://pmmp.io/ PMMP]
+|[https://twitter.com/dktapps Dylan K. Taylor]、[https://twitter.com/SOFe1970 SOFe]、Intyre（原开发者）、[[Shoghi Cervantes]]（原开发者）
+|[[基岩版1.21.0|1.21.0]]
+| style="background:#dedfea" |[[wzh:PHP|PHP]]、[[wzh:C++|C++]]<ref name=":0">PocketMine-MP的[https://github.com/pmmp/ext-chunkutils2/ chunkutils2]、[https://github.com/pmmp/ext-encoding ext-encoding]与[https://github.com/pmmp/ext-morton ext-morton]是通过C++编写的PHP扩展。</ref>、[[wzh:C语言|C]]<ref>PocketMine-MP的[https://github.com/pmmp/pthreads pthreads]、[https://github.com/pmmp/php-leveldb leveldb]与[https://github.com/pmmp/ext-libdeflate ext-libdeflate]是通过C语言编写的PHP扩展。</ref>
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|n/a|无}}
+|{{tc|unknown|仅支持64位设备。需要使用自定义PHP扩展。<ref name=":0" />关键开发者离开。}}
+|-
+|[https://github.com/bdsx/bdsx BDSX]
+|Karikera
+|[[基岩版1.21.3|1.21.3]]
+| style="background:#dedfea" |[[wzh:Node.js|Node.js]]
+|{{OS|Win}}
+| {{tc|n/a|无}}
+|{{tc|unknown|通过ChakraCore支持Node.js。拓展BDS功能，例如Hook功能和数据包以改变行为。已于2024年11月14日归档，不再更新。}}
+|-
+| [https://github.com/HosihikariFramework/PluginManagement 星光框架]
+| [https://github.com/orgs/Hosihikari/people 星光开发组]
+| [[基岩版1.21.3|1.21.3]]
+| style="background:#c0eece" | [[wzh:C♯|C#]]、[[wzh:通用中间语言|CIL]]
+| {{OS|Win|Linux}}
+| {{tc|n/a|无}}
+| {{tc|unknown|不活跃/停止更新}}
+|-
+|[https://github.com/twoone-3/BDSpyrunner BDSpyrunner]
+|twoone3
+|[[基岩版1.19.50|1.19.50]]
+| style="background:#dedfea" |[[wzh:Python|Python]]
+|{{OS|Win}}
+| {{tc|n/a|无}}
+| {{tc|unknown|项目被LiteLoaderBDS（现为LeviLamina）合并，原项目停止更新}}
+|-
+|[https://github.com/TuranicTeam/Altay Altay]
+|[https://twitter.com/Enes_5519 Enes5519]、[https://github.com/EmreTr1 EmreTr1]
+| [[基岩版1.16.100|1.16.100]]
+|style="background:#dedfea" |[[wzh:PHP|PHP]]
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|neutral|PocketMine-MP}}
+|{{tc|unknown|停止更新}}
+|-
+|[https://github.com/tobypayneyt/servercraft ServerCraft]
+|[https://github.com/tobypayneyt TobyPayneYT]
+|[[基岩版1.16.200|1.16.200]]/[[基岩版1.16.201|1.16.201]]
+| style="background:#dedfea" |[[wzh:PHP|PHP]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|neutral|PocketMine-MP}}
+|{{tc|unknown|停止更新}}
+|-
+|[https://github.com/NetrexMC/Netrex Neutrex]
+|[https://github.com/Bavfalcon9 Bavfalcon9]
+|[[基岩版1.18.30|1.18.30]]
+| style="background:#c74c00" |[[wzh:Rust|Rust]]
+|{{OS|Win|Mac|Linux}}
+|{{tc|n/a|无}}
+|{{tc|unknown|停止更新}}
+|-
+|[https://github.com/Podrum/Podrum Podrum]
+|[https://github.com/MFDGaming MFDGaming]
+|
+[[基岩版1.18.30|1.18.30]]
+| style="background:#dedfea" |
+[[wzh:C语言|C]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|n/a|无}}
+|{{tc|unknown|停止更新}}
+|-
+|[https://github.com/NovaPlayPE/JBServer JBServer]
+|[https://github.com/NovaPlayPE NovaPlay Team]
+|
+[[基岩版1.16.200|1.16.200]]
+| style="background:#f8e1c3" |
+[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|n/a|无}}
+|{{tc|unknown|停止更新}}
+|-
+|[https://powernukkit.org PowerNukkit]
+|[https://github.com/PowerNukkit PowerNukkit Team]
+|[[基岩版1.18.0|1.18.0]]
+| style="background:#f8e1c3" |
+[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|partial|Cloudburst (Nukkit)}}
+|{{tc|unknown|停止更新}}
+|-
+|[https://github.com/NiclasOlofsson/MiNET MiNET]
+|[https://twitter.com/NiclasOlofsson NiclasOlofsson]
+|[[基岩版1.18.0|1.18.0]]
+| style="background:#c0eece" |
+[[wzh:C♯|C#]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|n/a|无}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/BlueLightJapan/BlueLight BlueLight]
+|BlueLightJapan
+|[[基岩版1.2.10|1.2.10]]
+| style="background:#dedfea" |[[wzh:PHP|PHP]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|neutral|PocketMine-MP}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/HerryYT/PocketNodeX PocketNodeX]
+|HerryYT、kaliiks
+|[[基岩版1.2.0|1.2.0]]-[[基岩版1.12.0|1.12.0]]
+| style="background:#dedfea" |[[wzh:Javascript|Javascript]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|neutral|PocketNode}}
+| {{tc|neutral|缺少贡献者}}
+|-
+|[https://github.com/BukkitPE/BukkitPE BukkitPE]
+|[https://github.com/xZeroMCPE xZeroMCPE]
+|
+[[携带版1.0.9|1.0.9]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|neutral|Nukkit}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://cathesda.de/softwares Cathy-Batcat]
+|[https://cathesda.de Cathesda]
+|[[基岩版1.10|1.10]]
+| style="background:#dedfea" |[[wzh:PHP|PHP]]
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|neutral|PocketMine-MP}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/ClearSkyTeam/PocketMine-MP ClearSky]
+|ClearSkyTeam、[https://twitter.com/XenialDan XenialDan]
+|[[携带版1.1.5|1.1.5]]
+| style="background:#dedfea" |[[wzh:PHP|PHP]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|neutral|PocketMine-MP}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/iTXTech/Genisys Genisys]
+|iTXTech
+|[[携带版1.0.5|1.0.5]]
+| style="background:#dedfea" |[[wzh:PHP|PHP]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|neutral|PocketMine-MP}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/GenisysPro/GenisysPro GenisysPro]
+|GenisysPro团队
+|[[携带版1.1.0|1.1.0]]
+| style="background:#dedfea" |[[wzh:PHP|PHP]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|neutral|Genisys}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/codehz/mcpeserver MCPEServer]
+|[https://github.com/codehz Codehz]
+|[[基岩版1.6.0|1.6.0]]
+| style="background:#c6d9e7" |[[wzh:C++|C++]]
+|{{OS|Linux}}
+| {{tc|partial|另有启动器<br>[https://github.com/MCMrARM/mcpelauncher-linux mcpelauncher-linux]}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/Nukkit/Nukkit Nukkit]
+|Angelic47、MagicDroidX、Pub4Game、Snake1999、Creeperface01
+|[[基岩版1.2.10|1.2.10]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|partial|移植自PocketMine-MP}}
+| {{tc|unknown|不活跃/停止更新，部分贡献者转而参与[https://github.com/CloudburstMC/Nukkit Cloudburst Nukkit]。}}
+|-
+|[https://github.com/HerryYT/JSPrismarine JSPrismarine]
+|[https://github.com/HerryYT/JSPrismarine HerryYT]
+|[[基岩版1.16.0|1.16.0]]
+| style="background:#dedfea" |[[wzh:Javascript|Javascript]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|neutral|JSPrismarine}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/voxelwind/voxelwind VoxelWind]
+|fromgate、Pub4Game、tee7even、Nukkit.Ru团队、Tux（前开发者）
+|[[携带版1.1.5|1.1.5]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Linux}}
+| {{tc|n/a|无}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/Element-0/ElementZero ElementZero]
+|[https://github.com/CodeHz CodeHz]
+|[[基岩版1.16.0|1.16.0]]
+| style="background:#c6d9e7" |[[wzh:C++|C++]]
+|{{OS|Win|3=Linux}}
+| {{tc|n/a|无}}
+| {{tc|unknown|停止更新。主要开发者启动“ElementZeroR”项目，不久后放弃。}}
+|-
+|[https://github.com/minecraft-linux/mcpelauncher-server MCPELauncher]
+|[https://github.com/MCMrARM MCMrARM]
+|[[基岩版1.12.0|1.12.0]]
+| style="background:#c6d9e7" |[[wzh:C++|C++]]
+|{{OS|Linux}}
+| {{tc|n/a|无}}
+| {{tc|unknown|停止更新}}
+|-
+|[https://github.com/GoMint/GoMint GoMint]
+|[https://twitter.com/geNAZt geNAZt]
+|[[基岩版1.16.200|1.16.200]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+| {{tc|n/a|无}}
+| {{tc|unknown|停止更新。开发人员不再维护该软件。}}
+|-
+|[https://github.com/Hydreon/Steadfast2 Steadfast2]
+|[http://hydreon.com/ Hydreon]
+|[[基岩版1.2.0|1.2.0]]-[[基岩版1.18.0|1.18.0]]
+| style="background:#dedfea" |
+[[wzh:PHP|PHP]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|neutral|PocketMine-MP}}
+| {{tc|unknown|Lifeboat服务器将软件更换为pocketmine，steadfast因而停止更新。}}
+|}
+
+== 协议适配器 ==
+[[wzh:协议适配器|协议适配器]]让玩家可无缝连接到与客户端版本不同的服务器，无需担心版本不匹配导致的无法加入问题。
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="基岩版服务器协议适配器列表"
+|- style="background:#eee"
+! style="width: 078px" |名称
+! style="width: 240px" |开发者
+! style="width: 180px" |支持服务端版本
+! style="width: 180px" |支持客户端版本
+! style="width: 056px" |编写语言
+! style="width: 068px" |支持平台
+! style="width: 256px" |备注
+|-
+|[https://github.com/GlacieTeam/Glacie Glacie]
+|[https://github.com/GlacieTeam GlacieTeam]
+|[[基岩版1.21.130|1.21.130]]-[[基岩版1.21.124|26.20]]
+|[[基岩版1.21.130|1.21.130]]-[[基岩版26.20|26.20]]
+| style="background:#c6d9e7" |[[wzh:C++|C++]]
+|{{OS|Win|Linux}}
+| Glacie实际上是一个翻译器，试图通过翻译不同版本之间的数据包差异，来允许不同版本的玩家进入服务器。拥有[[基岩版服务器软件#第三方原生模组加载器|Levilamina加载器、Endstone加载器]]、客户端版本。不同版本的支持范围不尽相同。
+|}
+
+== 服务端代理 ==
+与数据包传输不同，代理允许玩家在服务器无缝传送。
+
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="基岩版代理软件列"
+|- style="background:#eee"
+! style="width: 078px" |名称
+! style="width: 200px" |开发者
+! style="width: 092px" |支持版本
+! style="width: 056px" |编写语言
+! style="width: 068px" |支持平台
+! style="width: 078px" |协议库
+! style="width: 256px" |备注
+|-
+|[https://github.com/Paroxity/portal Portal]
+|[https://github.com/Paroxity/ Paroxity]
+| style="background:#c0eece" |[[基岩版1.18.0|1.18.0]]
+| style="background:#29beb0" |[[wzh:Go|Go]]
+|{{OS|Win|Mac|Linux|Android}}
+|Bedrock Protocol
+|在软件后端使用[https://github.com/sandertv/gophertunnel Gophertunnel]。
+|-
+|[https://github.com/CloudburstMC/Nemisys Nemisys]
+|[https://github.com/CloudburstMC Cloudburst Team]/[https://github.com/opencollaboration Open Collaboration]
+| style="background:#c0eece" |[[基岩版1.14.0|1.14.0]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+|Synapse Protocol
+|SynapseAPI插件在各个服务器上都必须安装。
+|-
+|[https://github.com/yesdog/Waterdog Waterdog]
+|[https://github.com/yesdog/ Yesdog]、PaperMC、SpigotMC、Yesdog OSS Team
+| style="background:#c0eece" |[[基岩版1.8.0|1.8.0]]-[[基岩版1.16.0|1.16.0]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+|Bedrock Protocol, ProtocolSupport Encapsulation Protocol
+|原生Waterfall/BungeeCord的分支。
+|-
+|[https://github.com/WaterdogPE/WaterdogPE WaterdogPE]
+|[https://github.com/Alemiz112 Alemiz]、[https://github.com/TobiasGrether TobiasGrether]
+| style="background:#c0eece" |[[基岩版1.8.0|1.8.0]]-[[基岩版1.21.50|1.21.50]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+|Bedrock Protocol
+|用于基岩版的全新代理服务器。
+|-
+|[https://github.com/GoMint/ProxProx ProxProx]{{dead link}}
+|
+[https://twitter.com/geNAZt geNAZt]
+|[[基岩版1.8.0|1.8.0]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux|Android}}
+|Bedrock Protocol
+|Xbox与GoMint交互。
+|-
+|[https://github.com/AcidProxy/Acid Acid]<sup>[已弃用]</sup>
+|[https://github.com/AcidProxy kalliks、VixikHD]
+|[[基岩版1.8.0|1.8.0]]
+| style="background:#dedfea" |[[wzh:PHP|PHP]]
+|{{OS|Win|Linux}}
+|Bedrock Protocol
+|此代理并非设计用于在服务器后端转移玩家。
+<!-- removed from appearing on the front page due to not having at least one publicly available release.
+|-
+| PocketCord
+| [https://github.com/Encritary Encritary]
+| style="background:#ffc7ce" | [[携带版1.1.5|1.1.5]]/[[基岩版1.8.0|1.8.0]]
+| style="background:#dedfea" | [[wzh:PHP|PHP]]
+| {{OS|Win|Mac|Linux|Android}}
+| Bedrock Protocol
+| Private proxy software.
+-->
+|}
+
+==协议转换器==
+
+[[wzh:协议转换器|协议转换器]]允许基岩版客户端连接Java版服务器。
+
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="基岩版协议转换器列表"
+|- style="background:#eee"
+! style="width: 086px" |名称
+! style="width: 240px" |开发者
+! style="width: 090px" |基岩版版本
+! style="width: 068px" |Java版版本
+! style="width: 056px" |编写语言
+! style="width: 068px" |支持平台
+! style="width: 256px" |备注
+|-
+| style="height:42px" |[https://github.com/GeyserMC/Geyser Geyser]
+|[https://github.com/GeyserMC GeyserMC团队]/[https://github.com/opencollaboration Open Collaboration]
+| style="background:#C6EFCE" |[[基岩版1.21.50|1.21.50]]-[[基岩版1.21.82|1.21.82]]
+| style="background:#C6EFCE" |[[Java版1.21.8|1.21.8]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|
+{{OS|Win|Mac|Linux}}
+|近乎完美的协议转换器。<br>现处于活跃开发的状态，版本更新迅速。
+|-
+|[https://github.com/ProtocolSupport/ProtocolSupport ProtocolSupport (PE)]
+| ProtocolSupport
+|[[基岩版1.8.0|1.8.0]]–[[基岩版1.12.0|1.12.0]]
+|[[Java版1.13.2|1.13.2]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux}}
+|目前有许多漏洞等待修复，但基本可以进行游戏。<br>'''注意：目前用作开发者测试，如需使用，需要自行编辑。'''
+|-
+| style="height:42px" |[https://github.com/DragonetMC/DragonProxy DragonProxy]
+|Dragonet Foundation
+||[[基岩版1.14.60|1.14.60]]
+|[[Java版1.15.2|1.15.2]]
+| style="background:#f8e1c3" |[[wzh:Java|Java]]
+|{{OS|Win|Mac|Linux}}
+| {{tc|unknown|停止更新，开发者转移至[https://github.com/GeyserMC/Geyser Geyser]。}}
+|}
+
+== 服务器管理软件 ==
+服务器管理软件能够帮助管理员维护服务器并提供备份等功能。
+
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="基岩版服务器管理软件列表"
+|- style="background:#eee"
+! style="width: 078px" |名称
+! style="width: 240px" |开发者
+! style="width: 090px" |支持版本
+! style="width: 056px" |编写语言
+! style="width: 068px" |支持平台
+! style="width: 256px" |备注
+|-
+|[https://www.minebbs.com/resources/blocks-party.6376/ Blocks Party]
+|[https://www.minebbs.com/members/yoyo Yoyo666]
+| style="background:#C6EFCE" |[[基岩版1.21.80|1.21.80]]
+| style="background:#dedfea" |未知
+|{{OS|Win}}
+|这是一款多服务器控制的启动器。
+支持多种服务器、内置frp、开机自启等
+|-
+|[https://github.com/Sandertv/gophertunnel Gophertunnel]
+|[https://github.com/Sandertv Sandertv]
+| style="background:#C6EFCE" |[[基岩版1.18.0|1.18.0]]-[[基岩版1.21.80|1.21.80]]
+| style="background:#29beb0" |[[wzh:Go|Go]]
+|{{OS|Win|Linux}}
+|Go语言编写的Minecraft软件工具箱，可用于客户端、服务器及服务端代理。
+|-
+| style="height:42px" |[https://github.com/clarkx86/vellum vellum]
+|clarkx86、DeepBlue
+| style="background:#dedfea" |[[基岩版1.16|1.16.0]]
+| style="background:#C6EFCE" |[[wzh:C#|C#]]
+|{{OS|Win|Linux}}
+|自动进行（热）备份并按一定时间间隔执行[[mcservers:Programs and editors/Mapping|PapyrusCS]]地图渲染工具。
+|-
+| style="height:42px" |[https://foxynotail.com/tools/mcbe-play MCBE Play]
+|FoxyNoTail
+| style="background:#dedfea" |[[基岩版1.14.60|1.14.60]]
+| style="background:#c6d9e7" |[[wzh:C++|C++]]
+|{{OS|Win}}
+|通过GUI控制BDS，可进行自动备份、保存、重启等操作。
+|-
+| style="height:42px" |[https://github.com/mrrooster/minecraftbedrockconsole Minecraft Bedrock Console]
+|MrRooster
+| style="background:#C6EFCE" |[[基岩版1.21.80|1.21.80]]
+| style="background:#c6d9e7" |[[wzh:C++|C++]]
+|{{OS|Win}}
+|控制BDS的简易GUI面板，拥有自动热备份和玩家管理工具。
+|}
+
+== 第三方服务器托管平台 ==
+{| class="wikitable sortable" style="text-align: center; font-size: smaller" data-description="Pocket Edition server hosts list"
+ |-style="background:#eee"
+ !style="width: 128px" | 名称
+ !style="width: 68px" | 携带版与基岩版版本
+ !style="width: 76px" | 软件
+ !style="width: 68px" | 价格
+|-
+ | [https://simpfun.cn/ 简幻欢]
+ | 几乎所有版本
+ | 几乎所有服务器软件
+ | 免费（需要一元用于验证，付费用户有更多权益）
+|-
+ | [https://leet.cc/ LEET]
+ | {{verlink|基岩版1.2.0}}
+ | PocketMine-MP
+ | 根据信贷规划而变化
+|-
+ | [https://roxservers.com/ RoxServers]
+ | {{verlink|携带版1.1.0}}
+ | PocketMine-MP、Nukkit、miNET
+ | 每月[[wzh:欧元|€]]1.99至[[wzh:欧元|€]]19.98
+|-
+ | [https://mcpeservermaker.com Server maker for MCPE]
+ | {{verlink|基岩版1.2.2}}
+ | PocketMine-MP
+ | 根据信贷规划而变化
+|-
+ | [https://playu2.com Playu2.com]
+ |未知
+ | PocketMine-MP/个别可以安装“任何”软件。
+ | 免费
+|-
+ |[https://server.pro/ Server.pro]
+ | {{verlink|基岩版1.2.0}}
+ |PocketMine-MP、BlueLight、Tesseract、ClearSky、Genisys
+ |免费/根据信贷规划而变化
+|-
+ |[https://cubedhost.com/ CubedHost]
+ | {{verlink|基岩版1.2.0}}
+ | 未知
+ | 每月[[wzh:Dollar|$]]5至[[wzh:Dollar|$]]60
+|-
+ |[https://netherbox.com/ Netherbox]
+ | 未知
+ | Genisys、PocketMine-MP
+ | 未知
+|}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+
+[[Category:服务器]]
+
+[[en:Pocket Edition server software]]
+[[ja:Bedrock Edition/サーバーソフトウェア]]
+[[pt:Software de servidor da Edição Bedrock]]

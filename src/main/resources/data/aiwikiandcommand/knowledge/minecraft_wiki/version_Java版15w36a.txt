@@ -1,0 +1,97 @@
+# 页面: Java版15w36a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8815w36a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:14
+# 原始 Wikitext 内容:
+
+{{Dangerous version|离开压力板会导致游戏崩溃。<ref>{{bug|MC-87869|||Fixed}}</ref>}}
+{{Infobox version
+|title=15w36a
+|image=Java Edition 15w36a Simplified.png\Java Edition 15w36a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2015年9月2日
+|jsonhash=851de2edecdd714d0deaeb6138a8aca5da02575f
+|clienthash=132f019cf1bd9524451c83756440bd71468dac26
+|serverhash=ee0b49a2fff99c93b7a216931c11292537eed473
+|exehash=9c8b798a59ae6c151e7ae21c22d6af6fc4cde62c
+|parent=1.9
+|prevparent=1.8.9
+|prev=15w35e
+|next=15w36b
+|nextparent=1.9.1
+}}<onlyinclude>
+
+'''15w36a'''是[[Java版1.9]]的第19个快照，发布于2015年9月2日<ref>{{cite|url=http://mojang.com/2015/09/minecraft-snapshot-15w36a/|archive-url=1|archive=1|title=Minecraft 1.9 snapshot 15w36d|author=Dinnerbone|website=Mojang.com|date=Sep 2, 2015}}</ref>，加入了一个新的记分板参数，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''[[记分板]]'''
+* 加入了<code>collisionRule</code>参数。
+** 它决定了实体是否能够互相推撞，以及其是否依赖队伍。
+** 次级选项：<code>always</code>、<code>never</code>、<code>pushOtherTeam</code>、<code>pushOwnTeam</code>。
+
+== 更改 ==
+=== 方块 ===
+'''常规'''
+* 不能使用[[命令]]（例如{{cmd|give}}）的玩家不再能放置[[命令方块]]。
+
+=== 物品 ===
+'''[[盔甲]]'''
+* 盔甲防御计算的改变：
+** 满护甲值（20）减伤从80%削弱到66%（在[[16w02a]]改回）。
+** 攻击力度更大时盔甲减伤效果更低：每{{health|2}}点攻击减少{{armor|1}}点有效防御。
+
+=== 生物 ===
+'''常规'''
+* 生物被攻击后AI不再重置。
+* 现在所有攻击型生物能在视野中透过固体方块寻找并追逐玩家。
+
+'''[[骷髅]]、[[苦力怕]]与[[僵尸]]'''
+* 对戴着[[生物头颅]]的玩家探测距离再次调整回正常距离的50%。
+
+=== 非生物实体 ===
+'''常规'''
+* 现在绝大多数实体（[[掉落物]]与[[经验球]]除外）可被其他实体推动。
+** 这不包括物品、[[画]]、[[末地水晶]]、[[区域效果云]]、[[物品展示框]]和[[经验球]]。
+** 这能通过队伍规则被[[生物]]和玩家覆盖。
+** 相同类别的实体现在能被[[钓鱼竿]]的浮漂“吸住”，如果是生物或者玩家将不再遭受击退或伪损伤。
+
+=== 游戏内容 ===
+'''[[魔咒]]'''
+* [[锋利]]与[[保护]]被削弱。
+** 第一级锋利为基础伤害增加{{health|1}}点伤害并每增加一级随之增加0.5（{{health|2|notag=1}}×0.25），削弱自每级{{health|1.25}}。
+** 保护提供的减伤从抛物线增长改为直线增长。
+
+=== 常规 ===
+'''性能'''
+* 优化了连接至服务器时的内存分配。<ref>{{tweet|SeargeDP|638736531105185792}}</ref>
+
+== 修复 ==
+{{fixes|fixedin=15w36a|prefix=Minecraft|showdesc=1
+|;old
+|7980|末影人的传送和行为不正常。
+|59098|只有靠近末影人，才能听到末影人发出的“凝视”的声音。
+|64591|凋灵骷髅挥剑的样子不正确。
+|;dev
+|82955|使用Alex皮肤模型时，手持物品渲染不正确。
+|86840|盔甲耐久值的保护数值计算不正确。
+|87611|连锁条件命令方块不能正常工作。
+|;previous
+|87759|<code>Hopper: java.lang.NullPointerException: Loading entity NBT</code>。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:15w36a]]
+[[en:Java Edition 15w36a]]
+[[es:Java Edition 15w36a]]
+[[fr:Édition Java 15w36a]]
+[[ja:Java Edition 15w36a]]
+[[lzh:爪哇版一五週三六甲]]
+[[pt:Edição Java 15w36a]]
+[[ru:15w36a (Java Edition)]]

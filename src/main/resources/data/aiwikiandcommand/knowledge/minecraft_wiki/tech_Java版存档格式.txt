@@ -1,0 +1,184 @@
+# 页面: Java版存档格式
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E5%AD%98%E6%A1%A3%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件, 需要确定时间
+# 抓取时间: 2026-07-14 17:15:19
+# 原始 Wikitext 内容:
+
+{{for|基岩版的存档格式|基岩版存档格式}}
+{{exclusive|je}}
+
+'''存档（Level）'''是游戏保存世界的持久化形式。
+
+== 存档位置 ==
+游戏客户端内的所有存档均在{{filepath|[[.minecraft]]/saves}}（存档存储目录）下，每一个目录代表一个存档。
+
+游戏不会将所有目录都视为存档，而是会检查每个目录内的{{filename|[[level.dat]]}}或{{filename|level.dat_old}}以确认这是一个有效的游戏存档，确认后的目录才会在[[选择世界菜单]]中出现。
+
+对于客户端，名称为''w''的存档，其存档根目录就是{{filepath|.minecraft/saves/''w''}}。
+
+对于服务端，存档位置由两个参数决定：
+* 服务端启动参数<code>--universe</code>（默认为{{filepath|.}}，即当前运行目录）：指定存档存储目录，下文简化为''u''。
+* 服务端启动参数<code>--world</code>、{{filename|[[server.properties]]}}中<code>level-name</code>项（按顺序尝试获取）：指定存档名称，下文简化为''w''。
+
+根据这两个参数，服务端的存档根目录路径是{{filepath|''u''/''w''}}。
+
+== 存档结构 ==
+{{about||Java版26.1前的存档结构|Java版存档格式/1.21.11}}
+每个存档都有相应的文件保存数据，这些文件按照一定的存储格式，在特定的路径上起到作用。下文中'''粗体'''代表文件一定存在，未标注粗体则代表文件不一定存在，备份文件不以显示。假定存档已经初始化完成、且至少有一名玩家进入过存档。
+
+所有和[[维度]]无关的数据其存储文件都直接和存档根目录相对应，下列是所有维度无关的数据存储文件：
+
+<div class="treeview">
+* {{file|directory|''存档根目录''}}
+** {{file|file|icon.png}}：存档的图标。
+** {{file|file|'''level.dat'''}}：[[存档基础数据存储格式|存档基础数据存储文件]]。
+** {{file|directory|resourcepacks}}：世界指定资源包目录。
+*** {{file|archive|resources.zip}}：世界指定资源包，见{{slink|资源包|世界指定资源包}}。
+** {{file|file|'''session.lock'''}}：[[存档会话锁文件格式|存档会话锁文件]]。
+** {{file|directory|'''players'''}}：所有与玩家相关的数据存储目录。
+*** {{file|directory|'''advancements'''}}：进度存储目录。
+**** {{file|file|'''-{}-<''玩家UUID''>.json'''}}：[[进度存储格式|进度存储文件]]。
+*** {{file|directory|'''data'''}}：玩家存储目录。
+**** {{file|file|'''-{}-<''玩家UUID''>.dat'''}}：[[玩家数据格式|玩家存储文件]]。
+*** {{file|directory|'''stats'''}}：统计存储目录。
+**** {{file|file|'''-{}-<''玩家UUID''>.json'''}}：[[统计存储格式|统计存储文件]]。
+** {{file|directory|'''data'''}}：存档数据目录。
+*** {{file|directory|minecraft}}：<code>minecraft</code>命名空间下的存储数据。
+**** {{file|directory|maps}}：地图数据目录。
+***** {{file|file|last_id.dat}}：[[地图存储格式#地图计数存储格式|地图计数存储文件]]。
+***** {{file|file|-{}-<''地图ID''>.dat}}：[[地图存储格式#地图数据存储格式|地图数据存储文件]]。
+**** {{file|file|command_storage.dat}}：[[命令存储存储格式|命令存储存储文件]]。
+**** {{file|file|'''custom_boss_events.dat'''}}：[[自定义Boss栏存储格式|自定义Boss栏存储文件]]。
+**** {{file|file|'''game_rules.dat'''}}：[[游戏规则存储格式|游戏规则存储文件]]。
+**** {{file|file|'''random_sequences.dat'''}}：[[随机序列存储格式|随机序列存储文件]]。
+**** {{file|file|'''scheduled_events.dat'''}}：[[计划事件存储格式|计划事件存储文件]]。
+**** {{file|file|'''scoreboard.dat'''}}：[[记分板存储格式|记分板存储文件]]。
+**** {{file|file|'''stopwatches.dat'''}}：[[秒表存储格式|秒表存储文件]]。
+**** {{file|file|wandering_trader.dat}}：[[流浪商人数据存储格式|流浪商人数据存储文件]]。
+**** {{file|file|'''weather.dat'''}}：[[天气数据存储格式|天气数据存储文件]]。
+**** {{file|file|'''world_clocks.dat'''}}：[[世界时钟存储格式|世界时钟存储文件]]。
+**** {{file|file|'''world_gen_settings.dat'''}}：[[世界生成设置存储格式|世界生成设置存储文件]]。
+*** {{file|directory|<''命名空间''>}}：其他命名空间下的存储数据。
+**** 其他的存储文件，目前只有命令存储会使用<code>minecraft</code>以外的命名空间。
+** {{file|directory|'''datapacks'''}}：世界指定[[数据包]]。
+*** {{file|archive}}{{file|directory|-{}-<''数据包名称''>}}：一个世界指定数据包。
+** {{file|directory|generated}}：生成数据存储目录。
+*** {{file|directory|-{}-<''命名空间''>}}：对于指定命名空间的数据。
+**** {{file|directory|structure}}：生成结构文件目录。
+***** {{file|file|-{}-<''标识符''>.nbt}}：[[结构存储格式|结构存储文件]]。
+</div>
+
+对于所有维度数据，所有维度都有对应的根目录，下列列出了各个维度和对应维度目录相对于存档根目录的相对路径：
+
+{| class="wikitable"
+! 维度 || 命名空间ID || 相对路径
+|-
+| 主世界 || {{filepath|minecraft:overworld}} || {{filepath|-{}-/dimensions/minecraft/overworld/}}
+|-
+| 末地 || {{filepath|minecraft:the_end}} || {{filepath|-{}-/dimensions/minecraft/the_end/}}
+|-
+| 下界 || {{filepath|minecraft:the_nether}} || {{filepath|-{}-/dimensions/minecraft/the_nether/}}
+|-
+| 其他维度 || {{filepath|-{}-<''命名空间''>:<''标识符''>}} || {{filepath|-{}-/dimensions/<''命名空间''>/<''标识符''>/}}
+|}
+
+所有维度数据存储按照下列结构：
+
+<div class="treeview">
+* {{file|directory|''维度根目录''}}
+** {{file|directory|'''data'''}}：维度数据目录。
+*** {{file|directory|minecraft}}：minecraft命名空间下的维度数据。
+**** {{file|file|'''chunk_tickets.dat'''}}：[[区块标签存储格式|区块标签存储文件]]。
+**** {{file|file|'''raids.dat'''}}：[[袭击存储格式|袭击存储文件]]。
+**** {{file|file|'''ender_dragon_fight.dat'''}}：[[末影龙战斗存储格式|末影龙战斗存储文件]]。（仅限末地或其他可启动末影龙战斗的维度，否则不会自动生成此文件）
+**** {{file|file|'''world_border.dat'''}}：[[世界边界存储格式|世界边界存储文件]]。
+** {{file|directory|'''entities'''}}：实体数据目录。
+*** {{file|file|'''-{}-r.<''区域X坐标''>.<''区域Z坐标''>.mca'''}}：[[实体数据格式|区域实体存储文件]]。
+*** {{file|file|-{}-c.<''区块X坐标''>.<''区块Z坐标''>.mcc}}：区域实体存储文件的[[区域文件格式#区域额外文件|区域额外文件]]。
+** {{file|directory|'''poi'''}}：兴趣点数据目录。
+*** {{file|file|'''-{}-r.<''区域X坐标''>.<''区域Z坐标''>.mca'''}}：[[兴趣点存储格式|区域兴趣点存储文件]]。
+*** {{file|file|-{}-c.<''区块X坐标''>.<''区块Z坐标''>.mcc}}：区域兴趣点存储文件的[[区域文件格式#区域额外文件|区域额外文件]]。
+** {{file|directory|'''region'''}}：区块基础数据目录。
+*** {{file|file|'''-{}-r.<''区域X坐标''>.<''区域Z坐标''>.mca'''}}：[[区块存储格式|区域区块存储文件]]。
+*** {{file|file|-{}-c.<''区块X坐标''>.<''区块Z坐标''>.mcc}}：区域区块存储文件的[[区域文件格式#区域额外文件|区域额外文件]]。
+</div>
+
+对于从旧版本升级而来的存档，还可能存在下列文件：
+
+<div class="treeview">
+* {{file|directory|''存档根目录''}}
+** {{file|file|'''level.dat_mcr'''}}
+** {{file|file|worldgen_settings_export.json}}：世界生成导出设置，见[[自定义]]。
+</div>
+
+== 历史 ==
+=== 存档历史 ===
+{{see also|Java版存档格式/1.21.11}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了村庄数据文件。}}
+|{{HistoryLine||1.5|dev=13w04a|加入了记分板存储文件。}}
+|{{HistoryLine||1.7.2|dev=13w36a|将统计信息移动到各存档独立存储。}}
+|{{HistoryLine||1.8|dev=14w02a|加入了下界和末地的村庄数据。}}
+|{{HistoryLine|||dev=14w07a|加入了世界指定资源包的功能。}}
+|{{HistoryLine||1.9|dev=15w32b|加入了世界图标。}}
+|{{HistoryLine|||dev=15w43a|加入了战利品表定义目录。}}
+|{{HistoryLine||1.10|dev=16w20a|加入了生成结构数据。}}
+|{{HistoryLine||1.12|dev=17w13a|加入了进度定义目录和进度存储目录。}}
+|{{HistoryLine|||dev=pre1|加入了函数定义目录。}}
+|{{HistoryLine||1.13|dev=17w43a|加入了数据包目录。
+|战利品表、进度和函数被移动到数据包中。}}
+|{{HistoryLine|||dev=17w47a|生成结构数据目录从{{filepath|structures}}移动到{{filepath|generated/minecraft/structures}}。}}
+|{{HistoryLine|||dev=18w06a|移除了结构生成数据文件，结构片段现在保存在区块中。}}
+|{{HistoryLine||1.13.1|dev=18w31a|加入了强制加载区块存储文件。}}
+|{{HistoryLine||1.14|dev=18w47a|加入了袭击存储文件。}}
+|{{HistoryLine|||dev=19w11a|加入了兴趣点存储文件。
+|移除了村庄数据存储文件。}}
+|{{HistoryLine||1.15|dev=19w38a|加入了命令存储存储文件。}}
+|{{HistoryLine||1.16|dev=20w21a|加入了世界生成导出设置文件。}}
+|{{HistoryLine||1.17|dev=20w45a|将实体数据从区块数据拆分到单独的文件中。}}
+|{{HistoryLine||1.19.3|dev=23w05a|现在世界生成导出设置文件既不能被生成，也不能被读取。}}
+|{{HistoryLine||1.20|dev=pre1|加入了随机序列存储文件。}}
+|{{HistoryLine||1.21.5|dev=25w02a|重置了强制加载区块存储文件的功能，现在用于存储区块加载标签。}}
+|{{HistoryLine||1.21.9|dev=25w36a|加入了世界边界存储文件。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了秒表存储文件。}}
+|{{HistoryLine|||dev=25w43a|现在即使存档中不存在结构生成数据文件，游戏也会生成结构生成数据修复文件。<ref name="MC-304023">{{bug|MC-304023|||Fixed}}</ref>}}
+|{{HistoryLine||26.1|dev=snapshot-1|回退了25w43a的更改。<ref name="MC-304023"/>}}
+|{{HistoryLine|||dev=snapshot-6||现在所有的维度均按其命名空间和标识符存储数据，主世界、下界和末地不再使用根目录、{{filepath|DIM-1/}}和{{filepath|DIM1/}}作为维度目录。
+|现在所有的世界数据和维度数据均按带命名空间父目录的格式存储，且命名空间为<code>minecraft</code>。例外包括：
+* 末地的袭击存储文件由{{filename|<''维度根目录''>/data/raids_end.dat}}移动到{{filename|<''维度根目录''>/data/minecraft/raids.dat}}。
+* 区块标签存储文件由{{filename|<''维度根目录''>/data/chunks.dat}}移动到{{filename|<''维度根目录''>/data/minecraft/chunk_tickets.dat}}。
+* 地图计数文件由{{filepath|<''存档根目录''>/data/idcounts.dat}}移动到{{filename|<''存档根目录''>/data/maps/last_id.dat}}。
+* 地图数据文件由{{filepath|<''存档根目录''>/data/map_<''地图编号''>.dat}}移动到{{filename|<''存档根目录''>/data/maps/<''地图编号''>.dat}}。
+* 命令存储存储文件由{{filepath|<''存档根目录''>/data/command_storage_<''命名空间''>.dat}}移动到{{filename|<''存档根目录''>/data/<''命名空间''>/command_storage.dat}}。
+|加入了自定义Boss栏存储文件、流浪商人数据存储文件、计划事件存储文件、末影龙战斗存储文件、游戏规则存储文件、世界生成设置存储文件和世界时钟存储文件，先前它们均由{{filename|level.dat}}保存。
+|世界指定资源包从{{filepath|resources.zip}}移动到{{filepath|resourcepacks/resources.zip}}。
+|生成结构目录从{{filepath|generated/<''命名空间''>/structures}}移动到{{filepath|generated/<''命名空间''>/structure}}。
+|进度数据目录从{{filepath|advancements}}移动到{{filepath|players/advancements}}。
+|玩家数据目录从{{filepath|playerdata}}移动到{{filepath|players/data}}。
+|统计数据目录从{{filepath|stats}}移动到{{filepath|players/stats}}。}}
+}}
+
+=== 区块数据历史 ===
+区块数据从Alpha阶段{{when}}开始采用“区域”的概念存储，此时每个区块都存储于[[Alpha世界格式|独立的文件夹中]]；自[[Beta 1.3]]起，区块数据使用MCRegion格式存储，随后在[[Java版12w07a|12w07a]]中改为[[Anvil文件格式]]，并使用至今。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Weltdaten]]
+[[en:Java Edition level format]]
+[[es:Formato de nivel de Java Edition]]
+[[fr:Format de niveau de l'édition Java]]
+[[ja:ワールドフォーマット/Java Edition]]
+[[ko:Java Edition 레벨 포맷]]
+[[lzh:爪哇版生界範式]]
+[[nl:Level formaat]]
+[[pl:Level.dat]]
+[[pt:Formato de nível da Edição Java]]
+[[ru:Level.dat]]

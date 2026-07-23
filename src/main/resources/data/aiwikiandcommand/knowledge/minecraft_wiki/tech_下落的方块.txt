@@ -1,0 +1,270 @@
+# 页面: 下落的方块
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%8B%E8%90%BD%E7%9A%84%E6%96%B9%E5%9D%97
+# 分类: Java版独有信息, 基岩版独有信息, 实体, 本地化模块需更新, 需要信息
+# 抓取时间: 2026-07-14 17:19:41
+# 原始 Wikitext 内容:
+
+{{Infobox entity
+|image=Sand.png; Red Sand.png; Gravel.png; White Concrete Powder.png; Dragon Egg.png; Anvil.png; Floating Scaffolding.png; Pointed Dripstone Tip (D).png; Sulfur Spike Tip (D).png; Suspicious Sand.png; Suspicious Gravel.png
+|size=高：0.98格<br>宽：0.98格
+|spawn=见{{slink||生成}}
+}}
+{{relevant tutorial|生成下落的方块}}
+
+'''下落的方块（Falling Block）'''是部分[[方块]]在失去支撑时生成的[[实体]]。
+
+== 生成 ==
+下落的方块会在特定方块失去支撑且收到[[PP更新]]后生成。
+
+{{EntityLink|Sand}}、{{EntityLink|Red Sand}}、{{EntityLink|Gravel}}、{{EntityLink|Dragon Egg}}、{{EntityLink|Anvil}}及其受损变种、{{EntityLink|Concrete Powder}}、{{only|bedrock|for={{BlockLink|Snow}}}}、{{BlockLink|Suspicious Sand}}和{{BlockLink|Suspicious Gravel}}在下方为[[可替代方块]]时会变为下落的方块。
+
+{{EntityLink|Scaffolding}}在放置时没有得到支撑会变成下落的方块。
+
+破坏作为钟乳石的{{BlockLink|Pointed Dripstone}}或{{BlockLink|Sulfur Spike}}的上层结构会使未受支撑的滴水石锥或硫黄尖锥变为下落的方块。
+
+== 行为 ==
+下落的方块的实体名称为<code>{{tp|entity.minecraft.falling_block_type|''方块名称''}}</code>。
+
+可下落的方块检测到自身的位置不合理时，就会移除自身并生成一个下落的方块，持续向下下落，直到接触到任意可站立表面。如果上述方块处于[[含水]]状态，则会在原处留下水源。
+
+下落的方块有边界箱但无碰撞体积，无法被攻击，射到上方的箭矢会被弹开，但仍会受部分方块或机制影响而改变运动轨迹，如[[活塞]]、[[黏液块]]、[[蜘蛛网]]、[[气泡柱]]和[[爆炸]]等。
+
+=== 造成伤害 ===
+由[[铁砧]]和钟乳石产生的下落的方块落地时会对当前位置的生物造成伤害。下落的方块只有接触到地面后的瞬间才会造成伤害，直接接触下落的方块实体本身，或未接触下落的方块砸中的地面均不会受到伤害。<ref>{{bug|MCPE-184387}}</ref>
+
+对于下落的铁砧，从下落的第2格开始每增加一格高度，伤害增加{{hp|2}}（例如从4格高处下落的铁砧能造成{{hp|6}}伤害），最终伤害最多不超过{{hp|40}}。
+
+对于下落的滴水石锥或硫黄尖锥，由于[[受击后伤害免疫]]机制，连续砸落在生物身上的多个滴水石锥或硫黄尖锥只能造成一次伤害。以最下方的滴水石锥或硫黄尖锥为基准：
+* {{in|je}}从它下落的第3格开始，每下落一格高度，伤害增加量等同于组成原本钟乳石结构的滴水石锥或硫黄尖锥数量，但不会少于{{hp|6}}；
+* {{in|be}}每格高度的伤害增加值固定为{{hp|1}}，与滴水石锥或硫黄尖锥数量无关<ref>{{bug|MCPE-184329}}</ref>。
+
+不论原先位置离地面有多高，铁砧与钟乳石的最终伤害不会超过{{hp|40}}。
+
+以上内容使用数学公式表达为：
+
+* 离地面<math>h</math>格高的位置下落的铁砧造成的最终伤害为<math>\min\{2(h-1),40\}</math>。
+
+* {{in|je}}尖端距离地面高度为<math>h</math>格、由<math>a</math>个滴水石锥或硫黄尖锥组成的钟乳石造成的最终伤害为<math>\min\{\max\{a,6\}\times(h-2),40\}</math>。
+
+* {{in|be}}尖端距离地面高度为<math>h</math>格的钟乳石造成的最终伤害为<math>\min\{(h-2),40\}</math>。
+
+装备任意[[头盔]]可以减少{{frac|1|4}}的伤害，但头盔的耐久度会严重损失。令原始伤害为<math>m</math>，则头盔减少的耐久度为{{only|je|for=<math>\lfloor \max\{1, \frac{m}{4}\}\rfloor</math>}}或{{only|be|for=<math>\lfloor \max\{1, \frac{m}{4}\}\rfloor + \lfloor \mathrm{rand}(4,6)\times m \rfloor</math>}}。
+
+=== 混凝土粉末 ===
+{{main|混凝土粉末}}
+
+下落的[[混凝土粉末]]在接触到[[水]]时就会停止下落并变成对应的[[混凝土]]。
+
+=== 落地 ===
+下落的方块落地时，会消失并尝试在自身碰撞箱底面中心的坐标处放置自身对应的方块。使用命令召唤的下落的方块落地时可以保留自身全部方块状态。
+
+只有落点位置方块[[可替代]]（例如[[空气]]、[[水]]、[[草丛]]等）时才可放置方块，否则改为掉落与它对应的[[方块物品]]（如果有），下落的沙砾在这种情况下始终不会掉落燧石。以下情况除外：
+* 可疑的沙子和可疑的沙砾总是会直接“摔碎”且不掉落任何物品。
+* 下落的滴水石锥总是会消失并掉落一个滴水石锥物品。
+* {{only|be|for=下落的雪会掉落[[雪球]]而不是自身。}}
+
+下落的[[铁砧]]在落地时可能会受损或被摧毁。如果铁砧下落的高度高于1格，受损程度恶化的概率为5%×''下落的高度''。
+
+=== 超时 ===
+如果下落的方块自生成后存在了至少{{convert|600}}也没有变成方块，或在建造高度外且自生成后存在了至少{{convert|100}}{{info needed|需要基岩版信息}}，它也会消失并尝试掉落自身对应的方块物品。{{only|je|for=与前文落点被占用的情况不同，可疑的沙子和可疑的沙砾在这种情况下可以掉落自身}}。{{only|be|for=下落的雪在这种情况下仍会掉落[[雪球]]。}}
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound = Anvil break.ogg
+|subtitle = {{tp|subtitles.block.anvil.destroy}}
+|source = 方块
+|id = block.anvil.destroy
+|description=下落的铁砧落地且未能变为方块
+|translationkey = subtitles.block.anvil.destroy
+}}
+{{Sound table
+|sound = Anvil land.ogg
+|subtitle = {{tp|subtitles.block.anvil.land}}
+|source = 方块
+|id = block.anvil.land
+|description=下落的铁砧落地且变为方块
+|translationkey = subtitles.block.anvil.land}}
+{{Sound table
+|sound=Pointed Dripstone land1.ogg
+|sound2=Pointed Dripstone land2.ogg
+|sound3=Pointed Dripstone land3.ogg
+|sound4=Pointed Dripstone land4.ogg
+|sound5=Pointed Dripstone land5.ogg
+|subtitle=MC-213647
+|source=方块
+|description=下落的滴水石锥落地
+|id=block.pointed_dripstone.land
+|translationkey=-
+}}
+{{Sound table
+|sound=Sulfur Spike land1.ogg
+|sound2=Sulfur Spike land2.ogg
+|sound3=Sulfur Spike land3.ogg
+|sound4=Sulfur Spike land4.ogg
+|sound5=Sulfur Spike land5.ogg
+|sound6=Sulfur Spike land6.ogg
+|sound7=Sulfur Spike land7.ogg
+|subtitle=-
+|source={{tp|soundCategory.block}}
+|description=下落的硫黄尖锥落地
+|id=block.sulfur_spike.land
+|translationkey=-
+}}
+{{Sound table
+|sound=Suspicious Sand break1.ogg
+|sound2=Suspicious Sand break2.ogg
+|sound3=Suspicious Sand break3.ogg
+|sound4=Suspicious Sand break4.ogg
+|sound5=Suspicious Sand break5.ogg
+|sound6=Suspicious Sand break6.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source=方块
+|description=下落的可疑的沙子落地
+|id=block.suspicious_sand.break
+|translationkey=subtitles.block.generic.break
+|volume=0.9
+}}
+{{Sound table
+|sound=Suspicious gravel break1.ogg
+|sound2=Suspicious gravel break2.ogg
+|sound3=Suspicious gravel break3.ogg
+|sound4=Suspicious gravel break4.ogg
+|sound5=Suspicious gravel break5.ogg
+|sound6=Suspicious gravel break6.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source=方块
+|description=下落的可疑的沙砾落地
+|id=block.suspicious_gravel.break
+|translationkey=subtitles.block.generic.break
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Anvil break.ogg
+|source=方块
+|description=下落的铁砧落地且未能变为方块
+|id=random.anvil_break
+|typeid=random.anvil_break
+|soundvolume=0.6
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Anvil land.ogg
+|source=方块
+|description=下落的铁砧落地且变为方块
+|id=random.anvil_land
+|typeid=random.anvil_land
+|soundvolume=0.6
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|spritetype=entity |spritename=sand |displayname=下落的方块
+|nameid=falling_block
+|foot=1
+}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|spritetype=entity |spritename=sand |displayname=下落的方块
+|nameid=falling_block
+|foot=1
+}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{see also|实体数据格式|Tutorial:生成下落的方块}}
+下落的方块有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100618|加入了下落的方块，其ID为{{cd|FallingSand}}，应用于沙子和沙砾。
+|此前，沙子和沙砾在失去支撑时会瞬间出现在最低处。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre6|加入了可以下落的方块龙蛋。}}
+|{{HistoryLine||1.4.2|dev=12w41a|加入了可以下落的方块铁砧。}}
+|{{HistoryLine||1.7.2|dev=13w39a|加入了可以下落的方块红沙。}}
+|{{HistoryLine||1.12|dev=17w06a|加入了可以下落的方块混凝土粉末。}}
+|{{HistoryLine||1.13|dev=17w47a|将{{cd|FallingSand}}重命名为{{cd|falling_block}}。}}
+|{{HistoryLine||1.14|dev=18w45a|加入了可以下落的方块脚手架。}}
+|{{HistoryLine||1.17|dev=20w48a|加入了可以下落的方块滴水石锥。}}
+|{{HistoryLine||1.19.4|exp=update_1_20|dev=23w07a|加入了可以下落的方块可疑的沙子。}}
+|{{HistoryLine||1.20|dev=23w12a|可以下落的方块可疑的沙子不再属于[[实验性内容]]。
+|加入了可以下落的方块可疑的沙砾。}}
+|{{HistoryLine|||dev=23w14a|加入了实体数据{{nbt|boolean|CancelDrop}}。}}
+|{{HistoryLine|||dev=pre5|下落的方块不再能对[[物品实体]]造成伤害。<ref>{{bug|MC-572|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.5|dev=25w07a|现在下落的方块的{{nbt|compound|BlockState}}可以指定为空气。}}
+|{{HistoryLine|||dev=25w10a|现在下落的方块的{{nbt|boolean|HurtEntities}}在指定下落方块为铁砧时默认为<code>true</code>。}}
+|{{HistoryLine||26.2|dev=snapshot-3|加入了可以下落的方块硫黄尖锥。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.6.0|加入了下落的方块，应用于沙子和沙砾。}}
+|{{HistoryLine||0.9.0|dev=build 1|加入了可以下落的方块红沙。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了可以下落的方块铁砧。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了可以下落的方块龙蛋。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了可以下落的方块混凝土粉末。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|加入了可以下落的方块脚手架。}}
+|{{HistoryLine||1.16.210|dev=1.16.210.56| 加入了可以下落的方块滴水石锥。}}
+|{{HistoryLine||1.19.70|exg=next_major_update|dev=1.19.70.23|加入了可以下落的方块可疑的沙子。}}
+|{{HistoryLine||1.19.80|exg=next_major_update|dev=1.19.80.21|加入了可以下落的方块可疑的沙砾。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.22|可以下落的方块可疑的沙子和可疑的沙砾不再属于[[实验性玩法]]。}}
+|{{HistoryLine||26.30|dev=26.30.20|加入了可以下落的方块硫黄尖锥。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了可以下落的方块沙子和沙砾。}}
+|{{HistoryLine||xbox=TU9|加入了可以下落的方块龙蛋。}}
+|{{HistoryLine||xbox=TU14|xbone=CU1|ps3=1.05|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了可以下落的方块铁砧。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|加入了可以下落的方块红沙。}}
+|{{HistoryLine||xbox=TU53|xbone=CU43|ps3=1.49|psvita=1.49|ps4=1.50|wiiu=Patch 23|switch=1.0.3|加入了可以下落的方块混凝土粉末。}}
+|{{HistoryLine||xbox=TU74|xbone=none|ps3=none|psvita=none|ps4=1.83|wiiu=Patch 43|switch=none|加入了可以下落的方块脚手架。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|加入了可以下落的方块沙子、沙砾、红沙和铁砧。}}
+|{{HistoryLine||1.7.10|加入了可以下落的方块龙蛋。}}
+|{{HistoryLine||1.9.19|加入了可以下落的方块混凝土粉末。}}
+}}
+
+== 你知道吗 ==
+* 在[[Java版1.19]]前，受重力影响的方块在接收到[[方块更新]]时，是由下落的方块移除的。
+** 因此在下落的方块Time值变为1前用[[命令/kill|命令]]清除，原先受重力影响的方块就不会下落。
+* 下落的方块每0.45秒下落一米，生物坠落时往往会穿过下落的方块而非与其一同下降，这有时是致命的。
+* 下落的方块属于实体，因此它们能被爆炸或向上的[[气泡柱]]推动。
+* 射击下落的方块会使弹射物弹开。
+* 下落的方块无法继续下落时会尝试放置自身对应的方块，如果此时所在位置被不完整方块（如[[火把]]、放置于方块下半的[[活板门]]）占用，就会掉落为物品。
+** 如果下落的方块可以穿过该方块继续掉落，那么其不会被破坏。
+
+== 画廊 ==
+<gallery>
+Sand cannon.png|发射下落的方块的[[TNT大炮]]
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|Non-mobs}}
+
+[[de:Fallender Block]]
+[[en:Falling Block]]
+[[es:Bloque en caída]]
+[[fr:Bloc qui tombe]]
+[[ja:落下中のブロック]]
+[[pt:Bloco em queda]]
+[[ru:Падающий блок]]

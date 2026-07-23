@@ -1,0 +1,39 @@
+# 页面: 游戏规则存储格式
+# 来源: https://zh.minecraft.wiki/w/%E6%B8%B8%E6%88%8F%E8%A7%84%E5%88%99%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:31:03
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+'''游戏规则存储文件'''是游戏存储[[游戏规则]]所用的文件。
+
+== 存储格式 ==
+游戏规则存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/game_rules.dat}}。
+
+游戏规则存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|any|<''游戏规则命名空间ID''>}}：一项游戏规则和对应的值。不包括被功能开关过滤的游戏规则。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此游戏规则存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+加载存档时，如果不存在游戏规则存储文件，则游戏会自动生成新文件。新存储文件的所有游戏规则均使用默认值。
+
+重建存档时，游戏会根据游戏规则存储文件预先设置新世界，使游戏规则设置在重建过程中被保留。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了游戏规则存储数据。
+|此时，游戏规则数据存储于{{filename|[[level.dat]]}}中。}}
+|{{HistoryLine||1.21.11|dev=25w44a|将存储游戏规则数据的标签名从{{nbt|compound|GameRules}}重命名为{{nbt|compound|game_rules}}，且各游戏规则的值现在使用各自的值类型，而非转化为字符串存储。}}
+|{{HistoryLine||26.1|dev=snapshot-6|加入了单独的游戏规则存储文件，游戏规则数据不再存储于{{filename|level.dat}}中。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

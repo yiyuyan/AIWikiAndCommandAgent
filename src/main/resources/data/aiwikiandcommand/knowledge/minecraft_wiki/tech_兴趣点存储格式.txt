@@ -1,0 +1,48 @@
+# 页面: 兴趣点存储格式
+# 来源: https://zh.minecraft.wiki/w/%E5%85%B4%E8%B6%A3%E7%82%B9%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:20:22
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''兴趣点存储文件'''是每个存档中存储[[兴趣点]]数据的文件。
+
+== 存储格式 ==
+兴趣点存储文件是一种区块数据，以[[区域文件格式]]为载体，存储于{{filepath|-{}-<''维度根目录''>/poi}}内。例如，主世界的兴趣点存储文件全部位于{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/overworld/poi}}，下界的全部位于{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/the_nether/poi}}。
+
+在每个区块数据内，兴趣点都有下列存储格式：
+
+<div class="treeview">
+* {{nbt|compound}} 区域文件区块根标签
+** {{nbt|int|DataVersion|existonsave=1}}：保存此兴趣点存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1945（[[19w14b]]）。
+** {{nbt|compound|Sections|existonsave=1}}：所有[[子区块]]的数据。如果此项不存在则游戏认为所有子区块中不存在数据。
+*** {{nbt|compound|<''子区块垂直坐标''>}}：单个子区块的数据，垂直坐标可以为负值。
+**** {{nbt|list|Records|existonsave=1|required=1}}：子区块内的所有兴趣点记录。
+***** {{nbt|compound}}：一项兴趣点记录。
+****** {{nbt|int|free_tickets|existonsave=1}}：此兴趣点剩余的认领数。值为0说明此兴趣点无法被认领或认领名额已满。如果此项不存在游戏默认为0。
+****** {{nbt|int-array|pos|existonsave=1|required=1}}：兴趣点位置。数组中的三个元素分别代表了XYZ坐标。
+****** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）兴趣点类型。
+**** {{nbt|bool|Valid}}：此兴趣点数据是否有效。当区块加载时，如果此项为<samp>false</samp>，游戏会强制刷新数据以有效化。如果此项不存在游戏默认为<code>false</code>。
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=19w11a|加入了兴趣点存储文件。}}
+|{{HistoryLine|||dev=pre1|在此版本前，<code>-{}-<''子区块垂直坐标''></code>标签的内容是兴趣点记录列表。
+|加入了{{nbt|bool|Valid}}标签。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将主世界的兴趣点数据从{{filepath|<''存档根目录''>/poi}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/overworld/poi}}。
+|将下界的兴趣点数据从{{filepath|<''存档根目录''>/DIM-1/poi}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_nether/poi}}。
+|将末地的兴趣点数据从{{filepath|<''存档根目录''>/DIM1/poi}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_end/poi}}。
+}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Zielpunktdaten]]
+[[en:Point of Interest format]]
+[[fr:Format de point d'intérêt]]

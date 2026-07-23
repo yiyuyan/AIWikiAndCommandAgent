@@ -1,0 +1,122 @@
+# 页面: Java版13w37a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8813w37a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:08
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=13w37a
+|image=13w37a.png
+|image2=Java Edition 13w37a Simplified.png\Java Edition 13w37a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2013年9月12日
+|jsonhash=2f33c613a4bb81ef5f56be03a8f578208ada382a
+|clienthash=02a9c7237e5a2b68d62d3cacd36d23c0437a14d5
+|serverhash=c3d3d936394b35f20b871b140f5a8e6079822e51
+|exehash=6bb92bba0a587ce863d7e7184345c5b3f6fd6681
+|parent=1.7.2
+|prevparent=1.6.4
+|prev=13w36b
+|next=13w37b
+|nextparent=1.7.4
+}}<onlyinclude>
+
+'''13w37a'''是[[Java版1.7.2]]的第3个快照，发布于2013年9月12日<ref>{{cite|url=http://mojang.com/2013/09/minecraft-snapshot-13w37a/|archive-url=1|archive=1|title=Minecraft snapshot 13w37a|author=Dinnerbone|website=Mojang.com|date=Sep 12, 2013}}</ref>，加入了新的命令{{cmd|setblock}}和{{cmd|testforblock}}，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|setblock}}'''
+* 允许不通过使用<code>FallingSand</code>实体来放置方块。
+* 语法：{{cmd|setblock <x> <y> <z> <方块名称> [数据值] [原方块处理方式] [数据标签]}}
+* 有效的旧方块处理方式数值：<code>replace</code>将放置指定的方块（试图替换成同样的方块将会显示错误信息），<code>keep</code>只会将方块放置在空气中，<code>destroy</code>将先破坏原来的方块并在放置方块前掉落其物品。
+
+'''{{cmd|testforblock}}'''
+* 检测在特定地点的方块。
+** 语法：{{cmd|testforblock <x> <y> <z> <方块名称> [数据值] [数据标签]}}
+* 任何存在于X/Z=±30,000,000的方块都将视为固体方块，并且不能用十字准星来瞄准。
+** 包括空气方块。
+** 这基本上即是在边缘创造了一堵无形的墙。
+** 由于所有方块都是固体的，如果玩家通过外部工具移动到边缘外的话，他们将无法移动。
+** 即使如此，视角仍能自由地移动。这表示假区块仍会生成，因为玩家的视角能穿过这些固体方块。
+
+== 更改 ==
+=== 方块 ===
+'''[[命令方块]]'''
+* 提升了字符的限制，以允许“成千上万的字符”出现。<ref>{{tweet|dinner|383683701814853632}}</ref>
+
+'''[[熔岩]]'''
+* 熔岩源方块不再能被爆炸摧毁。
+
+'''技术性方块'''
+* [[Java版已移除方块#Java版1.7.2之前可获得的方块|移除]]了一些方块的物品形式。
+** 它们不再能通过{{cmd|give}}获得，而只能通过{{cmd|setblock}}放置。
+
+=== 世界生成 ===
+'''[[生物群系]]'''
+* 稍微更改了[[恶地]]生物群系以允许更多的叠层生成。
+
+=== 游戏内容 ===
+'''[[下界传送门]]'''
+* 计划拥有不同的尺寸以允许设计变种。
+* 可以建造足够大得令[[恶魂]]通过传送门来到[[主世界]]。
+* 玩家现在可以点燃传送门内的任何方块来激活，而不仅是底部的方块。
+* 传送门规格：从4×5到23×23之间的任何大小，但必须为长方形。
+
+=== 命令格式 ===
+'''{{cmd|give}}'''
+* 现在会在聊天窗口显示重命名的物品的名称并在鼠标悬在上方时显示其标签。
+
+'''ID'''
+* 方块/物品的ID可用其名字（英文）来代替原本的ID。
+
+=== 常规 ===
+'''[[聊天]]系统'''
+* “对于地图制作者、mod制作者、玩家和服务器管理员来说非常有用”。
+* 在聊天里加入了一个可以点击文字的方法，就像执行命令一样。
+* 这包括之前点击URL能打开网页以及能看到物品标签。
+* 截图已保存的消息现在能双击来打开截图或截图文件夹。
+* 点击玩家名字能自动设置好私聊消息。
+* 加入了{{cmd|tellraw <玩家> <纯json信息>}}来用于发送带有多种功能的消息，此消息不会包括发送者的名字。
+* 语法例子：<code>/tellraw @p {text:"Daytime? ",color:"green",extra:[{text:"Click here!",color:"blue",clickEvent:{action:"run_command",value:"/time set day"}},{text:" Nighttime? "},{text:"Click here!",color:"blue",clickEvent:{action:"run_command",value:"/time set night"}},{text:" Have fun!"}]}</code>
+
+== 修复 ==
+{{fixes|fixedin=13w37a|prefix=Minecraft|showdesc=1
+|;old
+|4973|当游戏规则{{cd|doMobSpawning}}为{{cd|false}}时下界传送门仍会生成僵尸猪人。
+|10077|黑曜石会使相邻的下界门无法被激活。
+|28400|即使游戏规则{{cd|doMobLoot}}为{{cd|false}}，繁殖动物也会掉落经验球。
+|28768|马的花纹无法遗传给幼年马。
+|29088|使用剪刀为哞菇除菇时不会播放剪切的音效。
+|30070|流动的熔岩可以被TNT的爆炸摧毁。
+|;dev
+|29432|流畅图像品质下水和冰的纹理会变为不透明。
+|29493|靠近X坐标或Z坐标为30000000的位置会使游戏崩溃。
+|29505|新加入的花无法被放入花盆中。
+|29530|新加入的花只能合成一个对应的染料，但蒲公英和虞美人能够合成两个对应的染料。
+|29866|荆棘魔咒有时也会对使用-{}-者造成伤害。
+|30405|使用打火石引爆苦力怕时不会播放点燃的音效和手部动画。
+|;previous
+|30181|统计界面和成就界面中游戏不会暂停。
+|30465|主世界中的末地水晶会使游戏卡顿。
+|30615|甘蔗可以被种植在未与水源相邻的方块上。
+}}</onlyinclude>
+
+== 你知道吗 ==
+* 此版本曾经在[[启动器]]中移除，但在2018年9月重新加入。
+* 该版本的宣传截图中出现了[[Grum]]的Minecraft皮肤。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.0}}
+
+[[de:13w37a]]
+[[en:Java Edition 13w37a]]
+[[es:Java Edition 13w37a]]
+[[fr:Édition Java 13w37a]]
+[[ja:Java Edition 13w37a]]
+[[ko:Java Edition 13w37a]]
+[[pt:Edição Java 13w37a]]
+[[ru:13w37a (Java Edition)]]

@@ -1,0 +1,239 @@
+# 页面: 构建信息
+# 来源: https://zh.minecraft.wiki/w/%E6%9E%84%E5%BB%BA%E4%BF%A1%E6%81%AF
+# 分类: 
+# 抓取时间: 2026-07-14 17:29:07
+# 原始 Wikitext 内容:
+
+{{about|基岩版测试版本中屏幕顶部的数据||调试}}
+{{undecided translation|cn=1|tw=1|hk=1}}
+{{exclusive|be|ee|customtext=此功能仅限于测试版本、[[Minecraft Preview|预览版]]及[[开发者版本#基岩版|开发者版本]]。}}
+{{filetr|BE debug screen.png|thumb|Android设备测试版本中的构建信息}}
+'''构建信息（Build info）'''是调试屏幕<!-- 基岩版存在调试屏幕（Debug Screen），后续可拆分条目 -->的一部分，显示在屏幕顶部，用于展示设备和游戏数据。
+
+== 说明 ==
+进入游戏后屏幕顶部会显示构建信息，包含设备型号和配置、RAM、游戏版本、帧数等数据。这些信息在所有界面和场景都会显示。
+
+构建信息可在测试版本、预览版本及[[开发者版本]]中通过“{{tr|显示版本信息|顯示建造資訊}}”选项控制；零售正式版（非Beta）下即使该选项被打开也不会显示构建信息。
+
+构建信息至少有3行（版本行、性能与内存行、帧耗时行），数据每秒刷新一次，同一行内以半角逗号隔开。在满足特定条件时，游戏还会在下方追加若干独立行（详见“[[#其他独立行|其他独立行]]”）。下方列出了所有构建信息（从左上到右下）。
+
+=== 第一行 ===
+{| class="wikitable"
+! 内容
+! 描述
+! 示例值
+! 示例值说明
+|-
+| ''版本''
+| 当前游戏版本。前缀因构建类型而异：
+* {{cd|Preview}} - [[Minecraft Preview|预览版]]构建。
+* {{cd|beta}} - Beta测试版构建。
+| beta 1.21.90.28、Preview 1.21.90.28
+| 当前游戏版本为[[基岩版1.21.90.28|1.21.90.28]]。
+|-
+| ''渲染引擎''
+| 游戏使用的渲染引擎。
+| [RENDERGRAGON]
+| 当前游戏使用[[RenderDragon]]渲染引擎。
+|-
+| ''图形API''<ref group="注" name="ps">PlayStation平台不显示此项。</ref>
+| 游戏使用的[[RenderDragon#图形API|图形API]]。
+| OpenGLES、D3D12+、D3D11、Metal、Vulkan、Vulkan1.3、NVN
+| 当前游戏使用的图形API为OpenGL ES、DirectX 12（{{cd|D3D12+}}带光线追踪扩展）或DirectX 11等。
+|-
+| ''图形模式''
+| 游戏当前的图形模式。
+| RTX、PBR
+| 使用{{pa|Vibrant Visuals|}}时为PBR，使用[[光线追踪]]时为RTX，其他情况则不显示此项。
+|-
+| ''图形API版本''<ref group="注" name="ps"/>
+| 游戏使用的图形API的版本/着色器平台。
+| ESSL_310、D3D_SM65、D3D_SM50、D3D_XB1、D3D_XBX、GLSL_430、Metal、Vulkan、Nvn
+| &ndash;
+|-
+| (cli-p''协议版本'', s''种子'')
+| 客户端的[[协议版本]]，以及所处世界使用的[[种子（世界生成）|种子]]。这两项仅在玩家处于世界中时才会显示。在测试/预览版本中，玩家位于Realm世界时种子会被隐藏，仅显示协议版本。
+| (cli-p818, s123456789)
+| 当前游戏客户端协议版本为818，玩家所处的世界使用种子123456789生成。
+|-
+| ''设备类型''
+|
+{| class="mw-collapsible mw-collapsed"
+| 使用Windows、Xbox或PlayStation时，固定显示以下文本：
+|-
+|
+* Windows：
+** 基岩版（UWP）：Windows 10 UWP Build<ref>{{bug|MCPE-146772||使用Windows11时构建信息显示Windows10。|WAI}}</ref>
+** 基岩版（GDK）：Windows GDK Build
+** 教育版（UWP）：Windows Desktop Build (Centennial)
+** 教育版（Win32）：Windows Desktop Build (Win32)
+* Xbox One、Xbox Series X/S：Xbox GDK Build
+* PlayStation 4：playstation_4
+* PlayStation 5：playstation_5
+|}
+使用其他平台和设备时，则会显示设备品牌和具体型号。
+| rowspan="3" colspan="2" style="text-align: center;" | 因平台和设备而异
+|-
+| ''GPU品牌及型号''<ref group="注">Xbox和PlayStation平台不显示此项。</ref>
+| 设备使用的GPU品牌和具体型号。
+|-
+| ''设备系统及版本''<ref group="注" name="ps"/>
+| 设备使用的操作系统及系统版本。
+|}
+
+=== 第二行 ===
+{| class="wikitable"
+! 参数
+! 描述
+! 示例值
+! 示例值说明
+|-
+| FPS
+| 游戏每秒帧数。
+* 启用“{{tr|改进的输入响应|改善輸入回應}}”时会在右侧括号内显示游戏每秒渲染帧数。
+| FPS: 60.0 (120)
+| 当前游戏已启用“{{tr|改进的输入响应|改善輸入回應}}”，游戏屏幕刷新率约为60.0hz，游戏每秒实际渲染120帧。<ref group="注">若通过修改[[options.txt]]或使用GPU控制面板关闭了垂直同步，则实际情况可能不同。</ref>
+|-
+| SrvTime / RemSrvTime
+| 游戏平均[[MSPT]]（每刻毫秒数）。
+* 在多人游戏客户端中，此参数被称为RemSrvTime。
+* 游戏运算不在本地时，固定显示为0.0。
+| SrvTime:12.3
+| 当前游戏运算一[[游戏刻]]平均耗时12.3毫秒。
+|-
+| RemNetTime<ref group="注">仅在多人游戏客户端中、且远端服务器的网络耗时大于1.0毫秒时显示，位于RemSrvTime右侧。</ref>
+| 远端服务器的网络耗时（毫秒）。
+| RemNetTime:5.2
+| 与远端服务器交互的网络耗时为5.2毫秒。
+|-
+| Mem
+| 游戏已使用的RAM大小（MB）。
+| Mem:512
+| 目前游戏已使用512MB RAM。
+|-
+| Max
+| 游戏最高使用的RAM大小（MB）。
+| Max:1024
+| 本次游戏运行期间最高使用1024MB RAM。
+|-
+| Free
+| 设备剩余可用RAM大小（MB）。
+| Free:2048
+| 设备剩余2048MB RAM可用。
+|-
+| Env
+| 在发布版显示为Production。{{info needed}}
+| Env: Production
+| &ndash;
+|-
+| Exp
+| {{info needed}}
+| Exp: f
+| &ndash;
+|-
+| GUI Scale
+| 当前的GUI比例。
+| GUI Scale: 5.0
+| 目前游戏的GUI比例为5。
+|-
+| Res
+| 游戏窗口分辨率。
+| Res:1920x1080
+| 当前游戏分辨率为1920x1080。
+|-
+| ASSERTS OFF<ref group="注">仅在当前构建禁用了开发者断言中断时显示。</ref>
+| 提示当前构建未启用断言中断的尾缀。
+|  ASSERTS OFF
+| 当前构建禁用了开发者断言。
+|}
+
+=== 第三行 ===
+{| class="wikitable"
+! 参数
+! 描述
+! 示例值
+! 示例值说明
+|-
+| Threads
+| 渲染用时（毫秒）及运算用时（毫秒）
+| Threads [render: 15.135 ms, main: 8.164 ms]
+| rowspan="2" | &ndash;
+|-
+| waitForPreviousFrame / GPU Time{{info needed|名称切换条件不明}}
+| 等待上帧用时（毫秒）/GPU用时（毫秒）
+| waitForPreviousFrame: 9.605 ms / GPU Time: 9.605 ms
+|}
+
+=== 其他独立行 ===
+以下信息由游戏在满足特定条件时作为独立行追加显示，按代码绘制顺序排列。
+{| class="wikitable"
+! 内容
+! 显示条件
+! 示例值
+|-
+| Upscaling Mode<ref group="注">仅在使用[[光线追踪]]时显示。</ref>
+| 启用“{{tr|画质提升|升級}}”时为DLSS，禁用时为Fallback。
+| Upscaling Mode:DLSS / Upscaling Mode:Fallback
+|-
+| LOW MEMORY WARNING BY PLATFORM
+| 系统平台向游戏报告内存不足时显示，颜色为红色。
+| LOW MEMORY WARNING BY PLATFORM
+|-
+| Warning: Level storage disabled
+| 关闭存档系统功能开关时显示，颜色为黄色。
+| Warning: Level storage disabled
+|-
+| Realm ID<ref group="注">仅在玩家在Realm世界中游玩时显示，或玩家位于与Realm世界相关的界面（如Realm故事、Realm Slots、Realm管理等）时显示。</ref>
+| 所处Realm世界的整数ID。
+| Realm ID: 12345678
+|}
+
+== 历史 ==
+{{stub|添加Realm ID的相关信息|section=1}}
+{{HistoryTable
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.8.0|dev=build 4|加入了构建信息，只显示当前游戏版本，位于屏幕下方。}}
+|{{HistoryLine||0.9.0|dev=build 1|现在构建信息位于屏幕顶部。}}
+|{{HistoryLine||0.10.0|dev=build 1|现在构建信息还会显示设备类型，位于第二行。}}
+|{{HistoryLine||0.15.0|dev=build 1|现在构建信息还会显示GUI比例，位于设备类型右侧。}}
+|{{HistoryLine||0.16.0|dev=build 1|将GUI比例的位置移至第一行游戏版本右侧。
+|现在构建信息还会显示设备GPU品牌及型号和设备系统及版本，位于设备类型右侧。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|现在构建信息还会显示游戏帧数，位于设备设备系统及版本右侧。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|现在构建信息还会显示游戏使用的RAM大小及最高使用的RAM大小，位于游戏帧数右侧。}}
+|{{HistoryLine||1.7.0|dev=1.7.0.2|现在构建信息还会显示[[MSPT]]（每刻毫秒数），位于游戏帧数和游戏使用RAM大小中间。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|现在构建信息还会显示设备剩余可用RAM大小。
+|重新调整了所有信息的位置：
+* 第一行：游戏版本、GUI比例、设备类型、GPU品牌及型号、设备系统及版本。
+* 第二行：游戏帧数、[[MSPT]]、游戏使用的RAM大小、游戏最高使用的RAM大小、设备剩余可用RAM大小。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.13|对于使用[[RenderDragon]]的设备，现在构建信息还会显示渲染引擎、图形API和图形API版本。}}
+|{{HistoryLine||RTX Beta|dev=1.15.0.8|随着[[光线追踪]]的加入，现在构建信息还会在使用光线追踪时显示图形模式和上采样方式。
+|图形模式位于渲染引擎右侧，上采样方式位于第三行。}}
+|{{HistoryLine||1.16.0|dev=1.15.0.51|将GUI比例的位置移至第二行设备剩余可用RAM大小右侧。}}
+|{{HistoryLine||1.20.30|dev=1.20.30.22|现在构建信息还会在使用[[延迟技术预览]]时显示图形模式。}}
+|{{HistoryLine||1.20.40|dev=1.20.40.23|现在构建信息还会显示Discovery{{info needed}}，位于设备剩余可用RAM大小和GUI比例中间。}}
+|{{HistoryLine||1.20.50|dev=1.21.50.24|将Discovery重命名为Env。}}
+|{{HistoryLine|||dev=1.21.50.28|修改了第三行显示的信息：渲染用时（毫秒）-运算用时（毫秒）-等待前帧用时（毫秒）。
+|上采样方式现在位于第四行。}}
+|{{HistoryLine||26.20|dev=26.20.27|现在构建信息还会显示Exp{{info needed}}，位于Env和GUI比例中间。}}
+}}
+
+== 你知道吗 ==
+* 按{{key|F1}}或通过设置启用“隐藏 HUD”时不会隐藏构建信息，但游戏内[[截图]]不会包含构建信息。
+* 构建信息的生成由游戏完成，在{{filepath|resource_packs/vanilla/ui/debug_screen.json}}中控制显示。可使用第三方资源包调整是否显示。
+
+== 画廊 ==
+<gallery>
+Pocket Edition 0.8.0 build 4.png|构建信息加入游戏最初的样子
+BE debug screen explosion cause FPS drop.png|大量[[TNT]]爆炸导致帧数大幅下降，[[MSPT]]大幅上升
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}

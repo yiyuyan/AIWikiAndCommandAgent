@@ -1,0 +1,181 @@
+# 页面: 拼图方块
+# 来源: https://zh.minecraft.wiki/w/%E6%8B%BC%E5%9B%BE%E6%96%B9%E5%9D%97
+# 分类: Java版即将到来/26.3, Java版独有信息, 不可再生资源, 使用简单计算器的页面, 基岩版独有信息, 方块
+# 抓取时间: 2026-07-14 17:26:33
+# 原始 Wikitext 内容:
+
+{{tr|保留拼图|儲存拼圖|mode=H}}
+{{Infobox block
+|image=Jigsaw Block.png
+|invimage=Jigsaw Block
+|light=0
+}}
+{{relevant tutorial|拼图方块}}
+
+'''拼图方块（Jigsaw Block）'''是用于生成一些[[结构]]的技术性[[方块]]。
+
+== 生成 ==
+拼图方块不会生成在世界中。虽然部分结构包含拼图方块（如[[掠夺者前哨站]]和[[村庄]]等），但这些拼图方块在结构自然生成时被转换为了其他方块，故不会生成在世界中。
+
+玩家手动使用[[结构方块]]加载包含拼图方块的结构会正常地生成拼图方块。
+
+== 获取 ==
+{{see also|Tutorial:获取任意物品}}
+拼图方块无法在未开启[[作弊]]的[[生存模式]]的世界中获取。使用[[创造模式]]或启用[[作弊]]，拼图方块可以通过{{only|for=[[创造模式物品栏]]（需要启用“{{tp|options.operatorItemsTab}}”，或“{{tp|itemGroup.hotbar}}”中有拼图方块）|JE}}、[[创造模式]]中使用{{ctrl|选取方块}}或[[命令]]等方式获得。
+
+== 破坏 ==
+拼图方块不能被挖掘破坏。
+
+{{Breaking table}}
+
+拼图方块被破坏后不会掉落。
+
+== 用途 ==
+{{Filetr|Jigsaw interface.png|thumb|right|{{in|je}}拼图方块的界面}}
+{{Filetr|Jigsaw interface BE.png|thumb|right|{{in|be}}拼图方块的界面}}
+
+拼图方块是一种允许游戏使用较小模板生成结构的拼接方块。
+
+拼图方块的用户界面有如下输入字段，可配置其生成结构的方法：
+
+; {{tp|jigsaw_block.pool}}
+: 表示一个[[结构池]]，用于提供要生成的结构。
+: 在生成时将基于区块坐标和世界种子伪随机地从池中选取一个结构元素。
+: 默认为{{code|minecraft:empty}}。
+
+; {{tp|jigsaw_block.name}}
+: 该拼图方块的名称。
+: 默认为{{code|minecraft:empty}}。
+
+; {{tp|jigsaw_block.target}}
+: 在目标池所选出的结构元素中，要连接的拼图方块的名称。
+: 默认为{{code|minecraft:empty}}。
+
+; {{tp|jigsaw_block.final_state}}
+: 成功生成结构后，拼图方块转变为的方块（可指定方块状态）。
+: 默认为<code>minecraft:air</code>。
+
+{{FlattenMarks|
+; {{tp|jigsaw_block.placement_priority}}
+: 用于定义某结构模板中各拼图方块的顺序，以便生成连接部件。
+: {{tp|jigsaw_block.placement_priority.tooltip}}
+
+; {{tp|jigsaw_block.selection_priority}}
+: {{tp|jigsaw_block.selection_priority.tooltip}}
+}}
+
+; {{tp|jigsaw_block.joint_label}}
+: 只在方块朝上或朝下放置时出现。
+: 含有两种{{tp|jigsaw_block.joint_label}}{{tp|jigsaw_block.joint.rollable}}和{{tp|jigsaw_block.joint.aligned}}。
+:* {{tp|jigsaw_block.joint.rollable}}：生成时，拼图方块会随机将目标结构或实体置于与该拼图方块处于同一XZ轴的结构方块的边界内。默认为此类型。
+:* {{tp|jigsaw_block.joint.aligned}}：生成时，拼图方块会直接把目标结构或实体置于自身所朝的方向（上方或下方）。可用于连接结构和固定的实体。
+; {{tp|jigsaw_block.levels|<''值''>}}
+: 决定了按下生成按钮时拼图方块生成的“层数”。（如部件>第一层>第二层）
+: 取值为0-20的整数，默认为0。
+; {{tp|jigsaw_block.keep_jigsaws}}
+: 决定了下一次生成的结构中的拼图方块应该正常生成还是变成“转变为”字段中填写的方块。
+: 默认为“开启”。
+; {{tp|jigsaw_block.generate}}
+: 可用来生成后续的结构部件。
+: 使用“层数”中填写的参数来生成结构的后续部分。
+
+拼图方块目前仅用于生成[[掠夺者前哨站]]、[[村庄]]、[[堡垒遗迹]]、[[远古城市]]、[[古迹废墟]]、[[试炼密室]]和{{upcoming|JE 26.3|for=[[废弃营地]]}}。这些结构的生成开始于包含拼图方块的模板。每个拼图方块都使用下列流程来生成另一个模板：
+# 在目标池内随机选择一个模板。
+# 在同一个连接类型中，至少存在1个拼图方块来生成模板。如果有多个方块符合条件，那么会随机选择其中的一个。
+# 这会使2个拼图方块“连接”。放置模板后使第2个拼图方块朝向第1个拼图方块并与之相邻。
+# 最后，两个拼图方块会被替换为对应的“转变为”中设置的方块。
+初始模板和附加模板里的拼图方块都会重复上述流程，直到没有剩余的拼图方块（或者游戏认为结构已经足够大）为止。然而，使用[[结构方块]]加载结构不能复现上述过程，结构仍会包含拼图方块。
+
+提示：要使拼图方块在上述流程中可靠地连接，需要符合以下两个条件之一：
+* 拼图方块的正面必须紧贴在当前结构的边界上，这样新生成的结构就会完全位于当前结构边界的外部。这对源拼图方块和目标拼图方块都适用。
+* 新生成的结构完全位于当前结构边界的内部。
+
+{{in|je}}在单人游戏中打开拼图方块GUI会暂停游戏。
+
+== 音效 ==
+{{Sound table/Block/Stone}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table|generatetranslationkeys=java
+|Jigsaw Block|spritetype=block|nameid=jigsaw
+|showblocktags=je
+|blocktags={{GameTag|block|jigsaw}}|foot=1}}
+{{ID table|displayname=方块实体|spritename=jigsaw-block|spritetype=block|nameid=Jigsaw|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table|generatetranslationkeys=bedrock
+|Jigsaw Block|spritetype=block|nameid=jigsaw|foot=1}}
+{{ID table|notnamespaced=y|Jigsaw Block|displayname=方块实体|spritename=jigsaw-block|spritetype=block|nameid=Jigsaw|foot=1}}
+
+=== 方块状态 ===
+{{FakeImage|
+{{animate|Jigsaw Block (E) JE3.png; Jigsaw Block (N) JE3 BE2.png; Jigsaw Block (S) JE3 BE2.png; Jigsaw Block (W) JE3.png; Jigsaw Block (UW).png; Jigsaw Block (US).png; Jigsaw Block (UN).png; Jigsaw Block (UE).png; Jigsaw Block (DW).png; Jigsaw Block (DS).png; Jigsaw Block (DN).png; Jigsaw Block (DE).png|150px}}
+|拼图方块的所有旋转角度}}
+
+{{see also|方块状态}}
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+{{el|je}}：
+{{/BE}}
+
+{{el|be}}：
+<div class="treeview">
+* {{nbt|compound}} 方块实体数据
+** {{bedrock nbt|方块实体|block}}
+** {{bedrock nbt|load|拼图方块|block}}
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w46a|[[File:Jigsaw Block JE1 BE1.png|32px]] 加入了拼图方块。}}
+|{{HistoryLine|||dev=18w47a|拼图方块现在可用于生成[[掠夺者前哨站]]。}}
+|{{HistoryLine|||dev=18w48a|拼图方块现在可用于生成平原[[村庄]]。}}
+|{{HistoryLine|||dev=18w49a|拼图方块现在可用于生成热带草原村庄。}}
+|{{HistoryLine|||dev=18w50a|拼图方块现在可用于生成针叶林和沙漠村庄。
+|[[File:Jigsaw Block JE2.png|32px]] 更改了拼图方块的纹理。}}
+|{{HistoryLine|||dev=19w14a|将拼图方块的英文名称从“Jigsaw block”更改为“Jigsaw Block”。<ref>{{bug|MC-139429|||Fixed}}</ref>}}
+|{{HistoryLine||1.16|dev=20w13a|[[File:Jigsaw Block (S) JE3 BE2.png|32px]] 加入了拼图方块的锁定纹理，并且有了新的GUI。}}
+|{{HistoryLine|||dev=20w16a|为拼图方块加入了新的GUI按钮，用于指定生成深度。
+|拼图方块现在可用于生成[[堡垒遗迹]]。}}
+|{{HistoryLine|||dev=20w22a|为拼图方块加入了“保留拼图”选项，以控制生成结构后是否保留该拼图方块。默认为“开启”。}}
+|{{HistoryLine||1.19|dev=exp1|拼图方块现在可用于生成[[远古城市]]。}}
+|{{HistoryLine||1.19.3|dev=22w44a|现在拼图方块可从创造模式物品栏中获取。}}
+|{{HistoryLine||1.20|dev=23w12a|拼图方块现在可用于生成[[古迹废墟]]。}}
+|{{HistoryLine||1.20.3|dev=23w43a|在拼图方块的编辑屏幕中加入了“选择优先级”和“放置优先级”输入字段。}}
+|{{HistoryLine|||dev=23w45a|拼图方块生成层数的最大值由7改为20。}}
+|{{HistoryLine|||exp=update_1_21|dev=23w45a|拼图方块现在可用于生成[[试炼密室]]。}}
+|{{HistoryLine||1.21|dev=24w18a|拼图方块用于生成试炼密室的功能不再属于[[实验性内容]]。}}
+|{{HistoryLine||26.3|dev=snapshot-1|拼图方块现在可用于生成[[废弃营地]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Jigsaw Block JE1 BE1.png|32px]] 加入了拼图方块，只能使用物品栏编辑器获得。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|[[File:Jigsaw Block (S) JE3 BE2.png|32px]] 更改了拼图方块的纹理。
+|现在拼图方块可通过{{cmd|give}}获得。
+|为拼图方块加入了实际功能。但无法被玩家使用。}}
+|{{HistoryLine||1.19.20|dev=1.19.20.22|[[末影龙]]不再能破坏拼图方块。<ref>{{bug|MCPE-158343|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.40|dev=1.21.40.22|更改了拼图方块的UI。现在拼图方块可以被玩家使用了。
+|在拼图方块的编辑屏幕中加入了“{{tr|选择优先级|選擇優先順序}}”和“{{tr|放置优先级|放置優先順序}}”字段。}}
+}}
+
+== 参见 ==
+* [[结构方块]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[de:Verbundblock]]
+[[en:Jigsaw Block]]
+[[fr:Bloc de puzzle]]
+[[ja:ジグソーブロック]]
+[[ko:직소 블록]]
+[[pl:Blok konstrukcyjny]]
+[[pt:Bloco-Quebra-Cabeça]]
+[[ru:Пазл]]

@@ -1,0 +1,74 @@
+# 页面: Java版网络协议/存活
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/%E5%AD%98%E6%B4%BB
+# 分类: Java版独有特性, 使用计算器的页面, 网络协议
+# 抓取时间: 2026-07-14 17:15:28
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|数据包|封包}}
+{{exclusive|je}}
+
+'''存活'''是Java版网络协议的一部分，用于服务端检测客户端连接是否仍然可用，并计算客户端到服务端的延迟。此机制通过服务端发送<code>keep_alive</code>S2C包、客户端返回<code>keep_alive</code>C2S包完成。
+
+当前版本中，存活数据包属于通用协议数据包，可用于配置阶段和游戏阶段。
+
+== 协议内容 ==
+{{Calculator|protocol|packets=configuration/client/keep_alive;configuration/server/keep_alive;play/client/keep_alive;play/server/keep_alive}}
+
+存活机制由两个方向相同名称的数据包组成：
+
+* <code>keep_alive</code>S2C包：服务端向客户端发送存活挑战。
+* <code>keep_alive</code>C2S包：客户端向服务端返回相同的存活挑战。
+
+两个数据包的结构相同：
+
+{| class="wikitable"
+! 名称 !! 类型 !! 作用
+|-
+| ID || Long || 存活挑战ID。
+|}
+
+== 服务端行为 ==
+
+服务端会记录上次存活检查的时间。如果距离上次检查达到15秒，且当前没有等待中的存活挑战，服务端会生成一个新的存活挑战并发送给客户端。
+
+原版服务端使用当前毫秒时间作为存活挑战ID，并发送<code>keep_alive</code>S2C包。发送后，服务端会进入等待状态，直到收到客户端返回的<code>keep_alive</code>C2S包。
+
+如果服务端在下一次存活检查时仍然没有收到正确响应，则会以“{{tp|disconnect.timeout}}”中止连接。
+
+如果服务端收到的<code>keep_alive</code>C2S包ID与当前等待的挑战ID不一致，服务端也会以“{{tp|disconnect.timeout}}”中止连接。单人游戏所有者连接不受此断开逻辑影响。
+
+== 客户端行为 ==
+
+客户端收到<code>keep_alive</code>S2C包后，会发送<code>keep_alive</code>C2S包，并原样返回收到的ID。
+
+如果客户端渲染线程处于冻结状态，原版客户端会延迟发送响应，最多等待1分钟。若在此期间客户端恢复，客户端会继续发送对应响应；若服务端已因超时断开连接，则此响应不再有效。
+
+== 延迟计算 ==
+
+服务端收到正确的<code>keep_alive</code>C2S响应后，会计算从发送挑战到收到响应经过的时间，并用此时间更新玩家延迟。原版服务端使用平滑计算：
+
+<pre>
+新延迟 = (旧延迟 × 3 + 本次往返时间) / 4
+</pre>
+
+玩家列表中显示的延迟来自服务端记录的延迟值，并可通过玩家信息更新同步给客户端。
+
+== 流程 ==
+
+存活流程可以总结如下：
+
+# 服务端记录当前时间作为存活挑战ID。
+# 服务端向客户端发送<code>keep_alive</code>S2C包。
+# 客户端收到后，发送<code>keep_alive</code>C2S包，并原样返回ID。
+# 服务端检查返回的ID是否与等待中的挑战ID一致。
+# 如果一致，服务端更新延迟并结束本次等待。
+# 如果不一致，或下一次检查时仍未收到响应，服务端中止连接。
+
+== 与Ping包的区别 ==
+
+存活数据包不同于通用<code>ping</code>和<code>pong</code>数据包。<code>keep_alive</code>由服务端定期主动发送，用于检测连接和计算玩家延迟；<code>ping</code>和<code>pong</code>是另一组通用请求与响应数据包，不参与原版服务端的存活超时等待状态。
+
+== 导航 ==
+{{Navbox protocol}}
+
+[[Category:网络协议]]

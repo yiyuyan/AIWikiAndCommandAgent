@@ -1,0 +1,93 @@
+# 页面: Java版22w07a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8822w07a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=22w07a
+|image=22w07a.png
+|image2=Java Edition 22w07a Simplified.png\Java Edition 22w07a Traditional.png\Java Edition 22w07a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2022年2月16日
+|jsonhash=9286c7fe196ffa0daa88d91c6985a685b1af5f58
+|clienthash=eaa192ef48f382efca1ea9bf437399c641f4357a
+|clientmap=353d2154e9a9987d6dc8d1367a7f2386dbb03001
+|serverhash=8131d9e36640d40ce8464c58035f35475579e897
+|servermap=5fb67255bafc8813b5b89ed7c2127c2167e3e614
+|parent=1.18.2
+|prevparent=1.18.1
+|prev=22w06a
+|next=1.18.2-pre1
+|nextparent=1.19
+}}<onlyinclude>
+
+'''22w07a'''是[[Java版1.18.2]]的第4个，也是最后一个快照，发布于2022年2月16日<ref>{{snap|22w07a|February 16, 2022}}</ref>，修复了一些漏洞。
+
+== 新内容 ==
+=== 世界生成 ===
+'''[[自定义世界生成]]'''
+* 在已配置结构文件中加入了<code>biomes</code>字段，值是一个标签。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 在原版数据包中加入了以下生物群系标签：
+** {{cd|#is_badlands}}：{{cd|d=pretty|badlands|eroded_badlands|wooded_badlands}}。
+** {{cd|#is_beach}}：{{cd|d=pretty|beach|snowy_beach}}。
+** {{cd|#is_deep_ocean}}：{{cd|d=pretty|deep_frozen_ocean|deep_cold_ocean|deep_ocean|deep_lukewarm_ocean}}。
+** {{cd|#is_forest}}：{{cd|d=pretty|forest|flower_forest|birch_forest|old_growth_birch_forest|dark_forest|grove}}。
+** {{cd|#is_hill}}：{{cd|d=pretty|windswept_hills|windswept_forest|windswept_gravelly_hills}}。
+** {{cd|#is_jungle}}：{{cd|d=pretty|bamboo_jungle|jungle|sparse_jungle}}。
+** {{cd|#is_mountain}}：{{cd|d=pretty|meadow|frozen_peaks|jagged_peaks|stony_peaks|snowy_slopes}}。
+** {{cd|#is_nether}}：{{cd|d=pretty|nether_wastes|basalt_deltas|soul_sand_valley|crimson_forest|warped_forest}}。
+** {{cd|#is_ocean}}：{{cd|d=pretty|#is_deep_ocean|frozen_ocean|ocean|cold_ocean|lukewarm_ocean|warm_ocean}}。
+** {{cd|#is_river}}：{{cd|d=pretty|river|frozen_river}}。
+** {{cd|#is_taiga}}：{{cd|d=pretty|taiga|snowy_taiga|old_growth_pine_taiga|old_growth_spruce_taiga}}。
+* 加入了用于指定结构可以在哪些生物群系中生成的生物群系标签，存储于<samp>tags/worldgen/biome/has_structure</samp>下。
+** 可以在其中的<code>values</code>字段中指定结构可以在哪些生物群系（可为生物群系ID或生物群系标签）中生成。
+
+== 更改 ==
+=== 常规 ===
+'''[[调试屏幕]]'''
+* 将"Terrain"行合并进"Multinoise"行，并更名为"NoiseRouter"，新格式为：{{cd|-{}-NoiseRouter T: ''数据'' H: ''数据'' C: ''数据'' E: ''数据'' D: ''数据'' W: ''数据'' PV: ''数据'' AS: ''数据'' N: ''数据''}}。
+** {{cd|d=pretty|T|H|C|E|W}}与之前"Multinoise"行中的同名值一致。
+** {{cd|PV}}与之前"Terrain"行中的同名值一致。
+** {{cd|D}}是深度，{{cd|AS}}是不加粗糙度的原始密度值，{{cd|N}}是最终密度值。和其他数据不同，这三项在受到X、Z轴坐标影响的同时也受到Y轴（高度）的影响。当坐标位于地面以上，这三个值通常为负数；而坐标在地下时，这三个值通常为正数。
+
+'''[[Java版标签|标签]]'''
+* 从{{cd|#azalea_root_replaceable}}标签中移除了{{cd|#lush_ground_replaceable}}，并加入了{{cd|d=pretty|#base_stone_overworld|#dirt|clay|gravel|sand}}。
+
+== 修复 ==
+{{fixes|fixedin=22w07a|showdesc=1
+|;1.18前正式版的漏洞
+|53850|带有<code>Invulnerable</code>NBT标签的物品实体和经验球在受到伤害时会被移除，但计算仅在客户端一侧。
+|;1.18的漏洞
+|237110|草方块可以在水下生成。
+|238977|发光鱿鱼可以在超平坦世界中村民的农田以及喷泉中生成。
+|243190|缠根泥土生成时可以替换洞穴藤蔓。
+|244683|繁茂洞穴中的热带鱼在气泡柱内生成。
+|;1.18.1的漏洞
+|245857|附魔台斜上方的方块会阻碍下面的书架发挥作用。
+|245925|<code>doImmediateRespawn</code>为true而玩家死亡时，下落的方块会在视觉显示上有问题。
+|246465|熔岩可能只在客户端侧使实体燃烧、受到伤害或被破坏，而由此造成不同步的现象。
+|248095|存档升级至1.18时，已被激活的循环型命令方块会停止运行。
+|;previous
+|248523|尝试打开信标界面时，游戏崩溃。
+|248617|加载数据包时客户端崩溃：<code>java.lang.IllegalStateException: Trying to access unbound value</code>。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:22w07a]]
+[[en:Java Edition 22w07a]]
+[[es:Java Edition 22w07a]]
+[[fr:Édition Java 22w07a]]
+[[ja:Java Edition 22w07a]]
+[[lzh:爪哇版二二週〇七甲]]
+[[pt:Edição Java 22w07a]]
+[[ru:22w07a (Java Edition)]]

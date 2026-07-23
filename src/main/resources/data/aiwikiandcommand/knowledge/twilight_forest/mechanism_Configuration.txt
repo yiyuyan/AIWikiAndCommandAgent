@@ -1,0 +1,222 @@
+The Configuration file is used to alter the behavior of the Twilight Forest mod. This can be found by navigating to the Mod Options menu, finding the Twilight Forest mod in the menu and selecting the Config button. Alternatively, one can find the config file using the command /config showfile twilightforest followed by either client or common. The following options can be found in this file.
+
+=Common Configurations=
+Found in twilightforest-common.toml, these configurations can completely change the way that the Twilight Forest can be played.
+
+## General Settings
+These are some generalized configuration settings. These settings will not drastically change the gameplay of Twilight Forest, but they can greatly help with various issues.
+
+### Skull Candles
+The config option disableSkullCandleCreation will determine if the ability to make Skull Candles by right clicking a vanilla mob's skull with a candle is allowed. Turn this on if you're having mod conflict issues for some reason.
+ By default, this is set to false
+
+### Enchantment Effects
+The config option showEnchantmentsOnItems will determine if items that come enchanted when you craft them (such as Ironwood or Steeleaf) should appear as enchanted way in the creative inventory. Please note that this does not affect the crafting recipes themselves, you will need a datapack to change those.
+ By default, this is set to true
+
+### Boss Loot Chests
+The config option bossesSpawnDropChests will determine if the Twilight Forest's bosses will put their drops inside of a chest where they originally spawned instead of dropping the loot directly on death. Note that the Knight Phantoms are not affected by this as their drops work differently than other bosses.
+ By default, this is set to true
+
+### Precipitation Distance
+The config option cloudBlockPrecipitationDistance will determine how many blocks down from a cloud block should the game logic check for handling weather related code. Lower if experiencing low tick rate. Set to 0 to turn all cloud precipitation logic off. See below: Cloud Precipitation
+ By default, this is set to 32
+
+## Multiplayer Settings
+These are tweaks to better adjust the Twilight Forest for multiplayer servers.
+
+### Boss Adjustments
+The config option multiplayerFightAdjuster will determine how bosses should adjust to multiplayer fights. There are 4 possible values that can be put here:
+
+link=|16px"NONE": Doesn't change anything when multiple people participate in a boss fight. Bosses will act the same as they do in singleplayer or solo fights.
+
+link=|16px"MORE_LOOT": Supplies additional drops to the boss loot table based on how many players participated in the fight. These are fully controlled through the entity's loot table, using the twilightforest:multiplayer_multiplier loot function. Note that this function will only do things to entities that are included in the twilightforest:multiplayer_inclusive_entities tag.
+
+link=|16px"MORE_HEALTH": Increases the maximum health of each boss by 35 hearts for each player nearby when the fight starts.
+
+link=|16px"MORE_LOOT_AND_HEALTH": Does both of the above functions for each boss.
+
+ By default, this is set to "MORE_HEALTH"
+
+### Keepsake Casket Locking
+The config option casketUUIDLocking  will determine if Keepsake Caskets that are placed when a player dies should be inaccessible by other players than the player who died. Use this if you don't want people taking from other people's death caskets. NOTE: Server operators will still be able to open locked caskets.
+ By default, this is set to false
+
+## Dimension Settings
+Settings for the Twilight Forest dimension itself can be found here. These purely affect player spawning.
+
+### Spawning Dimension
+The config option newPlayersSpawnInTF will determine if newly joining players should spawn in the Twilight Forest, opposed to spawning in the Overworld.
+ By default, this is set to false
+
+### Spawn Portal
+The config option portalForNewPlayer will determine if a return portal should generate for newly joining players when newPlayersSpawnInTF is true.
+ By default, this is set to false
+
+## Portal Settings
+All settings and tweaks regarding the Twilight Forest Portal can be found here:
+
+### Origin Dimension
+The config option originDimension will determine the dimension you can always travel to the Twilight Forest from, as well as the dimension you will return to when coming back from the Twilight Forest.
+ By default, this is set to "minecraft:overworld"
+
+### Additional Dimension Acesss
+The config option allowPortalsInOtherDimensions allow portals to the Twilight Forest to be made outside of the "origin" dimension listed above. It is important to note that this config does not change your dimension from the origin when blindly teleporting out of the Twilight Forest.
+ By default, this is set to false
+
+### Admin Portal Creation
+The config option portalCreationPermission will allow only players with the specified permission value or higher to create portals. This is based off of Vanilla's Permission System.
+ By default, this is set to 0
+
+### Disable Portal Creation
+The config option disablePortalCreation will completely disable the creation of Twilight Forest portals entirely, making the dimension restricted to only server operators.
+ By default, this is set to false
+
+### Portal Generation Safeguard
+The config option checkPortalPlacement determines if newly created portals should be pre-checked for safety from locations that aren't aligned with the player's progression. If this setting is false, portals will fail to form rather than redirect to a safe alternate destination. Note that disabling this also reduces the rate at which portal formation checks are performed.
+ By default, this is set to true
+
+### Lightning Fire
+The config option destructivePortalLightning, when set to false, will disable fire from generating from the lightning strike. This is purely for those who don't like fun.
+ By default, this is set to true
+
+### One Way Portal
+The config option shouldReturnPortalBeUsable determines if a return portal should require the activation item, or if it should be automatically activated, similar to the functionality of a Nether Portal.
+ By default, this is set to true
+
+### Advancement Activation
+The config option portalUnlockedByAdvancement uses an advancement to allow activation of the portal. For example, using the string "minecraft:story/mine_diamond" will lock the portal behind the "Diamonds!" advancement. Invalid/Empty Advancements will leave the portal unlocked.
+ By default, this is set to ""
+
+### Maximum Portal Size
+The config option maxPortalSize determines the max amount of water spaces the mod will check for when creating a portal. Very high numbers may cause performance issues, while the minimum number is 4.
+ By default, this is set to 64
+
+## Uncrafting Table Settings
+All configuration settings for the Uncrafting Table can be found here.
+
+### Uncrafting XP Cost
+The config option uncraftingXpCostMultiplier will determine the total XP cost of uncrafting an item and rounds up. Higher values means the recipe will cost more to uncraft, lower means less. Set to 0 to disable the cost altogether. Note that this only affects reversed crafting recipes, uncrafting recipes will still use the same cost as they normally would.
+ By default, this is set to 1.0
+
+### Repairing XP Cost
+The config option repairingXpCostMultiplier will the total XP cost of repairing an item and will round it up to it's nearest value. Higher values means the recipe will cost more to repair, lower means less.
+ By default, this is set to 1.0
+
+### Recipe Blacklist
+The config option disableUncraftingRecipes will determine the recipes that should be removed. To add a recipe, add the mod id followed by the name of the recipe, such as "twilightforest:firefly_particle_spawner". If an item has multiple crafting recipes and you wish to disable them all, add the item to the "twilightforest:banned_uncraftables" tag. If you have a problematic ingredient, add the item to the "twilightforest:banned_uncrafting_ingredients" tag.
+ By default, this is set to ["twilightforest:giant_log_to_oak_planks"]
+
+### Mod Whitelist
+The config option flipIdList will invert the above mod item list from a blacklist to a whitelist.
+ By default, this is set to false
+
+### Shapeless Uncrafting
+The config option enableShapelessCrafting will determine if the Uncrafting Table should be allowed to uncraft shapeless recipes. The Uncrafting Table was originally intended to only take shaped recipes, but this option remains for people who wish to keep the functionality.
+ By default, this is set to false
+
+### Recipe Switching
+The config option disableIngredientSwitching will determine if the uncrafting table should be allowed to switch between ingredients if a recipe uses a specific tag for crafting. This will remove the functionality for all recipes! If you want to prevent certain ingredients from showing up in the first place, use the twilightforest:banned_uncrafting_ingredients tag.
+ By default, this is set to false
+
+### Disable Uncrafting Feature
+The config option disableUncrafting will disables the uncrafting function of the uncrafting table. Recommended as a last resort if there's too many things to change about its behavior (or you're just lazy, we don't judge). Do note that some special uncrafting recipes are not disabled as the mod relies on them for other things.
+ By default, this is set to false
+
+### Disable Uncrafting Table
+The config option disableUncraftingTable will completely disable any usage of the uncrafting table, as well as prevents it from showing up in loot or crafted. Please note that table has more uses than just uncrafting, you can read about them here! It is highly recommended to keep the table enabled as the mod has special uncrafting exclusive recipes, but the option remains for people that don't want the table to be functional at all. If you are looking to just prevent normal crafting recipes from being reversed, consider using disableUncrafting instead.
+ By default, this is set to false
+
+## Magic Tree Settings
+Configuration settings regarding the Magic Tree Cores can be found here. All values can range between 0 and 128, where 0 completely disables the core's function.
+
+### Timewood Clock
+The config option timeCoreRange will determine the radius at which the Timewood Clock works.
+ By default, this is set to 16, making it a 33 by 33 range.
+
+### Heart of Transformation
+The config option transformationCoreRange will determine the radius at which the Heart of Transformation works.
+ By default, this is set to 16, making it a 33 by 33 range.
+
+### Minewood Core
+The config option miningCoreRange will determine the radius at which the Minewood Core works.
+ By default, this is set to 16, making it a 33 by 33 range.
+
+### Sortingwood Engine
+The config option sortingCoreRange will determine the radius at which the Sortingwood Engine works.
+ By default, this is set to 16, making it a 33 by 33 range.
+
+## Shield Parrying
+Shield Parrying is a set of config options that allow for parrying projectiles added in the Twilight Forest. It will deflect a projectile back at the target at the same speed and velocity it had. If the mod Shield Parry is installed, all config options listed will have no effect.
+
+### Parry Non-Twilight Projectiles
+The config option parryNonTwilightAttacks determines if other projectiles from vanilla or other mods can be deflected.
+ By default, this is set to disabled
+
+### Parry Opportunity
+The config option shieldParryTicksArrow determines the amount of ticks (1/20th of a second) where it is possible to parry a projectile.
+ By default, this is set to 40
+
+=Client Configurations=
+Found in twilightforest-client.toml, these are configurations that act as a performance and appearance adjustments, allowing for more customization and performance for those on a lower-end computer
+
+### Silent Cicadas
+The config option silentCicadas determines if Cicadas make any noises. In the event the sound events for Cicadas are not working properly, either by corruption or missing file, or the sounds are too annoying to bear, they can be silenced.
+ By default, this is set to false
+
+### Silent Head Cicadas
+The config option silentCicadasOnHead determines if Cicadas make any noises when sitting on your head. If the config option silentCicadas is set to true, this option will not have any effect.
+ By default, this is set to false
+
+### Screen Shaking Effect
+The config option screenShakingEffect controls whether the screen shakes when a Magic Bean is in the process of growing.
+ By default, this is set to true
+
+### Trophy Rotation
+The config option rotateTrophyHeadsGui determines trophies heads will rotate on the item model. This option has no performance impact, but can still be disabled for those who do not like fun.
+ By default, this is set to true
+
+### Optifine
+The config option disableOptifineNagScreen determines if the Optifine warning screen should be disabled, if it is installed. It is highly recommended to use a replacement for Optifine.
+ By default, this is set to false
+
+### Biome Toasts
+The config option disableLockedBiomeToasts determines if toasts should appear when travelling into a locked biome. Not recommended if one is not familiar with the progression.
+ By default, this is set to false
+
+### Questing Ram Indicator
+The config option questRamWoolIndicator determines if a render should exist that shows a little check mark or x above your crosshair, depending on if fed the Questing Ram a specific color of wool.
+ By default, this is set to true
+
+### Fortification Indication
+The config option fortificationShieldIndicator determines if a render should exist that shows how many fortification shields are currently active on your player, above the armor bar. Disable this option if you find it intrusive, or other mods render over or under it.
+ By default, this is set to true
+
+### Fortification Indication in Creative
+The config option fortificationShieldIndicatorInCreative determines if fortification indication is also on in creative for debugging.
+ By default, this is set to false
+
+### Cloud Precipitation
+The config option cloudBlockPrecipitationDistance determines how far away precipitation should be rendered when going through clouds. Leave this value to -1 to be synced with the common config, or set it to 0 to disable the cloud percipitation entirely.
+ By default, this is set to -1
+
+### Giant Skins
+The config option giantSkinUUIDs determines what skin(s) Giants should have. If left blank, it will default to the player's skin.
+ By default, this is set to []
+
+### Aurora Shader
+The config option auroraBiomes determines which biomes the Aurora Shader should be applied. Remove all text and leave [] if you wish to disable the shader completely.
+ By default, this is set to ["twilightforest:glacier"]
+
+### Ore Meter Interface
+The config option prettifyOreMeterGui determines if the dashes and percentages in the Ore Meter GUI should line up properly.
+ By default, this is set to true
+
+### Charm Animations
+The config option totemCharmAnimation determines if the Charm of Keeping and Charm of Life display similarly to the Totem of Undying when used.
+ By default, this is set to false
+
+=History=
+【历史更新】
+• 4.7.3040：Fixed spawnkills in the dimension especially when newPlayersSpawnInTF is enabled in the config.
+• 4.7.3094：Fixed players always logging into the Twilight Forest when newPlayersSpawnInTF config is enabled: Only on first login they will spawn in the TF.

@@ -1,0 +1,119 @@
+# 页面: 属性/空气阻力修正系数
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E7%A9%BA%E6%B0%94%E9%98%BB%E5%8A%9B%E4%BF%AE%E6%AD%A3%E7%B3%BB%E6%95%B0
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:31
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+{{Infobox attribute}}
+
+'''空气阻力修正系数（Air Drag Modifier）'''是控制生物在空气中运动时受到的阻力的[[属性]]。
+
+== 行为 ==
+{{main|实体#运动}}
+设此属性的计算值是<math>A</math>，来自方块的阻力系数的计算值是<math>B</math>。
+
+生物在空气中非[[滑翔]]移动时，其水平方向上的速度会乘上<math>B \times (1 - (1 - 0.91) \times A)</math>，竖直方向上的速度会乘上<math>1 - (1 - 0.98) \times A</math>。如果生物是[[蜜蜂]]、[[鹦鹉]]或吸收了方块的[[硫磺史萊姆]]，则竖直方向上的速度会乘上<math>1 - (1 - 0.91) \times A</math>。低于0时视为0，高于1时视为1。此计算不考虑生物持有的[[飘浮]]效果。
+
+来自方块的阻力系数的计算参见{{attribute|friction_modifier}}。
+
+[[山羊]]、[[青蛙]]和[[旋风人]]的长跳或大跳不受空气阻力影响。
+
+== 适用的生物 ==
+{| class="wikitable sortable"
+! 生物
+! 基值
+|-
+| 所有生物
+| 1.0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| bouncy_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.99
+| 否
+| [[硫方怪]]吸收方块后，且原型为弹性
+|-
+| explosive_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.7
+| 否
+| 硫方怪吸收方块后，且原型为爆炸
+|-
+| fast_flat_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.99
+| 否
+| 硫方怪吸收方块后，且原型为快速平移
+|-
+| fast_sliding_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.99
+| 否
+| 硫方怪吸收方块后，且原型为快速滑行
+|-
+| high_resistance_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.99
+| 否
+| 硫方怪吸收方块后，且原型为高阻力
+|-
+| hot_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.9
+| 否
+| 硫方怪吸收方块后，且原型为高温
+|-
+| light_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| 0.8
+| 否
+| 硫方怪吸收方块后，且原型为轻盈
+|-
+| regular_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.9
+| 否
+| 硫方怪吸收方块后，且原型为普通
+|-
+| slow_bouncy_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.95
+| 否
+| 硫方怪吸收方块后，且原型为缓慢弹性
+|-
+| slow_flat_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.9
+| 否
+| 硫方怪吸收方块后，且原型为缓慢平移
+|-
+| slow_sliding_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.99
+| 否
+| 硫方怪吸收方块后，且原型为缓慢滑行
+|-
+| sticky_mul_air_drag_modifier
+| add_multiplied_total (Op2)
+| -0.99
+| 否
+| 硫方怪吸收方块后，且原型为黏性
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了空气阻力修正系数。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

@@ -1,0 +1,139 @@
+# 页面: Java版25w21a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8825w21a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:36
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=25w21a
+|image=25w21a.png
+|image2=Java Edition 25w21a Simplified.png\Java Edition 25w21a Traditional.png\Java Edition 25w21a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2025年5月20日
+|jsonhash=ec6b54caf3f3d79865d360fdf04b9d0b3eaa6ed2
+|clienthash=cc1841deb726892f1e1be6fd59f870eba4ba5761
+|clientmap=ea047a77e9fb8fb92ec399ffc6a39ba5f498905a
+|serverhash=a5f7be5d2f05250abfc49639a26f399b8a8ebb61
+|servermap=e2b7179bf376b18ad5cbcd77301f1f610da97480
+|parent=1.21.6
+|prevparent=1.21.5
+|prev=25w20a
+|next=1.21.6-pre1
+|nextparent=1.21.7
+}}<onlyinclude>
+
+'''25w21a'''是[[Java版1.21.6]]的第7个，也是最后一个快照，发布于2025年5月20日<ref>{{snap|25w21a|May 20, 2025}}</ref>，加入了一些新音效，并修复了一些漏洞。
+
+== 新内容 ==
+=== 物品 ===
+'''[[拴绳]]'''
+* 为拴绳断裂加入了新音效<code>entity/leashknot/break</code>。
+
+'''[[剪刀]]'''
+* 为剪下[[鞍]]、[[马铠]]和羊驼身上的[[地毯]]分别加入了新音效{{cd|d=pretty|mob/horse/armor_unequip|mob/horse/saddle_unequip|mob/llama/unequip}}。
+
+== 更改 ==
+=== 生物 ===
+'''[[马]]、[[驴]]和[[骡]]'''
+* 现在可以通过喂食[[胡萝卜]]以治疗它们、加速其幼年变种成长和使其更容易驯服。
+
+=== 游戏内容 ===
+'''[[云]]'''
+* 更新了{{filename|clouds.png}}。
+** 包含一个向右旋转90°的[[苦力怕]]图案。
+
+=== 常规 ===
+'''[[音效]]'''
+* 更改了以下音效的名称：
+** <code>entity/leashknot/break1</code>→<code>entity/leashknot/unleash1</code>
+** <code>entity/leashknot/break2</code>→<code>entity/leashknot/unleash2</code>
+** <code>entity/leashknot/break3</code>→<code>entity/leashknot/unleash3</code>
+** <code>entity/leashknot/place1</code>→<code>entity/leashknot/leash1</code>
+** <code>entity/leashknot/place2</code>→<code>entity/leashknot/leash2</code>
+** <code>entity/leashknot/place3</code>→<code>entity/leashknot/leash3</code>
+
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|78}}。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|62}}。
+
+'''[[Java版标签|标签]]'''
+* 向<code>#horse_food</code>物品标签中加入了<code>carrot</code>。
+
+'''[[对话框]]'''
+* <code>run_command</code>点击事件现在能正常关闭对话框，不论是否需要不为0的权限等级。
+* 通常情况下，对话框关闭后应该返回打开此对话框的上一个屏幕。
+* 如果玩家正在警告屏幕时接收到对话框，则游戏不会显示对话框，仅当玩家退出警告屏幕后才显示。
+* 对话框的部分元素现在具有上限：
+** 所有按钮的{{nbt|int|width}}：1 - 1024
+** <code>plain_message</code>主体元素的{{nbt|int|width}}：1 - 1024
+** <code>item</code>主体元素：
+*** {{nbt|int|description.width}}：1 - 1024
+*** {{nbt|int|height}}：1 - 256
+*** {{nbt|int|width}}：1 - 256
+** <code>text</code>输入控件的{{nbt|int|width}}：1 - 1024
+** <code>single_option</code>输入控件的{{nbt|int|width}}：1 - 1024
+** <code>number_range</code>输入控件的{{nbt|int|width}}：1 - 1024
+* <code>single_option</code>输入控件：
+** 加入<code>max_length</code>字段，表示输入文本的最大长度。
+** 加入<code>multiline</code>字段，存在时允许输入多行文本。
+*** <code>max_lines</code>：如果存在，则限制最大行数。
+*** <code>height</code>：最大高度，取值在1至512之间。
+**** 如果省略此字段，但存在<code>max_lines</code>则以其行数作为文本框高度。
+**** 如果<code>multiline</code>为空，则渲染4行文本的高度。
+* <code>number_range</code>输入控件：
+** 删除<code>steps</code>字段，以<code>step</code>代替，为一个可选的正浮点数。
+*** 如果存在，则允许输入<code>initial + <any integer> * step</code>的值。
+*** 如果不存在，则允许输入任何值。
+** <code>initial</code>现在默认为取值区间的中点。
+* <code>multi_action_input_form</code>对话框类型：
+** 加入了<code>columns</code>字段，表示提交操作按钮的列数，默认为2。
+
+== 修复 ==
+{{fixes|fixedin=25w21a|showdesc=1|new=1
+|;old
+|36696|点击菜单屏幕中的统计信息按钮会将游戏推进1游戏刻。
+|112730|信标光柱和结构方块每帧渲染两次。
+|236464|重新加载区块后，从玩家下方发出的信标光柱不可见。
+|239701|“{{tr|区块构建器|區塊生成器|區塊構建器}}”设置为“{{tr|线程化|依執行緒|執行緒}}”时，破坏冰和飞行时出现渲染问题。
+|258336|使用线程化或半阻塞区块构建器时，冰霜行者在区块边界频繁产生视觉崩坏。
+|;1.21.5的漏洞
+|296337|矿车导致内存使用量增加并引发崩溃。
+|297264|猫的种类不再基于种子随机。
+|;dev
+|297336|对角落掷出的附魔之瓶生成的经验球很容易卡进方块中。
+|297615|尝试加入已关闭的Realm时出现不可翻译的错误消息。
+|;prev
+|297803|字符串“menu.custom_screen_info.contents”将“personal”错拼为“pesonal”。
+|297806|<code>music.game.swamp.labyrinthine</code>错拼曲名。
+|297808|<code>music.game.oxygene</code>缺少抑音符。
+|297812|粗体文本的渲染与上个版本不同。
+|297813|Amos Roddy未列入鸣谢名单。
+|297823|<code>music.game.mice_on_venus</code>使用了错误的大小写。
+|297845|在单人游戏中，直到返回游戏前，点击统计信息按钮不会播放按钮点击音效。
+|297846|“音乐”滑动条设为0时，暂停菜单中的音乐弹窗闪烁。
+|297875|聊天消息中带下划线文本的阴影与其下方的文本重叠。
+|297888|使用不同字体时，文本不再以一致的顺序呈现。
+|297917|显示具有极宽按钮的对话框时，客户端停止响应。
+|297977|对话框列布局在网格和溢出线性布局间存在额外间距。
+|298013|书中带有<code>click_event</code>的文本不再关闭书本屏幕。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:25w21a]]
+[[en:Java Edition 25w21a]]
+[[es:Java Edition 25w21a]]
+[[fr:Édition Java 25w21a]]
+[[it:Java Edition 25w21a]]
+[[ja:Java Edition 25w21a]]
+[[ko:Java Edition 25w21a]]
+[[pt:Edição Java 25w21a]]
+[[ru:25w21a (Java Edition)]]
+[[uk:25w21a (Java Edition)]]

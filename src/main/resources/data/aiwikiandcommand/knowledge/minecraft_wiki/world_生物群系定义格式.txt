@@ -1,0 +1,217 @@
+# 页面: 生物群系定义格式
+# 来源: https://zh.minecraft.wiki/w/%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 使用计算器的页面
+# 抓取时间: 2026-07-14 17:32:21
+# 原始 Wikitext 内容:
+
+{{exclusive|java|customtext=基岩版的生物群系文件请参见[https://learn.microsoft.com/en-us/minecraft/creator/documents/biomes/biomeoverview 官方文档]}}
+'''生物群系定义文件'''是'''[[生物群系]]（Biome）'''在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+生物群系在游戏中使用<code>BIOME</code>注册表，数据包路径为{{filepath|worldgen/biome}}，即所有的生物群系定义文件都需要在{{filepath|data/<''命名空间''>/worldgen/biome}}目录下定义，生物群系标签则需要在{{filepath|data/<''命名空间''>/tags/worldgen/biome}}目录下定义。
+
+生物群系定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|boolean|has_precipitation|required=1}}：生物群系是否拥有[[生物群系#降水|降水]]。
+** {{nbt|float|temperature|required=1}}：生物群系的[[温度]]值。
+** {{nbt|string|temperature_modifier|required=1}}：（默认为<code>none</code>）温度修饰器，在计算随高度调整的温度值之前对初始温度值进行随机修改。取值只能为<code>none</code>（不修改）或<code>frozen</code>（将某些区域设定为0.2）。
+** {{nbt|float|downfall|required=1}}：生物群系的降水值。此值并不影响降水行为，而是和温度值一起影响植物颜色。
+** {{nbt|compound|attributes|}}：生物群系的环境属性映射，不能指定不依赖位置解析的环境属性。如果有多个相同的环境属性，则游戏只使用最后一个值。
+*** {{nbt|any}}{{nbt|compound|<''环境属性ID''>}}：一项环境属性及其对应的值，详见[[环境属性]]。
+** {{nbt|compound|effects|required=1}}：生物群系的环境效果。
+*** 见下文{{slink||环境效果}}。
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|carvers|required=1}}：（可以为空）可以在生物群系内生成的[[雕刻器定义格式|雕刻器]]。可以为以<code>#</code>开头的雕刻器标签、雕刻器ID、雕刻器的内联格式，一个雕刻器ID的列表或其内联格式的列表。
+** {{nbt|list|features|required=1}}：（可以为空）可以在该生物群系放置的[[地物]]。此列表应有且仅有11个元素，详见下文{{slink||地物生成}}。
+*** {{nbt|string}}{{nbt|list}}：这一地物生成阶段可以放置的地物。可以为以<code>#</code>开头的[[已放置的地物]]标签、一个已放置的地物ID、一个已放置的地物列表或一个已放置的地物内联格式的列表。
+** {{nbt|float|creature_spawn_probability|required=1}}：（{{interval|left=0|right=0.9999999}}，默认为0.1）世界生成时生成[[生成#初始动物生成|初始动物]]的概率。
+** {{nbt|compound|spawners|required=1}}：（可以为空）生物生成设置。
+*** {{nbt|list|<''生成类别''>}}：此项生成类别的生成，可用类别及意义见{{slink|生成|生成类别}}。
+**** {{nbt|compound}}：此类别下的一项生成设置。
+***** {{nbt|string|type|required=1}}：实体类型ID。若指定的实体的生成类别为“其他”，则游戏只会生成猪。
+***** {{nbt|int|weight|required=1}}：该生物的生成权重。
+***** {{nbt|int|minCount|required=1}}：（{{interval|left_open=0}}）成群生成时的最低数量。
+***** {{nbt|int|maxCount|required=1}}：（{{interval|left_open=0}}）成群生成时的最高数量。
+** {{nbt|compound|spawn_costs|required=1}}：（可以为空）生成势，只有在此列出的生物使用。以一套类似于模拟真空中的点电荷系统的机制控制该生物群系内生成生物的数量与密度，详见{{slink|生成|生成势}}。
+*** {{nbt|compound|<''实体ID''>}}
+**** {{nbt|double|energyBudget|required=1}}：电势预算。生成此实体时能消耗最大能量。在宏观意义上看，此值越小生成的越少。
+**** {{nbt|double|charge|required=1}}：此次生成放置的点电荷的电荷量。每次生成都在之前放置的点电荷的基础上试图将一个点电荷从无穷远处移动到目标点，计算电势能并比较以决定是否生成。在宏观意义上看，此值越大生成的越少。
+</div>
+
+=== 环境效果 ===
+环境效果为生物群系的氛围提供了多种效果。生物群系的水体、植物的颜色等由下列标签决定。其中多项颜色会受到{{tp|options.videoTitle}}中的“{{tp|options.biomeBlendRadius}}”选项影响。
+
+植物颜色若未指定则默认使用{{nbt|float|downfall|required=1}}和{{nbt|float|temperature|required=1}}与对应的颜色图计算，计算方式见{{slink|生物群系|植物颜色}}。
+
+<div class="treeview">
+* {{nbt|compound|effects|required=1}} 生物群系环境效果
+** {{nbt|string}}{{nbt|int}}{{nbt|list|water_color|required=1}}：水体颜色。需为一个RGB颜色，下列颜色的格式与此相同。
+*** {{nbt inherit/string rgb color}}
+** {{nbt|string}}{{nbt|int}}{{nbt|list|dry_foliage_color}}：枯叶颜色。用于[[枯叶堆]]的着色。
+*** {{nbt inherit/string rgb color}}
+** {{nbt|string}}{{nbt|int}}{{nbt|list|foliage_color}}：树叶颜色。用于部分[[树叶]]和[[藤蔓]]的着色。
+*** {{nbt inherit/string rgb color}}
+** {{nbt|string}}{{nbt|int}}{{nbt|list|grass_color}}：草-{}-地颜色。用于[[草方块]]、[[矮草丛]]、[[高草丛]]、[[蕨]]、[[大型蕨]]、[[蕨盆栽]]中的蕨、[[灌木丛]]、[[甘蔗]]、[[粉红色花簇]]的茎和[[野花簇]]的茎的着色。
+*** {{nbt inherit/string rgb color}}
+** {{nbt|string|grass_color_modifier}}：（默认为<code>none</code>）草-{}-地颜色修饰器，取值可以为<code>none</code>（无调整）、<code>dark_forest</code>（将草-{}-地颜色与十六进制值FEFEFE按位与计算并和2634762相加后再取平均值）或<code>swamp</code>（根据噪声值从5011004和6975545两值随机选取）。
+</div>
+
+{{Calculator|decimalColor}}
+
+== 定义行为 ==
+{{Filetr|World Selection Recreate Error.png|thumb|没有定义<code>minecraft:plains</code>时的重建世界屏幕}}
+生物群系定义数据仅在服务端启动时加载一次，使用{{cmd|reload}}命令不可以重新加载生物群系定义，而必须重启服务端。
+
+每个生物群系都定义了自己独特的气候、环境效果、地物、雕刻器、生成生物等，将维度划分出了若干独特的区域。
+
+在[[单一生物群系]]世界预设中，可以选择所有已注册的生物群系，生物群系的文本默认为命名空间ID<code>-{}-<''命名空间''>:<''路径''></code>，但可以通过<code>-{}-biome.<''命名空间''>.<''路径''></code>本地化键名指定名称。
+
+如果<code>BIOME</code>注册表中没有元素<code>plains</code>，则游戏会拒绝加载世界。
+{{-}}
+
+== 地物生成 ==
+在世界生成的放置地物阶段，游戏会读取生物群系的地物信息并进行放置。地物放置是'''有序的'''：第一是游戏将地物生成划分为了若干生成阶段，生成阶段之间是有序的；第二是在每个生成阶段内，地物的放置顺序是有序的。
+
+地物的某一个生成阶段可直接对应{{nbt|list|features}}中的某个元素。原版游戏共使用了11个生成阶段，依次对应{{nbt|list|features}}的前11个元素。这11个阶段也被用于结构生成，分别是：
+* <code>RAW_GENERATION</code>：原始生成，原版用于放置末地浮岛。
+* <code>LAKES</code>：湖，原版用于放置熔岩湖。
+* <code>LOCAL_MODIFICATIONS</code>：本地修改，原版用于放置紫晶洞、冰山和玄武岩柱等。
+* <code>UNDERGROUND_STRUCTURES</code>：地下结构，原版用于放置刷怪房和化石。
+* <code>SURFACE_STRUCTURES</code>：地表结构，原版用于放置沙漠水井、蓝冰和冰刺等。
+* <code>STRONGHOLDS</code>：要塞，原版游戏未使用此阶段。
+* <code>UNDERGROUND_ORES</code>：地下矿物，原版用于放置各种矿石的团簇。
+* <code>UNDERGROUND_DECORATION</code>：地下装饰，原版用于放置非矿石团簇、下界矿石等。
+* <code>FLUID_SPRINGS</code>：涌泉，原版用于放置涌泉。
+* <code>VEGETAL_DECORATION</code>：植被装饰，原版用于放置各种植物类地物。
+* <code>TOP_LAYER_MODIFICATION</code>：顶层修改，原版用于放置冰冻顶层。
+
+游戏会按照生成阶段的顺序依次生成地物。虽然原版游戏只使用了11个生成阶段，但超出第11个生成阶段定义的地物依旧可以被游戏正常放置。
+
+对于可生成于同一维度的所有生物群系而言，生物群系的每个生成阶段中的地物的相对顺序必须相同。例如平原生物群系的地下矿物阶段为<code>ore_dirt</code>在<code>ore_gravel</code>之前，则其他所有的主世界生物群系若地下矿物阶段存在这两个地物放置，其相对顺序也一定是<code>ore_dirt</code>在<code>ore_gravel</code>之前。
+
+如果某维度内的两个生物群系任一生成阶段内的地物相对顺序不同，则游戏会在放置地物阶段报错<code>-{}-Feature order cycle found</code>。游戏并不会对地物顺序预先检查，只会在世界生成阶段检测出错误并中止游戏进程，因此必须手动检查地物顺序。
+
+对于可生成于同一维度的所有生物群系的所有地物生成阶段而言，应按下列方法检查地物顺序：
+* 如果是内联格式的列表或一个命名空间ID，则无顺序可言，无需检查。
+* 如果是命名空间ID的列表，则依照列表顺序判定地物顺序。
+* 如果是一个标签，则依照标签内{{nbt|list|values|required=1}}的顺序判定地物顺序。
+** 以上述平原为例，则不允许内容为<code>{"values":["ore_gravel","ore_dirt"]}</code>的标签出现在其他主世界生物群系的地下矿物阶段。
+
+此外，游戏会记录所有属于已配置的地物标签{{TagLink|configured_feature|can_spawn_from_bone_meal}}的地物，当玩家对此生物群系内的草方块使用骨粉时，若草方块上的位置符合这些地物的放置要求则游戏会尝试生成此类地物而不只是生成草丛。原版游戏用来实现在特定的生物群系使用骨粉后会生成特定的花。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16.2|dev=20w28a|加入了对数据包中的生物群系的实验性支持。}}
+|{{HistoryLine|||dev=20w30a|向<code>effects</code>字段加入了{{nbt|int|grass_color}}、{{nbt|int|foliage_color}}、{{nbt|int|water_color}}和{{nbt|int|water_fog_color}}参数。
+|现在可定义生物群系在自选世界屏幕上的显示名称。}}
+|{{HistoryLine|||dev=pre1|自定义生物群系从{{filepath|-{}-data/minecraft/worldgen/biome/<''命名空间''>/<''路径''>}}移动到{{filepath|-{}-data/<''命名空间''>/worldgen/biome/<''路径''>}}，和其他资源保持一致。}}
+|{{HistoryLine|||dev=pre2|加入了{{nbt|boolean|player_spawn_friendly}}字段。}}
+|{{HistoryLine||1.17|dev=21w13a|现在生成类别可接受<code>underground_water_creature</code>。}}
+|{{HistoryLine||1.18|dev=21w37a|移除了{{nbt|float|depth}}和{{nbt|float|scale}}字段。
+|移除了{{nbt|list|starts}}字段。
+|现在生成类别可接受<code>axolotls</code>。}}
+|{{HistoryLine|||dev=21w41a|移除了{{nbt|string}}{{nbt|object|surface_builder}}字段。
+|加入了生成阶段<code>FLUID_SPRINGS</code>。}}
+|{{HistoryLine|||dev=pre1|现在<code>features</code>字段需要已放置的地物，而不是已配置的地物。}}
+|{{HistoryLine|||dev=pre2|移除了{{nbt|boolean|player_spawn_friendly}}字段。}}
+|{{HistoryLine|||dev=pre3|现在<code>liquid</code>阶段雕刻器不再工作，但{{nbt|list|carvers.liquild}}参数仍会被解析。}}
+|{{HistoryLine||1.18.2|dev=22w06a|现在{{nbt|list|features}}的内部列表和{{nbt|list|carvers.<''雕刻器阶段''>}}接受标签。}}
+|{{HistoryLine||1.19|dev=22w11a|移除了{{nbt|string|category}}字段。}}
+|{{HistoryLine||1.19.3|dev=pre3|现在{{cd|d=pretty|effects.additions_sound.sound|effects.ambient_sound|effects.music.sound}}参数仅接受声音事件，此前接受资源包定义的声音。<ref>{{bug|MC-258911#comment-1220828|||Invalid}}</ref>}}
+|{{HistoryLine||1.19.4|dev=23w03a|移除了{{nbt|string|precipitation}}字段。
+|加入了{{nbt|boolean|has_precipitation}}字段。
+|现在生物群系不再控制生成的兔子是否为白色或黑白相间兔子，此前由降水类型是否为<code>snow</code>控制。
+|现在生物群系不再控制火是否更快燃烧，此前由降水是否大于0.85控制。
+|现在生物群系不再控制雪傀儡是否受到伤害，此前由温度是否大于1.0控制。}}
+|{{HistoryLine||1.21.2|dev=24w33a|现在可在<code>carvers</code>字段直接列出雕刻器，而非在<code>carvers.air</code>下列出。}}
+|{{HistoryLine||1.21.4|dev=24w44a|向<code>effects</code>字段加入了{{nbt|float|music_volume}}参数。
+|将<code>effects</code>的{{nbt|object|music}}字段的格式改为加权列表格式。}}
+|{{HistoryLine||1.21.5|dev=25w08a|向<code>effects</code>字段加入了{{nbt|int|dry_foliage_color}}参数。}}
+|{{HistoryLine||1.21.11|dev=25w42a|加入了{{nbt|compound|attributes}}字段以指定生物群系环境属性。
+|移除了<code>effects</code>字段的{{nbt|int|fog_color}}、{{nbt|int|water_fog_color}}、{{nbt|int|sky_color}}、{{nbt|compound|particle}}、{{nbt|string}}{{nbt|compound|ambient_sound}}、{{nbt|compound|additions_sound}}、{{nbt|compound|mood_sound}}、{{nbt|list|music}}和{{nbt|float|music_volume}}参数。它们的格式见{{slink||旧版环境效果}}。}}
+|{{HistoryLine|||dev=25w44a|现在生物群系环境效果支持浮点数数组和RGB字符串格式的颜色，此前仅支持十进制数字格式。}}
+|{{HistoryLine||26.1|dev=pre-1|将使用骨粉可放置地物的判断依据由地物是否是<code>flower</code>类型改为地物本身是否属于已配置的地物标签<code>#can_spawn_from_bone_meal</code>。}}
+}}
+
+=== 生物群系分类 ===
+在1.19前，生物群系分类决定了生物群系的若干性质。
+
+{|class="wikitable collapsed collapsible"
+! {{nbt|string|category}} || 游戏影响
+|-
+| none<br>taiga<br>extreme_hills<br>jungle<br>mesa<br>plains<br>savanna<br>icy<br>forest<br>underground<br>mountain
+| ''无''
+|-
+| beach<br>the_end<br>nether
+| 此分类的生物群系不能生成要塞。
+|-
+| ocean
+| 此分类的生物群系不能生成要塞，在地图上采用水系像素点绘制，可以播放水下环境音效，是海底神殿生成判定的有效生物群系。
+|-
+| desert
+| 此分类的生物群系生成的兔子均为金色兔子。
+|-
+| river
+| 此分类的生物群系不能生成要塞，在地图上采用水系像素点绘制，可以播放水下环境音效，是海底神殿生成判定的有效生物群系，生成类别<code>water_ambient</code>的生物生成得更少。
+|-
+| swamp
+| 此分类的生物群系不能生成要塞，在地图上采用水系像素点绘制，水下迷雾距离更近。
+|-
+| mushroom
+| 此分类的生物群系无法生成灾厄巡逻队和僵尸围城。
+|}
+
+=== 旧版环境效果 ===
+<div class="treeview">
+* {{nbt|compound|effects|required=1}} 生物群系环境效果
+** ''省略{{nbt|int|water_color|required=1}}、{{nbt|int|dry_foliage_color|required=1}}、{{nbt|int|foliage_color|required=1}}、{{nbt|int|grass_color|required=1}}和{{nbt|string|grass_color_modifier}}。''
+** {{nbt|int|fog_color|required=1}}：迷雾颜色。格式为十六进制转十进制RGB颜色值，下列颜色格式与此相同。
+** {{nbt|int|sky_color|required=1}}：天空颜色。
+** {{nbt|int|water_fog_color|required=1}}：水下迷雾颜色。
+** {{nbt|compound|particle}}：生物群系的粒子效果。
+*** {{nbt|compound|options|required=1}}：要使用的粒子。
+**** 见[[粒子数据格式]]。
+*** {{nbt|float|probability|required=1}}：粒子产生的频率。高于1的值相当于1，低于0的值相当于0。
+** {{nbt|string}}{{nbt|object|ambient_sound}}：循环音效使用的声音事件。
+*** {{nbt inherit/sound event}}
+** {{nbt|compound|additions_sound}}：附加音效。
+*** {{nbt|string}}{{nbt|object|sound|required=1}}：附加音效使用的声音事件。
+**** {{nbt inherit/sound event}}
+*** {{nbt|double|tick_chance|required=1}}：每一游戏刻中开始播放的概率。高于1的值相当于1，低于0的值相当于0。
+** {{nbt|compound|mood_sound}}：氛围音效。
+*** {{nbt|string}}{{nbt|object|sound|required=1}}：氛围音效使用的声音事件。
+**** {{nbt inherit/sound event}}
+*** {{nbt|int|tick_delay|required=1}}：两次播放间的最小延迟。
+*** {{nbt|int|block_search_extent|required=1}}：决定了氛围音效播放位置的正方体范围的大小。此正方体范围以玩家为中心，棱长为此值的2倍。
+*** {{nbt|double|offset|required=1}}：值越大，声源距离玩家越远。
+** {{nbt|list|music}}：生物群系的音乐。此列表为空时则不播放音乐。
+*** {{nbt|compound}}：一项音乐。
+**** {{nbt|compound|data|required=1}}：音乐具体数据。
+***** {{nbt|string}}{{nbt|object|sound|required=1}}：音乐使用的声音事件。
+****** {{nbt inherit/sound event}}
+***** {{nbt|int|min_delay|required=1}}：两次播放间最小延迟。会受到{{tp|options.music_frequency}}[[选项]]的限制，因此实际最小延迟不会超过{{convert|24000||分}}。
+***** {{nbt|int|max_delay|required=1}}：两次播放间最大延迟。会受到{{tp|options.music_frequency}}选项的限制，因此实际最大延迟不会超过{{convert|24000||分}}。
+***** {{nbt|boolean|replace_current_music|required=1}}：是否立即替换正在播放的音乐。
+**** {{nbt|int|weight|required=1}}：选择该音乐的权重。
+** {{nbt|float|music_volume}}：（默认为1）音乐的音量，游戏会在切换生物群系时平滑过渡音量。高于1的值相当于1，低于0的值相当于0。
+</div>
+
+== 参考 ==
+{{reflist}}
+
+== 外部链接 ==
+* [https://misode.github.io/worldgen/biome/ misode.github.io上的生物群系生成器]
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Biomdefinition]]
+[[en:Biome definition]]
+[[fr:Définition de biome]]
+[[ja:バイオームのカスタマイズ]]
+[[pt:Definição de biomas]]
+[[uk:Визначення біому]]

@@ -1,0 +1,158 @@
+# 页面: 属性/攻击伤害
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E6%94%BB%E5%87%BB%E4%BC%A4%E5%AE%B3
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+{{Infobox attribute}}
+
+'''攻击伤害（Attack Damage）'''是控制生物[[近战攻击]]伤害的[[属性]]。
+
+== 行为 ==
+{{main|近战攻击#基础近战攻击力}}
+攻击伤害的计算值是生物的基础近战攻击力。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Giant}}
+| 50
+|-
+| {{EntityLink|Warden}}
+| 30
+|-
+| {{EntityLink|Iron Golem}}
+| 15
+|-
+| {{EntityLink|Ravager}}
+| 12
+|-
+| {{EntityLink|Frog}}
+| 10
+|-
+| {{EntityLink|Elder Guardian}}
+| 8
+|-
+| {{EntityLink|Enderman}}<br>{{EntityLink|Piglin Brute}}
+| 7
+|-
+| {{EntityLink|Phantom}}
+| data-sort-value="2" | 2（{{code|size}}为0）<br>6+{{code|size}}（{{code|size}}大于0）
+|-
+| {{EntityLink|Blaze}}<br>{{EntityLink|Guardian}}<br>{{EntityLink|Panda}}<br>{{EntityLink|Polar Bear}}
+| 6
+|-
+| {{EntityLink|Hoglin}}（成年）<br>{{EntityLink|Zoglin}}（成年）
+| 6
+|-
+| {{EntityLink|Piglin}}<br>{{EntityLink|Pillager}}<br>{{EntityLink|Vindicator}}<br>{{EntityLink|Zombified Piglin}}
+| 5
+|-
+| {{EntityLink|Vex}}<br>{{EntityLink|Wolf}}
+| 4
+|-
+| {{EntityLink|Breeze}}<br>{{EntityLink|Cat}}<br>{{EntityLink|Creaking}}<br>{{EntityLink|Dolphin}}<br>{{EntityLink|Drowned}}<br>{{EntityLink|Husk}}<br>{{EntityLink|Nautilus}}<br>{{EntityLink|Ocelot}}<br>{{EntityLink|Rabbit}}<br>{{EntityLink|Zombie}}<br>{{EntityLink|Zombie Nautilus}}<br>{{EntityLink|Zombie Villager}}
+| 3
+|-
+| {{EntityLink|Allay}}<br>{{EntityLink|Axolotl}}<br>{{EntityLink|Bee}}<br>{{EntityLink|Bogged}}<br>{{EntityLink|Cave Spider}}<br>{{EntityLink|Creeper}}<br>{{EntityLink|Endermite}}<br>{{EntityLink|Evoker}}<br>{{EntityLink|Fox}}<br>{{EntityLink|Goat}}（成年）<br>{{EntityLink|Illusioner}}<br>{{EntityLink|Parched}}<br>{{EntityLink|Skeleton}}<br>{{EntityLink|Spider}}<br>{{EntityLink|Stray}}<br>{{EntityLink|Witch}}<br>{{EntityLink|Wither}}<br>{{EntityLink|Wither Skeleton}}
+| 2
+|-
+| {{EntityLink|Magma Cube}}<br>{{EntityLink|Slime}}
+| data-sort-value="3" | 1+''[[史莱姆#cite_note-1|尺寸]]''（尺寸不小于0）
+|-
+| {{EntityLink|Goat}}（幼年）<br>{{EntityLink|Silverfish}}<br>{{EntityLink|Player}}
+| 1
+|-
+| {{EntityLink|Hoglin}}（幼年）<br>{{EntityLink|Zoglin}}（幼年）
+| 0.5
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible stikitable" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! colspan = "2" | 值
+! 数据持久化
+! 来源
+|-
+| rowspan = "15" | base_attack_damage
+| rowspan = "15" | add_value (Op0)
+| {{ItemLink|Hoe}}
+| 0
+| rowspan = "15" | 否
+| rowspan = "15" | {{ItemLink|Axe}}、{{ItemLink|Hoe}}、{{ItemLink|Pickaxe}}、{{ItemLink|Shovel}}、{{ItemLink|Sword}}、{{ItemLink|Mace}}、{{ItemLink|Trident}}，{{tr|应用|套用}}于<code>mainhand</code>（主手）槽位
+|-
+| {{ItemLink|Wooden Pickaxe}}<br>{{ItemLink|Golden Pickaxe}}
+| 1
+|-
+| {{ItemLink|Wooden Shovel}}<br>{{ItemLink|Golden Shovel}}
+| 1.5
+|-
+| {{ItemLink|Stone Pickaxe}}<br>{{ItemLink|Copper Pickaxe}}
+| 2
+|-
+| {{ItemLink|Stone Shovel}}<br>{{ItemLink|Copper Shovel}}
+| 2.5
+|-
+| {{ItemLink|Wooden Sword}}<br>{{ItemLink|Golden Sword}}<br>{{ItemLink|Iron Pickaxe}}
+| 3
+|-
+| {{ItemLink|Iron Shovel}}
+| 3.5
+|-
+| {{ItemLink|Stone Sword}}<br>{{ItemLink|Copper Sword}}<br>{{ItemLink|Diamond Pickaxe}}
+| 4
+|-
+| {{ItemLink|Diamond Shovel}}
+| 4.5
+|-
+| {{ItemLink|Iron Sword}}<br>{{ItemLink|Netherite Pickaxe}}<br>{{ItemLink|Mace}}
+| 5
+|-
+| {{ItemLink|Netherite Shovel}}
+| 5.5
+|-
+| {{ItemLink|Wooden Axe}}<br>{{ItemLink|Golden Axe}}<br>{{ItemLink|Diamond Sword}}
+| 6
+|-
+| {{ItemLink|Netherite Sword}}
+| 7
+|-
+| {{ItemLink|Stone Axe}}<br>{{ItemLink|Copper Axe}}<br>{{ItemLink|Iron Axe}}<br>{{ItemLink|Diamond Axe}}<br>{{ItemLink|Trident}}
+| 8
+|-
+| {{ItemLink|Netherite Axe}}
+| 9
+|-
+| effect.strength
+| add_value (Op0)
+| colspan = "2" | ''等级''×3
+| 是
+| [[力量（状态效果）|力量]]状态效果
+|-
+| effect.weakness
+| add_value (Op0)
+| colspan = "2" | ''等级''×-4
+| 是
+| [[虚弱]]状态效果
+|-
+| evil
+| add_value (Op0)
+| colspan = "2" | 5
+| 否
+| {{EntityLink|Killer Bunny}}
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w21a|加入了攻击伤害属性，ID为<code>generic.attackDamage</code>。}}
+|{{HistoryLine||1.16|dev=20w14a|攻击伤害属性的ID被重命名为<code>generic.attack_damage</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|攻击伤害属性的ID从<code>generic.attack_damage</code>重命名为<code>attack_damage</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

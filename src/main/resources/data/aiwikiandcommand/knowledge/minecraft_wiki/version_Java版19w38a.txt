@@ -1,0 +1,139 @@
+# 页面: Java版19w38a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8819w38a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:23
+# 原始 Wikitext 内容:
+
+{{dangerous version|在特定情况下破坏方块会导致游戏崩溃。<ref>{{bug|MC-161268|||Fixed}}</ref>}}
+{{Infobox version
+|title=19w38a
+|image=19w38a.png
+|image2=Java Edition 19w38a Simplified.png\Java Edition 19w38a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2019年9月18日
+|jsonhash=9aa2357a825b659714762aeef4062d19d6617677
+|clienthash=33e153dbada31777c9344d3e21398f825bd92064
+|clientmap=8182cb6c4e9acd17c8865368e70955f6ca3e6d8e
+|serverhash=e40184002fa2e183de5fda0229d0709cfd6bfe8a
+|servermap=62537e90eeb6de46c4d14c5ab2ed4c952fb5b3ea
+|parent=1.15
+|prevparent=1.14.4
+|prev=19w37a
+|next=19w38b
+|nextparent=1.15.1
+}}<onlyinclude>
+
+'''19w38a'''是[[Java版1.15]]的第5个快照，发布于2019年9月18日<ref name="19w38a">{{snap|19w38a|September 18, 2019}}</ref>，更新了命令{{cmd|data}}、{{cmd|execute}}、{{cmd|schedule}}、实体选择器、谓词、实体谓词、定位谓词以及战利品表，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|data}}'''
+* 现在可以将<code>storage</code>作为目标，使用通用的键值对存储。
+** 每个{{tr|存储|容器}}都可以通过独立的[[命名空间ID]]区分。
+** 该{{tr|存储|容器}}在同一世界的所有[[维度]]里共享。
+** {{tr|存储|容器}}中的数据在重新加载中仍然存在。
+
+'''{{cmd|execute}}'''
+* 加入了子命令{{cmd|execute if predicate}}。
+** 核算定义在[[数据包]]路径下<code>predicates</code>中的自定义[[谓词]]。
+* 加入了子命令{{cmd|execute store storage}}。
+** 将命令的执行结果存储至{{cmd|data}}的[[命令存储|{{tr|存储|容器}}]]目标中。
+
+'''{{cmd|schedule}}'''
+* 加入了新的可选语法{{cmd|schedule ... [append{{!}}replace]}}。
+** 默认为{{cd|replace}}。
+* 加入了新的语法{{cmd|schedule clear <''id''>}}以移除已有的{{cmd|schedule}}操作。
+** 返回已移除的{{cmd|schedule}}操作数。
+* 拓展了{{cmd|schedule}}以便多次对相同函数进行操作。
+
+'''实体选择器'''
+* 新的选择器参数<code>predicate</code>允许应用定义在[[数据包]]路径下<code>predicates</code>中的自定义谓词。
+
+=== 常规 ===
+'''[[谓词]]'''
+* 加入了自定义谓词。
+** [[战利品表]]的谓词部分现在可以被定义为<code>predicates</code>目录下单独的数据包资源。
+
+'''实体谓词'''
+* 现在接受检查玩家属性的<code>player</code>字段。
+** 在实体不是[[玩家]]时失败。
+** 字段：
+*** <code>level</code> – 允许的玩家等级范围。
+*** <code>gamemode</code> – 与{{cmd|gamemode}}命令相同的值
+*** <code>stats</code> – 要匹配的统计信息列表。接受的字段：{{cd|type}}（例如{{cd|minecraft:custom}}）、{{cd|stat}}（例如{{cd|minecraft:sneak_time}}）和{{cd|value}}（整型的{{cd|range}}）。
+**** 例如，如果玩家使用钓鱼竿共2-10次，<code>{"stats":[{"type":"minecraft:used","stat":"minecraft:fishing_rod","value":{"min":2,"max":10}}]}</code>会成功，次数小于2或大于20则会导致失败。
+*** <code>recipes</code> – 合成配方ID表。一个布尔值表示玩家是否解锁此配方。
+*** <code>advancements</code> – 成就ID表。如果其值的类型为布尔类型，将执行成就完成情况的检查。如果值为对象，检查准则的完成度。
+* 实体谓词现在允许使用<code>team</code>字段以匹配队名。
+
+'''定位谓词'''
+* 现在接受<code>block</code>与<code>fluid</code>子谓词。
+** 字段：
+*** <code>block</code> – 精确匹配[[方块]]ID。
+*** <code>fluid</code> – 精确匹配[[流体]]ID。
+*** <code>tag</code> – 匹配方块/流体ID。
+*** <code>nbt</code> – 匹配方块NBT（仅方块）。
+*** <code>state</code> – 名称/值的属性映射。值可以是整型、布尔值、字符串或具有可选的最小和最大属性的对象。
+* 现在可以接受<code>light</code>子predicate。
+** 对象拥有一个整型范围——<code>light</code>——用于匹配可见光（天空变暗和方块亮度的最大值）。
+
+'''战利品表'''
+* 战利品表谓词现在能在独立文件定义并被实体选择器在<code>execute if</code>命令中使用。
+* 在<code>location_check</code>条件中加入了新参数选项。
+** <code>offsetX</code>、<code>offsetY</code>、<code>offsetZ</code> – 位置的可选偏移量。
+* 加入了<code>reference</code>。
+** 其导入数据包中<code>predicate</code>路径下定义的条件，通过name参数选择。
+* 加入了<code>time_check</code>条件。
+** 检测一天的[[时间]]。
+*** <code>value</code> – 可接受值的范围。
+*** <code>period</code> – 如果存在，则时间将模除以这个值（例如，如果将该值设置为24000，则该值将以天为周期运行）。
+
+== 更改 ==
+=== 方块 ===
+'''常规'''
+* 方块的[[轮廓箱]]（十字准星对准的方块所显示的黑边）现在颜色更深了。
+
+=== 命令格式 ===
+'''{{cmd|gamerule}}'''
+* 将游戏规则{{cd|fireDamage}}设置为{{cd|false}}后，现在也会免除[[岩浆块]]造成的伤害。
+
+'''{{cmd|kill}}'''
+* 若不给定{{cd|target}}参数，则第一个参数现在的默认值为{{cd|@s}}。
+
+=== 常规 ===
+'''[[调试屏幕]]'''
+* 不再显示第二行“区块更新（chunk updates）”的计数器。
+
+== 修复 ==
+{{fixes|fixedin=19w38a|showdesc=1
+|;old
+|70111|空气中的末影珍珠在重新登录后消失，玩家也不会被传送。
+|96207|船破坏睡莲时产生太多颗粒。
+|101247|马、驴、骡和船有时在结束骑乘后消失。
+|136367|下船时可能会把玩家置于船的顶部。
+|138465|重新加载后，末影珍珠忘记它的投掷者。
+|145275|重载资源包时纹理显示会暂时被打乱。
+|157697|掠夺者加载时游戏变得极其卡顿，无法正常游玩。
+|158373|袭击号角音效会在世界内的所有村庄播放。
+|158414|骑乘实体的玩家会在超出范围后回到其骑上实体时所在的位置。
+|160367|掠夺者不会被清除。
+|;previous
+|160919|使用{{cmd|gamerule|link=none}}禁用火焰伤害不会避免岩浆块伤害。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[cs:19w38a]]
+[[de:19w38a]]
+[[en:Java Edition 19w38a]]
+[[es:Java Edition 19w38a]]
+[[fr:Édition Java 19w38a]]
+[[it:Java Edition 19w38a]]
+[[ja:Java Edition 19w38a]]
+[[pt:Edição Java 19w38a]]
+[[ru:19w38a (Java Edition)]]

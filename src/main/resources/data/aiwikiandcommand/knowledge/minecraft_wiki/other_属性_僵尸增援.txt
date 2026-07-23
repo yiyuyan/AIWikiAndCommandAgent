@@ -1,0 +1,84 @@
+# 页面: 属性/僵尸增援
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E5%83%B5%E5%B0%B8%E5%A2%9E%E6%8F%B4
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox attribute}}
+
+'''僵尸增援（Zombie Reinforcements）'''是控制[[僵尸]]类生物在受到伤害时产生增援的概率的[[属性]]。
+
+== 行为 ==
+{{main|僵尸增援}}
+{{EntityLink|Zombie}}、{{EntityLink|Husk}}、{{EntityLink|Drowned}}、{{EntityLink|Zombie Villager}}、{{EntityLink|Zombified Piglin}}在受到有效的[[伤害]]后，如果当前的[[难度]]为困难，且游戏规则{{gamerule|spawn_mobs}}为<samp>true</samp>，则有一定的概率（此属性的计算值）尝试在周围生成一只新的同类。
+
+游戏会随机尝试50个位置以找到一个合适的位置生成增援僵尸，如果50次都没有找到合适的位置则生成失败。一个合适的生成位置满足下列要求：
+* 游戏只会在下列的27个区域内随机尝试生成，且每个区域被选中的概率相等，选中区域后游戏再在区域内随机选位置。下文中的坐标系以召唤增援僵尸[[碰撞箱]]底面中心点所在方块位置的最小点为原点建立：
+** 原点（1个区域，通常在此位置尝试生成的僵尸会因为和召唤增援僵尸的碰撞箱产生碰撞而无法生成）。
+** 原点沿各个坐标轴向外7-40格，包含端点（6个区域，每个区域34个位置）。
+** 原点沿各个坐标平面，[[切比雪夫距离]]不小于7，且距离坐标平面的两个坐标轴距离都不大于40格内的所有位置（12个区域，每个区域1156个位置）。
+** 距离原点切比雪夫距离不小于7，且距离坐标轴距离不大于40格内的所有位置（8个区域，每个区域39304个位置）。
+* 选中的位置永远是一个方块的最小点，即增援僵尸永远只会在一个方块的边缘生成。
+* 选中的位置下方必须是[[生成#可生成位置|可生成方块]]，且位置上的方块和位置上方的方块必须是有效空方块。
+* 选中的位置必须满足僵尸的生成条件，即方块亮度为0且内部天空光照小于8，殭屍化豬布林則不受亮度限制。
+* 选中的位置必须远离任何玩家7格以上，且僵尸在此位置不会与任何实体、方块碰撞箱和液体碰撞。
+
+如果一个僵尸成功召唤了增援，则它的此属性计算值会被降低0.05以减少后续增援的概率；同时，被增援而生成的僵尸此属性也会被降低0.05以减少无限增援的可能性。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Zombie}}<br>{{EntityLink|Husk}}<br>{{EntityLink|Drowned}}<br>{{EntityLink|Zombie Villager}}
+| data-sort-value="0.05" | 0 – 0.1<br>均匀分布随机数
+|-
+| {{EntityLink|Zombified Piglin}}
+| 0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| leader_zombie_bonus
+| add_value (Op0)
+| 0.5-0.75均匀分布随机数
+| 是
+| 领头僵尸加成，领头僵尸增加召唤增援概率
+|-
+| reinforcement_caller_charge
+| add_value (Op0)
+| -0.05&times;''召唤增援成功次数''
+| 是
+| 召唤增援能力消耗，召唤增援的僵尸在召唤成功后减少召唤增援概率
+|-
+| reinforcement_callee_charge
+| add_value (Op0)
+| -0.05
+| 是
+| 被召唤增援能力消耗，减少被召唤增援的僵尸的召唤增援概率
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w17a|为僵尸加入了僵尸增援属性，ID为<code>Spawn Reinforcements Chance</code>。
+|加入了<code>Zombie reinforcement charge</code>（增援能力消耗）、和<code>Leader zombie bonus</code>（领头僵尸加成）两种属性修饰符。}}
+|{{HistoryLine|||dev=13w18a|将<code>Zombie reinforcement charge</code>修饰符拆分为<code>Zombie reinforcement caller/callee charge</code>（召唤/被召唤增援能力消耗）两种属性修饰符。}}
+|{{HistoryLine|||dev=13w21a|僵尸增援属性的ID重命名为<code>zombie.spawnReinforcements</code>。}}
+|{{HistoryLine||1.16|dev=20w14a|僵尸增援属性的ID重命名为<code>zombie.spawn_reinforcements</code>。}}
+|{{HistoryLine||1.20.5|dev=24w21a|领头僵尸加成的修饰符的ID现在是<code>leader_zombie_bonus</code>，此前为随机UUID。
+|召唤增援能力消耗的修饰符的ID现在是<code>reinforcement_caller_charge</code>，此前为随机UUID。
+|被召唤增援能力消耗的修饰符的ID现在是<code>reinforcement_callee_charge</code>，此前为随机UUID。}}
+|{{HistoryLine||1.21.2|dev=24w33a|僵尸增援属性的ID从<code>zombie.spawn_reinforcements</code>重命名为<code>spawn_reinforcements</code>。
+|现在僵尸增援会生成召唤者的同类。在此前，僵尸增援只会生成僵尸。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

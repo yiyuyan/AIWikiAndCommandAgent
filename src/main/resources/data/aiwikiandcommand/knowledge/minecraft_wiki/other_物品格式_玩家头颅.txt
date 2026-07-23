@@ -1,0 +1,34 @@
+# 页面: 物品格式/玩家头颅
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E6%A0%BC%E5%BC%8F/%E7%8E%A9%E5%AE%B6%E5%A4%B4%E9%A2%85
+# 分类: 顶级数据值页面
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+<div class="treeview"><onlyinclude>
+** {{nbt|string}}{{nbt|compound|SkullOwner}}：指定头颅渲染的玩家。可以为玩家名称或一个玩家游戏档案标签。当存储时，玩家名称会自动解析为游戏档案标签。
+*** {{nbt|int-array|Id}}：（可选）玩家的[[UUID]]。
+*** {{nbt|string|Name}}：（可选）玩家的用户名。
+*** {{nbt|compound|Properties}}：玩家游戏档案配置属性。
+**** {{nbt|list|textures}}：游戏档案纹理属性。
+***** {{nbt|compound}}：一个独立的纹理。
+****** {{nbt|string|Signature}}：（可能不存在）{{nbt|string|Value}}使用Yggdrasil私钥的签名后得到的[[wikipedia:Base64|Base64]]字符串。
+****** {{nbt|string|Value}}：Base64字符串，其中包含游戏档案内所有的纹理（皮肤和披风）。在解密之后，能获得下面的JSON对象：
+******* {{nbt|compound}}：纹理对象。
+******** {{nbt|string|profileId}}：游戏档案的UUID，不带连字符。
+******** {{nbt|string|profileName}}：游戏档案名称。
+******** {{nbt|boolean|signatureRequired}}：（可能不存在）代表此纹理属性是否已被签名。如果{{nbt|string|Signature}}存在，则此项也存在并为<samp>true</samp>。
+******** {{nbt|compound|textures}}：纹理数据。
+********* {{nbt|compound|CAPE}}：（可能不存在）[[披风]]纹理。如果此游戏档案不包含披风，此项不存在。
+********** {{nbt|string|url}}：披风纹理的URL链接。
+********* {{nbt|compound|SKIN}}：（可能不存在）[[皮肤]]纹理。如果此游戏档案不包含自定义皮肤，此项不存在。
+********** {{nbt|compound|metadata}}：（可能不存在）皮肤的元数据。
+*********** {{nbt|string|model}}：（可能不存在）固定值<code>slim</code>。当皮肤模型手臂为3像素时存在，否则不存在。
+********** {{nbt|string|url}}：皮肤纹理的URL链接。
+******** {{nbt|int|timestamp}}：[[wikipedia:Unixtime|Unix时间戳]]，以毫秒为单位，时间为请求玩家游戏档案数据的时间。
+</onlyinclude></div><noinclude>
+[[Category:顶级数据值页面]]
+[[en:Item format/Player Heads]]
+[[fr:Format d'objet/Tête de joueur]]
+[[ja:アイテムフォーマット/1.20.5以前/Player Heads]]
+[[pt:Formato de item/Cabeças de jogador]]
+</noinclude>

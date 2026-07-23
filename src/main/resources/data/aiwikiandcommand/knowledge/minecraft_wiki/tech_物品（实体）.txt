@@ -1,0 +1,253 @@
+# 页面: 物品（实体）
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%EF%BC%88%E5%AE%9E%E4%BD%93%EF%BC%89
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有信息, 基岩版独有信息, 实体, 有未知版本的History模板的页面/携带版Alpha, 本地化模块需更新, 来源请求
+# 抓取时间: 2026-07-14 17:31:59
+# 原始 Wikitext 内容:
+
+{{about|物品或方块掉落时变成的实体|在物品栏中的物品|物品|生物和方块产生的物品实体|掉落物}}
+{{Infobox entity
+|title=物品
+|image=BowSpinning3.gif
+|spawn=见{{slink||生成}}
+|size=高度：0.25格<br>宽度：0.25格
+}}
+
+'''物品（Item'''，下文称'''物品实体）'''是掉落在世界中的[[物品]]。区别于位于[[玩家]]的[[物品栏]]里的形式或[[方块实体]]，它们是[[实体]]的一种。
+
+== 外观 ==
+[[File:Item entities.png|thumb|立体的物品实体，包括[[方块]]和堆叠的物品]]
+
+物品实体有两种外观，通常是与玩家物品栏中所显示相类似的二维或三维造型。三维物品（通常是方块）显示与它们放置时的三维外观相似，不过要缩小到{{fraction|1|4}}的尺寸；二维物品（通常是非方块）显示其{{fraction|1|2}}的尺寸，每个像素被一个小立方体取代。物品实体会上下浮动并逆时针缓缓旋转。
+
+当一个单独的物品实体表示一个以上的物品堆叠时，它看起来像多个同类物品卡在一起。堆叠数1时看起来是一个，2-16时看起来是两个，17-32时是三个，33-48时是四个，49及以上时是五个。
+
+== 生成 ==
+物品实体有很多来源。常见的有：
+* 玩家或其他生物将物品栏中的物品扔出。
+** 通过按{{ctrl|丢弃}}键。
+** 在触控设备的[[基岩版]]中，物品栏内选定物品后点击界面外或长按快捷栏选定的物品可以丢弃物品。
+* 在物品栏没有足够空位时，从物品栏窗口中拖出一组物品或关闭一个不能储存物品的窗口（如物品栏的2×2合成方格，[[工作台]]的3×3合成方格，以及[[附魔台]]、[[铁砧]]和[[信标]]等方块的物品槽位）而扔出物品。
+* 被[[宝库]]、[[试炼刷怪笼]]、[[投掷器]]、[[发射器]]或[[合成器]]扔出。
+* [[生物]]死亡或[[方块]]被破坏，产生[[掉落物]]。
+** 破坏存放着物品的容器，其内容物会一并掉落。
+* 方块检测到自身处于不正确的位置：
+** 依附方块被移除的附着性方块（例如[[火把]]、[[梯子]]、[[门]]以及[[告示牌]]）。
+** 位于不适合生存条件位置的[[植物]]。
+* 一个未在规定时间内落到未被占据的合适空间的[[下落的方块]]。
+* 由生物在一些情况下生成（如[[鸡]]下蛋、[[熊猫]]打喷嚏、[[海龟]]长大、对[[绵羊]]或[[哞菇]]使用[[剪刀]]）。
+* [[钓鱼]]。
+* 使用命令{{cmd|give}}给予物品并从背包溢出。
+* 使用命令{{cmd|summon item <pos:x y z> <nbt>}}召唤物品实体{{Only|JE}}。
+
+== 行为 ==
+物品实体使用其代表物品的名称作为实体名称。
+
+物品实体不能被[[近战攻击]]，也不能被[[弹射物]]击中，试图这样做只会打到它们后面的方块或实体。物品实体在与其他实体碰撞中并不作出反应。
+
+一个物品实体受到方块挤压时，它会优先尝试从该方块没有被阻塞的侧面之一弹出，若侧面均被阻塞则会向上移动。因此当生物在地下密闭空间内死亡时，其[[掉落物]]会涌现在地表。
+
+物品实体会在[[水]]中上浮。
+
+已加载[[区块]]中的物品实体总是在{{convert|6000|游戏刻|分钟}}后被清除，剩余存留时间的计算会在区块未被加载时暂停。当多个掉落物堆叠之總量不超過物品堆叠最大堆疊限制合并成一叠时，會保留剩余存留时间最长的物品堆叠並加總其數量。
+
+物品实体受到的伤害总计达到{{hp|5}}后会被摧毁。物品实体会受到以下伤害：
+* [[着火]]时受到的[[伤害#火焰伤害|火焰伤害]]。
+* [[爆炸]]造成的[[伤害#爆炸伤害|爆炸伤害]]。
+* [[闪电]]对范围内的实体造成的伤害。
+* [[火]]、[[熔岩]]、[[仙人掌]]对与其接触的实体造成的伤害。
+* [[虚空]]和{{cmd|kill}}造成的伤害。
+
+一部分物品在掉落为物品实体时，具有特殊的效果：
+* {{ItemLink|Nether Star}}
+** 免疫[[伤害#爆炸伤害|爆炸伤害]]，物品会被[[爆炸]]炸飞而不被炸毁。
+** {{in|je}}由[[凋灵]]掉落的下界之星会在{{convert|12000|游戏刻|分钟}}后被清除；{{in|be}}下界之星永远不会被清除。
+* {{BlockLink|Ancient Debris}}、{{ItemLink|Netherite Scrap}}、{{ItemLink|Netherite Ingot}}、{{BlockLink|Block of Netherite}}，{{ItemLink|Netherite Sword}}、{{ItemLink|Netherite Axe}}、{{ItemLink|Netherite Pickaxe}}、{{ItemLink|Netherite Shovel}}、{{ItemLink|Netherite Hoe}}、{{ItemLink|Netherite Spear}}、{{ItemLink|Netherite Helmet}}、{{ItemLink|Netherite Chestplate}}、{{ItemLink|Netherite Leggings}}、{{ItemLink|Netherite Boots}}、{{ItemLink|Netherite Horse Armor}}、{{ItemLink|Netherite Nautilus Armor}}
+** 免疫[[伤害#火焰伤害|火焰伤害]]，物品在火或熔岩中不会被烧毁。
+* {{BlockLink|Shulker Box}}、{{ItemLink|Bundle}}
+** 被伤害摧毁时掉落其中储存的所有内容物。生成的物品实体可以立即被捡起。
+* {{BlockLink|Wool}}
+** 发出的声音不会被[[幽匿感测体]]检测。
+
+=== 拾取 ===
+物品实体可以被[[玩家]]、[[村民]]、[[硫磺史萊姆]]、[[猪灵]]和一些人-{}-形敌对生物拾取。{{gamerule|mob_griefing|mobGriefing}}为false会阻止玩家以外的所有生物拾取物品实体。
+
+一部分物品实体在被生成时指定了实体数据<code>Owner</code>，此时只有对应的实体可以捡起物品，而其他实体不能。
+
+当一个物品实体与可以捡起该物品的生物距离小于1.425格时，它就会无视其间的任何方块而快速飞向该生物，到达时它会进入物品栏并发出“啵”的一声音效。该物品进入玩家的快捷栏中时，其图标会呈现简短的拉伸动画或{{only|for=放大动画（仅针对二维图标）|short=1|BE}}。技术上，物品实体被生物捡起后会被立即清除，并产生飞向该生物的{{cd|take}}[[粒子]]，该粒子无法使用{{cmd|particle}}命令产生。
+
+和[[经验球]]不同，任意数量的物品实体都可以被瞬间捡起。
+
+物品实体通常在出现{{Convert|10}}后才能被捡起，而由玩家扔出的要{{Convert|40}}后才能被捡起。
+
+=== 与方块交互 ===
+物品实体可以激活[[木质压力板]]、[[测重压力板]]和[[绊线]]。物品实体与这些方块接触时，它们会保持开启状态。其他开关则不受物品实体影响。
+
+=== 漏斗 ===
+{{main|漏斗|漏斗矿车}}
+[[漏斗]]和[[漏斗矿车]]可以捕捉物品实体。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Pop.ogg
+|subtitle={{tp|subtitles.entity.item.pickup}}
+|source=友好生物
+|description=捡起物品
+|id=entity.item.pickup
+|translationkey=subtitles.entity.item.pickup
+}}
+{{Sound table
+|nocat=1
+|sound=Fizz.ogg
+|subtitle={{tp|subtitles.entity.generic.burn}}
+|source=友好生物
+|description=物品被熔岩摧毁
+|id=entity.generic.burn
+|translationkey=subtitles.entity.generic.burn
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=random.pop.wav
+|source=玩家
+|description=捡起物品
+|id=random.pop
+|typeid=pop
+|soundvolume=0.25
+|soundpitch=0.6-2.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=random.pop.wav
+|source=玩家
+|description=从物品栏丢出物品
+|id=random.pop
+|typeid=drop.slot
+|soundvolume=0.3
+|soundpitch=0.55-0.75
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=random.fizz.wav
+|source=方块
+|description=物品被熔岩摧毁
+|id=random.fizz
+|typeid=fizz
+|soundvolume=0.4
+|soundpitch=1.6-2.88
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Items
+|spritetype=env
+|spritename=items
+|translationtype=entity
+|nameid=item
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Items
+|spritetype=env
+|translationtype=entity
+|spritename=item
+|nameid=item
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+物品实体有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||2009年8月4日|link={{notch|155882307/a-video-showing-what-i-did-today-are-vids-like}}|在博客文章中展示了物品实体。}}
+|{{HistoryLine||0.24|加入了物品实体。最初时，它们只采用了被摧毁方块的样式并闪烁白色（与那时的选择光标相同）。<ref name="resources">[https://www.youtube.com/watch?v=YIm_AKUbqh8 在Notch发布的有关Minecraft（Classic 0.24）早期视频]（[https://www.youtube.com/watch?v=srHTyTU2ejw 存档]）中第一次被公开提及时，它们被比作是“资源”。</ref>}}
+|{{HistoryLine||0.30（生存模式）|物品实体不再闪烁白色。并且不再会阻挡方块的放置，代之以被从所安放的方块中推出去。{{cn}}}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|物品实体现在落在其下方的方块上。{{cn}}
+|加入了非方块物品实体，其总会朝着玩家。}}
+|{{HistoryLine||20100219|物品实体现在会被火和熔岩摧毁。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.8|[[File:Oversized items.png|100px|右]][[File:In awe at the size of these fluids.png|100px|右]] 修复了一个使物品实体显示为方块的{{frac|1|2}}大小而非{{frac|1|4}}的漏洞。{{CollapseH|涉及的方块包括：}}
+* [[仙人掌]]
+* [[橡木活板门]]
+* [[橡木栅栏]]
+* [[橡木压力板]]
+* [[石头压力板]]
+* [[石头按钮]]
+* [[橡木楼梯]]
+* [[圆石楼梯]]
+* [[雪]]（当时无法获得其物品形式）
+* [[耕地]]（无法获得）
+* [[蛋糕]]（在该版本无法获得）
+* [[下界传送门（方块）|下界传送门]]（无法获得）
+* [[水]]（在[[Java版Infdev 20100615]]以前无法获得）
+* [[熔岩]]（在[[Java版Infdev 20100615]]以前无法获得）
+{{CollapseE}}}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w15a|移到同一处的同类物品将会自行组合成堆叠而不再保持为各自独立的实体。}}
+|{{HistoryLine||1.4.4|dev=1.4.3|物品现在会被推出透明和不透明的固体方块。<ref>{{bug|MC-15|||Fixed}}</ref>物品被推出方块时可以进入另一个方块，而不是卡在方块边界。（这可以用于向上运输物品。）新特性：物品实体会被推出楼梯方块的内角，从而导致“弹跳”效果。}}
+|{{HistoryLine||2012年12月11日|link=none|[[Dinnerbone]]在推特发布了一张掉落的钻石的3D造型渲染图。<ref>{{tweet|dinner|278457679805030401}}</ref>他也透露其他物品实体只在高品质画质里以这种方式进行渲染。<ref>{{tweet|dinner|278463997982949378}}</ref>}}
+|{{HistoryLine||2012年12月12日|link=none|TeamMojang（YouTube）发布了一段视频，展示了新的物品实体3D造型。<ref>{{ytl|tMOZLAxPWFE}}</ref>}}
+|{{HistoryLine||1.4.6|dev=12w50a|物品实体现在在高品质画质开启时渲染为3D旋转动画（非方块物品不再显示为[[wzh:精灵图|精灵图]]）。}}
+|{{HistoryLine||1.8|dev=14w25a|物品实体在流畅画质中也渲染其3D造型了，但仍不会旋转。}}
+|{{HistoryLine||1.8.1|dev=pre4|物品实体现在在流畅画质中也会旋转。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID从<code>Item</code>变为<code>item</code>。}}
+|{{HistoryLine||1.13|dev=18w07a|在水中的物品实体现在会上浮到水面。}}
+|{{HistoryLine||1.16|dev=20w06a|首次加入了实体形式不会被烧毁、且会漂浮在熔岩表面的下界合金质物品。}}
+|{{HistoryLine||1.17|dev=20w51a|现在潜影盒和收纳袋的物品实体在被伤害摧毁时会掉落其中储存的所有内容物。}}
+|{{HistoryLine||1.20|dev=pre5|下落的铁砧不再会对物品实体造成伤害。<ref>{{bug|MC-572|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.2|dev=24w38a|物品实体现在只会在命值为0时每{{convert|10}}播放一次着火音效。}}
+|{{HistoryLine||26.3|dev=snapshot-1|物品实体掉在方块边缘时，其位置不再错误显示。<ref name="MC-4">{{bug|MC-4|||Fixed}}</ref>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.2.0|加入了物品实体。}}
+|{{HistoryLine||?|改进了物品实体的渲染。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|物品实体现在会浮在水面上。}}
+|{{HistoryLine||1.16.0|dev=1.15.0.51|掉落物的物体显示为3D模型，并且能旋转（非方块物品不再显示为[[wzh:精灵图|精灵图]]）。}}
+|{{HistoryLine|||dev=1.16.0.51|首次加入了实体形式不会被烧毁、且会漂浮在熔岩表面的下界合金质物品。}}
+|{{HistoryLine||1.17.30|dev=1.17.30.22|现在潜影盒的物品实体在被伤害摧毁时会掉落其中储存的所有内容物。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了物品实体。}}
+|{{HistoryLine||xbox=TU12|物品实体现在在高品质画质开启时渲染为3D旋转动画（非方块物品不再显示为[[wzh:精灵（计算机图形学）|精灵图]]）。}}
+|{{HistoryLine||xbox=TU69|ps3=1.76|psvita=1.76|ps4=1.76|wiiu=Patch 38|在水中的物品实体现在会上浮到水面。}}
+}}
+
+== 你知道吗 ==
+* {{inUntil|je 26.3}}物品实体掉在方块边缘时，客户端和服务端的计算可能会有偏差，造成物品实体位置显示错误，引起一系列问题（例如物品无法正常捡起）。<ref name="MC-4"/>
+
+== 参见 ==
+* [[实体数据格式#其他|实体数据格式]] - 关于物品属性的更多详细信息。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|Non-mobs}}
+
+[[de:Drop]]
+[[en:Item (entity)]]
+[[es:Recompensas]]
+[[fr:Récompenses]]
+[[ja:ドロップ]]
+[[nl:Voorwerp (entiteit)]]
+[[pt:Drops]]
+[[ru:Предмет (сущность)]]
+[[uk:Предмет (сутність)]]

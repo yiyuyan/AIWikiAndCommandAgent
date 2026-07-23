@@ -1,0 +1,88 @@
+# 页面: 命令/kick
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/kick
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 有未知版本的History模板的页面/Java版Indev, 需要补充的条目
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{distinguish|命令/tick}}
+{{Missing information|被踢后一段时间无法进入的详细描述（基岩版）}}
+{{Infobox command
+|name=kick
+|oplevel=3\1
+|others=不在[[命令方块]]上执行{{only|java}}
+}}
+
+将玩家踢出服务器。
+
+== 语法 ==
+* '''Java版'''
+:<code>kick <targets> [<reason>]</code>
+
+* '''基岩版'''
+:<code>kick <name: target> <reason: message></code>
+
+== 参数 ==
+{{argument|targets|entity|name: target|CommandSelector<Player>}}
+: 指定要踢出的玩家。
+: {{arg desc|je=entity|amount=multiple|type=players|be=player}}
+: {{in|be}}也可以是玩家的XUID（Xbox UID）。
+
+{{argument|reason|message|reason: message|CommandMessage}}
+: 指定将显示给被踢出玩家的消息。{{in|je}}若未指定则使用默认消息“{{tp|multiplayer.disconnect.kicked}}”。{{in|be}}若未指定则使用默认消息“您已被踢出游戏”。
+: {{arg desc|je=message|be=CommandMessage}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><targets></code>或<code>name: target</code>不是在线玩家|fail|fail}}
+{{Result table|仅选中了一个玩家，且该玩家为服务器拥有者}}
+{{Result table|<code>reason: message</code>未指定<ref name="MCPE-185429">{{bug|MCPE-185429|||Fixed}}</ref>|N/A|success}}
+{{Result table|success}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|选中的玩家数量}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|选中的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 踢出名为player的玩家：<code>/kick player</code>
+* 踢出名为player的玩家，原因为“违反服务器规则”：<code>/kick player 违反服务器规则</code>
+* {{in|be}}踢出XUID为“123456”的玩家：<code>/kick "123456"</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.16a|加入了{{cmd|kick|link=none}}命令。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=?|移除了所有命令。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.16|再次加入了{{cmd|kick|link=none}}命令。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.3|dev=23w40a|{{cmd|kick|link=none}}命令不再能踢出单人游戏中的玩家或服务器的拥有者。<ref>{{bug|MC-254850|||Fixed}}</ref>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|加入了{{cmd|kick|link=none}}命令。}}
+|{{HistoryLine|||dev=1.16.0.58|{{cmd|kick|link=none}}命令不再能踢出服务器的拥有者。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.54|现在{{cmd|kick|link=none}}可在未开启作弊时执行，并且不再允许目标选择器。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.23|现在{{cmd|kick|link=none}}再次允许目标选择器。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/kick]]
+[[en:Commands/kick]]
+[[es:Comandos/kick]]
+[[fr:Commandes/kick]]
+[[ja:コマンド/kick]]
+[[ko:명령어/kick]]
+[[pt:Comandos/kick]]
+[[ru:Команды консоли/kick]]
+[[th:คำสั่ง/kick]]
+[[uk:Команди консолі/kick]]

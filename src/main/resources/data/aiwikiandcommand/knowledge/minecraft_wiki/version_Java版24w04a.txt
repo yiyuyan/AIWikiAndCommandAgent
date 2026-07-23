@@ -1,0 +1,126 @@
+# 页面: Java版24w04a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w04a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w04a
+|image=24w04a.png
+|image2=Java Edition 24w04a Simplified.png\Java Edition 24w04a Traditional.png\Java Edition 24w04a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年1月24日
+|jsonhash=1f93869c8ea7e1487e029c26efab855938c50341
+|clienthash=e4dfef131b1d43bde9386105503bdbd3d000341f
+|clientmap=67f7efb761682806f27d5504ab4185ecbda705ff
+|serverhash=d9f13751240a2fe4e85be1c839d9a4de1413c251
+|servermap=e22f91519fefe4e4d9692bca4467d8c5d4e89eba
+|parent=1.20.5
+|prevparent=1.20.4
+|prev=24w03b
+|next=24w05a
+|nextparent=1.20.6
+}}<onlyinclude>
+
+'''24w04a'''是[[Java版1.20.5]]的第5个快照，发布于2024年1月24日<ref>{{snap|24w04a|January 24, 2024}}</ref>，加入了{{cmd|transfer}}命令，更改了[[犰狳]]和[[旋风人]]的行为，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|transfer}}'''
+* 仅存在于专用服务器中，用于将玩家转移到另一个服务器。
+* 语法：{{cmd|link=none|transfer <hostname> [<port>] [<players>]}}
+* 参数：
+** {{cd|hostname}}：字符串，要连接到的服务器的主机名。
+** {{cd|port}}：整数，要连接到的服务器的端口编号，若省略则为{{cd|25565}}。
+** {{cd|players}}：要转移的玩家，若省略则为{{cd|@s}}。
+
+== 更改 ==
+=== 生物 ===
+'''[[犰狳]]'''
+* 现在被生物攻击时会蜷缩，而不是逃窜。
+* 现在会在检测到5秒内攻击过它的生物时蜷缩。
+* 现在处于蜷缩状态时，犰狳受到的伤害会被调整为<code>-{}-(修正前伤害 - 1) / 2</code>。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>29</code>。
+
+'''[[创建新的世界]]'''
+* 将“{{tr|允许作弊|允許作弊|容許作弊}}”选项重命名为“允许命令”。
+
+'''[[选择世界菜单]]'''
+* 将世界描述“作弊”重命名为“命令”。
+* 优化世界更改：
+** 现在优化单人游戏世界和运行<code>forceUpgrade</code>的专用服务器也会升级<code>entities</code>和<code>poi</code>目录下的世界内容。
+
+'''[[调试屏幕]]'''
+* 改进了帧生成时间图表。
+** 图表底部的深红色部分显示服务器运行主逻辑的时间，相当于旧图表中的显示值。
+** 浅棕色部分显示用于执行计划任务的时间。
+** 紫色部分显示为每刻执行其他所有代码所花费的时间。
+** 顶部浅绿色（受延迟影响可能显示为黄色或红色）部分显示到下一刻的空闲时间。
+** 显示的<code>min</code>（最小）、<code>avg</code>（平均）、<code>max</code>（最大）聚合值为前三部分的总和。
+
+'''<samp>[[server.properties]]</samp>'''
+* 加入了<code>region-file-compression</code>专用服务器启动配置参数，用于更改压缩算法，但不会自动重新压缩世界。
+** 若更改此参数，新区块或更新的区块使用新的压缩算法，而旧区块仍使用旧压缩算法。
+** 有两个可能的值：
+*** <code>deflate</code>，使用旧算法的默认值。
+*** <code>lz4</code>，使用LZ4算法，减少压缩和解压缩使用CPU的时间，但占用更多磁盘空间。
+* 加入了<code>recreateRegionFiles</code>专用服务器启动配置参数。
+** 这将使用与<code>forceUpgrade</code>类似的优化世界方案，创建新的碎片化的区域文件，但会重写所有区块。
+** 在更改<code>region-file-compression</code>服务器参数后将以新格式重新压缩所有区域文件。
+
+'''其他'''
+* 现在生成[[探险家地图]]、使用命令{{cmd|locate}}等方式定位结构所需时间减少。
+
+== 新内容（实验性） ==
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 加入了下列实体类型标签：
+** {{cd|#no_anger_from_wind_charge}}：{{cd|d=pretty|breeze|skeleton|stray|zombie|husk|spider|cave_spider|slime}}。
+*** 不会被风弹激怒的实体。
+
+== 更改（实验性） ==
+=== 方块 ===
+'''[[铜格栅]]'''
+* 现在使用[[切石机]]将[[铜块]]加工为铜格栅时会输出4个铜格栅，而不是1个。<ref>{{bug|MC-266078|||WAI}}</ref>
+
+=== 生物 ===
+'''[[旋风人]]'''
+* 现在会主动攻击[[铁傀儡]]。
+* 现在受到非玩家生物攻击后会尝试反击，但不会反击[[骷髅]]、[[流浪者]]、[[僵尸]]、[[尸壳]]、[[蜘蛛]]、[[洞穴蜘蛛]]和[[史莱姆]]。
+* 现在骷髅、流浪者、僵尸、尸壳、蜘蛛、洞穴蜘蛛和史莱姆被其[[风弹（实体）|风弹]]伤害后不会尝试反击。
+
+== 修复 ==
+{{fixes|fixedin=24w04a|showdesc=1
+|;old
+|232489|从花盆中取出植物时无视物品栏。
+|249136|尝试定位埋藏的宝藏或是打开/破坏内含地图的箱子时，会出现卡顿或造成服务端延迟。
+|266449|旋风人不攻击或反击视野中的生物。
+|266707|试炼刷怪笼不受其{{cd|custom_spawn_rules}}规则影响。
+|;dev
+|267925|手持物品取出花盆中的物品时，物品出现在玩家的副手中。
+|267937|用附魔穿透的弩向旋风人射击导致游戏崩溃。
+|267938|当{{cd|spawnChunkRadius}}游戏规则被设为较大的值时，出生点区块的加载动画会将世界加载百分比值覆盖。
+|267941|当{{cd|spawnChunkRadius}}游戏规则被设为0时，末地传送门会移除生物。
+|;previous
+|267953|当使用键盘打开Realms世界备份菜单时，没有被选中的选项。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:24w04a]]
+[[en:Java Edition 24w04a]]
+[[es:Java Edition 24w03a]]
+[[fr:Version Java 24w04a]]
+[[ja:Java Edition 24w04a]]
+[[lzh:二四週〇四甲]]
+[[pt:Edição Java 24w04a]]
+[[ru:24w04a (Java Edition)]]
+[[uk:24w04a (Java Edition)]]

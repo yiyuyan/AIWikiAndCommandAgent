@@ -1,0 +1,493 @@
+# 页面: 重力
+# 来源: https://zh.minecraft.wiki/w/%E9%87%8D%E5%8A%9B
+# 分类: Java版独有信息, 使用简单计算器的页面, 基岩版独有信息, 游戏内容, 需要信息
+# 抓取时间: 2026-07-14 17:37:17
+# 原始 Wikitext 内容:
+
+{{for|Java版中的同名[[属性]]|属性/重力}}
+'''重力（Gravity）'''是实体在垂直方向上持续向下加速的现象（即[[摔落|下落]]）的来源。
+
+== 机制 ==
+任何实体都具有在垂直方向上自发运动的趋势，在游戏中体现为'''重力'''。重力的单位为米每二次方[[游戏刻]]（m/gt{{^|2}}）。下文所有时间单位未说明则使用游戏刻（gt），速度按位移计而非当前速度（Delta Movement），所有公式中的时间1gt均被省略。
+
+游戏中的重力有下列计算规则：
+* {{in|je}}对于生物：
+** 任何{{nbt|bool|NoGravity}}为<samp>true</samp>的实体重力都为0。
+** 对于[[鱿鱼]]和[[发光鱿鱼]]，其重力固定为0.08。
+** 对于生物（鱿鱼和发光鱿鱼除外），其重力为{{attribute|gravity}}的计算值，默认为0.08。
+* {{in|be}}对于生物，其重力为0.08。
+* 对于其他实体：
+** [[附魔之瓶]]实体为0.07。
+** [[羊驼唾沫]]为0.06。
+** [[箭]]、[[光灵箭]]、[[三叉戟]]、[[药水]]为0.05。
+** 所有类型的[[矿车]]在水中重力为0.005，其他情况为0.04。
+** 所有类型的[[船]]、[[下落的方块]]、[[物品实体]]、[[被激活的TNT]]、[[潜影弹]]为0.04。
+** [[经验球]]、上文未提及的可以投掷的物品弹射物实体为0.03。
+** 其余所有实体都为0。
+
+各种实体重力作用效果可能产生差异，但基本遵照一定的模式。非生物实体和生物重力计算不同。
+
+非生物实体通常有三种模式。在下文中不涉及特殊情况，仅以在空气中自由下落举例：
+* 重力-位移-阻力。下落的方块、物品实体、被激活的TNT、经验球使用这种计算模式。
+*: 游戏先对当前速度减去当前的重力，然后根据计算后的速度进行位移，之后对当前速度施加阻力减小垂直速度。
+*: 设实体重力为''g''，当前垂直速度为''v''，阻力为''f''，则这一游戏刻的垂直位移是<math>\left|v-g\right|</math>，本游戏刻计算后的当前速度是<math>v \leftarrow \left(v-g\right)\left(1-f\right)</math>，终端速度是<math>v_t=-\frac{g}{f}</math>。
+* 重力-阻力-位移。大多数物品弹射物实体使用这种计算模式，包括雪球、鸡蛋、末影珍珠、喷溅药水、滞留药水、附魔之瓶等{{Info needed|请完整列举}}。
+*: 游戏先对当前速度减去当前的重力，再计算阻力，最后用更新后的速度位移。
+*: 设实体重力为''g''，当前垂直速度为''v''，阻力为''f''，则这一游戏刻的垂直位移是<math>\left|\left(v-g\right)\left(1-f\right)\right|</math>，本游戏刻计算后的当前速度是<math>v \leftarrow \left(v-g\right)\left(1-f\right)</math>，终端速度是<math>\left|v_t\right|=\frac{g\left(1-f\right)}{f}</math>。
+* 位移-阻力-重力。大多数箭类弹射物实体和羊驼唾沫实体使用这种计算模式{{Info needed|请完整列举}}。
+*: 游戏先根据当前速度位移，再计算阻力，最后减去重力。
+*: 设实体重力为''g''，当前垂直速度为''v''，阻力为''f''，则这一游戏刻的垂直位移是<math>\left|v\right|</math>，本游戏刻计算后的当前速度是<math>v \leftarrow \left(1-f\right)v-g</math>，终端速度是<math>v_t=-\frac{g}{f}</math>。
+* 位移-重力-阻力。浮漂使用这种计算模式。
+*: 游戏先根据当前速度位移，再减去重力，最后计算阻力。
+*: 设实体重力为''g''，当前垂直速度为''v''，阻力为''f''，则这一游戏刻的垂直位移是<math>\left|v\right|</math>，本游戏刻计算后的当前速度是<math>v \leftarrow \left(v-g\right)\left(1-f\right)</math>，终端速度是<math>v_t=-\frac{g}{f}+g</math>。
+
+生物的重力计算也类似，但位移、重力、阻力的计算顺序不同：
+# 如果生物有[[缓降]]状态效果，且当前正在向下运动，检查重力是否高于0.01，如果是则认为是0.01。
+# 根据当前速度，进行位移。
+# 加上重力：
+#* 如果生物具有[[飘浮]]状态效果，则重力不影响生物垂直速度，仅与飘浮状态效果等级''l''有关，在此步骤垂直速度被更新：<math>v \leftarrow 0.8v+0.01l</math>。
+#* 如果生物在未加载或不可见的区块，当生物高于最低建筑高度时垂直速度立刻设置为-0.1，否则设置为0。
+#* 其他状况下，垂直速度直接与当前重力相减：<math>v \leftarrow v-g</math>。
+# 计算阻力。生物的阻力固定为0.02，当生物进行长跳时则无阻力。
+# 设生物重力为''g''，当前垂直速度为''v''，且位于可见区块：
+#* 如果生物自然下落，则这一游戏刻的垂直位移是<math>\left|v\right|</math>，本游戏刻计算后的当前速度是<math>v \leftarrow 0.98\left(v-g\right)</math>，终端速度是<math>v_t=-49g</math>。
+#* 如果生物具有''l''级飘浮状态效果，本游戏刻计算后的当前速度是<math>v \leftarrow 0.98\left(0.8v+0.01l\right)</math>，终端速度是<math>v_t=\frac{49l}{1080}</math>。
+
+受非正重力影响的实体不能站立在地面上，即使碰撞箱底面与另一个固体阻挡碰撞箱的顶面完全贴合，这也会导致生物无法[[跳跃]]和[[属性/最大行走高度|走上方块]]。
+
+负重力将导致实体向上坠落，但不会引发[[摔落]]。
+
+== 生物垂直运动公式 ==
+根據生物垂直速度計算方式，可以得到下列公式。此節符號定義與上節不同，其中<math>g</math>为重力加速度（預設為0.08）、<math>f</math>為阻力乘數（預設為0.98，為<math>0.98^{2}=0.9604</math>）、<math>v_0</math>為初速（直接下落為0）。除重力向下為正，速度與位移的座標系皆為向上為正。
+
+* {{in|je}}[[魷魚]]和[[螢光魷魚]]外的生物重力加速度受到{{attribute|gravity}}控制。
+* {{in|je}}騎乘裝鞍的馬或拿著胡蘿蔔釣竿乘豬等時，等效阻力<math>f = 0.98^{2} = 0.9604</math>。
+** {{in|be|nc=1}}仍為0.98。
+* 若擁有[[緩降]]狀態效果，則在<math>v_{t} < 0</math>且重力大於0.01時，重力等效為0.01。
+** 涉及緩降和上下移動的計算需要分段討論。
+* 若擁有[[懸浮]]狀態效果，則等效阻力<math>f = 0.98 \times 0.8 = 0.784</math>，等效重力{{tr|<math>g = \frac{-0.01 \times \text{等级}}{0.08} = -0.0125 \times \text{等级}</math>|<math>g = \frac{-0.01 \times \text{等級}}{0.08} = -0.0125 \times \text{等級}</math>}}。
+
+以下所有時間<math>t</math>的單位皆為遊戲刻，1遊戲刻為0.05秒。
+
+=== 速度 ===
+{| class="wikitable calculator-container calculatorgadget-enabled" style="display: none; float:right;"
+! colspan=2 | 時間求速度
+|-
+| <math>g</math> || {{Simplecalc|type=number|id=g|default=0.08|step=0.01}}
+|-
+| <math>f</math> || {{Simplecalc|type=number|id=f|default=0.98}}
+|-
+| <math>v_0</math> || {{Simplecalc|type=number|id=v0|default=0|step=0.01}}
+|-
+| <math>t</math> || {{Simplecalc|type=number|id=t|default=0|step=1}}
+|-
+| <math>v_t</math> || {{Simplecalc|type=plain|id=vt|default=0|formula=v0*pow(f,t)-g*f*(1-pow(f,t))/(1-f)|decimals=10}}
+|}
+
+第<math>t</math>刻的垂直速度<math>v_t</math>為：
+
+:{{tr|<math>\begin{align}
+v_{t} &= v_{0}f^{t} - \frac{gf}{1-f}\left(1-f^t\right) \\
+    &= \left(v_{0} + \frac{gf}{1-f}\right)f^{t} - \frac{gf}{1-f} \\
+    &= \left(v_0 + 3.92\right)0.98^{t} - 3.92 && \text{(预设情況下)}
+\end{align}</math>
+|<math>\begin{align}
+v_{t} &= v_{0}f^{t} - \frac{gf}{1-f}\left(1-f^t\right) \\
+    &= \left(v_{0} + \frac{gf}{1-f}\right)f^{t} - \frac{gf}{1-f} \\
+    &= \left(v_0 + 3.92\right)0.98^{t} - 3.92 && \text{(預設情況下)}
+\end{align}</math>}}
+
+<math>v_{0} = 0</math>（即直接下落）時可化簡為：
+
+{{tr|<math>\begin{align}
+v_t &= - \frac{gf}{1-f}\left(1-f^t\right) \\
+    &= -3.92(1-0.98^t) && \text{(预设情況下)}
+\end{align}</math>
+|<math>\begin{align}
+v_t &= - \frac{gf}{1-f}\left(1-f^t\right) \\
+    &= -3.92(1-0.98^t) && \text{(預設情況下)}
+\end{align}</math>}}
+
+<div class="collapsible collapsed" style="border: thin solid #aaa;margin: 1em 2em;padding: 0.5em 1em 0.4em;">
+<strong>證明</strong>
+<div class="collapsible-content">
+根據定義<math>v_{t} = f\left(v_{t-1} - g\right)</math>，使用數學歸納法得證：
+
+<math>\begin{align}
+v_{0} &= v_{0}f^{0}
+ - \frac{gf}{1-f}\left(1-f^{0}\right) \\
+    &= 1v_{0} - \frac{gf}{1-f}\left(1-1\right) \\
+    &= v_{0} \\
+v_{t+1} &= f\left(v_{t} - g\right) \\
+        &= f\left(\left(v_{0} + \frac{gf}{1-f}\right)f^{t} - \frac{gf}{1-f} - g\right) \\
+        &= \left(v_{0} + \frac{gf}{1-f}\right)f^{t+1} - \frac{gf^2}{1-f} - gf \\
+        &= \left(v_{0} + \frac{gf}{1-f}\right)f^{t+1} - \frac{gf^2+gf\left(1-f\right)}{1-f} \\
+        &= \left(v_{0} + \frac{gf}{1-f}\right)f^{t+1} - \frac{g\left(f^2+f\left(1-f\right)\right)}{1-f} \\
+        &= \left(v_{0} + \frac{gf}{1-f}\right)f^{t+1} - \frac{gf}{1-f}
+\end{align}
+</math>
+</div>
+</div>
+
+{| class="wikitable calculator-container calculatorgadget-enabled" style="display: none; float:right;"
+! colspan=2 | 速度求時間
+|-
+| <math>g</math> || {{Simplecalc|type=number|id=g|default=0.08|step=0.01}}
+|-
+| <math>f</math> || {{Simplecalc|type=number|id=f|default=0.98}}{{Simplecalc|type=hidden|id=gfd1f|default=3.92|formula=g*f/(1-f)}}
+|-
+| <math>v_0</math> || {{Simplecalc|type=number|id=v0|default=0|step=0.01}}
+|-
+| <math>v'</math> || {{Simplecalc|type=number|id=vp|default=0|step=0.01}}
+|-
+| <math>t'</math> || {{Simplecalc|type=plain|id=tp|default=0|formula=log((vp+gfd1f)/(v0+gfd1f))/log(f)|decimals=10}}
+|-
+| <math>t</math> || {{Simplecalc|type=plain|id=t|default=0|formula=floor(tp)}}
+|}
+
+求<math>t</math>使得<math>v_{t} \le v' < v_{t+1}</math>或<math>v_t \ge v' > v_{t+1}</math>（即超過指定速度的前一刻）：
+
+:{{tr|<math>
+\begin{align}
+t &= \left\lfloor\log_{f}\frac{v'+\frac{gf}{1-f}}{v_{0}+\frac{gf}{1-f}}\right\rfloor \\
+  &= \left\lfloor\log_{0.98}\frac{v'+3.92}{v_{0}+3.92}\right\rfloor && \text{(预设情況下)}
+\end{align}
+</math>
+|<math>
+\begin{align}
+t &= \left\lfloor\log_{f}\frac{v'+\frac{gf}{1-f}}{v_{0}+\frac{gf}{1-f}}\right\rfloor \\
+  &= \left\lfloor\log_{0.98}\frac{v'+3.92}{v_{0}+3.92}\right\rfloor && \text{(預設情況下)}
+\end{align}
+</math>}}
+
+<math>v_{0} = 0</math>（即直接下落）時可化簡為：
+
+:<math>
+t = \left\lfloor\log_{f}\left(\frac{\left(1-f\right)v'}{gf}+1\right)\right\rfloor
+</math>
+
+<math>v' = 0</math>（即方向改變）時可化簡為：
+
+:<math>
+t = \left\lfloor-\log_{f}\left(\frac{\left(1-f\right)v_0}{gf}+1\right)\right\rfloor
+</math>
+
+<math>t</math>可能不存在。
+
+若欲使<math>v_{t-1} < v' \le v_{t}</math>或<math>v_{t-1} > v' \ge v_{t}</math>，則應將向下取整改為向上取整。
+
+<div class="collapsible collapsed" style="border: thin solid #aaa;margin: 1em 2em;padding: 0.5em 1em 0.4em;">
+<strong>證明</strong>
+<div class="collapsible-content">
+儘管速度公式只在輸入為自然數時才具意義，但直接將其[[wzh:限制_(數學)#扩张|擴張]]到實數後可以發現該函數單調且連續。因此，我們可以計算其[[wzh:反函數|反函數]]並取整來得到最接近目標速度的兩個刻數。
+
+令速度公式輸入實數<math>t'</math>後的輸出為<math>v'</math>。
+
+<math>
+\begin{align}
+v' &= \left(v_{0} + \frac{gf}{1-f}\right)f^{t'} - \frac{gf}{1-f} \\
+\left(v_{0} + \frac{gf}{1-f}\right)f^{t'} &= \frac{gf}{1-f} + v' \\
+f^{t'} &= \frac{v' + \frac{gf}{1-f}}{v_0 + \frac{gf}{1-f}} \\
+t' &= \log_f\frac{v'+\frac{gf}{1-f}}{v_0+\frac{gf}{1-f}}
+\end{align}
+</math>
+
+當<math>v_0 = 0</math>時：
+
+<math>
+\begin{align}
+t' &= \log_f\frac{v'+\frac{gf}{1-f}}{\frac{gf}{1-f}} \\
+  &= \log_f\left(\frac{\left(1-f\right)v'}{gf}+1\right)
+\end{align}
+</math>
+
+當<math>v' = 0</math>時：
+
+<math>
+\begin{align}
+t' &= \log_f\frac{\frac{gf}{1-f}}{v_0+\frac{gf}{1-f}} \\
+  &= -\log_f\frac{v_0+\frac{gf}{1-f}}{\frac{gf}{1-f}} \\
+  &= -\log_f\left(\frac{\left(1-f\right)v_0}{gf}+1\right)
+\end{align}
+</math>
+
+</div>
+</div>
+
+=== 位移 ===
+{| class="wikitable calculator-container calculatorgadget-enabled" style="display: none; float:right;"
+! colspan=2 | 時間求位移
+|-
+| <math>g</math> || {{Simplecalc|type=number|id=g|default=0.08|step=0.01}}
+|-
+| <math>f</math> || {{Simplecalc|type=number|id=f|default=0.98}}
+|-
+| <math>v_0</math> || {{Simplecalc|type=number|id=v0|default=0|step=0.01}}
+|-
+| <math>t</math> || {{Simplecalc|type=number|id=t|default=0|step=1}}
+|-
+| <math>s_t</math> || {{Simplecalc|type=plain|id=st|default=0|formula=((v0+g*f/(1-f))*(1-pow(f,t))-t*g*f)/(1-f)|decimals=10}}
+|}
+經過<math>t</math>刻的累計位移<math>s_t</math>為：
+
+:{{tr|<math>
+\begin{align}
+s_t &= \frac{\left(v_0+\frac{gf}{1-f}\right)\left(1-f^t\right)-tgf}{1-f} \\
+    &= 50\left(\left(v_0 + 3.92\right)\left(1 - 0.98^t\right) - 0.0784 t\right) && \text{(预设情況下)}
+\end{align}
+</math>
+|<math>
+\begin{align}
+s_t &= \frac{\left(v_0+\frac{gf}{1-f}\right)\left(1-f^t\right)-tgf}{1-f} \\
+    &= 50\left(\left(v_0 + 3.92\right)\left(1 - 0.98^t\right) - 0.0784 t\right) && \text{(預設情況下)}
+\end{align}
+</math>}}
+
+<math>v_0 = 0</math>（即直接下落）時累計位移可化簡為：
+
+:{{tr|<math>
+\begin{align}
+s_t &= \frac{gf}{1-f}\left(\frac{1-f^t}{1-f}-t\right) \\
+    &= 50\left(3.92\left(1 - 0.98^{t}\right) - 0.0784 t\right) && \text{(预设情況下)}
+\end{align}
+</math>
+|<math>
+\begin{align}
+s_t &= \frac{gf}{1-f}\left(\frac{1-f^t}{1-f}-t\right) \\
+    &= 50\left(3.92\left(1 - 0.98^{t}\right) - 0.0784 t\right) && \text{(預設情況下)}
+\end{align}
+</math>}}
+
+<div class="collapsible collapsed" style="border: thin solid #aaa;margin: 1em 2em;padding: 0.5em 1em 0.4em;">
+<strong>證明</strong>
+<div class="collapsible-content">
+<math>\begin{align}
+s_0 &= 0 \\
+s_t &= s_{t-1} + v_{t-1} \\
+    &= \sum_{k=0}^{t-1} v_k \\
+    &= \sum_{k=0}^{t-1} \left(v_0 + \frac{gf}{1-f}\right)f^k - \frac{gf}{1-f} \\
+    &= - \frac{tgf}{1-f} + \left(v_0 + \frac{gf}{1-f}\right) \sum_{k=0}^{t-1} f^k \\
+    &= - \frac{tgf}{1-f} + \left(v_0 + \frac{gf}{1-f}\right)\frac{1-f^t}{1-f} \\
+    &= \frac{\left(v_0+\frac{gf}{1-f}\right)\left(1-f^t\right)-tgf}{1-f}
+\end{align}
+</math>
+
+<math>v_0 = 0</math>時：
+
+<math>\begin{align}
+s_t &= \frac{\frac{gf}{1-f}\left(1-f^t\right)-tgf}{1-f} \\
+    &= \frac{gf}{1-f}\frac{\left(1-f^t\right)}{1-f}-\frac{tgf}{1-f} \\
+    &= \frac{gf}{1-f}\left(\frac{1-f^t}{1-f}-t\right)
+\end{align}
+</math>
+</div>
+</div>
+{| class="wikitable calculator-container calculatorgadget-enabled" style="display: none; float:right;"
+! colspan=2 | 位移求時間
+|-
+| <math>g</math> || {{Simplecalc|type=number|id=g|default=0.08|step=0.01}}
+|-
+| <math>f</math> || {{Simplecalc|type=number|id=f|default=0.98}}
+|-
+| <math>v_0</math> || {{Simplecalc|type=number|id=v0|default=0|step=0.01}}{{Simplecalc|type=hidden|id=a|default=50|formula=v0/g/f+1/(1-f)}}
+|-
+| <math>s'</math> || {{Simplecalc|type=number|id=sp|default=0}}{{Simplecalc|type=hidden|id=b|default=50|formula=a-(1-f)*sp/g/f}}<div style="display:none;">
+{{Simplecalc|type=hidden|id=x|formula=a*pow(f,b)*log(f)}}
+{{Simplecalc|type=hidden|id=w00|formula=ifless(x, -exp(-1), NaN, log((2*x+1)/(log(x+1)+1)))}}
+{{Simplecalc|type=hidden|id=w01|formula=(x*exp(-w00)+w00*w00)/(w00+1)}}
+{{Simplecalc|type=hidden|id=w02|formula=(x*exp(-w01)+w01*w01)/(w01+1)}}
+{{Simplecalc|type=hidden|id=w03|formula=(x*exp(-w02)+w02*w02)/(w02+1)}}
+{{Simplecalc|type=hidden|id=w04|formula=(x*exp(-w03)+w03*w03)/(w03+1)}}
+{{Simplecalc|type=hidden|id=w05|formula=(x*exp(-w04)+w04*w04)/(w04+1)}}
+{{Simplecalc|type=hidden|id=w06|formula=(x*exp(-w05)+w05*w05)/(w05+1)}}
+{{Simplecalc|type=hidden|id=w07|formula=(x*exp(-w06)+w06*w06)/(w06+1)}}
+{{Simplecalc|type=hidden|id=w08|formula=(x*exp(-w07)+w07*w07)/(w07+1)}}
+{{Simplecalc|type=hidden|id=w09|formula=(x*exp(-w08)+w08*w08)/(w08+1)}}
+{{Simplecalc|type=hidden|id=w10|formula=ifless(x, -exp(-1), NaN, (pow(log(-x)-1,2)-exp(1))/log(-x))}}
+{{Simplecalc|type=hidden|id=w11|formula=(x*exp(-w10)+w10*w10)/(w10+1)}}
+{{Simplecalc|type=hidden|id=w12|formula=(x*exp(-w11)+w11*w11)/(w11+1)}}
+{{Simplecalc|type=hidden|id=w13|formula=(x*exp(-w12)+w12*w12)/(w12+1)}}
+{{Simplecalc|type=hidden|id=w14|formula=(x*exp(-w13)+w13*w13)/(w13+1)}}
+{{Simplecalc|type=hidden|id=w15|formula=(x*exp(-w14)+w14*w14)/(w14+1)}}
+{{Simplecalc|type=hidden|id=w16|formula=(x*exp(-w15)+w15*w15)/(w15+1)}}
+{{Simplecalc|type=hidden|id=w17|formula=(x*exp(-w16)+w16*w16)/(w16+1)}}
+{{Simplecalc|type=hidden|id=w18|formula=(x*exp(-w17)+w17*w17)/(w17+1)}}
+{{Simplecalc|type=hidden|id=w19|formula=(x*exp(-w18)+w18*w18)/(w18+1)}}</div>
+|-
+| <math>t'</math> (<math>W_{-1}</math>) || {{Simplecalc|type=plain|id=tpw1|default=0|formula=round(b-w19/log(f),10)}}
+|-
+| <math>t</math> (<math>W_{-1}</math>)|| {{Simplecalc|type=plain|id=tw1|default=0|formula=floor(tpw1)}}
+|-
+| <math>t'</math> (<math>W_{0}</math>) || {{Simplecalc|type=plain|id=tpw0|default=1|formula=round(b-w09/log(f),10)}}
+|-
+| <math>t</math> (<math>W_0</math>)|| {{Simplecalc|type=plain|id=tw0|default=1|formula=floor(tpw0)}}
+|}
+
+求<math>t</math>使得<math>s_{t} \le s' < s_{t+1}</math>或<math>s_{t} \ge s' > s_{t+1}</math>（即經過指定位移的前一刻）：
+
+: <math>
+t=\left\lfloor b-\frac{1}{\ln{f}}W\left(af^b\ln{f}\right)\right\rfloor \quad \text{其中} \quad a = \frac{v_0}{gf}+\frac{1}{1-f}\,,\,b = a-\frac{\left(1-f\right)s'}{gf}
+</math>
+
+預設情況下：
+
+:<math>
+t \approx \left\lfloor 49.4983 W\left(-0.093842\left(v_0 + 3.92\right)0.994859^{50v_{0}-s'}\right) + 0.255102\left(50v_{0} - s'\right) + 50 \right\rfloor
+</math>
+
+當<math>v_{0} = 0</math>（直接下落）時：
+:<math>
+t \approx \left\lfloor 49.4983 W\left(-0.367861\times0.994859^{-s'}\right) + 0.255102s' + 50 \right\rfloor
+</math>
+
+其中<math>W</math>為[[Wzh:朗伯W函數|朗伯W函數]]，使用<math>W_{-1}</math>與<math>W_{0}</math>分支分別可以取得第一次（和重力方向相反）和第二次（和重力方向相同）經過指定位移的時間。<math>t</math>可能不存在。
+
+若欲使<math>s_{t-1} < s' \le s_{t}</math>或<math>s_{t-1} > s' \ge s_{t}</math>，則應將向下取整改為向上取整。
+
+<div class="collapsible collapsed" style="border: thin solid #aaa;margin: 1em 2em;padding: 0.5em 1em 0.4em;">
+<strong>證明</strong>
+<div class="collapsible-content">
+類似於速度，我們也可以計算將位移公式擴張至實數後計算其反函數並取整。但由於速度方向改變時位移會有一個轉折，該反函數將會是[[wzh:多值函數|多值]]的。
+
+由於<math>t</math>同時位於指數上與下，故須使用[[wzh:朗伯W函數|朗伯W函數]]來表示，該函數的定義為<math>W(xe^x) = x</math>。
+
+令位移公式輸入實數<math>t'</math>後的輸出為<math>s'</math>。
+
+<math>
+s' = \frac{\left(v_0+\frac{gf}{1-f}\right)\left(1-f^{t'}\right)-t'gf}{1-f}
+</math>
+
+設<math>a = \frac{v_0}{gf}+\frac{1}{1-f}</math>，則原方程式可以表示為：
+
+<math>\begin{align}
+s' &= \frac{agf\left(1-f^{t'}\right)-tgf}{1-f} \\
+   &= \frac{gf}{1-f}\left(a-af^{t'}-t'\right) \\
+\frac{\left(1-f\right)s'}{gf} &= a-af^{t'}-t'
+\end{align}
+</math>
+
+再設<math>b = a-\frac{\left(1-f\right)s'}{gf}</math>，則有：
+
+<math>\begin{align}
+af^{t'}+t' &= b \\
+ae^{t'\ln{f}} &= b - t \\
+a &= \left(b - t'\right)e^{-t'\ln{f}} \\
+ae^{b\ln{f}} &= \left(b - t'\right)e^{\left(b - t'\right)\ln{f}} \\
+ae^{b\ln{f}}\ln f &= \left(b - t'\right)\ln f\,e^{\left(b - t'\right)\ln{f}} \\
+W\left( ae^{b\ln f}\ln f \right) &= \left(b - t'\right)\ln f\\
+\frac{1}{\ln{f}}W\left( af^b\ln{f} \right) &= b - t'\\
+t' &= b - \frac{1}{\ln{f}}W\left( af^b\ln{f} \right)
+\end{align}
+</math>
+
+</div>
+</div>
+
+== 实体自由下落速度 ==
+下表中列出了各个实体在空气中自由下落时的重力、阻力及对应的终端速度。
+
+{| class="wikitable collapsible"
+! colspan=2 | 实体
+! 重力（m/gt{{^|2}}）
+! 阻力（1）
+! 终端速度（m/gt）
+! 终端速度（m/s）
+|-
+| rowspan=3 | 生物
+| 受{{EffectLink|Slow Falling}}影响、正在下落、且修正前重力高于0.01的生物
+| 0.01
+| 0.02
+| 0.49
+| 9.8
+|-
+| {{EntityLink|Squid}}<br>{{EntityLink|Glow Squid}}
+| 0.08
+| 0.02
+| 3.92
+| 78.4
+|-
+| 其他
+| 重力属性计算值''g''
+| 0.02
+| 49''g''
+| 980''g''
+|-
+| rowspan=7 | 弹射物
+| {{EntityLink|Arrow}}<br>{{EntityLink|Trident}}
+| 0.05
+| 0.01
+| 5
+| 100
+|-
+| {{EntityLink|Snowball}}<br>{{EntityLink|Egg}}<br>{{EntityLink|Ender Pearl}}
+| 0.03
+| 0.01
+| 3
+| 60
+|-
+| {{EntityLink|Splash Potion}}<br>{{EntityLink|Lingering Potion}}
+| 0.05
+| 0.01
+| 5
+| 100
+|-
+| {{EntityLink|Bottle o' Enchanting}}
+| 0.07
+| 0.01
+| 7
+| 140
+|-
+| {{EntityLink|Llama Spit}}
+| 0.06
+| 0.01
+| 6
+| 120
+|-
+| {{EntityLink|Shulker Bullet}}（无攻击对象）
+| 0.04
+| 0
+| ∞
+| ∞
+|-
+| {{EntityLink|Fishing Bobber}}
+| 0.03
+| 0.08
+| 0.345
+| 6.9
+|-
+| colspan=2 | {{EntityLink|Minecart}}
+| 0.04
+| 0.05
+| 0.8
+| 16
+|-
+| colspan=2 | {{EntityLink|Falling Block}}<br>{{ItemLink|id=iron-pickaxe|link=物品（实体）|text=物品}}<br>{{EntityLink|Primed TNT}}
+| 0.04
+| 0.02
+| 2
+| 40
+|-
+| colspan=2 | {{EntityLink|Experience Orb}}
+| 0.03
+| 0.02
+| 1.5
+| 30
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java pre-Classic}}
+|{{HistoryLine||rd-131655|link=Java版pre-Classic rd-131655|加入了重力。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|加入了重力。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了重力。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|加入了重力。}}
+}}
+
+== 你知道吗 ==
+* Minecraft世界中生物受到的重力的默认值是地球表面重力的约3.26倍，木星表面重力的约1.29倍。如此高重力的环境通常被认为不适合生命生存和进行建设。
+
+== 导航 ==
+{{Navbox gameplay}}

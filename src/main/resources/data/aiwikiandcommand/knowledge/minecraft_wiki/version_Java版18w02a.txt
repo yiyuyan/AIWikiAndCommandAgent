@@ -1,0 +1,124 @@
+# 页面: Java版18w02a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8818w02a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:20
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=18w02a
+|image=18w02a.png
+|image2=Java Edition 18w02a Simplified.png\Java Edition 18w02a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2018年1月10日
+|jsonhash=b0ddd29e3ab04729b1948bb50d9431cce420724d
+|clienthash=05932046cbefd34e42ba21530b96986435163bda
+|serverhash=950b737e9cefc9f91f286190166f062d6b0e0105
+|parent=1.13
+|prevparent=1.12.2
+|prev=18w01a
+|next=18w03a
+|nextparent=1.13.1
+}}<onlyinclude>
+
+'''18w02a'''是[[Java版1.13]]的第13个快照，发布于2018年1月10日<ref>{{snap|18w02a|January 10, 2018}}</ref>，加入了新的方块标签，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''标签'''
+* 加入了新的方块标签<code>minecraft:enderman_holdable</code>。
+
+== 更改 ==
+=== 非生物实体 ===
+'''[[画]]'''
+* [[画]]现在用命名空间ID区分图案。
+
+=== 命令格式 ===
+'''常规'''
+* 命令中的错误现在有了更好的错误信息（提示中有更多的信息）。
+
+'''{{cmd|teleport}}'''
+* 对{{cmd|teleport}}进行了简化，以避免表意模糊。
+** {{cmd|teleport <指定实体>}}不支持旋转或朝向，能将玩家传送到指定实体的位置。
+** {{cmd|teleport <x y z>}}不支持旋转或朝向，能使执行者传送到指定位置。
+** {{cmd|teleport <目标对象> <指定实体>}}不支持旋转或朝向，能使目标对象传送到指定实体位置。
+** {{cmd|teleport <目标对象> <x y z> [垂直旋转度数 水平旋转度数]}}能使目标对象传送到指定位置并选择性改变转向。
+** {{cmd|teleport <目标对象> <x y z> facing [指定朝向坐标]}}能使目标对象传送到指定位置并朝向指定的座标。
+** {{cmd|teleport <目标对象> <x y z> facing entity <指定朝向实体> [feet{{!}}eyes]}}能使目标对象传送到指定位置并指定朝向实体的脚或眼睛位置(预设为{{cd|feet}})。
+** 现在允许跨维度传送。
+
+'''{{cmd|execute}}'''
+* 加入了 {{cmd|execute}}的子命令用于允许对于命令的进一步控制。
+** <code>facing <x y z></code>会使命令执行得如同朝向指定位置<code><x y z></code>.
+** <code>-{}-facing entity <指定朝向实体> (eyes{{!}}feet)</code>会使命令执行得如同朝向指定朝向实体的脚或眼睛。
+** <code>offset <x y z></code>更名为<code>positioned x y z</code>。
+** <code>positioned as <entity></code>仅改变命令的运行位置。
+** <code>-{}-rotated as <指定实体></code>或<code>-{}-rotated [垂直旋转度数 水平旋转度数]</code>会使命令执行得如同执行者转向到指定方向。
+** <code>in (overworld{{!}}the_end{{!}}the_nether)</code>会使命令执行得如同位於指定维度。
+** <code>-{}-at <指定实体></code>会改变命令执行的所在维度、位置与方向。
+** <code>-{}-(if|unless) score <名称> <目标> matches <指定范围></code>测试目标对象的计分目标是否在指定范围内 (例如：<code>1</code>, <code>1..5</code>)。
+** <code>anchored (feet{{!}}eyes)</code>会在使用朝向坐标或朝向命令时调整此命令的判断位置为脚或眼睛。
+
+'''服务器命令'''
+* 服务器命令（[[Java版函数|函数]]、后台命令、远程控制）将会执行于世界重生点而非固定为坐标<code>0,0,0</code>。
+
+=== 常规 ===
+'''翻译文件'''
+* 将翻译文件从<code>.lang (key=value)</code> 改为<code>.json ("key": "value")</code>。
+** 现在支持新行了。
+
+== 修复 ==
+{{fixes|fixedin=18w02a|prefix=Minecraft|showdesc=1
+|;old
+|5461|方块统计不计入红色蘑菇、甘蔗等方块。
+|9669|在两格高的1&times;1空间内且上面一格有火把时，玩家会被显示的很暗。
+|63748|对多实体执行的有语法错误的命令会显示多次错误信息。
+|64539|{{cmd|spreadplayers|link=none}}命令的<code>-{}-''考虑队伍''</code>和<code>-{}-''传送目标''</code>参数不能使用{{key|Tab}}键补全。
+|68446|语言文件中缺失一些实体的翻译字符串。
+|68809|在两格高的1&times;1空间内且上面一格有火把时，玩家手持的物品会被显示的很暗。
+|73207|进入多人游戏菜单时，会显示“无法连接服务器”。
+|76312|{{cmd|testfor|link=none}}命令输出不显示UUID或队伍颜色。
+|81806|{{cmd|worldborder add|link=none}}命令允许大小大于等于0，而本应大于等于1。
+|108967|{{cmd|scoreboard teams join/leave|link=none}}命令缺失“选择器'<''选择器''>'找不到任何对象”错误信息。
+|120747|用活塞移动楼梯时，楼梯的判定箱会发生变化。
+|;dev
+|121662|命令中未处理的异常会把异常直接输出在聊天栏中，而不是显示“未知错误”。
+|121712|函数文件中的{{cmd|advancement|link=none}}命令导致游戏崩溃。
+|122579|所有<code>-{}-<''颜色''>_wall_banners</code>都缺失翻译文本。
+|122608|在实体前输入与方块相关的命令时，游戏崩溃。
+|122610|{{cmd|give|link=none}}命令的数量为0时，在聊天栏中显示的是玩家得到了0个空气。
+|122751|除非重载，否则{{cmd|data|link=none}}命令不能更新方块实体的视觉效果。
+|122893|{{cmd|execute as/at|link=none}}不能更改命令所执行的维度。
+|122908|加载世界时崩溃：<code>java.lang.NullPointerException: Exception in server tick loop.</code>
+|122956|函数路径中包含无效字符时会导致游戏卡死。
+|123104|{{cmd|scoreboard players reset|link=none}}会移除其他记分板项中的名称。
+|;previous
+|123764|单人游戏菜单中的世界版本显示不正确。
+|123771|无玩家持有但被放置在物品展示框上的地图被加载时，服务器崩溃。
+|123774|不再能通过<code>name{{=}}</code>测试名称。
+|123782|物品名称是无效JSON时，游戏崩溃。
+|123818|不像其他{{cmd|teleport|link=none}}命令的操作，{{cmd|teleport <''玩家''> facing <''实体''>|link=none}}命令在实体未被显示时无法工作。
+|123832|崩溃日志中，实体名称显示的是一个<code>TextComponent</code>对象，而不是它的文本。
+|123833|连接或断开连接的消息中，输出的是<code>TextComponent</code>对象，而不是玩家名称。
+|123891|在空的<code>TextComponent</code>对象上出现<code>NullPointerException</code>异常。
+|123931|在世界重载前，对结构方块使用{{cmd|data merge|link=none}}命令改变其朝向或镜像时，不会更新其加载方式。
+|123932|玩家不再能打开带有<code>lock</code>NBT标签的被锁定容器。
+|123943|点击聊天栏中的玩家名会显示原始<code>TextComponent</code>对象。
+|123974|命令列表的DataProvider被错误标记为“物品列表”。
+|124051|{{key|Tab}}键补全功能由于{{cmd|teleport|link=none}}命令的多义性而产生了歧义。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:18w02a]]
+[[en:Java Edition 18w02a]]
+[[es:Java Edition 18w02a]]
+[[fr:Édition Java 18w02a]]
+[[ja:Java Edition 18w02a]]
+[[nl:18w02a]]
+[[pt:Edição Java 18w02a]]
+[[ru:18w02a (Java Edition)]]

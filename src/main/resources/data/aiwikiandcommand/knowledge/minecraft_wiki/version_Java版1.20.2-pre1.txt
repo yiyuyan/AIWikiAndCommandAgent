@@ -1,0 +1,532 @@
+# 页面: Java版1.20.2-pre1
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.20.2-pre1
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:38
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=1.20.2-pre1
+|image=1.20.2-pre1.png
+|image2=Java Edition 1.20.2-pre1 Simplified.png\Java Edition 1.20.2-pre1 Traditional.png\Java Edition 1.20.2-pre1 Traditional HK.png
+|edition=Java
+|type=Pre-release
+|date=2023年9月5日
+|jsonhash=39b8ee6bd43752f3b5cf0405acc0ed686991a151
+|clienthash=fbbd743e671b0faa872be8ff8caab6189178912c
+|clientmap=a87ae393f7368e31d6e130014e86872803cdd3f0
+|serverhash=7fa1c9c59238ee98696da880d361d96c728dd9ea
+|servermap=fcf4d256daa79d32ee029604052c6ea5fa4193c2
+|parent=1.20.2
+|prevparent=1.20.1
+|prev=23w35a
+|next=1.20.2-pre2
+|nextparent=1.20.3
+}}<onlyinclude>
+
+'''1.20.2-pre1'''是[[Java版1.20.2]]的首个预发布版，发布于2023年9月5日<ref>{{article|minecraft-1-20-2-pre-release-1|Minecraft 1.20.2 Pre-Release 1|September 5, 2023}}</ref>，更改了配方书的搜索机制，对实验性的村民交易进行了进一步更改，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[游戏规则]]'''
+* 加入了<code>enderPearlsVanishOnDeath</code>，用于控制被掷出的末影珍珠是否会在掷出其的玩家死亡后消失，默认为<code>true</code>。
+
+'''[[Java版标签|标签]]'''
+* 加入了下列结构标签：
+** {{cd|#on_desert_village_maps}}：{{cd|village_desert}}。
+** {{cd|#on_jungle_explorer_maps}}：{{cd|jungle_pyramid}}。
+** {{cd|#on_plains_village_maps}}：{{cd|village_plains}}。
+** {{cd|#on_savanna_village_maps}}：{{cd|village_savanna}}。
+** {{cd|#on_snowy_village_maps}}：{{cd|village_snowy}}。
+** {{cd|#on_swamp_explorer_maps}}：{{cd|swamp_hut}}。
+** {{cd|#on_taiga_village_maps}}：{{cd|village_taiga}}。
+
+== 更改 ==
+=== 物品 ===
+'''[[探险家地图]]'''
+* 更改了制图师出售的探险家地图上的结构图标。
+
+=== 游戏内容 ===
+'''[[配方书]]'''
+* 改进了搜索机制。
+** 现在搜索词只会与每个单词的开头匹配。
+** 未解锁的配方现在也可以被搜索出来。
+
+'''[[交易]]'''
+* 当村民解锁交易项时，UI上交易项的顺序现在总会是随机的，而非之前在有时候是确定的。
+
+=== 命令格式 ===
+'''[[Java版函数|函数]]'''
+* 无论数值的类型如何，作为{{tr|宏|巨集}}参数使用的数字在插入时都不会包含后缀。
+
+'''{{cmd|execute}}'''
+* 暂时移除了{{cmd|link=none|execute (if{{!}}unless) function}}。
+
+'''{{cmd|return}}'''
+* 暂时移除了{{cmd|link=none|return run}}。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>18</code>。
+
+'''网络{{tr|协议|協定}}'''
+* 加入服务器时，客户端选项现在会在“配置”网络阶段时发出。
+
+== 更改（实验性） ==
+以下内容仅在创建世界时启用“{{tr|村民交易的平衡性调整|重新平衡村民交易}}”内置数据包后才会出现。
+
+=== 世界生成 ===
+'''[[远古城市]]'''
+* 增加了生成经验修补附魔书的概率。
+
+'''[[沙漠神殿]]'''
+* 增加了生成耐久（I到III级）附魔书的概率。
+
+'''[[丛林神庙]]'''
+* 增加了生成耐久（I到III级）附魔书的概率。
+
+'''[[废弃矿井]]'''
+* 增加了生成效率（I到V级）附魔书的概率。
+
+'''[[掠夺者前哨站]]'''
+* 增加了生成快速装填（I到III级）附魔书的概率。
+
+=== 游戏内容 ===
+'''[[交易]]'''
+* 制图师现在可以出售7种新的地图，可出售的具体种类与其生物群系着装有关。
+** 沼泽和丛林着装的村民一般不会自然生成，需要玩家在对应生物群系繁殖村民或者治愈对应生物群系生成的僵尸村民。
+** 各村庄地图指向对应生物群系的村庄，丛林探险家地图指向丛林神庙，沼泽探险家地图指向沼泽小屋。
+:: {| class="wikitable" style="text-align:center"
+|+ 不同着装的制图师可能出售的地图
+|-
+! !! 沙漠 !! 丛林 !! 平原 !! 热带草原 !! 雪原 !! 沼泽 !! 针叶林
+|-
+! 第1组
+| 热带草原村庄地图 || 热带草原村庄地图 || 热带草原村庄地图 || 沙漠村庄地图 || 平原村庄地图 || 雪原村庄地图 || 平原村庄地图
+|-
+! 第2组
+| 平原村庄地图 || 沙漠村庄地图 || 针叶林村庄地图 || 平原村庄地图 || 针叶林村庄地图 || 针叶林村庄地图 || 雪原村庄地图
+|-
+! 第3组
+| 丛林探险家地图 || 沼泽探险家地图 || &ndash; || 丛林探险家地图 || 沼泽探险家地图 || 丛林探险家地图 || 沼泽探险家地图
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中制图师的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Paper}} || 24 || 0.05 || {{ItemLink|Emerald}} || 1 || 16 || 2
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Empty Map}} || 1 || 12 || 1
+|-
+! rowspan=2 | 学徒
+| {{BlockLink|Glass Pane}} || 11 || 0.05 || {{ItemLink|Emerald}} || 1 || 16 || 10
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Compass}} || 8<br>1 || 0.2 || ''前述各地图''<ref group=注>分为3组，每一组独立抽取。</ref> || 1 || 12 || 5
+|-
+! rowspan=2 | 老手
+| {{ItemLink|Compass}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Compass}} || 13<br>1 || 0.2 || {{ItemLink|Ocean Explorer Map}} || 1 || 12 || 10
+|-
+! rowspan=17 | 专家
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Item Frame}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|White Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Blue Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Light Blue Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Red Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Pink Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Green Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Lime Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Gray Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Black Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Purple Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Magenta Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Cyan Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Brown Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Yellow Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Orange Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Light Gray Banner}} || 1 || 12 || 15
+|-
+! rowspan=2 | 大师
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Banner Pattern|旗帜图案（地球）}} || 1 || 12 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Compass}} || 14<br>1 || 0.2 || {{ItemLink|Woodland Explorer Map}} || 1 || 1 || 30
+|}
+* 更改了盔甲匠的交易项。
+** 购买钻石盔甲现在还需要少量钻石。
+** 大师级别的盔甲匠现在会收购铁块（除针叶林盔甲匠）或钻石块（针叶林盔甲匠）。
+** 锁链盔甲现在仅由丛林和沼泽盔甲匠出售。
+** 除针叶林盔甲匠外，专家级别的盔甲匠将会出售带有固定附魔的锁链盔甲或铁盔甲，热带草原盔甲匠会以较低的价格出售附有诅咒的盔甲。
+** 现在可在针叶林盔甲匠处将钻石盔甲换成其他种类的钻石盔甲。
+*** 玩家提供的盔甲必须是没有耐久损耗的；盔甲可以附带纹饰和魔咒，但在交换后会丢失。
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（沙漠）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Iron Boots}}（荆棘 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Helmet}}（荆棘 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 11 || 0.05 || {{ItemLink|Iron Leggings}}（荆棘 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 13 || 0.05 || {{ItemLink|Iron Chestplate}}（荆棘 I） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 16<br>4 || 0.05 || {{ItemLink|Diamond Chestplate}}（荆棘 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 16<br>3 || 0.05 || {{ItemLink|Diamond Leggings}}（荆棘 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（丛林）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Chainmail Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Chainmail Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Chainmail Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Chainmail Boots}}（耐久 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Helmet}}（耐久 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 11 || 0.05 || {{ItemLink|Chainmail Leggings}}（耐久 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 13 || 0.05 || {{ItemLink|Chainmail Chestplate}}（耐久 I） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Helmet}}（弹射物保护 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Chainmail Boots}}（摔落缓冲 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（平原）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Iron Boots}}（保护 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Helmet}}（保护 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 11 || 0.05 || {{ItemLink|Iron Leggings}}（保护 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 13 || 0.05 || {{ItemLink|Iron Chestplate}}（保护 I） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 16<br>3 || 0.05 || {{ItemLink|Diamond Leggings}}（保护 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 16<br>2 || 0.05 || {{ItemLink|Diamond Boots}}（保护 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（热带草原）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 2 || 0.05 || {{ItemLink|Iron Boots}}（绑定诅咒） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{ItemLink|Iron Helmet}}（绑定诅咒） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Leggings}}（绑定诅咒） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Chestplate}}（绑定诅咒） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 6<br>2 || 0.05 || {{ItemLink|Diamond Helmet}}（绑定诅咒） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 8<br>3 || 0.05 || {{ItemLink|Diamond Chestplate}}（绑定诅咒） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（雪原）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=2 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Iron Boots}}（冰霜行者 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Helmet}}（水下速掘） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 12<br>2 || 0.05 || {{ItemLink|Diamond Boots}}（冰霜行者 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 12<br>3 || 0.05 || {{ItemLink|Diamond Helmet}}（水下速掘） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（沼泽）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Chainmail Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Chainmail Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Chainmail Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Chainmail Boots}}（经验修补） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Helmet}}（经验修补） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 11 || 0.05 || {{ItemLink|Chainmail Leggings}}（经验修补） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 13 || 0.05 || {{ItemLink|Chainmail Chestplate}}（经验修补） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Helmet}}（{{tr|水下呼吸|水中呼吸}} I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Chainmail Boots}}（深海探索者 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（针叶林）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond Boots}} || 4<br>1 || 0.05 || {{ItemLink|Diamond Leggings}} || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond Leggings}} || 4<br>1 || 0.05 || {{ItemLink|Diamond Chestplate}} || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond Helmet}} || 4<br>1 || 0.05 || {{ItemLink|Diamond Boots}} || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond Chestplate}} || 2<br>1 || 0.05 || {{ItemLink|Diamond Helmet}} || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 18<br>4 || 0.05 || {{ItemLink|Diamond Chestplate}}（爆炸保护 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 18<br>3 || 0.05 || {{ItemLink|Diamond Leggings}}（爆炸保护 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Diamond}} || 1 || 0.05 || {{ItemLink|Emerald}} || 42 || 12 || 30
+|}
+
+== 修复 ==
+{{fixes|fixedin=1.20.2 Pre-release 1|showdesc=1
+|;old
+|70127|一部分方块状态的更改没有传递给客户端。
+|72721|无论聊天设置为何，玩家在死亡后总能接收到聊天消息。
+|103800|部分情况下盔甲架不会更新其视觉上的旋转。
+|119873|标题屏幕中，鸣谢名单按钮的文本无法被翻译。
+|154827|闪烁标语“Verlet intregration!”内存在拼写错误。
+|177172|村民/流浪商人的交易界面中的破折号是硬编码，无法被翻译。
+|248778|潜影盒的悬浮提示中，在物品后用于表示数量的x无法被翻译。
+|248833|“语言翻译不一定100%准确”这句话前后的两个括号无法被翻译。
+|248844|配方书界面中，当前页和总页数之间的 / 无法被翻译。
+|248846|死亡屏幕中，玩家分数前的冒号无法被翻译。
+|249355|统计信息中用于表示空值的连字符无法被翻译。
+|252295|源文本中，多条死亡消息中的“whilst”一词未采用美式拼写。
+|252298|源文本中，与荆棘魔咒相关的死亡消息未正确使用连词。
+|252316|一些死亡消息中的burnt一词应当被写作burned，使其更贴近美式英语。
+|253241|多人游戏菜单中，服务器当前在线玩家数和能容纳的总玩家数之间的 / 无法被翻译。
+|253269|进度菜单中，进度完成度示数中的符号无法被翻译。
+|253270|袭击使用的BOSS栏的标题中的连字符无法被翻译。
+|253278|世界加载屏幕中用于表示加载进度的百分号无法被翻译。
+|253281|“高级悬浮提示”设置为隐藏时，显示在已绘制地图的悬浮提示中的文本无法被翻译。
+|253283|优化世界菜单中用于表示进度的 % 和已完成区块数与总区块数之间的 / 无法被翻译。
+|253638|潜影盒的提示框中表示其使用了随机战利品表的???????无法被翻译。
+|255418|倚着投掷器/发射器/漏斗放置红石粉后，即使方块顶部红石粉被移除，垂直部分的红石粉看起来也不会跟着消失。
+|256777|Tab玩家列表中用于表示玩家生命值的 hp 无法被翻译。
+|260819|源文本中，字符串<code>death.attack.message_too_long</code>中的“stripped”一词前缺少冠词。
+|263133|“内存溢出”屏幕的源文本中用词不一致。
+|;1.20.1的漏洞
+|264233|玩家在死亡并重生后被显示为匿名玩家。
+|264574|符号链接在世界根文件夹下无法正常使用。
+|264809|红石比较器使红石粉无法正确连接。
+|265151|因未知原因被服务器封禁时显示的 (Unknown) 字符串无法被翻译。
+|;dev
+|264615|在获得伤害吸收效果后，它的图标要几秒后才能显示。
+|264656|在食用附魔金苹果并受到伤害后，食用普通金苹果将不会再增加伤害吸收值。
+|264657|在已有较高等级伤害吸收效果并再次赋予较低等级效果时，能否获得黄心取决于两次命令是否有相同的<code>hideParicles</code>参数。
+|264658|函数{{tr|宏|巨集}}中只能为数字使用整型的数据类型。
+|265053|Programmer Art资源包中附魔台UI的青金石轮廓纹理不正确地使用了旧格式。
+|265060|织布机 GUI（loom.png）中缺少用来表示错误的精灵图。
+|;previous
+|265126|进度的<code>requirements</code>字段不能被省略。
+|265209|协议切换至<code>CONFIGURATION</code>（配置）状态时客户端和服务端的协议状态不同步。
+|265213|源文本中，{{cmd|random|link=none}}命令返回的聊天消息采用“在1和6之间”的提法，而不是“1到6”。
+}}</onlyinclude>
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:1.20.2-pre1]]
+[[en:Java Edition 1.20.2 Pre-release 1]]
+[[es:Java Edition 1.20.2 Pre-release 1]]
+[[fr:Édition Java 1.20.2 Pre-release 1]]
+[[ja:Java Edition 1.20.2 Pre-release 1]]
+[[pt:Edição Java 1.20.2 Pre-release 1]]
+[[ru:1.20.2 Pre-release 1 (Java Edition)]]
+[[uk:1.20.2 Pre-release 1 (Java Edition)]]

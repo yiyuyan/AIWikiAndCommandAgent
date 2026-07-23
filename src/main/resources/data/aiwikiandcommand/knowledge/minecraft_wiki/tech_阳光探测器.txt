@@ -1,0 +1,343 @@
+# 页面: 阳光探测器
+# 来源: https://zh.minecraft.wiki/w/%E9%98%B3%E5%85%89%E6%8E%A2%E6%B5%8B%E5%99%A8
+# 分类: Java版独有信息, 使用简单计算器的页面, 可再生资源, 基岩版独有信息, 方块, 红石, 红石机制
+# 抓取时间: 2026-07-14 17:38:11
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|探测器|感測器}}
+{{redirect|探测器}}
+{{Infobox block
+|group1=普通
+|1-1=Daylight Detector.png
+|group2=反向
+|2-1=Inverted Daylight Detector.png
+|invimage=Daylight Detector
+|invimage2=----
+|invimage3=[阳光探测器已反转（基岩版）]Inverted Daylight Detector BE
+|light=0
+}}
+{{quote|我们是阳光传感器的忠实粉丝——夜色降临时它会自动关闭你的家门，阻止生物进入。当你在你的地下室长时间工作以致忘了时间时，它非常有用！
+|[[Tom Stone]]<ref name="quartz uses">{{article|block-week-quartz|Block of the Week: Quartz|March 3, 2017}}</ref>||Tom Stone Mojavatar.png}}
+{{quote|在Minecraft中，阳光探测器或许也能救你一命。何不设置个系统，让基地的门或大门在日落时自动关闭？虽然要花点石英，但总比醒来在储藏室里发现一只苦力怕强，对吧？|[[Duncan Geere]]<ref>{{article|daylight-detector|Block of the Month: Daylight Detector|Dec 14, 2023}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''阳光探测器（Daylight Detector）'''是能发出和阳光强度有关的红石信号的方块。
+
+== 生成 ==
+阳光探测器不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Glass         |B1= Glass         |C1= Glass
+|A2= Nether Quartz |B2= Nether Quartz |C2= Nether Quartz
+|A3= Any wood Slab |B3= Any wood Slab |C3= Any wood Slab
+|Output= Daylight Sensor
+|type= Redstone
+}}
+
+== 破坏 ==
+挖掘阳光探测器的合适工具是斧。
+
+{{Breaking table}}
+
+阳光探测器被破坏后会掉落自身。
+
+== 用途 ==
+阳光探测器高0.375格（{{frac|3|8}}格），不会被[[水]]和[[熔岩]]摧毁。
+
+{{in|je}}阳光探测器无法被[[活塞]]移动。
+
+=== 红石元件 ===
+[[File:Daylight sensor output clear.png|thumb|425px|阳光探测器在晴天里的输出信号图表]]
+{{see also|红石电路}}
+
+阳光探测器可用来产生与[[亮度#内部光照等级|内部天空光照等级]]、天气和时间相关的红石信号。
+
+; 输出信号
+常规的阳光探测器在暴露在阳光下时输出红石信号，阳光强度越高输出强度越高。
+
+反向阳光探测器在暴露在足够低的阳光时输出信号，阳光强度越低输出强度越高。
+
+在下界和末地中，阳光探测器的输出固定。在常规模式下为0，在反向模式下为{{only|je|for=15}}或{{only|be|for=0}}。
+
+光源（[[火把]]、[[荧石]]等）发出的光不影响阳光探测器。
+
+; 行为
+阳光探测器输出信号时会：
+* 激活毗邻的[[红石线]]和四周主输入端朝向阳光探测器的[[红石中继器]]和[[红石比较器]]，强度取决于所处位置的[[亮度#内部光照等级|内部天空光照等级]]。
+* 激活毗邻的[[红石元件#机械元件|红石元件]]。如[[活塞]]、[[红石灯]]等。
+
+阳光探测器不会充能毗邻方块。
+
+{{in|je}}游戏每20游戏刻更新一次已加载区块中的阳光探测器的输出信号；{{in|be}}则每红石刻更新。
+
+转换模式时阳光探测器会即时更新一次信号。方块更新不影响阳光探测器。
+
+==== 阳光探测器 ====
+常规的阳光探测器信号等级取决于时间、天气及阳光探测器所接收到的内部天空光照等级。
+
+{| class="wikitable" style="text-align:center"
+|+ 当'''天空光照'''为15级时常规阳光探测器的输出
+! rowspan=2 | 信号
+! colspan=2 | 晴天
+! colspan=2 | 降雨或降雪
+! colspan=2 | 雷暴
+|-
+! 时间 ↓ !! 时间 ↑ 
+! 时间 ↓ !! 时间 ↑
+! 时间 ↓ !! 时间 ↑ 
+|-
+| 0
+| colspan=2 | {{ClockPhase|18000}} 13670-22330 
+| colspan=2 | {{ClockPhase|18000}} 13670-22330
+| colspan=2 | {{ClockPhase|18000}} 13670-22330
+|-
+| 1
+| style="text-align: left;" | {{ClockPhase|22556}} 22331-22781
+| style="text-align: left;" | {{ClockPhase|13444}} 13219-13669
+| style="text-align: left;" | {{ClockPhase|22564}} 22331-22798
+| style="text-align: left;" | {{ClockPhase|13436}} 13203-13669
+| style="text-align: left;" | {{ClockPhase|22637}} 22331-22943
+| style="text-align: left;" | {{ClockPhase|13363}} 13058-13669
+|-
+| 2
+| style="text-align: left;" | {{ClockPhase|22925}} 22782-23069{{only|je|short=1}}<br>22782-23070{{only|be|short=1}}
+| style="text-align: left;" | {{ClockPhase|13074}} 12931-13218
+| style="text-align: left;" | {{ClockPhase|23015}} 22799-23231
+| style="text-align: left;" | {{ClockPhase|12985}} 12769-13202{{only|je|short=1}}<br>12770-13202{{only|be|short=1}}
+| style="text-align: left;" | {{ClockPhase|23148}} 22944-23352
+| style="text-align: left;" | {{ClockPhase|12852}} 12648-13057
+|-
+| 3
+| style="text-align: left;" | {{ClockPhase|23183}} 23070-23296{{only|je|short=1}}<br>23071-23296{{only|be|short=1}}
+| style="text-align: left;" | {{ClockPhase|12817}} 12705-12930
+| style="text-align: left;" | {{ClockPhase|23368}} 23232-23504
+| style="text-align: left;" | {{ClockPhase|12632}} 12497-12768{{only|je|short=1}}<br>12497-12769{{only|be|short=1}}
+| style="text-align: left;" | {{ClockPhase|23526}} 23353-23700
+| style="text-align: left;" | {{ClockPhase|12473}} 12300-12647
+|-
+| 4
+| style="text-align: left;" | {{ClockPhase|23413}} 23297-23529
+| style="text-align: left;" | {{ClockPhase|12587}} 12471-12704
+| style="text-align: left;" | {{ClockPhase|23625}} 23505-23745
+| style="text-align: left;" | {{ClockPhase|12376}}  12256-12496
+| style="text-align: left;" | {{ClockPhase|23880}} 23701-59
+| style="text-align: left;" | {{ClockPhase|12120}} 11941-12299{{only|je|short=1}}<br>11942-12299{{only|be|short=1}}
+|-
+| 5
+| style="text-align: left;" | {{ClockPhase|23648}} 23530-23767
+| style="text-align: left;" | {{ClockPhase|12351}} 12233-12470
+| style="text-align: left;" | {{ClockPhase|23868}} 23746-23991
+| style="text-align: left;" | {{ClockPhase|12132}} 12010-12255
+| style="text-align: left;" | {{ClockPhase|250}} 60-441
+| style="text-align: left;" | {{ClockPhase|11750}} 11560-11940{{only|je|short=1}}<br>11560-11941{{only|be|short=1}}
+|-
+| 6
+| style="text-align: left;" | {{ClockPhase|23864}} 23768-23960
+| style="text-align: left;" | {{ClockPhase|12136}} 12041-12232
+| style="text-align: left;" | {{ClockPhase|193}} 23992-394
+| style="text-align: left;" | {{ClockPhase|11808}} 11607-12009
+| style="text-align: left;" | {{ClockPhase|740}} 442-1039
+| style="text-align: left;" | {{ClockPhase|11260}} 10962-11559
+|-
+| 7
+| style="text-align: left;" | {{ClockPhase|63}} 23961-166
+| style="text-align: left;" | {{ClockPhase|11937}} 11835-12040
+| style="text-align: left;" | {{ClockPhase|638}} 395-882
+| style="text-align: left;" | {{ClockPhase|11362}} 11119-11606
+| style="text-align: left;" | {{ClockPhase|1387}} 1040-1735
+| style="text-align: left;" | {{ClockPhase|10613}} 10266-10961
+|-
+| 8
+| style="text-align: left;" | {{ClockPhase|351}} 167-535
+| style="text-align: left;" | {{ClockPhase|11649}} 11465-11834{{only|je|short=1}}<br>11466-11834{{only|be|short=1}}
+| style="text-align: left;" | {{ClockPhase|1156}} 883-1429{{only|je|short=1}}<br>883-1430{{only|be|short=1}}
+| style="text-align: left;" | {{ClockPhase|10844}} 10571-11118
+| style="text-align: left;" | {{ClockPhase|2172}} 1736-2608
+| style="text-align: left;" | {{ClockPhase|9828}} 9392-10265
+|-
+| 9
+| style="text-align: left;" | {{ClockPhase|734}} 536-933
+| style="text-align: left;" | {{ClockPhase|10250}} 11067-11464{{only|je|short=1}}<br>11067-11465{{only|be|short=1}}
+| style="text-align: left;" | {{ClockPhase|1749}} 1430-2069{{only|je|short=1}}<br>1431-2069{{only|be|short=1}}
+| style="text-align: left;" | {{ClockPhase|10250}} 9931-10570
+| style="text-align: left;" | {{ClockPhase|3275}} 2609-3942
+| style="text-align: left;" | {{ClockPhase|8725}} 8059-9391
+|-
+| 10
+| style="text-align: left;" | {{ClockPhase|1152}} 934-1371
+| style="text-align: left;" | {{ClockPhase|10847}} 10629-11066
+| style="text-align: left;" | {{ClockPhase|2472}} 2070-2875
+| style="text-align: left;" | {{ClockPhase|9527}} 9125-9930{{only|je|short=1}}<br>9126-9930{{only|be|short=1}} 
+| colspan=2 | {{ClockPhase|6000}} 3943-8058
+|-
+| 11
+| style="text-align: left;" | {{ClockPhase|1618}} 1372-1865
+| style="text-align: left;" | {{ClockPhase|10382}} 10136-10628
+| style="text-align: left;" | {{ClockPhase|3492}} 2876-4108
+| style="text-align: left;" | {{ClockPhase|8508}} 7892-9124{{only|je|short=1}}<br>7893-9125{{only|be|short=1}} 
+| N/A  || N/A   
+|-
+| 12
+| style="text-align: left;" | {{ClockPhase|2155}} 1866-2444 
+| style="text-align: left;" | {{ClockPhase|9846}} 9557-10135
+| colspan=2 | {{ClockPhase|6000}} 4109-7891{{only|je|short=1}}<br>4109-7892{{only|be|short=1}}
+| N/A  || N/A   
+|-
+| 13
+| style="text-align: left;" | {{ClockPhase|2810}} 2445-3175
+| style="text-align: left;" | {{ClockPhase|9191}} 8826-9556
+| N/A  || N/A  
+| N/A  || N/A  
+|-
+| 14
+| style="text-align: left;" | {{ClockPhase|3735}} 3176-4294
+| style="text-align: left;" | {{ClockPhase|8265}} 7706-8825
+| N/A  || N/A  
+| N/A  || N/A  
+|-
+| 15
+| colspan=2 | {{ClockPhase|6000}} 4295-7705
+| N/A  || N/A  
+| N/A  || N/A  
+|}
+
+==== 反向阳光探测器 ====
+对阳光探测器按下{{control|使用}}键会转换它的模式。反向阳光探测器输出的信号强度为15减去所在位置的[[亮度#内部光照|内部天空光照等级]]。若大于15或小于0，则相应地取15或0作为输出强度。
+
+若无遮挡，反向阳光探测器在午夜晴天时输出的强度为11。天空光照减少会增加信号的强度，且会防止信号强度降到0。
+
+{{in|je}}阳光探测器与反向阳光探测器的区别只是方块状态的不同。因此反向阳光探测器不能以物品实体形式掉落，挖掘反向阳光探测器只会掉落常规的阳光探测器。
+
+{{in|be}}阳光探测器和反向阳光探测器是两个不同的方块。在创造模式中使用[[选取方块]]可以直接获得反向阳光探测器，但破坏反向阳光探测器只能获得阳光探测器。
+
+=== 燃料 ===
+阳光探测器可作为[[熔炉]]、[[高炉]]或[[烟熏炉]]的[[燃料]]使用，一个阳光探测器可烧炼1.5个物品。
+
+== 音效 ==
+{{Sound table/Block/Wood}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Daylight Detector
+|spritetype=block
+|nameid=daylight_detector
+|showblocktags=je
+|blocktags={{GameTag|blocks|daylight_detector}}
+|foot=1
+}}
+{{ID table
+|displayname=方块实体
+|spritename=daylight-detector
+|spritetype=block
+|nameid=daylight_detector
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Daylight Sensor
+|spritetype=block
+|nameid=daylight_detector
+|showblocktags=be
+|blocktags={{GameTagBE|block|daylight_detector}}
+}}
+{{ID table
+|Inverted Daylight Sensor
+|spritetype=block
+|nameid=daylight_detector_inverted
+|blocktags={{GameTagBE|block|daylight_detector_inverted}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=daylight-detector
+|spritetype=block
+|nameid=DaylightDetector
+|foot=1
+}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值{{!}}数据值}}
+阳光探测器的方块数据指定它所发出的红石信号大小：
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table|阳光探测器|阳光探测器,反向阳光探测器}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+阳光探测器具有与它相关联的方块实体格式。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2010年7月6日|link=wordofnotch:776816446|[[Notch]]表示将要加入阳光传感器。}}
+|{{HistoryLine||2012年11月24日|link=none|[[Jeb]]提到可能会加入一种[[光|阳光]]传感器。}}
+|{{HistoryLine||2013年1月2日|link={{tweet|jeb_|286493347756011520}}|Jeb在Twitter上发布了阳光传感器的[http://i.imgur.com/DmHt3.png 第一张截图]。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w01a|[[File:Daylight Detector JE1 BE1.png|32px]] 加入了阳光传感器。}}
+|{{HistoryLine||1.8|dev=14w31a|[[File:Inverted Daylight Detector JE1 BE1.png|32px]] 加入了反向阳光传感器。
+|现在可通过{{ctrl|使用}}阳光传感器切换正向和反向模式。}}
+|{{HistoryLine||1.9|dev=15w47a|阳光传感器在夜晚有足够的阴影时不再发出信号。
+|现在反转模式的阳光传感器在夜间发出的信号将会随着所处环境的变化而变化。}}
+|{{HistoryLine||1.11|dev=16w32a|方块实体ID由<code>DLDetector</code>更改为<code>daylight_detector</code>。}}
+|{{HistoryLine||1.13|dev=17w47a|阳光传感器和反向阳光传感器合并。
+|加入了有决定是否反向的方块状态。
+|阳光传感器{{tr|（|的英文名稱}}Daylight Sensor{{tr|）|}}被重命名为{{tr|阳光探测器（|}}Daylight Detector{{tr|）|}}。
+|在[[扁平化]]前，阳光探测器和反向阳光探测器的数字ID为151和178。}}
+|{{HistoryLine||1.16|dev=20w07a|由于[[下界石英]]可以通过与[[猪灵]]以物易物来获得，阳光探测器成为可再生资源。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|[[File:Daylight Detector JE1 BE1.png|32px]] [[File:Inverted Daylight Detector JE1 BE1.png|32px]] 加入了阳光探测器。}}
+|{{HistoryLine||0.15.0|dev=build 1|阳光探测器现在可被活塞推动。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.30|dev=1.21.30.22|阳光探测器的英文名称由“Daylight Sensor”重命名为“Daylight Detector”，以匹配{{el|je}}。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|switch=1.0.1|[[File:Daylight Detector JE1 BE1.png|32px]] [[File:Inverted Daylight Detector JE1 BE1.png|32px]] 加入了阳光探测器。}}
+|{{HistoryLine||xbox=TU25|xbone=CU14|ps3=1.17|psvita=1.17|ps4=1.17|现在可通过{{ctrl|使用}}阳光传感器切换正向和反向模式。}}
+|{{HistoryLine||xbox=TU57|xbone=CU49|ps3=1.57|psvita=1.56|ps4=1.56|wiiu=Patch 27|switch=1.0.7|阳光探测器现在可以被活塞推动。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Daylight Detector JE1 BE1.png|32px]] [[File:Inverted Daylight Detector JE1 BE1.png|32px]] 加入了阳光探测器。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:13w01a.png|[[Mojang]]发布的13w01a快照截图
+</gallery>
+
+== 参见 ==
+* [[Tutorial:光照操纵]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:红石机制]]
+
+[[de:Tageslichtsensor]]
+[[en:Daylight Detector]]
+[[es:Sensor de luz solar]]
+[[fr:Capteur de lumière]]
+[[ja:日照センサー]]
+[[ko:햇빛 감지기]]
+[[nl:Daglichtsensor]]
+[[pl:Detektor światła dziennego]]
+[[pt:Detector de Luz Solar]]
+[[ru:Датчик дневного света]]

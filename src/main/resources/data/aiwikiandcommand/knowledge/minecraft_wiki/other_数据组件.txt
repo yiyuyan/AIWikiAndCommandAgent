@@ -1,0 +1,1580 @@
+# 页面: 数据组件
+# 来源: https://zh.minecraft.wiki/w/%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有特性, 使用计算器的页面, 开发
+# 抓取时间: 2026-07-14 17:28:11
+# 原始 Wikitext 内容:
+
+{{for|基岩版中的物品堆叠组件|基岩版物品堆叠组件}}
+{{redirect|组件}}{{tr|{{redirect|元件|建造红石电路的元件|红石元件}}|}}
+{{exclusive|je}}
+{{relevant tutorial|物品堆叠组件}}
+'''数据组件（Data Component）'''<ref>{{snap|24w39a}}</ref>，或简称为'''组件（Component）'''，是用于定义和存储各种数据属性的结构化数据。
+
+由于[[物品堆叠]]全面使用数据组件格式，故其也被称为'''物品堆叠组件（Item Stack Component）'''或'''物品组件（Item Component）'''。<ref name=24w09a>{{snap|24w09a}}</ref>
+
+{{TOC limit|2}}
+
+== 行为 ==
+数据组件是结构化的数据，也即每一个组件都有自己独特的编码方式。如果组件的数据格式不正确，则游戏会立即解析失败，对应的命令和文件等全部无效。
+
+由于数据组件的编码解码行为，使得其与通常的[[NBT标签]]数据不同。通常的NBT标签仅会在游戏尝试序列化为程序对象时才判断其是否符合编码格式，而组件自游戏加载之初就进行了判断。这使得数据组件格式拥有更快的加载性能，可以更早地发现命令和文件中的潜在错误。<ref name=24w09a/>
+
+除了编码方式外，每一个组件都有是否持久化和是否同步两个基本性质。不可持久化的组件通常仅用于网络传输，随游戏计算完毕或内存卸载而移除，不会保存到[[存档]]里，强行加载和保存也会导致游戏解析失败。若无特殊说明，下文的组件均指持久化组件。
+
+=== 加载行为 ===
+物品堆叠、方块实体和实体可以拥有数据组件。
+
+目前方块实体和实体依然使用了非结构化的NBT标签存储。为了对方块实体或实体套用或获取数据组件，游戏会将对应的组件和对应的NBT标签绑定。这步绑定操作所用的组件在游戏内部被称为隐式组件（Implicit Component）。游戏通常在使用物品放置方块或实体时套用组件，而使用谓词检测或破坏方块时获取组件。
+
+例如：当使用命名过的箱子放置箱子时，箱子物品的<code>custom_name</code>组件会套用到箱子的方块实体上。而方块实体会使用方块实体数据{{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}来保存它。而当从箱子获取<code>custom_name</code>组件时，游戏会将方块实体数据{{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}视为<code>custom_name</code>组件。
+
+=== 物品堆叠 ===
+{{Filetr|The Component Count In An Item Stack.png|thumb|300px|在物品提示框中会显示当前物品堆叠的组件数}}
+{{see also|物品格式}}
+物品堆叠全面使用数据组件格式。虽然游戏为每个物品定义了依据物品类型的默认组件，但默认组件只在内存中计算，不会保存到存档中。而存档会存储物品的组件修订（Data Component Patch）数据，组件修订中指定的组件会覆盖默认组件的值，且带<code>!</code>前缀的组件会移除该物品的默认组件。
+
+绝大多数数据组件都对物品自身有实际作用，决定了物品的诸多性质，例如是否可堆叠、可损坏等，影响了大量的游戏行为。当以组件为单位修改物品时，游戏不允许物品同时具有<code>damage</code>组件和值大于1的<code>max_stack_size</code>的组件补丁，即物品不可以既可堆叠又可损坏。
+
+<div class="treeview">
+* {{nbt|compound}} 物品堆叠数据
+** {{nbt transclude|编码格式/Item|codec_item}}
+</div>
+
+=== 方块实体 ===
+{{see also|方块实体数据格式}}
+方块实体部分采用数据组件格式。一部分组件以组件格式原样存储，另一部分则以隐式组件存储于NBT标签中。目前方块实体不支持删除组件。
+
+当使用方块物品放置方块时，<code>block_state</code>和<code>block_entity_data</code>组件永远不会保存到方块实体中。
+
+<div class="treeview">
+* {{nbt|compound}} 方块实体数据
+** {{nbt transclude|编码格式/BlockEntity|codec_block_entity}}
+</div>
+
+游戏内使用的以隐式组件存储的方块实体组件如下：
+
+{|class="wikitable sortable collapsible collapsed"
+! 命名空间ID !! 作用方块 !! 方块实体数据 !! 与<code>block_entity_data</code>组件间的行为
+|-
+| [[#banner_patterns|banner_patterns]]
+| {{BlockLink|Banners}}
+| {{nbt|list|patterns}}
+| rowspan="4" | 高优先级，作用的方块实体数据永远无法被<code>block_entity_data</code>设置
+|-
+| [[#bees|bees]]
+| {{BlockLink|Bee Nest}}<br>{{BlockLink|BeeHive}}
+| {{nbt|list|bees}}
+|-
+| rowspan="2" | [[#container|container]]
+| {{collapse|title='''容器方块'''|content={{BlockLink|Chest}}<br>{{BlockLink|Trapped Chest}}<br>{{BlockLink|Copper Chest}}<br>{{BlockLink|Barrel}}<br>{{BlockLink|id=all-shulker-boxes|潜影盒}}<br>{{BlockLink|Furnace}}<br>{{BlockLink|Smoker}}<br>{{BlockLink|Blast Furnace}}<br>{{BlockLink|Dispenser}}<br>{{BlockLink|Dropper}}<br>{{BlockLink|Crafter}}<br>{{BlockLink|Brewing Stand}}<br>{{BlockLink|Hopper}}}}{{BlockLink|Campfire}}<br>{{BlockLink|Soul Campfire}}<br>{{BlockLink|Chiseled Bookshelf}}<br>{{BlockLink|Shelf}}
+| {{nbt|list|Items}}
+|-
+| {{BlockLink|Decorated Pot}}
+| {{nbt|compound|Item}}<br>（注：对应组件{{tr|列表|串列}}的第一个物品）
+|-
+| [[#container_loot|container_loot]]
+| {{collapse|title='''战利品容器方块'''|content={{BlockLink|Chest}}<br>{{BlockLink|Trapped Chest}}<br>{{BlockLink|Copper Chest}}<br>{{BlockLink|Barrel}}<br>{{BlockLink|id=all-shulker-boxes|潜影盒}}<br>{{BlockLink|Dispenser}}<br>{{BlockLink|Dropper}}<br>{{BlockLink|Crafter}}}}
+| {{nbt|long|LootTableSeed}}<br>{{nbt|string|LootTable}}
+| 高优先级，作用的方块实体数据在此组件不存在时可以被<code>block_entity_data</code>设置
+|-
+| rowspan="2" | [[#custom_name|custom_name]]
+| {{collapse|title='''容器方块'''|content={{BlockLink|Chest}}<br>{{BlockLink|Trapped Chest}}<br>{{BlockLink|Copper Chest}}<br>{{BlockLink|Barrel}}<br>{{BlockLink|id=all-shulker-boxes|潜影盒}}<br>{{BlockLink|Furnace}}<br>{{BlockLink|Smoker}}<br>{{BlockLink|Blast Furnace}}<br>{{BlockLink|Dispenser}}<br>{{BlockLink|Dropper}}<br>{{BlockLink|Crafter}}<br>{{BlockLink|Brewing Stand}}<br>{{BlockLink|Hopper}}}}{{BlockLink|Banners}}<br>{{BlockLink|Enchanting Table}}<br>{{BlockLink|Beacon}}<br>{{BlockLink|Command Block}}<br>{{BlockLink|Chain Command Block}}<br>{{BlockLink|Repeating Command Block}}
+| {{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}
+| rowspan="6" | 高优先级，作用的方块实体数据永远无法被<code>block_entity_data</code>设置
+|-
+| {{BlockLink|Skulls}}
+| {{nbt|string}}{{nbt|compound}}{{nbt|list|custom_name}}
+|-
+| [[#lock|lock]]
+| {{collapse|title='''容器方块'''|content={{BlockLink|Chest}}<br>{{BlockLink|Trapped Chest}}<br>{{BlockLink|Copper Chest}}<br>{{BlockLink|Barrel}}<br>{{BlockLink|id=all-shulker-boxes|潜影盒}}<br>{{BlockLink|Furnace}}<br>{{BlockLink|Smoker}}<br>{{BlockLink|Blast Furnace}}<br>{{BlockLink|Dispenser}}<br>{{BlockLink|Dropper}}<br>{{BlockLink|Crafter}}<br>{{BlockLink|Brewing Stand}}<br>{{BlockLink|Hopper}}}}{{BlockLink|Beacon}}
+| {{nbt|compound|lock}}
+|-
+| [[#note_block_sound|note_block_sound]]
+| {{BlockLink|Skulls}}
+| {{nbt|string|note_block_sound}}
+|-
+| [[#pot_decorations|pot_decorations]]
+| {{BlockLink|Decorated Pot}}
+| {{nbt|list|sherds}}
+|-
+| [[#profile|profile]]
+| {{BlockLink|Skulls}}
+| {{nbt|string}}{{nbt|compound|profile}}
+|}
+
+=== 实体 ===
+实体的数据组件全部以隐式组件的形式存储于非组件结构的NBT数据中。
+
+若物品同时具有<code>bucket_entity_data</code>、<code>entity_data</code>组件和其他实体组件，则套用优先级依次为<code>bucket_entity_data</code>、<code>entity_data</code>、其他组件。
+
+游戏内使用的以隐式组件存储的实体组件如下：
+{|class="wikitable sortable collapsible collapsed"
+! 命名空间ID !! 作用实体 !! 实体数据
+|-
+| [[#axolotl/variant|axolotl/variant]] || {{EntityLink|Axolotl}} || {{nbt|int|Variant}}
+|-
+| [[#cat/collar|cat/collar]] || rowspan="3" | {{EntityLink|Cat}} || {{nbt|byte|CollarColor}}
+|-
+| [[#cat/variant|cat/variant]] || {{nbt|string|variant}}
+|-
+| [[#cat/sound_variant|cat/sound_variant]] || {{nbt|string|sound_variant}}
+|-
+| [[#chicken/variant|chicken/variant]] || rowspan="2" | {{EntityLink|Chicken}} || {{nbt|string|variant}}
+|-
+| [[#chicken/sound_variant|chicken/sound_variant]] || {{nbt|string|sound_variant}}
+|-
+| [[#cow/variant|cow/variant]] || rowspan="2" | {{EntityLink|Cow}} || {{nbt|string|variant}}
+|-
+| [[#cow/sound_variant|cow/sound_variant]] || {{nbt|string|sound_variant}}
+|-
+| [[#custom_data|custom_data]] || rowspan=2 | '''所有实体''' || {{nbt|string}}{{nbt|compound|data}}
+|-
+| [[#custom_name|custom_name]] || {{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}
+|-
+| [[#fox/variant|fox/variant]] || {{EntityLink|Fox}} || {{nbt|string|Type}}
+|-
+| [[#frog/variant|frog/variant]] || {{EntityLink|Frog}} || {{nbt|string|variant}}
+|-
+| [[#horse/variant|horse/variant]] || {{EntityLink|Horse}} || {{nbt|int|Variant}}的后8位
+|-
+| [[#llama/variant|llama/variant]] || {{EntityLink|Llama}}<br>{{EntityLink|Trader Llama}} || {{nbt|int|Variant}}
+|-
+| [[#mooshroom/variant|mooshroom/variant]] || {{EntityLink|Mooshroom}} || {{nbt|string|Type}}
+|-
+| [[#painting/variant|painting/variant]] || {{EntityLink|Painting}} || {{nbt|string|variant}}
+|-
+| [[#parrot/variant|parrot/variant]] || {{EntityLink|Parrot}} || {{nbt|int|Variant}}
+|-
+| [[#profile|profile]] || {{EntityLink|Mannequin}} || {{nbt|string}}{{nbt|compound|profile}}
+|-
+| [[#pig/variant|pig/variant]] || rowspan="2" | {{EntityLink|Pig}} || {{nbt|string|variant}}
+|-
+| [[#pig/sound_variant|pig/sound_variant]] || {{nbt|string|sound_variant}}
+|-
+| [[#potion_contents|potion_contents]] || rowspan="2" | {{EntityLink|Area Effect Cloud}} || {{nbt|string}}{{nbt|compound|potion_contents}}
+|-
+| [[#potion_duration_scale|potion_duration_scale]] || {{nbt|float|potion_duration_scale}}
+|-
+| [[#rabbit/variant|rabbit/variant]] || {{EntityLink|Rabbit}} || {{nbt|int|RabbitType}}
+|-
+| [[#salmon/size|salmon/size]] || {{EntityLink|Salmon}} || {{nbt|string|type}}
+|-
+| [[#sulfur_cube_content|sulfur_cube_content]] || {{EntityLink|Sulfur Cube}} || {{nbt|compound|equipment.body}}
+|-
+| [[#sheep/color|sheep/color]] || {{EntityLink|Sheep}} || {{nbt|byte|Color}}
+|-
+| [[#shulker/color|shulker/color]] || {{EntityLink|Shulker}} || {{nbt|byte|Color}}
+|-
+| [[#tropical_fish/base_color|tropical_fish/base_color]] || rowspan="3" | {{EntityLink|Tropical Fish}} || {{nbt|int|Variant}}的低2位
+|-
+| [[#tropical_fish/pattern|tropical_fish/pattern]] || {{nbt|int|Variant}}的中4位
+|-
+| [[#tropical_fish/pattern_color|tropical_fish/pattern_color]] || {{nbt|int|Variant}}的高4位
+|-
+| rowspan="2" | [[#villager/variant|villager/variant]] || {{EntityLink|Villager}} || rowspan="2" | {{nbt|string|VillagerData.type}}
+|-
+| {{EntityLink|Zombie Villager}}
+|-
+| [[#wolf/collar|wolf/collar]] || rowspan=3 | {{EntityLink|Wolf}} || {{nbt|byte|CollarColor}}
+|-
+| [[#wolf/sound_variant|wolf/sound_variant]] || {{nbt|string|sound_variant}}
+|-
+| [[#wolf/variant|wolf/variant]] || {{nbt|string|variant}}
+|}
+
+== 数据组件类型 ==
+游戏总共定义了下列数据组件。此处仅简要介绍，完整格式和作用见下文。
+{{columns-list|colwidth=24em|
+* {{ItemLink|wooden-spear|attack_range|link=#attack_range}}（[[攻击距离]]）
+* {{BlockLink|chain-command-block|attribute_modifiers|link=#attribute_modifiers}}（[[属性修饰符]]）
+* {{BlockLink|white-banner|banner_patterns|link=#banner_patterns}}（[[旗帜图案]]）
+* {{ItemLink|shield|base_color|link=#base_color}}（[[盾牌]]基色）
+* {{BlockLink|bee-nest|<nowiki>bees</nowiki>|link=#bees}}（[[蜜蜂]]数据）
+* {{BlockLink|monster-spawner|block_entity_data|link=#block_entity_data}}（[[方块实体数据格式|方块实体数据]]）
+* {{BlockLink|oak-stairs|block_state|link=#block_state}}（[[方块状态]]）
+* {{ItemLink|honeycomb|block_transformer|link=#block_transformer}}{{upcoming|je 26.3}}（物品交互方块变换效果）
+* {{ItemLink|shield|blocks_attacks|link=#blocks_attacks}}（[[格挡]]攻击）
+* {{ItemLink|wooden-hoe|break_sound|link=#break_sound}}（物品耐久耗尽音效）
+* {{ItemLink|tropical-fish-bucket|bucket_entity_data|link=#bucket_entity_data}}（[[生物桶]]所装实体数据）
+* {{ItemLink|bundle|bundle_contents|link=#bundle_contents}}（[[收纳袋]]内物品）
+* {{ItemLink|stone-pickaxe|can_break|link=#can_break}}（冒险模式下该物品可破坏的方块）
+* {{BlockLink|cobblestone|can_place_on|link=#can_place_on}}（冒险模式下该物品可放置于的方块）
+* {{ItemLink|crossbow|charged_projectiles|link=#charged_projectiles}}（所装载的弹射物）
+* {{BlockLink|composter|compostable|link=#compostable}}（[[堆肥桶#堆肥|堆肥]]行为）{{upcoming|je 26.3}}
+* {{ItemLink|golden-apple|<nowiki>consumable</nowiki>|link=#consumable}}（可消耗性）
+* {{BlockLink|shulker-box|container|link=#container}}（[[容器]]内物品）
+* {{BlockLink|chest|container_loot|link=#container_loot}}（容器[[战利品表]]）
+* {{BlockLink|barrier|custom_data|link=#custom_data}}（自定义数据）
+* {{ItemLink|diamond|custom_model_data|link=#custom_model_data}}（自定义模型数据）
+* {{ItemLink|name-tag|custom_name|link=#custom_name}}（自定义名称）
+* {{ItemLink|iron-axe|damage|link=#damage}}（物品损坏值）
+* {{ItemLink|netherite-ingot|damage_resistant|link=#damage_resistant}}（不被指定伤害类型摧毁）
+* {{ItemLink|iron-sword|damage_type|link=#damage_type}}（攻击造成的[[伤害类型]]）
+* {{ItemLink|debug-stick|debug_stick_state|link=#debug_stick_state}}（调试棒状态）
+* {{ItemLink|totem-of-undying|death_protection|link=#death_protection}}（死亡保护）
+* {{ItemLink|dye|-{}-dye|link=#dye}}（染料颜色）
+* {{ItemLink|leather-chestplate|dyed_color|link=#dyed_color}}（所染颜色）
+* {{ItemLink|diamond-boots|enchantable|link=#enchantable}}（在附魔台上的[[附魔能力]]）
+* {{EntityLink|experience-bottle|enchantment_glint_override|link=#enchantment_glint_override}}（附魔[[光效]]）
+* {{ItemLink|book|enchantments|link=#enchantments}}（[[魔咒]]）
+* {{ItemLink|armor-stand|entity_data|link=#entity_data}}（实体数据）
+* {{ItemLink|saddle|equippable|link=#equippable}}（可穿戴性）
+* {{ItemLink|firework-star|firework_explosion|link=#firework_explosion}}（[[烟火之星]]爆裂数据）
+* {{ItemLink|firework-rocket|<nowiki>fireworks</nowiki>|link=#fireworks}}（[[烟花火箭]]爆裂和飞行数据）
+* {{ItemLink|cooked-beef|food|link=#food}}（[[食物]]）
+* {{ItemLink|elytra|glider|link=#glider}}（穿戴后可[[滑翔]]）
+* {{ItemLink|goat-horn|instrument|link=#instrument}}（[[山羊角乐器定义格式|乐器]]）
+* {{ItemLink|arrow|intangible_projectile|link=#intangible_projectile}}（只能被创造模式玩家捡起的弹射物）
+* {{ItemLink|emerald|item_model|link=#item_model}}（[[物品模型映射|物品模型]]）
+* {{ItemLink|name-tag|item_name|link=#item_name}}（物品名称）
+* {{ItemLink|music-disc-5|jukebox_playable|link=#jukebox_playable}}（插入[[唱片机]]并播放音乐）
+* {{ItemLink|iron-spear|kinetic_weapon|link=#kinetic_weapon}}（设置冲锋攻击）
+* {{BlockLink|tripwire-hook|lock|link=#lock}}（锁）
+* {{ItemLink|lodestone-compass|lodestone_tracker|link=#lodestone_tracker}}（所追踪的[[磁石]]位置）
+* {{ItemLink|paper|lore|link=#lore}}（物品提示框中的描述信息）
+* {{ItemLink|filled-map|map_color|link=#map_color}}（[[地图]]在物品栏内的纹理颜色）
+* {{ItemLink|ocean-explorer-map|map_decorations|link=#map_decorations}}（地图图标）
+* {{ItemLink|filled-map|map_id|link=#map_id}}（地图编号）
+* {{ItemLink|diamond-axe|max_damage|link=#max_damage}}（最大耐久度）
+* {{ItemLink|egg|max_stack_size|link=#max_stack_size}}（最大堆叠数）
+* {{ItemLink|iron-sword|minimum_attack_charge|link=#minimum_attack_charge}}（进行近战或穿刺攻击所需的[[近战攻击#攻击冷却|冷却进度]]最小值）
+* {{BlockLink|note-block|note_block_sound|link=#note_block_sound}}（放有玩家的头的音符盒音效）
+* {{ItemLink|ominous-bottle|ominous_bottle_amplifier|link=#ominous_bottle_amplifier}}（物品的[[不祥之兆]]状态效果倍率）
+* {{ItemLink|iron-spear|piercing_weapon|link=#piercing_weapon}}（设置戳刺攻击）
+* {{ItemLink|danger-pottery-sherd|pot_decorations|link=#pot_decorations}}（[[饰纹陶罐]]陶片装饰）
+* {{ItemLink|potion|potion_contents|link=#potion_contents}}（药水效果与状态效果信息）
+* {{ItemLink|lingering-potion|potion_duration_scale|link=#potion_duration_scale}}（状态效果时长缩放倍率）
+* {{BlockLink|player-head|profile|link=#profile}}（玩家游戏档案信息）
+* {{ItemLink|creeper-charge-banner-pattern|provides_banner_patterns|link=#provides_banner_patterns}}（是否可放进织布机的旗帜图案槽位）
+* {{ItemLink|raiser-armor-trim-smithing-template|provides_trim_material|link=#provides_trim_material}}（为盔甲纹饰配方提供的纹饰材料）
+* {{ItemLink|nether-star|rarity|link=#rarity}}（[[稀有度]]）
+* {{ItemLink|knowledge-book|recipes|link=#recipes}}（知识之书配方信息）
+* {{BlockLink|anvil|repairable|link=#repairable}}（可在铁砧上被修复）
+* {{EntityLink|experience-orb|repair_cost|link=#repair_cost}}（在铁砧上的[[铁砧机制#累计惩罚|累计惩罚值]]）
+* {{ItemLink|enchanted-book|stored_enchantments|link=#stored_enchantments}}（所存储的“无活性”魔咒）
+* {{ItemLink|bucket-of-sulfur-cube|sulfur_cube_content|link=#sulfur_cube_content}}（硫方怪吸收的方块）
+* {{ItemLink|suspicious-stew|suspicious_stew_effects|link=#suspicious_stew_effects}}（[[谜之炖菜]]效果）
+* {{ItemLink|iron-sword|swing_animation|link=#swing_animation}}（攻击动画）
+* {{ItemLink|diamond-shovel|tool|link=#tool}}（成为挖掘某方块的工具）
+* {{ItemLink|item-frame|tooltip_display|link=#tooltip_display}}（物品提示框及附加信息的显示）
+* {{ItemLink|painting|tooltip_style|link=#tooltip_style}}（物品提示框背景和边框样式）
+* {{ItemLink|spire-armor-trim|trim|link=#trim}}（盔甲纹饰）
+* {{BlockLink|bedrock|unbreakable|link=#unbreakable}}（无法破坏）
+* {{ItemLink|ender-pearl|use_cooldown|link=#use_cooldown}}（使用后冷却）
+* {{ItemLink|diamond-spear|use_effects|link=#use_effects}}（玩家使用物品时的行为）
+* {{ItemLink|milk-bucket|use_remainder|link=#use_remainder}}（使用后返还物品）
+* {{ItemLink|diamond-sword|weapon|link=#weapon}}（作为武器时的行为）
+* {{ItemLink|book-and-quill|writable_book_content|link=#writable_book_content}}（书与笔内容）
+* {{ItemLink|written-book|written_book_content|link=#written_book_content}}（成书内容）
+}}
+
+'''[[#实体变种组件|实体变种组件]]'''
+{{columns-list|colwidth=18em|
+* {{EntityLink|axolotl|axolotl/variant|link=#axolotl/variant}}（美西螈变种）
+* {{EntityLink|cat|cat/collar|link=#cat/collar}}（猫项圈颜色）
+* {{EntityLink|cat|cat/sound_variant|link=#cat/sound_variant}}（猫音效变种）
+* {{EntityLink|cat|cat/variant|link=#cat/variant}}（猫变种）
+* {{EntityLink|chicken|chicken/sound_variant|link=#chicken/sound_variant}}（鸡音效变种）
+* {{EntityLink|chicken|chicken/variant|link=#chicken/variant}}（鸡变种）
+* {{EntityLink|cow|cow/sound_variant|link=#cow/sound_variant}}（牛音效变种）
+* {{EntityLink|cow|cow/variant|link=#cow/variant}}（牛变种）
+* {{EntityLink|fox|fox/variant|link=#fox/variant}}（狐狸变种）
+* {{EntityLink|frog|frog/variant|link=#frog/variant}}（青蛙变种）
+* {{EntityLink|horse|horse/variant|link=#horse/variant}}（马变种）
+* {{EntityLink|llama|llama/variant|link=#llama/variant}}（羊驼变种）
+* {{EntityLink|mooshroom|mooshroom/variant|link=#mooshroom/variant}}（哞菇变种）
+* {{EntityLink|parrot|parrot/variant|link=#parrot/variant}}（鹦鹉变种）
+* {{EntityLink|painting|painting/variant|link=#painting/variant}}（画变种）
+* {{EntityLink|pig|pig/sound_variant|link=#pig/sound_variant}}（猪音效变种）
+* {{EntityLink|pig|pig/variant|link=#pig/variant}}（猪变种）
+* {{EntityLink|rabbit|rabbit/variant|link=#rabbit/variant}}（兔子变种）
+* {{EntityLink|salmon|salmon/size|link=#salmon/size}}（鲑鱼体型尺寸）
+* {{EntityLink|sheep|sheep/color|link=#sheep/color}}（绵羊变种）
+* {{EntityLink|shulker|shulker/color|link=#shulker/color}}（潜影贝颜色）
+* {{EntityLink|tropical-fish|tropical_fish/base_color|link=#tropical_fish/base_color}}（热带鱼体色）
+* {{EntityLink|tropical-fish|tropical_fish/pattern|link=#tropical_fish/pattern}}（热带鱼花纹）
+* {{EntityLink|tropical-fish|tropical_fish/pattern_color|link=#tropical_fish/pattern_color}}（热带鱼花纹颜色）
+* {{EntityLink|villager|villager/variant|link=#villager/variant}}（村民变种）
+* {{EntityLink|wolf|wolf/collar|link=#wolf/collar}}（狼项圈颜色）
+* {{EntityLink|wolf|wolf/sound_variant|link=#wolf/sound_variant}}（狼音效变种）
+* {{EntityLink|wolf|wolf/variant|link=#wolf/variant}}（狼变种）
+}}
+
+'''[[#临时组件|临时组件]]'''
+* [[#additional_trade_cost|additional_trade_cost]]
+* [[#creative_slot_lock|creative_slot_lock]]
+* [[#map_post_processing|map_post_processing]]
+
+== 命令格式 ==
+<code>item_stack</code>和<code>item_predicate</code>[[参数类型]]支持物品堆叠组件。
+
+<code>item_stack</code>参数类型可以加载物品组件，也可通过在组件名前添加<code>!</code>来移除该物品的默认组件，在{{cmd|give}}等命令中使用。所提供的组件都会被设置，而未提供的组件会被设为默认值。格式参见{{slink|参数类型|item_stack}}。
+
+<code>item_predicate</code>参数类型可以检测物品组件，在{{cmd|clear}}等命令中使用。另外，该参数类型还可以直接使用[[数据组件谓词]]检测物品堆叠组件。格式参见{{slink|参数类型|item_predicate}}。
+
+== 数据格式 ==
+=== attack_range ===
+此组件负责生物使用物品攻击时使用的攻击距离。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_attack_range_component}}
+</div>
+
+=== attribute_modifiers ===
+此组件负责存储修饰生物属性的[[属性修饰符]]，当物品在生物的指定槽位上时可以修改其所在生物的属性。
+
+此组件会为物品提示框提供显示内容，内容为此组件和物品具有的魔咒提供的物品属性修饰符。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_attribute_modifiers_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个木棍，玩家手持该木棍时，玩家的[[属性/尺寸|尺寸]]会增加4倍（即原来的5倍大小）。物品提示框中将显示被{{cd|example:grow}}属性修饰符修饰后的{{cd|scale}}属性值。
+{{cmd|give @s stick[attribute_modifiers{{=}}[{type:"scale",slot:"hand",id:"example:grow",amount:4,operation:"add_multiplied_base"}]]}}
+}}
+
+=== banner_patterns ===
+此组件负责存储[[旗帜]]和[[盾牌]]上的[[旗帜#方块实体|旗帜图案]]。
+
+此组件会为物品提示框提供显示内容，内容为物品具有的旗帜图案列表，按顺序显示。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_banner_patterns_component}}
+</div>
+
+=== base_color ===
+此组件负责盾牌的基础颜色。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_base_color_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予玩家一个盾牌基色为黄绿色的盾牌：
+{{cmd|give @s shield[base_color{{=}}lime]}}
+}}
+
+=== bees ===
+此组件负责保存蜂巢和蜂箱的蜜蜂数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_bees_component}}
+</div>
+
+=== block_entity_data ===
+此组件负责保存方块实体数据。当玩家放置具有方块实体的方块时，此组件内部的NBT数据就会转化为方块实体数据。
+
+若放置的方块为指定了附加数据的任意[[命令方块]]、[[讲台]]、任意[[告示牌]]、任意[[悬挂式告示牌]]、[[刷怪笼]]或[[试炼刷怪笼]]，则非管理员玩家使用这些物品时不会设置方块实体数据，且提示框中会显示安全警告。
+
+此组件会为物品提示框提供内容：如果方块是刷怪笼或试炼刷怪笼，且此组件为空则会显示可以使用刷怪蛋设置生物；如果方块是刷怪笼，则会根据对应的NBT数据显示内部的生物。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_block_entity_data_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个蜘蛛刷怪笼。要放置该刷怪笼，玩家必须要有[[权限等级|管理员权限]]：
+{{cmd|give @s spawner[block_entity_data{{=}}{id:"mob_spawner",SpawnData:{entity:{id:"spider"<nowiki>}}</nowiki>}]}}
+}}
+
+=== block_state ===
+此组件负责保存方块状态。当玩家放置方块时，游戏会根据此组件内部的方块属性及其值设置方块属性，没有指定的方块属性使用默认值。如果方块属性对于被放置的方块不存在或对应的方块属性值无效，则这项设置不起任何作用。
+
+此组件会为物品提示框提供内容：若方块属性<code>honey_level</code>是一个数值的字符串，则提示框会显示蜂蜜等级信息。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_block_state_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个被放置时总位于方块网格的上半部分的竹台阶：
+{{cmd|give @s bamboo_slab[block_state{{=}}{type:"top"}]}}
+}}
+
+=== block_transformer ===
+{{added in development|jev=26.3|section=1}}
+此组件负责物品的对方块交互时的使用行为。当玩家对方块使用物品时，游戏会根据此组件提供的方块变换效果实施方块变换，并产生可能存在的掉落物。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{Nbt transclude|编码格式/DataComponent|codec_block_transformer_component}}
+</div>
+
+=== blocks_attacks ===
+此组件负责物品的[[格挡]]行为。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_blocks_attacks_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个[[弓]]，玩家使用此弓的同时会格挡前方所有类型所有伤害的攻击（因为使用物品和格挡的按键均为鼠标右键），且不会被[[盾牌#停用|可停用阻挡的攻击]]停用：
+{{cmd|give @s bow[blocks_attacks{{=}}{disable_cooldown_scale:0}]}}
+}}
+
+=== break_sound ===
+此组件负责物品耐久度耗尽时播放的音效。音效的声音分类取决于持有此物品的生物。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_break_sound_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个物品破坏音效为紫水晶块被破坏的音效的金锹：
+{{cmd|give @a minecraft:golden_shovel[minecraft:break_sound{{=}}{sound_id:block.amethyst_block.break}]}}
+}}
+
+=== bucket_entity_data ===
+此组件负责保存生物桶的数据。游戏从生物获取生物桶时会设置下列数据，放出生物时会设置对应的数据，指定其他的NBT数据不起作用。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_bucket_entity_data_component}}
+</div>
+
+=== bundle_contents ===
+此组件负责保存[[收纳袋]]内部包含的物品；拥有此组件的物品实体被摧毁时会释放内容物。
+
+此组件会为物品提示框提供内容：如果物品是收纳袋，则会显示容量条。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_bundle_contents_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个收纳袋，其中收纳袋内的物品从列表前方到后方分别为铜锭、铁锭、金锭：
+{{cmd|give @s bundle[bundle_contents{{=}}[{id:"copper_ingot"},{id:"iron_ingot"},{id:"gold_ingot"}]]}}
+}}
+
+=== {{text anchor|can_break}}和{{text anchor|can_place_on}} ===
+此组件负责控制[[冒险模式]]玩家能否破坏指定方块或与指定方块交互，可互动方块会在提示框中提示。如果存在此组件但方块谓词未指定或不满足条件，则显示于提示框的方块为“{{tp|item.canUse.unknown}}”，且此物品可与任何方块互动。游戏不会测试方块实体组件。
+
+<code>can_break</code>组件还可以触发[[红石矿石]]、[[龙蛋]]或[[音符盒]]的挖掘开始时效果。
+
+指定列表时不能是空列表，且只有一个元素时游戏只保存为复合标签形式。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_can_break_component}}
+** {{nbt transclude|编码格式/DataComponent|codec_can_place_on_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一把冒险模式下仅能挖掘一些矿石的金镐：
+{{cmd|give @s golden_pickaxe[can_break{{=}}{blocks:['copper_ore','coal_ore','iron_ore','gold_ore','diamond_ore','emerald_ore']}]}}
+
+给予一个冒险模式下仅能放置在砂岩上的石头：
+{{cmd|give @s stone[can_place_on{{=}}{blocks:'sandstone'}]}}
+}}
+
+=== charged_projectiles ===
+此组件负责存储[[弩]]装载的物品信息。此组件的所有物品将在提示框中显示，连续的相同内容物会合并显示。若物品列表存在烟花火箭则弩显示为“装填烟花火箭的弩”，否则为“装填箭的弩”。此组件不存在时代表弩没有装载任何物品。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_charged_projectiles_component}}
+</div>
+
+=== compostable ===
+{{in development|jev=26.3|section=1}}
+此组件控制物品是否能被堆肥，以及堆肥后所增加的堆肥层数。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_compostable_component}}
+</div>
+
+=== consumable ===
+此组件控制物品是否具有消耗使用行为，以及使用后的效果。此处的消耗使用指物品数量在使用后会减少的操作，不包含方块物品的放置等对方块进行的有效操作。
+
+这些物品即使使用此组件，也不能被消耗使用：[[船]]、[[运输船]]<ref>{{bug|MC-269629|||Won't Fix}}</ref>；满足放置条件的[[矿车]]、[[漏斗矿车]]、[[命令方块矿车]]、[[运输矿车]]、[[动力矿车]]和[[TNT矿车]]<ref>{{bug|MC-269631|||Won't Fix}}</ref>；[[成书]]；[[三叉戟]]<ref>{{bug|MC-269655|||Won't Fix}}</ref>；[[刷子]]<ref>{{bug|MC-269640|||Won't Fix}}</ref>；[[铁桶]]、[[水桶]]、[[熔岩桶]]、[[鳕鱼桶]]、[[鲑鱼桶]]、[[河豚桶]]、[[热带鱼桶]]、[[美西螈桶]]、[[蝌蚪桶]]<ref>{{bug|MC-269648|||Won't Fix}}</ref>；[[硫方怪桶]]；[[弓]]、[[弩]]<ref>{{bug|MC-269658|||Won't Fix}}</ref>；[[烟花火箭]]<ref>{{bug|MC-269722|||Won't Fix}}</ref>和所有[[刷怪蛋]]<ref>{{bug|MC-269723|||Won't Fix}}</ref>。
+
+若物品同时具有{{cd|d=pretty|food|ominous_bottle_amplifier|potion_contents|suspicious_stew_effects}}等组件，则这些组件的效果也会一并应用。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_consumable_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予当前实体一个[[铁镐]]，按下右键会花费{{convert|1.6|秒}}食用此铁镐，食用时播放声音事件“{{tp|subtitles.block.anvil.land}}”，食用后获得{{convert|6000||分}}的不显示效果粒子的16级[[急迫]]效果：
+{{cmd|give @s minecraft:iron_pickaxe[minecraft:consumable{{=}}{animation:"eat",consume_seconds:1.6,on_consume_effects:[{type:"apply_effects",effects:[{amplifier:15,duration:6000,id:"haste",show_icon:true,show_particles:false}]}],sound:"block.anvil.land"}]|long=1}}
+}}
+
+=== container ===
+此组件存储容器方块内部物品栏的物品。当此方块的物品实体被摧毁时会释放内容物。
+
+此组件会为物品提示框提供内容：游戏会根据槽位顺序，依次显示对应的物品及数量，即潜影盒提示框的显示内容。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_container_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个木桶，其中的第一个槽位放了一个苹果：
+{{cmd|give @s barrel[container{{=}}[{slot:0,item:{id:apple<nowiki>}}</nowiki>]]}}
+}}
+
+=== container_loot ===
+此组件负责保存战利品容器方块的战利品表数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_container_loot_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个箱子,当其被放置且打开时,从[[不祥宝库]]的战利品表{{cd|chests/trial_chambers/reward_ominous}}抽取物品：
+{{cmd|give @s chest[container_loot{{=}}[{loot_table:"chests/trial_chambers/reward_ominous"}]}}
+}}
+
+=== custom_data ===
+此组件负责保存自定义数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_custom_data_component}}
+</div>
+
+=== custom_model_data ===
+此组件负责保存自定义数据，供[[物品模型映射]]选择物品模型的自定义模型数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_custom_model_data_component}}
+</div>
+
+{{Calculator|decimalColor}}
+
+=== custom_name ===
+此组件负责保存自定义名称。物品的自定义名称默认具有斜体。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_custom_name_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个名为“Magic Wand”的木棍：
+{{cmd|give @s stick[custom_name{{=}}"Magic Wand"]}}
+}}
+
+=== damage ===
+此组件负责存储物品的[[耐久度|损坏值]]，和<code>max_damage</code>一起控制物品能否被损坏。此组件不存在时代表物品处于最大耐久值。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_damage_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一把缺少50点耐久的下界合金镐：
+{{cmd|give @s netherite_pickaxe[damage{{=}}50]}}
+}}
+
+=== damage_resistant ===
+此组件负责控制物品免疫的伤害类型。当物品实体受到此类伤害时不会被摧毁，且物品被装备时也不会因为受到此类伤害而消耗耐久度。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_damage_resistant_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予玩家一个不会被火焰伤害损坏的铁胸甲：
+{{cmd|give @s minecraft:iron_chestplate[minecraft:damage_resistant{{=}}{types:"#is_fire"}]}}
+}}
+
+=== damage_type ===
+此组件负责生物使用此物品攻击时使用的伤害类型。如果不存在此组件，则正常使用生物默认的（如<code>player_attack</code>和<code>mob_attack</code>）伤害类型。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_damage_type_component}}
+</div>{{collapse|title=示例|content=
+给予玩家一个会造成箭伤害的钻石剑：
+{{cmd|give @s diamond_sword[damage_type{{=}}arrow]}}
+}}
+
+=== death_protection ===
+此组件负责物品是否具有类似[[不死图腾]]的行为。当物品在手上时，如果生物受到伤害类型不为{{TagLink|damage_type|bypasses_invulnerability}}的致死伤害，游戏会阻止生物死亡、将生命值设置为1，并消耗此物品。此消耗行为不属于消耗使用行为。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_death_protection_component}}
+</div>
+
+=== debug_stick_state ===
+此组件负责保存调试棒的数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_debug_stick_state_component}}
+</div>
+
+=== dye ===
+此组件负责存储物品的染料颜色。具有<code>dye</code>组件是物品可作为染料使用的必要条件，在对应的游戏场景测试成功后将使用此组件的颜色进行计算：
+* 在各种配方中染色时，必须是提供染料的原料。（依[[配方]]定义不同）
+* 在[[织布机]]中染色时，必须在标签{{TagLink|item|loom_dyes}}中。
+* 给猫的项圈染色时，必须在标签{{TagLink|item|cat_collar_dyes}}中。
+* 给狼的项圈染色时，必须在标签{{TagLink|item|wolf_collar_dyes}}中。
+* 给绵羊的羊毛染色时，必须是[[染料|染料物品]]。
+* 给告示牌或悬挂式告示牌的文字染色时，必须是染料物品。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_dye_component}}
+</div>
+
+=== dyed_color ===
+此组件负责保存物品的染色数据。根据不同的物品模型定义或其装备模型定义，此组件的颜色也会影响物品外观或装备外观。
+
+此组件会为物品提示框提供内容：根据是否开启高级提示框显示对应的颜色或“{{tp|item.dyed}}”。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_dyed_color_component}}
+</div>
+
+{{Calculator|decimalColor}}
+
+=== enchantable ===
+此组件负责存储物品的[[附魔能力]]。该组件不存在时，物品不可在附魔台中附魔。该组件存在时，若物品存在<code>enchantments</code>组件且为空，且存在可附加的魔咒，则该物品可在[[附魔台]]中附魔。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_enchantable_component}}
+</div>
+
+{{collapse|title=示例|content=给予一把可以附魔且附魔能力为2的剪刀：
+{{cmd|give @s shears[enchantable{{=}}{value:2}]}}}}
+
+=== enchantment_glint_override ===
+此组件负责控制物品是否会显示[[光效]]，优先级高于其他任何影响光效的组件和物品自身属性。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_enchantment_glint_override_component}}
+</div>
+
+=== {{text anchor|enchantments}}和{{text anchor|stored_enchantments}} ===
+此组件负责存储物品的[[魔咒]]信息。物品提示框中也会显示魔咒及等级。
+
+两个组件的区别在于：<code>enchantments</code>组件添加的是“带活性”的魔咒，其上的魔咒可以产生魔咒效果；而<code>stored_enchantments</code>组件添加的是“无活性”的魔咒，通常只用于[[附魔书]]存储魔咒，其上的魔咒不会产生效果。
+
+需要注意的是，“无活性”魔咒在发挥实际附魔作用时会受到生存模式所能获取的对应附魔书的最大附魔等级的限制，例如给予自己一本[[锋利]]VI的附魔书，而其发挥的附魔作用只能为锋利V。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_enchantments_component}}
+** {{nbt transclude|编码格式/DataComponent|codec_stored_enchantments_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一把带有锋利III和击退II的木剑：
+{{cmd|give @s wooden_sword[enchantments{{=}}{sharpness:3,knockback:2}]}}
+
+给予一本带有效率V和耐久III的附魔书：
+{{cmd|give @s enchanted_book[stored_enchantments{{=}}{efficiency:5,unbreaking:3}]}}
+}}
+
+=== entity_data ===
+此组件负责存储物品生成对应实体时（如使用刷怪蛋或放置盔甲架）应用于所生成实体的数据。应用时采取合并的方式。若指定的实体类型无法在和平模式下存在，则提示框会提示“{{tp|item.spawn_egg.peaceful}}”。
+
+若刷怪蛋将生成的实体为指定了附加数据的[[下落的方块]]、[[命令方块矿车]]或[[刷怪笼矿车]]，则非管理员玩家使用这些物品时不会设置实体数据，且提示框中会显示安全警告。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_entity_data_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个在放置时成为小型盔甲架的盔甲架：{{cmd|give @s armor_stand[entity_data{{=}}{id:"armor_stand",Small:1b}]}}
+}}
+
+=== equippable ===
+此组件负责物品是否可像盔甲一样穿戴，控制了盔甲等装备的行为。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_equippable_component}}
+</div>
+
+=== firework_explosion ===
+此组件负责保存烟火之星的数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_firework_explosion_component}}
+</div>
+
+=== fireworks ===
+此组件负责保存烟花火箭的数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_fireworks_component}}
+</div>
+
+=== food ===
+此组件控制物品被消耗使用后能提供的食物属性。要让物品能被玩家消耗使用，物品需要同时拥有{{cd|consumable}}组件。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_food_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个海绵，该海绵可无视饥饿值食用，玩家食用后恢复玩家3点饥饿值和1点饱和度：
+{{cmd|give @s sponge[food{{=}}{can_always_eat:true,nutrition:3,saturation:1},consumable{{=}}{}]}}
+}}
+
+=== glider ===
+此组件存在时，物品被穿戴后可以让生物滑翔。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_glider_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个铁胸甲，穿戴后可以滑翔：
+{{cmd|give @s iron_chestplate[glider{{=}}{}]}}
+}}
+
+=== instrument ===
+此组件负责保存山羊角的数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_instrument_component}}
+</div>
+
+=== intangible_projectile ===
+此组件负责箭被射出后是否只能被创造模式玩家捡起。默认情况下，只有多重射击的弩额外装填的箭会具有此组件。
+
+此组件会为物品提示框提供内容：“{{tp|item.intangible}}”。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_intangible_projectile_component}}
+</div>
+
+=== item_model ===
+此组件控制了物品使用的物品模型映射。物品模型映射会根据命名空间ID解析为{{filepath|-{}-assets/<''命名空间''>/items/<''路径''>.json}}。若对应的物品模型映射不存在或无法解析则使用[[无效模型]]。此组件不存在时什么也不会渲染。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_item_model_component}}
+</div>
+
+=== item_name ===
+此组件控制了物品的默认名称。该名称无法通过铁砧修改，不能在物品展示框中显示名称，带有该组件的旗帜在充当[[地图#地图标记|地图标记]]时也不会显示名称。此组件对物品名称的控制等级永远最低，会被其他所有影响物品名称的组件覆盖。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_item_name_component}}
+</div>
+
+=== jukebox_playable ===
+此组件负责保存音乐唱片的数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_jukebox_playable_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个可以放进唱片机并播放cat的唱片残片：
+{{cmd|give @a minecraft:disc_fragment_5[minecraft:jukebox_playable{{=}}cat]}}
+}}
+
+=== kinetic_weapon ===
+此组件负责决定物品是否可触发冲锋攻击，其也会影响一系列与冲锋攻击判定的行为，部分生物的生物AI和手持物品的动作等。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_kinetic_weapon_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个可以蓄力攻击的下界合金剑，无法将目标强制脱离骑乘：
+{{cmd|give @s minecraft:netherite_sword[minecraft:kinetic_weapon{{=}}{dismount_conditions:{max_duration_ticks:0},knockback_conditions:{max_duration_ticks:2147483647},damage_conditions:{max_duration_ticks:2147483647}<nowiki/>}]}}
+}}
+
+=== lock ===
+此组件负责保存可上锁的方块实体数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_lock_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个箱子，此箱子放置后玩家仅能手持名为“密码”的物品来打开它：
+{{cmd|give @s chest[lock{{=}}{components:{custom_name:"密码"}<nowiki/>}]}}
+}}
+
+=== lodestone_tracker ===
+此组件负责保存磁石指针的数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_lodestone_tracker_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个指南针，其始终指向主世界X=1、Y=2、Z=3处，无论磁石是否存在：
+{{cmd|1=give @s compass[lodestone_tracker={target:{pos:[I;1,2,3],dimension:"overworld"},tracked:false}]}}
+}}
+
+=== lore ===
+{{Redirect|Lore|1.20.5前的Lore标签|物品格式/Java版1.20.5前#通用标签}}
+此组件负责保存物品的自定义提示框描述文本。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_lore_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一根木棍，描述信息为第一行“Hello Minecraft”、第二行“Hello World”的木棍：
+{{cmd|give @s stick[minecraft:lore{{=}}["Hello Minecraft", "Hello World"]]}}
+}}
+
+=== map_color ===
+此组件负责保存地图着色层的颜色。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_map_color_component}}
+</div>
+
+{{Calculator|decimalColor}}
+
+=== map_decorations ===
+此组件负责保存地图图标，这些图标属于物品数据的一部分，而不是全局地图数据保存的图标。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_map_decorations_component}}
+</div>
+
+=== map_id ===
+此组件负责存储地图编号。具有此组件的所有物品均会尝试读取相应编号的地图内容，且能被玩家展开，在物品展示框上铺开，作为地图被复制、锁定或扩展。提示框中会显示地图的缩放信息等数据。但是，只有地图物品可以主动要求游戏获取地图内容。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_map_id_component}}
+</div>
+
+=== max_damage ===
+此组件负责存储物品的最大耐久度，和<code>damage</code>组件一起控制物品能否被损坏。此组件不存在时若物品被损坏则游戏将最大耐久度视为0。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_max_damage_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个耐久上限999点的金剑：
+{{cmd|give @s golden_sword[max_damage{{=}}999]}}
+}}
+
+=== max_stack_size ===
+此组件负责物品的最大堆叠数，如果此组件不存在，则视为1。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_max_stack_size_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予99个最大堆叠99个的雪球：
+{{cmd|give @s snowball[max_stack_size{{=}}99] 99}}
+}}
+
+=== minimum_attack_charge ===
+此组件负责玩家使用物品攻击时，需要多少攻击冷却完成度才可发动攻击，此组件不存在时游戏会视为0。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_minimum_attack_charge_component}}
+</div>
+
+=== note_block_sound ===
+此组件负责保存玩家的头放置在音符盒上播放的自定义音效。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_note_block_sound_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个被放在音符盒上时会播放声音“{{tp|subtitles.entity.player.levelup}}”的玩家的头：
+{{cmd|give @s player_head[note_block_sound{{=}}"entity.player.levelup"]}}
+}}
+
+=== ominous_bottle_amplifier ===
+控制物品被消耗使用后，玩家获得的不祥之兆状态效果倍率。要让物品能被玩家消耗使用，物品需要同时拥有{{cd|consumable}}组件。
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_ominous_bottle_amplifier_component}}
+</div>
+
+=== piercing_weapon ===
+此组件负责物品是否会发动戳刺攻击。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_piercing_weapon_component}}
+</div>
+
+=== pot_decorations ===
+此组件负责保存饰纹陶罐的陶片数据，物品提示框中会显示其合成物品。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_pot_decorations_component}}
+</div>
+
+=== potion_contents ===
+存储[[药水效果]]和[[状态效果]]信息。影响物品的名称和状态效果，提示框中会显示药水信息。下文的<code>-{}-<''药水物品类型''></code>只对药水、喷溅药水、滞留药水和药箭有效。要让物品能被玩家消耗使用，物品需要同时拥有{{cd|consumable}}组件。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_potion_contents_component}}
+</div>
+
+{{Calculator|decimalColor}}
+
+{{collapse|title=示例|content=
+给予一瓶药水，药水颜色为紫色，药水的状态效果为持续{{convert|1102}}的122倍率（即123级）的[[发光]]效果：
+{{cmd|give @s potion[potion_contents{{=}}{custom_color:8388863,custom_effects:[{amplifier:122,duration:1102,id:"glowing"}]}]}}
+}}
+
+=== potion_duration_scale ===
+此组件负责<code>potion_contents</code>组件的状态效果的缩放倍率。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_potion_duration_scale_component}}
+</div>
+
+=== profile ===
+此组件负责游戏档案数据。任何与游戏档案相关的物品、方块实体和实体均使用此解析方式。
+
+游戏会优先使用玩家档案获取皮肤等数据，然后再根据玩家皮肤指定的纹理模型等进行更改。例如游戏渲染玩家的头<code>player_head[profile={name:"jeb_", texture:"missingno"}]</code>时，会先获取玩家jeb_的皮肤，再使用无效纹理进行覆盖。
+
+如果设置了{{nbt|list}}{{nbt|compound|properties}}，则游戏直接使用此游戏档案数据，不会因为对应玩家档案的更改而更改。
+
+在未设置{{nbt|list}}{{nbt|compound|properties}}的条件下，如果设置了{{nbt|string|name}}，则游戏会将其视作玩家名称解析游戏档案。如果设置了{{nbt|int array|id}}，则游戏会将其视作UUID解析游戏档案，解析的优先级高于{{nbt|string|name}}。游戏并不会将获取的游戏档案数据存储，而是实时获取，尽管需要客户端重新启动才能更改渲染效果。此时物品提示框也会显示“{{tr|实时显示|動態}}”，以与静态游戏档案相区分。
+
+无论是静态档案还是动态档案，只有{{nbt|string|name}}会影响玩家的头的物品名称。
+
+如果设置此组件为字符串，则等价于只设置复合标签形式中的{{nbt|string|name}}，游戏在保存时只会保存为复合标签形式。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_profile_component}}
+</div>
+
+{{Calculator|playerUuid|player=MinecraftWiki}}
+
+游戏档案属性通常包括<code>textures</code>用于保存玩家的皮肤数据。在此属性的数据被Base64解码后具有如下结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON数据根元素
+** {{nbt|string|profileId|existonsave=1|required=1}}：游戏档案的UUID，不带连字符。
+** {{nbt|string|profileName|existonsave=1|required=1}}：游戏档案名称。
+** {{nbt|boolean|signatureRequired}}：代表此纹理属性是否已被签名。如果{{nbt|string|signature}}存在，则此项也存在并为<samp>true</samp>。
+** {{nbt|compound|textures|existonsave=1|required=1}}：纹理数据。
+*** {{nbt|compound|CAPE}}：[[披风]]纹理。如果此游戏档案不包含披风，此项不存在。
+**** {{nbt|string|url||existonsave=1|required=1}}：披风纹理的URL链接。
+*** {{nbt|compound|SKIN}}：[[皮肤]]纹理。如果此游戏档案不包含自定义皮肤，此项不存在。
+**** {{nbt|compound|metadata}}：皮肤的元数据。
+***** {{nbt|string|model}}：固定值<code>slim</code>。当皮肤模型手臂为3像素时存在，否则不存在。
+**** {{nbt|string|url|existonsave=1|required=1}}：皮肤纹理的URL链接。
+** {{nbt|int|timestamp|existonsave=1|required=1}}：[[wikipedia:Unixtime|Unix时间戳]]，以毫秒为单位，时间为请求玩家游戏档案数据的时间。
+</div>
+
+=== provides_banner_patterns ===
+此组件负责物品被置于织布机旗帜图案槽位时提供的旗帜图案。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_provides_banner_patterns_component}}
+</div>
+
+=== provides_pottery_pattern ===
+{{added in development|jev=26.3|section=1}}
+此组件负责存储物品的陶片样式，影响饰纹陶罐的渲染。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_provides_pottery_pattern_component}}
+</div>
+
+=== provides_trim_material ===
+此组件负责物品被作为锻造原材料时提供的盔甲纹饰材料。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_provides_trim_material_component}}
+</div>
+
+=== rarity ===
+此组件负责物品的基础稀有度。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_rarity_component}}
+</div>
+
+=== recipes ===
+此组件负责知识之书的数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_recipes_component}}
+</div>
+
+=== repair_cost ===
+此组件负责保存物品在铁砧操作中的累计惩罚。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_repair_cost_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予当前实体一个累计惩罚值为30的下界合金剑：
+{{cmd|give @s netherite_sword[repair_cost{{=}}30]}}
+}}
+
+=== repairable ===
+此组件负责物品可使用何种物品在铁砧上进行原料修复。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_repairable_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予当前实体一个只能被[[橡木木板]]或[[下界合金剑]]修复的下界合金剑：
+{{cmd|give @s netherite_sword[repairable{{=}}{items:"oak_planks"}]}}
+}}
+
+=== sulfur_cube_content ===
+此组件负责保存硫方怪吸收的物品，提示框中会显示对应物品的名称，默认斜体灰色。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_sulfur_cube_content_component}}
+</div>
+
+=== suspicious_stew_effects ===
+存储[[谜之炖菜]]的状态效果信息。要让物品能被玩家消耗使用，物品需要同时拥有{{cd|consumable}}组件。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_suspicious_stew_effects_component}}
+</div>
+
+=== swing_animation ===
+此组件负责物品的挥动动画。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_swing_animation_component}}
+</div>
+
+=== tool ===
+此组件负责物品作为挖掘工具的行为。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_tool_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一把木锹，且这把木锹属于石头的适合挖掘工具：
+{{cmd|give @s wooden_shovel[tool{{=}}{rules:[{blocks:["stone"],correct_for_drops:True}]}]}}
+}}
+
+=== tooltip_display ===
+此组件控制由组件产生的提示框文本可见性和提示框可见性。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_tooltip_display_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个不显示提示框的[[金斧]]：
+{{cmd|give @s golden_axe[tooltip_display{{=}}{hide_tooltip:true}]}}
+}}
+
+=== tooltip_style ===
+此组件负责物品的提示框外观。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_tooltip_style_component}}
+</div>
+
+=== trim ===
+此组件负责保存物品的盔甲纹饰数据。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_trim_component}}
+</div>
+
+=== unbreakable ===
+此组件存在时，物品没有耐久度属性，不会减少耐久度，提示框中会显示“{{tp|item.unbreakable}}”。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_unbreakable_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一把无法破坏的钻石镐：
+{{cmd|give @s diamond_pickaxe[unbreakable{{=}}{}]}}
+}}
+
+=== use_cooldown ===
+此组件负责物品的使用冷却行为。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_use_cooldown_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予16个每使用一次冷却一秒的[[雪球]]：
+{{cmd|give @s snowball[use_cooldown{{=}}{seconds:1}] 16}}
+}}
+
+=== use_effects ===
+此组件负责使用物品时的部分行为。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_use_effects_component}}
+</div>
+
+=== use_remainder ===
+此组件负责物品被消耗使用后返还的物品。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_use_remainder_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予16个能在使用后返回1个普通[[雪球]]的雪球：{{cmd|give @s snowball[use_remainder{{=}}{id:"snowball"}] 16}}
+}}
+
+=== weapon ===
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_weapon_component}}
+</div>
+
+{{collapse|title=示例|content=
+给予一个下界合金剑，当攻击成功时停用目标盾牌60秒，且每次攻击损耗0耐久度：
+{{cmd|give @s netherite_sword[weapon{{=}}{disable_blocking_for_seconds:60,item_damage_per_attack:0}]}}
+}}
+
+=== writable_book_content ===
+存储[[书与笔]]的数据。当玩家使用拥有此组件的书与笔或成书时会显示编辑界面，在讲台上打开拥有此组件的任意物品时游戏会显示每页的文本信息。此组件的优先级低于<code>written_book_content</code>组件。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_writable_book_content_component}}
+</div>
+
+=== written_book_content ===
+存储[[成书]]的数据。当玩家使用拥有此组件的书与笔或成书，或在讲台上打开拥有此组件的任意物品时游戏会显示每页的文本信息。此组件的<code>title</code>字段也被视为物品的自定义名称。
+
+所有拥有此组件的物品可以使用成书复制配方在工作台上进行复制。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_written_book_content_component}}
+</div>
+
+=== 实体变种组件 ===
+这些数据组件都可以作为实体组件，且专用于控制实体变种。若物品可以生成对应的实体（例如刷怪蛋、鸡蛋、画等）则使用这些物品生成实体时会生成指定的变种。例如，若棕色鸡蛋的<code>chicken/variant</code>组件值为<code>minecraft:cold</code>，则投掷后会生成寒带鸡而不是热带鸡。
+
+==== axolotl/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_axolotl_variant_component}}
+</div>
+
+==== cat/collar ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_cat_collar_component}}
+</div>
+
+==== cat/sound_variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_cat_sound_variant_component}}
+</div>
+
+==== cat/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_cat_variant_component}}
+</div>
+
+==== chicken/sound_variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_chicken_sound_variant_component}}
+</div>
+
+==== chicken/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_chicken_variant_component}}
+</div>
+
+==== cow/sound_variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_cow_sound_variant_component}}
+</div>
+
+==== cow/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_cow_variant_component}}
+</div>
+
+==== fox/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_fox_variant_component}}
+</div>
+
+==== frog/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_frog_variant_component}}
+</div>
+
+==== horse/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_horse_variant_component}}
+</div>
+
+==== llama/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_llama_variant_component}}
+</div>
+
+==== mooshroom/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_mooshroom_variant_component}}
+</div>
+
+==== painting/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_painting_variant_component}}
+</div>
+
+==== parrot/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_parrot_variant_component}}
+</div>
+
+==== pig/sound_variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_pig_sound_variant_component}}
+</div>
+
+==== pig/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_pig_variant_component}}
+</div>
+
+==== rabbit/variant	====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_rabbit_variant_component}}
+</div>
+
+==== salmon/size ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_salmon_size_component}}
+</div>
+
+==== sheep/color ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_sheep_color_component}}
+</div>
+
+==== shulker/color ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_shulker_color_component}}
+</div>
+
+==== tropical_fish/base_color ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_tropical_fish_base_color_component}}
+</div>
+
+==== tropical_fish/pattern ====
+此组件会为物品提示框提供内容：根据其他热带鱼相关的组件，显示热带鱼变种信息。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_tropical_fish_pattern_component}}
+</div>
+
+==== tropical_fish/pattern_color ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_tropical_fish_pattern_color_component}}
+</div>
+
+==== villager/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_villager_variant_component}}
+</div>
+
+==== wolf/collar ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_wolf_collar_component}}
+</div>
+
+==== wolf/sound_variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_wolf_sound_variant_component}}
+</div>
+
+==== wolf/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_wolf_variant_component}}
+</div>
+
+==== zombie_nautilus/variant ====
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_zombie_nautilus_variant_component}}
+</div>
+
+=== 临时组件 ===
+这些数据组件仅网络同步，不会被保存也不会被加载。玩家只能判断组件是否存在，而不能主动设置或获取其组件信息。
+
+==== additional_trade_cost ====
+村民生成交易时收购物品的基础增加量，当交易选项生成时会立刻被移除。
+
+{{collapseH|同步格式}}
+<div class="treeview">
+** {{nbt transclude|编码格式/DataComponent|codec_additional_trade_cost_component}}
+</div>
+{{collapseE}}
+
+==== creative_slot_lock ====
+阻止玩家在物品栏内与此物品交互。默认附加到创造模式物品栏“已保存的快捷栏”中表示此快捷栏未保存的纸上。
+
+{{collapseH|同步格式}}
+<div class="treeview">
+** {{nbt transclude|编码格式/DataComponent|codec_creative_slot_lock_component}}
+</div>
+{{collapseE}}
+
+==== map_post_processing ====
+同步地图的缩放等级和锁定信息。默认附加到进行地图缩小或地图锁定操作的制图台的输出槽位或进行地图缩小配方的工作台的输出槽位的物品上，暂时提供输出物品的地图缩放信息或锁定信息。当物品从输出槽位取下时其组件会被立刻移除。
+
+{{collapseH|同步格式}}
+<div class="treeview">
+** {{nbt transclude|编码格式/DataComponent|codec_map_post_processing_component}}
+</div>
+{{collapseE}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|dev=24w09a|加入了数据组件。}}
+|{{HistoryLine|||dev=24w10a|为{{cd|d=pretty|attribute_modifiers|dyed_color|enchantments|potion_contents|profile|stored_enchantments}}组件加入了简化定义。
+|将<code>lodestone_target</code>组件重命名为<code>lodestone_tracker</code>。
+|现在<code>container</code>组件适用于所有的[[容器]]而不只有[[潜影盒]]。}}
+|{{HistoryLine|||dev=24w12a|现在<code>unbreakable</code>组件与[[耐久]]魔咒兼容。<ref>{{bug|MC-268510|||Fixed}}</ref>
+|加入了{{cd|d=pretty|fire_resistant|food|hide_tooltip|max_damage|max_stack_size|rarity|tool}}组件。}}
+|{{HistoryLine|||dev=24w13a|加入了{{cd|d=pretty|item_name|ominous_bottle_amplifier}}组件。
+|现在方块实体会保存方块物品的全部组件，而非只能由继承序列化处理的组件。}}
+|{{HistoryLine|||dev=24w14a|将{{cd|d=pretty|writable_book_content|written_book_content}}组件中的未过滤的文本组件原始信息<code>text</code>被重命名为<code>raw</code>以避免歧义。<ref>{{bug|MC-269677|||Fixed}}</ref>
+|现在<code>profile</code>组件中不存在<code>name</code>而存在<code>id</code>时，可由UUID解析玩家档案数据。<ref>{{bug|MC-269983|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=pre1|移除了{{cd|food}}组件的营养价值字段{{nbt|float|saturation_modifier}}，现在由新字段{{nbt|float|saturation}}直接指定饱和度。}}
+|{{HistoryLine||1.21|dev=24w19a|<code>custom_data</code>组件现在可以使用SNBT字符串定义。
+|向<code>food</code>组件加入新字段{{nbt|compound|using_converts_to}}。}}
+|{{HistoryLine|||dev=24w21a|加入了{{cd|jukebox_playable}}组件。
+|向<code>attribute_modifiers</code>组件加入新字段{{nbt|string|id}}，取代{{nbt|string|name}}和{{nbt|int array|uuid}}字段。}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了{{cd|d=pretty|enchantable|repairable}}组件。
+|将<code>enchantments</code>和<code>stored_enchantments</code>组件中的魔咒等级下限由0提升至1。
+|现在<code>written_book_content</code>组件中的<code>title</code>具有比<code>custom_name</code>和<code>item_name</code>更高的优先级。
+|现在<code>instrument</code>组件的内联定义需要<code>description</code>字段。}}
+|{{HistoryLine|||dev=24w34a|加入了{{cd|d=pretty|consumable|use_cooldown|use_remainder}}组件。
+|移除了<code>food</code>组件中{{nbt|list|effects}}、{{nbt|float|eat_seconds}}和{{nbt|compound|using_converts_to}}字段，现在此组件仅作为食物数据容器。
+{{Collapse|title=此前字段格式：|content=
+<div class="treeview">
+* {{nbt|compound|food}} 物品堆叠组件
+** {{nbt|float|eat_seconds}}：（默认为1.6）物品食用所需要的时间，以秒为单位。小于{{convert|0.05|秒|游戏刻}}时无法被食用。下列物品使用此标签无法修改食用时间：[[蜂蜜瓶]]（{{convert|40}}）、[[药水]]（{{convert|32}}）、[[不祥之瓶]]（{{convert|32}}）。
+** {{nbt|list|effects}}：物品被食用后可能被赋予的状态效果。
+*** {{nbt|compound}}：一项可能施加的状态效果。
+**** {{nbt|compound|effect|existonsave=1|required=1}}：一项状态效果。
+***** {{nbt|string|id|existonsave=1|required=1}}：状态效果的[[命名空间ID]]。
+***** {{nbt|bool|ambient}}：表示状态效果是否是被信标添加的。如果不存在则为<code>false</code>。
+***** {{nbt|byte|amplifier}}：（无符号8位整数，不小于0且不大于255）状态效果的等级。0表示等级1，以此类推。由于此数字为无符号整数，当值超过127时显示为负数但实际为正数，保存数字''s''和实际代表数字''a''的关系为<math>a=256+s</math>。如果不存在则为0。
+***** {{nbt|int|duration}}：距离状态效果失效的时间刻数。如果此值为-1，则此状态效果不会失效。如果不存在则为0。
+***** {{nbt|bool|show_icon}}：表示是否显示状态效果的图标。如果不存在则与{{nbt|bool|show_particles}}值相同。
+***** {{nbt|bool|show_particles}}：表示是否显示粒子效果。如果不存在则为<code>true</code>。
+**** {{nbt|float|probability}}：（{{interval|left=0|right=1}}，默认为1）食用后施加此状态效果的概率。
+** {{nbt|compound|using_converts_to}}：物品被食用后返还的物品。
+*** {{nbt|string|id|existonsave=1|required=1}}：（[[命名空间ID]]）表示某种类的物品堆叠。不能为[[空气]]（<code>air</code>）。
+*** {{nbt|compound|components}}：关于当前物品的额外信息。此标签对于多数物品来说都是非必需项。
+**** {{nbt|any|<''物品堆叠组件''>}}：一个物品堆叠组件，标签名称为物品组件的命名空间ID，类型则与对应的物品组件有关。在设置此数据时可以不写命名空间，但在导出时命名空间ID会自行加上<code>minecraft:</code>前缀。
+</div>
+}}
+|现在<code>custom_name</code>组件具有比<code>written_book_content</code>中<code>title</code>字段更高的优先级。}}
+|{{HistoryLine|||dev=24w35a|现在{{cd|use_cooldown}}组件使用{{nbt|string|cooldown_group}}字段而非{{nbt|string|cooldownGroup}}字段。
+|现在<code>bucket_entity_data</code>组件使用{{nbt|string|type}}字段用来保存鲑鱼的尺寸。}}
+|{{HistoryLine|||dev=24w36a|加入了{{cd|d=pretty|equippable|glider|item_model|tooltip_style}}组件。}}
+|{{HistoryLine|||dev=24w37a|加入了{{cd|d=pretty|damage_resistant|death_protection}}组件。
+|移除了<code>fire_resistant</code>组件。
+|向<code>potion_contents</code>组件加入新字段{{nbt|string|custom_name}}。
+|向<code>equippable</code>组件加入新字段{{nbt|boolean|swappable}}和{{nbt|boolean|damage_on_hurt}}。
+|<code>item_name</code>组件的优先级现在永远最低，因此它能被<code>potion_contents</code>之类影响物品名称的组件覆盖。
+|现在所有具有<code>map_id</code>组件的物品能像[[地图]]一样被展开，在[[物品展示框]]上直角旋转，作为地图被复制、锁定或拓展，且在未启用高级提示框时的物品提示框中显示地图编号。}}
+|{{HistoryLine|||dev=24w39a|<code>lock</code>组件现在是一个物品谓词，此前为任意字符串。}}
+|{{HistoryLine|||dev=pre1|向<code>equippable</code>组件加入新字段{{nbt|string|camera_overlay}}。}}
+|{{HistoryLine||1.21.4|dev=24w44a|现在<code>consumable</code>组件的第一人称格挡动画可以正常显示。<ref>{{bug|MC-275917|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=24w45a|修改了<code>custom_model_data</code>的格式。
+|现在<code>item_model</code>组件不再设置物品模型，而是设置物品模型映射。
+|将<code>equippable</code>组件的{{nbt|string|model}}字段重命名为{{nbt|string|asset_id}}。}}
+|{{HistoryLine|||dev=24w46a|向<code>consumable</code>组件的{{nbt|string|animation}}字段添加了新的可选值<code>bundle</code>。}}
+|{{HistoryLine||1.21.5|dev=25w02a|向<code>tool</code>组件加入新可选字段{{nbt|boolean|can_destroy_blocks_in_creative}}。
+|加入了{{cd|d=pretty|potion_duration_scale|weapon}}组件。}}
+|{{HistoryLine|||dev=25w03a|将<code>weapon</code>组件的{{nbt|int|damage_per_attack}}字段重命名为{{nbt|int|item_damage_per_attack}}。
+|向<code>equippable</code>组件加入新字段{{nbt|boolean|equip_on_interaction}}。
+|加入了{{cd|d=pretty|axolotl/variant|cat/collar|cat/variant|fox/variant|frog/variant|horse/variant|llama/variant|mooshroom/variant|parrot/variant|painting/variant|pig/variant|rabbit/variant|salmon/size|sheep/color|shulker/color|tropical_fish/pattern|tropical_fish/base_color|tropical_fish/pattern_color|villager/variant|wolf/collar|wolf/variant}}组件。
+|移除了<code>bucket_entity_data</code>的{{nbt|int|BucketVariantTag}}和{{nbt|string|type}}字段，由对应的变种组件保存。}}
+|{{HistoryLine|||dev=25w04a|将<code>weapon</code>组件的{{nbt|boolean|can_disable_blocking}}字段重做为{{nbt|float|disable_blocking_for_seconds}}。
+|加入了{{cd|d=pretty|blocks_attacks|break_sound|provides_banner_patterns|provides_trim_material|tooltip_display}}组件。
+|移除了{{cd|d=pretty|hide_additional_tooltip|hide_tooltip}}组件。
+|移除了{{cd|d=pretty|attribute_modifiers|can_break|can_place_on|dyed_color|enchantments|stored_enchantments|jukebox_playable|unbreakable|trim}}组件的{{nbt|boolean|show_in_tooltip}}字段。
+|现在具有简化定义的组件始终以简化形式存储，{{cd|jukebox_playable}}组件直接指定命名空间ID，{{cd|dyed_color}}组件可接受RGB数组。
+|现在<code>villager/variant</code>组件对僵尸村民可用，{{cd|d=pretty|potion_contents|potion_duration_scale}}组件对区域效果云可用。}}
+|{{HistoryLine|||dev=25w05a|加入了{{cd|cow/variant}}组件。
+|向<code>blocks_attacks</code>组件加入新字段{{nbt|string|bypassed_by}}和{{nbt|float|horizontal_blocking_angle}}。
+|现在{{cd|provides_banner_patterns}}接受的旗帜图案标签需带有<code>#</code>前缀。}}
+|{{HistoryLine|||dev=25w06a|加入了{{cd|chicken/variant}}组件。}}
+|{{HistoryLine|||dev=25w08a|加入了{{cd|wolf/sound_variant}}组件。}}
+|{{HistoryLine||1.21.6|dev=25w15a|向{{cd|attribute_modifiers}}组件的属性修饰符加入新字段{{nbt|compound|display}}。}}
+|{{HistoryLine|||dev=25w16a|现在{{cd|painting/variant}}组件只接受命名空间ID，不再接受内联定义。}}
+|{{HistoryLine|||dev=25w20a|向<code>equippable</code>组件加入新字段{{nbt|boolean|can_be_sheared}}和{{nbt|string}}{{nbt|compound|shearing_sound}}。}}
+|{{HistoryLine||1.21.9|dev=25w31a|<code>entity_data</code>和<code>block_entity_data</code>组件不再支持字符串格式定义。}}
+|{{HistoryLine|||dev=25w34a|修改了<code>profile</code>组件的解析行为，不再自动存储解析的玩家游戏档案数据，现在若未指定游戏档案则动态获取档案数据。}}
+|{{HistoryLine|||dev=pre1|现在<code>profile</code>组件可指定本地纹理以进行覆盖，并使其对玩家模型生效。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了{{cd|d=pretty|damage_type|kinetic_weapon|minimum_attack_charge|piercing_weapon|swing_animation|use_effects}}组件。
+|将{{cd|consumable}}组件的动画<code>spear</code>重命名为<code>trident</code>，被新的<code>spear</code>取代。}}
+|{{HistoryLine|||dev=25w45a|<code>entity_data</code>和<code>block_entity_data</code>组件再次支持字符串格式定义。}}
+|{{HistoryLine|||dev=25w46a|向<code>use_effects</code>组件加入新字段{{nbt|bool|interact_vibrations}}。}}
+|{{HistoryLine|||dev=pre1|加入了{{cd|attack_range}}组件。}}
+|{{HistoryLine||26.1|dev=snapshot-1|加入了<code>additional_trade_cost</code>组件。}}
+|{{HistoryLine|||dev=snapshot-3|更改了<code>bundle_contents</code>、<code>charged_projectiles</code>、<code>container</code>和<code>use_remainder</code>组件对物品的处理方式：现在这些组件内的物品可使用字符串直接定义。
+|更改了<code>bundle_contents</code>、<code>charged_projectiles</code>、<code>container</code>组件对物品的验证方式：现在游戏也会对这些组件内的物品进行严格性验证，验证失败时自动替换为空气。}}
+|{{HistoryLine|||dev=snapshot-5|加入了<code>dye</code>组件。}}
+|{{HistoryLine|||dev=snapshot-7|加入了<code>cat/sound_variant</code>、<code>chicken/sound_variant</code>、<code>cow/sound_variant</code>和<code>pig/sound_variant</code>组件。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了<code>sulfur_cube_content</code>组件。}}
+|{{HistoryLine|||dev=pre-3|现在<code>charged_projectiles</code>组件最多只接受64个物品堆叠。}}
+|{{HistoryLine|||dev=pre-4|现在<code>charged_projectiles</code>组件最多只接受1024个物品堆叠，且过多的物品会静默丢弃。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了<code>provides_pottery_pattern</code>组件。}}
+|{{HistoryLine|||dev=snapshot-2|加入了<code>block_transformer</code>组件。}}
+|{{HistoryLine|||dev=snapshot-3|向<code>block_transformer</code>组件加入新可选字段{{nbt|bool|update_from_neighbors}}。
+|加入了<code>compostable</code>组件。}}
+}}
+
+=== 已移除的组件 ===
+==== fire_resistant ====
+控制物品是否无法在熔岩或火中燃烧，且装备时是否不会因为受到火焰伤害而消耗耐久度。
+
+此组件已被<code>[[#damage_resistant|damage_resistant]]</code>组件替代。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_fire_resistant_component}}
+</div>
+
+==== hide_additional_tooltip ====
+隐藏物品的提示框文本信息。部分由组件产生的提示框文本由对应组件的{{nbt|boolean|show_in_tooltip}}决定。
+
+此组件已被<code>[[#tooltip_display|tooltip_display]]</code>组件替代。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_hide_additional_tooltip_component}}
+</div>
+
+==== hide_tooltip ====
+隐藏物品的提示框。
+
+此组件已被<code>[[#tooltip_display|tooltip_display]]</code>组件替代。
+
+<div class="treeview">
+* {{nbt|compound|components}}
+** {{nbt transclude|编码格式/DataComponent|codec_hide_tooltip_component}}
+</div>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Java files}}
+
+[[Category:开发]]
+
+[[de:Gegenstandsdaten]]
+[[en:Data component format]]
+[[fr:Format de composant de données]]
+[[ja:データコンポーネント]]
+[[ko:데이터 구성 요소 형식]]
+[[pt:Formato de componente de dado]]
+[[ru:Формат компонента данных]]
+[[uk:Формат компонента даних]]

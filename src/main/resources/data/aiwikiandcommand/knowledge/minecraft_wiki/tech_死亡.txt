@@ -1,0 +1,151 @@
+# 页面: 死亡
+# 来源: https://zh.minecraft.wiki/w/%E6%AD%BB%E4%BA%A1
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:29:38
+# 原始 Wikitext 内容:
+
+{{redirect|Death|同名曲目|Death（音乐）}}{{stub}}
+[[File:Mob corpses.png|缩略图|亡灵生物因日晒而死亡时产生的红色尸体及烟雾粒子]]
+'''死亡（Death）'''是生物的一种机制。
+
+== 成因 ==
+=== 伤害 ===
+当生物的[[生命]]值归零时便会死亡，在死亡动画过后便会从世界中移除。
+
+{{cmd|kill}}命令、{{only|je|for=给[[鹦鹉]]喂食[[曲奇]]}}可以对目标造成高额伤害，也可能导致死亡。
+
+=== 嘎枝之心 ===
+{{see also|嘎枝之心#破坏}}
+玩家破坏嘎枝之心时，会导致绑定的[[嘎枝]]死亡，视作玩家击杀。
+
+== 效果 ==
+{{stub|基岩版相关信息|section=1}}
+
+如果生物手持[[不死图腾]]且承受了不来自{{cmd|kill}}或[[虚空]]的致命伤害，不死图腾则会被消耗并保留至少{{hp|1}}以阻止生物死亡。
+
+如果生物在[[床#睡觉|睡觉]]时死亡，会立刻醒来。
+
+生物死亡时会触发[[游戏事件#entity_die|<code>entity_die</code>]]事件。
+
+生物死亡时可能会产生[[死亡消息]]，报告该生物的死因。
+
+玩家死亡后，鹦鹉不会继续站在玩家的[[鹦鹉#站在肩膀上|肩膀]]上。
+
+{{in|je}}如果游戏规则{{gamerule|forgive_dead_players}}为{{cd|true}}，[[条件敌对生物]]对死者息怒（在其死亡后不再对其具有[[仇恨]]）。
+
+{{in|je}}生物死亡时，将计算准则为<code>playerKillCount</code>、<code>totalKillCount</code>、<code>teamkill.</code>和<code>killedByTeam.</code>[[计分板]]的分数。玩家死亡时，将额外计算准则为<code>deathCount</code>计分板的分数。
+
+{{in|je}}生物死亡时，将计算“{{tp|stat.minecraft.mob_kills}}”和“{{tp|stat.minecraft.player_kills}}”CUSTOM[[统计信息]]。玩家死亡时，将额外计算ENTITY_KILLED_BY统计类型，重置“{{tp|stat.minecraft.time_since_death}}”和“{{tp|stat.minecraft.time_since_rest}}”CUSTOM统计信息，并计算“{{tp|stat.minecraft.deaths}}”CUSTOM统计信息。
+
+被[[凋灵]]杀死的生物死亡时会尝试放置[[凋灵玫瑰]]，若放置位置不合适，或{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时，则生成为[[物品（实体）|掉落物]]。
+
+生物死亡时会播放对应的死亡声音。
+
+玩家死亡时，重置剩余[[着火]]和[[冰冻]]时间。
+
+玩家死亡时，设置最近一次死亡地点（{{nbt|compound|LastDeathLocation}}），[[追溯指针]]会指向手持者的最近一次死亡地点。
+
+{{in|be}}若不是因为[[着火]]死亡，带有[[蓄风]]的生物会在尸体消失位置生成[[爆炸#风爆|风爆]]。
+
+可[[交易]]生物死亡时会关闭玩家的交易界面。
+
+使袭击者死亡的击杀者在[[袭击]]胜利后将被给予[[村庄英雄]]。
+
+[[嗅探兽]]死亡时停止当前进行的动作。[[狼]]死亡时会停止甩水。
+
+[[村民]]死亡时会解绑兴趣点。{{in|je}}村民死亡时还会传播给其他村民{{cd|major_negative}}言论。
+
+=== 掉落物品 ===
+{{see also|玩家#掉落物}}
+如果游戏规则{{gamerule|mob_drops|doMobLoot}}为{{cd|true}}，非[[玩家]]生物死亡时会在其死亡的地方掉落物品和[[经验球]]。
+
+如果游戏规则{{gamerule|keep_inventory|keepInventory}}为{{cd|true}}或游戏模式为[[旁观模式]]，玩家不会掉落任何物品和经验球；其他情况下，玩家会掉落经验球与自己物品栏中的所有非[[消失诅咒]]物品。
+
+=== 死亡界面 ===
+如果游戏规则{{gamerule|immediate_respawn|doImmediateRespawn}}为<code>true</code>，玩家在死亡后不会看到死亡界面，而是会立即重生。
+
+若玩家没有因上述游戏规则而立即重生，玩家就会在死亡时见到覆盖整个HUD的死亡界面。玩家的视野会染上红色，并且出现{{only|je|for=倾斜、颤动}}和缩放，但缩放到一定程度时，会停止缩放。
+
+在死亡界面显示期间，玩家的控制将会被释放，无法再控制视角、移动、互动，无法打开[[物品栏]]，{{only|JE|for=[[聊天栏]]会自动关闭}}，且不能重新打开聊天栏。
+
+{{in|JE}}尽管死亡的玩家和其他生物一样会消失，在第一人称视角时玩家仍然可以看见自己的手。{{in|BE}}死亡后视角会强制转化为[[第三人称视角|第三人称]]背面。
+
+{{el|je}}死亡界面包含以下元素：
+* 一个显著的大文本标题，显示为“{{tp|deathScreen.title}}”，[[极限模式]]中是“{{tp|deathScreen.title.hardcore}}”
+* 一行[[死亡消息]]，表示了玩家的死因。
+* 显示一行玩家的[[经验#分数|分数]]，表示玩家在这次生命中获得的[[经验值]]总量。
+* 一系列可以按下的按钮，做出选择后会关闭死亡界面。
+** '''重生'''（非极限模式）：玩家将会在自己的玩家[[重生点]]复活。
+** '''旁观世界'''（极限模式）：玩家将会进入[[旁观模式]]复活，无法再与世界互动。
+** '''标题屏幕'''：退出当前游戏并返回到标题屏幕。
+
+{{el|be}}死亡界面包含以下元素：
+* 一个显著的大文本标题，显示为“{{tr|您失败了|您死亡了}}！”（非极限模式）或“游戏结束！”（极限模式）。
+* 一行死亡消息，表示了玩家的死因。
+* 一系列可以按下的按钮，做出选择后会关闭死亡界面。
+** '''重生'''：玩家将会在自己的玩家重生点复活。（非极限模式）
+** '''观看世界'''：玩家将会进入旁观模式复活，无法再与世界互动。（极限模式）
+** '''{{tr|游戏菜单|遊戲目錄}}'''：切换至暂停屏幕。（非极限模式）
+** '''退出世界'''：退出当前游戏并返回到标题屏幕。（极限模式）
+{{gallery|
+File:Hardcore Death.png|convert|Java版极限模式的死亡界面
+File:Java Death Scene 1.20.4.png|Java版非极限模式的死亡界面
+File:Bedrock Hardcore Death Scene 1.21.41.png|基岩版极限模式的死亡界面（新UI）
+File:Bedrock Death Scene 1.20.51.png|基岩版非极限模式的死亡界面（新UI）
+File:Bedrock Old Version Death Scene.jpg|基岩版的死亡界面（旧UI）
+}}
+
+== 动画 ==
+生物死亡时外观会变红并倒下，大多数生物死亡时会倒向左侧，[[蜘蛛]]、{{only|for=[[洞穴蜘蛛]]、[[蠹虫]]和[[末影螨]]|je}}会在死亡时翻倒，{{only|for=[[烈焰人]]死亡时会向随机方向翻倒|be}}，持续{{convert|20}}。
+
+{{in|je}}生物在死亡动画期间仍然计算[[生物上限]]。<ref>{{bug|MC-183240}}</ref>
+
+[[末影龙]]{{only|be|for=和[[凋灵]]}}有独特的死亡效果，死亡动画的持续时间比其他生物更长。{{more info|长多少？}}
+
+== 消失 ==
+尸体消失处会发出烟雾粒子。
+
+{{only|be|for=若不是因为[[着火]]死亡}}，带有状态效果的生物会按获得顺序产生对应效果。{{only|je|for=带有[[蓄风]]的生物会在尸体消失位置生成[[爆炸#风爆|风爆]]}}，带有[[渗浆]]效果的生物会在尸体消失位置生成[[史莱姆]]，带有[[盘丝]]效果的生物会在尸体消失位置周围生成[[蜘蛛网]]。
+
+[[史莱姆]]、[[岩浆怪]]和[[硫方怪]]消失后会分裂出新生物。
+
+== 成就 ==
+{{load achievements|cheating-death}}
+
+== 进度 ==
+{{load advancements|adventure.totem_of_undying;adventure.voluntary_exile;nether.return_to_sender;end.kill_dragon;nether.uneasy_alliance;adventure.blowback;adventure.root;adventure.kill_a_mob;adventure.kill_all_mobs}}
+
+== 历史 ==
+{{stub|section=1}}
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.24_SURVIVAL_TEST|[[敌对生物]]被杀死时会倒下。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w25a|移除了[[多人游戏]]中玩家溺死前的[[击退]]效果。 }}
+|{{HistoryLine||1.11|dev=16w39a|加入了[[不死图腾]]，可以使手持者受到致命伤害时免于死亡。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了[[不死图腾]]，可以使手持者受到致命伤害时免于死亡。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.10|dev=1.19.10.21|现在会在死亡屏幕上展示死亡消息。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.20|更新了死亡屏幕。}}
+}}
+
+== 画廊 ==
+<gallery>
+Pig smoke death.png|猪死亡时变红的动画与烟雾粒子
+Sheep Death.png|死亡的羊
+Chicken Death.png|死亡的鸡
+Cow Death.png|死亡的牛
+Pufferfish Death.png|死亡的河豚
+Zombie Death.png|由于阳光灼烧死亡的僵尸
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[de:Tod]]
+[[en:Death]]
+[[uk:Смерть]]

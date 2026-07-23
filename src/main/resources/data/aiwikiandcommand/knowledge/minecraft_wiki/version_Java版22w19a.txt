@@ -1,0 +1,143 @@
+# 页面: Java版22w19a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8822w19a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=22w19a
+|image=22w19a.png
+|image2=Java Edition 22w19a Simplified.png\Java Edition 22w19a Traditional.png\Java Edition 22w19a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2022年5月12日
+|jsonhash=c7a98d0634a35e212276ce2e47c2ed8064e605bb
+|clienthash=b6f17935359d3a7bc8022eb48e5f3643ede72fd3
+|clientmap=5b76b821c9adfd58612afeababaabe95ffe27e59
+|serverhash=c354ac562b44fe5857535935125942ff89616cab
+|servermap=b4c5ef273e65f0df3da75378402ef00d638ef4cc
+|parent=1.19
+|prevparent=1.18.2
+|prev=22w18a
+|next=1.19-pre1
+|nextparent=1.19.1
+}}<onlyinclude>
+
+'''22w19a'''是[[Java版1.19]]的第10个，也是最后一个快照，发布于2022年5月12日<ref>{{snap|22w19a|May 12, 2022}}</ref>，加入了聊天预览功能，以及2个相关的选项。将{{cmd|locate}}和{{cmd|locatebiome}}命令合并为新的{{cmd|locate|link=none}}命令，并分别向{{cmd|locate|link=none}}和{{cmd|place}}命令中加入了定位[[兴趣点存储格式|兴趣点]]（Point of Interest）和按结构文件放置结构的功能，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|locate}}'''
+* 加入了<code>poi</code>子命令，用于定位[[兴趣点存储格式|兴趣点]]，语法如下：
+** {{cmd|locate poi <poi>|link=none}}
+*** <code>poi</code>：兴趣点的命名空间ID或兴趣点类型标签。
+
+'''{{cmd|place}}'''
+* 加入了<code>template</code>子命令，用于在指定位置上按结构文件放置结构，此命令的语法如下：
+** {{cmd|place template <template> [<pos>] [<rotation>] [<mirror>] [<integrity>] [<seed>]|link=none}}
+*** 此命令的功能类似于在[[结构方块]]界面中使用“加载”按钮。
+*** <code>template</code>：要加载并放置的结构文件的命名空间ID。
+*** <code>pos</code>：用作生成原点的位置（如不指定，则默认使用<code>~ ~ ~</code>）。
+*** <code>rotation</code>：被放置结构的旋转角度（如不指定，则默认使用<code>none</code>）。
+*** <code>mirror</code>：被放置结构的镜像方式（如不指定，则默认使用<code>none</code>）。
+*** <code>integrity</code>：被放置结构的完整度，可在0到1间取值（如不指定，则默认使用<code>1</code>）。
+*** <code>seed</code>：用于结构完整度的种子，结构完整度小于1时有效（如不指定，则使用随机种子）。
+
+=== 常规 ===
+'''[[聊天]]'''
+* 服务器现在可通过服务器选项启用聊天预览功能。
+** 启用后，客户端的聊天框上会出现一个由服务器控制的预览界面，显示消息发送时的样子。
+** 服务器可以利用其预览应用了样式后的消息，例如表情或聊天颜色。
+** 即便尚未确认发送，聊天预览也会将已键入的内容发送到服务器上。
+*** 服务器随后会实时返回应用了聊天样式的预览。
+*** 这使得服务器可以在使用动态消息样式的同时，签署聊天内容。
+** 玩家进入启用了聊天预览功能的服务器时会显示一个警告界面，这个界面可在聊天设置中完全禁用。
+** 动态聊天样式也可以由服务器控制，尽管只有在启用聊天预览时才会被签署。
+*** 客户端可通过聊天设置中的“{{tr|仅展示已签名的聊天|僅顯示已簽署的聊天|僅顯示已簽名嘅聊天}}”选项，设置为仅显示被签过名的原始聊天消息。
+
+'''[[选项]]'''
+* 加入了“{{tr|聊天预览|聊天預覽|聊天預覽}}”聊天设置，用于启用聊天预览功能。默认为开。
+* 加入了“{{tr|仅展示已签名的聊天|僅顯示已簽署的聊天|僅顯示已簽名嘅聊天}}”聊天设置，用于将客户端设置为仅显示被签过名的原始聊天消息。默认为关。
+
+'''<samp>[[options.txt]]</samp>'''
+* 加入了<code>chatPreview</code>和<code>onlyShowSignedChat</code>。
+
+'''协议'''
+* 现在服务器会在玩家连接到服务器后，向玩家发送一个额外的包含图标和MOTD的网络数据包。
+** 主要是为了让<code>enable-status</code>服务器选项设为<code>false</code>的服务器在玩家成功进入服务器后，图标和MOTD可以显示在服务器列表上。
+
+'''<samp>[[server.properties]]</samp>'''
+* 加入了<code>previews-chat</code>服务器选项，用于启用聊天预览功能。默认值为<code>true</code>。
+* 加入了临时的<code>test-rainbow-chat</code>服务器选项，仅会存在于此快照中。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下[[Java版标签/兴趣点类型 |兴趣点类型标签]]（新类型）：
+** {{TagLink|point_of_interest_type|acquirable_job_site}}：{{cd|d=pretty|armorer|butcher|cartographer|cleric|farmer|fisherman|fletcher|leatherworker|librarian|mason|shepherd|toolsmith|weaponsmith}}。
+*** 此标签用于定义<code>none</code>职业的[[村民]]会寻找的工作站点。
+** {{TagLink|point_of_interest_type|bee_home}}：{{cd|d=pretty|beehive|bee_nest}}。
+*** 此标签用于定义[[蜜蜂]]会寻找的兴趣点。
+** {{TagLink|point_of_interest_type|village}}：{{cd|d=pretty|#acquirable_job_site|home|meeting}}。
+*** 此标签用于定义属于[[村庄]]的兴趣点。
+
+== 更改 ==
+=== 生物 ===
+'''[[铁傀儡]]和[[监守者]]'''
+* 现在铁傀儡和监守者只会生成在固体方块上。
+
+=== 命令格式 ===
+'''{{cmd|locate}}和{{cmd|locatebiome}}'''
+* 合并至新的{{cmd|locate|link=none}}命令中：
+** {{cmd|locate|link=none}}改为{{cmd|locate structure|link=none}}。
+** {{cmd|locatebiome|link=none}}改为{{cmd|locate biome|link=none}}。
+
+=== 常规 ===
+'''[[兴趣点存储格式|兴趣点]]类型'''
+* 移除了<code>unemployed</code>和<code>nitwit</code>。
+
+== 修复 ==
+{{fixes|fixedin=22w19a|showdesc=1
+|;old
+|197647|玩家头顶上有方块且处于潜行状态时，玩家不能从方块边缘跳下。
+|200282|有击退抗性的玩家在方块边缘潜行时不会被击退。
+|231600|幽匿感测体会一直检测到来自被充能的大型垂滴叶的振动。
+|;dev
+|249130|由青蛙卵孵出的蝌蚪会在相邻的方块内生成。
+|249434|监守者被多个实体攻击时会一直咆哮。
+|249634|监守者被干扰时，其嗅探过程仍会继续。
+|249664|监守者会在距离玩家较远处消失。
+|249780|远古城市中，需要依附其他方块的方块可以悬空生成。
+|249833|右键点击副手槽中的特定物品会产生振动。
+|249888|监守者被烈焰人火球击中时不会被激怒。
+|249910|监守者的“监守者：迫近”音效未被使用。
+|249966|监守者会不再追逐其刚咆哮过的目标。
+|250172|监守者发射音波时不会转到音波发射的方向上。
+|250233|刷怪蛋刷出的监守者，其AI会突然不能工作。
+|250272|监守者可以生成在无碰撞箱的方块中。
+|250292|在被与其敌对的生物、其他生物的攻击、以及声音环绕时，监守者有时会不做出任何反应。
+|250319|即使<code>doWardenSpawning</code>被设为<code>false</code>，监守者将要出现时会播放的音效也会播放。
+|250353|不像其他生物，监守者不能生成在1层高的雪中。
+|250357|幽匿感测体和监守者可以检测到玩家举盾的动作。
+|250948|监守者的远程攻击不再受游戏难度的影响。
+|250966|玩家死于监守者远程攻击时不计入监守者的击杀数中。
+|251029|监守者不动弹且不再与玩家敌对。
+|251263|尝试打开单人游戏世界时，会出现“{{tr|无效的个人信息公钥签名|無效的個人資訊公鑰|個人資訊公鑰嘅簽名無效}}”提示。
+|;previous
+|251316|加载包含拼图方块的区块时游戏崩溃。
+|251321|监守者从地下钻出时可被爆炸击退。
+|251350|使用{{cmd|give @s goat_horn|link=none}}命令会获得1个未注册的山羊角。
+|251464|友好生物被监守者音波击中而受伤时不尝试逃离。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:22w19a]]
+[[en:Java Edition 22w19a]]
+[[es:Java Edition 22w19a]]
+[[fr:Édition Java 22w19a]]
+[[ja:Java Edition 22w19a]]
+[[pt:Edição Java 22w19a]]
+[[ru:22w19a (Java Edition)]]

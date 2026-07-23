@@ -1,0 +1,110 @@
+# 页面: Java版15w51a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8815w51a
+# 分类: Java版1.9快照
+# 抓取时间: 2026-07-14 17:14:17
+# 原始 Wikitext 内容:
+
+{{Infobox version 
+|title=15w51a
+|image=15w51a.png
+|image2=Java Edition 15w51a Simplified.png\Java Edition 15w51a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2015年12月17日
+|jsonhash=7070c87a526910524cbec04c3e0b76759a0208f3
+|clienthash=764384c71c303b3e18146dd90ac8cad2550b6ffb
+|serverhash=4d5f4d2111272d67f2238b83a552599b9b7ad92f
+|exehash=10b74066cbbe39e0a829205278402b5d428ded19
+|parent=1.9
+|prevparent=1.8.9
+|prev=15w50a
+|next=15w51b
+|nextparent=1.9.1
+}}<onlyinclude>
+
+'''15w51a'''是[[Java版1.9]]的第47个快照，发布于2015年12月17日<ref>{{cite|url=http://mojang.com/2015/12/minecraft-snapshot-15w51a/|archive-url=1|archive=1|title=Minecraft 1.9 snapshot 15w51a|author=Searge|website=Mojang.com|date=Dec 17, 2015}}</ref>，修复了一些漏洞与崩溃，加入了一些新特性，更新了生物AI，并修复了一些漏洞。
+
+== 更改 ==
+=== 方块 ===
+'''[[冰]]'''
+* 由冰融化的水现在会发生流动。
+
+=== 生物 ===
+'''常规'''
+* 对[[生物]]AI与寻路做了一些改进。
+
+'''[[苦力怕]]'''
+* 设定{{cmd|gamerule doMobLoot false}}后不再掉落音乐唱片。
+
+=== 非生物实体 ===
+[[File:GlowingSnapshotComparison.png|缩略图|250px|此快照前后末影龙身上发光效果的对比]]
+
+'''[[船]]'''
+* 现在船在被破坏后会掉落对应类型的木板。
+
+'''[[末地水晶]]'''
+* 冒险模式下不再能放置末地水晶。
+
+=== 命令格式 ===
+'''{{cmd|gamerule}}'''
+* 运行后设置规则将会返回更改：“Game rule &lt;gamerule&gt; has been updated to &lt;value&gt;.”（游戏规则&lt;gamerule&gt;已更新为&lt;value&gt;。）
+* 新的游戏规则<code>spawnRadius</code>，控制玩家能在距离世界出生点多远的位置重生。默认为10。
+
+=== 游戏内容 ===
+'''[[魔咒]]'''
+* [[冰霜行者]]现在仅会在上方为[[空气]]的[[水]]中生成[[霜冰]]。
+
+'''[[旁观模式]]'''
+* 旁观者不再能打开一个还未生成物的箱子。他们将获得这条消息：“Unable to open. Loot not generated yet.”（无法打开。战利品还未生成。）
+
+'''[[状态效果]]'''
+* 发光效果现在能更准确地描出玩家与生物的轮廓，包括插入他们的箭或是持着的物品与透明物。
+
+=== 常规 ===
+'''[[种子（世界生成）|世界生成]]'''
+* 乘着矿车，船或马时地形将正常生成。
+
+== 修复 ==
+{{fixes|fixedin=15w51a|prefix=Minecraft|showdesc=1
+|;old
+|3564|当收到<code>Sign Update</code>通信包时，会出现调试信息<code>Unable to locate Sign at (x, y, z)"</code>。
+|6674|冰块融化时，水不会流动。
+|13046|某些受支持的字符会清空整行文本。
+|51725|<code>doMobLoot</code>游戏规则不影响音乐唱片的掉落。
+|69072|使用{{cmd|worldborder warning distance/time|link=none}}命令但是不带参数时，会抛出一个错误。
+|73886|村民不能识别出被方块挡住的门。
+|75256|<code>server.properties</code>中的<code>spawn-protection</code>选项会影响玩家随机生成的范围。
+|93614|蝙蝠会飞离创造模式玩家。
+|;dev
+|85709|具有发光效果的末影龙，其边缘显示不正常。
+|86099|具有发光效果的守卫者，其尾巴上的发光范围要比尾巴本身大。
+|89246|发光效果结束后的1刻时间内，此实体不会被渲染。
+|89915|当玩家在矿车中，或者马和猪身上时，区块不会加载。
+|89954|无论什么类型的船，其掉落的都是橡木木板。
+|90585|穿着冰霜行者靴子走向水面上的船时，冰块会在船的下方生成。
+|92915|物品和方块在被拾起时会变得透明且（或）灰。
+|93503|手持头颅时，鞘翅的内侧纹理不被渲染。
+|93532|手持物品会导致鞘翅局部变亮，其他地方变暗。
+|93622|切换游戏模式后，末影人依然保持敌对。
+|93772|生物会跟随创造模式和旁观模式的玩家。
+|93844|玩家皮肤中，帽子部分里的透明像素在渲染时是不透明的。
+|93944|更改资源包时，默认资源包会置顶。但是在关闭并重新进入界面时，默认资源包会回到最底部。
+|94010|加入攻击的狼（即没有直接攻击到的）会对玩家保持敌对，即使切换了游戏模式也是这样。
+|;previous
+|94295|1.9前创建的世界在快照中加载后，末影龙会自己复活。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:15w51a]]
+[[en:Java Edition 15w51a]]
+[[es:Java Edition 15w51a]]
+[[fr:Édition Java 15w51a]]
+[[it:Java Edition 15w51a]]
+[[ja:Java Edition 15w51a]]
+[[pt:Edição Java 15w51a]]
+[[ru:15w51a (Java Edition)]]

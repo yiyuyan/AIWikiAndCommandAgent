@@ -1,0 +1,1155 @@
+# 页面: 命令/execute
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/execute
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有信息, 命令, 基岩版独有信息, 嵌入Bilibili视频的页面
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{for|[[Java版1.13]]（[[17w45a]]）和[[基岩版1.19.50]]（[[基岩版1.19.50.23|1.19.50.23]]）前的此命令|命令/execute/旧版}}
+{{Infobox command
+|name=execute
+|oplevel=2\1
+|becheat=1
+}}{{tr|mode=H|返回|回傳|返回}}
+{{TOC|right}}
+{{cmd|link=none|execute}}是各不同功能的子命令的集合，用于改变[[命令上下文|命令执行上下文]]（[[#修饰子命令|修饰子命令]]），执行逻辑判断（[[#条件子命令|条件子命令]]）和{{only|for=管理并存储命令返回值（[[#存储子命令|存储子命令]]）|je}}，并在此基础上执行任意其他命令。
+
+== 用法 ==
+=== 子命令 ===
+<code>/execute</code>命令有{{only|for=14|java}}/{{only|for=11|bedrock}}条子命令。子命令按功能可分为以下几类：
+* [[#修饰子命令|修饰子命令]]：修改命令上下文以改变命令执行时的状态，从而以特定的执行位置、执行基准点、执行者、执行朝向、执行维度执行后续子命令。
+* [[#条件子命令|条件子命令]]：检测特定条件是否成立并输出结果，或限制子命令执行的条件。
+* [[#存储子命令|存储子命令]]{{only|JE}}：将命令返回值存储至[[方块实体]]、[[实体]]或存储容器的NBT数据中，[[记分板]]的记分项中，或[[Boss栏]]的当前值或最大值中。
+* [[#run子命令|{{cd|run}}子命令]]：执行其他命令。
+
+子命令可以在{{cmd|link=none|execute}}后串连在一起使用，可出现在命令的任意位置及重复任意次数。但{{cd|run}}子命令除外，其只能位于{{cmd|link=none|execute}}末尾且只能使用一次，同时可用于嵌套执行{{cmd|link=none|execute}}。
+
+{{cmd|link=none|execute}}命令的结尾必须为条件子命令或{{cd|run}}子命令，否则命令不可解析。
+
+各子命令按其在命令中的顺序被依次处理，下列命令中子命令虽然一致，但由于顺序不同，会产生不同效果：
+* {{cmd|link=none|execute '''as @e at @s''' run tp @s ^ ^ ^1}}：所有实体向各自所朝方向移动一格。
+* {{cmd|link=none|execute '''at @s as @e''' run tp @s ^ ^ ^1}}：所有实体移动到执行者前方一格。
+
+=== 执行分支 ===
+有些子命令，可以将命令的执行过程'''分叉（Fork）'''为多个'''分支（Branch）'''，也就是使得后续的子命令被多次执行。例如，如果{{cd|as}}子命令选中了多个实体，那么每个实体都会执行一次后续的子命令。
+
+如果一个{{cmd|link=none|execute}}命令没有被分叉，我们称它只有一个分支——'''主分支'''。
+
+有些情况下，一个分支会'''执行中断'''，并且什么也不做（不执行{{cd|run}}子命令和{{only|je|for=存储子命令}}）。例如，条件子命令的条件没有达成，或是{{cd|as}}子命令没有选中实体，等等。{{in|be}}一个分支中断时会显示一条红色的消息。如果所有的分支都中断了，我们就说这个{{cmd|link=none|execute}}命令本身[[命令#结果|执行中断]]。
+
+注意：<code>... run execute ...</code>在任何情况下都不会起任何作用。例如下面的两个命令，效果都是一样的：
+* {{cmd|long=1|link=none|execute as @e[type{{=}}armor_stand] as @e[type{{=}}armor_stand] run summon armor_stand}}
+* {{cmd|long=1|link=none|execute as @e[type{{=}}armor_stand] run execute as @e[type{{=}}armor_stand] run execute run execute run summon armor_stand}}
+
+然而，{{el|je}}和{{el|be}}的分叉方式并不一样。<ref>{{bug|MC-125067|||Won't Fix}}</ref><ref>{{bug|MCPE-165278}}</ref>
+* {{in|je}}游戏会[[wzh:广度优先搜索|广度优先]]地处理子命令，也就是按顺序逐个处理子命令。所以游戏会在处理<code>run</code>子命令之前处理完其他的子命令，于是，<code>run</code>子命令无法影响到其他的子命令。
+* {{in|be}}游戏会[[wzh:深度优先搜索|深度优先]]地处理子命令。也就是说，命令执行分叉以后，后续的所有子命令会作为一个整体，每个分支执行一次。
+* 例如，如果世界上有两个盔甲架（A和B），一个玩家执行了<code>execute as @e[type=armor_stand] as @e[type=armor_stand] run summon armor_stand</code>，{{el|je}}和{{el|be}}的行为如图所示：
+{{gallery|
+File:Execute forking in Java Edition.png|Java版
+File:Execute forking in Bedrock Edition.png|convert|基岩版
+}}
+
+{{in|je}}可以利用{{cmd|function}}达到深度优先的效果，例如：
+* 世界上有两个盔甲架，一个玩家执行了<code>/execute as @e[type=armor_stand] run function test</code>，其中函数<samp>test</samp>的内容是：
+** <code>execute as @e[type=armor_stand] run summon armor_stand</code>
+* 这样的效果和{{el|be}}中的<code>/execute as @e[type=armor_stand] as @e[type=armor_stand] run summon armor_stand</code>是一样的。
+{{in|be}}暂时无法做到广度优先地执行子命令。
+
+=== 输出 ===
+{{main|命令#输出}}
+
+==== 储存值 ====
+{{exclusive|java|section=1}}
+{{IN|java}}一条分支在完整执行后（没有发生执行中断）会输出<code>success</code>值和<code>result</code>值（另见[[命令#输出]]）。这两个输出值：
+* 是各执行分支的输出值，而非{{cd|/execute}}命令本身的；
+* 均来自结尾的条件子命令或{{cd|run}}子命令中的命令；
+* 均为整数，{{cd|result}}遇小数时向下取整，{{cd|success}}总为0或1；
+* 如果结尾的子命令在一个分支中执行失败，则此分支的这两个值均为0；
+* 均可由存储子命令存储。
+
+请注意，这两个值来自结尾的条件子命令或{{cd|run}}子命令中的命令，是每个分支的输出值，而非整条{{cd|/execute}}命令的。
+
+若使用{{cd|run}}子命令执行{{cmd|function}}命令，在某些条件下没有这两个输出值。详细信息参见{{cmd|function}}。
+
+如果在储存子命令之后命令执行被分叉，则储存操作将应用于每个分支。每个分支的输出值都会在此分支执行完后被储存。如果所有分支的存储位置相同，则后执行的分支的输出会直接覆盖先执行分支的输出，而不是累加，所以在执行整个{{cd|/execute}}命令后，此存储位置最后的值是最后执行的分支的输出。
+
+==== 成功次数 ====
+像大多数命令一样，<code>/execute</code>命令（无论是否执行中断）本身也有一个'''[[命令#输出|成功次数]]'''。成功次数：
+* 是{{cd|/execute}}命令本身的输出值，而非各执行分支的；
+* 来自结尾的条件子命令或{{cd|run}}子命令；
+* 各分支的值会被累加；
+* 为大于等于0的整数；
+* 当使用命令方块执行<code>/execute</code>时，成功次数会返回到命令方块中，可用条件制约的命令方块检查，或用[[红石比较器]]读取成功次数。
+
+== 语法树 ==
+下面列出了各子命令及其语法的语法树。其中的所有{{cd|''-> execute''}}{{only|JE}}或{{cd|''chainedCommand: ExecuteChainedOption_0''}}{{only|BE}}表示此位置可作为下一个子命令的起始点。
+
+{{Collapse|title={{el|je}}：|content=
+* {{cd|'''execute''' ...}}
+** {{cd|... '''[[#align|align]]''' <axes> ''-> execute''}}
+** {{cd|... '''[[#anchored|anchored]]''' <anchor> ''-> execute''}}
+** {{cd|... '''[[#as|as]]''' <targets> ''-> execute''}}
+** {{cd|... '''[[#at|at]]''' <targets> ''-> execute''}}
+** {{cd|... '''[[#facing|facing]]''' ...}}
+*** {{cd|... <pos> ''-> execute''}}
+*** {{cd|... entity <targets> <anchor> ''-> execute''}}
+** {{cd|... '''[[#in|in]]''' <dimension> ''-> execute''}}
+** {{cd|... '''[[#on|on]]''' (attacker{{!}}controller{{!}}leasher{{!}}origin{{!}}owner{{!}}passengers{{!}}target{{!}}vehicle) ''-> execute''}}
+** {{cd|... '''[[#positioned|positioned]]''' ...}}
+*** {{cd|... <pos> ''-> execute''}}
+*** {{cd|... as <targets> ''-> execute''}}
+*** {{cd|... over <heightmap> ''-> execute''}}
+** {{cd|... '''[[#rotated|rotated]]''' ...}}
+*** {{cd|... <rot> ''-> execute''}}
+*** {{cd|... as <targets> ''-> execute''}}
+** {{cd|... ('''[[#条件子命令|if]]'''{{!}}'''[[#条件子命令|unless]]''') ...}}
+*** {{cd|... '''[[#ifunlessbiome|biome]]''' <pos> <biome> ''-> execute''}}
+*** {{cd|... '''[[#ifunlessblock|block]]''' <pos> <block> ''-> execute''}}
+*** {{cd|... '''[[#ifunlessblocks|blocks]]''' <start> <end> <destination> (all{{!}}masked) ''-> execute''}}
+*** {{cd|... '''[[#ifunlessdata|data]]''' ...}}
+**** {{cd|... block <-{}-source> <path> ''-> execute''}}
+**** {{cd|... entity <<nowiki/>source> <path> ''-> execute''}}
+**** {{cd|... storage <<nowiki/>source> <path> ''-> execute''}}
+*** {{cd|... '''[[#ifunlessdimension|dimension]]''' <dimension> ''-> execute''}}
+*** {{cd|... '''[[#ifunlessentity|entity]]''' <entities> ''-> execute''}}
+*** {{cd|... '''[[#ifunlessfunction|function]]''' <name> ''-> execute''}}
+*** {{cd|... '''[[#ifunlessitems|items]]''' ...}}
+**** {{cd|... block <pos> <slots> <item_predicate> ''-> execute''}}{{until|JE 26.3}}
+**** {{cd|... block <-{}-source> <slots> <item_predicate> ''-> execute''}}{{upcoming|JE 26.3}}
+**** {{cd|... entity <entities> <slots> <item_predicate> ''-> execute''}}{{until|JE 26.3}}
+**** {{cd|... entity <-{}-source> <slots> <item_predicate> ''-> execute''}}{{upcoming|JE 26.3}}
+*** {{cd|... '''[[#ifunlessloaded|loaded]]''' <pos> ''-> execute''}}
+*** {{cd|... '''[[#ifunlesspredicate|predicate]]''' <predicate> ''-> execute''}}
+*** {{cd|... '''[[#ifunlessscore|score]]''' <target> <targetObjective>}}
+**** {{cd|... ({{=}}{{!}}<{{!}}<{{=}}{{!}}>{{!}}>{{=}}) <<nowiki/>source> <sourceObjective> ''-> execute''}}
+**** {{cd|... matches <range> ''-> execute''}}
+*** {{cd|... '''[[#ifunlessstopwatch|stopwatch]]''' <id> <range> ''-> execute''}}
+** {{cd|... '''[[#存储子命令|store]]''' (result{{!}}success) ...}}
+*** {{cd|... '''[[#storeblock|block]]''' <target> <path> (int{{!}}float{{!}}short{{!}}long{{!}}double{{!}}byte) <scale> ''-> execute''}}
+*** {{cd|... '''[[#storebossbar|bossbar]]''' <id> (value{{!}}max) ''-> execute''}}
+*** {{cd|... '''[[#storeentity|entity]]''' <target> <path> (int{{!}}float{{!}}short{{!}}long{{!}}double{{!}}byte) <scale> ''-> execute''}}
+*** {{cd|... '''[[#storescore|score]]''' <targets> <objective> ''-> execute''}}
+*** {{cd|... '''[[#storestorage|storage]]''' <target> <path> (int{{!}}float{{!}}short{{!}}long{{!}}double{{!}}byte) <scale> ''-> execute''}}
+** {{cd|... '''[[#run子命令|run]]''' ...}}
+}}<!--
+{{Collapse|title={{el|je}}命令语法示意图：|content=
+[[File:Execute graph.svg|800px]]
+}}-->
+{{Collapse|title={{el|be}}：|content=
+* {{cd|'''execute''' ...}}
+** {{cd|... '''[[#align|align]]''' <axes: string> ''<chainedCommand: ExecuteChainedOption_0>''}}
+** {{cd|... '''[[#anchored|anchored]]''' <eyes{{!}}feet> ''<chainedCommand: ExecuteChainedOption_0>''}}
+** {{cd|... '''[[#as|as]]''' <origin: target> ''<chainedCommand: ExecuteChainedOption_0>''}}
+** {{cd|... '''[[#at|at]]''' <origin: target> ''<chainedCommand: ExecuteChainedOption_0>''}}
+** {{cd|... '''[[#facing|facing]]''' ...}}
+*** {{cd|... <position: x y z> ''<chainedCommand: ExecuteChainedOption_0>''}}
+*** {{cd|... entity <origin: target> <eyes{{!}}feet> ''<chainedCommand: ExecuteChainedOption_0>''}}
+** {{cd|... '''[[#in|in]]''' <dimension: Dimension> ''<chainedCommand: ExecuteChainedOption_0>''}}
+** {{cd|... '''[[#positioned|positioned]]''' ...}}
+*** {{cd|... <position: x y z> ''<chainedCommand: ExecuteChainedOption_0>''}}
+*** {{cd|... as <origin: target> ''<chainedCommand: ExecuteChainedOption_0>''}}
+** {{cd|... '''[[#rotated|rotated]]''' ...}}
+*** {{cd|... <yaw: value> <pitch: value> ''<chainedCommand: ExecuteChainedOption_0>''}}
+*** {{cd|... as <origin: target> ''<chainedCommand: ExecuteChainedOption_0>''}}
+** {{cd|-{}-... '''[[#条件子命令|<subcommand: Option_If_Unless>]]''' ...}}
+*** {{cd|... '''[[#ifunlessblock|block]]''' <position: x y z> <block: Block> ...}}
+**** {{cd|... <blockStates: block states> ''[chainedCommand: ExecuteChainedOption_0]''}}
+**** {{cd|... ''[chainedCommand: ExecuteChainedOption_0]''}}
+*** {{cd|... '''[[#ifunlessblocks|blocks]]''' <begin: x y z> <end: x y z> <destination: x y z> <scan mode: BlockScanMode> ''[chainedCommand: ExecuteChainedOption_0]''}}
+*** {{cd|... '''[[#ifunlessentity|entity]]''' <target: target> ''[chainedCommand: ExecuteChainedOption_0]''}}
+*** {{cd|... '''[[#ifunlessscore|score]]''' <target: target> <objective: string> ...}}
+**** {{cd|... <operation: compare operator> <source: target> <objective: string> ''[chainedCommand: ExecuteChainedOption_0]''}}
+**** {{cd|... matches <range: integer range> ''[chainedCommand: ExecuteChainedOption_0]''}}
+** {{cd|-{}-... '''[[#run子命令|run]]''' <command: command>}}
+}}
+
+== 修饰子命令 ==
+可用子命令：
+* {{cd|[[#align|align]]}}：将执行位置转换为方块坐标。
+* {{cd|[[#anchored|anchored]]}}：将执行基准点设置为实体的脚部或眼部。
+* {{cd|[[#as|as]]}}：将执行者设置为特定实体。
+* {{cd|[[#at|at]]}}：将执行位置、执行朝向和执行维度设置为指定实体的坐标、朝向和维度。
+* {{cd|[[#facing|facing]]}}：将命令的执行朝向设置为面向指定坐标或指定实体。
+* {{cd|[[#in|in]]}}：将命令执行维度设置为特定维度。
+* {{cd|[[#on|on]]}}{{only|java}}：将执行者设置为与当前执行者有指定类型的关系的实体。
+* {{cd|[[#positioned|positioned]]}}：将执行位置设置为指定坐标或指定实体位置。
+* {{cd|[[#rotated|rotated]]}}：将执行朝向设为特定方向或设为指定实体的朝向。
+* {{cd|[[#summon|summon]]}}{{only|JE}}：立即创建一个实体，并将此实体设置为执行者。
+
+=== align ===
+改变命令上下文中的[[命令上下文#执行位置|执行位置]]<math>(x,y,z)</math>，将其中的x或y或z向下取整，以转换为[[坐标#方块坐标|方块坐标]]。
+
+; 语法
+: {{el|je|short=1}}：{{cd|align <axes> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|align <axes: string> ''<chainedCommand: ExecuteChainedOption_0>''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|axes|swizzle}}
+: {{el|be|short=1}}：{{argument|be=1|axes: string|basic_string}}
+:: 需要转换的坐标轴。
+:: {{arg desc|je=swizzle}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+
+'''示例'''
+* {{cmd|link=none|execute positioned -1.8 2.3 5.9 '''align xz''' run tp ~ ~ ~}}：把自己从(-1.8, 2.3, 5.9)传送至(-2, 2.3, 5)。
+* {{cmd|link=none|execute positioned 2.4 -1.1 3.8 '''align yxz''' run spawnpoint @p ~ ~ ~}}：当前执行位置为(2.4, -1.1, 3.8)，将最近玩家的出生点设置为(2, -2, 3)。
+* {{cmd|link=none|execute '''align y''' run tp ~ ~ ~}}：把自己的Y坐标微调，向下取整。
+
+=== anchored ===
+将命令上下文中的[[命令上下文#执行锚点|执行锚点]]设置为眼{{cd|eyes}}或脚{{cd|feet}}。默认为脚。
+{{cd|facing}}子命令会根据锚点计算执行朝向；局部坐标{{cd|^ ^ ^}}会根据锚点计算起始位置。
+
+; 语法
+: {{el|je|short=1}}：{{cd|anchored <anchor> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|anchored <eyes{{!}}feet> ''<chainedCommand: ExecuteChainedOption_0>''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|anchor|entity_anchor}}
+: {{el|be|short=1}}：{{argument|be=1|eyes{{!}}feet}}
+:: 需要设置的锚点位置。
+:: {{arg desc|je=entity_anchor}}{{cd|eyes}}为眼部，{{cd|feet}}为脚部。
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+
+'''示例'''
+* {{cmd|tp}}的效果是通过将脚部移动到指定的位置来移动实体。
+* {{cmd|link=none|execute '''anchored eyes''' run tp ^ ^ ^}}：将命令执行者的腿部移动到原眼部位置。
+* {{cmd|link=none|execute '''anchored eyes''' run tp ^5 ^ ^}}：将命令执行者的腿部移动到原眼部位置左边5格的位置上。
+
+=== as ===
+将命令上下文中的[[命令上下文#执行者|执行者]]设置为指定实体。
+
+; 语法
+: {{el|je|short=1}}：{{cd|as <targets> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|as <origin: target> ''<chainedCommand: ExecuteChainedOption_0>''}}
+: {{in|je}}将按照广度优先顺序产生执行分支：以每个目标实体为执行实体建立执行分支，形成包含所有目标实体的命令上下文列表后才会执行后续子命令。
+
+; 参数
+: {{el|je|short=1}}：{{argument|targets|entity}}
+: {{el|be|short=1}}：{{argument|be=1|origin: target|CommandSelector<Actor>}}
+:: 设置执行者，影响后续子命令。
+:: {{arg desc|je=entity|be=actor|amount=multiple|type=entities}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若{{cd|<targets>}}或{{cd|origin: target}}无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）时，命令终止执行。
+
+'''示例'''
+* {{cmd|link=none|execute '''as @e[type{{=}}sheep]''' run data get entity @s}}{{only|JE}}：获取所有[[绵羊]]的数据。
+* {{cmd|link=none|execute '''as @a[gamemode{{=}}spectator]''' run spectate}}{{only|JE}}：使所有[[旁观模式]]的玩家从其附身的实体上退出。
+
+=== at ===
+将命令上下文中的[[命令上下文#执行维度|执行维度]]、[[命令上下文#执行位置|执行位置]]、[[命令上下文#执行朝向|执行朝向]]设置为指定实体的执行维度、执行位置和执行朝向。
+
+; 语法
+: {{el|je|short=1}}：{{cd|at <targets> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|at <origin: target> ''<chainedCommand: ExecuteChainedOption_0>''}}
+: {{in|je}}将按照广度优先顺序产生执行分支：以每个目标实体为执行实体建立执行分支，形成包含所有目标实体的命令上下文列表后才会执行后续子命令。
+
+; 参数
+: {{el|je|short=1}}：{{argument|targets|entity}}
+: {{el|be|short=1}}：{{argument|be=1|origin: target|CommandSelector<Actor>}}
+:: 指定目标实体。
+:: {{arg desc|je=entity|be=actor|amount=multiple|type=entities}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若{{cd|<targets>}}或{{cd|origin: target}}无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）时，命令终止执行。
+
+'''示例'''
+* {{cmd|link=none|execute '''at @r''' run setblock ~ ~-1 ~ stone}}：在一名随机玩家脚下放置一块[[石头]]。
+* {{cmd|link=none|execute '''as @e[type{{=}}sheep] at @s''' run tp ~ ~1 ~}}：将所有绵羊向上移动1格。
+* {{cmd|link=none|execute '''at @e[type{{=}}sheep]''' run kill @s}}：杀死执行者而非所有绵羊（{{cd|at}}子命令不修改执行者）。
+
+=== facing ===
+将起点为[[命令上下文#执行锚点|执行锚点]]，终点为指定位置的向量转换为命令上下文中的[[命令上下文#执行朝向|执行朝向]]。
+确定朝向终点<math>(x2, y2, z2)</math>：
+* 若命令设置了坐标，则直接将该坐标设置为朝向终点。
+* 若命令设置了目标实体及实体锚点，则对目标实体应用实体锚点，然后将得到的坐标设置为朝向终点。
+确定朝向起点<math>(x1, y1, z1)</math>：
+* 对当前命令上下文应用其自身存储的[[命令上下文#执行锚点|执行锚点]]，将得到的坐标设置为朝向起点。
+然后按照下述步骤计算执行朝向：
+# 计算面向方向向量<math>dir = (dx, dy, dz) = (x2 - x1, y2 - y1, z2 - z1)</math>。
+# 计算面向方向向量在水平面的投影<math>dir_{prj} = \sqrt{dx^2 + dz^2}</math>。
+# 计算朝向的垂直面角度：<math>-(atan2(dy, dir_{prj}) \cdot \frac{180}{\pi})</math>，其中<math>atan2</math>为双参反正切函数。
+# 计算朝向的水平面角度：<math>(atan2(dz, dx) \cdot \frac{180}{\pi}) - 90</math>，其中<math>atan2</math>为双参反正切函数。
+# 将垂直面角度和水平面角度构造为一个二维向量即得到执行朝向。
+当起点和终点的距离约为0时，朝向被计算为固定值<math>(-90, 0)</math>。
+
+; 语法
+: {{el|je|short=1}}：{{cd|facing <pos> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|facing <position: x y z> ''<chainedCommand: ExecuteChainedOption_0>''}}
+:: 将命令的执行朝向设置为执行锚点到指定坐标的射线方向。
+: {{el|je|short=1}}：{{cd|facing entity <targets> <anchor> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|facing entity <origin: target> <eyes{{!}}feet> ''<chainedCommand: ExecuteChainedOption_0>''}}
+:: 将命令的执行朝向设置为执行锚点到指定实体的指定锚点的射线方向。
+:: {{in|je}}将按照广度优先顺序产生执行分支：以每个目标实体为执行实体建立执行分支，形成包含所有目标实体的命令上下文列表后才会执行后续子命令。对于每一个分支，都以当前命令上下文中的执行锚点为起点，当前分支中实体的锚点为终点计算一次执行朝向。
+
+; 参数
+: {{el|je|short=1}}：{{argument|pos|vec3}}
+: {{el|be|short=1}}：{{argument|be=1|position: x y z|CommandPositionFloat}}
+:: 需要面向的坐标。
+:: {{arg desc|je=vec3|be=CommandPositionFloat}}
+: {{el|je|short=1}}：{{argument|targets|entity}}
+: {{el|be|short=1}}：{{argument|be=1|origin: target|CommandSelector<Actor>}}
+:: 需要面向的实体。
+:: {{arg desc|je=entity|be=actor|amount=multiple|type=entities}}
+: {{el|je|short=1}}：{{argument|anchor|entity_anchor}}
+: {{el|be|short=1}}：{{argument|be=1|eyes{{!}}feet}}
+:: 需要面向实体的眼部还是脚部。
+:: {{arg desc|je=entity_anchor}}
+
+; 结果
+: 将执行朝向设置为面向指定的坐标或目标实体。
+: 参数未正确指定时，视为语法错误。
+: 若{{cd|<targets>}}或{{cd|origin: target}}无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）时，命令终止执行。
+
+'''示例'''
+* {{cmd|link=none|execute facing ^1 ^ ^ run rotate @s ~ ~}}
+*: 使执行者正对自己的左面（水平左转90度，垂直旋转角度设置为0）。
+* {{cmd|link=none|execute anchored feet facing ^1 ^ ^ run rotate @s ~ ~}}
+*: 使执行者正对自己的左面（另一种等价写法）。
+* {{cmd|long=1|link=none|execute as @s at @s '''facing entity @n[type{{=}}armor_stand] feet''' run particle minecraft:end_rod ^ ^ ^1 0 0 0 0 1}}
+*: 显示执行者脚部到最近一个盔甲架脚部的单位向量的终点。
+* {{cmd|long=1|link=none|execute as @s at @s anchored eyes '''facing entity @n[type{{=}}armor_stand] eyes''' run particle minecraft:end_rod ^ ^ ^1 0 0 0 0 1}}
+*: 显示执行者眼部到最近一个盔甲架眼部的单位向量的终点。
+* {{cmd|long=1|link=none|execute as @s at @s '''facing entity @n[type{{=}}armor_stand] feet''' run tp @s ^ ^ ^1 ~ ~}}
+*: 建立以执行者脚部为起点，以最近一个盔甲架脚部为终点的向量，将该向量转换为执行朝向，然后将执行者沿该向量方向传送1个单位长度，同时将执行者的朝向设置为执行朝向。
+
+=== in ===
+将命令上下文中的[[命令上下文#执行维度|执行维度]]设置为指定[[维度]]，同时也将[[命令上下文#执行位置|执行位置]]设置为在该维度中的坐标。
+设改变维度前的执行位置为<math>(x, y, z)</math>，则有如下步骤：
+# 获取当前维度类型的坐标缩放值{{nbt|double|[[维度类型|coordinate_scale]]}}，记为<math>s1</math>，然后获取{{cd|in}}所指定的目标维度类型的坐标缩放值{{nbt|double|[[维度类型|coordinate_scale]]}}，记为<math>s2</math>。
+# 计算传送缩放值<math>S = \frac{s1}{s2}</math>。
+# 计算传送坐标值<math>(S \dot x, y, S \dot z)</math>（未改变y值）。
+# 将得到的传送坐标值作为新的执行位置，连同所设定的维度一同传入命令上下文。
+
+; 语法
+: {{el|je|short=1}}：{{cd|in <dimension> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|in <dimension: Dimension> ''<chainedCommand: ExecuteChainedOption_0>''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|dimension|dimension}}
+: {{el|be|short=1}}：{{argument|be=1|dimension: Dimension|enum}}
+:: 需要设置的维度。
+:: {{arg desc|je=dimension}}{{cd|minecraft}}命名空间下的维度默认有{{cd|overworld}}、{{cd|the_nether}}{{only|JE}}/{{cd|nether}}{{only|BE}}和{{cd|the_end}}。
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+
+'''示例'''
+* {{cmd|link=none|execute '''in the_end''' run locate structure end_city}}：从任意维度中定位末地中的末地城。
+* {{cmd|link=none|execute '''in the_nether''' positioned as @s run tp ~ ~ ~}}{{only|JE}}：将玩家传送到下界中的对应位置。
+* {{cmd|link=none|execute '''in the_nether''' run tp ~ ~ ~}}{{only|JE}}：将玩家传送到下界中的对应位置。若玩家原先位于其他维度的(X, Y, Z)处，则传送到下界的(X&divide;8, Y, Z&divide;8)处。
+* {{cmd|link=none|execute '''in nether''' run tp ~ ~ ~5}}{{only|BE}}：将玩家传送到下界中的对应位置。若玩家原先位于其他维度的(X, Y, Z)处，则传送到下界的(X&divide;8, Y, Z&divide;8+5)处。
+
+=== on ===
+{{exclusive|section=1|java}}
+
+将命令上下文中的[[命令上下文#执行者|执行者]]设置为与之有指定关联的实体。
+
+; 语法
+: {{el|je|short=1}}：{{cd|on (attacker{{!}}controller{{!}}leasher{{!}}origin{{!}}owner{{!}}passengers{{!}}target{{!}}vehicle) ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{cd|(attacker{{!}}controller{{!}}leasher{{!}}origin{{!}}owner{{!}}passengers{{!}}target{{!}}vehicle)}}
+:: {{cd|attacker}}：最近5秒内对当前执行者造成最后伤害的实体。每个执行者实体只能对应一个攻击实体。
+:: {{cd|controller}}：控制当前执行者的实体。每个执行者实体只能对应一个控制实体。
+:: {{cd|leasher}}：用拴绳牵引当前执行者的实体。每个执行者实体只能对应一个牵引实体。
+:: {{cd|origin}}：当前执行者的来源。每个执行者实体只能对应一个来源实体。
+::: 若当前执行者为[[弹射物]]，则为其发射者。
+::: 若当前执行者为[[物品（实体）|物品]]，则为其掷出者。
+::: 若当前执行者为[[区域效果云]]，则为其来源者。
+::: 若当前执行者为[[被激活的TNT]]，则为其点燃者。
+::: 若当前执行者为[[唤魔者尖牙]]或[[恼鬼]]，则为其召唤者。
+:: {{cd|owner}}：当前执行者为可驯服生物或恼鬼时，此实体的主人。每个执行者实体只能对应一个主实体。
+:: {{cd|passengers}}：直接骑乘于当前执行者的实体。若有多个骑乘于当前执行者的实体，则实体选择顺序和骑乘先后顺序相同。每个执行者实体可能对应多个骑乘者。
+:: {{cd|target}}：获取{{tooltip|带目标实体|Java类名：Targeting}}的目标。目前，所有{{tooltip|AI生物|Java类名：Mob}}和交互实体均属于带目标实体。
+::: 若当前执行者属于AI生物，则获取该[[生物记忆]]中的攻击目标。
+::: 若当前执行者为[[交互实体]]，则为其{{nbt|compound|interaction}}中{{nbt|int-array|player}}所代表的玩家。
+::: 若为其他实体，则返回为空。
+:: {{cd|vehicle}}：乘载当前执行者的实体。每个执行者实体只能对应一个乘载实体。
+
+; 结果
+: 若指定的关系不适用于当前执行实体，或此关系下没有匹配实体，则返回0个元素。
+: 参数未正确指定时，视为语法错误。
+: 若此参数无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）时，命令终止执行。
+
+; 示例
+: {{cmd|link=none|execute as @e[type{{=}}sheep] '''on attacker''' run kill @s}}：杀死5秒内对附近可检测到的所有绵羊发起攻击动作的所有最后一个实体。
+: {{cmd|link=none|execute as @e[type{{=}}cat] '''on leasher''' run damage @s 2 generic}}：给拴着猫的实体施加{{hp|2}}点普通伤害。
+
+=== positioned ===
+改变命令上下文中的[[命令上下文#执行位置|执行位置]]为指定坐标或指定实体的位置。
+若指定局部坐标，将应用执行锚点。否则，将执行锚点重置为{{cd|feet}}。
+
+; 语法
+: {{el|je|short=1}}：{{cd|positioned <pos> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|positioned <position: x y z> ''<chainedCommand: ExecuteChainedOption_0>''}}
+:: 将执行位置设置为指定坐标。
+: {{el|je|short=1}}：{{cd|positioned as <targets> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|positioned as <origin: target> ''<chainedCommand: ExecuteChainedOption_0>''}}
+:: 将执行位置设置为指定实体位置。
+:: {{in|je}}将按照广度优先顺序产生执行分支：以每个目标实体的位置为执行位置建立执行分支，形成包含所有目标实体位置的命令上下文列表后才会执行后续子命令。
+: {{el|je|short=1}}：{{cd|positioned over <heightmap> ''-> execute''}}
+:: 将执行位置设置为符合特定高度图的一纵列方块的最高的位置。
+
+; 参数
+: {{el|je|short=1}}：{{argument|pos|vec3}}
+: {{el|be|short=1}}：{{argument|be=1|position: x y z|CommandPositionFloat}}
+:: 指定命令执行的坐标。
+:: {{arg desc|je=vec3|be=CommandPositionFloat}}
+: {{el|je|short=1}}：{{argument|targets|entity}}
+: {{el|be|short=1}}：{{argument|be=1|origin: target|CommandSelector<Actor>}}
+:: 指定命令执行的位置为此处指定的实体所处的坐标。
+:: {{arg desc|je=entity|be=actor|amount=multiple|type=entities}}
+: {{el|je|short=1}}：{{argument|heightmap|heightmap}}
+:: 指定[[高度图]]。值须为{{cd|world_surface|motion_blocking|motion_blocking_no_leaves|ocean_floor|d=pretty}}中之一。
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 当指定{{cd|over <heightmap>}}但当前执行位置未被加载、或着{{cd|<targets>}}或{{cd|origin: target}}无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）时，命令终止执行。
+
+'''示例'''
+* {{cmd|link=none|execute '''positioned 0 64 0''' run locate structure #village}}{{only|JE}}：寻找离坐标(0, 64, 0)最近的村庄。
+* {{cmd|link=none|execute '''positioned 0 64 0''' run locate structure village}}{{only|BE}}：寻找离坐标(0, 64, 0)最近的村庄。
+
+=== rotated ===
+将命令上下文中的[[命令上下文#执行朝向|执行朝向]]设置为指定朝向或指定实体的朝向。
+
+; 语法
+: {{el|je|short=1}}：{{cd|rotated <rot> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|rotated <yaw: value> <pitch: value> ''<chainedCommand: ExecuteChainedOption_0>''}}
+:: 将命令的执行朝向设为特定方向。
+: {{el|je|short=1}}：{{cd|rotated as <targets> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|rotated as <origin: target> ''<chainedCommand: ExecuteChainedOption_0>''}}
+:: 将命令的执行朝向设为指定实体的朝向。
+:: {{in|je}}将按照广度优先顺序产生执行分支：以每个目标实体的朝向为执行朝向建立执行分支，形成包含所有目标实体朝向的命令上下文列表后才会执行后续子命令。
+
+; 参数
+: {{el|je|short=1}}：{{argument|rot|rotation}}（<code><yaw> <pitch></code>）
+: {{el|be|short=1}}：{{argument|be=1|yaw: value|RelativeFloat}}和{{argument|be=1|pitch: value|RelativeFloat}}
+:: 需要的旋转角度。
+:: {{arg desc|je=rotation|be=RelativeFloat}}
+: {{el|je|short=1}}：{{argument|targets|entity}}
+: {{el|be|short=1}}：{{argument|be=1|origin: target|CommandSelector<Actor>}}
+:: 采用指定实体的朝向。
+:: {{arg desc|je=entity|be=actor|amount=multiple|type=entities}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 当{{cd|<targets>}}实体不存在时命令终止执行。
+: 若{{cd|<targets>}}或{{cd|origin: target}}无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）时，命令终止执行。
+: 当选择到多个实体时，以各个实体的朝向分别执行一次后续子命令。
+
+'''示例'''
+* {{cmd|link=none|execute as @e[type{{=}}sheep] at @s '''rotated as @p''' run tp @s ^ ^ ^1}}：让所有的绵羊以各自距离最近玩家的朝向作为方向移动1格。
+
+=== summon ===
+{{exclusive|section=1|java}}
+
+立即召唤一个实体，并将命令上下文中的[[命令上下文#执行者|执行者]]设置为此实体。
+
+; 语法
+: {{el|je|short=1}}：{{cd|summon <entity> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|entity|entity_summon}}
+:: 需要生成的实体类型。
+:: {{arg desc|je=entity_summon}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+
+'''示例'''
+* {{cmd|link=none|execute '''summon pig''' run tag @s add test}}：召唤一只猪，并以猪为执行者对其添加记分板标签{{cd|test}}。
+* {{cmd|link=none|execute '''summon pig''' run function test:test}}：召唤一只猪，并以猪为执行者执行函数{{cd|test:test}}。
+
+== 条件子命令 ==
+{{anchor|if}}{{anchor|unless}}
+条件子命令包括{{cd|if}}和{{cd|unless}}两种，用于测试特定类型的条件。两者的语义相反但参数结构一致，{{cd|if}}表示“如果……就”，{{cd|unless}}表示“除非……否则”。
+
+条件子命令可以单独使用，也可以与其他子命令一起使用，根据其处于整条命令中的位置，其行为也有区别：
+* 位于整条命令的末尾时，条件子命令会直接输出测试结果。
+* 不位于整条命令的末尾时，条件子命令会根据自身语义与测试结果，决定后续子命令是否执行。
+** 若由多个变量（如执行者、执行位置、执行朝向）执行多次时，可作为变量过滤器使用。
+
+可用条件类型：
+* {{cd|[[#ifunlessbiome|biome]]}}{{only|JE}}：检测给定位置上的生物群系是否为特定生物群系。
+* {{cd|[[#ifunlessblock|block]]}}：检测给定位置上的方块是否是特定的方块或方块状态。
+* {{cd|[[#ifunlessblocks|blocks]]}}：检测给定区域内的方块是否匹配另一个同等大小区域内的方块。
+* {{cd|[[#ifunlessdata|data]]}}{{only|JE}}：检测方块、实体或存储容器是否拥有给定的NBT标签。
+* {{cd|[[#ifunlessdimension|dimension]]}}{{only|JE}}：检测命令执行时所处的维度是否为特定维度。
+* {{cd|[[#ifunlessentity|entity]]}}：检测一个或多个特定实体是否存在。
+* {{cd|[[#ifunlessfunction|function]]}}{{only|JE}}：检测函数是否有非零返回值。
+* {{cd|[[#ifunlessitems|items]]}}{{only|JE}}：检测方块或实体的给定物品栏槽位或槽位区间内是否拥有指定物品。
+* {{cd|[[#ifunlessloaded|loaded]]}}{{only|JE}}：检测给定位置是否已被加载。
+* {{cd|[[#ifunlesspredicate|predicate]]}}{{only|JE}}：检测谓词计算结果是否为正。
+* {{cd|[[#ifunlessscore|score]]}}：检测指定目标的记分板中的记分项的分数是否与另一个（或同一个）目标的记分板的记分项的分数是否符合指定的关系，或者是否在给定的范围之内。
+* {{cd|[[#ifunlesssslots|slots]]}}{{upcoming|JE 26.3}}：检测方块或实体是否具有能匹配给定[[槽位源]]的槽位。
+* {{cd|[[#ifunlessstopwatch|stopwatch]]}}{{only|JE}}：检测指定ID的秒表的时间是否在给定的范围之内。
+
+=== (if|unless) biome ===
+{{anchor|ifunlessbiome}}
+{{exclusive|section=1|java}}
+获取命令上下文中的[[命令上下文#执行维度|执行维度]]，检测指定的方块坐标处是否为指定的生物群系。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) biome <pos> <biome> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|pos|block_pos}}
+:: 需要检测的位置。
+:: {{arg desc|je=block_pos}}
+: {{el|je|short=1}}：{{argument|biome|biome_predicate}}
+:: 需要检测的生物群系或生物群系标签的命名空间ID。
+:: 参见[[生物群系/ID]]及{{slink|Java版标签/生物群系}}以查看所有可用的生物群系ID和生物群系标签。<!--
+:: {{arg desc|je=biome_predicate}}-->
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* {{cd|<pos>}}所指定的位置未加载或位于世界外。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|d=pretty|success|result}}均返回1。
+
+'''示例'''
+* {{cmd|link=none|execute '''if biome ~ ~ ~ #minecraft:has_structure/jungle_temple'''}}：检测当前执行位置所在的生物群系是否可生成丛林神庙。
+
+=== (if|unless) block ===
+{{anchor|ifunlessblock}}
+获取命令上下文中的[[命令上下文#执行维度|执行维度]]，检测给定位置上的方块是否是特定的方块或方块状态。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) block <pos> <block> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|<subcommand: Option_If_Unless> block <position: x y z> <block: Block> ''[chainedCommand: ExecuteChainedOption_0]''}}
+: {{el|be|short=1}}：{{cd|<subcommand: Option_If_Unless> block <position: x y z> <block: Block> <blockStates: block states> ''[chainedCommand: ExecuteChainedOption_0]''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|pos|block_pos}}
+: {{el|be|short=1}}：{{argument|be=1|position: x y z|CommandPosition}}
+:: 需要检测的方块的坐标。
+:: {{arg desc|je=block_pos|be=CommandPosition}}
+: {{el|je|short=1}}：{{argument|block|block_predicate}}
+: {{el|be|short=1}}：{{argument|be=1|block: Block|Block}}
+:: 需要检测的方块或方块标签的命名空间ID。{{in|je}}可以附加方块状态和NBT标签。
+:: {{arg desc|je=block_predicate|be=block}}
+: {{el|be|short=1}}：{{argument|be=1|blockStates: block states|BlockStateCommandParam}}
+:: 需要检测的方块的方块状态。
+:: {{arg desc|be=BlockStateCommandParam}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* {{cd|<pos>}}或{{cd|position: x y z}}所指定的位置未加载或位于世界外。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|d=pretty|success|result}}均返回1。
+
+'''示例'''
+* {{cmd|link=none|execute as @a at @s '''if block ~ ~-1 ~ stone''' run kill @s}}：击杀所有踩在石头上的玩家。
+
+=== (if|unless) blocks ===
+{{anchor|ifunlessblocks}}
+检测给定区域内的方块是否匹配另一个同等大小区域内的方块。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) blocks <start> <end> <destination> (all{{!}}masked) ''-> execute''}}
+: {{el|be|short=1}}：{{cd|<subcommand: Option_If_Unless> blocks <begin: x y z> <end: x y z> <destination: x y z> <scan mode: BlockScanMode> ''[chainedCommand: ExecuteChainedOption_0]''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|start|block_pos}}和{{argument|end|block_pos}}
+: {{el|be|short=1}}：{{argument|be=1|begin: x y z|CommandPosition}}和{{argument|be=1|end: x y z|CommandPosition}}
+:: 需要检测的源区域（比较时参照的区域）的两个对角方块位置。
+:: {{arg desc|je=block_pos|be=CommandPosition}}
+: {{el|je|short=1}}：{{argument|destination|block_pos}}
+: {{el|be|short=1}}：{{argument|be=1|destination: x y z|CommandPosition}}
+:: 需要检测的对照区域的西北下角方块的坐标（即长方体区域内坐标最小处）。
+:: {{arg desc|je=block_pos|be=CommandPosition}}
+: {{el|je|short=1}}：{{cd|(all{{!}}masked)}}
+: {{el|be|short=1}}：{{argument|be=1|scan mode: BlockScanMode|enum}}
+:: 需要使用的检测模式，可以是{{cd|all}}（检测区域内全部方块）或{{cd|masked}}（检测区域内除空气外的全部方块）。
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形之一，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* {{cd|<start>}}或{{cd|begin: x y z}}、{{cd|<end>}}或{{cd|end: x y z}}、{{cd|<destination>}}或{{cd|destination: x y z}}所指定的位置未加载或位于世界外。
+:* 要检测的源区域方块数大于32768。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|success}}返回1。{{cd|result}}返回：
+:* 匹配到的方块数（{{cd|if}}）。
+:* 1（{{cd|unless}}）。
+
+=== (if|unless) data ===
+{{anchor|ifunlessdata}}
+{{exclusive|section=1|java}}
+检测方块、实体或[[命令存储]]是否拥有给定的NBT标签。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) data block <-{}-source> <path> ''-> execute''}}（方块）
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) data entity <<nowiki/>source> <path> ''-> execute''}}（实体）
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) data storage <<nowiki/>source> <path> ''-> execute''}}（命令存储）
+
+; 参数
+: {{el|je|short=1}}：{{argument|source|block_pos}}（{{cd|data block}}时）
+:: 需要检测的方块的坐标。
+:: {{arg desc|je=block_pos}}
+: {{el|je|short=1}}：{{argument|source|entity}}（{{cd|data entity}}时）
+:: 需要检测的单个实体。
+:: {{arg desc|je=entity|amount=single|type=entities}}
+: {{el|je|short=1}}：{{argument|source|resource_location}}（{{cd|data storage}}时）
+:: 需要检测的[[命令存储]]的命名空间ID。
+:: {{arg desc|je=resource_location}}
+: {{el|je|short=1}}：{{argument|path|nbt_path}}
+:: 需要检测的NBT标签。
+:: {{arg desc|je=nbt_path}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形之一，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* {{cd|<-{}-source>}}（{{cd|block}}）所指定的位置未加载或位于世界外。
+:* {{cd|<-{}-source>}}（{{cd|block}}）所指定的位置上不是[[方块实体]]。
+:* {{cd|<nowiki><source></nowiki>}}（{{cd|entity}}）无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|success}}返回1。{{cd|result}}返回：
+:* 匹配到的NBT标签数（{{cd|if}}）。
+:* 1（{{cd|unless}}）。
+
+'''示例'''
+* {{cmd|link=none|execute as @a '''if data entity @s {OnGround:1b}''' run give @s minecraft:stone 1}}：给予所有在地面上的玩家一块石头。
+
+=== (if|unless) dimension ===
+{{anchor|ifunlessdimension}}
+{{exclusive|section=1|java}}
+检测命令执行时所处的维度是否为特定维度。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) dimension <dimension> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|dimension|dimension}}
+:: 需要检测的维度。
+:: {{arg desc|je=dimension}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）。
+: 若位于末尾且执行成功，{{cd|success}}返回1。{{cd|result}}返回：
+:* 匹配到的维度数（{{cd|if}}）。
+:* 1（{{cd|unless}}）。
+
+'''示例'''
+* {{cmd|link=none|execute as @a at @s '''if dimension minecraft:overworld''' run say YES}}：对所有在主世界的玩家输出“YES”。
+
+=== (if|unless) entity ===
+{{anchor|ifunlessentity}}
+检测一个或多个特定实体是否存在。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) entity <entities> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|<subcommand: Option_If_Unless> entity <target: target> ''[chainedCommand: ExecuteChainedOption_0]''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|entities|entity}}
+: {{el|be|short=1}}：{{argument|be=1|target: target|CommandSelector<Actor>}}
+:: 需要检测的目标实体。
+:: {{arg desc|je=entity|be=actor|amount=multiple|type=entities}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* {{cd|<entities>}}或{{cd|target: target}}无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|success}}返回1。{{cd|result}}返回：
+:* 匹配到的实体数（{{cd|if}}）。
+:* 1（{{cd|unless}}）。
+
+'''示例'''
+* {{cmd|link=none|execute '''if entity @e[type{{=}}sheep]''' run function foo:bar}}：若世界中有绵羊就执行函数{{cd|foo:bar}}。
+* {{cmd|long=1|link=none|execute as @e[type{{=}}creeper] at @s '''unless entity @e[type{{=}}ocelot,distance{{=}}..3]''' run kill @s}}{{only|JE}}：击杀所有在3格范围内没有豹猫的苦力怕。
+* {{cmd|link=none|execute as @e[type{{=}}creeper] at @s '''unless entity @e[type{{=}}ocelot,r{{=}}3]''' run kill @s}}{{only|BE}}：击杀所有在3格范围内没有豹猫的苦力怕。
+
+=== (if|unless) function ===
+{{anchor|ifunlessfunction}}
+{{exclusive|section=1|java}}
+执行并检测函数是否有非零的[[Java版函数#返回|函数返回值]]。若给定的函数返回0或没有返回值，测试失败。
+若给定[[函数标签]]，则其中任意一个函数返回非零值都将通过测试。当遍历到一个这样的函数后，标签的执行终止，不会再执行其他函数。
+与其他条件子命令不同，此子命令不能置于子命令链的末尾<ref>{{bug|MC-267799|||Invalid}}</ref>。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) function <name> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|name|function}}
+:: 要检测的函数。必须为一个[[命名空间ID]]，指向一个单独的函数或者是以{{cd|#}}作为前缀的函数标签。
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若给定的函数或函数标签不存在，或函数标签为空（其中没有任何函数），则终止整个<code>/execute</code>命令：
+: 当仅给出一个函数时，如果该函数不是宏函数，也不是 Void函数，并且其[[函数#返回值|返回值]]不为 0：
+:* <code>if</code>不会执行任何操作，而<code>unless</code>会终止当前分支。
+: 当给定包含多个函数的函数标签时，会按照标签文件中定义的顺序依次检查并调用每个函数：
+:* 如果该函数是宏函数：则结束此子命令的执行，同时<code>if</code>会终止当前分支，而<code>unless</code>不会执行任何操作。
+:* 如果该函数是Void函数：则会检查并调用下一个函数。如果没有下一个函数，则<code>if</code>会终止当前分支，而<code>unless</code>不会执行任何操作。
+:* 如果该函数返回失败结果，或者返回值为0的成功结果，则结束此子命令的执行，同时<code>if</code>会终止当前分支，而<code>unless</code>不会执行任何操作。
+:* 如果该函数返回成功结果且其返回值不为0：则结束此子命令的执行，同时<code>if</code>不会执行任何操作，而<code>unless</code>会终止当前分支。
+
+'''示例'''
+* {{cmd|link=none|execute '''unless function generic:test''' run say 1}}：执行函数{{cd|generic:test}}，若其返回值非0，则不执行{{cd|say 1}}。
+
+=== (if|unless) items ===
+{{anchor|ifunlessitems}}
+{{exclusive|section=1|java}}
+检测方块或实体的给定物品栏[[槽位]]或槽位区间内是否拥有指定物品。
+
+; 语法（[[Java版26.3|26.3]]前）
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) items block <pos> <slots> <item_predicate> ''-> execute''}}（方块）
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) items entity <entities> <slots> <item_predicate> ''-> execute''}}（实体）
+; 语法（[[Java版26.3|26.3]]起）
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) items block <-{}-source> <slots> <item_predicate> ''-> execute''}}（方块）
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) items entity <-{}-source> <slots> <item_predicate> ''-> execute''}}（实体）
+
+; 参数
+: {{el|je|short=1}}：{{argument|pos|block_pos}}
+:: 需要检测的方块的坐标。
+:: {{arg desc|je=block_pos}}
+: {{el|je|short=1}}：{{argument|entities|entities}}
+:: 需要检测的多个实体。
+:: {{arg desc|je=entity|amount=multiple|type=entities}}
+: {{el|je|short=1}}：{{argument|slots|item_slot}}
+:: 需要检测的单个槽位或槽位区间。
+:: {{arg desc|je=item_slot}}
+: {{el|je|short=1}}：{{argument|item_predicate|item_predicate}}
+:: 用于检测物品特征的物品谓词。
+:: {{arg desc|je=item_predicate}}
+: {{el|je|short=1}}：{{argument|source|block_pos}}（{{cd|block <-{}-source>}}时）
+:: 需要检测的方块的坐标。
+:: {{arg desc|je=block_pos}}
+: {{el|je|short=1}}：{{argument|source|entity}}（{{cd|entity <-{}-source>}}时）
+:: 需要检测的实体。
+:: {{arg desc|je=entity|amount=multiple|type=entities}}
+: {{argument|slots|slot_source}}
+:: 指定要检测的[[槽位]]或[[槽位源]]。槽位有效值取决于检测的方块或实体。
+:: {{arg desc|je=slot_source}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形之一，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* {{cd|<pos>}}所指定的位置未加载或位于世界外。
+:* {{cd|<pos>}}所指定的位置上不是[[方块实体]]。
+:* {{cd|<entities>}}无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）。
+:* {{cd|<-{}-source>}}（{{cd|block}}）所指定的位置未加载或位于世界外。
+:* {{cd|<-{}-source>}}（{{cd|block}}）所指定的位置上不是[[方块实体]]。
+:* {{cd|<-{}-source>}}（{{cd|entity}}）无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）。
+:* {{cd|<slots>}}不是指定方块或实体的有效槽位。
+:* {{cd|<item_predicate>}}不存在于方块或实体的指定槽位中。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|success}}返回1。{{cd|result}}返回：
+:* 匹配到的物品总数（{{cd|if}}）。
+:* 1（{{cd|unless}}）。
+
+'''示例'''
+* {{cmd|link=none|execute if items entity @p armor.* *[minecraft:custom_data~{id:"test:bar"}]}}：检测最近一位玩家的某盔甲[[槽位]]中是否存在某物品带有定义数据{{cd|id:"test:bar"}}。
+
+=== (if|unless) loaded ===
+{{anchor|ifunlessloaded}}
+{{exclusive|section=1|java}}
+检测给定位置是否已被加载。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) loaded <pos> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|pos|block_pos}}
+:: 需要检测的位置。
+:: {{arg desc|je=block_pos}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* {{cd|<pos>}}所指定的位置位于世界外。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|d=pretty|success|result}}均返回1。
+
+'''示例'''
+* {{cmd|link=none|execute if loaded ~ ~ ~500}}：检测当前执行位置向Z轴正方向偏移500格的位置是否被加载。
+
+=== (if|unless) predicate ===
+{{anchor|ifunlesspredicate}}
+{{exclusive|section=1|java}}
+检测[[谓词]]（Predicate）是否通过（结果是否为正值）。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) predicate <predicate> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|predicate|loot_predicate}}
+:: 用于测试条件的谓词。若符合谓词的描述则执行成功。
+:: {{arg desc|je=loot_predicate}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* 指定的谓词不存在。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|d=pretty|success|result}}均返回1。
+
+'''示例'''
+* <code><nowiki>/execute if predicate {condition:weather_check, raining:true}</nowiki></code>：检测当前维度是否在下雨（使用内联谓词）。
+* {{cmd|link=none|execute if predicate test:foo}}：调用数据包中命名空间ID为{{cd|test:foo}}的谓词文件。
+
+=== (if|unless) score ===
+{{anchor|ifunlessscore}}
+检测指定目标在指定[[记分板|记分项]]中的分数是否与另一个（或自身）目标在指定记分项中的分数符合指定关系，或是在指定范围内。
+
+; 语法
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) score <target> <targetObjective> <nowiki>(=|<|<=|>|>=)</nowiki> <<nowiki/>source> <sourceObjective> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|<subcommand: Option_If_Unless> score <target: target> <objective: string> <operation: compare operator> <source: target> <objective: string> ''[chainedCommand: ExecuteChainedOption_0]''}}
+:: 检测两个目标在两个记分项中的分数是否符合特定运算符表示的关系。
+: {{el|je|short=1}}：{{cd|(if{{!}}unless) score <target> <targetObjective> matches <range> ''-> execute''}}
+: {{el|be|short=1}}：{{cd|<subcommand: Option_If_Unless> score <target: target> <objective: string> matches <range: integer range> ''[chainedCommand: ExecuteChainedOption_0]''}}
+:: 检测指定目标在指定记分项的分数是否在指定范围内。
+
+; 参数
+: {{el|je|short=1}}：{{argument|target|score_holder}}
+: {{el|be|short=1}}：{{argument|be=1|target: target|WildcardCommandSelector<Actor>}}
+:: 需要检测的单个分数持有者。
+:: {{arg desc|je=score_holder|be=WildcardCommandSelector<Actor>}}
+:: 可以执行{{cd|*}}但判定失败。
+: {{el|je|short=1}}：{{argument|targetObjective|objective}}
+: {{el|be|short=1}}：{{argument|be=1|objective: string|basic_string}}
+:: 需要检测的记分项。
+:: {{arg desc|je=objective|be=basic_string}}
+: {{el|je|short=1}}：{{cd|<nowiki>(=|<|<=|>|>=)</nowiki>}}
+: {{el|be|short=1}}：{{argument|be=1|operation: compare operator|CommandCompareOperator}}
+:: 指定运算符，检测左操作数（目标记分项）与右操作数（源记分项）之间的关系是否符合此处定义的关系。
+: {{el|je|short=1}}：{{argument|source|score_holder}}
+: {{el|be|short=1}}：{{argument|be=1|source: target|WildcardCommandSelector<Actor>}}
+:: 需要被比较的单个分数持有者。
+:: {{arg desc|je=score_holder|be=wildcardcommandselector<actor>}}
+:: 可以执行{{cd|*}}但判定失败。
+: {{el|je|short=1}}：{{argument|sourceObjective|objective}}
+: {{el|be|short=1}}：{{argument|be=1|objective: string|basic_string}}
+:: 需要被比较的记分项。
+:: {{arg desc|je=objective|be=basic_string}}
+: {{el|je|short=1}}：{{argument|range|int_range}}
+: {{el|be|short=1}}：{{argument|be=1|range: integer range|CommandIntegerRange}}
+:: 被检测分数需要符合的范围。
+:: {{arg desc|je=int_range|be=CommandIntegerRange}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* {{cd|<target>}}或{{cd|target: target}}、{{cd|<nowiki><source></nowiki>}}或{{cd|source: target}}为{{cd|*}}。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|d=pretty|success|result}}均返回1。
+
+'''示例'''
+* {{cmd|link=none|execute if score @s a {{=}} @s b}}：检测自己的a分数与b分数是否相等。
+
+=== (if|unless) slots ===
+{{anchor|ifunlesssslots}}
+{{added in development|section=1|jev=26.3}}
+检测指定方块或实体是否具有能匹配给定[[槽位源]]的槽位。
+
+; 语法
+: {{cd|(if{{!}}unless) slots block <-{}-source> <slots> ''-> execute''}}（方块）
+: {{cd|(if{{!}}unless) slots entity <-{}-source> <slots> ''-> execute''}}（实体）
+
+; 参数
+: {{argument|source|block_pos}}（{{cd|block <-{}-source>}}时）
+:: 指定检测的方块的位置。
+:: {{arg desc|je=block_pos}}
+: {{argument|source|entity}}（{{cd|entity <-{}-source>}}时）
+:: 指定检测的实体。
+:: {{arg desc|je=entity|amount=multiple|type=entities}}
+: {{argument|slots|slot_source}}
+:: 指定检测的[[槽位]]或[[槽位源]]。槽位有效值取决于检测的方块或实体。
+:: {{arg desc|je=slot_source}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形之一，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* {{cd|<-{}-source>}}（{{cd|block}}）所指定的位置未加载或位于世界外。
+:* {{cd|<-{}-source>}}（{{cd|block}}）所指定的位置上不是[[方块实体]]。
+:* {{cd|<-{}-source>}}（{{cd|entity}}）无法选中一个或多个有效实体（指定玩家必须{{tr|在线|在線上}}）。
+:* {{cd|<slots>}}不是指定方块或实体的有效槽位。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|success}}返回1。{{cd|result}}返回：
+:* 匹配到的槽位总数（{{cd|if}}）。
+:* 1（{{cd|unless}}）。
+
+'''示例'''
+* {{cmd|link=none|execute if slots entity @n container.*}}：输出距离执行者最近的实体的容器槽位数量。
+
+=== (if|unless) stopwatch ===
+{{anchor|ifunlessstopwatch}}
+{{exclusive|section=1|java}}
+检测指定[[秒表存储格式|秒表]]的时间是否在指定范围内。
+
+; 语法
+: {{cd|(if{{!}}unless) stopwatch <id> <range> ''-> execute''}}
+
+; 参数
+: {{argument|id|resource_location}}
+:: 需要检测的秒表。
+:: {{arg desc|je=resource_location}}
+: {{argument|range|float_range}}
+:: 被检测秒表需要符合的范围。
+:: {{arg desc|je=float_range}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 若未通过测试或出现下列情形，终止执行后续子命令（不位于末尾）或执行失败（位于末尾）：
+:* ID为{{cd|<id>}}的秒表不存在。
+
+; 输出
+: 若位于末尾且执行成功，{{cd|d=pretty|success|result}}均返回1。
+
+'''示例'''
+* {{cmd|link=none|execute if stopwatch sw ..10}}：检测秒表{{cd|sw}}的时间是否在10秒内。
+
+== 存储子命令 ==
+{{anchor|store}}
+{{exclusive|section=1|JE}}
+存储子命令可以将最后一个子命令执行后产生的{{cd|result}}或{{cd|success}}值存储到指定位置。
+
+它与其他子命令一起处理，先行记录存储位置，不影响其他子命令。它能够将最后一个子命令执行后产生的返回值存储到指定位置（可以是[[记分板]]、NBT数据或[[Boss栏]]）。
+
+可用存入位置：
+* {{cd|[[#storeblock|block]]}}：将{{cd|result}}或{{cd|success}}存入指定方块实体的指定NBT标签内。
+* {{cd|[[#storebossbar|bossbar]]}}：将{{cd|result}}或{{cd|success}}存为Boss栏的当前值或最大值。
+* {{cd|[[#storeentity|entity]]}}：将{{cd|result}}或{{cd|success}}存入指定实体的指定NBT标签内。
+* {{cd|[[#storescore|score]]}}：将{{cd|result}}或{{cd|success}}存入指定分数持有者的指定记分项上。
+* {{cd|[[#storestorage|storage]]}}：将{{cd|result}}或{{cd|success}}存入指定存储容器的指定NBT标签内。
+
+=== store (result|success) block ===
+{{anchor|storeblock}}
+将{{cd|result}}或{{cd|success}}存入指定[[方块实体]]的指定NBT标签内。
+
+; 语法
+: {{el|je|short=1}}：{{cd|store (result{{!}}success) block <target> <path> (int{{!}}float{{!}}short{{!}}long{{!}}double{{!}}byte) <scale> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|target|block_pos}}
+:: 返回值需要存入的目标方块实体的坐标。
+:: {{arg desc|je=block_pos}}
+: {{el|je|short=1}}：{{argument|path|nbt_path}}
+:: 返回值需要存入的NBT路径。
+:: {{arg desc|je=nbt_path}}
+: {{el|je|short=1}}：{{cd|(int{{!}}float{{!}}short{{!}}long{{!}}double{{!}}byte)}}
+:: 返回值及目标NBT的数据类型。
+:: 只能为{{cd|d=pretty|int|float|short|long|double|byte}}之一。分别表示整型、单精度浮点型、短整型、长整型、双精度浮点型和字节型。
+: {{el|je|short=1}}：{{argument|scale|double}}
+:: 返回值存储时的倍率。
+:: {{arg desc|je=double}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 路径不存在时不进行操作。
+: 执行成功时，将返回值向下取整并乘以{{cd|<scale>}}后存储在{{cd|<target>}}处方块实体的{{cd|<path>}}NBT标签处，并存储为指定的[[NBT格式]]。
+
+=== store (result|success) bossbar ===
+{{anchor|storebossbar}}
+将{{cd|result}}或{{cd|success}}存为Boss栏的当前值或最大值。
+
+; 语法
+: {{el|je|short=1}}：{{cd|store (result{{!}}success) bossbar <id> (value{{!}}max) ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|id|resource_location}}
+:: 返回值需要存入的目标Boss栏的命名空间ID。
+:: {{arg desc|je=resource_location}}
+: {{el|je|short=1}}：{{cd|(value{{!}}max)}}
+:: 返回值需要存入的是Boss栏的当前值（{{cd|value}}）或是最大值（{{cd|max}}）。
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 执行成功时，将返回值向下取整，存为命名空间ID为{{cd|<id>}}的Boss栏的当前值或最大值。
+
+'''示例'''
+* {{cmd|long=1|link=none|execute '''store result bossbar minecraft:test value''' run scoreboard players get boss_health var}}：将虚拟玩家{{cd|boss_health}}的{{cd|var}}记分项中的分数转换为{{cd|minecraft:test}}Boss栏的当前值。
+
+=== store (result|success) entity ===
+{{anchor|storeentity}}
+将{{cd|result}}或{{cd|success}}存入指定[[实体]]的指定NBT标签内。与{{cmd|data}}一样，此命令不能修改玩家的NBT。
+
+; 语法
+: {{el|je|short=1}}：{{cd|store (result{{!}}success) entity <target> <path> (int{{!}}float{{!}}short{{!}}long{{!}}double{{!}}byte) <scale> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|target|entity}}
+:: 返回值需要存入的目标实体。
+:: {{arg desc|je=entity|amount=multiple|type=entities}}
+: {{el|je|short=1}}：{{argument|path|nbt_path}}
+:: 返回值需要存入的NBT路径。
+:: {{arg desc|je=nbt_path}}
+: {{el|je|short=1}}：{{cd|(int{{!}}float{{!}}short{{!}}long{{!}}double{{!}}byte)}}
+:: 返回值及目标NBT的数据类型。
+:: 只能为{{cd|d=pretty|int|float|short|long|double|byte}}之一。分别表示整型、单精度浮点型、短整型、长整型、双精度浮点型和字节型。
+: {{el|je|short=1}}：{{argument|scale|double}}
+:: 返回值存储时的倍率。
+:: {{arg desc|je=double}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 路径不存在时不进行操作。
+: 执行成功时，将返回值向下取整并乘以{{cd|<scale>}}后存储在{{cd|<target>}}实体的{{cd|<path>}}NBT标签处，并存储为指定的[[NBT格式]]。
+
+'''示例'''
+* <code>/execute store result entity @n[type=pig] Motion[1] double 0.5 run scoreboard players get #temp var</code>：将虚拟玩家{{cd|#temp}}的{{cd|var}}记分项中的分数转换为{{nbt|double|双精度浮点数}}数据（同时乘以倍率0.5），作为最近一只猪的{{nbt|list|Motion}}内的第二个元素。
+
+=== store (result|success) score ===
+{{anchor|storescore}}
+将{{cd|result}}或{{cd|success}}存入指定分数持有者的指定记分项上。
+
+; 语法
+: {{el|je|short=1}}：{{cd|store (result{{!}}success) score <targets> <objective> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|targets|score_holder}}
+:: 返回值需要存入的目标分数持有者。
+:: {{arg desc|je=score_holder}}
+: {{el|je|short=1}}：{{argument|objective|objective}}
+:: 返回值需要存入的目标记分项名称。
+:: {{arg desc|je=objective}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+: 执行成功时，将返回值向下取整后存储在{{cd|<targets>}}持有的{{cd|<objective>}}分数中。
+
+'''示例'''
+* {{cmd|link=none|execute '''store result score #temp var''' run data get entity @s Motion}}：将执行者实体{{nbt|list|Motion}}内的元素数量存储在虚拟玩家{{cd|#temp}}的{{cd|var}}记分项中。
+
+=== store (result|success) storage ===
+{{anchor|storestorage}}
+根据{{cd|<path>}}确定{{cd|<target>}}[[命令存储]]中的NBT标签并存入来自子命令的[[#输出|输出值]]（{{cd|success}}或{{cd|result}}）。输出值将被乘以{{cd|<scale>}}后再存储。可存储为byte、short、int、long、float或double。若不存在{{cd|<target>}}命令存储，则创建一个新的{{cd|<target>}}命令存储。
+对于{{cmd|data}}等在聊天消息中提示为小数的命令，小数值都将在内部被向下取整为整数作为输出值。
+
+; 语法
+: {{el|je|short=1}}：{{cd|store (result{{!}}success) storage <target> <path> (int{{!}}float{{!}}short{{!}}long{{!}}double{{!}}byte) <scale> ''-> execute''}}
+
+; 参数
+: {{el|je|short=1}}：{{argument|target|resource_location}}
+:: 输出值需要存入的目标命令存储的命名空间ID。
+:: {{arg desc|je=resource_location}}
+: {{el|je|short=1}}：{{argument|path|nbt_path}}
+:: 输出值需要存入的目标[[NBT路径]]。
+:: {{arg desc|je=nbt_path}}
+: {{el|je|short=1}}：{{cd|(int{{!}}float{{!}}short{{!}}long{{!}}double{{!}}byte)}}
+:: 输出值及目标NBT的数据类型。
+:: 只能为{{cd|d=pretty|int|float|short|long|double|byte}}之一。分别表示整型、单精度浮点型、短整型、长整型、双精度浮点型和字节型。
+: {{el|je|short=1}}：{{argument|scale|double}}
+:: 输出值存储时的倍率。
+:: {{arg desc|je=double}}
+
+; 结果
+: 参数未正确指定时，视为语法错误。
+
+== run子命令 ==
+{{anchor|run}}
+要被执行的目标命令。
+
+; 语法
+: {{el|je|short=1}}：{{cd|run ...}}
+: {{el|be|short=1}}：{{cd|run <command: command>}}
+
+; 参数
+: {{el|je|short=1}}：{{cd|...}}
+: {{el|be|short=1}}：{{argument|be=1|command: command|unique_ptr<Command>}}
+:: 一条完整的[[命令]]。{{in|je}}不能以斜杠开头。
+
+; 技术细节{{only|JE}}
+: 将命令节点重置为[[Brigadier|命令调度器]]的根节点。
+: 注意：
+:: 命令调度器是在玩家开始输入以斜杠{{cd|/}}开头的消息时开始的。
+:: 命令节点是光标正在编辑的特定词（word）或项（entry），是一个命令或参数。
+:: 根节点在当前命令的第一个词之前出现。
+
+; 结果
+: 执行此命令。指定的命令执行成功时成功，失败时失败。
+
+== 更多示例 ==
+* 将所有快捷栏第一槽位物品带有[[效率]]魔咒的玩家传送到0, 64, 0：
+*: {{cmd|long=1|link=none|execute as @a if data entity @s Inventory[{Slot:0b}].components."minecraft: enchantments".levels."minecraft:efficiency" run tp @s 0 64 0}}{{only|JE}}
+* 在所有玩家眼睛前方三格召唤烟雾粒子效果：
+*: {{cmd|link=none|execute as @a at @s anchored eyes run particle smoke ^ ^ ^3}}{{only|JE}}
+* 让所有在[[水]]中的玩家在聊天框里说：“我的脚湿了！”：
+*: {{cmd|link=none|execute as @a at @s if block ~ ~ ~ water run say "我的脚湿了！"}}
+* 让所有“test”记分板未设置的玩家在聊天框里说：“分数已重置”：
+*: {{cmd|link=none|execute as @a unless score @s test {{=}} @s test run say "分数已重置"}}
+* 将距离最近的玩家3格内的所有猪扔向天空：
+*: {{cmd|long=1|link=none|execute at @p as @e[type{{=}}pig,distance{{=}}..3] run data merge entity @s {Motion:[0.0,2.0,0.0]} }}{{only|JE}}
+* 杀死所有没有头盔的僵尸：
+*: {{cmd|link=none|execute as @e[type{{=}}zombie] unless data entity @s equipment.head.id run kill @s}}{{only|JE}}
+
+== 视频 ==
+{{bv|BV1Ly4y1a7YG}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w07a|加入了{{cmd|link=none|execute}}命令。}}
+|{{HistoryLine|||dev=14w08a|在命令方块中运行的{{cd|run}}子命令现在会把成功值传回命令方块了。}}
+|{{HistoryLine||1.11|dev=16w32a|加入了[[方块状态]]支持。}}
+|{{HistoryLine||1.13|dev=17w45a|语法被拆分。}}
+|{{HistoryLine|||dev=17w45b|重制了{{cmd|link=none|execute store (result{{!}}success)}}。}}
+|{{HistoryLine|||dev=18w02a|加入了新的子命令以允许通过命令进行更多的控制。}}
+|{{HistoryLine|||dev=18w05a|加入了{{cmd|link=none|execute store (result{{!}}success) bossbar}}。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了{{cmd|link=none|execute (if{{!}}unless) data}}。}}
+|{{HistoryLine||1.15|dev=19w38a|加入了{{cmd|link=none|execute (if{{!}}unless) predicate}}。
+|加入了{{cmd|link=none|execute store (result{{!}}success) storage}}。}}
+|{{HistoryLine||1.19.3|dev=22w46a|加入了{{cmd|link=none|execute (if{{!}}unless) biome}}。}}
+|{{HistoryLine||1.19.4|dev=23w03a|加入了{{cmd|link=none|execute on}}、{{cmd|link=none|execute (if{{!}}unless) dimension}}和{{cmd|link=none|execute (if{{!}}unless) loaded}}。}}
+|{{HistoryLine|||dev=23w04a|为{{cmd|link=none|execute on}}加入了{{cd|origin}}关系。}}
+|{{HistoryLine|||dev=23w06a|加入了{{cmd|link=none|execute summon}}。}}
+|{{HistoryLine|||dev=pre1|加入了{{cmd|link=none|execute positioned over}}。}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了{{cmd|link=none|execute (if{{!}}unless) function}}。}}
+|{{HistoryLine|||dev=pre1|暂时移除了{{cmd|link=none|execute (if{{!}}unless) function}}。}}
+|{{HistoryLine||1.20.3|dev=23w41a|重新加入了{{cmd|link=none|execute (if{{!}}unless) function}}。}}
+|{{HistoryLine||1.20.5|dev=24w10a|加入了条件子命令{{cmd|link=none|execute (if{{!}}unless) items}}。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了条件子命令{{cmd|link=none|execute (if{{!}}unless) stopwatch}}。}}
+|{{HistoryLine||26.2|dev=pre-1|现在修饰子命令{{cmd|link=none|execute on owner}}对恼鬼也有效。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了条件子命令{{cmd|link=none|execute (if{{!}}unless) slots}}。
+|将{{cd|items}}条件子命令改为接受[[槽位源]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|link=none|execute}}。
+|此命令目前相当于其在[[Java版1.10]]的功能，但在{{cmd|link=none|execute}}中实体目标是可选的。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.10|exg=upcoming_creator_features|dev=1.19.10.20|更新了语法以近似匹配{{el|je}}。}}
+|{{HistoryLine||1.19.40|exg=upcoming_creator_features|dev=1.19.40.20|加入了{{cmd|link=none|execute rotated}}子命令。}}
+|{{HistoryLine|||dev=1.19.40.21|加入了{{cmd|link=none|execute align}}和{{cmd|link=none|execute facing}}子命令。}}
+|{{HistoryLine|||dev=1.19.40.23|加入了{{cmd|link=none|execute anchored}}和{{cmd|link=none|execute in}}子命令。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.23|1.19.10.20起的所有变更均不再属于[[实验性玩法]]。
+此前保存于[[命令方块]]内的{{cmd|execute|link=none}}旧语法不受影响。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.21|从{{cd|block}}条件子命令中移除了{{cd|data: int}}参数。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/execute]]
+[[en:Commands/execute]]
+[[es:Comandos/execute]]
+[[fr:Commandes/execute]]
+[[ja:コマンド/execute]]
+[[ko:명령어/execute]]
+[[pl:Polecenia/execute]]
+[[pt:Comandos/execute]]
+[[ru:Команды консоли/execute]]
+[[uk:Команди консолі/execute]]

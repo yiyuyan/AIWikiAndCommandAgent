@@ -1,0 +1,122 @@
+# 页面: Alpha世界格式
+# 来源: https://zh.minecraft.wiki/w/Alpha%E4%B8%96%E7%95%8C%E6%A0%BC%E5%BC%8F
+# 分类: 开发, 过时内容, 需要整理
+# 抓取时间: 2026-07-14 17:10:45
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|访问|存取}}
+{{outdated|此存档格式已在[[Java版Beta 1.3|Beta 1.3]]中被[[区域文件格式]]取代。|edition=java}}
+{{cleanup}}
+[[Java版Infdev|Infdev]]在开发过程中引入了新的数据存储挑战：由于其地图的大小（地球表面积的几倍），Infdev中生成的地形有可能在内存中占大约为235PB，即240,640TB。 因此，为了减少文件大小和内存使用，Notch决定将地形分成16×128×16块，并在不可见时将它们存储在磁盘上。此外，地形仅在玩家视角的渲染距离内生成，大大减少了保存大小，因为大多数玩家只能在合理的时间范围内搜索地图的一小部分。Alpha使用了这种技术，而因为其成功，[[Java版Beta|Beta]]和[[正式版]]仍然使用这一般概念。
+
+== 存档文件夹结构 ==
+Alpha存档实际上是一个包含至少一个名为'''{{Filename|level.dat}}'''的文件的文件夹。还有一个{{filename|[[#session.lock格式|session.lock]]}}文件，以确保一次只有一个Minecraft打开该存档。
+
+存档文件夹最多可包含64个子文件夹，每个子文件夹最多包含64个子文件夹。这些文件夹包含保存世界的地形和实体的区块文件。 每个区块文件由其区块位置xPos和zPos标识。区块文件名称的不同部分是通过获取xPos和zPos的[[wzh:Base 36|base36]]表示来获得的。放置区块文件的文件夹的名称可以通过获取xPos和zPos，模除64（或按63进行位AND运算）和转换为base36来找到。负坐标必须通过[[wzh:有符号数处理#补码|补码]]按位解释为正数。因此，-13被视为243（如果它的大小为一个字节）。
+
+例如，要查找位置为（-13，44）处的区块：
+* 第一个文件夹名为{{cd|base36(-13 % 64)}}，也就是{{cd|base36(243 % 64 {{=}} 51)}}，即"1f"。
+* 第二个文件夹名为{{cd|base36(44 % 64)}}。也就是{{cd|base36(44)}}，即"18"。
+* 区块文件名为{{cd|"c." + base36(-13) + "." + base36(44) + ".dat"}}。计算得"{{filename|c.-d.18.dat}}"。
+* 所以位于（-13，44）的区块文件存储在"{{filepath|1f/18/c.-d.18.dat}}"。
+每个区块都会独立于文件和文件夹名称记住其位置。请参阅[[#区块格式|下文]]，了解如何从文件数据中读取区块的位置。
+
+=== 维度 ===
+其他维度的保存方式与普通世界相同，但不是将世界文件混合在保存文件夹中，而是将文件存储在具有自己的区域和方块数据的其他子文件夹中。它们的名称以<code>DIM</code>开头，后跟维度ID。
+
+在Alpha中使用这些维度ID：
+{| class="wikitable"
+! ID !! 文件夹 !! 维度
+|-
+| 0 || {{filepath|saves/[世界]/}} || 正常世界（主世界），总是存储在不带<code>DIM</code>的世界文件夹中
+|-
+| -1 || {{filepath|saves/[世界]/DIM-1/}} || [[下界]]，在[[万圣节更新]]中加入
+|}
+
+=== session.lock格式 ===
+此文件包含了该存档最后一次进入时的时间戳。文件为一64字节以大端字节序格式的整值数据，为自1970年（标准时区）开始的以百为单位的毫秒数。
+
+与典型的lock文件不同，这一文件确保了'''最后'''访问这一世界的程序有读取和修改的权限。该过程通常如下所示：
+# 程序打开{{filename|session.lock}}
+# 程序在{{filename|session.lock}}写入当前时间戳
+# 程序对{{filename|session.lock}}的变化进行监控
+# 如果{{filename|session.lock}}内容发生变化，则程序中断并锁定世界。
+
+=== level.dat格式 ===
+{{filename|level.dat}}文件是一个GZip压缩的[[NBT]]文件，用于存储全局级别数据（时间、玩家生命、背包、速度和地图中的位置等）。最重要的是，它存储了地形生成器用于在运行中无缝生成更多地形的随机种子。
+
+这个文件有这个结构：
+<div class="treeview">
+* {{nbt|compound}} 根标签。
+** {{nbt|compound|Data}}：全局世界数据。
+*** {{nbt|long|LastPlayed}}：当玩家保存游戏时，存储Unix时间戳（以毫秒为单位）。
+*** {{nbt|long|SizeOnDisk}}：估计整个世界的大小（以字节为单位）。
+*** {{nbt|long|RandomSeed}}：为地形提供随机种子的随机数。
+*** {{nbt|int|SpawnX}}：世界的生成位置的X坐标。
+*** {{nbt|int|SpawnY}}：世界的生成位置的Y坐标。
+*** {{nbt|int|SpawnZ}}：世界的生成位置的Z坐标。
+*** {{nbt|long|Time}}：以刻为单位存储当前“一天中的时间”。每个实际秒数有20刻，每个Minecraft[[昼夜更替]]有24000刻，使整个周期长度为20分钟。0是白天的开始，12000是日落的开始，13800是夜晚的开始，22200是日出的开始，24000又是白天的开始。 存储在level.dat中的值总是在增加，并且可以大于24000，但“时间”总是模除“时间”字段值的24000。
+*** {{nbt|compound|Player}}：世界的[[单人游戏]]玩家。
+**** {{nbt|int|Dimension}}：玩家所在的维度。0是[[主世界]]，1是[[下界]]。
+**** {{nbt|list|Pos}}：3个TAG_Doubles的列表，用于玩家的X，Y和Z位置。
+**** {{nbt|list|Rotation}}：2个TAG_Floats的列表，用于玩家视角的偏航（Yaw）和俯仰（Pitch）。
+**** {{nbt|list|Motion}}：3个TAG_Doubles的列表，用于X，Y和Z运动，以米每刻为单位。
+**** {{nbt|byte|OnGround}}：1或0（true/false） — 如果玩家在地上为true。
+**** {{nbt|float|FallDistance}}：玩家掉落了多远。
+**** {{nbt|short|Health}}：玩家拥有的生命值。20为10颗心。
+**** {{nbt|short|AttackTime}}：玩家免受攻击的刻数。
+**** {{nbt|short|HurtTime}}：玩家被攻击后红色的刻数。
+**** {{nbt|short|DeathTime}}：玩家死亡的刻数 — 用于控制死亡动画。
+**** {{nbt|short|Air}}：玩家开始溺水之前的刻数。从300开始。
+**** {{nbt|short|Fire}}：当为负数时，玩家将被点燃之前的刻数。当为正数时，火扑灭前的刻数。
+**** {{nbt|int|Score}}：玩家的得分。该分数从未在Alpha或甚至beta中使用，因此该值无关紧要。
+**** {{nbt|list|Inventory}}：TAG_Compounds的列表，表示玩家背包中的物品。
+***** {{nbt|compound}} 背包物品
+****** {{nbt|byte|Slot}}：物品所在的槽。
+****** {{nbt|short|id}}：物品ID。
+****** {{nbt|short|Damage}}：物品的数据值，或工具的损伤值。
+****** {{nbt|short|Count}}：栈中此物品的编号。范围从-128到127。小于2的值不会在游戏中显示。
+</div>
+
+=== 区块格式 ===
+{{cleanup|section=1|需要参照[[Minecraft Wiki:格式指导/NBT及JSON]]规范化}}
+区块文件，如上所示，是GZip压缩的[[NBT]]文件。它们有这个结构：
+<div class="treeview">
+* {{nbt|compound}} 根标签。
+** {{nbt|compound|Level}}：该区块的世界数据。
+*** {{nbt|int|xPos}}：X区块坐标。
+*** {{nbt|int|zPos}}：Z区块坐标。
+*** {{nbt|bool|TerrainPopulated}}：Minecraft是否这个区块中产生了特殊的功能，例如树木、花朵、矿石、地牢。
+*** {{nbt|long|LastUpdate}}：区块最后加载时的刻。
+*** {{nbt|byte-array|Blocks}}：方块ID为32768字节，每个方块8位。
+*** {{nbt|byte-array|Data}}：方块数据为16384字节，每个方块4位。
+*** {{nbt|byte-array|BlockLight}}：方块光照为16384字节，每个方块4位。
+*** {{nbt|byte-array|SkyLight}}：天空光照为16384字节，每个方块4位。
+*** {{nbt|byte-array|HeightMap}}：高度地图信息为256字节，每个XZ列4位。用于加快天空光照计算。
+*** {{nbt|list|Entities}}：区块中的所有实体。
+**** {{nbt|compound}}：一个实体。
+***** 见[[实体数据格式]] — 并非所有信息都适用于Alpha。
+*** {{nbt|list|TileEntities}}：区块中的所有方块实体。
+**** {{nbt|compound}} 一个[[方块实体]]。
+***** 见{{slink|区块存储格式|计划刻存储格式}} — 并非所有信息都适用于Alpha。
+</div>
+
+== 参见 ==
+* [[Indev世界格式]]
+* [[Java版存档格式]]
+** [[区域文件格式]]
+*** [[区块存储格式]]
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:开发]]
+
+[[de:Spielstand-Speicherung/Alpha Level Format]]
+[[en:Java Edition Alpha level format]]
+[[es:Formato de mundo de Java Edition Alpha]]
+[[fr:Format de niveau de l'édition Java Alpha]]
+[[ja:Alphaレベルフォーマット]]
+[[nl:Alpha level formaat]]
+[[pt:Formato de nível da Edição Java Alpha]]
+[[ru:Alpha (формат карты)]]

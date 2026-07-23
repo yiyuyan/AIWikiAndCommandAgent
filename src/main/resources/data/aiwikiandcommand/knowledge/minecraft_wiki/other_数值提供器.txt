@@ -1,0 +1,173 @@
+# 页面: 数值提供器
+# 来源: https://zh.minecraft.wiki/w/%E6%95%B0%E5%80%BC%E6%8F%90%E4%BE%9B%E5%99%A8
+# 分类: 
+# 抓取时间: 2026-07-14 17:28:08
+# 原始 Wikitext 内容:
+
+<!--此页面会被其他页面嵌入，故不采用全文转换-->{{wip}}
+{{exclusive|java}}
+{{Split|数值提供器类型;数值提供器定义格式|reason=26.3-snapshot-3后二者为相异的注册表且有相异的内置项，似已异质}}
+'''数值提供器（Number Provider）'''允许游戏按一定的规则生成一个特定的数值。其在战利品表系统中使用。
+
+== 定义格式 ==
+{{inUntil|JE 26.3}}数值提供器只能内联在其他的文件中使用。
+
+{{inUpcoming|je 26.3}}数值提供器在游戏内使用{{cd|NUMBER_PROVIDER}}注册表，数据包路径为{{filepath|number_provider}}，即所有数值提供器定义文件都需要在{{filepath|-{}-data/<''命名空间''>/number_provider}}目录内定义，数值提供器标签则需要在{{filepath|-{}-data/<''命名空间''>/tags/number_provider}}目录内定义。
+
+数值提供器定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|int}}{{nbt|float}}{{nbt|compound}} 数值提供器{{until|je 26.3}}/JSON文件根节点{{upcoming|je 26.3}}
+** {{nbt condition|如果{{tr|类型|型別}}为{{nbt|int|整数}}或{{nbt|float|浮点数}}：则此数值提供器为<code>constant</code>类型，{{nbt|int}}{{nbt|float|value}}字段使用此字段的值。}}
+** {{nbt condition|如果{{tr|类型|型別}}为{{nbt|compound|{{tr|对象|物件}}}}：则表示单个数值提供器，格式如下：}}
+** {{nbt|string|type}}：（可能不存在，默认为<code>uniform</code>）数值提供器的类型。
+** 其他字段与数值提供器类型相关。
+</div>
+
+== 数值提供器类型 ==
+=== binominal ===
+{{tr|返回|回傳|返回}}服从[[wzh:二项分布|二项分布]]的随机数。
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>binomial</code><section begin="binomial"/>
+** {{nbt|int}}{{nbt|compound|n|required=1}}：进行独立重复的[[wzh:伯努利试验|伯努利试验]]的次数。
+*** {{nbt inherit/number provider}}
+** {{nbt|float}}{{nbt|compound|p|required=1}}：每次试验的成功概率。
+*** {{nbt inherit/number provider}}
+<section end="binomial"/></div>
+
+=== conditional ===
+{{added in development|jev=26.3|section=1}}
+检查一个条件是否为真并使用对应的数值提供器。
+
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>conditional</code><section begin="conditional"/>
+** {{nbt|compound}}{{nbt|list|predicate|required=1}}：要检查的谓词。
+*** 见[[谓词]]。
+** {{nbt|float}}{{nbt|compound|on_true|required=1}}：谓词为真时，要使用的数值提供器。
+*** {{Nbt inherit/number provider}}
+** {{nbt|float}}{{nbt|compound|on_false}}：谓词为假时，要使用的数值提供器。默认为0。
+*** {{Nbt inherit/number provider}}
+<section end="conditional"/></div>
+
+=== constant ===
+{{tr|返回|回傳|返回}}常数。
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>constant</code><section begin="constant"/>
+** {{nbt|int}}{{nbt|float|value|required=1}}：一个任意的确切数值。
+<section end="constant"/></div>
+
+=== enchantment_level ===
+根据[[战利品上下文]]提供的魔咒等级计算得出数值。
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>enchantment_level</code><section begin="enchantment_level"/>
+** {{nbt|float}}{{nbt|compound|amount|required=1}}：使用魔咒等级计算数值。
+*** {{nbt inherit/level based value}}
+<section end="enchantment_level"/></div>
+
+=== environment_attribute ===
+{{tr|返回|回傳|返回}}服务端[[环境属性]]的值。如果环境属性可以随位置变化，则需要战利品上下文提供的<code>origin</code>作为来源位置进行获取。
+
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>environment_attribute</code><section begin="environment_attribute"/>
+** {{nbt|string|attribute|required=1}}：（命名空间ID）要获取的环境属性。只能指定数据类型为浮点数或天体角度的环境属性，其他环境属性游戏会因无法转化为浮点数而解析失败。
+<section end="environment_attribute"/></div>
+
+=== number_dispatcher ===
+{{added in development|jev=26.3|section=1}}
+逐一检查所列情形并使用第一个{{tr|匹配|相符}}的情形中的数值提供器，若无{{tr|匹配|相符}}情形则使用默认数值提供器。
+
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>number_dispatcher</code><section begin="number_dispatcher"/>
+** {{nbt|list|cases|required=1}}：要检查的情形的列表。游戏会按定义顺序检查。
+*** {{nbt|compound}}：一种情形。
+**** {{nbt|compound}}{{nbt|list|predicate|required=1}}：要检查的谓词。
+***** 见[[谓词]]。
+**** {{nbt|float}}{{nbt|compound|number_provider|required=1}}：匹配此情形时要使用的数值提供器。
+***** {{Nbt inherit/number provider}}
+** {{nbt|float}}{{nbt|compound|default}}：默认使用的数值提供器。默认为0。
+*** {{Nbt inherit/number provider}}
+<section end="number_dispatcher"/></div>
+
+=== score ===
+{{tr|返回|回傳|返回}}指定记分项的分数。
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>score</code><section begin="score"/>
+** {{nbt|string}}{{nbt|compound|target|required=1}}：记分项数据源。如果直接指定目标，则需要战利品上下文提供的'''实体'''进行检测，值必须为战利品上下文提供的[[战利品上下文#实体目标|实体目标]]。如果不是直接指定目标，则标签内要附加下面的参数：
+*** {{nbt|string|type}}：数据源类型。需为<code>context</code>（当前上下文中的某项数据源）或<code>fixed</code>（固定来源）。
+*** {{nbt condition|如果 <code>type</code>取值为<code>context</code>，附加参数如下：}}
+*** {{nbt|string|target|required=1}}：记分项数据源，需要战利品上下文提供的[[战利品上下文#实体目标|实体目标]]进行检测。
+*** {{nbt condition|如果 <code>type</code>取值为<code>fixed</code>，附加参数如下：}}
+*** {{nbt|string|name|required=1}}：一个UUID或玩家名。
+** {{nbt|string|score|required=1}}：需要查询的记分项。
+** {{nbt|float|scale}}：（可选，默认为1.0）记分项的值将乘以该倍率后{{tr|返回|回傳|返回}}。
+<section end="score"/></div>
+
+=== storage ===
+{{tr|返回|回傳|返回}}某命令存储中某数据标签所提供的数值。
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>storage</code><section begin="storage"/>
+** {{nbt|string|storage|required=1}}：（命名空间ID）表示一个命令存储。
+** {{nbt|string|path|required=1}}：NBT路径，表示一个NBT标签。
+<section end="storage"/></div>
+
+=== summands ===
+{{tr|返回|回傳|返回}}若干数值提供器的和。
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>summands</code><section begin="summands"/>
+** {{nbt|list|summands|required=1}}：要作和的数值提供器。
+*** {{nbt|int}}{{nbt|float}}{{nbt|compound}}：一个数值提供器。
+**** {{nbt inherit/number provider}}
+<section end="summands"/></div>
+
+=== uniform ===
+{{tr|返回|回傳|返回}}两个值（含）之间均匀分布的随机数。
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>uniform</code><section begin="uniform"/>
+** {{nbt|int}}{{nbt|float}}{{nbt|compound|min|required=1}}：最小值。
+*** {{nbt inherit/number provider}}
+** {{nbt|int}}{{Nbt|float}}{{nbt|compound|max|required=1}}：最大值。
+*** {{nbt inherit/number provider}}
+<section end="uniform"/></div>
+
+=== weighted_list ===
+{{added in development|jev=26.3|section=1}}
+按权重分布随机使用一个数值提供器。
+
+<div class="treeview">
+* {{nbt|compound}} 数值提供器根节点
+** {{nbt|string|type}}：<code>weighted_list</code><section begin="weighted_list"/>
+** {{nbt|list|distribution|required=1}}：（不能为空）权重的分布。
+*** {{nbt|compound}}：一个数值提供器及其权重。
+**** {{nbt|float}}{{nbt|compound|data|required=1}}：一个数值提供器。
+***** {{Nbt inherit/number provider}}
+**** {{nbt|int|weight|required=1}}：此数值提供器的权重。必须是正整数。
+<section end="weighted_list"/></div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w43a|加入了数值提供器。}}
+|{{HistoryLine||1.17|dev=20w46a|加入了数值提供器<code>score</code>。}}
+|{{HistoryLine||1.20.5|dev=24w12a|加入了数值提供器<code>storage</code>。}}
+|{{HistoryLine||1.21|dev=24w18a|加入了数值提供器<code>enchantment_level</code>。}}
+|{{HistoryLine||26.1|dev=snapshot-1|加入了数值提供器<code>summands</code>。}}
+|{{HistoryLine|||dev=pre-1|加入了数值提供器<code>environment_attribute</code>。}}
+|{{HistoryLine||26.3|dev=snapshot-3|现在数值提供器可以作为单独的文件定义在数据包中。
+|旧的数值提供器被重命名为数值提供器类型。
+|加入了数值提供器类型<code>number_dispatcher</code>、<code>conditional_value</code>和<code>weighted_list</code>。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]

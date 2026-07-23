@@ -1,0 +1,555 @@
+# 页面: 凋灵
+# 来源: https://zh.minecraft.wiki/w/%E5%87%8B%E7%81%B5
+# 分类: Boss生物, Java版独有信息, 亡灵生物, 使用DynamicPageList4的页面, 使用简单计算器的页面, 基岩版独有信息, 实体, 敌对生物, 教育版独有信息, 有未知版本的History模板的页面/Java版
+# 抓取时间: 2026-07-14 17:20:25
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|通过|透過}}
+{{about|生物|状态效果|凋零|其他含义|凋灵（消歧义）{{!}}{{tr|凋灵|凋零}}（消歧义）}}
+{{Infobox entity
+|group1=普通
+|1-1=Wither.png
+|group2=蓝色
+|2-1=Blue Wither.png
+|group3=生命值降低一半以下
+|3-1=Wither with Armor.png
+|group4=正在生成
+|4-1=Wither Invulnerable with Armor.png
+|*-1size=250px
+|invimage=Wither Spawn Egg
+|health=
+'''{{el|je}}：'''<br>
+{{hp|300}}<br>
+'''{{el|be}}：'''<br>
+简单：{{hp|300}}<br>普通：{{hp|450}}<br>困难：{{hp|600}}
+|behavior=敌对生物
+|classification=亡灵生物
+|armor={{armor|4}}
+|damage=
+''爆炸伤害值取100%接触率时''<br>
+'''爆炸（生成时{{only|for=和死亡时|be|short=1}}）：'''<br>{{AutoDmg|98}}<br>
+'''爆炸（生命值降低一半以下时）{{only|be|short=1}}：'''<br>
+{{AutoDmg|99}}<br>
+'''弹射物（{{EntityLink|Wither Skull}}）{{only|je|short=1}}：'''<br>{{AutoDmg|8|d2d=造成10秒{{EffectLink|Wither}}II|d3d=造成40秒{{EffectLink|Wither}}II}}<br>
+'''弹射物（{{EntityLink|Wither Skull}}）{{only|be|short=1}}：'''<br>
+普通：造成10秒{{EffectLink|Wither}}II<br>困难：造成40秒{{EffectLink|Wither}}II<br>
+'''爆炸（{{EntityLink|Wither Skull}}）{{only|je|short=1}}：'''<br>{{AutoDmg|10}}<br>'''爆炸（{{EntityLink|Wither Skull}}）{{only|be|short=1}}：'''<br>{{AutoDmg|15}}<br>
+'''近战攻击（冲撞）{{only|bedrock|short=1}}：'''<br>{{AutoDmg|15}}
+|size=
+'''{{el|je}}：'''<br>
+高度：3.5格<br>宽度：0.9格<br>
+'''{{el|be}}：'''<br>
+高度：3.0格<br>宽度：1.0格
+|spawn=由玩家或[[发射器]]建造
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{relevant tutorial|打败凋灵|凋灵笼}}
+{{quote|新Boss：凋灵。快给自己合成尿不湿吧，朋友。|[[骇人更新]]宣传海报标语}}
+
+'''凋灵（Wither）'''是一种由玩家召唤，会浮在空中且向玩家和生物发射凋灵之首的[[亡灵]]敌对生物，同时也是[[下界之星]]的唯一来源。
+
+== 生成 ==
+{{FakeImage|align=none|{{BlockGrid|scale=2|w=wither-skeleton-skull|s=soul sand|www|sss| s }}|可生成凋灵的结构图示|style=max-width:106px}}
+
+如图所示的结构可以召唤凋灵：将4个[[灵魂沙]]或[[灵魂土]]在任意方向上摆成T形，然后在T形上部的3块灵魂沙或灵魂土上各放置一个[[凋灵骷髅头颅]]。T形的两个角落必须是[[空气]]。最后一个放置的方块必须是凋灵骷髅头颅，可以由[[玩家]]或[[发射器]]放置。灵魂沙和灵魂土可以混用，凋灵骷髅头颅以及整个结构也可以朝任意的方向放置。
+
+和平难度下不会生成凋灵，即使结构摆放正确。
+
+{{in|be}}凋灵总是会在结构底端处生成（向X+偏移最多3个方块来寻找合法生成点），生成位置与头颅位置和周边环境有关。
+{{-|left}}
+
+=== 更新区域 ===
+{{exclusive|java|section=1}}
+当已存在一个完整的凋灵结构但没有生成凋灵时（由于方块放置顺序或先前有多余方块干扰），玩家能在特定区域再放置一个凋灵骷髅头颅来“更新”结构生成凋灵。
+
+更新区域的具体范围为：以凋灵结构的头部一行方块为起点，向X轴负方向（西）、Z轴负方向（北）以及向下各扩展2格。除开结构本身所需的空气方块。
+
+若[[发射器]]周围有完整的凋灵结构，或是仅缺失头部的凋灵结构（头部位置为空气或其他方块，其余位置满足要求），且发射器面对的位置在更新区域内（也包括结构本身空气方块的位置），发射器就能将凋灵骷髅头颅放置在面前，即使这样做可能无法生成凋灵。
+
+<gallery widths="300px" heights="200px" mode="nolines">
+Wither creation update area.png|一些凋灵结构的更新区域（视角向北）
+</gallery>
+
+== 掉落物 ==
+{{DropTable|name=Wither
+|{{DropLine|name=Nether Star}}
+}}
+
+凋灵{{only|for=被杀死|BE}}/{{only|for=被[[玩家]]或被驯服的[[狼]]杀死|JE}}时，会掉落{{xp|50}}。
+
+{{in|be}}不同于其他生物，凋灵只有在死亡动画结束后才会掉落其掉落物。
+
+{{in|je}}凋灵掉落下界之星的行为是被硬编码的，其无法通过数据包更改。<ref>{{bug|MC-149589}}</ref>
+
+== 行为 ==
+{{see also|Tutorial:打败凋灵}}
+{{Filetr|Bossbar of Wither.png|frame|凋灵的Boss栏|class=pixel-image}}
+{{Filetr|HealthBarComparison.png|缩略图|300px|[[末影龙]]和凋灵的Boss栏的不同}}
+
+=== 生成 ===
+在生成后的{{only|for=11秒内|JE}}或{{only|for=10秒内|BE}}，凋灵在其Boss栏上表现为生命值从0开始逐渐提升。在此期间，凋灵不会受到任何常规类伤害，也无法移动和攻击。{{in|je}}凋灵会在此过程的开始获得一个暂时的“凋灵护甲”效果，其视觉体积会在此过程中逐渐增大（但判定箱保持不变），呈现出蓝色外观并产生蓝色粒子效果；而{{in|be}}凋灵的外观会在此过程中由纯白色平滑过渡到蓝色正常纹理，并不断旋转。在[[生命值]]即将充满时，凋灵会在蓝色和黑色之间闪烁，随后创造一场以自身为中心、爆炸威力为7的大[[爆炸]]，摧毁附近的方块并对附近的生物造成至多{{hp|99}}的伤害，同时播放一段生成音效。{{in|je}}此音效属于全局声音事件，当游戏规则{{gamerule|global_sound_events}}被设为{{cd|true}}时，同一世界内的所有玩家在任何维度、任何位置都能听到此音效。在此之后，凋灵会开始攻击邻近的生物，并且可以受到伤害。
+
+{{in|je}}通过[[刷怪蛋]]或命令生成的凋灵不会有上述行为，而是直接发起攻击。
+
+凋灵不会自然消失。
+
+=== 攻击 ===
+{{See also|凋灵之首}}
+
+凋灵与大多数生物（包括生存模式和冒险模式下的玩家）敌对，除了以下生物：
+* [[亡灵生物]]
+** {{EntitySprite|Zombie}} {{EntitySprite|Zombie Villager}} {{EntitySprite|Husk}} {{EntitySprite|Drowned}} {{EntitySprite|Zombified Piglin}} [[僵尸]]及其变种
+** {{EntitySprite|Skeleton}} {{EntitySprite|Stray}} {{EntitySprite|Bogged}} {{EntitySprite|Wither Skeleton}} {{EntitySprite|Parched}} [[骷髅]]及其变种
+** {{EntitySprite|Skeleton Horse}} {{EntitySprite|Zombie Horse}} [[骷髅马]]和[[僵尸马]]
+** {{EntitySprite|Camel Husk}} [[骆驼尸壳]]
+** {{EntitySprite|Phantom}} [[幻翼]]
+** {{EntitySprite|Zoglin}} [[僵尸疣猪兽]]
+** {{EntitySprite|zombie nautilus}} [[僵尸鹦鹉螺]]
+** {{EntitySprite|Wither}} 其他凋灵
+* {{EntitySprite|Ghast}} [[恶魂]]
+* {{EntitySprite|armor stand}} [[盔甲架]]
+* {{only|ee|be|for={{EntitySprite|Agent}} [[智能体]]}}
+* {{nbt|bool|Invulnerable}}为<code>true</code>的生物
+
+在不考虑反击行为的前提下，以下生物会尝试攻击凋灵：
+* {{EntitySprite|Iron Golem}} [[铁傀儡]]
+* {{EntitySprite|Snow Golem}} [[雪傀儡]]
+* {{only|bedrock|for={{EntitySprite|Wolf}} [[狼]]}}
+* {{EntitySprite|Piglin}} [[猪灵]]
+* {{EntitySprite|Piglin Brute}} [[猪灵蛮兵]]
+* {{EntitySprite|Zoglin}} [[僵尸疣猪兽]]
+* {{EntitySprite|Vindicator}} [[卫道士#“Johnny”卫道士|“Johnny”卫道士]]
+* {{EntitySprite|Warden}} [[监守者]]（对凋灵的愤怒值达到80及以上时）
+
+其中雪傀儡和僵尸疣猪兽无法对凋灵造成伤害。
+
+被凋灵杀死的生物会在死亡处放置一株[[凋灵玫瑰]]，{{in|be}}该行为必须是被凋灵直接的伤害击杀，而{{in|je}}则可以是间接传递的伤害来源标签。若放置位置不合适，或{{gamerule|mob_griefing|mobGriefing}}为<code>false</code>时，则生成为[[物品（实体）|掉落物]]。
+
+==== Java版 ====
+[[File:Blue Wither 2.png|alt=凋灵的蓝色护盾|thumb|凋灵生成时出现的蓝色护盾]]
+
+凋灵有两种主要行为状态：'''平静'''和'''战斗'''。
+
+'''平静'''
+* 当凋灵没有锁定攻击目标时，其处于'''平静'''状态。
+* 在此状态下，凋灵会以贴地飞行的方式四处游荡。如果游戏难度为普通或困难，凋灵的左右两个附属头会向随机方向发射蓝色[[凋灵之首]]。当凋灵受到伤害时，随机发射蓝色凋灵之首的频率会提高。此效果仅与受到伤害的频率有关，与受到伤害的数值大小无关。
+* 凋灵在尝试以随机方向发射蓝色凋灵之首时，更倾向于水平线向上偏移30度，向下偏移60度的扇形范围方向，而与任何一个凋灵头的朝向无关。
+
+'''战斗'''
+* 凋灵会主动追逐并攻击侦测范围内的目标。当凋灵找到攻击目标时，其进入'''战斗'''状态。
+* 在发现目标后，凋灵会在目标上方徘徊并快速发射[[凋灵之首]]。它的每个头颅都可以独立攻击，这使得它可以同时攻击三个生物或玩家。中间的头控制着凋灵的移动。在普通或困难难度下，中间的头有0.1％的概率发射与黑色凋灵之首不同的蓝色凋灵之首。
+* 当目标与凋灵的水平距离超过3格时，凋灵会飞向目标。
+* 凋灵的攻击范围是以自身[[邊界箱]]包围盒向水平方向膨胀半径20格，垂直方向膨胀半径8格的包围盒。虽然凋灵的三个头可以独立攻击，但其攻击范围相同，当攻击范围内存在可攻击目标时会共同攻击。需要注意的是，若修改生物[[属性]]{{cd|follow_range}}来限制这个范围，则只有中间控制移动的头的侦测范围会受到限制，两个附属头的侦测范围（也即是攻击范围）不会受其影响。
+* 当目标出现在凋灵的视野及其攻击范围内时，凋灵中间的头将每2秒发射一次凋灵之首；两侧的附属头各在0.45-1秒后首次发射凋灵之首，此后每隔2-3秒发射一次凋灵之首。
+* 当有方块阻挡了凋灵的视野时，凋灵会在一定范围内持续搜寻并移动到合适的位置，以使自己重获视野。若未搜寻到合适的位置，则会在目标上空徘徊。在这种状态下，凋灵的飞行姿态与空闲时的游荡相似。
+* 在战斗状态下，只有当凋灵受到无来源伤害（如窒息、[[闪电]]、[[喷溅型治疗药水]]等造成的伤害），且游戏[[难度]]为普通或困难时，两个附属头才会尝试随机发射蓝色凋灵之首，但相比于平静状态下积极尝试发射，战斗状态下的尝试频率会消极许多。与'''平静'''状态下类似，随机发射这一行为仅与受到伤害的频率有关，与受到伤害的数值大小无关。
+* 如果凋灵中间的头对目标产生了敌意，且该目标与凋灵的距离超过30格时，凋灵将会匀速且缓慢地追击目标，并不再上升或下降。其左右两个附属头会因为超出攻击范围而不攻击。
+
+凋灵每秒恢复{{hp|1}}生命值。凋灵每通过发射凋灵之首杀死一个生物将恢复{{hp|5}}生命值。
+
+当生命值减至一半（{{hp|150}}）以下时，凋灵会获得“凋灵护甲”效果。该效果使凋灵免疫射出的[[箭]]和投掷的[[三叉戟]]对它的伤害，但凋灵仍会受到[[潜影弹]]和[[羊驼唾沫]]的伤害。在此状态下，凋灵只能以与目标相同的高度飞行。当凋灵的生命值恢复到一半以上，“凋灵护甲”效果会自动消失，凋灵会重新尝试在竖直方向上与目标保持距离。
+
+凋灵拥有发亮的纹理，在暗处也清楚可见，但不会影响其周围方块的实际[[亮度]]。
+
+==== 基岩版 ====
+凋灵生成后，天空光照会立即下降至11，黑暗的云会出现，类似于雷暴天气，直至凋灵死后才会恢复正常。尽管能自燃的[[亡灵生物]]仍会自燃，但此时可以种植[[蘑菇]]。
+
+不论是否发现目标，在普通及更高难度时，凋灵会往随机方向发射蓝色凋灵之首。
+
+凋灵生成后其进入第一阶段。凋灵在发现目标后会尝试提升飞行高度，使自己高于目标数格。凋灵将循环运行以下流程：首先会开始攻击。在攻击期间，它将向目标依次发射3个黑色[[凋灵之首]]和1个蓝色凋灵之首。此后的2秒内，凋灵不会有任何行为。在这之后，它将暂时锁定自身的高度，快速位移至目标周围的随机位置，再进行若干次小幅度位移，每次移动都会折返方向。当它在位移时丢失目标可能出现反复抽搐的现象，必须落在地面并隔一段时间才会恢复正常，若它在抽搐时锁定了一个目标，它会以几乎为传送的速度回到之前丢失目标时位移锁定的位置。
+
+在生命值降至一半及以下后，凋灵会进入第二阶段。它将获得“凋灵护甲”效果，快速落到地面并制造一场大爆炸，同时生成3只凋灵骷髅（简单难度下除外），由此生成的凋灵骷髅并不会援助凋灵，但被生成出它们的凋灵误伤后不会进行反击。而此时的凋灵免受射出的箭、投掷的三叉戟、潜影弹以及羊驼唾沫的伤害。
+
+进入第二阶段后，凋灵的飞行高度上限将大幅降低。凋灵发现目标后，将循环运行以下流程：首先会发射一轮[[凋灵之首]]，发射完的3秒后再发射第二轮凋灵之首。此后的4秒内，凋灵不会有任何行为。之后，凋灵将发动冲撞攻击，它会放平它的身体，向目标突进数十格，同时破坏和伤害冲撞路径上的方块与生物。
+
+凋灵刚进入二阶段落地产生爆炸之后会有4秒飞行能力瘫痪的时间，若在此时发起冲撞，那么它就会不受控制地向下冲撞数十格。<ref>{{bug|MCPE-173205}}</ref>
+
+除简单难度外，凋灵发射[[凋灵之首]]的射速由当前生命值决定。默认射速为1秒/发；当其生命值不足现阶段的{{frac|2|3}}后，射速提升至0.5秒/发；当其生命值不足现阶段的{{frac|1|3}}后，射速提升至0.25秒/发。简单难度下，凋灵的射速永远为1秒/发。
+
+当凋灵的目标在较远处或隔着障碍物对凋灵造成伤害后，它会立即暂停所有行为并直接开始位移或冲撞（取决于凋灵处于哪个阶段），之后会继续之前被暂停的行为，比如发射了三个凋灵之首后触发了该现象，剩下的那个凋灵之首总是会在位移之后补齐。若触发该现象的时候凋灵刚好进入二阶段，不管凋灵处于什么状态都必然会发动冲撞。如果凋灵此时刚好在位移，它会沿着一阶段的位移路线发动冲撞，再急速下落。
+
+当目标为非玩家实体时，凋灵总是会尽量瞄准目标脚下射击，以使凋灵之首的爆炸伤害最大化。当目标为玩家时，凋灵发射凋灵之首的角度会有更大的偏移，因此凋灵攻击玩家时，凋灵之首难以造成最大的爆炸伤害。
+
+当凋灵攻击玩家时，凋灵的飞行高度会比攻击非玩家生物时更高。这一点在凋灵处于第二阶段时尤为明显。
+
+在任何时候，凋灵都可能向任意方向走动，其单次移动距离在5-15格不等，为附加行为。如果凋灵处于滞空状态，那么实际移动距离将极大缩减，可忽略不计。
+
+在普通和困难难度下，凋灵处于攻击回合时，它的副首会主动攻击水平30格，垂直10格内未被障碍物阻挡且未被主首察觉的玩家，每个玩家最多激活一个副首来使其攻击该玩家。一个副首的射击间隔在2-3秒之间。在自身主首攻速为仅1秒/发时，一个副首在一次攻击回合内共会发射2次黑色凋灵之首；当主首攻速高于1秒/发时，一个副首在一次攻击回合内只能发射1次黑色凋灵之首。不同于凋灵的主首，副首可以察觉到隐身的玩家并攻击。
+
+当游戏重新渲染凋灵时，凋灵会重新播放生成动画（这只是视觉上的效果，不会影响凋灵的行为），若该凋灵处于第二阶段，那么在生成动画结束后将不会显示“凋灵护甲”。<ref>{{bug|MCPE-187724}}</ref>
+
+凋灵的数据被保存并加载时，凋灵冲撞前的准备时间将永久地从4秒降为2秒。
+
+当凋灵半径50格以内没有玩家（包括[[创造模式]]和[[旁观模式]]玩家<ref>{{bug|MCPE-188141}}</ref>）时，凋灵每秒恢复{{hp|1}}生命值。凋灵的生命值恢复到一半以上时，不会从第二阶段回退至第一阶段。
+
+当凋灵死亡时，其外观由蓝色正常纹理平滑过渡到纯白色，同时蓝白相间“凋灵护甲”时而穿插浮现，身体不断收缩膨胀，其死亡音效会反复播放。凋灵完全死亡后会制造一场和其生成时一致的大爆炸。
+
+=== 破坏方块 ===
+凋灵受到任意伤害时，会在{{convert|20}}后尝试强制摧毁自身一定范围内的方块（与方块硬度和游戏难度无关），但是不能摧毁以下方块{{fn|{{in|je}}由标签{{tagLink|blocks|wither_immune}}控制。}}：
+
+* [[基岩]]、[[强化深板岩]]、[[末地传送门方块]]、[[末地传送门框架]]、[[命令方块]]、[[结构方块]]、[[屏障]]、[[光源方块]]。
+* {{in|java}}[[末地折跃门方块]]、[[下界传送门方块]]、[[拼图方块]]、[[移动中的活塞]]、[[测试方块]]、[[测试实例方块]]。
+* {{in|BE|EE}}[[允许方块]]、[[拒绝方块]]、[[边界]]、[[结构空位]]。
+
+{{in|je}}这个范围为以自身躯干为中心3×4×3的方块，但不包含凋灵尾部下方的方块。{{in|be}}这个范围为以自身躯干东南角为中心4×6×4的方块。
+
+{{in|be}}凋灵发动冲撞时可持续破坏方块，其即时破坏范围为以自身躯干东南角为中心6×8×6的方块。除了受伤后本来摧毁不了的方块，凋灵冲撞时还无法破坏[[黑曜石]]。
+
+=== Boss栏 ===
+凋灵有与其相关的[[Boss栏]]显示其生命值，出现在游戏界面的上面。其Boss栏显示时，天空会稍稍变暗。每一只凋灵都会在屏幕上分别显示各自的Boss栏。{{in|je}}凋灵的Boss栏会在其距玩家水平距离76格及以内时出现，水平距离80格及以外时消失；{{in|be}}凋灵的Boss栏会在其距玩家55格以内时显示。
+
+=== 免疫 ===
+凋灵免疫火、熔岩、溺水和冰冻[[伤害]]。虽然凋灵能够摧毁它接触的大多数方块，但凋灵不能免疫窒息伤害。凋灵免疫一切来源于亡灵生物的伤害，但{{in|be|nc=1}}受到来自凋灵自身以外的所有伤害时都会[[#破坏方块|破坏方块]]，尽管对其免疫。
+
+凋灵免疫{{only|be|for=除瞬间伤害和瞬间治疗外}}所有的[[状态效果]]。
+
+=== 生物族群 ===
+{{main|亡灵生物}}
+
+凋灵是亡灵生物，被具有[[亡灵杀手]]魔咒的武器近战攻击时受到额外伤害，被[[瞬间伤害]]治疗，被[[瞬间治疗]]伤害，不会溺水，不被其他凋灵攻击。
+
+与多数亡灵生物不同，凋灵能够飞行，不会不受控地沉入水底。
+
+凋灵不会在阳光下[[着火]]。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Wither idle1.ogg
+|sound2=Wither idle2.ogg
+|sound3=Wither idle3.ogg
+|sound4=Wither idle4.ogg
+|subtitle={{tp|subtitles.entity.wither.ambient}}
+|source=敌对生物
+|description=空闲时随机播放此声音
+|id=entity.wither.ambient
+|translationkey=subtitles.entity.wither.ambient
+}}
+{{Sound table
+|sound=Zombie woodbreak.ogg
+|subtitle={{tp|subtitles.entity.wither.shoot}}
+|source=敌对生物
+|description=破坏方块
+|id=entity.wither.break_block
+|translationkey=subtitles.entity.wither.shoot
+}}
+{{Sound table
+|sound=Wither death.ogg
+|subtitle={{tp|subtitles.entity.wither.death}}
+|source=敌对生物
+|description=死亡
+|id=entity.wither.death
+|translationkey=subtitles.entity.wither.death
+}}
+{{Sound table
+|sound=Wither hurt1.ogg
+|sound2=Wither hurt2.ogg
+|sound3=Wither hurt3.ogg
+|sound4=Wither hurt4.ogg
+|subtitle={{tp|subtitles.entity.wither.hurt}}
+|source=敌对生物
+|description=受伤
+|id=entity.wither.hurt
+|translationkey=subtitles.entity.wither.hurt
+}}
+{{Sound table
+|sound=Wither shoot.ogg
+|subtitle={{tp|subtitles.entity.wither.shoot}}
+|source=敌对生物
+|description=射出凋灵之首
+|id=entity.wither.shoot
+|translationkey=subtitles.entity.wither.shoot
+}}
+{{Sound table
+|sound=Wither spawn.ogg
+|subtitle={{tp|subtitles.entity.wither.spawn}}
+|source=敌对生物
+|description=生成
+|id=entity.wither.spawn
+|translationkey=subtitles.entity.wither.spawn
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=mob.wither.idle1.wav
+|sound2=mob.wither.idle2.wav
+|sound3=mob.wither.idle3.wav
+|sound4=mob.wither.idle4.wav
+|source=敌对生物
+|description=空闲时随机播放此声音
+|id=mob.wither.ambient
+|typeid=ambient
+|soundvolume=0.2
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wither.hurt1.wav
+|sound2=mob.wither.hurt2.wav
+|sound3=mob.wither.hurt3.wav
+|sound4=mob.wither.hurt4.wav
+|source=敌对生物
+|description=受伤
+|id=mob.wither.hurt
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wither.death.wav
+|source=敌对生物
+|description=死亡（音量最大）
+|id=mob.wither.death
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wither.death.wav
+|source=敌对生物
+|description=死亡（音量最小）
+|id=mob.wither.death
+|typeid=death.min.volume
+|soundvolume=0.5
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wither.death.wav
+|source=敌对生物
+|description=死亡（音量中等）
+|id=mob.wither.death
+|typeid=death.mid.volume
+|soundvolume=0.75
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wither.spawn.wav
+|source=敌对生物
+|description=生成
+|id=mob.wither.spawn
+|typeid=spawn
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.wither.shoot.wav
+|source=敌对生物
+|description=发射凋灵之首
+|id=mob.wither.shoot
+|typeid=shoot
+|soundvolume=3
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.zombie.woodbreak.wav
+|source=敌对生物
+|description=破坏方块
+|id=mob.wither.break_block
+|typeid=break.block
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|displayname=凋灵
+|spritename=wither
+|spritetype=entity
+|nameid=wither
+|showentitytags=1|entitytags={{GameTag|entity|wither}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|displayname=凋灵
+|spritename=wither
+|spritetype=entity
+|nameid=wither
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+
+凋灵有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|Monster-Hunter;the-beginning?;the-beginning;it-spreads}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.kill_a_mob;adventure.kill_all_mobs;nether.summon_wither;story.deflect_arrow;adventure.kill_mob_near_sculk_catalyst}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w34a|[[File:Wither JE1 BE1.png|50px]] 加入了凋灵和凋灵的[[Boss栏]]。
+|此时凋灵无法正常生成。
+|[[Jeb]]没有完成它并把它隐藏在代码中，而其纹理可以在[[minecraft.jar|minecraft.jar/mob]]文件夹中找到。
+|凋灵只能通过编辑[[刷怪笼]]、[[mod]]之类第三方程序等方法来生成。}}
+|{{HistoryLine|||dev=12w34b|当凋灵的生命值低于{{frac|1|2}}时，将会获得凋灵护甲，并免疫箭伤。
+|凋灵之首的发射速度和移动速度增加了。}}
+|{{HistoryLine|||dev=unknown|在[[wzh:PAX游戏展|PAX]]上, Dinnerbone透露有可能会通过某种摆放[[凋灵骷髅头颅]]的方式来生成凋灵。<ref>https://www.youtube.com/watch?v=IqciEbjYd-I&t=03m07s</ref><ref>http://www.twitch.tv/pax2/b/330745811 (3:57:47处)</ref>}}
+|{{HistoryLine|||dev=12w36a|现在，凋灵可以通过在摆成“T”字形的灵魂沙上放置三个凋灵骷髅头颅来生成它。
+|凋灵现在在死亡时会掉落20点经验和一个[[下界之星]]。
+|凋灵的Boss栏名称现在会显示凋灵的名称。}}
+|{{HistoryLine|||dev=12w37a|凋灵在生命值加满后会大规模地爆炸。
+|当凋灵没有攻击目标时，有时会发射蓝色凋灵之首，蓝色凋灵之首移动得慢些，但会摧毁除[[基岩]]外的所有方块。}}
+|{{HistoryLine|||dev=12w38a|增加了凋灵破坏方块时的声音。}}
+|{{HistoryLine|||dev=12w42b|凋灵死亡时掉落的经验值从20点增加到50点。}}
+|{{HistoryLine|||dev=1.4|凋灵会发出各种各样的新声音了。}}
+|{{HistoryLine||1.4.4|dev=1.4.3|凋灵在和平难度下会被删除的漏洞被修复了。
+|此前，尝试在和平难度下生成凋灵会导致浪费灵魂沙和凋灵骷髅头颅。
+|凋灵不再会摧毁末地传送门框架。}}
+|{{HistoryLine||1.5|dev=13w05a|凋灵不再能乘坐矿车了。}}
+|{{HistoryLine||1.7.2|dev=13w37a|加入了生成凋灵和杀死凋灵的成就。}}
+|{{HistoryLine||1.8|dev=14w04a|现在可以通过发射凋灵骷髅头颅来生成凋灵。}}
+|{{HistoryLine|||dev=14w11b|凋灵稍微变得更矮。}}
+|{{HistoryLine|||dev=14w11b|更改了凋灵的碰撞箱。}}
+|{{HistoryLine|||dev=14w20a|凋灵不再能破坏[[屏障]]了。}}
+|{{HistoryLine|||dev=14w25a|凋灵处于无敌状态时可以移动了。<ref>{{bug|MC-57569|||Fixed}}</ref>}}
+|{{HistoryLine||1.8.1|dev=pre3|蓝色凋灵之首不再能破坏[[屏障]]了。}}
+|{{HistoryLine||1.9|dev=15w31a|凋灵的Boss栏改为紫色<code>purple</code>。}}
+|{{HistoryLine|||dev=15w46a|凋灵不再会在无敌时移动了。}}
+|{{HistoryLine|||dev=15w49a|凋灵不再能穿过传送门了。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID由<code>WitherBoss</code>更改至<code>wither</code>。}}
+|{{HistoryLine|||dev=16w38a|凋灵不再能摧毁[[结构方块]]和[[结构空位]]了。}}
+|{{HistoryLine|||dev=16w40a|标签<code>xTile</code>、<code>yTile</code>、<code>zTile</code>、<code>inTile</code>和<code>inGround</code>被从凋灵之首[[实体数据格式#弹射物|实体数据]]中移除。
+|<code>life</code>标签被弃用，但仍可被保存/读取。}}
+|{{HistoryLine|||dev=16w50a|被重命名的凋灵的Boss栏现在会显示其名称。<ref>{{bug|MC-83571|||Fixed}}</ref><ref>{{bug|MC-110234|||Fixed}}</ref>}}
+|{{HistoryLine||1.12|dev=pre3|凋灵不再能破坏[[活塞]]臂和[[末地折跃门方块]]了。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Wither JE2 BE2.png|50px]] 更改了纹理。
+|现在所有被凋灵杀死的生物的死亡处都会被放置一支[[凋灵玫瑰]]。}}
+|{{HistoryLine|||dev=18w44a|凋灵现在存在对应的[[战利品表]]。}}
+|{{HistoryLine||1.14|dev=19w08a|现在凋灵不再能看见[[隐身]]状态下的玩家。}}
+|{{HistoryLine||1.16|dev=20w07a|现在也可以用[[灵魂土]]代替[[灵魂沙]]召唤凋灵。}}
+|{{HistoryLine||1.17|dev=21w17a|现在凋灵免疫[[细雪]]的冰冻伤害。}}
+|{{HistoryLine||1.18|dev=21w37a|修复了凋灵在受到攻击前不会追逐玩家的漏洞。<ref>{{bug|MC-29274|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.3|dev=22w44a|现在凋灵能够通过[[凋灵刷怪蛋]]生成。}}
+|{{HistoryLine||1.21.2|dev=24w33a|凋灵之首现在会在撞击[[世界边界]]时破裂。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 4|[[File:Wither JE1 BE1.png|50px]] 加入了凋灵。
+|凋灵生命值降至50%时，会生成3只凋灵骷髅。
+|凋灵的攻击方式与{{el|je}}中的凋灵不同，且生命值在各个难度下有所不同。
+|当凋灵附近50格内没有玩家时会缓慢回复生命值。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.2|作为一个版本独有特性，蓝色凋灵之首现在像恶魂火球一样可被玩家反弹。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|实体ID由<code>wither.boss</code>更改为<code>wither</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Wither JE2 BE2.png|50px]] 更改了纹理。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.9|被凋灵杀死的生物现在会掉落[[凋灵玫瑰]]。}}
+|{{HistoryLine||1.16.0|dev=1.15.0.51|凋灵生成和死亡时的爆炸不再破坏黑曜石。<ref>{{bug|MCPE-59502|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=1.16.0.51|现在可以用[[灵魂土]]召唤凋灵了。}}
+|{{HistoryLine||1.16.20|dev=1.16.20.50|现在拥有凋灵护甲状态的凋灵在被治疗后可以回复另一半的生命值。在此之前，当凋灵生命值低于一半而获得凋灵护甲后无法回复另一半的生命值。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.56|现在凋灵免疫[[细雪]]的冰冻伤害。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.20|现在凋灵能够通过[[凋灵刷怪蛋]]生成。}}
+|{{HistoryLine||1.20.40|dev=1.20.40.21|凋灵Boss栏的颜色由粉色<code>pink</code>更改为紫色<code>purple</code>，以近似匹配{{el|je}}。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|现在凋灵生成时的外观会从白色平滑过渡到正常纹理，死亡时的外观会从正常纹理平滑过渡到白色。
+|现在凋灵生成时不再能移动。<ref>{{bug|MCPE-48265|||Fixed}}</ref>}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|switch=1.0.1|[[File:Wither JE1 BE1.png|50px]] 加入了凋灵。}}
+|{{HistoryLine||xbox=TU60|xbone=CU51|ps3=1.64|psvita=1.64|ps4=1.64|wiiu=Patch 30|switch=none|更改了凋灵的行为。
+|当其生命值只有一半时会发生爆炸并召唤3-4只凋灵骷髅，跟[[基岩版]]一样会冲刺攻击。
+|凋灵不再能自然回复生命值了。}}
+|{{HistoryLine|new3ds}}
+|{{HistoryLine||1.3.12|[[File:Wither JE1 BE1.png|50px]] 加入了凋灵。}}
+}}
+
+== 你知道吗 ==
+* 据[[Jeb]]说，凋灵的设计灵感来自《[[wzh:泰拉瑞亚|泰拉瑞亚]]》中玩家主动召唤boss的机制。“Wither”这个名字则来源于''Whispers in Akarra''（Jeb制作的一个游戏）里的一个中-{}-毒咒语。<ref>https://minecraft.net/en-us/article/meet-wither</ref>
+* 凋灵的简体中文译名“凋-{}-灵”为该生物引发的[[状态效果]]“凋-{}-零”与“亡-{}-灵”的谐音混成词。但凋-{}-灵对应英文原名并非混成词，英文的凋-{}-灵“Wither”与状态效果凋-{}-零“Wither”为同一词，一语双关。
+* 有一幅[[画]]上画有[[灵魂沙]]和[[凋灵骷髅头颅]]搭成的凋灵生成结构，暗示了召唤凋灵的方法。
+* 如果凋灵受到虚空伤害，它会狂乱地发射蓝色凋灵之首。
+* 凋灵的生命高于上限的一半时，其会尝试在目标生物的几格高处悬停。这意味着试图建造或是攀爬到高处以用剑攻击凋灵几乎不可能。
+** 如果凋灵与[[烈焰人]]交战，烈焰人会尝试向上飞，飞到凋灵上面，凋灵也会飞上去来保持与烈焰人的距离，这样造成了两个生物一起攀升，直到到达世界高度限制处（凋灵之首不再生成处）、碰到天花板、任意一方受到伤害或者烈焰人消失。
+* 尽管凋灵高3.5格，长3格，宽1格，但是它的碰撞箱只有3.5格高，1格长，1格宽。
+** 准确数据为：2.844格高（可变）、3格长、1.719格宽（亦可变）。
+* 凋灵的图案出现在了[[雕纹红砂岩]]的四个侧面中。
+* [[Minecraft: Story Mode]]里有一个叫做“[[Story Mode:凋灵风暴|{{tr|凋灵风暴|凋零風暴}}]]”的怪物。它的生成结构中心的灵魂沙方块被[[命令方块]]取代。
+* 尽管凋灵没有可见的脚，其仍能产生脚步声。<ref>{{bug|MC-92623}}</ref>
+* 在Java版的愚人节玩笑版本[[Java版3D Shareware v1.34|3D Shareware v1.34]]中，凋灵会掉落红色钥匙。
+* 据市场合作伙伴经理Quinn所述，凋灵的名字为“Simmons?”，这与末影龙的名字“Jean?”类似。<ref>https://www.minecraft.net/en-us/article/ask-mojang-episode--4</ref>
+** 该名字是“Summon”（召唤）的谐音双关，因为凋灵是由玩家召唤生成的。
+* {{in|be}}凋灵的“凋灵护甲”会叠加显示[[闪电苦力怕]]的蓝色电弧纹理；{{in|je}}凋灵的“凋灵护甲”不会显示此纹理。
+* {{in|be}}当使用特殊手段（如{{cmd|damage}}命令）使凋灵被黑色凋灵之首伤害时，会导致凋灵的飞行能力暂时瘫痪从而不受控制地落下，并使凋灵迟迟无法终止冲撞行为，约4秒后恢复正常。这种现象在凋灵完成进入第二阶段时的爆炸后也会出现。
+* {{in|be}}多人游戏下凋灵的两个副头会始终面向正南方向，主头则保持正常的行为。
+* {{in|be}}凋灵出生时的无敌状态不免疫虚空伤害。若在它解放前对它造成虚空伤害，并导致血条在半血以下时，凋灵会拥有凋灵护甲，但解放后消失。这样就能获得一个全程只有一阶段，但是位移前的准备时间从2秒升为4秒的凋灵了。
+
+== 画廊 ==
+<gallery>
+File:WitherPotionEffect.png|凋灵之首给予凋零状态效果
+File:Wither Shield.png|挡住箭的凋灵护甲
+File:Wither recipe.png|展示如何生成凋灵的大图
+File:Pink Wither.png|[[Minecraft 2.0]]中的友好凋灵——一只愚人节玩笑生物。注意后面的普通凋灵
+File:Wit.png|凋灵充能完成后制造的大坑
+File:The Wither Attacking Horses.jpg|凋灵在攻击[[马]]
+File:Wither attacking a sheep.jpg|凋灵在攻击羊
+File:WitherAttack.png|凋灵在攻击村庄
+</gallery>
+
+=== 其他媒体 ===
+<gallery>
+File:Pretty Scary Update Poster.png|[[骇人更新]]中凋灵的推广艺术作品
+File:Wither Storm With Two Other Progenies.jpg|凋灵风暴，[[故事模式]]中的凋灵变种
+File:Wither boss Mobestiary.jpg|[[Minecraft丛书]]中里面的凋灵插图
+File:LEGO Wither.jpg|[[乐高Minecraft]]中的凋灵
+</gallery>
+
+== 注释 ==
+{{fnlist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|Mobs}}
+
+[[Category:敌对生物]]
+[[Category:Boss生物]]
+[[Category:亡灵生物]]
+
+[[cs:Wither]]
+[[de:Wither]]
+[[en:Wither]]
+[[es:Wither]]
+[[fr:Wither]]
+[[it:Wither]]
+[[ja:ウィザー]]
+[[ko:위더]]
+[[nl:Wither]]
+[[pl:Wither]]
+[[pt:Wither]]
+[[ru:Иссушитель]]
+[[th:วิทเธอร์]]
+[[uk:Візер]]

@@ -1,0 +1,96 @@
+# 页面: 命令/recipe
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/recipe
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Redirect|Recipe|配方系统|配方}}
+{{Infobox command
+|name=recipe
+|oplevel=2\1
+|becheat=1
+}}
+
+给予或剥夺（解锁或锁定）玩家的[[配方]]。
+
+== 语法 ==
+* '''Java版'''
+: <code>recipe give <targets> *</code>
+:: 为玩家给予（解锁）所有配方。
+: <code>recipe take <targets> *</code>
+:: 剥夺（锁定）玩家的所有配方。
+: <code>recipe give <targets> <recipe></code>
+:: 为玩家给予（解锁）指定配方。
+: <code>recipe take <targets> <recipe></code> 
+:: 剥夺（锁定）玩家的指定配方。
+
+* '''基岩版'''
+: <code>recipe give <player: target> *</code>
+: <code>recipe give <player: target> "*"</code>
+:: 为玩家给予（解锁）所有配方。
+: <code>recipe take <player: target> *</code>
+: <code>recipe take <player: target> "*"</code> 
+:: 剥夺（锁定）玩家的所有配方。
+: <code>recipe give <player: target> <recipe: string></code>
+:: 为玩家给予（解锁）指定配方。
+: <code>recipe take <player: target> <recipe: string></code>
+:: 剥夺（锁定）玩家的指定配方。
+
+== 参数 ==
+{{argument|targets|entity|player: target|CommandSelector<Player>}}
+: 指定要给予或剥夺配方的玩家。
+:{{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+{{argument|recipe|resource_location|recipe: string|basic_string}} 
+: 指定要给予或剥夺的配方。
+: {{arg desc|je=resource_location}}{{IN|be}}必须为一个配方的ID，命名空间不可省略（如果有）或添加（如果没有），参见[https://learn.microsoft.com/en-us/minecraft/creator/commands/commands/recipe?view=minecraft-bedrock-stable#values 此官方文档]。
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><targets></code>或<code>player: target</code>无法选中至少一个玩家（指定的玩家必须在线上）|fail|fail}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器|N/A|fail}}
+{{Result table|cmd=/recipe ... *<br>/recipe ... "*"{{only|be|short=1}}|未能给予/剥夺配方（所有配方已经拥有/都未拥有）|fail|succeed}}
+{{Result table|cmd=/recipe ... <recipe><br>/recipe ... <recipe: string>|配方ID不正确||fail}}
+{{Result table|未能给任何玩家给予/剥夺配方（指定的配方已经被所有指定玩家拥有/未被任何指定玩家拥有）}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|从每个玩家处给予/剥夺的配方总数。}}
+{{Output table|edition=be|执行失败|cmd=|0}}
+{{Output table|cmd=/recipe ... *<br>/recipe ... "*"|执行成功|指定的玩家数量}}
+{{Output table|cmd=/recipe ... <recipe: string>|执行成功|配方发生变更的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 随机剥夺一名玩家全部的配方：<code>/recipe take @r *</code>
+* 给予所有玩家铁剑的合成配方：<code>/recipe give @a minecraft:iron_sword</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=17w13a|加入了{{cmd|recipe|link=none}}命令。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.10|dev=1.20.10.21|exg=recipe_unlocking|加入了{{cmd|recipe|link=none}}命令。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.20|exg=recipe_unlocking||更改了{{cmd|recipe|link=none}}的语法顺序以匹配{{el|je}}。}}
+|{{HistoryLine|||dev=1.20.20.21|exg=none|{{cmd|recipe|link=none}}不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.20.20.22|将目标参数{{cd|victim: target}}更改为{{cd|player: target}}。}}
+}}
+
+== 参见 ==
+* [[知识之书]]
+* {{cmd|gamerule doLimitedCrafting}} – 玩家是否只能用已解锁的配方来合成物品。
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/recipe]]
+[[en:Commands/recipe]]
+[[es:Comandos/recipe]]
+[[fr:Commandes/recipe]]
+[[ja:コマンド/recipe]]
+[[pt:Comandos/recipe]]
+[[ru:Команды консоли/recipe]]

@@ -1,0 +1,64 @@
+# 页面: 命令/teammsg
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/teammsg
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{exclusive|Java}}
+{{Infobox command
+|name=teammsg
+|alias=
+* {{cmd|tm}}
+|oplevel=0
+}}
+
+给命令的执行者实体所在的[[队伍]]全体成员发送消息。
+
+== 语法 ==
+: <code>-{}-teammsg <message></code>
+: <code>-{}-tm <message></code>
+
+== 参数 ==
+{{argument|message|message}}
+: 指定要显示的信息。
+: {{arg desc|je=message}}
+: 目标选择器只有在[[权限等级]]不低于2时才会被替换为选中的实体的名称。
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|命令执行者不是实体|fail}}
+{{Result table|命令执行者不在任何队伍内}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|队伍内玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 创建一个队伍{{cd|test}}，并让执行者加入，然后将所有可搜索到的实体名称发送给队伍中的所有实体（信息样式采用[[聊天类型]]{{cd|team_msg_command_outgoing}}）：
+: <syntaxhighlight lang=mcfunction>
+team add test
+team join test @s
+teammsg @e
+</syntaxhighlight>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=19w02a|加入了{{cmd|teammsg|link=none}}。}}
+|{{HistoryLine||1.19|dev=22w18a|{{cmd|teammsg|link=none}}命令发出的聊天信息现在会被签署。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/teammsg]]
+[[en:Commands/teammsg]]
+[[fr:Commandes#teammsg]]
+[[ja:コマンド/teammsg]]
+[[pt:Comandos/teammsg]]
+[[ru:Команды консоли/teammsg]]

@@ -1,0 +1,74 @@
+# 页面: Villages.dat格式
+# 来源: https://zh.minecraft.wiki/w/Villages.dat%E6%A0%BC%E5%BC%8F
+# 分类: 游戏文件, 过时内容
+# 抓取时间: 2026-07-14 17:18:43
+# 原始 Wikitext 内容:
+
+{{DISPLAYTITLE|{{filename|villages.dat}}格式}}
+{{About|用于存储村庄的门、玩家声望等内容的{{filename|villages.dat}}格式|存储生成村庄的{{filename|Village.dat}}的格式|结构生成数据文件格式}}
+{{outdated|edition=java}}
+
+'''{{filename|villages.dat}}'''、'''{{filename|villages_nether.dat}}'''和'''{{filename|villages_end.dat}}'''是游戏存储[[村庄]]相关数据的文件。
+
+== 存储格式 ==
+{{filename|villages.dat}}、{{filename|villages_nether.dat}}和{{filename|villages_end.dat}}位于{{filepath|-{}-<''存档根目录''>/data/}}目录下。
+
+这些文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}}：根标签。
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|int|Tick|existonsave=1|required=1}}：内部时钟。
+*** {{nbt|list|Villages|existonsave=1|required=1}}：村庄数据。
+**** {{nbt|compound}}：一个村庄。
+***** {{nbt|int|ACX|existonsave=1|required=1}}：所有房屋的X坐标之和。
+***** {{nbt|int|ACY|existonsave=1|required=1}}：所有房屋的Y坐标之和。
+***** {{nbt|int|ACZ|existonsave=1|required=1}}：所有房屋的Z坐标之和。
+***** {{nbt|int|CX|existonsave=1|required=1}}：村庄中心的X坐标。
+***** {{nbt|int|CY|existonsave=1|required=1}}：村庄中心的Y坐标。
+***** {{nbt|int|CZ|existonsave=1|required=1}}：村庄中心的Z坐标。
+***** {{nbt|int|Golems|existonsave=1|required=1}}：铁傀儡的数量。
+***** {{nbt|int|MTick|existonsave=1|required=1}}：最后一次有村民死于生物的攻击或当玩家在附近时与实体无关的伤害源的时间。
+***** {{nbt|int|PopSize|existonsave=1|required=1}}：[[村民]]的数量。
+***** {{nbt|int|Radius|existonsave=1|required=1}}：村庄的半径。
+***** {{nbt|int|Stable|existonsave=1|required=1}}：最后一次有房子被添加到了村庄里的时间。
+***** {{nbt|int|Tick|existonsave=1|required=1}}：内部时钟。
+***** {{nbt|list|Doors|existonsave=1|required=1}}：村庄内的门。
+****** {{nbt|compound}}：一个门。
+******* {{nbt|int|IDX|existonsave=1|required=1}}：X轴上门内侧的朝向。
+******* {{nbt|int|IDZ|existonsave=1|required=1}}：Z轴上门内侧的朝向。
+******* {{nbt|int|TS|existonsave=1|required=1}}：最后一次有村民在附近的时间。
+******* {{nbt|int|X|existonsave=1|required=1}}：X坐标。
+******* {{nbt|int|Y|existonsave=1|required=1}}：Y坐标。
+******* {{nbt|int|Z|existonsave=1|required=1}}：Z坐标。
+***** {{nbt|list|Players|existonsave=1|required=1}}：与此村庄相关的玩家数据。
+****** {{nbt|compound}}：一个与村民交易了或伤害了村民的玩家。
+******* {{nbt|string|Name|existonsave=1|required=1}}：玩家名称。
+******* {{nbt|int|S|existonsave=1|required=1}}：村民对玩家的态度。可为负。与村民交易时上升，伤害村民时下降。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此villages.dat文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+{{filename|villages.dat}}负责主世界的村庄数据，{{filename|villages_nether.dat}}负责下界的村庄数据，{{filename|villages_end.dat}}负责末地的村庄数据。
+
+当区块被卸载后村庄会被“遗忘”，并且不会保存到这些文件里，原因可能是村民没有被加载，因此它们不能“看见”门。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了villages.dat以保存主世界的村庄数据。}}
+|{{HistoryLine||1.8|dev=14w02a|现在会保存下界和末地的村庄数据。}}
+|{{HistoryLine||1.14|dev=19w11a|由于村庄相关的机制由[[兴趣点]]系统取代，游戏不再生成村庄数据文件。}}
+|{{HistoryLine||26.1|dev=snapshot-6|由于存档格式的更改，旧存档残留的村庄数据文件被删除。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Dorfdaten]]
+[[en:Villages.dat format]]
+[[fr:Format villages.dat]]
+[[nl:Villages.dat formaat]]
+[[ru:Формат Villages.dat]]

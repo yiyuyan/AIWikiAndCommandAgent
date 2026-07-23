@@ -1,0 +1,146 @@
+# 页面: 属性/弹性
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E5%BC%B9%E6%80%A7
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+{{Infobox attribute}}
+
+'''弹性（Bounciness）'''是控制生物碰撞后速度保留量的[[属性]]。
+
+== 行为 ==
+{{see also|实体#运动}}
+生物与方块或可碰撞实体发生碰撞后会损失速度，而此属性决定了速度的保留量。为便于表述，本文中的所有速度均指位移变化量Delta Movement。
+
+设生物碰撞前的速度为 <math>v_0</math>，碰撞后的速度为 <math>v_1</math>，此属性的计算值为 <math>B</math>。规定竖直方向上，向上为正。
+
+对于发生在水平方向上的碰撞，如果生物以潜行状态发生碰撞，则丢失对应方向上的所有速度；否则，碰撞后速度大小为碰撞前速度与此属性的乘积，即数值的绝对值相乘，方向与原方向相反：
+* <math>v_{1X} = - v_{0X} \cdot B</math>（X方向上发生碰撞时）
+* <math>v_{1Z} = - v_{0Z} \cdot B</math>（Z方向上发生碰撞时）
+
+对于发生在竖直方向上的碰撞：
+* 设生物{{attribute|gravity}}的计算值为 <math>G</math>。如果生物不受重力影响，则 <math>G</math> 视为0。
+* 获取生物正在站立的方块。这通常是生物正下方0.2格处的方块，实际上也不会判断是否真正“站”在方块上。但如果生物站在某个平面上且支撑实体的方块为[[栅栏]]（{{TagLink|block|fences}}）、[[墙]]（{{TagLink|block|walls}}）或[[栅栏门]]，则将这些支撑方块视为生物正在站立的方块。
+
+如果下列任一条件满足，则丢失Y方向上的所有速度：
+* <math>G + v_{0Y} > 0</math>
+** 此项条件用于防止生物在竖直方向上无限反弹：生物竖直方向上的速度<math>v_{0Y}</math>的绝对值在每次碰撞后都会减小（见下文），当<math>G</math>大于0时，<math>v_{0Y}</math>始终有减小的趋势，当<math>v_{0Y}</math>减小到负数且绝对值大于<math>G</math>时，生物就会因为此条件判断失败而无法因为碰撞反弹；对于<math>G</math>小于0的情况同理。
+** 这也会导致生物<math>G</math>大于0且正在站在平面上静止时，若将重力减小且重力不足以令生物脱离地面，则生物会自行开始弹跳，而<math>v_{0Y}</math>也会因为重力减小削弱减小的趋势而增大，直到下一个平衡状态。
+* 生物处于潜行状态
+* 生物正在站立的方块为[[蜂蜜块]]（{{TagLink|block|suppresses_bounce}}）
+
+如果上述条件均不满足，设生物正在站立的方块的[[方块基本属性#弹性碰撞系数|弹性碰撞系数]]是 <math>BR</math>，则竖直方向上的速度保留量为 <math>R_Y = \max\left\{ B, BR \right\}</math>。
+
+如果 <math>R_Y</math> 不大于0，则：
+
+* <math>v_{1Y} = v_{0Y} \cdot R_Y</math>。
+
+由于正常的游戏流程中<math>R_Y</math>最小值为0，即事实上相当于丢失了竖直方向上的所有速度。
+
+如果 <math>R_Y</math> 大于0：
+* 设游戏截止到处理碰撞时，计算出的预期的竖直方向上的速度为 <math>v_{expY}</math>。{{info needed}}
+* 设生物{{attribute|air_drag_modifier}}的计算值为<math>A</math>。
+
+则：
+
+* <math>v_{1Y} = \left(\frac{v_{expY}}{v_{0Y}} \cdot G - v_{0Y}\right) \cdot \left(1 - \left(1 - k\right) \cdot A\right) \cdot R_Y</math>，其中<math>k</math>默认为0.98，但对于[[蜜蜂]]、[[鹦鹉]]或吸收了方块的[[硫方怪]]为0.91。
+
+== 适用的生物 ==
+{| class="wikitable sortable"
+! 生物
+! 基值
+|-
+| 所有生物
+| 0.0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| bouncy_add_bounciness
+| add_value (Op0)
+| 0.9
+| 否
+| [[硫方怪]]吸收方块后，且原型为弹性
+|-
+| explosive_add_bounciness
+| add_value (Op0)
+| 0.5
+| 否
+| 硫方怪吸收方块后，且原型为爆炸
+|-
+| fast_flat_add_bounciness
+| add_value (Op0)
+| 0.2
+| 否
+| 硫方怪吸收方块后，且原型为快速平移
+|-
+| fast_sliding_add_bounciness
+| add_value (Op0)
+| 0.1
+| 否
+| 硫方怪吸收方块后，且原型为快速滑行
+|-
+| high_resistance_add_bounciness
+| add_value (Op0)
+| 0.2
+| 否
+| 硫方怪吸收方块后，且原型为高阻力
+|-
+| hot_add_bounciness
+| add_value (Op0)
+| 0.5
+| 否
+| 硫方怪吸收方块后，且原型为高温
+|-
+| light_add_bounciness
+| add_value (Op0)
+| 1.0
+| 否
+| 硫方怪吸收方块后，且原型为轻盈
+|-
+| regular_add_bounciness
+| add_value (Op0)
+| 0.5
+| 否
+| 硫方怪吸收方块后，且原型为普通
+|-
+| slow_bouncy_add_bounciness
+| add_value (Op0)
+| 0.6
+| 否
+| 硫方怪吸收方块后，且原型为缓慢弹性
+|-
+| slow_flat_add_bounciness
+| add_value (Op0)
+| 0.2
+| 否
+| 硫方怪吸收方块后，且原型为缓慢平移
+|-
+| slow_sliding_add_bounciness
+| add_value (Op0)
+| 0.1
+| 否
+| 硫方怪吸收方块后，且原型为缓慢滑行
+|-
+| sticky_add_bounciness
+| add_value (Op0)
+| 0.0
+| 否
+| 硫方怪吸收方块后，且原型为黏性
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了弹性。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

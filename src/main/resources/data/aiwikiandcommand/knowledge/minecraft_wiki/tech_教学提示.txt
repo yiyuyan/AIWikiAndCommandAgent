@@ -1,0 +1,95 @@
+# 页面: 教学提示
+# 来源: https://zh.minecraft.wiki/w/%E6%95%99%E5%AD%A6%E6%8F%90%E7%A4%BA
+# 分类: Java版独有信息, UI, 基岩版独有信息, 待更新条目, 游戏内容
+# 抓取时间: 2026-07-14 17:27:29
+# 原始 Wikitext 内容:
+
+{{about|生存模式中的教学提示|命令|命令/gametips|由社区创建的教程页面|教程|[[原主机版]]中的教程世界|原主机版教程}}
+{{needs update|需要添加[[基岩版]]的相关教学提示信息。}}
+{{tr
+|{{FakeImage|{{Animate|Toast Tutorial Movement Simplified.png;Toast Tutorial Find Tree Simplified.png;Toast Tutorial Punch Tree Simplified.png;Toast Tutorial Open Inventory Simplified.png;Toast Tutorial Craft Planks Simplified.png;Toast Tutorial Social Interactions Simplified.png |300px}}|Java中所有的提示}}
+|{{FakeImage|{{Animate|Toast Tutorial Movement Traditional.png;Toast Tutorial Find Tree Traditional.png;Toast Tutorial Punch Tree Traditional.png;Toast Tutorial Open Inventory Traditional.png;Toast Tutorial Craft Planks Traditional.png;Toast Tutorial Social Interactions Traditional.png |300px}}|Java中所有的提示}}
+|{{FakeImage|{{Animate|Toast Tutorial Movement Traditional HK.png;Toast Tutorial Find Tree Traditional HK.png;Toast Tutorial Punch Tree Traditional HK.png;Toast Tutorial Open Inventory Traditional HK.png;Toast Tutorial Craft Planks Traditional HK.png;Toast Tutorial Social Interactions Traditional HK.png |300px}}|Java版中所有的提示}}
+}}
+
+'''教学提示（Tutorial hints）'''，或{{el|be}}的'''游戏提示（Game Tips）'''，是第一次游玩世界时，出现在屏幕右上角的[[弹窗]]。这用于指导不知道如何操作的新手玩家。
+
+[[File:HintProgress.gif|缩略图|一个展示了进度条的动画]]
+[[File:Game tip.png|缩略图|300px|基岩版中的一个游戏提示]]
+
+== 界面 ==
+当玩家进入本设备创建的第一个[[世界]]时，游戏会显示首个教学提示：移动提示。每个教学提示都会以弹窗的形式在屏幕右上角显示，包括标题、如何完成的描述以及一幅描述它的图片。教学提示完成后，该提示便会消失。下一个提示会在一定的时长后自动显示。“合成[[木板]]”提示完成后，所有提示都不会再次在任何世界中显示。
+
+教学提示通过完成所给予的简单任务来获取。除“{{tp|tutorial.open_inventory.title}}”和“{{tp|tutorial.craft_planks.title}}”之外的每个提示都拥有一个进度条，显示了玩家在当前提示中的进度，会在完成时填满。例如，对于“{{tp|tutorial.find_tree.title}}”提示，进度条一开始是空的，随着玩家开采原木，它会逐渐填满。当原木被破坏时，进度条也就完成了，提示便随之消失。
+
+[[社交屏幕]]提示在玩家初次进入[[多人游戏]]时出现。
+
+在[[创造模式]]中，只有一开始的两个提示会显示。
+
+{{in|be}}使用[[命令]]{{cmd|gametips}}可启用或禁用此设备上的游戏提示。
+
+== 游戏设置 ==
+教学提示的进度存储在{{filename|[[options.txt]]}}中。
+
+{{in|je}}教学步骤由<code>tutorialStep</code>控制，因此它在每台设备和每个目录下都是独立的。最后一个提示完成后，其值会存储为<code>none</code>。其他的提示，如社交屏幕提示使用不同的选项控制。
+
+== 提示列表 ==
+提示中的按键会随按键绑定一同更改，此处展示默认值。
+
+{{el|je}}：
+{| class="wikitable"
+|-
+! 图标 !! 游戏内标题/描述 !! 实际需求（若异） !! options.txt名称 !! 对应选项
+|-
+| [[File:Movement hint.png|class=pixel-image]] || {{tp|tutorial.move.title|'''W'''|'''A'''|'''S'''|'''D'''}}<br>{{tp|tutorial.move.description|{{tp|key.keyboard.space}}}} || 使用{{ctrl|移动}}键和{{control|跳跃}}键来四处移动。 || <code>tutorialStep</code> || <code>movement</code>
+|-
+| [[File:Find tree hint.png|class=pixel-image]] || {{tp|tutorial.look.title}}<br>{{tp|tutorial.look.description}} || || <code>tutorialStep</code> || <code>find_tree</code>
+|-
+| [[File:Punch tree hint.png|class=pixel-image]] || {{tp|tutorial.find_tree.title}}<br>{{tp|tutorial.find_tree.description}} || {{control|开采}}一个[[原木]]方块直至其被破坏。|| <code>tutorialStep</code> || <code>punch_tree</code>
+|-
+| [[File:Open inventory hint.png|class=pixel-image]] || {{tp|tutorial.open_inventory.title}}<br>{{tp|tutorial.open_inventory.description|'''E'''}} || 打开你的{{control|物品栏}}。|| <code>tutorialStep</code> || <code>open_inventory</code>
+|-
+| [[File:Craft planks hint.png|class=pixel-image]] || {{tp|tutorial.craft_planks.title}}<br>{{tp|tutorial.craft_planks.description}} || 将[[原木]]或[[竹块]]放入物品栏中的合成区，并取出输出的4个[[木板]]或2个[[竹板]]。|| <code>tutorialStep</code> || <code>craft_planks</code>
+|-
+| [[File:Social Interactions hint.png|class=pixel-image]] || {{tp|tutorial.socialInteractions.title}}<br>{{tp|tutorial.socialInteractions.description|P}} || || <code>joinedFirstServer</code>
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=17w16a|加入了教学提示。}}
+|{{HistoryLine|||dev=pre3|现在更智能地决定其是否显示。}}
+|{{HistoryLine||1.16.4|dev=pre1|[[File:Social Interactions hint JE1.png]] 加入了社交页面教程提示。}}
+|{{HistoryLine|||dev=pre2|[[File:Social Interactions hint JE2.png]] 更改了社交页面教程提示的图标。}}
+|{{HistoryLine||1.17|dev=21w05a|加入了[[收纳袋]]的使用提示弹窗。}}
+|{{HistoryLine||1.19.3|dev=pre3|将打开物品栏教学提示的图标从[[File:Open inventory hint JE1.png]]更改为[[File:Open inventory hint JE2.png]]，以匹配[[知识之书]]的纹理。}}
+|{{HistoryLine||1.20.3|dev=23w41a|将合成木板教学提示的图标从[[File:Craft planks hint JE1.png]]改为[[File:Craft planks hint JE2.png]]。}}
+|{{HistoryLine||1.21.2|dev=24w33a|移除了收纳袋的提示弹窗。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.70|dev=1.20.70.20|加入了教学提示弹窗。}}
+|{{HistoryLine||1.20.80|dev=1.20.80.20|在{{tr|通用|一般}}设置中加入了“{{tr|教程|教學課程}}”选项和“{{tr|重启教程|重新啟動教學}}”按钮，用于启用或重启教学提示。<ref>{{bug|MCPE-184669}}</ref>}}
+|{{HistoryLine||1.21.20|dev=1.21.10.21|为教学提示加入了聊天提示。}}
+}}
+
+=== 已移除的提示 ===
+{| class="wikitable"
+|-
+! 图标 !! 游戏内标题/描述 !! 实际需求（若异） !! options.txt名称 !! 对应选项
+|-
+| [[File:Bundle hint.png|class=pixel-image]] || {{tp|tutorial.bundleInsert.title}}<br>{{tp|tutorial.bundleInsert.description|P}} || || <code>hideBundleTutorial</code> || -
+|}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:UI]]
+
+[[de:Anleitungs-Hinweise]]
+[[en:Tutorial hints]]
+[[fr:Astuces]]
+[[ja:チュートリアルヒント]]
+[[pl:Podpowiedzi]]
+[[pt:Dicas de tutoriais]]

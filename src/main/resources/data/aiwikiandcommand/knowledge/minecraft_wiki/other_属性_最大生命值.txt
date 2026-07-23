@@ -1,0 +1,135 @@
+# 页面: 属性/最大生命值
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E6%9C%80%E5%A4%A7%E7%94%9F%E5%91%BD%E5%80%BC
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+{{Infobox attribute}}
+
+'''最大生命值（Max Health）'''是控制生物[[生命]]的[[属性]]。
+
+== 行为 ==
+{{main|生命}}
+大多数生物在生成时的生命值是最大生命值。
+
+不论生物如何恢复，其生命值一定不会高于其最大生命值。
+
+此属性计算值发生变化时，如果生物的生命值高于最大生命值，那么该生物的生命值设置为最大生命值。
+
+== 适用的生物 ==
+{{Hatnote|注意：此处列出的数据是{{el|je}}属性max_health的基值，因此无{{el|be}}数据。包含{{el|be}}数据的最大生命值数据见{{slink|生命#生物的最大生命值}}。}}
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Warden}}
+| {{Hp|500}}
+|-
+| {{EntityLink|Wither}}
+| {{Hp|300}}
+|-
+| {{EntityLink|Ender Dragon}}
+| {{Hp|200}}
+|-
+| {{EntityLink|Iron Golem}}<br>{{EntityLink|Giant}}<br>{{EntityLink|Ravager}}
+| {{Hp|100}}
+|-
+| {{EntityLink|Elder Guardian}}
+| {{Hp|80}}
+|-
+| {{EntityLink|Piglin Brute}}
+| {{Hp|50}}
+|-
+| {{EntityLink|Enderman}}<br>{{EntityLink|Hoglin}}<br>{{EntityLink|Wolf}}（驯服）<br>{{EntityLink|Zoglin}}
+| {{Hp|40}}
+|-
+| {{EntityLink|Camel}}<br>{{EntityLink|Camel Husk}}<br>{{EntityLink|Illusioner}}
+| {{Hp|32}}
+|-
+| {{EntityLink|Breeze}}<br>{{EntityLink|Guardian}}<br>{{EntityLink|Shulker}}<br>{{EntityLink|Turtle}}<br>{{EntityLink|Polar Bear}}
+| {{Hp|30}}
+|-
+| {{EntityLink|Witch}}
+| {{Hp|26}}
+|-
+| {{EntityLink|Zombie Horse}}
+| {{Hp|25}}
+|-
+| {{EntityLink|Evoker}}<br>{{EntityLink|Pillager}}<br>{{EntityLink|Vindicator}}
+| {{Hp|24}}
+|-
+| {{EntityLink|Donkey}}<br>{{EntityLink|Horse}}<br>{{EntityLink|Llama}}<br>{{EntityLink|mule}}<br>{{EntityLink|Trader Llama}}
+| {{HpRange|sort=1|15|30}}<br>均匀分布随机数
+|-
+| {{EntityLink|Magma Cube}}<br>{{EntityLink|Slime}}
+| data-sort-value="21" | ''[[史莱姆#cite_note-1|尺寸]]''{{^|2}}
+|-
+| {{EntityLink|Allay}}<br>{{EntityLink|Armor Stand}}<br>{{EntityLink|Blaze}}<br>{{EntityLink|Creeper}}<br>{{EntityLink|Drowned}}<br>{{EntityLink|Happy Ghast}}<br>{{EntityLink|Husk}}<br>{{EntityLink|Panda}}（非体弱）<br>{{EntityLink|Phantom}}<br>{{EntityLink|Player}}<br>{{EntityLink|Skeleton}}<br>{{EntityLink|Stray}}<br>{{EntityLink|Strider}}<br>{{EntityLink|Villager}}<br>{{EntityLink|Wandering Trader}}<br>{{EntityLink|Wither Skeleton}}<br>{{EntityLink|Zombie Villager}}<br>{{EntityLink|Zombie}}<br>{{EntityLink|Zombified Piglin}}
+| {{Hp|20}}
+|-
+| {{EntityLink|Bogged}}<br>{{EntityLink|Parched}}<br>{{EntityLink|Piglin}}<br>{{EntityLink|Spider}}
+| {{Hp|16}}
+|-
+| {{EntityLink|Nautilus}}<br>{{EntityLink|Skeleton Horse}}<br>{{EntityLink|Zombie Nautilus}}
+| {{Hp|15}}
+|-
+| {{EntityLink|axolotl}}<br>{{EntityLink|sniffer}}<br>{{EntityLink|vex}}
+| {{Hp|14}}
+|-
+| {{EntityLink|armadillo}}<br>{{EntityLink|cave spider}}<br>{{EntityLink|Copper Golem}}
+| {{Hp|12}}
+|-
+| {{EntityLink|Bee}}<br>{{EntityLink|Cat}}<br>{{EntityLink|Cow}}<br>{{EntityLink|Dolphin}}<br>{{EntityLink|Fox}}<br>{{EntityLink|Frog}}<br>{{EntityLink|Ghast}}<br>{{EntityLink|Glow Squid}}<br>{{EntityLink|Goat}}<br>{{EntityLink|Mooshroom}}<br>{{EntityLink|Ocelot}}<br>{{EntityLink|Panda}}（体弱）<br>{{EntityLink|Pig}}<br>{{EntityLink|Squid}}
+| {{Hp|10}}
+|-
+| {{EntityLink|Endermite}}<br>{{EntityLink|Sheep}}<br>{{EntityLink|Silverfish}}<br>{{EntityLink|Wolf}}（野生）
+| {{Hp|8}}
+|-
+| {{EntityLink|Bat}}<br>{{EntityLink|Parrot}}<br>{{EntityLink|Tadpole}}
+| {{Hp|6}}
+|-
+| {{EntityLink|Chicken}}<br>{{EntityLink|Snow Golem}}
+| {{Hp|4}}
+|-
+| {{EntityLink|Cod}}<br>{{EntityLink|Pufferfish}}<br>{{EntityLink|Rabbit}}<br>{{EntityLink|Salmon}}<br>{{EntityLink|Tropical Fish}}
+| {{Hp|3}}
+|-
+| {{EntityLink|Creaking}}
+| {{Hp|1}}
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| effect.health_boost
+| add_value (Op0)
+| 等级×4
+| 是
+| [[生命提升]]状态效果
+|-
+| leader_zombie_bonus
+| add_multiplied_total (Op2)
+| 1-4均匀分布随机数
+| 是
+| 领头僵尸加成，应用于僵尸、溺尸、尸壳、僵尸村民和僵尸猪灵
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了最大生命值属性，ID为<code>Max Health</code>。}}
+|{{HistoryLine|||dev=13w21a|最大生命值的ID重命名为<code>generic.maxHealth</code>。}}
+|{{HistoryLine||1.16|dev=20w14a|最大生命值的ID重命名为<code>generic.max_health</code>。}}
+|{{HistoryLine||1.20.5|dev=24w21a|[[生命提升]]状态效果的修饰符的ID现在是<code>effect.health_boost</code>，此前为<code>5D6F0BA2-1186-46AC-B896-C61C5CEE99CC</code>。
+|领头僵尸加成的修饰符的ID现在是<code>leader_zombie_bonus</code>，此前为随机UUID。}}
+|{{HistoryLine||1.21.2|dev=24w33a|最大生命值属性的ID从<code>generic.max_health</code>重命名为<code>max_health</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

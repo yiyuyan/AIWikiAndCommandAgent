@@ -1,0 +1,114 @@
+# 页面: Java版16w41a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8816w41a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:17
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=16w41a
+|image=16w41a.png
+|image2=Java Edition 16w41a Simplified.png\Java Edition 16w41a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2016年10月13日
+|jsonhash=7d4ece5f41496402d25258e5725b88cb6190284c
+|clienthash=89c23ff48bce1df436919147044be1668270e60b
+|serverhash=94f47b24edd154d89240e49d9b7371e74f433d19
+|parent=1.11
+|prevparent=1.10.2
+|prev=16w40a
+|next=16w42a
+|nextparent=1.11.1
+}}<onlyinclude>
+
+'''16w41a'''是[[Java版1.11]]的第11个快照，发布于2016年10月13日<ref name="blogpost_16w41a">{{cite|url=http://mojang.com/2016/10/minecraft-snapshot-16w41a/|archive-url=1|archive=1|title=Minecraft snapshot 16w41a|author=LadyAgnes|website=Mojang.com|date=Oct 13, 2016}}</ref>，主要修复了[[侦测器]]和[[活塞]]的漏洞。
+
+== 更改 ==
+=== 物品 ===
+'''[[鞘翅]]'''
+* 现在装备鞘翅时有独特的声音。
+
+=== 生物 ===
+'''[[羊驼]]'''
+* 羊驼的生成概率大幅下降。
+
+=== 常规 ===
+'''[[物品耐久|耐久]]槽'''
+* 更改[[快捷栏]]和背包里损坏物品显示的耐久槽的颜色。
+** 以前由并不明亮的橙色和黄色渐变组成，现在整个槽的颜色现在变得明亮，并且会从明亮的橙色渐变为黄色。
+** 耐久槽的背景现在由透明变为纯黑。
+
+== 修复 ==
+{{fixes|fixedin=16w41a|prefix=Minecraft|showdesc=1
+|;old
+|341|使用数字键会复制或删除创造模式中的快捷栏物品。
+|2912|使用数字键交换物品槽时，创造模式热键出现故障。
+|3892|视频设置不总会被保存。
+|11416|发射器/投掷器/活塞/命令方块放置不一致。
+|14861|使用命令传送会重置速度。
+|51662|活塞上推将沙子/沙砾破坏成实体。
+|59303|放在仙人掌旁边时，床头保持不变。
+|70806|数据值大于{{cd|0}}的方块在超平坦自定义中纹理丢失。
+|73529|<code>@e[type{{=}}!Player,c{{=}}1,r{{=}}1]</code>的错误消息不正确。
+|80692|凋灵攻击盔甲架。
+|96544|冰点温度不一致。
+|97982|与快捷栏相比，副手栏边框旋转了180度。
+|98009|鞘翅装备音效使用皮革盔甲装备音效。
+|99103|在演示模式下拥有药水效果时看不到剩余时间。
+|99603|狼、狗和豹猫掉出世界。
+|99661|召唤有乘客实体的拴绳结导致崩溃。
+|99814|{{cmd|help 1|link=none}}引发未知命令异常。
+|99900|<code>Enchantments boostrap</code>类在boostrap前被调用时出现错误信息。
+|101249|目标选择器忽略无效参数。
+|102683|“Elder Guardian Flops”在字幕中显示为“Guardian Flops”。
+|104901|工具耐久条颜色的可见性和外观异常。
+|105406|视图截锥体引发OpenGL泄漏。
+|105898|蘑菇和农作物导致床掉落；留下床的“头部”，与两格高植物相同。
+|108315|使用{{key|Esc}}关闭选项界面不会发送玩家设置的数据。
+|108378|使用热键制作缩小的地图不会更新地图。
+|108409|点击箭头与交易框时，村民会发出拒绝音效。
+|108588|结构方块在0,0保存结构时保存为无效数据。
+|108700|破坏木头的字幕不正确。
+|;dev
+|106296|声音字幕错误（<code>sounds.json</code>有误）。
+|107171|<code>maxEntityCramming</code>设置为1时异常。
+|107407|缩小探索家地图会使地图变为空白。
+|107410|侦测器块输出单个游戏刻脉冲，而不是单个红石刻脉冲。
+|107600|侦测器导致床的下半部分被破坏。
+|107662|当被活塞推动时，侦测器可能会导致方块卡在充能状态。
+|107730|侦测器充能空气方块。
+|107783|侦测器仅将红石粉激活至1级。
+|107795|红石连接到侧面的侦测器。
+|107907|羊驼口水不被保存为实体。
+|107934|侦测器的输入端面向玩家（与基岩版不同）。
+|107957|<code>Hopper：java.util.ConcurrentModificationException</code>异常。
+|107959|连续使用按钮与侦测器引发异常。
+|108216|复制并缩小探索家地图会使其失去结构标识。
+|;previous
+|108344|左撇子卫道士在攻击时举起右臂。
+|108348|不死图腾不被消耗/摧毁。
+|108349|当一个黏性活塞（朝上且上方有一个方块）被收回，而一个实体正站在上面时，该实体似乎会沉入地下。
+|108354|为羊驼装备箱子时字幕不正确。
+|108357|缺少自然生成的卫道士。
+|108358|当32个或更多活塞在一个方块中缩回时发生崩溃（<code>IllegalArgumentException</code>）。
+|108399|不死图腾激活时无字幕。
+|108480|“Johnny”卫道士试图攻击盔甲架。
+|108525|<code>shulker_box.png</code>默认GUI纹理高了1像素（167而非166像素）。
+|;private
+|99599|接收到<code>CPacketEntityAction.Action.STOP_SLEEPING</code>时，服务端不会检测玩家是否在睡觉。<ref name=blogpost_16w41a/>
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:16w41a]]
+[[en:Java Edition 16w41a]]
+[[es:Java Edition 16w41a]]
+[[fr:Édition Java 16w41a]]
+[[ja:Java Edition 16w41a]]
+[[nl:16w41a]]
+[[pt:Edição Java 16w41a]]
+[[ru:16w41a (Java Edition)]]

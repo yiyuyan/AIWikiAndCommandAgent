@@ -1,0 +1,64 @@
+# 页面: 命令/wsserver
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/wsserver
+# 分类: 命令, 基岩版独有信息, 基岩版独有特性, 教育版独有信息, 教育版独有特性, 需要信息
+# 抓取时间: 2026-07-14 17:22:17
+# 原始 Wikitext 内容:
+
+{{exclusive|education|bedrock}}
+{{Infobox command
+|name=wsserver
+|alias=
+* {{cmd|connect}}
+|oplevel=2{{only|be}}<br>0{{only|edu}}
+|cheat=1
+|nocmdblock=1
+}}
+{{infobox command
+|name=dedicatedwsserver{{info needed}}
+|oplevel=0
+|cheat=1
+|serveronly=1
+}}
+
+用于连接WebSocket服务器，WebSocket服务器使用命令信息与客户端交互，主要用于{{el|edu}}中。
+
+== 语法 ==
+: <code>wsserver <serverUri: text></code>
+: <code>connect <serverUri: text></code>
+: <code>dedicatedwsserver <server-address> <port></code>
+:: 连接到指定的WebSocket服务器。
+
+== 参数 ==
+{{argument|be=1|serverUri: text|CommandRawText}}和{{argument|be=1|serverUri: message|CommandRawText}}
+: 指向WebSocket服务器的URI。如果URI不等同于当前连接的服务器，则会先断开当前连接。域名解析在客户端完成。
+: {{arg desc|be=CommandRawText}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|未启用“{{tr|已启用 Websocket|已啟用 Websockets}}”选项||fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 示例 ==
+* 连接到本地服务器的8000端口：<code>/wsserver 127.0.0.1:8000</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|wsserver|link=none}}。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了{{cmd|connect|link=none}}，作为{{cmd|wsserver|link=none}}的别名。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.10|dev=1.19.10.20|加入了{{cmd|dedicatedwsserver|link=none}}。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.25|现在{{cmd|wsserver|link=none}}默认禁用，需要更改选项来启用。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/wsserver]]
+[[en:Commands/wsserver]]
+[[ja:コマンド/wsserver]]
+[[pt:Comandos/wsserver]]
+[[ru:Команды консоли/wsserver]]

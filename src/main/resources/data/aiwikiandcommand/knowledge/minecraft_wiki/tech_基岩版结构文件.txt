@@ -1,0 +1,53 @@
+# 页面: 基岩版结构文件
+# 来源: https://zh.minecraft.wiki/w/%E5%9F%BA%E5%B2%A9%E7%89%88%E7%BB%93%E6%9E%84%E6%96%87%E4%BB%B6
+# 分类: 含空白段落的条目, 基岩版, 基岩版独有特性, 游戏文件, 需要信息, 需要整理
+# 抓取时间: 2026-07-14 17:24:42
+# 原始 Wikitext 内容:
+
+{{cleanup}}
+{{Exclusive|Bedrock}}
+'''结构文件（{{filename|.mcstructure}}）'''是基岩版中[[结构方块]]在保存模式下导出、在加载模式导入的文件，本质上是一个未被压缩{{Info needed|需要验证是否与文件大小有关}}的[[NBT格式]]文件。
+
+== 文件结构 ==
+与其他NBT格式文件类似，结构文件由一个根标签包裹。其内部定义了元数据、方块排列方式等数据。
+<div class="treeview">
+* {{nbt|compound}}：结构文件的根标签。
+** {{nbt|int|format_version}}：当前结构的文件版本，一般为1。{{Info needed|需要在其他版本进行测试}}
+** {{nbt|list|size}}：结构的尺寸。
+*** {{nbt|int|x}}：结构沿'''X'''轴方向的尺寸。
+*** {{nbt|int|y}}：结构沿'''Y'''轴方向的尺寸。
+*** {{nbt|int|z}}：结构沿'''Z'''轴方向的尺寸。
+** {{nbt|compound|structure}}：结构的主要定义。
+*** {{nbt|list|block_indices}}：包含2个有符号整数列表，定义了结构中的方块排列方式。
+**** {{nbt|list|主层级方块索引}}：由方块基础调色板的'''方块索引'''组成的有符号整数列表，将结构中的方块模板按照'''X-Y-Z'''顺序扁平化得到<ref group="注">即按照<code>(0,0,0) (0,0,1) ... (0,1,0) (0,1,1) (0,1,2) ... (1,0,0) (1,0,1) ...</code>的顺序。
+</ref>。
+**** {{nbt|list|次层级方块索引}}：由方块基础调色板的'''方块索引'''和'''-1'''组成的有符号整数列表，在当前位置的方块组合无法仅使用主层级方块索引完整表示时<ref group="注">如存在[[双层台阶]]，[[含水方块]]等。</ref>才会记录，其他情况下为'''-1'''。
+*** {{nbt|list|entities}}：包含结构中的全部实体数据的列表，参见[[基岩版存档格式/实体格式]]。<ref group="注">即使结构中没有实体信息（如关闭了“包含实体”选项时），该项也仍会存在</ref>
+*** {{nbt|compound|palette}}：方块调色板，是对于结构内方块数据的具体定义。
+**** {{nbt|compound|default}}：目前仅有这个调色板{{Info needed}}。
+***** {{nbt|list|block_palette}}：方块基础调色板，包含了方块的类型、状态等信息。
+****** {{nbt|compound|0}}：例如调色板中0号方块。
+******* {{Bedrock nbt|方块}}
+***** {{nbt|compound|block_position_data}}：包含了特定位置方块的数据，为方块提供了更详细的信息。
+****** {{nbt|compound|0}}：例如主层级方块索引中位置为0的方块实体数据。
+******* {{nbt|compound|block_entity_data}}：[[基岩版存档格式/方块实体格式|方块实体]]。
+******** {{bedrock nbt|方块实体|block}}
+******* {{nbt|list|tick_queue_data}}：[[计划刻]]。
+******** {{nbt|compound}}：1个计划刻。
+********* {{nbt|int|tick_delay}}：计划刻的触发时间延迟。
+** {{nbt|list|structure_world_origin}}：结构的原点世界坐标。
+*** {{nbt|int|x}}：结构原点'''X'''坐标。
+*** {{nbt|int|y}}：结构原点'''Y'''坐标。
+*** {{nbt|int|z}}：结构原点'''Z'''坐标。
+</div>
+
+== 历史 ==
+{{empty section}}
+
+== 注释 ==
+{{notelist}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+
+[[Category:游戏文件]]

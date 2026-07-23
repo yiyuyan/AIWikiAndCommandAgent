@@ -1,0 +1,1898 @@
+# 页面: Java版标签/方块
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%A0%87%E7%AD%BE/%E6%96%B9%E5%9D%97
+# 分类: 
+# 抓取时间: 2026-07-14 17:15:25
+# 原始 Wikitext 内容:
+
+{{redirect|方块标签|{{el|be}}中的方块标签|基岩版标签/方块}}{{exclusive|je}}
+'''方块标签（Block Tags）'''是[[方块]]的组合。
+
+{{TOC|right}}
+
+== 使用 ==
+方块标签被用于[[进度]]和[[世界生成]]等文件，也用于命令测试方块。只要方块在标签中则测试成功。
+
+游戏定义了一系列方块标签，有些是同类方块的简单分组。部分标签被游戏内部用于特殊用途，如生物生成、世界生成和方块行为等。
+
+== 标签列表 ==
+{{tag list|mode=missing|block}}<!--自动检查缺失的模板，请勿移除-->
+
+=== acacia_logs ===
+* 用于{{TagLink|block|logs_that_burn}}。
+
+{{tag list|block|acacia_logs}}
+
+=== air ===
+* 用于[[冰霜行者]]魔咒检测水上方的空气。
+
+{{tag list|block|air}}
+
+=== all_hanging_signs ===
+* 用于{{TagLink|block|all_signs}}。
+
+{{tag list|block|all_hanging_signs}}
+
+=== all_signs ===
+{{tag list|block|all_signs}}
+
+=== ancient_city_replaceable ===
+* 用于决定[[远古城市]]在生成时能取代哪些方块。
+
+{{tag list|block|ancient_city_replaceable}}
+
+=== animals_spawnable_on ===
+* 用于动物的[[生成#周期生成|生成]]判断。
+
+{{tag list|block|animals_spawnable_on}}
+
+=== anvil ===
+* 用来决定哪些方块能够用来打开[[铁砧]]的GUI界面
+* 对其他方块无效，但是将默认元素移出该标签会使得GUI在消失之前快速闪烁。
+* 用来决定其下落方块形式是否伤害实体，用于死亡消息。
+* 用来判断一个方块是否会在使用或落地时“破坏”。
+* 在标签里添加其他可以自然掉落的方块不会使它们受影响，除非使用命令召唤。例如，添加<code>sand</code>后不会使自然落下的落沙伤害实体，但是通过命令生成的落沙会对实体有伤害。
+* 用于从掉落中的方块实体中读取NBT，以把没有设置<code>HurtEntities</code>NBT标签的掉落的方块实体的<code>hurtEntities</code>设置为<code>true</code>。
+* 用来决定方块是否有机会被通过铁砧GUI破损。
+
+{{tag list|block|anvil}}
+
+=== armadillo_spawnable_on ===
+* [[犰狳]]可以在这些方块上自然生成。
+
+{{tag list|block|armadillo_spawnable_on}}
+
+=== axolotls_spawnable_on ===
+* 用于[[美西螈]]生成判断。
+
+{{tag list|block|axolotls_spawnable_on}}
+
+=== azalea_grows_on ===
+* 用于决定[[杜鹃树]]可以在哪些方块上自然生成。
+* 用于决定[[杜鹃树]]在自然生成时其下方1格的[[缠根泥土]]能取代哪些方块。
+
+{{tag list|block|azalea_grows_on}}
+
+=== azalea_root_replaceable ===
+* 用于决定[[杜鹃树]]在自然生成时，下方大量团簇状的[[缠根泥土]]和[[垂根]]能取代哪些方块。
+
+{{tag list|block|azalea_root_replaceable}}
+
+=== badlands_terracotta ===
+* 用于决定犰狳可以在哪些陶瓦上自然生成。
+
+{{tag list|block|badlands_terracotta}}
+
+=== bamboo_blocks ===
+{{tag list|block|bamboo_blocks}}
+
+=== banners ===
+* 用于检测用地图点击该方块是否应该在地图上标记该点。将其他方块加入此标签会导致用地图点击时产生使用动画，但不会添加标记。
+* 用于{{TagLink|block|wall_post_override}}。
+
+{{tag list|block|banners}}
+
+=== bars ===
+* 包含所有栏杆。
+
+{{tag list|block|bars}}
+
+=== base_stone_nether ===
+* 持有该标签的方块在生成时可以被[[远古残骸]]替代。
+
+{{tag list|block|base_stone_nether}}
+
+=== base_stone_overworld ===
+* 用于决定作为地下矿石生成时，泥土、沙砾、花岗岩、闪长岩、安山岩、凝灰岩、黏土能取代哪些方块。
+* 用于决定“滴水石簇”能取代哪些方块。
+* 用于“滴水石簇”的生成。
+* 用于{{TagLink|block|dripstone_replaceable_blocks}}和{{TagLink|block|moss_replaceable}}。
+
+{{tag list|block|base_stone_overworld}}
+
+=== bats_spawnable_on ===
+* 用于决定[[蝙蝠]]可以在哪些方块上自然生成。
+
+{{tag list|block|bats_spawnable_on}}
+
+=== beacon_base_blocks ===
+* 拥有此标签的方块在[[信标]]下方放置时能激活信标。
+
+{{tag list|block|beacon_base_blocks}}
+
+=== beds ===
+* 用于确定猫是否会在上面坐下或躺下。
+* 用于检测村民的兴趣点。
+* 用于决定可以睡在哪些方块中。
+* 用于确定幼年村民可以跳到哪些方块上。
+* 向该标签添加不分前后两部分的方块可能会导致游戏崩溃。
+
+{{tag list|block|beds}}
+
+=== bee_attractive ===
+* 蜜蜂会尝试在这些方块上授粉。
+
+{{tag list|block|bee_attractive}}
+
+=== bee_growables ===
+* 当[[蜜蜂]]对这些植株进行授粉时，它们会生长一个阶段。
+* 从该标签中删除方块没有效果。
+
+{{tag list|block|bee_growables}}
+
+=== beehives ===
+* 确定当蜜蜂带有花粉时可以为哪些方块填充蜂蜜。
+* 该标签中的方块可以用带有玻璃瓶或剪刀的发射器清除蜂蜜。
+* 用于进度文件husbandry/safely_harvest_honey.json。
+
+{{tag list|block|beehives}}
+
+=== beneath_bamboo_podzol_replaceable ===
+* 定义适用于竹子下方可被灰化土替代的方块。
+
+{{tag list|block|beneath_bamboo_podzol_replaceable}}
+
+=== beneath_tree_podzol_replaceable ===
+* 定义适用于树木下方可被灰化土替代的方块。
+
+{{tag list|block|beneath_tree_podzol_replaceable}}
+
+=== birch_logs ===
+* 用于{{TagLink|block|logs_that_burn}}。
+
+{{tag list|block|birch_logs}}
+
+=== blocks_dolphin_jump ===
+{{added in development|jev=26.3|section=1}}
+* 海豚飞出水面时会将这些方块视为阻挡方块。
+
+{{tag list|block|blocks_dolphin_jump}}
+
+=== blocks_fluid_flow ===
+{{added in development|jev=26.3|section=1}}
+* 阻止流体流动的方块。
+
+{{tag list|block|blocks_fluid_flow}}
+
+=== blocks_lava_fire_spread ===
+{{added in development|jev=26.3|section=1}}
+* 阻止熔岩生成火的方块。
+
+{{tag list|block|blocks_lava_fire_spread}}
+
+=== blocks_motion ===
+{{added in development|jev=26.3|section=1}}
+{{tag list|block|blocks_motion}}
+
+=== blocks_motion_in_heightmap ===
+{{added in development|jev=26.3|section=1}}
+* 用于高度图<code>MOTION_BLOCKING</code>的计算。
+
+{{tag list|block|blocks_motion_in_heightmap}}
+
+=== blocks_motion_in_heightmap_no_leaves ===
+{{added in development|jev=26.3|section=1}}
+* 用于高度图<code>MOTION_BLOCKING_NO_LEAVES</code>的计算。
+
+{{tag list|block|blocks_motion_in_heightmap_no_leaves}}
+
+=== blocks_motion_no_leaves ===
+{{added in development|jev=26.3|section=1}}
+{{tag list|block|blocks_motion_no_leaves}}
+
+=== blocks_wind_charge_explosions ===
+* 能够阻挡[[风弹]]爆炸的方块。
+
+{{tag list|block|blocks_wind_charge_explosions}}
+
+=== buttons ===
+{{tag list|block|buttons}}
+
+=== camel_sand_step_sound_blocks ===
+* 当[[骆驼]]在拥有此标签的方块上行走时，播放[[骆驼#音效|骆驼在沙子上方行走]]音效。
+
+{{tag list|block|camel_sand_step_sound_blocks}}
+
+=== camels_spawnable_on ===
+* 指定哪些方块可以生成骆驼。
+
+{{tag list|block|camels_spawnable_on}}
+
+=== campfires ===
+* [[蜜蜂]]、[[鹦鹉]]和[[海龟]]将此标记的方块视为造成火焰伤害并相应地进行路径查找。
+* 营火使用这个标签来确定它们是否被点燃。
+* 打火石用这个标签来确定它是否能点燃营火。给此标签添加方块无效果。
+* 属于该标签的方块若具有{{cd|lit}}[[方块状态]]，则当被喷溅水瓶击中时，其{{cd|lit}}值将被设为false。
+
+{{tag list|block|campfires}}
+
+=== candle_cakes ===
+* 拥有这个标签的方块会被视为插上蜡烛的蛋糕并能被点燃，除非它们的{{cd|lit}}方块状态被设定为false。
+
+{{tag list|block|candle_cakes}}
+
+=== candles ===
+* 拥有这个标签的方块会被视为蜡烛并能够点燃，如果有{{cd|d=pretty|lit|waterlogged}}这两个方块状态且都是false。
+
+{{tag list|block|candles}}
+
+=== cannot_place_basalt_pillar_on ===
+{{added in development|jev=26.3|section=1}}
+
+{{tag list|block|cannot_place_basalt_pillar_on}}
+
+=== cannot_replace_below_tree_trunk ===
+
+{{tag list|block|cannot_replace_below_tree_trunk}}
+
+=== cannot_support_kelp ===
+* [[海带]]无法放置在这些方块上。
+
+{{tag list|block|cannot_support_kelp}}
+
+=== cannot_support_seagrass ===
+* [[海草]]或[[高海草]]无法放置在这些方块上。
+
+{{tag list|block|cannot_support_seagrass}}
+
+=== cannot_support_snow_layer ===
+* [[雪]]无法放置在这些方块上。
+
+{{tag list|block|cannot_support_snow_layer}}
+
+=== can_glide_through ===
+* 可以攀爬且不打断滑翔的方块。
+
+{{tag list|block|can_glide_through}}
+
+=== cats_can_lie_on ===
+{{added in development|jev=26.3|section=1}}
+* [[猫]]可以躺在上面的方块。
+
+{{tag list|block|cats_can_lie_on}}
+
+=== cats_can_sit_on ===
+{{added in development|jev=26.3|section=1}}
+* 猫可以坐在上面的方块。
+
+{{tag list|block|cats_can_sit_on}}
+
+=== cauldrons ===
+* 这个标签被用于确认寻路过程。
+
+{{tag list|block|cauldrons}}
+
+=== causes_continuous_geyser_eruptions ===
+* 烈性硫黄在这些方块上方时会尝试生成持续的间歇泉。
+
+{{tag list|block|causes_continuous_geyser_eruptions}}
+
+=== causes_periodic_geyser_eruptions ===
+* 烈性硫黄在这些方块上方时会尝试生成非持续的间歇泉。
+
+{{tag list|block|causes_periodic_geyser_eruptions}}
+
+=== causes_suffocation ===
+{{added in development|jev=26.3|section=1}}
+* 被游戏视为视野阻挡方块的方块。如果方块碰撞箱完整，则始终被视为视野阻挡方块。
+
+{{tag list|block|causes_suffocation}}
+
+=== cave_vines ===
+* 用于{{TagLink|block|moss_replaceable}}。
+
+{{tag list|block|cave_vines}}
+
+=== ceiling_hanging_signs ===
+* 用于{{TagLink|block|all_hanging_signs}}。
+
+{{tag list|block|ceiling_hanging_signs}}
+
+=== chains ===
+* 包含所有锁链。
+
+{{tag list|block|chains}}
+
+=== cherry_logs ===
+* 用于{{TagLink|block|logs_that_burn}}。
+
+{{tag list|block|cherry_logs}}
+
+=== climbable ===
+* 用于生物寻路。
+* 该标签用于确定哪些方块可以攀爬。
+** 向该标签添加其他的方块时，为了使生物能够攀爬，这个方块碰撞箱必须足够小，以使生物碰撞箱的中心可以位于这一方块。
+** 这意味着不能从侧面攀登箱子等方块，而可以从顶部攀登。
+** 如果删除了脚手架，则生物将无法平滑地爬升，但仍可以跳上并潜下。
+
+{{tag list|block|climbable}}
+
+=== coal_ores ===
+{{tag list|block|coal_ores}}
+
+=== combination_step_sound_blocks ===
+* 此处定义的方块的行走音效是否与其下方方块的行走音效合并。
+
+{{tag list|block|combination_step_sound_blocks}}
+
+=== completes_find_tree_tutorial ===
+* 拥有这个标签的方块可用于完成“找到一棵树”教学提示。
+
+{{tag list|block|completes_find_tree_tutorial}}
+
+=== concrete ===
+{{tag list|block|concrete}}
+
+=== concrete_powders ===
+{{tag list|block|concrete_powders}}
+
+=== {{text anchor|convertable_to_mud}}{{sic}}/{{text anchor|convertible_to_mud}} ===
+* 对拥有此标签的方块{{control|使用}}[[水瓶]]时可以将其转化为[[泥巴]]。
+
+{{tag list|block|convertable_to_mud}}
+
+{{tag list|block|convertible_to_mud}}
+
+=== copper ===
+* 包含所有铜块。
+
+{{tag list|block|copper}}
+
+=== copper_chests ===
+* 包含所有铜箱子。
+
+{{tag list|block|copper_chests}}
+
+=== copper_golem_statues ===
+* 包含所有铜傀儡像。
+
+{{tag list|block|copper_golem_statues}}
+
+=== copper_ores ===
+{{tag list|block|copper_ores}}
+
+=== coral_blocks ===
+* 用于生成珊瑚礁。
+* 对单个海泡菜使用骨粉，如果海泡菜位于这些方块上方，会生长出更多的海泡菜。
+
+{{tag list|block|coral_blocks}}
+
+=== coral_plants ===
+* 用于{{TagLink|block|corals}}。
+
+{{tag list|block|coral_plants}}
+
+=== corals ===
+* 用于生成[[珊瑚礁]]。
+
+{{tag list|block|corals}}
+
+=== crimson_stems ===
+* 用于{{TagLink|block|logs}}。
+
+{{tag list|block|crimson_stems}}
+
+=== crops ===
+* 用于{{TagLink|block|bee_growables}}。
+
+{{tag list|block|crops}}
+
+=== crystal_sound_blocks ===
+* 拥有这个标签的方块在被踩中时会播放水晶的音效。
+
+{{tag list|block|crystal_sound_blocks}}
+
+=== dampens_vibrations ===
+* 实体不会在拥有这个标签的方块上发出振动。
+
+{{tag list|block|dampens_vibrations}}
+
+=== dark_oak_logs ===
+* 用于{{TagLink|block|logs_that_burn}}。
+
+{{tag list|block|dark_oak_logs}}
+
+=== deepslate_ore_replaceables ===
+* 用于决定在世界生成时能被深层[[矿石]]替换的方块，浅层变种见{{TagLink|block|stone_ore_replaceables}}。
+
+{{tag list|block|deepslate_ore_replaceables}}
+
+=== default_immune_to ===
+* 生物默认不会将这些方块视为危险方块。
+
+{{tag list|block|default_immune_to}}
+
+=== diamond_ores ===
+{{tag list|block|diamond_ores}}
+
+=== dirt ===
+* 用于{{TagLink|block|moss_replaceable}}。
+{{tag list|block|dirt}}
+
+=== does_not_block_hoppers ===
+* 用来决定哪些碰撞箱完整的方块不会阻挡[[漏斗]]捕捉物品实体。
+
+{{tag list|block|does_not_block_hoppers}}
+
+=== doors ===
+* 实体寻路过程中不会尝试跳跃上拥有这个标签的方块。
+* 生成[[僵尸村庄]]时拥有此标签的方块有概率被转换为空气。
+
+{{tag list|block|doors}}
+
+=== dragon_immune ===
+* 用来决定哪些方块不能被[[末影龙]]摧毁。
+
+{{tag list|block|dragon_immune}}
+
+=== dragon_transparent ===
+{{tag list|block|dragon_transparent}}
+
+=== dripstone_replaceable_blocks ===
+{{tag list|block|dripstone_replaceable_blocks}}
+
+=== edible_for_sheep ===
+* 用来决定哪些方块可被[[绵羊]]吃掉。
+
+{{tag list|block|edible_for_sheep}}
+
+=== emerald_ores ===
+{{tag list|block|emerald_ores}}
+
+=== enables_bubble_column_drag_down ===
+* 流体在这些方块上方生成[[气泡柱]]涡流。
+
+{{tag list|block|enables_bubble_column_drag_down}}
+
+=== enables_bubble_column_push_up ===
+* 流体在这些方块上方生成[[气泡柱]]涌流。
+
+{{tag list|block|enables_bubble_column_push_up}}
+
+=== enchantment_power_provider ===
+* 可以增加附魔台最大附魔等级的方块。
+
+{{tag list|block|enchantment_power_provider}}
+
+=== enchantment_power_transmitter ===
+* 不会阻断附魔台附魔等级增益的方块。
+
+{{tag list|block|enchantment_power_transmitter}}
+
+=== enderman_holdable ===
+* 用来决定哪些方块可以被[[末影人]]拾起。
+
+{{tag list|block|enderman_holdable}}
+
+=== entities_can_teleport_to ===
+{{added in development|jev=26.3|section=1}}
+* 生物的随机传送和末影人倾向传送到这些方块上。
+
+{{tag list|block|entities_can_teleport_to}}
+
+=== fall_damage_resetting ===
+* 用来决定除液体外哪些方块可以重置摔落伤害。
+
+{{tag list|block|fall_damage_resetting}}
+
+=== features_cannot_replace ===
+{{tag list|block|features_cannot_replace}}
+
+=== fence_gates ===
+{{tag list|block|fence_gates}}
+
+=== fences ===
+* 生物将这个标签中的所有方块视为栅栏，并据此进行寻路。
+* 可以将拴绳连接到此标签中的方块上。
+* 拴绳结实体使用此标签来检测它是否应该断开。
+
+{{tag list|block|fences}}
+
+=== fire ===
+* 当检测到有效的未激活下界传送门时，将忽略此标签中的方块，并将在激活后将其删除。
+* 生物将这个标签中的所有方块视作火并据此寻路。
+* 此标签中的方块不会阻挡沙子等方块掉落。
+* 能够扑灭火焰的药水会移除此标签中的方块。
+* 用于{{TagLink|block|dragon_transparent}}。
+
+{{tag list|block|fire}}
+
+=== flower_pots ===
+{{tag list|block|flower_pots}}
+
+=== flowers ===
+{{tag list|block|flowers}}
+
+=== forest_rock_can_place_on ===
+* 定义哪些方块之上可放置<code>forest_rock</code>地物。
+
+{{tag list|block|forest_rock_can_place_on}}
+
+=== foxes_spawnable_on ===
+* 用于狐狸的生成判定。
+
+{{tag list|block|foxes_spawnable_on}}
+
+=== fox_immune_to ===
+* 狐狸不会将这些方块视为危险方块。
+
+{{tag list|block|fox_immune_to}}
+
+=== frog_prefer_jump_to ===
+{{tag list|block|frog_prefer_jump_to}}
+
+=== frogs_spawnable_on ===
+* 用于青蛙的生成判定。
+
+{{tag list|block|frogs_spawnable_on}}
+
+=== geode_invalid_blocks ===
+{{tag list|block|geode_invalid_blocks}}
+
+=== glazed_terracotta ===
+{{tag list|block|glazed_terracotta}}
+
+=== goats_spawnable_on ===
+{{tag list|block|goats_spawnable_on}}
+
+=== gold_ores ===
+{{tag list|block|gold_ores}}
+
+=== grass_blocks ===
+
+{{tag list|block|grass_blocks}}
+
+=== grows_crops ===
+* <!-- CropBlock, StemBlock -->小麦植株、胡萝卜、马铃薯、甜菜根、火把花植株、瓶子草植株、南瓜茎、西瓜茎可以在这些方块上生长。
+
+{{tag list|block|grows_crops}}
+
+=== guarded_by_piglins ===
+* [[猪灵]]将与开启或摧毁拥有这个标签的方块的玩家敌对。
+
+{{tag list|block|guarded_by_piglins}}
+
+=== happy_ghast_avoids ===
+* [[恶魂]]和[[快乐恶魂]]会倾向于远离这些方块。
+
+{{tag list|block|happy_ghast_avoids}}
+
+=== height_specific_ore_replaceables ===
+{{added in development|jev=26.3|section=1}}
+* 在Y=8以下时会被替换为深层变种的矿石。
+
+{{tag list|block|height_specific_ore_replaceables}}
+
+=== hoglin_repellents ===
+* [[疣猪兽]]会远离这些方块。
+
+{{tag list|block|hoglin_repellents}}
+
+=== huge_brown_mushroom_can_place_on ===
+* 定义哪些方块之上可放置<code>huge_brown_mushroom</code>地物。
+
+{{tag list|block|huge_brown_mushroom_can_place_on}}
+
+=== huge_red_mushroom_can_place_on ===
+* 定义哪些方块之上可放置<code>huge_red_mushroom</code>地物。
+
+{{tag list|block|huge_red_mushroom_can_place_on}}
+
+=== ice ===
+* 海底废墟不会在这些方块上生成。
+
+{{tag list|block|ice}}
+
+=== ice_spike_replaceable ===
+* 定义冰刺可替换哪些方块。
+
+{{tag list|block|ice_spike_replaceable}}
+
+=== ice_melts_when_destroyed_above ===
+{{added in development|jev=26.3|section=1}}
+* 冰在这些方块上时，若被破坏后允许生成水则会生成水。
+
+{{tag list|block|ice_melts_when_destroyed_above}}
+
+=== impermeable ===
+* 这个标签下的方块的上方有液体时不会展示水滴/熔岩粒子效果。
+
+{{tag list|block|impermeable}}
+
+=== incorrect_for_copper_tool ===
+* 标记为该标签的方块被铜质工具挖掘后不会掉落。
+
+{{tag list|block|incorrect_for_copper_tool}}
+
+=== incorrect_for_diamond_tool ===
+* 标记为该标签的方块被钻石质工具挖掘后不会掉落。
+
+{{tag list|block|incorrect_for_diamond_tool}}
+
+=== incorrect_for_gold_tool ===
+* 标记为该标签的方块被金质工具挖掘后不会掉落。
+
+{{tag list|block|incorrect_for_gold_tool}}
+
+=== incorrect_for_iron_tool ===
+* 标记为该标签的方块被铁质工具挖掘后不会掉落。
+
+{{tag list|block|incorrect_for_iron_tool}}
+
+=== incorrect_for_netherite_tool ===
+* 标记为该标签的方块被下界合金质工具挖掘后不会掉落。
+
+{{tag list|block|incorrect_for_netherite_tool}}
+
+=== incorrect_for_stone_tool ===
+* 标记为该标签的方块被石质工具挖掘后不会掉落。
+
+{{tag list|block|incorrect_for_stone_tool}}
+
+=== incorrect_for_wooden_tool ===
+* 标记为该标签的方块被木质工具挖掘后不会掉落。
+
+{{tag list|block|incorrect_for_wooden_tool}}
+
+=== infiniburn_end ===
+* 在末地中，火会在使用该标签的方块上无限燃烧。
+
+{{tag list|block|infiniburn_end}}
+
+=== infiniburn_nether ===
+* 在下界中，火会在使用该标签的方块上无限燃烧。
+
+{{tag list|block|infiniburn_nether}}
+
+=== infiniburn_overworld ===
+* 在主世界中，火会在使用该标签的方块上无限燃烧。
+
+{{tag list|block|infiniburn_overworld}}
+
+=== inside_step_sound_blocks ===
+* 拥有这个标签的方块在被踩中时会播放在雪地行走的音效。
+
+{{tag list|block|inside_step_sound_blocks}}
+
+=== invalid_spawn_inside ===
+* 这个位置上的方块和它上方的方块带有此标签，则不会被选为[[生成#个人出生点|重生位置]]。
+{{tag list|block|invalid_spawn_inside}}
+
+=== iron_ores ===
+{{tag list|block|iron_ores}}
+
+=== jungle_logs ===
+* 可可豆可以放置其上。
+
+{{tag list|block|jungle_logs}}
+
+=== lanterns ===
+* 包含所有灯笼。
+
+{{tag list|block|lanterns}}
+
+=== lightning_rods ===
+* 包含所有避雷针。
+
+{{tag list|block|lightning_rods}}
+
+=== lapis_ores ===
+{{tag list|block|lapis_ores}}
+
+=== lava_pool_stone_cannot_replace ===
+{{tag list|block|lava_pool_stone_cannot_replace}}
+
+=== leaves ===
+* 此标签中的方块不会阻碍许多结构的生成，如奖励箱、树和巨型蘑菇。
+* 用于确定某些方块是否可以放置其上。
+* 此标签中的方块使用剑摧毁时速度是正常情况下的1.5倍。
+* 此标签中的方块使用剪刀破坏的速度是正常情况下的15倍，并增加其使用统计。
+* 该标签中的方块将剪刀识别为正确的工具。
+
+{{tag list|block|leaves}}
+
+=== logs ===
+* 用于[[鹦鹉]]AI在方块上栖息时对方块的要求之一。
+* 如果该标签的方块周围有树叶，树叶方块会将其<code>distance</code>方块状态设为与其最近的距离。
+
+{{tag list|block|logs}}
+
+=== logs_that_burn ===
+{{tag list|block|logs_that_burn}}
+
+=== lush_ground_replaceable ===
+{{tag list|block|lush_ground_replaceable}}
+
+=== maintains_farmland ===
+* 不会使耕地退化为泥土的方块。
+
+{{tag list|block|maintains_farmland}}
+
+=== mangrove_logs ===
+{{tag list|block|mangrove_logs}}
+
+=== mangrove_logs_can_grow_through ===
+* 红树生成时，[[红树原木]]可以穿过的方块。
+
+{{tag list|block|mangrove_logs_can_grow_through}}
+
+=== mangrove_roots_can_grow_through ===
+* 红树生成时，[[红树根]]可以穿过的方块。
+
+{{tag list|block|mangrove_roots_can_grow_through}}
+
+=== mineable/axe ===
+* 此标签内的方块用斧挖掘更快。
+
+{{tag list|block|mineable/axe}}
+
+=== mineable/hoe ===
+* 此标签内的方块用锄挖掘更快。
+
+{{tag list|block|mineable/hoe}}
+
+=== mineable/pickaxe ===
+* 此标签内的方块用镐挖掘更快。
+
+{{tag list|block|mineable/pickaxe}}
+
+=== mineable/shovel ===
+* 此标签内的方块用锹挖掘更快。
+
+{{tag list|block|mineable/shovel}}
+
+=== mob_interactable_doors ===
+* 此标签内的方块可作为[[门]]被生物交互。
+
+{{tag list|block|mob_interactable_doors}}
+
+=== mooshrooms_spawnable_on ===
+* 用于哞菇的生成判断。
+
+{{tag list|block|mooshrooms_spawnable_on}}
+
+=== moss_blocks ===
+
+{{tag list|block|moss_blocks}}
+
+=== moss_replaceable ===
+* 可以被骨粉复制的[[苔藓块]]替换的方块。
+
+{{tag list|block|moss_replaceable}}
+
+=== mud ===
+
+{{tag list|block|mud}}
+
+=== needs_diamond_tool ===
+* 标签中的方块需要钻石质以上的工具破坏才可能掉落物品。
+
+{{tag list|block|needs_diamond_tool}}
+
+=== needs_iron_tool ===
+* 标签中的方块需要铁质以上的工具破坏才可能掉落物品。
+
+{{tag list|block|needs_iron_tool}}
+
+=== needs_stone_tool ===
+* 标签中的方块需要石质以上的工具破坏才可能掉落物品。
+
+{{tag list|block|needs_stone_tool}}
+
+=== nether_carver_replaceables ===
+* 拥有此标签的方块可以被下界地形雕刻器切掉。
+
+{{tag list|block|nether_carver_replaceables}}
+
+=== nylium ===
+{{tag list|block|nylium}}
+
+=== oak_logs ===
+{{tag list|block|oak_logs}}
+
+=== occludes_vibration_signals ===
+* 阻挡[[幽匿感测体#振动检测|振动]]的传播
+
+{{tag list|block|occludes_vibration_signals}}
+
+=== ores ===
+{{added in development|jev=26.3|section=1}}
+{{tag list|block|ores}}
+
+=== overrides_mushroom_light_requirement ===
+* 蘑菇不能在不属于上述标签且光照等于大于13的位置存活。
+
+{{tag list|block|overrides_mushroom_light_requirement}}
+
+=== overworld_carver_replaceables ===
+* 拥有此标签的方块可以被主世界地形雕刻器切掉。
+
+{{tag list|block|overworld_carver_replaceables}}
+
+=== overworld_natural_logs ===
+{{tag list|block|overworld_natural_logs}}
+
+=== pale_oak_logs ===
+{{tag list|block|pale_oak_logs}}
+
+=== parrots_spawnable_on ===
+* 用于[[鹦鹉]]生成判定。
+
+{{tag list|block|parrots_spawnable_on}}
+
+=== piglin_repellents ===
+* [[猪灵]]会远离这些方块。
+
+{{tag list|block|piglin_repellents}}
+
+=== planks ===
+{{tag list|block|planks}}
+
+=== polar_bear_immune_to ===
+* 北极熊不会将这些方块视为危险方块。
+
+{{tag list|block|polar_bear_immune_to}}
+
+=== polar_bears_spawnable_on_alternate ===
+* 用于[[北极熊]]生成判定。
+
+{{tag list|block|polar_bears_spawnable_on_alternate}}
+
+=== poplar_logs ===
+{{added in development|jev=26.3|section=1}}
+
+{{tag list|block|poplar_logs}}
+
+=== portals ===
+* 当骑着一个实体的实体从其上脱离时，它将不会落在这些方块中以防止不需要的传送，而是会脱离在被骑乘的实体的位置。
+
+{{tag list|block|portals}}
+
+=== pressure_plates ===
+{{tag list|block|pressure_plates}}
+
+=== prevent_mob_spawning_inside ===
+* 生物不能在这些方块里生成。
+
+{{tag list|block|prevent_mob_spawning_inside}}
+
+=== prevents_nearby_leaf_decay ===
+* 树叶距离这些方块[[曼哈顿距离]]6格内时不消失。
+
+{{tag list|block|prevents_nearby_leaf_decay}}
+
+=== rabbits_spawnable_on ===
+* 用于[[兔子]]的生成判定。
+
+{{tag list|block|rabbits_spawnable_on}}
+
+=== rails ===
+* 检测是否与铁轨相连。
+* 矿车是否可在此方块上行驶。
+* 检测是否可以放置矿车。
+* 向此标签添加其他方块会导致游戏崩溃。
+* TNT矿车位于这些方块内时，不会破坏所在位置的方块和下方的方块。
+
+{{tag list|block|rails}}
+
+=== redstone_ores ===
+{{tag list|block|redstone_ores}}
+
+=== replaceable ===
+{{tag list|block|replaceable}}
+
+=== replaceable_by_mushrooms ===
+* 蘑菇被放置或生长时可替换的方块。
+
+{{tag list|block|replaceable_by_mushrooms}}
+
+=== replaceable_by_trees ===
+* 可被长成的树木替换的方块。
+
+{{tag list|block|replaceable_by_trees}}
+
+=== required_for_poplar_leaf_ambience ===
+{{added in development|jev=26.3|section=1}}
+* 用于杨树树叶环境音效的判定。
+
+{{tag list|block|required_for_poplar_leaf_ambience}}
+
+=== sand ===
+* 用于确定海龟蛋是否能在该方块上孵化。
+
+{{tag list|block|sand}}
+
+=== saplings ===
+* 树生长时可以替代此标签的方块。
+
+{{tag list|block|saplings}}
+
+=== sculk_growth_inhibitors ===
+{{added in development|jev=26.3|section=1}}
+* 能够阻止[[幽匿块]]扩散的方块。
+
+{{tag list|block|sculk_growth_inhibitors}}
+
+=== sculk_replaceable ===
+* 用于确定幽匿催发体在蔓延时会将何种方块转化为幽匿块。
+
+{{tag list|block|sculk_replaceable}}
+
+=== sculk_replaceable_world_gen ===
+* 用于确定在世界生成阶段哪些方块会被幽匿斑簇替换。
+
+{{tag list|block|sculk_replaceable_world_gen}}
+
+=== shears_extreme_breaking_speed ===
+* 被剪刀以15倍的速度破坏的方块。
+
+{{tag list|block|shears_extreme_breaking_speed}}
+
+=== shears_major_breaking_speed ===
+* 被剪刀以5倍的速度破坏的方块。
+
+{{tag list|block|shears_major_breaking_speed}}
+
+=== shears_minor_breaking_speed ===
+* 被剪刀以2倍的速度破坏的方块。
+
+{{tag list|block|shears_minor_breaking_speed}}
+
+=== shulker_boxes ===
+* 栅栏、墙和玻璃板不会连接到这些方块。
+
+{{tag list|block|shulker_boxes}}
+
+=== signs ===
+* 流水不会破坏这些方块。
+
+{{tag list|block|signs}}
+
+=== skulls ===
+{{added in development|jev=26.3|section=1}}
+{{tag list|block|skulls}}
+
+=== slabs ===
+{{tag list|block|slabs}}
+
+=== small_flowers ===
+* 蜜蜂会尝试采集这些方块的花粉。
+
+{{tag list|block|small_flowers}}
+
+=== smelts_to_glass ===
+* 这些方块可以被烧炼成玻璃。
+
+{{tag list|block|smelts_to_glass}}
+
+=== snaps_goat_horn ===
+* 山羊冲撞到这些方块会掉落山羊角。
+
+{{tag list|block|snaps_goat_horn}}
+
+=== sniffer_diggable_block ===
+* 嗅探兽可以从这些方块中找到种子。
+
+{{tag list|block|sniffer_diggable_block}}
+
+=== sniffer_egg_hatch_boost ===
+* 这些方块可以加速嗅探兽蛋的孵化。
+
+{{tag list|block|sniffer_egg_hatch_boost}}
+
+=== snow ===
+{{tag list|block|snow}}
+
+=== snow_golem_immune_to ===
+* 雪傀儡不会将这些方块视为危险方块。
+
+{{tag list|block|snow_golem_immune_to}}
+
+=== soul_fire_base_blocks ===
+* 灵魂火会在这些方块上燃烧。
+
+{{tag list|block|soul_fire_base_blocks}}
+
+=== soul_speed_blocks ===
+* 穿着附有[[灵魂疾行]]魔咒的靴子在这些方块上的行走速度会得到提高。
+
+{{tag list|block|soul_speed_blocks}}
+
+=== speeds_up_zombie_villager_curing ===
+{{added in development|jev=26.3|section=1}}
+* 能够加速治愈[[僵尸村民]]的方块。
+
+{{tag list|block|speeds_up_zombie_villager_curing}}
+
+=== speleothems ===
+{{tag list|block|speleothems}}
+
+=== spruce_logs ===
+{{tag list|block|spruce_logs}}
+
+=== stairs ===
+{{tag list|block|stairs}}
+
+=== standing_signs ===
+{{tag list|block|standing_signs}}
+
+=== stone_bricks ===
+{{tag list|block|stone_bricks}}
+
+=== stone_buttons ===
+{{tag list|block|stone_buttons}}
+
+=== stone_ore_replaceables ===
+* 用于决定在世界生成时能被[[矿石]]替换的方块，深层变种见{{TagLink|block|deepslate_ore_replaceables}}。
+
+{{tag list|block|stone_ore_replaceables}}
+
+=== stone_pressure_plates ===
+{{tag list|block|stone_pressure_plates}}
+
+=== stray_immune_to ===
+* 流浪者不会将这些方块视为危险方块。
+
+{{tag list|block|stray_immune_to}}
+
+=== strider_warm_blocks ===
+* [[炽足兽]]若不在此标签的方块当中，就会打寒颤。
+
+{{tag list|block|strider_warm_blocks}}
+
+=== substrate_overworld ===
+* 用于集合世界生成条件。
+
+{{tag list|block|substrate_overworld}}
+
+=== sulfur_spike_replaceable_blocks ===
+* [[硫黄尖锥（地物）|硫黄尖锥]]生成时可以取代这些方块。
+
+{{tag list|block|sulfur_spike_replaceable_blocks}}
+
+=== support_override_cactus_flower ===
+* [[仙人掌花]]可以放置并存活在这些方块上，即使方块上表面不完整。
+
+{{tag list|block|support_override_cactus_flower}}
+
+=== support_override_snow_layer ===
+* [[雪]]可以放置并存活在这些方块上，即使方块上表面不完整。
+
+{{tag list|block|support_override_snow_layer}}
+
+=== supports_azalea ===
+* [[杜鹃花丛]]、[[盛开的杜鹃花丛]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_azalea}}
+
+=== supports_bamboo ===
+* [[竹子]]、[[竹笋]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_bamboo}}
+
+=== supports_big_dripleaf ===
+* [[大型垂滴叶]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_big_dripleaf}}
+
+=== supports_cactus ===
+* [[仙人掌]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_cactus}}
+
+=== supports_chorus_flower ===
+* [[紫颂花]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_chorus_flower}}
+
+=== supports_chorus_plant ===
+* [[紫颂植株]]可以放置并存活在这些方块上。
+* [[歌萊樹]]会在这些方块上生成。
+
+{{tag list|block|supports_chorus_plant}}
+
+=== supports_cocoa ===
+* [[可可果]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_cocoa}}
+
+=== supports_crimson_fungus ===
+* [[绯红菌]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_crimson_fungus}}
+
+=== supports_crimson_roots ===
+* [[绯红菌索]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_crimson_roots}}
+
+=== supports_crops ===
+* <!-- CropBlock -->小麦植株、胡萝卜、马铃薯、甜菜根、火把花植株、瓶子草植株可以放置并存活在这些方块上。
+
+{{tag list|block|supports_crops}}
+
+=== supports_dry_vegetation ===
+* <!-- DryVegetationBlock -->矮枯草丛、高枯草丛可以放置并存活在这些方块上。
+
+{{tag list|block|supports_dry_vegetation}}
+
+=== supports_frogspawn ===
+* [[青蛙卵]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_frogspawn}}
+
+=== supports_hanging_mangrove_propagule ===
+* [[红树胎生苗]]可以在这些方块下存活。不能手动放置。
+
+{{tag list|block|supports_hanging_mangrove_propagule}}
+
+=== supports_lily_pad ===
+* [[睡莲]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_lily_pad}}
+
+=== supports_mangrove_propagule ===
+* [[红树胎生苗]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_mangrove_propagule}}
+
+=== supports_melon_stem ===
+* [[西瓜茎]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_melon_stem}}
+
+=== supports_melon_stem_fruit ===
+* [[西瓜茎]]能在这些方块上方生成[[西瓜]]。
+
+{{tag list|block|supports_melon_stem_fruit}}
+
+=== supports_nether_sprouts ===
+* [[下界苗]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_nether_sprouts}}
+
+=== supports_nether_wart ===
+* [[下界疣]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_nether_wart}}
+
+=== supports_pumpkin_stem ===
+* [[南瓜茎]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_pumpkin_stem}}
+
+=== supports_pumpkin_stem_fruit ===
+* [[南瓜茎]]能在这些方块上方生成[[南瓜]]。
+
+{{tag list|block|supports_pumpkin_stem_fruit}}
+
+=== supports_small_dripleaf ===
+* [[小型垂滴叶]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_small_dripleaf}}
+
+=== supports_stem_crops ===
+* 西瓜茎或南瓜茎可以放置并存活在这些方块上。
+
+{{tag list|block|supports_stem_crops}}
+
+=== supports_stem_fruit ===
+
+{{tag list|block|supports_stem_fruit}}
+
+=== supports_sugar_cane ===
+* [[甘蔗]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_sugar_cane}}
+
+=== supports_sugar_cane_adjacently ===
+* [[甘蔗]]可以放置并存活在这些方块毗邻方块上。
+
+{{tag list|block|supports_sugar_cane_adjacently}}
+
+=== supports_vegetation ===
+* <!-- VegetationBlock -->灌木丛、矮草丛、高草丛、蕨、大型蕨、瓶子草、向日葵、丁香、玫瑰丛、牡丹、眼眸花、萤火虫灌木丛、粉红色花簇、野花簇、蒲公英、火把花、虞美人、兰花、绒球葱、红色郁金香、橙色郁金香、白色郁金香、粉红色郁金香、滨菊、矢车菊、甜浆果丛、橡树树苗、白桦树苗、云杉树苗、丛林树苗、金合欢树苗、深色橡树树苗、樱花树苗、苍白橡树树苗可以放置并存活在这些方块上。
+
+{{tag list|block|supports_vegetation}}
+
+=== supports_warped_fungus ===
+* [[诡异菌]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_warped_fungus}}
+
+=== supports_warped_roots ===
+* [[诡异菌索]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_warped_roots}}
+
+=== supports_wither_rose ===
+* [[凋灵玫瑰]]可以放置并存活在这些方块上。
+
+{{tag list|block|supports_wither_rose}}
+
+=== suppresses_bounce ===
+* 实体与这些方块碰撞后会减小弹性。
+
+{{tag list|block|suppresses_bounce}}
+
+=== sword_efficient ===
+* 可被剑更快地破坏的方块。
+* 对[[蜘蛛网]]、[[竹子]]和[[竹笋]]的挖掘加速不受此标签影响。
+
+{{tag list|block|sword_efficient}}
+
+=== sword_instantly_mines ===
+* 可被剑瞬间破坏的方块。
+
+{{tag list|block|sword_instantly_mines}}
+
+=== terracotta ===
+{{tag list|block|terracotta}}
+
+=== trail_ruins_replaceable ===
+* 可疑的沙砾可以替换[[古迹废墟]]中的这些方块生成。
+
+{{tag list|block|trail_ruins_replaceable}}
+
+=== trapdoors ===
+* 当寻路时，生物把这个标签中的所有方块都视为活板门。
+
+{{tag list|block|trapdoors}}
+
+=== triggers_ambient_desert_dry_vegetation_block_sounds ===
+* 指定哪些方块可以触发沙漠环境音效。
+
+{{tag list|block|triggers_ambient_desert_dry_vegetation_block_sounds}}
+
+=== triggers_ambient_dried_ghast_block_sounds ===
+* 在沙子和红沙的环境音效判定中有效的方块。
+
+{{tag list|block|triggers_ambient_dried_ghast_block_sounds}}
+
+=== triggers_ambient_desert_sand_block_sounds ===
+* 在失水恶魂的环境音效判定中有效的方块。
+
+{{tag list|block|triggers_ambient_desert_sand_block_sounds}}
+
+=== turns_into_dirt_path ===
+{{added in development|jev=26.3|section=1}}
+* 可以被[[锹]]转变为[[土径]]的方块。
+
+{{tag list|block|turns_into_dirt_path}}
+
+=== turns_into_farmland ===
+{{added in development|jev=26.3|section=1}}
+* 可以被[[锄]]转变为[[耕地]]的方块。
+
+{{tag list|block|turns_into_farmland}}
+
+=== underwater_bonemeals ===
+* 当在暖洋生物群系中在水下使用骨粉时，该标签中的方块将取代水源方块（在5个水平块和2个垂直块内）。
+* 如果该标记中的方块是自定义的，则该行为将应用于任何生物群系中的水源方块。这些方块在默认情况下不会含水。
+
+{{tag list|block|underwater_bonemeals}}
+
+=== unstable_bottom_center ===
+{{tag list|block|unstable_bottom_center}}
+
+=== valid_spawn ===
+* 用于确定位置是否是玩家的有效出生位置。
+
+{{tag list|block|valid_spawn}}
+
+=== vibration_resonators ===
+* 可以产生共振的方块。
+
+{{tag list|block|vibration_resonators}}
+
+=== villager_babies_can_jump_on_bed ===
+{{added in development|jev=26.3|section=1}}
+* 幼年村民可以在上面跳跃的方块。
+
+{{tag list|block|villager_babies_can_jump_on_bed}}
+
+=== villagers_can_sleep_on_bed ===
+{{added in development|jev=26.3|section=1}}
+* [[村民]]可以睡在上面的方块。
+
+{{tag list|block|villagers_can_sleep_on_bed}}
+
+=== wall_corals ===
+* 用于生成珊瑚礁。
+
+{{tag list|block|wall_corals}}
+
+=== wall_hanging_signs ===
+* 用于{{TagLink|block|all_hanging_signs}}。
+
+{{tag list|block|wall_hanging_signs}}
+
+=== wall_post_override ===
+* 插在墙上，墙会出现柱子。
+
+{{tag list|block|wall_post_override}}
+
+=== wall_signs ===
+{{tag list|block|wall_signs}}
+
+=== walls ===
+* 当寻路时，生物把这个标签中的方块视为栅栏。
+* 栅栏门紧挨着这些方块时，方块状态{{cd|in_wall}}的值为{{cd|true}}。
+
+{{tag list|block|walls}}
+
+=== warped_stems ===
+{{tag list|block|warped_stems}}
+
+=== wart_blocks ===
+* 疣猪兽不能生成在这些方块上。
+
+{{tag list|block|wart_blocks}}
+
+=== washed_away_by_fluids ===
+{{added in development|jev=26.3|section=1}}
+* 流体流动时会破坏这些方块。如果方块本身不会被流体流动破坏，则此标签没有效果。
+
+{{tag list|block|washed_away_by_fluids}}
+
+=== wither_immune ===
+* 用来确定哪些方块凋灵不能破坏。
+
+{{tag list|block|wither_immune}}
+
+=== wither_immune_to ===
+* 凋零不会将这些方块视为危险方块。
+
+{{tag list|block|wither_immune_to}}
+
+=== wither_skeleton_immune_to ===
+* 凋零骷髅不会将这些方块视为危险方块。
+
+{{tag list|block|wither_skeleton_immune_to}}
+
+=== wither_summon_base_blocks ===
+* 可以用来搭建凋灵的方块。
+
+{{tag list|block|wither_summon_base_blocks}}
+
+=== wolves_spawnable_on ===
+* 用于狼的生成判定。
+
+{{tag list|block|wolves_spawnable_on}}
+
+=== wooden_buttons ===
+* 用于{{TagLink|block|buttons}}。
+
+{{tag list|block|wooden_buttons}}
+
+=== wooden_doors ===
+* 用于标签{{TagLink|block|doors}}。 村民用它来检测门。
+
+{{tag list|block|wooden_doors}}
+
+=== wooden_fences ===
+{{tag list|block|wooden_fences}}
+
+=== wooden_pressure_plates ===
+{{tag list|block|wooden_pressure_plates}}
+
+=== wooden_slabs ===
+{{tag list|block|wooden_slabs}}
+
+=== wooden_stairs ===
+{{tag list|block|wooden_stairs}}
+
+=== wooden_shelves ===
+* 包含所有木质展示架。
+
+{{tag list|block|wooden_shelves}}
+
+=== wooden_trapdoors ===
+{{tag list|block|wooden_trapdoors}}
+
+=== wool ===
+* 此标签的方块可以被使用[[剪刀]]以5倍的速度破坏，并增加剪刀的使用统计。
+* 放在该标签的方块上的[[音符盒]]会发出吉他音效。
+** 如果导致音符盒播放不同乐器音效的方块加入此标签，则这些方块会导致音符盒播放吉他。
+* 用于{{TagLink|block|occludes_vibration_signals}}。
+
+{{tag list|block|wool}}
+
+=== wool_carpets ===
+{{tag list|block|wool_carpets}}
+
+=== wool_stairs ===
+{{added in development|jev=26.3|section=1}}
+{{tag list|block|wool_stairs}}
+
+=== wool_slabs ===
+{{added in development|jev=26.3|section=1}}
+{{tag list|block|wool_slabs}}
+
+== 已移除的标签 ==
+=== azalea_log_replaceable ===
+{{Info needed}}
+
+添加于：[[21w05a]]。移除于：[[21w10a]]。
+
+{{tag list|type=block|id=azalea_log_replaceable|mode=manual
+|#flowers
+|#leaves
+|short_grass
+|fern
+|sweet_berry_bush
+|small_dripleaf
+}}
+
+=== dirt_like ===
+{{Info needed}}
+
+添加于：[[18w43a]]。移除于：[[19w41a]]。
+
+{{tag list|type=block|id=dirt_like|mode=manual
+|dirt
+|grass_block
+|podzol
+|coarse_dirt
+|mycelium
+}}
+
+=== fire_aspect_lightable ===
+* 能被带火焰附加魔咒的物品攻击点燃的方块。
+
+添加于：[[24w19a]]。移除于：[[Java版1.21-pre1]]。
+
+{{tag list|type=block|id=fire_aspect_lightable|mode=manual
+|#candles
+|#candle_cakes
+|#campfires
+}}
+
+=== lush_plants_replaceable ===
+* 被{{cd|moss_replaceable}}替代。
+
+添加于：[[21w05a]]。移除于：[[21w16a]]。
+
+{{tag list|type=block|id=lush_plants_replaceable|mode=manual
+|#base_stone_overworld
+|#cave_vines
+|dirt
+|gravel
+|sand
+|moss_block
+|#flowers
+|short_grass
+|tall_grass
+|moss_carpet
+|small_dripleaf
+|big_dripleaf
+|big_dripleaf_stem
+|vine
+}}
+
+=== non_flammable_wood ===
+在物品标签中仍存在与此同名的标签。
+
+添加于：[[20w13a]]。移除于：[[22w44a]]。
+
+{{tag list|type=block|id=non_flammable_wood|mode=manual
+|warped_stem
+|stripped_warped_stem
+|warped_hyphae
+|stripped_warped_hyphae
+|crimson_stem
+|stripped_crimson_stem
+|crimson_hyphae
+|stripped_crimson_hyphae
+|crimson_planks
+|warped_planks
+|crimson_slab
+|warped_slab
+|crimson_pressure_plate
+|warped_pressure_plate
+|crimson_fence
+|warped_fence
+|crimson_trapdoor
+|warped_trapdoor
+|crimson_fence_gate
+|warped_fence_gate
+|crimson_stairs
+|warped_stairs
+|crimson_button
+|warped_button
+|crimson_door
+|warped_door
+|crimson_sign
+|warped_sign
+|crimson_wall_sign
+|warped_wall_sign
+|crimson_hanging_sign
+|warped_hanging_sign
+|crimson_wall_hanging_sign
+|warped_wall_hanging_sign
+}}
+
+=== replaceable_plants ===
+* 被{{cd|replaceable_by_trees}}替代。
+
+添加于：[[Java版1.18-pre5]]。移除于：[[23w14a]]。
+
+{{tag list|type=block|id=replaceable_plants|mode=manual
+|short_grass
+|fern
+|dead_bush
+|vine
+|glow_lichen
+|sunflower
+|lilac
+|rose_bush
+|peony
+|tall_grass
+|large_fern
+|hanging_roots
+}}
+
+=== stripped_logs ===
+{{Info needed}}
+
+添加于：[[22w42a]]。移除于：[[22w46a]]。
+
+{{tag list|type=block|id=stripped_logs|mode=manual
+|stripped_oak_log
+|stripped_spruce_log
+|stripped_birch_log
+|stripped_jungle_log
+|stripped_acacia_log
+|stripped_dark_oak_log
+|stripped_crimson_stem
+|stripped_warped_stem
+|stripped_mangrove_log
+}}
+
+=== tall_flowers ===
+{{Info needed}}
+
+添加于：[[19w34a]]。移除于：[[24w45a]]。
+
+{{tag list|type=block|id=tall_flowers|mode=manual
+|sunflower
+|lilac
+|peony
+|rose_bush
+|pitcher_plant
+}}
+
+=== water_hacked ===
+{{Info needed}}
+
+添加于：[[18w07a]]。移除于：[[18w10c]]。
+
+{{tag list|type=block|id=water_hacked|mode=manual
+|#stairs
+|#waterlogged
+|#slabs
+|chest
+}}
+
+=== waterlogged ===
+{{Info needed}}
+
+添加于：[[18w07b]]。移除于：[[18w10c]]。
+
+{{tag list|type=block|id=waterlogged|mode=manual
+|#coral_plants=upcoming
+|bubble_column
+|kelp
+|kelp_top
+|sea_grass
+|tall_sea_grass
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=17w49a|加入了方块标签：{{cd|#planks|#wool|d=pretty}}。}}
+|{{HistoryLine|||dev=17w49b|加入了{{cd|#buttons|#carpets|#doors|#flower_pots|#logs|#saplings|#stone_bricks|d=pretty}}。}}
+|{{HistoryLine|||dev=17w50a|加入了{{cd|#wooden_buttons|#wooden_doors|d=pretty}}。
+|向{{cd|#buttons}}中加入了石质按钮。
+|向{{cd|#doors}}中加入了铁门。}}
+|{{HistoryLine|||dev=18w01a|加入了{{cd|#anvil}}。}}
+|{{HistoryLine|||dev=18w02a|加入了{{cd|#enderman_holdable}}。}}
+|{{HistoryLine|||dev=18w06a|加入了{{cd|#banners|#wooden_pressure_plates|#wooden_slabs|#wooden_stairs|d=pretty}}。}}
+|{{HistoryLine|||dev=18w07a|加入了{{cd|#slabs|#stairs|#water_hacked|d=pretty}}。
+|加入了{{cd|#acacia_logs|#birch_logs|#dark_oak_logs|#jungle_logs|#spruce_logs|d=pretty}}。}}
+|{{HistoryLine|||dev=18w07b|加入了{{cd|#waterlogged}}。
+|加入了{{cd|#rails|#sand|d=pretty}}。}}
+|{{HistoryLine|||dev=18w09a|加入了{{cd|#coral}}。
+|向{{cd|#slabs|#stairs|#water_hacked|d=pretty}}中加入了箱子。}}
+|{{HistoryLine|||dev=18w10a|加入了{{cd|#coral_plants}}。
+|向{{cd|#waterlogged}}中加入了珊瑚。}}
+|{{HistoryLine|||dev=18w10c|移除了{{cd|#water_hacked|#waterlogged|d=pretty}}。}}
+|{{HistoryLine|||dev=18w19a|加入了{{cd|#leaves}}。}}
+|{{HistoryLine|||dev=pre8|加入了{{cd|#wall_corals|#impermeable|d=pretty}}。}}
+|{{HistoryLine||1.13.1|dev=18w31a|加入了{{cd|#underwater_bonemeals}}。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了{{cd|#bamboo_plantable_on|#dirt_like|#signs|#small_flowers|#standing_signs|#wall_signs|#walls|d=pretty}}。
+|修改了{{cd|#enderman_holdable|#flower_pots|#slabs|#stairs|d=pretty}}。}}
+|{{HistoryLine|||dev=18w44a|加入了{{cd|#beds}}。}}
+|{{HistoryLine||1.15|dev=19w34a|加入了{{cd|#bee_growables|#beehives|#crops|#flowers|#tall_flowers|d=pretty}}。}}
+|{{HistoryLine|||dev=19w41a|移除了{{cd|#dirt_like}}。}}
+|{{HistoryLine|||dev=19w44a|加入了{{cd|#shulker_boxes}}。}}
+|{{HistoryLine|||dev=pre2|加入了{{cd|#portals}}。}}
+|{{HistoryLine||1.16|dev=20w06a|加入了{{cd|#crimson_stems|#fire|#nylium|#warped_stems|#wart_blocks|d=pretty}}。
+|向{{cd|#planks|#standing_signs|#wall_signs|#wooden_buttons|#wooden_doors|#wooden_fences|#wooden_pressure_plates|#wooden_slabs|#wooden_stairs|#wooden_trapdoors|d=pretty}}中加入了诡异木和绯红木。
+|{{cd|#slabs}}现在使用对应的{{cd|#wooden_slabs}}标签。}}
+|{{HistoryLine|||dev=20w07a|加入了{{cd|#beacon_base_blocks|#wall_post_override|#wither_summon_base_blocks|d=pretty}}。
+|向{{cd|#enderman_holdable}}中加入了下界菌、菌索和菌岩，并从中移除了下界岩。}}
+|{{HistoryLine|||dev=20w09a|加入了{{cd|#climbable}}。
+|向{{cd|#flower_pots}}中加入了绯红菌盆栽、诡异菌盆栽、绯红菌索盆栽和诡异菌索盆栽。}}
+|{{HistoryLine|||dev=20w10a|加入了{{cd|#hoglin_repellents|#piglin_repellents|d=pretty}}。
+|向{{cd|#crimson_stems}}中加入了绯红菌核和去皮绯红菌核。
+|向{{cd|#warped_stems}}中加入了诡异菌核和去皮诡异菌核。}}
+|{{HistoryLine|||dev=20w11a|加入了{{cd|#gold_ores|#soul_speed_blocks|d=pretty}}。
+|向{{cd|#climbable}}中加入了缠怨藤。
+|向{{cd|#dragon_immune}}中加入了哭泣的黑曜石。
+|向{{cd|#hoglin_repellents}}中加入了诡异菌盆栽。}}
+|{{HistoryLine|||dev=20w12a|加入了{{cd|#soul_fire_base_bolcks}}。
+|{{cd|#gold_ores}}不再要求镐的品质了。}}
+|{{HistoryLine|||dev=20w13a|加入了{{cd|#logs_that_burn|non_flammable_wood|#strider_warm_blocks|d=pretty}}。
+|向{{cd|#dragon_immune}}中加入了重生锚。
+|{{cd|#logs}}被拆分为{{cd|#logs_that_burn|#crimson_stems|#warped_stems|d=pretty}}。}}
+|{{HistoryLine|||dev=20w14a|{{cd|#hoglin_repellents}}里加入了下界传送门和重生锚。}}
+|{{HistoryLine|||dev=20w15a|加入了{{cd|#campfires|#guarded_by_piglins|#signs|d=pretty}}。
+|向{{cd|#buttons}}中加入了磨制黑石按钮。
+|向{{cd|#slabs|#stairs|#walls|d=pretty}}中加入了黑石、磨制黑石与磨制黑石砖的对应变种。
+|向{{cd|#piglin_repellents}}中加入了灵魂营火。
+|从{{cd|#wall_post_override}}中移除了了灯笼和灵魂灯笼。}}
+|{{HistoryLine|||dev=20w17a|加入了{{cd|#pressure_plates|#stone_pressure_plates|d=pretty}}。
+|{{cd|#wall_post_override}}现在包含{{cd|#banners|#pressure_plates|d=pretty}}。}}
+|{{HistoryLine|||dev=20w19a|加入了{{cd|#prevent_mob_spawning_inside}}。}}
+|{{HistoryLine|||dev=20w21a|从{{cd|#prevent_mob_spawning_inside}}中移除了凋灵玫瑰。}}
+|{{HistoryLine|||dev=pre1|从{{cd|#prevent_mob_spawning_inside}}中移除了甜浆果丛。}}
+|{{HistoryLine|||dev=pre3|加入了{{cd|#infiniburn_end|infiniburn_nether|#infiniburn_overworld|d=pretty}}。
+|{{cd|#sand}}现在用于确定海龟蛋是否能在该方块上孵化。}}
+|{{HistoryLine||1.16.2|dev=20w27a|加入了{{cd|#mushroom_grow_block}}。}}
+|{{HistoryLine|||dev=20w28a|加入了{{cd|#base_stone_nether|#base_stone_overworld|d=pretty}}。}}
+|{{HistoryLine||1.17|dev=20w45a|加入了{{cd|#candle_cakes|#candles|#cauldrons|#crystal_sound_blocks|d=pretty}}。}}
+|{{HistoryLine|||dev=20w46a|加入了{{cd|#snow_sound_blocks}}。
+|{{cd|#cauldrons}}里加入了装有细雪的炼药锅。}}
+|{{HistoryLine|||dev=20w48a|{{cd|#snow_step_sound_blocks}}被重命名为{{cd|#inside_step_sound_block}}。}}
+|{{HistoryLine|||dev=20w49a|加入了{{cd|#dripstone_replaceable_blocks|#occludes_vibration_signals|d=pretty}}。}}
+|{{HistoryLine|||dev=21w05a|加入了{{cd|#azalea_log_replaceable|#cave_vines|#lush_plants_replaceable|d=pretty}}。
+|{{cd|#leaves}}里加入了杜鹃树叶和盛开的杜鹃树叶。}}
+|{{HistoryLine|||dev=21w07a|{{cd|#base_stone_overworld}}及里加入了阴沉石。
+|{{cd|#slab|#stairs|#wall|d=pretty}}里加入了阴沉石的各类变种。}}
+|{{HistoryLine|||dev=21w08a|加入了{{cd|#deepslate_ore_replaceables|#diamond_ores|#iron_ores|#lapis_ores|#redstone_ores|#stone_ore_replaceable|d=pretty}}。
+|{{cd|#base_stone_overworld}}里加入了凝灰岩并将阴沉石更改为深板岩。
+|{{cd|#gold_ores}}里加入了深层金矿石。
+|{{cd|#slab|#stairs|#wall|d=pretty}}里加入了深板岩圆石的各类变种并将阴沉石的各类变种更改为深板岩。}}
+|{{HistoryLine|||dev=21w10a|加入了{{cd|#coal_ores|#copper_ores|#emerald_ores|#lush_ground_replaceable|d=pretty}}。
+|{{cd|#lush_plants_replaceable}}里移除了苔藓块、{{cd|#flowers}}、草丛、高草丛、覆地苔藓、小型垂滴叶、大型垂滴叶、大型垂滴叶茎和藤蔓。
+|移除了{{cd|#azalea_log_replaceable}}。}}
+|{{HistoryLine|||dev=21w11a|{{cd|#stone_ore_replaceables}}里移除了凝灰岩并将其加入{{cd|#deepslate_ore_replaceables}}里。
+|{{cd|#climbable}}里加入了洞穴藤蔓及其植物形式。
+|{{cd|#impermeable}}里加入了遮光玻璃。}}
+|{{HistoryLine|||dev=21w13a|加入了{{cd|#dirt|#snow|d=pretty}}。
+|更改了{{cd|#bamboo_plantable_on|#enderman_holdable|d=pretty}}，并将{{cd|#dirt}}加入了该标签。
+|将切制铜台阶、楼梯及其非氧化变种分别加入{{cd|#slabs|#stairs|d=pretty}}。
+|{{cd|#small_flowers}}里加入了杜鹃花丛和盛开的杜鹃花丛。}}
+|{{HistoryLine|||dev=21w14a|{{cd|#stairs|#slabs|d=pretty}}里加入了切制铜台阶和楼梯的氧化变种。}}
+|{{HistoryLine|||dev=21w16a|加入了{{cd|#moss_replaceable}}。
+|移除了{{cd|#lush_plants_replaceable}}。
+|{{cd|#lush_ground_replaceable}}里加入了沙子和沙砾，并将其中的{{cd|#lush_plants_replaceable}}标签替换为{{cd|#moss_replaceable}}标签。
+|{{cd|#dirt}}标签里加入了草方块、菌丝体、苔藓块。
+|从一些已经包含{{cd|#dirt}}的标签中移除了重复出现的方块。}}
+|{{HistoryLine|||dev=21w17a|加入了{{cd|#small_dripleaf_placeable}}。}}
+|{{HistoryLine|||dev=21w18a|{{cd|#guarded_by_piglins}}里加入了粗金块。}}
+|{{HistoryLine|||dev=21w19a|加入了{{cd|#mineable/axe|#mineable/hoe|#mineable/pickaxe|#mineable/shovel|#needs_diamond_tool|#needs_iron_tool|#needs_stone_tool|d=pretty}}。
+|{{cd|#bee_growables}}里加入了洞穴藤蔓。
+|{{cd|#lush_ground_replaceables}}里移除了苔藓块。
+|{{cd|#saplings}}里加入了杜鹃花丛和盛开的杜鹃花丛。}}
+|{{HistoryLine|||dev=21w20a|加入了{{cd|#features_cannot_replace}}。
+|{{cd|#bee_growables}}里加入了洞穴藤蔓植株。}}
+|{{HistoryLine|||dev=pre1|加入了{{cd|#lava_pool_stone_replaceables|#geode_invalid_blocks|d=pretty}}。}}
+|{{HistoryLine||1.18|dev=21w37a|将{{cd|#lava_pool_stone_replaceables}}重命名为{{cd|#lava_pool_stone_cannot_replace}}。}}
+|{{HistoryLine|||dev=21w43a|加入了{{cd|#big_dripleaf_placeable}}。}}
+|{{HistoryLine|||dev=21w44a|加入了{{cd|#animals_spawnable_on|#axolotls_spawnable_on|#foxes_spawnable_on|#goats_spawnable_on|#mooshrooms_spawnable_on|#parrots_spawnable_on|#polar_bears_spawnable_on_in_frozen_ocean|#rabbits_spawnable_on|#wolves_spawnable_on|d=pretty}}。}}
+|{{HistoryLine||1.18.2|dev=22w03a|加入了{{cd|#fall_damage_resetting}}。
+|从{{cd|#goats_spawnable_on}}里移除了细雪。
+|{{cd|#azalea_root_replaceable}}里加入了雪块和细雪。}}
+|{{HistoryLine|||dev=22w05a|从{{cd|#dripstone_replaceable_blocks}}中移除了泥土。}}
+|{{HistoryLine|||dev=22w07a|从{{cd|#azalea_root_replaceable}}中移除了{{cd|#lush_ground_replaceable}}，并加入了{{cd|d=pretty|#base_stone_overworld|#dirt|#clay|#gravel|#sand}}。}}
+|{{HistoryLine||1.19|dev=exp1|加入了{{cd|d=pretty|#ancient_city_replaceables|#deepslate_blocks|#sculk_replaceable|#sculk_replaceable_worldgen|#skip_occlude_vibration_when_above}}。}}
+|{{HistoryLine|||dev=22w11a|在常规快照中加入了{{cd|d=pretty|#sculk_replaceable|#sculk_replaceable_world_gen}}。
+|加入了{{cd|d=pretty|#convertable_to_mud|#dragon_transparent|#frog_prefer_jump_to|#mangrove_logs}}。
+|向{{cd|#enderman_holdable}}中加入了泥巴。
+|向{{cd|#flowers}}中加入了红树胎生苗。
+|向{{cd|#inside_step_sound_blocks}}中加入了幽匿脉络。
+|向{{cd|#mineable/axe}}中加入了红树根。
+|向{{cd|#mineable/hoe}}中加入了幽匿块、幽匿催发体、幽匿脉络和幽匿尖啸体。
+|向{{cd|#mineable/pickaxe}}中加入了泥砖、泥砖楼梯、泥砖台阶和泥坯。
+|向{{cd|#mineable/shovel}}中加入了沾泥的红树根和泥巴。
+|向{{cd|#wither_immune}}中加入了[[光源方块]]。
+|向{{cd|#logs_that_burn}}中分别加入了{{cd|#mangrove_logs}}。
+|将红树类、泥砖类方块分别加入其所属组别的方块签内。
+|{{cd|#polar_bears_spawnable_on_in_frozen_ocean}}重命名为{{cd|#polar_bears_spawnable_on_alternate}}。}}
+|{{HistoryLine|||dev=22w12a|向{{cd|#mineable/hoe}}加入了红树树叶。}}
+|{{HistoryLine|||dev=22w13a|在常规快照中加入了{{cd|#ancient_city_replaceable}}。
+|加入了{{cd|#ancient_city_center_replaceable}}。
+|将{{cd|#carpets}}重命名为{{cd|#wool_carpets}}。
+|向{{cd|d=pretty|#dragon_immune|#features_cannot_replace|#wither_immune}}中加入了强化深板岩。}}
+|{{HistoryLine|||dev=22w14a|加入了{{cd|#dead_bush_may_place_on}}、{{cd|#mangrove_logs_can_grow_through}}、{{cd|#mangrove_roots_can_grow_through}}。
+|移除了{{cd|#ancient_city_center_replaceable}}，其中全部内容合并至{{cd|#ancient_city_replaceable}}中。}}
+|{{HistoryLine|||dev=22w15a|加入了{{cd|d=pretty|#completes_find_tree_tutorial|#dampens_vibrations|#nether_carver_replaceables|#overworld_carver_replaceables}}。
+|向{{cd|#dirt}}中加入了泥巴和沾泥的红树根。
+|向{{cd|#mangrove_logs_can_grow_through}}中加入了覆地苔藓和藤蔓。
+|向{{cd|#mangrove_roots_can_grow_through}}中加入了覆地苔藓、藤蔓、红树胎生苗和雪。
+|从{{cd|d=pretty|#dead_bush_may_place_on|#enderman_holdable}}中移除了泥巴。}}
+|{{HistoryLine|||dev=22w16a|加入了{{cd|#frogs_spawnable_on}}。}}
+|{{HistoryLine|||dev=22w17a|加入了{{cd|d=pretty|#overworld_natural_logs|#snaps_goat_horn}}。
+|向{{cd|#sculk_replaceable_world_gen}}中加入了磨制深板岩。}}
+|{{HistoryLine|||dev=22w18a|加入了{{cd|d=pretty|#snow_layer_can_survive_on|#snow_layer_cannot_survive_on}}。}}
+|{{HistoryLine|||dev=pre2|向{{cd|#snaps_goat_horn}}中加入了{{cd|copper_ore}}。}}
+|{{HistoryLine|||dev=pre3|从{{cd|#frogs_spawnable_on}}中移除了覆地苔藓。}}
+|{{HistoryLine||1.19.3|dev=22w42a|加入了{{cd|d=pretty|#invalid_spawn_inside|#stripped_logs}}。}}
+|{{HistoryLine|||exp=update_1_20|dev=22w42a|加入了{{cd|d=pretty|#all_hanging_signs|#ceiling_hanging_signs|#wall_hanging_signs}}。
+|向{{cd|#fence_gates}}中加入了竹栅栏。
+|向{{cd|#mineable/axe}}中加入了{{cd|#all_hanging_signs}}、竹马赛克和雕纹书架。
+|向{{cd|#planks}}中加入了竹板。
+|向{{cd|#standing_signs}}中加入了竹告示牌。
+|向{{cd|#wall_signs}}中加入了墙上的竹告示牌。
+|向{{cd|#wooden_buttons}}中加入了竹按钮。
+|向{{cd|#wooden_doors}}中加入了竹门。
+|向{{cd|#wooden_fences}}中加入了竹栅栏。
+|向{{cd|#wooden_pressure_plates}}中加入了竹压力板。
+|向{{cd|#wooden_slabs}}中加入了竹台阶和竹马赛克台阶。
+|向{{cd|#wooden_stairs}}中加入了竹楼梯和竹马赛克楼梯。
+|向{{cd|#wooden_trapdoors}}中加入了竹活板门。}}
+|{{HistoryLine|||dev=22w44a|向{{cd|#mineable/axe}}中加入了竹马赛克台阶和竹马赛克楼梯。
+|从{{cd|#wooden_slabs}}中移除了竹马赛克台阶。
+|从{{cd|#wooden_stairs}}中移除了竹马赛克楼梯。}}
+|{{HistoryLine|||exp=none|dev=22w44a|移除了{{cd|#non_flammable_wood}}。
+|向{{cd|#inside_step_sound_blocks}}中加入了绯红菌索、发光地衣、睡莲、覆地苔藓、下界苗、小型紫晶芽、诡异菌索和{{cd|#wool_carpets}}。}}
+|{{HistoryLine|||exp=update_1_20|dev=22w45a|加入了{{cd|#bamboo_blocks}}。
+|向{{cd|#mineable/axe}}中加入了{{cd|#bamboo_blocks}}。}}
+|{{HistoryLine|||exp=none|dev=22w46a|加入了{{cd|#all_signs}}。
+|移除了{{cd|#stripped_logs}}。}}
+|{{HistoryLine||1.19.4|dev=23w03a|向{{cd|#goats_spawnable_on}}中加入了{{cd|#animals_spawnable_on}}。}}
+|{{HistoryLine|||exp=update_1_20|dev=23w07a|加入了{{cd|d=pretty|#cherry_logs|#sniffer_diggable_block}}。
+|向{{cd|#wooden_buttons}}中加入了樱花木按钮。
+|向{{cd|#wooden_doors}}中加入了樱花木门。
+|向{{cd|#fence_gates}}中加入了樱花木栅栏门。
+|向{{cd|#wooden_fences}}中加入了樱花木栅栏。
+|向{{cd|#ceiling_hanging_signs}}中加入了悬挂式樱花木告示牌。
+|向{{cd|#leaves}}中加入了樱花树叶。
+|向{{cd|d=pretty|#flowers|#mineable/hoe}}中加入了樱花树叶和粉红色花簇。
+|向{{cd|#overworld_natural_logs}}中加入了樱花原木。
+|向{{cd|#logs_that_burn}}中加入了{{cd|#cherry_logs}}。
+|向{{cd|#planks}}中加入了樱花木板。
+|向{{cd|#wooden_pressure_plates}}中加入了樱花木压力板。
+|向{{cd|#saplings}}中加入了樱花树苗。
+|向{{cd|#standing_signs}}中加入了樱花木告示牌。
+|向{{cd|#wooden_slabs}}中加入了樱花木台阶。
+|向{{cd|#wooden_stairs}}中加入了樱花木楼梯。
+|向{{cd|#wooden_trapdoors}}中加入了樱花木活板门。
+|向{{cd|#wall_hanging_signs}}中加入了墙上的悬挂式樱花木告示牌。
+|向{{cd|#wall_signs}}中加入了墙上的樱花木告示牌。
+|向{{cd|#inside_step_sound_blocks}}中加入了粉红色花簇。
+|向{{cd|#sand}}中加入了可疑的沙子。}}
+|{{HistoryLine|||dev=pre1|向{{cd|#crops}}中加入了火把花植株。
+|向{{cd|#small_flowers}}中加入了火把花。}}
+|{{HistoryLine|||exp=none|dev=pre1|加入了{{cd|#smelts_to_glass}}。}}
+|{{HistoryLine|||dev=pre3|将{{cd|#flower_pots}}中的{{cd|flower_pot}}改为{{cd|potted_cherry_sapling}}。}}
+|{{HistoryLine||1.20|dev=23w12a|所有实验性标签不再属于[[实验性内容]]。 
+|加入了{{cd|d=pretty|#combination_step_sound_blocks|#sniffer_egg_hatch_boost|#trail_ruins_replaceable|#vibration_resonators}}。
+|从{{cd|#inside_step_sound_blocks}}中移除了覆地苔藓、雪、下界苗、诡异菌索、绯红菌索和{{cd|#wool_carpets}}。
+|向{{cd|#mineable/hoe}}中加入了校频幽匿感测体。}}
+|{{HistoryLine|||dev=23w13a|向{{cd|#crops}}中加入了瓶子草植株。
+|向{{cd|#flower_pots}}中加入了火把花盆栽。
+|向{{cd|#tall_flowers}}中加入了瓶子草。}}
+|{{HistoryLine|||dev=23w14a|加入了{{cd|d=pretty|#enchantment_power_provider|#enchantment_power_transmitter|#replaceable|#replaceable_by_trees|#sword_efficient}}。
+|移除了{{cd|#replaceable_plants}}，并由{{cd|#replaceable_by_trees}}替代。
+|向{{cd|d=pretty|#mineable/shovel|#bamboo_plantable_on|#overworld_carver_replaceables}}加入了可疑的沙砾。
+|向{{cd|#mineable/shovel}}中加入了可疑的沙子。
+|从{{cd|#sculk_replaceable}}中移除了{{cd|#sand}}，并加入了沙子和红沙。}}
+|{{HistoryLine|||dev=23w16a|加入了{{cd|d=pretty|#maintains_farmland|#stone_buttons}}。
+|从{{cd|#buttons}}中移除了石头按钮和磨制黑石按钮，并加入了新加入的{{cd|#stone_buttons}}标签。
+|从{{cd|#mineable/pickaxe}}中移除了石头按钮，并加入了新加入的{{cd|#stone_buttons}}标签。
+|从{{cd|#trail_ruins_replaceable}}中移除了沙子、泥土和砂土。}}
+|{{HistoryLine|||dev=pre1|从{{cd|#maintains_farmland}}中移除了南瓜和西瓜。}}
+|{{HistoryLine|||dev=pre2|从{{cd|#replaceable}}中移除了向日葵、丁香、玫瑰丛和牡丹。}}
+|{{HistoryLine|||dev=pre7|向{{cd|#slabs}}中加入了竹马赛克台阶。
+|向{{cd|#stairs}}中加入了竹马赛克楼梯。}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了{{cd|d=pretty|#camel_sand_step_sound_blocks|#concrete_powder}}。
+|将所有种类的混凝土粉末从{{cd|#mineable/shovel}}移至新加入的{{cd|#concrete_powder}}中，并将{{cd|#concrete_powder}}加入到{{cd|#mineable/shovel}}中。}}
+|{{HistoryLine|||dev=23w33a|向{{cd|#flowers}}中加入了紫颂花和孢子花。}}
+|{{HistoryLine||1.20.5|dev=24w03a|加入了{{cd|#armadillo_spawnable_on}}。}}
+|{{HistoryLine|||exp=update_1_21|dev=24w05a|向{{cd|#features_cannot_replace}}加入了{{cd|vault}}。}}
+|{{HistoryLine|||dev=24w06a|加入了{{cd|#blocks_wind_charge_explosions}}。}}
+|{{HistoryLine|||exp=none|dev=24w06a|加入了{{cd|#badlands_terracotta}}。
+|将{{cd|#armadillo_spawnable_on}}中的值{{cd|#terracotta}}替换为{{cd|#badlands_terracotta}}。}}
+|{{HistoryLine|||dev=24w07a|加入了{{cd|#does_not_block_hoppers}}。}}
+|{{HistoryLine|||dev=24w10a|向{{cd|#wolves_spawnable_on}}中加入了{{cd|d=pretty|coarse_dirt|podzol}}。}}
+|{{HistoryLine|||dev=24w12a|加入了{{cd|d=pretty|#incorrect_for_wooden_tool|#incorrect_for_gold_tool|#incorrect_for_stone_tool|#incorrect_for_iron_tool|#incorrect_for_diamond_tool|#incorrect_for_netherite_tool}}。}}
+|{{HistoryLine||1.21|dev=24w19a|将{{filepath|blocks}}目录更改为{{filepath|block}}。
+|加入了{{cd|#fire_aspect_lightable}}。}}
+|{{HistoryLine|||dev=24w21a|加入了{{cd|d=pretty|#air}}。}}
+|{{HistoryLine|||dev=pre1|移除了：{{cd|#fire_aspect_lightable}}。}}
+|{{HistoryLine|||dev=pre2|加入了{{cd|#mob_interactable_doors}}。
+|从{{cd|#wooden_doors}}中移除了铜门及其变种。}}
+|{{HistoryLine||1.21.2|dev=24w36a|加入了{{cd|#bats_spawnable_on}}。}}
+|{{HistoryLine|||exp=winter_drop|dev=24w40a|加入了{{cd|#pale_oak_logs}}。}}
+|{{HistoryLine|||dev=pre2|向{{cd|#combination_step_sound_blocks}}中加入了{{cd|pale_moss_carpet}}。
+|{{cd|#overworld_natural_logs}}现在包含{{cd|pale_oak_log}}而不是{{cd|#pale_oak_logs}}。}}
+|{{HistoryLine||1.21.4|dev=24w44a|{{cd|#pale_oak_logs}}不再属于[[实验性内容]]。}}
+|{{HistoryLine|||dev=24w45a|加入了{{cd|#bee_attractive}}。
+|移除了{{cd|#tall_flowers}}。}}
+|{{HistoryLine||1.21.5|dev=25w02a|加入了{{cd|d=pretty|#replaceable_by_mushrooms|#sword_instantly_mines}}。}}
+|{{HistoryLine|||dev=25w04a|将{{cd|test_block}}和{{cd|test_instance_block}}均添加到{{cd|#dragon_immune}}和{{cd|#wither_immune}}中。}}
+|{{HistoryLine|||dev=25w05a|加入了{{cd|#plays_ambient_desert_block_sounds}}。}}
+|{{HistoryLine|||dev=25w06a|加入了{{cd|#edible_for_sheep}}。
+|将{{cd|#dead_bush_may_place_on}}重命名为{{cd|#dry_vegetation_may_place_on}}。}}
+|{{HistoryLine|||dev=25w07a|加入了{{cd|#camels_spawnable_on}}。}}
+|{{HistoryLine|||dev=25w08a|向{{cd|#edible_for_sheep}}中加入更多值。}}
+|{{HistoryLine|||dev=25w09a|向{{cd|d=pretty|#dry_vegetation_may_place_on|#replaceable|#wall_post_override}}中加入更多值。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了{{cd|#triggers_ambient_desert_sand_block_sounds}}。
+|将{{cd|#plays_ambient_desert_block_sounds}}重命名为{{cd|#triggers_ambient_desert_dry_vegetation_block_sounds}}。}}
+|{{HistoryLine||1.21.9|dev=25w31a|加入了{{cd|d=pretty|#copper_chests|#copper_golem_statues|#copper|#incorrect_for_copper_tool|#lightning_rods|#wooden_shelves}}。}}
+|{{HistoryLine|||dev=25w32a|加入了{{cd|d=pretty|#chains|#lanterns|#bars}}。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了{{cd|#can_glide_through}}。}}
+|{{HistoryLine|||dev=25w42a|向{{cd|#can_glide_through}}加入了{{cd|#cave_vines}}。}}
+|{{HistoryLine||26.1|dev=snapshot-3|加入了{{cd|d=pretty|#cannot_support_kelp|#cannot_support_seagrass|#cannot_support_snow_layer|#enables_bubble_column_drag_down|#enables_bubble_column_push_up|#grows_crops|#overrides_mushroom_light_requirement|#support_override_cactus_flower|#support_override_snow_layer|#supports_azalea|#supports_bamboo|#supports_big_dripleaf|#supports_cactus|#supports_chorus_flower|#supports_chorus_plant|#supports_cocoa|#supports_crimson_fungus|#supports_crimson_roots|#supports_crops|#supports_dry_vegetation|#supports_frogspawn|#supports_hanging_mangrove_propagule|#supports_lily_pad|#supports_mangrove_propagule|#supports_melon_stem|#supports_nether_sprouts|#supports_nether_wart|#supports_pumpkin_stem|#supports_small_dripleaf|#supports_stem_crops|#supports_sugar_cane|#supports_sugar_cane_adjacently|#supports_vegetation|#supports_warped_fungus|#supports_warped_roots|#supports_wither_rose}}。
+|重命名以下标签：
+* <code>#dry_vegetation_may_place_on</code> → <code>#supports_dry_vegetation</code>
+* <code>#bamboo_plantable_on</code> → <code>#supports_bamboo</code>
+* <code>#small_dripleaf_placeable</code> → <code>#supports_small_dripleaf</code>
+* <code>#big_dripleaf_placeable</code> → <code>#supports_big_dripleaf</code>
+* <code>#mushroom_grow_block</code> → <code>#overrides_mushroom_light_requirement</code>
+* <code>#snow_layer_can_survive_on</code> → <code>#support_override_snow_layer</code>
+* <code>#snow_layer_cannot_survive_on</code> → <code>#cannot_support_snow_layer</code>}}
+|{{HistoryLine|||dev=snapshot-4|加入了{{cd|d=pretty|#supports_melon_stem_fruit|#supports_pumpkin_stem_fruit|#supports_stem_fruit}}。}}
+|{{HistoryLine|||dev=snapshot-6|加入了{{cd|d=pretty|#cannot_replace_below_tree_trunk|#ice_spike_replaceable|#substrate_overworld|#mud|#huge_red_mushroom_can_place_on|#beneath_bamboo_podzol_replaceable|#huge_brown_mushroom_can_place_on|#beneath_tree_podzol_replaceable|#grass_blocks|#forest_rock_can_place_on|#moss_blocks}}。
+|拆分了{{cd|#dirt}}，现在仅包含泥土、砂土和缠根泥土。}}
+|{{HistoryLine|||dev=snapshot-11|加入了{{cd|#prevents_nearby_leaf_decay}}。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了{{cd|d=pretty|#concrete|#glazed_terracotta|#suppresses_bounce|#shears_extreme_breaking_speed|#shears_major_breaking_speed|#shears_minor_breaking_speed}}。
+|将{{cd|#concrete_powder}}重命名为{{cd|#concrete_powders}}。}}
+|{{HistoryLine|||dev=snapshot-3|加入了{{cd|d=pretty|#speleothems|#sulfur_spike_replaceable_blocks}}。
+|将{{cd|d=pretty|#mineable/pickaxe|#happy_ghast_avoids}}中的滴水石锥替换为{{cd|#speleothems}}。}}
+|{{HistoryLine|||dev=snapshot-5|加入了{{cd|d=pretty|#fox_immune_to|#polar_bear_immune_to|#snow_golem_immune_to|#stray_immune_to|#wither_immune_to|#wither_skeleton_immune_to|#default_immune_to}}。}}
+|{{HistoryLine|||dev=snapshot-7|加入了{{cd|d=pretty|#causes_periodic_geyser_eruptions|#causes_continuous_geyser_eruptions}}。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了{{cd|d=pretty|#poplar_logs|#wool_stairs|#wool_slabs|#ores|#skulls|#blocks_motion|#blocks_motion_no_leaves|#entities_can_teleport_to|#blocks_dolphin_jump|#ice_melts_when_destroyed_above|#blocks_motion_in_heightmap|#blocks_motion_in_heightmap|#blocks_lava_fire_spread|#blocks_fluid_flow|#washed_away_by_fluids|#required_for_poplar_leaf_ambience|#causes_suffocation}}。}}
+|{{HistoryLine||26.3|dev=snapshot-2|加入了{{cd|d=pretty|#cannot_place_basalt_pillar_on|#turns_into_dirt_path|#turns_into_farmland}}。
+|向{{cd|#saplings}}中加入了{{cd|poplar_sapling}}。
+|向{{cd|#shears_major_breaking_speed}}中加入了{{cd|d=pretty|#wool_slabs|#wool_stairs}}。
+|向{{cd|#washed_away_by_fluids}}中加入了{{cd|d=pretty|bamboo_sapling|cobweb}}。
+|移除了{{cd|d=pretty|#overworld_carver_replaceables|#nether_carver_replaceables}}。}}
+|{{HistoryLine||26.3|dev=snapshot-3|加入了{{cd|d=pretty|#cats_can_lie_on|#cats_can_sit_on|#villagers_can_sleep_on_bed|#villager_babies_can_jump_on_bed|#speeds_up_zombie_villager_curing|#sculk_growth_inhibitors|#height_specific_ore_replaceables}}。
+|将{{cd|#convertable_to_mud}}重命名为{{cd|#convertible_to_mud}}。
+|向{{cd|d=pretty|#blocks_motion_no_leaves|#washed_away_by_fluids}}中加入了{{cd|straw_bed}}。
+|从{{cd|d=pretty|#deepslate_ore_replaceables|#stone_ore_replaceables}}中移除了{{cd|tuff}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[en:Block tag (Java Edition)]]
+[[fr:Tag de bloc (Édition Java)]]
+[[lzh:爪哇版簽/塊方]]
+[[uk:Теґ блоків (Java Edition)]]

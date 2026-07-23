@@ -1,0 +1,250 @@
+# 页面: 制箭台/24w14potato
+# 来源: https://zh.minecraft.wiki/w/%E5%88%B6%E7%AE%AD%E5%8F%B0/24w14potato
+# 分类: 
+# 抓取时间: 2026-07-14 17:20:38
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=24w14potato|nowarn=1}}
+{{Infobox block
+| title = 制箭台
+| image = Fletching Table.png
+| invimage = Fletching Table
+| block-breaking-tool = {{BreakingToolTooltip|axe}}
+| block-hardness = 2.5
+| block-blast-resistance = 2.5
+| block-lava-flammable = 是
+| block-suffocating = 是
+| block-redstone-conductor = 是
+| block-solid = 是
+| block-replaceable = 否
+| block-push-reaction = 不可推动，不可拉动
+| block-instrument = 贝斯
+| block-map-color = {{color|#8F7748}}
+| block-id-raw = fletching_table
+| item-creative-tab = {{tp|itemGroup.functional}}
+| maxStack = 64
+| renewable = 是
+| item-id-raw = fletching_table
+| nobe=1
+}}
+
+'''制箭台（Fletching Table）'''是一种可以处理[[毒树脂]]并将其最终转化为[[琥珀宝石]]的方块。
+
+== 生成 ==
+=== 自然生成 ===
+制箭台会生成在[[村庄]]的制箭师小屋中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Flint
+|B1= Flint
+|A2= Oak Planks;Spruce Planks;Birch Planks;Jungle Planks;Acacia Planks;Dark Oak Planks;Mangrove Planks;Cherry Planks;Bamboo Planks;Crimson Planks;Warped Planks;[马铃薯木板]Potato Planks
+|B2= Oak Planks;Spruce Planks;Birch Planks;Jungle Planks;Acacia Planks;Dark Oak Planks;Mangrove Planks;Cherry Planks;Bamboo Planks;Crimson Planks;Warped Planks;[马铃薯木板]Potato Planks
+|A3= Oak Planks;Spruce Planks;Birch Planks;Jungle Planks;Acacia Planks;Dark Oak Planks;Mangrove Planks;Cherry Planks;Bamboo Planks;Crimson Planks;Warped Planks;[马铃薯木板]Potato Planks
+|B3= Oak Planks;Spruce Planks;Birch Planks;Jungle Planks;Acacia Planks;Dark Oak Planks;Mangrove Planks;Cherry Planks;Bamboo Planks;Crimson Planks;Warped Planks;[马铃薯木板]Potato Planks
+|Output= Fletching Table
+|ingredients=[[燧石]] +<br>任意[[木板]]
+|showname= 0
+|ignoreusage=1
+|Olink=none
+}}
+
+== 破坏 ==
+挖掘制箭台的合适工具是斧。
+
+{{Breaking table/manual|only=je|nocopper=1|{{BlockSprite|Fletching Table}} 制箭台|2.5|axe}}
+
+制箭台被破坏后会掉落自身和内容物。
+
+== 用途 ==
+[[File:Fletching Table GUI 24w14potato.png|thumb|制箭台的GUI]]
+制箭台共有3个槽位：正上方的输入槽位、正下方的输出槽位和左侧的羽毛槽位。输入槽位只能放置指定的[[毒树脂]]。
+
+玩家打开制箭台的GUI时，GUI上方的标题栏会逐渐拉开以显示完整标题。制箭台的GUI标题指示了输入信息，而输出信息视情况而定。
+* 输入毒树脂的清晰度不小于<code>j</code>{{note|字符的大小判断标准依据字符代码的大小，下同}}（Jewel，宝石）时，会显示输出为琥珀宝石，即：
+** Fletching <''清晰度''> Clarity, <''杂质''> Impurities into Amber Gem<br>（改造 清晰度：<''清晰度''>, 杂质：<''杂质''> 为 琥珀宝石）
+* 不满足上述清晰度条件且此制箭台未处理过毒树脂时，会显示输出毒树脂的清晰度，即：
+** Fletching <''清晰度''> Clarity, <''杂质''> Impurities into <''清晰度''> Clarity, ¯\_(ツ)_/¯ Impurities<br>（改造 清晰度：<''清晰度''>, 杂质：<''杂质''> 为 清晰度：<''清晰度''>, 杂质：¯\_(ツ)_/¯）
+* 处理过一次毒树脂后，会显示输出毒树脂的清晰度和杂质，即：
+** Fletching <''清晰度''> Clarity, <''杂质''> Impurities into <''清晰度''> Clarity, <''杂质''> Impurities<br>（改造 清晰度：<''清晰度''>, 杂质：<''杂质''> 为 清晰度：<''清晰度''>, 杂质：<''杂质''>）
+
+=== 转化毒树脂 ===
+[[File:Fletching Process.gif|300px|缩略图|在制箭台-{}-中提纯毒树脂，得到琥珀宝石]]
+制箭台被放置时，游戏会随机指定此制箭台的下列信息：输入毒树脂的杂质和清晰度、输出毒树脂的杂质以及单个毒树脂的处理时间。杂质从<code>a</code>至<code>p</code>之间选取，清晰度从<code>a</code>至<code>j</code>之间选取，处理时间从10至200之间选取。这些信息会保存到制箭台的方块实体数据中，即使玩家破坏后再重新放置也不会改变。
+
+当玩家在羽毛槽位放置羽毛并在输入槽位放置要求的毒树脂时，游戏将开始转化毒树脂。每次转化都会将毒树脂的清晰度等级提高一级，当输入毒树脂的要求清晰度不低于<code>j</code>时，会输出琥珀宝石。由于自然情况下毒树脂的清晰度不会高于<code>j</code>且制箭台对输入毒树脂的清晰度要求不会高于<code>j</code>，因此毒树脂最终总能转化为琥珀宝石。
+
+处理过程中，羽毛槽位的羽毛物品会在GUI中沿着“∞”形的轨迹飘动，每处理一个毒树脂便飘动一周，结束后羽毛槽位会生成一个新的羽毛物品，无需再次补充。
+
+=== 更改职业 ===
+如果一个制箭台没有被[[村民]]认领，则附近的任意一个失业村民有机会转变职业为制箭师。
+
+=== 燃料 ===
+制箭台能用作[[熔炉]]、[[高炉]]或[[烟熏炉]]的燃料，每个制箭台能熔炼1.5个物品。
+
+=== 红石比较器 ===
+[[红石比较器]]可检测制箭台的内容物占空比，3个槽位都会被统计。
+
+== 音效 ==
+{{Sound table
+|sound=Wood dig1.ogg
+|sound2=Wood dig2.ogg
+|sound3=Wood dig3.ogg
+|sound4=Wood dig4.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source=方块
+|description=破坏方块
+|id=block.wood.break
+|translationkey=subtitles.block.generic.break
+}}
+{{Sound table
+|sound=Wood step1.ogg
+|sound2=Wood step2.ogg
+|sound3=Wood step3.ogg
+|sound4=Wood step4.ogg
+|sound5=Wood step5.ogg
+|sound6=Wood step6.ogg
+|subtitle=MC-177082
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.wood.fall
+|translationkey=-
+}}
+{{Sound table
+|sound=Wood step1.ogg
+|sound2=Wood step2.ogg
+|sound3=Wood step3.ogg
+|sound4=Wood step4.ogg
+|sound5=Wood step5.ogg
+|sound6=Wood step6.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source=方块
+|description=挖掘方块
+|id=block.wood.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Wood dig1.ogg
+|sound2=Wood dig2.ogg
+|sound3=Wood dig3.ogg
+|sound4=Wood dig4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source=方块
+|description=放置方块
+|id=block.wood.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Wood step1.ogg
+|sound2=Wood step2.ogg
+|sound3=Wood step3.ogg
+|sound4=Wood step4.ogg
+|sound5=Wood step5.ogg
+|sound6=Wood step6.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.wood.step
+|translationkey=subtitles.block.generic.footsteps
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=java
+|Fletching Table
+|spritetype=block
+|nameid=fletching_table
+|showblocktags=1
+|blocktags=mineable/axe
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=Fletching Table
+|spritetype=block
+|nameid=fletching_table
+|foot=1}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+制箭台拥有与其相关联的方块实体，以保存制箭台的附加数据。
+
+{{see also|方块实体数据格式}}
+
+{{/BE}}
+
+=== 物品数据 ===
+{{see also|物品格式}}
+
+{| class="" style="width:100%"
+| style="padding:0;" |
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;background-color: var(--custom-nbt-inherit-color);"
+|-
+! style="text-align:left;" | 默认[[数据组件]]结构和字段<span>[</span>[[编码格式/DataComponent|源页面]]<span>]</span>
+|-
+|
+<div class="treeview">
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="物品共通组件">物品共通组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="物品共通组件">
+** {{nbt|compound}}{{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|list|modifiers}}：提供的属性修饰符。
+**** {{nbt|compound}}：一个修饰符。
+***** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+***** {{nbt|string|name|existonsave=1|required=1}}：当前[[属性修饰符]]的名称。
+***** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+***** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+***** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+***** {{nbt|int array|uuid|existonsave=1|required=1}}：当前属性修饰符的UUID。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示属性修饰符的提示框。
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|compound|levels}}：魔咒数据。
+**** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示魔咒的提示框。
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}：（[[文本组件]]）一行描述信息。
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+</div>
+</div>
+|}
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;"
+|-
+! style="text-align:left;" | JSON
+|-
+|
+<syntaxhighlight copy="1" lang="json">{
+    "minecraft:enchantments": {
+        "levels": {}
+    },
+    "minecraft:attribute_modifiers": {
+        "modifiers": []
+    },
+    "minecraft:lore": [],
+    "minecraft:max_stack_size": 64,
+    "minecraft:repair_cost": 0,
+    "minecraft:rarity": "common"
+}</syntaxhighlight>
+|}
+|}
+
+在默认组件的基础上，制箭台使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt|compound|minecraft:fletching}} 数据组件
+*** {{nbt|boolean|explored}}：（默认为<samp>false</samp>）制箭台是否已经输出过产物。
+*** {{nbt|string|impurities|existonsave=1|required=1}}：单个字符，表示可接受的毒树脂的杂质。
+*** {{nbt|string|next_level_impurities|existonsave=1|required=1}}：单个字符，表示输出的毒树脂的杂质。
+*** {{nbt|short|processs_time|existonsave=1|required=1}}：处理每个毒树脂所需的时间。
+*** {{nbt|string|quality|existonsave=1|required=1}}：单个字符，表示可接受的毒树脂的清晰度。
+</div>
+
+== 注释 ==
+{{notelist}}
+
+== 导航 ==
+{{Navbox jokes|24w14potato}}
+
+[[Category:方块]]
+[[Category:功能方块]]

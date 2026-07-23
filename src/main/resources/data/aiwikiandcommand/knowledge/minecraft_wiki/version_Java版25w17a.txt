@@ -1,0 +1,148 @@
+# 页面: Java版25w17a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8825w17a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:36
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=25w17a
+|image=25w17a.png
+|image2=Java Edition 25w17a Simplified.png\Java Edition 25w17a Traditional.png\Java Edition 25w17a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2025年4月22日
+|jsonhash=b0b639d40ca10ef21f714eb801222e033680e17d
+|clienthash=213e49c5ad5361ba89e4e35529fb36ec46617fc3
+|clientmap=abbf58ef2c8c9400a40b8ad6272aba27f9a4f6ea
+|serverhash=575756f90e54e5c2cd78997dd9e3579936aa9d6d
+|servermap=78bbaacb166117d8b2f3afad82fccf8448602193
+|parent=1.21.6
+|prevparent=1.21.5
+|prev=25w16a
+|next=25w18a
+|nextparent=1.21.7
+}}<onlyinclude>
+
+'''25w17a'''是[[Java版1.21.6]]的第3个快照，发布于2025年4月22日<ref>{{snap|25w17a|Apr 22, 2025}}</ref>，将[[定位栏]]正式加入到游戏中，并修复了一些漏洞。
+
+== 新内容 ==
+=== 游戏内容 ===
+'''[[选项]]'''
+* 加入了“云层距离”视频设置选项以调整云层渲染范围，默认为128个区块。
+
+=== 命令格式 ===
+'''{{cmd|waypoint}}'''
+* 加入了如下新语法：
+** <code>waypoint modify <entity-selector> color reset</code>
+*** 重置路径点颜色效果。
+** <code>waypoint modify <entity-selector> style set <waypoint_style/resource></code><ref>官网更新日志称为<code>waypoint modify <entity-selector> style <waypoint_style/resource></code></ref>
+*** 更改路径点样式。
+** <code>waypoint modify <entity-selector> style reset</code>
+*** 重置路径点样式。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 加入了下列方块标签：
+** {{cd|#happy_ghast_avoids}}：{{cd|sweet_berry_bush|cactus|wither_rose|magma_block|fire|pointed_dripstone|d=pretty}}。
+*** [[快乐恶魂]]不会主动靠近的方块。
+** {{cd|#triggers_ambient_dried_ghast_block_sounds}}：{{cd|soul_sand|soul_soil|d=pretty}}。
+*** 控制上方的[[失水恶魂]]产生环境音效的方块。
+
+'''[[资源包]]'''
+* 现在可在{{filepath|waypoint_style}}目录下定义路径点图标样式。
+
+'''[[Realms]]'''
+* 新增了“地区偏好”设置，允许更精细地控制启动的Realms服务器所在的区域。
+** 可以指定一个可选地区，也可以选择根据Realms所有者或者首个加入会话的玩家的延迟自动决定地区。
+
+== 更改 ==
+=== 方块 ===
+'''[[失水恶魂]]'''
+* 现在物品[[稀有度]]为“常见”。
+* 现在不含水时需要下方为[[灵魂沙]]或[[灵魂土]]才能播放环境音效。
+
+=== 游戏内容 ===
+'''[[定位栏]]'''
+* 不再属于[[实验性内容]]。
+
+'''[[游戏规则]]'''
+* 游戏规则<code>useLocatorBar</code>现已重命名为<code>locatorBar</code>，且不再属于[[实验性内容]]。
+
+=== 命令格式 ===
+'''{{cmd|waypoint}}'''
+* 移除了<code>modify <entity-selector> fade</code>子命令。
+* 不再属于[[实验性内容]]。
+
+'''[[实体数据格式]]'''
+* {{nbt|compound|locator_bar_icon.alpha_fade}}字段因路径点不再使用透明度区分因而不再需要，现由新加入的{{nbt|string|locator_bar_icon.style}}控制的路径点样式区分。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|74}}。
+
+'''[[数据组件]]'''
+* 物品堆叠组件<code>attribute_modifiers</code>的{{nbt|compound|display}}字段现在是可选的。
+
+'''[[实验性内容]]'''
+* 移除了实验性数据包“{{tr|定位栏|定位條}}”和功能开关<code>locator_bar</code>。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|58}}。
+
+'''[[Realms]]'''
+* 更改了Realms配置屏幕的外观，现在分为4个标签页——世界、玩家、订阅和设置。
+
+'''[[着色器]]和后处理效果'''
+* <code>Fog</code>Uniform块
+** 移除了<code>FOG_IS_SKY</code>以拆分天空着色器。
+
+== 修复 ==
+{{fixes|fixedin=25w17a|showdesc=1|new=1
+|;old
+|240121|{{filename|1x1_b5.nbt}}部件不会在林地府邸中生成。
+|;dev
+|296369|发射器不能为快乐恶魂装备上挽具。
+|296421|潜行时右键装备着挽具的快乐恶魂会播放手部动画。
+|296438|不同于更新日志，属性修饰符的<code>display</code>字段不是可选的。
+|296443|快乐恶魂不会避免寻路进危险的方块。
+|296511|使用不透明或半透明的{{filename|selection.png}}的资源包会使游戏模式切换器图标隐形。
+|296516|将鼠标指针悬停于Realm在线玩家时，提示框错误地显示于附近元素的下方。
+|296538|失水恶魂的稀有度与其合成原料不符。
+|296542|定位栏上的路径点未调整以适应第三人称正面视角。
+|296567|定位栏上的路径点无视队伍颜色。
+|296583|在实体生成的同时修改其<code>waypoint_transmit_range</code>属性会使其不在定位栏上显示。
+|;prev
+|296750|游戏在使用AMD显卡的部分系统（主要是Linux系统）上启动后崩溃。
+|296755|资源包：全景图层现在会在标题界面中优先渲染。
+|296756|渲染距离为2和3时，云不显示。
+|296764|文本指针在命令自动补全文本之后渲染。
+|296766|25w16a中，可骑乘生物的物品栏界面缺失槽位。
+|296770|村民界面中的删除线文本在字符后渲染。
+|296774|“{{tr|选择要举报的聊天消息|選取要檢舉的聊天訊息|選擇要舉報的聊天訊息}}”菜单中的玩家消息不在被选中时显示。
+|296775|“{{tr|选择要举报的聊天消息|選取要檢舉的聊天訊息|選擇要舉報的聊天訊息}}”菜单中的部分元素在玩家消息被选中时渲染得更暗。
+|296777|拴绳{{key|Shift}}+右键对运输船无效。
+|296779|{{tr|社交|社群交流|社羣互動}}屏幕比往常渲染得更暗。
+|296782|“{{tr|举报玩家皮肤|檢舉玩家外觀|舉報玩家外觀}}”菜单中的玩家模型比往常渲染得更暗更低。
+|296794|熔炉、高炉和烟熏炉偶尔不显示烧炼进度条和亮起进度动画。
+|296805|将鼠标指针悬停于Realm在线玩家时，游戏崩溃。
+|296806|25w16a中，云的渲染对性能产生较大影响。
+|296807|“{{tr|创建新的世界|建立新的世界|建立新的世界}}”菜单中的已选中标签页标题在其背景之后渲染。
+|296808|资源包和数据包菜单中列表的标题在其背景之后渲染。
+|296984|Realms邀请菜单中的“{{tr|没有未决邀请！|沒有待處理的邀請！|未有待處理邀請！}}”文本在背景之后渲染。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:25w17a]]
+[[en:Java Edition 25w17a]]
+[[es:Java Edition 25w17a]]
+[[fr:Édition Java 25w17a]]
+[[ja:Java Edition 25w17a]]
+[[lzh:爪哇版二五週一七甲]]
+[[pt:Edição Java 25w17a]]
+[[ru:25w17a (Java Edition)]]
+[[uk:25w17a (Java Edition)]]

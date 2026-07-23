@@ -1,0 +1,135 @@
+# 页面: Java版13w04a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8813w04a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:05
+# 原始 Wikitext 内容:
+
+{{Dangerous version|手持头盔右键点击方块会导致游戏崩溃。<ref>{{bug|MC-8189|||Fixed}}</ref>}}
+{{Launcher unavailable}}
+{{Infobox version
+|title=13w04a
+|image=13w04a.png
+|image2=Java Edition 13w04a Simplified.png\Java Edition 13w04a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2013年1月24日
+|clientdl=
+[https://vault.omniarchive.uk/archive/java/client-release/1.5/pre/13w04a.jar 客户端（原始版本）]（[https://dn710009.ca.archive.org/0/items/Minecraft-JSONs/13w04a.json .json]）<br>[https://vault.omniarchive.uk/archive/java/client-release/1.5/pre/13w04a-whitelinefix.jar 客户端（实验性）]
+|jsondl=[https://dn710009.ca.archive.org/0/items/Minecraft-JSONs/13w04a.json .json]
+|serverdl=[https://vault.omniarchive.uk/archive/java/server-release/1.5/pre/13w04a.jar 服务端]
+|exedl=[https://vault.omniarchive.uk/archive/java/server-release/1.5/pre/13w04a.exe .exe]
+|parent=1.5
+|prevparent=1.4.7
+|prev=13w03a
+|next=13w05a
+|nextparent=1.5.1
+}}<onlyinclude>
+
+'''13w04a'''是[[Java版1.5]]的第6个快照，发布于2013年1月24日<ref>{{cite|url=http://mojang.com/2013/01/minecraft-snapshot-13w04a/|archive-url=1|archive=1|title=Minecraft Snapshot 13w04a|author=Dinnerbone|website=Mojang.com|date=Jan 24, 2013}}</ref>，加入了尚未完成的记分板，并修复了一些漏洞。
+
+== 新内容 ==
+=== 生物 ===
+'''常规'''
+* 生物在被重命名后（通过[[铁砧]]或[[刷怪蛋]]）会在6格半径距离内在头上显示它们的名字。
+
+=== 命令格式 ===
+'''[[记分板]]'''
+* 加入了[[记分板]]功能。
+** 尚未100%完成。
+** 记分板可用于记录死亡次数，杀害玩家次数，杀害生物次数，或玩家触发命令的次数。
+** 这个复杂的系统使用名字，显示名，和准则的组合，并给玩家记录分数，分数均为整数。
+
+== 更改 ==
+=== 方块 ===
+'''[[命令方块]]'''
+* 重命名的命令方块在聊天栏中会使用它们的名字来代替<code>@</code>。
+
+'''[[发射器]]'''
+* 现在能朝向任何方向放置。
+* 现在会将盔甲装备到1方格内的玩家身上。
+* 它们现在能激活[[TNT]]。
+* 它们现在能使用骨粉。
+* 它们现在能使用打火器，使用时会降低工具的耐久。
+
+'''[[投掷器]]'''
+* 现在能朝向任何方向放置。
+
+'''[[红石比较器]]'''
+* 现在能用到[[唱片机]]上。
+** 根据唱片号码来输出信号。
+
+'''[[台阶]]'''
+* 改进了双[[台阶]]。
+** 43:8将会成为“平滑台阶方块”并保持如此。
+** 简单地说：如果最高的位元被置位的话，顶部的纹理会用在每一个面上，这也可以用来做出平滑砂岩方块（43：9）。
+
+=== 物品 ===
+'''[[盔甲]]'''
+* 手持盔甲右键现在会穿戴。
+** 在这个快照中，这个功能是非常错误的，容易发生崩溃和不正确的槽位使用。
+** 漏洞在下一个快照中被修复。
+
+'''[[骨粉]]'''
+* 不再给予瞬间生长——取而代之的是进入下一个成长阶段：
+** 农作物将需要7个骨粉。
+** [[树苗]]和[[可可豆]]需要2个。
+** 蘑菇仍会瞬间长成[[巨型蘑菇]]。
+* 使用时会发出绿色粒子。
+* Dinnerbone表示他仍然需要平衡这个新的骨粉催熟系统<ref>{{tweet|dinnerbone|294890450853167105}}</ref>。
+
+=== 生物 ===
+'''常规'''
+* 生物现在不会主动走过铁轨。
+
+=== 游戏内容 ===
+'''[[创造模式]]'''
+* 在[[创造模式]]中，玩家现在可以在5米外击中生物或玩家。
+** [[生存模式]]和[[冒险模式]]保持原来的距离。
+
+== 修复 ==
+{{Fixes|fixedin=13w04a|prefix=Snapshot|showdesc=1
+|;old
+|127|活塞可以保持同时伸出和缩回的状态。
+|195|流动的水可以推动飞行的玩家。
+|515|箱子显示为打开的外观，但其实并没有被打开。
+|519|更新游戏版本后成就丢失。
+|562|可以多次给同一头牛喂食。
+|835|使用服务器控制台执行的{{cmd|say|link=none}}命令不会被计入服务器日志中。
+|1914|其他生物的刷怪笼有时会显示为猪刷怪笼。
+|2503|在创造模式下破坏船或矿车仍然会掉落其掉落物。
+|3316|盔甲魔咒（除荆棘外）对生物无效。
+|3981|发射器无法朝下发射物品。
+|4052|红石元件会由红石信号强度的变化而改变。
+|;dev
+|5742|较强的红石信号会被较弱的红石信号减弱。
+|6069|服务器加载问题。
+|6118|脉冲电路只能朝北或朝南工作。
+|6228|如果物品栏的第一格有其他物品，则漏斗将不会吸取第二格的物品。
+|6486|红石信号强度会导致奇怪的方块更新行为。
+|6779|粒子效果再次混乱。
+|6851|门把手的位置错误。
+|6906|漏斗无法吸取移动中的运输矿车内的物品。
+|6952|铁门在红石块被破坏后仍然保持激活状态。
+|;previous
+|7619|当漏斗矿车落入虚空后，游戏会崩溃。
+|7627|在游戏过程中更改纹理包会导致游戏渲染异常。
+|7663|漏斗矿车的行为异常。
+|7668|对着TNT矿车或漏斗矿车按下{{ctrl|选取方块}}键，给予的物品会是矿车而不是TNT矿车或漏斗矿车。
+|7940|由发射器生成的改名生物会导致死亡消息显示错误。
+|8042|漏斗矿车无法被放置在铁轨上。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.0}}
+
+[[de:13w04a]]
+[[en:Java Edition 13w04a]]
+[[es:Java Edition 13w04a]]
+[[fr:Édition Java 13w04a]]
+[[ja:Java Edition 13w04a]]
+[[ko:Java Edition 13w04a]]
+[[pt:Edição Java 13w04a]]
+[[ru:13w04a (Java Edition)]]

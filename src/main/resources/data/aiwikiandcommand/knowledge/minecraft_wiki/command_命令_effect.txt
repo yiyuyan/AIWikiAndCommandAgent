@@ -1,0 +1,118 @@
+# 页面: 命令/effect
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/effect
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=effect
+|oplevel=2\1
+|becheat=1
+}}
+
+管理玩家及其他实体上的[[状态效果]]。
+
+== 语法 ==
+* '''Java版'''
+: <code>effect clear [<targets>]</code>
+: <code>effect clear <targets> [<effect>]</code>
+:: 移除一种或所有效果。
+: <code>effect give <targets> <effect> [<seconds>]</code>
+: <code>effect give <targets> <effect> <seconds> [<amplifier>]</code>
+: <code>effect give <targets> <effect> <seconds> <amplifier> [<hideParticles>]</code>
+:: 给予一种效果。
+
+* '''基岩版'''
+: <code>effect <player: target> <effect: Effect> [seconds: int]</code>
+: <code>effect <player: target> <effect: Effect> <seconds: int> [amplifier: int]</code>
+: <code>effect <player: target> <effect: Effect> <seconds: int> <amplifier: int> [hideParticles: Boolean]</code>
+:: 给予一种效果，指定时长秒数。
+: <code>effect <player: target> <effect: Effect> infinite [amplifier: int]</code>
+: <code>effect <player: target> <effect: Effect> infinite <amplifier: int> [hideParticles: Boolean]</code>
+:: 给予一种效果，时长为无限。
+: <code>effect <player: target> clear [effect: Effect]</code>
+:: 移除一种或所有效果。
+
+== 参数 ==
+{{argument|targets|entity|player: target|CommandSelector<Actor>}}
+: 指定目标。
+: {{arg desc|je=entity|amount=multiple|type=entities|be=actor}}
+
+{{argument|effect|resource|effect: Effect}}
+: 指定给予或者需要移除的效果。
+: {{in|je}}{{arg desc|je=resource|registry=minecraft:mob_effect}}
+: {{in|be}}必须是一个[[状态效果#状态效果列表|状态效果ID]]，且必须是字母ID。
+
+{{argument|seconds|integer|seconds: int|int}}
+: 以秒为单位指定效果时长（可指定{{cd|infinite}}表示无限时长）。[[瞬间伤害]]（{{cd|minecraft:instant_damage}}）、[[瞬间治疗]]（{{cd|minecraft:instant_health}}）和[[饱和]]（{{cd|minecraft:saturation}}）是仅有的三个例外，其单位是游戏刻。必须在{{only|java|for=1至1,000,000}}或{{only|bedrock|for=0至2,147,483,647（仅在2,040,109,465或以下时才会生效。如果更大，虽然会提示成功，但不会产生效果）}}之间。若未指定，默认为30秒（对上述三个例外为1游戏刻）。{{in|be}}若指定为0秒，且目标已拥有指定效果，则会将原有的效果变更为0秒，即移除指定效果。
+
+{{argument|amplifier|integer|amplifier: int|int}}
+: 指定效果的放大倍率。{{arg desc|je=integer|min=0|max=255}}若未指定，默认为0。注意，状态效果的第1级（如[[生命恢复]]I）对应为0倍率，因此第2级状态效果（如生命恢复II）应指定倍率为1。部分效果没有强弱之分，如[[夜视]]。
+
+{{argument|hideParticles|bool|hideParticles: Boolean|bool}}
+: 指定是否隐藏状态效果的[[粒子]]，以及{{only|Java|for=游戏界面上的状态效果指示图标}}。必须为<code>true</code>或<code>false</code>。若未指定，默认为<code>false</code>。
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><targets></code>或<code>player: target</code>未能选中实体（若为玩家名则必须在线上）|fail|fail}}
+{{Result table|cmd=/effect give ...|指定实体均满足以下任意条件：<br>
+* 该实体免疫此效果。
+* 该实体拥有<code>hideParticles</code>属性相同的相同效果，且赋予的效果无更高等级或更长时长。||N/A}}
+{{Result table|cmd=/effect clear|<code><targets></code>未指定，且命令执行者不是玩家||}}
+{{Result table|cmd={{only|je|for=/effect clear ...}}<br>{{only|be|for=/effect ... clear}}|没有效果可从实体身上移除||fail}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|失败时|0|0|0}}
+{{Output table|成功时|1|1|被给予或移除效果的实体数}}
+{{Output table|edition=be|失败时|0}}
+{{Output table|成功时|被给予或移除效果的实体数}}
+{{Output table}}
+
+== 示例 ==
+* 给予自己60秒的[[迅捷]]II效果：<code>/effect give @s speed 60 1</code>{{only|java}}或<code>/effect @s speed 60 1</code>{{only|bedrock}}
+* 给予自己60秒的迅捷III效果：<code>/effect give @s speed 60 2</code>{{only|java}}或<code>/effect @s speed 60 2</code>{{only|bedrock}}
+* 给予所有玩家无限时长的夜视I效果并隐藏粒子效果：<code>/effect give @a night_vision infinite 0 true</code>{{only|java}}或<code>/effect @a night_vision infinite 0 true</code>{{only|bedrock}}
+* 从所有玩家身上清除任何效果：<code>/effect clear @a</code>{{Only|java}}或<code>/effect @a clear</code>{{Only|bedrock}}
+* 从所有玩家身上清除任何[[急迫]]效果：<code>/effect clear @a haste</code>{{only|java}}或<code>/effect @a clear haste</code>{{Only|bedrock}}
+* 清除所有僵尸身上的所有效果：<code>/effect clear @e[type=zombie]</code>{{only|java}}或<code>/effect @e[type=zombie] clear</code>{{Only|bedrock}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w09b|加入了{{cmd|effect|link=none}}命令。}}
+|{{HistoryLine||1.6.1|dev=pre|加入了{{cd|clear}}参数。}}
+|{{HistoryLine||1.8|dev=14w06a|加入了{{cd|<hideParticles>}}参数。}}
+|{{HistoryLine||1.13|dev=17w45a|更改了语法，此前的语法{{note|游戏内的命令帮助为<code>-{}-/effect <''玩家''> <''药水效果''> [''秒数''] [''等级''] [''隐藏粒子'']</code>或<code>-{}-/effect <''玩家''> clear</code>，与实际可输入的参数不符，故更正。}}如下：
+* <code>-{}-/effect <''目标''> <''药水效果ID''> [''秒数''] [''等级''] [''隐藏粒子'']</code>
+* <code>-{}-/effect <''目标''> clear</code>}}
+|{{HistoryLine||1.19.4|dev=23w05a|现在{{cd|<seconds>}}参数可以被指定为{{cd|infinite}}，给予无限时长的效果。}}
+|{{HistoryLine||1.20.5|dev=24w05b|参数{{cd|<amplifier>}}的上限由255改为127。}}
+|{{HistoryLine|||dev=24w06a|回退了上个版本的更改。}}
+|{{HistoryLine|Pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|effect|link=none}}命令。}}
+|{{HistoryLine|||dev=1.0.5.3|{{cmd|effect|link=none}}命令中的<code>amplifier</code>不再接受负数值。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.40|dev=1.21.40.20|加入了为状态效果设置无限持续时间的语法：{{cmd|effect <player: target> <effect: Effect> infinite [amplifier: int]|link=none}}、
+{{cmd|effect <player: target> <effect: Effect> infinite <amplifier: int> [hideParticles: Boolean]|link=none}}。
+|加入了移除特定状态效果的语法：{{cmd|effect <player: target> clear [effect: Effect]|link=none}}。}}
+}}
+
+== 注释 ==
+{{Notelist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/effect]]
+[[en:Commands/effect]]
+[[es:Comandos/effect]]
+[[fr:Commandes/effect]]
+[[ja:コマンド/effect]]
+[[ko:명령어/effect]]
+[[pt:Comandos/effect]]
+[[ru:Команды консоли/effect]]
+[[uk:Команди консолі/effect]]

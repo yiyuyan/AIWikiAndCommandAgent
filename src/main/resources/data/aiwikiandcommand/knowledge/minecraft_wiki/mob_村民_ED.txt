@@ -1,0 +1,33 @@
+# 页面: 村民/ED
+# 来源: https://zh.minecraft.wiki/w/%E6%9D%91%E6%B0%91/ED
+# 分类: 实体数据值页面
+# 抓取时间: 2026-07-14 17:29:01
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt inherit/mob}}
+** {{Nbt inherit/breedable}}
+** {{nbt|bool|AssignProfessionWhenSpawned}}：（为<samp>false</samp>时不存在）表示村民是否在生成时就已经赋予职业。
+** {{nbt|byte|FoodLevel|existonsave=1}}：（默认为0）当前村民的食物等级。只有当食物等级与村民物品栏内食物点数之和大于12时村民才会有意愿繁殖。
+** {{nbt|list|Inventory|required=1|existonsave=1}}：村民存储的物品栏，此标签最多容纳8组物品。当读取时，如果列表数量超过8，则超出范围的物品尝试与范围内的物品合并，如果无法合并则被删除。
+*** {{nbt|compound}}：物品栏中的一个物品。
+**** {{nbt inherit/itemnoslot}}
+** {{nbt transclude|编码格式/Entity|codec_gossips}}
+** {{nbt|long|LastGossipDecay|required=1|existonsave=1}}: （默认为0）此村民最后一次衰减言论值的时间。两次衰减时间不会小于{{convert|24000||分}}。
+** {{nbt|long|LastRestock|required=1|existonsave=1}}: （默认为0）此村民最后一次前往工作站点补货的时间。两次补货时间不会小于{{convert|2400}}。
+** {{nbt transclude|编码格式/Entity|codec_merchant_offers}}
+** {{nbt|int|RestocksToday|required=1|existonsave=1}}：（默认为0）村民今天补货的次数。村民每天最多补货两次。
+** {{nbt transclude|编码格式/Entity|codec_villager_data}}
+** {{nbt|boolean|VillagerDataFinalized}}：（默认为<code>false</code>）村民数据是否初始化完毕。此值为<code>false</code>时游戏会重置村民生物群系着装数据，并设置为<code>true</code>。
+** {{nbt|int|Xp|existonsave=1}}：（默认为0）此村民当前的经验值。
+</div><noinclude>
+[[Category:实体数据值页面]]
+
+[[en:Villager/ED]]
+[[fr:Villageois/ED]]
+[[ja:村人/ED]]
+[[pt:Aldeão/DE]]
+[[th:ชาวบ้าน/ED]]
+[[uk:Селянин/ДС]]
+</noinclude>

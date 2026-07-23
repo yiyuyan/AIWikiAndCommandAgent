@@ -1,0 +1,223 @@
+# 页面: 钻石鸡
+# 来源: https://zh.minecraft.wiki/w/%E9%92%BB%E7%9F%B3%E9%B8%A1
+# 分类: 
+# 抓取时间: 2026-07-14 17:37:46
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=Java版2.0|nowarn=1}}
+{{Infobox entity
+|image=Diamond Chicken.png
+|image2=Baby Diamond Chicken.png
+|imagecaption=成年
+|image2caption=幼年
+|image2size=100px
+|health={{hp|4}}
+|size='''成年：'''<br>高度：0.7格<br>宽度：0.4格<br>
+'''幼年：'''<br>高度：0.35格<br>宽度：0.2格<br>
+|spawn=见{{slink|生成}}
+|behavior=友好生物
+|damage=''爆炸伤害值取100%接触率时''<br>
+'''爆炸：'''<br>{{AutoDmg|29}}
+|entity-id-raw=见{{slink||数据值}}
+}}
+'''钻石鸡（Diamond Chicken<ref>{{link|url=https://web.archive.org/web/20130401191346/http://mojang.com/2013/04/its-finally-coming-minecraft-2-0/|title=It’s finally coming – Minecraft 2.0!|date=Apr 1,2013}}</ref>）'''是下蛋时可以生成[[钻石]]的[[鸡]]。
+
+== 生成 ==
+{{main|鸡#生成}}
+自然生成的[[鸡]]有7%的概率生成为钻石鸡。
+
+== 掉落物 ==
+成年鸡被杀死时会掉落：
+{{DropTable|name=Chicken|edition=java|nosource=1
+|{{DropLine|name=Raw Chicken|notes=not_burn|lootingquantity=0-1}}
+|{{DropLine|name=Cooked Chicken|notes=burn|lootingquantity=0-1}}
+|{{DropLine|name=Feather|quantity=0-2|lootingquantity=0-1}}
+}}
+* 如被[[玩家]]或驯服的[[狼]]杀死则会掉落{{xp|1|3}}。
+
+与其他幼年动物一样，杀死幼年鸡不会掉落任何经验和物品。
+
+== 行为 ==
+{{see also|鸡#行为}}
+钻石鸡会漫无目的地游荡，且经常在水里游泳。当钻石鸡从高处掉落时会迅速扇动翅膀来减慢下落速度以避免摔伤。尽管如此，它们仍然会尽力避免从悬崖上掉落。
+
+与普通的鸡不同，钻石鸡准备下蛋时会下[[钻石]]或[[青金石]]，而不是[[鸡蛋]]，且有5%的概率会[[爆炸]]。
+
+== 音效 ==
+{{rewrite|section=1|音效不正确}}
+{{Sound table
+|sound=Chicken say1.ogg
+|sound2=Chicken say2.ogg
+|sound3=Chicken say3.ogg
+|subtitle={{tp|subtitles.entity.chicken.ambient}}
+|source=友好生物
+|description=空闲时随机播放此声音
+|id=entity.chicken.ambient
+|translationkey=subtitles.entity.chicken.ambient
+}}
+{{Sound table
+|sound=Chicken hurt1.ogg
+|sound2=Chicken hurt2.ogg
+|subtitle={{tp|subtitles.entity.chicken.death}}
+|source=友好生物
+|description=死亡
+|id=entity.chicken.death
+|translationkey=subtitles.entity.chicken.death
+}}
+{{Sound table
+|sound=Chicken plop.ogg
+|subtitle={{tp|subtitles.entity.chicken.egg}}
+|source=友好生物
+|description=下蛋
+|id=entity.chicken.egg
+|translationkey=subtitles.entity.chicken.egg
+}}
+{{Sound table
+|sound=Chicken hurt1.ogg
+|sound2=Chicken hurt2.ogg
+|subtitle={{tp|subtitles.entity.chicken.hurt}}
+|source=友好生物
+|description=受伤
+|id=entity.chicken.hurt
+|translationkey=subtitles.entity.chicken.hurt
+}}
+{{Sound table
+|sound=Chicken step1.ogg
+|sound2=Chicken step2.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=友好生物
+|description=行走
+|id=entity.chicken.step
+|translationkey=subtitles.block.generic.footsteps
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{| class="wikitable" style="text-align:center"
+|-
+! 名称 || 存档ID || 数字ID || 本地化键名
+|-
+| style="text-align:left" | {{EntityLink|id=Diamond Chicken|link=none|Chicken}} || <code>Chicken</code> || <code>93</code> || <code>entity.Chicken.name</code>
+|}
+
+=== 实体数据 ===
+{{main|实体数据格式}}
+钻石鸡有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+<div class="treeview">
+{{nbt collapsed source|物品共通标签|no-remove=1|
+** {{nbt|short|id|required=1|existonsave=1}}：表示某种类的物品堆叠。若未指定，游戏会在加载区块或者生成物品时将其变更为空气。
+** {{nbt|byte|Count}}：[[物品]]的堆叠数，不存在时则默认为1。当此值不大于0时在游戏系统中将此物品视为空气。
+** {{nbt|short|Damage}}：物品的损伤值。
+** {{nbt|compound|tag}}：关于当前物品的额外信息，详细内容见[[物品格式/Java版1.20.5前|物品格式]]。此标签对于多数物品来说都是非必须项。
+}}
+* {{nbt|compound}} 实体数据
+** {{nbt collapsed|实体共通标签|
+** {{nbt|string|id|existonsave=1|required=1}}：实体类型。此数据仅在持久化保存（存储入区块文件或作为乘客实体保存）时存在。
+** {{nbt|short|Air|existonsave=1}}：（{{interval|left=-20|right=实体最大空气值}}）当前实体所剩的空气值。在指定环境中每刻增加4直至实体最大空气值；在可窒息环境中逐渐减少直至-20，达到-20后如果实体仍然在可窒息环境中则会受到伤害，并将此值重置为0，继续减少进行循环。此值不存在时游戏默认为实体最大空气值。
+** {{nbt|int|Dimension|existonsave=1|required=1}}：实体所处的维度。
+** {{nbt|float|fallDistance|existonsave=1|required=1}}：当前实体已经摔落的距离。值越大，实体落地时受到的摔落伤害越大。
+** {{nbt|short|Fire|existonsave=1|required=1}}：正值代表距离火熄灭剩余的时间，负值表示当前实体能够在火中站立而不着火的时间，单位为游戏刻。未着火且未接触火时，玩家为-{{convert|20}}，其他实体为-{{convert|1}}。
+** {{nbt|bool|Invulnerable|existonsave=1|required=1}}：实体是否能抵抗绝大多数伤害。如果为<samp>true</samp>，实体只会受到来自[[创造模式]]玩家或{{cmd|kill}}等造成的伤害。
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体将要移动的距离向量。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|bool|OnGround|existonsave=1|required=1}}：实体是否正在接触地面。
+** {{nbt|compound|Riding}}：此实体当前正在骑乘的实体。注意：如果实体处于骑乘状态，堆叠中“最高”的实体拥有{{nbt|list|Pos}}标签，而该标签指定了“最低”的实体的坐标。同样，“最低”的实体控制这堆实体的运动；当实体堆叠由刷怪笼生成时，生成条件由最上方的实体决定。
+*** 见[[实体数据格式]]。
+** {{nbt|int|PortalCooldown|existonsave=1|required=1}}：距离当前实体下一次可以穿过[[下界传送门]]传送的时间，以游戏刻计。在使用下界传送门传送后，此项根据玩家游戏模式和当前游戏规则设置冷却。当实体不接触下界传送门方块时，此值每游戏刻减1直至0，此时才可以再次使用下界传送门传送。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+** {{nbt|list|Rotation|existonsave=1|required=1}}：实体的旋转角度，使用角度制。如果角度值为无限或非数（NaN），则对应角度会被修改为0度。
+*** {{nbt|float}}：（{{interval|left=0|right=360}}）当前实体以Y轴为中心，与正南方以顺时针方向旋转的视角角度（即偏转角）。如果角度值超出对应值域，则在按照相同朝向重新限制到值域内。
+*** {{nbt|float}}：（{{interval|left=-90|right=90}}）当前实体与视角与水平面之间的倾斜角（即俯仰角）。水平面为0，正值表示面朝下方，相反则为上方。如果此值超过值域，则被强制修改以回到值域。
+** {{nbt|long|UUIDLeast|existonsave=1|required=1}}：实体的UUID最低有效位。
+** {{nbt|long|UUIDMost|existonsave=1|required=1}}：实体的UUID最高有效位。
+}}
+** {{nbt collapsed|生物共通标签|
+** {{nbt|list|ActiveEffects}}：该生物的状态效果的列表。如果当前生物没有状态效果则不存在此标签。
+*** {{nbt|compound}}：一项状态效果。
+**** {{nbt|bool|Ambient}}：表示状态效果是否是被信标添加的。如果不存在则为<code>false</code>。
+**** {{nbt|byte|Amplifier}}：（无符号8位整数，{{interval|left=0|right=255}}）状态效果的等级。0表示等级1，以此类推。由于此数字为无符号整数，当值超过127时显示为负数但实际为正数，保存数字''s''和实际代表数字''a''的关系为<math>a=256+s</math>。如果不存在则为0。
+**** {{nbt|int|Duration}}：距离状态效果失效的时间刻数。如果此值为-1，则此状态效果不会失效。如果不存在则为0。
+**** {{nbt|int|Id|required=1|existonsave=1}}：状态效果的数字ID。
+** {{nbt|short|AttackTime|required=1|existonsave=1}}：生物免受攻击的时间。
+** {{nbt|boolean|CanPickUpLoot|required=1|existonsave=1}}：表示生物是否可以捡起战利品（穿戴捡起的盔甲，使用捡起的武器）。
+** {{nbt|string|CustomName}}：当前实体的自定义名称。会出现在玩家的死亡消息与村民的交易界面，以及玩家的光标指向的实体的上方。
+** {{nbt|bool|CustomNameVisible}}：表示实体是否一直渲染名称。如果为<samp>true</samp>，那么名称会一直在它们的上方渲染，而不受光标指向的影响。如果实体没有自定义名称，则渲染默认名称。此项不存在时游戏默认为<code>false</code>。
+** {{nbt|short|DeathTime|existonsave=1|required=1}}：距离生物死亡而被删除的时间，同时控制死亡动画。生物存活时为0，濒死时每游戏刻增加1，直至{{convert|20}}时生物被删除。
+** {{nbt|list|DropChances|existonsave=1}}：生物死亡时各种装备槽位物品的掉落概率，默认全部为8.5%。
+*** {{nbt|float}}：手部槽位的掉落概率。
+*** {{nbt|float}}：靴子槽位的掉落概率。
+*** {{nbt|float}}：护腿槽位的掉落概率。
+*** {{nbt|float}}：胸甲槽位的掉落概率。
+*** {{nbt|float}}：头盔槽位的掉落概率。
+** {{nbt|list|Equipment|existonsave=1}}：生物装备的物品。
+*** {{nbt|compound}}：手部槽位的物品。
+**** {{nbt collapsed link|物品共通标签}}
+*** {{nbt|compound}}：靴子槽位的物品。
+**** {{nbt collapsed link|物品共通标签}}
+*** {{nbt|compound}}：护腿槽位的物品。
+**** {{nbt collapsed link|物品共通标签}}
+*** {{nbt|compound}}：胸甲槽位的物品。
+**** {{nbt collapsed link|物品共通标签}}
+*** {{nbt|compound}}：头盔槽位的物品。
+**** {{nbt collapsed link|物品共通标签}}
+** {{nbt|short|Health|existonsave=1}}：当前生物所拥有的生命值。
+** {{nbt|short|HurtTime|existonsave=1|required=1}}：生物被伤害后发红时间的倒计时。当刚刚被伤害时此值被设置为{{convert|10}}，每游戏刻减少1直到0。
+** {{nbt|boolean|PersistenceRequired|required=1|existonsave=1}}：代表生物是否不会被自然删除。
+}}
+** {{nbt collapsed|可成长生物共通标签|
+** {{nbt|int|Age|required=1|existonsave=1}}：表示生物的年龄。生物为幼体时为负值；生物为成体时为正值或0，如果为正值则表示距离生物能再次繁衍的时间。
+}}
+** {{nbt collapsed|动物共通标签|
+** {{nbt|int|InLove|required=1|existonsave=1}}：距离生物失去繁衍意愿而停止寻找伴侣的时间。开始求爱模式时此值被设置为{{convert|600}}，每游戏刻此值减少1直至0时失去繁衍意愿。如果{{nbt|int|Age}}不为0则此值无法被设置为正值。
+** {{nbt|byte|Fatness|required=1|existonsave=1}}：未知。
+}}
+** {{nbt|boolean|DiamondChicken|required=1|existonsave=1}}：这只鸡是否是钻石鸡。
+</div>
+
+== 成就 ==
+{{main|成就/Java版}}
+
+{{Achievements/JE
+ |head=1
+ |title=Monster Hunter
+ |Bone
+ |{{tr|攻击并消灭一只怪物|攻擊並消滅一隻怪物}}
+ |{{tr|出击时间到！|殺戮時間！}}
+ |杀死敌对生物。
+ |killEnemy
+}}
+{{Achievements/JE
+ |title=Overkill
+ |fancy=1
+ |Diamond Sword
+ |{{tr|在一击内造成9颗心的伤害|一擊製造九顆心的傷害}}
+ |{{tr|附魔师|附魔師}}
+ |伤害可以施加给任何[[生物]]，即使那个生物的生命值低于9颗心。
+ |overkill
+ |foot=1
+}}
+
+== 参见 ==
+* [[鸡]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox jokes|2.0}}
+
+[[Category:实体]]
+[[Category:友好生物]]
+
+[[en:Diamond Chicken]]
+[[es:Pollo de diamante]]
+[[it:Gallina di diamante]]
+[[ja:Diamond Chicken]]
+[[pt:Edição Java 2.0/Diamond Chicken]]
+[[ru:Алмазная курица]]

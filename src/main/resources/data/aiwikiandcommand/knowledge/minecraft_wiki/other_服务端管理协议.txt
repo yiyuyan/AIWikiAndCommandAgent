@@ -1,0 +1,1349 @@
+# 页面: 服务端管理协议
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%AE%A1%E7%90%86%E5%8D%8F%E8%AE%AE
+# 分类: 
+# 抓取时间: 2026-07-14 17:28:36
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|对象|物件}}{{tr|mode=H|返回|回傳|返回}}
+{{about|{{el|je|nc=0}}中基于JSON-RPC协议，用于服务端管理的API|{{el|je}}中基于RCON协议，用于远程执行命令的API|远程控制台协议}}
+{{exclusive|java}}
+{{Relevant tutorial|服务端管理协议}}
+'''服务端管理协议（Server Management Protocol）'''是用于管理服务端而开放的API。
+
+{{TOC|none|limit=4}}
+
+== 配置 ==
+服务端管理协议默认关闭，必须设置[[服务端配置文件]]中的<code>management-server-enabled</code>为<samp>true</samp>才可以开启。
+
+在服务端配置文件中，下列配置与服务端管理协议有关：
+* <code>management-server-enabled</code>：（默认为<code>false</code>）是否开启服务端管理协议。
+* <code>management-server-host</code>：（默认为<code>localhost</code>）服务端管理协议绑定的主机名。
+* <code>management-server-port</code>：（默认为0）服务端管理协议监听的端口。如果此值为0，游戏将绑定当前未被占用的可绑定端口。
+* <code>management-server-secret</code>：（默认为随机生成的有效令牌）用于认证的令牌，必须为只包含大写字母、小写字母及数字的长度为40的字符串（即满足正则表达式<code>^[a-zA-Z0-9]{40}$</code>）。
+* <code>management-server-allowed-origins</code>：在使用浏览器WebSocket API的情况下，服务端管理协议允许连入的来源<ref>https://developer.mozilla.org/zh-CN/docs/Glossary/Origin</ref>。以逗号（<code>,</code>）分割，且不允许有前后空格。
+* <code>management-server-tls-enabled</code>：（默认为<code>true</code>）是否启用TLS。
+* <code>management-server-tls-keystore</code>：保存服务端用于TLS的私钥和证书的KeyStore。
+* <code>management-server-tls-keystore-password</code>：KeyStore的密码。
+* <code>status-heartbeat-interval</code>：（默认为0）控制管理服务器向已连接的客户端发送心跳通知的间隔，单位为秒。设置为0会禁用此功能。
+
+如果服务端启动时不能绑定指定的主机名和端口，服务端将启动失败。
+
+== 协议内容 ==
+服务端管理协议基于[[wzh:WebSocket|WebSocket]]（仅支持HTTP/1.1）和[[#JSON-RPC|JSON-RPC]] 2.0协议进行双向通信。
+
+=== 认证与安全 ===
+服务端管理协议要求客户端连入时必须携带认证数据。游戏要求客户端建立WebSocket连接时，请求中需要包含<code>Authorization</code><ref>可参照[https://datatracker.ietf.org/doc/html/rfc2616#section-14.8 RFC2616，14.8节]及[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Headers/Authorization MDN文档]</ref>或<code>Sec-WebSocket-Protocol</code><ref>可参照[https://datatracker.ietf.org/doc/html/rfc6455#section-1.9 RFC6455，1.9节]及[https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Sec-WebSocket-Protocol MDN文档]</ref>认证请求头：
+* 对于<code>Authorization</code>请求头，游戏要求输入格式为<code>-{}-Bearer <''认证令牌''></code>。
+* 对于<code>Sec-WebSocket-Protocol</code>，游戏要求输入格式为<code>-{}-minecraft-v1, <''认证令牌''></code>。此格式用于浏览器WebSocket API<ref>https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket</ref>认证。
+
+如果客户端连入时不带有有效的认证请求头，或认证令牌不相符，游戏会直接返回HTTP状态码401（Unauthorized）中止连接。对于浏览器WebSocket API认证方式，游戏还将验证连接来源（请求头<code>Origin</code><ref>可参照[https://datatracker.ietf.org/doc/html/rfc6454#section-7 RFC6454，7章]及[https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Reference/Headers/Origin MDN文档]</ref>）：如果来源不在<code>management-server-allowed-origins</code>中列出，游戏也将以HTTP状态码401中止连接。
+
+假设服务端管理协议绑定在40745端口，且认证令牌设置为<code>n2pQcIG1OQ92jot2xG1M0aw0ZWnrh4F3Z3jw8qRP</code>。此处使用[https://github.com/vi/websocat websocat]进行举例说明，连接请求应如下所示：
+
+<syntaxhighlight lang="shell">
+$ websocat ws://localhost:40745
+websocat: WebSocketError: WebSocketError: Received unexpected status code (401 Unauthorized)
+websocat: error running
+$ websocat ws://localhost:40745 -H 'Authorization: Bearer n2pQcIG1OQ92jot2xG1M0aw0ZWnrh4F3Z3jw8qRP'
+{"jsonrpc":"2.0","method":"server/status","id":0}
+{"jsonrpc":"2.0","id":0,"result":{"started":true,"version":{"name":"25w37a","protocol":1073742092}}}
+</syntaxhighlight>
+
+使用浏览器WebSocket API则如下所示。部分网页可能具有内容安全策略（CSP）<ref>https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Guides/CSP</ref>从而阻止不安全的WebSocket连接或跨域连接，因此此脚本不能在所有网页或控制台内生效。启用TLS（见下文）可解决不安全WebSocket问题，但仍不能绕过CSP的跨域限制。
+
+<syntaxhighlight lang="javascript">
+const socket = new WebSocket(
+	'ws://localhost:40745',
+    ['minecraft-v1', 'n2pQcIG1OQ92jot2xG1M0aw0ZWnrh4F3Z3jw8qRP']
+);
+socket.onmessage = console.log;
+</syntaxhighlight>
+
+同时，服务端管理协议还可以设置使用TLS（Transport Layer Security，传输层安全性协议）以提高整个协议的安全性。TLS默认开启，但服务端默认不设置相应的KeyStore文件和密码。
+
+游戏初始化服务端管理协议时，如果使用TLS，游戏会按照下列流程逐步获取基础信息：
+# 游戏首先读取<code>management-server-tls-keystore</code>配置中指定的KeyStore。
+#* 如果文件未设置，游戏报错<code>TLS is enabled but keystore is not configured</code>。
+#* 如果文件不存在，或不是一个文件，则报错<code>Supplied keystore is not a file or does not exist: <''文件''></code>。
+# 读取KeyStore密码：
+## 首先读取环境变量<code>MINECRAFT_MANAGEMENT_TLS_KEYSTORE_PASSWORD</code>，如果此值不存在，则进行下一步。
+## 其次读取系统属性<code>management.tls.keystore.password</code>，如果此值不存在，则进行下一步。
+## 最后读取<code>management-server-tls-keystore-password</code>配置。
+## 如果上述3个步骤均未获得密码，游戏报错<code>Keystore password not set</code>。
+
+如果文件和密码都设置且有效，游戏会以[[wzh:PKCS 12|PKCS #12]]格式读取KeyStore，获取其中的服务端证书和私钥。如果证书和私钥无效，在服务端初始化时将直接报错。任何在TLS初始化过程中的报错均会停止服务端。
+
+服务端本身不会检验TLS证书的可信性，但客户端可能会检查。例如使用自簽章证书时客户端将报错：
+
+{{syntaxhighlight|lang=shell|<nowiki>
+$ websocat wss://localhost:40745 -H 'Authorization: Bearer n2pQcIG1OQ92jot2xG1M0aw0ZWnrh4F3Z3jw8qRP'
+websocat: WebSocketError: WebSocket SSL error: error:0A000086:SSL routines:tls_post_process_server_certificate:certificate verify failed:ssl/statem/statem_clnt.c:2123: (self-signed certificate)
+websocat: error running
+$ websocat wss://localhost:40745 -H 'Authorization: Bearer n2pQcIG1OQ92jot2xG1M0aw0ZWnrh4F3Z3jw8qRP' --insecure # 不验证证书可信性
+{"jsonrpc":"2.0","method":"server/status","id":0}
+{"jsonrpc":"2.0","id":0,"result":{"started":true,"version":{"name":"25w37a","protocol":1073742092}}}
+</nowiki>}}
+
+=== JSON-RPC ===
+'''[[wzh:JSON-RPC|JSON-RPC]]（JSON-Remote Procedure Call）'''是基于[[JSON]]的一种轻量级的远程过程调用协议。<ref>https://www.jsonrpc.org/</ref>
+
+Minecraft中的实现与原版规范有较大差异，本章节主要描述Minecraft中的JSON-RPC协议规范。
+
+客户端负责发起请求和处理响应，服务端负责处理请求和发送响应。服务端管理协议支持双向通信，因此websocat与Minecraft服务端既充当了客户端，也充当了服务端。在客户端和服务端的数据互换过程中，成员是区分大小写的。
+
+:<span class="minetip" title="此项为必选项" style="color: red;">*</span>意味着websocat向Minecraft服务端发送数据时，Minecraft要求成员必须存在。
+:<span class="minetip" title="存储时必存在" style="color: blue;">*</span>意味着Minecraft服务端向websocat发送数据时，成员一定存在。
+
+在服务端管理协议中，所有的请求方法名称均为有效的[[命名空间ID]]。所有以<code>minecraft:notification/</code>作为前缀的ID都是服务端发送到客户端的通知，而其他的ID均为客户端发送到服务端的请求。下文中，对于请求省略<code>minecraft</code>命名空间前缀，对于通知省略<code>minecraft:notification/</code>前缀。
+
+所有请求或通知的参数均作为第一个方法传参传入，不具有名称。以下为示例（右箭头代表向服务端的信息，左箭头反之）：
+
+<syntaxhighlight lang="shell">
+-> {"jsonrpc":"2.0","method":"minecraft:allowlist/set","params":[[{"name":"jeb_"}]],"id":1}
+<- {"jsonrpc":"2.0","id":1,"result":[{"id":"853c80ef-3c37-49fd-aa49-938b674adae6","name":"jeb_"}]}
+<- {"jsonrpc":"2.0","method":"minecraft:notification/allowlist/added","params":[{"id":"853c80ef-3c37-49fd-aa49-938b674adae6","name":"jeb_"}]}
+-> {"jsonrpc":"2.0","method":"minecraft:allowlist","id":2}
+<- {"jsonrpc":"2.0","id":2,"result":[{"id":"853c80ef-3c37-49fd-aa49-938b674adae6","name":"jeb_"}]}
+</syntaxhighlight>
+
+下列为游戏对JSON-RPC协议的具体实现。
+
+==== 请求 ====
+每个RPC调用都对应一个'''请求（Request）'''。
+
+<div class="treeview">
+* {{nbt|compound}} JSON元素根标签
+** {{nbt|string|jsonrpc|existonsave=1}}：使用的JSON-RPC协议版本，严格为<code>"2.0"</code>。
+** {{nbt|int|id}}：由客户端建立的标识符，需要包含一个数字，否则视为[[#通知|通知]]。
+** {{nbt|string|method|required=1|existonsave=1}}：包含要调用的方法的名称。
+** {{nbt|compound}}{{nbt|list|params}}：在调用方法时使用的参数值负载。
+*** {{nbt condition|如果型別为{{nbt|list|陣列}}，则直接传递参数：}}
+*** {{nbt|any}}：单个参数，具体负载的数据类型见下文。
+*** {{nbt condition|如果型別为{{nbt|compound|{{tr|对象|物件}}}}，则按名称传递参数：}}
+*** {{nbt|compound|<''参数名称''>|required=1}}：一项参数名及对应的负载。
+**** {{nbt|any}}：单个参数，具体负载的数据类型见下文。
+</div>
+
+下文中，各个负载的参数名称会写在其参数后，例如<code>allowlist/set</code>负载的数据类型为数组，参数名称为<code>players</code>，那么会表示成{{nbt|list}} <code>players</code>。
+
+尽管缺失元素时游戏可以正常解析，但并不会有效执行请求，返回的通知也仅为空数组。
+
+===== 通知 =====
+'''通知（Notification）'''是<code>id</code>成员无效的请求。通知表明了客户端对相应的响应对象不感兴趣。因此，无论成功或失败，服务端都不会向客户端返回响应对象。
+
+==== 响应 ====
+当调用RPC时，除非请求是通知，服务器必须发送一个'''响应（Response）'''。
+
+===== 成功 =====
+<div class="treeview">
+* {{nbt|compound}} JSON元素根标签
+** {{nbt|string|jsonrpc|existonsave=1}}：使用的JSON-RPC协议版本，严格为<code>"2.0"</code>。
+** {{nbt|int|id|required=1|}}：与请求中<code>id</code>成员相同。
+** {{nbt|any|result|required=1|}}：具体内容，取决于调用的方法。
+</div>
+
+===== 失败 =====
+<div class="treeview">
+* {{nbt|compound}} JSON元素根标签
+** {{nbt|string|jsonrpc|existonsave=1}}：使用的JSON-RPC协议版本，严格为<code>"2.0"</code>。
+** {{nbt|int|id|}}：与请求中<code>id</code>成员相同。
+** {{nbt|compound|error|required=1||existonsave=1}}：错误对象。
+*** {{nbt|int|code|existonsave=1}}：错误代码，表示发生的错误类型。
+*** {{nbt|string|message|existonsave=1}}：错误消息，一条单句。
+*** {{nbt|string|data}}：详细的错误信息。
+</div>
+
+以下是常见的错误列表：
+
+{| class="wikitable"
+! <code>code</code> !! <code>message</code> !! 描述
+|-
+| -32700
+| Parse error
+| 请求字符串无法被解析为JSON。
+|-
+| -32600
+| Invalid Request{{sic}}
+| 请求对象无效。
+|-
+| -32601
+| Method not found
+| 方法不存在。
+|-
+| -32602
+| Invalid params
+| 调用参数无效。
+|-
+| -32603
+| Internal error
+| 服务端内部错误。
+|}
+
+==== {{tr|批处理|批次}}请求 ====
+Minecraft的JSON-RPC实现可以正确识别{{tr|批处理|批次}}请求格式并返回相应结果。
+
+{{tr|批处理|批次}}的格式为多个请求组成的数组，游戏将按顺序进行解析并执行。以下为示例：
+
+<syntaxhighlight lang="shell">
+-> [{"jsonrpc":"2.0","id":1,"method":"minecraft:allowlist/set","params":[[{"name":"jeb_"}]]},{"jsonrpc":"2.0","id":2,"method":"minecraft:allowlist","params":[]},{"jsonrpc":"2.0","id":3,"method":"minecraft:allowlist/clear","params":[]}]
+<- [{"jsonrpc":"2.0","id":1,"result":[{"id":"853c80ef-3c37-49fd-aa49-938b674adae6","name":"jeb_"}]},{"jsonrpc":"2.0","id":2,"result":[{"id":"853c80ef-3c37-49fd-aa49-938b674adae6","name":"jeb_"}]},{"jsonrpc":"2.0","id":3,"result":[]}]
+<- {"jsonrpc":"2.0","method":"minecraft:notification/allowlist/added","params":[{"id":"853c80ef-3c37-49fd-aa49-938b674adae6","name":"jeb_"}]}
+<- {"jsonrpc":"2.0","method":"minecraft:notification/allowlist/removed","params":[{"id":"853c80ef-3c37-49fd-aa49-938b674adae6","name":"jeb_"}]}
+</syntaxhighlight>
+
+=== 通用结构 ===
+在请求与通知中，有很多方法共通使用了同一种结构用于请求或响应。
+
+==== PlayerDto ====
+用于玩家相关的基础数据结构。
+
+<div class="treeview"><section begin="player_dto"/>
+* {{nbt|compound}} JSON元素根标签
+** {{nbt|string|id|existonsave=1}}：玩家的[[UUID]]。为带连字符的十六进制格式。
+** {{nbt|string|name|existonsave=1}}：玩家名称。
+<section end="player_dto"/>
+{{nbt collapsed source|PlayerDto|{{#lst:{{FULLPAGENAME}}|player_dto}}|no-remove=1}}
+</div>
+
+在请求时，UUID的读取优先级高于名称。如果两项数据均不设置，游戏将忽略此无效数据，不抛出错误。
+
+==== UserBanDto ====
+用于封禁玩家列表的基础结构。
+
+<div class="treeview"><section begin="user_ban_dto"/>
+* {{nbt|compound}} JSON元素根标签
+** {{nbt|string|expires|existonsave=1}}：封禁的过期时间。格式参见[[封禁列表存储格式]]。
+** {{nbt|compound|player|required=1|existonsave=1}}：一个玩家。
+*** {{nbt collapsed link|PlayerDto}}
+** {{nbt|string|reason|existonsave=1}}：封禁的原因。
+** {{nbt|string|source|existonsave=1}}：封禁的操作者。
+<section end="user_ban_dto"/>
+{{nbt collapsed source|UserBanDto|{{#lst:{{FULLPAGENAME}}|user_ban_dto}}|no-remove=1}}
+</div>
+
+==== IpBanDto ====
+用于封禁IP列表的基础结构。
+
+<div class="treeview"><section begin="ip_ban_dto"/>
+* {{nbt|compound}} JSON元素根标签
+** {{nbt|string|expires|existonsave=1}}：封禁的过期时间。格式参见[[封禁列表存储格式]]。
+** {{nbt|string|ip|required=1|existonsave=1}}：一个IP地址。
+** {{nbt|string|reason|existonsave=1}}：封禁的原因。
+** {{nbt|string|source|existonsave=1}}：封禁的操作者。
+<section end="ip_ban_dto"/>
+{{nbt collapsed source|IpBanDto|{{#lst:{{FULLPAGENAME}}|ip_ban_dto}}|no-remove=1}}
+</div>
+
+==== OperatorDto ====
+用于管理员列表的基础结构。
+
+<div class="treeview"><section begin="operator_dto"/>
+* {{nbt|compound}} JSON元素根标签
+** {{nbt|boolean|bypassesPlayerLimit|existonsave=1}}：玩家是否可以不受最大玩家数量限制进入服务端。
+** {{nbt|int|permissionLevel|existonsave=1}}：玩家的[[权限等级]]。
+** {{nbt|compound|player|required=1|existonsave=1}}：一个玩家。
+*** {{nbt collapsed link|PlayerDto}}
+<section end="operator_dto"/>
+{{nbt collapsed source|OperatorDto|{{#lst:{{FULLPAGENAME}}|operator_dto}}|no-remove=1}}
+</div>
+
+==== ServerState ====
+服务端状态的基本结构。
+
+<div class="treeview"><section begin="server_state"/>
+* {{nbt|compound}} JSON元素根标签
+** {{nbt|list|players||required=1existonsave=1}}：服务端在线的玩家。
+*** {{nbt|compound}}
+**** {{nbt collapsed link|PlayerDto}}
+** {{nbt|boolean|started|required=1|existonsave=1}}：服务端是否已启动。
+** {{nbt|compound|version|required=1|existonsave=1}}：服务端版本信息。
+*** {{nbt|string|name|required=1|existonsave=1}}：版本名称。
+*** {{nbt|int|protocol|required=1|existonsave=1}}：服务端的[[协议版本]]。
+<section end="server_state"/>
+{{nbt collapsed source|ServerState|{{#lst:{{FULLPAGENAME}}|server_state}}|no-remove=1}}
+</div>
+
+==== TypedRule ====
+游戏规则信息的基本结构。
+
+<div class="treeview"><section begin="typed_rule"/>
+* {{nbt|compound}} JSON元素根标签
+** {{nbt|string|key|existonsave=1}}：[[游戏规则]]的ID。
+** {{nbt|string|type|existonsave=1}}：游戏规则的值类型。只可能是<code>boolean</code>或<code>integer</code>。
+** {{nbt|any|value|existonsave=1}}：游戏规则的值。类型与对应游戏规则有关。
+<section end="typed_rule"/>
+{{nbt collapsed source|TypedRule|{{#lst:{{FULLPAGENAME}}|typed_rule}}|no-remove=1}}
+</div>
+
+=== 请求方法 ===
+下文中，对于无参数的请求，请求对应的章节内仅包含响应JSON结构；有参数的请求则同时包含负载和响应两部分。
+
+{| class="wikitable"
+! 方法 !! 具有参数 !! 作用
+|-
+| rpc.discover || 无 || 输出可用的所有方法，内容和{{filename|[[数据生成器#JSON-RPC_API模式报告|json-rpc-api-schema.json]]}}相同，且不会输出自身。<br>此方法可以在专用服务端启动前调用。
+|}
+
+==== 白名单管理 ====
+白名单相关方法共有5个，分别用于获取、设置、添加、修改及清空[[白名单存储格式|白名单]]。
+
+{| class="wikitable"
+! 方法 !! 具有参数 !! 作用
+|-
+| [[#allowlist|allowlist]] || 无 || 获取当前白名单
+|-
+| [[#allowlist/set|allowlist/set]] || 有 || 用新的白名单覆盖当前白名单，设置后不在白名单内的玩家将被立刻踢出服务端
+|-
+| [[#allowlist/add|allowlist/add]] || 有 || 将玩家添加到白名单中
+|-
+| [[#allowlist/remove|allowlist/remove]] || 有 || 将玩家移出白名单，设置后不在白名单内的玩家将被立刻踢出服务端
+|-
+| [[#allowlist/clear|allowlist/clear]] || 无 || 清空当前白名单
+|}
+
+===== allowlist =====
+<div class="treeview">
+* {{nbt|list}} <code>allowlist</code>
+** {{nbt|compound}}：一项在白名单中的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+===== allowlist/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>players</code>
+** {{nbt|compound}}：一项在白名单中的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>allowlist</code>
+** {{nbt|compound}}：一项在白名单中的玩家。此数组与传入负载一致。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+===== allowlist/add =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>add</code>
+** {{nbt|compound}}：一项要加入白名单中的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>allowlist</code>
+** {{nbt|compound}}：一项在白名单中的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+===== allowlist/remove =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>remove</code>
+** {{nbt|compound}}：一项要被移除于白名单中的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>allowlist</code>
+** {{nbt|compound}}：一项在白名单中的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+===== allowlist/clear =====
+<div class="treeview">
+* {{nbt|list}} <code>allowlist</code>
+** {{nbt|compound}}：一项白名单中的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+==== 封禁玩家列表管理 ====
+封禁玩家列表相关方法共有5个，分别用于获取、设置、添加、修改及清空[[封禁列表存储格式|封禁玩家列表]]。
+
+{| class="wikitable"
+! 方法 !! 具有参数 !! 作用
+|-
+| [[#bans|bans]] || 无 || 获取当前封禁玩家列表
+|-
+| [[#bans/set|bans/set]] || 有 || 用新的封禁玩家列表覆盖当前封禁玩家列表，设置后在封禁玩家列表内的玩家将被立刻踢出服务端
+|-
+| [[#bans/add|bans/add]] || 有 || 将玩家添加到封禁玩家列表中
+|-
+| [[#bans/remove|bans/remove]] || 有 || 将玩家移出封禁玩家列表，设置后在封禁玩家列表内的玩家将被立刻踢出服务端
+|-
+| [[#bans/clear|bans/clear]] || 无 || 清空当前封禁玩家列表
+|}
+
+===== bans =====
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁玩家列表中的玩家。
+*** {{nbt collapsed link|UserBanDto}}
+</div>
+
+===== bans/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>bans</code>
+** {{nbt|compound}}：一项在封禁玩家列表中的玩家。
+*** {{nbt collapsed link|UserBanDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁玩家列表中的玩家。此数组与传入负载一致。
+*** {{nbt collapsed link|UserBanDto}}
+</div>
+
+===== bans/add =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>add</code>
+** {{nbt|compound}}：一项要加入封禁玩家列表中的玩家。
+*** {{nbt collapsed link|UserBanDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁玩家列表中的玩家。
+*** {{nbt collapsed link|UserBanDto}}
+</div>
+
+===== bans/remove =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>remove</code>
+** {{nbt|compound}}：一项要被移除于封禁玩家列表中的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁玩家列表中的玩家。
+*** {{nbt collapsed link|UserBanDto}}
+</div>
+
+===== bans/clear =====
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁玩家列表中的玩家。
+*** {{nbt collapsed link|UserBanDto}}
+</div>
+
+==== 封禁IP列表管理 ====
+封禁IP列表相关方法共有5个，分别用于获取、设置、添加、修改及清空[[封禁列表存储格式|封禁IP列表]]。
+
+{| class="wikitable"
+! 方法 !! 具有参数 !! 作用
+|-
+| [[#ip_bans|ip_bans]] || 无 || 获取当前封禁IP列表
+|-
+| [[#ip_bans/set|ip_bans/set]] || 有 || 用新的封禁IP列表覆盖当前封禁列表，设置后在封禁IP列表内IP的玩家将被立刻踢出服务端
+|-
+| [[#ip_bans/add|ip_bans/add]] || 有 || 将IP添加到封禁IP列表中
+|-
+| [[#ip_bans/remove|ip_bans/remove]] || 有 || 将IP移出封禁IP列表，设置后在封禁IP列表内IP的玩家将被立刻踢出服务端
+|-
+| [[#ip_bans/clear|ip_bans/clear]] || 无 || 清空当前封禁IP列表
+|}
+
+===== ip_bans =====
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁IP列表中的玩家。
+*** {{nbt collapsed link|IpBanDto}}
+</div>
+
+===== ip_bans/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁IP列表中的玩家。
+*** {{nbt collapsed link|IpBanDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁IP列表中的玩家。此数组与传入负载一致。
+*** {{nbt collapsed link|IpBanDto}}
+</div>
+
+===== ip_bans/add =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>add</code>
+** {{nbt|compound}}：一项要加入封禁IP玩家列表中的IP。
+*** {{nbt|string|expires|existonsave=1}}：封禁的过期时间。
+*** {{nbt|string|ip|existonsave=1}}：一个IP。
+*** {{nbt|compound|player|existonsave=1}}：一个玩家，游戏将获取此玩家的IP地址。
+**** {{nbt collapsed link|PlayerDto}}
+*** {{nbt|string|reason|existonsave=1}}：封禁的原因。
+*** {{nbt|string|source|existonsave=1}}：封禁的操作者。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁IP列表中的IP。
+*** {{nbt collapsed link|IpBanDto}}
+</div>
+
+===== ip_bans/remove =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>ip</code>
+** {{nbt|string}}：一个要被移除于封禁IP列表中的IP。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁IP列表中的IP。
+*** {{nbt collapsed link|IpBanDto}}
+</div>
+
+===== ip_bans/clear =====
+<div class="treeview">
+* {{nbt|list}} <code>banlist</code>
+** {{nbt|compound}}：一项在封禁IP列表中的IP。
+*** {{nbt collapsed link|IpBanDto}}
+</div>
+
+==== 玩家管理 ====
+玩家相关方法共有2个，分别用于获取玩家列表和踢出玩家。
+
+{| class="wikitable"
+! 方法 !! 具有参数 !! 作用
+|-
+| [[#players|players]] || 无 || 获取当前玩家列表
+|-
+| [[#players/kick|players/kick]] || 有 || 将玩家踢出服务器
+|}
+
+===== players =====
+<div class="treeview">
+* {{nbt|list}} <code>players</code>
+** {{nbt|compound}}：一个在线的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+===== players/kick =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>kick</code>
+** {{nbt|compound}}：一项要踢出的玩家。
+*** {{nbt|compound|message|required=1|existonsave=1}}：踢出玩家的原因。
+**** {{nbt|string|literal}}：（{{nbt|string|translatable}}存在时无效）要发送的文本。
+**** {{nbt|string|translatable}}：一个[[本地化键名]]，游戏会根据当前语言显示文本。
+**** {{nbt|list|translatableParams}}：替换本地化文本内的参数。处理方法详见{{slink|文本组件|本地化文本组件}}。
+***** {{nbt|string}}：一个参数。
+*** {{nbt|compound|player|required=1|existonsave=1}}：要踢出的玩家。
+**** {{nbt collapsed link|PlayerDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>kicked</code>
+** {{nbt|compound}}：一项玩家。此数组仅包含实际被踢出的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+==== 管理员列表管理 ====
+管理员列表相关方法共有5个，分别用于获取、设置、添加、修改及清空[[管理员列表存储格式|管理员列表]]。
+
+{| class="wikitable"
+! 方法 !! 具有参数 !! 作用
+|-
+| [[#operators|operators]] || 无 || 获取当前管理员列表
+|-
+| [[#operators/set|operators/set]] || 有 || 用新的管理员列表覆盖当前管理员列表，设置后不在管理员列表内的玩家将立刻丢失管理员权限
+|-
+| [[#operators/add|operators/add]] || 有 || 将玩家添加到管理员列表中
+|-
+| [[#operators/remove|operators/remove]] || 有 || 将玩家移出管理员列表，设置后不在管理员列表内的玩家将立刻丢失管理员权限
+|-
+| [[#operators/clear|operators/clear]] || 无 || 清空当前管理员列表
+|}
+
+===== operators =====
+<div class="treeview">
+* {{nbt|list}} <code>operators</code>
+** {{nbt|compound}}：一项在管理员列表中的玩家。
+*** {{nbt collapsed link|OperatorDto}}
+</div>
+
+===== operators/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>operators</code>
+** {{nbt|compound}}：一项在管理员列表中的玩家。
+*** {{nbt collapsed link|OperatorDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>operators</code>
+** {{nbt|compound}}：一项在管理员列表中的玩家。此数组与传入负载一致。
+*** {{nbt collapsed link|OperatorDto}}
+</div>
+
+===== operators/add =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>add</code>
+** {{nbt|compound}}：一项要加入管理员列表中的玩家。
+*** {{nbt collapsed link|OperatorDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>operators</code>
+** {{nbt|compound}}：一项在管理员列表中的玩家。
+*** {{nbt collapsed link|OperatorDto}}
+</div>
+
+===== operators/remove =====
+'''负载'''
+<div class="treeview">
+* {{nbt|list}} <code>remove</code>
+** {{nbt|compound}}：一项要被移除于管理员列表中的玩家。
+*** {{nbt collapsed link|PlayerDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|list}} <code>operators</code>
+** {{nbt|compound}}：一项在管理员列表中的玩家。
+*** {{nbt collapsed link|OperatorDto}}
+</div>
+
+===== operators/clear =====
+<div class="treeview">
+* {{nbt|list}} <code>operators</code>
+** {{nbt|compound}}：一项在管理员列表中的玩家。
+*** {{nbt collapsed link|OperatorDto}}
+</div>
+
+==== 服务端状态管理 ====
+服务端状态相关方法共有4个。
+
+{| class="wikitable"
+! 方法 !! 具有参数 !! 作用
+|-
+| [[#server/status|server/status]] || 无 || 获取当前服务端状态
+|-
+| [[#server/save|server/save]] || 有 || 保存服务端
+|-
+| [[#server/stop|server/stop]] || 无 || 停止服务端
+|-
+| [[#server/system_message|server/system_message]] || 有 || 发送一条服务端消息
+|}
+
+===== server/status =====
+<div class="treeview">
+* {{nbt|compound}} <code>status</code>
+** {{nbt collapsed link|ServerState}}
+</div>
+
+===== server/save =====
+'''负载'''
+<div class="treeview">
+* {{nbt|boolean}} <code>flush</code>：是否立刻保存服务端数据。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>save</code>：是否保存成功。
+</div>
+
+===== server/stop =====
+<div class="treeview">
+* {{nbt|boolean}} <code>stopping</code>：是否已停止服务端。
+</div>
+
+===== server/system_message =====
+'''负载'''
+<div class="treeview">
+* {{nbt|compound}} <code>message</code>
+** {{nbt|compound|message|required=1|existonsave=1}}：要发送的消息。如果不存在任何有效文本则响应直接为<code>false</code>。
+*** {{nbt|string|literal}}：（{{nbt|string|translatable}}存在时无效）要发送的文本。
+*** {{nbt|string|translatable}}：一个[[本地化键名]]，游戏会根据当前语言显示文本。
+*** {{nbt|list|translatableParams}}：替换本地化文本内的参数。处理方法详见{{slink|文本组件|本地化文本组件}}。
+**** {{nbt|string}}：一个参数。
+** {{nbt|boolean|overlay|required=1|existonsave=1}}：此消息是否在[[动作栏]]而不是在聊天栏显示。
+** {{nbt|list|receivingPlayers|existonsave=1}}：若指定，则仅这些玩家可接收此消息。
+*** {{nbt|compound}}
+**** {{nbt collapsed link|PlayerDto}}
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>sent</code>：是否有玩家接收到了此服务端消息。
+</div>
+
+==== 服务端设置管理 ====
+服务端设置相关方法共有40个。部分设置亦在[[服务端配置文件]]中。
+
+下列方法的ID均遵守<code>serversettings/*</code>和<code>serversettings/*/set</code>的格式，它们的负载（若有）和响应的格式也类似：
+
+{| class="wikitable"
+! 方法 !! 具有参数 !! 作用
+|-
+| [[#serversettings/autosave|serversettings/autosave]] || 无 || 查询是否自动保存存档
+|-
+| [[#serversettings/autosave/set|serversettings/autosave/set]] || 有 || 设置是否自动保存存档
+|-
+| [[#serversettings/difficulty|serversettings/difficulty]] || 无 || 查询世界难度
+|-
+| [[#serversettings/difficulty/set|serversettings/difficulty/set]] || 有 || 设置世界难度
+|-
+| [[#serversettings/enforce_allowlist|serversettings/enforce_allowlist]] || 无 || 查询是否强制执行白名单
+|-
+| [[#serversettings/enforce_allowlist/set|serversettings/enforce_allowlist/set]] || 有 || 设置是否强制执行白名单，若开启则所有不在白名单内的玩家将被立刻踢出服务端
+|-
+| [[#serversettings/use_allowlist|serversettings/use_allowlist]] || 无 || 查询是否启用白名单
+|-
+| [[#serversettings/use_allowlist/set|serversettings/use_allowlist/set]] || 有 || 设置是否启用白名单
+|-
+| [[#serversettings/max_players|serversettings/max_players]] || 无 || 查询服务端同时能容纳的最大玩家数量
+|-
+| [[#serversettings/max_players/set|serversettings/max_players/set]] || 有 || 设置服务端同时能容纳的最大玩家数量
+|-
+| [[#serversettings/pause_when_empty_seconds|serversettings/pause_when_empty_seconds]] || 无 || 查询服务端在无玩家在线多长时间后停止计算
+|-
+| [[#serversettings/pause_when_empty_seconds/set|serversettings/pause_when_empty_seconds/set]] || 有 || 设置服务端在无玩家在线多长时间后停止计算
+|-
+| [[#serversettings/player_idle_timeout|serversettings/player_idle_timeout]] || 无 || 查询踢出空闲玩家的空闲时间
+|-
+| [[#serversettings/player_idle_timeout/set|serversettings/player_idle_timeout/set]] || 有 || 设置踢出空闲玩家的空闲时间
+|-
+| [[#serversettings/allow_flight|serversettings/allow_flight]] || 无 || 查询是否允许生存模式玩家飞行
+|-
+| [[#serversettings/allow_flight/set|serversettings/allow_flight/set]] || 有 || 设置是否允许生存模式玩家飞行
+|-
+| [[#serversettings/motd|serversettings/motd]] || 无 || 获取服务器的MOTD
+|-
+| [[#serversettings/motd/set|serversettings/motd/set]] || 有 || 设置服务器的MOTD
+|-
+| [[#serversettings/spawn_protection_radius|serversettings/spawn_protection_radius]] || 无 || 查询出生点保护区域的边长
+|-
+| [[#serversettings/spawn_protection_radius/set|serversettings/spawn_protection_radius/set]] || 有 || 设置出生点保护区域的边长
+|-
+| [[#serversettings/force_game_mode|serversettings/force_game_mode]] || 无 || 查询是否强制玩家加入时使用默认游戏模式
+|-
+| [[#serversettings/force_game_mode/set|serversettings/force_game_mode/set]] || 有 || 设置是否强制玩家加入时使用默认游戏模式
+|-
+| [[#serversettings/game_mode|serversettings/game_mode]] || 无 || 查询默认游戏模式
+|-
+| [[#serversettings/game_mode/set|serversettings/game_mode/set]] || 有 || 设置默认游戏模式
+|-
+| [[#serversettings/view_distance|serversettings/view_distance]] || 无 || 查询服务端的渲染距离
+|-
+| [[#serversettings/view_distance/set|serversettings/view_distance/set]] || 有 || 设置服务端的渲染距离
+|-
+| [[#serversettings/simulation_distance|serversettings/simulation_distance]] || 无 || 查询服务端的模拟距离
+|-
+| [[#serversettings/simulation_distance/set|serversettings/simulation_distance/set]] || 有 || 设置服务端的模拟距离
+|-
+| [[#serversettings/accept_transfers|serversettings/accept_transfers]] || 无 || 查询服务端是否接受由其他服务端转移连接的玩家
+|-
+| [[#serversettings/accept_transfers/set|serversettings/accept_transfers/set]] || 有 || 设置服务端是否接受由其他服务端转移连接的玩家
+|-
+| [[#serversettings/status_heartbeat_interval|serversettings/status_heartbeat_interval]] || 无 || 查询服务端发送心跳通知的间隔
+|-
+| [[#serversettings/status_heartbeat_interval/set|serversettings/status_heartbeat_interval/set]] || 有 || 设置服务端发送心跳通知的间隔
+|-
+| [[#serversettings/operator_user_permission_level|serversettings/operator_user_permission_level]] || 无 || 查询管理员默认的权限等级
+|-
+| [[#serversettings/operator_user_permission_level/set|serversettings/operator_user_permission_level/set]] || 有 || 设置管理员默认的权限等级
+|-
+| [[#serversettings/hide_online_players|serversettings/hide_online_players]] || 无 || 查询服务端在响应客户端状态请求时是否返回在线玩家列表
+|-
+| [[#serversettings/hide_online_players/set|serversettings/hide_online_players/set]] || 有 || 设置服务端在响应客户端状态请求时是否返回在线玩家列表
+|-
+| [[#serversettings/status_replies|serversettings/status_replies]] || 无 || 查询服务端是否允许切换网络状态到服务端列表查询阶段
+|-
+| [[#serversettings/status_replies/set|serversettings/status_replies/set]] || 有 || 设置服务端是否允许切换网络状态到服务端列表查询阶段
+|-
+| [[#serversettings/entity_broadcast_range|serversettings/entity_broadcast_range]] || 无 || 查询服务端向客户端发送实体{{tr|数据包|封包}}的距离百分比
+|-
+| [[#serversettings/entity_broadcast_range/set|serversettings/entity_broadcast_range/set]] || 有 || 设置服务端向客户端发送实体{{tr|数据包|封包}}的距离百分比
+|}
+
+===== serversettings/autosave =====
+<div class="treeview">
+* {{nbt|boolean}} <code>enabled</code>：查询结果。
+</div>
+
+===== serversettings/autosave/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|boolean}} <code>enable</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>enabled</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/difficulty =====
+<div class="treeview">
+* {{nbt|string}} <code>difficulty</code>：查询结果。
+</div>
+
+===== serversettings/difficulty/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|string}} <code>difficulty</code>：将设置的值。取值只能为{{cd|d=pretty|peaceful|easy|normal|hard}}。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|string}} <code>difficulty</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/enforced =====
+<div class="treeview">
+* {{nbt|boolean}} <code>enforced</code>：查询结果。
+</div>
+
+===== serversettings/enforced/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|boolean}} <code>enforce</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>enforced</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/use_allowlist =====
+<div class="treeview">
+* {{nbt|boolean}} <code>used</code>：查询结果。
+</div>
+
+===== serversettings/use_allowlist/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|boolean}} <code>use</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>used</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/max_players =====
+<div class="treeview">
+* {{nbt|int}} <code>max</code>：查询结果。
+</div>
+
+===== serversettings/max_players/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|int}} <code>max</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|int}} <code>max</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/pause_when_empty_seconds =====
+<div class="treeview">
+* {{nbt|int}} <code>seconds</code>：查询结果。
+</div>
+
+===== serversettings/pause_when_empty_seconds/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|int}} <code>seconds</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|int}} <code>seconds</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/player_idle_timeout =====
+<div class="treeview">
+* {{nbt|int}} <code>seconds</code>：查询结果。数据类型和值取决于具体的方法。
+</div>
+
+===== serversettings/player_idle_timeout/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|int}} <code>seconds</code>：将设置的值。数据类型和值取决于具体的方法。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|int}} <code>seconds</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/allow_flight =====
+<div class="treeview">
+* {{nbt|boolean}} <code>allowed</code>：查询结果。
+</div>
+
+===== serversettings/allow_flight/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|boolean}} <code>allow</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>allowed</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/motd =====
+<div class="treeview">
+* {{nbt|string}} <code>message</code>：查询结果。
+</div>
+
+===== serversettings/motd/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|string}} <code>message</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|string}} <code>message</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/spawn_protection_radius =====
+<div class="treeview">
+* {{nbt|int}} <code>radius</code>：查询结果。
+</div>
+
+===== serversettings/spawn_protection_radius/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|int}} <code>radius</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|int}} <code>radius</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/force_game_mode =====
+<div class="treeview">
+* {{nbt|boolean}} <code>forced</code>：查询结果。
+</div>
+
+===== serversettings/force_game_mode/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|boolean}} <code>force</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>forced</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/game_mode =====
+<div class="treeview">
+* {{nbt|string}} <code>mode</code>：查询结果。
+</div>
+
+===== serversettings/game_mode/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|string}} <code>mode</code>：将设置的值。取值只能为{{cd|d=pretty|survival|creative|adventure|spectator}}。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|string}} <code>mode</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/view_distance =====
+<div class="treeview">
+* {{nbt|int}} <code>distance</code>：查询结果。
+</div>
+
+===== serversettings/view_distance/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|int}} <code>distance</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|int}} <code>distance</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/simulation_distance =====
+<div class="treeview">
+* {{nbt|int}} <code>distance</code>：查询结果。
+</div>
+
+===== serversettings/simulation_distance/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|int}} <code>distance</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|int}} <code>distance</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/accept_transfers =====
+<div class="treeview">
+* {{nbt|boolean}} <code>accepted</code>：查询结果。
+</div>
+
+===== serversettings/accept_transfers/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|boolean}} <code>accept</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>accepted</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/status_heartbeat_interval =====
+<div class="treeview">
+* {{nbt|int}} <code>seconds</code>：查询结果。
+</div>
+
+===== serversettings/status_heartbeat_interval/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|int}} <code>seconds</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|int}} <code>seconds</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/operator_user_permission_level =====
+<div class="treeview">
+* {{nbt|int}} <code>level</code>：查询结果。
+</div>
+
+===== serversettings/operator_user_permission_level/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|int}} <code>level</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|int}} <code>level</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/hide_online_players =====
+<div class="treeview">
+* {{nbt|boolean}} <code>hidden</code>：查询结果。
+</div>
+
+===== serversettings/hide_online_players/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|boolean}} <code>hide</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>hidden</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/status_replies =====
+<div class="treeview">
+* {{nbt|boolean}} <code>enabled</code>：查询结果。
+</div>
+
+===== serversettings/status_replies/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|boolean}} <code>enable</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|boolean}} <code>enabled</code>：设置的值。此值与传入负载一致。
+</div>
+
+===== serversettings/entity_broadcast_range =====
+<div class="treeview">
+* {{nbt|int}} <code>percentage_points</code>：查询结果。
+</div>
+
+===== serversettings/entity_broadcast_range/set =====
+'''负载'''
+<div class="treeview">
+* {{nbt|int}} <code>percentage_points</code>：将设置的值。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|int}} <code>percentage_points</code>：设置的值。此值与传入负载一致。
+</div>
+
+==== 游戏规则管理 ====
+[[游戏规则]]相关方法共有2个。
+
+{| class="wikitable"
+! 方法 !! 具有参数 !! 作用
+|-
+| [[#gamerules|gamerules]] || 无 || 列出所有有效的游戏规则及其当前值
+|-
+| [[#gamerules/update|gamerules/update]] || 有 || 修改游戏规则
+|}
+
+===== gamerules =====
+<div class="treeview">
+* {{nbt|list}} <code>gamerules</code>
+** {{nbt|compound}}：一项游戏规则。
+*** {{nbt collapsed link|TypedRule}}
+</div>
+
+===== gamerules/update =====
+'''负载'''
+<div class="treeview">
+* {{nbt|compound}} <code>gamerule</code>
+** {{nbt|string|key|required=1}}：游戏规则的ID。
+** {{nbt|any|value|required=1}}：游戏规则的值。类型与对应游戏规则有关。
+</div>
+
+'''响应'''
+<div class="treeview">
+* {{nbt|compound}} <code>gamerule</code>
+** {{nbt collapsed link|TypedRule}}
+</div>
+
+=== 通知方法 ===
+通知是服务端发向客户端的数据，不存在<code>id</code>。下文中没有负载的通知将不单独以章节介绍，有负载的通知对应章节仅包含负载结构。
+
+==== 服务端状态 ====
+有关服务端状态的通知均不包含负载。
+
+{| class="wikitable"
+! 通知 !! 作用
+|-
+| server/started || 服务端加载完毕，开始运行游戏主循环前发出此通知
+|-
+| server/stopping || 服务端接收到停止指令，在开始执行停止前发出此通知
+|-
+| server/activity || 服务端与一个有效的客户端成功建立连接并开始握手流程，此通知30秒内只会发送一次
+|-
+| server/saving || 服务端保存所有区块前发出此通知
+|-
+| server/saved || 服务端保存所有区块后发出此通知
+|}
+
+==== 世界升级进度 ===
+{{added in development|jev=26.3|section=1}}
+与世界升级进度相关的通知共有4个。只有存档格式发生重大更改需要修复文件时才会发出这些通知，一般的数据修复不会发出此类通知。
+
+{| class="wikitable"
+! 通知 !! 作用
+|-
+| world/upgrade_started || 世界升级开始时发出此通知
+|-
+| [[#world/upgrade_progress|world/upgrade_progress]] || 世界升级过程中发出此通知
+|-
+| world/upgrade_finished || 世界生成完成后发出此通知
+|-
+| [[#world/upgrade_failed|world/upgrade_failed]] || 世界生成失败时发出此通知
+|}
+
+===== world/upgrade_progress =====
+<div class="treeview">
+* {{nbt|float}} <code>progress</code>：世界升级的进度。
+</div>
+
+==== world/upgrade_failed ====
+<div class="treeview">
+* {{nbt|string}} <code>reason</code>：世界升级失败的原因。
+</div>
+
+==== 玩家 ====
+有关玩家的通知共有2个。
+
+{| class="wikitable"
+! 通知 !! 作用
+|-
+| [[#players/joined|players/joined]] || 玩家与服务端连接时发出此通知
+|-
+| [[#players/left|players/left]] || 玩家与服务端断开连接时发出此通知
+|}
+
+===== players/joined =====
+<div class="treeview">
+* {{nbt|compound}} <code>player</code>：加入服务端的玩家。
+** {{nbt collapsed link|PlayerDto}}
+</div>
+
+===== players/left =====
+<div class="treeview">
+* {{nbt|compound}} <code>player</code>：离开服务端的玩家。
+** {{nbt collapsed link|PlayerDto}}
+</div>
+
+==== 管理员列表更改 ====
+有关管理员列表更改的通知共有2个。
+
+{| class="wikitable"
+! 通知 !! 作用
+|-
+| [[#operators/added|operators/added]] || 管理员列表新增管理员时发出此通知
+|-
+| [[#operators/removed|operators/removed]] || 管理员列表移除管理员时发出此通知
+|}
+
+===== operators/added =====
+<div class="treeview">
+* {{nbt|compound}} <code>player</code>：新增的管理员的信息。
+** {{nbt collapsed link|OperatorDto}}
+</div>
+
+===== operators/removed =====
+<div class="treeview">
+* {{nbt|compound}} <code>player</code>：被撤销的管理员的信息。
+** {{nbt collapsed link|OperatorDto}}
+</div>
+
+==== 白名单更改 ====
+有关白名单更改的通知共有2个。
+
+{| class="wikitable"
+! 通知 !! 作用
+|-
+| [[#allowlist/added|allowlist/added]] || 白名单新增玩家时发出此通知
+|-
+| [[#allowlist/removed|allowlist/removed]] || 白名单移除玩家时发出此通知
+|}
+
+===== allowlist/added =====
+<div class="treeview">
+* {{nbt|compound}} <code>player</code>：加入白名单的玩家。
+** {{nbt collapsed link|PlayerDto}}
+</div>
+
+===== allowlist/removed =====
+<div class="treeview">
+* {{nbt|compound}} <code>player</code>：从白名单中移除的玩家。
+** {{nbt collapsed link|PlayerDto}}
+</div>
+
+==== 封禁IP列表更改 ====
+有关封禁IP列表更改的通知共有2个。
+
+{| class="wikitable"
+! 通知 !! 作用
+|-
+| [[#ip_bans/added|ip_bans/added]] || 封禁IP列表新增IP地址时发出此通知
+|-
+| [[#ip_bans/removed|ip_bans/removed]] || 封禁IP列表移除IP地址时发出此通知
+|}
+
+===== ip_bans/added =====
+<div class="treeview">
+* {{nbt|compound}} <code>player</code>：被封禁的IP。
+** {{nbt collapsed link|IpBanDto}}
+</div>
+
+===== ip_bans/removed =====
+<div class="treeview">
+* {{nbt|string}} <code>player</code>：被解除封禁的IP地址。
+</div>
+
+==== 封禁玩家列表更改 ====
+有关封禁玩家列表更改的通知共有2个。
+
+{| class="wikitable"
+! 通知 !! 作用
+|-
+| [[#ip_bans/added|ip_bans/added]] || 封禁玩家列表新增玩家时发出此通知
+|-
+| [[#ip_bans/removed|ip_bans/removed]] || 封禁玩家列表移除玩家时发出此通知
+|}
+
+===== ip_bans/added =====
+<div class="treeview">
+* {{nbt|compound}} <code>player</code>：被封禁的玩家。
+** {{nbt collapsed link|UserBanDto}}
+</div>
+
+===== ip_bans/removed =====
+<div class="treeview">
+* {{nbt|compound}} <code>player</code>：被解除封禁的玩家。
+** {{nbt collapsed link|PlayerDto}}
+</div>
+
+==== 游戏规则更改 ====
+有关游戏规则更改的通知共有1个。
+
+{| class="wikitable"
+! 通知 !! 作用
+|-
+| [[#gamerules/updated|gamerules/updated]] || 更改游戏规则时发出此通知
+|}
+
+===== gamerules/updated =====
+<div class="treeview">
+* {{nbt|compound}} <code>gamerule</code>：游戏规则信息。
+** {{nbt collapsed link|TypedRule}}
+</div>
+
+==== 服务端心跳 ====
+有关服务端心跳的通知共有1个。
+
+{| class="wikitable"
+! 通知 !! 作用
+|-
+| [[#server/status_2|server/status]] || 服务端发出心跳时发出此通知<br>此方法可以在专用服务端启动前调用。
+|}
+
+===== server/status =====
+<div class="treeview">
+* {{nbt|compound}} <code>status</code>
+** {{nbt collapsed link|ServerState}}
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.9|dev=25w35a|加入了服务端管理协议。}}
+|{{HistoryLine|||dev=25w37a|为服务端管理协议加入了强制认证，并允许使用TLS提高安全性。
+|现在服务端管理协议支持{{tr|批处理|批次}}请求格式。<ref>{{bug|MC-301554|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=pre1|通知请求使用前缀{{cd|minecraft:notification/}}而不是此前的{{cd|notification:}}命名空间。}}
+|{{HistoryLine|||dev=pre2|现在支持按名称指定参数。}}
+|{{HistoryLine||1.21.11|dev=25w41a|将服务端管理协议版本号更改为{{cd|1.1.0}}。
+|加入了通知<code>notification/server/activity</code>。}}
+|{{HistoryLine|||dev=25w42a|现在允许使用浏览器WebSocket API连入服务端管理协议。}}
+|{{HistoryLine|||dev=25w44a|将服务端管理协议版本号更改为{{cd|2.0.0}}。
+|修改了游戏规则管理相关的请求和响应格式，以适配游戏规则注册表。}}
+|{{HistoryLine||26.2|dev=snapshot-5|将服务端管理协议版本号更改为{{cd|3.0.0}}。
+|现在管理服务端会在专用服务端启动之前启动。}}
+|{{HistoryLine||26.2|dev=snapshot-5|将服务端管理协议版本号更改为{{cd|3.1.0}}。
+|加入了通知{{cd|d=pretty|notification/world/upgrade_started|notification/world/upgrade_progress|notification/world/upgrade_finished|notification/world/upgrade_failed}}。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[de:Minecraft-Server-Verwaltungsprotokoll]]
+[[en:Minecraft Server Management Protocol]]
+[[pt:Protocolo de Gerenciamento de Servidor do Minecraft]]

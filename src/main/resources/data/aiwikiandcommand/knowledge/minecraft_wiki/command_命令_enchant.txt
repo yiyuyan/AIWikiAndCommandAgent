@@ -1,0 +1,89 @@
+# 页面: 命令/enchant
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/enchant
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{about|命令|在Minecraft中获取附魔物品的方式|魔咒#获取附魔物品}}
+{{Infobox command
+|name=enchant
+|oplevel=2\1
+|becheat=1
+}}
+
+为一个实体手持的物品添加[[魔咒]]。受限于[[铁砧机制]]。<ref>{{bug|MC-261942}}</ref>
+
+== 语法 ==
+* '''Java版'''
+: <code>enchant <targets> <enchantment> [<level>]</code>
+
+* '''基岩版'''
+: <code>enchant <player: target> <enchantmentId: int> [level: int]</code>
+: <code>enchant <player: target> <enchantmentName: Enchant> [level: int]</code>
+
+== 参数 ==
+{{argument|targets|entity|player: target|CommandSelector<Actor>}}
+: 指定目标。
+: {{arg desc|je=entity|amount=multiple|type=entities|be=actor}}
+
+{{el|je|short=1}}：{{argument|enchantment|resource}}<br>
+{{el|be|short=1}}：{{argument|be=1|enchantmentId: int|int}}或{{argument|enchantmentName: Enchant|enum}}
+: 指定要添加到实体主手持有物品上的[[魔咒]]。
+: {{arg desc|je=resource|registry=minecraft:enchantment|be=enum}}
+
+{{argument|level|integer|level: int|int}}
+: 指定魔咒的等级。此值不应当大于指定魔咒的[[魔咒#魔咒属性|最大等级]]。若未指定则默认为1。
+: {{arg desc|be=int|je=integer|min=0}}{{in|be}}应当大于等于1。
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数不正确|unparseable|unparseable}}
+{{Result table|<code><targets></code>或<code>player: target</code>未能选中实体（指定的玩家必须在线上）|fail|fail}}
+{{Result table|<code><level></code>或<code>level: int</code>大于指定魔咒的最大等级}}
+{{Result table|<code>level: int</code>小于1|unparseable}}
+{{Result table|所有实体均无手持物品|fail}}
+{{Result table|魔咒对所有实体的手持物品无效}}
+{{Result table|魔咒与已存在的魔咒冲突<br>（例如不能给带有“多重射击”的弩添加“穿透”，{{only|je|for=不能给带有“锋利I”的剑添加“锋利III”}}）}}
+{{Result table|所有目标的手持物品均带有该（最高等级的）{{only|be}}魔咒}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|失败|0|0|0}}
+{{Output table|成功|1|1|物品成功添加魔咒的玩家数量}}
+{{Output table|edition=be|失败|0}}
+{{Output table|成功|物品成功添加魔咒的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 给所有手持弓的玩家的主手物品添加无限：<code>enchant @a 22</code>{{only|bedrock}}或<code>enchant @a infinity</code>
+* 给所有手持剑的盔甲架的主手物品添加锋利：<code>enchant @e[type=armor_stand] 9</code>{{only|bedrock}}或<code>enchant @e[type=armor_stand] sharpness</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.4|dev=pre|加入了{{cmd|enchant|link=none}}命令。}}
+|{{HistoryLine||1.13|dev=17w45a|移除了{{cmd|enchant|link=none}}命令。}}
+|{{HistoryLine|||dev=18w06a|重新加入了{{cmd|enchant|link=none}}命令。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 5|加入了{{cmd|enchant|link=none}}命令。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/enchant]]
+[[en:Commands/enchant]]
+[[es:Comandos/enchant]]
+[[fr:Commandes/enchant]]
+[[ja:コマンド/enchant]]
+[[ko:명령어/enchant]]
+[[lzh:令/enchant]]
+[[pt:Comandos/enchant]]
+[[ru:Команды консоли/enchant]]
+[[th:คำสั่ง/enchant]]
+[[uk:Команди консолі/enchant]]

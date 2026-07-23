@@ -1,0 +1,136 @@
+# 页面: 属性/爆炸击退抗性
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E7%88%86%E7%82%B8%E5%87%BB%E9%80%80%E6%8A%97%E6%80%A7
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:31
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox attribute}}
+
+'''爆炸击退抗性（Explosion Knockback Resistance）'''是控制生物被[[爆炸]]波及受到[[爆炸击退]]的程度的[[属性]]。
+
+== 行为 ==
+{{main|爆炸#爆炸对实体的效果}}
+
+当爆炸威力为''P''的爆炸发生时，以爆炸中心为原点，半径<math>R=2P</math>的实体会被这次爆炸影响。对于每个实体，爆炸都会尝试将这个实体推离爆炸中心，造成爆炸击退：
+* 爆炸击退不会影响下列实体：
+** 位于爆炸中心的[[被激活的TNT]]。
+** 眼部位置刚好位于爆炸中心的实体。
+** 不可见的[[盔甲架]]。
+** 正在钻出或钻入地面的[[监守者]]。
+* 爆炸击退计算步骤如下：
+*# 计算爆炸中心到实体的眼部（对于被激活的TNT是碰撞箱底面中心点）的单位向量'''''e'''''、距离''d''、爆炸接触率<math>\alpha</math>。
+*# 计算爆炸击退威力''k''：
+*#* 对于[[风弹（实体）|风弹实体]]和[[魔咒]]造成的爆炸，飞行中的玩家不受爆炸击退影响，爆炸击退威力为0。
+*#* 对于[[风弹（物品）|风弹物品]]产生的风弹爆炸，爆炸击退威力为1.22；对于旋风人风弹和非魔咒引发的爆炸，爆炸击退威力为1；魔咒引发的爆炸则根据魔咒定义计算。
+*# 计算爆炸击退抗性''r''：对于生物爆炸击退抗性即本属性计算值，对于非生物实体则为0。
+*# 施加爆炸击退，对当前的速度增加爆炸击退速度，但不进行位移：<math>\mathbf{v} \leftarrow \mathbf{v}+\left(1-\frac{d}{R}\right)\left(1-r\right)k\alpha\mathbf{e}</math>。
+
+当生物此属性计算值为1时，爆炸击退速度会被降低为0，即完全不会被爆炸击退。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| 所有生物
+| 0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| enchantment.blast_protection/head<br>enchantment.blast_protection/chest<br>enchantment.blast_protection/legs<br>enchantment.blast_protection/feet<br>enchantment.blast_protection/body
+| add_value (Op0)
+| ''等级''&times;0.15
+| 否
+| [[爆炸保护]]魔咒，{{tr|应用|套用}}于<code>armor</code>（盔甲）槽位集合
+|-
+| bouncy_add_explosion_knockback_resistance
+| add_value (Op0)
+| -2
+| 否
+| [[硫磺史萊姆|硫方怪]]吸收方块后，且原型为弹性
+|-
+| explosive_add_explosion_knockback_resistance
+| add_value (Op0)
+| -1
+| 否
+| 硫方怪吸收方块后，且原型为爆炸
+|-
+| fast_flat_add_explosion_knockback_resistance
+| add_value (Op0)
+| -2
+| 否
+| 硫方怪吸收方块后，且原型为快速平移
+|-
+| fast_sliding_add_explosion_knockback_resistance
+| add_value (Op0)
+| 0.5
+| 否
+| 硫方怪吸收方块后，且原型为快速滑行
+|-
+| high_resistance_add_explosion_knockback_resistance
+| add_value (Op0)
+| 0.7
+| 否
+| 硫方怪吸收方块后，且原型为高阻力
+|-
+| hot_add_explosion_knockback_resistance
+| add_value (Op0)
+| 0.5
+| 否
+| 硫方怪吸收方块后，且原型为高温
+|-
+| light_add_explosion_knockback_resistance
+| add_value (Op0)
+| -1
+| 否
+| 硫方怪吸收方块后，且原型为轻盈
+|-
+| regular_add_explosion_knockback_resistance
+| add_value (Op0)
+| -1
+| 否
+| 硫方怪吸收方块后，且原型为普通
+|-
+| slow_bouncy_add_explosion_knockback_resistance
+| add_value (Op0)
+| 0.4
+| 否
+| 硫方怪吸收方块后，且原型为缓慢弹性
+|-
+| slow_flat_add_explosion_knockback_resistance
+| add_value (Op0)
+| 0.7
+| 否
+| 硫方怪吸收方块后，且原型为缓慢平移
+|-
+| slow_sliding_add_explosion_knockback_resistance
+| add_value (Op0)
+| 0.8
+| 否
+| 硫方怪吸收方块后，且原型为缓慢滑行
+|-
+| sticky_add_explosion_knockback_resistance
+| add_value (Op0)
+| -2
+| 否
+| 硫方怪吸收方块后，且原型为黏性
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21|dev=24w18a|加入了爆炸击退抗性属性，ID为<code>generic.explosion_knockback_resistance</code>。}}
+|{{HistoryLine|||dev=24w21a|爆炸保护魔咒修饰符的ID现在是<code>-{}-enchantment.blast_protection/''槽位''</code>，此前为<code>40A9968F-5C66-4E2F-B7F4-2EC2F4B3E450</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|爆炸击退抗性属性的ID从<code>generic.explosion_knockback_resistance</code>重命名为<code>explosion_knockback_resistance</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

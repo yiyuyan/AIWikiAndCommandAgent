@@ -1,0 +1,26 @@
+# 页面: 下落的方块/ED
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%8B%E8%90%BD%E7%9A%84%E6%96%B9%E5%9D%97/ED
+# 分类: 实体数据值页面
+# 抓取时间: 2026-07-14 17:19:41
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt inherit/entity}}
+** {{nbt|compound|BlockState|required=1|existonsave=1}}：此下落的方块实体存储的方块。如果设置为空气，则游戏立刻清除此实体。未指定或数据无效时默认为沙子。
+*** {{nbt inherit/block state}}
+** {{nbt|bool|CancelDrop|required=1|existonsave=1}}：表示下落的方块是否在落地时立刻被破坏且不放置方块或掉落任何物品。
+** {{nbt|bool|DropItem|required=1|existonsave=1}}：（默认为<samp>true</samp>）表示下落的方块落地无法放置方块而被破坏时是否要掉落物品。如果存储的方块没有对应的方块物品，即使此值设置为<samp>true</samp>也不会掉落物品。
+** {{nbt|float|FallHurtAmount}}：（默认为0，{{nbt|bool|HurtEntities|required=1|existonsave=1}}为<samp>true</samp>时存在并有效）下落的方块每下落一格增加的伤害。
+** {{nbt|int|FallHurtMax}}：（默认为40，{{nbt|bool|HurtEntities|required=1|existonsave=1}}为<samp>true</samp>时存在并有效）被这个下落的方块砸中的实体所承受的最大伤害。
+** {{nbt|bool|HurtEntities|required=1|existonsave=1}}：（默认为<samp>false</samp>，但{{nbt|compound|BlockState|required=1|existonsave=1}}指定的方块属于方块标签{{TagLink|block|anvil}}时，默认为<samp>true</samp>）表示是否要对它碰到的实体造成伤害。如果此项为<samp>false</samp>，但方块本身带有<code>#anvil</code>标签，那么游戏会尝试对碰到它的实体进行伤害，但伤害初始值为0。
+** {{nbt|compound|TileEntityData}}：存储方块的方块实体数据。
+*** 见[[方块实体数据格式]]。不包含{{nbt|string|id}}、{{nbt|int|x}}、{{nbt|int|y}}、{{nbt|int|z}}。
+** {{nbt|int|Time|required=1|existonsave=1}}：下落的方块已存在的时间，生成时设为0，每游戏刻增加1。当此值超过{{convert|600}}，或者处于世界建造高度之外且此值超过{{convert|100}}时，下落的方块就会被删除。
+</div><noinclude>
+[[Category:实体数据值页面]]
+[[fr:Bloc qui tombe/ED]]
+[[ja:落下中のブロック/ED]]
+[[ko:모래/BE]]
+[[ru:Падающий блок/ДС]]
+</noinclude>

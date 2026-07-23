@@ -1,0 +1,142 @@
+# 页面: 命令/function
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/function
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|宏|巨集}}
+{{about|命令|[[Java版]]中的函数|Java版函数|[[基岩版]]中的函数|基岩版函数}}
+{{Infobox command
+|name=function
+|oplevel=2\1
+|becheat=1
+}}
+运行[[函数]]。
+
+== 用法 ==
+{{in|je}}运行1个[[Java版函数|函数]]或者[[数据包]]内1个[[Java版标签/函数|函数标签]]的所有函数。{{in|be}}运行[[行为包]]内的1个[[基岩版函数|函数]]。
+
+函数中的[[命令上下文]]参数（如执行者、执行位置、执行朝向等）直接继承{{cmd|function ...|link=none}}所在的命令上下文。
+
+{{in|je}}{{cmd|return run function ...}}（或{{cmd|return run execute ... run function ...}}）的行为不同于直接调用{{cmd|link=none|function}}命令。如果{{cmd|return run function ...}}运行了多个函数，整个执行会在任意函数首次执行{{cmd|link=none|return}}后停止。如果直接调用{{cmd|function ...|link=none}}运行多个函数，所有的函数都会执行，且返回值会累加起来后作为该{{cmd|function ...|link=none}}命令的<code>result</code>输出值。
+
+== 语法 ==
+* '''Java版''': 
+: <code>function <name></code>
+:: 运行一个函数或一个函数标签中的函数。
+: <code>function <name> <arguments></code>
+: <code>function <name> with (block <sourcePos>|entity <-{}-source>|storage <-{}-source>) [<path>]</code>{{until|JE 26.3}}
+: <code>function <name> with (block|entity|storage) <-{}-source> [<path>]</code>{{upcoming|JE 26.3}}
+:: 运行一个函数或一个函数标签中的函数，并使用一个NBT复合标签提供用于[[Java版函数#宏|宏]]的参数。
+
+* '''基岩版'''
+: <code>function <name: filepath></code>
+:: 运行一个函数。
+
+== 参数 ==
+{{argument|name|function|name: filepath|CommandFilePath}}
+: 指定要执行的函数或函数标签。
+: {{arg desc|je=function|be=commandfilepath}}
+
+{{el|je|short=1}}：{{argument|arguments|nbt_compound_tag}}
+: 包含所有变量和对应值的[[NBT]]复合标签。
+: {{Arg desc|je=nbt_compound_tag}}
+
+{{el|je|short=1}}：{{argument|sourcePos|block_pos}}
+: 指定要使用其NBT数据的[[方块实体]]的坐标。
+: {{arg desc|je=block_pos}}
+
+{{el|je|short=1}}：{{argument|source|block_pos}}（{{cd|block <-{}-source>}}时）
+: 指定要使用其NBT数据的[[方块实体]]的坐标。
+: {{arg desc|je=block_pos}}
+
+{{el|je|short=1}}：{{argument|source|entity}}（{{cd|entity <-{}-source>}}时）
+: 指定要使用其NBT数据的实体。
+:{{arg desc|je=entity|amount=single|type=entities}}
+
+{{el|je|short=1}}：{{argument|source|resource_location}}（{{cd|storage <-{}-source>}}时）
+: 指定要使用其NBT数据的[[命令存储]]。
+: {{arg desc|je=resource_location}}
+
+{{el|je|short=1}}：{{argument|path|nbt_path}}
+: 指定要使用的NBT标签的[[NBT路径]]。路径所表示的标签应为单个复合标签。
+: {{arg desc|je=nbt_path}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|指定的函数或函数标签不存在<ref>{{bug|MC-277063||“未知的函数标签”报错不正确|Awaiting Response}}</ref>|fail|fail}}
+{{Result table|指定的函数标签内没有函数||N/A}}
+{{Result table|cmd=/function <name>|指定函数中有宏行}}
+{{Result table|cmd=/... with block ...|指定坐标未加载或在世界外}}
+{{Result table|位于指定坐标处的方块不是方块实体}}
+{{Result table|cmd=/... with entity ...|<code><nowiki><source></nowiki></code>未能选中1个实体（若为玩家名，则指定玩家必须在线上）}}
+{{Result table|cmd=/... with ... <path>|指定路径没有标签}}
+{{Result table|指定路径有一个以上的标签}}
+{{Result table|指定路径的标签不是{{nbt|compound|复合标签}}}}
+{{Result table|cmd=/... <arguments><br>/... with ..|将指定的宏参数替换到函数中后，存在宏行变为无法解析的命令}}
+{{Result table|cmd=|仅指定了一个函数，且其中没有{{cmd|return}}命令被执行|Void{{Note|这是一种特殊的[[命令#结果|命令执行结果]]，使得命令没有输出值。}}}}
+{{Result table|仅指定了一个函数，且其中被执行的{{cmd|return}}命令返回的成败标志为“失败”|fail}}
+{{Result table|指定了多个函数，且在所有函数中，都没有{{cmd|return}}命令被执行|Void}}
+{{Result table|succeed}}
+{{Result table}}
+{{notelist}}
+
+== 输出 ==
+{{in|java}}对于{{cmd|return run execute store ... run function ...}}：
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|Void|N/A|不改变|不改变}}
+{{Output table|执行成功|N/A|1|第一个[[Java版函数#返回|非void函数]]的返回值<br>（在任意函数中首次执行{{cmd|return}}命令后会终止整个执行过程）}}
+{{Output table}}
+{{in|java}}其他情况下：
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|Void|0|不改变|不改变}}
+{{Output table|执行成功|1|1|所有非void函数的返回值之和}}
+{{Output table}}
+{{in|be|nc=1}}：
+{{Output table|onlybe=1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* Java版中：
+** 运行<code>data/custom/functions/example/test.mcfunction</code>处的函数：{{cmd|function custom:example/test|link=none}}
+** 运行所有<code>data/custom/tags/functions/example/test.json</code>标签下的函数：{{cmd|function #custom:example/test|link=none}}
+** 执行某个宏函数时传入参数a=42，b="example"：<code>/function custom:example/test {a: 42, b: "example"}</code>
+** 执行某个宏函数时传入来自命令存储<code>custom:storage</code>的参数：<code>/function custom:example/test with custom:storage</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=pre1|加入了{{cmd|function|link=none}}。}}
+|{{HistoryLine|||dev=pre4|为{{cmd|function|link=none}}命令加入了条件语句<code>[if{{!}}unless] [''selector'']</code>}}
+|{{HistoryLine|||dev=pre6|条件语句失败而跳过函数时现在视为执行失败。}}
+|{{HistoryLine||1.13|dev=17w49b|{{cmd|function|link=none}}现在接受数据包的标签作为其参数。
+|因{{cmd|execute (if{{!}}unless)}}的存在而移除了{{cd|[if{{!}}unless]}}条件语句。}}
+|{{HistoryLine||1.20.2|dev=23w31a|{{cmd|function|link=none}}现在允许传递NBT作为参数。}}
+|{{HistoryLine||1.20.3|dev=23w41a|{{cmd|link=none|function}}不再输出执行命令的个数，以适应新的{{cmd|return}}命令。}}
+|{{HistoryLine|||dev=23w44a|如果执行多个函数的{{cmd|link=none|function <''function tag''>}}命令由{{cmd|link=none|return run}}执行，现在整个{{cmd|function}}命令会在任意一个函数首次执行{{cmd|return}}命令后结束执行。
+|使用{{cmd|link=none|return run}}执行{{cmd|link=none|function}}命令时，{{cmd|link=none|function}}命令执行一次后就会返回。例如：{{cmd|link=none|return run execute [''多个执行分支''] run function <''有return命令的函数''>}}会总在首个分支返回。}}
+|{{HistoryLine||1.20.5|dev=23w51a|修复了{{cmd|link=none|function}}命令执行带有{{cmd|return fail}}命令的函数时，输出的<code>success</code>值为1的问题。<ref>{{bug|MC-267193|||Fixed}}</ref><ref>{{bug|MC-268160|||Won't Fix}}</ref>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|加入了{{cmd|function|link=none}}。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/function]]
+[[en:Commands/function]]
+[[es:Comandos/function]]
+[[fr:Commandes/function]]
+[[ja:コマンド/function]]
+[[ko:명령어/function]]
+[[pt:Comandos/function]]
+[[ru:Команды консоли/function]]
+[[uk:Команди консолі/function]]

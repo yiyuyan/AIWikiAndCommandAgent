@@ -1,0 +1,606 @@
+# 页面: 辅助程序与编辑器/Tectonicus/Tectonicus配置格式
+# 来源: https://zh.minecraft.wiki/w/%E8%BE%85%E5%8A%A9%E7%A8%8B%E5%BA%8F%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8/Tectonicus/Tectonicus%E9%85%8D%E7%BD%AE%E6%A0%BC%E5%BC%8F
+# 分类: 地图查看工具
+# 抓取时间: 2026-07-14 17:36:44
+# 原始 Wikitext 内容:
+
+{{Disclaimer}}
+
+从命令行配置Tectonicus的最佳方法是使用配置文件。为获取最新信息，可查看此处的示例配置文件：http://code.google.com/p/tectonicus/source/browse/trunk/tectonicus/Docs/fullConfig.xml
+
+Tectonicus配置文件以XML格式存储。若不熟悉XML，可查看这个基本教程：http://www.w3schools.com/xml/xml_syntax.asp
+
+启动Tectonicus时，为让其读取配置文件，需传递“config=”参数。示例：
+
+<pre>
+java -jar Tectonicus.jar config=layerConfig.xml
+</pre>
+
+若你是新手，获取示例配置文件并修改世界文件夹和输出文件夹的路径会很容易。
+
+记住，选项配置对大小写敏感！
+
+== 预览 ==
+基本配置文件大致如下：
+
+<pre>
+<tectonicus version="2">
+
+	<config>
+		<!-- general config options go here -->
+	</config>
+
+	<rasteriser>
+		<!-- rasteriser options go here -->
+	</rasteriser>
+
+	<map>
+		<!-- map marker options go here -->
+		<layer>
+			<!-- options which control the appearance of the final rendered map go here -->
+		</layer>
+	</map>
+
+	<tweeks>
+		<!-- tweeks options go here -->
+	</tweeks>
+
+	<debug>
+		<!-- debug options go here -->
+	</debug>
+
+	<!-- additional maps go here -->
+
+</tectonicus>
+</pre>
+
+这些参数可按任意方式排列。仅“layer”和“map”可能出现多个，这些节点稍后会被覆盖。
+
+== 示例配置文件 ==
+以下是创建一个地图的最小配置文件：
+
+<pre>
+<?xml version="1.0"?>
+<tectonicus version="2">
+	<config mode="cmd" outputDir="myoutputdirectory"/>
+
+	<map name="mymapname" worldDir="/path/to/level.dat">
+		<layer name="Day" lighting="day"/>
+	</map>
+</tectonicus>
+</pre>
+
+== 配置文件定义 ==
+
+=== Config 节点 ===
+以下是Config节点的示例：
+<pre>
+	<config mode = "cmd"
+			worldDir = "D:\Minecraft\Tectonicus\level"
+			outputDir = "D:\Minecraft\Tectonicus\Map Render"
+			
+			outputHtmlName = "Xoozo_Map.html"
+			minecraftJar = "filepath to minecraft.jar"
+			texturePack = "/Users/xxx/Texture pack.jar"
+			
+			numDownsampleThreads = "2"
+			eraseOutputDir = "false"
+			useCache = "true"
+			cacheDir = "D:\Minecraft\Tectonicus\Map Render\cache"
+			logFile = "D:\Minecraft\Tectonicus\Map Render\Log.txt"
+	>
+	</config>
+</pre>
+
+这用于控制需要更改的电脑基本设置。
+
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| mode
+| 控制Tectonicus的运行模式
+| 是
+| 命令行模式为“cmd”
+'gui'启动GUI
+
+'players'更新玩家信息（注意Minecraft仅在登出时更新玩家信息）
+
+'interactive'启动超级秘密模式
+
+'views'仅启动预览
+| -
+|-
+| outputDir
+| 设置生成的文件和文件夹的储存位置，若路径不存在，会按路径创建文件夹。
+| 是
+| 一个文件夹路径
+| -
+|-
+|outputHtmlName
+| 生成的HTML文件的名称
+| 否
+| 一个文件名
+| map.html
+|-
+|minecraftJar
+| 指定Tectonicus读取（非运行）例如资源包等资源的minecraft.jar的路径
+| 否
+| 一个文件路径
+| 若在电脑上运行过Minecraft，未设置时会自动检测minecraft.jar的路径
+|-
+| texturePack
+| 指定要使用的Minecraft资源包，若不想使用默认Minecraft纹理。可使用高清纹理。
+| 否
+| 一个文件路径
+| 无（使用默认Minecraft纹理）
+|-
+| numDownsampleThreads
+| 选择创建层图像时最多运行的线程数（取决于CPU内核数量）
+| 否
+| 一个数值
+| 默认值是CPU内核数量
+|-
+| eraseOutputDir
+| 若设置，会删除输出文件夹里的整个目录。这对强迫Tectonicus重新启动很有用。
+| no
+| 'true' or 'false'
+| false
+|-
+| useCache
+| 设置为true，Tectonicus会尝试使用缓存信息，因此仅查看地图上自上次保存以来有更改的部分
+| 否
+| “true”或“false”
+| true
+|-
+| cacheDir
+| 指定Tectonicus缓存文件的储存位置。通常是输出目录里的一个文件夹。
+| 否
+| 一个文件夹路径
+| none
+|-
+| logFile
+| 指定替代日志文件的文件
+| 否
+| 一个完整的文件路径
+| 当前目录的“TectonicusLog.txt”
+|}
+
+=== Rasteriser 节点 ===
+以下是一个示例rasteriser节点：
+<pre>
+	<rasteriser type = "lwjgl"
+				colourDepth = "32"
+				alphaBits = "8"
+				numSamples = "4"
+				tileSize = "512"
+		>
+	</rasteriser>
+</pre>
+这些值用于在查看地图时配置显卡。
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| type
+| 要使用的rasteriser类型
+| 否
+| Opengl/LWJGL渲染器为“lwjgl”（当前唯一选项）
+| “lwjgl”
+|-
+| colourDepth
+| 要进行渲染的颜色深度
+| 否
+| 16、24或32
+| 32
+|-
+| alphaBits
+| 渲染时要使用的α二进制字节数。若初始化时遇到问题，将该值设置为0。
+| 否
+| 0或8
+| 8
+|-
+| numSamples
+| 要使用的反锯齿等级。使用0或1会关闭反锯齿（可能有助于提升兼容性）
+| 否
+| 0、1、2、4、8或16
+| 4
+|-
+| tileSize
+| 输出被分开的图像大小（单位：像素）
+| 否
+| 64-1024之间的数字
+| 512
+|}
+
+=== Map 节点 ===
+<pre>
+<!-- Maps to process (must have at least one map) -->
+	<map
+		name=""
+		worldDir="/Users/xxxx/AppData/Roaming/.minecraft/saves/My World" <!-- required -->
+		dimension="terra / nether / ender"
+		closestZoomSize="12"
+		cameraAngle="45"
+		cameraElevation="45 / 10 - 90"
+		north="-z / +z / -x / +x" <!-- compass rose north direction -->
+		compassRose="" <!-- custom image path -->>
+
+              
+        </map>
+</pre>
+
+=== Subset ===
+map节点里的一个子节点，会在地图上的特定位置，查看以该位置为中心、指定大小的圆形区域，而非整张地图。在测试Tectonicus选项以大幅减少查看时间时非常有用。其节点格式如下：
+
+<pre>-{}-
+<!-- Limit world rendering to a sub region. Optional, omit for the full world -->
+<!-- Radius is in world units. Remove 'origin' to center around the spawn point -->
+<subset>
+	<CircularSubset origin="0, 0" radius="200" />  <!-- note atypical capital ‘C’ -->
+</subset>
+</pre>
+
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| origin
+| 圆形区域的中心点
+| 否
+| 一个世界的x和z坐标，以“x, y”形式表示
+| 如未设置，默认为生成点
+|-
+| radius
+| 圆形区域的半径（单位：方块）
+| 否
+| 一个数值
+| -
+|}
+
+=== Layer ===
+map节点里的一个子节点。控制最终出现的地图层数。以下是一个示例layer节点：
+
+<pre>	<!-- A generated map layer -->
+<layer  dimension = "terra"
+	renderStyle = "normal"
+	cameraAngle = "45"
+	cameraElevation = "30"
+	imageFormat = "png"
+	imageCompressionLevel = "1.0"
+	lighting = "day"
+			
+	singlePlayerName="YourPlayerNameHere"
+						
+	numZoomLevels = "8"
+	closestZoomSize = "12"
+			
+	useDefaultBlocks="true"
+	customBlocks="/Users/xxx/TectonicusTests/customBlocks.xml" >
+			
+	<!-- Markers to display on this layer -->
+	<signs filter="special" initiallyVisible="true" />
+	<players filter="all" playerFilterFile="/Users/xxx/TectonicusTests/players.txt" initiallyVisible="true" />
+	<portals filter="all" initiallyVisible="true" />
+	<spawn show="true" intiallyVisible="true" />
+	<beds initiallyVisible="true" />
+</layer>
+</pre>
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| dimension
+| 要查看的维度
+| 否
+| “terra”<br>为Minecraft的主世界<br>
+“nether”<br>为下界维度<br>
+“ender”<br>为末地维度
+| terra
+|-
+|renderStyle
+| 要使用的渲染风格
+| 否
+| “regular”为普通渲染<br>
+“cave”为洞穴渲染（不显示层）<br>
+“nether”为下界渲染（不显示下界屋顶）
+“exploredcaves”只渲染探索过的洞穴
+| regular
+|-
+| cameraAngle
+| 用于改变指定的北边方向。默认45，会产生北边在地图右上角的斜视图（西北边在地图正上方）。增加该数值会让地图沿基本方向逆时针旋转（减少则为顺时针旋转）。90（或-270）会显示北方在地图正上方的视图；225（或-45）会显示北方在左下方、东南方在正上方的视图等。
+| 否
+| 从-360到360的任意角度
+| 45（北方在右上角）
+|-
+| cameraElevation
+| 指定视角的仰角角度。0为水平看，90为垂直向下看。默认为45。选择30会有更传统的等距视图。
+| 否
+| 0-180的一个角度
+| 45
+|-
+| imageFormat
+| 写入这些层图像的格式
+| 否
+| “png”为png文件（高质量，文件最大）<br>
+“gif”为gif文件（每张图片最大256色。图片质量和文件大小都较好，若使用默认Minecraft纹理或其他低色彩纹理包）<br>
+“jpg”为jpg文件（图片质量不定，若使用逼真的纹理包会有好的图片质量） 
+| png
+|-
+| imageCompressionLevel
+| 要使用的图像压缩级别（仅在使用jpg文件格式时有效）
+| 否
+| 0-1之间的小数。1为最高质量。用0.75（75%）创建jpg文件而非默认png文件会节省50%以上的空间。
+| 0.95
+|-
+| lighting
+| 要使用的照明风格
+| 否
+| “day”为白天照明<br>
+“night”为夜晚照明<br>
+“none”为无光照（完全黑暗）<br>
+“cave”为洞穴照明（像夜晚照明，但越深的洞穴越黑）
+| day
+|-
+| singlePlayerName
+| Minecraft的单人游戏模式不会储存玩家名字。若指定玩家世界的玩家名，会正确显示玩家的标记及皮肤。
+| 否
+| 任何Minecraft用户名
+| 
+|-
+| numZoomLevels
+| 要渲染的缩放等级（应用于所有地图）。增加该数字，地图首次加载时能看到更多世界，更高细节缩放等级会带来更多步骤。
+| 否
+| 一个数字
+| 8
+|-
+| closestZoomSize
+| 一直放大时，决定可见区域呈现图像文件的数量。增加[x]会让摄像机“变宽”到最近的视图。有时会与numZoomLevels（见上）结合使用。
+
+例如，设置为24时创建的图像文件比默认12显示的地形多100%（如“后面较远处”）。最近的文件（zoom8）和其他更宽的文件（zoom7-zoom0）都会被渲染。
+
+增加该数字需要更多内存，设置过大会造成内存溢出错误。
+| 否
+| 一个数字
+| 12
+|-
+| useDefaultBlocks
+| 指定是否渲染方块的默认外观
+| 否
+| “true”或“false”
+| true
+|-
+| customBlocks
+| 指定储存自定义方块数据的XML文件路径
+| 否
+| 一个文件路径
+| none
+|}
+
+==== Markers ====
+layers节点的一个子节点，这些选项控制最终渲染地图上要显示的标记。数据格式如下：
+
+<pre>
+<signs filter="special" initiallyVisible="true" />
+<players filter="all" playerFilterFile="/Users/xxx/TectonicusTests/players.txt" initiallyVisible="true" />
+<portals filter="all" initiallyVisible="true" />
+<spawn show="true" intiallyVisible="true" />
+<beds initiallyVisible="true" />
+</pre>
+
+==== Signs ====
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| filter
+| 导出标记时要应用的过滤器
+| 否
+| “all”会导出所有标记
+
+“none”不会导出标记
+
+“special”会导出与特殊字符开头或末尾匹配的字符：!#-或~。例如“-- lookout point --”的标记。
+所有空标记总会被跳过。
+| special
+|-
+| initiallyVisible
+| 指定最终渲染打开时，标记是否已显示在屏幕上
+| 否
+| “true”或“false”
+| true
+|}
+
+==== Players ====
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| filter
+| 导出玩家时要应用的过滤器
+| 否
+| “all”为导出所有玩家
+
+“none”为不导出玩家
+
+“ops”为只导出有管理员特权的玩家
+
+“whitelist”为只导出玩家过滤器文件中存在的玩家
+
+“blacklist”为导出所有玩家，除了玩家过滤器文件里的玩家
+| all
+|-
+| playerFilterFile
+| 与“whitelist”和“blacklist”使用的文本文档路径。
+每行应包含1个玩家（与Minecraft管理员文件相同）
+| 否
+| 一个文件路径
+| 
+|-
+| initiallyVisible
+| 指定最终渲染打开时，标记是否已显示在屏幕上
+| 否
+| “true”或“false”
+| true
+|}
+
+==== Portals ====
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| filter
+| 导出传送门标记时要应用的过滤器
+| 否
+| “all”为导出所有传送门；“none”为不导出传送门
+| all
+|-
+| initiallyVisible
+| 指定最终渲染打开时，标记是否已显示在屏幕上
+| 否
+| “true”或“false”
+| true
+|}
+
+==== Spawn ====
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| show
+| 是否导出生成位置
+| 否
+| “true”或“false”
+| true
+|-
+| initiallyVisible
+| 指定最终渲染打开时，标记是否已显示在屏幕上
+| 否
+| “true”或“false”
+| true
+|}
+
+==== Beds ====
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| initiallyVisible
+| 指定最终渲染打开时，标记是否已显示在屏幕上
+| 否
+| “true”或“false”
+| true
+|}
+
+=== Tweeks 节点 ===
+以下是一个示例tweeks节点：
+<pre>
+	<tweeks
+		extractLwjglNatives = "true"
+		forceLoadAwt = "false"
+		force32BitNatives = "false"
+		force64BitNatives = "false"
+	>
+	</tweeks>
+</pre>
+
+这些选项不建议更改，但在部分机器上可能运行异常。
+
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 可能的值
+! 默认值
+|-
+| extractLwjglNatives
+| 指定开始渲染前是否先提取LWJGL本地库
+| 否
+| “true”或“false”
+| true
+|-
+| forceLoadAwt
+| 在Tectonicus启动时强制加载Awt显示系统
+| 否
+| “true”或“false”
+| false
+|-
+| force32BitNatives
+| 强制使用32位本地库文件（.dll和.so）。若电脑自动匹配32位或64位失败，可使用该值。
+| 否
+| “true”或“false”
+| false
+|-
+| force64BitNatives
+| 强制使用64位本地库文件（.dll和.so）。若电脑自动匹配32位或64位失败，可使用该值。
+| 否
+| “true”或“false”
+| false
+|}
+
+=== Debug 节点 ===
+以下是一个示例debug节点：
+
+<pre>
+	<debug maxTiles = "-1"
+	>
+	</debug>
+</pre>
+
+这些调试选项不用于一般用途。
+
+{| class="wikitable"
+|-
+! 选项名称
+! 描述
+! 是否需要
+! 需要的值
+! 默认值
+|-
+| maxTiles
+| 设置渲染停止后的最大贴图数量。
+| 否
+| 任何正整数，-1为关闭该功能
+| -1（关闭）
+|}
+
+[[Category:地图查看工具]]
+
+[[en:Tutorial:Programs and editors/Tectonicus/TectonicusConfigFormat]]

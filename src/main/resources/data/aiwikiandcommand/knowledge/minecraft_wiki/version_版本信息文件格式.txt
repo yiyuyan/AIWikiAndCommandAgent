@@ -1,0 +1,59 @@
+# 页面: 版本信息文件格式
+# 来源: https://zh.minecraft.wiki/w/%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性
+# 抓取时间: 2026-07-14 17:31:49
+# 原始 Wikitext 内容:
+
+{{Redirect|version.json|[[启动器]]使用的<samp>''<游戏版本>''.json</samp>文件|客户端清单文件格式}}{{Exclusive|java}}
+
+'''版本信息文件'''是位于客户端核心文件和服务端核心文件内部的用于标记版本和提供版本信息的文件。
+
+== 文件格式 ==
+版本信息文件位于客户端核心文件和服务端核心文件内{{filepath|versions.json}}路径下，是一个JSON文件，并具有下列结构：
+
+<div class=treeview>
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|build_time|required=1}}：此核心文件的构建时间，格式为[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html#ISO_ZONED_DATE_TIME <code>DateTimeFormatter.ISO_ZONED_DATE_TIME</code>]。
+** {{nbt|string|id|required=1}}：此核心文件版本的唯一标识符。有时可能为构建时提交的散列值，与名称之间用斜杠分隔。
+** {{nbt|string|java_component}}：此核心文件使用的Java。
+** {{nbt|int|java_version}}：此核心文件使用的Java版本。
+** {{nbt|string|name|required=1}}：此核心文件版本的可读名称，通常与{{nbt|string|id}}相同。
+** {{nbt|compound|pack_version|required=1}}：此核心文件的[[资源包]]版本和[[数据包]]版本。
+*** {{nbt|int|data_major|required=1}}：数据包主要版本。
+*** {{nbt|int|data_minor|required=1}}：数据包次要版本。
+*** {{nbt|int|resource_major|required=1}}：资源包主要版本。
+*** {{nbt|int|resource_minor|required=1}}：资源包次要版本。
+** {{nbt|int|protocol_version|required=1}}：此核心文件的[[协议版本]]。
+** {{nbt|string|series_id|required=1}}：标识此核心文件来自哪个分支。不同分支的此核心文件之间的数据永远不能相互兼容。
+** {{nbt|bool|stable|required=1}}：用于判断此核心文件是否为正式版。
+** {{nbt|int|world_version|required=1}}：此核心文件的[[数据版本]]。
+** {{nbt|bool|use_editor}}：未知作用。
+</div>
+
+游戏在开发历史上具有多个分支：
+* <code>main</code>：游戏的主要开发分支。各种开发版本和正式版都属于此分支。
+* <code>ccpreview</code>：洞穴与山崖（第二部分）开发预览快照。[[Java版1.18]]的所有实验性快照属于此分支。
+* <code>deep_dark_preview</code>：深暗之域开发预览快照。[[Java版1.19]]的所有实验性快照属于此分支。
+* <code>-{}-april<''四位年份''></code>：[[愚人节玩笑]]快照。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w47b|加入了版本信息文件。}}
+|{{HistoryLine||1.17|dev=20w45a|'''pack_version'''从{{nbt|int}}整型变为{{nbt|compound}}复合标签。
+|数据包和资源包版本现在分开更新，而不是使用同一个版本号。}}
+|{{HistoryLine|||dev=21w19a|加入了{{nbt|string|java_component}}和{{nbt|int|java_version}}。}}
+|{{HistoryLine||1.18|dev=21w37a|加入了{{nbt|string|series_id}}。}}
+|{{HistoryLine||1.19.3|dev=22w42a|移除了{{nbt|string|release_target}}。}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了{{nbt|boolean|use_editor}}。}}
+|{{HistoryLine||1.21.9|dev=25w31a|修改了数据包版本号和资源包版本号的格式，此前{{nbt|compound|pack_version}}下仅有{{nbt|int|data}}和{{nbt|int|resource}}两个字段直接表示版本号。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[en:Version.json]]
+[[fr:Version.json]]
+[[pt:Version.json]]

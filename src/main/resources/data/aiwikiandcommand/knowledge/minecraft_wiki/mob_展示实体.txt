@@ -1,0 +1,137 @@
+# 页面: 展示实体
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%95%E7%A4%BA%E5%AE%9E%E4%BD%93
+# 分类: Java版独有特性
+# 抓取时间: 2026-07-14 17:25:25
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox entity
+|image=none
+|size=高度：0格<br>宽度：0格
+|nobe=0
+}}
+
+'''展示实体（Display）'''是一类用于灵活展示多种内容的[[实体]]，共有'''方块展示实体（Block Display）'''、'''物品展示实体（Item Display）'''、'''文本展示实体（Text Display）'''三种，分别用于展示方块、物品和文本。
+
+== 生成 ==
+方块展示实体、物品展示实体和文本展示实体不会生成在世界中，但可以使用{{cmd|summon}}等命令生成。
+
+== 行为 ==
+展示实体自身没有移动行为（即使指定了{{nbt|list|Motion|existonsave=1|required=1}}字段），不会受到伤害，不会发出声音，不会阻碍方块放置，也不会将玩家或其他实体推离自己所在的位置。
+
+展示实体无法被选中，因此无法通过使用{{Key|F3+I}}将其实体数据复制到粘贴板。
+
+使用不带实体数据参数的{{cmd|summon}}命令生成的展示实体是不可见的。对于方块展示实体和物品展示实体，其默认展示内容分别是{{cd|{block_state:{Name:"minecraft:air"} } }}和{{cd|{item:{id:"minecraft:air",count:1} } }}，对于文本展示实体，其默认展示内容是{{cd|{"text": ""} }}。修改其实体数据，可以设置展示的内容和其他视觉效果，并旋转、缩放和平移模型。
+
+对于物品展示实体，除了使用{{cmd|data}}操作实体数据外，还可以使用{{cmd|loot}}或{{cmd|item}}命令在{{cd|container.0}}槽位获取或变更展示的物品。
+
+使用物品展示实体，通过物品堆叠组件{{cd|-{}-[[物品堆叠组件#item_model|item_model]]}}可以很方便地展示任何自定义的[[物品模型]]。
+
+=== 插值 ===
+[[File:Display Interporlation Animation.gif|thumb|玩家通过命令使一个物品展示实体缩放到更小的尺寸]]
+对于展示实体的某些属性变化，可对其变化前后的中间过程进行插值来实现渐变动画。
+
+[[#实体数据|实体数据]]中所有标记为“可插值”的属性都是可以对变化过程进行插值的。在展示实体生成后，这些“可插值”属性值的前后变更都会被客户端记录。插值会根据变化前后的所有属性综合处理。每游戏刻服务器最多与客户端同步一次实体数据，因此一游戏刻内的多次变更仍将计为单个变更。
+
+展示实体的渲染将随插值时间推移而渐变。当客户端接收并经过<code>start_interpolation</code>[[游戏刻]]（预插值延时）后便开始进行插值，插值过程将持续<code>interpolation_duration</code>游戏刻（插值时间），从接收变更到转变为变更后的状态一共需要<code>start_interpolation + interpolation_duration</code>游戏刻。
+
+=== 变换 ===
+展示实体可以使用实体数据中的{{nbt|list}}{{nbt|compound|transformation|existonsave=1}}进行渲染变换。游戏从此数据中获取右旋转{{nbt|list}}{{nbt|compound|right_rotation|required=1|existonsave=1}}、缩放{{nbt|list|scale|required=1|existonsave=1}}、左旋转{{nbt|list}}{{nbt|compound|left_rotation|required=1|existonsave=1}}和平移{{nbt|list|translation|required=1|existonsave=1}}。
+
+如果使用矩阵数据，游戏会在加载时对矩阵进行分解，而不是直接使用矩阵进行变换：
+# 对矩阵'''M'''拆分为3个部分：<math>\mathbf{M}=\begin{pmatrix}\mathbf{R}_{3 \times 3}&&\mathbf{t}_{3 \times 1}\\&&w_{1 \times 1}\end{pmatrix}</math>。
+# 将矩阵'''R'''和向量'''t'''按照<math>1/w</math>缩放，<math>\mathbf{R'}=\frac{1}{w}\mathbf{R}, \mathbf{t'}=\frac{1}{w}\mathbf{t}</math>。缩放后的向量'''t''''即为平移变换。
+# 对矩阵'''R''''进行[[wzh:奇异值分解|奇异值分解]]，<math>\mathbf{R'}=\mathbf{U}\mathbf{\Sigma}\mathbf{V}^\mathrm{T}</math>。其中矩阵'''U'''即为左旋转，矩阵<math>\mathbf{V}^\mathrm{T}</math>为右旋转，这两个矩阵将转换为对应的四元数（均为单位四元数）。对角矩阵<math>\mathbf{\Sigma}</math>中的主对角线为缩放。
+# 实际上模型内最终的变换为<math>(\mathbf{R'} \ \mathbf{t'})</math>（3x4矩阵），即原矩阵左下方的1x3矩阵无效；如果w为1，那么可以简化为矩阵数据中的前12个值对模型变换生效。
+#* 假设模型中的一点为<math>(x, y, z)</math>，那么变换后的位置为<math>(\mathbf{R'} \ \mathbf{t'})(x, y, z, 1)^\mathrm{T}</math>。
+
+如果使用分解形式，则游戏会直接将对应的数据设置为实体数据中的值。对于分解形式中的两个旋转数据：
+* 如果以[[wzh:四元数|四元数]]定义旋转，即<math>q=w+xi+yj+zk</math>（数据内写法为<code>[x, y, z, w]</code>）：
+** 如果q是单位四元数，那么此四元数代表的旋转为旋转轴为<math>(x, y, z)</math>向量，角度为<math>2\mathrm{arccos}w</math>的逆时针旋转（旋转方向遵循右手法则。当从旋转轴正向端观察，旋转方向是逆时针的）。
+** 如果q不是单位四元数，则计算<math>q=|q|e</math>，其中e为单位四元数代表上文所述的旋转，同时整个模型将被缩放为之前的<math>|q|^2</math>。
+** 无论是否为单位四元数，游戏都会直接使用此四元数计算旋转和可能的缩放。
+* 如果用轴-角度形式定义旋转，游戏会转换为单位四元数：
+** 如果轴为<math>\mathbf{a}=(x, y, z)</math>，旋转角度为<math>\theta</math>，游戏先计算轴的单位向量<math>\mathbf{a}=|a|\mathbf{e}</math>，然后根据四元数规则构造旋转单位四元数<math>q=\cos{\frac{\theta}{2}}+\sin{\frac{\theta}{2}}(\mathbf{e}_xi+\mathbf{e}_yj+\mathbf{e}_zk)</math>。
+
+当游戏进行渲染时，会将模型经过右旋转、缩放、左旋转、平移的步骤进行变换。在此处，左右旋转都是单位四元数，非单位四元数旋转的缩放系数与缩放数据直接相乘并在缩放步骤中一起计算：
+# 假设模型中的一点为<math>(x, y, z)</math>，构造纯四元数<math>p_0=xi+yj+zk</math>。
+# 使用右旋转四元数<math>q_r</math>进行旋转：<math>p_1=q_rp_0q_r^{-1}</math>。
+# 使用缩放数据<math>\mathbf{s}</math>按照各个坐标轴进行缩放：<math>p_2=\mathbf{s}_xp_{1x}i+\mathbf{s}_yp_{1y}j+\mathbf{s}_zp_{1z}k</math>。
+# 使用左旋转四元数<math>q_l</math>进行旋转：<math>p_3=q_lp_2q_l^{-1}</math>。
+# 使用平移向量<math>\mathbf{t}</math>平移变换后的坐标为<math>\mathbf{p}=(p_{3x},p_{3y},p_{3z})+\mathbf{t}</math>
+
+此流程中，如果右旋转四元数为1（不进行旋转），或不进行缩放，那么模型在变换后仍能保证各个顶点间的相对位置关系，即模型本身不会变形。按照流程中的各个步骤，可以看出右旋转和缩放共同用于模型的变形，缩放控制模型的大小，左旋转负责模型最终的朝向，平移负责模型最终的位置。
+
+当渲染变换被修改时，游戏会进行插值以平滑过渡两次不同的变换。假设当前插值进度为p：
+* 对于平移和缩放，游戏直接使用线性插值（'''L'''inear Int'''erp'''olation），即<math>\mathbf{v}=p\mathbf{v}_1+(1-p)\mathbf{v}_0</math>。
+* 对于旋转（四元数），游戏使用球面线性插值（'''S'''pherical '''L'''inear Int'''erp'''olation），即<math>\theta=\mathrm{arccos}(q_0 \cdot q_1), q=\frac{1}{\sin{\theta}}(\sin{(p\theta)}q_1+\sin{((1-p)\theta)}q_0)</math>。
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|firstcolumnname=实体
+|generatetranslationkeys=java
+|Block Display
+|nameid=block_display
+|translationkey=entity.minecraft.block_display
+|spritetype=block
+|spritename=air
+}}
+{{ID table
+|firstcolumnname=实体
+|generatetranslationkeys=java
+|Item Display
+|nameid=item_display
+|translationkey=entity.minecraft.item_display
+|spritetype=block
+|spritename=air
+}}
+{{ID table
+|firstcolumnname=实体
+|generatetranslationkeys=java
+|Text Display
+|nameid=text_display
+|translationkey=entity.minecraft.text_display
+|spritetype=block
+|spritename=air
+|foot=1
+}}
+
+=== 实体数据 ===
+{{main|实体数据格式}}
+方块展示实体、物品展示实体和文本展示实体有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19.4|dev=23w06a|加入了方块展示实体、物品展示实体和文本展示实体。}}
+|{{HistoryLine||1.20|dev=23w16a|将物品展示实体展示的物品沿Y轴旋转了180度。}}
+|{{HistoryLine||1.20.2|dev=23w31a|现在三种展示实体会在更新后的第一个[[刻]]开始更新客户端的位置和旋转，插值的时长由字段<code>teleport_duration</code>控制。}}
+|{{HistoryLine||1.21.5|dev=25w07a|现在三种展示实体均不会强制保存{{nbt|int|glow_color_override}}数据。
+|现在物品展示实体{{nbt|string|item_display}}的{{cd|d=pretty|firstperson_lefthand|thirdperson_lefthand}}模式的渲染效果与手持时相同。}}
+|{{HistoryLine||26.1|dev=snapshot-11|现在方块展示实体可以正常渲染箱子、告示牌等特殊渲染的方块，流体、末地传送门和末地折跃门除外。}}
+|{{HistoryLine|||dev=pre-1|现在方块展示实体可以正常渲染末地传送门和末地折跃门。}}
+}}
+
+== 你知道吗 ==
+* 方块展示实体中的特定位置的方块会出现[[Wikipedia:z-fighting|深度冲突]]现象。<ref>{{bug|MC-266932|||Won't Fix}}</ref>
+
+== 外部链接 ==
+* [https://misode.github.io/transformation/ Transformation Visualizer]，用以简单预览展示实体的变换效果。
+* [https://eszesbalint.github.io/bdstudio/editor BDStudio]，用以生成创建展示实体所需的命令。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|Non-mobs}}
+
+[[de:Darsteller]]
+[[en:Display]]
+[[es:Holograma]]
+[[fr:Entité d'affichage]]
+[[ja:表示エンティティ]]
+[[pt:Entidade-exibição]]

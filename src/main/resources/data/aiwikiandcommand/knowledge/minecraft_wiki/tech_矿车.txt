@@ -1,0 +1,422 @@
+# 页面: 矿车
+# 来源: https://zh.minecraft.wiki/w/%E7%9F%BF%E8%BD%A6
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 可再生资源, 基岩版独有信息, 实体, 实验性内容, 实验性内容/矿车改进, 有未知版本的History模板的页面/Java版, 物品, 载具, 需要检查源代码, 需要测试, 需要测试/基岩版, 需要验证
+# 抓取时间: 2026-07-14 17:32:54
+# 原始 Wikitext 内容:
+
+{{about|可乘坐的矿车}}
+{{Infobox item
+|image=Minecart.png
+|invimage=Minecart
+|size=高度：0.7格<br>宽度：0.98格
+}}
+{{relevant tutorial|矿车}}
+{{quote|2010年6月18日，矿车被加入了游戏。刚开始，它们只能用于存储——就像箱子一样。但不到一周后，这个用作“箱子”的计划就被撤销，随后，矿车就可以乘坐了。随着时间的推移，矿车又添加了新功能——TNT矿车、漏斗矿车、动力矿车、甚至是命令方块矿车。|[[Duncan Geere]]<ref>{{article|taking-inventory--minecart|Taking Inventory: Minecart}}</ref>||Duncan Geere Mojavatar.png}}
+'''矿车（Minecart）'''是一种在[[铁轨]]上运行的类似于火车的载具[[实体]]。
+
+== 获取 ==
+可以用伤害使矿车实体掉落成物品。
+
+=== 合成 ===
+{{Crafting
+|A2= Iron Ingot |C2= Iron Ingot
+|A3= Iron Ingot |B3= Iron Ingot |C3= Iron Ingot
+|Output= Minecart
+|type= Transportation
+}}
+
+=== 其他矿车 ===
+[[命令方块矿车]]和{{only|for=[[刷怪笼矿车]]|je}}被摧毁后会掉落1个矿车。
+
+== 用途 ==
+矿车能被[[玩家]]或[[发射器]]放置在各类[[铁轨]]上，由此放置的矿车总是处于铁轨的正中央。矿车没有铁轨支撑时会脱轨，脱轨的矿车在接触铁轨的上表面及侧边时可回到铁轨上。
+
+=== 合成材料 ===
+{{crafting usage|Minecart}}
+
+== 行为 ==
+=== 生物 ===
+{{in|je}}骑乘矿车的[[蜘蛛骑士]]会自动加速矿车。
+
+若矿车从高处落到铁轨上，矿车中的生物不会受到坠落伤害。
+
+绝大多数情况下，矿车中的生物不会被清除，也不占用刷怪上限，详见{{slink|生成|清除}}。
+
+==== 乘坐 ====
+[[File:RideableMinecart.png|缩略图|250px|在木质台阶之间的可乘坐的矿车]]
+
+大多数生物可以乘坐矿车（详见{{slink|骑乘|生物乘骑矿车或船}}），但只有一些生物能够控制矿车。
+
+对矿车点击{{ctrl|使用}}键{{only|for=或“乘坐”按钮|be}}可以乘坐矿车。
+
+如果玩家把矿车推向生物，或生物走上矿车所在的位置，就会坐上矿车。
+
+与床不同，试图乘坐已被占用的矿车不会出现一条提示信息。<ref>{{bug|MC-161251|||WAI}}</ref>
+
+==== 下车 ====
+玩家可以通过按下{{ctrl|潜行}}键或{{only|for={{ctrl|跳跃}}键|be}}脱离矿车。生物不能自主下车，但在矿车被破坏时会下车，经过激活的[[激活铁轨]]时也会被从矿车弹出。[[末影人]]也不能从矿车中传送走。
+
+当一个玩家或者生物下车时，矿车会在一格远处为实体选择一个安全的下车位置。合理的下车位置应满足以下条件，需指出这里的“空间”中可以包含流体甚至打开的活板门（如果实体足够窄），且其他生物的存在与否不影响判断：
+* 下方为一个具有坚实上表面（不必完整）的方块。
+* 留下足够的空间以在高度上容纳实体。
+* 在实体站立在该位置的中心时在宽度方向上有容纳该实体的空间。
+
+首先，矿车会以右、左、右后、左后、右前、左前、后、前的顺序检查八个水平方向（相对于运动方向）上的相邻方块。然后，如果在与矿车高度相同的相邻位置没有合适的位置，矿车会依次搜索上方一格和下方一格处。对于玩家，矿车会继续检查能容纳爬行的玩家的位置。如果仍然没有找到，矿车会选择自身所在的位置作为生物的下车位置。生物的下车位置被确定后，矿车会将实体传送到该位置的中心处。
+
+=== 移动 ===
+位于铁轨上的矿车只能沿着轨道移动，而不在铁轨上的矿车可以任意移动。
+
+{{in|je}}当矿车离开铁轨时，矿车的朝向变为向东。{{in|be}}玩家在铁轨上放置矿车时，无关铁轨方向，被放置的矿车的Y轴旋转角默认是0°（即朝向正南），此时矿车的移动朝向未确定。若刚被放置的矿车在南北朝向的铁轨上，此矿车经实体碰撞等一般情况下，移动后的朝向为正南；若刚被放置的矿车在南北朝向的铁轨上，有实体乘坐此矿车并让矿车向北移动，同时此实体Y轴旋转角与正北方向有一定差距使得矿车足以改变自身视角时，矿车的移动朝向可由正南转为正北。若刚被放置的矿车在东西朝向的铁轨上，则此矿车移动后的朝向为开始移动时的朝向。当矿车离开铁轨时，矿车的朝向与在原铁轨上移动时的朝向一致。
+
+不在铁轨上的矿车，底部中心点位于铁轨上方1格范围内时会自动移动到铁轨上。
+
+==== 速度 ====
+{{in exp|diff=1|for=矿车的预设的'''单坐标轴'''最大速度为8格/秒，因此斜向行驶的矿车能达到约11.314格/秒。<ref group="注"><math>\sqrt{8^2+8^2}</math>的近似值，见[[wzh:勾股定理|{{tr|勾股定理|畢氏定理}}]]。</ref>}}当矿车转弯时它将会斜向行驶。
+
+玩家乘坐位于铁轨上的矿车时，可以按下{{ctrl|前进}}键移动矿车，在水平铁轨上的矿车最快能加速到约1.5格/秒。
+
+矿车在水平铁轨上移动时速度会缓慢减小。在斜向上的铁轨上移动时，矿车受到竖直向下的加速度影响，会在向上移动时减速，也会自动向下加速。
+
+当矿车行驶在水平或斜向上的[[动力铁轨]]上时：
+* 激活的动力铁轨会增加矿车的速度，直到矿车达到最大速度；
+* 未激活的动力铁轨会快速减小矿车的速度，直到矿车停下。一般只需1到2个未激活的动力铁轨即可将以最高速度行驶的矿车完全刹停。
+
+矿车碰到大多数实体时都会立即停下。{{in exp|diff=1|for=此外，矿车脱轨后会在1到2格内迅速停下。}}
+
+大部分实体可以改变矿车的速度，即可以通过推动矿车让矿车加速或减速。
+
+可装载物品或实体的矿车会有一个“空间”来决定它的惯性，并会因矿车“空间”中装载物品的数量和类型而不同。
+
+放置在轨道上的矿车，当轨道被拆卸时，矿车长边方向为东西方向。{{in exp|diff=1|for=放置两辆相邻的矿车，当轨道方向为东西方向时，两辆矿车将互相推动；当轨道方向为南北方向时，两辆矿车将静止。}}
+
+矿车完全不受[[冰]]、[[蓝冰]]、[[浮冰]]和[[霜冰]]的影响。<ref>{{bug|MC-8265}}</ref>
+
+==== 东南规则 ====
+{{Main|东南规则}}
+[[File:Track intersections.png|缩略图|“东南规则”示意图（上方为北）]]
+
+在交叉处铁轨不是弯道的十字路口，连续直道上的矿车正常行驶；断连的轨道上矿车在交叉处总会向南方或东方行驶。
+{{-}}
+
+==== 下坡定律 ====
+[[File:downhill rule.png|缩略图]]
+在非弯道的轨道交错上，矿车如果能往下坡走，那它总会往下坡走。这被称为下坡定律，并且优先于东南规则。
+{{-}}
+
+==== 坡道排除/单向效应 ====
+[[File:Minecart Block Passing Effect.png|缩略图|两个下行时被方块阻挡的矿车]]
+置于下坡轨道末端的轨道上方的方块会阻挡矿车下行，但不会阻挡其上行。要让矿车在倾斜的隧道中下行，必须要有能足够让玩家行走通过的空间。
+{{-}}
+
+==== 弯道交叉 ====
+[[File:T-intersection-south-west.png|右|缩略图]]
+[[File:Railguide.png|缩略图|矿车在弯道的行驶方式]]
+从不与弯道相连的方向进入丁字路口时，矿车会直行穿过弯道；从其余两个方向进入岔道的矿车会沿弯道行驶。
+
+矿车在跳过直道和弯道的间隙时能非常明显地超越正常情况下8m/s的速度限制。比如，在铁轨直道上每隔一格放置一个交叉，可以在直道方向达到10m/s的行驶速度。
+{{-}}
+
+==== 轨道性能 ====
+轨道上矿车的行驶性能由轨道的摆放方式决定。轨道贴墙（尤其是对角线贴墙）、轨道旁的路灯、以及上坡都会影响矿车的速度，以致影响矿车的移动距离。
+
+一辆最高速度的空矿车可以冲上10方块高的普通轨道坡，这意味着在10方块高的时候放置一段[[动力铁轨]]便可以使矿车持续上行。但由于矿车的严重减速，从9方块开始铺设2段动力铁轨后，矿车也只能再爬上5方块。保持矿车上行的动力铁轨最少用量是每6段普通铁轨配3段动力铁轨。
+
+载有乘客的矿车，或是[[运输矿车]]，具有更大的惯性，可以比空矿车冲上更高的高度。载有乘客的满速矿车可以在不需外来动力的情况下冲上24方块的高度。但与此同时，如果要将这种矿车从静止加速到最高速度，需要使用7段被充能的动力铁轨。
+
+=== 掉落 ===
+[[File:Minecart shake.gif|thumb|200px|right|矿车因为驶上了激活的激活铁轨或受到击打而摇晃]]
+
+{{in|je}}矿车的掉落受到'''损坏度（Damage）'''的影响，每{{hp|1}}点伤害会增加10点损坏度。矿车损坏度的初始值为0，大于40后矿车会掉落。如果损坏度大于0，则每游戏刻减少1。因此，单次攻击伤害大于{{hp|4}}时可以一击让矿车变成掉落物。
+
+{{in|be}}矿车的掉落受到'''结构完整度（Structural Integrity）'''的影响，每{{hp|1}}点伤害会减少8点结构完整度。矿车结构完整度的初始值为40，小于0后矿车会掉落。如果结构完整度低于20，则每游戏刻增加1。因此，单次攻击伤害大于等于{{hp|5}}时可以一击让矿车变成掉落物。与[[船]]不同的是，当玩家重载矿车所在区块时，矿车的结构完整度不会改变。
+
+创造模式下的玩家可以一击让矿车直接消失而不会掉落。
+
+[[状态效果]]可以改变玩家对矿车的{{only|JE|for=损坏度}}或{{only|BE|for=结构完整度}}造成的影响，但暴击与[[锋利]]魔咒均不会改变它们。
+
+矿车在接触到[[仙人掌]]、[[熔岩]]或者[[火]]时会变成掉落物。
+
+=== 矿车重叠 ===
+{{exclusive|je|section=1}}
+当两辆或者更多的矿车重叠在一起时称作矿车重叠。它们的移动方式很奇怪。当矿车冲出轨道时，这些重叠的矿车会瞬间以一个固定的速度一直移动，在撞到两个方块形成的凹角之前不会停下<ref>{{bug|MC-14}}</ref>。
+
+=== 空矿车的倾斜和加速 ===
+下表显示当矿车从斜坡驶下并使用加速工具（或不使用任何加速工具）在平地可滑行的距离。最为行之有效的加速方案是在斜坡的底端平地上使用1格充能轨道加速。使用2格加速会使其最大滑行距离增加20%（约1.5米）。最大滑行距离与斜坡高度的关系近似成对数关系。
+
+矿车在特定高度的斜坡顶端，从静止状态开始滑下。
+
+{| class="wikitable"
+|-
+! 斜坡高度 !! 不使用加速 !! 在底端使用加速 !! 在底端和顶端均使用加速 !! 在斜坡和底部所有位置均使用加速
+|-
+| 1 || 2.77m || 8.77 || 10.8 || 10.8
+|-
+| 2 || 4.59m || 9.59 || 10.83 || 13.37
+|-
+| 3 || 5.81m || 9.81 || 11.66 || 15.12
+|-
+| 4 || 7.04m || 10.04 || 12.46 || 16.95
+|-
+| 5 || 7.87m || 10.87 || 12.29<!--(Yes, it did actually travel less)--> || 17.95
+|-
+| 10 || 11.65m || 13.38 || 15.12 || 21.68
+|-
+| 100 || 15.87m || 17.05 || 17.54 || 25.34
+|}
+
+=== 碰撞 ===
+矿车的尺寸为0.98×0.7×0.98{{needs testing|bedrock=1}}。因此梯子和门都可保护矿车不坠入1×1的洞之中。但两辆矿车之间的碰撞使用不同于判定箱的尺寸，在矿车渲染模型长轴方向的尺寸略大于轮廓箱，与渲染模型的尺寸接近{{needs testing}}{{ctc}}。
+
+放置在被激活的动力铁轨正上方上的矿车，如果其前方或后方相邻的位置上存在一个红石导体，则矿车会被该方块推动从而朝相反方向运动。
+
+当在某种情形下，[[铁轨]]上的矿车可能无视碰撞。当矿车上坡或转弯时处于行车方向的方块会被矿车穿越。
+
+乘坐矿车的玩家和生物不会与任何有碰撞箱的非窒息方块发生碰撞或受到窒息伤害。玩家和生物的头部驶进窒息方块时会受到窒息伤害。
+
+=== 船 ===
+{{in exp|diff=1|for=当船被放进矿车时，在铁轨上的矿车会移动得更快，速度大约和在动力铁轨上一致。船在矿车里的运动具有漏洞，按下{{key|W}}会向后移动，按下{{key|S}}会向前移动。矿车在没有铁轨的地上会以爬行的速度移动，在船上的矿车不会脱离并飘浮。}}{{verify|似乎在非实验性玩法中也无法复现}}
+
+使用这种漏洞可以更加节省资源，因为矿车可以在平坦的地面和斜坡上以激活的动力铁轨提供的速度移动。船矿车的另一个漏洞是当矿车在铁轨上时摩擦会大大降低，这与船在冰上行驶时相似。这个漏洞可以在无作弊生存模式中通过将矿车推进在铁轨上方的船中实现。
+
+=== 实验性 ===
+{{experimental|minecart_improvements|je=1|section=1}}
+* 可以修改{{gamerule|max_minecart_speed}}以更改矿车及其变种在铁轨上运动的最大速度。
+** 水中的矿车可以达到的最大速度只有此规则的一半。
+* 速度（{{nbt|double|Motion}}）表示1刻内矿车的位移而非沿单坐标轴运动的速度。因此，斜向行驶的矿车将不能超过最大速度。
+* 矿车在快速行驶和转弯时更不容易停止或脱轨。
+* 矿车会在脱离以上下坡为末端的轨道时保留垂直动量。
+* 矿车在空中时会保持倾斜姿态，速度方向的垂直分量影响倾斜角度，水平分量影响倾斜方向。
+* 矿车在空中时不播放行驶音效。
+* 矿车不能被玩家重叠放置。
+* 改进了矿车的碰撞：
+** 矿车可以稳定地被相邻放置在铁轨上，而不会互相推开。
+** 在铁轨上撞上其他矿车的矿车可以稳定停下并推动被撞的矿车，而非与被撞矿车一起移动或被推回。
+** 生物会更稳定地坐上在轨道上行驶的矿车，而非将其撞停或使其返回。
+** 在铁轨上撞上其他不会主动骑乘矿车的实体的矿车可以稳定减速至停止，而非立刻被推回。
+* 矿车与船的交互发生了变化：
+** 无论船上是否有乘客，矿车总能够装载船，而无法在无作弊生存模式中使船骑乘矿车。
+** 船在矿车里时，无法通过操控船影响矿车移动。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Minecart inside.ogg
+|subtitle=<s>{{tp|subtitles.entity.minecart.inside}}</s><ref group="音效" name="MC-278135">{{bug|MC-278135||声音事件{{cd|entity.minecart.inside|entity.minecart.inside_underwater|d=pretty}}对应的字幕再度缺失。}}</ref>
+|source=友好生物<ref group="音效" name="oddcats">{{bug|MC-42132}}</ref>
+|description=玩家在陆地上骑乘矿车
+|id=entity.minecart.inside
+|translationkey=<s>subtitles.entity.minecart.inside</s>
+|translationkeydesc=<ref group="音效" name="MC-278135"/>
+|distance=16}}
+{{Sound table
+|sound=Minecart inside underwater1.ogg
+|sound2=Minecart inside underwater2.ogg
+|sound3=Minecart inside underwater3.ogg
+|subtitle=<s>{{tp|subtitles.entity.minecart.inside_underwater}}</s><ref group="音效" name="MC-278135"/>
+|source=友好生物<ref group="音效" name="oddcats" />
+|description=玩家在水下骑乘矿车
+|id=entity.minecart.inside.underwater
+|translationkey=<s>subtitles.entity.minecart.inside_underwater</s>
+|translationkeydesc=<ref group="音效" name="MC-278135"/>}}
+{{Sound table
+|sound=Minecart base.ogg
+|subtitle={{tp|subtitles.entity.minecart.riding}}<ref group="音效" name="MC-181831">{{bug|MC-181831|||WAI}}</ref>
+|source=友好生物<ref group="音效" name="oddcats" />
+|description=矿车行进
+|id=entity.minecart.riding
+|translationkey=subtitles.entity.minecart.riding
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Minecart inside.ogg
+|source=友好生物
+|description=玩家骑乘矿车
+|id=minecart.inside
+|typeid=minecart.inside
+|soundvolume
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Minecart base.ogg
+|source=友好生物
+|description=矿车行进
+|id=minecart.base
+|typeid=minecart.base
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Minecart
+|spritetype=item
+|nameid=minecart
+|foot=1}}
+{{ID table
+|generatetranslationkeys=java
+|Minecart
+|spritetype=entity
+|nameid=minecart
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Minecart
+|spritetype=item
+|nameid=minecart
+|foot=1}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Minecart
+|spritetype=entity
+|nameid=minecart
+|foot=1}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+
+矿车有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{load achievements|on-a-rail}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100618|[[File:Minecart JE1.png|32px]][[File:Minecart (item) JE1.png|32px]] 加入了矿车。它们不能被骑乘，但可以用来储存物品，容量相当于一个普通箱子的大小，右键点击会打开其物品栏。储存的东西越多，矿车内的[[泥土]]层越高。}}
+|{{HistoryLine||20100624|[[File:Minecart JE2.png|32px]][[File:Minecart (item) JE2 BE1.png|32px]] 更改了矿车的纹理。
+|更改了矿车的机制。现在可以骑乘矿车，同时移除了存储物品的功能。|由于未知原因，矿车现在会在其中渲染一个箱子。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.4|加入了乘坐矿车时的动画效果。
+|[[File:Minecart JE3 BE1.png|32px]]移除了矿车中渲染的箱子。}}
+|{{HistoryLine||v1.0.14|矿车现在可以用来合成[[动力矿车]]和[[运输矿车]]。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|徒手破坏矿车的速度现在变快了。
+|加入了[[动力铁轨]]，这使矿车能自动行驶。之前的加速方法失效或效率降低。
+|加入了[[探测铁轨]]，来用于探测矿车。在此更新之前，人们使用压力板来探测矿车，但会大幅阻碍甚至会逼停矿车，严重影响轨道的加速结构。}}
+|{{HistoryLine||1.6|dev=Test Build 3|矿车现在会将掉落伤害转移给乘坐者，矿车本身不会被摧毁。}}
+|{{HistoryLine||1.8|dev=pre1|当你在下落时攻击矿车，它会显示[[伤害#暴击|暴击]]的效果。此效果也会在坐在车内时产生。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|C418公开了一段矿车行进的音效。}}
+|{{HistoryLine||1.3.1|dev=12w21b|玩家在下车时不再出现在车内/车的上方，而是在一段距离外。玩家在乘坐矿车时可以使用方向键来缓慢地挪动矿车。}}
+|{{HistoryLine||1.4.2|dev=12w38b|加入了矿车的音效。}}
+|{{HistoryLine||1.5|dev=13w02a|矿车现在可以通过第三方工具来在车内显示不同的方块（仅为视觉效果）。所有类型的矿车都拥有这个功能。
+|不同类型的矿车不再共用实体ID<code>Minecart</code>，亦不再以<code>Type</code>标签区分矿车类型。各类矿车的实体ID是独立的。
+|矿车现在可以用来合成[[TNT矿车]]。}}
+|{{HistoryLine|||dev=13w03a|矿车现在可以用来合成[[漏斗矿车]]。}}
+|{{HistoryLine|||dev=13w04a|现在创造模式下攻击矿车会使矿车直接消失而不会掉落，但[[重命名]]后的矿车仍会掉落。}}
+|{{HistoryLine||1.7.2|dev=13w39a|加入了[[命令方块矿车]]。}}
+|{{HistoryLine||1.8|dev=14w11a|更改了矿车的物理性质——它们可以走的更快更远了；如果速度太快，过转弯位的时候会脱轨，且无法上坡；如果速度够快，可以越过1个方块。
+|改善了碰撞和位置处理的方式。}}
+|{{HistoryLine|||dev=14w17a|将矿车的运动机制回退至14w11a前。}}
+|{{HistoryLine||1.9.1|dev=pre2|修复了运输矿车和漏斗矿车显示为“''container.minecart''”的文字漏洞。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID由<code>MinecartRideable</code>更改为<code>minecart</code>。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，此物品的数字ID是328。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Minecart JE4 BE2.png|32px]] [[File:Minecart (item) JE3 BE2.png|32px]] 更改了矿车的纹理。}}
+|{{HistoryLine|||dev=19w12b|现在进入或破坏矿车时不再会短暂错误播放乘坐矿车时的音效。<ref>{{bug|MC-68687|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=?|现在，矿车在普通轨道上的移动速度会慢得多，在未激活的动力铁轨上更是如此，如果玩家不推动矿车，就无法从未激活的动力铁轨降下。}}
+|{{HistoryLine||1.16|dev=20w09a|现在会检测实体下车位置的空间高度是否能够容下该实体。}}
+|{{HistoryLine||1.17|dev=20w45a|矿车现在可以在水下行驶。}}
+|{{HistoryLine||1.18|dev=pre2|移除了矿车底部多余的棕色纹理。<ref>{{bug|MC-206303|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.3|dev=23w41a|现在创造模式下攻击重命名过的矿车也会使矿车直接消失而不会掉落。}}
+|{{HistoryLine||1.21|dev=24w21a|现在带有乘客的矿车可以通-{}-过[[下界传送门]]传送了。<ref>{{bug|MC-67|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.2|dev=24w33a|现在玩家乘坐装载着带鞍的猪的矿车时不再会以激活的动力铁轨提供的速度移动。}}
+|{{HistoryLine|||exp=minecart_improvements|dev=24w33a|矿车的传送冷却由{{convert|300}}缩减至{{convert|10}}。
+|矿车现在不能被重叠放置。
+|矿车现在具有惯性，在离开以上下坡为末端的轨道时会保留垂直动量，并在空中保持倾斜姿态。}}
+|{{HistoryLine|||dev=24w34a|矿车再次可以被[[发射器]]重叠放置。
+|放置在铁轨上时，矿车会朝向正确的方向。放置在倾斜铁轨上时，矿车会正常倾斜。
+|矿车不再强制与铁轨中心对齐。在弯铁轨上的矿车将会对齐到偏向转弯内侧的位置。被活塞推动后，矿车也会正常对齐到铁轨上。}}
+|{{HistoryLine||1.21.5|dev=25w07a|移除了矿车实体数据中的{{nbt|boolean|CustomDisplayTile}}字段，此前此项为<samp>false</samp>时矿车不会展示自定义方块。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.8.0|dev=build 2|[[File:Minecart JE3 BE1.png|32px]] [[File:Minecart (item) JE2 BE1.png|32px]] 加入了矿车。}}
+|{{HistoryLine||0.8.0|dev=build 3|矿车现在坐上去更平稳了。}}
+|{{HistoryLine||0.13.0|dev=build 1|加入矿车的音效。}}
+|{{HistoryLine|||dev=build 2|矿车现在可以往上堆叠。}}
+|{{HistoryLine||0.14.0|dev=build 1|矿车现在可以用来合成[[运输矿车]]、[[漏斗矿车]]和[[TNT矿车]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.20.1|矿车现在可以在水下行驶。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Minecart JE4 BE2.png|32px]][[File:Minecart (item) JE3 BE2.png|32px]] 更改了矿车的纹理。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Minecart JE3 BE1.png|32px]] [[File:Minecart (item) JE2 BE1.png|32px]] 加入了矿车。}}
+|{{HistoryLine||xbox=TU13|ps3=1.00|psvita=1.00|ps4=1.00|翻倍了矿车的速度。}}
+|{{HistoryLine||xbox=TU21|xbone=CU9|ps3=1.14|psvita=1.14|ps4=1.14|提高了矿车的最大数量。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|更改了矿车的音效。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Minecart JE4 BE2.png|32px]][[File:Minecart (item) JE3 BE2.png|32px]] 更改了矿车的纹理。}}
+|{{HistoryLine|new 3DS}}
+|{{HistoryLine||0.1.0|[[File:Minecart JE3 BE1.png|32px]] [[File:Minecart (item) JE2 BE1.png|32px]] 加入了矿车。}}
+}}
+
+== 你知道吗 ==
+* 由于矿车的模型没有轮子，所以矿车看起来像是浮在铁轨上的。
+* 在坐着矿车的时候，玩家可以在其能够到的范围内点击另一辆矿车来进行传送。
+* {{in|je}}在坐着矿车的时候，如果玩家将游戏设置里的声音关掉再打开，那么客户端中这辆矿车将不再发出响声，直到玩家离开矿车。
+* {{in|je}}如果一只上了[[鞍]]的猪在乘坐矿车，玩家可以骑矿车里的猪。此时矿车能够以玩家的行走速度自由移动。<ref>{{bug|MC-51632}}</ref>
+* 如果玩家乘坐的矿车前有太多的矿车，那么玩家乘坐的这辆矿车是不能推着它们移动的。
+
+== 画廊 ==
+<gallery>
+File:Minecart with chest and head thing.png|[[Jeb]]发布的第一张关于矿车的图片<ref>{{Tweet|jeb|289000646210904064}}</ref>
+File:Pocket Edition v0.8.0 alpha Development minecarts.png|第一张关于[[携带版]]中矿车的图片
+File:MinecartInfdev1.png|Infdev版本中矿车的GUI
+File:MinecartInfdev2.png|Infdev版本中的矿车
+File:Villager in minecart.png|矿车中的村民
+File:Minecart fire pig.png|着火的矿车里的猪
+File:MinecartStack.png|堆叠起来的矿车
+File:2ed Spawner Minecart Image and 1st Dispenser cart image.jpg|两个激活的刷怪笼矿车和未激活的发射器矿车
+File:Minecart (Trails and Tales Summer Event) Render.png|[[足迹与故事活动]]中的木制矿车
+</gallery>
+
+== 注释 ==
+{{fnlist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox items|Tools & Utilities}}
+{{Navbox entities|Non-mobs}}
+
+[[Category:载具]]
+
+[[cs:Vozík]]
+[[de:Lore]]
+[[en:Minecart]]
+[[es:Vagoneta]]
+[[fr:Wagonnet]]
+[[hu:Csille]]
+[[it:Vagonetto]]
+[[ja:トロッコ]]
+[[ko:광산 수레]]
+[[lzh:礦車]]
+[[nl:Mijnkar]]
+[[pl:Wagonik]]
+[[pt:Carrinho de Mina]]
+[[ru:Вагонетка]]
+[[th:รถราง]]
+[[uk:Вагонетка]]

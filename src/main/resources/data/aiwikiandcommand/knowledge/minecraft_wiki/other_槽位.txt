@@ -1,0 +1,585 @@
+# 页面: 槽位
+# 来源: https://zh.minecraft.wiki/w/%E6%A7%BD%E4%BD%8D
+# 分类: 
+# 抓取时间: 2026-07-14 17:29:20
+# 原始 Wikitext 内容:
+
+'''槽位（Slot）'''是[[方块实体]]或[[实体]]的数据中能储存单个物品堆叠的位置。
+
+== Java版 ==
+游戏使用'''槽位索引'''确定一个槽位。
+
+{| class="wikitable sortable" data-description="槽位索引"
+! 槽位索引
+! 用途
+! 描述
+|-
+| 0-53
+| 一般的物品栏
+| 不同容器的槽位索引有不同的范围：
+* [[物品实体]]、[[物品展示框]]、[[物品展示实体]]、[[箭]]、[[光灵箭]]、[[小火球]]、[[火球]]的槽位索引为0。
+* [[箱子]]、[[发射器]]、[[投掷器]]、[[漏斗]]、[[陷阱箱]]、[[木桶]]、[[潜影盒]]左上角的槽位索引为0，先向右逐槽位增加1，再从下一行开头继续计数。（例如，箱子第二行从左到右的槽位索引是9到17）。大箱子里的物品实际上储存在两个单独的方块实体中。
+* [[酿造台]]下方的三个槽位从左到右索引依次为0到2，顶部的原料槽位索引为3，燃料槽位为4。
+* [[熔炉]]的原料槽位的索引为0，燃料槽位为1，输出槽位为2。
+* [[玩家]]的物品栏槽位索引为0到35。
+* [[运输矿车]]为0到26。
+* [[漏斗矿车]]为0到4。
+|-
+| 98-103
+| [[生物]]（所有生物都有这些槽位，但并非所有生物都实际使用了这些槽位并渲染其中的物品）
+|
+* 头部盔甲槽位：103
+* 胸部盔甲槽位：102
+* 腿部盔甲槽位：101
+* 足部盔甲槽位：100
+* 主手：98
+* 副手：99
+|-
+|105
+| [[生物]]（所有生物都有这些槽位，但并非所有生物都实际使用了这些槽位并渲染其中的物品）
+| 马和僵尸马的[[马铠]]槽位、羊驼和行商羊驼的[[地毯]]槽位、狼的[[狼铠]]槽位、快乐恶魂的[[挽具]]槽位、鹦鹉螺和僵尸鹦鹉螺的[[鹦鹉螺铠]]槽位、[[硫方怪]]的方块槽位
+|-
+|106
+| [[生物]]（所有生物都有这些槽位，但并非所有生物都实际使用了这些槽位并渲染其中的物品）
+| [[猪]]、[[炽足兽]]、[[马]]、[[驴]]、[[骡]]、[[骷髅马]]、[[僵尸马]]、[[骆驼]]、[[骆驼尸壳]]、[[鹦鹉螺]]和[[僵尸鹦鹉螺]]的[[鞍]]槽位；铜傀儡的[[虞美人]]槽位
+|-
+| 200-226
+| [[玩家]]
+| 末影箱中的槽位
+|-
+| 300-307
+| [[村民]]、[[流浪商人]]、[[掠夺者]]、[[猪灵]]
+| [[村民]]、[[流浪商人]]、[[掠夺者]]、[[猪灵]]的物品栏
+|-
+| 499
+| 装备箱子的[[驴]]、[[羊驼]]和[[骡]]；[[玩家]]
+| 驴、羊驼和骡所装备的[[箱子]]物品；[[创造模式物品栏]]外玩家的鼠标所持的物品
+|-
+| 500-503
+| 玩家
+| 玩家物品栏中的四个合成槽位
+|-
+| 500-514
+| 装备箱子的[[驴]]、[[羊驼]]和[[骡]]
+| 箱子内物品的槽位
+|}
+
+=== 命令参数 ===
+在命令中槽位使用字符串名称指定，而不是直接指定其索引。当命令执行时，字符串名称会被映射到槽位索引。
+
+槽位的字符串名称包含'''槽位类型'''和可选的'''槽位编号'''两部分，格式为<code>-{}-<槽位类型></code>或<code>-{}-<槽位类型>.<槽位编号></code>.
+
+{| class="wikitable sortable" data-description="Slot mapping"
+! 字符串名称
+! 允许的槽位编号
+! 映射到槽位索引
+|-
+| <code>contents</code>
+|
+| align="center" | 0
+|-
+| <code>-{}-container.<槽位编号></code>
+| align="center" | 0-53
+| align="center" | 0-53
+|-
+| <code>-{}-hotbar.<槽位编号></code>
+| align="center" | 0-8
+| align="center" | 0-8
+|-
+| <code>-{}-inventory.<槽位编号></code>
+| align="center" | 0-26
+| align="center" | 9-35
+|-
+| <code>-{}-enderchest.<槽位编号></code>
+| align="center" | 0-26
+| align="center" | 200-226
+|-
+| <code>-{}-horse.<槽位编号></code>
+| align="center" | 0-14
+| align="center" | 500-514
+|-
+| <code>-{}-mob.inventory.<槽位编号></code>
+| align="center" | 0-7
+| align="center" | 300-307
+|-
+| <code>weapon</code>
+|
+| align="center" | 98
+|-
+| <code>weapon.mainhand</code>
+|
+| align="center" | 98
+|-
+| <code>weapon.offhand</code>
+|
+| align="center" | 99
+|-
+| <code>armor.head</code>
+|
+| align="center" | 103
+|-
+| <code>armor.chest</code>
+|
+| align="center" | 102
+|-
+| <code>armor.legs</code>
+|
+| align="center" | 101
+|-
+| <code>armor.feet</code>
+|
+| align="center" | 100
+|-
+| <code>armor.body</code>
+|
+| align="center" | 105
+|-
+| <code>saddle</code>
+|
+| align="center" | 106
+|-
+| <code>horse.chest</code>
+|
+| align="center" | 499
+|-
+| <code>player.cursor</code>
+|
+| align="center" | 499
+|-
+| <code>-{}-player.crafting.<槽位编号></code>
+| align="center" | 0-3
+| align="center" | 500-503
+|}
+
+{{cmd|execute if items}}还支持带有通配符的槽位名称：
+* <code>container.*</code>：包含<code>container.0</code>到<code>container.53</code>。
+* <code>hotbar.*</code>：包含<code>hotbar.0</code>到<code>hotbar.8</code>。
+* <code>inventory.*</code>：包含<code>inventory.0</code>到<code>inventory.26</code>。
+* <code>enderchest.*</code>：包含<code>enderchest.0</code>到<code>enderchest.26</code>。
+* <code>mob.inventory.*</code>：包含<code>mob.inventory.0</code>到<code>mob.inventory.7</code>。
+* <code>horse.*</code>：包含<code>horse.0</code>到<code>horse.14</code>。
+* <code>weapon.*</code>：包含{{cd|d=pretty|weapon.mainhand|weapon.offhand}}。
+* <code>armor.*</code>：包含{{cd|d=pretty|armor.head|armor.chest|armor.legs|armor.feet|armor.body}}。
+* <code>player.crafting.*</code>：包含<code>player.crafting.0</code>到<code>player.crafting.3</code>。
+
+=== 装备槽位 ===
+装备槽位在实体数据、实体谓词和与生物装备相关的物品堆叠组件（如{{cd|equippable}}）等中使用。所有生物都具有这些槽位，但不一定全部使用这些槽位。
+
+{| class="wikitable sortable"
+! 字符串名称 !! 映射到槽位索引 !! 描述
+|-
+| <code>mainhand</code> || 98 || 主手槽位
+|-
+| <code>offhand</code> || 99 || 副手槽位
+|-
+| <code>feet</code> || 100 || 靴子槽位
+|-
+| <code>legs</code> || 101 || 护腿槽位
+|-
+| <code>chest</code> || 102 || 胸甲槽位
+|-
+| <code>head</code> || 103 || 头盔槽位
+|-
+| <code>body</code> || 105 || 身体槽位
+|-
+| <code>saddle</code> || 106 || 鞍槽位
+|}
+
+通常情况下，{{cd|d=pretty|mainhand|offhand|head|chest|legs|feet}}装备槽位被所有人-{}-形生物使用；{{cd|body}}装备槽位被用于动物盔甲，包括狼的狼铠、羊驼和行商羊驼的地毯、马和僵尸马的马铠、快乐恶魂的挽具与鹦鹉螺和僵尸鹦鹉螺的鹦鹉螺铠、硫方怪的方块槽位；{{cd|saddle}}装备槽位被用于马类生物、骆驼、骆驼尸壳、猪、炽足兽、鹦鹉螺和僵尸鹦鹉螺的鞍以及铜傀儡的虞美人。
+
+'''{{text anchor|装备槽位组}}'''是一个或多个装备槽位的集合。由于装备槽位组可能包含多个装备槽位，因此只用于诸如物品可被置于哪些装备槽位等定义性用途，而不能作为数据项用来保存物品。游戏共定义了如下装备槽位组：
+
+{| class="wikitable sortable"
+! 字符串名称 !! 包含的装备槽位 !! 描述
+|-
+| <code>any</code> || 全部 || 任何槽位
+|-
+| <code>hand</code> || {{cd|d=pretty|mainhand|offhand}} || 双手
+|-
+| <code>armor</code> || {{cd|d=pretty|body|head|chest|legs|feet}} || 护甲槽位
+|-
+| colspan="2" | <code>mainhand</code> || 主手槽位
+|-
+| colspan="2" | <code>offhand</code> || 副手槽位
+|-
+| colspan="2" | <code>feet</code> || 靴子槽位
+|-
+| colspan="2" | <code>legs</code> || 护腿槽位
+|-
+| colspan="2" | <code>chest</code> || 胸甲槽位
+|-
+| colspan="2" | <code>head</code> || 头盔槽位
+|-
+| colspan="2" | <code>body</code> || 身体槽位
+|-
+| colspan="2" | <code>saddle</code> || 鞍槽位
+|}
+
+== 基岩版 ==
+=== 命令参数 ===
+命令中槽位使用'''槽位类型'''和'''槽位编号'''两个参数指定。
+
+对于一个方块实体，其槽位的槽位类型是<code>slot.container</code>。
+* [[箱子]]、[[发射器]]、[[投掷器]]、[[漏斗]]、[[陷阱箱]]、[[木桶]]、[[潜影盒]]左上角的槽位编号为0，先向右逐槽位增加1，再从下一行开头继续计数。（例如，箱子第二行从左到右的槽位编号是9到17)。大箱子里的物品实际上储存在两个单独的方块实体中。
+* [[酿造台]]下方的三个槽位从左到右编号依次为0到2，顶部的原料槽位编号为3，燃料槽位为4。
+* [[熔炉]]的原料槽位的编号为0，燃料槽位为1，输出槽位为2。
+
+对于实体：
+{| class="wikitable" data-description="Slot information"
+!槽位类型
+!槽位编号
+!限制
+|-
+|<code>slot.weapon.mainhand</code>
+|任意编号（<code>hasitem</code>[[选择器]]中必须是0）
+|rowspan=7|仅[[生物]]（所有生物都有这些槽位，但并非所有生物都实际使用了这些槽位并渲染其中的物品）
+
+[[狼]]的[[狼铠]]储存在<code>slot.armor.body</code>中，但是实际上在<code>slot.armor.head</code>中也能渲染模型
+|-
+|<code>slot.weapon.offhand</code>
+|任意编号（<code>hasitem</code>[[选择器]]中必须是0）
+|-
+|<code>slot.armor.head</code>
+|任意编号（<code>hasitem</code>[[选择器]]中必须是0）
+|-
+|<code>slot.armor.chest</code>
+|任意编号（<code>hasitem</code>[[选择器]]中必须是0）
+|-
+|<code>slot.armor.legs</code>
+|任意编号（<code>hasitem</code>[[选择器]]中必须是0）
+|-
+|<code>slot.armor.feet</code>
+|任意编号（<code>hasitem</code>[[选择器]]中必须是0）
+|-
+|<code>slot.armor.body</code>
+|任意编号（<code>hasitem</code>[[选择器]]中必须是0）
+|-
+|<code>slot.hotbar</code>
+|align="center"|0–8
+|仅[[玩家]]
+|-
+|<code>slot.inventory</code>
+|align="center"|0–''物品栏大小减1''
+|仅带有<code>minecraft:inventory</code>组件的实体
+|-
+|<code>slot.enderchest</code>
+|align="center"|0–26
+|仅[[玩家]]
+|-
+|<code>slot.saddle</code>
+|任意编号（<code>hasitem</code>[[选择器]]中必须是0）
+|仅[[马]]、[[驴]]、[[骡]]，其中的物品只能是[[鞍]]
+|-
+|<code>slot.armor</code>
+|任意编号（<code>hasitem</code>[[选择器]]中必须是0）
+|仅[[马]]，其中的物品只能是[[马铠]]
+|-
+|<code>slot.chest</code>
+|align="center"|0–''箱子空间减1''
+|仅装备了箱子的[[羊驼]]、[[驴]]、[[骡]]
+
+对于{{cmd|replaceitem}}和{{cmd|loot}}存在漏洞：槽位编号为-1–''箱子大小减2''
+|-
+|<code>slot.equippable</code>
+|align="center"|0–''equippable槽位数量减1''
+|仅带有<code>minecraft:equippable</code>组件的实体。这些槽位指向<code>minecraft:inventory</code>组件定义的槽位
+
+{{cmd|replaceitem}}和{{cmd|loot}}命令'''不支持'''此槽位类型
+|}
+
+=== 原版实体的槽位 ===
+{|class='sortable wikitable collapsible'
+!实体名称
+!实体ID
+!slot<br>.inventory
+!slot<br>.weapon<br>.mainhand
+!slot<br>.weapon<br>.offhand
+!slot<br>.equippable
+!slot<br>.armor
+!slot<br>.saddle
+!slot<br>.chest
+!slot<br>.enderchest
+!slot<br>.hotbar
+|-
+|{{EntityLink|Allay}}
+|{{cd|allay}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|partial|1，未使用}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|id=oak boat with chest|Boat with Chest}}
+|{{cd|boat_chest}}
+|{{tc|yes|27}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Camel}}
+|{{cd|camel}}
+|{{tc|yes|1}}
+|{{tc|partial|1，未使用}}
+|{{tc|partial|1，未使用}}
+|{{tc|yes|1（指向slot.saddle槽位）}}
+|{{tc|no}}
+|{{tc|yes|指向slot.inventory的第0个槽位}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Donkey}}
+|{{cd|donkey}}
+|{{tc|yes|16<small>（驯服后）</small>}}
+|{{tc|partial|1，未使用}}
+|{{tc|partial|1，未使用}}
+|{{tc|yes|1（指向slot.saddle槽位）}}
+|{{tc|no}}
+|{{tc|yes|指向slot.inventory的第0个槽位<small>（驯服后）</small>}}
+|{{tc|yes|15（指向slot.inventory的第1到15个槽位<ref name="slot-chest">对于{{cmd|replaceitem}}和{{cmd|loot}}存在漏洞：槽位编号为-1–13，指向<code>slot.inventory</code>的0–14槽位。</ref>）<small>（驯服并装备箱子后）</small>}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Drowned}}
+|{{cd|drowned}}
+|{{tc|no}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Fox}}
+|{{cd|fox}}
+|{{tc|no}}
+|{{tc|yes|1}}
+|{{tc|partial|1，未使用}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Horse}}
+|{{cd|horse}}
+|{{tc|yes|2<small>（驯服后）</small>}}
+|{{tc|partial|1，未使用}}
+|{{tc|partial|1，未使用}}
+|{{tc|yes|2（第0个槽位指向slot.saddle，第1个槽位指向slot.armor）}}
+|{{tc|yes|指向slot.inventory的第1个槽位<small>（驯服后）</small>}}
+|{{tc|yes|指向slot.inventory的第0个槽位<small>（驯服后）</small>}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Husk}}
+|{{cd|husk}}
+|{{tc|no}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Llama}}
+|{{cd|llama}}
+|{{tc|yes|16<small>（驯服后）</small>}}
+|{{tc|partial|1，未使用}}
+|{{tc|partial|1，未使用}}
+|{{tc|yes|1（指向slot.inventory的第0个槽位）}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|yes|N（指向slot.inventory的第1到N个槽位，N是箱子空间的大小<ref>对于{{cmd|replaceitem}}和{{cmd|loot}}存在漏洞：槽位编号为-1–(N-2)，指向<code>slot.inventory</code>的0–(N-1)槽位。</ref>）<small>（驯服并装备箱子后）</small>}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Minecart with Chest}}
+|{{cd|chest_minecart}}
+|{{tc|yes|27}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Minecart with Hopper}}
+|{{cd|hopper_minecart}}
+|{{tc|yes|5}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Mule}}
+|{{cd|mule}}
+|{{tc|yes|16<small>（驯服后）</small>}}
+|{{tc|partial|1，未使用}}
+|{{tc|partial|1，未使用}}
+|{{tc|yes|1（指向slot.saddle槽位）}}
+|{{tc|no}}
+|{{tc|yes|指向slot.inventory的第0个槽位<small>（驯服后）</small>}}
+|{{tc|yes|15（指向slot.inventory的第1到15个槽位<ref name="slot-chest/>）<small>（驯服并装备箱子后）</small>}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Panda}}
+|{{cd|panda}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|partial|1，未使用}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Piglin}}
+|{{cd|piglin}}
+|{{tc|yes|8}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Piglin Brute}}
+|{{cd|piglin_brute}}
+|{{tc|no}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Player}}
+|{{cd|player}}
+|{{tc|yes|27}}
+|{{tc|yes|来自于slot.hotbar的1个槽位}}
+|{{tc|yes|1}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|yes|27}}
+|{{tc|yes|9}}
+|-
+|{{EntityLink|Skeleton}}
+|{{cd|skeleton}}
+|{{tc|no}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Stray}}
+|{{cd|stray}}
+|{{tc|no}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Villager}}
+|{{cd|villager}}
+|{{tc|yes|8}}
+|{{tc|yes|1}}
+|{{tc|partial|1，未使用}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Zombie}}
+|{{cd|zombie}}
+|{{tc|no}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+|{{EntityLink|Zombie Villager}}
+|{{cd|zombie_villager}}
+|{{tc|no}}
+|{{tc|yes|1}}
+|{{tc|yes|1}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|dev=24w05a|<code>horse.armor</code>（401）槽位名称以<code>armor.body</code>（105）替代，现在适用于所有生物。}}
+|{{HistoryLine|||dev=24w10a|加入了<code>item_slots</code>[[参数类型]]，支持带有通配符（<code>*</code>）的槽位名称。
+|加入了<code>player.cursor</code>和<code>-{}-player.crafting.<槽位编号></code>。}}
+|{{HistoryLine|||dev=24w11a|为物品展示框、物品展示实体等仅有单个槽位的实体加入了槽位名称<code>contents</code>。}}
+|{{HistoryLine|||dev=pre1|现在<code>contents</code>槽位也对箭、光灵箭、三叉戟、火球和小火球有效。<ref>{{bug|MC-270119|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.5|dev=25w03a|<code>horse.saddle</code>（400）槽位名称以<code>saddle</code>（106）替代，现在适用于所有生物。}}
+|{{HistoryLine||26.1|dev=snapshot-1|为猪灵加入了单独的槽位索引300-307和命令参数<code>piglin.*</code>。}}
+|{{HistoryLine|||dev=snapshot-4|将猪灵和村民槽位的命令参数合并为<code>mob.inventory.*</code>。}}
+}}
+
+== 参见 ==
+* {{cmd|item}}
+* {{cmd|replaceitem}}
+* {{cmd|loot}}
+* [[参数类型]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[de:Inventarplatz]]
+[[en:Slot]]
+[[ja:スロット]]
+[[pt:Espaço]]

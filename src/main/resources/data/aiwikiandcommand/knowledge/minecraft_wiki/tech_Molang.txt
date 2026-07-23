@@ -1,0 +1,205 @@
+# 页面: Molang
+# 来源: https://zh.minecraft.wiki/w/Molang
+# 分类: 基岩版, 基岩版独有特性, 待扩充页面, 有未知版本的History模板的页面/基岩版
+# 抓取时间: 2026-07-14 17:16:22
+# 原始 Wikitext 内容:
+
+{{distinguish|Mojang}}
+{{stub}}
+{{exclusive|bedrock}}
+
+'''Molang'''是一种基于表达式的简单语言，用于快速、数据驱动地在运行时计算数值，与游戏中的数值和系统直接连接。Molang在[[基岩版]]的[[附加包]]中使用，其设计目标是在保持高性能的同时，为动画等低级系统提供数据驱动的可变行为支持。<ref>[https://docs.microsoft.com/en-us/minecraft/creator/reference/content/molangreference/examples/molangconcepts/molangintroduction "Molang Documentation - Introduction to Molang"]</ref>
+
+[[Mojang]]提供官方文档[https://docs.microsoft.com/en-us/minecraft/creator/reference/content/molangreference/ Molang文档]，其中详细介绍了该语言的工作原理和使用位置。
+
+== 用途 ==
+Molang表达式用于输出可以动态变化的值（通常是数值）。这使得在[[JSON]]格式的限制内能够编写更复杂的行为逻辑。Molang可在[[资源包]]（客户端）和[[行为包]]（[[服务端]]）的JSON文件中的多个位置使用：
+
+* [[粒子数据格式|粒子组件]]中的数值
+* [[基岩版存档格式/实体格式|实体定义文件]]的<code>scripts</code>和<code>part_visibility</code>字段
+* 可穿戴物品（Attachable）定义文件的<code>scripts</code>字段
+* 动画文件中的数值
+* 动画控制器<code>transitions</code>字段中的条件判断
+* 方块行为<code>permutations</code>字段中的条件判断
+* 渲染控制器中的数组和资源分配
+* 特定[[基岩版存档格式/实体格式/组件|实体组件]]中的数值
+* 配方对象中的数据字段
+
+== 使用指南 ==
+Molang表达式以纯文本字符串的形式存储在JSON文件中，由英文双引号<code>"</code>括起。因此，表达式内部如需定义字符串，必须使用英文单引号<code>'</code>。与指令不同，Molang表达式不区分大小写，即大小写不会影响表达式的解析结果。
+
+对于只包含单个语句的表达式，结尾的分号<code>;</code>可以省略。包含多个语句的表达式则需要使用分号来分隔各个语句。
+
+== 语法 ==
+Molang采用类C语言的语法风格。一个表达式可以是简单的单语句计算，也可以是多语句的复杂脚本。
+
+=== 表达式类型 ===
+Molang表达式分为两种形态：
+
+==== 简单表达式 ====
+简单表达式（Simple Expression）：仅包含一个语句，结尾不需要分号<code>;</code>，该语句的计算结果直接作为表达式的返回值。例如：
+
+<pre>math.sin(query.anim_time * 1.23)</pre>
+
+==== 复杂表达式 ====
+复杂表达式（Complex Expression）：包含多个子表达式（即多个语句），每个子表达式的结尾必须使用分号<code>;</code>作为结束标识。复杂表达式通常需要使用<code>return</code>语句来返回最终值；若省略<code>return</code>语句，则表达式返回<code>0.0</code>。例如：
+<pre>
+temp.moo = math.sin(query.anim_time * 1.23);
+temp.baa = math.cos(query.life_time + 2.0);
+return temp.moo * temp.moo + temp.baa;
+</pre>
+复杂表达式在JSON中可以写在同一行，也可以换行且保留缩进。
+
+== 运算符 ==
+以下列出了Molang支持的全部运算符和关键字。Molang采用类C语言的运算符优先级规则，从高到低依次为：逻辑非（<code>!</code>）、乘除（<code>*</code>、<code>/</code>）、加减（<code>+</code>、<code>-</code>）、比较运算符（<code><</code>、<code><=</code>、<code>></code>、<code>>=</code>）、相等性运算符（<code>==</code>、<code>!=</code>）、逻辑与（<code>&&</code>）、逻辑或（<code>||</code>）、三元条件（<code>? :</code>）、空值合并（<code>??</code>）。使用括号<code>()</code>可以显式控制求值顺序。
+{| class="wikitable"
+!运算符/关键字
+!描述
+|-
+|<code>!</code>、<code>&&</code>、<code><nowiki>||</nowiki></code>、<code><</code>、<code><=</code>、<code>>=</code>、<code>></code>、<code>==</code>、<code>!=</code>
+|逻辑运算符：非、与、或、小于、小于等于、大于等于、大于、等于、不等于
+|-
+|<code>*</code>、<code>/</code>、<code>+</code>、<code>-</code>
+|基本数学运算符
+|-
+|<code>()</code>
+|圆括号，用于控制表达式求值顺序或带参函数的参数列表
+|-
+|<code>[]</code>
+|方括号，用于数组访问
+|-
+|<code>{}</code>
+|花括号，用于控制执行作用域
+|-
+|<code>??</code>
+|空合并运算符，用于处理缺失变量或无效实体引用
+|-
+|<code><test> ? <if true></code>
+|二元条件运算符
+|-
+|<code><test> ? <if true> : <if false></code>
+|三元条件运算符
+|-
+|<code>-></code>
+|箭头运算符，用于访问另一个实体的数据
+|-
+|<code>geometry.geometry_name</code>
+|引用实体定义文件中命名的几何模型
+|-
+|<code>material.material_name</code>
+|引用实体定义文件中命名的材质
+|-
+|<code>texture.texture_name</code>
+|引用实体定义文件中命名的纹理
+|-
+|<code>math.function_name</code>
+|访问数学函数
+|-
+|<code>query.function_name</code>
+|查询实体的属性
+|-
+|<code>variable.variable_name</code>
+|读写实体变量
+|-
+|<code>temp.variable_name</code>
+|读写临时变量
+|-
+|<code>context.variable_name</code>
+|访问游戏提供的只读上下文变量
+|-
+|<code>this</code>
+|当前表达式的当前值（取决于上下文）
+|-
+|<code>return</code>
+|返回并停止复杂表达式的执行
+|-
+|<code>loop</code>
+|重复执行一个或多个命令
+|-
+|<code>for_each</code>
+|遍历实体数组
+|-
+|<code>break</code>
+|提前退出<code>loop</code>或<code>for_each</code>作用域
+|-
+|<code>continue</code>
+|跳过当前<code>loop</code>或<code>for_each</code>迭代的剩余语句，进入下一次迭代
+|}
+在Molang中，除字符串内容外，字母不区分大小写。
+
+== 变量 ==
+Molang提供三种类型的变量：
+
+=== 实体变量 ===
+实体变量（Entity Variable）——使用<code>variable.</code>或简写<code>v.</code>前缀，是可以在表达式中存储以备后续使用的值。大多数变量可以通过<code>=</code>运算符声明和重新赋值，例如<code>v.<名称> = <值>;</code>。以这种方式声明的变量在其所属实体或粒子的生命周期内可读写，且在世界保存并重新加载后不会被保留。
+
+=== 临时变量 ===
+临时变量（Temp Variable）——使用<code>temp.</code>或简写<code>t.</code>前缀，仅在声明该变量的表达式执行期间存在。
+
+=== 上下文变量 ===
+上下文变量（Context Variable）——使用<code>context.</code>或简写<code>c.</code>前缀，是只读变量，仅在定义该表达式的上下文中可用。例如，<code>context.owning_entity</code>只能在可穿戴物品（Attachable）文件的Molang表达式中读取，因为该变量返回装备该可穿戴物品的实体。
+
+== 函数 ==
+
+=== 查询函数 ===
+查询函数（Query Function）使用<code>query.</code>或简写<code>q.</code>前缀，以布尔值或数值的形式返回关于世界、实体等信息。它们是只读的，不可修改。例如，<code>query.health</code>返回当前实体的生命值；若不在实体上下文中使用，则返回<code>0</code>。
+
+部分查询函数可以接受参数，参数放在函数名后的圆括号内，多个参数之间用逗号分隔。参数可以作为数值读取，也可以作为字符串读取，字符串参数可作为标签、槽位、实体等对象的标识符。例如，<code>q.is_item_name_any('slot.weapon.mainhand', 0, 'minecraft:iron_ingot')</code>根据当前实体主手第一个槽位（主手只有一个槽位，与物品栏或快捷栏不同；槽位索引从0开始）中的物品名称（即类型ID）是否匹配后续参数中的任意一个，返回<code>1</code>（真）或<code>0</code>（假）。
+
+部分查询函数在行为包和资源包中均可使用，另一些则仅限其中一侧使用。例如，<code>query.remaining_durability</code>仅在服务端可用于物品组件<code>minecraft:repairable</code>。
+
+常用查询函数包括：
+
+* <code>query.anim_time</code>：当前动画已播放的时间（秒）
+* <code>query.is_alive</code>：实体是否存活，返回<code>1.0</code>或<code>0.0</code>
+* <code>query.is_sneaking</code>：实体是否潜行
+* <code>query.is_baby</code>：实体是否为幼年形态
+* <code>query.health</code>：实体当前生命值
+* <code>query.get_equipped_item_name</code>：返回指定槽位的物品名称
+* <code>query.scoreboard</code>：读取计分板数据
+* <code>query.last_hit_by_player</code>：实体是否最后被玩家击中
+* <code>query.modified_move_speed</code>：实体的归一化移动速度（<code>0</code>至<code>1</code>之间）
+* <code>query.life_time</code>：实体存在的时间（秒）
+* <code>query.delta_time</code>：上一帧到当前帧的时间间隔（秒）
+* <code>query.variant</code>：返回实体的变种序号
+
+完整的查询函数列表可查阅Minecraft官方文档：[https://docs.microsoft.com/en-us/minecraft/creator/reference/content/molangreference/ Molang文档]。
+
+=== 数学函数 ===
+数学函数（Math Function）使用<code>math.</code>前缀（无单字母别名），执行特定的数学运算，参数的传入方式与部分查询函数类似。
+
+例如，<code>math.floor(3.8)</code>将输入值向下取整，返回<code>3.0</code>。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||?|加入了Molang，最初大写为“MoLang”。}}
+|{{HistoryLine||1.17.0|作为附加包与数据驱动系统的组成部分加入游戏。}}
+|{{HistoryLine||1.17.20|dev=1.17.20.23|Molang现在使用资源包或行为包的<code>min_engine_version</code>来允许版本化更改。}}
+|{{HistoryLine||1.17.30|修复了<code>query.item_remaining_use_duration</code>的转换逻辑，此前该查询错误地将其值乘以20，而非除以20；同时修正了该查询的归一化逻辑方向。}}
+|{{HistoryLine||1.17.40|为无效表达式新增错误消息（例如<code>'text' + 1</code>现在会触发内容日志错误）；新增对括号内运算符过多的错误检测。}}
+|{{HistoryLine||1.18.10|修复了三元条件运算符的结合性问题。此前<code>A ? B : C ? D : E</code>按<code>(A ? B : C) ? D : E</code>求值，现改为按<code>A ? B : (C ? D : E)</code>求值。}}
+|{{HistoryLine||1.18.20|修复了逻辑运算符的优先级问题：逻辑与（<code>&&</code>）现在先于逻辑或（<code>&amp;&amp;</code>、<code>{{!}}{{!}}</code>），比较运算符先于相等性运算符。}}
+|{{HistoryLine||1.19.60|修复了当除以一个动态确定的负数时，实际除以了该数绝对值的错误。}}
+|{{HistoryLine||1.20.0|修复了<code>query.cape_flap_amount</code>使用了错误旋转角度的问题。}}
+|{{HistoryLine||1.20.10|<code>block_property</code>和<code>has_block_property</code>更名为<code>block_state</code>和<code>has_block_state</code>。}}
+|{{HistoryLine||1.20.40|弃用<code>block_property</code>和<code>has_block_property</code>。}}
+|{{HistoryLine||1.20.50|移除了<code>block_property</code>和<code>has_block_property</code>的支持；移除了<code>is_scenting</code>、<code>is_rising</code>、<code>is_feeling_happy</code>等查询，改用<code>timer_flag_1</code>、<code>timer_flag_2</code>、<code>timer_flag_3</code>。}}
+|{{HistoryLine||1.20.60|将以下Molang查询从实验性功能中正式推出：<code>query.relative_block_has_any_tag</code>、<code>query.relative_block_has_all_tags</code>、<code>query.block_neighbor_has_any_tag</code>、<code>query.block_neighbor_has_all_tags</code>、<code>query.block_has_any_tag</code>、<code>query.block_has_all_tags</code>、<code>query.bone_orientation_matrix</code>、<code>query.bone_orientation_trs</code>、<code>query.is_cooldown_type</code>、<code>query.cooldown_time</code>、<code>query.cooldown_time_remaining</code>。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+<!--{{Add-ons}}-->
+== 导航 ==
+{{Navbox Bedrock Edition}}
+
+[[en:Molang]]
+[[es:Molang]]
+[[fr:Molang]]
+[[ja:Molang]]
+[[lzh:魔琅]]
+[[pt:Molang]]
+[[ru:Molang]]
+[[uk:Molang]]

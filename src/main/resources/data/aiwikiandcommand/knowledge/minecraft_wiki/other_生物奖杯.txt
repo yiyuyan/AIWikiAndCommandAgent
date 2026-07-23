@@ -1,0 +1,247 @@
+# 页面: 生物奖杯
+# 来源: https://zh.minecraft.wiki/w/%E7%94%9F%E7%89%A9%E5%A5%96%E6%9D%AF
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:18
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=25w14craftmine}}
+{{Infobox block
+|image = Mob Trophy.png
+|invimage = [&d奖杯]Mob Trophy
+|block-breaking-tool = ''无''
+|block-hardness = 0
+|block-blast-resistance = 0
+|block-lava-flammable = 否
+|block-suffocating = 否
+|block-redstone-conductor = 否
+|block-java-solid = 否
+|block-replaceable = 否
+|block-push-reaction = 不可推动，不可拉动
+|block-instrument = 竖琴/钢琴
+|block-map-color={{color|#FAEE4D}}
+|block-id-raw = mob_trophy
+|item-creative-tab = ''无''
+|maxstack = 16
+|rarity=史诗
+|renewable = 是
+|item-id-raw = mob_trophy
+|nobe = 1
+}}
+
+'''生物奖杯（Mob Trophy）'''是一种装饰性方块，游戏内显示为奖杯（Trophy）。
+
+== 生成 ==
+=== 事件生成 ===
+[[微光之门]]解锁的<code>hub/room/stairs</code>房间内部有一个下界合金等级、装有带光效的[[羊驼唾沫]]的生物奖杯。
+
+== 获取 ==
+=== 掉落物 ===
+除盔甲架外的任意[[生物]]被玩家杀死后都有10%的概率额外掉落一个内部装有其生物模型的生物奖杯，此模型有1%的概率具有[[光效]]，同时物品[[提示框]]中会显示一行“{{tr|喔，闪闪发亮！|金光閃閃|嘩，閃令令}}（Oooh, shiny!）”。
+
+生物奖杯的等级随机抽取：
+* 草丛（{{frac|100|181}} ≈ {{#expr: 100/181*100 round 1 }}%概率）
+* 石头（{{frac|50|181}} ≈ {{#expr: 50/181*100 round 1 }}%概率）
+* 金（{{frac|25|181}} ≈ {{#expr: 25/181*100 round 1 }}%概率）
+* 钻石（{{frac|5|181}} ≈ {{#expr: 5/181*100 round 1 }}%概率）
+* 下界合金（{{frac|1|181}} ≈ {{#expr: 1/181*100 round 1 }}%概率）
+
+=== 箱子战利品 ===
+微光之门解锁的<code>hub/room/labyrinth</code>房间的尽头有一个[[箱子]]，里面有18个钻石等级、装有[[闪电束]]的生物奖杯。
+
+== 破坏 ==
+生物奖杯被挖掘时会立刻被破坏。
+
+{{Breaking table/manual|only=je|nocopper=1
+|{{BlockLink|id=mob-trophy}} 生物奖杯|0
+}}
+
+生物奖杯被破坏后会掉落自身，并附带等级和生物模型信息。
+
+== 用途 ==
+玩家从矿境返回[[主世界]]时，物品栏中的生物奖杯不会被清除。
+
+生物奖杯内部装有生物模型，此模型的大小会根据实体类型的不同进行缩放。由于此模型渲染无生物附加数据，因此模型动作固定，具有变种的生物始终展示固定的变种。
+
+玩家与生物奖杯方块{{ctrl|交互}}时，游戏会根据其内部的实体，从所有ID符合<code>-{}-entity.<''实体ID''>.<''任意值''></code>的[[Java版声音事件|声音事件]]中随机选择一个声音播放。对于大多数生物而言，相当于从其所有可能的音效中随机播放。
+
+生物奖杯的等级会在物品提示框中提示“Grade: <''等级''>（等级：<''等级''>）”，游戏会自动给<''等级''>添加颜色样式。等级同时还决定了生物奖杯外观上两条“条带”的颜色。这两种颜色完全一致，每个等级对应的颜色如下：
+* 草丛 - {{color|#50CE02}}
+* 石头 - {{color|#474f52}}
+* 金 - {{color|#DEB12D}}
+* 钻石 - {{color|#6EECD2}}
+* 下界合金 - {{color|#625859}}
+
+== 音效 ==
+{{Sound table
+|sound=Stone dig1.ogg
+|sound2=Stone dig2.ogg
+|sound3=Stone dig3.ogg
+|sound4=Stone dig4.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source=方块
+|description=破坏方块
+|id=block.stone.break
+|translationkey=subtitles.block.generic.break
+}}
+{{Sound table
+|sound=Stone step1.ogg
+|sound2=Stone step2.ogg
+|sound3=Stone step3.ogg
+|sound4=Stone step4.ogg
+|sound5=Stone step5.ogg
+|sound6=Stone step6.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.stone.fall
+|translationkey=subtitles.block.generic.fall
+}}
+{{Sound table
+|sound=Stone step1 pitch0.5.ogg
+|sound2=Stone step2 pitch0.5.ogg
+|sound3=Stone step3 pitch0.5.ogg
+|sound4=Stone step4 pitch0.5.ogg
+|sound5=Stone step5 pitch0.5.ogg
+|sound6=Stone step6 pitch0.5.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source=方块
+|description=挖掘方块
+|id=block.stone.hit
+|translationkey=subtitles.block.generic.hit
+}}
+{{Sound table
+|sound=Stone dig1.ogg
+|sound2=Stone dig2.ogg
+|sound3=Stone dig3.ogg
+|sound4=Stone dig4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source=方块
+|description=放置方块
+|id=block.stone.place
+|translationkey=subtitles.block.generic.place
+}}
+{{Sound table
+|sound=Stone step1.ogg
+|sound2=Stone step2.ogg
+|sound3=Stone step3.ogg
+|sound4=Stone step4.ogg
+|sound5=Stone step5.ogg
+|sound6=Stone step6.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.stone.step
+|translationkey=subtitles.block.generic.footsteps
+|foot=1}}
+
+玩家与生物奖杯交互时的音效请参见对应条目，除了声音分类为{{tp|soundCategory.block}}外信息完全一致。
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|Mob Trophy
+|displayname=Trophy
+|spritetype=block
+|nameid=mob_trophy
+|generatetranslationkeys=java
+|showitemtags=1
+|itemtags=carry_over
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=Mob Trophy
+|spritetype=block
+|nameid=mob_trophy
+|foot=1}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{bst|facing|north|north|方块朝向北方|south|方块朝向南方|west|方块朝向西方|east|方块朝向东方}}
+{{bst|grade|grass|grass|等级为草丛|stone|等级为石头|gold|等级为金|diamond|等级为钻石|netherite|等级为下界合金|foot=1}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+生物奖杯拥有一个与其相关的方块实体，以保存生物奖杯的附加数据。
+
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+生物奖杯使用<code>mob_trophy/type</code>组件保存生物渲染数据。
+
+=== 物品数据 ===
+{{see also|物品格式}}
+
+{| style="width:100%"
+| style="padding:0;" |
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;background-color: var(--custom-nbt-inherit-color);"
+|-
+! style="text-align:left;" | 默认[[数据组件]]结构和字段<span>[</span>[[编码格式/DataComponent|源页面]]<span>]</span>
+|-
+|
+<div class="treeview">
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="物品共通组件">物品共通组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="物品共通组件">
+** {{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|compound}}：一个修饰符。
+**** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+**** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）当前[[属性修饰符]]的ID。
+**** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+**** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+**** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+** {{nbt|string}}{{nbt|object|minecraft:break_sound}}：物品耐久度耗尽时播放的声音事件。
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+** {{nbt|string|minecraft:item_model}}：（[[命名空间ID]]）为当前物品绑定一个[[物品模型映射]]。
+** {{nbt|string}}{{nbt|object}}{{nbt|list|minecraft:item_name}}：（[[文本组件]]）物品的默认名称。
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}{{nbt|object}}{{nbt|list}}：（[[文本组件]]）一行描述信息。
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+** {{nbt|object|minecraft:tooltip_display}}：物品提示框的显示数据。
+*** {{nbt|boolean|hide_tooltip}}：（默认为<code>false</code>）物品提示框是否总是隐藏。
+*** {{nbt|list|hidden_components}}：（默认为空列表）一个物品组件ID列表，列表内的所有组件提供的提示框文本都会被隐藏。如果组件不提供提示框文本，则对其没有效果。
+**** {{nbt|string}}：（命名空间ID）一个物品组件。
+</div>
+</div>
+|}
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;"
+|-
+! style="text-align:left;" | JSON
+|-
+|
+<syntaxhighlight copy="1" lang="json">{
+    "minecraft:attribute_modifiers": [],
+    "minecraft:break_sound": "minecraft:entity.item.break",
+    "minecraft:enchantments": {},
+    "minecraft:item_model": "minecraft:mob_trophy",
+    "minecraft:item_name": {
+      "translate": "block.minecraft.mob_trophy"
+    },
+    "minecraft:lore": [],
+    "minecraft:max_stack_size": 16,
+    "minecraft:rarity": "epic",
+    "minecraft:repair_cost": 0,
+    "minecraft:tooltip_display": {}
+}</syntaxhighlight>
+|}
+|}
+
+在默认组件的基础上，生物奖杯使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt|string}}{{nbt|compound|minecraft:mob_trophy/type}}：生物奖杯类型。可以直接指定实体类型ID，也可以指定详细数据。游戏只保存为复合标签格式。
+*** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）要渲染的实体。
+*** {{nbt|boolean|shiny|existonsave=1}}：（默认为<code>false</code>）是否在实体上渲染光效。
+</div>
+
+== 导航 ==
+{{Navbox jokes|25w14craftmine}}
+
+[[Category:方块]]
+
+[[en:Mob Trophy]]
+[[ja:Mob Trophy]]

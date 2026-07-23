@@ -1,0 +1,63 @@
+# 页面: 命令/controlscheme
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/controlscheme
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{exclusive|be|edu}}
+{{Infobox command
+|name=controlscheme
+|oplevel=1
+|cheat=1
+}}
+修改相机预设的控制方案。
+
+此命令需与{{cmd|camera}}命令一同使用。
+
+== 语法 ==
+: <code>controlscheme <players: target> clear</code>
+:: 清除控制方案。
+: <code>controlscheme <players: target> set <control scheme: controlscheme></code>
+:: 设定控制方案。
+
+== 参数 ==
+{{argument|be=1|players: target|CommandSelector<Player>}}
+: 指定要被修改控制方案的[[玩家]]。
+: {{arg desc|be=CommandSelector<Player>}}
+
+{{argument|be=1|control scheme: controlscheme|Enum}}
+: 指定控制方案。
+: {{arg desc|be=enum}}必须为以下其中之一：
+:* {{cd|camera_relative}} — 相对相机进行移动，视角保持水平并跟随移动方向
+:* {{cd|camera_relative_strafe}} — 相对相机进行移动，视角保持水平并跟随朝向
+:* {{cd|locked_player_relative_strafe}} — 相对玩家进行移动，视角跟随朝向
+:* {{cd|player_relative}} — 相对玩家进行移动，视角保持水平并跟随移动方向
+:* {{cd|player_relative_strafe}} — 相对玩家进行移动，视角保持水平并跟随朝向
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|命令不完整或参数未正确指定||unparseable}}
+{{Result table|{{cd|players: target}}未能选中一个或多个在线玩家||fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|执行失败|0}}
+{{Output table|执行成功|被修改的玩家数}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.80|exg=experimental_creator_cameras|dev=1.21.80.27|加入了{{cmd|controlscheme|link=none}}命令。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.23|{{cmd|controlscheme|link=none}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.90.26|{{cd|camera_relative_strafe}}控制方案不再属于[[实验性玩法]]。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/controlscheme]]
+[[en:Commands/controlscheme]]
+[[pt:Comandos/controlscheme]]

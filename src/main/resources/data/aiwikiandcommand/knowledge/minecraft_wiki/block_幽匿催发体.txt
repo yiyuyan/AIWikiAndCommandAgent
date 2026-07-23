@@ -1,0 +1,425 @@
+# 页面: 幽匿催发体
+# 来源: https://zh.minecraft.wiki/w/%E5%B9%BD%E5%8C%BF%E5%82%AC%E5%8F%91%E4%BD%93
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:49
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|image1=Sculk Catalyst.png
+|image1caption={{el|JE}}
+|image2=Sculk Catalyst BE.png
+|image2caption={{el|BE}}
+|invimage=Sculk Catalyst
+|invimage2=----
+|invimage3=Sculk Catalyst BE
+|light=6
+}}
+
+'''幽匿催发体（Sculk Catalyst）'''是一种可以通过吸收周围死亡生物的经验，催发出其他种类[[幽匿]]类方块的方块。
+
+== 生成 ==
+=== 自然生成 ===
+幽匿催发体自然生成于[[深暗之域]]生物群系。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 箱子战利品 ===
+{{LootChestItem|sculk_catalyst}}
+
+=== 生物掉落物 ===
+{{Drop sources|Sculk Catalyst}}
+
+== 破坏 ==
+挖掘幽匿催发体的合适工具是锄。
+
+{{Breaking table}}
+
+没有被具有[[精准采集]]的工具挖掘破坏时，幽匿催发体被破坏后会掉落{{xp|5}}。
+
+被具有精准采集的工具挖掘破坏时，幽匿催发体被破坏后会掉落自身。
+
+== 用途 ==
+=== 转化方块 ===
+[[File:Sculk Catalyst Bloom JE1 BE1.gif|150px|right]]
+[[File:Sculkcatalystrange.png|thumb|upright|[[Java版]]中幽匿催发体的检测范围]]
+[[File:Sculk Catalyst bloom and spread sculks.gif|thumb|upright|幽匿催发体激活后将部分方块转化]]
+
+当幽匿催发体的半径{{only|je|for=8格|short=1}}/{{only|be|for=10格|short=1}}内有[[生物]]死亡时，幽匿催发体顶部会出现动态声波图案和[[粒子#sculk_soul|灵魂粒子]]，并按如下的蔓延规则将生物本应掉落的[[经验]]（若有）{{fn|即使由于游戏规则{{gamerule|mob_drops|doMobLoot}}为<code>false</code>或击杀伤害来源不为玩家而不掉落经验，其应掉落的“经验”也会计入信号能量}}转化成幽匿类方块：
+* 将生物死亡时所在的方块位置与信号能量储存至幽匿催发体的[[方块实体]]中的<code>cursors</code>列表内，信号能量为掉落的经验点的总和。如果信号能量大于1000，则将信号能量拆为两份，一份为1000，另一份为原信号能量减1000，并存储到两个信号中。如果信号能量仍然大于1000，则继续拆分信号能量，直到信号能量不大于1000。
+* 对于<code>cursors</code>列表内的所有信号，每个信号都储存其方块位置，每{{convert|2}}在它们对应的位置上尝试生成幽匿类方块。
+** 如果信号的位置位于[[区块#计算等级|加载边界]]或不可访问区块中，则此信号不会计算。
+** 尝试在该方块及毗邻方块上尽可能多地附着[[幽匿脉络]]，不消耗信号能量。
+*** 若满足脉络附着条件（具有与[[空气]]、{{only|je|for=[[洞穴空气]]、[[虚空空气]]|short=1}}或[[水]]接触的完整面）的方块是[[石头]]、[[深板岩]]（{{in|be|nc=1}}仅包括上下朝向的）、[[安山岩]]、[[闪长岩]]、[[花岗岩]]、[[凝灰岩]]、[[方解石]]、[[平滑玄武岩]]、[[下界岩]]、[[菌岩]]、[[玄武岩]]（{{in|be|nc=1}}仅包括上下朝向的）、[[黑石]]、[[沙砾]]、[[灵魂沙]]、[[灵魂土]]、[[黏土]]、[[滴水石块]]、[[末地石]]、[[沙子]]、[[红沙]]、[[砂岩]]、[[红砂岩]]、[[泥土]]、[[草方块]]、[[灰化土]]、[[砂土]]、[[菌丝体]]、[[缠根泥土]]、[[苔藓块]]、[[苍白苔藓块]]、[[泥巴]]、[[沾泥的红树根]]、各色[[陶瓦]]<ref group="注">{{in|je}}由方块标签{{TagLink|blocks|sculk_replaceable}}控制</ref>，则会将该方块转化为[[幽匿块]]，每次转化消耗1个信号能量。同时会将方块本身附着的幽匿脉络清除。
+** 若该方块或毗邻方块是幽匿块、远离幽匿催发体超过4格且上方为[[空气]]或[[水]]，其上方有9%的概率生成[[幽匿感测体]]、1%的概率生成[[幽匿尖啸体]]，每次生成消耗1个信号能量。
+*** 如果以该位置为下底面中心的9×3×9区域内有多于1株幽匿感测体或幽匿尖啸体，则这两者一定不生成，即生成密度有一定上限。
+** 生成后，被生成过的方块的位置与其信号中剩余的能量被添加至<code>cursors</code>列表内，并产生[[粒子#sculk_charge|浮动的青色气泡粒子]]。
+** 若该方块或毗邻方块是幽匿块，但不满足如上其他条件，该方块中的信号会继续以2游戏刻1个方块的速度随机游走。若一段时间内仍然无法游走至可蔓延方块处，该方块储存的所有信号将丢失，位置上产生几个[[粒子#sculk_charge_pop|逐渐破裂的青色圆圈粒子]]。
+** 若信号起源于一个无法被替换为幽匿块且不可生成幽匿脉络的方块，且无法向周围传递信号，则信号就此终止，直接产生破裂粒子。
+** 幽匿催发体本身不能传递信号。
+** 如果两个信号游走到同一个方块上，则两个信号会合并或互相代替。如果两个信号的能量总和不大于1000，则两个信号合并，信号能量为原先两个信号能量之和；如果两个信号的能量总和大于1000，则信号能量较少的信号会直接终止，只留下信号能量较大的信号。
+
+若生物死亡位置在多个幽匿催发体的探测范围内，只有距该位置最近的幽匿催发体会产生反应。单个幽匿催发体最多允许32个信号同时蔓延。
+
+生物死亡以外的途径产生的经验不能使幽匿催发体产生反应。不掉落经验的生物死亡时也可以使幽匿催发体产生反应，但不会蔓延出幽匿类方块<ref>{{bug|MC-251319|||WAI}}</ref>。然而{{in|be}}尽管驯服的狼被玩家击杀时不会掉落任何经验，但是仍然会蔓延出幽匿类方块。
+
+=== 光源 ===
+幽匿催发体会发出[[亮度]]等级为6的光。
+{{-}}
+
+== 音效 ==
+{{Sound table
+|sound=Sculk Catalyst break1.ogg
+|sound2=Sculk Catalyst break2.ogg
+|sound3=Sculk Catalyst break3.ogg
+|sound4=Sculk Catalyst break4.ogg
+|sound5=Sculk Catalyst break5.ogg
+|sound6=Sculk Catalyst break6.ogg
+|sound7=Sculk Catalyst break7.ogg
+|sound8=Sculk Catalyst break8.ogg
+|sound9=Sculk Catalyst break9.ogg
+|sound10=Sculk Catalyst break10.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source={{tp|soundCategory.block}}
+|description=破坏方块
+|id=block.sculk_catalyst.break
+|translationkey=subtitles.block.generic.break
+}}
+{{Sound table
+|sound=Sculk Catalyst step1.ogg
+|sound2=Sculk Catalyst step2.ogg
+|sound3=Sculk Catalyst step3.ogg
+|sound4=Sculk Catalyst step4.ogg
+|sound5=Sculk Catalyst step5.ogg
+|sound6=Sculk Catalyst step6.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.sculk_catalyst.fall
+|translationkey=subtitles.block.generic.fall
+}}
+{{Sound table
+|sound=Sculk Catalyst step1.ogg
+|sound2=Sculk Catalyst step2.ogg
+|sound3=Sculk Catalyst step3.ogg
+|sound4=Sculk Catalyst step4.ogg
+|sound5=Sculk Catalyst step5.ogg
+|sound6=Sculk Catalyst step6.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source={{tp|soundCategory.block}}
+|description=挖掘方块
+|id=block.sculk_catalyst.hit
+|translationkey=subtitles.block.generic.hit
+}}
+{{Sound table
+|sound=Sculk Catalyst place1.ogg
+|sound2=Sculk Catalyst place2.ogg
+|sound3=Sculk Catalyst place3.ogg
+|sound4=Sculk Catalyst place4.ogg
+|sound5=Sculk Catalyst place5.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source={{tp|soundCategory.block}}
+|description=放置方块
+|id=block.sculk_catalyst.place
+|translationkey=subtitles.block.generic.place
+}}
+{{Sound table
+|sound=Sculk Catalyst step1.ogg
+|sound2=Sculk Catalyst step2.ogg
+|sound3=Sculk Catalyst step3.ogg
+|sound4=Sculk Catalyst step4.ogg
+|sound5=Sculk Catalyst step5.ogg
+|sound6=Sculk Catalyst step6.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.sculk_catalyst.step
+|translationkey=subtitles.block.generic.footsteps
+}}
+{{Sound table
+|sound=Soulspeed1.ogg
+|sound2=Soulspeed2.ogg
+|sound3=Soulspeed3.ogg
+|sound4=Soulspeed4.ogg
+|sound5=Soulspeed5.ogg
+|sound6=Soulspeed6.ogg
+|sound7=Soulspeed7.ogg
+|sound8=Soulspeed8.ogg
+|sound9=Soulspeed9.ogg
+|sound10=Soulspeed10.ogg
+|sound11=Soulspeed11.ogg
+|sound12=Soulspeed12.ogg
+|sound13=Soulspeed13.ogg
+|subtitle={{tp|subtitles.block.sculk_catalyst.bloom}}
+|source={{tp|soundCategory.block}}
+|description=激活
+|id=block.sculk_catalyst.bloom
+|translationkey=subtitles.block.sculk_catalyst.bloom
+|volume=0.25
+|distance=12
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Sculk_Catalyst_place1.wav
+|sound2=Sculk_Catalyst_place2.wav
+|sound3=Sculk_Catalyst_place3.wav
+|sound4=Sculk_Catalyst_place4.wav
+|sound5=Sculk_Catalyst_place5.wav
+|source=方块
+|description=方块作为物品使用时发出的音效
+|typeid=item.use.on
+|id=place.sculk_catalyst
+|soundvolume=0.8-1.0
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Catalyst_break1.wav
+|sound2=Sculk_Catalyst_break2.wav
+|sound3=Sculk_Catalyst_break3.wav
+|sound4=Sculk_Catalyst_break4.wav
+|sound5=Sculk_Catalyst_break5.wav
+|sound6=Sculk_Catalyst_break6.wav
+|sound7=Sculk_Catalyst_break7.wav
+|sound8=Sculk_Catalyst_break8.wav
+|sound9=Sculk_Catalyst_break9.wav
+|sound10=Sculk_Catalyst_break10.wav
+|source=方块
+|description=破坏方块
+|typeid=break
+|id=break.sculk_catalyst
+|soundvolume=0.3
+|soundpitch=0.5
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Catalyst_step1.wav
+|sound2=Sculk_Catalyst_step2.wav
+|sound3=Sculk_Catalyst_step3.wav
+|sound4=Sculk_Catalyst_step4.wav
+|sound5=Sculk_Catalyst_step5.wav
+|sound6=Sculk_Catalyst_step6.wav
+|source=方块
+|description=挖掘方块
+|typeid=hit
+|id=hit.sculk_catalyst
+|soundvolume=0.3
+|soundpitch=0.5
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Catalyst_break1.wav
+|sound2=Sculk_Catalyst_break2.wav
+|sound3=Sculk_Catalyst_break3.wav
+|sound4=Sculk_Catalyst_break4.wav
+|sound5=Sculk_Catalyst_break5.wav
+|sound6=Sculk_Catalyst_break6.wav
+|sound7=Sculk_Catalyst_break7.wav
+|sound8=Sculk_Catalyst_break8.wav
+|sound9=Sculk_Catalyst_break9.wav
+|sound10=Sculk_Catalyst_break10.wav
+|source=方块
+|description=放置方块
+|typeid=place
+|id=break.sculk_catalyst
+|soundvolume=0.3
+|soundpitch=0.5
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Catalyst_step1.wav
+|sound2=Sculk_Catalyst_step2.wav
+|sound3=Sculk_Catalyst_step3.wav
+|sound4=Sculk_Catalyst_step4.wav
+|sound5=Sculk_Catalyst_step5.wav
+|sound6=Sculk_Catalyst_step6.wav
+|source=方块
+|description=带有摔落伤害时摔落在方块上
+|typeid=fall
+|id=fall.sculk_catalyst
+|soundvolume=0.4
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Catalyst_step1.wav
+|sound2=Sculk_Catalyst_step2.wav
+|sound3=Sculk_Catalyst_step3.wav
+|sound4=Sculk_Catalyst_step4.wav
+|sound5=Sculk_Catalyst_step5.wav
+|sound6=Sculk_Catalyst_step6.wav
+|source=方块
+|description=在方块上行走
+|typeid=step
+|id=step.sculk_catalyst
+|soundvolume=0.17
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Catalyst_step1.wav
+|sound2=Sculk_Catalyst_step2.wav
+|sound3=Sculk_Catalyst_step3.wav
+|sound4=Sculk_Catalyst_step4.wav
+|sound5=Sculk_Catalyst_step5.wav
+|sound6=Sculk_Catalyst_step6.wav
+|source=方块
+|description=在方块上跳跃
+|typeid=jump
+|id=jump.sculk_catalyst
+|soundvolume=0.12
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Catalyst_step1.wav
+|sound2=Sculk_Catalyst_step2.wav
+|sound3=Sculk_Catalyst_step3.wav
+|sound4=Sculk_Catalyst_step4.wav
+|sound5=Sculk_Catalyst_step5.wav
+|sound6=Sculk_Catalyst_step6.wav
+|source=方块
+|description=在方块上着陆
+|typeid=land
+|id=land.sculk_catalyst
+|soundvolume=0.14
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Soulspeed1.ogg
+|sound2=Soulspeed2.ogg
+|sound3=Soulspeed3.ogg
+|sound4=Soulspeed4.ogg
+|sound5=Soulspeed5.ogg
+|sound6=Soulspeed6.ogg
+|sound7=Soulspeed7.ogg
+|sound8=Soulspeed8.ogg
+|sound9=Soulspeed9.ogg
+|sound10=Soulspeed10.ogg
+|sound11=Soulspeed11.ogg
+|sound12=Soulspeed12.ogg
+|sound13=Soulspeed13.ogg
+|source=方块
+|description=激活
+|typeid=block.sculk_catalyst.bloom
+|id=bloom.sculk_catalyst
+|soundvolume=0.25
+|soundpitch
+|sounddistance=12
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|spritetype=block
+|Sculk Catalyst
+|nameid=sculk_catalyst
+|showblocktags=je
+|blocktags={{GameTag|block|sculk_catalyst}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Sculk Catalyst
+|nameid=sculk_catalyst
+|spritetype=block
+|showblocktags=be
+|blocktags={{GameTagBE|block|sculk_catalyst}}
+|foot=1
+}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+幽匿催发体有与其相关的方块实体，用于存储蔓延数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 == 
+{{Load achievements|it-spreads}}
+
+== 进度 == 
+{{load advancements|prefix=adventure|kill_mob_near_sculk_catalyst}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2020年10月3日|link={{ytl|DWZIfsaIgtE|t=2424s}}|[[File:Sculk Catalyst (pre-release).png|32px]] [[Minecraft Live 2020]]的片段中出现了幽匿催发体，当时还没有名字，且幽匿系列方块计划于[[Java版1.17]]加入。}}
+|{{HistoryLine||2020年11月13日|link={{tweet|kingbdogz|1327265084352180224}}|[[File:Sculk Catalyst JE1.png|32px]] [[kingbdogz]]发推展示了幽匿催发体的新纹理。}}
+|{{HistoryLine||2021年4月26日|link={{Tweet|kingbdogz|1386776067046785025}}|kingbdogz表示幽匿催发体不会在1.17加入。}}
+|{{HistoryLine||2021年10月16日|link={{ytl|w6zLprHHZOk}}|[[Minecraft Live 2021]]的片段中展示了幽匿催发体的更多信息。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19|dev=exp1|[[File:Sculk Catalyst JE1.png|32px]] [[File:Sculk Catalyst Bloom JE1 BE1.gif|32px]] 加入了幽匿催发体。}}
+|{{HistoryLine|||dev=22w11a|在常规快照中加入了幽匿催发体。}}
+|{{HistoryLine|||dev=22w12a|由于漏洞，现在幽匿催发体不再能生成[[幽匿尖啸体]]。<ref>{{bug|MC-249437|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=22w13a|现在幽匿催发体又能生成[[幽匿尖啸体]]了。}}
+|{{HistoryLine|||dev=22w17a|现在[[监守者]]死亡时可掉落1个幽匿催发体，使其成为[[可再生资源]]。
+|现在扩散出的幽匿类方块斑簇可以替换[[泥巴]]和[[灵魂沙]]。}}
+|{{HistoryLine||1.19.1|dev=pre6|现在幽匿催发体被破坏后会掉落{{xp|5}}而不是{{xp|20}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.30|dev=1.17.30.22|基岩版测试版文档中出现了幽匿催发体。}}
+|{{HistoryLine|||dev=1.17.30.23|[[洞穴与山崖]]内部纹理文件中出现了幽匿催发体的纹理。}}
+|{{HistoryLine||1.18.0|exg=vanilla_experiments|dev=1.18.0.22|[[File:Sculk Catalyst BE1.png|32px]] [[File:Sculk Catalyst Bloom JE1 BE1.gif|32px]] 加入了幽匿催发体。}}
+|{{HistoryLine||1.18.10|exg=wild_update|dev=1.18.10.21|现在幽匿催发体属于[[实验性玩法]]中的“{{experiment|wild_update|exg=1}}”部分。}}
+|{{HistoryLine||1.18.30|exg=wild_update|dev=1.18.30.22|更改了幽匿催发体的蔓延行为以匹配{{el|je}}。}}
+|{{HistoryLine|||dev=1.18.30.28|现在幽匿催发体可以在[[深暗之域]]生物群系中自然生成。}}
+|{{HistoryLine|||dev=1.18.30.32|现在幽匿催发体可以在[[远古城市]]的战利品箱子中找到。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|幽匿催发体不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.19.0.28|现在[[监守者]]死亡时可掉落1个幽匿催发体，使其成为[[可再生资源]]。}}
+|{{HistoryLine||1.19.20|dev=1.19.20.23|现在幽匿催发体被破坏后会掉落{{xp|5}}而不是{{xp|20}}。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|幽匿催发体的爆炸抗性由1.8改为3。}}
+}}
+
+== 你知道吗 ==
+* 开发者[[Brandon Pearce]]曾提及，幽匿催发体的下半部分由一种骨状材料构成。<ref>{{Tweet|kingbdogz|1327266276511768577|That is actually a bone-like material, not End Stone :)|November 13, 2020}}</ref>
+
+== 画廊 ==
+<gallery>
+SculkCharge.png|生物死亡，幽匿催发体产生信号
+Slicedlime video sculk catalyst.gif|[[Slicedlime]]的一段视频，幽匿催发体在持续有[[骷髅]]死亡的情况下将一整片区域“腐化”成了幽匿方块
+Sculk catalyst in deep dark.png|深暗之域中的[[幽匿斑块]]，其中有幽匿催发体
+</gallery>
+
+== 注释 ==
+{{Fnlist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|natural blocks}}
+
+[[de:Sculk-Katalysator]]
+[[en:Sculk Catalyst]]
+[[es:Catalizador de sculk]]
+[[fr:Catalyseur de sculk]]
+[[ja:スカルクカタリスト]]
+[[ko:스컬크 촉매]]
+[[lzh:幽匿引]]
+[[pl:Sculkowy katalizator]]
+[[pt:Catalisador de Sculk]]
+[[ru:Скалк-катализатор]]
+[[uk:Скалковий каталізатор]]

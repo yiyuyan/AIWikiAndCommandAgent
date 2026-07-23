@@ -1,0 +1,161 @@
+# 页面: Java版22w18a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8822w18a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=22w18a
+|image=22w18a.png
+|image2=Java Edition 22w18a Simplified.png\Java Edition 22w18a Traditional.png\Java Edition 22w18a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2022年5月4日
+|jsonhash=9f2303ee66c417d52aed26c02bd0e8fe5b374687
+|clienthash=85ab5e9725b6fa8078c6bd9df2697221fbe34b40
+|clientmap=798b951eeff3b86e5a0cd4a81f415b5f465808f2
+|serverhash=d3259a8939a724c78ebbb995dfc31c1c364464e3
+|servermap=001ab71a16b49623990eaecbb02ac43140cf7827
+|parent=1.19
+|prevparent=1.18.2
+|prev=22w17a
+|next=22w19a
+|nextparent=1.19.1
+}}<onlyinclude>
+
+'''22w18a'''是[[Java版1.19]]的第9个快照，发布于2022年5月4日<ref>{{snap|22w18a|May 4, 2022}}</ref>，加入了{{cmd|place}}命令，调整了[[悦灵]]的行为，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|place}}'''
+* 一个可用于放置[[地物]]、[[拼图方块|拼图]]和[[结构]]的新[[命令]]，用以替代{{cmd|placefeature}}命令。此命令的语法如下：
+** {{cmd|place feature <feature> [<pos>]|link=none}}
+*** 与移除的{{cmd|placefeature}}命令类似。
+*** <code>feature</code>：要放置的地物的命名空间ID。
+** {{cmd|place jigsaw <pool> <start> <depth> [<pos>]|link=none}}
+*** 类似于在[[拼图方块]]内点击“生成”按钮。在特定结构锚点的特定模板池开始生成拼图结构，然后从这个地方扩展指定等级。
+*** <code>pool</code>：要开始生成结构的模板池的命名空间ID。
+*** <code>start</code>：作为起始锚点的拼图的命名空间ID。
+*** <code>depth</code>：放置期间要遍历的拼图对接数最大值。
+** {{cmd|place structure <structure> [<pos>]|link=none}}
+*** 就像在世界生成过程中一样，放置整个结构。
+*** <code>structure</code>：要放置的结构的命名空间ID。
+*** <code>pos</code>：用作生成原点的位置（如不指定，则默认使用<code>~ ~ ~</code>）。
+
+=== 常规 ===
+'''[[聊天]]'''
+* 由{{cmd|say}}、{{cmd|msg}}、{{cmd|teammsg}}和{{cmd|me}}命令发出的聊天信息现在都会被签署。
+* 服务器现在可以通过<code>chat_type</code>注册表项为客户端定义不同的聊天样式格式。
+** 会在玩家进入服务器时被同步到客户端上。
+** 可以定义翻译键或翻译格式，如<code>chat.type.text</code>或<code>%s：%s</code>。
+*** 聊天可以类似地使用自定义翻译键或格式进行复述。
+** 格式可以应用到整个消息上，例如斜体或特定颜色（但目前不支持点击和悬停事件）。
+
+'''[[物品修饰器]]'''
+* 加入了物品函数<code>set_instrument</code>，用于从一个标签中选出乐器需要的物品标签，有以下参数：
+** <code>options</code>：对乐器标签的引用，用于指定包含了要被抽取的乐器ID的标签。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下[[Java版标签/方块|方块标签]]：
+** {{TagLink|block|snow_layer_can_survive_on}}：{{cd|d=pretty|honey_block|soul_sand|mud}}。
+** {{TagLink|block|snow_layer_cannot_survive_on}}：{{cd|d=pretty|ice|packed_ice|barrier}}。
+* 加入了以下[[Java版标签/旗帜图案|旗帜图案标签]]（新类型）：
+** {{TagLink|banner_pattern|no_item_required}}：{{cd|d=pretty|square_bottom_left|square_bottom_right|square_top_left|square_top_right|stripe_bottom|stripe_top|stripe_left|stripe_right|stripe_center|stripe_middle|stripe_downright|stripe_downleft|small_stripes|cross|straight_cross|triangle_bottom|triangle_top|triangles_bottom|triangles_top|diagonal_left|diagonal_up_right|diagonal_up_left|diagonal_right|circle|rhombus|half_vertical|half_horizontal|half_vertical_right|half_horizontal_bottom|border|curly_border|gradient|gradient_up|bricks}}。
+*** 用于定义不需要特定的图案物品就可以在织布机上制作出的图案。
+** {{TagLink|banner_pattern|pattern_item/creeper}}：{{cd|creeper}}
+** {{TagLink|banner_pattern|pattern_item/flower}}：{{cd|flower}}
+** {{TagLink|banner_pattern|pattern_item/globe}}：{{cd|globe}}
+** {{TagLink|banner_pattern|pattern_item/mojang}}：{{cd|mojang}}
+** {{TagLink|banner_pattern|pattern_item/piglin}}：{{cd|piglin}}
+** {{TagLink|banner_pattern|pattern_item/skull}}：{{cd|skull}}
+* 加入了以下[[Java版标签/乐器|乐器标签]]（新类型）：
+** {{TagLink|instrument|goat_horns}}：{{cd|d=pretty|#regular_goat_horns|#screaming_goat_horns}}。
+** {{TagLink|instrument|regular_goat_horns}}：{{cd|d=pretty|ponder_goat_horn|sing_goat_horn|seek_goat_horn|feel_goat_horn}}。
+** {{TagLink|instrument|screaming_goat_horns}}：{{cd|d=pretty|admire_goat_horn|call_goat_horn|yearn_goat_horn|dream_goat_horn}}。
+
+== 更改 ==
+=== 生物 ===
+'''[[悦灵]]'''
+* 现在悦灵会跟随无法看见的给予其物品的玩家。
+* 现在悦灵仅会在玩家64格外才不再跟随玩家。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 更改了“[[进度#advancements-anchor-adventure.avoid_vibration|{{Advancement name|adventure.avoid_vibration|zh|rev=1}}]]”进度的描述。
+** 旧内容：{{tr|在幽匿感测体、幽匿尖啸体或监守者周围潜行以防被它们听到|在伏聆振測器、伏聆尖嘯器或伏守者附近潛行以避免被聽見。<!--未approved文本，采用22w18a原文更改前的最后版本-->|喺沉靈感測器、沉靈尖嘯器或者沉靈守衞周圍潛行以防被佢哋聽到}}
+** 新内容：{{tr|在幽匿感测体或监守者周围潜行以防被它们探测到|在伏聆振測器或伏守者附近潛行以避免被偵測。|喺沉靈感測器或沉靈守衞周圍潛行以防被佢哋檢測到}}
+
+'''振动'''
+* 振动接收者（如[[幽匿感测体]]、[[幽匿尖啸体]]和[[监守者]]）现在改为侦测最近的振动信号，而非之前的1刻内的首个振动信号。
+
+=== 命令格式 ===
+'''{{cmd|placefeature}}'''
+* 被合并至{{cmd|place}}命令中。
+
+=== 常规 ===
+'''[[物品修饰器]]'''
+* 移除了物品函数<code>set_goat_horn_sound</code>。
+
+'''[[粒子]]'''
+* 更改了<code>sonic_boom</code>粒子的纹理。
+
+'''[[Java版标签|标签]]'''
+* 将{{cd|flap}}游戏事件从{{cd|d=pretty|#vibrations|#warden_can_listen}}游戏事件标签中移除。
+
+'''常规'''
+* 随游戏一同提供的Java版本升级至17.0.3。
+
+== 修复 ==
+{{fixes|fixedin=22w18a|showdesc=1
+|;old
+|179447|可以在旗帜上添加多于6种图案。
+|207935|同时产生的振动不会按预期触发幽匿感测体。
+|232009|SRV记录不会被正确解析。
+|249021|Realms菜单中的邀请和新闻按钮不始终显示。
+|;dev
+|249129|青蛙行走动画不会随移动速度的变化而变化。
+|249175|使用附有精准采集魔咒的锄挖掘位于单格方块空间内的多个幽匿脉络只会掉落1个物品。
+|249454|不掉落经验的幼年生物在幽匿催发体附近死亡时幽匿斑簇仍会扩散。
+|249527|玩家有黑暗效果时，天空效果仍然可见。
+|249562|监守者被困在气泡柱中时，不会尝试寻路到别的地方。
+|249732|悦灵已拾起的物品会在世界重新加载后消失。
+|249739|趋同事项：Java版中悦灵飞行速度太慢。
+|249740|拴在栅栏上的悦灵不会移动也不会捡拾物品。
+|249857|趋同事项：悦灵不会紧跟玩家或音符盒。
+|250139|雪不能放置在泥巴顶部。
+|250143|“{{Advancement name|adventure.avoid_vibration|zh|rev=1}}”进度描述中有不合适的表述。
+|250144|幽匿尖啸体在“{{Advancement name|adventure.avoid_vibration|zh|rev=1}}”的进度描述中被当成是可以“听到”玩家的方块。
+|250145|游戏暂停时，监守者和青蛙的动画不会被暂停。
+|250163|监守者死亡后仍会检测振动。
+|250183|监守者会一直对被玩家引爆的苦力怕咆哮。
+|250198|监守者会对因非自然因素死亡的目标一直咆哮。
+|250207|监守者会一直对已断开连接的玩家咆哮。
+|250216|监守者会一直对处于已卸载区块内的目标咆哮。
+|250218|监守者会一直对已消失的目标咆哮。
+|250244|监守者会一直对已进入下界传送门、末地传送门和末地折跃门的目标咆哮。
+|250245|玩家进入其他维度后仍可被监守者的远程攻击击中。
+|250506|在Y{{=}}0以下生长的红树可以在高于其应当生长出的高度生成。
+|250557|悦灵无法拾起NBT不同的同种物品（或NBT相同的不同种物品），且会停在原地不动。
+|250662|播放动画时，<code>minecraft:sonic_boom</code>粒子各帧的排序有误。
+|250864|数据包中有<samp>.DS_Store</samp>文件时，游戏加载世界生成设置会失败。
+|;previous
+|250926|创造模式物品栏的“{{tr|摧毁物品|銷毀物品|銷毀物品}}”槽位上有山羊角；创造模式物品栏的所有类别中都有山羊角。
+|250937|玩家皮肤在单人游戏中无法加载。
+|250939|使用具有无效音效种类的山羊角时游戏崩溃：<code>java.lang.ArrayIndexOutOfBoundsException: Index <index> out of bounds for length 8</code>。
+|250954|单人游戏中，玩家会被分配到新的UUID。
+|250974|打开或创建世界时出现<code>MinecraftClientHttpException</code>异常。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:22w18a]]
+[[en:Java Edition 22w18a]]
+[[es:Java Edition 22w18a]]
+[[fr:Édition Java 22w18a]]
+[[ja:Java Edition 22w18a]]
+[[pt:Edição Java 22w18a]]
+[[ru:22w18a (Java Edition)]]

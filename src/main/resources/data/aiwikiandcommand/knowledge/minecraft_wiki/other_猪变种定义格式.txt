@@ -1,0 +1,53 @@
+# 页面: 猪变种定义格式
+# 来源: https://zh.minecraft.wiki/w/%E7%8C%AA%E5%8F%98%E7%A7%8D%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:05
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+'''猪变种定义文件'''是用于定义[[猪]]变种及其生成规则的数据驱动定义文件。
+
+== 定义格式 ==
+猪变种在游戏内使用<code>PIG_VARIANT</code>[[注册表]]，数据包路径为{{filepath|pig_variant}}，即所有猪变种自定义文件都需要在{{filepath|-{}-data/<''命名空间''>/pig_variant}}目录中定义。
+
+猪变种定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|asset_id|required=1}}：（命名空间ID）猪的纹理。游戏在渲染时将此值解析为{{filepath|-{}-assets/<''命名空间''>/textures/<''路径''>.png}}。
+** {{nbt|string|baby_asset_id|required=1}}：（命名空间ID）幼年猪的纹理。游戏在渲染时将此值解析为{{filepath|-{}-assets/<''命名空间''>/textures/<''路径''>.png}}。
+** {{nbt|string|model}}：（默认为<code>normal</code>）猪的模型。取值可以为<code>normal</code>和<code>cold</code>，在原版游戏中前者用于温带猪与热带猪的模型，后者用于寒带猪的模型。
+** {{nbt|list|spawn_conditions|required=1}}：变种生成选择器，控制变种的生成条件与优先级。
+*** {{nbt|compound}}：一个变种生成选择器。
+**** {{nbt transclude|编码格式/Entity|codec_spawn_priority_selector|indent=2}}
+</div>
+
+== 定义行为 ==
+猪变种定义数据仅在服务端启动时被加载一次，使用{{cmd|reload}}命令不可以使猪变种定义被重新加载，而必须重启服务端。
+
+<code>PIG_VARIANT</code>注册表中必须至少有一个元素，否则游戏会在同步时报错并阻止世界加载。
+
+=== 变种生成 ===
+{{see also|猪#生成}}
+生成猪时，游戏根据{{nbt|list|spawn_conditions}}指定的通用变种选择器选择生成何种变种。
+
+通用变种选择器包含了生成变种的各种条件，以及条件满足时的生成优先级。尝试生成时，游戏会在所有变种的选择器中找出条件成立且优先级最大的选择器，并生成拥有该选择器的变种；如有多个选择器的优先级同为最大，则会随机选取一个选择器，并生成其对应的变种。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.5|dev=25w02a|加入了猪变种定义格式，以及相应的<code>PIG_VARIANT</code>可写注册表。}}
+|{{HistoryLine|||dev=25w04a|修改了猪变种定义格式，以统一不同生物变种的格式。
+<div class{{=}}"treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|texture|required=1}}: （命名空间ID）猪的纹理。
+** {{nbt|string|model}}: （默认为<code>normal</code>）猪的模型。需为{{cd|d=pretty|normal|cold}}之一。
+** {{nbt|string}}{{nbt|list|biomes}}: {{json ref|生物群系|生物群系#数据值|tag=1}}，表示可生成该变种的生物群系。如果未指定生物群系，那么这种变种只会在没有其他符合生物群系要求的变种时生成。
+</div>}}
+|{{HistoryLine||26.1|dev=snapshot-2|加入了{{nbt|string|baby_asset_id}}以单独指定幼年猪的纹理。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]

@@ -1,0 +1,428 @@
+# 页面: 崩溃报告文件
+# 来源: https://zh.minecraft.wiki/w/%E5%B4%A9%E6%BA%83%E6%8A%A5%E5%91%8A%E6%96%87%E4%BB%B6
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:35
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''崩溃（Crash）'''是程序因未预期的异常而停止正常流程进行的应急性处理，而'''崩溃报告（Crash Report）'''是用于描述这次崩溃具体信息的报告。
+
+== 分类 ==
+在游戏中，崩溃报告分为几个种类。按照崩溃是否会影响程序进程，崩溃分为两类：
+* 非致命崩溃：崩溃虽然发生，但游戏不至于因为这次崩溃而停止所有游戏流程，因此此类崩溃虽然有崩溃报告但不会引发程序中止。
+* 致命崩溃：崩溃发生后，游戏无法阻止崩溃的影响，使得所有游戏流程停止。崩溃报告可能产生，程序在之后会被立刻中止。
+
+按照崩溃发生的位置，崩溃被分为下列6种：
+* 常规崩溃：致命崩溃，游戏在保存常规崩溃报告后会立刻中止进程。这类崩溃产生于游戏的各个流程中，当游戏没有捕获并正常处理异常时，常规崩溃就会产生以阻止程序继续错误运行。
+* 测试崩溃：非致命崩溃，用于性能分析报告。
+* 网络协议崩溃：非致命崩溃，在连接远程服务端时，如果服务端因为网络协议问题而中止连接，就会在客户端触发网络协议崩溃。
+* 区块文件崩溃：非致命崩溃，游戏在保存或读取区块时，如果区块内部数据异常造成程序异常，游戏就会产生区块文件崩溃。
+* JVM崩溃：致命崩溃，但此崩溃无法产生游戏崩溃报告，也无法应急保存数据。这种崩溃生成JVM崩溃报告。
+* 外部崩溃：致命崩溃，由外部引发，例如强制停止进程（发送SIGKILL信号等方式）、因内存占用过高而被[https://www.kernel.org/doc/html/latest/admin-guide/mm/concepts.html?highlight=oom+killer#oom-killer OOM Killer]杀死进程等。这类崩溃无法生成任何崩溃报告，因为生成报告之前程序就已经中止。
+
+== 存储路径 ==
+按照崩溃的不同，游戏保存崩溃报告文件的路径也不同：
+* 常规崩溃报告保存在{{filepath|-{}-<''游戏根目录''>/crash-reports/crash-<''时间''>-<''逻辑端类型''>.txt}}。
+* 测试崩溃报告保存在[[性能分析报告文件]]内部的指定位置。
+* 网络协议崩溃报告保存在{{filepath|-{}-<''客户端根目录''>/crash-reports/disconnect-<''时间''>-client.txt}}。
+* 区块文件崩溃报告保存在{{filepath|-{}-<''游戏根目录''>/crash-reports/chunk-<''维度名称''>-<''时间''>-server.txt}}。
+* JVM崩溃报告保存在{{filepath|-{}-<''运行目录''>/hs_err_pid<''进程ID''>.log}}。
+
+== 文件结构 ==
+所有游戏崩溃报告都有统一的结构，分为头部和各个章节信息。
+
+=== 文件头部 ===
+
+文件头部具有下列结构：
+
+<pre>-{}-
+---- <报告类型> ----
+// <诙谐评论>
+
+Time: <崩溃时间>
+Description: <崩溃简要描述>
+
+<异常描述及栈帧信息>
+</pre>
+
+根据不同的崩溃类型，报告类型也不同：
+
+{| class="wikitable"
+! 崩溃类型 !! 报告类型
+|-
+| 常规崩溃 || Minecraft Crash Report
+|-
+| 测试崩溃 || Minecraft Test Report
+|-
+| 网络协议崩溃 || Minecraft Network Protocol Error Report
+|-
+| 区块文件崩溃 || Minecraft Chunk IO Error Report
+|}
+
+==== 诙谐评论 ====
+'''诙谐评论（Witty Comment）'''是与崩溃报告本身无关的随机挑选的字符串。这些字符串无法通过资源包等方式修改，被硬编码在游戏中。针对于不同的崩溃，诙谐评论也不同：
+
+<!--
+请记住：标语右边留空的位置代表该标语的解释太简单或太模糊。你可以随便在任何地方留下可能的来源（不能提供找不到的来源），在未确定这些来源是可靠的情况下，不能显示它们。不要用实际的描述来解释这些评论。
+-->
+{| class="wikitable collapsible collapsed"
+|-
+! 诙谐评论
+! 出处与解释
+|-
+! colspan=2 | 常规崩溃
+|-
+| Who set us up the TNT?<br>谁放的TNT？
+| “有人给我们装了一个炸弹”的一个[[wiktionary:snowclone|用典]]，取自1991年的游戏[[wzh:零翼战机|《零翼战机》]]的低质量英语翻译版本。
+|-
+| Everything's going to plan. No, really, that was supposed to happen.<br>一切都在计划当中。不，真的！那本来就应该发生的！
+| <!-- 可能是对manual debug crashes的一个reference。 -->
+|-
+| Uh... Did I do that?<br>额……这是我干的吗？
+| <!-- Possibly referencing the famous quote by [[wikipedia:Steve Urkel|Steve Urkel]] from the show [[wikipedia:Family Matters|''Family Matters'']]. Left this in a wiki note due to it being too close to speculation rather than a straight-forward recognition. -->
+|-
+| Oops.<br>哎呀。
+|
+|-
+| Why did you do that?<br>你为什么要这样做？
+|
+|-
+| I feel sad now :(<br>人家很伤心:( 
+|
+|-
+| My bad.<br>我的错。
+| <!-- Possibly a reference to Derpy Hooves in [[wikipedia: My Little Pony: Friendship Is Magic|''My Little Pony: Friendship Is Magic'']]. Left this in a wiki note due to it being too close to speculation rather than a straight-forward recognition. -->
+|-
+| I'm sorry, Dave.<br>对不起, Dave。
+| 引用了著名电影[[wzh:2001:太空漫游(电影)|《2001: 太空漫游》]]中的对话“I'm sorry, Dave. I'm afraid I can't do that.” （对不起，Dave。恐怕我做不到。）。
+|-
+| I let you down. Sorry :( <br>我让你失望了。对不起:( 
+|
+|-
+| On the bright side, I bought you a teddy bear!<br>好消息是，我给你买了个泰迪熊！
+| 
+|-
+| Daisy, daisy...
+| 同样来自电影《2001: 太空漫游》当HAL开始唱“Daisy Bell (A Bicycle Built for Two)”时。
+|-
+| Oh - I know what I did wrong!<br>噢——我知道我哪里搞错了！
+| 此评论是对“I just don't know what went wrong :(”评论的交叉引用。
+|-
+| Hey, that tickles! Hehehe!<br>嗨，好痒啊！嘿嘿嘿！
+| <!-- Tickle-me-Elmo? Lol. -->
+|-
+| I blame Dinnerbone.<br>都是Dinnerbone的错！
+| [[Dinnerbone]]是[[Mojang Studios]]的一名员工。
+|-
+| You should try our sister game, Minceraft! <br>也许你该尝试一下我们的姊妹游戏，Minceraft！
+| 引用[[彩蛋#Minceraft|彩蛋]]：在MIN'''EC'''RAFT主界面的名称屏幕上有极低概率把“C”和“E”调换位置。
+|-
+| Don't be sad. I'll do better next time, I promise!<br>不要伤心。下次我会做得更好的，我保证！
+| 
+|-
+| Don't be sad, have a hug! <3 <br>不要伤心，抱一抱！<3
+| “<3”与爱心形状相似。
+|-
+| I just don't know what went wrong :(<br>我就是不知道哪里错了嘛:( 
+| “Oh - I know what I did wrong!”的交叉引用。
+|-
+| Shall we play a game?<br>来玩个游戏吗？
+| 引用自电影[[wzh:戰爭遊戲_(1983年電影)|《战争游戏》]]当角色David Lightman首次与超级计算机Joshua交流时的对话“How about a nice game of chess?”（来一盘国际象棋怎么样？）。
+|-
+| Quite honestly, I wouldn't worry myself about that.<br>老实说，我并不会担心这个。
+| 引用电影《2001：太空漫游》中HAL对Frank的回答：“嗯当然我知道9000系列中所有绝妙的成就，但是，呃，你确信从来没有吗，即使是最微不足道的计算机错误都没有吗？”
+|-
+| I bet Cylons wouldn't have this problem.<br>我打赌，Cylons绝对不会有这个问题。
+| [[wikipedia:Cylon (Battlestar Galactica)|Cylons]]是太空堡垒卡拉狄加展出中一个反复出现的部分。
+|-
+| Sorry :(<br>对不起:(
+|
+|-
+| Surprise! Haha. Well, this is awkward.<br>惊喜！哈哈。好吧，的确挺羞耻的。
+| 
+|-
+| Would you like a cupcake?<br>想要一个纸杯蛋糕吗？
+| <!-- Possible reference to Pinkie Pie in [[wikipedia: My Little Pony: Friendship Is Magic|''My Little Pony: Friendship Is Magic'']]. Left this in a wiki note due to it being too close to speculation rather than a straight-forward recognition. -->
+|-
+| Hi. I'm Minecraft, and I'm a crashaholic.<br>嗨。我叫Minecraft，是个崩溃狂魔。
+| 嗜酒者互诫协会（以及其他成瘾者帮助群组）见面时的常用介绍，以“Hi, my name is _____ and I'm an alcoholic（嗨。我叫_____，是一个酒鬼）”开头。
+|-
+| Ooh. Shiny.<br>哦。漂亮。
+| 游戏''[https://terraria.wiki.gg/wiki/Terraria Terraria]''中有一个名为“Ooo！Shiny！”的成就，其达成条件为玩家在其游戏中开采了第一块矿石。
+|-
+| This doesn't make any sense!<br>这根本就不合情理啊！
+|
+|-
+| Why is it breaking :(<br>为什么它会坏掉:(
+|
+|-
+| Don't do that.<br>不要这样做。
+|
+|-
+| Ouch. That hurt :(<br>哎呀，好疼:(
+|
+|-
+| You're mean.<br>你好残忍
+| 这是[[Java版2.0]]愚人节笑话中的一句话。
+|-
+| {{Anchor|免费的拥抱}}This is a token for 1 free hug. Redeem at your nearest Mojangsta: [~~HUG~~]<br>你可以用这条消息换取一个免费的拥抱。请在离你最近的Mojang员工那里兑换：[~~抱一抱~~]
+| 引用游戏《Little Inferno》，其中你可以得到一张与Miss Nancy免费拥抱的优惠券。
+|-
+| There are four lights!<br>只有四盏灯！
+| 取自[[wzh:星际旅行：下一代|《星际旅行：下一代》]]第6季第11集Capt. Jean-Luc Picard被Cardassians俘获并虐待时对他实际虐待技术的引用。
+|-
+| But it works on my machine.<br>但是它明明在我的电脑上是正常的！
+| 一些开发人员在出现错误时常使用的借口，声称它在他们的机器上有效，但在其他人的机器上失效了。
+|-
+! colspan=2 | 测试崩溃
+|-
+| Don't mind me<br>别管我
+|
+|-
+| One day I will be a real crash!<br>总有一天，我会变成真正的崩溃！
+|
+|-
+| Booo! Haha, did I scare you?<br>嘘！哈哈，我吓到你了吗？
+|
+|-
+| Help, I'm trapped in a report factory!<br>救命，我被困在报告里了！
+|取自Todd Strasser一系列以Help! I'm trapped in...为开头的小说
+|-
+| Have I answered your question?<br>我的回答对你的问题有帮助吗？
+|
+|-
+| No hugs here, sorry<br>抱歉，这里不提供拥抱
+| 见上文{{slink||免费的拥抱}}
+|-
+| I Can't Believe It's Not A Crash Report!<br>难以置信这竟然不是一个崩溃报告！
+|
+|-
+| Where's the kaboom!?<br>爆炸在哪里？！
+| 取自电影《火星人马文》中马文的著名台词。
+|-
+! colspan=2 | 网络协议崩溃
+|-
+| 0xBADF00D
+| 使用[[wzh:Hexspeak|Hexspeak]]用16进制字符书写的英文单词。其原型0xBAADF00D在Windows API中的内存分配函数中用于填充已分配但未初始化的堆内存。
+|-
+| +'${`%&NO CARRIER
+| [[wp:NO CARRIER|NO CARRIER]]曾用于表示网络或通信设备检测到没有外部连接的状态。现用于论坛中表示留言被拦截的诙谐评论，此时前面会有类似乱码的符号。
+|-
+| Please insert The Internet CD #4<br>请更换至Internet CD #4
+|早期存储介质容量较小时，部分游戏公司会采取将一个游戏拆分到多个光盘中的做法，并在一张光盘的内容游玩完毕后提示“Please insert CD#n”（请更换至光盘#n）。
+|-
+| Sabotage!<br>破坏！
+| 源于游戏《Among Us》中内鬼破坏通讯的功能。
+|-
+| Are you sure you are not moving wrongly?<br>你确定没走错地方吗？
+|
+|-
+| This time is not my fault, I promise!<br>这次真不是我干的，我发誓！
+|
+|-
+| All lines are down!<br>所有线路都停摆了！
+|
+|-
+| Maybe a shark bit some cable<br>也许是鲨鱼把线缆咬坏了
+| 源于鲨鱼喜欢啃咬海底电缆的习性。
+|-
+| 404
+| HTTP状态码之一，通常是因为请求的URL对应的资源在服务器上未找到，可能是因为资源已被删除、移动或从未存在。
+|-
+| I'm sorry, I don't speak that language<br>抱歉，但我不会说那种语言
+|
+|-
+| What we've got here is failure to communicate<br>我们现在的状况就是沟通失败的结果
+| 取自[[wzh:铁窗喋血|《{{tr|铁窗喋血|逃獄金剛}}》]]（Cool Hand Luke，也作《酷汉卢克》）的著名台词。
+|-
+| It's the tubes, they're clogged!<br>是管道堵塞了！
+|
+|-
+| Abort, Retry, Ignore?<br>中止，重试，忽略？
+| 调试模式下编译的报错信息。
+|-
+| Could be worse, I guess<br>我猜，这还不是最坏的情况
+|
+|-
+| Wait, was the last bit one or zero?<br>等等，上一位是1还是0？
+| 单比特错误是一种常见的网络传输错误。
+|-
+| Too many suspicious packets<br>可疑的数据包过多
+|
+|-
+| Don't worry, I'll be fine<br>别担心，我会好起来的
+|
+|-
+| Maybe this time it will work!<br>也许这次能行！
+|
+|-
+| I heard pigeons are more reliable<br>我听说鸽子要更可靠些
+| 源于[[wzh:IETF|互联网工程任务组]]于1990年愚人节发布的[[rfc:1149|RFC 1149]]中提出的[[wzh:以鸟类为载体的网际协议|以鸟类为载体的网际协议]]。
+|-
+! colspan=2 | 区块文件崩溃
+|-
+| I have failed you!<br>我让你失望了！
+|
+|-
+| Let's not do it again...<br>别再这样了……
+|
+|-
+| Worst magic trick ever!<br>史上最烂的魔术表演！
+|
+|-
+| Remember to backup your worlds regularly<br>记得经常备份你的世界
+|
+|-
+| Pirates stole your chunk!<br>海盗偷了你的区块！
+|
+|-
+| Ker-chunk!
+| 业余无线电中继站（Kerchunk），同时也是[[区块]]（Chunk）的双关
+|-
+| Ideally, this shouldn't be here<br>理想情况下，它不应该在这里
+|
+|-
+| Let's hope it wasn't anything important<br>希望不是什么重要的事
+|
+|-
+| Computers were a mistake<br>电脑是一个错误
+|
+|-
+| Welp
+好吧
+|
+|-
+| Not my proudest moment<br>这可不是什么光荣事情
+|
+|-
+| Who needs blocks in a block game, right?<br>在这一个方块游戏中谁还需要方块？不是吗？
+|
+|-
+| This chunk is no more...it has ceased to be...this is an EX-chunk<br>这个区块已经归西了...它已经断气了...这就是个死区块
+| 取自《{{w|巨蟒剧团之飞翔的马戏团|{{tr|巨蟒剧团之飞翔的马戏团|蒙提·派森的飛行馬戲團|踎低噴飯的飛行馬戲團}}}}》中的台词“This parrot is no more! It has ceased to be!”。
+|-
+| loss.mca
+| <code>mca</code>是[[区域文件]]的后缀名。
+|-
+! colspan=2 | 生成诙谐评论异常
+|-
+| Witty comment unavailable :(<br>无法使用诙谐评论 :(
+| 如果诙谐评论选择失败，会罕见地出现这个被硬编码的评论。同时，这也是一个诙谐评论（字面意义上）。
+|}
+
+=== 信息章节 ===
+文件头部粗略说明了异常的发生位置与原因，在文件头部下方，游戏会附加一些更详细的信息以帮助分析崩溃。
+
+为了将信息章节与文件头部分隔，崩溃报告中使用下列这两行用于分隔开文件头部和信息章节：
+
+<pre>
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+</pre>
+
+每个信息章节都有下列的结构：
+
+<pre>-{}-
+-- <信息类型> --
+Details:
+	<数据描述>: <数据值>
+    ...
+Stacktrace:
+	<生成此章节的栈帧信息>
+</pre>
+
+其中，<code>Stacktrace</code>部分可能不存在，具体和信息类型有关。<code>Details</code>内的数据与信息类型相关，指定的信息类型会提供相应的数据。
+
+如果在生成崩溃报告时，数据值为空，那么数据值会变为<code>~~NULL~~</code>；如果数据值获取发生异常，则为<code>-{}-~~ERROR~~ <''异常类型名''>: <''异常描述''></code>。
+
+=== 常见信息类型 ===
+下列举例了崩溃报告中经常出现的信息类型。
+
+==== Head ====
+<code>Head</code>是特殊的信息类型，永远作为崩溃报告的第一个章节。且固定格式为：
+
+<pre>-{}-
+-- Head --
+Thread: <当前线程名称>
+Stacktrace:
+	<与头部相同的栈帧信息>
+</pre>
+
+==== System Details ====
+包含了操作系统、硬件及游戏本体信息，不包含栈帧信息。所有崩溃报告都有这一章节，且一定作为最后一个章节写入崩溃报告。
+
+此章节包含下列数据，部分数据可能不会最终保存在崩溃报告中：
+* '''Minecraft Version'''：游戏版本名称。
+* '''Minecraft Version ID'''：游戏版本ID。
+* '''Operating System'''：操作系统。此值本质上读取Java系统属性的{{cd|os.name|os.arch|os.version|d=pretty}}，并拼接而成。
+* '''Java Version'''：Java运行时信息。此值本质上读取Java系统属性的{{cd|java.version|java.vendor|d=pretty}}，并拼接而成。
+* '''Java VM Version'''：Java虚拟机信息。此值本质上读取Java系统属性的{{cd|java.vm.name|java.vm.info|java.vm.vendor|d=pretty}}，并拼接而成。
+* '''Memory'''：内存使用情况。内部的3个内存数据指标分别是[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Runtime.html#freeMemory() Java堆内空闲内存]、[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Runtime.html#totalMemory() Java堆内存]和[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Runtime.html#maxMemory() Java最大堆内存]。
+* '''CPUs'''：Java虚拟机可用的处理器数量，见[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Runtime.html#availableProcessors() 此文档]。
+* '''Processor Vendor'''：处理器供应商，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/CentralProcessor.ProcessorIdentifier.html#getVendor() 此文档]。
+* '''Processor Name'''：处理器名称，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/CentralProcessor.ProcessorIdentifier.html#getName() 此文档]。
+* '''Identifier'''：处理器标识符，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/CentralProcessor.ProcessorIdentifier.html#getIdentifier() 此文档]。
+* '''Microarchitecture'''：处理器微架构，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/CentralProcessor.ProcessorIdentifier.html#getMicroarchitecture() 此文档]。
+* '''Frequency (GHz)'''：处理器频率，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/CentralProcessor.ProcessorIdentifier.html#getVendorFreq() 此文档]。	
+* '''Number of physical packages'''：物理封装数量，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/CentralProcessor.html#getPhysicalPackageCount() 此文档]。
+* '''Number of physical CPUs'''：物理处理器数量，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/CentralProcessor.html#getPhysicalProcessorCount() 此文档]。
+* '''Number of logical CPUs'''：逻辑处理器数量，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/CentralProcessor.html#getLogicalProcessorCount() 此文档]。
+* '''Graphics card #<''序号''> name'''：显卡名称，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/GraphicsCard.html#getName() 此文档]。
+* '''Graphics card #<''序号''> vendor'''：显卡供应商，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/GraphicsCard.html#getVendor() 此文档]。
+* '''Graphics card #<''序号''> VRAM (MiB)'''：显存大小，以兆字节（MiB）为单位，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/GraphicsCard.html#getVRam() 此文档]。
+* '''Graphics card #<''序号''> deviceId'''：显卡硬件ID，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/GraphicsCard.html#getDeviceId() 此文档]。
+* '''Graphics card #<''序号''> versionInfo'''：显卡更详细的版本信息数据，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/GraphicsCard.html#getVersionInfo() 此文档]。
+* '''Memory slot #<''序号''> capacity (MiB)'''：物理内存的大小，以兆字节（MiB）为单位，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/PhysicalMemory.html#getCapacity() 此文档]。
+* '''Memory slot #<''序号''> clockSpeed (GHz)'''：物理内存的时钟周期，以吉赫兹（GHz）为单位，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/PhysicalMemory.html#getClockSpeed() 此文档]。
+* '''Memory slot #<''序号''> type'''：物理内存的类型，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/PhysicalMemory.html#getMemoryType() 此文档]。
+* '''Virtual memory max (MiB)'''：设备总内存，以兆字节（MiB）为单位，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/VirtualMemory.html#getVirtualMax() 此文档]。
+* '''Virtual memory used (MiB)'''：设备已用内存，以兆字节（MiB）为单位，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/VirtualMemory.html#getVirtualInUse() 此文档]。
+* '''Swap memory max (MiB)'''：交换空间总大小，以兆字节（MiB）为单位，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/VirtualMemory.html#getSwapTotal() 此文档]。
+* '''Swap memory used (MiB)'''：交换空间已用大小，以兆字节（MiB）为单位，见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/VirtualMemory.html#getSwapUsed() 此文档]。
+* '''Space in storage for jna.tmpdir (MiB)'''：JNA临时目录（系统属性<code>jna.tmpdir</code>）所在文件系统的可用空间和已用空间，以兆字节（MiB）为单位。
+* '''Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB)'''：LWJGL本地库目录（系统属性<code>org.lwjgl.system.SharedLibraryExtractPath</code>）所在文件系统的可用空间和已用空间，以兆字节（MiB）为单位。
+* '''Space in storage for io.netty.native.workdir (MiB)'''：Netty本地库工作目录（系统属性<code>io.netty.native.workdir</code>）所在文件系统的可用空间和已用空间，以兆字节（MiB）为单位。
+* '''Space in storage for java.io.tmpdir (MiB)'''：Java临时目录（系统属性<code>java.io.tmpdir</code>）所在文件系统的可用空间和已用空间，以兆字节（MiB）为单位。
+* '''Space in storage for workdir (MiB)'''：当前工作目录所在文件系统的可用空间和已用空间，以兆字节（MiB）为单位。
+* '''JVM Flags'''：Java虚拟机旗标。
+* '''Is Modded'''：游戏本体是否已被修改。下文的游戏铭牌代表游戏中<code>net.minecraft.client.ClientBrandRetriever#getClientModName()</code>（客户端）和<code>net.minecraft.server.MinecraftServer#getServerModName()</code>（服务端）的返回值。
+** 如果游戏本体未被修改（游戏铭牌为<code>vanilla</code>，且游戏本体文件具有有效签名），则为<code>-{}-Probably not. <''逻辑端类型''> jar signature and brand is untouched</code>。
+** 如果游戏铭牌未被修改，但游戏本体文件没有有效签名，则为<code>-{}-Very likely; <''逻辑端类型''> jar signature invalidated</code>。
+** 如果游戏铭牌被修改，则为<code>-{}-Definitely; <''逻辑端类型''> brand changed to '<''游戏铭牌''>'</code>。
+* '''Type'''：崩溃发生线程所代表的逻辑端详细类型。
+** 如果游戏在客户端渲染线程崩溃，则为<code>Client (map_client.txt)</code>。
+** 如果游戏在客户端内置服务端线程崩溃，则为<code>Integrated Server (map_client.txt)</code>。
+** 如果游戏是专用服务端，并发生崩溃，则为<code>Dedicated Server (map_server.txt)</code>。
+
+下列其他数据仅在客户端中存在，服务端生成崩溃报告将不会产生下列数据：
+* '''Launched Version'''：游戏版本，此项由外部使用<code>--version</code>参数传入。
+* '''Launcher name'''：游戏启动器名称，此项由外部使用<code>minecraft.launcher.brand</code>系统属性传入。如果对应系统属性不存在则此项也不存在。
+* '''Backend library'''：LWJGL运行库信息。
+* '''Backend API'''：OpenGL渲染器信息。此值本质上读取了{{cd|GL_RENDERER|GL_VERSION|GL_VENDOR|d=pretty}}三个OpenGL常量代表的字符串。如果游戏没有创建或不存在OpenGL上下文时崩溃，则此值为<code>NO CONTEXT</code>。
+* '''Window size'''：游戏窗口大小。如果游戏还没有完成初始化时就已经崩溃，那么此值为<code><not initialized></code>。
+* '''GFLW Platform'''{{sic}}：GLFW的运行平台，见[https://www.glfw.org/docs/latest/group__init.html#ga6d6a983d38bd4e8fd786d7a9061d399e 此文档]。
+* '''GL Caps'''：固定值为<code>Using framebuffer using OpenGL 3.2</code>。
+* '''GL debug messages'''：输出OpenGL最后10条调试信息。如果OpenGL上下文不支持[https://registry.khronos.org/OpenGL/extensions/KHR/KHR_debug.txt GL_KHR_debug]和[https://registry.khronos.org/OpenGL/extensions/ARB/ARB_debug_output.txt GL_ARB_debug_output]扩展，则此值为<code><debugging unavailable></code>。如果游戏无法找到渲染设备，则为<code><no renderer available></code>。
+* '''Universe'''：如果游戏未初始化就已经崩溃，此值为<code>404</code>，否则为<code>400921fb54442d18</code>（Java标准库常数圆周率<code>Math.PI</code>转换为对应长整数的16进制表示）。
+* '''GPU Warnings'''：GPU警告，与资源包内定义的[[资源包#GPU警告列表|GPU警告列表]]有关。如果选项还未初始化，此值不存在。
+* '''Graphics mode'''：图像品质，与选项中的<code>graphicsMode</code>一致。如果选项还未初始化，此值不存在。
+* '''Render Distance'''：视距，与选项中的<code>renderDistance</code>一致。如果选项还未初始化，此值不存在。
+* '''Resource Packs'''：游戏已启用的资源包。如果游戏还未初始化，此值不存在。
+* '''Current Language'''：游戏使用的语言。如果语言还未初始化，此值不存在。
+* '''Locale'''：系统的区域设置，见[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Locale.html#getDefault() 此文档]。
+* '''System encoding'''：系统编码。此值本质读取系统属性<code>sun.jnu.encoding</code>。如果对应系统属性不存在则为<code><not set></code>。
+* '''File encoding'''：文件编码。此值本质读取系统属性<code>file.encoding</code>。如果对应系统属性不存在则为<code><not set></code>。
+* '''CPU'''：处理器信息，是上述处理器信息的拼接。
+
+==== Manual crash details ====
+当使用{{key|F3+C}}时客户端崩溃时，崩溃报告中包含此章节，且具有栈帧信息。
+
+内部仅包含一条数据<code>Modules</code>，保存了游戏使用的所有本地模块（动态链接库）。只有在Windows系统下数据不为空，其他系统则为空。每一行都代表了一个模块，且格式为<code>-{}-<''模块路径''>:<''模块描述''>:<''模块版本''>:<''模块提供者''></code>。
+
+此数据本质上调用了<code>Kernel32Util.getModules</code>，文档见[http://java-native-access.github.io/jna/5.13.0/javadoc/com/sun/jna/platform/win32/Kernel32Util.html#getModules-int- 此]。
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

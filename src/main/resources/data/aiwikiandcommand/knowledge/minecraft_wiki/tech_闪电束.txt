@@ -1,0 +1,284 @@
+# 页面: 闪电束
+# 来源: https://zh.minecraft.wiki/w/%E9%97%AA%E7%94%B5%E6%9D%9F
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 实体, 本地化模块需更新
+# 抓取时间: 2026-07-14 17:38:11
+# 原始 Wikitext 内容:
+
+{{Infobox entity
+|image=Lightning Bolt.png
+|imagesize=100px
+|size=
+'''{{el|je}}：'''<br>
+高度：0格<br>
+宽度：0格<br>
+'''{{el|be}}：'''<br>
+高度：1.8格<br>
+宽度：0.8格<br>
+|spawn=见{{slink||生成}}
+}}
+
+'''闪电束（Lightning Bolt'''，简称'''闪电）'''是一种会在[[雷暴]]中因多种原因而生成的[[实体]]，作为雷暴的标志性危险因素，会在落下时产生多次'''雷击（Lightning Strike）'''，对实体造成伤害并生成[[火]]。
+
+== 生成 ==
+=== 雷暴 ===
+雷暴期间，对每一个已加载的[[区块]]，在每个游戏刻，会有{{frac|1|100,000}}概率尝试生成一次闪电束。在这个概率下，如果有大约201个已加载的区块（对应玩家到区块中心的距离为128格），那么90%的情况下，每分钟都会产生0到5道闪电束，平均值约每分钟2.4道闪电束。
+
+尝试生成闪电束时，闪电束会随机选中区块内的X和Z坐标，并选定此坐标上Y值最高的液体方块或有碰撞箱的方块。随后若在3×''h''×3区域内（这个区域以世界最高高度为上限，以选定的方块往下3格为下限）有暴露在天空下的[[生物]]，则会随机选择其中之一，将闪电束的目标转移到该生物脚下的方块。
+
+游戏会再次确认目标位置是否符合下列条件：
+* 目标[[方块]]暴露在天空下
+* 该方块上存在降雨，不含降雪或无雨
+** 因此，闪电束不会发生在不下雨的炎热[[生物群系]]，以及世界的某些[[温度]]较低且会降雪的区域（通常为寒冷生物群系）。
+若以上条件确认通过，闪电束就会劈下。
+
+若选中的位置在半径128格内{{only|je|short=1}}或64×64×64{{only|be|short=1}}的区域有[[避雷针]]，闪电束会改为劈中避雷针的位置。
+
+=== 三叉戟 ===
+{{main|引雷}}
+如果处于露天处的{{only|je|for=实体}}或{{only|be|for=生物}}在[[雷暴]]天气时被由玩家掷出的具有[[引雷]]魔咒的[[三叉戟]]击中（近身攻击时无效），则会在被击中的目标所在处召唤一道闪电。
+
+如果处于露天处{{only|be|for=且有降雨（不含降雪或无雨）}}的[[避雷针]]在雷暴或{{only|be|for=降雨}}天气时被由玩家掷出的具有[[引雷]]魔咒的三叉戟击中，则会在该避雷针的顶部召唤一道闪电。
+
+=== 骷髅陷阱 ===
+{{main|骷髅陷阱}}
+玩家接近并触发[[骷髅陷阱]]马时，会出现一道特殊的闪电束，生成的闪电束不会被吸引到避雷针上。
+
+此闪电束无碰撞箱，不能造成伤害，不能生成火，不能转化生物，不能生成骷髅陷阱，但可以降低周围铜质方块的锈蚀程度，可以使被击中的避雷针输出红石信号。<!--因为不能生成火，所以可以使玩家达成{{tp|advancements.adventure.lightning_rod_with_villager_no_fire.title}}进度。-->
+
+如无特殊说明，中文Minecraft Wiki中所提及的所有闪电束均指非此方式生成的闪电束。
+
+== 行为 ==
+闪电束的主要效果是对实体造成伤害和在方块上生成火。在闪电束落下后，会发出响亮的雷声并使天空闪烁片刻。{{in|je}}天空闪烁效果可以在辅助功能设置中关闭。
+
+=== 造成伤害 ===
+闪电束生成时，会对范围内6×6×12区域（水平中心为目标方块的西北角，底边在目标方块下方三格）内的所有实体造成{{hp|5}}伤害。{{in|je}}闪电束会在此区域进行数次击打，击打次数不固定，且击打次数多也会相应延长闪电束的存在时间。[[受击后伤害免疫]]通常会防止生物受到{{hp|5}}以上的伤害，但物品实体、船、盔甲架和矿车可能会迅速被击打摧毁。{{in|be}}闪电束只会进行一次击打。
+
+{{In|Java}}闪电束造成的伤害不会造成[[着火]]，但生成的[[火]]可以。
+
+{{In|Bedrock}}闪电束造成的伤害还会设置实体的剩余着火时间为{{convert|160|tick}}。
+
+{{in|je}}[[海龟]]被闪电束击中时会受到3.4×10<sup>38</sup>（{{healthbar|2|9px}} × 1.7×10<sup>38</sup>）伤害。
+
+{{in|be}}海龟和[[美西螈]]受到的来自闪电束的伤害为2000倍，被闪电束击中时会受到{{hp|10000}}伤害。
+
+被闪电束击杀的海龟会掉落1个[[碗]]。<ref>{{bug|MC-125562|||WAI}}</ref><ref>{{bug|MCPE-57038|||WAI}}</ref>但{{in|je}}闪电束通常会迅速将掉落的碗清除。<ref>{{bug|MC-206922}}</ref>
+
+=== 生成火 ===
+[[File:Lightning fire.png|缩略图|200px|闪电束制造的[[火]]]]
+
+在普通和困难难度下，闪电束在以击中点为中心、2格为半径（即3×3）的区域产生火。由此产生的火会正常地点燃任何可燃物品，引爆[[TNT]]，甚至激活[[下界传送门]]。但是，闪电束本身不会对方块造成任何破坏。大多数火很快会被雨扑灭，但某些遮住雨的地方可能会让火扩散。若火焰点燃了[[下界岩]]、[[岩浆块]]、[[灵魂沙]]或[[灵魂土]]，则火焰也不会熄灭。
+
+=== 转化生物 ===
+闪电束会对部分生物造成特殊的效果：
+* 被闪电束击中的[[猪]]会变成[[僵尸猪灵]]。
+* 被闪电束击中的[[苦力怕]]会变成[[闪电苦力怕]]。
+* 被闪电束击中的[[村民]]会变成[[女巫]]。
+* 被闪电束击中的红色[[哞菇]]会变成棕色哞菇，反之亦然。
+* 被闪电束击中的[[铜傀儡]]会降低锈蚀程度。
+
+以上生物被闪电束击中时，假设在承受闪电伤害后该生物的生命值仍然大于或等于0，则该生物不会受到闪电伤害或附加[[着火]]效果，且立即转化。反之，假设在承受闪电伤害后该生物的生命值将小于0，则该生物会受到闪电伤害并直接死亡，无法转化。
+
+{{in|be}}以上生物被闪电束击中时不会受到闪电伤害或附加[[着火]]效果，但仍可被生成的火焰点燃。
+
+{{in|be}}[[苦力怕]]和[[哞菇]]被闪电束击中会立刻转化，而[[猪]]和[[村民]]则会在闪电持续时间结束后完成转化，如果持续受到闪电伤害则会一直无法完成转化直到闪电持续时间结束，且此过程中不会受到闪电伤害或附加[[着火]]效果。
+
+被用附有[[引雷]]魔咒的[[三叉戟]]击中时，即使该生物（除[[苦力怕]]和{{only|be|for=哞菇}}外）在受到两次伤害后生命值将小于0，该生物仍然会在死亡后于[[闪电束]]落下的位置重新生成一个新实体。
+
+除[[苦力怕]]和{{only|be|for=哞菇}}在转化时仅修改实体数据，[[猪]]、[[村民]]及{{only|je|for=哞菇}}都会在转化时删除本体并生成一个新实体。
+
+=== 避雷针 ===
+以任何原因被生成的闪电束在击中[[避雷针]]后，避雷针会输出[[红石信号]]。
+
+=== 铜质方块 ===
+{{main|氧化#闪电束}}
+
+以任何原因被生成的闪电束在击中铜质方块或附着于铜质方块的避雷针后，铜质方块的锈蚀程度会降低。
+
+=== 生成骷髅陷阱 ===
+{{main|骷髅陷阱}}
+[[File:SkeletonRiderGroup.png|缩略图|右|250px|雷暴中生成的一个[[骷髅马#生成|骷髅陷阱]]]]
+自然生成的闪电束在落下且未击中[[避雷针]]时，有概率生成[[骷髅陷阱马]]，生成概率分别为0.75–1.5%（简单难度）、1.5–4%（普通难度）、2.8125–6.75%（困难难度），具体值取决于[[区域难度]]。
+
+当玩家移动到骷髅陷阱马的10格以内时，就会触发陷阱，生成[[#骷髅陷阱|装饰性的闪电束]]，且骷髅陷阱马会变成四个[[骷髅骑士]]。未触发的陷阱马将在15分钟后自动消失。
+
+=== 雷声 ===
+'''雷声（Thunder）'''是每次闪电束发生时随之发生的声音事件。以闪电束为中心，渲染距离范围之内的玩家都可以同时听到雷声。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Thunder1.ogg
+|sound2=Thunder2.ogg
+|sound3=Thunder3.ogg
+|source=天气
+|description=雷鸣
+|subtitle={{tp|subtitles.entity.lightning_bolt.thunder}}
+|id=entity.lightning_bolt.thunder
+|translationkey=subtitles.entity.lightning_bolt.thunder}}
+{{Sound table
+|sound=Explosion1.ogg
+|sound2=Explosion2.ogg
+|sound3=Explosion3.ogg
+|sound4=Explosion4.ogg
+|source=天气
+|description=闪电束击中地面
+|subtitle={{tp|subtitles.entity.lightning_bolt.impact}}
+|id=entity.lightning_bolt.impact
+|translationkey=subtitles.entity.lightning_bolt.impact}}
+{{Sound table
+|sound=Trident thunder1.ogg
+|sound2=Trident thunder2.ogg
+|subtitle={{tp|subtitles.item.trident.thunder}}
+|source=玩家
+|description=带有引雷的三叉戟击中目标
+|id=item.trident.thunder
+|translationkey=subtitles.item.trident.thunder
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=ambient.weather.thunder1.wav
+|sound2=ambient.weather.thunder2.wav
+|sound3=ambient.weather.thunder3.wav
+|source=天气
+|description=雷鸣
+|id=ambient.weather.thunder
+|typeid=thunder
+|soundvolume=1000.0
+|soundpitch=0.6-1
+|sounddistance=100
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=random.explode1.ogg
+|sound2=random.explode2.ogg
+|sound3=random.explode3.ogg
+|sound4=random.explode4.ogg
+|source=天气
+|description=闪电束击中地面
+|id=ambient.weather.lightning.impact
+|typeid=explode
+|soundvolume=1000.0
+|soundpitch=0.3-0.7
+|sounddistance=100
+}}
+{{Sound table
+|bedrock=1
+|sound=item.trident.thunder1.wav
+|sound2=item.trident.thunder2.wav
+|source=玩家
+|description=带有引雷的三叉戟击中目标
+|id=item.trident.thunder
+|typeid=item.trident.thunder
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Lightning Bolt
+|spritetype=entity
+|nameid=lightning_bolt
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Lightning Bolt
+|spritetype=entity
+|nameid=lightning_bolt
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+闪电束有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 进度 ==
+{{load advancements|prefix=adventure|lightning_rod_with_villager_no_fire;very_very_frightening}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|[[File:Lightning Bolt JE1 BE1.png|13px]] 加入了雷暴和闪电束。
+|闪电束劈中猪会使其变成僵尸猪人。
+|闪电束劈中苦力怕会使其变成闪电苦力怕。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w03a|现在闪电束劈中村民会使其变成女巫。}}
+|{{HistoryLine|||dev=14w30a|现在可以通过命令{{cmd|summon LightningBolt}}来召唤闪电束。}}
+|{{HistoryLine|||dev=14w32a|现在闪电束可以伤害下界生物和带火焰保护状态的生物。}}
+|{{HistoryLine||1.9|dev=15w38a|现在闪电束有一定概率（取决于[[难度#区域难度|区域难度]]）生成[[骷髅陷阱马]]。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID由<code>LightningBolt</code>更改为<code>lightning_bolt</code>。}}
+|{{HistoryLine||1.13|dev=18w07a|现在向露天生物投掷带有[[引雷]]魔咒的[[三叉戟]]可召唤闪电束。}}
+|{{HistoryLine||1.14|dev=19w08a|现在闪电束劈中红色[[哞菇]]会使其变成棕色哞菇，反之亦然。}}
+|{{HistoryLine|||dev=19w11a|现在闪电束不再能转化濒死的生物。<ref>{{bug|MC-114559|||Fixed}}</ref>}}
+|{{HistoryLine||1.16|dev=pre1|闪电束现在可以被[[目标选择器]]选中。<ref>{{bug|MC-64623|||Fixed}}</ref>
+|现在玩家现在只会接收到渲染距离内的雷声。此前，所有位于闪电束发生的维度且距离闪电束16万格之内的玩家都可以同时听到雷声。<ref>{{bug|MCPE-83601|||WAI}}其中的评论可能有相关信息。</ref>}}
+|{{HistoryLine||1.17|dev=20w45a|闪电束现在可以被16×16范围内的[[避雷针]]吸引。}}
+|{{HistoryLine|||dev=20w46a|闪电束现在可以被32×32范围内的[[避雷针]]吸引。}}
+|{{HistoryLine|||dev=21w11a|现在闪电束可以减轻[[铜块]]及其所有未涂蜡变种的锈蚀程度。}}
+|{{HistoryLine||1.18|dev=21w37a|现在可以在辅助功能设置中隐藏闪电束的闪烁效果。}}
+|{{HistoryLine||1.21.2|dev=24w40a|现在不再能通过命令{{cmd|ride}}骑乘闪电束。}}
+|{{HistoryLine||1.21.9|dev=25w36a|由于漏洞，现在被涂蜡的避雷针吸引的闪电不再能对避雷针附近的铜质方块除锈。<ref name="MC-302409">{{bug|MC-302409|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.11|dev=25w42a|修复了25w36a中的漏洞。<ref name="MC-302409"/>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|[[File:Lightning Bolt JE1 BE1.png|13px]] 加入了雷暴和闪电束。}}
+|{{HistoryLine||0.14.0|dev=build 1|现在闪电束劈中村民会使其变成女巫。}} 
+|{{HistoryLine||0.16.0|dev=build 1|现在闪电束有一定概率（取决于[[难度#区域难度|区域难度]]）生成[[骷髅陷阱马]]。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|实体ID由<code>lightningbolt</code>更改为<code>lightning_bolt</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.13.8|现在向露天生物投掷带有[[引雷]]魔咒的[[三叉戟]]可召唤闪电束。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.9|现在闪电束劈中红色哞菇会使其变成棕色哞菇，反之亦然。}}
+|{{HistoryLine||1.16.210|exg=caves_and_cliffs_en|dev=1.16.210.57|闪电束现在可以被64×64范围内的避雷针吸引。}}
+|{{HistoryLine||1.16.220|exg=caves_and_cliffs_en|dev=1.16.220.52|现在闪电束可以减轻铜块的锈蚀程度。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.52|1.16.210.57和1.16.220.52中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Lightning Bolt JE1 BE1.png|13px]] 加入了雷暴和闪电束。}}
+}}
+
+== 你知道吗 ==
+* 闪电束不像游戏中的多数效果和实体，不具有相关的图像文件，而是被直接编码入游戏引擎中来制造动态、逼真的闪电束。
+* {{in|be}}由于生成范围的限制，与{{el|je|ce}}相比，玩家更容易被闪电束击中。
+* 当多个闪电束同时击中一个村民时，生成的女巫数量和闪电束的数量是相等的，所以可以由一个村民生成多个女巫；这对猪转变成僵尸猪灵同样有效。
+** 但这对苦力怕转变成闪电苦力怕无效。这是因为后者只是修改了数据值，而并非生成新实体。
+* 在游戏中无法透过闪电束看见实体、生物、水、玻璃等等。
+* 闪电束看上去是从云层生成的，然而闪电束的动画从击中的地方起有128格长（巧合的是这也是云层与海平面之间的距离），例如在海平面上（Y=63）的闪电束是从Y=191处劈下来的。这也就是说从云层产生的“现实的”闪电束只会出现在海平面处。
+* 在[[Java版1.16-pre1]]前，利用闪电束仅会发生在已加载区块且雷声能在极远距离被听见的特性，玩家可以通过被修改过的客户端或抓包来获取雷声发生位置的准确坐标，导致有其他玩家的位置泄漏，即知名的雷声漏洞。
+
+== 画廊 ==
+<gallery>
+File:Lightning.png|闪电束底部的外观
+File:LightningStrike.gif|一道闪电束击中一棵树
+File:Villager becoming Witch.gif|村民遭受雷击并转化成女巫
+File:Void Thunder.png|在虚空里打雷时的样子
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|Non-mobs}}
+
+[[de:Gewitter]]
+[[en:Thunderstorm]]
+[[es:Tormenta]]
+[[fr:Orage]]
+[[ja:雷雨]]
+[[ko:뇌우#번개]]
+[[nl:Onweersbui]]
+[[pl:Burza]]
+[[pt:Tempestade]]
+[[ru:Погода#Гроза]]

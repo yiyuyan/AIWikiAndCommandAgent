@@ -1,0 +1,826 @@
+# 页面: 铁傀儡
+# 来源: https://zh.minecraft.wiki/w/%E9%93%81%E5%82%80%E5%84%A1
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 友好生物, 基岩版独有信息, 实体, 嵌入Bilibili视频的页面, 已过期的视频, 待更新条目, 教育版独有信息, 有未知版本的History模板的页面/Java版, 有未知版本的History模板的页面/基岩版, 需要信息
+# 抓取时间: 2026-07-14 17:37:46
+# 原始 Wikitext 内容:
+
+{{for|愚人节版本[[15w14a]]中的变种|爱心傀儡|Minecraft Dungeons里的生物|MCD:铁傀儡}}
+{{Infobox entity
+|group1=正常
+|1-1=Iron Golem.png
+|group2=轻微开裂
+|2-1=Iron Golem Cracked Low.png
+|group3=中等开裂
+|3-1=Iron Golem Cracked Medium.png
+|group4=严重开裂
+|4-1=Iron Golem Cracked High.png
+|invimage=Iron Golem Spawn Egg
+|health={{hp|100}}
+|behavior=友好生物
+|damage=
+'''近战攻击{{only|je|short=1}}：'''<br>{{AutoDmg|7.5|21.5}}<br>'''近战攻击{{only|be|short=1}}：'''<br>{{AutoDmg|7|21}}
+|size=
+'''{{el|je}}'''：<br>高度：2.7格<br>宽度：1.4格<br>
+'''{{el|be}}'''：<br>高度：2.9格<br>宽度：1.4格
+|usableitems=
+{{ItemLink|Iron Ingot}}<br>
+{{ItemLink|Lead}}<br>
+{{ItemLink|Name Tag}}
+|spawn=
+由玩家或[[发射器]]建造<br>
+{{EnvLink|Pillager Outpost}}<br>
+{{EnvLink|village}}
+}}
+{{quote|……有一个很好的理由让你不敢去惹村民：它们时刻被铁傀儡守护着，这些“钢铁巨人”不会溺水、不会摔伤，甚至免疫击退效果。它们挥一下手臂就能造成巨大的伤害。如果你攻击了村民，我们很同情你——真的同情你——因为此时你已成为铁傀儡的敌人。激怒铁傀儡也将成为你今生最后的壮举——铁傀儡是主世界中最强悍的生物之一；如果你打不过它，这不足为奇。|[[Tom Stone]]<ref>{{article|meet-iron-golem|Meet the Iron Golem|February 27,2017}}</ref>||Tom Stone Mojavatar.png}}
+
+'''铁傀儡（Iron Golem）'''是一种高大且强壮的友好生物，用于保护[[玩家]]和[[村民]]。
+
+== 生成 ==
+铁傀儡会随村庄一同生成于村庄会合点处。
+
+=== 村民 ===
+{{see also|村民#生成铁傀儡}}
+
+==== Java版 ====
+村民生成铁傀儡的过程与其职业和上次工作的时间无关，如果村民在前{{convert|24000||分}}内睡过觉且在前{{convert|600}}内没有观察到铁傀儡，则该村民产生生成铁傀儡的意愿。村民每过{{convert|200}}就会观察一次周围是否存在铁傀儡。如果存在铁傀儡的[[边界箱]]与该村民边界箱各个方向膨胀16格形成的包围盒相交，即视为观察到周围存在铁傀儡。
+
+村民每{{convert|1200}}内最多传播一次言论，若该村民有生成铁傀儡的意愿，且还存在另外4个边界箱与该村民边界箱各个方向膨胀10格的包围盒相交的有意愿的村民（合计5名村民为一组单位），在言论传播时铁傀儡就会尝试生成。铁傀儡生成后，该村民及其周围10格内的所有其他村民会进入{{convert|600}}的冷却时间，在冷却时间内它们也会继续观察周围是否存在铁傀儡。
+
+如果村民受伤或处在惊慌状态下，且在20分钟内有过一次睡觉，也会每{{convert|100}}尝试生成1次铁傀儡，这种情况下只需要3名有意愿的村民而非5名为一组单位。这种生成方式一样会受到16格范围内的铁傀儡侦测和冷却{{convert|600}}的限制。
+
+当村民尝试生成1个铁傀儡时，系统最多会尝试10次，在以该村民为中心的17×13×17格范围内（村民所在方块坐标的水平方向±8格，竖直方向±6格范围内）生成1个铁傀儡。每次尝试生成铁傀儡时，系统会在这个范围内随机选择一个高13格的1×1柱状区域，然后从这个柱状区域的最顶部开始向下查找，直到找到一个合适位置，若无法找到合适位置则这次尝试失败。即：若多个合适位置的X坐标和Z坐标相同，铁傀儡只会生成在最高的那个，低处的合适位置无法生成铁傀儡。
+
+铁傀儡的合适位置需符合以下条件：
+* 该处需为空气或液体
+* 该处下方的方块必须是[[固体方块]]或[[细雪]]{{note|细雪是铁傀儡生成判定必要条件之一，尽管铁傀儡在实际生成中无法生成在细雪上。}}
+* 该处下方不能是下列方块：
+** [[冰]]
+** [[浮冰]]
+** [[玻璃]]（含染色与[[遮光玻璃|遮光]]变种）
+** [[玻璃板]]（含染色变种）
+** [[树叶]]
+** [[仙人掌]]
+** [[TNT]]
+** [[蜘蛛网]]
+** [[信标]]
+** [[荧石]]
+** [[海晶灯]]
+** [[潮涌核心]]
+
+选定合适位置后，若该位置下方为[[生成#可生成位置|可生成方块]]，且生成的铁傀儡不会和任何其他实体和方块的碰撞箱碰撞，则铁傀儡会被生成在此处；否则，此次尝试失败。
+
+==== 基岩版 ====
+铁傀儡的生成具有以下条件：
+* 村庄中至少存在20张床和10个村民。
+* 村庄已有铁傀儡数量小于村庄可生成铁傀儡上限，每多10个村民，村庄可存生成铁傀儡上限加1，但不影响铁傀儡生成速度。
+* 村庄中75%的村民必须在过去的一天里工作过。
+* [[村庄]]内的所有村民都必须与[[床]]绑定，且村民的数量少于或等于床的数量。
+*玩家必须位于村庄加载范围内。与[[模拟距离]]决定的加载范围不同，村庄加载范围仅为[[村庄#村庄与范围|村庄范围]]向X、Y、Z轴正负各扩展'''模拟距离×8'''格形成的长方体区域。
+[[File:Village tick distance.png|thumb|150px|村庄加载范围的平面图，其中黄色方框是村庄范围，绿色虚线方框是村庄加载范围]]
+
+满足条件后每[[刻]]都有{{frac|1|700}}的概率尝试生成（平均每35秒1次）。铁傀儡生成在围绕由床、钟或其他工作方块构建的村庄范围的中心的17×13×17范围内的最高可生成位置。生成点上方3×3×3的空间上（即铁傀儡所在生成方块的西北角处水平居中点）需满足碰撞箱检测，当碰撞箱不足以生成铁傀儡时生成失败。
+
+铁傀儡生成点必须为除楼梯以外上表面西北角完整的方块（如炼药锅、堆肥桶），所在生成方块的上方一格必须全部为[[生成#空气检测|真空气方块]]（即空气、流体）才能生成。
+
+当铁傀儡被村庄生成后同时离开村庄，会造成该村庄在一段时间内判定铁傀儡未脱离村庄，在这段时间中，该村庄的可铁傀儡刷新上限会被占用，该情况称为铁傀儡迷失。
+造成铁傀儡迷失的情况（包括但不限于以下情况）：
+*当铁傀儡生成后立刻进入末地传送门。
+*村庄生成铁傀儡的瞬间铁傀儡移民到其他村庄。
+
+=== 掠夺者前哨站 ===
+[[File:Pillager outpost feature cage2.png|thumb|150px|带有一个铁傀儡的掠夺者前哨站牢笼]]
+[[掠夺者前哨站]]的深色橡木笼子里可能会生成一个铁傀儡。
+
+=== 建造 ===
+{{FakeImage|align=left|{{BlockGrid|scale=2|p=carved pumpkin|i=Block of Iron| p |iii| i }}|一种可生成铁傀儡的结构图示}}
+{{FakeImage|align=left|{{BlockGrid|scale=2|p=Jack o'Lantern|i=Block of Iron| p |iii| i }}|另一种结构}}
+
+将4个[[铁块]]摆放成T形（如图所示），然后将[[雕刻南瓜]]或[[南瓜灯]]放置在T字的正上方，即可生成一个铁傀儡。由玩家建造的铁傀儡永远不会攻击玩家。
+
+雕刻南瓜或南瓜灯必须最后放置。雕刻南瓜可以被[[末影人]]和[[发射器]]放置。{{in|be}}南瓜灯也能被发射器放置。放置[[南瓜]]不能生成铁傀儡，但用[[剪刀]]修剪后可以生成。
+
+这个结构可以直立、躺下或颠倒放置。图中的4个空位置（即“双臂”的上方和下方）必须是[[空气]]。如果将结构以躺下的形式放置，铁傀儡将生成在T形中最下方铁块的位置。
+
+和其他构建而成的生物一样，铁傀儡在生成时总是朝南。它们较大的尺寸可能会导致头部被其他固体方块阻挡并受到窒息伤害。
+{{-}}
+
+==== 更新区域 ====
+[[File:Iron_Golem_creation_update_area.png|thumb|一些铁傀儡结构的更新区域（视角向南）]]
+{{exclusive|java|section=1}}
+当已存在一个完整的铁傀儡结构但没有生成铁傀儡时（由于方块放置顺序或先前有多余方块干扰），玩家能在特定区域再放置一个雕刻南瓜或南瓜灯来“更新”结构生成铁傀儡。
+
+更新区域的具体范围为：以铁傀儡结构的头部一行方块为起点，向X轴负方向（西）、Z轴负方向（北）以及向下各扩展2格。除开结构本身所需的空气方块。
+
+若发射器周围有完整的铁傀儡结构，或是仅缺失头部的铁傀儡结构（头部位置为空气或其他方块，其余位置满足要求），且发射器面对的位置在更新区域内（也包括结构本身空气方块的位置），发射器就能将雕刻南瓜放置在面前，即使这样做可能无法生成铁傀儡。
+
+== 掉落物 ==
+{{see also|Tutorial:铁傀儡陷阱}}
+{{DropTable|name=Iron Golem
+|{{DropLine|name=Poppy|quantity=0-2}}
+|{{DropLine|name=Iron Ingot|quantity=3-5}}
+}}
+
+== 行为 ==
+铁傀儡会在[[村庄]]周围缓慢地徘徊来进行巡逻，会一直贴着建筑物以及其他结构的边缘。与村民类似，无论它们是在何处生成的，它们都不会离开村庄。有时铁傀儡会像在和村民交谈一般面对村民。
+
+{{in|bedrock}}只有村庄自然生成的铁傀儡不会离开村庄。<ref>{{bug|MCPE-46240|||WAI}}</ref>当一个铁傀儡远离它所属的村庄时，铁傀儡会寻找该村庄并跑向村庄。
+
+铁傀儡可以直接走上1格高的方块而无需跳跃。它们会尝试避开[[水]]、[[熔岩]]、[[火]]、[[仙人掌]]。铁傀儡免疫溺水伤害和摔落伤害。在水中，铁傀儡会沉入水底，但是它们仍然能够在水下自由移动。
+
+与大部分友好生物类似，铁傀儡可以被[[拴绳]]拴住。
+
+{{in|bedrock}}铁傀儡移动的速度会快一些。但是闲逛时的行走会有顿挫感。
+
+{{in|je}}铁傀儡在行走时会在脚下产生粒子。它们要比基岩版的同类行走更加顺滑。
+
+{{in|be}}即使铁傀儡有攻击目标，铁傀儡也不会主动走下至少2格高的高度或走入水中。<ref>{{bug|MCPE-237136}}</ref>
+
+=== 攻击 ===
+铁傀儡会主动追踪并攻击16格内的{{only|for=[[僵尸鹦鹉螺]]|be}}<ref name="Zombie Nautilus">{{bug|MCPE-235914}}</ref>和绝大多数敌对生物，包括飞行敌对生物（[[恶魂]]和{{only|be|for=[[末影龙]]}}除外）。{{in|be}}如果玩家在一个村庄的[[声望]]值在-15及以下，任何在该村庄自然生成的铁傀儡都会与玩家敌对；{{in|je}}如果附近有村民对某个玩家的声望小于-100，则该村庄的铁傀儡会与此玩家敌对。铁傀儡被生物攻击时会进行反击。由玩家建造的铁傀儡永远不会攻击玩家。{{in|je}}村庄自然生成的铁傀儡不会直接因为生物攻击了村民而攻击该生物，{{in|be|nc=1}}则会。并且{{in|be}}当该村庄中自然生成的铁傀儡被生物攻击时，则该村庄中所有自然生成的铁傀儡都会攻击该生物。
+
+当铁傀儡被激怒时，它们会快速跑向目标。铁傀儡会抡起双臂对目标进行攻击，并将目标抛向空中。
+
+多个铁傀儡可能会同时击中同一目标，目标被铁傀儡抛向空中的高度与对其进行攻击的铁傀儡的数量有关。
+
+{{in|be}}铁傀儡会感知到[[袭击]]事件中的灾厄村民的位置并且向其移动，即使它们不在铁傀儡的视线范围内或藏在建筑后或地底下时也是如此。
+
+{{in|be}}铁傀儡的近战攻击伤害不受[[力量（状态效果）|力量]]和[[虚弱]]状态效果影响。<ref>{{bug|MCPE-45823}}</ref>
+
+下表列出了生物是否会被铁傀儡主动攻击或者主动攻击铁傀儡。注意：即使一些生物不会主动攻击铁傀儡，也会在被攻击后反击；即使生物不会主动攻击铁傀儡，它们的攻击方式（如弹射物）也可能会误伤铁傀儡并导致铁傀儡反击。
+
+{| class="wikitable sortable"
+!生物
+!铁傀儡主动攻击此生物
+!此生物主动攻击铁傀儡
+!备注
+|-
+|{{only|be|ee|for={{EntityLink|Agent}}}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Axolotl}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Bee}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Blaze}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Breeze}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Creaking}}
+|{{Tc|yes}}
+|{{Tc|no}}
+| 嘎枝只与玩家敌对，不会反击铁傀儡。
+|-
+|{{EntityLink|Nautilus}}
+|{{Tc|no}}
+|{{Tc|no}}
+|仅当它们不小心冲撞到铁傀儡时才会被反击。
+|-
+|{{EntityLink|Zombie Nautilus}}
+|{{Tc|yes}}{{only|be}}
+|{{Tc|no}}
+|{{in|je}}仅当僵尸鹦鹉螺不小心冲撞到铁傀儡时才会被反击。{{in|be}}铁傀儡会主动攻击僵尸鹦鹉螺。
+|-
+|{{EntityLink|Sulfur Cube}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Cat}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Creeper}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Dolphin}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Drowned}}
+|{{Tc|Yes}}
+|{{Tc|partial}}
+|溺尸通常会在晚上主动攻击铁傀儡。溺尸在白天只会主动攻击在水中的铁傀儡。<br>{{in|java}}白天未携带三叉戟的溺尸不会对不在水中的铁傀儡发起攻击，携带三叉戟的溺尸对于不在水中的铁傀儡则为条件敌对，当铁傀儡攻击其中一个溺尸时，附近携带三叉戟的溺尸都会反击铁傀儡。{{in|be}}白天溺尸不会主动攻击不在水中的铁傀儡，会在受到攻击时反击。
+|-
+|{{EntityLink|Ender dragon}}
+|{{Tc|yes}}{{only|je}}
+|{{Tc|no}}
+|末影龙只与玩家敌对，不会反击铁傀儡。<br>{{in|be}}铁傀儡不会主动攻击末影龙。
+|-
+|{{EntityLink|Enderman}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Endermite}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|{{in|be}}末影螨只与玩家和末影人敌对，不会反击铁傀儡。
+|-
+|{{EntityLink|Evoker}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Fox}}
+|{{Tc|no}}
+|{{Tc|no}}
+|{{in|be}}当玩家被铁傀儡攻击时，信任该玩家的狐狸会反击铁傀儡。
+|-
+|{{EntityLink|Frog}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Goat}}
+|{{Tc|no}}
+|{{Tc|partial|随机}}
+|铁傀儡不会因山羊的冲撞攻击而反击。
+|-
+|{{Only|je|for={{EntityLink|Giant}}}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Ghast}}
+|{{Tc|no}}
+|{{Tc|no}}
+|{{in|je}}仅当恶魂距离铁傀儡太近时才会被攻击，恶魂只与玩家敌对，不会反击铁傀儡。<br>{{in|be}}铁傀儡在任何情况下都不会攻击恶魂。
+|-
+|{{EntityLink|Guardian}}<br>{{EntityLink|Elder guardian}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|守卫者和远古守卫者不会反击铁傀儡。
+|-
+|{{EntityLink|Hoglin}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|{{in|be|nc=1}}的和平难度下，铁傀儡不会主动攻击疣猪兽。
+|-
+|{{only|je|for={{EntityLink|Illusioner}}}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Iron golem|link=none}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{only|je|for={{EntityLink|Killer bunny}}}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Llama}}<br>{{EntityLink|Trader llama}}
+|{{Tc|no}}
+|{{Tc|no}}
+|仅当它们的唾沫不小心攻击到铁傀儡时才会被反击。
+|-
+|{{EntityLink|Magma cube}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Ocelot}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Panda}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Phantom}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|幻翼只与玩家敌对，不会反击铁傀儡。
+|-
+|{{EntityLink|Piglin}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|仅当铁傀儡攻击猪灵或猪灵蛮兵时反击，幼年猪灵不会反击。
+|-
+|{{EntityLink|Piglin brute}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|仅当铁傀儡攻击猪灵或猪灵蛮兵时反击。
+|-
+|{{EntityLink|Pillager}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Player}}
+|{{Tc|partial}}
+|{{Tc|partial}}
+|由玩家创造的铁傀儡在任何情况下都不会攻击玩家。<br>自然生成、使用命令或[[刷怪蛋]]生成的铁傀儡被玩家攻击时会反击。<br>{{only|be|for=玩家在特定村庄中的[[声望]]值小於等於-15}}或{{only|je|for=附近村民的[[言论]]声望值小於-100}}時会受到自然生成的铁傀儡主动攻击。
+|-
+|{{EntityLink|Polar bear}}
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Pufferfish}}
+|{{Tc|no}}
+|{{Tc|no}}
+|铁傀儡被附近的河豚伤害时才会反击。
+|-
+|{{EntityLink|Ravager}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Shulker}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|
+|-
+|rowspan=2|{{EntityLink|Silverfish}}
+|rowspan=2{{Tc|yes}}
+|{{Tc|yes|是{{only|be}}}}
+|rowspan=2|{{in|je|nc=1}}仅当铁傀儡攻击其中一只蠹虫时反击。{{in|be|nc=1}}总是会攻击铁傀儡。
+|-
+|{{Tc|no|否{{only|java}}}}
+|-
+|{{EntityLink|Skeleton}}<br>{{EntityLink|Stray}}<br>{{EntityLink|Wither Skeleton}}<br>{{EntityLink|Bogged}}<br>{{EntityLink|Parched}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Slime}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Snow golem}}
+|{{Tc|no}}
+|{{Tc|no}}
+|仅当它们的雪球不小心攻击到铁傀儡时才会被反击。<br>雪傀儡只会攻击敌对生物，不会反击铁傀儡。
+|-
+|{{EntityLink|Spider}}<br>{{EntityLink|Cave Spider}}<br>{{EntityLink|Spider Jockey}}<br>{{only|for={{EntityLink|id=Cave Spider Jockey|蜘蛛骑士|洞穴蜘蛛骑士}}|be}}
+|{{Tc|yes}}
+|{{Tc|partial}}
+|仅当亮度等级小于等于11时才会主动攻击铁傀儡，其中蜘蛛骑士和洞穴蜘蛛骑士中的骷髅会主动攻击铁傀儡。
+|-
+|rowspan=2|{{EntityLink|Vex}}
+|rowspan=2{{Tc|yes}}
+|{{Tc|yes|是{{only|be}}}}
+|rowspan=2|{{in|je}}当唤魔者指定铁傀儡为目标时，恼鬼才会主动攻击铁傀儡。{{in|be}}恼鬼总是会主动攻击铁傀儡。
+|-
+|{{Tc|partial|部分{{only|je}}}}
+|-
+|{{EntityLink|Villager}}
+|{{Tc|no}}
+|{{Tc|no}}
+|{{in|je}}当袭击胜利后，村民的烟花火箭误伤到铁傀儡时，铁傀儡才会攻击村民。{{in|be}}村民也会发射烟花火箭，但铁傀儡不会因为被村民的烟花火箭误伤而反击。
+|-
+|{{EntityLink|Vindicator}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Warden}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|rowspan=2|{{EntityLink|Witch}}
+|rowspan=2{{Tc|yes}}
+|{{Tc|yes|是{{only|be}}}}
+|rowspan=2|
+|-
+|{{Tc|no|否{{only|java}}}}
+|-
+|{{EntityLink|Wither}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Wolf}}
+|{{Tc|no}}
+|{{Tc|partial}}
+|仅当驯服它的玩家攻击铁傀儡时。<br>当玩家被铁傀儡攻击时其驯服的狼也会反击铁傀儡。
+|-
+|{{EntityLink|Zombie}}<br>{{EntityLink|Husk}}<br>{{EntityLink|Zombie Villager}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|{{EntityLink|Zombified piglin}}
+|{{Tc|yes}}
+|{{Tc|no}}
+|
+|-
+|{{EntityLink|Zoglin}}
+|{{Tc|yes}}
+|{{Tc|yes}}
+|
+|-
+|所有无伤害能力的友好生物
+|{{Tc|no}}
+|{{Tc|no}}
+|
+|}
+
+=== 承受伤害 ===
+[[僵尸]]及其变种（[[僵尸猪灵]]除外）、[[骷髅]]及其变种、[[蜘蛛]]、[[洞穴蜘蛛]]、[[旋风人]]、[[史莱姆]]、[[岩浆怪]]和[[灾厄村民]]都会主动攻击铁傀儡，且可能会对其造成严重的伤害，特别是在它们成群攻击的情况下。如果铁傀儡被多个生物攻击，那么它就会按照这些生物攻击它的顺序来对这些生物进行反击。{{in|be}}[[恼鬼]]、[[蠹虫]]和[[女巫]]也会主动攻击铁傀儡。
+
+铁傀儡有100％的击退抗性，但{{in|je}}铁傀儡可以被附有[[冲击]]魔咒的[[弓]]击退，而{{in|bedrock|nc=1}}则不能。
+
+=== 开裂 ===
+铁傀儡剩余的生命值可通过其身上裂纹的数量反映出来，其{{only|for=生命值每损失25%|je}}或{{only|for=生命值为{{hp|100}}时每损失{{hp|25}}|be}}，开裂就会变严重一些。铁傀儡受不同程度损伤时对应的纹理共有4种。
+
+=== 治疗 ===
+玩家可以通过对受伤的铁傀儡{{ctrl|使用}}[[铁锭]]来为其恢复生命值，每个[[铁锭]]可以恢复{{hp|25}}的生命值。
+
+=== 送花 ===
+[[File:Iron_Golem_holding_Poppy_BE4.png|缩略图|一个送出虞美人的铁傀儡]]
+
+铁傀儡每2个游戏刻有{{frac|1|8000}}的概率，在自身碰撞箱X轴和Z轴方向两侧各扩展6格、在Y轴方向上下各扩展2格的范围内，尝试寻找幼年村民或[[铜傀儡]]，并选择其中最近的目标送出[[虞美人]]。{{in|je}}此过程需要铁傀儡所在处的天空光照等级≥12，{{in|be|nc=1}}则需要其位于主世界。
+
+在找到目标后的400游戏刻内，铁傀儡会抬起右手拿着虞美人并面向目标，尝试送出虞美人。铁傀儡不会采摘虞美人，准备送出的虞美人会直接出现在铁傀儡的右手。
+
+{{in|be}}如果铁傀儡送出虞美人的目标是铜傀儡，铜傀儡会靠近并面向铁傀儡。{{in|je}}铜傀儡不会理睬铁傀儡。当两者的碰撞箱相交且铜傀儡的头上没有虞美人时，铁傀儡手上的虞美人会消失，而铜傀儡的头上会出现一株虞美人。
+
+{{in|be}}如果铁傀儡送出虞美人的目标是幼年村民，在铁傀儡找到目标后80—400游戏刻内的某个时刻，该幼年村民会靠近并面向铁傀儡，随后“接过”虞美人。<ref>{{in|je}}幼年村民因{{bug|MC-159069}}无法接受铁傀儡送出的虞美人。</ref>尽管如此，村民的物品栏中并不会出现虞美人。
+
+=== 首选路径 ===
+{{exclusive|bedrock|section=1}}
+和[[村民]]一样，{{in|bedrock|nc=1}}铁傀儡会优先步行在下列“成本”较小的方块上。
+{| class="wikitable sortable collapsible" data-description="偏好方块"
+|-
+! 路径方块 !! 方块“成本”
+|-
+|{{BlockLink|Dirt path}}
+|0
+|-
+|{{BlockLink|Cobblestone}}<br>
+{{BlockLink|Stone}}<br>
+{{BlockLink|Stone Bricks}}<br>
+{{BlockLink|Sandstone}}<br>
+{{BlockLink|Mossy Cobblestone}}<br>
+{{BlockLink|Slabs}}<br>
+{{BlockLink|Planks}}<br>
+{{BlockLink|Bricks}}<br>
+{{BlockLink|Nether Bricks}}<br>
+{{BlockLink|Red Nether Bricks}}<br>
+{{BlockLink|End Stone Bricks}}<br>
+{{BlockLink|Red Sandstone}}<br>
+{{BlockLink|Stained Glass}}<br>
+{{BlockLink|Glass}}<br>
+{{BlockLink|Glowstone}}<br>
+{{BlockLink|Prismarine}}<br>
+{{BlockLink|Block of Emerald}}<br>
+{{BlockLink|Block of Diamond}}<br>
+{{BlockLink|Lapis Lazuli Block}}<br>
+{{BlockLink|Block of Gold}}<br>
+{{BlockLink|Block of Redstone}}<br>
+{{BlockLink|Glazed Terracotta}} 
+|1
+|-
+|{{BlockLink|Beds}}<br>
+{{BlockLink|Lectern}}<br>
+{{BlockLink|Composter}}<br>
+{{BlockLink|Grindstone}}<br>
+{{BlockLink|Blast Furnace}}<br>
+{{BlockLink|Smoker}}<br>
+{{BlockLink|Fletching Table}}<br>
+{{BlockLink|Cartography Table}}<br>
+{{BlockLink|Brewing Stand}}<br>
+{{BlockLink|Smithing Table}}<br>
+{{BlockLink|Cauldron}}<br>
+{{BlockLink|Barrel}}<br>
+{{BlockLink|Loom}}<br>
+{{BlockLink|Stonecutter}}
+|50
+|-
+|其他
+|1.5
+|-
+!跳跃“成本”
+|5
+|}
+
+== 音效 ==
+{{edition|java}}：
+{{Sound table
+|sound = Iron Golem walk1.ogg
+|sound2 = Iron Golem walk2.ogg
+|sound3 = Iron Golem walk3.ogg
+|sound4 = Iron Golem walk4.ogg
+|subtitle = {{tp|subtitles.block.generic.footsteps}}
+|source = 友好生物
+|description = 行走
+|id = entity.iron_golem.step
+|translationkey = subtitles.block.generic.footsteps
+}}
+{{Sound table
+|sound = Iron Golem damage1.ogg
+|sound2 = Iron Golem damage2.ogg
+|subtitle = {{tp|subtitles.entity.iron_golem.damage}}
+|source = 友好生物
+|description=开裂程度增加
+|id = entity.iron_golem.damage
+|translationkey = subtitles.entity.iron_golem.damage
+}}
+{{Sound table
+|sound = Iron Golem death.ogg
+|subtitle = {{tp|subtitles.entity.iron_golem.death}}
+|source = 友好生物
+|description=死亡
+|id = entity.iron_golem.death
+|translationkey = subtitles.entity.iron_golem.death
+}}
+{{Sound table
+|sound = Iron Golem hit1.ogg
+|sound2 = Iron Golem hit2.ogg
+|sound3 = Iron Golem hit3.ogg
+|sound4 = Iron Golem hit4.ogg
+|subtitle = {{tp|subtitles.entity.iron_golem.hurt}}
+|source = 友好生物
+|description=受伤
+|id = entity.iron_golem.hurt
+|translationkey = subtitles.entity.iron_golem.hurt
+}}
+{{Sound table
+|sound = Iron Golem repair.ogg
+|subtitle = {{tp|subtitles.entity.iron_golem.repair}}
+|source = 友好生物
+|description=被铁锭修复
+|id = entity.iron_golem.repair
+|translationkey = subtitles.entity.iron_golem.repair
+}}
+{{Sound table
+|sound = Iron Golem throw.ogg
+|subtitle = {{tp|subtitles.entity.iron_golem.attack}}
+|source = 友好生物
+|description=攻击
+|id = entity.iron_golem.attack
+|translationkey = subtitles.entity.iron_golem.attack
+|foot = 1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=-|source=友好生物
+|description=空声音事件
+|id=mob.irongolem.say
+|typeid=ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.irongolem.hit1.wav
+|sound2=mob.irongolem.hit2.wav
+|sound3=mob.irongolem.hit3.wav
+|sound4=mob.irongolem.hit4.wav
+|source=友好生物
+|description=受伤
+|id=mob.irongolem.hit
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.irongolem.death.wav
+|source=友好生物
+|description=死亡
+|id=mob.irongolem.death
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.irongolem.walk1.wav
+|sound2=mob.irongolem.walk2.wav
+|sound3=mob.irongolem.walk3.wav
+|sound4=mob.irongolem.walk4.wav
+|source=友好生物
+|description=行走
+|id=mob.irongolem.walk
+|typeid=step
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.irongolem.throw.wav
+|source=友好生物
+|description=攻击
+|id=mob.irongolem.throw
+|typeid=throw
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Iron Golem damage1.ogg
+|sound2=Iron Golem damage2.ogg
+|source=友好生物
+|description=开裂程度增加
+|id=mob.irongolem.crack
+|typeid=crack
+|soundvolume
+|soundpitch=0.8-1.0
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Iron Golem repair.ogg
+|source=友好生物
+|description=被铁锭修复
+|id=mob.irongolem.repair
+|typeid=repair
+|soundvolume
+|soundpitch=0.8-1.0
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Iron Golem
+|spritetype=entity
+|nameid=iron_golem
+|showentitytags=1|entitytags={{GameTag|entity|iron_golem}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Iron Golem
+|spritetype=entity
+|nameid=iron_golem
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+铁傀儡有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|body-guard}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.summon_iron_golem;story.smelt_iron}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 视频 ==
+{{video note|该视频对[[南瓜]]可用於建造鐵魔像的敘述已於基岩版1.21.30失效。|outdated}}
+{{bv|BV19t411K7gx}}
+
+== 历史 ==
+{{needs update|section=1|需完善Java版和基岩版的铁傀儡手持虞美人的渲染图}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.2.1|dev=12w08a|[[File:Iron Golem JE1 BE1.png|32px]] 加入了铁傀儡，只要村庄内有16个村民就有机会生成。}}
+|{{HistoryLine|||dev=1.2|加入了铁傀儡的音效。}}
+|{{HistoryLine||1.4.2|dev=12w32a|铁傀儡现在会攻击[[史莱姆]]与[[岩浆怪]]。}}
+|{{HistoryLine|||dev=?|现在一个村庄中每10个[[村民]]就有可能生成1个铁傀儡。}}
+|{{HistoryLine||1.7.2|dev=13w36a|由于玫瑰被替换成了虞美人，铁傀儡的[[掉落物]]也因此变更。}}
+|{{HistoryLine||1.8|dev=14w03a|现在铁傀儡仅当由于[[玩家]]因素死亡时才会掉落[[铁锭]]，否则只会掉落[[虞美人]]。}}
+|{{HistoryLine|||dev=14w04a|现在铁傀儡由于非玩家因素死亡时也可以掉落铁锭了。}}
+|{{HistoryLine|||dev=14w26c|现在[[南瓜灯]]不能用来生成铁傀儡了。}}
+|{{HistoryLine|||dev=14w33a|现在[[僵尸]]、[[蜘蛛]]、[[洞穴蜘蛛]]、[[骷髅]]、[[史莱姆]]、[[岩浆怪]]会攻击铁傀儡了。}}
+|{{HistoryLine||1.8|由于一个漏洞，铁傀儡不再会立即主动攻击敌对生物。<ref name="MC-73724">{{bug|MC-73724|||Fixed}}</ref>}}
+|{{HistoryLine||1.8.1|dev=pre1|南瓜灯再次可以用来生成铁傀儡了。}}
+|{{HistoryLine||1.9|dev=15w39a|铁傀儡的高度从2.9格改为2.7格。}}
+|{{HistoryLine|||dev=15w46a|铁傀儡现在具有100%的击退抗性。}}
+|{{HistoryLine||1.11|dev=16w32a|铁傀儡的实体ID由<code>VillagerGolem</code>改为<code>villager_golem</code>。}}
+|{{HistoryLine||1.13|dev=17w47a|现在铁傀儡需要使用[[雕刻南瓜]]建造。}}
+|{{HistoryLine|||dev=pre5|铁傀儡的实体ID由<code>villager_golem</code>改为<code>iron_golem</code>。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Iron Golem JE2 BE2.png|32px]] 更改了铁傀儡的纹理。}}
+|{{HistoryLine|||dev=18w47a|现在铁傀儡会自然生成在[[掠夺者前哨站]]。}}
+|{{HistoryLine|||dev=19w08a|一只铁傀儡现在总是会作为[[村庄]]的一部分生成。
+|现在铁傀儡不再能看见[[隐身]]状态下的敌对生物。
+|[[File:Iron Golem texture change 19w08a.gif|128px]] 更改了铁傀儡的纹理。左臂的下方现在与右臂的下方纹理相同。更改了头颅底部以及腰底部的纹理。
+|现在铁傀儡再次会立即主动攻击敌对生物。<ref name=MC-73724/>}}
+|{{HistoryLine||1.14.3|dev=pre1|慌张的村民现在有更高的概率生成铁傀儡。}}
+|{{HistoryLine||1.15|dev=19w41a|[[File:Iron Golem Cracked Low.png|32px]] [[File:Iron Golem Cracked Medium.png|32px]] [[File:Iron Golem Cracked High.png|32px]] 铁傀儡受伤时现在会开裂。
+|现在可以使用[[铁锭]]以治疗铁傀儡。}}
+|{{HistoryLine|||dev=19w44a|铁傀儡的开裂程度现在基于当前生命值与最大生命值的比值。}}
+|{{HistoryLine||1.16|dev=20w19a|现在生成铁傀儡的条件与[[村民]]的工作状态和最近工作时间无关。}}
+|{{HistoryLine||1.19|dev=22w19a|现在铁傀儡只会生成在固体方块上。}}
+|{{HistoryLine|||dev=pre1|回退了上个快照作出的更改。}}
+|{{HistoryLine||1.19.3|dev=22w44a|现在铁傀儡能够通过[[铁傀儡刷怪蛋]]生成。}}
+|{{HistoryLine||1.20.2|dev=23w33a|铁傀儡现在不再能穿过一格厚的墙进行攻击。<ref>{{bug|MC-2310|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.9|dev=25w33a|铁傀儡现在有概率将虞美人赠予附近的[[铜傀儡]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|[[File:Iron Golem JE1 BE1.png|32px]] 加入了铁傀儡。}}
+|{{HistoryLine|||dev=build 7|现在铁傀儡在死亡时会掉落铁锭和虞美人。<ref>{{bug|MCPE-9753|||Fixed}}</ref>}}
+|{{HistoryLine||0.15.0|dev=build 1|现在僵尸、蜘蛛、洞穴蜘蛛、骷髅、史莱姆、岩浆怪和女巫会攻击铁傀儡了。}}
+|{{HistoryLine||0.16.0|dev=build 4|现在铁傀儡会在和平模式下伤害玩家。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=1.0.0.0|铁傀儡不再在和平难度中伤害玩家。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|铁傀儡的实体ID由<code>irongolem</code>更改为<code>iron_golem</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Iron Golem JE2 BE2.png|32px]] [[File:Iron Golem holding Poppy BE2.png|53px]] 更改了铁傀儡的纹理。
+|铁傀儡会自然生成在[[掠夺者前哨站]]。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|铁傀儡现在会正常生成于掠夺者前哨站的笼子里。
+|村庄现在总是生成一个铁傀儡。
+|玩家拥有村庄英雄效果时，自然或命令生成的铁傀儡不会攻击玩家，即使玩家攻击铁傀儡。}}
+|{{HistoryLine||1.16.0|dev=1.15.0.51|提升了铁傀儡的生成速度并更改了生成规则。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.54|铁傀儡现在会主动攻击[[疣猪兽]]和[[僵尸疣猪兽]]。}}
+|{{HistoryLine||1.16.220|dev=?|[[File:Iron Golem holding Poppy BE3.png|53px]] 更改了铁傀儡手持虞美人时虞美人的模型。
+|[[File:Iron Golem holding Poppy BE2.png|53px]] 再次更改了铁傀儡手持虞美人时虞美人的模型。}}
+|{{HistoryLine||1.17.30|dev=1.17.30.23|修改了铁傀儡的生成机制以近似匹配{{el|je}}。{{More info|具体改了什么}}}}
+|{{HistoryLine||1.18.10|dev=1.18.10.26|[[File:Iron Golem Cracked Low.png|32px]] [[File:Iron Golem Cracked Medium.png|32px]] [[File:Iron Golem Cracked High.png|32px]] 铁傀儡现在会随生命值的降低而逐渐开裂。
+|现在可以使用[[铁锭]]来治疗铁傀儡。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.20|现在铁傀儡能够通过[[铁傀儡刷怪蛋]]生成。}}
+|{{HistoryLine||1.20.40|dev=1.20.40.22|现在建造生成铁傀儡时会产生类似于方块被破坏的粒子效果。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.21|铁傀儡不再能使用南瓜生成。}}
+|{{HistoryLine||1.21.60|[[File:Iron Golem holding Poppy BE4.png|53px]] 更改了铁傀儡手持虞美人时虞美人的模型。}}
+|{{HistoryLine||1.21.111|dev=1.21.110.23|铁傀儡现在有概率将虞美人赠予附近的[[铜傀儡]]。}}
+|{{HistoryLine||26.0|dev=26.0.23|铁傀儡现在会攻击[[僵尸鹦鹉螺]]。<ref name="Zombie Nautilus"/>}}
+|{{HistoryLine||26.30|dev=26.30.28|[[File:Iron Golem holding Poppy BE5.png|63px]] 更改了铁傀儡手持虞美人时虞美人的UV。<ref>{{bug|MCPE-239050}}</ref>}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU12|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Iron Golem JE1 BE1.png|32px]] 加入了铁傀儡。}}
+}}
+
+== 你知道吗 ==
+[[File:Castleintheskyrobot.png|缩略图|200px|《天空之城》中的机器人]]
+* 铁傀儡给幼年村民送[[虞美人]]的机制致敬了日本动画师宫崎骏的电影作品《[[wzh:天空之城|天空之城]]》的古老机器人<ref>{{tweet|jonkagstrom|172728720799436801|@scambot 是的，感谢@pgeuder的图片给了我灵感！|2012/2/23}}</ref>。幼年村民注意到铁傀儡手中的虞美人时，会慢慢地接近，并最终接受虞美人。
+** 实际上，铁傀儡在定义上更接近于{{w|魔像}}而不是机器人。<ref>{{article|iron-golem|Meet the Iron Golem|September 12, 2024}}</ref>
+* 铁傀儡不会主动进入船或矿车里。但{{in|be}}将在铁轨上的矿车推到铁傀儡处会使铁傀儡进入矿车。
+* 铁傀儡在Xbox 360 Marketplace是一个可购买物品。
+* {{in|BE}}铁傀儡拥有其追击动作，但是移动摆臂的优先级更高，因此只有在一起受困无法追击而静止的情况下可以看到。是一种保持右臂上抬左臂后摆的动作。
+{{-}}
+
+== 画廊 ==
+<gallery>
+File:IronGolemRose.png|一只铁傀儡送给村民一朵虞美人
+File:IronGolemHoldingRose.png|一只铁傀儡向几个幼年村民赠送一朵虞美人
+File:IronGolemKillingSpider.png|一只铁傀儡攻击[[蜘蛛]]，并把它扔向空中
+File:Village Golem Attacking.png|一只铁傀儡正在攻击玩家
+File:Iron golem Attacks Pillagers.jpg|一只铁傀儡正在攻击掠夺者
+File:15 Years Journey End Hub Iron Golem.png|[[15年之旅]]中的铁傀儡
+File:Player killing iron golem.png|一位玩家通过原地搭三格高的方块的方式来避免铁傀儡攻击，并击杀铁傀儡
+File:Iron Golem In Outpost Cage.png|掠夺者前哨站中关押着铁傀儡
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|mobs}}
+
+[[Category:友好生物]]
+
+[[de:Eisengolem]]
+[[en:Iron Golem]]
+[[es:Gólem de hierro]]
+[[fr:Golem de fer]]
+[[hu:Vasgólem]]
+[[it:Golem di ferro]]
+[[ja:アイアンゴーレム]]
+[[ko:철 골렘]]
+[[lzh:鐵傀儡]]
+[[nl:IJzergolem]]
+[[pl:Żelazny golem]]
+[[pt:Golem de Ferro]]
+[[ru:Железный голем]]
+[[uk:Залізний ґолем]]

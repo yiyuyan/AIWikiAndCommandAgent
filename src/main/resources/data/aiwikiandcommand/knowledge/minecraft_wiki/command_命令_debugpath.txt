@@ -1,0 +1,51 @@
+# 页面: 命令/debugpath
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/debugpath
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}{{debug feature warning}}
+{{Infobox command
+|oplevel=2
+|others=仅[[wzh:集成开发环境|IDE]]或启用[[调试工具#DEV_COMMANDS|调试工具<code>MC_DEBUG_DEV_COMMANDS</code>]]
+}}
+
+测试指定位置是否可被[[寻路]]。
+
+游戏会尝试利用生物寻路算法计算一条使命令执行者通往指定位置的路径。这并不会让生物按照该路径的规划过程行进，它只会检验是否能够构建出这样的路径。
+
+== 语法 ==
+: <code>debugpath <to></code>
+
+== 参数 ==
+{{argument|to|block_pos}}
+: 指定要寻路的终点。
+: {{arg desc|je=block_pos}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|指定位置未被加载或在世界之外|fail}}
+{{Result table|执行者不是[[AI生物]]}}
+{{Result table|指定的位置无法被寻路}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.3|dev=23w43a|加入了{{cmd|debugpath|link=none}}，仅在[[wzh:集成开发环境|IDE]]中可用。}}
+|{{HistoryLine||1.21.9|dev=pre1|现在{{cmd|debugpath|link=none}}命令在启用[[调试工具#DEV_COMMANDS|调试工具<code>MC_DEBUG_DEV_COMMANDS</code>]]时可用。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/debugpath]]
+[[en:Commands/debugpath]]

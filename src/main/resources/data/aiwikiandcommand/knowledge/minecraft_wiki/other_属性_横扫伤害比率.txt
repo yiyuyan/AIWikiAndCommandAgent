@@ -1,0 +1,51 @@
+# 页面: 属性/横扫伤害比率
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E6%A8%AA%E6%89%AB%E4%BC%A4%E5%AE%B3%E6%AF%94%E7%8E%87
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox attribute}}
+
+'''横扫伤害比率（Sweeping Damage Ratio）'''是控制玩家横扫伤害的[[属性]]。
+
+== 行为 ==
+{{main|横扫攻击}}
+横扫攻击默认产生{{Hp|1}}攻击伤害。此属性可以使近战攻击伤害以一定比例追加于横扫攻击伤害中，从而提升横扫攻击伤害。
+
+横扫攻击伤害的最终值为<math>1+rd</math>，其中<math>r</math>为横扫伤害比率，<math>d</math>为原近战攻击伤害。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Player}}
+| 0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| enchantment.sweeping_edge/mainhand
+| add_value (Op0)
+| {{frac|''等级''|''等级''+1}}
+| 否
+| [[横扫之刃]]魔咒，{{tr|应用|套用}}于<code>mainhand</code>（主手）槽位，仅限玩家
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21|dev=24w18a|加入了横扫伤害比率属性，ID为<code>player.sweeping_damage_ratio</code>。}}
+|{{HistoryLine|||dev=24w21a|[[横扫之刃]]魔咒修饰符的ID现在是<code>enchantment.sweeping_edge/mainhand</code>，此前为<code>5D3D087B-DEBE-4037-B53E-D84F3FF51F17</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|横扫伤害比率属性的ID从<code>player.sweeping_damage_ratio</code>重命名为<code>sweeping_damage_ratio</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

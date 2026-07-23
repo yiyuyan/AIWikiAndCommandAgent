@@ -1,0 +1,893 @@
+# 页面: 基岩版粒子
+# 来源: https://zh.minecraft.wiki/w/%E5%9F%BA%E5%B2%A9%E7%89%88%E7%B2%92%E5%AD%90
+# 分类: 基岩版, 基岩版即将到来/26.40, 基岩版独有特性, 实验性内容/2026 年第 3 次更新, 待更新条目, 教育版独有信息, 来源请求, 正在合并, 需要信息, 需要验证历史/基岩版
+# 抓取时间: 2026-07-14 17:24:42
+# 原始 Wikitext 内容:
+
+{{about||产生粒子效果的命令|命令/particle|Java版的有关机制|Java版粒子}}
+{{merge|Java版粒子|into=粒子|wip=1}}
+{{exclusive|be}}
+{{Needs update|缺失部分基岩版粒子图片、部分基岩版粒子效果描述不准确或错误。}}
+[[File:Coral reef at night.png|缩略图|右|300px|水下粒子效果，包括气泡柱]]
+'''粒子（Particle）'''，也称'''粒子效果（Particle Effect）'''，是[[Minecraft]]中一种特殊的图形效果，在特定事件发生（比如[[爆炸]]、[[降雨]]、用[[熔炉]]进行[[烧炼]]）时出现。
+
+== 定义 ==
+所有原版的粒子效果都由原版资源包的<samp>particles</samp>中的JSON文件定义，一个JSON文件定义了一个粒子效果，主要包括一个粒子发射器及其要发射的单个粒子。有的粒子效果在调用需要向其传递特定的上下文或变量。受限于{{cmd|particle}}命令无法向其传参（ScriptAPI中则可以完全正常地传参调用），因此某些粒子效果在游戏中无法通过{{cmd|particle}}命令正常生成。
+
+== 行为 ==
+单个粒子总会以2D的图像显示，并且大多数粒子会以正前方朝向玩家。它们在一段时间后消失，在这段时间内，它们可能静止不动，也可能发生移动，它们可能在多个纹理间循环，也可能随时间发生尺寸缩放、颜色改变、或透明度改变。
+
+每种粒子类型都有其寿命（Lifetime），从粒子生成开始计时，到达寿命后粒子被移除。有的粒子类型的寿命是在某个范围内的随机数，有的粒子类型的寿命则是固定值。在未到达寿命前，有的粒子也会在特定的条件下消失，如熔岩粒子落入熔岩中会立即消失。
+
+粒子生成时往往会带有初速度，取决于粒子类型。运动速度可能会受到阻力而逐渐减小，不同粒子类型的阻力大小不同，有的粒子类型不受阻力。一些粒子类型还具有重力，使得Y轴方向的速度随时间不断改变。有的粒子类型具有负的重力，使得粒子向上加速。一些粒子类型具有类似[[实体]]的运动碰撞检测，其运动会被方块碰撞箱阻碍。
+
+== 类型 ==
+下面列出的是原版资源包中所定义的粒子效果，也是在{{cmd|particle}}命令和制作[[附加包]]等场景下使用的粒子ID。
+
+{| class="wikitable sortable" data-description="Particles_BE"
+! ID名
+! class="unsortable" | 描述
+! class="unsortable" style="min-width: 100px;" | 图片
+|-
+|<code>arrow_spell_emitter</code>
+|从[[药箭]]上飘散的药水粒子
+|[[File:Particle_arrow_spell_emitter.png|300px]]
+|-
+|<code>balloon_gas_particle</code>
+|[[气球]]炸裂时的气体
+|
+|-
+|<code>basic_bubble_particle</code>
+|[[实体]]在水下产生的飞溅粒子，[[投射物]]在水下产生的轨迹粒子。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_basic_bubble_particle.png|300px]]
+|-
+|<code>basic_bubble_particle_manual</code>
+|漂浮在水面上的[[实体]]产生的粒子，[[水下TNT]]被点燃时的气泡粒子。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_basic_bubble_particle_manual.png|300px]]
+|-
+|<code>basic_crit_particle</code>
+|用蓄力完成的[[弓]]或装填完成的[[弩]]射出的[[箭]]产生的轨迹粒子，[[尖牙]]进行攻击产生的粒子
+|[[File:Particle_basic_crit_particle.png|300px]]
+|-
+|<code>basic_flame_particle</code>
+|[[火把]]；烧制物品的[[熔炉]]、[[高炉]]和[[烟熏炉]]；[[岩浆怪]]着地；[[刷怪笼]]工作；用[[实验台]]制作[[化合物]]时的火苗粒子
+|[[File:Particle_basic_flame_particle.png|300px]]
+|-
+|<code>basic_portal_particle</code>
+|[[末影之眼]]的轨迹粒子
+|[[File:Particle_basic_portal_particle.png|300px]]
+|-
+|<code>basic_smoke_particle</code>
+|雨中的[[熔岩]]、[[岩浆块]]产生的粒子；伴随着<code>lava_particle</code>粒子产生的粒子；[[火]]、[[火把]]、[[灵魂火把]]的烟雾粒子；[[投掷器]]投掷物品；[[发射器]]发射物品；[[烈焰人]]；[[末地传送门]]；[[酿造台]]；正在工作的[[刷怪笼]]；烧制物品的[[熔炉]]、[[高炉]]、[[烟熏炉]]；点燃的[[蜡烛]]；[[凋灵]]；[[营火]]；[[凋灵玫瑰]]；驯服[[生物]]失败；给[[棕色哞菇]]喂食[[小型花]]；使用[[末影之眼]]；[[试炼刷怪笼]]、[[宝库]]、[[实验台]]产出[[废物]]、制作[[加热块]]；[[凋灵之首]]、[[火球]]的飞行轨迹粒子
+|[[File:Particle_basic_smoke_particle.png|300px]]
+|-
+|<code>biome_tinted_leaves_particle</code>
+|[[树叶]]底面飘落的树叶粒子{{info needed}}
+|
+|-
+|<code>bleach</code>
+|[[实验台]]制作[[漂白剂]]时的漂白粒子
+|[[File:Bleach Particle.png|frameless]]
+|-
+|<code>block_destruct</code>
+|[[方块]]被摧毁；生物[[摔落|摔伤]]；玩家[[疾跑]]；[[羊]]吃草；[[兔子]]跳跃；[[嗅探兽]]刨挖；[[盔甲架]]被[[玩家]]破坏；使用[[刷子]]；[[实验台]]制作[[超级肥料]]时的粒子；[[旋风人]]跳跃时的方块碎片粒子
+|[[File:Particle_block_destruct.png|300px]]
+|-
+|<code>block_slide</code>
+|从[[蜂蜜块]]的侧面滑下的粒子
+|[[File:Particle_block_slide.png|300px]]
+|-
+|<code>blue_flame_particle</code>
+|[[灵魂火把]]火苗粒子
+|[[File:Particle_blue_flame_particle.png|300px]]
+|-
+|<code>breaking_item_icon</code>
+|玩家[[饥饿|进食]]；[[狐狸]]进食；[[鸡蛋]]、[[喷溅药水]]、[[滞留药水]]、[[附魔之瓶]]、[[雪球]]和[[冰弹]]破碎；[[史莱姆]]着地；[[海龟蛋]]孵化时的物品碎片粒子
+|[[File:Particle_breaking_item_icon.png|300px]]
+|-
+|<code>breaking_item_terrain</code>
+|喂食[[生物]]或[[熊猫]]吃[[竹子]]时的物品碎片粒子
+|[[File:Particle_breaking_item_terrain.png|300px]]
+|-
+|<code>breeze_ground_particle</code>
+|[[旋风人]]产生的方块碎片粒子
+|[[File:Particle_breeze_ground_particle.png|300px]]
+|-
+|<code>breeze_wind_explosion_emitter</code>
+|[[风弹（实体）|风弹]]爆炸粒子
+|[[File:Particle_breeze_wind_explosion_emitter.png|300px]]
+|-
+|<code>bubble_column_bubble</code>
+|[[气泡柱]]顶部的[[实体]]产生的气泡粒子。该粒子只能在[[水]]中生成和存在。
+|[[File:Particle_bubble_column_bubble.png|300px]]
+|-
+|<code>bubble_column_down_particle</code>
+|水下[[岩浆块]]的涡流[[气泡柱]]。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_bubble_column_down_particle.png|300px]]
+|-
+|<code>bubble_column_up_particle</code>
+|水下[[灵魂沙]]的涌流[[气泡柱]]。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_bubble_column_up_particle.png|300px]]
+|-
+|<code>camera_shoot_explosion</code>
+|{{only|ee|for=[[摄像机]]拍摄}}时的粒子
+|[[File:Camera Shoot Explosion.png|frameless]]
+|-
+|<code>campfire_smoke_particle</code>
+|[[营火]]和[[灵魂营火]]的烟雾粒子
+|[[File:Particle_campfire_smoke_particle.png|300px]]
+|-
+|<code>campfire_tall_smoke_particle</code>
+|放置在[[干草捆]]上的[[营火]]和[[灵魂营火]]的高烟雾粒子
+|[[File:Particle_campfire_tall_smoke_particle.png|300px]]
+|-
+|<code>candle_flame_particle</code>
+|[[蜡烛]]的火焰粒子
+|[[File:Particle_candle_flame_particle.png|300px]]
+|-
+|<code>cauldron_bubble_particle</code>
+|[[炼药锅]]气泡粒子（该粒子未被使用<ref name="MCPE-134079">{{bug|MCPE-134079|||Incomplete}}</ref>）。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Cauldron Bubble Particle.png|frameless|300x300px]]
+|-
+|<code>cauldron_explosion_emitter</code>
+|[[炼药锅]]液体冲突、[[湿海绵]]在[[下界]]或干燥的[[生物群系]]被烤干时的粒子
+|[[File:Particle_cauldron_explosion_emitter.png|300px]]
+|-
+|<code>cauldron_spell_emitter</code>
+|将[[药水]]放入[[炼药锅]]时的药水粒子，装有[[药水]]的[[炼药锅]]产生的药水粒子
+|[[File:Particle_cauldron_spell_emitter.png|300px]]
+|-
+|<code>cauldron_splash_particle</code>
+|[[炼药锅]]的杂质粒子（该粒子未被使用<ref name="MCPE-134079" />）{{info needed}}。''该粒子只能在[[水]]中生成和存在。''
+|
+|-
+|<code>cherry_leaves_particle</code>
+|[[樱花树叶]]飘落的花瓣粒子
+|[[File:Particle_cherry_leaves_particle.png|300px]]
+|-
+|<code>colored_flame_particle</code>
+|[[彩色火把]]的火焰粒子
+|
+|-
+|<code>conduit_absorb_particle</code>
+|由[[潮涌核心]]产生并朝向潮涌核心移动的粒子
+|[[File:Particle_conduit_absorb_particle.png|300px]]
+|-
+|<code>conduit_attack_emitter</code>
+|由[[潮涌核心]]攻击的敌对[[生物]]产生的粒子
+|[[File:Particle_conduit_attack_emitter.png|300px]]
+|-
+|<code>conduit_particle</code>
+|[[潮涌核心]]产生的粒子（该粒子未被使用）{{info needed}}
+|[[File:Particle_conduit_absorb_particle.png|300px]]
+|-
+|<code>creaking_crumble_body</code>
+|[[嘎枝之心]]被破坏时[[嘎枝]]的身体发出的粒子{{info needed}}
+|
+|-
+|<code>creaking_crumble_head</code>
+|[[嘎枝之心]]被破坏时[[嘎枝]]的头部发出的粒子{{info needed}}
+|
+|-
+|<code>creaking_heart_trail</code>
+|[[嘎枝]]被攻击时嘎枝和[[嘎枝之心]]发出的粒子{{info needed}}
+|
+|-
+|<code>critical_hit_emitter</code>
+|[[玩家]]造成[[近战攻击#暴击|暴击]]时的暴击粒子
+|[[File:Particle_critical_hit_emitter.png|300px]]
+|-
+|<code>crop_growth_area_emitter</code>
+|在[[草方块]]、[[花]]或[[苔藓块]]上使用[[骨粉]]时出现植物生长粒子
+|[[File:Particle_crop_growth_area_emitter.png|300px]]
+|-
+|<code>crop_growth_emitter</code>
+|在[[作物]]或其他[[植物]]上使用[[骨粉]]时的生长粒子；[[堆肥桶]]被填充，[[蜜蜂]]授粉，[[海龟蛋]]放置在[[沙子]]上，[[嗅探兽蛋]]置于[[苔藓块]]上时的粒子
+|[[File:Particle_crop_growth_emitter.png|300px]]
+|-
+|<code>death_explosion_emitter</code>
+|[[生物]]死亡时的粒子
+|[[File:Particle_death_explosion_emitter.png|300px]]
+|-
+|<code>dolphin_move_particle</code>
+|[[海豚]]游泳轨迹粒子。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_dolphin_move_particle.png|300px]]
+|-
+|<code>dragon_breath_fire</code>
+|[[末影龙]]吐出的粒子
+|[[File:Particle_dragon_breath_fire.png|300px]]
+|-
+|<code>dragon_breath_lingering</code>
+|滞留在地面的龙息粒子
+|[[File:Particle_dragon_breath_lingering.png|300px]]
+|-
+|<code>dragon_breath_trail</code>
+|[[末影龙火球]]飞行时的粒子
+|[[File:Particle_dragon_breath_trail.png|300px]]
+|-
+|<code>dragon_death_explosion_emitter</code>
+|[[末影龙]]死亡后的粒子
+|[[File:Particle_dragon_death_explosion_emitter.png|300px]]
+|-
+|<code>dragon_destroy_block</code>
+|[[末影龙]]破坏方块时的粒子
+|[[File:Particle_dragon_destroy_block.png|300px]]
+|-
+|<code>dragon_dying_explosion</code>
+|[[末影龙]]死亡时的粒子
+|[[File:Particle_dragon_dying_explosion.png|300px]]
+|-
+|<code>dust_plume</code>
+|成功向[[饰纹陶罐]]中放置物品的粒子
+|[[File:Particle_BE_dust_plume.png|300px]]
+|-
+|<code>egg_destroy_emitter</code>
+|（该粒子未被使用）{{info needed}}
+|[[File:Particle_egg_destroy_emitter.png|300px]]
+|-
+|<code>electric_spark_particle</code>
+|[[闪电束]]击中[[铜块]]的未涂蜡氧化变种或在[[雷暴]]天气击中露天的[[避雷针]]时的粒子
+|[[File:Particle_electric_spark_particle.png|300px]]
+|-
+|<code>elephant_tooth_paste_vapor_particle</code>
+|[[实验台]]产出[[废物]]时的"大象牙膏"粒子
+|
+|-
+|<code>enchanting_table_particle</code>
+|从[[书架]]流入[[附魔台]]的符文粒子
+|[[File:Particle_enchanting_table_particle.png|300px]]
+|-
+|<code>end_chest</code>
+|[[末影箱]]周围不断收敛的粒子
+|[[File:Particle_end_chest.png|300px]]
+|-
+|<code>endrod</code>
+|[[末地烛]]的粒子
+|[[File:Particle_endrod.png|300px]]
+|-
+|<code>evocation_fang_particle</code>
+|[[唤魔者尖牙]]的粒子（该粒子未被使用）{{info needed}}
+|[[File:Particle_evocation_fang_particle.png|300px]]
+|-
+|<code>evoker_spell</code>
+|带有[[状态效果]]的生物、[[凋灵]]护甲、[[区域效果云]]的粒子
+|[[File:Particle_evoker_spell.png|300px]]
+|-
+|<code>explosion_manual</code>
+|[[爆炸]]破坏方块的粒子（该粒子未被使用<ref name="MCPE-127604">{{bug|MCPE-127604|||WAI}}</ref>）{{info needed}}
+|[[File:Particle_explosion_manual.png|300px]]
+|-
+|<code>explosion_particle</code>
+|[[爆炸]]破坏方块的粒子
+|[[File:Particle_explosion_particle.png|300px]]
+|-
+|<code>eye_of_ender_bubble_particle</code>
+|[[末影之眼]]在水下运动时的气泡粒子。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_eye_of_ender_bubble_particle.png|300px]]
+|-
+|<code>eyeblossom_close</code>
+|[[眼眸花]]闭合时产生的粒子
+|
+|-
+|<code>eyeblossom_open</code>
+|[[眼眸花]]绽放时产生的粒子
+|
+|-
+|<code>eyeofender_death_explode_particle</code>
+|[[末影之眼]]破碎时的粒子
+|[[File:Particle_eyeofender_death_explode_particle.png|300px]]
+|-
+|<code>falling_border_dust_particle</code>
+|在[[边界]]底部下沉的尘埃粒子
+|[[File:Particle_falling_border_dust_particle.png|300px]]
+|-
+|<code>falling_dust</code>
+|下落尘埃粒子（该粒子未被使用）
+|
+|-
+|<code>falling_dust_concrete_powder_particle</code>
+|浮空而未下落的[[混凝土粉末]]粒子
+|
+|-
+|<code>falling_dust_dragon_egg_particle</code>
+|浮空而未下落的[[龙蛋]]粒子
+|
+|-
+|<code>falling_dust_gravel_particle</code>
+|浮空而未下落的[[沙砾]]粒子
+|[[File:Particle falling dust gravel particle.png|300px]]
+|-
+|<code>falling_dust_red_sand_particle</code>
+|浮空而未下落的[[红沙]]粒子
+|
+|-
+|<code>falling_dust_sand_particle</code>
+|浮空而未下落的[[沙子]]粒子
+|
+|-
+|<code>falling_dust_scaffolding_particle</code>
+|浮空而未下落的[[脚手架]]粒子
+|
+|-
+|<code>falling_dust_top_snow_particle</code>
+|浮空而未下落的[[雪层]]粒子
+|
+|-
+|<code>firefly_particle</code>
+|[[萤火虫灌木丛]]产生的萤火虫粒子
+|
+|-
+|<code>fish_hook_particle</code>
+|[[鱼钩]]的气泡粒子。''该粒子只能在[[水]]中生成和存在。''
+|
+|-
+|<code>fish_pos_particle</code>
+|[[钓鱼]]时鱼的位置产生的气泡粒子。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_fish_pos_particle.png|300px]]
+|-
+|<code>geyser_base</code>
+|[[间歇泉]]底部产生的较为持续的粒子。
+|
+|-
+|<code>geyser_plume</code>
+|间歇泉产生的上升水柱。
+|
+|-
+|<code>geyser_poof</code>
+|间歇泉底部产生的爆发速度较快的粒子。
+|
+|-
+|<code>glow_particle</code>
+|[[发光鱿鱼]]的发光粒子。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_glow_particle.png|300px]]
+|-
+|<code>green_flame_particle</code>
+|[[铜火把]]产生的粒子
+|
+|-
+|<code>guardian_attack_particle</code>
+|[[守卫者]]激光气泡粒子。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_guardian_attack_particle.png|300px]]
+|-
+|<code>guardian_water_move_particle</code>
+|[[守卫者]]水下移动轨迹粒子。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Particle_guardian_water_move_particle.png|300px]]
+|-
+|<code>heart_particle</code>
+|生物[[繁殖]]或被驯服、[[悦灵]]复制时的爱心粒子
+|
+|-
+|<code>honey_drip_particle</code>
+|[[蜂巢（方块）|蜂巢]]或[[蜂箱]]滴落的蜂蜜粒子
+|
+|-
+|<code>huge_explosion_emitter</code>
+|大型爆炸粒子（该粒子未被使用<ref name="MCPE-127604"/>）{{info needed}}
+|
+|-
+|<code>huge_explosion_lab_misc_emitter</code>
+|{{only|ee|for=[[实验台]]产出[[废物]]}}时粒子
+|
+|-
+|<code>ice_evaporation_emitter</code>
+|[[冰]]汽化粒子（该粒子未被使用）{{info needed}}
+|
+|-
+|<code>infested_ambient</code>
+|[[寄生]]效果产生的粒子
+|[[File:Infested Ambient.png|frameless]]
+|-
+|<code>infested_emitter</code>
+|带有[[寄生]]效果的生物死亡时的粒子
+|
+|-
+|<code>ink_emitter</code>
+|[[鱿鱼]]和[[发光鱿鱼]]受击产生的粒子
+|
+|-
+|<code>knockback_roar_particle</code>
+|[[劫掠兽]]怒吼粒子
+|
+|-
+|<code>lab_table_heatblock_dust_particle</code>
+|{{only|ee|for=[[实验台]]制作[[加热块]]}}时的粒子
+|
+|-
+|<code>lab_table_misc_mystical_particle</code>
+|{{only|ee|for=[[实验台]]产出[[废物]]}}时的粒子
+|
+|-
+|<code>large_explosion</code>
+|大型爆炸粒子（该粒子未被使用<ref name="MCPE-127604"/>）{{info needed}}
+|
+|-
+|<code>lava_drip_particle</code>
+|渗过方块滴落的熔岩粒子；{{only|ee|for=[[实验台]]产出[[废物]]}}时的粒子；[[滴水石锥]]向[[炼药锅]]滴落的[[熔岩]]粒子
+|
+|-
+|<code>lava_particle</code>
+|[[熔岩]]、点燃的[[营火]]飞溅的火焰粒子；{{only|ee|for=[[实验台]]产出[[废物]]}}时的粒子
+|
+|-
+|<code>llama_spit_smoke</code>
+|[[羊驼]]啐生物时的唾沫粒子
+|
+|-
+|<code>magic_critical_hit_emitter</code>
+|带有[[锋利]]附魔的剑攻击生物时发出的粒子
+|
+|-
+|<code>magnesium_salts_emitter</code>
+|{{only|ee|for=[[实验台]]制作镁盐}}时的粒子
+|
+|-
+|<code>misc_fire_vapor_particle</code>
+|{{only|ee|for=[[实验台]]产出[[废物]]}}时的粒子
+|
+|-
+|<code>mob_block_spawn_emitter</code>
+|[[刷怪笼]]刷怪时的粒子
+|
+|-
+|<code>mob_portal</code>
+|[[末影人]]、[[末影螨]]的粒子
+|
+|-
+|<code>mobflame_emitter</code>
+|[[烈焰人]]的火焰粒子
+|
+|-
+|<code>mobflame_single</code>
+|[[生物]]产生的单个火焰粒子（该粒子未被使用）{{info needed}}
+|
+|-
+|<code>mobspell_ambient</code>
+|带有[[信标]]或[[潮涌核心]]给予的效果的玩家的药水粒子
+|
+|-
+|<code>mobspell_emitter</code>
+|带有[[状态效果]]的生物、[[区域效果云]]产生的粒子
+|
+|-
+|<code>mobspell_lingering</code>
+|{{info needed}}
+|
+|-
+|<code>mycelium_dust_particle</code>
+|[[菌丝体]]的孢子粒子
+|
+|-
+|<code>nautilus_bubbles_particle</code>
+|[[鹦鹉螺]]的气泡粒子
+|
+|-
+|<code>nectar_drip_particle</code>
+|沾有花粉的[[蜜蜂]]掉落的花粉粒子
+|[[File:Nectar Drip Particle.png|frameless]]
+|-
+|<code>note_particle</code>
+|激活[[音符盒]]或工作的[[唱片机]]产生的音符粒子
+|[[File:Note Particle.png|frameless]]
+|-
+|<code>noxious_gas_particle</code>
+|[[烈性硫黄]]在上方的[[水源]]方块表面生成的黄色烟雾粒子
+|
+|-
+|<code>obsidian_glow_dust_particle</code>
+|[[黑曜石]]的发光尘埃粒子
+|
+|-
+|<code>obsidian_tear_particle</code>
+|[[哭泣的黑曜石]]滴落的粒子
+|
+|-
+|<code>ominous_spawning_particle</code>
+|[[不祥之物生成器]]生成物品时释放的粒子
+|
+|-
+|<code>oozing_ambient</code>
+|[[渗浆]]效果产生的粒子
+|
+|-
+|<code>oozing_emitter</code>
+|带有[[渗浆]]效果的生物死亡时的粒子
+|
+|-
+|<code>orange_poplar_leaves_particle</code>{{in exp|be 26.40|exg=y_2026_drop_3|op=upcoming}}
+|[[橙色杨树树叶]]飘落的落叶粒子
+|
+|-
+|<code>pale_oak_leaves_particle</code>
+|[[苍白橡树树叶]]飘落的落叶粒子
+|
+|-
+|<code>phantom_trail_particle</code>
+|[[幻翼]]的飞行轨迹粒子
+|[[File:Phantom Trail Particle.png|frameless]]
+|-
+|<code>portal_directional</code>
+|[[末影珍珠]]破碎时的粒子；[[龙蛋]]瞬移时的粒子
+|
+|-
+|<code>portal_east_west</code>
+|沿X轴向[[下界传送门]]和[[末地折跃门]]飘去的传送门粒子
+|
+|-
+|<code>portal_north_south</code>
+|沿Z轴向[[下界传送门]]和[[末地折跃门]]飘去的传送门粒子
+|
+|-
+|<code>portal_reverse_particle</code>
+|激活的[[重生锚]]顶部漂浮的粒子
+|[[File:Portal Reverse Particle.png|frameless]]
+|-
+|<code>raid_omen_ambient</code>
+|[[袭击之兆]]效果产生的粒子{{info needed}}
+|[[File:Raid Omen Ambient.png|frameless]]
+|-
+|<code>raid_omen_emitter</code>
+|[[袭击之兆]]效果产生的粒子{{info needed}}
+|
+|-
+|<code>rain_splash_particle</code>
+|{{only|ee|for=[[实验台]]制作[[冰弹]]}}时的飞溅粒子；<code>stalactite_water_drip_particle</code>粒子、<code>water_drip_particle</code>粒子、雨水落地后的飞溅粒子。''该粒子只能在[[空气]]中生成和存在。''
+|
+|-
+|<code>red_poplar_leaves_particle</code>{{in exp|be 26.40|exg=y_2026_drop_3|op=upcoming}}
+|[[红色杨树树叶]]飘落的落叶粒子
+|
+|-
+|<code>redstone_ore_dust_particle</code>
+|[[红石矿石]]激活时的粒子
+|[[File:Redstone Ore Dust Particle.png|frameless]]
+|-
+|<code>redstone_repeater_dust_particle</code>
+|[[红石中继器]]激活时的粒子
+|[[File:Redstone Repeater Dust Particle.png|frameless]]
+|-
+|<code>redstone_torch_dust_particle</code>
+|[[红石火把]]激活时的粒子
+|[[File:Redstone Torch Dust Particle.png|frameless]]
+|-
+|<code>redstone_wire_dust_particle</code>
+|[[红石线]]激活时的粒子
+|[[File:Redstone Wire Dust Particle.png|frameless]]
+|-
+|<code>rising_border_dust_particle</code>
+|[[边界]]顶部飘升的尘埃粒子
+|[[File:Particle_rising_border_dust_particle.png|300px]]
+|-
+|<code>sculk_charge_particle</code>
+|幽匿信号蔓延过程中的气泡粒子
+|
+|-
+|<code>sculk_charge_pop_particle</code>
+|幽匿信号丢失时的气泡破裂粒子
+|
+|-
+|<code>sculk_sensor_redstone_particle</code>
+|[[幽匿感测体]]激活时的粒子
+|
+|-
+|<code>sculk_soul_particle</code>
+|[[幽匿催发体]]探测到生物死亡时顶部的灵魂粒子
+|
+|-
+|<code>shriek_particle</code>
+|[[幽匿尖啸体]]激活时的环状粒子
+|[[File:Shriek Particle.png|frameless]]
+|-
+|<code>shulker_bullet</code>
+|[[潜影弹]]的轨迹粒子
+|
+|-
+|<code>silverfish_grief_emitter</code>
+|[[蠹虫]]进出方块时的粒子
+|[[File:Silverfish Grief Emitter.png|frameless]]
+|-
+|<code>small_flame_particle</code>
+|[[试炼刷怪笼]]运作时的粒子
+|[[File:Small Flame Particle.png|frameless]]
+|-
+|<code>small_soul_fire_flame</code>
+|[[不祥试炼刷怪笼]]运作时的粒子
+|
+|-
+|<code>smash_ground_particle</code>
+|[[重锤]]猛击击中处在地面的生物时在生物周围产生的粒子
+|
+|-
+|<code>smash_ground_particle_center</code>
+|[[重锤]]猛击击中处在地面的生物时在生物上方产生的粒子
+|
+|-
+|<code>sneeze</code>
+|幼年[[熊猫]]打喷嚏时产生的粒子
+|
+|-
+|<code>snowflake_particle</code>
+|[[细雪]]中的[[实体]]产生的雪花粒子
+|[[File:Snowflake Particle.png|frameless]]
+|-
+|<code>sonic_explosion</code>
+|[[监守者]]发射的音波粒子
+|[[File:Sonic Explosion.png|frameless]]
+|-
+|<code>soul_particle</code>
+|穿戴[[灵魂疾行]]靴子的生物在[[灵魂沙]]或[[灵魂土]]上行走时的灵魂粒子
+|
+|-
+|<code>sparkler_emitter</code>
+|使用{{only|ee|for=[[烟花棒]]}}时的粒子。
+|[[File:Sparkler Emitter.png|frameless]]
+|-
+|<code>splash_spell_emitter</code>
+|[[末影龙火球]]爆炸以及[[喷溅药水]]、[[滞留药水]]、[[附魔之瓶]]破碎时的粒子
+|
+|-
+|<code>sponge_absorb_water_particle</code>
+|[[海绵]]吸水时的粒子（该粒子未被使用）{{info needed}}。''该粒子只能在[[水]]中生成和存在。''
+|
+|-
+|<code>spore_blossom_ambient_particle</code>
+|在[[孢子花]]周围发散的孢子粒子
+|
+|-
+|<code>spore_blossom_shower_particle</code>
+|[[孢子花]]掉落的孢子粒子
+|
+|-
+|<code>squid_flee_particle</code>
+|[[鱿鱼]]和[[发光鱿鱼]]逃亡时的粒子（该粒子未被使用）{{info needed}}。''该粒子只能在[[水]]中生成和存在。''
+|
+|-
+|<code>squid_ink_bubble</code>
+|[[鱿鱼]]和[[发光鱿鱼]]受击时的粒子。''该粒子只能在[[水]]中生成和存在。''
+|
+|-
+|<code>squid_move_particle</code>
+|[[鱿鱼]]和[[发光鱿鱼]]移动时的粒子（该粒子未被使用）{{info needed}}。''该粒子只能在[[水]]中生成和存在。''
+|
+|-
+|<code>stalactite_lava_drip_particle</code>
+|[[滴水石锥]]滴落的[[熔岩]]粒子
+|
+|-
+|<code>stalactite_water_drip_particle</code>
+|[[滴水石锥]]滴落的[[水]]粒子
+|[[File:Stalactite water drip particle.png|center|frameless]]
+|-
+|<code>stunned_emitter</code>
+|[[劫掠兽]]被击晕时的粒子
+|
+|-
+|<code>sulfur_bubble_particle</code>
+|[[烈性硫黄]]在上方的[[水源]]方块生成的向上移动的白色气泡
+|
+|-
+|<code>sulfur_cube_goo</code>
+|[[硫方怪]]着地产生的粒子
+|
+|-
+|<code>totem_manual</code>
+|激活[[不死图腾]]时的单个粒子（该粒子未被使用）{{info needed}}
+|
+|-
+|<code>totem_particle</code>
+|激活[[不死图腾]]时的粒子
+|
+|-
+|<code>trial_omen_ambient</code>
+|[[试炼之兆]]效果产生的粒子{{info needed}}
+|
+|-
+|<code>trial_omen_emitter</code>
+|[[试炼之兆]]效果产生的粒子{{info needed}}
+|
+|-
+|<code>trial_omen_single</code>
+|[[试炼之兆]]效果产生的粒子{{info needed}}
+|[[File:Trial omen single.png|center|frameless]]
+|-
+|<code>trial_spawner_detection</code>
+|[[试炼刷怪笼]]激活瞬间产生的火花粒子
+|[[File:Trial spawner detection.png|center|frameless]]
+|-
+|<code>trial_spawner_detection_ominous</code>
+|[[不祥试炼刷怪笼]]激活瞬间产生的火花粒子
+|[[File:Trial spawner detection ominous.png|center|frameless]]
+|-
+|<code>underwater_torch_particle</code>
+|{{only|ee|for=[[水下火把]]}}的粒子。''该粒子只能在[[水]]中生成和存在。''
+|[[File:Underwater torch particle.png|center|frameless]]
+|-
+|<code>vault_connection_particle</code>
+|玩家附近有可解锁的[[宝库]]时引导玩家解锁宝库的粒子
+|[[File:Vault connection particle.png|center|frameless]]
+|-
+|<code>vibration_signal</code>
+|传向[[幽匿感测体]]、[[监守者]]或[[悦灵]]的振动粒子
+|[[File:Vibration signal.png|center|frameless]]
+|-
+|<code>villager_angry</code>
+|[[村民]]被玩家攻击、无法进行[[繁殖]]、与[[床]]、[[工作站点方块]]或[[钟]]解除绑定时的愤怒粒子
+|[[File:Villager angry.png|center|frameless]]
+|-
+|<code>villager_happy</code>
+|使用[[骨粉]]；与[[村民]]进行[[交易]]；喂养幼年[[动物]]；村民认领[[床]]、[[工作站点方块]]或[[钟]]时的粒子
+|[[File:Villager happy.png|center|frameless]]
+|-
+|<code>warden_dig</code>
+|[[监守者]]钻出地面时的方块碎片粒子
+|[[File:Warden dig from ground.png|center|frameless]]
+|-
+|<code>water_drip_particle</code>
+|渗过方块的[[水]]粒子及[[湿海绵]]和下雨时[[树叶]]产生的水粒子；[[滴水石锥]]向[[炼药锅]]滴落的[[水]]粒子
+|[[File:Water drip particle.png|center|frameless]]
+|-
+|<code>water_evaporation_actor_emitter</code>
+|着火的[[生物]]进入水中的粒子；[[细雪]]产生的水蒸发粒子
+|[[File:Water evaporation actor emitter.png|center|frameless]]
+|-
+|<code>water_evaporation_bucket_emitter</code>
+|在[[下界]]使用[[水桶]]放[[水]]时水蒸发的粒子
+|[[File:Water evaporation bucket emitter.png|center|frameless]]
+|-
+|<code>water_evaporation_manual</code>
+|水蒸发粒子（该粒子未被使用）{{info needed}}
+|[[File:Water evaporation manual.png|center|frameless]]
+|-
+|<code>water_splash_particle</code>
+|[[气泡柱]]顶部的水花飞溅粒子；{{only|ee|for=用[[实验台]]制作[[冰弹]]}}时的粒子；[[狼]]离开水后甩水粒子。''该粒子只能在[[空气]]中生成和存在。''
+|[[File:Water splash particle.png|center|frameless|298x298px]]
+|-
+|<code>water_splash_particle_manual</code>
+|水中的[[实体]]或[[鱼钩]]产生的水花飞溅粒子。''该粒子只能在[[空气]]中生成和存在。''
+|[[File:Water splash particle manual.png|center|frameless]]
+|-
+|<code>water_wake_particle</code>
+|[[钓鱼]]时鱼的轨迹粒子
+|[[File:Water wake particle.png|center|frameless]]
+|-
+|<code>wax_particle</code>
+|用[[斧]]给[[铜块]]的涂蜡变种除蜡时的粒子，用[[蜜脾]]给[[铜块]]未涂蜡变种或[[告示牌]]涂蜡时的粒子
+|[[File:Wax particle.png|center|frameless]]
+|-
+|<code>weaving_ambient</code>
+|[[盘丝]]效果产生的粒子
+|[[File:Weaving ambient.png|center|frameless]]
+|-
+|<code>weaving_emitter</code>
+|带有[[盘丝]]效果的生物死亡时的粒子
+|[[File:Weaving emitter.png|center|frameless]]
+|-
+|<code>white_smoke_particle</code>
+|[[合成器]]掷出物品的粒子，[[失水恶魂]]未含水时产生的粒子
+|[[File:White smoke particle.png|center|frameless]]
+|-
+|<code>wind_charged_ambient</code>
+|[[蓄风]]效果产生的粒子{{Citation needed}}
+|[[File:Wind charged ambient.png|center|frameless]]
+|-
+|<code>wind_charged_emitter</code>
+|带有[[蓄风]]效果的生物死亡时的粒子{{Citation needed}}
+|[[File:Wind charged emitter.png|center|frameless]]
+|-
+|<code>wind_explosion_emitter</code>
+|[[风弹（实体）|风弹实体]]爆炸时的一阵狂风粒子
+|[[File:Wind explosion emitter.png|center|frameless]]
+|-
+|<code>witchspell_emitter</code>
+|[[女巫]]产生的粒子
+|[[File:Particle witchMagic.png|300px]]
+|-
+|<code>wither_boss_invulnerable</code>
+|[[凋灵]]处于在刚生成的无敌状态时的粒子
+|[[File:Particle evoker spell.png|300px]]
+|-
+|<code>yellow_poplar_leaves_particle</code>{{in exp|be 26.40|exg=y_2026_drop_3|op=upcoming}}
+|[[黄色杨树树叶]]飘落的落叶粒子
+|
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|加入了<code>blockcrack</code>、<code>flame</code>、<code>smoke</code>、<code>bubble</code>和<code>watersplash</code>粒子。}}
+|{{HistoryLine||0.3.2|<code>flame</code>粒子现在会在[[熔炉]]上产生。}}
+|{{HistoryLine||0.4.0|加入了<code>crit</code>和<code>snowballpoof</code>粒子。}}
+|{{HistoryLine||0.5.0|加入了<code>reddust</code>粒子。}}
+|{{HistoryLine||0.9.0|dev=build 1|加入了<code>dripWater</code>、<code>dripLava</code>{{verify|history=1|bedrock=1}}、<code>townaura</code>、<code>heart</code>和<code>portal</code>粒子。}}
+|{{HistoryLine||0.10.0|dev=build 1|加入了对应不稳定的沙子和沙砾的<code>fallingdust</code>粒子。}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了<code>ink</code>、<code>spell</code>、<code>mobspellinstantaneous</code>、<code>mobspell</code>和<code>waterwake</code>粒子。}}
+|{{HistoryLine||0.12.1|dev=build 1|<code>crit</code>粒子现在会在造成暴击时产生。
+|<code>portal</code>粒子现在会在[[下界传送门]]附近产生。
+|加入了<code>villagerangry</code>、<code>largeexplode</code>、<code>hugeexplode</code>粒子、<code>blockdust</code>、<code>slime</code>、<code>enchantingtable</code>、<code>rainsplash</code>和<code>snowshovel</code>粒子。}}
+|{{HistoryLine|||dev=build 8|<code>largeexplode</code>和<code>hugeexplosion</code>粒子现在有了更高的清晰度。}}
+|{{HistoryLine|||dev=build 9|粒子现在能够从水下看见。
+|粒子不再会在方块内部变暗。}}
+|{{HistoryLine||0.13.0|dev=build 1|粒子不再作为实体处理。
+|<code>reddust</code>粒子现在由[[红石]]产生。
+|加入了<code>villagerhappy</code>和<code>note</code>粒子。}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了<code>mobappearance</code>粒子。{{verify|history=1|bedrock=1}}}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了<code>endRod</code>{{verify|history=1|bedrock=1}}和<code>dragonbreath</code>粒子。}}
+|{{HistoryLine||1.0.4|dev=1.0.4.0|<code>villagerhappy</code>粒子现在会在[[交易]]时产生。}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|particle}}命令，可用于生成粒子。}}
+|{{HistoryLine|||dev=1.0.5.3|移除了{{cmd|particle}}命令。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了<code>spit</code>和<code>totem</code>粒子。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了<code>fireworksSpark</code>粒子。}}
+|{{HistoryLine||1.5.0|dev=1.5.0.0|加入了<code>dolphin</code>粒子。}}
+|{{HistoryLine|||dev=1.5.0.1|加入了<code>nautilus</code>粒子。}}
+|{{HistoryLine|||dev=1.5.0.7|加入了<code>bubble_column_up</code>、<code>bubble_pop</code>和<code>current_down</code>粒子。}}
+|{{HistoryLine||1.6.0|dev=1.6.0.1|加入了<code>barrier</code>粒子。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|重新加入了{{cmd|particle}}命令，会暂时生成一个粒子发射器，而不是一个粒子区域。
+|粒子现在使用JSON格式进行定义，以支持{{cmd|particle}}命令生成粒子。使用JSON格式的粒子包括：<code>basic_flame_particle</code>、<code>basic_render_parameters</code>、<code>basic_smoke_particle</code>、<code>block_destruct</code>、<code>heart_particle</code>、<code>mobflame_emitter</code>、<code>test_beziercurve</code>、<code>test_bounce</code>、<code>test_catmullromcurve</code>、<code>test_colorcurve</code>、<code>test_combocurve</code>、<code>test_highrestitution</code>、<code>test_linearcurve</code>、<code>test_mule</code>、<code>test_smoke_puff</code>、<code>test_sphere</code>、<code>test_spiral</code>、<code>test_watertest</code>。
+|加入了<code>sneeze</code>粒子。}}
+|{{HistoryLine||1.9.0|dev=1.9.0.0|加入了<code>test_flipbook</code>、<code>test_vertexrandom</code>、<code>balloon_gas_particle</code>、<code>mobspell_emitter</code>、<code>basic_crit_particle</code>、<code>portal_directional</code>、<code>bubble_column_down_particle</code>、<code>portal_east_west</code>、<code>portal_north_south</code>、<code>bubble_column_up_particle</code>、<code>crit_emitter</code>、<code>splash_spell_emitter</code>、<code>end_chest</code>、<code>totem_particle</code>、<code>evocation_fang_particle</code>、<code>water_splash_particle</code>、<code>evoker_spell</code>、<code>water_wake_particle</code>、<code>magnesium_salts_emitter</code>、<code>wither_boss_invulnerable</code>和<code>mob_portal</code>粒子。}}
+|{{HistoryLine|||dev=1.9.0.3|移除了<code>portal_east_west</code>和<code>portal_north_south</code>粒子。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|加入了<code>basic_bubble_particle</code>、<code>bubble_column_bubble</code>、<code>cauldron_bubble_particle</code>、<code>cauldron_explosion_emitter</code>、<code>cauldron_splash_particle</code>、<code>death_explosion_emitter</code>、<code>dolphin_move_particle</code>、<code>elephant_tooth_paste_vapor_particle</code>、<code>egg_destroy_emitter</code>、<code>explosion_particle</code>、<code>eye_of_ender_bubble_particle</code>、<code>eyeofender_death_explode_particle</code>、<code>fish_hook_particle</code>、<code>fish_pos_particle</code>、<code>guardian_attack_particle</code>、<code>guardian_water_move_particle</code>、<code>ice_evaporation_emitter</code>、<code>ink_emitter</code>、<code>misc_fire_vapor_particle</code>、<code>mob_block_spawn_emitter</code>、<code>silverfish_grief_emitter</code>、<code>sponge_absorb_water_particle</code>、<code>squid_flee_particle</code>、<code>squid_ink_bubble</code>、<code>squid_move_particle</code>、<code>underwater_torch_particle</code>、<code>water_evaporation_actor_emitter</code>和<code>water_evaporation_bucket_emitter</code>粒子。
+|重新加入了<code>portal_east_west</code>和<code>portal_north_south</code>粒子。
+|粒子现在由[[附加包|原版资源包]]数据驱动。
+|将带有{{cd|test_}}前缀的粒子的前缀重命名为{{cd|example_}}。
+|移除了{{cd|test_mule}}和{{cd|test_sphere}}粒子。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|加入了<code>campfire_smoke_particle</code>、<code>campfire_tall_smoke_particle</code>、<code>knockback_roar_particle</code>和<code>stunned_emitter</code>粒子。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|加入了<code>camera_shoot_explosion</code>、<code>colored_flame_particle</code>、<code>conduit_absorb_particle</code>、<code>conduit_attack_emitter</code>、<code>critical_hit_emitter</code>、<code>dragon_death_explosion_emitter</code>、<code>underwater_torch_particle</code>、<code>dragon_destroy_block</code>、<code>dragon_dying_explosion</code>、<code>enchanting_table_particle</code>、<code>falling_border_dust_particle</code>、<code>falling_dust_concrete_powder_particle</code>、<code>falling_dust_dragon_egg_particle</code>、<code>falling_dust_gravel_particle</code>、<code>falling_dust_red_sand_particle</code>、<code>falling_dust_sand_particle</code><code>falling_dust_scaffolding_particle</code>、<code>falling_dust_top_snow_particle</code>、<code>huge_explosion_lab_misc_emitter</code>、<code>huge_explosion_emitter</code>、<code>lab_table_heatblock_dust_particle</code>、<code>lab_table_misc_mystical_particle</code>、<code>large_explosion</code>、<code>lava_particle</code>、<code>llama_spit_smoke</code>、<code>mycelium_dust_particle</code>、<code>obsidian_glow_dust_particle</code>、<code>phantom_trail_particle</code>、<code>redstone_ore_dust_particle</code>、<code>redstone_repeater_dust_particle</code>、<code>redstone_torch_dust_particle</code>、<code>redstone_wire_dust_particle</code>、<code>rising_border_dust_particle</code>和<code>water_drip_particle</code>粒子。
+|移除了所有带有{{cd|example_}}前缀的粒子。}}
+|{{HistoryLine|||dev=1.12.0.6|加入了<code>basic_bubble_particle_manual</code>和<code>water_splash_particle_manual</code>粒子。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.1|加入了<code>breaking_item_icon</code>、<code>breaking_item_terrain</code>、<code>minecraft:dragon_breath_fire</code>、<code>dragon_breath_lingering</code>、<code>dragon_breath_trail</code>和<code>sparkler_emitter</code>粒子。}}
+|{{HistoryLine|||dev=1.13.0.16|加入了<code>conduit_particle</code>、<code>explosion_manual</code>、<code>falling_dust</code>、<code>mobflame_single</code>、<code>totem_manual</code>和<code>water_evaporation_manual</code>粒子。}}
+|{{HistoryLine||1.14.0|dev=1.14.0.1|加入了<code>block_slide</code>、<code>honey_drip_particle</code>、<code>nectar_drip_particle</code>粒子。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|加入了<code>blue_flame_particle</code>粒子。}}
+|{{HistoryLine|||dev=1.16.0.57|加入了<code>obsidian_tear_particle</code>、<code>obsidian_tear_particle</code>、<code>portal_reverse_particle</code>和<code>soul_particle</code>粒子。}}
+|{{HistoryLine||1.16.210|dev=1.16.210.53|加入了<code>snowflake_particle</code>粒子。}}
+|{{HistoryLine|||dev=1.16.210.56|加入了<code>vibration_signal</code>和<code>sculk_sensor_redstone_signal</code>粒子。}}
+|{{HistoryLine|||dev=1.16.210.59|加入了<code>glow_particle</code>粒子。}}
+|{{HistoryLine|||dev=1.16.210.60|移除了<code>glow_particle</code>粒子。}}
+|{{HistoryLine||1.16.220|dev=1.16.220.50|加入了<code>stalactite_lava_drip_particle</code>和<code>stalactite_water_drip_particle</code>粒子。
+|重新加入了<code>glow_particle</code>粒子。}}
+|{{HistoryLine|||dev=1.16.220.52|加入了<code>electric_spark_particle</code>、<code>spore_blossom_ambient_particle</code>、<code>spore_blossom_shower_particle</code>和<code>wax_particle</code>粒子。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.52|加入了<code>crop_growth_area_emitter</code>粒子。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.22|加入了<code>candle_flame_particle</code>粒子。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.22|加入了<code>sculk_soul_particle</code>和<code>shriek_particle</code>粒子。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.22|加入了<code>sculk_charge_particle</code>和<code>sculk_charge_pop_particle</code>粒子。}}
+|{{HistoryLine|||dev=1.18.30.32|加入了<code>warden_dig</code>粒子。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.26|加入了<code>sonic_explosion</code>粒子。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.20|加入了<code>cherry_leaves_particle</code>粒子。}}
+|{{HistoryLine||1.20.50|dev=1.20.50.20|加入了<code>dust_plume</code>粒子。}}
+|{{HistoryLine|||dev=1.20.50.21|加入了<code>white_smoke_particle</code>粒子。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|exg=updateAnnouncedLive2023|加入了{{cd|d=pretty|small_soul_fire_flame|trial_spawner_detection|trial_spawner_detection_ominous}}粒子，属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.0.21|加入了{{cd|d=pretty|ominous_spawning_particle|smash_ground_particle|smash_ground_particle_center}}粒子，属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|exg=none|{{cd|d=pretty|small_soul_fire_flame|trial_spawner_detection|trial_spawner_detection_ominous|ominous_spawning_particle|smash_ground_particle|smash_ground_particle_center}}粒子不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|加入了{{cd|d=pretty|creaking_heart_trail|creaking_teardown_body|creaking_teardown_head}}粒子。}}
+|{{HistoryLine|||dev=1.21.50.24|加入了{{cd|mobspell_lingering}}粒子。}}
+|{{HistoryLine|||dev=1.21.50.25|将{{cd|d=pretty|creaking_teardown_body|creaking_teardown_head}}粒子重命名为{{cd|d=pretty|creaking_crumble_body|creaking_crumble_head}}。}}
+|{{HistoryLine|||dev=1.21.50.26|加入了{{cd|d=pretty|eyeblossom_close|eyeblossom_open|pale_oak_leaves_particle}}粒子。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.25|exg=y_2025_drop_1|加入了{{cd|d=pretty|azalea_leaves_particle|biome_tinted_leaves_particle}}粒子，属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.20|exg=y_2025_drop_1|加入了{{cd|firefly_particle}}粒子，属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.23|exg=none|{{cd|d=pretty|azalea_leaves_particle|biome_tinted_leaves_particle|firefly_particle}}粒子不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.20|加入了{{cd|magic_critical_hit}}粒子。}}
+|{{HistoryLine||1.21.111|dev=1.21.110.23|加入了{{cd|green_flame_particle}}粒子。}}
+|{{HistoryLine||1.21.120|dev=1.21.120.21|更改了{{cd|green_flame_particle}}粒子的纹理。}}
+|{{HistoryLine||26.20|dev=26.20.23|exg=y_2026_drop_2|加入了{{cd|d=pretty|noxious_gas_particle|sulfur_bubble_particle|sulfur_cube_goo}}粒子。}}
+|{{HistoryLine||26.30|dev=26.30.20|{{cd|d=pretty|noxious_gas_particle|sulfur_bubble_particle|sulfur_cube_goo}}粒子不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=26.30.25|加入了{{cd|d=pretty|geyser_poof|geyser_base|geyser_plume}}粒子。}}
+|{{HistoryLine||26.40|dev=26.40.27|exg=y_2026_drop_3|加入了{{cd|d=pretty|red_poplar_leaves_particle|orange_poplar_leaves_particle|yellow_poplar_leaves_particle}}粒子。}}
+}}
+
+== 你知道吗 ==
+* [[着火]]的实体在火焰动画处迸出圆形的粒子。
+
+== 画廊 ==
+<gallery>
+File:ParticlesGuide.png|文件<code>particles.png</code>的注解
+File:Eating Particles Pocket.jpg|旧版本中吃东西时产生的粒子，看起来像是该食物的缩略图
+File:Burning Zombie Pocket.jpg|一只正在燃烧的[[僵尸]]，播放着火动画的同时迸出火焰粒子
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}

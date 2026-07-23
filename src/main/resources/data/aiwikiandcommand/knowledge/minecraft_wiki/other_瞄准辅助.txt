@@ -1,0 +1,91 @@
+# 页面: 瞄准辅助
+# 来源: https://zh.minecraft.wiki/w/%E7%9E%84%E5%87%86%E8%BE%85%E5%8A%A9
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:43
+# 原始 Wikitext 内容:
+
+{{stub}}
+{{exclusive|be}}
+'''瞄准辅助（Aim Assist）'''用于在[[第三人称视角]]等视角下协助瞄准[[方块]]和[[实体]]。
+
+== 启用 ==
+当[[玩家]]处于第三人称、固定悬臂{{sic}}、跟随轨道、自由视角时，可通过{{cmd|aimassist}}命令启用瞄准辅助。
+
+玩家切换到内置了瞄准辅助的相机视角时，该瞄准辅助会被启用。在此期间，其他瞄准辅助均不生效。
+
+== 行为 ==
+{{stub|section=1}}
+启用瞄准辅助后，游戏会基于玩家实体朝向瞄准方块和实体，并在其瞄准面显示瞄准图标。瞄准图标可由资源包更改。
+
+瞄准辅助的行为受[[命令]]和行为包的制约，因此玩家可通过瞄准辅助来精确其在非第一人称视角下的瞄准行为来更方便地瞄准想瞄准的目标。
+
+=== 瞄准范围 ===
+瞄准辅助的瞄准范围是可变的。瞄准距离最小为0，最大为1-15。水平瞄准角度和竖直瞄准角度以度为单位，可取值为10-90。
+
+游戏以[[玩家]]视线为轴形成一个锥体形区域，其高为瞄准距离，顶角由瞄准角度决定，在水平方向上，其以轴为中心向左、右各偏出一个水平角度，竖直方向同理。超出该区域的[[方块]]和[[实体]]不能被瞄准。
+
+=== 瞄准模式 ===
+瞄准辅助的瞄准模式有两种，包括距离和角度。
+
+* '''距离'''：优先瞄准距离玩家近的方块和实体。
+* '''角度'''：优先瞄准靠近锥体轴的方块和实体。
+
+=== 瞄准对象 ===
+通过[[行为包]]，可从瞄准对象中排除特定方块和实体，指定能否瞄准[[液体]]，并基于玩家的手持状态设定以上特殊行为的触发条件。
+
+== 预设 ==
+瞄准辅助预设是瞄准辅助的预配置，能够对瞄准辅助进行更为精细的参数设置。瞄准辅助预设是[[行为包]]的一部分，其文件位于{{filepath|aim_assist/presets}}路径下，为JSON格式。每个文件的根对象格式如下：
+
+<div class="treeview">
+* {{nbt|object}}：根对象。
+** {{nbt|string|format_version|required=1}}：文件格式版本。瞄准辅助预设需要{{cd|1.21.70}}及以上；要支持[[弹射物]]，则必须为{{cd|1.21.110}}及以上。
+** {{nbt|object|minecraft:aim_assist_preset|required=1}}：瞄准辅助预设定义。
+*** {{nbt|string|identifier|required=1}}：此预设的[[命名空间ID]]。
+*** {{nbt|string|default_item_settings}}：未在{{nbt|object|item_settings}}中特殊指定的物品所使用的默认[[#分类|分类]]。
+*** {{nbt|string|hand_settings}}：空手时使用的分类。
+*** {{nbt|object|item_settings}}：为特殊物品设置的特殊分类。
+**** {{nbt|string|<''物品的命名空间ID''>}}：手持此物品时使用的分类的命名空间ID。
+*** {{nbt|object|exclusion_settings}}：瞄准辅助要排除的方块和实体。
+**** {{nbt|list|blocks}}：瞄准辅助要排除的方块。
+***** {{nbt|string}}：方块的命名空间ID。
+**** {{nbt|list|entities}}：瞄准辅助要排除的实体。
+***** {{nbt|string}}：实体的命名空间ID。
+*** {{nbt|list|liquid_targeting_list}}：一个列表，手持列表中物品时能够瞄准液体。
+**** {{nbt|string}}：物品的命名空间ID。
+</div>
+
+== 分类 ==
+瞄准辅助分类定义每种方块或实体的瞄准优先级。多个分类不能同时被激活。瞄准辅助分类是[[行为包]]的一部分，其位于{{filepath|aim_assist/categories}}路径下，为JSON格式。每个文件的根对象格式如下：
+
+<div class="treeview">
+* {{nbt|object}}：根对象。
+** {{nbt|string|format_version|required=1}}：文件格式版本。瞄准辅助分类需要{{cd|1.21.70}}及以上；要支持[[弹射物]]，则必须为{{cd|1.21.110}}及以上。
+** {{nbt|object|minecraft:aim_assist_categories|required=1}}：瞄准辅助分类列表定义。
+*** {{nbt|list|categories|required=1}}：瞄准辅助分类定义列表。
+**** {{nbt|object}}：瞄准辅助分类定义。
+***** {{nbt|string|name|required=1}}：分类的[[命名空间ID]]。
+***** {{nbt|object|priorities|required=1}}：此分类下[[方块]]和[[实体]]的优先级。瞄准辅助判定距离为{{cd|实际距离/优先级}}。在角度模式下，距离为目标到轴线的距离，而非到[[玩家]]的距离。
+****** {{nbt|int|block_default}}：{{nbt|object|blocks}}中未指定的方块的默认优先级。
+****** {{nbt|int|entity_default}}：{{nbt|object|entities}}中未指定的实体的默认优先级。
+****** {{nbt|object|blocks}}：特定方块的优先级。
+******* {{nbt|int|<''方块的命名空间ID''>}}：优先级大小。
+****** {{nbt|object|entities}}：特定实体的优先级。
+******* {{nbt|int|<''实体的命名空间ID''>}}：优先级大小。
+</div>
+
+== 历史 ==
+{{stub|section=1}}
+{{HistoryTable
+|{{HistoryLine|be}}
+|{{HistoryLine||1.21.50|dev=1.21.50.25|exg=camera_aim_assist|加入了瞄准辅助，目前仅支持方块。|加入了{{cmd|aimassist}}命令。|瞄准辅助可通过[[行为包]]和资源包更改。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.21|exg=camera_aim_assist|现在仅能在第三人称相机视角下使用，切换至不受支持的相机类型时会禁用瞄准辅助。}}
+|{{HistoryLine|||dev=1.21.60.23|将瞄准辅助预设物品更改为通过唯一[[命名空间ID]]来全局引用，而不是通过categories列表中的名称来引用。}}
+|{{HistoryLine|||dev=1.21.60.25|瞄准辅助现在仅允许[[玩家]]在交互范围内进行交互。|瞄准辅助现在能够正确检测到位于检测区域内的[[实体]]判定箱部分。|现在瞄准辅助的实体和[[方块]]锁定功能会应用于触摸控制模式：“摇杆并点击进行互动”和“方向键并点击进行互动”。}}
+|{{HistoryLine||1.21.70|dev=?|把数组属性{{cd|exclusion_list}}改为对象属性{{cd|exclusion_settings}}。}}
+|{{HistoryLine|||dev=1.21.70.23|瞄准辅助不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.111|dev=?|添加了对弹射物的支持。}}
+|{{HistoryLine|||dev=1.21.110.20|内容日志警告现在会记录瞄准辅助预设和瞄准辅助分类JSON中缺失的引用。}}
+}}
+
+== 导航 ==
+{{Navbox gameplay}}

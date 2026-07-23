@@ -1,0 +1,993 @@
+# 页面: Java版指南/足迹与故事
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%8C%87%E5%8D%97/%E8%B6%B3%E8%BF%B9%E4%B8%8E%E6%95%85%E4%BA%8B
+# 分类: Java版指南, 使用DynamicPageList4的页面
+# 抓取时间: 2026-07-14 17:15:22
+# 原始 Wikitext 内容:
+
+{{for|基岩版版本的指南|基岩版指南/足迹与故事}}
+{{Infobox guide
+|edition=Java版
+|name=足迹与故事
+|vers=
+* [[Java版1.20|1.20]]
+* [[Java版1.20.1|1.20.1]]
+* [[Java版1.20.2|1.20.2]]
+|prev=荒野更新
+|next=蝙蝠与陶罐
+}}
+这篇指南简要概述了[[足迹与故事]]（[[Java版1.20]]-[[Java版1.20.2|1.20.2]]）的内容。本指南假定读者对[[荒野更新]]（Java版1.19.x）更新的内容有基本了解。
+
+== 生物 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Mobs}}
+|-
+| [[骆驼]]
+| [[File:Camel JE1 BE2.png|84px]]
+|
+* 沙漠[[村庄]]
+|
+* {{xp|1|3}}（若被[[玩家]]或驯服的[[狼]]杀死）
+* 其装备的{{ItemLink|Saddle}}（若有）
+|
+* 可以跨过[[栅栏]]等1.5格高的方块。
+* 有时会原地坐下。
+* 可以通过[[仙人掌]]繁殖。
+* 可以装备[[鞍]]，供2名玩家骑乘。
+** 被骑乘时可以慢走和疾跑。也可以冲刺，但有一定冷却时间。
+** 在玩家骑乘时，来自比玩家低0.5格以上距离的生物的单体近战攻击无法伤害玩家。
+* 被[[拴绳]]拴住时若受到伤害，会进入惊慌状态。
+|-
+| [[嗅探兽]]
+| [[File:Sniffer JE1 BE1.png|84px]]
+|
+* 不会自然生成，只会从[[嗅探兽蛋]]中孵出
+|
+* {{xp|1|3}}（若被[[玩家]]或驯服的[[狼]]杀死）
+|
+* 能被手持[[火把花种子]]的玩家吸引，但不能被驯服。
+* 时常嗅探空气，有时能刨挖出远古植物的种子。
+** 有8分钟冷却时间。
+** 最近被挖掘过的20个方块会被记录，并且不再寻求挖掘这些方块。
+* 可以使用火把花种子喂养和繁殖。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Mobs}}
+|-
+| [[盔甲架]]
+| {{Animate|Armor Stand JE4.png;Armor Stand Golden.png;Armor Stand Chainmail.png;Armor Stand Iron.png;Armor Stand Diamond.png;Armor Stand Netherite.png|84px}}
+|
+* 不再会被[[羊驼唾沫]]和[[潜影弹]]摧毁。
+|-
+| [[监守者]]
+| [[File:Warden JE1 BE1.png|84px]]
+|
+* 现在能检测到[[紫水晶块]]的共振。
+|-
+| [[村民]]
+| {{Animate|Desert Farmer.png;Jungle Farmer JE2.png;Plains Farmer.png;Savanna Farmer.png;Snowy Farmer.png;Swamp Farmer.png;Taiga Farmer.png|84px}}
+|
+* 现在农民可以种植[[火把花种子]]和[[瓶子草荚果]]。
+* 现在被多次感染并治愈时，所提供的折扣不再翻倍。
+* 生成[[铁傀儡]]所需观察时间由35秒改回30秒。
+* 更改了沙漠村民的纹理。
+|-
+| [[蜜蜂]]
+| [[File:Bee types.gif|84px]]
+|
+* 现在会从[[紫颂花]]和[[孢子花]]上收集花粉。
+* 优化了飞行AI，现在上下飞行幅度不会太大。
+|-
+| [[鹦鹉]]
+| {{Animate|Red Parrot JE1 BE1.png;Blue Parrot JE1 BE1.png;Green Parrot JE1 BE1.png;Cyan Parrot JE1 BE1.png;Gray Parrot JE1 BE1.png|84px}}
+|
+* 优化了飞行AI，现在上下飞行幅度不会太大。
+|-
+| [[猫]]
+| [[File:Tuxedo Cat JE2 BE2.png|84px]]
+|
+* 更改了西服猫的纹理，回退至[[18w43a]]的纹理。
+|-
+| [[青蛙]]和[[山羊]]
+| [[File:Frog.png|84px]] [[File:Goat.png|84px]]
+|
+* 现在被[[拴绳]]拴住时若受到伤害，会进入惊慌状态。
+|-
+| [[狼]]
+| [[File:Tamed_Wolf_with_Red_Collar_JE3_BE4.png|84px]] 
+|
+* 更改了项圈的纹理。
+* 项圈颜色不再能被主人外的玩家更改。
+|-
+| [[史莱姆]]和[[岩浆怪]]
+| [[File:Slime_JE3_BE2.png|84px]] [[File:Magma_Cube_JE2.png|84px]]
+|
+* 现在会受到跳跃提升效果影响。
+* 发出的声音现在受到“敌对生物”音量滑块的控制。
+|-
+| [[僵尸村民]]
+| [[File:Desert Zombie Villager Base.png|84px]]
+|
+* 更改了沙漠僵尸村民的纹理。
+|-
+| [[近战攻击]]
+|
+|
+* 更改了生物近战攻击的攻击距离的计算方法。
+** 水平方向上，生物的攻击距离现在由其边界箱在水平方向上向外延伸得到，而非由水平宽度决定。
+*** 例如，[[劫掠兽]]不再能穿过几格厚的墙壁而攻击到目标。
+** 垂直方向上，生物的攻击距离即为其边界箱的垂直范围。如果它的边界箱不与其目标的边界箱在垂直方向上重叠，其就无法攻击到目标。比如：
+*** 骑乘中型生物（如[[马]]）可以免受小型生物（如[[幼年僵尸]]）的攻击。
+*** 骑乘体型较高的生物（如[[骆驼]]）可以免受一般大小的生物（如[[僵尸]]）的攻击。
+*** 一些生物的攻击高度变高（如[[末影人]]，攻击它的安全高度由1.5格变为3格）。
+|}
+
+== 方块 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory	
+|type=generic
+|title=足迹与故事新增方块
+|rows=6
+| 0=Bamboo Mosaic | Bamboo Mosaic Stairs | Bamboo Mosaic Slab | Bamboo Planks | Bamboo Stairs | Bamboo Slab | Block of Bamboo | Block of Stripped Bamboo | Bamboo Trapdoor | Bamboo Pressure Plate | Bamboo Button | Bamboo Fence | Bamboo Fence Gate | Bamboo Door | Bamboo Sign | Calibrated Sculk Sensor | Cherry Log | Cherry Planks | Cherry Stairs | Cherry Slab | Cherry Leaves | Cherry Sapling | Cherry Wood | Stripped Cherry Log | Stripped Cherry Wood | Cherry Trapdoor | Cherry Pressure Plate | Cherry Button | Cherry Fence | Cherry Fence Gate | Cherry Door | Cherry Sign | Pink Petals | Chiseled Bookshelf | Oak Hanging Sign | Spruce Hanging Sign | Birch Hanging Sign | Jungle Hanging Sign | Acacia Hanging Sign | Dark Oak Hanging Sign | Mangrove Hanging Sign | Cherry Hanging Sign | Bamboo Hanging Sign | Crimson Hanging Sign | Warped Hanging Sign | Decorated Pot | Suspicious Sand | Suspicious Gravel | Piglin Head | Sniffer Egg | Torchflower | Pitcher Plant
+}}	}}
+{|{{Simple Guide table|New Blocks}}
+|-
+| [[竹马赛克]]
+| [[File:Bamboo Mosaic JE1 BE1.png|84px]]
+|
+{{Crafting
+|B1=Bamboo Slab|B2=Bamboo Slab|Output=Bamboo Mosaic}}
+|
+可使用任意工具或徒手开采，但用斧是最快的
+|
+* 可用于制作对应台阶和楼梯。
+|-
+| [[竹板]]
+| [[File:Bamboo Planks JE2 BE2.png|84px]]
+|
+{{Crafting
+|B2=Block of Bamboo; Block of Stripped Bamboo|Output=Bamboo Planks,2}}
+|
+可使用任意工具或徒手开采，但用斧是最快的
+|
+* 可用于制作对应台阶、楼梯、栅栏、栅栏门、压力板、按钮、门、活板门、告示牌和竹筏。
+|-
+| [[竹块]]
+| [[File:Block of Bamboo JE3 BE2.png|84px]]
+|
+{{Crafting|A1=Bamboo|A2=Bamboo|A3=Bamboo|B1=Bamboo|B2=Bamboo|B3=Bamboo|C1=Bamboo|C2=Bamboo|C3=Bamboo|Output=Block of Bamboo}}
+|
+可使用任意工具或徒手开采，但用斧是最快的
+|
+* 可用作装饰性方块。
+* 可用于合成竹板。
+|-
+| [[去皮竹块]]
+| [[File:Block of Stripped Bamboo JE3 BE2.png|84px]]
+|
+* 可通过对竹块{{ctrl|使用}}斧获得，此操作将消耗斧1点耐久度。
+|
+可使用任意工具或徒手开采，但用斧是最快的
+|
+* 可用作装饰性方块。
+* 可用于合成悬挂式竹告示牌和竹板。
+|-
+| [[校频幽匿感测体]]
+| [[File:Calibrated Sculk Sensor JE2.gif|84px]]
+|
+{{Crafting|A2=Amethyst Shard|B1=Amethyst Shard|B2=Sculk Sensor|C2=Amethyst Shard|Output=Calibrated Sculk Sensor}}
+|
+可使用任意工具或徒手开采，但用锄是最快的
+|
+* 是幽匿感测体的变种。
+* 在紫水晶侧输入红石信号时，只能检测到与其接收的红石信号对应的振动。
+|-
+| [[雕纹书架]]
+| {{Animate|Chiseled Bookshelf (S) JE1.png;Chiseled Bookshelf (S) JE1.png;Chiseled Bookshelf (S) JE1.png;Chiseled Bookshelf (S) JE1.png;Chiseled Bookshelf (S) JE1.png;Chiseled Bookshelf (S) JE1.png;Chiseled Bookshelf (S) JE1.png|84px}}
+|
+{{crafting|A1=Any Planks|B1=Any Planks|C1=Any Planks|A2=Any wood Slab|B2=Any wood Slab|C2=Any wood Slab|A3=Any Planks|B3=Any Planks|C3=Any Planks|Output=Chiseled Bookshelf}}
+|
+可使用任意工具或徒手开采，但用斧是最快的
+|
+* 可容纳最多6本[[书]]、[[书与笔]]、[[成书]]、[[附魔书]]或[[知识之书]]。
+* 玩家可以手持任意书对某个空槽位按下{{control|使用}}键以在该槽位放入书本，对非空槽位按下{{control|使用}}键取出对应槽位上的书本。
+* 在没有被具有[[精准采集]]的工具挖掘破坏时，只会掉落内容物，不会掉落自身。
+|-
+| [[悬挂式告示牌]]
+| {{Animate|Oak Hanging Sign JE1.png;Spruce Hanging Sign JE1.png;Birch Hanging Sign JE1.png;Jungle Hanging Sign JE1.png;Acacia Hanging Sign JE1.png;Dark Oak Hanging Sign JE1.png;Mangrove Hanging Sign JE1.png;Cherry Hanging Sign JE1.png;Crimson Hanging Sign JE1.png;Warped Hanging Sign JE1.png;Bamboo Hanging Sign JE1.png|84px}}
+{{Animate|Oak Wall Hanging Sign JE1.png;Spruce Wall Hanging Sign JE1.png;Birch Wall Hanging Sign JE1.png;Jungle Wall Hanging Sign JE2.png;Acacia Wall Hanging Sign JE1.png;Dark Oak Wall Hanging Sign JE1.png;Mangrove Wall Hanging Sign JE1.png;Cherry Wall Hanging Sign JE1.png;Crimson Wall Hanging Sign JE1.png;Warped Wall Hanging Sign JE1.png;Bamboo Wall Hanging Sign JE1.png|84px}}
+|
+{{Crafting
+|A1=Chain|C1=Chain|A2=Matching Stripped Log or Stem; Block of Stripped Bamboo|B2=Matching Stripped Log or Stem; Block of Stripped Bamboo|C2=Matching Stripped Log or Stem; Block of Stripped Bamboo|A3=Matching Stripped Log or Stem; Block of Stripped Bamboo|B3=Matching Stripped Log or Stem; Block of Stripped Bamboo|C3=Matching Stripped Log or Stem; Block of Stripped Bamboo|Output=Matching Hanging Sign,6; Bamboo Hanging Sign,6}}
+|
+可使用任意工具或徒手开采，但用斧是最快的
+|
+* 是告示牌的可悬挂变种。
+|-
+| [[樱花原木]]
+| [[File:Cherry Log (UD) JE1 BE1.png|84px]]
+|
+* 作为[[樱花树]]的枝干自然生成于[[樱花树林]]生物群系中。
+| 可使用任意工具或徒手开采，但用斧是最快的
+|
+* 与其他原木用途相同。
+|-
+| [[樱花木板]]
+| [[File:Cherry Planks JE1 BE1.png|84px]]
+|
+{{Crafting|B2=Cherry Log|Output=Cherry Planks,4}} 
+| 可使用任意工具或徒手开采，但用斧是最快的
+|
+* 可用于制作对应台阶、楼梯、栅栏、栅栏门、压力板、按钮、门、活板门、告示牌和船。
+|-
+| [[樱花树叶]]
+| [[File:Cherry Leaves JE2.png|84px]]
+|
+* 作为樱花树的一部分自然生成于樱花树林生物群系中。
+| 可使用任意工具或徒手开采，被剪刀或带有精准采集的工具开采时会掉落自身
+|
+* 可用作装饰性方块。
+* 可用于获取樱花树苗。
+|-
+| [[樱花树苗]]
+| [[File:Cherry Sapling JE2 BE1.png|84px]]
+|
+* 可由樱花树叶掉落。
+| 可使用任意工具开采，当被挖掘时会被立即破坏
+|
+* 与其他树苗用途相同。
+|-
+| [[櫻花原木]]
+| [[File:Cherry Wood (UD) JE1 BE1.png|84px]]
+|
+{{Crafting|A2=Cherry Log|B2=Cherry Log|A3=Cherry Log|B3=Cherry Log|Output=Cherry Wood,3}}
+| 可使用任意工具或徒手开采，但用斧是最快的
+| 
+* 可用作装饰性方块。
+* 可用于合成樱花木板。
+|-
+| [[去皮樱花原木]] 
+| [[File:Stripped Cherry Log (UD) JE1 BE1.png|84px]]
+|
+* 可通过对樱花原木{{ctrl|使用}}斧获得，此操作将消耗斧1点耐久度。
+| 可使用任意工具或徒手开采，但用斧是最快的
+|
+* 可用作装饰性方块。
+* 可用于合成樱花木板。
+|-
+| [[去皮樱花木]] 
+| [[File:Stripped Cherry Wood (UD) JE1 BE1.png|84px]] 
+|
+* 可通过对櫻花木塊{{ctrl|使用}}斧获得，此操作将消耗斧1点耐久度。
+| 可使用任意工具或徒手开采，但用斧是最快的
+|
+* 可用作装饰性方块。
+* 可用于合成樱花木板。
+|-
+| [[粉红色花簇]] 
+| {{Animate|Pink Petals 1 JE2 BE1.png;Pink Petals 2 JE2 BE1.png;Pink Petals 3 JE2 BE1.png;Pink Petals 4 JE2 BE1.png|84px}}
+|
+* 自然生成于樱花树林生物群系中。
+* 在樱花树林中对着草方块{{ctrl|使用}}骨粉，有小概率会生成。
+| 可使用任意工具采集。当被挖掘时会被立即破坏
+|
+* 可用作装饰性方块。
+* 与[[海泡菜]]和[[蜡烛]]类似，最多可以在一个方块空间内放置4簇。
+* 可用于合成[[粉红色染料]]。
+|-
+| [[饰纹陶罐]] 
+| {{Animate|Decorated Pot JE2 BE2.png;Angler Decorated Pot.png;Archer Decorated Pot.png;Arms Up Decorated Pot.png;Blade Decorated Pot.png;Brewer Decorated Pot.png;Burn Decorated Pot.png;Danger Decorated Pot.png;Explorer Decorated Pot.png;Friend Decorated Pot.png;Heart Decorated Pot.png;Heartbreak Decorated Pot.png;Howl Decorated Pot.png;Miner Decorated Pot.png;Mourner Decorated Pot.png;Plenty Decorated Pot.png;Prize Decorated Pot.png;Sheaf Decorated Pot.png;Shelter Decorated Pot.png;Skull Decorated Pot.png;Snort Decorated Pot.png|84px}}
+|
+{{Crafting|ingredients=任意[[陶片]]或<br>[[红砖]]|B1=Any Pottery Sherd|A2=Any Pottery Sherd|C2=Any Pottery Sherd|B3=Any Pottery Sherd|Output=Decorated Pot}}
+| 可使用任意工具采集。当被挖掘时会被立即破坏
+|
+* 可用作装饰性方块。
+|-
+| [[可疑的方块]] 
+| {{Animate|Suspicious Sand JE1 BE1.png;Suspicious Gravel JE1 BE1.png|84px}}
+|
+* [[可疑的沙子]]自然生成于[[沙漠神殿]]内部的地窖中、沙漠水井下方、热带[[海底废墟]]中。
+* [[可疑的沙砾]]自然生成于寒带海底废墟和[[古迹废墟]]中。
+* 可疑的方块被破坏后不会掉落。
+** 只能通过其生成的[[下落的方块]]超时而掉落。
+| 可使用任意工具采集，但用锹是最快的
+|
+* 是一类供玩家考古的方块。
+* 对着可疑的方块持续{{ctrl|使用}}[[刷子]]时，其纹理上的裂缝会不断扩大，最终会变为[[沙子]]或[[沙砾]]。若中途停止，可疑的方块会逐渐恢复原状。
+* 如果可疑的方块中有物品，被刷子刷扫的一面会逐渐露出其中的物品，并在可疑的方块被清扫完毕后掉落该物品。
+|-
+| [[猪灵的头]] 
+| [[File:Piglin Head JE1 BE1.png|84px]]
+|
+* [[猪灵]]被[[闪电苦力怕]]炸死时掉落。
+| 可使用任意工具采集
+|
+* 可用作装饰性方块。
+* 放置在音符盒上时，可使其发出猪灵的哼叫。
+|-
+| [[嗅探兽蛋]] 
+| {{Animate|Sniffer Egg Age 0 JE1 BE1.png;Sniffer Egg Age 1 JE1 BE1.png;Sniffer Egg Age 2 JE1 BE1.png|84px}}
+|
+* 用[[刷子]]刷扫热带[[海底废墟]]里的[[可疑的沙子]]有概率掉落嗅探兽蛋。
+* 给两只成年嗅探兽喂食[[火把花种子]]使之繁殖后，其中一只会掉落一个嗅探兽蛋。
+| 可使用任意工具采集
+|
+* 可用作装饰性方块。
+* 可孵化出幼年嗅探兽。
+|-
+| [[火把花]] 
+| [[File:Torchflower JE1 BE3.png|84px]]
+|
+* 由[[火把花种子]]种出。
+| 可使用任意工具采集。当被挖掘时会被立即破坏
+|
+* 可用作装饰性方块。
+* 可用于合成[[橙色染料]]。
+* 可用于合成[[谜之炖菜]]，可给予玩家[[夜视]]效果。
+|-
+| [[瓶子草]] 
+| [[File:Pitcher Plant JE1 BE1.png|84px]]
+|
+* 由[[瓶子草荚果]]种出。
+| 可使用任意工具采集。当被挖掘时会被立即破坏
+|
+* 可用作装饰性方块。
+* 可用于合成[[青色染料]]。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Blocks}}
+|-
+| [[大型箱子]]和[[大型陷阱箱]]
+| 
+|
+* 略微更改了纹理。
+|-
+| [[音符盒]]
+| [[File:Note Block JE2 BE2.png|84px]]
+|
+* 若音符盒顶面上放置了[[生物头颅]]（玩家的头除外），玩家敲击或红石激活音符盒时，音符盒会随机播放对应生物特定类型的音效。
+** 若是玩家的头，则播放{{nbt|string|note_block_sound}}中设置的音效（默认为空）。
+|-
+| [[告示牌]]
+| {{Animate|Oak Standing Sign JE2 BE2.png;Spruce Standing Sign JE2 BE2.png;Birch Standing Sign JE2 BE2.png;Jungle Standing Sign JE2 BE2.png;Acacia Standing Sign JE2 BE2.png;Dark Oak Standing Sign JE2 BE2.png;Mangrove Standing Sign JE1 BE1.png;Crimson Standing Sign JE1 BE1.png;Warped Standing Sign JE1 BE1.png;Bamboo Standing Sign JE1 BE1.png;Cherry Standing Sign JE2 BE2.png|84px}}
+{{Animate|Oak Wall Sign JE2 BE2.png;Spruce Wall Sign JE2 BE2.png;Birch Wall Sign JE2 BE2.png;Jungle Wall Sign JE2 BE2.png;Acacia Wall Sign JE2 BE2.png;Dark Oak Wall Sign JE2 BE2.png;Mangrove Wall Sign JE1 BE1.png;Crimson Wall Sign JE1 BE1.png;Warped Wall Sign JE1 BE1.png;Bamboo Wall Sign JE1 BE1.png;Cherry Wall Sign JE1 BE1.png|84px}}
+|
+* 现在与已放置的告示牌交互可重新编辑文字。
+* 现在告示牌的两面可以分别显示独立的文本内容和颜色。
+* 现在告示牌可以使用[[蜜脾]]涂蜡，涂蜡后的告示牌无法再进行编辑。
+|-
+| [[幽匿感测体]]
+| [[File:Sculk Sensor JE1.gif|84px]]
+|
+* 现在会强充能下方的方块。
+* 加入了可感测到的15个{{cd|resonate}}游戏事件，对应15个振动频率。
+* 更改了许多可感测的游戏事件的振动频率。
+* 若有振动计划被幽匿感测体接收，此振动会在临近全部区块均被加载和计算前留在等待队列中。
+** 此改动用于防止共振机制在远处被卸载的区块中出现问题。
+* 激活状态的持续时长由40游戏刻改为30游戏刻。
+* 冷却状态的持续时长由1游戏刻改为10游戏刻。
+* 振动不再会因为[[模拟距离]]限制而丢失。
+* 现在能检测以下动作：
+** <code>item_interact_finish</code>游戏事件，频率为3：
+*** {{ctrl|使用}}[[骨粉]]。
+** 新增的<code>entity_action</code>游戏事件，频率为4：
+*** [[骆驼]]冲刺。
+*** 骆驼站起。
+*** 骆驼坐下。
+*** [[海龟]]挖开[[沙子]]。
+*** [[女巫]]喝药水。
+** 新增的<code>unequip</code>游戏事件，频率为4：
+*** 卸下装备。
+** <code>entity_damage</code>游戏事件，频率为7：
+*** [[不死图腾]]激活。
+** <code>block_change</code>游戏事件，频率为11：
+*** [[兔子]]啃食[[胡萝卜]]植株。
+*** [[雕纹书架]]与[[漏斗]]、[[投掷器]]交互。
+*** [[狐狸]]采摘[[甜浆果丛]]中的甜浆果。
+*** [[海龟蛋]]开裂。
+*** 与[[饰纹陶罐]]交互。
+** <code>block_destroy</code>游戏事件，频率为12：
+*** [[火]]被[[喷溅型水瓶]]或[[滞留型水瓶]]浇灭。
+*** 海龟蛋孵化。
+** <code>entity_place</code>游戏事件，频率为14：
+*** [[唤魔者]]召唤出[[恼鬼]]或[[尖牙]]。
+* 将[[骆驼]]吃[[仙人掌]]发出的振动由<code>entity_interact</code>游戏事件更改为<code>eat</code>，振动频率由6改为8。
+|-
+| [[锻造台]]
+| [[File:Smithing Table JE2 BE2.png|84px]]
+|
+* 更改了UI，现在拥有三个输入槽位，第一个槽位为锻造模板，其次为装备，最后为锻造原材料。
+** 锻造模板控制可在后两个槽位中放置的物品种类。
+* 现在锻造下界合金工具需要“下界合金升级”锻造模板才能完成。
+* 现在使用自定义配方时，可通过按{{key|Shift}}+左键将锻造用品放入槽位。
+|-
+| [[床]]、[[地毯]]和[[羊毛]]
+| {{Animate|White Bed JE3 BE2.png;Orange Bed JE3 BE2.png;Magenta Bed JE3 BE2.png;Pink Bed JE3 BE2.png;Light Blue Bed JE3 BE2.png;Yellow Bed JE3 BE2.png;Lime Bed JE3 BE2.png;Gray Bed JE3 BE2.png;Light Gray Bed JE3 BE2.png;Cyan Bed JE3 BE2.png;Purple Bed JE3 BE2.png;Blue Bed JE3 BE2.png;Brown Bed JE3 BE2.png;Cyan Bed JE3 BE2.png;Green Bed JE3 BE2.png;Red Bed JE5 BE3.png;Black Bed JE3 BE2.png|84px}}
+{{Animate|White Carpet JE2 BE2.png;Orange Carpet JE2 BE2.png;Magenta Carpet JE2 BE2.png;Pink Carpet JE2 BE2.png;Light Blue Carpet JE2 BE2.png;Yellow Carpet JE2 BE2.png;Lime Carpet JE2 BE2.png;Gray Carpet JE2 BE2.png;Light Gray Carpet JE2 BE2.png;Cyan Carpet JE2 BE2.png;Purple Carpet JE2 BE2.png;Blue Carpet JE2 BE2.png;Brown Carpet JE2 BE2.png;Cyan Carpet JE2 BE2.png;Green Carpet JE2 BE2.png;Red Carpet JE2 BE2.png;Black Carpet JE2 BE2.png|84px}}<br>
+{{Animate|White Wool JE2 BE2.png;Orange Wool JE3 BE3.png;Magenta Wool JE3 BE3.png;Pink Wool JE3 BE3.png;Light Blue Wool JE3 BE3.png;Yellow Wool JE3 BE3.png;Lime Wool JE3 BE3.png;Gray Wool JE3 BE3.png;Light Gray Wool JE3 BE3.png;Cyan Wool JE3 BE3.png;Purple Wool JE3 BE3.png;Blue Wool JE3 BE3.png;Brown Wool JE3 BE3.png;Cyan Wool JE3 BE3.png;Green Wool JE3 BE3.png;Red Wool JE3 BE3.png;Black Wool JE3 BE3.png|84px}}
+|
+* 现在所有颜色的单个方块物品均可以通过与单个[[染料]]合成而染成其他颜色的单个方块物品，以同步{{el|be}}。
+* 地毯不再能通过8个白色地毯围绕单个染料的方式染色。
+|-
+| [[按钮]]
+| {{Animate|Oak Button JE5.png;Birch Button JE4.png;Spruce Button JE5.png;Jungle Button JE4.png;Acacia Button JE4.png;Dark Oak Button JE4.png;Mangrove Button JE2.png;Crimson Button JE2.png;Warped Button JE2.png;Stone Button (S) JE9.png;Polished Blackstone Button (S) JE2.png|84px}}
+|
+* 更改了所有按钮的模型UV映射。
+* 磨制黑石按钮的破坏时间现在与其他按钮一致。
+|-
+| [[带釉陶瓦]]
+| [[File:Purple Glazed Terracotta JE2.png|84px]]
+|
+* 略微更改了紫色带釉陶瓦的纹理，使剑的图案契合[[纹理更新]]后剑的纹理。
+|-
+| [[漏斗]]
+| {{Animate|hopper_JE3_BE2.png;Hopper_(N)_JE8.png;Hopper_(E)_JE8.png;Hopper_(S)_JE8.png;Hopper_(W)_JE8.png|84px}}
+|
+* 略微更改了底面纹理。
+* 现在在其上方有蜂巢或蜂箱以外的[[碰撞箱]]完整的方块时，不再尝试吸取[[物品实体]]。
+|-
+| [[唱片机]]
+| [[File:Jukebox JE2 BE2.png|84px]]
+|
+* 加入至创造模式物品栏的“红石方块”标签页。
+* 现在会发出木板而非石头的声音。
+|-
+| [[紫水晶块]]
+| [[File:Block of Amethyst JE3 BE1.png|84px]]
+|
+* 现在放置在幽匿感测体旁时具有共振功能。
+** 当幽匿感测体接收到振动时，紫水晶块会在其位置发送一个频率相同的振动。
+** 可以在不重新创造振动源的情况下远程传递振动。
+* 加入到创造模式物品栏中的“红石方块”标签页。
+|-
+| [[附魔台]]
+| [[File:Enchanting Table JE4 BE2.png|84px]]
+|
+* 现在多数非固体方块不会影响[[书架]]对附魔台的附魔等级增益。
+* 将GUI中青金石槽的纹理回退至[[Java版1.18-pre5|1.18-pre5]]前的版本，以与锻造台GUI中的纹理{{tr|匹配|相符}}。
+|-
+| [[砂轮]]
+| [[File:Grindstone JE2 BE2.png|84px]]
+|
+* 现在不接受无法破坏但没有魔咒的物品。
+** 如果上方物品允许存在耐久度，则可使用下方附魔的无法破坏物品为其修复，输出的物品不会继承“无法破坏”组件；如果交换物品顺序，则既不可祛魔也不可修复；如果只存在附魔的无法破坏物品，则仅祛魔而保留“无法破坏”组件。
+* 现在不可同时为两本附魔书祛魔。
+|-
+| [[幽匿尖啸体]]
+| [[File:Sculk Shrieker JE2 BE3.gif|84px]]
+|
+* 现在会在[[含水]]时静音。
+** 这并不影响其召唤监守者。
+* 加入到创造模式物品栏中的“红石方块”标签页。
+* 若有振动计划被幽匿尖啸体接收，此振动会在临近全部区块均被加载和计算前留在等待队列中。
+** 此改动用于防止共振机制在远处未加载的区块中出现问题。
+|-
+| [[潜影盒]]
+| {{Animate|Shulker Box JE1 BE1.png;White Shulker Box JE2 BE2.png;Orange Shulker Box JE2 BE2.png;Magenta Shulker Box JE2 BE2.png;Light Blue Shulker Box JE2 BE2.png;Yellow Shulker Box JE2 BE2.png;Lime Shulker Box JE2 BE2.png;Pink Shulker Box JE2 BE2.png;Gray Shulker Box JE2 BE2.png;Light Gray Shulker Box JE2 BE2.png;Cyan Shulker Box JE2 BE2.png;Purple Shulker Box JE2 BE2.png;Blue Shulker Box JE2 BE2.png;Brown Shulker Box JE2 BE2.png;Green Shulker Box JE2 BE2.png;Red Shulker Box JE2 BE2.png;Black Shulker Box JE2 BE2.png|84px}}
+|
+* 现在开启时不属于[[窒息]]方块。
+* 现在开始开合和结束开合时发出[[方块更新#NC更新|NC更新]]。
+|-
+| [[红石线]]
+| {{Animate|Inactive Redstone Wire (unconnected).png;Inactive Redstone Wire (NS).png;Inactive Redstone Wire (EW).png;Inactive Redstone Wire (NE).png;Inactive Redstone Wire (ES).png;Inactive Redstone Wire (SW).png;Inactive Redstone Wire (NW).png;Inactive Redstone Wire (ESW).png;Inactive Redstone Wire (NSW).png;Inactive Redstone Wire (NEW).png;Inactive Redstone Wire (NES).png;Inactive Redstone Wire (NESW).png|84px}}
+{{Animate|Active Redstone Wire (unconnected).png;Active Redstone Wire (NS).png;Active Redstone Wire (EW).png;Active Redstone Wire (NE).png;Active Redstone Wire (ES).png;Active Redstone Wire (SW).png;Active Redstone Wire (NW).png;Active Redstone Wire (ESW).png;Active Redstone Wire (NSW).png;Active Redstone Wire (NEW).png;Active Redstone Wire (NES).png;Active Redstone Wire (NESW).png|84px}}
+|
+* 现在会连接四周开启的[[活板门]]上的红石线。
+* 现在收到来自下侧的[[方块更新#PP更新|PP更新]]时检查附着。
+|-
+| [[红石中继器]]和[[红石比较器]]
+| {{Animate|Redstone Repeater (S) JE8.png;Redstone Repeater Delay 2 (S) JE8.png;Redstone Repeater Delay 3 (S) JE8.png;Redstone Repeater Delay 4 (S) JE8.png|84px}}
+{{Animate|Powered Redstone Repeater (S) JE10.png;Powered Redstone Repeater Delay 2 (S) JE11.png;Powered Redstone Repeater Delay 3 (S) JE11.png;Powered Redstone Repeater Delay 4 (S) JE11.png|84px}}
+{{Animate|Locked Redstone Repeater (S) JE7.png;Locked Redstone Repeater Delay 2 (S) JE7.png;Locked Redstone Repeater Delay 3 (S) JE7.png;Locked Redstone Repeater Delay 4 (S) JE9.png|84px}}
+{{Animate|Powered Locked Redstone Repeater (S) JE9.png;Powered Locked Redstone Repeater Delay 2 (S) JE9.png;Powered Locked Redstone Repeater Delay 3 (S) JE9.png;Powered Locked Redstone Repeater Delay 4 (S) JE9.png|84px}}
+{{Animate|Redstone Comparator (S) JE4.png;Subtracting Redstone Comparator (S) JE5.png|84px}}
+{{Animate|Powered Redstone Comparator (S) JE5.png;Powered Subtracting Redstone Comparator (S) JE6.png|84px}}
+|
+* 现在收到来自下侧的PP更新时检查附着。
+* 现在会发出石头而非木板的声音。
+|-
+| [[拉杆]]
+| [[File:Lever JE3 BE2.png|84px]]
+|
+* 现在会发出石头而非木板的声音。
+|-
+| [[屏障]]
+| [[File:Barrier JE2 BE2.png|84px]]
+|
+* 被[[刷子]]刷扫以及实体落于其上时不再产生粒子。
+* 现在[[创造模式]]玩家可以使之[[含水]]。
+** 非直接的交互，例如[[发射器]]，无法使之含水或去水。
+|-
+| [[紫颂花]]
+| {{Animate|Chorus Flower JE2.png;Chorus Flower Dead JE2.png|84px}}
+|
+* 不再提供支撑面。
+|-
+| [[绊线钩]]
+| [[File:Tripwire Hook (S) JE5.png|84px]]
+|
+* 现在会发出木板而非石头的声音。
+|-
+| [[海绵]]和[[湿海绵]]
+| {{Animate|Sponge.png;Wet Sponge.png|84px}}
+|
+* 现在有其独特的声音。
+|-
+| [[草]]
+| [[File:Short Grass_JE7_BE7.png|84px]]
+|
+* 被重命名为“矮草丛”（Short Grass）。
+** ID由<code>grass</code>更改为<code>short_grass</code>。
+|-
+| [[玩家的头]]
+| [[File:Player Head (S) JE2.png|84px]]
+|
+* 现在会储存其物品名称。
+|-
+| [[刷怪笼]]
+| [[File:Spawner_JE4.png|84px]]
+|
+* 现在生成[[史莱姆]]不受[[区块#史莱姆区块|区块]]的影响。
+* 现在生成[[溺尸]]不受[[生物群系]]的影响。
+* 现在可以从战利品表中选取物品装备到所生成的生物身上。
+|-
+| [[蜘蛛网]]
+| [[File:Cobweb JE7 BE4.png|84px]]
+|
+* 加入了独有音效，不再使用石头的音效。
+|-
+| 常规
+|
+|
+* 现在玩家即使在方块边缘也能正确受到方块的效果。
+* 略微更改了破坏动画。
+* 现在使用{{key|Ctrl}}和[[选取方块|{{ctrl|选取方块}}]]键选取一个有自定义名称的方块（如箱子）后，也会得到一个同名的对应物品。
+* 现在所[[选取方块|{{ctrl|选取方块}}]]的物品提示框中不再显示<code>(+NBT)</code>。
+|}
+
+== 物品 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory	
+|type=generic
+|title=足迹与故事新增物品
+|rows=5
+| 0= Brush | Music Disc Relic | Netherite Upgrade Smithing Template | Sentry Armor Trim Smithing Template | Vex Armor Trim Smithing Template | Wild Armor Trim Smithing Template | Coast Armor Trim Smithing Template | Dune Armor Trim Smithing Template | Wayfinder Armor Trim Smithing Template | Raiser Armor Trim Smithing Template | Shaper Armor Trim Smithing Template | Host Armor Trim Smithing Template | Ward Armor Trim Smithing Template | Silence Armor Trim Smithing Template | Tide Armor Trim Smithing Template | Snout Armor Trim Smithing Template | Rib Armor Trim Smithing Template | Eye Armor Trim Smithing Template | Spire Armor Trim Smithing Template | Angler Pottery Sherd | Archer Pottery Sherd | Arms Up Pottery Sherd | Blade Pottery Sherd | Brewer Pottery Sherd | Burn Pottery Sherd | Danger Pottery Sherd | Explorer Pottery Sherd | Friend Pottery Sherd | Heart Pottery Sherd | Heartbreak Pottery Sherd | Howl Pottery Sherd | Miner Pottery Sherd | Mourner Pottery Sherd | Plenty Pottery Sherd | Prize Pottery Sherd | Sheaf Pottery Sherd | Shelter Pottery Sherd | Skull Pottery Sherd | Snort Pottery Sherd |Pitcher Pod | Torchflower Seeds | Armadillo Spawn Egg Revision 1 | Camel Spawn Egg Revision 1 | Sniffer Spawn Egg Revision 1
+}}	}}
+{|{{Simple Guide table|New Items}}
+|-
+| 骆驼、嗅探兽和犰狳[[刷怪蛋]]
+| {{Animate|Camel Spawn Egg JE2 BE2.png;Sniffer Spawn Egg JE2 BE2.png;Armadillo Spawn Egg JE1 BE1.png|84px}}
+|
+* 仅能通过创造模式物品栏和命令获取。
+|
+* 可以生成相应的生物。
+
+|-
+
+| [[刷子]]
+| [[File:Brush JE1 BE1.png|84px]]
+|
+{{Crafting|B1=Feather|B2=Copper Ingot|B3= Stick|Output=Brush}}
+|
+* 用于清刷方块。
+* 成功刷出物品时消耗1点耐久。
+* 对可疑的方块外的其他方块没有实际效果。
+
+|-
+| [[音乐唱片]]''Relic''
+| [[File:Music Disc Relic JE1 BE1.png|84px]]
+|
+* 能够在古迹废墟通过刷扫可疑的沙砾获得。
+|
+* 与其他音乐唱片功能相同。
+|-
+| [[锻造模板]]
+| {{Animate|Netherite Upgrade Smithing Template JE1 BE1.png;Sentry Armor Trim Smithing Template JE2 BE2.png;Vex Armor Trim Smithing Template JE1 BE1.png;Wild Armor Trim Smithing Template JE1 BE1.png;Coast Armor Trim Smithing Template JE1 BE1.png;Dune Armor Trim Smithing Template JE2 BE2.png;Wayfinder Armor Trim Smithing Template JE1 BE1.png;Raiser Armor Trim Smithing Template JE1 BE1.png;Shaper Armor Trim Smithing Template JE1 BE1.png;Host Armor Trim Smithing Template JE1 BE1.png;Ward Armor Trim Smithing Template JE1 BE1.png;Silence Armor Trim Smithing Template JE1 BE1.png;Tide Armor Trim Smithing Template JE1 BE1.png;Snout Armor Trim Smithing Template JE1 BE1.png;Rib Armor Trim Smithing Template JE1 BE1.png;Eye Armor Trim Smithing Template JE1 BE1.png;Spire Armor Trim Smithing Template JE1 BE1.png|84px}}
+|
+* 下界合金升级、猪鼻盔甲纹饰锻造模板可在[[堡垒遗迹]]的战利品箱子中找到。
+* 哨兵盔甲纹饰锻造模板可在[[掠夺者前哨站]]的战利品箱子中找到。
+* 恼鬼盔甲纹饰锻造模板可在[[林地府邸]]的战利品箱子中找到。
+* 荒野盔甲纹饰锻造模板可在[[丛林神庙]]的战利品箱子中找到。
+* 海岸盔甲纹饰锻造模板可在[[沉船]]的战利品箱子中找到。
+* 监守、幽静盔甲纹饰锻造模板可在[[远古城市]]的战利品箱子中找到。
+* 潮汐盔甲纹饰锻造模板在[[远古守卫者]]死亡时掉落。
+* 肋骨盔甲纹饰锻造模板可在[[下界要塞]]的战利品箱子中找到。
+* 眼眸盔甲纹饰锻造模板可在[[要塞]]的战利品箱子中找到。
+* 尖塔盔甲纹饰锻造模板可在[[末地城]]的战利品箱子中找到。
+* 向导、牧民、塑造、雇主盔甲纹饰锻造模板可在[[古迹废墟]]里的可疑的沙砾中用刷子刷出。
+* 用[[钻石]]和对应材料复制。
+{{Crafting
+|A1=Diamond|B1=Netherite Upgrade; Sentry Armor Trim; Vex Armor Trim; Wild Armor Trim; Coast Armor Trim; Dune Armor Trim; Wayfinder Armor Trim; Raiser Armor Trim; Shaper Armor Trim; Host Armor Trim; Ward Armor Trim; Silence Armor Trim; Tide Armor Trim; Snout Armor Trim; Rib Armor Trim; Eye Armor Trim; Spire Armor Trim|C1=Diamond|A2=Diamond|B2=Netherrack; Cobblestone; Cobblestone; Mossy Cobblestone; Cobblestone; Sandstone; Terracotta; Terracotta; Terracotta; Terracotta; Cobbled Deepslate; Cobbled Deepslate; Prismarine; Blackstone; Netherrack; End Stone; Purpur Block|C2=Diamond|A3=Diamond|B3=Diamond|C3=Diamond|Output=Netherite Upgrade,2; Sentry Armor Trim,2; Vex Armor Trim,2; Wild Armor Trim,2; Coast Armor Trim,2; Dune Armor Trim,2; Wayfinder Armor Trim,2; Raiser Armor Trim,2; Shaper Armor Trim,2; Host Armor Trim,2; Ward Armor Trim,2; Silence Armor Trim,2; Tide Armor Trim,2; Snout Armor Trim,2; Rib Armor Trim,2; Eye Armor Trim,2; Spire Armor Trim,2}}
+|
+* 下界合金升级锻造模板可在锻造台上将钻石装备升级为对应的下界合金装备。
+* 盔甲纹饰锻造模板可在锻造台上与盔甲和锻造原材料相结合，给盔甲添加不同的纹饰。
+|-
+| [[陶片]]
+| {{Animate|Angler Pottery Sherd JE1 BE1.png;Archer Pottery Sherd JE2 BE2.png;Arms Up Pottery Sherd JE1 BE2.png;Blade Pottery Sherd JE1 BE1.png;Brewer Pottery Sherd JE1 BE1.png;Burn Pottery Sherd JE1 BE1.png;Danger Pottery Sherd JE1 BE1.png;Explorer Pottery Sherd JE1 BE1.png;Friend Pottery Sherd JE1 BE1.png;Heart Pottery Sherd JE1 BE1.png;Heartbreak Pottery Sherd JE1 BE1.png;Howl Pottery Sherd JE1 BE1.png;Miner Pottery Sherd JE1 BE1.png;Mourner Pottery Sherd JE1 BE1.png;Plenty Pottery Sherd JE1 BE1.png;Prize Pottery Sherd JE1 BE2.png;Sheaf Pottery Sherd JE1 BE1.png;Shelter Pottery Sherd JE1 BE1.png;Skull Pottery Sherd JE1 BE2.png;Snort Pottery Sherd JE1 BE1.png|84px}}
+|
+* 弓箭、采矿、珍宝和头颅纹样陶片可在[[沙漠神殿]]里的可疑的沙子中用刷子刷出。
+* 举臂和佳酿纹样陶片可在[[沙漠水井]]里的可疑的沙子中用刷子刷出。
+* 垂钓、树荫和嗅探纹样陶片可在热带[[海底废墟]]里的可疑的沙子中用刷子刷出。
+* 利刃、探险、悲恸和富饶纹样陶片可在寒带[[海底废墟]]里的可疑的沙砾中用刷子刷出。
+* 烈焰、危机、挚友、爱心、心碎、狼嚎和麦捆纹样陶片可在[[古迹废墟]]里的可疑的沙砾中用刷子刷出。
+|
+* 可用于合成[[饰纹陶罐]]。
+|-
+| [[瓶子草荚果]]
+| [[File:Pitcher Pod JE1 BE1.png|84px]]
+|
+* 可通过嗅探兽挖掘获得。
+|
+* 可用于种植瓶子草植株。
+* 可用于吸引及繁殖[[鸡]]，也可喂食给幼年个体以减少其10%的剩余生长时间。
+* 可用于吸引及驯服[[鹦鹉]]。
+|-
+| [[火把花种子]]
+| [[File:Torchflower Seeds JE1 BE1.png|84px]]
+|
+* 可通过嗅探兽挖掘获得。
+|
+* 可用于种植火把花植株。
+* 可用于吸引及繁殖嗅探兽和鸡，也可喂食给幼年个体以减少其10%的剩余生长时间。
+* 可用于吸引及驯服鹦鹉。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Items}}
+|-
+| [[盔甲]]
+| {{Animate|Leather Cap (item) JE4 BE4.png;Chainmail Helmet (item) JE2 BE2.png;Iron Helmet (item) JE2 BE2.png;Golden Helmet (item) JE3 BE3.png;Diamond Helmet (item) JE3 BE2.png;Netherite Helmet (item) JE2 BE1.png|84px}}
+{{Animate|Leather Tunic (item) JE4 BE4.png;Chainmail Chestplate (item) JE2 BE2.png;Iron Chestplate (item) JE2 BE2.png;Golden Chestplate (item) JE3 BE3.png;Diamond Chestplate (item) JE3 BE2.png;Netherite Chestplate (item) JE2 BE1.png|84px}}<br>
+{{Animate|Leather Pants (item) JE4 BE4.png;Chainmail Leggings (item) JE2 BE2.png;Iron Leggings (item) JE2 BE2.png;Golden Leggings (item) JE3 BE3.png;Diamond Leggings (item) JE3 BE2.png;Netherite Leggings (item) JE2 BE1.png|84px}}<br>
+{{Animate|Leather Boots (item) JE4 BE4.png;Chainmail Boots (item) JE2 BE2.png;Iron Boots (item) JE2 BE2.png;Golden Boots (item) JE3 BE3.png;Diamond Boots (item) JE3 BE2.png;Netherite Boots (item) JE2 BE2.png|84px}}<br>
+[[File:Turtle Shell (item) JE1 BE1.png|84px]]
+|
+* 现在盔甲可以通过[[锻造台]]消耗锻造模板和以下10种原材料中的一种进行锻造：
+** [[紫水晶碎片]]
+** [[铜锭]]
+** [[钻石]]
+** [[绿宝石]]
+** [[金锭]]
+** [[铁锭]]
+** [[青金石]]
+** [[下界石英]]
+** [[下界合金锭]]
+** [[红石粉]]
+* 锻造结果只改变外观，不会提供任何[[属性]]增益。
+* 锻造模板决定锻造后盔甲纹饰图案，原材料决定纹饰颜色。
+* 重复锻造将会覆盖上一次的锻造结果。
+* 锻造后盔甲的纹饰和锻造原材料名称会在物品提示框中以原材料颜色显示。
+* 在物品栏图标中，不同的纹饰皆显示一种类似于荒野盔甲纹饰的纹理；不同的纹饰颜色在物品栏图标中显示的纹饰颜色不同。
+* 现在[[头盔]]、[[护腿]]、[[靴子]]可以通过附魔获得[[荆棘]]。
+|-
+| [[紫颂果]]
+| [[File:Chorus Fruit JE2 BE2.png|84px]]
+|
+* 现在食用紫颂果会重置摔落距离。
+|-
+| [[探险家地图]]
+| {{Animate|Ocean Explorer Map.png;Woodland Explorer Map.png;Jungle Explorer Map.png;Swamp Explorer Map.png;Desert Village Map.png;Plains Village Map.png;Savanna Village Map.png;Snowy Village Map.png;Taiga Village Map.png;Map (item).png|84px}}
+|
+* 更改了制图师出售的探险家地图上的结构图标。
+|-
+| [[斧]]
+| {{Animate|Wooden Axe JE2 BE2.png;Stone Axe JE2 BE2.png;Iron Axe JE5 BE2.png;Golden Axe JE3 BE2.png;Diamond Axe JE3 BE3.png;Netherite Axe JE2 BE2.png|84px}}
+|
+* 现在[[斧]]可以通过附魔获得[[锋利]]、[[亡灵杀手]]、[[节肢杀手]]。
+|-
+| [[盾牌]]
+| [[File:Shield_JE2_BE1.png|84px]] {{Animate|White Shield.png;Orange Shield.png;Magenta Shield.png;Light Blue Shield.png;Yellow Shield.png;Lime Shield.png;Pink Shield.png;Gray Shield.png;Light Gray Shield.png;Cyan Shield.png;Purple Shield.png;Blue Shield.png;Brown Shield.png;Green Shield.png;Red Shield.png;Black Shield.png|84px}}
+|
+* 现在可以阻挡TNT爆炸伤害。
+|-
+| [[时钟]]和[[指南针]]
+| [[File:Clock_JE3_BE3.gif|84px]] [[File:Compass_JE3_BE3.gif|84px]]
+|
+* 不再在工作台的输出槽中运作。
+|-
+| [[鳞甲]]
+| [[File:Scute JE1 BE1.png|84px]]
+|
+* 被重命名为“海龟鳞甲”（Turtle Scute）。
+|-
+| [[马铠]]
+| {{Animate|Leather Horse Armor (item) JE2.png;Iron Horse Armor (item) JE4 BE3.png;Golden Horse Armor (item) JE3 BE3.png;Diamond Horse Armor (item) JE3 BE3.png|84px}}
+|
+* 现在物品[[提示框]]中包含[[护甲值]]及[[盔甲韧性]]信息。
+|-
+| [[灾厄旗帜]]
+| [[File:Ominous Banner.png|84px]]
+|
+* 现在物品提示框中不再显示图案。
+* “灾厄旗帜”现在是由组件定义的<code>item_name</code>。
+|-
+| [[探险家地图]]
+| {{Animate|Ocean Explorer Map JE2 BE2.png;Woodland Explorer Map JE2 BE2.png;Map (item) JE2 BE2.png|84px}}
+|
+* 其显示名称现在是由组件定义的<code>item_name</code>。
+|}
+
+== 非生物实体 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Non-mob entities}}
+|-
+| [[竹筏]]
+| [[File:Bamboo Raft JE1 BE1.png|84px]]
+|
+{{Crafting
+|A2=Bamboo Planks|C2=Bamboo Planks|A3=Bamboo Planks|B3=Bamboo Planks|C3=Bamboo Planks|Output=Bamboo Raft}}
+|
+* {{ItemLink|Bamboo Raft}}
+|
+* 可用于穿越水域航行。
+|-
+| [[运输竹筏]]
+| [[File:Bamboo Raft with Chest JE1 BE1.png|84px]]
+|
+{{Crafting
+|Chest|Bamboo Raft|Output=Bamboo Raft with Chest}}
+|
+* {{ItemLink|Bamboo Raft With Chest}}
+|
+* 可用于穿越水域运输物品。
+|-
+| [[樱花木船]]
+| [[File:Cherry Boat JE1 BE1.png|84px]]
+|
+{{Crafting
+|A2=Cherry Planks|C2=Cherry Planks|A3=Cherry Planks|B3=Cherry Planks|C3=Cherry Planks|Output=Cherry Boat}}
+|
+* {{ItemLink|Cherry Boat}}
+|
+* 可用于穿越水域航行。
+|-
+| [[樱花木运输船]]
+| [[File:Cherry Boat with Chest JE1 BE1.png|84px]]
+|
+{{Crafting
+|Chest|Cherry Boat|Output=Cherry Boat with Chest}}
+|
+* {{ItemLink|Cherry Boat With Chest}}
+|
+* 可用于穿越水域运输物品。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Non-mob entities}}
+|-
+| [[箭]]
+| [[File:Arrow JE2 BE1.png|84px]] [[File:Spectral Arrow JE3.png|84px]]
+|
+* 不再储存附着的[[状态效果]]，而是从其在<code>item</code>中储存的物品形式中获取。
+** 现在药箭的状态效果在其生效期过后消失。
+|-
+| [[运输船]]
+| {{Animate|Oak Boat with Chest.png; Spruce Boat with Chest.png; Birch Boat with Chest.png; Jungle Boat with Chest.png; Acacia Boat with Chest.png; Dark Oak Boat with Chest.png; Mangrove Boat with Chest.png; Cherry Boat with Chest.png; Bamboo Raft with Chest.png|84px}}
+|
+* 放置后不再丢失名称。
+|-
+| [[展示实体]]
+|
+|
+* 现在会在更新后的第一个[[刻]]开始更新客户端的位置和旋转。
+** 此前，更新是在相同的刻中应用的，导致运动不平稳。
+** 新的行为类似于生物。
+* 在服务器中，位置和旋转仍是立即更新的。
+* 这个插值的时长是由字段<code>teleport_duration</code>控制的。
+** <code>0</code>意味着更新立即应用。
+** <code>1</code>意味着实体会在一刻的时间内，由当前的位置移动到新的。
+** 更高的值会将这一运动分配到多个刻。
+** 由于周期性的位置更新，这个值会被限制范围，以避免异常运动。
+** 新值仅适用于更改后进行的位置和旋转更改。
+*** 这意味着当前的运动继续保持不变。
+* 注意：骑行时的行为仍保持不变，与之前的版本一致。
+|-
+| [[区域效果云]]
+|
+|
+* 不再给死亡的生物应用效果。
+* 现在使用<code>potion_contents</code>字段中的<code>minecraft:potion_contents</code>组件存储格式相同的[[药水效果]]。
+|-
+| [[下落的方块|下落的铁砧]]
+| [[File:Anvil (N) JE3.png|84px]]
+|
+* 不再摧毁下方的掉落物。
+|-
+| 常规
+|
+|
+* 现在所有无生命的实体，其名称都会：
+** 在被玩家观察且设置了<code>CustomName</code>NBT标签时显示。
+** 在设置了<code>CustomNameVisible</code>NBT标签时一直显示。
+|}
+
+== 结构 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Structures}}
+|-
+| [[古迹废墟]]
+| [[File:Trail Ruins.png|256px]]
+|
+* [[丛林]]、[[针叶林]]、[[积雪针叶林]]、[[原始松木针叶林]]、[[原始云杉针叶林]]和[[原始桦木森林]]生物群系。
+|
+无
+|
+无
+|
+* 建筑物主要由[[泥砖]]、各色[[陶瓦]]和[[带釉陶瓦]]构成，内部被大量[[沙砾]]掩埋。
+** 废墟的最高处（塔顶）通常裸露在地表。
+* 与多数结构不同的是，战利品不在[[箱子]]里，而是藏在[[可疑的沙砾]]中。
+|-
+| [[樱花树]]
+| [[File:Cherry Blossom Tree.png|256px]]
+|
+* [[樱花树林]]生物群系
+|
+无
+|
+无
+|
+* 一种由樱花树叶和樱花原木组成的树。
+* 自然生成时有5%的概率带有一个容纳3只[[蜜蜂]]的[[蜂巢（方块）|蜂巢]]。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Structures}}
+|-
+| [[沙漠神殿]]
+| [[File:Desert Pyramid.png|256px]]
+|
+* 现在包含一个填满沙子和可疑的沙子的地窖。
+** 可在主房间的地板发现被沙子掩埋的地窖入口。
+|-
+| [[沙漠水井]]
+| [[File:Desert Well.png|256px]]
+|
+* 现在可疑的沙子会生成在其底部。
+|-
+| [[海底废墟]]
+| {{Animate|underwater ruin cold.png;Underwater ruin warm.png|256px}}
+|
+* 现在可以生成可疑的沙子和可疑的沙砾。
+|-
+| [[矿石]]分布
+|
+|
+* [[钻石矿石]]会在主世界的[[深板岩]]层更加频繁地生成。
+** 加入了中型钻石矿团，其他现有的钻石矿团放置保持不变。
+*** 中型钻石矿团的大小为1-8个钻石矿石，每个区块尝试生成2次，在Y=-64到-4之间均匀分布。
+*** 暴露在空气中的钻石矿石有50%的概率跳过生成。
+|-
+| 常规
+|
+|
+* 现在生成[[探险家地图]]、使用命令{{cmd|locate}}等方式定位结构所需时间减少。
+|}
+
+== 生物群系 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Biomes}}
+|-
+| [[樱花树林]]
+| [[File:Cherry Grove.png|256px]] 
+|
+* 是一种花团锦簇的山地类生物群系。
+|
+* 樱花树
+* [[掠夺者前哨站]]
+|}
+
+== 状态效果 ==
+=== 更改 ===
+{|{{Simple Guide table|Changed Effects}}
+|-
+| [[缓降]]
+| [[File:Slow Falling JE1 BE1.png|84px]]
+|
+* 将粒子的颜色由{{color|#FFEFD1}}改为{{color|#F3CFB9}}。
+|-
+| [[缓慢|{{tr|缓慢|緩速|緩慢}}]]
+| [[File:Slowness JE4.png|84px]]
+|
+* 略微更改了{{tr|缓慢|緩速|緩慢}}图标的纹理。
+|-
+| [[凋零]]
+| [[File:Wither (effect) JE2 BE2.png|84px]]
+|
+* 将粒子的颜色由{{color|#352A27}}改为{{color|#736156}}。
+|-
+| 常规
+|
+|
+* 跳跃提升、飘浮和挖掘疲劳放大倍率超过127的行为已被新的属性所取代。
+* 状态效果粒子不再混合为一种颜色，现在多个状态效果的粒子会分别渲染。
+* 降低了实体发出状态效果粒子的频率。
+|}
+
+== 药水效果 ==
+=== 更改 ===
+{|{{Simple Guide table|Changed Potions}}
+|-
+| [[缓降]]
+|
+* 更改了缓降药水、喷溅型缓降药水、滞留型缓降药水和缓降之箭的颜色。
+|-
+| [[跳跃提升]]
+|
+* 带有跳跃提升对应药水效果物品的物品提示框中现在会显示此药水效果对属性修饰符的影响。
+|-
+| 不可合成
+|
+* 其ID<code>minecraft:empty</code>被移除。这种药水效果将在无药水效果时使用。
+* 将不可合成的药水效果由品红色更改为蓝色。
+|-
+| 常规
+|
+* 物品或实体中存储的药水效果不再编码默认值。
+|}
+
+== 魔咒 ==
+=== 更改 ===
+{|{{Simple Guide table|Changed Enchantments}}
+|-
+| [[力量（魔咒）|{{tr|力量|強力}}]]、[[冲击]]、[[火矢]]和[[无限]]
+|
+* 现在会在[[弩]]上产生效果。
+|-
+| [[穿透]]和[[多重射击]]
+|
+* 现在会在玩家的[[弓]]上产生效果。
+|-
+| [[横扫之刃]]
+|
+* ID由<code>sweeping</code>改为<code>sweeping_edge</code>。
+|-
+| 常规
+|
+* 现在物品[[提示框]]中的魔咒会被按照{{TagLink|enchantment|tooltip_order}}标签排序。
+* 更改了[[效率]]、[[火焰附加]]、[[时运]]、[[击退]]、[[抢夺]]、[[海之眷顾]]、[[饵钓]]、[[精准采集]]、[[引雷]]和[[耐久]]魔咒的修正附魔等级范围，详见[[Special:Diff/847331/883993|此处]]。
+|}
+
+== 进度 ==
+=== 新内容 ===
+{{load advancements|adventure.craft_decorated_pot_using_only_sherds;adventure.trim_with_any_armor_pattern;husbandry.feed_snifflet;husbandry.plant_any_sniffer_seed;adventure.salvage_sherd;adventure.trim_with_all_exclusive_armor_patterns;husbandry.obtain_sniffer_egg;adventure.read_power_from_chiseled_bookshelf|main=none}}
+
+=== 更改 ===
+{| class = "wikitable" style = "width:100%"
+! style="width:1%" | 图标 !! style="width:7.11%" | 进度 !! 更改
+|-
+| {{Aicon|Diamond Boots|fancy}}
+| <span style="text-align: center;"> '''{{tr|探索的时光|探索時光}}<br><small>Adventuring Time</small>'''</span>
+|
+* 现在还需要玩家到访[[樱花树林]]生物群系。
+|-
+| {{Aicon|Golden Carrot|fancy}}
+| <span style="text-align: center;"> '''成双成对<br><small>Two by Two</small>'''</span>
+|
+* 现在还需要繁殖[[骆驼]]和[[嗅探兽]]。
+|-
+| {{Aicon|Glow Ink Sac|plain}}
+| <span style="text-align: center;"> '''{{tr|眼前一亮！|螢光墨囊}}<br><small>Glow and Behold!</small>'''</span>
+|
+* 现在还可在[[悬挂式告示牌]]上达成。
+|-
+| {{Aicon|Wheat|plain}}
+| <span style="text-align: center;"> '''{{tr|开荒垦地|汗滴禾下土}}<br><small>A Seedy Place</small>'''</span>
+|
+* 现在还可通过种植[[火把花种子]]或[[瓶子草荚果]]达成。
+|-
+| {{Aicon|Wheat|plain}}
+| <span style="text-align: center;"> '''{{tr|我从哪儿来？|送子鳥的禮物|我喺邊度嚟？}}<br><small>The Parrots and the Bats</small>'''</span>
+|
+* 现在还可通过繁殖[[骆驼]]或[[嗅探兽]]达成。
+|}
+
+== 导航 ==
+{{Navbox guides|je}}
+
+[[en:Java Edition guides/Trails & Tales]]
+[[es:Guías de Java Edition/Trails & Tales]]
+[[ja:ガイド/Java Edition/旅路と物語]]

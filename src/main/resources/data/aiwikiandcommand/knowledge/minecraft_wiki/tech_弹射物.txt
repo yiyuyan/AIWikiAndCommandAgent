@@ -1,0 +1,225 @@
+# 页面: 弹射物
+# 来源: https://zh.minecraft.wiki/w/%E5%BC%B9%E5%B0%84%E7%89%A9
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 实体, 教育版独有信息, 环境
+# 抓取时间: 2026-07-14 17:25:58
+# 原始 Wikitext 内容:
+
+{{redirect|远程攻击|其他生物的攻击|伤害/伤害来源#生物攻击}}
+'''弹射物（Projectile）'''是一类沿轨迹飞行并可以命中各类物体的[[实体]]，可以造成[[伤害]]等多种效果。
+
+== 生成 ==
+多种生物会生成弹射物作为它们的攻击手段。玩家也可以使用部分物品来生成弹射物。
+
+[[骷髅]]、[[流浪者]]、[[沼骸]]、[[焦骸]]、{{only|for=[[凋灵骷髅]]、[[幻术师]]|short=1|JE}}可以使用[[弓]]来发射[[箭]]，[[掠夺者]]、[[猪灵]]可以使用[[弩]]来发射箭或[[烟花火箭]]，[[烈焰人]]可以发射[[小火球]]，[[恶魂]]可以发射[[火球]]，[[雪傀儡]]可以发射雪球，[[旋风人]]可以发射[[风弹（实体）|风弹]]，[[女巫]]可以发射[[喷溅药水]]，[[末影龙]]可以发射末影龙火球，[[凋灵]]可以发射凋灵之首，[[羊驼]]和[[行商羊驼]]可以发射羊驼唾沫，[[溺尸]]在持有[[三叉戟]]时可以发射三叉戟，[[潜影贝]]可以发射能够锁定并追踪目标的[[潜影弹]]，[[村民]]可以发射烟花火箭。
+
+[[玩家]]可以使用弓发射箭，可以使用弩发射箭或烟花火箭，可以对任意方块表面使用烟花火箭来在指定位置将其发射，可以{{control|使用}}[[钓鱼竿]]来发射和收回[[浮漂]]，可以通过{{control|使用}}来发射[[鸡蛋]]、[[雪球]]、[[末影珍珠]]、[[喷溅药水]]、[[滞留药水]]、[[附魔之瓶]]、[[风弹（物品）|风弹]]和{{only|for=[[冰弹]]|short=1|be|ee}}。
+
+[[发射器]]可以发射[[箭]]、[[火焰弹]]（发射为[[小火球]]）、烟花火箭、鸡蛋、雪球、喷溅药水、滞留药水、附魔之瓶、风弹和{{only|for=冰弹|short=1|be|ee}}。
+
+== 行为 ==
+弹射物按照一定的速度飞行，最终击中方块、实体或{{only|for=世界边界|je}}，并产生效果。弹射物还可能会受到多种物理效果，如受重力影响而下坠，受[[蜘蛛网]]、[[液体]]等阻力减速，或被[[爆炸]]加速。多数弹射物在击中物体后会破裂，从世界中消失。
+
+除浮漂外，所有弹射物的实体数据都具有{{nbt|int array|Owner}}记录该弹射物的发射者。在弹射物造成伤害时，该伤害被视为由发射者间接造成，并引发相关的伤害效果和[[魔咒]]效果。发射器发射的弹射物不具有该实体数据。
+
+{{In|je}}被生物发射的弹射物会被发射者的{{nbt|list|Motion}}影响其初速度：弹射物在X/Z轴上的速度会与发射者同轴上的速度相加，如果发射者不在地面上，弹射物在Y轴上的速度还会与发射者的竖直速度相加。
+
+=== 与实体碰撞 ===
+弹射物在离开发射者的碰撞箱前不能命中发射者。在弹射物离开发射者后，弹射物可以击中甚至击杀发射者。
+
+对命中实体造成伤害的弹射物，均对命中的实体造成[[弹射物伤害]]和沿其运动方向的[[伤害#击退|击退]]。[[弹射物保护]]提供针对弹射物伤害的伤害减免。{{in|be}}[[着火]]的箭、鸡蛋、雪球、三叉戟、风弹还会点燃命中的实体。{{EntityLink|small-fireball}}和{{EntityLink|fireball}}命中实体时造成的伤害同时是弹射物伤害和[[火焰伤害]]。
+
+[[盾牌]]可以抵挡几乎所有弹射物的命中，使其被弹开或破裂而不能造成伤害。仍有剩余穿透数量的箭是唯一一种可以穿透实体并无视盾牌的弹射物。
+
+除[[潜影弹]]外的所有弹射物的直接命中都会被[[末影人]]通过传送来躲避，使弹射物可以继续飞行下去。
+
+[[旋风人]]不会受到除风弹外<ref>{{bug|MCPE-178900|||WAI}}</ref>任何弹射物的伤害，同时命中旋风人的这些弹射物会被减速<ref>{{bug|MC-267948||旋风人反射的箭仅对实体造成{{hp|2}}-{{hp|4}}伤害。|WAI}}</ref>并朝发射者的方向重新射出。
+
+=== 与方块碰撞 ===
+所有的弹射物都可以触发其击中的[[标靶]]，击塌其击中的[[大型垂滴叶]]。
+
+所有的弹射物可以激活[[木质压力板]]和[[绊线]]，{{EntityLink|arrow}}和{{EntityLink|trident}}可以激活[[木质按钮]]。当弹射物穿过这些方块时，这些开关会保持开启状态。其他开关则不受弹射物的影响。[[箭]]和[[三叉戟]]可以插在方块上，并保持这些开关的开启。
+
+{{In|java}}任何具有伤害的弹射物都可以敲响[[钟]]。{{In|bedrock}}任何弹射物都可以敲响[[钟]]。
+
+着火的弹射物可以激活[[TNT]]，可以点燃熄灭的[[营火]]，可以破坏其穿过的[[细雪]]。
+
+弹射物能够破坏以下方块：
+* [[三叉戟]]会破坏其击中的[[滴水石锥]]。
+* [[箭]]、[[三叉戟]]、[[鸡蛋]]、[[雪球]]、[[小火球]]、[[恶魂火球]]、[[末影龙火球]]、[[凋灵之首]]、[[风弹（实体）|风弹]]、[[烟花火箭]]和{{only|for=[[冰弹]]|short=1|be|ee}}会破坏其击中的[[紫颂花]]或[[饰纹陶罐]]。
+
+=== 与世界边界碰撞 ===
+箭类弹射物和浮漂会在碰到[[世界边界]]时反弹，烟花火箭会沿边界飞行，而其他弹射物则会在边界处破裂或消失。
+
+== 弹射物分类 ==
+=== 箭类弹射物 ===
+箭类弹射物包括{{EntityLink|arrow}}、{{only|for={{EntityLink|spectral-arrow}}|je}}和{{EntityLink|trident}}。
+
+这些弹射物在击中方块时会插在方块上，并有机会被回收。如果这些弹射物射中的方块被改变或方块的碰撞模型发生了变化，这些弹射物就会再次下坠并有机会命中实体或插在另一个方块上。在停止运动1分钟后，这些弹射物会消失。
+
+被盾牌挡下时，这些弹射物会被弹开而不会破裂。三叉戟在任何情况下都不会破裂。
+
+[[末影人]]、外壳关闭的[[潜影贝]]、栖息状态的[[末影龙]]（{{Only|be|for=三叉戟命中除外|short=1}}）、生命值低于一半的[[凋灵]]、处于创造模式的[[玩家]]、{{only|for=处于[[受击后伤害免疫]]状态的生物|short=1|je}}不能被这些弹射物命中，接触到这些生物时会被弹开并失去速度落到地面上。
+
+=== 火球类弹射物 ===
+火球类弹射物包括{{EntityLink|small-fireball}}、{{EntityLink|fireball}}、{{EntityLink|dragon-fireball}}、{{EntityLink|wind charge}}和{{EntityLink|wither-skull}}。
+
+这些弹射物不受重力影响，而是按照其实体数据特殊指定的加速度来保持持续的位置变化。风弹以及由命令生成的以外的火球类弹射物在1分钟后都会消失，不能无限地飞行下去。
+
+=== 物品弹射物 ===
+物品弹射物包括{{EntityLink|snowball}}、{{EntityLink|egg}}、{{EntityLink|ender-pearl}}、{{EntityLink|splash-potion}}、{{EntityLink|lingering-potion}}、{{EntityLink|bottle-o'-enchanting}}、{{EntityLink|small-fireball}}和{{EntityLink|fireball}}。
+
+这些弹射物采用伪3D渲染的始终朝向镜头的物品纹理，且可以通过实体数据{{nbt|compound|Item}}设置一个物品来变更其外观。对于[[喷溅药水]]和[[滞留药水]]，其实体数据中的物品数据还控制了药水的效果。
+
+=== 投掷物 ===
+投掷物包括{{EntityLink|snowball}}、{{EntityLink|egg}}、{{EntityLink|ender-pearl}}、{{EntityLink|splash-potion}}、{{EntityLink|lingering-potion}}、{{EntityLink|bottle-o'-enchanting}}和{{only|for={{EntityLink|ice-bomb}}|short=1|be|ee}}。
+
+所有的投掷物都有完全相同的运动方式，区别只有它们破裂后会造成的效果。
+
+== 弹射物列表 ==
+{| class="wikitable sortable" style="text-align: center;" data-description="弹射物列表"
+! 弹射物
+! 重力加速度<br>（m/s<sup>2</sup>）
+! 终端速度<br>（m/s）
+! 击中效果
+! 破裂效果
+! 弹射物行为
+|-
+! {{EntityLink|arrow}}
+| {{Tc|yes|20}}
+| {{Tc|yes|100}}
+| 造成{{hp|1}} – 2,147,483,647（{{healthbar|2|9px}} × 1,073,741,823.5）弹射物伤害（计算方式见{{slink|箭#箭伤害}}）<br>着火时，造成5秒着火<br>施加实体数据附带的药水效果
+|
+| 可以穿透一定数量的实体<br>击中方块时不会破裂，可以回收<br>会被盾牌和无敌的实体弹开<br>停止运动1分钟后消失
+|-
+! {{EntityLink|dragon-fireball}}
+| {{Tc|no|0}}
+| {{Tc|-}}
+|
+| 生成[[区域效果云]]
+| 持续飞行1分钟后消失
+|-
+! {{EntityLink|egg}}
+| {{Tc|yes|12}}
+| {{Tc|yes|60}}
+| 造成{{hp|0}}弹射物伤害
+| 可能生成[[鸡]]
+|
+|-
+! {{EntityLink|ender-pearl}}
+| {{Tc|yes|12}}
+| {{Tc|yes|60}}
+| 造成{{hp|0}}弹射物伤害
+| 传送发射者<br>可能生成[[末影螨]]
+|
+|-
+! {{EntityLink|fireball}}
+| {{Tc|no|0}}
+| {{Tc|-}}
+| 造成{{hp|6}}伤害（同时为弹射物伤害和火焰伤害）<br>被反弹命中[[恶魂]]时，造成{{hp|1000}}弹射物伤害<br>{{in|be}}造成5秒着火<ref>{{bug|MC-176741|||WAI}}</ref>
+| 造成爆炸
+| 被攻击会改为飞向攻击方向<br>总是着火<br>持续飞行1分钟后消失
+|-
+! {{EntityLink|firework-rocket}}
+| {{Tc|no|0}}
+| {{Tc|-}}
+|
+| 造成爆裂
+| 即使没有击中任何物体也会定时爆裂
+|-
+! {{EntityLink|fishing-bobber}}
+| {{Tc|yes|12}}
+| {{Tc|yes|6.9}}
+| {{in|be}}造成{{hp|0}}弹射物伤害
+| ''不会破裂''
+| 没有弹射物共通实体数据<br>吸附在击中的实体上<br>不会破裂
+|-
+! {{EntityLink|lingering-potion}}
+| {{Tc|yes|20}}
+| {{Tc|yes|60}}
+|
+| 生成[[区域效果云]]
+|
+|-
+! {{EntityLink|llama-spit}}
+| {{Tc|yes|24}}
+| {{Tc|yes|120}}
+| 造成{{hp|1}}{{only|be|for=弹射物伤害}}/{{only|je|for=伤害}}
+| 
+|
+|-
+! {{EntityLink|bottle-o'-enchanting}}
+| {{Tc|yes|20}}
+| {{Tc|yes|60}}
+|
+|生成{{xp|3|11}}
+|
+|-
+! {{EntityLink|shulker-bullet}}
+| {{Tc|yes|16}}
+| {{Tc|yes|60}}
+| 造成{{hp|4}}弹射物伤害<br>造成10秒{{EffectLink|Levitation}}I
+|
+| 制导时不受加速度影响<br>受到伤害后被摧毁
+|-
+! {{EntityLink|small-fireball}}
+| {{Tc|no|0}}
+| {{Tc|-}}
+| 造成{{hp|5}}伤害（同时为弹射物伤害和火焰伤害）<br>造成5秒着火
+|
+| 总是着火<br>持续飞行1分钟后消失
+|-
+! {{EntityLink|snowball}}
+| {{Tc|yes|12}}
+| {{Tc|yes|60}}
+| 造成{{hp|0}}弹射物伤害<br>命中[[烈焰人]]时，造成{{hp|3}}弹射物伤害
+| 
+|
+|-
+! {{EntityLink|splash-potion}}
+| {{Tc|yes|20}}
+| {{Tc|yes|60}}
+| 
+| 在范围内施加[[状态效果]]
+|
+|-
+! {{EntityLink|trident}}
+| {{Tc|yes|20}}
+| {{Tc|yes|100}}
+| 造成{{hp|8}}+''[[近战攻击#魔咒攻击力|魔咒攻击力]]''弹射物伤害<br>条件符合时生成[[闪电]]
+| ''不会破裂''
+| 运动时无视液体阻力<br>不会破裂，可以回收<br>会被盾牌和无敌的实体弹开<br>{{Only|je|for=停止运动1分钟后消失|short=1}}<br>受[[忠诚]]魔咒影响时会在击中物体后飞回发射者，期间不能命中任何物体
+|-
+! {{EntityLink|wind charge}}
+| {{Tc|no|0}}
+| {{Tc|-}}
+| 造成{{hp|1}}弹射物伤害
+| 产生[[爆炸#风爆|风爆]]
+| 被攻击会改为飞向攻击方向<br>不会被[[旋风人]]反弹<br>高于所在维度的[[高度#建筑高度限制|最高建筑高度]]30格以上时立刻爆炸
+|-
+! {{EntityLink|wither-skull}}
+| {{Tc|no|0}}
+| {{Tc|-}}
+| {{in|je}}造成{{hp|8}}弹射物伤害<br>在普通难度中，造成10秒{{EffectLink|Wither}}II<br>在困难难度中，造成40秒{{EffectLink|Wither}}II
+| 产生爆炸
+| 持续飞行1分钟后消失
+|-
+|}
+
+== 实体数据 ==
+{{/ED}}
+
+== 成就 ==
+{{load achievements|sniper-duel;return-to-sender;archer;taste-of-your-own-medicine;bullseye}}
+
+== 进度 ==
+{{load advancements|story.deflect_arrow;nether.return_to_sender;adventure.ol_betsy;adventure.throw_trident;adventure.shoot_arrow;adventure.two_birds_one_arrow;adventure.whos_the_pillager_now;adventure.arbalistic;adventure.very_very_frightening;adventure.sniper_duel;adventure.bullseye;adventure.blowback}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|Non-mobs}}
+{{Navbox environment}}
+
+[[en:Projectile]]
+[[pt:Projétil]]

@@ -1,0 +1,546 @@
+# 页面: 箭
+# 来源: https://zh.minecraft.wiki/w/%E7%AE%AD
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 可再生资源, 基岩版即将到来/26.40, 基岩版即将移除/26.40, 基岩版独有信息, 实体, 工具, 有未知版本的History模板的页面/Java版, 有未知版本的History模板的页面/Java版Beta, 武器, 物品, 需要信息, 需要测试
+# 抓取时间: 2026-07-14 17:33:22
+# 原始 Wikitext 内容:
+
+{{Tr|mode=H|箭|箭矢|箭}}
+{{Tr|mode=H|之箭|之箭}}
+{{Tr|mode=H|弓箭|弓箭}}
+{{Tr|mode=H|射箭|射箭}}
+{{Tr|mode=H|发射箭|發射箭矢|發射箭}}
+{{Tr|mode=H|力量|強力}}
+{{about|基础的箭|具有药水效果的箭|药箭|赋予生物发光状态效果的箭|光灵箭}}
+{{Infobox item
+|image=Arrow.png
+|invimage=Arrow
+|size='''{{el|je}}'''：<br>高度：0.5格<br>宽度：0.5格<br>'''{{el|be}}'''：<br>高度：0.25格<br>宽度：0.25格
+}}
+
+'''箭（Arrow）'''是一种用于攻击的弹射物。
+
+== 生成 ==
+[[骷髅]]、{{only|for=[[凋灵骷髅]]和[[幻术师]]|short=1|JE}}可以使用[[弓]]来发射箭，[[掠夺者]]、[[猪灵]]可以使用[[弩]]来发射箭。{{in|je}}凋灵骷髅会发射着火的箭，[[流浪者]]会发射带{{tr|缓慢|緩速|緩慢}}效果的箭，[[沼骸]]会发射带中毒效果的箭，[[焦骸]]会发射带虚弱效果的箭。以上生物不需要拥有箭就可以无限发射箭，且{{in|je}}使用弓的生物副手持有箭及其变种时也能无限发射对应的箭。由非玩家生物发射的箭不能被回收。
+
+[[不祥之物生成器]]有概率投掷箭。
+
+[[发射器]]在使用箭时会将其发射。
+
+[[玩家]]使用弓或弩可以发射箭。
+
+== 获取 ==
+射出的箭在一些情况下可以被[[#回收|回收]]进玩家的[[物品栏]]里。
+
+=== 生物掉落物 ===
+掠夺者和猪灵在被玩家或驯服的[[狼]]杀死时可能会掉落其持有的弩，若其中包含已经装填的箭，则可以在发射出来后回收。
+
+{{Drop sources|Arrow}}
+
+=== 交易 ===
+{{Trade sources}}
+
+=== 以物易物 ===
+{{see also|以物易物}}
+{{exclusive|bedrock|section=1}}
+
+[[猪灵]]获得[[金锭]]后有{{frac|40|469}}的概率给予6-12支箭。
+
+=== 礼物 ===
+{{main|村庄英雄#给予物品}}
+{{exclusive|java|section=1}}
+
+[[制箭师]]会向带有[[村庄英雄]]效果的玩家投掷箭。
+
+=== 合成 ===
+{{Crafting
+|head=1
+|B1= Flint
+|B2= Stick
+|B3= Feather
+|Output = Arrow,4
+|type = Combat
+|foot=1
+}}
+
+=== 箱子战利品 ===
+[[Java版]]：
+{{LootChestItem|arrow|only=java}}
+{{Loot notelist}}
+
+[[基岩版]]：
+{{LootChestItem|arrow|only=bedrock}}
+
+== 用途 ==
+{{see also|弓|弩|发射器}}
+
+箭的物品形式不能被直接使用。弓、弩、发射器可以消耗箭，并发射箭实体。
+
+具有[[无限]]魔咒的弓在使用普通的箭射击时，箭不会被消耗。
+
+具有[[穿透]]魔咒的弩可以使箭射中实体后再射到方块上，具有[[多重射击]]魔咒的弩也能够在可回收的箭未命中实体的情况下回收药箭，玩家可以借此将箭回收，使箭的效果在箭不被消耗的情况下被无限使用。
+
+=== 合成材料 ===
+{{Crafting usage|Arrow}}
+
+=== 交易 ===
+{{Trade uses}}
+
+== 行为 ==
+=== 发射 ===
+使用[[弓]]沿水平方向射出至平地上时，未拉弦的箭大约可射3米远，拉至一半可射15米远，拉满弦可射24米远。{{In|je}}以合适的角度射出一支拉满弦的箭可使其飞行约120米，而{{In|be}}该距离约为240米。竖直向上射出的箭最高可飞约66米。
+
+被射出时，箭会按照[[wzh:抛物线|斜抛运动]]的规律飞行，且会受到[[空气]]、[[水]]和[[熔岩]]阻力的影响。
+
+在箭的轨迹中有一个用于X、Y和Z坐标的随机变量，由<code>this.rand.nextGaussian() * 0.0075 * (double)inaccuracy</code><ref>https://docs.oracle.com/javase/8/docs/api/java/util/Random.html#nextGaussian--</ref>给出。这一不准确值相对较小，但在较长的距离中会变得明显。
+
+=== 移动 ===
+飞行中的箭会受到[[爆炸]]的影响，增加或降低箭的速度。高强度爆炸发射的高速箭可以造成极高且没有上限的伤害。
+
+[[液体]]中的箭会受到可观的阻力：箭在射出不到8米时，水平速度就会完全减至0，然后开始垂直下沉，但箭造成的[[伤害#击退|击退]]效果不受影响。水中的箭还会产生气泡粒子效果尾迹。
+
+=== 着火 ===
+箭在穿过[[火]]或[[熔岩]]会[[着火]]，穿过[[雨]]或[[水]]时会熄灭。具有[[火矢]]魔咒的[[弓]]发射的箭在射出时是着火的。栖息状态的[[末影龙]]会使其{{upcoming|for=反弹|o=je|be 26.40}}或{{until|for=穿过|o=be|be 26.40}}的箭着火。
+
+着火的箭可以激活[[TNT]]，可以立即引爆[[TNT矿车]]，可以点燃熄灭的[[营火]]，可以破坏其穿过的[[细雪]]；在破坏其穿过的细雪后，箭会熄灭。
+
+被着火的箭命中的实体会着火，剩余着火时间被设置为{{convert|100|tick}}。
+
+=== 击中方块 ===
+[[File:ArrowShotInTree.png|缩略图|嵌入[[树]]中的一支箭]]
+箭在击中方块后会插在方块上，摇晃7[[刻]]，并开始1分钟的消失计时。箭的飞行距离与入射角度决定箭射入物体的深度。当箭射中方块的侧面时，箭尾会相比预计轨迹更翘起一些。这可能会导致箭横穿两个方块，并激活位于其上方的开关，或阻挡位于其上方的[[铁轨]]。
+
+射到[[铁轨]]上的箭会阻止矿车前进，直至箭消失或被回收。
+
+若箭所射入的方块的碰撞模型发生了变化（如开启或关闭[[门]]，[[树叶]]枯萎，挖掘其依附的方块），则箭会回到未插入方块的状态并开始垂直掉落。
+
+插在方块上的箭会开始计时并在{{convert|60|秒}}后消失，再次移动时计时将被重置为0。
+
+=== 命中实体 ===
+箭可以命中[[实体]]，造成伤害、击退、着火或状态效果。
+
+[[末影人]]、外壳关闭的[[潜影贝]]、{{upcoming|for=栖息状态的[[末影龙]]|o=je|be 26.40}}、生命值{{only|je|for=低于一半}}或{{only|be|for=达到过一半以下}}的[[凋灵]]、处于[[创造模式]]的[[玩家]]、{{only|je|for=处于[[受击后伤害免疫]]状态且最后伤害高于箭伤害的生物}}不能被箭命中，箭会被这些实体弹开并失去速度落到地面上。
+
+[[旋风人]]不能被箭命中，且箭会减速并朝发射者的方向重新射出。
+
+具有[[冲击]]魔咒的弓射出的箭能造成更强的[[伤害#击退|击退]]。
+
+箭默认仅能命中1个实体，具有[[穿透]]魔咒的弩或{{only|je|for=[[弓]]}}可以使发射的箭可以命中的实体数量增加，可命中实体数量至少为2的箭会穿过命中的实体并使自身此数值-1，此数值为1或不存在时，命中实体的箭会消失。
+
+举[[盾牌]]的玩家可以反弹在有效角度内来袭的箭。剩余可命中实体数量至少为2的箭无法被盾牌阻挡。
+
+==== 造成伤害 ====
+{{main|#箭伤害}}
+箭对实体造成[[弹射物伤害]]，可以被[[弹射物保护]]魔咒防护。箭造成的伤害受到诸多因素的影响，其伤害值会在极大的范围内浮动。
+
+被箭射中的[[船]]、[[矿车]]、[[物品展示框]]、[[画]]、[[末地水晶]]等实体会被破坏。
+
+==== 造成着火 ====
+{{main|伤害#着火}}
+
+被着火的箭命中的实体，其剩余着火时间会被设置为{{convert|100}}，最终增燃烧时间会正常受[[火焰保护]]魔咒的影响。
+
+=== 玩家 ===
+{{exclusive|java|section=17}}
+[[File:WeGotShot.png|缩略图|身上插着箭的两名玩家]]
+
+玩家被箭射中时，箭会插在玩家身上，外观总是为普通箭的纹理。<ref>{{bug|MC-83933|||WAI}}</ref>被插中的位置与被箭射中的位置无关，而是由实体编号作为种子随机出现的视觉效果。
+
+由玩家使用弓或弩发射的箭在命中其他玩家时，发射者会听到一个高音调的“叮”的声音。
+
+=== 与方块交互 ===
+箭可以触发其击中的[[标靶]]，可以敲响[[钟]]。
+
+箭可以激活[[木质按钮]]、[[木质压力板]]以及[[绊线]]。当箭穿过这些方块时，这些开关会保持开启状态。如果箭因为命中了方块而停止运动，那么被箭钉住的开关一直会保持激活状态，直至箭消失或被回收。其他开关则不受箭的影响。由于这些方块不具有[[碰撞箱]]，箭无法插在这些方块上，但可以插在临近的方块上来保持与开关相交，甚至同时激活多个开关。
+
+=== 回收 ===
+箭的实体数据<code>pickup</code>控制箭会如何被回收。
+
+* 由骷髅、凋灵骷髅、流浪者、沼骸、[[焦骸]]、{{only|je|for=[[幻术师]]}}、掠夺者、猪灵发射的箭无法被回收。<ref>{{bug|MC-128845|||WAI}}</ref>
+* 玩家使用具有无限魔咒的弓射出的普通箭，以及创造模式玩家射出的箭不能被生存模式的玩家回收。创造模式的玩家可以回收这些箭，但不会增加物品栏内箭的数量。
+* 由发射器发射的箭，由[[生存模式]]下的玩家使用不具有无限魔咒的弓发射的箭，以及玩家使用弩发射的不由多重射击魔咒增加的箭可以被回收。
+* 由不祥之物生成器发射的箭不可被回收。
+
+箭只有在扎进了方块且停止了摇晃之后才可以被回收，飞行中的箭接触实体会命中或被弹开，而不能被回收。
+
+{{in|je}}可以回收的箭在玩家靠近后，则会飞向玩家并进入其物品栏，就像拾取[[物品（实体）|物品]]一样。若玩家物品栏装不下对应物品，则该玩家只能在处于创造模式时回收，并且不会增加物品栏内箭的数量。{{in|be}}可回收的箭会在接触玩家碰撞箱后消失并相应在物品栏增加物品形式的箭。
+
+{{in|java}}扎在玩家上的箭不能被回收，玩家在死亡时也不会掉落他们身上扎着的箭。
+
+{{in|je}}由玩家使用带有多重射击魔咒的弩散射的箭无法被生存模式的玩家回收。{{in|be}}玩家靠近由多重射击的弩散射的箭后，箭会播放回收动画，但不会增加物品栏内箭的数量。
+
+== 箭伤害 ==
+=== Java版 ===
+箭的基础伤害为2。
+
+由骷髅、流浪者、沼骸、[[焦骸]]、凋灵骷髅发射的箭，基础伤害增加<math>0.11r+m</math>，其中<math>r</math>在简单、普通、困难难度分别为1、2、3，<math>m</math>为中位数为0、上下偏差为0.57425的[[wzh:三角形分布|三角分布]]随机数。
+
+由具有[[力量（魔咒）|力量]]魔咒的弓射出的箭，基础伤害增加<math>0.5+0.5p</math>，其中<math>p</math>为力量魔咒等级。箭在发射时，其基础伤害就已经计算完毕。
+
+箭造成的伤害为<math>\mathrm{ceil}(v d)</math>，其中<math>d</math>为基础伤害，<math>v</math>为击中时的速度（单位为米每游戏刻），<math>\mathrm{ceil}</math>为向上取整函数。
+
+玩家使用弓在满弦时发射的箭和弩发射的箭是“暴击箭”，箭造成的伤害额外增加<math>0</math>至<math>\mathrm{floor}(0.5d)+1</math>之间的均匀分布随机整数，其中<math>d</math>为速度修正前伤害，<math>\mathrm{floor}</math>为向下取整函数。
+
+箭最终造成的伤害不能超过2,147,483,647（{{healthbar|2|9px}} × 1,073,741,823.5）。至此伤害值计算完毕，并对实体产生伤害事件。
+
+=== 基岩版 ===
+箭击中实体时，取基础伤害区间内的均匀分布随机数作为基础伤害，根据发射者种类，该区间有所不同：
+* 玩家发射的箭为1。
+* 掠夺者发射的箭为3–6。
+* 其他生物在简单和普通难度发射的箭为1–4，在困难难度发射的箭为1–5。
+
+由具有[[力量（魔咒）|力量]]魔咒的弓射出的箭，伤害变为<math>1.25d+0.25pd</math>，其中<math>d</math>为修正前伤害，<math>p</math>为力量魔咒等级。
+
+如果箭是玩家发射的，那么伤害变为<math>d+0.11r+0.25m+0.97v</math>，其中<math>d</math>为基础伤害，<math>r</math>在简单、普通、困难难度分别为1、2、3，<math>m</math>为N(0,1)的[[wikipedia:Marsaglia polar method|Marsaglia极化高斯]]随机数，<math>v</math>为击中时的速度（单位为米每游戏刻）<!--，<math>f</math>对于玩家箭和非玩家箭分别为0.97和2.0-->。
+
+玩家使用弓在满弦时发射的箭和弩发射的箭是“暴击箭”，伤害变为<math>\max\left\{9, \min\left\{10, d+0.5dr+2r\right\}\right\}</math>，其中<math>d</math>为修正前伤害，<math>r</math>为0–1的均匀分布随机数。
+
+箭最终造成的伤害不能超过2,147,483,647（{{healthbar|2|9px}} × 1,073,741,823.5）。至此伤害值计算完毕，并对实体产生伤害事件。
+
+=== 常见来源的箭伤害 ===
+{{:箭/伤害1}}
+{{:箭/伤害2}}
+{{:箭/伤害3}}
+
+== 音效 ==
+{{edition|java}}：
+{{Sound table
+|sound=Arrow hit1.ogg
+|sound2=Arrow hit2.ogg
+|sound3=Arrow hit3.ogg
+|sound4=Arrow hit4.ogg
+|subtitle={{tp|subtitles.entity.arrow.hit}}
+|source=友好生物
+|description=箭击中方块或实体
+|id=entity.arrow.hit
+|translationkey=subtitles.entity.arrow.hit}}
+{{Sound table
+|sound=Succesfull Hit.ogg
+|subtitle={{tp|subtitles.entity.arrow.hit_player}}
+|source=玩家
+|description=玩家发射箭击中其他玩家
+|id=entity.arrow.hit_player
+|translationkey=subtitles.entity.arrow.hit_player}}
+{{Sound table
+|sound=Bow shoot.ogg
+|subtitle={{tp|subtitles.entity.arrow.shoot}}
+|source=玩家
+|description=玩家发射箭
+|id=entity.arrow.shoot
+|translationkey=subtitles.entity.arrow.shoot}}
+{{Sound table
+|sound=Bow shoot.ogg
+|subtitle={{tp|subtitles.entity.skeleton.shoot}}
+|source=敌对生物
+|description=骷髅发射箭
+|id=entity.skeleton.shoot
+|translationkey=subtitles.entity.skeleton.shoot}}
+{{Sound table
+|sound=Crossbow shoot1.ogg
+|sound2=Crossbow shoot2.ogg
+|sound3=Crossbow shoot3.ogg
+|subtitle={{tp|subtitles.item.crossbow.shoot}}
+|source=玩家
+|description=用弩发射箭
+|id=item.crossbow.shoot
+|translationkey=subtitles.item.crossbow.shoot
+|distance=16}}
+{{Sound table
+|sound=Arrow hit1.ogg
+|sound2=Arrow hit2.ogg
+|sound3=Arrow hit3.ogg
+|sound4=Arrow hit4.ogg
+|subtitle={{tp|subtitles.item.crossbow.hit}}
+|source=友好生物
+|description=用弩射中目标
+|id=item.crossbow.hit
+|translationkey=subtitles.item.crossbow.hit}}
+{{Sound table
+|sound=Bow shoot.ogg
+|subtitle={{tp|subtitles.block.dispenser.dispense}}
+|source=方块
+|description=投掷器发射弹射物
+|id=block.dispenser.launch
+|translationkey=subtitles.block.dispenser.dispense
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Arrow hit1.ogg
+|sound2=Arrow hit2.ogg
+|sound3=Arrow hit3.ogg
+|sound4=Arrow hit4.ogg
+|source=友好生物
+|description=箭击中方块或实体
+|id=random.bowhit
+|typeid=bow.hit
+|soundvolume
+|soundpitch=1.09-1.3
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Bow shoot.ogg
+|source=友好生物
+|description=实体发射箭或发射器发射弹射物
+|id=random.bow
+|typeid=bow
+|soundvolume
+|soundpitch=0.83-1.25
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Crossbow shoot1.ogg
+|sound2=Crossbow shoot2.ogg
+|sound3=Crossbow shoot3.ogg
+|source=友好生物
+|description=用弩发射箭
+|id=crossbow.shoot
+|typeid=crossbow.shoot
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Arrow
+|spritetype=item
+|nameid=arrow
+|showitemtags=je
+|rowspan=0
+|itemtags={{GameTag|items|arrow}}
+|foot=1
+}}
+
+{{ID table
+|generatetranslationkeys=java
+|Arrow
+|spritetype=entity
+|nameid=arrow
+|showentitytags=1|rowspan=0|entitytags={{GameTag|entity|arrow}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Arrow
+|spritetype=item
+|nameid=arrow
+|translationkey=item.arrow.name
+|foot=1}}
+
+{{ID table
+|generatetranslationkeys=bedrock
+|arrow
+|spritetype=entity
+|nameid=arrow
+|foot=1}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+
+箭有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{load achievements|sniper-duel;archer;bullseye}}
+
+== 进度 ==
+{{load advancements|story.deflect_arrow;adventure.ol_betsy;adventure.shoot_arrow;adventure.two_birds_one_arrow;adventure.whos_the_pillager_now;adventure.arbalistic;adventure.sniper_duel;adventure.bullseye}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.24_SURVIVAL_TEST|[[File:Arrow JE1.png|42px]] 加入了箭，可按{{Key|Tab}}键发射。}}
+|{{HistoryLine||0.25_SURVIVAL_TEST|[[File:Arrow JE2 BE1.png|42px]] 更改了箭的纹理。
+|现在箭能飞得更远，并且会造成更多伤害。
+|现在箭会伤害[[玩家]]。
+|现在玩家生成时物品栏中只有20支箭，而不再能无限发射箭了。
+|现在玩家的剩余箭数会显示在[[快捷栏]]上方。
+|[[File:Purple_Arrow_JE1.png|42px]] 现在骷髅会射出紫色的箭，且死亡时会随机向周围短距离内射出4-9支箭，这些箭可被玩家捡拾并使用。}}
+|{{HistoryLine||0.29|移除了创造模式中的箭。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100122-2251|[[File:Arrow (item) JE1 BE1.png|32px]] 现在箭和[[弓]]一起作为[[物品]]加入了游戏。
+|移除了快捷栏上方的剩余箭数统计。}}
+|{{HistoryLine|||dev=20100124-2119|为箭加入了音效。}}
+|{{HistoryLine|||dev=20100128-2304|{{CollapseH|加入了用[[苹果]]合成箭的测试合成配方：}}
+{{Crafting Table
+|A1=Apple
+|Output=Arrow
+|ignoreusage=1
+}}
+{{CollapseE}}}}
+|{{HistoryLine|||dev=20100129-1447|移除了上述合成配方。}}
+|{{HistoryLine|||dev=20100130|{{CollapseH|现在箭可由[[铁锭]]、[[木棍]]和[[羽毛]]合成：}}
+{{Crafting Table
+|A1=
+|A2=
+|A3=
+|B1=Iron Ingot
+|B2=Stick
+|B3=Feather
+|C1=
+|C2=
+|C3=
+|Output=Arrow
+|ignoreusage=1
+}}
+{{CollapseE}}}}
+|{{HistoryLine||20100218-0011|现在箭击中处于和平难度的玩家时会反弹。}}
+|{{HistoryLine||20100219|骷髅现在会掉落箭。}}
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100316|现在箭击中固体方块时有概率生成[[绵羊]]、[[猪]]、骷髅、[[苦力怕]]、[[蜘蛛]]或[[僵尸]]。
+|现在玩家生成时物品栏中自带999支箭。}}
+|{{HistoryLine||20100320|现在玩家生成时物品栏中自带64支箭。}}
+|{{HistoryLine||20100327|现在玩家生成时物品栏不再携带任何物品。}}
+|{{HistoryLine||20100413-1951|箭击中固体方块时不再会生成生物。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.14|合成箭的材料由铁锭变成了[[燧石]]。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.2|加入了发射器，可以射出箭。}}
+|{{HistoryLine||1.6|dev=Test Build 3|现在玩家射出的箭可被其他玩家捡起。}}
+|{{HistoryLine||1.8|dev=pre1|现在弓不能连射-{}-箭了。
+|现在拉满弦的弓射出的箭最多可达120格远。
+|现在箭会留在其击中的生物上。}}
+|{{HistoryLine||音效更新|更改了射箭时的音效。}}
+|{{HistoryLine||2011年11月21日|link={{ytl|BES9EKK4Aw4}}|[[Notch]]提及了爆炸箭。}}
+|{{HistoryLine||1.8|dev=?|加入了爆炸弓的原型。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|箭现在不会留在生物上了。}}
+|{{HistoryLine|||dev=rc1|更改了被箭击中时的音效。}}
+|{{HistoryLine||1.1|dev=?|现在着火的箭会使其射中的实体着火。}}
+|{{HistoryLine||1.3.1|dev=12w21a|现在农民[[村民]]以1个[[绿宝石]]的价格出售9-12支箭。}}
+|{{HistoryLine|||dev=12w22a|加入了[[丛林神庙]]，现在箭会出现在丛林神庙的发射器中。}}
+|{{HistoryLine|||dev=12w23a|现在箭可激活[[绊线]]和木质压力板。}}
+|{{HistoryLine||1.4.2|dev=12w34a|现在箭可激活木质按钮。}}
+|{{HistoryLine|||dev=12w34b|现在着火的箭可引爆TNT。}}
+|{{HistoryLine||1.4.4|dev=1.4.3|现在箭又会留在其射中的玩家身上，但仍不会留在其他生物身上。}}
+|{{HistoryLine||1.8|dev=14w02a|农民村民不再出售箭。
+|现在制箭师村民以1个绿宝石的价格出售8-12支箭。}}
+|{{HistoryLine|||dev=14w25a|现在射入水中的箭在移动几格后会减速并缓慢沉没。
+|现在着火的箭进入水中时会熄灭。}}
+|{{HistoryLine|||dev=14w26a|着火的箭现在可以用来引爆[[TNT矿车]]。}}
+|{{HistoryLine|||dev=15w33c|加入了[[盾牌]]。尽管盾牌能完全挡下箭，但箭在视觉上仍会留在玩家身上。}}
+|{{HistoryLine|||dev=15w37a|现在箭会被盾牌弹飞。}}
+|{{HistoryLine|||dev=15w47b|现在箭会从创造模式的玩家身上弹开，此前它们是直接穿过。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID<code>Arrow</code>被更改为<code>arrow</code>。}}
+|{{HistoryLine|||dev=16w42a|加入<code>crit</code>标签，以表示箭造成[[#造成伤害|暴击]]。}}
+|{{HistoryLine||1.11.1|dev=16w50a|箭实体现在拥有数值为整型的<code>Color</code>标签，用于储存具有<code>CustomPotionColor</code>标签的箭射出时显示的自定义药水效果颜色。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，此物品的数字ID为262。}}
+|{{HistoryLine||1.14|dev=18w43a|现在弩可以装填并发射箭。
+|现在箭可以破坏[[紫颂花]]。}}
+|{{HistoryLine|||dev=18w47a|现在箭会出现在掠夺者前哨站的箱子内。}}
+|{{HistoryLine|||dev=18w50a|现在箭可以在制箭师房屋内的箱子里找到。}}
+|{{HistoryLine|||dev=19w13a|现在当玩家具有村庄英雄状态效果时，制箭师村民可能会将普通箭作为礼物投给玩家。}}
+|{{HistoryLine||1.14.1|dev=pre2|现在着火的箭可点燃营火。}}
+|{{HistoryLine||1.16|dev=20w16a|现在箭会出现在[[堡垒遗迹]]的箱子内。}}
+|{{HistoryLine||1.20.3|dev=23w43a|现在箭射出后被拾起时，其NBT数据会保留。<ref>{{bug|MC-1981|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=23w45a|exp=1.21更新|箭现在可以在[[试炼密室]]补给箱、决斗室发射器、柱廊陶罐、入口箱子和柱廊发射器中获得。}}
+|{{HistoryLine|||dev=24w11a||箭现在可以从[[宝库]]普通战利品中获得。}}
+|{{HistoryLine|||dev=24w13a||现在[[不祥试炼刷怪笼]]会定期在附近生物的上方生成箭。}}
+|{{HistoryLine||1.21|dev=24w18a|exp=none|23w45a、24w11a和24w13a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|dev=24w34a|箭现在会在撞击[[世界边界]]时反弹。}}
+|{{HistoryLine|||dev=24w39a|现在箭可以随气泡柱上浮。<ref>{{bug|MC-276724|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.11|dev=25w44a|加入了[[焦骸]]，死亡时掉落箭。}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在箭可以在[[废弃营地]]的[[箱子]]或[[木桶]]中找到。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.2.0|[[File:Arrow JE2 BE1.png|42px]] [[File:Arrow (item) JE1 BE1.png|32px]] 加入了箭。}}
+|{{HistoryLine||0.12.1|dev=build 1|现在着火的箭会使其射中的实体着火。
+|现在着火的箭可引爆[[TNT]]。
+|现在射入水中的箭在移动几格后会减速并缓慢沉没。}}
+|{{HistoryLine||0.13.0|dev=build 1|现在箭会更新[[沙子]]和[[沙砾]]的状态。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.4|dev=1.0.4.0|现在可以与制箭师村民交易箭。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|实体ID由<code>arrow.skeleton</code>更改为<code>arrow</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.10|现在弩可以装填并发射箭。}}
+|{{HistoryLine||1.9.0|dev=1.9.0.0|加入了掠夺者，在死亡时掉落箭。}}
+|{{HistoryLine|||dev=1.9.0.2|现在箭可以用来合成[[制箭台]]。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|现在箭会出现在[[掠夺者前哨站]]的箱子中。
+|现在箭可破坏[[紫颂花]]。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|现在箭会出现在村庄的箱子中。}}
+|{{HistoryLine|||dev=1.11.0.4|现在制箭师村民会以5支箭换一颗绿宝石。
+|现在可以通过与制箭师村民交易获得各种箭。}}
+|{{HistoryLine|||dev=1.11.0.7|箭不再能合成制箭台。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.3|现在新手级的制箭师村民出售16支普通箭，而不是5支。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|加入了猪灵，在死亡时掉落箭。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|猪灵死亡时不再掉落箭。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.20|exg=1.21|箭现在可以在试炼密室决斗室发射器、柱廊陶罐、入口箱子和柱廊发射器中获得。}}
+|{{HistoryLine||1.20.80|dev=1.20.80.22|exg=1.21|箭现在可以从宝库的普通战利品中获得。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|exg=1.21|箭现在可以从不祥宝库普通战利品中获得。
+|现在[[不祥试炼刷怪笼]]会定期在附近生物的上方生成箭。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|exg=none|1.20.60.20、1.20.80.22和1.21.0.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.0.23|缓降之箭现在可以从不祥宝库普通战利品中获得。同时箭从上述战利品中移除。
+|不祥试炼刷怪笼生成的箭的数量由1-2支减少至1支，以匹配{{el|je}}。}}
+|{{HistoryLine|||dev=1.21.0.24|现在[[饰纹陶罐]]战利品中箭的数量由1-4支增加至2-8支。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.24|加入了[[焦骸]]，死亡时掉落箭。}}
+|{{HistoryLine||26.40|dev=26.40.26|现在箭击中栖息状态的[[末影龙]]时会被反弹，而不是穿过。<ref>{{bug|MCPE-44493}}</ref>}}
+|{{HistoryLine|||exg=y_2026_drop_3|dev=26.40.27|现在箭可以在[[废弃营地]]的[[箱子]]或[[木桶]]中找到。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Arrow JE2 BE1.png|42px]] [[File:Arrow (item) JE1 BE1.png|32px]] 加入了箭。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|现在射入水中的箭在移动几格后会减速并缓慢沉没。
+|现在着火的箭进入水中会熄灭。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|[[File:Arrow JE2 BE1.png|42px]] [[File:Arrow (item) JE1 BE1.png|32px]] 加入了箭。}}
+}}
+
+== 你知道吗 ==
+* 在默认情况下，拉弓所射箭矢的生成位置会稍微靠向玩家的主手。若玩家抵住墙壁，在准星不动的时候射箭，会发现箭会集中在准星的右方。但如果玩家在选项中将主手设为左手，那么弓箭产生的位置就会稍微靠左。
+* 箭实体的实际朝向与模型的旋转角度在数值上为相反数关系。{{needs testing}}
+* {{Only|BE|for=由玩家发射的}}高速飞行的箭命中实体能产生极高的伤害，这可以通过同时引爆大量TNT所产生的推力实现，这一特性常被玩家用于建造快速杀死末影龙的装置，以刷取[[末地折跃门]]。
+
+== 画廊 ==
+<gallery>
+File:AllArrowTypes.png|目前在Minecraft里所有种类的箭
+File:Steve got shot.png|身上插着箭的[[Steve]]
+File:Alex got shot.png|身上插着箭的[[Alex]]
+File:Arrow Burning.gif|[[着火]]的箭{{only|je}}
+File:PurpleArrow.png|紫色的箭
+File:Arrows in player.png|{{in|je}}可以在[[物品栏]]内看到玩家身上的箭
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox items|Combat}}
+{{Navbox entities|Non-mobs}}
+
+[[Category:工具]]
+[[Category:武器]]
+
+[[de:Pfeil]]
+[[en:Arrow]]
+[[es:Flecha]]
+[[fr:Flèche]]
+[[hu:Nyíl]]
+[[it:Freccia]]
+[[ja:矢]]
+[[ko:화살]]
+[[nl:Pijl]]
+[[pl:Strzała]]
+[[pt:Flecha]]
+[[ru:Стрела]]
+[[th:ลูกธนู]]
+[[uk:Стріла]]

@@ -1,0 +1,161 @@
+# 页面: 工具材料
+# 来源: https://zh.minecraft.wiki/w/%E5%B7%A5%E5%85%B7%E6%9D%90%E6%96%99
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:35
+# 原始 Wikitext 内容:
+
+{{for|制作盔甲所用的材料|盔甲材料|方块的材料|材料}}{{stub}}
+'''工具材料（Tool Material）'''指的是工具和武器不同的等级和材料。
+
+== 材料 ==
+工具材料决定了物品的{{only|for=不适宜挖掘的方块|JE}}、耐久度、挖掘速度倍率、伤害加成、附魔能力和修复所用的物品。
+
+目前游戏中的材料有木质、石质、铜质、铁质、钻石质、下界合金质和金质。
+
+{| class="wikitable sortable" style="text-align:center" data-description="Tiers"
+! class="unsortable" | 名称
+! [[挖掘#合适挖掘工具|不适宜挖掘的方块]]{{only|JE|short=1}}<ref group="注">使用工具挖掘具有对应标签的方块时，挖掘时间总会延长且方块不会掉落物品。</ref><!--
+! 挖掘等级-->
+! [[耐久度]]
+! [[挖掘#挖掘速度|挖掘速度倍率]]
+! 伤害加成<ref group="注">基础伤害为1，此为材料所提供的最低伤害加成，但大部分使用工具材料的物品会进一步增加攻击力。</ref>
+! [[附魔能力]]
+! class="unsortable" | [[铁砧机制#原材料修复|修复所用物品]]
+! class="unsortable" | 修复所用物品标签
+|-
+! 木质
+|{{TagLink|block|incorrect_for_wooden_tool|frameless=1}}
+|59
+|2x
+| +0
+|15
+|{{BlockLink|Planks}}
+|{{TagLink|item|wooden_tool_materials|frameless=1}}
+|-
+! 石质
+|{{TagLink|block|incorrect_for_stone_tool|frameless=1}}
+|131
+|4x
+| rowspan="2" | +1
+|5
+|
+{{BlockLink|CobbleStone}}<br>{{BlockLink|Blackstone}}<br>{{BlockLink|Cobbled Deepslate}}
+|{{TagLink|item|stone_tool_materials|frameless=1}}
+|-
+! 铜质
+|{{TagLink|block|incorrect_for_copper_tool|frameless=1}}
+|190
+|5x
+|13
+|
+{{ItemLink|Copper Ingot}}
+|{{TagLink|item|copper_tool_materials|frameless=1}}
+|-
+! 铁质
+|{{TagLink|block|incorrect_for_iron_tool|frameless=1}}
+|250
+|6x
+| +2
+|14
+|{{ItemLink|Iron Ingot}}
+|{{TagLink|item|iron_tool_materials|frameless=1}}
+|-
+! 钻石质
+|{{TagLink|block|incorrect_for_diamond_tool|frameless=1}}
+|1561
+|8x
+| +3
+|10
+|{{ItemLink|Diamond}}
+|{{TagLink|item|diamond_tool_materials|frameless=1}}
+|-
+! 下界合金质
+|{{TagLink|block|incorrect_for_netherite_tool|frameless=1}}
+|2031
+|9x
+| +4
+|15
+|{{ItemLink|Netherite Ingot}}
+|{{TagLink|item|netherite_tool_materials|frameless=1}}
+|-
+! 金质
+|{{TagLink|block|incorrect_for_gold_tool|frameless=1}}
+|32
+|12x
+| +0
+|22
+|{{ItemLink|Gold Ingot}}
+|{{TagLink|item|gold_tool_materials|frameless=1}}
+|}
+; 注释
+{{Notelist|columns=2}}
+
+== 物品影响 ==
+[[斧]]、[[锄]]、[[镐]]、[[锹]]、[[剑]]和[[矛]]都使用了工具材料。
+
+{{in|je}}工具材料影响上述物品的[[物品堆叠数据格式#物品默认组件|默认组件]]。
+* <code>attribute_modifiers</code>：<code>-{}-[{type: "attack_damage", id: "base_attack_damage", slot: "mainhand", operation: "add_value", amount: <''伤害加成''>},{type: "attack_speed", id: "base_attack_speed", slot: "mainhand", operation: "add_value", amount: <''[[属性/攻击速度#已知修饰符|攻击速度]]''>}]</code>
+* <code>enchantable</code>：{{nbt|int|value}}使用上表中的附魔能力。
+* <code>max_damage</code>：使用上表中的耐久度。
+* <code>repairable</code>：{{nbt|string|items}}使用上表中的修复所用物品的标签ID。
+* <code>tool</code>：
+** 除剑外：<code>-{}-{rules: [{blocks: "<''不适宜挖掘的方块标签ID''>", correct_for_drops: false}, {blocks: "#mineable/<''工具类型''>", correct_for_drops: true, speed:"<''挖掘速度倍率''>"}]}</code>
+** 剑的组件值不受工具材料影响，固定为<code>{"can_destroy_blocks_in_creative": false, "damage_per_block": 2, "rules": [{"blocks": "minecraft:cobweb", "correct_for_drops": true, "speed": 15.0}, {"blocks": "#minecraft:sword_instantly_mines", "speed": 3.4028235E38}, {"blocks": "#minecraft:sword_efficient","speed": 1.5}]}</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100201-2|加入了品质系统。
+|加入了木质、石质、铁质、钻石质和金质。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w06a|加入了下界合金质。}}
+|{{HistoryLine|||dev=20w10a|现在下界合金质工具需要在[[锻造台]]合成。}}
+|{{HistoryLine|||dev=20w15a|现在石质工具可以用[[黑石]]来合成。}}
+|{{HistoryLine|||dev=20w22a|现在石质工具可以用[[黑石]]来修复。}}
+|{{HistoryLine||1.16.2|dev=20w29a|在[[创造模式物品栏]]里的[[工具]]现在会根据品质排序。}}
+|{{HistoryLine||1.17|dev=21w08a|现在石质工具可以用[[深板岩圆石]]来合成和修复。}}
+|{{HistoryLine||1.20.5|dev=24w12a|移除了挖掘等级。此前，木质和金质的挖掘等级为0，石质为1，铁质为2，钻石质为3，下界合金质为4。
+|现在品质还会影响不适合由工具挖掘的方块标签。其效果与先前的挖掘等级相同。}}
+|{{HistoryLine||1.21.2|dev=24w33a|具有品质的物品的修复材料现由[[Java版标签|标签]]控制，而非硬编码。
+|品质（Tier）重命名为工具材料（Tool Material）。}}
+|{{HistoryLine||1.21.9|dev=25w31a|加入了铜质。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||Demo|加入了品质系统。
+|加入了木质和石质。}}
+|{{HistoryLine||0.3.2|加入了铁质、钻石质和金质。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|加入了下界合金质。}}
+|{{HistoryLine|||dev=1.16.0.57|现在下界合金质工具需要在锻造台合成。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.52|现在石质工具可以用深板岩圆石来合成和修复。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.26|现在石质工具可以用黑石来修复。<ref>{{bug|MCPE-71859|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.100|dev=1.21.100.23|exg=y_2025_drop_3|加入了铜质。}}
+|{{HistoryLine||1.21.111|dev=1.21.110.20|1.21.100.23中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|加入了品质系统。
+|加入了木质、石质、铁质、钻石质和金质。}}
+}}
+
+== 参见 ==
+* [[盔甲材料]]
+* [[材料]]
+* [[木]]
+* [[石]]
+* [[铁]]
+* [[铜]]
+* [[金]]
+* [[钻石（消歧义）]]
+* [[下界合金]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[en:Tiers]]
+[[fr:Tiers]]
+[[ja:階級]]
+[[ko:등급]]
+[[lzh:器質]]
+[[pt:Matérias-primas]]
+[[ru:Ресурсы инструментов]]

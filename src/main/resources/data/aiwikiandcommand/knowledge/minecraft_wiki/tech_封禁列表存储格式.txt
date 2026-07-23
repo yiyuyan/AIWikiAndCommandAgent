@@ -1,0 +1,67 @@
+# 页面: 封禁列表存储格式
+# 来源: https://zh.minecraft.wiki/w/%E5%B0%81%E7%A6%81%E5%88%97%E8%A1%A8%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 待扩充段落, 有未知版本的History模板的页面/Java版, 游戏文件
+# 抓取时间: 2026-07-14 17:25:22
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''封禁列表存储文件'''是游戏服务端为阻止部分玩家或IP地址进入世界的数据存储文件。
+
+== 存储格式 ==
+封禁列表有两种形式：封禁指定玩家和封禁指定IP。两种方式使用不同的文件存储。
+
+封禁玩家列表位于{{filepath|<''服务端根目录''>/banned-players.json}}，以JSON格式存储，具有下列存储格式：
+
+<div class="treeview">
+* {{nbt|list}} JSON文件根数组
+** {{nbt|compound}}：一项封禁信息。
+*** {{nbt|string|created|existonsave=1}}：这项封禁数据创建的时间，格式为<code>yyyy-MM-dd HH:mm:ss Z</code><ref name="dateFormat">[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/text/SimpleDateFormat.html Java日期格式]</ref>。此值不存在或无效时替换为服务端启动时间。
+*** {{nbt|string|expires|existonsave=1}}：这项封禁数据的过期时间，过期后此数据不再有效，游戏会自动删除此数据，格式为<code>yyyy-MM-dd HH:mm:ss Z</code><ref name="dateFormat"/>。此值不存在、无效或为<code>forever</code>时服务端会认为此封禁数据永远不会过期，即永久封禁。
+*** {{nbt|string|name|existonsave=1|required=1}}：被封禁玩家的名称。
+*** {{nbt|string|reason|existonsave=1}}：这次封禁的原因。不存在时此项为<code>Banned by an operator.</code>。
+*** {{nbt|string|source|existonsave=1}}：进行这次封禁操作的操作者。不存在此项时为<code>(Unknown)</code>。
+*** {{nbt|string|uuid|existonsave=1|required=1}}：被封禁玩家的[[UUID]]。
+</div>
+
+封禁IP列表位于{{filepath|<''服务端根目录''>/banned-ips.json}}，以JSON格式存储，具有下列存储格式：
+
+<div class="treeview">
+* {{nbt|list}} JSON文件根列表
+** {{nbt|compound}}：一项封禁信息。
+*** {{nbt|string|created|existonsave=1}}：这项封禁数据创建的时间，格式为<code>yyyy-MM-dd HH:mm:ss Z</code><ref name="dateFormat"/>。此值不存在或无效时替换为服务端启动时间。
+*** {{nbt|string|expires|existonsave=1}}：这项封禁数据的过期时间，过期后此数据不再有效，游戏会自动删除此数据，格式为<code>yyyy-MM-dd HH:mm:ss Z</code><ref name="dateFormat"/>。此值不存在、无效或为<code>forever</code>时服务端会认为此封禁数据永远不会过期，即永久封禁。
+*** {{nbt|string|ip|existonsave=1|required=1}}：被封禁的IP。
+*** {{nbt|string|reason|existonsave=1}}：这次封禁的原因。不存在时此项为<code>Banned by an operator.</code>。
+*** {{nbt|string|source|existonsave=1}}：进行这次封禁操作的操作者。不存在此项时为<code>(Unknown)</code>。
+</div>
+
+== 存储行为 ==
+服务端可以在没有封禁列表存储文件的情况下启动，此时服务端会自动创建空的封禁列表存储文件，表示此服务端还没有人被封禁。
+
+对于玩家的封禁，游戏只会把玩家的UUID作为唯一判据，即玩家改名无法绕过封禁，因为即使非离线玩家的名称改变，其对应的UUID也不变。
+
+封禁的优先级高于白名单，即即使玩家在白名单内，封禁也会生效阻止玩家进入服务端。
+
+在使用{{cmd|ban}}、{{cmd|ban-ip}}、{{cmd|pardon}}、{{cmd|pardon-ip}}命令后，对应文件会被立刻写入。在服务端运行时直接修改文件无法影响当前运行的服务端。
+
+== 历史 ==
+{{stub|section=1}}
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.15a|加入了封禁功能。此时封禁列表以txt文件格式存储。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.15|对应[[Java版Alpha服务器0.1.0]]，此版本正式加入了多人游戏生存模式，但没有封禁功能。}}
+|{{HistoryLine||v1.0.16|对应[[Java版Alpha服务器0.1.1]]，此版本重新加入了封禁功能。此时封禁列表仍以txt文件格式存储，每行为一个封禁的玩家名或IP。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||?|将<code>banned-players.txt</code>和<code>banned-ips.txt</code>每行更改为<code>-{}-<被封禁玩家>{{!}}<封禁时间>{{!}}<操作者>{{!}}<封禁时长>{{!}}<理由></code>格式。<ref name="dateFormat"/><ref>此格式示例：<code>Player|2025-12-1 01:39:15 +0800|Server|Forever|Hacker</code></ref>}}
+|{{HistoryLine||1.7.6|dev=pre1|将封禁列表以JSON文件格式存储，并更改了存储格式。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

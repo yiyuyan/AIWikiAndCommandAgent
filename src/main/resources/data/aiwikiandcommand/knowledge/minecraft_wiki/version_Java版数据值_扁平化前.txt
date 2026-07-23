@@ -1,0 +1,2031 @@
+# 页面: Java版数据值/扁平化前
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%95%B0%E6%8D%AE%E5%80%BC/%E6%89%81%E5%B9%B3%E5%8C%96%E5%89%8D
+# 分类: Java版, 开发, 数据值页面, 过时内容
+# 抓取时间: 2026-07-14 17:15:25
+# 原始 Wikitext 内容:
+
+{{outdated|edition=java|大多数的数字ID仅存在于旧版本的Minecraft中。}}
+{{tr|mode=H|位|位元}}{{tr|mode=H|位置|位置}}{{tr|mode=H|单位|單位}}{{tr|mode=H|位于|位於}}{{tr|mode=H|角位|角位}}
+
+'''数据值（Data Values）'''被用在Minecraft的很多很多地方，它们指代不同种类的方块和物品。[[/方块ID|方块ID]]被用来指定放置在世界中的方块和物品栏里的物品（包括箱子里的物品和地上的掉落物）。[[/物品ID|物品ID]]只对物品有效。还有为生物、弹射物等实体准备的[[/实体ID|实体ID]]。[[#数据|方块数据]]进一步定义世界中的方块，例如指定水的高度或火把指向的方向。
+
+本条目列出了[[Java版1.12.2]]之前的数据值。
+
+[[File:DataValuesBeta.png|缩略图|右|在Java版1.12.2中的[[/方块ID|方块]]和[[/物品ID|物品]]列表]]
+
+__TOC__
+
+== 所有ID ==
+{{data table/key}}
+
+{{LoadPage|Java版数据值/扁平化前/方块ID|方块ID|h3}}
+{{-}}
+{{LoadPage|Java版数据值/扁平化前/物品ID|物品ID|h3}}
+{{-}}
+{{LoadPage|Java版数据值/扁平化前/实体ID|实体ID|h3}}
+{{-}}
+
+==== [[马]]的变种 ====
+马的变种决定了马的品种。下面是决定马的变种的数据值的列表。
+
+{| class="wikitable" style="text-align: center" data-description="Data values for colors and markings"
+!   !! 白色 !! 奶油色 !! 板栗色 !! 棕色 !! 黑色 !! 灰色 !! 深棕色
+|-
+! 无
+| 0 || 1 || 2 || 3 || 4 || 5 || 6
+|-
+! 白色
+| 256 || 257 || 258 || 259 || 260 || 261 || 262
+|-
+! 白色底色
+| 512 || 513 || 514 || 515 || 516 || 517 || 518
+|-
+! 白色斑点
+| 768 || 769 || 770 || 771 || 772 || 773 || 774
+|-
+! 黑色斑点
+| 1024 || 1025 || 1026 || 1027 || 1028 || 1029 || 1030
+|}<noinclude>
+</noinclude>
+变种名称取自对应纹理文件的名称。
+
+生成马时不使用特定的变种值或者使用无效的ID（不在上述范围内的ID）会导致生成一只白色的马。
+
+=== 生物群系ID ===
+{{:生物群系/1.13前的ID|1}}
+
+=== 魔咒ID ===
+在游戏的{{cmd|enchant}}、{{cmd|give}}和{{cmd|replaceitem}}命令中使用。
+
+{| class="wikitable sortable col-3-right col-4-right" data-description="Enchantment IDs" style="text-align: left;"
+! 魔咒
+! [[命名空间ID]]
+! 数字ID
+|-
+| 保护
+| <code>protection</code>
+| 0
+|-
+| 火焰保护
+| <code>fire_protection</code>
+| 1
+|-
+| 摔落缓冲
+| <code>feather_falling</code>
+| 2
+|-
+| 爆炸保护
+| <code>blast_protection</code>
+| 3
+|-
+| 弹射物保护
+| <code>projectile_protection</code>
+| 4
+|-
+| {{tr|水下呼吸|水中呼吸}}
+| <code>respiration</code>
+| 5
+|-
+| 水下速掘
+| <code>aqua_affinity</code>
+| 6
+|-
+| 荆棘
+| <code>thorns</code>
+| 7
+|-
+| 深海探索者
+| <code>depth_strider</code>
+| 8
+|-
+| 冰霜行者
+| <code>frost_walker</code>
+| 9
+|-
+| 绑定诅咒
+| <code>binding_curse</code>
+| 10
+|-
+| 锋利
+| <code>sharpness</code>
+| 16
+|-
+| 亡灵杀手
+| <code>smite</code>
+| 17
+|-
+| 节肢杀手
+| <code>bane_of_arthropods</code>
+| 18
+|-
+| 击退
+| <code>knockback</code>
+| 19
+|-
+| 火焰附加
+| <code>fire_aspect</code>
+| 20
+|-
+| 抢夺
+| <code>looting</code>
+| 21
+|-
+| 横扫之刃
+| <code>sweeping</code>
+| 22
+|-
+| 效率
+| <code>efficiency</code>
+| 32
+|-
+| 精准采集
+| <code>silk_touch</code>
+| 33
+|-
+| 耐久
+| <code>unbreaking</code>
+| 34
+|-
+| 时运
+| <code>fortune</code>
+| 35
+|-
+| {{tr|力量|強力}}
+| <code>power</code>
+| 48
+|-
+| 冲击
+| <code>punch</code>
+| 49
+|-
+| 火矢
+| <code>flame</code>
+| 50
+|-
+| 无限
+| <code>infinity</code>
+| 51
+|-
+| 海之眷顾
+| <code>luck_of_the_sea</code>
+| 61
+|-
+| 饵钓
+| <code>lure</code>
+| 62
+|-
+| 经验修补
+| <code>mending</code>
+| 70
+|-
+| 消失诅咒
+| <code>vanishing_curse</code>
+| 71
+|}
+
+=== [[状态效果]] ===
+在游戏的{{cmd|effect}}命令中使用。
+
+{| style="margin:2px; border: 1px solid silver; text-align: left;" data-description="状态效果"
+! 图标 !! 数据值 !! [[命名空间ID]] !! 效果类型 !! 源代码 !! 粒子颜色
+|-
+| {{EffectSprite|speed}} || 1 || minecraft:speed || 速度（Speed） || potion.moveSpeed || {{EffectSprite|particle-speed}} #7CAFC6
+|-
+| {{EffectSprite|slowness}} || 2 || minecraft:slowness || {{tr|缓慢|緩速|緩慢}}（Slowness） || potion.moveSlowdown || {{EffectSprite|particle-slowness}} #5A6C81
+|-
+| {{EffectSprite|haste}} || 3 || minecraft:haste || 急迫（Haste） || potion.digSpeed || {{EffectSprite|particle-haste}} #D9C043
+|-
+| {{EffectSprite|mining-fatigue}} || 4 || minecraft:mining_fatigue || 挖掘疲劳（Mining Fatigue） || potion.digSlowDown || {{EffectSprite|particle-mining-fatigue}} #4A4217
+|-
+| {{EffectSprite|strength}} || 5 || minecraft:strength || 力量（Strength） || potion.damageBoost || {{EffectSprite|particle-strength}} #932423
+|-
+| — || 6 || minecraft:instant_health || 瞬间治疗（Instant Health） || potion.heal || {{EffectSprite|particle-healing}} #F82423
+|-
+| — || 7 || minecraft:instant_damage || 瞬间伤害（Instant Damage） || potion.harm || {{EffectSprite|particle-instant damage}} #430A09
+|-
+| {{EffectSprite|jump-boost}} || 8 || minecraft:jump_boost || 跳跃提升（Jump Boost） || potion.jump || {{EffectSprite|particle-jump-boost}} #786297
+|-
+| {{EffectSprite|nausea}} || 9 || minecraft:nausea || 反胃（Nausea） || potion.confusion || {{EffectSprite|particle-nausea}} #551D4A
+|-
+| {{EffectSprite|regeneration}} || 10 || minecraft:regeneration || 生命回复（Regeneration）|| potion.regeneration || {{EffectSprite|particle-regeneration}} #CD5CAB
+|-
+| {{EffectSprite|resistance}} || 11 || minecraft:resistance || 抗性提升（Resistance） || potion.resistance || {{EffectSprite|particle-resistance}} #99453A
+|-
+| {{EffectSprite|fire-resistance}} || 12 || minecraft:fire_resistance || 抗火（Fire Resistance） || potion.fireResistance || {{EffectSprite|particle-fire-resistance}} #E49A3A
+|-
+| {{EffectSprite|water-breathing}} || 13 || minecraft:water_breathing || 水下呼吸（Water Breathing） || potion.waterBreathing || {{EffectSprite|particle-water-breathing}} #2E5299
+|-
+| {{EffectSprite|invisibility}} || 14 || minecraft:invisibility || 隐身（Invisibility） || potion.invisibility || {{EffectSprite|particle-invisibility}} #7F8392
+|-
+| {{EffectSprite|blindness}} || 15 || minecraft:blindness || 失明（Blindness） || potion.blindness || {{EffectSprite|particle-blindness}} #1F1F23
+|-
+| {{EffectSprite|night-vision}} || 16 || minecraft:night_vision || 夜视（Night vision） || potion.nightVision || {{EffectSprite|particle-night-vision}} #1F1FA1
+|-
+| {{EffectSprite|hunger}} || 17 || minecraft:hunger || 饥饿（Hunger） || potion.hunger || {{EffectSprite|particle-hunger}} #587653
+|-
+| {{EffectSprite|weakness}} || 18 || minecraft:weakness || 虚弱（Weakness） || potion.weakness || {{EffectSprite|particle-weakness}} #484D48
+|-
+| {{EffectSprite|poison}} || 19 || minecraft:poison || 中毒（Poison） || potion.poison || {{EffectSprite|particle-poison}} #4E9331
+|-
+| {{EffectSprite|wither}} || 20 || minecraft:wither || 凋零（Wither） || potion.wither || {{EffectSprite|particle-wither}} #352A27
+|-
+| {{EffectSprite|health boost}} || 21 || minecraft:health_boost || 生命提升（Health Boost） || potion.healthBoost || {{EffectSprite|particle-health boost}} #F87D23
+|-
+| {{EffectSprite|absorption}} || 22 || minecraft:absorption || 伤害吸收（Absorption） || potion.absorption || {{EffectSprite|particle-absorption}} #2552A5
+|-
+| — || 23 || minecraft:saturation || 饱和（Saturation） || potion.saturation || {{EffectSprite|particle-saturation}} #F82423
+|-
+| {{EffectSprite|glowing}} || 24 || minecraft:glowing || 发光（Glowing） || potion.glowing || {{EffectSprite|particle-glowing}} #94A061
+|-
+| {{EffectSprite|levitation}} || 25 || minecraft:levitation || 飘浮（Levitation） || potion.levitation || {{EffectSprite|particle-levitation}} #CEFFFF
+|-
+| {{EffectSprite|luck}} || 26 || minecraft:luck || 幸运（Luck） || potion.luck || {{EffectSprite|particle-luck}} #339900
+|-
+| {{EffectSprite|unluck}} || 27 || minecraft:unluck || 霉运（Bad Luck） || potion.unluck || {{EffectSprite|particle-unluck}} #C0A44D
+|}
+
+== 数据 ==
+对于特定种类的方块和物品，最多有4位元的特殊数据被用来定义其状态。若方块ID和4位元特殊数据仍不能完整地定义一个方块，这个方块会被换成[[方块实体]]或被分成两个方块。根据世界格式储存它们的不同。
+
+{| style="margin:2px; border: 1px solid silver; text-align: center" data-description="方块数据"
+! 方块 !! dec !! hex !! 用途
+|-
+| [[#木头|木头]] || 0-5 || 0-5 || 木头的纹理/旋转
+|-
+| [[#火|火]] || 0-15 || 0-F || 年龄（即已燃烧的时间，以游戏刻为单位）
+|-
+| [[#树叶|树叶]] || 0-5 || 0-5 || 树叶的纹理、枯萎计数器
+|-
+| [[#唱片机|唱片机]] || 0-11 || 0-B || 唱片机中是否有唱片
+|-
+| [[#树苗|树苗]] || 0-15 || 0-F || 树龄/树的种类
+|-
+| [[#仙人掌|仙人掌]] || 0-15 || 0-F ||年龄
+|-
+| [[#甘蔗|甘蔗]] || 0-15 || 0-F ||年龄
+|-
+| [[#水和熔岩|水和熔岩]] || 0-15 || 0-F || 液面高度
+|-
+| [[#沙子|沙子]] || 0-1 || 0-1 || 沙子的颜色
+|-
+| [[#耕地|土地/耕地]]  || 0-8 || 0-8 || 湿润度
+|-
+| [[#农作物|农作物]]  || 0-7 || 0-7 || 农作物大小
+|-
+| [[#下界疣|下界疣]] || 0-3 || 0-3 || 下界疣大小
+|-
+| [[#南瓜梗和西瓜梗|南瓜和西瓜梗]]  || 0-7 || 0-7 || 生长阶段
+|-
+| [[#羊毛、陶瓦、染色玻璃和地毯|羊毛、陶瓦、染色玻璃和地毯]]  || 0-15 || 0-F || 颜色
+|-
+| [[#染料|染料]]  || 0-15 || 0-F || 染料颜色
+|-
+| [[#鱼|鱼]] || 0-3 || 0-3 || 鱼的种类
+|-
+| [[#命令方块|命令方块]] || 0-15 || 0-F || 命令方块的朝向与条件制约状态
+|-
+| [[#火把和红石火把|火把和红石火把]]  || 0-5 || 0-5 || 火把朝向
+|-
+| [[#铁轨|铁轨]] (普通、充能、探测) || 0-9 || 0-9 || 铁轨的斜坡、方向、能量
+|-
+| [[#楼梯|楼梯]]  || 0-3 || 0-3 || 楼梯的方向
+|-
+| [[#拉杆|拉杆]]  || 6-14 || 6-E || 拉杆的放置方向和开关状态
+|-
+| [[#门|门]]  || 0-15 || 0-F || 门角位置和门的状态
+|-
+| [[#按钮|按钮]] || 0-15 || 0-F || 按钮方向，按钮是否被点击
+|-
+| [[#告示牌|告示牌]] || 0-15 || 0-F || 告示牌的方向
+|-
+| [[#梯子、墙上的告示牌、熔炉和箱子|梯子、墙上的告示牌、熔炉和箱子]] || 2-5 || 2-5 || 方向
+|-
+| [[#南瓜和南瓜灯|南瓜和南瓜灯]]  || 0-3 || 0-3 || 南瓜方向
+|-
+| [[#压力板|压力板]]  || 0-1 || 0-1 || 压力板是否受压
+|-
+| [[#煤炭|煤炭]]  || 0-1 || 0-1 || 煤炭种类（是天然煤炭还是[[木炭]]）
+|-
+| [[工具]]和[[盔甲]]  ||colspan=2| 因种类而不同 || 耐久度损耗
+|-
+| [[#台阶和双台阶|台阶]] || 0-3 || 0-3 || 台阶种类
+|-
+| [[#雪|雪]] || 0-15 || 0-F || 方块高度
+|-
+| [[#蛋糕|蛋糕]] || 0-5 || 0-5 || 已吃掉的块数
+|-
+| [[#床|床]] || 0-15 || 0-F || 方向，床是否被占据
+|-
+| [[#红石比较器|红石比较器]] || 0-15 || 0-F || 方向，模式设置和充能状态
+|-
+| [[#红石中继器|红石中继器]] || 0-15 || 0-F || 方向和延迟数
+|-
+| [[#红石线|红石线]] || 0-15 || 0-F || 信号强度
+|-
+| [[#阳光传感器|阳光传感器]] || 0-15 || 0-F || 信号强度
+|-
+| [[#草丛|草丛]] || 0-2 || 0-2 || 草丛种类（普通草丛、蕨、灌木）
+|-
+| [[#花|花]] || 0-8 || 0-8 || 花的种类
+|-
+| [[#大型花|大型花]] || 0-5、8-13 || 0-5、8-D || 花的种类
+|-
+| [[#活板门|活板门]] || 0-7 || 0-7 || 方向和开启状态
+|-
+| [[#活塞|活塞]] || 0-5、8-13 || 0-5、8-D || 方向，活塞臂是否伸出
+|-
+| [[#活塞臂|活塞臂]] || 0-5、8-13 || 0-5、8-D || 方向，是否有黏性
+|-
+| [[#石砖|石砖]] || 0-3 || 0-3 || 要塞纹理
+|-
+| [[#粽色和红色巨型蘑菇|粽色和红色巨型蘑菇]] || 0-10 || 0-A || 纹理
+|-
+| [[#藤蔓|藤蔓]] || 0-15 || 0-F || 附着面
+|-
+| [[#栅栏门|栅栏门]] || 0-7 || 0-7 || 方向和开关状态
+|-
+| [[#药水|药水]]  || 0-65535 || 0-FFFF || 药水种类
+|-
+| [[#酿造台|酿造台]] || 0-7 || 0-7 || 已用槽位
+|-
+| [[#炼药锅|炼药锅]] || 0-3 || 0-3 || 水量
+|-
+| [[#末地传送门框架|末地传送门框架]] || 0-7 || 0-7 || 方向，是否有末影之眼
+|-
+| [[#圆石墙|圆石墙]] || 0-1 || 0-1 || 墙的种类（圆石墙或苔石墙）
+|-
+| [[#花盆|花盆]] || 0-11 || 0-B || 花盆中的植物
+|-
+| [[#生物头颅|生物头颅]] || 0-4 || 0-4 || 生物头颅的种类
+|-
+| [[#铁砧|铁砧]] || 0-2 || 0-2 || 损毁状态
+|-
+| [[#金苹果|金苹果]] || 0-1 || 0-1 || 金苹果的种类（普通金苹果或附魔金苹果）
+|-
+| [[#木板|木板]] || 0-5 || 0-5 || 木板纹理
+|-
+| [[#石英块|石英块]] || 0-4 || 0-4 || 石英块纹理/旋转
+|}
+
+=== [[木板]] ===
+{{dvt|spritetype=block|sprite=oak-planks|橡木木板}}
+{{dvt|sprite=spruce-planks|云杉木板}}
+{{dvt|sprite=birch-planks|白桦木板}}
+{{dvt|sprite=jungle-planks|丛林木板}}
+{{dvt|sprite=acacia-planks|金合欢木板}}
+{{dvt|sprite=dark-oak-planks|深色橡木木板|foot=1}}
+
+=== [[石头]] ===
+{{dvt|spritetype=block|sprite=stone|[[石头]]}}
+{{dvt|sprite=granite|[[花岗岩]]}}
+{{dvt|sprite=polished-granite|[[磨制花岗岩]]}}
+{{dvt|sprite=diorite|[[闪长岩]]}}
+{{dvt|sprite=polished-diorite|[[磨制闪长岩]]}}
+{{dvt|sprite=andesite|[[安山岩]]}}
+{{dvt|sprite=polished-andesite|[[磨制安山岩]]|foot=1}}
+
+=== [[泥土]] ===
+{{dvt|sprite=dirt|[[泥土]]}}
+{{dvt|sprite=coarse-dirt|[[砂土]]}}
+{{dvt|sprite=podzol|[[灰化土]]|foot=1}}
+
+=== [[树苗]] ===
+数据值被分成两半。底部的三个位元会确定树苗的类型(和树生成时的类型)，根据下表：
+
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2<br>0x4
+| 一个储存0-5的三位字段表示树苗的种类：
+* 0：{{BlockSprite|Oak Sapling}}橡树树苗
+* 1：{{BlockSprite|Spruce Sapling}} 云杉树苗
+* 2：{{BlockSprite|Birch Sapling}} 白桦树苗
+* 3：{{BlockSprite|Jungle Sapling}} 丛林树苗
+* 4：{{BlockSprite|Acacia Sapling}} 金合欢树苗
+* 5：{{BlockSprite|Dark Oak Sapling}} 深色橡树树苗
+|-
+| 0x8 || 在树苗可以长成树时被设置。
+|}
+
+0x8的位元被用于计数器。计数器会在树苗以物品形式掉落时清零。
+
+=== [[水]]和[[熔岩]] ===
+如果位元0x8被设定，这种液体是在“下落”并只向下蔓延。这种情况下，后面的位元将被忽视，因为这个方块自然有最大的液体量。
+
+后面的3个位元代表的是液体方块的液体量。0x0是最大的液体量（不代表会填满整个方块，这取决于其斜上方的液体方块）。数据值会随着液体量降低而增加：0x1其次，0x2更低，直到0x7——最低的液体量。沿着平地，水从水源流出会每一米降低一级；熔岩会在下界降低一级，在别的地方降低2级。
+
+每种液体的静态版本都是“稳定的”，并不会被游戏引擎进一步地检测液体量变更。奇怪的是，固定的水和熔岩的代码为“<code>water</code>”和“<code>lava</code>”，而常规版本的为“<code>flowing_water</code>”和“<code>flowing_lava</code>”。
+
+=== [[沙子]] ===
+{{dvt|spritetype=block|sprite=sand|沙子}}
+{{dvt|sprite=red-sand|红沙|foot=1}}
+
+=== [[木头]] ===
+'''17号方块'''
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2
+| 一个储存0-3的两位字段表示木头的种类：
+
+* 0：{{BlockSprite|Oak Log}} 橡木
+* 1：{{BlockSprite|Spruce Log}} 云杉木
+* 2：{{BlockSprite|Birch Log}} 白桦木
+* 3：{{BlockSprite|Jungle Log}} 丛林木
+|-
+| 0x4<br>0x8
+| 一个储存0-3的两位字段表示木头的方向：
+* 0：{{BlockSprite|Oak Log}} 向上/下
+* 1：{{BlockSprite|Oak Log Horizontal}} 向东/西
+* 2：{{BlockSprite|Oak Log Top}} 向北/南
+* 3：{{BlockSprite|Oak Log}} 仅树皮
+|}
+
+'''162号方块'''
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2
+| 一个储存0-1的两位字段表示木头的种类：
+* 0：{{BlockSprite|Acacia Log}} 金合欢木
+* 1：{{BlockSprite|Dark Oak Log}} 深色橡木
+|-
+| 0x4<br>0x8
+| 一个储存0-3的两位字段表示木头的方向：
+* 0：{{BlockSprite|Acacia Log}} 向上/下
+* 1:{{BlockSprite|Acacia Log Horizontal}} 向东/西
+* 2：{{BlockSprite|Acacia Log Top}} 向北/南
+* 3：{{BlockSprite|Acacia Log}} 仅树皮
+|}
+
+=== [[树叶]] ===
+如果树叶被设定了位元0x4，树叶将会永久存在，不会衰亡。玩家放置的树叶上会标注此位元，并覆盖位元0×8的意义。
+
+如果树叶被设定了位元0x8，游戏将会检查树叶的状态，在符合条件时使树叶衰亡（移除树叶方块）。如果检查结果表明树叶的状态未达到衰亡标准，该位元会被清除。当树叶方块下一次收到方块更新时，该位元会被重新设置。
+
+'''18号方块'''
+{{dvt|sprite=oak-leaves|橡树树叶}}
+{{dvt|sprite=spruce-leaves|云杉树叶}}
+{{dvt|sprite=birch-leaves|白桦树叶}}
+{{dvt|sprite=jungle-leaves|丛林树叶}}
+{{dvt|sprite=oak-leaves|橡树树叶（无枯萎）}}
+{{dvt|sprite=spruce-leaves|云杉树叶（无枯萎）}}
+{{dvt|sprite=birch-leaves|白桦树叶（无枯萎）}}
+{{dvt|sprite=jungle-leaves|丛林树叶（无枯萎）}}
+{{dvt|sprite=oak-leaves|橡树树叶（检查枯萎）}}
+{{dvt|sprite=spruce-leaves|云杉树叶（检查枯萎）}}
+{{dvt|sprite=birch-leaves|白桦树叶（检查枯萎）}}
+{{dvt|sprite=jungle-leaves|丛林树叶（检查枯萎）}}
+{{dvt|sprite=oak-leaves|橡树树叶（无枯萎并检查枯萎）}}
+{{dvt|sprite=spruce-leaves|云杉树叶（无枯萎并检查枯萎）}}
+{{dvt|sprite=birch-leaves|白桦树叶（无枯萎并检查枯萎）}}
+{{dvt|sprite=jungle-leaves|丛林树叶（无枯萎并检查枯萎）|foot=1}}
+
+'''161号方块'''
+{{dvt|sprite=acacia-leaves|金合欢树叶}}
+{{dvt|sprite=dark-oak-leaves|深色橡树树叶}}
+{{dvt|dv=4|sprite=acacia-leaves|金合欢树叶（无枯萎）}}
+{{dvt|sprite=dark-oak-leaves|深色橡树树叶（无枯萎）}}
+{{dvt|dv=8|sprite=acacia-leaves|金合欢树叶（检查枯萎）}}
+{{dvt|sprite=dark-oak-leaves|深色橡树树叶（检查枯萎）}}
+{{dvt|dv=12|sprite=acacia-leaves|金合欢树叶（无枯萎并检查枯萎）}}
+{{dvt|sprite=dark-oak-leaves|深色橡树树叶（无枯萎并检查枯萎）|foot=1}}
+
+=== [[羊毛]]、[[陶瓦]]、[[染色玻璃]]和[[地毯]] ===
+这些数值所表示的是羊毛、陶瓦、染色玻璃和地毯的颜色。此数据被存储在被放置的羊毛、染色黏土、染色玻璃或地毯的方块元数据里，而在物品栏里时，用“损害值”标签储存这些信息。
+
+;{{text anchor|地毯}}
+{{dvt|spritetype=block|sprite=white-carpet|白色地毯}}
+{{dvt|sprite=orange-carpet|橙色地毯}}
+{{dvt|sprite=magenta-carpet|品红色地毯}}
+{{dvt|sprite=light-blue-carpet|淡蓝色地毯}}
+{{dvt|sprite=yellow-carpet|黄色地毯}}
+{{dvt|sprite=lime-carpet|黄绿色地毯}}
+{{dvt|sprite=pink-carpet|粉红色地毯}}
+{{dvt|sprite=gray-carpet|灰色地毯}}
+{{dvt|sprite=light-gray-carpet|淡灰色地毯}}
+{{dvt|sprite=cyan-carpet|青色地毯}}
+{{dvt|sprite=purple-carpet|紫色地毯}}
+{{dvt|sprite=blue-carpet|蓝色地毯}}
+{{dvt|sprite=brown-carpet|棕色地毯}}
+{{dvt|sprite=green-carpet|绿色地毯}}
+{{dvt|sprite=red-carpet|红色地毯}}
+{{dvt|sprite=black-carpet|黑色地毯|foot=1}}
+
+;{{text anchor|羊毛}}
+{| class="wikitable" style="text-align:center" data-description="Data values"
+! rowspan=2 |
+! colspan=2 | [[数据值]]
+! rowspan=2 | 描述
+! colspan=2 | 颜色代码<ref group="注">羊毛每个像素的颜色几乎都是不同的，这里是默认纹理包内平均的RGB颜色数值。</ref> 
+|-
+! <abbr title="Decimal">Dec</abbr> !! <abbr title="Hexadecimal">Hex</abbr>
+! <abbr title="until 1.12">旧</abbr> !! 新
+|-
+| {{InvSprite|White Wool}}
+| 0 || 0x0
+| 白色羊毛
+| <code>#DDDDDD</code> || <code>#E9ECEC</code>
+|-
+| {{InvSprite|Orange Wool}}
+| 1 || 0x1
+| 橙色羊毛
+| <code>#DB7D3E</code> || <code>#F07613</code>
+|-
+| {{InvSprite|Magenta Wool}}
+| 2 || 0x2
+| 品红色羊毛
+| <code>#B350BC</code> || <code>#BD44B3</code>
+|-
+| {{InvSprite|Light Blue Wool}}
+| 3 || 0x3
+| 淡蓝色羊毛
+| <code>#6B8AC9</code> || <code>#3AAFD9</code>
+|-
+| {{InvSprite|Yellow Wool}}
+| 4 || 0x4
+| 黄色羊毛
+| <code>#B1A627</code> || <code>#F8C627</code>
+|-
+| {{InvSprite|Lime Wool}}
+| 5 || 0x5
+| 黄绿色羊毛
+| <code>#41AE38</code> || <code>#70B919</code>
+|-
+| {{InvSprite|Pink Wool}}
+| 6 || 0x6
+| 粉红色羊毛
+| <code>#D08499</code> || <code>#ED8DAC</code>
+|-
+| {{InvSprite|Gray Wool}}
+| 7 || 0x7
+| 灰色羊毛
+| <code>#404040</code> || <code>#3E4447</code>
+|-
+| {{InvSprite|Light Gray Wool}}
+| 8 || 0x8
+| 淡灰色羊毛
+| <code>#9AA1A1</code> || <code>#8E8E86</code>
+|-
+| {{InvSprite|Cyan Wool}}
+| 9 || 0x9
+| 青色羊毛
+| <code>#2E6E89</code> || <code>#158991</code>
+|-
+| {{InvSprite|Purple Wool}}
+| 10 || 0xA
+| 紫色羊毛
+| <code>#7E3DB5</code> || <code>#792AAC</code>
+|-
+| {{InvSprite|Blue Wool}}
+| 11 || 0xB
+| 蓝色羊毛
+| <code>#2E388D</code> || <code>#35399D</code>
+|-
+| {{InvSprite|Brown Wool}}
+| 12 || 0xC
+| 棕色羊毛
+| <code>#4F321F</code> || <code>#724728</code>
+|-
+| {{InvSprite|Green Wool}}
+| 13 || 0xD
+| 绿色羊毛
+| <code>#35461B</code> || <code>#546D1B</code>
+|-
+| {{InvSprite|Red Wool}}
+| 14 || 0xE
+| 红色羊毛
+| <code>#963430</code> || <code>#A12722</code>
+|-
+| {{InvSprite|Black Wool}}
+| 15 || 0xF
+| 黑色羊毛
+| <code>#191616</code> || <code>#141519</code>
+|}
+{{notelist}}
+;{{text anchor|陶瓦}}
+{{dvt|spritetype=block|sprite=white-terracotta|白色陶瓦}}
+{{dvt|sprite=orange-terracotta|橙色陶瓦}}
+{{dvt|sprite=magenta-terracotta|品红色陶瓦}}
+{{dvt|sprite=light-blue-terracotta|淡蓝色陶瓦}}
+{{dvt|sprite=yellow-terracotta|黄色陶瓦}}
+{{dvt|sprite=lime-terracotta|黄绿色陶瓦}}
+{{dvt|sprite=pink-terracotta|粉红色陶瓦}}
+{{dvt|sprite=gray-terracotta|灰色陶瓦}}
+{{dvt|sprite=light-gray-terracotta|淡灰色陶瓦}}
+{{dvt|sprite=cyan-terracotta|青色陶瓦}}
+{{dvt|sprite=purple-terracotta|紫色陶瓦}}
+{{dvt|sprite=blue-terracotta|蓝色陶瓦}}
+{{dvt|sprite=brown-terracotta|棕色陶瓦}}
+{{dvt|sprite=green-terracotta|绿色陶瓦}}
+{{dvt|sprite=red-terracotta|红色陶瓦}}
+{{dvt|sprite=black-terracotta|黑色陶瓦|foot=1}}
+
+;{{text anchor|染色玻璃}}
+{{dvt|spritetype=block|sprite=white-stained-glass|白色染色玻璃}}
+{{dvt|sprite=orange-stained-glass|橙色染色玻璃}}
+{{dvt|sprite=magenta-stained-glass|品红色染色玻璃}}
+{{dvt|sprite=light-blue-stained-glass|淡蓝色染色玻璃}}
+{{dvt|sprite=yellow-stained-glass|黄色染色玻璃}}
+{{dvt|sprite=lime-stained-glass|黄绿色染色玻璃}}
+{{dvt|sprite=pink-stained-glass|粉红色染色玻璃}}
+{{dvt|sprite=gray-stained-glass|灰色染色玻璃}}
+{{dvt|sprite=light-gray-stained-glass|淡灰色染色玻璃}}
+{{dvt|sprite=cyan-stained-glass|青色染色玻璃}}
+{{dvt|sprite=purple-stained-glass|紫色染色玻璃}}
+{{dvt|sprite=blue-stained-glass|蓝色染色玻璃}}
+{{dvt|sprite=brown-stained-glass|棕色染色玻璃}}
+{{dvt|sprite=green-stained-glass|绿色染色玻璃}}
+{{dvt|sprite=red-stained-glass|红色染色玻璃}}
+{{dvt|sprite=black-stained-glass|黑色染色玻璃|foot=1}}
+
+=== [[火把]]和[[红石火把]] ===
+{{dvt|dv=0}}
+{{dvt|指向东边（所插方块位于其西边）}}
+{{dvt|指向西边（所插方块位于其东边）}}
+{{dvt|指向南边（所插方块位于其北边）}}
+{{dvt|指向北边（所插方块位于其南边）}}
+{{dvt|指向上面（所插方块位于其下）|foot=1}}
+
+=== [[台阶]] ===
+半台阶可以是“正常”和“倒置”的；此信息如下储存在最重要的0x8元数据位元里：
+* 0：台阶是正确的，占据其体素的下半部分。
+* 1：台阶是颠倒的，占据其体素的上半部分。
+
+因此，普通的木台阶拥有元数据值0x2 0x2(二进制<code><b style="color: red">0</b>010</code>)，而颠倒的木台阶是用元数据0xA表示(二进制<code><b style="color: red">1</b>010</code>)。
+
+位元较高的双台阶方块会将其顶面纹理应用到所有六个面上。
+
+木台阶被分为带有木头特性的另一种方块，而不是一种变了纹理的石台阶。[[石化橡木台阶]]仍然能通过命令获得。
+
+==== 双石台阶 ====
+;43号方块
+{{dvt|spritetype=block|sprite=double-smooth-stone-slab|双石台阶}}
+{{dvt|sprite=sandstone|双砂岩台阶}}
+{{dvt|sprite=oak-planks|石质双木台阶}}
+{{dvt|sprite=cobblestone|双圆石台阶}}
+{{dvt|sprite=bricks|双砖块台阶}}
+{{dvt|sprite=stone-bricks|双石砖台阶}}
+{{dvt|dv=6|sprite=nether-bricks|双下界砖块台阶}}
+{{dvt|dv=7|sprite=block-of-quartz|双石英台阶}}
+{{dvt|dv=8|sprite=smooth-stone|无缝双石台阶|foot=1}}
+;181号方块
+{{dvt|spritetype=block|sprite=red-sandstone|双红砂岩台阶|foot=1}}
+完整的石头、石英、砂岩和红砂岩台阶在任何面上都会显示顶层纹理。
+
+==== 石台阶 ====
+;44号方块
+{{dvt|spritetype=block|sprite=smooth-stone-slab|石台阶}}
+{{dvt|sprite=sandstone-slab|砂岩台阶}}
+{{dvt|sprite=oak-wood-slab|石质木台阶}}
+{{dvt|sprite=cobblestone-slab|圆石台阶}}
+{{dvt|sprite=bricks-slab|砖块台阶}}
+{{dvt|sprite=stone-brick-slab|石砖台阶}}
+{{dvt|sprite=nether-brick-slab|下界砖块台阶}}
+{{dvt|sprite=quartz-slab|石英台阶}}
+{{dvt|sprite=smooth-stone-slab|上半石台阶}}
+{{dvt|sprite=sandstone-slab|上半圆石台阶}}
+{{dvt|sprite=oak-wood-slab|石质上半木台阶}}
+{{dvt|sprite=cobblestone-slab|上半圆石台阶}}
+{{dvt|sprite=bricks-slab|上半砖块台阶}}
+{{dvt|sprite=stone-brick-slab|上半石砖台阶}}
+{{dvt|sprite=nether-brick-slab|上半下界砖块台阶}}
+{{dvt|sprite=quartz-slab|上半石英台阶|foot=1}}
+;182号方块
+{{dvt|sprite=red-sandstone-slab|红砂岩台阶}}
+{{dvt|dv=8|sprite=red-sandstone-slab|上半红砂岩台阶|foot=1}}
+
+==== 双木台阶 ====
+;125号方块
+{{dvt|spritetype=block|sprite=oak-planks|双橡木台阶}}
+{{dvt|sprite=spruce-planks|双云杉木台阶}}
+{{dvt|sprite=birch-planks|双白桦木台阶}}
+{{dvt|sprite=jungle-planks|双丛林木台阶}}
+{{dvt|sprite=acacia-planks|双金合欢木台阶}}
+{{dvt|sprite=dark-oak-planks|双深色橡木台阶|foot=1}}
+
+==== 木台阶 ====
+;126号方块
+{{dvt|spritetype=block|sprite=oak-wood-slab|橡木台阶}}
+{{dvt|sprite=spruce-wood-slab|云杉木台阶}}
+{{dvt|sprite=birch-wood-slab|白桦木台阶}}
+{{dvt|sprite=jungle-wood-slab|丛林木台阶}}{{dvt|sprite=acacia-wood-slab|金合欢木台阶}}
+{{dvt|sprite=dark-oak-wood-slab|深色橡木台阶}}
+{{dvt|dv=8|sprite=oak-wood-slab|上半橡木台阶}}
+{{dvt|sprite=spruce-wood-slab|上半云杉木台阶}}
+{{dvt|sprite=birch-wood-slab|上半白桦木台阶}}
+{{dvt|sprite=jungle-wood-slab|上半丛林木台阶}}
+{{dvt|sprite=acacia-wood-slab|上半金合欢木台阶}}
+{{dvt|sprite=dark-oak-wood-slab|上半深色橡木台阶|foot=1}}
+
+=== [[火]] ===
+0x0是一个放置或蔓延的火。一旦它达到0xF，永恒之火将会生效因为该方块无法进一步更新。
+
+=== [[砂岩]] ===
+普通砂岩下半部有裂痕纹路，所有类型砂岩最上方两行像素都一样。
+{{dvt|spritetype=block|sprite=sandstone|砂岩}}
+{{dvt|sprite=chiseled-sandstone|雕纹砂岩}}
+{{dvt|sprite=cut-sandstone|平滑砂岩|foot=1}}
+
+=== [[红砂岩]] ===
+{{dvt|spritetype=block|sprite=red-sandstone|红砂岩}}
+{{dvt|sprite=chiseled-red-sandstone|雕纹红砂岩}}
+{{dvt|sprite=cut-red-sandstone|平滑红砂岩|foot=1}}
+
+=== [[床]] ===
+{| class="wikitable" data-description="Block data"
+! 最低两位的值 !! 朝向
+|-
+| 0
+| 床头朝向南方
+|-
+| 1
+| 床头朝向西方
+|-
+| 2
+| 床头朝向北方
+|-
+| 3
+| 床头朝向东方
+|-
+! 位元标志 !! 意义
+|-
+| 0x4
+| 0为空床<br>1为已占用
+|-
+| 0x8
+| 0为床尾<br>1为床头
+|}
+
+=== [[草丛]] ===
+{{dvt|sprite=shrub|[[灌木（已移除方块）|灌木]]}}
+{{dvt|sprite=short-grass|[[草]]}}
+{{dvt|sprite=fern|[[蕨]]|foot=1}}
+
+=== [[花]] ===
+{{dvt|sprite=poppy|虞美人}}
+{{dvt|sprite=blue-orchid|兰花}}
+{{dvt|sprite=allium|绒球葱}}
+{{dvt|sprite=azure-bluet|蓝花美耳草}}
+{{dvt|sprite=red-tulip|红色郁金香}}
+{{dvt|sprite=orange-tulip|橙色郁金香}}
+{{dvt|sprite=white-tulip|白色郁金香}}
+{{dvt|sprite=pink-tulip|粉红色郁金香}}
+{{dvt|sprite=oxeye-daisy|滨菊|foot=1}}
+
+=== [[大型花]] ===
+{{dvt|sprite=sunflower|[[向日葵]]}}
+{{dvt|sprite=lilac|[[丁香]]}}
+{{dvt|sprite=tall-grass|[[高草丛]]}}
+{{dvt|sprite=large-fern|[[大型蕨]]}}
+{{dvt|sprite=rose-bush|[[玫瑰丛]]}}
+{{dvt|sprite=peony|[[牡丹]]}}
+{{dvt|dv=8|任何大型植物的上半部；下3个位元0x7并未设定为植物种类，它们取自其下方的方块|foot=1}}
+
+=== [[活塞]] ===
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2<br>0x4
+| 一个包含0-5之间的一个值来指定活塞臂的方向''(活塞臂指向的方向)''：
+* 0：下
+* 1：上
+* 2：北
+* 3：南
+* 4：西
+* 5：东
+|-
+| 0x8
+| 活塞是否被推出。1为已推出去，0为已收回
+|}
+
+=== [[活塞臂]] ===
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2<br>0x4
+| 一个包含0-5之间的一个值来指定活塞臂的方向''(活塞臂指向的方向)''：
+* 0：下
+* 1：上
+* 2：北
+* 3：南
+* 4：西
+* 5：东
+|-
+| 0x8
+| 活塞臂是黏性与否(注意黏性与普通活塞体实际上有完全不同的方块类型)。1为黏性，0为普通
+|}
+
+=== [[楼梯]] ===
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2
+| 一个包含0-3之间的一个值来指定楼梯整格面的方向的两位字段：
+* 0：东
+* 1：西
+* 2：南
+* 3：北
+|-
+| 0x4
+| 楼梯若为上下颠倒的则使用此值
+|-
+| 0x8
+| style="color:silver" | （未使用）
+|}
+
+=== [[红石线]] ===
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2<br>0x4<br>0x8
+| 一个四位的字段存储着0-15的值，用来指定当前红石充能的级别。
+|}
+
+=== [[阳光传感器]] ===
+{| class="wikitable"
+! 位元
+! 描述
+|-
+| 0x1<br>0x2<br>0x4<br>0x8
+| 一个四位的字段存储着0-15的值，用来指定当前红石充能的级别。
+|}
+
+=== [[Tutorial:农作物种植|农作物]] ===
+农作物从0x0生长到0x7。胡萝卜、甜菜根和马铃薯的生长看起来有4个阶段，但实际上它们与小麦的生长阶段相同，仅仅在多个阶段使用相同的纹理。注意：一个数据值为0xf的农作物被发现；最大的0x8位元意义未知。
+;小麦
+{| style="margin:2px; border: 1px solid silver; text-align: center;"
+! 图标 !! 数据值
+|-
+|{{BlockSprite|wheat-1}} || 0
+|-
+|{{BlockSprite|wheat-2}} || 1
+|-
+|{{BlockSprite|wheat-3}} || 2
+|-
+|{{BlockSprite|wheat-4}} || 3
+|-
+|{{BlockSprite|wheat-5}} || 4
+|-
+|{{BlockSprite|wheat-6}} || 5
+|-
+|{{BlockSprite|wheat-7}} || 6
+|-
+|{{BlockSprite|wheat-8}} || 7
+|}
+;胡萝卜
+{| style="margin:2px; border: 1px solid silver; text-align: center;"
+! 图标 !! 数据值
+|-
+|{{BlockSprite|carrots-1}} || 0、1
+|-
+|{{BlockSprite|carrots-2}} || 2、3
+|-
+|{{BlockSprite|carrots-3}} || 4、5、6
+|-
+|{{BlockSprite|carrots-4}} || 7
+|}
+;马铃薯
+{| style="margin:2px; border: 1px solid silver; text-align: center;"
+! 图标 !! 数据值
+|-
+|{{BlockSprite|potatoes-1}} || 0、1
+|-
+|{{BlockSprite|potatoes-2}} || 2、3
+|-
+|{{BlockSprite|potatoes-3}} || 4、5、6
+|-
+|{{BlockSprite|potatoes-4}} || 7
+|}
+;甜菜
+{| data-description="Block data" style="margin:2px; border: 1px solid silver; text-align: center;"
+! 图标 !! 数据值
+|-
+|{{BlockSprite|beetroots-1}} || 0
+|-
+|{{BlockSprite|beetroots-2}} || 1
+|-
+|{{BlockSprite|beetroots-3}} || 2
+|-
+|{{BlockSprite|beetroots-4}} || 3
+|}
+
+=== [[耕地]] ===
+{| class="wikitable"
+! 数据值 !! 意义
+|-
+| 0
+|干耕地
+|-
+| 1-7
+| 增加湿润等级。<br>当耕地接触不到水时，湿润值会减到0x0。<br>湿润的耕地纹理只有在湿润等级在0x7时使用。
+|}
+
+=== [[旗帜]] ===
+==== 站立 ====
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2<br>0x4<br>0x8
+| 一个4位元的字段存储了一个0-15的值，用于指定方块面对的方向：
+* 0：南
+* 1：西南偏南
+* 2：西南
+* 3：西南偏西
+* 4：西
+* 5：西北偏西
+* 6：西北
+* 7：西北偏北
+* 8：北
+* 9：东北偏北
+* 10：东北
+* 11：东北偏东
+* 12：东
+* 13：东南偏东
+* 14：东南
+* 15：东南偏南
+|}
+
+==== 墙上 ====
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2<br>0x4
+| 一个3字节的字段存储了一个2-5的值，用于指定方块面对的方向：
+* 2：北
+* 3：南
+* 4：西
+* 5：东
+|-
+| 0x8
+| style="color:silver" | （未使用）
+|}
+
+=== [[门]] ===
+==== Minecraft 1.1和更早期版本 ====
+最不重要的两个位元是门的方向，即其角位：
+* 0x0：西北角
+* 0x1：东北角
+* 0x2：东南角
+* 0x3：西南角
+
+上面的两个位元是标志：
+* 0x8：如果被设定为此位元，这是一扇门的上半部分(否则是下半部)。
+* 0x4：如果被设定为此位元，此门已被沿其角逆时针转动。
+
+例如，一扇门的下半部的角在西南角并已被转动，所以从西方看时它是关闭的，将有一个(3|4)=(3+4)=7的数据值。
+
+==== 从12w06a开始 ====
+[[File:12w06a-doors-idx.png|300px|缩略图|右|在12w06a中可能的门的数据值图像]]
+
+准确描述一扇门的总数据现在包含在'''两个'''门方块的数据值内，所以两个数据值都要被检查。
+
+在两个门方块中，上面的位元(0x8)如下：
+* 0：门的下半部
+* 1：门的上半部
+
+'''上半部'''
+:最不重要的位元(0x1)内容如下，假设你面向着与门关闭时面向的同一个方向：
+:* 0：角在右边''(这是一扇门的默认值)''
+:* 1：角在左边''(这将用于双门组合中的另一扇门)''
+:
+:其他两个位元(0x2和0x4)永远是零。
+:
+:因此，上半部唯一有效的值，是8(二进制1000)和9(二进制1001)。
+
+'''下半部'''
+:第二个位元(0x4)决定门的状态：
+:* 0：关闭
+:* 1：开启
+:
+:底部的两个位元确定门面向的方向(这些方向为门关闭时面向的方向)
+:* 0：面向西方
+:* 1：面向北方
+:* 2：面向东方
+:* 3：面向南方
+
+==== 从Minecraft ??版本开始 ====
+:在门的上半部分的第二位元（0x2）确定门是否被充能。
+:* 0:未充能
+:* 1:充能
+:
+:这意味着上半部分现在使用值8，9，10，和11。
+
+=== [[铁轨]] ===
+{| class="wikitable"
+! 数据值 !! 描述
+|-
+| 0 || 平直铁轨，南北走向
+|-
+| 1 || 平直铁轨，东西走向
+|-
+| 2 || 倾斜铁轨，朝东
+|-
+| 3 || 倾斜铁轨，朝西
+|-
+| 4 || 倾斜铁轨，朝北
+|-
+| 5 || 倾斜铁轨，朝南
+|-
+| 6 || 拐弯铁轨，朝向东南
+|-
+| 7 || 拐弯铁轨，朝向西南
+|-
+| 8 || 拐弯铁轨，朝向西北
+|-
+| 9 || 拐弯铁轨，朝向东北
+|}
+
+==== [[激活铁轨]]、[[探测铁轨]]和[[动力铁轨]] ====
+{| class="wikitable"
+! 位元 !! 值
+|-
+| 0x1<br>0x2<br>0x4
+|
+一个储存0-5的三位字段表示铁轨的朝向：
+* 0: 平坦铁轨朝向北南
+* 1: 平坦铁轨朝向西东
+* 2: 倾斜铁轨朝向东
+* 3: 倾斜铁轨朝向西
+* 4: 倾斜铁轨朝向北
+* 5: 倾斜铁轨朝向南
+|-
+| 0x8
+| 如果设定，铁轨将被激活。
+|}
+
+=== [[梯子]]、[[熔炉]]、[[箱子]]和[[陷阱箱]] ===
+;梯子
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1<br>0x2<br>0x4
+|
+一个储存了2-5之间的一个值的三位字段：
+* 2：梯子朝向北
+* 3：梯子朝向南
+* 4：梯子朝向西
+* 5：梯子朝向东
+
+无效的值默认设为2。
+|-
+| 0x8
+| style="color:silver" | （未使用）
+|}
+
+;熔炉
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1<br>0x2<br>0x4
+|
+一个储存了2-5之间的一个值的三位字段：
+* 2: 熔炉面向北
+* 3: 熔炉面向南
+* 4: 熔炉面向西
+* 5: 熔炉面向东
+
+无效的值默认设为2。
+|-
+| 0x8
+| style="color:silver" | （未使用）
+|}
+;箱子
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1<br>0x2<br>0x4
+|
+一个储存了2-5之间的一个值的三位字段：
+* 2: 箱子朝向北
+* 3: 箱子朝向南
+* 4: 箱子朝向西
+* 5: 箱子朝向东
+
+无效的值默认设为2。
+|-
+| 0x8
+| style="color:silver" | （未使用）
+|}
+;陷阱箱
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1<br>0x2<br>0x4
+|
+一个储存了2-5之间的一个值的三位字段：
+* 2: 陷阱箱朝向北
+* 3: 陷阱箱朝向南
+* 4: 陷阱箱朝向西
+* 5: 陷阱箱朝向东
+
+无效的值默认设为2。
+|-
+| 0x8
+| style="color:silver" | （未使用）
+|}
+
+=== [[告示牌]] ===
+==== 站立 ====
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2<br>0x4<br>0x8
+| 一个4位元的字段存储了一个0-15的值，用于指定方块面对的方向：
+* 0：南
+* 1：西南偏南
+* 2：西南
+* 3：西南偏西
+* 4：西
+* 5：西北偏西
+* 6：西北
+* 7：西北偏北
+* 8：北
+* 9：东北偏北
+* 10：东北
+* 11：东北偏东
+* 12：东
+* 13：东南偏东
+* 14：东南
+* 15：东南偏南
+|}
+
+==== 墙上 ====
+{| class="wikitable"
+! 位元 !! 描述
+|-
+| 0x1<br>0x2<br>0x4
+| 一个3字节的字段存储了一个2-5的值，用于指定方块面对的方向:
+* 2：北
+* 3：南
+* 4：西
+* 5：东
+|-
+| 0x8
+| style="color:silver" | （未使用）
+|}
+
+=== [[发射器]]和[[投掷器]] ===
+;投掷器
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1<br>0x2<br>0x4
+|
+一个储存0-5的三位字段表示投掷器开口的朝向：
+* 0: 投掷器朝下
+* 1: 投掷器朝上
+* 2: 投掷器朝北
+* 3: 投掷器朝南
+* 4: 投掷器朝西
+* 5: 投掷器朝东
+|-
+| 0x8
+| 如果设定，投掷器将被激活。
+|}
+;发射器
+{| class="wikitable"
+! 位元
+! 数
+|-
+| 0x1<br>0x2<br>0x4
+|
+一个储存0-5的三位字段表示发射器开口的朝向：
+* 0: 发射器朝下
+* 1: 发射器朝上
+* 2: 发射器朝北
+* 3: 发射器朝南
+* 4: 发射器朝西
+* 5: 发射器朝东
+|-
+| 0x8
+| 如果设定，发射器将被激活。
+|}
+
+=== [[漏斗]] ===
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1<br>0x2<br>0x4
+|
+存储了0-5之间的值的一个三位字段。
+* 0：朝下。
+* 1：<span style="color:silver">（未使用）</span>
+* 2：输出朝向北
+* 3：输出朝向南
+* 4：输出朝向西
+* 5：输出朝向东
+|-
+| 0x8
+| 如果设置，则漏斗被激活/关闭。
+|}
+
+=== [[拉杆]] ===
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1<br>0x2<br>0x4
+|
+一个值在0-7之间的三位字段：
+* 0：方块底部的拉杆关闭时指向东。
+* 1：方块侧面的拉杆指向东。
+* 2：方块侧面的拉杆指向西。
+* 3：方块侧面的拉杆指向南。
+* 4：方块侧面的拉杆指向北。
+* 5：方块顶部的拉杆关闭时指向南。
+* 6：方块顶部的拉杆关闭时指向东。
+* 7：方块底部的拉杆关闭时指向南。
+|-
+| 0x8
+| 如果设置，则拉杆为激活状态。
+|}
+
+=== [[压力板]] ===
+; 石质或木质压力板
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1
+| 如果设置，则压力板将是被开启的。
+|-
+| 0x2<br>0x4<br>0x8
+| style="color:silver" | （未使用）
+|}
+; 测重压力板
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1<br>0x2<br>0x4<br>0x8
+| 一个4位字段，存储从0-15的值，代表测重压力板当前的红石信号强度。
+|}
+
+=== [[按钮]] ===
+{| class="wikitable"
+! 位元
+! 值
+|-
+| 0x1<br>0x2<br>0x4
+|
+这3个位存储了0-5的一个值：
+* 0：按钮在方块底部朝向下
+* 1：按钮在方块侧面朝向东
+* 2：按钮在方块侧面朝向西
+* 3：按钮在方块侧面朝向南
+* 4：按钮在方块侧面朝向北
+* 5：按钮在方块顶部朝向上
+|-
+| 0x8
+| 如果设置，则按钮处于激活状态。
+|}
+
+=== [[雪]] ===
+[[File:Snow heights.png|右|缩略图|由左至右，从0-7的积雪高度]]
+{{dvt|spritetype=block|sprite=Snow|1层，2 像素厚}}
+{{dvt|sprite=Snow|2层，4像素厚}}
+{{dvt|sprite=Snow|3层，6像素厚}}
+{{dvt|sprite=Snow|4层，8像素厚}}
+{{dvt|sprite=Snow|5层，10像素厚}}
+{{dvt|sprite=Snow|6层，12像素厚}}
+{{dvt|sprite=Snow|7层，14像素厚}}
+{{dvt|sprite=Snow|8层，16像素厚|foot=1}}
+
+{{anchor|仙人掌}}{{anchor|甘蔗}}
+
+=== [[仙人掌]]和[[甘蔗]] ===
+;仙人掌
+{| class="wikitable"
+! 值 !! 值
+|-
+| 0
+|刚种下的仙人掌。
+|-
+| 1-15
+|数据值会在随机的间歇中增加。<br>到达15时，整株高度未达到3，就在最顶端创造一个新的仙人掌方块。
+|}
+;甘蔗
+{| class="wikitable"
+! 值 !! 意义
+|-
+| 0
+|刚种植的甘蔗。
+|-
+| 1-15
+| 数据值以随机间隔增加。<br>当它变成15，只要高度不超过3，一个新的甘蔗会在上面生成。
+|}
+
+=== [[唱片机]] ===
+{{dvt|spritetype=block|sprite=jukebox|无唱片}}
+{{dvt|spritetype=item|sprite=music-discs|包含唱片|foot=1}}
+与其相连的[[方块实体]]被用于来记录所包含的唱片。
+
+=== [[南瓜]]与[[南瓜灯]] ===
+;南瓜
+{{dvt|spritetype=block|sprite=pumpkin|南瓜朝向南边}}
+{{dvt|spritetype=block|sprite=pumpkin|南瓜朝向西边}}
+{{dvt|spritetype=block|sprite=pumpkin|南瓜朝向北边}}
+{{dvt|spritetype=block|sprite=pumpkin|南瓜朝向东边|foot=1}}
+;南瓜灯
+{{dvt|spritetype=block|sprite=jack-o'lantern|南瓜朝向南边}}
+{{dvt|spritetype=block|sprite=jack-o'lantern|南瓜朝向西边}}
+{{dvt|spritetype=block|sprite=jack-o'lantern|南瓜朝向北边}}
+{{dvt|spritetype=block|sprite=jack-o'lantern|南瓜朝向东边|foot=1}}
+
+=== [[蛋糕]] ===
+{{:蛋糕/DV}}
+
+=== [[红石中继器]] ===
+{{:红石中继器/DV}}
+
+=== [[红石比较器]] ===
+{{:红石比较器/DV}}
+
+=== [[活板门]] ===
+{{:活板门/DV}}
+
+=== [[虫蚀方块]] ===
+{{:虫蚀方块/DV}}
+
+=== [[石砖]] ===
+{{dvt|spritetype=block|sprite=stone-bricks|石砖}}
+{{dvt|sprite=mossy-stone-bricks|苔石砖}}
+{{dvt|sprite=cracked-stone-bricks|裂纹石砖}}
+{{dvt|sprite=chiseled-stone-bricks|雕纹石砖|foot=1}}
+
+=== [[海晶石]] ===
+{{:海晶石/DV}}
+
+=== [[海绵]] ===
+{{:海绵/DV}}
+
+=== [[巨型蘑菇|棕色和红色巨型蘑菇]] ===
+巨型蘑菇在结构上是相同的方块，每个方块的数据值决定其纹理。各面的默认纹理是多孔的菌肉。菌盖的纹理可以是棕色蘑菇或红色蘑菇的纹理，气孔方块和茎干方块两侧的纹理都是相同的。虽然数据值11-13未被使用，但它们有和数据值为0（占位符）时一样的纹理，以防止地图被破坏。
+
+{{:蘑菇方块/DV}}
+
+=== [[南瓜梗]]和[[西瓜梗]] ===
+{{:南瓜种子/DV}}
+
+=== [[藤蔓]] ===
+决定藤蔓固定在哪面墙的方向。注意(除了上方)这些作为位元标记是可测试的，不同于大多数其他方块类型的其他方向性数据。藤蔓可以出现在多个面上。"上方"附着被认为是如果数据值是0或上方有固体方块时出现。
+* 1：南
+* 2：西
+* 4：北
+* 8：东
+
+=== [[栅栏门]] ===
+[[File:Fence gate orientation bits.png|缩略图|左边的四个栅栏门是从外侧打开的，右边的四个栅栏门是从内侧打开的。朝向：红色=北；绿色=东；黄色=南；蓝色=西]]
+
+{{:栅栏门/DV}}
+
+=== [[下界疣]] ===
+和农作物一样，数据值与下界疣的大小有关。下界疣的生长有三种不同视觉阶段(相关的数据值已给出)：
+
+{{:下界疣/DV}}
+
+=== [[酿造台]] ===
+底部的3个位元是位元标记，决定瓶子方格实际上是否有瓶子。
+
+{{:酿造台/DV}}
+
+=== [[炼药锅]] ===
+数据值储存在炼药锅中的水量，用可以充满玻璃瓶的数量为单位。
+
+{{:炼药锅/DV}}
+
+=== [[下界传送门方块]] ===
+建造在1.6.4以前的下界传送门会基于相邻方块而自动决定下界传送门方块的方向。在[[13w37a]]加入了建造更大传送门的能力之后，传送门开始使用数据值来跟踪方向，并且拥有数据值为0的旧的传送门会随机关闭。
+
+{| class="wikitable"
+! [[Java版数据值|DV]] !! 朝向
+|-
+| 0 || 自动，1.6.4及以前
+|-
+| 1 || 南北朝向（黑曜石为东西朝向）
+|-
+| 2 || 东西朝向（黑曜石为南北朝向）
+|}
+
+=== [[末地传送门框架]] ===
+底部的两个位元确定这个方块是在整个传送门中的哪一边。 要让框架被激活，每一个末地传送门框架必须面对中间对齐直到这些图像近对称。很难描述哪个位置可以让每一个方块都面向中间，但是如果一个方块没对齐，即使你已经放入了最后一个末影之眼，框架也不会被激活。
+
+下面的数据值是可以决定方块的朝向的：
+
+* 0:面向南
+* 1:面向西
+* 2:面向北
+* 3:面向东
+
+0x4是一个位元标记：0是一个“空”的框架方块，1是一个有[[末影之眼]]的方块.
+
+=== [[可可豆]] ===
+{{:可可豆/DV}}
+
+=== [[绊线钩]] ===
+{{:绊线钩/DV}}
+
+=== [[绊线]] ===
+{{:线/DV}}
+
+=== [[圆石墙]] ===
+{{dvt|spritetype=block|sprite=cobblestone-wall|圆石墙}}
+{{dvt|sprite=mossy-cobblestone-wall|苔石墙|foot=1}}
+
+=== [[花盆]] ===
+对于在Minecraft 1.7版后被放置的花盆，放在花盆里的植物保存在相关联的方块实体中。详情参见[[方块实体数据格式]]。当缺少方块实体时，表明了这是一个空花盆，或是在1.7版前放置的花盆。
+
+对于在1.7版前放置的花盆，放在花盆里的植物由数据值来表明，参见下表：
+
+{{dvt|spritetype=block|sprite=flower-pot|空花盆}}
+{{dvt|sprite=poppy|虞美人盆栽}}
+{{dvt|sprite=dandelion|蒲公英盆栽}}
+{{dvt|sprite=oak-sapling|橡树树苗盆栽}}
+{{dvt|sprite=spruce-sapling|云杉树苗盆栽}}
+{{dvt|sprite=birch-sapling|白桦树苗盆栽}}
+{{dvt|sprite=jungle-sapling|丛林树苗盆栽}}
+{{dvt|sprite=red-mushroom|红色蘑菇盆栽}}
+{{dvt|sprite=brown-mushroom|棕色蘑菇盆栽}}
+{{dvt|sprite=cactus|仙人掌盆栽}}
+{{dvt|sprite=dead-bush|枯萎的灌木盆栽}}
+{{dvt|sprite=fern|蕨盆栽}}
+{{dvt|sprite=acacia-sapling|金合欢树苗盆栽}}
+{{dvt|sprite=dark-oak-sapling|深色橡树树苗盆栽|foot=1}}
+
+=== [[生物头颅]] ===
+{{:生物头颅/DV}}
+
+=== [[石英块]] ===
+{{:石英块/DV}}
+
+=== [[煤炭]] ===
+{{:煤炭/DV}}
+
+=== [[染料]] ===
+{{dvt|spritetype=item|sprite=ink-sac|[[墨囊]]}}
+{{dvt|sprite=rose-red|[[玫瑰红]]}}
+{{dvt|sprite=cactus-green|[[仙人掌绿]]}}
+{{dvt|sprite=cocoa-beans|[[可可豆]]}}
+{{dvt|sprite=lapis-lazuli|[[青金石]]}}
+{{dvt|sprite=purple-dye|[[紫色染料]]}}
+{{dvt|sprite=cyan-dye|[[青色染料]]}}
+{{dvt|sprite=light-gray-dye|[[淡灰色染料]]}}
+{{dvt|sprite=gray-dye|[[灰色染料]]}}
+{{dvt|sprite=pink-dye|[[粉红色染料]]}}
+{{dvt|sprite=lime-dye|[[黄绿色染料]]}}
+{{dvt|sprite=dandelion-yellow|[[蒲公英黄]]}}
+{{dvt|sprite=light-blue-dye|[[淡蓝色染料]]}}
+{{dvt|sprite=magenta-dye|[[品红色染料]]}}
+{{dvt|sprite=orange-dye|[[橙色染料]]}}
+{{dvt|sprite=bone-meal|[[骨粉]]|foot=1}}
+
+=== [[鱼]] ===
+生鱼与熟鱼都是用相同的数据值。注意小丑鱼和河豚不能被烹饪。
+
+{{dvt|spritetype=item|sprite=raw-fish|生鱼}}
+{{dvt|sprite=raw-salmon|生鲑鱼}}
+{{dvt|sprite=clownfish|小丑鱼}}
+{{dvt|sprite=pufferfish|河豚|foot=1}}
+
+{{dvt|spritetype=item|sprite=cooked-fish|熟鱼}}
+{{dvt|sprite=cooked-salmon|熟鲑鱼|foot=1}}
+
+=== [[铁砧]] ===
+铁砧的物品形式与方块形式拥有不同的数据值。
+
+{{:铁砧/DV}}
+
+对于一个以方块形式放置在世界中的铁砧，0x1是定义其方向的位元（0为 南—北 方向，1为 东—西 方向）。0x4 和 0x8是定义其损坏程度的位元（0x4&nbsp;&&nbsp;0x8&nbsp;=&nbsp;0为未损坏， 0x4&nbsp;=&nbsp;1为轻微损坏，0x8&nbsp;=&nbsp;1为严重损坏）
+对于物品栏内的铁砧，其数据值仅标注损坏程度。
+
+=== [[侦测器]] ===
+{{:侦测器/DV}}
+
+=== [[药水]] ===
+药水是储存在[[玻璃瓶]]内的。药水类型是作为16位数字储存在物品的损害值里。药水的效果，名称，和其他信息是以位元编码。效果的持续时间本身是不在里面的，但可以从其他数值计算出来。
+
+当前位元的含义如下。注意药水会与药水效果和层次的名称重叠。
+
+{| class="wikitable" style="text-align: center;"
+! 位元
+! Dec !! Hex
+!colspan="2"| 意义
+|-
+! 0
+| 1 || 0001
+|rowspan="4"|药水效果
+|rowspan="6"|药水名称
+|-
+! 1
+| 2 || 0002
+|-
+! 2
+| 4 || 0004
+|-
+! 3
+| 8 || 0008
+|-
+! 4
+| 16 || 0010
+|-
+! 5
+| 32 || 0020
+| 等级
+|-
+! 6
+| 64 || 0040
+|colspan="2"| 加长的持续时间
+|-
+! 7
+| 128 || 0080
+|colspan="2" rowspan="7"| ''(被忽视)''
+|-
+! 8
+| 256 || 0100
+|-
+! 9
+| 512 || 0200
+|-
+! 10
+| 1024 || 0400
+|-
+! 11
+| 2048 || 0800
+|-
+! 12
+| 4096 || 1000
+|-
+! 13
+| 8192 || 2000
+|-
+! 14
+| 16384 || 4000
+|colspan="2"| 喷溅药水 
+|-
+! 15
+| 32768 || 8000
+|colspan="2"| ''(被忽视)''
+|}
+
+计算药水的损害值与想要的效果，请使用下列公式计算：
+ -{}-损害值=药水效果+等级位元+延长位元+喷溅位元
+例如：
+* 有"瞬间治疗"效果的药水拥有的损害值为5(=5+0+0+0)；
+* 有延长"迟缓"效果的药水拥有的损害值为74(=10+0+64+0)；
+* 有二级"力量"效果的喷溅药水拥有的损害值为16425(=9+32+0+16384)
+
+要得到具有特定名称的药水，请使用下列公式计算：
+ -{}-损害值=药水名称+延长位元+喷溅位元
+例如：
+* "喷溅型迷人药水"拥有的损害值为16423(=39+0+16384)
+
+==== "药水名称"位元 ====
+{| class="wikitable" align="left"
+! Dec !! Hex !! 药水
+|-
+! 0
+| 00
+| 水瓶/平凡的药水
+|-
+! 1
+| 01
+| 再生药水
+|-
+! 2
+| 02
+| 迅捷药水
+|-
+! 3
+| 03
+| 抗火药水
+|-
+! 4
+| 04
+| 剧毒药水
+|-
+! 5
+| 05
+| 治疗药水
+|-
+! 6
+| 06
+| 夜视药水
+|-
+! 7
+| 07
+| 清澈的药水
+|-
+! 8
+| 08
+| 虚弱药水
+|-
+! 9
+| 09
+| 力量药水
+|-
+! 10
+| 0a
+| 迟缓药水
+|-
+! 11
+| 0b
+| 跳跃药水
+|-
+! 12
+| 0c
+| 伤害药水
+|-
+! 13
+| 0d
+| 水肺药水
+|-
+! 14
+| 0e
+| 隐身药水
+|-
+! 15
+| 0f
+| 稀薄的药水
+|}
+{| class="wikitable" align="left"
+! Dec !! Hex !! 药水
+|-
+! 16
+| 10
+| 粗制的药水
+|-
+! 17
+| 11
+| 再生药水
+|-
+! 18
+| 12
+| 迅捷药水
+|-
+! 19
+| 13
+| 抗火药水
+|-
+! 20
+| 14
+| 剧毒药水
+|-
+! 21
+| 15
+| 治疗药水
+|-
+! 22
+| 16
+| 夜视药水
+|-
+! 23
+| 17
+| 笨拙的药水
+|-
+! 24
+| 18
+| 虚弱药水
+|-
+! 25
+| 19
+| 力量药水
+|-
+! 26
+| 1a
+| 迟缓药水
+|-
+! 27
+| 1b
+| 跳跃药水
+|-
+! 28
+| 1c
+| 伤害药水
+|-
+! 29
+| 1d
+| 水肺药水
+|-
+! 30
+| 1e
+| 隐身药水
+|-
+! 31
+| 1f
+| 快活的药水
+|}
+{| class="wikitable" align="left"
+! Dec !! Hex !! 药水
+|-
+! 32
+| 20
+| 浓稠的药水
+|-
+! 33
+| 21
+| 再生药水 II
+|-
+! 34
+| 22
+| 迅捷药水 II
+|-
+! 35
+| 23
+| 抗火药水
+|-
+! 36
+| 24
+| 剧毒药水 II
+|-
+! 37
+| 25
+| 治疗药水 II
+|-
+! 38
+| 26
+| 夜视药水
+|-
+! 39
+| 27
+| 迷人的药水
+|-
+! 40
+| 28
+| 虚弱药水
+|-
+! 41
+| 29
+| 力量药水 II
+|-
+! 42
+| 2a
+| 迟缓药水
+|-
+! 43
+| 2b
+| 跳跃药水 II
+|-
+! 44
+| 2c
+| 伤害药水 II
+|-
+! 45
+| 2d
+| 水肺药水
+|-
+! 46
+| 2e
+| 隐身药水
+|-
+! 47
+| 2f
+| 闪亮的药水
+|}
+{| class="wikitable" align="left"
+! Dec !! Hex !! 药水
+|-
+! 48
+| 30
+| 给力的药水
+|-
+! 49
+| 31
+| 再生药水 II
+|-
+! 50
+| 32
+| 迅捷药水 II
+|-
+! 51
+| 33
+| 抗火药水
+|-
+! 52
+| 34
+| 剧毒药水 II
+|-
+! 53
+| 35
+| 治疗药水 II
+|-
+! 54
+| 36
+| 夜视药水
+|-
+! 55
+| 37
+| 恶臭的药水
+|-
+! 56
+| 38
+| 虚弱药水
+|-
+! 57
+| 39
+| 力量药水 II
+|-
+! 58
+| 3a
+| 迟缓药水
+|-
+! 59
+| 3b
+| 跳跃药水 II
+|-
+! 60
+| 3c
+| 伤害药水 II
+|-
+! 61
+| 3d
+| 水肺药水
+|-
+! 62
+| 3e
+| 隐身药水
+|-
+! 63
+| 3f
+| 异味的药水
+|}
+{{-}}
+
+注意：如果没有设置其他位元和''名称''被设置为0，它的名称将会是"水瓶"。否则，它会被称为"平凡的药水"。
+
+注意：有''喷溅药水''位元的药水会有"喷溅"前缀。
+
+==== "药水效果"位元 ====
+{| class="wikitable" style="text-align: center;"
+! Dec !! Hex !! 效果 !! 持续时间 !! 瓶子 !! 图标 !! 效果的颜色
+|-
+! 0
+| 0
+| - || -
+| [[File:Water Bottle JE1 BE1.png|64px]][[File:Splash Water Bottle JE1 BE1.png|64px]] || -
+|-
+! 1
+| 1
+| 生命恢复 || 0:45
+| [[File:Potion of Regeneration JE1 BE1.png|64px]][[File:Splash Potion of Regeneration JE1 BE1.png|64px]] || {{EffectSprite|regeneration}} || {{EffectSprite|particle-regeneration}} 粉红色
+|-
+! 2
+| 2
+| 速度 || 3:00
+| [[File:Potion of Swiftness JE1 BE1.png|64px]][[File:Splash Potion of Swiftness JE1 BE1.png|64px]] || {{EffectSprite|speed}} || {{EffectSprite|particle-speed}} 天蓝色
+|-
+! 3
+| 3
+| 抗火 || 3:00
+| [[File:Potion of Fire Resistance JE1 BE1.png|64px]][[File:Splash Potion of Fire Resistance JE1 BE1.png|64px]] || {{EffectSprite|fire resistance}} || {{EffectSprite|particle-fire resistance}} 橙色
+|-
+! 4
+| 4
+| 中毒 || 0:45
+| [[File:Potion of Poison JE1 BE1.png|64px]][[File:Splash Potion of Poison JE1 BE1.png|64px]] || {{EffectSprite|poison}} || {{EffectSprite|particle-poison}} 绿色
+|-
+! 5
+| 5
+| 瞬间治疗 || ''瞬间''
+| [[File:Potion of Healing JE1 BE1.png|64px]][[File:Splash Potion of Healing JE1 BE1.png|64px]] || - || -
+|-
+! 6
+| 6
+| 夜视 || 3：00
+| [[File:Water Bottle JE1 BE1.png|64px]][[File:Splash Water Bottle JE1 BE1.png|64px]] || {{EffectSprite|night vision}} || {{EffectSprite|particle-night vision}} 深蓝色
+|-
+! 7
+| 7
+| - || -
+| [[File:Water Bottle JE1 BE1.png|64px]][[File:Splash Water Bottle JE1 BE1.png|64px]] || - || -
+|-
+! 8
+| 8
+| 虚弱 || 1:30
+| [[File:Potion of Weakness JE1 BE1.png|64px]][[File:Splash Potion of Weakness JE1 BE1.png|64px]] || {{EffectSprite|weakness}} || {{EffectSprite|particle-weakness}} 灰色
+|-
+! 9
+| 9
+| 力量 || 3:00
+| [[File:Potion of Strength JE1 BE1.png|64px]][[File:Splash Potion of Strength JE1 BE1.png|64px]] || {{EffectSprite|strength}} || {{EffectSprite|particle-strength}} 暗红色
+|-
+! 10
+| a
+| 迟缓 || 1:30
+| [[File:Potion of Slowness JE1 BE1.png|64px]][[File:Splash Potion of Slowness JE1 BE1.png|64px]] || {{EffectSprite|slowness}} || {{EffectSprite|particle-slowness}} 灰蓝色
+|-
+! 11
+| b
+| 跳跃 || 3：00
+| [[File:Water Bottle JE1 BE1.png|64px]][[File:Splash Water Bottle JE1 BE1.png|64px]] || {{EffectSprite|jump-boost}} || {{EffectSprite|particle-jump-boost}} 薄荷绿
+|-
+! 12
+| c
+| 瞬间伤害 || ''瞬间''
+| [[File:Potion of Harming JE1 BE1.png|64px]][[File:Splash Potion of Harming JE1 BE1.png|64px]] || - || -
+|-
+! 13
+| d
+| 水肺 || 3：00
+| [[File:Water Bottle JE1 BE1.png|64px]][[File:Splash Water Bottle JE1 BE1.png|64px]] || {{EffectSprite|water breathing}} || {{EffectSprite|particle-water breathing}} 蓝色
+|-
+! 14
+| e
+| 隐身 || 3：00
+| [[File:Water Bottle JE1 BE1.png|64px]][[File:Splash Water Bottle JE1 BE1.png|64px]] || {{EffectSprite|invisibility}} || {{EffectSprite|particle-invisibility}} 淡灰色
+|-
+! 15
+| f
+| - || -
+| [[File:Water Bottle JE1 BE1.png|64px]][[File:Splash Water Bottle JE1 BE1.png|64px]] || - || -
+|}
+
+==== "等级"位元 ====
+{| class="wikitable"
+! Dex !! Hex !! 意义
+|-
+! 0
+| 0000
+| 等级一效果。
+|-
+! 32
+| 0020
+| 等级二效果。持续时间乘以<sup>1</sup>/<sub>2</sub>.
+|}
+注意：抗火，虚弱和迟缓效果没有第二级。其强度和持续时间不受此位元影响。
+
+==== "延长持续时间"位元 ====
+{| class="wikitable"
+! Dex !! Hex !! 意义
+|-
+! 0
+| 0000
+| 基本持续时间。
+|-
+! 64
+| 0040
+| 持续时间乘以<sup>8</sup>/<sub>3</sub>.
+|}
+
+==== "喷溅药水"位元 ====
+{| class="wikitable"
+! Dex !! Hex !! 意义
+|-
+! 0
+| 0000
+| 可饮用药水。
+|-
+! 16384
+| 4000
+| 喷溅药水。持续时间乘以<sup>3</sup>/<sub>4</sub>.
+|}
+
+=== [[地图]] ===
+每张地图的损坏值都对应着在每个世界的[[NBT格式|NBT数据]]内储存[[地图存储格式|地图编号]]。与[[成书]]和[[烟花火箭]]直接将它们的额外数据直接储存在物品内不同，地图的尺寸，位置和已探索区域的数据是储存在另一个.dat文件内的。如果地图被复制则它们共享一样的损坏值。
+
+=== [[金苹果]] ===
+{{dvt|spritetype=item|sprite=golden-apple|金苹果}}
+{{dvt|sprite=golden-apple|附魔金苹果|foot=1}}
+
+=== [[结构方块]] ===
+{{:结构方块/DV}}
+
+=== [[紫颂花]] ===
+紫颂花的数据值表示了其年龄，当达到0x5时紫颂花死亡。
+
+=== [[末地烛]] ===
+{{:末地烛/DV}}
+
+=== [[带釉陶瓦]] ===
+{{:带釉陶瓦/DV}}
+
+== 参见 ==
+* [[Java版数据值]]
+* [[Java版数据值/Classic]]
+* [[Java版数据值/Indev]]
+* [[基岩版数据值]]
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[Category:数据值页面]]
+[[Category:开发]]
+
+[[de:Datenwert]]
+[[en:Java Edition pre-flattening data values]]
+[[es:Valores de datos]]
+[[fr:Valeurs de l'édition Java Pré-aplanissement]]
+[[hu:Adatértékek]]
+[[ja:データ値]]
+[[ko:데이터 값]]
+[[nl:Datawaardes]]
+[[pl:ID]]
+[[pt:Valores de dados]]
+[[ru:Нумерация данных]]
+[[tr:Data değerleri]]

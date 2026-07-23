@@ -1,0 +1,99 @@
+# 页面: 命令/rotate
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/rotate
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+{{Infobox command
+|name=rotate
+|oplevel=2
+}}
+更改[[实体]]的旋转角。
+
+== 用法 ==
+<code>rotate <target> <rotation></code>用于直接设置实体的朝向，而<code>rotate ... facing ...</code>用于将一个朝向向量转换为实体的朝向。
+
+为了确定朝向向量，游戏将先从命令上下文中获取[[命令上下文#执行锚点|执行锚点]]，并将该锚点应用到要执行旋转的目标实体上以确定朝向向量的起点，然后再根据命令指定的世界坐标或要面向的实体（带有锚点）以确定朝向向量的终点。向量转换为角度的计算过程类似于{{cmd|execute ... facing ...}}。
+
+== 语法 ==
+: <code>rotate <target> <rotation></code>
+:: 使实体旋转指定角度。
+: <code>rotate <target> facing <facingLocation></code>
+:: 使实体面向指定的世界坐标。
+: <code>rotate <target> facing entity <facingEntity> [<facingAnchor>]</code>
+:: 使实体面向指定的实体（可指定实体锚点）。
+
+== 参数 ==
+{{argument|target|entity}}
+: 指定旋转的实体。
+: {{arg desc|je=entity|amount=single|type=entities}}
+
+{{argument|rotation|rotation}}
+: 指定旋转角度。
+: {{arg desc|je=rotation}}
+
+{{argument|facingLocation|vec3}}
+: 指定被旋转实体所转向的世界位置坐标。
+: {{arg desc|je=vec3}}
+
+{{argument|facingEntity|entity}}
+: 指定被旋转实体所转向的实体。
+: {{arg desc|je=entity|amount=single|type=entities}}
+
+{{argument|facingAnchor|entity_anchor}}
+: 指定基准点位置，默认为{{cd|feet}}。
+: {{arg desc|je=entity_anchor}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|<code><target></code>或<code><facingEntity></code>未能选出单个实体（指定的玩家必须在线上）|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table}}
+
+== 示例 ==
+让执行者绕Y轴旋转10度：
+<syntaxhighlight lang="mcfunction">
+rotate @s ~10 ~
+</syntaxhighlight>
+
+让最近的1位玩家看向距离执行位置最近的1只绵羊：
+<syntaxhighlight lang="mcfunction">
+rotate @p facing entity @n[type=minecraft:sheep]
+</syntaxhighlight>
+
+将距离执行位置最近的1只绵羊的朝向赋给最近的1位玩家：
+<syntaxhighlight lang="mcfunction">
+execute rotated as @n[type=minecraft:sheep] run rotate @p ~ ~
+</syntaxhighlight>
+
+让最近的1位玩家背对距离其最近的嘎枝：
+<syntaxhighlight lang="mcfunction">
+execute as @p at @s facing entity @n[type=minecraft:creaking] feet run rotate @s facing ^ ^ ^-1
+</syntaxhighlight>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.2|dev=24w40a|加入了{{cmd|rotate|link=none}}命令。}}
+|{{HistoryLine||1.21.2|dev=pre1|现在{{cmd|rotate|link=none}}命令需要的权限等级为2，而不是0。<ref>{{bug|MC-277141||{{cmd|rotate|link=none}}命令需要的权限等级不为2|Fixed}}</ref>}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/rotate]]
+[[en:Commands/rotate]]
+[[ja:コマンド/rotate]]
+[[pt:Comandos/rotate]]
+[[ru:Команды консоли/rotate]]

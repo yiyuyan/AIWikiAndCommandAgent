@@ -1,0 +1,311 @@
+# 页面: 下界传送门
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%8B%E7%95%8C%E4%BC%A0%E9%80%81%E9%97%A8
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用计算器的页面, 基岩版独有信息, 有未知版本的History模板的页面/携带版Alpha, 环境, 结构, 需要验证
+# 抓取时间: 2026-07-14 17:19:31
+# 原始 Wikitext 内容:
+
+{{about|人造的下界传送门结构|自然生成的废墟式结构|废弃传送门|用以传送的方块|下界传送门（方块）}}
+{{Infobox structure
+| image = Nether portal (animated).png
+| blocks = 
+* {{BlockLink|Obsidian}}
+* {{BlockLink|Nether Portal}}
+| canspawn = 是，当玩家进入传送门且搜索区域内无传送门
+}}
+{{relevant tutorial|下界传送门}}
+'''下界传送门（Nether Portal）'''是一种人造的[[结构]]，用来在[[主世界]]和[[下界]]两个维度之间传送。
+
+== 创建 ==
+{{FakeImage
+|{{BlockGrid|o=Obsidian|p=Nether portal
+  |oooo
+  |oppo
+  |oppo
+  |oppo
+  |oooo
+}}
+|完整版
+}}
+{{FakeImage
+|{{BlockGrid|o=Obsidian|p=Nether portal
+  | oo 
+  |oppo
+  |oppo
+  |oppo
+  | oo 
+}}
+|精简版
+}}
+一个下界传送门由[[黑曜石]]框架构成（最小4×5，最大23×23）。四个角上的黑曜石可以省略，但是游戏生成的下界传送门会包含四个角的黑曜石。
+
+黑曜石可以用任何方式放置，比如说直接放置黑曜石或者用[[熔岩]]与[[水]]形成的都可以。相邻的下界传送门可以共用框架上的黑曜石。
+
+构建好这个框架后，就可以通过在框架内任意位置点[[火]]来激活它，激活后，框架里面会创建漩涡状的[[下界传送门方块]]。火可以以任何方式放置，例如用[[打火石]]或者[[火焰弹]]点火，或者[[恶魂]]、[[烈焰人]]的火球产生的火，还可以是火焰自然蔓延而产生的火。
+
+下界传送门不能在[[末地]]和[[自定义维度]]中按照上述方式激活，但是可以通过{{cmd|fill}}、{{cmd|setblock}}或[[结构方块]]等方法放置下界传送门方块。
+
+{{in|be}}创建下界传送门时，每一个下界传送门方块会创建一个[[计划刻]]，产生的计划刻总数为不包含框架的下界传送门大小。
+
+当玩家使用一个下界传送门时会在另一个维度里创建一个新的下界传送门，详见下文。
+
+== 行为 ==
+{{main|下界传送门（方块）}}
+{{Filetr|PositionOfEntity.jpg|缩略图|基岩版中实体传送后的位置}}
+
+当玩家在[[主世界]]或者[[下界]]的下界传送门内4秒后，玩家就会传送到对应的维度里，在传送动画结束前走出传送门则会取消传送。若玩家处于[[创造模式]]{{only|je|for=或骑乘在生物上}}，那么玩家会在进入传送门的瞬间被传送。{{in|je}}创造模式和非创造模式玩家传送之前需要等待的时间分别由[[游戏规则]]{{gamerule|players_nether_portal_creative_delay}}和{{gamerule|players_nether_portal_default_delay}}控制。
+
+在传送动画播放时无法打开[[物品栏]]；可以进食，但如果在完成进食前传送动画播放完毕，则进食动作会中断。
+
+大多数实体都能通过下界传送门传送，包括各种[[生物]]（除了{{only|je|for=[[凋灵]]}}、[[末影龙]]和与[[嘎枝之心]]绑定的[[嘎枝]]）、[[船]]、[[矿车]]、{{only|je|for=除浮漂外的[[弹射物]]}}或{{only|be|for=除箭类弹射物、火球类弹射物和浮漂外的弹射物}}和[[物品实体]]。
+
+{{in|be}}实体组合（例如[[蜘蛛骑士]]）不能通过传送门。<ref>{{bug|MCPE-47288}}</ref>
+
+{{only|je|for=未被骑乘的}}生物有着比玩家更长的传送“冷却时间”，它们在大约15秒内不能再次使用传送门。
+
+{{in|je}}通过传送门的实体会创建一个[[区块#标签|传送门区块加载标签]]，详见{{slink||区块加载}}。
+
+穿过传送门的实体的传送位置和穿过传送门时的位置有关。根据传送门的朝向，南北朝向的传送门将北视为正方向，东西朝向的传送门将西作为正方向，以正方向将实体进入传送门的相对位置按照进入的传送门大小和对应的传送门大小进行缩放，得到实体穿过传送门后与传送门的相对位置。
+: 如：
+: 实体穿过一个传送门时位于门的正中央，那么传送后它会位于另一个传送门的正中央。
+:* 若传送门的朝向一致，实体穿过传送门后速度和朝向都不变；
+:* 若传送门的朝向不一致，实体穿过传送门后速度逆时针旋转90度，而朝向顺时针旋转90度。
+
+若主世界下界传送门的下界传送门方块被[[随机刻]]选中，那么在它下方的传送门框架上将有一定概率会生成[[僵尸猪灵]]。简单难度下的生成概率是{{frac|1|2000}}，普通难度下的生成概率是{{frac|2|2000}}<!-- 请不要化简此处的分数 -->，困难难度下的生成概率是{{frac|3|2000}}。
+
+{{in|be}}下界传送门切换激活状态时有更高的概率生成僵尸猪灵。僵尸猪灵不能在低于Y=0的下界传送门中生成。<ref>{{bug|MCPE-149718}}</ref>
+
+{{in|je}}若一个[[自定义]]世界没有定义{{cd|dimensions/minecraft:the_nether}}，下界传送门仍然可以被激活并创建[[下界传送门方块]]，但不会传送任何实体。
+
+=== 主世界与下界的联系 ===
+[[File:ClosestPortal.png|缩略图|根据玩家的位置而决定的最近传送门]]
+[[File:IfNoPortal.png|缩略图|如果没有其他传送门在范围内则会生成一个新的传送门]]
+
+==== 坐标转换 ====
+在X轴与Z轴上，下界和主世界的比例为1:8。即：在X轴与Z轴上，玩家在下界中移动1格相当于在主世界移动8格。
+
+在Y轴上不同，比例为1:1，尽管下界的高度只有128格。
+
+因此若在主世界里给定一个坐标<code><math>X</math> <math>Y</math> <math>Z</math></code>，那么在下界里对应的坐标就是<code><math>\left\lfloor \frac{X}{8} \right\rfloor</math> <math>Y</math> <math>\left\lfloor \frac{Z}{8} \right\rfloor</math></code><ref>其中<math>\left\lfloor x \right\rfloor</math>表示向下取整。</ref>。
+
+[http://download.oracle.com/javase/6/docs/api/java/lang/Math.html#floor%28double%29 Java floor() 方法]返回小于等于参数的最大整数，因此X或Z坐标为-29.5的会变成-30，X或Z坐标为29.5的会变成29。
+
+X和Z坐标的转换会控制在±29999872（包括本身），而这会影响到从主世界用下界传送门去超过±3749984的地方。
+
+{{Calculator|netherCoords}}
+
+==== 搜索并创建传送门 ====
+当一个实体开始接触下界传送门方块时，游戏会记录下该实体的坐标。
+
+然后，游戏会按特定的方法转换实体的坐标：X或Z坐标乘以或除以8，Y轴坐标不变。
+
+以转换后得到的目标坐标为起点，游戏会查找一个高度上包含整个可建筑区域，水平方向上为以该坐标为中心的一个长方形的一个区域中的传送门[[兴趣点存储格式|兴趣点]]（POI，Point of Interest）。在主世界，游戏会查找257×257的区域；而在下界，只会查找33×33的区域。
+
+若找到了候选的传送门兴趣点，游戏会选择在新的坐标系中[[欧几里得距离]]（考虑Y轴）目标坐标最近的一个，并将实体传送至传送门中一个由特殊算法得到的位置。若有多个传送门到目标坐标的位置相等，那么选取Y轴坐标最低的兴趣点。
+
+用于计算实体在传送后位于传送门内的位置的算法如下：
+# 获取两端传送门的大小（不计黑曜石边框）。
+# 从获取的两端传送门的大小中减去实体的长度和宽度，这意味着此时实体可以被看作一个点，用于在几何变换中保留碰撞体积的数据。
+# 测量原传送门底部到实体碰撞箱底部的距离，并以类似的方式测量实体碰撞箱边缘到传送门边缘的距离。
+# 上述距离会被乘以两端传送门的大小（减去碰撞体积后）比例，以确定实体在目标传送门的位置。
+# 若实体的长度或宽度大于传送门的大小，实体在目标传送门中的位置被设为传送门的底部中心；否则，仍保持上述算法的结果不变。
+# 若目标传送门和原传送门朝向不一致，实体的偏向角和速度会被绕Y轴顺时针旋转90°（从上方看）。无论进入传送门的方向如何，实体都会被如此旋转。
+
+这样，若原传送门和目标传送门有一致的形状和朝向，且没有发生串门，就可以认为实体会不经任何变动直接通过传送门，除了维度和位置发生变化之外就像只是走过了一个简单的黑曜石框。
+
+'''对于玩家{{only|je|for=或其他实体}}，若搜索区域内没有传送门，游戏会在水平距离不超过16格且高度不受此限制的范围内搜索最近的合适位置并创建一个传送门。'''
+
+合适位置须是一个长边与原传送门一致的4×3且高为4的全为非固体方块，且距离目标位置最近的区域。
+
+若第一次搜索失败，游戏会再次将一个长边与原传送门一致的4×1且高为4的全为非固体方块的区域作为合适位置进行搜索。
+
+若第二轮搜索也失败，目标传送门会被强制确定为目标位置，但Y坐标会被限制在70和高度上限（下界为118，主世界为246）之间。当一个传送门被强制确定于此处时，会创建一个大小为2×3且在上方带有3格空气的黑曜石平台，并会替换掉此处的所有方块。这个平台为传送到地下的玩家提供空间，也为传送到空中的玩家提供了一个立足之地。{{in|be}}这一黑曜石平台两边各会有4个下界岩，从而使得平台共有12个方块。
+
+坐标被选定后，传送门就会创建在该坐标处，并替换掉此处的所有方块。
+
+若一个传送门被强制生成于水或熔岩中，那么流体会马上流进生成的空气方块，可能导致玩家进入在熔岩中死亡或溺水。然而，若流体同时在垂直和水平方向流进空气区域，它实际上只在垂直方向上流动，所以平台的外部边角不会成为水源方块。
+
+=== 区块加载 ===
+{{exclusive|je|section=1}}
+
+每当实体被下界传送门传送时，目标维度中传送门所在的区块会得到加载等级为30的一个[[区块#标签|加载标签]]，这意味着该区块会被完全加载，其中的实体也会被计算。这一加载等级也会向邻近的区块传播，但是这会随[[切比雪夫距离]]的增大而递增。最终，会有9个（3×3）的区块被强加载，更远处的区块会加载得更弱。
+
+这些区块会加载15秒，每次有实体穿过传送门该计时就会被重置。这可以被用于建造[[Tutorial:区块加载器|区块加载器]]以永久地加载区块，但区块加载器在加载区块时可能会造成卡顿。
+
+== 音效 ==
+{{edition|java}}：
+{{Sound table
+|sound=Nether Portal ambient.ogg
+|subtitle={{tp|subtitles.block.portal.ambient}}
+|source=方块
+|description=被激活后的循环音效
+|id=block.portal.ambient
+|translationkey=subtitles.block.portal.ambient}}
+{{Sound table
+|sound=Nether Portal trigger.ogg
+|subtitle={{tp|subtitles.block.portal.trigger}}
+|source=方块
+|description=玩家站在传送门里
+|id=block.portal.trigger
+|translationkey=subtitles.block.portal.trigger
+}}
+{{Sound table
+|sound=Nether_Portal_travel.ogg
+|subtitle={{tp|subtitles.block.portal.travel}}
+|description=玩家被传送后
+|source=方块
+|id=block.portal.travel
+|translationkey=subtitles.block.portal.travel
+|foot=1}}
+
+{{edition|bedrock}}：
+{{Sound table
+|bedrock=1
+|sound=portal.portal.wav
+|source=方块
+|description=被激活后的循环音效
+|id=portal.portal
+|typeid=portal
+|soundvolume=0.25
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=portal.trigger.wav
+|source=环境
+|description=玩家站在传送门里
+|id=portal.trigger
+|typeid=portal.trigger
+|soundvolume=0.25
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=portal.travel.wav
+|source=环境
+|description=玩家被传送后
+|id=portal.travel
+|typeid=portal.travel
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 成就 ==
+{{load achievements|into-the-nether}}
+
+== 进度 ==
+{{load advancements|story.enter_the_nether;nether.root}}
+
+== 历史 ==
+<onlyinclude>{{HistoryTable
+|{{HistoryLine||2010年10月4日|link={{notch|1243370641}}|在Notch的博客上的一篇博文上发布了一个新的“地狱世界”，并暗示这个世界将会有实用的传送门以进行快速传送。}}
+|{{HistoryLine||2010年10月22日|link={{tweet|notch|28442542287|}}|原本打算把[[恶魂]]生成在[[主世界]]的下界传送门处，然而这个功能未被引入。<ref>{{tweet|jeb|53730464141295616|@BlakesAwesome No it doesn't|April 1, 2011}}</ref>}}
+|{{HistoryLine||2010年10月29日|link={{notch|1431121056}}|Notch向两间游戏公司发送了万圣节更新的预览，这两间公司的文章<ref>http://www.pcgamer.com/minecraft-halloween-update-hands-on/</ref><ref>http://www.indiegames.com/2010/10/handson_with_the_minecraft_hal.html</ref>详细描述了下界传送门用于进入[[下界]]的用途。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.2.0|dev=preview|加入了下界传送门，当时被称为“Slip Gate”。}}
+|{{HistoryLine||v1.2.2|现在玩家可以通过按下{{key|F4}}来生成一个已经激活的下界传送门。}}
+|{{HistoryLine||v1.2.3|回退了上个版本的更改。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.6|dev=Test Build 3|在此之前，下界传送门可以在多人模式服务器中创建，但不会将玩家传送到[[下界]]；现在下界传送门在多人模式中正常工作。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|敲击下界传送门方块就会使其关闭。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|下界传送门外貌有所改变，色调变得更深。{{verify}}}}
+|{{HistoryLine|||dev=rc1|水或熔岩不会再关闭下界传送门，而会像碰到实体方块般被阻挡住。但在传送门中放置一个水方块，会关闭传送门。}}
+|{{HistoryLine||1.2.1|dev=12w07a|现在主世界的限高到了256格，下界却不能搜索128格及以上的传送门。}}
+|{{HistoryLine|||dev=12w08a|在快照中玩家又可以捶击传送门方块而关闭传送门。这会发出[[玻璃]]碎裂的声音。}}
+|{{HistoryLine||1.3.1|dev=12w18a|因为单人游戏现在在本地服务器中进行，{{filename|travel.ogg}}不再播放，{{tr|通过|通過}}后的屏幕动画也不再播放。}}
+|{{HistoryLine|||dev=12w22a|[[僵尸猪人]]会罕见地在下界传送门附近生成。}}
+|{{HistoryLine|||dev=12w30c|现在在主世界里会搜索256格高的所有范围内的传送门了。}}
+|{{HistoryLine||1.4.2|dev=12w34a|生物、物品和弹射物可以穿过传送门并保持原有速度。}}
+|{{HistoryLine|||dev=12w38a|在穿过下界传送门时，下界将载入得更快；在创造模式中，传送甚至会在瞬间完成。}}
+|{{HistoryLine||1.5|dev=13w02a|下界传送门方块的纹理在{{filename|textures/blocks/portal.png}}里储存了。}}
+|{{HistoryLine||1.7.2|dev=2013年9月11日|slink={{tweet|Dinnerbone|377794308453437440}}|[[Dinnerbone]]发布了更大而形状不同的传送门的图片，他在这条推特中也提到可以在任何方块激活传送门而不是只能在下部激活。<ref>{{tweet|Dinnerbone|377797008981254146|Bunch of other small tweaks to them too; you can light a portal from any block, not just the bottom row. Good for automatic on/off toggling|September 11, 2013}}</ref>
+<gallery>
+File:4x5-5x7_Nether_Portal.png|{{tweet|Dinnerbone|377488231769853952}}
+File:7x7_Nether_Portal.png|{{tweet|Dinnerbone|377489959810498560}}
+File:Portal large.png|{{tweet|Dinnerbone|377794308453437440}}
+</gallery>
+第二张图片中的告示牌和圆形传送门参考了星际之门中的Jack O'Neill上校，他对陈词滥调的憎恨经常被提及。}}
+|{{HistoryLine||1.7.2|dev=13w37a|下界传送门现在只要在框架内点火就能激活传送门，而不只是底部。
+|新的下界传送门建造规则：下界传送门最小为4×5，最大为23×23。}}
+|{{HistoryLine|||dev=13w41a|现在可以透过下界传送门方块看见后面的方块。}}
+|{{HistoryLine||1.8|dev=14w25a|下界传送门方块不能用{{cmd|give}}命令获取了。}}
+|{{HistoryLine|||dev=14w26a|移除了特殊值3、7、11、15的下界传送门方块。}}
+|{{HistoryLine||1.9|dev=15w49a|[[凋灵]]和[[末影龙]]不能通过传送门进行传送了。}}
+|{{HistoryLine|||dev=16w02a|现在又能播放{{filename|travel.ogg}}音效了。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，下界传送门方块的数字ID是90。}}
+|{{HistoryLine|||dev=17w48a|现在浮漂不再可以通过下界传送门传送。}}
+|{{HistoryLine||1.14|dev=pre5|优化了下界传送门。|在一个实体进入传送门时，传送门的另一端将加载15秒。}}
+|{{HistoryLine||1.15|dev=19w36a|主世界的下界传送门现在可以正确连接下界Y{{=}}128-255中的下界传送门。}}
+|{{HistoryLine||1.16|dev=20w06a|现在穿越下界传送门时几乎没有加载停顿。}}
+|{{HistoryLine||1.16|dev=pre3|下界传送门方块现在拥有了关联的[[战利品表]]，默认为空。}}
+|{{HistoryLine||1.16.2|dev=pre1|加入了“屏幕扭曲效果”选项，可影响下界传送门产生的视觉扭曲。强度设置得越低，屏幕上的紫色视觉效果越明显。
+|现在[[箭]]、[[三叉戟]]、[[喷溅药水]]、[[滞留药水]]、[[投掷物]]和[[潜影弹]]可以通过下界传送门传送。<ref>{{bug|MC-96007|||Fixed}}</ref><ref>{{bug|MC-102967|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.3|dev=23w42a|加入了游戏规则[[游戏规则/playersNetherPortalDefaultDelay|playersNetherPortalDefaultDelay]]和[[游戏规则/playersNetherPortalCreativeDelay|playersNetherPortalCreativeDelay]]，用于控制玩家需要待在下界传送门内多长时间才能进入另一个维度。}}
+|{{HistoryLine||1.21|dev=24w21a|加入了游戏规则[[游戏规则/entitiesWithPassengersCanUsePortals|entitiesWithPassengersCanUsePortals]]，用于控制带有乘客的实体能否穿过下界传送门。
+|现在非玩家实体在另一维度不存在已被激活的下界传送门时也能跨越维度。
+|现在非玩家实体也能在另一维度生成对应的下界传送门。}}
+|{{HistoryLine|||dev=pre1|移除了游戏规则entitiesWithPassengersCanUsePortals，现在带有乘客的实体可以无延迟地穿过下界传送门。
+|现在对下界传送门掷出末影珍珠可以将玩家传送至对应维度。}}
+|{{HistoryLine||1.21.5|dev=25w04a|下界传送门的传送范围从完整方块变为了与[[轮廓箱]]保持一致。<ref>{{bug|MC-101556|||WAI}}</ref>}}
+|{{HistoryLine||1.21.6|dev=25w16a|回退了25w04a中对下界传送门的更改。}}
+|{{HistoryLine||1.21.9|dev=25w33a|现在可以在下界传送门中打开[[聊天]]。}}
+|{{HistoryLine|||dev=25w35a|加入了游戏规则[[游戏规则/allowEnteringNetherUsingPortals|allowEnteringNetherUsingPortals]]，用于控制实体能否通过下界传送门进入下界。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了下界传送门，并且尺寸最小为4×5，最大为23×23。}}
+|{{HistoryLine||unknown|下界传送门的音效现在与Java版的相同。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.60|dev=1.21.60.25|由于对[[末地]]传送至[[主世界]]相关问题的修复，现在位于末地的下界传送门会将生物传送至[[世界出生点]]的Y{{=}}-64处，此前为Y{{=}}32767处。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了下界传送门。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 2|新的下界传送门建造规则：下界传送门最小4×5，最大23×23。
+|下界传送门如果够大的话甚至恶魂也可以{{tr|通过|通過}}。
+|现在只要在框架内点火就能激活传送门而不只是底部。}}
+}}</onlyinclude>
+
+== 你知道吗 ==
+* 下界传送门可以以类似隧道的方式建造并激活。当玩家从下界生成的传送门回到主世界时，玩家将会被传送到传送门隧道的中间部分。
+* 有[[反胃]]效果时进入下界传送门，屏幕不会变紫。
+* 当客户端与服务端通信延迟较高时，传送后可能出现客户端区块未加载而使[[玩家]]下坠脱离[[下界传送门方块]]，待到玩家被拉回时客户端会再次播放传送动画，但由于处于传送冷却，动画最后几帧会一直重复播放。
+
+=== 资源 ===
+* 乐高Minecraft系列“The Nether”内包含了一个乐高下界传送门。
+* 在2010年10月29日，''PC Gamer''发布了[http://www.youtube.com/watch?v=0Um6x9T-yRM 此视频]，显示了一个下界传送门建造和使用的过程。
+* 在2011年4月1日，''Think Geek''发布了[http://www.youtube.com/watch?v=cLGJ6DzMdqY 此视频]来宣传它们的年度愚人节产品[http://www.thinkgeek.com/interests/looflirpa/e8bf/ Minecraft USB桌面下界传送门]。
+
+== 画廊 ==
+<gallery>
+File:Zombie pigman and nether portal.png|一个[[僵尸猪人]]在主世界的一个下界传送门里
+File:Inside Portal Alpha 1.2.3 01.png|一个下界传送门方块里面的视图
+File:Minecraft Portal 23x23 Graduated.png|最大的下界传送门（23×23是整个包括框架，21×21是下界传送门方块）
+File:Nether portal generated in the air.png|Java版中在空中生成的下界传送门，门两侧有黑曜石组成的小平台
+</gallery>
+
+== 外部链接 ==
+* [http://www.minecraftforum.net/topic/345806- Nether Portal Science]
+* [http://www.slideshare.net/erich666/how-portals-work-in-minecraft How Portals Work (slideshow)]
+* [http://www.mavenspun.com/games/minecraft/index.htm Minecraft Portal Calculator]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[Category:结构]]
+
+[[de:Netherportal]]
+[[en:Nether Portal]]
+[[es:Portal del Nether]]
+[[fr:Portail du Nether]]
+[[it:Blocco#Blocchi tecnici]]
+[[ja:ネザーポータル]]
+[[ko:네더 차원문]]
+[[nl:Netherportaal]]
+[[pl:Portal Netheru]]
+[[pt:Portal do Nether]]
+[[ru:Портал Нижнего мира]]
+[[uk:Портал Незеру]]

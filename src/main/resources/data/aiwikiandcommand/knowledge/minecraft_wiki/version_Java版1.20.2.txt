@@ -1,0 +1,1249 @@
+# 页面: Java版1.20.2
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.20.2
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:38
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|宏|巨集}}{{Infobox version
+|title=1.20.2
+|image=1.20.2.png
+|image2=Java Edition 1.20.2 Simplified.png\Java Edition 1.20.2 Traditional.png\Java Edition 1.20.2 Traditional HK.png
+|edition=Java
+|date=2023年9月21日
+|jsonhash=b994a7ad16326530c7a67e1b700fcd6fb86e1497
+|clienthash=82d1974e75fc984c5ed4b038e764e50958ac61a0
+|clientmap=5c292ff7d3161977041116698e295083fd5ec8f5
+|serverhash=5b868151bd02b41319f54c8d4061b8cae84e665c
+|servermap=dced504a9b5df367ddd3477adac084cea8024ba4
+|prevparent=1.20
+|prev=1.20.1
+|next=
+|nextparent=1.20.3
+}}
+
+'''1.20.2'''是{{el|je}}的一次次要更新，发布于2023年9月21日<ref>{{article|minecraft-java-edition-1-20-2|Minecraft Java Edition 1.20.2|September 21, 2023}}</ref>，加入了“{{tr|村民交易的平衡性调整|重新平衡村民交易}}”内置数据包，并修复了一些漏洞。此版本不兼容1.20到1.20.1的服务端。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|random}}'''
+* 可用于生成随机值及控制随机序列的新命令。
+** 语法：
+*** {{cmd|link=none|random (value{{!}}roll) <range> [<sequence>]}}：生成随机值。
+*** {{cmd|link=none|random reset (*{{!}}<sequence>) [<seed>] [<includeWorldSeed>] [<includeSequenceId>]}}：控制随机序列。
+** 参数：
+*** <code>range</code>：随机值的范围，包含两端。例如<code>1..6</code>就是常规的<code>[1, 6]</code>的随机值。
+*** <code>sequence</code>：需要采样或者重置的序列的名称。
+**** 在{{cmd|link=none|random reset}}中，可用<code>*</code>表示所有随机序列。
+*** <code>seed</code>：随机序列重置后使用的种子。
+*** <code>includeWorldSeed</code>：布尔值，指定了计算序列种子时是否包含世界种子，默认值为<code>true</code>。
+**** <code>false</code>表示无论命令在哪个世界运行，序列的计算结果都是相同的。
+*** <code>includeSequenceId</code>：布尔值，指定了计算序列种子时是否包含序列ID，默认值为<code>true</code>。
+**** <code>false</code>表示无论序列的名字是什么，所有的序列的计算结果都是相同的。
+** 关于{{cmd|link=none|random (value{{!}}roll)}}：
+*** 如果使用的是<code>roll</code>而非<code>value</code>，生成的随机值会显示在所有玩家的聊天栏上。
+*** 如果不指定<code>sequence</code>参数，此命令可以由不具有管理员权限的玩家执行。
+** 关于{{cmd|link=none|random reset}}：
+*** 此命令的后三个参数，默认情况下对所有随机序列而言都为{{cd|d=、|0|true|true}}。
+*** 若使用<code>*</code>作为序列ID，所有随机序列都会被重置为默认参数。
+*** 如果没有指定种子，随机序列会重置为默认参数。
+
+=== 常规 ===
+'''[[属性]]'''
+* 加入了<code>generic.max_absorption</code>属性。
+** 用于限制<code>AbsorptionAmount</code>的最大值。
+** [[生物]]被施加[[伤害吸收]]效果时会增加<code>generic.max_absorption</code>，同时也会将<code>AbsorptionAmount</code>填充到最大值。
+
+'''[[数据包]]'''
+* 在实验性内容中加入了“{{tr|村民交易的平衡性调整|重新平衡村民交易}}”内置数据包。
+
+'''[[游戏规则]]'''
+* 加入了<code>enderPearlsVanishOnDeath</code>，用于控制被掷出的末影珍珠是否会在掷出其的玩家死亡后消失，默认为<code>true</code>。
+
+'''[[战利品表]]'''
+* 加入了<code>sequence</code>战利品表函数。
+** 包含一个字段：
+*** <code>functions</code>：按顺序运行的子函数数组。
+** 也可被声明为无类型内联数组。
+*** 这同样符合战利品表函数的JSON文件可以声明为复合函数数组的现有行为。
+* <code>all_of</code>这一战利品表谓词现在可以隐性声明为无类型内联数组。
+** 这同样与战利品表谓词JSON文件可声明为子谓词数组的行为相匹配。
+
+'''[[选项]]'''
+* 加入了“{{tr|复述功能快捷键|朗讀功能快捷鍵}}”{{tr|辅助功能|協助工具}}选项，用于控制是否在按{{key|Ctrl+B}}组合键时切换{{tr|复述功能|朗讀功能}}的状态，默认为开。
+
+'''<samp>[[options.txt]]</samp>'''
+* 加入了<code>narratorHotkey</code>，默认为<code>true</code>。
+
+'''[[社交屏幕]]'''
+* 现在可以举报玩家皮肤和名称。
+** 与聊天举报一样，玩家皮肤和名称的举报由真人处理。
+** 如果皮肤和名称被举报，且被认为违反了{{tr|社区准则|社群準則|社羣準則}}，工作人员可以采取以下措施：
+*** 封禁此皮肤，且不再能被任何玩家使用。
+*** 封禁此名称，且不再能被任何玩家使用。
+*** 暂停反复违反{{tr|社区准则|社群準則|社羣準則}}的玩家的在线游戏权限。
+** 如果玩家使用的皮肤被封禁，此玩家会在启动游戏时获得通知，其皮肤会被移除并被自动分配一个默认皮肤。玩家的游戏权限不受影响，且仍可使用其他自定义皮肤。
+** 如果玩家使用的名称被封禁，此玩家会在启动游戏时获得通知，且被要求更改名称，否则不能进行在线游戏。
+** 未来，被封禁的皮肤和名称不能被任何玩家使用。
+* 加入了下列{{tr|举报类型|檢舉類別|舉報類型}}：
+** {{tr|我想举报该玩家|我想要檢舉此玩家|我想舉報此玩家}}
+*** {{tr|该玩家使我恼怒或做的事情使我反感。|此玩家的行為使我惱怒或反感。|佢激怒咗我或做咗令我反感嘅事。}}
+
+'''[[Java版标签|标签]]'''
+* 加入了下列[[方块]]标签：
+** {{cd|#camel_sand_step_sound_blocks}}：{{cd|d=pretty|#sand|#concrete_powder}}。
+** {{cd|#concrete_powder}}：所有种类的混凝土粉末。
+* 加入了下列[[伤害类型]]标签：
+** {{cd|#always_kills_armor_stands}}：{{cd|d=pretty|arrow|trident|mob_projectile|fireball|wither_skull}}。
+*** 此标签内的伤害类型会总是完全杀死[[盔甲架]]。
+** {{cd|#no_knockback}}：{{cd|d=pretty|explosion|player_explosion|bad_respawn_point}}。
+*** 使伤害本身不会造成击退。原版中用于事件造成的伤害，例如爆炸等事件会单独施加击退。
+* 加入了下列[[实体]]标签：
+** {{cd|#non_controlling_rider}}：{{cd|d=pretty|slime|magma_cube}}。
+*** 包含不能控制载具移动的实体。
+
+== 更改 ==
+=== 方块 ===
+'''[[屏障]]'''
+* 被[[刷子]]刷扫以及实体落于其上时不再产生粒子。
+* 现在[[创造模式]]玩家可以使之[[含水]]。
+** 非直接的交互，例如[[发射器]]，无法使之[[含水]]或去水。
+
+'''[[紫颂花]]'''
+* 不再提供支撑面。
+
+'''[[附魔台]]'''
+* 将GUI中青金石槽的纹理回退至[[Java版1.18-pre5|1.18-pre5]]前的版本，以与锻造台GUI中的纹理{{tr|匹配|相符}}。
+
+'''[[唱片机]]和[[绊线钩]]'''
+* 现在会发出木板而非石头的声音。
+
+'''[[拉杆]]、[[红石中继器]]和[[红石比较器]]'''
+* 现在会发出[[石头]]而非木板的声音。
+
+'''[[粉红色花簇]]'''
+* 现在轮廓箱的大小会根据花簇数量变化。
+
+'''[[幽匿感测体]]和[[校频幽匿感测体]]{{anchor|可感测动作}}'''
+* 振动不再会因为[[模拟距离]]限制而丢失。
+* 现在能检测以下动作：
+** <code>item_interact_finish</code>游戏事件，频率为3：
+*** {{ctrl|使用}}[[骨粉]]。
+** 新增的<code>entity_action</code>游戏事件，频率为4：
+*** [[骆驼]]冲刺。
+*** 骆驼站起。
+*** 骆驼坐下。
+*** [[海龟]]挖开[[沙子]]。
+*** [[女巫]]喝药水。
+** 新增的<code>unequip</code>游戏事件，频率为4：
+*** 卸下装备。
+** <code>entity_damage</code>游戏事件，频率为7：
+*** [[不死图腾]]激活。
+** <code>block_change</code>游戏事件，频率为11：
+*** [[兔子]]啃食[[胡萝卜]]植株。
+*** [[雕纹书架]]与[[漏斗]]、[[投掷器]]交互。
+*** [[狐狸]]采摘[[甜浆果丛]]中的甜浆果。
+*** [[海龟蛋]]开裂。
+** <code>block_destroy</code>游戏事件，频率为12：
+*** [[火]]被[[喷溅型水瓶]]或[[滞留型水瓶]]浇灭。
+*** 海龟蛋孵化。
+** <code>entity_place</code>游戏事件，频率为14：
+*** [[唤魔者]]召唤出[[恼鬼]]或[[尖牙]]。
+* 将[[骆驼]]吃[[仙人掌]]发出的振动由<code>entity_interact</code>游戏事件更改为<code>eat</code>，振动频率由6改为8。
+
+'''[[潜影盒]]'''
+* 现在开启时不属于[[窒息]]方块和[[红石导体]]。
+* 现在开始开合和结束开合时发出[[方块更新#NC更新|NC更新]]。
+
+'''[[锻造台]]'''
+* 现在使用自定义配方时，可通过按{{key|Shift}}+左键将锻造用品放入槽位。
+
+'''[[海绵]]和[[湿海绵]]'''
+* 现在有其独特的声音。
+
+'''[[红石线]]、[[红石中继器]]和[[红石比较器]]'''
+* 现在收到来自下侧的[[方块更新#PP更新|PP更新]]时检查附着。
+
+=== 物品 ===
+'''[[紫颂果]]'''
+* 现在食用紫颂果会重置摔落距离。
+
+'''[[探险家地图]]'''
+* 更改了制图师出售的探险家地图上的结构图标。
+
+=== 生物 ===
+'''[[蜜蜂]]'''
+* 现在会从[[紫颂花]]和[[孢子花]]上收集花粉。
+
+'''[[骆驼]]、[[青蛙]]、[[山羊]]和[[嗅探兽]]'''
+* 现在被[[拴绳]]拴住时若受到伤害，会进入惊慌状态。
+
+'''[[村民]]'''
+* 现在被多次感染并治愈时，所提供的折扣不再翻倍。
+* 生成[[铁傀儡]]所需观察时间由35秒改回30秒。
+
+'''[[近战攻击]]'''
+* 更改了生物近战攻击的攻击距离的计算方法。
+** 水平方向上，生物的攻击距离现在由其边界箱在水平方向上向外延伸得到，而非由水平宽度决定。
+*** 例如，[[劫掠兽]]不再能穿过几格厚的墙壁而攻击到目标。
+** 垂直方向上，生物的攻击距离即为其边界箱的垂直范围。如果它的边界箱不与其目标的边界箱在垂直方向上重叠，其就无法攻击到目标。比如：
+*** 骑乘中型生物（如[[马]]）可以免受小型生物（如[[幼年僵尸]]）的攻击。
+*** 骑乘体型较高的生物（如[[骆驼]]）可以免受一般大小的生物（如[[僵尸]]）的攻击。
+*** 一些生物的攻击高度变高（如[[末影人]]，攻击它的安全高度由1.5格变为3格）。
+
+=== 非生物实体 ===
+'''[[展示实体]]'''
+* 现在会在更新后的第一个[[刻]]开始更新客户端的位置和旋转。
+** 此前，更新是在相同的刻中应用的，导致运动不平稳。
+** 新的行为类似于生物。
+* 在服务器中，位置和旋转仍是立即更新的。
+* 这个插值的时长是由字段<code>teleport_duration</code>控制的。
+** <code>0</code>意味着更新立即应用。
+** <code>1</code>意味着实体会在一刻的时间内，由当前的位置移动到新的。
+** 更高的值会将这一运动分配到多个刻。
+** 由于周期性的位置更新，这个值会被限制范围，以避免异常运动。
+** 新值仅适用于更改后进行的位置和旋转更改。
+*** 这意味着当前的运动继续保持不变。
+* 注意：骑行时的行为仍保持不变，与之前的版本一致。
+
+=== 世界生成 ===
+'''[[矿石]]分布'''
+* [[钻石矿石]]会在主世界的[[深板岩]]层更加频繁地生成。
+** 加入了中型钻石矿团，其他现有的钻石矿团放置保持不变。
+*** 中型钻石矿团的大小为1-8个钻石矿石，每个区块尝试生成2次，在Y=-64到-4之间均匀分布。暴露在空气中的钻石矿石有50%的概率跳过生成。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 现在完成“{{Advancement name|adventure.trim_with_all_exclusive_armor_patterns|zh|rev=1}}”进度时会给予150经验。
+
+'''[[配方书]]'''
+* 将竹栅栏和竹栅栏门的配方并入木质栅栏和栅栏门。
+
+'''[[交易]]'''
+* 当村民解锁交易项时，UI上交易项的顺序现在总会是随机的，而非之前在有时候是确定的。
+
+=== 命令格式 ===
+'''[[Java版函数|函数]]'''
+* 一行内如果最后一个非空白字符是反斜杠（<code>\</code>），命令将在下一行继续。
+** 后续行的前后两端的空白会被截去，然后在附加到前面的内容中。
+* 函数现在可以包括宏命令，从而产生函数宏。
+** 一行以<code>$</code>开头（作为首个非空白字符），即可标记这一行为宏命令。
+** 宏命令还可以以<code>-{}-$(变量)</code>的形式以包含一个或者更多的替换。
+*** 包含变量替换的命令会在变量被替换后重新计算。
+**** 执行此类命令会带来比预解析函数更高的执行开销。
+**** 重复执行此类命令时，游戏会尝试缓存函数调用中特定参数集的结果，以减少重复调用时的执行开销。
+** 调用函数宏时，必须提供包含了所有变量的数据的复合标签。
+** 无论数值的类型如何，作为宏参数使用的数字在插入时都不会包含后缀。
+
+'''{{cmd|function}}'''
+* 扩展了命令用法，现在支持为函数宏中的变量替换提供参数。
+** 新语法：{{cmd|link=none|function <name> [<arguments>{{!}}with (block <sourcePos>{{!}}entity <source>{{!}}storage <source>) [<path>]]}}
+** 新{{tr|参数|引數}}：
+*** <code>arguments</code>：数据复合标签，用<code>{}</code>包围。
+*** ''数据源''：指定数据源，与{{cmd|data get}}中指定数据源的语法一致。
+*** <code>path</code>：NBT路径。
+** ''数据源''与<code>path</code>所指向的位置必须是一个复合标签。
+** 复合标签必须包含函数宏使用的每个变量的项。
+** 复合标签中可以有更多的数据，这些数据将被忽略。
+** 调用非宏函数但使用了数据复合标签时，会忽略而不报错。
+** 调用函数宏时，会用提供的值相应替换函数中的变量，然后再执行返回的命令。由于无法预先解析，有变量的函数会在执行时才解析。
+*** 为提高重复以相同参数调用时的性能，函数宏中有指定的且在数据复合标签中提供的值会做缓存处理。
+** 因变量替换而导致的各行中的语法错误会导致整个函数调用被跳过。
+
+'''{{cmd|item}}'''
+* 现在可以替换[[唱片机]]中的物品。
+* 现在可以移除[[雕纹书架]]中的物品。
+
+'''常规'''
+* 现在命令的使用历史可以在不同的世界之间保存和{{tr|访问|使用}}，以匹配{{el|be}}。
+** 最近发布到聊天的50个命令会在{{tr|不同的游戏会话|不同的遊戲}}之间记录。
+** 在聊天中，按下向上或者向下箭头可以{{tr|访问|存取}}命令和聊天记录。
+** 常规的聊天只会在{{tr|同一个游戏会话|同一次遊戲}}中保留，离开服务器或者世界后清除。
+** 最近的命令会存储在游戏文件夹的<code>command_history.txt</code>中。
+
+=== 常规 ===
+'''[[聊天]]'''
+* 客户端接收到无效聊天消息时不再会断开{{tr|连接|連線}}。
+** 取而代之的是，一条作为占位符的消息将会显示在聊天栏中。
+
+'''[[区块存储格式]]'''
+* 游戏不再使用数值来存储世界中的[[状态效果]]。
+** 例如，数值<code>4</code>变为<code>minecraft:mining_fatigue</code>。
+** 更改了以下状态效果实例的字段：
+*** <code>Id</code>（整数） → <code>id</code>（字符串，[[命名空间ID]]）
+*** <code>Ambient</code> → <code>ambient</code>
+*** <code>Amplifier</code> → <code>amplifier</code>
+*** <code>Duration</code> → <code>duration</code>
+*** <code>ShowParticles</code> → <code>show_particles</code>
+*** <code>ShowIcon</code> → <code>show_icon</code>
+*** <code>HiddenEffect</code> → <code>hidden_effect</code>
+**** 该字段是一个状态效果实例，因此父对象的更改也会{{tr|应用|套用}}在这里。
+*** <code>FactorCalculationData</code> → <code>factor_calculation_data</code>
+* 对于方块实体类型<code>beacon</code>的NBT格式：
+** <code>Primary</code>（整数） → <code>primary_effect</code>（字符串，命名空间ID）
+** <code>Secondary</code>（整数） → <code>secondary_effect</code>（字符串，命名空间ID）
+
+'''[[区块刻]]'''
+* 现在露天方块检查天气更新的频率受[[游戏规则]]<code>randomTickSpeed</code>影响。
+
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>18</code>。
+* 向盔甲纹饰中加入了<code>decal</code>字段，默认为<code>false</code>。
+** 如果设为<code>true</code>，其纹饰会根据其底层的盔甲来遮罩。
+
+'''[[调试屏幕]]'''
+* 若玩家处于服务器，调试屏幕的<code>SH</code>一行中的值会显示为问号，而不再显示错误的值。
+* 通过{{key|F3+B}}显示碰撞箱时，有乘客的实体会显示乘客的着落点。
+* 将“Debug”一行改为“Debug charts”，并更改了其格式。
+** 原先的“Pie”图表现在被称为“Profiler”图表。
+* 将打开/关闭性能评测图表和帧生成时间图表的组合键由{{key|Shift+F3}}和{{key|Alt+F3}}分别改为{{key|F3+1}}和{{key|F3+2}}。
+* 现在使用{{key|F3+3}}打开调试屏幕会在右下角显示ping值图表，在[[多人游戏]]中也会在左下角显示网络流量图表。
+* 切换图表时，调试屏幕不再关闭。
+* 如果相互间没有冲突，多个图表可以同时显示。
+* 关闭调试屏幕时，图表布局会被保留。
+
+'''[[实体数据格式]]'''
+* 对于实体类型<code>mooshroom</code>的NBT格式：
+** 移除了{{cd|d=pretty|EffectId|EffectDuration}}。
+** 加入了<code>stew_effects</code>，和物品格式<code>suspicious_stew</code>中的<code>effects</code>字段格式相同。
+* 对于实体类型<code>area_effect_cloud</code>的NBT格式：
+** 将<code>Effects</code>重命名为<code>effects</code>。
+* 对于实体类型<code>arrow</code>的NBT格式：
+** 将<code>CustomPotionEffects</code>重命名为<code>custom_potion_effects</code>。
+* 对于生物的NBT格式：
+** 将<code>ActiveEffects</code>重命名为<code>active_effects</code>。
+
+'''[[游戏事件]]'''
+* 加入了<code>entity_action</code>，用以替代{{cd|d=pretty|entity_roar|entity_shake}}。
+* 加入了<code>unequip</code>。
+
+'''[[Pack.mcmeta|包的元数据]]'''
+* 数据包和资源包加入了新的特性以允许兼容多个游戏版本。
+** 包的元数据（<code>pack.mcmeta</code>）现在包含了一个可选的字段<code>supported_formats</code>，描述了资源包和数据包所支持格式的范围。
+*** 示例：{{cd|d=pretty|16|[16,17]|<nowiki>{"min_inclusive": 16, "max_inclusive": 17}</nowiki>}}
+** <code>pack_format</code>字段仍是必需的，且格式保持不变，以允许旧版游戏读取包数据。
+*** 如果<code>supported_formats</code>存在，则必须包含<code>pack_format</code>中{{tr|声明|宣告}}的值。
+*** 由于这个新信息在旧版游戏中会被忽略，因此在旧版中仍会被视为普通的、单版本的包，而没有{{tr|扩展|擴充}}的兼容性。
+* 包现在可以拥有叠加目录（“overlays”）。
+** 叠加是会应用在包的“普通”部分之上的子包。
+*** 这些目录的布局与顶层包相同，包含<code>assets</code>和<code>data</code>两个目录。
+*** 如果支持客户端的包格式，那么这个叠加就会被应用。
+*** 叠加可以替换文件，但不能移除文件。
+**** 例如，如果应用了叠加<code>foo</code>，那么文件<code>foo/assets/minecraft/textures/bar.png</code>将会替换<code>assets/minecraft/textures/bar.png</code>的内容。
+*** 叠加目录中的<code>pack.mcmeta</code>和<code>pack.png</code>会被忽略。
+** 包的元数据加入了新的部分<code>overlays</code>。
+*** 包含<code>entries</code>字段，包含一系列的叠加。
+*** 每个叠加有两个字段：
+**** <code>formats</code>：支持的版本范围
+**** <code>directory</code>：叠加目录（允许以下字符：<code>[a-z0-9_\-]</code>。
+** 应用顺序：叠加在列表中从底到顶堆叠。
+*** 例如，如果有两个叠加：<code>"entries": [{"directory":"A", ...}, {"directory":"B", ...}]</code>，那么游戏会先看B，然后再看A，然后再看顶层包目录。
+
+'''[[物品格式]]'''
+* 对于物品类型{{cd|d=、|potion|lingering_potion|splash_potion|tipped_arrow}}的NBT格式：
+** 将<code>CustomPotionEffects</code>重命名为<code>custom_potion_effects</code>。
+* 对于物品类型<code>suspicious_stew</code>的NBT格式：
+** 将<code>Effects</code>重命名为<code>effects</code>，并更改了该字段的以下字段：
+*** <code>EffectId</code>（整数） → <code>id</code>（字符串，命名空间ID）
+*** <code>EffectDuration</code> → <code>duration</code>
+
+'''网络{{tr|协议|協定}}'''
+* 优化了区块发送到客户端的方式，以允许低带宽的网络{{tr|连接|連線}}进行多人模式游戏。
+** 区块不再通过网络以大的连续批次发送到客户端。
+** 区块现在是以更小的批次发送的，取决于带宽。这意味着：
+*** 极低带宽的客户端在加载世界时不会超时。
+*** 低带宽{{tr|连接|連線}}的客户端可以在加载区块的同时与世界交互。
+** 现在仅发送客户端的渲染范围内的区块。
+** 游戏数据包现在被打包为更大的TCP{{tr|数据包|封包}}来降低TCP报头的开销，显著降低了网络使用。
+* 更改了网络{{tr|协议|協定}}，以允许未来更多数据驱动的内容。
+** 登录阶段后（例如，在客户端账号验证后）会自动开始配置阶段，持续到玩家加入世界（游戏阶段）。
+** 客户端可以无限停留在配置阶段，取决于服务器何时释放世界。
+** 服务器也可以请求客户端在进入游戏阶段后重新进入配置阶段。
+*** 其他玩家会看到这样的客户端断开{{tr|连接|連線}}。
+** 配置阶段的用户在玩家列表中不可见。
+** 配置阶段允许的活动（从游戏阶段移动过来）。
+*** 配置数据驱动的注册表。
+*** 配置启用的特性。
+** 配置和游玩阶段共享的活动：
+*** 应用服务器资源包。
+*** 更新标签。
+*** 交换自定义封包。
+*** 测试封包{{tr|连接|連線}}并保活。
+** 服务器现在会在配置阶段协商资源包。
+*** 这意味着，玩家在回应提示和重新加载资源包时，不再会在世界中。
+* 加入服务器时，客户端选项现在会在“配置”网络阶段时发出。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>18</code>。
+** 以下升级资源包的过程可以用自动化的Slicer工具辅助完成<ref>https://github.com/Mojang/slicer/releases/tag/v1.1</ref>：
+*** 所有含有多个部件贴图的GUI纹理现在都被拆分为单独的贴图，位于<code>textures/gui/sprites</code>目录下。
+*** <code>realms</code>命名空间下的所有纹理都被移至<code>minecraft</code>命名空间下。
+*** <code>villager2.png</code>被重命名为<code>villager.png</code>。
+*** GUI纹理现在可以通过<code>.mcmeta</code>文件添加动画。先前Realms试用的提示图标与Realms即将过期的状态图标，现在即采用此方式显示动画，而不再是之前的硬编码。
+** 辅助功能、语言和[[Realms]]新闻的按钮图标现在是单独的文件，不再各自附于按钮的纹理之上。
+** 移除了Realms“邀请”按钮及其数量图标的{{tr|高亮显示|醒目標示}}。
+** Realms拥有5个以上通知时出现的角标（<code>notification/more.png</code>）不再有感叹号。
+** GUI纹理图集现在可以通过<code>.mcmeta</code>文件中的<code>gui</code>部分自定义变换行为。
+*** 目前该部分仅包括<code>scaling</code>字段，其有3种类型，可通过<code>type</code>参数指定：<code>stretch</code>（拉伸，默认值）、<code>tile</code>（平铺）和<code>nine_slice</code>（九宫格切分）。
+*** <code>tile</code>和<code>nine_slice</code>需要提供额外参数才能正常显示。
+*** [[收纳袋]]悬浮提示框的背景纹理现在即采用<code>nine_slice</code>方式处理。
+*** 文本编辑框现在是一张位于{{cd|d=pretty|widget/text_field|widget/text_field_highlighted}}的九宫格切分的精灵图。
+*** 列表和编辑框的滚动条现在是一张位于<code>widget/scroller</code>的九宫格切分的精灵图。
+
+'''[[记分板]]'''
+* 将显示位置<code>belowName</code>重命名为<code>below_name</code>。
+
+'''<samp>[[server.properties]]</samp>'''
+* 加入了新的<code>log-ips</code>选项（默认为<code>true</code>）。
+** 如果设为<code>false</code>，玩家加入游戏时，日志中不会包含玩家的IP。
+
+'''[[社交屏幕]]'''
+* 更改了下列举报类型的名称和描述：
+** 诽谤（原名称：{{tr|诽谤、冒充他人或散布虚假信息|誹謗、冒充他人或虛假資訊|誹謗、冒充他人或發佈虛假資訊}}）
+*** 旧描述：{{tr|有人以利用或误导他人为目的，损害他人名誉、冒充他人或散布虚假信息。|有人以利用或誤導他人為目的，誹謗、冒充他人或散布虛假資訊。|有人以利用或誤導他人為目的，損害他人名譽、冒充他人或散佈虛假資訊。}}
+*** 新描述：{{tr|有人以利用或误导他人为目的，正在损害你或他人的名誉，例如散布虚假信息。|有人以利用或誤導他人為目的，損害你或他人的名譽，例如散布虛假資訊。|有人以利用或誤導他人為目的，損害你或他人名譽，例如散佈虛假資訊。}}
+** 自残或自杀（原名称：{{tr|即将发生的伤害行为 — 自残或自杀|緊急危難──自傷或自殺|即將發生嘅危險 — 自殘或自殺}}）
+*** 描述未更改。
+** {{tr|威胁伤害他人|恐嚇加害他人|威脅傷害他人}}（原名称：{{tr|即将发生的伤害行为 — 威胁伤害他人|緊急危難──恐嚇加害公眾|即將發生嘅危險 — 威脅傷害他人}}）
+*** 描述未更改。
+
+'''[[Java版标签|标签]]'''
+* 将所有种类的混凝土粉末从{{cd|#mineable/shovel}}方块标签移至新加入的{{cd|#concrete_powder}}方块标签中，并将{{cd|#concrete_powder}}加入到{{cd|#mineable/shovel}}中。
+* 从{{cd|d=pretty|#vibrations|#warden_can_listen}}游戏事件标签中移除了{{cd|d=pretty|entity_roar|entity_shake}}，并加入了{{cd|d=pretty|entity_action|unequip}}。
+* 向{{cd|#flowers}}方块和物品标签中添加了{{cd|d=pretty|chorus_flower|spore_blossom}}。
+
+'''遥测'''
+* 在遥测数据收集界面中添加了链接至Microsoft Privacy Statement（微软隐私声明）的按钮。
+
+'''常规'''
+* 加入了数据包和资源包含符号链接时的警告以提升安全性。
+** 这一特性扩展了此前的发布版本中加入的符号链接验证。
+** 通过拖动添加包含不允许的符号链接的包时，游戏会警告用户。
+** 包含不允许的符号链接的包在UI和命令中不可见。
+** 此外，不被识别为包和目录和文件在拖动时不再会被复制。
+* 将LWJGL的版本升级到3.3.2。
+* 随游戏一同提供的Microsoft OpenJDK版本升级至17.0.8。
+* 调整了所有实体骑乘矿车时的位置，使其更合理。
+
+== 更改（实验性） ==
+以下内容仅在创建世界时启用“{{tr|村民交易的平衡性调整|重新平衡村民交易}}”内置数据包后才会出现。
+
+=== 世界生成 ===
+'''[[远古城市]]'''
+* 增加了生成经验修补附魔书的概率。
+
+'''[[沙漠神殿]]'''
+* 增加了生成耐久（I到III级）附魔书的概率。
+
+'''[[丛林神庙]]'''
+* 增加了生成耐久（I到III级）附魔书的概率。
+
+'''[[废弃矿井]]'''
+* 增加了生成效率（I到V级）附魔书的概率。
+
+'''[[掠夺者前哨站]]'''
+* 增加了生成快速装填（I到III级）附魔书的概率。
+
+=== 游戏内容 ===
+'''[[交易]]'''
+* 更改了图书管理员出售[[附魔书]]的机制。
+** 图书管理员不再随机出售附魔书，它们现在会根据其[[生物群系]]着装售卖特定的附魔书。
+*** 沼泽和丛林着装的[[村民]]一般不会自然生成，需要玩家在对应生物群系繁殖村民或者治愈对应生物群系生成的[[僵尸村民]]。
+** 所有可交易附魔书现在被分为特殊附魔书和普通附魔书。
+*** 特殊附魔书的魔咒等级固定，且只会出现在大师级交易项中。
+*** 普通附魔书的魔咒等级随机，会出现在大师级以下的交易项中，与之前一致。
+** 移除了所有包含用于[[弩]]、[[钓鱼竿]]和[[三叉戟]]的魔咒的附魔书的交易选项。
+:: {| class="wikitable"
+|+ 不同着装的图书管理员可能出售的附魔书对应魔咒
+|-
+! 类别 !! 沙漠 !! 平原 !! 热带草原 !! 雪原 !! 针叶林 !! 丛林 !! 沼泽
+|-
+| 特殊 
+| [[效率]]III || [[保护]]III || [[锋利]]III || [[精准采集]] || [[时运]]II || [[耐久]]II || [[经验修补]]
+|-
+| 普通 
+| [[火焰保护]]<br>[[荆棘]]<br>[[无限]] || [[冲击]]<br>[[亡灵杀手]]<br>[[节肢杀手]] || [[击退]]<br>[[绑定诅咒]]<br>[[横扫之刃]] || [[水下速掘]]<br>[[抢夺]]<br>[[冰霜行者]] || [[爆炸保护]]<br>[[火焰附加]]<br>[[火矢]] || [[摔落缓冲]]<br>[[弹射物保护]]<br>[[力量（魔咒）|{{tr|力量|強力}}]] || [[深海探索者]]<br>[[水下呼吸（魔咒）|{{tr|水下呼吸|水中呼吸}}]]<br>[[消失诅咒]]
+|}
+
+* 更改了[[流浪商人]]的交易项。
+** 流浪商人的交易项现在由以下顺序和数量组成：
+*** 2个收购选项
+*** 2个特殊售货选项
+*** 5个普通售货选项
+** 新增了收购选项，加入并更改了一些售货选项，详见下表：{{anchor|流浪商人}}
+:: {| class="wikitable"
+|+ 流浪商人的新增交易项
+! 类别
+! 购买的物品
+! 数量
+! 出售的物品
+! 数量
+! 可交易次数
+|-
+| 收购选项
+| {{ItemLink|Baked Potato}}
+| 4
+| {{ItemLink|Emerald}}
+| 1
+| 1
+|-
+| 收购选项
+| {{ItemLink|Fermented Spider Eye}}
+| 1
+| {{ItemLink|Emerald}}
+| 3
+| 1
+|-
+| 收购选项
+| {{BlockLink|Hay Bale}}
+| 1
+| {{ItemLink|Emerald}}
+| 1
+| 1
+|-
+| 收购选项
+| {{ItemLink|Milk Bucket}}
+| 1
+| {{ItemLink|Emerald}}
+| 2
+| 1
+|-
+| 收购选项
+| {{ItemLink|Water Bottle}}
+| 1
+| {{ItemLink|Emerald}}
+| 1
+| 1
+|-
+| 收购选项
+| {{ItemLink|Water Bucket}}
+| 1
+| {{ItemLink|Emerald}}
+| 2
+| 1
+|-
+| 特殊售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Acacia Log}}
+| 8
+| 4
+|-
+| 特殊售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Birch Log}}
+| 8
+| 4
+|-
+| 特殊售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Cherry Log}}
+| 8
+| 4
+|-
+| 特殊售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Dark Oak Log}}
+| 8
+| 4
+|-
+| 特殊售货选项
+| {{ItemLink|Emerald}}
+| 6-20
+| {{ItemLink|Iron Pickaxe|附魔铁镐}}
+| 1
+| 1
+|-
+| 特殊售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Jungle Log}}
+| 8
+| 4
+|-
+| 特殊售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Oak Log}}
+| 8
+| 4
+|-
+| 特殊售货选项
+| {{ItemLink|Emerald}}
+| 5
+| {{ItemLink|Potion of Invisibility}}（延长版）
+| 1
+| 1
+|-
+| 特殊售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Spruce Log}}
+| 8
+| 4
+|}
+:: {| class="wikitable"
+|+ 流浪商人的交易项更改
+! 类别
+! 购买的物品
+! 数量
+! 出售的物品
+! 数量
+! 可交易次数
+|-
+| 普通售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Brown Mushroom}}
+| 1→3
+| 12→4
+|-
+| 特殊售货选项→普通售货选项
+| {{ItemLink|Emerald}}
+| 5→3
+| {{ItemLink|Bucket of Pufferfish}}
+| 1
+| 4
+|-
+| 特殊售货选项→普通售货选项
+| {{ItemLink|Emerald}}
+| 5→3
+| {{ItemLink|Bucket of Tropical Fish}}
+| 1
+| 4
+|-
+| 普通售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{ItemLink|Gunpowder}}
+| 1→4
+| 8→2
+|-
+| 普通售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Lily Pad}}
+| 2→5
+| 5→2
+|-
+| 普通售货选项
+| {{ItemLink|Emerald}}
+| 3→1
+| {{BlockLink|Packed Ice}}
+| 1
+| 6
+|-
+| 普通售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Red Mushroom}}
+| 1→3
+| 12→4
+|-
+| 普通售货选项
+| {{ItemLink|Emerald}}
+| 1
+| {{BlockLink|Vines}}
+| 1→3
+| 12→4
+|}
+
+* 制图师现在可以出售7种新的[[地图]]。
+** 可出售的具体种类与其[[生物群系]]着装有关。
+*** 沼泽和丛林着装的[[村民]]一般不会自然生成，需要玩家在对应生物群系繁殖村民或者治愈对应生物群系生成的[[僵尸村民]]。
+** 各村庄地图指向对应生物群系的[[村庄]]，丛林探险家地图指向[[丛林神庙]]，沼泽探险家地图指向[[沼泽小屋]]。
+:: {| class="wikitable" style="text-align:center"
+|+ 不同着装的制图师可能出售的地图
+|-
+! !! 沙漠 !! 丛林 !! 平原 !! 热带草原 !! 雪原 !! 沼泽 !! 针叶林
+|-
+! 第1组
+| 热带草原村庄地图 || 热带草原村庄地图 || 热带草原村庄地图 || 沙漠村庄地图 || 平原村庄地图 || 雪原村庄地图 || 平原村庄地图
+|-
+! 第2组
+| 平原村庄地图 || 沙漠村庄地图 || 针叶林村庄地图 || 平原村庄地图 || 针叶林村庄地图 || 针叶林村庄地图 || 雪原村庄地图
+|-
+! 第3组
+| 丛林探险家地图 || 沼泽探险家地图 || &ndash; || 丛林探险家地图 || 沼泽探险家地图 || 丛林探险家地图 || 沼泽探险家地图
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中制图师的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Paper}} || 24 || 0.05 || {{ItemLink|Emerald}} || 1 || 16 || 2
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Empty Map}} || 1 || 12 || 1
+|-
+! rowspan=2 | 学徒
+| {{BlockLink|Glass Pane}} || 11 || 0.05 || {{ItemLink|Emerald}} || 1 || 16 || 10
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Compass}} || 8<br>1 || 0.2 || ''前述各地图''<ref group=注>分为3组，每一组独立抽取。</ref> || 1 || 12 || 5
+|-
+! rowspan=2 | 老手
+| {{ItemLink|Compass}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Compass}} || 13<br>1 || 0.2 || {{ItemLink|Ocean Explorer Map}} || 1 || 12 || 10
+|-
+! rowspan=17 | 专家
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Item Frame}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|White Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Blue Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Light Blue Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Red Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Pink Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Green Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Lime Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Gray Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Black Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Purple Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Magenta Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Cyan Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Brown Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Yellow Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Orange Banner}} || 1 || 12 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{BlockLink|Light Gray Banner}} || 1 || 12 || 15
+|-
+! rowspan=2 | 大师
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Banner Pattern|旗帜图案（地球）}} || 1 || 12 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Compass}} || 14<br>1 || 0.2 || {{ItemLink|Woodland Explorer Map}} || 1 || 1 || 30
+|}
+* 更改了盔甲匠的交易项。
+** 购买钻石[[盔甲]]现在还需要少量钻石。
+** 大师级别的盔甲匠现在会收购[[铁块]]（除针叶林盔甲匠）或[[钻石块]]（针叶林盔甲匠）。
+** 锁链盔甲现在仅由丛林和沼泽盔甲匠出售。
+** 除针叶林盔甲匠外，专家级别的盔甲匠将会出售带有固定附魔的锁链盔甲或铁盔甲，热带草原盔甲匠会以较低的价格出售附有诅咒的盔甲。
+** 现在可在针叶林盔甲匠处将钻石盔甲换成其他种类的钻石盔甲。
+*** 玩家提供的盔甲必须是没有耐久损耗的；盔甲可以附带[[纹饰]]和[[魔咒]]，但在交换后会丢失。
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（沙漠）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Iron Boots}}（荆棘 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Helmet}}（荆棘 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 11 || 0.05 || {{ItemLink|Iron Leggings}}（荆棘 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 13 || 0.05 || {{ItemLink|Iron Chestplate}}（荆棘 I） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 16<br>4 || 0.05 || {{ItemLink|Diamond Chestplate}}（荆棘 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 16<br>3 || 0.05 || {{ItemLink|Diamond Leggings}}（荆棘 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（丛林）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Chainmail Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Chainmail Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Chainmail Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Chainmail Boots}}（耐久 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Helmet}}（耐久 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 11 || 0.05 || {{ItemLink|Chainmail Leggings}}（耐久 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 13 || 0.05 || {{ItemLink|Chainmail Chestplate}}（耐久 I） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Helmet}}（弹射物保护 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Chainmail Boots}}（摔落缓冲 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（平原）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Iron Boots}}（保护 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Helmet}}（保护 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 11 || 0.05 || {{ItemLink|Iron Leggings}}（保护 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 13 || 0.05 || {{ItemLink|Iron Chestplate}}（保护 I） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 16<br>3 || 0.05 || {{ItemLink|Diamond Leggings}}（保护 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 16<br>2 || 0.05 || {{ItemLink|Diamond Boots}}（保护 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（热带草原）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 2 || 0.05 || {{ItemLink|Iron Boots}}（绑定诅咒） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 3 || 0.05 || {{ItemLink|Iron Helmet}}（绑定诅咒） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Leggings}}（绑定诅咒） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Chestplate}}（绑定诅咒） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 6<br>2 || 0.05 || {{ItemLink|Diamond Helmet}}（绑定诅咒） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 8<br>3 || 0.05 || {{ItemLink|Diamond Chestplate}}（绑定诅咒） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（雪原）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=2 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Iron Boots}}（冰霜行者 I） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Helmet}}（水下速掘） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 12<br>2 || 0.05 || {{ItemLink|Diamond Boots}}（冰霜行者 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 12<br>3 || 0.05 || {{ItemLink|Diamond Helmet}}（水下速掘） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（沼泽）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Chainmail Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Chainmail Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Chainmail Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Chainmail Boots}}（经验修补） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Helmet}}（经验修补） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 11 || 0.05 || {{ItemLink|Chainmail Leggings}}（经验修补） || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}} || 13 || 0.05 || {{ItemLink|Chainmail Chestplate}}（经验修补） || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Chainmail Helmet}}（{{tr|水下呼吸|水中呼吸}} I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}} || 8 || 0.05 || {{ItemLink|Chainmail Boots}}（深海探索者 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Iron}} || 1 || 0.05 || {{ItemLink|Emerald}} || 4 || 12 || 30
+|}
+:: {| class="wikitable" style="text-align:center"
+|+ 此版本中盔甲匠（针叶林）的交易项
+|-
+! 等级 !! 购买的物品 !! 默认数量 !! 价格乘数 !! 出售的物品 !! 数量 !! 失效前可交易次数 !! 村民获得的经验值
+|-
+! rowspan=2 | 新手
+| {{ItemLink|Coal}} || 15 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+| {{ItemLink|Iron Ingot}} || 5 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 2
+|-
+! rowspan=4 | 学徒
+| {{ItemLink|Emerald}} || 4 || 0.05 || {{ItemLink|Iron Boots}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Iron Helmet}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 7 || 0.05 || {{ItemLink|Iron Leggings}} || 1 || 12 || 5
+|-
+| {{ItemLink|Emerald}} || 9 || 0.05 || {{ItemLink|Iron Chestplate}} || 1 || 12 || 5
+|-
+! rowspan=3 | 老手
+| {{ItemLink|Lava Bucket}} || 1 || 0.05 || {{ItemLink|Emerald}} || 1 || 12 || 20
+|-
+| {{ItemLink|Emerald}} || 5 || 0.05 || {{ItemLink|Shield}} || 1 || 12 || 10
+|-
+| {{ItemLink|Emerald}} || 36 || 0.2 || {{ItemLink|Bell}} || 1 || 12 || 10
+|-
+! rowspan=4 | 专家
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond Boots}} || 4<br>1 || 0.05 || {{ItemLink|Diamond Leggings}} || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond Leggings}} || 4<br>1 || 0.05 || {{ItemLink|Diamond Chestplate}} || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond Helmet}} || 4<br>1 || 0.05 || {{ItemLink|Diamond Boots}} || 1 || 3 || 15
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond Chestplate}} || 2<br>1 || 0.05 || {{ItemLink|Diamond Helmet}} || 1 || 3 || 15
+|-
+! rowspan=3 | 大师
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 18<br>4 || 0.05 || {{ItemLink|Diamond Chestplate}}（爆炸保护 I） || 1 || 3 || 30
+|-
+| {{ItemLink|Emerald}}<br>{{ItemLink|Diamond}} || 18<br>3 || 0.05 || {{ItemLink|Diamond Leggings}}（爆炸保护 I） || 1 || 3 || 30
+|-
+| {{BlockLink|Block of Diamond}} || 1 || 0.05 || {{ItemLink|Emerald}} || 42 || 12 || 30
+|}
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 加入了下列结构标签：
+** {{cd|#on_desert_village_maps}}：{{cd|village_desert}}。
+** {{cd|#on_jungle_explorer_maps}}：{{cd|jungle_pyramid}}。
+** {{cd|#on_plains_village_maps}}：{{cd|village_plains}}。
+** {{cd|#on_savanna_village_maps}}：{{cd|village_savanna}}。
+** {{cd|#on_snowy_village_maps}}：{{cd|village_snowy}}。
+** {{cd|#on_swamp_explorer_maps}}：{{cd|swamp_hut}}。
+** {{cd|#on_taiga_village_maps}}：{{cd|village_taiga}}。
+
+== 修复 ==
+{{fixes|fixedin=1.20.2,1.20.2 Release Candidate 2,1.20.2 Release Candidate 1,1.20.2 Pre-Release 4,1.20.2 Pre-Release 3,1.20.2 Pre-release 2,1.20.2 Pre-release 1,23w35a,23w33a,23w32a,23w31a|beforeVersion=23w31a|veralias=1|showdesc=1
+|;old
+|2310|攻击半径计算有误，导致实体会受到穿过方块或方块角落的伤害。
+|25088|生命提升若被再次应用则会完全重置。
+|29371|一些按钮和图标在悬停时使用旧的提示框样式。
+|61041|{{cd|d=pretty|CustomPotionEffects|ActiveEffects|Effects}}NBT标签仍使用数字ID。
+|67532|已选中的快捷栏纹理底部的2{{tr|行|橫列}}像素不出现在游戏中。
+|69387|{{cmd|item|link=none}}命令不能替换唱片机中的物品。
+|70127|一部分方块状态的更改没有传递给客户端。
+|72721|无论聊天设置为何，玩家在死亡后总能接收到聊天消息。
+|80876|骑乘坐骑的实体始终具有相同的偏移量。
+|85582|物品栏中的实体模型可以渲染到黑框边界以外。
+|93320|即使<code>randomTickSpeed</code>为0，水仍然会结冰。
+|96409|在陆地上时，苦力怕不会炸毁其骑乘的船或运输船。
+|103800|部分情况下盔甲架不会更新其视觉上的旋转。
+|109346|在其头部移动前，新渲染的玩家总是朝向南方。
+|112133|食用紫颂果不重置摔落距离。
+|118616|岩浆怪和史莱姆发出的声音不受“敌对生物”音量滑块的控制。
+|119873|标题屏幕中，鸣谢名单按钮的文本无法被翻译。
+|121772|在macOS上按住{{key|Shift}}时无法滚动。
+|122296|无法使用Mac“{{tr|妙控鼠标|巧控滑鼠|精妙滑鼠}}”进行水平滚动。
+|122547|屏障可以产生摔落粒子。
+|122645|不能自定义或禁用{{tr|复述功能|朗讀功能}}的热键。
+|125046|任何使用铁砧重命名过的物品都会被添加{{cd|RepairCost}}NBT标签，使其不能与其他物品正常堆叠。
+|131684|区块数据包会给每个使用<code>GlobalPalette</code>的部分多分配一个字节。
+|135339|作为局域网世界主机的玩家，如果之前未打开过任何世界，其皮肤对局域网世界中的其他玩家不可见。
+|140646|使用{{key|Shift}}键选择文本时，文本字段不会滚动。
+|147766|在按下其他键之前，{{key|Shift}}键会一直保持激活状态。
+|154827|闪烁标语“Verlet intregration!”内存在拼写错误。
+|164080|骑乘恶魂的实体会有部分或全部处于恶魂体内。
+|169530|玩家在两格高的隧道中骑乘猪时会在客户端潜行。
+|173057|文本字段在自动补全时可以滚动，从而无法看到补全的内容。
+|177110|生物脚步声的字幕不统一。
+|177172|村民/流浪商人的交易界面中的破折号是硬编码，无法被翻译。
+|181109|砂轮会往物品上添加{{cd|RepairCost: 0}}NBT数据。
+|181190|如果村民被多次感染并治愈，治愈村民获得的折扣将加倍。
+|182820|即便红石中继器和红石比较器中的都主要由石头制成，其发出的放置或破坏声仍使用的是木头的声音。
+|190815|潜影盒在开启时会停止传导红石信号，但不会触发红石更新。
+|197473|不能正常堆叠被重命名过的方块实体。
+|200484|即便唱片机主要由木头制成，其发出的声音仍使用的是石头的声音。
+|202432|伤害吸收效果即使在黄心消失后也不会解除。
+|206182|不能使用{{key|Tab}}键将焦点移出命令方块的文本框。
+|208909|美西螈若在下雨时处于水中的船或运输船上仍然会脱水。
+|209798|使用骨粉不会激活幽匿感测体。
+|210485|唤魔者召唤恼鬼不会激活幽匿感测体。
+|214126|蜜蜂不会为孢子花和紫颂花授粉。
+|215768|幽匿感测体无法探测到海龟清理沙子。
+|217628|拉杆发出的是木头的声音，而不是石头的。
+|217629|绊线钩发出的是石头的声音，而不是木头的。
+|219440|幽匿感测体无法检测到喷溅型水瓶扑灭火。
+|227338|卫道士骑乘劫掠兽时的攻击距离非常远。
+|228420|当加入服务器/在维度间穿梭/重生时，世界不会加载/会掉出世界。
+|229121|JVM在<code>jdk.internal.loader.NativeLibraries.load</code>上崩溃。
+|230732|在服务器上运行世界时，Minecraft的本地难度设置计算/显示错误。
+|232840|幼年僵尸的腿会穿过所骑乘怪物的头部。
+|235762|截图宽度大于16384像素时游戏崩溃：<code>java.lang.OutOfMemoryError: Out of stack space</code>。
+|237326|马的生命值闪烁图标未被使用。
+|237333|蛋糕、旗帜和{{tr|画|繪畫|畫}}不能放在紫颂花上，尽管其能提供支撑。
+|237427|马的生命值背景闪烁纹理未被使用。
+|237428|饥饿值的闪烁图标未被使用。
+|237429|饥饿值的闪烁背景纹理未被使用。
+|242076|蜘蛛骑士中的骷髅坐在蜘蛛模型的“里面”而不是上面。
+|242092|岩浆怪的纹理贴图（<code>magmacube.png</code>）中有未使用的像素。
+|242385|区块{{tr|数据包|封包}}数据中的缓冲区大小计算方法不一致。
+|242395|烈焰人的纹理贴图（<code>blaze.png</code>）中有未使用的像素。
+|242396|盔甲架的纹理贴图（<code>wood.png</code>）中有未使用的像素。
+|242397|牛及红色和棕色哞菇的纹理贴图（<code>red</code>/<code>brown_mooshroom.png</code>和<code>cow.png</code>）中有未使用的像素。
+|242398|绵羊及其羊毛的纹理贴图（<code>sheep.png</code>和<code>sheep_fur.png</code>）中有未使用的像素。
+|242591|羊驼及行商羊驼的纹理贴图（<code>white</code>/<code>gray</code>/<code>creamy</code>/<code>brown.png</code>）中有未使用的像素。
+|242592|北极熊的纹理贴图（<code>polarbear.png</code>）中有未使用的像素。
+|248778|潜影盒的悬浮提示中，在物品后用于表示数量的x无法被翻译。
+|248833|“语言翻译不一定100%准确”这句话前后的两个括号无法被翻译。
+|248844|配方书界面中，当前页和总页数之间的 / 无法被翻译。
+|248846|死亡屏幕中，玩家分数前的冒号无法被翻译。
+|249109|嗅探兽、青蛙、山羊和骆驼在系上拴绳时不会惊慌逃窜。
+|249355|统计信息中用于表示空值的连字符无法被翻译。
+|249702|若<samp>banned-ips.json</samp>格式有误，服务器启动时会崩溃。
+|249776|玩家在漏斗下方坐船时会在客户端潜行。
+|250985|合成和物品栏界面的纹理中有未使用的配方书按钮。
+|251525|兔子啃食胡萝卜植株不会激活幽匿感测体。
+|252231|热带青蛙的纹理中有不一致的像素。
+|252295|源文本中，多条死亡消息中的“whilst”一词未采用美式拼写。
+|252298|源文本中，与荆棘魔咒相关的死亡消息未正确使用连词。
+|252316|一些死亡消息中的burnt一词应当被写作burned，使其更贴近美式英语。
+|253137|加入局域网世界时，游戏输出控制台出现属性纹理缺失签名的报错。
+|253241|多人游戏菜单中，服务器当前在线玩家数和能容纳的总玩家数之间的 / 无法被翻译。
+|253269|进度菜单中，进度完成度示数中的符号无法被翻译。
+|253270|袭击使用的BOSS栏的标题中的连字符无法被翻译。
+|253278|世界加载屏幕中用于表示加载进度的百分号无法被翻译。
+|253281|“高级悬浮提示”设置为隐藏时，显示在已绘制地图的悬浮提示中的文本无法被翻译。
+|253283|优化世界菜单中用于表示进度的 % 和已完成区块数与总区块数之间的 / 无法被翻译。
+|253638|潜影盒的提示框中表示其使用了随机战利品表的???????无法被翻译。
+|254100|铁傀儡生成率降低。
+|255418|倚着投掷器/发射器/漏斗放置红石粉后，即使方块顶部红石粉被移除，垂直部分的红石粉看起来也不会跟着消失。
+|255967|若有旧区块在Y{{=}}0以下应当生成深暗之域生物群系，则其不会完全生成，只会生成远古城市。
+|256549|幼年骆驼寻路到吸引其的玩家处且未处于移动状态时，其会看向附近的成年个体。
+|256652|末影人几乎无法攻击骑乘骆驼的玩家。
+|256737|嗅探兽、青蛙、山羊和骆驼被喂食，而后受到伤害时，寻路到其伴侣的优先级高于其逃离危险的优先级。
+|256777|Tab玩家列表中用于表示玩家生命值的 hp 无法被翻译。
+|257909|僵尸疣猪兽、疣猪兽和熊猫仍会攻击骑乘在骆驼上的玩家。
+|258379|趋同事项：不同平台上的骆驼耳朵的位置不同。
+|258620|猪灵每121刻而非每120刻进行一次以物易物。
+|259152|物品栏中显示的玩家潜行时的模型在各版本间不同。
+|259401|附魔台与锻造台中的青金石图标不一致。
+|259475|玩家骑乘坐下的骆驼且具有控制权时，若此玩家缓慢地调整视角方向，可调整范围有时会受到限制。
+|259769|烟花火箭爆炸不再对实体产生击退。
+|259794|附魔有绑定诅咒的盔甲不能在创造模式下通过右键交换。
+|259860|玩家骑乘坐下的骆驼时，骆驼的头会一直向上或向下看。
+|260490|乘客的骑乘位置对于非默认大小的怪物而言过低。
+|260604|连续使用{{cmd|fill|link=none}}后产生声音的响度过高。
+|260819|源文本中，字符串<code>death.attack.message_too_long</code>中的“stripped”一词前缺少冠词。
+|260968|复述功能不会复述出世界选择屏幕上的“实验性”一词。
+|261119|{{tr|辅助功能|協助工具}}引导屏幕上的{{tr|辅助功能设置|協助工具設定}}按钮没有使用独立的字符串。
+|261123|<code>item_display</code>实体作为乘客时会破坏某些生物的AI。
+|261261|幽匿感测体无法检测到雕纹书架跟漏斗和投掷器的交互。
+|261420|幽匿感测体和校频幽匿感测体无法探测到女巫饮用药水。
+|261427|幽匿感测体和校频幽匿感测体无法探测到不死图腾激活。
+|261440|调整窗口大小会使得无法在铁砧中更改名称。
+|261926|由于Realms广告而无法加入Realm。
+|261951|放置在正在播放唱片的唱片机上的龙首或猪灵的头没有其应有的动画效果。
+|262295|尽管诡异木和绯红木对应的去皮菌柄有独特的声音，相应悬挂式告示牌却还是使用相应木板的声音。
+|262754|<code>AbstractScrollWidget</code>中的更改破坏了<code>MultiLineEditBox</code>的单击移动光标行为。
+|263133|“内存溢出”屏幕的源文本中用词不一致。
+|;1.20的漏洞
+|256466|竹筏实体被命名为船。
+|256482|在骆驼站起或坐下时，幽匿感测体不会激活。
+|256485|村庄中生成的骆驼可以生成在方块中。
+|256641|竹栅栏和栅栏门在工作台中不与其他栅栏和栅栏门分为一组。
+|256675|骆驼坐下时，其腿部会与鞍的纹理产生深度冲突。
+|256690|当有方块置于其上时，骆驼会尝试站起，导致在有方块与其眼睛处同一高度的情况下，它们会受到窒息伤害。
+|256696|玩家在三格高的空间内骑乘骆驼时会在客户端潜行。
+|257342|在3个方块高的区域内骑乘骆驼会减速。
+|257431|竹栅栏门采用错误的纹理。
+|257628|幽匿感测体不会在骆驼冲刺时激活。
+|259382|给予玩家带有无效纹饰图案或材料的盔甲时，会重复记录<code>Failed to get element</code>消息。
+|259452|幼年骆驼坐下/起身的音效没有加速。
+|260054|粉红色花簇的判定箱不会根据内容物调整。
+|260058|{{ctrl|选取方块}}对于空白的饰纹陶罐不能正常运作。
+|260085|对着屏障{{ctrl|使用}}刷子会产生粒子。
+|260096|饰纹陶罐没有创造模式提示框。
+|260485|{{cmd|item|link=none}}命令无法移除雕纹书架中的物品。
+|260675|饰纹陶罐在放置后的第一帧渲染为空白。
+|261182|告示牌上的颜色在世界中和编辑界面中看起来不同。
+|261369|清洗过的旗帜无法与空白旗帜堆叠。
+|261411|所有锻造模板共用同一个本地化键名。
+|261611|对着涂蜡的告示牌放置方块不会播放该方块的放置音效。
+|261657|幽匿感测体的感测范围仍为球形，导致对于某一给定的方块会产生不同的输出。
+|261739|半格高方块旁的竹筏会产生深度冲突。
+|261965|拿着荧光墨囊与空白告示牌交互时尽管不消耗荧光墨囊，却仍然会获得“{{Advancement name|husbandry.make_a_sign_glow|zh|rev=2}}”进度。
+|262108|附加有自定义配方时锻造台的GUI问题。
+|262436|在创造模式下复制饰纹陶罐不会存储NBT数据。
+|262442|骆驼离引诱它们的玩家站得有些太近。
+|262591|骆驼吃仙人掌时发出生物互动的振动，而非物品消耗的振动。
+|262613|生物无法操控一些可骑乘的生物。
+|262615|被骑乘的骆驼在能够被生物操控着移动之前，必须得装备上鞍，这与其他可骑乘的生物不一致。
+|262620|羊驼和行商羊驼需要被驯服才能被生物骑乘，这与其他可骑乘的生物不一致。
+|262636|载有史莱姆或岩浆怪的生物无法移动，也无法正常运作。
+|262638|当<code>Size:0</code>的史莱姆和岩浆怪骑乘在某些生物身上时，渲染位置过低。 
+|262720|粉红色花簇有一处茎部模型不完整。
+|262751|空白饰纹陶罐的NBT取决于获得它的方法。
+|262766|NBSP是一个能被添加进书本标题的有效不可见字符，因而可以使之具有空白的名称。
+|262804|玩家的游泳动画对于其他玩家有些僵硬。
+|262947|“{{Advancement name|adventure.trim_with_all_exclusive_armor_patterns|zh|rev=1}}”进度在完成时不会获得经验。
+|263011|嗅探兽能够从非常远的距离外嗅出并跟随玩家。
+|263049|骆驼在熔岩中无限地冲刺。
+|263126|海绵吸水时不再发出声音。
+|263200|骑乘幼年嗅探兽的实体渲染得过高。
+|263283|在1.20中加载含有告示牌的1.12.2结构方块会消除上面的文本。
+|263313|无法使用{{key|Tab}}键开始创建Realm。
+|263322|当骆驼走在可疑的沙子上时，产生的声音是“{{tr|骆驼：脚步声|駱駝踏步|駱駝腳步聲}}”而非“{{tr|骆驼：踏沙|駱駝踏沙|駱駝踩沙}}”。
+|263387|聊天滚动条不再渲染出来。
+|263430|<code>TickingTracker</code>中的{{tr|内存泄漏|記憶體流失}}。
+|;1.20.1的漏洞
+|263588|当其他玩家在服务器上尝试挖掘不可破坏的方块时，其会在客户端上显示破坏动画的第一{{tr|帧|個影格|幀}}。
+|263833|Minecraft错误地假设它能够在Wayland上设置窗口图标。
+|263879|开启的潜影盒会传导红石信号。
+|264092|包含{{cmd|say|link=none}}命令的函数不按顺序执行。
+|264233|玩家在死亡并重生后被显示为匿名玩家。
+|264260|修改方块数据后熔炉GUI不正确显示。
+|264356|系上拴绳的嗅探兽永远只会在同一处挖掘，忽略掉“探索过的位置”。
+|264467|GUI纹理<code>villager2.png</code>包含未使用的部分。
+|264468|GUI纹理<code>legacy_smithing.png</code>尽管不再使用，却仍然存在于游戏文件中。
+|264561|23w31a加入的一些新字符串的英文中缺少冠词。
+|264574|符号链接在世界根文件夹下无法正常使用。
+|264809|红石比较器使红石粉无法正确连接。
+|264829|文本过滤器不会在告示牌上隐藏被设为完全过滤的文本。
+|265151|因未知原因被服务器封禁时显示的 (Unknown) 字符串无法被翻译。
+}}
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:1.20.2]]
+[[en:Java Edition 1.20.2]]
+[[es:Java Edition 1.20.2]]
+[[fr:Édition Java 1.20.2]]
+[[ja:Java Edition 1.20.2]]
+[[ko:Java Edition 1.20.2]]
+[[lzh:爪哇版一點二〇點二]]
+[[pt:Edição Java 1.20.2]]
+[[ru:1.20.2 (Java Edition)]]
+[[tr:Java Sürümü 1.20.2]]
+[[uk:1.20.2 (Java Edition)]]

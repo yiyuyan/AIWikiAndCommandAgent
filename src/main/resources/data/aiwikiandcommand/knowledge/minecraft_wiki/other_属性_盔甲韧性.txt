@@ -1,0 +1,97 @@
+# 页面: 属性/盔甲韧性
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E7%9B%94%E7%94%B2%E9%9F%A7%E6%80%A7
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:31
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+{{Infobox attribute}}
+
+'''盔甲韧性（Armor Toughness）'''是与[[属性/护甲值|护甲值]]共同作用，减少生物受到伤害的[[属性]]。
+
+== 行为 ==
+{{main|盔甲机制}}
+每{{armor|1}}[[属性/护甲值|护甲值]]使伤害减少4%、至多被伤害降低至下限0.8%。最终提供的伤害减免不能超过80%。
+
+单次伤害中的每{{hp|0.5}}伤害值使护甲值提供的伤害减少比例减少1%，直到下限。每1盔甲韧性使减少1%减少比例需要的伤害增加{{hp|0.0625}}，在20盔甲韧性时降低1%伤害减少比例需要{{hp|1.75}}伤害。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| 所有生物
+| 0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! colspan = "2" | 值
+! 数据持久化
+! 来源
+|-
+| rowspan = "2" | armor.helmet
+| rowspan = "2" | add_value（Op0）
+| {{ItemLink|Diamond Helmet}}
+| 2
+| rowspan = "2" | 否
+| rowspan = "2" | {{ItemLink|Helmet}}，{{tr|应用|套用}}于<code>head</code>（头盔）槽位
+|-
+| {{ItemLink|Netherite Helmet}}
+| 3
+|-
+| rowspan = "2" | armor.chestplate
+| rowspan = "2" | add_value（Op0）
+| {{ItemLink|Diamond Chestplate}}
+| 2
+| rowspan = "2" | 否
+| rowspan = "2" | {{ItemLink|Chestplate}}，{{tr|应用|套用}}于<code>chest</code>（胸甲）槽位
+|-
+| {{ItemLink|Netherite Chestplate}}
+| 3
+|-
+| rowspan = "2" | armor.leggings
+| rowspan = "2" | add_value（Op0）
+| {{ItemLink|Diamond Leggings}}
+| 2
+| rowspan = "2" | 否
+| rowspan = "2" | {{ItemLink|Leggings}}，{{tr|应用|套用}}于<code>legs</code>（护腿）槽位
+|-
+| {{ItemLink|Netherite Leggings}}
+| 3
+|-
+| rowspan = "2" | armor.boots
+| rowspan = "2" | add_value（Op0）
+| {{ItemLink|Diamond Boots}}
+| 2
+| rowspan = "2" | 否
+| rowspan = "2" | {{ItemLink|Boots}}，{{tr|应用|套用}}于<code>feet</code>（靴子）槽位
+|-
+| {{ItemLink|Netherite Boots}}
+| 3
+|-
+| rowspan = "2" | armor.body
+| rowspan = "2" | add_value（Op0）
+| {{ItemLink|Diamond Horse Armor}}<br>{{ItemLink|Diamond Nautilus Armor}}
+| 2
+| rowspan = "2" | 否
+| rowspan = "2" | {{ItemLink|Horse Armor}}和{{ItemLink|Nautilus Armor}}，{{tr|应用|套用}}于<code>body</code>（身体）槽位
+|-
+| {{ItemLink|Netherite Horse Armor}}<br>{{ItemLink|Netherite Nautilus Armor}}
+| 3
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了盔甲韧性属性，ID为<code>generic.armorToughness</code>。}}
+|{{HistoryLine||1.16|dev=20w14a|盔甲韧性的ID重命名为<code>generic.armor_toughness</code>。}}
+|{{HistoryLine||1.20.5|dev=24w05a|移除了马匹盔甲修饰<code>Horse armor bonus</code>。现在马铠提升盔甲韧性使用<code>Armor Modifier</code>修饰符。}}
+|{{HistoryLine||1.21|dev=24w21a|将<code>Armor Modifier</code>修饰符提高盔甲韧性的行为拆分至{{cd|d=pretty|armor.helmet|armor.chestplate|armor.leggings|armor.boots|armor.body}}。}}
+|{{HistoryLine||1.21.2|dev=24w33a|盔甲韧性属性ID从<code>generic.armor_toughness</code>重命名为<code>armor_toughness</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

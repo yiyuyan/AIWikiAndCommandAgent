@@ -1,0 +1,342 @@
+# 页面: 生物转化
+# 来源: https://zh.minecraft.wiki/w/%E7%94%9F%E7%89%A9%E8%BD%AC%E5%8C%96
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:21
+# 原始 Wikitext 内容:
+
+{{stub|基岩版存在数据继承，但此条目没有基岩版数据，且机制描述需要检查基岩版}}
+'''生物转化（Mob conversion）'''是适用于[[AI生物]]的转化机制。
+
+== 机制 ==
+生物转化允许一个生物转化为另一个生物，且允许转化前后的生物类型不同。
+
+与自然[[生成]]的生物相比，经转化生成的生物会继承原生物的部分实体数据，例如生物转化生成时会继承原生物的自定义名称。
+
+技术上而言，生物转化并不是直接改变生物本体，而是先生成一个新的生物，待新生物继承原生物的部分实体数据后，再直接移除原生物，从而实现生物的“转化”。需要如此做，是因为一个已被实例化的生物的类型是不可被改变的，因此需要重新生成一个新的各方面都相同的生物来间接地实现。
+
+因此尽管诸如[[苦力怕]]转化为闪电苦力怕等行为也发生了转化，但这种转化依赖于直接修改生物本体数据，而非此处的狭义上的生物转化。
+
+下列生物可以进行生物转化：
+* [[哞菇]]被[[剪刀]]修剪后转化为[[牛]]。
+* [[猪]]被[[闪电]]击中后转化为[[僵尸猪灵]]。
+* [[蝌蚪]]成长转化为[[青蛙]]。
+* [[骷髅]]在[[细雪]]中转化为[[流浪者]]。
+* [[猪灵]]和[[猪灵蛮兵]]在非[[下界]]维度转化为僵尸猪灵。
+* [[疣猪兽]]在非下界维度转化为[[僵尸疣猪兽]]。
+* [[尸壳]]在[[水]]中转化为[[僵尸]]。
+* 僵尸在水中转化为[[溺尸]]。
+* [[村民]]被闪电击中后转化为[[女巫]]。
+* 村民被僵尸类生物{{note|如无特殊说明，仅包括僵尸、僵尸村民、尸壳、溺尸{{only|je|for=和僵尸猪灵}}。}}击杀后转化为[[僵尸村民]]。
+* 僵尸村民被[[僵尸村民#治愈|治愈]]而转化为村民。
+
+[[史莱姆]]、[[岩浆怪]]和[[硫方怪]]死亡后分裂成小型对应生物的行为也属于生物转化。游戏会使原生物转化多次以实现分裂效果，如史莱姆分裂就是发生了多次大史莱姆到小史莱姆的转化。
+* 史莱姆和岩浆怪死亡后，生成的新史莱姆或岩浆怪尺寸减半，数量为2至4个。
+* 硫方怪死亡后，生成的新硫方怪尺寸减半，数量为2个，会在24000刻后成长为中型硫方怪。{{more info|基岩版}}
+
+== 属性继承 ==
+=== Java版 ===
+游戏内部将生物转化分为了'''单生物（Single）'''和'''死亡时分裂（Split on death）'''两种类型。此外生物转化时还有两个布尔参数'''保留装备（Keep equipment）'''和'''保持可以捡起战利品（Preserve can pick up loot）'''，控制着特定属性的继承。
+
+{| class="wikitable stikitable"
+! 类型 !! 原生物 !! 新生物 !! 触发条件 !! 保留装备 !! 保持可以捡起战利品
+|-
+! rowspan = 10 | 单生物
+| {{EntityLink|Tadpole}}
+| {{EntityLink|Frog}}
+| 生长
+| class="tc-no"  | <samp>false</samp>
+| class="tc-no"  | <samp>false</samp>
+|-
+| {{EntityLink|Mooshroom}}
+| {{EntityLink|Cow}}
+| 剪刀
+| class="tc-no"  | <samp>false</samp>
+| class="tc-no"  | <samp>false</samp>
+|-
+| {{EntityLink|Zombie Villager}}
+| {{EntityLink|Villager}}
+| 治愈
+| class="tc-no"  | <samp>false</samp>
+| class="tc-no"  | <samp>false</samp>
+|-
+| {{EntityLink|Pig}}
+| {{EntityLink|Zombified Piglin}}
+| 闪电
+| class="tc-no"  | <samp>false</samp>
+| class="tc-yes" | <samp>true</samp>
+|-
+| {{EntityLink|Villager}}
+| {{EntityLink|Witch}}
+| 闪电
+| class="tc-no"  | <samp>false</samp>
+| class="tc-no"  | <samp>false</samp>
+|-
+| {{EntityLink|Villager}}
+| {{EntityLink|Zombie Villager}}
+| 僵尸攻击
+| class="tc-yes" | <samp>true</samp>
+| class="tc-yes" | <samp>true</samp>
+|-
+| {{EntityLink|Hoglin}}
+| {{EntityLink|Zoglin}}
+| 僵尸化
+| class="tc-yes" | <samp>true</samp>
+| class="tc-no"  | <samp>false</samp>
+|-
+| {{EntityLink|Piglin}}
+| {{EntityLink|Zombified Piglin}}
+| 僵尸化
+| class="tc-yes" | <samp>true</samp>
+| class="tc-yes" | <samp>true</samp>
+|-
+| {{EntityLink|Skeleton}}
+| {{EntityLink|Stray}}
+| 细雪
+| class="tc-yes" | <samp>true</samp>
+| class="tc-yes" | <samp>true</samp>
+|-
+| colspan="3" | 僵尸类生物之间的转化
+| class="tc-yes" | <samp>true</samp>
+| class="tc-yes" | <samp>true</samp>
+|-
+! rowspan = 1 | 死亡时分裂
+| {{EntityLink|Slime}}<br>{{EntityLink|Magma Cube}}<br>{{EntityLink|Sulfur Cube}}
+| {{EntityLink|Slime}}<br>{{EntityLink|Magma Cube}}<br>{{EntityLink|Sulfur Cube}}
+| 分裂
+| class="tc-no"  | <samp>false</samp>
+| class="tc-no"  | <samp>false</samp>
+|}
+
+如果转化类型是死亡时分裂转化，则生物转化前会尝试丢弃[[乘客]]和[[拴绳]]数据，乘客将强制脱离骑乘，而拴绳会主动断开。
+
+在转化过程中，新生物会继承原生物的下列实体属性，而其他实体属性会被忽略。
+
+{| class="wikitable stikitable"
+! 类型 !! 实体属性 !! 实体存档数据 !! 继承条件
+|-
+! rowspan="15" | 单生物
+| 实体[[位置]]
+| {{nbt|list|Pos}}
+| -
+|-
+| 实体[[朝向]]
+| {{nbt|list|Rotation}}
+| -
+|-
+| 实体[[实体#运动|位移变化量]]
+| {{nbt|list|Motion}}
+| -
+|-
+| 实体乘客
+| {{nbt|list|Passengers}}
+| 原生物存在乘客
+|-
+| 实体载具
+| ''无''{{note|作为参照，唯一将此数据保存到存档的只有玩家，即{{nbt|int array|RootVehicle.Attach}}。}}
+| 原生物存在载具
+|-
+| {{tc|partial|}} 生物装备
+| {{tc|partial|}} {{nbt|compound|equipment}}
+| rowspan="2" {{tc|partial|}} 生物转化可以保留装备
+|-
+| {{tc|partial|}} 生物装备掉率
+| {{tc|partial|}} {{nbt|compound|drop_chances}}
+|-
+| 实体[[摔落]]距离
+| {{nbt|double|fall_distance}}
+| -
+|-
+| 实体是否正在[[滑翔]]
+| {{nbt|boolean|FallFlying}}
+| -
+|-
+| 生物离自己最后一次被玩家攻击的时间
+| {{nbt|int|last_hurt_by_<wbr>player_memory_time}}
+| -
+|-
+| 生物被伤害后发红时间的倒计时
+| {{nbt|short|hurtTime}}
+| -
+|-
+| 生物身体俯仰角
+| ''无''
+| -
+|-
+| 实体是否正在站在地面
+| {{nbt|boolean|OnGround}}
+| -
+|-
+| 生物睡觉位置
+| {{nbt|int array|sleeping_pos}}
+| 原生物存在睡觉位置
+|-
+| 生物拴绳数据
+| {{nbt|int array}}{{nbt|compound|leash}}
+| 原生物被拴住
+|-
+! rowspan="22" | 通用
+| 生物[[伤害吸收值]]
+| {{nbt|float|AbsorptionAmount}}
+| -
+|-
+| 生物[[状态效果]]
+| {{nbt|list|active_effects}}
+| -
+|-
+| 生物是否是[[幼年生物]]
+| 僵尸类生物、僵尸疣猪兽和猪灵：{{nbt|boolean|IsBaby}}<br>其他生物：''无''
+| -
+|-
+| 生物年龄
+| {{nbt|int|Age}}
+| rowspan="3" | 原生物和转化后生物均为可成长生物
+|-
+| 生物喂食后增加年龄
+| {{nbt|int|ForcedAge}}
+|-
+| 生物喂食后倒计时
+| ''无''
+|-
+| 生物[[生物记忆#angry_at|愤怒目标]]及倒计时
+| {{nbt|int array|Brain.memories.<wbr>minecraft:angry_at.value}}<br>{{nbt|int|Brain.memories.<wbr>minecraft:angry_at.ttl}}
+| 原生物和新生物均注册此记忆，且原生物具有此记忆
+|-
+| {{tc|partial|}} 生物是否可捡起战利品
+| {{tc|partial|}} {{nbt|bool|CanPickUpLoot}}
+| {{tc|partial|}} 生物转化可以保持可以捡起战利品
+|-
+| 生物[[主手]]是否是左手
+| {{nbt|bool|LeftHanded}}
+| -
+|-
+| 生物是否被禁用[[生物AI]]
+| {{nbt|bool|NoAI}}
+| -
+|-
+| 生物是否不会被[[生成#清除|自然删除]]
+| {{nbt|boolean|PersistenceRequired}}
+| 原生物不会被自然删除
+|-
+| 实体是否始终显示名称
+| {{nbt|bool|CustomNameVisible}}
+| -
+|-
+| 实体是否视觉上[[着火]]
+| {{nbt|bool|HasVisualFire}}
+| -
+|-
+| 实体是否免疫[[伤害#无懈可击|大多数伤害]]
+| {{nbt|bool|Invulnerable}}
+| -
+|-
+| 实体是否不受[[重力]]影响
+| {{nbt|bool|NoGravity}}
+| -
+|-
+| 实体下次可穿过[[下界传送门]]的时间
+| {{nbt|int|PortalCooldown}}
+| -
+|-
+| 实体是否不发出声音
+| {{nbt|bool|Silent}}
+| -
+|-
+| 实体[[记分板标签]]
+| {{nbt|list|Tags}}
+| -
+|-
+| 实体<code>custom_data</code>组件
+| {{nbt|string}}{{nbt|compound|data}}
+| -
+|-
+| 实体<code>custom_name</code>组件
+| {{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}
+| -
+|-
+| 生物[[队伍]]
+| ''无''{{note|队伍数据由记分板存储，而非实体存储。}}
+| 原生物在队伍里
+|-
+| 僵尸是否可破门
+| {{nbt|bool|CanBreakDoors}}
+| 两个生物均为僵尸类生物，且原生物可以破坏门
+|}
+
+如果是僵尸村民与村民之间的转化，则游戏还会额外继承村民数据。
+
+{| class="wikitable"
+! rowspan="2" | 实体属性 !! rowspan="2" | 实体存档数据 !! colspan="2" | 继承条件
+|-
+! 转化为僵尸村民 !! 转化为村民
+|-
+| 村民职业等级数据是否初始化完毕
+| {{nbt|boolean|VillagerDataFinalized}}
+| -
+| -
+|-
+| 村民职业等级数据
+| {{nbt|compound|VillagerData}}
+| -
+| -
+|-
+| 村民言论
+| {{nbt|list|Gossips}}
+| -
+| 僵尸村民存在村民言论
+|-
+| 村民交易数据
+| {{nbt|compound|Offers}}
+| -
+| 僵尸村民存在村民交易数据
+|-
+| 村民经验值
+| {{nbt|int|Xp}}
+| -
+| -
+|}
+
+=== 基岩版 ===
+{{empty section}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.5|现在猪可以转化为僵尸猪人。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|加入了哞菇，可以转化为牛。}}
+|{{HistoryLine||1.4|dev=12w32a|加入了僵尸村民，可以和村民之间互相转化。}}
+|{{HistoryLine||1.8|dev=14w03a|现在村民可以转化为女巫。}}
+|{{HistoryLine||1.13|dev=18w11a|现在僵尸可以转化为溺尸。}}
+|{{HistoryLine|||dev=18w21b|现在尸壳可以转化为僵尸。}}
+|{{HistoryLine||1.16|dev=20w07a|加入了猪灵，可以转化为僵尸猪人。}}
+|{{HistoryLine|||dev=20w14a|现在疣猪兽可以转化为僵尸疣猪兽。}}
+|{{HistoryLine||1.16.2|dev=20w27a|加入了猪灵蛮兵，可以转化为僵尸猪灵。}}
+|{{HistoryLine||1.17|dev=21w05a|现在骷髅可以转化为流浪者。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了蝌蚪，可以转化为青蛙。}}
+|{{HistoryLine||1.21.2|dev=24w36a|现在生物转化会继承原生物的生命值、属性、状态效果、动量、下落高度、乘客、队伍和装备等数据，且最大生命值会等比转换。}}
+|{{HistoryLine|||dev=24w37a|撤销了上个快照对继承生命值、属性和战利品表的更改。}}
+|{{HistoryLine|||dev=24w39a|现在僵尸类生物之间转化时会保留是否可打破门的属性。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.9.0|dev=build 1|加入了哞菇，可以转化为牛。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了僵尸村民，可以和村民之间互相转化。}}
+|{{HistoryLine||0.12.1|dev=?|现在猪可以转化为僵尸猪人。}}
+|{{HistoryLine||0.14.0|dev=build 1|现在村民可以转化为女巫。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.15|dev=1.15.0|现在尸壳可以转化为僵尸。
+|现在僵尸可以转化为溺尸。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|现在猪灵可以转化为僵尸猪灵。}}
+|{{HistoryLine|||dev=1.16.0.51|现在疣猪兽可以转化为僵尸疣猪兽。}}
+|{{HistoryLine||1.16.20|dev=1.16.20.50|加入了猪灵蛮兵，可以转化为僵尸猪灵。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.54|现在骷髅可以转化为流浪者。}}
+|{{HistoryLine||1.18.10|exg=wild_update|dev=1.18.10.24|加入了蝌蚪，可以转化为青蛙。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|蝌蚪不再属于[[实验性玩法]]。}}
+}}
+
+== 注释 ==
+{{notelist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[en:Mob conversion]]
+[[pt:Conversão de criatura]]

@@ -1,0 +1,391 @@
+# 页面: 弓
+# 来源: https://zh.minecraft.wiki/w/%E5%BC%93
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用DynamicPageList4的页面, 可再生资源, 基岩版即将到来/26.40, 基岩版独有信息, 有未知版本的History模板的页面/基岩版, 武器, 物品, 需要信息, 需要测试/基岩版
+# 抓取时间: 2026-07-14 17:25:56
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|力量|強力}}
+{{for|Minecraft Dungeons中的武器|MCD:弓}}
+{{Redirect|弓箭|陶片|弓箭纹样陶片}}
+{{Infobox item
+|group1=通常
+|1-1=Bow.png
+|group2=拉弓（程度1）
+|2-1=Bow (Pull 0).png
+|group3=拉弓（程度2）
+|3-1=Bow (Pull 1).png
+|group4=拉弓（程度3）
+|4-1=Bow (Pull 2).png
+|invimage=Bow
+|invimage2=Bow BE
+}}
+'''弓（Bow）'''是一种可以发射[[箭]]的远程[[武器]]。
+
+== 获取 ==
+=== 合成 ===
+{{crafting
+|showname=0
+|head=1
+|showdescription=1
+|B1= Stick
+|C1= String
+|A2= Stick
+|C2= String
+|B3= Stick
+|C3= String
+|Output= Bow
+|type= Combat
+}}
+
+{{crafting
+|foot=1
+|custom=1
+|Damaged Bow
+|Damaged Bow
+|Output=Bow
+|description= 2个弓的耐久度加在一起，再加额外的5%耐久度。会损失所有非诅咒魔咒。
+|type= Combat
+|ignoreusage=1
+}}
+
+=== 生物掉落 ===
+==== 骷髅变种 ====
+[[骷髅]]、[[流浪者]]、[[沼骸]]和[[焦骸]]在被玩家或驯服的狼击杀时有{{only|for=8.5%|je|short=1}}/{{only|for=25%|be|short=1}}（[[抢夺]]魔咒每级增加1%）的概率掉落一把弓。弓是否带有魔咒取决于[[难度]]，在普通和困难难度下，魔咒的等级等价于附魔台上5-22级的魔咒。
+
+由[[骷髅陷阱]]里的骷髅掉落的附魔弓魔咒等级总等价于附魔台上5-22级的魔咒。准确的值取决于[[区域难度]]（简单难度下的魔咒总等价于附魔台上5级的魔咒）。
+
+==== 幻术师 ====
+{{exclusive|je|section=1}}
+[[幻术师]]死亡时有8.5%的概率掉落它们的弓，掉落的概率会随着抢夺魔咒等级的增加而增加。每增加1级，概率增加1%，最高掉落概率为11.5%。
+
+=== 交易 ===
+{{Trade sources|Bow,Enchanted Bow}}
+
+=== 钓鱼 ===
+{{main|钓鱼#垃圾与宝藏}}
+{{only|je|for=在[[开阔水域]]}}[[钓鱼]]时，弓可作为[[钓鱼#垃圾与宝藏|宝藏]]被钓起。使用附有[[海之眷顾]]魔咒的[[钓鱼竿]]会提高其概率。
+
+这些弓的[[附魔等级]]是30级，可以包含其适用的[[宝藏型魔咒]]，且有[[耐久度]]损耗。
+
+=== 修复 ===
+==== 砂轮 ====
+{{Grinding
+|showdescription=1
+|ingredients=损坏的[[弓]]
+|Damaged Bow
+|Damaged Bow
+|Bow
+|description=2个弓的耐久度加在一起，再加额外的5%耐久度。会损失所有非诅咒魔咒。
+}}
+
+==== 铁砧 ====
+{{main|铁砧机制}}
+{{Anvil
+|Damaged Bow
+|Damaged Bow
+|Bow
+}}
+叠加两把弓的剩余耐久度，再额外获得12%的耐久度，按照铁砧机制保留魔咒。
+
+=== 箱子战利品 ===
+{{LootChestItem|bow}}
+{{Loot notelist}}
+
+== 用途 ==
+=== 武器 ===
+{{seealso|箭}}
+
+<div style='float:right'>{{animate|Steve aiming with Bow.png;Alex aiming with Bow.png|100px}}</div>
+长按{{ctrl|使用}}键可以拉弦。要使用弓，玩家应保证物品栏内至少有一支[[箭]]，或者自身处于创造模式。在拉弦时，玩家只能以[[潜行]]的速度移动，若玩家正骑着[[马]]、坐在[[矿车]]或者[[船]]里，则拉弦不会使移动速度下降。拉弓时，在弓上显示的箭外观不随箭的类型改变。<ref>{{bug|MC-87685||弓的拉弦动画不因箭的种类而变化|Won't Fix}}</ref>
+
+弓按照以下顺序选择要消耗的箭：
+* 副手中的箭
+* {{only|je|for=副手持弓时，快捷栏中被选中的箭}}
+* 快捷栏中最靠左的箭
+* 物品栏中距离0槽位最近的箭（从最左上角向右逐行搜索）
+
+拉弓时，拉弓程度会随着时间逐渐增加，其值等于<code>-{}-拉弓时间刻数 × ( 拉弓时间刻数 + 40 ) / 1200</code>。拉弓时间达到1秒时，弓拉满，拉弓程度停止增加，弓会开始上下抖动。
+
+松开{{ctrl|使用}}时，只有至少拉弓了{{convert|3}}时才会发射箭{{needs testing|bedrock=1}}。弓发射的箭的速度为<code>拉弓程度 × 60</code>格/秒。
+
+{| class="wikitable"
+|-
+! 拉弓时间 !! 拉弓程度
+|-
+| {{convert|0}}
+| {{#expr: 00 * ( 00  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|1}}
+| {{#expr: 01 * ( 01  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|2}}
+| {{#expr: 02 * ( 02  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|3}}
+| {{#expr: 03 * ( 03  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|4}}
+| {{#expr: 04 * ( 04  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|5}}
+| {{#expr: 05 * ( 05  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|6}}
+| {{#expr: 06 * ( 06  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|7}}
+| {{#expr: 07 * ( 07  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|8}}
+| {{#expr: 08 * ( 08  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|9}}
+| {{#expr: 09 * ( 09  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|10}}
+| {{#expr: 10 * ( 10  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|11}}
+| {{#expr: 11 * ( 11  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|12}}
+| {{#expr: 12 * ( 12  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|13}}
+| {{#expr: 13 * ( 13  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|14}}
+| {{#expr: 14 * ( 14  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|15}}
+| {{#expr: 15 * ( 15  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|16}}
+| {{#expr: 16 * ( 16  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|17}}
+| {{#expr: 17 * ( 17  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|18}}
+| {{#expr: 18 * ( 18  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|19}}
+| {{#expr: 19 * ( 19  + 40 ) / 1200 round 5 }}
+|-
+| {{convert|20}}
+| {{#expr: 20 * ( 20  + 40 ) / 1200 round 5 }}
+|-
+|}
+
+箭矢的飞行轨迹受到重力影响，射箭时须稍稍向上提起准星或处于高位，以便命中目标。流体中的箭会受到极大阻力，无法远飞。
+
+{{In|je}}当箭射中其他玩家时，会向发射者播放高音调的“叮”声。
+
+箭造成的伤害不受玩家所带的[[力量（状态效果）|-{力量}-]]状态效果的影响，而是基于基础伤害与和射箭物品、箭矢速度相关的各种计算得出。
+
+==== 伤害 ====
+{{main|箭#箭伤害}}
+
+{{In|je}}箭的基础伤害默认为2，基础伤害会因附魔改变，部分敌对生物所射箭的基础伤害还会根据[[难度]]额外随机增加。基础伤害乘以命中时箭自身的速度并向上取整后，将得到最终伤害。
+
+{{In|be}}箭的基础伤害默认根据发射生物类型在不同的区间内随机选择，玩家所射箭的基础伤害还会因附魔、难度设置与命中时自身的速度随机增加。上述修正后，将得到最终伤害。
+
+满弦射出的箭与[[弩]]发射的箭为“暴击箭”，径迹会带有星状浅黄色粒子，命中造成的最终伤害进一步增加。
+
+{{:箭/伤害2}}
+
+=== 生物使用 ===
+[[骷髅]]、{{only|for=[[凋灵骷髅]]|je}}、[[流浪者]]、[[沼骸]]、[[焦骸]]和{{only|for=[[幻术师]]|je}}在持有弓时可以发射[[箭]]，且骷髅、流浪者、沼骸、焦骸和幻术师在生成时就持有弓。
+
+流浪者使用弓发射延长版的迟缓之箭，沼骸使用弓发射剧毒之箭，焦骸使用弓发射虚弱之箭，{{in|je}}凋灵骷髅使用弓发射着火的箭。
+
+=== 合成材料 ===
+{{Crafting usage|Bow}}
+
+=== 魔咒 ===
+弓接受7种不同类型的魔咒<!--指施加在弓上时能对弓的使用效果产生变化的魔咒-->，其基础[[附魔能力]]为1。弓的魔咒不会对箭的速度或距离有任何的影响。
+
+弓能够提升对单一目标的打击强度，与同时打击多个目标的[[弩]]相对。
+
+{| class="wikitable col-2-center"
+|-
+! 魔咒
+! 最大等级
+|-
+| [[力量（魔咒）|力量]]
+| V
+|-
+| [[火矢]]
+| I
+|-
+| [[冲击]]
+| II
+|-
+| [[无限]]<ref group="注" name=exc>无限与经验修补相互排斥。</ref>
+| I
+|-
+| [[耐久]]
+| III
+|-
+| [[经验修补]]<ref group="注" name=exc/><ref group="注" name=anvil>只能通过使用相应的[[附魔书]]在[[铁砧]]上叠加而获得。</ref>
+| I
+|-
+| [[消失诅咒]]<ref group="注" name=anvil/>
+| I
+|}
+{{notelist|注}}
+
+=== 燃料 ===
+弓能用作[[熔炉]]、[[高炉]]或[[烟熏炉]]的燃料。{{in|je}}每把弓可以烧炼1.5个物品；{{in|be}}每把弓能烧炼1个物品。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Bow shoot.ogg
+|subtitle={{tp|subtitles.entity.arrow.shoot}}
+|source=玩家
+|description=玩家发射箭
+|id=entity.arrow.shoot
+|translationkey=subtitles.entity.arrow.shoot}}
+{{Sound table
+|sound=Bow shoot.ogg
+|subtitle={{tp|subtitles.entity.skeleton.shoot}}
+|source=敌对生物
+|description=骷髅或幻术师发射箭
+|id=entity.skeleton.shoot
+|translationkey=subtitles.entity.skeleton.shoot}}
+{{Sound table/Entity/ItemBreak/JE}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Bow shoot.ogg
+|source=友好生物
+|description=实体发射箭
+|id=random.bow
+|typeid=bow
+|soundvolume
+|soundpitch=0.83-1.25
+|sounddistance
+}}
+{{Sound table/Entity/ItemBreak/BE}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Bow
+|spritetype=item
+|nameid=bow
+|showitemtags=je
+|itemtags={{GameTag|item|bow}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Bow
+|spritetype=item
+|nameid=bow
+|foot=1}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+== 成就 ==
+{{Load achievements|sniper-duel;dispense-with-this;archer}}
+
+== 进度 ==
+{{load advancements|prefix=adventure|shoot_arrow;sniper_duel;bullseye}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年6月14日|link={{notch|123343045/my-vision-for-survival}}|[[Notch]]提及了弓和[[箭]]如何在生存模式中运作：“弓由木头制成。使用弓要在热键栏内选中它，并且你已经拿到了些箭。对准前面点击，箭就会根据物理规则飞出去。要击中目标的话要瞄准它。”}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100110|[[File:Bow JE1.png|32px]] 在[[items.png]]中加入了弓的纹理。}}
+|{{HistoryLine||0.31|dev=20100122|[[File:Bow JE2 BE1.png|32px]] 加入了弓。按住鼠标右键可以快速连续地射箭，每一支箭都会造成{{hp|4}}的伤害。与地平线保持平行射出的箭会沿着因[[wzh:引力|引力]]而形成的[[wzh:平抛运动|抛物线]]飞行大约15米。当与地平线呈大约38°角射箭时箭的飞行距离将达到最大值，大约是52米。
+|拿着弓进行互动（如打开门或箱子）时经常会射出箭而不是完成互动。这是由于射箭是一个瞬间动作。}}
+|{{HistoryLine||0.31|dev=20100130|加入了弓的合成配方。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.2|弓也被设计成用于制作[[发射器]]的原料。}}
+|{{HistoryLine||1.8|dev=pre1|彻底更改了弓的行为，现在射箭前必须要拉弦了。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|一支完全拉满弓的箭射出去后会造成{{hp|9}}的伤害，罕见会造成{{hp|10}}的伤害。|弓也拥有耐久值了。|在[[创造模式]]中，弓不需要箭也能射击。|弓可以通过命令来获得魔咒，但没有魔咒会真正起作用。}}
+|{{HistoryLine||1.1|弓可以被正确地[[附魔（物品修饰）|附魔]]。目前弓具有四种专属魔咒：火矢、冲击、力量、无限。}}
+|{{HistoryLine||1.2.1|dev=12w06a|[[骷髅]]有2.5%的概率掉落一把弓，并有五分之一的概率其带有力量I魔咒(20%)。}}
+|{{HistoryLine||1.4.6|dev=12w50a|现在可使用[[铁砧]]和[[附魔书]]对弓进行附魔了。}}
+|{{HistoryLine|||dev=1.4.6-pre|当玩家被其他玩家在远距离发射的箭射中后，会发出高音调的“叮”的声音。}}
+|{{HistoryLine||1.7.2|可以通过钓鱼来获得弓“宝藏”。}}
+|{{HistoryLine||1.9|dev=15w31a|在拉弦时，物品栏里的弓会显示一支箭了。
+|射击时，箭不再偏移到准星的右方。
+|弓现在可以射出额外的14种类型的箭矢，会优先射出在副手上的箭矢，其次物品栏（以编号最小的那一栏优先）。
+|弓不能在副手上使用。}}
+|{{HistoryLine|||dev=15w37a|弓现在可以在副手上使用了，但是在副手上拉弓的时候看起来像单手向下拉弓。
+|如果弓是在副手中，弓将优先选择主手上所拿的[[箭矢]]。}}
+|{{HistoryLine||1.10|dev=16w20a|[[流浪者]]现在会使用弓攻击，并且死后有概率掉落弓。}}
+|{{HistoryLine||1.11|dev=16w33a|弓现在能用作熔炉的燃料。}}
+|{{HistoryLine||1.11.1|dev=16w50a|经验修补和无限现在不兼容。}}
+|{{HistoryLine||1.12|dev=17w16a|[[幻术师]]现在会配备一把弓，被杀死时作为稀有掉落物机会掉落无魔咒的弓。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，此[[物品]]的数字ID是261。}}
+|{{HistoryLine||1.13.1|dev=18w30a|现在在副手使用弓的动画可以正确显示。}}
+|{{HistoryLine||1.20.5|dev=24w09a|[[穿透]]、[[多重射击]]现在会在弓上产生效果。}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在弓可以在[[废弃营地]]的[[箱子]]中找到。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.3.3|[[File:Bow JE2 BE1.png|32px]] 加入了弓。}}
+|{{HistoryLine||0.8.0|dev=build 1|[[File:Bow BE2.png|32px]] 更改了弓的纹理。}}
+|{{HistoryLine||0.11.0|dev=build 1|现在弓可以作为宝藏物品通过钓鱼来获得。}}
+|{{HistoryLine||0.12.1|dev=build 1|现在一支完全拉满弓的箭射出去会显示粒子效果。}}
+|{{HistoryLine||0.15.0|dev=build 1|[[流浪者]]现在会使用弓攻击，并且死后有概率掉落弓。
+|弓现在能发射14种额外类型的箭，取决于哪种箭距离槽位0最近。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.4|dev=1.0.4.0|弓能够通过和造箭师村民交易获得了。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了[[经验修补]]魔咒，可以在弓上使用，并且互相排斥[[无限]]魔咒。
+|[[箭]]现在可以放在副手中，弓将优先选择主手上所拿的[[箭矢]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.10|现在拉弓时快捷栏中的弓会显示一个射[[箭]]的动画。}}
+|{{HistoryLine||?|更改了弓的纹理，与Java版保持一致。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.4|制箭师村民现在以2个绿宝石的价格出售未附魔的弓，以8个绿宝石的价格出售附魔的弓。}}
+|{{HistoryLine||26.40|exg=y_2026_drop_3|dev=26.40.27|现在弓可以在[[废弃营地]]的[[箱子]]中找到。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Bow JE2 BE1.png|32px]] 加入了弓。}}
+|{{HistoryLine||xbox=TU5|更改了弓的行为，现在需要拉弦才能射击了。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|弓现在能通过和制箭师[[村民]]进行[[交易]]获得。}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|弓现在能射出额外的14种箭，根据在副手的箭的类型或最接近槽位0时选择。}}
+}}
+
+== 画廊 ==
+<gallery>
+Enchanted Bow.gif|附魔的弓
+File:Animation of bow.png|弓的动画
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox items|Combat}}
+
+[[Category:武器]]
+
+[[cs:Luk]]
+[[de:Bogen]]
+[[en:Bow]]
+[[es:Arco]]
+[[fr:Arc]]
+[[hu:Íj]]
+[[it:Arco]]
+[[ja:弓]]
+[[ko:활]]
+[[lzh:弓]]
+[[nl:Boog]]
+[[pl:Łuk]]
+[[pt:Arco]]
+[[ru:Лук]]
+[[uk:Лук]]

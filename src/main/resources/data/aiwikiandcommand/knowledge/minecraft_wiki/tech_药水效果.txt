@@ -1,0 +1,521 @@
+# 页面: 药水效果
+# 来源: https://zh.minecraft.wiki/w/%E8%8D%AF%E6%B0%B4%E6%95%88%E6%9E%9C
+# 分类: Java版独有信息, 基岩版独有信息, 游戏内容, 药水效果
+# 抓取时间: 2026-07-14 17:35:07
+# 原始 Wikitext 内容:
+
+{{distinguish|状态效果}}
+'''药水效果（Potion Effect）'''是[[药水]]、[[喷溅药水]]、[[滞留药水]]、[[药箭]]和[[区域效果云]]使用的基本数据。
+
+== 机制 ==
+药水、喷溅药水、滞留药水、药箭物品，以及喷溅药水、滞留药水、[[箭]]、[[区域效果云]]实体在它们的数据中储存了药水效果。如果上述物品或实体没有指定药水效果，或指定了游戏无法识别的药水效果ID，那么{{only|je|for=不可合成的药水}}或{{only|be|for=水瓶}}药水效果就会被使用。
+
+药水效果决定了药水的名称，药水的颜色，引发的[[状态效果]]及其等级和持续时间。一部分药水效果的名称与其引发的状态效果的名称是不同的。
+
+少数药水效果没有对应的状态效果；神龟药水引发了多种状态效果。
+
+有一些药水效果还控制了其他的行为，如药水效果为水瓶的喷溅药水。
+
+== 药水效果列表 ==
+下表中的引发的状态效果的持续时间使用了药水的数据。对于喷溅药水，其造成的状态效果的持续时间会随受影响生物到喷溅药水破裂位置的距离的增加而降低；对于滞留药水和区域效果云，其造成的状态效果的持续时间是{{frac|1|4}}；对于药箭，其造成的状态效果的持续时间是{{frac|1|8}}。
+
+下表中“药水名称”为具有这些药水效果的药水的物品名称；“药水效果ID”列的值省略了<code>minecraft:</code>前缀；基岩版数字ID为药水、喷溅药水和滞留药水的数据值，对于药箭每个数据都应增加1；“药水颜色”列的值是根据Java版混合药水颜色算法得出的，游戏并非预设了这些值。
+
+基岩版所有种类的神龟药水的颜色均为{{color|#8B80E3}}，以下不再指出。
+
+{| class="wikitable sortable" style="text-align: center;"
+! 药水名称
+! 药水颜色
+! 药水效果ID
+! {{el|be}}<br>数字ID
+! 引发的状态效果
+! class="unsortable" style="width:2em;" | 药水
+! class="unsortable" style="width:2em;" | 喷溅药水
+! class="unsortable" style="width:2em;" | 滞留药水
+! class="unsortable" style="width:6em;" | 药箭
+|-
+| [[不可合成的药水]]{{only|je}}
+| {{color|#385DC6}}
+| -
+| -
+| -
+| {{Slot|Uncraftable Potion}}
+| {{Slot|Uncraftable Splash Potion}}
+| {{Slot|Uncraftable Lingering Potion}}
+| {{Slot|Uncraftable Tipped Arrow}}
+|-
+| [[水瓶]]
+| {{color|#385DC6}}
+| {{code|water}}
+| 0
+| -
+| {{Slot|Water Bottle}}
+| {{Slot|Splash Water Bottle}}
+| {{Slot|Lingering Water Bottle}}
+| {{Slot|Arrow of Splashing}} {{Slot|Arrow of Splashing BE}}
+|-
+| [[平凡的药水]]
+| {{color|#385DC6}}
+| {{code|mundane}}
+| 1
+| -
+| {{Slot|Mundane Potion}}
+| {{Slot|Mundane Splash Potion}}
+| {{Slot|Mundane Lingering Potion}}
+| {{Slot|Tipped Arrow|link=平凡的药水}} {{Slot|Tipped Arrow BE|link=平凡的药水}}
+|-
+| [[长久平凡药水]]{{only|be}}
+|{{color|#385DC6}}
+|{{code|long_mundane}}
+| 2
+| -
+| {{Slot|Long Mundane Potion}}
+| {{Slot|Splash Long Mundane Potion}}
+| {{Slot|Lingering Long Mundane Potion}}
+| {{Slot|[tipped_arrow.effect.mundane.extended]Arrow of Long Mundane|link=长久平凡药水}}
+|-
+| [[浓稠的药水]]
+| {{color|#385DC6}}
+| {{code|thick}}
+| 3
+| -
+| {{Slot|Thick Potion}}
+| {{Slot|Thick Splash Potion}}
+| {{Slot|Thick Lingering Potion}}
+| {{Slot|Tipped Arrow|link=浓稠的药水}} {{Slot|Tipped Arrow BE|link=浓稠的药水}}
+|-
+| [[粗制的药水]]
+| {{color|#385DC6}}
+| {{code|awkward}}
+| 4
+| -
+| {{Slot|Awkward Potion}}
+| {{Slot|Awkward Splash Potion}}
+| {{Slot|Awkward Lingering Potion}}
+| {{Slot|Tipped Arrow|link=粗制的药水}} {{Slot|Tipped Arrow BE|link=粗制的药水}}
+|-
+| rowspan="2" | [[夜视药水]]
+| rowspan="2" | {{color|#C2FF66}}
+| {{code|night_vision}}{{only|je}}<br><code>nightvision</code>{{only|be}}
+| 5
+| {{EffectLink|Night Vision}} 3:00
+| {{Slot|Potion of Night Vision}}
+| {{Slot|Splash Potion of Night Vision}}
+| {{Slot|Lingering Potion of Night Vision}}
+| {{Slot|Arrow of Night Vision}}
+|-
+| {{code|long_night_vision}}{{only|je}}<br><code>long_nightvision</code>{{only|be}}
+| 6
+| {{EffectLink|Night Vision}} 8:00
+| {{Slot|Potion of Night Vision Extended}}
+| {{Slot|Splash Potion of Night Vision Extended}}
+| {{Slot|Lingering Potion of Night Vision Extended}}
+| {{Slot|Arrow of Night Vision Extended}}
+|-
+| rowspan="2" | [[隐身药水]]
+| rowspan="2" | {{color|#F6F6F6}}
+| {{code|invisibility}}
+| 7
+| {{EffectLink|Invisibility}} 3:00
+| {{Slot|Potion of Invisibility}}
+| {{Slot|Splash Potion of Invisibility}}
+| {{Slot|Lingering Potion of Invisibility}}
+| {{Slot|Arrow of Invisibility}}
+|-
+| {{code|long_invisibility}}
+| 8
+| {{EffectLink|Invisibility}} 8:00
+| {{Slot|Potion of Invisibility Extended}}
+| {{Slot|Splash Potion of Invisibility Extended}}
+| {{Slot|Lingering Potion of Invisibility Extended}}
+| {{Slot|Arrow of Invisibility Extended}}
+|-
+| rowspan="3" | [[跳跃药水]]
+| rowspan="3" | {{color|#FDFF84}}
+| {{code|leaping}}
+| 9
+| {{EffectLink|Jump Boost}} 3:00
+| {{Slot|Potion of Leaping}}
+| {{Slot|Splash Potion of Leaping}}
+| {{Slot|Lingering Potion of Leaping}}
+| {{Slot|Arrow of Leaping}}
+|-
+| {{code|long_leaping}}
+| 10
+| {{EffectLink|Jump Boost}} 8:00
+| {{Slot|Potion of Leaping Extended}}
+| {{Slot|Splash Potion of Leaping Extended}}
+| {{Slot|Lingering Potion of Leaping Extended}}
+| {{Slot|Arrow of Leaping Extended}}
+|-
+| {{code|strong_leaping}}
+| 11
+| {{EffectLink|Jump Boost}} II 1:30
+| {{Slot|Potion of Leaping Enhanced}}
+| {{Slot|Splash Potion of Leaping Enhanced}}
+| {{Slot|Lingering Potion of Leaping Enhanced}}
+| {{Slot|Arrow of Leaping Enhanced}}
+|-
+| rowspan="2" | [[抗火药水]]
+| rowspan="2" | {{color|#FF9900}}
+| {{code|fire_resistance}}
+| 12
+| {{EffectLink|Fire Resistance}} 3:00
+| {{Slot|Potion of Fire Resistance}}
+| {{Slot|Splash Potion of Fire Resistance}}
+| {{Slot|Lingering Potion of Fire Resistance}}
+| {{Slot|Arrow of Fire Resistance}}
+|-
+| {{code|long_fire_resistance}}
+| 13
+| {{EffectLink|Fire Resistance}} 8:00
+| {{Slot|Potion of Fire Resistance Extended}}
+| {{Slot|Splash Potion of Fire Resistance Extended}}
+| {{Slot|Lingering Potion of Fire Resistance Extended}}
+| {{Slot|Arrow of Fire Resistance Extended}}
+|-
+| rowspan="3" | [[迅捷药水]]
+| rowspan="3" | {{color|#33EBFF}}
+| {{code|swiftness}}
+| 14
+| {{EffectLink|Speed}} 3:00
+| {{Slot|Potion of Swiftness}}
+| {{Slot|Splash Potion of Swiftness}}
+| {{Slot|Lingering Potion of Swiftness}}
+| {{Slot|Arrow of Swiftness}}
+|-
+| {{code|long_swiftness}}
+| 15
+| {{EffectLink|Speed}} 8:00
+| {{Slot|Potion of Swiftness Extended}}
+| {{Slot|Splash Potion of Swiftness Extended}}
+| {{Slot|Lingering Potion of Swiftness Extended}}
+| {{Slot|Arrow of Swiftness Extended}}
+|-
+| {{code|strong_swiftness}}
+| 16
+| {{EffectLink|Speed}} II 1:30
+| {{Slot|Potion of Swiftness Enhanced}}
+| {{Slot|Splash Potion of Swiftness Enhanced}}
+| {{Slot|Lingering Potion of Swiftness Enhanced}}
+| {{Slot|Arrow of Swiftness Enhanced}}
+|-
+| rowspan="3" | [[迟缓药水]]
+| rowspan="3" | {{color|#8BAFE0}}
+| {{code|slowness}}
+| 17
+| {{EffectLink|Slowness}} 1:30
+| {{Slot|Potion of Slowness}}
+| {{Slot|Splash Potion of Slowness}}
+| {{Slot|Lingering Potion of Slowness}}
+| {{Slot|Arrow of Slowness}}
+|-
+| {{code|long_slowness}}
+| 18
+| {{EffectLink|Slowness}} 4:00
+| {{Slot|Potion of Slowness Extended}}
+| {{Slot|Splash Potion of Slowness Extended}}
+| {{Slot|Lingering Potion of Slowness Extended}}
+| {{Slot|Arrow of Slowness Extended}}
+|-
+| {{code|strong_slowness}}
+| 42
+| {{EffectLink|Slowness}} IV 0:20
+| {{Slot|Potion of Slowness Enhanced}}
+| {{Slot|Splash Potion of Slowness Enhanced}}
+| {{Slot|Lingering Potion of Slowness Enhanced}}
+| {{Slot|Arrow of Slowness Enhanced}}
+|-
+| rowspan="2" | [[水肺药水]]
+| rowspan="2" | {{color|#98DAC0}}
+| {{code|water_breathing}}
+| 19
+| {{EffectLink|Water Breathing}} 3:00
+| {{Slot|Potion of Water Breathing}}
+| {{Slot|Splash Potion of Water Breathing}}
+| {{Slot|Lingering Potion of Water Breathing}}
+| {{Slot|Arrow of Water Breathing}}
+|-
+| {{code|long_water_breathing}}
+| 20
+| {{EffectLink|Water Breathing}} 8:00
+| {{Slot|Potion of Water Breathing Extended}}
+| {{Slot|Splash Potion of Water Breathing Extended}}
+| {{Slot|Lingering Potion of Water Breathing Extended}}
+| {{Slot|Arrow of Water Breathing Extended}}
+|-
+| rowspan="2" | [[治疗药水]]
+| rowspan="2" | {{color|#F82423}}
+| {{code|healing}}
+| 21
+| {{EffectLink|Instant Health}}
+| {{Slot|Potion of Healing}}
+| {{Slot|Splash Potion of Healing}}
+| {{Slot|Lingering Potion of Healing}}
+| {{Slot|Arrow of Healing}}
+|-
+| {{code|strong_healing}}
+| 22
+| {{EffectLink|Instant Health}} II
+| {{Slot|Potion of Healing Enhanced}}
+| {{Slot|Splash Potion of Healing Enhanced}}
+| {{Slot|Lingering Potion of Healing Enhanced}}
+| {{Slot|Arrow of Healing Enhanced}}
+|-
+| rowspan="2" | [[伤害药水]]
+| rowspan="2" | {{color|#A9656A}}
+| {{code|harming}}
+| 23
+| {{EffectLink|Instant Damage}}
+| {{Slot|Potion of Harming}}
+| {{Slot|Splash Potion of Harming}}
+| {{Slot|Lingering Potion of Harming}}
+| {{Slot|Arrow of Harming}}
+|-
+| {{code|strong_harming}}
+| 24
+| {{EffectLink|Instant Damage}} II
+| {{Slot|Potion of Harming Enhanced}}
+| {{Slot|Splash Potion of Harming Enhanced}}
+| {{Slot|Lingering Potion of Harming Enhanced}}
+| {{Slot|Arrow of Harming Enhanced}}
+|-
+| rowspan="3" | [[剧毒药水]]
+| rowspan="3" | {{color|#87A363}}
+| {{code|poison}}
+| 25
+| {{EffectLink|Poison}} 0:45
+| {{Slot|Potion of Poison}}
+| {{Slot|Splash Potion of Poison}}
+| {{Slot|Lingering Potion of Poison}}
+| {{Slot|Arrow of Poison}}
+|-
+| {{code|long_poison}}
+| 26
+| {{EffectLink|Poison}} 1:30
+| {{Slot|Potion of Poison Extended}}
+| {{Slot|Splash Potion of Poison Extended}}
+| {{Slot|Lingering Potion of Poison Extended}}
+| {{Slot|Arrow of Poison Extended}}
+|-
+| {{code|strong_poison}}
+| 27
+| {{EffectLink|Poison}} II 0:21.5
+| {{Slot|Potion of Poison Enhanced}}
+| {{Slot|Splash Potion of Poison Enhanced}}
+| {{Slot|Lingering Potion of Poison Enhanced}}
+| {{Slot|Arrow of Poison Enhanced}}
+|-
+| rowspan="3" | [[再生药水]]
+| rowspan="3" | {{color|#CD5CAB}}
+| {{code|regeneration}}
+| 28
+| {{EffectLink|Regeneration}} 0:45
+| {{Slot|Potion of Regeneration}}
+| {{Slot|Splash Potion of Regeneration}}
+| {{Slot|Lingering Potion of Regeneration}}
+| {{Slot|Arrow of Regeneration}}
+|-
+| {{code|long_regeneration}}
+| 29
+| {{EffectLink|Regeneration}} 1:30
+| {{Slot|Potion of Regeneration Extended}}
+| {{Slot|Splash Potion of Regeneration Extended}}
+| {{Slot|Lingering Potion of Regeneration Extended}}
+| {{Slot|Arrow of Regeneration Extended}}
+|-
+| {{code|strong_regeneration}}
+| 30
+| {{EffectLink|Regeneration}} II 0:21.5
+| {{Slot|Potion of Regeneration Enhanced}}
+| {{Slot|Splash Potion of Regeneration Enhanced}}
+| {{Slot|Lingering Potion of Regeneration Enhanced}}
+| {{Slot|Arrow of Regeneration Enhanced}}
+|-
+| rowspan="3" | [[力量药水]]
+| rowspan="3" | {{color|#FFC700}}
+| {{code|strength}}
+| 31
+| {{EffectLink|Strength}} 3:00
+| {{Slot|Potion of Strength}}
+| {{Slot|Splash Potion of Strength}}
+| {{Slot|Lingering Potion of Strength}}
+| {{Slot|Arrow of Strength}}
+|-
+| {{code|long_strength}}
+| 32
+| {{EffectLink|Strength}} 8:00
+| {{Slot|Potion of Strength Extended}}
+| {{Slot|Splash Potion of Strength Extended}}
+| {{Slot|Lingering Potion of Strength Extended}}
+| {{Slot|Arrow of Strength Extended}}
+|-
+| {{code|strong_strength}}
+| 33
+| {{EffectLink|Strength}} II 1:30
+| {{Slot|Potion of Strength Enhanced}}
+| {{Slot|Splash Potion of Strength Enhanced}}
+| {{Slot|Lingering Potion of Strength Enhanced}}
+| {{Slot|Arrow of Strength Enhanced}}
+|-
+| rowspan="2" | [[虚弱药水]]
+| rowspan="2" | {{color|#484D48}}
+| {{code|weakness}}
+| 34
+| {{EffectLink|Weakness}} 1:30
+| {{Slot|Potion of Weakness}}
+| {{Slot|Splash Potion of Weakness}}
+| {{Slot|Lingering Potion of Weakness}}
+| {{Slot|Arrow of Weakness}}
+|-
+| {{code|long_weakness}}
+| 35
+| {{EffectLink|Weakness}} 4:00
+| {{Slot|Potion of Weakness Extended}}
+| {{Slot|Splash Potion of Weakness Extended}}
+| {{Slot|Lingering Potion of Weakness Extended}}
+| {{Slot|Arrow of Weakness Extended}}
+|-
+| [[幸运药水]]{{only|je}}
+| {{color|#59C106}}
+| {{code|luck}}
+| -
+| {{EffectLink|Luck}} 5:00
+| {{Slot|Potion of Luck}}
+| {{Slot|Splash Potion of Luck}}
+| {{Slot|Lingering Potion of Luck}}
+| {{Slot|Arrow of Luck}}
+|-
+|[[衰变药水]]{{only|be}}
+|{{color|#736156}}
+|{{code|wither}}
+| 36
+|{{EffectLink|wither}}II 0:40
+| {{Slot|Potion of Decay}}
+| {{Slot|Splash Potion of Decay}}
+| {{Slot|Lingering Potion of Decay}}
+| {{Slot|Arrow of Decay}}
+|-
+| rowspan="3" | [[神龟药水]]
+| rowspan="2" | {{color|#8D82E6}}
+| {{code|turtle_master}}
+| 37
+| {{EffectLink|Slowness}} IV 0:20<br>{{EffectLink|Resistance}} III 0:20
+| {{Slot|Potion of the Turtle Master}}
+| {{Slot|Splash Potion of the Turtle Master}}
+| {{Slot|Lingering Potion of the Turtle Master}}
+| {{Slot|Arrow of the Turtle Master}}
+|-
+| {{code|long_turtle_master}}
+| 38
+| {{EffectLink|Slowness}} IV 0:40<br>{{EffectLink|Resistance}} III 0:40
+| {{Slot|Potion of the Turtle Master Extended}}
+| {{Slot|Splash Potion of the Turtle Master Extended}}
+| {{Slot|Lingering Potion of the Turtle Master Extended}}
+| {{Slot|Arrow of the Turtle Master Extended}}
+|-
+| {{color|#8D85E6}}
+| {{code|strong_turtle_master}}
+| 39
+| {{EffectLink|Slowness}} VI 0:20<br>{{EffectLink|Resistance}} IV 0:20
+| {{Slot|Potion of the Turtle Master Enhanced}}
+| {{Slot|Splash Potion of the Turtle Master Enhanced}}
+| {{Slot|Lingering Potion of the Turtle Master Enhanced}}
+| {{Slot|Arrow of the Turtle Master Enhanced}}
+|-
+| rowspan="2" | [[缓降药水]]
+| rowspan="2" | {{color|#FFEFD1}}
+| {{code|slow_falling}}
+| 40
+| {{EffectLink|Slow Falling}} 1:30
+| {{Slot|Potion of Slow Falling}}
+| {{Slot|Splash Potion of Slow Falling}}
+| {{Slot|Lingering Potion of Slow Falling}}
+| {{Slot|Arrow of Slow Falling}}
+|-
+| {{code|long_slow_falling}}
+| 41
+| {{EffectLink|Slow Falling}} 4:00
+| {{Slot|Potion of Slow Falling Extended}}
+| {{Slot|Splash Potion of Slow Falling Extended}}
+| {{Slot|Lingering Potion of Slow Falling Extended}}
+| {{Slot|Arrow of Slow Falling Extended}}
+|-
+| [[蓄风药水]]
+| {{color|#BDC9FF}}
+| {{code|wind_charged}}
+| 43
+| {{EffectLink|Wind Charged}} 3:00
+| {{Slot|Potion of Wind Charging}}
+| {{Slot|Splash Potion of Wind Charging}}
+| {{Slot|Lingering Potion of Wind Charging}}
+| {{Slot|Arrow of Wind Charging}}
+|-
+| [[盘丝药水]]
+| {{color|#78695A}}
+| {{code|weaving}}
+| 44
+| {{EffectLink|Weaving}} 3:00
+| {{Slot|Potion of Weaving}}
+| {{Slot|Splash Potion of Weaving}}
+| {{Slot|Lingering Potion of Weaving}}
+| {{Slot|Arrow of Weaving}}
+|-
+| [[渗浆药水]]
+| {{color|#99FFA3}}
+| {{code|oozing}}
+| 45
+| {{EffectLink|Oozing}} 3:00
+| {{Slot|Potion of Oozing}}
+| {{Slot|Splash Potion of Oozing}}
+| {{Slot|Lingering Potion of Oozing}}
+| {{Slot|Arrow of Oozing}}
+|-
+| [[虫蚀药水]]
+| {{color|#8C9B8C}}
+| {{code|infested}}
+| 46
+| {{EffectLink|Infested}} 3:00
+| {{Slot|Potion of Infestation}}
+| {{Slot|Splash Potion of Infestation}}
+| {{Slot|Lingering Potion of Infestation}}
+| {{Slot|Arrow of Infestation}}
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|Java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|随着[[药水酿造]]机制的完成，加入了药水效果。
+|此时药水效果依赖于药水物品生效，依据药水的损伤值来区分。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|重做了药水酿造机制。}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了夜视药水及其延长版药水效果。}}
+|{{HistoryLine|||dev=12w34a|加入了隐身药水及其延长版药水效果。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了水肺药水及其延长版药水效果。}}
+|{{HistoryLine||1.8|dev=14w27a|加入了跳跃药水及其增强版药水效果。}}
+|{{HistoryLine||1.8.1|dev=1.8.1-pre1|加入了延长版跳跃药水效果。}}
+|{{HistoryLine||1.9|dev=15w31a|现在药水效果是独立于药水物品的游戏内容，每种药水效果都分配了独立的命名空间ID，而非依赖于药水物品的损伤值。
+|移除了自Beta 1.9-pre3起遗留的29种未使用的药水效果，详见{{slink|药水/Java版1.9前#未使用的药水}}。}}
+|{{HistoryLine|||dev=15w44b|加入了幸运药水和不可合成的药水药水效果。}}
+|{{HistoryLine||1.13|dev=18w07a|加入了神龟药水及其延长版和增强版药水效果。
+|加入了增强版迟缓药水效果。}}
+|{{HistoryLine|||dev=18w14a|加入了缓降药水及其延长版药水效果。}}
+|{{HistoryLine||1.20.5|dev=24w09a|现在不再允许未注册的药水效果ID。
+|现在只有在不指定药水效果时才会使用“不可合成的药水”效果，此前它的药水效果ID为<code>minecraft:empty</code>。
+|对于物品，药水效果现在储存于<code>potion_contents</code>物品堆叠组件的<code>potion</code>中，此前它储存于物品NBT的<code>Potion</code>中。
+|对于区域效果云，药水效果现在存储于<code>potion_contents</code>标签的<code>potion</code>中，而不是<code>Potion</code>标签中。
+|对于箭，药水效果现在由内部的物品保存，而非<code>Potion</code>标签。}}
+|{{HistoryLine|||exp=update_1_21|dev=24w13a|加入了蓄风、虫蚀、渗浆和盘丝药水效果。}}
+|{{HistoryLine||1.21|dev=24w18a|24w13a加入的药水效果不再属于实验性内容。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了迅捷、迟缓、力量、治疗、伤害、跳跃提升、再生、抗火、水肺、隐身、夜视、虚弱、剧毒和衰变药水效果。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.5.0|dev=1.5.0.4|加入了神龟药水及其延长版和增强版药水效果。}}
+|{{HistoryLine||1.6.0|dev=1.6.0.5|加入了缓降药水及其延长版药水效果。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|加入了蓄风、虫蚀、渗浆和盘丝药水效果。}}
+}}
+
+== 导航 ==
+{{Navbox potion effects}}
+{{Navbox gameplay}}
+
+[[Category:药水效果| ]]

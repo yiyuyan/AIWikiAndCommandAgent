@@ -1,0 +1,186 @@
+# 页面: Java版25w36a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8825w36a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:36
+# 原始 Wikitext 内容:
+
+{{dangerous version|游戏会在渲染末影箱、其他玩家或玩家模型刷怪笼时崩溃。<ref>{{bug|MC-301745|||Fixed}}</ref><ref>{{bug|MC-301749|||Fixed}}</ref><ref>{{bug|MC-301751|||Fixed}}</ref>}}
+{{Infobox version
+|title=25w36a
+|image=25w36a.png
+|image2=Java Edition 25w36a Simplified.png\Java Edition 25w36a Traditional.png\Java Edition 25w36a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2025年9月2日
+|jsonhash=4ea6923a98f7abec2914a7e51ebec23cecf09e11
+|clienthash=ae36ffc5291e78d5157346d4d6f275938baa9742
+|clientmap=1f66a65e2aaf58af9ec944f3b072f703a4c39543
+|serverhash=4d094c84219be8bbe23bcec02e1c016e12717e17
+|servermap=16fbcd86b56362a06269cef21b3ad784d8264b5f
+|parent=1.21.9
+|prevparent=1.21.8
+|prev=25w35a
+|next=25w36b
+|nextparent=1.21.10
+}}<onlyinclude>
+
+'''25w36a'''是[[Java版1.21.9]]的第7个快照，发布于2025年9月2日<ref>{{snap|25w36a|Sept 02, 2025}}</ref>，加入了[[玩家模型]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 生物 ===
+'''[[玩家模型]]'''
+* 一种技术性实体，仅能由{{cmd|summon}}生成。
+* 相当于没有被真实玩家操控的玩家实体。
+* 行为继承类似[[盔甲架]]，可以穿戴装备、手持物品、受到状态效果和属性影响、受到伤害，等等。
+* 在玩家的<code>below_score</code>[[记分板#显示位置|记分板显示位置]]处总会显示“NPC”。
+* 在[[生物#实体数据|生物数据格式]]的基础上，额外有如下字段：
+<div class="treeview">
+:* {{nbt|compound}} 实体数据
+:** {{nbt|string}}{{nbt|compound|profile}}：指定玩家游戏档案（格式同<code>profile</code>[[数据组件]]）或玩家模型档案。玩家模型档案格式见下：
+:*** {{nbt|string|texture|required=1}}：所使用[[皮肤]]纹理的命名空间ID，即使用{{filepath|textures}}目录下的{{filename|.png}}文件。如<code>entity/player/wide/steve</code>会使用默认的Steve皮肤。
+:*** {{nbt|string|cape}}：所使用[[披风]]纹理的命名空间ID。此字段不存在时，玩家模型没有披风。
+:*** {{nbt|string|elytra}}：所使用[[鞘翅]]纹理的命名空间ID。此字段不存在时，玩家模型使用披风纹理（若有）或使用默认鞘翅纹理。
+:*** {{nbt|string|model}}：（默认为<code>wide</code>）玩家模型类型，可以为{{cd|d=或|wide|slim}}。
+:** {{nbt|list|hidden_layers}}：需隐藏的外部皮肤层列表，可以包含{{cd|d=pretty|cape|jacket|left_sleeve|right_sleeve|left_pants_leg|right_pants_leg|hat}}。
+:** {{nbt|string|main_hand}}：哪只手是玩家模型的主手，可以为{{cd|d=或|left|right}}。
+</div>
+
+== 更改 ==
+=== 方块 ===
+'''[[铜火把]]和[[铜灯笼]]'''
+* 更改了颜色以方便色盲玩家区分于其他类似方块。
+
+'''[[铜傀儡像]]'''
+* 破坏后，方块状态<code>copper_golem_pose</code>和数据组件<code>custom_name</code>现在会保存到掉落物中。
+* 现在默认具有数据组件<code>block_state</code>。
+
+'''[[展示架]]'''
+* 现在激活的展示架只能连接到同方向的展示架。
+
+=== 物品 ===
+'''[[铜盔甲]]'''
+* 使用[[铜锭]]为铜盔甲附加盔甲纹饰时，纹饰颜色现在会更深。
+
+=== 游戏内容 ===
+'''[[世界边界]]'''
+* 现在每个维度的世界边界相互独立。
+** 现在可以为每个维度单独设置世界边界的尺寸、位置等。
+
+'''[[Java版粒子|粒子]]'''
+* 现在玩家视野外的粒子不再渲染，以提升部分场景下的性能。
+
+'''[[末地闪光]]'''
+* 末影龙[[迷雾]]激活时，末地闪光源会隐藏，且末地闪光对世界的亮度影响会降低。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|86.0}}。
+
+'''[[粒子数据格式]]'''
+* <code>dragon_breath</code>粒子现在可以接受参数<code>power</code>（浮点数，默认为1），在随机数计算完毕后初始速度将乘上此值。
+* <code>instant_effect</code>和<code>effect</code>粒子现在可以接受参数<code>power</code>（浮点数，默认为1）和<code>color</code>（RGB颜色，默认为<code>0xFFFFFF</code>）。
+* <code>flash</code>现在必须指定参数<code>color</code>（ARGB颜色）。
+
+'''{{tr|服务器行为准则|伺服器行為準則|伺服器行為守則}}屏幕'''
+* 现在文件中的格式化代码不会显示。
+
+'''[[控制]]'''
+* 被分配相同按键的多个操作现在会同时工作，先前只有一个工作。
+** 例如，现在可以为“{{tr|向前移动|前進|向前移動"}}”和“{{tr|跳跃|跳躍}}”同时绑定{{keys|W}}键，则按下该键会同时执行前进和跳跃操作。
+** 因此，先前提示多个操作分配同一按键的红色指示条改为了黄色。
+* 旁观模式玩家快捷栏现在可以绑定按键。
+** 其与既有的“{{tr|高亮玩家|標示玩家}}”共同在新分类“{{tr|旁观|旁觀者|旁觀}}”下。
+
+'''用户界面'''
+* 现在双击编辑界面的文本会选中该文本。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|68.0}}。
+
+'''[[着色器]]'''
+* 移除了未使用的着色器：
+** {{cd|d=*|core/position_color_lightmap.vsh|core/position_color_lightmap.fsh|core/position_color_tex_lightmap.vsh|core/position_color_tex_lightmap.fsh}}
+* 修改了{{cd|core/terrain.vsh}}中函数{{cd|minecraft_sample_lightmap}}中UV计算的部分。
+
+== 修复 ==
+{{fixes|fixedin=25w36a|showdesc=1|new=1
+|;old
+|223142|玩家能在旁观标记时移动。
+|225088|亮度低时，主世界表层比之前更暗。
+|234737|“EmtyPoolElement”异常信息中包含错误拼写。
+|236508|“{{tr|添加服务器|新增伺服器}}”菜单内的标题显示为“{{tr|编辑服务器信息|編輯伺服器資訊}}”。
+|237590|渲染距离和模拟距离滑动条内的“chunks”一词存在不当大小写。
+|238273|“{{tr|被另一个正在运行的Minecraft实例锁定|被另一個正在執行的 Minecraft 鎖定|被另一個開啟的 Minecraft 程式鎖定}}”缺少标点符号。
+|249205|在创造模式下通过{{ctrl|使用}}水瓶创造泥巴会导致<code>minecraft.used:minecraft.potion</code>增加2。
+|250062|游戏中有几个字符串包含逗号拼接。
+|250193|服务器日志在加密过程中断开连接时未使用玩家游戏档案的字符串表示。
+|254052|{{cmd|locate|link=none}}不在建筑高度限制外工作。
+|254668|在死亡屏幕的标题屏幕警告上按下{{key|Esc}}会使玩家重生。
+|257792|交易菜单的输出槽位偏离中心。
+|258191|根部系统地物允许垂根的垂直跨度为0，导致报错。
+|259347|用铁桶右键位于建筑高度限制的方块顶部时会显示高度限制警告消息。
+|262370|部分多人游戏字符串不可翻译。
+|264962|包含给定行为的两个输入的字符串具有不一致的字距和省略号。
+|265807|生物不会在其<code>Air</code>NBT低于-19时溺水。
+|277975|物品提示框中命令执行警告的首行缺少标点符号。
+|278435|即使原版数据包中指定了蘑菇岛生物群系生成南瓜斑块，南瓜斑块也不会在蘑菇岛生成。
+|279123|部分引用Minecraft Realms的字符串使用不一致的动词形式或缺少动词。
+|279153|部分提及属性基值的字符串缺少冠词。
+|279173|<code>chat.disabled.invalid_command_signature</code>字符串中的“Command”一词前缺少一个冠词。
+|279174|<code>gamerule.spawnChunkRadius.description</code>字符串中的“Amount”一词前缺少一个冠词。
+|279175|部分多人游戏断开连接字符串中缺少冠词和指示代词。
+|279176|<code>gamerule.commandModificationBlockLimit.description</code>字符串中的“Number”一词前缺少一个冠词。
+|279212|部分旁白字符串缺失冠词和所有格限定词。
+|295829|测试实例方块GUI使用“批次”而非“环境”。
+|298605|创建“水世界”超平坦世界时，玩家在海底出生。
+|299105|Tears和Lava Chicken音乐唱片的“desc”翻译未使用。
+|;1.21.8的漏洞
+|301619|控制台消息中使用的游戏模式翻译键会在无权限的玩家尝试切换其游戏模式时发出。
+|;dev
+|300055|能在手持蜜脾时通过更改铜傀儡像的姿势来达成进度“{{Advancement name|husbandry.wax_on|zh|rev=1}}”。
+|300088|被铜傀儡放置于大型箱子中的物品不会更新在大型箱子右侧读取信号的红石比较器。
+|300109|由避雷针引出的闪电束不会移除避雷针的氧化状态。
+|300169|铜傀儡像的<code>CustomName</code>标签未在被挖掘后保留。
+|300192|铜没有颜色更深的纹饰。
+|300201|破坏带有姿势的铜傀儡像不会保留其姿势。
+|300416|铜傀儡偏向寻路到西北的箱子。
+|300558|铜傀儡能在未持有适当的钥匙物品时打开上锁的箱子。
+|300729|锈蚀或斑驳的铜栏杆上有错误或异常明显的像素。
+|300961|尸壳的盔甲图层不再表现出尸壳相较于其他人形生物更大的尺寸。
+|301099|铜傀儡的头上穿戴的铜箱子不可见。
+|301250|在观看鸣谢名单时退出游戏模式切换器（{{key|F3+F4}}）后，玩家仍未恢复观看状态，而是以幻影状态留在末地，直到重新登录。
+|301258|行走姿势的铜傀儡像的脖子有一点从手臂中探出。
+|301259|展示架方块实体数据中的<code>align_items_to_bottom</code>无效。
+|301261|铜傀儡像的右臂未与其身体相连。
+|301276|修剪铜傀儡时，手部动画不再播放。
+|301277|带地图或画的物品展示框不再能共用一个角落。
+|301278|行为准则屏幕会渲染回车字符。
+|301283|{{ctrl|疾跑}}和{{ctrl|潜行}}输入键会在被按下且屏幕打开的同时“卡住”。
+|301310|Realms菜单中的“立即转移”按钮在选择框外显示。
+|301312|注视铜傀儡时不能开始{{ctrl|使用}}物品。
+|301324|坐下的铜傀儡像的鼻子被异常翻转。
+|301330|恶意服务器能强制客户端在行为准则界面卡住。
+|301374|唤魔者现在会在和平难度下生成。
+|;prev
+|301519|在游戏规则<code>enableCommandBlocks</code>为<code>false</code>时，尝试在非服务器上使用命令方块会产生“{{tr|此服务器未启用命令方块|這個伺服器不允許使用指令方塊|此伺服器已經停用命令方塊}}”。
+|301523|部分游戏规则描述字符串包含不一致的末尾标点和多余的“or not”，且语法不正确。
+|301524|旗帜上的方块破坏动画现在会随已有的每种图案放大。
+|301546|附近有另一个钟时，钟不会显示响铃动画。
+|301577|方块光源在天空光照下会产生围绕自身的阴影。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:25w36a]]
+[[en:Java Edition 25w36a]]
+[[es:Java Edition 25w36a]]
+[[fr:Édition Java 25w36a]]
+[[ja:Java Edition 25w36a]]
+[[lzh:爪哇版二五週三六甲]]
+[[pt:Edição Java 25w36a]]
+[[ru:25w36a (Java Edition)]]
+[[uk:25w36a (Java Edition)]]

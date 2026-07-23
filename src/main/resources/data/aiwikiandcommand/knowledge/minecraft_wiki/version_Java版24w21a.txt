@@ -1,0 +1,277 @@
+# 页面: Java版24w21a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w21a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w21a
+|image=24w21a.png
+|image2=Java Edition 24w21a Simplified.png\Java Edition 24w21a Traditional.png\Java Edition 24w21a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年5月22日
+|jsonhash=a7346493faf4a8fd8bb4b9ea179ab60345d70b20
+|clienthash=e01724ca24f6ad9e0f4669ab63d08a7a23e82be2
+|clientmap=d4f9ffcc966ba9b479c261211030719431508cb3
+|serverhash=6ba7192e60bedb3ff02db3c57b75f7ea56c63242
+|servermap=69fd349bdd8ca1c79e57240e8eae9550d25565fd
+|parent=1.21
+|prevparent=1.20.6
+|prev=24w20a
+|next=24w21b
+|nextparent=1.21.1
+}}<onlyinclude>
+
+'''24w21a'''是[[Java版1.21]]的第5个快照，发布于2024年5月22日<ref>{{snap|24w21a|May 22, 2024}}</ref>，加入了新的[[游戏规则]]，实现了唱片音乐的数据驱动，更改了生物惊慌机制和[[属性修饰符]]ID，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''[[目标选择器]]'''
+* 加入了目标选择器类型<code>@n</code>，用于选择最近的实体。
+** 类似于<code>@e[sort=nearest,limit=1]</code>的功能。
+** 仍可指定参数，如<code>@n[type=pig]</code>会选中最近的[[猪]]。
+
+=== 常规 ===
+'''[[游戏规则]]'''
+* 加入了<code>entitiesWithPassengersCanUsePortals</code>游戏规则。
+** 设置为<code>true</code>时，带有乘客的实体可以穿过[[下界传送门]]、[[末地传送门]]和[[末地折跃门]]。
+** 默认为<code>false</code>。
+
+'''[[数据包]]'''
+* 加入了{{filepath|jukebox_song}}文件夹，现在[[唱片机]]音乐可由数据驱动。
+** 音乐注册表路径为{{filepath|data/<''命名空间''>/jukebox_song/<''id''>.json}}。
+
+'''唱片音乐'''
+* 音乐定义文本包含以下字段：
+<div class="treeview">
+:* {{nbt|compound}} 父标签。
+:** {{nbt|string}}{{nbt|compound|sound_event}}：由唱片机播放的流媒体声音事件。
+:*** {{nbt|string|sound_id}}：声音事件的命名空间ID。
+:*** {{nbt|float|range}}：（可选）声音可以传播的最远距离。
+:** {{nbt|string}}{{nbt|compound|description}}：在悬停[[提示框]]中以[[文本组件格式]]显示的音乐名称。
+:** {{nbt|float|length_in_seconds}}：（大于0）音乐播放的秒数。
+:** {{nbt|int|comparator_output}}：（不小于0且不大于15）音乐在唱片机中播放时，红石比较器输出的[[红石信号]]强度。
+</div>
+
+'''[[物品堆叠组件]]'''
+* 加入了<code>jukebox_playable</code>组件。
+<div class="treeview">
+:* {{nbt|compound|jukebox_playable}} 物品堆叠组件
+:** {{nbt|string|song}}：物品放入唱片机时播放的唱片音乐ID。
+:** {{nbt|bool|show_in_tooltip}}：（可选，默认为<code>true</code>）音乐名称是否在物品提示框中显示。此前这由{{nbt|bool|hide_additional_tooltip}}控制。
+</div>
+:* 存在时，物品可放入唱片机以播放音乐。
+:* 示例：<code>jukebox_playable={song:'minecraft:precipice'}</code>或<code>jukebox_playable={song:'minecraft:precipice', show_in_tooltip:false}</code>。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下方块标签：
+** {{cd|#air}}：{{cd|d=pretty|air|void_air|cave_air}}。
+*** 所有类空气方块。
+* 加入了以下伤害类型标签：
+** {{cd|#panic_environmental_causes}}：{{cd|d=pretty|cactus|freeze|hot_floor|in_fire|lava|lightning_bolt|on_fire}}。
+*** 会使[[生物#条件敌对|条件敌对动物]]惊慌（进行反击）的伤害类型。
+** {{cd|#panic_causes}}：{{cd|d=pretty|#panic_environmental_causes|arrow|dragon_breath|explosion|fireball|fireworks|indirect_magic|magic|mob_attack|mob_projectile|player_attack|player_explosion|sonic_boom|sting|thrown|trident|unattributed_fireball|wind_charge|wither|wither_skull}}。
+*** 会使被动型动物惊慌（尝试逃走）的伤害类型。
+
+'''[[Java版声音事件|声音事件]]'''
+* 加入了<code>block.vault.reject_rewarded_player</code>声音事件。
+
+'''[[物品子谓词]]'''
+* 加入了新的物品子谓词<code>jukebox_playable</code>，作为<code>jukebox_playable</code>组件（如[[音乐唱片]]的默认组件）的匹配器。
+** 包含唯一字段<code>song</code>，可为需匹配唱片机音乐的单个ID、ID列表或标签。
+
+'''[[战利品上下文#参数集|战利品上下文参数集]]'''
+* 加入了战利品上下文参数集<code>hit_block</code>，用于魔咒效果组件<code>minecraft:hit_block</code>的战利品上下文。
+** <code>hit_block</code>参数：
+*** <code>this</code>：击中方块的实体
+*** 魔咒等级
+*** 来源
+*** 方块状态
+
+'''服务器链接'''
+* 服务端现在可向客户端提供链接列表。
+** 如果客户端已经接收到任意链接，[[游戏菜单]]中将会显示一个名为“{{tr|服务器链接…|伺服器連結...}}”的新按钮。
+*** 为了给这个按钮腾出空间，“{{tr|报告漏洞|回報錯誤|報吿錯誤}}”和“{{tr|提供反馈|提供意見回饋|提供意見回饋}}”按钮可能会在必要时移动到子界面内。
+* {{tr|内置|內建}}链接<code>report_bug</code>：
+** 如果断开连接是由{{tr|数据包|封包}}处理错误造成的，则此链接将在断开连接屏幕上显示。
+** 链接会以注释形式写于断开连接报告中。
+
+'''断开连接屏幕'''
+* 现在客户端将在某些情况下存储有关断开连接的详细信息（类似于崩溃报告），并显示新增的“{{tr|打开报告目录|開啟報告資料夾|打開報告檔案目錄}}”按钮。
+** 此按钮也将在服务端提供漏洞报告链接时显示。
+
+'''自定义服务端崩溃报告'''
+* 在{{cd|d=pretty|configuration|game}}协议中加入了新的客户端绑定{{tr|数据包|封包}}<code>server_links</code>。
+** 包含一个键值文本列表。
+** 如果被接收，此{{tr|数据包|封包}}的内容将被添加到与服务器连接期间生成的任何崩溃或断开连接报告的单独部分。
+
+'''[[server.properties]]'''
+* 加入了<code>bug-report-link</code>以允许原版服务器配置<code>report_bug</code>链接。
+** 需为格式完整的URL。
+** 如果此字段不为空，服务端将把该链接发送给客户端。
+
+== 更改 ==
+=== 方块 ===
+'''[[活塞]]'''
+* 回退了24w20a的音效更改，并降低了原音效的音量和衰减距离。
+
+'''[[宝库]]'''
+* 现在玩家在已经解锁的宝库旁边时会播放新音效。
+
+=== 物品 ===
+'''[[音乐唱片]]'''
+* 现在默认具有<code>jukebox_playable</code>物品堆叠组件。
+
+'''[[锻造模板]]'''
+* 镶铆盔甲纹饰锻造模板现在可以用[[涂蜡的铜块]]复制。
+
+=== 生物 ===
+'''[[动物]]'''
+* 动物现在根据预定义的伤害类型来源造成的伤害而惊慌，且惊慌时间从4秒减至2秒。
+* 动物受到下列类型伤害后会保持惊慌2秒：
+** <code>#panic_environmental_causes</code>：用于[[狼]]、成年[[北极熊]]和[[熊猫]]。
+** <code>#panic_causes</code>：用于除以上提及动物外的所有动物，包括幼年北极熊。
+
+'''[[玩家]]'''
+* 现在重生时总会恢复到最大生命值而非固定{{hp|20}}生命值。
+
+'''[[旋风人]]'''
+* 受到攻击后不再会尝试反击。<ref>{{bug|MC-273018}}</ref>
+
+'''常规'''
+* 实体属性现在储存于<code>attributes</code>中，包含以下字段：
+** {{nbt|string|id}}，由{{nbt|string|Name}}重命名。
+** {{nbt|double|base}}，由{{nbt|double|Base}}重命名。
+** {{nbt|list|modifiers}}，由{{nbt|list|Modifiers}}重命名。
+*** 现在会储存为与<code>attribute_modifiers</code>物品堆叠组件中修饰符的相同格式。
+
+=== 世界生成 ===
+'''[[试炼密室]]'''
+* 现在更少地生成于[[深暗之域]]中。
+
+'''[[下界传送门]]'''
+* 现在非玩家实体在另一维度不存在已被激活的下界传送门时也能跨越维度。
+* 现在非玩家实体也能在另一维度生成对应的下界传送门。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* “{{Advancement name|adventure.play_jukebox_in_meadows|zh|rev=1}}”进度现在需求唱片机播放具有<code>jukebox_playable</code>组件而非<code>#music_discs</code>物品标签的物品。
+
+'''[[创造模式物品栏]]'''
+* 现在具有自定义魔咒的[[附魔书]]也会在创造模式物品栏中出现。
+
+'''[[饥饿]]'''
+* 现在[[难度]]为和平且游戏规则<code>naturalRegeneration</code>为<code>true</code>时，玩家每{{convert|20}}增加1点饱和度，直到饱和度达到20。
+* 现在难度为和平且饱和度耗尽时，玩家饥饿条不再抖动。
+
+=== 命令格式 ===
+'''{{cmd|attribute}}'''
+* 移除了{{cd|d=pretty|uuid|name}}参数，取而代之的是单个<code>id</code>参数。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|45}}。
+* 重命名以下数据包文件夹：
+** {{filepath|structures}} → {{filepath|structure}}
+** {{filepath|advancements}} → {{filepath|advancement}}
+** {{filepath|recipes}} → {{filepath|recipe}}
+** {{filepath|loot_tables}} → {{filepath|loot_table}}
+** {{filepath|predicates}} → {{filepath|predicate}}
+** {{filepath|item_modifiers}} → {{filepath|item_modifier}}
+** {{filepath|functions}} → {{filepath|function}}
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|34}}。
+
+'''[[属性]]'''
+* 移除了属性修饰符的UUID和名称，取而代之的是唯一命名空间ID。
+** 现在在不同修饰符中的不同属性允许使用相同的ID。
+* 现有的自定义修饰符会升级为<code>minecraft</code>命名空间下的GUID。
+
+'''[[物品堆叠组件]]'''
+* 移除了<code>attribute_modifiers</code>组件中的{{cd|d=pretty|uuid|name}}参数，并加入了必选的<code>id</code>（命名空间ID）字段，作为修饰符内每个属性的唯一标识符。
+
+'''玩家谓词'''
+* <code>gamemode</code>字段现在接受一个[[游戏模式]]列表。
+
+'''[[魔咒效果组件]]'''
+* 现在实体效果类型<code>damage_item</code>不会降低[[创造模式]]玩家所持物品耐久。
+
+'''[[Java版标签|标签]]'''
+* 重命名以下标签文件夹：
+** {{filepath|tags/functions}} → {{filepath|tags/function}}
+* 移除了物品标签{{cd|#music_discs}}。
+* 移除了伤害类型标签{{cd|#breeze_immune_to}}。
+
+'''[[着色器]]'''
+* 移除了未使用的<code>armor_glint</code>着色器和核心着色器定义中的<code>blend</code>方块。
+* 移除了{{cd|d=pretty|position_color_tex|glint_direct}}着色器，并将现存的{{cd|d=pretty|position_tex_color|glint}}着色器作为替代。
+
+'''[[Realms]]'''
+* 现在受所有者邀请的玩家都能升级Realm世界。
+* 现在Realms主菜单中会显示Realm内的在线玩家皮肤。
+** 鼠标悬停时会显示这些玩家的-{}-头像和名称。
+
+== 修复 ==
+{{fixes|fixedin=24w21a|veralias=1|showdesc=1
+|;old
+|67|带乘客的实体不能穿越传送门。
+|31819|饥饿饱和度在和平难度下消耗。
+|116279|非玩家实体穿过下界传送门时不会在下界生成不存在的对应传送门。
+|151648|非玩家实体不能穿越未经连接的下界传送门。
+|170103|未驯服的狼仅在被激怒和跳跃时乞求食物。
+|253209|一些生物在受到中毒或凋零伤害时不再惊慌。
+|260346|自定义音乐唱片于原版唱片自然结束播放处中止。
+|262469|驾驶船穿越末地折跃门时不会达成“{{Advancement name|end.enter_end_gateway|zh|rev=1}}”进度。
+|266290|涂蜡的和未涂蜡的铜门即使变种相同也不会自动形成双开门。
+|266586|试炼密室能直接生成在深暗之域生物群系中。
+|266626|旋风人与玩家在同一队伍中时不会停止攻击玩家。
+|267498|{{cmd|attribute|link=none}}中和物品修饰器<code>set_attributes</code>中的运算模式名称互不相同。
+|267967|旋风人无视<code>deflects_projectiles</code>实体类型标签。
+|268438|幼年犰狳仍能在蜷缩时吃东西。
+|269034|狼不再在尝试寻路离开熔岩时传送。
+|269351|镶铆盔甲纹饰不能用涂蜡的铜块复制。
+|269370|重锤猛击产生的粒子上限异常导致大量延迟。
+|269460|实体被风弹击中时不会触发荆棘魔咒。
+|269964|不祥之物生成器不会加载<code>spawn_item_after_ticks</code>NBT。
+|269988|苦力怕爆炸时，新药水效果不会以各自行为生效。
+|270024|饮用不祥之瓶时，等级较高的不祥之兆能被较低倍率覆盖。
+|270377|风弹会在被投掷出的同时被击偏。
+|270573|被骑乘的实体免疫风弹伤害。
+|270749|在折跃门旁投掷末影珍珠以进入其中时不会达成“{{Advancement name|end.enter_end_gateway|zh|rev=1}}”进度。
+|270808|<code>armor.body</code>槽位中的任何物品都能保护狼免受伤害。
+|;dev
+|271458|在雷暴天，引雷三叉戟每次击中避雷针不再生成闪电束。
+|271573|属性魔咒在盔甲上的表现不正常。
+|271634|自定义魔咒不会在创造模式菜单中显示。
+|271718|当<code>randomized_int_state_provider</code>应用于缺少属性的方块时崩溃。
+|271753|由于<code>by_cost_with_difficulty</code>中的花费计算溢出而崩溃。
+|271856|附有快速装填的弩在副手中使用时不会受其增益。
+|271868|冰霜行者现在会替换水流。
+|271901|实体效果<code>play_sound</code>中字段<code>pitch</code>数值上限为1.0而非2.0。
+|271911|冰霜行者不再对虚空空气和洞穴空气生效。
+|271914|带有灵魂疾行魔咒的实体被玩家操控时不会产生粒子。
+|272039|灵魂疾行在创造模式下消耗耐久。
+|272182|在生存或冒险模式中，知识之书不再在堆叠数量为1时正常生效。
+|;prev
+|272042|玩家如果在最大生命值大于20时死亡，重生后只有20生命值而非它们的最大生命值。
+|272043|带有渗浆效果的实体死亡时游戏崩溃。
+|272075|在控制实体且快速移动时尝试走上一格方块经常会出现故障。
+|272084|带有药水效果的苦力怕不再在爆炸时创造区域效果云。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:24w21a]]
+[[en:Java Edition 24w21a]]
+[[es:Java Edition 24w21a]]
+[[fr:Édition Java 24w21a]]
+[[ja:Java Edition 24w21a]]
+[[pt:Edição Java 24w21a]]
+[[ru:24w21a (Java Edition)]]
+[[uk:24w21a (Java Edition)]]

@@ -1,0 +1,544 @@
+# 页面: Java版20w14∞
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8820w14%E2%88%9E
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:26
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|为无暇应对无谓事物的玩家所准备的生物群系|令玩家無暇胡思亂想的生態域|無暇應對無謂事物的玩家的生物羣落}}{{about|愚人节玩笑快照|同一周发布的正常快照|Java版20w14a}}{{April Fools}}{{Dangerous version|某些随机生成的生物群系可能会导致游戏崩溃。}}
+{{Infobox version
+|title=20w14∞
+|image=20w14infinite.png
+|image2=Java Edition 20w14infinite Simplified.png\Java Edition 20w14infinite Traditional.png
+|edition=Java
+|type=Snapshot
+|name=终极内容更新
+|date=2020年4月1日
+|clienthash=cc5cb23748614a6396ffb77427b4f11f4b6ae99b
+|clientmap=9c696595b65e342a25ff96d7375b744c8a8aa51d
+|jsonhash=c72805a04a8e08cd5d773230293dc88ccf2e5f4e |jsonfile=20w14infinite
+|serverhash=c0711cd9608d1af3d6f05ac423dd8f4199780225
+|servermap=428c32326e6fd1e4a2bade80e6f277b75e497eee
+|prev=3D Shareware v1.34
+|next=22w13oneBlockAtATime
+}}
+{{quote|这个快照的创建用上了我们长期安全保存的玩家反馈汇总，结合了高度先进的机器学习，以及我们在[https://twitter.com/Dinnerbone/status/1236976106194055169 最近一次研讨会]期间从[[Dinnerbone]]办公桌上“借来”的一些随机旧算法，使得'''想象全部化为现实'''。访问的过程非常简单：只需拿起一本[[书与笔|书]]，在里面写几个字，把它扔进一个[[下界传送门]]，搞定——随后即可进入一个独特的世界。想要一个由苦力怕组成的海洋世界？行！胡萝卜变成音符盒、太阳变成末影人的世界？当然可以。可能性''无穷无尽''。|[[Per Landin]]<ref>{{article|every-update-imaginable-coming-minecraft|Every update imaginable coming to Minecraft}}</ref>||Mojavatar-Per-Landin.png}}
+
+'''20w14∞'''（启动器内称'''20w14infinite'''，游戏内称'''20w14~'''），亦称“'''无限快照（Infinity Snapshot）'''”，<ref>{{tweet|Minecraft|1245366688390021122|You asked; our really fancy machine learning algorithm listened. Introducing Java snapshot 20w14∞: the Infinity Snapshot.<br><br>Download it here, and enter a new dimension:<br><br>↣ http://redsto.ne/infinitysnapshot… ↢|April 1, 2020}}</ref>是一个[[愚人节玩笑]]快照，也是所谓“'''终极内容更新（Ultimate Content Update）'''”的唯一一个快照，发布于2020年4月1日，加入了由程序生成的大量新维度，其将各种已有的游戏元素随机杂糅在一起，并且有特殊的进入方式。
+
+此版本由[[Java版20w13b]]分叉而来，独立于Minecraft开发的主分支。
+
+尽管是个愚人节玩笑，但[[自定义维度]]和[[自定义世界生成]]已在[[20w21a]]和[[20w28a]]分别实现。
+
+== 新内容 ==
+=== 方块 ===
+'''[[File:Box of Infinite Books Yellow.png|32px]][[File:Box of Infinite Books Blue.png|32px]][[File:Box of Infinite Books Red.png|32px]][[File:Box of Infinite Books Green.png|32px]] [[无限书盒]]（Box of Infinite Books）'''
+* 其[[命名空间ID]]为<code>minecraft:book_box</code>。
+** 它在5个面上都使用[[橡木木板]]的纹理，而在另外一面它拥有根据坐标随机分配的、类似书架的纹理。
+* [[斧]]会加速挖掘速度，被破坏后会掉落自身。
+* 当{{ctrl|使用}}时，如果该方块不在其所在区块的某一边缘并且朝向该边缘，就会生成一本随机的[[成书]]。这本书能够被扔进[[下界传送门]]。
+** 这本随机的书与该方块是完全绑定在一起的，因此使用同一个无限书盒多次始终会获得同一本成书。
+*** 标题采用<code>-{}-<''区块X''>/<''区块Z''>/<''方块方向''>/<''本区块边缘至该方块右侧的距离''>/<''方块Y''></code>的格式，因此来自同一方块的书总是会拥有相同的标题和内容。
+** 每本书的作者都是“Universe itself”（宇宙本身），并且每本书都有16页，上面写满了随机的文本。
+* 方块在“library”和“isolation”维度是自然生成的。
+* 该方块纹理上的书本颜色是随机的。
+* 若[[游戏规则]]<code>doTileDrops</code>设为<code>false</code>，则不会生成成书。
+* 蓝色变种用于物品栏图标。
+
+'''{{animate|Neither Portal (white).png; Neither Portal (orange).png; Neither Portal (magenta).png; Neither Portal (light blue).png; Neither Portal (yellow).png; Neither Portal (lime).png; Neither Portal (pink).png; Neither Portal (gray).png; Neither Portal (light gray).png; Neither Portal (cyan).png; Neither Portal (purple).png; Neither Portal (blue).png; Neither Portal (brown).png; Neither Portal (green).png; Neither Portal (red).png; Neither Portal (black).png|32px}}[[时髦的传送门（方块）|时髦的传送门]]（Funky Portal）'''
+* 其方块ID为<code>minecraft:neither_portal</code>。
+* 如果任何成书——无论是由无限书盒生成的还是由[[玩家]]写成的，被扔进一个下界传送门后，这些传送门方块就会变为时髦的传送门方块。进入这个新的传送门会将玩家传送到一个随机的新[[维度]]。
+** 将书扔进传送门后，这本书会被摧毁，不能穿过自己所转变的传送门。
+** 每本书都会生成其自己的维度，并且有着相同页面内容的书也会生成相同的维度。
+*** 如果将一本新的成书扔进时髦的传送门，会改变时髦的传送门传送的目标维度，以最后扔进去的为准。
+** 罕见情况下，将成书扔进下界传送门会导致其变成多种时髦的传送门方块组成的传送门。
+* 时髦的传送门是方块实体。
+* 在时髦的传送门上运行{{cmd|data get block}}会返回包括维度名称的数据。
+* 通往同一维度的传送门有着相同的颜色。
+* 使用{{cmd|setblock ~ ~ ~ neither_portal}}将会放置该方块并给予其随机的方块数据来确定通往的维度。
+* 其也被称为{{tr|不界|地域}}传送门。
+
+'''[[File:Cursor.gif|32px]] [[光标]]（Cursor）'''
+* 光标方块有着每秒钟更换一次的动态纹理，会在绿色和黑色之间不断转换。
+* 其[[命名空间ID]]为<code>minecraft:cursor</code>。
+* 放置或破坏光标方块时会发出石头的声音。
+* 该方块会于“terminal”维度中，在黄绿色[[混凝土]]构成的“C:\”旁作为闪烁的“_”自然生成。
+* 其纹理像是在黑色和黄绿色混凝土之间循环，而“terminal”维度的其余部分也是由这两种混凝土构成的。
+
+'''[[File:An Ant.png|32px]] [[一只蚂蚁]]（An Ant）'''
+* 一只蚂蚁只能通过使用{{cmd|setblock}}或类似的命令才能出现，没有物品形式。
+* 其[[命名空间ID]]为<code>minecraft:ant</code>。
+* 模拟{{Wikipedia|兰顿蚂蚁}}。
+** 如果放置在黑色[[混凝土]]上，右转90度，将该方块改为白色混凝土，向前移一步；如果放置在白色混凝土上，左转90度，将该方块改为黑色混凝土，向前移一步。
+* 一只蚂蚁即为Mojang网站上所提到的图灵机。
+* 多个一只蚂蚁相撞会合并成一个。
+* 自然生成在“ant”维度中，之后立即开始移动。
+* 移动时无视途中的任何方块而直接将其替换。
+
+'''[[File:Swaggiest stairs ever.png|32px]] [[史上最炫楼梯]]（Swaggiest stairs ever）'''
+* [[下界合金块]]的楼梯变种。
+* 其命名空间ID为<code>minecraft:netherite_stairs</code>。
+* 无法合成。
+* 可以用[[镐]]采集。
+* 在“missing”维度中自然生成，作为通向[[箱子]]的楼梯。
+
+'''[[剩余物]]（Leftover）'''
+* 剩余物只能通过使用{{cmd|setblock}}或类似的命令才能出现，没有物品形式。
+* 在游戏中称为“Zone”（结界），其[[命名空间ID]]为{{code|minecraft:zone}}。
+* 该方块是隐形的 ，只会散发出“Happy Villager”[[粒子]]效果。
+* 一个实体进入该方块中会获得{{EffectLink|Blindness}}II和{{EffectLink|Poison}}IV的效果各3秒。
+* 尽管剩余物是隐形的，但无法将其他方块放置在它所在的位置，[[活塞]]也不能将其移动或破坏。
+* 将物品扔入其中后，该物品的重力会发生改变。
+* 在“zones”维度中自然生成。
+* 其也被称为结界方块。
+
+=== 物品 ===
+'''[[File:Footprint.png|32px]] [[脚印]]（Footprint）'''
+* [[命名空间ID]]为<code>minecraft:footprint</code>。
+* 纹理类似于footprint粒子，但有着16×16而非8×8的分辨率，并且还有透明度。
+* 不存在于[[创造模式物品栏]]中，必须通过{{cmd|give}}命令或类似的方法来获得。
+* 没有合成配方。
+* 生成在“missing”维度的箱子中。
+* 最有可能是在致敬已移除的“Footprint”粒子，故其存在于“missing”维度中。
+* 这个物品是基于“脚印”粒子被经常要求加入的命令社区的玩笑。<ref>https://gist.github.com/boq/8e65cb85badc75765eeb8956af78aaa5</ref>
+
+'''[[File:Fine item.png|32px]] [[一个极妙之物]]（A Very Fine Item）'''
+* 其[[命名空间ID]]为<code>minecraft:fine_item</code>。
+* 该物品的纹理为写有“Home Sweet Home”（家，甜蜜的家）的[[草方块]]的侧面。
+* 其不存在于[[创造模式物品栏]]中，必须通过{{cmd|give}}命令或类似的方法来获得。
+* 可以在“isolation”维度中床旁边的物品展示框内找到。
+
+=== 世界生成 ===
+'''[[生物群系]]'''
+[[File:Supercalifragilisticexpialidocious biome.png|thumb|“supercalifragilisticexpialidocious”维度里随机生成的生物群系]]
+* 新维度里能找到随机生成的生物群系。
+** [[玩家]]可以在不同维度中发现新生物群系，发现的群系会加入到[[自选世界类型]]的生物群系列表中，包括{{cd|_generated.''x''}}生物群系。
+** 一些特定的音效（如方块不同状态的以及生物的音效）会周期性地播放，尽管整个生物群系中都没有其正常来源。
+** 一些生物群系会禁用[[天气]]。
+** 这些生物群系的生物生成机制是随机的。
+*** 原本不会自然生成的生物（例如[[巨人]]、[[杀手兔]]和[[幻术师]]）会自然生成在随机维度里。
+*** 许多生物群系不会生成生物。[[File:Shulker Generation in Dimension Fry.png|thumb|大量的潜影贝和末地城生成于“fry”维度里]]
+** 生成的生物群系可能包含了随机结构或者其他维度会生成的结构。
+*** 会大量生成随着结构而生成的生物，因此[[海底神殿]]会生成大量[[远古守卫者]]或[[末地城]]会生成大量的[[潜影贝]]。
+*** 通常情况下生物群系会包含大量的一个特定的结构。
+*** 有时，维度会生成重复的字符（例如通过<code>/warp 52</code>访问的维度会大量生成由[[带釉陶瓦]]组成的字母“J”，<code>/warp norway</code>包含由棕色陶瓦组成的“ſt”，<code>/warp blessing</code>包含组成U形以及仅一个额外的像素的白色染色[[玻璃]]）。这些字符的形状很可能来自Minecraft的字体纹理。
+** 一些随机生物群系可能与非随机的生物群系比较相似。
+** 大量的随机生物群系具有大量造成延迟的方块，例如藤蔓、腐烂的树叶或营火，这些生物群系有可能使游戏崩溃。
+* 加入了三种预设的生物群系。
+** '''[[船间]]（Between）'''
+***[[File:Between.png|缩略图|船间生物群系生成的示例]]
+*** 最适合在自选世界类型中与''浮岛''一起使用。
+*** 会生成一连串的[[末地船]]。
+*** 命名空间ID为<code>minecraft:between</code>。
+** '''[[为无暇应对无谓事物的玩家所准备的生物群系]]（Biome For Player With No Time For Nonsense）'''
+***[[File: Biome For Player With No Time For Nonsense.jpg|缩略图| 为无暇应对无谓事物的玩家所准备的生物群系生物群系生成的示例]]
+*** 最适合在自选世界类型中与''主世界''一起使用。
+*** 类似于[[积雪针叶林]]，不过生成的矿石变成了矿物块和[[红石元件]]。
+*** 命名空间ID为<code>minecraft:busy</code>。
+** '''[[形状]]（Shapes）'''
+***[[File:ShapesBuffet.png|缩略图|形状生物群系生成的示例]]最适合在自选世界类型中与''主世界''一起使用。
+*** 生成的世界含有由一种或多种方块组成的不同形状。
+*** 命名空间ID为<code>minecraft:shapes</code>。
+
+'''[[维度]]'''
+* 有'''2,147,483,645'''个新维度，这意味每个世界种子有2,147,483,648（2<sup>31</sup>）个维度，共有39,614,081,257,132,168,796,771,975,168 （2<sup>95</sup>）种维度组合。<ref>{{tweet|SeargeDP|1245484473338212352|What most people probably didn't realize with the snapshot today, there are not just 2 billion dimensions added to the game. There are 2 billion dimensions per world seed and they are all different. That makes 2^95 combinations（a really large number）|April 1, 2020}}</ref>
+** 某些维度包含彩蛋（见下文）。
+** 某些维度（包括彩蛋维度）在同一个世界种子中有与主世界一致的世界生成。
+* 各个维度中会出现各种预设且随机生成的[[生物群系]]。[[File:-NX- snowy tundra.png|thumb|维度“[NX]”里的[[雪原]]生物群系]]
+** 一些维度可能仅有1个生物群系，一些则可能有多个。
+*** 即使维度里有多个生物群系，特定的生物群系可能会占据维度里大部分地方，其他生物群系可能会非常稀有。
+** 在[[主世界]]或[[下界]]里的稀有的生物群系可能会变得常见。
+* 构成各种地物（例如[[矿团]]、[[冰刺]]、[[湖泊]]）的方块将被随机交换。
+* 如果非随机的生物群系出现在随机的维度中，生物通常按照预期生成。
+** 通常，除了[[蝙蝠]]之外，需要特定[[光照等级]]才能生成的生物不会忽略光照水平就生成。例如，在维度“jeb__”中，被动型生物和[[史莱姆]]会在[[稀树草原]]生物群系中生成，但不会在其他生物群系中生成。
+*** 这有一些例外，在“interesting”维度以及少量其他维度，敌对生物在低光照等级的地方生成。
+** [[史莱姆区块]]仍然存在，一些特定的生物群系仍会正常生成史莱姆。
+* 天空、方块、菜单、[[玩家]]等都会被随机着色。
+* 天空可以是主世界、下界和[[末地]]里随机选择的一个。
+** 对于主世界的天空，[[太阳]]和[[月亮]]可能会选择随机尺寸，昼夜更替会加速、减速，或者停滞不动。
+*** 在大多数维度中，昼夜更替要么快速循环，在五秒钟内完成一整圈，要么完全不循环。天空很少以其他速度移动，但若以其他速度移动，周期持续时间是随机的。
+**** 在“Just a normal day”维度，昼夜更替的循环速度比主世界快两倍，而在“Toast”维度，移动时间迟缓两倍。
+[[File:Dimension -name- lighting screenshot.png|thumb|随机维度里的异常光照现象。这是“name”维度放置在虚空里的[[白色混凝土]]]]
+* 一些维度里可能会有日光，而其他维度即使有太阳和月亮也不会有任何亮度。
+** 在没有昼夜更替的维度里，日光仍会正常运作以控制生物生成，但在其他维度中也可以代替月光控制而在地表生成敌对生物。
+* 生成的维度可能具有异常的光照。
+** 有时，维度中每个方块的同一面都是纯黑的。
+** 在一些维度里，光照会和主世界类似（例如维度“gallery”的彩蛋）。
+* 一些维度遍布随机[[粒子]]效果。
+** 每个生物群系出现的粒子效果取决于维度，有些时候主世界生物群系也会有粒子效果。
+*** 例如，维度“owo”里的[[针叶林]]生物群系会出现<code>elder_guardian</code>粒子。
+** 在一些生成的维度中，随机生成的粒子可能会导致系统卡顿，取决于操作系统。
+* 生成的维度可能采用的生成风格有：[[File:Interesting sky generation.png|thumb|“interesting”维度中生成的末地型地形]]
+** 主世界风格，包含大量的山峰和峡谷。
+*** 不会生成[[洞穴]]，但[[熔岩]]和[[水]]仍会生成在地下。
+*** 山峰和峡谷的生成取决于生物群系，大部分与[[自选]]世界类型相同。
+*** 底部有[[基岩]]，其生成与主世界相同。
+**** 在一些维度，基岩可能存在洞。
+*** 一种主世界生成的子类别是生成[[超平坦]]，但是有一些区别：[[File:Fry flat type generation.png|thumb|“fry”维度里的超平坦风格]]
+**** 仍然会生成洞穴。
+**** 有时候会生成一层由单个方块组成的方块层，厚度多变。
+***** 在一些特定的维度，这些层并不平坦，可能出现小山丘和峡谷。
+**** Y=0附近的基岩层不是平坦的，而是以主世界的形式生成。
+**** 这类生成非常罕见。
+**** 超平坦生成似乎是以水为基础的生物群系交换了方块的结果，超平坦生物群系的表层高度与海洋表面的相同（均为Y=63）。
+** 下界风格，在Y=128处有基岩层，并生成下界样式的洞穴。
+*** 顶部基岩层上面可能还是会生成一些地形和结构。
+** 末地风格，没有基岩层，具有大量浮岛。
+* [[床]]和充能的[[重生锚]]会爆炸。
+** 然而，在一些维度里床不会爆炸，而且随时可以[[睡觉]]，也可以正常设置玩家[[重生点]]，但睡完觉后不会变成白天。
+*** 下列维度可以安全使用床（都是彩蛋维度，共15个）：
+**** “blacklight”
+**** “busy”
+**** “chess”
+**** “colors”
+**** “darkness”
+**** “decay”
+**** “holes”
+**** “pillars”
+**** “rooms”
+**** “slime”
+**** “wall”
+**** “zones”
+**** 颜色维度（“red”（“radmanovic”），“green”和“blue”）
+* 每个维度的ID都是由该维度名称的SHA256散列确定的，该散列的字符串后面加上<code>:why_so_salty#LazyCrypto</code>。
+* 在新维度中[[末地船]]里的箱子带有[[#常规|fleer_orders]]战利品表。
+* 在一些维度里，[[指南针]]会指向世界中心，其他维度会和下界和末地那样随机旋转。
+* [[流体]]会以不同的方式运作。在一些维度水像主世界那样正常使用，而在一些维度里水会像在下界那样蒸发。
+* 即使是在白天，[[亡灵生物]]不会燃烧，[[猪灵]]也不会僵尸化。
+* [[末地传送门]]会激活，进入后[[玩家]]会正常传送到末地里，但会以他们进入传送门的坐标传送在新生成的[[黑曜石平台]]上。
+* [[地图]]会正常运作，就像在白天那样，但在大部分维度里地图只会像在下界那样失效。
+** 和下界不同的是，玩家的点会准确显示朝向。
+* [[云]]会在一些维度里出现，但会出现在随机高度。
+* 部分维度存在不同数量的[[末地折跃门]]，当玩家进入后会传送至此世界的另外一个折跃门。
+* 有[[天气]]。
+** 当前天气在所有维度上都是相同的，如果在一个随机维度[[下雨]]，则在所有随机维度和主世界都在下雨，尽管如上所述在某些生物群系中不会下雨。
+* 维度里世界中心出现携带[[黑曜石柱]]的<code>the_end</code>生物群系比较常见。
+* 背景音乐和主世界的相同。
+* 一些维度可能有雾，导致无法看清。
+* 自选世界和独有维度里的光照系统是不同的。主世界可以非常暗，彩蛋维度可以不是。（例如“fleet”{{code|minecraft:between}}和“shapes”{{code|minecraft:shapes}}。）
+
+'''彩蛋维度'''
+{{SpoilerWarning|段落}}
+* 总共有43个硬编码的彩蛋维度<ref>{{tweet|0x00716F62|1245420291620327424|Seems like magic Internet people have already cracked all 42 crackable ones. Anyway, for a hint: there is a dimension with quite a lot of free books. And other one with lots of music.|April 1, 2020}}</ref>，可以通过{{cd|-{}-/warp <''名称''>}}进入，也可以通过在书中写上维度的名称，并把书丢入下界传送门来进入。
+** 刻意设计的彩蛋维度可以在代码中找到，但其中记录的是其维度ID而非其名称。对于硬编码的维度，也提供了维度ID（可以通过{{cmd|setblock ~ ~ ~ neither_portal{Dimension:<''ID''>} }}使用）。
+** 许多特殊维度使用与主世界相同的生成方式，包括“red”“green”“blue”“wall”“chess”“colors”和“slime”，但向其中加入了独有特性。
+{{collapseH|'''所有彩蛋维度'''}}
+[[File:Ant2.png|缩略图|“ant”维度中创建的图案。大约10,000步后，右侧的“高速公路”会开始无限延伸]]
+* “'''ant'''”（741472677） - 最初是平坦[[白色混凝土]]世界，以及一个立即开始移动的一只蚂蚁和写有“PATIENCE”（耐心）的[[金合欢木告示牌]]。告示牌上的内容可能是指玩家必须耐心等待蚂蚁运动，其在行进超过10,000步后即会开始重复制作“高速公路”形状。
+** 告示牌是浮空的墙上的告示牌，无方块支撑。
+* “'''basic'''”（236157810） – 对角迷宫图案。看起来类似于用BASIC编程语言生成的简单迷宫，蓝色混凝土地板生成于Y=16以及更低的海拔，淡蓝色混凝土迷宫墙壁延伸至Y=32处。
+** 迷宫似乎由一个没有分支或死角的主要通道以及一个只能从顶部进入的随机正方形组成。
+* “'''blacklight'''”（1896587401） – 反转亮度的维度。实体和方块在白天呈黑色，在洞穴或晚上则是明亮的，[[火把]]会使周围的区域变暗，等等。
+** 也会使文本和物品纹理变暗。
+** 天空的亮度正常，和主世界一样。
+** 世界生成和玩家生成的世界是一样的。
+* “'''brand'''”（726931095） – 有着由随机方块组成的8x8[[苦力怕]]脸的维度，由随机颜色的[[陶瓦]]、[[带釉陶瓦]]、[[玻璃]]、[[玻璃板]]、[[羊毛]]、[[地毯]]、[[混凝土]]和[[混凝土粉末]]组成（Y=0-31）。
+* “'''bridges'''”（233542201） – 有着在Y=130的地方随机生成的[[末地石]]桥的维度。
+* “'''busy'''”（669175628） – 完全由[[为无暇应对无谓事物的玩家所准备的生物群系]]生成的维度，该维度会生成[[红石元件]]（主要是[[漏斗]]）和矿物方块来代替矿石。因此，这个维度在生成时非常缓慢。
+* “'''checkerboard'''”（1929426645） – 包含了所有可染色方块的世界——混凝土、混凝土粉末、羊毛、地毯、染色玻璃、染色玻璃板、陶瓦和带釉陶瓦，以16×16×16的尺寸堆叠生成，从Y=0到Y=127。
+** 有两种图案——每种染色方块的图案和包含每种染色方块的同样但更小的图案的64×16×64区域。[[File:Warp checkerboard pattern.png|缩略图|“checkerboard”维度里的混凝土粉末图案，以及旁边的羊毛“区块图案”]]
+*** 后者或较大的图案是不一致的。{{Needs testing}}[[File:Large warp checkerboard pattern.png|缩略图|更大的64×16×64图案]]
+* “'''chess'''”（378547252） – 和主世界基本相同的维度，但如果XYZ坐标是奇数时，方块是完全黑暗的。这会出现国际象棋的图案，虽然只是在视觉上。基于位置，生物和大多数实体都会受此影响。
+** 这个维度的世界生成和主世界也是一样的。
+** 黑白图案是三维的。
+* “'''colors'''”（94341406） – 分成4个象限，每个象限显示为黄、绿、蓝、红四种颜色，类似于微软的徽标。
+** 这个维度的世界生成也是和主世界一样的。
+* “'''content'''”（1174283440） – 只有在出生点附近一个[[空岛]]的维度，空岛上有一棵[[树]]和[[箱子]]。
+** 玩家生成于（9, 75, 11）位于树上，结构大小是来自{{cd|minecraft:content}}的6×12×7。
+** 空岛类似于YouTube Gaming图标，因为维度的名称是“content”。
+** 空岛上面的箱子里有以下物品：
+[[File:Warp content comparison.png|缩略图|“content”维度里的空岛和YouTube Gaming图标的对比]]
+
+{{Inventory
+|type=generic
+|title=箱子
+|rows=3
+|3=Lava Bucket
+|4=Beacon
+|5=Bucket of Pufferfish
+|12=Pumpkin
+|13=Sugar Cane
+|14=Melon Slice
+|22=Box of Infinite Books
+}}
+
+* “'''credits'''”（1210674279） – 由下界合金块构成的完整Minecraft制作人员名单文本，位于Y=20处。
+* “'''custom'''”（344885676） – 地面上为黄黑条纹的警示标记，从Y=16一直延伸到Y=0处，并且每两个方块层条纹前移一次。有两个告示牌，上面的位于（0,19,0）写有“UNDER CONSTRUCTION”（正在施工）和下面的位于（0,18,0）“IOU 1x Custom Worlds”（IOU 1x自定义世界；其中“IOU 1x”为“I owe you one”的缩写，意为“我欠你一个”），这和未来发布的[[20w21a]]重新加入[[自定义]]世界有关。
+* “'''darkness'''”（31674686） – 除了玩家[[出生点]]的约半径一百格以外没有任何光照的世界。
+* “'''decay'''”（2114493792） – 几乎与主世界相同的维度，但离出生点越远就越显得破碎且崩坏。
+** 当尝试加载X或Z坐标绝对值超过32768的区块时（对应世界坐标±524,288），过高的坐标值会将一个非正数作为随机数参数传入<code>Random.nextInt()</code>，导致生成新区块时抛出<code>IllegalArgumentException: bound must be positive</code>异常并崩溃。
+** 破碎崩坏效果会应用于流体和固体。
+* “'''fleet'''”（1143264807） – 由[[船间]]生物群系生成的网格排列的大型末地船舰队。
+** 正常末地船中的所有非箱子战利品都会生成，但不包括[[鞘翅]]。
+* “'''gallery'''”（1049823113） – 有[[石英]]路径的博物馆，陈列着使用随机方块的螺旋形的雕塑，其中一些具有随机[[Java版数据值|数据值]]（例如，[[台阶]]含水，或出现在[[花盆]]内的[[植物]]）。
+** “方块DNA”雕塑似乎有着随机的最大和最小高度，但它们确实在中间连起来了，并具有镜像翻转的顶部和底部（方块呈轴对称分布，Y=128处的石英层为对称轴）。
+** 任何音符盒在激活时都会播放随机乐器的声音，尽管其下方没有任何方块。
+* “'''holes'''”（1011847535） – 常规的世界，但充满了[[形状]]生物群系那样各种形状的洞。
+** 洞可以在水中形成。
+* “'''isolation'''”（1902968744） – 在[[泥土]]超平坦上有一个房屋，内有名为bob的[[村民]]、三条[[狗]]、一个隐藏在地下的[[箱子]]以及周围的其他装饰品。在文件中该房屋名为<code>house_of_bob</code>。
+** [[告示牌]]上写着“INGEN REKLAM TACK!”（在瑞典语中表示“谢绝广告宣传！”）和“GO AWAY!”（走开！）
+** 隐藏的箱子包含[[腐肉]]、[[骨头]]和一把名为“Stabby McStabface”的[[铁剑]]（模仿[[wikipedia:Boaty McBoatface|Boaty McBoatface]]）。
+** 三条狗的项圈颜色与“red”“green”和“blue”维度的颜色相同。
+** 狗命名为“Bob's dog”（鲍勃的狗）“Bob's Other Dog”（鲍勃的另一条狗）和“... their cousin Jim”（它们的表兄弟吉姆）。
+** Bob是丛林村民。
+** 不生成[[生物]]。
+** 基地里面，有10个无限书盒和没有接线的[[陷阱箱]]。
+** 楼上有个空的[[唱片机]]。
+* “'''library'''”（264458659） - 一个无限生成连续结构的维度，这些结构由无限书盒组成。这一设计参考了豪尔赫·路易斯·{{tr|博尔赫斯|波赫士}}（Jorge Luis Borges）所著的《[[wikipedia:The Library of Babel|巴别图书馆]]》（''The Library of Babel''）。<ref>{{tweet|0x00716F62|1245422741387464705}}</ref>
+** 图书馆的图案延伸到高度和深度极限的位置。
+* “'''llama'''”（1113696725） - 地表为超平坦基岩，而在Y=65处有着数个安宁房间的维度，每个房间中有一头装备了黄绿色地毯的[[羊驼]]，以及用有色字体写着“RELAX!”（放轻松！）和“ENJOY!”（享受吧！）的告示牌。除此之外还有一幅[[画]]（画面为日落）和开启的[[下界传送门]]。
+** 传送门旁的墙后隐藏着一个秘密箱子，箱子中有一本署名为“The Developer”（开发者）、名为“A Book”（一本书）的书，内容为“Nothing to solve”（没有东西可供解决）。将这本书扔进传送门会将玩家带往第709,735,702号维度，但这个维度完全是随机生成的。
+** 许多房间都会生成，都完全相同，但这些房间被几层基岩隔开。
+** 下界传送门使用黑曜石的最低要求大小。
+* “'''message'''”（1113696725） - 空维度，有一条用[[火]]方块书写的信息：“We apologise for the inconvenience.”（我们为带来的不便表示抱歉），这是道格拉斯·亚当斯（Douglas Adams）的《[[wzh:银河系漫游指南_(小说)|{{tr|银河系漫游指南|銀河便車指南}}]]》（''The Hitchhiker's Guide to the Galaxy''）中的类似消息。
+* “'''missing'''”（1384344230） - 空维度，在（0,65,0）处有一个由[[石英块]]、[[信标]]和[[箱子]]组成的神龛，箱子中有两个脚印物品。
+** 该维度中生成的[[铁傀儡]]无生物AI。
+** 下界合金楼梯下方有一个告示牌，上面写着“this is not a sign”（这不是一个告示牌）。这是在致敬超现实主义画家雷内·马格利特（René Magritte）的作品《{{Wikipedia|形象的叛逆}}》（''La Trahison des images''）。
+<gallery>
+24w14infinte-missing-front.png|“missing”维度中的神龛
+24w14infinte-missing-back.png|前图的后侧
+24w14infinte-missing-sign.png|楼梯下的告示牌
+</gallery>
+* “'''notes'''”（214387762） – 由[[音符盒]]组成的超平坦维度，尽管没有接收到[[红石信号]]或玩家输入，并且下面没有任何方块，但它们仍会演奏随机的音符和乐器和音高。玩家进入[[旁观模式]]时停止播放。
+* “'''nothing'''”（1098962767） – 空维度，在（502640,99,1482448）有一个草方块和一个标有“Ha! I lied!”（哈！我撒谎了！）和“This isn't nothing!”（不是什么也没有！）的告示牌，其区块坐标（31415,92653）来自{{Wikipedia|圆周率}}。
+* “'''origin'''”（927632079） – 具有X,Y,Z指示器的维度（到4个方块远，原点有个[[钻石块]]），与打开[[调试屏幕]]时的类似。
+* “'''patterns'''”（307219718） – 内有一个网格，在每个单元格中具有随机的黑白图案。除了沿X轴上进行拆分外，每个网格正方形与其相邻的正方形相差一个方块。
+* “'''perfection'''”（545072168） – 具有无限重复的[[圆石]]房间的维度（地板为Y=63，天花板为Y=68）。
+** 可能是在引用YouTube用户Direwolf20，他上传Minecraft模组相关的内容，并经常建造与其所在维度发现的设计风格相同的房屋。<ref>https://www.youtube.com/watch?v=sD1ySvIBrTM - 4/1/2017, a house build by direwolf20 of the same design, also on April 1st.</ref>
+* “'''pillars'''”（1834117187） - 充满高大黑曜石柱的维度。
+* “'''retro'''”（661885389） - 区块带有黄绿色边框的黑色世界，类似于{{w|蒸气波}}风格。
+* “'''rooms'''”（1036032341） - 以主世界为基础并有大型砖墙和天花板的世界。
+[[File:ShapesBuffet.png|缩略图|形状生物群系]]
+* “'''shapes'''”（484336196） - 由[[形状]]生物群系组成的维度。
+* “'''skygrid'''”（1059552697） - 和由Sethbling设计的广受欢迎的生存挑战同名，其中含有所有方块，包括只能通过[[创造模式物品栏]]或[[命令]]获得的方块。
+** 许多方块以通常不可能单独存在的方式生成，如浮空的植物和受重力方块。
+*** 方块以随机的方块状态生成，这导致产生许多[[含水]]方块、激活的红石元件、斜坡[[铁轨]]、半扇[[门]]，诸如此类。
+*** 单个传送门方块可能在世界中生成，进入会前往另一随机维度。
+*** [[末地折跃门]]不会传送玩家。
+* “'''slime'''”（907661935） – 几乎与主世界相同，但地面上的所有东西都埋在10块厚的[[黏液块]]中。
+* “'''spiral'''”（1141490659） – 由[[苔石]]组成的大螺旋形，[[草方块]]层在Y=50处。
+* “'''sponge'''”（1028465021） – 由[[海绵]]方块组成的类似于{{Wikipedia|门格海绵}}的结构。
+* “'''terminal'''”（2003598857） – 超平坦维度（地表为Y=15），类似于DOS终端界面。使用了“光标”方块。
+* “'''this_is_a_very_long_phrase_that_hopefully_is_not_in_any_dictionary'''”（985130845） – 在代码中被称为“last page”（最后一页），这是在引用[http://hmpg.net/ last page of the internet]<ref>https://imgur.com/a/WeA3Ip6</ref>。
+** 在{{cd|/warp}}命令或书中使用正确的名称进入此维度时，会包含一条秘密消息。
+** 当使用错误的名称（如<code>abglaiap</code>或<code>myrobod</code>）进入此维度时，将会包含用草方块写成的“Uh uh uh! You didn't say the magic word!”（啊啊啊！你没念咒语！），这句话引用了《{{Wikipedia|侏罗纪公园}}》。
+*** 有时候有多个可以散列到同一字符串的值多个值（{{code|/warp cDCCd}}或者{{code|/warp tgTZ&}}）会传送到同一个维度里。
+** 如果正确进入，世界中就会包含下列文字，这是在引用《{{Wikipedia|威震太陽神|2010太空漫游}}》中一条外星人用石板所警告人类的消息：
+{{quote|Hello! Only purpose of this message was to troll completionists and put my name somewhere in Minecraft（again!）. I hope it wasn't cracked by accident – it was obviously supposed to take more time than other phrases. Written during time of plague by [[boq]]（yes. lowercase. because symmetry） “All these worlds are yours, except Europa'''*'''. Use them together. Use them in peace. ” '''*'''Europa™ the Moon sold separately.<br>
+''您好！这条信息存在的唯一目的是捉弄完美主义者以及把我的名字放在Minecraft里某个地方（又一次！）。我希望这没有被意外泄露——显然这比其他语句花的时间要长。在瘟疫的时间由boq（是的。小写。因为对称性）所创作：“所有的世界都是你的，除了木卫二'''*'''。请一起使用。请和平利用。”'''*'''木卫二™另售。''}}
+:* 通过{{tr|访问|存取}}一个由[[boq]]创建的[https://radio.xn--jxe.net/air.ogg 流媒体服务器]解密了这条秘密消息，该服务器会在随机间隔内发出可被解码为SSTV图像的蜂鸣声，从而生成笔记本上写有正确维度名称的照片。
+:* 该维度名称可以使用由[[boq]]提供的一个[https://gist.github.com/boq/15aa9b6feeb5aa0776393f3a8ea9f712 代码片段]来核实。
+:* “Time of plague”（瘟疫的时间）是在影射{{Wikipedia|2019冠状病毒病疫情}}。
+:* 通过书中包含的“Europa”一词进入的维度似乎是一个满是云杉[[森林]]的随机生成的世界，其中[[屏障]]方块构成了固体区域的绝大部分。该世界不是一个彩蛋维度，因此对不同的世界[[种子（世界生成）|种子]]有不同的生成。
+* “'''tunnels'''”（107712651） - 随机生成的、由[[海晶灯]]组成的隧道。
+* “'''wall'''”（251137100） - 巨大的基岩墙沿X=0延伸，（0,0）处有一扇[[铁门]]。隔离墙的两面都类似主世界，但主色调分别为红色和蓝色，对比强烈。
+** 可能是引用了[[wzh:麦克斯韦妖|{{tr|麦克斯韦妖|馬克士威的惡魔}}]]。
+* “'''zones'''”（1537997313） - 充满[[剩余物]]的常规世界。
+* 色彩维度
+** “'''red'''”（1791460938） - 一切皆为红色的维度。
+*** 维度别称为“radmanovic”。
+** “'''blue'''”（1916276638） - 一切皆为蓝色的维度。
+** “'''green'''”（894945615） - 一切皆为绿色的维度。
+** 在任何色彩维度中退出至主屏幕会在各种菜单元素中保留一些效果。
+{{collapseE}}
+
+'''{{anchor|结构}}[[结构]]'''
+
+以下新的结构文件存储在<code>data/minecraft/structures</code>目录中：
+* <samp>9x9.nbt</samp>
+**“perfection”维度中的[[圆石]]房间。
+* <samp>b_center.nbt</samp>
+**“bridges”维度中桥梁的一部分。
+* <samp>b_legs.nbt</samp>
+**“bridges”维度中桥梁的一部分。
+* <samp>b_side.nbt</samp>
+**“bridges”维度中桥梁的一部分。
+* <samp>command.com.nbt</samp>
+**“terminal”维度中的“C: \ _”文本。
+* <samp>content.nbt</samp>
+**“content”维度中的空岛。
+* <samp>desire.nbt</samp>
+**“missing”维度中的神龛。
+* <samp>house_of_bob.nbt</samp>
+**“isolation”维度中bob的房子。
+* <samp>library.nbt</samp>
+**“library”维度中的一个单元。
+* <samp>llama.nbt</samp>
+**“llama”维度中的单个房间。
+
+=== 命令格式 ===
+'''{{cmd|debugdim}}'''
+* 在世界存档的“debug”文件夹中生成多个JSON文件，其中包括：
+** 一个“dim-#”文件，内含维度编号、使用的生成类型、默认方块、默认流体以及维度内的生物群系。
+** 一个或多个“biome-#”文件，存储用于生成该维度中的生物群系的数据。
+
+'''{{cmd|warp}}'''
+* 在其后加上字符串或数字，即可到达一个相应的随机维度。
+** 玩家会被传送到一个与向传送门扔出具有相同文字的书的相同维度。
+** 始终将玩家传送到每个维度上的相同坐标:在0,0附近的最高方块之一，如果在0,0附近没有任何方块，则在0,257,0处。
+** 如果玩家就在此维度中，再次向同一维度传送将会被传送到0,0。
+
+=== 游戏内容 ===
+'''{{anchor|进度}}[[进度]]'''
+{{Advancements
+|key=adventure.almost_there
+|icon=Flint and Steel
+|bg=plain
+|name-normal={{tr|快成功了|快成功了|就快得喇}}
+|name-small=Almost there
+|describe-custom={{tr|访问|探索|進入}}十亿个维度<br><small>（Visited over billion dimensions）</small>
+|upstream=adventure.root
+|require=玩家穿过传送门后统计信息“Dimensions changes”达到1,000,000,000。
+|nsid=adventure/almost_there
+|foot=1
+}}
+
+'''[[统计]]'''
+* 增加了统计项目“Dimensions changes”，记录玩家穿过传送门的次数。
+** 当该统计数据达到1,000,000,000，玩家就会获得“{{tr|快成功了|快成功了|就快得喇}}”进度。
+** 该统计的ID是<code>minecraft.custom:minecraft.change_dimension</code>。
+
+=== 常规 ===
+'''[[战利品表]]'''
+* 加入了<code>fleet_order</code>战利品表。
+** 被用在新维度中的[[末地船]]的箱子里。
+** 内有一本名为“Orders”、作者是“§kDeep Lore”的书。
+*** <code>§k</code>是一个[[格式化代码]]，可以使后面的字符变为乱码。可以通过编辑世界存档中玩家或箱子的数据来查看乱码文本，或者通过使用{{cmd|data}}命令获取数据来查看。不过，<code>§k</code>的效果只能到这一行结束，一旦换行后不再有效。
+*** 书的内容遵循<''动词''> §k<''宾语''>的格式。
+**** <''动词''>为以下文本之一：
+***** capture
+***** destroy
+***** cut
+***** find
+***** obliterate
+***** discover
+***** observe
+***** reinforce
+***** build
+***** deploy
+***** restore
+***** deliver
+**** <''宾语''>为以下文本之一：
+***** cheese
+***** footprints
+***** bananas
+***** toeshoes
+***** mah brewskis
+***** bicycle build for two
+***** my canoe
+***** Minecraft 3D: Lost Floppies
+***** content
+***** those pesky modders
+***** license-free mappings
+***** those VHS
+***** pre-mixed coctails
+***** quasi-connectivity
+** 包含了新的战利品表功能：
+<div class="treeview">
+* '''add_book_contents''' - 给成书或书与笔生成文字内容。
+** {{nbt|string|provider}}: '''"orders"'''：必须设置为“orders”才能生成上面详述的内容。
+</div>
+
+== 更改 ==
+=== 游戏内容 ===
+'''[[物品栏]]'''
+* 现在[[创造模式物品栏]]里的[[方块]]和[[物品]]是被打乱的。
+
+'''[[调试模式]]'''
+* 像创造模式物品栏一样，[[调试模式]]的方块顺序也是被打乱的。
+
+'''[[钓鱼]]'''
+* 玩家在钓鱼时可以钓到[[生物鱼]]、[[守卫者]]、[[远古守卫者]]、[[鱿鱼]]或[[船]]了。
+
+'''[[进度]]'''
+* 加入了<code>player</code>来检测<code>changed_dimension</code>触发器。
+
+=== 常规 ===
+'''启动界面'''
+* 更改了[[Mojang]]启动界面。
+** 游戏正在启动时，会在下方显示公司名称MOJANG，同时会有一位Minecraft开发人员说“Mojang！”，类似于在世嘉的启动界面中说的“Sega！”。在[[Java版3D Shareware v1.34|3D Shareware v1.34]]中也用了同样的声音。
+
+'''[[选择世界菜单]]'''
+* 其他版本的存档在本快照中均不可见。
+** 这是因为本快照读写世界的是<code>special_level.dat</code>而非<code>level.dat</code>。
+
+== 视频 ==
+{{videos|BV1jc411h7g8|_dWMIPeyXT8}}
+
+== 你知道吗 ==
+* 此快照与[[20w13b]]有相同的[[协议版本]]，因此可以在两个版本间跨版本游戏，但这可能会导致意外问题。
+* 本快照中加入的新维度的ID从3开始分配，因为0是[[下界]]，1是[[主世界]]，2是[[末地]]。例子：使用{{cmd|warp acyvoz}}会将玩家传送到ID为3的维度，{{cmd|warp aehUD7}}则为ID2147483647。
+* 在游戏JAR的<code>assets</code>文件夹中，有一个叫做<code>nothingtoseeheremovealong</code>的新文件夹，其中包含在[[Mojang]]启动画面上播放的音效（标题为<code>bananana.ogg</code>）以及其高音调版本（标题为<code>banananana.ogg</code>）。
+** 使用{{cmd|playsound}}播放<code>awesome_intro</code>音效时，命名空间也是<code>nothingtoseeheremovealong</code>。
+** 这些音效被视为游戏内的音效（<code>nothingtoseeheremovealong:awesome_intro</code>），并且能够在生成的维度（例如“<code>code</code>”）中播放。
+* 有多个生物群系和维度可能导致游戏卡顿，甚至是崩溃或假死。
+** 有些在特定的维度生成的生物群系可能导致因为Java的异常导致错误和崩溃，例如“bound must be positive”（<code>java.lang.IllegalArgumentException</code>）和“Exception generating new chunk”（在服务器刻循环<code>java.util.concurrent.CompletionException</code>中）。这在大多数彩蛋生物群系中都不会发生。{{needs testing}}
+
+== 画廊 ==
+{{Spoiler Warning|section}}
+{{CollapseH|'''彩蛋维度'''}}
+<gallery>
+File:Ant biome.png|“ant”彩蛋维度
+File:Basic biome.png|“basic”彩蛋维度
+File:Blacklight biome.png|“blacklight”彩蛋维度
+File:Brand biome.png|“brand”彩蛋维度
+File:Bridges biome.png|“bridges”彩蛋维度
+File:Busy 20w14.png|“busy”彩蛋维度中由活塞和铁块组成的矿团
+File:Checkerboard biome.png|“checkerboard”彩蛋维度
+File:Chess biome.png|“chess”彩蛋维度
+File:Colors biome.png|“colors”彩蛋维度
+File:Content biome.png|“content”彩蛋维度
+File:Credits biome.png|“credits”彩蛋维度
+File:Custom biome.png|“custom”彩蛋维度
+File:Darkness biome.png|“darkness”彩蛋维度
+File:Decay biome.png|“decay”彩蛋维度
+File:Fleet biome.png|“fleet”彩蛋维度
+File:Gallery biome.png|“gallery”彩蛋维度
+File:Holes biome.png|“holes”彩蛋维度
+File:Isolation biome.png|“isolation”彩蛋维度
+File:Library biome.png|“library”彩蛋维度
+File:Llama biome.png|“llama”彩蛋维度
+File:Message biome.png|“message”彩蛋维度
+File:Missing biome.png|“missing”彩蛋维度
+File:Notes biome.png|“notes”彩蛋维度
+File:Nothing biome.png|“nothing”彩蛋维度
+File:Origin biome.png|“origin”彩蛋维度
+File:Patterns biome.png|“patterns”彩蛋维度
+File:Perfection biome.png|“perfection”彩蛋维度
+File:Pillars biome.png|“pillars”彩蛋维度
+File:Retro biome.png|“retro”彩蛋维度
+File:Rooms biome.png|“rooms”彩蛋维度
+File:Shapes biome.png|“shapes”彩蛋维度
+File:Skygrid biome.png|“skygrid”彩蛋维度
+File:Slime biome.png|“slime”彩蛋维度
+File:Spiral biome.png|“spiral”彩蛋维度
+File:Sponge biome.png|“sponge”彩蛋维度
+File:Terminal.gif|“terminal”彩蛋维度
+File:Tunnels biome.png|“tunnels”彩蛋维度
+File:Red biome.png|“wall”彩蛋维度的红色一侧
+File:Blue wall biome.png|“wall”彩蛋维度的蓝色一侧
+File:Zones biome.png|“zones”彩蛋维度
+File:Red color biome.png|“red”彩蛋维度
+File:Green color biome.png|“green”彩蛋维度
+File:Blue color biome.png|“blue”彩蛋维度
+File:Secret message.png|秘密消息维度，使用正确的维度名称进入
+</gallery>
+{{CollapseE}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox jokes|20w14infinite}}
+{{Navbox Java Edition versions}}
+
+[[Category:分叉分支版本]]
+
+[[de:20w14∞]]
+[[en:Java Edition 20w14∞]]
+[[es:Java Edition 20w14∞]]
+[[fr:Édition Java 20w14∞]]
+[[it:Java Edition 20w14∞]]
+[[ja:Java Edition 20w14∞]]
+[[pl:Java Edition 20w14∞]]
+[[pt:Edição Java 20w14∞]]
+[[ru:20w14∞ (Java Edition)]]

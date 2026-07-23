@@ -1,0 +1,1118 @@
+# 页面: 魔咒
+# 来源: https://zh.minecraft.wiki/w/%E9%AD%94%E5%92%92
+# 分类: Java版独有信息, 基岩版独有信息, 机制, 游戏内容, 需要信息, 魔咒
+# 抓取时间: 2026-07-14 17:39:17
+# 原始 Wikitext 内容:
+
+<!--{{Tr|mode=T|魔咒|附魔（物品效果）|魔咒}}-->
+{{Tr|mode=H|水下呼吸|水中呼吸}}
+{{Tr|mode=H|力量|強力}}
+{{about|适用于物品的效果|为物品随机生成魔咒的操作|附魔（物品修饰）|其他含义|附魔（消歧义）}}
+{{About|Minecraft中的游戏机制|Minecraft Dungeons中的游戏机制|Minecraft Dungeons:附魔}}
+[[File:Enchanted Iron Pickaxe.gif|thumb|带光效的附魔铁镐]]
+
+'''魔咒（Enchantment）'''是适用于[[物品]]的额外效果，能够为物品提供多种功能。具有魔咒的物品被称为'''附魔物品（Enchanted Item）'''。
+
+== 机制 ==
+魔咒是普适于所有物品的机制，存储在物品的物品数据中。
+
+所有物品都可以具有任意魔咒并生效，但为物品添加魔咒会受到许多因素的限制。
+
+常见的可附魔物品包括[[盔甲]]、[[工具]]、[[武器]]；[[附魔书]]、[[磁石指针]]等其他物品也可以获得一些魔咒。
+
+具有魔咒的物品会获得[[稀有度]]提升和[[光效]]。
+
+=== 魔咒属性 ===
+魔咒有以下基本属性：
+* 魔咒的'''适用物品'''限定了哪些物品可被添加上该魔咒；该魔咒是这些物品的'''适用魔咒'''，而这些物品也即该魔咒的'''适用物品'''。
+* 魔咒的'''可附魔物品'''限定了哪些物品在经过附魔后可添加上该魔咒。该属性仅限定了该魔咒在“附魔”情境下所被附加到的载体，在其他情境下，通过某种方法，该魔咒可能被允许附加到任何载体上。
+** 绝大多数魔咒的可附魔物品与适用物品是相同的；{{el|je}}有以下例外：
+*** [[锋利]]、[[亡灵杀手]]、[[节肢杀手]]排除了[[斧]]。
+*** [[火焰附加]]、[[亡灵杀手]]、[[节肢杀手]]排除了[[重锤]]。
+*** [[荆棘]]排除了[[头盔]]、[[护腿]]、[[靴子]]。
+* 魔咒不能与'''不共存魔咒'''一起被添加到同一个物品上。
+* 魔咒的等级不能超过'''最大等级'''。
+** 魔咒的最大等级为I级时，I级的该魔咒不会在[[提示框]]中显示等级。（例如：1级的经验修补会显示为“经验修补”）
+* 魔咒的'''{{vanchor|出现条件}}'''限制了为物品添加该魔咒的方式。
+** '''宝藏魔咒'''意味着附魔台、村民售卖的装备、生物天然装备的附魔过程不能提供该魔咒。
+** '''无法交易获得'''意味着村民的交易选项不能提供具有该魔咒的物品。
+** '''无法以战利品获得'''意味着战利品生成（如[[箱子战利品]]和[[钓鱼]]）的附魔过程不能提供该魔咒。
+*** 部分战利品会直接生成具有指定魔咒的物品，不使用附魔过程，从而使该魔咒可以通过战利品获取。
+* 魔咒的每个等级的'''修正附魔等级范围'''由'''最小修正附魔等级'''和'''最大修正附魔等级'''构成，决定了在[[附魔（物品修饰）|附魔]]过程中，根据附魔操作的修正附魔等级，该魔咒的这个等级是否会可以被附魔选中；最小修正附魔等级还决定了[[砂轮]]移除该魔咒时提供的[[经验值]]。
+** 一部分魔咒的高等级的最小修正附魔等级极高，导致物品无法通过附魔台的30级附魔得到，如[[锋利]]V和[[荆棘]]III，但其他方式（如[[末地城]]战利品的39级附魔、村民交易选项、通过[[铁砧]]直接添加魔咒）仍然可以提供这些魔咒。
+** {{in|je}}[[快速装填]]III的修正附魔等级范围为52–50，因此也无法通过附魔获得。
+* 魔咒的'''挑选权重'''决定了在附魔过程中，根据修正附魔等级决定了可选魔咒后，魔咒最终会被选中的相对权重。
+* 魔咒的'''合并魔咒花费'''决定了在铁砧上为其他物品添加该魔咒需要消耗的[[经验等级]]。
+* 少数魔咒是'''诅咒'''，在提示框中的文本颜色为红色，且不能以常规方式从物品上移除。
+
+物品上的每一个魔咒仅有一个属性：
+* '''等级'''决定了许多魔咒的效果强度。
+** 該等級可以超過魔咒本身的最大等級，但只能以{{cmd|give}}或修改NBT等方式達到。
+** 魔咒数据能存储的最高等级是{{only|je|for=255}}或{{only|be|for=32767}}，不論何種手段皆不可超過。
+
+=== 附魔书 ===
+{{see also|附魔书}}
+[[附魔书]]是专门用于存储魔咒的物品。所有魔咒都可以被添加到附魔书上，无论其适用物品。
+
+附魔书的主要用途是在[[铁砧]]上作为牺牲物品来为目标物品添加魔咒。
+
+在[[铁砧]]中使用附魔书来获得同样的魔咒所需要的经验消耗要比结合物品少得多。但因为制作附魔书本身也需要消耗经验等级，且附魔书的附魔能力不高，而直接附魔物品有概率同时得到多个魔咒，所以'''不建议'''有意制作附魔书后将其与物品合并。
+
+附魔书的最大优势在于可以将针对某类工具的魔咒囤积起来日后使用，或从[[图书管理员]]购买大量需要的魔咒。而且附魔书可以进行'''受控'''的魔咒组合，例如，“精准采集”附魔书可以为斧、镐或锹附魔，玩家可以随意选择将该附魔书用在哪一种工具上。
+
+附魔书存储魔咒的实现与其他具有魔咒的物品有诸多不同：
+* {{in|je}}附魔书使用自己专有的物品数据来存储魔咒，物品本身并不是附魔物品，因此附魔书存储的魔咒不会产生效果。
+* {{in|be}}附魔书以类似其他附魔物品的方式存储魔咒，这意味着附魔书具有魔咒。这导致部分魔咒会在附魔书上生效：具有[[火焰附加]]的附魔书可用于点燃[[TNT矿车]]<ref>{{bug|MCPE-235016}}</ref>，具有[[风爆]]的附魔书可用于产生[[爆炸#风爆|风爆效果]]。<ref>{{bug|MCPE-236575}}</ref>
+
+== 获取附魔物品 ==
+=== 自然生成 ===
+许多物品在生成时就具有魔咒：
+
+以下途径获得的物品具有单一的魔咒。这些途径生成的魔咒不使用[[附魔（物品修饰）]]机制。若无特殊说明，则所有魔咒出现的概率相同，可以施加的宝藏型魔咒有[[经验修补]]、[[冰霜行者]]、[[绑定诅咒]]和[[消失诅咒]]，魔咒出现概率与魔咒的等级无关。
+* 搜寻[[废弃矿井]]、[[刷怪房]]、[[沙漠神殿]]、[[掠夺者前哨站]]、[[林地府邸]]、大型[[海底废墟]]、[[远古城市]]等[[结构]]中的[[箱子]]，获得其中的[[附魔书]]。
+* [[图书管理员]]村民的许多[[交易]]选项会提供附魔书。
+* [[废弃传送门]]的箱子中的金质装备、[[试炼密室]]柱廊木桶中的[[铁斧]]、[[试炼密室]]交叉口木桶中的[[钻石斧]]附有随机魔咒。
+* 在[[袭击]]中生成的[[掠夺者]]携带的[[弩]]可能会附有[[快速装填]]I（第4-5波）或[[快速装填]]II（第6-8波）；袭击中生成的[[卫道士]]携带的[[铁斧]]可能会附有[[锋利]]I（第1-5波）或[[锋利]]II（第6-8波）。
+* 搜寻[[堡垒遗迹]]结构中的箱子，获得附有随机等级的[[灵魂疾行]]的附魔书。
+* 使用[[金锭]]与[[猪灵]]进行[[以物易物]]有概率获得附有随机等级的[[灵魂疾行]]的[[铁靴]]或[[附魔书]]。
+* 搜寻[[远古城市]]结构中的箱子，获得附有随机等级的[[迅捷潜行]]的附魔书。
+* 解锁[[试炼密室]]结构中的[[不祥宝库]]，获取附有[[风爆]]I的附魔书。
+* 解锁[[试炼密室]]结构中的[[宝库]]或搜寻其中的奖品箱，获得附有特定魔咒、随机等级的附魔书。
+** [[宝库]]和[[不祥宝库]]中的附魔书均可能附有[[激流]]、[[忠诚]]、[[引雷]]、[[穿刺]]或[[经验修补]]。
+** [[宝库]]中的附魔书还可能附有[[锋利]]、[[节肢杀手]]、[[效率]]、[[时运]]、[[精准采集]]或[[摔落缓冲]]。
+** [[不祥宝库]]中的附魔书还可能附有[[破甲]]、[[致密]]。
+
+以下途径获得的物品可能会具有多个魔咒。这些途径生成的魔咒使用[[附魔（物品修饰）]]机制，且[[附魔等级]]各不相同。通常来说，附魔等级越高，魔咒的等级越高，魔咒的数量也越多。
+* 部分生物在生成时会持有附魔物品（如[[僵尸]]、[[尸壳]]、{{only|JE|for=[[僵尸村民]]}}、[[溺尸]]、[[卫道士]]、[[掠夺者]]、[[骷髅]]、[[流浪者]]、[[沼骸]]、[[焦骸]]、[[僵尸猪灵]]和[[猪灵]]）；杀死生物有机会使其天然装备掉落，获取其附魔物品。这些物品可以进行5-22级附魔，具体等级取决于[[副区域难度]]，不能附有宝藏型魔咒。
+* {{in|be}}[[袭击]]中生成的[[掠夺者]]和[[卫道士]]有可能会额外掉落30級附魔的附魔书，可以附有宝藏型魔咒。
+* [[盔甲匠]]村民售卖的[[钻石盔甲]]、[[渔夫]]村民售卖的[[钓鱼竿]]、[[制箭师]]村民售卖的[[弓]]和[[弩]]、[[工具匠]]村民售卖的铁质或钻石质[[工具]]、[[武器匠]]村民售卖的铁质或钻石质[[武器]]、流浪商人售卖的[[铁镐]]。这些物品可以进行5-19级附魔，不能附有宝藏型魔咒。
+* [[钓鱼]]有概率得到附魔的[[钓鱼竿]]、[[弓]]、[[附魔书]]。这些物品可以进行30级附魔，可以附有宝藏型魔咒。
+* 搜寻[[要塞]]、[[丛林神庙]]、[[末地城]]、[[远古城市]]、[[试炼密室]]等[[结构]]中的[[箱子]]，获取其[[箱子战利品]]。
+** [[要塞]]、[[丛林神庙]]的箱子中的[[附魔书]]可以进行30级附魔。可以附有宝藏型魔咒。
+** [[末地城]]的箱子中的铁质、钻石质[[装备]]和[[远古城市]]的箱子中的[[铁护腿]]可以进行20–39级附魔。可以附有宝藏型魔咒。
+** [[试炼密室]]的箱子战利品和[[宝库]]战利品中的铁胸甲、铁斧可以进行0–10级附魔，[[弓]]可以进行5-15级附魔，弩可以进行5-20级附魔，钻石胸甲、钻石斧可以进行5-15级附魔。特别地，[[不祥宝库]]中的钻石胸甲、钻石斧可以进行10-20级附魔，无附魔的弓和铁质装备。可以附有宝藏型魔咒。
+** [[远古城市]]的箱子战利品中的钻石锄、钻石护腿可以进行30–50级附魔。可以附有宝藏型魔咒。
+
+=== 附魔 ===
+{{main|附魔（物品修饰）}}
+'''附魔（Enchanting）'''是一种为不具有魔咒的物品随机生成一个或多个魔咒的方式。
+
+附魔得到的魔咒取决于参数'''附魔等级'''和物品的属性'''附魔能力'''。一般来说，这两个参数越大，物品得到的附魔品质趋于更好，数量趋于更多。
+
+[[附魔台]]提供了玩家可操作的附魔方式，通过消耗[[青金石]]和[[经验等级]]，可以为大多数'''没有魔咒'''的物品添加一个或数个魔咒。为了提供更多和高等级的魔咒，附魔台还需要在附近设置[[书架]]。
+
+然而，附魔台无法为物品添加[[宝藏型魔咒]]或最小修正附魔等级过高的魔咒，如钻石剑无法被添加[[锋利]]V，钻石胸甲无法被添加[[荆棘]]III等。某魔咒的适用物品，但不是可附魔物品，无法添加该魔咒，详见上文。一些没有附魔能力的物品，如[[盾牌]]、[[剪刀]]、[[刷子]]、[[打火石]]、[[胡萝卜钓竿]]、[[诡异菌钓竿]]、[[鞘翅]]等无法使用附魔的方式添加魔咒。这些情况下，玩家可以使用[[铁砧]]为物品添加魔咒。
+
+附魔台、多数附魔战利品、生物天然装备均使用附魔来为物品添加魔咒。[[书]]可以通过附魔变为[[附魔书]]，用于在[[铁砧]]上提供魔咒。
+
+=== 铁砧 ===
+{{main|铁砧机制}}
+[[铁砧]]通过消耗[[经验等级]]和一个'''牺牲物品'''，可以为一个物品（称作'''目标物品'''）添加牺牲物品的魔咒。
+
+在铁砧上使用的牺牲物品必须和目标物品完全相同（例如，铁镐和钻石镐不能合并）或者是一个[[附魔书]]。牺牲物品是附魔书时，合并魔咒需要的经验等级更少。
+
+用附魔为物品添加魔咒的方式存在随机性和局限性，通常难以满足玩家的需求。此时通过铁砧操作来为物品添加魔咒是必要的。然而，即使使用铁砧，也无法为目标物品添加不适用的魔咒或与原有魔咒不共存的魔咒。
+
+在铁砧上进行操作会为物品增加“累积惩罚”，导致物品在铁砧上进行操作需要消耗的经验等级大量增加。[[生存模式]]中，当一次操作需要的经验等级大于等于40级时，铁砧会拒绝进行此操作，并提示“过于昂贵！”，[[创造模式]]则无视此限制。因此，玩家要合理规划自己的操作以节省经验等级。
+
+{{in|je}}在创造模式中使用[[铁砧]]结合魔咒可以让魔咒被添加到不适用的物品上，但仍不能添加与原有魔咒不共存的魔咒。
+
+=== 物品修复 ===
+通过[[合成]]和[[砂轮]]进行的[[物品修复]]会合并两个物品的魔咒，不过绝大多数魔咒都会被物品修复移除，因此物品修复只能用于合并两个物品的诅咒魔咒。
+
+=== 作弊与命令 ===
+在[[创造模式物品栏]]中可以获取所有魔咒任意生存模式下能正常获得的等级的对应[[附魔书]]。{{In|je}}创造模式物品栏中的附魔书只有最高的等级。
+
+{{cmd|enchant}}可以为执行者的主手物品添加魔咒，且受到魔咒的适用物品、最大等级、不共存魔咒的限制。
+
+{{cmd|give}}在给予玩家物品时，可以通过指定物品的{{code|enchantments}}或{{code|stored_enchantment}}[[数据组件]]来指定该物品的魔咒。该方法不受以上限制。
+
+{{cmd|item}}可以通过某些[[物品修饰器]]来修改方块或生物的槽位中的物品具有的魔咒，或为物品添加随机等级、随机种类的魔咒，或使用[[附魔（物品修饰）]]机制进行附魔。该方法不受以上限制。
+
+{{cmd|data}}可以通过修改方块（如箱子、熔炉）或生物[[物品栏]]的某[[槽位]]中的物品的数据组件修改该物品的魔咒。该方法不受以上限制。
+
+== 移除物品魔咒 ==
+物品上所有不是诅咒的魔咒可以通过以下方式被移除：
+* 通过[[合成]]来合并两个物品。
+* 通过[[砂轮]]进行祛魔或合并两个物品，并根据移除的魔咒的修正附魔等级提供[[经验值]]。
+
+== 所有魔咒 ==
+{{see also|Java版数据值#魔咒|基岩版数据值#魔咒ID|教程:最佳附魔指南}}
+下表列出了所有的魔咒及其适用的物品。
+
+{| class="wikitable sortable col-1-left" style="text-align: center;" data-description="魔咒概述"
+|+魔咒概述
+|-
+! 名称
+! 命名空间ID
+! 最高等级
+! 描述
+! 适用物品
+|-
+| [[水下速掘]]
+| <code>aqua_affinity</code>
+| data-sort-value="1" | I
+| 增加水下挖掘速度
+| {{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Turtle Helmet|link=海龟壳}}
+|-
+| [[节肢杀手]]
+| <code>bane_of_arthropods</code>
+| data-sort-value="5" | V
+| 对[[节肢生物]]造成额外伤害并附加{{tr|缓慢|緩速|緩慢}}效果
+| {{ItemSprite|Iron Sword|link=Sword}}{{ItemSprite|Iron Axe|link=Axe}}{{ItemSprite|Mace|link=Mace}} {{ItemSprite|Spear|link=Spear}}
+|-
+| [[爆炸保护]]
+| <code>blast_protection</code>
+| data-sort-value="4" | IV
+| 减少受到的爆炸伤害，{{only|je|for=减少受到的爆炸击退}}
+| {{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Iron Chestplate|link=Chestplate}}{{ItemSprite|Iron Leggings|link=Leggings}}{{ItemSprite|Iron Boots|link=Boots}}{{ItemSprite|Turtle Helmet|link=海龟壳}}
+|-
+| [[破甲]]
+| <code>breach</code>
+| data-sort-value="4" | IV
+| 降低攻击目标的护甲值对攻击伤害的减少效果
+| {{ItemSprite|Mace|link=Mace}}
+|-
+| [[引雷]]
+| <code>channeling</code>
+| data-sort-value="1" | I
+| 使三叉戟击中实体时召唤闪电，仅在雷暴且被命中实体暴露于雨下时生效
+| {{ItemSprite|Trident|link=Trident}}
+|-
+| [[绑定诅咒]]
+| <code>binding_curse</code>{{Only|je}}<br><code>binding</code>{{Only|be}}
+| data-sort-value="1" | I
+| 受影响物品在装备时不能被卸下，玩家处于[[创造模式]]则不受影响
+| {{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Iron Chestplate|link=Chestplate}}{{ItemSprite|Iron Leggings|link=Leggings}}{{ItemSprite|Iron Boots|link=Boots}}{{ItemSprite|Elytra|link=Elytra}}{{BlockSprite|Carved Pumpkin|link=Pumpkin}}{{BlockSprite|Heads|link=生物头颅}}{{ItemSprite|Turtle Helmet|link=海龟壳}}
+|-
+| [[消失诅咒]]
+| <code>vanishing_curse</code>{{Only|je}}<br><code>vanishing</code>{{Only|be}}
+| data-sort-value="1" | I
+| 在生物死亡时，受影响物品会消失而不掉落
+| {{ItemSprite|Iron Pickaxe|link=Pickaxe}}{{ItemSprite|Iron Shovel|link=Shovel}}{{ItemSprite|Iron Axe|link=Axe}}{{ItemSprite|Fishing Rod|link=Fishing Rod}}{{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Iron Chestplate|link=Chestplate}}{{ItemSprite|Iron Leggings|link=Leggings}}{{ItemSprite|Iron Boots|link=Boots}}{{ItemSprite|Iron Sword|link=Sword}}{{ItemSprite|Bow|link=Bow}}{{ItemSprite|Crossbow |link=Crossbow}}{{ItemSprite|Iron Hoe|link=Hoe}}{{ItemSprite|Shears|link=Shears}}{{ItemSprite|Flint and Steel|link=Flint and Steel}}{{ItemSprite|Carrot on a Stick|link=Carrot on a Stick}}{{ItemSprite|Shield|link=Shield}}{{ItemSprite|Elytra|link=Elytra}}{{BlockSprite|Carved Pumpkin|link=Pumpkin}}{{BlockSprite|Heads|link=生物头颅}}{{ItemSprite|Trident|link=Trident}}{{ItemSprite|Turtle Helmet|link=海龟壳}}{{ItemSprite|Compass|link=Compass}}{{ItemSprite|Warped Fungus on a Stick|link=Warped Fungus on a Stick}}{{ItemSprite|Brush|link=Brush}}{{ItemSprite|Mace|link=Mace}}{{ItemSprite|Spear|link=Spear}}{{only|be|for={{ItemSprite|Recovery Compass|link=Recovery Compass}}}}
+|-
+| [[致密]]
+| <code>density</code>
+| data-sort-value="5" | V
+| 增加重锤下落攻击所造成的伤害
+| {{ItemSprite|Mace|link=Mace}}
+|-
+| [[深海探索者]]
+| <code>depth_strider</code>
+| data-sort-value="3" | III
+| 增加水下游泳和行走速度
+| {{ItemSprite|Iron Boots|link=Boots}} 
+|-
+| [[效率]]
+| <code>efficiency</code>
+| data-sort-value="5" | V
+| 加快挖掘速度
+| {{ItemSprite|Iron Pickaxe|link=Pickaxe}}{{ItemSprite|Iron Shovel|link=Shovel}}{{ItemSprite|Iron Axe|link=Axe}}{{ItemSprite|Iron Hoe|link=Hoe}}{{ItemSprite|Shears|link=Shears}}
+|-
+| [[摔落缓冲]]
+| <code>feather_falling</code>
+| data-sort-value="4" | IV
+| 减少受到的摔落伤害
+| {{ItemSprite|Iron Boots|link=Boots}} 
+|-
+| [[火焰附加]]
+| <code>fire_aspect</code>
+| data-sort-value="2" | II
+| 使被近战攻击目标着火
+| {{ItemSprite|Iron Sword|link=Sword}}{{ItemSprite|Mace|link=Mace}}{{ItemSprite|Spear|link=Spear}}
+|-
+| [[火焰保护]]
+| <code>fire_protection</code>
+| data-sort-value="4" | IV
+| 减少受到的火焰伤害和着火时间
+| {{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Iron Chestplate|link=Chestplate}}{{ItemSprite|Iron Leggings|link=Leggings}}{{ItemSprite|Iron Boots|link=Boots}}{{ItemSprite|Turtle Helmet|link=海龟壳}}
+|-
+| [[火矢]]
+| <code>flame</code>
+| data-sort-value="1" | I
+| 使射出的箭着火
+| {{ItemSprite|Bow|link=Bow}} 
+|-
+| [[时运]]
+| <code>fortune</code>
+| data-sort-value="3" | III
+| 增加方块掉落物的数量或概率
+| {{ItemSprite|Iron Pickaxe|link=Pickaxe}}{{ItemSprite|Iron Shovel|link=Shovel}}{{ItemSprite|Iron Axe|link=Axe}}{{ItemSprite|Iron Hoe|link=Hoe}} 
+|-
+| [[冰霜行者]]
+| <code>frost_walker</code>
+| data-sort-value="2" | II
+| 使在水面行走时产生霜冰，且不会受到[[岩浆块]]和[[营火]]的伤害
+| {{ItemSprite|Iron Boots|link=Boots}}
+|-
+| [[穿刺]]
+| <code>impaling</code>
+| data-sort-value="5" | V
+| 对{{only|je|for=水生生物}}或{{only|be|for=接触水和雨的生物}}造成额外伤害
+| {{ItemSprite|Trident|link=Trident}}
+|-
+| [[无限]]
+| <code>infinity</code>
+| data-sort-value="1" | I
+| 射箭时不会消耗箭，不包括药箭和{{only|je|for=光灵箭}}
+| {{ItemSprite|Bow|link=Bow}}
+|-
+| [[击退]]
+| <code>knockback</code>
+| data-sort-value="2" | II
+| 增加近战攻击造成的击退距离
+| {{ItemSprite|Iron Sword|link=Sword}}{{ItemSprite|Spear|link=Spear}}
+|-
+| [[抢夺]]
+| <code>looting</code>
+| data-sort-value="3" | III
+| 增加生物掉落物的数量或概率
+| {{ItemSprite|Iron Sword|link=Sword}}{{ItemSprite|Spear|link=Spear}}
+|-
+| [[忠诚]]
+| <code>loyalty</code>
+| data-sort-value="3" | III
+| 使掷出后的[[三叉戟]]返回，魔咒等级越高，三叉戟返回所需时间越短
+| {{ItemSprite|Trident|link=Trident}}
+|-
+| [[海之眷顾]]
+| <code>luck_of_the_sea</code>
+| data-sort-value="3" | III
+| 增加钓鱼时获得宝藏的概率
+| {{ItemSprite|Fishing Rod|link=Fishing Rod}}
+|-
+| [[突进]]
+| <code>lunge</code>
+| data-sort-value="3" | III
+| 进行戳刺攻击时在攻击方向上移动一段距离
+| {{ItemSprite|Spear|link=Spear}}
+|-
+| [[饵钓]]
+| <code>lure</code>
+| data-sort-value="3" | III
+| 减少钓鱼所需的时间
+| {{ItemSprite|Fishing Rod|link=Fishing Rod}}
+|-
+| [[经验修补]]
+| <code>mending</code>
+| data-sort-value="1" | I
+| 损耗获得的经验以修补工具或盔甲的耐久度
+| {{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Iron Chestplate|link=Chestplate}}{{ItemSprite|Iron Leggings|link=Leggings}}{{ItemSprite|Iron Boots|link=Boots}}{{ItemSprite|Iron Pickaxe|link=Pickaxe}}{{ItemSprite|Iron Shovel|link=Shovel}}{{ItemSprite|Iron Axe|link=Axe}}{{ItemSprite|Fishing Rod|link=Fishing Rod}}{{ItemSprite|Iron Sword|link=Sword}}{{ItemSprite|Bow|link=Bow}}{{ItemSprite|Iron Hoe|link=Hoe}}{{ItemSprite|Shears|link=Shears}}{{ItemSprite|Flint and Steel|link=Flint and Steel}}{{ItemSprite|Carrot on a Stick|link=Carrot on a Stick}}{{ItemSprite|Shield|link=Shield}}{{ItemSprite|Elytra|link=Elytra}}{{ItemSprite|Trident|link=Trident}}{{ItemSprite|Crossbow|link=Crossbow}}{{ItemSprite|Warped Fungus on a Stick|link=Warped Fungus on a Stick}}{{ItemSprite|Brush|link=Brush}}{{ItemSprite|Mace|link=Mace}}{{ItemSprite|Turtle Helmet|link=海龟壳}}{{ItemSprite|Spear|link=Spear}}
+|-
+| [[多重射击]]
+| <code>multishot</code>
+| data-sort-value="1" | I
+| 装填时消耗一个物品以装填三个该物品
+| {{ItemSprite|Crossbow|link=Crossbow}}
+|-
+| [[穿透]]
+| <code>piercing</code>
+| data-sort-value="4" | IV
+| 使箭穿过多个实体
+| {{ItemSprite|Crossbow|link=Crossbow}}
+|-
+| [[力量（魔咒）|力量]]
+| <code>power</code>
+| data-sort-value="5" | V
+| 增加箭伤害
+| {{ItemSprite|Bow|link=Bow}}
+|-
+| [[弹射物保护]]
+| <code>projectile_protection</code>
+| data-sort-value="4" | IV
+| 减少受到的弹射物伤害
+| {{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Iron Chestplate|link=Chestplate}}{{ItemSprite|Iron Leggings|link=Leggings}}{{ItemSprite|Iron Boots|link=Boots}}{{ItemSprite|Turtle Helmet|link=海龟壳}}
+|-
+| [[保护]]
+| <code>protection</code>
+| data-sort-value="4" | IV
+| 减少受到的大多数种类的伤害
+| {{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Iron Chestplate|link=Chestplate}}{{ItemSprite|Iron Leggings|link=Leggings}}{{ItemSprite|Iron Boots|link=Boots}}{{ItemSprite|Turtle Helmet|link=海龟壳}}
+|-
+| [[冲击]]
+| <code>punch</code>
+| data-sort-value="2" | II
+| 增加箭的击退距离
+| {{ItemSprite|Bow|link=Bow}}
+|-
+| [[快速装填]] 
+| <code>quick_charge</code>
+| data-sort-value="3" | III
+| 减少弩的填装时间
+| {{ItemSprite|Crossbow|link=Crossbow}}
+|-
+| [[水下呼吸（魔咒）|水下呼吸]]
+| <code>respiration</code>
+| data-sort-value="3" | III
+| 延长水下呼吸时间
+| {{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Turtle Helmet|link=海龟壳}}
+|-
+| [[激流]]
+| <code>riptide</code>
+| data-sort-value="3" | III
+| 将玩家向掷出三叉戟的方向发射，仅在水中或雨中生效
+| {{ItemSprite|Trident|link=Trident}}
+|-
+| [[锋利]]
+| <code>sharpness</code>
+| data-sort-value="5" | V
+| 增加近战攻击伤害
+| {{ItemSprite|Iron Sword|link=Sword}}{{ItemSprite|Iron Axe|link=Axe}}{{ItemSprite|Spear|link=Spear}}
+|-
+| [[精准采集]]
+| <code>silk_touch</code>
+| data-sort-value="1" | I
+| 使部分被开采的方块改为掉落其方块物品，而非其他物品
+| {{ItemSprite|Iron Pickaxe|link=Pickaxe}}{{ItemSprite|Iron Shovel|link=Shovel}}{{ItemSprite|Iron Axe|link=Axe}}{{ItemSprite|Iron Hoe|link=Hoe}}{{only|be|for={{ItemSprite|Shears|link=Shears}}}}
+|-
+| [[亡灵杀手]]
+| <code>smite</code>
+| data-sort-value="5" | V
+| 对[[亡灵生物]]造成额外伤害
+| {{ItemSprite|Iron Sword|link=Sword}}{{ItemSprite|Iron Axe|link=Axe}}{{ItemSprite|Mace|link=Mace}}{{ItemSprite|Spear|link=Spear}}
+|-
+| [[灵魂疾行]] 
+| <code>soul_speed</code>
+| data-sort-value="3" | III
+| 增加玩家在[[灵魂沙]]和[[灵魂土]]上的移动速度
+| {{ItemSprite|Iron Boots|link=Boots}}
+|-
+| [[横扫之刃]]{{only|je}}
+| <code>sweeping_edge</code>
+| data-sort-value="3" | III
+| 增加横扫攻击伤害
+| {{ItemSprite|Iron Sword|link=Sword}}
+|-
+| [[迅捷潜行]]
+| <code>swift_sneak</code>
+| data-sort-value="3" | III
+| 提高玩家[[潜行]]、[[爬行]]时的移动速度
+| {{ItemSprite|Iron Leggings|link=Leggings}}
+|-
+| [[荆棘]]
+| <code>thorns</code>
+| data-sort-value="3" | III
+| 给予攻击者伤害
+| {{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Iron Chestplate|link=Chestplate}}{{ItemSprite|Iron Leggings|link=Leggings}}{{ItemSprite|Iron Boots|link=Boots}}{{ItemSprite|Turtle Helmet|link=海龟壳}}
+|-
+| [[耐久]]
+| <code>unbreaking</code>
+| data-sort-value="3" | III
+| 减少触发耐久消耗的概率
+| {{ItemSprite|Iron Pickaxe|link=Pickaxe}}{{ItemSprite|Iron Shovel|link=Shovel}}{{ItemSprite|Iron Axe|link=Axe}}{{ItemSprite|Fishing Rod|link=Fishing Rod}}{{ItemSprite|Iron Helmet|link=Helmet}}{{ItemSprite|Iron Chestplate|link=Chestplate}}{{ItemSprite|Iron Leggings|link=Leggings}}{{ItemSprite|Iron Boots|link=Boots}}{{ItemSprite|Iron Sword|link=Sword}}{{ItemSprite|Bow|link=Bow}}{{ItemSprite|Trident|link=Trident}}{{ItemSprite|Turtle Helmet|link=海龟壳}}{{ItemSprite|Iron Hoe|link=Hoe}}{{ItemSprite|Crossbow|link=Crossbow}}{{ItemSprite|Shears|link=Shears}}{{ItemSprite|Flint and Steel|link=Flint and Steel}}{{ItemSprite|Carrot on a Stick|link=Carrot on a Stick}}{{ItemSprite|Shield|link=Shield}}{{ItemSprite|Elytra|link=Elytra}}{{ItemSprite|Warped Fungus on a Stick|link=Warped Fungus on a Stick}}{{ItemSprite|Brush|link=Brush}}{{ItemSprite|Mace|link=Mace}}{{ItemSprite|Spear|link=Spear}}
+|-
+| [[风爆]]
+| <code>wind_burst</code>
+| data-sort-value="3" | III
+| 使重锤下落时击中目标后产生[[爆炸#风爆|风爆]]，将攻击者向上弹起
+| {{ItemSprite|Mace|link=Mace}}
+|}
+
+=== 宝藏型魔咒 ===
+宝藏型魔咒是无法从附魔台等常见来源获取的魔咒。若要将这些魔咒应用到玩家预期的物品上，唯一的方式是获取拥有这些魔咒的物品，并使用铁砧来进行物品合并。不同的宝藏型魔咒有不同的获取方式：
+
+; [[经验修补]]、[[冰霜行者]]、[[绑定诅咒]]、[[消失诅咒]]
+:* [[交易]]以获取具有这些魔咒的工具或附魔书。图书管理员提供的具有宝藏型魔咒的附魔书，相较于其会提供的其他附魔书，价格会增加一倍。
+:* [[钓鱼]]时获得的物品或附魔书有可能具有这些魔咒。
+:* 一部分[[箱子战利品]]会包含有概率出现这些魔咒的物品或附魔书。
+:* {{in|be}}[[袭击]]中生成的[[掠夺者]]和[[卫道士]]有可能会额外掉落具有宝藏型魔咒的附魔书。
+
+; [[灵魂疾行]]
+:* 进行[[以物易物]]有概率得到具有灵魂疾行的附魔书或铁靴子。
+:* 探索[[堡垒遗迹]]的战利品箱有概率找到灵魂疾行附魔书。
+
+; [[迅捷潜行]]
+:* 探索[[远古城市]]的战利品箱有概率找到具有迅捷潜行的附魔书。
+
+; [[风爆]]
+:* 解锁[[试炼密室]]的不祥宝库有概率找到具有风爆的附魔书。
+
+=== 魔咒的适用性 ===
+{{see also|不兼容魔咒}}
+以下表格列出了魔咒的[[#魔咒属性|适用物品]]。既可应用于手持物品又可应用于盔甲位物品的魔咒会同时出现在2个表格中。
+
+==== 手持物品魔咒 ====
+{| class="wikitable sortable col-1-left" data-description="手持物品魔咒" style="text-align: center;"
+|-
+! 魔咒（最高等级）
+!{{ItemSprite|Iron Sword|link=剑}}
+!{{ItemSprite|Iron Axe|link=斧}}
+!{{ItemSprite|Iron Pickaxe|link=镐}}<br>{{ItemSprite|Iron Shovel|link=锹}}{{ItemSprite|Iron Hoe|link=锄}}
+!{{ItemSprite|Shears|link=剪刀}}
+!{{ItemSprite|Bow|link=弓}}
+!{{ItemSprite|Fishing Rod|link=钓鱼竿}}
+!{{ItemSprite|Flint and Steel|link=打火石}}{{ItemSprite|Carrot on a Stick|link=胡萝卜钓竿}}<br>{{ItemSprite|Shield|link=盾牌}}{{ItemSprite|Warped Fungus on a Stick|link=诡异菌钓竿}}{{ItemSprite|Brush|link=刷子}}
+!{{ItemSprite|Trident|link=三叉戟}}
+!{{ItemSprite|Crossbow|link=弩}}
+!{{ItemSprite|Compass|link=指南针}}<br>{{only|be|for={{ItemSprite|Recovery Compass|link=追溯指针}}}}
+!{{ItemSprite|Mace|link=重锤}}
+!{{ItemSprite|Spear|link=矛}}
+|-
+| [[节肢杀手]]（V）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[破甲]]（IV）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" |
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" |
+|-
+| [[引雷]]（I）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" |
+|-
+| [[消失诅咒]]（I）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[致密]]（V）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" |
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+|-
+| [[效率]]（V）
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[火焰附加]]（II）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[火矢]]（I）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[时运]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[穿刺]]（V）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[无限]]（I）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[击退]]（II）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[抢夺]]（III）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[忠诚]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[海之眷顾]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[突进]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" |
+| data-sort-value="Z" | 
+| data-sort-value="Z" |
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[饵钓]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[经验修补]]（I）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[多重射击]]（I）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|- 
+| [[穿透]]（IV）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|- 
+| [[力量（魔咒）|力量]]（V）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[冲击]]（II）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[快速装填]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-  
+| [[激流]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[锋利]]（V）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[精准采集]]（I）
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[亡灵杀手]]（V）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[横扫之刃]]（III）{{only|je}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[耐久]]（III）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+|-
+| [[风爆]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" |
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" |  
+|}
+
+==== 盔甲位物品魔咒 ====
+{| class="wikitable sortable col-1-left" data-description="盔甲位物品魔咒" style="text-align: center;"
+|-
+! 魔咒（最高等级）
+!{{ItemSprite|Iron Helmet|link=头盔}}<br>{{ItemSprite|Turtle Helmet|link=海龟壳}}
+!{{ItemSprite|Iron Chestplate|link=胸甲}}
+!{{ItemSprite|Iron Leggings|link=护腿}}
+!{{ItemSprite|Iron Boots|link=靴子}}
+!{{ItemSprite|Elytra|link=鞘翅}}
+! {{BlockSprite|Carved Pumpkin|link=南瓜}}<br>{{BlockSprite|Heads|link=生物头颅}}
+|-
+| [[水下速掘]]（I）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[爆炸保护]]（IV）
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[绑定诅咒]]（I）
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[消失诅咒]]（I）
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+|-
+| [[深海探索者]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[摔落缓冲]]（IV）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[火焰保护]]（IV）
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[冰霜行者]]（II）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[经验修补]]（I）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+|-
+| [[弹射物保护]]（IV）
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[保护]]（IV）
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[水下呼吸（魔咒）|{{tr|水下呼吸|水中呼吸}}]]（III）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[灵魂疾行]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[迅捷潜行]]（III）
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[荆棘]]（III）
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}} 
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+| data-sort-value="Z" | 
+|-
+| [[耐久]]（III）
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="A" {{tc|Yes|✔}}
+| data-sort-value="Z" | 
+|}
+
+== 数据驱动 ==
+{{main|魔咒定义格式}}
+
+{{in|je}}魔咒可以在[[数据包]]中定义。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2011年9月30日|link=none|首次提及附魔台。}}
+|{{HistoryLine||2011年10月1日|link={{tweet|notch|120207632228298753}}|附魔台的附魔界面的图像流出，魔咒使用“[[wikipedia:Standard Galactic Alphabet|标准银河字母]]”写就，第一条魔咒翻译为“Well Played Internets You Are Good”（网友们表现不错！你们做得很好！），第二条是“These Names Will Be Random And Confusing”（这些名字会随机且混乱），第三条是“Each Spell Costs Experience Levels”（每条魔咒都需要经验等级）。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre3|加入了魔咒，物品可以在附魔台上附魔获得魔咒。|附魔后的物品拥有蓝色的提示框并且在其上方有“Enchanted!!”字样。|}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|修复了附魔为所有工具、剑和盔甲只提供“摔落缓冲 I”的漏洞。
+|在多人游戏中加入了正常的附魔功能。之前，若玩家试图附魔一个物品，在客户端上会显示物品具有魔咒，但玩家退出登录并重新登录时，物品上的魔咒会消失。|现在附魔的物品将显示其具有的魔咒。}}
+|{{HistoryLine||1.1|dev=正式版|加入了力量、火矢、冲击和无限。}}
+|{{HistoryLine||1.2.1|dev=12w06a|现在生物掉落的弓和金剑可能具有魔咒。}}
+|{{HistoryLine||1.3.1|dev=12w23a|附魔物品的光效在多人游戏中也能看到了。}}
+|{{HistoryLine||1.4.2|dev=12w41a|加入了铁砧，可以牺牲一个物品来为另一个同种物品添加其魔咒。
+|在铁砧上合并两个物品时，其相同的魔咒若具有相同等级且低于最高等级，则输出的物品的对应魔咒提升一级。}}
+|{{HistoryLine||1.4.4|dev=pre|{{cmd|enchant}}可以用来给物品添加魔咒，但保护魔咒由于漏洞无法使用。}}
+|{{HistoryLine||1.4.6|dev=12w49a|加入了[[附魔书]]，可以用于在铁砧上为物品添加魔咒。|{{cmd|enchant|link=none}}现在可以接受魔咒ID参数为0，即保护魔咒。}}
+|{{HistoryLine|||dev=12w50a|加入了荆棘。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了海之眷顾和饵钓。|钓鱼竿现在可以获取魔咒。}}
+|{{HistoryLine||1.8|dev=14w02a|村民交易系统更新后，牧师不再出售附魔物品，而由穿黑围裙的村民出售附魔物品。}}
+|{{HistoryLine|||dev=14w25a|加入了深海探索者。}}
+|{{HistoryLine||1.9|dev=15w42a|加入了宝藏魔咒，以及首个宝藏魔咒：冰霜行者和经验修补。
+|最大等级为I级的I级魔咒不再显示等级。例如“无限”不再显示为“无限 I”。}}
+|{{HistoryLine|||dev=15w44a|降低了经验修补魔咒所需的经验等级。}}
+|{{HistoryLine||1.11|dev=16w39a|加入了诅咒，以及首个诅咒：绑定诅咒和消失诅咒魔咒。}}
+|{{HistoryLine||1.11.1|dev=16w50a|加入了横扫之刃。
+|无限和经验修补现在互为不共存魔咒。}}
+|{{HistoryLine||1.13|dev=17w47a|[[锄]]现在可以获取魔咒。}}
+|{{HistoryLine|||dev=18w07a|加入了忠诚、穿刺、激流和引雷。}}
+|{{HistoryLine|||dev=18w14a|激流和忠诚现在互为不共存魔咒。|激流和引雷现在互为不共存魔咒。}}
+|{{HistoryLine|||dev=18w21a|物品具有的魔咒的物品数据NBT标签由<code>ench</code>改为了<code>Enchantments</code>，支持的最大等级由32767（short）提高到2147483647（int）。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了多重射击、快速填充和穿透。}}
+|{{HistoryLine|||dev=19w02a|保护、爆炸保护、弹射物保护、火焰保护不再互为不共存魔咒。<ref name="MC-141961">{{bug|MC-141961|||Fixed}}</ref>}}
+|{{HistoryLine||1.14.3|dev=pre2|保护、弹射物保护、火焰保护和爆炸保护现在互为不共存魔咒。<ref name="MC-141961"/>}}
+|{{HistoryLine||1.16|dev=20w10a|[[效率]]、[[时运]]和[[精准采集]]现在适用于[[锄]]。}}
+|{{HistoryLine|||dev=20w11a|加入了灵魂疾行。}}
+|{{HistoryLine|||dev=20w14a|消失诅咒现在适用于[[指南针]]。}}
+|{{HistoryLine||1.17.1|dev=pre1|物品具有的魔咒的物品数据NBT标签<code>Enchantments</code>支持的最大数值再次改为32767（short），但在读取时会将其限制在0~255之间（含）。<ref>{{bug|MC-231508||魔咒上限为255级|WAI}}</ref>}}
+|{{HistoryLine||1.19|dev=exp1|加入了[[迅捷潜行]]。}}
+|{{HistoryLine|||dev=22w12a|在常规快照中加入了迅捷潜行，现在其用于[[护腿]]而不是靴子。
+|基于上述更改，迅捷潜行不再与[[灵魂疾行]]、[[冰霜行者]]和[[深海探索者]]互斥。}}
+|{{HistoryLine||1.20.5|dev=24w03a|现在[[斧]]可以通过附魔获得[[锋利]]、[[亡灵杀手]]、[[节肢杀手]]。<ref name="MC-267943">{{bug|MC-267943|||Fixed}}</ref>|现在[[头盔]]、[[护腿]]、[[靴子]]可以通过附魔获得[[荆棘]]。<ref name="MC-267943"/>}}
+|{{HistoryLine|||dev=24w09a|现在物品提示框中已附魔物品的魔咒列表按照命名空间ID排序，而非附魔顺序。
+|[[強力]]、[[冲击]]、[[火矢]]、[[无限]] 现在会在弩上产生效果。|[[穿透]]、[[多重射击]] 现在会在弓上产生效果。}}
+|{{HistoryLine|||dev=24w12a|现在[[斧]]不再能通过附魔获得[[锋利]]、[[亡灵杀手]]、[[节肢杀手]]。<ref name="MC-267943"/>|现在头盔、护腿、靴子不再能通过附魔获得荆棘。<ref name="MC-267943"/>}}
+|{{HistoryLine|||dev=24w13a|加入了[[致密]]、[[破甲]]和[[风爆]]。}}
+|{{HistoryLine|||dev=pre1|加入了魔咒[[Java版标签|标签]]<code>#tooltip_order</code>以控制物品上的魔咒顺序。}}
+|{{HistoryLine||1.21|dev=24w18a|现在魔咒属性由数据包定义。|现在水下速掘、爆炸保护、深海探索者、效率、火焰保护、{{tr|水下|水中}}呼吸、横扫之刃和迅捷潜行魔咒会为将附魔物品装备在特定槽位的生物添加[[属性修饰符]]。这些修饰符效果会在物品[[提示框]]中显示。}}
+|{{HistoryLine|||dev=24w21a|现在魔咒的属性效果可在不同有效槽位上叠加。}}
+|{{HistoryLine||1.21.2|dev=24w33a|魔咒的最低等级由0提升至1。<ref>{{bug|MC-273555||使用具有快速装填0的弩会导致游戏崩溃|Fixed|archive=https://web.archive.org/web/20240619090548/https://bugs.mojang.com/browse/MC-273555}}</ref>}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了[[突进]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了魔咒。{{info needed}}}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入经验修补与冰霜行者。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了绑定诅咒和消失诅咒，绑定诅咒和消失诅咒魔咒可以与图书管理员交易获得。}}
+|{{HistoryLine||1.2.13|exg=1|dev=1.2.13.8|加入忠诚、穿刺、激流和引雷。}}
+|{{HistoryLine|||dev=1.2.13.11|三叉戟可以获取魔咒。}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|忠诚、穿刺、激流和引雷不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.10|为弩加入了3种新魔咒：多重射击、快速装填、穿透。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|为靴子加入了新魔咒：灵魂疾行。
+|[[效率]]、[[时运]]和[[精准采集]]现在适用于[[锄]]。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.24|加入了[[迅捷潜行]]。}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.21|加入了[[致密]]、[[破甲]]和[[风爆]]。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|致密、破甲和风爆不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.22|最大等级为I级的I级魔咒不再显示等级。例如“无限”不再显示为“无限 I”。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.20|加入了[[突进]]。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU7|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了魔咒。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|switch=1.0.1|加入海之眷顾、饵钓和深海探索者。
+|附魔书现在可以一次出现多个魔咒。}}
+|{{HistoryLine||xbox=TU43|xbone=CU33|ps3=1.36|psvita=1.36|ps4=1.36|wiiu=Patch 13|switch=1.0.1|加入了冰霜行者和经验修补。}}
+|{{HistoryLine||xbox=TU54|xbone=CU44|ps3=1.52|psvita=1.52|ps4=1.52|wiiu=Patch 24|switch=1.0.4|加入了绑定诅咒及消失诅咒。}}
+|{{HistoryLine|new3ds}}
+|{{HistoryLine||0.1.0|加入了魔咒。}}
+|{{HistoryLine||1.9.19|加入了冰霜行者和经验修补。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox enchantments}}
+{{Navbox gameplay}}
+
+[[Category:机制]]
+[[Category:魔咒|*]]
+
+[[cs:Očarování]]
+[[de:Verzauberung]]
+[[en:Enchantment]]
+[[es:Encantamiento]]
+[[fr:Enchantement]]
+[[it:Incantamento]]
+[[ja:エンチャント]]
+[[ko:마법 부여]]
+[[lzh:靈]]
+[[nl:Betoveren]]
+[[pl:Zaklinanie]]
+[[pt:Encantamento]]
+[[ru:Зачаровывание]]
+[[th:การร่ายมนตร์]]
+[[uk:Зачарування]]

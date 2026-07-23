@@ -1,0 +1,51 @@
+# 页面: 旧版Minecraft验证
+# 来源: https://zh.minecraft.wiki/w/%E6%97%A7%E7%89%88Minecraft%E9%AA%8C%E8%AF%81
+# 分类: CC-BY-SA页面, Java版, 过时内容, 需要确定时间
+# 抓取时间: 2026-07-14 17:28:24
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|返回|回傳|返回}}
+{{outdated|该验证系统先被[[Yggdrasil]]取代，随后被[[微软验证]]取代.|edition=java}}
+
+'''旧版Minecraft验证'''指的是[[Java版1.6.1]]之前用于验证Java版账户的方法。
+
+== 登录 ==
+
+为了让玩家登录，官方启动器会向以下地址发送一个HTTPS POST请求：
+<syntaxhighlight lang=urlencoded>https://login.minecraft.net</syntaxhighlight>
+请求参数：
+<syntaxhighlight lang=urlencoded>?user=<username>&password=<password>&version=<launcher version></syntaxhighlight>
+并在<code>Content-Type</code>请求头中指定“application/x-www-form-urlencoded”。
+
+迁移到Mojang账户后，登录便使用电子邮件地址而非用户名，但流程保持不变。
+
+假设当前启动器版本为13（新启动器是14）。如果发送的版本号小于12，服务器会返回“Old version”；但如果发送一个很大的数字，服务器依然会正常返回。如果登录成功，则会返回一个用<code>:</code>分隔的5个值：
+<syntaxhighlight lang=text>1343825972000:deprecated:SirCmpwn:7ae9007b9909de05ea58e94199a33b30c310c69c:dba0c48e1c584963b9e93a038a66bb98</syntaxhighlight>
+#'''当前游戏版本'''（不是启动器版本）。这是一个UNIX时间戳，启动器会将其与~/.minecraft/bin/version文件进行比较。
+#在以前，这里会有一个用于从服务器请求新的minecraft.jar的'''下载凭证'''。现在则只返回“deprecated”。
+#'''区分大小写的用户名'''。对于Mojang账户，返回的是真实用户名，而非登录所用的邮箱。
+#'''sessionId'''——当前会话的唯一ID。
+#'''UID'''——目前未使用，大约在2012年8月8日引入。Grum曾说它是用户的唯一ID。
+
+* 如果请求缺少参数，服务器则会返回“Bad response”；
+* 如果登录信息错误，服务器则会返回“Bad login”；
+* 如果登录信息正确但账户并没有购买游戏，服务器则会返回“User not premium”；
+* 如果相应minecraft.net账户已经迁移到Mojang账户，但依然用minecraft.net用户名登录，服务器则会返回「Account migrated, use e-mail」。
+
+== 维持会话 ==
+客户端会每6000刻发送一个HTTPS请求：
+<syntaxhighlight lang=urlencoded>https://login.minecraft.net/session?name=<username>&session=<session id></syntaxhighlight>
+
+在较旧的Minecraft版本中，客户端只会直接丢弃返回的内容。
+
+后来{{when|需要确认具体版本}}，客户端则会检查返回码。如果返回码为400，客户端则会认为游戏是盗版，并在游戏过程中显示相应的提示。
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{license wiki.vg}}
+
+[[Category:Java版]]
+
+[[en:Legacy_Minecraft_authentication]]
+[[fr:Ancienne authentification Minecraft]]
+[[ja:旧式Minecraft認証]]

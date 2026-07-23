@@ -1,0 +1,286 @@
+# 页面: 陷阱箱
+# 来源: https://zh.minecraft.wiki/w/%E9%99%B7%E9%98%B1%E7%AE%B1
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 储物, 可再生资源, 基岩版独有信息, 方块, 有未知版本的History模板的页面/携带版Alpha, 红石, 红石机制
+# 抓取时间: 2026-07-14 17:38:19
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|image=Trapped Chest.gif
+|imagesize=x150px
+|imagecaption=陷阱箱
+|image2=Large Trapped Chest.gif
+|image2size=x175px
+|image2caption=大型陷阱箱
+|invimage1=Trapped Chest
+|invimage2=Trapped Chest BE
+|light=0
+}}
+
+'''陷阱箱（Trapped Chest）'''是[[箱子]]的变种，在开启时会发出[[红石信号]]。
+
+== 生成 ==
+=== 自然生成 ===
+陷阱箱会自然生成在[[林地府邸]]的[[林地府邸/结构/战利品房间#伪末地传送门房|伪末地传送门房间]]里，两侧各有一个[[TNT]]。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|Tripwire Hook
+|Chest
+|Output=Trapped Chest
+|type=Redstone
+}}
+
+== 破坏 ==
+挖掘陷阱箱的合适工具是斧。
+
+{{Breaking table}}
+
+陷阱箱被破坏后会掉落自身和内容物。
+
+如果一个大型陷阱箱（由2个相邻的陷阱箱组成）的其中一个陷阱箱破坏，那么将会掉落对应27个储存格的物品。
+
+== 用途 ==
+陷阱箱可用作物品容器储存物品或用作[[红石元件]]。
+
+陷阱箱的闩的四周相比普通箱子的稍红。
+
+若要放置陷阱箱，应对着方块表面{{ctrl|放置方块}}。
+
+把一个陷阱箱放在另一个陷阱箱的旁边，若两者朝向相同，那么它们会合并为一个大型陷阱箱。若要避免这种情况，玩家需要{{only|je|for=在放置第二个陷阱箱时{{ctrl|潜行}}（若潜行放置时对准了陷阱箱，则两个箱子仍然会合并）}}或{{only|be|for=用[[活塞]]移动陷阱箱到指定位置}}。普通箱子不会与陷阱箱合并。
+
+[[水]]和[[熔岩]]会绕过陷阱箱流动，不会对其造成任何影响。熔岩会在陷阱箱周围的空气方块生成火，但陷阱箱不会被烧毁（并且也不会以其他方式燃烧）。{{in|be}}陷阱箱可被活塞推动。
+
+=== 容器 ===
+{{Filetr|Large Chest GUI.png|缩略图|大型陷阱箱的界面}}
+
+一个陷阱箱拥有27个物品槽位，大型陷阱箱拥有54个槽位。大型陷阱箱的物品槽位分布如下：
+* 前27个（上三行）：
+** {{in|je}}对应其面对锁扣观察时的左侧部分。
+** {{in|be}}对应其先被放置的部分。
+* 后27个（下三行）：
+** {{in|je}}对应其面对锁扣观察时的右侧部分。
+** {{in|be}}对应其后被放置的部分。
+
+对陷阱箱按下{{ctrl|使用}}可以打开陷阱箱的界面。
+
+陷阱箱在上方置有{{only|je|for=[[红石导体]]}}或{{only|be|for=固体方块（[[信标]]、[[客户端请求占位符方块]]、[[荧石]]、[[海晶灯]]、[[TNT]]、[[水下TNT]]除外）或下半[[台阶]]}}时，或[[猫]]坐在其上方时，不能开启。但由于陷阱箱不是{{only|je|for=红石导体}}或{{only|be|for=固体方块}}，所以可以在陷阱箱的上面放置陷阱箱而不影响开启（无论陷阱箱是否已打开）。
+
+陷阱箱界面的标题默认为“箱子”，可以在放置前使用[[铁砧]]重命名来进行更改，{{in|je}}也可以通过使用{{cmd|data}}命令修改陷阱箱的<code>CustomName</code>标签进行更改（例如，要把位于(0,64,0)的陷阱箱标记为“陷阱！”，则使用命令{{cmd|data merge block 0 64 0 {CustomName:"陷阱！"} }}）。若大型陷阱箱的一半被重命名，那么整个大型陷阱箱界面上的名字都会改变，但若重命名的那一半被摧毁，剩下的一半会恢复到默认状态。若两个部分的名字不同，陷阱箱根据朝向优先选择北侧或西侧的那一半的名字（即X轴或Z轴上坐标最小的那一半），若均无重命名则会显示“大型箱子”。{{in|be}}大型陷阱箱界面上的名字取决于被打开的大型陷阱箱的一半的名称。若打开的大型陷阱箱的一半无名称，则会显示“大箱子”。
+
+{{in|je}}陷阱箱可以被<code>lock</code>标签上锁。若陷阱箱的该标签不是空白的，那么这个陷阱箱必须使用符合该标签表示的物品谓词的物品打开。
+
+=== 红石元件 ===
+[[File:Chest-Comparsion.png|缩略图|箱子（左）和陷阱箱（右）可毗邻放置。[[红石粉]]会指向陷阱箱，但不指向普通的箱子]]
+{{see also|红石电路}}
+
+陷阱箱会将正在使用陷阱箱的生物（如玩家或[[铜傀儡]]）数量（最大为15）输出为红石信号，可检测玩家何时打开了它的界面。
+
+从大型陷阱箱的任一部分打开都会使大型陷阱箱的两边都发出信号。陷阱箱不会因[[投掷器]]、[[合成器]]或[[漏斗]]改变其内容物而发出红石信号。
+
+陷阱箱会改变水平方向上毗邻的红石线的指向。
+
+陷阱箱开启时会：
+* 为毗邻的[[红石线]]提供对应信号强度。
+* 为毗邻且朝向正确（主输入端面向陷阱箱）的[[红石中继器]]提供对应信号强度。
+* 激活毗邻且朝向正确（若需要，如[[活塞]]）的任何[[红石元件#机械元件|机械元件]]。
+* '''[[强充能]]'''自身下方的[[红石导体]]至对应充能等级。
+
+[[红石比较器]]只能以检测普通箱子的方式检测陷阱箱存储物品的数量。
+
+=== 猪灵 ===
+{{main|猪灵#敌对性}}
+在非和平[[难度]]下，成年[[猪灵]]会与打开或破坏陷阱箱的玩家敌对。
+
+=== 燃料 ===
+陷阱箱可用作[[熔炉]]、[[高炉]]或[[烟熏炉]]的[[燃料]]，每个陷阱箱可烧炼1.5个物品。
+
+=== 圣诞节 ===
+{{see also|彩蛋#圣诞节}}
+{{exclusive|je|section=1}}
+每年12月24日至26日，陷阱箱和[[箱子]]会共用圣诞节礼物包裹纹理，因而无法从外观分辨。由于游戏会读取电脑数据，玩家可以通过更改游戏文件和时间来看到或隐藏圣诞节纹理。
+
+<gallery mode="packed">
+File:Xmas chest.png|圣诞节期间的陷阱箱
+File:Xmas large chest.png|圣诞节期间的大型陷阱箱
+</gallery>
+
+== 音效 ==
+{{Sound table/Block/Wood
+|suffix-je=
+{{Sound table
+|sound=Chest close1.ogg
+|sound2=Chest close2.ogg
+|sound3=Chest close3.ogg
+|subtitle={{tp|subtitles.block.chest.close}}
+|source={{tp|soundCategory.block}}
+|description=关闭箱子
+|id=block.chest.close
+|translationkey=subtitles.block.chest.close}}
+{{Sound table
+|sound=Door close.ogg
+|sound2=Door open.ogg
+|subtitle={{tp|subtitles.block.chest.close}}
+|source={{tp|soundCategory.block}}
+|description=试图打开锁上的箱子
+|id=block.chest.locked
+|translationkey=subtitles.block.chest.locked}}
+{{Sound table
+|sound=Chest open.ogg
+|subtitle={{tp|subtitles.block.chest.open}}
+|source={{tp|soundCategory.block}}
+|description=打开箱子
+|id=block.chest.open
+|translationkey=subtitles.block.chest.open
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=random.chestopen.wav
+|source=方块
+|description=打开箱子
+|id=random.chestopen
+|typeid=chest.open
+|soundvolume=0.5
+|soundpitch=0.9-1
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=random.chestclosed.wav
+|source=方块
+|description=关闭箱子
+|id=random.chestclosed
+|typeid=chest.closed
+|soundvolume=0.5
+|soundpitch=0.9-1
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table|generatetranslationkeys=java
+|Trapped Chest|spritetype=block|nameid=trapped_chest
+|showblocktags=je
+|blocktags={{GameTag|block|trapped_chest}}
+|foot=1}}
+{{ID table|Trapped Chest|displayname=方块实体|spritetype=block|nameid=trapped_chest|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table|generatetranslationkeys=bedrock
+|Trapped Chest|spritetype=block|nameid=trapped_chest|showblocktags=be|blocktags={{GameTagBE|block|trapped_chest}}|foot=1}}
+{{ID table|Trapped Chest|displayname=方块实体|spritetype=block|nameid=Chest|foot=1}}
+
+=== 方块数据 ===
+{{main|基岩版数据值}}
+
+{{in|be}}陷阱箱的方块数据里存储着它的方向：
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+每个陷阱箱都有相对应的方块实体，储存了关于陷阱箱的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{:箱子/BE|陷阱箱}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{Load achievements|chestful-of-cobblestone;freight-station;smelt-everything}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w01a|[[File:Trapped Chest JE1 BE1.gif|32px]] [[File:Large Trapped Chest JE1 BE1.gif|32px]] 加入了陷阱箱。}}
+|{{HistoryLine|||dev=13w02a|陷阱箱在创造模式物品栏分类里被移到了装饰性方块中。}}
+|{{HistoryLine|||dev=13w02b|陷阱箱现在可以强充能下面的一个红石导体。}}
+|{{HistoryLine||1.8|dev=14w02a|陷阱箱现在可以具有方块实体数据{{nbt|string|Lock}}，用于锁定陷阱箱。如该标签存在，该陷阱箱只能用自定义名称与该标签相同的物品打开。}}
+|{{HistoryLine||1.8.9|[[File:Xmas chest.png|32px]][[File:Xmas large chest.png|32px]] 陷阱箱会在圣诞节期间看起来像礼物。}}
+|{{HistoryLine||1.9|dev=15w31a|现在其物品模型旋转了，其正面对着玩家的视角。}}
+|{{HistoryLine|||dev=15w43a|加入了战利品表；陷阱箱现在可以使用战利品表了。}}
+|{{HistoryLine|||dev=15w49a|在创造模式的物品栏里，陷阱箱从装饰性方块移动到了红石部分。}}
+|{{HistoryLine|||dev=16w05a|现在陷阱箱的合成配方是无序的。
+{{{!}} class{{=}}"collapsible collapsed" data-description{{=}}
+! 旧合成配方
+{{!}}-
+{{!}}
+{{Crafting Table
+|A2= Tripwire Hook
+|B2= Chest
+|Output= Trapped Chest
+}}
+{{!}}} }}
+|{{HistoryLine||1.11|dev=16w39a|陷阱箱现在会生成在[[林地府邸]]中。}}
+|{{HistoryLine||1.13|dev=17w47a|陷阱箱现在能够直接放在大型陷阱箱的旁边而无需和大型陷阱箱相隔一格的距离。
+|在潜行时并排放置陷阱箱将不会合并为大型陷阱箱。}}
+|{{HistoryLine|||dev=18w10c|水现在能够放置在陷阱箱所在的方块上。}}
+|{{HistoryLine||1.16|dev=20w07a|加入了[[猪灵]]，当玩家打开或破坏陷阱箱时会被激怒。}}
+|{{HistoryLine||1.20|dev=23w14a|[[File:Large Trapped Chest JE2 BE2.gif|32px]] 略微更改了大型陷阱箱的纹理。}}
+|{{HistoryLine||1.21.2|dev=24w39a|将方块实体数据{{nbt|string|Lock}}重命名为{{nbt|compound|lock}}，并支持物品谓词。}}
+|{{HistoryLine||1.21.9|dev=25w31a|降低了陷阱箱的音效音量。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|[[File:Trapped Chest JE1 BE1.gif|32px]] 加入了陷阱箱。}}
+|{{HistoryLine||0.14.0|dev=build 1|[[File:Large Trapped Chest JE1 BE1.gif|32px]] 陷阱箱现在可以由两个陷阱箱合并成一个大型陷阱箱。
+|现在陷阱箱在使用时会产生红石信号。}}
+|{{HistoryLine|||dev=build 4|现在大型陷阱箱在被使用时会产生红石信号。}}
+|{{HistoryLine||0.15.0|dev=build 1|陷阱箱现在可以被活塞推动了。}}
+|{{HistoryLine||?|重命名后的陷阱箱现在会在其界面显示名字了。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|陷阱箱现在会自然生成在林地府邸中。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|水现在能够放置在陷阱箱所在的方块上。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|加入了[[猪灵]]，当玩家打开或破坏陷阱箱时会被激怒。}}
+|{{HistoryLine||1.20.40|dev=1.20.40.20|现在陷阱箱使用方块状态{{cd|minecraft:cardinal_direction}}，并弃用了{{cd|facing_direction}}。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.25|[[File:Large Trapped Chest JE2 BE2.gif|32px]] 略微更改了大型陷阱箱的纹理。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|switch=1.0.1|[[File:Trapped Chest JE1 BE1.gif|32px]] [[File:Large Trapped Chest JE1 BE1.gif|32px]] 加入了陷阱箱。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Trapped Chest JE1 BE1.gif|32px]] [[File:Large Trapped Chest JE1 BE1.gif|32px]] 加入了陷阱箱。}}
+}}
+
+== 你知道吗 ==
+* {{in|bedrock}}陷阱箱在物品栏中显示的形状和完整方块一样，虽然它其实不是完整的。<ref>{{bug|MCPE-7990}}</ref>
+
+== 画廊 ==
+<gallery>
+File:Christmaschest vs Christmastrapchest.png|圣诞节时，陷阱箱与普通箱子的比较（前者为陷阱箱，后者为普通箱子）
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:红石机制]]
+[[Category:储物]]
+
+[[cs:Nástražná truhla]]
+[[de:Redstone-Truhe]]
+[[en:Trapped Chest]]
+[[es:Cofre trampa]]
+[[fr:Coffre piégé]]
+[[it:Baule trappola]]
+[[ja:トラップチェスト]]
+[[ko:덫 상자]]
+[[nl:Kist met valstrik]]
+[[pl:Skrzynia-pułapka]]
+[[pt:Baú com Armadilha]]
+[[ru:Сундук-ловушка]]
+[[uk:Скриня-пастка]]

@@ -1,0 +1,83 @@
+# 页面: 命令/querytarget
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/querytarget
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Stub|缺少输出、缺少示例}}{{Exclusive|education|bedrock}}
+{{Infobox command
+|name=querytarget
+|hidden=1
+|oplevel=2{{only|bedrock}}<br>0{{only|education}}
+|nocmdblock=1
+|cheat=1
+}}
+返回指定实体的详细信息。
+
+== 用法 ==
+信息将以[[JSON]]返回，格式见下：
+<div class="treeview">
+* {{nbt|list}} JSON根数组
+** {{nbt|compound}}：一项实体信息。
+*** {{nbt|int|dimension}}：实体所处[[维度]]。0为主世界，1为下界，2为末地。
+*** {{nbt|long|id}}：实体的唯一ID。
+*** {{nbt|compound|position}}：实体所处位置的[[坐标]]。
+**** {{nbt|double|x}}：X轴坐标。
+**** {{nbt|double|y}}：Y轴坐标。
+**** {{nbt|double|z}}：Z轴坐标。
+*** {{nbt|string|uuid}}：玩家的[[UUID]]或非玩家实体的唯一ID。
+*** {{nbt|double|yRot}}：实体的Y轴旋转角度。
+</div>
+
+=== 返回信息示例 ===
+<syntaxhighlight lang="json">
+目标数据：[
+   {
+      "dimension" : 0,
+      "id" : -21474836477,
+      "position" : {
+         "x" : 95.57814788818359,
+         "y" : 43.69106674194336,
+         "z" : -46.34045791625977
+      },
+      "uniqueId" : "45f4943f-cb75-37cb-87a8-873d8abfff8f",
+      "yRot" : 41.42701721191406
+   },
+   {
+      "dimension" : 0,
+      "id" : -21474836478,
+      "position" : {
+         "x" : 95.57814788818359,
+         "y" : 21.94908905029297,
+         "z" : -46.34045791625977
+      },
+      "uniqueId" : "-21474836478",
+      "yRot" : 0.0
+   }
+]
+</syntaxhighlight>
+
+== 语法 ==
+: <code>querytarget <victim: target></code>
+
+== 参数 ==
+{{argument|be=1|victim: target|CommandSelector<Actor>}}
+: {{arg desc|be=actor}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|education}}
+|{{HistoryLine||?|加入了{{cmd|querytarget|link=none}}。}}}}
+== 导航 ==
+{{Navbox commands}}
+
+[[en:Commands/querytarget]]
+[[ja:コマンド/querytarget]]
+[[lzh:令/querytarget]]
+[[pt:Comandos/querytarget]]

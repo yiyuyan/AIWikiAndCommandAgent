@@ -1,0 +1,380 @@
+# 页面: Java版26.3-snapshot-3
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8826.3-snapshot-3
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:42
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|串列}}{{Undecided translation|tw=1|hk=1}}
+{{Dangerous version|该版本的以下行为会导致游戏崩溃：
+* 启用“{{tr|改进透明显示|改善透明顯示|改進透明顯示}}”选项时，在GUI外渲染[[地图]]的物品纹理。<ref>{{bug|MC-309394}}</ref>
+* [[鸡蛋]]、[[末影珍珠]]、[[滞留药水]]、[[羊驼唾沫]]、[[附魔之瓶]]、[[雪球]]或[[喷溅药水]]的弹射物实体的Y轴坐标低于最低建筑高度或高于最高建筑高度。<ref>{{bug|MC-309686|||Fixed}}</ref>}}
+{{Infobox version
+|title=26.3-snapshot-3
+|image=26.3-snapshot-3.jpg
+|image2=Java Edition 26.3-snapshot-3 Simplified.png\Java Edition 26.3-snapshot-3 Traditional.png\Java Edition 26.3-snapshot-3 Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2026年7月7日
+|jsonhash=1bfa4903868c9a848276d4746115aec29a8a6908
+|clienthash=50383a4ce84352142b77b10fff8122e3103db661
+|serverhash=6cd1e711f62dc45497df6f390a9e83ba6191be41
+|parent=26.3
+|prevparent=26.2
+|prev=26.3-snapshot-2
+|next=
+|nextparent=
+}}<onlyinclude>
+
+'''26.3-snapshot-3'''是[[Java版26.3]]的第3个快照，发布于2026年7月7日<ref>{{article|minecraft-26-3-snapshot-3|Minecraft 26.3 Snapshot 3|Jul 07, 2026}}</ref>，加入了{{pa|Straw Bed|}}、[[坐垫]]等新特性，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''{{pa|Straw Bed|}}'''
+* 使用后可以使玩家通过睡觉来跳过夜晚，但不会设置重生点。
+* 只能使用一次，使用后会被摧毁。
+* 无法在[[下界]]或[[末地]]中使用，如果试图在其中使用，{{pa|Straw Bed}}会被摧毁。
+* 使用3个[[干草捆]]合成4个{{pa|Straw Bed}}。
+* 可用于[[堆肥]]，有85%的概率使堆肥层数增加一层。
+
+=== 非生物实体 ===
+'''[[坐垫]]'''
+* 一种可以在放置后通过{{ctrl|交互}}来坐下的[[实体]]。
+* 有16种颜色。
+* 可以使用3个相同颜色的[[羊毛台阶]]合成。
+* 可被[[活塞]]或[[黏性活塞]]推动破坏。
+* 可被会造成伤害的[[弹射物]]破坏。
+* 可以放置在方块[[轮廓箱]]的任意上表面上，且水平方向上总是居于方块位置的中心。
+** 如果支撑方块被移除，会在几秒后被破坏。
+** 如果此实体边界箱被方块完全覆盖，会被立即破坏。
+** 没有碰撞体积，可以与其他不完整方块重叠。
+** 不能与其他坐垫重叠。
+* 不会穿越传送门。骑乘坐垫的玩家也不会穿越传送门。
+
+=== 命令格式 ===
+'''{{cmd|posteffect}}'''
+* 添加或移除玩家使用的[[着色器#后处理管线|后处理效果]]。
+* 后处理效果仅存在于客户端，服务端无法获知后处理效果是否实际生效。
+* 语法：
+** {{cmd|posteffect add <player> <posteffect>|link=none|/=0}} - 为玩家添加指定的后处理效果。
+** {{cmd|posteffect clear <player>|link=none|/=0}} - 移除玩家的所有后处理效果。
+** {{cmd|posteffect list <target>|link=none|/=0}} - 列出玩家的所有后处理效果。
+** {{cmd|posteffect remove <player> <posteffect>|link=none|/=0}} - 移除玩家的指定的后处理效果。
+
+=== 常规 ===
+'''[[统计信息]]'''
+* 新增玩家在{{pa|Straw Bed}}上睡觉次数的统计信息。
+
+'''[[语言]]'''
+* 加入了哥特语。
+
+'''[[数据包]]'''
+* 加入了注册表<code>minecraft:number_provider</code>。
+
+'''[[环境属性]]'''
+* 加入了<code>minecraft:gameplay/straw_bed_rule</code>。
+** 格式与<code>minecraft:gameplay/bed_rule</code>相同，用于控制{{pa|Straw Bed}}的相关行为。
+
+'''[[数据组件]]'''
+* 加入了<code>minecraft:compostable</code>。
+** 描述物品的[[堆肥]]行为。
+** 格式：具有以下字段的复合标签：
+*** <code>layers</code>：一个数值提供器的命名空间ID。
+
+'''[[谓词]]'''
+* 加入了以下谓词：
+** <code>minecraft:tool/can_silk_touch</code>
+** <code>minecraft:tool/can_shear</code>
+
+'''数值提供器'''<!--[[数值提供器]]会重定向到一个NBT树结构页-->
+* 加入了以下数值提供器：
+** <code>minecraft:compostable/low</code>
+*** 如果[[战利品上下文]]中的参数<code>block_state</code>存在且提供的是一个空[[堆肥桶]]，则返回1，否则有30%的概率返回1。
+** <code>minecraft:compostable/low_medium</code>
+*** 如果战利品上下文中的参数<code>block_state</code>存在且提供的是一个空堆肥桶，则返回1，否则有50%的概率返回1。
+** <code>minecraft:compostable/medium</code>
+*** 如果战利品上下文中的参数<code>block_state</code>存在且提供的是一个空堆肥桶，则返回1，否则有65%的概率返回1。
+** <code>minecraft:compostable/medium_high</code>
+*** 如果战利品上下文中的参数<code>block_state</code>存在且提供的是一个空堆肥桶，则返回1，否则有85%的概率返回1。
+** <code>minecraft:compostable/always_add_one</code>
+*** 必定返回1。
+** 上述数值提供器若未返回1，则会返回0。
+* 加入了<code>minecraft:number_dispatcher</code>数值提供器类型。
+** 逐一检查所列情形并使用第一个{{tr|匹配|相符}}的情形中的数值提供器，若无{{tr|匹配|相符}}情形则使用默认数值提供器。
+** 格式：
+<div class="treeview">
+::* {{nbt|compound}}数值提供器
+::** {{nbt|string|type}}：<code>number_dispatcher</code>
+::** {{nbt|list|cases|required=1}}：要检查的情形的列表。游戏会按定义顺序检查。
+::*** {{nbt|compound}}：一种情形。
+::**** {{nbt|compound}}{{nbt|list|predicate|required=1}}：要检查的谓词。
+::***** 见[[谓词]]。
+::**** {{nbt|float}}{{nbt|compound|number_provider|required=1}}：匹配此情形时要使用的数值提供器。
+::***** {{Nbt inherit/number provider}}
+::** {{nbt|float}}{{nbt|compound|default}}：默认使用的数值提供器。默认为0。
+::*** {{Nbt inherit/number provider}}
+</div>
+* 加入了<code>minecraft:conditional_value</code>数值提供器类型。
+** 检查一个条件是否为真并使用对应的数值提供器。
+** 格式：
+<div class="treeview">
+::* {{nbt|compound}}数值提供器
+::** {{nbt|compound}}{{nbt|list|predicate|required=1}}：要检查的谓词。
+::*** 见[[谓词]]。
+::** {{nbt|float}}{{nbt|compound|on_true|required=1}}：谓词为真时，要使用的数值提供器。
+::*** {{Nbt inherit/number provider}}
+::** {{nbt|float}}{{nbt|compound|on_false}}：谓词为假时，要使用的数值提供器。默认为0。
+::*** {{Nbt inherit/number provider}}
+</div>
+* 加入了<code>minecraft:weighted_list</code>数值提供器类型。
+** 按权重分布随机使用一个数值提供器。
+** 格式：
+<div class="treeview">
+::* {{nbt|compound}}数值提供器
+::** {{nbt|list|distribution|required=1}}：权重的分布。
+::*** {{nbt|compound}}：一个数值提供器及其权重。
+::**** {{nbt|float}}{{nbt|compound|data|required=1}}：一个数值提供器。
+::***** {{Nbt inherit/number provider}}
+::**** {{nbt|int|weight|required=1}}：此数值提供器的权重。必须是正整数。
+</div>
+
+'''[[配方]]'''
+* 加入了<code>minecraft:brewing</code>配方类型。
+** 用于定义[[药水酿造]]配方。
+** 格式：
+<div class="treeview">
+::* {{nbt|compound}}JSON文件根对象
+::** {{nbt|string|type|required=1}}：<code>brewing</code>。
+::** {{nbt|compound|input|required=1}}：此配方的原料物品。
+::*** {{nbt|string}}{{nbt|list|item|required=1}}：一个物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+::*** {{nbt|compound|potion_contents}}：一个<code>minecraft:potion_contents</code>类型的数据组件谓词。
+::**** 见{{section link|数据组件谓词#potion_contents}}。
+::** {{nbt|compound|reagent|required=1}}：此配方的酿造材料。
+::*** {{nbt|string}}{{nbt|list|item|required=1}}：一个物品。可以为单个物品ID、物品ID的列表或一个物品标签。
+::*** {{nbt|compound|potion_contents}}：一个<code>minecraft:potion_contents</code>类型的数据组件谓词。
+::**** 见{{section link|数据组件谓词#potion_contents}}。
+::** {{nbt|string}}{{nbt|compound|output|required=1}}：此配方的输出物品。
+::*** {{Nbt inherit/item template}}
+</div>
+
+'''[[已配置的地物]]'''
+* 加入了<code>minecraft:random_block_provider</code>方块状态提供器。
+** 提供一个随机方块的及其默认方块状态。
+** 具有如下附加字段：
+*** <code>blocks</code>：随机选择方块的范围。可以为单个方块ID、方块ID的列表或一个方块标签。
+
+'''[[已放置的地物]]'''
+* 加入了<code>minecraft:cuboid</code>放置修饰器类型。
+** 在长方体内重复放置地物。
+** 具有如下附加字段：
+*** <code>xz_size</code>：长方体沿着X轴和Z轴的尺寸。
+*** <code>y_size</code>：长方体沿着Y轴的尺寸。
+*** <code>include_interior</code>：可选。决定是否要放置长方体内部的方块。默认为<code>true</code>。
+*** <code>include_edge</code>：可选。决定是否要放置长方体边缘的方块。默认为<code>true</code>。
+**** 设为<code>false</code>时将得到更“圆润”的长方体。
+* 加入了<code>minecraft:random_chance</code>放置修饰器类型。
+** 以一定概率放置地物。
+** 具有如下附加字段：
+*** <code>chance</code>：（0≤值≤1）放置地物的概率。 
+
+'''规则测试'''
+* 加入了<code>minecraft:any_of</code>。
+** 当方块满足规则列表中的任一规则时返回<code>true</code>。
+** 具有如下附加字段；
+*** <code>rules</code>：要应用的规则列表。
+* 加入了<code>minecraft:not</code>。
+** 对所给规则取反。
+** 具有如下附加字段；
+*** <code>rule</code>：要取反的规则。
+
+'''[[烘焙模型]]'''
+* 为模型元素加入了<code>shade_direction_override</code>可选字段。
+** 如果指定了此字段，在阴影渲染时会用此字段的值覆写此模型面的实际朝向来计算阴影。
+** 取值必须为{{cd|d=pretty|fd=或|down|up|north|south|east|west}}之一。
+
+'''[[着色器]]与后处理管线'''
+* 加入了<code>minecraft:end_of_frame</code>后处理管线，可由资源包定义。
+** 该效果将在所有其他效果之前应用。
+** 只要加载了资源包，该效果就会一直启用，{{cmd|posteffect|link=none}}命令无法将其禁用。
+** 多个资源包均定义了此效果时，使用最后一个定义了此效果的资源包的定义。
+
+'''[[Java版标签|标签]]'''
+* 加入了<code>#cats_can_lie_on</code>方块标签，包含[[猫]]可以躺在上面的方块。
+* 加入了<code>#cats_can_sit_on</code>方块标签，包含猫可以坐在上面的方块。
+* 加入了<code>#villagers_can_sleep_on_bed</code>方块标签，包含[[村民]]可以睡在上面的方块。
+* 加入了<code>#villager_babies_can_jump_on_bed</code>方块标签，包含幼年村民可以在上面跳跃的方块。
+* 加入了<code>#speeds_up_zombie_villager_curing</code>方块标签，包含能够加速[[僵尸村民#治愈|治愈]][[僵尸村民]]的方块。
+* 加入了<code>#sculk_growth_inhibitors</code>方块标签，包含能够阻止[[幽匿块]]扩散的方块。
+* 加入了<code>#height_specific_ore_replaceables</code>方块标签，包含在Y=8以下时会被替换为深层变种的矿石。
+* 加入了<code>#cushions</code>物品标签，包含所有坐垫物品。
+* 加入了<code>#abandoned_camp</code>结构标签，包含所有[[废弃营地]]变种。
+
+== 更改 ==
+=== 方块 ===
+'''[[硫黄尖锥]]'''
+* 略微更改了向上的石柱末梢的纹理。
+
+'''[[悬挂式杨木告示牌]]'''
+* 更改了物品纹理。
+
+'''[[杨木门]]'''
+* 更改了纹理。
+
+'''[[红灌木]]'''
+* 现在拥有了独特的音效。
+
+=== 世界生成 ===
+'''[[废弃营地]]'''
+* 大幅更改了结构文件。
+** 现在大多数结构中的植物通过子结构调-{}-用相应地物生成，而不是直接内嵌在结构中。
+** 现在营地结构会包含坐垫，帐篷结构会包含{{pa|Straw Bed}}。
+** 现在有更多营地结构埋藏[[氧化的铜箱子]]，并且移除了暴露于地表的氧化的铜箱子。
+** 减少了通用营地结构中内嵌[[草方块]]的数量，使其更自然地融入地表。
+
+=== 命令格式 ===
+'''{{cmd|place}}'''
+* <code>feature</code>子命令现在接受内联定义的[[已配置的地物]]。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>110.0</code>。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>91.0</code>。
+
+'''[[环境属性]]'''
+* 修改了<code>minecraft:gameplay/bed_rule</code>。
+** 将<code>explodes</code>字段重命名为<code>destroy_on_use</code>。
+** 加入了<code>destroy_on_leave</code>可选字段。
+*** 布尔值，如果为<code>true</code>，下床时会将床摧毁。
+*** 默认为<code>false</code>。
+
+'''[[数据组件]]'''
+* 修改了<code>minecraft:block_transformer</code>。
+** 加入了<code>update_from_neighbors</code>可选字段。
+*** 布尔值，决定变换后的方块是否要根据临近的方块更新自身。
+*** 默认为<code>true</code>。
+
+'''[[战利品表]]'''
+* 原先内联检查工具是否具有[[精准采集]]或工具是否是[[剪刀]]的战利品表现在改用谓词。
+
+'''[[数据组件谓词]]'''
+* 修改了<code>potion_contents</code>，现在具有以下格式：
+<div class="treeview">
+* {{nbt|compound|minecraft:potion_contents}}
+** {{nbt|string}}{{nbt|list|potions}}：要检查的药水效果。可以为单个药水效果ID、一个药水效果ID的列表或一个药水效果标签。若指定了多个药水效果，只需有其中一个药水效果存在即测试成功。
+** {{nbt|compound|effects}}：要检查的状态效果。
+*** {{nbt transclude|编码格式/CritereonPredicate|codec_collection_predicate|vname=状态效果|vtype=compound|vcondition={{Nbt inherit/mob effects predicate}}|indent=1}}
+</div>
+
+'''[[已配置的地物]]'''
+* 移除了以下地物类型：
+** <code>minecraft:coral_mushroom</code>
+** <code>minecraft:kelp</code>
+** <code>minecraft:seagrass</code>
+** <code>minecraft:sea_pickle</code>
+* 修改了<code>minecraft:coral_claw</code>和<code>minecraft:coral_tree</code>地物类型。
+** 加入了<code>feature</code>字段。
+*** 需为一个已放置的地物，该地物将会在每个预期要放置地物的位置被放置一次。
+* 修改了<code>minecraft:copy_properties_provider</code>方块状态提供器。
+** 将<code>source_block_state_provider</code>字段重命名为<code>source</code>。
+* 修改了<code>minecraft:rotated_block_provider</code>方块状态提供器。
+** 现在对所有具有<code>axis</code>或<code>facing</code>[[方块属性]]的方块均有效。
+** 修改了<code>state</code>字段，改为接受一个方块状态提供器。
+** 加入了<code>direction</code>可选字段，描述方块的朝向。
+*** 如果省略此字段，会随机选择一个朝向。
+
+'''[[烘焙模型]]'''
+* 移除了模型元素的<code>shade</code>字段。
+** 若要保持和之前<code>shade: false</code>相同的行为，需改用<code>shade_direction_override: "up"</code>。
+
+'''[[Java版标签|标签]]'''
+* 将<code>#convertable_to_mud</code>重命名为<code>#convertible_to_mud</code>。
+* 将<code>#dowses_campfires</code>重命名为<code>#douses_campfires</code>。
+* 向{{cd|#blocks_motion_no_leaves|#washed_away_by_fluids|d=pretty}}中加入了{{cd|straw_bed}}。
+* 从{{cd|#deepslate_ore_replaceables|#stone_ore_replaceables|d=pretty}}中移除了{{cd|tuff}}。
+
+== 修复 ==
+{{fixes|fixedin=26.3 Snapshot 3|showdesc=1|new=1
+|;old
+|51859|所有悬浮提示框文本中，第一、二行间的距离都比其他行之间大。
+|112580|单人游戏下，打开结构方块的GUI不会暂停游戏。
+|112744|只有生物能存在{{cd|Team}}NBT标签。
+|174958|{{cd|/gamerule}}命令在值未改变时也会执行成功。
+|175180|{{cd|Silent}}NBT标签仍无法让某些实体完全静音。
+|224528|两条闪烁标语使用了弯单引号（-{’}-）而非直撇号（'）。
+|229831|附魔台GUI的右上角有3个不应存在的像素。
+|239401|{{cd|items/light.png}}从未出现在游戏中，却被其他游戏{{tr|资产|資源檔案}}无意义地引用。
+|254353|分数被重置时，总会广播移除分数的{{tr|数据包|封包}}。
+|254661|{{cd|/schedule clear}}的函数参数必须带有命名空间。
+|256073|{{cd|tab_inventory.png}}有颜色错误的像素。
+|256096|禁用同队攻击时，有的实体仍可伤害走到它们前面的队友。
+|256097|禁用同队攻击时，有的实体仍可在爆炸时伤害队友。
+|259583|使用1瓶龙息酿造不会返还玻璃瓶。
+|267902|{{cd|/random}}命令在指定范围过大时，失败消息中的最大值不正确。
+|271297|{{cd|/fillbiome}}在无实际更改时不会执行失败。
+|273327|{{cd|#convertable_to_mud}}方块标签误将“convertible”拼为“convertable”。
+|275532|缩写“fps”在各字符串中的大小写方式不统一。
+|279185|“{{cd|selectWorld.load_folder_access}}”字符串中，单词“folder”前缺少冠词。
+|279819|3级挖掘疲劳的挖掘速度乘数不符合其他等级的规律。
+|293615|“物品&times;数量”的悬浮提示格式在各类物品中不统一。
+|301804|单人游戏下，打开测试方块的GUI不会暂停游戏。
+|305707|{{cd|/time}}在无实际更改时仍报告执行成功。
+|307616|{{cd|ActiveProfiler}}的日志消息有拼写错误：“aprox”。
+|307618|{{cd|SoundEngine}}的日志消息有拼写错误：“disapeared”。
+|307648|崩溃报告的系统详细信息部分误将“non-heap”拼成了“non-head”。
+|307660|{{cd|GameRenderer}}的日志消息有拼写错误：“coudln't”。
+|307709|向上合并的硫黄尖锥纹理最顶端有一个错误像素。
+|308460|野花簇和粉红色花簇的一些茎渲染得更亮。
+|308851|{{cd|chat_restriction.disabled_by_profile.action}}字符串大小写不正确。
+|;dev
+|309021|杨树树叶的隐藏式字幕显示为原始的本地化键名。
+|309024|{{cd|death.attack.sulfurCubeHot.item}}显示为原始的本地化键名。
+|309033|废弃营地结构{{cd|campsite_flower_forest_1}}下面有橙色羊毛条带。
+|309034|废弃营地结构{{cd|tent_windswept_forest_8}}含有一组掉落的骨粉。
+|309054|杨木悬挂式告示牌的物品纹理与其他悬挂式告示牌不一致。
+|309058|废弃营地结构{{cd|tent_windswept_forest_8}}含有一个掉落的白桦原木。
+|309090|某些实体在层孔菇上时会在每刻都发出声音。
+|309122|废弃营地可以生成在疏林恶地中没有树、也没有草丛的区域。
+|309155|层孔菇和红灌木没有独有音效，与基岩版不同。
+|309208|杨树系列方块在创造模式物品栏的位置不符合先前的树种顺序。
+|309261|杨树树干放置器的计算不正确。
+|309308|数个废弃营地结构含有不会枯萎的树叶。
+|309324|在Y{{=}}0以下，矿石不会生成于安山岩、闪长岩或花岗岩组成的团簇中。
+|309350|伴随倒下的树木生成的层孔菇会取代水。
+|;prev
+|309392|实体和方块实体的光照渲染不正确，某些面过暗或过亮。
+|309395|杨木门的上半部分纹理缺失了第二个铰链的一个像素。
+|309397|使用Vulkan渲染后端时，若退出全屏或调整窗口大小，游戏渲染器会出错。
+|309399|在加载进世界时，游戏输出控制台会记录“Ignoring chat session from &lt;PLAYER&gt; due to missing Services public key”（由于缺少服务公钥，忽略来自&lt;玩家&gt;的聊天{{tr|会话|Session}}）。
+|309400|实体上的发光效果在清除后仍然保留。
+|309403|拥有具有{{cd|block_transformer}}组件的物品，且该组件中带有类型为{{cd|rule_based_state_provider}}的方块状态提供器，会导致玩家无法进入世界。
+|309408|控制哪些物品可以扑灭营火的物品标签被误拼为{{cd|#dowses_campfires}}。
+|309412|方块物品无视{{cd|block_transformer}}组件。
+|309420|{{cd|random_neighbor_spread}}地物中有一个字段被误拼为“{{cd|xy_offset}}”。
+|309432|在macOS上使用Vulkan后端时，世界渲染为一整片品红色。
+|309433|溺尸可以消耗或使用特定物品。
+|309435|溺尸无法正确追击玩家。
+|309441|重新加载世界后，弹射物会失去{{cd|can_break}}属性。
+|309445|游戏在使用OpenGL渲染后端时，切换全屏或打开物品栏时游戏渲染器会出错。
+|309467|无法使用玩家举报功能。
+|309471|看不到其他玩家的皮肤。
+|309518|无法对铜门进行除锈或脱蜡。
+}}</onlyinclude>
+
+== 视频 ==
+由[[slicedlime]]制作的视频：
+{{yt|vWgesiTs1vM}}
+{{yt|UWCc6AFVtow}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|2026}}
+
+[[de:26.3-snapshot-3]]
+[[en:Java Edition 26.3 Snapshot 3]]
+[[es:Java Edition 26.3 Snapshot 3]]
+[[ja:Java Edition 26.3 Snapshot 3]]
+[[pt:Edição Java 26.3 Snapshot 3]]
+[[ru:26.3 Snapshot 3 (Java Edition)]]

@@ -1,0 +1,48 @@
+# 页面: 流浪商人数据存储格式
+# 来源: https://zh.minecraft.wiki/w/%E6%B5%81%E6%B5%AA%E5%95%86%E4%BA%BA%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:30:11
+# 原始 Wikitext 内容:
+
+{{about|流浪商人生成信息的存档数据|流浪商人实体数据的存档数据|流浪商人#实体数据}}
+{{exclusive|je}}
+'''流浪商人数据存储文件'''是游戏存储[[流浪商人]]生成数据所用的文件。
+
+== 存储格式 ==
+流浪商人数据存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/wandering_trader.dat}}。
+
+流浪商人数据存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|int|spawn_chance}}：游戏尝试生成流浪商人的成功概率。游戏加载时除以1000计算真实概率。如50表示5%的生成概率。如果此项不存在则游戏默认为25。
+*** {{nbt|int|spawn_delay}}：距下次尝试生成流浪商人的时间，以游戏刻为单位。如果此项不存在则游戏默认为24000。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此流浪商人数据存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+游戏初始不存在流浪商人数据文件，只有当游戏更新流浪商人生成数据时游戏才会在存档保存时更新此文件。
+
+受限于流浪商人的生成机制，默认情况下，{{nbt|int|spawn_delay}}只会是1200的倍数，{{nbt|int|spawn_chance}}只会在25、50和75之间取值。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=19w05a|加入了流浪商人生成数据。
+|此时，流浪商人数据存储于{{filename|[[level.dat]]}}中。}}
+|{{HistoryLine||26.1|dev=snapshot-6|加入了单独的流浪商人数据存储文件，流浪商人数据不再存储于{{filename|level.dat}}中。
+|此前格式如下：
+<div class{{=}}"treeview">
+* {{nbt|compound}} '''level.dat根标签'''
+** {{nbt|compound|Data}}
+*** {{nbt|int-array|WanderingTraderId}}：（UUID）上一次成功生成的流浪商人的UUID。
+*** {{nbt|int|WanderingTraderSpawnChance|existonsave=1}}：游戏尝试生成流浪商人的成功概率。游戏加载时除以1000计算真实概率。如50表示5%的生成概率。如果此项不存在则游戏默认为0。
+*** {{nbt|int|WanderingTraderSpawnDelay|existonsave=1}}：距下次尝试生成流浪商人的时间，以游戏刻为单位。如果此项不存在则游戏默认为0。
+</div>}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

@@ -1,0 +1,84 @@
+# 页面: 地图/BE
+# 来源: https://zh.minecraft.wiki/w/%E5%9C%B0%E5%9B%BE/BE
+# 分类: 基岩版独有信息, 物品栏模板, 表格模板
+# 抓取时间: 2026-07-14 17:22:39
+# 原始 Wikitext 内容:
+
+{{tsl|Template:Anvil/styles.css}}{{
+#vardefine: head
+ | {{{!}} class="wikitable" data-description="{{
+   #switch: {{{1|}}}
+    | zoom = "Zoom out a map"
+    | clone = "Cloning a map"
+    | position = "Adding position marker"
+    | = "Zooming, cloning, or adding position marker"
+   }}
+! scope="col" style="width:64px;" {{!}} 名称
+! 合成材料
+! [[铁砧]]用法
+! 描述
+}}{{
+#vardefine: zoom
+ | {{!}}-
+! scope="row" style="text-align: center;" {{!}} '''地图或定位器地图（已缩小）'''
+{{!}} [[地图]]<br>或[[空地图]]+[[纸]]
+{{!}} style="width: 266px; padding: 1px;" {{!}} {{Anvil|Map;Locator Map|Paper,8|Map;Locator Map|title=地图}}
+{{!}} {{only|BE}}
+使用8张纸会缩小地图。
+}}{{
+#vardefine: clone
+ | {{!}}-
+! scope="row" style="text-align: center;" {{!}} '''地图或定位器地图（已复制）'''
+{{!}} [[地图]]<br>或[[空地图]]+[[指南针]]
+{{!}} style="width: 266px; padding: 1px;" {{!}} {{Anvil|Map;Locator Map|Empty Map|Map,2;Locator Map,2|title=地图}}
+{{!}} {{only|BE}}
+一次只能合成一个。
+
+使用的地图必须为定位器地图，使用空地图无效。
+}}{{
+#vardefine: position
+ | {{!}}-
+! scope="row" style="text-align: center;" {{!}} '''定位器地图'''
+{{!}} [[地图]] +<br>[[指南针]]
+{{!}} style="width: 266px; padding: 1px;" {{!}} {{Anvil|Map|Compass|Locator Map|title=地图}}
+{{!}} {{only|BE}}
+只使用纸合成的地图不会带有玩家标记；想要加入标记则要使用指南针。
+}}{{
+#vardefine: foot
+ | {{!}}}
+}}{{
+#switch: {{{1|}}}
+ | zoom =
+{{#var: head}}
+{{#var: zoom}}
+{{#var: foot}}
+ | clone =
+{{#var: head}}
+{{#var: clone}}
+{{#var: foot}}
+ | position =
+{{#var: head}}
+{{#var: position}}
+{{#var: foot}}
+ | all | =
+{{#var: head}}
+{{#var: zoom}}
+{{#var: clone}}
+{{#var: position}}
+{{#var: foot}}
+}}<noinclude>
+{{documentation|content=
+接受一个匿名参数{{p|1}}指定展开的表格：
+* <code>zoom</code>：缩小地图表格。
+* <code>clone</code>：复制地图表格。
+* <code>position</code>：定位器地图表格。
+* <code>all</code>（默认值）：显示所有表格。
+
+[[Category:物品栏模板]]
+[[Category:表格模板]]
+
+[[en:Map/BE]]
+[[ja:地図/BE]]
+[[pt:Mapa/EB]]
+[[ru:Карта/BE]]
+}}</noinclude>

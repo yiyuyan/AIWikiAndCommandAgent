@@ -1,0 +1,159 @@
+# 页面: 属性/击退抗性
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E5%87%BB%E9%80%80%E6%8A%97%E6%80%A7
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+{{Infobox attribute}}
+
+'''击退抗性（Knockback Resistance）'''是降低生物所受击退效果的[[属性]]。
+
+== 行为 ==
+{{main|伤害#击退抗性}}
+击退抗性会降低生物所受击退的威力。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Iron Golem}}<br>{{EntityLink|Warden}}
+| 1
+|-
+| {{EntityLink|Ravager}}
+| 0.75
+|-
+| {{EntityLink|Hoglin}}<br>{{EntityLink|Zoglin}}
+| 0.6
+|-
+| 其他所有生物
+| 0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| armor.helmet
+| add_value (Op0)
+| 0.1
+| 否
+| {{ItemLink|Netherite Helmet}}，{{tr|应用|套用}}于<code>head</code>（头盔）槽位
+|-
+| armor.chestplate
+| add_value (Op0)
+| 0.1
+| 否
+| {{ItemLink|Netherite Chestplate}}，{{tr|应用|套用}}于<code>chest</code>（胸甲）槽位
+|-
+| armor.leggings
+| add_value (Op0)
+| 0.1
+| 否
+| {{ItemLink|Netherite Leggings}}，{{tr|应用|套用}}于<code>legs</code>（护腿）槽位
+|-
+| armor.feet
+| add_value (Op0)
+| 0.1
+| 否
+| {{ItemLink|Netherite Boots}}，{{tr|应用|套用}}于<code>feet</code>（靴子）槽位
+|-
+| random_spawn_bonus
+| add_value (Op0)
+| 0-0.05均匀分布随机数
+| 是
+| 僵尸、溺尸、尸壳、僵尸村民和僵尸猪灵生成时额外增加击退抗性
+|-
+| bouncy_add_knockback_resistance
+| add_value (Op0)
+| -2
+| 否
+| [[硫磺史萊姆|硫方怪]]吸收方块后，且原型为弹性
+|-
+| explosive_add_knockback_resistance
+| add_value (Op0)
+| -1
+| 否
+| 硫方怪吸收方块后，且原型为爆炸
+|-
+| fast_flat_add_knockback_resistance
+| add_value (Op0)
+| -2
+| 否
+| 硫方怪吸收方块后，且原型为快速平移
+|-
+| fast_sliding_add_knockback_resistance
+| add_value (Op0)
+| 0.5
+| 否
+| 硫方怪吸收方块后，且原型为快速滑行
+|-
+| high_resistance_add_knockback_resistance
+| add_value (Op0)
+| 0.7
+| 否
+| 硫方怪吸收方块后，且原型为高阻力
+|-
+| hot_add_knockback_resistance
+| add_value (Op0)
+| -1
+| 否
+| 硫方怪吸收方块后，且原型为高温
+|-
+| light_add_knockback_resistance
+| add_value (Op0)
+| -1
+| 否
+| 硫方怪吸收方块后，且原型为轻盈
+|-
+| regular_add_knockback_resistance
+| add_value (Op0)
+| -1
+| 否
+| 硫方怪吸收方块后，且原型为普通
+|-
+| slow_bouncy_add_knockback_resistance
+| add_value (Op0)
+| 0.4
+| 否
+| 硫方怪吸收方块后，且原型为缓慢弹性
+|-
+| slow_flat_add_knockback_resistance
+| add_value (Op0)
+| 0.7
+| 否
+| 硫方怪吸收方块后，且原型为缓慢平移
+|-
+| slow_sliding_add_knockback_resistance
+| add_value (Op0)
+| 0.8
+| 否
+| 硫方怪吸收方块后，且原型为缓慢滑行
+|-
+| sticky_add_knockback_resistance
+| add_value (Op0)
+| -2
+| 否
+| 硫方怪吸收方块后，且原型为黏性
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了击退抗性属性，ID为<code>Knockback Resistance</code>。}}
+|{{HistoryLine|||dev=13w21a|击退抗性属性的ID重命名为<code>generic.knockbackResistance</code>。}}
+|{{HistoryLine||1.16|dev=20w06a|击退抗性属性现在用于修饰下界合金盔甲。
+|击退抗性属性除了会影响不会被击退的概率外，现在还会按一定比例计算承受的击退距离。}}
+|{{HistoryLine|||dev=20w14a|击退抗性属性的ID被重命名为<code>generic.knockback_resistance</code>。}}
+|{{HistoryLine||1.18.2|dev=22w03a|击退抗性属性不再有概率无视击退。}}
+|{{HistoryLine||1.21.2|dev=24w33a|击退抗性属性的ID从<code>generic.knockback_resistance</code>重命名为<code>knockback_resistance</code>。}}
+|{{HistoryLine||26.2|dev=snapshot-1|击退抗性属性的最小值由0改为-2。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

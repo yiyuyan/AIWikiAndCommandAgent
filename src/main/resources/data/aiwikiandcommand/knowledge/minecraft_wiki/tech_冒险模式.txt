@@ -1,0 +1,72 @@
+# 页面: 冒险模式
+# 来源: https://zh.minecraft.wiki/w/%E5%86%92%E9%99%A9%E6%A8%A1%E5%BC%8F
+# 分类: Java版独有信息, 基岩版独有信息, 教育版独有信息, 游戏内容, 游戏模式
+# 抓取时间: 2026-07-14 17:20:22
+# 原始 Wikitext 内容:
+
+{{relevant tutorial|冒险模式生存}}
+'''冒险（Adventure）'''模式是一种主要供自定义地图使用的[[游戏模式]]。冒险模式下的玩家不能破坏或放置[[方块]]。
+
+== 游戏内容 ==
+冒险模式下的玩家与[[生存模式]]玩家的属性基本相同，玩家能够受到伤害、死亡，饥饿值也会正常消耗。处于冒险模式的玩家通常不能徒手破坏方块。{{in|java}}玩家只能使用具有<code>can_break</code>[[物品组件]]的工具或物品破坏由其指定的方块；玩家只能放置具有<code>can_place_on</code>物品组件的方块，且只能放置在其指定的方块上。{{in|be|edu}}破坏和放置方块分别需要{{code|can_destroy}}和{{code|can_place_on}}[[基岩版物品堆叠组件|组件]]；此外，拥有<code>worldbuilder</code>能力的玩家可以随意破坏或放置方块；[[允许方块]]也会允许冒险模式的玩家放置或破坏它们上方的方块。
+
+然而，处于冒险模式的玩家还是能够以其他方式利用环境——包括与[[生物]]和其他[[实体]]互动（包括与[[村民]]进行[[交易]]等），打开或关闭红石机械（如[[拉杆]]），玩家也可以像在其他游戏模式一样进行[[合成]]以及与其他带有[[GUI]]的方块互动。这个模式还拥有另一个特点：玩家总是精确地生成在世界出生点上；这与生存模式不同——在生存模式中，玩家会在以重生点为中心的重生半径内任意地点生成。
+
+一些自定义地图将游戏模式设定为冒险模式，使玩家无法破坏或放置方块，从而防止地图结构被破坏，便于按照设定的方向更好的体验地图内容。另外，此模式可以用于保护服务器免受[[恶意破坏|破坏者]]的影响。在服务器和自定义地图中，[[命令方块]]经常与冒险模式一起使用。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java alpha}}
+|{{HistoryLine||2010年7月7日|link={{notch|779956568/the-rationale-for-redstone}}|冒险模式，原来被叫做'''地下城与拉杆（Dungeons and Levers）'''，为[[Notch]]在2010年7月7日宣布的新模式。<ref name="AdventureBreakdown">{{notch|779956568/the-rationale-for-redstone|The rationale for Redstone|July 7, 2010}}</ref>
+|Notch暗示四个玩家会在冒险模式中竞赛。冒险模式也许会包括类似于[[极限模式]]的“永久死亡”，使其本质与[[wzh:Rogue|Rogue]]相似，<ref>http://www.gamebandits.com/news/pc/minecraft-1-9-hardcore-mode-bring-it-on-17345/</ref>同时此模式也许会带有随机生成的地图/任务的系统。<ref>http://www.gameinformer.com/b/features/archive/2011/06/14/notch-and-todd-howard-the-one-on-one-interview.aspx</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w22a|加入了冒险模式。可以通过命令{{cmd|gamemode 2}}或{{cmd|gamemode adventure}}进入。
+|在冒险模式内玩家仍然能使用物品栏内的2×2合成栏和工作台内的3×3合成栏进行合成。玩家依然能与[[箱子]]、[[发射器]]这种带有用户界面的方块进行互动。玩家也能进入[[传送门]]，但无法使用[[打火石]]开启下界传送门。打火石能用于激活[[TNT]]。}}
+|{{HistoryLine||1.4.2|dev=12w34a|一些方块现在能通过使用正确的工具来移除和放置。<ref name="reddit.com">https://www.reddit.com/r/Minecraft/comments/yp597/12w34a_snapshot_is_accessible_now/c5xplgu</ref>}}
+|{{HistoryLine||1.8|dev=14w02a|在冒险模式鼠标准星对准时不会显示方块碰撞箱了。
+|在冒险模式中任何工具都无法破坏方块了。
+|给物品给予<code>CanDestroy</code>NBT标签可以破坏指定的方块。}}
+|{{HistoryLine|||dev=14w06a|NBT标签<code>CanPlaceOn</code>，可以让方块放置在指定的方块上。<ref name="reddit.com">https://www.reddit.com/r/Minecraft/comments/yp597/12w34a_snapshot_is_accessible_now/c5xplgu</ref>}}
+|{{HistoryLine||1.20.5|dev=24w09a|由于将物品NBT标签更改为数据组件，现在由<code>can_destroy</code>和<code>can_place_on</code>[[数据组件]]控制玩家在冒险模式下能放置的方块和用于破坏指定方块的物品。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了冒险模式。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.6.0|{{cd|worldbuilder}}为{{cd|true}}的玩家可以在冒险模式自由地破坏和放置方块。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.10|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了冒险模式。}}
+}}
+
+== 参见 ==
+* [[游戏模式]]
+* [[Tutorial:冒险模式生存]]
+* [[命令]]
+* [[数据组件]]
+* [[方块]]
+* [[实体]]
+* [[重生]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:游戏模式]]
+
+[[cs:Dobrodružná hra]]
+[[de:Abenteuermodus]]
+[[en:Adventure]]
+[[es:Aventura]]
+[[fr:Aventure]]
+[[hu:Kaland]]
+[[it:Avventura]]
+[[ja:アドベンチャー]]
+[[ko:모험 모드]]
+[[lzh:勇]]
+[[nl:Avontuur]]
+[[pl:Tryb przygodowy]]
+[[pt:Aventura]]
+[[ru:Приключение]]
+[[th:ผจญภัย]]
+[[tr:Macera]]
+[[uk:Пригода]]

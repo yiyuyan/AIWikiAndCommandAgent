@@ -1,0 +1,467 @@
+# 页面: 距离现象/Java版/Beta 1.8之前版本的现象
+# 来源: https://zh.minecraft.wiki/w/%E8%B7%9D%E7%A6%BB%E7%8E%B0%E8%B1%A1/Java%E7%89%88/Beta%201.8%E4%B9%8B%E5%89%8D%E7%89%88%E6%9C%AC%E7%9A%84%E7%8E%B0%E8%B1%A1
+# 分类: 待扩充页面, 过时内容, 需要检查源代码, 需要测试
+# 抓取时间: 2026-07-14 17:36:37
+# 原始 Wikitext 内容:
+
+{{for|较新版本的现象|距离现象/Java版|其他用法|距离现象}}
+{{outdated|edition=java}}
+{{stub}}
+
+下面介绍了[[Java版Beta 1.8|Beta 1.8]]之前的距离现象。
+
+== 总体现象 ==
+某些现象可能在任何距离发生，它们随着[[坐标]]的增加会逐渐恶化。
+
+=== 抖动 ===
+[[File:Farlandsblockmovement.gif|thumb]]
+
+世界在玩家周围开始渲染时会渲染出两个不同的版本，一个渲染方块本身（实体和所需方块生成数量）另一个则渲染视觉外观（比如说碰撞箱、方块像素等等）。游戏渲染引擎使用了双精度浮点数，这决定了玩家周围的世界位置。但渲染引擎会使用单精度浮点数来确定玩家移动至周围的方块所需的距离，由于单精度浮点数的精确度只有双精度浮点数的一半，导致渲染引擎没有办法从中得到足够信息去正确渲染地形，并且距离翻倍的位置上信息又会被削减一半，这就导致了移动时产生的抖动。
+{{-}}
+
+=== 方块渲染错误 ===
+[[File:Up broken redstone type 2.png|thumb]]
+
+红石粉和梯子等方块在较远的距离处会发生明显的拉伸。每过一次{{^|2|n}}，这种现象就会变得更严重。比如说在X/Z=±268,435,456上红石粉会变为一个区块大，而在X/Z=±1,073,741,824时就会变为128个方块长。
+{{-}}
+
+=== 方块功能错误 ===
+[[File:Pressure plate precision loss.png|thumb]]
+
+在较远距离处，很多方块的功能开始出现问题，包括但不限于：
+
+* 较远处的下落的方块可能不会自然下落，同时也可能会复制物品，导致可能会自然生成上千的物品实体。
+* 较远处的压力板会在错误的位置检测踩上压力板的实体。
+** 有时压力板仅在玩家踩到精度损失点时才能检测到，而有时压力板甚至可以在玩家离开时保持状态。
+* 探测铁轨无法正确检测到矿车的存在。
+{{-}}
+
+=== 出生点区块复制 ===
+[[File:Farlands Trees.png|thumb]]
+
+在X/Z=±524,288，出生点附近的区块就会重新在此生成，并覆盖原有的地形。之后每过一次{{^|2|n}}，出生点附近的区块就会被复制一次。
+
+这类“复制区域”与出生点区块是同步的，这意味着玩家在“复制区域”做的任何事情都会被同步回出生点。
+
+{{-}}
+=== 世界渲染错误 ===
+[[File:2 billion intersection.png|thumb]]
+
+从X/Z=±268,435,456开始，世界渲染会出现漏洞导致地形闪烁。实际上该现象在之前就已出现，但在此之后变得更为严重，且每过{{^|2|n}}，就会变得越来越明显。
+
+这个现象可能是由于浮点数误差，游戏错误定位了玩家的位置，从而错误地认为玩家看不到某些区块。
+
+{{clear}}
+
+== 具体现象 ==
+此历史表格按照这些现象开始出现的时间排序。
+
+{| class="wikitable" data-description="Spatial distance effect history"
+! 从
+! 到
+! 错误
+! 例子
+! 注
+|-
+! 游戏早期开发
+! [[Java版Infdev 20100227-1414|Infdev 2010027-1]]<ref name="notch">可能由于此处提及的更改：{{notch|443693773/the-world-is-bigger-now|The world is bigger now.|May 12, 2010}}</ref>
+| 实体使用单精度浮点数来计算位置，而非双精度浮点数。 
+|
+|
+|-
+! 游戏早期开发
+! [[Java版Infdev 20100313|Infdev 20100313]]<ref name="notch"/>
+| 粒子在世界远处会发生拉伸和变形。
+| [[File:Particles lose precision.png|128px]]
+| 
+|-
+! 游戏早期开发
+! [[Java版Infdev 20100313|Infdev 20100313]]<ref name="notch"/>
+| 方块判定箱的线框会在世界远处产生抖动和卡顿。
+| [[File:Better example of hitbox precision loss.png|128px]]
+| 在某些显卡上，方块的轮廓箱还会被扭曲成非立方体。
+<!--|-
+! 游戏早期开发
+! [[Java版Infdev 20100313|Infdev 20100313]]<ref name="notch"/>
+| 在世界远处世界会定期停止渲染，从而形成条纹状的地形。
+| [[File:Infdev Chunk Detaching.jpg|128px]]
+|-->
+|-
+! 可能是Classic
+! [[Java版Indev 20100218-0011|Indev 20100218-0011]]
+| [[雨]]在极端的高度下被拉伸。
+| [[File:Stretched rain indev.png|128px]]
+|
+|-
+! [[Java版Indev 0.31 20100125|Indev 20100125]]
+! [[Java版1.8|1.8]]<br>（[[14w02a]]）
+| 熔岩余烬粒子在世界远处丢失精度。
+| [[File:Lava particle precision loss old.png|128px]]
+|
+|-
+! [[Java版Indev 0.31 20100128-2203|Indev 0.31 20100128-2203]]
+! [[Java版Alpha v1.0.1|Alpha v1.0.1]]
+| [[齿轮]]在世界远处被拉伸。
+| [[File:Stretched gear.png|128px]]
+| 由于齿轮被红石粉取代，这个问题被“修复”了。
+|-
+! 可能是Indev
+! [[Java版1.7.2|1.7.2]]<br>（[[13w38a]]）
+| 远离世界原点放置的[[画]]会出现在错误的坐标上。
+| [[File:Painting bug pre 38a.png|128px]]
+|
+|-
+! 可能是Indev
+! [[Java版1.8|1.8]]<br>（[[14w17a]]）
+| 在墙上的[[火]]在世界远处会发生偏移导致出现深度冲突，或者被拉伸。
+| [[File:Fire model precision loss.png|128px]]
+|
+|-
+! 可能是Indev
+! [[Java版1.15|1.15]]<br>（[[Java版1.15-pre1|pre1]]）
+| [[TNT]]爆炸发出的烟粒子在世界远处丢失精度。
+| [[File:Explosion precision loss.png|128px]]
+| 
+|-
+! 可能是Indev
+! [[Java版1.15|1.15]]<br>（[[Java版1.15-pre1|pre1]]）
+| [[TNT]]爆炸发出的白烟粒子在世界远处丢失精度。
+| [[File:White Explosion precision loss.png|128px]]
+|
+|-
+! 可能是Indev
+! [[Java版1.15|1.15]]<br>（[[Java版1.15-pre4|pre4]]）<ref>{{bug|MC-125638|||Fixed}}</ref>
+| [[TNT]]在世界远处被点燃会发生位置偏移。
+| [[File:TNT offset bug.png|128px]]
+|
+|-
+! 可能是Indev
+! [[Java版1.16|1.16]]<br>（[[Java版1.16-pre1|pre1]]）<ref>{{bug|MC-167047|||Fixed}}</ref>
+| 在世界远处[[TNT]]被引爆时会发生位置偏移。
+| [[File:Detonation offset.png|128px]]
+|
+|-
+! [[Java版Infdev 20100227-1414|Infdev 20100227-1414]]
+! [[Java版Infdev 20100313|Infdev 20100313]]<ref name="notch"/>
+| 世界渲染失去精度，导致相邻的区块脱离。
+| [[File:Infdev chunk detach.png|128px]]
+| 从技术上讲可能是会在更早的版本上发生的，但是世界会在X/Z{{=}}±2560后停止渲染，所以该现象无论如何都不会在之前版本中出现。<br>在某些角度上来看世界的渲染也有可能会停止渲染并导致地形闪烁。在更远的位置世界还会定期停止渲染。
+|-
+! [[Java版Infdev 20100313|Infdev 20100313]]
+! [[Java版Infdev 20100316|Infdev 20100316]]
+| [[花]]、[[蘑菇]]、[[火把]]、[[橡树]]和[[小麦]]丢失精度，并在很远的位置上被呈现为2D的样子。
+| [[File:313 far items.png|128px]]
+|
+|-
+! [[Java版Infdev 20100413-1951|Infdev 20100413-1951]]
+! [[Java版Alpha v1.0.4|Alpha v1.0.4]]
+| 在世界远处的降雨粒子在第三人称视角下丢失精度。
+| [[File:Rain particle grid.png|128px]]
+|
+|-
+! [[Java版Infdev 20100607|Infdev 20100607]]
+! [[Java版Beta 1.8|Beta 1.8]]<br>（[[Java版Beta 1.8-pre1|pre1]]）
+| [[梯子]]在世界远处被拉伸。
+| [[File:Distorted ladder.png|128px]]
+|
+|-
+! [[Java版Infdev 20100616-1808|Infdev 20100616-1808]]
+! [[Java版Beta 1.8|Beta 1.8]]<br>（[[Java版Beta 1.8-pre1|pre1]]）
+| [[水]]和[[熔岩]]的侧面在世界远处渲染不正确。
+| [[File:Distorted streams.png|128px]]
+|
+|-
+! [[Java版Infdev 20100618|Infdev 20100618]]
+! [[Java版Beta 1.8|Beta 1.8]]<br>（[[Java版Beta 1.8-pre1|pre1]]）
+| [[铁轨]]在世界远处被拉伸。
+| [[File:Infdev big rail.png|128px]]
+|
+|-
+! [[Java版Infdev 20100618|Infdev 20100618]]
+! [[Java版1.4.6|1.4.6]]<br>（[[12w49a]]）
+| [[下落的方块]]在世界远处可以复制物品，导致可能会自然生成上千的物品实体。
+|
+| 这可能会导致世界远处出现严重卡顿。
+|-
+! [[Java版Infdev 20100624|Infdev 20100624]]
+! [[Java版Beta 1.8|Beta 1.8]]<br>（[[Java版Beta 1.8-pre1|pre1]]）
+| 地形渲染在世界远处丢失精度，从而使地形渲染出现偏移并发生抖动。
+| [[File:Farlandsblockmovement.gif|128px]]
+| 在更远的位置后，这会导致世界闪烁，足够的精度损失可使游戏错误定位了玩家的位置，从而错误地认为玩家看不到某些区块。
+<!--|-
+! [[Java版Infdev 20100624|Infdev 20100624]]
+! {{testingame}}
+| 区块可能不会被渲染，即使其位于玩家的视野内。
+| [[File:2 billion intersection.png|128px]]
+|-->
+|-
+! [[Java版Alpha v1.0.4|Alpha v1.0.4]]
+! [[Java版Alpha v1.2.0|Alpha v1.2.0]]
+| 冬天模式的雪会在极端高度被拉伸。
+| [[File:Stretched alpha snow.png|128px]]
+| 
+|-
+! [[Java版Alpha v1.0.1|Alpha v1.0.1]]
+! [[Java版Beta 1.5|Beta 1.5]]
+| 爬上方块的[[红石线]]在世界远处发生位置偏移并被拉伸。
+| [[File:Up broken redstone beta1.png|128px]]
+|
+|-
+! [[Java版Alpha v1.0.1|Alpha v1.0.1]]<!--tested on _01-->
+! [[Java版1.8|1.8]]<br>（[[14w17a]]）
+| [[红石线]]在世界远处被拉伸。
+| [[File:Far lands redstone.png|128px]]
+|
+|-
+! [[Java版Beta 1.3|Beta 1.3]]
+! [[Java版Beta 1.8|Beta 1.8]]<br>（[[Java版Beta 1.8-pre1|pre1]]）
+| 红石中继器的顶部在世界远处丢失精度。
+| [[File:Stretched repeater.png|128px]]
+|
+|-
+! [[Java版Beta 1.5|Beta 1.5]]
+! [[Java版Beta 1.8|Beta 1.8]]<br>（[[Java版Beta 1.8-pre1|pre1]]）
+| [[动力铁轨]]和[[探测铁轨]]在世界远处被拉伸。
+| [[File:Redstone rail model bug.png|128px]]
+|
+|-
+! [[Java版Beta 1.5|Beta 1.5]]
+! [[Java版Beta 1.8|Beta 1.8]]<br>（[[Java版Beta 1.8-pre1|pre1]]）
+| 爬上方块的[[红石线]]在世界远处发生位置偏移并被拉伸。
+| [[File:Up broken redstone beta2.png|128px]]
+|
+|-
+! [[Java版Beta 1.7|Beta 1.7]]
+! [[Java版1.8|1.8]]<br>（[[14w02a]]）
+| [[活塞头]]在世界远处丢失精度，在更远处可能会脱离活塞本体。
+| [[File:Piston model bug.png|128px]]
+|
+|-
+! [[Java版Infdev 20100618|Infdev 20100618]]
+! [[Java版1.8|1.8]]<br>（[[14w25a]]）
+| 下落的方块在世界远处丢失精度。
+| [[File:Falling block creation precision loss.png|128px]]
+|
+|-
+! 可能是Indev
+! [[Java版1.8|1.8]]<br>（[[14w28a]]）
+| 在世界远处打破容器时，其内的物品会掉入错误的区域。
+| [[File:Furnace drop precision loss.png|128px]]
+|
+|-
+! [[Java版Indev 0.31 20100125|Indev 20100125]]
+! [[Java版1.8|1.8]]<br>（[[14w32a]]）<ref name="jumboticket">{{bug|MC-3718|||Fixed}}</ref>
+| [[火把]]的火焰粒子在世界远处会发生位置偏移。
+| [[File:Torch precision loss.png|128px]]
+|
+|-
+! [[Java版Indev 0.31 20100125|Indev 20100125]]
+! [[Java版1.8|1.8]]<br>（[[14w32a]]）<ref name="jumboticket"/>
+| [[火]]的烟雾粒子在世界远处会发生位置偏移。
+| [[File:Fire precision loss.png|128px]]
+|
+|-
+! [[Java版Indev 20100219|Indev 20100219]]
+! [[Java版1.8|1.8]]<br>（[[14w32a]]）<ref name="jumboticket"/>
+| [[熔炉]]的火焰粒子在世界远处会发生位置偏移。
+| [[File:Furnace precision loss.png|128px]]
+|
+|-
+! [[Java版Infdev 20100618|Infdev 20100618]]
+! [[Java版1.8|1.8]]<br>（[[14w32a]]）
+| [[沙子]]、[[沙砾]]、[[龙蛋]]和[[铁砧]]在世界远处可能会悬空。
+| [[File:Physics precision loss.png|128px]]
+| 一旦收到一次方块更新后，它们可以在变回方块之前在某些帧生成一个实体。
+|-
+! [[Java版Infdev 20100624|Infdev 20100624]]
+! [[Java版1.8|1.8]]<br>（[[14w32a]]）
+| 在世界远处放置的[[矿车]]和骑乘者的位置可能会不正确。
+| [[File:Minecart precision loss.png|128px]]
+| 在某些情况下（通常是在被拉伸的铁轨上）矿车可能会被渲染在正确的位置，但是骑乘者和影子的位置发生了偏移。
+|-
+! [[Java版Infdev 20100625-1917|Infdev 20100625-1917]]
+! [[Java版1.15|1.15]]<br>（[[Java版1.15-pre4|pre4]]）
+| [[刷怪笼]]发出的粒子在世界远处会发生位置偏移并丢失精度。
+| [[File:Spawner precision loss.png|128px]]
+|
+|-
+! [[Java版Alpha v1.0.1|Alpha v1.0.1]]<!--tested on _01-->
+! [[Java版1.8.2|1.8.2]]<br>（[[Java版1.8.2-pre5|pre5]]）<ref>{{bug|MC-76747|||Fixed}}</ref>
+| [[红石火把]]的粒子在世界远处会发生位置偏移。
+| [[File:Redstone torch precision loss.png|128px]]
+|
+|-
+! [[Java版Alpha v1.0.1|Alpha v1.0.1]]<!--tested on _01-->
+! [[Java版1.9|1.9]]<br>（[[15w37a]]）
+| [[压力板]]在世界远处会在错误的位置检测到踩上压力板的实体。
+| [[File:Pressure plate precision loss.png|128px]]
+| 有些压力板仅在玩家踩到精度损失点时才能检测到，而某些压力板甚至可以在玩家离开时仍保持状态。
+|-
+! [[Java版Alpha v1.0.2|Alpha v1.0.2]]
+! [[Java版1.13|1.13]]<br>（[[17w47a]]）
+|  [[红石矿石]]的粒子在世界远处会发生位置偏移。
+| [[File:Redstone ore precision loss.png|128px]]
+|
+|-
+! [[Java版Alpha v1.0.6|Alpha v1.0.6]]
+! [[Java版1.9|1.9]]<br>（[[16w04a]]）
+| 足够远的位置后[[船]]会被放置在错误的位置。
+| [[File:Boat precision loss.png|128px]]
+|
+|-
+! [[Java版Alpha v1.0.11|Alpha v1.0.11]]
+! [[Java版1.9|1.9]]<br>（[[15w38a]]）
+| [[仙人掌]]的碰撞箱丢失精度。
+| [[File:Cactus collision precision loss.png|128px]]
+|
+|-
+! [[Java版Alpha v1.0.11|Alpha v1.0.11]]
+! [[Java版1.9|1.9]]<br>（[[15w49a]]）
+| 仙人掌的判定箱线框丢失精度。
+| [[File:Cactus hitbox bug.png|128px]]
+|
+|-
+! [[Java版Alpha v1.2.0|Alpha v1.2.0]]
+! [[Java版1.15|1.15]]<br>（[[Java版1.15-pre4|pre4]]）
+| [[下界传送门方块]]发出的粒子在世界远处会发生位置偏移。
+| [[File:Nether portal precision loss.png|128px]]
+|
+|-
+! [[Java版Beta 1.2|Beta 1.2]]
+! [[Java版1.9|1.9]]<br>（[[15w38a]]）
+| [[蛋糕]]的碰撞箱丢失精度。
+| [[File:Cake collision precision loss.png|128px]]
+|
+|-
+! [[Java版Beta 1.2|Beta 1.2]]
+! [[Java版1.9|1.9]]<br>（[[15w38a]]）
+| 蛋糕的判定箱线框丢失精度。
+| [[File:Cake hitbox bug.png|128px]]
+|
+|-
+! [[Java版Beta 1.3|Beta 1.3]]
+! [[Java版1.14|1.14]]<br>（[[19w08a]]）
+| 睡在床上的玩家在世界远处会发生位置偏移。
+| [[File:Bed precision loss.png|128px]]
+|
+|-
+! [[Java版Beta 1.3|Beta 1.3]]
+! [[Java版1.16|1.16]]<br>（[[Java版1.16-pre1|pre1]]）<ref>{{bug|MC-167971|||Fixed}}</ref>
+| [[红石中继器]]发出的红烟在世界远处丢失精度。
+| [[File:Repeater precision error.png|128px]]
+|
+|-
+! [[Java版Beta 1.5|Beta 1.5]]
+! [[Java版1.8.2|1.8.2]]<br>（[[Java版1.8.2-pre5|pre5]]）
+| [[雨]]在世界远处丢失精度。
+| [[File:Rain precision loss old.png|128px]]
+|
+|-
+! [[Java版Beta 1.5|Beta 1.5]]
+! [[Java版1.16|1.16]]<br>（[[Java版1.16-pre1|pre1]]）<ref>{{bug|MC-183174|||Fixed}}</ref>
+| [[探测铁轨]]在世界远处无法正确检测到矿车的存在。
+| [[File:Detector rail precision loss.png|128px]]
+|
+|-
+! [[Java版Beta 1.6.5|Beta 1.6.5]]
+! 当前
+| [[雨]]和[[雪]]在极端高度上会被拉伸。
+| [[File:StretchedSnow.png|128px]]
+| 在[[Java版Beta 1.6.5|Beta 1.6.5]]之前对该现象的测试会很困难，因为此前游戏会在这么高的地方崩溃。
+|-
+! [[Java版Beta 1.7|Beta 1.7]]
+! [[Java版1.9|1.9]]<br>（[[15w38a]]）
+| [[活塞]]头的碰撞箱在世界远处丢失精度。
+| [[File:Piston collision precision loss.png|128px]]
+|
+|-
+! {{testingame}}
+! [[Java版Beta 1.8|Beta 1.8]]<br>（[[Java版Beta 1.8-pre1|pre1]]）
+| 在X/Z±{{=}}2{{^|19}}及其整数倍时，出生点区块会被复制到该区域，并覆盖原有地形。 
+| [[File:Farlands Trees.png|128px]]
+| 在Beta 1.8之后，X/Z{{=}}±2{{^|36}}及之后该现象才会出现，尽管并没有被真正意义上修复，但该现象在[[世界界限]]范围内已不再可见。
+|-
+! {{ctc}}
+! 当前
+| [[声音]]会从错误的地方发出。
+| 
+| 在X/Z=±268,435,456后变得越来越严重，许多声音会越来越听不见。
+|}
+
+== 水平方向极限 ==
+{| class="wikitable"
+|+
+!位置
+!现象
+|-
+|世界原点
+|
+* 方块会偏移{{frac|1|4194304}}格。
+** 自此之后，每过一次{{^|2|n}}，方块的偏移量就会翻倍。
+|-
+|X/Z=±16,384（2<sup>14</sup>）
+|
+* 玩家移动时开始产生抖动。
+** 自此之后，每过一次{{^|2|n}}，抖动现象就会加剧一次。
+|-
+|X/Z=±524,288（2<sup>19</sup>）
+|
+* 移动时产生的抖动开始变得十分明显。
+* 出生点附近的区块会重新再此出现，并导致突然的卡顿。
+* 自此之后，每过一次{{^|2|n}}，出生点附近的区块就会被复制一次。
+|-
+|X/Z=±16,777,216（2<sup>24</sup>）
+|方块开始偏移整整一格。
+|-
+|X/Z=±268,435,456（2<sup>28</sup>）
+|世界渲染错误开始变得十分明显。
+|-
+|X/Z=±2,147,483,648（2<sup>31</sup>）
+|
+* 方块不会再被渲染，自此之后只会留下一片空荡荡的天空。
+* 在此处附近会造成游戏崩溃。
+|}
+
+== 垂直方向极限 ==
+{| class="wikitable"
+|+
+!位置
+!现象
+|-
+|Y<-2,147,483,648（2<sup>31</sup>）
+|
+* 虚空的黑暗消失了，看起来就像是一个空的世界。
+** 尽管如此，玩家仍然会受到来自虚空的伤害。
+|}
+
+== 画廊 ==
+<gallery>
+File:Xraybug.png|移动时的透视漏洞
+File:Brokenhitbox.png|由于漏洞而错位的判定箱问题
+File:Itembug.png|由于漏洞而悬浮的物品问题
+File:Farlandswaterfall.png|被拉伸的瀑布
+File:Farlandslavafall.png|被拉伸的熔岩瀑布
+File:Distorted rails.png|之前的被拉伸的铁轨、动力铁轨和激活铁轨
+File:Distorted rail circle.png|之前的呈环形的铁轨
+File:Farlandpistonside.png|侧面放置并激活的[[活塞]]。它的活塞臂被拉伸了，但是它的判定箱还是不变的
+File:Farlandpistonup.png|向上放置并激活的活塞，它的活塞臂被渲染成一整个方块
+File:Stretched piston arm cross.png|X/Z±16,777,216后两个被拉伸的活塞臂摆成的V字形
+File:Distant alpha redstone.png|在Alpha中X/Z±8388608后的红石。由于默认情况下呈十字形，因此需要在其旁边放上红石粉以显示此处的拉伸效果
+File:Broken redstone up.png|爬上一个方块的红石
+File:Up broken redstone type 1.png|爬上方块的红石在远距离处的样子
+File:Up broken redstone is fixed.png|另外一个更新版本的例子
+File:Giantcreepyredstone.png|巨型红石
+File:Redstone 1048576 dots.png|第一个由于红石精度损失而发生的现象。最小的红石（图中最上面那个）在X/Z±1048576前，最底下那个在X/Z±1048576的后面，其余两侧的仅在一个方向上被拉伸
+File:Redstone 4194304.png|放置在X/Z±4194304后的红石，错误逐渐扩大到一半方块的大小。点状红石在这里不可见，其他红石形状开始出现明显的失真
+File:Redstone 8388608.png|放置在X/Z±8388608后的红石，错误扩大到一整个方块。点状红石变为一整个方块的大小，除了线状和十字形以外，其他形状都被拉伸
+File:Redstone 16777216.png|放置在X/Z±16777216后的红石，错误扩大到两个方块的大小。实际上，所有放置的红石中只有四分之一在此处渲染，并且在渲染时会被伸展
+File:Redstone 16777216 up.png|在这个位置上的红石行为，红石爬上了方块，底部的红石被拉伸，但是墙上的红石没有
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[en:Java_Edition_hard_limits]]

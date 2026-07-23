@@ -1,0 +1,492 @@
+# 页面: 发射器
+# 来源: https://zh.minecraft.wiki/w/%E5%8F%91%E5%B0%84%E5%99%A8
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 储物, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 教育版独有信息, 方块, 机制, 红石, 红石机制, 需要信息
+# 抓取时间: 2026-07-14 17:21:07
+# 原始 Wikitext 内容:
+
+{{about|激活或发射物品的方块|其纹理相像且仅投掷物品的方块|投掷器}}{{Infobox block
+|image=Dispenser.png
+|invimage=Dispenser
+}}
+
+'''发射器（Dispenser）'''是一种可作为一个[[红石元件]]来发射物品的固体[[方块]]。
+
+== 生成 ==
+=== 自然生成 ===
+[[丛林神庙]]内会自然生成2个发射器。
+
+[[试炼密室]]中会生成多个发射器。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|showdescription=1
+|A1= Cobblestone |B1= Cobblestone     |C1= Cobblestone
+|A2= Cobblestone |B2= Bow;Damaged Bow |C2= Cobblestone
+|A3= Cobblestone |B3= Redstone Dust   |C3= Cobblestone
+|Output= Dispenser
+|type= Redstone
+|description=弓的物品数据不会影响合成结果。
+}}
+
+== 破坏 ==
+挖掘发射器的合适工具是镐。发射器需要木镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+发射器被破坏后会掉落自身。
+
+== 用途 ==
+发射器可用作一种容器，以及一种被激活时发射物品的[[红石元件]]。
+
+发射器的发射面可朝向任何方向，包括上方和下方。玩家放置发射器时，发射器会朝向该玩家的方向。
+
+=== 容器 ===
+{{Filetr|Dispenser GUI.png|thumb|{{el|je}}中发射器的界面}}
+
+发射器有9个物品槽位。对发射器按下{{ctrl|使用}}可以打开发射器的界面。
+
+[[红石比较器]]可以检测发射器存储物品的占空比。
+
+发射器界面的标题默认为“发射器”，可以在放置前使用[[铁砧]]重命名来进行更改，{{in|je}}也可以通过使用{{cmd|data}}命令修改发射器的<code>CustomName</code>标签进行更改（例如，要把位于(0,64,0)的发射器标记为“我的发射器”，则使用命令{{cmd|data merge block 0 64 0 {CustomName:"\"我的发射器\""} }}）。
+
+{{in|je}}发射器可以被<code>lock</code>标签上锁。如果发射器的该标签不是空白的，那么这个发射器必须使用符合该标签表示的物品谓词的物品打开。
+
+=== 红石元件 ===
+{{see also|红石电路}}
+
+发射器可用于随机发射所装的物品。
+
+==== 激活 ====
+发射器是[[红石元件#机械元件|机械元件]]，可被下列形式激活：
+* 毗邻的开启的'''[[红石元件#电源|电源]]'''（例外：[[红石火把]]不会激活其所附着的发射器，[[侦测器]]只会激活指向的发射器）。
+* 毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻的指向发射器且激活的[[红石中继器]]、[[红石比较器]]或[[红石粉]]（包括发射器上方的红石粉）；毗邻但未指向发射器的红石粉不会激活发射器。
+
+{{in|je}}发射器还能通过[[半连接性]]激活。若上述途径对于发射器正上方的方块（种类不限，包括[[空气]]方块和非红石导体）成立，发射器会在收到方块更新（狭义）时被激活。
+
+{{in|be}}在同一红石刻内，电容器更新阶段前存在，但在电容器更新阶段被取消的信号无法激活发射器。
+
+==== 行为 ====
+被激活后，发射器会产生1个计划刻，在延时2红石刻（4游戏刻，0.2秒）后发射一个物品。在这4游戏刻内，发射器不会响应其他红石信号。
+
+发射器只在激活信号到达（[[红石电路#信号与脉冲|上升沿]]）时发射物品，因此保持激活时不会连续发射物品。若要连续发射物品，需用[[时钟电路]]反复激活发射器。
+
+若发射器储存空间的多个槽位被物品占据，则会发射随机一个槽位中的物品。随机选择的过程在发射时完成，而非发射器被激活时；在这个短暂的间隔内，玩家可以移进移出发射器中的物品。
+
+发射器的效果取决于发射的物品。多数物品会被简单沿发射器的朝向投掷，和玩家按下了{{ctrl|丢弃物品}}键类似（但不像[[投掷器]]，发射器不能填充其他容器）。其他物品在发射时的行为则有不同。以下表格列出行为有不同的物品，若无特别说明，“朝向某方块”是指发射面紧贴该方块：
+
+{| class="wikitable collapsible"
+! colspan=2 | 发射器行为
+|-
+! 物品
+! 效果
+|-
+| {{ItemLink|Chestplate|盔甲}}（任何种类）<br>{{ItemLink|Elytra}}
+| 向发射器朝向的1格内有空的适当盔甲槽的[[玩家]]、[[僵尸]]及其变种、[[骷髅]]及其变种、{{only|je|for=[[村民]]|short=1}}、{{only|be|for=[[灾厄村民]]、[[女巫]]|short=1}}、[[猪灵]]、[[猪灵蛮兵]]或[[盔甲架]]装备盔甲或鞘翅。否则以物品实体形式掷出。
+|-
+| {{ItemLink|Shield}}
+| 向发射器朝向的1格内有空的副手的[[玩家]]、[[僵尸]]及其变种、[[骷髅]]及其变种、{{only|je|for=[[村民]]|short=1}}、{{only|be|for=[[灾厄村民]]、[[女巫]]|short=1}}、[[猪灵]]、[[猪灵蛮兵]]或[[盔甲架]]装备盾牌。否则以物品实体形式掷出。
+|-
+| {{ItemLink|Sword}}<br>{{ItemLink|Shovel}}<br>{{ItemLink|Pickaxe}}<br>{{ItemLink|Axe}}<br>{{ItemLink|Hoe}}<br>{{ItemLink|Spear}}<br>{{ItemLink|Bow}}<br>{{ItemLink|Crossbow}}<br>{{ItemLink|Mace}}
+| 向发射器朝向的1格内有空的主手的[[玩家]]、[[僵尸]]及其变种、[[骷髅]]及其变种、{{only|je|for=[[村民]]|short=1}}、{{only|be|for=[[灾厄村民]]、[[女巫]]|short=1}}、[[猪灵]]、[[猪灵蛮兵]]或[[盔甲架]]装备武器或工具。否则以物品实体形式掷出。
+|-
+| {{ItemLink|Arrow}}<br>{{only|je|for={{ItemLink|Spectral Arrow}}}}<br>{{ItemLink|Tipped Arrow}}
+| 沿发射器的朝向发射箭。
+|-
+| {{EntityLink|Boat}}
+| 若发射器朝向水，则将[[船]]以实体形式放置。否则以物品实体形式掷出。<ref name="LousyDispensers>{{bug|MC-114111}}</ref>
+|-
+| {{ItemLink|Bone Meal}}
+| 若发射器朝向可以接受骨粉交互的方块（例如草方块或作物方块），则将骨粉作为[[骨粉#肥料|肥料]]对该方块使用。否则不会发射，骨粉会留在发射器内。
+|-
+| {{ItemLink|Bottle o' Enchanting}}<br>{{ItemLink|Egg}}<br>{{ItemLink|Snowball}}<br>{{ItemLink|Splash Potion}}<br>{{ItemLink|Lingering Potion}}<br>{{only|be|edu|for={{ItemLink|Ice Bomb}}}}<br>{{ItemLink|Wind Charge}}
+| 沿发射器朝向以弹射物形式发射，与玩家按下{{ctrl|使用}}键投掷的效果相同。喷溅药水和滞留药水会射得更远。
+|-
+| {{ItemLink|Bucket}}
+| 收集前方的水源、熔岩源或[[细雪]]到物品栏的空桶内。若没有槽位来放置填充的桶（例如一组空桶其中的一个空桶被填充而其他的物品槽没有空位），则填充后的桶会以物品实体形式掷出。若没有水源、熔岩源或细雪则以物品实体形式掷出一个空桶。<ref name="LousyDispensers"/>
+|-
+| {{ItemLink|Fire Charge}}
+| 沿发射器的朝向发射[[小火球]]。
+|-
+| {{ItemLink|Firework Rocket}}
+| 沿发射器的朝向发射烟花火箭。使用烟火之星合成的烟花火箭可以对实体造成伤害。
+|-
+| {{ItemLink|Flint and Steel}}
+| 若发射器朝向[[固体方块]]上面或[[可燃方块]]旁边的[[空气]]方块，会放置[[火]]并减少打火石的耐久度。<br>若发射器朝向TNT或TNT矿车，则将其点燃。<br>否则不会发射，打火石会留在发射器内。
+|-
+| {{ItemLink|Lava Bucket}}<br>{{ItemLink|Water Bucket}}<br>{{ItemLink|Cod Bucket}}<br>{{ItemLink|Salmon Bucket}}<br>{{ItemLink|Pufferfish Bucket}}<br>{{ItemLink|Tropical Fish Bucket}}<br>{{ItemLink|Bucket of Axolotl}}<br>{{ItemLink|Bucket of Tadpole}}<br>{{ItemLink|Bucket of Sulfur Cube}}
+| 将桶里的内容物放置出来，并把发射器里原有的桶变成空铁桶。<br>除[[硫磺史萊姆桶|硫方怪桶]]外的桶要求发射器朝向的方块可{{ctrl|使用}}熔岩桶或水桶等（如[[空气]]、[[花]]、[[草]]等；[[炼药锅]]除外），否则会以物品实体形式掷出。<ref name="LousyDispensers"/><br>通过发射器在[[下界]]放置的水会立即消失，且原有的桶也会变成空铁桶。<br>若发射器朝向的方块为[[下界传送门（方块）|下界传送门]]，则同样会放置出内容物，并破坏传送门。
+|-
+|{{EntityLink|Minecart}}<br>{{EntityLink|Minecart with Chest}}<br>{{EntityLink|Minecart with Command Block}}<br>{{only|for={{EntityLink|Minecart with Furnace}}|je}}<br>{{EntityLink|Minecart with Hopper}}<br>{{EntityLink|Minecart with TNT}}
+| 若发射器朝向铁轨，则将[[矿车]]以实体形式放置，否则以物品实体形式掷出。<ref name="LousyDispensers"/>
+|-
+| {{BlockLink|Heads}}<br>{{BlockLink|Carved Pumpkin}}<br>{{only|for={{BlockLink|Jack o'Lantern}}|be}}
+| 向发射器朝向的1格内有空的适当盔甲槽的[[玩家]]、[[僵尸]]及其变种、[[骷髅]]及其变种、{{only|je|for=[[村民]]|short=1}}、{{only|be|for=[[灾厄村民]]、[[女巫]]|short=1}}、[[猪灵]]、[[猪灵蛮兵]]或[[盔甲架]]装备生物头颅或雕刻南瓜。<br>{{in|je}}如果发射器面对的位置在[[凋灵]]、[[铁傀儡]]、[[铜傀儡]]或[[雪傀儡]]对应结构的更新区域内，则会放置凋灵骷髅头颅或雕刻南瓜。详见{{slink|凋灵#更新区域}}、{{slink|铁傀儡#更新区域}}、{{slink|铜傀儡#更新区域}}、{{slink|雪傀儡#更新区域}}。<br>{{in|be}}如果发射器面对的位置在凋灵、铁傀儡、铜傀儡或雪傀儡对应结构的周围{{more info}}，则会放置凋灵骷髅头颅、雕刻南瓜或南瓜灯。<br>否则不会发射，将物品{{only|JE|for=留在发射器内}}或{{only|BE|for=以物品实体形式掷出}}。
+|-
+| {{BlockLink|Shulker Box}}
+| 若发射器朝向[[空气]]、[[熔岩]]、[[水]]、[[花]]、[[草]]等可以被替代的方块，则会放置出潜影盒。否则不会发射，潜影盒会留在发射器内。
+|-
+| {{ItemLink|Spawn Egg}}<br>{{only|je|for={{ItemLink|Armor Stand}}}}
+| 在发射器前方生成一个对应的生物。<br>在[[和平]]难度下，尝试发射无法存在于和平难度的生物时会{{only|je|for=消耗刷怪蛋但不生成生物}}或{{only|be|for=将刷怪蛋以物品实体形式掷出}}。
+|-
+| {{BlockLink|TNT}}
+| 放置并点燃TNT，并且给予TNT一个随机方向的较小的速度。
+|-
+| {{only|be|for={{ItemLink|Trident}}}}
+| 沿发射器朝向扔出三叉戟。
+|-
+| {{ItemLink|Shears}}
+| 卸下生物装备的物品，见{{slink|剪刀|卸下装备}}。<br>若发射器朝向的1格方块内有一只未被剪毛的[[绵羊]]（只要碰撞箱进入方块），则会剪掉其的[[羊毛]]，并减少剪刀的耐久度。<br>从充满蜂蜜的[[蜂巢（方块）|蜂巢]]或[[蜂箱]]中收获[[蜜脾]]。<br>剪下[[哞菇]]或[[沼骸]]的[[蘑菇]]。<br>剪下[[铜傀儡]]头戴的[[虞美人]]。<br>去除[[雪傀儡]]的南瓜头。<br>剪断朝向的1格方块内的生物或实体的拴绳连接。<br>移除[[硫方怪]]吸收的方块。<br>否则不会发射，剪刀会留在发射器内。
+|-
+| {{ItemLink|Brush}}
+| 若发射器朝向的1格方块内有[[犰狳]]（只要碰撞箱进入方块），则会刷下一个[[犰狳鳞甲]]，并减少刷子的耐久度。
+|-
+| {{ItemLink|Glass Bottle}}
+| 若发射器朝向水源，则会为玻璃瓶装水。<br>如果发射器朝向装满蜂蜜的[[蜂巢（方块）|蜂巢]]或[[蜂箱]]，则会为玻璃瓶装满蜂蜜。<br>若没有槽位来放置填充的玻璃瓶（如一组玻璃瓶其中的一个被填充而其他的物品槽没有空位），则'''填充后'''的玻璃瓶会以物品实体形式掷出。<br>否则将玻璃瓶以物品实体形式掷出。<ref>{{snap|19w42a}}</ref>
+|-
+| {{BlockLink|Glowstone}}
+| 若发射器朝向能量未满的[[重生锚]]，则会为重生锚补充能量，若能量已满则{{only|je|for=不会发射}}或{{only|be|for=以物品实体形式掷出}}。否则以物品形式掷出。
+|-
+| {{ItemLink|Saddle}}
+| 为未装备鞍的[[猪]]、[[炽足兽]]、[[骆驼]]、[[骆驼尸壳]]、被驯化的[[马]]、[[驴]]、[[骡]]、[[僵尸马]]、{{only|for=[[骷髅马]]|je}}、[[鹦鹉螺]]、[[僵尸鹦鹉螺]]装备鞍。否则以物品实体形式掷出。
+|-
+| {{ItemLink|Horse Armor}}
+| 为未装备马铠的[[马]]或[[僵尸马]]装备马铠。否则以物品实体形式掷出。
+|-
+| {{ItemLink|Nautilus Armor}}
+| 为未装备鹦鹉螺铠的[[鹦鹉螺]]或[[僵尸鹦鹉螺]]装备鹦鹉螺铠。否则以物品实体形式掷出。
+|-
+| {{BlockLink|Carpets}}
+| 为未装备地毯的[[羊驼]]和[[行商羊驼]]装备地毯。否则以物品实体形式掷出。
+|-
+| {{BlockLink|Chest}}
+| 为未装备箱子的[[羊驼]]、[[行商羊驼]]、[[驴]]或[[骡]]装备箱子。否则以物品实体形式掷出。
+|-
+| {{ItemLink|Powder Snow Bucket}}
+| 若发射器朝向空气，则会放置出[[细雪]]，并将发射器里的细雪桶变成[[空桶]]。否则以物品实体形式掷出。
+|-
+| {{ItemLink|Honeycomb}}
+| 为[[氧化#所有铜质方块|铜质方块]]涂蜡，使其变成对应涂蜡变种，并消耗一个蜜脾。否则以物品实体形式掷出。
+|-
+| {{ItemLink|Water Bottle}}
+| 若发射器朝向[[泥土]]、[[砂土]]或[[缠根泥土]]，会将方块转化为[[泥巴]]，并留下空[[玻璃瓶]]。否则以物品实体形式掷出。
+|-
+| {{ItemLink|Harness}}
+| 若发射器朝向[[快乐恶魂]]，会为其装备上[[挽具]]。
+|-
+| [[硫方怪#吸收属性|部分方块]]
+| 若发射器朝向[[硫方怪]]，会使其吸收对应可吸收的方块。否则以物品实体形式掷出。
+|-
+| {{only|BE|for={{BlockLink|Ominous Banner}}}}
+| 若发射器朝向[[掠夺者]]、[[卫道士]]或[[唤魔者]]，会让其佩戴不祥旗帜。否则以物品实体形式掷出。
+|-
+| 其他物品
+| 沿发射器的朝向以物品实体形式掷出物品，与玩家使用{{ctrl|丢弃物品}}键相同。
+|}
+
+当发射器发射物品时，它会发出清脆的响声并产生[[粒子|烟雾粒子]]。若激活时发射器里面为空，则清脆响声的音调稍高。发射器的音效最远可在16格外听到。
+*{{in|je}}发射器发射弹射物或刷怪蛋时不会发出响声。
+*{{in|be}}发射器使用部分物品（使用剪刀、放置潜影盒等）时不会发出发射器的响声。
+
+发射器使用并减少工具耐久度也会受到[[耐久]]魔咒的影响。
+
+发射器是[[红石导体]]，因此可以充能发射器，被充能的发射器也能作为充能方块激活毗邻的其他元件。
+
+{{in|je}}除[[箭]]、[[药箭]]、[[光灵箭]]、[[鸡蛋]]、[[棕色鸡蛋]]、[[蓝色鸡蛋]]、[[雪球]]、[[附魔之瓶]]、[[喷溅药水]]、[[滞留药水]]、[[烟花火箭]]、[[火焰弹]]、[[风弹]]、[[盔甲架]]、[[箱子]]、所有种类的[[船]]、[[竹筏]]、所有种类的[[运输船]]、[[运输竹筏]]、[[熔岩桶]]、[[水桶]]、[[细雪桶]]、[[鲑鱼桶]]、[[鳕鱼桶]]、[[热带鱼桶]]、[[河豚桶]]、[[美西螈桶]]、[[蝌蚪桶]]、[[硫方怪桶]]、[[铁桶]]、[[打火石]]、[[骨粉]]、[[TNT]]、所有种类的[[潜影盒]]、[[凋灵骷髅头颅]]（若当前发射器可以构建凋灵，则无视后续行为）、[[雕刻南瓜]]（若当前发射器可以构建铁傀儡等生物，则无视后续行为）、[[玻璃瓶]]、[[荧石]]、[[剪刀]]、[[刷子]]、[[蜜脾]]、[[药水]]、[[矿车]]、[[运输矿车]]、[[漏斗矿车]]、[[TNT矿车]]、[[命令方块矿车]]和[[动力矿车]]外：
+# 如果物品具有<code>equippable</code>组件，则根据此组件指定的对应槽位将物品如同盔甲一样装备到生物上；
+# 如果物品属于物品标签{{TagLink|block|sulfur_cube_swallowable}}且发射器前方为[[硫磺史萊姆|硫方怪]]，则令硫方怪吸收此物品；
+# 如果物品是[[刷怪蛋]]且具有<code>entity_data</code>组件，则会在发射的位置生成一个对应的实体。
+# 若均不符合上述检查，则直接投掷物品实体。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Click.ogg
+|subtitle={{tp|subtitles.block.dispenser.dispense}}
+|source={{tp|soundCategory.block}}
+|description=发射器发射物品
+|id=block.dispenser.dispense
+|translationkey=subtitles.block.dispenser.dispense}}
+{{Sound table
+|sound=Click pitch1.2.ogg
+|subtitle={{tp|subtitles.block.dispenser.fail}}
+|source={{tp|soundCategory.block}}
+|description=发射器发射失败
+|id=block.dispenser.fail
+|translationkey=subtitles.block.dispenser.fail}}
+{{Sound table
+|sound=Bow shoot.ogg
+|subtitle={{tp|subtitles.block.dispenser.dispense}}
+|source={{tp|soundCategory.block}}
+|description=发射器发射弹射物
+|id=block.dispenser.launch
+|translationkey=subtitles.block.dispenser.dispense
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=Click.ogg
+|source=方块
+|description=发射器发射物品
+|id=random.click
+|typeid=power.on
+|soundvolume=0.2
+|soundpitch=1.0
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Click pitch1.2.ogg
+|source=方块
+|description=发射器发射失败
+|id=random.click
+|typeid=power.off
+|soundvolume=0.2
+|soundpitch=1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=random.bow.wav
+|source=方块
+|description=发射器发射弹射物
+|id=random.bow
+|typeid=bow
+|soundvolume=1.0
+|soundpitch=0.83-1.25
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Dispenser
+|spritetype=block
+|showblocktags=je
+|blocktags={{GameTag|block|dispenser}}
+|nameid=dispenser
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=dispenser
+|spritetype=block
+|nameid=dispenser
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Dispenser
+|spritetype=block
+|nameid=dispenser
+|showblocktags=be
+|blocktags={{GameTagBE|block|dispenser}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=dispenser
+|spritetype=block
+|nameid=Dispenser
+|foot=1
+}}
+
+=== 方块数据值 ===
+{{see also|基岩版数据值}}
+
+在基岩版中，发射器使用其方块数据值来存储它的朝向和激活状态：
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+发射器有用于存储与其相关联的附加数据的方块实体。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{load achievements|dispense-with-this}}
+
+== 视频 ==
+{{bv|BV134411Z7fS}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.2|[[File:Dispenser (S)_JE1.png|32px]] 加入了发射器。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.2.1|dev=12w03a|现在发射器能够通过发射刷怪蛋来生成生物。}}
+|{{HistoryLine|||dev=12w04a|[[File:Dispenser (S) JE2 BE1.png|32px]] 更改了发射器的纹理。}}
+|{{HistoryLine||1.3.1|dev=12w15a|发射器能够放置[[船]]和[[矿车]]。}}
+|{{HistoryLine|||dev=12w21a|发射器能够将水桶以及熔岩桶内的液体发射出去。再次激活发射器，发射器能够回收这些液体。}}
+|{{HistoryLine||2013年1月18日|link={{tweet|Dinnerbone|292069254017204224}}|[[Dinnerbone]]说发射器将会有更多的功能，发射器可以将物品发射进前面的容器中。}}
+|{{HistoryLine||1.5|dev=13w02a|[[File:Dispenser (S) JE3.png|32px]] 更改了发射器的纹理。<ref>{{bug|MC-6738|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=13w02b|[[File:Dispenser (S) JE4.png|32px]] 回退了上个版本的更改。}}
+|{{HistoryLine||||dev=13w04a|[[File:Dispenser (U) JE1 BE1.png|32px]] 发射器现在可以朝向所有的六个方向。
+|发射器现在能够使用很多新物品，包括TNT、骨粉、打火石以及盔甲。}}
+|{{HistoryLine|||dev=13w10b|充能的发射器收到一个红石更新时现在不会发射物品。}}
+|{{HistoryLine||1.7.2|[[File:Dispenser (S) JE5.png|32px]] 更改了发射器的UV。<ref>{{bug|MC-37106|||Fixed}}</ref>}}
+|{{HistoryLine||1.7.4|dev=13w47a|[[File:Dispenser (S) JE6.png|32px]] 回退了上个版本的更改。}}
+|{{HistoryLine||1.8|dev=14w02a|发射器现在可以具有方块实体数据{{nbt|string|Lock}}，用于锁定发射器。如该标签存在，该发射器只能用自定义名称与该标签相同的物品打开。}}
+|{{HistoryLine|||dev=14w04a|发射器可以通过发射南瓜、凋灵骷髅头颅来生成雪傀儡、铁傀儡、凋灵。}}
+|{{HistoryLine|||dev=14w07a|发射器激活时会放置命令方块而不是发射它。}}
+|{{HistoryLine||1.8.6|发射器不再放置命令方块，因为那构成了一个漏洞。<ref>{{bug|MC-80671#comment-228546}}</ref>}}
+|{{HistoryLine||1.9|dev=15w33a|发射器现在能把[[喷溅药水]]和[[滞留药水]]射得更远。}}
+|{{HistoryLine|||dev=15w33c|发射器会把火焰弹作为末影龙火球发射，而不是作为烈焰人火球发射。}}
+|{{HistoryLine|||dev=15w39c|发射器现在会向生物装备生物头颅和南瓜。}}
+|{{HistoryLine|||dev=15w44b|发射器现在再一次地把火焰弹作为烈焰人火球发射了。}}
+|{{HistoryLine||1.9.1|dev=pre1|发射器现在可以使用[[战利品表]]，生成在[[丛林神庙]]的发射器现在会使用战利品表。}}
+|{{HistoryLine||1.10|dev=16w21a|发射器现在可以像盔甲那样装备盾。}}
+|{{HistoryLine||1.11|dev=16w32a|发射器方块实体ID从<code>Trap</code>变为<code>dispenser</code>。}}
+|{{HistoryLine|||dev=16w39a|发射器现在可以放置[[潜影盒]]。}}
+|{{HistoryLine|||dev=16w39c|发射器现在沿发射器的朝向发射[[船]]，而不是朝着发射器发射。}}
+|{{HistoryLine||1.13|dev=17w47a|现在发射器被放置时朝向玩家朝向的反方向。}}
+|{{HistoryLine||1.14|dev=18w43a|可以发射剪刀来给绵羊剪羊毛。|[[File:Dispenser (S)_JE7 BE2.png|32px]] [[File:Dispenser (U) JE2 BE2.png|32px]] 再次更改了纹理。}}
+|{{HistoryLine||1.15|dev=19w34a|发射器现在可以从充满蜂蜜的蜂巢和蜂箱中收获[[蜜脾]]。
+|现在可以在发射器里放入[[玻璃瓶]]来对着充满蜂蜜的蜂巢和蜂箱中收获[[蜂蜜瓶]]。
+|现在可以在发射器里放入空瓶来对着水发射以获得水瓶。}}
+|{{HistoryLine|||dev=19w36a|烟花火箭现在会朝着发射器朝着的方向发射。}}
+|{{HistoryLine|||dev=19w41a|发射器现在能正确发射空瓶，在不是朝向[[水]]的地方。}}
+|{{HistoryLine|||dev=19w42a|发射器现在能放置[[盔甲架]]。}}
+|{{HistoryLine||1.16|dev=20w15a|发射器现在可以给[[猪]]、[[炽足兽]]、被驯服的[[马]]、[[驴]]、[[骡]]装备鞍。
+|发射器现在可以给马装备[[马铠]]。
+|发射器现在可以给[[羊驼]]和[[行商羊驼]]装备[[地毯]]。
+|发射器现在可以给羊驼、行商羊驼、驴和骡装备[[箱子]]。
+|发射器现在可以修剪[[哞菇]]和[[雪傀儡]]。}}
+|{{HistoryLine||1.17|dev=20w46a|发射器现在可以用[[细雪桶]]放置出[[细雪]]，用空桶收回细雪。}}
+|{{HistoryLine|||dev=21w11a|发射器现在可以使用[[蜜脾]]给[[铜块]]（氧化的除外）涂蜡。}}
+|{{HistoryLine|||dev=21w14a|发射器现在可以使用蜜脾给氧化的铜块涂蜡。}}
+|{{HistoryLine||1.19|dev=22w11a|发射器现在可以使用[[水瓶]]将[[泥土]]、[[缠根泥土]]和[[砂土]]变为[[泥巴]]。}}
+|{{HistoryLine|||dev=22w13a|发射器现在可以使用[[蝌蚪桶]]发射出[[蝌蚪]]。<ref>{{bug|MC-249349|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.3|exp=update_1_21|dev=23w45a|发射器现在可以生成于[[试炼密室]]。}}
+|{{HistoryLine||1.20.5|dev=23w51a|发射器现在可以从[[犰狳]]身上刷落[[犰狳鳞甲]]。}}
+|{{HistoryLine|exp=update_1_21|||dev=24w06a|发射器现在可以发射[[风弹（实体）|风弹]]。}}
+|{{HistoryLine|||dev=24w09a|发射器现在可以修剪[[沼骸]]的蘑菇。}}
+|{{HistoryLine||1.21|dev=24w18a|23w45a、24w06a和24w09a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|dev=24w39a|将方块实体数据{{nbt|string|Lock}}重命名为{{nbt|compound|lock}}，并支持物品谓词。}}
+|{{HistoryLine||1.21.6|dev=25w16a|发射器现在可以使用剪刀来剪断生物或实体的拴绳连接。}}
+|{{HistoryLine|||dev=25w17a|发射器现在可以为[[快乐恶魂]]装备上[[挽具]]。<ref>{{bug|MC-296369|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.9|dev=25w33a|发射器现在可以使用剪刀剪下[[铜傀儡]]头戴的[[虞美人]]。}}
+|{{HistoryLine||1.21.11|dev=pre4|发射器现在可以为驯服的鹦鹉螺和僵尸鹦鹉螺装备鞍和鹦鹉螺铠。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了[[硫方怪桶]]，发射器可以使用其放置出[[硫方怪]]。
+|发射器现在可以使硫方怪吸收或移除其内部的方块。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了发射器。}}
+|{{HistoryLine|||dev=build 5|[[File:Dispenser (S) JE2 BE1.png|32px]] [[File:Dispenser (U) JE1 BE1.png|32px]] 更改了纹理，使其与Java版匹配。}}
+|{{HistoryLine||0.15.0|dev=build 1|发射器现在可被活塞推动。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|可以发射剪刀来给绵羊剪羊毛。
+|[[File:Dispenser (S)_JE7 BE2.png|32px]] [[File:Dispenser (U) JE2 BE2.png|32px]] 更改了纹理。}}
+|{{HistoryLine||1.14.0|dev=1.14.0.1|发射器现在可以从充满蜂蜜的蜂巢和蜂箱中收获[[蜜脾]]。
+|现在可以在发射器里放入玻璃瓶来对着充满蜂蜜的蜂巢和蜂箱中收获蜂蜜瓶。
+|现在可以在发射器里放入空瓶来对着水发射以获得水瓶。}}
+|{{HistoryLine||1.16.0|dev=1.15.0.51|现在合成发射器不再必需使用满耐久的弓。}}
+|{{HistoryLine|||dev=1.16.0.59|现在发射器可以给生物装备盾牌。}}
+|{{HistoryLine||1.16.210|exg=caves_and_cliffs_en|dev=1.16.210.57|现在发射器可以使用蜜脾给铜块（氧化的除外）涂蜡。}}
+|{{HistoryLine||1.17.0|exg=caves_and_cliffs_en|dev=1.16.230.52|现在发射器可以使用蜜脾给氧化的铜块涂蜡。}}
+|{{HistoryLine|||exg=none|dev=1.17.0.52|1.16.210.57和1.16.230.52中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.17.0.54|现在发射器可以使用细雪桶放置细雪。}}
+|{{HistoryLine||1.17.30|dev=1.17.20.20|现在发射器可以使用空桶收回细雪。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|发射器现在可以使用[[水瓶]]将[[泥土]]、[[缠根泥土]]和[[砂土]]变为[[泥巴]]。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.22|发射器现在可以给[[猪]]、[[炽足兽]]、被驯服的[[马]]、[[驴]]、[[骡]]装备鞍。
+|发射器现在可以给马装备[[马铠]]。
+|发射器现在可以给[[羊驼]]和[[行商羊驼]]装备[[地毯]]。
+|发射器现在可以给羊驼、行商羊驼、驴和骡装备[[箱子]]。
+|发射器现在可以修剪[[哞菇]]和[[雪傀儡]]。}}
+|{{HistoryLine|||exg=next_major_update|dev=1.19.60.22|发射器现在可以给[[骆驼]]装备鞍。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|1.19.60.22中与骆驼相关的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.20.60|exg=updateAnnouncedLive2023|dev=1.20.60.20|发射器现在可以生成于[[试炼密室]]。}}
+|{{HistoryLine|||dev=1.20.60.23|发射器现在可以从[[犰狳]]身上刷落[[犰狳鳞甲]]。}}
+|{{HistoryLine||1.20.70|exg=updateAnnouncedLive2023|dev=1.20.70.24|发射器现在可以发射[[风弹（实体）|风弹]]。}}
+|{{HistoryLine||1.20.80|dev=1.20.80.20|1.20.60.23中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|1.20.60.20和1.20.70.24中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.24|现在发射器只会在使用镐挖掘时掉落。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.27|现在发射器不再能同时拥有多个计划刻。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.22|回退了1.21.60.27中的变更。<ref>{{bug|MCPE-189895|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.90|dev=1.21.90.20|发射器现在可以使用剪刀来剪断生物或实体的拴绳连接。
+|现在发射器发射无法在和平难度下存在的生物的刷怪蛋时，不再会将该刷怪蛋以物品形式掷出。}}
+|{{HistoryLine|||dev=1.21.90.21|发射器现在可以为[[快乐恶魂]]装备上[[挽具]]。}}
+|{{HistoryLine|||dev=1.21.90.25|回退了1.21.90.20中发射器可以发射无法在和平难度下存在的生物的刷怪蛋的变更。}}
+|{{HistoryLine||26.20|exg=y_2026_drop_2|dev=26.20.23|加入了[[硫方怪桶]]，发射器可以使用其放置出[[硫方怪]]。
+|发射器现在可以使硫方怪吸收或移除其内部的方块。}}
+|{{HistoryLine||26.30|dev=26.30.20|26.20.23中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Dispenser JE1.png|32px]] 加入了发射器。}}
+|{{HistoryLine||xbox=TU3|[[File:Dispenser (S) JE2 BE1.png|32px]] 更改了纹理。}}
+|{{HistoryLine||xbox=TU5|为发射器添加了便捷操作。}}
+|{{HistoryLine||xbox=TU9|现在发射器能够通过发射刷怪蛋来生成生物。
+|发射器激活时能够将水桶以及熔岩桶内的液体发射出去，再次激活也能够回收这些液体，但是并没有填充发射器内的空桶。}}
+|{{HistoryLine||xbox=TU10|修复了收回液体时没有正确填充放射器内空桶的错误。}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|现在可以面向任何方向。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|发射器可以通过发射南瓜、凋灵骷髅头颅来生成雪傀儡、铁傀儡、凋灵。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|可以发射剪刀来给绵羊剪羊毛。
+|[[File:Dispenser_(S) JE7 BE2.png|32px]] [[File:Dispenser (U) JE2 BE2.png|32px]] 更改了纹理。}}
+
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|[[File:Dispenser (S) JE2 BE1.png|32px]] [[File:Dispenser (U) JE1 BE1.png|32px]] 加入了发射器。}}
+}}
+
+== 画廊 ==
+<gallery>
+DispenserPlacement.png|发射器可朝向上方和下方，以及朝向侧面的各个方向
+DispenserPlacement2.png|朝向下方和上方的发射器
+1st image of new Dispenser slash dropper Placement.png|Mojang[{{tweet|Dinnerbone|293667947434631168}} 发布]的第一张关于发射器的图片，展示了发射器和[[投掷器]]的新放置方式。上面的是发射器
+</gallery>
+
+== 参见 ==
+其他一些方块也可以用于移动物品：
+* [[投掷器]]可以丢出物品或把物品输入朝向的容器。
+* [[漏斗]]可把物品输入朝向的容器。
+* [[冰]]和[[浮冰]]能减少物品实体移动的摩擦力。
+* [[黏液块]]被活塞推动时可以给予物品实体速度。
+* [[水]]和[[熔岩]]可以推动物品实体。
+* [[半连接性]]在发射器上的应用。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+
+[[Category:机制]]
+[[Category:红石机制]]
+[[Category:储物]]
+
+[[cs:Dávkovač]]
+[[de:Werfer]]
+[[en:Dispenser]]
+[[es:Dispensador]]
+[[fr:Distributeur]]
+[[hu:Adagoló]]
+[[it:Distributore]]
+[[ja:ディスペンサー]]
+[[ko:발사기]]
+[[nl:Dispenser]]
+[[pl:Dozownik]]
+[[pt:Ejetor]]
+[[ru:Раздатчик]]
+[[uk:Роздавач]]

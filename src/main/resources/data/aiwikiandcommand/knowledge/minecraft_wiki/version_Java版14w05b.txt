@@ -1,0 +1,105 @@
+# 页面: Java版14w05b
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w05b
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:11
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=14w05b
+|image=14w05a.png
+|image2=Java Edition 14w05b Simplified.png\Java Edition 14w05b Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年1月31日
+|jsonhash=ce7fca43310f73f6532c6f8f94f850a86532ae80
+|clienthash=3e925a7e4cd1bbfa12fdf1bd9efc92618bdaa644
+|serverhash=d2d2b00952748af9ee8e60f49b9998dcfad3071f
+|exehash=86b07b8315f7364adca87c62602879227135bf78
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w05a
+|next=14w06a
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w05b'''是[[Java版1.8]]的第9个快照，发布于2014年1月31日<ref>{{cite|url=http://mojang.com/2014/01/minecraft-snapshot-14w05a/|archive-url=1|archive=1|archive-time=20140203082016|title=Minecraft snapshot 14w05b|author=Dinnerbone|website=Mojang.com|date=Jan 30, 2014}}</ref>，发布以修复[[14w05a]]里的漏洞和崩溃。
+
+== 更改 ==
+=== 生物 ===
+'''[[哞菇]]'''
+* 获得[[隐身]]状态效果时，身上的蘑菇不再显示。
+
+'''[[绵羊]]'''
+* 获得隐身状态效果时，身上的羊毛不再显示。
+
+'''[[雪傀儡]]'''
+* 获得隐身状态效果时，头部不再显示。
+
+'''狼'''
+* 获得隐身状态效果时，项圈不再显示。
+
+=== 常规 ===
+'''[[着色器]]'''
+* 现在改变视角并改变观察生物的视角时，现在会从视图中移除。<ref name="comment-219617">{{bug|MC-46727#comment-219617}}</ref>
+* {{key|F4}}现在会切换不同的着色器，而不是关闭。<ref name="comment-219617"/>
+
+== 修复 ==
+{{fixes|fixedin=14w05b|prefix=Minecraft|showdesc=1
+|;old
+|1769|站在TNT、荧石、红石块和树叶中可以透视（流畅画质下）。
+|4476|当近距离攻击其他生物时，末影人不会传送。
+|4546|被扔在地上的羊刷怪蛋显示错误的纹理（流畅画质下）。
+|12640|当条目过多时，记分板会消失。
+|19313|湿的驯服狼和敌对狼使用的是野生狼的纹理。
+|22395|当玩家在栅栏旁边对着栅栏放置方块时，方块可以放置在玩家体内。
+|30543|摔落在墙或栅栏上，没有粒子效果。
+|31147|某些方块在末影人手上是隐形的。
+|31382|{{cmd|summon|link=none}}命令中，当魔咒ID大于255时会导致游戏崩溃。
+|31574|{{cmd|tellraw|link=none}}命令中，如果不包含<code>with</code>参数，而只包含<code>translate</code>参数，会导致崩溃。
+|33246|使用{{cmd|give|link=none}}命令给予或{{cmd|summon|link=none}}生成的多色烟花导致游戏崩溃。
+|33467|使用{{cmd|summon|link=none}}生成烟花时，使用非数字作为颜色值时会导致游戏崩溃。 
+|37398|点击主菜单中的“超级秘密设置”时会{{tr|抛出|丟擲|投擲}}异常（但不导致崩溃）。
+|38915|当玩家在炼药锅内部或者顶部时，可以在炼药锅顶部放置方块。
+|40484|执行<code>/summon MinecartRideable ~ ~ ~ <nowiki>{</nowiki>Riding:<nowiki>{</nowiki>id:Villager<nowiki>}}</nowiki></code>后游戏崩溃。
+|;dev
+|44569|经验等级为负时，经验条不显示。
+|44757|在冒险模式中，手指向方块时，其碰撞箱会被显示。
+|45102|{{cmd|clear|link=none}}命令不工作。
+|45503|{{cmd|particle|link=none}}命令在被选定的粒子效果不存在时仍然返回成功消息。
+|45762|画的放置位置不正确。
+|45826|升级至14w04b后，物品展示框掉落，并且物品展示框在方块错误的一边被渲染。
+|46004|高草丛被花替代。
+|46084|在新版本中打开旧存档，导致画被破坏。
+|;previous
+|46402|在旁观模式中飞行时，服务器按照生存模式的情况处理，同时将玩家踢出服务器。
+|46416|<code>Hopper: java.lang.NullPointerException: Unexpected error</code>.
+|46420|<code>Hopper: java.lang.ArrayIndexOutOfBoundsException: 44339</code>.
+|46442|<code>Hopper: java.lang.ArrayIndexOutOfBoundsException: -1</code>.
+|46444|旁观模式下重新连接服务器，导致玩家不能穿过实体。
+|46447|不能通过合成方式修复工具。
+|46465|在旁观具有着色器的生物时切换语言，会导致着色器停止工作。
+|46467|<code>Hopper: java.lang.RuntimeException: Already decorating</code>.
+|46472|旁观模式下，速度调整功能只有第一次有效。
+|46485|使用“Flip”着色器时会黑屏。
+|46489|将屏障作为落沙类（<code>FallingSand</code>）实体生成时导致游戏崩溃。
+|46510|玩家在旁观模式中可以推动史莱姆。
+|46558|当被旁观的生物死亡时，不会恢复为正常的旁观状态。
+|46563|在旁观生物时，使用F5切换到第三人称视角，透视效果仍然存在。
+|46568|在旁观模式中无法移动。
+|46576|在屏障方块内部时游戏崩溃。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:14w05b]]
+[[en:Java Edition 14w05b]]
+[[es:Java Edition 14w05b]]
+[[fr:Édition Java 14w05b]]
+[[ja:Java Edition 14w05b]]
+[[pt:Edição Java 14w05b]]
+[[ru:14w05b (Java Edition)]]
+[[uk:14w05b (Java Edition)]]

@@ -1,0 +1,992 @@
+# 页面: 调试屏幕
+# 来源: https://zh.minecraft.wiki/w/%E8%B0%83%E8%AF%95%E5%B1%8F%E5%B9%95
+# 分类: Java版, Java版即将到来/26.3, Java版独有特性, UI, 开发, 待更新条目, 缺少理由的待更新条目, 需要验证历史/Java版
+# 抓取时间: 2026-07-14 17:36:19
+# 原始 Wikitext 内容:
+
+{{about|游戏中的一种屏幕||调试}}
+{{exclusive|java}}{{needs update}}
+{{tr|mode=H|堆内存|堆積記憶體}}{{tr|mode=H|帧生成|影格產生|幀生成}}{{tr|mode=H|帧数|影格數|幀數}}{{tr|mode=H|每帧|每影格|每幀}}{{tr|mode=H|饼图|圓形圖}}
+
+[[File:DebugScreen.png|缩略图|默认配置并未开启“简化调试信息”调试屏幕]]
+
+[[File:DebugScreen without coordinates.png|缩略图|默认配置并开启了“简化调试信息”调试屏幕]]
+
+'''调试屏幕（Debug screen）'''默认使用{{keys|F3}}呼出，是一种在游戏内显示调试信息的屏幕，包括[[区块]]缓存、内存使用、玩家的当前[[坐标]]、当前游戏帧率图表等各种参数。调试屏幕会在需要向其他玩家描述自己位置或监测游戏性能时发挥很大用处。
+
+'''调试组合键（Debug hotkey）'''控制了调试屏幕部分元素的显示，它也提供了多种调试信息。
+
+== 调试选项屏幕 ==
+{{Filetr|Debug Options.png|thumb|调试选项屏幕}}
+
+按下{{key|F3+F6}}可以打开调试选项屏幕，该屏幕用于配置哪些调试信息需隐藏/仅在调试屏幕中显示/始终可见。其他的一些调试组合键也可通过此屏幕开关。
+
+该屏幕顶部有搜索框和一串警告文字。底部有“{{tp|debug.options.profile.default}}”和“{{tp|debug.options.profile.performance}}”两种配置。其中后者会在前者的基础上只保留某些选项及其元素，具体见下方表格。
+
+根据具体用途，各个选项在调试选项屏幕中被分为“调试屏幕文本”和“调试渲染器”两部分，并按首字母顺序排列。
+
+若[[游戏规则]]{{gamerule|reduced_debug_info}}设为<code>true</code>，或者在[[选项#聊天设置|聊天设置]]中开启了“{{tp|options.reducedDebugInfo}}”选项，则调试屏幕只显示下面表格里带<code>*</code>标记的元素，并在调试选项屏幕内在不显示的元素上显示“{{tp|debug.options.notAllowed.tooltip}}”。
+
+调试选项的配置存储在{{filename|[[debug-profile.json]]}}中。
+
+所有的调试快捷键均可在[[控制]]中重新绑定，本文将以默认配置描述。
+{{-}}
+
+=== 调试屏幕文本 ===
+{| class="wikitable" data-description="说明"
+|-
+! rowspan="2"| 选项
+! rowspan="2"| 对应元素
+! rowspan="2"| 描述<ref name="debug-screen">http://gaming.stackexchange.com/questions/14990/minecraft-debug-screen</ref><ref name="forum">http://www.minecraftforum.net/viewtopic.php?f=35&t=13231</ref>
+! colspan="2"| 默认状态
+|-
+! {{tp|debug.options.profile.default}}
+! {{tp|debug.options.profile.performance}}
+|-
+| biome
+| Biome
+| 显示玩家当前所在的[[生物群系]]。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+|rowspan="2"| chunk_generation_stats
+| NoiseRouter
+| 见下文{{slink||NoiseRouter}}
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+|-
+| Biome builder
+| 见下文{{slink||Biome builder}}
+|-
+|rowspan="5"| chunk_render_stats
+| C*
+| 屏幕上渲染的子区块数/已加载区块（包括强/弱加载）中的总子区块数。
+| rowspan="5" {{tc|no|{{tp|options.off}}}}
+| rowspan="5" {{tc|no|{{tp|options.off}}}}
+|-
+| D*
+| 客户端的渲染距离。
+|-
+| pC*
+| 待批处理的区块数。
+|-
+| pU*
+| 待提交至显卡的更新数。
+|-
+| aB*
+| 批处理时可用的缓冲区。
+|-
+|rowspan="2"| chunk_source_stats
+| Chunks[C]*
+| 所能载入的最大区块数。
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+|-
+| Chunks[S]
+| 所在维度中服务端加载到内存中的区块个数。
+|-
+| day_count
+| Day
+| 当前天数。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| rowspan="2" | detailed_memory
+| Memory(heap)
+| 堆内存的使用情况。
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+|-
+| Memory(non-heap)
+| 非堆内存的使用情况。
+|-
+|rowspan="2"| entity_render_stats
+| E*
+| 渲染实体数/加载区块中的总实体数
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+|-
+| SD*
+| 客户端的模拟距离。
+|-
+| entity_spawn_counts
+| SC
+| 见下文{{slink||SC}}
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+|rowspan="2"| fps
+| fps*
+| 游戏的当前帧率。帧率是以帧为单位的位图图像连续出现在显示器上的频率（速率），多个静止的帧快速过渡形成连续的图像，这是所有移动媒体的基础。帧率通常用“帧每秒”（FPS）描述。
+| rowspan="2" {{tc|neutral|{{tp|debug.entry.overlay}}}}
+| rowspan="2" {{tc|yes|{{tp|debug.entry.always}}}}
+|-
+| T（第一个）*
+| 显示最高可能帧率（不锁帧时为“inf”）
+|-
+| game_version
+| ''版本''*
+| 显示当前游戏版本，无论它是否为原版，或者是否为快照。
+| {{tc|neutral|{{tp|debug.entry.overlay}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| gpu_utilization
+| GPU*
+| 预计GPU占用率（仅使用支持GPU计时查询的显卡时可用）。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|neutral|{{tp|debug.entry.overlay}}}}
+|-
+|rowspan="2"| heightmap
+| CH
+| 见下文{{slink||CH}}
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+|-
+| SH
+| 见下文{{slink||SH}}
+|-
+|rowspan="2"| light_levels
+| Client Light
+| 客户端的光照。第一个数字显示玩家脚部位置的总[[亮度#光照等级|光照等级]]。需要注意的是，此数值为[[亮度#天空光照|天空光照]]和[[亮度#方块光照|方块光照]]二者的较大值。但“天空光照”不代表游戏世界中的实际光照，譬如是否处于夜晚、雷暴等。<br>第二个数字显示玩家脚部位置能够获取的天空光照。同样有上述的注意事项。<br>第三个数字显示玩家脚部位置来自其他方块（如[[火把]]）的光照等级。
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+| rowspan="2" {{tc|no|{{tp|options.off}}}}
+|-
+| Server Light
+| 服务端的天空光照和方块光照。
+|-
+| local_difficulty
+| Local Difficulty
+| 显示玩家所在区块的游戏[[难度]]。由于一个漏洞，括号内的数字总是为0。其后为玩家在世界内度过的游戏日。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| looking_at_block_state
+| Targeted Block
+| 显示玩家指向的方块和方块状态。只有当玩家正指向一个非液体方块时才会显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| looking_at_block_tags
+| 
+| 显示玩家指向的方块的方块标签。只有当玩家正指向一个非液体方块时才会显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| looking_at_fluid_state
+| Targeted Fluid
+| 显示玩家指向的流体和流体状态。只有当玩家正指向一个方块或液体时才会显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| looking_at_fluid_tags
+| 
+| 显示玩家指向的流体的流体标签。只有当玩家正指向一个方块或液体时才会显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| looking_at_entity
+| Targeted Entity
+| 只显示玩家指向的实体。仅当玩家正指向实体时才显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| looking_at_entity_tags
+| 
+| 显示玩家指向的实体的实体类型标签。仅当玩家正指向实体时才显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+|rowspan="3"| memory
+| Mem*
+| 游戏使用的内存（和百分比），以及游戏可用的最大内存。
+| rowspan="3" {{tc|neutral|{{tp|debug.entry.overlay}}}}
+| rowspan="3" {{tc|neutral|{{tp|debug.entry.overlay}}}}
+|-
+| Allocation rate*
+| 游戏分配堆内存的速率，单位为MB/s。
+|-
+| Allocated*
+| 从游戏可用内存最大值中分配给游戏的内存量，以及百分比。
+|-
+| particle_render_stats
+| P*
+| 渲染的粒子数。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+|rowspan="5"| player_position
+| XYZ
+| X为玩家的位置相对0,0点偏东的距离（负值为偏西）。<br>Y为玩家（脚底）以方格计数的高度（处于[[主世界]]海平面高度时为63，熔岩层高度为-54，[[下界]]熔岩海平面高度为32）。<br>Z为玩家的位置相对0,0位点偏南的距离（负值为偏北）。
+| rowspan="5" {{tc|neutral|{{tp|debug.entry.overlay}}}}
+| rowspan="5" {{tc|no|{{tp|options.off}}}}
+|-
+| Block
+| 玩家目前脚底所处方块的坐标，同为XYZ格式。与上述XYZ值相近，向下取整。
+|-
+| Chunk*
+| 该区块在整个世界中的位置。当<code>ReducedDebugInfo</code>设置为<code>true</code>时，仅显示玩家于区块内部的位置。末尾的方括号中还显示玩家当前所处区块在对应区域文件的位置，以及此区域文件的文件名。
+|-
+| {{text anchor|Facing}}
+| 玩家的朝向（东西南北或XZ轴的正负方向）。末尾的2个数字表示玩家的水平旋转和垂直旋转角度。
+|-
+| ''维度''FC
+| 当前维度强制加载的区块的数量（FC=Forceloaded Chunk）。
+|-
+| player_section_position
+| Section-relative
+| 显示玩家位于区块内部的位置。
+| {{tc|neutral|{{tp|debug.entry.overlay}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| post_effect
+| Post: ''标识符''
+| 当前使用的后处理管线。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+|rowspan="2"| simple_performance_impactors
+| ''图像品质''*
+| 当前图像品质设置（“流畅”时为“fast”，“高品质”时为“fancy”，“极佳”时为“fabulous”），以及云的显示设置（“流畅”时为“fast-clouds”，“高品质”时为“fancy-clouds”，“关闭”时为“none”）。
+| rowspan="2" {{tc|neutral|{{tp|debug.entry.overlay}}}}
+| rowspan="2" {{tc|neutral|{{tp|debug.entry.overlay}}}}
+|-
+| B（第二个）*
+| 未被使用，固定为0。
+|-
+| sound_mood
+| Sounds
+| 正在播放的声音数量/最多可以播放多少声音。<br>第一对数字代表的非流式播放音效，第二对数字代表流式播放音效。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+|rowspan="3"| system_specs
+| Java
+| 运行游戏的Java版本，以及它是32位还是64位。
+| rowspan="3" {{tc|neutral|{{tp|debug.entry.overlay}}}}
+| rowspan="3" {{tc|no|{{tp|options.off}}}}
+|-
+| CPU*
+| CPU，包括它有多少线程，它的品牌和型号，以及运行速度（单位为GHz）。
+|-
+| Display*
+| Minecraft屏幕的分辨率、GPU品牌的名称、显卡、OpenGL版本和玩家使用的驱动程序。
+|-
+|rowspan="3"| tps
+| ms ticks*
+| 服务端上的一游戏刻所花费的时间。
+| rowspan="3" {{tc|neutral|{{tp|debug.entry.overlay}}}}
+| rowspan="3" {{tc|neutral|{{tp|debug.entry.overlay}}}}
+|-
+| tx*
+| 客户端发送数据包的数量。
+|-
+| rx*
+| 客户端接收数据包的数量。
+|}
+
+只要调试屏幕具有可渲染元素，游戏就会渲染下列元素。这些元素不受调试选项屏幕控制。
+{| class="wikitable"
+! 对应元素 || 描述
+|-
+| Debug charts*
+| 告诉玩家各项图表是否可见，以及控制它们开关的调试组合键。
+|}
+
+==== NoiseRouter ====
+显示用于生成地形和生物群系的噪声值。
+
+* T（Temperature）：温度。用于生物群系的放置，不影响地形。
+
+* V（Vegetation）：植被，即湿度。用于生物群系的放置，不影响地形。
+
+* C（Continents）：大陆性。用于区分海洋与陆地，决定生物群系的放置。
+
+* E（Erosion）：侵蚀度。决定地形的平缓程度，此值越高表示地形越平缓。
+
+* D（Depth）：深度，随高度变化，用于生物群系放置。
+
+* W（Weirdness）：奇异性。此值影响山脊性进而影响了地形的起伏，也用于决定一些生物群系的放置位置，例如向日葵平原和冰刺之地。
+
+* PV（Peaks and Valleys）：山脊性。即地形为山谷或山峰，与奇异性有关。
+
+* AS：原始密度值（即不加粗糙度）。
+
+* N：最终密度值（即加粗糙度）。
+
+==== Biome builder ====
+显示噪声值所对应的类别。
+
+* PV（Peaks and Valleys）：地形类型，与山脊性有关。值可为Valley（仅河流生物群系）、Low、Mid、High或Peak。
+
+* C（Continents）：陆地类型，与大陆性有关。值可为Mushroom fields、Deep ocean、Ocean、Coast、Near inland、Mid inland或Far inland。
+
+* E（Erosion）：侵蚀度。值可为0-6。
+
+* T（Temperature）：温度。值可为0-4。
+
+* H（Humidity）：湿度。值可为0-4。
+
+==== SC ====
+显示生物生成的详细信息。
+
+* SC：当前可生成生物的区块数。
+
+* MO（Monster）：当前生物容量中敌对生物的数量。
+
+* C（Creature）：当前生物容量中动物的数量。
+
+* AM（Ambient）：当前生物容量中环境生物的数量。
+
+* AX（Axolotls）：当前生物容量中美西螈的数量。
+
+* U（Underground water creature）：当前生物容量中地底水生动物的数量。
+
+* WC（Water creature）：当前生物容量中水生动物的数量。
+
+* WA（Water ambient）：当前生物容量中水生环境动物的数量。
+
+* MI（Misc）：当前生物容量中其他生物的数量。
+
+==== CH ====
+客户端[[高度图]]。描述当前在玩家当前X/Z坐标处存在的最高特定方块的Y坐标。
+
+* CH：指客户端高度图。
+
+* S：在此X/Z坐标处最高非空气方块的Y坐标。
+
+* M：在此X/Z坐标处最高的'''任意液体'''或'''材料阻止运动的方块'''的Y坐标。
+
+==== SH ====
+服务端[[高度图]]。描述当前在玩家当前X/Z坐标处存在的最高特定方块的Y坐标。
+
+* SH：指服务端高度图。
+
+* S：在此X/Z坐标处最高非空气方块的Y坐标。若非内置服务端，此值以问号显示。
+
+* O：该X/Z坐标处最高的'''[[材料]]阻止运动的方块'''的Y坐标。若非内置服务端，此值以问号显示。
+
+* M：在此X/Z坐标处最高'''任意液体'''或'''[[材料]]阻止运动的方块'''的Y坐标。若非内置服务端，此值以问号显示。
+
+* ML：该X/Z坐标处最高'''任意液体'''或'''[[材料]]阻止运动且非树叶的方块'''的Y坐标。若非内置服务端，此值以问号显示。
+
+=== 调试渲染器 ===
+{| class="wikitable" data-description="说明"
+|-
+! rowspan="2"| 选项
+! rowspan="2"| 描述
+! colspan="2"| 默认状态
+|-
+! {{tp|debug.options.profile.default}}
+! {{tp|debug.options.profile.performance}}
+|-
+| 3d_crosshair
+| 打开或关闭准星处显示每个坐标轴的正方向（X/红色，Y/绿色，Z/蓝色）的彩色线条。
+| {{tc|neutral|{{tp|debug.entry.overlay}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| chunk_borders
+| 等效于{{key|F3+G}}，打开或关闭显示玩家周边区块的边界。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| chunk_section_octree
+| 打开或关闭子区块八叉树显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| chunk_section_paths
+| 打开或关闭子区块路径显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| chunk_section_visibility
+| 打开或关闭子区块可视化显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| entity_hitboxes
+| 等效于{{key|F3+B}}，打开或关闭显示[[实体]]的[[判定箱#实体|判定箱]]。如果实体被其他实体骑乘，还会显示乘客的着落点。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| visualize_block_light_levels
+| 打开或关闭子区块状态显示，以及每个方块的方块光照。详见{{slink||visualize_block_light_levels}}。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| visualize_chunks_on_server
+| 打开或关闭服务端区块状态显示。详见{{slink||visualize_chunks_on_server}}。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| visualize_collision_boxes
+| 打开或关闭方块碰撞箱显示。渲染范围为玩家碰撞箱周围切比雪夫距离小于6格的所有方块。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| visualize_entity_supporting_block
+| 打开或关闭显示[[实体]]支撑方块的渲染。{{slink||visualize_entity_supporting_block}}。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| visualize_heightmap
+| 打开或关闭高度图显示。详见{{slink||visualize_height_map}}。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| visualize_sky_light_levels
+| 打开或关闭子区块状态显示，以及每个方块的天空光照。详见{{slink||visualize_sky_light_levels}}。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| visualize_sky_light_sections
+| 打开或关闭子区块状态显示。详见{{slink||visualize_sky_light_sections}}。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| visualize_solid_faces
+| 打开或关闭固体方块完整表面显示。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|-
+| visualize_water_levels
+| 打开或关闭水高度显示。所有距离玩家切比雪夫距离10格内的水会渲染浅绿色方块及其流体高度。
+| {{tc|no|{{tp|options.off}}}}
+| {{tc|no|{{tp|options.off}}}}
+|}
+
+==== visualize_block_light_levels ====
+[[File:Visualize Block Light Levels.png|thumb|300px]]
+* 子区块未计算天空光照时为<code>2</code>，计算天空光照且子区块内全部为空气且天空光均为15时为<code>1</code>，无天空光照计算时为<code>n/a</code>，其他条件下为<code>0</code>。
+* 如果方块位置上的方块光不为0，则以黄色到红色字渲染光照等级。
+* 游戏只会渲染摄像机周围切比雪夫距离小于10的信息。
+{{-}}
+
+==== visualize_chunks_on_server ====
+[[File:Debug Feature debug chunks.png|thumb|300px]]
+启用时，若调试屏幕正在渲染（即必须有一个调试屏幕的元素正在渲染），则显示玩家周围区块的状态，颜色与[[世界加载屏幕]]中的颜色图相同，并使用红框标记玩家所在区块。同时，在每个区块上方渲染带有区块信息的文字，按照行的顺序分别为：
+* 客户端区块信息：如果区块还没有获取到信息，为<code>0n/a</code>；如果区块为空，则为<code>E</code>；其他情况下此项为空字符串。
+* 服务端区块加载等级。
+* 服务端区块状态。
+* 服务端区块当前持久化到存储的区块状态。
+* 服务端区块当前的计算状态。
+
+专用服务端中此调试渲染器无效。
+{{-}}
+
+==== visualize_entity_supporting_block ====
+[[File:Debug Feature debug support blocks.png|thumb|300px]]
+实体支撑方块是用于计算方块对实体效果的数据，例如受伤行为和行走速度等。游戏以红色画出玩家自身的主支撑方块，以绿色画出周围实体的主支撑方块，以青色画出实体下方0.2格的方块（如果此方块与主支撑方块不一致）。如果实体没有支撑方块则不进行渲染。
+{{-}}
+
+==== visualize_height_map ====
+[[File:Debug Feature debug heightmap.png|thumb|300px]]
+若各高度图的高度相同，则游戏渲染的标记方块在同一方块内自上而下排列，顺序如下：
+* <code>MOTION_BLOCKING_NO_LEAVES</code>：{{color|#007F7F}}（<code>[0, 0.5, 0.5]</code>）
+* <code>MOTION_BLOCKING</code>：{{color|#004D4D}}（<code>[0, 0.3, 0.3]</code>）
+* <code>OCEAN_FLOOR</code>：{{color|#00007F}}（<code>[0, 0, 0.5]</code>）
+* <code><s>OCEAN_FLOOR_WG</s></code>：{{color|#FF00FF}}（<code>[1, 0, 1]</code>）
+* <code>WORLD_SURFACE</code>：{{color|#00B300}}（<code>[0, 0.7, 0]</code>）
+* <code><s>WORLD_SURFACE_WG</s></code>：{{color|#FFFF00}}（<code>[1, 1, 0]</code>）
+{{-}}
+
+==== visualize_sky_light_levels ====
+[[File:Visualize Sky Light Levels.png|thumb|300px]]
+* 子区块状态计算参见{{slink||visualize_block_light_levels}}。
+* 如果方块位置上的天空光不为15，则以蓝色字渲染光照等级。
+* 游戏只会渲染摄像机周围切比雪夫距离小于10的信息。
+{{-}}
+
+==== visualize_sky_light_sections ====
+[[File:Debug Feature debug sky light sections.png|thumb|300px]]
+* 子区块状态计算参见{{slink||visualize_block_light_levels}}。
+* 与另外两个光照渲染的子区块状态相同，但渲染子区块。游戏只会渲染玩家所在子区块，且将上方只有空气方块的方块位置渲染为棕色（{{color|#40200020}}），其他位置渲染为黄色（{{color|#FFFF0040}}）。
+{{-}}
+<gallery>
+File:Chunk Section Octree.png|子区块八叉树
+File:Chunk Section Paths.png|子区块路径
+File:Chunk Section Visibility.png|子区块可视化
+File:Debug Feature debug chunks F3.png|服务端区块状态中的调试屏幕
+File:Debug Feature debug collision.png|方块碰撞箱
+File:Debug Feature debug solid face.png|方块完整表面渲染
+File:Visualize Water Levels.png|水高度
+</gallery>
+
+== 图表 ==
+=== {{tp|key.debug.profilingChart}} ===
+使用{{key|F3+1}}会在屏幕右侧呼出这个图表。
+
+[[File:F3 Profiler Graph.png|150px|缩略图|饼图]]
+'''{{tp|key.debug.profilingChart}}（Profiler graph）'''，亦称'''性能分析器图表'''或'''饼图（Pie chart）'''，可用于实时显示各项分析信息。使用1-9键放大查看某一项的详细信息。使用0键返回至上一视图。目前无法查看序号高于9的选项，同时或依次按下两个数字键都只会进入序号不高于9的选项。<ref>{{bug|MC-215458}}</ref>
+{{-}}
+
+=== {{tp|key.debug.fpsCharts}}{{anchor|FPS/TPS图表}} ===
+使用{{key|F3+2}}会在屏幕下方呼出这两个图表，其中刻速率图表只有在玩家游玩[[单人游戏]]或作为一个[[服务器]]里的[[管理员]]时才会出现。
+
+[[File:F3 Frametime Graph.png|150px|缩略图|帧生成时间图表]]
+左下角的是'''帧生成时间图表（Frame rate graph）'''，亦称'''{{text anchor|FPS图表}}（FPS graph）'''，附有每帧1/60秒和1/30秒的参考线。数据柱形的颜色从绿色到黄色再到红色，表示帧生成时间越来越长。
+{{-}}
+
+[[File:TPS.png|150px|缩略图|刻速率图表]]
+右下角的是'''刻速率图表（Tick rate graph）'''，亦称'''{{text anchor|TPS图表}}（TPS graph）'''，在其顶部附有最后240刻的最小、平均和最大刻时间。该柱状图显示了游戏的最后的240刻，数据柱形从低到高，表示游戏运行越来越慢。
+{{-}}
+
+=== {{tp|key.debug.networkCharts}} ===
+也被称为'''网络性能图表'''。使用{{key|F3+3}}会在屏幕下方呼出这两个图表。
+
+[[File:F3 Bandwith Graph.png|150px|缩略图|传输速率柱状图]]
+左下角的是'''传输速率柱状图（Bandwidth graph）'''，附有64B/s、1.0KiB/s、16.0KiB/s、1.0MiB/s参考线以及最小、平均、最大速率。数据柱形的颜色取决于上行和下行数据所占比例，颜色越接近紫色表示下行数据占比越高，越接近蓝色表示上行数据占比越高。
+{{-}}
+
+[[File:F3 Ping Graph.png|150px|缩略图|网络延迟柱状图]]
+右下角的是'''网络延迟柱状图（Ping graph）'''，附有500ms的参考线以及最小、平均、最大延迟。数据柱形的颜色从绿色到黄色再到红色，表示网络延迟越来越大。
+{{-}}
+
+=== {{tp|key.debug.lightmapTexture}} ===
+[[File:F3 Lightmap Texture.png|150px|缩略图|]]
+使用{{key|F3+4}}会在屏幕右下角呼出这个图表。此图表与{{tp|key.debug.fpsCharts}}和{{tp|key.debug.networkCharts}}互斥。
+
+此图标会显示当前的光照纹理。纵轴代表天空光照强度，从下到上依次代表0至15级；横轴代表方块光照强度，从左到右依次代表0至15级。每个像素的颜色代表将对应方块光照和天空光照下要应用到方块和实体的光照颜色。具体详见{{slink|亮度|渲染亮度}}。
+{{-}}
+
+== 调试组合键 ==
+按下大部分调试组合键时，聊天框会显示提示信息。注意使用某些组合键，如{{keys|F3+N}}、{{keys|F3+B}}等不会打开调试屏幕。
+
+* {{key|F3+A}}：重新加载所有[[区块]]。
+* {{key|F3+B}}：打开或关闭显示[[实体]]的[[判定箱#实体|判定箱]]。如果实体被其他实体骑乘，还会显示乘客的着落点。
+* {{key|F3+C}}：以{{cmd|execute in ''维度'' run tp}}的形式复制玩家当前的坐标及旋转角度。
+** 按住{{key|F3+C}}10秒会导致调试性的游戏崩溃，并生成Minecraft崩溃报告。
+** 按住{{key|Ctrl+F3+C}}10秒会强制Java虚拟机崩溃，生成虚拟机崩溃报告，而不是常规的Minecraft崩溃报告。然而，对于某些键盘，它只能使用右侧{{key|Ctrl}}触发，而使用左侧只会产生普通的崩溃。
+** 一些键盘可能不允许同时按下{{key|F3+C}}（可能是因为它们在同一竖列中）。
+* {{key|F3+D}}：清除聊天记录。
+* {{key|F3+G}}：打开或关闭显示玩家周边区块的边界。
+* {{key|F3+H}}：打开或关闭显示物品栏中物品的ID、工具的耐久度、[[物品堆叠组件]]数量、染色物品的颜色值和[[地图]]的放大尺寸。
+* {{key|F3+I}}：将玩家注视的方块/实体的数据复制到剪贴板。
+* {{key|F3+L}}：评估游戏各项性能数据，保存到[[性能分析报告文件]]。
+* {{key|F3+N}}：在上一个[[游戏模式]]与旁观模式间切换。
+* {{key|F3+P}}：开启或关闭Minecraft失去窗口焦点时的自动暂停功能。
+* {{key|F3+S}}：将动态纹理转储到{{samp|screenshots/debug/}}目录中，具体见下。
+* {{key|F3+T}}：重新加载纹理、模型、声音及所有其他[[资源包]]内容。
+* {{key|F3+V}}：输出客户端的版本信息。
+* {{key|F3+F4}}：打开游戏模式切换器。按住{{key|F3}}并多次按{{key|F4}}，玩家选定的游戏模式可以在四种游戏模式间循环。松开{{key|F3}}即载入选定的游戏模式。
+* {{key|F3+F6}}：打开或关闭调试选项屏幕。
+* {{key|F3+1}}：显示或隐藏{{tp|key.debug.profilingChart}}。
+* {{key|F3+2}}：显示或隐藏{{tp|key.debug.fpsCharts}}。
+* {{key|F3+3}}：显示或隐藏{{tp|key.debug.networkCharts}}。
+* {{key|F3+4}}：显示或隐藏{{tp|key.debug.lightmapTexture}}。
+
+当[[游戏规则]]{{gamerule|reduced_debug_info}}设为<code>true</code>时，{{key|F3+B}}（显示实体碰撞箱）和{{key|F3+G}}（区块边界）{{key|F3+C}}（复制坐标）和{{key|F3+I}}（复制方块/实体数据）无效。但长按{{key|F3+C}}和{{key|Ctrl+F3+C}}仍然可以导致崩溃。
+
+使用{{key|F3+S}}时，游戏会导出下列{{vanchor|动态纹理}}：
+* [[纹理图集]]纹理，以及对应的MipMap版本（若有）和纹理映射文件；
+* 游戏使用的[[字体]]纹理；
+* 服务器图标；
+* [[资源包]]和[[数据包]]图标；
+* 在线获取的[[皮肤]]和[[披风]]纹理；
+* [[地图]]显示的地图内容；
+* [[无效纹理]];
+* 用于字体Lightmap的1像素大小的空白纹理。
+* {{inUpcoming|je 26.3}}实体盔甲纹饰图集。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.2a|在左上角加入了版本号。}}
+|{{HistoryLine||0.0.9a|加入了调试屏幕。包括FPS（每秒帧数）和区块更新。{{verify|之前的版本中是否存在？|history=1|java=1}}}}
+|{{HistoryLine||0.0.23a|在选项菜单中加入打开调试屏幕的选项。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.1.0|调试屏幕不再出现在选项菜单中，需要按住F3调出。}}
+|{{HistoryLine||v1.2.3|调试屏幕现在会显示坐标。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.3|调试屏幕按键及其他功能控制变成按键切换状态模式。
+|调试屏幕开启时所有生物的头顶都会显示其实体ID。这些数字可以隔墙看到，这使F3成为了一个方便的生物搜寻器。}}
+|{{HistoryLine||1.7|加入“f”坐标，表示朝向。}}
+|{{HistoryLine||1.8|加入查看[[种子（世界生成）|种子]]的功能。
+|移除了生物头顶的实体ID，因为有些玩家认为这是作弊。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.2.1|dev=1.2|加入了[[生物群系]]和光照等级信息。|隐藏了多人世界中的种子信息，显示为“0”。}}
+|{{HistoryLine||1.2.4|按下{{key|F3}}（在Mac或部分笔记本电脑是{{key|Fn}}+{{key|F3}}）显示的是不带图表的调试屏幕。按下{{key|Shift+F3}}可以显示带图表的调试屏幕。（在Mac或部分笔记本电脑是{{key|Fn}} + {{key|Shift}} + {{key|F3}}）。}}
+|{{HistoryLine||1.3.1|dev=12w18a|玩家的速度以及是否接触地面的信息加入。
+|坐标精确到小数点后5位。}}
+|{{HistoryLine|||dev=12w21a|删除了世界种子的信息，以{{cmd|seed}}命令取代。}}
+|{{HistoryLine||1.4.2|dev=12w34a|调试屏幕的<code>f:</code>现在显示玩家看着的方向。
+|按下{{key|P+F3}}在失焦时自动停止游戏。
+|按下{{key |H+F3}}显示物品的详细信息。}}
+|{{HistoryLine|||dev=12w39a|Fl、区块的x、z坐标，以及更丰富的旋转角度（f）信息加入。}}
+|{{HistoryLine|||dev=12w41a|{{key|Shift+F3}}现在显示性能评测图表。}}
+|{{HistoryLine||1.8|dev=14w02a|现在在主要方向后显示玩家面向的坐标轴：“朝向X/Z的正/反向”。}}
+|{{HistoryLine|||dev=14w04a|准星处显示3条短的彩色线条来表示每个坐标轴的正方向：X/红色，Y/绿色，Z/蓝色。
+|x坐标轴现在将在玩家看向东/西时加粗，z坐标轴同样将在玩家看向南/北时加粗。}}
+|{{HistoryLine|||dev=14w05a|文字有了背景。
+|用更加易懂的标签替换x, y, z, b, bl。
+|“Light”现在显示脚部的光照等级，而非眼部。}}
+|{{HistoryLine|||dev=14w06a|X、Y和Z标签从先前快照的“Feet”改为“XYZ”。
+|游戏天计数器加入，每天日出时增加1。
+|加入显示区域难度：和平- 0.00，简单- 0.75，普通- 1.50，困难- 2.25（在某一个地方停留时间越久，数值越大）。
+|加入显示玩家的旋转角度，以角度和象限表示。}}
+|{{HistoryLine|||dev=14w11a|界面右侧会显示当前注视方块的信息，包括其ID和方块状态。}}
+|{{HistoryLine|||dev=14w17a|所有方块都会在调试屏幕右侧显示其信息。
+|移除“面向X/Z坐标正负方向”的信息。}}
+|{{HistoryLine|||dev=14w20a|再次加入“面向X/Z坐标正负方向”的信息。}}
+|{{HistoryLine|||dev=14w25b|{{key|F3+B}}现在会以蓝色线条表示实体的当前朝向。
+|移除右侧显示玩家当前注视方块的方块模型名称的线条。}}
+|{{HistoryLine|||dev=14w29a|“简化调试信息”开关出现在聊天设置中，可简化调试屏幕中的内容。
+|<code>reducedDebugInfo</code>游戏规则可用于开关调试屏幕的简化视图。此游戏规则覆盖客户端的简化调试信息选项。}}
+|{{HistoryLine|||dev=14w30a|现在显示渲染的区块数量、不在视野范围内的区块数量百分比、OpenGL版本、显示尺寸、GPU及其供应商。
+|在版本号后面加入了“Vanilla（纯净版）”。}}
+|{{HistoryLine||1.8.2|dev=pre1|加入了帧率显示，可以按下{{key|Alt}} + {{key|F3}}打开。}}
+|{{HistoryLine||1.9|dev=15w32a|当玩家处于[[创造模式]]或[[旁观模式]]时，可通过{{key|F3}}+{{key|N}}来回切换。玩家需要拥有{{cmd|gamemode}}的执行权限。}}
+|{{HistoryLine|||dev=15w43a|显示更多信息。|{{keys|F3+Q}}显示所有{{key|F3}} + 按键的组合键帮助。|{{keys|F3+F}}可将渲染距离增加1（范围为2-32）。|{{keys|F3+shift+F}}可将渲染距离减少1（范围为2-32）。|饼图和FPS图显示时会有描述信息。|重载区块、声音等等时，会出现提示信息。|在使用特定的组合键如{{keys|F3+N}}、{{keys|F3+B}}等时不会呼出调试屏幕。|移除{{keys|F3+S}}组合键，曾用于重载声音。|{{keys|F3+T}}现在重载所有资源包内容，包括声音。
+|根据界面缩放设置，红、蓝、绿线的大小也会随之变化。}}
+|{{HistoryLine|||dev=16w05b|在版本号后添加了“snapshot”字样，例如：“16w05b/vanilla/snapshot”。}}
+|{{HistoryLine||1.10|dev=16w20a|{{key|F3}}+{{key|G}}切换显示玩家周边区块的可视边界。
+|红、蓝、绿方向线在对比度差的环境下会显示黑色外边框。}}
+|{{HistoryLine||1.13|dev=17w43a|现在在非游戏时长按{{key|F3}}+{{key|C}}也能触发崩溃。}}
+|{{HistoryLine|||dev=18w11a|现在按{{key|F3}}+{{key|C}}会将玩家的当前位置以{{cmd|tp}}命令的形式复制到剪贴板中，但长按该组合键10秒后释放仍会强制导致调试崩溃。}}
+|{{HistoryLine|||dev=18w14a|现在在调试崩溃前会给出一条警告。}}
+|{{HistoryLine|||dev=18w22c|F3调试叠加层现在会显示玩家视角正对的流体，以与方块区分。}}
+|{{HistoryLine|||dev=pre6|按{{key|F3+I}}会将方块或物品的数据复制至剪贴板。
+|加入了有关整合服务器中一[[刻]]所用时长的信息，计算客户端（tx）发送{{tr|数据包|封包}}的数量及客户端（rx）接收{{tr|数据包|封包}}的数量。}}
+|{{HistoryLine|||dev=pre7|加入了“Looking at liquid”{{tr|行|欄}}来显示正对的流体的坐标。
+|将“Looking at”{{tr|行|欄}}重命名为“Looking at block”。
+|“Targeted Block”信息现在会穿过流体来靶向且会显示至多16个方块远的方块信息。
+|加入了用以显示至多16个方块远的物品信息的“Targeted Entity”。
+|更改了{{key|F3+I}}操作，现在该操作由{{key|Shift+F3+I}}实现。现在已明确其复制的是目标方块或物品在客户一端的数据。该操作所有人可用。
+|加入了按{{key|F3+I}}来复制目标方块或物品的服务器端数据至剪贴板的操作。该操作仅管理员可用。}}
+|{{HistoryLine||1.13.1|dev=18w30a|现在可以通过{{keys|Ctrl+F3+C}}强制触发一次JVM（Java虚拟机）崩溃，而不是常规崩溃。}}
+|{{HistoryLine|||dev=18w31a|加入了用于当前维度与相关强制加载区块的区域。}}
+|{{HistoryLine||1.14|dev=18w43c|现在按{{key|Alt+F3}}会显示TPS（每秒刻数）。
+|加入了{{code|delimiter=/|min|avg|max}}刻数来帮助寻找卡顿。}}
+|{{HistoryLine||1.14.1|dev=pre1|按{{key|F3+Esc}}现在可以暂停而不显示暂停菜单（如果允许暂停）。}}
+|{{HistoryLine||1.15|dev=19w38a|移除了chunk update。}}
+|{{HistoryLine||1.16|dev=20w06a|在世界垂直区域之外时，调试菜单不再显示为minecraft:the_void生物群系，而是隐藏生物群系信息。}}
+|{{HistoryLine|||dev=20w18a|加入了“SC”{{tr|行|欄}}来显示生物生成的详细信息。}}
+|{{HistoryLine|||dev=20w20a|加入了游戏模式切换器，可通过快捷键{{key|F3+F4}}打开。
+|{{key|F3+N}}现在用于在旁观模式与上一游戏模式间进行切换。}}
+|{{HistoryLine||1.17|dev=21w11a|加入了生成、保存性能分析数据的快捷键{{keys|F3+L}}。}}
+|{{HistoryLine||1.18|dev=exp1|加入了“Multinoise”{{tr|行|欄}}来显示所处的多噪声生物群系使用的参数。
+|加入了“Terrain”{{tr|行|欄}}来显示所处的多噪声生物群系地形生成数值。}}
+|{{HistoryLine|||dev=exp4|加入了“Biome builder”{{tr|行|欄}}来显示所处的多噪声生物群系的详细信息。}}
+|{{HistoryLine|||dev=21w38a|在“E”{{tr|行|欄}}加入了“SD”值。}}
+|{{HistoryLine||1.18.2|dev=22w03a|加入了玩家所处区块在区域文件中的位置，及所处区域文件的文件名。放置在“Chunk”{{tr|行|欄}}末新的方括号中。
+|“Chunk”{{tr|行|欄}}中的玩家位于区块内部的位置信息移至“Block”{{tr|行|欄}}末新的方括号中。}}
+|{{HistoryLine|||dev=22w07a|将“Terrain”{{tr|行|欄}}合并进“Multinoise”{{tr|行|欄}}，更名为“NoiseRouter”，并更改了其中一些字段所代表的内容。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了预计GPU占用率，但仅限支持GPU计时查询的显卡可用。
+|“NoiseRouter”一{{tr|行|欄}}中的“H”（Humidity，湿度）更改为“V”（Vegetation）。
+|加入了“Blending”{{tr|行|欄}}，位于“Noise Router”{{tr|行|欄}}的上面。}}
+|{{HistoryLine|||dev=22w12a|移除了{{key|F3+F}}和{{key|F3+shift+F}}，先前它们控制渲染距离。}}
+|{{HistoryLine|||dev=22w16a|加入了“Allocation rate”{{tr|行|欄}}显示堆内存分配速率。}}
+|{{HistoryLine||1.19.1|dev=rc1|“Blending”{{tr|行|欄}}现在在玩家处于使用新地形生成器生成的区块时消失，而非显示<code>Blending: New</code>。}}
+|{{HistoryLine||1.19.4|dev=pre3|加入了{{key|F3+S}}，用于将动态纹理（如纹理图集、[[地图]]等）转储到{{samp|screenshots/debug/}}下。}}
+|{{HistoryLine||1.20.2|dev=23w31a|若玩家处于服务器，<code>SH</code>一行中的值会显示为问号，而不再显示错误的值。
+|现在通过{{key|F3+B}}显示碰撞箱时，有乘客的实体会显示乘客的着落点。}}
+|{{HistoryLine|||dev=23w32a|现在可通过{{key|Ctrl+F3}}打开网络性能图表。}}
+|{{HistoryLine|||dev=23w33a|将“Debug”一行改为“Debug charts”，并更改了其格式。
+|修改了图表的打开方式，现在为{{key|F3+1}}、{{key|F3+2}}、{{key|F3+3}}显示或隐藏指定图表，以前为{{key|F3+Shift}}、{{key|F3+Alt}}和{{key|F3+Ctrl}}。如果相互间没有冲突，图表可以同时显示，关闭调试屏幕时，图表布局也会被保留。
+|调试屏幕现在不再在切换图表时关闭。}}
+|{{HistoryLine||1.21.2|dev=24w33a|现在服务器性能图表会渲染得更大。<ref>{{bug|MC-275484|||WAI}}</ref>}}
+|{{HistoryLine||1.21.6|dev=25w15a|现在按{{key|F3+V}}会输出客户端的版本信息。}}
+|{{HistoryLine||1.21.9|dev=25w31a|现在默认会显示较少的信息，包括FPS、TPS、游戏版本、系统规格、内存使用、玩家位置、玩家区段坐标和3D准星。
+|加入了调试选项屏幕，使用{{key|F3+F5}}打开。
+|现在也可以在世界以外的屏幕中启用，且始终置于顶层。}}
+|{{HistoryLine|||dev=pre4|调试选项屏幕现在需要使用{{key|F3+F6}}打开而不是{{key|F3+F5}}。}}
+|{{HistoryLine||1.21.11|dev=25w41a|为调试选项屏幕的调试渲染器部分加入了选项<code>visualize_block_light_levels</code>、<code>visualize_chunks_on_server</code>、<code>visualize_collision_boxes</code>、<code>visualize_entity_supporting_block</code>、<code>visualize_height_map</code>、<code>visualize_sky_light_levels</code>、<code>visualize_sky_light_sections</code>、<code>visualize_solid_faces</code>、<code>visualize_water_levels</code>。
+|所有的调试组合键均可在控制中重新绑定。
+|移除了{{key|F3+Q}}。}}
+|{{HistoryLine||26.1|dev=snapshot-1|将方块信息和方块标签信息拆分：<code>looking_at_block</code>拆分为<code>looking_at_block_state</code>和<code>looking_at_block_tags</code>。
+|将流体信息和流体标签信息拆分：<code>looking_at_fluid</code>拆分为<code>looking_at_fluid_state</code>和<code>looking_at_fluid_tags</code>。
+|加入了实体类型标签信息：<code>looking_at_entity_tags</code>。
+|加入了光照贴图纹理以显示亮度纹理。
+|在生物生成的详细信息栏中部分改用双字母缩写，以消除歧义，现在为：MO（Monster）、C（Creature）、AM（Ambient）、AX（Axolotls）、U（Underground water creature）、WC（Water creature）、WA（Water ambient）、MI（Misc）。}}
+|{{HistoryLine|||dev=snapshot-8|加入了调试选项<code>detailed_memory</code>，用于显示已经使用的内存。}}
+|{{HistoryLine||26.2|dev=snapshot-2|调试屏幕选项<code>fps</code>现在会报告使用的预设模式类型。}}
+}}
+
+=== 1.8前的图例 ===
+{{collapseH}}
+{|  class="wikitable collapsible" data-description="Pre-1.8 legend"
+|-
+! 名称
+! 描述<ref>http://gaming.stackexchange.com/questions/14990/minecraft-debug-screen</ref><ref>http://www.minecraftforum.net/viewtopic.php?f=35&t=13231</ref>
+|-
+| C
+| 渲染区块数/总区块数。统计所有的渲染操作：如果一个区块渲染了两次（例如因既包含水又有普通方块）也会计数两次。
+|-
+| F
+| 所有在视野距离外载入的区块数。计数所有的渲染操作。
+|-
+| O
+| 通过[[wikipedia:Hidden surface determination|隐藏面剔除算法]]移除的区块数。计数所有的渲染操作。
+|-
+| E（第一{{tr|行|列}}）
+| 空区块数。这些区块因一至两个原因而被跳过：要么区块尚未被载入且未被渲染成多边形，要么区块在当前的渲染操作中没有需要被绘图的东西。统计所有的渲染操作。
+|-
+| E（第二{{tr|行|列}}）
+| 渲染实体数/总实体数。
+|-
+| B
+| 未使用，总是0。或许以前用来统计因隐藏区块而被移除的实体数。
+|-
+| I
+| 不可见的实体数。
+|-
+| P
+| 世界中的粒子数。
+|-
+| T
+| 显示设备的最大帧率。
+|-
+| ALL
+| 显示加载的总实体数（包括生物和掉落物）
+|-
+| ServerChunkCache<br> ChunkCache
+| 所能载入的最大区块数。
+|-
+| x
+| 玩家的位置相对0,0位点偏东的距离（负值为偏西），“//”后为玩家所在的区块位置。
+|-
+| y
+| 玩家以方块计数的海拔高度63（62又7/8）是主世界的海平面高度，11（10又略高一些）是主世界熔岩池的高度，31是下界熔岩海的高度）。坐标取自脚踏高度而非视线高度（注：站在平地站立/潜行可以注意到其并未变化）。
+|-
+| z
+| z指玩家的位置相对0,0位点偏南的距离（负值为偏北），“//”后为玩家所在的区块位置。
+|-
+| f
+| 玩家的朝向（0-3分别为：南、西、北、东），和玩家是否面朝X或Z轴的正方向。
+|-
+| lc
+| 玩家所在区块的最大渲染子区块高度（使用立方形的子区块，所以高度显示都是16的倍数减1。）
+|-
+| b
+| 玩家所在的[[生物群系]]。
+|-
+| bl
+| 显示除日月外由其他方块（如[[火把]]）所带来的光照的等级。例如玩家与火把身处同一方块，此值为13而非14，这是由于玩家的-{}-头与火把有1个方块远。
+|-
+| sl
+| 显示由天空带来的光照等级。该值只显示方块的天空光照等级，不考虑夜晚、雨天造成的低亮度。
+|-
+| rl
+| 显示玩家头部所在位置总共的实际光照等级，等于bl和sl之间的最大值。
+|-
+| ws
+| 行走速度。
+|-
+| fs
+| 飞行速度。
+|-
+| g
+| 是否接触地面，布尔值，当玩家触碰地面时为true。
+|-
+| fl
+| 玩家位置处可站立的最高方块的y坐标，站在台阶上如[[台阶]]时向上取整。位于在虚空上（脚下没有任何方块）时，会保持为0。
+|-
+| shader
+| 目前生效的[[着色器]]的文件路径（位于[[minecraft.jar]]的“assets”文件夹）。仅在着色器生效时显示。
+|}
+{{collapseE}}
+
+=== 1.21.9前的图例 ===
+调试屏幕中，左侧更多的是关于游戏，右边更多的是关于玩家设备的系统信息。
+{{collapseH}}
+'''左侧'''
+{| class="wikitable collapsible" data-description="说明"
+|-
+! 名称
+! 描述<ref name="debug-screen"/><ref name="forum"/>
+|-
+|''版本''*
+|显示当前游戏版本，无论它是否为原版，或者是否为快照版。
+|-
+| fps*
+| 游戏的当前{{tr|帧率|影格率|幀率}}。{{tr|帧率|影格率|幀率}}是以{{tr|帧|影格（Frame）|幀}}为单位的{{tr|位图图像|點陣圖像}}连续出现在显示器上的频率（速率），多个静止的{{tr|帧|影格|幀}}快速过渡形成连续的图像，这是所有移动媒体的基础。{{tr|帧率|影格率|幀率}}通常用“{{tr|帧|影格|幀}}每秒”（FPS）描述。
+|-
+| T（第一个）*
+| 显示最高可能帧率（不锁帧时为“inf”）及当前图像品质设置（“流畅”时为“fast”，“高品质”时为“fancy”，“极佳”时为“fabulous”），以及云的显示设置（“流畅”时为“fast-clouds”，“高品质”时为“fancy-clouds”，“关闭”时为“none”）。
+|-
+| B（第一个）*
+| 显示生物群系过渡的距离。
+|-
+| GPU*
+| 预计GPU占用率（仅使用支持GPU计时查询的显卡时可用）
+|-
+| ms ticks*
+| 服务端上的一游戏刻所花费的时间。
+|-
+| tx*
+| 客户端发送{{tr|数据包|封包}}的数量。
+|-
+| rx*
+| 客户端接收{{tr|数据包|封包}}的数量。
+|-
+| C*
+| 屏幕上渲染的子区块数/已加载区块（包括强/弱加载）中的总子区块数。 
+|-
+| D*
+| 客户端的渲染距离。
+|-
+| pC*
+| 待批处理的区块数。
+|-
+| pU*
+| 待提交至显卡的更新数。
+|-
+| aB*
+| 批处理时可用的缓冲区。
+|-
+| E*
+| 渲染实体数/加载区块中的总实体数。
+|-
+| B（第二个）*
+| 未被使用，固定为0。
+|-
+| SD*
+| 客户端的模拟距离。
+|-
+| P*
+| 渲染的粒子数。
+|-
+| T（第二个）*
+| 加载区块中的总实体数。
+|-
+| Client Chunk Cache*
+| 所能载入的最大区块数。
+|-
+| ServerChunkCache
+| 所在维度中服务端加载到内存中的区块个数。
+|-
+| ''维度'' FC
+| 当前维度强制加载的区块的数量（FC=Forceloaded Chunk）。
+|-
+| XYZ
+| X为玩家的位置相对0,0点偏东的距离（负值为偏西）。<br>Y为玩家（脚底）以方格计数的高度（处于[[主世界]]海平面高度时为63，熔岩层高度为-54，[[下界]]熔岩海平面高度为32）。<br>Z为玩家的位置相对0,0位点偏南的距离（负值为偏北）。
+|-
+| Block
+| 玩家目前脚底所处方块的坐标，同为XYZ格式。与上述XYZ值相近，向下取整。末尾的方括号中还显示玩家位于区块内部的位置。
+|-
+| Chunk*
+| 该区块在整个世界中的位置。当<code>ReducedDebugInfo</code>设置为<code>true</code>时，仅显示玩家于区块内部的位置。末尾的方括号中还显示玩家当前所处区块在对应区域文件的位置，以及此区域文件的文件名。
+|-
+| Facing
+| 玩家的朝向（东西南北或XZ轴的正负方向）。末尾的2个数字表示玩家的水平旋转和垂直旋转角度。
+|-
+| Client Light
+| 客户端的光照。第一个数字显示玩家脚部位置的总[[亮度#光照等级|光照等级]]。需要注意的是，此数值为[[亮度#天空光照|天空光照]]和[[亮度#方块光照|方块光照]]二者的较大值。但“天空光照”不代表游戏世界中的实际光照，譬如是否处于夜晚、雷暴等。<br>第二个数字显示玩家脚部位置能够获取的天空光照。同样有上述的注意事项。<br>第三个数字显示玩家脚部位置来自其他方块（如[[火把]]）的光照等级。
+|-
+| Server Light
+| 服务端的天空光照和方块光照。
+|-
+| CH
+| 客户端[[高度图]]。描述当前在玩家当前X/Z坐标处存在的最高特定方块的Y坐标。<br>CH：指客户端高度图。<br>S：在此X/Z坐标处最高非空气方块的Y坐标。<br>M：在此X/Z坐标处最高的'''任意液体'''或'''材料阻止运动的方块'''的Y坐标。
+|-
+| SH
+| 服务端[[高度图]]。描述当前在玩家当前X/Z坐标处存在的最高特定方块的Y坐标。<br>SH：指服务端高度图。<br>S：在此X/Z坐标处最高非空气方块的Y坐标。若非内置服务端，此值以问号显示。<br>O：该X/Z坐标处最高的'''[[材料]]阻止运动的方块'''的Y坐标。若非内置服务端，此值以问号显示。<br>M：在此X/Z坐标处最高'''任意液体'''或'''[[材料]]阻止运动的方块'''的Y坐标。若非内置服务端，此值以问号显示。<br>ML：该X/Z坐标处最高'''任意液体'''或'''[[材料]]阻止运动且非树叶的方块'''的Y坐标。若非内置服务端，此值以问号显示。
+|-
+| Biome
+| 显示当前所在的[[生物群系]]。
+|-
+| Local Difficulty
+| 显示玩家所在区块的游戏[[难度]]。由于一个漏洞，括号内的数字总是为0。<!--其后为玩家在游戏内的天数，详见[[昼夜更替]]页面。-->
+|-
+| Blending
+| 显示地形生成器的模式。如果使用旧的生成器显示为Old，如果使用新的生成器则不显示。
+|-
+| NoiseRouter
+| 显示用于生成地形和生物群系的噪声值。<br>T（Temperature）：温度。用于生物群系的放置，不影响地形。<br>V（Vegetation）：植被，即湿度。用于生物群系的放置，不影响地形。<br>C（Continents）：大陆性。用于区分海洋与陆地，决定生物群系的放置。<br>E（Erosion）：侵蚀度。决定地形的平缓程度，此值越高表示地形越平缓。<br>D（Depth）：深度，随高度变化，用于生物群系放置。<br>W（Weirdness）：奇异性。此值影响山脊性进而影响了地形的起伏，也用于决定一些生物群系的放置位置，例如向日葵平原和冰刺之地。<br>PV（Peaks and Valleys）：山脊性。即地形为山谷或山峰，与奇异性有关。<br>AS：原始密度值（即不加粗糙度）。<br>N：最终密度值（即加粗糙度）。
+|-
+| Biome builder
+| 显示噪声值所对应的类别。<br>PV（Peaks and Valleys）：地形类型，与山脊性有关。值可为Valley（仅河流生物群系）、Low、Mid、High或Peak。<br>C（Continents）：陆地类型，与大陆性有关。值可为Mushroom fields、Deep ocean、Ocean、Coast、Near inland、Mid inland或Far inland。<br>E（Erosion）：侵蚀度。值可为0-6。<br>T（Temperature）：温度。值可为0-4。<br>H（Humidity）：湿度。值可为0-4。
+|-
+| SC
+| 显示生物生成的详细信息。<br>SC：当前可生成生物的区块数。<br>M（Monster）：当前生物容量中敌对生物的数量。<br>C（Creature）：当前生物容量中动物的数量。<br>A（Ambient）：当前生物容量中环境生物的数量。<br>A（Axolotls）：当前生物容量中[[美西螈]]的数量。<br>U（Underground water creature）：当前生物容量中地底水生动物的数量。<br>W（Water creature）：当前生物容量中水生动物的数量。<br>W（Water ambient）：当前生物容量中水生环境动物的数量。<br>M（Misc）：当前生物容量中其他生物的数量。
+|-
+| Shader
+| 目前生效的后处理[[着色器]]的文件路径（位于[[minecraft.jar]]的{{code|assets/minecraft/post_effect}}文件夹）。仅在后处理着色器生效时显示。
+|-
+| Sounds
+| 正在播放的声音数量/最多可以播放多少声音<br>第一对数字代表的非流式播放音效，第二对数字代表流式播放音效。
+|-
+| Debug charts*
+| 告诉玩家性能评测图表或帧生成时间图表是否可见。
+|-
+| For help*
+| 告诉玩家按F3+Q查看其他调试内容的按键帮助，也可参阅下方信息。
+|}
+
+'''右侧'''
+{| class="wikitable" data-description="说明"
+|-
+! 名称
+! 描述
+|-
+|Java*
+|运行游戏的Java版本，以及它是32{{tr|位|位元}}还是64{{tr|位|位元}}。
+|-
+|Mem*
+|游戏使用的内存（和百分比），以及游戏可用的最大内存。
+|-
+|Allocation rate*
+|游戏分配堆内存的速率，单位为MB/s。
+|-
+|Allocated*
+|从游戏可用内存最大值中分配给游戏的内存量，以及百分比。
+|-
+|CPU*
+|CPU，包括它有多少{{tr|线程|執行緒}}，它的品牌和型号，以及运行速度（单位为GHz）。
+|-
+|Display*
+|Minecraft屏幕的分辨率、GPU品牌的名称、显卡、OpenGL版本和玩家使用的驱动程序。
+|-
+|Targeted Block
+|显示玩家指向的方块、方块的方块状态和标签。只有当玩家正指向一个非液体方块时才会显示。
+|-
+|Targeted Fluid
+|显示玩家指向的液体、液体的方块状态和标签。只有当玩家正指向一个方块或液体时才会显示。
+|-
+|Targeted Entity
+|只显示玩家指向的实体。仅当玩家正指向实体时才显示。
+|}
+{{collapseE}}
+
+== 你知道吗 ==
+* 在长按左键或右键时，按下{{key|F3+T}}再松开左键或右键，等待加载完成，完成后游戏会保持长按左键或右键，想要取消时按下任意鼠标键即可。
+
+== 画廊 ==
+{{gallery|
+File:Chunk borders.png|调试功能中的显示区块边界功能
+File:Hitboxes.png|调试功能中的显示实体碰撞箱功能
+File:F3-C Crash Alert.png|convert|调试功能中崩溃游戏功能的消息
+File:DebugScreen on MainMenu.png|convert|主菜单中的调试屏幕
+File:DebugScreen All Options Opened.png|调试屏幕所有选项打开时的世界
+}}
+
+=== 旧版本 ===
+<gallery>
+File:Debug Screen Performance Profiler Sneak Peek.png|Notch的Twitter于2011年10月2日展示的性能分析器预览<ref>{{tweet|notch|120525867045765120}}</ref>
+File:First image of TheMogMiner's frame time graph (1.8.2-pre1).png|[[Java版1.8.2-pre1]]引入的帧生成时间图表，由[[TheMogMiner]]提供
+File:DebugScreenAlpha.png|Indev版、Infdev版和早期Alpha版的调试信息
+File:DebugScreen before25w31a.png|25w31a前的调试屏幕
+File:DebugScreen before25w31a without coordinates.png|25w31a前开启了“简化调试信息”的调试屏幕
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[Category:开发]]
+[[Category:UI]]
+
+[[de:Debug-Bildschirm]]
+[[en:Debug screen]]
+[[es:Pantalla de desarrollo]]
+[[fr:Écran de débogage]]
+[[it:Cruscotto di debug]]
+[[ja:デバッグ画面]]
+[[ko:디버그 화면]]
+[[nl:Debug-scherm]]
+[[pl:Ekran debugowania]]
+[[pt:Tela de depuração]]
+[[ru:Экран отладки]]
+[[uk:Екран налагодження]]

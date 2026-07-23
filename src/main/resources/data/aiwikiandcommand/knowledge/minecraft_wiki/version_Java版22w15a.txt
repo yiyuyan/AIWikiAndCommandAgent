@@ -1,0 +1,227 @@
+# 页面: Java版22w15a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8822w15a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=22w15a
+|image=22w15a.png
+|image2=Java Edition 22w15a Simplified.png\Java Edition 22w15a Traditional.png\Java Edition 22w15a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2022年4月13日
+|jsonhash=884c9042aa5877be1e8e282a4723a7778e1246ab
+|clienthash=b5b14c791de1b44ce2d6de13dfd18b9ced843618
+|clientmap=5ca2f62eacc890b09b9b9b45cd1edfe36cdee34a
+|serverhash=2760f745a00711bcc19bf78d6056019f69318d03
+|servermap=496416e9ac476347b47655089b7819877977f737
+|parent=1.19
+|prevparent=1.18.2
+|prev=22w14a
+|next=22w16a
+|nextparent=1.19.1
+}}<onlyinclude>
+
+'''22w15a'''是[[Java版1.19]]的第5个快照，发布于2022年4月13日<ref>{{snap|22w15a|April 13, 2022}}</ref>，加入了[[监守者]]的远程攻击方式和2个新[[进度]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 游戏内容 ===
+'''[[进度]]'''
+* 加入了2个新进度：
+<!--
+版本页面的内容属于“历史内容”，进度描述请勿使用{{sc}}模板。
+要修改进度名称，请到{{Advancement name}}和{{sc}}中进行。
+在Crowdin approved前，请不要汉化尚未approved的进度名称和描述。每个中文变体都是如此。
+繁简/地区转换请用{{tr}}。
+-->
+** [[进度#advancements-anchor-adventure.avoid_vibration|{{Advancement name|adventure.avoid_vibration|zh|rev=1}}]]
+*** {{tr|在[[幽匿感测体]]、[[幽匿尖啸体]]或监守者周围[[潜行]]以防被它们听到|在[[伏聆振測器]]、[[幽匿尖啸体|伏聆尖嘯器]]或伏守者附近潛行以避免被聽見。<!--未approved文本，采用22w18a原文更改前的最后版本-->|喺[[沉靈感測器]]、[[沉靈尖嘯器]]或者沉靈守衞周圍[[潛行]]以防被佢哋聽到}}
+** [[进度#advancements-anchor-husbandry.leash_all_frog_variants|{{Advancement name|husbandry.leash_all_frog_variants|zh|rev=1}}]]
+*** {{tr|用拴绳拴住所有种类的[[青蛙]]|用栓繩牽著所有種類的[[青蛙]]|用栓繩牽住所有種類嘅[[青蛙]]}}
+* 加入了<code>avoid_vibration</code>进度触发器，会在有振动事件因玩家正在潜行而被忽略时触发。有以下可用条件：
+** <code>player</code>：执行此触发器的玩家
+* 加入了<code>thrown_item_picked_up_by_player</code>进度触发器，会在玩家拾起实体掷出的物品时触发。有以下可用条件：
+** <code>player</code>：执行此触发器的玩家
+** <code>entity</code>：投掷物品的实体的谓词
+** <code>item</code>：掷出的物品的谓词
+
+=== 常规 ===
+'''[[粒子]]'''
+* 加入了<code>sonic_boom</code>粒子。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下[[Java版标签/方块|方块标签]]：
+** {{TagLink|block|completes_find_tree_tutorial}}：{{cd|d=pretty|#logs|#leaves|#wart_blocks}}。
+** {{TagLink|block|dampens_vibrations}}：{{cd|d=pretty|#wool|#wool_carpets}}。
+** {{TagLink|block|nether_carver_replaceables}}：{{cd|d=pretty|#base_stone_overworld|#base_stone_nether|#dirt|#nylium|#wart_blocks|soul_sand|soul_soil}}。
+** {{TagLink|block|overworld_carver_replaceables}}：{{cd|d=pretty|#base_stone_overworld|#dirt|#sand|#terracotta|#iron_ores|#copper_ores|water|gravel|sandstone|red_sandstone|calcite|snow|packed_ice|raw_iron_block|raw_copper_block}}。
+* 加入了以下[[Java版标签/物品|物品标签]]：
+** {{TagLink|item|completes_find_tree_tutorial}}：{{cd|d=pretty|#logs|#leaves|#wart_blocks}}。
+** {{TagLink|item|wart_blocks}}：{{cd|d=pretty|nether_wart_block|warped_wart_block}}。
+
+== 更改 ==
+=== 方块 ===
+'''[[发光地衣]]和[[幽匿脉络]]'''
+* 现在可被放置在[[灵魂沙]]、[[泥巴]]和全高的[[雪]]的顶面与侧面上。
+
+'''[[红树树叶]]'''
+* 更改了纹理。
+
+'''[[红树根]]'''
+* 现在可用于堆肥。
+
+'''[[泥巴]]'''
+* 现在[[甘蔗]]、[[竹子]]和[[大型垂滴叶]]可以被放置在其顶面上。
+
+'''[[沾泥的红树根]]'''
+* 现在[[花]]、[[树苗]]和[[草丛]]可以被放置在其顶面上。
+
+'''[[音符盒]]'''
+* 回退了[[22w13a]]仅让羊毛和羊毛地毯可以阻止音符盒发出声音的更改。
+
+'''[[幽匿尖啸体]]'''
+* 更改了模型以及侧面纹理，现在其上半部分的高度减小了1个像素。
+
+'''[[藤蔓]]'''
+* 现在可被放置在灵魂沙、泥巴和全高的雪的侧面上。
+
+'''羊毛[[地毯]]'''
+* 现在放置羊毛地毯时，其被放置、被破坏以及以物品形式掉落时所产生的振动会被减弱，与[[羊毛]]一样。
+* 羊毛地毯现在还可以减弱在其上面跑和跳跃所产生的振动。
+
+=== 物品 ===
+'''[[船]]和[[运输船]]'''
+* 更改了所有种类的船和运输船的物品纹理。
+
+=== 生物 ===
+'''[[悦灵]]'''
+* 现在每秒会恢复{{hp|2}}生命值。
+
+'''[[流浪商人]]'''
+* 现在有概率以5个[[绿宝石]]的价格出售1个[[红树胎生苗]]。
+
+'''[[监守者]]'''
+* 现在若其目标的位置在近战范围外或有方块阻隔，会尝试蓄力并发起远程攻击。
+** 攻击时，一道形如幽匿尖啸体尖啸粒子的攻击波粒子<code>sonic_boom</code>会自其胸前发出，并有胸口张开的动画。
+** 此远程攻击可击中距离监守者15格内的生物，并造成和该难度下近战攻击相等的伤害。
+** 此远程攻击一次只能击中一个目标，且可以攻击到在墙后的生物。
+* 增加了靠嗅觉侦测目标的范围。
+* 靠嗅觉侦测时垂直方向的敌对范围由6格改为20格。
+
+=== 非生物实体 ===
+'''[[运输船]]'''
+* 现在，当运输船中已有乘客时，箱子可以直接按{{ctrl|使用}}键打开。
+
+'''[[物品展示框]]'''
+* 现在判定箱大小会随着地图的放入而变化。
+
+=== 世界生成 ===
+'''[[红树林沼泽]]'''
+* 增加了红树林沼泽的[[泥巴]]层厚度，现在[[石头]]层的上方皆为泥巴。
+* 现在红树林沼泽里的高红树生成频率远高于普通红树。
+* 现在[[热带鱼]]会在水中生成。
+* 水下迷雾的颜色由与普通沼泽一致的黄色改为青色。
+
+'''[[红树]]'''
+* 现在会有[[覆地苔藓]]生成在红树根的上方。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 进度“[[进度#advancements-anchor-nether.all_effects|{{Advancement name|nether.all_effects|zh|rev=1}}]]”现在还要求玩家具有[[黑暗]]状态效果。
+* 进度“[[进度#advancements-anchor-husbandry.froglights|{{Advancement name|husbandry.froglights|zh|rev=1}}]]”的上游进度由“[[进度#advancements-anchor-husbandry.tadpole_in_a_bucket|{{Advancement name|husbandry.tadpole_in_a_bucket|zh|rev=1}}]]”改为“[[进度#advancements-anchor-husbandry.leash_all_frog_variants|{{Advancement name|husbandry.leash_all_frog_variants|zh|rev=1}}]]”。
+* 进度“[[进度#advancements-anchor-husbandry.allay_deliver_cake_to_note_block|{{Advancement name|husbandry.allay_deliver_cake_to_note_block|zh|rev=1}}]]”的命名空间ID由<code>allay_deliver_cake_to_noteblock</code>改为<code>allay_deliver_cake_to_note_block</code>。
+* 移除了<code>item_delivered_to_player</code>进度触发器，改用<code>thrown_item_picked_up_by_player</code>替代。
+
+=== 常规 ===
+'''[[全景图]]'''
+* 更改了全景图以适配[[荒野更新]]。
+** 其使用种子<code>thewildupdate</code>（<code>-1696067516</code>）在坐标为X=3820.872, Y=67.868, Z=553.455的地方拍摄。在此版本中可以生成最接近全景图的地形。<ref>https://www.youtube.com/watch?v=gw9oLFTHXqw</ref>
+
+'''[[Java版标签|标签]]'''
+* 将{{cd|#ignore_vibrations_on_occluding_block}}游戏事件标签重命名为{{cd|#dampenable_vibrations}}。
+* 将{{cd|#occludes_vibration_signals}}物品标签重命名为{{cd|#dampens_vibrations}}，并向其中加入了{{cd|#wool_carpets}}。
+* 从{{cd|d=pretty|#dead_bush_may_place_on|#enderman_holdable}}方块标签中移除了泥巴。
+* 向{{cd|#dirt}}方块和物品标签中加入了泥巴和沾泥的红树根。
+* 向{{cd|#mangrove_logs_can_grow_through}}方块标签中加入了覆地苔藓和藤蔓。
+* 向{{cd|#mangrove_roots_can_grow_through}}方块标签中加入了覆地苔藓、藤蔓、红树胎生苗和雪。
+
+== 修复 ==
+{{fixes|fixedin=22w15a|showdesc=1
+|;old
+|147686|加入使用自定义资源包的世界时，游戏会在尚未完全载入此资源包时显示默认的资源包。
+|183520|具有<code>NoAI</code>NBT标签的幻翼可以穿过方块。
+|210805|羊毛会错误地遮挡放置在其上的{{frac|5|16}}格高方块发出的振动。
+|210868|结合垂直和水平运动时，羊毛遮挡振动的功能不能正常工作。<!-- Wool occlusion doesn't work as it should when combining both vertical and horizontal motion. -->
+|212610|发光地衣不能被放置在灵魂沙上。
+|212629|连接2个或多个隐身实体的拴绳会互相连接到一起。
+|216567|藤蔓不能被放置在8层高的雪的侧面上。
+|216569|发光地衣不能被放置在8层高的雪的侧面上。
+|219642|藤蔓不能被放置在灵魂沙的侧面上。
+|226430|一些1.17进度的字符串中有错误的大小写。
+|228862|客户端下载服务器资源包失败时，游戏会卡死。
+|231458|“{{Advancement name|husbandry.netherite_hoe|zh|rev=1}}”进度的英文描述中，“ingot”一词的大小写不正确。
+|235035|在<code>natural</code>设为<code>false</code>的自定义维度中睡觉会导致游戏崩溃。
+|237920|“{{Advancement name|nether.ride_strider_in_overworld_lava|zh|rev=1}}”进度的英文名称中有不正确的大小写。
+|237922|“{{Advancement name|adventure.play_jukebox_in_meadows|zh|rev=1}}”进度的英文描述中，“Jukebox”一词的大小写不正确。
+|237924|“{{Advancement name|adventure.trade_at_world_height|zh|rev=1}}”进度的英文描述中，“villager”一词的大小写不正确。
+|;dev
+|249072|在水源方块中放置幽匿尖啸体时，水会消失。
+|249111|不能在{{cmd|particle|link=none}}命令中使用<code>sculk_charge</code>粒子。
+|249208|藤蔓、发光地衣和幽匿脉络不能被放置在泥巴的侧面或顶面上。
+|249315|红树根不能被堆肥。
+|249347|地图上的红树木告示牌和墙上的红树木告示牌颜色不正确。
+|249423|即使玩家不能上船，玩家也不能通过只按鼠标右键的方式打开运输船。
+|249424|玩家尝试乘坐一艘已有实体的运输船时会显示手部动画。
+|249445|被激活的幽匿尖啸体被破坏时不能生成监守者。
+|249488|{{tr|黑暗脉动效果|黑暗波動|黑暗波動效果}}辅助功能选项的状态不会被保存。
+|249495|船的物品图标中的阴影位置不一致。
+|249632|黑暗效果没有被计入“{{Advancement name|nether.all_effects|zh|rev=1}}”进度的达成条件中。
+|249688|在创造模式物品栏的建筑方块选项卡中，红树木楼梯被排在了下界木质楼梯的后面。
+|249737|具有<code>NoAI</code>NBT标签的悦灵可以被推动。
+|249741|新进度名英文名称中有不正确的大小写。
+|249785|监守者从地下钻出或钻回地底时能被推动。
+|249824|因为悦灵与实体不正确碰撞，其可以在客户端侧穿墙。
+|;previous
+|249917|红树生成时，特定类型方块不会被红树根替换掉。
+|249923|创造模式物品栏中，追溯指针没有与普通指南针排到一起。
+|249927|玩家可以对磁石使用追溯指针。
+|249931|使用骨粉催生红树会产生幽灵方块。
+|249933|与青蛙有关的游戏崩溃问题（从多个线程访问<code>LegacyRandomSource</code>）。
+|249934|生成在水中的红树根有时不含水。
+|249936|洞穴雕刻器不会切掉泥巴。
+|249938|使用附有精准采集的工具挖掘红树树叶时不掉落相应物品。
+|249942|含水的红树胎生苗长成红树后，原位置上的水会消失。
+|249947|幽匿尖啸体模型的顶部是被垂直挤压的。
+|249968|服务器中，玩家激活信标时会断开连接。
+|249977|从1.18.2升级来的世界中出现硬边界。
+|249979|从水下由红树胎生苗长成的红树根有概率不含水。
+|249984|在<code>allay_deliver_cake_to_noteblock</code>进度ID中，“note_block”一词被写作了“noteblock”。
+|250017|启动服务端时需要添加<code>UUID</code>启动参数，否则服务端会在启动过程中崩溃。
+|250025|“{{Advancement name|husbandry.allay_deliver_item_to_player|zh|rev=1}}”进度的英文名称错误地使用了过去时态。
+|250063|监守者离开其所骑乘的实体后不会攻击任何东西。
+|250081|流浪商人不交易红树胎生苗。
+|250099|奖励箱中不出现红树原木和红树木板。
+|250101|不能在泥巴上放置甘蔗。
+|250103|不能在泥巴上放置竹子。
+|250104|不能在泥巴上放置大型垂滴叶。
+|250106|不能在沾泥的红树根上放置主世界植物。
+|250115|泥巴不会在红树林沼泽的水下生成。
+|250135|幽匿脉络不能被放置在灵魂沙的顶面或侧面上。
+|250136|幽匿脉络不能被放置在8层高的雪上。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:22w15a]]
+[[en:Java Edition 22w15a]]
+[[es:Java Edition 22w15a]]
+[[fr:Édition Java 22w15a]]
+[[ja:Java Edition 22w15a]]
+[[pt:Edição Java 22w15a]]
+[[ru:22w15a (Java Edition)]]
+[[th:รุ่น Java 22w15a]]

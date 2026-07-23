@@ -1,0 +1,220 @@
+# 页面: Java版24w37a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w37a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w37a
+|image=24w37a.png
+|image2=Java Edition 24w37a Simplified.png\Java Edition 24w37a Traditional.png\Java Edition 24w37a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年9月11日
+|jsonhash=9fdf7dcfc4325b612cf472df711a9871f7b5cc7c
+|clienthash=0b48c22e8ed722bcae66e25a03531409681e648b
+|clientmap=38d87708ff2de34eadecda2a54592fe4846d03de
+|serverhash=4ba5f8917ac400474751b6e0f20d311d3b726fe7
+|servermap=67b788a9ce161c044c63cf2ae611412a64cd9111
+|parent=1.21.2
+|prevparent=1.21.1
+|prev=24w36a
+|next=24w38a
+|nextparent=1.21.3
+}}<onlyinclude>
+
+'''24w37a'''是[[Java版1.21.2]]的第5个快照，发布于2024年9月11日<ref>{{snap|24w37a|September 11, 2024}}</ref>，修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[物品堆叠组件]]'''
+* {{cd|fire_resistant}}组件现在被重命名为<code>damage_resistant</code>，同时加入了一个新字段：
+<div class="treeview">
+:* {{nbt|compound|damage_resistant}} 物品堆叠组件
+:** {{nbt|string|types|required=1|existonsave=1}}：对应[[物品实体]]不会被此标签内的[[伤害类型]]伤害，物品在被玩家装备时也不会因此标签内的伤害类型受损。
+</div>
+* 为<code>potion_contents</code>组件加入了新字段：
+<div class="treeview">
+:* {{nbt|compound|potion_contents}} 物品堆叠组件
+:** {{nbt|string|custom_name}}：影响药水效果的自定义名称翻译键。如将<code>foo</code>值应用于<code>minecraft:lingering_potion</code>（滞留药水），物品名称翻译将使用{{cd|item.minecraft.lingering_potion.effect.foo}}。
+</div>
+* 为<code>equippable</code>组件加入了新字段：
+<div class="treeview">
+:* {{nbt|compound|equippable}} 物品堆叠组件
+:** {{nbt|bool|swappable}}：（默认为<code>true</code>）控制物品是否能由右键装备到指定槽位上。
+:** {{nbt|bool|damage_on_hurt}}：（默认为<code>true</code>）控制装备此物品的实体受伤时此物品是否消耗耐久度。
+</div>
+* 加入了<code>death_protection</code>物品堆叠组件。
+<div class="treeview">
+:* {{nbt|compound|death_protection}} 物品堆叠组件
+:** {{nbt|list|death_effects}}：此物品保护其持有实体时触发的效果，与<code>consumable</code>组件中的<code>on_consume_effects</code>相同。
+</div>
+:* 存在时，此物品会像[[不死图腾]]一样保护持有者免于死亡并恢复{{hp|1}}。
+
+'''实体子谓词'''
+* 加入了<code>salmon</code>实体子谓词。
+<div class="treeview">
+:* {{nbt|compound}} 父标签
+:** {{nbt|string|variant}}：[[鲑鱼]]的变种ID，需为{{cd|d=pretty|small|medium|large}}之一。
+</div>
+
+'''[[进度触发器]]'''
+* 将<code>killed_by_crossbow</code>重命名为<code>killed_by_arrow</code>，并加入了新可选物品谓词字段<code>fired_from_weapon</code>，用于匹配发射箭的物品。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下物品标签：
+** {{cd|#duplicates_allays}}：{{cd|amethyst_shard}}。
+*** 能在[[悦灵]]跳舞时将其复制的物品。
+** {{cd|#panda_eats_from_ground}}：{{cd|#panda_food|cake|d=、}}。
+*** 会被[[熊猫]]从地上捡起来吃的物品。
+** {{cd|#brewing_fuel}}：{{cd|blaze_powder}}。
+*** 能作为[[酿造台]]燃料的物品。
+
+== 更改 ==
+=== 物品 ===
+'''[[重锤]]'''
+* 现在非玩家生物也能对实体应用猛击额外攻击力，且能造成<code>mace_smash</code>类型伤害。
+
+=== 生物 ===
+'''[[生物转化]]'''
+* 回退了上个快照在转化时保留生命值、属性和战利品表的更改。
+** 除此以外，言论、村民数据和经验值也故意不被保留。
+* 现在只有以下标签能被转化保留：
+** {{cd|d=list|AbsorptionAmount|active_effects|Age|AngerTime|AngryAt|ArmorDropChances|ArmorItems|Brain.memories.minecraft:angry_at.ttl|Brain.memories.minecraft:angry_at.value|CanBreakDoors|CanPickUpLoot|CustomNameVisible|CustomName|fall_distance|FallFlying|Fire|ForcedAge|HandDropChances|HandItems|HurtByTimestamp|HurtTime|Invulnerable|IsBaby|Leash|LeftHanded|Motion|NoAI|NoGravity|OnGround|Passengers|PersistenceRequired|PortalCooldown|Position|RootVehicle|Rotation|Silent|SleepingX|SleepingY|SleepingZ|Tags|Team}}
+* 会发生分裂而非由一种生物转化为另一种生物的行为不会保留以下标签：
+** {{cd|d=list|ArmorDropChances|ArmorItems|fall_distance|FallFlying|HandDropChances|HandItems|HurtByTimestamp|HurtTime|Leash|Motion|OnGround|Passengers|Position|Rotation|SleepingX|SleepingY|SleepingZ}}
+
+=== 非生物实体 ===
+'''[[掷出的末影珍珠]]'''
+* 现在掷出的末影珍珠能强加载它们所经过的区块，包括跨越维度。
+* 现在掷出的末影珍珠会在对应玩家退出时随玩家消失，并在该玩家进入游戏时随玩家重新出现。
+
+'''[[船]]和[[运输船]]'''
+* 不再会摔碎或使乘客因摔落受伤。
+
+'''[[TNT矿车]]'''
+* TNT矿车的爆炸威力现在会加上<code>explosion_power</code>。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|53}}。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|38}}。
+* 高亮槽位的纹理现在能通过替换以下精灵图自定义：
+** {{filepath|container/slot_highlight_front}}：渲染高亮槽位正面的精灵图。
+** {{filepath|container/slot_highlight_back}}：渲染高亮槽位背面的精灵图。
+** {{filepath|container/bundle/slot_highlight_front}}：[[收纳袋]]高亮槽位正面的精灵图。
+** {{filepath|container/bundle/slot_highlight_back}}：收纳袋高亮槽位背面的精灵图。
+
+'''[[物品堆叠组件]]'''
+* <code>item_name</code>组件的优先级现在永远最低，因此它能被<code>potion_contents</code>之类的组件覆盖。
+* 具有<code>map_id</code>组件的物品现在能像[[地图]]一样被展开、在[[物品展示框]]上直角旋转、在合成栏中通过[[空地图]]复制、且在物品提示框中显示地图编号。
+
+'''[[战利品表]]'''
+* 鸡下蛋的战利品表现在受{{filepath|gameplay/chicken_lay}}控制。
+* 犰狳随机脱落鳞甲的战利品表现在受{{filepath|gameplay/armadillo_shed}}控制。
+* 在村庄英雄战利品表文件夹中加入了以下文件：
+** {{filepath|gameplay/hero_of_the_village/unemployed_gift}}：失业村民的礼物。
+** {{filepath|gameplay/hero_of_the_village/baby_gift}}：幼年村民的礼物。
+* 工具谓词（用于<code>match_tool</code>等[[谓词]]）现在还可用于下列战利品表类型：
+** <code>archaeology</code> - [[刷子]]。
+** <code>vault</code> - 对宝库{{ctrl|使用}}[[试炼钥匙]]（宝库展示物品时无效）。
+** <code>shearing</code> - [[剪刀]]。
+
+== 修复 ==
+{{fixes|fixedin=24w37a|veralias=1|showdesc=1
+|;old
+|119369|船会在下落特定距离时崩损且杀死其乘客。
+|162551|创造模式中向站在高处的玩家、闭合的潜影贝或无敌的生物射箭时，箭会卡在实体顶部。
+|174214|由弩发射的烟花火箭会穿过离玩家太近的实体。
+|206436|{{key|Shift}}+单击物品时，切石机会忽略超出64的部分。
+|220360|村庄英雄效果下，幼年村民、傻子村民和失业的村民给予的礼物是硬编码的。
+|260537|树生长时能替换方块状态<code>persistent</code>为<samp>true</samp>的树叶。
+|265399|其他玩家在屏幕中出现时，脱离游泳或爬行状态的玩家头部位置异常。
+|269873|鸡蛋的战利品表是硬编码的。
+|270254|物品槽的高亮效果纹理不能被修改。
+|;1.21.1的漏洞
+|276134|在收纳袋处悬停时，不能在创造模式物品栏中滚动。
+|276433|<code>set_enchantments</code>函数会移除书中的<code>enchantments</code>组件。
+|;dev
+|275205|手部动画会延迟且不会一直播放。
+|275300|即使产生了粒子和音效，生物也不会造成重锤猛击伤害。
+|275302|末地水晶的动画速度不再一致。
+|275352|Programmer Art的光灵箭纹理未正常更新。
+|275406|<code>options.rotateWithMinecart.tooltip</code>中出现语法错误。
+|275451|收纳袋不使用纹理数据渲染收纳袋物品栏中的物品。
+|275468|游戏规则<code>minecartMaxSpeed</code>不能由函数设置。
+|275504|自定义模型数据不会应用于打开的收纳袋。
+|275538|极近的旋风人仍不会攻击。
+|275750|红石火把仍缺失底部纹理。
+|275751|头部在脱离爬行时扣合。
+|275765|字符串<code>gamerule.minecartMaxSpeed.description</code>中缺少句号。
+|275792|固体方块上的火把和灵魂火把的底面不会剔除。
+|275833|手部动画比之前更高。
+|275857|同一区域内存在大量矿车时，矿车会隐形。
+|275883|乘坐矿车组入墙会冻结游戏。
+|275909|被生物的猛击杀死时显示错误的死亡消息。
+|275964|鼠标指针抓取收纳袋时，能通过交换物品以使其保持打开状态。
+|275990|能通过工作台使收纳袋保持打开状态。
+|276025|模型覆写不对打开的收纳袋内出现的物品生效。
+|276111|由生物桶生成的鲑鱼首刻大小异常。
+|276127|蜂巢提示框中的分数未用空白填充。
+|276263|<code>explosion_power</code>NBT不对TNT矿车生效。
+|276463|猪灵以物易物时，身上的盔甲会脱离身体。
+|;prev
+|276293|AI生物不再被甜浆果丛伤害。
+|276295|僵尸总能杀死村民。
+|276296|穿上的锁链盔甲缺失纹理。
+|276297|穿上的下界合金盔甲显示为钻石盔甲。
+|276299|马铠在马的物品栏中未完整渲染。
+|276301|物品提示框填充消失。
+|276304|雕刻南瓜和生物头颅能通过右键装备。
+|276310|玩家在胸甲槽中穿戴非胸甲物品时，披风会脱离身体。
+|276311|玩家带着非鞘翅物品飞行时，披风会不合理地指向上方。
+|276314|用风弹直接击中实体能将它们弹飞极高。
+|276315|传送命令总在实体原位置运行且忽略执行上下文提供的位置。
+|276316|末影珍珠不再将实体传送到其所击中的位置。
+|276317|弹射物动量变化时的视觉更新较慢。
+|276320|盾牌不再抵挡来袭的弹射物。
+|276321|鞘翅会在受到伤害时消耗耐久度。
+|276322|船被破坏时不会掉落物品。
+|276326|“空气”物品没有名称。
+|276327|<code>item_name</code>组件不再覆写药水名称。
+|276335|被治疗的村民具有错误的移速。
+|276338|转化后的生物会保留与原生物相同的战利品表。
+|276339|由村民转化的女巫移动得很快。
+|276344|收纳袋中选中的物品不会反映出任意<code>tooltip_style</code>组件。
+|276364|具有<code>equippable</code>标签的非盔甲物品不能给狼穿上。
+|276365|切换物品和使用物品动画中，盔甲袖子不会跟随手臂。
+|276370|金质盔甲部件具有错误的最大耐久度。
+|276376|{{cmd|tp|link=none}}命令不能传送到指定的俯仰角。
+|276378|转化后的女巫会失去盔甲，但仍受其保护。
+|276383|对船使用{{ctrl|选取方块}}使游戏崩溃。
+|276384|玩家移动时，披风从身体脱离。
+|276394|部分特殊渲染元素不再被任意类型的雾影响。
+|276415|装备到非头盔槽位的海龟壳不会给予{{tr|水下呼吸|水中呼吸|水下呼吸}}状态效果。
+|276429|弹射物在击中方块后移动。
+|276476|船被危险环境破坏时崩溃。
+|276480|弹射物被反弹后不再正常运动。
+|276484|火球和凋灵之首造成过多伤害。
+|276495|未被传送的创造玩家能通过投掷激流三叉戟穿过下界传送门。
+|276501|返回三叉戟会卡在方块上并产生噪声。
+|276527|被骑乘的猪被闪电转化后产生了重复的UUID错误，进而导致玩家被传送到世界原点。
+|276533|游戏在三个或更多骷髅将要射箭时崩溃。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:24w37a]]
+[[en:Java Edition 24w37a]]
+[[es:Java Edition 24w37a]]
+[[fr:Édition Java 24w37a]]
+[[ja:Java Edition 24w37a]]
+[[pt:Edição Java 24w37a]]
+[[ru:24w37a (Java Edition)]]
+[[uk:24w37a (Java Edition)]]

@@ -1,0 +1,153 @@
+# 页面: 命令/test
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/test
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{for|{{el|be}}中功能相似的命令|命令/gametest}}
+{{exclusive|je}}
+{{Infobox command
+|name=test
+|oplevel=2
+|others=无（不在<code>export</code>中）<br>仅[[wzh:集成开发环境|IDE]]（在<code>export</code>中）
+}}
+
+管理和运行[[游戏测试]]。
+
+== 语法 ==
+: <code>test (clearall [<radius>]|clearthat|clearthese)</code>
+:: 清除测试的结构和方块。
+: <code>test create <id> [<width>] [<height> <depth>]</code>
+:: 创建测试。
+: <code>test locate <tests></code>
+:: 在已加载区块中寻找测试的位置。
+: <code>test pos [<nowiki><var></nowiki>]</code>
+:: 在半径250格内寻找并显示准星所指方向10格内第一个方块处对于测试的局部坐标。
+: <code>test (resetclosest|resetthat|reseetthese)</code>
+:: 重置测试结构。
+: <code>test run <tests> [<numberOfTimes>] [<untilFailed>] [<rotationSteps>] [<testsPerRow>]</code>
+: <code>test (runclosest|runthat|runthese) [<numberOfTimes>] [<untilFailed>]</code>
+: <code>test runmultiple <tests> [<amount>]</code>
+:: 运行一个或多个测试。
+: <code>test runfailed [<numberOfTimes>] [<untilFailed>] [<rotationSteps>] [<testsPerRow>]</code>
+: <code>test runfailed [<onlyRequiredTests>] [<numberOfTimes>]</code>
+:: 运行已失败的测试。
+: <code>test stop</code>
+:: 停止所有测试。
+: <code>test verify <tests></code>
+:: 验证测试。
+: <code>test (export <test>|exportclosest|exportthat|exportthese)</code>
+:: 导出测试结构。仅在[[wzh:集成开发环境|IDE]]中可用。
+
+== 参数 ==
+{{cd|clearall}}
+: 对指定半径内的所有测试进行清除。
+
+{{cd|d=pretty|resetclosest|runclosest|exportclosest}}
+: 分别对半径15格内最近的测试进行重置、运行和导出。
+
+{{cd|d=pretty|clearthat|resetthat|runthat|exportthat}}
+: 分别对准星所指处的测试进行清除、重置、运行和导出。
+
+{{cd|d=pretty|clearthese|resetthese|runthese|exportthese}}
+: 分别对半径250格内所有的测试进行清除、重置、运行和导出。
+
+{{argument|radius|integer}}
+: 指定清除的半径。默认为250。
+: {{arg desc|je=integer}}
+
+{{argument|id|resource_location}}
+: 指定测试的ID。
+: {{arg desc|je=resource_location}}
+
+{{argument|width|integer}}
+: 指定测试结构的宽度。默认为5。
+: {{arg desc|je=integer}}
+
+{{argument|height|integer}}
+: 指定测试结构的高度。默认为{{cd|<width>}}的值。
+: {{arg desc|je=integer}}
+
+{{argument|depth|integer}}
+: 指定测试结构的深度。默认为{{cd|<width>}}的值。
+: {{arg desc|je=integer}}
+
+{{argument|tests|resource_selector}}
+: 指定测试的ID。
+: {{arg desc|je=resource_selector|registry=test_instance}}
+
+{{argument|var|string}}
+: 指定复制代码段中使用的变量名。默认为{{cd|pos}}。
+: {{arg desc|je=string|type=word}}
+
+{{argument|numberOfTimes|integer}}
+: 指定每个测试在不同批次内的重复次数。默认为1。
+: {{arg desc|je=integer}}
+
+{{argument|untilFailed|bool}}
+: 指定测试是否应该在一次迭代失败后立即停止。默认为{{samp|false}}。
+: {{arg desc|je=bool}}
+
+{{argument|rotationSteps|integer}}
+: 指定测试的额外90度旋转步数。默认为0。
+: {{arg desc|je=integer}}
+
+{{argument|testsPerRow|integer}}
+: 指定在网格布局中每行放置的测试数量。默认为8。
+: {{arg desc|je=integer}}
+
+{{argument|amount|integer}}
+: 指定每个测试在同一批次内的重复次数。默认为1。
+: {{arg desc|je=integer}}
+
+{{argument|onlyRequiredTests|bool}}
+: 指定是否仅需必要测试。默认为{{samp|false}}。
+: {{arg desc|je=bool}}
+
+{{argument|test|resource}}
+: 指定测试的ID。
+: {{arg desc|je=resource|registry=minecraft:test_instance}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|测试实例不存在|fail}}
+{{Result table|cmd=/test create ...|{{cd|d=、|fd=或|<width>|<height>|<depth>}}大于48}}
+{{Result table|cmd=/test pos ...|执行者不是[[玩家]]}}
+{{Result table|cmd=/test locate|无额外条件<ref>{{bug|MC-300831}}</ref>}}
+{{Result table|cmd=/test run ...,/test runfailed ...|<code><rotationSteps></code>超出[0, 3]|exception}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/test clear ...<br>/test reset ...|执行成功|1|1|被清除/重置的测试结构数量}}<!--
+{{Output table|cmd=/test locate ...|执行成功|1|1|寻找到的测试结构数量}}  MC-300831 -->
+{{Output table|cmd=other|执行成功|1|1|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.15|dev=19w34a|加入了{{cmd|test|link=none}}命令，仅在[[wzh:集成开发环境|IDE]]中可用。}}
+|{{HistoryLine||1.21.5|dev=25w03a|现在{{cmd|test|link=none}}命令在游戏内可用。}}
+|{{HistoryLine||1.21.9|dev=25w31a|将管理和运行测试的默认半径由200格更改为250格。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:Command test pos effect.png|{{cmd|test pos|link=none}}的执行效果
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/test]]
+[[en:Commands/test]]
+[[ja:コマンド/test]]
+[[pt:Comandos/test]]
+[[ru:Команды консоли/test]]

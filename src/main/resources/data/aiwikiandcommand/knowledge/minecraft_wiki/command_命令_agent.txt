@@ -1,0 +1,147 @@
+# 页面: 命令/agent
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/agent
+# 分类: 命令, 基岩版独有信息, 基岩版独有特性, 教育版独有信息, 教育版独有特性, 有未知版本的History模板的页面/携带版, 有未知版本的History模板的页面/教育版
+# 抓取时间: 2026-07-14 17:22:02
+# 原始 Wikitext 内容:
+
+{{about|命令|生物|智能体}}{{exclusive|education|bedrock}}
+{{Infobox command
+|oplevel=0{{only|EDU}}<br>1{{only|BE}}
+}}
+
+用于控制[[智能体]]。仅允许被玩家所连接的WebSocket、开发者控制台、脚本或[[NPC]]执行，命令方块和玩家无法执行该命令。
+
+若执行命令时不存在智能体，均会在执行者处生成后再执行，{{cmd|agent create|link=none}}除外。
+
+== 语法 ==
+: <code>agent attack <direction: AgentDirection></code>
+:: 使智能体向指定方向攻击。
+: <code>agent collect <item: Item></code>
+:: 使智能体收集自身周围一格内的一种物品。
+: <code>agent collect all</code>
+:: 使智能体收集自身周围一格内的所有物品。
+: <code>agent create</code>
+:: 在执行者处生成智能体。
+: <code>agent destroy <direction: AgentDirection></code>
+:: 使智能体摧毁指定方向的方块或物品。
+: <code>agent detect <direction: AgentDirection></code>
+:: 使智能体检测指定方向是否存在可碰撞方块。
+: <code>agent detectredstone <direction: AgentDirection></code>
+:: 使智能体检测指定方向的红石信号。
+: <code>agent drop <slotNum: int> <quantity: int> <direction: AgentDirection></code>
+:: 使智能体按指定数量丢弃指定槽位编号的物品到指定方向。数量小于0时全部丢弃。
+: <code>agent dropall <direction: AgentDirection></code>
+:: 使智能体将所有槽位的物品丢弃到指定方向一格内的地面。
+: <code>agent getitemcount <slotNum: int></code>
+:: 使智能体返回指定槽位的物品数量（即该槽位耗尽前的可用数量）。
+: <code>agent getitemdetail <slotNum: int></code>
+:: 使智能体返回指定槽位的物品名称。
+: <code>agent getitemspace <slotNum: int></code>
+:: 使智能体返回指定槽位的剩余空间（即该槽位填满前可容纳的物品数量）。
+: <code>agent getposition</code>
+:: 使智能体获取自身在世界中的坐标位置。
+: <code>agent inspect <direction: AgentDirection></code>
+:: 使智能体返回指定方向的方块名称。
+: <code>agent inspectdata <direction: AgentDirection></code>
+:: 使智能体返回指定方向方块的数据值。
+: <code>agent interact <direction: AgentDirection></code>
+:: 使智能体与指定方向的方块交互。
+: <code>agent move <direction: AgentDirection></code>
+:: 使智能体向指定方向移动。
+: <code>agent place <slotNum: int> <direction: AgentDirection></code>
+:: 使智能体在指定方向放置方块。
+: <code>agent setitem <slotNum: int> <item: Item> <count: int> <aux: int></code>
+:: 设置智能体指定槽位的物品。数量小于一个时，则设置一个；大于一组时，则设置一组。
+: <code>agent till <direction: AgentDirection></code>
+:: 使智能体在指定方向耕种草地。
+: <code>agent tp <destination: x y z> facing <lookAtPosition: x y z></code>
+: <code>agent tp [destination: x y z] [y-rot: float]</code>
+:: 将智能体传送到指定坐标位置，并使其旋转角度与指定的一致。
+: <code>agent transfer <slotNum: int> <quantity: int> <dstSlotNum: int></code>
+:: 将指定数量的物品从智能体库存的一个槽位转移到另一个槽位。
+: <code>agent turn <direction: AgentTurnDirection></code>
+:: 使智能体按指定方向旋转90度。
+
+== 参数 ==
+{{argument|be=1|direction: AgentDirection|enum}}
+: 指定方向，必须为以下其中之一：
+:* {{cd|back}} — 后
+:* {{cd|down}} — 下
+:* {{cd|forward}} — 前
+:* {{cd|left}} — 左
+:* {{cd|right}} — 右
+:* {{cd|up}} — 上
+
+{{argument|be=1|direction: AgentTurnDirection|enum}}
+: 指定旋转方向，必须为以下其中之一：
+:* {{cd|left}} — 左
+:* {{cd|right}} — 右
+
+{{argument|be=1|slotNum: int|int}}
+: 指定要改变的智能体物品栏槽位。有效值为1和27之间（含）的整数。
+: {{arg desc|be=int}}
+
+{{argument|be=1|item: Item|CommandItem}}
+: 指定要给予或收集到物品栏槽位内的物品。
+: {{arg desc|be=CommandItem}}
+
+{{argument|be=1|quantity: int|int}}和{{argument|be=1|count: int|int}}
+: 指定被丢出、给予或移动的物品数量。
+: {{arg desc|be=int}}
+
+{{argument|be=1|aux: int|int}}
+: 指定参与命令的物品的数据值。
+: {{arg desc|be=int}}
+
+{{argument|be=1|destination: x y z|CommandPositionFloat}}
+: 指定要被传送到的坐标。
+: {{arg desc|be=CommandPositionFloat}}
+
+{{argument|be=1|y-rot: float|float}}
+: 指定传送后智能体的水平旋转角度。
+: {{arg desc|be=float}}
+
+{{argument|be=1|lookAtPosition: x y z|CommandPositionFloat}}
+: 指定传送后智能体朝向的位置。
+: {{arg desc|be=CommandPositionFloat}}
+
+{{argument|be=1|dstSlotNum: int|int}}
+: 指定目标物品栏槽位。有效值为1和27之间（含）的整数。
+: {{arg desc|be=int}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|命令不完整或参数未正确指定||unparseable}}
+{{Result table|{{cd|slotNum: int}}或{{cd|dstSlotNum: int}}小于0||fail}}
+{{Result table|cmd=/agent drop ...,/agent place ...,/agent setitem ..., /agent transfer ...|{{cd|slotNum: int}}或{{cd|dstSlotNum: int}}等于0}}
+{{Result table|cmd=/agent transfer ...|{{cd|quantity: int}}小于等于0或大于64}}
+{{Result table|cmd=|success}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 创建智能体：<code>/agent create</code>
+* 将自己的智能体传送至(0, -60, 0)：<code>/agent tp 0 -60 0</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=?|加入了{{cmd|agent|link=none}}。}}
+|{{HistoryLine|education}}
+|{{HistoryLine||?|加入了{{cmd|agent|link=none}}。}}
+}}
+
+== 参见 ==
+* [[智能体]]
+
+== 导航 ==
+{{Navbox commands}}
+
+[[en:Commands/agent]]
+[[ja:コマンド/agent]]
+[[pt:Comandos/agent]]

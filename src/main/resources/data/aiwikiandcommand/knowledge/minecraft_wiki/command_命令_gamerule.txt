@@ -1,0 +1,111 @@
+# 页面: 命令/gamerule
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/gamerule
+# 分类: 命令, 基岩版独有信息, 有未知版本的History模板的页面/基岩版
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{Redirect|Gamerule|更改世界玩法的选项|游戏规则}}
+{{Infobox command
+|name=gamerule
+|oplevel=2\1
+|others=启用作弊（仅对于某些规则）{{only|bedrock}}
+}}
+
+设置或查询游戏规则。
+
+== 语法 ==
+* '''Java版'''
+: {{cd|-{}-gamerule <''规则名称''> [<value>]}}
+:: 规则参数在Java版中区分大小写。
+
+* '''基岩版'''
+: {{cd|gamerule}}
+: {{cd|gamerule <rule: BoolGameRule> [value: Boolean]}}
+: {{cd|gamerule <rule: IntGameRule> [value: int]}}
+: {{cd|gamerule [[游戏规则/playerWaypoints|playerWaypoints]] <value: playerwaypointsValues>}}
+:: 规则参数在基岩版中输入时不区分大小写。本wiki通常采用小驼峰命名，以便理解含义。
+
+== 参数 ==
+{{see also|游戏规则#游戏规则列表}}
+
+{{el|je|short=1}}：{{argument|-{}-''规则名称''}}<br>
+{{el|be|short=1}}：{{argument|be=1|rule: BoolGameRule|enum}}或{{argument|be=1|rule: IntGameRule|enum}}
+: 指定要设置或查询的游戏规则。只有某些预设的游戏规则会影响游戏玩法（见[[游戏规则#游戏规则列表|预设游戏规则]]）。
+
+{{el|je|short=1}}：{{argument|value}}<br>
+{{el|be|short=1}}：{{argument|be=1|value: Boolean|enum}}或{{argument|be=1|value: int|int}}
+: 指定游戏规则设置的值。
+
+{{el|be|short=1}}：{{argument|be=1|value: playerwaypointsValues|enum}}
+: 指定游戏规则[[游戏规则/playerWaypoints|playerWaypoints]]设置的值，必须为以下其中之一：
+:* {{cd|off}} — 玩家不会在定位栏上显示。
+:* {{cd|everyone}} — 所有玩家均会在定位栏上显示。
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行成功|1|1|该游戏规则在命令执行后的数值（{{cd|true}}为1，{{cd|false}}为0）}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 禁止玩家互相攻击：{{cd|gamerule pvp false}}
+
+=== Java版 ===
+* 停止昼夜更替：{{cd|gamerule advance_time false}}
+* 停止自然恢复生命值：{{cd|gamerule natural_health_regeneration false}}
+* 禁止破坏性生物行为（如苦力怕、恶魂等生物炸毁方块）：{{cd|gamerule mob_griefing false}}
+* 在玩家死亡时保留物品栏：{{cd|gamerule keep_inventory true}}
+* 禁止TNT爆炸：{{cd|gamerule tnt_explodes false}}
+* 屏蔽命令方块执行成功后在控制台显示的文本内容：{{cd|gamerule command_block_output false}}
+* 设置一格内最大实体堆叠数量为100：{{cd|gamerule max_entity_cramming 100}}
+* 设置玩家重生半径为25格：{{cd|gamerule respawn_radius 25}}
+* 禁用聊天框命令反馈：{{cd|gamerule send_command_feedback false}}
+
+=== 基岩版 ===
+* 列出所有游戏规则：{{cd|gamerule}}
+* 停止昼夜更替：{{cd|gamerule doDaylightCycle false}}
+* 停止自然恢复生命值：{{cd|gamerule naturalRegeneration false}}
+* 禁止破坏性生物行为（如苦力怕、恶魂等生物炸毁方块）：{{cd|gamerule mobGriefing false}}
+* 在玩家死亡时保留物品栏：{{cd|gamerule keepInventory true}}
+* 禁止TNT爆炸：{{cd|gamerule tntExplodes false}}
+* 屏蔽命令方块执行成功后在控制台显示的文本内容：{{cd|gamerule commandBlockOutput false}}
+* 设置玩家重生半径为25格：{{cd|gamerule spawnRadius 25}}
+* 禁用聊天框命令反馈：{{cd|gamerule sendCommandFeedback false}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了{{cmd|gamerule|link=none}}。}}
+|{{HistoryLine||1.8|dev=14w29a|加入了创建虚拟规则的能力，即规则名称可以是任意自定义名称。}}
+|{{HistoryLine||1.13|dev=17w45a|现在不再接受未知值（自定义游戏规则）。
+|现在会对值进行类型检查。
+|现在仅执行{{cmd|gamerule|link=none}}时聊天框不再会列出所有游戏规则，而是会出现未知命令提示。}}
+|{{HistoryLine||1.21.11|dev=pre1|{{cd|-{}-<''规则名称''>}}现在默认命名空间为{{cd|minecraft}}，此前不支持命名空间。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|gamerule|link=none}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8|dev=1.8.0.13|现在只有拥有管理员权限的玩家能够使用该命令。}}
+|{{HistoryLine||?|不再接受未知值（自定义游戏规则）。}}
+|{{HistoryLine||26.30|dev=26.30.20|加入了游戏规则[[游戏规则/playerWaypoints|playerWaypoints]]并分配了独有的枚举值，因此新增了其语法。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/gamerule]]
+[[en:Commands/gamerule]]
+[[es:Comandos/gamerule]]
+[[fr:Commandes/gamerule]]
+[[ja:コマンド/gamerule]]
+[[ko:명령어/gamerule]]
+[[pl:Polecenia/gamerule]]
+[[pt:Comandos/gamerule]]
+[[ru:Команды консоли/gamerule]]
+[[uk:Команди консолі/gamerule]]

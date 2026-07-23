@@ -1,0 +1,365 @@
+# 页面: 幻翼
+# 来源: https://zh.minecraft.wiki/w/%E5%B9%BB%E7%BF%BC
+# 分类: Java版独有信息, 亡灵生物, 使用DynamicPageList4的页面, 使用简单计算器的页面, 基岩版独有信息, 实体, 敌对生物, 需要验证历史/基岩版
+# 抓取时间: 2026-07-14 17:25:46
+# 原始 Wikitext 内容:
+
+{{for|Minecraft Dungeons中的同名生物|MCD:幻翼}}
+{{Infobox entity
+|image1=Phantom.gif
+|imagecaption={{el|je}}
+|image2=Phantom BE.gif
+|image2caption={{el|be}}
+|*imagesize=250px
+|invimage=Phantom Spawn Egg
+|health={{hp|20}}
+|behavior=敌对生物
+|classification=亡灵生物
+|damage='''近战攻击{{only|java|short=1}}：'''<br>
+{{AutoDmg|2}}<br>
+'''近战攻击{{only|bedrock|short=1}}：'''<br>
+{{AutoDmg|6}}<br>
+|spawn=见{{slink||生成}}
+|size=
+高度：<!-- size作为nbt标签名称不应该被翻译 --><br>0.5 + <code>Size</code>×0.1格<br>
+宽度：<br>0.9 + <code>Size</code>×0.2格
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{relevant tutorial|幻翼防护}}
+{{quote|这种像蝠鲼一样的生物生成于高空。它被失眠所吸引，并且会找到长时间没有睡觉的玩家。它会迅速地冲下来并咬下你的肉。|[[Jens Bergensten]]<ref name="meetphantom">{{article|meet-phantom|Meet the Phantom|March 12, 2018}}</ref>||Jens_Bergensten_Mojang_avatar.png}}
+
+'''幻翼（Phantom）'''是一种会因[[玩家]]长时间不睡觉而生成的飞行[[亡灵]]敌对生物。
+== 生成 ==
+[[File:Phantom at night.png|thumb|夜里的两只幻翼]]
+
+幻翼会在{{only|java|for=非[[旁观模式]]的}}玩家{{convert|3|游戏日|分钟}}未睡眠时在主世界的玩家上空自然生成。在床上睡眠（无需跳过夜晚）或死亡会重置这一时间，当玩家头上有阻碍天空光照的方块（例如[[树叶]]、[[蜘蛛网]]，[[水]]；但[[玻璃]]不会）时，会阻止幻翼生成。
+
+幻翼在关闭[[游戏规则]]{{gamerule|spawn_phantoms|doInsomnia}}时不会自然生成。
+
+=== Java版 ===
+幻翼的生成不依赖任何[[生物群系]]，其拥有独特的生成方式。
+
+幻翼只会在夜间或雷暴期间生成，每{{convert|1200|刻|秒}}~{{convert|2400|刻|秒}}尝试生成一次。对于每个不是[[旁观模式]]的玩家，如果这个玩家上方不能看见天空（即正上方有[[亮度#光照透明方块|光照不透明方块]]）或者玩家低于海平面（Y<64），则幻翼不会生成。幻翼成功生成的概率会随着这个玩家没有睡觉的时间的增加而增加，计算公式为<math>\frac{x-72000}{x}</math>，<math>x</math>为玩家自上次上床经过的[[刻]]数。如果玩家自上次上床时间小于72000[[刻]]，则幻翼不会生成。
+
+如果生成判定成功，幻翼将在以玩家为中心21×21格的区域，距离头顶20-34格的某一个位置生成。生成数量与[[难度]]有关，在简单难度下生成1-2只，普通难度下1-3只，困难难度下是1-4只。
+
+幻翼计入敌对生物数量上限，但在生成时无视上限。它的生成是基于在游戏中的玩家的位置，而不是像普通怪物[[生成]]那样随机选择一个玩家附近的方块。
+
+=== 基岩版 ===
+幻翼的生成类似于其他怪物，受到敌对生物数量上限限制。幻翼的生物密度上限为'''5'''。
+
+生成幻翼需要在当前模拟距离下的生物生成范围内，亮度≤7且符合苦力怕空间检测条件的'''可生成方块'''作为生成尝试点位，并且玩家上方没有[[亮度#光照透明方块|光照不透明方块]]。若玩家的高度大于或等于世界建筑高度限制，幻翼将无法生成。
+
+若生成尝试成功，幻翼会生成于玩家上方28格为中心的21×15×21区域内符合其空间检测，且亮度为0的某个不阻挡幻翼生成的方块处。
+
+== 掉落物 ==
+{{DropTable|name=Phantom
+|{{DropLine|name=Phantom Membrane|notes=player|quantity=0-1|lootingquantity=0-1}}
+}}
+* {{xp|5}}（被玩家或驯服的狼杀死）
+
+== 行为 ==
+幻翼空闲时会以恒定的高度绕圈飞行，同时其双翅会产生灰烟粒子。幻翼的飞行速度可达每秒20.83格，是目前游戏中移动速度最快的非Boss生物，且{{in|je|nc=1}}不受水的阻碍。{{in|be}}水中的幻翼会试图飞出水面。
+
+幻翼只与玩家敌对，且不会尝试反击任何生物。它们发现玩家时，会在距玩家水平距离15-25格、垂直距离24-35格的范围内徘徊飞行，并尝试攻击。{{in|je}}幻翼会查找水平半径16格，垂直半径64格的玩家并优先攻击高度更高的玩家，并且每8到11秒会进行俯冲攻击。{{in|be}}幻翼每20秒搜寻半径64格和高度80格内的玩家，并且每10到20秒会进行俯冲攻击。若幻翼攻击到了玩家，或者俯冲时突然失去目标、突然受到攻击，则会试图直升到俯冲前的飞行高度，即使上方被方块阻挡。
+
+幻翼的眼睛拥有发亮的纹理，在暗处也清楚可见，但不会影响周围方块的实际[[亮度]]。幻翼[[隐身]]时身体会消失，但眼睛和烟雾粒子仍然可见，这一点与[[末影人]]和[[蜘蛛]]相同。
+
+幻翼会尝试待在猫[[切比雪夫距离]]16格以外的地方{{only|je|for=，并且[[猫]]会向正在攻击玩家的幻翼发出嘶嘶声}}。{{in|be}}幻翼也会在同样的情况下避开[[豹猫]]。
+
+=== 生物族群 ===
+{{main|亡灵生物}}
+
+幻翼是亡灵生物，被具有[[亡灵杀手]]魔咒的武器近战攻击时受到额外伤害，被[[瞬间伤害]]治疗，被[[瞬间治疗]]伤害，免疫[[生命恢复]]和[[中毒]]，不会溺水，不被[[凋灵]]攻击。
+
+与多数亡灵生物不同，幻翼能够飞行，不会不受控地沉入水底。
+
+幻翼会在阳光下[[着火]]，但幻翼不会寻找阴凉处、水域或细雪来避免着火。
+
+== 音效 ==
+{{Sound table
+|sound = Phantom idle1.ogg
+|sound2 = Phantom idle2.ogg
+|sound3 = Phantom idle3.ogg
+|sound4 = Phantom idle4.ogg
+|sound5 = Phantom idle5.ogg
+|subtitle = {{tp|subtitles.entity.phantom.ambient}}
+|source= 敌对生物
+|description = 空闲时随机播放此声音
+|id = entity.phantom.ambient
+|translationkey = subtitles.entity.phantom.ambient
+}}
+{{Sound table
+|sound = Phantom bite1.ogg
+|sound2 = Phantom bite2.ogg
+|subtitle = {{tp|subtitles.entity.phantom.bite}}
+|source= 敌对生物
+|description = 攻击生物
+|id = entity.phantom.bite
+|translationkey = subtitles.entity.phantom.bite
+}}
+{{Sound table
+|sound = Phantom death1.ogg
+|sound2 = Phantom death2.ogg
+|sound3 = Phantom death3.ogg
+|subtitle = {{tp|subtitles.entity.phantom.death}}
+|source= 敌对生物
+|description = 死亡
+|id = entity.phantom.death
+|translationkey = subtitles.entity.phantom.death
+}}
+{{Sound table
+|sound = Phantom flap1.ogg
+|sound2 = Phantom flap2.ogg
+|sound3 = Phantom flap3.ogg
+|sound4 = Phantom flap4.ogg
+|sound5 = Phantom flap5.ogg
+|sound6 = Phantom flap6.ogg
+|subtitle = {{tp|subtitles.entity.phantom.flap}}
+|source= 敌对生物
+|description = 挥动翅膀
+|id = entity.phantom.flap
+|translationkey = subtitles.entity.phantom.flap
+}}
+{{Sound table
+|sound = Phantom hurt1.ogg
+|sound2 = Phantom hurt2.ogg
+|sound3 = Phantom hurt3.ogg
+|subtitle = {{tp|subtitles.entity.phantom.hurt}}
+|source= 敌对生物
+|description = 受伤
+|id = entity.phantom.hurt
+|translationkey = subtitles.entity.phantom.hurt
+}}
+{{Sound table
+|sound = Phantom swoop1.ogg
+|sound2 = Phantom swoop2.ogg
+|sound3 = Phantom swoop3.ogg
+|sound4 = Phantom swoop4.ogg
+|subtitle = {{tp|subtitles.entity.phantom.swoop}}
+|source= 敌对生物
+|description = 俯冲攻击
+|id = entity.phantom.swoop
+|translationkey = subtitles.entity.phantom.swoop
+|foot = 1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=mob.phantom.idle1.wav
+|sound2=mob.phantom.idle2.wav
+|sound3=mob.phantom.idle3.wav
+|sound4=mob.phantom.idle4.wav
+|sound5=mob.phantom.idle5.wav
+|source=敌对生物
+|description=空闲时随机播放此声音
+|id=mob.phantom.idle
+|typeid=ambient
+|soundvolume=2
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.phantom.hurt1.wav
+|sound2=mob.phantom.hurt2.wav
+|sound3=mob.phantom.hurt3.wav
+|source=敌对生物
+|description=受伤
+|id=mob.phantom.hurt
+|typeid=hurt
+|soundvolume=10
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.phantom.death1.wav
+|sound2=mob.phantom.death2.wav
+|sound3=mob.phantom.death3.wav
+|source=敌对生物
+|description=死亡
+|id=mob.phantom.death
+|typeid=death
+|soundvolume=10
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.phantom.bite1.wav
+|sound2=mob.phantom.bite2.wav
+|source=敌对生物
+|description=攻击生物
+|id=mob.phantom.bite
+|typeid=attack
+|soundvolume=10
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.phantom.swoop1.wav
+|sound2=mob.phantom.swoop2.wav
+|sound3=mob.phantom.swoop3.wav
+|sound4=mob.phantom.swoop4.wav
+|source=敌对生物
+|description=俯冲攻击
+|id=mob.phantom.swoop
+|typeid=swoop
+|soundvolume=10
+|soundpitch=0.95-1.05
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound = Phantom flap1.ogg
+|sound2 = Phantom flap2.ogg
+|sound3 = Phantom flap3.ogg
+|sound4 = Phantom flap4.ogg
+|sound5 = Phantom flap5.ogg
+|sound6 = Phantom flap6.ogg
+|source=敌对生物
+|description=挥动翅膀
+|id=mob.phantom.flap
+|typeid=flap
+|soundvolume=10
+|soundpitch=0.8-1.2
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Phantom
+|spritetype=entity
+|nameid=phantom
+|showentitytags=1|entitytags={{GameTag|entity|phantom}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Phantom
+|spritetype=entity
+|nameid=phantom
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+幻翼有与之相联系的包含许多该生物属性的存档数据。 
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|Monster-Hunter;it-spreads}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.kill_a_mob;adventure.kill_all_mobs;adventure.two_birds_one_arrow;adventure.kill_mob_near_sculk_catalyst}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2017年11月1日|link=https://www.youtube.com/watch?v=Cf9-ngK-LgM|[[File:MINECON 2017 Mob B.jpg|48px]] Minecraft的YouTube频道发布了介绍[[MINECON Earth 2017]]生物投票的视频。幻翼为选项中的“生物B”，当时被称为“夜空之怪”（The Monster of the Night Skies）。}}
+|{{HistoryLine||2017年11月18日|link={{tweet|minecraft|931953200625840132}}|“生物B”在投票中胜出。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=18w07a|[[File:Phantom JE1.png|48px]] 加入了幻翼，死亡时掉落1-4个[[皮革]]。}}
+|{{HistoryLine|||dev=18w09a|幻翼不再生成于[[末地]]。
+|现在幻翼会在白天时自然消失。}}
+|{{HistoryLine|||dev=18w10a|[[File:Phantom JE2.png|48px]] 更改了幻翼的模型和纹理。}}
+|{{HistoryLine|||dev=18w10c|现在幻翼属于亡灵生物。}}
+|{{HistoryLine|||dev=18w10d|现在幻翼会在阳光下燃烧。
+|现在幻翼不会在白天时自然消失。}}
+|{{HistoryLine|||dev=18w14a|现在幻翼死亡时掉落0-1个[[幻翼膜]]。}}
+|{{HistoryLine|||dev=18w19a|更改了幻翼的飞行动画，使其翅膀拍打得更快更自然。
+|现在幻翼会掉落[[经验]]。<ref>{{bug|MC-128712|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=pre1|为幻翼加入了新的挥翅音效。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了[[进度]]“{{Advancement name|adventure.two_birds_one_arrow|zh}}”，需要用带有[[穿透]]魔咒的[[弩]]一箭射杀两只幻翼获得。}}
+|{{HistoryLine|||dev=18w44a|现在幻翼会远离[[猫]]。}}
+|{{HistoryLine|||dev=pre3|幻翼的伤害从{{hp|6}}减少至{{hp|2}}。<ref>{{bug|MC-154372|||WAI}}</ref>}}
+|{{HistoryLine||1.15|dev=19w36a|加入了控制幻翼是否自然生成的[[游戏规则]]{{cd|doInsomnia}}。}}
+|{{HistoryLine||1.20|dev=23w18a|幻翼不再能产生脚步声。<ref>{{bug|MC-92623||漏洞描述：“<s>Phantom</s> Fixed in 23w18a.”}}</ref>}}
+|{{HistoryLine||1.21.5|dev=25w07a|将幻翼实体数据的{{cd|Size}}字段重命名为{{cd|size}}，并将分离的{{nbt|int|AX}}、{{nbt|int|AY}}和{{nbt|int|AZ}}字段合并为{{nbt|int-array|anchor_pos}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.6.0|dev=1.6.0.1|[[File:Phantom BE1.png|48px]] 加入了幻翼，此时生命值为{{hp|10}}，且死亡时会掉落1-4个[[皮革]]。{{verify|bedrock=1|history=1}}}}
+|{{HistoryLine|||dev=1.6.0.5|幻翼的生命值由{{hp|10}}提升至{{hp|20}}。
+|现在幻翼死亡时会掉落0-1个[[幻翼膜]]。
+|现在幻翼属于亡灵生物。
+|现在幻翼会溺水。
+|现在幻翼[[隐身]]时眼睛是可见的。
+|更改了幻翼的飞行动画。}}
+|{{HistoryLine|||dev=1.6.0.6|加入了控制幻翼是否自然生成的[[游戏规则]]{{cd|doInsomnia}}。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|现在幻翼会远离[[豹猫]]和[[猫]]。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.57|加入了幻翼的振翅音效。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.22|现在幻翼不再会溺水。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU69|ps3=1.76|psvita=1.76|ps4=1.76|wiiu=Patch 38|[[File:Phantom JE2.png|48px]] 加入了幻翼。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.83|wiiu=none|switch=none|现在幻翼会远离[[猫]]。}}
+}}
+
+== 你知道吗 ==
+[[File:Unused Red Phantom.jpg|thumb|200px|被弃用的红色幻翼]]
+* 在[[18w10a]]发布前，幻翼曾有一个红色版本的纹理，因看起来太像[[下界]]生物而被弃用。<ref name="meetphantom"/>
+** 在[[Minecraft Dungeons]]中，红色幻翼作为2022年万圣节活动限定[[Dungeons:宠物|宠物]]加入。
+* [[MINECON_Earth_2017|生物投票]]中的“夜空之怪”素描是有嘴巴的，该设计因实装后使幻翼看起来像是布偶玩具而被弃用。<ref name="meetphantom" />
+* 幻翼的音效取自[[Samuel Åberg]]儿子的尖叫声。<ref>https://www.asoundeffect.com/minecraft-dungeons-game-audio/</ref>
+
+== 画廊 ==
+<gallery>
+Mob B The Night Skies.gif|“夜空之怪”在生物投票中胜出
+Flying Phantom.png|仰视一只[[18w10a]]前的幻翼
+Flying Phantom2.jpg|俯视一只18w10a前的幻翼
+Invisible Phantom.png|[[隐身]]状态下的幻翼
+Phantoms on fire.png|在阳光下自燃的幻翼
+Phantom swoop.png|夜晚一只正俯冲向玩家的幻翼，留下一条灰烟[[粒子]]的轨迹
+Phantom Wing Animation 320p.gif|幻翼双翅产生的灰烟粒子（点击查看完整版动图）
+</gallery>
+
+=== 艺术作品 ===
+<gallery>
+Phantom Artwork1.png|幻翼的官方艺术作品
+Phantom Artwork2.png|幻翼的另一幅官方艺术作品
+</gallery>
+
+=== 其他媒体 ===
+<gallery>
+Phantom Textures.png|Minecraft的Instagram上展示的4种幻翼模型设计，前3种未被采纳
+Phantom Poses.jpg|[[Jappa]]在推特展示的幻翼各种飞行姿势
+LEGO Phantom.png|[[乐高Minecraft]]中的幻翼
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|mobs}}
+
+[[Category:敌对生物]]
+[[Category:亡灵生物]]
+
+[[de:Phantom]]
+[[en:Phantom]]
+[[es:Fantasma]]
+[[fr:Phantom]]
+[[hu:Fantom]]
+[[it:Fantasma]]
+[[ja:ファントム]]
+[[ko:팬텀]]
+[[pl:Fantom]]
+[[pt:Espectro]]
+[[ru:Фантом]]
+[[th:แฟนท่อม]]
+[[uk:Фантом]]

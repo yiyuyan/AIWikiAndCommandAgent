@@ -1,0 +1,77 @@
+# 页面: 协议版本
+# 来源: https://zh.minecraft.wiki/w/%E5%8D%8F%E8%AE%AE%E7%89%88%E6%9C%AC
+# 分类: 
+# 抓取时间: 2026-07-14 17:20:54
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|协议|協定}}
+'''协议版本（Protocol Version Number'''，简称'''PVN）'''{{note|出现在<samp>[https://minecraft.net/download/server server.jar]</samp>中的<samp>com.mojang.bridge.game.GameVersion</samp>类}}<ref>[[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol_version_numbers]]</ref>是用于检查与服务器版本之间是否不兼容的整数。
+
+== 用法 ==
+{{Filetr|Outdated client.png|缩略图|{{in|je|nc=1}}一个过时的客户端试图连接到新版本的服务器}}
+具有相同协议版本的客户端和服务器版本彼此兼容。<ref group="注">特殊情况下，协议版本相同的原版客户端和服务端也不能彼此兼容，例如[[23w51a]]和[[Java版1.20.4-rc1]]有着相同的协议版本，但无法兼容，不能连接。</ref>例如，运行[[Java版1.21.10]]的客户端可以连接到运行[[Java版1.21.9]]的服务器，这是因为两者的协议版本都是773。
+
+当尝试加入[[多人游戏]]服务器时，游戏将检查客户端是否有比所选服务器更新或更旧的协议版本；如果是这样，游戏就会显示消息“{{tp|multiplayer.disconnect.outdated_client|''<服务端版本>''}}”<ref group="注">协议版本更新和更旧使用两条不同的消息，本地化键名分别为{{cd|multiplayer.disconnect.outdated_client}}和{{cd|multiplayer.disconnect.outdated_server}}。其本地化文本相同，此处省略其中之一。</ref>，来提醒玩家的客户端（或服务器）已过期。
+
+== 版本管理 ==
+所有版本，包括{{el|je|be}}上的次要版本和开发版本，都有自己的协议版本。与客户端版本不同，协议版本是一个不断增长的正整数。协议版本可能偶尔会在主要版本之间略过几个数字。
+
+== 储存位置 ==
+=== Java版 ===
+自[[18w47b]]起，协议版本可以在当前游戏版本的{{filename|[[version.json]]}}内找到，该文件位于客户端的{{filename|[[client.jar]]}}和服务端的{{filename|[[server.jar]]}}内。
+<div class="treeview">
+* {{nbt|compound}} version.json
+** {{nbt|int|protocol_version}}: 此游戏版本的协议版本。
+</div>
+
+=== 基岩版 ===
+自[[基岩版1.2.0.22|1.2.0.22]]起，当前的协议版本可以在设置的“档案”界面（[[基岩版1.19.40.20|1.19.40.20]]起为“通用”界面）中滚动至底部来查看。协议版本的数值会出现在“协议版本：”字样后，也会出现在beta提示文本的“cli-p''n''”字样后。
+
+== 协议版本列表 ==
+<!-- 修复红链请至“模块:Protocol version/Versions” -->
+{{Protocol version/Latest}}
+{{CollapseH}}
+{{Protocol version/Table|hidedata=1|hiderespack=1|hidedatpack=1}}
+{{CollapseE}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.16a|加入了协议版本。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20091223-0040|移除了协议版本。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.5|重新加入了协议版本。}}
+|{{HistoryLine||v1.0.17_02 <!--在.17和.17_02之间-->|将协议版本号重置为1。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w41a|使用Netty重写协议版本控制系统，将协议版本重置为0。更新前的协议版本与更新后协议版本相同的版本不兼容。}}
+|{{HistoryLine||1.16.4|dev=pre1|新的网络协议方案，现在在高比特位（第30位）会设置一个比特给快照版本使用。每个快照的协议版本会增加1，但是网络协议兼容时，完整发布版的协议版本可能会和之前的完整发布版一样。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|加入了协议版本。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.6.0|dev=1.6.0.1|写入level.dat的协议版本不再用于检测世界是否在过时的版本中进行游戏。}}
+}}
+
+== 参见 ==
+* [[数据版本]]
+* [[al_version]]
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{Navbox Bedrock Edition}}
+
+[[en:Protocol version]]
+[[es:Versión de protocolo]]
+[[fr:Version de protocole]]
+[[it:Versione di protocollo]]
+[[ja:プロトコルバージョン]]
+[[ko:프로토콜 버전]]
+[[pt:Versão do protocolo]]
+[[ru:Версия протокола]]
+[[uk:Версія протоколу]]

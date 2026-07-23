@@ -1,0 +1,169 @@
+# 页面: Java版22w16a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8822w16a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=22w16a
+|image=22w16a.png
+|image2=Java Edition 22w16a Simplified.png\Java Edition 22w16a Traditional.png\Java Edition 22w16a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2022年4月20日
+|jsonhash=34219564fefd4e925314a935e8a12af32b7ec222
+|clienthash=4e8f686a40481690d16b006bbe571f5fdbc54d05
+|clientmap=bfe8eb3f33e792e2b0f49d870eda0de4f0eae02c
+|serverhash=8ac6c67599bd30009fdc2f9d0174419b0bc19f8b
+|servermap=09b27637ea134f570beaae2e61c54deb73333baf
+|parent=1.19
+|prevparent=1.18.2
+|prev=22w15a
+|next=22w16b
+|nextparent=1.19.1
+}}<onlyinclude>
+
+'''22w16a'''是[[Java版1.19]]的第6个快照，发布于2022年4月20日<ref>{{snap|22w16a|April 20, 2022}}</ref>，加入了[[唱片残片]]、[[音乐唱片]]''5''和新的[[音乐]]曲目以及新的游戏规则，调整了[[悦灵]]的行为和一些游戏特性，修复了一些漏洞。
+
+== 新内容 ==
+=== 物品 ===
+'''[[唱片残片]]'''
+* 一种残片物品，可以罕见地在[[远古城市]]的战利品箱子中找到。
+
+'''[[音乐唱片]]'''
+* 加入了音乐唱片5，作者为[[Samuel Åberg]]。
+** 只能通过9个唱片残片合成得到。
+
+=== 非生物实体 ===
+'''[[画]]'''
+* 加入了{{el|be}}中的4种画：<code>earth</code>、<code>wind</code>、<code>fire</code>和<code>water</code>，目前未被使用。
+** 这些画默认情况下不会被放置出来，可以通过[[命令]]（例如{{cmd|summon painting ~ ~ ~ {variant:"water"}<nowiki/>}}）或[[数据包]]放置它们。
+
+=== 命令格式 ===
+'''[[游戏规则]]'''
+* 加入了游戏规则<code>doWardenSpawning</code>。
+** 用于设置是否生成[[监守者]]。
+** 默认值为<code>true</code>。
+
+=== 常规 ===
+'''[[调试屏幕]]'''
+* 加入了堆内存分配指标。
+
+'''[[音乐]]'''
+* 加入了4首新的音乐<ref group="注">发布到了所有1.19快照中。</ref>，作者为[[Lena Raine]]：
+** “Ancestry”仅会在[[深暗之域]]中播放。
+** “Aerie”“Firebugs”和“Labyrinthine”会在[[繁茂洞穴]]、所有种类的[[沼泽]]、[[森林]]和[[丛林]]中以及[[菜单屏幕]]中播放。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下[[Java版标签/方块|方块标签]]：
+** {{TagLink|block|frogs_spawnable_on}}：{{cd|d=pretty|grass_block|mud|mangrove_roots|muddy_mangrove_roots|moss_carpet}}。
+* 加入了以下[[Java版标签/画变种|画变种标签]]（新类型）：
+** {{TagLink|painting_variant|placeable}}：{{cd|d=pretty|kebab|aztec|alban|aztec2|bomb|plant|wasteland|pool|courbet|sea|sunset|creebet|wanderer|graham|match|bust|stage|void|skull_and_roses|wither|fighters|pointer|pigscene|burning_skull|skeleton|donkey_kong}}。
+*** 此标签用于决定哪些画会在生存模式下出现。
+
+== 更改 ==
+=== 方块 ===
+'''[[蛙明灯]]'''
+* 现在可以被[[活塞]]移动。
+
+=== 生物 ===
+'''[[悦灵]]'''
+* 生命值由{{hp|10}}提升到{{hp|20}}。
+* 掷出物品后再次搜寻物品前的间隔由5秒降为3秒。
+* 搜寻物品的范围由9格增至32格。
+* 降低了空闲时飞行的速度，提高了收集物品、飞向玩家或[[音符盒]]时的飞行速度。
+* 修改了投掷物品的曲线。
+
+'''[[青蛙]]'''
+* 现在可以在[[草方块]]、[[泥巴]]、[[覆地苔藓]]、[[红树根]]和[[沾泥的红树根]]上生成。
+
+=== 常规 ===
+'''[[wikipedia:LWJGL|LWJGL]]'''
+* 将LWJGL的版本升级到3.3.1。
+
+'''[[音乐]]'''
+* 更改了以下音乐可播放的位置：<ref group="注">所有1.19快照均受此改动影响。</ref>
+** “Stand Tall”“Wending”和“Infinite Amethyst”现在不再会在菜单屏幕上播放。
+** “Left to Bloom”和“One More Day”现在不再会在菜单屏幕上播放，会在所有种类的森林、丛林和[[原始针叶林]]中播放。
+** “Floating Dream”和“Comforting Memories”现在会在所有种类的森林、丛林和原始针叶林中播放。
+
+'''[[粒子]]'''
+* 移除了<code>allay_dust</code>粒子。
+
+'''随机化游戏事件'''
+* 以下随机化的游戏事件的可预测性被提高，不再会出现极端行为：
+** [[投掷器]]或[[发射器]]掷出物品的位置和速率
+** 容器被破坏后弹出物品[[实体]]的位置和速率
+** 生物的随机<code>follow_range</code>[[属性]]
+** [[骷髅陷阱]]生成的[[骷髅马]]的移动速率
+** [[烈焰人]]的随机生成位置和投射物速度
+** [[箭]]伤害中的随机值部分以及飞行速率
+** [[烟花火箭]]的随机飞行轨迹
+** [[钓鱼]]时气泡粒子的样式和钓到鱼的等待时间
+
+'''[[Java版标签|标签]]'''
+* 将{{cd|music_disc_5}}加入了{{TagLink|item|music_discs}}标签。
+
+== 修复 ==
+{{fixes|fixedin=22w16a|showdesc=1
+|;old
+|81870|区块重载前，被修改的画的实体数据不会立即显示出来。
+|111809|实体数据快速更新时，画会由正常渲染变为不渲染。
+|121376|不能在{{tr|按键控制|按鍵設定|按鍵設定}}中绑定{{key|Caps Lock}}键。
+|122421|Linux上同时按两个键，其中一个键有延迟。
+|187188|画的NBT标签和注册表中有字段名称被误写为“Motive”，正确的应该是“Motif”。
+|189897|进入单人世界世界选择菜单时，游戏会在加载存档列表时挂起。
+|227041|美西螈会一直在放在水上的蜂蜜块上旋转。
+|228049|美西螈不能寻路到处于打开状态的门后。
+|244957|使用{{key|Tab}}键选中{{tr|社交屏幕|社群交流畫面|社羣互動界面}}中的“{{tr|搜索…|搜尋...|搜尋⋯⋯}}”选项的顺序不正确。
+|245001|{{tr|社交屏幕|社群交流畫面|社羣互動界面}}中的“{{tr|使用Microsoft账户管理|以 Microsoft 帳號管理|利用 Microsoft 帳户管理}}”按钮不是居中的。
+|249169|放置画时，其对应网络数据包中的坐标不会被设置。
+|249246|炽足兽不能寻路到处于打开状态的门后。
+|;dev
+|249084|从蝌蚪桶中放出蝌蚪时没有声音。
+|249092|去皮红树原木、去皮红树木和紅樹林木塊在创造模式物品栏中的顺序不正确。
+|249120|游戏中缺少一些22w11a中引入的声音事件。
+|249176|蛙明灯没有被绘制在地图上。
+|249193|青蛙不能寻路到处于打开状态的门后。
+|249217|蛙明灯附近液面高度过低。
+|249265|一些方块不能放置在蛙明灯上。
+|249459|在仙人掌旁边放置蛙明灯，仙人掌不会被破坏。
+|249653|趋同事项：橡木船物品纹理与基岩版中的不一致。
+|249663|有一些鹦鹉模仿其他生物声音时字幕中的英文用词与被模仿对象声音字幕中的英文用词不一致。
+|249679|监守者嗅探动画和行为会被不正确地触发。
+|249715|悦灵死亡时不掉落手持物品。
+|249734|<code>minecraft:entity.allay.flap</code>声音事件没有对应的翻译键。
+|249754|<code>minecraft:entity.allay.flap</code>声音事件未被使用。
+|249766|悦灵可以在已手持物品但尚未捡起其他物品时消失。
+|249790|悦灵会跟随旁观模式玩家并向其投掷物品。
+|249838|悦灵开始移动后，其空闲状态动画不再显示。
+|249855|趋同事项：Java版中悦灵没有飞行动画。
+|249912|<code>minecraft:ancient_city/city_center_3</code>结构比其他同类结构要矮1格。
+|249928|催生出的红树所产生的红树根不会更新周围方块。
+|250039|监守者会被世界边界外的生物激怒。
+|250040|监守者可以感知到世界边界外的生物。
+|250041|监守者可以生成在世界边界外。
+|250044|红树被催生出时，侦测器不会检测到其中的红树根的生成。
+|250094|监守者从地下钻出或钻回地底时，不能被{{cmd|kill|link=none}}命令杀死。
+|250095|监守者可以在非常狭窄的地方生成，并导致其受到窒息伤害。
+|;previous
+|250293|<code>allay_dust</code>粒子未使用。
+|250294|趋同事项：悦灵检测物品的范围明显比基岩版中的要小。
+}}</onlyinclude>
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:22w16a]]
+[[en:Java Edition 22w16a]]
+[[es:Java Edition 22w16a]]
+[[fr:Édition Java 22w16a]]
+[[ja:Java Edition 22w16a]]
+[[pt:Edição Java 22w16a]]
+[[ru:22w16a (Java Edition)]]

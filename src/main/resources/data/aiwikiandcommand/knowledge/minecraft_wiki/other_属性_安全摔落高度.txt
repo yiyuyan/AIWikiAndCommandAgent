@@ -1,0 +1,68 @@
+# 页面: 属性/安全摔落高度
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E5%AE%89%E5%85%A8%E6%91%94%E8%90%BD%E9%AB%98%E5%BA%A6
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox attribute}}
+
+'''安全摔落高度（Safe Fall Distance）'''是控制生物摔落而不受伤害的最大高度的[[属性]]。
+
+== 行为 ==
+{{main|摔落}}
+
+当生物摔落触地时，如果下落高度小于此属性计算值，则不产生落地粒子。
+
+当生物摔落触地时，游戏按照下列步骤计算摔落伤害：
+# 获取生物的下落高度''f''和此属性计算值''h''。
+# 获取生物脚下的方块，修正下落高度，获得方块摔落伤害系数''r''：
+#* 如果为[[干草捆]]和[[蜂蜜块]]，则摔落伤害系数''r''为0.2。
+#* 如果为[[床]]，则摔落伤害系数''r''为0.5。
+#* 如果为方向向上的[[滴水石锥]]，则下落高度<math>f \leftarrow f+2</math>，摔落伤害系数''r''为2。
+#* 其他方块摔落伤害系数''r''为1。
+# 获取摔落伤害倍数属性计算值为''a''，则摔落伤害为<math>d=\left\lceil\left(f-h\right)ra\right\rceil</math>。
+# 对于部分生物，摔落伤害会被强制减少：
+#* [[山羊]]的摔落伤害固定减少10，即<math>d \leftarrow d-10</math>。
+#* [[青蛙]]的摔落伤害固定减少5，即<math>d \leftarrow d-5</math>。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Camel}}<br>{{EntityLink|Donkey}}<br>{{EntityLink|Horse}}<br>{{EntityLink|Llama}}<br>{{EntityLink|Mule}}<br>{{EntityLink|Skeleton Horse}}<br>{{EntityLink|Trader Llama}}<br>{{EntityLink|Zombie Horse}}
+| 6
+|-
+| {{EntityLink|Fox}}
+| 5
+|-
+| 其他所有生物
+| 3
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| effect.jump_boost
+| add_value (Op0)
+| ''等级''
+| 是
+| [[跳跃提升]]状态效果
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|dev=24w06a|加入了安全摔落高度属性，ID为<code>generic.safe_fall_distance</code>。}}
+|{{HistoryLine||1.21|dev=24w21a|跳跃提升状态效果修饰符的ID现在是<code>effect.jump_boost</code>，此前为<code>C0105BF3-AEF8-46B0-9EBC-92943757CCBE</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|安全摔落高度属性的ID从<code>generic.safe_fall_distance</code>重命名为<code>safe_fall_distance</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

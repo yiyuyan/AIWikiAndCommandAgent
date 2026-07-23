@@ -1,0 +1,232 @@
+# 页面: Minecraft启动器
+# 来源: https://zh.minecraft.wiki/w/Minecraft%E5%90%AF%E5%8A%A8%E5%99%A8
+# 分类: Java版, Minecraft, 游戏内容
+# 抓取时间: 2026-07-14 17:16:16
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|虚拟机|虛擬機器}}
+{{tr|mode=H|配置|安裝檔|安裝檔案}}
+{{redirect|启动器|并入前的Minecraft Dungeons独立启动器|Minecraft Dungeons:启动器}}
+{{infobox
+|defaultimagesize=292px
+|image=Minecraft Launcher Simplified.png\Minecraft Launcher Traditional.png\Minecraft Launcher Traditional HK.png
+|rows=
+{{infobox row|开发者|[[File:Mojang Studios logo.svg|20px|link=Mojang Studios]] [[Mojang Studios]]<br>[[Nathan Adams]]<br>[[Petr Mrázek]]}}
+{{infobox row|平台|{{OS|Windows|macOS|Linux}}}}
+{{infobox row|编写语言|TypeScript、ReactJS、C++<ref>{{tweet|dinnerbone|1037686466250530816| We're expanding our Minecraft Launcher team! We have a lot of exciting plans and are looking for another senior C++ developer to help make them happen. Know someone interested? Send them our way!|September 6, 2018}}</ref>}}
+{{infobox row|当前版本|
+{{#if: {{v|launcher}} | 正式版：{{v|launcher}} }}{{#if: {{v|launcher-beta}} | <br>测试版：{{v|launcher-beta}} }}
+}}
+{{infobox row|发布日期|2010年6月30日}}
+{{infobox row|程序大小|{{OS|w10+}} ~10.13 MB}}
+{{Infobox row|下载
+|[https://xbox.com/games/store/-/9PGW18NPBZV5 xbox.com]<br>
+[https://minecraft.net/download minecraft.net]（[https://minecraft.net/download-dungeons Dungeons]）}}
+}}
+
+'''Minecraft启动器（Minecraft Launcher）'''是一个用于登录、下载并启动独立的[[Java版|Minecraft：Java版]]的主要客户端，以及启动{{el|be}}、{{el|Dungeons}}及{{el|Legends}}游戏的前端软件。它支持{{w|Microsoft Windows|Windows}}、{{w|macOS}}和{{w|Linux}}操作系统。
+
+启动器负责下载主要的[[wzh:Java|Java]]软件包，包括含有游戏代码和诸如纹理等资源的{{filename|[[client.jar]]}}以及[[wikipedia:LWJGL|LWJGL]]。启动器会在第一次运行时强制让用户登录到一个或多个付费账户上。
+
+可以使用启动器来运行{{el|je}}的所有正式版本（包括公开的快照）、绝大多数[[Java版Beta|Beta]]版本，以及部分的[[Java版Classic|Classic]]、[[Java版Infdev|Infdev]]、[[Java版Alpha|Alpha]]和[[Java版pre-Classic|pre-Classic]]版本。要查看启动器所有未包括的Java版版本，详见“[[启动器中丢失的版本]]”。除此之外，在Windows 10/11平台上，启动器还可以启动{{el|be|mcd|mclg}}。
+
+== 启动 ==
+[[File:Launcher login screen.png|缩略图|右|在用户未登录时启动器显示的登录屏幕]]
+每次启动器运行时，它都会检查储存着Minecraft文件的[[.minecraft]]文件夹。其检查一个名为“<samp>[[launcher_profiles.json]]</samp>”的文件作为启动器的登录凭证。如果文件未找到、被损坏或没有用户登录的记录，那么用户必须使用有效的付费账户来进行登录，否则将只能游玩[[演示版]]或[https://www.minecraft.net/choose-your-game 购买游戏]。
+
+当登录后，启动器会首先尝试验证登录。如果存在有效的“<samp>launcher_profiles.json</samp>”文件，且在最后一次关闭时进行了登录，但是没有网络连接，启动器将会启动“离线游戏”模式。如果成功连接到网络，启动器将会把最新版本的“versions”文件夹与服务器的最新发布的版本进行比较。当配置选项里的“最新版本”被选择时，如果选择的版本不存在，或版本需要进行更新，启动器将会下载所有最新的Minecraft组件以及Java二进制文件。它也会将<samp>assets</samp>文件夹里的所有文件都进行同步。
+
+最后，一旦成功安装或更新之后，启动器将会启动“minecraft.jar”（通过“javaw.exe”，Java虚拟机可执行文件）。在缺失“.jar”的文件的情况下仍然可以启动。在这种情况下，启动器会自动下载缺失文件，但是如果没有网络连接，则会停止下载。
+{{-}}
+
+== 特性 ==
+=== 启动器 ===
+* 管理多个配置（储存在{{filename|launcher_profiles.json}}）。每个配置都可以控制：
+** 游戏版本。包括使用已过时的预览版本和之前的预发布版。你也可以手动添加较旧/自定义的版本。<ref>{{tweet|dinner|344164561701724160}}</ref>
+** 在游戏内使用的Microsoft账户
+** Java命令行参数（例如堆大小）
+** 游戏目录（硬盘上储存游戏文件的地方）
+** 配置文件的图片，或自制的图片
+* 启动器不会在硬盘上储存你的密码。启动器会使用一个“刷新令牌”进行验证。
+* 启动器支持多个实例同时运行（游戏也支持）
+* 启动器会自动更新
+* 启动器有更新库的能力，例如{{w|LWJGL}}。
+* 离线模式（第一次启动需要有网络连接来下载所需资源） 
+* 可以通过[[崩溃#Hopper|Hopper]]向Mojang报告崩溃。
+* 通过引用数据库的崩溃信息来提供如何修复漏洞。
+* 启动器设置
+* 切换账户或登出
+* 更改皮肤
+* 下载各版本的服务器
+* 帮助按钮
+* 点击启动器版本可显示启动器版本信息
+
+=== 向后兼容性 ===
+[[File:HowtoOldVersion2019.png|300px|缩略图|启用了Alpha和Beta版本的配置]]
+启动器拥有游玩旧版本[[Java版Alpha|Alpha]]和[[Java版Beta|Beta]]的能力。当前，可以游玩快照、Alpha、Beta以及所有正式版本。四个[[Java版pre-Classic|pre-Classic]]版本、四个[[Java版Classic|Classic]]版本、还有一个[[Java版Infdev|Infdev]]版本都被归为“old_alpha”。<ref>{{tweet|dinner|364762596387205120}}</ref>然而，目前启动器依然没有可用的[[Java版Indev|Indev]]版本。
+
+尽管如此，这些版本早已过时且可能会不稳定。任何由不稳定产生的漏洞、故障、遗失的特性和崩溃都不会解决。[[Mojang Studios]]还推荐玩家在其他目录下游玩以便它们不会损坏游戏本体。<ref>https://help.mojang.com/customer/portal/articles/1475923-changing-game-versions</ref>
+
+要启用旧版本，在“设置”页面的“{{tr|通用|一般}}”选项卡中，勾选“{{tr|在启动器中显示《Minecraft：Java版》的历史版本|在啟動器中顯示 Minecraft Java 版的歷史版本|在啟動器中顯示 Minecraft：Java 版的歷史版本}}”，之后在“MINECRAFT: JAVA EDITION”页面的“配置”选项卡中新建一个配置并任选一个早期版本，最后点击“{{tr|新建|建立}}”按钮保存即可。
+ {{-}}
+
+=== 皮肤 ===
+{{main|皮肤}}
+[[File:SkinLibrary.png|缩略图|启动器中的皮肤库]]
+[[File:LauncherChangeSkin.png|缩略图|皮肤设置]]
+你可以在Minecraft启动器中更改或添加你的自定义皮肤。要更改或添加你的皮肤，请打开“皮肤”选项卡，单击“{{tr|添加新皮肤|新增外觀}}”或某个已有皮肤，然后再单击“浏览”按钮浏览你的文件系统找到你的皮肤文件。皮肤文件的分辨率必须为64×64，否则启动器将不会接受它。此外，皮肤文件的文件格式必须为<code>.png</code> 。在你找到皮肤文件之后，点击“保存”按钮来确认你在游戏中的皮肤。
+
+* 你也可以选择其他8个默认皮肤之一。
+* 你可以在两种玩家模型中切换：{{tr|宽型|寬版|闊}}或{{tr|纤细|苗條}}。
+
+=== 配置 ===
+[[File:2019LauncherProfileSettings.png|缩略图|启动器中的配置设置]]
+当你第一次打开Minecraft启动器的时候，它会创建一个最新版本Minecraft的配置。
+
+但是，你可以在启动器里创建自己的配置。打开“配置”选项卡，然后点击“新配置”去创建一个。在此之后，你可以输入你想要的名称。如果你不输入名称，它将被命名为“<{{tr|未命名配置|未命名的安裝檔|未命名安裝檔案}}>”。然后你可以在启动器里自定义一张配置的图标，但是它必须是128×128分辨率且扩展名为<code>.png</code>的图片。选择你想要的版本，然后点击“保存”来保存你的配置。若想更改某个配置，则只需点击它或点击“…”按钮中的“编辑”选项。这同样适用于删除一个配置：点击你想要删除的配置旁的“…”按钮中的“删除”选项。
+* 你可以通过点击“服务器”来下载服务端版本。
+* 如果想要调整游戏窗口大小，修改“分辨率”来更改游戏窗口初始大小。
+* 你可以通过“{{tr|显示更多选项|更多選項}}”来查看更多的配置选项。
+* 如果你想改变<code>.minecraft</code>文件夹的路径，修改“{{tr|游戏目录|遊戲資料夾}}”选项。然后选择<code>.minecraft</code>文件夹的路径。你也可以通过点击“浏览”按钮来打开<code>.minecraft</code> 文件夹。
+* 如果你勾选“快照”，会自动创建一个叫做“最新快照”的配置。
+* 你可以手动设置[http://logging.apache.org/log4j/2.x/manual/configuration.html 日志{{tr|配置|組態}}]（详见[[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Debugging|英文Wiki上的调试文章]]）。
+
+== 命令行用法 ==
+从2.1.1432开始，启动器有9个可用的命令行选项：
+* <code>--clean</code> - 此选项从工作目录中删除<code>game</code>和<code>runtime</code>文件夹，包括其里面的文件。
+* <code>--launcherui</code>
+* <code>--workDir</code> - 此选项后接（相对或绝对）路径，将更改<code>.minecraft</code>文件夹的位置（和/或名称）。
+* <code>--nativeLauncherVersion</code>
+* <code>--tmpDir</code> - 此选项后接（相对或绝对）路径，将更改<code>tmp</code>文件夹的位置（和/或名称）。
+* <code>--lockDir</code>
+* <code>--winTen</code> - 此选项添加了对Windows 10的支持。由于启动器现在完全支持Windows 10，所以这个选项是不必要的，似乎没有任何效果。
+* <code>--proxyHost</code>
+* <code>--proxyPort</code>
+
+可以使用<code>--workDir</code>选项创建游戏的便携式安装。例如，可以使用<code>--workDir .</code>（或<code>--workDir=.</code>）使启动程序使用当前目录（无论调用什么当前文件夹）。
+{{-}}
+
+== 历史 ==
+{{main|启动器版本记录}}
+{{HistoryTable
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100629|最初版本。在这个版本里，用户可以选择当前版本和[[Java版Infdev|Infdev]]版本。
+|当第一次运行客户端时，需要一个网络连接来检查更新，之后就会支持离线游戏了。
+|允许使用命令行参数启动游戏。使用格式：<code>-{}-java -cp Minecraft.jar net.minecraft.LauncherFrame ''用户名'' ''密码''</code>将会允许在不加入到服务器的情况下进行登录，当格式为<code>-{}-java -cp minecraft.jar net.minecraft.LauncherFrame ''用户名'' ''密码'' ''服务器地址'':''端口号''</code>就会允许加入到一个服务器。}}
+|{{HistoryLine|java alpha}}
+|{{HistoryLine||v1.2.2|命令行参数格式改变。}}
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.3|发布于2011年2月21日。<ref>{{notch|3428176687/server-downtime-and-a-new-launcher|Server downtime, and a new Launcher|February 21, 2011}}</ref>一份技术性预览在2011年2月18日由[[Notch]]发布。<ref>{{tweet|notch|38621269331025921|This requires some technical know-how|February 18, 2011}}</ref>|现在使用新的Minecraft徽标。|添加通过命令行参数自动登录到游戏的能力。|（客户端/启动器更新）添加官方链接、社区链接和Twitter链接。|添加小更新系统，这个系统只会更新已更改的文件、引导用户进行更新、允许使用HTTPS登录来使用更安全的连接、以及提供用户界面的改进。一个暗中进行的技术性预览已由Notch在2011年2月18日发布。<ref>{{tweet|notch|38621269331025921}}</ref>
+|连接到Minecraft安装目录，以方便访问。
+|在“Options”对话框下面添加“Force Update”按钮。
+|启动器支持在程序内通过一个叫做[[MCUpdate]]的[http://mcupdate.tumblr.com/ Tumblr]博客查看更新日志，并且支持命令行参数。<ref>http://mcupdate.tumblr.com/post/3427294253/welcome-to-the-new-minecraft-launcher</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.2.1|现在可为macOS用户适当选择64位Java安装。<ref>http://www.mojang.com/2012/03/minecraft-1-2-is-out/</ref>}}
+|{{HistoryLine||1.3.2|为未付费用户添加了启动[[演示模式]]的能力。}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了新启动器。}}
+|{{HistoryLine||1.14|加入了新的beta版启动器。要查看此版本之后的更新历史，详见[[启动器版本记录]]。}}
+}}
+
+== 你知道吗 ==
+{{FakeImage|{{animate|Launcher Creeper face.png;Launcher shrug emoji.png|120px}}|测试阶段的彩蛋}}
+* 在2016-2019启动器左上角可以找到一个隐隐可见的按钮，它会随机显示为[[苦力怕]]脸或耸肩的颜文字¯\_(ツ)_/¯。它在点击时会闪烁白色，不过没有实际用处。这在启动器的[[启动器2.1.497x|2019重新设计]]中被移除了。
+** 在启动器的测试阶段，苦力怕的脸以及耸肩被用于语言选择菜单，当添加一个地球而不是简单地向下移动时，这作为一个彩蛋保存。
+* 将鼠标悬停在2016-2019启动器中的“开始”按钮上足够长的时间将导致随机生物出现在窗口的右侧。
+* 2022年7月2日，为了纪念于2022年6月30日因4期骨癌逝世的Minecraft YouTuber [[Technoblade]]，启动器背景图上的猪被戴上了皇冠。
+
+== 画廊 ==
+<gallery>
+File:Minecraft Launcher icon.png|启动器的图标
+File:Legacy Minecraft Launcher icon.png|旧版启动器的图标
+File:MCL square key art.jpg|Microsoft Store版启动器的方形封面
+Minecraft Launcher Xbox Horizontal Key Art.jpg|Microsoft Store中使用的启动器主视觉图
+File:MCL horizontal key art.png|Microsoft Store版启动器的横版封面
+File:Minecraft Launcher icon 1.svg|启动器的旧图标
+</gallery>
+
+=== 背景图片 ===
+<gallery>
+File:Launcher login background.jpg|登录账号时的背景图片
+File:Minecraft Launcher background.png|当前“Minecraft：Java版”和“Minecraft： Bedrock 版”标签页的背景图片
+File:Dungeons launcher background.jpg|“Minecraft Dungeons”标签页的背景图片
+File:Minecraft Legends Key Art.png|“Minecraft Legends”标签页的背景图片
+File:Java Launcher legacy background.png|[[启动器2.2.74x|2.2.74''x'']]版本前“Java版”标签页的背景图片
+File:Bedrock Edition key art.png|2.3.227版本前“Minecraft for Windows”标签页的背景图片
+File:Original Dungeons launcher background.png|“Minecraft Dungeons”标签页最初的背景图片
+</gallery>
+
+=== 版本记录 ===
+<gallery>
+File:AlphaLauncher.png|第一代启动器
+File:Launcher-1.0.png|第二代启动器。可以看见其中旧的Minecraft logo
+File:Oldlauncher2.png|第三代启动器
+File:Oldlauncher3.png|第四代启动器
+File:Launcher-1.1.1.png|第五代启动器，版本号1.6
+File:2016Launcher.png|第六代启动器，版本号2.0
+File:2019Launcher.png|第七代启动器，版本号2.1
+</gallery>
+
+=== 2010-2016 ===
+<gallery>
+File:Minecraft Launcher-Launcher Log.png|启动器启动后的''Launcher Log''标签
+File:1.6DevLauncher Local Version Editer (NYI).png|''Local Version Editor (NYI)'' 标签
+File:Development Launcher Outdated.png|开发版启动器版本过旧时显示的错误信息
+File:Used Newer Launcher.png|使用2.0版启动器后打开旧版启动器时显示的错误信息
+File:NotchLauncher.png|第二代启动器的开发图片，来自Notch的博客
+</gallery>
+
+=== 2016-2019 ===
+<gallery>
+File:2016LauncherProfileIcons.png|启动器自带的个人档案头像集
+File:2016LauncherOfflineMode.png|处于离线模式中的启动器
+File:2016LauncherHelp.png|帮助页面
+File:GameCrashinNewLauncher.jpg|游戏崩溃
+File:GameisAlreadyRunninginNewLauncher.jpg|当已经运行了一个Minecraft，则启动器会警告你将要运行另一个Minecraft
+File:ChangingSkinLauncher.png|皮肤设置
+File:2016 Launcher Login.png|登录界面
+</gallery>
+
+=== 2019至今 ===
+{{gallery|
+File:Minecraft Launcher.png|convert|启动器的{{tr|主页|首頁|主頁}}
+File:Launcher JE tab.png|convert|启动器的“Java Edition”标签页
+File:Launcher MCD tab.png|启动器的“Minecraft Dungeons”标签页
+File:Launcher MCD2 tab.png|启动器的“Minecraft Dungeons II”标签页
+File:2019Launcher.png|2.2之前版本启动器的“Java Edition”标签页
+File:Launcher login screen.png|启动器登录界面
+File:Launcher installations.png|默认配置
+File:Edit launcher installation.png|正在进行自定义配置
+File:Launcher about.png|convert|启动器的“关于”界面
+File:MC Launcher Safety Warning.png|在当前版本不支持最新的玩家安全特性时，启动器弹出的警告
+File:MC launcher already running 2020.png|在启动器上同时启动两个版本时，启动器弹出的警告
+File:Minecraft Launcher macOS installer background.png|macOS上启动器安装镜像的背景图
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 参见 ==
+* [[辅助程序与编辑器]]
+* [[Tutorial:编写启动器]]
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{Navbox Minecraft (franchise)|games}}
+
+[[Category:游戏内容]]
+
+[[cs:Spouštěč Minecraftu]]
+[[de:Minecraft Launcher]]
+[[en:Minecraft Launcher]]
+[[es:Lanzador de Minecraft]]
+[[fr:Launcher]]
+[[it:Launcher di Minecraft]]
+[[ja:Minecraftランチャー]]
+[[ko:Minecraft 런처]]
+[[lzh:礦藝啟者]]
+[[nl:Minecraft launcher]]
+[[pl:Minecraft Launcher]]
+[[pt:Minecraft Launcher]]
+[[ru:Лаунчер]]
+[[th:ลันเชอร์ Minecraft]]
+[[uk:Лаунчер]]

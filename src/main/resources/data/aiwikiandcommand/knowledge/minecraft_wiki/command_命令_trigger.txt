@@ -1,0 +1,76 @@
+# 页面: 命令/trigger
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/trigger
+# 分类: Java版独有特性, 命令
+# 抓取时间: 2026-07-14 17:22:17
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox command
+|name=trigger
+|oplevel=0
+}}
+
+修改命令执行者玩家在一个[[记分板#准则|准则]]为“触发器”的[[记分板#记分项|记分项]]上的分数。此命令使得非管理员玩家能够通过记分板激活管理员或地图制作者设计的系统，一般配合[[文本组件]]使用。
+
+== 语法 ==
+<code>trigger <objective></code>
+: 将执行者的分数增加1。
+<code>trigger <objective> add <value></code>
+: 将执行者的分数增加指定的<code><value></code>数值。
+<code>trigger <objective> set <value></code>
+: 将执行者的分数设置为指定的<code><value></code>数值。
+
+== 参数 ==
+{{argument|objective|objective}}
+: 指定一个已启用的、准则为“触发器”的记分项。
+: {{arg desc|je=objective}}
+
+{{argument|value|integer}}
+: 指定要设为或要增加的数值。
+: {{arg desc|je=integer}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|指定的记分项不存在|fail}}
+{{Result table|指定记分项的准则不是“trigger”}}
+{{Result table|命令执行者不是玩家}}
+{{Result table|指定的记分项中没有命令执行者}}
+{{Result table|指定的记分项未被启用}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|命令执行后，执行者在指定记分项上的分数}}
+{{Output table}}
+
+== 示例 ==
+* 高频执行，设定触发型记分项{{cd|trigger_test}}并为所有玩家开启触发权限。
+: <syntaxhighlight lang=mcfunction>
+scoreboard objectives add trigger_test trigger
+scoreboard players enable @a trigger_test
+execute as @a[scores={trigger_test=1..}] run tellraw @s "(>_<)"
+execute as @a[scores={trigger_test=1..}] run scoreboard players set @s trigger_test 0
+</syntaxhighlight>
+* 为最近的一位玩家输出一个可以点击的“按钮”（使用文本组件点击事件实现），点击后将触发型记分项{{cd|trigger_test}}的分数设定为1，玩家将在聊天栏看到信息{{chat text|(>_<)|inline=1}}。
+: <syntaxhighlight lang=mcfunction>
+tellraw @p {text:"按钮", click_event:{action:"run_command",command:"execute as @s run trigger trigger_test set 1"}}
+</syntaxhighlight>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w06a|加入了{{cmd|trigger|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/trigger]]
+[[en:Commands/trigger]]
+[[es:Comandos/trigger]]
+[[ja:コマンド/trigger]]
+[[pt:Comandos/trigger]]
+[[ru:Команды консоли/trigger]]

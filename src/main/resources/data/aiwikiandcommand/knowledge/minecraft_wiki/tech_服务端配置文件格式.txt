@@ -1,0 +1,1520 @@
+# 页面: 服务端配置文件格式
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F
+# 分类: Java版, Java版即将到来/26.3, Java版即将移除/26.3, 基岩版, 待扩充段落, 待更新条目, 服务器, 未确定的译名, 游戏文件, 缺少理由的待更新条目, 需要信息
+# 抓取时间: 2026-07-14 17:28:36
+# 原始 Wikitext 内容:
+
+{{tr|mode=T|服务端配置文件格式|伺服器設定檔格式}}
+{{needs update}}
+[[File:Server.properties.png|缩略图|Java版默认的{{filename|server.properties}}文件]]
+
+'''{{filename|server.properties}}'''是储存服务器所有设置的文件。
+
+在编辑{{filename|server.properties}}时，行之间的顺序可以打乱，但文件结构不能改变。每一行的等号之前的文本为变量名，用户不应该修改这些内容。等号后面为变量的值，用户可以按照规则自行编辑。以<code>#</code>开头的行为注释，添加、修改或移除注释行不会对游戏造成影响。
+
+{{filename|[[wzh:.properties|.properties]]}}文件的格式定义于Java的<code>[https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Properties.html#load(java.io.Reader) Properties.load(Reader)]</code>。其实际上只是一个普通的UTF-8编码文本文件，因此可以使用任何文本编辑器进行编辑，比如Windows上的记事本、macOS上的TextEdit或者Linux上的nano和vim。
+
+保存了{{filename|server.properties}}的更改之后，服务端必须重新启动才能使更改生效。
+
+== Java版 ==
+=== 文件内容 ===
+若该文件不存在，则会在服务端第一次运行时自动生成。
+
+{| class="wikitable"
+|-
+! 操作系统
+! 文件位置
+! 注解
+|-
+! Windows
+| 工作目录路径（chdir）
+| 
+|-
+! Linux/Unix/Mac
+| 工作目录路径（pwd）
+| 
+如果你在你的home目录下启动（{{filepath|-{}-/home/<用户名>}}），服务端文件也会在{{filepath|-{}-/home/<用户名>}}下创建。请按照下列步骤确保服务端文件能够如你预期地正确生成。
+* 准备一个完整的文件夹来存放所有服务端文件。
+** 把{{filename|server.jar}}放置（复制、移动）进去。
+* 使用[https://www.minecraft.net/download/server 官方指导]设置你的Minecraft服务端启动脚本。（我们假设你的Minecraft服务端启动脚本名是{{filename|./start.sh}}）
+** 确保它位于你的可执行目录 {{filename|$PATH}}
+** 确保你具有启动脚本的执行权限（<code>chmod +x start.sh</code>，或使用文件夹管理器）
+*** {{filename|./start.sh}}
+|}
+
+{{CollapseH
+|截至[[Java版26.2|26.2]]，新安装的服务器具有以下默认设置：
+|expanded=1
+}}
+{{syntaxhighlight|1=
+#Minecraft server properties
+#（{{tr|时间戳|時間戳}}）
+accepts-transfers=false
+allow-flight=false
+broadcast-console-to-ops=true
+broadcast-rcon-to-ops=true
+bug-report-link=
+chat-spam-threshold-seconds=10
+command-spam-threshold-seconds=10
+difficulty=easy
+enable-code-of-conduct=false
+enable-jmx-monitoring=false
+enable-query=false
+enable-rcon=false
+enable-status=true
+enforce-secure-profile=true
+enforce-whitelist=false
+entity-broadcast-range-percentage=100
+force-gamemode=false
+function-permission-level=2
+gamemode=survival
+generate-structures=true
+generator-settings={}
+hardcore=false
+hide-online-players=false
+initial-disabled-packs=
+initial-enabled-packs=vanilla
+level-name=world
+level-seed=
+level-type=minecraft\:normal
+log-ips=true
+management-server-allowed-origins=
+management-server-enabled=false
+management-server-host=localhost
+management-server-port=0
+management-server-secret=（{{tr|随机文本|隨機文本}}）
+management-server-tls-enabled=true
+management-server-tls-keystore=
+management-server-tls-keystore-password=
+max-chained-neighbor-updates=1000000
+max-players=20
+max-tick-time=60000
+max-world-size=29999984
+motd=A Minecraft Server
+network-compression-threshold=256
+online-mode=true
+op-permission-level=4
+pause-when-empty-seconds=60
+player-idle-timeout=0
+prevent-proxy-connections=false
+query.port=25565
+rate-limit=0
+rcon.password=
+rcon.port=25575
+region-file-compression=deflate
+require-resource-pack=false
+resource-pack=
+resource-pack-id=
+resource-pack-prompt=
+resource-pack-sha1=
+server-ip=
+server-port=25565
+simulation-distance=10
+spawn-protection=16
+status-heartbeat-interval=0
+sync-chunk-writes=true
+text-filtering-config=
+text-filtering-version=0
+use-native-transport=true
+view-distance=10
+white-list=false
+|lang="properties"}}
+{{CollapseE}}
+
+如果{{filename|server.properties}}文件未列出下文中所有的属性（例如服务端版本更新加入新属性，或该文件还未创建），那么服务器在启动时会重写{{filename|server.properties}}补全缺失的属性，并将缺失的属性值设为默认值。
+
+=== 服务器属性 ===
+{| class="wikitable stikitable mw-collapsible"
+|-
+! <span style="white-space:nowrap;">属性</span>
+! 类型
+! 默认值
+! 描述
+
+|-
+! <span style="white-space:nowrap;">'''accepts-transfers'''</span>
+| 布尔值
+| false
+| {{Anchor|accepts-transfers}}允许服务端接受以[[命令/transfer|Transfer]]封包作为登录请求的传入连接。
+:'''false''' - 不接受Transfer封包登录。
+:'''true''' - 接受Transfer封包登录。
+
+|-
+! <span style="white-space:nowrap;">'''allow-flight'''</span>
+| 布尔值
+| false
+| {{Anchor|allow-flight}}允许玩家在安装添加飞行功能的[[mod]]前提下在生存模式下[[飞行]]。
+允许飞行可能会使[[Tutorial:防止恶意破坏|恶意破坏]]者更加常见，因为此设定会使他们更容易达成目的。在创造模式下无作用。
+:'''false''' - 不允许飞行。悬空超过5秒的玩家会被踢出服务器。
+:'''true''' - 允许飞行。玩家得以使用任何能飞行的mod飞行。
+
+|-
+! <span style="white-space:nowrap;">'''broadcast-console-to-ops'''</span>
+| 布尔值
+| true
+| {{Anchor|broadcast-console-to-ops}}向所有[[服务器#管理和维护服务器|在线OP]]发送所执行命令的输出。
+
+|-
+! <span style="white-space:nowrap;">'''broadcast-rcon-to-ops'''</span>
+| 布尔值
+| true
+| {{Anchor|broadcast-rcon-to-ops}}向所有在线OP发送通过RCON执行的命令的输出。
+
+|-
+! <span style="white-space:nowrap;">'''bug-report-link'''</span>
+| 字符串
+| ''空白''
+| {{Anchor|bug-report-link}}服务器“{{tp|known_server_link.report_bug}}”的URL。
+比如由于封包处理错误导致断开连接，则在界面上显示用于引导玩家前往提交错误报告或获取帮助的地方。
+
+此字段应包含格式正确的URL。
+
+|-
+! <span style="white-space:nowrap;">'''chat-spam-threshold-seconds'''</span>
+| 整数{{more info|限制范围}}
+| 10
+| {{Anchor|chat-spam-threshold-seconds}}设置服务器踢出过于频繁地发送聊天消息的玩家的频率阈值。玩家每发送一条聊天消息，计数器的值增加1；每经过{{convert|1}}，计数器的值减少{{frac|1|20}}。当计数器的值超过此处设置的值时，服务器将会踢出玩家。
+: 设置为0表示无限制。
+
+|-
+! <span style="white-space:nowrap;">'''command-spam-threshold-seconds'''</span>
+| 整数{{more info|限制范围}}
+| 10
+| {{Anchor|command-spam-threshold-seconds}}设置服务器踢出过于频繁地发送命令的玩家的频率阈值。玩家每发送一条命令，计数器的值增加1；每经过{{convert|1}}，计数器的值减少{{frac|1|20}}。当计数器的值超过此处设置的值时，服务器将会踢出玩家。
+: 设置为0表示无限制。
+<!--编者水平有限，以上2个选项的描述可能需要调整-->
+
+|-
+! <span style="white-space:nowrap;">'''difficulty'''</span>
+| 字符串
+| easy
+| {{Anchor|difficulty}}定义服务器的游戏[[难度]]（例如生物对玩家造成的伤害，饥饿和中毒对玩家的影响方式等）。
+如果设置了旧的数字ID，则会自动转化为英文的难度名称。
+:'''peaceful''' (0) - 和平
+:'''easy''' (1) - 简单
+:'''normal''' (2) - 普通
+:'''hard''' (3) - 困难
+|-
+!enable-code-of-conduct
+|布尔值
+|false
+|{{Anchor|enable-code-of-conduct}}当为{{cd|true}}时，服务器会在与{{filename|server.properties}}同级的{{filename|codeofconduct}}文件夹中查找行为准则文件。
+
+其中的文件名格式应为{{filename|<''语言代码''>.txt}}，服务器将显示与玩家使用语言相匹配的行为准则。若该语言不存在，则会使用美式英语。若均不存在，则会使用任意语言。
+
+|-
+! <span style="white-space:nowrap;">'''enable-jmx-monitoring'''</span>
+| 布尔值
+| false
+| {{Anchor|enable-jmx-monitoring}} 暴露一个具有对象名<code>net.minecraft.server:type=Server</code>的<code>MBean</code>和两个属性<code>averageTickTime</code>和<code>tickTimes</code>用于暴露以毫秒为单位的tick时间。
+: 为了启用JRE的JMX，你需要添加[https://docs.oracle.com/javase/8/docs/technotes/guides/management/agent.html 在此处所述]的一些JVM标志。
+<!--译者：由于译者水平所限，以上的描述可能需要重新翻译，下面提供此处的原始文本以供参考-->
+<!--
+Exposes an MBean with the Object name <code>net.minecraft.server:type=Server</code> and two attributes <code>averageTickTime</code> and <code>tickTimes</code> exposing the tick times in milliseconds.
+In order for enabling JMX on the Java runtime you also need to add a couple of JVM flags to the startup as documented [https://docs.oracle.com/javase/8/docs/technotes/guides/management/agent.html here].
+-->
+
+|-
+! <span style="white-space:nowrap;">'''enable-query'''</span>
+| 布尔值
+| false
+| {{Anchor|enable-query}}允许使用GameSpy4协议的服务器监听器。用于获取服务器信息。
+
+|-
+! <span style="white-space:nowrap;">'''enable-rcon'''</span>
+| 布尔值
+| false
+| {{Anchor|enable-rcon}}是否允许远程访问服务器控制台。
+* 由于RCON协议传输数据时没有加密，所以不建议把RCON暴露在互联网上。RCON客户端和服务端交换的所有数据（包括RCON密码）都会泄露给正在监听此连接的人。
+
+|-
+! <span style="white-space:nowrap;">'''enable-status'''</span>
+| 布尔值
+| true
+| {{Anchor|enable-status}} 使服务器在服务器列表中看起来是“在线”的。
+
+|-
+! <span style="white-space:nowrap;">'''enforce-secure-profile'''</span>
+| 布尔值
+| true
+| {{Anchor|enforce-secure-profile}}要求玩家必须具有Mojang签名的公钥才能进入服务器。启用此选项也会阻止玩家发送未签名的[[聊天]]消息。
+:'''true''' - 不具有Mojang签名的公钥的玩家不能进入服务器。
+:'''false''' - 不具有Mojang签名的公钥的玩家也可进入服务器。
+
+|-
+! <span style="white-space:nowrap;">'''enforce-whitelist'''</span>
+| 布尔值
+| false
+| {{Anchor|enforce-whitelist}}在服务器上强制执行白名单。
+当启用后，不在白名单（前提是启用）中的用户将在服务器重新加载白名单文件后从服务器踢出。
+:'''true''' - 不在白名单上的用户会被踢出。
+:'''false''' - 不在白名单上的在线用户不会被踢出。
+
+|-
+! <span style="white-space:nowrap;">'''entity-broadcast-range-percentage'''</span>
+| 整数（10-1000）
+| 100
+| {{Anchor|entity-broadcast-range-percentage}} 此选项控制实体需要距离玩家有多近才会将封包发送给客户端。更高的数值意味着实体可以在更远的地方就被渲染，同时也可能提高增加延迟的概率。
+: 这个值是以默认值的百分比来表示的。例如：将此值设为50，表示将渲染正常情况下一半距离以内的生物。
+: 此功能模仿了客户端视频设置中的功能，而不像客户端的渲染距离设置一样只能在服务器设置的限制下调整渲染距离。
+
+|-
+! <span style="white-space:nowrap;">'''force-gamemode'''</span>
+| 布尔值
+| false
+| {{Anchor|force-gamemode}}强制玩家加入时为默认[[游戏模式]]。
+:'''false''' - 玩家将以退出前的游戏模式加入
+:'''true''' - 玩家总是以默认游戏模式加入
+
+|-
+! <span style="white-space:nowrap;">'''function-permission-level'''</span>
+| 整数（1-4）
+| 2
+| {{Anchor|function-permission-level}}设定[[Java版函数|函数]]解析时的[[权限等级]]。
+
+|-
+! <span style="white-space:nowrap;">'''gamemode'''</span>
+| 字符串
+| survival
+| {{Anchor|gamemode}}定义默认[[游戏模式]]。
+如果值是旧用的数字，会静默转换为对应游戏模式的英文名称。
+:'''survival''' (0) - 生存模式
+:'''creative''' (1) - 创造模式
+:'''adventure''' (2) - 冒险模式
+:'''spectator''' (3) - 旁观模式
+
+|-
+! <span style="white-space:nowrap;">'''generate-structures'''</span>
+| 布尔值
+| true
+| {{Anchor|generate-structures}}定义是否能生成[[结构]]（例如[[村庄]]）。
+:'''false''' - 新生成的区块中将不包含结构。
+:'''true''' - 新生成的区块中将包含结构。
+'''注：'''由于[[刷怪房]]和[[沙漠水井]]在技术上属于[[地物]]，因而即使此项设为false，其仍然会生成。
+
+|-
+! <span style="white-space:nowrap;">'''generator-settings'''</span>
+| 字符串
+| {}
+| {{Anchor|generator-settings}}本属性用于自定义世界的生成。详见[[超平坦世界]]和[[自定义]]了解正确的设定及例子。
+
+|-
+! <span style="white-space:nowrap;">'''hardcore'''</span>
+| 布尔值
+| false
+| {{Anchor|hardcore}}如果设为 '''true'''，<!-- 英文原页面：Server difficulty set to hard and difficulty setting ignored? -->服务器难度的设置会被忽略并且设为hard（[[困难]]），玩家在死后会自动切换至旁观模式。
+
+|-
+! <span style="white-space:nowrap;">'''hide-online-players'''</span>
+| 布尔值
+| false
+| {{Anchor|hide-online-players}}如果设为 '''true'''，服务端在响应客户端状态请求时不会返回在线玩家列表。
+
+|-
+! <span style="white-space:nowrap;">'''initial-disabled-packs'''</span>
+| 字符串
+| ''空白''
+| {{Anchor|initial-disabled-packs}}需要在创建世界过程中禁用的数据包名称，以逗号分隔。
+
+|-
+! <span style="white-space:nowrap;">'''initial-enabled-packs'''</span>
+| 字符串
+| vanilla
+| {{Anchor|initial-enabled-packs}}需要在创建世界过程中启用的数据包名称，以逗号分隔。特别地，功能数据包必须在此指定才能生效。
+
+|-
+! <span style="white-space:nowrap;">'''level-name'''</span>
+| 字符串
+| world
+| {{Anchor|level-name}}“level-name”的值将作为世界名称及其文件夹名。你也可以把你已生成的世界存档复制过来，然后让这个值与那个文件夹的名字保持一致，服务器就可以载入该存档。
+:部分字符，例如 <code>'</code> （单引号）可能需要在前面加反斜杠号 <code>\</code> 才能被正常应用。
+
+|-
+! <span style="white-space:nowrap;">'''level-seed'''</span>
+| 字符串
+| ''空白''
+| {{Anchor|level-seed}}设置[[种子（世界生成）|种子]]。
+|-
+! <span style="white-space:nowrap;">'''level-type'''</span>
+| 字符串
+| minecraft:normal
+| {{Anchor|level-type}}使用[[世界预设]]ID，确定地图所生成的类型。
+使用世界预设ID时，需要在其中的“:”前加“\”转义。原版世界预设ID可以省略其前面的“minecraft:”（即命名空间）。
+:'''minecraft:normal''' - 默认。
+:'''minecraft:flat''' - [[超平坦]]，可用'''generator-settings'''修改。
+:'''minecraft:large_biomes''' - [[巨型生物群系]]。
+:'''minecraft:amplified''' - [[放大化]]。
+:'''minecraft:single_biome_surface''' - [[单一生物群系]]，可用'''generator-settings'''修改。
+
+|-
+! <span style="white-space:nowrap;">'''log-ips'''</span>
+| 布尔值
+| true
+| {{Anchor|log-ips}}是否在有新玩家加入游戏时，在服务器日志中记录其IP地址。
+:'''true''' - 在日志中记录新加入玩家的IP地址。
+:'''false''' - 在日志中隐藏新加入玩家的IP地址。
+
+|-
+! <span style="white-space:nowrap;">'''management-server-enabled'''</span>
+| 布尔值
+| false
+| {{Anchor|management-server-enabled}}用于控制是否启用[[Minecraft服务器管理协议]]。
+
+|-
+! <span style="white-space:nowrap;">'''management-server-host'''</span>
+| 字符串
+| localhost
+| {{Anchor|management-server-host}}用于设置Minecraft服务器管理协议监听的主机。
+
+|-
+! <span style="white-space:nowrap;">'''management-server-port'''</span>
+| 整数
+| 0
+| {{Anchor|management-server-port}}用于设置Minecraft服务器管理协议监听的端口号。
+
+|-
+! <span style="white-space:nowrap;">'''max-chained-neighbor-updates'''</span>
+| 整数{{more info|限制范围}}
+| 1000000
+| {{Anchor|max-chained-neighbor-updates}}限制连锁[[方块更新]]的数量，超过此数量的连锁[[方块更新]]会被跳过，若为负数则无限制。
+
+|-
+! <span style="white-space:nowrap;">'''max-players'''</span>
+| 整数（0-2147483647）
+| 20
+| {{Anchor|max-players}}服务器同时能容纳的最大玩家数量。请注意，在线玩家越多，对服务器造成的负担也就越大。同样注意，服务器的OP具有在人满的情况下强行进入服务器的能力：找到在服务器根目录下叫ops.json的文件并打开，将需要此能力的OP下的bypassesPlayerLimit选项设置为true即可（默认值为false），这意味着OP将不需要在服务器人满时等待有玩家离开后再加入。过大的数值会使客户端显示的玩家列表崩坏。
+
+|-
+! <span style="white-space:nowrap;">'''max-tick-time'''</span>
+| 整数（0–(2^63 - 1)）
+| 60000
+| {{Anchor|max-tick-time}}设置每个tick花费的最大毫秒数。超过该毫秒数时，服务器watchdog插件将停止服务器程序并附带上信息：服务器的一个tick花费了60.00秒（最长也应该只有0.05秒）；判定服务器已崩溃，它将被强制关闭。遇到这种情况的时候，它会调用<samp>[https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/System.html#exit(int) System.exit](1)</samp>。
+:'''-1''' - 完全停用watchdog插件（这个停用选项在14w32a快照中添加）
+
+|-
+! <span style="white-space:nowrap;">'''max-world-size'''</span>
+| 整数（1-29999984）
+| 29999984
+| {{Anchor|max-world-size}}设置可让[[世界边界]]获得的最大半径值，单位为方块。通过成功执行的命令能把世界边界设置得更大，但不会超过这里设置的最大方块限制。如果设置的max-world-size超过默认值的大小，那将不会起任何效果。
+例如：
+*设置 max-world-size为1000将会有2000×2000的地图边界。
+*设置 max-world-size为4000将会有8000×8000的地图边界。
+
+|-
+! <span style="white-space:nowrap;">'''motd'''</span>
+| 字符串
+| A Minecraft Server
+| {{Anchor|motd}}本属性值是玩家客户端的多人游戏服务器列表中显示的服务器信息，显示于名称下方。
+* MOTD支持[[样式代码]]。
+* MOTD支持特殊符号，比如“♥”。然而，这些符号需要转换为Unicode转义字符。你可以在[http://www.freeformatter.com/string-utilities.html#charinfo 这里]找到一个转换器。
+* 如果MOTD超过59个字符，服务器列表很可能会返回“通讯错误”。
+
+|-
+! <span style="white-space:nowrap;">'''network-compression-threshold'''</span>
+| 整数
+| 256
+| {{Anchor|network-compression-threshold}}默认会允许n-1字节的封包正常发送, 如果封包为n字节或更大时会进行压缩。所以，更低的数值会使得更多的封包被压缩，但是如果被压缩的封包字节太小将反而使压缩后字节更大。
+:'''-1''' - 完全禁用封包压缩。
+:'''0''' - 压缩全部封包。
+'''注：'''以太网规范要求把小于64字节的封包填充为64字节。因此，设置一个低于64的值可能没有什么好处。也不推荐让设置的值超过MTU（通常为1500字节）。
+
+|-
+! <span style="white-space:nowrap;">'''online-mode'''</span>
+| 布尔值
+| true
+| {{Anchor|online-mode}}是否启用[[在线验证]]。
+:'''true''' - 启用在线验证，此时只有正版玩家才可加入。
+:'''false''' - 禁用在线验证，此时离线玩家也可加入。
+
+|-
+! <span style="white-space:nowrap;">'''op-permission-level'''</span>
+| 整数（1-4）
+| 4
+| {{Anchor|op-permission-level}} 设定使用{{cmd|op}}命令时添加管理员时的默认[[权限等级]]。
+
+|-
+! <span style="white-space:nowrap;">'''pause-when-empty-seconds'''</span>
+| 整数
+| 60
+| {{Anchor|pause-when-empty-seconds}} 服务器在没有玩家在线指定秒数后自动停止计算。设置为负数则不会自动停止计算。
+
+|-
+! <span style="white-space:nowrap;">'''player-idle-timeout'''</span>
+| 整数
+| 0
+| {{Anchor|player-idle-timeout}}如果不为0，服务器将在玩家的空闲时间达到设置的时间（单位为分钟）时将玩家踢出服务器
+:'''注：'''当服务器接受到下列封包之一时将会重置空闲时间：
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Click_Container|点击窗口]]
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Enchant_Item|附魔物品]]<!--unchecked-->
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Update_Sign|更新告示牌]]
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Player_Action|玩家挖掘方块]]
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Block_Update|放置方块]]
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Set_Held_Item|更换拿着的物品]]
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Entity_Animation|动画]]（挥动手臂等）
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Entity_Action|实体动作]]<!--unchecked-->
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Client_Status|客户端状态]]
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Player_Chat_Message|聊天信息]]
+:* [[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol#Use_Entity|使用实体]]<!--unchecked-->
+
+|-
+! <span style="white-space:nowrap;">'''prevent-proxy-connections'''</span>
+| 布尔值
+| false
+| {{Anchor|prevent-proxy-connections}} 开启此选项后，服务器会将玩家加入服务器时使用的IP地址发送给Mojang验证服务器，若玩家加入服务器时使用的IP地址与连接验证服务器的不同{{info needed|具体比较了哪些信息，IP地址、IP段，ISP/AS或其他？}}，则会验证不通过。
+:'''true''' - 启用。服务器将会禁止玩家使用虚拟专用网络或代理。
+:'''false''' - 禁用。服务器将不会禁止玩家使用虚拟专用网络或代理。
+
+
+|-
+! <span style="white-space:nowrap;">'''query.port'''</span>
+| 整数（1-65534）
+| 25565
+| {{Anchor|query.port}}设置监听服务器的端口号（参见 '''enable-query'''）。
+
+|-
+! <span style="white-space:nowrap;">'''rate-limit'''</span>
+| 整数
+| 0
+| {{Anchor|rate-limit}} 设置玩家被踢出服务器前，可以发送的封包数量。
+: 设置为0表示关闭此功能。
+
+|-
+! <span style="white-space:nowrap;">'''rcon.password'''</span>
+| 字符串
+| ''空白''
+| {{Anchor|rcon.password}}设置RCON远程访问的密码（参见'''enable-rcon'''）。RCON：能允许其他应用程序通过互联网与Minecraft服务器连接并交互的远程控制台协议。
+
+|-
+! <span style="white-space:nowrap;">'''rcon.port'''</span>
+| 整数（1-65534)
+| 25575
+| {{Anchor|rcon.port}}设置RCON远程访问的端口号。
+
+|-
+! <span style="white-space:nowrap;">'''region-file-compression'''</span>
+| 字符串
+| deflate
+| {{Anchor|region-file-compression}} 设置区域文件压缩算法。
+:'''deflate''' - 区域文件使用Deflate算法压缩（存档体积最小，效率最低）。
+:'''lz4''' - 区域文件使用LZ4算法压缩（兼顾存档体积和效率）。
+:'''none''' - 区域文件不进行压缩（存档体积最大，除非硬盘速度很低，否则效率最高）。
+
+|-
+! <span style="white-space:nowrap;">'''require-resource-pack'''</span>
+| 布尔值
+| false
+| {{Anchor|require-resource-pack}} 当此选项启用（设为true）时，玩家会被提示作出选择（是否启用服务器资源包）。如果玩家拒绝则会被服务器断开连接。
+* 但是，若玩家使用Linux系统加入服务器，游戏目录内的<code>server-resource-packs</code>没有写权限，则会提示“{{tp|multiplayer.texturePrompt.failure.line1}}”“{{tp|multiplayer.texturePrompt.failure.line2}}”，并提示玩家“{{tp|gui.proceed}}”或“{{tp|gui.cancel}}”。若玩家选择“{{tp|gui.proceed}}”，则仍可在此服务器中游戏。
+
+|-
+! <span style="white-space:nowrap;">'''resource-pack'''</span>
+| 字符串
+| ''空白''
+| {{Anchor|resource-pack}}可选选项，可输入指向一个[[资源包]]的URI。玩家可选择是否使用该资源包。
+注意若该值含":"和"="字符，需要在其前加上反斜线(\)，例如 http\://somedomain.com/somepack.zip?someparam\=somevalue
+资源包大小理应不能超过
+* 50 MiB（1.15-pre5前）
+* 100 MiB（1.15-pre5到1.18-pre8）
+* 250 MiB（1.18-rc1起）
+注意，下载成功或失败由客户端记录，而非服务器。
+
+|-
+! <span style="white-space:nowrap;">'''resource-pack-id'''</span>
+| [[UUID]]
+| ''空白''
+| {{Anchor|resource-pack-id}}可选，{{cd|resource-pack}}指定的资源包的UUID，用于客户端标识资源包。
+
+|-
+! <span style="white-space:nowrap;">'''resource-pack-prompt'''</span>
+| 字符串
+| ''空白''
+| {{Anchor|resource-pack-prompt}}
+可选，用于在使用<code>require-resource-pack</code>时在资源包提示界面显示自定义信息。
+
+与聊天组件语法一致，可以包含多行文本。
+
+|-
+! <span style="white-space:nowrap;">'''resource-pack-sha1'''</span>
+| 字符串
+| ''空白''
+| {{Anchor|resource-pack-sha1}}资源包的SHA-1值，必须为小写十六进制，建议填写它，因为它用于验证资源包的完整性。
+
+'''注：'''如果资源包的SHA-1值不与此处填写的值匹配，则会在日志中显示一条警告消息：“Invalid sha1 for resource-pack-sha1（resource-pack-sha1中的sha1值无效）”。
+
+|-
+! <span style="white-space:nowrap;">'''server-ip'''</span>
+| 字符串
+| ''空白''
+| {{Anchor|server-ip}}将服务器与一个特定IP绑定。强烈建议留空该属性值！
+:留空，或是填入你想让服务器绑定（监听）的IP。
+
+|-
+! <span style="white-space:nowrap;">'''server-port'''</span>
+| 整数（1-65534）
+| 25565
+| {{Anchor|server-port}}改变服务器（监听的）端口号。如果服务器在使用[[wzh:网络地址转换|NAT]]的网络中运行，该端口必须被[[wzh:端口转发|转发]]（在你有家用路由器/防火墙的前提下）。
+
+|-
+! <span style="white-space:nowrap;">'''simulation-distance'''</span>
+| 整数（3-32）
+| 10
+| {{Anchor|simulation-distance}}设置服务端可更新实体范围的最大值（[[模拟距离]]），即玩家各个方向上的[[区块]]数量（是以玩家为中心的半径，不是直径）。超出此范围的实体不会被更新，对玩家也不可见。
+默认/推荐设置为10，如果有严重卡顿的话，减少该数值。
+
+|-
+! <span style="white-space:nowrap;">'''spawn-protection'''</span>
+| 整数
+| 16
+| {{Anchor|spawn-protection}}通过将该值进行2x+1的运算来决定[[出生点保护]]区域的边长。例如，设置为1会保护以出生点为中心的3×3方块的区域。如果服务器没有管理员，出生点保护不生效。设置为0或负数会禁用出生点保护。
+
+|-
+! <span style="white-space:nowrap;">'''status-heartbeat-interval'''</span>
+| 整数
+| 0
+| {{Anchor|status-heartbeat-interval}}控制管理服务器向已连接的客户端发送心跳通知的间隔。设置为0会禁用此功能。
+
+参见：[[Minecraft服务器管理协议]]
+
+|-
+! <span style="white-space:nowrap;">'''sync-chunk-writes'''</span>
+| 布尔值
+| true
+| {{Anchor|sync-chunk-writes}} 启用后区块文件以同步模式写入。
+
+|-
+! <span style="white-space:nowrap;">'''text-filtering-config'''</span>
+| 字符串
+| ''空白''
+| {{Anchor|text-filtering-config}} 服务器中屏蔽文本的配置，应为一个JSON对象，所有的“:”前均需要加“\”转义。<br>仅在Realms内部使用，且未在更新博文中被提及。
+
+|-
+! <span style="white-space:nowrap;">'''text-filtering-version'''</span>
+| 整数
+| 0
+| {{Anchor|text-filtering-version}} 服务器中屏蔽文本的版本。
+:'''0''' - 旧版格式
+:'''1''' - 新版格式
+其他版本会无法加载屏蔽文本系统。
+|-
+! <span style="white-space:nowrap;">'''use-native-transport'''</span>
+| 布尔值
+| true
+| {{Anchor|use-native-transport}}是否使用针对Linux平台的封包收发优化。这可以提升Linux上服务器的性能。
+:'''true''' - 启用。启用Linux封包收发优化。
+:'''false''' - 禁用。禁用Linux封包收发优化。
+
+|-
+! <span style="white-space:nowrap;">'''view-distance'''</span>
+| 整数（3-32）
+| 10
+| {{Anchor|view-distance}}设置服务端发送给客户端的世界数据量，也就是设置玩家各个方向上的区块数量（是以玩家为中心的半径，不是直径）。它决定了服务端的可视距离。（另见[[渲染距离]]）
+默认/推荐设置为10，如果有严重卡顿的话，减少该数值。
+
+|-
+! <span style="white-space:nowrap;">'''white-list'''</span>
+| 布尔值
+| false{{until|JE 26.3}}<br>true{{upcoming|JE 26.3}}
+| {{Anchor|white-list}}启用服务器的白名单。
+当启用时，只有白名单上的用户才能连接服务器。白名单主要用于私人服务器，例如提供给相识的朋友、通过应用流程谨慎选择的陌生人等。
+:'''false''' - 不使用白名单。
+:'''true''' - 从whitelist.json文件加载白名单。
+'''''注:''''' OP会自动被视为在白名单上，所以无需再将OP加入白名单。
+|}
+
+{{Anchor|announce-player-achievements}}在[[Java版1.12]]之前的版本中，'''announce-player-achievements''' 布尔值（默认为true）属性用于切换是否[[成就/Java版|成就]]要广播给所有玩家。该属性已被移除，但如果已经设置了这条属性，则[[游戏规则]]{{gamerule|show_advancement_messages}}将自动更新，随后从文件中删除这条属性。
+
+== 基岩版 ==
+=== 文件内容 ===
+该文件会与[[基岩版专用服务器|专用服务器]]文件一同下载。若不存在，运行服务器时会报错并被中止。
+
+{| class="wikitable"
+! 操作系统
+! 文件位置
+|-
+! Windows
+| {{filename|bedrock_server.exe}}的相同目录下。
+|-
+! Linux
+| {{filename|bedrock_server}}的相同目录下。
+|}
+
+{{CollapseH
+|截至[[基岩版26.32|1.26.32.2]]，新安装的服务器具有以下默认设置：
+|expanded=1
+}}
+<syntaxhighlight lang="properties">
+server-name=Dedicated Server
+# Used as the server name
+# Allowed values: Any string without semicolon symbol.
+
+gamemode=survival
+# Sets the game mode for new players.
+# Allowed values: "survival", "creative", or "adventure"
+
+force-gamemode=false
+# force-gamemode=false (or force-gamemode is not defined in the server.properties)
+# prevents the server from sending to the client gamemode values other
+# than the gamemode value saved by the server during world creation
+# even if those values are set in server.properties after world creation.
+#
+# force-gamemode=true forces the server to send to the client gamemode values
+# other than the gamemode value saved by the server during world creation
+# if those values are set in server.properties after world creation.
+
+difficulty=easy
+# Sets the difficulty of the world.
+# Allowed values: "peaceful", "easy", "normal", or "hard"
+
+allow-cheats=false
+# If true then cheats like commands can be used.
+# Allowed values: "true" or "false"
+
+max-players=10
+# The maximum number of players that can play on the server.
+# Allowed values: Any positive integer
+
+online-mode=true
+# If true then all connected players must be authenticated to Xbox Live.
+# Clients connecting to remote (non-LAN) servers will always require Xbox Live authentication regardless of this setting.
+# If the server accepts connections from the Internet, then it's highly recommended to enable online-mode.
+# Allowed values: "true" or "false"
+
+allow-list=true
+# If true then all connected players must be listed in the separate allowlist.json file.
+# Allowed values: "true" or "false"
+
+server-port=19132
+# Which IPv4 port the server should listen to.
+# Allowed values: Integers in the range [1, 65535]
+
+server-portv6=19133
+# Which IPv6 port the server should listen to. This property is ignored when `transport=nethernet` and
+# a dual-stack socket will be opened on `server-port` instead
+# Allowed values: Integers in the range [1, 65535]
+
+# server-ip=
+# Leave empty to bind to all interfaces. This property is ignored when `transport=raknet`
+# Allowed values: An IPv4 or IPv6 literal, or empty.
+
+# server-udp-ports=
+# Configures UDP client transport ports. Multiple comma-separated entries are
+# allowed, and the property may also appear on more than one line to accumulate
+# configuration. This property is ignored when `transport=raknet`
+# Allowed values:
+#   * `internal` or `start-end` — the internal port (or range) constrains the
+#     UDP local port allocation window.
+#   * `[ip:]external[-external]:internal[-internal]` — additionally publishes
+#     an externally reachable mapping for clients. Ranges on each
+#     side of `:` must be the same length.
+#
+# Examples:
+#   server-udp-ports=49152-49200 (internal port range only)
+#   server-udp-ports=19132:32000 (external port 19132 maps to internal port 32000)
+#   server-udp-ports=203.0.113.10:19132-19140:32000-32008
+#   server-udp-ports=[2001:db8::1]:19132:32000,32000
+
+transport=raknet
+# Which transport protocol the server should use.
+# Allowed values: "raknet" or "nethernet"
+
+enable-lan-visibility=true
+# Listen and respond to clients that are looking for servers on the LAN.
+# When `transport=raknet`, this will cause the server to bind to the default ports (19132, 19133)
+# even when `server-port` and `server-portv6` have non-default values. Consider turning this
+# off if LAN discovery is not desirable, or when running multiple servers on the same host may
+# lead to port conflicts.
+# Allowed values: "true" or "false"
+
+view-distance=32
+# The maximum allowed view distance in number of chunks.
+# Allowed values: Positive integer equal to 5 or greater.
+
+tick-distance=4
+# The world will be ticked this many chunks away from any player.
+# Allowed values: Integers in the range [4, 12]
+
+player-idle-timeout=30
+# After a player has idled for this many minutes they will be kicked. If set to 0 then players can idle indefinitely.
+# Allowed values: Any non-negative integer.
+
+# allow-player-joining=true
+# When set to 'false' players will not be able to join the server unless explicitly allowed by scripting (via AsyncPlayerJoinBeforeEvent)
+# Allowed values: true, false
+# Default: true
+
+max-threads=8
+# Maximum number of threads the server will try to use. If set to 0 or removed then it will use as many as possible.
+# Allowed values: Any positive integer.
+
+level-name=Bedrock level
+# Allowed values: Any string without semicolon symbol or symbols illegal for file name: /\n\r\t\f`?*\\<>|\":
+
+level-seed=
+# Use to randomize the world
+# Allowed values: Any string
+
+default-player-permission-level=member
+# Permission level for new players joining for the first time.
+# Allowed values: "visitor", "member", "operator"
+
+texturepack-required=false
+# Force clients to use texture packs in the current world
+# Allowed values: "true" or "false"
+
+content-log-file-enabled=false
+# Enables logging content errors to a file
+# Allowed values: "true" or "false"
+
+content-log-console-output-enabled=false
+# Enables logging content errors to stdout
+# Allowed values: "true" or "false"
+
+content-log-level=info
+# Sets the minimum content log level (error being the highest level)
+# Allowed values: "error", "warning", "info", "verbose"
+
+compression-threshold=1
+# Determines the smallest size of raw network payload to compress
+# Allowed values: 0-65535
+
+compression-algorithm=zlib
+# Determines the compression algorithm to use for networking
+# Allowed values: "zlib", "snappy"
+
+server-authoritative-movement-strict=false
+# Set at true to be more strict toward the Player position and be less permissive in accepting the client info.
+# This means clients will receive more position corrections. This will impact Player around moving block if there is high latency
+
+server-authoritative-dismount-strict=false
+# Set at true to be more strict toward the Player dismount position.
+# This means clients will receive a correction on their dismount position in higher latency situation
+
+server-authoritative-entity-interactions-strict=false
+# Set at true to be more strict toward the Entity interactions.
+# This means clients will be more strict towards Entity interactions. This will impact Players interacting with each other in higher latency situations.
+
+player-position-acceptance-threshold=0.5
+# This is the tolerance of discrepancies between the Client and Server Player position. This helps prevent sending corrections too frequently
+# for non-cheating players in cases where the server and client have different perceptions about when a motion started. For example damage knockback or being pushed by pistons.
+# The higher the number, the more tolerant the server will be before asking for a correction. Values beyond 1.0 have increased chances of allowing cheating.
+
+player-movement-action-direction-threshold=0.85
+# The amount that the player's attack direction and look direction can differ.
+# Allowed values: Any value in the range of [0, 1] where 1 means that the
+# direction of the players view and the direction the player is attacking
+# must match exactly and a value of 0 means that the two directions can
+# differ by up to and including 90 degrees.
+
+server-authoritative-block-breaking-pick-range-scalar=1.5
+# If true, the server will compute block mining operations in sync with the client so it can verify that the client should be able to break blocks when it thinks it can.
+
+chat-restriction=None
+# Allowed values: "None", "Dropped", "Disabled"
+# This represents the level of restriction applied to the chat for each player that joins the server.
+# "None" is the default and represents regular free chat.
+# "Dropped" means the chat messages are dropped and never sent to any client. Players receive a message to let them know the feature is disabled.
+# "Disabled" means that unless the player is an operator, the chat UI does not even appear. No information is displayed to the player.
+
+disable-player-interaction=false
+# If true, the server will inform clients that they should ignore other players when interacting with the world. This is not server authoritative.
+
+client-side-chunk-generation-enabled=true
+# If true, the server will inform clients that they have the ability to generate visual level chunks outside of player interaction distances.
+
+block-network-ids-are-hashes=true
+# If true, the server will send hashed block network ID's instead of id's that start from 0 and go up.  These id's are stable and won't change regardless of other block changes.
+
+disable-persona=false
+# Internal Use Only
+
+disable-custom-skins=false
+# If true, disable players customized skins that were customized outside of the Minecraft store assets or in game assets.  This is used to disable possibly offensive custom skins players make.
+
+server-build-radius-ratio=Disabled
+# Allowed values: "Disabled" or any value in range [0.0, 1.0]
+# If "Disabled" the server will dynamically calculate how much of the player's view it will generate, assigning the rest to the client to build.
+# Otherwise from the overridden ratio tell the server how much of the player's view to generate, disregarding client hardware capability.
+# Only valid if client-side-chunk-generation-enabled is enabled
+
+allow-outbound-script-debugging=false
+# Allows script debugger 'connect' command and script-debugger-auto-attach=connect mode.
+
+allow-inbound-script-debugging=false
+# Allows script debugger 'listen' command and script-debugger-auto-attach=listen mode.
+
+#force-inbound-debug-port=19144
+# Locks the inbound (listen) debugger port, if not set then default 19144 will be used. Required when using script-debugger-auto-attach=listen mode.
+
+script-debugger-auto-attach=disabled
+# Attempt to attach script debugger at level load, requires that either inbound port or connect address is set and that inbound or outbound connections are enabled.
+# "disabled" will not auto attach.
+# "connect" server will attempt to connect to debugger in listening mode on the specified port.
+# "listen" server will listen to inbound connect attempts from debugger using connect mode on the specified port.
+
+#script-debugger-auto-attach-connect-address=localhost:19144
+# When auto attach mode is set to 'connect', use this address in the form host:port. Required for script-debugger-auto-attach=connect mode.
+
+#script-debugger-auto-attach-timeout=0
+# Amount of time to wait at world load for debugger to attach.
+
+#script-debugger-passcode=
+# VSCode will prompt user for passcode to connect.
+
+#script-watchdog-enable=true
+# Enables the watchdog (default = true).
+
+#script-watchdog-enable-exception-handling=true
+# Enables watchdog exception handling via the events.beforeWatchdogTerminate event (default = true).
+
+#script-watchdog-enable-shutdown=true
+# Enables server shutdown in the case of an unhandled watchdog exception (default = true).
+
+#script-watchdog-hang-exception=true
+# Throws a critical exception when a hang occurs, interrupting script execution (default = true).
+
+#script-watchdog-hang-threshold=10000
+# Sets the watchdog threshold for single tick hangs (default = 10000 ms).
+
+#script-watchdog-spike-threshold=100
+# Sets the watchdog threshold for single tick spikes.
+# Warning is disabled if property left unset.
+
+#script-watchdog-slow-threshold=10
+# Sets the watchdog threshold for slow scripts over multiple ticks.
+# Warning is disabled if property left unset.
+
+#script-watchdog-memory-warning=100
+# Produces a content log warning when the combined memory usage exceeds the given threshold (in megabytes).
+# Setting this value to 0 disables the warning. (default = 100, max = 2000)
+
+#script-watchdog-memory-limit=250
+# Saves and shuts down the world when the combined script memory usage exceeds the given threshold (in megabytes).
+# Setting this value to 0 disables the limit. (default = 250, max = 2000)
+
+#diagnostics-capture-auto-start=false
+# Starts a diagnostics capture session at level load (default = false)
+
+#diagnostics-capture-max-files=5
+# Maximum number of diagnostics capture files to keep before cycling. (default = 5)
+
+#diagnostics-capture-max-file-size=2097152
+# Max size in bytes of current diagnostics capture file before system will cycle to a new file. (default = 2097152, 2mb)
+
+#disable-client-vibrant-visuals=true
+# If true, the server will tell clients to use the next best available graphics setting instead of Vibrant Visuals.
+
+#sentry-rate-limit-window=60
+# The number of seconds in which to apply limits to scripting errors to Sentry.
+# Default: 60
+# Allowed values: Any positive integer, or 0 to disable limits
+
+#sentry-max-events-per-window=10
+# The maximum number of events allowed in the specified time window.
+# Default: 10
+# Allowed values: Any positive integer, or 0 to disable sending events to Sentry
+
+#enable-profiler=true
+# If true, enable profiler support for performance analysis.
+
+#enable-editor-network-metrics=true
+# If true, enable network metrics collection for displaying live diagnostics in the debugger
+
+#convert-world-to-editor-project=false
+# If true and the server is launched with the Editor=true command line flag, an existing
+# vanilla world will be upgraded to an editor project on load. Has no effect without Editor=true.
+# Default: false
+</syntaxhighlight>
+{{CollapseE}}
+
+=== 服务器属性 ===
+{| class="wikitable stikitable mw-collapsible"
+|-
+! <span style="white-space:nowrap;">属性名称</span>
+! 类型
+! 默认值
+! 描述
+|-
+! <span style="white-space:nowrap;">'''server-name'''</span>
+| 字符串
+| Dedicated Server
+| 作为服务器在游戏内服务器列表中显示的名称。不能包含分号。
+|-
+! <span style="white-space:nowrap;">'''gamemode'''</span>
+| 字符串
+| survival
+| 设定新玩家的游戏模式。
+:'''survival (0)''' - 生存模式
+:'''creative (1)''' - 创造模式
+:'''adventure (2)''' - 冒险模式
+:'''spectator''' - 旁观模式
+|-
+! <span style="white-space:nowrap;">'''force-gamemode'''</span>
+| 布尔值
+| false
+| 如果为true，每当玩家加入服务器都会自动将玩家的游戏模式修改为默认的游戏模式。
+|-
+! <span style="white-space:nowrap;">'''difficulty'''</span>
+| 字符串
+| easy
+| 设置世界的游戏难度。
+:'''peaceful (0)''' - 和平
+:'''easy (1)''' - 简单
+:'''normal (2)''' - 普通
+:'''hard (3)''' - 困难
+|-
+! <span style="white-space:nowrap;">'''allow-cheats'''</span>
+| 布尔值
+| false
+| 用于设置是否允许作弊行为（例如使用命令）。
+|-
+! <span style="white-space:nowrap;">'''max-players'''</span>
+| 整数
+| 10
+| 设置服务器同时能容纳的最大玩家数量。'''较高的值可能会影响服务器性能。'''
+|-
+! <span style="white-space:nowrap;">'''online-mode'''</span>
+| 布尔值
+| true
+| 如果为{{cd|true}}，服务器会校验加入玩家的Xbox Live认证链以取得可信的XUID。关闭此项时{{cd|allow-list}}会被自动禁用——因为无法可靠识别玩家身份；若白名单已开启则服务器会拒绝启动。
+|-
+! <span style="white-space:nowrap;">'''allow-list'''</span>
+| 布尔值
+| true
+| 用于设置是否开启白名单。如果为true，则包括管理员在内的所有玩家都要在{{filename|allowlist.json}}文件中才能加入服务器。
+|-
+! <span style="white-space:nowrap;">'''server-port'''</span>
+| 整数（1-65535）
+| 19132
+| 用于设置服务器监听的IPv4端口号。
+|-
+! <span style="white-space:nowrap;">'''server-portv6'''</span>
+| 整数（1-65535）
+| 19133
+| 用于设置服务器监听的IPv6端口号。
+|-
+! <span style="white-space:nowrap;">'''enable-lan-visibility'''</span>
+| 布尔值
+| true
+| 监听并响应正在搜索局域网服务器的客户端。开启此项时，即使{{cd|server-port}}和{{cd|server-portv6}}被设为非默认端口，服务器仍会绑定默认的局域网端口（19132、19133）。如果不需要局域网发现或同主机运行多个服务器存在端口冲突时可关闭此项。
+|-
+! <span style="white-space:nowrap;">'''view-distance'''</span>
+| 至少为5的整数
+| 32
+| 用于设置玩家可视距离最大值，单位为区块。'''较高的值可能会影响服务器性能。'''
+|-
+! <span style="white-space:nowrap;">'''tick-distance'''</span>
+| 整数（4-12）
+| 4
+| 用于设置区块加载（tick）的距离，单位为区块。'''较高的值可能会影响服务器性能。'''
+|-
+! <span style="white-space:nowrap;">'''player-idle-timeout'''</span>
+| 非负整数
+| 30
+| 设置空闲玩家被踢出的时间，单位为分钟。设置为0时玩家可以无限挂机。
+|-
+! <span style="white-space:nowrap;">'''allow-player-joining'''</span>
+| 布尔值
+| true
+| ''默认被注释。''设置为{{cd|false}}时，玩家无法加入服务器，除非脚本（通过{{cd|AsyncPlayerJoinBeforeEvent}}事件）显式允许其加入。
+|-
+! <span style="white-space:nowrap;">'''max-threads'''</span>
+| 正整数
+| 8
+| 用于设置服务器尝试使用的最大线程数。设置为0或被移除时会使用尽可能多的线程。
+|-
+! <span style="white-space:nowrap;">'''level-name'''</span>
+| 字符串
+| Bedrock level
+| 使用或生成的存档名称，每个存档在{{filepath|/worlds}}中都有单独的文件夹。不能包含分号符号或文件名非法符号（{{samp|<nowiki>/\n\r\t\f`?*\\<>|\":</nowiki>}}）。
+|-
+! <span style="white-space:nowrap;">'''level-seed'''</span>
+| 字符串
+| ''空白''
+| 为生成的世界设置一个[[种子（世界生成）|种子]]。留空将随机选择种子。
+|-
+! <span style="white-space:nowrap;">'''default-player-permission-level'''</span>
+| 字符串
+| member
+| 设置新玩家首次加入时将拥有哪种权限。
+:'''visitor''' - 访客
+:'''member''' - 成员
+:'''operator''' - 管理员
+|-
+! <span style="white-space:nowrap;">'''texturepack-required'''</span>
+| 布尔值
+| false
+| 如果为true，则要求客户端使用与服务端等同的[[附加包|资源包]]。
+|-
+! <span style="white-space:nowrap;">'''content-log-file-enabled'''</span>
+| 布尔值
+| false
+| 设置是否将内容日志记录至文件。
+|-
+! <span style="white-space:nowrap;">'''content-log-console-output-enabled'''</span>
+| 布尔值
+| false
+| 设置是否将内容日志记录至控制台。
+|-
+! <span style="white-space:nowrap;">'''content-log-level'''</span>
+| 字符串
+| info
+| 设置最低记录的内容日志级别（{{cd|error}}为最高级别）。
+:'''verbose'''
+:'''info'''
+:'''warning'''
+:'''error'''
+|-
+! <span style="white-space:nowrap;">'''compression-threshold'''</span>
+| 整数（0-65535）
+| 1
+| 决定开始压缩的最小原始网络负载大小。
+|-
+! <span style="white-space:nowrap;">'''compression-algorithm'''</span>
+| 字符串
+| zlib
+| 设置网络通信使用的压缩算法。
+:'''zlib'''
+:'''snappy'''
+|-
+! <span style="white-space:nowrap;">'''server-authoritative-movement-strict'''</span>
+| 布尔值
+| false
+| 设置为{{cd|true}}时对玩家位置的判定更严格，对客户端发来的信息更不宽容，客户端将收到更多的位置纠正。在高延迟下与可移动方块相关的玩家行为会受影响。
+|-
+! <span style="white-space:nowrap;">'''server-authoritative-dismount-strict'''</span>
+| 布尔值
+| false
+| 设置为{{cd|true}}时对玩家下来（dismount）的位置判定更严格。在高延迟下，客户端的下骑乘位置可能会被纠正。
+|-
+! <span style="white-space:nowrap;">'''server-authoritative-entity-interactions-strict'''</span>
+| 布尔值
+| false
+| 设置为{{cd|true}}时对实体交互的判定更严格。这会在高延迟下影响玩家与玩家间的互动。
+|-
+! <span style="white-space:nowrap;">'''player-position-acceptance-threshold'''</span>
+| 浮点数
+| 0.5
+| 服务器与客户端玩家位置之间允许的差异阈值。值越大，服务器越宽容地接受客户端位置（不易触发位置纠正），但超过{{cd|1.0}}时会增加放过作弊行为的概率。
+|-
+! <span style="white-space:nowrap;">'''player-movement-action-direction-threshold'''</span>
+| 浮点数（0.0-1.0）
+| 0.85
+| 玩家攻击方向与视角朝向的差异容忍度。值为{{cd|1}}时两者必须完全一致；值为{{cd|0}}时两者可以差到90°。
+|-
+! <span style="white-space:nowrap;">'''server-authoritative-block-breaking-pick-range-scalar'''</span>
+| 不小于1.0的浮点数
+| 1.5
+| 服务器在校验玩家挖掘方块时使用的拾取范围放大系数。
+|-
+! <span style="white-space:nowrap;">'''chat-restriction'''</span>
+| 字符串
+| None
+| 设置服务器内的[[聊天]]限制。
+:'''None''' - 玩家可以自由地聊天。
+:'''Dropped''' - 聊天消息会被服务器丢弃，不会发送给其他玩家。同时玩家会收到一条聊天功能已被禁用的消息。
+:'''Disabled''' - 除非玩家是管理员，否则不会出现聊天UI，并且不给玩家显示任何信息。
+|-
+! <span style="white-space:nowrap;">'''disable-player-interaction'''</span>
+| 布尔值
+| false
+| 如果为true，服务器会通知客户端在与世界交互时忽略其他玩家。此项不是服务端权威的。
+|-
+! <span style="white-space:nowrap;">'''client-side-chunk-generation-enabled'''</span>
+| 布尔值
+| true
+| 如果为true，服务器允许客户端在玩家可交互距离之外自行生成可视区块。
+|-
+! <span style="white-space:nowrap;">'''block-network-ids-are-hashes'''</span>
+| 布尔值
+| true
+| 如果为true，服务器发送哈希后的方块网络ID，而不是从0开始递增的ID；这种ID更稳定，不会因其他方块的变化而改变。
+|-
+! <span style="white-space:nowrap;">'''disable-persona'''</span>
+| 布尔值
+| false
+| 仅供内部使用。
+|-
+! <span style="white-space:nowrap;">'''disable-custom-skins'''</span>
+| 布尔值
+| false
+| 是否禁用玩家在[[市场]]或游戏资源外自定义的皮肤。
+|-
+! <span style="white-space:nowrap;">'''server-build-radius-ratio'''</span>
+| Disabled或浮点数（0.0-1.0）
+| Disabled
+| 仅在{{cd|client-side-chunk-generation-enabled}}为{{cd|true}}时生效。设为{{cd|Disabled}}时服务器根据情况动态决定生成多少玩家视野；设为浮点比例时按该比例分配，不再考虑客户端硬件能力。
+|-
+! <span style="white-space:nowrap;">'''allow-outbound-script-debugging'''</span>
+| 布尔值
+| false
+| 是否允许出站脚本调试。支持脚本调试器{{cd|connect}}命令和{{cd|script-debugger-auto-attach{{=}}connect}}模式。
+|-
+! <span style="white-space:nowrap;">'''allow-inbound-script-debugging'''</span>
+| 布尔值
+| false
+| 是否允许入站脚本调试。支持脚本调试器{{cd|listen}}命令和{{cd|script-debugger-auto-attach{{=}}listen}}模式。
+|-
+! <span style="white-space:nowrap;">'''force-inbound-debug-port'''</span>
+| 整数（1-65535）
+| 19144
+| ''默认被注释。''锁定入站（侦听）调试器端口；未设置时使用默认值19144。{{cd|script-debugger-auto-attach{{=}}listen}}模式下需要。
+|-
+! <span style="white-space:nowrap;">'''script-debugger-auto-attach'''</span>
+| 字符串
+| disabled
+| 在世界加载时尝试自动连接脚本调试器，要求{{cd|allow-inbound-script-debugging}}或{{cd|allow-outbound-script-debugging}}为{{cd|true}}且配置了对应端口/地址。
+:'''disabled''' - 不自动连接。
+:'''connect''' - 服务器以连接模式连接到指定端口监听中的调试器。
+:'''listen''' - 服务器在指定端口监听调试器以连接模式发起的连接。
+|-
+! <span style="white-space:nowrap;">'''script-debugger-auto-attach-connect-address'''</span>
+| host:port形式
+| localhost:19144
+| ''默认被注释。''当{{cd|script-debugger-auto-attach}}为{{cd|connect}}时使用此地址。
+|-
+! <span style="white-space:nowrap;">'''script-debugger-auto-attach-timeout'''</span>
+| 整数（0-10）
+| 0
+| ''默认被注释。''世界加载时等待调试器连接的秒数。
+|-
+! <span style="white-space:nowrap;">'''script-debugger-passcode'''</span>
+| 字符串
+| ''空白''
+| ''默认被注释。''VSCode会在连接时询问玩家密码。
+|-
+! <span style="white-space:nowrap;">'''script-watchdog-enable'''</span>
+| 布尔值
+| true
+| ''默认被注释。''是否启用看门狗。
+|-
+! <span style="white-space:nowrap;">'''script-watchdog-enable-exception-handling'''</span>
+| 布尔值
+| true
+| ''默认被注释。''是否通过{{cd|events.beforeWatchdogTerminate}}事件启用看门狗异常处理。
+|-
+! <span style="white-space:nowrap;">'''script-watchdog-enable-shutdown'''</span>
+| 布尔值
+| true
+| ''默认被注释。''发生未处理的看门狗异常时是否关闭服务器。
+|-
+! <span style="white-space:nowrap;">'''script-watchdog-hang-exception'''</span>
+| 布尔值
+| true
+| ''默认被注释。''发生卡顿时是否抛出严重异常以中断脚本执行。
+|-
+! <span style="white-space:nowrap;">'''script-watchdog-hang-threshold'''</span>
+| 整数
+| 10000
+| ''默认被注释。''单tick卡顿的看门狗判定阈值，单位为毫秒。
+|-
+! <span style="white-space:nowrap;">'''script-watchdog-spike-threshold'''</span>
+| 整数
+| 100
+| ''默认被注释。''单tick耗时尖刺的看门狗判定阈值，未设置时禁用此项警告。
+|-
+! <span style="white-space:nowrap;">'''script-watchdog-slow-threshold'''</span>
+| 整数
+| 10
+| ''默认被注释。''跨多tick的慢脚本判定阈值，未设置时禁用此项警告。
+|-
+! <span style="white-space:nowrap;">'''script-watchdog-memory-warning'''</span>
+| 整数（0-2000）
+| 100
+| ''默认被注释。''脚本累计内存超过该MB阈值时输出内容日志警告，设为{{cd|0}}时禁用警告。
+|-
+! <span style="white-space:nowrap;">'''script-watchdog-memory-limit'''</span>
+| 整数（0-2000）
+| 250
+| ''默认被注释。''脚本累计内存超过该MB阈值时保存并关闭世界，设为{{cd|0}}时禁用此限制。
+|-
+! <span style="white-space:nowrap;">'''diagnostics-capture-auto-start'''</span>
+| 布尔值
+| false
+| ''默认被注释。''世界加载时是否自动启动诊断采集会话。
+|-
+! <span style="white-space:nowrap;">'''diagnostics-capture-max-files'''</span>
+| 整数
+| 5
+| ''默认被注释。''诊断采集文件循环前最多保留的文件数量。
+|-
+! <span style="white-space:nowrap;">'''diagnostics-capture-max-file-size'''</span>
+| 整数
+| 2097152
+| ''默认被注释。''当前诊断采集文件循环前的最大字节数（默认2MB）。
+|-
+! <span style="white-space:nowrap;">'''disable-client-vibrant-visuals'''</span>
+| 布尔值
+| false
+| ''默认被注释。''如果为{{cd|true}}，服务器会通知客户端使用次优画面设置而非{{pa|Vibrant Visuals|}}。
+|-
+! <span style="white-space:nowrap;">'''sentry-rate-limit-window'''</span>
+| 非负整数
+| 60
+| ''默认被注释。''限制脚本错误向Sentry提交的时间窗口秒数；设为{{cd|0}}时禁用限制。
+|-
+! <span style="white-space:nowrap;">'''sentry-max-events-per-window'''</span>
+| 非负整数
+| 10
+| ''默认被注释。''时间窗口内允许向Sentry提交的最大事件数；设为{{cd|0}}时禁用Sentry提交。
+|-
+! <span style="white-space:nowrap;">'''enable-profiler'''</span>
+| 布尔值
+| true
+| ''默认被注释。''启用性能分析器以便进行性能分析。
+|-
+! <span style="white-space:nowrap;">'''enable-editor-network-metrics'''</span>
+| 布尔值
+| true
+| ''默认被注释。''启用网络指标收集，以便在调试器中显示实时诊断信息。
+<!-- 以下为默认不存在于server.properties的属性 -->
+|-
+! <span style="white-space:nowrap;">'''level-type'''</span>
+| 字符串
+| DEFAULT
+| 设置生成的世界的类型。
+:'''FLAT''' - 平坦
+:'''LEGACY''' - [[旧世界]]类型
+:'''DEFAULT''' - 默认
+|-
+! <span style="white-space:nowrap;">'''server-authoritative-block-breaking'''</span>
+| 布尔值
+| true
+| 自[[1.21.0]]起从默认模板中移除（默认行为改为启用）。如果为{{cd|true}}，服务器与客户端同步计算挖掘方块的进度，以校验客户端是否真的可以破坏对应方块。
+|-
+! <span style="white-space:nowrap;">'''emit-server-telemetry'''</span>
+| 布尔值
+| false
+| 是否发出遥测数据。启用后，有助于游戏开发者改进游戏。
+|-
+! <span style="white-space:nowrap;">'''isHardcore'''</span>
+| 布尔值
+| false
+| 设置生成的世界是否启用[[极限模式]]。
+|-
+! <span style="white-space:nowrap;">'''language'''</span>
+| 字符串
+| en_US
+| 设置服务器使用的[[语言]]。服务器输出的文本编码为UTF-8，这可能导致在某些控制台上显示乱码。
+|-
+! <span style="white-space:nowrap;">'''op-permission-level'''</span>
+| 整数（0-4）
+| 1
+| 设置“玩家权限”屏幕中的“{{tr|操作员|操作者}}命令”开关已打开的玩家所拥有的[[权限等级]]。
+|}
+
+== Java版Classic ==
+以下是在[[Java版Classic]]中的服务器属性。
+
+{| class="wikitable stikitable mw-collapsible"
+|-
+! <span style="white-space:nowrap;">属性</span>
+! 类型
+! 默认值
+! 描述
+|-
+! <span style="white-space:nowrap;">verify-names</span><!-- This is a guess -->
+| 布尔值
+| true
+| 验证玩家的IP是否与其连接Minecraft.net的IP相同。如果启用，在一台电脑上同时运行服务端和客户端的人会出现问题，服务器看见的是本地IP（127.0.0.1），而Minecraft.net看到的是外部IP。除非上述情况发生，建议启用该属性。
+
+:'''true''' - 启用。服务器会和Minecraft.net检查所有的名字。
+:'''false''' - 禁用。服务器会确保IP吻合。
+
+|-
+! <span style="white-space:nowrap;">admin-slot</span>
+| 布尔值
+| false
+| 允许管理员在服务器人满时也能加入游戏。
+
+|-
+! <span style="white-space:nowrap;">public</span>
+| 布尔值
+| 
+| 服务器是否显示在服务器列表里。
+:'''true''' - 服务器会显示在服务器列表里，任何人都能看到。
+:'''false''' - 只有掌握服务器 URL（可以在externalurl.txt中找到）的人和掌握IP和端口的人才能加入。
+
+|-
+! <span style="white-space:nowrap;">server-name</span>
+| 字符串
+| 
+| 服务器名称，会显示在服务器名单上及有人正加入服务器时。
+* 单行文本。部分字符，例如 '（单引号）可能需要在前面加反斜杠号\才能正确应用。
+
+|-
+! <span style="white-space:nowrap;">max-players</span>
+| 整数（0-256）
+| 
+| 服务器同时在线的最大玩家人数。注意，服务器上玩家越多，服务器使用的资源越多。同样注意，服务器管理员的连接不算在内。
+
+|-
+! <span style="white-space:nowrap;">max-connections</span>
+| 整数（1-3）
+| 
+| 同一个IP允许的最大连接数。
+'''注:''' ''如果你尝试设定的值大于3，它会被改回3。''
+
+|-
+! <span style="white-space:nowrap;">motd</span>
+| 字符串
+| 
+| MOTD 是Message of the day（每日一句）的简写，尽管你不用每天更改。MOTD是玩家加入服务器时显示的信息。
+|-
+! <span style="white-space:nowrap;">grow-trees</span>
+| 布尔值
+| 
+| 是否允许树苗长成为树木。
+:'''true''' - 服务器会允许树苗长成为树木。
+:'''false''' - 服务器不会允许树苗长成为树木。
+|}
+
+== 历史 ==
+{{stub|一些设置并没有其首次加入时间|section=1}}
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||服务器1.2|link=Java版Classic服务器1.2|现今已存档的最早版本。
+|可用的选项包括：{{cd|port}}、{{cd|server-name}}、{{cd|max-players}}、{{cd|motd}}和{{cd|public}}。}}
+|{{HistoryLine||服务器1.3|link=Java版Classic服务器1.3|加入了{{cd|verify-names}}，验证玩家的IP是否与其连接Minecraft.net的IP相同。}}
+|{{HistoryLine||服务器1.5|link=Java版Classic服务器1.5|加入了<code>max-connections</code>，限制一个IP地址的最大连接数。}}
+|{{HistoryLine||服务器1.9.1|link=Java版Classic服务器1.9.1|加入了<code>grow-trees</code>，除非将其设置为true，否则树苗将不会长成树木。}}
+|{{HistoryLine||服务器1.10|link=Java版Classic服务器1.10|加入了<code>verify-names</code>禁用时的警告。
+|加入了<code>admin-slot</code>，关闭它将使OP无法在服务器人满时加入游戏。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||服务器0.1.0|link=Java版Alpha服务器0.1.0|移除了全部选项，加入了<code>level-name</code>、<code>server-ip</code>和<code>server-port</code>选项。}}
+|{{HistoryLine||服务器0.1.1|link=Java版Alpha服务器0.1.1|加入了<code>online-mode</code>选项，如果设置为true将要求玩家使用在线登录。}}
+|{{HistoryLine||服务器0.2.0|link=Java版Alpha服务器0.2.0|加入了<code>monsters</code>选项，如果设置为true将允许生成怪物。}}
+|{{HistoryLine||服务器0.2.2|link=Java版Alpha服务器0.2.2|加入了<code>hellworld</code>选项，默认为<code>false</code>，如果设置为true将启用地狱。}}
+|{{HistoryLine||服务器0.2.4|link=Java版Alpha服务器0.2.4|加入了<code>no-animals</code>选项，如果设置为true则不会生成动物。}}
+|{{HistoryLine||服务器0.2.5|link=Java版Alpha服务器0.2.5|加入了<code>pvp</code>选项，禁用或者启用玩家对战（PVP）。
+|将<code>monsters</code>重命名为<code>spawn-monsters</code>并将默认设置为true。
+|将<code>no-animals</code>重命名为<code>spawn-animals</code>。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.3|加入了<code>white-list</code>。}}
+|{{HistoryLine||1.5|加入了<code>allow-flight</code>。}}
+|{{HistoryLine||1.6|将<code>hellworld</code>重命名为<code>allow-nether</code>。
+|加入了<code>view-distance</code>，设置了大视距。}}
+|{{HistoryLine||1.8|加入了<code>difficulty</code>。
+|加入了<code>gamemode</code>。
+|加入了<code>motd</code>。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre4|加入了<code>debug</code>、<code>enable-query</code>、<code>enable-rcon</code>、<code>query.port</code>、<code>rcon.password</code>和<code>rcon.port</code>。}}
+|{{HistoryLine||1.1|dev=11w49a|加入了<code>spawn-npcs</code>。}}
+|{{HistoryLine|||dev=12w01a|加入了<code>level-type</code>。}}
+|{{HistoryLine|||dev=正式版|加入了<code>generate-structures</code>。}}
+|{{HistoryLine||1.2.1|dev=12w07a|加入了<code>max-build-height</code>。}}
+|{{HistoryLine||1.3.1|dev=12w30a|加入了<code>snooper-enabled</code>。}}
+|{{HistoryLine|||dev=1.3|加入了<code>hardcore</code>{{Info needed|确切版本}}。
+|加入了<code>texture-pack</code>{{Info needed|确切版本}}。}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了<code>enable-command-block</code>，但不会在默认配置中生成。}}
+|{{HistoryLine|||dev=12w39a|加入了<code>generator-settings</code>。}}
+|{{HistoryLine|||dev=12w40a|加入了<code>spawn-protection</code>。}}
+|{{HistoryLine||1.5|dev=13w05a|将<code>spawn-protection</code>设置为0会把出生点保护关闭了，而不是像以前一样保护1&times;1的范围（{{bug|MC-666}}）。}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了<code>force-gamemode</code>。}}
+|{{HistoryLine|||dev=13w18a|加入了<code>op-permission-level</code>。}}
+|{{HistoryLine||1.7.2|dev=13w36a|将<code>resource-pack</code>重命名为<code>texture-pack</code>。}}
+|{{HistoryLine|||dev=13w37b|加入了<code>player-idle-timeout</code>。}}
+|{{HistoryLine|||dev=正式版|加入了<code>announce-player-achievements</code>。}}
+|{{HistoryLine||1.7.5|加入了<code>broadcast-rcon-to-ops</code>。}}
+|{{HistoryLine||1.8|dev=14w18a|加入了<code>max-world-size</code>。}}
+|{{HistoryLine|||dev=14w28a|加入了自定义网络压缩选项<code>network-compression-threshold</code>。}}
+|{{HistoryLine|||dev=14w31a|加入了<code>max-tick-time</code>。
+|加入了<code>resource-pack-hash</code>。}}
+|{{HistoryLine||1.8.1|dev=pre1|加入了<code>broadcast-rcon-to-ops</code>。
+|加入了<code>use-native-transport</code>。}}
+|{{HistoryLine||1.8.4|加入了<code>broadcast-console-to-ops</code>。}}
+|{{HistoryLine||1.11|dev=16w38a|加入了<code>prevent-proxy-connections</code>。}}
+|{{HistoryLine||1.12|dev=17w18a|游戏规则<code>announceAdvancements</code>取代选项<code>announce-player-achievements</code>，启动游戏时会将此选项移除并更改游戏规则。}}
+|{{HistoryLine||1.13|dev=18w19a|加入了<code>enforce-whitelist</code>。}} 
+|{{HistoryLine||1.14|dev=18w48a|<code>difficulty</code>和<code>gamemode</code>设置使用字符串，整数仍旧可以使用。}} 
+|{{HistoryLine||1.14.4|dev=pre4|加入了<code>function-permission-level</code>选项，可以控制[[Java版函数|函数]]的权限等级。}}
+|{{HistoryLine||1.15|dev=pre5|将服务器资源包的大小上限提升到100MB。}}
+|{{HistoryLine||1.16|dev=20w14a|加入了<code>sync-chunk-writes</code>选项，是否禁用新的同步区块写入。}}
+|{{HistoryLine|||dev=20w16a|加入了<code>enable-jmx-monitoring</code>选项，启用将使MBean使用以毫秒为单位时间计时{{Info needed}}。}}
+|{{HistoryLine|||dev=20w18a|加入了<code>enable-status</code>。
+|加入了<code>entity-broadcast-range-percentage</code>。}}
+|{{HistoryLine|||dev=20w20a|移除了<code>generate-structures</code>。
+|移除了<code>generator-settings</code>。
+|移除了<code>level-seed</code>。
+|移除了<code>level-type</code>。}}
+|{{HistoryLine||1.16.2|dev=20w28a|加入了<code>rate-limit</code>，设置封包的速度限制。}}
+|{{HistoryLine||1.16.4|dev=pre1|加入了<code>text-filtering-config</code>。}}
+|{{HistoryLine||1.17|dev=20w45a|加入了<code>require-resource-pack</code>，用于强制使用户接受服务器资源包。}}
+|{{HistoryLine|||dev=20w49a|移除了<code>max-build-height</code>。}}
+|{{HistoryLine|||dev=21w15a|加入了<code>resource-pack-prompt</code>，用于在资源包提示界面中显示自定义信息。}}
+|{{HistoryLine||1.18|dev=21w38a|加入了<code>simulation-distance</code>，用于控制实体更新的距离范围。}}
+|{{HistoryLine|||dev=21w43a|移除了<code>snooper-enabled</code>。}}
+|{{HistoryLine|||dev=21w44a|加入了<code>hide-online-players</code>，用于控制服务端是否在响应客户端状态请求时发送在线玩家列表。}}
+|{{HistoryLine|||dev=pre1|重新加入了<code>generate-structures</code>。
+|重新加入了<code>generator-settings</code>。
+|重新加入了<code>level-seed</code>。
+|重新加入了<code>level-type</code>。}}
+|{{HistoryLine|||dev=rc1|将服务器资源包的大小上限提升到250MB。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了<code>max-chained-neighbor-updates</code>，用于限制连锁NC更新的数量，超过此数量的连锁NC更新会被跳过。
+|<code>level-type</code>的接受值改为世界预设ID。}}
+|{{HistoryLine|||dev=22w17a|加入了<code>enforce-secure-profile</code>，用于使服务器要求玩家必须具有Mojang签名的公钥才能进入服务器。}}
+|{{HistoryLine|||dev=22w19a|加入了<code>previews-chat</code>，用于启用聊天预览功能。
+|加入了临时的<code>test-rainbow-chat</code>，用于在聊天预览中以彩虹色显示消息文本。}}
+|{{HistoryLine|||dev=pre1|移除了<code>test-rainbow-chat</code>。}}
+|{{HistoryLine||1.19.1|dev=pre2|将<code>enforce-secure-profile</code>的默认值改为true。}}
+|{{HistoryLine||1.19.3|dev=22w42a|移除了聊天预览及与其相关的<code>previews-chat</code>。
+|加入了<code>initial-enabled-packs</code>和<code>initial-disabled-packs</code>，用于指定要在创建世界过程中被选中并加载的数据包。}}
+|{{HistoryLine||1.20|dev=pre1|文件现在默认以UTF-8编码读取，但仍保留先前编码（ISO 8859-1/Latin 1）的后向兼容性。
+|文件现在会以UTF-8编码写入。}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了<code>log-ips</code>，用于在玩家加入游戏时在日志中记录其IP地址。}}
+|{{HistoryLine||1.20.3|dev=pre1|加入了<code>resource-pack-id</code>，用于标识<code>resource-pack</code>指定的资源包。}}
+|{{HistoryLine||1.20.5|dev=24w03a|加入了<code>accepts-transfers</code>，用于允许服务端接受以Transfer封包作为登录请求的传入连接。}}
+|{{HistoryLine|||dev=24w04a|加入了<code>region-file-compression</code>，用于设置服务端区域文件压缩算法。}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了<code>pause-when-empty-seconds</code>，用于控制服务器在无玩家上线时多长时间后自动停止计算。
+|加入了<code>text-filtering-version</code>，用于标识文本过滤格式版本。
+|移除了<code>spawn-animals</code>和<code>spawn-npcs</code>。}}
+|{{HistoryLine||1.21.9|dev=25w34a|加入了{{cd|d=pretty|enable-code-of-conduct}}。}}
+|{{HistoryLine|||dev=25w35a|加入了{{cd|d=pretty|management-server-enabled|management-server-port|management-server-host|status-heartbeat-interval}}。
+|移除了{{cd|d=pretty|allow-nether|spawn-monsters|enable-command-block|pvp}}。}}
+|{{HistoryLine|||dev=25w37a|加入了{{cd|d=pretty|management-server-secret|management-server-tls-enabled|management-server-tls-keystore|management-server-tls-keystore-password}}。}}
+|{{HistoryLine||1.21.11|dev=25w42a|加入了{{cd|d=pretty|management-server-allowed-origins}}。}}
+|{{HistoryLine||26.2|dev=pre-1|加入了{{cd|d=pretty|chat-spam-threshold-seconds|command-spam-threshold-seconds}}。}}
+|{{HistoryLine||26.3|dev=snapshot-2|将{{code|white-list}}的默认值由{{cd|false}}改为{{cd|true}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.6.1|[[基岩版专用服务器]]的首次发布。
+|可用的选项包括：{{code|server-name}}、{{code|gamemode}}、{{code|difficulty}}、{{code|allow-cheats}}、{{code|max-players}}、{{code|online-mode}}、{{code|white-list}}、{{code|server-port}}、{{code|server-portv6}}、{{code|view-distance}}、{{code|tick-distance}}、{{code|player-idle-timeout}}、{{code|max-threads}}、{{code|level-name}}、{{code|level-seed}}、{{code|default-player-permission}}和{{code|texturepack-required}}。}}
+|{{HistoryLine||1.7.0|将{{code|default-player-permission}}重命名为{{code|default-player-permission-level}}。}}
+|{{HistoryLine||1.12.0|加入了{{code|content-log-file-enabled}}，用于启用错误日志。}}
+|{{HistoryLine||1.13.0|加入了{{code|compression-threshold}}、{{code|server-authoritative-movement}}、{{code|player-movement-score-threshold}}、{{code|player-movement-distance-threshold}}、{{code|player-movement-duration-threshold-in-ms}}和{{code|correct-player-movement}}。}}
+|{{HistoryLine||1.16.100|将{{code|server-authoritative-movement}}的默认值由<code>true</code>改为<code>server-auth</code>（原先的<code>false</code>现在改为<code>client-auth</code>）。}}
+|{{HistoryLine||1.16.210|加入了新的选项{{code|force-gamemode}}和{{code|server-authoritative-block-breaking}}。
+|{{code|server-authoritative-movement}}新增可选值<code>server-auth-with-rewind</code>。}}
+|{{HistoryLine||1.18.10|将{{code|white-list}}重命名为{{code|allow-list}}。}}
+|{{HistoryLine||1.19.20|加入了{{code|disable-player-interaction}}和{{code|chat-restriction}}。}}
+|{{HistoryLine||1.19.41|加入了{{code|client-side-chunk-generation-enabled}}。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.21|加入了{{code|enable-lan-visibility}}。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.21|加入了{{code|server-authoritative-block-breaking-pick-range-scalar}}。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|从默认配置文件中移除{{code|server-authoritative-block-breaking}}（该选项默认改为启用，仍可通过手动添加该字段覆盖）。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.23|加入了{{code|server-authoritative-movement-strict}}、{{code|server-authoritative-dismount-strict}}、{{code|server-authoritative-entity-interactions-strict}}三个布尔开关，取代旧的{{code|server-authoritative-movement}}。}}
+|{{HistoryLine|||dev=1.21.70.25|移除了{{code|server-authoritative-movement}}。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.26|加入了{{code|disable-client-vibrant-visuals}}，默认被注释。}}
+|{{HistoryLine||1.21.120|dev=1.21.120.23|加入了{{code|allow-player-joining}}，默认被注释。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.20|加入了{{code|sentry-rate-limit-window}}和{{code|sentry-max-events-per-window}}，默认均被注释，用于限制脚本错误向Sentry的提交速率。}}
+|{{HistoryLine||26.0|加入了{{code|enable-profiler}}，默认被注释。}}
+|{{HistoryLine||26.10|dev=26.10.20|加入了{{code|enable-editor-network-metrics}}，默认被注释。}}
+|{{HistoryLine||26.30|dev=26.30.27|将{{code|allow-list}}的默认值由{{cd|false}}改为{{cd|true}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{Navbox Bedrock Edition}}
+{{Navbox Java files}}
+
+[[Category:服务器]]
+[[Category:游戏文件]]
+
+[[de:Server.properties]]
+[[en:Server.properties]]
+[[es:Server.properties]]
+[[fr:Server.properties]]
+[[hu:Server.properties]]
+[[it:Server.properties]]
+[[ja:Server.properties]]
+[[ko:Server.properties]]
+[[nl:Server.properties]]
+[[pl:Server.properties]]
+[[pt:Server.properties]]

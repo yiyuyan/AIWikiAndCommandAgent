@@ -1,0 +1,81 @@
+# 页面: 属性/minecraft：player.exhaustion
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/minecraft%EF%BC%9Aplayer.exhaustion
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|be}}
+{{Infobox attribute
+|bedrock=1
+|attribute-id-raw=<samp>minecraft:player.exhaustion</samp>
+|redefinition-mode=保持当前值
+|syncable=是
+|legacy-name=<samp>player.exhaustion</samp>}}
+
+'''<samp>minecraft:player.exhaustion</samp>'''是控制玩家[[消耗度]]的[[属性]]。
+
+== 行为 ==
+{{main|饥饿#机制}}
+此属性的当前值代表玩家当前的消耗度。玩家进行特定行为、自然恢复生命值或受到[[饥饿（状态效果）|饥饿]]状态效果影响时，消耗度会增加；当消耗度到达4时，会扣除饱和度或饥饿值并重置。
+
+只有玩家可以实例化该属性。
+
+== 使用场景 ==
+{| class="wikitable sortable" style="width:100%"
+! 来源
+! 默认最小值
+! 默认最大值
+! 默认值
+! 备注
+|-
+| {{EntityLink|Player}}
+| 0
+| 4
+| 0
+| 玩家行为包定义。
+|-
+| [[玩家]]饥饿系统
+| 0
+| 4
+| 0
+| 达到最大值时会扣除饱和度或饥饿值。
+|}
+
+== 已知修饰符 ==
+当前原版未使用此属性的已知修饰符。
+
+== 已知增益 ==
+{| class="wikitable collapsible" style="width:100%"
+! 名称
+! 类型
+! 运算数
+! 值
+! 基础持续时间（游戏刻）
+! 数据持久化
+! 来源
+|-
+| <samp>FoodPosion</samp>
+| 饥饿
+| 当前值
+| 15.0
+| 600
+| 否
+| [[饥饿（状态效果）|饥饿]]状态效果
+|-
+| <samp>PufferPoison</samp>
+| 饥饿
+| 当前值
+| 22.5
+| 300
+| 否
+| 食用[[河豚（物品）|河豚]]造成的饥饿状态效果
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||?|加入了<samp>minecraft:player.exhaustion</samp>属性。}}
+}}
+
+== 导航 ==
+{{Navbox attributes|bedrock}}

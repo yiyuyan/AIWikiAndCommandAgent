@@ -1,0 +1,426 @@
+# 页面: 烧炼
+# 来源: https://zh.minecraft.wiki/w/%E7%83%A7%E7%82%BC
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用DynamicPageList4的页面, 基岩版即将到来/26.40, 基岩版独有信息, 实验性内容/2026 年第 3 次更新, 有未知版本的History模板的页面/携带版Alpha, 游戏内容
+# 抓取时间: 2026-07-14 17:31:28
+# 原始 Wikitext 内容:
+
+{{FakeImage|{{Furnace}}|熔炉的界面}}
+{{relevant tutorial|自动化烧炼|选择燃料}}
+'''烧炼（Smelting）'''（依具体语境可能又被称为'''烧制'''、'''{{tr|熔炼|燒煉}}'''、'''冶炼'''或'''烹饪'''）是转化物品的一种方式，只要给予适合的材料，就会输出对应的成品。烧炼可使用[[熔炉]]、[[高炉]]或[[烟熏炉]]进行，部分[[食物]]也能使用[[营火]]烹饪。
+
+== 用途和机制 ==
+=== 熔炉 ===
+当[[熔炉]]的燃料槽内有燃料，烧炼槽中有烧炼物，且成品槽没有与烧炼所得成品不同的物品时，烧炼就会开始，即使玩家关闭界面，烧炼也会继续。开始烧炼时会消耗一份燃料，并填满界面上的火焰图标。即使烧炼槽中没有烧炼物，火焰也会随时间逐渐减弱。火焰逐渐减弱直至消失后，若烧炼槽仍有烧炼物，熔炉会使用下一份燃料继续烧炼。
+
+熔炉烧炼一个物品需要{{convert|200}}，界面中的箭头会显示烧炼的进度。若在火焰消失之前箭头已经填满，则烧炼物转换为成品并进入成品槽；若箭头填满前火焰已经消失且没有燃料补充，則箭头的进度会以两倍速度倒退。
+
+若玩家离烧炼的熔炉太远而导致[[区块]]卸载，熔炉会暂停烧炼直到玩家重新加载熔炉所在区块。玩家进入其他维度或退出游戏后熔炉也会暂停烧炼。玩家睡觉不影响烧炼速度，因为烧炼进度只因玩家实际在游戏内时长而定，而睡觉时游戏会直接将游戏时间设定为早上，烧炼进度不会因跳过晚上而瞬间增加。
+
+玩家取出成品会获得对应数量的[[经验值]]。即使熔炉烧炼成品被[[漏斗]]取出，玩家从熔炉中取出任意成品或破坏熔炉后同样会获得其内积累的经验值。<ref>{{bug|MC-131258}}</ref>经验值的小数部分代表额外获得{{xp|1}}的概率。
+
+=== 高炉和烟熏炉 ===
+物品也可以用[[高炉]]和[[烟熏炉]]烧炼，机制和使用方法与普通的熔炉相同，但烧炼效率是普通熔炉的2倍，即烧一个物品只需要{{convert|100}}。
+
+但高炉只能冶炼[[#矿物|矿物]]，熔炼[[#工具、武器和盔甲|工具、武器和盔甲]]；烟熏炉只能烹饪[[#食物|食物]]。
+
+=== 营火 ===
+{{see also|营火#烹饪}}
+食物也能用[[营火]]或[[灵魂营火]]烹饪，且无需燃料。玩家需要手持[[#配方|配方]]内列出的食物对着一个点燃的营火或灵魂营火并{{ctrl|使用}}它。只要营火仍在燃烧就能无限制地烧制食物。营火烹饪一个食物需要{{convert|600}}，是熔炉烧炼时间的3倍，但至多可同时烹饪4个食物。烹饪完成后，成品会弹出并变成掉落物。
+
+== 配方 ==
+下面列出目前所有的烧炼配方。
+
+=== 食物 ===
+可在[[熔炉]]、[[烟熏炉]]或[[营火]]烹饪部分食物。
+
+{| class="sortable wikitable"
+|-align="center"
+! width="150" | 烧炼物
+! width="75" | 成品
+! 经验
+! class="unsortable" | 简介
+|-
+|align="center"| {{Inventory slot|Raw Porkchop}}<br>[[生猪排]]
+!<span id="熟猪排">{{Inventory slot|Cooked Porkchop}}<br>[[熟猪排]]</span>
+|align="center"| 0.35
+| 食用熟猪排恢复{{hunger|8}}，而食用生猪排只恢复{{hunger|3}}。
+|-
+|align="center"| {{Inventory slot|Raw Beef}}<br>[[生牛肉]]
+!<span id="牛排">{{Inventory slot|Steak}}<br>[[牛排]]</span>
+|align="center"| 0.35
+| 食用牛排恢复{{hunger|8}}，而食用生牛肉只恢复{{hunger|3}}。
+|-
+|align="center"| {{Inventory slot|Raw Chicken}}<br>[[生鸡肉]]
+!<span id="熟鸡肉">{{Inventory slot|Cooked Chicken}}<br>[[熟鸡肉]]</span>
+|align="center"| 0.35
+| 食用熟鸡肉恢复{{hunger|6}}，而食用生鸡肉只恢复{{hunger|2}}并有30%概率获得30秒的[[饥饿（状态效果）|饥饿]]效果。
+|-
+|align="center"| {{Inventory slot|Raw Cod}}<br>[[生鳕鱼]]
+!<span id="熟鳕鱼">{{Inventory slot|Cooked Cod}}<br>[[熟鳕鱼]]</span>
+|align="center"| 0.35
+| 食用熟鳕鱼恢复{{hunger|5}}，而食用生鳕鱼只恢复{{hunger|2}}。
+|-
+|align="center"| {{Inventory slot|Raw Salmon}}<br>[[生鲑鱼]]
+!<span id="熟鲑鱼">{{Inventory slot|Cooked Salmon}}<br>[[熟鲑鱼]]</span>
+|align="center"| 0.35
+| 食用熟鲑鱼恢复{{hunger|6}}，而食用生鲑鱼只恢复{{hunger|2}}。
+|-
+|align="center"| {{Inventory slot|Potato}}<br>[[马铃薯]]
+!<span id="烤马铃薯">{{Inventory slot|Baked Potato}}<br>[[烤马铃薯]]</span>
+|align="center"| 0.35
+| 食用烤马铃薯恢复{{hunger|5}}，而食用马铃薯只恢复{{hunger|1}}。
+|-
+|align="center"| {{Inventory slot|Raw Mutton}}<br>[[生羊肉]]
+!<span id="熟羊肉">{{Inventory slot|Cooked Mutton}}<br>[[熟羊肉]]</span>
+|align="center"| 0.35
+| 食用熟羊肉恢复{{hunger|6}}，而食用生羊肉只恢复{{hunger|2}}。
+|-
+|align="center"| {{Inventory slot|Raw Rabbit}}<br>[[生兔肉]]
+!<span id="熟兔肉">{{Inventory slot|Cooked Rabbit}}<br>[[熟兔肉]]</span>
+|align="center"| 0.35
+| 食用熟兔肉恢复{{hunger|5}}，而食用生兔肉只恢复{{hunger|3}}。
+|-
+|align="center"| {{Inventory slot|Kelp}}<br>[[海带]]
+!<span id="干海带">{{Inventory slot|Dried Kelp}}<br>[[干海带]]</span>
+|align="center"| 0.1
+| 食用干海带恢复{{hunger|1}}，海带不可食用。干海带用于合成[[干海带块]]。
+|}
+
+=== 矿物 ===
+可在[[熔炉]]或[[高炉]]冶炼矿物。
+
+{| class="sortable wikitable"
+|-align="center"
+! width="150" | 烧炼物
+! width="75" | 成品
+! 经验
+! class="unsortable" | 简介
+|-
+|align="center"| {{Inventory slot|Iron Ore}}{{Inventory slot|Deepslate Iron Ore}}{{Inventory slot|Raw Iron}}<br>[[铁矿石]]、[[深层铁矿石]]或[[粗铁]]
+!<span id="铁锭">{{Inventory slot|Iron Ingot}}<br>[[铁锭]]</span>
+|align="center"| 0.7
+| 用于合成多种物品。<br>当正常挖掘铁矿石或深层铁矿石时会掉落1个粗铁。<br>详见[[铁锭]]。
+|-
+|align="center"| {{Inventory slot|Copper Ore}}{{Inventory slot|Deepslate Copper Ore}}{{Inventory slot|Raw Copper}}<br>[[铜矿石]]、[[深层铜矿石]]或[[粗铜]]
+!<span id="铜锭">{{Inventory slot|Copper Ingot}}<br>[[铜锭]]</span>
+|align="center"| 0.7
+| 用于合成多种物品。<br>当正常挖掘铜矿石或深层铜矿石时会掉落2-5个粗铜。<br>详见[[铜锭]]。
+|-
+|align="center"| {{Inventory slot|Gold Ore}}{{Inventory slot|Deepslate Gold Ore}}{{Inventory slot|Raw Gold}}<br>[[金矿石]]、[[深层金矿石]]或[[粗金]]
+!<span id="金锭">{{Inventory slot|Gold Ingot}}<br>[[金锭]]</span>
+|align="center"| 1.0
+| 用于合成多种物品。<br>当正常挖掘金矿石或深层金矿石时会掉落1个粗金。<br>详见[[金锭]]。
+|-
+|align="center"| {{Inventory slot|Nether Gold Ore}}<br>[[下界金矿石]]
+!<span id="下界金矿石">{{Inventory slot|Gold Ingot}}<br>[[金锭]]</span>
+|align="center"| 1.0
+| 用于合成多种物品。<br>当正常挖掘时会掉落2-6个[[金粒]]和{{xp|0|1}}。
+|-
+|align="center"| {{Slot|Ancient Debris}}<br>[[远古残骸]]
+!<span id="下界合金碎片">{{Slot|Netherite Scrap}}<br>[[下界合金碎片]]</span>
+|align="center"| 2.0
+| 用于合成锻造下界合金装备的原料[[下界合金锭]]。<br>当正常挖掘时会掉落自身。
+|-
+|align="center"| {{Inventory slot|Diamond Ore}}{{Inventory slot|Deepslate Diamond Ore}}<br>[[钻石矿石]]或[[深层钻石矿石]]
+!<span id="钻石">{{Inventory slot|Diamond}}<br>[[钻石]]</span>
+|align="center"| 1.0
+| 用于合成多种物品。<br>当正常挖掘时会掉落1个钻石和{{xp|3|7}}。
+|-
+|align="center"| {{Inventory slot|Lapis Lazuli Ore}}{{Inventory slot|Deepslate Lapis Lazuli Ore}}<br>[[青金石矿石]]或[[深层青金石矿石]]
+!<span id="青金石">{{Inventory slot|Lapis Lazuli}}<br>[[青金石]]</span>
+|align="center"| 0.2
+| 用于[[附魔]]、合成[[青金石块]]和[[蓝色染料]]。<br>当正常挖掘时会掉落4-9个青金石和{{xp|2|5}}。
+|-
+|align="center"| {{Inventory slot|Redstone Ore}}{{Inventory slot|Deepslate Redstone Ore}}<br>[[红石矿石]]或[[深层红石矿石]]
+!<span id="红石粉">{{Inventory slot|Redstone Dust}}<br>[[红石粉]]</span>
+|align="center"| 0.7
+| 用于[[合成]]、[[酿造]]和构建[[红石电路]]。<br>当正常挖掘时会掉落4-5个红石粉和{{xp|1|5}}。
+|-
+|align="center"| {{Inventory slot|Coal Ore}}{{Inventory slot|Deepslate Coal Ore}}<br>[[煤矿石]]或[[深层煤矿石]]
+!<span id="煤炭">{{Inventory slot|Coal}}<br>[[煤炭]]</span>
+|align="center"| 0.1
+| 用于作为燃料和合成[[火把]]供照明使用。<br>当正常挖掘时会掉落1个煤炭和{{xp|0|2}}。
+|-
+|align="center"| {{Inventory slot|Emerald Ore}}{{Inventory slot|Deepslate Emerald Ore}}<br>[[绿宝石矿石]]或[[深层绿宝石矿石]]
+!<span id="绿宝石">{{Inventory slot|Emerald}}<br>[[绿宝石]]</span>
+|align="center"| 1.0
+| 用于与[[村民]]进行[[交易]]和合成[[绿宝石块]]。<br>当正常挖掘时会掉落1个绿宝石和{{xp|3|7}}。
+|-
+|align="center"| {{Inventory slot|Nether Quartz Ore}}<br>[[下界石英矿石]]
+!<span id="下界石英">{{Inventory slot|Nether Quartz}}<br>[[下界石英]]</span>
+|align="center"| 0.2
+| 用于合成[[侦测器]]等红石类方块或建筑方块。<br>当正常挖掘时会掉落1个下界石英和{{xp|2|5}}。
+|}
+
+=== 工具、武器和盔甲 ===
+可在[[熔炉]]或[[高炉]]熔炼工具、武器和盔甲。
+
+{| class="sortable wikitable"
+|-align="center"
+! width="200" | 烧炼物
+! width="80" | 成品
+! 经验
+! class="unsortable" | 简介
+|-
+|align="center"| {{Slot|Iron Sword}}{{Slot|Iron Spear}}{{Slot|Iron Pickaxe}}{{Slot|Iron Axe}}{{Slot|Iron Shovel}}{{Slot|Iron Hoe}}{{Slot|Chainmail Helmet}}{{Slot|Chainmail Chestplate}}{{Slot|Chainmail Leggings}}{{Slot|Chainmail Boots}}<br>{{Slot|Iron Helmet}}{{Slot|Iron Chestplate}}{{Slot|Iron Leggings}}{{Slot|Iron Boots}}{{Slot|Iron Horse Armor}}{{Slot|Iron Nautilus Armor}}<br>铁质的[[工具]]、[[武器]]、[[盔甲]]、[[马铠]]和[[鹦鹉螺铠]]；锁链盔甲
+!<span>{{Slot|Iron Nugget}}<br>[[铁粒]]</span>
+|align="center"| 0.1
+| 可合成[[铁锭]]、[[灯笼]]、[[灵魂灯笼]]和[[铁链]]。
+|-
+|align="center"| {{Slot|Golden Sword}}{{Slot|Golden Spear}}{{Slot|Golden Pickaxe}}{{Slot|Golden Axe}}{{Slot|Golden Shovel}}{{Slot|Golden Hoe}}{{Slot|Golden Helmet}}{{Slot|Golden Chestplate}}{{Slot|Golden Leggings}}{{Slot|Golden Boots}}{{Slot|Golden Horse Armor}}{{Slot|Golden Nautilus Armor.png}}<br>金质的[[工具]]、[[武器]]、[[盔甲]]、[[马铠]]和[[鹦鹉螺铠]]
+!<span>{{Slot|Gold Nugget}}<br>[[金粒]]</span>
+|align="center"| 0.1
+| 可合成[[金锭]]、[[闪烁的西瓜片]]和[[金胡萝卜]]。<br>可用于制作有星星效果的[[烟火之星]]。
+|-
+|align="center"| {{Slot|Copper Sword}}{{Slot|Copper Spear}}{{Slot|Copper Pickaxe}}{{Slot|Copper Axe}}{{Slot|Copper Shovel}}{{Slot|Copper Hoe}}{{Slot|Copper Helmet}}{{Slot|Copper Chestplate}}{{Slot|Copper Leggings}}{{Slot|Copper Boots}}{{Slot|Copper Horse Armor}}{{Slot|Copper Nautilus Armor}} <br>铜质的[[工具]]、[[武器]]、[[盔甲]]、[[马铠]]和[[鹦鹉螺铠]]
+!<span>{{Slot|Copper Nugget}}<br>[[铜粒]]</span>
+|align="center"| 0.1
+| 可合成[[铜锭]]、[[铜链]]、[[铜火把]]、[[铜灯笼]]。
+|}
+
+=== 其他可烧炼物品 ===
+下列物品仅能在[[熔炉]]中烧炼。
+
+{| class="sortable wikitable"
+|-align="center"
+! width="150" | 烧炼物
+! width="75" | 成品
+! 经验
+! class="unsortable" | 简介
+|-
+|align="center"| {{Inventory slot|Sand}}{{Inventory slot|Red Sand}}<br>[[沙子]]或[[红沙]]
+!<span id="玻璃">{{Inventory slot|Glass}}<br>[[玻璃]]</span>
+|align="center"| 0.1
+| 用于制造如窗户的透明结构，也可用于合成[[玻璃板]]和[[玻璃瓶]]等。
+|-
+|align="center"| {{Inventory slot|Cobblestone}}<br>[[圆石]]
+!<span id="石头">{{Inventory slot|Stone}}<br>[[石头]]</span>
+|align="center"| 0.1
+| 用作建筑材料，也可用于合成以下方块或红石元件：[[楼梯]]、[[台阶]]、[[石砖]]、[[切石机]]、[[压力板]]、[[按钮]]、[[红石比较器]]和[[红石中继器]]。
+|-
+|align="center"| {{Inventory slot|Cobbled Deepslate}}<br>[[深板岩圆石]]
+!<span id="深板岩">{{Inventory slot|Deepslate}}<br>[[深板岩]]</span>
+|align="center"| 0.1
+| 用作建筑材料。
+|-
+| align="center"| {{Inventory slot|Stone}}<br>[[石头]]
+!<span id="平滑石头">{{Inventory slot|Smooth Stone}}<br>[[平滑石头]]</span>
+| align="center"| 0.1
+| 用作建筑材料，也可用于合成[[平滑石头台阶]]和[[高炉]]。
+|-
+| align="center"| {{Inventory slot|Sandstone}}{{Inventory slot|Red Sandstone}}<br>[[砂岩]]或[[红砂岩]]
+!<span id="平滑砂岩;平滑红砂岩">{{Inventory slot|Smooth Sandstone}}{{Inventory slot|Smooth Red Sandstone}}<br>[[平滑砂岩]]或[[平滑红砂岩]]</span>
+| align="center" | 0.1
+| 用作建筑材料，也可用于合成楼梯和台阶。
+|-
+|align="center"| {{Inventory slot|Block of Quartz}}<br>[[石英块]]
+!<span id="平滑石英块">{{Inventory slot|Smooth Quartz}}<br>[[平滑石英块]]</span>
+|align="center"| 0.1
+| 用作建筑材料，也可用于合成楼梯和台阶。
+|-
+| align="center" | {{Inventory slot|Clay Ball}}<br>[[黏土球]]
+!<span id="红砖">{{Inventory slot|Brick}}<br>[[红砖]]</span>
+| align="center" | 0.3
+| 用于合成[[红砖块]]、[[花盆]]和[[饰纹陶罐]]。
+|-
+| align="center" |{{Inventory slot|Netherrack}}<br>[[下界岩]]
+! <span id="下界砖">{{Inventory slot|Nether Brick}}<br>[[下界砖]]</span>
+| align="center" | 0.1
+| 用于合成[[下界砖块]]、[[下界砖栅栏]]和[[红色下界砖块]]。
+|-
+| align="center" |{{Inventory slot|Resin Clump}}<br>[[树脂团]]
+! <span id="树脂砖">{{Inventory slot|Resin Brick}}<br>[[树脂砖]]</span>
+| align="center" | 0.1
+| 用于合成[[树脂砖块]]或作为锻造原材料。
+|-
+| align="center" | {{Inventory slot|Clay}}<br>[[黏土]]
+!<span id="陶瓦">{{Inventory slot|Terracotta}}<br>[[陶瓦]]</span>
+| align="center" | 0.35
+| 用作建筑材料，也可用于合成[[染色陶瓦]]。
+|-
+| align="center" | {{Inventory slot|Stone Bricks}}<br>[[石砖]]
+!<span id="裂纹石砖">{{Inventory slot|Cracked Stone Bricks}}<br>[[裂纹石砖]]</span>
+| align="center" | 0.1
+| 用作建筑材料。也会生成于[[要塞]]中。
+|-
+| align="center" | {{Inventory slot|Nether Bricks}}<br>[[下界砖块]]
+!<span id="裂纹下界砖块">{{Inventory slot|Cracked Nether Bricks}}<br>[[裂纹下界砖块]]</span>
+| align="center" | 0.1
+| 用作建筑材料。
+|-
+| align="center" | {{Inventory slot|Polished Blackstone Bricks}}<br>[[磨制黑石砖]]
+!<span id="裂纹磨制黑石砖">{{Inventory slot|Cracked Polished Blackstone Bricks}}<br>[[裂纹磨制黑石砖]]</span>
+| align="center" | 0.1
+| 用作建筑材料。也会生成于[[堡垒遗迹]]中。
+|-
+| align="center" |{{Inventory slot|Deepslate Bricks}}<br>[[深板岩砖]]
+!<span id="裂纹深板岩砖">{{Inventory slot|Cracked Deepslate Bricks}}<br>[[裂纹深板岩砖]]</span>
+| align="center" |0.1
+| 用作建筑材料。也会生成于[[远古城市]]中。
+|-
+| align="center" |{{Inventory slot|Deepslate Tiles}}<br>[[深板岩瓦]]
+!<span id="裂纹深板岩瓦">{{Inventory slot|Cracked Deepslate Tiles}}<br>[[裂纹深板岩瓦]]</span>
+| align="center" |0.1
+| 用作建筑材料。也会生成于[[远古城市]]中。
+|-
+| align="center" | {{Inventory slot|Basalt}}<br>[[玄武岩]]
+!<span id="平滑玄武岩">{{Inventory slot|Smooth Basalt}}<br>[[平滑玄武岩]]</span>
+| align="center" | 0.1
+| 用作建筑材料。也会生成于[[紫晶洞]]中。
+|-
+| align="center" |{{Slot|Matching Dyed Terracotta}}<br>对应的[[染色陶瓦]]
+!<span id="带釉陶瓦">{{Slot|Matching Glazed Terracotta}}<br>[[带釉陶瓦]]</span>
+| align="center" | 0.1
+| 用作建筑材料，装饰性方块。
+|-
+|align="center"| {{Slot|Any Log}}{{Slot|Any Stripped Log}}{{Slot|Any Wood}}{{Slot|Any Stripped Wood}}<br>[[原木]]或[[去皮原木]]<br>或[[木头]]或[[去皮木头]]
+!<span id="木炭">{{Slot|Charcoal}}<br>[[木炭]]</span>
+|align="center"| 0.15
+| 在游戏前期的[[煤炭]]替代品。用于制作[[火把]]或[[火焰弹]]和作为[[熔炉]]或{{only|je|for=[[动力矿车]]}}的燃料使用。
+|-
+|align="center"| {{Slot|Cactus}}<br>[[仙人掌]]
+!<span id="绿色染料">{{Slot|Green Dye}}<br>[[绿色染料]]</span>
+|align="center"| {{only|je|short=1|for=1.0}}<ref>{{bug|MC-210211}}</ref><br>{{only|be|short=1|for=0.2}}
+| 作为[[染料]]使用。
+|-
+|align="center"| {{Slot|Wet Sponge}}<br>[[湿海绵]]
+!<span id="海绵">{{Slot|Sponge}}<br>[[海绵]]</span>
+|align="center"| 0.15
+| 烤干[[海绵]]使其可被重复使用。烧炼完成后，若燃料槽中有一个[[铁桶]]，其会被替换为[[水桶]]。
+|-
+|align="center"| {{Slot|Chorus Fruit}}<br>[[紫颂果]]
+!<span id="爆裂紫颂果">{{Slot|Popped Chorus Fruit}}<br>[[爆裂紫颂果]]</span>
+|align="center"| 0.1
+| 用于制作[[紫珀块]]和[[末地烛]]。
+|-
+|align="center"|{{Slot|Sea Pickle}}<br>[[海泡菜]]
+!<span id="黄绿色燃料">{{Slot|Lime Dye}}<br>[[黄绿色染料]]</span>
+|align="center"| {{only|je|short=1|for=0.1}}<br>{{only|be|short=1|for=0.2}}
+| 作为[[染料]]使用。
+|-
+|align="center"|{{Slot|Any Leaves}}<br>任意[[树叶]]
+!<span id="枯叶堆">{{Slot|Leaf Litter}}<br>[[枯叶堆]]</span>
+|align="center"| 0.1
+| 用于装饰或堆肥，也可用作燃料。
+|}
+
+== 燃料效率 ==
+{{see also|Tutorial:选择燃料}}
+表中列出了不同燃料可燃烧的时间（或称燃料热值）。
+
+[[高炉]]和[[烟熏炉]]只缩短了完成一次烧炼的时间，同量燃料燃烧的物品數量不变。
+
+{{/燃料时间表}}
+
+== 成就 ==
+{{load achievements|acquire-hardware;delicious-fish;pork-chop;renewable-energy;rabbit-season;dry-spell;super-fuel;alternative-fuel}}
+
+== 进度 ==
+{{load advancements|story.smelt_iron}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100129-1447|[[打火石]]可用于烧炼[[矿石]]和烹饪食物。<ref>http://www.youtube.com/watch?v=OpmK7rDU5bA</ref>}}
+|{{HistoryLine||20100219|加入了熔炉，取代了[[打火石]]的烧炼功能。}}
+|{{HistoryLine||20100223|首个可烧炼的物品是[[圆石]]，烧炼后变成[[石头]]。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w18a|木质工具能作为烧炼一件物品的燃料使用。}}
+|{{HistoryLine|||dev=12w22a|现在在熔炉内烧炼矿石和物品会回馈经验。
+|现在使用[[熔岩桶]]作为燃料时会返还[[铁桶]]。}}
+|{{HistoryLine||1.7.2|现在每个原木台阶只能燃烧0.75个物品。}}
+|{{HistoryLine||1.8|dev=14w04a|当一个熔炉用尽燃料时，熔炼进度将会以2倍速度倒退。}}
+|{{HistoryLine||1.13|dev=18w06a|烧炼界面现在包含了[[配方]]栏，允许玩家得知如何烧炼先前烧炼过的[[物品]]，自动填充烧炼物，并从物品栏中过滤目前可烧炼的配方。
+|自定义配方现在通过数据包的<code>data/(namespace)/recipes/(name).json</code>加载。
+|不使用原版数据包会移除所有的配方。}}
+|{{HistoryLine|||dev=18w07a|加入了[[干海带块]]，可作为燃料使用。}}
+|{{HistoryLine|||dev=正式版|现在使用漏斗取出烧炼的产物时产生的经验会储存在熔炉中，而非消失。<ref>{{bug|MC-7046|||Fixed}}</ref>}}
+|{{HistoryLine||1.14|dev=18w43a|加入了[[竹子]]，可作为燃料使用。
+|[[枯萎的灌木]]现在可作为燃料使用，每个枯萎的灌木可烧炼0.5个物品。}}
+|{{HistoryLine|||dev=18w45a|加入了[[脚手架]]，可作为燃料使用。}}
+|{{HistoryLine|||dev=18w50a|现在可用[[高炉]]和[[烟熏炉]]烧炼特定物品。}}
+|{{HistoryLine|||dev=19w02a|现在可用[[营火]]烧炼食物。}}
+|{{HistoryLine||1.15|dev=19w37a|[[船]]现在可烧炼6个物品，而非先前的1个物品。}}
+|{{HistoryLine|||dev=pre1|[[脚手架]]现在可烧炼2个物品，而非先前的0.25个物品。}}
+|{{HistoryLine||1.16|dev=20w13a|现在绯红木和诡异木对应的木板、木台阶和木楼梯均不再能作为燃料使用。}}
+|{{HistoryLine|||dev=20w15a|加入了[[灵魂营火]]，可用于烧炼食物。}}
+|{{HistoryLine||1.17|dev=21w11a|[[杜鹃花丛]]现在可作为燃料使用，每个杜鹃花丛可烧炼0.5个物品。}}
+|{{HistoryLine||1.19|dev=22w11a|现在每个脚手架只能烧炼0.25个物品。<ref>{{bug|MC-165990|||Fixed}}</ref>
+|加入了[[红树根]]，可作为燃料使用。}}
+|{{HistoryLine|||dev=22w12a|加入了[[运输船]]，可作为燃料使用。}}
+|{{HistoryLine||1.19.3|dev=22w44a|现在[[竹马赛克]]可作为燃料使用。}}
+|{{HistoryLine||1.21.5|dev=25w02a|加入了[[枯叶堆]]，可作为燃料使用。}}
+|{{HistoryLine||26.3|dev=snapshot-2|现在[[羊毛楼梯]]、[[羊毛台阶]]和[[杨树树苗]]可作为燃料使用。<ref>{{bug|MC-309067 |||Fixed}}</ref><ref>{{bug|MC-309205 |||Fixed}}</ref>}}
+|{{HistoryLine|||dev=snapshot-3|加入了[[坐垫]]，可作为燃料使用。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.3.2|加入了熔炉，所有存在的方块和物品现在能够通过收集、合成和烧炼获得（不再存在无限物品）。}}
+|{{HistoryLine||0.8.0|木质工具现在可作为燃料。
+|现在每个熔岩桶可烧炼100个物品。}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了[[船]]和[[钓鱼竿]]，可作为燃料使用。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了[[烈焰棒]]，可作为燃料使用。}}
+|{{HistoryLine||0.13.0|dev=build 1|加入了[[音符盒]]和[[阳光探测器]]，可作为燃料使用。}}
+|{{HistoryLine||0.16.0|dev=unknown|更改了熔炉的界面。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了[[唱片机]]和[[旗帜]]，可作为燃料使用。}}
+|{{HistoryLine||1.4.0|dev=1.2.13.8|加入了[[去皮原木]]，可作为燃料使用。}}
+|{{HistoryLine|||dev=1.2.14.2|加入了[[干海带块]]，可作为燃料使用。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|加入了[[竹子]]和[[脚手架]]，可作为燃料使用。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[枯萎的灌木]]现在可作为燃料使用，烧炼0.5个物品。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|现在可用[[营火]]烧炼食物。
+|现在可用[[高炉]]和[[烟熏炉]]烧炼特定物品。
+|[[告示牌]]现在可作为燃料使用。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|加入了灵魂营火，可用于烧炼食物。}}
+|{{HistoryLine||1.16.220|dev=1.16.220.52|加入了杜鹃花丛和盛开的杜鹃花丛，可作为燃料使用。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.28|加入了运输船，可作为燃料使用。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|加入了红树根，可作为燃料使用。}}
+|{{HistoryLine|||dev=1.19.0.30|现在红树根不再能作为燃料使用。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.22|现在每个脚手架只能烧炼0.25个物品，以匹配{{el|je}}。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.21|加入了竹马赛克，可作为燃料使用。}}
+|{{HistoryLine||1.21.40|dev=1.21.40.20|现在[[蜂巢（方块）|蜂巢]]和[[蜂箱]]不再能作为燃料使用。}}
+|{{HistoryLine||1.21.70|exg=y_2025_drop_1|dev=1.21.70.20|加入了[[枯叶堆]]，可作为燃料使用。}}
+|{{HistoryLine|||exg=none|dev=1.21.70.23|1.21.70.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.20|现在红树根再次能作为燃料。<ref>{{bug|MCPE-155605|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.111|dev=1.21.110.20|加入了[[展示架]]，可作为燃料使用。}}
+|{{HistoryLine||26.40|exg=y_2026_drop_3|dev=26.40.30|加入了[[坐垫]]，可作为燃料使用。}}
+|{{HistoryLine|new3ds}}
+|{{HistoryLine||1.1.06|现在烧炼矿石会回馈经验。}}
+}}
+
+== 你知道吗 ==
+{{See also|Tutorial:提示与技巧#烧炼}}
+* 使用单个熔炉烧炼一组（64个）物品需要10分40秒时间，可以通过使用多个熔炉'''并行'''烧炼来压缩最终用时。（参见：[[Tutorial:自动化烧炼]]）
+* 使用[[木炭]]作为燃料比使用[[原木]]作为燃料效率高4倍（×4.57），比使用木板的效率高{{frac|1|1|4}}倍，但需要消耗更多时间。
+* {{in|be}}使用[[木板]]制作[[木质台阶]]作为燃料比使用木板烧炼原木或木头来获得木炭作为燃料的效率高（×1.875）。
+* 把[[煤炭]]合成为[[煤炭块]]可以增加烧炼效率（×1.11）。9个煤炭能烧炼72个物品，而1个煤炭块可以烧炼80个。
+* 如果使用木质[[工具]]作为燃料，最具性价比的做法是把工具用到只剩下{{only|je|for=1}}或{{only|be|for=0}}耐久度，然后作为燃料使用。
+* 尽管[[下界木板]]与其制品不能直接作为燃料使用，但通过将其合成为诸如[[木棍]]等由主世界木板同样能制成的物品间接达成该目的。
+* “烧炼”在Minecraft中是一个相当广泛的术语，而在现实世界中，烧炼具有更精确的定义。<ref>{{article|block-week-furnace|Block of the Week: Furnace|September 15, 2017}}</ref>
+
+== 参见 ==
+* {{slink|Tutorial:漏斗|自动冶炼}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:游戏内容]]
+
+[[cs:Tavba]]
+[[de:Erhitzen]]
+[[en:Smelting]]
+[[es:Fundición]]
+[[fr:Cuisson]]
+[[hu:Olvasztás]]
+[[it:Cottura]]
+[[ja:製錬]]
+[[ko:제련]]
+[[lzh:煉]]
+[[nl:Smelten]]
+[[pl:Przetapianie]]
+[[pt:Fundição]]
+[[ru:Плавка]]
+[[th:การเผา]]
+[[tr:Eritme]]
+[[uk:Витоплення]]

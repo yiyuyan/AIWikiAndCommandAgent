@@ -1,0 +1,580 @@
+# 页面: Java版指南/铜器时代
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%8C%87%E5%8D%97/%E9%93%9C%E5%99%A8%E6%97%B6%E4%BB%A3
+# 分类: 
+# 抓取时间: 2026-07-14 17:15:22
+# 原始 Wikitext 内容:
+
+{{for|基岩版版本的指南|基岩版指南/铜器时代}}
+{{Infobox guide
+| edition = Java版
+| name = 铜器时代
+| vers =
+* {{vl|je 1.21.9}}
+* {{vl|je 1.21.10}}
+| prev = 追逐天空
+| next = 群骑纷争
+}}
+
+这篇指南简要概述了[[铜器时代]]小更新（[[Java版1.21.9]]-[[Java版1.21.10|1.21.10]]）的所有非[[实验性内容]]。本指南假定读者对[[追逐天空]]（[[Java版1.21.6]]-[[Java版1.21.8|1.21.8]]）更新的内容有基本了解。
+
+== 生物 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Mobs}}
+|-
+| [[铜傀儡]]
+| {{Animate|Copper_Golem_JE1.png; Exposed_Copper_Golem_JE1.png; Weathered_Copper_Golem_JE1.png; Oxidized_Copper_Golem_JE1.png|84px}}
+|
+* 在[[铜块]]的氧化或涂蜡变种的任意一面上放置1个[[南瓜灯]]或[[雕刻南瓜]]后生成（如下图）。
+{{FakeImage|align=none|style=display:inline-block;margin:0|{{BlockGrid|align=left|scale=1|b=block of copper|c=carved pumpkin| c | b }}}}
+{{FakeImage|align=none|style=display:inline-block;margin:0|{{BlockGrid|align=left|scale=1|j=Jack o'Lantern|b=block of copper| j | b }}}}
+
+| 
+* {{Drop|Item|Copper Ingot|1|3}}
+* 其手持的物品
+| 
+* 生成铜傀儡后，铜块会转变为对应的[[铜箱子]]。铜傀儡的氧化程度与铜块相同。
+* 会从[[铜箱子]]中取出物品，最多可取出16个物品，并放入附近装有相同物品的[[箱子]]、[[陷阱箱]]以及对应的空箱子里。
+** 如果被它打开的铜箱子是空的，它会将该铜箱子记住并搜寻下一个铜箱子。
+** 若箱子或陷阱箱不满足条件或无法放入物品，铜傀儡会将其记住并搜寻下一个未记住的箱子或陷阱箱。
+** 若容器无法打开，铜傀儡会将其标记为已访问并搜寻下一个目标。
+** 铜傀儡会按顺序记住最多10个种类相同的容器。若在记住10个后仍未能找到匹配的容器，铜傀儡会进入7秒的空闲状态并重置记住的容器，随后再次进行尝试。
+* 会随时间流逝而逐渐锈蚀，纹理也会发生相应的变化。
+* [[雷击]]可以减轻其锈蚀程度。
+* 各个锈蚀变种均可通过{{Control|使用}}[[蜜脾]]为其涂蜡，其不会进一步锈蚀。
+* 对铜傀儡{{Control|使用}}斧可以除锈，每次操作使锈蚀程度减轻一级。若已涂蜡则先进行脱蜡。
+* 处于氧化阶段且未涂蜡的铜傀儡每刻有0.58%的概率完全氧化并转变为[[氧化的铜傀儡像]]。若所在位置不为[[空气]]，铜傀儡不会尝试转变。转变后，铜傀儡会以随机姿势保持静止，并掉落手持物品，也会保留转变前通过[[命名牌]]获得的名字。
+* [[玩家]]空手与铜傀儡交互时，铜傀儡会掉落其手持物品。
+* 会接受[[铁傀儡]]给予的[[虞美人]]并将其戴在头上。
+** 可以使用[[剪刀]]剪掉虞美人且会掉落。
+* 可以开关[[木门]]和[[铜门]]。
+|-
+| [[玩家模型]]
+| [[File:Alex JE3.png|84px]]
+|
+* 玩家模型只能使用{{cmd|summon}}生成。
+|
+* 无
+|
+* 玩家模型的<code>below_score</code>[[记分板#显示位置|记分板显示位置]]处总会显示“NPC”。
+* 玩家模型的外形与玩家类似，其实体数据有许多与玩家渲染相关的实体属性，可以视为没有被玩家操控的玩家。
+* 类似于[[盔甲架]]，玩家模型不具有任何[[生物AI]]，但仍有作为生物的基本行为，如可以不受方格限制地移动，可以被[[属性]]或[[状态效果]]影响，可以被[[发射器]]装备物品，可以正常行使[[冰霜行者]]等[[魔咒]]，具有[[摔落]]、[[受伤]]和[[死亡]]等行为。
+* 玩家模型不能被[[拴绳]]牵引，不具有[[物品栏]]，无法设置[[战利品表]]。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Mobs}}
+|-
+| [[快乐恶魂]]
+| [[File:Happy Ghast JE1 BE1.gif|84px]]
+|
+* 现在快乐恶魂的音效可在64格距离内听到。
+|-
+| [[僵尸]]、[[骷髅]]及其变种
+| {{Animate|Zombie.png; Husk.png; Plains Zombie Villager Base.png; Desert Zombie Villager Base.png; Jungle Zombie Villager Base.png; Savanna Zombie Villager Base.png; Snowy Zombie Villager Base.png; Swamp Zombie Villager Base.png; Taiga Zombie Villager Base.png; Skeleton.png; Stray.png; Bogged.png|84px}}
+{{Animate|Baby Zombie JE2 BE2.png; Baby Husk JE2 BE2.png; Plains Baby Zombie Villager JE1 BE1.png; Desert Baby Zombie Villager JE1 BE1.png; Jungle Baby Zombie Villager JE1 BE1.png; Savanna Baby Zombie Villager JE1 BE1.png; Snowy Baby Zombie Villager JE1 BE1.png; Swamp Baby Zombie Villager JE1 BE1.png; Taiga Baby Zombie Villager JE1 BE1.png|56px}}
+|
+* 现在有概率装备铜[[盔甲]]。
+** 受此影响，其他盔甲的出现概率降低了。
+:: {| class="wikitable sortable"
+|-
+! class="unsortable" rowspan=2 | 盔甲材料
+! colspan=2 | 概率
+|-
+! 此前
+! 更新后
+|-
+| 皮革
+| 37.06%
+| 23.60%
+|-
+| 铜
+| style="text-align: center;" | &ndash;
+| 32.24%
+|-
+| 金
+| 48.73%
+| 33.29%
+|-
+| 链甲
+| 12.90%
+| 9.73%
+|-
+| 铁
+| 1.27%
+| 1.10%
+|-
+| 钻石
+| 0.04%
+| 0.04%
+|}
+|-
+| [[铁傀儡]]
+| [[File:Iron Golem.png|84px]]
+|
+* 现在会将[[虞美人]]赠予附近的铜傀儡，接受的铜傀儡会将其戴到头上。
+|-
+| [[末影人]]
+| [[File:Enderman JE3.png|84px]]
+|
+* 随末地天空光照变化更新了[[寻路]]AI，现在不会趋向移动到暗处。
+|}
+
+== 方块 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=铜器时代新增方块
+|rows=7
+| 0= Copper Chest | Exposed Copper Chest | Weathered Copper Chest | Oxidized Copper Chest | Waxed Copper Chest | Waxed Exposed Copper Chest | Waxed Weathered Copper Chest | Waxed Oxidized Copper Chest | Oak Shelf | Spruce Shelf | Birch Shelf | Jungle Shelf | Acacia Shelf | Dark Oak Shelf | Mangrove Shelf | Cherry Shelf | Pale Oak Shelf | Bamboo Shelf | Crimson Shelf | Warped Shelf |Copper Golem Statue | Exposed Copper Golem Statue | Weathered Copper Golem Statue | Oxidized Copper Golem Statue | Waxed Copper Golem Statue | Waxed Exposed Copper Golem Statue | Waxed Weathered Copper Golem Statue | Waxed Oxidized Copper Golem Statue | Exposed Lightning Rod | Weathered Lightning Rod | Oxidized Lightning Rod | Waxed Lightning Rod | Waxed Exposed Lightning Rod | Waxed Weathered Lightning Rod | Waxed Oxidized Lightning Rod | Copper Torch | Copper Lantern | Exposed Copper Lantern | Weathered Copper Lantern | Oxidized Copper Lantern | Waxed Copper Lantern | Waxed Exposed Copper Lantern | Waxed Weathered Copper Lantern | Waxed Oxidized Copper Lantern | Copper Bars | Exposed Copper Bars | Weathered Copper Bars | Oxidized Copper Bars | Waxed Copper Bars | Waxed Exposed Copper Bars | Waxed Weathered Copper Bars | Waxed Oxidized Copper Bars | Copper Chain | Exposed Copper Chain | Weathered Copper Chain | Oxidized Copper Chain | Waxed Copper Chain | Waxed Exposed Copper Chain | Waxed Weathered Copper Chain | Waxed Oxidized Copper Chain}}
+|铜器时代新增方块一览
+}}
+{|{{Simple Guide table|New Blocks}}
+|-
+| [[铜箱子]]
+| 
+{{Animate|Copper Chest (S) JE1.png; Exposed Copper Chest (S) JE1.png; Weathered Copper Chest (S) JE1.png; Oxidized Copper Chest (S) JE1.png|84px}}
+{{Animate|Large Copper Chest JE1.png; Large Exposed Copper Chest JE1.png; Large Weathered Copper Chest JE1.png; Large Oxidized Copper Chest JE1.png|84px}}
+| 
+* 在[[铜傀儡]]生成时替换铜块生成。
+* 配方：
+: {{Crafting
+|A1 = Copper Ingot
+|A2 = Copper Ingot
+|A3 = Copper Ingot
+|B1 = Copper Ingot
+|B2 = Chest
+|B3 = Copper Ingot
+|C1 = Copper Ingot
+|C2 = Copper Ingot
+|C3 = Copper Ingot
+|Output = Copper Chest
+|ignoreusage = 1
+}}
+| 可使用石镐或品质更好的镐开采
+|
+* 和[[箱子]]相同，可以用于储存物品。
+** 将任意氧化程度的两个铜箱子相邻放置时会合并成大型铜箱子，大型铜箱子的氧化程度与合并之前氧化程度最轻的铜箱子相同。
+* 会随时间流逝而逐渐锈蚀，纹理也会发生相应的变化。
+* [[闪电]]可以减轻其锈蚀程度。
+* 各个锈蚀变种均可通过{{Control|使用}}[[蜜脾]]或与1个蜜脾合成得到涂蜡变种，其不会进一步锈蚀。
+* 对铜箱子{{Control|使用}}斧可以除锈，每次操作使锈蚀程度减轻一级。若是涂蜡变种则先进行脱蜡。
+* [[铜傀儡]]会从中取出存放的物品。
+|-
+| [[展示架]]
+| {{Animate|Oak Shelf (S) JE1.png; Spruce Shelf (S) JE1.png; Birch Shelf.png; Jungle Shelf.png; Acacia Shelf.png; Dark Oak Shelf.png; Mangrove Shelf.png; Cherry Shelf.png; Pale Oak Shelf.png; Crimson Shelf.png; Warped Shelf.png; Bamboo Shelf.png|84px}}
+| 
+{{Crafting
+|A1=Matching Stripped Log or Stem; Block of Stripped Bamboo
+|B1=Matching Stripped Log or Stem; Block of Stripped Bamboo
+|C1=Matching Stripped Log or Stem; Block of Stripped Bamboo
+|A3=Matching Stripped Log or Stem; Block of Stripped Bamboo
+|B3=Matching Stripped Log or Stem; Block of Stripped Bamboo
+|C3=Matching Stripped Log or Stem; Block of Stripped Bamboo
+|Output=Matching Shelf, 6; Bamboo Shelf, 6
+|type=Decoration block
+}}
+| 可使用任意工具或徒手开采，但用斧是最快的
+|
+* 有12种木质变种。
+* 正面有3个槽位，可存放最多3组物品。
+** 与任意槽位交互时，玩家的主手物品会与所交互槽位的物品交换。
+** 类似于[[物品展示框]]，展示架会在正面展示其包含的所有物品。
+* 被红石信号充能时，展示架的正面纹理会随之改变；充能的展示架可以相连接，最多可以连接3个。
+** 与单个展示架交互时，其包含的所有物品会与玩家快捷栏最右侧的3个物品交换。
+** 与两个相连接的展示架交互时，其包含的所有物品会与玩家快捷栏最右侧的6个物品交换。
+** 与三个相连接的展示架交互时，其包含的所有物品会与玩家快捷栏的所有物品交换。
+|-
+| [[铜傀儡像]]
+| {{Animate|Copper Golem Statue.png; Exposed Copper Golem Statue.png; Weathered Copper Golem Statue.png; Oxidized Copper Golem Statue.png|84px}}
+| 铜傀儡会在处于完全氧化状态时转变为铜傀儡像。
+| 可使用任意工具或徒手开采，但用镐是最快的
+|
+* 会随时间流逝而逐渐锈蚀，纹理也会发生相应的变化。
+* [[闪电]]可以减轻其锈蚀程度。
+* 各个锈蚀变种均可通过{{Control|使用}}[[蜜脾]]或与1个蜜脾合成得到涂蜡变种，其不会进一步锈蚀。
+* 对铜傀儡像{{Control|使用}}斧可以除锈，每次操作使锈蚀程度减轻一级。若是涂蜡变种则先进行脱蜡。
+* 对未涂蜡且未氧化的铜傀儡像{{Control|使用}}[[斧]]会生成[[铜傀儡]]。
+* 与其交互可改变其姿势。
+* 与[[红石比较器]]连接时会根据当前姿势发出红石信号。
+|-
+| [[避雷针]]的锈蚀及涂蜡变种
+| {{Animate|Exposed Lightning Rod.png; Weathered Lightning Rod.png; Oxidized Lightning Rod.png; Lightning Rod.png; Exposed Lightning Rod.png; Weathered Lightning Rod.png; Oxidized Lightning Rod.png|84px}}
+| 锈蚀变种在避雷针[[氧化]]后生成，各个锈蚀变种均可通过{{Control|使用}}[[蜜脾]]或与1个蜜脾合成得到涂蜡变种。
+| 可使用石镐或品质更好的镐开采
+|
+* 功能与普通的避雷针相同。
+* 会随时间流逝而逐渐锈蚀，纹理也会发生相应的变化。
+* [[闪电]]可以减轻其锈蚀程度。
+* 各个锈蚀变种均可通过{{Control|使用}}[[蜜脾]]或与1个蜜脾合成得到涂蜡变种，其不会进一步锈蚀。
+* 对其{{Control|使用}}斧可以除锈，每次操作使锈蚀程度减轻一级。若是涂蜡变种则先进行脱蜡。
+|-
+| [[铜火把]]
+| [[File:Copper Torch.png|84px]]
+|
+{{Crafting
+|B1= Copper Nugget
+|B2= Coal; Charcoal
+|B3= Stick
+|Output= Copper Torch, 4
+|type= Decoration block
+}}
+| 可使用任意工具或徒手开采
+|
+* [[火把]]的变种。
+|-
+| [[铜灯笼]]
+| {{Animate|Copper Lantern.gif; Exposed Copper Lantern.gif; Weathered Copper Lantern.gif; Oxidized Copper Lantern.gif|84px}}
+|
+{{Crafting
+|A1=Copper Nugget |A2=Copper Nugget     |A3=Copper Nugget
+|B1=Copper Nugget |B2=Copper Torch |B3=Copper Nugget
+|C1=Copper Nugget |C2=Copper Nugget     |C3=Copper Nugget
+|Output=Copper Lantern
+|type=Decoration block
+}}
+| 可使用任意工具或徒手开采
+|
+* [[灯笼]]的铜质变种。
+* 会随时间流逝而逐渐锈蚀，纹理也会发生相应的变化。
+* [[闪电]]可以减轻其锈蚀程度。
+* 各个锈蚀变种均可通过{{Control|使用}}[[蜜脾]]或与1个蜜脾合成得到涂蜡变种，其不会进一步锈蚀。
+* 对其{{Control|使用}}斧可以除锈，每次操作使锈蚀程度减轻一级。若是涂蜡变种则先进行脱蜡。
+** 氧化程度仅会影响外观，不会影响发光。
+|-
+| [[铜栏杆]]
+| {{Animate|Copper Bars.png; Exposed Copper Bars.png; Weathered Copper Bars.png; Oxidized Copper Bars.png|84px}}
+|
+{{Crafting
+|A1=            |B1=            |C1=
+|A2= Copper Ingot |B2= Copper Ingot |C2=Copper Ingot
+|A3= Copper Ingot |B3=Copper Ingot |C3= Copper Ingot
+|Output= Copper Bars,16
+}}
+| 可使用木镐及品质更好的镐开采
+|
+* 一种与[[玻璃板]]性质类似的装饰性方块。
+* 会随时间流逝而逐渐锈蚀，纹理也会发生相应的变化。
+* [[闪电]]可以减轻其锈蚀程度。
+* 各个锈蚀变种均可通过{{Control|使用}}[[蜜脾]]或与1个蜜脾合成得到涂蜡变种，其不会进一步锈蚀。
+* 对其{{Control|使用}}斧可以除锈，每次操作使锈蚀程度减轻一级。若是涂蜡变种则先进行脱蜡。
+|-
+| [[铜链]]
+| {{Animate|Copper Chain.png; Exposed Copper Chain.png; Weathered Copper Chain.png; Oxidized Copper Chain.png|84px}}
+|
+{{Crafting
+|B1=Copper Nugget
+|B2=Copper Ingot
+|B3=Copper Nugget
+|Output=Copper Chain
+}}
+| 可使用木镐及品质更好的镐开采
+|
+* [[铁链]]的铜质变种。
+* 会随时间流逝而逐渐锈蚀，纹理也会发生相应的变化。
+* [[闪电]]可以减轻其锈蚀程度。
+* 各个锈蚀变种均可通过{{Control|使用}}[[蜜脾]]或与1个蜜脾合成得到涂蜡变种，其不会进一步锈蚀。
+* 对其{{Control|使用}}斧可以除锈，每次操作使锈蚀程度减轻一级。若是涂蜡变种则先进行脱蜡。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Blocks}}
+|-
+| [[箱子]]、[[陷阱箱]]和[[末影箱]]
+| {{Animate|Chest.png; Trapped Chest.png;Ender Chest.png|84px}}
+|
+* 现在音效音量更低。
+|-
+| [[铜活板门]]
+| [[File:Copper Trapdoor.png|84px]]
+|
+* 配方由6个铜锭更改为4个铜锭。
+: {{Crafting
+|A2= Copper Ingot
+|B2= Copper Ingot
+|A3= Copper Ingot
+|B3= Copper Ingot
+|Output=Copper Trapdoor, 1
+|type= Redstone
+}}
+|-
+| [[锁链]]
+| [[File:Iron Chain.png|84px]]
+|
+* 重新命名為「铁链」。
+|}
+
+== 物品 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=铜器时代新增物品
+|rows=2 
+| 0= Copper Helmet | Copper Chestplate | Copper Leggings | Copper Boots | Copper Sword | Copper Axe | Copper Pickaxe | Copper Shovel | Copper Hoe | Copper Golem Spawn Egg | Copper Nugget | Copper Horse Armor}}
+|铜器时代新增物品一览 
+}}
+{|{{Simple Guide table|New Items}}
+|-
+| [[铜头盔]]
+| [[file:Copper Helmet (item).png|84px]]
+|
+{{Crafting
+|A1=Copper Ingot |B1=Copper Ingot |C1=Copper Ingot
+|A2=Copper Ingot |C2=Copper Ingot
+|Output=Copper Helmet
+}}
+|
+* 头盔的铜质变种。
+* 为装备的生物提供{{armor|2}}护甲值。
+|-
+| [[铜胸甲]]
+| [[file:Copper Chestplate (item).png|84px]]
+|
+{{Crafting
+|A1=Copper Ingot |C1=Copper Ingot
+|A2=Copper Ingot |B2=Copper Ingot |C2=Copper Ingot
+|A3=Copper Ingot |B3=Copper Ingot |C3=Copper Ingot
+|Output=Copper Chestplate
+}}
+|
+* 胸甲的铜质变种。
+* 为装备的生物提供{{armor|4}}护甲值。
+|-
+| [[铜护腿]]
+| [[file:Copper Leggings (item).png|84px]]
+|
+{{Crafting
+|A1=Copper Ingot |B1=Copper Ingot  |C1=Copper Ingot
+|A2=Copper Ingot |C2=Copper Ingot
+|A3=Copper Ingot |C3=Copper Ingot
+|Output=Copper Leggings
+}}
+|
+* 护腿的铜质变种。
+* 为装备的生物提供{{armor|3}}护甲值。
+|-
+| [[铜靴子]]
+| [[file:Copper Boots (item).png|84px]]
+|
+{{Crafting
+|A2=Copper Ingot |C2=Copper Ingot
+|A3=Copper Ingot |C3=Copper Ingot
+|Output=Copper Boots
+}}
+|
+* 靴子的铜质变种。
+* 为装备的生物提供{{armor|1}}护甲值。
+|-
+| [[铜剑]]
+| [[file:Copper Sword.png|84px]]
+|
+{{Crafting
+|B1=Copper Ingot
+|B2=Copper Ingot
+|B3=Stick
+|Output=Copper Sword
+}}
+|
+* 剑的铜质变种。
+|-
+| [[铜斧]]
+| [[file:Copper Axe.png|84px]]
+|
+{{Crafting
+|A1=Copper Ingot |B1=Copper Ingot
+|A2=Copper Ingot |B2=Stick |B3=Stick
+|Output=Copper Axe
+}}
+|
+* 斧的铜质变种。
+|-
+| [[铜镐]]
+| [[file:Copper Pickaxe.png|84px]]
+|
+{{Crafting
+|A1=Copper Ingot |B1=Copper Ingot  |C1=Copper Ingot
+|B2=Stick
+|B3=Stick
+|Output=Copper Pickaxe
+}}
+|
+* 镐的铜质变种。
+|-
+| [[铜锹]]
+| [[file:Copper Shovel.png|84px]]
+|
+{{Crafting
+|B1=Copper Ingot
+|B2=Stick
+|B3=Stick
+|Output=Copper Shovel
+}}
+|
+* 锹的铜质变种。
+|-
+| [[铜锄]]
+| [[file:Copper Hoe.png|84px]]
+|
+{{Crafting
+|A1=Copper Ingot |B1=Copper Ingot
+|B2=Stick
+|B3=Stick
+|Output=Copper Hoe
+}}
+|
+* 锄的铜质变种。
+|-
+| [[铜傀儡]]刷怪蛋
+| [[File:Copper Golem Spawn Egg.png|84px]]
+| 创造模式物品栏。
+|
+* 用于生成铜傀儡。
+|-
+| [[铜粒]]
+| [[File:Copper Nugget.png|84px]]
+|
+{{Crafting
+|B2=Copper Ingot
+|Output=Copper Nugget, 9
+}}
+{{Smelting
+|Any copper tools; Any copper armor; Copper Horse Armor
+|Copper Nugget
+}}
+|
+* 可用于合成[[铜锭]]、[[铜火把]]和[[铜灯笼]]。
+|-
+| [[铜马铠]]
+| [[File:Copper Horse Armor.png|84px]][[File:Copper Horse Armor (item) JE1 BE1.png|84px]]
+|会在包含铁马铠的战利品表中出现，且生成概率与铁马铠相同。
+|
+* 马铠的铜质变种。
+* 为[[马]]提供{{Armor|4}}护甲值。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Items}}
+|-
+| [[染料]]
+| {{Animate|White Dye JE2 BE2.png; Light Gray Dye JE3 BE3.png; Gray Dye JE3 BE3.png; Black Dye JE2 BE2.png; Brown Dye JE2 BE2.png; Red Dye JE3 BE3.png; Orange Dye JE3 BE3.png; Yellow Dye JE3 BE3.png; Lime Dye JE3 BE3.png; Green Dye JE3 BE3.png; Cyan Dye JE3 BE3.png; Light Blue Dye JE3 BE3.png; Blue Dye JE2 BE2.png; Purple Dye JE3 BE3.png; Magenta Dye JE3 BE3.png; Pink Dye JE3 BE3.png|84px}}
+|
+* 更改了所有染料的纹理。
+|-
+| [[刷怪蛋]]
+| {{animate|Allay Spawn Egg JE2 BE2.png; Armadillo Spawn Egg JE3 BE3.png; Axolotl Spawn Egg JE2 BE2.png; Bat Spawn Egg JE2 BE2.png; Bee Spawn Egg JE3 BE2.png; Blaze Spawn Egg JE3 BE2.png; Bogged Spawn Egg JE2 BE2.png; Breeze Spawn Egg JE2 BE2.png; Camel Spawn Egg JE3 BE3.png; Cat Spawn Egg JE3 BE2.png; Cave Spider Spawn Egg JE3 BE2.png; Chicken Spawn Egg JE3 BE2.png; Cod Spawn Egg JE2 BE3.png; Copper Golem Spawn Egg JE1 BE1.png; Cow Spawn Egg JE3 BE2.png; Creaking Spawn Egg JE2 BE2.png; Creeper Spawn Egg JE3 BE2.png; Dolphin Spawn Egg JE2 BE2.png; Donkey Spawn Egg JE2 BE2.png; Drowned Spawn Egg JE2 BE2.png; Elder Guardian Spawn Egg JE2 BE2.png; Ender Dragon Spawn Egg JE3 BE2.png; Enderman Spawn Egg JE3 BE2.png; Endermite Spawn Egg JE2 BE2.png; Evoker Spawn Egg JE2 BE2.png; Fox Spawn Egg JE2 BE2.png; Frog Spawn Egg JE2 BE2.png; Ghast Spawn Egg JE3 BE2.png; Glow Squid Spawn Egg JE2 BE2.png; Goat Spawn Egg JE2 BE3.png; Guardian Spawn Egg JE2 BE2.png; Happy Ghast Spawn Egg JE1 BE1.png; Hoglin Spawn Egg JE3 BE3.png; Horse Spawn Egg JE2 BE2.png; Husk Spawn Egg JE2 BE3.png; Iron Golem Spawn Egg JE2 BE2.png; Llama Spawn Egg JE2 BE2.png; Magma Cube Spawn Egg JE3 BE2.png; Mooshroom Spawn Egg JE3 BE2.png; Mule Spawn Egg JE2 BE2.png; Ocelot Spawn Egg JE2 BE2.png; Panda Spawn Egg JE2 BE2.png; Parrot Spawn Egg JE2 BE2.png; Phantom Spawn Egg JE3 BE2.png; Pig Spawn Egg JE3 BE2.png; Piglin Spawn Egg JE2 BE3.png; Piglin Brute Spawn Egg JE2 BE2.png; Pillager Spawn Egg JE2 BE2.png; Polar Bear Spawn Egg JE3 BE3.png; Pufferfish Spawn Egg JE2 BE3.png; Rabbit Spawn Egg JE2 BE2.png; Ravager Spawn Egg JE2 BE2.png; Salmon Spawn Egg JE2 BE3.png; Sheep Spawn Egg JE3 BE2.png; Shulker Spawn Egg JE2 BE3.png; Silverfish Spawn Egg JE3 BE3.png; Skeleton Spawn Egg JE3 BE2.png; Skeleton Horse Spawn Egg JE2 BE2.png; Slime Spawn Egg JE3 BE2.png; Sniffer Spawn Egg JE3 BE3.png; Snow Golem Spawn Egg JE3 BE2.png; Spider Spawn Egg JE3 BE2.png; Squid Spawn Egg JE3 BE2.png; Stray Spawn Egg JE2 BE3.png; Strider Spawn Egg JE2 BE2.png; Tadpole Spawn Egg JE2 BE2.png; Trader Llama Spawn Egg JE2 BE2.png; Tropical Fish Spawn Egg JE2 BE3.png; Turtle Spawn Egg JE2 BE2.png; Vex Spawn Egg JE2 BE2.png; Villager Spawn Egg JE3 BE2.png; Vindicator Spawn Egg JE2 BE2.png; Wandering Trader Spawn Egg JE2 BE2.png; Warden Spawn Egg JE2 BE2.png; Witch Spawn Egg JE2 BE2.png; Wither Spawn Egg JE2 BE2.png; Wither Skeleton Spawn Egg JE2 BE2.png; Wolf Spawn Egg JE3 BE2.png; Zoglin Spawn Egg JE2 BE2.png; Zombie Spawn Egg JE3 BE2.png; Zombie Horse Spawn Egg JE2 BE3.png; Zombie Villager Spawn Egg JE2 BE2.png; Zombified Piglin Spawn Egg JE3 BE2.png|84px}}
+|
+* 现在在[[和平]]难度中会出现提示框文本。
+* 现在在和平难度中，怪物不会生成。
+|}
+
+== 非生物实体 ==
+=== 更改 ===
+{|{{Simple Guide table|Changed Non-mob entities}}
+|-
+| [[动力矿车]]
+| [[File:Minecart with Furnace.png|84px]]
+|
+* 手中没有可作为燃料的物品或燃料充足时，按{{ctrl|使用}}键与其交互不再使动力矿车方向改变为玩家点击时的方向。
+|}
+
+== 游戏内容 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Gameplay}}
+|-
+| [[Java版粒子|粒子]]
+|
+* 加入了{{cd|copper_fire_flame}}粒子。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Gameplay}}
+|-
+| [[爆炸]]
+|
+* 现在爆炸时会与[[Java版1.15-pre1|1.15-pre1]]前一样生成方块粒子。
+|-
+| [[世界边界]]
+|
+* 现在每个[[维度]]的世界边界相互独立。
+** 即，现在可以为每个维度单独设置世界边界的尺寸、位置等。
+|-
+| [[Java版粒子|粒子]]
+|
+* 现在[[玩家]]视野外的粒子不再渲染，以提升部分场景下的性能。
+|}
+
+== 世界生成 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Others}}
+|-
+| [[世界加载屏幕]]
+|
+* 加入了一个显示在世界加载时所有需加载区块的加载进度条，包括：
+** {{cmd|forceload}}加载的区块。
+** 传送门活动的区块。
+** 单人游戏中，末影珍珠加载的区块。
+** 单人游戏中，玩家周围的区块。
+** 创建世界时，分配世界出生点所需的区块。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Others}}
+|-
+| [[末地]]
+|
+* 现在具有天空光照和环境光照。
+* 怪物生成位置的最大天空光照现在为15。
+* 现在，末地的天空中会不定时地出现紫色光芒。
+** 紫色光芒出现时，维度的天空光照随之增长。
+** 末影龙[[迷雾]]激活时，末地闪光源会隐藏，且末地闪光对世界的亮度影响会降低。
+|}
+
+== 常规 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Others}}
+|-
+| [[调试屏幕]]
+|
+* 加入了调试选项屏幕，使用{{key|F3+F6}}打开。
+** 用于配置哪些调试信息需隐藏/仅在调试屏幕中显示/始终可见。
+** 其他{{key|F3}}调试组合键也可通过此屏幕开关。
+** 之前未向社区开放的调试功能（比如可视化区段八叉树）现在可通过此屏幕开关。
+** 调试选项屏幕有以下预设配置。
+*** {{cd|Default}}：将所有选项重置为默认状态。
+*** {{cd|Performance}}：仅显示如FPS的简单性能指标。
+|-
+| [[选项]]
+|
+* 在“{{tr|辅助功能设置|協助工具設定|無障礙功能設定}}”界面中加入了“{{tr|按键控制…|按鍵設定...|按鍵設定⋯⋯}}”按钮。
+** 此界面中的“自动跳跃”、“潜行”和“疾跑”设定键已移除。
+* 在“{{tr|按键控制|按鍵設定}}”界面中加入了用于调整“{{tr|攻击/摧毁|攻擊／破壞}}”及“{{tr|使用物品/放置方块|使用物品／放置方塊}}”按键绑定模式（“按住”或“切换”）的按钮。
+* 在“{{tr|按键控制|按鍵設定}}”界面中加入了“{{tr|疾跑间隔|跑步觸發間隔|跑步時間間隔}}”滑动条，控制双击前进键疾跑时双击有效的窗口期，单位为刻，最大为10，为“关”时无法通过双击前进键以疾跑。
+* 在“鼠标设置”界面中加入了“{{tr|反转鼠标X轴|反轉滑鼠 X 軸}}”按钮。
+** 原来的“鼠标反转”已重命名为“{{tr|反转鼠标Y轴|反轉滑鼠 Y 軸}}”。
+* 在“聊天设置”中加入了“{{tr|保存未发送的聊天消息|儲存未傳送的聊天訊息}}”选项。
+** 启用时，未发送的消息会在玩家主动关闭聊天框时保存。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Others}}
+|-
+| [[选项]]
+|
+* “显示字幕”选项已重命名为“{{tr|隐藏式字幕|隱藏式字幕|隱閉式字幕}}”，以更准确地描述它的作用。
+|-
+| [[控制]]
+|
+* 被分配相同按键的多个操作现在会同时工作，先前只有一个工作。
+** 例如，现在可以为“{{tr|向前移动|前進|向前移動"}}”和“{{tr|跳跃|跳躍}}”同时绑定{{keys|W}}键，则按下该键会同时执行前进和跳跃操作。
+** 因此，先前提示多个操作分配同一按键的红色指示条改为了黄色。
+* 旁观模式玩家快捷栏现在可以绑定按键。
+** 其与既有的“{{tr|高亮玩家|標示玩家}}”共同在新分类“{{tr|旁观|旁觀者|旁觀}}”下。
+|}
+
+== 导航 ==
+{{Navbox guides|je}}
+
+[[en:Java Edition guides/The Copper Age]]
+[[ja:ガイド/Java Edition/銅の時代]]
+[[pt:Guias da Edição Java/The Copper Age]]

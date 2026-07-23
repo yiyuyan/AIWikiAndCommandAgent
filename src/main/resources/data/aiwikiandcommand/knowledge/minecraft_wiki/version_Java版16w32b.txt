@@ -1,0 +1,98 @@
+# 页面: Java版16w32b
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8816w32b
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:17
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=16w32b
+|image=16w32a.png
+|image2=Java Edition 16w32b Simplified.png\Java Edition 16w32b Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2016年8月11日
+|jsonhash=a672dd946075b43da267bcd73d3953f09845767c
+|clienthash=71afbf19a5e9d37cceb449743323acbb17895dae
+|serverhash=b912ff1468e93003f36cda32db5d70133b517f97
+|parent=1.11
+|prevparent=1.10.2
+|prev=16w32a
+|next=16w33a
+|nextparent=1.11.1
+}}<onlyinclude>
+
+'''16w32b'''是[[Java版1.11]]的第2个快照，发布于2016年8月11日<ref>{{cite|url=http://mojang.com/2016/08/minecraft-snapshot-16w32a/|archive-url=1|archive=1|title=Minecraft snapshot 16w32b|author=Searge|website=Mojang.com|date=August 10, 2016}}</ref>，重新加入了傻子村民以及傻子僵尸村民，并修复了[[16w32a]]的一些漏洞和崩溃。
+
+== 更改 ==
+=== 方块 ===
+'''[[铁轨]]'''
+* 所有种类的铁轨的碰撞箱都从一整个方块减少为半个方块。
+
+=== 命令 ===
+'''{{cmd|title}}'''
+* 现在能在动作栏中显示文字。
+
+=== 生物 ===
+'''[[傻子村民]]'''
+* 作为<code>Profession:5</code>重新加入该实体，它的交易GUI中显示的名称为“傻子（Nitwit）”
+* 可以在村庄中自然生成
+* 自然生成或刷怪蛋生成的傻子村民都不会进行任何交易。
+** 当使用命令生成一个傻子村民，它仍可以进行一次互动，虽然交易槽为空。<ref>{{bug|MC-106056|||Fixed}}</ref>
+** 当一个普通僵尸村民被治愈时，它可以变为其他职业进行交易。<ref>{{bug|MC-106058|||Fixed}}</ref>
+
+'''[[僵尸村民|傻子僵尸村民]]'''
+* 重新加入该实体，但还没有特殊作用。
+* 和其他僵尸村民一样能自然生成。
+
+== 修复 ==
+{{fixes|fixedin=16w32b|prefix=Minecraft|showdesc=1
+|;old
+|2188|对一只带鞍的猪点右键时物品会被使用。
+|19033|带鞍的猪的名字会消失，但是当它所处区块被卸载时又会恢复。
+|30790|落地粒子的扩散度是基于下落距离而不是下落速度计算的。
+|34943|可以与使用{{cmd|summon|link=none}}命令生成的不带“<code>Count</code>”标签的村民交易，但交易时不收取相应物品。
+|71367|把两格物品栏中的同种物品通过{{key|Shift}}点击的方式放入铁砧中时，可以使得客户端侧物品栏中的数量为0。
+|75290|把青金石从背包放入附魔界面中时可以使背包中出现数量为0的青金石。
+|76899|按住鼠标中键拖动物品可以使物品数量为0。
+|97245|放船声的字幕使用的是装备声的字幕。
+|100398|<code>Marker</code>为<code>true</code>的盔甲架可以被活塞推动。（<code>incl. + excl. NoGravity:1</code>）
+|101063|村民交易中无效的物品ID会导致尝试进行此交易的客户端崩溃。
+|101608|传送载具会导致乘客被踢下载具。
+|102248|玩家被流浪者杀死时，显示的死亡消息是“<玩家名> 被骷髅杀死了”。
+|102454|不能生成绿袍村民和绿袍僵尸村民。
+|102638|所有种类的斜面铁轨的判定箱与完整方块的一致。
+|;previous
+|105948|不能在游戏内更改语言/选择语言时游戏崩溃。
+|105950|僵尸村民刷怪蛋只会刷出农民僵尸村民。
+|105953|使用没有对应物品形式方块的超平坦预设会导致游戏崩溃（例如虚空）。
+|105954|被手持没有指定伤害值物品的生物攻击时游戏崩溃。
+|105955|选择器中不接受以“<code>minecraft:</code>”开头的实体类型，但是错误信息中指出的并不是这个错误。
+|105956|尝试骑刷怪蛋刷出的驴或骡会导致游戏崩溃。
+|105960|提示框中显示的实体ID使用的还是旧版格式（例如：<code>ArmorStand</code>而不是<code>minecraft:armor_stand</code>）。
+|105962|捡起物品的相关成就不会被触发。
+|105969|{{cmd|summon minecraft:lightning_bolt|link=none}}命令不工作。
+|105970|破坏结构空位方块时显示的是缺失纹理。
+|105975|在统计中实体的翻译名称不正确。
+|105989|在重载世界时，使用{{cmd|execute|link=none}}命令检测楼梯的进程会被终止。
+|105990|在创造模式中，使用单个拴绳时拴绳会被清除。
+|106002|{{key|Shift}}键双击不再能移动所有同种物品。
+|106014|把钓鱼竿浮标扔到下界传送门中时，游戏崩溃。
+|106016|盔甲放上盔甲架后不能取下。
+|106035|客户端会删除<code>assets</code>文件夹。
+|106036|使用发射器发射南瓜或凋灵骷髅头颅时游戏崩溃。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:16w32b]]
+[[en:Java Edition 16w32b]]
+[[es:Java Edition 16w32b]]
+[[fr:Édition Java 16w32b]]
+[[ja:Java Edition 16w32b]]
+[[nl:16w32b]]
+[[pt:Edição Java 16w32b]]
+[[ru:16w32b (Java Edition)]]

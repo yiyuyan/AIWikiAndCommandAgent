@@ -1,0 +1,37 @@
+# 页面: 魔咒数据格式/等级依赖函数
+# 来源: https://zh.minecraft.wiki/w/%E9%AD%94%E5%92%92%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/%E7%AD%89%E7%BA%A7%E4%BE%9D%E8%B5%96%E5%87%BD%E6%95%B0
+# 分类: 通过Nbt inherit加载的页面, 顶级数据值页面
+# 抓取时间: 2026-07-14 17:39:17
+# 原始 Wikitext 内容:
+
+<div class="treeview"><onlyinclude>
+** {{nbt|string|type}}：等级依赖函数的类型。可以为<code>clamped</code>（钳制）、<code>fraction</code>（相除）、<code>levels_squared</code>（平方）、<code>linear</code>（线性）、<code>lookup</code>（查找）、<code>exponent</code>（相乘，但倍数作幂运算）。
+** {{nbt condition|如果{{nbt|string|type}}为<code>clamped</code>，则将内部的另一个等级依赖函数的输出值钳制到指定区间后输出。}}
+** {{nbt|float|max|required=1}}：输出的最大值。
+** {{nbt|float|min|required=1}}：输出的最小值。
+** {{nbt|float}}{{nbt|compound|value|required=1}}：要钳制的输入。
+*** {{nbt inherit/level based value}}
+** {{nbt condition|如果{{nbt|string|type}}为<code>fraction</code>，则将内部两个等级依赖函数的输出相除后输出。}}
+** {{nbt|float}}{{nbt|compound|denominator|required=1}}：作为除数的输入。当除数为0时输出为0。
+*** {{nbt inherit/level based value}}
+** {{nbt|float}}{{nbt|compound|numerator|required=1}}：作为被除数的输入。
+*** {{nbt inherit/level based value}}
+** {{nbt condition|如果{{nbt|string|type}}为<code>levels_squared</code>，则输出值为魔咒等级的平方加一个指定的数字。}}
+** {{nbt|float|added|required=1}}：魔咒等级平方后再增加的值。
+** {{nbt condition|如果{{nbt|string|type}}为<code>linear</code>，则根据魔咒的等级值计算出输出值。}}
+** {{nbt|float|base|required=1}}：当魔咒为I级时的输出值''b''。
+** {{nbt|float|per_level_above_first|required=1}}：魔咒每增加一级，输出值的增加值''p''。对于等级为''n''的魔咒，此等级依赖函数返回<math>b+p(n-1)</math>。
+** {{nbt condition|如果{{nbt|string|type}}为<code>lookup</code>，则根据魔咒等级选择对应的等级依赖函数后输出。魔咒等级<code>level</code>对应{{nbt|list|values}}中下标为<code>level - 1</code>的等级依赖函数，若对应下标超出所定义的{{nbt|list|values}}的下标范围，则使用{{nbt|float}}{{nbt|compound|fallback}}所定义的等级依赖函数。}}
+** {{nbt|list|values|required=1}}：各个魔咒等级下函数的输出。
+*** {{nbt|float}}：指定魔咒等级下函数的输出。第一个值即为魔咒为I级时的输出，以此类推。
+** {{nbt|float}}{{nbt|compound|fallback|required=1}}：当魔咒等级超出了{{nbt|list|values}}的长度，则使用此等级依赖函数计算输出。
+*** {{nbt inherit/level based value}}
+** {{nbt condition|如果{{nbt|string|type}}为<code>exponent</code>，则输出值为输入值乘上一个经过幂运算的常数。}}
+** {{nbt|float}}{{nbt|compound|base|required=1}}：幂运算的底数。
+*** {{nbt inherit/level based value}}
+** {{nbt|float}}{{nbt|compound|power|required=1}}：幂运算的指数。
+*** {{nbt inherit/level based value}}
+</onlyinclude></div><noinclude>
+[[Category:顶级数据值页面]]
+[[Category:通过Nbt inherit加载的页面]]
+</noinclude>

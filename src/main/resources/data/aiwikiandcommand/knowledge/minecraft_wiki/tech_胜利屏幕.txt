@@ -1,0 +1,176 @@
+# 页面: 胜利屏幕
+# 来源: https://zh.minecraft.wiki/w/%E8%83%9C%E5%88%A9%E5%B1%8F%E5%B9%95
+# 分类: Java版独有信息, Minecraft, 基岩版独有信息, 待更新条目, 需要验证/基岩版
+# 抓取时间: 2026-07-14 17:34:43
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|鸣谢名单|製作人員名單|鳴謝名單}}
+'''胜利屏幕（Win screen）'''和'''鸣谢与著作权说明屏幕（Credits and attribution screen）'''是覆盖整个窗口的文本消息。
+
+胜利屏幕在[[玩家]]首次进入[[返回传送门]]时出现，主要展示[[终末之诗]]，因此也常被称为“终末之诗屏幕”。
+
+== 机制 ==
+在一定条件下（通常是在击杀[[末影龙]]后，[[返回传送门]]会被激活，以供玩家离开[[末地]]回到主世界，详见{{slink||技术性细节}}），当玩家跳入末地中的[[末地传送门方块]]时，胜利屏幕会立即呈现，此时玩家可以将其阅读完毕或是跳过。之后，玩家会回到自己的重生点。胜利屏幕只会在玩家第一次进入返回传送门时显示。
+
+{{in|java}}单击[[主菜单]]屏幕右下角的版权文本会打开“{{tp|credits_and_attribution.screen.title}}”页面；{{in|bedrock}}在“[[设置]]”窗口的“档案”选项卡中点击“制作团队”按钮可以查看鸣谢名单。
+
+胜利屏幕包含三个主要的文本部分：终末之诗、鸣谢名单、引言。鸣谢与著作权说明屏幕只有鸣谢名单。
+
+{{in|je}}胜利屏幕的背景使用[[末地传送门（方块）|末地传送门]]和[[末地折跃门（方块）|末地折跃门]]的动画效果，鸣谢和著作权说明屏幕的背景使用暗化、模糊化的[[全景图]]；{{in|be}}胜利屏幕的背景使用[[背景图|泥土背景]]。
+
+在胜利屏幕或鸣谢与著作权说明屏幕显示时，会播放[[Minecraft - Volume Beta]]中的[[Alpha（音乐）|Alpha]]，即音轨<code>alpha.ogg</code>{{only|je}}/<code>credits.ogg</code>{{only|be}}。
+
+在胜利屏幕或鸣谢与著作权说明屏幕中，可以通过按下{{key|Esc}}键（{{in|be|nc=1}}还可以点击右下角的“跳过”按钮）来跳过它。{{in|java}}还可以按住{{key|Space}}加速文本向下滚动，同时按住{{key|Ctrl}}进一步加速，再按住另一个{{key|Ctrl}}使速度达到最快；按住{{key|Up}}可以使文本向上滚动，详见{{slink||速度计算}}。
+
+[[玩家]]开启胜利屏幕时处于进入返回传送门的位置，其与{{el|je}}的[[标记]]一样只存在于服务端，因此具有类似的行为。
+
+=== 速度计算 ===
+{{exclusive|java|section=1}}
+当胜利屏幕或鸣谢与著作权说明屏幕打开时，计算基准速度：胜利屏幕为0.5，鸣谢与著作权说明屏幕为0.75。
+
+玩家每次按下或松开按键，都会计算按键数量和滚动速度。若设基准速度为<math>b</math>，按下{{key|Space}}的数量为<math>s</math>，按下{{key|Ctrl}}的数量为<math>c</math>，按下{{key|Up}}的数量为<math>u</math>，则滚动速度的值为<math>\left(-1\right)^u\left[\left(15c+4\right)s+1\right]b</math>。
+
+每次渲染该屏幕，均会增加对应的滚动速度。背景速度為文字速度的一半。
+
+=== 技术性细节 ===
+对于{{el|je}}，终末之诗、鸣谢名单和引言均储存在<samp>[[client.jar]]</samp>中：终末之诗的文本储存在{{filepath|assets/minecraft/texts/end.txt}}，鸣谢名单储存在{{filepath|assets/minecraft/texts/credits.json}}，引言则储存在{{filepath|assets/minecraft/texts/postcredits.txt}}；它们都可以使用[[资源包]]编辑。对于{{el|be}}，终末之诗的文本储存在{{filepath|data/credits/end.txt}}，鸣谢名单储存在{{filepath|data/credits/credits.json}}，引言则储存在{{filepath|data/credits/quote.txt}}。
+
+谈话者1的叙述所用的[[格式化代码]]是<code>§3</code>（湖蓝色），而谈话者2的叙述使用了<code>§2</code>（深绿色），玩家名称以<code>PLAYERNAME</code>的形式插入文本，而乱码则是<code>§f§k§a§b</code>。
+
+在显示时，<code>§f§k§a§b</code>会逐一替换为<code>-{}-§f§k''3~6个X''</code>。其中<code>X</code>的数量使用固定种子的随机数生成器生成，随机序列的前30个值为6 6 5 3 5 6 3 6 6 4 5 5 6 6 6 6 3 4 4 4 5 6 3 3 5 5 4 4 4 5。{{verify|bedrock=1}}
+
+玩家进入返回传送门后胜利屏幕是否显示，取决于玩家的实体数据{{only|for={{nbt|bool|seenCredits}}|je|short=1}}或{{only|for={{nbt|bool|hasSeenCredits}}|be|short=1}}。初始状态下为{{samp|false}}，此时诗会显示；玩家看过或跳过之后，数据变为{{samp|true}}，则不再会显示。
+
+鸣谢名单的JSON结构如下：
+<div class="treeview">
+* {{nbt|list}} 鸣谢名单。
+** {{nbt|compound}}：鸣谢名单中的一个部分。
+*** {{nbt|string|section}}：此部分的名称。游戏中显示为黄色居中文本，上下分别显示一行形似双横线的12个等于号（<code>============</code>）。
+*** {{nbt|list|disciplines}}：部门列表。
+**** {{nbt|string|discipline}}：此部门的名称。若字符串不为空，则显示为黄色居中文本。目前只有Mojang Studios各部门的鸣谢名单用到了这层结构，其他部分均留空（<code>""</code>）。
+**** {{nbt|list|titles}}：职位列表。
+***** {{nbt|compound}}：职位列表中的一个职位。
+****** {{nbt|string|title}}：此职位的名称。游戏中显示为灰色文本。
+****** {{nbt|list|names}}：职员列表。
+******* {{nbt|string}}：一位职员的姓名。游戏中显示为白色文本，并缩进了11个字符。
+</div>
+
+== 内容 ==
+胜利屏幕总共会显示约62分钟42秒{{only|je}}或63分9秒{{only|be}}。
+
+=== 终末之诗 ===
+{{main|终末之诗}}
+[[终末之诗]]会显示约7分钟42秒{{only|je}}或3分钟21秒{{only|be}}。
+
+=== 鸣谢名单 ===
+{{needs update|更新显示时长（en亦过时），同时建议用注释给出测算方法|section=1}}
+鸣谢名单会显示约55分钟{{only|je}}或60分钟{{only|be}}。
+
+鸣谢名单可以在[[Minecraft网站]]的[https://www.minecraft.net/credits 此页面]上查看。
+
+{{:胜利屏幕/鸣谢名单}}
+
+如正文无法正常显示，可前往[[胜利屏幕/鸣谢名单|内容页面]]查看。
+
+=== 引言 ===
+[[File:The End of End Poem 20 Years.png|thumb|鸣谢名单结束后浮现的一段话]]
+
+胜利屏幕的末尾附有如下引言：
+{{quote|Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails. Explore. Dream. Discover.|Unknown}}
+
+参考译文：
+{{quote|二十年之后，更令你懊悔的不是你做了什么，而是你没做什么。所以解开帆索，离开安全的港湾，赶着航程中的信风，去探索，去梦想，去发现。|佚名}}
+
+虽然这段话在此处署名“佚名”，但实际上它出自[[wikipedia:H. Jackson Brown Jr.|H. Jackson Brown Jr.]]的作品''P.S. I Love You''。<ref>https://www.goodreads.com/quotes/2340-twenty-years-from-now-you-will-be-more-disappointed-by</ref>这句话广泛地被误认为出自[[wzh:马克·吐温|马克·吐温]]。<ref>https://www.huffpost.com/entry/thats-what-he-said-quotin_b_4282800</ref>
+
+== 音效 ==
+{{Music disclaimer}}
+{{el|je}}：
+{{Sound table
+|sound=Alpha.ogg
+|subtitle=-
+|source=音乐
+|description=胜利屏幕或鸣谢与著作权说明屏幕背景音乐
+|id=music.credits
+|translationkey=-
+|foot=1
+}}
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Alpha.ogg
+|source=音乐
+|description=胜利屏幕或鸣谢与著作权说明屏幕背景音乐
+|id=music.game.credits
+|typeid=credits
+|soundvolume=0.1
+|soundpitch
+|sounddistance
+|soundstream=1
+|soundpreload=1
+|usedelay=1
+|sounddelay=0
+|foot=1
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||2011年10月16日|link=none|[[Notch]]在推特中发表推文，希望有人能为游戏结尾写上一段“傻气、夸张又莫名其妙的文字”。
+|作家{{w|朱利安·高夫|Julian Gough}}<ref>[http://boingboing.net/2012/01/09/ending-an-endless-game-an-int.html Ending an endless game: an interview with Julian Gough, author of Minecraft's epic finale] Boingboing.net</ref>为游戏结尾撰写了文段，随后其得名为“终末之诗”。
+|后来，Notch说Gough的小说''[http://pastebin.com/ateTJxEK The iHole]''使他确信Gough是写终末之诗的最佳人选。<ref>{{tweet|notch|222246755603988480}}</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre6|加入了胜利屏幕，展示终末之诗、鸣谢名单和引言。}}
+|{{HistoryLine||1.4.2|dev=12w32a|制作人员名单结束后出现的语录的作者由“马克·吐温”变为“未知”。}}
+|{{HistoryLine||1.12|dev=pre6|加入了鸣谢与著作权说明屏幕，可以在主菜单中点击右下角的版权文本查看。}}
+|{{HistoryLine||1.16|dev=pre3|更新了鸣谢名单。}}
+|{{HistoryLine||1.17|dev=pre1|现在按住空格键可以加快屏幕的滚动速度。
+|更新了鸣谢名单的文本，现在与{{el|be}}相同。这也导致结尾处的引言被移除。<ref name="quote">{{bug|MC-227204|||Fixed}}</ref>
+|鸣谢名单文件的格式由{{cd|.txt}}改为{{cd|.json}}。}}
+|{{HistoryLine|||dev=pre4|现在在按住空格键的同时若按住{{key|Ctrl}}键会让滚动速度变得更快。若同时按住两个{{key|Ctrl}}键，滚动速度会达到最高。
+|修正了鸣谢名单中的各种笔误。}}
+|{{HistoryLine||1.18|dev=pre2|更新了鸣谢名单的文本，现在与{{el|be}}相同。
+|结尾处的引言被重新加入。<ref name="quote"/>
+|再次修正了鸣谢名单中的各种笔误。}}
+|{{HistoryLine||1.19.4|dev=pre4|加入了用于打开鸣谢名单的[[选项]]按钮。
+|现在单击主菜单的版权文本会进入“{{tp|options.credits_and_attribution}}”页面，而不是直接打开鸣谢名单。}}
+|{{HistoryLine||1.20|dev=23w17a|更改了鸣谢名单的格式，向其中添加了{{cd|discipline}}层级。
+|现在胜利屏幕和鸣谢与著作权说明屏幕可通过{{key|Up}}键向上滚动。
+|又一次修正了鸣谢名单中的各种笔误。}}
+|{{HistoryLine||1.20.5|dev=24w09a|胜利屏幕的背景现在由泥土[[背景图]]更改为[[返回传送门]]的背景动画。
+|鸣谢和著作权说明屏幕的背景现在改为暗化、模糊化的[[全景图]]。
+|修复了<code>options_background.png</code>异常颠倒的漏洞。<ref>{{bug|MC-19893|||Fixed}}</ref>}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了胜利屏幕。}}
+|{{HistoryLine|||dev=正式版|{{cd|credit.ogg}}现在会在胜利屏幕出现时播放。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.13.0|dev=1.13.0.9|加入了鸣谢名单。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.24|更新了鸣谢名单。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.25|更新了鸣谢名单。}}
+|{{HistoryLine|||dev=1.21.90.26|将[[Amos Roddy]]添加到鸣谢名单中。}}
+|{{HistoryLine||1.21.120|dev=1.21.120.20|将[[Hyper Potions]]添加到鸣谢名单中。}}
+|{{HistoryLine||26.30|dev=26.30.28|更新了鸣谢名单。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU9|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了胜利屏幕。
+|与其他版本不同，此版本中的鸣谢名单并不会在终末之诗结束后立即呈现。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Minecraft}}
+
+[[de:Abspann]]
+[[en:Credit sequence]]
+[[es:Poema del End]]
+[[fr:Poème de l'End]]
+[[ja:エンドポエム]]
+[[ko:엔드 시]]
+[[lzh:終末之詩]]
+[[nl:Endgedicht]]
+[[pl:Poemat Endu]]
+[[pt:Poema Final]]
+[[ru:Поэма Края]]
+[[th:บทกวีเอนด์]]
+[[uk:Поема Краю]]

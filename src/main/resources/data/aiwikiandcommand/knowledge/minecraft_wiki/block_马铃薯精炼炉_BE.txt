@@ -1,0 +1,26 @@
+# 页面: 马铃薯精炼炉/BE
+# 来源: https://zh.minecraft.wiki/w/%E9%A9%AC%E9%93%83%E8%96%AF%E7%B2%BE%E7%82%BC%E7%82%89/BE
+# 分类: 方块实体页面
+# 抓取时间: 2026-07-14 17:39:04
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 方块实体数据
+** {{nbt collapsed|方块实体共通标签|{{#lst:编码格式/BlockEntity|codec_block_entity_24w14potato}}}}
+** {{nbt|string|CustomName}}：表示当前马铃薯精炼炉名称的[[JSON文本]]，会取代默认名称出现在马铃薯精炼炉的界面中。
+** {{nbt|string|Lock}}：如果存在且不为空字符串，游戏会阻止马铃薯精炼炉被“未持有名称与此项相符的物品”的玩家打开。
+** {{nbt|short|BurnTime|required=1|existonsave=1}}：在当前的燃料耗尽之前剩下的时间。
+** {{nbt|short|CookTime|required=1|existonsave=1}}：该物品已被精炼或润滑的时间。当该值达到{{nbt|short|CookTimeTotal}}时，物品完成精炼或润滑，此值重置为0。如果{{nbt|short|BurnTime}}为0，此值每游戏刻减少2。如果此值大于{{nbt|short|CookTimeTotal}}，则无法完成精炼。
+** {{nbt|short|CookTimeTotal|required=1|existonsave=1}}：该物品需要多长时间才能完成精炼或润滑。
+** {{nbt|list|Items|required=1|existonsave=1}}：当前马铃薯精炼炉内物品的列表，超出槽位范围的物品无效。槽位0代表左上方槽位的物品；槽位1代表要作为燃料使用的物品；槽位2代表右上方槽位的物品；槽位3代表右下方槽位的物品。
+*** {{nbt|compound}}：一个物品。
+**** {{nbt collapsed|物品共通标签|{{#lst:编码格式/Item|codec_item_with_slot_24w14potato}}}}
+** {{nbt|compound|RecipesUsed|required=1|existonsave=1}}：马铃薯精炼炉从最后一次成品被玩家取出到现在已经精炼的配方数，用于计算经验值。
+*** {{nbt|int|<''[[配方]]的[[命名空间ID]]''>}}：此配方精炼成功的数量。
+** {{nbt|float|storedExperience|required=1|existonsave=1}}：玩家取出输出槽的物品时给予玩家的经验值。不存在时默认为0。
+</div><noinclude>
+[[Category:方块实体页面]]
+
+[[en:Potato_Refinery/BE]]
+[[ja:Potato Refinery/BE]]
+</noinclude>

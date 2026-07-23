@@ -1,0 +1,48 @@
+# 页面: 天气数据存储格式
+# 来源: https://zh.minecraft.wiki/w/%E5%A4%A9%E6%B0%94%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:04
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+'''天气数据存储文件'''是游戏存储[[天气]]状态所用的文件。
+
+== 存储格式 ==
+天气数据存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/weather.dat}}。
+
+天气数据存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|int|clear_weather_time|existonsave=1}}：存档内世界晴天剩余时间，在此期间天气将保持晴天，但此值大于0不是晴天的必要条件。当此值不存在时游戏默认为0。
+*** {{nbt|bool|raining|existonsave=1}}：当前存档内世界是否正在降雨。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|int|rain_time|existonsave=1}}：如果存档内世界目前不处于降雨天气，此值代表距离下一次降雨的时间。如果目前正处于降雨天气，此值表示距离降雨结束的时间。此值按游戏刻计算。如果此项不存在游戏默认为0。
+*** {{nbt|bool|thundering|existonsave=1}}：当前存档内世界是否正处于[[雷暴]]天气。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|int|thunder_time|existonsave=1}}：如果存档内世界目前不处于雷暴天气，此值代表距离下一次雷暴的时间。如果目前正处于雷暴天气，此值表示距离雷暴结束的时间。此值按游戏刻计算。如果此项不存在游戏默认为0。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此天气数据存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+加载存档时，如果不存在天气数据存储文件，则游戏会自动生成新文件。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||26.1|dev=snapshot-6|加入了天气数据存储文件。
+|此前，天气数据存储于{{filename|[[level.dat]]}}中，且重命名了部分标签。
+<div class{{=}}"treeview">
+* {{nbt|compound}} '''level.dat根标签'''
+** {{nbt|compound|Data}}
+*** {{nbt|int|clearWeatherTime|existonsave=1}}：存档内世界晴天剩余时间，在此期间天气将保持晴天，但此值大于0不是晴天的必要条件。当此值不存在时游戏默认为0。
+*** {{nbt|bool|raining|existonsave=1}}：当前存档内世界是否正在降雨。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|int|rainTime|existonsave=1}}：如果存档内世界目前不处于降雨天气，此值代表距离下一次降雨的时间。如果目前正处于降雨天气，此值表示距离降雨结束的时间。此值按游戏刻计算。如果此项不存在游戏默认为0。
+*** {{nbt|bool|thundering|existonsave=1}}：当前存档内世界是否正处于雷暴天气。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|int|thunderTime|existonsave=1}}：如果存档内世界目前不处于雷暴天气，此值代表距离下一次雷暴的时间。如果目前正处于雷暴天气，此值表示距离雷暴结束的时间。此值按游戏刻计算。如果此项不存在游戏默认为0。
+</div>}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

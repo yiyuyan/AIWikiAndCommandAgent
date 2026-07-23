@@ -1,0 +1,907 @@
+# 页面: 物品
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81
+# 分类: Java版即将到来/26.3, Java版独有信息, 基岩版即将到来/26.40, 基岩版独有信息, 实验性内容/2026 年第 3 次更新, 教育版独有信息, 物品, 环境, 需要验证历史/Java版, 需要验证历史/基岩版
+# 抓取时间: 2026-07-14 17:31:49
+# 原始 Wikitext 内容:
+
+{{about|在物品栏里的物品|其存在于物品栏外时的形态|物品（实体）|生物死亡时留下的物品|掉落物|修改物品栏内物品的命令|命令/item|或|命令/replaceitem|中国版中的机制|中国版:物品}}
+{{Redirect|资源|纹理、模型等游戏资产|{{slink|资源包|资源包内容}}}}
+{{upcoming in draft}}
+{{relevant tutorial|整理物品|通用物品分类器|获取任意物品}}
+'''物品（Item）'''是会出现在[[物品栏]]中的物体，它们有各种不同的行为与作用。
+
+== 行为 ==
+持有的物品是所有[[生物]]共有的[[实体数据]]的一部分，因此所有生物都可以持有物品。如果这个生物正在展示自己持有的物品，这个物品可以被所有玩家看见。[[物品展示框]]可以展示1个物品。[[展示架]]可以展示3组物品。[[物品实体]]的外观会使用它们代表的物品，[[盔甲架]]可以展示[[盔甲]]。
+
+许多物品都定义了它们在[[玩家]]持有时{{control|使用}}的行为，以及被生物持有时的行为。一些物品在{{control|使用}}时会在游戏的世界中放置[[方块]]或[[实体]]。例如[[船]]在使用时会放置[[实体]]，而[[铁块]]在使用时会放置方块。当物品在[[快捷栏]]被选择（[[空气]]及其变种除外），[[HUD]]的上面会短暂地展示它们的名字，且{{in|be|nc=1}}还会展示魔咒等额外信息，魔咒越多展示时间越长。
+
+所有物品都有堆叠限制，大多数物品的最大堆叠数量为64，但有些物品（如[[末影珍珠]]、[[雪球]]、[[鸡蛋]]等）的最大堆叠数量为16，而某些特殊物品（如[[工具]]、[[盔甲]]、[[药水]]等）不能堆叠。具有不同[[NBT]]数据的物品通常不能堆叠在一起。
+
+所有物品都有[[稀有度]]，改变其名称颜色。绝大多数物品的稀有度都是“常见”（如[[橡树原木]]），少数物品的稀有度会是“少见”（如[[不死图腾]]）、“稀有”（如[[附魔金苹果]]）或“史诗”（如[[重锤]]）。
+
+所有物品都可以在[[铁砧]]上进行重命名。具有自定义名称的物品，其名称将会是斜体。
+
+所有物品都可以通过编辑其数据组件[[数据组件#lore|<code>lore</code>]]被添加描述。
+
+物品可以被添加[[魔咒]]，获得多种特殊效果。具有魔咒的物品还会获得一个半透明的紫色动态[[光效]]动画，并提升其稀有度。{{in|je}}通过[[命令]]，任何物品都可以被添加魔咒。
+
+所有物品都在其数据组件[[数据组件#repair_cost|<code>repair_cost</code>]]记录了在铁砧上进行操作而获得的操作数，增加该物品后续在铁砧上进行操作的经验等级花费惩罚。
+
+部分物品具有[[耐久度]]，其耐久度会因多种因素被消耗。{{in|java}}所有物品都可以通过添加数据组件[[数据组件#unbreakable|<code>unbreakable</code>]]来阻止任何形式的耐久度消耗。当物品的耐久度降至0时，物品会被消耗。
+
+物品可以在[[创造模式]]下无限使用，不会消耗耐久度，也不会被消耗。
+
+部分物品具有属性修饰符，可以修改拥有该物品的生物的[[属性]]。[[工具]]在持有在主手上时会改变生物的属性，而[[盔甲]]在被穿戴在正确位置上时会改变生物的属性。通过命令，任何物品都可以被添加属性修饰符。
+
+部分物品可能会因为多种因素进入冷却时间，期间物品在物品栏中会被覆盖一个半透明的白色矩形，其上端随着时间逐渐下降。冷却时间期间，物品不可以被{{control|使用}}。常见的冷却时间物品包括[[末影珍珠]]、[[紫颂果]]、[[风弹]]、被[[斧]]击中的[[盾牌]]等。
+
+{{in|je}}物品还具有合成后返还物品属性，负责被合成后应该返还的物品。在[[合成]]时，返还物品会留在合成方格或返回到物品栏；在[[烧炼]]时，若只存在一个燃料物品，则燃料消耗后会返还物品；在[[药水酿造]]时，加入的材料在酿造结束后会返还物品，若材料槽位还有物品则会以[[物品实体]]形式弹出。[[水桶]]、[[熔岩桶]]和[[奶桶]]的返还物品是[[铁桶]]，[[蜂蜜瓶]]和[[龙息]]的返还物品是[[玻璃瓶]]。
+
+== 物品列表 ==
+=== 产生方块、液体或实体的物品 ===
+{{columns-list|colwidth=16em|
+* {{ItemLink|Acacia Boat}}
+* {{ItemLink|Acacia Boat with Chest}}
+* {{ItemLink|Armor Stand}}
+* {{ItemLink|Bamboo Raft}}
+* {{ItemLink|Bamboo Raft with Chest}}
+* {{ItemLink|Beetroot Seeds}}
+* {{ItemLink|Birch Boat}}
+* {{ItemLink|Birch Boat with Chest}}
+* {{ItemLink|Blue Egg}}
+* {{ItemLink|Bottle o' Enchanting}}
+* {{ItemLink|Bow}}
+* {{ItemLink|Brown Egg}}
+* {{ItemLink|Bucket of Axolotl}}
+* {{ItemLink|Bucket of Cod}}
+* {{ItemLink|Bucket of Pufferfish}}
+* {{ItemLink|Bucket of Salmon}}
+* {{ItemLink|Bucket of Tadpole}}
+* {{ItemLink|Bucket of Tropical Fish}}
+* {{ItemLink|Bucket of Sulfur Cube}}
+* {{ItemLink|Carrot}}
+* {{ItemLink|Cherry Boat}}
+* {{ItemLink|Cherry Boat with Chest}}
+* {{ItemLink|Cocoa Beans}}
+* {{ItemLink|Crossbow}}
+* {{ItemLink|Dark Oak Boat}}
+* {{ItemLink|Dark Oak Boat with Chest}}
+* {{ItemLink|Egg}}
+* {{ItemLink|End Crystal}}
+* {{ItemLink|Ender Pearl}}
+* {{ItemLink|Eye of Ender}}
+* {{ItemLink|Fire Charge}}
+* {{ItemLink|Firework Rocket}}
+* {{ItemLink|Fishing Rod}}
+* {{ItemLink|Flint and Steel}}
+* {{ItemLink|Glow Berries}}
+* {{ItemLink|Glow Item Frame}}
+* {{ItemLink|Item Frame}}
+* {{ItemLink|Jungle Boat}}
+* {{ItemLink|Jungle Boat with Chest}}
+* {{ItemLink|Kelp}}
+* {{ItemLink|Lava Bucket}}
+* {{ItemLink|Lead}}
+* {{ItemLink|Lingering Potion}}
+* {{ItemLink|Mangrove Boat}}
+* {{ItemLink|Mangrove Boat with Chest}}
+* {{ItemLink|Melon Seeds}}
+* {{ItemLink|Minecart}}
+* {{ItemLink|Minecart with Chest}}
+* {{ItemLink|Minecart with Command Block}}
+* {{ItemLink|Minecart with Furnace}}{{only|je}}
+* {{ItemLink|Minecart with Hopper}}
+* {{ItemLink|Minecart with TNT}}
+* {{ItemLink|Nether Wart}}
+* {{ItemLink|Oak Boat}}
+* {{ItemLink|Oak Boat with Chest}}
+* {{ItemLink|Painting}}
+* {{ItemLink|Pale Oak Boat}}
+* {{ItemLink|Pale Oak Boat with Chest}}
+* {{ItemLink|Pitcher Pod}}
+* {{ItemLink|Poplar Boat}}{{in update|drop 3 2026}}
+* {{ItemLink|Poplar Boat with Chest}}{{in update|drop 3 2026}}
+* {{ItemLink|Potato}}
+* {{ItemLink|Powder Snow Bucket}}
+* {{ItemLink|Pumpkin Seeds}}
+* {{ItemLink|Redstone Dust}}
+* {{ItemLink|Snowball}}
+* {{ItemLink|Splash Potion}}
+* {{ItemLink|Spruce Boat}}
+* {{ItemLink|Spruce Boat with Chest}}
+* {{ItemLink|String}}
+* {{ItemLink|Sweet Berries}}
+* {{ItemLink|Torchflower Seeds}}
+* {{ItemLink|Trident}}
+* {{ItemLink|Water Bucket}}
+* {{ItemLink|Wheat Seeds}}
+* {{ItemLink|Wind Charge}}
+}}
+
+=== 在世界中可以交互的物品 ===
+{{columns-list|colwidth=16em|
+* {{ItemLink|Apple}}
+* {{ItemLink|Arrow}}
+* {{ItemLink|Baked Potato}}
+* {{ItemLink|Beetroot}}
+* {{ItemLink|Beetroot Soup}}
+* {{ItemLink|Black Dye}}
+* {{ItemLink|Black Harness}}
+* {{ItemLink|Blue Dye}}
+* {{ItemLink|Blue Harness}}
+* {{ItemLink|Bone}}
+* {{ItemLink|Bone Meal}}
+* {{ItemLink|Book and Quill}}
+* {{ItemLink|Bowl}}
+* {{ItemLink|Bread}}
+* {{ItemLink|Brown Dye}}
+* {{ItemLink|Brown Harness}}
+* {{ItemLink|Brush}}
+* {{ItemLink|Bucket}}
+* {{ItemLink|Bundle}}
+* {{ItemLink|Carrot on a Stick}}
+* {{ItemLink|Chainmail Boots}}
+* {{ItemLink|Chainmail Chestplate}}
+* {{ItemLink|Chainmail Helmet}}
+* {{ItemLink|Chainmail Leggings}}
+* {{ItemLink|Charcoal}}（作为[[动力矿车]]的燃料{{only|je}}）
+* {{ItemLink|Chorus Fruit}}
+* {{ItemLink|Coal}}（作为[[动力矿车]]的燃料{{only|je}}）
+* {{ItemLink|Compass}}
+* {{ItemLink|Copper Axe}}
+* {{ItemLink|Copper Boots}}
+* {{ItemLink|Copper Chestplate}}
+* {{ItemLink|Copper Helmet}}
+* {{ItemLink|Copper Hoe}}
+* {{ItemLink|Copper Horse Armor}}
+* {{ItemLink|Copper Leggings}}
+* {{ItemLink|Copper Nautilus Armor}}
+* {{ItemLink|Copper Pickaxe}}
+* {{ItemLink|Copper Shovel}}
+* {{ItemLink|Copper Spear}}
+* {{ItemLink|Copper Sword}}
+* {{ItemLink|Cooked Chicken}}
+* {{ItemLink|Cooked Cod}}
+* {{ItemLink|Cooked Mutton}}
+* {{ItemLink|Cooked Porkchop}}
+* {{ItemLink|Cooked Rabbit}}
+* {{ItemLink|Cooked Salmon}}
+* {{ItemLink|Cookie}}
+* {{ItemLink|Cyan Dye}}
+* {{ItemLink|Cyan Harness}}
+* {{ItemLink|Debug Stick}}
+* {{ItemLink|Diamond Axe}}
+* {{ItemLink|Diamond Boots}}
+* {{ItemLink|Diamond Chestplate}}
+* {{ItemLink|Diamond Helmet}}
+* {{ItemLink|Diamond Hoe}}
+* {{ItemLink|Diamond Horse Armor}}
+* {{ItemLink|Diamond Leggings}}
+* {{ItemLink|Diamond Nautilus Armor}}
+* {{ItemLink|Diamond Pickaxe}}
+* {{ItemLink|Diamond Shovel}}
+* {{ItemLink|Diamond Spear}}
+* {{ItemLink|Diamond Sword}}
+* {{ItemLink|Dried Kelp}}
+* {{ItemLink|Elytra}}
+* {{ItemLink|Empty Map}}
+* {{ItemLink|Enchanted Golden Apple}}
+* {{ItemLink|Goat Horn}}
+* {{ItemLink|Glass Bottle}}
+* {{ItemLink|Glow Ink Sac}}
+* {{ItemLink|Gold Ingot}}
+* {{ItemLink|Golden Apple}}
+* {{ItemLink|Golden Axe}}
+* {{ItemLink|Golden Boots}}
+* {{ItemLink|Golden Carrot}}
+* {{ItemLink|Golden Chestplate}}
+* {{ItemLink|Golden Helmet}}
+* {{ItemLink|Golden Hoe}}
+* {{ItemLink|Golden Horse Armor}}
+* {{ItemLink|Golden Leggings}}
+* {{ItemLink|Golden Nautilus Armor}}
+* {{ItemLink|Golden Pickaxe}}
+* {{ItemLink|Golden Shovel}}
+* {{ItemLink|Golden Spear}}
+* {{ItemLink|Golden Sword}}
+* {{ItemLink|Gray Dye}}
+* {{ItemLink|Gray Harness}}
+* {{ItemLink|Green Dye}}
+* {{ItemLink|Green Harness}}
+* {{ItemLink|Honeycomb}}
+* {{ItemLink|Honey Bottle}}
+* {{ItemLink|Ink Sac}}
+* {{ItemLink|Iron Axe}}
+* {{ItemLink|Iron Boots}}
+* {{ItemLink|Iron Chestplate}}
+* {{ItemLink|Iron Helmet}}
+* {{ItemLink|Iron Hoe}}
+* {{ItemLink|Iron Horse Armor}}
+* {{ItemLink|Iron Ingot}}
+* {{ItemLink|Iron Leggings}}
+* {{ItemLink|Iron Nautilus Armor}}
+* {{ItemLink|Iron Pickaxe}}
+* {{ItemLink|Iron Shovel}}
+* {{ItemLink|Iron Spear}}
+* {{ItemLink|Iron Sword}}
+* {{ItemLink|Knowledge Book}}{{only|je}}
+* {{ItemLink|Lapis Lazuli}}（作为染料{{only|be}}）
+* {{ItemLink|Leather Boots}}
+* {{ItemLink|Leather Cap}}
+* {{ItemLink|Leather Horse Armor}}
+* {{ItemLink|Leather Pants}}
+* {{ItemLink|Leather Tunic}}
+* {{ItemLink|Light Blue Dye}}
+* {{ItemLink|Light Blue Harness}}
+* {{ItemLink|Light Gray Dye}}
+* {{ItemLink|Light Gray Harness}}
+* {{ItemLink|Lime Dye}}
+* {{ItemLink|Lime Harness}}
+* {{ItemLink|Lodestone Compass}}
+* {{ItemLink|Mace}}
+* {{ItemLink|Magenta Dye}}
+* {{ItemLink|Magenta Harness}}
+* {{ItemLink|Map}}及[[探险家地图]]
+* {{ItemLink|Melon Slice}}
+* {{ItemLink|Milk Bucket}}
+* {{ItemLink|Mushroom Stew}}
+* {{ItemLink|Music Disc 5}}（5）
+* {{ItemLink|Music Disc 11}}（11）
+* {{ItemLink|Music Disc 13}}（13）
+* {{ItemLink|Music Disc blocks}}（blocks）
+* {{ItemLink|Music Disc Bounce}}（Bounce）
+* {{ItemLink|Music Disc cat}}（cat）
+* {{ItemLink|Music Disc chirp}}（chirp）
+* {{ItemLink|Music Disc Creator}}（Creator）
+* {{ItemLink|Music Disc Creator (Music Box)}}（Creator（八音盒））
+* {{ItemLink|Music Disc far}}（far）
+* {{ItemLink|Music Disc Lava Chicken}}（Lava Chicken）
+* {{ItemLink|Music Disc mall}}（mall）
+* {{ItemLink|Music Disc mellohi}}（mellohi）
+* {{ItemLink|Music Disc otherside}}（otherside）
+* {{ItemLink|Music Disc Pigstep}}（Pigstep）
+* {{ItemLink|Music Disc Precipice}}（Precipice）
+* {{ItemLink|Music Disc Relic}}（Relic）
+* {{ItemLink|Music Disc stal}}（stal）
+* {{ItemLink|Music Disc strad}}（strad）
+* {{ItemLink|Music Disc Tears}}（Tears）
+* {{ItemLink|Music Disc wait}}（wait）
+* {{ItemLink|Music Disc ward}}（ward）
+* {{ItemLink|Name Tag}}
+* {{ItemLink|Netherite Axe}}
+* {{ItemLink|Netherite Boots}}
+* {{ItemLink|Netherite Chestplate}}
+* {{ItemLink|Netherite Helmet}}
+* {{ItemLink|Netherite Hoe}}
+* {{ItemLink|Netherite Horse Armor}}
+* {{ItemLink|Netherite Leggings}}
+* {{ItemLink|Netherite Nautilus Armor}}
+* {{ItemLink|Netherite Pickaxe}}
+* {{ItemLink|Netherite Shovel}}
+* {{ItemLink|Netherite Spear}}
+* {{ItemLink|Netherite Sword}}
+* {{ItemLink|Ominous Bottle}}
+* {{ItemLink|Ominous Trial Key}}
+* {{ItemLink|Orange Dye}}
+* {{ItemLink|Orange Harness}}
+* {{ItemLink|Pink Dye}}
+* {{ItemLink|Pink Harness}}
+* {{ItemLink|Poisonous Potato}}
+* {{ItemLink|Potion|Potions}}
+* {{ItemLink|Pufferfish}}
+* {{ItemLink|Pumpkin Pie}}
+* {{ItemLink|Purple Dye}}
+* {{ItemLink|Purple Harness}}
+* {{ItemLink|Rabbit Stew}}
+* {{ItemLink|Raw Beef}}
+* {{ItemLink|Raw Chicken}}
+* {{ItemLink|Raw Cod}}
+* {{ItemLink|Raw Mutton}}
+* {{ItemLink|Raw Porkchop}}
+* {{ItemLink|Raw Rabbit}}
+* {{ItemLink|Raw Salmon}}
+* {{ItemLink|Recovery Compass}}
+* {{ItemLink|Red Dye}}
+* {{ItemLink|Red Harness}}
+* {{ItemLink|Rotten Flesh}}
+* {{ItemLink|Saddle}}
+* {{ItemLink|Shears}}
+* {{ItemLink|Shield}}
+* {{ItemLink|Spectral Arrow}}{{only|je}}
+* {{ItemLink|Spider Eye}}
+* {{ItemLink|Spyglass}}
+* {{ItemLink|Steak}}
+* {{ItemLink|Stone Axe}}
+* {{ItemLink|Stone Hoe}}
+* {{ItemLink|Stone Pickaxe}}
+* {{ItemLink|Stone Shovel}}
+* {{ItemLink|Stone Spear}}
+* {{ItemLink|Stone Sword}}
+* {{ItemLink|Sugar}}
+* {{ItemLink|Suspicious Stew}}
+* {{ItemLink|Tipped Arrow}}
+* {{ItemLink|Totem of Undying}}
+* {{ItemLink|Trial Key}}
+* {{ItemLink|Tropical Fish}}
+* {{ItemLink|Turtle Shell}}
+* {{ItemLink|Warped Fungus on a Stick}}
+* {{ItemLink|Wheat}}
+* {{ItemLink|White Dye}}
+* {{ItemLink|White Harness}}
+* {{ItemLink|Wolf Armor}}
+* {{ItemLink|Wooden Axe}}
+* {{ItemLink|Wooden Hoe}}
+* {{ItemLink|Wooden Pickaxe}}
+* {{ItemLink|Wooden Shovel}}
+* {{ItemLink|Wooden Spear}}
+* {{ItemLink|Wooden Sword}}
+* {{ItemLink|Written Book}}
+* {{ItemLink|Yellow Dye}}
+* {{ItemLink|Yellow Harness}}}}
+
+=== 在世界中间接使用的物品 ===
+玩家无法与这些物品互动或直接使用。有些是装饰性的（例如[[旗帜图案]]），有些是信息性的（例如[[时钟]]或[[指南针]]），许多可用于[[交易]]，[[酿造]]或直接用作其他物品的[[合成]]材料。
+{{columns-list|colwidth=16em|
+* {{ItemLink|Amethyst Shard}}
+* {{ItemLink|Angler Pottery Sherd}}
+* {{ItemLink|Archer Pottery Sherd}}
+* {{ItemLink|Armadillo Scute}}
+* {{ItemLink|Arms Up Pottery Sherd}}
+* {{ItemLink|Blade Pottery Sherd}}
+* {{ItemLink|Blaze Powder}}
+* {{ItemLink|Blaze Rod}}
+* {{ItemLink|Breeze Rod}}
+* {{ItemLink|Book}}
+* {{ItemLink|Bordure Indented Banner Pattern}}
+* {{ItemLink|Brewer Pottery Sherd}}
+* {{ItemLink|Brick}}
+* {{ItemLink|Burn Pottery Sherd}}
+* {{ItemLink|Charcoal}}
+* {{ItemLink|Clay Ball}}
+* {{ItemLink|Clock}}
+* {{ItemLink|Coal}}
+* {{ItemLink|Copper Ingot}}
+* {{ItemLink|Copper Nugget}}
+* {{ItemLink|Creeper Charge Banner Pattern}}
+* {{ItemLink|Danger Pottery Sherd}}
+* {{ItemLink|Diamond}}
+* {{ItemLink|Disc Fragment 5}}
+* {{ItemLink|Dragon's Breath}}
+* {{ItemLink|Echo Shard}}
+* {{ItemLink|Emerald}}
+* {{ItemLink|Enchanted Book}}
+* {{ItemLink|Explorer Pottery Sherd}}
+* {{ItemLink|Feather}}
+* {{ItemLink|Fermented Spider Eye}}
+* {{ItemLink|Field Masoned Banner Pattern}}
+* {{ItemLink|Firework Star}}
+* {{ItemLink|Flint}}
+* {{ItemLink|Flow Banner Pattern}}
+* {{ItemLink|Flower Charge Banner Pattern}}
+* {{ItemLink|Flow Pottery Sherd}}
+* {{ItemLink|Friend Pottery Sherd}}
+* {{ItemLink|Ghast Tear}}
+* {{ItemLink|Glistering Melon Slice}}
+* {{ItemLink|Glowstone Dust}}
+* {{ItemLink|Globe Banner Pattern}}
+* {{ItemLink|Gold Nugget}}
+* {{ItemLink|Gunpowder}}
+* {{ItemLink|Guster Banner Pattern}}
+* {{ItemLink|Guster Pottery Sherd}}
+* {{ItemLink|Heart of the Sea}}
+* {{ItemLink|Heart Pottery Sherd}}
+* {{ItemLink|Heartbreak Pottery Sherd}}
+* {{ItemLink|Howl Pottery Sherd}}
+* {{ItemLink|Ink Sac}}
+* {{ItemLink|Iron Nugget}}
+* {{ItemLink|Lapis Lazuli}}
+* {{ItemLink|Leather}}
+* {{ItemLink|Magma Cream}}
+* {{ItemLink|Miner Pottery Sherd}}
+* {{ItemLink|Mourner Pottery Sherd}}
+* {{ItemLink|Nautilus Shell}}
+* {{ItemLink|Nether Brick}}
+* {{ItemLink|Nether Quartz}}
+* {{ItemLink|Nether Star}}
+* {{ItemLink|Netherite Ingot}}
+* {{ItemLink|Netherite Scrap}}
+* {{ItemLink|Paper}}
+* {{ItemLink|Phantom Membrane}}
+* {{ItemLink|Plenty Pottery Sherd}}
+* {{ItemLink|Popped Chorus Fruit}}
+* {{ItemLink|Prismarine Crystals}}
+* {{ItemLink|Prismarine Shard}}
+* {{ItemLink|Prize Pottery Sherd}}
+* {{ItemLink|Rabbit Hide}}
+* {{ItemLink|Rabbit's Foot}}
+* {{ItemLink|Raw Copper}}
+* {{ItemLink|Raw Gold}}
+* {{ItemLink|Raw Iron}}
+* {{ItemLink|Resin Brick}}
+* {{ItemLink|Resin Clump}}
+* {{ItemLink|Scrape Pottery Sherd}}
+* {{ItemLink|Sheaf Pottery Sherd}}
+* {{ItemLink|Shelter Pottery Sherd}}
+* {{ItemLink|Shulker Shell}}
+* {{ItemLink|Skull Charge Banner Pattern}}
+* {{ItemLink|Skull Pottery Sherd}}
+* {{ItemLink|Slimeball}}
+* {{ItemLink|id=netherite-upgrade-smithing-template|Smithing Template}}（下界合金升级）
+* {{ItemLink|id=bolt-armor-trim-smithing-template|Smithing Template}}（镶铆盔甲纹饰）
+* {{ItemLink|id=coast-armor-trim-smithing-template|Smithing Template}}（海岸盔甲纹饰）
+* {{ItemLink|id=dune-armor-trim-smithing-template|Smithing Template}}（沙丘盔甲纹饰）
+* {{ItemLink|id=eye-armor-trim-smithing-template|Smithing Template}}（眼眸盔甲纹饰）
+* {{ItemLink|id=flow-armor-trim-smithing-template|Smithing Template}}（涡流盔甲纹饰）
+* {{ItemLink|id=host-armor-trim-smithing-template|Smithing Template}}（雇主盔甲纹饰）
+* {{ItemLink|id=raiser-armor-trim-smithing-template|Smithing Template}}（牧民盔甲纹饰）
+* {{ItemLink|id=rib-armor-trim-smithing-template|Smithing Template}}（肋骨盔甲纹饰）
+* {{ItemLink|id=sentry-armor-trim-smithing-template|Smithing Template}}（哨兵盔甲纹饰）
+* {{ItemLink|id=shaper-armor-trim-smithing-template|Smithing Template}}（塑造盔甲纹饰）
+* {{ItemLink|id=silence-armor-trim-smithing-template|Smithing Template}}（幽静盔甲纹饰）
+* {{ItemLink|id=snout-armor-trim-smithing-template|Smithing Template}}（猪鼻盔甲纹饰）
+* {{ItemLink|id=spire-armor-trim-smithing-template|Smithing Template}}（尖塔盔甲纹饰）
+* {{ItemLink|id=tide-armor-trim-smithing-template|Smithing Template}}（潮汐盔甲纹饰）
+* {{ItemLink|id=vex-armor-trim-smithing-template|Smithing Template}}（恼鬼盔甲纹饰）
+* {{ItemLink|id=ward-armor-trim-smithing-template|Smithing Template}}（监守盔甲纹饰）
+* {{ItemLink|id=wayfinder-armor-trim-smithing-template|Smithing Template}}（向导盔甲纹饰）
+* {{ItemLink|id=wild-armor-trim-smithing-template|Smithing Template}}（荒野盔甲纹饰）
+* {{ItemLink|Snort Pottery Sherd}}
+* {{ItemLink|Snout Banner Pattern}}
+* {{ItemLink|Stick}}
+* {{ItemLink|Thing Banner Pattern}}
+* {{ItemLink|Turtle Scute}}
+}}
+
+=== 刷怪蛋 ===
+{{columns-list|colwidth=16em|
+* {{ItemLink|Allay Spawn Egg}}
+* {{ItemLink|Armadillo Spawn Egg}}
+* {{ItemLink|Axolotl Spawn Egg}}
+* {{ItemLink|Bat Spawn Egg}}
+* {{ItemLink|Bee Spawn Egg}}
+* {{ItemLink|Blaze Spawn Egg}}
+* {{ItemLink|Bogged Spawn Egg}}
+* {{ItemLink|Breeze Spawn Egg}}
+* {{ItemLink|Camel Husk Spawn Egg}}
+* {{ItemLink|Camel Spawn Egg}}
+* {{ItemLink|Cat Spawn Egg}}
+* {{ItemLink|Cave Spider Spawn Egg}}
+* {{ItemLink|Chicken Spawn Egg}}
+* {{ItemLink|Cod Spawn Egg}}
+* {{ItemLink|Copper Golem Spawn Egg}}
+* {{ItemLink|Cow Spawn Egg}}
+* {{ItemLink|Creaking Spawn Egg}}
+* {{ItemLink|Creeper Spawn Egg}}
+* {{ItemLink|Dolphin Spawn Egg}}
+* {{ItemLink|Donkey Spawn Egg}}
+* {{ItemLink|Drowned Spawn Egg}}
+* {{ItemLink|Elder Guardian Spawn Egg}}
+* {{ItemLink|Ender Dragon Spawn Egg}}
+* {{ItemLink|Enderman Spawn Egg}}
+* {{ItemLink|Endermite Spawn Egg}}
+* {{ItemLink|Evoker Spawn Egg}}
+* {{ItemLink|Fox Spawn Egg}}
+* {{ItemLink|Frog Spawn Egg}}
+* {{ItemLink|Ghast Spawn Egg}}
+* {{ItemLink|Glow Squid Spawn Egg}}
+* {{ItemLink|Goat Spawn Egg}}
+* {{ItemLink|Guardian Spawn Egg}}
+* {{ItemLink|Happy Ghast Spawn Egg}}
+* {{ItemLink|Hoglin Spawn Egg}}
+* {{ItemLink|Horse Spawn Egg}}
+* {{ItemLink|Husk Spawn Egg}}
+* {{ItemLink|Iron Golem Spawn Egg}}
+* {{ItemLink|Llama Spawn Egg}}
+* {{ItemLink|Magma Cube Spawn Egg}}
+* {{ItemLink|Mooshroom Spawn Egg}}
+* {{ItemLink|Mule Spawn Egg}}
+* {{ItemLink|Nautilus Spawn Egg}}
+* {{ItemLink|NPC Spawn Egg}}{{only|be|ee}}
+* {{ItemLink|Ocelot Spawn Egg}}
+* {{ItemLink|Panda Spawn Egg}}
+* {{ItemLink|Parched Spawn Egg}}
+* {{ItemLink|Parrot Spawn Egg}}
+* {{ItemLink|Phantom Spawn Egg}}
+* {{ItemLink|Pig Spawn Egg}}
+* {{ItemLink|Piglin Spawn Egg}}
+* {{ItemLink|Piglin Brute Spawn Egg}}
+* {{ItemLink|Pillager Spawn Egg}}
+* {{ItemLink|Polar Bear Spawn Egg}}
+* {{ItemLink|Pufferfish Spawn Egg}}
+* {{ItemLink|Rabbit Spawn Egg}}
+* {{ItemLink|Ravager Spawn Egg}}
+* {{ItemLink|Salmon Spawn Egg}}
+* {{ItemLink|Sheep Spawn Egg}}
+* {{ItemLink|Shulker Spawn Egg}}
+* {{ItemLink|Silverfish Spawn Egg}}
+* {{ItemLink|Skeleton Horse Spawn Egg}}
+* {{ItemLink|Skeleton Spawn Egg}}
+* {{ItemLink|Slime Spawn Egg}}
+* {{ItemLink|Sniffer Spawn Egg}}
+* {{ItemLink|Snow Golem Spawn Egg}}
+* {{ItemLink|Spider Spawn Egg}}
+* {{ItemLink|Squid Spawn Egg}}
+* {{ItemLink|Stray Spawn Egg}}
+* {{ItemLink|Strider Spawn Egg}}
+* {{ItemLink|Sulfur Cube Spawn Egg}}
+* {{ItemLink|Tadpole Spawn Egg}}
+* {{ItemLink|Trader Llama Spawn Egg}}
+* {{ItemLink|Tropical Fish Spawn Egg}}
+* {{ItemLink|Turtle Spawn Egg}}
+* {{ItemLink|Vex Spawn Egg}}
+* {{ItemLink|Villager Spawn Egg}}
+* {{ItemLink|Vindicator Spawn Egg}}
+* {{ItemLink|Wandering Trader Spawn Egg}}
+* {{ItemLink|Warden Spawn Egg}}
+* {{ItemLink|Witch Spawn Egg}}
+* {{ItemLink|Wither Spawn Egg}}
+* {{ItemLink|Wither Skeleton Spawn Egg}}
+* {{ItemLink|Wolf Spawn Egg}}
+* {{ItemLink|Zoglin Spawn Egg}}
+* {{ItemLink|Zombie Horse Spawn Egg}}
+* {{ItemLink|Zombie Nautilus Spawn Egg}}
+* {{ItemLink|Zombie Spawn Egg}}
+* {{ItemLink|Zombie Villager Spawn Egg}}
+* {{ItemLink|Zombified Piglin Spawn Egg}}}}
+
+=== 教育版独有的物品 ===
+这些物品仅能在[[教育版]]中获得，[[相片簿]]和[[摄像机]]仅能通过[[创造模式]]和{{cmd|give}}[[命令]]获得。有些物品也能在[[基岩版]]内开启“教育版”选项后获得。
+{{columns-list|colwidth=16em|
+* {{ItemLink|Agent Spawn Egg}}
+* {{ItemLink|Antidote}}
+* {{ItemLink|Black Balloon}}
+* {{ItemLink|Bleach}}
+* {{ItemLink|Blue Balloon}}
+* {{ItemLink|Blue Glow Stick}}
+* {{ItemLink|Blue Sparkler}}
+* {{ItemLink|Board}}
+* {{ItemLink|Brown Balloon}}
+* {{ItemLink|Brown Glow Stick}}
+* {{EntityLink|Camera}}
+* {{ItemLink|Compound}}
+* {{ItemLink|Cyan Balloon}}
+* {{ItemLink|Cyan Glow Stick}}
+* {{ItemLink|Elixir}}
+* {{ItemLink|Eye Drops}}
+* {{ItemLink|Gray Balloon}}
+* {{ItemLink|Gray Glow Stick}}
+* {{ItemLink|Green Balloon}}
+* {{ItemLink|Green Glow Stick}}
+* {{ItemLink|Green Sparkler}}
+* {{ItemLink|Ice Bomb}}
+* {{ItemLink|Light Blue Balloon}}
+* {{ItemLink|Light Blue Glow Stick}}
+* {{ItemLink|Light gray Balloon}}
+* {{ItemLink|Lime Balloon}}
+* {{ItemLink|Lime Glow Stick}}
+* {{ItemLink|Magenta Balloon}}
+* {{ItemLink|Magenta Glow Stick}}
+* {{ItemLink|NPC Spawn Egg}}
+* {{ItemLink|Orange Balloon}}
+* {{ItemLink|Orange Glow Stick}}
+* {{ItemLink|Orange Sparkler}}
+* {{ItemLink|Pink Balloon}}
+* {{ItemLink|Pink Glow Stick}}
+* {{ItemLink|Portfolio}}
+* {{ItemLink|Poster}}
+* {{ItemLink|Purple Balloon}}
+* {{ItemLink|Purple Glow Stick}}
+* {{ItemLink|Purple Sparkler}}
+* {{ItemLink|Red Balloon}}
+* {{ItemLink|Red Glow Stick}}
+* {{ItemLink|Red Sparkler}}
+* {{ItemLink|Slate}}
+* {{ItemLink|Super Fertilizer}}
+* {{ItemLink|Tonic}}
+* {{ItemLink|White Balloon}}
+* {{ItemLink|White Glow Stick}}
+* {{ItemLink|Yellow Balloon}}
+* {{ItemLink|Yellow Glow Stick}}
+* {{ItemLink|Photo}}
+}}
+
+=== 已移除的物品 ===
+{{main|Java版已移除物品|基岩版已移除特性#物品}}
+以下物品在某些版本中曾存在过，但是在此后的版本已经被移除。
+
+* {{ItemLink|Copper Horn}}
+* {{ItemLink|Fish|text=鱼|link=Java版已移除物品#鱼}}
+* {{ItemLink|Horse Saddle|text=马鞍|link=马鞍}}
+* {{ItemLink|Quiver|text=箭袋|link=Java版已移除物品#箭袋}}
+* {{ItemLink|Potion|text=还原药水|link=Java版已移除物品#还原药水}}
+* [[File:Default Spawn Egg.png|16px]] [[基岩版已移除特性#自定义刷怪蛋|自定义刷怪蛋]]
+* {{ItemLink|Studded Helmet|text=皮革链头盔|link=Java版已移除物品#皮革链甲}}
+* {{ItemLink|Studded Chestplate|text=皮革链胸甲|link=Java版已移除物品#皮革链甲}}
+* {{ItemLink|Studded Leggings|text=皮革链护腿|link=Java版已移除物品#皮革链甲}}
+* {{ItemLink|Studded Boots|text=皮革链靴子|link=Java版已移除物品#皮革链甲}}
+
+== 数据值 ==
+{{el|je}}：
+{{see also|物品格式}}
+<div class="treeview">
+* {{nbt|compound}} 物品数据
+** {{nbt inherit/itemnoslot}}
+</div>
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.24_SURVIVAL_TEST|加入了[[箭]]。}}
+
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20091231-2147|加入了[[苹果]]、[[铁锹]]和[[铁剑]]<ref group="注">此时叫做“锹”“剑”。</ref>，以及皮革<ref group="注">此时叫做“布甲”。</ref>、皮革链、锁-{}-链、铁[[盔甲]]。}}
+|{{HistoryLine|||dev=20100110|加入了[[打火石]]、[[弓]]、[[铁斧]]和[[铁镐]]<ref group="注">此时叫做“斧”“镐”。</ref>。}}
+|{{HistoryLine|||dev=20100128-2203|加入了[[煤炭]]、[[铁锭]]、[[金锭]]、[[钻石]]，以及剑、斧、镐、锹的木、石、钻石质变种。}}
+|{{HistoryLine|||dev=20100129-1447|加入了[[木棍]]。}}
+|{{HistoryLine|||dev=20100130|加入了[[碗]]、[[蘑菇煲]]、[[火药]]、[[线]]、[[羽毛]]，以及剑、斧、镐、锹的金质变种。}}
+|{{HistoryLine||20100206-2034|加入了[[小麦种子]]<ref group="注" name="seed">此时叫做“种子”。</ref>、[[小麦]]、[[面包]]，以及木、石、铁、金、钻石[[锄]]。
+|移除了皮革链甲。}}
+|{{HistoryLine||20100212-1210|加入了盔甲的金、钻石质变种。}}
+|{{HistoryLine||20100219|加入了[[燧石]]、[[生猪排]]、[[熟猪排]]。}}
+
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100227-1414|加入了[[金苹果]]。}}
+|{{HistoryLine||20100615|加入了[[铁桶]]、[[水桶]]、[[熔岩桶]]。}}
+|{{HistoryLine||20100625-1917|加入了[[鞍]]。}}
+
+|{{HistoryLine|Java Alpha}}
+|{{HistoryLine||v1.0.1|加入了[[红石粉]]<ref group="注">此时还没有正式名称。</ref>。}}
+|{{HistoryLine||v1.0.5|加入了[[雪球]]。}}
+|{{HistoryLine||v1.0.8|加入了[[皮革]]和[[奶桶]]<ref group="注" name="milk">此时叫做“牛奶”。</ref>。}}
+|{{HistoryLine||v1.0.11|加入了[[纸]]、[[书]]、[[黏土球]]<ref group="注" name="clay">此时叫做“黏土”。</ref>、[[红砖]]、[[黏液球]]。}}
+|{{HistoryLine||v1.0.14|加入了[[鸡蛋]]、[[动力矿车]]、[[运输矿车]]、[[音乐唱片]]cat和13。}}
+|{{HistoryLine||v1.1.0|加入了[[指南针]]。}}
+|{{HistoryLine||v1.1.1|加入了[[钓鱼竿]]。}}
+|{{HistoryLine||v1.2.0|加入了[[时钟]]、[[荧石粉]]、[[生鳕鱼]]和[[熟鳕鱼]]<ref group="注" name="fish">此时叫做“生鱼”“熟鱼”。</ref>。}}
+
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.2|加入了[[骨头]]、[[木炭]]、[[糖]]、16种[[染料]]<ref group="注" name="dyes">此时白色、黑色、蓝色、棕色染料分别为[[骨粉]]、[[墨囊]]、[[青金石]]、[[可可豆]]，黄色、红色、绿色染料分别叫做“蒲公英黄”“玫瑰红”“仙人掌绿”。</ref>。}}
+|{{HistoryLine||1.4|加入了[[曲奇]]。}}
+|{{HistoryLine||1.6|加入了[[地图]]。}}
+|{{HistoryLine||1.7|加入了[[剪刀]]。}}
+|{{HistoryLine||1.8|加入了[[生鸡肉]]、[[熟鸡肉]]、[[生牛肉]]、[[牛排]]、[[腐肉]]、[[南瓜种子]]、[[西瓜种子]]、[[西瓜片]]、[[末影珍珠]]。}}
+
+|{{HistoryLine|Java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|加入了[[烈焰棒]]、[[恶魂之泪]]、[[金粒]]、[[下界疣]]。}}
+|{{HistoryLine|||dev=Beta 1.9-pre2|加入了[[烈焰粉]]、[[蜘蛛眼]]、[[发酵蛛眼]]、[[玻璃瓶]]、[[岩浆膏]]，以及9张[[音乐唱片]]<ref group="注">11、blocks、chirp、far、mall、mellohi、stal、strad、ward。</ref>。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|加入了[[末影之眼]]。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[闪烁的西瓜片]]、12种[[药水]]和[[喷溅药水]]<ref group="注" name="potions">[[水瓶]]、[[平凡的药水]]、[[浓稠的药水]]、[[粗制的药水]]以及[[再生药水]]、[[治疗药水]]、[[迅捷药水]]、[[抗火药水]]、[[力量药水]]、[[剧毒药水]]、[[伤害药水]]、[[迟缓药水]]。</ref>{{verify|java=1|history=1}}。}}
+|{{HistoryLine||1.1|dev=11w49a|加入了20种[[刷怪蛋]]<ref group="注">[[烈焰人]]、[[洞穴蜘蛛]]、[[鸡]]、[[牛]]、[[苦力怕]]、[[末影人]]、[[恶魂]]、[[岩浆怪]]、[[哞菇]]、[[猪]]、[[绵羊]]、[[蠹虫]]、[[骷髅]]、[[史莱姆]]、[[蜘蛛]]、[[鱿鱼]]、[[村民]]、[[狼]]、[[僵尸]]、[[僵尸猪人]]。此时“XX刷怪蛋”叫做“生成XX”。</ref>。}}
+|{{HistoryLine||1.2.1|dev=12w04a|加入了[[附魔之瓶]]、[[火焰弹]]、[[豹猫]]刷怪蛋。}}
+|{{HistoryLine||1.3.1|dev=12w17a|加入了[[书与笔]]、[[成书]]。}}
+|{{HistoryLine|||dev=12w21a|加入了[[绿宝石]]、[[附魔金苹果]]。}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了[[夜视药水]]及对应喷溅型。}}
+|{{HistoryLine|||dev=12w34a|加入了[[胡萝卜]]、[[金胡萝卜]]、[[马铃薯]]、[[烤马铃薯]]、[[毒马铃薯]]、[[隐身药水]]及对应喷溅型。}}
+|{{HistoryLine|||dev=12w36a|加入了[[胡萝卜钓竿]]、[[下界之星]]。}}
+|{{HistoryLine|||dev=12w37a|加入了[[南瓜派]]。}}
+|{{HistoryLine||1.4.2|dev=12w38a|加入了[[蝙蝠]]、[[女巫]]刷怪蛋。}}
+|{{HistoryLine||1.4.4|dev=1.4.3|加入了音乐唱片wait。}}
+|{{HistoryLine||1.4.6|dev=12w49a|加入了[[附魔书]]、[[烟花火箭]]、[[烟火之星]]。}}
+|{{HistoryLine||1.5|dev=13w01a|加入了[[下界砖]]、[[下界石英]]。}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了[[拴绳]]、[[马鞍]]、[[马]]刷怪蛋以及铁、金、钻石[[马铠]]。}}
+|{{HistoryLine|||dev=13w16b|加入了[[命名牌]]。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了[[生鲑鱼]]、[[熟鲑鱼]]、[[热带鱼]]<ref group="注" name="clownfish">此时叫做“小丑鱼”。</ref>、[[河豚（物品）|河豚]]、[[水肺药水]]及对应喷溅型。}}
+|{{HistoryLine||1.8|dev=14w11a|加入了[[末影螨]]刷怪蛋。}}
+|{{HistoryLine|||dev=14w25a|加入了[[海晶砂粒]]、[[海晶碎片]]、[[守卫者]]刷怪蛋。}}
+|{{HistoryLine|||dev=14w27a|加入了[[生羊肉]]、[[熟羊肉]]、[[生兔肉]]、[[熟兔肉]]、[[兔肉煲]]、[[兔子脚]]、[[兔子皮]]、[[兔子]]刷怪蛋、跳跃药水及其喷溅变种。}}
+|{{HistoryLine|||dev=14w32a|加入了[[盔甲架]]。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了[[光灵箭]]、14种[[药箭]]<ref group="注">喷溅之箭以及抗火、伤害、治疗、隐身、跳跃、夜视、剧毒、再生、迟缓、力量、迅捷、水肺、虚弱之箭。</ref>、[[甜菜根]]、[[甜菜种子]]、[[甜菜汤]]、[[紫颂果]]、[[爆裂紫颂果]]、[[潜影贝]]刷怪蛋。}}
+|{{HistoryLine|||dev=15w33a|加入了[[龙息]]、所有药水对应的[[滞留药水]]。}}
+|{{HistoryLine|||dev=15w33c|加入了[[盾牌]]。}}
+|{{HistoryLine|||dev=15w41a|加入了[[鞘翅]]。}}
+|{{HistoryLine|||dev=15w44a|加入了[[末地水晶]]。}}
+|{{HistoryLine|||dev=15w44b|加入了[[幸运药水]]和[[不可合成的药水]]及对应喷溅型、滞留型、药箭；平凡、浓稠、粗制药水对应药箭；以及所有药水的增强版、延长版对应药箭。}}
+|{{HistoryLine||1.10|dev=16w20a|加入了10种刷怪蛋<ref group="注">[[猫]]、[[驴]]、[[骡]]、[[骷髅马]]、[[僵尸马]]、[[北极熊]]、[[远古守卫者]]、[[流浪者]]、[[凋灵骷髅]]、[[尸壳]]。</ref>。}}
+|{{HistoryLine|||dev=pre2|移除了上述除北极熊外的9种刷怪蛋。}}
+|{{HistoryLine||1.11|dev=16w32a|重新加入了9种刷怪蛋，并加入了[[僵尸村民]]刷怪蛋。}}
+|{{HistoryLine|||dev=16w39a|加入了[[潜影壳]]、[[不死图腾]]、海洋和林地[[探险家地图]]以及[[羊驼]]、[[唤魔者]]、[[恼鬼]]、[[卫道士]]刷怪蛋。}}
+|{{HistoryLine||1.11.1|dev=16w50a|加入了[[铁粒]]。}}
+|{{HistoryLine||1.12|dev=17w13a|加入了[[知识之书]]、[[鹦鹉]]刷怪蛋。}}
+|{{HistoryLine||1.13|dev=17w47a|加入了[[调试棒]]。}}
+|{{HistoryLine|||dev=18w07a|加入了[[三叉戟]]、[[海带]]、[[干海带]]、[[鳞甲]]、[[海龟壳]]、[[海龟]]和[[幻翼]]刷怪蛋、[[神龟药水]]及对应喷溅型、滞留型、药箭。}}
+|{{HistoryLine|||dev=18w08b|加入了[[鳕鱼]]、[[鲑鱼]]、[[河豚]][[鱼桶|桶]]及刷怪蛋。}}
+|{{HistoryLine|||dev=18w10a|加入了[[藏宝图]]、[[热带鱼]]桶及刷怪蛋。}}
+|{{HistoryLine|||dev=18w11a|加入了[[溺尸]]刷怪蛋。}}
+|{{HistoryLine|||dev=18w14a|加入了[[幻翼膜]]、[[缓降药水]]及对应喷溅型、滞留型、药箭。}}
+|{{HistoryLine|||dev=18w15a|加入了[[海洋之心]]、[[鹦鹉螺壳]]、[[海豚]]刷怪蛋。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了[[弩]]、[[谜之炖菜]]；[[熊猫]]、[[掠夺者]]、[[劫掠兽]]<ref group="注">此时叫做“{{tr|灾厄之兽|窳獸}}”。</ref>刷怪蛋；4种[[旗帜图案]]“花朵”“头颅”“苦力怕”“Mojang徽标”；以及[[白色染料]]、[[黑色染料]]、[[蓝色染料]]、[[棕色染料]]。}}
+|{{HistoryLine|||dev=18w49a|加入了[[甜浆果]]。}}
+|{{HistoryLine|||dev=19w05a|加入了[[流浪商人]]和[[行商羊驼]]刷怪蛋。}}
+|{{HistoryLine|||dev=19w07a|加入了[[狐狸]]刷怪蛋。}}
+|{{HistoryLine|||dev=19w08a|加入了[[皮革马铠]]。}}
+|{{HistoryLine|||dev=19w11a|加入了“地球”[[旗帜图案]]。}}
+|{{HistoryLine||1.15|dev=19w34a|加入了[[蜂蜜瓶]]、[[蜜脾]]、[[蜜蜂]]刷怪蛋。}}
+|{{HistoryLine||1.16|dev=20w06a|加入了[[疣猪兽]]刷怪蛋、[[下界合金碎片]]、[[下界合金锭]]以及盔甲、剑、斧、镐、锹、锄的下界合金质变种。}}
+|{{HistoryLine|||dev=20w07a|加入了[[猪灵]]刷怪蛋。}}
+|{{HistoryLine|||dev=20w13a|加入了[[诡异菌钓竿]]、[[磁石指针]]、[[炽足兽]]刷怪蛋。}}
+|{{HistoryLine|||dev=20w14a|加入了[[疣猪兽]]刷怪蛋。}}
+|{{HistoryLine|||dev=20w15a|加入了[[旗帜图案]]“猪鼻”<ref group="注" name="snout">此时叫做“猪灵”。</ref>。}}
+|{{HistoryLine|||dev=20w16a|加入了[[音乐唱片]]Pigstep。}}
+|{{HistoryLine||1.16.2|dev=20w27a|加入了[[猪灵蛮兵]]刷怪蛋。}}
+|{{HistoryLine||1.17|dev=20w45a|加入了[[紫水晶碎片]]、[[铜锭]]、[[望远镜]]、[[收纳袋]]。}}
+|{{HistoryLine|||dev=20w46a|加入了[[细雪桶]]。}}
+|{{HistoryLine|||dev=20w51a|加入了[[美西螈]]桶及刷怪蛋。}}
+|{{HistoryLine|||dev=21w03a|加入了[[荧光墨囊]]、[[发光鱿鱼]]刷怪蛋。}}
+|{{HistoryLine|||dev=21w05a|加入了[[发光浆果]]。}}
+|{{HistoryLine|||dev=21w13a|加入了[[山羊]]刷怪蛋。}}
+|{{HistoryLine|||dev=21w14a|加入了[[粗铜]]、[[粗铁]]、[[粗金]]。}}
+|{{HistoryLine||1.18|dev=21w42a|加入了[[音乐唱片]]otherside。}}
+|{{HistoryLine||1.19|dev=exp1|加入了[[监守者]]刷怪蛋。}}
+|{{HistoryLine|||dev=22w11a|加入了[[红树木船]]、[[蝌蚪桶]]以及[[蝌蚪]]、[[青蛙]]刷怪蛋。}}
+|{{HistoryLine|||dev=22w12a|加入了七种木质的[[运输船]]，并从实验性快照中加入[[监守者]]刷怪蛋。}}
+|{{HistoryLine|||dev=22w13a|加入了[[悦灵]]刷怪蛋。}}
+|{{HistoryLine|||dev=22w14a|加入了[[回响碎片]]、[[追溯指针]]。}}
+|{{HistoryLine|||dev=22w16a|加入了[[唱片残片]]、[[音乐唱片]]5。}}
+|{{HistoryLine|||dev=22w17a|加入了[[山羊角]]。}}
+|{{HistoryLine||1.19.3|exp=update_1_20|dev=22w42a|加入了[[竹筏]]、[[运输竹筏]]、[[骆驼]]刷怪蛋。}}
+|{{HistoryLine|||exp=none|dev=22w44a|加入了[[末影龙]]、[[凋灵]]、[[铁傀儡]]、[[雪傀儡]]刷怪蛋。}}
+|{{HistoryLine||1.19.4|exp=update_1_20|dev=23w04a|加入了12种[[锻造模板]]<ref group="注" name="template1">“下界合金升级”“海岸盔甲纹饰”“沙丘盔甲纹饰”“眼眸盔甲纹饰”“肋骨盔甲纹饰”“哨兵盔甲纹饰”“猪鼻盔甲纹饰”“尖塔盔甲纹饰”“潮汐盔甲纹饰”“恼鬼盔甲纹饰”“监守盔甲纹饰”“荒野盔甲纹饰”。</ref>。}}
+|{{HistoryLine|||dev=23w07a|加入了[[樱花木船]]、[[樱花木运输船]]、[[刷子]]、“弓箭”“{{tr|举臂|人形|舉臂}}”“珍宝”“头颅”4种[[陶片]]、[[火把花种子]]、[[嗅探兽]]刷怪蛋。}}
+|{{HistoryLine||1.20|dev=23w12a|22w42a和23w07a加入的物品不再属于[[实验性内容]]。
+|加入了[[瓶子草荚果]]、16种陶片<ref group="注" name="potteryshard">“垂钓”“利刃”“{{tr|佳酿|釀造|佳釀}}”“烈焰”“危机”“探险”“{{tr|挚友|摯友|朋友}}”“爱心”“心碎”“狼嚎”“{{tr|采矿|礦工|採礦}}”“{{tr|悲恸|悼惜|悲慟}}”“富饶”“麦捆”“树荫”“嗅探”。</ref>、5种锻造模板<ref group="注" name="template2">“向导盔甲纹饰”“牧民盔甲纹饰”“塑造盔甲纹饰”“雇主盔甲纹饰”“幽静盔甲纹饰”。</ref>。}}
+|{{HistoryLine|||dev=23w17a|加入了音乐唱片Relic。}}
+|{{HistoryLine||1.20.2|exp=trade_rebalance|dev=pre1|加入了7种[[探险家地图]]<ref group="注" name="map">丛林、沼泽探险家地图，以及沙漠、平原、热带草原、雪原、针叶林村庄地图。</ref>。}}
+|{{HistoryLine||1.20.3|exp=update_1_21|dev=23w45a|加入了[[试炼钥匙]]和[[旋风人]]刷怪蛋。}}
+|{{HistoryLine||1.20.5|dev=23w51a|加入了[[犰狳鳞甲]]、[[狼铠]]和[[犰狳]]刷怪蛋。}}
+|{{HistoryLine|||dev=24w06a|exp=update_1_21|加入了[[风弹（物品）|风弹]]。}}
+|{{HistoryLine|||dev=24w07a|加入了[[沼骸]]刷怪蛋。}}
+|{{HistoryLine|||dev=24w11a|加入了[[旋风棒]]、[[重锤]]、2种[[锻造模板]]、2种[[旗帜图案]]、3种[[陶片]]<ref group="注" name="trial">“镶铆盔甲纹饰”“涡流盔甲纹饰”锻造模板、“涡流”“旋风”旗帜图案、“涡流”“旋风”“刮削”纹样陶片。</ref>。}}
+|{{HistoryLine|||dev=24w12a|加入了[[试炼探险家地图]]<ref group="注" name="trialchambersmap">此时叫做“试炼密室地图”。</ref>。}}
+|{{HistoryLine|||dev=24w13a|加入了[[不祥之瓶]]和[[不祥试炼钥匙]]。}}
+|{{HistoryLine||1.21|dev=24w18a|23w45a、24w06a、24w07a、24w11a、24w12a和24w13a加入的物品不再属于[[实验性内容]]。
+|加入了音乐唱片Precipice、Creator和Creator（八音盒）。}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了砖纹旗帜图案和波纹边旗帜图案以匹配{{el|be}}。}}
+|{{HistoryLine|||dev=24w40a|exp=winter_drop|加入了[[嘎枝]]刷怪蛋、[[苍白橡木船]]和[[苍白橡木运输船]]。}}
+|{{HistoryLine||1.21.4|dev=24w44a|嘎枝刷怪蛋、苍白橡木船和苍白橡木运输船都不再属于[[实验性内容]]。
+|加入了[[树脂砖]]和[[树脂团]]。}}
+|{{HistoryLine||1.21.5|dev=25w06a|加入了[[蓝色鸡蛋]]和[[棕色鸡蛋]]。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了不同颜色的[[挽具]]和[[快乐恶魂刷怪蛋]]。}}
+|{{HistoryLine||1.21.6|dev=25w20a|加入了[[音乐唱片Tears]]。}}
+|{{HistoryLine||1.21.7|dev=rc1|加入了[[音乐唱片Lava Chicken]]。}}
+|{{HistoryLine||1.21.9|dev=25w31a|加入了[[铜质盔甲]]与[[铜质工具]]、[[铜剑]]、[[铜粒]]、[[铜傀儡刷怪蛋]]和[[铜马铠]]。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了[[矛]]、[[鹦鹉螺铠]]、[[鹦鹉螺]]和[[僵尸鹦鹉螺]]刷怪蛋。}}
+|{{HistoryLine|||dev=25w44a|加入了[[骆驼尸壳]]和[[焦骸]]刷怪蛋。}}
+|{{HistoryLine|||dev=25w45a|加入了[[下界合金马铠]]。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了[[硫方怪]]刷怪蛋和[[硫方怪桶]]。}}
+|{{HistoryLine|||dev=snapshot-7|加入了[[音乐唱片Bounce]]。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了[[杨木船]]和[[杨木运输船]]。}}
+|{{HistoryLine|Pocket Alpha}}
+|{{HistoryLine||0.2.0|加入了石[[剑]]、[[斧]]、[[镐]]、[[锹]]以及[[剪刀]]。}}
+|{{HistoryLine||0.3.0|加入了16种[[染料]]<ref group="注" name="dyes"/>、[[雪球]]、[[碗]]、[[糖]]、[[纸]]、[[书]]、[[骨头]]、[[煤炭]]、[[木炭]]、[[黏土球]]<ref group="注" name="clay"/>、[[红砖]]、[[线]]、[[羽毛]]、[[木棍]]、[[箭]]以及木剑、斧、镐、锹。}}
+|{{HistoryLine||0.3.2|加入了[[铁锭]]、[[金锭]]、[[钻石]]以及剑、斧、镐、锹的铁、金、钻石质变种。}}
+|{{HistoryLine||0.3.3|加入了[[弓]]和[[燧石]]。}}
+|{{HistoryLine||0.4.0|加入了[[火药]]、[[打火石]]、[[小麦种子]]<ref group="注" name="seed"/>、[[小麦]]、[[面包]]、[[苹果]]、[[蘑菇煲]]、[[生牛肉]]、[[牛排]]、[[生鸡肉]]、[[熟鸡肉]]、[[生猪排]]、[[熟猪排]]以及木、石、铁、金、钻石[[锄]]。}}
+|{{HistoryLine||0.5.0|加入了[[西瓜种子]]、[[西瓜片]]。}}
+|{{HistoryLine||0.6.0|加入了[[下界砖]]、[[下界石英]]以及皮革、锁-{}-链、铁、金、钻石[[盔甲]]。}}
+|{{HistoryLine||0.7.0|加入了[[铁桶]]、[[水桶]]、[[熔岩桶]]、[[奶桶]]<ref group="注" name="milk"/>、[[鸡蛋]]以及[[鸡]]、[[猪]]、[[牛]]、[[绵羊]][[刷怪蛋]]。}}
+|{{HistoryLine||0.8.0|dev=build 1|加入了[[胡萝卜]]、[[马铃薯]]、[[烤马铃薯]]、[[南瓜派]]、[[时钟]]、[[红石粉]]<ref group="注">此时叫做“红石”。</ref>。}}
+|{{HistoryLine|||dev=build 2|加入了[[矿车]]、[[甜菜种子]]、[[甜菜根]]、[[甜菜汤]]。}}
+|{{HistoryLine||0.9.0|dev=build 1|加入了[[绿宝石]]、[[黏液球]]以及[[哞菇]]、[[狼]]、[[蠹虫]]、[[史莱姆]]、[[蜘蛛]]、[[末影人]]、[[僵尸猪人]]刷怪蛋。}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了[[钓鱼竿]]、[[生鳕鱼]]、[[熟鳕鱼]]<ref group="注" name="fish"/>、[[生鲑鱼]]、[[熟鲑鱼]]、[[河豚]]、[[热带鱼]]<ref group="注" name="clownfish"/>、[[腐肉]]、[[岩浆膏]]以及[[鱿鱼]]、[[蝙蝠]]、[[洞穴蜘蛛]]、[[岩浆怪]]、[[恶魂]]刷怪蛋。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了[[金粒]]、[[金胡萝卜]]、[[金苹果]]、[[附魔金苹果]]、[[闪烁的西瓜片]]、[[下界疣]]、[[烈焰棒]]、[[烈焰粉]]、[[兔子脚]]、[[恶魂之泪]]、[[蜘蛛眼]]、[[发酵蛛眼]]、[[毒马铃薯]]、[[附魔书]]、[[附魔之瓶]]、[[玻璃瓶]]、12种[[药水]]和[[喷溅药水]]<ref group="注" name="potions"/>{{verify|bedrock=1|history=1}}以及[[豹猫]]、[[僵尸村民]]、[[烈焰人]]刷怪蛋。}}
+|{{HistoryLine||0.13.0|dev=build 1|加入了[[生兔肉]]、[[熟兔肉]]、[[兔子皮]]、[[兔肉煲]]、[[兔子]]刷怪蛋。}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了[[地图]]、[[末影珍珠]]、[[女巫]]刷怪蛋。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了[[生羊肉]]、[[熟羊肉]]、[[火焰弹]]、[[命名牌]]、[[拴绳]]、[[胡萝卜钓竿]]、[[药箭]]、[[皮革马铠]]以及[[马]]、[[驴]]、[[骡]]、[[僵尸马]]、[[骷髅马]]、[[尸壳]]、[[流浪者]]、[[凋灵骷髅]]刷怪蛋。}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了[[海晶砂粒]]、[[海晶碎片]]、[[相片簿]]以及[[守卫者]]、[[远古守卫者]]、[[NPC]]刷怪蛋。}}
+|{{HistoryLine|||dev=build 2|移除了相片簿。}}
+|{{HistoryLine|||dev=build 4|加入了[[下界之星]]、[[衰变药水]]及对应喷溅型、药箭。
+|移除了NPC刷怪蛋。}}
+
+|{{HistoryLine|Pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了[[末影珍珠]]、[[末影之眼]]、[[末地水晶]]、[[紫颂果]]、[[爆裂紫颂果]]、[[鞘翅]]、[[龙息]]、[[滞留药水]]以及[[潜影贝]]、[[末影螨]]、[[北极熊]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.0.0.1|加入了[[潜影壳]]。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了[[铁粒]]、[[探险家地图]]、[[不死图腾]]以及[[羊驼]]、[[卫道士]]、[[唤魔者]]、[[恼鬼]]刷怪蛋。}}
+
+|{{HistoryLine|Bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了[[盔甲架]]、[[书与笔]]、[[烟火之星]]、[[烟花火箭]]、12张[[音乐唱片]]、[[鹦鹉]]刷怪蛋。}}
+|{{HistoryLine||1.4.0|dev=1.2.13.8|加入了[[三叉戟]]、[[溺尸]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.2.14.2|加入了[[海带]]、[[干海带]]以及[[鳕鱼]]、[[鲑鱼]]、[[河豚]][[鱼桶|桶]]和刷怪蛋。}}
+|{{HistoryLine|||dev=1.2.20.1|加入了[[海洋之心]]、[[鹦鹉螺壳]]、[[海豚]]刷怪蛋。}}
+|{{HistoryLine||1.5.0|dev=1.5.0.4|加入了[[鳞甲]]、[[海龟壳]]、[[海龟]]刷怪蛋、[[神龟药水]]及对应喷溅型、滞留型、药箭。}}
+|{{HistoryLine||1.6.0|dev=1.6.0.1|加入了[[幻翼]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.6.0.5|加入了[[幻翼膜]]、[[缓降药水]]及对应喷溅型、滞留型、药箭。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|加入了[[猫]]和[[熊猫]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.8.0.10|加入了[[弩]]和黑色、白色、青色、棕色[[染料]]。}}
+|{{HistoryLine||1.9.0|dev=1.9.0.0|加入了[[掠夺者]]刷怪蛋。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|加入了6种[[旗帜图案]]、[[甜浆果]]、[[盾牌]]、[[流浪商人]]和[[劫掠兽]]刷怪蛋。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.1|加入了[[狐狸]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.13.0.9|加入了[[谜之炖菜]]。}}
+|{{HistoryLine||1.14.0|dev=1.14.0.1|加入了[[蜂蜜瓶]]、[[蜜脾]]、[[蜜蜂]]刷怪蛋。}}
+|{{HistoryLine||1.16.0|dev=1.15.0.51|加入了迟缓IV药水及对应喷溅型、滞留型、药箭。}}
+|{{HistoryLine|||dev=1.16.0.51|加入了[[下界合金碎片]]、[[下界合金锭]]以及盔甲、剑、斧、镐、锹、锄的下界合金质变种；[[猪灵]]和[[疣猪兽]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.16.0.57|加入了[[旗帜图案]]“猪鼻”<ref group="注" name="snout"/>、[[音乐唱片]]Pigstep、[[诡异菌钓竿]]、[[炽足兽]]和[[僵尸疣猪兽]]刷怪蛋。}}
+|{{HistoryLine||1.16.20|dev=1.16.20.50|加入了[[猪灵蛮兵]]刷怪蛋。}}
+|{{HistoryLine||1.16.200|dev=1.16.200.52|加入了[[山羊角]]、[[山羊]]刷怪蛋。}}
+|{{HistoryLine||1.16.210|dev=1.16.210.53|加入了[[细雪桶]]。}}
+|{{HistoryLine|||dev=1.16.210.57|加入了[[铜锭]]。}}
+|{{HistoryLine|||dev=1.16.210.59|加入了[[荧光墨囊]]、[[发光鱿鱼]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.16.210.60|移除了荧光墨囊、发光鱿鱼刷怪蛋。}}
+|{{HistoryLine||1.16.220|dev=1.16.220.50|重新加入了荧光墨囊、发光鱿鱼刷怪蛋。}}
+|{{HistoryLine|||dev=1.16.220.52|加入了[[发光浆果]]。}}
+|{{HistoryLine||1.17.0|dev=1.16.230.52|加入了[[美西螈]]桶及刷怪蛋。}}
+|{{HistoryLine|||dev=1.17.0.50|加入了[[紫水晶碎片]]、[[粗铜]]、[[粗铁]]、[[粗金]]、[[望远镜]]。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.22|加入了[[音乐唱片]]otherside。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.24|加入了[[旗帜图案]]“地球”、[[蝌蚪桶]]以及[[青蛙]]、[[蝌蚪]]刷怪蛋。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.22|加入了[[悦灵]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.18.30.26|加入了[[铜制号角]]。}}
+|{{HistoryLine|||dev=1.18.30.28|加入了六种木质的[[运输船]]。}}
+|{{HistoryLine|||dev=1.18.30.32|加入了[[监守者]]刷怪蛋。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|加入了红树木船、红树木运输船。}}
+|{{HistoryLine|||dev=1.19.0.24|加入了[[回响碎片]]和[[追溯指针]]。
+|移除了铜制号角。}}
+|{{HistoryLine|||dev=1.19.0.28|加入了[[唱片残片]]、[[音乐唱片]]5。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.20|加入了[[行商羊驼]]刷怪蛋。}}
+|{{HistoryLine||1.19.50|exg=next_major_update|dev=1.19.50.21|加入了[[竹筏]]、[[运输竹筏]]、[[骆驼]]刷怪蛋。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.20|加入了[[末影龙]]、[[凋灵]]、[[铁傀儡]]、[[雪傀儡]]刷怪蛋。}}
+|{{HistoryLine||1.19.70|exg=next_major_update|dev=1.19.70.23|加入了[[刷子]]、“弓箭”“{{tr|举臂|人形|舉臂}}”“珍宝”“头颅”4种[[陶片]]、[[火把花种子]]、[[嗅探兽]]刷怪蛋。}}
+|{{HistoryLine||1.19.80|exg=next_major_update|dev=1.19.80.20|加入了[[樱花木船]]、[[樱花木运输船]]。}}
+|{{HistoryLine|||dev=1.19.80.21|加入了12种[[锻造模板]]<ref group="注" name="template1"/>。}}
+|{{HistoryLine|||dev=1.19.80.22|加入了16种陶片<ref group="注" name="potteryshard"/>、5种锻造模板<ref group="注" name="template2"/>。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.20|加入了[[瓶子草荚果]]。
+|火把花种子、嗅探兽刷怪蛋不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.20.0.21|1.19.50.21、1.19.70.23、1.19.80.20、1.19.80.21和1.19.80.22加入的物品不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.20.0.22|加入了音乐唱片Relic。}}
+|{{HistoryLine||1.20.40|dev=1.20.40.20|exg=villager_trades_rebalance|加入了7种[[探险家地图]]<ref group="注" name="map"/>。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.20|exg=updateAnnouncedLive2023|加入了[[试炼钥匙]]和[[旋风人]]刷怪蛋。}}
+|{{HistoryLine|||exg=armadillo|dev=1.20.60.23|加入了[[犰狳鳞甲]]、[[狼铠]]和[[犰狳]]刷怪蛋。}}
+|{{HistoryLine||1.20.70|exg=updateAnnouncedLive2023|dev=1.20.70.24|加入了[[风弹（物品）|风弹]]和[[沼骸]]刷怪蛋。}}
+|{{HistoryLine||1.20.80|dev=1.20.80.20|1.20.60.23加入的物品不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.20.80.22|exg=updateAnnouncedLive2023|加入了[[旋风棒]]、[[重锤]]、2种[[锻造模板]]、2种[[旗帜图案]]、3种[[陶片]]<ref group="注" name="trial" />。}}
+|{{HistoryLine|||dev=1.20.80.23|加入了[[试炼探险家地图]]<ref group="注" name="trialchambersmap" />。}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.20|加入了[[不祥之瓶]]和[[不祥试炼钥匙]]。}}
+|{{HistoryLine|||dev=1.21.0.22|exg=none|1.20.60.20、1.20.70.24、1.20.80.22、1.20.80.23和1.21.0.20加入的物品不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.0.24|加入了音乐唱片Precipice、Creator和Creator（八音盒）。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|加入了[[嘎枝]]刷怪蛋、[[苍白橡木船]]和[[苍白橡木运输船]]。}}
+|{{HistoryLine|||dev=1.21.50.25|加入了[[树脂砖]]和[[树脂团]]。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.25|exg=y_2025_drop_2|加入了不同颜色的[[挽具]]和[[快乐恶魂]]刷怪蛋。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.20|挽具和快乐恶魂刷怪蛋不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.25|加入了音乐唱片Tears。}}
+|{{HistoryLine||1.21.93|加入了音乐唱片Lava Chicken。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.23|exg=y_2025_drop_3|加入了[[铜盔甲]]、[[铜质工具]]、[[铜剑]]、[[铜粒]]和[[铜傀儡]]刷怪蛋。}}
+|{{HistoryLine||1.21.111|dev=1.21.110.20|1.21.100.23中加入的物品不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.110.22|加入了[[铜马铠]]。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.20|加入了[[矛]]、[[鹦鹉螺铠]]、[[鹦鹉螺]]和[[僵尸鹦鹉螺]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.21.130.24|加入了[[骆驼尸壳]]和[[焦骸]]刷怪蛋。}}
+|{{HistoryLine|||dev=1.21.130.26|加入了[[下界合金马铠]]。}}
+|{{HistoryLine||26.20|exg=y_2026_drop_2|dev=26.20.23|加入了[[硫方怪]]刷怪蛋和[[硫方怪桶]]。}}
+|{{HistoryLine||26.30|dev=26.30.20|硫方怪刷怪蛋和硫方怪桶不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=26.30.28|加入了唱片Bounce。}}
+|{{HistoryLine||26.40|dev=26.40.27|exg=y_2026_drop_3|加入了[[杨木船]]和[[杨木运输船]]。}}
+}}
+
+== 参见 ==
+* [[物品修复]]
+* [[物品耐久]]
+* [[物品（实体）]]
+* [[物品堆叠组件]]
+* [[物品栏]]
+
+== 注释 ==
+{{Fnlist}}
+
+== 导航 ==
+{{Navbox items}}
+{{Navbox environment}}
+
+[[Category:物品|*]]
+
+[[cs:Předmět]]
+[[de:Gegenstand]]
+[[el:Αντικείμενο]]
+[[en:Item]]
+[[es:Objeto]]
+[[fr:Objet]]
+[[hu:Tárgyak]]
+[[it:Oggetto]]
+[[ja:アイテム]]
+[[ko:아이템]]
+[[lzh:物]]
+[[nl:Voorwerp]]
+[[pl:Przedmioty]]
+[[pt:Item]]
+[[ru:Предмет]]
+[[th:ไอเทม]]
+[[tr:Eşyalar]]
+[[uk:Предмет]]

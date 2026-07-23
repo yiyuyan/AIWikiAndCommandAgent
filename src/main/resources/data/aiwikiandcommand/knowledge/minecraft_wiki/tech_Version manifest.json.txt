@@ -1,0 +1,53 @@
+# 页面: Version manifest.json
+# 来源: https://zh.minecraft.wiki/w/Version%20manifest.json
+# 分类: Java版, Java版独有特性, 游戏文件, 需要信息
+# 抓取时间: 2026-07-14 17:18:43
+# 原始 Wikitext 内容:
+
+<span>{{DISPLAYTITLE:<samp>version_manifest.json</samp>}}</span>
+{{exclusive|java}}
+
+<samp>'''version_manifest.json'''</samp>及其变种<samp>'''version_manifest_v2.json'''</samp>是一个来自piston-meta.mojang.com的包含[[Java版版本记录]]列表的文件。它为[[启动器]]列出了可用的Minecraft版本。
+
+如果一个版本不在这个列表中，则被认为是[[启动器中丢失的版本|在启动器中不可用]]，如[[Java版1.14.3 - Combat Test]]。
+
+这个列表将在每次[[Mojang]]发布新版[[Java版]]时更新。
+
+== JSON格式 ==
+这是<samp>version_manifest.json</samp>的JSON格式。
+
+<div class="treeview">
+* {{nbt|compound}} 根标签。
+** {{nbt|compound|latest}}：最新的稳定发布版和快照版。
+*** {{nbt|string|release}}：最新稳定发布版的版本ID。
+*** {{nbt|string|snapshot}}：最新快照版的版本ID。
+** {{nbt|list|versions}}：可用版本列表。
+*** {{nbt|compound}}：其中一个版本条目。
+**** {{nbt|string|id}}：该版本的ID。
+**** {{nbt|string|type}}：版本类型，可以是：{{cd|release}}（[[Java版版本记录#正式版|正式版]]）、{{cd|snapshot}}（[[快照]]）、{{cd|old_beta}}（[[Java版Beta|Beta版]]）或{{cd|old_alpha}}（[[Old Alpha|Alpha及更早的版本]]）。
+**** {{nbt|string|url}}：下载版本对应的[[client.json|''<version id>''.json]]文件链接。
+**** {{nbt|string|time}}：使用[[wzh:ISO_8601|ISO 8601]]格式化的数据，用于表示版本的更新时间。{{info needed}}
+**** {{nbt|string|releaseTime}}：使用[[wzh:ISO_8601|ISO 8601]]格式化的数据，用于表示版本的发布时间。
+**** {{nbt|string|sha1}}（仅v2）：该版本的SHA1散列值，也是JSON文件的ID。
+**** {{nbt|int|complianceLevel}}（仅v2）：如果为0，启动器会警告用户此版本因老旧而不足以支持最新的玩家安全特性。其他情况为1。
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2022年6月15日|link={{ytl|iXbAgnzQ6UQ|t=185}}|托管<samp>version_manifest.json</samp>和<samp>version_manifest_v2.json</samp>文件的主机由<code>launchermeta.mojang.com</code>改为<code>piston-meta.mojang.com</code>。}}
+}}
+
+== 外部链接 ==
+* [https://piston-meta.mojang.com/mc/game/version_manifest.json <samp>version_manifest.json</samp>]
+* [https://piston-meta.mojang.com/mc/game/version_manifest_v2.json <samp>version_manifest_v2.json</samp>]
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[Category:游戏文件]]
+
+[[en:Version_manifest.json]]
+[[fr:Version_manifest.json]]
+[[lzh:Version_manifest.json]]
+[[pt:Version_manifest.json]]
+[[ru:Version_manifest.json]]

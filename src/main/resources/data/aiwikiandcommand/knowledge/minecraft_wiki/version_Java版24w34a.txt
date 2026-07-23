@@ -1,0 +1,263 @@
+# 页面: Java版24w34a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w34a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Dangerous version|在大部分情况下使用桶类物品都会导致[[铁桶]]被删除。<ref>{{bug|MC-275757|||Fixed}}</ref>}}
+{{Infobox version
+|title=24w34a
+|image=24w34a.png
+|image2=Java Edition 24w34a Simplified.png\Java Edition 24w34a Traditional.png\Java Edition 24w34a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年8月21日
+|jsonhash=17e3b903641353554e4b1728df2b62b97562d0ab
+|clienthash=f252db3368f588fa8c946dcbeed712bfe109e816
+|clientmap=852be4d787be546e91b5c9b611c9cb692d8e6922
+|serverhash=ff16e26392a5ced7cfe52ffdc5461cd646b9b65d
+|servermap=9a187ebcd24ee307f7d635db94d7f9b814cd02f6
+|parent=1.21.2
+|prevparent=1.21.1
+|prev=24w33a
+|next=24w35a
+|nextparent=1.21.3
+}}<onlyinclude>
+
+'''24w34a'''是[[Java版1.21.2]]的第2个快照，发布于2024年8月21日<ref>{{snap|24w34a|August 21, 2024}}</ref>，加入了3个新的[[物品堆叠组件]]，更改了[[矿车]]改进、红石电路优化相关的[[实验性内容]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[物品堆叠组件]]'''
+* 加入了{{cd|use_remainder}}组件。
+<div class="treeview">
+:* {{nbt|compound|use_remainder}}：物品堆叠组件。
+:** {{nbt|string|id|existonsave=1|required=1}}：物品的命名空间ID。
+:** {{nbt|int|count}}：物品的数量。
+:** {{nbt|compound|components}}：物品所具有的[[物品堆叠组件]]。
+</div>
+:* 存在时，如果物品被使用后其堆叠数量减少，则会用余留物品替代被消耗的物品。
+:** 如果单组物品剩余数量大于0，则余留物品会放于物品栏。
+:** 如果物品栏也满了，则余留物品会被丢到地上。
+:* 示例：<code>use_remainder={id:'minecraft:stick', count:1}</code>。
+* 加入了{{cd|use_cooldown}}组件。
+<div class="treeview">
+:* {{nbt|compound|use_cooldown}}：物品堆叠组件。
+:** {{nbt|float|seconds|existonsave=1|required=1}}：（{{interval|left_open=0}}）冷却持续的秒数。
+:** {{nbt|string|cooldownGroup<ref>更新日志中称为<code>cooldown_group</code>，见{{bug|MC-275837}}</ref>}}：冷却组的命名空间ID。存在时，物品冷却仅对具有同一冷却组的物品生效。
+</div>
+:* 存在时，被使用的物品会对所有同类或同冷却组的物品添加冷却。
+:* 示例：<code>use_cooldown={seconds:1.5, cooldownGroup:"minecraft:custom_weapon"}</code>。
+* 加入了<code>consumable</code>组件。
+<div class="treeview">
+:* {{nbt|compound|consumable}}：物品堆叠组件。
+:** {{nbt|float|consume_seconds}}：（{{interval|left=0}}，默认为1.6）玩家消耗物品所需的秒数。
+:** {{nbt|string|animation}}：（默认为<code>eat</code>）消耗物品时所使用的动画，可以为{{cd|d=pretty|none|eat|drink|block|bow|spear|crossbow|spyglass|toot_horn|brush}}。
+:** {{nbt|string}}{{nbt|compound|sound}}：（默认为<code>entity.generic.eat</code>）消耗物品过程中和完成时使用的[[Java版声音事件|声音事件]]。
+:** {{nbt|bool|has_consume_particles}}：（默认为<samp>true</samp>）是否显示物品消耗粒子。
+:** {{nbt|list|on_consume_effects}}：物品消耗后产生的副效果列表。
+:*** {{nbt|compound}}：一个副效果。
+:**** {{nbt|string|type|existonsave=1|required=1}}：副效果的命名空间ID，可以为{{cd|d=pretty|minecraft:apply_effects|minecraft:remove_effects|minecraft:clear_all_effects|minecraft:teleport_randomly|minecraft:play_sound}}。
+:**** {{nbt condition|如果{{nbt|string|type}}为<code>minecraft:apply_effects</code>，则还具有以下参数：}}
+:**** {{nbt|list|effects|existonsave=1|required=1}}：物品被消耗后立即应用的[[状态效果]]列表。
+:***** {{nbt|compound}}：一个状态效果。
+:**** {{nbt|float|probability}}：（{{interval|left=0|right=1}}，默认为1.0）应用状态效果的概率。
+:**** {{nbt condition|如果{{nbt|string|type}}为<code>minecraft:remove_effects</code>，则还具有以下参数：}}
+:**** {{nbt|string}}{{nbt|list|effects}}：物品被消耗后立即移除的[[状态效果]]标签或ID列表。
+:**** {{nbt condition|如果{{nbt|string|type}}为<code>minecraft:clear_all_effects</code>，则会清除消耗者身上的所有状态效果。}}
+:**** {{nbt condition|如果{{nbt|string|type}}为<code>minecraft:teleport_randomly</code>，则还具有以下参数：}}
+:**** {{nbt|float|diameter}}：（{{interval|left_open=0}}，默认为16.0）消耗者传送范围的直径。
+:**** {{nbt condition|如果{{nbt|string|type}}为<code>minecraft:play_sound</code>，则还具有以下参数：}}
+:**** {{nbt|string}}{{nbt|compound|sound|existonsave=1|required=1}}：消耗完成时播放的声音事件。
+</div>
+:* 存在时，物品能被{{ctrl|使用}}且消耗；如果物品还具有{{cd|d=pretty|fd=或|food|potion_contents|ominous_bottle_amplifier|suspicious_stew_contents}}组件，则这些组件的效果也会应用。
+:* 示例：<code>consumable={consume_seconds:3.0, animation:'eat', sound:'entity.generic.eat', has_consume_particles:true, on_consume_effects:[{type:'minecraft:clear_all_effects'}]}</code>。
+
+'''[[着色器]]'''
+* 在程序定义中加入了{{nbt|compound|defines}}字段，会将GLSL定义指令注入到着色器资源中，以利于着色器引用。
+<div class="treeview">
+:* {{nbt|compound|defines}}预编译宏定义
+:** {{nbt|compound|values}}：定义预编译值。
+:*** {{nbt|string|<''名称''>}}：定义以指定名称和对应值的预编译值，相当于在源码顶部添加<code>-{}-#define <键> <值></code>。
+:** {{nbt|list|flags}}：定义预编译旗标。
+:*** {{nbt|string}}：一个预编译旗标，相当于在源码顶部添加<code>-{}-#define <键></code>。
+</div>
+
+== 更改 ==
+=== 方块 ===
+'''[[炼药锅]]'''
+* 现在又能对水下炼药锅{{ctrl|使用}}水桶了。
+
+'''[[火把]]和[[灵魂火把]]'''
+* 更改了模型和UV映射，现在又会渲染其底面了。
+
+=== 物品 ===
+'''[[不祥之瓶]]'''
+* 现在不再是[[食物]]。
+
+'''常规'''
+* 在[[创造模式]]下使用物品后不再会返还其他物品。
+** 例如：创造模式下玩家饮用[[蜂蜜瓶]]后不再返还[[玻璃瓶]]。
+
+=== 生物 ===
+'''[[烈焰人]]'''
+* 更改了烈焰棒部分的底部纹理。
+
+=== 非生物实体 ===
+'''[[箭]]、[[三叉戟]]和[[浮漂]]'''
+* 现在会在撞击[[世界边界]]时反弹。
+
+=== 世界生成 ===
+'''[[试炼密室]]'''
+* 在<code>encounter_4</code>结构的发射器机关中添加了一个发射器。
+* 移除了{{cd|d=pretty|assembly|chamber_4}}结构中的空箱子。
+
+=== 游戏内容 ===
+'''[[配方书]]'''
+* 现在会能通过{{tooltip|选定|minetip=1|默认为空格或回车键。}}键重选上次选中的配方。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|50}}。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|36}}。
+
+'''[[物品堆叠组件]]'''
+* <code>food</code>组件现在只保存食物数据，而不再影响食物是否能被食用。
+** 因此移除了{{nbt|list|effects}}、{{nbt|float|eat_seconds}}和{{nbt|compound|using_converts_to}}字段，其功能被新加入的组件取代。
+
+'''性能'''
+* 改善了更高渲染距离下的性能，并降低了相机转动对性能的影响。
+
+'''[[着色器]]和后处理管线'''
+* 移除了核心着色器<code>rendertype_entity_glint_direct</code>，现以<code>rendertype_entity_glint</code>代替。
+* 移除了核心着色器<code>rendertype_entity_translucent_cull</code>，现以<code>rendertype_item_entity_translucent_cull</code>代替。
+* 用于后处理效果的程序定义（{{filepath|-{}-assets/<命名空间>/shaders/program/<名称>.json}}）现与核心着色器定义（{{filepath|-{}-assets/<命名空间>/shaders/core/<名称>.json}}）一致化。
+** 移除了没有实际作用的<code>blend</code>字段。
+** 移除了<code>attributes</code>字段，其顶点属性<code>Position</code>将永被绑定。
+** Uniform现与为核心着色器提供的Uniform合并，其中<code>Time</code>被重命名为<code>GameTime</code>。
+* {{cd|d=pretty|vertex|fragment}}着色器引用现在需为着色器命名空间ID。
+** 顶点着色器<code>-{}-<命名空间>:<路径></code>会被处理为{{filepath|-{}-assets/<命名空间>/shaders/<路径>.vsh}}。
+** 片段着色器<code>-{}-<命名空间>:<路径></code>会被处理为{{filepath|-{}-assets/<命名空间>/shaders/<路径>.fsh}}。
+* 着色器源文件不再需放于{{filepath|shaders/core}}子目录。
+* 着色器导入指令<code>#moj_import</code>现在支持带绝对路径的命名空间包含着色器。
+** 例如<code>#moj_import <minecraft:fog.glsl></code>会导入{{filepath|assets/minecraft/shaders/include/fog.glsl}}。
+* 现在后处理管线程序由{{filepath|-{}-assets/<命名空间>/shaders/post}}移动到{{filepath|-{}-assets/<命名空间>/post_effect}}。
+* 后处理管线使用的顶点和片段着色器现由{{filepath|-{}-assets/<命名空间>/shaders/program}}移动到{{filepath|-{}-assets/<命名空间>/shaders/post}}。
+* 后处理渲染过程<code>name</code>现被重命名为<code>program</code>，且需要命名空间ID。
+** 例如<code>-{}-<命名空间>:<路径></code>会被处理为{{filepath|-{}-assets/<命名空间>/shaders/<路径>.json}}。
+
+== 更改（实验性） ==
+=== 方块 ===
+以下内容属于“{{tr|红石实验性内容|紅石實驗性內容|紅石實驗性內容}}”。
+* 在传播距离相等时，红石信号会优先更新左侧，再按正常顺序更新。（即更新顺序为左、后、前、右、下、上。）
+** 这导致在多数情况下，传播距离相等时的更新顺序不再具有随机性。
+** 如果中位红石线优先接受到红石信号，且信号由红石线的正上方一格或正下方一格的信号源产生，则仍然会随机交换左侧和右侧的更新顺序。<!--被强充能的红石导体不能产生随机-->
+*** 电路中，可在红石线上方放置红石火把、侦测器或由活塞推动的红石块以进行左右随机。
+
+=== 物品 ===
+以下内容属于“收纳袋”。
+
+'''[[收纳袋]]'''
+* 现在收纳袋物品提示框最多显示3行物品而非2行，使得折叠部分物品的收纳袋至少能展示8种物品。
+
+=== 非生物实体 ===
+以下内容属于“{{tr|矿车改进|礦車改進|礦車改進}}”。
+
+'''[[矿车]]及其变种'''
+* 矿车再次可以被[[发射器]]重叠放置。
+* 在短距离下落或垂直下落时，矿车不再会倾斜。
+* 放置在铁轨上时，矿车会朝向正确的方向。放置在倾斜铁轨上时，矿车会正常倾斜。
+* 在倾斜铁轨上移动时，矿车不再会穿过压在铁轨上的方块，而是会与之碰撞。
+* 落至铁轨上时，矿车不再强制与铁轨中心对齐。
+** 在弯铁轨上的矿车将会对齐到偏向转弯内侧的位置。
+** 被活塞推动后，矿车也会正常对齐到铁轨上。
+* 放置在一对相向的倾斜铁轨之间的矿车更容易停下了。
+
+== 修复 ==
+{{fixes|fixedin=24w34a|veralias=1|showdesc=1
+|;old
+|73178|村民的<code>CanPickUpLoot</code>标签不能被设为0。
+|144327|烈焰人的烈焰棒的底面纹理与其顶面纹理相同。
+|191431|切换到“{{tr|极佳！|極致！|極佳！}}”后，玩家旁观头颅在物品栏中隐形/未渲染。
+|249414|启动游戏时，“<code style{{=}}"display:inline">Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.</code>”警告会记录到游戏控制台输出中。
+|269376|旋风人从判定箱中心发射风弹。
+|269715|组件<code>food.eat_seconds</code>少于0.05的食物不能被食用。
+|272643|重启世界后，包含<code>using_converts_to</code>的物品不能与源物品堆叠。
+|273329|在创造模式下喝{{tr|奶桶|鮮奶桶}}会得到空桶。
+|273629|用<code>effects_changed</code>进度添加的效果若由{{tr|奶|鮮奶}}触发则会造成{{tr|数据包|封包}}错误（<code>ConcurrentModificationException</code>）。
+|276936|狐狸食用汤不会返回碗。
+|;1.21.1的漏洞
+|275998|菜单模糊使发光轮廓变暗。
+|;prev
+|275203|放在铁轨上的矿车总以东西方向生成且略微上移。
+|275209|不能将水放进水下炼药锅。
+|275210|矿车能在斜上行驶时穿过方块。
+|275211|掉落物的魔咒光效不可见。
+|275213|尝试将熔岩或细雪放入水下炼药锅时仍然播放手部动画。
+|275218|矿车脱轨再复轨后，“{{tr|矿车：行进|礦車移動}}”音效不在轨道上播放。
+|275219|尝试在创造模式下对同一铁轨{{ctrl|使用}}矿车时，手部动画仍会播放。
+|275221|在24w33a中，幼年北极熊模型损坏。
+|275224|对上方已有矿车的铁轨{{ctrl|使用}}矿车物品时，矿车物品失去同步。
+|275226|在第三人称下，玩家或其他生物所持物品的魔咒光效不可见。
+|275229|气泡柱上的矿车表现异常。
+|275230|旁观模式下打开物品栏时游戏崩溃。
+|275232|挖掘疲劳动画显得太近了。
+|275236|游戏规则<code>minecartMaxSpeed</code>不影响下行速度。
+|275237|不能用铁砧重命名成书。
+|275241|矿车被停下后会短暂持续产生音效。
+|275246|在创造模式物品栏中尝试移动副手物品后崩溃。
+|275248|各种火把不再具有底面。
+|275249|“{{tr|视场角效果|視角廣度效果}}”滑动条异常地修改了望远镜的缩放值。
+|275252|现在玩家爬行时头部仰角异常。
+|275270|放置在倾斜且未充能的动力铁轨上的矿车方向不正确。
+|275271|在创造模式物品栏中尝试将物品移动到快捷栏后崩溃。
+|275273|幼年哞菇使用错误的尺寸。
+|275276|矿车能穿过斜坡底部的方块。
+|275277|试炼密室的<code>encounter_4</code>机关通常打不到玩家。
+|275289|即使在24w33a后某些决斗室中也仍存在空箱子。
+|275293|在生存模式下选取不在快捷栏但在物品栏中的方块时出现内部异常。
+|275296|自发光纹理不在玩家的手中发光。
+|275297|失败的选择器和“<code>score</code>”选择器结果中的假玩家导致意外错误。
+|275307|从旁观模式切换到其他模式时手不会显示。
+|275310|不能在附魔台中附魔盔甲。
+|275319|24w33a中的末地水晶略小于上一版本。
+|275323|按下{{key|F3+A}}重载区块导致游戏崩溃。
+|275328|物品展示框内物品的魔咒光效不可见。
+|275329|24w33a的僵尸村民不再抬起手臂攻击。
+|275332|红石实验性内容中在墙面或顶部表面上的拉杆和按钮的朝向不影响红石线的更新顺序。
+|275343|更改世界边界大小后，插在世界边界上的弹射物会在空中悬浮。
+|275361|幼年僵尸变种的手臂会在攻击时与身体断开。
+|275377|脱轨矿车会在落地后吸附附近的铁轨。
+|275397|红石粉未合适地更新。
+|275436|不能在附魔台中附魔书。
+|275467|如果矿车在蜘蛛网或细雪中脱轨，玩家会被弹射上十万多格。
+|275473|纤细模型的手臂现在比躯干低0.5个像素。
+|275479|如果一格远处存在矿车，发射器就不能将矿车放上铁轨。
+|275482|矿车未与以前一样载入生物。
+|275486|<code>enchantable</code>数据组件不对仅由数据包添加可用魔咒的物品生效。
+|275498|钟、指南针和追溯指针不在物品展示框内生效。
+|275553|脱离轨道末端的矿车会永远倾斜。
+|275554|两个斜坡间的矿车会持续剧烈摇晃。
+|275566|尝试在{{tr|极佳|極致|極佳}}画质下打开许多GUI时游戏崩溃。
+|275569|被禁用的外层皮肤在进入第三人称视角前仍然显示。
+|275628|超过某一速度的矿车会在从水平轨道过渡到下行轨道时脱轨。
+|275631|上行矿车不会被玩家阻挡。
+|275677|上行矿车有时不被蜘蛛网影响。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:24w34a]]
+[[en:Java Edition 24w34a]]
+[[es:Java Edition 24w34a]]
+[[fr:Édition Java 24w34a]]
+[[ja:Java Edition 24w34a]]
+[[pt:Edição Java 24w34a]]
+[[ru:24w34a (Java Edition)]]
+[[uk:24w34a (Java Edition)]]

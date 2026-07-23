@@ -1,0 +1,101 @@
+# 页面: 命令/vote
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/vote
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:17
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=23w13a_or_b|nowarn=1}}
+{{Infobox command
+|title=vote
+|oplevel=2
+}}
+管理投票和[[投票规则]]。
+
+== 语法 ==
+: <code>vote dump_all [long|short]</code>
+:: 在日志输出所有投票规则的信息，并在聊天栏输出“Whew! That was scary!（呼！太可怕了！）”。
+: <code>vote io (flush|reload)</code>
+:: 刷新或重新加载投票。
+: <code>vote pending discard (*|<id>)</code>
+:: 放弃投票，不启用投票规则。
+: <code>vote pending finish (*|<id>)</code>
+:: 结束投票，根据结果启用投票规则。
+: <code>vote pending repeal</code>
+:: 开始为废除投票规则投票。
+: <code>vote pending start <rule></code>
+:: 开始为启用投票规则投票，参数随机。
+: <code>vote pending vote <id> <option> [<count>]</code>
+:: 为指定投票的选项投票。
+: <code>vote rule <rule> approve [?|<value>]</code>
+: <code>vote rule&ensp;? approve</code>
+:: 启用投票规则。
+: <code>vote rule <rule> repeal [*|?|<value>]</code>
+: <code>vote rule (*|?) repeal</code>
+:: 废除投票规则。
+
+== 参数 ==
+{{cd|long{{!}}short}}
+: 指定日志中输出的信息。默认为{{cd|long}}。
+:* {{cd|long}} — 输出完整介绍，格式为：
+<pre>-{}-
+<投票规则ID>
+	Example proposals:
+		<JSON数据>
+			 Approve: <投票规则启用表述>
+			 Repeal: <投票规则废除表述>
+</pre>
+:* {{cd|short}} — 仅输出简介，格式为：{{cd|-{}-<投票规则ID>:&nbsp;"<投票规则表述，每个参数使用逗号分隔>"}}
+
+{{cd|*}}
+: 所有投票规则或效果。
+
+{{cd|?}}
+: 随机投票规则或效果。
+
+{{argument|rule|resource}}
+: 指定投票规则名称。
+: {{arg desc|je=resource|registry=minecraft:rules}}
+
+{{argument|id|uuid}}
+: 指定投票的[[UUID]]。
+: {{arg desc|je=uuid}}
+
+{{argument|option|integer}}
+: 指定投票的选项。
+: {{arg desc|je=integer}}
+
+{{argument|count|integer}}
+: 指定票数。默认为1。
+: {{arg desc|je=integer}}
+
+{{argument|value|nbt_tag}}
+: 指定对应投票规则的参数。
+: {{arg desc|je=nbt_tag}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|投票、投票规则或选项不存在|fail}}
+{{Result table|cmd=/vote ...&ensp;? repeal|未启用任何投票规则}}
+{{Result table|cmd=/vote ... approve&ensp;?|该投票规则没有已废除的效果}}
+{{Result table|cmd=/vote ... repeal&ensp;?|该投票规则没有已启用的效果}}
+{{Result table|cmd=|无效的投票规则参数<code><value></code>}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/vote ... discard ...<br>/vote ... finish ...|执行成功|1|1|已放弃/结束的投票数量}}
+{{Output table|cmd=/vote rule ... repeal<br>/vote rule ... repeal ...|执行成功|1|1|已废除的投票规则/效果的数量}}
+{{Output table|cmd=other|执行成功|1|1|1}}
+{{Output table}}
+
+== 导航 ==
+{{Navbox jokes|23w13a_or_b}}
+
+[[Category:命令|vote]]
+
+[[en:Commands/vote]]
+[[ja:コマンド/vote]]
+[[pt:Comandos/vote]]

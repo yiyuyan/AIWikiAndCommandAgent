@@ -1,0 +1,537 @@
+# 页面: 生命
+# 来源: https://zh.minecraft.wiki/w/%E7%94%9F%E5%91%BD
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 教育版独有信息, 游戏内容
+# 抓取时间: 2026-07-14 17:32:15
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|信息|訊息}}
+{{tr|mode=H|消息|訊息}}
+
+'''生命（Health）'''是生物存活的基础条件。生物的生命值多少决定了其对抗危害时的生存能力大小，生命值归零后生物便会死亡。
+
+== 监测 ==
+{{fakeImage|align=right|{{healthbar|20}}|生命条}}
+{{fakeImage|align=right|{{healthbar|20|hardcore=1}}|极限模式下的生命条}}
+{{fakeImage|align=right|{{healthbar|20|mob=1}}|坐骑生物的生命条}}
+[[File:Shaking_hearts.gif|180px|缩略图|生命危急时剧烈颤动的生命条]]
+在Minecraft中，生命的测量和监控基于一排'''红心'''图标，每颗红心包含两半，每半部分为1点，每颗红心代表2点生命值。
+
+'''红心'''组成了生存模式和冒险模式中玩家的生命条，显示在玩家的[[平视显示器]]（HUD）上。
+
+默认情况下，玩家的生命值为20，这会在玩家的生命条上显示十颗红心。如果玩家获得了更多的生命值，那么就会每十颗红心一行并形成多行生命值，不足十颗红心的部分靠左排列，从右到左后从上到下扣除受伤的部分。
+
+[[伤害吸收]]值显示在常规生命值的后面，外观为{{healthbar|2|18px|absorption=1}}{{healthbar|2|18px|absorption=1|hardcore=1}}黄色的心形。
+
+当玩家骑乘生物时，坐骑生物的生命条{{healthbar|2|mob=1}}会显示在玩家生命条的对侧，每十颗心一行并形成多行生命值，不足十颗心的部分靠右排列，从左到右后从上到下扣除受伤的部分。
+
+如果生命条包含奇数值的生命，那么生命的最后半颗红心将不会显示。
+
+生命值不为整数时，生命条会向上取整显示，如3.24会显示为{{Hp|4}}。
+
+当生命条只剩下20%（对于{{Hp|20}}的玩家为{{Hp|4}}）或更少时，它会开始剧烈地抖动。
+
+{{in|java}}如果生物拥有大量的生命值，平视显示器上的红心之间的行间距会降低。
+
+部分效果会改变玩家的平视显示器上的红心外观，优先级如下：
+# [[中毒]]效果会将玩家生命条的红心变成{{healthbar|2|18px|poisoned=1}}{{healthbar|2|18px|poisoned=1|hardcore=1}}病态的绿色。
+# [[凋零]]效果会将心变成{{healthbar|2|18px|withered=1}}{{healthbar|2|18px|withered=1|hardcore=1}}深红边缘的黑色，并使损失的生命值更难看见。
+# 陷入[[细雪]]而被冻结会将红心变成{{healthbar|2|18px|freezing=1}}{{healthbar|2|18px|freezing=1|hardcore=1}}蓝青色并呈现出冻结的雪花外观。
+
+在玩家列表中的生命值显示将只会显示至多10颗红心，拥有更高生命值的玩家的生命值超出20的部分会显示为{{healthbar|2|18px|absorption=1}}{{healthbar|2|18px|absorption=1|hardcore=1}}黄色的心形。
+
+[[生命恢复]]效果会使生命条周期性地从左到右波浪状抖动，这种抖动与玩家在生命值较低时的剧烈抖动不同。
+
+如果玩家的剩余生命值发生了改变，那么生命条就会闪烁白色的边缘。{{in|java}}如果玩家受到了伤害，生命条在闪烁的同时还会显示玩家在受伤之前的生命值。
+
+{| class="wikitable"
+|+ 红心的外观
+|-
+! 场景
+! 常规
+! 极限模式
+|-
+| 常规
+| {{healthbar|3|total=6}}
+| {{healthbar|3|total=6|hardcore=1}}
+|-
+| 中-{}-毒
+| {{healthbar|3|total=6|poisoned=1}}
+| {{healthbar|3|total=6|poisoned=1|hardcore=1}}
+|-
+| 凋零
+| {{healthbar|3|total=6|withered=1}}
+| {{healthbar|3|total=6|withered=1|hardcore=1}}
+|-
+| 冰冻
+| {{healthbar|3|total=6|freezing=1}}
+| {{healthbar|3|total=6|freezing=1|hardcore=1}}
+|-
+| 伤害吸收值
+| {{healthbar|3|total=4|absorption=1}}
+| {{healthbar|3|total=4|absorption=1|hardcore=1}}
+|-
+| 坐骑生物
+| {{healthbar|3|total=6|mob=1}}
+| {{healthbar|3|total=6|mob=1|hardcore=1}}
+|}
+
+关于[[Boss生物]]的生命检测，参见[[Boss栏]]。
+
+== 机制 ==
+生物的生命健康由多个部分组成：
+* '''生命值'''是生物实际拥有的可用于承受伤害的资源，在达到0后会导致生物死亡。
+** 剩余生命值由生物的实体数据{{code|Health}}记录，可以被直接修改。
+* '''最大生命值'''是生物可以拥有的最高生命值，任何恢复生命值的效果都无法使生命值超过这个上限。大多数生物的生命值上限是固定的，[[马]]、[[驴]]、[[骡]]、[[羊驼]]、{{only|for=[[僵尸#增援 2|“领头”僵尸]]|je}}等生物的生命值上限是在一个范围内的随机值。
+** [[生命提升]]效果每等级增加{{hp|4}}到生物的总生命值，当效果消失时会被移除。
+** 生物的{{attribute|max_health}}决定了最大生命值。这一属性可以被影响，从而改变最大生命值。
+* {{anchor|伤害吸收值}}'''伤害吸收值'''是一层额外的防护，在受伤时会首先被扣除。
+** [[伤害吸收]]效果是伤害吸收值的主要来源，该效果生效时每等级增加{{hp|4|absorption=1}}，在效果结束时每等级扣除{{hp|4|absorption=1}}。
+** 伤害吸收值由生物的实体数据{{code|AbsorptionAmount}}记录，可以被直接修改。
+** {{in|be}}由于一个漏洞，重新加载区块后若伤害吸收效果仍然存在，已消耗的伤害吸收值会恢复。<ref>{{bug|MCPE-174184}}</ref>
+
+生命值和伤害值均是[[wzh:单精度浮点数|单精度浮点数]]，可以有小数部分。在游戏中观察到的整数生命值（生命条或[[记分板]]项目）是实际生命值的向上取整后结果。
+
+在[[创造模式]]和[[旁观模式]]中玩家仍然有生命值。{{in|Java}}创造模式和旁观模式玩家免疫除了虚空伤害和{{cmd|kill}}命令以外的一切伤害。{{in|bedrock}}创造模式玩家免疫一切伤害，旁观模式玩家免疫除了{{cmd|kill}}命令以外的一切伤害。
+
+=== 生命值变化 ===
+{{main|治疗|伤害}}
+生命值能通过多种方式恢复：
+* 游戏规则{{gamerule|natural_health_regeneration|naturalRegeneration}}为<code>true</code>时，玩家的[[饥饿值]]在{{hunger|18|total=20}}及以上时将持续恢复生命值。这是玩家恢复生命值的主要方式。
+* 在和平[[难度]]下，玩家的生命值会随着时间恢复。
+* [[瞬间治疗]]效果可以立刻恢复非亡灵生物的生命值。
+* [[生命恢复]]效果可以随时间迅速恢复生命值，该效果可以通过[[药水]]、[[信标]]、[[金苹果]]、[[附魔金苹果]]、[[不死图腾]]或由[[滨菊]]合成的[[谜之炖菜]]获取。
+* 部分生物有恢复生命值的额外方式：
+** [[亡灵生物]]会被[[瞬间伤害]]效果恢复生命值。
+** [[狼]]、[[猫]]、[[鹦鹉螺]]等可驯服的生物可以被喂食来恢复生命。
+** [[马]]、[[驴]]、[[骡]]、[[骆驼]]、{{only|for=[[羊驼]]|je}}、[[快乐恶魂]]等生物的生命值会随着时间缓慢地持续恢复。
+** [[铁傀儡]]可以被[[铁锭]]修复来治疗。
+** [[女巫]]会饮用[[治疗药水]]来治疗自身；袭击中的女巫会向[[灾厄村民]]与[[劫掠兽]]投掷[[喷溅型治疗药水]]和[[喷溅型再生药水]]。
+** [[末影龙]]会接受[[末地水晶]]的持续治疗。
+** [[美西螈]]装死时会恢复生命值。
+** [[悦灵]]每秒恢复{{hp|2}}生命值。
+** {{in|je}}[[凋灵]]每秒恢复{{hp|1}}生命值，杀死生物时恢复{{hp|5}}生命值。
+** {{in|be}}凋灵半径50格以内没有玩家时，凋灵每秒恢复{{hp|1}}生命值。 
+** {{in|be}}睡觉的[[村民]]在自然醒来时生命值会回满。
+** {{in|be}}[[嗅探兽]]可以被喂食来恢复生命。
+** [[快乐恶魂]]和小恶魂处于雨或雪中时或飞行高度与云的高度相同时，会每秒恢复{{hp|1}}生命值。
+
+伤害是导致生命值损失的主要原因，这些因素包括：
+* 遭受[[生物]]攻击
+* 遭受[[潮涌核心]]攻击
+* 被[[弹射物]]击中
+* [[摔落]]
+* [[饥饿]]（除[[难度#和平|和平难度]]）
+* [[着火]]
+* [[溺水]]
+* [[冰冻]]
+* [[窒息]]
+* {{only|je|for=[[挤压]]}}
+* [[爆炸]]
+* [[闪电]]
+* [[虚空]]
+* 在未受防护的情况下接触[[火]]、[[熔岩]]、[[岩浆块]]、[[仙人掌]]、[[甜浆果丛]]等危险物体
+* 受到直接造成伤害的负面[[状态效果]]，包括[[瞬间伤害]]、[[瞬间治疗]]（对于亡灵生物）、[[中毒]]、{{only|be|for=[[中毒（致命）]]}}和[[凋零]]
+* 攻击具有[[荆棘]]或尖-{}-刺的目标
+* 被[[下落的方块|下落的铁砧或下落的滴水石锥]]砸中
+* 用[[鞘翅]]滑翔时高速撞击固体[[碰撞箱]]的侧面
+* 被{{cmd|kill}}或{{cmd|damage}}命令影响
+
+除了以上情况外，以下因素也能导致生命值的改变：
+* 通过[[命令]]等方式直接修改生物的{{code|Health}}实体数据。
+* 最大生命值降低到比生命值更低时导致的生命值损失。
+* [[嘎枝]]与[[嘎枝之心]]之间的绑定被破坏时，嘎枝的生命值直接被修改为0。
+
+== 死亡 ==
+{{main|死亡}}
+当生物的生命值归零时便会'''死亡'''，在死亡动画过后便会从世界中被移除。
+
+== 生物的最大生命值 ==
+{| class="wikitable collapsible sortable" style="text-align: center;" data-sort-type="number" data-description="生物生命值"
+! colspan="3" | 生物
+! 生命值
+|-
+| colspan="3" | {{EntityLink|Player}}
+| {{Hp|20}}
+|-
+! colspan="4" | 友好生物
+|-
+| colspan="3" | {{EntityLink|Allay}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Armadillo}}
+| {{Hp|12}}
+|-
+| rowspan="2" | {{EntityLink|Armor Stand}}
+| colspan="2" | {{el|je|short=1}} || {{Hp|20}}
+|-
+| colspan="2" | {{el|be|short=1}} || {{Hp|6}}
+|-
+| colspan="3" | {{EntityLink|Axolotl}}
+| {{Hp|14}}
+|-
+| colspan="3" | {{EntityLink|Bat}}
+| {{Hp|6}}
+|-
+| colspan="3" | {{EntityLink|Bee}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Camel}}
+| {{Hp|32}}
+|-
+| colspan="3" | {{EntityLink|Camel Husk}}
+| {{Hp|32}}
+|-
+| rowspan="3" | {{EntityLink|Cat}}
+| colspan="2" | {{el|je|short=1}} || {{Hp|10}}
+|-
+| rowspan="2" | {{el|be|short=1}} || 流浪 || {{Hp|10}}
+|-
+| 驯服 || {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Chicken}}
+| {{Hp|4}}
+|-
+| colspan="3" | {{EntityLink|Cod}}
+| {{Hp|3}}
+|-
+| colspan="3" | {{EntityLink|Copper Golem}}
+| {{Hp|12}}
+|-
+| colspan="3" | {{EntityLink|Cow}}
+| {{Hp|10}}
+|-
+| rowspan="2" |
+{{EntityLink|Sulfur Cube}}
+| colspan="2" | 中型 || {{Hp|8}}
+|-
+| colspan="2" | 小型 || {{Hp|4}}
+|-
+| colspan="3" | {{EntityLink|Dolphin}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Donkey}}
+| {{HpRange|sort=1|15|30}}
+|-
+| colspan="3" | {{EntityLink|Fox}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Frog}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Glow Squid}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Goat}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Ghastling}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Happy Ghast}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Horse}}
+| {{HpRange|sort=1|15|30}}
+|-
+| colspan="3" | {{EntityLink|Iron Golem}}
+| {{Hp|100}}
+|-
+| colspan="3" | {{EntityLink|Llama}}
+| {{HpRange|sort=1|15|30}}
+|-
+| colspan="3" | {{EntityLink|Mooshroom}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Mule}}
+| {{HpRange|sort=1|15|30}}
+|-
+| colspan="3" | {{EntityLink|Nautilus}}
+| {{Hp|15}}
+|-
+| colspan="3" | {{EntityLink|Ocelot}}
+| {{Hp|10}}
+|-
+| rowspan="2" | {{EntityLink|Panda}}
+| colspan="2" | 其他 || {{Hp|20}}
+|-
+| colspan="2" | 体弱 || {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Parrot}}
+| {{Hp|6}}
+|-
+| colspan="3" | {{EntityLink|Pig}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Polar Bear}}
+| {{Hp|30}}
+|-
+| colspan="3" | {{EntityLink|Pufferfish}}
+| {{Hp|3}}
+|-
+| colspan="3" | {{EntityLink|Rabbit}}
+| {{Hp|3}}
+|-
+| colspan="3" | {{EntityLink|Salmon}}
+| {{Hp|3}}
+|-
+| colspan="3" | {{EntityLink|Sheep}}
+| {{Hp|8}}
+|-
+| colspan="3" | {{EntityLink|Skeleton Horse}}
+| {{Hp|15}}
+|-
+| colspan="3" | {{EntityLink|Sniffer}}
+| {{Hp|14}}
+|-
+| colspan="3" | {{EntityLink|Snow Golem}}
+| {{Hp|4}}
+|-
+| colspan="3" | {{EntityLink|Squid}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Strider}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Tadpole}}
+| {{Hp|6}}
+|-
+| colspan="3" | {{EntityLink|Trader Llama}}
+| {{HpRange|sort=1|15|30}}
+|-
+| colspan="3" | {{EntityLink|Tropical Fish}}
+| {{Hp|3}}
+|-
+| colspan="3" | {{EntityLink|Turtle}}
+| {{Hp|30}}
+|-
+| colspan="3" | {{EntityLink|Villager}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Wandering Trader}}
+| {{Hp|20}}
+|-
+| rowspan="2" | {{EntityLink|Wolf}}
+| colspan="2" | 野生 || {{Hp|8}}
+|-
+| colspan="2" | 驯服 || {{Hp|40}}
+|-
+| colspan="3" | {{EntityLink|Zombie Horse}}
+| {{Hp|25}}
+|-
+| colspan="3" | {{EntityLink|Zombie Nautilus}}
+| {{Hp|15}}
+|-
+! colspan="4" | 敌对生物
+|-
+| colspan="3" | {{EntityLink|Blaze}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Bogged}}
+| {{Hp|16}}
+|-
+| colspan="3" | {{EntityLink|Breeze}}
+| {{Hp|30}}
+|-
+| colspan="3" | {{EntityLink|Cave Spider}}
+| {{Hp|12}}
+|-
+| colspan="3" | {{EntityLink|Creaking}}
+| {{Hp|1}}
+|-
+| colspan="3" | {{EntityLink|Creeper}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Drowned}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Elder Guardian}}
+| {{Hp|80}}
+|-
+| colspan="3" | {{EntityLink|Ender Dragon}}
+| {{Hp|200}}
+|-
+| colspan="3" | {{EntityLink|Enderman}}
+| {{Hp|40}}
+|-
+| colspan="3" | {{EntityLink|Endermite}}
+| {{Hp|8}}
+|-
+| colspan="3" | {{EntityLink|Evoker}}
+| {{Hp|24}}
+|-
+| colspan="3" | {{EntityLink|Ghast}}
+| {{Hp|10}}
+|-
+| colspan="3" | {{EntityLink|Guardian}}
+| {{Hp|30}}
+|-
+| colspan="3" | {{EntityLink|Hoglin}}
+| {{Hp|40}}
+|-
+| colspan="3" | {{EntityLink|Husk}}
+| {{Hp|20}}
+|-
+| rowspan="3" | {{EntityLink|Magma Cube}}
+| colspan="2" | 大型 || {{Hp|16}}
+|-
+| colspan="2" | 中型 || {{Hp|4}}
+|-
+| colspan="2" | 小型 || {{Hp|1}}
+|-
+| colspan="3" | {{EntityLink|Parched}}
+| {{Hp|16}}
+|-
+| colspan="3" | {{EntityLink|Phantom}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Piglin Brute}}
+| {{Hp|50}}
+|-
+| colspan="3" | {{EntityLink|Piglin}}
+| {{Hp|16}}
+|-
+| colspan="3" | {{EntityLink|Pillager}}
+| {{Hp|24}}
+|-
+| colspan="3" | {{EntityLink|Ravager}}
+| {{Hp|100}}
+|-
+| colspan="3" | {{EntityLink|Shulker}}
+| {{Hp|30}}
+|-
+| colspan="3" | {{EntityLink|Silverfish}}
+| {{Hp|8}}
+|-
+| colspan="3" | {{EntityLink|Skeleton}}
+| {{Hp|20}}
+|-
+| rowspan="3" | {{EntityLink|Slime}}
+| colspan="2" | 大型 || {{Hp|16}}
+|-
+| colspan="2" | 中型 || {{Hp|4}}
+|-
+| colspan="2" | 小型 || {{Hp|1}}
+|-
+| colspan="3" | {{EntityLink|Spider}}
+| {{Hp|16}}
+|-
+| colspan="3" | {{EntityLink|Stray}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Vex}}
+| {{Hp|14}}
+|-
+| colspan="3" | {{EntityLink|Vindicator}}
+| {{Hp|24}}
+|-
+| colspan="3" | {{EntityLink|Warden}}
+| {{Hp|500}}
+|-
+| colspan="3" | {{EntityLink|Witch}}
+| {{Hp|26}}
+|-
+| colspan="3" | {{EntityLink|Wither Skeleton}}
+| {{Hp|20}}
+|-
+| rowspan="4" | {{EntityLink|Wither}}
+| colspan="2" | {{el|je|short=1}} || {{Hp|300}}
+|-
+| rowspan="3" | {{el|be|short=1}} || 简单 || {{Hp|300}}
+|-
+| 普通 || {{Hp|450}}
+|-
+| 困难 || {{Hp|600}}
+|-
+| colspan="3" | {{EntityLink|Zoglin}}
+| {{Hp|40}}
+|-
+| colspan="3" | {{EntityLink|Zombie Villager}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Zombie}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{EntityLink|Zombified Piglin}}
+| {{Hp|20}}
+|-
+! colspan="4" | 未使用
+|-
+| colspan="3" | {{only|be|ee|for={{EntityLink|Camera}}}}
+| {{Hp|4}}
+|-
+| colspan="3" | {{only|be|for={{EntityLink|Elder Guardian Ghost}}}}
+| {{Hp|20}}
+|-
+| colspan="3" | {{only|je|for={{EntityLink|Giant}}}}
+| {{Hp|100}}
+|-
+| colspan="3" | {{only|je|for={{EntityLink|Illusioner}}}}
+| {{Hp|32}}
+|-
+| colspan="3" | {{only|je|for={{EntityLink|Mannequin}}}}
+| {{Hp|20}}
+|}
+
+== 成就 ==
+{{load achievements|overkill;over-overkill;cheating-death}}
+
+== 进度 ==
+{{load advancements|adventure.overoverkill;adventure.totem_of_undying}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年8月18日|link={{notch|165713706/each-player-has-10-hearts-of-health-you-can-lose}}|加入了生命条。
+|玩家现在可以受到[[摔落伤害]]。}}
+|{{HistoryLine||2009年8月20日|link={{notch|167380207/signs-up-to-four-lines-of-15-characters-each-i}}|受到伤害时生命条会抖动。
+|受到伤害几秒后玩家是无敌的。}}
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.24 SURVIVAL TEST|[[蘑菇]]现在能恢复生命值。
+|[[敌对生物]]被杀死时会倒下。
+|食用一个[[红色蘑菇]]会对玩家造成{{hp|3}}伤害。}}
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100618|加入了窒息伤害，现在玩家处于窒息状态时看不到任何东西。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.4|玩家在乘坐[[矿车]]时不再会窒息。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|徒手攻击造成的[[伤害]]从{{hp|1}}增加到{{hp|2}}。}}
+|{{HistoryLine||1.8|dev=pre1|加入了饥饿机制。这意味着吃食物不再能直接恢复生命值，[[饥饿值]]达到18以上才会逐渐恢复生命值。}}
+|{{HistoryLine|||dev=正式版|徒手攻击造成的伤害从{{hp|2}}减少到{{hp|1}}。|[[生命恢复]]效果增加。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|[[生物]]开始拥有[[护甲值]]。<ref>{{tweet|jeb_|119377281796935680}}</ref>
+|[[极限模式]]下的生命条看起来不同了。}}
+|{{HistoryLine|||dev=rc1|玩家受到伤害时发出的声音从男性的呻吟声变得更中性。}}
+|{{HistoryLine||1.3.1|dev=12w25a|移除了[[多人游戏]]中玩家溺死前的[[击退]]效果。 }}
+|{{HistoryLine||1.8|dev=14w32a|为生命条加入了显示失去多少[[生命值]]的动画。}}
+|{{HistoryLine||1.11|dev=16w39a|加入了[[不死图腾]]，可以防止玩家死亡。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.2.0|加入了生命条。}}
+|{{HistoryLine||0.3.3|从5格以上掉落会播放骨头碎裂的音效。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了[[生命恢复]]状态效果。
+|玩家受到伤害时发出的声音从男性的呻吟声变得更中性。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了[[不死图腾]]，可以防止玩家死亡。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.10|dev=1.19.10.21|现在会在死亡屏幕上展示死亡消息。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.20|更新了死亡屏幕。}}
+|{{HistoryLine|Console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|加入了生命条。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[de:Gesundheit]]
+[[en:Health]]
+[[es:Salud]]
+[[fr:Santé]]
+[[it:Salute]]
+[[ja:体力]]
+[[ko:생명력]]
+[[lzh:命數]]
+[[nl:Gezondheid]]
+[[pl:Życie]]
+[[pt:Vida]]
+[[ru:Здоровье]]

@@ -1,0 +1,60 @@
+# 页面: 命令/locatebiome
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/locatebiome
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{removed|edition=je|此命令在Java版1.19中已被'''[[命令/locate|locate biome]]'''命令替代。}}
+{{Infobox command
+|name=locatebiome
+|oplevel=2
+}}
+
+在聊天框中为命令执行者显示指定[[生物群系]]的最近坐标和距离。
+
+== 语法 ==
+* '''Java版'''
+:<code>-{}-locatebiome <''生物群系ID''></code>
+
+== 参数 ==
+<code>-{}-''生物群系ID''</code>
+
+: 指定要定位的生物群系或生物群系标签。参见[[生物群系/ID]]以查看所有可用的生物群系ID。
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|参数未正确指定|unparseable|fail}}
+{{Result table|当前[[维度]]中不生成所请求的生物群系（或属于标签定义的任意一个生物群系）|fail}}
+{{Result table|无法在12801×12801方块的正方形区域中找到请求的生物群系（或属于标签定义的任意一个生物群系）||N/A}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|生物群系位置和执行者位置间的水平距离}}
+{{Output table}}
+
+== 示例 ==
+* 定位[[沙漠]]生物群系的坐标：{{cmd|link=none|locatebiome desert}}。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w06a|加入了{{cmd|locatebiome|link=none}}。}}
+|{{HistoryLine|||dev=pre1|错误信息中，关于无效生物群系、找不到的有效生物群系的ID现在会用引号引起来了。|将无效生物群系的错误信息由“没有名为<biome ID>的生物群系”改为了“没有名为‘<biome ID>’的生物群系”。}}
+|{{HistoryLine||1.18.2|dev=pre1|现在支持标签，用<code>#</code>前缀与一般的ID做区分。}}
+|{{HistoryLine||1.19|dev=22w12a|现在会返回目标位置的X、Y、Z三个坐标。
+|改进了对3D生物群系的定位，因此现在[[洞穴类生物群系]]能够正确定位。}}
+|{{HistoryLine|||dev=22w19a|移除了{{cmd|locatebiome|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/locatebiome]]
+[[en:Commands/locatebiome]]
+[[es:Comandos/locatebiome]]
+[[ja:コマンド/locatebiome]]
+[[pt:Comandos/locatebiome]]
+[[ru:Команды консоли/locatebiome]]

@@ -1,0 +1,92 @@
+# 页面: Java版存档格式/1.21.11
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E5%AD%98%E6%A1%A3%E6%A0%BC%E5%BC%8F/1.21.11
+# 分类: 
+# 抓取时间: 2026-07-14 17:15:19
+# 原始 Wikitext 内容:
+
+{{outdated feature|edition=java}}
+本页面列出了Java版1.21.11的存档结构。
+
+下文中'''粗体'''代表文件一定存在，未标注粗体则代表文件不一定存在，备份文件不以显示。假定存档已经初始化完成、且至少有一名玩家进入过存档。
+
+所有和[[维度]]无关的数据其存储文件都直接和存档根目录相对应，下列是所有维度无关的数据存储文件：
+
+<div class="treeview">
+* {{file|directory|''存档根目录''}}
+** {{file|file|icon.png}}：存档的图标。
+** {{file|file|'''level.dat'''}}：[[存档基础数据存储格式|存档基础数据存储文件]]。
+** {{file|archive|resources.zip}}：世界指定资源包，见{{slink|资源包|世界指定资源包}}。
+** {{file|file|'''session.lock'''}}：[[存档会话锁文件格式|存档会话锁文件]]。
+** {{file|directory|'''advancements'''}}：进度存储目录。
+*** {{file|file|'''-{}-<''玩家UUID''>.json'''}}：[[进度存储格式|进度存储文件]]。
+** {{file|directory|'''data'''}}：存档数据目录。
+*** {{file|file|command_storage_<''命名空间''>.dat}}：[[命令存储存储格式|命令存储存储文件]]。
+*** {{file|file|idcounts.dat}}：[[地图存储格式#地图计数存储格式|地图计数存储文件]]。
+*** {{file|file|-{}-map_<''地图ID''>.dat}}：[[地图存储格式#地图数据存储格式|地图数据存储文件]]。
+*** {{file|file|scoreboard.dat}}：[[记分板存储格式|记分板存储文件]]。
+*** {{file|file|stopwatches.dat}}：[[秒表存储格式|秒表存储文件]]。
+** {{file|directory|'''datapacks'''}}：世界指定[[数据包]]。
+*** {{file|archive}}{{file|directory|-{}-<''数据包名称''>}}：一个世界指定数据包。
+** {{file|directory|generated}}：生成数据存储目录。
+*** {{file|directory|-{}-<''命名空间''>}}：对于指定命名空间的数据。
+**** {{file|directory|structures}}：生成结构文件目录。
+***** {{file|file|-{}-<''标识符''>.nbt}}：[[结构存储格式|结构存储文件]]。
+** {{file|directory|'''playerdata'''}}：玩家存储目录。
+*** {{file|file|'''-{}-<''玩家UUID''>.dat'''}}：[[玩家数据格式|玩家存储文件]]。
+** {{file|directory|'''stats'''}}：统计存储目录
+*** {{file|file|'''-{}-<''玩家UUID''>.json'''}}：[[统计存储格式|统计存储文件]]。
+</div>
+
+对于所有维度数据，所有维度都有对应的根目录，下列列出了各个维度和对应维度目录相对于存档根目录的相对路径：
+
+{| class="wikitable"
+! 维度 || 命名空间ID || 相对路径
+|-
+| 主世界 || {{filepath|minecraft:overworld}} || {{filepath|/}}
+|-
+| 末地 || {{filepath|minecraft:the_end}} || {{filepath|/DIM1/}}
+|-
+| 下界 || {{filepath|minecraft:the_nether}} || {{filepath|/DIM-1/}}
+|-
+| 其他维度 || {{filepath|-{}-<''命名空间''>:<''标识符''>}} || {{filepath|-{}-/dimensions/<''命名空间''>/<''标识符''>/}}
+|}
+
+所有维度数据存储按照下列结构：
+
+<div class="treeview">
+* {{file|directory|''维度根目录''}}
+** {{file|directory|'''data'''}}：维度数据目录。
+*** {{file|file|'''chunks.dat'''}}：[[区块标签存储格式|区块标签存储文件]]。
+*** {{file|file|'''raids.dat'''}}：[[袭击存储格式|袭击存储文件]]（非末地维度）。
+*** {{file|file|'''raids_end.dat'''}}：[[袭击存储格式|袭击存储文件]]（仅末地维度）。
+*** {{file|file|random_sequences.dat}}：[[随机序列存储格式|随机序列存储文件]]。
+*** {{file|file|'''world_border.dat'''}}：[[世界边界存储格式|世界边界存储文件]]。
+** {{file|directory|'''entities'''}}：实体数据目录。
+*** {{file|file|'''-{}-r.<''区域X坐标''>.<''区域Z坐标''>.mca'''}}：[[实体数据格式|区域实体存储文件]]。
+*** {{file|file|-{}-c.<''区块X坐标''>.<''区块Z坐标''>.mcc}}：区域实体存储文件的[[区域文件格式#区域额外文件|区域额外文件]]。
+** {{file|directory|'''poi'''}}：兴趣点数据目录。
+*** {{file|file|'''-{}-r.<''区域X坐标''>.<''区域Z坐标''>.mca'''}}：[[兴趣点存储格式|区域兴趣点存储文件]]。
+*** {{file|file|-{}-c.<''区块X坐标''>.<''区块Z坐标''>.mcc}}：区域兴趣点存储文件的[[区域文件格式#区域额外文件|区域额外文件]]。
+** {{file|directory|'''region'''}}：区块基础数据目录。
+*** {{file|file|'''-{}-r.<''区域X坐标''>.<''区域Z坐标''>.mca'''}}：[[区块存储格式|区域区块存储文件]]。
+*** {{file|file|-{}-c.<''区块X坐标''>.<''区块Z坐标''>.mcc}}：区域区块存储文件的[[区域文件格式#区域额外文件|区域额外文件]]。
+</div>
+
+对于从旧版本升级而来的存档，还可能存在下列文件：
+
+<div class="treeview">
+* {{file|directory|''存档根目录''}}
+** {{file|directory|'''data'''}}：存档数据目录。
+*** {{file|directory|'''advancements'''}}：[[进度定义格式|进度定义文件]]目录。
+*** {{file|directory|'''functions'''}}：[[Java版函数|函数]]文件目录。
+*** {{file|directory|loot_tables}}：[[战利品表|战利品表定义]]文件目录。
+*** {{file|file|<''结构类型''>.dat}}：这一种的结构的结构片段数据，见[[结构生成数据文件格式]]。
+*** {{file|file|<''结构类型''>_index.dat}}：这一种结构的结构片段修复-{}-数据，自18w06a起打开的存档若存在本维度结构的结构生成数据文件就会全部生成。
+*** {{file|file|'''villages.dat'''}}：主世界村庄数据文件，见[[villages.dat格式]]。
+*** {{file|file|'''villages_end.dat'''}}：末地村庄数据文件，见[[villages.dat格式]]。
+*** {{file|file|'''villages_nether.dat'''}}：下界村庄数据文件，见[[villages.dat格式]]。
+** {{file|file|'''level.dat_mcr'''}}
+** {{file|file|worldgen_settings_export.json}}：世界生成导出设置，见[[自定义]]。
+</div>
+
+[[Category:游戏文件]]

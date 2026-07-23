@@ -1,0 +1,91 @@
+# 页面: 中毒（致命）
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%AD%E6%AF%92%EF%BC%88%E8%87%B4%E5%91%BD%EF%BC%89
+# 分类: 基岩版独有特性, 状态效果
+# 抓取时间: 2026-07-14 17:19:52
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock}}
+{{Infobox effect
+|image=Poison.png
+|noje=1
+}}
+
+'''中毒（致命）（Fatal Poison）'''，游戏内为'''中毒（Poison）'''，是一种使用与[[中毒]]效果相同名称和图标纹理，使生物持续受到伤害，但是会致命的[[状态效果]]。
+
+由于此效果的名称和图标在游戏中和[[中毒]]完全相同，只能通过其ID和状态效果行为来辨认出来。
+
+== 效果 ==
+受影响生物每隔一段时间受到无来源的{{hp|1}}魔法伤害，间隔取决于效果等级。
+
+{| class="wikitable" style="text-align:right"
+ ! 等级 !! 伤害周期 !! 每秒伤害量
+ |-
+ | 1 || {{convert|25}} || {{hp|0.8}}
+ |-
+ | 2 || {{convert|12}} || {{hp|1.6}}
+ |-
+ | 3<ref group="注" name ="immunity 1">此时伤害间隔已经低于[[受击后伤害免疫]]的持续时间，在3级和4级时实际有效的伤害时段为12刻（0.6秒每次，每秒{{hp|1.6}}伤害）。</ref> || {{convert|6}} || {{hp|3.33}}
+ |-
+ | 4<ref group="注" name ="immunity 1" /> || {{convert|3}} || {{hp|6.67}}
+ |-
+ | 5+<ref group="注" name ="immunity 2">此时伤害间隔已经低于[[受击后伤害免疫]]的持续时间，在5级及以上实际有效的伤害时段为10刻（0.5秒每次，每秒{{hp|2}}伤害）。</ref> || {{convert|1}} || {{hp|20}}
+|}
+
+{{fnlist|group=注}}
+
+当效果的剩余时间的游戏刻数是周期的整倍数时，执行一次效果。如果效果的剩余时间被持续设置，会导致伤害会持续进行或不进行。
+
+玩家具有该效果时，生命条中的红心会变成黄绿色{{Healthbar|2|poisoned=1}}{{Healthbar|2|poisoned=1|hardcore=1}}。
+
+如果被赋予效果倍率值0-31（对应等级1-32）范围以外的值，实际生效的倍率值则取[[wzh:模除|模除]]32后的值。
+
+与中毒效果不同，此效果不能通过[[蜂蜜瓶]]或[[解毒剂]]来解除，且能使[[蜘蛛]]、[[洞穴蜘蛛]]、[[亡灵生物]]（[[凋灵]]除外）、[[鹦鹉螺]]和吸收了方块的[[硫方怪]]受到影响。
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+ ! 来源
+ ! 效果等级
+ ! 时长
+ ! 备注
+ |-
+ | {{ItemLink|Cookie}}
+ | I
+ | 16:40
+ | 被{{EntityLink|parrot}}食用
+ |}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=bedrock
+|spritetype=effect
+|Poison
+|nameid=fatal_poison
+|translationkey=potion.poison
+|showaliasids=1
+|aliasid=25
+|foot=1
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|[[File:Poison JE1 BE1.png|32px]] 加入了中毒（致命）。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.5|[[File:Poison JE3 BE2.png|32px]] 更改了图标纹理。}} 
+}}
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Tödliche Vergiftung]]
+[[en:Fatal Poison]]
+[[es:Veneno fatal]]
+[[fr:Poison fatal]]
+[[it:Avvelenamento fatale]]
+[[ja:致死毒]]
+[[ko:맹독]]
+[[lzh:烈毒]]
+[[pt:Veneno Fatal]]
+[[ru:Смертельное отравление]]
+[[th:ติดพิษถึงตาย]]
+[[uk:Смертельна отрута]]

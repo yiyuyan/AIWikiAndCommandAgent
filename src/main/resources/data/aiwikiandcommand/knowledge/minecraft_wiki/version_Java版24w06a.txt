@@ -1,0 +1,174 @@
+# 页面: Java版24w06a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w06a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|过滤器|篩選器}}{{Infobox version
+|title=24w06a
+|image=24w06a.png
+|image2=Java Edition 24w06a Simplified.png\Java Edition 24w06a Traditional.png\Java Edition 24w06a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年2月7日
+|jsonhash=ea857dcb590a1e29fb33771bf14161cb8f6fc643
+|clienthash=ad812400b80dc4785154cc82fe60ef810ccc1c51
+|clientmap=5e72da937ceaee39d6b12a4cdb9fe58d85330b4f
+|serverhash=703cffc390ff71b7900d7a4356f48bc2108b448e
+|servermap=4f4e55074cd6a186a2b93fc63e45428720e72632
+|parent=1.20.5
+|prevparent=1.20.4
+|prev=24w05b
+|next=24w07a
+|nextparent=1.20.6
+}}<onlyinclude>
+
+'''24w06a'''是[[Java版1.20.5]]的第8个快照，发布于2024年2月7日<ref>{{snap|24w06a|February 7, 2024}}</ref>，加入了“{{tr|日本字形变体|日文字形變體|日本字形變體}}”语言选项，优化了[[漏斗]]，丰富了[[犰狳]]的蜷缩行为，在内置实验性数据包中加入了[[风弹（物品）|物品形式的风弹]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[属性]]'''
+* 加入了<code>generic.gravity</code>，用于控制实体的重力加速度，值域为-1~1。
+* 加入了<code>generic.safe_fall_distance</code>，用于控制生物不受摔落伤害的最大高度，值域为-1024~1024。
+* 加入了<code>generic.fall_damage_multiplier</code>，用于控制生物总摔落伤害的倍率，值域为0~100。
+* 加入了<code>player.block_break_speed</code>，用于控制玩家破坏方块速度的倍率，值域为0~1024。
+
+'''[[选项]]'''
+* 在“语言”屏幕中加入了“字体设置”。
+** 将“{{tr|强制使用Unicode字体|強制使用 Unicode 字型}}”选项移入其中。
+** 加入了“{{tr|日本字形变体|日文字形變體|日本字形變體}}”选项。
+*** 用于控制是否在默认字体中为CJK字符使用日本字形。
+*** 默认值基于系统语言环境设置。
+
+'''[[字体]]'''
+* 加入了字体变体过滤器。
+** 现在字形提供器可以基于特定的变体集来启用或禁用字体变体。
+** 过滤器在<code>filter</code>节中定义，可用于每个字形提供器。
+*** 只有当过滤器中的值与键中变体的实际值匹配时，才会包含该字形提供器。
+** 可用的变体目前是硬编码的，并由字体选项菜单控制。
+*** <code>uniform</code>，连接到“{{tr|强制使用Unicode字体|強制使用 Unicode 字型}}”选项。
+*** <code>jp</code>，连接到“{{tr|日本字形变体|日文字形變體|日本字形變體}}”选项。
+
+'''[[Java版标签|标签]]'''
+* 加入了下列方块标签：
+** {{cd|#badlands_terracotta}}：{{cd|d=pretty|terracotta|white_terracotta|yellow_terracotta|orange_terracotta|red_terracotta|brown_terracotta|light_gray_terracotta}}。
+
+'''其他'''
+* 加入了JFR（Java Flight Recorder）事件，用于对单区块的读取（<code>minecraft.ChunkRegionRead</code>）和写入（<code>minecraft.ChunkRegionWrite</code>）。
+
+== 更改 ==
+=== 方块 ===
+'''[[漏斗]]'''
+* 现在其上方有[[判定箱#碰撞箱|碰撞箱]]完整的方块时，不再尝试吸取[[物品实体]]。
+
+'''常规'''
+* 方块位置现在存储为一个由3个整数组成的数组（<code>[I;''x'',''y'',''z'']</code>），而不是一个包含X、Y、Z的复合元素（<code>{X:''x'',Y:''y'',Z:''z''}</code>）。
+* [[蜂巢（方块）|蜂巢]]的NBT标签<code>FlowerPos</code>重命名为<code>flower_pos</code>。
+* [[末地折跃门（方块）]]的NBT标签<code>ExitPortal</code>重命名为<code>exit_portal</code>。
+
+=== 生物 ===
+'''[[犰狳]]'''
+* 现在只能生成于未染色、红色、橙色、黄色、棕色、白色和淡灰色陶瓦上，而非所有种类的陶瓦。
+* 现在蜷缩时会隐藏自己的头和脚，期间会探出头窥视以检查蜷缩条件是否满足。
+** 如果满足，犰狳左右张望后再次缩进壳内；如果不满足，犰狳立即起身。
+* 现在拥有新的动画和音效。
+
+'''[[狼]]'''
+* 驯服的狼生命值由{{hp|20}}改为{{hp|40}}。
+* 喂食恢复的生命值翻倍。
+* 受到不来自箭或玩家的伤害时，伤害不再被调整为<code>-{}-(修正前伤害 + 1) / 2</code>。
+
+'''常规'''
+* [[蜜蜂]]的NBT标签<code>FlowerPos</code>和<code>HivePos</code>分别重命名为<code>flower_pos</code>和<code>hive_pos</code>。
+* [[袭击]]生物的NBT标签<code>PatrolTarget</code>重命名为<code>patrol_target</code>。
+* [[流浪商人]]的NBT标签<code>WanderTarget</code>重命名为<code>wander_target</code>。
+* 可被[[拴绳]]拴住的实体的NBT标签<code>Leash</code>重命名为<code>leash</code>。
+
+=== 非生物实体 ===
+'''[[漏斗矿车]]'''
+* 现在其上方有[[判定箱#碰撞箱|碰撞箱]]完整的方块时，不再尝试吸取[[物品实体]]。<ref>{{bug|MC-268349||漏斗矿车不再从上方完整方块寻找和拾取物品实体。|Fixed}}</ref>
+
+'''常规'''
+* [[末地水晶]]的NBT标签<code>BeamTarget</code>重命名为<code>beam_target</code>。
+
+=== 游戏内容 ===
+'''[[状态效果]]'''
+* 现在放大倍率再次被限制在0到255之间。
+** 跳跃提升、飘浮和挖掘疲劳放大倍率超过127的行为已被新的属性所取代。
+
+=== 常规 ===
+'''[[属性]]'''
+* 将属性<code>horse.jump_strength</code>重命名为<code>generic.jump_strength</code>，现在对所有实体生效。
+** 控制了一次跳跃的基本冲量。计算优先于跳跃提升或方块属性。
+
+'''[[Java版标签|标签]]'''
+* 将方块标签{{cd|#armadillo_spawnable_on}}中的值{{cd|#terracotta}}替换为{{cd|#badlands_terracotta}}。
+
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>31</code>。
+* 现在函数中命令的最大长度（包括{{tr|宏|巨集}}展开）不能超过2,000,000个字符。
+* 通过重用部分原版数据包，减少了登录期间服务器发送的数据量。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>26</code>。
+
+== 新内容（实验性） ==
+=== 物品 ===
+'''[[风弹（物品）|风弹]]'''
+* [[旋风人]]被玩家或驯服的狼杀死时掉落4-6个，不受[[抢夺]]魔咒影响<ref>{{bug|MC-268344||旋风人不受抢夺魔咒影响。|Fixed}}</ref>。
+* 可由[[玩家]]和[[发射器]]发射。
+** 玩家发射的风弹比[[旋风人]]发射的多10%击退<ref>{{bug|MC-268385||风弹的击退太弱。|WAI}}</ref>，但影响范围更小。
+** 玩家被自己发射的风弹击中时会重置摔落伤害，且摔落伤害只会从碰撞点以下开始累积。
+* 每次使用后有0.5秒的冷却时间。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 加入了以下方块标签：
+** {{cd|#blocks_wind_charge_explosions}}：{{cd|d=pretty|barrier|bedrock}}。
+
+== 更改（实验性） ==
+=== 方块 ===
+'''[[宝库]]'''
+* 更改了纹理。
+
+=== 非生物实体 ===
+'''[[风弹（实体）|风弹]]'''
+* 旋风人发射的风弹的ID由{{cd|wind_charge}}重命名为{{cd|breeze_wind_charge}}。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 向{{cd|#impact_projectiles}}实体类型标签加入了{{cd|breeze_wind_charge}}。
+
+== 修复 ==
+{{fixes|fixedin=24w06a|showdesc=1
+|;old
+|72151|雪傀儡投掷的雪球对狼会造成伤害，而不是击退。
+|193202|当NBT数据加载后，会重置驯服的狼的生命值。
+|259142|朝下的木桶在漏斗上方时，漏斗仍会拾取物品。
+|261846|日文使用中文的字体。
+|264684|太长的{{tr|宏|巨集}}静默失效。
+|;dev
+|267512|无懈可击的恶魂会被反弹的火球杀死。
+|267917|幼年犰狳被喂食蜘蛛眼时无进食音效。
+|267940|犰狳鳞甲掉落计时器不被储存进数据。
+|268065|无AI的犰狳被攻击也会蜷缩。
+|268091|音乐“Shuniji”“Dragon Fish”和“Axolotl”不再在{{tr|水下|水中}}播放。
+|268096|单人游戏客户端丢失同步的生物群系标签。
+|268179|对空气右键会使手上的马铠和狼铠消失。
+|268189|<code>block.vault.fall</code>使用占位符音效。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:24w06a]]
+[[en:Java Edition 24w06a]]
+[[es:Java Edition 24w06a]]
+[[fr:Édition Java 24w06a]]
+[[ja:Java Edition 24w06a]]
+[[pt:Edição Java 24w06a]]
+[[ru:24w06a (Java Edition)]]
+[[uk:24w06a (Java Edition)]]

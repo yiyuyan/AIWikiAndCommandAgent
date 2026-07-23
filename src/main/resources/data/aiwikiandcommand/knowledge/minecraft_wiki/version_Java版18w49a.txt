@@ -1,0 +1,116 @@
+# 页面: Java版18w49a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8818w49a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:23
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=18w49a
+|image=18w49a.jpg
+|image2=Java Edition 18w49a Simplified.png\Java Edition 18w49a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2018年12月5日
+|jsonhash=d108918c2200a58ee88a53af16038f09e2bedfff
+|clienthash=2a0b27ad8bd6cd2bb09e3a2210170fd0b5424c54
+|serverhash=5b6eb767f6708d351e3d1009a44115bb033b854f
+|parent=1.14
+|prevparent=1.13.2
+|prev=18w48b
+|next=18w50a
+|nextparent=1.14.1
+}}<onlyinclude>
+
+'''18w49a'''是[[Java版1.14]]的第11个快照，发布于2018年12月5日<ref>{{snap|18w49a|December 5, 2018}}</ref>，加入了甜浆果、甜浆果丛、新的死亡消息和积雪的冻原村庄，更新了战利品表，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[甜浆果丛]]'''
+* 普遍地生成在{{BiomeLink|Taiga}}、{{BiomeLink|Taiga Hills}}和 {{BiomeLink|Taiga Mountains}}；罕见地生成在{{BiomeLink|Snowy Taiga}}、{{BiomeLink|Snowy Taiga Hills}}和 {{BiomeLink|Snowy Taiga Mountains}}。
+* 可用[[甜浆果]]种植。
+** 有四个生长阶段：树苗、没有浆果、少量浆果和大量浆果。
+*** 在第三生长阶段时会掉落1-2个浆果，第四阶段时掉落2-3个。
+*** 所有成长阶段均会减慢玩家和生物的移动速度。
+** 使用右键采集。
+** 可用骨粉催熟。
+* 任何生物都可以站在里面。但是如果它们在过了树苗阶段的果丛中移动，将会受到和站在[[仙人掌]]旁边一样的伤害。
+
+=== 物品 ===
+'''[[甜浆果]]'''
+* 恢复{{hunger|2}}饥饿值。
+* 将其种在地上会长成甜浆果丛。
+
+=== 世界生成 ===
+'''[[村庄]]'''
+* 加入了{{EnvLink|Snowy Village|link=村庄|text=雪原村庄}}。
+
+=== 常规 ===
+'''[[战利品表]]'''
+* 加入了一个新的战利品表函数：<code>copy_nbt</code>。
+** 从来源复制NBT到物品标签。
+** 参数：
+*** {{code|source}}：可以是{{cd|d=，|this|killer|killer_player}}或{{cd|block_entity}}。
+*** {{code|ops}}
+**** 复制操作列表：
+***** {{code|source}}：源路径（与{{cmd|data}}类似）。
+***** {{code|target}}：目标路径。
+***** {{code|op}}：{{code|replace}}, {{code|append}} (对于清单), 或 {{code|merge}} (对于复合标签)。
+*** {{code|entity}}：个人资料来源(仅玩家)
+
+===游戏内容 ===
+'''[[死亡消息]]'''
+* 加入了新的死亡消息，当玩家在甜浆果丛中移动导致死亡时触发。
+** <玩家>被甜浆果丛刺死了
+** <玩家>在试图逃离<实体>时被甜浆果丛刺死了
+
+== 更改 ==
+=== 世界生成 ===
+'''[[村庄]]'''
+* 更新了{{EnvLink|Village Savanna|link=村庄|text=热带草原村庄}}。
+
+=== 游戏内容 ===
+'''[[袭击]]'''
+* 最强袭击的对应{{EffectLink|Bad Omen|不祥之兆}}等级变为5级。
+** 杀死[[灾厄巡逻队]]队长能增加不祥之兆等级。
+* 现在每级的不祥之兆效果会增加两波。
+* 现在玩家必须完成一波才能开始下一波。
+* {{tr|灾厄之兽|窳獸}}现在可以出现在任何一波。
+* 当袭击被触发或当一波的生物全部被清除时，袭击进度条会慢慢填满。
+
+== 修复 ==
+{{fixes|fixedin=18w49a|prefix=Minecraft|showdesc=1
+|;old
+|72809|Y{{=}}256处的实体没有实体阴影。
+|111480|在游戏启动后第一个加载的世界里，或当玩家的实体ID为0时，不能用烟花火箭加速。
+|125051|进度里不正确的结构名称会导致<code>java.lang.NullPointerException</code>出现。
+|139712|复制无法识别的半个Unicode字符时会导致客户端崩溃。
+|;dev
+|137688|从弩发射的烟花火箭不在遇到实体时爆炸。
+|137848|空手打掉潜影盒时不掉落任何东西。
+|138067|替换唱片机会掉落唱片。
+|138641|在被挖掘的时候潜影盒不保留<code>Lock</code>NBT标签。
+|139555|{{cmd|data modify|link=none}}复制源NBT到目标NBT。
+|139703|掠夺者的武器又出现了问题。
+|139732|村民的交易界面在村庄外时打不开。
+|139886|掠夺者前哨站里不会生成袭击队长。
+|139935|寻找袭击生物生成位置时出现无限循环。
+|139979|当袭击生物不因玩家而死去，袭击永不停止。
+|139993|当玩家在和平难度进入村庄时，仍然会触发袭击。
+|139994|当调为和平难度时，袭击永不停止。
+|140113|当袭击生物进入传送门，袭击栏不会减少。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:18w49a]]
+[[en:Java Edition 18w49a]]
+[[es:Java Edition 18w49a]]
+[[fr:Édition Java 18w49a]]
+[[ja:Java Edition 18w49a]]
+[[pt:Edição Java 18w49a]]
+[[ru:18w49a (Java Edition)]]
+[[th:รุ่น Java 18w49a]]

@@ -1,0 +1,192 @@
+# 页面: 命令/place
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/place
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{for|{{in|be|nc=1|nocat=1}}已移除的用于控制[[智能体]]的命令|命令/place（已移除）|{{in|be|nc=1|nocat=1}}用于放置结构的命令|命令/structure}}
+{{Infobox command
+|name=place
+|oplevel=2
+|becheat=1
+|others=不在[[命令方块]]上执行{{only|be}}
+}}
+
+以指定位置为生成原点，放置[[已配置的地物]]、[[结构地物]]、[[结构模板]]或[[结构池]]。
+
+== 语法 ==
+* '''Java版'''
+: <code>place feature <feature> [<pos>]</code>
+:: 放置[[已配置的地物]]。
+: <code>place jigsaw <pool> <target> <max_depth> [<position>]</code>
+:: 放置[[结构池]]并展开至指定深度。
+: <code>place structure <structure> [<pos>]</code>
+:: 放置[[结构地物]]。
+: <code>place template <template> [<pos>] [<rotation>] [<mirror>] [<integrity>] [<seed>] [strict]</code>
+:: 放置[[结构模板]]。与[[结构方块]]功能基本一致。
+* '''基岩版'''
+: <code>place feature <feature: features> [position: x y z]</code>
+: <code>place featurerule <featurerule: featureRules> [position: x y z]</code>
+:: 放置[[地物]]。
+: <code>place jigsaw <pool: filepath> <jigsawTarget: string> <maxDepth: int> [pos: x y z] [keepJigsaws: Boolean] [includeEntities: Boolean] [liquidSettings: LiquidSettings]</code>
+:: 放置[[结构池]]并展开至指定深度。
+: <code>place structure <structure: string> [pos: x y z] [ignoreStartHeight: Boolean] [keepJigsaws: Boolean] [includeEntities: Boolean] [liquidSettings: LiquidSettings]</code>
+:: 放置[[结构地物]]。
+
+== 参数 ==
+{{el|je|short=1}}：{{argument|feature|resource_key}}（[[Java版26.3|26.3]]前）
+: 指定要放置的已配置地物。原版中的已配置地物参见[[地物]]。
+:{{arg desc|je=resource_key|registry=minecraft:worldgen/configured_feature}}
+
+{{el|je|short=1}}：{{argument|feature|feature}}（[[Java版26.3|26.3]]起）
+: 指定要放置的已配置地物。原版中的已配置地物参见[[地物]]。
+:{{arg desc|je=feature}}
+
+{{argument|structure|resource_key|structure: string|basic_string}} 
+: 指定要放置的结构地物。原版中的结构地物参见[[生成结构]]。
+:{{in|je}}{{arg desc|je=resource_key|registry=minecraft:worldgen/structure}}
+:{{in|be}}{{arg desc|be=basic_string}}且只能为以下其中之一：
+:* {{cd|minecraft:trail_ruins}} — 古迹废墟
+:* {{cd|minecraft:trial_chambers}} — 试炼密室
+
+{{argument|pool|resource_key|pool: filepath|CommandFilePath}}
+: 指定要放置的结构池。
+:{{arg desc|je=resource_key|registry=minecraft:worldgen/template_pool}}
+
+{{argument|target|resource_location|jigsawTarget: string|basic_string}}
+: 指定放置结构池时的结构中的起始[[拼图方块]]。
+:{{in|je}}{{arg desc|je=resource_location}}
+:{{in|be}}{{arg desc|be=basic_string}}
+
+{{argument|max_depth|integer|maxDepth: int|int}}
+: 指定要展开拼图方块的最大深度。
+:{{arg desc|je=integer|min=1|max=7}}
+
+{{el|je|short=1}}：{{argument|template|resource_location}}
+: 指定要放置的结构模板（结构文件）。
+:{{arg desc|je=resource_location}}
+
+{{el|je|short=1}}：{{argument|pos|block_pos}}和{{argument|position|block_pos}}<br>
+{{el|be|short=1}}：{{argument|be=1|position: x y z|CommandPosition}}和{{argument|be=1|pos: x y z|CommandPosition}}
+: 指定放置时使用的生成原点。
+:{{arg desc|je=block_pos|be=commandposition}}
+
+{{el|je|short=1}}：{{argument|rotation|template_rotation}}
+: 指定放置模板时应当旋转的角度，旋转方向以Y轴俯视角为基准。可用值如下：
+:* <code>none</code>（默认值）：不旋转。
+:* <code>clockwise_90</code>：顺时针旋转90°。
+:* <code>180</code>：旋转180°。
+:* <code>counterclockwise_90</code>：逆时针旋转90°。
+
+{{el|je|short=1}}：{{argument|mirror|template_mirror}}
+: 指定放置模板时应当采取的镜像方式。可用值如下：
+:* <code>none</code>（默认值）：不镜像。
+:* <code>front_back</code>：前后翻转。
+:* <code>left_right</code>：左右翻转。
+
+{{el|je|short=1}}：{{argument|integrity|float}}
+: 指定被放置结构的完整度。默认值为1。
+:{{arg desc|je=float|min=0.0|max=1.0}}
+
+{{el|je|short=1}}：{{argument|seed|integer}}
+: 指定要被用于结构随机不完整放置的种子。0代表随机种子。如不指定，则默认为0，即使用随机种子。
+: {{arg desc|je=integer}}
+
+{{el|je|short=1}}：{{cd|strict}}
+: 使命令在放置方块时不触发自身及紧挨着的方块的方块更新和形状更新。
+
+{{el|be|short=1}}：{{argument|be=1|feature: features|enum}}
+: 指定地物。
+: {{arg desc|be=enum}}
+
+{{el|be|short=1}}：{{argument|be=1|featurerule: featureRules|enum}}
+: 指定地物规则。
+: {{arg desc|be=enum}}
+
+{{el|be|short=1}}：{{argument|be=1|ignoreStartHeight: Boolean|enum}}
+: 指定放置结构时是否忽略起始高度，默认为<samp>false</samp>。
+: {{arg desc|be=bool}}
+
+{{el|be|short=1}}：{{argument|be=1|keepJigsaws: Boolean|enum}}
+: 指定被放置结构是否保留拼图方块，默认为<samp>false</samp>。
+: {{arg desc|be=bool}}
+
+{{el|be|short=1}}：{{argument|be=1|includeEntities: Boolean|enum}}
+: 指定被放置结构是否包含实体，默认为<code>false</code>。
+: {{arg desc|be=bool}}
+
+{{el|be|short=1}}：{{argument|be=1|liquidSettings: LiquidSettings|enum}}
+: 指定流体处理方式，默认为{{cd|apply_waterlogging}}。
+: 必须为以下其中之一：
+:* {{cd|apply_waterlogging}} — 允许[[含水]]。
+:* {{cd|ignore_waterlogging}} — 忽略含水。
+: {{arg desc|be=enum}}
+
+== 结果 ==
+{{missing information|需要基岩版信息|section=1}}
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/place feature ...|生成原点周围的3×3区块中有区块未加载或在世界外|fail}}
+{{Result table|不存在已配置地物具有指定的ID}}
+{{Result table|已配置地物无法被放置（取决于已配置地物的放置条件）}}
+{{Result table|cmd=/place jigsaw ...|不存在结构池具有指定的ID}}
+{{Result table|指定的模板池中没有任何元素<ref>{{bug|MC-259351}}</ref>|error}}
+{{Result table|放置的是指定的模板池中的空元素（<code>empty_pool_element</code>）|fail}}
+{{Result table|生成原点未加载或在世界外}}
+{{Result table|模板池中的结构模板中不存在指定的起始拼图方块}}
+{{Result table|cmd=/place structure ...|不存在结构地物具有指定的ID}}
+{{Result table|区块中没有合适位置放置此结构（取决于地物的放置条件）}}
+{{Result table|区块中没有合适的生物群系放置此结构}}
+{{Result table|指定的<code><pos></code>未加载或在世界外}}
+{{Result table|结构要放置的区块中有区块未加载或在世界外<ref>{{bug|MC-274875}}</ref>|执行失败或执行出错}}
+{{Result table|cmd=/place template ...|结构模板在旋转前所将会占据的区块中有区块未加载或在世界外|fail}}
+{{Result table|不存在结构模板具有指定的ID}}
+{{Result table|结构模板是空的，其中没有任何实体或方块}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table|执行出错|不改变|不改变|不改变}}
+{{Output table}}
+
+== 示例 ==
+* 以命令执行者当前坐标为原点，在合适的位置放置一处试炼密室：{{cmd|link=none|place structure minecraft:trial_chambers ~ ~ ~}}
+* {{in|je}}以命令执行者当前坐标为原点，放置一项金合欢树地物：{{cmd|link=none|place feature acacia ~ ~ ~}}
+* {{in|je}}以命令执行者当前坐标为原点，以远古城市中心为模板池抽取模板，并向外生成7层结构：{{cmd|link=none|place jigsaw ancient_city/city_center empty 7 ~ ~ ~}}
+* {{in|je}}以命令执行者当前坐标为原点，放置一个<code>ancient_city/city_center/city_center_1</code>（顺时针旋转90°；左右翻转；50%完整度；种子随机）：{{cmd|link=none|place template ancient_city/city_center/city_center_1 ~ ~ ~ clockwise_90 left_right 0.5 0}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19|dev=22w18a|加入了{{cmd|place|link=none}}命令，用以替代{{cmd|placefeature}}。}}
+|{{HistoryLine|||dev=22w19a|加入了<code>template</code>子命令，用于放置结构模板。}}
+|{{HistoryLine|||dev=pre1|<code>template</code>子命令的<code><template></code>参数现在可被自动补全。}}
+|{{HistoryLine||1.20.5|dev=24w07a|将参数{{cd|max_depth}}的最大值由7更改为20。<ref>{{bug|MC-267732|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=pre2|现在{{cmd|place jigsaw|link=none}}命令在放置前检测是否加载或在世界外。<ref>{{bug|MC-259355|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.5|dev=25w02a|为{{cmd|place template|link=none}}命令加入了{{cd|strict}}选项。}}
+|{{HistoryLine||26.3|dev=snapshot-3|<code>feature</code>子命令现在接受内联定义的[[已配置的地物]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.50|dev=1.21.50.26|exg=jigsaw_structures|加入了{{cmd|place|link=none}}命令。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.23|exg=upcoming_creator_features|加入了{{cd|d=pretty|feature|featurerule}}子命令。}}
+|{{HistoryLine|||dev=1.21.60.23|exg=jigsaw_structures|为{{cd|d=pretty|jigsaw|structure}}子命令加入了{{cd|includeEntities: Boolean}}参数。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.22|{{cd|d=pretty|feature|featurerule}}子命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.22|{{cd|d=pretty|jigsaw|structure}}子命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.21|为{{cd|d=pretty|jigsaw|structure}}子命令加入了{{cd|liquidSettings: LiquidSettings}}参数。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/place]]
+[[en:Commands/place]]
+[[es:Comandos/place]]
+[[fr:Commandes/place]]
+[[ja:コマンド/place]]
+[[pt:Comandos/place]]
+[[ru:Команды консоли/place]]

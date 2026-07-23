@@ -1,0 +1,219 @@
+# 页面: 石头压力板
+# 来源: https://zh.minecraft.wiki/w/%E7%9F%B3%E5%A4%B4%E5%8E%8B%E5%8A%9B%E6%9D%BF
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:46
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|image=Stone Pressure Plate.png
+|invimage=Stone Pressure Plate
+}}
+
+'''石头压力板（Stone Pressure Plate）'''是一种可以用来探测[[生物]]的[[方块]]。
+
+== 生成 ==
+=== 自然生成 ===
+石头压力板生成于[[沙漠神殿]]和[[远古城市]]中。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A2= Stone
+|B2= Stone
+|Output= Stone Pressure Plate
+|type= Redstone
+}}
+
+== 破坏 ==
+挖掘石头压力板的合适工具是镐。
+
+{{Breaking table}}
+
+石头压力板被破坏后会掉落自身。
+
+== 用途 ==
+石头压力板必须{{ctrl|放置}}于[[方块支撑形状]]上表面中心完整或边缘完整的方块上方（包括[[漏斗]]、[[栅栏]]、[[侦测器]]等），不能放置于任何方块的侧面与底部。
+
+尝试在无效的表面放置石头压力板会使其附着到这块空间内最近的有效附着表面（如有）。如尝试在地面上的栅栏侧面放置石头压力板会使其附着到栅栏周围地面方块的顶部。
+
+当石头压力板附着的方块变动（移动、破坏、替代等），不再允许附着时或有[[活塞]]试图推动它或将方块推入其位置时，石头压力板会掉落为方块物品。
+
+[[沙子]]或[[沙砾]]这类受重力影响的方块正下方为石头压力板时不会开始下落。下落到石头压力板的位置时，它会掉落为方块物品。
+
+=== 红石元件 ===
+{{see also|红石元件}}
+
+==== 开启 ====
+石头压力板只能被[[生物]]开启，不受非生物实体的影响。
+
+石头压力板上方（具体为在石头压力板所在方块的（0.125,0,0.125）到（0.875,0.25,0.875）这个长方体区域内）有{{only|je|for=除了[[蝙蝠]]和“标记”[[盔甲架]]以外的}}[[生物]]时（即使生物的碰撞箱只有一小部分在其中），石头压力板会被'''开启'''。
+
+石头压力板开启时输出的[[红石电路#信号强度|信号强度]]固定为15。
+
+石头压力板开启后每20游戏刻更新一次状态。
+
+==== 行为 ====
+当开启时石头压力板会：
+* 激活毗邻的[[红石粉]]，四周背对石头压力板的[[红石比较器]]或[[红石中继器]]。
+* 强充能石头压力板下方任何[[红石导体]]至相应等级。
+* 激活毗邻的[[红石电路#机械元件|机械元件]]。
+
+石头压力板没有碰撞箱，不会阻碍实体移动。石头压力板附着的方块能在它下面提供一个固体阻碍（让生物走过，让物体落在上面等等），但石头压力板放置在碰撞箱较小（如栅栏）的方块上时，实体可能在开启石头压力板时穿过石头压力板。因此石头压力板可以用来探测实体而不阻碍它们的运动。
+
+石头压力板关闭时高0.0625个方块（方块的{{frac|1|16}}），开启时高0.03125个方块（方块的{{frac|1|32}}），但它没有碰撞箱，所以不会影响它上方的实体（如石头压力板上的玩家其实是站在它下面的方块上）。
+
+=== 合成材料 ===
+{{crafting usage|Stone Pressure Plate}}
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Click pitch0.5.ogg
+|subtitle={{tp|subtitles.block.pressure_plate.click}}
+|source={{tp|soundCategory.block}}
+|description=石质压力板取消激活
+|id=block.stone_pressure_plate.click_off
+|translationkey=subtitles.block.pressure_plate.click
+|volume=0.3
+|pitch=0.5}}
+{{Sound table
+|sound=Click pitch0.6.ogg
+|subtitle={{tp|subtitles.block.pressure_plate.click}}
+|source={{tp|soundCategory.block}}
+|description=石质压力板激活
+|id=block.stone_pressure_plate.click_on
+|translationkey=subtitles.block.pressure_plate.click
+|volume=0.3
+|pitch=0.6
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=Click pitch0.6.ogg
+|source=方块
+|description=石质压力板激活
+|id=click_on.stone_pressure_plate
+|typeid=pressure_plate.click_on
+|soundvolume=0.3
+|soundpitch=0.6
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Click pitch0.5.ogg
+|source=方块
+|description=石质压力板取消激活
+|id=click_off.stone_pressure_plate
+|typeid=pressure_plate.click_off
+|soundvolume=0.3
+|soundpitch=0.5
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Stone Pressure Plate
+|spritetype=block
+|nameid=stone_pressure_plate
+|showblocktags=je
+|blocktagsmerge=2 |blocktags={{GameTag|blocks|stone_pressure_plate,polished_blackstone_pressure_plate}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Stone Pressure Plate
+|spritetype=block
+|nameid=stone_pressure_plate
+|showblocktags=be
+|blocktags={{GameTagBE|block|stone_pressure_plate}}
+|foot=1
+}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+压力板的数据值决定了其是否被开启：
+
+{{:压力板/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年5月21日|link={{notch|110762705/my-list-on-tile-types-so-far}}|[[Notch]]展示出加入压力板的兴趣。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.1|[[File:Stone Pressure Plate JE1.png|32px]] 加入了石头压力板。
+{{Collapse|title=合成配方|content=
+<div style="display:inline-block">
+{{Crafting Table
+|A2= Stone
+|B2= Stone
+|C2= Stone
+|Output= Stone Pressure Plate
+}}</div>
+}}
+|[[File:Stone Pressure Plate (item) JE1.png|32px]] 物品栏中的石头压力板比较厚且居中。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.3|石头压力板只需要用两个[[石头]]来制作。之前的版本需要三个（这个配方现在用来制作石[[台阶]]）。}}
+|{{HistoryLine||1.5|石头压力板现在被用来制作[[探测铁轨]]。}}
+|{{HistoryLine||1.6|dev=Test Build 3|石头压力板现在会因支撑[[方块]]的消失变为掉落物。
+|石头压力板不能放在[[树叶]]或[[TNT]]上了。之前放在这些方块上的石头压力板会在被触发后掉落而可以重新收集。}}
+|{{HistoryLine||1.7|[[File:Stone_Pressure_Plate_JE2.png|32px]] 更改了石头压力板的模型。}}
+|{{HistoryLine||1.8|dev=pre1|石头压力板现在可以放置在[[栅栏]]上，虽然在这种放置方式中它们不会发挥压力板的作用。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|现在当石头压力板放置在栅栏顶部时起作用了。}}
+|{{HistoryLine|||dev=Beta 1.9-pre5|[[File:Stone Pressure Plate JE3 BE1.png|32px]] 更改了石头压力板的纹理。}}
+|{{HistoryLine||1.3.1|dev=12w21a|现在石头压力板可以自然生成在[[沙漠神殿]]。}}
+|{{HistoryLine||1.7.2|dev=13w36a|现在允许所有实体触发石头压力板。}}
+|{{HistoryLine||1.8|dev=正式版|石头压力板有自己的物品名称了。<ref>{{bug|MC-66247|||Fixed}}</ref>}}
+|{{HistoryLine||1.9|dev=15w31a|{{inventory icon|Stone Pressure Plate Revision 1}} 石头压力板在物品栏中看起来更薄更靠下了。}}
+|{{HistoryLine|||dev=15w46a|生物不再生成于石头压力板上。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，石头压力板的数字ID是70。}}
+|{{HistoryLine||1.14|dev=18w44a|[[File:Stone Pressure Plate JE5 BE2.png|32px]] 更改了石头压力板的纹理。}}
+|{{HistoryLine||1.14.3|dev=pre3|石头压力板现在可以放在[[铁栏杆]]和[[玻璃板]]上了。}}
+|{{HistoryLine||1.19|dev=22w13a|现在石头压力板会自然生成于[[远古城市]]中。}}
+|{{HistoryLine||1.21.4|dev=24w44a|现在石头压力板不再需要木镐或品质更好的镐来挖掘。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|[[File:Stone Pressure Plate JE3 BE1.png|32px]] 加入了石头压力板。
+|石头压力板可以用来合成[[探测铁轨]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|石头压力板现在能含水。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Stone Pressure Plate JE5 BE2.png|32px]] 更改了石头压力板的纹理。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.26|现在石头压力板会自然生成于[[远古城市]]中。}}
+|{{HistoryLine|||dev=1.21.50.24|现在石头压力板不再需要木镐或品质更好的镐挖掘。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|[[File:Stone Pressure Plate JE3 BE1.png|32px]] 加入了石头压力板。}}
+|{{HistoryLine||xbox=TU5|现在可在[[栅栏]]上放置石头压力板。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Stone Pressure Plate JE5 BE2.png|32px]] 更改了石头压力板的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Stone Pressure Plate JE3 BE1.png|32px]] 加入了石头压力板。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|building blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:机制]]
+
+[[Category:红石机制]]
+
+[[en:Stone Pressure Plate]]
+[[fr:Plaque de pression en pierre]]
+[[ja:石の感圧板]]
+[[ko:돌 압력판]]
+[[pt:Placa de Pressão de Pedra]]

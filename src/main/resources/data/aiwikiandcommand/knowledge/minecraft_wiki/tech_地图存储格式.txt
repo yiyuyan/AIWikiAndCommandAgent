@@ -1,0 +1,324 @@
+# 页面: 地图存储格式
+# 来源: https://zh.minecraft.wiki/w/%E5%9C%B0%E5%9B%BE%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:22:39
+# 原始 Wikitext 内容:
+
+{{about|地图物品相关的地图数据存储格式|存档的存储和文件格式|Java版存档格式|和|基岩版存档格式}}
+{{exclusive|je}}
+
+'''地图计数存储文件'''和'''地图数据存储文件'''是存档中存储[[地图]]数据的文件。
+
+== 地图计数存储格式 ==
+游戏在使用地图时，会给每张独立的地图分配一个'''地图编号'''（Map ID）。游戏使用地图计数存储文件用于存储最后一个已用的地图编号。
+
+地图计数存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/maps/last_id.dat}}，使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：地图计数数据。
+*** {{nbt|int|map|existonsave=1|required=1}}：最后一个已用的地图编号。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此地图计数存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 地图数据存储格式 ==
+游戏不会将地图数据存入地图物品中，而是在存档内单独存储地图数据。地图数据存储文件也被官方称为'''地图索引文件（Map index files）'''<ref>{{article|minecraft-26-1-snapshot-6|Minecraft 26.1 Snapshot 6|Feb 03, 2026}}</ref>。
+
+地图计数存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/maps/<''地图编号''>.dat}}，使用GZip压缩的NBT文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：地图数据。
+*** {{nbt|list|banners|existonsave=1|required=1}}：[[旗帜]]标记数据。
+**** {{nbt|compound}}：一个旗帜标记。
+***** {{nbt|string|color}}：（旗帜的颜色，见[[颜色]]。如果不存在则为<code>white</code>（白色）。
+***** {{nbt|string}}{{nbt|compound}}{{nbt|list|name}}：（[[文本组件]]）旗帜标记的名称，使用对应旗帜的{{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}名称。
+***** {{nbt|int-array|pos|existonsave=1|required=1}}：旗帜在世界中的位置。
+*** {{nbt|byte-array|colors|existonsave=1|required=1}}：地图内部的渲染颜色阵列，总长度16384。如果此数组长度不是16384，游戏将不读取此数组，而是使用全部为0的数组替换。格式见下文。
+*** {{nbt|string|dimension|existonsave=1|required=1}}：（命名空间ID）地图所记录的维度。
+*** {{nbt|list|frames|existonsave=1|required=1}}：[[物品展示框]]显示数据。
+**** {{nbt|compound}}：一个物品展示框的数据。
+***** {{nbt|int|entity_id|existonsave=1|required=1}}：此物品展示框的实体ID。
+***** {{nbt|int-array|pos|existonsave=1|required=1}}：物品展示框在世界中的位置。
+***** {{nbt|int|rotation|existonsave=1|required=1}}：物品展示框的旋转角度，以角度计。此值对应水平平面内的旋转，如果物品展示框是向上或向下，则为-90。
+*** {{nbt|bool|locked|existonsave=1|required=1}}：地图是否已被锁定。锁定后的地图无法更新内部的显示数据，也不会更新旗帜标记。
+*** {{nbt|byte|scale|existonsave=1|required=1}}：（{{interval|left=0|right=4}}）地图的缩放等级。
+*** {{nbt|bool|trackingPosition|existonsave=1|required=1}}：地图是否追踪并显示在地图显示范围内的手持此地图的[[玩家]]和物品展示框的位置。当此值不存在时游戏默认为<code>true</code>。
+*** {{nbt|bool|unlimitedTracking|existonsave=1|required=1}}：地图是否显示距离地图显示范围[[切比雪夫距离]]大于320格的正在手持此地图的玩家，这些玩家会以更小的点渲染（地图图标<code>player_off_limits</code>）。
+*** {{nbt|int|xCenter|existonsave=1|required=1}}：地图中心的世界X坐标。
+*** {{nbt|int|zCenter|existonsave=1|required=1}}：地图中心的世界Z坐标。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此地图数据存储文件的游戏的数据版本。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+{{anchor|地图基色}}{{anchor|地图色}}
+{{nbt|byte-array|colors}}记录了地图上每一个点的颜色。地图边长为128，内部有16384个点。假设地图内像素点''P''，按照地图左上角为原点，其横坐标为''x''，纵坐标为''z''，那么这个点在数组内的下标是<math>x+128z</math>。每个字节都表示一个颜色，这个颜色并不是真正的RGB或灰度值，而是'''地图色'''''C''。
+
+地图色''C''按照二进制位分为两个部分：高6位代表'''地图基色'''''B''，低2位代表'''颜色修饰'''''M''。下列代码演示了如何计算地图色：
+
+<syntaxhighlight lang="java">
+public static byte getMapColor(int baseColor, int modifier) {
+	return (byte) (baseColor << 2 | modifier & 3);
+}
+
+public static int getBaseColor(byte mapColor) {
+	return (((int) mapColor) & 0xFF) >> 2;
+}
+
+public static int getModifier(byte mapColor) {
+	return mapColor & 3;
+}
+</syntaxhighlight>
+
+地图基色''B''是由游戏硬编码的颜色，是一个枚举，共有62种地图基色。颜色修饰''M''有4种，对地图基色提供的RGB颜色进行进一步修改。下表为颜色修饰''M''的取值和对地图基色的影响：
+
+{| class="wikitable"
+! 颜色修饰''M'' !! 枚举名称 !! 修饰效果
+|-
+| 0 || LOW || 对地图基色RGB通道分别乘以{{frac|180|255}}，获得比较暗的颜色
+|-
+| 1 || NORMAL || 对地图基色RGB通道分别乘以{{frac|220|255}}，获得亮度适中的颜色
+|-
+| 2 || HIGH || 不对地图基色做处理，获得较亮的颜色
+|-
+| 3 || LOWEST || 对地图基色RGB通道分别乘以{{frac|135|255}}，获得更暗的颜色
+|}
+
+下表为目前游戏中使用的地图基色，以及它们被颜色修饰修饰后的颜色：
+
+{| class="wikitable collapsible collapsed"
+! rowspan=2 | 地图基色''B''
+! rowspan=2 | 枚举名称
+! colspan=4 | 颜色修饰''M''
+|-
+! 0 (LOW) !! 1 (NORMAL) !! 2 (HIGH) !! 3 (LOWEST)
+|-
+| 0 || NONE || {{color|transparent|透明}} || {{color|transparent|透明}} || {{color|transparent|透明}} || {{color|transparent|透明}}
+|-
+| 1 || GRASS || {{color|#597D27}} || {{color|#6D9930}} || {{color|#7FB238}} || {{color|#435E1D}}
+|-
+| 2 || SAND || {{color|#AEA473}} || {{color|#D5C98C}} || {{color|#F7E9A3}} || {{color|#827B56}}
+|-
+| 3 || WOOL || {{color|#8C8C8C}} || {{color|#ABABAB}} || {{color|#C7C7C7}} || {{color|#696969}}
+|-
+| 4 || FIRE || {{color|#B40000}} || {{color|#DC0000}} || {{color|#FF0000}} || {{color|#870000}}
+|-
+| 5 || ICE || {{color|#7070B4}} || {{color|#8A8ADC}} || {{color|#A0A0FF}} || {{color|#545487}}
+|-
+| 6 || METAL || {{color|#757575}} || {{color|#909090}} || {{color|#A7A7A7}} || {{color|#585858}}
+|-
+| 7 || PLANT || {{color|#005700}} || {{color|#006A00}} || {{color|#007C00}} || {{color|#004100}}
+|-
+| 8 || SNOW || {{color|#B4B4B4}} || {{color|#DCDCDC}} || {{color|#FFFFFF}} || {{color|#878787}}
+|-
+| 9 || CLAY || {{color|#737681}} || {{color|#8D909E}} || {{color|#A4A8B8}} || {{color|#565861}}
+|-
+| 10 || DIRT || {{color|#6A4C36}} || {{color|#825E42}} || {{color|#976D4D}} || {{color|#4F3928}}
+|-
+| 11 || STONE || {{color|#4F4F4F}} || {{color|#606060}} || {{color|#707070}} || {{color|#3B3B3B}}
+|-
+| 12 || WATER || {{color|#2D2DB4}} || {{color|#3737DC}} || {{color|#4040FF}} || {{color|#212187}}
+|-
+| 13 || WOOD || {{color|#645432}} || {{color|#7B663E}} || {{color|#8F7748}} || {{color|#4B3F26}}
+|-
+| 14 || QUARTZ || {{color|#B4B1AC}} || {{color|#DCD9D3}} || {{color|#FFFCF5}} || {{color|#878581}}
+|-
+| 15 || COLOR_ORANGE || {{color|#985924}} || {{color|#BA6D2C}} || {{color|#D87F33}} || {{color|#72431B}}
+|-
+| 16 || COLOR_MAGENTA || {{color|#7D3598}} || {{color|#9941BA}} || {{color|#B24CD8}} || {{color|#5E2872}}
+|-
+| 17 || COLOR_LIGHT_BLUE || {{color|#486C98}} || {{color|#5884BA}} || {{color|#6699D8}} || {{color|#365172}}
+|-
+| 18 || COLOR_YELLOW || {{color|#A1A124}} || {{color|#C5C52C}} || {{color|#E5E533}} || {{color|#79791B}}
+|-
+| 19 || COLOR_LIGHT_GREEN || {{color|#599011}} || {{color|#6DB015}} || {{color|#7FCC19}} || {{color|#436C0D}}
+|-
+| 20 || COLOR_PINK || {{color|#AA5974}} || {{color|#D06D8E}} || {{color|#F27FA5}} || {{color|#804357}}
+|-
+| 21 || COLOR_GRAY || {{color|#353535}} || {{color|#414141}} || {{color|#4C4C4C}} || {{color|#282828}}
+|-
+| 22 || COLOR_LIGHT_GRAY || {{color|#6C6C6C}} || {{color|#848484}} || {{color|#999999}} || {{color|#515151}}
+|-
+| 23 || COLOR_CYAN || {{color|#35596C}} || {{color|#416D84}} || {{color|#4C7F99}} || {{color|#284351}}
+|-
+| 24 || COLOR_PURPLE || {{color|#592C7D}} || {{color|#6D3699}} || {{color|#7F3FB2}} || {{color|#43215E}}
+|-
+| 25 || COLOR_BLUE || {{color|#24357D}} || {{color|#2C4199}} || {{color|#334CB2}} || {{color|#1B285E}}
+|-
+| 26 || COLOR_BROWN || {{color|#483524}} || {{color|#58412C}} || {{color|#664C33}} || {{color|#36281B}}
+|-
+| 27 || COLOR_GREEN || {{color|#485924}} || {{color|#586D2C}} || {{color|#667F33}} || {{color|#36431B}}
+|-
+| 28 || COLOR_RED || {{color|#6C2424}} || {{color|#842C2C}} || {{color|#993333}} || {{color|#511B1B}}
+|-
+| 29 || COLOR_BLACK || {{color|#111111}} || {{color|#151515}} || {{color|#191919}} || {{color|#0D0D0D}}
+|-
+| 30 || GOLD || {{color|#B0A836}} || {{color|#D7CD42}} || {{color|#FAEE4D}} || {{color|#847E28}}
+|-
+| 31 || DIAMOND || {{color|#409A96}} || {{color|#4FBCB7}} || {{color|#5CDBD5}} || {{color|#307370}}
+|-
+| 32 || LAPIS || {{color|#345AB4}} || {{color|#3F6EDC}} || {{color|#4A80FF}} || {{color|#274387}}
+|-
+| 33 || EMERALD || {{color|#009928}} || {{color|#00BB32}} || {{color|#00D93A}} || {{color|#00721E}}
+|-
+| 34 || PODZOL || {{color|#5B3C22}} || {{color|#6F4A2A}} || {{color|#815631}} || {{color|#442D19}}
+|-
+| 35 || NETHER || {{color|#4F0100}} || {{color|#600100}} || {{color|#700200}} || {{color|#3B0100}}
+|-
+| 36 || TERRACOTTA_WHITE || {{color|#937C71}} || {{color|#B4988A}} || {{color|#D1B1A1}} || {{color|#6E5D55}}
+|-
+| 37 || TERRACOTTA_ORANGE || {{color|#703919}} || {{color|#89461F}} || {{color|#9F5224}} || {{color|#542B13}}
+|-
+| 38 || TERRACOTTA_MAGENTA || {{color|#693D4C}} || {{color|#804B5D}} || {{color|#95576C}} || {{color|#4E2E39}}
+|-
+| 39 || TERRACOTTA_LIGHT_BLUE || {{color|#4F4C61}} || {{color|#605D77}} || {{color|#706C8A}} || {{color|#3B3949}}
+|-
+| 40 || TERRACOTTA_YELLOW || {{color|#835D19}} || {{color|#A0721F}} || {{color|#BA8524}} || {{color|#624613}}
+|-
+| 41 || TERRACOTTA_LIGHT_GREEN || {{color|#485225}} || {{color|#58642D}} || {{color|#677535}} || {{color|#363D1C}}
+|-
+| 42 || TERRACOTTA_PINK || {{color|#703637}} || {{color|#8A4243}} || {{color|#A04D4E}} || {{color|#542829}}
+|-
+| 43 || TERRACOTTA_GRAY || {{color|#281C18}} || {{color|#31231E}} || {{color|#392923}} || {{color|#1E1512}}
+|-
+| 44 || TERRACOTTA_LIGHT_GRAY || {{color|#5F4B45}} || {{color|#745C54}} || {{color|#876B62}} || {{color|#473833}}
+|-
+| 45 || TERRACOTTA_CYAN || {{color|#3D4040}} || {{color|#4B4F4F}} || {{color|#575C5C}} || {{color|#2E3030}}
+|-
+| 46 || TERRACOTTA_PURPLE || {{color|#56333E}} || {{color|#693E4B}} || {{color|#7A4958}} || {{color|#40262E}}
+|-
+| 47 || TERRACOTTA_BLUE || {{color|#352B40}} || {{color|#41354F}} || {{color|#4C3E5C}} || {{color|#282030}}
+|-
+| 48 || TERRACOTTA_BROWN || {{color|#352318}} || {{color|#412B1E}} || {{color|#4C3223}} || {{color|#281A12}}
+|-
+| 49 || TERRACOTTA_GREEN || {{color|#35391D}} || {{color|#414624}} || {{color|#4C522A}} || {{color|#282B16}}
+|-
+| 50 || TERRACOTTA_RED || {{color|#642A20}} || {{color|#7A3327}} || {{color|#8E3C2E}} || {{color|#4B1F18}}
+|-
+| 51 || TERRACOTTA_BLACK || {{color|#1A0F0B}} || {{color|#1F120D}} || {{color|#251610}} || {{color|#130B08}}
+|-
+| 52 || CRIMSON_NYLIUM || {{color|#852122}} || {{color|#A3292A}} || {{color|#BD3031}} || {{color|#641919}}
+|-
+| 53 || CRIMSON_STEM || {{color|#682C44}} || {{color|#7F3653}} || {{color|#943F61}} || {{color|#4E2133}}
+|-
+| 54 || CRIMSON_HYPHAE || {{color|#401114}} || {{color|#4F1519}} || {{color|#5C191D}} || {{color|#300D0F}}
+|-
+| 55 || WARPED_NYLIUM || {{color|#0F585E}} || {{color|#126C73}} || {{color|#167E86}} || {{color|#0B4246}}
+|-
+| 56 || WARPED_STEM || {{color|#286462}} || {{color|#327A78}} || {{color|#3A8E8C}} || {{color|#1E4B4A}}
+|-
+| 57 || WARPED_HYPHAE || {{color|#3C1F2B}} || {{color|#4A2535}} || {{color|#562C3E}} || {{color|#2D1720}}
+|-
+| 58 || WARPED_WART_BLOCK || {{color|#0E7F5D}} || {{color|#119B72}} || {{color|#14B485}} || {{color|#0A5F46}}
+|-
+| 59 || DEEPSLATE || {{color|#464646}} || {{color|#565656}} || {{color|#646464}} || {{color|#343434}}
+|-
+| 60 || RAW_IRON || {{color|#987B67}} || {{color|#BA967E}} || {{color|#D8AF93}} || {{color|#725C4D}}
+|-
+| 61 || GLOW_LICHEN || {{color|#597569}} || {{color|#6D9081}} || {{color|#7FA796}} || {{color|#43584F}}
+|}
+
+[[File:Map Colour Shades.png|1000px|thumb|none|所有地图色]]
+
+== 存储行为 ==
+如果存档内没有创建过任何一张地图，那么地图计数存储文件和地图数据存储文件都不存在。当有玩家创建第一张地图时，这两个文件才会被创建和写入。
+
+如果地图计数存储文件内的地图编号是一个已经存在的地图编号，当游戏创建新的地图时，新的地图会覆盖使用同地图编号的地图。
+
+== 地图更新行为 ==
+地图并不是时刻都在更新，也不是所有数据都会同步到地图数据内，部分数据由地图物品保存而不是地图数据保存。
+
+在满足下列条件下，地图内的渲染颜色阵列数据会被更新：
+* 地图未被锁定。（{{nbt|bool|locked}}为<samp>false</samp>）
+* 玩家由主手或副手拿着对应地图编号的地图。
+* 地图所记录维度与玩家所在维度一致。
+
+更新地图的范围为玩家为中心、水平半径128格的世界范围。如果维度类型{{nbt|boolean|has_ceiling}}为<samp>true</samp>，即维度具有天花板（例如[[下界]]），那么距离减半，变为64格。如果更新范围内的某个区块未被加载，则这个区块内的地图数据不被更新。
+
+=== 更新像素 ===
+服务端以128x像素的整列进行更新。
+* 当一名玩家手持地图物品时，服务器会创建一个计数器<code>holdingPlayer.step</code>，每游戏刻自增。
+* 每游戏刻，服务器会遍历更新范围内的每一列，并条件性更新。设当前更新的列位置为<math>u</math>。
+*# 若<math>u\mod16=\text{step}\mod16</math>，则当前列必定更新。
+*# 若此列中有颜色变化的像素，则下一列必定更新。
+
+服务端将更新后的地图数据发送给客户端。
+# 若玩家背包内有此id的地图物品，则会立即收到更新。
+# 若地图被放置在物品展示框内，则每10游戏刻会被更新一次。
+
+装饰部分（旗帜、展示框等标记）的更新步骤尚且不明。
+
+=== 地图颜色的算法 ===
+# 定义缩放范围<math>r=2^s</math>，其中<math>s</math>为[[地图#缩小细节|缩放等级]]。
+# 对于每个地图内的像素点，定义平均高度<math>\bar{h}</math>，计算地图基色<math>B</math>和平均流体深度<math>\bar{d}</math>：
+#* 如果维度有天花板，定义平均高度<math>\bar{h}</math>固定为100，平均流体深度<math>\bar{d}</math>固定为0。根据转换后的世界坐标，填充[[泥土]]的地图基色<code>DIRT</code>或[[石头]]的地图基色<code>STONE</code>：
+#** 定义世界坐标为<math>(x, ?, z)</math>，<math>u=x+231871z</math>。计算<math>31287121u^2+11u</math>，取二进制第21位。0为泥土，1为石头。
+#* 如果维度没有天花板，则取像素点转换到世界坐标后<math>r\times r</math>大小的范围：
+#** 对于范围内的每个水平坐标：
+#**# 如果此水平坐标只有空气，则认为控制地图基色的方块是[[基岩]]，Y坐标为世界最低值，不进行后续流程。
+#**# 从最高非空气方块开始遍历，直到找到一个地图基色不为<code>NONE</code>的方块，或抵达最低的方块。此方块的高度取作<math>h</math>。
+#**# 如果找到的方块含有流体（[[水]]、[[熔岩]]或任意[[含水]]方块），继续向下查找直到找到第一个不含流体的方块，高度差取作<math>d</math>。计算方块上表面是否完整，若不完整认为流体方块是控制地图基色的方块，否则取自身作为控制地图基色的方块。
+#** 计算范围内所有高度的平均值为平均高度<math>\bar{h}</math>，流体深度的平均值作为平均流体深度<math>\bar{d}</math>。取出现次数最多的地图基色作为此像素点的地图基色<math>B</math>（若数量最多的基色不止一种，西北角优先）。
+# 计算颜色修饰<math>M</math>：
+#* 如果像素点的地图基色<math>B</math>是WATER：
+#** 设像素点位置为<math>(u,v)</math>，计算<math>m=0.1\bar{d}+0.2(u+v \mod 2)</math>。
+#*** <math>m<0.5</math>时颜色修饰为<code>HIGH</code>；<math>m>0.9</math>时为<code>LOW</code>；其他情况下为<code>NORMAL</code>。
+#*** 这代表了平均流体深度小于3格时颜色修饰为HIGH，不小于3格且小于5格时为HIGH和NORMAL渐变，不小于5格且小于7格时为NORMAL，不小于7格且小于9格时为NORMAL和LOW渐变，不小于9格时为LOW。（上述渐变为50%方格状）
+#* 如果像素点地图基色<math>B</math>不是WATER：
+#** 获取上方像素点的平均高度<math>\bar{h'}</math>，设平均高度差<math>\Delta\bar{h}=\bar{h}-\bar{h'}</math>，像素点位置为<math>(u,v)</math>，计算<math>m=\frac{4\cdot\Delta\bar{h}}{r+4}+0.4((u+v \mod 2) - 0.5)</math>。
+#*** <math>m>0.6</math>时颜色修饰为<code>HIGH</code>；<math>m<-0.6</math>时为<code>LOW</code>；其他情况下为<code>NORMAL</code>。
+#*** 如果缩放等级{{nbt|byte|scale}}为0，此公式退化为：如果北方方块高于此方块，则颜色修饰为LOW；如果北方方块与此方块同等高度，则颜色修饰为NORMAL；如果北方方块低于此方块，则颜色修饰为HIGH。
+# 按照计算得出的地图基色''B''、颜色修饰''M''，计算地图色''C''写入地图渲染颜色阵列数据。
+
+[[File:Map Pixel Art Train.jpg|350px|thumb|right|使用了带有起伏的方块结构制作一幅像素画]]
+
+当所有方块都处于一个高度时，使用缩放等级为0的地图只会使用62种颜色；但如果方块按照南北方向起伏，则可以使地图拥有186种颜色。这种方式可以扩展地图的颜色，以丰富地图上的色彩呈现。
+
+对于[[探险家地图]]，地图颜色在物品生成时就被决定，只有在玩家后续更新后才会变成真正和世界同步的地图颜色。探险家地图的地图颜色计算如下：
+# 获取所有像素点对应世界坐标的[[生物群系]]，标记带有{{TagLink|biome|water_on_map_outlines}}标签（默认为河流类、海洋类、沼泽类生物群系）的生物群系为水系像素点，其他群系则为陆地像素点。
+# 遍历所有像素点：
+#* 获取周围8个像素点是水系像素点的数量''w''。
+#* 如果此像素点不是水系像素点，且''w''为0，则地图基色为NONE，颜色修饰为LOWEST。
+#* 如果此像素点不是水系像素点，但''w''大于0，则地图基色为BROWN。当''w''大于3时颜色修饰为NORMAL，否则为LOWEST。
+#* 如果此像素点是水系像素点，则地图基色为COLOR_ORANGE，设像素点坐标为<math>(u,v)</math>：
+#** 如果''w''为8，且''v''为偶数，计算<math>m=u+7\sin v</math>，对''m''按位右移3位后对5取余。如果''m''本身为负数，则颜色修饰为LOWEST；如果结果为0或4，则为LOW；如果为1和3，则为NORMAL;如果为2，则为HIGH。
+#** 如果''w''为8，且''v''为奇数，则地图基色为NONE，颜色修饰为LOWEST。
+#** 如果''w''为6或7，则颜色修饰为NORMAL。
+#** 如果''w''为2、3、4、5，则颜色修饰为LOW。
+#** 如果''w''为0或1，则颜色修饰为LOWEST。
+
+地图的旗帜数据和物品展示框数据由地图数据保存。当玩家使用地图物品加入或删除旗帜标记时，数据会立刻同步到地图数据内。当地图物品放入物品展示框或被移出物品展示框时，地图数据也会立刻被更新。但是除了旗帜标记和物品展示框标记外，其他标记数据都由物品数据保存，例如探险家地图上的标记。换言之，地图的渲染颜色阵列、旗帜标记、物品展示框标记、缩放、锁定是全世界同步的，只要保证地图编号一致，数据就会立刻被全局同步；但是，额外的标记不会被全局同步，因为它们在地图物品数据中而不是全局的地图数据内。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2011年5月3日|link={{tweet|notch|65360048049754112}}|Notch提到了地图数据，且最初不打算使用NBT格式。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.6|dev=Test Build 3|加入了[[地图]]。
+|此时地图编号使用短整数。<ref name="mapsize">{{tweet|notch|62970142207913984}}</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8.1|dev=pre1|加入了下界颜色<code>NETHER</code>（35），基色数量提升到36。
+|颜色修饰3的乘数从220改为135。}}
+|{{HistoryLine||1.12|dev=17w17a|基色数量提升到52。}}
+|{{HistoryLine||1.13|dev=17w47a|地图编号不再使用短整数而改用了整数，因为它们不再基于物品的损伤值。}}
+|{{HistoryLine|||dev=18w19a|加入了{{nbt|int|DataVersion}}以记录地图数据存储文件的数据版本。}}
+|{{HistoryLine||1.14|dev=19w02a|加入了地图锁定。}}
+|{{HistoryLine||1.16|dev=pre6|添加基色<code>CRIMSON_NYLIUM</code>（52）、<code>CRIMSON_STEM</code>（53）、<code>CRIMSON_HYPHAE</code>（54）、<code>WARPED_NYLIUM</code>（55）、<code>WARPED_STEM</code>（56）、<code>WARPED_HYPHAE</code>（57）和<code>WARPED_WART_BLOCK</code>（58），基色数量提升到59。}}
+|{{HistoryLine||1.17|dev=21w15a|添加基色<code>DEEPSLATE</code>（59）和<code>RAW_IRON</code>（60），基色数量提升到了61。}}
+|{{HistoryLine|||dev=21w16a|添加基色<code>GLOW_LICHEN</code>（61），基色数量提升到了62。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将地图计数数据从{{filepath|-{}-<''存档根目录''>/data/idcounts.dat}}移动到{{filepath|-{}-<''存档根目录''>/data/minecraft/maps/last_id.dat}}。
+|将地图数据从{{filepath|-{}-<''存档根目录''>/data/map_<''地图编号''>.dat}}移动到{{filepath|-{}-<''存档根目录''>/data/minecraft/maps/<''地图编号''>.dat}}。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Kartendaten]]
+[[en:Map item format]]
+[[fr:Format de carte (objet)]]
+[[ja:地図アイテムフォーマット]]
+[[nl:Kaart object formaat]]
+[[pt:Formato de item do mapa]]

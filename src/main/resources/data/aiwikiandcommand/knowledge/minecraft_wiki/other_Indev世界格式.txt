@@ -1,0 +1,119 @@
+# 页面: Indev世界格式
+# 来源: https://zh.minecraft.wiki/w/Indev%E4%B8%96%E7%95%8C%E6%A0%BC%E5%BC%8F
+# 分类: 开发, 过时内容, 需要整理
+# 抓取时间: 2026-07-14 17:13:02
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|访问|存取}}
+{{outdated|edition=java}}
+'''Indev世界格式'''是游戏存储Indev世界所用的格式。
+
+== 存储格式 ==
+{{cleanup|section=1|需要参照[[Minecraft Wiki:格式指导/NBT及JSON]]规范化}}
+Indev世界使用[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound|MinecraftLevel}}：根标签。
+** {{nbt|compound|About}}：世界相关信息。
+*** {{nbt|long|CreatedOn}}：世界创建时的UNIX时间。
+*** {{nbt|string|Name}}：世界名称，默认为“A Nice World”。
+*** {{nbt|string|Author}}：创建该世界的玩家用户名。
+** {{nbt|compound|Environment}}：有关世界创建环境的信息，这会根据世界生成设置变化。
+*** {{nbt|short|TimeOfDay}}：影响昼夜更替的时间刻。范围为0 - 24000。
+*** {{nbt|byte|SkyBrightness}}：天空光照等级，0至15。
+*** {{nbt|int|SkyColor}}：天空的RGB颜色，24位。红为{{cd|SkyColor >> 16 & 255}}，绿为{{cd|SkyColor >> 8 & 255}}，蓝为{{cd|SkyColor & 255}}。
+*** {{nbt|int|FogColor}}：雾的RGB颜色，24位。红为{{cd|FogColor >> 16 & 255}}，绿为{{cd|FogColor >> 8 & 255}}，蓝为{{cd|FogColor & 255}}。
+*** {{nbt|int|CloudColor}}：云的RGB颜色，24位。红为{{cd|CloudColor >> 16 & 255}}，绿为{{cd|CloudColor >> 8 & 255}}，蓝为{{cd|CloudColor & 255}}。
+*** {{nbt|short|CloudHeight}}：云的高度（Y坐标）。
+*** {{nbt|byte|SurroundingGroundType}}：构成世界外围地面的方块ID。该标签实际上并未被使用，因为游戏总是会将其值视为2。
+*** {{nbt|short|SurroundingGroundHeight}}：世界外围地面的高度。
+*** {{nbt|byte|SurroundingWaterType}}：构成世界外围液体的方块ID。如果该值不为8或9，其会错误地显示为[[熔岩]]的纹理。
+*** {{nbt|short|SurroundingWaterHeight}}：世界外围液体的高度。
+** {{nbt|compound|Map}}：世界数据。
+*** {{nbt|short|Width}}：世界宽度。
+*** {{nbt|short|Length}}：世界长度。
+*** {{nbt|short|Height}}：世界高度。
+*** {{nbt|list|Spawn}}：3个TAG_Shorts的列表，用于X、Y和Z的出生坐标。
+*** {{nbt|byte-array|Blocks}}：{{cd|Width*Length*Height}}字节方块ID。（8位）
+*** {{nbt|byte-array|Data}}：{{cd|Width*Length*Height}}字节方块数据（4位）和光照值（接下来4位）。
+** {{nbt|list|Entities}}：TAG_Compounds列表，用于世界中的实体。
+*** {{nbt|compound}} 一个实体。玩家拥有自己的实体，如下例所示。
+**** {{nbt|string|id}}：实体ID。玩家则为“LocalPlayer”。
+**** {{nbt|list|Pos}}：3个TAG_Floats的列表，用于玩家的X、Y和Z位置。
+**** {{nbt|list|Rotation}}：2个TAG_Floats的列表，用于玩家视角的偏航和俯仰。
+**** {{nbt|list|Motion}}：3个TAG_Floats的列表，用于X、Y和Z的运动，以米每刻为单位。
+**** {{nbt|float|FallDistance}}：玩家下落的距离。
+**** {{nbt|short|Health}}：玩家拥有的生命值。20为10颗心。
+**** {{nbt|short|AttackTime}}：玩家免受攻击的刻数。
+**** {{nbt|short|HurtTime}}：玩家被攻击后红色的刻数。
+**** {{nbt|short|DeathTime}}：玩家死亡的刻数 — 用于控制死亡动画。
+**** {{nbt|short|Air}}：玩家开始溺水之前的刻数。从300开始。
+**** {{nbt|short|Fire}}：当为负数时，玩家将被点燃之前的刻数。当为正数时，火扑灭前的刻数。
+**** {{nbt|int|Score}}：玩家的得分。该分数从未在Alpha或甚至beta中使用，因此该值无关紧要。
+**** {{nbt|list|Inventory}}：TAG_Compounds的列表，表示玩家背包中的物品。
+***** {{nbt|compound}} 一叠物品。
+****** {{nbt|byte|Slot}}：物品所在的槽。
+****** {{nbt|short|id}}：物品[[Java版数据值#ID|ID]].
+****** {{nbt|short|Damage}}：物品的数据值，或工具的损伤值。
+****** {{nbt|byte|Count}}：叠中此物品的编号。范围-128到127。小于2的值不会在游戏中显示。
+** {{nbt|list|TileEntities}}：TAG_Compounds的列表，用于地图中的实体附加值。
+*** {{nbt|compound}} 实体附加值。
+**** {{nbt|string|id}}：实体附加值ID。在本例中为“箱子（Chest）”。
+**** {{nbt|int|Pos}}：实体附加值的位置，稍后解释。
+**** {{nbt|list|Items}}：TAG_Compounds的列表，表示箱子中的物品。
+***** {{nbt|compound}} 一叠物品。
+****** {{nbt|byte|Slot}}：物品所在的槽。
+****** {{nbt|short|id}}：物品的数据值，或工具的损伤值。
+****** {{nbt|short|Damage}}：物品的数据值，或工具的损伤值。
+****** {{nbt|byte|Count}}：叠中此物品的编号。范围-128到127。小于2的值不会在游戏中显示。
+</div>
+计算实体附加值的“Pos”标记：
+
+ pos = x + (y << 10) + (z << 20)
+
+从“Pos”标记计算X、Y和Z：
+
+ x = pos % 1024
+
+ y = (pos >> 10) % 1024
+
+ z = (pos >> 20) % 1024
+
+== 方块 ==
+方块字节数组用于定义占用地图的方块类型。可以通过乘以地图的维度来计算数组中的字节数。Y是向上方向而不是Z.对于Hex值，请参见[[Java版数据值#方块|方块ID]]。
+
+要从XYZ坐标访问方块或数据数组中的特定方块，请使用以下公式：
+
+ array index = (y * height + z) * width + x;
+
+== 数据 ==
+数据字节数组用于光照和额外的方块数据。
+
+有关方块元数据的扩展信息，请参阅[[Java版数据值/Indev|Java版数据值]]。
+
+== 光照 ==
+[[File:Lighting values.png]]
+
+对于方块有16个级别的光照，范围从0x0（0，无光）到0xF（15，全光）。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java indev}}
+|{{HistoryLine||0.31|dev=20100122-2251|现在游戏存档开始使用Indev世界格式。}}
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100227-1414|出于测试无限世界的原因，游戏的存档功能不再起作用。}}
+|{{HistoryLine||20100327|彻底弃用了Indev世界格式，现在游戏存档开始使用[[Alpha世界格式]]。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:开发]]
+
+[[de:Spielstand-Speicherung/Indev Level Format]]
+[[en:Java Edition Indev level format]]
+[[fr:Format de niveau de l'édition Java Indev]]
+[[ja:Levelフォーマット/Java Edition Indev]]
+[[nl:Indev level formaat]]
+[[pt:Formato de nível da Edição Java Indev]]
+[[ru:Формат файлов Minecraft (NBT)]]

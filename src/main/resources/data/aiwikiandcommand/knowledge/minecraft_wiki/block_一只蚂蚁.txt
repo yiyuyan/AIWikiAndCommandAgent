@@ -1,0 +1,715 @@
+# 页面: 一只蚂蚁
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%80%E5%8F%AA%E8%9A%82%E8%9A%81
+# 分类: 使用简单计算器的页面, 愚人节玩笑特性, 方块, 本地化模块需更新, 没有方块物品的方块, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:19:19
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=20w14∞}}
+{{Infobox block
+| image = An Ant.png
+| block-breaking-tool = ''无''
+| block-hardness = -1
+| block-blast-resistance = 3600000
+| block-lava-flammable = 否
+| block-suffocating = 是
+| block-redstone-conductor = 是
+| block-java-solid = 是
+| block-replaceable = 否
+| block-push-reaction = 可推动，可拉动
+| block-instrument = 底鼓
+| block-map-color = {{color|#A7A7A7}}
+| block-id-raw = ant
+| nobe=1
+| noitem=1
+}}
+
+'''一只蚂蚁（An Ant）'''是用于模拟[[wzh:兰顿蚂蚁|兰顿蚂蚁]]的方块。
+
+== 生成 ==
+一只蚂蚁固定在“ant”维度中<code>0 1 0</code>处生成，朝向北方。
+
+== 获取 ==
+一只蚂蚁没有对应的物品形式。
+
+== 破坏 ==
+一只蚂蚁不能被挖掘破坏。
+
+{{Breaking table/manual|only=je|nocopper=1|
+{{BlockSprite|an ant}} 一只蚂蚁|-1|none
+}}
+一只蚂蚁被破坏后不会掉落。
+
+== 用途 ==
+当一只蚂蚁的下方为[[黑色混凝土]]或[[白色混凝土]]时，其每[[游戏刻]]会按照如下的兰顿蚂蚁的规则进行一次移动，并改变其下方的方块。
+
+当一只蚂蚁的下方为黑色混凝土时，右转90度，并将其下方的方块改为白色混凝土，然后向前移动一格；当一只蚂蚁的下方为白色混凝土时，左转90度，并将其下方的方块改为黑色混凝土，然后向前移动一格。
+
+一只蚂蚁在移动时会无视途中的任何方块而直接将其替换，这也包括其他的一只蚂蚁。如果多个一只蚂蚁相撞，它们会合并为一个方块。
+
+如果一只蚂蚁的下方不是黑色混凝土或白色混凝土，一只蚂蚁不会移动。
+
+<div style="display: flex; flex-direction: column; align-items: center;">'''交互式兰顿蚂蚁模拟器'''
+<div class="mcw-calc searchaux" data-type="lifeviewer">
+<div class="mcw-calc-parameter" data-name="pattern"><nowiki>x = 1, y = 1, rule = Langtons-Ant
+B!
+#C [[ GRID ICONS GPS 5 HEIGHT 500 T 0 "Press PLAY to initiate simulation" T 1 "" ]]
+@RULE Langtons-Ant
+
+@TREE
+
+num_states=10
+num_neighbors=4
+num_nodes=17
+1 0 1 1 1 1 1 0 0 0 0
+1 2 6 6 6 6 6 2 2 2 2
+2 0 0 0 0 0 1 0 1 0 0
+1 5 9 9 9 9 9 5 5 5 5
+2 3 3 3 3 3 0 3 0 3 3
+3 2 2 2 2 4 2 4 2 2 2
+1 3 7 7 7 7 7 3 3 3 3
+2 6 6 6 6 6 0 6 0 6 6
+2 0 0 0 0 0 0 0 0 0 0
+3 7 7 7 7 8 7 8 7 7 7
+4 5 5 9 5 5 5 5 5 9 5
+1 4 8 8 8 8 8 4 4 4 4
+2 11 11 11 11 11 0 11 0 11 11
+3 12 12 12 12 8 12 8 12 12 12
+3 8 8 8 8 8 8 8 8 8 8
+4 13 13 14 13 13 13 13 13 14 13
+5 10 10 10 15 10 10 10 10 10 15
+
+@COLORS
+
+0 255 255 255
+1   0   0   0
+2   0 100   0
+3   0 100   0
+4   0 100   0
+5   0 100   0
+6   0 100   0
+7   0 100   0
+8   0 100   0
+9   0 100   0
+
+@ICONS
+
+XPM
+/* width height num_colors chars_per_pixel */
+"31 279 2 1"
+/* colors */
+"A c #FFFFFF"
+". c #000000"
+/* icon for state 1 */
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+/* icon for state 2 */
+".........A...........A........."
+".........A...........A........."
+"..........A.........A.........."
+"...........A.......A..........."
+"............AAAAAAA............"
+"............A.AAA.A............"
+".......A....AAAAAAA....A......."
+".......A.....AAAAA.....A......."
+"........A.....AAA.....A........"
+".........A....AAA....A........."
+"..........AAAAAAAAAAA.........."
+"...........AAAAAAAAA..........."
+"..............AAA.............."
+"..............AAA.............."
+"..........AAAAAAAAAAA.........."
+".........AAAAAAAAAAAAA........."
+"........AA....AAA....AA........"
+".......A......AAA......A......."
+"......A.......AAA.......A......"
+"...........AAAAAAAAA..........."
+"..........AAAAAAAAAAA.........."
+".........AA...AAA...AA........."
+"........A.....AAA.....A........"
+".......A.....AAAAA.....A......."
+"......A.....AAAAAAA.....A......"
+"............AAAAAAA............"
+"............AAAAAAA............"
+"............AAAAAAA............"
+".............AAAAA............."
+"..............................."
+"..............................."
+/* icon for state 3 */
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"......A.....A.................."
+".......A.....A.........AA......"
+"........A.....A.......A........"
+".........A....AA.....A.......AA"
+".........AA....AA...A.......A.."
+"..........AA...AA..AA......A..."
+"...AAAA...AA...AA..AA...AAA...."
+"..AAAAAA..AA...AA..AA..AA.A...."
+"..AAAAAAAAAAAAAAAAAAAAAAAAA...."
+"..AAAAAAAAAAAAAAAAAAAAAAAAA...."
+"..AAAAAAAAAAAAAAAAAAAAAAAAA...."
+"..AAAAAA..AA...AA..AA..AA.A...."
+"...AAAA...AA...AA..AA...AAA...."
+"..........AA...AA..AA......A..."
+".........AA....AA...A.......A.."
+".........A....AA.....A.......AA"
+"........A.....A.......A........"
+".......A.....A.........AA......"
+"......A.....A.................."
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+/* icon for state 4 */
+"..............................."
+"..............................."
+".............AAAAA............."
+"............AAAAAAA............"
+"............AAAAAAA............"
+"............AAAAAAA............"
+"......A.....AAAAAAA.....A......"
+".......A.....AAAAA.....A......."
+"........A.....AAA.....A........"
+".........AA...AAA...AA........."
+"..........AAAAAAAAAAA.........."
+"...........AAAAAAAAA..........."
+"......A.......AAA.......A......"
+".......A......AAA......A......."
+"........AA....AAA....AA........"
+".........AAAAAAAAAAAAA........."
+"..........AAAAAAAAAAA.........."
+"..............AAA.............."
+"..............AAA.............."
+"...........AAAAAAAAA..........."
+"..........AAAAAAAAAAA.........."
+".........A....AAA....A........."
+"........A.....AAA.....A........"
+".......A.....AAAAA.....A......."
+".......A....AAAAAAA....A......."
+"............A.AAA.A............"
+"............AAAAAAA............"
+"...........A.......A..........."
+"..........A.........A.........."
+".........A...........A........."
+".........A...........A........."
+/* icon for state 5 */
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"..................A.....A......"
+"......AA.........A.....A......."
+"........A.......A.....A........"
+"AA.......A.....AA....A........."
+"..A.......A...AA....AA........."
+"...A......AA..AA...AA.........."
+"....AAA...AA..AA...AA...AAAA..."
+"....A.AA..AA..AA...AA..AAAAAA.."
+"....AAAAAAAAAAAAAAAAAAAAAAAAA.."
+"....AAAAAAAAAAAAAAAAAAAAAAAAA.."
+"....AAAAAAAAAAAAAAAAAAAAAAAAA.."
+"....A.AA..AA..AA...AA..AAAAAA.."
+"....AAA...AA..AA...AA...AAAA..."
+"...A......AA..AA...AA.........."
+"..A.......A...AA....AA........."
+"AA.......A.....AA....A........."
+"........A.......A.....A........"
+"......AA.........A.....A......."
+"..................A.....A......"
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+"..............................."
+/* icon for state 6 */
+"AAAAAAAAA.AAAAAAAAAAA.AAAAAAAAA"
+"AAAAAAAAA.AAAAAAAAAAA.AAAAAAAAA"
+"AAAAAAAAAA.AAAAAAAAA.AAAAAAAAAA"
+"AAAAAAAAAAA.AAAAAAA.AAAAAAAAAAA"
+"AAAAAAAAAAAA.......AAAAAAAAAAAA"
+"AAAAAAAAAAAA.A...A.AAAAAAAAAAAA"
+"AAAAAAA.AAAA.......AAAA.AAAAAAA"
+"AAAAAAA.AAAAA.....AAAAA.AAAAAAA"
+"AAAAAAAA.AAAAA...AAAAA.AAAAAAAA"
+"AAAAAAAAA.AAAA...AAAA.AAAAAAAAA"
+"AAAAAAAAAA...........AAAAAAAAAA"
+"AAAAAAAAAAA.........AAAAAAAAAAA"
+"AAAAAAAAAAAAAA...AAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAA...AAAAAAAAAAAAAA"
+"AAAAAAAAAA...........AAAAAAAAAA"
+"AAAAAAAAA.............AAAAAAAAA"
+"AAAAAAAA..AAAA...AAAA..AAAAAAAA"
+"AAAAAAA.AAAAAA...AAAAAA.AAAAAAA"
+"AAAAAA.AAAAAAA...AAAAAAA.AAAAAA"
+"AAAAAAAAAAA.........AAAAAAAAAAA"
+"AAAAAAAAAA...........AAAAAAAAAA"
+"AAAAAAAAA..AAA...AAA..AAAAAAAAA"
+"AAAAAAAA.AAAAA...AAAAA.AAAAAAAA"
+"AAAAAAA.AAAAA.....AAAAA.AAAAAAA"
+"AAAAAA.AAAAA.......AAAAA.AAAAAA"
+"AAAAAAAAAAAA.......AAAAAAAAAAAA"
+"AAAAAAAAAAAA.......AAAAAAAAAAAA"
+"AAAAAAAAAAAA.......AAAAAAAAAAAA"
+"AAAAAAAAAAAAA.....AAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+/* icon for state 7 */
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAA.AAAAA.AAAAAAAAAAAAAAAAAA"
+"AAAAAAA.AAAAA.AAAAAAAAA..AAAAAA"
+"AAAAAAAA.AAAAA.AAAAAAA.AAAAAAAA"
+"AAAAAAAAA.AAAA..AAAAA.AAAAAAA.."
+"AAAAAAAAA..AAAA..AAA.AAAAAAA.AA"
+"AAAAAAAAAA..AAA..AA..AAAAAA.AAA"
+"AAA....AAA..AAA..AA..AAA...AAAA"
+"AA......AA..AAA..AA..AA..A.AAAA"
+"AA.........................AAAA"
+"AA.........................AAAA"
+"AA.........................AAAA"
+"AA......AA..AAA..AA..AA..A.AAAA"
+"AAA....AAA..AAA..AA..AAA...AAAA"
+"AAAAAAAAAA..AAA..AA..AAAAAA.AAA"
+"AAAAAAAAA..AAAA..AAA.AAAAAAA.AA"
+"AAAAAAAAA.AAAA..AAAAA.AAAAAAA.."
+"AAAAAAAA.AAAAA.AAAAAAA.AAAAAAAA"
+"AAAAAAA.AAAAA.AAAAAAAAA..AAAAAA"
+"AAAAAA.AAAAA.AAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+/* icon for state 8 */
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAA.....AAAAAAAAAAAAA"
+"AAAAAAAAAAAA.......AAAAAAAAAAAA"
+"AAAAAAAAAAAA.......AAAAAAAAAAAA"
+"AAAAAAAAAAAA.......AAAAAAAAAAAA"
+"AAAAAA.AAAAA.......AAAAA.AAAAAA"
+"AAAAAAA.AAAAA.....AAAAA.AAAAAAA"
+"AAAAAAAA.AAAAA...AAAAA.AAAAAAAA"
+"AAAAAAAAA..AAA...AAA..AAAAAAAAA"
+"AAAAAAAAAA...........AAAAAAAAAA"
+"AAAAAAAAAAA.........AAAAAAAAAAA"
+"AAAAAA.AAAAAAA...AAAAAAA.AAAAAA"
+"AAAAAAA.AAAAAA...AAAAAA.AAAAAAA"
+"AAAAAAAA..AAAA...AAAA..AAAAAAAA"
+"AAAAAAAAA.............AAAAAAAAA"
+"AAAAAAAAAA...........AAAAAAAAAA"
+"AAAAAAAAAAAAAA...AAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAA...AAAAAAAAAAAAAA"
+"AAAAAAAAAAA.........AAAAAAAAAAA"
+"AAAAAAAAAA...........AAAAAAAAAA"
+"AAAAAAAAA.AAAA...AAAA.AAAAAAAAA"
+"AAAAAAAA.AAAAA...AAAAA.AAAAAAAA"
+"AAAAAAA.AAAAA.....AAAAA.AAAAAAA"
+"AAAAAAA.AAAA.......AAAA.AAAAAAA"
+"AAAAAAAAAAAA.A...A.AAAAAAAAAAAA"
+"AAAAAAAAAAAA.......AAAAAAAAAAAA"
+"AAAAAAAAAAA.AAAAAAA.AAAAAAAAAAA"
+"AAAAAAAAAA.AAAAAAAAA.AAAAAAAAAA"
+"AAAAAAAAA.AAAAAAAAAAA.AAAAAAAAA"
+"AAAAAAAAA.AAAAAAAAAAA.AAAAAAAAA"
+/* icon for state 9 */
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAA.AAAAA.AAAAAA"
+"AAAAAA..AAAAAAAAA.AAAAA.AAAAAAA"
+"AAAAAAAA.AAAAAAA.AAAAA.AAAAAAAA"
+"..AAAAAAA.AAAAA..AAAA.AAAAAAAAA"
+"AA.AAAAAAA.AAA..AAAA..AAAAAAAAA"
+"AAA.AAAAAA..AA..AAA..AAAAAAAAAA"
+"AAAA...AAA..AA..AAA..AAA....AAA"
+"AAAA.A..AA..AA..AAA..AA......AA"
+"AAAA.........................AA"
+"AAAA.........................AA"
+"AAAA.........................AA"
+"AAAA.A..AA..AA..AAA..AA......AA"
+"AAAA...AAA..AA..AAA..AAA....AAA"
+"AAA.AAAAAA..AA..AAA..AAAAAAAAAA"
+"AA.AAAAAAA.AAA..AAAA..AAAAAAAAA"
+"..AAAAAAA.AAAAA..AAAA.AAAAAAAAA"
+"AAAAAAAA.AAAAAAA.AAAAA.AAAAAAAA"
+"AAAAAA..AAAAAAAAA.AAAAA.AAAAAAA"
+"AAAAAAAAAAAAAAAAAA.AAAAA.AAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+
+XPM
+/* width height num_colors chars_per_pixel */
+"15 135 2 1"
+/* colors */
+"A c #FFFFFF"
+". c #000000"
+/* icon for state 1 */
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+/* icon for state 2 */
+"....A.....A...."
+".....A...A....."
+"......AAA......"
+"...A..AAA..A..."
+"....A..A..A...."
+".....AAAAA....."
+".......A......."
+"....AAAAAAA...."
+"...A...A...A..."
+".....AAAAA....."
+"....A..A..A...."
+"...A..AAA..A..."
+"......AAA......"
+"......AAA......"
+"..............."
+/* icon for state 3 */
+"..............."
+"..............."
+"..............."
+"...A..A....A..."
+"....A..A..A...A"
+".....A.A.A...A."
+".AAA.A.A.A.AA.."
+".AAAAAAAAAAAA.."
+".AAA.A.A.A.AA.."
+".....A.A.A...A."
+"....A..A..A...A"
+"...A..A....A..."
+"..............."
+"..............."
+"..............."
+/* icon for state 4 */
+"..............."
+"......AAA......"
+"......AAA......"
+"...A..AAA..A..."
+"....A..A..A...."
+".....AAAAA....."
+"...A...A...A..."
+"....AAAAAAA...."
+".......A......."
+".....AAAAA....."
+"....A..A..A...."
+"...A..AAA..A..."
+"......AAA......"
+".....A...A....."
+"....A.....A...."
+/* icon for state 5 */
+"..............."
+"..............."
+"..............."
+"...A....A..A..."
+"A...A..A..A...."
+".A...A.A.A....."
+"..AA.A.A.A.AAA."
+"..AAAAAAAAAAAA."
+"..AA.A.A.A.AAA."
+".A...A.A.A....."
+"A...A..A..A...."
+"...A....A..A..."
+"..............."
+"..............."
+"..............."
+/* icon for state 6 */
+"AAAA.AAAAA.AAAA"
+"AAAAA.AAA.AAAAA"
+"AAAAAA...AAAAAA"
+"AAA.AA...AA.AAA"
+"AAAA.AA.AA.AAAA"
+"AAAAA.....AAAAA"
+"AAAAAAA.AAAAAAA"
+"AAAA.......AAAA"
+"AAA.AAA.AAA.AAA"
+"AAAAA.....AAAAA"
+"AAAA.AA.AA.AAAA"
+"AAA.AA...AA.AAA"
+"AAAAAA...AAAAAA"
+"AAAAAA...AAAAAA"
+"AAAAAAAAAAAAAAA"
+/* icon for state 7 */
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAA.AA.AAAA.AAA"
+"AAAA.AA.AA.AAA."
+"AAAAA.A.A.AAA.A"
+"A...A.A.A.A..AA"
+"A............AA"
+"A...A.A.A.A..AA"
+"AAAAA.A.A.AAA.A"
+"AAAA.AA.AA.AAA."
+"AAA.AA.AAAA.AAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+/* icon for state 8 */
+"AAAAAAAAAAAAAAA"
+"AAAAAA...AAAAAA"
+"AAAAAA...AAAAAA"
+"AAA.AA...AA.AAA"
+"AAAA.AA.AA.AAAA"
+"AAAAA.....AAAAA"
+"AAA.AAA.AAA.AAA"
+"AAAA.......AAAA"
+"AAAAAAA.AAAAAAA"
+"AAAAA.....AAAAA"
+"AAAA.AA.AA.AAAA"
+"AAA.AA...AA.AAA"
+"AAAAAA...AAAAAA"
+"AAAAA.AAA.AAAAA"
+"AAAA.AAAAA.AAAA"
+/* icon for state 9 */
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAA.AAAA.AA.AAA"
+".AAA.AA.AA.AAAA"
+"A.AAA.A.A.AAAAA"
+"AA..A.A.A.A...A"
+"AA............A"
+"AA..A.A.A.A...A"
+"A.AAA.A.A.AAAAA"
+".AAA.AA.AA.AAAA"
+"AAA.AAAA.AA.AAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAA"
+
+XPM
+/* width height num_colors chars_per_pixel */
+"7 63 2 1"
+/* colors */
+"A c #FFFFFF"
+". c #000000"
+/* icon for state 1 */
+"AAAAAAA"
+"AAAAAAA"
+"AAAAAAA"
+"AAAAAAA"
+"AAAAAAA"
+"AAAAAAA"
+"AAAAAAA"
+/* icon for state 2 */
+".A...A."
+"..AAA.."
+"...A..."
+".AAAAA."
+"...A..."
+".AAAAA."
+"...A..."
+/* icon for state 3 */
+"......."
+".A.A..A"
+".A.A.A."
+"AAAAAA."
+".A.A.A."
+".A.A..A"
+"......."
+/* icon for state 4 */
+"...A..."
+".AAAAA."
+"...A..."
+".AAAAA."
+"...A..."
+"..AAA.."
+".A...A."
+/* icon for state 5 */
+"......."
+"A..A.A."
+".A.A.A."
+".AAAAAA"
+".A.A.A."
+"A..A.A."
+"......."
+/* icon for state 6 */
+"A.AAA.A"
+"AA...AA"
+"AAA.AAA"
+"A.....A"
+"AAA.AAA"
+"A.....A"
+"AAA.AAA"
+/* icon for state 7 */
+"AAAAAAA"
+"A.A.AA."
+"A.A.A.A"
+"......A"
+"A.A.A.A"
+"A.A.AA."
+"AAAAAAA"
+/* icon for state 8 */
+"AAA.AAA"
+"A.....A"
+"AAA.AAA"
+"A.....A"
+"AAA.AAA"
+"AA...AA"
+"A.AAA.A"
+/* icon for state 9 */
+"AAAAAAA"
+".AA.A.A"
+"A.A.A.A"
+"A......"
+"A.A.A.A"
+".AA.A.A"
+"AAAAAAA"</nowiki></div></div></div>
+
+== 音效 ==
+{{Sound table
+|sound=Seagrass dig1.ogg
+|sound2=Seagrass dig2.ogg
+|sound3=Seagrass dig3.ogg
+|sound4=Seagrass dig4.ogg
+|subtitle={{tr|方块：被破坏|方塊破壞聲|方塊被破壞}}
+|source=方块
+|description=破坏方块
+|id=block.wet_grass.break
+|translationkey=subtitles.block.generic.break}}
+{{Sound table
+|sound=Seagrass step1.ogg
+|sound2=Seagrass step2.ogg
+|sound3=Seagrass step3.ogg
+|sound4=Seagrass step4.ogg
+|sound5=Seagrass step5.ogg
+|sound6=Seagrass step6.ogg
+|subtitle=MC-177082
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.wet_grass.fall
+|translationkey=-
+|volume=0.5
+|pitch=0.75
+|distance=16}}
+{{Sound table
+|sound=Seagrass step1.ogg
+|sound2=Seagrass step2.ogg
+|sound3=Seagrass step3.ogg
+|sound4=Seagrass step4.ogg
+|sound5=Seagrass step5.ogg
+|sound6=Seagrass step6.ogg
+|subtitle={{tr|方块：损坏中|正在破壞方塊|方塊正在損壞}}
+|source=方块
+|description=挖掘方块
+|id=block.wet_grass.hit
+|translationkey=subtitles.block.generic.hit
+}}
+{{Sound table
+|sound=Seagrass dig1.ogg
+|sound2=Seagrass dig2.ogg
+|sound3=Seagrass dig3.ogg
+|sound4=Seagrass dig4.ogg
+|subtitle={{tr|方块：被放置|方塊放置聲|方塊被放置}}
+|source=方块
+|description=放置方块
+|id=block.wet_grass.place
+|translationkey=subtitles.block.generic.place
+}}
+{{Sound table
+|sound=Seagrass step1.ogg
+|sound2=Seagrass step2.ogg
+|sound3=Seagrass step3.ogg
+|sound4=Seagrass step4.ogg
+|sound5=Seagrass step5.ogg
+|sound6=Seagrass step6.ogg
+|subtitle={{tr|脚步声|腳步聲}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.wet_grass.step
+|translationkey=subtitles.block.generic.footsteps
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|spritetype=block | an ant
+|generatetranslationkeys=java
+|displayname=An Ant
+|nameid=ant
+|foot=1}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{/BS}}
+
+== 你知道吗 ==
+* 一只蚂蚁的外观即为Mojang网站上所提到的图灵机。
+* 一只蚂蚁在经历大约10000～11000次移动后，会进入一个以104步为周期的无限循环（见下图）。
+
+== 画廊 ==
+<gallery>
+Ant2.png|一只蚂蚁移动约10000次后进入循环
+</gallery>
+
+== 导航 ==
+{{Navbox jokes|20w14∞}}
+
+[[Category:方块]]
+
+[[en:An Ant]]
+[[fr:An Ant]]
+[[ja:An Ant]]
+[[pt:Edição Java 20w14∞/An Ant]]

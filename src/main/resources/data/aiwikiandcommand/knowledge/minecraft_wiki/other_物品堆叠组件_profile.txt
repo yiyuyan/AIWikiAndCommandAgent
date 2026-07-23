@@ -1,0 +1,27 @@
+# 页面: 物品堆叠组件/profile
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%A0%86%E5%8F%A0%E7%BB%84%E4%BB%B6/profile
+# 分类: 已弃用的模板
+# 抓取时间: 2026-07-14 17:31:52
+# 原始 Wikitext 内容:
+
+<noinclude>{{deprecated|type=模板|historical=1|text=请使用[[编码格式/DataComponent]]代替。}}</noinclude>
+<div class="treeview">
+** {{nbt|string}}{{nbt|compound|profile}} 物品堆叠组件
+*** {{nbt|int-array|id}}：玩家的UUID。
+*** {{nbt|string|name}}：（长度不超过16，不能有空格和特殊字符<ref>{{bug|MC-268898|||WAI}}</ref>）玩家名称。如果此项不存在则使用{{nbt|int-array|id}}加载玩家数据。
+*** {{nbt|list}}{{nbt|compound|properties}}：玩家游戏档案属性。
+**** {{nbt condition|如果使用{{nbt|list|列表}}形式，则游戏档案属性数据可以具有签名，且内部标签如下：}}
+**** {{nbt|compound}}：一项游戏档案属性。
+***** {{nbt|string|name|existonsave=1|required=1}}：游戏档案属性的名称。仅在值为{{cd|textures}}时，由{{cd|value}}设置的数据才会被加载为皮肤。
+***** {{nbt|string|value|existonsave=1|required=1}}：游戏档案属性的数据，是使用Base64编码的JSON数据。
+***** {{nbt|string|signature}}：游戏档案属性的签名。
+**** {{nbt condition|如果使用{{nbt|compound|复合标签}}形式，则游戏档案属性数据不具有签名，且内部标签如下：}}
+**** {{nbt|list|<''游戏档案属性名称''>}}：游戏档案属性，可以保存多个不同数据但具有相同属性名称的游戏档案属性。
+***** {{nbt|string}}：游戏档案属性的数据，是使用Base64编码的JSON数据。
+</div><noinclude>
+[[en:Data component format/profile]]
+[[fr:Format de composant de données/profile]]
+[[ja:データコンポーネント/profile]]
+[[pt:Formato de componente de dado/profile]]
+[[uk:Формат компонента даних/profile]]
+</noinclude>

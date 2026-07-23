@@ -1,0 +1,73 @@
+# 页面: 命令/tellraw
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/tellraw
+# 分类: Java版即将到来/26.3, Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=tellraw
+|oplevel=2\1
+}}
+
+向一个或多个玩家发送一条以[[文本组件]]表示的消息。
+
+== 语法 ==
+* '''Java版'''
+: <code>tellraw <targets> <message></code>
+* '''基岩版'''
+: <code>tellraw <target: target> <raw json message: json></code>
+
+== 参数 ==
+{{argument|targets|entity|target: target|CommandSelector<Player>}}
+: 指定该消息的接收玩家。
+: {{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+{{argument|message|component|raw json message: json|Json::Value}}
+: 指定要发送的[[文本组件]]消息。（例：<code>{"text":"Hi there!","bold":"true"}</code>{{only|JE}}；<code>{"rawtext":[{"text":"Hello world"}]}</code>{{only|be}}）
+: {{arg desc|je=component|be=Json::Value}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code>raw json message: json</code>不是一个[[文本组件]]|N/A|fail}}
+{{Result table|<code>target: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器||}}
+{{Result table|<code><targets></code>或<code>target: target</code>未能选中一个或多个在线玩家|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|失败时|0|0|0}}
+{{Output table|成功时|1|1|指定的玩家数}}
+{{Output table|edition=be|失败时|0}}
+{{Output table|成功时|1}}
+{{Output table}}
+
+== 示例 ==
+* 向所有玩家发送蓝色消息“Hello everyone!”：
+** {{el|je|short=1}}：<code>tellraw @a {"text":"Hello everyone!", "color":"blue"}</code>
+** {{el|be|short=1}}：<code>tellraw @a {"rawtext":[{"text":"§9Hello everyone!"}]}</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w37a|加入了{{cmd|tellraw|link=none}}。}}
+|{{HistoryLine||26.3|dev=snapshot-1|<code><message></code>[[文本组件]]中的NBT组件现在至多解析64000次。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.9.0|dev=1.9.0.0|加入了{{cmd|tellraw|link=none}}。}}
+}}
+
+== 参见 ==
+: {{cmd|say}} — 向所有玩家发送一条简单的消息
+: {{cmd|msg}} — 向指定玩家发送一条简单的消息
+: {{cmd|title}} — 向玩家显示一条标题
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/tellraw]]
+[[en:Commands/tellraw]]
+[[es:Comandos/tellraw]]
+[[ja:コマンド/tellraw]]
+[[pt:Comandos/tellraw]]
+[[ru:Команды консоли/tellraw]]

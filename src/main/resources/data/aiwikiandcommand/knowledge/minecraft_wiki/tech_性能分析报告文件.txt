@@ -1,0 +1,377 @@
+# 页面: 性能分析报告文件
+# 来源: https://zh.minecraft.wiki/w/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A%E6%96%87%E4%BB%B6
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:26:05
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''性能分析报告文件'''是由{{cmd|perf}}命令或{{key|F3+L}}生成的用于分析游戏性能的文件。
+
+== 文件结构 ==
+
+性能分析报告文件可以由{{cmd|perf}}（仅专用服务端下可用）生成，根据生成时的时间，保存在{{filepath|-{}-<''服务端根目录''>/debug/profiling/<''时间''>-<''存档名称''>-<''游戏版本''>.zip}}，其中时间格式为<code>yyyy-MM-dd_HH.mm.ss</code><ref name="dateFormat">[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/text/SimpleDateFormat.html Java日期格式]</ref>。这种方式生成的性能分析报告文件只包含服务端数据。
+
+性能分析报告文件也可以由游戏客户端使用{{key|F3+L}}生成，根据生成时的时间，保存在{{filepath|-{}-<''客户端根目录''>/debug/profiling/<''时间''>-<''存档名称''>-<''游戏版本''>.zip}}，其中时间格式与上文相同。这种方式生成的性能分析报告文件会包含客户端数据，如果使用内置服务端（即单人游戏或作为局域网联机主机）则也包含服务端数据。
+
+性能分析报告文件是一个[[wzh:ZIP格式|ZIP文件]]，内部有很多文件记录了服务端各个性能指标。
+
+=== 系统信息 ===
+
+系统信息存储在性能分析报告文件内的{{filepath|system.txt}}内，记录了服务端所处的系统的系统信息。
+
+文件格式与崩溃报告中的<code>System Details</code>节一致。
+
+=== 服务端基础信息 ===
+
+所有服务端的基础信息都保存在性能分析报告文件的{{filepath|server/*.txt}}，详细记录了当前服务端的设置信息和部分运行状态。
+
+如果性能分析报告文件使用{{key|F3+L}}生成，且当前客户端连接了一个远程的服务端，则不包含这些数据。
+
+; 类路径信息
+
+类路径信息保存在{{filepath|server/classpath.txt}}，每一行代表一个包含的类路径，即引用的外部JAR文件路径。
+
+此项本质上读取了系统属性<code>java.class.path</code>，是JVM启动参数中的一部分。
+
+; 游戏规则信息
+
+游戏规则信息保存在{{filepath|server/gamerules.txt}}，保存了所有服务端内的[[游戏规则]]。此文件仅专用服务端导出性能分析报告文件时存在。
+
+此文件每一行都是一项游戏规则和它对应的值，格式为<code>-{}-<''游戏规则''>=<''值''></code>。
+
+; 本地模块信息
+
+本地模块信息保存在{{filepath|server/modules.txt}}，保存了服务端内使用的所有本地模块（动态链接库）。
+
+此文件只有在Windows系统下内部才有数据，其他系统则为空。每一行都代表了一个模块，且格式为<code>-{}-<''模块路径''>:<''模块描述''>:<''模块版本''>:<''模块提供者''></code>。
+
+此数据本质上调用了<code>Kernel32Util.getModules</code>，文档见[http://java-native-access.github.io/jna/5.13.0/javadoc/com/sun/jna/platform/win32/Kernel32Util.html#getModules-int- 此]。
+
+; 服务端配置信息（仅{{cmd|perf}}）
+
+服务端配置信息保存在{{filepath|server/server.properties.txt}}，保存[[服务端配置文件格式|服务端部分配置]]信息。
+
+下列服务端配置会被记录在此文件中，而其他配置将被忽略。每一行的格式是<code>-{}-<''服务端配置''>=<''值''></code>：
+* <code>sync-chunk-writes</code>
+* <code>gamemode</code>
+* <code>spawn-monsters</code>
+* <code>entity-broadcast-range-percentage</code>
+* <code>max-world-size</code>
+* <code>view-distance</code>
+* <code>simulation-distance</code>
+* <code>generate-structures</code>
+* <code>use-native</code>
+* <code>rate-limit</code>
+
+; 服务端基础统计数据
+
+服务端基础统计数据保存在{{filepath|server/stats.txt}}，内部包含了4项数据：
+* <code>pending_tasks</code>：服务端主线程在保存性能分析报告文件时剩余未处理的任务数。
+* <code>average_tick_time</code>：服务端的[[每刻毫秒数]]（MSPT）。
+* <code>tick_times</code>：服务端在保存性能分析报告文件前100游戏刻的刻毫秒数数组。
+* <code>queue</code>：服务端背景并发线程池的信息。
+
+; 服务端线程信息
+
+服务端线程信息保存在{{filepath|server/threads.txt}}，是服务端保存性能分析报告时所有线程的状态信息。
+
+此数据本质上调用了<code>ThreadMXBean.dumpAllThreads</code>，详细信息可见[https://docs.oracle.com/en%2Fjava%2Fjavase%2F21%2Fdocs%2Fapi%2F%2F/java.management/java/lang/management/ThreadMXBean.html#dumpAllThreads(boolean,boolean) 此方法文档]和[https://docs.oracle.com/en%2Fjava%2Fjavase%2F21%2Fdocs%2Fapi%2F%2F/java.management/java/lang/management/ThreadInfo.html ThreadInfo类文档]。
+
+=== 客户端基础信息 ===
+
+客户端基础信息仅在使用{{key|F3+L}}生成的性能分析报告文件中存在。
+
+; 客户端选项数据
+
+客户端选项数据保存在{{filepath|client/options.txt}}，保存部分[[客户端选项文件格式|客户端选项]]信息。每一行的格式是<code>-{}-<''客户端选项''>: <''值''></code>。
+
+=== 性能转储数据 ===
+
+性能转储数据存放在两个位置：
+* {{filepath|server/profiling.txt}}：服务端线程在整个性能分析时间范围内的性能转储数据。
+* {{filepath|client/profiling.txt}}：客户端线程在整个性能分析时间范围内的性能转储数据。
+* {{filepath|-{}-server/deviations/ticktime/<''刻数''>@<''时间''>.txt}}（时间格式为<code>yyyy-MM-dd_HH.mm.ss.SSS</code><ref name="dateFormat"/>）：在服务端线程内抽取本游戏刻毫秒数比前一游戏刻毫秒数增加大于200%的游戏刻，记录这个游戏刻的性能转储数据。
+* {{filepath|-{}-client/deviations/ticktime/<''刻数''>@<''时间''>.txt}}（时间格式与上文相同）：在客户端线程内抽取本游戏刻毫秒数比前一游戏刻毫秒数增加大于200%的游戏刻，记录这个游戏刻的性能转储数据。
+
+性能转储数据分为三个部分：
+
+; 基础信息部分
+
+基础信息部分以<code>---- Minecraft Profiler Results ----</code>开头，并包含下列信息：
+* 第1行（文件第2行）为诙谐评论，游戏将从下列字符串中挑选一个写入文件：
+** <code>I'd Rather Be Surfing</code>；
+** <code>Shiny numbers!</code>；
+** <code>Am I not running fast enough? :(</code>；
+** <code>I'm working as hard as I can!</code>；
+** <code>Will I ever be good enough for you? :(</code>；
+** <code>Speedy. Zoooooom!</code>；
+** <code>Hello world</code>；
+** <code>40% better than a crash report.</code>；
+** <code>Now with extra numbers</code>；
+** <code>Now with less numbers</code>；
+** <code>Now with the same numbers</code>；
+** <code>You should add flames to things, it makes them go faster!</code>；
+** <code>Do you feel the need for... optimization?</code>；
+** <code>*cracks redstone whip*</code>；
+** <code>Maybe if you treated it better then it'll have more motivation to work faster! Poor server.</code>。
+* 第3行（文件第4行）为<code>Version</code>，游戏版本。
+* 第4行（文件第5行）为<code>Time span</code>，性能转储记录的现实持续时间。
+* 第5行（文件第6行）为<code>Tick span</code>，性能转储记录的游戏刻数。
+* 第6行（文件第7行）为记录了每秒刻数（TPS）信息，固定为下列字符串：
+
+<pre>
+// This is approximately <TPS> ticks per second. It should be 20 ticks per second
+</pre>
+
+; 性能转储部分
+
+性能转储部分以<code>--- BEGIN PROFILE DUMP ---</code>开头，并以<code>--- END PROFILE DUMP ---</code>结束。
+
+性能转储部分整体是一个树状结构，游戏使用缩进表明各个层级节点的归属关系。节点分为两种：计数器节点和时间区段节点。
+
+计数器节点都不含有子节点，每个节点的格式如下：
+
+<pre>
+[<indent>] ... #<name> <totalCount>/<avgCount>
+</pre>
+
+* <code>indent</code>：此节点的缩进，即此节点距离根（Root）的深度减1。
+* <code>name</code>：此节点的名称。
+* <code>totalCount</code>：游戏在性能转储的整个过程中，此节点的计数器被访问了多少次。游戏会在执行相关代码的同时访问计数器增加计数，因此此数量可以代表相关代码的执行次数。
+* <code>avgCount</code>：游戏在性能转储的整个过程中，每游戏刻平均访问此节点计数器多少次。此数字向下取整。
+
+时间区段节点都带有3个及以上的子节点，且格式如下：
+
+<pre>
+[<indent>] ... <name>(<totalCount>/<avgCount>) - <percentage>%/<globalPercentage>%
+</pre>
+
+* <code>indent</code>：此节点的缩进，即此节点距离根（Root）的深度减1。
+* <code>name</code>：此节点的名称。<code>unspecified</code>是特殊节点，代表“不在计数范围内的代码”，虽然不带有子节点，但仍然是时间区段节点。
+* <code>totalCount</code>：游戏在性能转储的整个过程中，此节点的计数器被访问了多少次。游戏会在执行相关代码的同时访问计数器增加计数，因此此数量可以代表相关代码的执行次数。
+* <code>avgCount</code>：游戏在性能转储的整个过程中，每游戏刻平均访问此节点计数器多少次。此数字四舍五入。
+* <code>percentage</code>：此节点消耗的时间对于上一级节点消耗时间的占比。
+* <code>globalPercentage</code>：此节点消耗的时间对于根节点消耗时间的占比。
+
+; 计数器转储部分
+
+计数器转储部分以<code>--- BEGIN COUNTER DUMP ---</code>开头，并以<code>--- END COUNTER DUMP ---</code>结束。
+
+每个计数器都有自己的一个部分，以<code>-{}--- Counter: <''名称''> --</code>开头。每个部分也都是一个树状结构，每个节点都有下列格式：
+
+<pre>
+[<indent>] ... <name> total:<selfCount>/<allCount> average: <avgSelfCount>/<avgAllCount>
+</pre>
+
+* <code>indent</code>：此节点的缩进，即此节点距离根（Root）的深度。
+* <code>name</code>：此节点的名称。
+* <code>selfCount</code>：游戏在性能转储的整个过程中，在此节点内访问计数器的次数。
+* <code>allCount</code>：游戏在性能转储的整个过程中，在此节点及其递归子节点内访问计数器的次数。
+* <code>avgSelfCount</code>：游戏在性能转储的整个过程中，每游戏刻在此节点内游戏访问计数器的平均次数。此数字向下取整。
+* <code>avgAllCount</code>：游戏在性能转储的整个过程中，每游戏刻在此节点及其递归子节点内游戏访问计数器的平均次数。此数字向下取整。
+
+=== 运行性能数据 ===
+
+运行性能数据存储在{{filepath|server/metrics/*.csv}}和{{filepath|client/metrics/*.csv}}（仅{{key|F3+L}}）。
+
+; 区块渲染数据（仅{{key|F3+L}}）
+
+区块渲染数据存储在{{filepath|client/metrics/chunk_rendering.csv}}。
+
+文件共有4列：
+* <code>@tick</code>，表示当前刻数。
+* <code>lastViewDistance</code>，在对应游戏刻时的渲染距离。
+* <code>renderedChunks</code>，玩家可见且已经编译完成的可渲染子区块数量。
+* <code>totalChunks</code>，在渲染距离内的所有子区块数量。
+
+; 区块编译数据（仅{{key|F3+L}}）
+
+区块渲染数据存储在{{filepath|client/metrics/chunk_rendering_dispatching.csv}}。
+
+文件共有4列：
+* <code>@tick</code>，表示当前刻数。
+* <code>toUpload</code>，在对应游戏刻时的等待上传数据数量，与调试屏幕中<code>pU</code>一致。
+* <code>freeBufferCount</code>，空闲缓冲区数量，与调试屏幕中<code>aB</code>一致。
+* <code>toBatchCount</code>，待编译子区块数量，与调试屏幕中<code>pC</code>一致。
+
+; CPU性能数据
+
+CPU性能数据存储在{{filepath|server/metrics/cpu.csv}}（使用{{cmd|perf}}）或{{filepath|client/metrics/cpu.csv}}（使用{{key|F3+L}}）。
+
+如果设备上共有N个处理器，则此文件有N+1列。第一列为<code>@tick</code>，表示当前刻数；其余列均为<code>-{}-cpu#<''序号''></code>，代表对应处理器的占用率。
+
+此数据本质上调用了<code>CentralProcessor.getProcessorCpuLoadTicks</code>和<code>CentralProcessor.getProcessorCpuLoadBetweenTicks</code>，具体见[https://www.oshi.ooo/oshi-core/apidocs/oshi/hardware/CentralProcessor.html 此文档]。
+
+; 事件循环数据
+
+事件循环数据存储在{{filepath|server/metrics/event-loops.csv}}（使用{{cmd|perf}}）或{{filepath|client/metrics/event-loops.csv}}（使用{{key|F3+L}}）。
+
+事件循环本身依赖于一个线程，其他部分代码可以将任务提交到事件循环内，并由事件循环在之后执行。
+
+服务端有下列事件循环：
+* 服务端主线程内有一个事件循环，每游戏刻执行待处理的任务。名称为<code>Server</code>。
+* 各个维度区块源内都有一个事件循环，用于将任务提交到服务端主线程。名称为<code>-{}-Chunk source main thread executor for <''维度命名空间ID''></code>。
+
+客户端有下列事件循环：
+* 客户端主线程内有一个事件循环，每游戏刻执行待处理的任务。名称为<code>Client</code>。
+* 声音系统线程内有一个事件循环，用于处理各种声音事件请求。名称为<code>Sound executor</code>。
+
+如果程序内共有N个事件循环，则此文件有N+1列。第一列为<code>@tick</code>，表示当前刻数；其余列均为<code>-{}-<''事件循环名称''>-pending-tasks</code>，代表各个事件循环内待处理的任务数。
+
+; GPU性能数据（仅{{key|F3+L}}）
+
+GPU性能数据存储在{{filepath|client/metrics/gpu.csv}}。此文件要求OpenGL上下文必须支持[https://registry.khronos.org/OpenGL/extensions/ARB/ARB_timer_query.txt ARB_timer_query]扩展，否则此文件不会出现在性能报告文件中。
+文件共含有两列：
+* <code>@tick</code>，表示当前刻数。
+* <code>gpuUtilization</code>，GPU占用率，与调试屏幕中<code>GPU</code>一致。
+
+; 内存数据
+
+内存数据存储在{{filepath|server/metrics/jvm.csv}}（使用{{cmd|perf}}）或{{filepath|client/metrics/jvm.csv}}（使用{{key|F3+L}}）。
+
+文件共含有两列：
+* <code>@tick</code>，表示当前刻数。
+* <code>heap MiB</code>，堆内存数据，单位为MiB。
+
+; 并发任务数据
+
+并发任务数据存储在{{filepath|server/metrics/mailboxes.csv}}（使用{{cmd|perf}}）或{{filepath|client/metrics/mailboxes.csv}}（使用{{key|F3+L}}）。
+
+游戏各处代码都需要用到异步执行的代码，而这些代码会提交到并发任务处理器中，再依次提交给对应的并发线程池执行。
+
+服务端中总共有下列并发任务处理器：
+* <code>entity-deserializer</code>实体反序列化并发任务处理器，使用服务端主线程。
+* <code>IOWorker-poi</code>POI文件同步并发任务处理器，使用IO并发线程池。
+* <code>IOWorker-entities</code>实体文件同步并发任务处理器，使用IO并发线程池。
+* <code>IOWorker-chunk</code>区域文件同步并发任务处理器，使用IO并发线程池。
+* <code>light</code>光照引擎并发任务处理器，使用背景并发线程池。
+* <code>sorter</code>区块加载排序并发任务处理器，使用背景并发线程池。
+* <code>worldgen</code>区块生成并发任务处理器，使用背景并发线程池。
+
+客户端中总共有下列并发任务处理器：
+* <code>download-queue</code>下载队列并发任务处理器，使用下载并发线程池。
+* <code>progressListener</code>区块生成监听并发任务处理器，使用渲染主线程。
+* <code>Section Renderer</code>子区块渲染编译并发任务处理器，使用背景并发线程池。
+* <code>telemetry-event-log</code>遥测事件日志并发任务处理器，使用背景并发线程池。
+
+如果程序内共有N个并发任务处理器，则此文件有N+1列。第一列为<code>@tick</code>，表示当前刻数；其余列均为<code>-{}-<''并发任务处理器名称''>-queue-size</code>，代表各个并发任务处理器内待处理的任务数。
+
+; 刻纳秒数数据
+
+刻纳秒数数据存储在{{filepath|server/metrics/ticking.csv}}和{{filepath|client/metrics/ticking.csv}}，分别代表了服务端和客户端的游戏刻信息。
+
+文件包含2列：
+* <code>@tick</code>，表示当前刻数。
+* <code>ticktime</code>，代表执行这一游戏刻消耗了多少纳秒。
+
+=== 维度数据 ===
+
+维度数据都存储在{{filepath|server/levels/}}下，按照维度命名空间ID，各个维度的数据存储在{{filepath|-{}-server/levels/<''命名空间''>/<''名称''>/}}内。
+
+如果性能分析报告文件使用{{key|F3+L}}生成，且当前客户端连接了一个远程的服务端，则不包含这些数据。
+
+; 方块实体数据
+
+方块实体数据存储在{{filepath|-{}-<''维度数据目录''>/block_entities.csv}}，统计了当前维度已加载区块内可进行每刻持续计算的[[方块实体]]。
+
+文件包含4列：
+* <code>x</code>，方块实体的X坐标。
+* <code>y</code>，方块实体的Y坐标。
+* <code>z</code>，方块实体的Z坐标。
+* <code>type</code>，方块实体的类型。
+
+; 区块数据
+
+区块数据存储在{{filepath|-{}-<''维度数据目录''>/chunks.csv}}，统计了当前维度所有[[区块]]的信息。
+
+文件包含16列：
+* <code>x</code>，区块X坐标。
+* <code>z</code>，区块Z坐标。
+* <code>level</code>，区块的加载等级。
+* <code>in_memory</code>，区块数据是否在内存中。如果不在内存中，则代表区块已被卸载且已被保存，这些不在内存中的区块通常用于辅助世界生成，世界生成完毕后就被释放内存占用。加载等级小于35的区块一定在内存中。
+* <code>status</code>，[[世界生成#生成阶段|区块状态]]，代表了区块的生成情况，达到<code>full</code>时区块才可以可见。此值与加载等级相关，区块状态最终至少达到指定加载等级要求的区块状态。
+* <code>full_status</code>，加载等级类型。此值也与加载等级相关。
+* <code>accessible_ready</code>，区块是否已经准备好被访问，即区块是否是一个世界区块，对玩家是否可以可见。此值共有5种可能值：
+** <code>done</code>：区块已经准备完毕，可以执行对应操作。
+** <code>unloaded</code>：区块不能执行对应的操作，通常是因为加载等级（加载等级类型）未达到要求。
+** <code>not completed</code>：区块正在准备对应的操作，但还未完全准备好。
+** <code>-{}-failed <''错误信息''></code>：区块在准备对应的操作时发生了错误。
+** <code>cancelled</code>：区块准备对应的操作时被游戏取消。
+* <code>ticking_ready</code>，区块是否已经准备好计算方块实体和计划刻。在准备计算方块实体和计划刻前，游戏会对这个区块做最后的从原型区块转换为世界区块的计划刻计算。此值也有5种可能值，具体见上文。
+* <code>entity_ticking_ready</code>，区块是否已经准备好计算实体。此值也有5种可能值，具体见上文。
+* <code>ticket</code>，此区块位置上的加载标签。如果此处没有加载标签，则为<code>no_ticket</code>；如果有加载标签，则为<code>-{}-Ticket[<''加载标签类型''> <''加载标签等级''> <''加载标签位置/加载标签其他信息''>] at <''加载标签创建时间''></code>。
+* <code>spawning</code>，区块是否距离任何一位非[[旁观模式]]玩家128格以内。此项是生成候选区块的其中一项判定条件。
+* <code>block_entity_count</code>，区块内的方块实体数量。
+* <code>ticking_ticket</code>，此区块位置上的计算标签。如果此处没有计算标签，则为<code>no_ticket</code>；如果有计算标签，则为<code>-{}-Ticket[<''计算标签类型''> <''计算标签等级''> <''计算标签位置/计算标签其他信息''>] at <''计算标签创建时间''></code>。
+* <code>ticking_level</code>，区块的计算等级。
+* <code>block_ticks</code>，此区块内的还未执行的方块计划刻数量。
+* <code>fluid_ticks</code>，此区块内的还未执行的流体计划刻数量。
+
+; 实体信息
+
+实体信息存储在{{filepath|-{}-<''维度数据目录''>/entities.csv}}，统计了所有可见[[实体]]。
+
+文件包含8列：
+* <code>x</code>，实体的X坐标。
+* <code>y</code>，实体的Y坐标。
+* <code>z</code>，实体的Z坐标。
+* <code>uuid</code>，实体的[[UUID]]。
+* <code>type</code>，实体的类型。
+* <code>alive</code>，实体是否存活。
+* <code>display_name</code>，实体的显示名称。
+* <code>custom_name</code>，实体的自定义名称，不存在时为<code>[null]</code>。
+
+; 实体子区块信息
+
+实体子区块信息存储在{{filepath|-{}-<''维度数据目录''>/entity_chunks.csv}}，统计了有实体的子区块。
+
+文件包含6列：
+* <code>x</code>，子区块的X坐标。
+* <code>y</code>，子区块的Y坐标。
+* <code>z</code>，子区块的Z坐标。
+* <code>visibility</code>，子区块实体可见性。有三种可能值：<code>TICKING</code>（实体可以被计算）、<code>TRACKED</code>（实体可以被追踪）、<code>HIDDEN</code>（实体被隐藏而不可见）。
+* <code>load_status</code>，子区块实体加载状态。有三种可能值：<code>FRESH</code>（实体子区块还未被加载）、<code>PENDING</code>（实体子区块正在被加载）、<code>LOADED</code>（实体子区块加载完毕）。
+* <code>entity_count</code>，子区块内的实体数量。
+
+; 示例崩溃信息
+
+示例崩溃信息存储在{{filepath|-{}-<''维度数据目录''>/example_crash.txt}}。
+
+示例崩溃信息内的错误固定是<code>java.lang.Exception: dummy</code>，描述固定为<code>Level dump</code>，最顶层栈帧永远为<code>net.minecraft.server.level.ServerLevel.saveDebugReport(java.nio.file.Path)</code>。
+
+; 维度统计信息
+
+维度统计信息存储在{{filepath|-{}-<''维度数据目录''>/stats.txt}}，记录了此维度内的基础信息。
+
+维度统计信息共包含下列数据：
+* <code>spawning_chunks</code>：维度内的[[生成#生成类别与生物上限|可生成区块]]数量。
+* <code>spawn_count.ambient</code>：维度内环境生成类别的实体数量。
+* <code>spawn_count.axolotls</code>：维度内美西螈生成类别的实体数量。
+* <code>spawn_count.creature</code>：维度内动物生成类别的实体数量。
+* <code>spawn_count.monster</code>：维度内怪物生成类别的实体数量。
+* <code>spawn_count.underground_water_creature</code>：维度内地下水生生成类别的实体数量。
+* <code>spawn_count.water_ambient</code>：维度内水下环境生成类别的实体数量。
+* <code>spawn_count.water_creature</code>：维度内水生生成类别的实体数量。
+* <code>entities</code>：维度内实体信息。各个数字分别表示：已知实体UUID数量、可见实体数量、实体子区块数量、准备/正在/已经加载的区块数量、可见区块数量、正在加载的区块数量、正在卸载的区块数量。
+* <code>block_entity_tickers</code>：维度已加载区块内可进行每刻持续计算的方块实体的数量。
+* <code>block_ticks</code>：维度内方块计划刻数量。
+* <code>fluid_ticks</code>：维度内流体计划刻数量。
+* <code>distance_manager</code>：区块加载等级管理器的状态。
+* <code>pending_tasks</code>：此维度内未完成的计划任务数量。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=21w11a|加入了{{key|F3+L}}。}}
+|{{HistoryLine|||dev=pre1|加入了{{cmd|perf|link=none}}。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了GPU占用率数据。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

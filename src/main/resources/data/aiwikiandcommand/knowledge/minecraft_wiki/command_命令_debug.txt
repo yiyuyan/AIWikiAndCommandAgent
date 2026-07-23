@@ -1,0 +1,95 @@
+# 页面: 命令/debug
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/debug
+# 分类: Java版独有特性, 命令
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|刻分析|刻點分析}}
+{{about|刻分析器和函数调试器|性能分析器|命令/perf|JVM分析器|命令/jfr|其他调试|调试}}
+{{exclusive|java}}
+{{Infobox command
+|name=debug
+|oplevel=3
+|nocmdblock=1
+}}
+
+开始或结束刻分析器或对[[Java版函数|函数]]进行调试。
+
+== 语法 ==
+: <code>debug start</code>
+:: 开始新的刻分析器会话。
+: <code>debug stop</code>
+:: 结束正在运行的刻分析器会话。
+: <code>debug function <name></code>
+:: 执行函数，并获取执行函数时的详细信息。注意此命令不能被{{cmd|return run}}或另一个{{cmd|debug function|link=none}}调用或间接调用。
+
+== 参数 ==
+{{argument|name|function}}
+: {{arg desc|je=function}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/debug start|已经有正在运行的刻分析器会话|fail}}
+{{Result table|cmd=/debug stop|没有正在运行的刻分析器会话}}
+{{Result table|cmd=/debug function|指定的函数或函数标签不存在}}
+{{Result table|cmd=/debug function|该命令的执行是由{{cmd|return run}}或之前的{{cmd|debug function|link=none}}引起的}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|cmd=/debug start|执行成功|N/A|1|0}}
+{{Output table|cmd=/debug stop|执行成功|N/A|1|整个分析过程中的平均TPS（[[刻]]数每秒）}}
+{{Output table|cmd=/debug function|执行成功|N/A|1|所有函数中的命令总数量}}
+{{Output table}}
+
+== 文件结果 ==
+=== 函数调试 ===
+{{cmd|debug function|link=none}}会产生一个txt文件，文件名为'''debug-trace-yyyy-MM-dd_HH.mm.ss.txt'''，位于{{filepath|[[.minecraft]]/debug}}目录下。
+
+在此文件中：
+*<code>[C] <''command''></code>表示<code><''command''></code>被执行。
+*<code>[M] <''message''></code>表示命令返回了一条消息。
+*<code>[E] <''message''></code>表示命令返回了一条失败的消息。
+*<code>[R = <''num''>] <''command''></code>表示<code><''command''></code>返回了一个'''[[Brigadier]]返回值'''。
+*<code>[C] <''command''> -> <''num''></code>表示<code><''command''></code>被执行并返回了一个'''Brigadier返回值'''.
+*<code>[F] <''function''> size=<''num''></code>表示一个函数被调用。
+
+对于大多数命令，其'''Brigadier返回值'''等于其可被<code>/execute store result</code>储存的<code>result</code>值。
+
+但对于带有以下任意子命令的<code>/execute ...</code>，其每个分支都返回一个'''Brigadier返回值'''，如果该分支末尾的命令执行成功则为1，否则为0:
+* <code>... if ...</code>（不在命令末尾）
+* <code>... unless ...</code>（不在命令末尾）
+* <code>... as <targets> ...</code>
+* <code>... at <targets> ...</code>
+* <code>... positioned as <targets> ...</code>
+* <code>... rotated as <targets> ...</code>
+* <code>... facing entity <targets> <anchor> ...</code>
+
+<code>/return</code>、<code>/function</code>等命令没有'''Brigadier返回值'''。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w27a|加入了{{cmd|debug|link=none}}命令。}}
+|{{HistoryLine||1.8|dev=14w31a|{{cmd|debug|link=none}}现在可以在单人游戏中运行。|加入了{{cmd|debug chunk|link=none}}。}}
+|{{HistoryLine||1.8.1|dev=pre1|移除了{{cmd|debug chunk|link=none}}。}}
+|{{HistoryLine||1.13|dev=18w03a|向分析器加入了命令。}}
+|{{HistoryLine||1.14.4|dev=pre1|加入了{{cmd|debug report|link=none}}，用来在调试性能时获得更多细节信息。}}
+|{{HistoryLine||1.17|dev=21w15a|加入了{{cmd|debug function|link=none}}。}}
+|{{HistoryLine|||dev=pre1|移除了{{cmd|debug report|link=none}}并被{{key|F3+L}}和{{cmd|perf}}所替代。}}
+|{{HistoryLine||1.20.3|dev=23w41a|现在{{cmd|debug function|link=none}}的<code>result</code>值变为指定函数中命令的总数。
+|现在{{cmd|debug function|link=none}}不可被{{cmd|debug function|link=none}}调用。}}
+|{{HistoryLine|||dev=23w44a|现在{{cmd|debug function|link=none}}不可被{{cmd|return run}}调用。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/debug]]
+[[en:Commands/debug]]
+[[ja:コマンド/debug]]
+[[pt:Comandos/debug]]
+[[ru:Команды консоли/debug]]

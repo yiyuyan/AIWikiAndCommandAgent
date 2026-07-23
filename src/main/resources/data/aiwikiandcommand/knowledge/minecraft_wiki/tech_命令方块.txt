@@ -1,0 +1,302 @@
+# 页面: 命令方块
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4%E6%96%B9%E5%9D%97
+# 分类: Java版独有信息, 不可再生资源, 使用简单计算器的页面, 基岩版独有信息, 嵌入Bilibili视频的页面, 方块, 红石, 红石电路, 过长的自动值输出
+# 抓取时间: 2026-07-14 17:22:17
+# 原始 Wikitext 内容:
+
+{{for|Minecraft: Story Mode中的同名方块|Story Mode:命令方块}}
+{{Infobox block
+|group1=脉冲型
+|1-1=Impulse Command Block.gif
+|1-2=Conditional Impulse Command Block.gif
+|group2=连锁型
+|2-1=Chain Command Block.gif
+|2-2=Conditional Chain Command Block.gif
+|group3=循环型
+|3-1=Repeating Command Block.gif
+|3-2=Conditional Repeating Command Block.gif
+|*-1caption=不受制约
+|*-2caption=条件制约
+|invimage=Command Block
+|invimage2=Chain Command Block
+|invimage3=Repeating Command Block
+|autovalue-id = 命令方块;连锁型命令方块;循环型命令方块
+|light=0
+}}
+{{Relevant tutorial|命令方块}}
+{{quote|这种方块将可以通过红石信号控制来执行命令。使用恰当的命令，即可编写很多东西。|[[Jeb]]对命令方块的介绍<ref name="jeb_">{{tweet|jeb_|228829830731427840}}</ref>||Mojavatar Jens 200x296.png}}
+'''命令方块（Command Block）'''是一种用于储存和执行[[命令]]的[[方块]]，常用于多人服务器与自定义地图中。
+
+== 生成 ==
+命令方块不会生成在世界中。
+
+== 获取 ==
+{{see also|Tutorial:获取任意物品}}
+命令方块无法在未开启[[作弊]]的[[生存模式]]的世界中获取。使用[[创造模式]]或启用[[作弊]]，命令方块可以通过{{only|for=[[创造模式物品栏]]（需要启用“{{tp|options.operatorItemsTab}}”，或“{{tp|itemGroup.hotbar}}”中有命令方块）|JE}}、[[创造模式]]中使用{{ctrl|选取方块}}或[[命令]]等方式获得。
+
+== 破坏 ==
+命令方块不能被挖掘破坏。
+
+[[权限等级]]不足<code>2</code>{{only|je}}或<code>1</code>{{only|be}}的玩家，即使处于创造模式也不能破坏命令方块。
+
+{{Breaking table|命令方块,连锁型命令方块,循环型命令方块}}
+
+命令方块被破坏后不会掉落。
+
+== 用途 ==
+{{see also|命令|Tutorial:命令方块}}
+
+满足预设条件时，命令方块会执行其内含的命令。可帮助不能使用命令的玩家执行一个特定的命令（如允许所有人通过{{cmd|give}}获得一件特定物品，而非让他们直接使用{{cmd|give}}获得任何他们想要的东西）。
+
+命令方块拥有'''朝向（Facing）'''，决定哪个连锁型命令方块会受到感应，以及“{{tp|advMode.mode.conditional}}”模式的命令方块会受哪个命令方块控制。
+
+要允许命令方块执行命令，必须启用[[游戏规则]]{{gamerule|command_blocks_work|commandBlocksEnabled}}。
+
+命令方块的[[权限等级]]为<code>2</code>{{only|je}}或<code>1</code>{{only|be}}，不能执行需要更高权限等级的命令。
+
+{{in|je}}命令方块执行以下命令时，输出只会在“上一个输出”文本框显示，而不会在聊天框显示：{{cmd|help}}、{{cmd|seed}}、{{cmd|list}}、{{cmd|scoreboard objectives list}}、{{cmd|scoreboard players list}}和{{cmd|team list}}。
+
+玩家无法在生存模式和冒险模式下打开命令方块的交互界面并修改其内容。
+
+只有处于[[创造模式]]且拥有对应管理员权限的玩家才能够放置或破坏命令方块。
+
+命令方块不能被点燃。命令方块的[[爆炸抗性]]与[[基岩]]相同且不能被[[活塞]]推动。
+
+=== 设置 ===
+{{Filetr|Command Block GUI.png|缩略图|Java版命令方块界面}}
+{{Filetr|Bedrock Command Block GUI.png|缩略图|基岩版命令方块界面}}
+
+要输入或修改命令，对命令方块点击{{ctrl|使用}}键以打开命令方块的界面。只有处于[[创造模式]]且拥有相关权限的玩家才能打开命令方块的界面。在[[单人游戏]]中，玩家必须处于创造模式并激活命令功能才能编辑命令方块。在[[多人游戏]]中，只能由创造模式下的[[管理员]]编辑。
+
+{{in|je}}在[[单人游戏]]中打开命令方块界面时会暂停游戏。
+
+; 控制台命令{{anchor|控制台命令}}
+: 命令可被输入到第一个文本框按{{key|tab}}可以补全命令且循环代入可选项。
+: 在命令方块中的命令：
+:* 长度较长时，文本框一次只能显示其中的一小段。
+:* 执行时的最大有效长度为32500个字符。
+:* {{in|je}}最多只能输入32500个字符。
+:* {{in|be}}超出32767个字符时可以正常保存，但当命令方块所在区块被重新加载后，会被截断至{{cd|<''字符数''> - 32768}}个字符。
+: 命令方块内的命令'''可以'''像在聊天框中一样加斜杠前缀（<code>/</code>），但也可以省略。
+: {{in|be}}在命令文本框下是一些如何使用[[目标选择器]]的小提示。
+
+; 上一个输出{{anchor|上一个输出}}
+:下方的文本框显示上一个命令的输出（执行成功或失败）。起初它是{{only|je|for=空白的}}或{{only|be|for=<code> - </code>}}。这里的文本无法编辑。
+:文本框{{only|je|for=右边}}或{{only|be|for=左边}}的按钮控制上一个输出是否储存并显示。它设置为输出时将显示为{{only|je|for=<code>O</code>}}或{{only|be|for=开关打开}}（默认），设置为隐藏时将显示为{{only|je|for=<code>X</code>}}或{{only|be|for=开关关闭}}。当世界中有大量命令方块正在运行时，不显示输出可减少内存使用以优化卡顿。
+
+[[File:Command block textures.png|缩略图|'''上方：'''“{{tp|advMode.mode.unconditional}}”模式的命令方块<br>'''下方：'''“{{tp|advMode.mode.conditional}}”模式的命令方块]]
+; 方块类型{{anchor|方块类型}}
+: 点击{{only|je|for=“{{tp|advMode.mode.redstone}}/{{tp|advMode.mode.auto}}/{{tp|advMode.mode.sequence}}”按钮}}或{{only|be|for=“方块类型：”下拉菜单}}可改变命令方块的类型。默认为命令方块的种类。命令方块改变类型时也会改变颜色：
+:* 脉冲型命令方块是橙色的。这种方块是“标准”的命令方块，激活一次执行一次命令。
+:* 连锁型命令方块是青色的。这种方块只在指向它的方块执行命令时才会执行命令。指向它的命令方块可为任意类型的命令方块。
+:* 循环型命令方块是紫色的。这种方块被激活时，{{only|je|for=每一游戏刻}}或{{only|be|for=每过所设定的延迟时间（若为0则为每一游戏刻）}}执行一次命令。
+
+; 条件{{anchor|条件}}
+: 点击{{only|je|for=“{{tp|advMode.mode.conditional}}/{{tp|advMode.mode.unconditional}}”按钮}}或{{only|be|for=“条件：”下拉菜单}}可改变命令方块的条件制约行为：
+:* “{{tp|advMode.mode.conditional}}”：只有当背后的命令方块成功执行命令时才会执行命令（“背后”的意思是该命令方块上箭头指向的反方向，无视连锁方向）。除了连锁型命令方块之外，脉冲型和循环型命令方块都需要至少1游戏刻（{{in|be|nc=1}}取决于“已选项中的延迟”）来激活。条件制约检测的是上一个命令方块在至少1游戏刻前是否成功而忽视同一游戏刻已经发生变化的状态，这就使得检测上一个命令方块是否成功会先于有条件的命令方块激活，即实际不在同一游戏刻内。不过延迟并不代表命令链在进程处理上的混乱，在较短的时间内命令链的结果仍然是相对有序的。
+:* “{{tp|advMode.mode.unconditional}}”（默认）：无论背后的命令方块是否成功执行命令，该命令方块都会正常执行命令。
+
+; 红石{{anchor|红石}}
+:点击{{only|je|for=“{{tp|advMode.mode.autoexec.bat}}/{{tp|advMode.mode.redstoneTriggered}}”按钮}}或{{only|be|for=“红石：”下拉菜单}}可改变命令方块的开启需求条件：
+:* “{{tp|advMode.mode.redstoneTriggered}}”（脉冲型命令方块和循环型命令方块的默认设置）：命令方块必须接收到红石信号才能执行命令。
+:* “{{tp|advMode.mode.autoexec.bat}}”（连锁型命令方块的默认设置）：命令方块在没有红石信号时也会保持为开启状态。特别地，脉冲型命令方块在设置完毕后将立即激活，此后使用{{cmd|clone}}，或{{cmd|structure}}{{only|be}}复制或放置带有NBT的命令方块才可以再次激活。
+
+; {{tr|执行第一个已选项{{sic}}|於第一個刻度執行}}{{only|be}}{{anchor|执行第一个已选项}}
+:{{tr|英文为“Execute on First Tick”，即“首刻执行”。|}}指定循环型命令方块是否在[[#激活|激活]]后立即执行其命令。若被禁用，则从激活时起延迟后第一次执行。该选项对延迟为0刻的循环型命令方块没有影响。
+
+; {{tr|已选项中的延迟{{sic}}|以刻度計算延遲}}{{only|be}}{{anchor|已选项中的延迟}}
+:{{tr|英文为“Delay in Ticks”，即“延迟刻数”。|}}对于脉冲型命令方块和连锁型命令方块，指定在被激活或触发后，执行命令之前延迟的游戏刻。对于循环型命令方块，指定其重新执行命令所延迟的游戏刻。对于脉冲型命令方块和循环型命令方块，延迟设置为0和1的效果相同，游戏将把0视为1。但对于连锁型命令方块，0和1不同。当被设置延迟的命令方块被破坏，未执行的命令将不会执行。
+
+; {{tr|悬停说明|暫留註解}}{{only|be}}{{anchor|悬停说明}}
+:指定命令方块的名称，在指向该方块时显示。它也用于[[#消息|消息命令]]。若命令方块有在铁砧中命名，放置时将采用此名称。若为空，则默认为<code>!</code>。
+
+; 完成与取消{{anchor|完成与取消}}
+:{{only|je|for=点击“完成”按钮或按{{key|Enter}}}}或{{only|be|for=点击“关闭”按钮或按{{key|Esc}}}}会保存命令并退出命令方块界面。
+:点击“取消”按钮或{{only|je|for=按{{key|Esc}}}}会在不保存任何修改的情况下退出命令方块界面。
+
+=== 激活 ===
+处于“{{tp|advMode.mode.redstoneTriggered}}”模式的命令方块是[[红石元件#机械元件|机械元件]]，可被下列形式激活：
+* 毗邻的开启的'''[[红石元件#电源|电源]]'''（例外：[[红石火把]]不会激活其所附着的命令方块，[[侦测器]]只会激活指向的命令方块）。
+* 毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻的指向命令方块且激活的[[红石中继器]]、[[红石比较器]]或[[红石粉]]（包括命令方块上方的红石粉）；毗邻但未指向命令方块的红石粉不会激活命令方块。
+
+{{in|be}}在同一红石刻内，电容器更新阶段前存在，但在电容器更新阶段被取消的信号无法激活命令方块。
+
+命令方块也是[[红石导体]]，因此可被充能。
+<!--
+疑似过时：另外，当命令方块由命令复制到一个会被激活的位置时，新的命令方块只有在原有命令未被执行过时才会执行命令。（可从F3调试屏幕的“triggered”看到）。--><!--
+过时内容：不像除了[[音符盒]]的其他红石元件，命令方块可在每个[[游戏刻]]激活一次（每秒20次，在不卡顿的情况下）。然而，在两个游戏刻中都激活一次需要使其在同一刻钟从被激活转为未激活状态（见[[Tutorial:高频电路#/fill+replace高频|fill+replace高频]]的实例）。-->
+
+处于“{{tp|advMode.mode.autoexec.bat}}”的命令方块将一直被激活。
+
+命令方块有1游戏刻的延迟，当它接收[[脉冲电路#上升沿|上升沿]]时将在1游戏刻后做出反应（激活或撤销激活）。
+
+当被激活时，命令方块将尝试执行它的命令。激活后的动作将取决于命令方块的类型，见[[#方块类型|上文]]。
+
+==== 连锁执行 ====
+若一个指向连锁型命令方块的命令方块被激活，它将向连锁型命令方块发出准备执行命令的信号，而无论其是否执行命令。连锁型命令方块只有在被激活开启时（在“条件制约”模式下还要在它所指向方向的反方向的命令方块成功执行命令时）才会执行命令。
+
+连锁中的方块将在同一游戏刻执行命令。连锁执行的信号无法传递给一个已经在这个游戏刻执行过命令的方块。游戏规则{{gamerule|max_command_sequence_length|maxCommandChainLength}}决定了连锁型命令方块能连锁执行的总数量，默认为65536。
+
+=== 输出 ===
+当激活时，命令方块可以有几种不同类型的输出：
+
+==== 成功次数 ====
+红石比较器可检测并输出命令方块的成功次数。成功次数是0到2,147,483,647（含）之间的整数。信号强度总是反映命令方块最后一次执行的结果，即便命令方块取消激活。
+
+{{in|je}}成功次数通常是0或1，除了{{cmd|execute}}命令。{{in|be}}成功次数通常与命令有关（例如，被命令所影响的玩家数，改变的方块数，命令的返回值）。
+
+{{in|je}}点击“完成”按钮或按下{{key|Enter}}退出界面时，无论是否作出修改均会将成功次数置零。{{in|be}}在有更改的情况下退出界面会将成功次数置零。
+
+==== 消息 ====
+输出消息描述执行命令的成功与否，会有几种输出位置：
+
+* 上一个输出：输出消息都会写入命令方块GUI的“上一个输出”文本框里。
+* 聊天框：输出消息会写入到聊天框，在多人模式下只对所有管理员显示。将游戏规则{{gamerule|command_block_output|commandBlockOutput}}设为<code>false</code>可关闭在聊天框的输出。一些命令可能会在聊天框写入其正常工作时的附带文本，这不会被拦截。（比如，{{cmd|say}}命令将在所有玩家的聊天框写入消息）。带有执行者的名字作为前缀的聊天信息（比如命令{{cmd|me}}，{{cmd|msg}}和{{cmd|say}}）会使用<code>@</code>{{only|je}}/<code>!</code>{{only|be}}作为执行者名字。如果命令方块已经被命名过，那么输出时就会使用命名的名字。
+* 日志：输出信息会写入到多人游戏服务器日志{{only|je|for=，除非游戏规则{{gamerule|log_admin_commands}}被设为<code>false</code>}}。
+
+=== 彩蛋 ===
+{{main|彩蛋#Searge}}
+
+在命令方块中不加“<code>/</code>”运行命令“[[Searge]]”（不区分大小写）会把上一个输出设为“#itzlipofutzli”。
+
+=== 安全保护 ===
+{{exclusive|je|section=1}}
+{{Filetr|Command Block warning.png|thumb|300px|命令方块的物品提示框警告信息}}
+{{in|je}}命令方块属于“仅管理员可设置数据”的方块。
+
+非管理员玩家对命令方块按下{{key|Ctrl}}+{{ctrl|选取方块}}时不会复制方块实体数据，放置物品栏中已有的带有方块实体数据的这些方块也不会将数据实际加载。
+
+管理员玩家的物品栏中带有方块实体数据的命令方块的物品[[提示框]]中会显示警告信息。
+
+== 音效 ==
+{{Sound table/Block/Metal}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Command Block
+|spritetype=block
+|nameid=command_block
+|showblocktags=je
+|blocktags={{GameTag|block|command_block,chain_command_block,repeating_command_block}}
+|rowspan=3
+}}
+{{ID table|Chain Command Block|spritetype=block|nameid=chain_command_block}}
+{{ID table|Repeating Command Block|spritetype=block|nameid=repeating_command_block|foot=1}}
+
+{{ID table|displayname=方块实体|spritename=command-blocks|spritetype=block|nameid=command_block|foot=1}}
+
+{{el|be}}：
+{{ID table|generatetranslationkeys=bedrock
+|Command Block|spritetype=block|nameid=command_block}}
+{{ID table|Chain Command Block|spritetype=block|nameid=chain_command_block}}
+{{ID table|Repeating Command Block|spritetype=block|nameid=repeating_command_block|foot=1}}
+{{ID table|notnamespaced=y|displayname=方块实体|spritename=command-blocks|spritetype=block|nameid=CommandBlock|foot=1}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+{{in|be}}命令方块的方块数据用于确定方块朝向与条件制约模式：
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table|命令方块,连锁型命令方块,循环型命令方块}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+命令方块有包含方块附加数据的方块实体。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 视频 ==
+{{bv|BV1A8bXzyEuf}}
+
+== 历史 ==
+{{see also|命令#历史}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||2012年7月27日|link={{tweet|jeb_|228811183107493888}}|[[Jeb]]开始发一些关于扩展生存模式的新方块的推文。他开始推送一些图片，想法和方块将来用法的线索。}}
+|{{HistoryLine||2012年7月31日|link=http://www.reddit.com/r/Minecraft/comments/xfzdg/i_am_markus_persson_aka_notch_creator_of/c5m0a79|[[Notch]]在他的AMA中暗示这个方块会在1.4中出现。}}
+|{{HistoryLine||1.4.2|dev=12w32a|[[File:Impulse Command Block Revision 1.png|32px]] 加入了命令方块。}}
+|{{HistoryLine||1.5|dev=13w03a|命令方块的成功运行可用[[红石比较器]]输出信号。}}
+|{{HistoryLine|||dev=13w04a|用[[铁砧]]重命名的命令方块在聊天框中会用其名字代替{{cd|@}}。}}
+|{{HistoryLine||1.6.1|dev=13w19a|命令方块在生存模式中不再可破坏，也不会在爆炸中破坏，但蓝色的[[凋灵之首]]除外。}}
+|{{HistoryLine||1.7.2|dev=13w37a|加入了一个显示上一个输出的框。|增加游戏内输入命令的字符限制从256到16,369。使用第三方编辑器可以达到32767个字符。}}
+|{{HistoryLine||1.8|dev=14w07a|[[发射器]]会放置命令方块，而不是发射它。}}
+|{{HistoryLine|||dev=14w20a|移除了游戏内16369的字符限制，允许达到最高的32767个字符。}}
+|{{HistoryLine|||dev=14w27a|加入了<code>CommandStats</code>NBT标签。}}
+|{{HistoryLine||1.8.6|发射器不再放置命令方块。<ref>{{bug|MC-80671#comment-228546}}</ref>}}
+|{{HistoryLine||1.9|dev=15w34a|[[File:Chain Command Block Revision 1.png|32px]][[File:Repeating Command Block Revision 1.png|32px]] 加入了连锁型命令方块和循环型命令方块。
+|加入了方块朝向。
+|[[File:Impulse Command Block Revision 2.png|32px]] 更改了命令方块的纹理。}}
+|{{HistoryLine|||dev=15w34b|加入了条件制约模式。}}
+|{{HistoryLine|||dev=15w35a|[[File:Impulse Command Block Revision 3.png|32px]][[File:Chain Command Block Revision 2.png|32px]][[File:Repeating Command Block Revision 2.png|32px]] 更改了所有命令方块的纹理。
+|加入了保持开启和红石控制选项。加入了<code>auto</code>NBT标签负责控制此项。
+|设置为条件制约模式后，命令方块箭头尾部会弯曲。}}
+|{{HistoryLine|||dev=15w36a|不能使用像{{cmd|give}}这类[[命令]]的玩家不再能放置命令方块。 }}
+|{{HistoryLine|||dev=15w36d|不同类型的命令方块现在在地图上将显示不同的颜色。}}
+|{{HistoryLine|||dev=16w02a|现在在命令方块中运行{{cmd|help}}将随机使用各种不同的幽默短语作为上一个输出。}}
+|{{HistoryLine|||dev=16w04a|在命令方块中不带“<code>/</code>”将“[[Searge]]”作为命令运行，输出会变成“#itzlipofutzli”。}}
+|{{HistoryLine||1.11|dev=16w32a|方块实体ID由<code>Control</code>更改为<code>command_block</code>。}}
+|{{HistoryLine||1.12|dev=17w16a|连锁型命令方块不再安排命令链中的命令在下一刻执行了，现在这些命令会在被读取后的同一刻执行。这使之后放置的方块可以经由之前放置的方块被修改，由此可以在一个游戏刻内实现分支、循环等手法。
+|加入了游戏规则<code>maxCommandChainLength</code>以决定连锁型命令方块运行的限度。}}
+|{{HistoryLine|||dev=17w17a|加入了NBT标签<code>UpdateLastExecution</code>和<code>LastExecution</code>，可以控制对存储连锁型命令方块最后执行的那一刻的跟踪。}}
+|{{HistoryLine|||dev=pre6|命令方块中使用Tab键来自动补全的命令名称不再添加<code>/</code>前缀。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，命令方块、循环型、连锁型命令方块的数字ID分别为137、210、211。}}
+|{{HistoryLine|||dev=pre1|玩家现在可以重新用{{key|tab}}补全命令了。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Impulse Command Block TextureUpdate Revision 1.png|32px]][[File:Chain Command Block.png|32px]][[File:Repeating Command Block TextureUpdate Revision 1.png|32px]] 更改了所有命令方块的纹理。}}
+|{{HistoryLine|||dev=18w47b|[[File:Impulse Command Block.png|32px]][[File:Repeating Command Block.png|32px]] 更改了脉冲型和循环型命令方块的纹理。}}
+|{{HistoryLine||1.19.3|dev=22w44a|现在所有种类的命令方块均可从创造模式物品栏中获取。}}
+|{{HistoryLine||1.21.4|dev=24w44a|加入了命令方块的安全保护提示。}}
+|{{HistoryLine||1.21.9|dev=25w35a|加入了游戏规则<code>[[游戏规则/enableCommandBlocks|enableCommandBlocks]]</code>，用于控制命令方块能否执行命令。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|[[File:Impulse Command Block Revision 3.png|32px]][[File:Chain Command Block Revision 2.png|32px]][[File:Repeating Command Block Revision 2.png|32px]] 加入了所有种类的命令方块。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|命令方块现在的默认名称为{{code|!}}而不是{{code|@}}。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Impulse Command Block.png|32px]][[File:Chain Command Block.png|32px]][[File:Repeating Command Block.png|32px]] 更改了纹理。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|加入了自动完成功能。|加入了延迟选项。}}
+|{{HistoryLine||1.20.70|dev=1.20.70.22|现在命令方块被破坏后不再掉落自身。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|switch=1.0.1|[[File:Impulse Command Block Revision 2.png|32px]] 加入了命令方块。
+|命令方块没有任何功能。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:JebAdventureModeControlBlockDev1.png|Mojang[{{tweet|jeb_|228829830731427840}} 发布]的第一张命令方块的截图
+File:JebAdventureModeControlBlockDev2.png|Mojang[{{tweet|jeb_|228848952240373761}} 发布]的第二张截图，展示着命令方块正在给予Jeb玻璃
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+{{Navbox redstone}}
+
+[[Category:红石电路]]
+
+[[cs:Příkazový blok]]
+[[de:Befehlsblock]]
+[[en:Command Block]]
+[[es:Bloque de comandos]]
+[[fr:Bloc de commande]]
+[[it:Blocco comandi]]
+[[ja:コマンドブロック]]
+[[ko:명령 블록]]
+[[nl:Opdrachtblok]]
+[[pl:Blok poleceń]]
+[[pt:Bloco de Comando]]
+[[ru:Командный блок]]
+[[th:บล็อกคำสั่ง]]
+[[uk:Командний блок]]

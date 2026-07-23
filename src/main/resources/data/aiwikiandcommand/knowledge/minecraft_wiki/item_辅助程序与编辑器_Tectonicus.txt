@@ -1,0 +1,198 @@
+# 页面: 辅助程序与编辑器/Tectonicus
+# 来源: https://zh.minecraft.wiki/w/%E8%BE%85%E5%8A%A9%E7%A8%8B%E5%BA%8F%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8/Tectonicus
+# 分类: 地图查看工具
+# 抓取时间: 2026-07-14 17:36:44
+# 原始 Wikitext 内容:
+
+{{disclaimer}}
+{{Infobox 3rd party tool
+| title = Tectonicus
+| image = TectonicusLogo.png
+| author = OrangyTang
+| platform = {{OS|Win|Linux|Mac}}
+| programming language = Java
+| version = 2.RV
+| license = 新BSD授权协议
+| source available = 是
+| date = 2016年3月
+| size = 2.8MB
+| minecraft version = 1.9
+| nether support = 是
+| homepage = https://github.com/tectonicus/tectonicus
+| bugreports = https://github.com/tectonicus/tectonicus/issues
+| forum topic = http://www.minecraftforum.net/viewtopic.php?f=25&t=95739
+}}
+[[File:TectonicusCloseZoom.png|256px|缩略图|右|实际输出的尺寸]]
+
+'''Tectonicus'''是一个用Java编写的“深度”Minecraft地图查看工具。它比同类工具（如[https://github.com/overviewer/Minecraft-Overviewer Overviewer]）的依赖性更小。它以3D模型生成地图，而非基于方块像素生成。生成的地图细节度很高且可缩放。它会创建大量地图贴图与HTML文件，使你能通过Google地图界面浏览地图，而非简单生成一张图片。
+
+== 功能 ==
+* 可运行在Windows、OSX和安装了X或Xvfb的Linux系统上。
+* 支持查看多个世界。
+* 可使用自定义纹理。
+* 提供标记出生点的图标，点击后会展示该世界所有已发现方块的数量统计。
+* 在地图上显示位置标记，点击时会显示标记文本（空白标记不会显示，通常用于装饰用途，如椅子等）。
+* 支持使用玩家自定义皮肤创建玩家标记，并显示其生命值与统计数据。
+* 具有缓存功能，重复查看相同地图时可加快区域加载与转换速度。
+* 提供多种选项用于控制缩放等级、视角角度和输出格式。
+* 支持输出png、jpg或gif格式的图片。
+* 提供白天、夜晚和洞穴三种查看模式。
+* 支持Mod，可为喜爱的Mod添加自定义方块。
+* 开启高质量输出时会启用反锯齿功能。
+
+如有功能需求，请提交至[https://github.com/tectonicus/tectonicus/issues Tectonicus漏洞追踪器]。
+
+== 示例地图 ==
+[http://www.triangularpixels.com/Junk/TectonicusTest/map.html 查看示例地图]
+
+== 用法 ==
+在版本2，Tectonicus读取储存在XML文件的配置，支持命令行选项。XML文件允许Tectonicus一次查看多个地图，并且你可以通过点击按钮在地图之间切换。
+
+# 在[https://github.com/tectonicus/tectonicus/releases/download/v2.20/Tectonicus_v2.20.zip 这里]下载经过压缩的jar文件，并将其保存在你的电脑上。如果你想以zip文件打开，请右击并点击“另存为”。
+# 创建一个[[辅助程序与编辑器/Tectonicus/Tectonicus配置格式|Tectonicus XML配置文件]]。
+# 从命令行运行Tectonicus，指向刚才创建的XML文件：
+<pre>java -jar Tectonicus_v2.20.jar config=myconfig.xml</pre>
+大一些的地图可能无法在没有内存问题的情况下完全查看，因此使用：
+<pre>java -Xms2048M -Xmx2048M -jar Tectonicus_v2.20.jar config=myconfig.xml</pre>
+2048M=2048MB或2GB的内存（或指定要使用多少内存）。
+也可以创建一个.bat文件，该文件内容如下：
+<pre>@ECHO OFF
+SET BINDIR=%~dp0
+CD /D "%BINDIR%"
+"%ProgramFiles%\Java\jre6\bin\java.exe" -Xincgc -Xmx1G -jar Tectonicus_v2.20.jar config=myconfig.xml
+PAUSE</pre>
+注意：使用%ProgramFiles(x86)%代替%ProgramFiles%，如果你在64位系统上使用32位的Java。
+
+因为Tectonicus会为地图上的每个方块预先生成图像，所以它生成的地图占用的空间可能比源Minecraft世界还要大得多（GB）。这可以通过设置imageFormat="jpg"，并且适当配置Views节点的imageCompressionLevel，同时使用Map节点的closestZoomSize来减少占用空间。
+
+第一次运行Tectonicus时可能会花很长时间（小时），之后使用相同设置运行将会更快，因为Tectonicus只更新更改了的贴图。
+
+== 特殊标记 ==
+Tectonicus默认会显示所有地方的标记。为了防止地图标记泛滥，你可以使用filter="special"（详见XML文件）。
+
+“特殊”标记是指那些以这些符号为开头和结尾的：
+<pre>
+" # - = ~
+</pre>
+因此，下列地图标记将会被显示：
+<pre>
+-----------
+  someone's
+    house
+----------
+</pre>
+或：
+<pre>
+# my place! #
+</pre>
+或：
+<pre>
+~ long
+  sign
+  on four
+  lines ~
+</pre>
+
+== 创建视图 ==
+Tectonicus可以生成第一人称视角并将其插入地图中，便于预览建筑或发现。
+
+[[File:TectonicusExampleView.png|256px|缩略图|左|一个生成的视图]]
+
+可放置以下内容的标记来显示第一人称视角：
+
+<pre>
+#view
+你的描述
+</pre>
+
+<nowiki>#view</nowiki>必须放在标记第一行，剩余文字将作为视图标题。
+
+视图根据标记朝向生成，也可调整高度和视角角度：
+<pre>
+#view h10 a135
+你的描述
+</pre>
+
+包含两个值：“h10”生成最多10个方块的视图，有助于获取结构俯瞰视角，还能隐藏下方不可见标记，负数同样有效。
+
+“a135”将仰角角度（视图上下看的幅度）设为135°，取值范围为0（垂直上看）到180（垂直下看）。
+
+示例图像由“#view h10 a135”生成，视角设定在距地面10方块高的位置，且垂直向下看。
+
+也可将视图渲染为夜晚效果：
+<pre>
+#view night
+描述
+</pre>
+
+若第一行空间不足需使用第二行，只需在第二行以#开头并输入内容：
+<pre>
+#view h10 a135
+#night
+描述
+</pre>
+
+== Mod支持/自定义方块 ==
+若安装了含新方块的Mod，可将这些方块添加到Tectonicus中，使它们在地图上正确显示。
+
+{{main|辅助程序与编辑器/Tectonicus/自定义方块}}
+
+== 捐赠 ==
+[[File:TectonicusDiamondSupporter.png|缩略图|右|256px|捐赠徽章]]
+如果你喜爱Tectonicus，不妨给作者捐赠。捐赠后，Tectonicus地图上玩家的弹出信息框会显示“supporter”（支持者）徽章，在他人制作的地图上也能显示。
+
+[http://www.justgiving.com/tectonicus Tectonicus捐赠页面]
+
+== 报告漏洞 ==
+{{main|辅助程序与编辑器/Tectonicus/报告Tectonicus漏洞}}
+
+== 从命令行中控制Tectonicus ==
+Tectonicus也可通过命令行控制，无需使用XML文件，但该方法功能有限，并非最佳选择。
+
+{{main|辅助程序与编辑器/Tectonicus/从命令行中控制Tectonicus}}
+
+== 计划任务 ==
+若要让Tectonicus在Linux/Unix机器上按指定时间运行，在多显示器设置中需添加DISPLAY=:0或DISPLAY=:0.0来设置计划任务。
+
+== 工具 ==
+* [http://www.minecraftforum.net/viewtopic.php?f=1022&t=278821 TectonicusGUI] - 易于使用的图形用户界面，用Java编写。
+* [http://forums.bukkit.org/threads/info-misc-teclp-v1-0-live-player-updates-for-tectonicus-nightly.3674 teclp] - 自动更新玩家位置。
+* [http://www.minecraftforum.net/viewtopic.php?p=1866360#p1866360 TectonicusPlayers]，一个hMod/Canary插件，可实时输出玩家位置和登录信息。（[http://mc.nexua.org/plugins/TectonicusPlayers/download/Tectonicus_Players_v0_3.jar 下载]）。
+* [http://www.minecraftforum.net/viewtopic.php?p=1468940#p1468940 Tectonicus Simplifier]，一个Linux运行脚本，帮助设置部分选项。（[http://horobox.reager.org/u/biodude94566_1291490971.zip 下载]）。
+** 注意：该软件已过期，且不含当前选项的代码。
+* [http://www.minecraftforum.net/viewtopic.php?f=1022&t=119635 Minetographer]，一个Tectonicus的多平台前端系统。
+* [[辅助程序与编辑器/Tectonicus/TectonicusUploader|Tectonicus Uploader]]，一个python脚本，用于向FTP服务器上传更改后的文件。
+
+== 教程 ==
+* [[/集成显卡|集成显卡（例如Intel GMA3100）]]
+* [[/VPS|在Headless/Linux VPS机器上安装并运行Tectonicus]]
+* [[/Mac脚本教程|如何在OS X（同时也可能是Linux）上自动运行Tectonicus]]
+* [http://www.minecraftforum.net/viewtopic.php?p=1581430#p1581430 通过Windows命令行运行Tectonicus（作者mmillss）]
+
+== 你的地图 ==
+* [http://sfxworks.net/map/SoundslikePvP_Map.html sfxworks - SoundslikePvP Map]
+* [http://minecraft.onkoistudios.com/?page_id=2 World Maps @ Onkoi Studios] - Multiworld Minecraft（4张地图，1张会自动更新）
+* [http://deadworkers.com/community/viewtopic.php?f=173&t=5759&sid=d0a6c540b82843d49262c424f8d7b2bc&start=0 World map] for 'The Shaft' ([http://www.deadworkerspartynetwork.com/theshaft/map1/altmap/altmap.html map direct link])
+* [http://map.rumfish.net Rumfish.net map]
+<!-- * [http://minecraft.brokedcomputer.com Craig's Map (Currently looking into a real name)] -->
+<!-- * [http://keupon99.is-a-geek.org/map.html THC Server map] -->
+* [http://server.m-o-p-s.nl/TRTSNBN/index.php?page=map TRTSNBN (Terra, Nether and night map)]
+<!-- * [http://minecognix.de/map/map.html Minecognix.de map] -->
+* [http://yoo.dk/minecraft/ Yoo.dk's map]
+* [http://web.mac.com/cybermewtwo/MojimMineMap/map.html Sclerosis Server map]
+* [http://home.comcast.net/~choggo/Normal/map.html Choggoria]
+<!-- * [http://map.skyenet.com.au Skyenet.com.au] -->
+* [http://minecraft.riaux.fr/maps/map.html Jibi's Server, Skytrap & video games pixel art]
+
+想获得一张很酷的地图？可以自由地在这里添加你的链接。
+
+== 外部资源 ==
+* Tectonicus GitHub项目页：https://github.com/tectonicus/tectonicus
+* Tectonicus主页：http://triangularpixels.net/games/tectonicus
+* 最初的MinecraftForum.net话题和技术支持帖：http://www.minecraftforum.net/viewtopic.php?f=25&t=95739
+* Tectonicus开源公告：http://www.minecraftforum.net/topic/1165662-tectonicus-now-open-source/
+
+[[Category:地图查看工具]]
+
+[[en:Programs and editors/Tectonicus]]
+[[ru:Tectonicus]]

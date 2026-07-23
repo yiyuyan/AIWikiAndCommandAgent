@@ -1,0 +1,385 @@
+# 页面: 红石中继器
+# 来源: https://zh.minecraft.wiki/w/%E7%BA%A2%E7%9F%B3%E4%B8%AD%E7%BB%A7%E5%99%A8
+# 分类: Java版独有信息, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 含有受损文件链接的页面, 基岩版独有信息, 嵌入Bilibili视频的页面, 方块, 有未知版本的History模板的页面/基岩版, 有未知版本的History模板的页面/携带版Alpha, 红石, 缺失自动值的页面, 覆写自动值的页面, 需要图像的页面, 需要验证历史
+# 抓取时间: 2026-07-14 17:34:12
+# 原始 Wikitext 内容:
+
+{{about|一种方块|中继电路|传输电路#中继器|其他有关于红石的主题|红石（消歧义）}}
+{{Infobox block
+|group1=未激活、未锁定
+|1-1=Redstone Repeater.png
+|1-2=Redstone Repeater BE.png
+|group2=激活、未锁定
+|2-1=Powered Redstone Repeater.png
+|2-2=Powered Redstone Repeater BE.png
+|group3=未激活、锁定
+|3-1=Locked Redstone Repeater.png
+|3-2=Locked Redstone Repeater BE.png
+|group4=激活、锁定
+|4-1=Powered Locked Redstone Repeater.png
+|4-2=Powered Locked Redstone Repeater BE.png
+|*-1caption={{el|je}}
+|*-2caption={{el|be}}
+|extratext={{tr|查看|檢視}}[[#渲染图|所有渲染图]]
+|invimage=Redstone Repeater
+|invimage2=----
+|invimage3=[动力中继器（基岩版）]Powered Repeater BE
+|invimage4=[无动力中继器（基岩版）]Unpowered Repeater BE
+|light=0
+|block-id-raw='''{{el|je}}'''：repeater<br>'''{{el|be}}'''：见{{slink||数据值}}
+}}
+
+'''红石中继器（Redstone Repeater）'''是一种在[[红石电路]]中用于加强、延迟、锁存红石信号以及阻止信号倒流的[[红石元件]]方块。
+
+== 生成 ==
+=== 自然生成 ===
+[[File:Redstone Repeater naturally generated.png|缩略图|红石中继器自然生成于丛林神庙的密室]]
+每座[[丛林神庙]]中在密室中会自然生成1个红石中继器。
+
+红石中继器还会自然生成于[[远古城市]]中心的地下室中。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A2= Redstone Torch
+|B2= Redstone Dust
+|C2= Redstone Torch
+|B3= Stone
+|C3= Stone
+|A3= Stone
+|Output= Redstone Repeater
+|type= Redstone
+}}
+
+== 破坏 ==
+红石中继器被挖掘时会立刻被破坏。
+
+{{Breaking table}}
+
+红石中继器被破坏后会掉落自身。
+
+== 用途 ==
+{{see also|红石电路}}
+
+红石中继器在红石电路中用于加强或“中继”红石信号、阻止信号倒流或“锁存”信号状态。
+
+红石中继器只能放置在上表面[[方块支撑形状|边缘完整]]的方块上，包括[[漏斗]]、[[堆肥桶]]、[[台阶|上半台阶]]等。{{in|be}}还可以放置在[[墙]]、[[栅栏]]、竖直的[[末地烛]]、竖直的[[避雷针]]和[[饰纹陶罐]]等方块上。
+
+红石中继器有前侧与后侧之分——纹理上的箭头指向的方向就是前侧。前侧为“输出端”，后侧为“输入端”，两个边侧为“锁存端”。红石中继器仅被输入端所输入的信号激活。中继器上还有两个小红石火把——它们的熄灭与亮起指示输出是否为开（输出关时火把熄灭，开时火把亮起），一根火把位置固定，一根火把位置可变，可变位置的火把的位置表示中继器的'''档位'''。
+
+红石中继器高度为0.125（{{frac|1|8}}）格。
+
+红石中继器在下列情况下会被破坏并掉落自身：
+* 附着方块移动、移除、被破坏或变为无法提供支撑的状态；
+* {{in|je}}有[[水]]流过；
+* [[活塞]]试图推动它，或将方块推入其所在位置。
+
+若[[熔岩]]流过红石中继器，中继器会被破坏，但不会掉落。
+
+=== 输入输出 ===
+红石中继器只能从输入往输出传输信号，可以被边侧的输入干预（见[[#锁存信号|锁存信号]]）。
+
+[[File:Redstone Torch Power.png|缩略图|激活中继器的不同方式]]
+红石中继器是[[红石元件列表#传输元件|传输元件]]，可被下列形式激活：
+* 毗邻主输入端的开启的'''[[红石元件列表#电源|电源]]'''（例外：[[侦测器]]只会激活指向的红石中继器）。
+* 毗邻主输入端的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻主输入端的指向中继器且激活的[[红石比较器]]、[[红石线]]或其他红石中继器。
+* 毗邻主输入端且未熄灭的[[红石火把]]。
+
+红石中继器激活时，以下列方式输出：
+* 为毗邻输出端的红石线提供15点信号强度。
+* 为毗邻输出端且朝向正确的红石比较器和其他红石中继器（需要任意输入端面向自身）提供15点信号强度。
+* 激活毗邻输出端且朝向正确（若需要，如[[活塞]]）的任何[[红石元件列表#机械元件|机械元件]]。
+* '''[[强充能]]'''毗邻输出端的[[红石导体]]至充能等级15。
+
+{{in|je}}红石中继器收到[[NC更新]]时，若自身不被[[#锁存信号|锁存]]、不存在计划刻且当前的状态与输入不符，则会创建一个位于<code>档位×2</code>个[[游戏刻]]后的[[计划刻]]。若放置时检查到自身应被激活，则会创建一个位于1游戏刻后的计划刻。
+
+红石中继器执行计划刻时，会按照下文更新输出：
+* 若自身亮起且有输入信号，则保持亮起。
+* 若自身亮起且无输入信号，则立即熄灭。
+* 若自身熄灭且有输入信号，则立即亮起。
+* 若自身熄灭且无输入信号，则'''立即亮起'''并添加<code>档位×2</code>个游戏刻后的计划刻。
+
+{{in|be}}红石中继器属于“电容器元件”，在电容器信号计算阶段根据上游元件列表获取输入，根据判断规则调整内置队列的值随后调整输出，并在'''阶段结束时'''同步计算结果。因此：
+* 红石中继器无法接收'''在上一红石刻存在，但在该红石刻的图更新阶段被阻断的信号变化'''。
+* 消费者元件可在同一红石刻接收到红石中继器的新输出值。
+
+=== 强化信号 ===
+{{see also|传输电路#中继器}}
+
+由于红石中继器可以将任意强度输入加强到15强度输出，因此红石中继器可以“中继”信号或是“规整”信号强度。
+
+红石信号的最大强度为15，信号每通过一格[[红石线]]就衰减1。若需要信号流过更多红石线，可以使用红石中继器将其重置为15强度。利用红石导体强弱充能的性质，在中继器前后各放置一块红石导体可再增加2格的传输距离。
+
+虽然红石中继器可以让信号远距离传输，但由于它具有延迟（最小1红石刻，不含卡顿为0.1秒），因此信号经过的中继器数量越多，延迟越高。
+
+由于红石中继器收到输入信号时便会输出15点强度的信号，因此红石中继器可用于“规整”信号强度，将电路中强度不固定的信号规整到15强度。
+
+=== 延迟信号 ===
+红石中继器共有4个档位，延迟分别为2、4、6、8[[游戏刻]]，刚被放置时（默认档位）是1档，也就是2游戏刻延迟。
+
+可通过对中继器按下{{ctrl|使用}}键改变其档位。每次点击都会增加档位（+1），延迟同时会增加，最大4档（即延迟8游戏刻工作），再点击就会重置为1档。若需要更高延迟，可以通过串联多个中继器达成——例如串联4档与1档的中继器可以造成10游戏刻（半秒）的延迟（8游戏刻+2游戏刻=10游戏刻）。
+
+由于中继器在接收到输入信号后经过延迟时间才会输出，在输入信号消失后经过延迟时间才会停止输出。因此输出的脉冲长度一般与输入的脉冲长度相等。但有例外情况：
+* 熄灭的中继器接收到输入信号时，在延迟时间过后'''一定'''会亮起，无论输入是否已经消失。
+** 因此当输入的[[脉冲电路#脉冲|正脉冲]]长度小于中继器档位时，它会将输入的脉冲长度提升到自身的延迟长度。例如，4档中继器接收到2游戏刻的正脉冲，从输入的上升沿开始计时，8游戏刻后中继器亮起，但这时中继器又发现输入已经消失，所以再经过延迟时间8游戏刻后，中继器停止输出，输出的脉冲长度为8游戏刻。
+
+* 亮起的中继器在输入消失后仍然会被新的输入影响，若条件满足，那么它将不会熄灭。
+** {{in|je}}若中继器的计划刻生效时，主输入具有信号，则中继器忽略该负脉冲，不熄灭。<br>如4档中继器接收到2游戏刻负脉冲，从输入的下降沿开始计时，8游戏刻后由于负脉冲上升沿已经到达，中继器输入存在信号，所以中继器不会熄灭，保持输出。
+** {{in|be}}若中继器的内置队列中的内容符合熄灭判断规则，则内置队列中的所有值'''强制归0'''，中继器熄灭。需要注意，[[#放大循环]]规则优先级更高。<br>如4档中继器接收到单个1红石刻负脉冲，在负脉冲上升沿到达后内置队列状态符合重置判断规则且不符合放大循环判断规则，因此中继器不会熄灭，保持输出。<!--测试流程：使用一个红石火把向4档中继器提供反相输入。向火把输入1001，中继器不会熄灭。若输入1010，会触发“放大循环”行为，因此中继器会熄灭-->
+
+虽然中继器的延迟不能设置为0刻，但[[传输电路#瞬时中继器|瞬时中继器电路]]（无延迟中继信号的电路）可以实现0刻中继信号。
+
+=== 放大循环 ===
+{{exclusive|bedrock|section=1}}
+非1档的中继器具有特判逻辑<!--源码中,1档中继器不会进入特判逻辑-->，借助内置队列中的值将2[[红石刻]]周期时钟信号（1红石刻亮，1红石刻灭）的周期扩大为自身档位（延迟）乘2：
+* 2档中继器会将该时钟信号周期扩大至4红石刻周期（2红石刻亮，2红石刻灭）。
+* 3档中继器会将该时钟信号周期扩大至6红石刻周期（3红石刻亮，3红石刻灭）。
+* 4档中继器会将该时钟信号周期扩大至8红石刻周期（4红石刻亮，4红石刻灭）。
+
+该特判逻辑并不完美，部分特殊输入下会带来“出乎意料”的输出，如向4档中继器按顺序从左往右输入<code>10001010101</code>，会使该中继器输出长度13红石刻的信号。
+
+=== {{anchor|diode|二极管|导线/二极管}}单向传输 ===
+{{see also|传输电路#二极管}}
+
+中继器可在[[红石电路]]中作为“二极管”——中继器仅允许红石信号单向通过（而[[红石线]]与红石导体允许信号双向通过）。
+
+二极管可隔离电路各部分，保护电路免受输出端返回的信号影响。
+
+=== {{anchor|lock|锁存}}锁存信号 ===
+{{see also|记忆电路}}
+[[File:Latch.png|缩略图|左侧中继器被右侧中继器锁定，状态未根据输入变为激活而为关闭]]
+<div style="float:right">{{animate|Locked Redstone Repeater.png;Powered Locked Redstone Repeater.png|125px}}</div>
+
+红石中继器边侧仅接受如下输入：
+* 指向自身的红石比较器的输出。
+* 另一个红石中继器的输出。
+工作逻辑如下：
+* 当边侧收到输入信号，中继器'''锁定'''，此时输出恒定为锁存前1刻的状态。
+* 当边侧失去输入信号，中继器'''解锁'''，行为恢复正常。
+
+当红石中继器被锁定时，其顶部显示档位的红石火把变为一条使用基岩纹理的立方体模型，指示其状态为锁定。
+
+红石中继器解锁后，也需要延迟时间后才会改变状态。若解锁后过快地重新锁定红石中继器（如边侧输入来自高频时钟电路），红石中继器不会切换状态。
+* 恰当的信号输入可以令红石中继器变为T触发器。
+
+利用红石比较器也能锁定红石中继器的性质，可以更灵活地控制红石中继器的锁存。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table/Block/Stone/JE}}
+
+{{el|be}}：
+{{Sound table/Block/Wood/BE}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Redstone Repeater
+|spritetype=block
+|nameid=repeater
+|showblocktags=je
+|blocktags={{GameTag|block|repeater}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|firstcolumnname=红石中继器
+|nocat=1
+|generatetranslationkeys=bedrock
+|Unpowered Repeater
+|spritetype=block
+|nameid=unpowered_repeater
+|displayname=未激活的中继器}}
+{{ID table
+|nocat=1
+|Powered Repeater
+|displayname=激活的中继器
+|spritetype=block
+|nameid=powered_repeater}}
+{{ID table
+|Redstone Repeater
+|displayname=物品
+|spritetype=item
+|nameid=repeater
+|foot=1}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+{{in|be}}红石中继器使用方块数据值决定朝向和延迟。
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table|红石中继器|激活的红石中继器,未激活的红石中继器}}
+
+== 视频 ==
+{{bv|BV1dt411u7V1}}
+
+== 历史 ==
+{{More images|红石中继器的底面（facing NWU）渲染图|section=1}}
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.3|{{animate|Redstone Repeater (S) JE1.png; Redstone Repeater Delay 2 (S) JE1.png; Redstone Repeater Delay 3 (S) JE1.png; Redstone Repeater Delay 4 (S) JE1.png|32px}} {{animate|Powered Redstone Repeater (S) JE1.png; Powered Redstone Repeater Delay 2 (S) JE1.png; Powered Redstone Repeater Delay 3 (S) JE1.png; Powered Redstone Repeater Delay 4 (S) JE1.png|32px}} [[File:Redstone Repeater (item) JE1.png|32px]] 加入了红石中继器，激活时会发出9级的光。
+|[[File:Redstone Repeater (block item) JE1.png|32px]] [[File:Redstone Repeater (block item) JE1.png|32px]] 红石中继器的方块形式在[[物品栏]]中会呈现双层[[平滑石台阶]]的侧面纹理。}}
+|{{HistoryLine||1.7|{{animate|Redstone Repeater (S) JE2.png; Redstone Repeater Delay 2 (S) JE2.png; Redstone Repeater Delay 3 (S) JE2.png; Redstone Repeater Delay 4 (S) JE2.png|32px}} {{animate|Powered Redstone Repeater (S) JE2.png; Powered Redstone Repeater Delay 2 (S) JE2.png; Powered Redstone Repeater Delay 3 (S) JE2.png; Powered Redstone Repeater Delay 4 (S) JE2.png|32px}} 更改了红石中继器底座侧面的UV映射。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w22a|红石中继器现在在丛林神庙中自然生成。}}
+|{{HistoryLine|||dev=1.3|[[File:Redstone Repeater (item) JE2 BE1.png|32px]] 更改了红石中继器的物品纹理。}}
+|{{HistoryLine||1.4.2|dev=12w42a|{{animate|Redstone Repeater (S) JE3.png; Redstone Repeater Delay 2 (S) JE3.png; Redstone Repeater Delay 3 (S) JE3.png; Redstone Repeater Delay 4 (S) JE3.png|32px}} {{animate|Powered Redstone Repeater (S) JE3.png; Powered Redstone Repeater Delay 2 (S) JE3.png; Powered Redstone Repeater Delay 3 (S) JE3.png; Powered Redstone Repeater Delay 4 (S) JE3.png|32px}} 更改了红石中继器的纹理。
+|{{animate|Locked Redstone Repeater (S) JE1.png; Locked Redstone Repeater Delay 2 (S) JE1.png; Locked Redstone Repeater Delay 3 (S) JE1.png; Locked Redstone Repeater Delay 4 (S) JE1.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE1.png; Powered Locked Redstone Repeater Delay 2 (S) JE1.png; Powered Locked Redstone Repeater Delay 3 (S) JE1.png; Powered Locked Redstone Repeater Delay 4 (S) JE1.png|32px}} 加入了中继器的锁存功能。}}
+|{{HistoryLine||1.5|dev=13w02a|{{animate|Redstone Repeater (S) JE4.png; Redstone Repeater Delay 2 (S) JE4.png; Redstone Repeater Delay 3 (S) JE4.png; Redstone Repeater Delay 4 (S) JE4.png|32px}} {{animate|Powered Redstone Repeater (S) JE4.png; Powered Redstone Repeater Delay 2 (S) JE4.png; Powered Redstone Repeater Delay 3 (S) JE4.png; Powered Redstone Repeater Delay 4 (S) JE4.png|32px}} {{animate|Locked Redstone Repeater (S) JE2.png; Locked Redstone Repeater Delay 2 (S) JE2.png; Locked Redstone Repeater Delay 3 (S) JE2.png; Locked Redstone Repeater Delay 4 (S) JE2.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE2.png; Powered Locked Redstone Repeater Delay 2 (S) JE2.png; Powered Locked Redstone Repeater Delay 3 (S) JE2.png; Powered Locked Redstone Repeater Delay 4 (S) JE2.png|32px}} 更改了红石中继器底座侧面的UV映射。}}
+|{{HistoryLine||1.7.2|dev=13w37a|方块ID为93（未激活的中继器）与94（激活的中继器）的方块不再能通过{{cmd|give}}命令获得。}}
+|{{HistoryLine|||dev=正式版|{{animate|Redstone Repeater (S) JE5.png; Redstone Repeater Delay 2 (S) JE5.png; Redstone Repeater Delay 3 (S) JE5.png; Redstone Repeater Delay 4 (S) JE5.png|32px}} {{animate|Powered Redstone Repeater (S) JE5.png; Powered Redstone Repeater Delay 2 (S) JE5.png; Powered Redstone Repeater Delay 3 (S) JE5.png; Powered Redstone Repeater Delay 4 (S) JE5.png|32px}} {{animate|Locked Redstone Repeater (S) JE3.png; Locked Redstone Repeater Delay 2 (S) JE3.png; Locked Redstone Repeater Delay 3 (S) JE3.png; Locked Redstone Repeater Delay 4 (S) JE3.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE3.png; Powered Locked Redstone Repeater Delay 2 (S) JE3.png; Powered Locked Redstone Repeater Delay 3 (S) JE3.png; Powered Locked Redstone Repeater Delay 4 (S) JE3.png|32px}} 红石中继器的UV被错误地翻转了<ref>{{bug|MC-37106|||Fixed}}</ref>。}}
+|{{HistoryLine||1.7.4|dev=13w47a|{{animate|Redstone Repeater (S) JE4.png; Redstone Repeater Delay 2 (S) JE4.png; Redstone Repeater Delay 3 (S) JE4.png; Redstone Repeater Delay 4 (S) JE4.png|32px}} {{animate|Powered Redstone Repeater (S) JE4.png; Powered Redstone Repeater Delay 2 (S) JE4.png; Powered Redstone Repeater Delay 3 (S) JE4.png; Powered Redstone Repeater Delay 4 (S) JE4.png|32px}} {{animate|Locked Redstone Repeater (S) JE2.png; Locked Redstone Repeater Delay 2 (S) JE2.png; Locked Redstone Repeater Delay 3 (S) JE2.png; Locked Redstone Repeater Delay 4 (S) JE2.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE2.png; Powered Locked Redstone Repeater Delay 2 (S) JE2.png; Powered Locked Redstone Repeater Delay 3 (S) JE2.png; Powered Locked Redstone Repeater Delay 4 (S) JE2.png|32px}} 修复了上述问题。}}
+|{{HistoryLine||1.8|dev=14w06a|激活的中继器不再发光。}}
+|{{HistoryLine|||dev=14w10a|{{animate|Redstone Repeater (S) JE7.png; Redstone Repeater Delay 2 (S) JE7.png; Redstone Repeater Delay 3 (S) JE7.png; Redstone Repeater Delay 4 (S) JE7.png|32px}} {{animate|Powered Redstone Repeater (S) JE7.png; Powered Redstone Repeater Delay 2 (S) JE7.png; Powered Redstone Repeater Delay 3 (S) JE7.png; Powered Redstone Repeater Delay 4 (S) JE7.png|32px}} {{animate|Locked Redstone Repeater (S) JE5.png; Locked Redstone Repeater Delay 2 (S) JE5.png; Locked Redstone Repeater Delay 3 (S) JE5.png; Locked Redstone Repeater Delay 4 (S) JE5.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE5.png; Powered Locked Redstone Repeater Delay 2 (S) JE5.png; Powered Locked Redstone Repeater Delay 3 (S) JE5.png; Powered Locked Redstone Repeater Delay 4 (S) JE5.png|32px}} 更改了红石中继器的模型。<ref>{{bug|MC-50242|||Fixed}}</ref>红石中继器的红石火把的顶面和基岩柱的UV不再锁定，且红石火把现在受环境光遮蔽。
+|红石中继器下方的火把变短了，模型从{{animate|Redstone Repeater (facing NWU) JE2 BE1.png; Redstone Repeater Delay 2 (facing NWU) JE2 BE1.png; Redstone Repeater Delay 3 (facing NWU) JE2 BE1.png; Redstone Repeater Delay 4 (facing NWU) JE2 BE1.png; Active Redstone Repeater (facing NWU) JE2 BE1.png; Active Redstone Repeater Delay 2 (facing NWU) JE2 BE1.png; Active Redstone Repeater Delay 3 (facing NWU) JE2 BE1.png; Active Redstone Repeater Delay 4 (facing NWU) JE2 BE1.png; Locked Redstone Repeater (facing NWU) JE2 BE1.png; Locked Redstone Repeater Delay 2 (facing NWU) JE2 BE1.png; Locked Redstone Repeater Delay 3 (facing NWU) JE2 BE1.png; Locked Redstone Repeater Delay 4 (facing NWU) JE2 BE1.png; Active Locked Redstone Repeater (facing NWU) JE2 BE1.png; Active Locked Redstone Repeater Delay 2 (facing NWU) JE2 BE1.png; Active Locked Redstone Repeater Delay 3 (facing NWU) JE2 BE1.png; Active Locked Redstone Repeater Delay 4 (facing NWU) JE2 BE1.png|32px}} 变为{{animate|Redstone Repeater (facing NWU) JE3.png; Redstone Repeater Delay 2 (facing NWU) JE3.png; Redstone Repeater Delay 3 (facing NWU) JE3.png; Redstone Repeater Delay 4 (facing NWU) JE3.png; Active Redstone Repeater (facing NWU) JE3.png; Active Redstone Repeater Delay 2 (facing NWU) JE3.png; Active Redstone Repeater Delay 3 (facing NWU) JE3.png; Active Redstone Repeater Delay 4 (facing NWU) JE3.png; Locked Redstone Repeater (facing NWU) JE3.png; Locked Redstone Repeater Delay 2 (facing NWU) JE3.png; Locked Redstone Repeater Delay 3 (facing NWU) JE3.png; Locked Redstone Repeater Delay 4 (facing NWU) JE3.png; Locked Active Redstone Repeater (facing NWU) JE3.png; Locked Active Redstone Repeater Delay 2 (facing NWU) JE3.png; Locked Active Redstone Repeater Delay 3 (facing NWU) JE3.png; Locked Active Redstone Repeater Delay 4 (facing NWU) JE3.png|32px}}。}}
+|{{HistoryLine|||dev=14w10b|{{animate|Powered Redstone Repeater (S) JE8.png; Powered Redstone Repeater Delay 2 (S) JE8.png; Powered Redstone Repeater Delay 3 (S) JE8.png; Powered Redstone Repeater Delay 4 (S) JE8.png|32px}} 修复了激活的红石中继器的模型，并且红石中继器的红石火把现在在激活时不再受环境光遮蔽。}}
+|{{HistoryLine|||dev=14w25a|{{animate|Powered Redstone Repeater (S) JE9.png; Powered Redstone Repeater Delay 2 (S) JE9.png; Powered Redstone Repeater Delay 3 (S) JE9.png; Powered Redstone Repeater Delay 4 (S) JE9.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE7.png; Powered Locked Redstone Repeater Delay 2 (S) JE7.png; Powered Locked Redstone Repeater Delay 3 (S) JE7.png; Powered Locked Redstone Repeater Delay 4 (S) JE7.png|32px}} 红石中继器的红石火把现在在激活时会受到环境光遮蔽。由于漏洞<ref>{{bug|MC-56921|||Fixed}}</ref>，激活的红石中继器不能正确显示其延迟刻数。
+|[[File:Locked Redstone Repeater Delay 4 (S) JE6.png|32px]] 现在锁存状态下的四档红石中继器底座顶部使用红石比较器的纹理。}}
+|{{HistoryLine|||dev=14w25b|{{animate|Powered Redstone Repeater (S) JE9.png; Powered Redstone Repeater Delay 2 (S) JE10.png; Powered Redstone Repeater Delay 3 (S) JE10.png; Powered Redstone Repeater Delay 4 (S) JE10.png|32px}} 现在红石中继器的红石火把能正确显示其延迟刻数。|[[File:Locked Redstone Repeater Delay 4 (S) JE7.png|32px]] 现在锁存状态下的四档红石中继器底座顶部使用红石中继器的纹理。}}
+|{{HistoryLine||1.13|dev=17w47a|红石中继器的所有3个ID被合并为1个ID：<code>repeater</code>。
+|加入了红石中继器激活时的方块状态。
+|红石中继器现在会渲染其底部，模型从 {{animate|Redstone Repeater (facing NWU) JE3.png; Redstone Repeater Delay 2 (facing NWU) JE3.png; Redstone Repeater Delay 3 (facing NWU) JE3.png; Redstone Repeater Delay 4 (facing NWU) JE3.png; Active Redstone Repeater (facing NWU) JE3.png; Active Redstone Repeater Delay 2 (facing NWU) JE3.png; Active Redstone Repeater Delay 3 (facing NWU) JE3.png; Active Redstone Repeater Delay 4 (facing NWU) JE3.png; Locked Redstone Repeater (facing NWU) JE3.png; Locked Redstone Repeater Delay 2 (facing NWU) JE3.png; Locked Redstone Repeater Delay 3 (facing NWU) JE3.png; Locked Redstone Repeater Delay 4 (facing NWU) JE3.png; Locked Active Redstone Repeater (facing NWU) JE3.png; Locked Active Redstone Repeater Delay 2 (facing NWU) JE3.png; Locked Active Redstone Repeater Delay 3 (facing NWU) JE3.png; Locked Active Redstone Repeater Delay 4 (facing NWU) JE3.png|32px}} 变为 {{animate|Redstone Repeater (facing NWU) JE4 BE2.png; Redstone Repeater Delay 2 (facing NWU) JE4 BE2.png; Redstone Repeater Delay 3 (Underside) JE4 BE2.png; Redstone Repeater Delay 4 (Underside) JE4 BE2.png; Active Redstone Repeater (facing NWU) JE4 BE2.png; Active Redstone Repeater Delay 2 (facing NWU) JE4 BE2.png; Active Redstone Repeater Delay 3 (facing NWU) JE4 BE2.png; Active Redstone Repeater Delay 4 (facing NWU) JE4 BE2.png; Locked Redstone Repeater (facing NWU) JE4 BE2.png; Locked Redstone Repeater Delay 2 (facing NWU) JE4 BE2.png; Locked Redstone Repeater Delay 3 (facing NWU) JE4 BE2.png; Locked Redstone Repeater Delay 4 (facing NWU) JE4 BE2.png; Locked Active Redstone Repeater (facing NWU) JE4 BE2.png; Locked Active Redstone Repeater Delay 2 (facing NWU) JE4 BE2.png; Locked Active Redstone Repeater Delay 3 (facing NWU) JE4 BE2.png; Locked Active Redstone Repeater Delay 4 (facing NWU) JE4 BE2.png|32px}}。
+|在[[扁平化]]之前，这些方块的数字ID分别是93和94，物品的是356。}}
+|{{HistoryLine||1.14|dev=18w43a|{{animate|Redstone Repeater (S) JE8.png; Redstone Repeater Delay 2 (S) JE8.png; Redstone Repeater Delay 3 (S) JE8.png; Redstone Repeater Delay 4 (S) JE8.png|32px}} {{animate|Powered Redstone Repeater (S) JE10.png; Powered Redstone Repeater Delay 2 (S) JE11.png; Powered Redstone Repeater Delay 3 (S) JE11.png; Powered Redstone Repeater Delay 4 (S) JE11.png|32px}} {{animate|Locked Redstone Repeater (S) JE6.png; Locked Redstone Repeater Delay 2 (S) JE6.png; Locked Redstone Repeater Delay 3 (S) JE6.png; Locked Redstone Repeater Delay 4 (S) JE8.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE8.png; Powered Locked Redstone Repeater Delay 2 (S) JE8.png; Powered Locked Redstone Repeater Delay 3 (S) JE8.png; Powered Locked Redstone Repeater Delay 4 (S) JE8.png|32px}} [[File:Redstone Repeater (item) JE3 BE2.png|32px]] 更改了红石中继器的纹理。}}
+|{{HistoryLine|||dev=18w50a|{{animate|Locked Redstone Repeater (S) JE7.png; Locked Redstone Repeater Delay 2 (S) JE7.png; Locked Redstone Repeater Delay 3 (S) JE7.png; Locked Redstone Repeater Delay 4 (S) JE9.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE9.png; Powered Locked Redstone Repeater Delay 2 (S) JE9.png; Powered Locked Redstone Repeater Delay 3 (S) JE9.png; Powered Locked Redstone Repeater Delay 4 (S) JE9.png|32px}} 由于更改了[[基岩]]的纹理，锁存状态下的红石中继器的纹理也相应被更改。}}
+|{{HistoryLine|||dev=19w12b|红石中继器现在可放置在[[冰]]和[[海晶灯]]上。}}
+|{{HistoryLine||1.19|dev=22w13a|现在红石中继器会自然生成于[[远古城市]]中。}}
+|{{HistoryLine||1.20.2|dev=23w33a|现在红石中继器使用石质方块的音效，而非木质方块。}}
+|{{HistoryLine|||dev=23w35a|现在红石中继器收到来自下侧的[[方块更新#PP更新|PP更新]]时检查附着。}}
+|{{HistoryLine||1.21.2|dev=24w33a|{{animate|Powered Redstone Repeater (S) JE11.png; Powered Redstone Repeater Delay 2 (S) JE12.png; Powered Redstone Repeater Delay 3 (S) JE12.png; Powered Redstone Repeater Delay 4 (S) JE12.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE10.png; Powered Locked Redstone Repeater Delay 2 (S) JE10.png; Powered Locked Redstone Repeater Delay 3 (S) JE10.png; Powered Locked Redstone Repeater Delay 4 (S) JE10.png|32px}} 更改了红石中继器的模型和UV映射。}}
+|{{HistoryLine|||dev=24w38a|再次更改了红石中继器的模型和UV映射。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.14.0|dev=build 1|{{animate|Redstone Repeater (S) BE1.png; Redstone Repeater Delay 2 (S) BE1.png; Redstone Repeater Delay 3 (S) BE1.png; Redstone Repeater Delay 4 (S) BE1.png|32px}} {{animate|Powered Redstone Repeater (S) BE1.png; Powered Redstone Repeater Delay 2 (S) BE1.png; Powered Redstone Repeater Delay 3 (S) BE1.png; Powered Redstone Repeater Delay 4 (S) BE1.png|32px}} {{animate|Locked Redstone Repeater (S) BE1.png; Locked Redstone Repeater Delay 2 (S) BE1.png; Locked Redstone Repeater Delay 3 (S) BE1.png; Locked Redstone Repeater Delay 4 (S) BE1.png|32px}} {{animate|Powered Locked Redstone Repeater (S) BE1.png; Powered Locked Redstone Repeater Delay 2 (S) BE1.png; Powered Locked Redstone Repeater Delay 3 (S) BE1.png; Powered Locked Redstone Repeater Delay 4 (S) BE1.png|32px}}<br>
+[[File:Redstone Repeater (item) JE2 BE1.png|32px]] 加入了红石中继器。}}
+|{{HistoryLine||1.0.0|dev=?|{{animate|Locked Redstone Repeater (S) BE2.png; Locked Redstone Repeater Delay 2 (S) BE2.png; Locked Redstone Repeater Delay 3 (S) BE2.png; Locked Redstone Repeater Delay 4 (S) BE2.png|32px}} {{animate|Powered Locked Redstone Repeater (S) BE2.png; Powered Locked Redstone Repeater Delay 2 (S) BE2.png; Powered Locked Redstone Repeater Delay 3 (S) BE2.png; Powered Locked Redstone Repeater Delay 4 (S) BE2.png|32px}} 现在锁存状态下的红石中继器的基岩柱顶面会在切换档位时改变UV映射。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|红石中继器的底面现在也会被渲染。将其底部纹理由 {{animate|Redstone Repeater (facing NWU) JE2 BE1.png; Redstone Repeater Delay 2 (facing NWU) JE2 BE1.png; Redstone Repeater Delay 3 (facing NWU) JE2 BE1.png; Redstone Repeater Delay 4 (facing NWU) JE2 BE1.png; Active Redstone Repeater (facing NWU) JE2 BE1.png; Active Redstone Repeater Delay 2 (facing NWU) JE2 BE1.png; Active Redstone Repeater Delay 3 (facing NWU) JE2 BE1.png; Active Redstone Repeater Delay 4 (facing NWU) JE2 BE1.png; Locked Redstone Repeater (facing NWU) JE2 BE1.png; Locked Redstone Repeater Delay 2 (facing NWU) JE2 BE1.png; Locked Redstone Repeater Delay 3 (facing NWU) JE2 BE1.png; Locked Redstone Repeater Delay 4 (facing NWU) JE2 BE1.png; Active Locked Redstone Repeater (facing NWU) JE2 BE1.png; Active Locked Redstone Repeater Delay 2 (facing NWU) JE2 BE1.png; Active Locked Redstone Repeater Delay 3 (facing NWU) JE2 BE1.png; Active Locked Redstone Repeater Delay 4 (facing NWU) JE2 BE1.png|32px}} 改为了 {{animate|Redstone Repeater (facing NWU) JE4 BE2.png; Redstone Repeater Delay 2 (facing NWU) JE4 BE2.png; Redstone Repeater Delay 3 (facing NWU) JE4 BE2.png; Redstone Repeater Delay 4 (facing NWU) JE4 BE2.png; Active Redstone Repeater (facing NWU) JE4 BE2.png; Active Redstone Repeater Delay 2 (facing NWU) JE4 BE2.png; Active Redstone Repeater Delay 3 (facing NWU) JE4 BE2.png; Active Redstone Repeater Delay 4 (facing NWU) JE4 BE2.png; Locked Redstone Repeater (facing NWU) JE4 BE2.png; Locked Redstone Repeater Delay 2 (facing NWU) JE4 BE2.png; Locked Redstone Repeater Delay 3 (facing NWU) JE4 BE2.png; Locked Redstone Repeater Delay 4 (facing NWU) JE4 BE2.png; Locked Active Redstone Repeater (facing NWU) JE4 BE2.png; Locked Active Redstone Repeater Delay 2 (facing NWU) JE4 BE2.png; Locked Active Redstone Repeater Delay 3 (facing NWU) JE4 BE2.png; Locked Active Redstone Repeater Delay 4 (facing NWU) JE4 BE2.png|32px}} 。}}
+|{{HistoryLine||?|{{animate|Powered Redstone Repeater (S) BE2.png; Powered Redstone Repeater Delay 2 (S) BE2.png; Powered Redstone Repeater Delay 3 (S) BE2.png; Powered Redstone Repeater Delay 4 (S) BE2.png|32px}} {{animate|Powered Locked Redstone Repeater (S) BE3.png; Powered Locked Redstone Repeater Delay 2 (S) BE3.png; Powered Locked Redstone Repeater Delay 3 (S) BE3.png; Powered Locked Redstone Repeater Delay 4 (S) BE3.png|32px}} 更改了模型，现在激活的红石中继器的底座及基岩柱不再发光。{{verify|history=1|此更改晚于基岩版1.2.13，且不晚于基岩版1.2.14.3。}}}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|{{animate|Redstone Repeater (S) BE2.png; Redstone Repeater Delay 2 (S) BE2.png; Redstone Repeater Delay 3 (S) BE2.png; Redstone Repeater Delay 4 (S) BE2.png|32px}} {{animate|Powered Redstone Repeater (S) BE3.png; Powered Redstone Repeater Delay 2 (S) BE3.png; Powered Redstone Repeater Delay 3 (S) BE3.png; Powered Redstone Repeater Delay 4 (S) BE3.png|32px}} {{animate|Locked Redstone Repeater (S) BE3.png; Locked Redstone Repeater Delay 2 (S) BE3.png; Locked Redstone Repeater Delay 3 (S) BE3.png; Locked Redstone Repeater Delay 4 (S) BE3.png|32px}} {{animate|Powered Locked Redstone Repeater (S) BE4.png; Powered Locked Redstone Repeater Delay 2 (S) BE4.png; Powered Locked Redstone Repeater Delay 3 (S) BE4.png; Powered Locked Redstone Repeater Delay 4 (S) BE4.png|32px}}<br>
+[[File:Redstone Repeater (item) JE3 BE2.png|32px]] 更改了红石中继器的纹理。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.26|现在红石中继器会自然生成于[[远古城市]]中。}}
+|{{HistoryLine||1.20.30|dev=1.20.30.20|现在红石中继器使用方块状态{{cd|minecraft:cardinal_direction}}，并弃用了{{cd|direction}}。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|{{animate|Redstone Repeater (S) JE1.png; Redstone Repeater Delay 2 (S) JE1.png; Redstone Repeater Delay 3 (S) JE1.png; Redstone Repeater Delay 4 (S) JE1.png|32px}} {{animate|Powered Redstone Repeater (S) JE1.png; Powered Redstone Repeater Delay 2 (S) JE1.png; Powered Redstone Repeater Delay 3 (S) JE1.png; Powered Redstone Repeater Delay 4 (S) JE1.png|32px}} [[File:Redstone Repeater (item) JE1.png|32px]] 加入了红石中继器。}}
+|{{HistoryLine||xbox=TU3|{{animate|Redstone Repeater (S) JE2.png; Redstone Repeater Delay 2 (S) JE2.png; Redstone Repeater Delay 3 (S) JE2.png; Redstone Repeater Delay 4 (S) JE2.png|32px}} {{animate|Powered Redstone Repeater (S) JE2.png; Powered Redstone Repeater Delay 2 (S) JE2.png; Powered Redstone Repeater Delay 3 (S) JE2.png; Powered Redstone Repeater Delay 4 (S) JE2.png|32px}} 更改了红石中继器底座侧面的UV映射。}}
+|{{HistoryLine||xbox=TU9|[[File:Redstone Repeater (item) JE2 BE1.png|32px]] 更改了红石中继器的物品纹理。}}
+|{{HistoryLine||xbox=TU12|{{animate|Redstone Repeater (S) JE4.png; Redstone Repeater Delay 2 (S) JE4.png; Redstone Repeater Delay 3 (S) JE4.png; Redstone Repeater Delay 4 (S) JE4.png|32px}} {{animate|Powered Redstone Repeater (S) JE4.png; Powered Redstone Repeater Delay 2 (S) JE4.png; Powered Redstone Repeater Delay 3 (S) JE4.png; Powered Redstone Repeater Delay 4 (S) JE4.png|32px}} 更改了红石中继器的纹理及底座侧面的UV映射。}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|{{animate|Locked Redstone Repeater (S) JE1.png; Locked Redstone Repeater Delay 2 (S) JE1.png; Locked Redstone Repeater Delay 3 (S) JE1.png; Locked Redstone Repeater Delay 4 (S) JE1.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE1.png; Powered Locked Redstone Repeater Delay 2 (S) JE1.png; Powered Locked Redstone Repeater Delay 3 (S) JE1.png; Powered Locked Redstone Repeater Delay 4 (S) JE1.png|32px}} 加入了中继器的锁存功能。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|{{animate|Redstone Repeater (S) JE8.png; Redstone Repeater Delay 2 (S) JE8.png; Redstone Repeater Delay 3 (S) JE8.png; Redstone Repeater Delay 4 (S) JE8.png|32px}} {{animate|Powered Redstone Repeater (S) JE10.png; Powered Redstone Repeater Delay 2 (S) JE11.png; Powered Redstone Repeater Delay 3 (S) JE11.png; Powered Redstone Repeater Delay 4 (S) JE11.png|32px}} {{animate|Locked Redstone Repeater (S) JE6.png; Locked Redstone Repeater Delay 2 (S) JE6.png; Locked Redstone Repeater Delay 3 (S) JE6.png; Locked Redstone Repeater Delay 4 (S) JE8.png|32px}} {{animate|Powered Locked Redstone Repeater (S) JE8.png; Powered Locked Redstone Repeater Delay 2 (S) JE8.png; Powered Locked Redstone Repeater Delay 3 (S) JE8.png; Powered Locked Redstone Repeater Delay 4 (S) JE8.png|32px}}<br>
+[[File:Redstone Repeater (item) JE3 BE2.png|32px]] 更改了红石中继器的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|{{animate|Redstone Repeater (S) BE1.png; Redstone Repeater Delay 2 (S) BE1.png; Redstone Repeater Delay 3 (S) BE1.png; Redstone Repeater Delay 4 (S) BE1.png|32px}} {{animate|Powered Redstone Repeater (S) BE1.png; Powered Redstone Repeater Delay 2 (S) BE1.png; Powered Redstone Repeater Delay 3 (S) BE1.png; Powered Redstone Repeater Delay 4 (S) BE1.png|32px}} {{animate|Locked Redstone Repeater (S) BE2.png; Locked Redstone Repeater Delay 2 (S) BE2.png; Locked Redstone Repeater Delay 3 (S) BE2.png; Locked Redstone Repeater Delay 4 (S) BE2.png|32px}} {{animate|Powered Locked Redstone Repeater (S) BE2.png; Powered Locked Redstone Repeater Delay 2 (S) BE2.png; Powered Locked Redstone Repeater Delay 3 (S) BE2.png; Powered Locked Redstone Repeater Delay 4 (S) BE2.png|32px}}<br>
+[[File:Redstone Repeater (item) JE2 BE1.png|32px]] 加入了红石中继器，及其锁存功能。}}
+}}
+
+== 你知道吗 ==
+* 红石中继器原本计划延迟设定为“1、2、5、7”，<ref>{{tweet|jeb_|33888465502339073|@aza1810 You right-click to toggle through 4 possible settings, which currently is 1,2,5 and 7|February 5, 2011}}</ref>但最后被更改为“1、2、3、4”。<ref>http://www.reddit.com/r/Minecraft/comments/fmdtp/teammojang_redstone_repeater_video/c1gzrn6</ref>
+* 红石中继器的纹理是由若干个其他方块的纹理拼凑成的。
+** 指示档位的“红石火把”的纹理直接取自红石火把。
+** 指示锁存状态的一条“基岩”的纹理直接取自[[基岩]]。
+** 底座除顶面外的纹理均取自[[平滑石头]]，即使制作红石中继器并未使用到平滑石头。
+** 只有底座顶面的纹理是红石中继器自身独有的。
+* 中继器的锁存功能类似于现实中的“D触发器”，但控制输入相反。
+
+== 画廊 ==
+<gallery>
+Repeater clock.gif|一个使用红石火把和红石中继器构成的“取反环”时钟电路，其时钟周期为8红石刻
+Repeater feedback.gif|一个使用2个红石中继器构成的“旋转环”时钟电路，其时钟周期为2红石刻
+</gallery>
+
+=== 渲染图 ===
+''' {{el|je}}，未激活、未锁定 '''
+<gallery>
+Redstone Repeater.png
+Redstone Repeater Delay 2.png
+Redstone Repeater Delay 3.png
+Redstone Repeater Delay 4.png
+</gallery>
+''' {{el|be}}，未激活、未锁定 '''
+<gallery>
+Redstone Repeater BE.png
+Redstone Repeater Delay 2 BE.png
+Redstone Repeater Delay 3 BE.png
+Redstone Repeater Delay 4 BE.png
+</gallery>
+
+''' {{el|je}}，激活、未锁定 '''
+<gallery>
+Powered Redstone Repeater.png
+Powered Redstone Repeater Delay 2.png
+Powered Redstone Repeater Delay 3.png
+Powered Redstone Repeater Delay 4.png
+</gallery>
+
+''' {{el|be}}，激活、未锁定 '''
+<gallery>
+Powered Redstone Repeater BE.png
+Powered Redstone Repeater Delay 2 BE.png
+Powered Redstone Repeater Delay 3 BE.png
+Powered Redstone Repeater Delay 4 BE.png
+</gallery>
+
+''' {{el|je}}，未激活、锁定 '''
+<gallery>
+Locked Redstone Repeater.png
+Locked Redstone Repeater Delay 2.png
+Locked Redstone Repeater Delay 3.png
+Locked Redstone Repeater Delay 4.png
+</gallery>
+
+''' {{el|be}}，未激活、锁定 '''
+<gallery>
+Locked Redstone Repeater BE.png
+Locked Redstone Repeater Delay 2 BE.png
+Locked Redstone Repeater Delay 3 BE.png
+Locked Redstone Repeater Delay 4 BE.png
+</gallery>
+
+''' {{el|je}}，激活、锁定 '''
+<gallery>
+Powered Locked Redstone Repeater.png
+Powered Locked Redstone Repeater Delay 2.png
+Powered Locked Redstone Repeater Delay 3.png
+Powered Locked Redstone Repeater Delay 4.png
+</gallery>
+
+''' {{el|be}}，激活、锁定 '''
+<gallery>
+Powered Locked Redstone Repeater BE.png
+Powered Locked Redstone Repeater Delay 2 BE.png
+Powered Locked Redstone Repeater Delay 3 BE.png
+Powered Locked Redstone Repeater Delay 4 BE.png
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[cs:Ruditový zesilovač]]
+[[de:Redstone-Verstärker]]
+[[en:Redstone Repeater]]
+[[es:Repetidor de redstone]]
+[[fr:Répéteur de redstone]]
+[[hu:Redstone-jelismétlő]]
+[[it:Ripetitore di redstone]]
+[[ja:レッドストーンリピーター]]
+[[ko:레드스톤 중계기]]
+[[nl:Redstoneversterker]]
+[[pl:Przekaźnik redstone]]
+[[pt:Repetidor de Redstone]]
+[[ru:Редстоуновый повторитель]]
+[[tr:Kızıltaş tekrarlayıcı]]
+[[uk:Редстоуновий повторювач]]

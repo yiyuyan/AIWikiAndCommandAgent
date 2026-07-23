@@ -1,0 +1,210 @@
+# 页面: 末地折跃门（方块）
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%AB%E5%9C%B0%E6%8A%98%E8%B7%83%E9%97%A8%EF%BC%88%E6%96%B9%E5%9D%97%EF%BC%89
+# 分类: 
+# 抓取时间: 2026-07-14 17:28:39
+# 原始 Wikitext 内容:
+
+{{more images|缺失所有平台的渲染图。详见英文wiki。}}
+{{about|提供传送功能的方块|整个末地折跃门|末地折跃门|纹理相似的平面方块|末地传送门（方块）}}
+{{Infobox block
+|title=末地折跃门
+|image=End Gateway.gif
+|invimage=[末地折跃门]End Gateway BE
+|noitem=1
+|light=15
+}}
+
+'''末地折跃门（End Gateway）'''是出现在[[末地折跃门|末地折跃门结构]]的一种方块，用来把玩家传送到[[末地]]的另一个空岛上。
+
+== 生成 ==
+{{main|末地折跃门#生成}}
+
+=== 末地折跃门 ===
+末地折跃门方块会作为[[末地折跃门]]结构的一部分生成。
+
+== 获取 ==
+{{in|java}}末地折跃门方块没有对应的物品形式。
+
+{{in|bedrock}}末地折跃门方块的物品形式只能通过编辑物品栏获得。
+
+== 破坏 ==
+末地折跃门不能被挖掘破坏。
+
+{{Breaking table|末地折跃门}}
+
+末地折跃门被破坏后不会掉落。
+
+== 用途 ==
+[[File:Endgatewaycommand.jpg|thumb|{{only|je|for=通过命令放置的末地折跃门}}]]
+末地折跃门可以将进入其中的实体或对其投掷了[[末影珍珠]]的实体传送到预设的目的地。末地折跃门的目的地由其方块实体数据值定义，自然生成的末地折跃门的目的地取决于其生成方式：
+* 主岛末地折跃门会将实体传送至对应的外岛末地折跃门。
+* 外岛末地折跃门会将实体传送至对应的主岛末地折跃门。
+* 回归折跃门会将实体传送至黑曜石平台。
+
+如果在末地以外的维度不指定方块数据<code>exit_portal</code>{{only|je}}或<code>ExitPortal</code>{{only|be}}，它不会传送实体{{only|je|for=，但仍然会在实体进入时激活其光柱效果}}。
+
+{{in|be}}若熔岩流过末地折跃门，末地折跃门会被破坏。
+
+{{in|be}}末地折跃门会阻挡实体通过其自身；{{in|je}}末地折跃门对实体没有阻挡作用。
+
+{{in|je}}放置在末地中且没有设置目的地的末地折跃门会尝试将玩家传送至外岛最靠近主岛的位置上，并在必要时生成[[末地浮岛]]。具体来说，当末地传送门方块开始传送实体时，若其处在末地中且方块数据<code>exit_portal</code>不存在，则会遵循以下流程确定传送的目的地<math>P</math>并生成指向自身的[[末地折跃门|末地折跃门结构]]：
+
+# 按照以下方法确定目标位置<math>P_0</math>。注意：在此步骤的计算中，忽视高度，只使用x与z两个坐标进行平面计算：
+## 选择坐标原点（x=0, z=0）到末地折跃门所在位置的方向，距离坐标原点1024格远位置，作为起始位置；
+## 从起始位置开始，检查当前位置所在区块是否为空区块（即没有任何方块的区块）。如果是，以当前位置进入下一步；否则，将当前位置向接近坐标原点方向移动16格，并再次执行该检查，直到找到一个空区块，或当前位置距离起始位置达256格，以当前位置进入下一步；
+## 将上一步的位置作为起始位置，从起始位置开始，检查当前位置所在的区块是否非空。如果是，以当前位置进入下一步；否则，将当前位置向远离坐标原点方向移动16格，并再次执行该检查，直到找到一个非空区块，或当前位置距离起始位置达256格，以当前位置进入下一步；
+## 当前位置即为目标位置<math>P_0</math>。
+# 在目标位置<math>P_0</math>所在的区块中，找到同时满足以下条件的，且离坐标原点（x=0, y=0, z=0）最近的一个位置<math>P_1</math>：
+## 位置的高度不低于30，或者位置的高度是整个区块中方块高度的最大值；
+## 位置上的方块是[[末地石]]；
+## 位置上方1～2格的方块不是完整方块。
+# 如果<math>P_1</math>不存在，则令位置<math>P_2</math>为水平坐标（x与z）与<math display="inline">P_0</math>相同，且高度（y）为75的位置，并在该位置生成[[末地浮岛]]；否则令<math>P_2</math>等于<math>P_1</math>；
+# 找到位置在水平方向上与<math>P_2</math>的[[切比雪夫距离]]不超过16，且高度最高的完整方块。将该方块的位置作为传送目的地<math>P</math>；
+## 如果这样的完整方块无法找到（例如末地浮岛被禁用导致无法生成），则将<math>P_2</math>作为传送目的地<math>P</math>；
+# 在<math>P</math>上方10格的位置生成指向自身的[[末地折跃门|末地折跃门结构]]；
+# 如果实体数据<code>ExactTeleport</code>为{{Code|true}}，则按照[[末地折跃门#行为|自然生成的末地折跃门的传送逻辑]]，修正传送目的地<math>P</math>。
+
+=== 光柱 ===
+当通过自然生成{{only|je|for=或通过{{cmd|setblock}}生成时}}，末地折跃门分别同时向其上方终点为上方253格和下方终点为下方254格竖直发射出两束{{color|#C354CD|品红色}}的光柱，持续{{convert|200|刻|秒}}。
+
+当有一个实体进入折跃门方块时，它会发出两束{{color|#7B2FBE|紫色}}光柱，在{{convert|40|刻|秒}}内可见，此时不能传送第二个实体。
+
+{{only|je|for=在没有实体传送的情况下，折跃门方块每隔{{convert|2400|刻|分钟}}会发出两束{{color|#7B2FBE|紫色}}光柱。<ref>{{bug|MC-107824|||WAI}}</ref>}}
+
+如果末地折跃门在发射光柱的过程中被破坏，则光柱会停止延伸并立即消失。
+
+光柱前进速度约2.854格/刻，上方光柱的起点是末地折跃门所在位置，下方光柱的起点是末地折跃门所在位置的下方1格，被发射时先向远离末地折跃门的方向前进，纹理向下作加速运动，达到终点并等待一段时间（{{only|je|for=仅{{color|#C354CD|品红色}}光柱}}或{{only|be|for=均适用}}）后向末地折跃门方向前进，纹理向上作加速运动。
+
+对于{{color|#7B2FBE|紫色}}光柱：{{in|java}}该光柱分为自末地折跃门方块之下49格位置至末地折跃门方块之下1格位置和自末地折跃门方块至末地折跃门方块之上48格位置；{{in|be}}该光柱长度同{{color|#C354CD|品红色}}光柱。在与看见一个垂直堆叠方块的大致相同的距离可以看见光柱。如果渲染距离设置为16区块，那么光柱至多可以在255方块以外的距离看到。与[[信标]]的光柱不同，在光柱上面放置染色玻璃并不会改变光柱的颜色，光柱不会被[[遮挡形状|完全固体渲染方块]]阻挡。
+
+=== 光源 ===
+末地折跃门会发出[[亮度]]等级为15的光。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Explosion1.ogg
+|sound2=Explosion2.ogg
+|sound3=Explosion3.ogg
+|sound4=Explosion4.ogg
+|subtitle={{tp|subtitles.entity.generic.explode}}
+|source={{tp|soundCategory.block}}
+|description=生成末地折跃门
+|id=block.end_gateway.spawn
+|translationkey=subtitles.entity.generic.explode
+|foot=1}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|End Gateway
+|spritetype=block
+|nameid=end_gateway
+|showblocktags=je
+|blocktags={{GameTag|blocks|end_gateway}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=end-gateway
+|spritetype=block
+|nameid=end_gateway
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|End Gateway
+|spritetype=block
+|nameid=end_gateway
+|foot=1}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=end-gateway
+|spritetype=block
+|nameid=EndGateway
+|foot=1}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+末地折跃门拥有一个保存了该方块的附加数据的与其相关联的方块实体。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 进度 ==
+{{load advancements|end.enter_end_gateway}}
+
+== 历史 ==
+{{Incomplete section|[[:en:End Gateway (block)]] - 自15w33a以来实际上还有诸多更改。}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w31a|[[File:End Gateway JE1.png|32px]] 加入了末地折跃门，它是末地折跃门的组成部分。}}
+|{{HistoryLine|||dev=15w33a|[[File:End Gateway JE2 BE1.png|32px]] 更改了方块的星空纹理，以让它不随观察者的视角改变而改变。
+|加入了 <code>ExactTeleport</code> NBT标签。
+|原本使用[[信标]]光柱的光柱纹理被改为独一无二的纹理。}}
+|{{HistoryLine|||dev=15w37a|不能再通过在末地折跃门方块的位置放置液体来破坏末地折跃门方块了。}}
+|{{HistoryLine||1.10|dev=16w20a|末地折跃门的背景色从{{color|#262626}}改为了{{color|#06191C}}}}
+|{{HistoryLine||1.11|dev=16w32a|方块实体ID由<code>EndGateway</code>更改为<code>end_gateway</code>。}}
+|{{HistoryLine|||dev=16w39a|现在当实体传送时会发出{{color|#7B2FBE|紫色}}光柱，而不是{{color|#DECF2A|黄色}}。与方块首次生成时发出的光柱颜色匹配。}}
+|{{HistoryLine||1.13|dev=17w43a|末地折跃门的动画现在更加平滑。}}
+|{{HistoryLine|||dev=17w47a|在[[扁平化]]前，方块的数字ID为209。}}
+|{{HistoryLine|||dev=17w48a|将[[粒子]]更改为[[黑曜石]]的粒子。}}
+|{{HistoryLine||1.15|dev=19w39a|由于一个漏洞<ref>{{bug|MC-161852|||Fixed}}</ref>，末地折跃门会渲染在错误的位置或不渲染。}}
+|{{HistoryLine|||dev=19w40a|修复了上述漏洞。
+|末地折跃门现在受迷雾影响。}}
+|{{HistoryLine|||dev=19w41a|末地折跃门现在不再受迷雾影响。}}
+|{{HistoryLine||1.20.5|dev=24w06a|末地折跃门方块实体NBT标签<code>ExitPortal</code>被重命名为<code>exit_portal</code>。}}
+|{{HistoryLine||1.21.5|dev=25w07a|末地折跃门现在再次受迷雾影响。<ref>{{bug|MC-152382|||Fixed}}</ref>}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|[[File:End Gateway JE2 BE1.png|32px]] 加入了末地折跃门。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|更改了末地折跃门方块的纹理。}}
+|{{HistoryLine||1.13.0|dev=正式版|不能再通过在末地折跃门方块的位置放置液体来破坏末地折跃门方块了。<ref>{{bug|MCPE-48264|||Fixed}}</ref>}}
+|{{HistoryLine||1.14.0|dev=正式版|不能再通过凋灵炸毁末地折跃门了。<ref>{{bug|MCPE-47174|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.70|dev=1.19.70.22|末地折跃门不再能在旁观模式中使用。<ref>{{bug|MCPE-165689|||Fixed}}</ref>}}
+|{{HistoryLine||26.0|dev=26.0.23|现在末地折跃门方块拥有显示名称。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|[[File:End Gateway JE2 BE1.png|32px]] 加入了末地折跃门。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||1.7.10|[[File:End Gateway JE2 BE1.png|32px]] 加入了末地折跃门。}}
+}}
+
+== 你知道吗 ==
+* {{in|je}}若玩家的视线与指令放置的末地折跃门处在同一格，则末地折跃门本身将不可见，但玩家仍能看见其发出的光束。
+* {{in|be}}末地中由玩家放置的末地折跃门会将玩家传送至坐标（0,0,0）。
+* {{in|be}}玩家可以站在主世界和下界中的末地折跃门上，且不会被传送到任何地方。
+* {{in|be}}虽然末地折跃门具有碰撞箱，但手持末地折跃门物品的玩家可以将末地折跃门放置在与实体碰撞箱相交的位置，并且在非末地维度还会挤开实体。
+
+== 画廊 ==
+<gallery>
+File:GatewayBlockBeam.png|一个末地折跃门在通过{{cmd|setblock}}来放置时射出品红色光柱
+File:GatewayBlockBeamYellow.png|在旧版本中，一个末地折跃门在实体进入末地折跃门时射出黄色光柱
+File:End gateway portal inside.png|末地折跃门的星空纹理
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[Category:末地方块]]
+
+[[en:End Gateway (block)]]
+[[es:Nexo del End (bloque)]]
+[[fr:Passerelle de l'End (bloc)]]
+[[ja:エンドゲートウェイ (ブロック)]]
+[[ko:엔드 관문 (블록)]]
+[[pl:Blok portalu bramy Endu]]
+[[pt:Passagem do End (bloco)]]
+[[ru:Блок врат Края]]

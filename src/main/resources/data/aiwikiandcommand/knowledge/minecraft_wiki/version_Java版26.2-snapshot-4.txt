@@ -1,0 +1,133 @@
+# 页面: Java版26.2-snapshot-4
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8826.2-snapshot-4
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:39
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=26.2-snapshot-4
+|image=26.2-snapshot-4.jpg
+|image2=Java Edition 26.2-snapshot-4 Simplified.png\Java Edition 26.2-snapshot-4 Traditional.png\Java Edition 26.2-snapshot-4 Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2026年4月21日
+|jsonhash=883027af8a99f6bcc229655600f9f7d7b8e39eec
+|clienthash=08ff2a0b68a3eda26cb73abafe87cd8c9b5a838f
+|serverhash=679190223788622aa5edfb9346fad3d0717087c5
+|parent=26.2
+|prevparent=26.1.2
+|prev=26.2-snapshot-3
+|next=26.2-snapshot-5
+|nextparent=26.3
+}}<onlyinclude>
+
+'''26.2-snapshot-4'''是[[Java版26.2]]的第4个快照，发布于2026年4月21日<ref>{{article|minecraft-26-2-snapshot-4|Minecraft 26.2 Snapshot 4|Apr 21, 2026}}</ref>，修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[属性]]'''
+* 加入了属性<code>minecraft:nameplate_distance</code>。
+** 控制实体的名称标签能在多少格之内可见。
+** 如果实体不可见，则名称标签也不可见。
+** 允许值在<code>0.0</code>至<code>512.0</code>之间。
+** 默认值：64.0。
+* 加入了属性<code>minecraft:below_name_distance</code>。
+** 控制<code>below_name</code>记分板显示能在多少格之内可见。
+** 如果实体不可见，则名称标签也不可见。
+** 允许值在<code>0.0</code>至<code>512.0</code>之间。
+** 默认值：10.0。
+
+'''[[遥测]]'''<!-- us <-> Mojang -->
+* 新必要事件
+** <code>graphics_capabilities</code>
+*** 这是会在启动时发送的新事件，用于告知Mojang用于运行游戏的图形设备功能。
+*** 加入了新属性：<code>backend_name</code>
+**** 这会是<code>Vulkan</code>或<code>OpenGL</code>，用于告知Mojang以了解玩家使用的图形API。
+*** 加入了新属性：<code>backend_failure_reason</code>
+**** 这会是一段简短的错误代码，例如<code>vulkan_device_version_too_low</code>，将帮助Mojang识别针对Vulkan需求的潜在问题。
+*** 加入了新属性：<code>backend_failure_message</code>
+**** 这会是一个简短且模糊的信息，例如<code>Failed to find the GLFW platform surface extensions</code>，如果玩家在运行Vulkan遇到问题，将帮助Mojang缩小范围。
+*** 加入了新属性：<code>backend_failure_missing_capabilities</code>
+**** 这会是Vulkan缺失的功能列表，例如<code>VULKAN_CORE_1_2, VK_KHR_dynamic_rendering</code>，将帮助Mojang了解玩家为了使用Vulkan需要哪些功能。
+
+'''[[语言]]'''
+* 加入了楚瓦什语和瑞士法语。
+
+== 更改 ==
+=== 生物 ===
+'''[[硫方怪]]'''
+* 自然生成的小型变种现在拥有正确的尺寸。
+* 更改了外层的眼部纹理。
+* 现在可以在和平难度下生成。
+
+'''[[猪灵]]、[[疣猪兽]]和[[豹猫]]'''
+* 现在可以在和平难度下生成。
+
+=== 物品 ===
+'''[[硫方怪桶]]'''
+* 现在装起和释放硫方怪会播放音效。
+
+=== 世界生成 ===
+'''[[硫黄洞穴]]'''
+* 现在会在硫黄和朱砂之间生成[[花岗岩]]和[[凝灰岩]]。
+* 缩短了[[硫黄尖锥簇]]的平均长度。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>103.0</code>。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>86.1</code>。
+
+'''[[实体谓词]]'''
+* 史莱姆子谓词已从<code>minecraft:type_specific/slime</code>重命名为<code>minecraft:type_specific/cube_mob</code>。
+
+'''[[纹理图集]]'''
+* 移除了图集<code>minecraft:beds</code>。
+
+== 修复 ==
+{{fixes|fixedin=26.2 Snapshot 4|showdesc=1|new=1
+|;26.2前正式版的漏洞
+|1788|在和平难度下，豹猫无法在丛林和竹林生物群系自然生成。
+|186131|猪灵和疣猪兽无法在和平难度下自然生成。
+|296343|钓鱼竿抛出浮漂后，使用鼠标滚轮切换钓鱼竿，在第一人称视角下会短暂显示未抛出浮漂的纹理。
+|307002|对用于复活末影龙的末地水晶使用{{cmd|kill|link=none}}命令不再会中断复活过程。
+|;dev
+|307327|在部分Mac系统上使用Vulkan渲染时，垂直同步限制的帧率大小在全屏和非全屏时不一致。
+|307378|在部分显卡上使用Vulkan渲染时发光效果不可见。
+|307434|硫方怪无法在和平难度下自然生成。
+|307626|资源包或数据包选择屏幕的选择列表可能会延伸到游戏窗口边界外，违反Vulkan规范。
+|;prev
+|307532|将熔岩桶倒入流动的水中时，其在服务端不会倒空。
+|307539|在部分Mac系统上，游戏启动时崩溃。
+|307545|“高对比度”资源包被列为不兼容。
+|307549|{{cd|beds.png-atlas}}仍然存在。
+|307587|在下界放置湿海绵时，其在服务端不会从物品栏移除。
+|307624|立方体生物的实体子谓词名为{{cd|type_specific/slime}}而非{{cd|cube_mob}}。
+|307647|启用Vulkan验证层时，游戏启动时崩溃——{{cd|NORMAL}}顶点属性使用了可能不支持{{cd|VERTEX_BUFFER_BIT}}的格式。
+}}</onlyinclude>
+
+== 影片 ==
+由[[slicedlime]]製作的影片：
+{{yt|sLkfyTZXsU0}}
+{{yt|OdLqAvlpM5g}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|2026}}
+
+[[de:26.2-snapshot-4]]
+[[en:Java Edition 26.2 Snapshot 4]]
+[[es:Java Edition 26.2 Snapshot 4]]
+[[fr:Édition Java 26.2 Snapshot 4]]
+[[it:Java Edition 26.2 Snapshot 4]]
+[[ja:Java Edition 26.2 Snapshot 4]]
+[[ko:Java Edition 26.2 스냅숏 4]]
+[[lzh:爪哇版二六點二之快照四]]
+[[nl:26.2 Snapshot 4]]
+[[pt:Edição Java 26.2 Snapshot 4]]
+[[ru:26.2 Snapshot 4 (Java Edition)]]
+[[th:รุ่น Java 26.2 Snapshot 4]]
+[[uk:26.2 Snapshot 4 (Java Edition)]]

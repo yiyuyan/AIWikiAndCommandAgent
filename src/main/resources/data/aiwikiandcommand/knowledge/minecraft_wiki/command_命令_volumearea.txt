@@ -1,0 +1,72 @@
+# 页面: 命令/volumearea
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/volumearea
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:17
+# 原始 Wikitext 内容:
+
+{{Stub|缺少示例}}{{Outdated|edition=bedrock}}{{Infobox command
+|name=volumearea
+|oplevel=1
+|cheat=y
+}}
+
+在当前维度中添加、移除或列出功能域。
+
+== 语法 ==
+:<code>volumearea add <identifier: string> <from: x y z> <to: x y z> <name: string></code>
+::在指定范围内添加功能域。
+:<code>volumearea list [all-dimensions: VolumeAreaAllDimensions]</code>
+::列出当前维度中的功能域。若指定可选参数<code>[all-dimensions: VolumeAreaAllDimensions]</code>，则会列出当前已定义的所有功能域。
+:<code>volumearea remove <name: string></code>
+::移除指定名称的功能域。
+:<code>volumearea remove <position: x y z></code>
+::移除指定位置上的功能域。
+:<code>volumearea remove_all</code>
+::移除所有功能域。
+
+== 参数 ==
+{{argument|identifier: string|basic_string|be=1}}
+:指定标识符的名称。
+:{{arg desc|be=basic_string}}
+{{argument|from: x y z|CommandPosition|be=1}}和{{argument|to: x y z|CommandPosition|be=1}}
+:指定添加功能域范围的两组对角方块坐标。
+:{{arg desc|be=CommandPosition}}
+{{argument|name: string|basic_string|be=1}}
+:指定功能域的名称。
+:{{arg desc|be=basic_string}}
+{{argument|position: x y z|CommandPosition|be=1}}
+:指定功能域的位置。
+:{{arg desc|be=CommandPosition}}
+{{argument|all-dimensions: VolumeAreaAllDimensions|enum|be=1}}
+:指定是否列出其他维度的功能域。
+
+== 结果 ==
+{{Result table|onlybe=1|noee=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|cmd=/volumearea add ...|尝试添加不存在的已定义功能域||fail}}
+{{Result table|功能域数量达到上限}}
+{{Result table|指定名称的标识符不存在}}
+{{Result table|cmd=/volumearea remove ...|指定名称的功能域不存在或指定位置不存在功能域}}
+{{Result table|cmd=/volumearea remove_all<br>/volumearea list ...|已定义功能域不存在}}
+{{Result table|cmd=|success}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1|noee=1}}
+{{Output table|失败|0}}
+{{Output table|成功|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.18.30|dev=1.18.20.21|加入了{{cmd|volumearea|link=none}}。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.22|移除了{{cmd|volumearea|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/volumearea]]
+[[en:Commands/volumearea]]
+[[pt:Comandos/volumearea]]

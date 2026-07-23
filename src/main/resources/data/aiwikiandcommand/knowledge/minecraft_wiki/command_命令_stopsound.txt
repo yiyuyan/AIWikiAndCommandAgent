@@ -1,0 +1,82 @@
+# 页面: 命令/stopsound
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/stopsound
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=stopsound
+|oplevel=2\1
+|becheat=1
+}}
+
+停止[[声音事件]]播放。
+
+== 语法 ==
+* '''Java版'''
+: <code>stopsound <targets> * <sound></code>
+:: 停止指定的声音（省略类别）。
+: <code>-{}-stopsound <targets> [<''类别''>] [<sound>]</code>
+:: 停止所有（指定类别）的声音。
+
+* '''基岩版'''
+: <code>stopsound <player: target> [sound: string]</code>
+
+== 参数 ==
+{{argument|targets|minecraft:entity|player: target|CommandSelector<Player>}}
+: 指定声音的接收者。
+: {{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+{{el|je|short=1}}: {{cd|-{}-<''类别''>}}
+: 指定要停止的声音所属的类别，对应于游戏选项中“音乐和声音”设置的分类。
+: 必须为以下之一：<code>master</code>、<code>music</code>、<code>record</code>、<code>weather</code>、<code>block</code>、<code>hostile</code>、<code>neutral</code>、<code>player</code>、<code>ambient</code>、<code>voice</code>、<code>ui</code>。
+
+{{argument|sound|minecraft:resource_location|sound: string|basic_string}}
+: 指定要停止的声音。若未指定，则停止所有声音。
+: {{in|java}}{{arg desc|je=resource_location}}应为一个声音事件（例如，<code>entity.pig.ambient</code>）。
+: {{in|bedrock}}{{arg desc|be=string}}应为一个声音事件（例如，<code>mob.pig.say</code>）。
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器|N/A|fail}}
+{{Result table|<code><targets></code>或<code>player: target</code>无法选中至少一个在线玩家|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|被选中的玩家数量}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|被选中的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 对所有玩家停止播放下雨声：
+** {{el|je|short=1}}：<code>stopsound @a * weather.rain</code>
+** {{el|be|short=1}}：<code>stopsound @a ambient.weather.rain</code>
+** 该命令在雨天执行时会暂时消除雨声。
+* 停止所有玩家的所有声音：<code>stopsound @a</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9.3|dev=pre2|加入了{{cmd|stopsound|link=none}}。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|stopsound|link=none}}。}}
+}}
+
+== 参见 ==
+* {{cmd|playsound}} — 播放一段声音。
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/stopsound]]
+[[en:Commands/stopsound]]
+[[es:Comandos/stopsound]]
+[[ja:コマンド/stopsound]]
+[[pt:Comandos/stopsound]]
+[[ru:Команды консоли/stopsound]]
+[[uk:Команди консолі/stopsound]]

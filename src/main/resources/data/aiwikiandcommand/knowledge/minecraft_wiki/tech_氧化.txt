@@ -1,0 +1,194 @@
+# 页面: 氧化
+# 来源: https://zh.minecraft.wiki/w/%E6%B0%A7%E5%8C%96
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 游戏内容, 需要验证/基岩版
+# 抓取时间: 2026-07-14 17:29:47
+# 原始 Wikitext 内容:
+
+[[File:All Oxidizing Blocks.png|thumb]]
+
+铜质方块会随时间流逝而逐渐'''氧化（Oxidation）'''。不同氧化程度的铜质方块有着不同的纹理和名称。
+
+[[铜傀儡]]的氧化行为见{{slink|铜傀儡#氧化}}。
+
+== 机制 ==
+=== 氧化 ===
+铜质方块有4种氧化阶段（包括尚未氧化阶段）。铜质方块在名称上，后3个阶段依次体现为“'''斑驳（Exposed）'''”“'''{{tr|锈蚀|風化|生鏽}}（Weathered）'''”和“'''氧化（Oxidized）'''”。随着氧化程度加深，铜质方块的外观逐渐由棕色过渡到绿色。
+
+铜质方块的氧化速度与自身氧化程度、周围[[曼哈顿距离]]小于等于4（下文简写为“周围”）且未涂蜡的铜质方块的氧化程度和数量有关：
+: 铜质方块每接收到一个[[随机刻]]，都有{{only|je|for={{frac|64|1125}}}}或{{only|be|for={{frac|128|1875}}}}的概率进入“预氧化”状态。
+* 若周围其他铜质方块的氧化程度更低，则该铜质方块不会进一步氧化。
+* 若周围没有氧化程度更低的铜质方块，则该铜质方块有<math>\frac{m(b + 1)^2}{(a + 1)^2}</math>的概率氧化到下一阶段。
+** <math>b</math>为周围氧化程度更严重的铜质方块数量，<math>a</math>为周围所有铜质方块的数量。
+** 若该铜质方块尚未被氧化，系数<math>m</math>为0.75；其他则为1。
+因此被单独放置的铜质方块氧化速度最快；而被未氧化的铜质方块完全包裹住的铜质方块氧化速度最慢。
+
+=== 涂蜡 ===
+涂蜡可以维持铜质方块的氧化程度，防止继续氧化或被[[闪电束]]消除锈蚀。涂蜡变种与对应的未涂蜡变种在纹理上没有差异。
+
+玩家可以通过消耗[[蜜脾]]来为铜质方块涂蜡：
+* 在合成方格中结合铜质方块与蜜脾
+* 对铜质方块{{ctrl|使用}}蜜脾
+* 在装有蜜脾的[[发射器]]前方摆放铜质方块并将其激活
+
+=== 斧 ===
+对铜质方块{{ctrl|使用}}[[斧]]可以除锈，每次操作使铜质方块减轻一个氧化阶段。若是涂蜡变种则先进行脱蜡。
+
+=== 闪电束 ===
+[[File:Electric spark.png|thumb|闪电束击中铜块后为其除锈]]
+未涂蜡的铜质方块被[[闪电束]]击中时会清除所有锈蚀。其附近的铜质方块也会被减轻锈蚀，减轻概率随离闪电束击中点距离的增加而降低。
+
+本段落所述的铜质方块都需要排除涂蜡变种。
+
+[[File:Lightning oxidizing anim.gif|thumb|闪电束击中避雷针后为下方的铜块除锈]]
+闪电束在击中铜质方块或附着于铜质方块的[[避雷针]]后，会将该铜质方块直接清理为未氧化变种，并将这里设置为起始点，进行3-5次除锈操作，其中每次除锈操作进行1-8次寻路尝试：每次寻路尝试会在起始点的3×3×3范围内的27个方块中随机搜索10次，若搜索到铜质方块，就将其锈蚀程度减轻一级，并将起始点设置为这里；若没有搜索到，则这次寻路尝试失败。因此避雷针最多可以清理雷击点或避雷针根部17×17×17范围的铜质方块，一次雷击最多清理41块铜质方块。前提是这些铜质方块相连在一起，因为寻路是无法跨过间隔的。{{verify|bedrock=1}}
+
+在平面单层铜质方块的情况下模拟<ref group="注">使用程序模拟雷击2500万次，雷击点在深绿色1.36处。</ref>，下列是得到的一次雷击每个位置的期望除锈次数。也就是说在4格距离已经平均需要上百次雷击才能除锈，[[切比雪夫距离]]8格的边缘铜质方块被寻路到的可能性微乎其微。
+
+{| class="wikitable"
+|-
+|  ||  ||  ||  || {{tc|rarely|0.03}} || ||   ||  || {{tc|rarely|0.0045}}
+|-
+|  ||  ||  ||  || {{tc|neutral|0.12}} || ||   || {{tc|neutral|0.03}} || 
+|-
+|  ||  ||  ||  || {{tc|partial|0.41}}  || || {{tc|partial|0.19}} ||  || 
+|-
+|  ||  ||  || {{tc|yes|1.01}} || {{tc|yes|1.16}}|| {{tc|yes|1.01}} ||  ||  || 
+|-
+| {{tc|rarely|0.03}} || {{tc|neutral|0.12}} ||{{tc|partial|0.41}} || {{tc|yes|1.16}} || {{tc|always|1.36}} || {{tc|yes|1.16}} || {{tc|partial|0.41}} || {{tc|neutral|0.12}} || {{tc|rarely|0.03}}
+|-
+|  ||  ||  || {{tc|yes|1.01}} || {{tc|yes|1.16}} || {{tc|yes|1.01}} ||  ||  || 
+|-
+|  ||  ||  ||  || {{tc|partial|0.41}} ||  ||  ||  || 
+|-
+|  ||  ||  ||  || {{tc|neutral|0.12}} ||  ||  ||  || 
+|-
+|  ||  ||  ||  || {{tc|rarely|0.03}} ||  ||  ||  || 
+|}
+
+== 所有铜质方块 ==
+下表列出了所有受氧化机制影响的铜质方块。位于同一{{tr|行|列}}的方块可以通过该机制在世界中互相转化。
+{|class="wikitable collapsible collapsed" style="overflow-x: auto; display: inline-block; vertical-align: top; "
+! colspan="4" | 未涂蜡铜方块
+|-
+! 未氧化
+! 斑驳
+! {{tr|锈蚀|風化|生鏽}}
+! 氧化
+|-
+| {{BlockLink|Block of Copper}} || {{BlockLink|Exposed Copper}} || {{BlockLink|Weathered Copper}} || {{BlockLink|Oxidized Copper}}
+|-
+| {{BlockLink|Cut Copper}} || {{BlockLink|Exposed Cut Copper}} || {{BlockLink|Weathered Cut Copper}} || {{BlockLink|Oxidized Cut Copper}}
+|-
+| {{BlockLink|Cut Copper Slab}} || {{BlockLink|Exposed Cut Copper Slab}} || {{BlockLink|Weathered Cut Copper Slab}} || {{BlockLink|Oxidized Cut Copper Slab}}
+|-
+| {{BlockLink|Cut Copper Stairs}} || {{BlockLink|Exposed Cut Copper Stairs}} || {{BlockLink|Weathered Cut Copper Stairs}} || {{BlockLink|Oxidized Cut Copper Stairs}}
+|-
+| {{BlockLink|Chiseled Copper}} || {{BlockLink|Exposed Chiseled Copper}} || {{BlockLink|Weathered Chiseled Copper}} || {{BlockLink|Oxidized Chiseled Copper}}
+|-
+| {{BlockLink|Copper Bulb}} || {{BlockLink|Exposed Copper Bulb}} || {{BlockLink|Weathered Copper Bulb}} || {{BlockLink|Oxidized Copper Bulb}}
+|-
+| {{BlockLink|Copper Grate}} || {{BlockLink|Exposed Copper Grate}} || {{BlockLink|Weathered Copper Grate}} || {{BlockLink|Oxidized Copper Grate}}
+|-
+| {{BlockLink|Copper Door}} || {{BlockLink|Exposed Copper Door}} || {{BlockLink|Weathered Copper Door}} || {{BlockLink|Oxidized Copper Door}}
+|-
+| {{BlockLink|Copper Trapdoor}} || {{BlockLink|Exposed Copper Trapdoor}} || {{BlockLink|Weathered Copper Trapdoor}} || {{BlockLink|Oxidized Copper Trapdoor}}
+|-
+| {{BlockLink|Lightning Rod}} || {{BlockLink|Exposed Lightning Rod}} || {{BlockLink|Weathered Lightning Rod}} || {{BlockLink|Oxidized Lightning Rod}}
+|-
+| {{BlockLink|Copper Chest}} || {{BlockLink|Exposed Copper Chest}} || {{BlockLink|Weathered Copper Chest}} || {{BlockLink|Oxidized Copper Chest}}
+|-
+| {{BlockLink|Copper Golem Statue}} || {{BlockLink|Exposed Copper Golem Statue}} || {{BlockLink|Weathered Copper Golem Statue}} || {{BlockLink|Oxidized Copper Golem Statue}}
+|-
+| {{BlockLink|Copper Bars}} || {{BlockLink|Exposed Copper Bars}} || {{BlockLink|Weathered Copper Bars}} || {{BlockLink|Oxidized Copper Bars}}
+|-
+| {{BlockLink|Copper Chain}} || {{BlockLink|Exposed Copper Chain}} || {{BlockLink|Weathered Copper Chain}} || {{BlockLink|Oxidized Copper Chain}}
+|-
+| {{BlockLink|Copper Lantern}} || {{BlockLink|Exposed Copper Lantern}} || {{BlockLink|Weathered Copper Lantern}} || {{BlockLink|Oxidized Copper Lantern}}
+|}
+{| class="wikitable collapsible collapsed" style="overflow-x: auto; display: inline-block; vertical-align: top; "
+! colspan="4" | 涂蜡铜方块
+|-
+! 未氧化
+! 斑驳
+! {{tr|锈蚀|風化|生鏽}}
+! 氧化
+|-
+| {{BlockLink|Waxed Block of Copper}} || {{BlockLink|Waxed Exposed Copper}} || {{BlockLink|Waxed Weathered Copper}} || {{BlockLink|Waxed Oxidized Copper}}
+|-
+| {{BlockLink|Waxed Cut Copper}} || {{BlockLink|Waxed Exposed Cut Copper}} || {{BlockLink|Waxed Weathered Cut Copper}} || {{BlockLink|Waxed Oxidized Cut Copper}}
+|-
+| {{BlockLink|Waxed Cut Copper Slab}} || {{BlockLink|Waxed Exposed Cut Copper Slab}} || {{BlockLink|Waxed Weathered Cut Copper Slab}} || {{BlockLink|Waxed Oxidized Cut Copper Slab}}
+|-
+| {{BlockLink|Waxed Cut Copper Stairs}} || {{BlockLink|Waxed Exposed Cut Copper Stairs}} || {{BlockLink|Waxed Weathered Cut Copper Stairs}} || {{BlockLink|Waxed Oxidized Cut Copper Stairs}}
+|-
+| {{BlockLink|Waxed Chiseled Copper}} || {{BlockLink|Waxed Exposed Chiseled Copper}} || {{BlockLink|Waxed Weathered Chiseled Copper}} || {{BlockLink|Waxed Oxidized Chiseled Copper}}
+|-
+| {{BlockLink|Waxed Copper Bulb}} || {{BlockLink|Waxed Exposed Copper Bulb}} || {{BlockLink|Waxed Weathered Copper Bulb}} || {{BlockLink|Waxed Oxidized Copper Bulb}}
+|-
+| {{BlockLink|Waxed Copper Grate}} || {{BlockLink|Waxed Exposed Copper Grate}} || {{BlockLink|Waxed Weathered Copper Grate}} || {{BlockLink|Waxed Oxidized Copper Grate}}
+|-
+| {{BlockLink|Waxed Copper Door}} || {{BlockLink|Waxed Exposed Copper Door}} || {{BlockLink|Waxed Weathered Copper Door}} || {{BlockLink|Waxed Oxidized Copper Door}}
+|-
+| {{BlockLink|Waxed Copper Trapdoor}} || {{BlockLink|Waxed Exposed Copper Trapdoor}} || {{BlockLink|Waxed Weathered Copper Trapdoor}} || {{BlockLink|Waxed Oxidized Copper Trapdoor}}
+|-
+| {{BlockLink|Waxed Lightning Rod}} || {{BlockLink|Waxed Exposed Lightning Rod}} || {{BlockLink|Waxed Weathered Lightning Rod}} || {{BlockLink|Waxed Oxidized Lightning Rod}}
+|-
+| {{BlockLink|Waxed Copper Chest}} || {{BlockLink|Waxed Exposed Copper Chest}} || {{BlockLink|Waxed Weathered Copper Chest}} || {{BlockLink|Waxed Oxidized Copper Chest}}
+|-
+| {{BlockLink|Waxed Copper Golem Statue}} || {{BlockLink|Waxed Exposed Copper Golem Statue}} || {{BlockLink|Waxed Weathered Copper Golem Statue}} || {{BlockLink|Waxed Oxidized Copper Golem Statue}}
+|-
+| {{BlockLink|Waxed Copper Bars}} || {{BlockLink|Waxed Exposed Copper Bars}} || {{BlockLink|Waxed Weathered Copper Bars}} || {{BlockLink|Waxed Oxidized Copper Bars}}
+|-
+| {{BlockLink|Waxed Copper Chain}} || {{BlockLink|Waxed Exposed Copper Chain}} || {{BlockLink|Waxed Weathered Copper Chain}} || {{BlockLink|Waxed Oxidized Copper Chain}}
+|-
+| {{BlockLink|Waxed Copper Lantern}} || {{BlockLink|Waxed Exposed Copper Lantern}} || {{BlockLink|Waxed Weathered Copper Lantern}} || {{BlockLink|Waxed Oxidized Copper Lantern}}
+|}
+
+== 成就 ==
+{{load achievements|wax-on-wax-off}}
+
+== 进度 ==
+{{load advancements|prefix=husbandry|wax_on;wax_off}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=20w45a|加入了[[铜块]]及其氧化机制。}}
+|{{HistoryLine|||dev=21w05a|现在铜的氧化基于[[随机刻]]而不是[[计划刻]]。}}
+|{{HistoryLine|||dev=21w11a|现在可对铜使用[[蜜脾]]来涂蜡。
+|现在装有蜜脾的[[发射器]]被激活后也可以为其前方的铜涂蜡。
+|现在对铜使用[[斧]]可以脱蜡或除锈。
+|现在未涂蜡的铜被[[闪电]]击中时会减轻氧化程度。}}
+|{{HistoryLine||1.21.9|dev=25w36a|由于漏洞，现在被涂蜡的避雷针吸引的闪电不再能对避雷针附近的铜质方块除锈。<ref name="MC-302409">{{bug|MC-302409|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.11|dev=25w42a|修复了25w36a中的漏洞。<ref name="MC-302409"/>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.210|exg=caves_and_cliffs_en|dev=1.16.210.57|加入了[[铜块]]及其氧化机制。
+|可对铜使用[[蜜脾]]来涂蜡。}}
+|{{HistoryLine||1.16.210|由于不存在“{{experiment|caves_and_cliffs_en|exg=1}}”选项，铜块及其氧化机制在此正式版中不可用。}}
+|{{HistoryLine||1.16.220|exg=caves_and_cliffs_en|dev=1.16.220.52|现在对铜使用[[斧]]可以脱蜡或除锈。
+|现在未涂蜡的铜被[[闪电]]击中时会减轻氧化程度。
+|现在铜的氧化基于[[随机刻]]而不是[[计划刻]]。}}
+|{{HistoryLine||1.16.220|由于不存在“{{experiment|caves_and_cliffs_en|exg=1}}”选项，铜块及其氧化机制在此正式版中仍不可用。}}
+|{{HistoryLine||1.17.0|exg=caves_and_cliffs_en|dev=1.17.0.50|更改了闪电对铜的除锈机制，以匹配{{el|je}}。}}
+|{{HistoryLine|||exg=none|dev=1.17.0.52|铜块及其氧化机制不再属于[[实验性玩法]]。}}
+}}
+
+== 你知道吗 ==
+* 在现实中，绿色铜锈的主要成分通常是[[wzh:碱式碳酸铜|碱式碳酸铜]][<chem>Cu2(OH)2CO3</chem>]，俗称铜绿。
+* 在现实中，绿色铜锈仅生成于金属表层且相当容易刮除，游戏中以斧除锈的机制与之相对应。
+* 游戏中铜块的闪电除锈机制源自现实中将铜作为阴极的电解除锈原理。
+
+== 注释 ==
+{{fnlist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[en:Oxidation]]
+[[es:Oxidación]]
+[[fr:Oxydation]]
+[[ja:酸化]]
+[[ko:산화]]
+[[pt:Oxidação]]
+[[ru:Окисление]]
+[[uk:Окиснення]]

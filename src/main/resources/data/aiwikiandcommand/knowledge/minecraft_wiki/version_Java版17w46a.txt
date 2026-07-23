@@ -1,0 +1,93 @@
+# 页面: Java版17w46a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8817w46a
+# 分类: Java版1.13快照
+# 抓取时间: 2026-07-14 17:14:20
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=17w46a
+|image=17w46a.png
+|image2=Java Edition 17w46a Simplified.png\Java Edition 17w46a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2017年11月15日
+|jsonhash=5b07e94d1276496e661c99d117b8dc5df4f6d099
+|clienthash=fd90b150fb461573b121a7e6b6de657ba382f14d
+|serverhash=9127416e2341eb8fb7b63636c3ae39efefb2843b
+|parent=1.13
+|prevparent=1.12.2
+|prev=17w45b
+|next=17w47a
+|nextparent=1.13.1
+}}<onlyinclude>
+
+'''17w46a'''是[[Java版1.13]]的第5个快照，发布于2017年11月15日<ref>{{snap|17w46a|November 15, 2017}}</ref>，加入了新的命令{{cmd|datapack}}，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|datapack}}'''
+* 一个用于控制[[数据包]]加载的命令。
+* 有以下子命令：
+** <code>-{}-enable <名称></code> - 启用指定数据包。
+** <code>-{}-disable <名称></code> - 禁用指定数据包。
+** <code>list [available{{!}}enabled]</code> - 列出所有可用/已启用的数据包。
+* 默认数据包都是启用的，但是如果玩家已将其禁用，可以通过下述命令使其重新启用：
+** <code>-{}-enable <名称></code> - 启用指定数据包，并使用默认的加载顺序。
+** <code>-{}-enable <名称> first</code> - 启用使数据包，并将其放在其他数据包前面（优先级最低）。
+** <code>-{}-enable <名称> last</code> - 启用使数据包，并将其放在其他数据包后面（优先级最高）。
+** <code>-{}-enable <名称> before <已存在></code> - 启用指定数据包，并将其放在<code><已存在></code>前面（优先级比其低）。
+** <code>-{}-enable <名称> after <已存在></code> - 启用指定数据包，并将其放在<code><已存在></code>后面（优先级比其高）。
+
+== 更改 ==
+=== 生物 ===
+'''[[马]]'''
+* 稍微调整了马的模型。
+** 鼻子位于高一个像素，后腿向后移动1.5个像素。
+
+=== 命令格式 ===
+'''[[命令]]UI'''
+* 命令UI有了新原型。
+* 现在可以在多人游戏中工作。
+
+== 修复 ==
+{{fixes|fixedin=17w46a|prefix=Minecraft|showdesc=1
+|;old
+|10880|逗号或其他符号紧接在<code>@</code>选择器后时，其在命令方块中不能工作。
+|76044|<code>randomTickSpeed</code>、<code>spawnRadius</code>、<code>maxEntityCramming</code>和<code>maxCommandChainLength</code>游戏规则会接受非整型值。
+|88481|{{cmd|worldborder set|link=none}}命令接受小数，但命令在聊天栏中显示不正确。
+|99434|{{cmd|worldborder damage|link=none}}命令中有无效参数时，无任何回显。
+|107359|战利品表和进度可以被替换，但结构文件不行。
+|110566|执行失败的{{cmd|scoreboard players operation|link=none}}命令仍然会把记分值设为0。
+|117191|移动鼠标指针时，{{key|Tab}}键补全的列表没有变化。
+|;dev
+|121645|使用命令的别称时，其语法提示或{{key|Tab}}键补全功能显示出的内容不正确。
+|121658|把世界开放到局域网，且开启作弊时，初始玩家（即存档所有者）不会开启作弊。
+|121684|新命令菜单会把整个屏幕挡住。
+|121690|命令中不指定方块状态时，游戏会检测默认值，而不把状态忽略。
+|121691|无法执行带旋转角度的{{cmd|teleport|link=none}}命令。
+|121694|使用{{cmd|summon|link=none}}生成的生物没有武器。
+|121754|{{cmd|ban|link=none}}命令不再能踢出被封禁的玩家。
+|121756|尝试添加已使用名称的记分板项时显示的错误信息有误。
+|121791|<code>gameLoopFunction</code>中{{tr|抛出|丟擲|投擲}}的异常导致服务器崩溃。
+|121810|聊天栏中命令错误不再是红色。
+|;previous
+|121838|命令候选项有多种选择时，{{key|Tab}}键不会插入任何值。
+|121841|输入命令中一个词的一部分时，命令候选列表不会更新。
+|121848|命令候选列表的背景不透明。
+|121948|命令显示问题。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:17w46a]]
+[[en:Java Edition 17w46a]]
+[[es:Java Edition 17w46a]]
+[[fr:Édition Java 17w46a]]
+[[ja:Java Edition 17w46a]]
+[[nl:17w46a]]
+[[pt:Edição Java 17w46a]]
+[[ru:17w46a (Java Edition)]]

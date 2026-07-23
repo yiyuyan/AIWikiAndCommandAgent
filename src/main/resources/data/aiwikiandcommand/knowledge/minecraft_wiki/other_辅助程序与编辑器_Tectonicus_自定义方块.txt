@@ -1,0 +1,166 @@
+# 页面: 辅助程序与编辑器/Tectonicus/自定义方块
+# 来源: https://zh.minecraft.wiki/w/%E8%BE%85%E5%8A%A9%E7%A8%8B%E5%BA%8F%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8/Tectonicus/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%B9%E5%9D%97
+# 分类: 自定义软件
+# 抓取时间: 2026-07-14 17:36:44
+# 原始 Wikitext 内容:
+
+{{disclaimer}}
+Tectonicus默认会识别所有原生Minecraft方块，但如果使用了添加新方块的Mod，Tectonicus无法识别这些新增方块。不过，通过创建自定义方块设置，你可以将Mod中的自定义方块添加到Tectonicus中，从而在地图上显示这些你喜爱的Mod方块。
+
+在Minecraft中，每个方块都有唯一的数字标识（ID）。你可以在[[数据值#方块ID|方块ID]]中查看相关ID。Mod新增方块所使用的ID目前未被原生Minecraft占用——如果你是Mod作者，想制作供他人使用的方块配置，或者你可以向Mod作者获取新方块ID的相关文件。
+
+== 教程：添加一个简单的自定义方块 ==
+首先，你需要创建一个自定义方块文件。空文件的格式如下：
+
+<pre>
+<blockConfig version="1">
+</blockConfig>
+</pre>
+
+由于这是XML格式，文件扩展名通常为.xml，但并非必须。我们将这段代码保存为C:/customBlockConfig.xml。
+
+假设你有一个Mod，其中添加了“cheese”方块（完全由硬奶酪制成），它是固体方块（类似泥土或石头），每一面都是黄色。添加该cheese方块后，配置文件应如下所示：
+
+<pre>
+<blockConfig version="1">
+
+  <!-- 奶酪方块 -->
+  <Solid id="200" name="Cheese" texture="C:/cheese.png"/>
+  
+</blockConfig>
+</pre>
+
+需要注意以下重要事项：
+
+* “Solid”标签表示该方块是完全固体的，如同泥土。
+* “id”是方块的ID。
+* “name”是方块的名称。
+* “texture”是方块所用纹理文件的路径，支持.png、gif或jpeg格式。
+
+接下来，要在查看地图时包含此自定义配置，需找到你的配置文件，在“layer”标签中添加相关设置（最后两个属性为新增）：
+
+<pre>
+<layer dimension="terra" renderStyle="normal"
+       useDefaultBlocks="true"
+       customBlocks="C:/customBlockConfig.xml">
+</pre>
+
+此时查看地图，新方块应该就能显示了！
+
+== 替代已有方块 ==
+若你想改变Minecraft原生方块的外观，可在自定义方块配置中重新定义它们。例如，若将之前示例中方块的ID从200改为12（沙子的ID），那么游戏世界中所有的沙子都会显示为奶酪方块的样式。
+
+== 移除已有方块 ==
+若你只想显示自定义方块，可将“useDefaultBlocks”设置为“false”，这意味着所有Minecraft原生方块都不会显示。你可以利用这一设置配置仅显示矿石（煤炭、铁、金、钻石）的地图，以查看它们在地下的位置。
+
+<pre>
+<blockConfig version="1">
+  <Solid id="14" name="Gold Ore" texture="terrain[0, 2]"/>
+  <Solid id="15" name="Iron Ore" texture="terrain[1, 2]"/>
+  <Solid id="16" name="Coal Ore" texture="terrain[2, 2]"/>
+  <Solid id="56" name="Diamond Ore" texture="terrain[2, 3]"/>
+</blockConfig>
+</pre>
+
+值得注意的是 texture="terrain[0, 2]" 这部分。Minecraft的方块图像存储在一个名为terrain.png的大文件中（详见[[纹理包]]）。terrain[0, 2]表示使用terrain.png中第一列第三行的方块图像（即金矿石的图像）。
+
+任何图像都可以通过[]从中选择一个贴图，只要该图像与terrain.png具有相同的网格大小（例如16×16）。例如：
+
+<pre>
+<blockConfig version="1">
+  <Solid id="14" name="Gold Ore" texture="C:/CustomOres.png[1, 2]"/>
+</blockConfig>
+</pre>
+
+== 从纹理包中使用图像 ==
+若要直接使用硬盘中的图像，你可以选用Minecraft原生图像或你的纹理包中的图像。
+
+<pre>
+<blockConfig version="1">
+  <!-- 创建一个带有Minecraft云纹理的自定义云朵方块 -->
+  <Solid id="201" name="Cloud" texture="environment/clouds.png"/>
+</blockConfig>
+</pre>
+
+由于使用默认纹理，系统会先检查第一个纹理包，若未找到对应文件，会接着检查默认的minecraft jar文件。
+
+== 不同类型的方块 ==
+到目前为止我们只使用到了固体方块，如石头和泥土。如果原始方块存在于Minecraft中，你也可以添加不同形状的方块。这里是一个自定义Plant示例：
+
+<pre>
+<blockConfig version="1">
+  <Plant id="202" name="Rose" texture="C:/Rose.png"/>
+</blockConfig>
+</pre>
+
+用“Plant”代替“Solid”意味着Tectonicus将会在图像上画一个X，就像原始Minecraft植物那样。
+
+你可以添加各种不同类型的示例方块，请在Tectonicus的网站上查看使用的默认方块配置：
+http://www.triangularpixels.com/Tectonicus/defaultBlockConfig.xml
+
+== 子方块（Mod） ==
+所有方块不仅有方块ID，还有数据值。简单方块（如圆石）的数据值会被忽略，而其他方块（如床）的数据值会存储方向或其他额外信息。
+
+部分方块（包括一些Mod添加的方块）会将数据值当作第二ID使用，这可以在“id”字段中体现。
+
+以下是Minecraft原生羊毛方块的示例：
+
+<pre>
+	<Solid id="35:0" name="White wool"  texture="terrain[0, 4]" />
+	<Solid id="35:1" name="Orange wool"  texture="terrain[2, 13]" />
+	<Solid id="35:2" name="Magenta wool"  texture="terrain[2, 12]" />
+	<Solid id="35:3" name="Light blue wool"  texture="terrain[2, 11]" />
+	<Solid id="35:4" name="Yellow wool"  texture="terrain[2, 10]" />
+	<Solid id="35:5" name="Light green wool"  texture="terrain[2, 9]" />
+	<Solid id="35:6" name="Pink wool"  texture="terrain[2, 8]" />
+	<Solid id="35:7" name="Grey wool"  texture="terrain[2, 7]" />
+	<Solid id="35:8" name="Light grey wool"  texture="terrain[1, 14]" />
+	<Solid id="35:9" name="Cyan wool"  texture="terrain[1, 13]" />
+	<Solid id="35:10" name="Purple wool"  texture="terrain[1, 12]" />
+	<Solid id="35:11" name="Blue wool"  texture="terrain[1, 11]" />
+	<Solid id="35:12" name="Brown wool"  texture="terrain[1, 10]" />
+	<Solid id="35:13" name="Dark green wool"  texture="terrain[1, 9]" />
+	<Solid id="35:14" name="Red wool"  texture="terrain[1, 8]" />
+	<Solid id="35:15" name="Black wool"  texture="terrain[1, 7]" />
+</pre>
+
+这些方块的ID都是35，通过数据值来确定使用哪种颜色的纹理。例如红色羊毛的数据值是14，所以其ID为id="35:14"。
+
+需要注意的是，这些方块不一定都是“Solid”类型，必要时可以混合不同种类的方块，这为Mod的自定义方块提供了一定便利。
+
+== 可用的方块类型 ==
+=== Air ===
+Air方块代表空白空间。若想隐藏Minecraft原生方块，可使用该类型。
+
+<pre><Air id="0" name="Air"/></pre>
+
+=== Solid方块 ===
+用于创建方形方块（如泥土或石头），其各个面可使用相同图像，也可使顶部图像与其他面不同。
+
+“alphaTest”为可选属性，用于不显示透明像素（如玻璃或刷怪笼）。
+
+<pre>
+<!-- 平滑石头所有面纹理相同 -->
+<Solid id="1" name="Stone" texture="terrain[1, 0]"/>
+
+<!-- TNT侧面使用一种纹理，顶部和底部使用另一种纹理 -->
+<Solid id="46" name="TNT" side="terrain[8, 0]" top="terrain[9, 0]"/>
+
+<!-- 刷怪笼使用alpha测试 -->
+<Solid id="52" name="Mob Spawner" texture="terrain[1, 4]" alphaTest="true"/>
+</pre>
+
+=== Water ===
+一种各面透明的固体方块，且经过特殊处理后，水越深颜色越黑。
+
+<pre><Water id="8" name="Water" texture="terrain[15, 12]"/></pre>
+
+=== Log ===
+一种各面纹理不同的固体方块，纹理会根据方块的数据值变化。
+
+<pre><Log id="17" name="Log" normal="terrain[4, 1]" spruce="terrain[4, 7]"
+ birch="terrain[5, 7]" top="terrain[5, 1]"/></pre>
+
+[[Category:自定义软件]]
+
+[[en:Tutorials/Programs and editors/Tectonicus/Custom Blocks]]

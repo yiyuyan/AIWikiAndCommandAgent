@@ -1,0 +1,376 @@
+# 页面: 侦测器
+# 来源: https://zh.minecraft.wiki/w/%E4%BE%A6%E6%B5%8B%E5%99%A8
+# 分类: Java版独有信息, 使用简单计算器的页面, 可再生资源, 基岩版独有信息, 待更新条目, 方块, 红石, 缺少理由的待更新条目, 需要信息
+# 抓取时间: 2026-07-14 17:20:06
+# 原始 Wikitext 内容:
+
+{{about|检测方块更新的红石元件||探测器（消歧义）}}
+{{Infobox block
+|group1=正面
+|1-1=Observer.png
+|1-2=Observer BE.png
+|group2=背面，未激活
+|2-1=Observer (back).png
+|2-2=Observer (back) BE.png
+|group3=背面，激活
+|3-1=Active Observer (back).png
+|3-2=Active Observer (back) BE.png
+|*-1caption={{el|java}}
+|*-2caption={{el|be}}
+|invimage1=Observer
+|invimage2=----
+|invimage3=Observer BE
+|light=0
+}}
+
+'''侦测器（Observer）'''是当一个面对的方块传来状态更新时会发出红石信号的方块。
+
+== 生成 ==
+侦测器不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+  |A1=Cobblestone
+  |B1=Cobblestone
+  |C1=Cobblestone
+  |A2=Redstone Dust
+  |B2=Redstone Dust
+  |C2=Nether Quartz
+  |A3=Cobblestone
+  |B3=Cobblestone
+  |C3=Cobblestone
+  |Output=Observer
+  |type=Redstone
+}}
+
+== 破坏 ==
+挖掘侦测器的合适工具是镐。侦测器需要木镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+侦测器被破坏后会掉落自身。
+
+== 用途 ==
+侦测器的放置方式类似于[[活塞]]，放置后其输出红石信号的一端会朝向玩家。它会侦测其侦测面对着的方块。侦测面是侦测器的“脸”。由于侦测器可以侦测其他侦测器的状态，因此放置两个侦测面相邻的侦测器（彼此侦测）可以制作紧凑的高频红石时钟。详见[[Tutorial:高频电路#侦测器高频|侦测器高频]]。
+
+=== 行为 ===
+{{in|je}}侦测器用于侦测目标方块的方块状态的变化，或者方块的放置或移除（方块状态的改变，而'''不是'''方块实体数据的改变）。
+侦测器充当方块更新检测器的角色，它会响应面前造成[[方块更新#PP更新|PP更新]]的事件。尽管侦测器能够阻挡[[亮度|光]]，但它不是红石导体：它不能被外部红石信号充能，也不能被自己的输出信号充能。
+* 注意，由于Java版与基岩版的机制差异，两个版本分别有另一个版本不能侦测到的变化，详见下文的表格。
+
+当侦测到某变化时，侦测器会向输出面发出[[红石电路|信号强度]]为15，持续2[[游戏刻]]的脉冲。脉冲能激活[[红石粉]]、[[红石中继器]]、{{only|be|for=[[红石比较器]]、[[红石火把]]}}或在侦测器输出端一侧的[[红石元件|机械元件]]等，也会强充能输出端朝向的红石导体至15等级。
+
+侦测器侦测到变化后延迟'''2游戏刻'''后激活，亮起后再过'''2游戏刻'''后关闭。
+
+{{in|be}}实际体现为'''2红石刻'''。原因是基岩版侦测器信号计算阶段为'''电容器更新阶段'''而非信号源更新阶段（这使得输出“延后”了1红石刻）。<ref>{{bug|MCPE-15793}}</ref><ref>{{bug|MCPE-73342}}</ref>
+
+当关闭的侦测器本身被活塞移动到位后，侦测器在移动到位后再过2游戏刻会发出脉冲；若活塞推动时侦测器是激活的，则不会在移动到位后发出脉冲。
+
+{{in|je}}由于侦测器可以侦测方块状态变化，而非方块更新（[[方块更新#NC更新|NC更新]]），它相较于BUD可以侦测范围更广的现象（因为一些方块状态的改变不会引起方块更新）。
+
+{{in|be}}侦测器有时会侦测方块更新，有时会侦测方块状态的改变。如侦测红石粉时，侦测器侦测其信号强度方块状态变更，连接变更（无论是红石粉链接变化还是其涉及的有向图变化）则不会被侦测。
+
+{{in|je}}侦测器是典型的[[刻#计划刻|计划刻]]元件，其行为依赖计划刻事件，当侦测器执行计划刻事件时，若侦测器是关闭状态，则激活，若侦测器是激活状态，则关闭，具体行为如下：
+* 侦测器在面前的方块状态发生变化（发出PP更新）时，会添加一个延迟为'''2游戏刻'''的计划刻事件，在2游戏刻后执行该计划刻事件。依次执行以下操作：
+*# 将自身方块状态设为激活（powered:false->true）
+*# 发出状态更新（PP更新）
+*# 添加延迟2游戏刻的计划刻事件
+*# 发出方块更新（NC更新）
+* 在2游戏刻后，侦测器执行计划刻事件，此时侦测器为激活状态，依次执行以下操作：
+*# 将方块状态设为关闭（powered:true->false）
+*# 发出状态更新（PP更新）
+*# 发出方块更新（NC更新）<ref>{{cite|url=https://www.bilibili.com/opus/833449948682911784|title=剖析侦测器的计划刻事件【MC刨根问底#2】|author=tanh丶桁|website=Bilibili|date=Nov 30, 2023|access-date=Jul 19, 2025}}</ref>
+
+{{in|je}}侦测器被活塞推动时：
+* 关闭的侦测器被活塞推动后，在[[移动的活塞]]变为侦测器时，会添加一个延迟2游戏刻的计划刻事件。
+* 激活的侦测器被活塞推动时，会停止信号输出，并在后方输出位置发出方块更新（NC更新）。
+在[[移动的活塞]]变为侦测器时：
+* 若在到位位置'''没有'''侦测器的计划刻事件，则状态设为关闭，向后方输出位置发出方块更新（NC更新），不会添加计划刻事件。
+* 若在到位位置'''有'''侦测器的计划刻事件，则侦测器状态保持激活，不会向后方输出位置发出方块更新（NC更新），直到执行该计划刻事件时状态设为关闭。
+
+侦测器的计划刻优先级均为0（NORMAL）。
+
+=== 限制 ===
+{{Needs update|section=1}}
+{| class="wikitable"
+! rowspan=2 | 方块更新类型
+! colspan=3 | 可被侦测
+|-
+! [[基岩版]]
+! [[Java版]]
+|-
+| {{BlockSprite|bell}} [[钟]]被手动敲击
+| {{tc|Yes}}
+| {{tc|No}}
+|-
+| {{BlockSprite|fire}} [[火]]体现周围燃烧面方块的状态变化
+| {{tc|No}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|chest}} {{BlockSprite|trapped-chest}} {{BlockSprite|ender-chest}} 打开或关闭[[箱子]]、[[陷阱箱]]和[[末影箱]]
+| {{tc|no}}
+| {{tc|no}}
+|-
+| {{BlockSprite|shulker-box}} 打开或关闭[[潜影盒]]
+| {{tc|no}}
+| {{tc|yes}}
+|-
+| {{BlockSprite|barrel}} 打开或关闭[[木桶]]
+| {{tc|yes}}
+| {{tc|yes}}
+|-
+| {{BlockSprite|chest}} [[箱子]]、[[陷阱箱]]、[[潜影盒]]、[[木桶]]、[[炼药锅]]、[[堆肥桶]]、[[蜂巢（方块）|蜂巢]]与[[蜂箱]]这些能用[[红石比较器]]检测的方块的方块状态或方块实体的变化
+| {{tc|Yes}}
+| {{tc|No}}
+|-
+| {{BlockSprite|ender-chest}} 除箱子、陷阱箱、潜影盒、木桶、炼药锅、蜂巢与蜂箱之外能用红石比较器检测的方块的方块状态或方块实体的变化
+| {{tc|No}}
+| {{tc|No}}
+|-
+| {{BlockSprite|beacon}} 激活或停用[[信标]]
+| {{tc|No}}
+| {{tc|No}}
+|-
+| {{BlockSprite|command block}} [[命令方块]]成功执行命令
+| {{tc|No}}
+| {{tc|No}}
+|-
+| {{BlockSprite|hopper}} 锁定或解锁[[漏斗]]（打开或关闭漏斗）
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|campfire}} {{BlockSprite|soul campfire}}在[[营火]]或[[灵魂营火]]上放置物品
+| {{tc|Yes}}
+| {{tc|No}}
+|-
+| {{BlockSprite|farmland}} 干燥的[[耕地]]在外观相同的6个湿润等级之间变化
+| {{tc|No}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|farmland wet}} [[耕地]]在干燥和湿润之间变化
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|dropper}} {{BlockSprite|dispenser}} {{BlockSprite|crafter}}激活或撤销激活[[发射器]]、[[投掷器]]、[[合成器]]
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|copper-bulb}} 激活或撤销激活、点亮或熄灭任意[[铜灯]]
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|redstone ore}} [[红石矿石]]亮起或熄灭
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|grass-block}} [[泥土]]和[[草方块]]之间的转变
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|saplings}} {{BlockSprite|sugar cane}} {{BlockSprite|bamboo}} {{BlockSprite|kelp}} {{BlockSprite|fire}}  [[树苗]]、[[甘蔗]]、[[竹子]]、[[海带]]和[[火]]的（生长）阶段变化
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+|{{BlockSprite| cactus-side}}[[仙人掌]]的生长<code>age</code>变化<ref>仙人掌会发出使侦测器响应的状态更新，但是侦测器放置在仙人掌旁边会使其掉落</ref>
+|{{tc|Yes}}
+|{{tc|Yes}}
+|-
+| {{BlockSprite|brewing-stand}} 向[[酿造台]]放入或取出[[药水]]等除[[烈焰粉]]外的物品
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|dragon-head}} 激活或撤销激活[[龙首]]
+| {{tc|Yes}}
+| {{tc|No}}
+|-
+| {{ItemSprite|item-frame}} 放置或移除[[物品展示框]]、向其添加或移除物品、旋转其内的物品
+| {{tc|Yes}}
+| {{tc|No}}
+|-
+| {{ItemSprite|sign}} 改变[[告示牌]]内容
+| {{tc|Yes}}
+| {{tc|No}}
+|-
+| {{BlockSprite|end-gateway}} 通过[[末地折跃门方块]]传送
+| {{tc|Yes}}
+| {{tc|No}}
+|-
+| {{BlockSprite|flower-pot}} 向[[花盆]]添加或移除植物
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|redstone-repeater}} 锁定或解锁[[红石中继器]]
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|walls}} {{BlockSprite|tripwire}} {{BlockSprite|melon-stem}} [[墙]]、[[绊线]]、[[西瓜茎]]与[[南瓜茎]]的形状变化
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|fences}} {{BlockSprite|iron-bars}} {{BlockSprite|stained-glass-panes}} {{BlockSprite|stairs}} {{BlockSprite|redstone-dust}} {{BlockSprite|vines}} [[栅栏]]、[[铁栏杆]]、[[玻璃板]]、[[楼梯]]、[[红石粉]]、[[藤蔓]]的形状变化
+| {{tc|No}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|grass-block}} {{BlockSprite|mycelium}} {{BlockSprite|podzol}} [[草方块]]、[[菌丝体]]或[[灰化土]]变得有[[雪]]或没有[[雪]]
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|note-block}} 使用或激活/撤销激活[[音符盒]]
+| {{tc|No}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|jukebox}} [[唱片机]]播放或取出唱片
+| {{tc|No}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|sugar-cane}} 使用[[骨粉]]催熟[[甘蔗]]{{only|be|short=1}}
+| {{tc|Yes}}
+| {{tc|No}}
+|-
+| {{BlockSprite|oak-door}} {{BlockSprite|spruce-door}} {{BlockSprite|birch-door}} {{BlockSprite|jungle-door}} {{BlockSprite|acacia-door}} {{BlockSprite|dark-oak-door}} {{BlockSprite|iron-door}} [[门]] 的开关变化
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|Observer}} 侦测器亮起或熄灭
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| 所有其他[[方块]]或[[方块状态]]的变化
+| {{tc|Yes}}
+| {{tc|Yes}}
+|-
+| {{BlockSprite|water}} {{BlockSprite|lava}} 水与熔岩的<code>level</code>变化
+| {{tc|yes}}
+| {{tc|Yes}}
+|}
+
+== 音效 ==
+{{Sound table/Block/Stone}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Observer
+|spritetype=block
+|nameid=observer
+|showblocktags=je
+|blocktags={{GameTag|block|observer}}
+|showitemtags=je
+|itemtags={{GameTag|item|observer}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Observer
+|spritetype=block
+|nameid=observer
+|showblocktags=be
+|blocktags={{GameTagBE|block|observer}}
+|showitemtags=be
+|itemtags={{GameTagBE|item|observer}}
+|foot=1
+}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+== 历史 ==
+{{update|行文需优化。|section=1}}
+{{HistoryTable
+|{{HistoryLine||2012年11月24日|link= https://youtube.com/watch?v=YG9RNyRhIow?t=5m42s|在宣布即将发布的1.5[[红石更新]]时，[[Jeb]]提到对红石逻辑的更改可能会破坏现有的[[BUD]]功能，因此，可能需要以更加长久、有意的方式在游戏中实现方块更新检测，而不是作为一个行为怪癖。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.11|dev=16w39a|[[File:Observer JE1.png|32px]] [[File:Observer (back) JE1.png|32px]] 加入了侦测器。此时侦测器充当[[Tutorial:方块更新感应器|方块更新感应器]]，并且会发出持续1[[游戏刻]]（0.5[[红石刻]]），强度为1的脉冲。侦测器也可以充能方块（像[[红石中继器]]那样）。侦测器在探测到方块更新后会无延迟地发出脉冲，这意味着侦测器在本质上是即时生效的。侦测器也以侦测面或输入端朝向玩家放置。}}
+|{{HistoryLine|||dev=16w41a|侦测器发出的脉冲的持续时间改为4游戏刻（2红石刻）<ref>{{bug|MC-107410|||Fixed}}</ref>，脉冲强度改为15。<ref>{{bug|MC-107783|||Fixed}}</ref>
+|侦测器输出时的方块更新范围出现问题。原先被侦测器通过强充能所激活的元件，需要提供方块更新才能正常被激活或取消激活。 <ref>{{bug|MC-108696|||Fixed}}</ref>
+|侦测器现在可以以输出端朝向玩家地放置。<ref>{{bug|MC-107934|||Fixed}}</ref>
+|修复了侦测器会连接4个方向的红石线的漏洞。<ref>{{bug|MC-107795|||Fixed}}</ref> （红石线应该只连接侦测器的输出端。）}}
+|{{HistoryLine|||dev=16w42a|为了让侦测器的行为变得更可预测，开发者尝试使侦测器不再探测从空气方块发出的方块更新。<ref>{{bug|MC-107730|||Fixed}}</ref>在此过程中，他们稍微破坏了红石机制，致使前一个快照的方块更新范围的漏洞也会影响红石中继器和红石比较器。<ref>{{bug|MC-108897|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=16w43a|[[File:Observer JE2.png|32px]] [[File:Observer (back) JE2.png|32px]] 修复了侦测器“箭头”纹理的旋转，使它指向了正确的方向。
+|常规红石电路会像16w42a之前那样工作，但发生了如下所述的更改。
+|侦测器现在会像在16w39a里的那样输出强充能，除了侦测器、红石中继器以及红石比较器都不再向透明方块或空气提供方块更新。}}
+|{{HistoryLine|||dev=16w44a|回退了16w42a和16w43a中关于红石的方块更新的更改。
+|侦测器的行为被重新定义。侦测器从一个方块更新探测器变成一个方块状态更改探测器。侦测器被修改为探测方块的更改、基础方块状态的更改或方块被放置或摧毁。侦测器不会探测扩展方块状态的更改，也不会探测世界被卸载后未被保存的更改。此更改使得侦测器的行为变得更可预测，因为意料之外的或隐形的方块更新不再触发侦测器。<ref>{{bug|MC-107760|||Fixed}}</ref>
+|侦测器激活时发出的脉冲的持续时间被更改为2游戏刻（1红石刻）。<ref>{{bug|MC-108697|||Fixed}}</ref>
+|侦测器不再立即输出信号。<ref>{{bug|MC-107623|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=1.11-pre1|[[File:Observer JE3.png|32px]] [[File:Observer (back) JE3.png|32px]] 更改了侦测器的纹理。
+|[[File:Active Observer (back) JE1.png|32px]] 现在侦测器输出面的红石在其输出信号时会红色闪烁。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，侦测器的数字ID为218。
+|由于[[扁平化]]，侦测器现在可以侦测到所有方块的状态变化。}}
+|{{HistoryLine|||dev=pre4|侦测器被放置时不再发出红石信号。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Observer JE4.png|32px]] [[File:Observer (back) JE4.png|32px]] [[File:Active Observer (back) JE2.png|32px]] 更改了侦测器的纹理。}}
+|{{HistoryLine||1.16|dev=20w07a|由于[[下界石英]]可以通过与[[猪灵]]以物易物来获得，侦测器成为可再生资源。}}
+|{{HistoryLine|||dev=20w10a|现在可以在侦测器侧面放置[[梯子]]和[[绊线钩]]。}}
+|{{HistoryLine|||dev=20w14a|侦测器现在能正确检测栅栏的状态变化了。}}
+|{{HistoryLine|||dev=pre3|[[File:Active Observer (back) JE3.png|32px]] 更改了侦测器被激活时方块背面的纹理。}}
+|{{HistoryLine||1.20.5|dev=pre1|exp=update_1_21|现在试炼密室决斗室中会生成包含侦测器的附加结构。}}
+|{{HistoryLine||1.21|dev=24w18a|侦测器及其所属结构从试炼密室中移除。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||2016年5月2日|link=none|[[Jeb]]发布推特说[[Daniel Wustenhoff]]正在开发一种新设备，它会像[[Tutorial:方块更新感应器|BUD]]方块那样工作。<ref>{{tweet|jeb|727043609552367616|Hype train! @darngeek is working on a device that will act as a proper BUD block in MC:PE (PC eventually), currently called "Observer"|2016年5月2日}}</ref>
+|[[File:Observer_(front_texture)_pre-BE.png|32px]] [[Tommaso Checchi]] 发布了他对侦测器的“被驳回的图像”。<ref>{{tweet|tomcc|727044087522713600|Here's my rejected graphics for the Observer, because @darngeek has no artistic sensibility|May 2, 2016}}</ref>}}
+|{{HistoryLine||0.15.0|dev=build 1|[[File:Observer BE1.png|32px]] [[File:Observer (back) BE1.png|32px]] 加入了侦测器。}}
+|{{HistoryLine||0.15.3|侦测器的放置方式现在类似于[[活塞]]而不是[[木头]]。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.3|[[File:Observer BE2.png|32px]] [[File:Observer (back) BE2.png|32px]] 侦测器的顶部纹理现在不再UV锁定了。<ref>{{bug|MCPE-15502|||Fixed}}</ref>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|[[File:Observer BE3.png|32px]] [[File:Observer (back) BE3.png|32px]] 更改了侦测器的纹理以匹配{{el|je}}。
+|[[File:Active Observer (back) BE1.png|32px]] 现在侦测器输出面的红石在其输出信号时会红色闪烁。
+|侦测器现在可以检测更多的方块更改。
+|增强了侦测器输出的红石脉冲的强度，并且在侦测缩回活塞时不再发出两次脉冲。
+|打开和关闭命令方块屏幕不再激活侦测器。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Observer BE4.png|32px]] [[File:Observer (back) BE4.png|32px]] [[File:Active Observer (back) BE2.png|32px]] 更改了侦测器的纹理。}}
+|{{HistoryLine||1.16.0|dev=1.15.0.53|侦测器被放置时不再发出红石信号。}}
+|{{HistoryLine|||dev=1.16.0.51|侦测器能检测西瓜茎、南瓜茎与墙的形状变化了。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.55|侦测器被活塞移动时不再停留在被激活的状态。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.23|现在试炼密室决斗室中会生成包含侦测器的附加结构。}}
+|{{HistoryLine|||dev=1.21.0.24|侦测器及其所属结构从试炼密室中移除。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU54|xbone=CU44|ps3=1.52|psvita=1.52|ps4=1.52|wiiu=Patch 24|switch=1.0.4|[[File:Observer BE3.png|32px]] [[File:Observer (back) BE3.png|32px]] 加入了侦测器。}}
+|{{HistoryLine||xbox=TU57|xbone=CU49|ps3=1.57|psvita=1.56|ps4=1.56|wiiu=Patch 27|switch=1.0.7|侦测器现在能检测[[物品展示框]]和[[花盆]]的状态变化了。}}
+|{{HistoryLine||xbox=TU63|xbone=CU53|ps3=1.67|psvita=1.67|ps4=1.67|wiiu=Patch 32|switch=1.0.13|[[File:Active Observer (back) BE1.png|32px]] 现在侦测器输出面的红石在其输出信号时会红色闪烁。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Observer BE4.png|32px]] [[File:Observer (back) BE4.png|32px]] [[File:Active Observer (back) BE2.png|32px]] 更改了侦测器的纹理。}}
+
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|[[File:Observer BE1.png|32px]] [[File:Observer (back) BE1.png|32px]] 加入了侦测器。{{info needed|当时的侦测器顶部UV锁定吗？}}}}
+}}
+
+== 你知道吗 ==
+* 现在侦测器前后两端纹理有差别，这是因为[[Jeb]]经常把侦测器前后搞混，从而对其纹理（尤其是侦测面）作了修改。他说现在的纹理受到了Tommaso Checchi制作的“被驳回的图像”的启发。<ref>{{tweet|jeb_|795625080067866624|I kept confusing myself which side was front and back, so here's something inspired by the works of @_tomcc http://i.imgur.com/IK2d8m2.png}}</ref><ref>{{tweet|tomcc|727044087522713600|Here's my rejected graphics for the Observer, because @darngeek has no artistic sensibility|May 2, 2016}}</ref>
+
+== 画廊 ==
+<gallery>
+File:Frowny Observers.png|Java版侦测器新纹理的首张图像
+File:Observer each other.gif|两个互相侦测对方的侦测器，可从两侧的红石线上观察到其发出的红石信号
+</gallery>
+
+== 参见 ==
+* [[Tutorial:方块更新感应器]]
+* [[红石比较器]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[de:Beobachter]]
+[[en:Observer]]
+[[es:Observador]]
+[[fr:Observateur]]
+[[it:Osservatore]]
+[[ja:オブザーバー]]
+[[ko:관측기]]
+[[nl:Observeerder]]
+[[pl:Detektor]]
+[[pt:Observador]]
+[[ru:Наблюдатель]]
+[[uk:Спостерігач]]

@@ -1,0 +1,269 @@
+# 页面: Java版24w36a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w36a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Dangerous version|对船使用{{ctrl|选取方块}}、船被烧毁、三只骷髅及以上骷髅即将射箭都会导致游戏崩溃。<ref>{{bug|MC-276476|||Fixed}}</ref><ref>{{bug|MC-276383|||Fixed}}</ref><ref>{{bug|MC-276533|||Fixed}}</ref>}}
+
+{{Infobox version
+|title=24w36a
+|image=24w36a.png
+|image2=Java Edition 24w36a Simplified.png\Java Edition 24w36a Traditional.png\Java Edition 24w36a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年9月4日
+|jsonhash=d92c822631962d180baa23285397fb46a8fc2b4e
+|clienthash=28ff7dc5f3a5e1759bfc4e05eab3590b23c30c6f
+|clientmap=b9b745676050e51b9996223ba8383e3f5bb9e851
+|serverhash=30663a50aaf407751ae9e704758364ed9433206d
+|servermap=7124c6d09c711626b75d2e45c2f8d82e7fe70bbf
+|parent=1.21.2
+|prevparent=1.21.1
+|prev=24w35a
+|next=24w37a
+|nextparent=1.21.3
+}}<onlyinclude>
+
+'''24w36a'''是[[Java版1.21.2]]的第4个快照，发布于2024年9月4日<ref>{{snap|24w36a|September 4, 2024}}</ref>，加入了新的物品堆叠组件、标签和模型格式以允许玩家自定义盔甲，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[物品堆叠组件]]'''
+* 加入了{{cd|item_model}}组件，控制物品的模型，是所有物品的默认组件之一。
+** {{nbt|string|item_model}}：物品模型的命名空间ID，调用位于{{filepath|-{}-/assets/<''命名空间''>/models/item/<''id''>}}的模型。
+* 加入了<code>equippable</code>组件。
+** 组件存在时，此物品能被玩家通过物品栏或在主手中右键以装备。
+<div class="treeview">
+:* {{nbt|compound|equippable}} 物品堆叠组件
+:** {{nbt|string|slot|required=1|existonsave=1}}：单一槽位，需为{{cd|d=、|head|chest|legs|feet|body|mainhand|offhand}}之一。
+:** {{nbt|string}}{{nbt|compound|equip_sound}}：物品被装备时播放的[[Java版声音事件|声音事件]]。未指定时，使用默认装备声音事件。
+:*** {{nbt inherit/sound event}}
+:** {{nbt|string|model}}：装备模型的命名空间ID。未指定时，若物品被装备到头部，则会渲染物品自身，否则不渲染。
+:** {{nbt|string}}{{nbt|list|allowed_entities}}：能装备此物品的实体ID、标签或实体ID列表。未指定时，任意实体均可穿戴此物品。
+:** {{nbt|bool|dispensable}}：（默认为<code>true</code>）物品是否可由发射器装备。如果物品在发射器中具有特殊功能，则装备无效。
+</div>
+:* 示例：<code>equippable={slot:'chest',equip_sound:'item.armor.equip_chain'}</code>。
+* 加入了<code>glider</code>组件。
+** 存在时，物品能像[[鞘翅]]一样允许将物品装备到{{cd|equippable}}组件指定槽位的玩家滑翔。
+** 示例：<code>glider={}</code>。
+* 加入了<code>tooltip_style</code>组件。
+** 存在时，物品将此自定义精灵图用作其提示框背景和边框。
+** {{nbt|string|tooltip_style}}：提示框样式的命名空间ID，如<code>-{}-<命名空间>:<路径></code>将调用{{filepath|-{}-assets/<''命名空间''>/textures/gui/sprites/tooltip/<''路径''>_background}}和{{filepath|-{}-assets/<''命名空间''>/textures/gui/sprites/tooltip/<''路径''>_frame}}。
+** 示例：<code>tooltip_style='minecraft:special_sword'</code>。
+
+'''[[实体谓词#玩家|玩家子谓词]]'''
+* 加入了<code>input</code>字段以用于检测玩家按下的移动键位。目前支持以下输入：
+** {{nbt|bool|forward}}：{{ctrl|前进}}。
+** {{nbt|bool|backward}}：{{ctrl|后退}}。
+** {{nbt|bool|left}}：{{ctrl|向左}}。
+** {{nbt|bool|right}}：{{ctrl|向右}}。
+** {{nbt|bool|jump}}：{{ctrl|跳跃}}。
+** {{nbt|bool|sneak}}：{{ctrl|潜行}}。
+** {{nbt|bool|sprint}}：{{ctrl|疾跑}}。
+
+'''[[Java版标签|标签]]'''
+* 加入了下列方块标签：
+** {{cd|#bats_spawnable_on}}：{{cd|#base_stone_overworld}}。
+*** [[蝙蝠]]能在其上方生成的方块。
+* 加入了下列物品标签：
+** {{cd|#repairs_leather_armor}}：{{cd|leather}}。
+*** 用于修复皮革质装备的物品。
+** {{cd|#repairs_iron_armor}}：{{cd|iron_ingot}}。
+*** 用于修复铁质装备的物品。
+** {{cd|#repairs_chain_armor}}：{{cd|iron_ingot}}。
+*** 用于修复锁链质装备的物品。
+** {{cd|#repairs_gold_armor}}：{{cd|gold_ingot}}。
+*** 用于修复金质装备的物品。
+** {{cd|#repairs_diamond_armor}}：{{cd|diamond}}。
+*** 用于修复钻石质装备的物品。
+** {{cd|#repairs_netherite_armor}}：{{cd|netherite_ingot}}。
+*** 用于修复下界合金质装备的物品。
+** {{cd|#repairs_turtle_helmet}}：{{cd|turtle_scute}}。
+*** 用于修复[[海龟壳]]的物品。
+** {{cd|#repairs_wolf_armor}}：{{cd|armadillo_scute}}。
+*** 用于修复[[狼铠]]的物品。
+** {{cd|#piglin_safe_armor}}：{{cd|d=pretty|golden_helmet|golden_chestplate|golden_leggings|golden_boots}}。
+*** 被玩家穿着时不会激怒[[猪灵]]的物品，用于进度文件{{filepath|nether/distract_piglin.json}}。
+
+'''[[资源包]]'''
+* 现在可以自定义提示框了。
+** 提示框的背景与边框分别由{{cd|d=pretty|tooltip/background|tooltip/frame}}精灵图控制。
+** 如在物品堆叠组件中设置<code>tooltip_style</code>组件为<code>-{}-<''命名空间''>:<''路径''></code>，该物品的提示框将由{{cd|d=pretty|-{}-<''命名空间''>:tooltip/<''路径''>_background|-{}-<''命名空间''>:tooltip/<''路径''>_frame}}精灵图控制。
+
+'''[[装备模型]]'''
+* 装备模型定义位于{{filepath|-{}-assets/<''命名空间''>/models/equipment/<''路径''>.json}}，可被<code>equippable</code>组件调用。
+<div class="treeview">
+:* {{nbt|compound}} 父标签
+:** {{nbt|compound|layers}}
+:*** {{nbt|list|wolf_body}}：类似于狼铠，仅会在狼的身体槽位中渲染的盔甲纹理层。
+:*** {{nbt|list|horse_body}}：类似于马铠，仅会在马的身体槽位中渲染的盔甲纹理层。
+:*** {{nbt|list|llama_body}}：类似于地毯，仅会在羊驼、行商羊驼的身体槽位中渲染的纹理层。
+:*** {{nbt|list|humanoid}}：人-{}-形生物的头盔、胸甲和靴子使用的纹理层。
+:*** {{nbt|list|humanoid_leggings}}：人-{}-形生物的护腿使用的纹理层。
+:*** {{nbt|list|wings}}：鞘翅使用的纹理层。
+</div>
+:* 每个纹理层列表中包含多个层对象，格式如下：
+<div class="treeview">
+::* {{nbt|compound}} 父标签
+::** {{nbt|string|texture|required=1}}：纹理的命名空间ID，如<code>-{}-<''命名空间''>:<''路径''></code>会被解析为{{filepath|-{}-assets/<''命名空间''>/textures/entity/equipment/<''层类型''>/<''路径''>.png}}。
+::** {{nbt|compound|dyeable}}：具有<code>#dyeable</code>物品标签且具有<code>dyed_color</code>组件的物品被染色时的层行为。存在时，此纹理层会以<code>dyed_color</code>组件内的颜色渲染。
+::*** {{nbt|int|color_when_undyed}}：（RGB）物品不可染色或未染色时使用的颜色。如果此值不存在，则此纹理层会被隐藏。
+::** {{nbt|bool|use_player_texture}}：（默认为<code>false</code>）如果为<code>true</code>，则此纹理层能够被从玩家档案获取的纹理覆盖。仅用于会被玩家的自定义鞘翅纹理覆盖的<code>wings</code>层。
+</div>
+* 示例：
+{{file display|assets/minecraft/models/models/equipment/iron|json|<nowiki>{
+  "layers": {
+    "horse_body": [
+      { "texture": "minecraft:iron" }
+    ],
+    "humanoid": [
+      { "texture": "minecraft:iron" }
+    ],
+    "humanoid_leggings": [
+      { "texture": "minecraft:iron" }
+    ]
+  }
+}
+</nowiki>}}
+
+== 更改 ==
+=== 方块 ===
+'''[[绊线钩]]'''
+* 计算沿线方块的连接状态时，尝试设置方块<code>attached</code>状态的行为现在会在遇到非[[绊线]]且非绊线钩方块时跳过，而非仅在遇到空气时跳过。
+
+=== 物品 ===
+'''[[马铠]]'''
+* 马身上的马铠现在会渲染魔咒[[光效]]。
+
+'''[[刷怪蛋]]'''
+* 鱿鱼刷怪蛋现在只会生成成年鱿鱼。
+
+'''[[提示框]]'''
+* 移除了物品提示框的内边距。<ref>{{bug|MC-276301|||Fixed}}</ref>
+
+'''[[物品耐久]]'''
+* 现在具有<code>glider</code>组件且装备在<code>equippable</code>组件指定槽位中的物品会在生物滑翔时消耗耐久。
+
+=== 生物 ===
+'''[[海豚]]'''
+* 现在幼年海豚有10%的概率自然生成。
+
+'''[[鱿鱼]]'''
+* 现在生成时会有5%的概率是幼年鱿鱼。
+
+'''[[生物转化]]'''
+* 现在一种生物转化为另一种生物时，原生物的部分序列化数据会被继承，包括[[生命值]]、[[属性]]、[[状态效果]]、动量、下落高度、[[乘客]]、[[队伍]]和装备等。
+** 如果生物的[[属性/最大生命值|最大生命值属性]]未被序列化，它的生命值会按先后生物种类的最大生命值等比转换。
+
+=== 游戏内容 ===
+'''[[盔甲材料]]'''
+* 盔甲材料不再具有[[注册表]]。
+* 现在盔甲材料不再决定盔甲的属性修饰符和修复物品，仅用于为原版物品提供默认组件。
+* 海龟鳞甲质材料的英文名<code>turtle</code>被重命名为<code>turtle_scute</code>。
+* 犰狳鳞甲质材料的英文名<code>armadillo</code>被重命名为<code>armadillo_scute</code>。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|52}}。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|37}}。
+* 物品覆写条件<code>broken</code>现在在所有物品模型中都可用了。
+** 之前该条件只能用于鞘翅。
+** 若物品的剩余耐久值为1，该条件的值为1，否则均为0。
+* 所有与装备相关的纹理现移动到了{{filepath|textures/entity/equipment}}的子目录中。
+** 玩家盔甲纹理现移动到了{{filepath|textures/entity/equipment/humanoid/}}和{{filepath|textures/entity/equipment/humanoid_leggings/}}。
+*** 原先<code>-{}-<''盔甲材料''>_layer_1''(_overlay)''</code>纹理现被重命名为<code>-{}-<''盔甲材料''>''(_overlay)''</code>，且移动到{{filepath|textures/entity/equipment/humanoid/}}文件夹中。
+*** 原先<code>-{}-<''盔甲材料''>_layer_2''(_overlay)''</code>纹理现被重命名为<code>-{}-<''盔甲材料''>''(_overlay)''</code>，且移动到{{filepath|textures/entity/equipment/humanoid_leggings/}}文件夹中。
+** {{filename|wolf_armor}}和{{filename|wolf_armor_overlay}}纹理现被移动到{{filepath|textures/entity/equipment/wolf_body/}}，且按盔甲材料分别重命名为{{filename|armadillo_scute}}和{{filename|armadillo_scute_overlay}}。
+** 羊驼装饰物纹理现被移动到{{filepath|textures/entity/equipment/llama_body/}}。
+** 马铠纹理现被移动到{{filepath|textures/entity/equipment/horse_body/}}。
+** 鞘翅纹理现被移动到{{filepath|textures/entity/equipment/wings/elytra}}。
+** {{filepath|textures/trims/models/armor}}中的盔甲纹饰纹理现被拆分到{{filepath|textures/trims/entity/humanoid}}和{{filepath|textures/trims/entity/humanoid_leggings}}。
+*** 原先腿部纹理文件的<code>_leggings</code>后缀现被移除。
+
+'''[[物品堆叠组件]]'''
+* <code>item_name</code>组件现在是所有物品的默认组件之一。
+* <code>trim</code>组件现在会在所有可装备物品的装备模型上渲染[[盔甲纹饰]]。
+** 盔甲纹饰纹理现在会从{{filepath|-{}-textures/trims/entity/<''模型类型''>/}}目录中加载。
+
+== 更改（实验性） ==
+=== 物品 ===
+'''[[收纳袋]]'''
+* 现在手持并使用收纳袋时只会扔出最近放入的物品，而不是其中的所有物品。
+
+== 修复 ==
+{{fixes|fixedin=24w36a|veralias=1|showdesc=1
+|;old
+|16829|马铠模型不显示附魔光效。
+|38022|渲染半透明方块面的顺序未能随相机位置更新。
+|88967|一种生物转化为另一种生物时，大多数NBT标签不会保留。
+|92875|无碰撞箱方块忽略高速实体。
+|135898|一种生物转化为另一种生物时，队伍不会保留。
+|154053|行商羊驼受到攻击时向远处喷射唾沫。
+|167242|闪电将睡在床上的村民转化为女巫后，床一直被占用。
+|186362|投射问题：半透明方块渲染在视距较高时崩溃。
+|196556|弹射物（如箭和三叉戟）移动过快时不能被传送门和末地折跃门传送。
+|196736|即使僵尸疣猪兽能被拴住，疣猪兽僵尸化时也会断开拴绳。
+|196964|一种实体转化为另一种实体时，摔落伤害重置。
+|207101|滞留药水落于玩家/AI生物头顶时，区域效果云会在其上方而非内部生成，以致滞留药水无效。
+|230317|拴绳在哞菇被修剪时消失。
+|250924|山羊角缺失音效。
+|259936|用右键装备手中的盔甲会装备整组。
+|259376|<code>ServerboundMovePlayerPacket</code>类的<code>xRot</code>能为无效值。
+|261666|给村民的盔甲在其转化为僵尸村民时丢失。
+|262598|绊线钩连接到不透明方块时，<code>attached: true</code>状态绊线钩的绊线纹理错误地渲染黑色。
+|269447|悬停文本背景框不能修改纹理。
+|270183|击中目标的头部时，滞留药水不会生效。<!--
+|270842|一种生物转化为另一种生物时，记分板分数不会保留。Reopened-->
+|271826|盔甲默认属性修饰符组件不能被移除。
+|275011|站在蜘蛛网中不能瞬间挖掘。
+|;dev
+|275228|基于创造模式快捷栏的物品复制。
+|275239|基于屏幕（创造模式）的物品复制。
+|275298|具有特殊碰撞行为的方块比之前具有更大的探测范围。
+|275299|用{{key|Ctrl}}+{{ctrl|丢弃}}键合成能合成出数量异常的物品。
+|275344|甜浆果丛造成伤害的行为与先前不一致。
+|275345|持续打乱物品的物品栏漏洞。<!--
+|275416|幼年鱿鱼或幼年发光鱿鱼在远处产生墨水粒子。Reopened-->
+|275418|喂养幼年海豚不能加速其成长。
+|275437|高速移动的实体会冻结服务端并引起监视器崩溃。
+|275445|未能指定预处理效果着色器目标的尺寸。
+|275450|玩家骑乘其他实体时，<code>Motion</code>数据不再更新。
+|275455|相对传送不再保留玩家的动量。
+|275462|蝙蝠能生成在不寻常的地方，如在林地府邸和树下。
+|275497|盔甲物品没有默认的<code>repairable</code>物品堆叠组件。
+|275537|随蜂蜜块下滑比上个版本慢。
+|275622|与上个正式版相比，TNT矿车更不稳定。
+|275624|具有自定义模型的红石线意料之外地泛绿。
+|275638|仍能在通过投掷激流三叉戟高速移动时穿过传送门。
+|275642|幼年海豚不会自然生成。
+|275655|使用{{cmd|teleport|link=none}}命令时，除非重新加载世界，否则实体视角不会更新。
+|275745|显示模式为<code>below_name</code>的记分板对象渲染于玩家名称的正后方。
+|275767|骑乘被不断传送的实体时，视角不断抖动。
+|275770|守卫者激光攻击保持黄色且不再改变。
+|276027|盔甲架上的胸甲和靴子渲染头盔层纹理。
+|276030|告示牌的蓝色高亮文本背景消失了。
+|276064|通过骨粉催熟草方块生成的高草丛会删除其上方的第二个方块。
+|;prev
+|276122|灵魂沙和岩浆块气泡柱不会竖直移动创造模式下未飞行的玩家。
+|276132|半透明层排序似乎略有损坏。
+|276179|僵尸村民攻击时不再有抬手动作。
+|276204|海豚和美西螈一直尝试游进海床。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:24w36a]]
+[[en:Java Edition 24w36a]]
+[[es:Java Edition 24w36a]]
+[[fr:Édition Java 24w36a]]
+[[ja:Java Edition 24w36a]]
+[[pt:Edição Java 24w36a]]
+[[ru:24w36a (Java Edition)]]
+[[uk:24w36a (Java Edition)]]

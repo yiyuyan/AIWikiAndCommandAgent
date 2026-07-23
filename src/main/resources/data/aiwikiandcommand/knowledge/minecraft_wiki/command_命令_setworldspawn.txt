@@ -1,0 +1,88 @@
+# 页面: 命令/setworldspawn
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/setworldspawn
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=setworldspawn
+|oplevel=2\1
+|becheat=1
+}}
+
+设置[[世界出生点]]。
+
+== 用法 ==
+{{in|BE}}此命令只能用于[[主世界]]，不能用于其他[[维度]]。
+
+出生点扩散半径由{{gamerule|respawn_radius|spawnRadius}}控制。
+
+== 语法 ==
+* '''Java版'''
+: <code>setworldspawn [<pos>] [<rotation>]</code>
+
+* '''基岩版'''
+: <code>setworldspawn [spawnPoint: x y z]</code>
+
+== 参数 ==
+{{argument|pos|block_pos|spawnPoint: x y z|CommandPositionFloat}}
+: 指定[[世界出生点]]坐标。若没有指定，默认为命令执行位置所在的方块位置。
+: {{IN|java}}<''x''>或<''z''>应在[-30000000, 30000000)区间内，<''y''>应在[-20000000, 20000000)区间内。
+: {{in|be}}大于30,000,000和小于-30,000,000的<''x''>和<''z''>值会分别被设置为30,000,000和-30,000,000，大于319和小于-64的<''y''>值会被分别设置为319和-64。
+: {{IN|java}}{{arg desc|je=block_pos}}
+: {{IN|bedrock}}{{arg desc|be=CommandPositionFloat}}
+
+{{el|je|short=1}}：{{argument|rotation|rotation}}
+: 指定出生时的旋转角，默认为{{cd|0 0}}。
+: {{arg desc|je=rotation}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|执行维度不是[[主世界]]|success|failed}}
+{{Result table|指定的<''x''>或<''z''>超出[-30000000, 30000000)或<''y''>超出[-20000000, 20000000)|fail|success}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 将当前命令的执行位置设置为主世界出生点（同时改变主世界出生点区块）：{{cd|/setworldspawn ~ ~ ~}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w43a|加入了{{cmd|setworldspawn|link=none}}。}}
+|{{HistoryLine||1.16.2|dev=20w29a|现在可以设置玩家重生时面朝的水平角度。}}
+|{{HistoryLine||1.17|dev=21w10a|{{cmd|setworldspawn|link=none}}现在不允许<''x''>或<''z''>超出[-30000000, 30000000)或<''y''>超出[-20000000, 20000000)。<ref>{{bug|MC-210408|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.5|dev=24w03a|现在在主世界以外的维度使用会执行失败。在这之前，如果在其他维度执行此命令，此命令将表现为成功运行，然而世界出生点并不会改变。}}
+|{{HistoryLine||1.21.6|dev=pre1|现在水平角度参数总是生效。<ref>{{bug|MC-200092|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.9|dev=pre1|现在可以设置玩家重生时面朝的垂直角度。
+|现在{{cmd|setworldspawn|link=none}}命令可在任意维度中执行。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|setworldspawn|link=none}}。}}
+}}
+
+== 参见 ==
+* {{cmd|spawnpoint}}
+* {{cmd|clearspawnpoint}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/setworldspawn]]
+[[en:Commands/setworldspawn]]
+[[fr:Commandes/setworldspawn]]
+[[ja:コマンド/setworldspawn]]
+[[pt:Comandos/setworldspawn]]
+[[ru:Команды консоли/setworldspawn]]
+[[uk:Команди консолі/setworldspawn]]

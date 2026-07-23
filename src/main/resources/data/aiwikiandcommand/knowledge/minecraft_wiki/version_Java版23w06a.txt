@@ -1,0 +1,314 @@
+# 页面: Java版23w06a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8823w06a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=23w06a
+|image=23w06a.png
+|image2=Java Edition 23w06a Simplified.png\Java Edition 23w06a Traditional.png\Java Edition 23w06a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2023年2月8日
+|jsonhash=92ed97b686fe8904d8ec00fd486c435582fd0155
+|clienthash=824248d1bfd3ab53c6bd0b6568a4ad86d772bd04
+|clientmap=eb346f0182a6c81b3fcccbe586ebe9dcc729e498
+|serverhash=daaed1fac98d17bd76f8fd43268f1c1b97230b59
+|servermap=1ce40d5437e644ef89545dc70f0efae1877c3ae4
+|parent=1.19.4
+|prevparent=1.19.3
+|prev=23w05a
+|next=23w07a
+|nextparent=1.20
+}}<onlyinclude>
+
+'''23w06a'''是[[Java版1.19.4]]的第4个快照，发布于2023年2月8日<ref>{{snap|23w06a|February 8, 2023}}</ref>，加入了3种[[展示实体]]、{{cmd|damage}}命令、伤害类型和伤害类型[[Java版标签|标签]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 非生物实体 ===
+'''[[展示实体]]'''
+* 包括方块展示实体、物品展示实体和文本展示实体三个实体，其ID分别为{{cd|d=pretty|block_display|item_display|text_display}}，分别用于灵活展示方块、物品和文本。 
+** 与[[标记]]（{{cd|marker}}）相同，不会导致任何更新，不会与其他实体碰撞，没有物理效果。
+** 模型在实体所在的位置渲染，并正常绕X轴和Y轴旋转（即可以被传送类命令控制旋转角度），但同时也受到任意的模型变换影响<!--but also with additional arbitrary model transform.-->。
+* 加入了2种新的数据类型，每种数据类型接受2种形式，但只有其中1个用于存档，如下所示：
+** {{cd|rotation}}
+*** 四元数形式（用于存档）：由4个数字组成的数组，分别描述 (x, y, z, w) 这4个分量。
+*** 轴-角度形式：具有以下字段的复合标签：
+**** {{cd|axis}}：三维向量。
+**** {{cd|angle}}：角度（弧度制）。
+** {{cd|transformation}}：任意的仿射变换，由以下字段组成并由以下顺序合成：
+*** 矩阵形式：由16个数字组成的数组，描述一个{{tr|行主序（Row-major）|列主序（Row-major）}}矩阵。
+*** 分解形式（用于存档）：具有以下字段的复合标签：
+**** {{cd|translation}}：三维向量。
+**** {{cd|left_rotation}}：{{cd|rotation}}{{tr|对象|物件}}。
+**** {{cd|scale}}：三维向量。
+**** {{cd|right_rotation}}：{{cd|rotation}}{{tr|对象|物件}}。
+* 这些实体的部分属性可插值，以在客户端营造渐变效果，而非跳跃式的突变。
+** 这些实体会记录插值的“当前值”和“先前值”：
+*** 以下所有被标记为“可插值”的属性都是单个插值集的一部分。
+*** 所有对可插值的属性的更新都会导致插值集里面的所有值被保存为“当前值”。
+**** 不改变属性值的data命令的执行（即便属性存在于NBT中）不算作更新。
+**** 每个刻同步到客户端的更新最多只有一次，即命令内的多个更新依然算一次更新。
+*** 上一批“当前值”被保存为“先前值”。
+*** 启用插值时，实体会随时间在“先前值”和“当前值”之间变化。
+*** 插值起点（实体完全处于“先前值”状态）由字段{{cd|interpolation_start}}（游戏时间，单位为刻）定义。
+**** 设为{{cd|-1}}将加载当前游戏时间。
+*** 插值终点（实体完全处于“当前值”状态）定义为{{cd|interpolation_start}} + {{cd|interpolation_duration}}（单位为刻）。
+* 三个实体都具有以下字段：
+** {{cd|transformation}}：{{tr|应用|套用}}于模型的{{cd|transformation}}（经过正常的实体旋转后）。默认为单位矩阵，可插值。
+** {{cd|billboard}}：用于控制这些实体渲染时是否应该旋转面对玩家：
+*** {{cd|fixed}}：无旋转（默认）。
+*** {{cd|vertical}}：实体可绕垂直轴旋转。
+*** {{cd|horizontal}}：实体可绕水平轴旋转。
+*** {{cd|center}}：实体可以绕中心点旋转。
+** {{cd|brightness}}：若存在，覆盖渲染所用的亮度值。默认省略（即渲染时会使用实体所在的地方的光照）。该复合标签有两个字段：
+*** {{cd|sky}}：天空光照的值，0至15。
+*** {{cd|block}}：方块光照的值，0至15。
+** {{cd|view_range}}：此实体的最大可视范围。实际距离也取决于客户端的{{tr|渲染距离|顯示距離}}和{{tr|实体渲染距离|實體顯示距離}}。默认值为1.0（与[[火球]]大致相同）。
+** {{cd|shadow_radius}}：实体阴影的大小。默认为0（无阴影）。可插值。
+** {{cd|shadow_strength}}：实体阴影的强度。作为随与下方方块的距离而变化的函数，控制阴影的不透明度。默认为1。可插值。
+** {{cd|d=pretty|width|height}}：描述剔除边界框（Culling bounding box）的大小。边界框自实体位置的所有方向纵向伸展{{cd|y}}至{{cd|y+height}}，横向伸展{{cd|width/2}}。<!--Bounding box spans vertically {{cd|y}} to {{cd|y+height}} and horizontally {{cd|width/2}} in all directions from entity position.-->若其中一个字段设为0，则禁用剔除。默认都为0。
+** {{cd|glow_color_override}}：覆盖发光边框颜色。默认为0（使用队伍的颜色）。
+* 除去这些共通字段外，各个实体由于其类型不同，也具有一些特有字段：
+** 物品展示实体（{{cd|item_display}}）：展示单个物品堆（Item stack，可通过命令设置槽位{{cd|inventory.0}}更改）。
+*** {{cd|item}}：要展示的物品，格式与物品栏中物品的相同。
+**** 示例：{{cd|{id: "minecraft:dirt", Count: 1} }}
+*** {{cd|item_display}}：描述{{tr|应用|套用}}到物品模型的变换（定义于模型JSON的{{cd|display}}部分）：
+**** 可用值：{{cd|none}}（无，默认）、{{cd|d=pretty|thirdperson_lefthand|thirdperson_righthand|firstperson_lefthand|firstperson_righthand|head|gui|ground|fixed}}。
+** 方块展示实体（{{cd|block_display}}）：展示单个方块状态，但不会展示方块实体，即使在一般情况下方块放置时会随即创建方块实体（比如[[箱子]]）。<!--Displays a block state, does not display block entities, even if they would normally be created on block placement (like chest).-->
+*** {{cd|block_state}}：要展示的方块状态。格式与[[末影人]]手持的物品相同。
+**** 示例：{{cd|{Name:"minecraft:dirt"} }}
+** 文本展示实体（{{cd|text_display}}）：展示文本组件（背景使用新的着色器类型 {{cd|d=pretty|rendertype_text_background|rendertype_text_background_see_through}}）。
+*** {{cd|text}}：要展示的文本。解析文本组件时，会使用该实体所在的上下文。
+*** {{cd|line_width}}：用于控制换行的行宽（但需要插入新行也可以用{{cd|\n}}字符）。默认为200。
+*** {{cd|text_opacity}}：被渲染文本的不透明度（Alpha部分）。默认为255。可插值。
+*** {{cd|background}}：背景颜色。包括Alpha通道。默认为0x40000000。可插值。
+*** {{cd|default_background}}：若为true，则渲染时使用默认的背景颜色（与聊天栏相同）。默认为false。
+*** {{cd|shadow}}：文本是否显示阴影。默认为false。
+*** {{cd|see_through}}：文本是否可以穿透方块显示。默认为false。
+*** {{cd|alignment}}：文字对齐方向。
+**** 可用值：{{cd|center}}（默认）、{{cd|d=pretty|left|right}}。
+
+=== 命令格式 ===
+'''[[游戏规则]]'''
+* 加入了{{cd|doVinesSpread}}，默认为{{cd|true}}，用于决定[[藤蔓]]是否会向周围扩散，不影响[[洞穴藤蔓]]、[[缠怨藤]]和[[垂泪藤]]。
+
+'''{{cmd|damage}}'''
+* 用于对指定实体造成伤害，语法如下：
+** {{cmd|link=none|damage <target> <amount> [<damageType>] [at <location>]}}
+** {{cmd|link=none|damage <target> <amount> [<damageType>] [by <entity>] [from <cause>]}}
+* 参数：
+** {{cd|target}}：要被伤害的实体。
+** {{cd|amount}}：要造成的伤害值。
+** {{cd|damageType}}：要造成的伤害的类型。决定伤害影响实体的方式，以及要显示出来的[[死亡消息]]。
+** {{cd|location}}：伤害源位置（若无实体造成了伤害）。
+*** 例如，此值可代表[[下界]]中[[床]]爆炸的位置。
+** {{cd|entity}}：造成伤害的实体。
+** {{cd|cause}}：间接造成的伤害的来源实体。
+*** 例如，当实体被骷髅射箭击中时，{{cd|entity}}为[[箭]]，{{cd|cause}}为[[骷髅]]。
+
+'''{{cmd|execute}}'''
+* 加入了{{cmd|link=none|execute summon}}子命令，语法如下：
+** {{cmd|link=none|execute summon <entity> -> execute}}
+* 此子命令用于立即创建一个实体，并同时将命令执行者（{{cd|@s}}）设为此实体。此功能用于简化实体设置过程并减少对原始NBT编辑的需求。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 加入了伤害类型，作为一种新的注册表项，用于决定游戏如何处理伤害。
+** 包括伤害应该具有哪些属性，以及实体因此类型伤害死亡时需要使用哪种死亡消息。示例如下：<syntaxhighlight lang="json">
+{
+	"exhaustion": 0.1,
+ 	"message_id": "arrow",
+	"scaling": "when_caused_by_living_non_player"
+}</syntaxhighlight>
+** 已定义的字段如下：
+*** {{cd|message_id}}：用于此伤害类型的消息ID，将与其他字符串片段组合成完整的翻译字符串。
+*** {{cd|exhaustion}}：此伤害类型所造成的[[饥饿#饥饿影响|饥饿等级]]的提升量。
+*** {{cd|scaling}}：难度是否影响该伤害对玩家的伤害值，可为下列值：
+**** {{cd|never}}：难度不影响该伤害对玩家的伤害值。
+**** {{cd|always}}：难度总是影响该伤害对玩家的伤害值。
+**** {{cd|when_caused_by_living_non_player}}：难度仅在该伤害有玩家以外的生物来源时才会影响该伤害对玩家的伤害值。
+*** {{cd|effects}}：可选，伤害施加于玩家时的表现形式，可为下列值：
+**** {{cd|hurt}}（默认值）：一般受伤音效。
+**** {{cd|thorns}}：荆棘受伤音效。
+**** {{cd|drowning}}：溺水音效。
+**** {{cd|burning}}：1游戏刻的着火音效。
+**** {{cd|poking}}：甜浆果丛刺伤音效。
+**** {{cd|freezing}}：冻结音效。
+*** {{cd|death_message_type}}：可选，用于指定是否使用死亡消息的特殊变体，可为下列值：
+**** {{cd|default}}（默认值）：不显示特殊死亡消息。
+**** {{cd|fall_variants}}：显示摔落类死亡消息（如{{cd|death.fell.assist.item}}）。
+**** {{cd|intentional_game_design}}：显示“刻意的游戏设计”类死亡消息。
+** 伤害类型标签决定解释来自不同来源的伤害的方式。
+
+'''[[选项]]'''
+* 加入了“{{tr|受伤抖动效果|受傷抖動效果}}”{{tr|辅助功能|協助工具}}选项，用于控制受到伤害时视角抖动的量。
+* 在“按键绑定”屏幕中加入了按键冲突时的提示框。
+
+'''[[Java版标签|标签]]'''
+* 加入了下列伤害类型标签：
+** {{cd|#always_most_significant_fall}}：{{cd|out_of_world}}。
+** {{cd|#always_triggers_silverfish}}：{{cd|magic}}。
+** {{cd|#avoids_guardian_thorns}}：{{cd|magic}}。
+** {{cd|#burns_armor_stands}}：{{cd|on_fire}}。
+** {{cd|#bypasses_armor}}：{{cd|d=pretty|on_fire|in_wall|cramming|drown|fly_into_wall|generic|wither|dragon_breath|freeze|starve|fall|freeze|stalagmite|magic|indirect_magic|out_of_world|sonic_boom}}。
+** {{cd|#bypasses_effects}}：{{cd|starve}}。
+** {{cd|#bypasses_enchantments}}：{{cd|sonic_boom}}。
+** {{cd|#bypasses_invulnerability}}：{{cd|out_of_world}}。
+** {{cd|#bypasses_resistance}}：{{cd|out_of_world}}。
+** {{cd|#damages_helmet}}：{{cd|d=pretty|falling_anvil|falling_block|falling_stalactite}}。
+** {{cd|#ignites_armor_stands}}：{{cd|in_fire}}。
+** {{cd|#is_drowning}}：{{cd|drown}}。
+** {{cd|#is_explosion}}：{{cd|d=pretty|fireworks|explosion|player_explosion|bad_respawn_point}}。
+** {{cd|#is_fall}}：{{cd|d=pretty|fall|stalagmite}}。
+** {{cd|#is_fire}}：{{cd|d=pretty|in_fire|on_fire|lava|hot_floor|unattributed_fireball|fireball}}。
+** {{cd|#is_freezing}}：{{cd|freeze}}。
+** {{cd|#is_lightning}}：{{cd|lightning_bolt}}。
+** {{cd|#is_projectile}}：{{cd|d=pretty|arrow|trident|mob_projectile|unattributed_fireball|fireball|wither_skull|thrown}}。
+** {{cd|#no_anger}}：{{cd|mob_attack_no_aggro}}。
+** {{cd|#no_impact}}：{{cd|drown}}。
+** {{cd|#witch_resistant_to}}：{{cd|d=pretty|magic|indirect_magic|sonic_boom|thorns}}。
+** {{cd|#wither_immune_to}}：{{cd|drown}}。
+
+'''常规'''
+* 为专用服务器命令行加入了{{cd|--pidFile}}参数，用于将服务端的{{w|进程ID|{{tr|进程|行程}}ID（PID）}}写入到特定文件中。
+
+== 更改 ==
+=== 方块 ===
+'''[[唱片机]]'''
+* 现在在播放[[音乐唱片]]时会产生音符粒子，以匹配{{el|be}}。
+
+'''[[幽匿感测体]]{{anchor|新可感测动作}}'''
+* 现在可感测到属于以下游戏事件的动作：
+** {{cd|block_change}}：
+*** 使用[[剪刀]]修剪[[洞穴藤蔓]]、[[海带]]、[[缠怨藤]]和[[垂泪藤]]。
+*** 采集[[发光浆果]]。
+*** 取下[[讲台]]上的书。
+*** 与[[物品展示框]]或[[荧光物品展示框]]中的物品互动。
+*** 将[[耕地]]踩踏成[[泥土]]。
+*** 为[[重生锚]]充能。
+*** 与[[堆肥桶]]交互。
+** {{cd|block_place}}：
+*** [[海龟]]和[[青蛙]]产卵。
+** {{cd|container_close}}：
+*** 关闭[[运输矿车]]或[[运输船]]。
+** {{cd|entity_dismount}}（新游戏事件，信号强度6）：
+*** 离开载具。
+** {{cd|entity_interact}}：
+*** 给[[绵羊]]染色。
+*** 用[[拴绳]]拴住实体。
+*** 解除拴住实体的拴绳。
+** {{cd|entity_mount}}（新游戏事件，信号强度7）：
+*** 进入载具。
+
+=== 物品 ===
+'''[[盾牌]]'''
+* 现在当放置到副手时会播放音效。
+
+=== 非生物实体 ===
+'''[[漏斗矿车]]'''
+* 现在打开时不再会激怒[[猪灵]]。
+
+=== 常规 ===
+'''[[创建新的世界]]'''
+* 现在各{{tr|标签页|頁籤}}可通过按{{key|Ctrl+Tab}}和{{key|Ctrl+Shift+Tab}}键切换。
+* 现在可通过{{key|Ctrl}} + {{cd|''{{tr|标签页|頁籤}}序号''}}切换至指定{{tr|标签页|頁籤}}。
+* 加入了实验性内容选择屏幕，用于更方便地启用或禁用实验性功能。
+** 此屏幕总是可以在“更多”{{tr|标签页|頁籤}}中找到。
+** 若为快照版本，此屏幕还可在“游戏”{{tr|标签页|頁籤}}中快捷进入。
+
+'''[[创造模式物品栏]]'''
+* 向“功能方块”分类中加入了各种[[画|{{tr|画|繪畫|畫}}]]。
+** 若为预定义的种类，其名称、作者和尺寸会显示在提示框中。
+** 其他4种不能在[[生存模式]]下获取的{{tr|画|繪畫|畫}}位于“{{tr|管理员用品|管理員實用物品|管理員用品}}”中。
+* 向“原材料”分类中加入了[[火焰弹]]。
+
+'''[[数据包]]'''
+* 版本更改为{{cd|12}}。
+
+'''[[选项]]'''
+* “{{tr|通知显示时长|通知顯示時間|通知顯示時長}}”{{tr|辅助功能|協助工具}}选项的英文名称由“Notification Display Time”改为“Notification Time”。
+* 现在，若选项按钮文本过长，文本会滚动显示。
+
+'''{{samp|[[options.txt]]}}'''
+* 移除了{{cd|heldItemTooltips}}。
+
+'''[[谓词]]'''
+* 移除了伤害类型谓词中的{{cd|d=pretty|is_projectile|is_explosion|bypasses_armor|bypasses_invulnerability|bypasses_magic|is_fire|is_magic|is_lightning}}字段。
+* 加入了新的{{cd|tags}}数组。数组内的每一项都有以下字段：
+** {{cd|id}}：伤害类型标签的命名空间ID。
+** {{cd|expected}}：指定的伤害类型标签是否要被谓词用于匹配过程。
+
+== 更改（实验性） ==
+=== 物品 ===
+'''[[盔甲]]'''
+* 将{{cd|iron}}与{{cd|iron_darker}}调色板对调后整体加深了{{cd|iron_dark}}调色板的颜色。
+* 在{{cd|chestplate_trim}}带纹饰盔甲物品纹理上添加了一个颜色最深的像素点。
+
+== 修复 ==
+{{fixes|fixedin=23w06a|showdesc=1
+|;1.19前正式版的漏洞
+|12729|实体穿着的护腿和靴子上会出现深度冲突。
+|145765|{{tr|辅助功能|協助工具}}选项中的“{{tr|文本背景|文字背景}}”和“{{tr|文本背景不透明度|文字背景不透明度}}”两个选项的设置文本会超出按钮范围。
+|156443|在一些语言中，文本会太长并超出按钮范围。
+|198874|打开漏斗不激怒猪灵，但打开漏斗矿车会。
+|209622|幽匿感测体不能感测到与物品展示框和荧光物品展示框的交互动作。
+|209896|向重生锚中放荧石的充能动作不激活幽匿感测体。
+|209929|填充堆肥桶不激活幽匿感测体。
+|210276|踩踏耕地不激活幽匿感测体。
+|210294|骑乘或脱离非生物实体不激活幽匿感测体。
+|210334|给绵羊染色不激活幽匿感测体。
+|210707|关闭运输船、运输竹筏或运输矿车不激活幽匿感测体。
+|210715|为实体上拴绳或下拴绳不激活幽匿感测体。
+|212501|从讲台上取书不激活幽匿感测体。
+|213803|从洞穴藤蔓上收取发光浆果不激活幽匿感测体。
+|215767|海龟下蛋不激活幽匿感测体。
+|233972|按键绑定菜单中，正在给按键分配功能时或一个按键被分配了多个功能时，按钮文本会出现在按钮范围外。
+|236988|对洞穴藤蔓、缠怨藤、垂泪藤或海带使用剪刀不激活幽匿感测体。
+|237450|“模拟距离”选项文本可以超出滑块范围。
+|237879|村民在堆肥桶上工作不激活幽匿感测体。
+|249878|{{tr|音乐和声音|音樂和音效}}选项菜单中的“{{tr|设备|裝置}}”选项的文本可以出现在按钮范围外。
+|;1.19的漏洞
+|251917|将盾牌放入副手槽时不播放音效，也没有对应的字幕。
+|251934|青蛙产卵不激活幽匿感测体。
+|252434|手持拴绳时与栅栏交互不激活幽匿感测体。
+|;1.19.2的漏洞
+|257873|手持盔甲与盔甲槽中同种类的盔甲交换位置时不播放音效。
+|258156|困难难度下，监守者对玩家与实体造成的伤害不相等。
+|;1.19.3的漏洞
+|258622|创造模式物品栏中，火焰弹不属于原材料。
+|;dev
+|259193|“{{tr|通知显示时长|通知顯示時間|通知顯示時長}}”选项文本可以超出滑块范围。
+|259195|对另一个维度中的实体使用{{cmd|ride|link=none}}命令会导致服务端与客户端间的不同步。
+|259197|伤害倾斜效果不可通过{{tr|辅助功能|協助工具}}选项控制。
+|259221|对无效实体使用{{cmd|ride|link=none}}命令会使玩家传送到此实体的位置上。
+|259224|用盾阻挡攻击会使伤害倾斜动画和受伤的红色效果播放出来。
+|259227|单独执行{{cmd|execute if loaded <pos>|link=none}}命令总是失败。
+|259233|参数值过低的错误消息的英语文本中，各错误消息中的拼写不一致。
+|259245|玩家看着被玩家用{{cmd|ride|link=none}}骑乘的末影人时，末影人会一直传送。
+|259247|{{cmd|execute on owner|link=none}}子命令不选中马、驴或骡的主人。
+|259360|{{cd|selectWorld.mapFeatures.info}}字符串的英文文本中，“Shipwrecks”一词前缺少了一个逗号。
+|259432|{{cd|chestplate_trim}}物品纹理上缺失了几个像素点。
+|259442|不能按住{{key|Shift}}键将物品放入铁砧的第二个槽位。
+|259454|堡垒遗迹中疣猪兽棚战利品箱的战利品表使用的是桥战利品箱的。
+|259468|{{cd|empty_slot_amethyst_shard}}纹理不出现在锻造台槽位上。
+|;previous
+|259599|手持的盔甲可以交换出已装备的附有绑定诅咒的盔甲。
+|259635|用于盔甲纹饰的{{cd|iron}}和{{cd|iron_darker}}调色板被翻转了。
+|259640|{{cd|iron}}和{{cd|iron_darker}}两个调色板中最亮的三个像素是一样的。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:23w06a]]
+[[en:Java Edition 23w06a]]
+[[es:Java Edition 23w06a]]
+[[fr:Édition Java 23w06a]]
+[[ja:Java Edition 23w06a]]
+[[pt:Edição Java 23w06a]]
+[[ru:23w06a (Java Edition)]]

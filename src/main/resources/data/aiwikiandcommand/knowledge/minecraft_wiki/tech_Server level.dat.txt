@@ -1,0 +1,60 @@
+# 页面: Server level.dat
+# 来源: https://zh.minecraft.wiki/w/Server%20level.dat
+# 分类: 服务器, 游戏文件, 过时内容
+# 抓取时间: 2026-07-14 17:17:58
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|访问|存取}}
+{{outdated|edition=java}}{{DISPLAYTITLE|{{filename|server_level.dat}}}}
+'''{{filename|server_level.dat}}'''是Minecraft Classic[[服务器]]用于加载和保存游戏内地图的文件的名称。可以备份该文件以保存内容，这有助于保护构造免受[[恶意破坏|攻击者]]或使用该文件进行地图编辑。
+
+== 一般信息 ==
+使用[[wzh:Gzip|gzip]]压缩文件以节省空间（因为文件最终会因为一切而变得相当大，甚至[[空气]]会被视为[[方块]]）。
+
+'''（注意：在此示例中，使用了默认的{{filename|server_level.dat}}，大小为256×256×64。维度较大的地图文件的字节数可能不同。）'''<br/>
+{{filename|server_level.dat}}文件是Minecraft[[服务器]]转储地图信息以进行永久存储的位置。由于此文件主要是原始地图数据，因此可能非常大：常规256×256×64大小的世界大小为4MB。但是，使用gzip压缩文件。大多数方块值为0（空白空间），可以通过压缩大大减小了大小，通常减少到几百KB。
+
+在解压缩数据文件之后（你可以使用可以解压缩gzip压缩文件的工具简单地解压缩文件本身），顺序上数据文件由数字656127880组成为32位整数（HEX中为0x27 0x1B 0xB7 0x88），后跟数字2作为一个字节（HEX中的0x02），然后是序列化的Level Java类文件实例。地图的方块值（材料类型，如石头）存储在此类内部的字节数组中。
+
+数组的前65536个连续字节构成该地图的最顶部256×256“薄片”，最左边的字节行从左到右，位于0 ... 255的位置，下面的行从左到右，位于256 ... 511的位置，依此类推。默认地图深64“薄片”。
+
+=== 文件格式 ===
+解压缩后，文件格式如下：
+
+{| border="1" class="wikitable"
+! 位置
+! 大小（字节）
+! 名称
+! 说明
+|-
+| 0
+| 4
+| Magic ID
+| 魔数ID是用于标识Minecraft文件格式的常数。当前值为'''0x271bb788'''。
+|-
+| 4
+| 1
+| Version Number
+| 版本号表示用于保存地图的当前格式。当前值为'''2'''。
+|-
+| 5
+| 可变的
+| 序列化的Java ''com.mojang.minecraft.level.Level''类
+| 有关Java使用的序列化格式的更多信息，请参见[http://java.sun.com/developer/technicalArticles/Programming/serialization/ 手册]，但是编辑文件的最简单方法是使用此处提供的[[:en:Development_resources/Example Minecraft Classic Level Editing Class|类]]和官方的<span class="plainlinks">[http://minecraft.net/servers.jsp minecraft-server.jar文件]</span>。
+|}
+
+== 访问字节数组 ==
+地图中最有趣的部分是方块数组。该数组中的每个字节定义了世界上相应位置的[[数据值|方块类型]]。通常有两个用于访问方块字节数组的选项：
+
+你可以将压缩的.dat文件直接反序列化回Java内部的{{cd|Level}}对象的实例，从而可以完全像Minecraft服务器那样访问Level对象的实例。这将允许你通过调用实例化的Level对象上的方法直接设置方块、维度、生成点和其他地图的方面。加载前不需要手动解压缩，因为Java可以动态压缩和解压缩gzip压缩文件。要将数据文件加载回{{cd|Level}}类的实例，你需要{{cd|Level}}类的类定义。这包含在{{filename|minecraft-server.jar}}文件中。
+
+其他人只需访问数据文件文件中的原始字节数组就可以读取和修改地图的数据。为此你将解压缩它，更改存储字节数组的字节，然后再次压缩它。由于你正在编辑它，因此必须保持第一个344（HEE中的14E）字节不变。接下来的256x256x64字节是存储字节数组的位置。此外，如果你知道要查找的位置，也可以通过这种方式更改生成位置坐标：从字节284开始有3个整数值，因此覆盖接下来的12个字节（3个整数）将允许你更改生成位置。
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:服务器]]
+[[Category:游戏文件]]
+
+[[en:server_level.dat]]
+[[fr:server_level.dat]]

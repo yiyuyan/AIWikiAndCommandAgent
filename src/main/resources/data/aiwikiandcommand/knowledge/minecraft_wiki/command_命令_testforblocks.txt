@@ -1,0 +1,71 @@
+# 页面: 命令/testforblocks
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/testforblocks
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock|education}}
+{{outdated|edition=java}} 
+{{Infobox command
+|name=testforblocks
+|oplevel=1
+|cheat=1
+}}
+
+测试两个区域中的方块是否相同。返回匹配方块的总数量（<code>all</code>模式下所有方块的数量，或<code>masked</code>模式下的源区域非空气方块的数量）。
+
+== 语法 ==
+: <code>testforblocks <begin: x y z> <end: x y z> <destination: x y z> [masked|all]</code>
+
+== 参数 ==
+: <code>begin: x y z</code>与<code>end: x y z</code>
+:: 指定作为样式基准的区域（源区域）的两个对角方块。''x1''、''z1''、''x2''及''z2''必须在[[世界边界|-30,000,000和30,000,000]]之间（含，不输入逗号），且''y1''及''y2''必须在-64和319之间（含）。可以使用波浪号来指定基于命令执行位置的[[相对坐标]]或使用脱字符来指定基于命令执行者的位置和角度的[[局部坐标]]。源区域中的方块数量不能超过786,432个。
+
+: <code>destination: x y z</code>
+:: 指定待检查区域（目标区域）的下西北角（具有最小坐标值的边角）。''x''和''z''必须在[[世界边界|-30,000,000和30,000,000]]之间（含，不输入逗号），且''y''必须在-64和319之间（含）。可以使用波浪号来指定基于命令执行位置的[[相对坐标]]。源区域和目标区域可以重叠。
+
+: <code>masked|all</code>（可选）
+:: 指定测试模式。必须为下列其中之一：
+::* <code>all</code> — 两个区域的所有方块必须完全相同。
+::* <code>masked</code> — 源区域的[[空气]]方块可匹配目标区域的任意方块。
+:: 若未指定，默认为<code>all</code>。
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|指定的区域处于已卸载的或在世界外的区块中||fail}}
+{{Result table|源区域被选中的方块数量超过786432}}
+{{Result table|源区域和目标区域不匹配}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 检测(36,64,68)至(37,68,70)处是否与坐标(36,64,72)至(37,68,74)处完全相同：{{cmd|testforblocks 36 64 72 37 68 74 36 64 68 all|link=none}}
+* 检测(36,64,68)至(37,68,70)处的非空气方块是否与坐标(36,64,72)至(37,68,74)处相同：{{cmd|testforblocks 36 64 72 37 68 74 36 64 68 masked|link=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w07a|加入了{{cmd|testforblocks|link=none}}。}}
+|{{HistoryLine||1.13|dev=17w45a|移除了{{cmd|testforblocks|link=none}}，并加入{{cmd|execute if blocks}}取代其功能。}}
+
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|testforblocks|link=none}}。}}
+}}
+<!-- 请留两空行以分隔段落 -->
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/testforblocks]]
+[[en:Commands/testforblocks]]
+[[es:Comandos/testforblocks]]
+[[ja:コマンド/testforblocks]]
+[[pt:Comandos/testforblocks]]
+[[ru:Команды консоли/testforblocks]]

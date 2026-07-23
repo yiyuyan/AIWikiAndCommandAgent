@@ -1,0 +1,101 @@
+# 页面: 合成方格（26w14a）
+# 来源: https://zh.minecraft.wiki/w/%E5%90%88%E6%88%90%E6%96%B9%E6%A0%BC%EF%BC%8826w14a%EF%BC%89
+# 分类: 
+# 抓取时间: 2026-07-14 17:21:19
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|串列}}{{Joke feature|update=26w14a}}
+{{Infobox entity
+|title=合成方格
+|group1=2x2
+|1-1=Crafting Grid 2x2.png
+|group2=3x3
+|2-1=Crafting Grid 3x3.png
+|size=高度：1.0格<br>宽度：3.0格
+|nobe=0
+|id-raw=crafting_grid
+}}
+
+'''合成方格（Crafting Grid）'''是用来进行[[合成]]的实体。
+
+== 生成 ==
+当玩家对方块使用[[合成（物品）|合成]]时，如果以选取的位置为中心、周围3x3的区域没有方块阻挡，则会生成一个具有2x2方格的合成方格实体。
+
+[[活化方块]]形式的[[工作台]]和[[合成器]]会生成具有3x3方格的合成方格实体。在生成前，游戏会在活化方块东西南北四个水平方向3格外选取一个位置，检查以此中心、周围3x3的区域是否没有方块阻挡。如果存在一个方块没有被阻挡，则生成成功，否则活化方块只会发出愤怒粒子，直到移动到满足条件的位置后才会生成合成方格。
+
+== 行为 ==
+当玩家对方块使用[[合成（物品）|合成]]或玩家死亡时，上一个由合成生成的合成方格会被清除。
+
+合成方格的合成方格区域总是对准方块网格，允许玩家将方块或活化方块对准位置进行合成。
+
+如果玩家没有解锁配方且{{gamerule|limited_crafting}}为<code>false</code>，则无法进行合成。
+
+玩家点击配方书的预览后，合成方格上会渲染“幽灵物品”，指示对应的配方。如果合成方格由活化方块形式的合成器生成，则点击预览后周围的活化方块会尝试自动组合配方，并自动合成。
+
+当合成方格上的方块或活化方块符合配方的排列要求，就会在其上方1.6格出生成渲染为合成输出物品的[[合成产物]]实体，此时玩家对其使用或攻击就会进行合成：清空合成方格上的物体，并生成对应的活化方块。
+
+== 音效 ==
+{{Sound table
+|sound=Crafter craft.ogg
+|subtitle={{tp|subtitles.block.crafter.craft}}
+|source={{tp|soundCategory.block}}
+|description=活化方块形式的合成器生成的合成方格进行合成
+|id=block.crafter.craft
+|translationkey=subtitles.block.crafter.craft
+|distance=5}}
+{{Sound table
+|sound=Smithing_Table_use1.ogg
+|sound2=Smithing_Table_use2.ogg
+|sound3=Smithing_Table_use3.ogg
+|source={{tp|soundCategory.block}}
+|description=活化方块形式的工作台或合成物品生成的合成方格进行合成
+|id=block.smithing_table.use
+|subtitle={{tp|subtitles.block.smithing_table.use}}
+|translationkey=subtitles.block.smithing_table.use
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|firstcolumnname=实体
+|generatetranslationkeys=java
+|Crafting Grid
+|nameid=crafting_grid
+|translationkey=entity.minecraft.crafting_grid
+|spritetype=entity
+|spritename=Crafting Grid
+|foot=1
+}}
+
+=== 实体数据 ===
+{{main|实体数据格式}}
+合成方格有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt collapsed|{{tooltip|实体|Java类名：Entity}}共通标签|{{#lst:编码格式/Entity|codec_entity_26w14a}}|Entity}}
+** {{nbt|int|size|existonsave=1}}：（默认为3）合成方格的大小。为2时为2x2，否则为3x3。
+** {{nbt|int array|owner}}：生成合成方格的实体，当此值不存在或UUID指向的实体不存在时合成方格会被立刻清除。
+** {{nbt|list|ingredients|existonsave=1}}：合成方格的合成原料数据。
+*** {{nbt|compound}}：一个原料。
+**** {{nbt|int array|pos|required=1|existonsave=1}}：合成原料在世界上的坐标。
+**** {{nbt|compound|state|required=1|existonsave=1}}：合成原料。
+***** {{nbt|string|Name|required=1|existonsave=1}}：[[方块]]的命名空间ID。
+***** {{nbt|compound|Properties}}：组成此[[方块状态]]的方块属性。只有本方块具有的方块属性才有实际效果，而未指定的方块属性使用默认值。
+****** {{nbt|string|<''方块属性''>}}：此项方块属性的值。
+** {{nbt|list|ghosts|existonsave=1}}：合成方格上的“幽灵物品”。此列表的元素顺序为：从合成方格左上角开始横向遍历到右下角，总数量超过9时会因为索引无效导致游戏崩溃。
+*** {{nbt|compound}}：一项槽位预览，默认为<code>minecraft:empty</code>。
+**** {{nbt collapsed link|预览槽位}}
+{{nbt collapsed source|预览槽位|no-remove=1| {{/SlotDisplay}} }}
+</div>
+
+== 进度 ==
+{{Load advancements|page=进度/26w14a|adventure.craft_table;adventure.crafter}}
+
+== 导航 ==
+{{Navbox jokes|26w14a}}
+
+[[Category:实体]]
+
+[[en:Crafting Grid]]
+[[ja:Crafting Grid (エンティティ)]]

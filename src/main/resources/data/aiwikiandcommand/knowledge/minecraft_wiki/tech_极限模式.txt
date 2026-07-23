@@ -1,0 +1,151 @@
+# 页面: 极限模式
+# 来源: https://zh.minecraft.wiki/w/%E6%9E%81%E9%99%90%E6%A8%A1%E5%BC%8F
+# 分类: Java版独有信息, 基岩版独有信息, 游戏内容
+# 抓取时间: 2026-07-14 17:29:07
+# 原始 Wikitext 内容:
+
+{{relevant tutorial|极限模式}}
+'''极限（Hardcore）'''模式是难度锁定为困难且[[玩家]]在死亡后以[[旁观模式]]重生的世界设置。
+
+== 机制 ==
+处于极限模式的世界或服务器有以下特征：
+* {{in|je}}其[[level.dat]]或[[server.properties]]中的数据{{cd|hardcore}}为{{cd|true}}；
+* {{in|be}}其[[server.properties]]中的属性{{cd|isHardcore}}（只影响由服务器新创建的世界）或其[[基岩版存档格式#level.dat|level.dat]]中的数据{{cd|IsHardcore}}为<code>true</code>。
+
+在[[选择世界菜单]]中，极限模式的世界{{in|java|nc=1}}会於版本信息旁显示暗红色字体的“极限模式”，而{{in|be|nc=1}}則是粉红色底的“极限”二字。{{in|be}}这些世界还会显示独特的边框和图标。
+
+极限模式是一个世界设置，会影响世界中的所有玩家，因此无法为特定的玩家单独开启或关闭极限模式。
+
+=== 创建新的世界 ===
+{{main|创建新的世界}}
+{{filetr|Hardcore button.png|thumb|{{el|je}}中游戏模式按钮显示“极限”}}
+{{filetr|BE hardcore option.png|thumb||{{el|be}}中用于开启极限模式的选项}}
+在创建新的世界时，“极限”是{{only|java|for=一种游戏模式}}或{{only|be|for=一个独立选项}}，选择该选项即可创建一个极限模式世界。
+
+选定“极限”游戏模式时，[[创建新的世界]]界面中的{{only|be|for=“{{tr|初始地图|起始地圖}}”}}“允许命令”和“奖励箱”将被锁定为关，世界的游戏模式被锁定为[[生存模式]]，[[难度]]被锁定为困难。不过，世界被创建后可以通过编辑level.dat来更改它们，设置世界游戏模式和难度、解锁难度或开启作弊，且不会受到极限模式的影响。
+
+{{in|be}}在选择世界菜单、创建新的世界和编辑世界界面中，极限模式世界的世界图标周围会显示红色边框，右上角或底部会显示一个极限模式红心，它会不时在红色和白色之间闪动。
+
+=== 生命监测 ===
+{{main|生命#监测}}
+{{fakeImage|align=right|{{healthbar|20|hardcore=1}}|极限模式下的生命条}}
+
+在极限模式的世界中，生命条中的红心的外观会有改变，提醒玩家极限模式的启用。该变化没有实质影响。
+
+{| class="wikitable"
+|+ 红心的外观
+|-
+! 场景
+! 常规
+! 极限模式
+|-
+| 常规
+| {{healthbar|3|total=6}}
+| {{healthbar|3|total=6|hardcore=1}}
+|-
+| 中毒
+| {{healthbar|3|total=6|poisoned=1}}
+| {{healthbar|3|total=6|poisoned=1|hardcore=1}}
+|-
+| 凋零
+| {{healthbar|3|total=6|withered=1}}
+| {{healthbar|3|total=6|withered=1|hardcore=1}}
+|-
+| 冰冻
+| {{healthbar|3|total=6|freezing=1}}
+| {{healthbar|3|total=6|freezing=1|hardcore=1}}
+|-
+| 伤害吸收
+| {{healthbar|3|total=4|absorption=1}}
+| {{healthbar|3|total=4|absorption=1|hardcore=1}}
+|-
+|}
+
+=== 玩家死亡 ===
+{{Filetr|Hardcore Death.png|thumb|{{el|je}}中极限模式的死亡界面}}
+{{Filetr|BE hardcore death screen.png|thumb|{{el|be}}中极限模式的死亡界面}}
+
+在极限模式的世界中，[[生命#死亡界面|死亡界面]]相比非极限模式的死亡界面有所不同，其中的标题{{only|java|for=“你死了！”}} {{only|be|for=“您失败了！”}}变为了“游戏结束！”，且其中的按钮“重生”变为了{{only|java|for=“旁观世界”}} {{only|be|for=“退出世界”}}。
+
+玩家在死亡后仍將重生在他们的个人出生点，但极限模式的主要差異在於，死亡後玩家的[[游戏模式]]会变为[[旁观模式]]，即极限模式中的玩家只有一次生命。其无法再对世界做出任何影响，也无法被其他活着的玩家观测到，相当于死者被永久移除出了世界。
+
+{{in|be}}若玩家已在极限模式的世界中死亡，则玩家会被添加值为<samp>true</samp>的{{nbt|boolean|HasDiedBefore}}[[基岩版存档格式/实体格式#玩家|标签]]。该世界在[[选择世界菜单]]和编辑世界界面中的世界图标周围会显示灰色边框，右上角或底部的极限模式红心也会变为灰色。目前只能在level.dat或server.properties中修改NBT后才能修改个人游戏模式。
+{{-}}
+
+== 历史 ==
+[[File:Hardcoremode.png|thumb|Notch在推特上发布的极限模式选项截图]]
+[[File:Beta_1.9_Beta_2_in-game.png|thumb|Notch在首个存在极限模式的版本中的死亡截图]]
+
+{{HistoryTable
+|{{HistoryLine||2010年11月22日|link={{notch|1646175743}}|极限模式的想法来自PC Gamer上的“Minecraft”游戏博客。<ref>http://www.pcgamer.com/2010/11/20/the-minecraft-experiment-day-1-chasing-waterfalls/</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||2011年9月23日|link={{tweet|notch|117149170120400896}}|Notch发了一张极限模式选项的图片。}}
+|{{HistoryLine||2011年9月28日|link={{tweet|notch|119031614553587713}}|Notch发了一张极限模式下的死亡界面的图片。}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|加入了极限模式。}}
+|{{HistoryLine||1.3.1|dev=12w17a|在极限模式时不能开启[[作弊]]和[[奖励箱]]选项（服务器操作员的命令不受极限模式的影响）。}}
+|{{HistoryLine|||dev=12w18a|极限模式现在可以在多人游戏中使用。|现在在多人游戏的极限模式中死亡时会被自动封禁。}}
+|{{HistoryLine||1.8|dev=pre1|极限模式的世界现在不能上传至[[Realms]]。}}
+|{{HistoryLine||1.9|dev=15w37a|现在当玩家死亡时，游戏模式会被改为[[旁观模式]]，而不会删除世界或封禁玩家。}}
+|{{HistoryLine||1.15|dev=19w35a|现在死亡屏幕的“删除世界”按钮被“标题画面”按钮取代。}}
+|{{HistoryLine||1.21.2|dev=24w38a|现在Realms可以在世界创建屏幕中创建极限模式世界。}}
+|{{HistoryLine||26.2|dev=pre-5|“{{tr|游戏模式|遊戲模式|遊戲模式}}”和“{{tr|允许命令|允許指令|允許命令}}”按钮在极限模式世界中不再可用。<ref>{{bug|MC-308619|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=pre-6|在极限模式世界中以[[旁观模式]]重生不再会关闭游戏规则<code>spectators_generate_chunks</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||2024年2月29日|link=https://feedback.minecraft.net/hc/en-us/articles/24509955193229-Minecraft-Beta-Preview-1-20-80-20#h_01HQSPSHHCSB81QE441P4P1M8C|[[基岩版1.20.80.20]]的更改日志中称，极限模式将会加入基岩版。}}
+|{{HistoryLine||2024年3月6日|link={{ytl|HnWFq1nN8eQ}}|[[Minecraft Monthly]]中提到极限模式将会在今年春季加入基岩版。}}
+|{{HistoryLine||1.20.80|dev=1.20.80.22|在世界编辑屏幕中加入了“硬核模式{{sic}}”选项，暂时不可切换且无任何功能。}}
+|{{HistoryLine|||dev=1.20.80.23|将“硬核模式”选项重命名为“极限模式”。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|加入了极限模式。}}
+|{{HistoryLine|||dev=1.21.0.21|现在极限模式会显示与非极限模式不同的死亡界面。}}
+|{{HistoryLine|||dev=正式版|极限模式在正式版中不可用。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.20|现在极限模式选项的开关样式为极限模式红心。
+|现在开启极限模式选项后，极限模式世界的世界图标会显示红色边框和极限模式红心。
+|加入了打开和关闭极限模式选项的音效。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.24|现在如果玩家在极限模式世界中死亡，该世界会在新的[[选择世界菜单]]UI中显示灰色边框。}}
+|{{HistoryLine||2024年9月28日|link=https://www.youtube.com/live/qnX6sPFjXnA?si=Sfsvs8Y0mWWzcag9|极限模式在[[Minecraft Live 2024]]中被宣布将在[[勇气之袋]]中加入。}}
+|{{HistoryLine||1.21.40|dev=正式版|极限模式现在在正式版中可用。}}
+}}
+
+== 你知道吗 ==
+[[File:1DNGn.png|thumb|右|200px|玩笑中的“超极限模式”按钮]]
+
+* {{in|je}}将极限模式的世界降级到[[Java版Beta 1.9-pre2]]之前的版本会导致世界数据中的<code>hardcore</code>丢失，并导致该存档再次升级后不再是极限模式。
+* Notch曾经在Twitter表示，会发布一种“超极限”模式，付费玩家如果死亡则会撤销账号。当然，最后证实这是一个玩笑。<ref>{{tweet|notch|117188911230500864}}</ref>
+
+== 画廊 ==
+{{gallery|
+MCBE hardcore.gif|{{el|be}}中创建极限模式世界时的世界图标
+Hardcore mode tip.png|convert|{{el|be}}中创建极限模式世界前的提示
+MCBE hardcore not dead.png|convert|{{el|be}}中玩家还存活的世界在[[选择世界菜单]]中的样子
+MCBE hardcore dead.png|convert|{{el|be}}中玩家已死亡的世界在选择世界菜单中的样子
+}}
+
+== 参见 ==
+* [[Tutorial:极限模式]] — 在极限模式下生存的完整指南。
+* [[Tutorial:超极限模式]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:游戏内容]]
+
+[[cs:Nemilosrdná hra]]
+[[de:Hardcore-Modus]]
+[[en:Hardcore]]
+[[es:Extremo]]
+[[fr:Hardcore]]
+[[hu:Hardcore]]
+[[it:Estrema]]
+[[ja:ハードコア]]
+[[ko:하드코어 모드]]
+[[lzh:極]]
+[[nl:Hardcore]]
+[[pl:Hardcore]]
+[[pt:Intenso]]
+[[ru:Хардкор]]
+[[th:ฮาร์ดคอร์]]
+[[tr:Zor]]
+[[uk:Гардкор]]

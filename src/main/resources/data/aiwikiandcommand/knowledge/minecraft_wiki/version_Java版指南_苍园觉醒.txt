@@ -1,0 +1,662 @@
+# 页面: Java版指南/苍园觉醒
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%8C%87%E5%8D%97/%E8%8B%8D%E5%9B%AD%E8%A7%89%E9%86%92
+# 分类: 
+# 抓取时间: 2026-07-14 17:15:22
+# 原始 Wikitext 内容:
+
+{{for|基岩版版本的指南|基岩版指南/苍园觉醒}}
+{{Infobox guide
+| edition = Java版
+| name = 苍园觉醒
+| vers = 
+* {{vl|je 1.21.4|}}
+| prev = 勇气之袋
+| next = 春意盎然
+}}
+这篇指南简要概述了[[苍园觉醒]]小更新（[[Java版1.21.4]]）的所有非[[实验性内容]]。本指南假定读者对[[勇气之袋]]（[[Java版1.21.2]]-[[Java版1.21.3|1.21.3]]）更新的内容有基本了解。
+
+== 生物 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Mobs}}
+|-
+| [[嘎枝]]
+| [[File:Creaking JE1 BE1.png|84px]]
+|
+{{BlockLink|Creaking Heart}}在夜晚或[[雷暴]]天气激活时生成。
+| 无
+|
+* 一种被玩家注视前不会主动攻击，且在被未戴着雕刻南瓜的玩家注视时无法行动（包括移动、被击退、[[骑乘]]实体和被骑乘）的敌对生物。
+* 灾厄村民会主动远离嘎枝。
+* 由嘎枝之心生成的嘎枝与其绑定，这种嘎枝还具有以下特性：
+** 生成和消失完全由嘎枝之心决定，不受亮度影响。
+*** 如果处在白天且天气非[[雷暴]]，则会消失。
+*** [[边界箱]]持续覆盖最近的生存模式或冒险模式玩家的视平线5秒后消失。
+*** 离所绑定的嘎枝之心的[[欧几里得距离]]超过34格时消失。
+*** 如果所绑定的嘎枝之心未激活或已被破坏，则生命值归零，同时消失。
+** 免疫[[无懈可击]]所能免疫的一切伤害。
+** 无视[[仙人掌]]、[[甜浆果丛]]、[[细雪]]和[[熔岩]]这类危险环境，且能从中穿过。
+** 受到来自玩家的直接或间接攻击时，会在原地摇摆。同时，如果前{{convert|100}}内未触发过嘎枝之心，则会生成一条指向嘎枝之心的粒子，并使嘎枝之心尝试生成树脂团。
+** 不能穿越传送门。
+** 不能被[[命名牌]]命名。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Mobs}}
+|-
+| [[蜜蜂]]
+| [[File:Bee.png|84px]]
+|
+* 被喂食[[凋灵玫瑰]]时会获得[[凋零]]效果而不再能繁殖，接触到或被喂食张开的眼眸花时获得[[中毒]]效果。
+|-
+| [[狼]]和[[猫]]
+| {{animate|Baby Red Tabby Cat JE2.png;Baby Wolf JE2.png|84px}}
+|
+* 幼年狼和幼年猫的项圈颜色现在为其双亲项圈颜色的[[染料#混色机制|有效混色]]。
+|-
+| [[玩家]]
+| [[File:Steve JE5.png|84px]]
+|
+* 客户端加载完成后，地形加载保护赋予玩家的[[无懈可击]]会立即停止，而不再持续到加载超时。
+|-
+| 生物意愿
+|
+|
+* [[溺尸]]现在更愿意拾取[[三叉戟]]。
+* [[骷髅]]及其变种现在更愿意拾取[[弓]]，但是[[凋灵骷髅]]除外。
+* 成年[[猪灵]]和[[掠夺者]]现在更愿意拾取[[弩]]。
+* 除此以外，生物会按以下顺序比较物品以将其装备：
+** 对于盔甲槽物品：
+*** 具有[[绑定诅咒]]魔咒的旧物品不会被替换。
+*** 新物品具有更高的基础[[属性/护甲值|护甲值]]时，旧物品会被替换；更低时，不会发生替换；相同时，比较下一项。
+*** 新物品具有更高的基础[[属性/盔甲韧性|盔甲韧性]]时，旧物品会被替换；更低时，不会发生替换；相同时，比较下一项。
+*** 新物品附有更多[[魔咒]]时，旧物品会被替换；更少时，不会发生替换；数量相同时，比较下一项。
+*** 新物品拥有更多[[耐久度]]时，旧物品会被替换；更少时，不会发生替换；相同时，比较下一项。
+*** 新物品拥有自定义名称，且当前所装备的物品没有时，旧物品会被替换。否则，不会发生替换。
+** 对于主手物品：
+*** 新物品符合生物的意愿，且当前所持的物品不符合时，物品会被替换；反之，新物品不符合生物的意愿，且当前所持的物品符合时，物品不会被替换；其他情况则比较下一项。
+*** 新物品具有更高的基础[[属性/攻击伤害|攻击伤害]]时，旧物品会被替换；更低时，不会发生替换；相同时，比较下一项。
+*** 新物品附有更多魔咒时，旧物品会被替换；更少时，不会发生替换；数量相同时，比较下一项。
+*** 新物品拥有更多耐久度时，旧物品会被替换；更少时，不会发生替换；相同时，比较下一项。
+*** 新物品拥有自定义名称，且当前所持物品没有时，旧物品会被替换。否则，不会发生替换。
+|}
+
+== 方块 ==
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=苍园觉醒新增方块
+|rows=4
+| 0=Creaking Heart | Pale Oak Log | Stripped Pale Oak Log | Pale Oak Wood | Stripped Pale Oak Wood | Pale Oak Planks | Pale Oak Stairs | Pale Oak Slab | Pale Oak Sign
+| Pale Oak Hanging Sign | Pale Oak Button | Pale Oak Pressure Plate | Pale Oak Door | Pale Oak Fence | Pale Oak Fence Gate | Pale Oak Trapdoor | Pale Hanging Moss | Pale Moss Block | Pale Moss Carpet | Pale Oak Leaves | Pale Oak Sapling | Closed Eyeblossom | Open Eyeblossom | Block of Resin | Resin Bricks | Chiseled Resin Bricks | Resin Brick Slab | Resin Brick Stairs | Resin Brick Wall | Resin Clump}}
+|苍园觉醒新增方块一览
+}}
+=== 新内容 ===
+{|{{Simple Guide table|New Blocks}}
+|-
+| [[苍白橡木原木]]及其去皮变种
+| {{Animate|Pale Oak Log JE1 BE1.png;Stripped Pale Oak Log (UD) JE1 BE2.png|84px}}
+|
+* 作为苍白橡树的一部分生成。
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 可用于合成{{tr|苍白橡木|蒼白橡木塊|蒼白橡木}}、苍白橡木木板和嘎枝之心
+|-
+| [[苍白橡木|{{tr|苍白橡木|蒼白橡木塊|蒼白橡木}}]]及其去皮变种
+| {{Animate|Pale Oak Wood JE1 BE1.png;Stripped Pale Oak Wood (UD) JE1 BE2.png|84px}}
+|
+{{Crafting
+ |A1 = Pale Oak Log
+ |A2 = Pale Oak Log
+ |B1 = Pale Oak Log
+ |B2 = Pale Oak Log
+ |Output=Pale Oak Wood,3
+ |ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 可用于合成苍白橡木木板。
+|-
+| [[苍白橡木木板]]
+| [[File:Pale Oak Planks JE1 BE1.png|84px]]
+|
+{{Crafting
+|B2 = Pale Oak Log; Stripped Pale Oak Log; Pale Oak Wood; Stripped Pale Oak Wood
+|Output = Pale Oak Planks,4
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 可合成对应的[[按钮]]、[[栅栏]]、[[门]]、[[栅栏门]]和[[活板门]]等。
+|-
+| [[苍白橡木台阶]]
+| [[File:Pale Oak Slab JE1 BE1.png|84px]]
+|
+{{Crafting
+|A3 = Pale Oak Planks
+|B3 = Pale Oak Planks
+|C3 = Pale Oak Planks
+|Output = Pale Oak Slab,6
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 用作装饰。
+|-
+| [[苍白橡木楼梯]]
+| [[File:Pale Oak Stairs JE1 BE1.png|84px]]
+|
+{{Crafting
+|A1 = Pale Oak Planks
+|A2 = Pale Oak Planks
+|B2 = Pale Oak Planks
+|A3 = Pale Oak Planks
+|B3 = Pale Oak Planks
+|C3 = Pale Oak Planks
+|Output= Pale Oak Stairs,4
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 用作装饰。
+|-
+| [[苍白橡木告示牌]]
+| [[File:Pale Oak Standing Sign JE1 BE1.png|84px]]
+|
+{{Crafting
+|A1 = Pale Oak Planks
+|B1 = Pale Oak Planks
+|C1 = Pale Oak Planks
+|A2 = Pale Oak Planks
+|B2 = Pale Oak Planks
+|C2 = Pale Oak Planks
+|B3 = Stick
+|Output = Pale Oak Sign,3
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 用作装饰。
+|-
+| [[悬挂式苍白橡木告示牌]]
+| [[File:Pale Oak Hanging Sign JE2.png|84px]]
+|
+{{Crafting
+|A1 = Chain
+|C1 = Chain
+|A2 = Stripped Pale Oak Log
+|B2 = Stripped Pale Oak Log
+|C2 = Stripped Pale Oak Log
+|A3 = Stripped Pale Oak Log
+|B3 = Stripped Pale Oak Log
+|C3 = Stripped Pale Oak Log
+|Output = Pale Oak Hanging Sign
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 用作装饰。
+|-
+| [[苍白橡木按钮]]
+| [[File:Pale Oak Button JE1 BE1.png|84px]]
+|
+{{Crafting
+|B2 = Pale Oak Planks
+|Output = Pale Oak Button
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 对其按下{{control|使用}}可产生红石信号。
+|-
+| [[苍白橡木压力板]]
+| [[File:Pale Oak Pressure Plate JE1 BE1.png|84px]]
+|
+{{Crafting
+|A2 = Pale Oak Planks
+|B2 = Pale Oak Planks
+|Output = Pale Oak Pressure Plate
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 踩上时产生红石信号。
+|-
+| [[苍白橡木门]]
+| [[File:Pale Oak Door JE1.png|84px]]
+| 
+{{Crafting
+|A1= Pale Oak Planks
+|B1= Pale Oak Planks
+|A2= Pale Oak Planks
+|B2= Pale Oak Planks
+|A3= Pale Oak Planks
+|B3= Pale Oak Planks
+|Output= Pale Oak Door,3
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 对其按下{{control|使用}}可开关。
+|-
+| [[苍白橡木活板门]]
+| [[File:Pale Oak Trapdoor JE1 BE1.png|84px]]
+| 
+{{Crafting
+|A2= Pale Oak Planks
+|B2= Pale Oak Planks
+|C2= Pale Oak Planks
+|A3= Pale Oak Planks
+|B3= Pale Oak Planks
+|C3= Pale Oak Planks
+|Output= Pale Oak Trapdoor,2
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 对其按下{{control|使用}}可开关。
+|-
+| [[苍白橡木栅栏]]和[[苍白橡木栅栏门]]
+| {{animate|Pale Oak Fence JE1 BE1.png;Pale Oak Fence Gate JE1 BE1.png|84px}}
+|
+{{Crafting
+|A2=Pale Oak Planks
+|B2=Stick
+|C2=Pale Oak Planks
+|A3=Pale Oak Planks
+|B3=Stick
+|C3=Pale Oak Planks
+|Output=Pale Oak Fence,3
+|ignoreusage=1
+}}
+{{Crafting
+|A2=Stick
+|B2=Pale Oak Planks
+|C2=Stick
+|A3=Stick
+|B3=Pale Oak Planks
+|C3=Stick
+|Output=Pale Oak Fence Gate
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，但用斧是最快的。
+|
+* 对其按下{{control|使用}}可开关。
+|-
+| [[树脂块]]
+| [[File:Block of Resin JE1 BE1.png|84px]]
+|
+{{Crafting
+|A1 = Resin Clump
+|A2 = Resin Clump
+|A3 = Resin Clump
+|B1 = Resin Clump
+|B2 = Resin Clump 
+|B3 = Resin Clump
+|C1 = Resin Clump
+|C2 = Resin Clump
+|C3 = Resin Clump
+|Output = Block of Resin
+|ignoreusage=1
+}}
+| 可使用任意工具或徒手采集，当被挖掘时会被立即破坏。
+|
+* 可用于存储树脂团。
+* 可合成嘎枝之心。
+|-
+| [[树脂砖块]]
+| [[File:Resin Bricks JE1 BE2.png|84px]]
+|
+{{Crafting
+|A2 = Resin Brick
+|B2 = Resin Brick
+|A3 = Resin Brick
+|B3 = Resin Brick
+|Output = Resin Bricks
+|ignoreusage=1
+}}
+| 可使用任意镐开采
+|
+* 用作装饰。
+* 可合成[[树脂砖台阶]]、[[树脂砖楼梯]]和[[树脂砖墙]]。
+|-
+| [[雕纹树脂砖块]]
+| [[File:Chiseled Resin Bricks JE2 BE3.png|84px]]
+|
+{{Crafting
+|B2 = Resin Brick Slab
+|B3 = Resin Brick Slab
+|Output = Chiseled Resin Bricks
+|ignoreusage=1
+}}
+| 可使用任意镐开采
+|
+* 用作装饰。
+|-
+| [[树脂砖台阶]]
+| [[File:Resin Brick Slab JE1 BE2.png|84px]]
+|
+{{Crafting
+|A3 = Resin Bricks
+|B3 = Resin Bricks
+|C3 = Resin Bricks
+|Output = Resin Brick Slab,6
+|ignoreusage=1
+}}
+| 可使用任意镐开采
+|
+* 用作装饰。
+* 可合成[[雕纹树脂砖块]]。
+|-
+| [[树脂砖楼梯]]
+| [[File:Resin Brick Stairs JE1 BE2.png|84px]]
+|
+{{Crafting
+|A1= Resin Bricks
+|A2= Resin Bricks
+|B2= Resin Bricks
+|A3= Resin Bricks
+|B3= Resin Bricks
+|C3= Resin Bricks
+|Output = Resin Brick Stairs,4
+|ignoreusage=1
+}}
+| 可使用任意镐开采
+|
+* 用作装饰。
+|-
+| [[树脂砖墙]]
+| [[File:Resin Brick Wall (ewU) JE1.png|84px]]
+|
+{{Crafting
+|A2= Resin Bricks
+|B2= Resin Bricks
+|C2= Resin Bricks
+|A3= Resin Bricks
+|B3= Resin Bricks
+|C3= Resin Bricks
+|Output = Resin Brick Wall,6
+|ignoreusage=1
+}}
+| 可使用任意镐开采
+|
+* 用作装饰。
+|-
+| [[嘎枝之心]]
+| {{animate|Active Creaking Heart JE1 BE1.png;Creaking Heart JE2 BE2.png|84px}}
+|
+* 自然生成于[[苍白之园]]中的苍白橡树的树干内，四周均被苍白橡木原木覆盖。
+{{Crafting
+|B1= Pale Oak Log
+|B2= Block of Resin
+|B3= Pale Oak Log
+|Output= Creaking Heart 
+|ignoreusage=1
+|type= Decoration block}}
+| 斧（须带有[[精准采集]]）
+|
+* 放置在朝向正确的苍白橡木原木或{{tr|苍白橡木|蒼白橡木塊|蒼白橡木}}及其去皮变种之间时，它会在夜晚或雷暴时激活，并在水平16格、竖直8格范围内会生成与其绑定的嘎枝。
+* 所生成的嘎枝被玩家攻击时会发出指向该方块的粒子效果，同时此方块尝试在周围曼哈顿距离2格内与其相连的苍白橡木原木、{{tr|苍白橡木|蒼白橡木塊|蒼白橡木}}、去皮苍白橡木原木和去皮苍白橡木上生成总计{{range|2|3}}个树脂团方块。
+* 被破坏时，所生成的嘎枝会一并被移除。
+* 与之相连的[[红石比较器]]会按其与绑定嘎枝的距离输出[[红石信号]]。
+** 距离越近，信号强度越强。
+|-
+| [[树脂团]]
+| [[File:Resin Clump JE1 BE1.png|84px]]
+|
+* 嘎枝之心被使用不带有[[精准采集]]的工具破坏时掉落。
+| 可使用任意工具或徒手开采，当被挖掘时会被立即破坏。
+|
+* 用作装饰。
+|-
+| [[苍白橡树树叶]]
+| [[File:Pale Oak Leaves JE1.png|84px]]
+|
+* 作为苍白橡树的一部分生成。
+| [[剪刀]]
+|
+* 用作装饰。
+|-
+| [[苍白橡树树苗]]
+| [[File:Pale Oak Sapling JE1 BE1.png|84px]]
+|
+* 破坏苍白橡树树叶时有概率掉落。
+* [[流浪商人]]会出售此物品。
+| 
+|
+* 生长成苍白橡树。
+|-
+| [[苍白苔藓块]]和[[苍白覆地苔藓]]
+| [[File:Pale Moss Block JE1 BE1.png|84px]] <br> [[File:Pale Moss Carpet JE1 BE1.png|84px]]
+|
+* 自然生成于苍白之园。
+| 可使用任意工具采集，但用锄是最快的。
+|
+* 对苍白苔藓块{{ctrl|使用}}[[骨粉]]可使其扩散至周围合适的方块。
+|-
+| [[苍白垂须]]
+| {{Animate|Pale Hanging Moss JE1 BE2.png;Pale Hanging Moss (tip) JE1 BE2.png|84px}}
+|
+* 自然生成于苍白之园的苍白橡树下方。
+** 不会自然生长，但可以用骨粉使其生长。
+| [[剪刀]]
+|
+* 用作装饰。
+|-
+| [[眼眸花]]
+| {{animate|Open_Eyeblossom JE1 BE2.png;Closed Eyeblossom JE1 BE2.png|84px}}
+|
+* 自然生成于苍白之园。
+| 可使用任意工具或徒手开采，当被挖掘时会被立即破坏
+|
+* 可用于合成[[灰色染料]]或[[橙色染料]]，以及谜之炖菜。
+* 在白天和夜晚会相互转化。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Blocks}}
+|-
+| [[钟]]、[[灯笼]]、[[灵魂灯笼]]、[[铜门]]、<br>[[铁门]]、[[重质测重压力板]]、<br>[[轻质测重压力板]]、<br>[[磨制黑石压力板]]、<br>[[石头压力板]]和[[酿造台]]
+| {{Animate|Bell.png;Lantern.png;Soul Lantern.png;Copper Door.png;Exposed Copper Door.png;Weathered Copper Door.png;Oxidized Copper Door.png;Iron Door.png;Heavy Weighted Pressure Plate.png;Light Weighted Pressure Plate.png;Stone Pressure Plate.png;Brewing Stand.png|84px}}
+|
+* 现在被任意工具破坏都会掉落。
+|-
+| [[末影箱]]
+| [[File:Ender Chest JE2 BE2.png|84px]]
+|
+* 现在被任意工具破坏都会产生掉落物。
+|-
+| [[下界砖块]]
+| {{Animate|Chiseled Nether Bricks JE3 BE3.png;Cracked Nether Bricks JE1 BE1.png;Red Nether Bricks JE4 BE3.png|84px}}
+|
+* 略微更改了雕纹下界砖块、裂纹下界砖块和红色下界砖块的纹理，以匹配其他砖块。
+|-
+| [[覆地苔藓]]
+| [[File:Moss Carpet JE1 BE1.png|84px]]
+|
+* 不再能由剑加速破坏。
+|-
+| [[幽匿感测体]]
+| {{Animate|Inactive Sculk Sensor JE1.gif;Active Sculk Sensor JE1.gif;Cooldown Sculk Sensor JE1.gif|84px}}
+|
+* 现在能感测到[[嘎枝之心]]放置树脂团，振动频率为13。
+|}
+
+== 物品 ==
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=苍园觉醒新增物品
+|rows=1 
+| 0=Pale Oak Boat | Pale Oak Boat with Chest | Resin Clump | Resin Brick | Creaking Spawn Egg Revision 1}}
+|苍园觉醒新增物品一览
+}}
+
+=== 新内容 ===
+{|{{Simple Guide table|New Items}}
+|-
+| [[树脂砖]]
+| [[File:Resin_Brick_JE1_BE1.png|84px]]
+|
+* 可通过烧炼树脂团获得。
+{{Smelting
+|Resin Clump
+|Resin Brick
+|0.1
+}}
+|
+* 可用于合成树脂砖块。
+* 可作为[[盔甲纹饰材料]]。
+|-
+| [[树脂团]]
+| [[File:Resin_Clump_(item) JE1 BE1.png|84px]]
+|
+* 树脂团方块被破坏时掉落。
+* 可在[[林地府邸]]的箱子中找到。
+|
+* 可合成树脂块。
+* 可烧炼成树脂砖。
+|-
+| [[嘎枝刷怪蛋]]
+| {{Animate|Creaking Spawn Egg JE1 BE1.png|84px}}
+|
+* 可从创造模式物品栏获得。
+|
+* 生成嘎枝。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Items}}
+|-
+| [[谜之炖菜]]
+| [[File:Suspicious_Stew.png|84px]]
+|
+* 更改了一些合成配方中谜之炖菜的状态效果持续时间：
+* {{EffectLink|Fire Resistance}}：3s
+* {{EffectLink|Blindness}}：11s
+* {{EffectLink|Weakness}}：7s
+* {{EffectLink|Regeneration}}：7s
+* {{EffectLink|Jump Boost}}：5s
+* {{EffectLink|Wither}}：7s
+* {{EffectLink|Poison}}：11s
+|}
+
+== 非生物实体 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Non-mob entities}}
+|-
+| [[苍白橡木船]]
+| [[File:Pale Oak Boat JE1 BE1.png|128px]]
+|
+{{Crafting
+|A2= Pale Oak Planks
+|C2= Pale Oak Planks
+|A3= Pale Oak Planks 
+|B3= Pale Oak Planks
+|C3= Pale Oak Planks
+|Output= Pale Oak Boat
+}}
+| {{ItemLink|Pale Oak Boat}}
+|
+* 可用于水上移动。
+|-
+| [[苍白橡木运输船]]
+| [[File:Pale Oak Boat with Chest JE1 BE1.png|128px]]
+|
+{{Crafting
+|B2 = Chest
+|B3 = Pale Oak Boat
+|Output= Pale Oak Boat with Chest
+|ignoreusage=1
+}}
+| {{ItemLink|Pale Oak Boat with Chest}}
+|
+* 可用于水上运输。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Non-mob entities}}
+|-
+| [[经验球]]
+| [[File:Experience Orb Value 3-6.png|84px]]
+|
+* 更改了经验球的物理行为，现在掉落至地面时会反弹。<ref>{{bug|MC-277961|||Fixed}}</ref>
+|}
+
+== 结构 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Structures}}
+|-
+| [[苍白橡树]]
+| [[File:Pale_Oak.png|200px]]
+|
+* 自然生成于苍白之园，也可由苍白橡树树苗长成。
+|
+* 无
+|
+* 无
+|
+* 一种主要由苍白橡木原木和苍白橡树树叶构成的树。自然生成的苍白橡树还有概率带有苍白覆地苔藓、苍白苔藓块、苍白垂须和嘎枝之心。
+|}
+
+=== 更改 ===
+{|{{Simple Guide table|Changed Structures}}
+|-
+| [[林地府邸]]
+| [[File:Woodland_Mansion.png|256px]]
+|
+* 战利品箱子中现在会包含树脂团。
+|}
+
+== 生物群系 ==
+=== 新内容 ===
+{|{{Simple Guide table|New Biomes}}
+|-
+| [[苍白之园]]
+| [[File:Pale Garden.png|324px]]
+|
+* 一种会生成苍白橡树的[[黑森林]]变种。
+* [[林地府邸]]和[[动物]]类生物不在此生物群系生成。
+* 不会播放背景音乐。
+** 正在播放的音乐会在玩家进入此生物群系时淡出。
+| 无
+|}
+
+== 魔咒 ==
+=== 更改 ===
+{|{{Simple Guide table|Changed Enchantments}}
+|-
+| [[力量（魔咒）|力量]]
+|
+* 基础伤害增值还原至1.21前。
+|-
+| [[冰霜行者]]
+|
+* 不再在目标实体骑乘其他实体时生效。
+|}
+
+== 进度 ==
+=== 更改 ===
+{| class = "wikitable" style = "width:100%"
+! style="width:1%" | 图标 !! style="width:10%" | 进度 !! 更改
+|-
+| {{Aicon|Iron Sword|plain}}
+| <span style="text-align: center;"> '''{{Advancement name|adventure.kill_a_mob|zh|rev=1}}<br><small>Monster Hunter</small>'''</span>
+|
+* 现在还可以通过杀死[[嘎枝]]获取。
+|-
+| {{Aicon|Diamond Sword|fancy}}
+| <span style="text-align: center;"> '''{{Advancement name|adventure.kill_all_mobs|zh|rev=1}}<br><small>Monsters Hunted</small>'''</span>
+|
+* 现在还需要杀死[[嘎枝]]。
+|}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox guides|je}}
+
+[[en:Java Edition guides/The Garden Awakens]]
+[[es:Guías de Java Edition/The Garden Awakens]]
+[[ja:ガイド/Java Edition/ガーデン・アウェイケンズ]]
+[[pt:Guias da Edição Java/The Garden Awakens]]

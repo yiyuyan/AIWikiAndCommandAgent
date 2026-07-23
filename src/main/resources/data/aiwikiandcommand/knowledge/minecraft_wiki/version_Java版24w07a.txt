@@ -1,0 +1,128 @@
+# 页面: Java版24w07a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w07a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w07a
+|image=24w07a.png
+|image2=Java Edition 24w07a Simplified.png\Java Edition 24w07a Traditional.png\Java Edition 24w07a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年2月14日
+|jsonhash=60823331a5b8805ac1fcca472f8069aa7bbddd1c
+|clienthash=246ccdb05eb41e0aadd6d77c04a88552a6bf3d8a
+|clientmap=1645b3c7123c408274584b3279b7c1d559f2fcad
+|serverhash=94acd52e9b9392e21a06231bdc4f8f0cd6ccb2af
+|servermap=4e4d445c3f582f4a9f4c96ca7d9920f2b0def795
+|parent=1.20.5
+|prevparent=1.20.4
+|prev=24w06a
+|next=24w09a
+|nextparent=1.20.6
+}}<onlyinclude>
+
+'''24w07a'''是[[Java版1.20.5]]的第9个快照，发布于2024年2月14日<ref>{{snap|24w07a|February 14, 2024}}</ref>，在内置实验性数据包中加入了[[沼骸]]，并修复了一些漏洞。
+
+== 更改 ==
+=== 方块 ===
+'''[[漏斗]]'''
+* 现在其上方为[[蜂巢（方块）|蜂巢]]或[[蜂箱]]时仍能吸取[[物品实体]]。
+
+=== 生物 ===
+'''[[熊猫]]'''
+* 现在幼年熊猫打喷嚏掉落的[[黏液球]]由战利品表控制。
+
+=== 非生物实体 ===
+'''[[漏斗矿车]]'''
+* 回退了[[24w06a]]的更改。
+
+=== 命令格式 ===
+'''{{cmd|place}}'''
+* 将参数{{cd|max_depth}}的最大值由7更改为20。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>32</code>。
+* 加入了<code>gameplay/panda_sneeze</code>战利品表，用于控制在[[熊猫]]打喷嚏时掉落的物品。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下方块标签：
+** {{cd|#does_not_block_hoppers}}：{{cd|#beehives}}。
+
+== 新内容（实验性） ==
+=== 物品 ===
+'''[[刷怪蛋]]'''
+* 加入了沼骸刷怪蛋。
+
+=== 生物 ===
+'''[[沼骸]]'''
+* [[骷髅]]的新变种。
+** 拥有{{hp|16}}生命值，不同于骷髅的{{hp|20}}。
+** 在简单和普通[[难度]]中攻击间隔是{{convert|70}}，不同于骷髅的{{convert|40}}；在困难难度中攻击间隔是{{convert|50}}，不同于骷髅的{{convert|20}}。
+** 发射[[剧毒之箭]]而非普通箭。
+* 被玩家或驯服的狼杀死时，有概率掉落剧毒之箭。
+* 自然生成于[[沼泽]]和[[红树林沼泽]]生物群系，也会代替先前的带剧毒之箭的骷髅生成于[[试炼密室]]的部分[[试炼刷怪笼]]。
+
+== 更改（实验性） ==
+=== 生物 ===
+'''[[旋风人]]'''
+* 现在会将弹射物向其反方向发射。
+* 现在[[抢夺]]魔咒对其生效。
+
+=== 非生物实体 ===
+'''[[风弹（实体）|风弹]]'''
+* 现在可以穿过[[碰撞箱]]不完整的方块。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 现在可通过击杀沼骸达成“{{Advancement name|adventure.kill_a_mob|zh|rev=1}}”进度。
+* 将沼骸加入到“{{Advancement name|adventure.kill_all_mobs|zh|rev=1}}”进度的达成要求中。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 向实体类型标签{{cd|#no_anger_from_wind_charge}}加入了{{cd|bogged}}。
+* 向实体类型标签{{cd|#skeletons}}加入了{{cd|bogged}}。
+
+== 修复 ==
+{{fixes|fixedin=24w07a|showdesc=1
+|;old
+|266570|风弹无法穿过方块轮廓箱。
+|;1.20.4的漏洞
+|267732|{{cmd|link=none|place jigsaw}}命令的参数{{cd|max_depth}}仍为7。
+|267866|熊猫掉落黏液球依赖于硬编码。
+|268355|{{cmd|tick freeze|link=none}}会使已加载区块过期。
+|;dev
+|267955|旋风人不移动时不能反弹箭和三叉戟以外的弹射物。
+|268080|旋风人反弹的弹射物总是向下而非反方向发射。
+|;prev
+|268339|{{cd|options.japaneseGlyphVariants.tooltip}}中“Japanese”误拼为“Japanse”。
+|268342|旋风人会被风弹伤害。
+|268344|旋风人不受抢夺魔咒影响。
+|268349|上方有完整方块的漏斗矿车不再寻找和拾起物品实体。
+|268353|{{cmd|tick freeze|link=none}}会随机下一刻的AI行为。
+|268362|玩家使用风弹摔落到可以减免摔落伤害的方块上时，仍然受到全部摔落伤害。
+|268368|利用风弹反弹入水，出水后受到摔落伤害。
+|268383|无论是否由风弹引起下落，其都能抵消在碰撞点及其上方累积的摔落伤害。
+|268389|使用风弹后，切换游戏模式也会造成摔落伤害。
+|268418|1.9前的世界升级后似乎有随机的区块重新生成。
+|268426|旋风人风弹被反弹后击中旋风人时不爆炸而被删除。
+|268451|漏斗不能从蜂巢或蜂箱中吸取蜂蜜瓶。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:24w07a]]
+[[en:Java Edition 24w07a]]
+[[es:Java Edition 24w07a]]
+[[fr:Édition Java 24w07a]]
+[[ja:Java Edition 24w07a]]
+[[lzh:爪哇版二四週〇七甲]]
+[[pt:Edição Java 24w07a]]
+[[ru:24w07a (Java Edition)]]
+[[uk:24w07a (Java Edition)]]

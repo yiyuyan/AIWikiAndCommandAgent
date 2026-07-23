@@ -1,0 +1,130 @@
+# 页面: 计算器/实体运动
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%A1%E7%AE%97%E5%99%A8/%E5%AE%9E%E4%BD%93%E8%BF%90%E5%8A%A8
+# 分类: 使用简单计算器的页面, 计算器与互动式工具
+# 抓取时间: 2026-07-14 17:36:06
+# 原始 Wikitext 内容:
+
+这个交互计算器可以计算实体的运动的数据。
+<onlyinclude>{| class="wikitable calculator-container calculatorgadget-enabled" data-calculator-refresh-on-load="true" style="display: none; max-width: 500px; {{{style|}}}"
+{{#if: {{{hidedynamics|}}} | | {{pipe escape|
+! colspan{{=}}"4" | 初始条件{{note|name=angleConvention}}<br><div style{{=}}"width: max-content; justify-self: center;"><span style{{=}}"white-space: nowrap;">{{Simplecalc|id=eulerAngles|name=velType|type=radio|default=1}} {{Simplecalc label|for=eulerAngles|label=角度}}</span> <span style{{=}}"white-space: nowrap;"> {{Simplecalc|id=velVector|name=velType|type=radio|default=0}} {{Simplecalc label|for=velVector|label=矢量}}</span></div>
+|-
+! X坐标
+| {{Simplecalc|type=number|id=pxInit|size=6|default={{{x0|0}}}|decimals=3}}
+! {{simplecalc-hideifzero|formula=velVector|X方向上的速度分量<math>v_{\text{X}}</math>|starthidden=1}}{{simplecalc-hideifzero|formula=eulerAngles|偏航角<math>\beta</math>}}
+| style{{=}}"white-space: nowrap;" | {{simplecalc-hideifzero|formula=velVector|{{Simplecalc|type=hidden|id=vxInitForm|formula=speedInitVal*cos(pi/180*pitchInitVal)*cos(pi/180*(yawInitVal+90))}}{{Simplecalc|type=number|id=vxInit|formula=if(eulerAngles,ifless(abs(vxInitForm),1/1e10,0,vxInitForm),vxInit)|size=6|decimals=3}}米/刻|starthidden=1}}{{simplecalc-hideifzero|formula=eulerAngles|{{Simplecalc|type=number|id=yawInitVal|formula=ifzero(eulerAngles,180/pi*atan2(ifless(abs(vzInit),1/1e10,0,vzInit),ifless(abs(vxInit),1/1e10,0,vxInit))-90,yawInitVal)|min=-180|max=180|size=6|default={{{yaw|0}}}|decimals=3}}度}}{{Simplecalc|type=hidden|id=velMag|formula=pow(vxInit*vxInit+vyInit*vyInit+vzInit*vzInit,0.5)}}
+|-
+! Y坐标
+| {{Simplecalc|type=number|id=pyInit|size=6|default={{{y0|0}}}|decimals=3}}
+! {{simplecalc-hideifzero|formula=velVector|Y方向上的速度分量<math>v_{\text{Y}}</math>|starthidden=1}}{{simplecalc-hideifzero|formula=eulerAngles|俯仰角<math>\alpha</math>}}
+| style{{=}}"white-space: nowrap;" | {{simplecalc-hideifzero|formula=velVector|{{Simplecalc|type=hidden|id=vyInitForm|formula=-speedInitVal*sin(pi/180*pitchInitVal)}}{{Simplecalc|type=number|id=vyInit|formula=if(eulerAngles,ifless(abs(vyInitForm),1/1e10,0,vyInitForm),vyInit)|size=6|decimals=3}}米/刻|starthidden=1}}{{simplecalc-hideifzero|formula=eulerAngles|{{Simplecalc|type=hidden|id=pitchInitValForm|formula=vyInit/speedInitVal}}{{Simplecalc|type=number|id=pitchInitVal|formula=ifzero(eulerAngles,ifzero(speedInitVal,0,-180/pi*asin(ifless(abs(pitchInitValForm),1/1e10,0,pitchInitValForm))),pitchInitVal)|min=-90|max=90|size=6|default={{{pitch|-30}}}|decimals=3}}度}}
+|-
+! Z坐标
+| {{Simplecalc|type=number|id=pzInit|size=6|default={{{z0|0}}}|decimals=3}}
+! {{simplecalc-hideifzero|formula=velVector|Z方向上的速度分量<math>v_{\text{Z}}</math>|starthidden=1}}{{simplecalc-hideifzero|formula=eulerAngles|速度<math>v</math>}}
+| style{{=}}"white-space: nowrap;" | {{simplecalc-hideifzero|formula=velVector|{{Simplecalc|type=hidden|id=vzInitForm|formula=speedInitVal*cos(pi/180*pitchInitVal)*sin(pi/180*(yawInitVal+90))}}{{Simplecalc|type=number|id=vzInit|formula=if(eulerAngles,ifless(abs(vzInitForm),1/1e10,0,vzInitForm),vzInit)|size=6|decimals=3}}米/刻|starthidden=1}}{{simplecalc-hideifzero|formula=eulerAngles|{{Simplecalc|type=number|id=speedInitVal|formula=ifzero(eulerAngles,velMag,speedInitVal)|min=0|size=6|default={{{speed|3}}}|step=0.01|decimals=3}}米/刻}}
+|-
+! colspan{{=}}"4" | {{{name|实体}}}数据
+}} | }}
+{{#if: {{{hidedynamics|}}} | 
+! style{{=}}"{{#if: {{{hideproperties|}}} | display: none; | }}" colspan{{=}}"4" {{!}} {{{name|Entity}}} properties
+| }}
+|-
+! style="{{#if: {{{hideproperties|}}} | display: none; | }}" | 水平方向“阻力”<math>f_{\text{h}}</math>
+| style="{{#if: {{{hideproperties|}}} | display: none; | }}" | {{Simplecalc|type=number|id=dragH|min=0|max=1|size=6|default=0.99|decimals=3}}
+! style="{{#if: {{{hideproperties|}}} | display: none; | }}" rowspan="2" | 加速度<math>a</math>
+| style="{{#if: {{{hideproperties|}}} | display: none; | }} white-space: nowrap;" rowspan="2" | {{Simplecalc|type=number|id=grav|size=6|default={{{gravity|-0.05}}}|step=0.01|decimals=3}}米/刻<sup>2</sup>
+|-
+! style="{{#if: {{{hideproperties|}}} | display: none; | }}" | 竖直方向“阻力”<math>f_{\text{v}}</math>
+| style="{{#if: {{{hideproperties|}}} | display: none; | }}" |
+{{Simplecalc|type=number|id=dragY|min=0|max=1|size=6|default={{{dragy|0.99}}}|decimals=3}}
+|-
+! style="{{#if: {{{hideproperties|}}} | display: none; | }}" | 计算的顺序
+| style="{{#if: {{{hideproperties|}}} | display: none; | }}" colspan="3" | {{Simplecalc|type=select|id=order|class=cdx-select|mapping={"位置，“阻力”，加速度":1,"位置，加速度，“阻力”":2,"加速度，位置，“阻力”":3,"“阻力”，加速度，位置":4,"“阻力”，位置，加速度":5,"加速度，“阻力”，位置":6}|default={{{type|1}}}}}
+{{Simplecalc|type=hidden|id=AH|formula=switch(order,1,1,2,1,3,1,4,dragH,5,dragH,6,dragH)}}
+{{Simplecalc|type=hidden|id=AY|formula=switch(order,1,1,2,1,3,1,4,dragY,5,dragY,6,dragY)}}
+{{Simplecalc|type=hidden|id=B|formula=switch(order,1,1,2,dragY,3,dragY,4,1,5,1,6,dragY)}}
+{{Simplecalc|type=hidden|id=C|formula=switch(order,1,1,2,dragY,3,1,4,1,5,dragY,6,dragY)}}
+{{Simplecalc|type=hidden|id=terminalSpeedSel|formula=switch(order,1,1,2,0,3,0,4,1,5,1,6,0)}}
+|-
+{{#if: {{{hidedynamics|}}} | | {{pipe escape|
+! {{simplecalc-hideifzero|formula=timeInput|时间<math>t</math>}}{{simplecalc-hideifzero|formula=radiusInput|移动距离<math>R</math>|starthidden=1}}
+| colspan{{=}}"3" | 
+{{Simplecalc|type=hidden|id=ImindHt|formula=1-pow(dragH,time)}}
+{{Simplecalc|type=hidden|id=ImindYt|formula=1-pow(dragY,time)}}{{Simplecalc|type=hidden|id=timeRadius|formula=log(1-radius/(AH*recImindH*pow(vxInit*vxInit+vzInit*vzInit,0.5)))/logdH}}{{Simplecalc|type=hidden|id=radiusTime|formula=AH*recImindH*ImindHt*pow(vxInit*vxInit+vzInit*vzInit,0.5)}}
+{{simplecalc-hideifzero|formula=timeInput|{{Simplecalc|type=range|min=0|max=500|step=1|id=time|formula=if(radiusInput,timeRadius,time2)|default={{{time|0}}}}} {{Simplecalc|type=number|min=0|max=500|step=1|id=time2|formula=if(radiusInput,timeRadius,time)|default={{{time|0}}}}}刻
+}}{{simplecalc-hideifzero|formula=radiusInput|{{Simplecalc|type=range|min=0|max=300|step=1|id=radius|formula=if(timeInput,radiusTime,radius2)|default=0}} {{Simplecalc|type=number|min=0|max=300|step=1|id=radius2|formula=if(timeInput,radiusTime,radius)|default=0}}米
+|starthidden=1}}<br>{{Simplecalc|id=timeInput|name=inputType|type=radio|default=1}} {{Simplecalc label|for=timeInput|label=时间}} {{Simplecalc|id=radiusInput|name=inputType|type=radio|default=0}} {{Simplecalc label|for=radiusInput|label=移动距离}}
+|-
+! 位置
+| colspan{{=}}"3" |
+{{Simplecalc|type=hidden|id=vGravRec|formula=vyInit-grav*recImindY*B}}
+X坐标{{=}}
+{{Simplecalc|type=plain|id=px|formula=pxInit+ImindHt*recImindH*vxInit*AH|size=6|decimals=3}}，
+
+Y坐标{{=}} {{Simplecalc|type=plain|id=py|formula=pyInit+ImindYt*recImindY*vGravRec*AY+grav*recImindY*time*C|size=6|decimals=3}}，
+
+Z坐标{{=}} {{Simplecalc|type=plain|id=pz|formula=pzInit+ImindHt*recImindH*vzInit*AH|size=6|decimals=3}}，
+<br>最高高度<math>\text{Y}_\max=</math>{{Simplecalc-hideifzero|formula=ifgreater(timePeak,0,1,0)|{{Simplecalc|type=plain|id=peak|formula=pyInit+(1-pow(dragY,timePeak))*recImindY*vGravRec*AY+grav*recImindY*timePeak*C|size=6|decimals=3}}米 （在{{Simplecalc|type=plain|id=timePeak|formula=round(1/logdY*log(C/AY*grav/(logdY*vGravRec)))}}刻时）}}{{Simplecalc-hideifzero|formula=ifgreater(timePeak,0,0,1)|none}}，<br>水平移动范围<math>\text{H}=</math>{{Simplecalc|type=plain|id=range|formula=AH*recImindH*(1-pow(dragH,timeGround))*pow(vxInit*vxInit+vzInit*vzInit,0.5)|size=6|decimals=3}}
+{{Simplecalc|type=hidden|id=pdaInit|formula=-(recImindY*vGravRec*AY)/(grav*recImindY*C)}}
+{{Simplecalc|type=hidden|id=pdaIterA|formula=pdaInit-(recImindY*((1-pow(dragY,pdaInit))*vGravRec*AY+pdaInit*grav*C))/(recImindY*(grav*C-logdY*pow(dragY,pdaInit)*vGravRec*AY))}}
+{{Simplecalc|type=hidden|id=pdaIterB|formula=pdaIterA-(recImindY*((1-pow(dragY,pdaIterA))*vGravRec*AY+pdaIterA*grav*C))/(recImindY*(grav*C-logdY*pow(dragY,pdaIterA)*vGravRec*AY))}}
+{{Simplecalc|type=hidden|id=pdaIterC|formula=pdaIterB-(recImindY*((1-pow(dragY,pdaIterB))*vGravRec*AY+pdaIterB*grav*C))/(recImindY*(grav*C-logdY*pow(dragY,pdaIterB)*vGravRec*AY))}}米（在{{Simplecalc|type=plain|id=timeGround|formula=round(pdaIterC-(recImindY*((1-pow(dragY,pdaIterC))*vGravRec*AY+pdaIterC*grav*C))/(recImindY*(grav*C-logdY*pow(dragY,pdaIterC)*vGravRec*AY)))}}刻时）。
+|-
+! 速度<math>v</math>
+| colspan{{=}}"3" |
+X方向上的速度分量<math>v_{\text{X}}</math>{{=}}{{Simplecalc|type=plain|id=vx|formula=-logdH*(1-ImindHt)*recImindH*vxInit*AH|size=6|decimals=3}}米/刻，
+
+Y方向上的速度分量<math>v_{\text{Y}}</math>{{=}}{{Simplecalc|type=plain|id=vy|formula=recImindY*(grav*C-logdY*(1-ImindYt)*vGravRec*AY)|size=6|decimals=3}}米/刻，
+
+Z方向上的速度分量<math>v_{\text{Z}}</math>{{=}}{{Simplecalc|type=plain|id=vz|formula=-logdH*(1-ImindHt)*recImindH*vzInit*AH|size=6|decimals=3}}米/刻，<br>
+
+终端速度<math>v_\infty=</math>{{Simplecalc|type=plain|id=terminalSpeed|formula=abs(ifzero(terminalSpeedSel,dragY,1)*grav*recImindY)|decimals=3}}米/刻。
+}} }}
+|-
+{{#ifeq: {{{name|}}} | Arrow | {{pipe escape|
+! style{{=}}"{{#if: {{{hidelevel|{{{hidecrit|}}}}}} | display: none; | }}" | Bow level
+| style{{=}}"{{#if: {{{hidelevel|}}} | display: none; | }}" colspan{{=}}"{{#if: {{{hidecrit|}}} | 3 | 2 }}" | {{Simplecalc|id=speedVal|type=hidden|formula=pow(vx*vx+vy*vy+vz*vz,0.5)}}
+{{Simplecalc|id=dmgTag|type=hidden|formula=ifequal(level,0,2,2.5+level/2)}}{{Simplecalc|type=range|datalist=0;1;2;3;4;5|min=0|max=5|step=1|size={{#if: {{{hidecrit|}}} | 24 | 12 }}|id=level|formula=level2|default={{{level|0}}}}} {{Simplecalc|type=number|min=0|max=5|step=1|id=level2|formula=level|default={{{level|0}}}}}
+| style{{=}}"{{#if: {{{hidelevel|{{{hidecrit|}}}}}} | display: none; | }}" | {{Simplecalc|type=checkbox|id=crit|default={{{crit|0}}}}} {{Simplecalc label|Critical damage|for=crit}}
+|-
+{{#if: {{{hidedynamics|}}} | | {{pipe escape|
+! Damage
+| colspan{{=}}"3" | {{Simplecalc-hideifzero|formula=crit|Avg.}} {{Simplecalc|id=dmg|type=plain|formula=if(crit,5/4*round(speedVal*dmgTag)+1,round(speedVal*dmgTag))|default=6.00|size=6|decimals=2}} <span class{{=}}"nowrap mc-hearts">{{healthbar|2|9}}&#32;× {{Simplecalc|id=dmgHeart|type=plain|formula=dmg/2|default=3}}</span>
+|-
+}} }}
+}} | }}
+! colspan="4" | 发射角度计算器{{note|name=angleConvention|偏航角和俯仰角遵循Minecraft的记法，因此0度偏航角是Z的正方向（北方），负数的俯仰角是向上看。}}{{Simplecalc|type=hidden|id=recImindH|formula=1/(1-dragH)}}{{Simplecalc|type=hidden|id=recImindY|formula=1/(1-dragY)}}{{Simplecalc|type=hidden|id=logdH|formula=log(dragH)}}{{Simplecalc|type=hidden|id=logdY|formula=log(dragY)}}
+|-
+| colspan="4" | ''给定欲击中的目标和初始速度，计算{{lc:{{{name|实体}}}}}能够击中目标的发射角度。 {{Simplecalc-hideifzero|formula=ifless(pitchCond,1/1e5,1,0)|{{#ifeq: {{{name|}}} | Arrow | <br> | }}目标将在 {{Simplecalc|type=plain|id=timeTarget|formula=round(log(1-pitchB/cos(pitchTarget))/logdH)}} 刻后被击中。{{#ifeq: {{{name|}}} | Arrow | {{Simplecalc|type=hidden|id=vxTarget|formula=-logdH*pow(dragH,timeTarget)*recImindH*speedTarget*cos(pitchTarget)*cos(yawTarget+pi/2)*AH}}{{Simplecalc|type=hidden|id=vyTarget|formula=recImindY*(grav*C-logdY*pow(dragY,timeTarget)*(speedTarget*sin(pitchTarget)-grav*recImindY*B)*AY)}}{{Simplecalc|type=hidden|id=vzTarget|formula=-logdH*pow(dragH,timeTarget)*recImindH*speedTarget*cos(pitchTarget)*sin(yawTarget+pi/2)*AH}}&nbsp;and would deal {{Simplecalc-hideifzero|formula=crit|avg.}} {{Simplecalc|id=dmgTarget|type=plain|formula=if(crit,5/4*round(speedTarget*dmgTag)+1,round(speedTarget*dmgTag))|default=6.00|size=6|decimals=2}} <span class{{=}}"nowrap mc-hearts">{{healthbar|2|9}}&#32;× {{Simplecalc|id=dmgTargetHeart|type=plain|formula=dmgTarget/2|default=3}}</span> damage }}}}''
+|-
+! X坐标
+| {{#if: {{{hidedynamics|}}} | style{{=}}"white-space: nowrap;" {{!}} {{Simplecalc|type=number|id=pxInit|size=3|default={{{x0|0}}}|decimals=3}}&nbsp;–&nbsp;| }}{{Simplecalc|type=number|id=pxTarget|size={{#if: {{{hidedynamics|}}} | 3 | 6 }}|default={{{xt|10}}}|decimals=3}}
+! 偏航角<math>\beta</math>
+| style{{=}}"white-space: nowrap;" | {{Simplecalc|type=hidden|id=dX|formula=pxTarget-pxInit}}{{Simplecalc|type=hidden|id=dY|formula=pyTarget-pyInit}}{{Simplecalc|type=hidden|id=dZ|formula=pzTarget-pzInit}}{{Simplecalc|type=hidden|id=yawTarget|formula=atan2(dZ,dX)}}{{Simplecalc|type=plain|id=yawTargetDeg|formula=180/pi*yawTarget-90|decimals=3}}度
+|-
+! Y坐标
+| {{#if: {{{hidedynamics|}}} | style{{=}}"white-space: nowrap;" {{!}} {{Simplecalc|type=number|id=pyInit|size=3|default={{{y0|0}}}|decimals=3}}&nbsp;–&nbsp;| }}{{Simplecalc|type=number|id=pyTarget|size={{#if: {{{hidedynamics|}}} | 3 | 6 }}|default={{{yt|10}}}|decimals=3}}
+! 俯仰角<math>\alpha</math>
+| style{{=}}"white-space: nowrap;" | {{Simplecalc|type=hidden|id=pitchA|formula=AY*recImindY}}{{Simplecalc|type=hidden|id=pitchB|formula=if(and(ifless(abs(abs(yawTarget)-pi/2),1/1e10,1,0),ifless(abs(dX),1/1e10,1,0)),abs(dZ)/(AH*speedTarget*recImindH),dX/(AH*speedTarget*cos(yawTarget)*recImindH))}}{{Simplecalc|type=hidden|id=pitchC|formula=logdY/logdH}}{{Simplecalc|type=hidden|id=pitchD|formula=B*grav*recImindY}}{{Simplecalc|type=hidden|id=pitchE|formula=C*grav*recImindY/logdH}}{{Simplecalc|type=hidden|id=euler|formula=exp(1)}}{{Simplecalc|type=hidden|id=pitchInitA|formula=-pitchA*(speedTarget-pitchD)*pitchC/pitchE*exp(pitchC*(dY-pitchA*(speedTarget-pitchD))/pitchE)}}{{Simplecalc|type=hidden|id=pitchInitB|formula=pow(2/euler*(pitchInitA+1/euler),0.5)}}{{Simplecalc|type=hidden|id=pitchInitC|formula=pitchInitA/(1/euler+pitchInitB*pow(1+euler/3*pitchInitB,0.5))}}{{Simplecalc|type=hidden|id=pitchInit|formula=if(direct,asin(dY/pow(dX*dX+dY*dY+dZ*dZ,0.5)),acos(pitchB/(1-pow(-pitchE/(pitchA*(speedTarget-pitchD)*pitchC)*pitchInitC,1/pitchC))))}}{{Simplecalc|type=hidden|id=pitchIterA|formula=pitchInit-(pitchA*(1-pow(1-pitchB/cos(pitchInit),pitchC))*(speedTarget*sin(pitchInit)-pitchD)+pitchE*log(1-pitchB/cos(pitchInit))-dY)/(pitchA*speedTarget*(1-pow(1-pitchB/cos(pitchInit),pitchC))*cos(pitchInit)-pitchE*pitchB*sin(pitchInit)/((1-pitchB/cos(pitchInit))*pow(cos(pitchInit),2))+pitchA*pitchB*pitchC*pow(1-pitchB/cos(pitchInit),pitchC-1)*sin(pitchInit)*(speedTarget*sin(pitchInit)-pitchD)/pow(cos(pitchInit),2))}}
+{{Simplecalc|type=hidden|id=pitchIterB|formula=pitchIterA-(pitchA*(1-pow(1-pitchB/cos(pitchIterA),pitchC))*(speedTarget*sin(pitchIterA)-pitchD)+pitchE*log(1-pitchB/cos(pitchIterA))-dY)/(pitchA*speedTarget*(1-pow(1-pitchB/cos(pitchIterA),pitchC))*cos(pitchIterA)-pitchE*pitchB*sin(pitchIterA)/((1-pitchB/cos(pitchIterA))*pow(cos(pitchIterA),2))+pitchA*pitchB*pitchC*pow(1-pitchB/cos(pitchIterA),pitchC-1)*sin(pitchIterA)*(speedTarget*sin(pitchIterA)-pitchD)/pow(cos(pitchIterA),2))}}
+{{Simplecalc|type=hidden|id=pitchIterC|formula=pitchIterB-(pitchA*(1-pow(1-pitchB/cos(pitchIterB),pitchC))*(speedTarget*sin(pitchIterB)-pitchD)+pitchE*log(1-pitchB/cos(pitchIterB))-dY)/(pitchA*speedTarget*(1-pow(1-pitchB/cos(pitchIterB),pitchC))*cos(pitchIterB)-pitchE*pitchB*sin(pitchIterB)/((1-pitchB/cos(pitchIterB))*pow(cos(pitchIterB),2))+pitchA*pitchB*pitchC*pow(1-pitchB/cos(pitchIterB),pitchC-1)*sin(pitchIterB)*(speedTarget*sin(pitchIterB)-pitchD)/pow(cos(pitchIterB),2))}}{{Simplecalc|type=hidden|id=pitchIterD|formula=pitchIterC-(pitchA*(1-pow(1-pitchB/cos(pitchIterC),pitchC))*(speedTarget*sin(pitchIterC)-pitchD)+pitchE*log(1-pitchB/cos(pitchIterC))-dY)/(pitchA*speedTarget*(1-pow(1-pitchB/cos(pitchIterC),pitchC))*cos(pitchIterC)-pitchE*pitchB*sin(pitchIterC)/((1-pitchB/cos(pitchIterC))*pow(cos(pitchIterC),2))+pitchA*pitchB*pitchC*pow(1-pitchB/cos(pitchIterC),pitchC-1)*sin(pitchIterC)*(speedTarget*sin(pitchIterC)-pitchD)/pow(cos(pitchIterC),2))}}{{Simplecalc|type=hidden|id=pitchIterE|formula=pitchIterD-(pitchA*(1-pow(1-pitchB/cos(pitchIterD),pitchC))*(speedTarget*sin(pitchIterD)-pitchD)+pitchE*log(1-pitchB/cos(pitchIterD))-dY)/(pitchA*speedTarget*(1-pow(1-pitchB/cos(pitchIterD),pitchC))*cos(pitchIterD)-pitchE*pitchB*sin(pitchIterD)/((1-pitchB/cos(pitchIterD))*pow(cos(pitchIterD),2))+pitchA*pitchB*pitchC*pow(1-pitchB/cos(pitchIterD),pitchC-1)*sin(pitchIterD)*(speedTarget*sin(pitchIterD)-pitchD)/pow(cos(pitchIterD),2))}}{{Simplecalc|type=hidden|id=pitchIterF|formula=pitchIterE-(pitchA*(1-pow(1-pitchB/cos(pitchIterE),pitchC))*(speedTarget*sin(pitchIterE)-pitchD)+pitchE*log(1-pitchB/cos(pitchIterE))-dY)/(pitchA*speedTarget*(1-pow(1-pitchB/cos(pitchIterE),pitchC))*cos(pitchIterE)-pitchE*pitchB*sin(pitchIterE)/((1-pitchB/cos(pitchIterE))*pow(cos(pitchIterE),2))+pitchA*pitchB*pitchC*pow(1-pitchB/cos(pitchIterE),pitchC-1)*sin(pitchIterE)*(speedTarget*sin(pitchIterE)-pitchD)/pow(cos(pitchIterE),2))}}{{Simplecalc|type=hidden|id=pitchTarget|formula=pitchIterF-(pitchA*(1-pow(1-pitchB/cos(pitchIterF),pitchC))*(speedTarget*sin(pitchIterF)-pitchD)+pitchE*log(1-pitchB/cos(pitchIterF))-dY)/(pitchA*speedTarget*(1-pow(1-pitchB/cos(pitchIterF),pitchC))*cos(pitchIterF)-pitchE*pitchB*sin(pitchIterF)/((1-pitchB/cos(pitchIterF))*pow(cos(pitchIterF),2))+pitchA*pitchB*pitchC*pow(1-pitchB/cos(pitchIterF),pitchC-1)*sin(pitchIterF)*(speedTarget*sin(pitchIterF)-pitchD)/pow(cos(pitchIterF),2))}}
+{{Simplecalc-hideifzero|formula=ifless(pitchCond,1/1e5,1,0)|{{Simplecalc|type=hidden|id=pitchCond|formula=abs(pitchA*(1-pow(1-pitchB/cos(pitchTarget),pitchC))*(speedTarget*sin(pitchTarget)-pitchD)+pitchE*log(1-pitchB/cos(pitchTarget))-dY)}}{{Simplecalc|type=plain|id=pitchTargetDeg|formula=-180/pi*pitchTarget|size=6|decimals=3}} 度}}{{Simplecalc-hideifzero|formula=ifless(pitchCond,1/1e5,0,1)|Unreachable}}<br>{{Simplecalc|type=checkbox|id=direct|default=1}} {{Simplecalc label|直接射击|for=direct}}
+|-
+! Z坐标
+| {{#if: {{{hidedynamics|}}} | style{{=}}"white-space: nowrap;" {{!}} {{Simplecalc|type=number|id=pzInit|size=3|default={{{z0|0}}}|decimals=3}}&nbsp;–&nbsp;| }}{{Simplecalc|type=number|id=pzTarget|size={{#if: {{{hidedynamics|}}} | 3 | 6 }}|default={{{zt|10}}}|decimals=3}}
+! 速度{{#if: {{{speednote|}}} | {{note|name=entitySpeedNote|{{{speednote}}}}} }}
+| style{{=}}"white-space: nowrap;" | {{Simplecalc|type=number|id=speedTarget|min=0|size=6|step=0.01|default={{{speedt|{{{speed|3}}}}}}|decimals=3}}米/刻
+|}
+{{#if: {{{hidedynamics|}}} | {{see also|Calculators/Projectile motion}}}}
+{{notelist}}</onlyinclude>
+
+== 导航 ==
+{{Navbox calculators}}
+
+[[en:Calculators/Projectile motion]]
+[[ja:計算機/投擲物の飛距離]]
+[[ko:계산기/발사체 운동]]
+[[lzh:算械/實體之行]]
+[[pt:Calculadoras/Movimento de projétil]]
+[[uk:Калькулятори/Рух снаряда]]

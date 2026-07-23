@@ -1,0 +1,1229 @@
+# 页面: 距离现象/Java版/历史现象
+# 来源: https://zh.minecraft.wiki/w/%E8%B7%9D%E7%A6%BB%E7%8E%B0%E8%B1%A1/Java%E7%89%88/%E5%8E%86%E5%8F%B2%E7%8E%B0%E8%B1%A1
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:37
+# 原始 Wikitext 内容:
+
+{{for|较新版本的距离现象|距离现象/Java版|其他用法|距离现象}}{{stub|需要补充一些现象发生的具体版本和具体的坐标}}{{more images}}
+下面介绍了[[Java版]]历史版本的所有距离现象。
+
+== 方块模型 ==
+模型问题在[[Java版1.8|1.8]]中被修复，因为硬编码的方块模型被JSON文件的标准化模型所取代。
+
+=== 火 ===
+影响版本：[[Java版Indev|Indev]] - [[14w17a]]
+
+[[File:Fire model precision loss.png|缩略图]]
+
+在墙上的火在世界远处会发生偏移导致出现深度冲突，或者被拉伸。
+{{-}}
+
+=== 齿轮和梯子 ===
+影响版本：[[Java版Indev 0.31 20100128-2203|Indev 20100128-2203]]（齿轮）/[[Java版Infdev 20100616-1808|Infdev 20100616-1808]]（梯子） - [[Java版Infdev 20100630-1835|Infdev 20100630-1835]]（齿轮）/[[Java版Beta 1.7.3|Beta 1.7.3]]（梯子）
+
+[[File:Stretched gear.png|缩略图]]
+
+[[File:Distorted ladder.png|缩略图]]
+
+由于齿轮和梯子总是会覆盖整个方块表面，因此只有当精度不再能够支持完整方块时，齿轮和梯子才会出现精度损失现象。
+
+从X/Z=±16,777,216开始，齿轮和梯子会被拉伸成两个方块宽。此外，放置在此处相邻的齿轮和梯子中只有其中一个变得可见。
+
+自此之后，每过{{^|2|n}}，这两种现象就会变得更加严重。
+
+由于齿轮在[[Java版Alpha v1.0.1|Alpha v1.0.1]]中被移除，这使得齿轮的该现象被“修复”了。
+{{-}}
+
+=== 火把和树苗 ===
+影响版本：[[Java版Infdev 20100313|Infdev 20100313]]
+
+[[File:313 far items.png|缩略图]]
+
+X/Z>±8,388,608时，火把，树苗和其他十字模型将失去精度，这会导致它们会被显示为2D的。
+{{-}}
+
+=== 流动的水和熔岩 ===
+影响版本：[[Java版Infdev 20100616-1808|Infdev 20100616-1808]] - [[Java版Beta 1.7.3|Beta 1.7.3]]
+
+[[File:Distorted streams.png|缩略图]]
+
+由于流体总是会覆盖整个方块表面，因此只有当精度不再能够支持完整方块时，流体才会出现精度损失现象。
+
+从X/Z=16,777,216开始，流体的侧面会被拉伸成两格方块大小。
+
+自此之后，每过{{^|2|n}}，这种现象就会变得更加严重。
+
+<gallery>
+File:Farlandswaterfall.png|拉伸的水
+File:Farlandslavafall.png|拉伸的熔岩
+</gallery>
+{{-}}
+
+=== 铁轨、动力铁轨和探测铁轨 ===
+影响版本：[[Java版Infdev 20100618|Infdev 20100618]]（铁轨）/[[Java版Beta 1.5|Beta 1.5]] （动力铁轨和探测铁轨） - [[Java版Beta 1.7.3|Beta 1.7.3]]
+
+[[File:Infdev big rail.png|缩略图]]
+
+由于铁轨总是会覆盖整个方块表面，因此只有当精度不再能够支持完整方块时，铁轨才会出现精度损失现象。
+
+从X/Z=±16,777,216开始，铁轨会被拉伸。每四个相邻的铁轨只有中间的一或两个变得可见。爬上方块的铁轨同样会被拉伸。这会导致铁轨的坡度变小。
+
+自此之后，每过{{^|2|n}}，这种现象就会变得更加严重。
+
+<gallery>
+File:Redstone rail model bug.png|探测铁轨和动力铁轨
+File:Distorted rails.png|动力铁轨，探测铁轨和激活铁轨
+File:Distorted rail circle.png|用铁轨围成的一个圈
+</gallery>
+{{-}}
+
+=== 红石线 ===
+影响版本：[[Java版Alpha v1.0.1|Alpha v1.0.1]] - [[14w11b]]，在[[Java版Beta 1.5|Beta 1.5]]、[[Java版Beta 1.8-pre1|Beta 1.8-pre1]]和[[14w02a]]发生改变
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±262,144（2<sup>18</sup>）~±1,048,575
+|在[[Java版Beta 1.8-pre1|Beta 1.8-pre1]]之前，爬上方块的红石线会发生偏移，从而与被爬上的方块产生严重的纹理冲突。
+|[[File:Redstone 262144 vertical.png|64px]]
+|-
+|X/Z ±1,048,576（2<sup>20</sup>）~4,194,303
+|点状红石开始被拉伸。
+|[[File:Redstone 1048576 dots.png|64px]]
+|-
+|X/Z ±4,194,304（2<sup>22</sup>）~8,388,607
+|
+* 红石线再次被拉伸。
+* 点状红石变得不可见。
+|[[File:Redstone 4194304.png|64px]]
+|-
+|X/Z ±8,388,608（2<sup>23</sup>）~16,777,215
+|
+* 红石线被拉伸得更严重。
+* 点状红石现在再次可见，并与T形红石和拐角红石一样覆盖了整个方块顶面。
+|[[File:Redstone 8388608.png|64px]]
+|-
+|X/Z ±16,777,216（2<sup>24</sup>）~33,554,431
+|
+* 现在红石线将会在视觉上占据2个方块，同时每四个相邻的红石线在这里只有中间的一或两个变得可见。
+** 在14w02a之前的现象如下：
+*** 4n:不可见
+*** 4n+1: 向负方向拉伸
+*** 4n+2: 向正方向拉伸
+*** 4n+3: 不可见
+** 在14w02a及之后版本的现象如下：
+*** 4n: 不可见
+*** 4n+1: 不可见
+*** 4n+2: 向正方向拉伸
+*** 4n+3: 不可见
+* 在Alpha v1.0.1-[[Java版Beta 1.4_01|Beta 1.4_01]]中爬上方块的红石线也会被拉伸，而在[[Java版Beta 1.5|Beta 1.5]]-[[Java版Beta 1.7.3|1.7.3]]中则不会被拉伸，但还是会发生位置偏移。但在Beta 1.8-pre1及之后版本中爬上方块的红石线无论如何都会正常渲染。
+** 在Beta 1.8-pre1之前的版本中，爬上方块的红石线的现象如下：
+*** 4n: 覆盖整个方块侧面
+*** 4n+1: 与被爬上的方块产生严重的纹理冲突
+*** 4n+2: 进入方块内部
+*** 4n+3: 与被爬上的方块产生严重的纹理冲突
+
+|[[File:Redstone 16777216.png|64px]]
+|-
+|X/Z>±33,554,432（2<sup>25</sup>）
+|在此之后，红石粉会被拉伸得越来越长，垂直移动的红石粉会越来越偏离其预期位置。自此之后，每超过{{^|2|n}}，这两种现象都会变得更加严重。
+|[[File:1073741824 redstone one axis.png|64px]]
+|}
+
+; X/Z=±8,388,608 - 16,777,215
+<gallery>
+File:Distant alpha redstone.png|Alpha阶段中X/Z=±8,388,608之后的红石线
+</gallery>
+
+; X/Z=±16,777,216 - 33,554,431
+<gallery>
+File:Far lands redstone.png|世界远处的红石线发生了拉伸
+File:Redstone 2^24 dots.png|点状红石在视觉上看起来相邻，但它们在实际上是不相交的
+File:Redstone superflat 16777216.png|在[[14w02a]]之前的一个超平坦世界，红石线在X/Z=±16,777,216之后占据了两个方块
+Redstone superflat 2^24 14w02a.png|在[[14w02a]]及之后的一个超平坦世界，红石线在X/Z=±16,777,216之后占据了两个方块
+File:Broken redstone up.png|在Alpha阶段中此处爬上方块的红石线
+File:Up broken redstone type 1.png|Beta 1.4_01之前的爬上方块的红石线，既发生了位置偏移又发生了视觉拉伸
+File:Up broken redstone beta1.png|Beta 1.4_01之前的红石线，同样发生了拉伸和偏移
+File:Up broken redstone type 2.png|从Beta 1.5 - Beta 1.7.3的爬上方块的红石线，只发生了位置偏移
+File:Up broken redstone beta2.png|从Beta 1.5-Beta 1.7.3的爬上方块的红石线，同样只发生了位置偏移
+File:Redstone 16777216 up.png|在Beta 1.8-pre1及之后版本中爬上方块的红石线无论如何都会正常渲染
+</gallery>
+
+; X/Z>±33,554,432
+<gallery>
+File:Redstone superflat 2^30 one axis.png|一个超平坦世界中在X/Z=±1,073,741,824附近的红石线
+File:Redstone 2^30 dot.png|X和Z=1,073,741,824处的点状红石在视觉上有128格宽
+</gallery>
+
+=== 红石中继器 ===
+影响版本：[[Java版Beta 1.3|Beta 1.3]] - [[Java版Beta 1.7.3|Beta 1.7.3]]
+
+[[File:Stretched repeater.png|缩略图]]
+
+红石中继器在世界远处丢失精度，顶部会发生位置偏移，底部也会被扩大到几格方块宽。
+{{-}}
+
+=== 活塞头 ===
+影响版本：[[Java版Beta 1.7|Beta 1.7]] - [[Java版1.7.10|1.7.10]]
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±2,097,152（2<sup>21</sup>）~±4,194,303
+|
+* 如果活塞的方向垂直于坐标轴方向（包括垂直方向的活塞），则活塞头会被渲染得完全扁平。
+* 如果在两个坐标轴上都超过这一点并在垂直方向上延伸，这将导致活塞头是一维的，因此是不可见的。
+|
+|-
+|X/Z ±4,194,304（2<sup>22</sup>）~±8,388,607
+|
+* 平行于坐标轴的活塞头会显得更短，并与活塞本体略微分离。
+* 垂直于坐标轴的活塞头会被拉伸为一整格方块。
+* 在X/Z=±4,194,303，如果活塞头面向世界原点伸出，活塞头上的纹理将出现轻微拉伸。而在此之后则不会，但活塞头的一部分将会出现在活塞本体的内部。
+|[[File:Farlandpistonside.png|64px]]
+|-
+|X/Z ±8,388,608（2<sup>23</sup>）~±16,777,215
+|
+* 与坐标轴平行的活塞头看起来仍然与之前相同，但垂直的活塞头会被大幅拉伸覆盖一整格方块。
+|[[File:Farlandpistonup.png|64px]]
+|-
+|X/Z ±16,777,216（2<sup>24</sup>）~±33,554,431
+|
+* 对于沿正方向延伸的活塞来说，平行于坐标轴的活塞头通常不可见。而对于沿负方向延伸的活塞来说，每四个活塞中就有一个活塞头被拉伸到两个方块宽。具体而言，活塞的放置必须使活塞头延伸到4n+2才能达到该效果。
+* 对于在垂直方向，活塞头将看起来完全扁平，要么出现在活塞本体的边缘，要么会偏离（发生在4n+1处）。{{info needed|活塞本体还是活塞头？}}
+* 在两个坐标轴上都到达此处可以同时观察到以上两个效果。垂直的活塞头总是不可见。
+** 不过，还可以看到其他效果：坐标为4x-1，4z+1的活塞头向负X轴方向伸出，将导致活塞头被拉伸并偏离整整一格。
+|[[File:Piston model bug.png|64px]]
+|}
+
+; X/Z=±16,777,216 - 33,55,44,31
+<gallery>
+File:Stretched piston arms.png|被拉伸并偏移的活塞头
+File:Stretched piston arm cross.png|两个方向上被拉伸的活塞头
+</gallery>
+
+=== 睡莲 ===
+影响版本：[[Java版Beta 1.9-pre1|Beta 1.9-pre1]] - [[14w08a]]
+
+[[File:Lily pad model bug.png|缩略图]]
+
+睡莲会在X/Z=±8,388,608处被拉伸，并在X/Z=±8,388,609后消失。
+{{-}}
+
+=== 炼药锅和漏斗 ===
+影响版本：[[Java版Beta 1.9-pre2|Beta 1.9-pre2]]（炼药锅）/[[13w01a]]（漏斗） - [[Java版1.7.10|1.7.10]]
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±2,097,152（2<sup>21</sup>）~±16,777,215
+|炼药锅和漏斗发生轻微拉伸，这会导致其内部看起来要稍微大一些。
+|
+|-
+|X/Z ±16,777,216（2<sup>24</sup>）~±33,554,431
+|每四个相邻的炼药锅和漏斗内部在这里只有一个变得完全可见，情况如下：
+* 4n: 内部不可见
+* 4n+1: 正方向内部缺失
+* 4n+2: 两个内部纹理会向外偏移到相邻的方块上
+* 4n+3: 正方向内部缺失
+|[[File:Cauldron model bug.png|64px]]
+|}
+
+<gallery>
+High distance cauldron.png|在X和Z坐标上都超过16,777,216的炼药锅，X和Z坐标都是偶数而不是4的倍数
+High distance hopper.png|相同的位置的漏斗
+</gallery>
+
+=== 绊线 ===
+影响版本：[[12w22a]] - [[Java版1.7.10|1.7.10]]，在[[13w02a]]发生改变
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±262,144（2<sup>18</sup>）~±8,388,607
+|
+* X/Z=262,144处的绊线会停止渲染。
+* 垂直于坐标轴的绊线会停止渲染。而仍渲染的线也可以看到一些微小的深度冲突。
+|[[File:Tripwire superflat 262144.png|64px]]
+|-
+|X/Z ±8,388,608（2<sup>23</sup>）~16,777,215
+|
+* 绊线的纹理会被拉伸到覆盖整个方块顶面。
+* 垂直于坐标轴的绊线会再次渲染。
+* 连接到[[绊线钩]]的绊线的表现会因版本而异。
+** 在12w22a-13w01b，连接绊线钩的绊线与单独的绊线的现象相同。
+** 在13w02a-1.7.10，绊线连接到绊线钩的钩子部分有一个灰色部分。
+|[[File:Tripwire 8388608.png|64px]]<br>{{FakeImage|{{Animate|Tripwire hook broken type 1.png; Tripwire hook broken type 2.png|64px}}}}
+|-
+|X/Z>±16,777,216（2<sup>24</sup>）
+|在此之后，垂直于轴的方向的绊线会停止渲染。
+|[[File:Tripwire superflat 16777216.png|64px]]
+|}
+
+<gallery>
+File:Tripwire model bug.png|世界远处的绊线丢失精度
+File:Tripwire 8388608 close up.png|X和Z=±8,388,608处2×2大小的绊线
+File:Tripwire superflat 8388608.png|超平坦世界中X和Z=±8,388,608的绊线
+</gallery>
+
+=== 花盆 ===
+
+
+影响版本：[[12w34a]] - [[Java版1.7.10|1.7.10]]
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±1,048,576（2<sup>20</sup>）~±2,097,151
+|
+* 花盆开始被拉伸。
+* 一个位于X/Z=±1,048,576的花盆只会在正半部分被拉伸，而负半部分会保持旧的拉伸；而在此之后，花盆的正半部分和负半部分都会发生新的拉伸。这会适用于在此之后的所有位于{{^|2|n}}处的花盆。
+|
+|-
+|X/Z ±2,097,152（2<sup>21</sup>）~±4,194,303
+|花盆再次被拉伸。
+|
+|-
+|X/Z ±4,194,304（2<sup>22</sup>）~±8,388,607
+|花盆内部现在会偏移出花盆本体。
+|
+|-
+|X/Z ±8,388,607（2<sup>23</sup>）~±16,777,215
+|
+* 花盆内部的偏移现在与花盆所处的位置相关。在只有一个轴超过此坐标的情况如下：
+** 2n: 花盆内部似乎不可见；
+** 2n+1: 花盆内部将会偏移到相邻的方块中；
+* 对于X和Z都超过此坐标的情况下：
+** 双偶坐标的花盆内部不可见；
+** 奇偶坐标下的花盆内部只有两个面会发生偏移；
+** 双奇坐标的花盆内部四个面都会发生偏移。
+|
+|-
+|X/Z ±16,777,216（2<sup>21</sup>）~±33,554,431
+|
+* 偏移会变得更严重。在只有一个轴超过此坐标的情况如下：
+** 4n: 花盆内部的四个面不可见；
+** 4n+1: 花盆内部的其中两个面沿负方向偏移；
+** 4n+2: 花盆内部的四个面不可见；
+** 4n+3: 花盆内部的其中两个面沿正方向偏移；
+* 对于X和Z都超过此坐标的情况下：
+** 双偶坐标的花盆内部的四个面不可见；
+** 奇偶坐标的花盆内部的两个面不可见，另外两个面会发生偏移；
+** 双奇坐标的花盆内部的两个面都会发生偏移。
+|[[File:Flower pot model bug.png|64px]]
+|}
+
+<gallery>
+High distance cauldron.png|四个花盆在双奇坐标处，有炼药锅用于比较
+High distance hopper.png|四个花盆在双奇坐标处，漏斗用于比较
+</gallery>
+{{-}}
+
+=== 半透明方块 ===
+影响版本：[[13w41a]] - [[24w35a]]
+
+[[File:Translucent rendering precision loss.png|缩略图]]
+
+在世界远处，半透明方块有时会错误地阻止其后面不同纹理的半透明方块渲染。
+
+这可能是由于精度损失，游戏错误地认为玩家看不到它们。
+{{-}}
+
+== 方块判定箱 ==
+=== 仙人掌和蛋糕 ===
+影响版本：[[Java版Alpha v1.0.11|Alpha v1.0.11]]（仙人掌）/[[Java版Beta 1.2|Beta 1.2]]（蛋糕） - [[15w38a]]（蛋糕的判定箱）/[[15w49a]]（轮廓箱）<ref>{{bug|MC-106300|||Fixed}}</ref>
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±1,048,576（2<sup>20</sup>）~±2,097,151
+|轮廓箱和碰撞箱会被拉伸到一个完整方块长度。
+* 仙人掌可以用这个扩展的碰撞箱来造成伤害。
+* 部分食用的蛋糕也会出现碰撞箱和轮廓箱故障。
+|{{FakeImage|{{Animate|Cactus 1048576 after.png;Cake 1048576 after.png;Cake 1048576 0 after.png;Cake 1048576 1 after.png;Cake 1048576 2 after.png;Cake 1048576 3 after.png;Cake 1048576 4 after.png;Cake 1048576 5 after.png;Cake 1048576 6 after.png;Cake 1048576 7 after.png;Cake 1048576 8 after.png;Cake 1048576 9 after.png;Cake 1048576 10 after.png;Cake 1048576 11 after.png;Cake 1048576 12 after.png;Cake 1048576 13 after.png;Cake 1048576 14 after.png;Cake 1048576 15 after.png|64px}}}}
+|-
+|X/Z ±2,097,152（2<sup>21</sup>）~±4,194,303
+|{{Info needed}}
+|
+|-
+|X/Z ±4,194,304（2<sup>22</sup>）~±8,388,607
+|{{Info needed}}
+|
+|-
+|X/Z ±8,388,608（2<sup>23</sup>）~±16,777,215
+|{{Info needed}}
+|[[File:Cakeglitch.png|64px]]
+|-
+|X/Z ±16,777,215（2<sup>24</sup>）~±33,554,431
+|在一个坐标轴到达此处，轮廓箱要么是一个平面，要么被拉伸同时占据两个不同的方块。
+|[[File:Cake hitbox bug.png|64px]]
+|}
+
+<gallery>
+File:Cactus hitbox bug.png|仙人掌的轮廓箱在世界远处丢失精度
+File:Cactus collision precision loss.png|仙人掌的碰撞箱在世界远处丢失精度
+File:Cake collision precision loss.png|蛋糕的碰撞箱在世界远处丢失精度
+</gallery>
+
+=== 栅栏、栅栏门和墙 ===
+影响版本：[[Java版Beta 1.9-pre2|Beta 1.9-pre2]]（栅栏）/[[12w01a]]（栅栏门）/[[12w34a]]（墙） - [[13w06a]]（栅栏）/[[15w38a]]（栅栏门）/[[Java版1.4.3|1.4.3]]（墙）
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±2,097,152（2<sup>21</sup>）~±8,388,607
+|碰撞箱开始有所缩小。
+|{{FakeImage|{{Animate|Fence 2097152 after.png;Fence Gate 2097152 after.png;
+Wall 2097152 after.png|64px}}}}
+|-
+|X/Z ±8,388,608（2<sup>23</sup>）~±16,777,215
+|碰撞箱被拉伸到可以填充它们所占据的整个方块。
+|{{FakeImage|{{Animate|Fence 8388608 after.png;Fence Gate 8388608 after.png;
+Wall 8388608 after.png|64px}}}}
+|-
+|X/Z ±16,777,216（2<sup>24</sup>）~±33,554,431
+|仅在一个坐标轴上到达该坐标，每四个相邻的栅栏、栅栏门和墙碰撞箱的情况都会有所不同：
+* 4n：在负方向上的极薄的碰撞箱
+* 4n+1：没有碰撞箱
+* 4n+2：在负方向上的极薄的碰撞箱
+* 4n+3：在正方向上的极薄的碰撞箱
+|[[File:Fence 2^24 solidplanes.png|64px]]
+|}
+
+<gallery>
+File:Fence collision precision loss.png|栅栏的碰撞箱在世界远处失去精度
+File:Fence gate collision precision loss.png|栅栏门的碰撞箱在世界远处丢失精度
+File:Wall collision precision loss.png|墙的碰撞箱在世界远处失去精度
+</gallery>
+
+== 粒子精度损失 ==
+{| class="wikitable" data-description="Spatial distance effect history"
+! 发生版本
+! 最后版本
+! 更改类型
+! 例子
+! 备注
+|-
+| 游戏早期开发
+| [[Java版Infdev 20100227-1433|Infdev 20100227-1433]]<ref name="notch">可能由于此处提及的更改：{{notch|443693773/the-world-is-bigger-now|The world is bigger now.|May 12, 2010}}</ref>
+| 粒子在世界远处会发生拉伸和变形。
+| [[File:Particles lose precision.png|64px]]
+|
+|-
+| [[Java版Indev 0.31 20100125|Indev 20100125]]
+| [[Java版1.7.10|1.7.10]]
+| rowspan="2"| 熔岩余烬粒子在世界远处会发生位置偏移并丢失精度。<ref>{{bug|MC-167046|||Fixed}}</ref>
+| rowspan="2"| [[File:Lava_precision_error.png|64px]]
+| rowspan="2"|
+|-
+| [[18w10c]]
+| [[20w22a]]
+|-
+| [[Java版Indev 0.31 20100125|Indev 20100125]]
+| [[14w31a]]
+| 火把的火焰粒子在世界远处会发生位置偏移。<ref name="jumboticket">{{bug|MC-3718|||Fixed}}</ref>
+| [[File:Torch precision loss.png|64px]]
+|
+|-
+| [[Java版Indev 0.31 20100125|Indev 20100125]]
+| [[14w31a]]
+| 火的烟雾粒子在世界远处会发生位置偏移。<ref name="jumboticket"/>
+| [[File:Fire precision loss.png|64px]]
+|
+|-
+| [[Java版Indev 20100219|Indev 20100219]]
+| [[14w31a]]
+| 熔炉的火焰粒子在世界远处会发生位置偏移。<ref name="jumboticket"/>
+| [[File:Furnace_precision_loss.png|64px]]
+|
+|-
+| {{verify}}
+| [[19w46b]]
+| TNT爆炸粒子在世界远处丢失精度。<ref>{{bug|MC-165991|||Fixed}}</ref>
+| [[File:Explosion precision loss.png|64px]]
+| 由于这些粒子在[[Java版1.15-pre1|1.15-pre1]]中被移除，这使得该现象被“修复”了。
+|-
+| [[Java版Infdev 20100325-1545|Infdev 20100325-1545]]
+| [[Java版Infdev 20100618|Infdev 20100618]]
+| rowspan="3"| 水下粒子在世界远处丢失精度。
+| rowspan="3"| [[File:Underwater_precision_loss.png|64px]]
+| rowspan="3"| 由于水下粒子在[[Java版Infdev 20100624|Infdev 20100624]] - [[Java版Beta 1.7.3|Beta 1.7.3]]中被移除，这使得该现象被“修复”了。
+|-
+| [[Java版Beta 1.8-pre1|Beta 1.8-pre1]]
+| [[Java版1.7.10|1.7.10]]
+|-
+| [[18w10c]]
+| [[Java版1.15-pre3|1.15-pre3]]
+|-
+| [[Java版Infdev 20100413-1951|Infdev 20100413-1951]]
+| [[Java版Alpha v1.0.4|Alpha v1.0.4]]
+| rowspan="3"| 在世界远处的降雨粒子会丢失精度。<ref>{{bug|MC-131770|||Fixed}}</ref><ref>{{bug|MC-171035|||Fixed}}</ref>
+| rowspan="3"| [[File:New rain precision error.png|64px]]
+| rowspan="3"| 由于降雨粒子在[[Java版Alpha v1.0.5|Alpha v1.0.5]] - [[Java版Beta 1.4_01]]中不再会产生，这使得该现象被“修复”了。
+|-
+| [[Java版Beta 1.5|Beta 1.5]]
+| [[Java版1.8.2-pre4|1.8.2-pre4]]
+|-
+| [[20w06a]]
+| [[20w22a]]
+|-
+| [[Java版Infdev 20100625-1917|Infdev 20100625-1917]]（刷怪笼）
+| rowspan="2"| [[Java版1.15-pre3|1.15-pre3]]
+| rowspan="2"| 刷怪笼和刷怪笼矿车发出的粒子在世界远处会发生位置偏移并丢失精度。
+| [[File:Spawner precision loss.png|64px]]
+|
+|-
+| [[13w06a]]（刷怪笼矿车）
+| [[File:Spawner cart precision loss.png|64px]]
+|
+|-
+| [[Java版Alpha v1.0.1|Alpha v1.0.1]]
+| [[Java版1.8.2-pre4|1.8.2-pre4]]
+| 红石火把的粒子在世界远处会发生位置偏移。
+| [[File:Redstone_torch_precision_loss.png|64px]]
+|
+|-
+| [[Java版Alpha v1.0.2|Alpha v1.0.2]]
+| [[17w46a]]
+| 红石矿石的粒子在世界远处会发生位置偏移。
+| [[File:Redstone ore precision loss.png|64px]]
+|
+|-
+| [[Java版Alpha v1.2.0|Alpha v1.2.0]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 下界传送门方块发出的粒子在世界远处会发生位置偏移。
+| [[File:Nether portal precision loss.png|64px]]
+|
+|-
+| [[Java版Beta 1.3|Beta 1.3]]
+| [[Java版1.8.2-pre4|1.8.2-pre4]]
+| 红石中继器发出的红烟在世界远处丢失精度。<ref>{{bug|MC-167971|||Fixed}}</ref>
+| [[File:Repeater precision error.png|64px]]
+|
+|-
+| [[Java版Beta 1.8-pre1|Beta 1.8-pre1]]
+| [[14w34b]]
+| 虚空粒子在世界远处会发生位置偏移。
+| [[File:1.6.2 Farlands Void.png|64px]]
+| 由于虚空粒子在[[14w34c]]中被移除，这使得该现象被“修复”了。
+|-
+| [[Java版Beta 1.8-pre1|Beta 1.8-pre1]]
+| [[Java版1.8.2-pre4|1.8.2-pre4]]
+| rowspan="2"| 击中熔岩的雨冒出的烟在世界远处丢失精度。<ref>{{bug|MC-76747|||Fixed}}</ref><ref>{{bug|MC-164158|||Fixed}}</ref><ref>{{bug|MC-171037|||Fixed}}</ref>
+| rowspan="2"| [[File:Lava_rain_precision_loss_old.png|64px]]
+| rowspan="2"|
+|-
+| [[20w06a]]
+| [[20w22a]]
+|-
+| rowspan="2"| [[Java版Beta_1.9-pre1|Beta 1.9-pre1]]
+| rowspan="2"| [[Java版1.7.10|1.7.10]]
+| rowspan="2"| 水滴粒子和熔岩粒子在世界远处丢失精度。
+| [[File:Water drip precision loss.png|64px]]
+| rowspan="2"|
+|-
+| [[File:Lava drip precision loss.png|64px]]
+|-
+| [[Java版Beta 1.9-pre1|Beta 1.9-pre1]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 菌丝体发出的粒子在世界远处会发生位置偏移。
+| [[File:Mycelium precision loss.png|64px]]
+|
+|-
+| [[Java版Beta 1.9-pre3|Beta 1.9-pre3]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 末地传送门方块发出的粒子在世界远处会发生位置偏移。
+| [[File:End portal particle precision loss.png|64px]]
+|
+|-
+| [[Java版Beta 1.9-pre3|Beta 1.9-pre3]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 酿造台发出的粒子在世界远处会发生位置偏移并丢失精度。
+| [[File:Brewing stand precision loss.png|64px]]
+|
+|-
+| [[Java版Beta_1.9-pre4|Beta_1.9-pre4]]
+| [[12w17a]]
+| rowspan="2"| 末地传送门框架上的末影之眼发出的烟在世界远处丢失精度。<ref>{{bug|MC-10369|||Fixed}}</ref><ref>{{bug|MC-161969|||Fixed}}</ref>
+| rowspan="2"| [[File:End_portal_frame_precision_error.png|64px]]
+| rowspan="2"| 由于末地传送门框架上的末影之眼在[[12w18a]]-[[19w13b]]中不再会发出烟，这使得该现象被“修复”了。
+|-
+| [[19w14a]]
+| [[20w22a]]
+|-
+| [[12w22a]]
+| [[20w22a]]
+| 从树叶上滴下来的粒子在世界远处丢失精度。<ref>{{bug|MC-167091|||Fixed}}</ref>
+| [[File:Leaves_precision_error.png|64px]]
+|
+|-
+| [[13w04a]]
+| [[20w11a]]
+| 骨粉粒子在世界远处会发生位置偏移并丢失精度。<ref>{{bug|MC-76810|||Fixed}}</ref>
+| [[File:Bone meal precision loss.png|64px]]
+|
+|-
+| [[13w36a]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 玩家从高处摔下发出的粒子在世界远处会发生位置偏移并丢失精度。
+| [[File:Fall precision loss.png|64px]]
+|
+|-
+| [[13w36a]]
+| [[Java版1.15-pre3|1.15-pre3]]<ref>{{bug|MC-161991|||Fixed}}</ref>
+| 钓鱼发出的粒子在世界远处会发生位置偏移并丢失精度。
+| [[File:Fishing precision loss.png|64px]]
+|
+|-
+| [[14w04a]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 使用{{cmd|particle}}命令生成的粒子在世界远处会发生位置偏移。
+| [[File:Particle command precision loss.png|64px]]
+|
+|-
+| [[14w06a]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 屏障发出的粒子在世界远处会发生位置偏移。
+| [[File:Barrier_precision_loss.png|64px]]
+|
+|-
+| [[14w33a]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 破坏盔甲架发出的粒子在世界远处会发生位置偏移并丢失精度。
+| [[File:Armor stand precision loss.png|64px]]
+|
+|-
+| [[15w31a]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 末地折跃门的粒子在世界远处会发生位置偏移。<ref>{{bug|MC-161999|||Fixed}}</ref>
+| [[File:End gateway particle precision loss.png|64px]]
+|
+|-
+| [[15w34b]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 攻击生物发出的黑心粒子在世界远处会发生位置偏移。
+| [[File:Damage heart precision loss.png|64px]]
+|
+|-
+| [[13w36a]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 横扫攻击发出的粒子在世界远处会发生位置偏移。
+| [[File:Sweep_attack_precision_loss.png|64px]]
+|
+|-
+| [[16w20a]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 悬空的重力方块在世界远处发出的粒子丢失精度。
+| [[File:Physics_particle_precision_loss.png|64px]]
+|
+|-
+| [[18w07a]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 鱿鱼墨水粒子在世界远处会发生位置偏移并丢失精度。
+| [[File:Squid precision loss.png|64px]]
+|
+|-
+| [[18w15a]]
+| [[Java版1.15-pre3|1.15-pre3]]
+| 潮涌核心粒子在世界远处会发生位置偏移并丢失精度。<ref>{{bug|MC-161993|||Fixed}}</ref>
+| [[File:Conduit precision loss.png|64px]]
+|
+|-
+| [[Java版Beta 1.5|Beta 1.5]]
+| [[20w22a]]
+| 营火的余烬在世界远处会发生位置偏移并丢失精度。<ref>{{bug|MC-183174|||Fixed}}</ref>
+| [[File:Campfire precision error.png|64px]]
+|
+|-
+| [[20w06a]]（营火）
+| rowspan="2"| [[20w22a]]
+| rowspan="2"| 雨击中营火和灵魂营火发出的烟粒子在世界远处丢失精度。<ref>{{bug|MC-185480|||Fixed}}</ref><ref>{{bug|MC-185480|||Fixed}}</ref>
+| [[File:Campfire smoke precision loss.png|64px]]
+| rowspan="2"|
+|-
+| [[20w15a]]（灵魂营火） 
+| [[File:Soul_campfire_smoke_precision_loss.png|64px]]
+<!--|-
+| [[20w06a]]
+| [[20w22a]]
+| 在世界远处绯红森林、灵魂沙峡谷和诡异森林的环境粒子丢失精度。<ref>{{bug|MC-170872|||Fixed}}</ref>{{note|例子使用的是X/Z>±1,073,741,824后的现象，因为在原版中很难证明精度已损失。}}
+| [[File:Warped_forest_precision_loss.png|64px]]
+|-->
+|-
+| [[20w15a]]
+| [[20w22a]]
+| 在世界远处玄武岩三角洲的环境粒子丢失精度。<ref>{{bug|MC-170872|||Fixed}}</ref>
+| [[File:Basalt_deltas_precision_loss.png|64px]]
+| 这在X/Z=±16,777,216之后变得尤为明显。
+|-
+| [[20w19a]]
+| [[20w22a]]
+| 激活的红石线发出的粒子在世界远处丢失精度。<ref>{{bug|MC-181566|||Fixed}}</ref><ref>{{bug|MC-182748|||Fixed}}</ref>
+| [[File:Redstone_dust_precision_error.png|64px]]
+|
+|}
+
+<gallery>
+File:Lava_particle_precision_loss_old.png|12w17a及之前末地传送门框架上的末影之眼发出的烟在世界远处丢失精度
+Lava_particle_precision_loss_old.png|1.7.10及之前在世界远处的熔岩余烬粒子
+White Explosion precision loss.png|TNT爆炸粒子在世界远处丢失精度
+Water_particle_error_early.png|1.7.10及之前水下粒子在世界远处丢失精度
+File:Rain particle grid.png|Infdev在世界远处丢失精度的降雨粒子
+File:Rain precision loss old.png|1.7.10及以前在世界远处丢失精度的降雨粒子
+</gallery>
+
+== 渲染漏洞 ==
+=== 方块轮廓箱 ===
+影响版本：游戏早期开发 - [[Java版Infdev 20100227-1433|Infdev 20100227-1433]]<ref name="notch"/>
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±2,048（2<sup>11</sup>）~±131,071
+|方块的轮廓箱开始轻微闪烁。
+* 从此开始，每过{{^|2|n}}，方块的轮廓箱就会越来越扭曲。
+|
+|-
+|X/Z>±131,072（2<sup>17</sup>）
+|方块的轮廓箱开始发生变形。
+* 在某些GPU上，轮廓箱的形状也可能扭曲并变为非立方体。
+|[[File:Better example of hitbox precision loss.png|64px]]
+|}
+<!--
+=== 世界定期停止渲染 ===
+影响版本：游戏早期开发 - [[Java版Infdev 20100227-1433|Infdev 20100227-1433]]<ref name="notch"/>
+
+[[File:Infdev_Chunk_Detaching.jpg|缩略图]]
+
+在世界远处世界会定期停止渲染，从而形成条纹状的地形。
+{{-}}
+-->
+=== Infdev 20100227中的区块抖动 ===
+影响版本：[[Java版Infdev 20100227-1414|Infdev 20100227-1414]]、[[Java版Infdev 20100227-1433|Infdev 20100227-1433]]<ref name="notch"/>
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z>±32,768（2<sup>15</sup>）
+|区块开始彼此分离并产生抖动。
+* 自此之后，每过{{^|2|n}}，这两种现象就会变得更加严重。
+|[[File:Infdev chunk detach.png|64px]]
+|-
+|X/Z>±2,097,152（2<sup>21</sup>）
+|从某个角度来看世界可能会停止渲染，导致地形闪烁。
+|
+|-
+|{{testingame}}
+|在世界远处世界会定期停止渲染，从而形成条纹状的地形。
+|[[File:Infdev_Chunk_Detaching.jpg|64px]]
+|}
+
+=== 下落的方块 ===
+; 位置偏移
+影响版本：[[14w32a]] - [[15w47c]]
+
+[[File:Falling_block_older_precision_loss.png|缩略图]]
+
+下落的方块在世界远处被渲染在方块的一角。
+{{-}}
+
+; 渲染错误
+影响版本：[[15w49a]] - [[19w38b]]<ref>{{bug|MC-93810}}{{bug|MC-98656|||Fixed}}</ref>
+
+[[File:Falling block precision loss.png|缩略图]]
+
+在世界远处，[[下落的方块]]的渲染被破坏，导致其渲染会跟随玩家的位置和视角。
+
+在某些GPU上，在世界远处下落的方块也有可能会被扭曲成非立方体。
+
+<gallery>
+File:Falling Block Glitch.png|下落的方块在世界远处丢失精度
+</gallery>
+{{-}}
+
+=== 世界渲染器 ===
+影响版本：[[Java版Infdev 20100624|Infdev 20100624]] - [[Java版Beta 1.7.3|Beta 1.7.3]]
+
+[[File:Brokenhitbox.png|缩略图]]
+
+地图在玩家周围开始渲染时会渲染出两个不同的版本，一个渲染方块本身（实体和所需方块生成数量）另一个则渲染视觉外观（比如说碰撞箱、方块像素等等）。世界渲染视觉外观出现了失去精度的现象，导致了卡顿的移动发生。世界精度丢失的原因是因为游戏渲染引擎使用了双精度浮点数，这决定了玩家周围的世界位置。但渲染引擎会使用单精度浮点数来确定玩家移动至周围的方块所需的距离，由于单精度浮点数的精确度只有双精度浮点数的一半，导致渲染引擎没有办法从中得到足够信息去正确渲染地形，并且距离翻倍的位置上信息又会被削减一半。
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|世界原点
+| 方块会偏移{{frac|1|4194304}}格。
+* 自此之后，每过一次{{^|2|n}}，方块的偏移量就会翻倍。
+|
+|-
+|X/Z ±16,384（2<sup>14</sup>）~524,287
+| 玩家移动时地形开始产生抖动。
+* 自此之后，每过一次{{^|2|n}}，抖动现象就会加剧一次。
+|
+|-
+|X/Z=±524,288（2<sup>19</sup>）~16,777,215
+|移动时产生的抖动开始变得十分明显。
+|[[File:Farlandsblockmovement.gif|64px]]
+|-
+|X/Z=±16,777,216（2<sup>24</sup>）
+|方块偏移整整一格。
+|
+|-
+|X/Z=±268,435,456（2<sup>28</sup>）
+|世界渲染会出现漏洞导致地形闪烁。
+* 实际上该现象在之前就已出现，但在此之后变得更为严重，且每过{{^|2|n}}，就会变得越来越明显。
+** 该现象可能是由于浮点数误差，游戏错误定位了玩家的位置，从而错误地认为玩家看不到某些区块。
+* 在不同的操作系统上，这可能会表现得有所不同。
+|[[File:Broken world rendering, b1.7.3.png|64px]]
+|}
+
+<gallery>
+Xraybug.png|移动时的透视漏洞
+Itembug.png|由于漏洞而浮动的掉落物
+File:2 billion intersection.png|在下界远处，周围的区块发生了渲染故障
+</gallery>
+{{-}}
+
+=== 移动的活塞 ===
+影响版本：[[Java版Beta 1.7|Beta 1.7]] - [[Java版1.10.2|1.10.2]]<ref>{{bug|MC-98093|||Fixed}}</ref>{{note|虽然这个错误也会发生在Beta 1.7，但是要发现到该现象是不可能的，因为该版本的世界渲染会发生偏移，两个现象同时出现使得该现象被抵消了。直到Beta 1.8修复了世界渲染，但依然没有修复该问题。}}
+
+[[File:Piston offset bug.png|缩略图]]
+
+在世界远处，[[移动的活塞]]的渲染被破坏，导致其渲染会跟随玩家的位置和视角。
+{{-}}
+
+=== 雨和雪（水平方向） ===
+影响版本：[[Java版Beta 1.8-pre1|Beta 1.8-pre1]] - [[Java版1.8.2-pre4|1.8.2-pre4]]<ref>{{bug|MC-72562|||Fixed}}虽然修复没有立即被注意到，且过去了很多个版本。</ref>
+
+[[File:High dist rain.png|缩略图]]
+
+雨和雪会在世界远处丢失精度，从而错误地聚集在一条线上。
+{{-}}
+
+=== 末地传送门 ===
+影响版本：[[Java版Beta 1.9-pre3|Beta 1.9-pre3]] - [[16w39c]]
+
+[[File:Black portal block.png|缩略图]]
+
+末地传送门方块的在世界远处渲染被破坏并发生深度冲突。{{note|在该版本中，传送门方块的效果是根据视角的相对位置决定的，而不取决于玩家的移动。}}
+
+=== 13w38a实体、半透明方块和轮廓箱抖动 ===
+影响版本：[[13w38a]] - [[13w39b]]<ref>{{bug|MC-31653|||Fixed}}尽管修复版本不正确。</ref>
+
+实体、实体方块、半透明方块和轮廓箱在世界远处会发生偏移和抖动。
+
+<gallery>
+File:1.7 dev painting.png|发生偏移的画
+File:1.7 dev frame.png|在世界远处物品展示框发生位置偏移
+</gallery>
+
+=== 14w30a和14w30b中的区块抖动 ===
+影响版本：[[14w30a]]、[[14w30b]]<ref>{{bug|MC-63333|||Fixed}}</ref>
+
+[[File:Shaky terrain third person.png|缩略图]]
+
+在某些硬件上，过远的距离会导致区块会在视觉上彼此分离并产生抖动。
+{{-}}
+
+=== 末地折跃门 ===
+影响版本：[[15w31a]] - [[15w32c]]
+
+[[File:End_gateway_precision_loss.png|缩略图]]
+
+末地折跃门方块的效果在世界远处被破坏。
+{{-}}
+
+== 游戏内容 ==
+=== 实体位置 ===
+影响版本：游戏早期开发 - [[Java版Infdev 20100227-1433|Infdev 20100227-1433]]<ref name="notch"/>
+
+实体使用单精度浮点数来计算位置，而非双精度浮点数。
+
+=== 生物寻路 ===
+影响版本：{{verify}} - [[20w22a]]<ref>{{bug|MC-177723|||Fixed}}</ref>
+
+生物寻路在世界远处被破坏，导致生物在原地转圈。
+
+=== 打破容器产生的掉落物 ===
+影响版本：[[Java版Indev 0.31 20100124-2119|Indev 0.31 20100124-2119]] - [[14w27b]]
+
+[[File:Furnace drop precision loss.png|缩略图]]
+
+在世界远处打破容器时，所包含的物品会掉入错误的区域。	
+{{-}}
+
+=== Indev实体移动 ===
+影响版本：[[Java版Indev 0.31 20100106-2158|Indev 0.31 20100106-2158]]{{verify}} - [[Java版Indev 20100223|Indev 20100223]]
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|{{testingame}}
+|每越过{{^|2|n}}，玩家的移动都会变得愈发困难。
+|
+|-
+|X/Z ±4,194,304（2<sup>22</sup>）~±8,388,607
+|
+* 玩家不再能够向更远处移动。
+* 在X/Z=±4,194,304的玩家会穿过方块落入虚空。
+|
+|-
+|X/Z>±8,388,608（2<sup>23</sup>）
+|玩家不再能够站在方块上，从而落入虚空。
+|
+|}
+
+=== TNT ===
+; 被点燃
+影响版本：{{verify}} - [[Java版1.15-pre3|1.15-pre3]]<ref>{{bug|MC-125638|||Fixed}}</ref>
+
+[[File:TNT offset bug.png|缩略图]]
+
+TNT在世界远处被点燃会发生位置偏移。
+{{-}}
+
+; 被引爆
+影响版本：{{verify}} - [[20w22a]]<ref>{{bug|MC-167047|||Fixed}}</ref>
+
+[[File:Detonation_offset.png|缩略图]]
+
+在世界远处TNT被引爆时会发生位置偏移。
+{{-}}
+
+=== 画 ===
+影响版本：{{verify}} - [[Java版1.8-pre1|1.8-pre1]]
+
+[[File:Painting bug pre 38a.png|缩略图]]
+
+在世界远处的[[画]]可能会发生位置偏移。
+
+<gallery>
+Painting precision loss.png|在世界远处，发生了位置偏移的画
+</gallery>
+{{-}}
+
+=== Infdev 20100227方块碰撞箱丢失 ===
+影响版本：[[Java版Infdev 20100227-1414|Infdev 20100227-1414]]、[[Java版Infdev 20100227-1433|Infdev 20100227-1433]]<ref name="notch"/>
+
+在X/Z>±16,777,216，玩家不再能够站在方块上，从而落入虚空中的熔岩海。
+
+=== 下落的方块 ===
+; 复制物品
+影响版本：[[Java版Infdev 20100618|Infdev 20100618]] - [[Java版1.4.5|1.4.5]]
+
+下落的方块在世界远处可以复制物品，导致可能会自然生成上千的物品实体。这可能会导致世界远处出现严重卡顿。
+
+; 悬空
+影响版本：[[Java版Infdev 20100618|Infdev 20100618]] - [[14w31a]]
+
+[[File:Physics_precision_loss.png|缩略图]]
+
+下落的方块在世界远处可能会悬空，而一旦收到一次方块更新就可以在变回方块之前在某些帧生成一个实体。
+{{-}}
+
+=== 矿车及其骑乘者 ===
+影响版本：[[Java版Infdev 20100624|Infdev 20100624]] - [[14w31a]]
+
+[[File:Minecart_precision_loss.png|缩略图]]
+
+在世界远处放置的矿车和骑乘者的位置可能会不正确。
+
+在被拉伸的铁轨上时矿车可能会被渲染在正确的位置，但是骑乘者和影子的位置还是会发生偏移。
+{{-}}
+
+=== 压力板 ===
+影响版本：[[Java版Alpha v1.0.1|Alpha v1.0.1]] - [[15w36d]]
+
+[[File:Pressure_plate_precision_loss.png|缩略图]]
+
+压力板在世界远处会在错误的位置检测到踩上压力板的实体。
+
+有些压力板仅在玩家踩到精度损失点时才能检测到，而某些压力板甚至可以在玩家离开时仍保持状态。
+{{-}}
+
+=== 船 ===
+影响版本：[[Java版Alpha v1.0.6|Alpha v1.0.6]] - [[16w03a]]{{note|可能与MC-90011一起修复了。}}
+
+[[File:Boat_precision_loss.png|缩略图]]
+
+在世界远处船会被放置在错误的位置。
+{{-}}
+
+=== 玩家的上床位置 ===
+影响版本：[[Java版Beta 1.3|Beta 1.3]] - [[19w07a]]
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±8,388,608（2<sup>23</sup>）~±16,777,215
+|睡在床上的玩家会出现在床的边缘。
+|[[File:Bed precision loss.png|64px]]
+|-
+|X/Z ±16,777,216（2<sup>24</sup>）~±33,554,431
+|
+* 仅一个坐标轴到达此处，睡在床上的玩家会被出现在床外。
+* X和Z坐标都到达此处，睡在床上会导致玩家被放在床的中央，但是位置比平常要低一些。
+|
+|}
+
+=== 探测铁轨 ===
+影响版本：[[Java版Beta 1.5|Beta 1.5]] - [[20w22a]]<ref>{{bug|MC-183174|||Fixed}}</ref>
+
+[[File:Detector_rail_precision_loss.png|缩略图]]
+
+探测铁轨在世界远处无法正确检测到矿车的存在。
+{{-}}
+
+=== 方块的方向 ===
+影响版本：{{testingame}} - [[16w39c]]<ref>{{bug|MC-4132|||Fixed}}</ref>
+
+[[File:Placement precision loss.png|缩略图]]
+
+活塞、命令方块和其他能朝向六个面的其中一个的方块的放置方向不再使用失去精度的玩家位置的浮点数决定。
+{{-}}
+<!--
+=== 黑曜石柱上的末影水晶 ===
+影响版本：[[Java版Beta 1.9-pre6|Beta 1.9-pre6]] - [[Java版1.8.9|1.8.9]]<ref>{{bug|MC-92901|||Fixed}}</ref>
+
+[[File:18CornerEnd.png|缩略图]]
+
+黑曜石柱生成的末地水晶在世界远处会发生位置偏移。
+
+也许不可能在原版见到这个现象，因为在当时末地不会在世界远处生成地形。
+{{-}}
+-->
+=== 附魔台上的书 ===
+; 错误朝向
+影响版本：[[Java版Beta 1.9-pre3|Beta 1.9-pre3]] - [[Java版1.15-pre3|1.15-pre3]]<ref>{{bug|MC-161888|||Fixed}}</ref>
+
+[[File:Enchantment table angle precision loss.png|缩略图]]
+
+附魔台上的书在世界远处会朝向错误的位置。
+{{-}}
+
+; 不会打开
+影响版本：[[Java版Beta 1.9-pre3|Beta 1.9-pre3]] - [[20w22a]]<ref>{{bug|MC-167044|||Fixed}}</ref>
+
+[[File:Enchantment table presence precision loss.png|缩略图]]
+
+附魔台上的书在世界远处有时候不会自动打开。
+{{-}}
+
+=== 物品展示框 ===
+影响版本：[[12w34a]] - [[16w05b]]<ref>{{bug|MC-3493|||Fixed}}尽管修复版本不正确。</ref><ref>{{bug|MC-56551|||Fixed}}</ref>
+
+在[[13w41a]]和[[Java版1.8-pre1|1.8-pre1]]中改变
+
+[[File:Item frame position precision loss 1.7.png|缩略图]]
+
+在世界远处的物品展示框会被放置在错误的位置。
+* 在1.8-pre1之前，在世界远处的物品展示框不但会发生位置偏移，还会变得无法交互。
+* 在13w41a及之后，物品展示框的偏移位置发生了改变。
+
+<gallery>
+File:Frame clipping.png|在世界远处的物品展示框偏移进了方块内部，并无法交互
+</gallery>
+{{-}}
+
+=== 烟花火箭 ===
+影响版本：[[12w49a]] - [[19w02a]]
+
+[[File:Firework precision loss.png|缩略图]]
+
+在世界远处烟花火箭会被放置在错误的位置。
+{{-}}
+
+=== 废弃矿井中的运输矿车 ===
+影响版本：[[13w02a]] - [[20w22a]]<ref>{{bug|MC-182748|||Fixed}}</ref>
+
+[[File:Minecart generation precision loss.png|缩略图]]
+
+在世界远处生成在废弃矿井里的运输矿车会发生位置偏移。
+{{-}}
+
+=== 拴绳结 ===
+影响版本：[[13w16a]] - [[16w05b]]
+
+[[File:Lead position precision loss.png|缩略图]]
+
+在世界远处拴绳结会被放置在错误的位置。
+{{-}}
+
+=== 世界响应缓慢 ===
+影响版本：[[Java版1.8|1.8]] - [[Java版1.12|1.12]]
+
+世界会在高坐标处存在明显延迟，并响应缓慢。
+
+=== 生物生成 ===
+影响版本：[[Java版1.8|1.8]] - [[20w22a]]<ref>{{bug|MC-167103|||Fixed}}</ref>
+
+生物生成在世界远处被破坏。{{note|可能与{{bug|MC-123390}}有关。}}
+
+=== 末影水晶 ===
+影响版本：[[15w44a]] - [[17w46a]]<ref>{{bug|MC-92901|||Fixed}}</ref>
+
+[[File:End crystal precision loss.png|缩略图]]
+
+在世界远处放置末地水晶会被放置在错误的地方。
+{{-}}
+
+=== 幽匿感测体振动 ===
+影响版本：[[20w49a]] - [[22w11a]]
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±4,194,304（2<sup>22</sup>）~±8,388,607
+|
+* 仅一个坐标轴到达此处，幽匿感测体只能检测到一个方块上的三条线的振动：两个方块边缘和方块中心。
+* X和Z坐标都到达此处，幽匿感测体只能检测到一个方块上的九个点的振动：方块中心、方块四个边缘的中点和四个角。
+|
+|-
+|X/Z ±8,388,608（2<sup>23</sup>）~±16,777,215
+|
+* 仅一个坐标轴到达此处，幽匿感测体不再能检测到来自方块中心的振动。
+* X和Z坐标都到达此处，幽匿感测体只能够检测到来自方块四个角的振动。
+|
+|-
+|X/Z ±16,777,216（2<sup>24</sup>）~±33,554,431
+|幽匿感测体检测到的振动可能来自与实际来源完全不同的位置。
+|
+|}
+
+== 世界生成 ==
+=== 块状地形 ===
+影响版本：[[Java版Infdev 20100227-1414|Infdev 20100227-1414]]、[[Java版Infdev 20100227-1433|Infdev 20100227-1433]]<ref name="notch"/>
+
+{| class="wikitable"
+|+
+!位置
+!现象
+!例子
+|-
+|X/Z ±4,194,304（2<sup>22</sup>）~±8,388,607
+|地形稍微开始扭曲并形成块状形状。
+|[[File:Infdev 20100227-1433Distance Effect1.png|64px]]
+|-
+|X/Z ±8,388,608（2<sup>23</sup>）~±16,777,215
+|上述情况变得加剧了。
+|[[File:Infdev 20100227-1433Distance Effect2.png|64px]]
+|-
+|X/Z ±16,777,216（2<sup>24</sup>）~[[边境之地/Java版/Infdev 20100325-1640及之前版本的现象|±33,554,431]]或[[世界界限|±32,000,000]]
+|地形变得更加扭曲。
+|[[File:Infdev 20100227-1433Distance Effect4.png|64px]]
+|}
+
+=== 块状矿脉 ===
+影响版本：[[Java版Infdev 20100325-1545|Infdev 20100325-1545]] - [[20w27a]]<ref>{{bug|MC-185925|||Fixed}}</ref>
+
+[[File:Ore_gen_precision_loss.png|缩略图]]
+
+在世界远处地下会生成更多块状的矿脉。
+{{-}}
+
+=== 出生点区块复制 ===
+影响版本：{{verify}} - [[Java版Beta 1.7.3|Beta 1.7.3]]
+
+[[File:Farlands Trees.png|缩略图]]
+
+在X/Z±=2{{^|19}}及其整数倍时，出生点附近的区块会被复制到该区域，并覆盖原有地形。
+
+这类“复制区域”与出生点区块是同步的，这意味着“复制区域”中发生的任何事情都会被同步回出生点。
+
+{{-}}
+
+== 长时间浮点精度误差漏洞 ==
+不像严格的距离现象，这些浮点精度误差是因为时间值过多而引起的，与空间位置无关。
+
+=== 信标光束停止旋转 ===
+影响版本：{{testingame}}<ref>{{bug|MC-1279|||Fixed}}</ref>
+
+[[File:Ancient beacon.png|缩略图]]
+
+[[信标]]光束旋转变得卡顿，最终因高时间值而停止旋转，且视觉效果被破坏。
+{{-}}
+
+=== 旗帜停止摆动 ===
+影响版本：[[14w30a]] - [[19w34a]]、[[19w38a]] - [[Java版1.15-pre2|1.15-pre2]]<ref>{{bug|MC-63720|||Fixed}}</ref>
+
+[[File:Frozen banner.png|缩略图]]
+
+[[旗帜]]在3分至3.5分之间在风中停止摆动。
+{{-}}
+
+=== 守卫者激光停止渲染 ===
+影响版本：[[19w40a]] - [[Java版1.19.3|1.19.3]]<ref>{{bug|MC-165595|||Fixed}}</ref>
+
+[[File:Guardian beam does not render.png|缩略图]]
+
+{{samp|level.dat}}中的{{cd|Time}}超过特定值时，守卫者激光不渲染。
+{{-}}
+
+=== 不祥之物生成器动画受损 ===
+影响版本：[[24w13a]] - [[Java版1.21.1|1.21.1]]<ref>{{bug|MC-273758|||Fixed}}</ref>
+
+若{{filename|level.dat}}中的“<code>Time</code>”值超过特定的值，不祥之物生成器的动画就会受损。
+
+=== 气泡柱中的船动画受损 ===
+影响版本：[[24w44a]] - [[Java版1.21.4|1.21.4]]<ref>{{bug|MC-277865|||Fixed}}</ref>
+
+[[File:Boats in bubble columns breaks.png|缩略图]]
+
+{{filename|level.dat}}中的<code>Time</code>大于某特定值时，气泡柱中的船的动画损坏。
+{{-}}
+
+=== 实体动画停止 ===
+影响版本：[[12w38a]] - [[25w44a]]<ref>{{bug|MC-199467|||Fixed}}</ref>
+
+[[File:Certain entity animations stop.png|缩略图]]
+
+某些实体的动画在世界中存在太长时间后停止。
+{{-}}
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[en:Java Edition distance effects/Historical effects]]

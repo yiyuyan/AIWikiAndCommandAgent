@@ -1,0 +1,152 @@
+# 页面: 基岩版函数
+# 来源: https://zh.minecraft.wiki/w/%E5%9F%BA%E5%B2%A9%E7%89%88%E5%87%BD%E6%95%B0
+# 分类: 基岩版, 基岩版独有特性, 有未知版本的History模板的页面/基岩版, 附加包
+# 抓取时间: 2026-07-14 17:24:36
+# 原始 Wikitext 内容:
+
+{{about|[[基岩版]]中的函数|[[Java版]]中的函数|Java版函数|函数命令|命令/function}}
+{{exclusive|bedrock}}
+
+'''函数（Function）'''是一种可包含多行[[命令]]的<samp>.mcfunction</samp>文本文件，存储于[[行为包]]中的{{filepath|-{}-<行为包>/functions}}目录下，可以用于方便地执行多条命令。
+
+== 定义 ==
+=== 文件夹结构 ===
+{{main|附加包}}
+原版默认无任何函数。要使用函数，首先必须在游戏文件根目录{{filename|com.mojang}}中的{{file|directory|development_behavior_packs}}或{{file|directory|behavior_packs}}中创建一个[[行为包]]；如果是多人游戏，函数必须放置在每一个需要使用该函数的世界存档文件夹中。
+
+要在行为包中定义一个函数文件，可参照下图（尖括号部分仅用于指示文件或目录名，不能照抄）：
+<div class="treeview">
+* {{file|directory|<''行为包名称或其内部ID''>}}
+** {{file|file|manifest.json}}
+** {{file|directory|<''命名空间''>}}
+*** {{file|directory|functions}}
+**** {{file|file|<''函数名称''>.mcfunction}}
+**** {{file|file|tick.json}}
+</div>
+
+以上的文件夹结构定义了一个命名空间ID为<code>-{}-<命名空间ID>:<函数名称></code>的函数和一个{{filename|tick.json}}文件（可选，详见[[#tick.json|下文]]）。但值得一提的是，就像其他文件夹，{{filename|functions}}文件夹也可以直接在行为包根目录创建，但此时函数无命名空间。
+
+像其他的文件一样，{{filename|functions}}文件夹也能包含若干子文件夹以组织更深的层级关系。在调用这些子文件夹内的函数时，也必须引用子文件夹名。例如，如果需要调用{{filepath|-{}-behavior_packs/<行为包文件夹名称或.zip文件名称>/custom/functions/example/test.mcfunction}}的函数文件。则需描述为<code>custom:example/test</code>。
+
+=== 文件结构 ===
+==== <samp>.mcfunction</samp>文件 ====
+'''单行命令'''
+
+在<samp>.mcfunction</samp>文件中，每一行都允许一条不带前导正斜杠{{cd|/}}的命令。可以在每条命令的行首行末添加若干制表符或空格——在读取函数文件时，每行的首尾空白字符都会被消去。在函数文件中，单个命令的长度不受命令方块字符数上限32,500的限制。基岩版不支持类似[[Java版函数#文件格式|Java版]]的单行命令的拆分和续接。
+
+'''注释'''
+
+目前函数文件仅支持单行注释，玩家可以在行首添加{{cd|#}}来注释单行文本。
+
+==== <samp>tick.json</samp> ====
+{{filename|tick.json}}可以重复运行一系列函数。
+
+其使用每秒20刻的游戏刻，即设置运行的函数将每秒执行20次。因此包含大量要运行的函数会严重影响性能，尤其是在低端设备中。
+
+{{filename|tick.json}}文件仅使用{{cd|values}}键，值是要运行的函数的名称。以下是一个示例：
+<syntaxhighlight lang="json">
+{
+    "values": [
+        "a", 
+        "b"
+    ]
+}
+</syntaxhighlight>
+
+游戏会尝试每秒运行20次名为{{cd|a}}和{{cd|b}}的<samp>.mcfunction</samp>文件。
+
+=== 命令版本 ===
+{{main|附加包}}
+需要在[[行为包]]内的{{filename|manifest.json}}文件中使用{{cd|min_engine_version}}声明函数适用的最低版本，此字段叫做最小引擎版本。
+
+该字段指定了运行命令的游戏版本的版本号。例如，{{cmd|fill}}命令在[[基岩版1.16.210|1.16.210]]中发生了变动，如果你的行为包带有<code>"min_engine_version": [1, 8, 0]</code>，那么在运行包含{{cmd|fill}}的函数时，游戏将视其为旧版本的{{cmd|fill}}命令来运行，就如同游戏版本仍为[[基岩版1.8.0|1.8.0]]。
+
+需要注意，{{filename|manifest.json}}中的<code>format_version</code>会影响最小引擎版本的读取方式。当<code>format_version</code>为<code>1</code>时，最小引擎版本最高为[[基岩版1.12.0|1.12.0]]；当<code>format_version</code>为<code>2</code>时，最小引擎版本最低为[[基岩版1.13.0|1.13.0]]。例如，如果填写了<code>"format_version": 1</code>和<code>"min_engine_version": [1, 19, 50]</code>，那么最小引擎版本将被读取为[[基岩版1.12.0|1.12.0]]而非[[基岩版1.19.50|1.19.50]]。
+
+== 调用 ==
+函数可能以不同的方式从行为包中的其他文件调用。
+
+=== 通过命令 ===
+可以使用{{cmd|function}}命令调用函数。
+
+=== 通过计划 ===
+{{cmd|schedule}}命令可推迟函数在一定时间后被调用，或在指定的区域全部被加载时执行一个函数。函数将在满足到达后由服务端自动执行，执行位置为世界出生点。
+
+== 行为 ==
+=== 加载与解析 ===
+在正在运行的存档中，如果对函数文件的内容或位置进行了修改，则可以使用{{cmd|reload}}来重新从硬盘加载。
+
+在进入存档时，游戏会对函数文件进行预读取，若命令中出现了语法错误，游戏将会在内容日志中弹出报错并取消加载，进入存档后将无法在[[聊天栏]]或[[命令方块]]中使用含有语法错误的函数文件。
+
+=== 运行 ===
+目前的函数支持判断的条件极为有限，因为函数按照顺序执行命令，{{cmd|testfor}}等命令不能起到作用。要解决这个问题，可以设置函数的最低引擎版本为[[基岩版1.19.50.23|1.19.50.23]]或更高，然后使用命令{{cmd|execute}}中的[[命令/execute#条件子命令|条件子命令]]进行逻辑判断。
+
+函数每次被调用时，都将在一[[游戏刻]]内运行其中的所有命令，包括其中通过{{cmd|function}}命令执行的子函数，也将在同一个游戏刻运行。同一游戏刻运行的总命令数量受[[游戏规则]]{{cd|functionCommandLimit}}的限制（默认为10000）。超过此数量限制的命令将在运行时被忽略。
+
+在单人或局域网世界中，与命令方块一样，函数可以执行任何[[权限等级]]不超过1的命令。
+
+在默认的多人游戏，函数要运行的命令的权限等级不能超过设定在{{cd|server.properties}}中的{{cd|function-permission-level}}。
+
+使用{{cmd|function}}命令运行函数时，函数内部的命令会继承{{cmd|function}}命令的[[命令上下文]]中的“执行者参数”、“执行环境参数”和“执行权限等级”，不会继承“执行输出反馈”。
+
+通过{{cmd|schedule}}命令计划的函数也会继承此{{cmd|schedule}}命令执行上下文中的“执行者参数”、“执行环境参数”和“执行权限等级”
+
+例如以下函数：
+<syntaxhighlight lang="mcfunction">
+execute as @a at @s run function foo:bar
+</syntaxhighlight>
+
+其中''foo:bar''的内容是：
+<syntaxhighlight lang="mcfunction">
+teleport @s ~ ~5 ~
+execute at @s run setblock ~ ~-1 ~ minecraft:diamond_block
+setblock ~ ~-1 ~ minecraft:emerald_block
+</syntaxhighlight>
+
+以上命令执行成功后，所有玩家都将被向上传送5格，并在其传送前脚下的位置放置绿宝石块。由于第2条命令使用{{cmd|execute}}的<code>at</code>子命令改变了其位置参数，故钻石块会被放置在传送后的位置。
+
+=== 递归 ===
+递归即一个函数对其自身的调用行为。
+
+例如以下函数：
+{{file display|test/functions/test.mcfunction|mcfunction|<nowiki>
+say 1
+function test:test
+say 2
+</nowiki>}}
+
+当执行函数{{cd|test:test}}时，即形成递归调用。由于该函数没有设置终止条件，故其会在1游戏刻内一直运行至{{cd|functionCommandLimit}}规则所限制的命令数后停止。
+
+=== 返回 ===
+如果函数被{{cmd|function}}命令调用，则其返回结果会返回至{{cmd|function}}命令，并作为其输出值输出。详见{{cmd|function}}页面。
+
+=== 输出 ===
+成功执行一个函数后，[[聊天栏]]或[[命令方块]]的上一个输出中会出现“成功执行<code>-{}-<数量></code>个功能项”。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.10|加入了函数功能。}}
+|{{HistoryLine|||dev=?|函数文件现在只在行为包中可用。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.1|现在在命令列表中现在可以看到函数文件。}}
+}}
+
+== 参见 ==
+* [[附加包]]
+* [[命令上下文]]
+* [[辅助程序与编辑器/资源包制作器]]
+* [[Tutorial:制作资源附加包]]
+
+== 外部链接 ==
+* {{Citation|url=https://learn.microsoft.com/zh-cn/minecraft/creator/documents/tickjsonintroduction|title=Tick.json 简介|website=Microsoft Learn}}
+* [[bedev:函数 (附加包)]]
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+
+[[Category:附加包]]
+
+[[en:Function (Bedrock Edition)]]
+[[ja:関数 (Bedrock Edition)]]
+[[pt:Funções (Edição Bedrock)]]
+[[uk:Функція (Bedrock Edition)]]

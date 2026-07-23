@@ -1,0 +1,130 @@
+# 页面: 返回传送门
+# 来源: https://zh.minecraft.wiki/w/%E8%BF%94%E5%9B%9E%E4%BC%A0%E9%80%81%E9%97%A8
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有信息, 使用DynamicPageList4的页面, 地物, 基岩版独有信息, 等待移动, 需要信息
+# 抓取时间: 2026-07-14 17:36:59
+# 原始 Wikitext 内容:
+
+{{move|discussAnchor=如何处理“返回传送门”的官方名称}}
+{{Infobox structure
+| group1 = 未激活
+| 1-1 = End Podium.png
+| group2 = 已激活
+| 2-1 = End Podium (active).png
+| biome = {{BiomeLink|The End}}
+| blocks = 
+* {{BlockLink|Bedrock}}
+* {{BlockLink|End Stone}}
+* {{BlockLink|End Portal}}（击败末影龙后生成）
+* {{BlockLink|Torch}}
+* {{BlockLink|Dragon Egg}}（仅击败首条{{only|for=或第二条<ref>{{bug|MCPE-51345}}</ref>|BE}}末影龙时生成）
+| canspawn = 是
+}}
+
+'''返回传送门（Exit portal）'''，也称'''末地池'''或'''终末之池'''，是让玩家得以返回[[主世界]]的[[地物]]，在击败[[末影龙]]后激活。
+
+== 生成 ==
+返回传送门不在区块生成的时候被自然生成，而是在末地被加载后由[[末影龙战斗]]系统生成。
+
+返回传送门首次生成时总是在<code>0 0</code>处的最高的阻止运动方块（[[树叶]]除外）处生成。如不存在这样的方块，则会在维度最低位置高一格处生成。<ref name="MC-93185"/>
+
+返回传送门的整个结构会在返回传送门状态更新时在原位置重新生成。由于返回传送门的结构包含16个[[末地石]]，且重新生成返回传送门需要消耗的[[末地水晶]]是可再生资源，这使末地石成为了可再生资源。
+
+{{in|be}}若末地已加载区块内没有任何末地传送门方块，且不存在与返回传送门绑定的末影龙时，游戏会间或{{info needed|具体多久一次？}}尝试生成激活的返回传送门。
+
+{{inUntil|je 26.3}}由于返回传送门没有被预先分配独立的[[已配置的地物]]，因而它不可以使用{{cmd|place feature}}命令放置。
+
+{{in|je}}游戏检查末影龙复活时，如果无法获取返回传送门的生成位置，则会在X=0、Z=0的竖直方向上搜索符合返回传送门的结构的位置，若存在则使用此位置，否则将视作首次生成以生成新的返回传送门。<ref>{{bug|MC-263548|||Won't Fix}}</ref>
+
+== 结构 ==
+{{for|详细的结构图示和方块构成|返回传送门/结构}}
+
+返回传送门是7方块宽的碗状[[基岩]]结构，中间的基岩柱周围每边都有一根火把。首次击败末影龙后传送门上方还会生成一颗[[龙蛋]]。
+
+每个最外圈基岩下方的16个[[末地石]]方块若被挖掘，在击败或重生[[末影龙]]时会重新生成。
+
+== 行为 ==
+{{see also|末地传送门（方块）#用途}}
+激活的返回传送门的内部由[[末地传送门方块]]构成，与[[末地传送门]]相同。
+
+如果玩家第一次穿过返回传送门，会看到[[胜利屏幕]]界面滚动，阅读完或跳过之后就会返回[[个人出生点]]，之后胜利屏幕不会再出现。如果玩家以外的实体穿过，它就会被送至[[世界出生点]]位置。
+
+若要使激活的返回传送门触发[[末影龙#重生|末影龙重生]]，{{in|je}}需要分别在其4条基岩边框（长3格）的任意处放置[[末地水晶]]，触发范围还包括长边里外1格、下方1格；{{in|be}}需要分别在其4条基岩边框（长3格）的任意中心放置[[末地水晶]]，触发范围还包括长边里外1格、上方1格、下方2格，并且受[[东南规则]]影响，其中可存在1颗末地水晶放置于偏东南方向的1格处。
+
+触发末影龙重生时，返回传送门内部的传送门方块会消失。
+
+== 数据值 ==
+=== ID ===
+[[Java版26.3]]前及{{el|be}}：
+{{ID table
+|firstcolumnname=地物
+|displayname=[无显示名称]
+|spritename=end-podium
+|spritetype=env
+|nameid=-{}-[无ID]
+|foot=1}}
+
+[[Java版26.3]]起：
+{{ID table
+|firstcolumnname=已配置的地物
+|displayname=[无显示名称]
+|spritename=end-podium
+|spritetype=env
+|featuretype=end_podium
+|nameid=end_podium_active
+}}
+{{ID table
+|displayname=[无显示名称]
+|spritename=end-podium
+|spritetype=env
+|featuretype=end_podium
+|nameid=end_podium_inactive
+|foot=1
+}}
+
+== 成就 ==
+{{load achievements|the-end}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre4|随着[[末地]]的加入，返回传送门被一同加入。}}
+|{{HistoryLine||1.9|dev=15w31a|返回传送门会预先生成，但不会生成龙蛋和传送门方块。}}
+|{{HistoryLine||1.21|dev=24w20a|穿过返回传送门时不再清除[[状态效果]]，也不再重置玩家[[属性]]。<ref>{{bug|MC-6431|||Fixed}}</ref><ref>{{bug|MC-181604|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=24w21a|加入了游戏规则<code>entitiesWithPassengersCanUsePortals</code>，用于控制带有乘客的实体能否穿过返回传送门。}}
+|{{HistoryLine|||dev=pre1|移除了游戏规则<code>entitiesWithPassengersCanUsePortals</code>，现在带有乘客的实体可以无延迟地穿过返回传送门。
+|现在对返回传送门掷出末影珍珠可以将玩家传送回主世界。}}
+|{{HistoryLine||1.21.5|dev=25w02a|现在当<code>0,0</code>处没有方块时，返回传送门会在维度最低高度高一格处生成，而不是在低一格生成。<ref name="MC-93185">{{bug|MC-93185|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=25w03a|现在当返回传送门切换状态时，其中被替换的方块会正常掉落。<ref>{{bug|MC-272790|||Fixed}}</ref>}}
+|{{HistoryLine||26.3|dev=snapshot-1|返回传送门现在拥有地物ID：{{cd|d=pretty|end_podium_active|end_podium_inactive}}。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了返回传送门。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU9|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了返回传送门。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||1.7.10|加入了返回传送门。}}
+}}
+
+== 你知道吗 ==
+* 在[[25w02a]]之前，在每大约50000个[[種子碼]]中会有一个使得末地的<code>0,0</code>处没有生成任何方块，此时返回传送门只有中间最高的3个基岩以及4根火把会被生成，其余部分会因为位置超出世界范围而生成失败。<ref name="MC-93185"/>
+** 由于返回传送门自首次生成后不会再重置位置，这类世界无法通过进入返回传送门离开末地。
+
+== 画廊 ==
+<gallery>
+File:Dragon egg on portal.png|返回传送门上生成的[[龙蛋]]
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox world features|features}}
+
+[[de:Endbrunnen]]
+[[en:End Podium]]
+[[fr:Portail de l'End]]
+[[ja:出口ポータル]]
+[[ko:출구 차원문]]
+[[nl:Endportaal]]
+[[pl:Fontanna Endu]]
+[[pt:Portal do End]]
+[[ru:Портал Края]]

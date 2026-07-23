@@ -1,0 +1,122 @@
+# 页面: 客户端清单文件格式
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B8%85%E5%8D%95%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:25:19
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+<!--除非你清楚自己在写什么，否则请不要盲目将此页面与en同步-->
+'''{{filename|client.json}}'''与{{filename|[[client.jar]]}}文件一起位于{{filepath|-{}-[[.minecraft]]/versions/''<版本>''}}，列出了版本的属性。当使用最新版[[启动器]]时，它会被命名为{{filename|-{}-''<游戏版本>''.json}}。特定版本的JSON文件位于{{filename|[[version_manifest.json]]}}文件中。
+
+== JSON格式 ==
+这是{{filename|client.json}}的JSON格式。
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|arguments}}：参数列表。
+*** {{nbt|list|default-user-jvm}}：用户默认JVM参数列表。
+**** {{nbt|compound}}：包含{{cd|rules}}的标签。
+***** {{nbt|list|rules}}：判断是否应用该标签：
+****** {{nbt|compound}}：需满足的规则。
+******* {{nbt|string|action}}：对当前项执行的操作，可以是'''allow'''（允许）或'''disallow'''（不允许），若满足其余键值，则执行该action。
+******* {{nbt|compound|os}}：当前系统相关的要求。
+******** {{nbt|string|name}}：系统名称。
+******** {{nbt|string|version}}：系统版本。
+******** {{nbt|compound|versionRange}}：系统版本区间。
+********* {{nbt|string|max}}：最低版本号。
+********* {{nbt|string|min}}：最高版本号。
+******** {{nbt|string|arch}}：系统架构。
+***** {{Nbt|string}}{{nbt|list|value}}：规则满足时添加的参数。
+****** {{nbt|string}}：列表中的值。
+*** {{nbt|list|game}}：游戏参数列表，包含了如用户名、游戏路径等信息。也包含了复合标签，如下详述。
+**** {{nbt|string}}：列表中的值。
+**** {{nbt|compound}}：包含{{cd|rules}}的标签。
+***** {{nbt|list|rules}}：判断是否应用该标签：
+****** {{nbt|compound}}：需满足的规则。
+******* {{nbt|string|action}}：对当前项执行的操作，可以是'''allow'''（允许）或'''disallow'''（不允许），若满足其余键值，则执行该action。
+******* {{nbt|compound|features}}：对应启动器内设置，通常是一个布尔变量。
+******** {{nbt|boolean|is_demo_user}}：是否为[[演示版]]用户。
+******** {{nbt|boolean|has_custom_resolution}}：是否使用自定义分辨率。
+******** {{Nbt|bool|has_quick_plays_support}}：是否支持[[快速进入游戏]]。
+******** {{Nbt|bool|is_quick_play_singleplayer}}：是否支持单人模式下的快速进入游戏。
+******** {{Nbt|bool|is_quick_play_multiplayer}}：是否支持多人模式下的快速进入游戏。
+******** {{Nbt|bool|is_quick_play_realms}}：是否支持[[Realms]]下的快速进入游戏。
+***** {{Nbt|string}}{{nbt|list|value}}：规则满足时添加的参数。
+****** {{nbt|string}}：列表中的值。
+*** {{nbt|list|jvm}}：JVM参数列表。
+**** {{nbt|compound}}：包含{{cd|rules}}的标签。
+***** {{nbt|list|rules}}：判断是否应用该标签：
+****** {{nbt|compound}}：需满足的规则。
+******* {{nbt|string|action}}：对当前项执行的操作，可以是'''allow'''（允许）或'''disallow'''（不允许），若满足其余键值，则执行该action。
+******* {{nbt|compound|os}}：当前系统相关的要求。
+******** {{nbt|string|name}}：系统名称。
+******** {{nbt|string|version}}：系统版本。
+******** {{nbt|string|arch}}：系统架构。
+***** {{Nbt|string}}{{nbt|list|value}}：规则满足时添加的参数。
+****** {{nbt|string}}：列表中的值。
+** {{nbt|compound|assetIndex}}：当前版本的[[散列资源文件#资源索引|资源索引]]。
+*** {{nbt|string|id}}：资源索引的标识符。
+*** {{nbt|string|sha1}}：资源索引的SHA1校验码。
+*** {{nbt|int|size}}: 资源索引文件的文件大小。
+*** {{nbt|int|totalSize}}：所有资源文件的总大小。
+*** {{nbt|string|url}}：下载资源索引文件的URL。
+** {{nbt|string|assets}}：当前版本的资源文件版本。
+** {{nbt|int|complianceLevel}}：玩家安全特性等级，当前为1。
+** {{nbt|compound|downloads}}：包含[[客户端]]及[[服务端]]下载地址等信息。
+*** {{nbt|compound}}：下载的类型。
+**** {{nbt|string|sha1}}：客户端/服务端的SHA1校验码。
+**** {{nbt|int|size}}：客户端/服务端的文件大小。
+**** {{nbt|string|url}}：下载客户端/服务端的URL。
+** {{nbt|string|id}}：版本标识符。
+** {{Nbt|compound|javaVersion}}：包含要使用的Java运行时环境（JRE）信息。
+*** {{Nbt|string|component}}：Java运行时环境的代号。
+*** {{Nbt|int|majorVersion}}：Java运行时环境的主版本号。
+** {{nbt|list|libraries}}：游戏所有依赖库，包含其下载地址等信息。
+*** {{nbt|compound}}：依赖库。
+**** {{nbt|compound|downloads}}：下载相关信息。
+***** {{nbt|compound|artifact}}
+****** {{nbt|string|path}}：依赖库文件相对于libraries文件夹的路径，并包含文件名。
+****** {{nbt|string|sha1}}：依赖库文件的SHA1校验码。
+****** {{nbt|int|size}}：依赖库文件的文件大小。
+****** {{nbt|string|url}}：依赖库文件的URL。
+**** {{nbt|string|name}}：该库的[https://maven.apache.org/guides/mini/guide-naming-conventions.html Maven名称]，以<code>groupId:artifactId:version</code>的形式出现。
+**** {{nbt|list|rules}}：对当前项执行的操作，可以是'''allow'''（允许）或'''disallow'''（不允许），若满足其余键值，则执行该action。
+** {{nbt|compound|logging}}：日志配置信息。
+*** {{nbt|compound|client}}：客户端的日志配置信息。
+**** {{nbt|string|argument}}：额外JVM参数。
+**** {{nbt|compound|file}}：配置文件的信息。
+***** {{nbt|string|id}}：日志配置文件的文件名。
+***** {{nbt|string|sha1}}：日志配置文件的SHA1校验码。
+***** {{nbt|int|size}}：日志配置文件的文件大小。
+***** {{nbt|string|url}}：日志配置文件的完整URL。
+**** {{nbt|string|type}}：日志配置文件的类型。
+** {{nbt|string|mainClass}}：主类名。
+** {{nbt|int|minimumLauncherVersion}}：可以运行该版本的最小启动器版本。
+** {{nbt|string|releaseTime}}：使用[[wzh:ISO_8601|ISO 8601]]格式化的数据，用于表示版本的发布时间。
+** {{nbt|string|time}}：使用[[wzh:ISO_8601|ISO 8601]]格式化的数据，用于表示版本的更新时间。
+** {{nbt|string|type}}：版本类型，可以是：'''release'''（[[Java版版本记录#正式版|正式版]]）、'''snapshot'''（[[快照]]）、'''unobfuscated'''（未混淆版本）、'''old_beta'''（[[Java版版本记录#Beta|Beta版]]）或'''old_alpha'''（[[Java版版本记录#Alpha|Alpha版]]及更早的版本）。
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|随着启动器的更新，版本被存储在了{{filepath|[[.minecraft]]/versions}}，而且每个版本都有了自己文件夹，内有{{filename|[[minecraft.jar]]}}（新版中的{{filename|[[client.jar]]}}）和一个{{filename|.json}}文件，即{{filename|client.json}}。}}
+|{{HistoryLine||1.7.2|dev=13w39a|在根标签加入了{{nbt|compound|logging}}标签。}}
+|{{HistoryLine||1.13|dev=17w43a|使用{{nbt|compound|arguments}}复合标签取代了旧的{{nbt|compound|minecraftArguments}}标签。}}
+|{{HistoryLine||1.15|dev=19w36a|混淆映射表现在在{{nbt|compound|downloads}}标签中被列出。其也在1.14.4中被实现。}}
+|{{HistoryLine||1.16|dev=20w21a|加入了两个新的参数：{{cd|disableChat}}（禁用在线聊天的接收和发送）和{{cd|disableMultiplayer}}（禁用“[[多人游戏]]”和“[[Minecraft Realms]]”按钮）。}}
+|{{HistoryLine||1.19|dev=1.19-pre1|移除了{{nbt|list|libraries}}中的{{nbt|compound|downloads.classifiers}}和{{nbt|compound|natives}}字段。}}
+|{{HistoryLine||1.20|dev=23w14a|向{{nbt|compound|arguments.game.features}}加入了四个参数：{{nbt|bool|has_quick_plays_support}}、{{nbt|bool|is_quick_play_singleplayer}}、{{nbt|bool|is_quick_play_multiplayer}}和{{nbt|bool|is_quick_play_realms}}}}
+|{{HistoryLine||26.1|dev=26.1-snapshot-1|因代码不再混淆，移除了{{nbt|compound|downloads.client_mappings}}和{{nbt|compound|downloads.server_mappings}}字段。}}
+|{{HistoryLine||26.1|dev=26.1-snapshot-2|从{{nbt|list|arguments.jvm}}中拆分出{{nbt|list|arguments.default-user-jvm}}字段}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[en:Client.json]]
+[[es:Client.json]]
+[[ja:Client.json]]
+[[pt:Client.json]]

@@ -1,0 +1,132 @@
+# 页面: 聊天类型定义格式
+# 来源: https://zh.minecraft.wiki/w/%E8%81%8A%E5%A4%A9%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:43
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''聊天类型定义文件'''是'''聊天类型（Chat Type）'''在[[数据包]]中的数据驱动定义文件。
+
+== 聊天类型 ==
+
+聊天类型是游戏用于标识不同聊天信息作用的元信息。例如，游戏内系统信息和玩家发出的聊天信息就不是一种聊天类型。
+
+聊天类型可以控制聊天信息在聊天框内的显示样式，也可以控制聊天信息的复述内容。游戏内只会使用下列7种聊天类型，由数据包定义的其他聊天类型在游戏内无法使用任何方式调用，但数据包可以覆盖定义这7种聊天类型以控制聊天信息的显示样式和复述内容。
+
+下表中，<code>sender</code>表示发送信息的玩家名称，<code>target</code>表示接收信息的玩家或队伍名称，<code>content</code>表示发送的聊天消息。
+{{#vardefine: style | class="format-f" style="font-family: Minecraft, 'Arial Black', Unifont, 'WenQuanYi Bitmap Song', SimSun, MingLiU, Beijing, sans-serif" }}<!--
+-->{{#vardefine: style_italic | class="format-f" style="font-family: Minecraft, 'Arial Black', Unifont, 'WenQuanYi Bitmap Song', SimSun, MingLiU, Beijing, sans-serif; font-style:italic; color: gray" }}<!--
+-->{{#vardefine: back_bg | style="background: #000000" }}
+{| class="wikitable"
+! 注册名
+! 描述
+! 默认聊天格式
+! 默认复述功能格式
+|-
+| <code>chat</code>
+| 玩家发送的聊天消息
+| {{#var:back_bg}} | <span {{#var:style}}>{{tp|chat.type.text|sender|content}}</span>
+| {{#var:back_bg}} | <span {{#var:style}}>{{tp|chat.type.text.narrate|sender|content}}</span>
+|-
+| <code>emote_command</code>
+| 使用{{cmd|me}}命令发送的消息
+| colspan=2 {{#var:back_bg}} | <span {{#var:style}}>{{tp|chat.type.emote|sender|content}}</span>
+|-
+| <code>msg_command_incoming</code>
+| 接收到来自其他玩家的[[命令/msg|私人消息]]
+| {{#var:back_bg}} | <span {{#var:style_italic}}>{{tp|commands.message.display.incoming|sender|content}}</span>
+| rowspan=5 {{#var:back_bg}} | <span {{#var:style}}>{{tp|chat.type.text.narrate|sender|content}}</span>
+|-
+| <code>msg_command_outgoing</code>
+| 发送给其他玩家的[[命令/msg|私人消息]]
+| {{#var:back_bg}} | <span {{#var:style_italic}}>{{tp|commands.message.display.outgoing|target|content}}</span>
+|-
+| <code>say_command</code>
+| 使用{{cmd|say}}命令发送的消息
+| {{#var:back_bg}} | <span {{#var:style}}>{{tp|chat.type.announcement|sender|content}}</span>
+|-
+| <code>team_msg_command_incoming</code>
+| 接收到来自队伍的[[命令/teammsg|队伍消息]]
+| {{#var:back_bg}} | <span {{#var:style}}>{{tp|chat.type.team.text|target|sender|content}}</span>
+|-
+| <code>team_msg_command_outgoing</code>
+| 发送给队伍的[[命令/teammsg|队伍消息]]
+| {{#var:back_bg}} | <span {{#var:style}}>{{tp|chat.type.team.sent|target|sender|content}}</span>
+|}
+
+== 定义格式 ==
+
+聊天类型在游戏内使用<code>CHAT_TYPE</code>注册表，数据包路径为{{filepath|chat_type}}，即所有聊天类型定义文件都需要在{{filepath|-{}-data/<''命名空间''>/chat_type}}目录内定义，聊天类型标签则需要在{{filepath|-{}-data/<''命名空间''>/tags/chat_type}}目录内定义。
+
+由于游戏不会使用数据包自定义的聊天类型，也没有提供使用自定义聊天类型的方式，所以实际上真正可以生效的聊天类型定义文件只有游戏内定义的7个聊天类型，数据包也只能覆盖定义这7个聊天类型，其他文件均不生效，但会被游戏解析。另外，游戏也不使用聊天类型标签，因此所有聊天类型标签在游戏内无任何作用。
+
+聊天类型定义文件使用JSON格式，并具有下列结构： 
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|compound|chat|required=1}}：聊天信息在聊天框内的显示样式。
+*** 见下文{{slink||聊天类型装饰}}。
+** {{nbt|compound|narration|required=1}}：聊天信息在使用[[复述功能]]时朗读的文本。
+*** 见下文{{slink||聊天类型装饰}}。
+</div>
+
+=== 聊天类型装饰 ===
+
+聊天消息会读取聊天类型中的装饰（Decoration）信息，将原始的发送者、接收者和消息内容格式化为文本组件或复述信息。
+
+<div class="treeview>
+* {{nbt|compound}} 聊天类型装饰
+** {{nbt|string|translation_key|required=1}}：一个翻译键。
+** {{nbt|list|parameters|required=1}}：传入到翻译文本中的参数。
+*** {{nbt|string}}：一个参数，对应的下标代表了传入到翻译文本中的顺序。具体取值见下文{{slink||生成翻译文本}}。
+** {{nbt|compound|style}}：（默认没有样式）设置文本组件的样式。此项对复述文本无效。
+*** 见{{slink|文本组件|组件样式}}。
+</div>
+
+== 定义行为 ==
+
+聊天类型定义数据仅在服务端启动时被加载一次，使用{{cmd|reload}}命令不可以使聊天类型定义被重新加载，而必须重启服务端。
+
+=== 生成翻译文本 ===
+
+当游戏在聊天栏内显示聊天信息，或复述聊天信息时，游戏就会读取对应聊天类型的装饰信息。
+
+每种聊天类型的应用场景不同，导致实际上每种类型的参数不同。除一定存在的消息内容外，聊天信息还包含发送者和接收者，但有些类型不存在接收者。这三种参数可以在{{nbt|list|parameters|required=1}}中定义，游戏会将对应下标的参数转换为文本组件后传入翻译文本内进行替换。下表中给出了这三种参数的枚举值和使用条件：
+
+{| class="wikitable"
+! 枚举值 !! 参数含义 !! 聊天类型可用性
+|-
+| <code>content</code> || 聊天信息的消息内容 || 所有聊天类型均可用
+|-
+| <code>sender</code> || 聊天信息发送者的显示名称 || 所有聊天类型均可用
+|-
+| <code>target</code> || 聊天信息接收者的显示名称 || 仅<code>msg_command_outgoing</code>、<code>team_msg_command_incoming</code>和<code>team_msg_command_outgoing</code>可用，其他聊天类型此项为空文本组件
+|}
+
+{{nbt|list|parameters|required=1}}中参数可以重复出现。例如一个装饰信息中此项为<code>["sender", "content", "sender"]</code>，且翻译文本为<code>%s: %s (%s)</code>，假设发送者显示名称为<code>A</code>，消息内容为<code>B</code>，则最终显示的文本组件是<code>A: B (A)</code>。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||?|加入了聊天类型以区分不同聊天信息。}}
+|{{HistoryLine||1.19|dev=22w18a|重写了聊天类型系统，加入了<code>CHAT_TYPE</code>可写注册表，添加了聊天类型定义格式。}}
+|{{HistoryLine||1.19.1|dev=22w24a|{{nbt|compound|style}}现在是可选的。}}
+|{{HistoryLine|||dev=pre2|简化了{{nbt|compound|decoration}}，将其移入{{nbt|compound|chat}}和{{nbt|compound|narration}}中。
+|移除了{{nbt|compound|narration}}中的{{nbt|string|priority}}。
+|移除了{{nbt|compound|overlay}}。聊天类型现在不再能够用于动作栏。
+|移除了内置聊天类型<code>system</code>、<code>game_info</code>和<code>tellraw_command</code>。}}
+|{{HistoryLine|||dev=pre3|聊天类型<code>msg_command</code>现在被拆分为<code>msg_command_outgoing</code>和<code>msg_command_incoming</code>。
+|将聊天类型参数<code>team_name</code>重命名为<code>target</code>。其现在也被用于聊天类型<code>msg_command_outgoing</code>。}}
+|{{HistoryLine|||dev=pre5|聊天类型<code>team_msg_command</code>现在被拆分为<code>team_msg_command_incoming</code>和<code>team_msg_command_outgoing</code>。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Chatartendefinition]]
+[[en:Chat type]]
+[[fr:Type de tchat]]
+[[pt:Tipo de chat]]

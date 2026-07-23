@@ -1,0 +1,546 @@
+# 页面: 红石比较器
+# 来源: https://zh.minecraft.wiki/w/%E7%BA%A2%E7%9F%B3%E6%AF%94%E8%BE%83%E5%99%A8
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:12
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|group1=比较模式，未激活
+|1-1=Redstone Comparator.png
+|1-2=Redstone Comparator BE.png
+|group2=比较模式，激活
+|2-1=Powered Redstone Comparator.png
+|2-2=Powered Redstone Comparator BE.png
+|group3=作差模式，未激活
+|3-1=Subtracting Redstone Comparator.png
+|3-2=Subtracting Redstone Comparator BE.png
+|group4=作差模式，激活
+|4-1=Powered Subtracting Redstone Comparator.png
+|4-2=Powered Subtracting Redstone Comparator BE.png
+|*-1caption={{el|je}}
+|*-2caption={{el|be}}
+|invimage=Redstone Comparator
+|invimage2=----
+|invimage3=[动力比较器（基岩版）]Powered Comparator BE
+|invimage4=[无动力比较器（基岩版）]Unpowered Comparator BE
+|block-id-raw='''{{el|je}}'''：comparator<br>'''{{el|be}}'''：见{{slink||数据值}}
+}}
+'''红石比较器（Redstone Comparator）'''是一种在[[红石电路]]中用于保持、比较、作差红石信号以及检测特定数据值（主要是容器装载量）的[[红石元件]]方块。
+
+== 生成 ==
+=== 自然生成 ===
+红石比较器会自然生成于[[远古城市]]中心的地下室中。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|B1= Redstone Torch
+|A2= Redstone Torch
+|B2= Nether Quartz
+|C2= Redstone Torch
+|A3= Stone
+|B3= Stone
+|C3= Stone
+|Output= Redstone Comparator
+|type= Redstone
+}}
+
+== 破坏 ==
+红石比较器被挖掘时会立刻被破坏。
+
+{{Breaking table}}
+
+红石比较器被破坏后会掉落自身。
+
+== 用途 ==
+红石比较器可放置在任何上表面边缘完整的方块（包括上半[[台阶]]、倒置[[楼梯]]和[[漏斗]]）上。{{in|be}}还可以放置在[[墙]]、[[栅栏]]、竖直的[[末地烛]]、竖直的[[避雷针]]和[[饰纹陶罐]]等方块上。
+
+红石比较器在下列情况会被破坏并掉落：
+* 附着方块移动、移除、被破坏或变为无法提供支撑的状态；
+* {{Only|for=有[[水]]流过|je}}；
+* 有[[活塞]]推动它或将方块推入其位置。
+
+若[[熔岩]]流过其位置，红石比较器会被破坏但不会掉落。
+
+红石比较器具有三个输入输出端口：输出端、主输入端、侧输入端（被分为左、右两个侧输入端，计算时取两个侧输入端中的最大值）。放下比较器时，比较器的主输入端朝向玩家，上表面的三角指向输出端，两侧则为侧输入端。比较器上表面后端有两根小红石火把，上表面前端则只有一根。当比较器输出信号时，后侧的红石火把会变亮，三角也会变红。前端火把的状态可以由{{ctrl|使用}}键切换：
+* 关闭、熄灭（使比较器处于“比较模式”）；
+* 打开、亮起（使比较器处于“作差模式”）。
+
+红石比较器只会从主输入端和侧输入端接受信号。侧输入端只接受来自[[红石线]]、[[红石中继器]]、{{only|je|for=[[红石块]]、[[侦测器]]<ref>https://fallenbreath.me/2020/09/17/deeply-dissecting-minecraft_3.4/</ref>、[[避雷针]]}}和其他比较器的输入。
+
+=== 输入输出 ===
+红石比较器是[[红石元件#传输元件|传输元件]]，可被下列形式激活：
+* 毗邻主输入端的开启的'''[[红石元件#电源|电源]]'''（例外：[[侦测器]]只会激活指向的比较器）。
+* 毗邻主输入端的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻主输入端的指向比较器且激活的[[红石中继器]]、[[红石线]]或其他红石比较器。
+* 毗邻主输入端且未熄灭的[[红石火把]]。
+
+红石比较器激活时，以下列方式输出：
+* 为毗邻输出端的红石线提供对应的信号强度。
+* 为毗邻输出端且朝向正确的红石中继器和其他红石比较器（需要任意输入端面向自身）提供对应的信号强度。
+* 激活毗邻输出端且朝向正确（若需要，如[[活塞]]）的任何[[红石元件列表#机械元件|机械元件]]。
+* '''[[强充能]]'''输出端毗邻的红石导体至对应充能等级。
+
+{{in|je}}红石比较器收到[[NC更新]]或[[比较器更新]]时，若自身不存在计划刻且当前的状态与输入不符，则会创建一个位于2[[游戏刻]]后的[[计划刻]]。若在放置时检查到自身应被激活，则会创建一个位于1游戏刻后的计划刻。
+
+红石比较器执行上述计划刻时，其会获取当前的输入信号，计算并更新自身的状态与输出。
+* 由于红石比较器执行计划刻时会检查输入信号，一般的长度小于等于2游戏刻的信号无法令红石比较器更改输出，该性质可用于过滤过短的脉冲。
+
+{{in|be}}红石比较器属于“电容器元件”，在电容器信号计算阶段根据上游元件列表获取输入并计算输出，并在'''阶段结束时'''同步计算结果。因此：
+* 红石比较器无法接收'''在上一红石刻存在，但在该红石刻的图更新阶段被阻断的信号变化'''。
+* 消费者元件可在同一红石刻接收到红石比较器的新输出值。
+
+红石比较器输出信号时，后侧的两个小红石火把会亮起，否则熄灭。
+
+红石比较器有四大用途：保持信号强度、比较信号强度、信号强度作差及检测方块状态（主要为容器的装载量）。
+
+=== 保持信号强度 ===
+红石比较器的侧输入端没有输入时，输出的信号强度与主输入端的信号强度'''相同'''（与红石中继器增强信号强度的功能不同）。
+
+=== 比较信号强度 ===
+{{Filetr|Comparators Explained.png|比较模式的比较器|缩略图|260px}}
+比较模式的红石比较器（前侧火把熄灭）会比较主输入端与侧输入端。其输出逻辑性质可用于规整信号强度。
+
+若任意侧输入端大于主输入，红石比较器不输出信号；否则输出与主输入相同的信号强度。
+
+表达式：<math> \text{输出} = \text{主输入} \times \left[\max(\text{左侧输入}, \;\text{右侧输入}) \leq \text{主输入}\right] </math>
+
+如：
+* 主输入端输入强度为'''8'''的信号；左侧输入端输入强度为'''13'''的信号；右侧输入端'''无信号'''（强度为0）；则输出信号的强度为<math> 8 \times \left[\max(13, \;0) \leq 8\right] = 0 </math>。
+* 主输入端输入强度为'''4'''的信号；左侧输入端输入强度为'''6'''的信号；右侧输入端输入强度为'''7'''的信号；则输出信号的强度为<math> 4 \times \left[\max(6, \;7) \leq 4\right] = 0 </math>。
+* 主输入端输入强度为'''9'''的信号；左侧输入端输入强度为'''5'''的信号；右侧输入端输入强度为'''2'''的信号；则输出信号的强度为<math> 9 \times \left[\max(5, \;2) \leq 9\right] = 9 </math>。
+* 主输入端输入强度为'''15'''的信号；左侧输入端输入强度为'''14'''的信号；右侧输入端输入强度为'''15'''的信号；则输出信号的强度为<math> 15 \times \left[\max(14, \;15) \leq 15\right] = 15 </math>。
+
+{{-}}
+
+=== 信号强度作差 ===
+[[File:Redstone comparator.png|thumb|后侧输入B与边侧A/C中较强的一端相减，得1。假设A或者C中有比B更大的输入，则会输出0|260px]]
+作差模式的红石比较器（前侧火把亮起）会对主输入端与侧输入端作差。
+
+输出主输入信号与两个边侧输入中较强的信号强度之差，若结果小于0则输出0。
+
+表达式：<math> \text{输出} = \max\Big(\text{主输入} - \max(\text{左侧输入},\;\text{右侧输入}), \;0 \Big) </math>
+
+如：
+* 主输入端输入强度为'''4'''的信号；左侧输入端输入强度为'''6'''的信号；右侧输入端输入强度为'''7'''的信号；则输出信号的强度为<math> \max\Big(4 - \max(6, \;7), \;0 \Big) = 0 </math>。
+* 主输入端输入强度为'''9'''的信号；左侧输入端输入强度为'''5'''的信号；右侧输入端输入强度为'''2'''的信号；则输出信号的强度为<math> \max\Big(9 - \max(2, \;5), \;0 \Big) = 4 </math>。
+
+作差模式的红石比较器在红石电路中可作为高精度非门使用。
+
+=== 检测特定方块或实体状态 ===
+{{Schematic
+|caption=特定位置的方块可以被红石比较器检测它的方块状态或方块实体（如箱子的装载量），红石比较器可以透过一个方块检测。
+|rc-w|LW|GW|-
+|rc-w!|ch|-
+|rc-w!|SB|ch|-
+}}
+
+特定类型的方块{{only|je|for=和物品展示框}}<ref>{{in|je}}物品展示框是实体而非方块。</ref>可作为红石比较器的'''受测目标'''，红石比较器会获取其[[方块状态]]或[[方块实体]]，经转换后作为自身输入。
+
+受测目标需要位于红石比较器的主输入端方向上，且与红石比较器的主输入端'''毗邻'''或'''相隔一个不受测的方块'''才能作为红石比较器的输入。
+* {{in|je}}该不受测的方块需要是[[红石导体]]。
+* {{in|be}}该不受测的方块可以是[[活塞]]、[[銅格柵]]、[[铁链]]、[[铜链]]或除了[[标靶]]、[[鐘]]及[[大懸葉草]]外的红石导体。
+
+红石比较器优先将受测目标作为输入。
+* {{in|je}}当受测目标与红石比较器间相隔了一个红石导体，而红石导体被充能且强度不小于15时，红石比较器会将该强度的信号作为输入，而不会检测受测目标的状态。<ref>{{bug|MC-64394|||WAI}}</ref>
+
+红石比较器实际上可寄存最大2,147,483,647的信号强度，可通过[[#命令方块|检测命令方块]]或检测使用命令修改过的容器来获得大于15的信号。
+{{-}}
+
+==== 检测容器 ====
+{| class="wikitable floatright" style="margin-left: 0.5em; margin-right: 0; text-align: center;"
+|+ 容器信号强度所需最少物品数
+! rowspan=3 style="max-width:1.2em;" | 信号强度
+! colspan=6 | 容器与槽位数
+|-
+! {{BlockSprite|Decorated Pot}}
+! {{BlockSprite|Furnace}} {{BlockSprite|Blast Furnace}} {{BlockSprite|Smoker}}
+! {{BlockSprite|Hopper}} {{EntitySprite|Minecart with Hopper}} {{BlockSprite|Brewing Stand}}
+! {{BlockSprite|Dispenser}} {{BlockSprite|Dropper}}
+! {{BlockSprite|Chest}} {{EntitySprite|Minecart with Chest}} {{BlockSprite|Shulker Box}}<br>{{BlockSprite|Barrel}} {{BlockSprite|Copper Chest}}
+! <div style="display:inline-block; min-width:38px;">{{blockSprite|chest left}}{{blockSprite|chest right}}<br>{{BlockSprite|copper chest left}}{{BlockSprite|copper chest right}}</div>
+|-
+! 1 !! 3 !! 5 !! 9 !! 27 !! 54
+|-
+| 0
+| colspan=6 | 0个
+|-
+| 1
+| colspan=6 | 1个
+|-
+| 2
+| 5个 || 14个 || 23个 || 42个 || 1组60个 || 3组55个
+|-
+| 3
+| 10个 || 28个 || 46个 || 1组19个 || 3组55个 || 7组46个
+|-
+| 4
+| 14个 || 42个 || 1组5个 || 1组60个 || 5组51个 || 11组37个
+|-
+| 5
+| 19个 || 55个 || 1组28个 || 2组37个 || 7组46个 || 15组28个
+|-
+| 6
+| 23个 || 1组5个 || 1组51个 || 3组14个 || 9组42个 || 19组19个
+|-
+| 7
+| 28个 || 1组19个 || 2组10个 || 3组55个 || 11组37个 || 23组10个
+|-
+| 8
+| 32个 || 1组32个 || 2组32个 || 4组32个 || 13组32个 || 27组
+|-
+| 9
+| 37个 || 1组46个 || 2组55个 || 5组10个 || 15组28个 || 30组55个
+|-
+| 10
+| 42个 || 1组60个 || 3组14个 || 5组51个 || 17组23个 || 34组46个
+|-
+| 11
+| 46个 || 2组10个 || 3组37个 || 6组28个 || 19组19个 || 38组37个
+|-
+| 12
+| 51个 || 2组23个 || 3组60个 || 7组5个 || 21组14个 || 42组28个
+|-
+| 13
+| 55个 || 2组37个 || 4组19个 || 7组46个 || 23组10个 || 46组19个
+|-
+| 14
+|60个 || 2组51个 || 4组42个 || 8组23个 || 25组5个 || 50组10个
+|-
+| 15
+| 1组 || 3组 || 5组 || 9组 || 27组 || 54组
+|}
+[[File:Comparator storage.png|用于检测容器的红石比较器|缩略图]]
+
+用于检测容器状态的红石比较器会根据物品装满的程度输出对应信号。
+
+下列容器可以被红石比较器检测：
+* {{BlockLink|Furnace}}
+* {{BlockLink|Blast Furnace}}
+* {{BlockLink|Smoker}}
+* {{BlockLink|Brewing Stand}}
+* {{BlockLink|Hopper}}
+* [[探测铁轨]]上的{{ItemLink|Minecart with Hopper}}
+* {{BlockLink|Dispenser}}
+* {{BlockLink|Dropper}}
+* {{BlockLink|Chest}}
+* {{BlockLink|Trapped Chest}}
+* {{BlockLink|id=all-copper-chests|Copper Chest}}
+* [[探测铁轨]]上的{{ItemLink|Minecart with Chest}}
+* {{BlockLink|Barrel}}
+* {{blockSprite|chest left}}{{blockSprite|chest right}} [[大型箱子]]
+* {{blockSprite|chest left}}{{blockSprite|chest right}} [[大型陷阱箱]]
+* {{BlockSprite|copper chest left}}{{BlockSprite|copper chest right}} [[大型铜箱子]]
+* {{BlockLink|Shulker Box}}
+* {{BlockLink|Decorated Pot}}
+
+当红石比较器检测大型箱子、大型陷阱箱或大型铜箱子时，红石比较器会检测整个大型箱子（54个槽位），而不只是红石比较器后方的那半个部分。{{in|je|nc=1}}无法打开的箱子（无论是因为上方有红石导体还是有[[猫]]坐在上方）总会使红石比较器认为信号为0（若红石比较器没有改变输出至正确状态，需要给予红石比较器[[NC更新]]或[[比较器更新]]），不受其中物品数量的影响。潜影盒总是可以被检测，即使无法打开。
+
+表中展示了各容器中，最大堆叠数为64的物品需要多少组才能输出指定的信号强度值。对于最大堆叠数为16的物品（[[雪球]]、[[告示牌]]、[[末影珍珠]]等），个数除以4并向上取整就可以适用。对于不可堆叠的物品，1个即为1组。
+
+如：仅使用最大堆叠数为64的物品，需要依靠漏斗产生强度为10的信号，需要至少3组14个物品，共206个。
+
+<!--<div style="border: thin solid #aaa;margin: 1em 2em;padding: 0.5em 1em 0.4em;">-->
+; 已知物品数量，求输入信号强度值
+: 容器为空时，输入0。
+: 容器不为空时，输入按下列公式计算：
+:* <math>\text{槽位填充率} = \frac{\text{槽位物品数}}{\text{此物品最大堆叠数}}</math>
+
+:* <math>\text{信号强度} = \left\lfloor 1 + 14 \times \frac{ \text{槽位填充率之和}}{\text{槽位总数}} \right\rfloor</math>
+: '''示例：'''发射器（共9个槽位）中有300个最大堆叠至64的物品，产生的信号强度为8：
+:* <math> \text{信号强度} = \left\lfloor 1 + \frac{\frac{300}{64}}{9} \times 14 \right\rfloor = 8 </math>
+: '''注意：'''不可堆叠的物品总被认为填满一个槽位。
+
+; 已知信号强度值，求物品数量
+: 适用于利用红石比较器与容器配合来输出特定强度。
+: 当物品最大堆叠数为64时，输出特定信号强度所需物品数量用如下算法计算：
+:* <math> \text{所需物品数} = \max\left( \text{信号强度},\ \left\lceil \frac{\text{槽位总数} \times 64}{14} \times (\text{信号强度} - 1) \right\rceil \right) </math>
+: '''示例：'''用熔炉（3物品栏）得到强度为9的信号，需要110物品：
+:* <math> \text{所需物品数} = \max\left( 9,\ \left\lceil \frac{3 \times 64}{14} \times (9 - 1) \right\rceil \right) = 110 </math>
+<!--</div>-->
+
+{{-}}
+
+==== 其他 ====
+一些非容器的方块或实体也可以被红石比较器检测：
+
+; {{BlockLink|Cake}}
+: 蛋糕输出的信号强度取决于其剩余量。每片输出2强度，共7片，即完整蛋糕输出14强度。
+
+; {{BlockLink|Cauldron}}
+[[File:Cauldron Redstone Strength Values.png|炼药锅的信号强度|缩略图]]
+: 炼药锅输出的信号强度取决于其填充量。从完全无[[水]]或[[细雪]]到完全充满，输出分别为0、1、2和3；完全充满[[熔岩]]，输出为3。
+
+; {{BlockLink|Composter}}
+[[File:Composter Redstone Strength Values.png|堆肥桶的信号强度|thumb]]
+: 堆肥桶输出的信号强度取决于其堆肥层数，每有一层增加一点信号。堆肥层数从无堆到满，输出分别为0-7，产生[[骨粉]]则输出8。
+
+; {{Anchor|命令方块}}{{BlockLink|Command Block}}
+: 命令方块存储最后执行的命令的“成功次数”，表示此命令方块最近执行成功命令的次数。“成功”的定义由[[命令]]的成功条件决定：如果聊天界面显示红色错误信息，那么命令执行不成功。
+: 没有目标或者只有一个目标的命令，因为只成功一次，在执行成功后只会输出一格信号；对多个目标生效的命令，红石比较器会输出执行成功的次数，{{only|je|for=可以}}或{{only|be|for=不可以}}超过15。
+: 命令方块持续存储最后执行的命令的成功数，直到再次执行命令。因此红石比较器会持续输出同一信号强度，即使命令方块已经不在激活状态（命令方块关闭不影响比较器开关）。
+: 详见{{slink|命令方块|输出|成功次数}}。
+
+; {{BlockLink|id=all-copper-bulbs|Copper Bulb}}
+: 铜灯点亮时输出满强度15，否则输出0。不受[[氧化]]程度影响。 
+
+; {{BlockLink|Crafter}}
+: 合成器输出的信号强度等于被禁用及被物品占用的槽位数量，可能的取值为0-9。
+
+; {{BlockLink|End Portal Frame}}
+: 末地传送门框架有[[末影之眼]]时输出满强度15，否则输出0。
+
+; {{ItemLink|Item Frame}}
+[[File:Item frame and comparator.png|红石比较器检测物品展示框的物品是否存在及其旋转方向|缩略图]]
+: 红石比较器可检测物品展示框的内含物的旋转状态。若要检测物品展示框的状态，红石比较器必须位于物品展示框后方且红石比较器的主输入端必须朝向并紧贴物品展示框的附着方块。若物品展示框内无物品，则输出0，否则根据物品旋转角度输出1至8强度（1为默认方向，{{ctrl|使用}}旋转直到8，然后再返回1）。
+
+; {{BlockLink|Jukebox}}
+: 唱片机输出的信号取决于其中储存的[[音乐唱片]]。
+{{Collapse|title=对应关系列表|content={{:音乐唱片/信号强度}}}}
+
+; {{BlockLink|Lectern}}
+: {{in|je}}讲台输出的信号强度取决于当前玩家打开[[书]]的页码与书的总页码之比，例如一本有15页的书每翻一页提升1信号强度，或5页的书每翻一页提升3强度。
+: {{in|be}}因为讲台同时展示两页内容，讲台输出的信号强度取决于右侧的页码与书的总页码之比，若为最后一页则输出为15。
+
+; {{BlockLink|Bee nest}}和{{BlockLink|Beehive}}
+: 蜂巢和蜂箱会输出与其方块状态{{cd|honey_level}}的值相同强度的红石信号。
+
+; {{BlockLink|Respawn Anchor}}
+: 重生锚会输出其能量等级乘4再减1的值，即：1级能量对应3级信号，2级能量对应7级信号，3级能量对应11级信号，4级能量对应15级信号。
+
+; {{BlockLink|Chiseled Bookshelf}}
+: 雕纹书架会输出与其方块状态{{cd|last_interaction_book_slot}}的值（最后一次互动的槽位号）相同强度的红石信号。
+
+; {{BlockLink|Sculk Sensor}}
+: 幽匿感测体会输出与其感测到的振动频率值相同强度的红石信号，详见[[幽匿感测体/振动频率]]。
+
+; {{BlockLink|Creaking Heart}}
+: 嘎枝之心会输出与其绑定的[[嘎枝]]的距离对应的红石信号，详见{{slink|嘎枝之心|红石比较器}}。
+
+; {{BlockLink|id=all-copper-golem-statues|Copper Golem Statue}}
+: [[铜傀儡像]]会根据其姿势输出对应的红石信号，详见{{slink|铜傀儡像|用途|姿势}}。
+
+; {{BlockLink|Shelf}}
+: [[展示架]]会根据其三个栏位放置物品与否输出对应的红石信号，详见{{slink|展示架|红石比较器}}。
+
+{{-}}
+
+=== 检测更新 ===
+{{main|Tutorial:比较器更新感应器}}
+红石比较器在接收到[[NC更新]]或[[比较器更新]]时会检测自身状态。
+
+{{-}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Redstone Comparator
+|spritetype=block
+|nameid=comparator
+|showblocktags=je
+|blocktags={{GameTag|block|comparator}}
+|foot=1}}
+
+{{ID table
+|Redstone Comparator
+|displayname=方块实体
+|spritetype=block
+|nameid=comparator
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|firstcolumnname=红石比较器
+|nocat=1
+|generatetranslationkeys=bedrock
+|Unpowered Comparator
+|displayname=不输出信号
+|spritetype=block
+|nameid=unpowered_comparator}}
+{{ID table|nocat=1|Powered Comparator|displayname=输出信号|spritetype=block|nameid=powered_comparator}}
+{{ID table|nocat=1|Redstone Comparator|displayname=物品|spritetype=item|nameid=comparator|foot=1}}
+{{ID table|nocat=1|Redstone Comparator|displayname=方块实体|spritetype=block|nameid=Comparator|foot=1}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table|红石比较器|激活的红石比较器,未激活的红石比较器}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+红石比较器具有与其相关联的方块实体，它保存关于此方块的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 视频 ==
+{{bv|BV1Dt411u7Xy}}
+
+== 音效 ==
+{{el|je}}：
+{{Sound table/Block/Stone/JE|continue=1}}
+{{Sound table
+|sound=Click pitch0.55.ogg
+|subtitle={{tp|subtitles.block.comparator.click}}
+|id=block.comparator.click
+|source=方块
+|description=模式从比较模式转换到作差模式
+|translationkey=subtitles.block.comparator.click}}
+{{Sound table
+|sound=Click pitch0.5.ogg
+|subtitle={{tp|subtitles.block.comparator.click}}
+|id=block.comparator.click
+|source=方块
+|description=模式从作差模式转换到比较模式
+|translationkey=subtitles.block.comparator.click
+|foot=1}}
+
+{{el|be}}：
+{{Sound table/Block/Wood/BE}}
+
+== 进度 ==
+{{load advancements|adventure.read_power_from_chiseled_bookshelf}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2012年11月24日|link={{ytl|YG9RNyRhIow|t=6m56s}}|[[Jeb]]表示可能会在Minecraft中加入一个“电容器”。}}
+|{{HistoryLine||2012年12月27日|link={{tweet|Dinnerbone|284388625595125760}}|[[File:Powered Redstone Comparator (S) (pre-release).png|32px]] [[File:Subtracting Redstone Comparator (S) (pre-release).png|32px]] [[File:Powered Subtracting Redstone Comparator (S) (pre-release).png|32px]] [[Dinnerbone]]发布了的原始版本的“比较器”的[http://imgur.com/a/FBKed 图片]，并表明它将替代“电容器”，其中有可变化、交替的输入。}}
+|{{HistoryLine||2013年1月2日|link={{tweet|Dinnerbone|286428595423965184}}|Dinnerbone又发布了一张关于比较器的[http://dinnerbone.com/media/uploads/2013-01/screenshots/2013-01-02_12.06.47.png 图片]。图片中显示了一个数模转换器，其中使用比较器作为主要的方块。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w01a|[[File:Redstone Comparator (S) JE1.png|32px]] [[File:Powered Redstone Comparator (S) JE1.png|32px]] [[File:Subtracting Redstone Comparator (S) JE1.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) JE1.png|32px]] [[File:Redstone Comparator (item) JE1 BE1.png|32px]] 加入了红石比较器，延迟为0。}}
+|{{HistoryLine|||dev=13w01b|在红石比较器中加入了1个游戏刻的延迟以修复漏洞。
+|加强了红石比较器检测容器的能力。}}
+|{{HistoryLine|||dev=13w02a|[[File:Redstone Comparator (S) JE2.png|32px]] [[File:Powered Redstone Comparator (S) JE2.png|32px]] [[File:Subtracting Redstone Comparator (S) JE2.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) JE2.png|32px]] 更改了红石比较器的纹理，将石英显示在其中间。
+|更改了红石比较器检测容器的算法，容器中有一个物品时比较器就会输出的信号。}}
+|{{HistoryLine|||dev=13w02b|红石比较器现在将大[[箱子]]判定为一个容器。}}
+|{{HistoryLine|||dev=13w03a|红石比较器现在可检测[[命令方块]]执行命令是否成功。
+|红石比较器现在可检测[[探测铁轨]]上的容器[[矿车]]。}}
+|{{HistoryLine|||dev=13w04a|红石比较器现在可以检测[[唱片机]]。}}
+|{{HistoryLine|||dev=13w05a|红石比较器现在不再不断地产生更新方块，延迟保持一致，从侧面的输入不再导致脉冲输出。
+|现在不再使用方块150（<code>powered_comparator</code>）；方块149（<code>unpowered_comparator</code>）的激活状态现在是8秒。}}
+|{{HistoryLine|||dev=13w05b|红石比较器延迟从1个游戏刻（1/2红石刻）更改为2个游戏刻（1个红石刻）。
+|红石比较器的延迟更改为1红石刻。}}
+|{{HistoryLine|||dev=13w09c|现在装有3个水瓶的[[酿造台]]旁边的红石比较器的信号强度与装有3个水瓶1种成分的酿造台相同。}}
+|{{HistoryLine||1.6|dev=13w18a|红石比较器现在能检测[[末地传送门框架]]和[[炼药锅]]了。}}
+|{{HistoryLine||1.7.2|dev=13w37a|方块149（<code>unpowered_comparator</code>）和150（<code>powered_comparator</code>）的物品形式被移除了。}}
+|{{HistoryLine||1.8|dev=14w04a|红石比较器现在能检测[[物品展示框]]了。}}
+|{{HistoryLine|||dev=14w25a|[[File:Redstone Comparator (S) JE3.png|32px]] [[File:Subtracting Redstone Comparator (S) JE3.png|32px]] [[File:Powered Redstone Comparator (S) JE3.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) JE3.png|32px]] 红石比较器上的红石火把现在受环境光遮蔽影响。}}
+|{{HistoryLine|||dev=14w25b|[[File:Subtracting Redstone Comparator (S) JE4.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) JE4.png|32px]] 更改了红石比较器的模型，将减法模式的红石比较器上的正面红石火把下移了2像素。}}
+|{{HistoryLine|||dev=14w28a|红石比较器现在能检测[[蛋糕]]了。}}
+|{{HistoryLine||1.9|dev=15w42a|为酿造台添加了[[烈焰粉]]燃料槽后，有5个储存槽位而不是4个。与原来的输出信号值对比如下所示：
+{{{!}} class{{=}}"wikitable collapsible collapsed" data-description{{=}}"Original values"
+! 原先值
+{{!}}-
+{{!}}
+* 0：0
+* 1：1个
+* 2：19个
+* 3：37个
+* 4：55个
+* 5：1组10个
+* 6：1组28个
+* 7：1组46个
+* 8：2组
+* 9：2组19个
+* 10：2组37个
+* 11：2组55个
+* 12：3组10个
+* 13：3组28个
+* 14：3组46个
+* 15：4组
+{{!}}}
+}}
+|{{HistoryLine|||dev=15w47a|现在红石比较器可以输入[[红石块]]的红石信号。}}
+|{{HistoryLine||1.13|dev=17w47a|红石比较器的3个ID被合并成一个ID：{{cd|comparator}}。
+|红石比较器现在会渲染底面。
+|在[[扁平化]]前，这些方块的数字ID是149和150，物品的是404。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Redstone Comparator (S) JE4.png|32px]] [[File:Powered Redstone Comparator (S) JE4.png|32px]] [[File:Subtracting Redstone Comparator (S) JE5.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) JE5.png|32px]] [[File:Redstone Comparator (item) JE2 BE2.png|32px]] 更改了红石比较器的纹理。}}
+|{{HistoryLine|||dev=19w02a|红石比较器现在可检测[[讲台]]。}}
+|{{HistoryLine|||dev=19w03a|红石比较器现在可检测[[堆肥桶]]。}}
+|{{HistoryLine||1.15|dev=19w34a|红石比较器现在可检测[[蜂巢（方块）|蜂巢]]和[[蜂箱]]中的蜂蜜储存量。}}
+|{{HistoryLine||1.16|dev=20w06a|更改了计算红石比较器输入信号的方式。}}
+|{{HistoryLine|||dev=20w07a|由于[[下界石英]]可通过与[[猪灵]]以物易物来获得，红石比较器成为可再生资源。}}
+|{{HistoryLine|||dev=20w11a|还原了20w06a中对红石比较器输入信号的计算方式的更改。}}
+|{{HistoryLine|||dev=20w12a|红石比较器现在可检测[[重生锚]]的能量。}}
+|{{HistoryLine||1.17|dev=20w45a|比较模式的红石比较器在后侧输入变化但输出不变时不再添加[[刻#计划刻|计划刻]]。}}
+|{{HistoryLine||1.17|dev=20w49a|红石比较器现在可检测[[幽匿感测体]]的振动频率。}}
+|{{HistoryLine||1.18|dev=21w41a|[[File:Powered Redstone Comparator (S) JE5.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) JE6.png|32px]] 更改了红石比较器激活状态的基部纹理。}}
+|{{HistoryLine||1.19|dev=22w13a|现在红石比较器会自然生成于[[远古城市]]中。}}
+|{{HistoryLine||1.19.3|dev=22w42a|红石比较器现在可检测[[雕纹书架]]的最后一次互动槽位。}}
+|{{HistoryLine||1.20.2|dev=23w33a|现在红石比较器使用石质方块的音效，而非木质方块。}}
+|{{HistoryLine|||dev=23w35a|现在红石比较器收到来自下侧的[[方块更新#PP更新|PP更新]]时检查附着。}}
+|{{HistoryLine||1.20.3|dev=23w40a|红石比较器现在可检测[[饰纹陶罐]]。}}
+|{{HistoryLine|exp=update_1_21|||dev=23w42a|红石比较器现在可检测[[合成器]]。}}
+|{{HistoryLine||1.21|dev=24w18a|23w42a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|dev=24w33a|[[File:Redstone Comparator (S) JE5.png|32px]] [[File:Powered Redstone Comparator (S) JE6.png|32px]] [[File:Subtracting Redstone Comparator (S) JE6.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) JE7.png|32px]] 更改了红石比较器的模型和UV映射。}}
+|{{HistoryLine|||dev=24w38a|再次更改了红石比较器的模型和UV映射。}}
+|{{HistoryLine|||dev=pre1|exp=winter_drop|红石比较器现在可检测[[嘎枝之心]]距其绑定的[[嘎枝]]的距离。}}
+|{{HistoryLine||1.21.4|dev=24w44a|1.21.2-pre1中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.9|dev=25w31a|红石比较器现在可检测[[铜箱子]]的内容物。
+|红石比较器现在可检测[[铜傀儡像]]的姿势。
+|红石比较器现在可检测[[展示架]]的槽位。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.14.0|dev=build 1|[[File:Redstone Comparator (S) BE1.png|32px]] [[File:Powered Redstone Comparator (S) BE1.png|32px]] [[File:Subtracting Redstone Comparator (S) BE1.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) BE1.png|32px]] [[File:Redstone Comparator (item) JE1 BE1.png|32px]] 加入了红石比较器。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|红石比较器现在可检测[[末地传送门框架]]。}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|红石比较器现在可检测[[命令方块]]执行命令是否成功。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|红石比较器现在可检测[[潜影盒]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|红石比较器现在可检测[[唱片机]]。}}
+|{{HistoryLine||?|[[File:Powered Redstone Comparator (S) BE2.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) BE2.png|32px]] 更改了模型，现在激活的红石比较器的底座不再发光。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Redstone Comparator (S) BE2.png|32px]] [[File:Powered Redstone Comparator (S) BE3.png|32px]] [[File:Subtracting Redstone Comparator (S) BE2.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) BE3.png|32px]] [[File:Redstone Comparator (item) JE2 BE2.png|32px]] 更改了红石比较器的纹理。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|红石比较器现在可检测[[烟熏炉]]、[[高炉]]、[[讲台]]和[[堆肥桶]]。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.20|[[File:Powered Redstone Comparator (S) BE4.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) BE4.png|32px]] 更改了红石比较器激活状态的基部纹理。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.26|现在红石比较器会自然生成于[[远古城市]]中。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.20|由于对[[红石电路#红石系统|红石系统]]的有向图搜索逻辑的错误更改，红石比较器被同一信号源同时连接红石比较器的正面输入和侧面输入时无法正确计算结果。<ref>{{bug|MCPE-163651|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.50|dev=1.19.50.21|红石比较器现在可检测[[雕纹书架]]的最后一次互动槽位。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.22|修复了1.19.40中红石比较器信号源计算错乱的问题。}}
+|{{HistoryLine||1.20.30|dev=1.20.30.20|现在红石比较器使用方块状态{{cd|minecraft:cardinal_direction}}，并弃用了{{cd|direction}}。}}
+|{{HistoryLine||1.20.50|dev=1.20.50.20|红石比较器现在可检测[[饰纹陶罐]]。}}
+|{{HistoryLine|exg=updateAnnouncedLive2023|||dev=1.20.50.21|红石比较器现在可检测[[合成器]]。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|1.20.50.21中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.23|红石比较器现在可检测[[铜箱子]]的内容物。}}
+|{{HistoryLine||1.21.111|dev=1.21.110.20|红石比较器现在可检测[[铜傀儡像]]的姿势。}}
+|{{HistoryLine|||dev=1.21.110.22|红石比较器现在可检测[[展示架]]的占用槽位。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|switch=1.0.1|[[File:Redstone Comparator (S) JE2.png|32px]] [[File:Powered Redstone Comparator (S) JE2.png|32px]] [[File:Subtracting Redstone Comparator (S) JE4.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) JE4.png|32px]] [[File:Redstone Comparator (item) JE1 BE1.png|32px]] 加入了红石比较器。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|红石比较器现在能检测[[物品展示框]]了。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Redstone Comparator (S) JE4.png|32px]] [[File:Powered Redstone Comparator (S) JE4.png|32px]] [[File:Subtracting Redstone Comparator (S) JE5.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) JE5.png|32px]] [[File:Redstone Comparator (item) JE2 BE2.png|32px]] 更改了红石比较器的纹理。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|[[File:Redstone Comparator (S) BE1.png|32px]] [[File:Powered Redstone Comparator (S) BE1.png|32px]] [[File:Subtracting Redstone Comparator (S) BE1.png|32px]] [[File:Powered Subtracting Redstone Comparator (S) BE1.png|32px]]  [[File:Redstone Comparator (item) JE1 BE1.png|32px]] 加入了红石比较器。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[de:Redstone-Komparator]]
+[[en:Redstone Comparator]]
+[[es:Comparador de redstone]]
+[[fr:Comparateur de redstone]]
+[[hu:Redstone-komparátor]]
+[[it:Comparatore di redstone]]
+[[ja:レッドストーンコンパレーター]]
+[[ko:레드스톤 비교기]]
+[[nl:Redstonevergelijker]]
+[[pl:Komparator redstone]]
+[[pt:Comparador de Redstone]]
+[[ru:Редстоуновый компаратор]]
+[[uk:Редстоуновий компаратор]]

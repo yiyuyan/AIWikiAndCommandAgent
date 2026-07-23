@@ -1,0 +1,281 @@
+# 页面: 酿造台
+# 来源: https://zh.minecraft.wiki/w/%E9%85%BF%E9%80%A0%E5%8F%B0
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 基岩版独有信息, 待更新条目, 方块
+# 抓取时间: 2026-07-14 17:37:13
+# 原始 Wikitext 内容:
+
+{{update|缺失部分历史和渲染图。}}
+{{Infobox block
+|group1=常规
+|1-1=Brewing Stand.png
+|group2=装满药水
+|2-1=Brewing Stand (Full).png
+|invimage=Brewing Stand
+|light=1
+}}
+{{quote|在2011年，Java版1.0.0添加了酿造台和完善的酿造机制，取代了最初使用的炼药锅。它们非常容易合成，但获取材料却很困难，需要三个圆石和一个烈焰棒，烈焰棒只能在下界要塞击杀烈焰人来获得。好运的话，你可以在村庄、雪屋或末地船找到酿造台。|[[Duncan Geere]]<ref>{{article|taking-inventory--brewing-stand|Taking Inventory: Brewing Stand|Oct 11, 2019}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''酿造台（Brewing Stand）'''是一种用于[[酿造]][[药水]]、[[喷溅药水]]和[[滞留药水]]的方块。
+
+== 生成 ==
+=== 自然生成 ===
+空的酿造台会生成在[[村庄]]的教堂内。
+
+酿造台会生成在[[雪屋]]的地下室内，内含一瓶[[喷溅型虚弱药水]]。
+
+酿造台也会自然生成在[[末地船]]中，内含两瓶[[治疗药水|增强版治疗药水]]。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|B2= Blaze Rod 
+|A3= Any stone-tier block
+|B3= Any stone-tier block
+|C3= Any stone-tier block
+|Output= Brewing Stand
+|type= Brewing
+|foot=1
+}}
+
+== 破坏 ==
+挖掘酿造台的合适工具是镐。
+
+{{Breaking table}}
+
+酿造台被破坏后会掉落自身和内容物。
+
+== 用途 ==
+{{Filetr|Brewing Stand GUI.png|缩略图|Java版中酿造台的界面}}
+
+{{in|je}}酿造台不能被[[活塞]]推动。
+
+酿造台界面的标题为“酿造台”，可在放置前使用[[铁砧]]重命名来进行更改，{{in|je}}也可以通过使用{{cmd|data}}命令修改酿造台的<code>CustomName</code>标签进行更改。
+
+=== 酿造 ===
+{{main|酿造}}
+酿造台最主要的功能是[[酿造]]。对酿造台按下{{ctrl|使用}}可以打开酿造台的界面。
+
+酿造台使用[[烈焰粉]]作为能量，每份烈焰粉可进行20次酿造。与[[熔炉]]不同，酿造台的能量影响的是可以执行配方的次数而非运行时间。
+
+若被放置在酿造台中的物品与任意酿造配方匹配，且酿造台有能量，酿造过程就会开始。每次酿造需用时20秒。{{in|je}}酿造需要消耗1点能量才能开始，{{in|be}}只有酿造过程结束之后才会消耗能量。
+
+酿造台能与[[漏斗]]进行如下交互：
+
+* 酿造台上方指向酿造台的漏斗能输入酿造材料；
+* 任何有效的药水配方均可预先加入，可用于复杂配方的自动酿造，其中[[下界疣]]通常会在第一步进入；
+* 药水与用作燃料的烈焰粉能从侧面指向酿造台的漏斗进入；
+* 药水可通过下方的漏斗取出。
+
+酿造台没有“输出”槽位，放置在其中的药水会在酿造过程中被直接转换，多个酿造材料可以如此连续地改变药水。放置在酿造台下的漏斗不会检测酿造台是否在工作，在未激活时总是会取走药水。
+
+当酿造台的药水槽位有{{only|JE|short=1|for=[[玻璃瓶]]}}或任意[[药水]]时，酿造台方块模型上的对应位置会显示红色药水纹理。
+
+=== 红石比较器 ===
+[[红石比较器]]能够检测酿造台的五个槽位存储物品的数量。
+
+=== 光源 ===
+酿造台会发出[[亮度]]为1的光。
+
+=== 更改村民职业 ===
+{{See also|村民#工作站点与床}}
+失业的[[村民]]在靠近未被认领的酿造台后有机会转变职业为[[牧师]]。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Brewing Stand brew1.ogg
+|sound2=Brewing Stand brew2.ogg
+|subtitle={{tp|subtitles.block.brewing_stand.brew}}
+|source={{tp|soundCategory.block}}
+|description=酿造完成
+|id=block.brewing_stand.brew
+|translationkey=subtitles.block.brewing_stand.brew
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=block.brewing_stand.brew1.wav
+|sound2=block.brewing_stand.brew2.wav
+|source=方块
+|description=酿造完成
+|id=random.potion.brewed
+|typeid=potion.brewed
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Brewing Stand
+|spritetype=block
+|nameid=brewing_stand
+|showblocktags=je
+|blocktags={{GameTag|blocks|brewing_stand}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=Brewing Stand
+|spritetype=block
+|nameid=brewing_stand
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Brewing Stand
+|displayname=酿造台（方块）
+|spritetype=block
+|nameid=brewing_stand
+|translationkey=item.brewing_stand.name
+|showblocktags=be
+|blocktags={{GameTagBE|block|brewing_stand}}
+}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Brewing Stand
+|displayname=酿造台（物品）
+|spritetype=item
+|nameid=brewing_stand
+|translationkey=item.brewing_stand.name
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=Brewing Stand
+|spritetype=block
+|nameid=BrewingStand
+|foot=1
+}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+{{in|bedrock}}酿造台使用数据值来决定其每个槽位是否存有药水。
+
+{{/DV}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+酿造台拥有与之相关联的方块实体，以保存该方块的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+== 成就 ==
+{{load achievements|local-brewery}}
+
+== 进度 ==
+{{load advancements|nether.brew_potion}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|炼药锅原计划用来酿造，但是这个特性一直没有实现。}}
+|{{HistoryLine|||dev=2011年9月30日|slink={{tweet|jeb|119762786619359232}}|[[File:Brewing Stand (pre-release).png|32px]] Jeb揭示了酿造台要作为取代炼药锅的酿造工具的事实。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|[[File:Brewing Stand JE1 BE1.png|32px]] [[File:Brewing Stand (Full) JE1 BE1.png|32px]] [[File:Brewing Stand (item) JE1 BE1.png|32px]] 加入了酿造台，酿造一次需要30秒。
+|当酿造台首次出现时，它的底部有附加的2D底座专门用来放瓶子（如画廊中一张图所示），但现在放瓶子的架子变成3D的了。<ref>{{tweet|jeb|119763532312096769}}</ref>}}
+|{{HistoryLine||1.1|dev=12w01a|酿造台酿造一个物品时间缩短到了20秒。}}
+|{{HistoryLine||1.7.2|dev=13w37a|方块ID 117（酿造台）从{{cmd|give}}的命令中移除。}}
+|{{HistoryLine||1.8|dev=14w02a|酿造台现在可以具有方块实体数据{{nbt|string|Lock}}，用于锁定酿造台。如该标签存在，该酿造台只能用自定义名称与该标签相同的物品打开。}}
+|{{HistoryLine|||dev=14w11a|由于22.5°旋转限制，酿造台的模型略微更改了。}}
+|{{HistoryLine||1.9|dev=15w31a|酿造台现在会在[[末地船]]中自然生成了。}}
+|{{HistoryLine|||dev=15w33a|酿造台现在可以用来酿造[[滞留药水]]。}}
+|{{HistoryLine|||dev=15w33c|修复了酿造台不能把喷溅药水酿造成滞留药水的漏洞。}}
+|{{HistoryLine|||dev=15w42a|酿造台现在需要[[烈焰粉]]以使其工作，一份烈焰粉支持30个材料的酿造。}}
+|{{HistoryLine|||dev=15w43a|酿造台现在会在[[雪屋]]的地下室中自然生成。
+[[烈焰粉]]现在只能为酿造台提供20点能量而不是30点。}}
+|{{HistoryLine|||dev=15w47b|为酿造台加入了音效。}}
+|{{HistoryLine||1.11|dev=16w32a|酿造台的方块实体ID从<code>Cauldron</code>变为<code>brewing_stand</code>。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]前，酿造台方块的数字ID是117，物品的数字ID是379。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Brewing Stand JE2 BE2.png|32px]] [[File:Brewing Stand (Full) JE2 BE2.png|32px]] [[File:Brewing Stand (item) JE2.png|32px]] 更改了酿造台的纹理。}}
+|{{HistoryLine|||dev=18w44a|[[File:Brewing Stand (item) JE3 BE2.png|32px]] 再次更改了酿造台的物品纹理。}}
+|{{HistoryLine|||dev=18w48a|酿造台现在会在平原[[村庄]]的教堂中自然生成。}}
+|{{HistoryLine|||dev=18w49a|酿造台现在会在雪原村庄和热带草原村庄的教堂中自然生成。}}
+|{{HistoryLine|||dev=18w50a|酿造台现在会在沙漠村庄和针叶林村庄的教堂中自然生成。}}
+|{{HistoryLine|||dev=19w03c|现在酿造台的三个瓶子使用正确的剔除面。}}
+|{{HistoryLine|||dev=19w11a|酿造台现在可作为[[牧师]]村民的工作站点方块。}}
+|{{HistoryLine||1.16.2|dev=20w28a|酿造台现在可以使用[[黑石]]合成。}}
+|{{HistoryLine||1.17|dev=21w07a|酿造台现在可以使用[[深板岩|阴沉石]]合成。}}
+|{{HistoryLine||1.17|dev=21w08a|酿造台不再能够使用[[深板岩]]合成。
+|酿造台现在可以使用[[深板岩圆石]]合成。}}
+|{{HistoryLine|||dev=21w11a|调整了酿造台GUI纹理中玻璃瓶图标的两个像素，以匹配其在[[纹理更新]]后的纹理。}}
+|{{HistoryLine||1.19|dev=22w11a|[[File:Brewing Stand JE3.png|32px]] [[File:Brewing Stand (Full) JE3.png|32px]] 略微更改了酿造台的方块纹理，以使其臂与其底座相连。}}
+|{{HistoryLine|||dev=22w17a|[[File:Brewing Stand JE4 BE3.png|32px]] [[File:Brewing Stand (Full) JE4 BE3.png|32px]] 更改了酿造台方块底座的UV和纹理，以与先前在{{el|be}}上作出的修复保持一致。}}
+|{{HistoryLine||1.21.2|dev=24w39a|将方块实体数据{{nbt|string|Lock}}重命名为{{nbt|compound|lock}}，并支持物品谓词。}}
+|{{HistoryLine||1.21.4|dev=24w44a|现在酿造台不再需要木镐或品质更好的镐来挖掘。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|[[File:Brewing Stand JE1 BE1.png|32px]] [[File:Brewing Stand (Full) JE1 BE1.png|32px]] [[File:Brewing Stand (item) JE1 BE1.png|32px]] 加入了酿造台。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|酿造台现在会在[[雪屋]]的地下室中自然生成。
+|酿造台现在会在[[末地船]]中自然生成。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|酿造台现在需要[[烈焰粉]]以使其工作。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|空的酿造台现在会生成在[[村庄]]的教堂中。
+|[[File:Brewing Stand JE2 BE2.png|32px]] [[File:Brewing Stand (Full) JE2 BE2.png|32px]] [[File:Brewing Stand (item) JE3 BE2.png|32px]] 更改了酿造台的纹理。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.52|酿造台现在可以用[[黑石]]合成。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.50|酿造台现在可以用[[深板岩圆石]]合成。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|[[File:Brewing Stand JE4 BE3.png|32px]] [[File:Brewing Stand (Full) JE4 BE3.png|32px]] 略微更改了酿造台的方块纹理，以使其臂与其底座相连。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.24|现在酿造台不再会在不使用镐挖掘时延长挖掘时间。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU7|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Brewing Stand JE1 BE1.png|32px]] [[File:Brewing Stand (Full) JE1 BE1.png|32px]] [[File:Brewing Stand (item) JE1 BE1.png|32px]] 加入了酿造台。}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|酿造台现在需要烈焰粉以使其工作。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Brewing Stand JE2 BE2.png|32px]] [[File:Brewing Stand (Full) JE2 BE2.png|32px]] [[File:Brewing Stand (item) JE3 BE2.png|32px]] 更改了酿造台的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Brewing Stand JE1 BE1.png|32px]] [[File:Brewing Stand (Full) JE1 BE1.png|32px]] [[File:Brewing Stand (item) JE1 BE1.png|32px]] 加入了酿造台。}}
+}}
+
+== 你知道吗 ==
+* 即使酿造台没被使用，也会有烟从顶部冒出。
+* 无论是否装有药水，酿造台被破坏时产生的粒子总是{{only|JE|short=1|for=包含}}/{{only|BE|short=1|for=不包含}}红色药水纹理。
+* 无论玩家朝向什么方向放置，酿造台总是面向东方。
+* 开发者之所以补充酿造台的燃料消耗机制，是因为[[Searge]]想在[[雪屋]]地下室留一个酿造台，同时确保获取[[下界]]独有资源的游戏进程不受影响；并且开发者认为每种合成过程都应消耗资源。<ref>{{article|meet-blaze|Meet the Blaze|December 20, 2016}}</ref>
+
+== 画廊 ==
+{{gallery|
+File:Brewing stand with potions.png|第一张酿造台的图片，图中也有一个[[巨型蘑菇]]
+File:Brewing Stand GUI.png|convert|酿造台的酿造界面
+File:Brewingstand pre3.png|[[Java版Beta 1.9-pre3]]中的酿造台
+File:Brewing stand in action.png|convert|正在酿制药水的酿造台
+File:Igloobasement.png|[[雪屋]]地下室的酿造台
+File:1.8 and below brewing stand.png|酿造台在[[Java版1.9]]之前版本的GUI
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks}}
+
+[[de:Braustand]]
+[[en:Brewing Stand]]
+[[es:Soporte para pociones]]
+[[fr:Alambic]]
+[[hu:Főzőállvány]]
+[[it:Alambicco]]
+[[ja:醸造台]]
+[[ko:양조기]]
+[[nl:Brouwstandaard]]
+[[pl:Statyw alchemiczny]]
+[[pt:Suporte de Poções]]
+[[ru:Варочная стойка]]
+[[th:แท่นปรุงยา]]
+[[uk:Варильна стійка]]

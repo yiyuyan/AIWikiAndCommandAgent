@@ -1,0 +1,142 @@
+# 页面: 存档基础数据存储格式/世界生成格式/1.16前
+# 来源: https://zh.minecraft.wiki/w/%E5%AD%98%E6%A1%A3%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90%E6%A0%BC%E5%BC%8F/1.16%E5%89%8D
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:10
+# 原始 Wikitext 内容:
+
+{{outdated feature|edition=java}}
+在[[Java版20w20a|20w20a]]前，游戏使用下列格式存储世界的世界生成设置：
+
+== 数据格式 ==
+<div class="treeview">
+* {{nbt|compound}} '''level.dat根标签'''
+** {{nbt|compound|Data}} 
+*** {{nbt|long|RandomSeed|existonsave=1}}：该世界的种子。当此项不存在时游戏默认为0。
+*** {{nbt|boolean|MapFeatures|existonsave=1}}：是否生成建筑。当此项不存在时游戏默认为<code>true</code>。
+*** {{nbt|boolean|BonusChest|existonsave=1}}：是否生成奖励箱。当此项不存在时游戏默认为<code>true</code>。
+*** {{nbt|string|legacy_custom_options}}：若存在，则此世界使用过[[旧版自定义]]配置世界生成。
+*** {{nbt|string|generatorName|existonsave=1}}：生成器的名称。当此项不存在活无效时游戏默认为<code>default</code>
+*** {{nbt|int|generatorVersion|existonsave=1}}：生成器的版本。为0时，若{{nbt|string|generatorName}}为<code>default</code>则会将其更改为<code>default_1_1</code>。当此项不存在时游戏默认为0。
+*** {{nbt|compound|generatorOptions}}：生成器的选项，只有部分生成器具有此数据。
+</div>
+
+生成器名称决定了世界主世界的生成方式，共有下列有效名称：
+
+{|class="wikitable"
+! 生成器名称 !! 生成器版本 !! 描述 !! 加入时间 !! 移除时间
+|-
+| <code>default</code>
+| 1
+| 默认的世界生成器。
+| [[Java版12w01a|12w01a]]
+| [[Java版20w20a|20w20a]]
+|-
+| <code>flat</code>
+| &dash;
+| 用于[[超平坦世界]]的生成。<br>此生成器具有配置项{{nbt|compound|generatorOptions}}，见下文。
+| [[Java版12w01a|12w01a]]
+| [[Java版20w20a|20w20a]]
+|-
+| <code>default_1_1</code>
+| 0
+| 旧版的默认的世界生成器。
+| [[Java版12w03a|12w03a]]
+| [[Java版20w20a|20w20a]]
+|-
+| <code>largeBiomes</code>
+| &dash;
+| 用于[[巨型生物群系]]的生成。
+| [[Java版12w19a|12w19a]]
+| [[Java版20w20a|20w20a]]
+|-
+| <code>amplified</code>
+| &dash;
+| 用于[[放大化]]的生成。
+| [[Java版13w36a|13w36a]]
+| [[Java版20w20a|20w20a]]
+|-
+| <code>customized</code>
+| &dash;
+| 用于[[旧版自定义]]的生成。<br>使用此生成器的存档若被版本高于1.13-pre8的游戏打开则生成器名称会被设置为<code>normal</code>。<br>此生成器具有配置项{{nbt|string|generatorOptions}}。
+| [[Java版14w17a|14w17a]]
+| [[Java版18w06a|18w06a]]
+|-
+| <code>debug_all_block_states</code>
+| &dash;
+| 用于[[调试模式]]的生成。
+| [[Java版14w26a|14w26a]]
+| [[Java版20w20a|20w20a]]
+|-
+| <code>buffet</code>
+| &dash;
+| 用于[[自选]]的生成。<br>此生成器具有配置项{{nbt|compound|generatorOptions}}，见下文。
+| [[Java版18w16a|18w16a]]
+| [[Java版20w20a|20w20a]]
+|-
+| <code>normal</code>
+| 0
+| 默认的世界生成器。<br>使用此生成器的存档若低于版本1.13-pre8且打开存档的游戏版本高于1.13-pre8则会被标记为旧版自定义。<br>使用此生成器的存档被重建时生成器名称会被设置为<code>default</code>。
+| [[Java版1.13-pre8|1.13-pre8]]
+| [[Java版20w20a|20w20a]]
+|}
+
+生成器选项决定了特定生成器的生成细节，共有下列生成器选项：
+
+=== 超平坦生成器选项 ===
+
+<div class="treeview">
+* {{nbt|compound|generatorOptions}}：生成器的选项。
+** {{nbt|string|biome|required=1|existonsave=1}}：（命名空间ID）超平坦世界使用的生物群系。
+** {{nbt|list|layers}}：超平坦世界的方块层设置，按照列表顺序依次从下层到上层。
+*** {{nbt|object}}：一个方块层。
+**** {{nbt|string|block}}：这一层所用的方块。
+**** {{nbt|short|height}}：这一层的高度。
+** {{nbt|object|structures}}：[[超平坦世界#地物生成选项|地物生成设置]]。
+*** {{nbt|object|<''地物生成选项''>}}：若存在则可生成此项。
+**** {{nbt|string|<''额外参数''>}}：若存在则此参数用的值。
+** {{nbt|string|flat_world_options}}：未转义的<code>generator-settings</code>字符串。仅在由服务器创建的世界上出现。
+</div>
+
+=== 自选生成器选项 ===
+
+<div class="treeview">
+* {{nbt|compound|generatorOptions}}：生成器的选项。
+** {{nbt|compound|biome_source}}：生物群系源设置。
+*** {{nbt|string|type}}：（命名空间ID）生物群系源类型。可以为<code>fixed</code>（单一生物群系）、<code>checkerboard</code>（棋盘分布）或<code>vanilla_layered</code>（主世界）。当此项不存在时游戏默认为<code>fixed</code>。
+*** {{nbt|compound|options}}：生物群系源选项。
+**** {{nbt|list|biomes}}：一个生物群系ID的列表，表示可以生成的生物群系。此项只对单一生物群系和棋盘分布有效，且单一生物群系只使用首个元素。当此项不存在时游戏默认只有<code>ocean</code>一个元素。
+**** {{nbt|byte|size}}：棋盘分布的生物群系规模，当此项不存在时游戏默认为2。
+** {{nbt|compound|chunk_generator}}：区块生成器设置。
+*** {{nbt|string|type}}：（命名空间ID）生成器类型。取值只能为<code>surface</code>（地表）、<code>floating_islands</code>（浮岛）或<code>caves</code>（洞穴）。当此项不存在时游戏默认为<code>surface</code>。
+*** {{nbt|compound|options}}：区块生成器选项。
+**** {{nbt|string|default_block}}：（命名空间ID）生成器使用的默认方块。当此项不存在时游戏默认为<code>stone</code>。
+**** {{nbt|string|default_fluid}}：（命名空间ID）生成器使用的默认流体。当此项不存在时游戏默认为<code>water</code>。
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了{{nbt|boolean|MapFeatures}}。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.1|dev=12w01a|加入了{{nbt|string|generatorName}}。}}
+|{{HistoryLine||1.2.1|dev=12w03a|加入了{{nbt|int|generatorVersion}}。}}
+|{{HistoryLine||1.4.2|dev=12w36a|加入了{{nbt|string|generatorOptions}}，其内容为超平坦世界预设码。}}
+|{{HistoryLine||1.8|dev=14w17a|加入了生成器名称为<code>customized</code>的{{nbt|string|generatorOptions}}格式，其内容为旧版自定义预设码。}}
+|{{HistoryLine||1.13|dev=18w16a|加入了生成器名称为<code>buffet</code>的{{nbt|string|generatorOptions}}格式，其内容为<code>-{}-{"biome_source":{"type":"minecraft:fixed","biomes":["<''生物群系ID''>"]},"chunk_generator":{"type":"<''区块生成器ID''>"}<nowiki/>}</code>。}}
+|{{HistoryLine|||dev=18w19a|将生成器名称为<code>buffet</code>时{{nbt|string|generatorOptions}}的格式更改为<code>-{}-{"biome_source":{"type":"<''生物群系源ID''>","options":{"biomes":["<''生物群系ID''>"],"size":<''值''>}<nowiki/>},"chunk_generator":{"type":"<''区块生成器ID''>","options":{"default_block":"<''默认方块的ID''>","default_fluid":"<''默认流体的ID''>"}<nowiki/>}<nowiki/>}</code>，且进行了下列更改：
+* 加入了{{cd|d=pretty|checkerboard|vanilla_layered}}生物群系源。
+* 现在可以配置区块生成器的默认方块或流体。
+* 重命名生成器类型<code>overworld</code>为<code>surface</code>。
+* 重命名生成器类型<code>nether</code>为<code>caves</code>。
+* 重命名生成器类型<code>end</code>为<code>floating_islands</code>。}}
+|{{HistoryLine|||dev=pre8|移除了{{nbt|string|generatorOptions}}，由{{nbt|object|generatorOptions}}代替。内容由预设码字符串转换为展开的复合标签。
+|加入了{{nbt|string|legacy_custom_options}}。}}
+|{{HistoryLine||1.16|dev=20w11a|现在{{nbt|string|flat_world_options}}会正常生效。<ref>{{bug|MC-134900|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=20w17a|加入了{{nbt|boolean|BonusChest}}。}}
+}}
+
+== 参见 ==
+* [[存档基础数据存储格式/世界生成格式/1.16-1.18.1]]
+
+== 参考 ==
+{{reflist}}

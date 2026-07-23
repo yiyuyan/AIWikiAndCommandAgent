@@ -1,0 +1,917 @@
+# 页面: Java版1.19.4
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.19.4
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:35
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=1.19.4
+|image=1.19.4.png
+|image2=Java Edition 1.19.4 Simplified.png\Java Edition 1.19.4 Traditional.png\Java Edition 1.19.4 Traditional HK.png
+|edition=Java
+|date=2023年3月14日
+|jsonhash=84b7afa1277e39f0e7b2653673c741d5acac07b6
+|clienthash=958928a560c9167687bea0cefeb7375da1e552a8
+|clientmap=f14771b764f943c154d3a6fcb47694477e328148
+|serverhash=8f3112a1049751cc472ec13e397eade5336ca7ae
+|servermap=73c8bb982e420b33aad9632b482608c5c33e2d13
+|prevparent=1.19
+|prev=1.19.3
+|next=
+|nextparent=1.20
+}}
+
+'''1.19.4'''是{{el|je}}的一次次要更新，发布于2023年3月14日<ref>{{article|minecraft-java-edition-1-19-4|Minecraft Java Edition 1.19.4|March 14, 2023}}</ref>，加入了[[展示实体]]、[[交互实体]]、{{cmd|ride}}和{{cmd|damage}}命令、新的[[菜单屏幕]]交互方式、[[创建新的世界]]屏幕的新设计、伤害类型和[[Java版标签/伤害类型|伤害类型标签]]，在内置实验性数据包中加入了[[锻造模板]]、[[嗅探兽]]、[[樱花树林]]和[[考古]]相关内容，并修复了一些漏洞。此版本不兼容1.19到1.19.3的服务端。
+
+== 新内容 ==
+=== 非生物实体 ===
+'''[[展示实体]]'''
+* 包括方块展示实体、物品展示实体和文本展示实体三个实体，其ID分别为{{cd|d=pretty|block_display|item_display|text_display}}，分别用于灵活展示方块、物品和文本。 
+** 与[[标记]]（{{cd|marker}}）相同，不会导致任何更新，不会与其他实体碰撞，没有物理效果。
+** 模型在实体所在的位置渲染，并正常绕X轴和Y轴旋转（即可以被传送类命令控制旋转角度），但同时也受到任意的模型变换影响<!--but also with additional arbitrary model transform.-->。
+* 加入了2种新的数据类型，每种数据类型接受2种形式，但只有其中1个用于存档，如下所示：
+** {{cd|rotation}}
+*** 四元数形式（用于存档）：由4个数字组成的数组，分别描述 (x, y, z, w) 这4个分量。
+*** 轴-角度形式：具有以下字段的复合标签：
+**** {{cd|axis}}：三维向量。
+**** {{cd|angle}}：角度（弧度制）。
+** {{cd|transformation}}：任意的仿射变换，由以下字段组成并由以下顺序合成：
+*** 矩阵形式：由16个数字组成的数组，描述一个{{tr|行主序（Row-major）|列主序（Row-major）}}矩阵。
+*** 分解形式（用于存档）：具有以下字段的复合标签：
+**** {{cd|translation}}：三维向量。
+**** {{cd|left_rotation}}：{{cd|rotation}}{{tr|对象|物件}}。
+**** {{cd|scale}}：三维向量。
+**** {{cd|right_rotation}}：{{cd|rotation}}{{tr|对象|物件}}。
+* 这些实体的部分属性可插值，以在客户端营造渐变效果，而非跳跃式的突变。
+** 这些实体会记录插值的“当前值”和“先前值”：
+*** 以下所有被标记为“可插值”的属性都是单个插值集的一部分。
+*** 所有对可插值的属性的更新都会导致插值集里面的所有值被保存为“当前值”。
+**** 不改变属性值的data命令的执行（即便属性存在于NBT中）不算作更新。
+**** 每个刻同步到客户端的更新最多只有一次，即命令内的多个更新依然算一次更新。
+*** 上一批“当前值”被保存为“先前值”。
+*** 启用插值时，实体会随时间在“先前值”和“当前值”之间变化。
+*** 插值起点（实体完全处于“先前值”状态）由字段{{cd|start_interpolation}}（游戏时间，单位为刻）定义，代表当接收到用以启动插值的更新后，从下个客户端游戏刻起始时计算的游戏刻数量。插值总是会在客户端游戏刻起始时开始。
+**** 设为{{cd|0}}时，当接收到用以启动插值的更新后，插值过程会在下个客户端游戏刻起始时开始。
+*** 插值终点（实体完全处于“当前值”状态）定义为{{cd|start_interpolation}}所代表的游戏刻 + {{cd|interpolation_duration}}（单位为刻）。
+* 三个实体都具有以下字段：
+** {{cd|transformation}}：{{tr|应用|套用}}于模型的{{cd|transformation}}（经过正常的实体旋转后）。默认为单位矩阵，可插值。
+** {{cd|billboard}}：用于控制这些实体渲染时是否应该旋转面对玩家：
+*** {{cd|fixed}}：无旋转（默认）。
+*** {{cd|vertical}}：实体可绕垂直轴旋转。
+*** {{cd|horizontal}}：实体可绕水平轴旋转。
+*** {{cd|center}}：实体可以绕中心点旋转。
+** {{cd|brightness}}：若存在，覆盖渲染所用的亮度值。默认省略（即渲染时会使用实体所在的地方的光照）。该复合标签有两个字段：
+*** {{cd|sky}}：天空光照的值，0至15。
+*** {{cd|block}}：方块光照的值，0至15。
+** {{cd|view_range}}：此实体的最大可视范围。实际距离也取决于客户端的{{tr|渲染距离|顯示距離}}和{{tr|实体渲染距离|實體顯示距離}}。默认值为1.0（与[[火球]]大致相同）。
+** {{cd|shadow_radius}}：实体阴影的大小。默认为0（无阴影）。可插值。
+** {{cd|shadow_strength}}：实体阴影的强度。作为随与下方方块的距离而变化的函数，控制阴影的不透明度。默认为1。可插值。
+** {{cd|d=pretty|width|height}}：描述剔除边界框（Culling bounding box）的大小。边界框自实体位置的所有方向纵向伸展{{cd|y}}至{{cd|y+height}}，横向伸展{{cd|width/2}}。<!--Bounding box spans vertically {{cd|y}} to {{cd|y+height}} and horizontally {{cd|width/2}} in all directions from entity position.-->若其中一个字段设为0，则禁用剔除。默认都为0。
+** {{cd|glow_color_override}}：覆盖发光边框颜色。默认为0（使用队伍的颜色）。
+* 除去这些共通字段外，各个实体由于其类型不同，也具有一些特有字段：
+** 物品展示实体（{{cd|item_display}}）：展示单个物品堆（Item stack，可通过命令设置槽位{{cd|inventory.0}}更改）。
+*** {{cd|item}}：要展示的物品，格式与物品栏中物品的相同。
+**** 示例：{{cd|{id: "minecraft:dirt", Count: 1} }}
+*** {{cd|item_display}}：描述{{tr|应用|套用}}到物品模型的变换（定义于模型JSON的{{cd|display}}部分）：
+**** 可用值：{{cd|none}}（无，默认）、{{cd|d=pretty|thirdperson_lefthand|thirdperson_righthand|firstperson_lefthand|firstperson_righthand|head|gui|ground|fixed}}。
+** 方块展示实体（{{cd|block_display}}）：展示单个方块状态，但不会展示方块实体，即使在一般情况下方块放置时会随即创建方块实体（比如[[箱子]]）。<!--Displays a block state, does not display block entities, even if they would normally be created on block placement (like chest).-->
+*** {{cd|block_state}}：要展示的方块状态。格式与[[末影人]]手持的物品相同。
+**** 示例：{{cd|{Name:"minecraft:dirt"} }}
+** 文本展示实体（{{cd|text_display}}）：展示文本组件（背景使用新的着色器类型 {{cd|d=pretty|rendertype_text_background|rendertype_text_background_see_through}}）。
+*** {{cd|text}}：要展示的文本。解析文本组件时，会使用该实体所在的上下文。
+*** {{cd|line_width}}：用于控制换行的行宽（但需要插入新行也可以用{{cd|\n}}字符）。默认为200。
+*** {{cd|text_opacity}}：被渲染文本的不透明度（Alpha部分）。默认为255。可插值。
+*** {{cd|background}}：背景颜色。包括Alpha通道。默认为0x40000000。可插值。
+*** {{cd|default_background}}：若为true，则渲染时使用默认的背景颜色（与聊天栏相同）。默认为false。
+*** {{cd|shadow}}：文本是否显示阴影。默认为false。
+*** {{cd|see_through}}：文本是否可以穿透方块显示。默认为false。
+*** {{cd|alignment}}：文字对齐方向。
+**** 可用值：{{cd|center}}（默认）、{{cd|d=pretty|left|right}}。
+
+'''[[交互实体]]'''
+* 一种新的实体，会记录所有的{{ctrl|攻击}}和{{ctrl|交互}}动作。交互实体（{{cd|interaction}}）是不可见的，并且有自定义的尺寸，有以下字段：
+** {{cd|width}}：实体边界箱的宽度（默认为{{cd|1}}）。
+** {{cd|height}}：实体边界箱的高度（默认为{{cd|1}}）。
+** {{cd|attack}}：一个action对象，记录了实体的上一个攻击动作。
+** {{cd|interaction}}：一个action对象，记录了实体的上一个交互动作。
+** {{cd|response}}：布尔值，表示交互是否应该触发响应（如手臂挥动、声音效果等，默认为{{cd|false}}）。
+* 相应地，加入了action对象。存储行为时，这个对象有两个字段：
+** {{cd|player}}：执行此行为的玩家的UUID（标准整数数组形式）。
+** {{cd|timestamp}}：事件发生时，游戏刻的时间戳（存储为长整型）。
+
+=== 命令格式 ===
+'''[[游戏规则]]'''
+* 加入了{{cd|commandModificationBlockLimit}}，默认为{{cd|32768}}，用于控制{{cmd|clone}}、{{cmd|fill}}和{{cmd|fillbiome}}命令单次执行可更改的最大方块数。
+* 加入了{{cd|doVinesSpread}}，默认为{{cd|true}}，用于决定[[藤蔓]]是否会向周围扩散，不影响[[洞穴藤蔓]]、[[缠怨藤]]和[[垂泪藤]]。
+
+'''{{cmd|damage}}'''
+* 用于对指定实体造成伤害，语法如下：
+** {{cmd|link=none|damage <target> <amount> [<damageType>] [at <location>]}}
+** {{cmd|link=none|damage <target> <amount> [<damageType>] [by <entity>] [from <cause>]}}
+* 参数：
+** {{cd|target}}：要被伤害的实体。
+** {{cd|amount}}：要造成的伤害值。
+** {{cd|damageType}}：要造成的伤害的类型。决定伤害影响实体的方式，以及要显示出来的[[死亡消息]]。
+** {{cd|location}}：伤害源位置（若无实体造成了伤害）。
+*** 例如，此值可代表[[下界]]中[[床]]爆炸的位置。
+** {{cd|entity}}：造成伤害的实体。
+** {{cd|cause}}：间接造成的伤害的来源实体。
+*** 例如，当实体被骷髅射箭击中时，{{cd|entity}}为[[箭]]，{{cd|cause}}为[[骷髅]]。
+
+'''{{cmd|ride}}'''
+* 加入了{{cmd|link=none|ride}}命令，用于使一个[[实体]]骑乘另一个实体，或停止骑乘任何实体。语法如下：
+** {{cmd|link=none|ride <target> mount <vehicle>}}，用于使单个实体骑乘于另一个实体上，遇下列情况时执行失败：
+*** {{cd|vehicle}}为一[[玩家]]；
+*** {{cd|target}}已骑乘一实体；
+*** {{cd|target}}和{{cd|vehicle}}为同一实体；
+*** {{cd|vehicle}}已为{{cd|target}}的直接或间接骑乘者。
+** {{cmd|link=none|ride <target> dismount}}，用于取消{{cd|target}}的骑乘状态。{{cd|target}}未骑乘任何实体时执行失败。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 加入了伤害类型，作为一种新的注册表项，用于决定游戏如何处理伤害。
+** 包括伤害应该具有哪些属性，以及实体因此类型伤害死亡时需要使用哪种死亡消息。示例如下：<syntaxhighlight lang="json">
+{
+	"exhaustion": 0.1,
+ 	"message_id": "arrow",
+	"scaling": "when_caused_by_living_non_player"
+}</syntaxhighlight>
+** 已定义的字段如下：
+*** {{cd|message_id}}：用于此伤害类型的消息ID，将与其他字符串片段组合成完整的翻译字符串。
+*** {{cd|exhaustion}}：此伤害类型所造成的[[饥饿#饥饿影响|饥饿等级]]的提升量。
+*** {{cd|scaling}}：难度是否影响该伤害对玩家的伤害值，可为下列值：
+**** {{cd|never}}：难度不影响该伤害对玩家的伤害值。
+**** {{cd|always}}：难度总是影响该伤害对玩家的伤害值。
+**** {{cd|when_caused_by_living_non_player}}：难度仅在该伤害有玩家以外的生物来源时才会影响该伤害对玩家的伤害值。
+*** {{cd|effects}}：可选，伤害施加于玩家时的表现形式，可为下列值：
+**** {{cd|hurt}}（默认值）：一般受伤音效。
+**** {{cd|thorns}}：荆棘受伤音效。
+**** {{cd|drowning}}：溺水音效。
+**** {{cd|burning}}：1游戏刻的着火音效。
+**** {{cd|poking}}：甜浆果丛刺伤音效。
+**** {{cd|freezing}}：冻结音效。
+*** {{cd|death_message_type}}：可选，用于指定是否使用死亡消息的特殊变体，可为下列值：
+**** {{cd|default}}（默认值）：不显示特殊死亡消息。
+**** {{cd|fall_variants}}：显示摔落类死亡消息（如{{cd|death.fell.assist.item}}）。
+**** {{cd|intentional_game_design}}：显示“刻意的游戏设计”类死亡消息。
+** 伤害类型标签决定解释来自不同来源的伤害的方式。
+
+'''[[菜单屏幕]]'''
+* 加入了辅助功能引导屏幕，会在玩家首次启动游戏时出现。
+* 加入了方向键导航功能。
+** 现在菜单屏幕可以使用方向键进行导航。
+** 用方向键导航时，若需更改滑块值，需要先通过按下{{key|Enter}}或{{key|Space}}以激活滑块。
+
+'''[[调试屏幕]]'''
+* 现在按{{key|F3+S}}可以将动态纹理（如纹理图集、映射等）转储到{{samp|screenshots/debug/}}下。
+
+'''[[选项]]'''
+* 加入了“{{tr|通知显示时长|通知顯示時長}}”辅助功能选项，用于更改已解锁[[配方]]、[[进度]]、[[字幕]]、选择的[[方块]]名称等通知的显示时长。
+* 加入了“{{tr|附魔光效闪烁速度|附魔光效閃爍速度}}”和“{{tr|附魔光效闪烁强度|附魔光效閃爍強度}}”{{tr|辅助功能|協助工具}}选项，分别用于调整附魔光效的变化速度和显眼程度。
+* 加入了“{{tr|受伤抖动效果|受傷抖動效果}}”{{tr|辅助功能|協助工具}}选项，用于控制受到伤害时视角抖动的量。
+* 在“按键绑定”屏幕中加入了按键冲突时的提示框。
+* 加入了{{tr|鸣谢与著作权说明|鳴謝|鳴謝及版權説明}}按钮，用于查看[[鸣谢名单]]、{{tr|著作权说明|著作權|版權説明}}和{{tr|许可协议|授權條款}}。
+
+'''协议'''
+* 加入了一个新的网络协议功能，用于将打包起来的{{tr|数据包|封包}}强制在客户端侧的同刻中处理。
+** 客户端现在可接收一种新的分隔{{tr|数据包|封包}}。
+** 两个分隔{{tr|数据包|封包}}间的所有{{tr|数据包|封包}}保证会在同刻处理。
+** 出于安全考虑，客户端向服务端发送的数据流不支持此功能。
+
+'''[[Realms]]'''
+* 加入了Realms通知系统，用于提醒玩家关于Realms的重要消息。
+
+'''[[配方]]'''
+* 加入了{{cd|crafting_decorated_pot}}配方序列化器，以控制饰纹陶罐的合成。
+* 加入了{{cd|show_notification}}字段，为一布尔值，用于控制配方解锁时是否显示通知。默认值为{{cd|true}}。
+
+'''[[资源包]]'''
+* 加入了内置资源包“高对比度”，用于提高UI控件的对比度。
+** 该资源包可在辅助功能选项的资源包菜单中手动启用。
+
+'''[[Java版标签|标签]]'''
+* 加入了下列[[Java版标签/方块|方块]]和[[Java版标签/物品|物品]]标签：
+** {{cd|#smelts_to_glass}}：{{cd|d=pretty|sand|red_sand}}。
+*** 此处定义的方块和物品可以被[[烧炼]]成[[玻璃]]。
+
+* 加入了下列物品标签：
+** {{cd|#axes}}：{{cd|d=pretty|diamond_axe|stone_axe|golden_axe|netherite_axe|wooden_axe|iron_axe}}。
+** {{cd|#breaks_decorated_pots}}：{{cd|#tools}}。
+** {{cd|#hoes}}：{{cd|d=pretty|diamond_hoe|stone_hoe|golden_hoe|netherite_hoe|wooden_hoe|iron_hoe}}。
+** {{cd|#pickaxes}}：{{cd|d=pretty|diamond_pickaxe|stone_pickaxe|golden_pickaxe|netherite_pickaxe|wooden_pickaxe|iron_pickaxe}}。
+** {{cd|#shovels}}：{{cd|d=pretty|diamond_shovel|stone_shovel|golden_shovel|netherite_shovel|wooden_shovel|iron_shovel}}。
+** {{cd|#swords}}：{{cd|d=pretty|diamond_sword|stone_sword|golden_sword|netherite_sword|wooden_sword|iron_sword}}。
+** {{cd|#tools}}：{{cd|d=pretty|#axes|#hoes|#pickaxes|#shovels|#swords|trident}}。
+
+* 加入了下列[[Java版标签/实体类型|实体类型标签]]：
+** {{cd|#fall_damage_immune}}：{{cd|d=pretty|iron_golem|snow_golem|shulker|allay|bat|bee|blaze|cat|chicken|ghast|phantom|magma_cube|ocelot|parrot|wither}}。
+*** 此处定义的实体不会受到摔落伤害。
+** {{cd|#dismounts_underwater}}：{{cd|d=pretty|camel|chicken|donkey|horse|llama|mule|pig|ravager|spider|strider|trader_llama|zombie_horse}}。
+*** 此处定义的生物会在进入水中时强制其乘客离开。
+
+* 加入了下列[[Java版标签/生物群系|生物群系标签]]：
+** {{cd|#increased_fire_burnout}}
+*** 包含{{cd|d=pretty|bamboo_jungle|mushroom_fields|mangrove_swamp|snowy_slopes|frozen_peaks|jagged_peaks|swamp|jungle}}。
+*** [[火]]会在此处定义的生物群系中更快熄灭。
+** {{cd|#snow_golem_melts}}
+*** 包含{{cd|d=pretty|badlands|basalt_deltas|crimson_forest|desert|eroded_badlands|nether_wastes|savanna|savanna_plateau|soul_sand_valley|warped_forest|windswept_savanna|wooded_badlands}}。
+*** [[雪傀儡]]会在此处定义的生物群系中融化。
+** {{cd|#spawns_snow_foxes}}
+*** 包含{{cd|d=pretty|snowy_plains|ice_spikes|frozen_ocean|snowy_taiga|frozen_river|snowy_beach|frozen_peaks|jagged_peaks|snowy_slopes|grove}}。
+*** 白色狐狸会在此处定义的生物群系中生成。
+** {{cd|#spawns_white_rabbits}}
+*** 包含{{cd|d=pretty|snowy_plains|ice_spikes|frozen_ocean|snowy_taiga|frozen_river|snowy_beach|frozen_peaks|jagged_peaks|snowy_slopes|grove}}。
+*** 白色兔子会在此处定义的生物群系中生成。
+
+* 加入了下列[[Java版标签/伤害类型|伤害类型标签]]：
+** {{cd|#always_hurts_ender_dragons}}：{{cd|d=and|#is_explosion}}。
+** {{cd|#always_most_significant_fall}}：{{cd|out_of_world}}。
+** {{cd|#always_triggers_silverfish}}：{{cd|magic}}。
+** {{cd|#avoids_guardian_thorns}}：{{cd|magic}}。
+** {{cd|#burns_armor_stands}}：{{cd|on_fire}}。
+** {{cd|#bypasses_armor}}：{{cd|d=pretty|on_fire|in_wall|cramming|drown|fly_into_wall|generic|wither|dragon_breath|freeze|starve|fall|freeze|stalagmite|magic|indirect_magic|out_of_world|sonic_boom}}。
+** {{cd|#bypasses_cooldown}}：未包含任何值。
+** {{cd|#bypasses_effects}}：{{cd|starve}}。
+** {{cd|#bypasses_enchantments}}：{{cd|sonic_boom}}。
+** {{cd|#bypasses_invulnerability}}：{{cd|out_of_world}}。
+** {{cd|#bypasses_resistance}}：{{cd|out_of_world}}。
+** {{cd|#bypasses_shield}}：{{cd|d=pretty|#bypasses_armor|falling_anvil|falling_stalactite}}。
+** {{cd|#damages_helmet}}：{{cd|d=pretty|falling_anvil|falling_block|falling_stalactite}}。
+** {{cd|#ignites_armor_stands}}：{{cd|in_fire}}。
+** {{cd|#is_drowning}}：{{cd|drown}}。
+** {{cd|#is_explosion}}：{{cd|d=pretty|fireworks|explosion|player_explosion|bad_respawn_point}}。
+** {{cd|#is_fall}}：{{cd|d=pretty|fall|stalagmite}}。
+** {{cd|#is_fire}}：{{cd|d=pretty|in_fire|on_fire|lava|hot_floor|unattributed_fireball|fireball}}。
+** {{cd|#is_freezing}}：{{cd|freeze}}。
+** {{cd|#is_lightning}}：{{cd|lightning_bolt}}。
+** {{cd|#is_projectile}}：{{cd|d=pretty|arrow|trident|mob_projectile|unattributed_fireball|fireball|wither_skull|thrown}}。
+** {{cd|#no_anger}}：{{cd|mob_attack_no_aggro}}。
+** {{cd|#no_impact}}：{{cd|drown}}。
+** {{cd|#witch_resistant_to}}：{{cd|d=pretty|magic|indirect_magic|sonic_boom|thorns}}。
+** {{cd|#wither_immune_to}}：{{cd|drown}}。
+
+'''常规'''
+* 为专用服务器命令行加入了{{cd|--pidFile}}参数，用于将服务端的{{w|进程ID|{{tr|进程|行程}}ID（PID）}}写入到特定文件中。
+
+== 更改 ==
+=== 方块 ===
+'''[[蛙明灯]]'''
+* 调低了放置和破坏蛙明灯的声音。
+
+'''[[唱片机]]'''
+* 现在在播放[[音乐唱片]]时会产生音符粒子，以匹配{{el|be}}。
+* 现在播放[[音乐唱片]]过程中，会直接发出强度为15的红石信号。
+* 现在可以与[[漏斗]]和[[投掷器]]交互。
+
+'''[[幽匿感测体]]'''
+* 将游戏事件{{cd|item_interact_finish}}的振动频率由14调整为2。
+* 现在可感测到属于以下游戏事件的动作：
+** {{cd|block_change}}：
+*** 使用[[剪刀]]修剪[[洞穴藤蔓]]、[[海带]]、[[缠怨藤]]和[[垂泪藤]]。
+*** 采集[[发光浆果]]。
+*** 取下[[讲台]]上的书。
+*** 与[[物品展示框]]或[[荧光物品展示框]]中的物品互动。
+*** 将[[耕地]]踩踏成[[泥土]]。
+*** 为[[重生锚]]充能。
+*** 与[[堆肥桶]]交互。
+** {{cd|block_place}}：
+*** [[海龟]]和[[青蛙]]产卵。
+** {{cd|container_close}}：
+*** 关闭[[运输矿车]]或[[运输船]]。
+** {{cd|entity_damage}}：
+*** 摧毁[[潜影弹]]。
+** {{cd|entity_dismount}}（新游戏事件，信号强度6）：
+*** 离开载具。
+** {{cd|entity_interact}}：
+*** 给[[绵羊]]染色。
+*** 用[[拴绳]]拴住实体。
+*** 解除拴住实体的拴绳。
+** {{cd|entity_mount}}（新游戏事件，信号强度7）：
+*** 进入载具。
+
+=== 物品 ===
+'''[[盔甲]]和[[鞘翅]]'''
+* 现在手持的盔甲或鞘翅可以通过按{{ctrl|使用}}键与对应盔甲槽中的物品交换位置。
+
+'''[[药水]]和[[药箭]]'''
+* 更改了具有以下种类的状态效果的药水（所有形式）和药箭的颜色：
+** 抗火
+** 瞬间伤害
+** 隐身
+** 跳跃提升
+** 幸运
+** 夜视
+** 中毒
+** 抗性提升
+** {{tr|缓慢|緩速|緩慢}}
+** 速度
+** 力量
+** 水下呼吸
+* 移除了药水的附魔光效，以避免玩家混淆颜色相近的药水。
+
+'''[[盾牌]]'''
+* 现在当放置到副手时会播放音效。
+
+'''常规'''
+* 调整了物品和[[盔甲]]的附魔光效。
+
+=== 生物 ===
+'''[[驴]]、[[骡]]、[[骷髅马]]和[[僵尸马]]'''
+* 更改了其[[鞍]]和[[箱子]]的纹理。
+
+'''[[马]]及其变种'''
+* 繁殖马及其变种产下的新个体的速度、跳跃高度和生命值不再会趋近双亲对应属性的平均值。
+** 这意味着繁殖马产生的新个体的属性有可能会超越双亲。
+
+'''[[恼鬼]]'''
+* 更改了其空手时的蓄力动画。
+
+'''[[蜘蛛]]'''
+* 现在蜘蛛生成时附带的[[状态效果]]拥有无限的持续时间，而不是之前的2<sup>31</sup>-1[[游戏刻]]（约3.4年）。
+
+=== 非生物实体 ===
+'''[[盔甲架]]'''
+* 现在在放置和破坏时会保留自定义名称。
+
+'''[[漏斗矿车]]'''
+* 现在打开时不再会激怒[[猪灵]]。
+
+=== 命令格式 ===
+'''[[聊天]]组件'''
+* 向{{cd|translate}}文本组件中加入了可选的{{cd|fallback}}字段。
+** 此字段为一字符串，用于在翻译文本缺失时显示此内容。
+** 若{{cd|fallback}}缺失，则直接显示本地化键名（旧处理方法）。
+* {{cd|translate}}格式中的越界参数不再被直接忽略而不显示任何错误。
+
+'''{{cmd|clone}}'''
+* 现在支持指定来源[[维度]]和目的维度，新语法如下：
+** {{cmd|link=none|clone [from <sourceDimension>] <begin> <end> [to <targetDimension>] <destination> ...}}
+*** {{cd|sourceDimension}}：要复制的区域的来源维度ID。
+*** {{cd|targetDimension}}：将区域复制到的维度的ID。
+
+'''{{cmd|data}}'''
+* 加入了新的{{cd|string}}数据源，用于从字符串中截取一段内容作为新值，语法如下：
+** {{cd|... ''(insert <index>{{!}}prepend{{!}}append{{!}}set{{!}}merge)'' string (block <sourcePos>{{!}}entity <<nowiki/>source>{{!}}storage <<nowiki/>source>) [<sourcePath>] [<start>] [<end>]}}
+*** {{cd|start}}：源字符串中需要包含在新字符串起始位置上的首个字符位置（索引值）。
+*** {{cd|end}}：源字符串中需要被排除在新字符串外的首个字符位置（索引值）。
+
+'''{{cmd|effect}}'''
+* 效果持续时长现在可以被指定为{{cd|infinite}}。
+** 此时，在物品栏中显示的效果时长会显示为“∞”。
+
+'''{{cmd|execute}}'''
+* 加入了以下条件子命令：
+** {{cd|... loaded <pos>}}，用于检查给定位置是否被完全加载（对于方块和实体而言）。
+*** {{cd|pos}}：要被检查的方块位置。
+** {{cd|... dimension <dimension>}}，用于检查命令执行维度是否在匹配的维度上。
+*** {{cd|dimension}}：维度的命名空间ID。
+* 加入了新的{{cd|on}}修饰子命令，基于与当前执行实体间的关系选择实体，语法如下：
+** {{cd|... on (attacker{{!}}controller{{!}}leasher{{!}}origin{{!}}owner{{!}}passengers{{!}}target{{!}}vehicle) -> execute}}
+*** {{cd|attacker}}：最近5秒内对当前执行实体造成伤害的最后实体。
+*** {{cd|controller}}：控制当前执行实体的实体（如船前半部的玩家）。
+*** {{cd|leasher}}：用[[拴绳]]牵引当前执行实体的实体（若已拴在栅栏上，则可能为拴绳结）。
+*** {{cd|origin}}：特定实体的来源。
+**** 若执行实体为[[弹射物]]，则为对应发射者。
+**** 若执行实体为[[物品（实体）|物品]]，则为对应掷出者。
+**** 若执行实体为[[区域效果云]]，则为对应效果的来源者。
+**** 若执行实体为[[被激活的TNT]]，则为对应点燃者。
+**** 若执行实体为[[唤魔者尖牙]]或[[恼鬼]]，则为对应召唤者。
+*** {{cd|owner}}：当前执行实体（可驯服，如[[猫]]、[[狼]]或[[鹦鹉]]）的主人。
+*** {{cd|passengers}}：直接骑乘于当前执行实体（无次级乘客）的实体。
+*** {{cd|target}}：当前执行实体的攻击目标。
+*** {{cd|vehicle}}：正在被当前执行实体骑乘的实体。
+** 若指定的关系不适用于当前执行实体，或此关系下没有匹配实体，则返回0个元素。
+* 加入了新的{{cd|summon}}子命令，用于立即创建一个实体，并同时将命令执行者（{{cd|@s}}）设为此实体，语法如下：
+** {{cmd|link=none|execute summon <entity> -> execute}}
+*** {{cd|entity}}：要生成的实体类型。
+* 加入了新的子命令{{cd|positioned over}}，用于寻找高度图顶端的位置，执行时会将命令环境中的位置更改为指定高度图的顶端。语法：
+** {{cd|... positioned over <heightmap> -> execute}}
+*** {{cd|<heightmap>}}：高度图记录符合指定准则的一纵列方块的最高的位置。可用的选项：
+**** {{cd|world_surface}}：任意非空气方块。
+**** {{cd|motion_blocking}}：任意能阻挡移动的方块（例如，忽略花草）。
+**** {{cd|motion_blocking_no_leaves}}：任意不包括树叶的能阻挡移动的方块。
+**** {{cd|ocean_floor}}：任意能阻挡移动的非流体方块。
+
+'''{{cmd|title}}'''
+* {{cmd|link=none|title times}}命令中所有时间参数现在均改为时长参数，且需要在其后添加{{cd|d=pretty|t|s|d}}后缀。
+
+'''{{cmd|weather}}'''
+* 若未指定时长，[[天气]]变化的持续时间现在会与游戏的常规天气周期相匹配。
+* {{cd|duration}}参数的默认单位现在改为刻，且可以用{{cd|d=pretty|t|s|d}}后缀来指定单位。
+** 若要保持旧命令功能不变，需要在原{{cd|duration}}参数后加{{cd|s}}后缀。
+
+=== 常规 ===
+'''[[创建新的世界]]'''
+* 重新设计了布局，现在被分为3个{{tr|标签页|頁籤}}：
+** “游戏”：用于设置世界名称、[[游戏模式]]、[[难度]]、[[作弊]]及实验性内容。
+** “世界”：用于设置[[世界类型]]、[[种子（世界生成）|种子]]及[[结构]]与[[奖励箱]]的生成。
+** “更多”：用于设置[[游戏规则]]及进入[[数据包]]选择屏幕。
+* 各{{tr|标签页|頁籤}}可通过按{{key|Crtl+Tab}}和{{key|Ctrl+Shift+Tab}}键切换。
+* 可通过{{key|Ctrl}} + {{cd|''{{tr|标签页|頁籤}}序号''}}切换至指定{{tr|标签页|頁籤}}。
+* 加入了实验性内容选择屏幕，用于更方便地启用或禁用实验性功能。
+** 此屏幕总是可以在“更多”{{tr|标签页|頁籤}}中找到。
+** 若为快照版本，此屏幕还可在“游戏”{{tr|标签页|頁籤}}中快捷进入。
+* 移除了“编辑世界”屏幕中的“导入设置”和“导出设置”按钮。
+* 现在将鼠标指针放在世界名称上时会显示存档文件夹名称。
+
+'''[[创造模式物品栏]]'''
+* 向“功能方块”分类中加入了各种[[画|{{tr|画|繪畫|畫}}]]。
+** 若为预定义的种类，其名称、作者和尺寸会显示在提示框中。
+** 其他4种不能在生存模式下获取的{{tr|画|繪畫|畫}}位于“{{tr|管理员用品|管理員實用物品|管理員用品}}”中。
+* 向“原材料”分类中加入了[[火焰弹]]。
+
+'''[[数据包]]'''
+* 版本更改为{{cd|12}}。
+
+'''[[菜单屏幕]]'''
+* 为资源包屏幕加入了键盘导航功能。
+* 更改了菜单界面[[提示框]]确定显示位置的方式。
+
+'''[[选项]]'''
+* 自动跳跃选项现在默认关闭。
+* 现在，若选项按钮文本过长，文本会滚动显示。
+* 现在遥测屏幕可以使用箭头按键来滚动。
+
+'''[[Realms]]'''
+* 更新了Realms界面，使之更符合单人和多人游戏的界面。
+
+'''[[配方]]'''
+* 现在[[工作台]]的合成配方在创建世界后会自动解锁。
+* [[弩]]和[[灵魂营火]]的合成配方不再在得到木棍后解锁。
+
+'''[[资源包]]'''
+* 现在原版资源包的{{samp|en_us.json}}语言文件以字符串键名的字母顺序排列。
+* 版本更新至<code>13</code>。
+* 附魔光效现在使用两个不同的纹理文件：{{samp|enchanted_glint_entity.png}}和{{samp|enchanted_glint_item.png}}。
+
+'''{{samp|[[options.txt]]}}'''
+* 移除了{{cd|heldItemTooltips}}。
+
+'''[[谓词]]'''
+* 移除了伤害类型谓词中的{{cd|d=pretty|is_projectile|is_explosion|bypasses_armor|bypasses_invulnerability|bypasses_magic|is_fire|is_magic|is_lightning}}字段。
+* 加入了新的{{cd|tags}}数组。数组内的每一项都有以下字段：
+** {{cd|id}}：伤害类型标签的命名空间ID。
+** {{cd|expected}}：指定的伤害类型标签是否要被谓词用于匹配过程。
+
+'''协议'''
+* 客户端现在会在收到登录{{tr|数据包|封包}}时重置其安全聊天{{tr|会话|的session}}状态。
+
+'''[[Java版标签|标签]]'''
+* 向{{cd|#goats_spawnable_on}}方块标签中加入了{{cd|#animals_spawnable_on}}。
+* 将{{cd|#only_allows_snow_and_gold_rabbits}}生物群系标签重命名为{{cd|#spawns_gold_rabbits}}。
+
+'''用户界面'''
+* 略微移动了[[配方书]]界面上的搜索图标。
+* 调亮了各槽位占位符图标（[[织布机]]未受影响）。
+
+== 新内容（实验性） ==
+=== 方块 ===
+'''[[樱花树叶]]'''
+* 一种新的树叶，长满粉红色的花朵，其下方会出现粉红色的下落粒子。
+* [[蜜蜂]]将其视为花。
+
+'''[[樱花原木]]'''
+* 一种紫褐色外皮、粉红色内干的原木，有对应的去皮变种。
+** 去皮变种可以合成对应种类的[[悬挂式告示牌]]。
+* 可用于合成对应种类的[[木板]]。
+
+'''[[樱花木板]]'''
+* 一种新的木板。
+* 可以合成对应种类的[[按钮]]、[[门]]、[[栅栏]]、[[栅栏门]]、[[压力板]]、[[告示牌]]、[[台阶]]、[[楼梯]]和[[活板门]]。
+
+'''[[樱花树苗]]'''
+* 一种新的树苗。
+* 可以放置在[[花盆]]中。
+
+'''[[櫻花木塊]]'''
+* 樱花原木的木头变种，有对应的去皮变种。
+* 可用于合成对应种类的木板。
+
+'''[[饰纹陶罐]]'''
+* 在合成表中使用4个[[陶片]]或[[红砖]]摆成菱形以合成。
+** 陶片的种类决定了输出陶罐的对应面出现何种图案，使用红砖则没有图案。
+* 非常容易被破坏。
+** 使用[[剑]]、[[镐]]、[[锹]]、[[锄]]、[[斧]]或[[三叉戟]]进行破坏，会碎裂成其原先的合成材料。
+** 徒手破坏、被活塞推动和使用附有[[精准采集]]魔咒的工具破坏时掉落自身。
+
+'''[[粉红色花簇]]'''
+* 一种新的方块，在樱花树林中自然生成。
+* 可通过对已有的粉红色花簇或樱花树林的地面使用[[骨粉]]再生。
+* 类似于[[海泡菜]]，一个方块内可以放置4个。
+* 可以以特定方向放置。
+* 可以用来合成[[粉红色染料]]。
+* 蜜蜂会将其视为花。
+
+'''[[可疑的沙子]]'''
+* 与[[沙子]]相似，但纹理看起来更粗糙。
+* 受重力影响，会在落地时消失。
+* 被挖掘或被活塞推动时不掉落任何物品，用附有精准采集的工具挖掘也不会掉落。
+* 会在[[沙漠神殿]]和[[沙漠水井]]中自然生成，两处生成的可疑的沙子带有的战利品表不同。
+* 用[[刷子]]刷可疑的沙子可以刷出物品。
+** 清刷时，可疑的沙子会经历4个阶段，若中途停止，会逐渐恢复原状。
+** 清刷完成后，可疑的沙子转变为普通沙子。
+** 带有有效战利品表的可疑的沙子才能刷出物品。
+
+'''[[火把花植株]]'''
+* 一种新的[[作物]]方块，可用火把花种子种出。
+* 共有3个生长阶段，完全成熟时变为火把花。
+* 若完全成熟，破坏时掉落火把花；若未完全成熟，破坏时掉落火把花种子。
+
+'''[[火把花]]'''
+* 一种新的花。
+* 可用于合成[[橙色染料]]。
+* 可用于合成[[谜之炖菜]]，给予玩家[[夜视]]效果。
+* 可以放置在[[花盆]]中。
+
+=== 物品 ===
+'''[[刷子]]'''
+* 用于清刷方块的物品。
+* 需在工作台中将[[羽毛]]、[[铜锭]]和[[木棍]]依次排成一列来合成。
+* 成功刷出物品时消耗1点耐久。
+* 对可疑的沙子外的其他方块没有实际效果。
+
+'''[[陶片]]'''
+* 共有四种，分别为弓箭纹样、举臂纹样、珍宝纹样和头颅纹样。
+* 无法合成，只能通过刷可疑的沙子来获得。
+
+'''[[锻造模板]]'''
+* 一类新物品，可用于装饰盔甲与锻造下界合金装备，在[[锻造台]]上使用。
+* 一次消耗一个锻造模板。
+* 无法直接合成，但可以在工作台中用7个[[钻石]]、1个锻造模板和1个对应复制材料来复制1个。
+* 共有以下12种（一些种类的盔甲纹饰会更稀有）：
+:{| class="wikitable"
+! 类别
+! 名称 !! 获取途径 !! 对应复制材料
+|-
+! 下界合金升级
+| 下界合金升级 || [[堡垒遗迹]]的战利品箱 || [[下界岩]]
+|-
+! rowspan=11 | 盔甲纹饰
+| 海岸盔甲纹饰 || [[沉船]]的战利品箱 || [[圆石]]
+|-
+| 沙丘盔甲纹饰 || [[沙漠神殿]]的战利品箱 || [[砂岩]]
+|-
+| 眼眸盔甲纹饰 || [[要塞]]的走廊、图书馆箱子 || [[末地石]]
+|-
+| 肋骨盔甲纹饰 || [[下界要塞]]的战利品箱 || 下界岩
+|-
+| 哨兵盔甲纹饰 || [[掠夺者前哨站]]的战利品箱 || 圆石
+|-
+| 猪鼻盔甲纹饰 || 堡垒遗迹的战利品箱 || [[黑石]]
+|-
+| 尖塔盔甲纹饰 || [[末地城]]的战利品箱 || [[紫珀块]]
+|-
+| 潮汐盔甲纹饰 || [[远古守卫者]]死亡后掉落 || [[海晶石]]
+|-
+| 恼鬼盔甲纹饰 || [[林地府邸]]的战利品箱 || 圆石
+|-
+| 监守盔甲纹饰 || [[远古城市]]的战利品箱 || [[深板岩圆石]]
+|-
+| 荒野盔甲纹饰 || [[丛林神庙]]的战利品箱 || [[苔石]]
+|}
+
+'''[[刷怪蛋]]'''
+* 加入了嗅探兽刷怪蛋。
+
+'''[[火把花种子]]'''
+* 一种新的种子，可以种植在[[耕地]]上。
+* 可通过嗅探兽挖掘获得。
+* 可用于喂食[[鸡]]和[[鹦鹉]]。
+
+=== 生物 ===
+'''[[嗅探兽]]'''
+* [[Minecraft Live 2022]]生物投票的获胜生物，属于友好生物，体型很大。
+* 有{{hp|14}}点生命值。
+* 目前不会自然生成。
+* 不会被食物吸引，不能被驯服。
+* 时常嗅探空气，有时能挖掘出火把花种子。
+** 有8分钟冷却时间。
+** 最近被挖掘过的20个方块会被记录，并且不再寻求挖掘这些方块。
+* 可以使用火把花种子喂养和繁殖。
+* 死亡时掉落[[苔藓块]]。
+
+=== 非生物实体 ===
+'''[[樱花木船]]'''
+* 一种新的船，使用樱花木板合成。
+
+'''[[樱花木运输船]]'''
+* 一种新的运输船，使用樱花木船和[[箱子]]合成。
+
+=== 世界生成 ===
+'''[[樱花树林]]'''
+* 一种新的[[山地]]生物群系变种，类似于[[草甸]]。
+* 含有[[樱花树]]，一种新的[[树木]]。
+** 可由樱花树苗长成。
+** 有5%的概率带有[[蜂巢（方块）|蜂巢]]。
+* 可以自然生成[[兔子]]、[[猪]]、[[绵羊]]、[[蜜蜂]]。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 加入了{{cd|trim_pattern}}和{{cd|trim_material}}注册项。
+** 新的纹饰和锻造原材料可以通过这两个注册项添加。
+** 玩家加入服务端时，这些数据会自动同步到客户端上，但需要客户端有对应资源包才能显示纹理。
+** 纹理路径根据纹饰的JSON文件名推断，并会在与纹饰的{{cd|name}}字段相同的命名空间中查找。
+** {{cd|trim_pattern}}定义了以下数据：
+*** {{cd|asset_id}}：纹理的命名空间ID，用于推断纹理存储位置及定位。
+*** {{cd|template_item}}：锻造模板物品的命名空间ID，用于应用纹饰。
+*** {{cd|description}}：文本组件，用于在悬停提示中显示纹饰名称。
+** {{cd|trim_material}}定义了以下数据：
+*** {{cd|asset_name}}：字符串，用作盔甲纹饰纹理位置的后缀。
+*** {{cd|ingredient}}：锻造原材料的命名空间ID，用于指定要应用到纹饰上的调色板。
+*** {{cd|item_model_index}}：浮点数，用于定义物品模型覆写，以改变盔甲物品的显示。
+*** {{cd|description}}：文本组件，用于在悬停提示中显示锻造原材料名称。
+**** 此描述中定义的样式也可用于纹饰的{{cd|description}}字段。
+*** {{cd|override_armor_materials}}：可选，用于要被覆盖调色板的盔甲材料映射表。
+**** 键名为要被此锻造材料覆盖调色板的盔甲材料。
+**** 键值为当锻造材料应用于对应盔甲材料时，需要使用的调色板名称。
+
+'''[[粒子]]'''
+* 加入了{{cd|d=pretty|dripping_cherry_leaves|falling_cherry_leaves|landing_cherry_leaves}}粒子，会在樱花树叶下方自然生成。
+
+'''[[物品格式]]'''
+* 为{{cd|HideFlags}}NBT字段加入了旗标（值为{{cd|128}}），用于隐藏盔甲纹饰的工具提示。
+
+'''[[配方]]'''
+* 为新的工具锻造机制加入了{{cd|d=pretty|smithing_transform|smithing_trim}}配方序列化器，分别用于新的下界合金升级配方和盔甲锻造配方。
+
+'''[[资源包]]'''
+* 加入了{{cd|paletted_permutations}}图集配置资源，可以通过调色板在内存中动态生成新纹理，而不再需要为每个纹理变种单独制作纹理。其拥有以下参数：
+** {{cd|textures}}：基础纹理的命名空间地址列表。
+** {{cd|palette_key}}：指定需要被调色板中的颜色替换的像素。
+** {{cd|permutations}}：将前缀对应到调色板的命名空间地址的排列映射。
+*** 前缀位于输出纹理目标地址之前，与基础纹理名称以{{cd|_}}隔开。
+*** 调色板为一用作替换基础纹理文件中符合调色板键的像素的纹理文件，像素数量须与{{cd|palette_key}}的定义相同。
+*** 键配对的过程为比较{{cd|palette_key}}与调色板中像素的RGB值。Alpha通道在键配对的过程中会被忽略，但在配对完成后会与调色板的Alpha通道相乘。
+*** 不符合{{cd|palette_key}}的像素会被直接复制到输出纹理中。
+** 定义了{{cd|paletted_permutations}}，这些输出的纹理可以被资源包中的其他资源引用。
+*** 如定义了以下{{cd|paletted_permutations}}：
+**** <syntaxhighlight lang="json">
+{
+    "type": "paletted_permutations",
+    "textures": [
+        "minecraft:item/leather_helmet",
+        "minecraft:item/leather_chestplate",
+        "minecraft:item/leather_leggings",
+        "minecraft:item/leather_boots"
+    ],
+    "palette_key": "minecraft:colormap/color_palettes/leather_armor_color_key",
+    "permutations": {
+        "red": "minecraft:colormap/color_palettes/red",
+        "green": "minecraft:colormap/color_palettes/green",
+        "blue": "minecraft:colormap/color_palettes/blue"
+    }
+}
+</syntaxhighlight>
+*** 可在其他资源中通过下面的方式引用：
+**** <syntaxhighlight lang="json">
+{
+    "textures": {
+        "layer0": "minecraft:item/leather_helmet_red",
+        "layer1": "minecraft:item/leather_chestplate_green",
+        "layer2": "minecraft:item/leather_boots_blue"
+    }
+}
+</syntaxhighlight>
+
+'''[[Java版标签|标签]]'''
+* 加入了以下方块标签：
+** {{cd|#cherry_logs}}：{{cd|d=pretty|cherry_log|cherry_wood|stripped_cherry_log|stripped_cherry_wood}}。
+** {{cd|#sniffer_diggable_block}}：{{cd|d=pretty|dirt|grass_block|podzol|coarse_dirt|rooted_dirt|moss_block|mud|muddy_mangrove_roots}}。
+
+* 加入了以下物品标签：
+** {{cd|#cherry_logs}}：{{cd|d=pretty|cherry_log|cherry_wood|stripped_cherry_log|stripped_cherry_wood}}。
+** {{cd|#decorated_pot_shards}}：{{cd|d=pretty|brick|pottery_shard_archer|pottery_shard_prize|pottery_shard_arms_up|pottery_shard_skull}}。
+** {{cd|#noteblock_top_instruments}}：{{cd|d=pretty|zombie_head|skeleton_skull|creeper_head|dragon_head|wither_skeleton_skull|piglin_head|player_head}}。
+** {{cd|#sniffer_food}}：{{cd|torchflower_seeds}}。
+** {{cd|#trim_materials}}：{{cd|d=pretty|amethyst_shard|copper_ingot|diamond|emerald|gold_ingot|iron_ingot|lapis_lazuli|netherite_ingot|quartz|redstone}}。
+** {{cd|#trim_templates}}：{{cd|d=pretty|coast_armor_trim_smithing_template|dune_armor_trim_smithing_template|eye_armor_trim_smithing_template|rib_armor_trim_smithing_template|sentry_armor_trim_smithing_template|snout_armor_trim_smithing_template|spire_armor_trim_smithing_template|tide_armor_trim_smithing_template|vex_armor_trim_smithing_template|ward_armor_trim_smithing_template|wild_armor_trim_smithing_template}}。
+** {{cd|#trimmable_armor}}：{{cd|d=pretty|chainmail_boots|chainmail_chestplate|chainmail_helmet|chainmail_leggings|diamond_boots|diamond_chestplate|diamond_helmet|diamond_leggings|golden_boots|golden_chestplate|golden_helmet|golden_leggings|iron_boots|iron_chestplate|iron_helmet|iron_leggings|leather_boots|leather_chestplate|leather_helmet|leather_leggings|netherite_boots|netherite_chestplate|netherite_helmet|netherite_leggings|turtle_helmet}}。
+
+== 更改（实验性）==
+=== 方块 ===
+'''[[生物头颅]]'''
+* 现在可以在非潜行状态下放置到[[音符盒]]上。
+
+=== 物品 ===
+'''[[盔甲]]'''
+* 现在盔甲可以通过[[锻造台]]消耗锻造模板和以下10种原材料中的一种进行锻造：
+** [[紫水晶碎片]]
+** [[铜锭]]
+** [[钻石]]
+** [[绿宝石]]
+** [[金锭]]
+** [[铁锭]]
+** [[青金石]]
+** [[下界石英]]
+** [[下界合金锭]]
+** [[红石粉]]
+* 锻造结果不会提供任何[[属性]]增益。
+* 锻造模板决定锻造后盔甲纹饰图案，原材料决定纹饰颜色。
+* 重复锻造将会覆盖上一次的锻造结果。
+* 锻造后的盔甲，其纹饰和锻造原材料名称会在物品提示框中以原材料颜色显示。
+* 不同的纹饰在物品栏图标中显示的是相同的纹理，实际展示出来的是类似于荒野盔甲纹饰的样式；不同的纹饰颜色在物品栏图标中显示的纹饰颜色不同。
+
+=== 世界生成 ===
+'''[[沙漠神殿]]'''
+* 更改了结构，现在会有一个填满沙子和可疑的沙子的新空间。
+** 一些沙子会暴露在外，可以在与[[蓝色陶瓦]]等高的位置上找到。
+
+'''[[沙漠水井]]'''
+* 现在可疑的沙子会生成在其水下。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 现在完成“{{Advancement name|adventure.adventuring_time|zh|rev=1}}”进度还需要访问樱花树林生物群系。
+* 将火把花种子加入到了进度“{{Advancement name|husbandry.plant_seed|zh|rev=1}}”的达成要求当中。
+* 将嗅探兽加入到了进度“{{Advancement name|husbandry.breed_all_animals|zh|rev=1}}”的达成要求当中。
+* 现在可通过繁殖嗅探兽来达成进度“{{Advancement name|husbandry.breed_an_animal|zh|rev=1}}”。
+
+'''锻造机制'''
+* 更改了锻造台的UI，现在拥有三个输入槽位，第一个槽位为锻造模板，其次为装备，最后为锻造原材料，需要先放入锻造模板才可进一步操作。
+** 锻造模板控制可在后两个槽位中放置的物品种类。
+* 现在锻造下界合金工具需要“下界合金升级”锻造模板才能完成。
+* 将旧菜单重命名为{{cd|legacy_smithing}}（将在新菜单不再为实验性功能时移除），新菜单使用原名{{cd|smithing}}。
+
+'''[[Java版标签|标签]]'''
+* 将下列实验性功能加入到非实验性标签中：
+** 将{{cd|cherry_boat}}添加到{{cd|#boats}}物品标签中。
+** 将{{cd|cherry_button}}添加到{{cd|#wooden_buttons}}方块和物品标签中。
+** 将{{cd|cherry_chest_boat}}添加到{{cd|#chest_boats}}物品标签中。
+** 将{{cd|cherry_door}}添加到{{cd|#wooden_doors}}方块和物品标签中。
+** 将{{cd|cherry_fence_gate}}添加到{{cd|#fence_gates}}方块和物品标签中。
+** 将{{cd|cherry_fence}}添加到{{cd|#wooden_fences}}方块和物品标签中。
+** 将{{cd|cherry_grove}}添加到{{cd|#is_mountain}}生物群系标签中。
+** 将{{cd|cherry_hanging_sign}}添加到{{cd|#ceiling_hanging_signs}}方块标签和{{cd|#hanging_signs}}物品标签中。
+** 将{{cd|cherry_leaves}}添加到{{cd|d=pretty|#leaves|#flowers}}方块和物品标签中。
+** 将{{cd|d=pretty|cherry_leaves|pink_petals}}添加到{{cd|d=pretty|#flowers|#mineable/hoe}}方块和物品标签中。
+** 将{{cd|cherry_log}}添加到{{cd|#overworld_natural_logs}}方块标签中。
+** 将{{cd|cherry_logs}}添加到{{cd|#logs_that_burn}}方块和物品标签中。
+** 将{{cd|cherry_planks}}添加到{{cd|#planks}}方块和物品标签中。
+** 将{{cd|cherry_pressure_plate}}添加到{{cd|#wooden_pressure_plates}}方块和物品标签中。
+** 将{{cd|cherry_sapling}}添加到{{cd|#saplings}}方块和物品标签中。
+** 将{{cd|cherry_sign}}添加到{{cd|#standing_signs}}方块标签和{{cd|#signs}}物品标签中。
+** 将{{cd|cherry_slab}}添加到{{cd|#wooden_slabs}}方块和物品标签中。
+** 将{{cd|cherry_stairs}}添加到{{cd|#wooden_stairs}}方块和物品标签中。
+** 将{{cd|cherry_trapdoor}}添加到{{cd|#wooden_trapdoors}}方块和物品标签中。
+** 将{{cd|cherry_wall_hanging_sign}}添加到{{cd|#wall_hanging_signs}}方块标签中。
+** 将{{cd|cherry_wall_sign}}添加到{{cd|#wall_signs}}方块标签中。
+** 将{{cd|pink_petals}}添加到{{cd|#inside_step_sound_blocks}}方块标签中。
+** 将{{cd|suspicious_sand}}添加到{{cd|#sand}}方块和物品标签中。
+* 将{{cd|torchflower_crop}}添加到{{cd|#crops}}方块标签。
+* 将{{cd|torchflower}}添加到{{cd|#small_flowers}}方块和物品标签。
+* 将{{cd|#flower_pots}}方块标签中的{{cd|flower_pot}}改为{{cd|potted_cherry_sapling}}。
+
+== 修复 ==
+{{fixes|fixedin=1.19.4,1.19.4 Release Candidate 3,1.19.4 Release Candidate 2,1.19.4 Release Candidate 1,1.19.4 Pre-release 4,1.19.4 Pre-release 3,1.19.4 Pre-release 2,1.19.4 Pre-release 1,23w07a,23w06a,23w05a,23w04a,23w03a|beforeVersion=23w03a|veralias=1|showdesc=1
+|;old
+|12729|实体穿着的护腿和靴子上会出现深度冲突。
+|16533|繁殖出的幼年马属性永远不会超过其双亲的。
+|26678|受到伤害的倾斜动画不再反映伤害的来源方向。
+|30403|脱离可骑乘生物时，已有的疾跑状态不会被取消。
+|64522|正在启动的服务器会在服务器列表中显示为“旧版”。
+|84633|资源包中，子级方块模型中的{{cd|ambientocclusion}}不能覆盖父级方块模型中的{{cd|ambientocclusion}}。
+|106484|一些药水无法通过颜色分辨。
+|121048|实体死亡时，战斗追踪器只记录致命一击。
+|122595|执行持续时长指定为0的{{cmd|weather|link=none}}命令会保持当前天气状态，而不是立即随机切换一个天气。
+|127749|玩家移动时披风出现抖动现象；动画比18w03b中的更不平滑。
+|132200|在已被充能的位置上用命令放置漏斗会出现幽灵方块。
+|134448|溺尸转身时，其部分转身动画存在异常。
+|136534|使用局部坐标时，命令方块始终将南方作为基准方向。
+|137552|已装填的弩在物品展示框中和变成掉落物时仍显示为未装填的状态。
+|145765|{{tr|辅助功能|協助工具}}选项中的“{{tr|文本背景|文字背景}}”和“{{tr|文本背景不透明度|文字背景不透明度}}”两个选项的设置文本会超出按钮范围。
+|147711|溺尸不再有不一样的游泳动画。
+|148458|可骑乘生物死亡时不会被击退。
+|149144|按{{key|Tab}}键选中按钮后用鼠标按另一个按钮，之后再按{{key|Tab}}键，可以使多个按钮被选中。
+|155433|漏斗矿车不从一堆混合物品中拾起与其相匹配的物品。
+|156443|在一些语言中，文本会太长并超出按钮范围。
+|165595|{{samp|level.dat}}中的{{cd|Time}}超过特定值时，守卫者激光不渲染。
+|172305|{{cmd|clear|link=none}}命令的英文回显文本中，一些单词总为复数形式。
+|181412|使用命令移除一个正在播放音乐唱片的唱片机时，其对应的音乐唱片不会停止播放。
+|181832|使用{{cmd|execute|link=none}}命令指定了维度的{{cmd|spreadplayers|link=none}}命令不会将实体在指定的维度中分散开来。
+|190146|游戏模式的一些描述有语法错误。
+|191942|多人游戏菜单中的按钮间距不均匀。
+|193497|末影人手持的高草丛和大型蕨渲染不正确。
+|194080|飞行和转向时，鞘翅模型会发生抖动。
+|198809|除非魔咒等级非常高，否则爆炸保护魔咒不削弱爆炸击退。
+|198874|打开漏斗不激怒猪灵，但打开漏斗矿车会。
+|209409|坐下的猫会沉入水中。
+|209622|幽匿感测体不能感测到与物品展示框和荧光物品展示框的交互动作。
+|209896|向重生锚中放荧石的充能动作不激活幽匿感测体。
+|209929|填充堆肥桶不激活幽匿感测体。
+|210276|踩踏耕地不激活幽匿感测体。
+|210294|骑乘或脱离非生物实体不激活幽匿感测体。
+|210334|给绵羊染色不激活幽匿感测体。
+|210707|关闭运输船、运输竹筏或运输矿车不激活幽匿感测体。
+|210715|为实体上拴绳或下拴绳不激活幽匿感测体。
+|210816|击毁潜影弹时，幽匿感测体不激活。
+|211071|{{cmd|spreadplayers|link=none}}命令的英文回显文本中，一些单词总为复数形式。
+|211194|创建新的世界菜单中调试模式显示出不符合预设的游戏模式。
+|212501|从讲台上取书不激活幽匿感测体。
+|213803|从洞穴藤蔓上收取发光浆果不激活幽匿感测体。
+|215767|海龟下蛋不激活幽匿感测体。
+|216270|无法在手持盔甲物品时用鼠标右键替换已装备的盔甲。
+|222518|骷髅马、僵尸马、驴和骡的鞍与箱子的纹理过时或有错误。
+|229293|强制转换问题：在距离很远（坐标值很大）时，破坏方块会在错误的位置掉落物品。
+|224960|{{cmd|spectate|link=none}}命令不能跨维度使用。
+|226729|原生操作中的内存泄露问题。
+|230678|冻洋生物群系中的炼药锅积累细雪时，天空中却看起来是在下雨。
+|233893|冻洋生物群系的温暖区域中，雨不会熄灭生物身上的火焰。
+|233972|按键绑定菜单中，正在给按键分配功能时或一个按键被分配了多个功能时，按钮文本会出现在按钮范围外。
+|235260|原点处的漏斗矿车传输物品的速度比正常的慢。
+|236988|对洞穴藤蔓、缠怨藤、垂泪藤或海带使用剪刀不激活幽匿感测体。
+|237450|“模拟距离”选项文本可以超出滑块范围。
+|237879|村民在堆肥桶上工作不激活幽匿感测体。
+|238904|降雨在冻洋生物群系不播放音效。
+|238920|获得木棍会解锁灵魂营火的配方。
+|247836|激流魔咒在冻洋生物群系的雨中不起作用。
+|248249|使用{{cmd|link=none|place}}命令不能正常放置出{{cd|minecraft:forest_rock}}地物。
+|249878|{{tr|音乐和声音|音樂和音效}}选项菜单中的“{{tr|设备|裝置}}”选项的文本可以出现在按钮范围外。
+|257082|玩家骑乘生物或穿着鞘翅飞行时按疾跑会更改视场角。
+|;1.19的漏洞
+|250486|更改全屏分辨率的同时，若切换全屏状态，此时日志中会出现“Error saving option GUI Scale”错误。
+|251917|将盾牌放入副手槽时不播放音效，也没有对应的字幕。
+|251934|青蛙产卵不激活幽匿感测体。
+|252434|手持拴绳时与栅栏交互不激活幽匿感测体。
+|252461|山羊不会作为击杀者显示在玩家的死亡消息中。
+|252625|向青蛙{{tr|应用|套用}}{{cd|NoAI}}NBT标签后仍会播放行走动画。
+|252773|有其他NBT标签，但无{{cd|instrument}}或{{cd|instrument}}内容不正确的山羊角不播放音效。
+|253210|山羊受到摔落伤害时会进入恐慌状态。
+|253211|青蛙受到摔落伤害时会进入恐慌状态。
+|254074|青蛙受到伤害时不播放行走动画。
+|254132|狼的纹理在冻洋生物群系的雨中不会变成深灰色。
+|;1.19.2的漏洞
+|255060|{{cmd|function|link=none}}和{{cmd|schedule|link=none}}命令的英文回显文本中，一些单词总为复数形式。
+|255087|{{cmd|worldborder|link=none}}命令的英文回显文本中，一些单词总为复数形式。
+|255545|岩浆怪阴影的大小不随其自身大小而变。
+|255811|即便正在下雨，{{cd|Level#isRainingAt(BlockPos)}}方法总会对积雪类和冰冻类生物群系返回{{cd|false}}值。
+|256270|一些多人游戏命令的英文回显文本中，一些单词总为复数形式。
+|256292|世界生成完成后，山羊不能再在草方块上生成。
+|256650|青蛙停止移动后进入空闲状态的过程没有平滑过渡。
+|257464|美西螈缓慢移动时，其行走动画会出现卡顿。
+|257755|当玩家不是任何Realms中的成员时，Realms菜单中用{{key|Tab}}键选中的按钮不是按顺序选中的。
+|257784|一些Realms相关的英文文本中，一些单词总为复数形式。
+|257873|手持盔甲与盔甲槽中同种类的盔甲交换位置时不播放音效。
+|258156|困难难度下，监守者对玩家与实体造成的伤害不相等。
+|;1.19.3的漏洞
+|256465|成年骆驼不会坐入船中，而幼年骆驼会。
+|256479|骆驼受到伤害时不播放行走动画。
+|256484|受到其所喜爱的食物吸引时，坐下的骆驼不能站起来并开始跟随手持此食物的玩家。
+|256489|处于求爱模式下的坐着的骆驼，不会站起来并靠近其他骆驼进行繁殖。
+|256493|骆驼停止移动后进入空闲状态的过程没有平滑过渡。
+|256530|骆驼在被伤害后寻路的AI比其他生物的都要慢。
+|256555|骆驼生成时会短暂坐下。
+|256576|骑上已有其他玩家骑乘的未上鞍的骆驼的玩家会获得控制权。
+|256664|向骆驼应用{{cd|NoAI}}NBT标签后仍会播放行走动画。
+|256731|“{{tr|骆驼：恢复体力|駱駝體力恢復|駱駝休息}}”音效不由“友好生物”声音滑块控制。
+|256838|骆驼的实际朝向与模型朝向不相符。
+|256861|骆驼受到摔落伤害时会进入恐慌状态。
+|257282|悦灵决定跟随玩家前，有时会有几秒的延迟。
+|257346|空手的恼鬼会做出冒犯性的手势。
+|257418|骆驼受到伤害时会短暂坐下。
+|257875|生存模式或冒险模式下，使用火焰弹点燃苦力怕不消耗火焰弹。
+|258163|{{cd|ClientboundSectionBlocksUpdatePacket}}方法会在序列化{{^|2|19}}个方块状态后中止。
+|258173|睡觉过程中进入末地传送门会使床被永久占用。
+|258246|“遥测{{tr|数据|資料|數據}}”按钮文本中缺少省略号。
+|258295|附近有工作站点时，村民AI会停止工作。
+|258430|{{cd|LastPoseTime}}值过大的骆驼会导致玩家视野模型出现奇怪的偏移。
+|258457|若资源包中引用了不存在的粒子，资源包不加载。
+|258459|若服务器强制使用的资源包无效时，客户端会在无限重复加载过程。
+|258561|将受末地水晶、TNT和凋灵之首爆炸伤害时，末影人会传送走而不是接受伤害。
+|258580|玩家骑于马或骆驼上死亡并处于死亡屏幕中时，会被服务器以“{{tr|此服务器未启用飞行|此伺服器並沒有啟用飛行|依個伺服器未啟用飛行}}”踢出。
+|258622|创造模式物品栏中，火焰弹不属于原材料。
+|258624|玩家重生后，“{{tr|你确定要退出吗？|你確定要退出了嗎？|你真係想離開遊戲？}}”屏幕不会消失。
+|258625|客户端的玩家死亡消息会随玩家按下“重生”按钮而立即消失，即使玩家由于延迟仍然停留在死亡界面。
+|258669|点击为新的世界导入数据时警告界面的“是”按钮后无响应。
+|258697|命令方块界面中的{{cd|translationKey=narration.suggestion}}翻译无效。
+|258902|冒险模式下打开并关闭讲台会导致物品栏不同步。
+|258907|在{{cd|area_effect_cloud}}实体上使用{{cd|glass_bottle}}物品时，{{cd|player_interacted_with_entity}}进度触发器不 工作。
+|258953|“{{tr|内存溢出|記憶體不足|記憶體已耗盡}}”屏幕上有未被翻译的原始消息。
+|259107|打开合成配方书时，鼠标指针下的合成配方会自动选中。
+|259241|自然生成的海龟可以生成在其他自然生成的海龟身体里，导致它们被卡住并一直发出声音。
+|259259|敌对生物身着更好的盔甲时，此盔甲不能被替换掉。
+|259666|第二次重载带自定义纹理图集的资源包会导致客户端有非常严重的FPS延迟。
+|259702|{{cd|death.attack.hotFloor.player}}字符串英文文本中，“danger”一词前缺少冠词。
+|259714|与龙息有关的英文死亡消息中，龙息一词没有使用所有格。
+|259715|{{cd|death.attack.message_too_long}}字符串英文文本中，“message”一词前缺少冠词。
+|260764|右键单击可使文本框获得焦点。
+|260765|资源包/数据包编辑屏幕上，右键点击可以移动资源包/数据包。
+|260774|在之前更改聊天设置后尝试输入聊天内容时，由于聊天消息验证失败，玩家会被踢出服务器环境。
+|259797|靴子底部有深度冲突。
+|259920|{{cd|ITEM_INTERACT_FINISH}}游戏事件会覆盖其他游戏事件，导致一些动作不能产生其预期的振动频率。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:1.19.4]]
+[[en:Java Edition 1.19.4]]
+[[es:Java Edition 1.19.4]]
+[[fr:Édition Java 1.19.4]]
+[[ja:Java Edition 1.19.4]]
+[[pl:Java Edition 1.19.4]]
+[[pt:Edição Java 1.19.4]]
+[[ru:1.19.4 (Java Edition)]]
+[[uk:1.19.4 (Java Edition)]]

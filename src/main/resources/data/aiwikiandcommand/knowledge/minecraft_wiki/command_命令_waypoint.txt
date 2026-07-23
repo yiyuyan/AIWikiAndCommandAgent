@@ -1,0 +1,93 @@
+# 页面: 命令/waypoint
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/waypoint
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:17
+# 原始 Wikitext 内容:
+
+{{Exclusive|JE}}
+{{Infobox command
+|name=waypoint
+|oplevel=2
+}}
+
+列出或更改[[路径点]]。
+
+== 语法 ==
+: <code>waypoint list</code>
+:: 列出路径点。
+: <code>waypoint modify <waypoint> color <color></code>
+: <code>waypoint modify <waypoint> color hex <color></code>
+:: 更改路径点颜色。
+: <code>waypoint modify <waypoint> color reset</code>
+:: 重置路径点颜色。
+: <code>waypoint modify <waypoint> style set <nowiki><style></nowiki></code>
+:: 设置[[路径点样式]]。
+: <code>waypoint modify <waypoint> style reset</code>
+:: 重置路径点样式为默认值。
+
+== 参数 ==
+{{argument|waypoint|entity}}
+: 指定要更改的路径点。
+: {{arg desc|je=entity|amount=single|type=entities}}
+
+{{argument|color|team_color}}（在{{cd|color <color>}}中）
+: 指定路径点颜色。
+: {{arg desc|je=team_color}}
+
+{{argument|color|hex_color}}（在{{cd|color hex <color>}}中）
+: 指定路径点颜色代码。
+: {{arg desc|je=hex_color}}
+
+{{argument|style|resource_location}}
+: 指定路径点样式名。
+: 若指定的路径点样式不存在，将显示为[[无效纹理]]。
+: {{arg desc|je=resource_location}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|{{cd|<waypoint>}}无法选出单个实体（指定的玩家必须在线上）|fail}}
+{{Result table|{{cd|<waypoint>}}不是路径点}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/waypoint list|执行成功|1|1|列出的路径点数量}}
+{{Output table|cmd=other|执行成功|1|1|0}}
+{{Output table}}
+
+== 示例 ==
+* 列出所有路径点所追踪的生物：{{cd|/waypoint list}}
+* 将最近一只猪的路径点传输距离属性基值设置为32.0，并将其路径点颜色设置为金色。
+: <syntaxhighlight lang="mcfunction">
+tag @n[type=pig] add waypoint_test
+attribute @n[tag=waypoint_test] minecraft:waypoint_transmit_range base set 32.0
+waypoint modify @n[tag=waypoint_test] color gold
+</syntaxhighlight>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.6|dev=25w15a|exp=locator_bar|加入了{{cmd|waypoint|link=none}}。}}
+|{{HistoryLine|||dev=25w17a|exp=none|{{cmd|waypoint|link=none}}不再属于[[实验性内容]]。
+|移除了<code>modify ... fade</code>子命令。
+|加入了<code>modify ... style</code>子命令。}}
+|{{HistoryLine||26.2|dev=snapshot-5|颜色参数现在不再兼容非蛇形命名的颜色名称。}}
+}}
+
+== 画廊 ==
+<gallery>
+Locator Bar Waypoint Fade.gif|[[25w16a]]中可使用命令改变路径点图标的不透明度
+</gallery>
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/waypoint]]
+[[en:Commands/waypoint]]
+[[fr:Commandes/waypoint]]
+[[ja:コマンド/waypoint]]
+[[lzh:令/waypoint]]
+[[pt:Comandos/waypoint]]

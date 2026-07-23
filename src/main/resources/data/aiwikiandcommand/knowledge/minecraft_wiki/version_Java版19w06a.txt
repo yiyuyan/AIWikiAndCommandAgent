@@ -1,0 +1,124 @@
+# 页面: Java版19w06a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8819w06a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:23
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=19w06a
+|image=19w06a.jpg
+|image2=Java Edition 19w06a Simplified.png\Java Edition 19w06a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2019年2月6日
+|jsonhash=60cb1ac72483ee66d261d3bdda543bb2a2ded49c
+|clienthash=10c8f97e8d9d32a6d0a951a7db6f51818d5d258a
+|serverhash=20c069d373e77265aaeeedb733f7051e294325a3
+|parent=1.14
+|prevparent=1.13.2
+|prev=19w05a
+|next=19w07a
+|nextparent=1.14.1
+}}<onlyinclude>
+
+'''19w06a'''是[[Java版1.14]]的第20个快照，发布于2019年2月6日<ref>{{snap|19w06a|February 6, 2019}}</ref>，加入了新的可选方块状态和新的启动界面，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[方块状态]]'''
+* 加入了新的可选[[方块]][[物品]]标签： <code>BlockStateTag</code>。
+** 格式为<code>{BlockStateTag:{''state'':"''value''",''state2'':"''value2''",''stateN'':"''valueN''"}}</code>。
+* 物品模型不受影响。
+
+'''启动界面'''
+* 在启动界面加入了进度条。
+* 加载完成后，启动屏幕将淡入主菜单。
+
+== 更改 ==
+=== 生物 ===
+'''[[流浪商人]]'''
+* 现在会在晚上喝下隐身[[药水]]。
+** 日出时会喝下[[牛奶]]解除效果。
+* 现在有一个包含方块位置的{{code|WanderTarget}}NBT标签。设置后，它们将寻找该位置。
+
+=== 世界生成 ===
+'''[[丛林神庙]]'''
+* 现在会生成于{{BiomeLink|bamboo-jungle}}。
+'''[[村庄]]'''
+* 改进了村庄铁匠铺的生成以防止被内部的熔岩引燃。
+** 沙漠铁匠铺建筑被移除。
+
+=== 常规 ===
+* 稍微改进了启动时间。
+'''[[Tutorial:升级LWJGL|LWJGL]]'''
+* 更新至3.2.1版本。
+'''[[粒子]]'''
+* 粒子现在被拆分成每帧单独的纹理文件，取代原来的{{filename|[[particles.png]]}}。
+** 不能使用<code>.mcmeta</code>文件来加载粒子动画；它们仍然是硬编码的。
+
+== 修复 ==
+{{fixes|fixedin=19w06a|prefix=Minecraft|showdesc=1
+|;old
+|11532|在创造模式创建地图时空地图仍然会被消耗。
+|79357|<code>Marker</code>NBT标签为<code>true</code>的盔甲架下落时仍会产生粒子。
+|87049|过多的爆炸烟花火箭会导致光效闪烁。
+|89000|掉在方块边缘的<code>falling_block</code>不会被清除。
+|90523|<code>falling_block</code>在栅栏或墙上悬浮。
+|91404|<code>falling_block</code>不会落在潜影贝上。
+|94420|<code>falling_block</code>掉在任意船上会悬浮在该船上的3×3格里，且永不落地。
+|114561|动物在死亡时仍能长大。
+|119808|矿车掉落物品位置偏移。
+|121152|<code>WorldClient</code>会导致玩家和画实体内存泄露。
+|126010|海沟会与峡谷相交。
+|126302|游戏主文件或资源包中的<samp>splashes.txt</samp>只有一个文本231时游戏无响应。
+|131356|烟花火箭的闪光效果丢失。
+|136400|损坏一把钻石锄时无法获得进度“终极奉献”。
+|139493|<code>falling_block</code>飘在雪（雪片）上。
+|;dev
+|138389|熊猫打喷嚏时掉落的黏液球无法捡起。
+|138617|丛林神庙无法在竹林中生成。
+|139122|玩家或实体有时会在死亡后变得不可见。
+|139477|劫掠兽在数据含有<code>NoAI:1b</code>时仍能下落。
+|140009|熊猫在游泳时仍能进食。
+|140240|新平原村庄的<code>plains_big_house_1</code>缺失地板。
+|140286|村庄楼梯不连接。
+|140698|新积雪冻原村庄的<code>snowy_small_house_7</code>缺失光源。
+|140703|武器匠的房屋会起火。
+|140710|刷怪笼中刷出掠夺者需要光源。
+|140759|部分新村庄的房屋缺失拼图方块。
+|140985|红石机械在离开区块后卡顿。
+|141004|<code>desert_weaponsmith_1</code>结构与<code>desert_blacksmith_1</code>结构重复。
+|141070|猫丢失它们的主人和项圈颜色。
+|141368|<code>[Client] java.lang.NullPointerException: Rendering screen</code>。
+|141823|末地主岛的折跃门将玩家带向小岛。
+|141898|熄灭营火会出现幽灵物品。
+|141906|Programmer Art资源包不显示营火的烟。
+|141940|工作台显示来自营火和切石机的配方。
+|142655|如果书中的JSON文本元件有误，则开启讲台上的书会导致崩溃。
+|142813|向脚手架中放置熔岩，熔岩桶被清空而放置失败。
+|142893|当熔岩中的岩浆怪骑乘僵尸时发生崩溃。
+|142916|切石机的配方使用工作台图标。
+|142958|水放置在双台阶后消失。
+|143069|<code>Marker:1b</code>的盔甲架和方块无碰撞。
+|;previous
+|143347|在刷怪蛋列表中劫掠兽刷怪蛋不按照正确的字母顺序排序。
+|143350|流浪商人的字幕缺失，显示翻译文本。
+|143351|物品展示框和拴绳在错误的位置显示。
+|143354|填充堆肥桶时没有音效。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:19w06a]]
+[[en:Java Edition 19w06a]]
+[[es:Java Edition 19w06a]]
+[[fr:Édition Java 19w06a]]
+[[it:Java Edition 19w06a]]
+[[ja:Java Edition 19w06a]]
+[[pt:Edição Java 19w06a]]
+[[ru:19w06a (Java Edition)]]
+[[th:รุ่น Java 19w06a]]

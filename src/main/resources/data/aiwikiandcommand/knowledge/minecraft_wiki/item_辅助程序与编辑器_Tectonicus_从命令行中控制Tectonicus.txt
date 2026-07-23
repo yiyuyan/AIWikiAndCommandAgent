@@ -1,0 +1,339 @@
+# 页面: 辅助程序与编辑器/Tectonicus/从命令行中控制Tectonicus
+# 来源: https://zh.minecraft.wiki/w/%E8%BE%85%E5%8A%A9%E7%A8%8B%E5%BA%8F%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8/Tectonicus/%E4%BB%8E%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E6%8E%A7%E5%88%B6Tectonicus
+# 分类: 地图查看工具
+# 抓取时间: 2026-07-14 17:36:44
+# 原始 Wikitext 内容:
+
+{{Disclaimer}}
+虽然[[Tectonicus]]可以用命令行代替XML文件进行控制，但这种方法功能有限，且不被官方支持。
+
+从命令行运行以下命令：
+
+<pre>java -jar Tectonicus_v1.0.jar</pre>
+
+（记得将版本号改成你下载文件的版本号。）这会显示所有可用选项。
+
+如果Java未在环境变量中设置，就需要用java.exe的完整路径运行Tectonicus：
+
+<pre>"C:\Program Files\Java\jre6\bin\java.exe" -jar Tectonicus_v1.0.jar</pre>
+
+在64位系统上运行时，使用force64BitNatives=true可避免内存溢出错误：
+
+<pre>"C:\Program Files (x86)\Java\jre6\bin\java.exe" -jar Tectonicus_v1.0.jar force64BitNatives=true</pre>
+
+要映射一个玩家世界，需输入：
+
+<pre>java -jar Tectonicus_v1.0.jar worldDir=1 outputDir=C:/MyMap</pre>
+
+这会映射单人游戏世界1，并输出到C:/MyMap。改变数字可映射不同的单人游戏世界。
+
+要映射多人游戏世界，需将worldDir定位到你的世界文件夹（包含level.dat的那个），如下所示：
+
+<pre>java -jar Tectonicus_v1.19.jar worldDir=C:/MinecraftMultiplayer/world</pre>
+
+查看[[Tectonicus#教程|教程]]可获取特殊命令和附加命令。
+
+== 命令行参数 ==
+在2.00版本中，命令行参数已被弃用，取而代之的是[[辅助程序与编辑器/Tectonicus/Tectonicus配置格式|XML配置文件]]。2.00及之后版本仍支持命令行方式，但唯一建议使用的参数是“config=”，用于指定配置文件的路径。
+
+{| class="wikitable" border="1" width="100%"
+|-
+! width="150px" | 名称
+! width="400px" | 设置
+! 用法
+
+|-
+| style="text-align: center;" | alphaBits
+| 
+* alphaBits=0
+* alphaBits=8（默认）
+| 用于指定分配给地图贴图Alpha通道的字节数，推荐设置为0（关闭）或8（最高）。Tectonicus会根据显卡自动匹配该数值，理论上可设置为显卡支持的任意值。关于色深的更多信息，可参见[[wzh:色深|维基百科]]。
+
+|-
+| style="text-align: center;" | bedsInitiallyVisible
+| 
+* bedsInitiallyVisible=true（默认）
+* bedsInitiallyVisible=false
+| 指定床标记在初始状态下是否可见。
+
+|-
+| style="text-align: center;" | cacheDir
+| 
+* cacheDir="[路径]"
+| 指定缓存文件夹（详见useCache）。默认开启缓存，缓存默认存储在输出目录的子目录中。
+
+|-
+| style="text-align: center;" | cameraAngle
+| 
+* cameraAngle=[x]
+* cameraAngle=45（默认）
+| 用于改变北方的方向。默认值45会呈现北方位于地图左上角的斜视图；0表示北方在正上方；90表示东方在正上方，以此类推。数值增大时，地图会逆时针旋转。
+
+|-
+| style="text-align: center;" | cameraElevation
+| 
+* cameraElevation=[x]
+* cameraElevation=45（默认）
+| 指定视角的仰角角度（单位：度）。0为水平视角，90为垂直俯视视角，默认为45。选择30可获得更传统的等距视图。
+
+|-
+| style="text-align: center;" | closestZoomSize
+| 
+* closestZoomSize=[x]
+* closestZoomSize=12（默认）
+| 该值决定了放大到最大程度时，可见区域呈现的图像文件数量。增大[x]会使摄像机在最近视图中视野更“宽”，有时需与numZoomLevels（见上文）配合使用。
+
+例如，将该值设为24时，创建的图像文件比默认值12所显示的地形多100%（即能看到“更远处”的地形）。此时，最近的文件（zoom8）及其他更宽视角的文件（zoom7-zoom0）都会被渲染。
+
+增大该数值会消耗更多内存，设置过大可能导致内存溢出错误。
+
+|-
+| style="text-align: center;" | colourDepth
+| 
+* colourDepth=24
+* colourDepth=16（默认）
+| 与Alpha字节类似，色深指定了贴图中分配使用的字节数，且会根据显卡自动匹配，可设置为显卡支持的值。推荐使用24（“上万种颜色”或“真彩色”）或16（“上千种颜色”）。更多关于色深的信息，可阅读[[wzh:色彩深度|维基百科文章]]。
+
+|-
+| style="text-align: center;" | config
+| 
+* config=configFile.xml
+| 指定要使用的配置文件。使用配置文件时，该参数必须是命令行中唯一的参数。更多信息详见[[辅助程序与编辑器/Tectonicus/Tectonicus配置格式]]。
+
+|-
+| style="text-align: center;" | dimension
+| 
+* dimension=terra（默认）
+* dimension=nether
+| 结合renderStyle=nether使用可映射下界。
+
+|-
+| style="text-align: center;" | eraseOutputDir
+| 
+* eraseOutputDir=true
+* eraseOutputDir=false（默认）
+| 设置为“true”时，会清空整个输出文件夹并重新开始映射。
+
+|-
+| style="text-align: center;" | imageCompressionLevel
+| 
+* imageCompressionLevel=[x]
+* imageCompressionLevel=0.95（默认）
+| 仅用于jpeg格式映射，可指定0.1-1.0之间的值来调整压缩等级，默认为0.95。
+
+|-
+| style="text-align: center;" | imageFormat
+| 
+* imageFormat=jpg
+* imageFormat=gif
+* imageFormat=png（默认）
+| 可通过输出jpg或gif格式文件来减小文件大小（但会牺牲图像质量）。若使用纹理包，需注意gif格式仅支持256色，无法精确呈现纹理包的细节。
+
+|-
+| style="text-align: center;" | lighting
+| 
+* lighting=none
+* lighting=night
+* lighting=day（默认）
+| 选择映射时的光照风格，可选值为“day”“night”或“none”，默认为“day”。
+
+|-
+| style="text-align: center;" | logFile
+| 
+* logFile=TectonicusLog.txt（默认）
+| 日志文件的文件名。
+
+|-
+| style="text-align: center;" | minecraftJar
+| 
+* minecraftJar="[path]"
+| Minecraft jar文件的路径，用于获取原始纹理。若未指定，会自动在AppData文件夹中查找。
+
+示例：minecraftJar="C:\Documents and Settings\User\Application Data\.minecraft\bin\minecraft.jar"
+
+|-
+| style="text-align: center;" | maxTiles
+| 
+* maxTiles=[x]
+| 该特殊参数仅用于故障排除。例如，maxTiles=100会创建基于100张贴图的“预览”映射地图（非完整地图）。
+
+|-
+| style="text-align: center;" | mode
+| 
+* mode=cmd
+* mode=gui
+* mode=players
+| 设置mode=cmd对Tectonicus的运行无影响；设置mode=gui会打开一个具有基本功能的简单图形界面，在1.18版本中，该界面可输入世界路径、输出路径和minecraft.jar位置，选择“Show Advanced Options”仅会将文字变为“advanced”；设置mode=players仅更新玩家位置（不重新映射整个地图），仅适用于多人游戏地图。
+
+详见下文的players参数。
+
+|-
+| style="text-align: center;" | numDownsampleThreads
+| 
+* numDownsampleThreads=[x]
+| 设置用于采样计算的CPU核心数量。
+
+|-
+| style="text-align: center;" | numSamples
+| 
+* numSamples=[x]
+* numSamples=4（默认）
+| 指定反混淆的采样数量，默认为4（高质量）。设置numSamples=0有时可解决显卡不支持反锯齿的问题。
+
+|-
+| style="text-align: center;" | numZoomLevels
+| 
+* numZoomLevels=[x]
+* numZoomLevels=8（默认）
+| 定义最终地图的缩放等级数量。地图加载于zoom0（缩放等级0），可用除0外的数字替换[x]。
+例如，numZoomLevels=6会提供缩放等级0-6（zoom1-zoom6）。
+最接近地形的缩放等级由参数closestZoomSize（见上文）决定。
+
+|-
+| style="text-align: center;" | outputDir
+| 
+* outputDir="[path]"
+| 必须参数，指定映射地图文件的存放文件夹。
+
+|-
+| style="text-align: center;" | outputHtmlName
+| 
+* outputHtmlName=map.html（默认）
+| 用于更改Tectonicus输出的HTML文件名，默认为map.html。
+
+|-
+| style="text-align: center;" | playerFilterFile
+| 
+* playerFilterFile="[path]"
+| 与“whitelist”和“blacklist”配合使用的文本文档路径，每行应包含一个玩家（与Minecraft管理员文件格式相同）。
+
+|-
+| style="text-align: center;" | players
+| 
+* players=none
+* players=ops
+* players=blacklist
+* players=whitelist
+* players=all（默认）
+| 默认情况下，多人游戏世界中玩家的位置会用图标标记，并显示玩家当前皮肤。设置players=none会隐藏所有玩家位置标记；设置players=ops仅显示配置文件中服务器OP列表中的玩家；设置players=whitelist仅显示过滤器文件白名单中的玩家（另见上文playerFilterFile）；设置players=blacklist会排除过滤器文件中的玩家。
+
+点击玩家标记会弹出提示气泡，显示当前皮肤、生命值和氧气槽。对于[http://www.justgiving.com/tectonicus 已捐赠]的玩家，其气泡会显示特殊标记。
+
+最终地图右下角有一个开关，可让用户隐藏或显示玩家标记。
+
+若要在不重新映射地图的情况下更新玩家标记，可使用mode参数（见上文）。
+
+|-
+| style="text-align: center;" | playersInitiallyVisible
+| 
+* playersInitiallyVisible=false
+* playersInitiallyVisible=true（默认）
+| 设置地图加载时是否显示玩家。
+
+|-
+| style="text-align: center;" | portals
+| 
+* portals=none
+* portals=all（默认）
+| 设置是否在地图上显示传送门。
+
+|-
+| style="text-align: center;" | portalsInitiallyVisible
+| 
+* portalsInitiallyVisible=false
+* portalsInitiallyVisible=true（默认）
+| 设置地图加载时是否显示传送门。
+
+|-
+| style="text-align: center;" | renderStyle
+| 
+* renderStyle=cave
+* renderStyle=nether
+* renderStyle=regular（默认）
+| 指定地图映射类型，可选择仅映射洞穴、下界（需配合参数dimension=nether）或原始世界地图。
+
+|-
+| style="text-align: center;" | showSpawn
+| 
+* showSpawn=false
+* showSpawn=true（默认）
+| 指定是否显示标记出生点的图标，可选“true”或“false”，默认为“true”。
+
+|-
+| style="text-align: center;" | signs
+| 
+* signs=none
+* signs=all
+* signs=special（默认）
+| 带有!、-、=或~特殊符号的牌子会在地图上作为位置标记显示，且符号需位于牌子文字的开头或结尾。例如，牌子“-- Lookout point --”会在所有缩放等级中作为位置标记显示，点击时会弹出气泡显示牌子的完整文字。
+
+设置signs=all会显示所有牌子，无论其文字内容如何。
+
+空白牌子会被忽略，因其通常仅用于装饰（如制作椅子）。
+
+无论设置为all还是none，最终地图右下角都会有一个折叠按钮，允许用户隐藏或显示所有牌子。
+
+|-
+| style="text-align: center;" | signsInitiallyVisible
+| 
+* signsInitiallyVisible=false
+* signsInitiallyVisible=true（默认）
+| 设置地图加载时是否显示牌子。
+
+|-
+| style="text-align: center;" | spawnInitiallyVisible
+| 
+* spawnInitiallyVisible=false
+* spawnInitiallyVisible=true（默认）
+| 设置地图加载时是否显示出生点。
+
+|-
+| style="text-align: center;" | texturePack
+| 
+* texturePack="[path]"
+| 指定要使用的自定义纹理包，默认使用minecraft.jar中的原始图像。[http://www.planetminecraft.com/texture_pack/smooth-vanilla/ Smooth Vanilla]是一个不错的纹理替代选择，其纹理减少了细节，呈现出瓷砖效果。
+
+示例：texturePack="C:\Users\Bob\Desktop\smoothvanilla_14054_texture.zip"
+
+支持高清纹理包，且无需将minecraftJar定位到minecraft.jar，因为高清纹理包已打好补丁。
+
+|-
+| style="text-align: center;" | tileSize
+| 
+* tileSize=[x]
+* tileSize=512（默认）
+| 指定输出图像贴图的尺寸（单位：像素），最小值为64，最大值为1024。
+
+|-
+| style="text-align: center;" | useBiomeColours
+| 
+* useBiomeColours=false（默认）
+* useBiomeColours=true
+| 设置草和叶子是否使用生物群系颜色，可选“true”或“false”，默认为“false”。
+
+|-
+| style="text-align: center;" | useCache
+| 
+* useCache=false
+* useCache=true（默认）
+| 开启或关闭重复映射时的缓存功能（详见上文cacheDir）。
+
+|-
+| style="text-align: center;" | verbose
+| 
+* verbose=true
+* verbose=false（默认）
+| 设置为true时，映射过程中会打印相关调试数据。
+
+|-
+| style="text-align: center;" | worldDir
+| 
+* worldDir="[path]"
+* worldDir=[x]
+| 必须参数，指定Minecraft世界文件夹（包含level.dat文件）。
+
+|}
+
+[[Category:地图查看工具]]
+
+[[en:Tutorials/Programs and editors/Tectonicus/Controlling Tectonicus from the command line]]

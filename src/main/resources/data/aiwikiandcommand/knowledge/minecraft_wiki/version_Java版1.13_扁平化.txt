@@ -1,0 +1,3936 @@
+# 页面: Java版1.13/扁平化
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.13/%E6%89%81%E5%B9%B3%E5%8C%96
+# 分类: Java版独有特性, 失效链接
+# 抓取时间: 2026-07-14 17:13:18
+# 原始 Wikitext 内容:
+
+{{redirect|扁平化|基岩版的扁平化|基岩版扁平化}}{{exclusive|java}}
+[[Java版1.13]]版本修改了许多方块和物品的数据值，亦添加并移除了一些方块状态。<ref>{{bug|MC-105922}}中的 https://bugs.mojang.com/secure/attachment/151784/the_flattening.txt {{dead link}}</ref>这个过程也被称作“'''扁平化（The Flattening）'''”。
+
+此页面当前的内容为[[Java版1.12.2|1.12.2]]和[[Java版1.13|1.13]]版本之间标识符的比较。
+
+== 方块和物品ID ==
+以任何方式更改了ID的[[方块]]和[[物品]]也会改变其[[统计信息]]。
+{|class="wikitable"
+! rowspan="2" | 改动
+! colspan="2" | [[Java版1.12.2]]
+! colspan="2" | [[Java版1.13]]
+|-
+! 方块
+! [[命名空间ID]]
+! 方块
+! [[命名空间ID]]
+|-
+| rowspan="7" | 拆分
+| rowspan="7" | {{BlockSprite|stone}} [[石头]]
+| rowspan="7" | {{code|stone}}
+| {{BlockSprite|stone}} [[石头]]
+| {{code|stone}}
+|-
+| {{BlockSprite|granite}} [[花岗岩]]
+| {{code|granite}}
+|-
+| {{BlockSprite|polished-granite}} [[磨制花岗岩]]
+| {{code|polished_granite}}
+|-
+| {{BlockSprite|diorite}} [[闪长岩]]
+| {{code|diorite}}
+|-
+| {{BlockSprite|polished-diorite}} [[磨制闪长岩]]
+| {{code|polished_diorite}}
+|-
+| {{BlockSprite|andesite}} [[安山岩]]
+| {{code|andesite}}
+|-
+| {{BlockSprite|polished-andesite}} [[磨制安山岩]]
+| {{code|polished_andesite}}
+|-
+| 重命名
+| {{BlockSprite|grass-block}} [[草方块]]
+| {{code|grass}}
+| {{BlockSprite|grass-block}} [[草方块]]
+| {{code|grass_block}}
+|-
+| rowspan="3" | 拆分
+| rowspan="3" | {{BlockSprite|dirt}} [[泥土]]
+| rowspan="3" | {{code|dirt}}
+| {{BlockSprite|dirt}} [[泥土]]
+| {{code|dirt}}
+|-
+| {{BlockSprite|coarse-dirt}} [[砂土]]
+| {{code|coarse_dirt}}
+|-
+| {{BlockSprite|podzol}} [[灰化土]]
+| {{code|podzol}}
+|-
+| rowspan="6" | 拆分
+| rowspan="6" | {{BlockSprite|all-planks}} [[木板]]
+| rowspan="6" | {{code|planks}}
+| {{BlockSprite|oak-planks}} [[橡木木板]]
+| {{code|oak_planks}}
+|-
+| {{BlockSprite|spruce-planks}} [[云杉木板]]
+| {{code|spruce_planks}}
+|-
+| {{BlockSprite|birch-planks}} [[白桦木板]]
+| {{code|birch_planks}}
+|-
+| {{BlockSprite|jungle-planks}} [[丛林木板]]
+| {{code|jungle_planks}}
+|-
+| {{BlockSprite|acacia-planks}} [[金合欢木板]]
+| {{code|acacia_planks}}
+|-
+| {{BlockSprite|dark-oak-planks}} [[深色橡木木板]]
+| {{code|dark_oak_planks}}
+|-
+| rowspan="6" | 拆分
+| rowspan="6" | {{BlockSprite|all-saplings}} [[树苗]]
+| rowspan="6" | {{code|sapling}}
+| {{BlockSprite|oak-sapling}} [[橡树树苗]]
+| {{code|oak_sapling}}
+|-
+| {{BlockSprite|spruce-sapling}} [[云杉树苗]]
+| {{code|spruce_sapling}}
+|-
+| {{BlockSprite|birch-sapling}} [[白桦树苗]]
+| {{code|birch_sapling}}
+|-
+| {{BlockSprite|jungle-sapling}} [[丛林树苗]]
+| {{code|jungle_sapling}}
+|-
+| {{BlockSprite|acacia-sapling}} [[金合欢树苗]]
+| {{code|acacia_sapling}}
+|-
+| {{BlockSprite|dark-oak-sapling}} [[深色橡树树苗]]
+| {{code|dark_oak_sapling}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{BlockSprite|sand}} [[沙子]]
+| rowspan="2" | {{code|sand}}
+| {{BlockSprite|sand}} [[沙子]]
+| {{code|sand}}
+|-
+| {{BlockSprite|red-sand}} [[红沙]]
+| {{code|red_sand}}
+|-
+| rowspan="8" | 拆分
+| rowspan="8" | {{BlockSprite|all-logs}} [[原木]]
+| rowspan="8" | {{code|log}}
+| {{BlockSprite|oak-log}} [[橡木原木]]
+| {{code|oak_log}}
+|-
+| {{BlockSprite|spruce-log}} [[云杉原木]]
+| {{code|spruce_log}}
+|-
+| {{BlockSprite|birch-log}} [[白桦原木]]
+| {{code|birch_log}}
+|-
+| {{BlockSprite|jungle-log}} [[丛林原木]]
+| {{code|jungle_log}}
+|-
+| {{BlockSprite|oak-wood}} [[木头|橡木]]
+| {{code|oak_wood}}
+|-
+| {{BlockSprite|spruce-wood}} [[云杉木]]
+| {{code|spruce_wood}}
+|-
+| {{BlockSprite|birch-wood}} [[白桦木]]
+| {{code|birch_wood}}
+|-
+| {{BlockSprite|jungle-wood}} [[丛林木]]
+| {{code|jungle_wood}}
+|-
+| rowspan="4" | 拆分
+| rowspan="4" | {{BlockSprite|all-logs}} [[原木]]（2）
+| rowspan="4" | {{code|log2}}
+| {{BlockSprite|acacia-log}} [[金合欢原木]]
+| {{code|acacia_log}}
+|-
+| {{BlockSprite|dark-oak-log}} [[深色橡木原木]]
+| {{code|dark_oak_log}}
+|-
+| {{BlockSprite|acacia-wood}} [[金合欢木]]
+| {{code|acacia_wood}}
+|-
+| {{BlockSprite|dark-oak-wood}} [[深色橡木]]
+| {{code|dark_oak_wood}}
+|-
+| rowspan="4" | 拆分
+| rowspan="4" | {{BlockSprite|all-leaves}} [[树叶]]
+| rowspan="4" | {{code|leaves}}
+| {{BlockSprite|oak-leaves}} [[橡树树叶]]
+| {{code|oak_leaves}}
+|-
+| {{BlockSprite|spruce-leaves}} [[云杉树叶]]
+| {{code|spruce_leaves}}
+|-
+| {{BlockSprite|birch-leaves}} [[白桦树叶]]
+| {{code|birch_leaves}}
+|-
+| {{BlockSprite|jungle-leaves}} [[丛林树叶]]
+| {{code|jungle_leaves}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{BlockSprite|all-leaves}} [[树叶]]（2）
+| rowspan="2" | {{code|leaves2}}
+| {{BlockSprite|acacia-leaves}} [[金合欢树叶]]
+| {{code|acacia_leaves}}
+|-
+| {{BlockSprite|dark-oak-leaves}} [[深色橡树树叶]]
+| {{code|dark_oak_leaves}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{BlockSprite|sponge}} [[海绵]]
+| rowspan="2" | {{code|sponge}}
+| {{BlockSprite|sponge}} [[海绵]]
+| {{code|sponge}}
+|-
+| {{BlockSprite|wet-sponge}} [[湿海绵]]
+| {{code|wet_sponge}}
+|-
+| rowspan="3" | 拆分
+| rowspan="3" | {{BlockSprite|sandstone}} [[砂岩]]
+| rowspan="3" | {{code|sandstone}}
+| {{BlockSprite|sandstone}} [[砂岩]]
+| {{code|sandstone}}
+|-
+| {{BlockSprite|chiseled-sandstone}} [[雕纹砂岩]]
+| {{code|chiseled_sandstone}}
+|-
+| {{BlockSprite|cut-sandstone}} [[切制砂岩]]
+| {{code|cut_sandstone}}
+|-
+| 重命名
+| {{BlockSprite|note-block}} [[音符盒]]
+| {{code|noteblock}}
+| {{BlockSprite|note-block}} [[音符盒]]
+| {{code|note_block}}
+|-
+| 重命名
+| {{BlockSprite|powered-rail}} [[动力铁轨]]
+| {{code|golden_rail}}
+| {{BlockSprite|powered-rail}} [[动力铁轨]]
+| {{code|powered_rail}}
+|-
+| 重命名
+| {{BlockSprite|cobweb}} [[蜘蛛网]]
+| {{code|web}}
+| {{BlockSprite|cobweb}} [[蜘蛛网]]
+| {{code|cobweb}}
+|-
+| rowspan="3" | 拆分
+| rowspan="3" | {{BlockSprite|grass}} [[草丛]]
+| rowspan="3" | {{code|tallgrass}}
+| {{BlockSprite|dead-bush}} [[枯萎的灌木]]<ref group="注">原先数据值为0的草丛变种（即[[灌木（已移除方块）|灌木]]）现在会转化为枯萎的灌木。</ref>
+| {{code|dead_bush}}
+|-
+| {{BlockSprite|grass}} [[草丛]]
+| {{code|grass}}
+|-
+| {{BlockSprite|fern}} [[蕨]]
+| {{code|fern}}
+|-
+| 重命名
+| {{BlockSprite|dead-bush}} [[枯萎的灌木]]
+| {{code|deadbush}}
+| {{BlockSprite|dead-bush}} [[枯萎的灌木]]
+| {{code|dead_bush}}
+|-
+| 重命名
+| {{BlockSprite|moving-piston}} [[移动的活塞]] <ref group="注" name="noitemform">这个方块没有物品形式。</ref>
+| {{code|piston_extension}}
+| {{BlockSprite|moving-piston}} [[移动的活塞]] <ref group="注" name="noitemform" />
+| {{code|moving_piston}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{BlockSprite|all-wool}} [[羊毛]]
+| rowspan="16" | {{code|wool}}
+| {{BlockSprite|white-wool}} [[白色羊毛]]
+| {{code|white_wool}}
+|-
+| {{BlockSprite|orange-wool}} [[橙色羊毛]]
+| {{code|orange_wool}}
+|-
+| {{BlockSprite|magenta-wool}} [[品红色羊毛]]
+| {{code|magenta_wool}}
+|-
+| {{BlockSprite|light-blue-wool}} [[淡蓝色羊毛]]
+| {{code|light_blue_wool}}
+|-
+| {{BlockSprite|yellow-wool}} [[黄色羊毛]]
+| {{code|yellow_wool}}
+|-
+| {{BlockSprite|lime-wool}} [[黄绿色羊毛]]
+| {{code|lime_wool}}
+|-
+| {{BlockSprite|pink-wool}} [[粉红色羊毛]]
+| {{code|pink_wool}}
+|-
+| {{BlockSprite|gray-wool}} [[灰色羊毛]]
+| {{code|gray_wool}}
+|-
+| {{BlockSprite|light-gray-wool}} [[淡灰色羊毛]]
+| {{code|light_gray_wool}}
+|-
+| {{BlockSprite|cyan-wool}} [[青色羊毛]]
+| {{code|cyan_wool}}
+|-
+| {{BlockSprite|purple-wool}} [[紫色羊毛]]
+| {{code|purple_wool}}
+|-
+| {{BlockSprite|blue-wool}} [[蓝色羊毛]]
+| {{code|blue_wool}}
+|-
+| {{BlockSprite|brown-wool}} [[棕色羊毛]]
+| {{code|brown_wool}}
+|-
+| {{BlockSprite|green-wool}} [[绿色羊毛]]
+| {{code|green_wool}}
+|-
+| {{BlockSprite|red-wool}} [[红色羊毛]]
+| {{code|red_wool}}
+|-
+| {{BlockSprite|black-wool}} [[黑色羊毛]]
+| {{code|black_wool}}
+|-
+| 重命名
+| {{BlockSprite|dandelion}} [[蒲公英]]
+| {{code|yellow_flower}}
+| {{BlockSprite|dandelion}} [[蒲公英]]
+| {{code|dandelion}}
+|-
+| rowspan="9" | 拆分
+| rowspan="9" | {{BlockSprite|poppy}} [[花]]
+| rowspan="9" | {{code|red_flower}}
+| {{BlockSprite|poppy}} [[虞美人]]
+| {{code|poppy}}
+|-
+| {{BlockSprite|blue-orchid}} [[兰花]]
+| {{code|blue_orchid}}
+|-
+| {{BlockSprite|allium}} [[绒球葱]]
+| {{code|allium}}
+|-
+| {{BlockSprite|azure-bluet}} [[蓝花美耳草]]
+| {{code|azure_bluet}}
+|-
+| {{BlockSprite|red-tulip}} [[红色郁金香]]
+| {{code|red_tulip}}
+|-
+| {{BlockSprite|orange-tulip}} [[橙色郁金香]]
+| {{code|orange_tulip}}
+|-
+| {{BlockSprite|white-tulip}} [[白色郁金香]]
+| {{code|white_tulip}}
+|-
+| {{BlockSprite|pink-tulip}} [[粉红色郁金香]]
+| {{code|pink_tulip}}
+|-
+| {{BlockSprite|oxeye-daisy}} [[滨菊]]
+| {{code|oxeye_daisy}}
+|-
+| rowspan="6" | 重新分类
+| rowspan="3" | {{BlockSprite|double-all-wooden-slabs}} [[木台阶|木质双层台阶]] <ref group="注" name="noitemform" />
+| rowspan="3" | {{code|double_wooden_slab}}
+| {{BlockSprite|oak-slab}} [[橡木台阶]]
+| {{code|oak_slab}}
+|-
+| {{BlockSprite|spruce-slab}} [[云杉木台阶]]
+| {{code|spruce_slab}}
+|-
+| {{BlockSprite|birch-slab}} [[白桦木台阶]]
+| {{code|birch_slab}}
+|-
+| rowspan="3" | {{BlockSprite|all-wooden-slabs}} [[木质台阶]]
+| rowspan="3" | {{code|wooden_slab}}
+| {{BlockSprite|jungle-slab}} [[丛林木台阶]]
+| {{code|jungle_slab}}
+|-
+| {{BlockSprite|acacia-slab}} [[金合欢木台阶]]
+| {{code|acacia_slab}}
+|-
+| {{BlockSprite|dark-oak-slab}} [[深色橡木台阶]]
+| {{code|dark_oak_slab}}
+|-
+| rowspan="11" | 重新分类
+| rowspan="5" | {{BlockSprite|double-all-slabs}} [[台阶|石质双层台阶]] <ref group="注" name="noitemform" />
+| rowspan="5" | {{code|double_stone_slab}}
+| {{BlockSprite|smooth-stone-slab}} [[石台阶]]
+| {{code|stone_slab}}
+|-
+| {{BlockSprite|sandstone-slab}} [[砂岩台阶]]
+| {{code|sandstone_slab}}
+|-
+| {{BlockSprite|petrified-oak-slab}} [[石化橡木台阶]]
+| {{code|petrified_oak_slab}}
+|-
+| {{BlockSprite|cobblestone-slab}} [[圆石台阶]]
+| {{code|cobblestone_slab}}
+|-
+| {{BlockSprite|brick-slab}} [[砖台阶]]
+| {{code|brick_slab}}
+|-
+| rowspan="6" | {{BlockSprite|all-slabs}} [[台阶|石质台阶]]
+| rowspan="6" | {{code|stone_slab}}
+| {{BlockSprite|stone-brick-slab}} [[石砖台阶]]
+| {{code|stone_brick_slab}}
+|-
+| {{BlockSprite|nether-brick-slab}} [[下界砖台阶]]
+| {{code|nether_brick_slab}}
+|-
+| {{BlockSprite|quartz-slab}} [[石英台阶]]
+| {{code|quartz_slab}}
+|-
+| {{BlockSprite|smooth-stone}} [[平滑石头]]
+| {{code|smooth_stone}}
+|-
+| {{BlockSprite|smooth-sandstone}} [[平滑砂岩]]
+| {{code|smooth_sandstone}}
+|-
+| {{BlockSprite|smooth-quartz}} [[平滑石英块]]
+| {{code|smooth_quartz}}
+|-
+| rowspan="2" | 重新分类
+| {{BlockSprite|red-sandstone-double-slab}} [[砂岩台阶|红砂岩双层台阶]] <ref group="注" name="noitemform" />
+| {{code|double_stone_slab2}}
+| {{BlockSprite|red-sandstone-slab}} [[红砂岩台阶]]
+| {{code|red_sandstone_slab}}
+|-
+| {{BlockSprite|red-sandstone-slab}} [[红砂岩台阶]]
+| {{code|stone_slab2}}
+| {{BlockSprite|smooth-red-sandstone}} [[平滑红砂岩]]
+| {{code|smooth_red_sandstone}}
+|-
+| rowspan="2" | 合并
+| {{BlockSprite|purpur-double-slab}} [[紫珀台阶|紫珀双层台阶]] <ref group="注" name="noitemform" />
+| {{code|double_purpur_slab}}
+| rowspan="2" | {{BlockSprite|purpur-slab}} [[紫珀台阶]]
+| rowspan="2" | {{code|purpur_slab}}
+|-
+| {{BlockSprite|purpur-slab}} [[紫珀台阶]]
+| {{code|purpur_slab}}
+|-
+| 重命名
+| {{BlockSprite|bricks}} [[砖块]]
+| {{code|brick_block}}
+| {{BlockSprite|bricks}} [[砖块]]
+| {{code|bricks}}
+|-
+| 重命名
+| {{BlockSprite|spawner}} [[刷怪笼]]
+| {{code|mob_spawner}}
+| {{BlockSprite|spawner}} [[刷怪笼]]
+| {{code|spawner}}
+|-
+| 重命名
+| {{BlockSprite|nether-portal}} [[下界传送门]]
+| {{code|portal}}
+| {{BlockSprite|nether-portal}} [[下界传送门]]
+| {{code|nether_portal}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{BlockSprite|torch}} [[火把]]
+| rowspan="2" | {{code|torch}}
+| {{BlockSprite|wall-torch}} [[墙上的火把]] <ref group="注" name="noitemform" />
+| {{code|wall_torch}}
+|-
+| {{BlockSprite|torch}} [[火把]]
+| {{code|torch}}
+|-
+| rowspan="2" | 合并
+| {{BlockSprite|furnace}} [[熔炉]]
+| {{code|furnace}}
+| rowspan="2" | {{BlockSprite|furnace}} [[熔炉]]
+| rowspan="2" | {{code|furnace}}
+|-
+| {{BlockSprite|lit-furnace}} [[熔炉|燃烧中的熔炉]] <ref group="注" name="noitemform" />
+| {{code|lit_furnace}}
+|-
+| 重命名
+| {{BlockSprite|cobblestone-stairs}} [[圆石楼梯]]
+| {{code|stone_stairs}}
+| {{BlockSprite|cobblestone-stairs}} [[圆石楼梯]]
+| {{code|cobblestone_stairs}}
+|-
+| 重命名
+| {{BlockSprite|oak-pressure-plate}} [[橡木压力板]]
+| {{code|wooden_pressure_plate}}
+| {{BlockSprite|oak-pressure-plate}} [[橡木压力板]]
+| {{code|oak_pressure_plate}}
+|-
+| rowspan="2" | 合并
+| {{BlockSprite|redstone-ore}} [[红石矿石]]
+| {{code|redstone_ore}}
+| rowspan="2" | {{BlockSprite|redstone-ore}} [[红石矿石]]
+| rowspan="2" | {{code|redstone_ore}}
+|-
+| {{BlockSprite|redstone-ore}} [[红石矿石|发光的红石矿石]] <ref group="注" name="noitemform" />
+| {{code|lit_redstone_ore}}
+|-
+| rowspan="2" | 重新分类
+| {{BlockSprite|unlit-redstone-torch}} [[红石火把|熄灭的红石火把]] <ref group="注" name="noitemform" />
+| {{code|unlit_redstone_torch}}
+| {{BlockSprite|redstone-wall-torch}} [[墙上的红石火把]] <ref group="注" name="noitemform" />
+| {{code|redstone_wall_torch}}
+|-
+| {{BlockSprite|redstone-torch}} [[红石火把]]
+| {{code|redstone_torch}}
+| {{BlockSprite|redstone-torch}} [[红石火把]]
+| {{code|redstone_torch}}
+|-
+| 重命名
+| {{BlockSprite|snow}} [[雪]]
+| {{code|snow_layer}}
+| {{BlockSprite|snow}} [[雪]]
+| {{code|snow}}
+|-
+| 重命名
+| {{BlockSprite|snow-block}} [[雪块]]
+| {{code|snow}}
+| {{BlockSprite|snow-block}} [[雪块]]
+| {{code|snow_block}}
+|-
+| 重命名
+| {{BlockSprite|oak-fence}} [[橡木栅栏]]
+| {{code|fence}}
+| {{BlockSprite|oak-fence}} [[橡木栅栏]]
+| {{code|oak_fence}}
+|-
+| 重命名
+| {{BlockSprite|carved-pumpkin}} [[雕刻南瓜]]
+| {{code|pumpkin}}
+| {{BlockSprite|carved-pumpkin}} [[雕刻南瓜]]
+| {{code|carved_pumpkin}}
+|-
+| 重命名
+| {{BlockSprite|jack-o'lantern}} [[南瓜灯]]
+| {{code|lit_pumpkin}}
+| {{BlockSprite|jack-o'lantern}} [[南瓜灯]]
+| {{code|jack_o_lantern}}
+|-
+| 重命名
+| {{BlockSprite|oak-trapdoor}} [[橡木活板门]]
+| {{code|trapdoor}}
+| {{BlockSprite|oak-trapdoor}} [[橡木活板门]]
+| {{code|oak_trapdoor}}
+|-
+| rowspan="6" | 拆分
+| rowspan="6" | {{BlockSprite|infested-blocks}} [[虫蚀方块]]
+| rowspan="6" | {{code|monster_egg}}
+| {{BlockSprite|infested-stone}} [[虫蚀石头]]
+| {{code|infested_stone}}
+|-
+| {{BlockSprite|infested-cobblestone}} [[虫蚀圆石]]
+| {{code|infested_cobblestone}}
+|-
+| {{BlockSprite|infested-stone-bricks}} [[虫蚀石砖]]
+| {{code|infested_stone_bricks}}
+|-
+| {{BlockSprite|infested-mossy-stone-bricks}} [[虫蚀苔石砖]]
+| {{code|infested_mossy_stone_bricks}}
+|-
+| {{BlockSprite|infested-cracked-stone-bricks}} [[虫蚀裂纹石砖]]
+| {{code|infested_cracked_stone_bricks}}
+|-
+| {{BlockSprite|infested-chiseled-stone-bricks}} [[虫蚀雕纹石砖]]
+| {{code|infested_chiseled_stone_bricks}}
+|-
+| rowspan="4" | 拆分
+| rowspan="4" | {{BlockSprite|stone-bricks}} [[石砖]]
+| rowspan="4" | {{code|stonebrick}}
+| {{BlockSprite|stone-bricks}} [[石砖]]
+| {{code|stone_bricks}}
+|-
+| {{BlockSprite|mossy-stone-bricks}} [[苔石砖]]
+| {{code|mossy_stone_bricks}}
+|-
+| {{BlockSprite|cracked-stone-bricks}} [[裂纹石砖]]
+| {{code|cracked_stone_bricks}}
+|-
+| {{BlockSprite|chiseled-stone-bricks}} [[雕纹石砖]]
+| {{code|chiseled_stone_bricks}}
+|-
+| rowspan="4" | 重新分类
+| rowspan="2" | {{BlockSprite|brown-mushroom-block}} [[棕色蘑菇方块]]
+| rowspan="2" | {{code|brown_mushroom_block}}
+| {{BlockSprite|brown-mushroom-block}} [[棕色蘑菇方块]]
+| {{code|brown_mushroom_block}}
+|-
+| rowspan="2" | {{BlockSprite|mushroom-stem}} [[蘑菇柄]]
+| rowspan="2" | {{code|mushroom_stem}}
+|-
+| rowspan="2" | {{BlockSprite|red-mushroom-block}} [[红色蘑菇方块]]
+| rowspan="2" | {{code|red_mushroom_block}}
+|-
+| {{BlockSprite|red-mushroom-block}} [[红色蘑菇方块]]
+| {{code|red_mushroom_block}}
+|-
+| 重命名
+| {{BlockSprite|melon}} [[西瓜]]
+| {{code|melon_block}}
+| {{BlockSprite|melon}} [[西瓜]]
+| {{code|melon}}
+|-
+| 重命名
+| {{BlockSprite|oak-fence-gate}} [[橡木栅栏门]]
+| {{code|fence_gate}}
+| {{BlockSprite|oak-fence-gate}} [[橡木栅栏门]]
+| {{code|oak_fence_gate}}
+|-
+| 重命名
+| {{BlockSprite|lily-pad}} [[睡莲]]
+| {{code|waterlily}}
+| {{BlockSprite|lily-pad}} [[睡莲]]
+| {{code|lily_pad}}
+|-
+| 重命名
+| {{BlockSprite|nether-bricks}} [[下界砖块]]
+| {{code|nether_brick}}
+| {{BlockSprite|nether-bricks}} [[下界砖块]]
+| {{code|nether_bricks}}
+|-
+| 重命名
+| {{BlockSprite|end-stone-bricks}} [[末地石砖]]
+| {{code|end_bricks}}
+| {{BlockSprite|end-stone-bricks}} [[末地石砖]]
+| {{code|end_stone_bricks}}
+|-
+| rowspan="2" | 合并
+| {{BlockSprite|redstone-lamp}} [[红石灯]]
+| {{code|redstone_lamp}}
+| rowspan="2" | {{BlockSprite|redstone-lamp}} [[红石灯]]
+| rowspan="2" | {{code|redstone_lamp}}
+|-
+| {{BlockSprite|lit-redstone-lamp}} [[发光的红石灯]] <ref group="注" name="noitemform" />
+| {{code|lit_redstone_lamp}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{BlockSprite|cobblestone-wall}} [[圆石墙]]
+| rowspan="2" | {{code|cobblestone_wall}}
+| {{BlockSprite|cobblestone-wall}} [[圆石墙]]
+| {{code|cobblestone_wall}}
+|-
+| {{BlockSprite|mossy-cobblestone-wall}} [[苔石墙]]
+| {{code|mossy_cobblestone_wall}}
+|-
+| 重命名
+| {{BlockSprite|oak-button}} [[橡木按钮]]
+| {{code|wooden_button}}
+| {{BlockSprite|oak-button}} [[橡木按钮]]
+| {{code|oak_button}}
+|-
+| rowspan="3" | 拆分
+| rowspan="3" | {{BlockSprite|anvil}} [[铁砧]]
+| rowspan="3" | {{code|anvil}}
+| {{BlockSprite|anvil}} [[铁砧]]
+| {{code|anvil}}
+|-
+| {{BlockSprite|chipped-anvil}} [[开裂的铁砧]]
+| {{code|chipped_anvil}}
+|-
+| {{BlockSprite|damaged-anvil}} [[损坏的铁砧]]
+| {{code|damaged_anvil}}
+|-
+| rowspan="2" | 合并
+| {{BlockSprite|daylight-detector}} [[阳光探测器]]
+| {{code|daylight_detector}}
+| rowspan="2" | {{BlockSprite|daylight-detector}} [[阳光探测器]]
+| rowspan="2" | {{code|daylight_detector}}
+|-
+| {{BlockSprite|inverted-daylight-detector}} [[反向阳光探测器]] <ref group="注" name="noitemform" />
+| {{code|daylight_detector_inverted}}
+|-
+| 重命名
+| {{BlockSprite|nether-quartz-ore}} [[下界石英矿石]]
+| {{code|quartz_ore}}
+| {{BlockSprite|nether-quartz-ore}} [[下界石英矿石]]
+| {{code|nether_quartz_ore}}
+|-
+| rowspan="3" | 拆分
+| rowspan="3" | {{BlockSprite|block-of-quartz}} [[石英块]]
+| rowspan="3" | {{code|quartz_block}}
+| {{BlockSprite|block-of-quartz}} [[石英块]]
+| {{code|quartz_block}}
+|-
+| {{BlockSprite|chiseled-quartz-block}} [[雕纹石英块]]
+| {{code|chiseled_quartz_block}}
+|-
+| {{BlockSprite|quartz-pillar}} [[石英柱]]
+| {{code|quartz_pillar}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{BlockSprite|colored-terracotta}} [[染色陶瓦]]
+| rowspan="16" | {{code|stained_hardened_clay}}
+| {{BlockSprite|white-terracotta}} [[白色陶瓦]]
+| {{code|white_terracotta}}
+|-
+| {{BlockSprite|orange-terracotta}} [[橙色陶瓦]]
+| {{code|orange_terracotta}}
+|-
+| {{BlockSprite|magenta-terracotta}} [[品红色陶瓦]]
+| {{code|magenta_terracotta}}
+|-
+| {{BlockSprite|light-blue-terracotta}} [[淡蓝色陶瓦]]
+| {{code|light_blue_terracotta}}
+|-
+| {{BlockSprite|yellow-terracotta}} [[黄色陶瓦]]
+| {{code|yellow_terracotta}}
+|-
+| {{BlockSprite|lime-terracotta}} [[黄绿色陶瓦]]
+| {{code|lime_terracotta}}
+|-
+| {{BlockSprite|pink-terracotta}} [[粉红色陶瓦]]
+| {{code|pink_terracotta}}
+|-
+| {{BlockSprite|gray-terracotta}} [[灰色陶瓦]]
+| {{code|gray_terracotta}}
+|-
+| {{BlockSprite|light-gray-terracotta}} [[淡灰色陶瓦]]
+| {{code|light_gray_terracotta}}
+|-
+| {{BlockSprite|cyan-terracotta}} [[青色陶瓦]]
+| {{code|cyan_terracotta}}
+|-
+| {{BlockSprite|purple-terracotta}} [[紫色陶瓦]]
+| {{code|purple_terracotta}}
+|-
+| {{BlockSprite|blue-terracotta}} [[蓝色陶瓦]]
+| {{code|blue_terracotta}}
+|-
+| {{BlockSprite|brown-terracotta}} [[棕色陶瓦]]
+| {{code|brown_terracotta}}
+|-
+| {{BlockSprite|green-terracotta}} [[绿色陶瓦]]
+| {{code|green_terracotta}}
+|-
+| {{BlockSprite|red-terracotta}} [[红色陶瓦]]
+| {{code|red_terracotta}}
+|-
+| {{BlockSprite|black-terracotta}} [[黑色陶瓦]]
+| {{code|black_terracotta}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{BlockSprite|all-carpets}} [[地毯]]
+| rowspan="16" | {{code|carpet}}
+| {{BlockSprite|white-carpet}} [[白色地毯]]
+| {{code|white_carpet}}
+|-
+| {{BlockSprite|orange-carpet}} [[橙色地毯]]
+| {{code|orange_carpet}}
+|-
+| {{BlockSprite|magenta-carpet}} [[品红色地毯]]
+| {{code|magenta_carpet}}
+|-
+| {{BlockSprite|light-blue-carpet}} [[淡蓝色地毯]]
+| {{code|light_blue_carpet}}
+|-
+| {{BlockSprite|yellow-carpet}} [[黄色地毯]]
+| {{code|yellow_carpet}}
+|-
+| {{BlockSprite|lime-carpet}} [[黄绿色地毯]]
+| {{code|lime_carpet}}
+|-
+| {{BlockSprite|pink-carpet}} [[粉红色地毯]]
+| {{code|pink_carpet}}
+|-
+| {{BlockSprite|gray-carpet}} [[灰色地毯]]
+| {{code|gray_carpet}}
+|-
+| {{BlockSprite|light-gray-carpet}} [[淡灰色地毯]]
+| {{code|light_gray_carpet}}
+|-
+| {{BlockSprite|cyan-carpet}} [[青色地毯]]
+| {{code|cyan_carpet}}
+|-
+| {{BlockSprite|purple-carpet}} [[紫色地毯]]
+| {{code|purple_carpet}}
+|-
+| {{BlockSprite|blue-carpet}} [[蓝色地毯]]
+| {{code|blue_carpet}}
+|-
+| {{BlockSprite|brown-carpet}} [[棕色地毯]]
+| {{code|brown_carpet}}
+|-
+| {{BlockSprite|green-carpet}} [[绿色地毯]]
+| {{code|green_carpet}}
+|-
+| {{BlockSprite|red-carpet}} [[红色地毯]]
+| {{code|red_carpet}}
+|-
+| {{BlockSprite|black-carpet}} [[黑色地毯]]
+| {{code|black_carpet}}
+|-
+| 重命名
+| {{BlockSprite|terracotta}} [[陶瓦]]
+| {{code|hardened_clay}}
+| {{BlockSprite|terracotta}} [[陶瓦]]
+| {{code|terracotta}}
+|-
+| 重命名
+| {{BlockSprite|slime-block}} [[黏液块]]
+| {{code|slime}}
+| {{BlockSprite|slime-block}} [[黏液块]]
+| {{code|slime_block}}
+|-
+| rowspan="6" | 拆分
+| rowspan="6" | {{BlockSprite|sunflower}} [[花|大型植物]]
+| rowspan="6" | {{code|double_plant}}
+| {{BlockSprite|sunflower}} [[向日葵]]
+| {{code|sunflower}}
+|-
+| {{BlockSprite|lilac}} [[丁香]]
+| {{code|lilac}}
+|-
+| {{BlockSprite|tall-grass}} [[高草丛]]
+| {{code|tall_grass}}
+|-
+| {{BlockSprite|large-fern}} [[大型蕨]]
+| {{code|large_fern}}
+|-
+| {{BlockSprite|rose Bush}} [[玫瑰丛]]
+| {{code|rose_bush}}
+|-
+| {{BlockSprite|peony}} [[牡丹]]
+| {{code|peony}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{BlockSprite|all-stained-glass}} [[染色玻璃]]
+| rowspan="16" | {{code|stained_glass}}
+| {{BlockSprite|white-stained-glass}} [[白色染色玻璃]]
+| {{code|white_stained_glass}}
+|-
+| {{BlockSprite|orange-stained-glass}} [[橙色染色玻璃]]
+| {{code|orange_stained_glass}}
+|-
+| {{BlockSprite|magenta-stained-glass}} [[品红色染色玻璃]]
+| {{code|magenta_stained_glass}}
+|-
+| {{BlockSprite|light-blue-stained-glass}} [[淡蓝色染色玻璃]]
+| {{code|light_blue_stained_glass}}
+|-
+| {{BlockSprite|yellow-stained-glass}} [[黄色染色玻璃]]
+| {{code|yellow_stained_glass}}
+|-
+| {{BlockSprite|lime-stained-glass}} [[黄绿色染色玻璃]]
+| {{code|lime_stained_glass}}
+|-
+| {{BlockSprite|pink-stained-glass}} [[粉红色染色玻璃]]
+| {{code|pink_stained_glass}}
+|-
+| {{BlockSprite|gray-stained-glass}} [[灰色染色玻璃]]
+| {{code|gray_stained_glass}}
+|-
+| {{BlockSprite|light-gray-stained-glass}} [[淡灰色染色玻璃]]
+| {{code|light_gray_stained_glass}}
+|-
+| {{BlockSprite|cyan-stained-glass}} [[青色染色玻璃]]
+| {{code|cyan_stained_glass}}
+|-
+| {{BlockSprite|purple-stained-glass}} [[紫色染色玻璃]]
+| {{code|purple_stained_glass}}
+|-
+| {{BlockSprite|blue-stained-glass}} [[蓝色染色玻璃]]
+| {{code|blue_stained_glass}}
+|-
+| {{BlockSprite|brown-stained-glass}} [[棕色染色玻璃]]
+| {{code|brown_stained_glass}}
+|-
+| {{BlockSprite|green-stained-glass}} [[绿色染色玻璃]]
+| {{code|green_stained_glass}}
+|-
+| {{BlockSprite|red-stained-glass}} [[红色染色玻璃]]
+| {{code|red_stained_glass}}
+|-
+| {{BlockSprite|black-stained-glass}} [[黑色染色玻璃]]
+| {{code|black_stained_glass}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{BlockSprite|all-stained-glass-panes}} [[染色玻璃板]]
+| rowspan="16" | {{code|stained_glass_pane}}
+| {{BlockSprite|white-stained-glass-pane}} [[白色染色玻璃板]]
+| {{code|white_stained_glass_pane}}
+|-
+| {{BlockSprite|orange-stained-glass-pane}} [[橙色染色玻璃板]]
+| {{code|orange_stained_glass_pane}}
+|-
+| {{BlockSprite|magenta-stained-glass-pane}} [[品红色染色玻璃板]]
+| {{code|magenta_stained_glass_pane}}
+|-
+| {{BlockSprite|light-blue-stained-glass-pane}} [[淡蓝色染色玻璃板]]
+| {{code|light_blue_stained_glass_pane}}
+|-
+| {{BlockSprite|yellow-stained-glass-pane}} [[黄色染色玻璃板]]
+| {{code|yellow_stained_glass_pane}}
+|-
+| {{BlockSprite|lime-stained-glass-pane}} [[黄绿色染色玻璃板]]
+| {{code|lime_stained_glass_pane}}
+|-
+| {{BlockSprite|pink-stained-glass-pane}} [[粉红色染色玻璃板]]
+| {{code|pink_stained_glass_pane}}
+|-
+| {{BlockSprite|gray-stained-glass-pane}} [[灰色染色玻璃板]]
+| {{code|gray_stained_glass_pane}}
+|-
+| {{BlockSprite|light-gray-stained-glass-pane}} [[淡灰色染色玻璃板]]
+| {{code|light_gray_stained_glass_pane}}
+|-
+| {{BlockSprite|cyan-stained-glass-pane}} [[青色染色玻璃板]]
+| {{code|cyan_stained_glass_pane}}
+|-
+| {{BlockSprite|purple-stained-glass-pane}} [[紫色染色玻璃板]]
+| {{code|purple_stained_glass_pane}}
+|-
+| {{BlockSprite|blue-stained-glass-pane}} [[蓝色染色玻璃板]]
+| {{code|blue_stained_glass_pane}}
+|-
+| {{BlockSprite|brown-stained-glass-pane}} [[棕色染色玻璃板]]
+| {{code|brown_stained_glass_pane}}
+|-
+| {{BlockSprite|green-stained-glass-pane}} [[绿色染色玻璃板]]
+| {{code|green_stained_glass_pane}}
+|-
+| {{BlockSprite|red-stained-glass-pane}} [[红色染色玻璃板]]
+| {{code|red_stained_glass_pane}}
+|-
+| {{BlockSprite|black-stained-glass-pane}} [[黑色染色玻璃板]]
+| {{code|black_stained_glass_pane}}
+|-
+| rowspan="3" | 拆分
+| rowspan="3" | {{BlockSprite|prismarine}} [[海晶石]]
+| rowspan="3" | {{code|prismarine}}
+| {{BlockSprite|prismarine}} [[海晶石]]
+| {{code|prismarine}}
+|-
+| {{BlockSprite|prismarine-bricks}} [[海晶石砖]]
+| {{code|prismarine_bricks}}
+|-
+| {{BlockSprite|dark-prismarine}} [[暗海晶石]]
+| {{code|dark_prismarine}}
+|-
+| rowspan="3" | 拆分
+| rowspan="3" | {{BlockSprite|red-sandstone}} [[红砂岩]]
+| rowspan="3" | {{code|red_sandstone}}
+| {{BlockSprite|red-sandstone}} [[红砂岩]]
+| {{code|red_sandstone}}
+|-
+| {{BlockSprite|chiseled-red-sandstone}} [[雕纹红砂岩]]
+| {{code|chiseled_red_sandstone}}
+|-
+| {{BlockSprite|cut-red-sandstone}} [[切制红砂岩]]
+| {{code|cut_red_sandstone}}
+|-
+| 重命名
+| {{BlockSprite|magma-block}} [[岩浆块]]
+| {{code|magma}}
+| {{BlockSprite|magma-block}} [[岩浆块]]
+| {{code|magma_block}}
+|-
+| 重命名
+| {{BlockSprite|red-nether-bricks}} [[红色下界砖块]]
+| {{code|red_nether_brick}}
+| {{BlockSprite|red-nether-bricks}} [[红色下界砖块]]
+| {{code|red_nether_bricks}}
+|-
+| 重命名
+| {{BlockSprite|light-gray-shulker-box}} [[淡灰色潜影盒]]
+| {{code|silver_shulker_box}}
+| {{BlockSprite|light-gray-shulker-box}} [[淡灰色潜影盒]]
+| {{code|light_gray_shulker_box}}
+|-
+| 重命名
+| {{BlockSprite|light-gray-glazed-terracotta}} [[淡灰色带釉陶瓦]]
+| {{code|silver_glazed_terracotta}}
+| {{BlockSprite|light-gray-glazed-terracotta}} [[淡灰色带釉陶瓦]]
+| {{code|light_gray_glazed_terracotta}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{BlockSprite|all-concrete}} [[混凝土]]
+| rowspan="16" | {{code|concrete}}
+| {{BlockSprite|white-concrete}} [[白色混凝土]]
+| {{code|white_concrete}}
+|-
+| {{BlockSprite|orange-concrete}} [[橙色混凝土]]
+| {{code|orange_concrete}}
+|-
+| {{BlockSprite|magenta-concrete}} [[品红色混凝土]]
+| {{code|magenta_concrete}}
+|-
+| {{BlockSprite|light-blue-concrete}} [[淡蓝色混凝土]]
+| {{code|light_blue_concrete}}
+|-
+| {{BlockSprite|yellow-concrete}} [[黄色混凝土]]
+| {{code|yellow_concrete}}
+|-
+| {{BlockSprite|lime-concrete}} [[黄绿色混凝土]]
+| {{code|lime_concrete}}
+|-
+| {{BlockSprite|pink-concrete}} [[粉红色混凝土]]
+| {{code|pink_concrete}}
+|-
+| {{BlockSprite|gray-concrete}} [[灰色混凝土]]
+| {{code|gray_concrete}}
+|-
+| {{BlockSprite|light-gray-concrete}} [[淡灰色混凝土]]
+| {{code|light_gray_concrete}}
+|-
+| {{BlockSprite|cyan-concrete}} [[青色混凝土]]
+| {{code|cyan_concrete}}
+|-
+| {{BlockSprite|purple-concrete}} [[紫色混凝土]]
+| {{code|purple_concrete}}
+|-
+| {{BlockSprite|blue-concrete}} [[蓝色混凝土]]
+| {{code|blue_concrete}}
+|-
+| {{BlockSprite|brown-concrete}} [[棕色混凝土]]
+| {{code|brown_concrete}}
+|-
+| {{BlockSprite|green-concrete}} [[绿色混凝土]]
+| {{code|green_concrete}}
+|-
+| {{BlockSprite|red-concrete}} [[红色混凝土]]
+| {{code|red_concrete}}
+|-
+| {{BlockSprite|black-concrete}} [[黑色混凝土]]
+| {{code|black_concrete}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{BlockSprite|all-concrete-powder}} [[混凝土粉末]]
+| rowspan="16" | {{code|concrete_powder}}
+| {{BlockSprite|white-concrete-powder}} [[白色混凝土粉末]]
+| {{code|white_concrete_powder}}
+|-
+| {{BlockSprite|orange-concrete-powder}} [[橙色混凝土粉末]]
+| {{code|orange_concrete_powder}}
+|-
+| {{BlockSprite|magenta-concrete-powder}} [[品红色混凝土粉末]]
+| {{code|magenta_concrete_powder}}
+|-
+| {{BlockSprite|light-blue-concrete-powder}} [[淡蓝色混凝土粉末]]
+| {{code|light_blue_concrete_powder}}
+|-
+| {{BlockSprite|yellow-concrete-powder}} [[黄色混凝土粉末]]
+| {{code|yellow_concrete_powder}}
+|-
+| {{BlockSprite|lime-concrete-powder}} [[黄绿色混凝土粉末]]
+| {{code|lime_concrete_powder}}
+|-
+| {{BlockSprite|pink-concrete-powder}} [[粉红色混凝土粉末]]
+| {{code|pink_concrete_powder}}
+|-
+| {{BlockSprite|gray-concrete-powder}} [[灰色混凝土粉末]]
+| {{code|gray_concrete_powder}}
+|-
+| {{BlockSprite|light-gray-concrete-powder}} [[淡灰色混凝土粉末]]
+| {{code|light_gray_concrete_powder}}
+|-
+| {{BlockSprite|cyan-concrete-powder}} [[青色混凝土粉末]]
+| {{code|cyan_concrete_powder}}
+|-
+| {{BlockSprite|purple-concrete-powder}} [[紫色混凝土粉末]]
+| {{code|purple_concrete_powder}}
+|-
+| {{BlockSprite|blue-concrete-powder}} [[蓝色混凝土粉末]]
+| {{code|blue_concrete_powder}}
+|-
+| {{BlockSprite|brown-concrete-powder}} [[棕色混凝土粉末]]
+| {{code|brown_concrete_powder}}
+|-
+| {{BlockSprite|green-concrete-powder}} [[绿色混凝土粉末]]
+| {{code|green_concrete_powder}}
+|-
+| {{BlockSprite|red-concrete-powder}} [[红色混凝土粉末]]
+| {{code|red_concrete_powder}}
+|-
+| {{BlockSprite|black-concrete-powder}} [[黑色混凝土粉末]]
+| {{code|black_concrete_powder}}
+|-
+| 重命名
+| {{ItemSprite|oak-door}} [[橡木门]]
+| {{code|wooden_door}}
+| {{ItemSprite|oak-door}} [[橡木门]]
+| {{code|oak_door}}
+|-
+| rowspan="3" | 合并
+| {{BlockSprite|redstone-repeater-off}} [[红石中继器|未激活的红石中继器]] <ref group="注" name="noitemform" />
+| {{code|unpowered_repeater}}
+| rowspan="3" | {{ItemSprite|redstone-repeater}} [[红石中继器]]
+| rowspan="3" | {{code|repeater}}
+|-
+| {{BlockSprite|redstone-repeater-on}} [[红石中继器|激活的红石中继器]] <ref group="注" name="noitemform" />
+| {{code|powered_repeater}}
+|-
+| {{ItemSprite|redstone-repeater}} [[红石中继器]]
+| {{code|repeater}}
+|-
+| rowspan="3" | 合并
+| {{BlockSprite|redstone-comparator-off}} [[红石比较器|未激活的红石比较器]] <ref group="注" name="noitemform" />
+| {{code|unpowered_comparator}}
+| rowspan="3" | {{ItemSprite|redstone-comparator}} [[红石比较器]]
+| rowspan="3" | {{code|comparator}}
+|-
+| {{BlockSprite|redstone-comparator-on}} [[红石比较器|激活的红石比较器]] <ref group="注" name="noitemform" />
+| {{code|powered_comparator}}
+|-
+| {{ItemSprite|redstone-comparator}} [[红石比较器]]
+| {{code|comparator}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{ItemSprite|coal}} [[煤炭]]
+| rowspan="2" | {{code|coal}}
+| {{ItemSprite|coal}} [[煤炭]]
+| {{code|coal}}
+|-
+| {{ItemSprite|charcoal}} [[木炭]]
+| {{code|charcoal}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{ItemSprite|golden-apple}} [[金苹果]]
+| rowspan="2" | {{code|golden_apple}}
+| {{ItemSprite|golden-apple}} [[金苹果]]
+| {{code|golden_apple}}
+|-
+| {{ItemSprite|enchanted-golden-apple}} [[附魔金苹果]]
+| {{code|enchanted_golden_apple}}
+|-
+| rowspan="2" | 合并
+| {{BlockSprite|oak-sign}} [[告示牌|站立的告示牌]] <ref group="注" name="noitemform" />
+| {{code|standing_sign}}
+| rowspan="2" | {{ItemSprite|oak-sign}} [[告示牌]]
+| rowspan="2" | {{code|sign}}
+|-
+| {{ItemSprite|oak-sign}} [[告示牌]]
+| {{code|sign}}
+|-
+| rowspan="2" | 合并
+| {{BlockSprite|water}} [[水]] <ref group="注" name="noitemform" />
+| {{code|water}}
+| rowspan="2" | {{BlockSprite|water}} [[水]] <ref group="注" name="noitemform" />
+| rowspan="2" | {{code|water}}
+|-
+| {{BlockSprite|water}} [[水|流动的水]] <ref group="注" name="noitemform" />
+| {{code|flowing_water}}
+|-
+| rowspan="2" | 合并
+| {{BlockSprite|lava}} [[熔岩]] <ref group="注" name="noitemform" />
+| {{code|lava}}
+| rowspan="2" | {{BlockSprite|lava}} [[熔岩]] <ref group="注" name="noitemform" />
+| rowspan="2" | {{code|lava}}
+|-
+| {{BlockSprite|lava}} [[熔岩|流动的熔岩]] <ref group="注" name="noitemform" />
+| {{code|flowing_lava}}
+|-
+| 重命名
+| {{ItemSprite|oak-boat}} [[橡木船]]
+| {{code|boat}}
+| {{ItemSprite|oak-boat}} [[橡木船]]
+| {{code|oak_boat}}
+|-
+| 重命名
+| {{BlockSprite|sugar-cane}} [[甘蔗]]
+| {{code|reeds}}
+| {{BlockSprite|sugar-cane}} [[甘蔗]]
+| {{code|sugar_cane}}
+|-
+| rowspan="4" | 拆分
+| rowspan="4" | {{ItemSprite|raw-cod}} [[生鱼]]
+| rowspan="4" | {{code|fish}}
+| {{ItemSprite|raw-cod}} [[生鳕鱼]]
+| {{code|cod}}
+|-
+| {{ItemSprite|raw-salmon}} [[生鲑鱼]]
+| {{code|salmon}}
+|-
+| {{ItemSprite|tropical-fish}} [[热带鱼]]
+| {{code|tropical_fish}}
+|-
+| {{ItemSprite|pufferfish}} [[河豚]]
+| {{code|pufferfish}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{ItemSprite|cooked-cod}} [[熟鱼]]
+| rowspan="2" | {{code|cooked_fish}}
+| {{ItemSprite|cooked-cod}} [[熟鳕鱼]]
+| {{code|cooked_cod}}
+|-
+| {{ItemSprite|cooked-salmon}} [[熟鲑鱼]]
+| {{code|cooked_salmon}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{ItemSprite|all-dyes}} [[染料]]
+| rowspan="16" | {{code|dye}}
+| {{ItemSprite|bone-meal}} [[骨粉]]
+| {{code|bone_meal}}
+|-
+| {{ItemSprite|orange-dye}} [[橙色染料]]
+| {{code|orange_dye}}
+|-
+| {{ItemSprite|magenta-dye}} [[品红色染料]]
+| {{code|magenta_dye}}
+|-
+| {{ItemSprite|light-blue-dye}} [[淡蓝色染料]]
+| {{code|light_blue_dye}}
+|-
+| {{ItemSprite|yellow-dye}} [[蒲公英黄]]
+| {{code|dandelion_yellow}}
+|-
+| {{ItemSprite|lime-dye}} [[黄绿色染料]]
+| {{code|lime_dye}}
+|-
+| {{ItemSprite|pink-dye}} [[粉红色染料]]
+| {{code|pink_dye}}
+|-
+| {{ItemSprite|gray-dye}} [[灰色染料]]
+| {{code|gray_dye}}
+|-
+| {{ItemSprite|light-gray-dye}} [[淡灰色染料]]
+| {{code|light_gray_dye}}
+|-
+| {{ItemSprite|cyan-dye}} [[青色染料]]
+| {{code|cyan_dye}}
+|-
+| {{ItemSprite|purple-dye}} [[紫色染料]]
+| {{code|purple_dye}}
+|-
+| {{ItemSprite|lapis-lazuli}} [[青金石]]
+| {{code|lapis_lazuli}}
+|-
+| {{ItemSprite|cocoa-beans}} [[可可豆]]
+| {{code|cocoa_beans}}
+|-
+| {{ItemSprite|green-dye}} [[仙人掌绿]]
+| {{code|cactus_green}}
+|-
+| {{ItemSprite|red-dye}} [[玫瑰红]]
+| {{code|rose_red}}
+|-
+| {{ItemSprite|ink-sac}} [[墨囊]]
+| {{code|ink_sac}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{BlockSprite|all-beds}} [[床]]
+| rowspan="16" | {{code|bed}}
+| {{BlockSprite|white-bed}} [[白色床]]
+| {{code|white_bed}}
+|-
+| {{BlockSprite|orange-bed}} [[橙色床]]
+| {{code|orange_bed}}
+|-
+| {{BlockSprite|magenta-bed}} [[品红色床]]
+| {{code|magenta_bed}}
+|-
+| {{BlockSprite|light-blue-bed}} [[淡蓝色床]]
+| {{code|light_blue_bed}}
+|-
+| {{BlockSprite|yellow-bed}} [[黄色床]]
+| {{code|yellow_bed}}
+|-
+| {{BlockSprite|lime-bed}} [[黄绿色床]]
+| {{code|lime_bed}}
+|-
+| {{BlockSprite|pink-bed}} [[粉红色床]]
+| {{code|pink_bed}}
+|-
+| {{BlockSprite|gray-bed}} [[灰色床]]
+| {{code|gray_bed}}
+|-
+| {{BlockSprite|light-gray-bed}} [[淡灰色床]]
+| {{code|light_gray_bed}}
+|-
+| {{BlockSprite|cyan-bed}} [[青色床]]
+| {{code|cyan_bed}}
+|-
+| {{BlockSprite|purple-bed}} [[紫色床]]
+| {{code|purple_bed}}
+|-
+| {{BlockSprite|blue-bed}} [[蓝色床]]
+| {{code|blue_bed}}
+|-
+| {{BlockSprite|brown-bed}} [[棕色床]]
+| {{code|brown_bed}}
+|-
+| {{BlockSprite|green-bed}} [[绿色床]]
+| {{code|green_bed}}
+|-
+| {{BlockSprite|red-bed}} [[红色床]]
+| {{code|red_bed}}
+|-
+| {{BlockSprite|black-bed}} [[黑色床]]
+| {{code|black_bed}}
+|-
+| 重命名
+| {{ItemSprite|melon-slice}} [[西瓜片]]
+| {{code|melon}}
+| {{ItemSprite|melon-slice}} [[西瓜片]]
+| {{code|melon_slice}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{BlockSprite|pumpkin-stem}} [[南瓜梗]] <ref group="注" name="noitemform" />
+| rowspan="2" | {{code|pumpkin_stem}}
+| {{BlockSprite|pumpkin-stem}} [[南瓜梗]] <ref group="注" name="noitemform" />
+| {{code|pumpkin_stem}}
+|-
+| {{BlockSprite|attached-pumpkin-stem}} [[附着的南瓜梗]] <ref group="注" name="noitemform" />
+| {{code|attached_pumpkin_stem}}
+|-
+| rowspan="2" | 拆分
+| rowspan="2" | {{BlockSprite|melon-stem}} [[西瓜梗]] <ref group="注" name="noitemform" />
+| rowspan="2" | {{code|melon_stem}}
+| {{BlockSprite|melon-stem}} [[西瓜梗]] <ref group="注" name="noitemform" />
+| {{code|melon_stem}}
+|-
+| {{BlockSprite|attached-melon-stem}} [[附着的西瓜梗]] <ref group="注" name="noitemform" />
+| {{code|attached_melon_stem}}
+|-
+| 重命名
+| {{ItemSprite|glistering-melon-slice}} [[闪烁的西瓜片]]
+| {{code|speckled_melon}}
+| {{ItemSprite|glistering-melon-slice}} [[闪烁的西瓜片]]
+| {{code|glistering_melon_slice}}
+|-
+| rowspan="43" | 拆分
+| rowspan="43" | {{ItemSprite|spawn-egg}} [[刷怪蛋]]
+| rowspan="43" | {{code|spawn_egg}}
+| {{ItemSprite|bat-spawn-egg}} [[蝙蝠刷怪蛋]]
+| {{code|bat_spawn_egg}}
+|-
+| {{ItemSprite|blaze-spawn-egg}} [[烈焰人刷怪蛋]]
+| {{code|blaze_spawn_egg}}
+|-
+| {{ItemSprite|cave-spider-spawn-egg}} [[洞穴蜘蛛刷怪蛋]]
+| {{code|cave_spider_spawn_egg}}
+|-
+| {{ItemSprite|chicken-spawn-egg}} [[鸡刷怪蛋]]
+| {{code|chicken_spawn_egg}}
+|-
+| {{ItemSprite|cow-spawn-egg}} [[牛刷怪蛋]]
+| {{code|cow_spawn_egg}}
+|-
+| {{ItemSprite|creeper-spawn-egg}} [[苦力怕刷怪蛋]]
+| {{code|creeper_spawn_egg}}
+|-
+| {{ItemSprite|donkey-spawn-egg}} [[驴刷怪蛋]]
+| {{code|donkey_spawn_egg}}
+|-
+| {{ItemSprite|elder-guardian-spawn-egg}} [[远古守卫者刷怪蛋]]
+| {{code|elder_guardian_spawn_egg}}
+|-
+| {{ItemSprite|enderman-spawn-egg}} [[末影人刷怪蛋]]
+| {{code|enderman_spawn_egg}}
+|-
+| {{ItemSprite|endermite-spawn-egg}} [[末影螨刷怪蛋]]
+| {{code|endermite_spawn_egg}}
+|-
+| {{ItemSprite|evoker-spawn-egg}} [[唤魔者刷怪蛋]]
+| {{code|evoker_spawn_egg}}
+|-
+| {{ItemSprite|ghast-spawn-egg}} [[恶魂刷怪蛋]]
+| {{code|ghast_spawn_egg}}
+|-
+| {{ItemSprite|guardian-spawn-egg}} [[守卫者刷怪蛋]]
+| {{code|guardian_spawn_egg}}
+|-
+| {{ItemSprite|horse-spawn-egg}} [[马刷怪蛋]]
+| {{code|horse_spawn_egg}}
+|-
+| {{ItemSprite|husk-spawn-egg}} [[尸壳刷怪蛋]]
+| {{code|husk_spawn_egg}}
+|-
+| {{ItemSprite|llama-spawn-egg}} [[羊驼刷怪蛋]]
+| {{code|llama_spawn_egg}}
+|-
+| {{ItemSprite|magma-cube-spawn-egg}} [[岩浆怪刷怪蛋]]
+| {{code|magma_cube_spawn_egg}}
+|-
+| {{ItemSprite|mooshroom-spawn-egg}} [[哞菇刷怪蛋]]
+| {{code|mooshroom_spawn_egg}}
+|-
+| {{ItemSprite|mule-spawn-egg}} [[骡刷怪蛋]]
+| {{code|mule_spawn_egg}}
+|-
+| {{ItemSprite|ocelot-spawn-egg}} [[豹猫刷怪蛋]]
+| {{code|ocelot_spawn_egg}}
+|-
+| {{ItemSprite|parrot-spawn-egg}} [[鹦鹉刷怪蛋]]
+| {{code|parrot_spawn_egg}}
+|-
+| {{ItemSprite|pig-spawn-egg}} [[猪刷怪蛋]]
+| {{code|pig_spawn_egg}}
+|-
+| {{ItemSprite|polar-bear-spawn-egg}} [[北极熊刷怪蛋]]
+| {{code|polar_bear_spawn_egg}}
+|-
+| {{ItemSprite|rabbit-spawn-egg}} [[兔子刷怪蛋]]
+| {{code|rabbit_spawn_egg}}
+|-
+| {{ItemSprite|sheep-spawn-egg}} [[绵羊刷怪蛋]]
+| {{code|sheep_spawn_egg}}
+|-
+| {{ItemSprite|shulker-spawn-egg}} [[潜影贝刷怪蛋]]
+| {{code|shulker_spawn_egg}}
+|-
+| {{ItemSprite|silverfish-spawn-egg}} [[蠹虫刷怪蛋]]
+| {{code|silverfish_spawn_egg}}
+|-
+| {{ItemSprite|skeleton-spawn-egg}} [[骷髅刷怪蛋]]
+| {{code|skeleton_spawn_egg}}
+|-
+| {{ItemSprite|skeleton-horse-spawn-egg}} [[骷髅马刷怪蛋]]
+| {{code|skeleton_horse_spawn_egg}}
+|-
+| {{ItemSprite|slime-spawn-egg}} [[史莱姆刷怪蛋]]
+| {{code|slime_spawn_egg}}
+|-
+| {{ItemSprite|spider-spawn-egg}} [[蜘蛛刷怪蛋]]
+| {{code|spider_spawn_egg}}
+|-
+| {{ItemSprite|squid-spawn-egg}} [[鱿鱼刷怪蛋]]
+| {{code|squid_spawn_egg}}
+|-
+| {{ItemSprite|stray-spawn-egg}} [[流浪者刷怪蛋]]
+| {{code|stray_spawn_egg}}
+|-
+| {{ItemSprite|vex-spawn-egg}} [[恼鬼刷怪蛋]]
+| {{code|vex_spawn_egg}}
+|-
+| {{ItemSprite|villager-spawn-egg}} [[村民刷怪蛋]]
+| {{code|villager_spawn_egg}}
+|-
+| {{ItemSprite|vindicator-spawn-egg}} [[卫道士刷怪蛋]]
+| {{code|vindicator_spawn_egg}}
+|-
+| {{ItemSprite|witch-spawn-egg}} [[女巫刷怪蛋]]
+| {{code|witch_spawn_egg}}
+|-
+| {{ItemSprite|wither-skeleton-spawn-egg}} [[凋灵骷髅刷怪蛋]]
+| {{code|wither_skeleton_spawn_egg}}
+|-
+| {{ItemSprite|wolf-spawn-egg}} [[狼刷怪蛋]]
+| {{code|wolf_spawn_egg}}
+|-
+| {{ItemSprite|zombie-spawn-egg}} [[僵尸刷怪蛋]]
+| {{code|zombie_spawn_egg}}
+|-
+| {{ItemSprite|zombie-horse-spawn-egg}} [[僵尸马刷怪蛋]]
+| {{code|zombie_horse_spawn_egg}}
+|-
+| {{ItemSprite|zombie-pigman-spawn-egg}} [[僵尸猪人刷怪蛋]]
+| {{code|zombie_pigman_spawn_egg}}
+|-
+| {{ItemSprite|zombie-villager-spawn-egg}} [[僵尸村民刷怪蛋]]
+| {{code|zombie_villager_spawn_egg}}
+|-
+| rowspan="22" | 拆分
+| rowspan="22" | {{BlockSprite|flower-pot}} [[花盆]]
+| rowspan="22" | {{code|flower_pot}}
+| {{BlockSprite|flower-pot}} [[花盆]]
+| {{code|flower_pot}}
+|-
+| {{BlockSprite|potted-poppy}} [[虞美人盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_poppy}}
+|-
+| {{BlockSprite|potted-dandelion}} [[蒲公英盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_dandelion}}
+|-
+| {{BlockSprite|potted-oak-sapling}} [[橡树树苗盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_oak_sapling}}
+|-
+| {{BlockSprite|potted-spruce-sapling}} [[云杉树苗盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_spruce_sapling}}
+|-
+| {{BlockSprite|potted-birch-sapling}} [[白桦树苗盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_birch_sapling}}
+|-
+| {{BlockSprite|potted-jungle-sapling}} [[丛林树苗盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_jungle_sapling}}
+|-
+| {{BlockSprite|potted-red-mushroom}} [[红色蘑菇盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_red_mushroom}}
+|-
+| {{BlockSprite|potted-brown-mushroom}} [[棕色蘑菇盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_brown_mushroom}}
+|-
+| {{BlockSprite|potted-cactus}} [[仙人掌盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_cactus}}
+|-
+| {{BlockSprite|potted-dead-bush}} [[枯萎的灌木盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_dead_bush}}
+|-
+| {{BlockSprite|potted-fern}} [[蕨盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_fern}}
+|-
+| {{BlockSprite|potted-acacia-sapling}} [[金合欢树苗盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_acacia_sapling}}
+|-
+| {{BlockSprite|potted-dark-oak-sapling}} [[深色橡树树苗盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_dark_oak_sapling}}
+|-
+| {{BlockSprite|potted-blue-orchid}} [[兰花盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_blue_orchid}}
+|-
+| {{BlockSprite|potted-allium}} [[绒球葱盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_allium}}
+|-
+| {{BlockSprite|potted-azure-bluet}} [[蓝花美耳草盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_azure_bluet}}
+|-
+| {{BlockSprite|potted-red-tulip}} [[红色郁金香盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_red_tulip}}
+|-
+| {{BlockSprite|potted-orange-tulip}} [[橙色郁金香盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_orange_tulip}}
+|-
+| {{BlockSprite|potted-white-tulip}} [[白色郁金香盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_white_tulip}}
+|-
+| {{BlockSprite|potted-pink-tulip}} [[粉红色郁金香盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_pink_tulip}}
+|-
+| {{BlockSprite|potted-oxeye-daisy}} [[滨菊盆栽]] <ref group="注" name="noitemform" />
+| {{code|potted_oxeye_daisy}}
+|-
+| rowspan="12" | 拆分
+| rowspan="12" | {{BlockSprite|all-heads}} [[头颅]]
+| rowspan="12" | {{code|skull}}
+| {{BlockSprite|skeleton-skull}} [[骷髅头颅]]
+| {{code|skeleton_skull}}
+|-
+| {{BlockSprite|skeleton-wall-skull}} [[墙上的骷髅头颅]] <ref group="注" name="noitemform" />
+| {{code|skeleton_wall_skull}}
+|-
+| {{BlockSprite|wither-skeleton-skull}} [[凋灵骷髅头颅]]
+| {{code|wither_skeleton_skull}}
+|-
+| {{BlockSprite|wither-skeleton-wall-skull}} [[墙上的凋灵骷髅头颅]] <ref group="注" name="noitemform" />
+| {{code|wither_skeleton_wall_skull}}
+|-
+| {{BlockSprite|zombie-head}} [[僵尸的头]]
+| {{code|zombie_head}}
+|-
+| {{BlockSprite|zombie-wall-head}} [[墙上的僵尸的头]] <ref group="注" name="noitemform" />
+| {{code|zombie_wall_head}}
+|-
+| {{BlockSprite|player-head}} [[玩家头颅]]
+| {{code|player_head}}
+|-
+| {{BlockSprite|player-wall-head}} [[墙上的玩家头颅]] <ref group="注" name="noitemform" />
+| {{code|player_wall_head}}
+|-
+| {{BlockSprite|creeper-head}} [[苦力怕的头]]
+| {{code|creeper_head}}
+|-
+| {{BlockSprite|creeper-wall-head}} [[墙上的苦力怕的头]] <ref group="注" name="noitemform" />
+| {{code|creeper_wall_head}}
+|-
+| {{BlockSprite|dragon-head}} [[龙首]]
+| {{code|dragon_head}}
+|-
+| {{BlockSprite|dragon-wall-head}} [[墙上的龙首]] <ref group="注" name="noitemform" />
+| {{code|dragon_wall_head}}
+|-
+| 重命名
+| {{ItemSprite|firework-rocket}} [[烟花火箭]]
+| {{code|fireworks}}
+| {{ItemSprite|firework-rocket}} [[烟花火箭]]
+| {{code|firework_rocket}}
+|-
+| 重命名
+| {{ItemSprite|firework-star}} [[烟火之星]]
+| {{code|firework_charge}}
+| {{ItemSprite|firework-star}} [[烟火之星]]
+| {{code|firework_star}}
+|-
+| 重命名
+| {{ItemSprite|nether-brick}} [[下界砖块]]
+| {{code|netherbrick}}
+| {{ItemSprite|nether-brick}} [[下界砖块]]
+| {{code|nether_brick}}
+|-
+| rowspan="16" | 重新分类
+| rowspan="8" | {{BlockSprite|all-banners}} [[旗帜]] <ref group="注" name="noitemform" />
+| rowspan="8" | {{code|standing_banner}}
+| {{BlockSprite|white-banner}} [[白色旗帜]]
+| {{code|white_banner}}
+|-
+| {{BlockSprite|orange-banner}} [[橙色旗帜]]
+| {{code|orange_banner}}
+|-
+| {{BlockSprite|magenta-banner}} [[品红色旗帜]]
+| {{code|magenta_banner}}
+|-
+| {{BlockSprite|light-blue-banner}} [[淡蓝色旗帜]]
+| {{code|light_blue_banner}}
+|-
+| {{BlockSprite|yellow-banner}} [[黄色旗帜]]
+| {{code|yellow_banner}}
+|-
+| {{BlockSprite|lime-banner}} [[黄绿色旗帜]]
+| {{code|lime_banner}}
+|-
+| {{BlockSprite|pink-banner}} [[粉红色旗帜]]
+| {{code|pink_banner}}
+|-
+| {{BlockSprite|gray-banner}} [[灰色旗帜]]
+| {{code|gray_banner}}
+|-
+| rowspan="8" | {{BlockSprite|all-banners}} [[旗帜]]
+| rowspan="8" | {{code|banner}}
+| {{BlockSprite|light-gray-banner}} [[淡灰色旗帜]]
+| {{code|light_gray_banner}}
+|-
+| {{BlockSprite|cyan-banner}} [[青色旗帜]]
+| {{code|cyan_banner}}
+|-
+| {{BlockSprite|purple-banner}} [[紫色旗帜]]
+| {{code|purple_banner}}
+|-
+| {{BlockSprite|blue-banner}} [[蓝色旗帜]]
+| {{code|blue_banner}}
+|-
+| {{BlockSprite|brown-banner}} [[棕色旗帜]]
+| {{code|brown_banner}}
+|-
+| {{BlockSprite|green-banner}} [[绿色旗帜]]
+| {{code|green_banner}}
+|-
+| {{BlockSprite|red-banner}} [[红色旗帜]]
+| {{code|red_banner}}
+|-
+| {{BlockSprite|black-banner}} [[黑色旗帜]]
+| {{code|black_banner}}
+|-
+| rowspan="16" | 拆分
+| rowspan="16" | {{BlockSprite|all-wall-banners}} [[旗帜|墙上的旗帜]] <ref group="注" name="noitemform" />
+| rowspan="16" | {{code|wall_banner}}
+| {{BlockSprite|white-wall-banner}} [[墙上的白色旗帜]] <ref group="注" name="noitemform" />
+| {{code|white_wall_banner}}
+|-
+| {{BlockSprite|orange-wall-banner}} [[墙上的橙色旗帜]] <ref group="注" name="noitemform" />
+| {{code|orange_wall_banner}}
+|-
+| {{BlockSprite|magenta-wall-banner}} [[墙上的品红色旗帜]] <ref group="注" name="noitemform" />
+| {{code|magenta_wall_banner}}
+|-
+| {{BlockSprite|light-blue-wall-banner}} [[墙上的淡蓝色旗帜]] <ref group="注" name="noitemform" />
+| {{code|light_blue_wall_banner}}
+|-
+| {{BlockSprite|yellow-wall-banner}} [[墙上的黄色旗帜]] <ref group="注" name="noitemform" />
+| {{code|yellow_wall_banner}}
+|-
+| {{BlockSprite|lime-wall-banner}} [[墙上的黄绿色旗帜]] <ref group="注" name="noitemform" />
+| {{code|lime_wall_banner}}
+|-
+| {{BlockSprite|pink-wall-banner}} [[墙上的粉红色旗帜]] <ref group="注" name="noitemform" />
+| {{code|pink_wall_banner}}
+|-
+| {{BlockSprite|gray-wall-banner}} [[墙上的灰色旗帜]] <ref group="注" name="noitemform" />
+| {{code|gray_wall_banner}}
+|-
+| {{BlockSprite|light-gray-wall-banner}} [[墙上的淡灰色旗帜]] <ref group="注" name="noitemform" />
+| {{code|light_gray_wall_banner}}
+|-
+| {{BlockSprite|cyan-wall-banner}} [[墙上的青色旗帜]] <ref group="注" name="noitemform" />
+| {{code|cyan_wall_banner}}
+|-
+| {{BlockSprite|purple-wall-banner}} [[墙上的紫色旗帜]] <ref group="注" name="noitemform" />
+| {{code|purple_wall_banner}}
+|-
+| {{BlockSprite|blue-wall-banner}} [[墙上的蓝色旗帜]] <ref group="注" name="noitemform" />
+| {{code|blue_wall_banner}}
+|-
+| {{BlockSprite|brown-wall-banner}} [[墙上的棕色旗帜]] <ref group="注" name="noitemform" />
+| {{code|brown_wall_banner}}
+|-
+| {{BlockSprite|green-wall-banner}} [[墙上的绿色旗帜]] <ref group="注" name="noitemform" />
+| {{code|green_wall_banner}}
+|-
+| {{BlockSprite|red-wall-banner}} [[墙上的红色旗帜]] <ref group="注" name="noitemform" />
+| {{code|red_wall_banner}}
+|-
+| {{BlockSprite|black-wall-banner}} [[墙上的黑色旗帜]] <ref group="注" name="noitemform" />
+| {{code|black_wall_banner}}
+|-
+| 重命名
+| {{ItemSprite|popped-chorus-fruit}} [[爆裂紫颂果]]
+| {{code|chorus_fruit_popped}}
+| {{ItemSprite|popped-chorus-fruit}} [[爆裂紫颂果]]
+| {{code|popped_chorus_fruit}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-13}} [[音乐唱片]]
+| {{code|record_13}}
+| {{ItemSprite|music-disc-13}} [[音乐唱片]]
+| {{code|music_disc_13}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-cat}} [[音乐唱片]]
+| {{code|record_cat}}
+| {{ItemSprite|music-disc-cat}} [[音乐唱片]]
+| {{code|music_disc_cat}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-blocks}} [[音乐唱片]]
+| {{code|record_blocks}}
+| {{ItemSprite|music-disc-blocks}} [[音乐唱片]]
+| {{code|music_disc_blocks}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-chirp}} [[音乐唱片]]
+| {{code|record_chirp}}
+| {{ItemSprite|music-disc-chirp}} [[音乐唱片]]
+| {{code|music_disc_chirp}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-far}} [[音乐唱片]]
+| {{code|record_far}}
+| {{ItemSprite|music-disc-far}} [[音乐唱片]]
+| {{code|music_disc_far}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-mall}} [[音乐唱片]]
+| {{code|record_mall}}
+| {{ItemSprite|music-disc-mall}} [[音乐唱片]]
+| {{code|music_disc_mall}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-mellohi}} [[音乐唱片]]
+| {{code|record_mellohi}}
+| {{ItemSprite|music-disc-mellohi}} [[音乐唱片]]
+| {{code|music_disc_mellohi}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-stal}} [[音乐唱片]]
+| {{code|record_stal}}
+| {{ItemSprite|music-disc-stal}} [[音乐唱片]]
+| {{code|music_disc_stal}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-strad}} [[音乐唱片]]
+| {{code|record_strad}}
+| {{ItemSprite|music-disc-strad}} [[音乐唱片]]
+| {{code|music_disc_strad}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-ward}} [[音乐唱片]]
+| {{code|record_ward}}
+| {{ItemSprite|music-disc-ward}} [[音乐唱片]]
+| {{code|music_disc_ward}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-11}} [[音乐唱片]]
+| {{code|record_11}}
+| {{ItemSprite|music-disc-11}} [[音乐唱片]]
+| {{code|music_disc_11}}
+|-
+| 重命名
+| {{ItemSprite|music-disc-wait}} [[音乐唱片]]
+| {{code|record_wait}}
+| {{ItemSprite|music-disc-wait}} [[音乐唱片]]
+| {{code|music_disc_wait}}
+|}
+
+{{notelist|注}}
+
+== 实体ID ==
+以任何方式更改了ID的实体也会改变其统计信息。
+{|class="wikitable"
+! [[实体]]
+! [[Java版1.12.2]]
+! [[Java版1.13]]
+|-
+| {{EntitySprite|experience-orb}} [[经验球]]
+| {{code|xp_orb}}
+| {{code|experience_orb}}
+|-
+| {{EntitySprite|bottle-o'-enchanting}} [[附魔之瓶]]
+| {{code|xp_bottle}}
+| {{code|experience_bottle}}
+|-
+| {{EntitySprite|eye-of-ender}} [[末影之眼]]
+| {{code|eye_of_ender_signal}}
+| {{code|eye_of_ender}}
+|-
+| {{EntitySprite|end-crystal}} [[末地水晶]]
+| {{code|ender_crystal}}
+| {{code|end_crystal}}
+|-
+| {{EntitySprite|firework-rocket}} [[烟花火箭]]
+| {{code|fireworks_rocket}}
+| {{code|firework_rocket}}
+|-
+| {{EntitySprite|minecart-with-command-block}} [[命令方块矿车]]
+| {{code|commandblock_minecart}}
+| {{code|command_block_minecart}}
+|-
+| {{EntitySprite|snow-golem}} [[雪傀儡]]
+| {{code|snowman}}
+| {{code|snow_golem}}
+|-
+| {{EntitySprite|iron-golem}} [[铁傀儡]]
+| {{code|villager_golem}}
+| {{code|iron_golem}}
+|-
+| {{EntitySprite|evoker-fangs}} [[唤魔者尖牙]]
+| {{code|evocation_fangs}}
+| {{code|evoker_fangs}}
+|-
+| {{EntitySprite|evoker}} [[唤魔者]]
+| {{code|evocation_illager}}
+| {{code|evoker}}
+|-
+| {{EntitySprite|vindicator}} [[卫道士]]
+| {{code|vindication_illager}}
+| {{code|vindicator}}
+|-
+| {{EntitySprite|illusioner}} [[幻术师]]
+| {{code|illusion_illager}}
+| {{code|illusioner}}
+|}
+
+== 生物群系ID ==
+{|class="wikitable stikitable"
+! [[生物群系]]
+! [[Java版1.12.2]]
+! [[Java版1.13]]
+|-
+| {{BiomeSprite|mountains}} [[山地]]
+| {{code|extreme_hills}}
+| {{code|mountains}}
+|-
+| {{BiomeSprite|swamp}} [[沼泽]]
+| {{code|swampland}}
+| {{code|swamp}}
+|-
+| {{BiomeSprite|nether}} [[下界]]
+| {{code|hell}}
+| {{code|nether}}
+|-
+| {{BiomeSprite|the-end}} [[末地]]
+| {{code|sky}}
+| {{code|the_end}}
+|-
+| {{BiomeSprite|snowy-tundra}} [[积雪的冻原]]
+| {{code|ice_flats}}
+| {{code|snowy_tundra}}
+|-
+| {{BiomeSprite|snowy-mountains}} [[雪山]]
+| {{code|ice_mountains}}
+| {{code|snowy_mountains}}
+|-
+| {{BiomeSprite|mushroom-fields}} [[蘑菇岛]]
+| {{code|mushroom_island}}
+| {{code|mushroom_fields}}
+|-
+| {{BiomeSprite|mushroom-field-shore}} [[蘑菇岛岸]]
+| {{code|mushroom_island_shore}}
+| {{code|mushroom_field_shore}}
+|-
+| {{BiomeSprite|beach}} [[沙滩]]
+| {{code|beaches}}
+| {{code|beach}}
+|-
+| {{BiomeSprite|wooded-hills}} [[繁茂的丘陵]]
+| {{code|forest_hills}}
+| {{code|wooded_hills}}
+|-
+| {{BiomeSprite|mountain-edge}} [[山地边缘]]
+| {{code|smaller_extreme_hills}}
+| {{code|mountain_edge}}
+|-
+| {{BiomeSprite|stone-shore}} [[石岸]]
+| {{code|stone_beach}}
+| {{code|stone_shore}}
+|-
+| {{BiomeSprite|snowy-beach}} [[积雪沙滩]]
+| {{code|cold_beach}}
+| {{code|snowy_beach}}
+|-
+| {{BiomeSprite|dark-forest}} [[黑森林]]
+| {{code|roofed_forest}}
+| {{code|dark_forest}}
+|-
+| {{BiomeSprite|snowy-taiga}} [[积雪针叶林]]
+| {{code|taiga_cold}}
+| {{code|snowy_taiga}}
+|-
+| {{BiomeSprite|snowy-taiga-hills}} [[积雪的针叶林丘陵]]
+| {{code|taiga_cold_hills}}
+| {{code|snowy_taiga_hills}}
+|-
+| {{BiomeSprite|giant-tree-taiga}} [[巨型针叶林]]
+| {{code|redwood_taiga}}
+| {{code|giant_tree_taiga}}
+|-
+| {{BiomeSprite|giant-tree-taiga-hills}} [[巨型针叶林丘陵]]
+| {{code|redwood_taiga_hills}}
+| {{code|giant_tree_taiga_hills}}
+|-
+| {{BiomeSprite|wooded-mountains}} [[繁茂的山地]]
+| {{code|extreme_hills_with_trees}}
+| {{code|wooded_mountains}}
+|-
+| {{BiomeSprite|savanna-plateau}} [[热带高原]]
+| {{code|savanna_rock}}
+| {{code|savanna_plateau}}
+|-
+| {{BiomeSprite|badlands}} [[恶地]]
+| {{code|mesa}}
+| {{code|badlands}}
+|-
+| {{BiomeSprite|wooded-badlands-plateau}} [[繁茂的恶地高原]]
+| {{code|mesa_rock}}
+| {{code|wooded_badlands_plateau}}
+|-
+| {{BiomeSprite|badlands-plateau}} [[恶地高原]]
+| {{code|mesa_clear_rock}}
+| {{code|badlands_plateau}}
+|-
+| {{BiomeSprite|the-void}} [[虚空]]
+| {{code|void}}
+| {{code|the_void}}
+|-
+| {{BiomeSprite|sunflower-plains}} [[向日葵平原]]
+| {{code|mutated_plains}}
+| {{code|sunflower_plains}}
+|-
+| {{BiomeSprite|desert-lakes}} [[沙漠湖泊]]
+| {{code|mutated_desert}}
+| {{code|desert_lakes}}
+|-
+| {{BiomeSprite|gravelly-mountains}} [[沙砾山地]]
+| {{code|mutated_extreme_hills}}
+| {{code|gravelly_mountains}}
+|-
+| {{BiomeSprite|flower-forest}} [[繁花森林]]
+| {{code|mutated_forest}}
+| {{code|flower_forest}}
+|-
+| {{BiomeSprite|taiga-mountains}} [[针叶林山地]]
+| {{code|mutated_taiga}}
+| {{code|taiga_mountains}}
+|-
+| {{BiomeSprite|swamp-hills}} [[沼泽丘陵]]
+| {{code|mutated_swampland}}
+| {{code|swamp_hills}}
+|-
+| {{BiomeSprite|ice-spikes}} [[冰刺之地]]
+| {{code|mutated_ice_flats}}
+| {{code|ice_spikes}}
+|-
+| {{BiomeSprite|modified-jungle}} [[丛林变种]]
+| {{code|mutated_jungle}}
+| {{code|modified_jungle}}
+|-
+| {{BiomeSprite|modified-jungle-edge}} [[丛林边缘变种]]
+| {{code|mutated_jungle_edge}}
+| {{code|modified_jungle_edge}}
+|-
+| {{BiomeSprite|tall-birch-forest}} [[高大桦木森林]]
+| {{code|mutated_birch_forest}}
+| {{code|tall_birch_forest}}
+|-
+| {{BiomeSprite|tall-birch-hills}} [[高大桦木丘陵]]
+| {{code|mutated_birch_forest_hills}}
+| {{code|tall_birch_hills}}
+|-
+| {{BiomeSprite|dark-forest-hills}} [[黑森林丘陵]]
+| {{code|mutated_roofed_forest}}
+| {{code|dark_forest_hills}}
+|-
+| {{BiomeSprite|snowy-taiga-mountains}} [[积雪的针叶林山地]]
+| {{code|mutated_taiga_cold}}
+| {{code|snowy_taiga_mountains}}
+|-
+| {{BiomeSprite|giant-spruce-taiga}} [[巨型云杉针叶林]]
+| {{code|mutated_redwood_taiga}}
+| {{code|giant_spruce_taiga}}
+|-
+| {{BiomeSprite|giant-spruce-taiga-hills}} [[巨型云杉针叶林丘陵]]
+| {{code|mutated_redwood_taiga_hills}}
+| {{code|giant_spruce_taiga_hills}}
+|-
+| {{BiomeSprite|modified-gravelly-mountains}} [[沙砾山地+]]
+| {{code|mutated_extreme_hills_with_trees}}
+| {{code|modified_gravelly_mountains}}
+|-
+| {{BiomeSprite|shattered-savanna}} [[破碎的热带草原]]
+| {{code|mutated_savanna}}
+| {{code|shattered_savanna}}
+|-
+| {{BiomeSprite|shattered-savanna-plateau}} [[破碎的热带高原]]
+| {{code|mutated_savanna_rock}}
+| {{code|shattered_savanna_plateau}}
+|-
+| {{BiomeSprite|eroded-badlands}} [[风蚀恶地]]
+| {{code|mutated_mesa}}
+| {{code|eroded_badlands}}
+|-
+| {{BiomeSprite|modified-wooded-badlands-plateau}} [[繁茂的恶地高原变种]]
+| {{code|mutated_mesa_rock}}
+| {{code|modified_wooded_badlands_plateau}}
+|-
+| {{BiomeSprite|modified-badlands-plateau}} [[恶地高原变种]]
+| {{code|mutated_mesa_clear_rock}}
+| {{code|modified_badlands_plateau}}
+|}
+
+== [[粒子]]ID ==
+粒子ID现在也拥有了像其他ID (在前面{{code|minecraft:}}）一样的命名空间。
+{|class="wikitable stikitable"
+! 改动
+! [[Java版1.12.2]]
+! [[Java版1.13]]
+|-
+| 重命名
+| {{code|angryVillager}}
+| {{code|angry_villager}}
+|-
+| rowspan="2"| 合并
+| {{code|blockdust}}
+| rowspan="2"| {{code|block}}
+|-
+| {{code|blockcrack}}
+|-
+| 重命名
+| {{code|damageIndicator}}
+| {{code|damage_indicator}}
+|-
+| 移除
+| {{code|depthsuspend}}
+| —
+|-
+| 重命名
+| {{code|dragonbreath}}
+| {{code|dragon_breath}}
+|-
+| 重命名
+| {{code|dripLava}}
+| {{code|dripping_lava}}
+|-
+| 重命名
+| {{code|dripWater}}
+| {{code|dripping_water}}
+|-
+| 重命名
+| {{code|droplet}}
+| {{code|rain}}
+|-
+| 重命名
+| {{code|enchantmenttable}}
+| {{code|enchant}}
+|-
+| 重命名
+| {{code|endRod}}
+| {{code|end_rod}}
+|-
+| rowspan="2"| 合并
+| {{code|explode}}
+| rowspan="2"| {{code|poof}}
+|-
+| {{code|snowshovel}}
+|-
+| 重命名
+| {{code|fallingdust}}
+| {{code|falling_dust}}
+|-
+| 重命名
+| {{code|fireworksSpark}}
+| {{code|firework}}
+|-
+| 移除
+| {{code|footstep}}
+| —
+|-
+| 重命名
+| {{code|happyVillager}}
+| {{code|happy_villager}}
+|-
+| 重命名
+| {{code|hugeexplosion}}
+| {{code|explosion_emitter}}
+|-
+| 重命名
+| {{code|iconcrack}}
+| {{code|item}}
+|-
+| 重命名
+| {{code|instantSpell}}
+| {{code|instant_effect}}
+|-
+| 重命名
+| {{code|largeexplosion}}
+| {{code|explosion}}
+|-
+| 重命名
+| {{code|largesmoke}}
+| {{code|large_smoke}}
+|-
+| 重命名
+| {{code|magicCrit}}
+| {{code|enchanted_hit}}
+|-
+| 重命名
+| {{code|mobappearance}}
+| {{code|elder_guardian}}
+|-
+| 重命名
+| {{code|mobSpell}}
+| {{code|entity_effect}}
+|-
+| 重命名
+| {{code|mobSpellAmbient}}
+| {{code|ambient_entity_effect}}
+|-
+| 重命名
+| {{code|reddust}}
+| {{code|dust}}
+|-
+| 重命名
+| {{code|slime}}
+| {{code|item_slime}}
+|-
+| 重命名
+| {{code|snowballpoof}}
+| {{code|item_snowball}}
+|-
+| 重命名
+| {{code|spell}}
+| {{code|effect}}
+|-
+| 重命名
+| {{code|suspended}}
+| {{code|underwater}}
+|-
+| 重命名
+| {{code|sweepAttack}}
+| {{code|sweep_attack}}
+|-
+| 移除
+| {{code|take}}
+| —
+|-
+| 重命名
+| {{code|totem}}
+| {{code|totem_of_undying}}
+|-
+| 重命名
+| {{code|townaura}}
+| {{code|mycelium}}
+|-
+| 重命名
+| {{code|wake}}
+| {{code|fishing}}
+|-
+| 重命名
+| {{code|witchMagic}}
+| {{code|witch}}
+|}
+
+== 声音事件 ==
+{|class="wikitable"
+! 旧
+! 新
+|-
+| <code>block.cloth.break</code>
+| <code>block.wool.break</code>
+|-
+| <code>block.cloth.fall</code>
+| <code>block.wool.fall</code>
+|-
+| <code>block.cloth.hit</code>
+| <code>block.wool.hit</code>
+|-
+| <code>block.cloth.place</code>
+| <code>block.wool.place</code>
+|-
+| <code>block.cloth.step</code>
+| <code>block.wool.step</code>
+|-
+| <code>block.enderchest.close</code>
+| <code>block.ender_chest.close</code>
+|-
+| <code>block.enderchest.open</code>
+| <code>block.ender_chest.open</code>
+|-
+| <code>block.metal_pressureplate.click_off</code>
+| <code>block.metal_pressure_plate.click_off</code>
+|-
+| <code>block.metal_pressureplate.click_on</code>
+| <code>block.metal_pressure_plate.click_on</code>
+|-
+| <code>block.note.basedrum</code>
+| <code>block.note_block.basedrum</code>
+|-
+| <code>block.note.bass</code>
+| <code>block.note_block.bass</code>
+|-
+| <code>block.note.bell</code>
+| <code>block.note_block.bell</code>
+|-
+| <code>block.note.chime</code>
+| <code>block.note_block.chime</code>
+|-
+| <code>block.note.flute</code>
+| <code>block.note_block.flute</code>
+|-
+| <code>block.note.guitar</code>
+| <code>block.note_block.guitar</code>
+|-
+| <code>block.note.harp</code>
+| <code>block.note_block.harp</code>
+|-
+| <code>block.note.hat</code>
+| <code>block.note_block.hat</code>
+|-
+| <code>block.note.pling</code>
+| <code>block.note_block.pling</code>
+|-
+| <code>block.note.snare</code>
+| <code>block.note_block.snare</code>
+|-
+| <code>block.note.xylophone</code>
+| <code>block.note_block.xylophone</code>
+|-
+| <code>block.slime.break</code>
+| <code>block.slime_block.break</code>
+|-
+| <code>block.slime.fall</code>
+| <code>block.slime_block.fall</code>
+|-
+| <code>block.slime.hit</code>
+| <code>block.slime_block.hit</code>
+|-
+| <code>block.slime.place</code>
+| <code>block.slime_block.place</code>
+|-
+| <code>block.slime.step</code>
+| <code>block.slime_block.step</code>
+|-
+| <code>block.stone_pressureplate.click_off</code>
+| <code>block.stone_pressure_plate.click_off</code>
+|-
+| <code>block.stone_pressureplate.click_on</code>
+| <code>block.stone_pressure_plate.click_on</code>
+|-
+| <code>block.waterlily.place</code>
+| <code>block.lily_pad.place</code>
+|-
+| <code>block.wood_pressureplate.click_off</code>
+| <code>block.wooden_pressure_plate.click_off</code>
+|-
+| <code>block.wood_button.click_on</code>
+| <code>block.wooden_button.click_on</code>
+|-
+| <code>block.wood_button.click_off</code>
+| <code>block.wooden_button.click_off</code>
+|-
+| <code>block.wood_pressureplate.click_on</code>
+| <code>block.wooden_pressure_plate.click_on</code>
+|-
+| <code>entity.armorstand.break</code>
+| <code>entity.armor_stand.break</code>
+|-
+| <code>entity.armorstand.fall</code>
+| <code>entity.armor_stand.fall</code>
+|-
+| <code>entity.armorstand.hit</code>
+| <code>entity.armor_stand.hit</code>
+|-
+| <code>entity.armorstand.place</code>
+| <code>entity.armor_stand.place</code>
+|-
+| <code>entity.bobber.retrieve</code>
+| <code>entity.fishing_bobber.retrieve</code>
+|-
+| <code>entity.bobber.splash</code>
+| <code>entity.fishing_bobber.splash</code>
+|-
+| <code>entity.bobber.throw</code>
+| <code>entity.fishing_bobber.throw</code>
+|-
+| <code>entity.enderdragon.ambient</code>
+| <code>entity.ender_dragon.ambient</code>
+|-
+| <code>entity.enderdragon.death</code>
+| <code>entity.ender_dragon.death</code>
+|-
+| <code>entity.enderdragon.flap</code>
+| <code>entity.ender_dragon.flap</code>
+|-
+| <code>entity.enderdragon.growl</code>
+| <code>entity.ender_dragon.growl</code>
+|-
+| <code>entity.enderdragon.hurt</code>
+| <code>entity.ender_dragon.hurt</code>
+|-
+| <code>entity.enderdragon.shoot</code>
+| <code>entity.ender_dragon.shoot</code>
+|-
+| <code>entity.enderdragon_fireball.explode</code>
+| <code>entity.dragon_fireball.explode</code>
+|-
+| <code>entity.endereye.death</code>
+| <code>entity.ender_eye.death</code>
+|-
+| <code>entity.endereye.launch</code>
+| <code>entity.ender_eye.launch</code>
+|-
+| <code>entity.endermen.ambient</code>
+| <code>entity.enderman.ambient</code>
+|-
+| <code>entity.endermen.death</code>
+| <code>entity.enderman.death</code>
+|-
+| <code>entity.endermen.hurt</code>
+| <code>entity.enderman.hurt</code>
+|-
+| <code>entity.endermen.scream</code>
+| <code>entity.enderman.scream</code>
+|-
+| <code>entity.endermen.stare</code>
+| <code>entity.enderman.stare</code>
+|-
+| <code>entity.endermen.teleport</code>
+| <code>entity.enderman.teleport</code>
+|-
+| <code>entity.enderpearl.throw</code>
+| <code>entity.ender_pearl.throw</code>
+|-
+| <code>entity.evocation_illager.ambient</code>
+| <code>entity.evoker.ambient</code>
+|-
+| <code>entity.evocation_illager.cast_spell</code>
+| <code>entity.evoker.cast_spell</code>
+|-
+| <code>entity.evocation_illager.death</code>
+| <code>entity.evoker.death</code>
+|-
+| <code>entity.evocation_illager.hurt</code>
+| <code>entity.evoker.hurt</code>
+|-
+| <code>entity.evocation_illager.prepare_attack</code>
+| <code>entity.evoker.prepare_attack</code>
+|-
+| <code>entity.evocation_illager.prepare_summon</code>
+| <code>entity.evoker.prepare_summon</code>
+|-
+| <code>entity.evocation_illager.prepare_wololo</code>
+| <code>entity.evoker.prepare_wololo</code>
+|-
+| <code>entity.firework.blast</code>
+| <code>entity.firework_rocket.blast</code>
+|-
+| <code>entity.firework.blast_far</code>
+| <code>entity.firework_rocket.blast_far</code>
+|-
+| <code>entity.firework.large_blast</code>
+| <code>entity.firework_rocket.large_blast</code>
+|-
+| <code>entity.firework.large_blast_far</code>
+| <code>entity.firework_rocket.large_blast_far</code>
+|-
+| <code>entity.firework.launch</code>
+| <code>entity.firework_rocket.launch</code>
+|-
+| <code>entity.firework.shoot</code>
+| <code>entity.firework_rocket.shoot</code>
+|-
+| <code>entity.firework.twinkle</code>
+| <code>entity.firework_rocket.twinkle</code>
+|-
+| <code>entity.firework.twinkle_far</code>
+| <code>entity.firework_rocket.twinkle_far</code>
+|-
+| <code>entity.illusion_illager.ambient</code>
+| <code>entity.illusioner.ambient</code>
+|-
+| <code>entity.illusion_illager.cast_spell</code>
+| <code>entity.illusioner.cast_spell</code>
+|-
+| <code>entity.illusion_illager.death</code>
+| <code>entity.illusioner.death</code>
+|-
+| <code>entity.illusion_illager.hurt</code>
+| <code>entity.illusioner.hurt</code>
+|-
+| <code>entity.illusion_illager.mirror_move</code>
+| <code>entity.illusioner.mirror_move</code>
+|-
+| <code>entity.illusion_illager.prepare_blindness</code>
+| <code>entity.illusioner.prepare_blindness</code>
+|-
+| <code>entity.illusion_illager.prepare_mirror</code>
+| <code>entity.illusioner.prepare_mirror</code>
+|-
+| <code>entity.irongolem.attack</code>
+| <code>entity.iron_golem.attack</code>
+|-
+| <code>entity.irongolem.death</code>
+| <code>entity.iron_golem.death</code>
+|-
+| <code>entity.irongolem.hurt</code>
+| <code>entity.iron_golem.hurt</code>
+|-
+| <code>entity.irongolem.step</code>
+| <code>entity.iron_golem.step</code>
+|-
+| <code>entity.itemframe.add_item</code>
+| <code>entity.item_frame.add_item</code>
+|-
+| <code>entity.itemframe.break</code>
+| <code>entity.item_frame.break</code>
+|-
+| <code>entity.itemframe.place</code>
+| <code>entity.item_frame.place</code>
+|-
+| <code>entity.itemframe.remove_item</code>
+| <code>entity.item_frame.remove_item</code>
+|-
+| <code>entity.itemframe.rotate_item</code>
+| <code>entity.item_frame.rotate_item</code>
+|-
+| <code>entity.leashknot.break</code>
+| <code>entity.leash_knot.break</code>
+|-
+| <code>entity.leashknot.place</code>
+| <code>entity.leash_knot.place</code>
+|-
+| <code>entity.lightning.impact</code>
+| <code>entity.lightning_bolt.impact</code>
+|-
+| <code>entity.lightning.thunder</code>
+| <code>entity.lightning_bolt.thunder</code>
+|-
+| <code>entity.lingeringpotion.throw</code>
+| <code>entity.lingering_potion.throw</code>
+|-
+| <code>entity.magmacube.death</code>
+| <code>entity.magma_cube.death</code>
+|-
+| <code>entity.magmacube.hurt</code>
+| <code>entity.magma_cube.hurt</code>
+|-
+| <code>entity.magmacube.jump</code>
+| <code>entity.magma_cube.jump</code>
+|-
+| <code>entity.magmacube.squish</code>
+| <code>entity.magma_cube.squish</code>
+|-
+| <code>entity.parrot.imitate.enderdragon</code>
+| <code>entity.parrot.imitate.ender_dragon</code>
+|-
+| <code>entity.parrot.imitate.evocation_illager</code>
+| <code>entity.parrot.imitate.evoker</code>
+|-
+| <code>entity.parrot.imitate.illusion_illager</code>
+| <code>entity.parrot.imitate.illusioner</code>
+|-
+| <code>entity.parrot.imitate.magmacube</code>
+| <code>entity.parrot.imitate.magma_cube</code>
+|-
+| <code>entity.parrot.imitate.vindication_illager</code>
+| <code>entity.parrot.imitate.vindicator</code>
+|-
+| <code>entity.player.splash.highspeed</code>
+| <code>entity.player.splash.high_speed</code>
+|-
+| <code>entity.polar_bear.baby_ambient</code>
+| <code>entity.polar_bear.ambient_baby</code>
+|-
+| <code>entity.small_magmacube.death</code>
+| <code>entity.magma_cube.death_small</code>
+|-
+| <code>entity.small_magmacube.hurt</code>
+| <code>entity.magma_cube.hurt_small</code>
+|-
+| <code>entity.small_magmacube.squish</code>
+| <code>entity.magma_cube.squish_small</code>
+|-
+| <code>entity.small_slime.death</code>
+| <code>entity.slime.death_small</code>
+|-
+| <code>entity.small_slime.hurt</code>
+| <code>entity.slime.hurt_small</code>
+|-
+| <code>entity.small_slime.jump</code>
+| <code>entity.slime.jump_small</code>
+|-
+| <code>entity.small_slime.squish</code>
+| <code>entity.slime.squish_small</code>
+|-
+| <code>entity.snowman.ambient</code>
+| <code>entity.snow_golem.ambient</code>
+|-
+| <code>entity.snowman.death</code>
+| <code>entity.snow_golem.death</code>
+|-
+| <code>entity.snowman.hurt</code>
+| <code>entity.snow_golem.hurt</code>
+|-
+| <code>entity.snowman.shoot</code>
+| <code>entity.snow_golem.shoot</code>
+|-
+| <code>entity.vindication_illager.ambient</code>
+| <code>entity.vindicator.ambient</code>
+|-
+| <code>entity.vindication_illager.death</code>
+| <code>entity.vindicator.death</code>
+|-
+| <code>entity.vindication_illager.hurt</code>
+| <code>entity.vindicator.hurt</code>
+|-
+| <code>entity.zombie.attack_door_wood</code>
+| <code>entity.zombie.attack_wooden_door</code>
+|-
+| <code>entity.zombie.break_door_wood</code>
+| <code>entity.zombie.break_wooden_door</code>
+|-
+| <code>entity.zombie_pig.ambient</code>
+| <code>entity.zombie_pigman.ambient</code>
+|-
+| <code>entity.zombie_pig.angry</code>
+| <code>entity.zombie_pigman.angry</code>
+|-
+| <code>entity.zombie_pig.death</code>
+| <code>entity.zombie_pigman.death</code>
+|-
+| <code>entity.zombie_pig.hurt</code>
+| <code>entity.zombie_pigman.hurt</code>
+|-
+| <code>record.11</code>
+| <code>music_disc.11</code>
+|-
+| <code>record.13</code>
+| <code>music_disc.13</code>
+|-
+| <code>record.blocks</code>
+| <code>music_disc.blocks</code>
+|-
+| <code>record.cat</code>
+| <code>music_disc.cat</code>
+|-
+| <code>record.chirp</code>
+| <code>music_disc.chirp</code>
+|-
+| <code>record.far</code>
+| <code>music_disc.far</code>
+|-
+| <code>record.mall</code>
+| <code>music_disc.mall</code>
+|-
+| <code>record.mellohi</code>
+| <code>music_disc.mellohi</code>
+|-
+| <code>record.stal</code>
+| <code>music_disc.stal</code>
+|-
+| <code>record.strad</code>
+| <code>music_disc.strad</code>
+|-
+| <code>record.wait</code>
+| <code>music_disc.wait</code>
+|-
+| <code>record.ward</code>
+| <code>music_disc.ward</code>
+|}
+
+== [[方块状态]] ==
+{|class="wikitable stikitable"
+! colspan="2" | [[Java版1.12.2]]
+! colspan="2" | [[Java版1.13]]
+|-
+! 方块
+! 状态
+! 方块
+! 状态
+|-
+| {{BlockSprite|stone}} [[石头]]
+| {{code|variant}}
+| {{BlockSprite|stone}} [[石头]]
+| —
+|-
+| rowspan="2" | {{BlockSprite|dirt}} [[泥土]]
+| rowspan="2" | {{code|variant}}<br>{{code|snowy}}
+| {{BlockSprite|dirt}} [[泥土]]
+{{BlockSprite|coarse-dirt}} [[砂土]]
+| —
+|-
+| {{BlockSprite|podzol}} [[灰化土]]
+| {{code|snowy}}
+|-
+| {{BlockSprite|all-planks}} [[木板]]
+| {{code|variant}}
+| {{BlockSprite|all-planks}} [[木板]]
+| —
+|-
+| {{BlockSprite|all-saplings}} [[树苗]]
+| {{code|type}}
+| {{BlockSprite|all-saplings}} [[树苗]]
+| —
+|-
+| {{BlockSprite|sand}} [[沙子]]
+| {{code|variant}}
+| {{BlockSprite|sand}} [[沙子]]
+| —
+|-
+| rowspan="2" | {{BlockSprite|all-logs}} [[原木]]
+
+| rowspan="4" | {{code|variant}}<br>{{code|<nowiki>axis=none|x|y|z</nowiki>}}
+| {{BlockSprite|oak-log}} [[橡木原木]]
+{{BlockSprite|spruce-log}} [[云杉原木]]
+
+{{BlockSprite|birch-log}} [[白桦原木]]
+
+{{BlockSprite|jungle-log}} [[丛林原木]]
+| rowspan="4" | {{code|<nowiki>axis=x|y|z</nowiki>}}
+|-
+|{{BlockSprite|oak-wood}} [[木头|橡木]]
+{{BlockSprite|spruce-wood}} [[云杉木]]
+
+{{BlockSprite|birch-wood}} [[白桦木]]
+
+{{BlockSprite|jungle-wood}} [[丛林木]]
+|-
+| rowspan="2" |{{BlockSprite|all-logs}} [[原木]] (2)
+|{{BlockSprite|acacia-log}} [[金合欢原木]]
+{{BlockSprite|dark-oak-log}} [[深色橡木原木]]
+|-
+|{{BlockSprite|acacia-wood}} [[金合欢木]]
+{{BlockSprite|dark-oak-wood}} [[深色橡木]]
+|-
+| {{BlockSprite|all-leaves}} [[树叶]]
+| rowspan="2" | {{code|variant}}<br>{{code|decayable}}
+
+{{code|check_decay}}
+| rowspan="2" | {{BlockSprite|all-leaves}} [[树叶]]
+| rowspan="2" | {{code|<nowiki>distance=1-7</nowiki>}}<br>{{code|<nowiki>persistent=true|false</nowiki>}}
+|-
+|{{BlockSprite|all-leaves}} [[树叶]] (2)
+|-
+| {{BlockSprite|sponge}} [[海绵]]
+| {{code|wet}}
+| {{BlockSprite|sponge}} [[海绵]]
+| —
+|-
+| {{BlockSprite|sandstone}} [[砂岩]]
+| {{code|type}}
+| {{BlockSprite|sandstone}} [[砂岩]]
+| —
+|-
+| {{BlockSprite|note-block}} [[音符盒]]
+| —
+| {{BlockSprite|note-block}} [[音符盒]]
+| {{code|<nowiki>note=0-24</nowiki>}}<br>{{code|<nowiki>powered=true|false</nowiki>}}<br>{{code|<nowiki>instrument=xylophone|chime|guitar|bell|flute|bass|hat|snare|basedrum|harp</nowiki>}}
+|-
+| {{BlockSprite|grass}} [[草丛]]
+| {{code|type}}
+| {{BlockSprite|grass}} [[草丛]]
+| —
+|-
+| {{BlockSprite|moving-piston}} [[移动的活塞]]
+| {{code|extended}}
+| {{BlockSprite|moving-piston}} [[移动的活塞]]
+| {{code|<nowiki>type=normal|sticky</nowiki>}}
+|-
+| {{BlockSprite|all-wool}} [[羊毛]]
+| {{code|color}}
+| {{BlockSprite|all-wool}} [[羊毛]] 
+| —
+|-
+| {{BlockSprite|dandelion}} [[蒲公英]]
+| rowspan="2" | {{code|type}}
+| rowspan="2" | {{BlockSprite|dandelion}} [[花]]
+| rowspan="2" | —
+|-
+| {{BlockSprite|poppy}} [[花]]
+|-
+| {{BlockSprite|all-planks}} [[台阶|双木台阶]]
+| {{code|variant}}
+| rowspan="2" | {{BlockSprite|all-wooden-slabs}} [[台阶|木台阶]]
+| rowspan="2" | {{code|<nowiki>type=top|bottom|double</nowiki>}}
+|-
+| {{BlockSprite|all-wooden-slabs}} [[台阶|木台阶]]
+| {{code|variant}}<br>{{code|half}}
+|-
+| {{BlockSprite|double-smooth-stone-slab}} [[台阶|双石台阶]]
+| {{code|variant}}<br>{{code|seamless}}
+| rowspan="2" | {{BlockSprite|all-slabs}} [[石台阶]]
+| rowspan="2" | {{code|<nowiki>type=top|bottom|double</nowiki>}}
+|-
+| {{BlockSprite|all-slabs}} [[石头台阶]]
+| {{code|variant}}<br>{{code|half}}
+|-
+| {{BlockSprite|red-sandstone}} [[台阶|双红砂岩台阶]]
+| {{code|variant}}<br>{{code|seamless}}
+| rowspan="2" | {{BlockSprite|red-sandstone-slab}} [[红砂岩台阶]]
+| rowspan="2" | {{code|<nowiki>type=top|bottom|double</nowiki>}}
+|-
+| {{BlockSprite|red-sandstone-slab}} [[红砂岩台阶]]
+| {{code|variant}}<br>{{code|half}}
+|-
+| {{BlockSprite|purpur-block}} [[台阶|双紫珀台阶]]
+| {{code|variant}}
+| rowspan="2" |{{BlockSprite|purpur-slab}} [[紫珀台阶]]
+| rowspan="2" | {{code|<nowiki>type=top|bottom|double</nowiki>}}
+|-
+| {{BlockSprite|purpur-slab}} [[紫珀台阶]]
+| {{code|variant}}<br>{{code|half}}
+|-
+| {{BlockSprite|tnt}} [[TNT]]
+| {{code|<nowiki>explode</nowiki>}}
+| {{BlockSprite|tnt}} [[TNT]]
+| —
+|-
+| rowspan="2" | {{BlockSprite|torch}} [[火把]]
+| rowspan="2" | {{code|<nowiki>facing=north|east|south|west|up</nowiki>}}
+| {{BlockSprite|wall-torch}} [[墙上的火把]]
+| {{code|<nowiki>facing=north|south|east|west</nowiki>}}
+|-
+| {{BlockSprite|torch}} [[火把]]
+| —
+|-
+| {{BlockSprite|chest}} [[箱子]]
+| —
+| {{BlockSprite|chest}} [[箱子]]
+| {{code|<nowiki>type=single|left|right</nowiki>}}
+|-
+| {{BlockSprite|furnace}} [[熔炉]]
+| rowspan="2" | —
+| rowspan="2" | {{BlockSprite|furnace}} [[熔炉]]
+| rowspan="2" | {{code|<nowiki>lit=true|false</nowiki>}}
+|-
+| {{BlockSprite|lit-furnace}} [[熔炉|燃烧的熔炉]]
+|-
+| {{BlockSprite|lever}} [[拉杆]]
+| {{code|<nowiki>facing=north|east|south|west|</nowiki>}}<br>{{code|<nowiki>|up_x|down_x|up_z|down_z</nowiki>}}
+| {{BlockSprite|lever}} [[拉杆]]
+| {{code|<nowiki>face=ceiling|wall|floor</nowiki>}}<br>{{code|<nowiki>facing=north|east|south|west</nowiki>}}
+|-
+| {{BlockSprite|redstone-ore}} [[红石矿石]]
+| rowspan="2" | —
+| rowspan="2" | {{BlockSprite|redstone-ore}} [[红石矿石]]
+| rowspan="2" | {{code|<nowiki>lit=true|false</nowiki>}}
+|-
+| {{BlockSprite|redstone-ore}} [[发光的红石矿石]]
+|-
+| {{BlockSprite|unlit-redstone-torch}} [[红石火把|熄灭的红石火把]]
+| rowspan="2" | {{code|<nowiki>facing=north|east|south|west|up</nowiki>}}
+| {{BlockSprite|redstone-wall-torch}} [[墙上的红石火把]]
+| {{code|<nowiki>lit=true|false</nowiki>}}<br>{{code|<nowiki>facing=north|east|south|west</nowiki>}}
+|-
+| {{BlockSprite|redstone-torch}} [[红石火把]]
+| {{BlockSprite|redstone-torch}} [[红石火把]]
+| {{code|<nowiki>lit=true|false</nowiki>}}
+|-
+| {{BlockSprite|stone-button}} [[石质按钮]]
+| {{code|<nowiki>facing=north|east|south|west|up|down</nowiki>}}
+| {{BlockSprite|stone-button}} [[石质按钮]]
+| {{code|<nowiki>face=ceiling|wall|floor</nowiki>}}<br>{{code|<nowiki>facing=north|east|south|west</nowiki>}}
+|-
+| {{BlockSprite|oak-trapdoor}} [[橡木活板门]]
+| —
+| {{BlockSprite|oak-trapdoor}} [[橡木活板门]]
+| {{code|<nowiki>powered=true|false</nowiki>}}
+|-
+| {{BlockSprite|all-infested-blocks}} [[虫蚀方块]]
+| {{code|variant}}
+| {{BlockSprite|all-infested-blocks}} [[虫蚀方块]]
+| —
+|-
+| {{BlockSprite|stone-bricks}} [[石砖]]
+| {{code|variant}}
+| {{BlockSprite|stone-bricks}} [[石砖]]
+| —
+|-
+| rowspan="2" | {{BlockSprite|brown-mushroom-block}} [[棕色蘑菇方块]]
+| rowspan="2" | {{code|variant}}
+| {{BlockSprite|brown-mushroom-block}} [[棕色蘑菇方块]]
+| {{code|<nowiki>up=true|false</nowiki>}}<br>{{code|<nowiki>down=true|false</nowiki>}}<br>{{code|<nowiki>north=true|false</nowiki>}}<br>{{code|<nowiki>south=true|false</nowiki>}}<br>{{code|<nowiki>east=true|false</nowiki>}}<br>{{code|<nowiki>west=true|false</nowiki>}}
+|-
+| rowspan="2" | {{BlockSprite|mushroom-stem}} [[蘑菇柄]]
+| rowspan="2" |
+{{code|<nowiki>up=true|false</nowiki>}}<br>{{code|<nowiki>down=true|false</nowiki>}}<br>{{code|<nowiki>north=true|false</nowiki>}}<br>{{code|<nowiki>south=true|false</nowiki>}}<br>{{code|<nowiki>east=true|false</nowiki>}}<br>{{code|<nowiki>west=true|false</nowiki>}}
+|-
+| rowspan="2" | {{BlockSprite|red-mushroom-block}} [[红色蘑菇方块]]
+| rowspan="2" | {{code|variant}}
+|-
+| {{BlockSprite|red-mushroom-block}} [[红色蘑菇方块]]
+| {{code|<nowiki>up=true|false</nowiki>}}<br>{{code|<nowiki>down=true|false</nowiki>}}<br>{{code|<nowiki>north=true|false</nowiki>}}<br>{{code|<nowiki>south=true|false</nowiki>}}<br>{{code|<nowiki>east=true|false</nowiki>}}<br>{{code|<nowiki>west=true|false</nowiki>}}
+|-
+| {{BlockSprite|redstone-lamp}} [[红石灯]]
+| rowspan="2" | —
+| rowspan="2" | {{BlockSprite|redstone-lamp}} [[红石灯]]
+| rowspan="2" | {{code|<nowiki>lit=true|false</nowiki>}}
+|-
+| {{BlockSprite|lit-redstone-lamp}} [[发光的红石灯]]
+|-
+| {{BlockSprite|cobblestone-wall}} [[圆石墙]]
+| {{code|variant}}
+| {{BlockSprite|cobblestone-wall}} [[圆石墙]]
+| —
+|-
+| {{BlockSprite|oak-button}} [[橡木按钮]]
+| {{code|<nowiki>facing=north|east|south|west|up|down</nowiki>}}
+| {{BlockSprite|oak-button}} [[橡木按钮]]
+| {{code|<nowiki>face=ceiling|wall|floor</nowiki>}}<br>{{code|<nowiki>facing=north|east|south|west</nowiki>}}
+|-
+| {{BlockSprite|anvil}} [[铁砧]]
+| {{code|damage}}
+| {{BlockSprite|anvil}} [[铁砧]]
+| —
+|-
+| {{BlockSprite|trapped-chest}} [[陷阱箱]]
+| —
+| {{BlockSprite|trapped-chest}} [[陷阱箱]]
+| {{code|<nowiki>type=single|left|right</nowiki>}}
+|-
+| {{BlockSprite|daylight-detector}} [[阳光探测器]]
+| —
+| {{BlockSprite|daylight-detector}} [[阳光探测器]]
+| {{code|<nowiki>inverted=true|false</nowiki>}}
+|-
+| rowspan="3" | {{BlockSprite|block-of-quartz}} [[石英块]]
+| rowspan="3" | {{code|variant}}
+| {{BlockSprite|block-of-quartz}} [[石英块]]
+| —
+|-
+| {{BlockSprite|chiseled-quartz-block}} [[雕纹石英块]]
+| —
+|-
+| {{BlockSprite|quartz-pillar}} [[石英柱]]
+| {{code|<nowiki>axis=x|y|z</nowiki>}}
+|-
+| {{BlockSprite|colored-terracotta}} [[染色陶瓦]]
+| {{code|color}}
+| {{BlockSprite|colored-terracotta}} [[染色陶瓦]]
+| —
+|-
+| {{BlockSprite|iron-trapdoor}} [[铁活板门]]
+| —
+| {{BlockSprite|iron-trapdoor}} [[铁活板门]]
+| {{code|<nowiki>powered=true|false</nowiki>}}
+|-
+| {{BlockSprite|all-carpets}} [[地毯]]
+| {{code|color}}
+| {{BlockSprite|all-carpets}} [[地毯]]
+| —
+|-
+| {{BlockSprite|sunflower}} [[花|大型植物]]
+| {{code|facing}}<br>{{code|variant}}
+| {{BlockSprite|sunflower}} [[花|大型植物]]
+| —
+|-
+| {{BlockSprite|all-stained-glass}} [[染色玻璃]]
+| {{code|color}}
+| {{BlockSprite|all-stained-glass}} [[染色玻璃]]
+| —
+|-
+| {{BlockSprite|all-stained-glass-panes}} [[染色玻璃板]]
+| {{code|color}}
+| {{BlockSprite|all-stained-glass-panes}} [[染色玻璃板]]
+| —
+|-
+| {{BlockSprite|prismarine}} [[海晶石]]
+| {{code|variant}}
+| {{BlockSprite|prismarine}} [[海晶石]]
+| —
+|-
+| {{BlockSprite|red-sandstone}} [[红砂岩]]
+| {{code|variant}}
+| {{BlockSprite|red-sandstone}} [[红砂岩]]
+| —
+|-
+| {{BlockSprite|all-concrete}} [[混凝土]]
+| {{code|color}}
+| {{BlockSprite|all-concrete}} [[混凝土]]
+| —
+|-
+| {{BlockSprite|all-concrete-powder}} [[混凝土粉末]]
+| {{code|color}}
+| {{BlockSprite|all-concrete-powder}} [[混凝土粉末]]
+| —
+|-
+| {{BlockSprite|redstone-repeater-off}} [[红石中继器|未激活的红石中继器]]
+| rowspan="2" | —
+| rowspan="2" | {{ItemSprite|redstone-repeater}} [[红石中继器]]
+| rowspan="2" | {{code|<nowiki>powered=true|false</nowiki>}}
+|-
+| {{BlockSprite|redstone-repeater-on}} [[红石中继器|激活的红石中继器]]
+|-
+| rowspan="2" | {{BlockSprite|pumpkin-stem}} [[南瓜梗]]
+| rowspan="2" | {{code|age}}<br>{{code|<nowiki>facing=north|south|east|west|up</nowiki>}}
+| {{BlockSprite|pumpkin-stem}} [[南瓜梗]]
+| {{code|age}}
+|-
+| {{BlockSprite|attached-pumpkin-stem}} [[附着的南瓜梗]]
+| {{code|<nowiki>facing=north|south|east|west</nowiki>}}
+|-
+| rowspan="2" | {{BlockSprite|melon-stem}} [[西瓜梗]]
+| rowspan="2" | {{code|age}}<br>{{code|<nowiki>facing=north|south|east|west|up</nowiki>}}
+| {{BlockSprite|melon-stem}} [[西瓜梗]]
+| {{code|age}}
+|-
+| {{BlockSprite|attached-melon-stem}} [[附着的西瓜梗]]
+| {{code|<nowiki>facing=north|south|east|west</nowiki>}}
+|-
+| {{BlockSprite|flower-pot}} [[花盆]]
+| {{code|legacy_data}}<br>{{code|contents}}
+| {{BlockSprite|flower-pot}} [[花盆]]
+| —
+|-
+| rowspan="2" | {{BlockSprite|all-heads}} [[头颅]]
+| rowspan="2" | {{code|<nowiki>facing=north|east|south|west|up|down</nowiki>}}<br>{{code|<nowiki>nodrop</nowiki>}}
+| {{BlockSprite|skeleton-skull}} [[骷髅头颅]]
+{{BlockSprite|wither-skeleton-skull}} [[凋灵骷髅头颅]]
+
+{{BlockSprite|zombie-head}} [[僵尸的头]]
+
+{{BlockSprite|player-head}} [[玩家头颅]]
+
+{{BlockSprite|creeper-head}} [[苦力怕的头]]
+
+{{BlockSprite|dragon-head}} [[龙首]]
+| {{code|<nowiki>rotation=0-15</nowiki>}}
+|-
+| {{BlockSprite|skeleton-wall-skull}} [[墙上的骷髅头颅]]
+{{BlockSprite|wither-skeleton-wall-skull}} [[墙上的凋灵骷髅头颅]]
+
+{{BlockSprite|zombie-wall-head}} [[墙上的僵尸的头]]
+
+{{BlockSprite|player-wall-head}} [[墙上的玩家头颅]]
+
+{{BlockSprite|creeper-wall-head}} [[墙上的苦力怕的头]]
+
+{{BlockSprite|dragon-wall-head}} [[墙上的龙首]]
+| {{code|<nowiki>facing=north|east|south|west</nowiki>}}
+|}
+
+{{notelist|状态说明}}
+
+== [[画]] ==
+画现在也拥有了像其他ID (在前面<code>minecraft:</code>)一样的命名空间。
+{|class="wikitable"
+! rowspan="2" | 画
+! [[Java版1.12.2]]
+! [[Java版1.13]]
+|-
+! 旧名字
+! 新名字
+|-
+| [[File:Kebab Painting.png|128px]]
+| {{code|Kebab}}
+| {{code|kebab}}
+|-
+| [[File:Aztec Painting.png|128px]]
+| {{code|Aztec}}
+| {{code|aztec}}
+|-
+| [[File:Alban Painting.png|128px]]
+| {{code|Alban}}
+| {{code|alban}}
+|-
+| [[File:Aztec2 Painting.png|128px]]
+| {{code|Aztec2}}
+| {{code|aztec2}}
+|-
+| [[File:Bomb Painting.png|128px]]
+| {{code|Bomb}}
+| {{code|bomb}}
+|-
+| [[File:Plant Painting.png|128px]]
+| {{code|Plant}}
+| {{code|plant}}
+|-
+| [[File:Wasteland Painting.png|128px]]
+| {{code|Wasteland}}
+| {{code|wasteland}}
+|-
+| [[File:Wanderer Painting.png|128px]]
+| {{code|Wanderer}}
+| {{code|wanderer}}
+|-
+| [[File:Graham Painting.png|128px]]
+| {{code|Graham}}
+| {{code|graham}}
+|-
+| [[File:Pool Painting.png|128px]]
+| {{code|Pool}}
+| {{code|pool}}
+|-
+| [[File:Courbet Painting.png|128px]]
+| {{code|Courbet}}
+| {{code|courbet}}
+|-
+| [[File:Sunset Painting.png|128px]]
+| {{code|Sunset}}
+| {{code|sunset}}
+|-
+| [[File:Sea Painting.png|128px]]
+| {{code|Sea}}
+| {{code|sea}}
+|-
+| [[File:Creebet Painting.png|128px]]
+| {{code|Creebet}}
+| {{code|creebet}}
+|-
+| [[File:Match Painting.png|128px]]
+| {{code|Match}}
+| {{code|match}}
+|-
+| [[File:Bust Painting.png|128px]]
+| {{code|Bust}}
+| {{code|bust}}
+|-
+| [[File:Stage Painting.png|128px]]
+| {{code|Stage}}
+| {{code|stage}}
+|-
+| [[File:Void Painting.png|128px]]
+| {{code|Void}}
+| {{code|void}}
+|-
+| [[File:Skull And Roses Painting.png|128px]]
+| {{code|SkullAndRoses}}
+| {{code|skull_and_roses}}
+|-
+| [[File:Wither Painting.png|128px]]
+| {{code|Wither}}
+| {{code|wither}}
+|-
+| [[File:Fighters Painting.png|128px]]
+| {{code|Fighters}}
+| {{code|fighters}}
+|-
+| [[File:Skeleton Painting.png|128px]]
+| {{code|Skeleton}}
+| {{code|skeleton}}
+|-
+| [[File:Donkey Kong Painting.png|128px]]
+| {{code|DonkeyKong}}
+| {{code|donkey_kong}}
+|-
+| [[File:Pointer Painting.png|128px]]
+| {{code|Pointer}}
+| {{code|pointer}}
+|-
+| [[File:Pigscene Painting.png|128px]]
+| {{code|Pigscene}}
+| {{code|pigscene}}
+|-
+| [[File:Burning Skull Painting.png|128px]]
+| {{code|BurningSkull}}
+| {{code|burning_skull}}
+|}
+
+== [[Java版数据值|名称]] ==
+{|class="wikitable stikitable"
+! [[Java版1.12.2]]
+! [[Java版1.13]]
+|-
+| {{BlockSprite|oak-planks}} 橡木木板（Oak Wood Planks）
+| [[橡木木板]]（Oak Planks）
+|-
+| {{BlockSprite|spruce-planks}} 云杉木板（Spruce Wood Planks）
+| [[云杉木板]]（Spruce Planks）
+|-
+| {{BlockSprite|birch-planks}} 白桦木板（Birch Wood Planks）
+| [[白桦木板]]（Birch Planks）
+|-
+| {{BlockSprite|jungle-planks}} 丛林木板（Jungle Wood Planks）
+| [[丛林木板]]（Jungle Planks）
+|-
+| {{BlockSprite|acacia-planks}} 金合欢木板（Acacia Wood Planks）
+| [[金合欢木板]]（Acacia Planks）
+|-
+| {{BlockSprite|dark-oak-planks}} 深色橡木木板（Dark Oak Wood Planks）
+| [[深色橡木木板]]（Dark Oak Planks）
+|-
+| {{BlockSprite|oak-log}} 橡木
+| [[橡木原木]]
+|-
+| {{BlockSprite|spruce-log}} 云杉木
+| [[云杉原木]]
+|-
+| {{BlockSprite|birch-log}} 白桦木
+| [[白桦原木]]
+|-
+| {{BlockSprite|jungle-log}} 丛林木
+| [[丛林原木]]
+|-
+| {{BlockSprite|acacia-log}} 金合欢木
+| [[金合欢原木]]
+|-
+| {{BlockSprite|dark-oak-log}} 深色橡木
+| [[深色橡木原木]]
+|-
+| {{BlockSprite|cut-sandstone}} 平滑砂岩
+| [[切制砂岩]]
+|-
+| {{BlockSprite|piston-head}} 活塞
+| [[活塞头]]
+|-
+| {{BlockSprite|moving-piston}} tile.null.name
+| [[移动的活塞]]
+|-
+| {{BlockSprite|brown-mushroom}} 蘑菇
+| [[棕色蘑菇]]
+|-
+| {{BlockSprite|red-mushroom}} 蘑菇
+| [[红色蘑菇]]
+|-
+| {{BlockSprite|oak-slab}} 橡木台阶（Oak Wood Slab）
+| [[橡木台阶]]（Oak Slab）
+|-
+| {{BlockSprite|spruce-slab}} 云杉木台阶（Spruce Wood Slab）
+| [[云杉木台阶]]（Spruce Slab）
+|-
+| {{BlockSprite|birch-slab}} 白桦木台阶（Birch Wood Slab）
+| [[白桦木台阶]]（Birch Slab）
+|-
+| {{BlockSprite|jungle-slab}} 丛林木台阶（Jungle Wood Slab）
+| [[丛林木台阶]]（Jungle Slab）
+|-
+| {{BlockSprite|acacia-slab}} 金合欢木台阶（Acacia Wood Slab）
+| [[金合欢木台阶]]（Acacia Slab）
+|-
+| {{BlockSprite|dark-oak-slab}} 深色橡木台阶（Dark Oak Wood Slab）
+| [[深色橡木台阶]]（Dark Oak Slab）
+|-
+| {{BlockSprite|petrified-oak-slab}} 木台阶
+| [[石化橡木台阶]]
+|-
+| {{BlockSprite|brick-slab}} 砖块台阶（Bricks Slab）
+| [[砖台阶]]（Brick Slab）
+|-
+| {{BlockSprite|stone-brick-slab}} 石砖台阶（Stone Bricks Slab）
+| [[石砖台阶]]（Stone Brick Slab）
+|-
+| {{BlockSprite|smooth-stone}} 石台阶
+| [[平滑石头]]
+|-
+| {{BlockSprite|smooth-sandstone}} 石台阶
+| [[平滑砂岩]]
+|-
+| {{BlockSprite|smooth-quartz}} 石台阶
+| [[平滑石英块]]
+|-
+| {{BlockSprite|smooth-red-sandstone}} 石台阶
+| [[平滑红砂岩]]
+|-
+| {{BlockSprite|mossy-cobblestone}} 苔石（Moss Stone）
+| [[苔石]]（Mossy Cobblestone）
+|-
+| {{BlockSprite|spawner}} 刷怪笼（Monster Spawner）
+| [[刷怪笼]]（Spawner）
+|-
+| {{BlockSprite|nether-portal}} 传送门
+| [[下界传送门]]
+|-
+| {{BlockSprite|wall-torch}} 火把（墙上）
+| [[墙上的火把]]
+|-
+| {{BlockSprite|oak-stairs}} 橡木楼梯（Oak Wood Stairs）
+| [[橡木楼梯]]（Oak Stairs）
+|-
+| {{BlockSprite|oak-pressure-plate}} 木质压力板
+| [[橡木压力板]]
+|-
+| {{BlockSprite|redstone-wall-torch}} 红石火把（墙上）
+| [[墙上的红石火把]]
+|-
+| {{BlockSprite|stone-button}} 按钮
+| [[石质按钮]]
+|-
+| {{BlockSprite|snow-block}} 雪
+| [[雪块]]
+|-
+| {{BlockSprite|carved-pumpkin}} 南瓜
+| [[雕刻南瓜]]
+|-
+| {{BlockSprite|oak-trapdoor}} 木质活板门
+| [[橡木活板门]]
+|-
+| {{BlockSprite|infested-stone}} 石头怪物蛋
+| [[虫蚀石头]]
+|-
+| {{BlockSprite|infested-cobblestone}} 圆石怪物蛋
+| [[虫蚀圆石]]
+|-
+| {{BlockSprite|infested-stone-bricks}} 石砖怪物蛋
+| [[虫蚀石砖]]
+|-
+| {{BlockSprite|infested-mossy-stone-bricks}} 苔石砖怪物蛋
+| [[虫蚀苔石砖]]
+|-
+| {{BlockSprite|infested-cracked-stone-bricks}} 裂纹石砖怪物蛋
+| [[虫蚀裂纹石砖]]
+|-
+| {{BlockSprite|infested-chiseled-stone-bricks}} 雕纹石砖怪物蛋
+| [[虫蚀雕纹石砖]]
+|-
+| {{BlockSprite|brown-mushroom-block}} 蘑菇
+| [[棕色蘑菇方块]]
+|-
+| {{BlockSprite|red-mushroom-block}} 蘑菇
+| [[红色蘑菇方块]]
+|-
+| {{BlockSprite|nether-bricks}} 下界砖块（Nether Brick）
+| [[下界砖块]]（Nether Bricks）
+|-
+| {{BlockSprite|enchanting-table}} 附魔台（Enchantment Table）
+| [[附魔台]]（Enchanting Table）
+|-
+| {{BlockSprite|end-portal-frame}} 末地传送门
+| [[末地传送门框架]]
+|-
+| {{BlockSprite|end-portal}} tile.null.name
+| [[末地传送门方块]]
+|-
+| {{BlockSprite|end-gateway}} tile.null.name
+| [[末地折跃门方块]]
+|-
+| {{BlockSprite|spruce-stairs}} 云杉木楼梯（Spruce Wood Stairs)
+| [[云杉木楼梯]]（Spruce Stairs）
+|-
+| {{BlockSprite|birch-stairs}} 白桦木楼梯（Birch Wood Stairs）
+| [[白桦木楼梯]]（Birch Stairs）
+|-
+| {{BlockSprite|jungle-stairs}} 丛林木楼梯（Jungle Wood Stairs）
+| [[丛林木楼梯]]（Jungle Stairs）
+|-
+| {{BlockSprite|oak-button}} 按钮
+| [[橡木按钮]]
+|-
+| {{BlockSprite|chipped-anvil}} 轻微损坏的铁砧
+| [[开裂的铁砧]]
+|-
+| {{BlockSprite|damaged-anvil}} 严重损坏的铁砧
+| [[损坏的铁砧]]
+|-
+| {{BlockSprite|light-weighted-pressure-plate}} 轻质测重压力板（Weighted Pressure Plate (Light)）
+| [[轻质测重压力板]]（Light Weighted Pressure Plate）
+|-
+| {{BlockSprite|heavy-weighted-pressure-plate}} 重质测重压力板（Weighted Pressure Plate (Heavy)）
+| [[重质测重压力板]]（Heavy Weighted Pressure Plate）
+|-
+| {{BlockSprite|daylight-detector}} 阳光传感器（Daylight Sensor）
+| [[阳光探测器]]（Daylight Detector）
+|-
+| {{BlockSprite|quartz-pillar}} 石英柱（Pillar Quartz Block）
+| [[石英柱]]（Quartz Pillar）
+|-
+| {{BlockSprite|acacia-stairs}} 金合欢木楼梯（Acacia Wood Stairs）
+| [[金合欢木楼梯]]（Acacia Stairs）
+|-
+| {{BlockSprite|dark-oak-stairs}} 深色橡木楼梯（Dark Oak Wood Stairs）
+| [[深色橡木楼梯]]（Dark Oak Stairs）
+|-
+| {{BlockSprite|tall-grass}} 双草丛
+| [[高草丛]]
+|-
+| {{BlockSprite|cut-red-sandstone}} 平滑红砂岩
+| [[切制红砂岩]]
+|-
+| {{BlockSprite|red-nether-bricks}} 红色下界砖块（Red Nether Brick）
+| [[红色下界砖块]]（Red Nether Bricks）
+|-
+| {{ItemSprite|wheat-seeds}} 小麦种子（Seeds）
+| [[小麦种子]]（Wheat Seeds）
+|-
+| {{BlockSprite|wheat-crops}} 小麦（Crops）
+| [[小麦]]（Wheat Crops）
+|-
+| {{ItemSprite|chainmail-helmet}} 锁链头盔（Chain Helmet）
+| [[锁链头盔]]（Chainmail Helmet）
+|-
+| {{ItemSprite|chainmail-chestplate}} 锁链胸甲（Chain Chestplate）
+| [[锁链胸甲]]（Chainmail Chestplate）
+|-
+| {{ItemSprite|chainmail-leggings}}  锁链护腿（Chain Leggings）
+| [[锁链护腿]]（Chainmail Leggings）
+|-
+| {{ItemSprite|chainmail-boots}} 锁链靴子（Chain Boots）
+| [[锁链靴子]]（Chainmail Boots）
+|-
+| {{ItemSprite|enchanted-golden-apple}} 金苹果
+| [[附魔金苹果]]
+|-
+| {{BlockSprite|oak-wall-sign}} 告示牌（墙上）
+| [[墙上的橡木告示牌|墙上的告示牌]]
+|-
+| {{ItemSprite|redstone-dust}} 红石
+| [[红石粉]]
+|-
+| {{ItemSprite|milk-bucket}} 牛奶
+| [[奶桶]]
+|-
+| {{ItemSprite|sugar-cane}} 甘蔗（Sugar Cane）
+| [[甘蔗]]（Suger Canes）
+|-
+| {{ItemSprite|raw-cod}} 生鱼
+| [[生鳕鱼]]（Raw Cod）
+|-
+| {{ItemSprite|tropical-fish}} 小丑鱼
+| [[热带鱼]]
+|-
+| {{ItemSprite|cooked-cod}} 熟鱼
+| [[熟鳕鱼]]（Cooked Cod）
+|-
+| {{ItemSprite|melon-slice}} 西瓜
+| [[西瓜片]]
+|-
+| {{BlockSprite|attached-pumpkin-stem}} 南瓜梗
+| [[附着的南瓜梗]]
+|-
+| {{BlockSprite|melon-stem}} 南瓜梗 <ref group="注" name="string">这其实是西瓜梗，它曾与南瓜梗共用相同的翻译。</ref>
+| [[西瓜梗]]
+|-
+| {{BlockSprite|attached-melon-stem}} 南瓜梗  <ref group="注" name="string"/>
+| [[附着的西瓜梗]]
+|-
+| {{ItemSprite|glistering-melon-slice}} 闪烁的西瓜片
+| [[闪烁的西瓜片]]
+|-
+| {{ItemSprite|bat-spawn-egg}} 生成蝙蝠
+| [[蝙蝠刷怪蛋]]
+|-
+| {{ItemSprite|blaze-spawn-egg}} 生成烈焰人
+| [[烈焰人刷怪蛋]]
+|-
+| {{ItemSprite|cave-spider-spawn-egg}} 生成洞穴蜘蛛
+| [[洞穴蜘蛛刷怪蛋]]
+|-
+| {{ItemSprite|chicken-spawn-egg}} 生成鸡
+| [[鸡刷怪蛋]]
+|-
+| {{ItemSprite|cow-spawn-egg}} 生成牛
+| [[牛刷怪蛋]]
+|-
+| {{ItemSprite|creeper-spawn-egg}} 生成苦力怕
+| [[苦力怕刷怪蛋]]
+|-
+| {{ItemSprite|donkey-spawn-egg}} 生成驴
+| [[驴刷怪蛋]]
+|-
+| {{ItemSprite|elder-guardian-spawn-egg}} 生成远古守卫者
+| [[远古守卫者刷怪蛋]]
+|-
+| {{ItemSprite|enderman-spawn-egg}} 生成末影人
+| [[末影人刷怪蛋]]
+|-
+| {{ItemSprite|endermite-spawn-egg}} 生成末影螨
+| [[末影螨刷怪蛋]]
+|-
+| {{ItemSprite|evoker-spawn-egg}} 生成唤魔者
+| [[唤魔者刷怪蛋]]
+|-
+| {{ItemSprite|ghast-spawn-egg}} 生成恶魂
+| [[恶魂刷怪蛋]]
+|-
+| {{ItemSprite|guardian-spawn-egg}} 生成守卫者
+| [[守卫者刷怪蛋]]
+|-
+| {{ItemSprite|horse-spawn-egg}} 生成马
+| [[马刷怪蛋]]
+|-
+| {{ItemSprite|husk-spawn-egg}} 生成尸壳
+| [[尸壳刷怪蛋]]
+|-
+| {{ItemSprite|llama-spawn-egg}} 生成羊驼
+| [[羊驼刷怪蛋]]
+|-
+| {{ItemSprite|magma-cube-spawn-egg}} 生成岩浆怪
+| [[岩浆怪刷怪蛋]]
+|-
+| {{ItemSprite|mooshroom-spawn-egg}} 生成哞菇
+| [[哞菇刷怪蛋]]
+|-
+| {{ItemSprite|mule-spawn-egg}} 生成骡
+| [[骡刷怪蛋]]
+|-
+| {{ItemSprite|ocelot-spawn-egg}} 生成豹猫
+| [[豹猫刷怪蛋]]
+|-
+| {{ItemSprite|parrot-spawn-egg}} 生成鹦鹉
+| [[鹦鹉刷怪蛋]]
+|-
+| {{ItemSprite|pig-spawn-egg}} 生成猪
+| [[猪刷怪蛋]]
+|-
+| {{ItemSprite|polar-bear-spawn-egg}} 生成北极熊
+| [[北极熊刷怪蛋]]
+|-
+| {{ItemSprite|rabbit-spawn-egg}} 生成兔子
+| [[兔子刷怪蛋]]
+|-
+| {{ItemSprite|sheep-spawn-egg}} 生成绵羊
+| [[绵羊刷怪蛋]]
+|-
+| {{ItemSprite|shulker-spawn-egg}} 生成潜影贝
+| [[潜影贝刷怪蛋]]
+|-
+| {{ItemSprite|silverfish-spawn-egg}} 生成蠹虫
+| [[蠹虫刷怪蛋]]
+|-
+| {{ItemSprite|skeleton-spawn-egg}} 生成骷髅
+| [[骷髅刷怪蛋]]
+|-
+| {{ItemSprite|skeleton-horse-spawn-egg}} 生成骷髅马
+| [[骷髅马刷怪蛋]]
+|-
+| {{ItemSprite|slime-spawn-egg}} 生成史莱姆
+| [[史莱姆刷怪蛋]]
+|-
+| {{ItemSprite|spider-spawn-egg}} 生成蜘蛛
+| [[蜘蛛刷怪蛋]]
+|-
+| {{ItemSprite|squid-spawn-egg}} 生成鱿鱼
+| [[鱿鱼刷怪蛋]]
+|-
+| {{ItemSprite|stray-spawn-egg}} 生成流浪者
+| [[流浪者刷怪蛋]]
+|-
+| {{ItemSprite|vex-spawn-egg}} 生成恼鬼
+| [[恼鬼刷怪蛋]]
+|-
+| {{ItemSprite|villager-spawn-egg}} 生成村民
+| [[村民刷怪蛋]]
+|-
+| {{ItemSprite|vindicator-spawn-egg}} 生成卫道士
+| [[卫道士刷怪蛋]]
+|-
+| {{ItemSprite|witch-spawn-egg}} 生成女巫
+| [[女巫刷怪蛋]]
+|-
+| {{ItemSprite|wither-skeleton-spawn-egg}} 生成凋灵骷髅
+| [[凋灵骷髅刷怪蛋]]
+|-
+| {{ItemSprite|wolf-spawn-egg}} 生成狼
+| [[狼刷怪蛋]]
+|-
+| {{ItemSprite|zombie-spawn-egg}} 生成僵尸
+| [[僵尸刷怪蛋]]
+|-
+| {{ItemSprite|zombie-horse-spawn-egg}} 生成僵尸马
+| [[僵尸马刷怪蛋]]
+|-
+| {{ItemSprite|zombie-pigman-spawn-egg}} 生成僵尸猪人
+| [[僵尸猪人刷怪蛋]]
+|-
+| {{ItemSprite|zombie-villager-spawn-egg}} 生成僵尸村民
+| [[僵尸村民刷怪蛋]]
+|-
+| {{BlockSprite|potted-poppy}} 花盆
+| [[虞美人盆栽]]
+|-
+| {{BlockSprite|potted-dandelion}} 花盆
+| [[蒲公英盆栽]]
+|-
+| {{BlockSprite|potted-oak-sapling}} 花盆
+| [[橡树树苗盆栽]]
+|-
+| {{BlockSprite|potted-spruce-sapling}} 花盆
+| [[云杉树苗盆栽]]
+|-
+| {{BlockSprite|potted-birch-sapling}} 花盆
+| [[白桦树苗盆栽]]
+|-
+| {{BlockSprite|potted-jungle-sapling}} 花盆
+| [[丛林树苗盆栽]]
+|-
+| {{BlockSprite|potted-red-mushroom}} 花盆
+| [[红色蘑菇盆栽]]
+|-
+| {{BlockSprite|potted-brown-mushroom}} 花盆
+| [[棕色蘑菇盆栽]]
+|-
+| {{BlockSprite|potted-cactus}} 花盆
+| [[仙人掌盆栽]]
+|-
+| {{BlockSprite|potted-dead-bush}} 花盆
+| [[枯萎的灌木盆栽]]
+|-
+| {{BlockSprite|potted-fern}} 花盆
+| [[蕨盆栽]]
+|-
+| {{BlockSprite|potted-acacia-sapling}} 花盆
+| [[金合欢树苗盆栽]]
+|-
+| {{BlockSprite|potted-dark-oak-sapling}} 花盆
+| [[深色橡树树苗盆栽]]
+|-
+| {{BlockSprite|potted-blue-orchid}} 花盆
+| [[兰花盆栽]]
+|-
+| {{BlockSprite|potted-allium}} 花盆
+| [[绒球葱盆栽]]
+|-
+| {{BlockSprite|potted-azure-bluet}} 花盆
+| [[蓝花美耳草盆栽]]
+|-
+| {{BlockSprite|potted-red-tulip}} 花盆
+| [[红色郁金香盆栽]]
+|-
+| {{BlockSprite|potted-orange-tulip}} 花盆
+| [[橙色郁金香盆栽]]
+|-
+| {{BlockSprite|potted-white-tulip}} 花盆
+| [[白色郁金香盆栽]]
+|-
+| {{BlockSprite|potted Pink Tulip}} 花盆
+| [[粉红色郁金香盆栽]]
+|-
+| {{BlockSprite|potted Oxeye Daisy}} 花盆
+| [[滨菊盆栽]]
+|-
+| {{BlockSprite|player-head}} 头颅（物品）
+| [[玩家头颅]]
+|-
+| {{BlockSprite|skeleton-skull}} tile.skull.skeleton.name （方块，在地上）
+| [[骷髅头颅]]
+|-
+| {{BlockSprite|skeleton-wall-skull}} tile.skull.skeleton.name （方块，在墙上）
+| [[墙上的骷髅头颅]]
+|-
+| {{BlockSprite|wither-skeleton-skull}} tile.skull.skeleton.name （方块，在地上）
+| [[凋灵骷髅头颅]]
+|-
+| {{BlockSprite|wither-skeleton-wall-skull}} tile.skull.skeleton.name （方块，在墙上）
+| [[墙上的凋灵骷髅头颅]]
+|-
+| {{BlockSprite|zombie-head}} tile.skull.skeleton.name （方块，在地上）
+| [[僵尸的头]]
+|-
+| {{BlockSprite|zombie-wall-head}} tile.skull.skeleton.name （方块，在墙上）
+| [[墙上的僵尸的头]]
+|-
+| {{BlockSprite|player-head}} tile.skull.skeleton.name （方块，在地上）
+| [[玩家头颅]]
+|-
+| {{BlockSprite|player-wall-head}} tile.skull.skeleton.name （方块，在墙上）
+| [[墙上的玩家头颅]]
+|-
+| {{BlockSprite|creeper-head}} tile.skull.skeleton.name （方块，在地上）
+| [[苦力怕的头]]
+|-
+| {{BlockSprite|creeper-wall-head}} tile.skull.skeleton.name （方块，在墙上）
+| [[墙上的苦力怕的头]]
+|-
+| {{BlockSprite|dragon-head}} tile.skull.skeleton.name （方块，在地上）
+| [[龙首]]
+|-
+| {{BlockSprite|dragon-wall-head}} tile.skull.skeleton.name （方块，在墙上）
+| [[墙上的龙首]]
+|-
+| {{ItemSprite|golden-horse-armor}} 金马铠（Gold Horse Armor）
+| [[金马铠]]（Golden Horse Armor）
+|-
+| {{BlockSprite|orange-banner}} 白色旗帜 （方块，在地上）
+| [[橙色旗帜]]
+|-
+| {{BlockSprite|magenta-banner}} 白色旗帜 （方块，在地上）
+| [[品红色旗帜]]
+|-
+| {{BlockSprite|light-blue-banner}} 白色旗帜 （方块，在地上）
+| [[淡蓝色旗帜]]
+|-
+| {{BlockSprite|yellow-banner}} 白色旗帜 （方块，在地上）
+| [[黄色旗帜]]
+|-
+| {{BlockSprite|lime-banner}} 白色旗帜 （方块，在地上）
+| [[黄绿色旗帜]]
+|-
+| {{BlockSprite|pink-banner}} 白色旗帜 （方块，在地上）
+| [[粉红色旗帜]]
+|-
+| {{BlockSprite|gray-banner}} 白色旗帜 （方块，在地上）
+| [[灰色旗帜]]
+|-
+| {{BlockSprite|light-gray-banner}} 白色旗帜 （方块，在地上）
+| [[淡灰色旗帜]]
+|-
+| {{BlockSprite|cyan-banner}} 白色旗帜 （方块，在地上）
+| [[青色旗帜]]
+|-
+| {{BlockSprite|purple-banner}} 白色旗帜 （方块，在地上）
+| [[紫色旗帜]]
+|-
+| {{BlockSprite|blue-banner}} 白色旗帜 （方块，在地上）
+| [[蓝色旗帜]]
+|-
+| {{BlockSprite|brown-banner}} 白色旗帜 （方块，在地上）
+| [[棕色旗帜]]
+|-
+| {{BlockSprite|green-banner}} 白色旗帜 （方块，在地上）
+| [[绿色旗帜]]
+|-
+| {{BlockSprite|red-banner}} 白色旗帜 （方块，在地上）
+| [[红色旗帜]]
+|-
+| {{BlockSprite|black-banner}} 白色旗帜 （方块，在地上）
+| [[白色旗帜]]
+|-
+| {{BlockSprite|white-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[白色旗帜]]<ref group="注" name="bug">这些翻译字符串其实是丢失的，具体见{{bug|MC-122579}}；现在它们使用与站立的旗帜一样的翻译字符串（而不是它们自己的），具体见{{bug|MC-124142}}</ref>
+|-
+| {{BlockSprite|orange-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[橙色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|magenta-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[品红色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|light-blue-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[淡蓝色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|yellow-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[黄色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|lime-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[黄绿色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|pink-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[粉红色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|gray-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[灰色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|light-gray-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[淡灰色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|cyan-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[青色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|purple-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[紫色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|blue-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[蓝色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|brown-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[棕色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|green-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[绿色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|red-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[红色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BlockSprite|black-wall-banner}} 白色旗帜 （方块，在墙上）
+| [[黑色旗帜]]<ref group="注" name="bug"/>
+|-
+| {{BiomeSprite|mountains}} 峭壁
+| [[山地]]
+|-
+| {{BiomeSprite|swamp}} 沼泽（Swampland）
+| [[沼泽]]（Swamp）
+|-
+| {{BiomeSprite|desert-hills}} [[沙漠丘陵]]（DesertHills）
+| [[沙漠丘陵]]（Desert Hills）
+|-
+| {{BiomeSprite|wooded-hills}} 森林山丘
+| [[繁茂的丘陵]]
+|-
+| {{BiomeSprite|frozen-ocean}} 冻洋（FrozenOcean）
+| [[冻洋]]（Frozen Ocean）
+|-
+| {{BiomeSprite|frozen-river}} 冻河（FrozenRiver）
+| [[冻河]]（Frozen River）
+|-
+| {{BiomeSprite|snowy-tundra}} 冰原
+| [[积雪的冻原]]
+|-
+| {{BiomeSprite|snowy-mountains}} 冰山
+| [[雪山]]
+|-
+| {{BiomeSprite|mushroom-fields}} 蘑菇岛（Mushroom Island）
+| [[蘑菇岛]]（Mushroom Fields）
+|-
+| {{BiomeSprite|mushroom-field-shore}} 蘑菇岛岸（MushroomIslandShore）
+| [[蘑菇岛岸]]（Mushroom Field Shore）
+|-
+| {{BiomeSprite|taiga-hills}} 针叶林丘陵（TaigaHills）
+| [[针叶林丘陵]]（Taiga Hills）
+|-
+| {{BiomeSprite|mountain-edge}} 峭壁边缘
+| [[山地边缘]]
+|-
+| {{BiomeSprite|nether}} 地狱
+| [[下界]]
+|-
+| {{BiomeSprite|jungle-edge}} 丛林边缘（JungleEdge）
+| [[丛林边缘]]（Jungle Edge）
+|-
+| {{BiomeSprite|jungle-hills}} 丛林丘陵（JungleHills）
+| [[丛林丘陵]]（Jungle Hills）
+|-
+| {{BiomeSprite|stone-shore}} 石滩
+| [[石岸]]
+|-
+| {{BiomeSprite|snowy-beach}} 冻沙滩
+| [[积雪沙滩]]
+|-
+| {{BiomeSprite|dark-forest}} 黑森林（Roofed Forest）
+| [[黑森林]]（Dark Forest）
+|-
+| {{BiomeSprite|snowy-taiga}} 冷针叶林
+| [[积雪针叶林]]
+|-
+| {{BiomeSprite|snowy-taiga-hills}} 冷针叶林山丘
+| [[积雪的针叶林丘陵]]
+|-
+| {{BiomeSprite|giant-tree-taiga}} 巨型针叶林（Mega Taiga）
+| [[巨型针叶林]]（Giant Tree Taiga）
+|-
+| {{BiomeSprite|giant-tree-taiga-hills}} 巨型针叶林丘陵（Mega Taiga Hills）
+| [[巨型针叶林丘陵]]（Giant Tree Taiga Hills）
+|-
+| {{BiomeSprite|wooded-mountains}} 峭壁+
+| [[繁茂的山地]]
+|-
+| {{BiomeSprite|badlands}} 平顶山
+| [[恶地]]
+|-
+| {{BiomeSprite|wooded-badlands-plateau}} 平顶山高原F
+| [[繁茂的恶地高原]]
+|-
+| {{BiomeSprite|badlands-plateau}} 平顶山高原
+| [[恶地高原]]
+|-
+| {{BiomeSprite|desert-lakes}} 沙漠M
+| [[沙漠湖泊]]
+|-
+| {{BiomeSprite|gravelly-mountains}} 峭壁M
+| [[沙砾山地]]
+|-
+| {{BiomeSprite|taiga-mountains}} 针叶林M
+| [[针叶林山地]]
+|-
+| {{BiomeSprite|swamp-hills}} 沼泽M
+| [[沼泽丘陵]]
+|-
+| {{BiomeSprite|ice-spikes}} 冰刺之地（Ice Plains Spikes）
+| [[冰刺之地]]（Ice Spikes）
+|-
+| {{BiomeSprite|modified-jungle}} 丛林M
+| [[丛林变种]]
+|-
+| {{BiomeSprite|modified-jungle-edge}} 丛林边缘M
+| [[丛林边缘变种]]
+|-
+| {{BiomeSprite|tall-birch-forest}} 桦木森林M
+| [[高大桦木森林]]
+|-
+| {{BiomeSprite|tall-birch-hills}} 桦木森林丘陵M
+| [[高大桦木森林]]
+|-
+| {{BiomeSprite|dark-forest-hills}} 黑森林M
+| [[黑森林丘陵]]
+|-
+| {{BiomeSprite|snowy-taiga-mountains}} 冷针叶林M
+| [[积雪的针叶林山地]]
+|-
+| {{BiomeSprite|giant-spruce-taiga}} 巨型云杉针叶林（Mega Spruce Taiga）
+| [[巨型云杉针叶林]]（Giant Spruce Taiga）
+|-
+| {{BiomeSprite|giant-spruce-taiga-hills}} 巨型云杉针叶林丘陵（Redwood Taiga Hills）
+| [[巨型云杉针叶林丘陵]]（Giant Spruce Taiga Hills）
+|-
+| {{BiomeSprite|modified-gravelly-mountains}} 峭壁+M
+| [[沙砾山地+]]
+|-
+| {{BiomeSprite|shattered-savanna}} 热带草原M
+| [[破碎的热带草原]]
+|-
+| {{BiomeSprite|shattered-savanna-plateau}} 热带高原M
+| [[破碎的热带高原]]
+|-
+| {{BiomeSprite|eroded-badlands}} 平顶山（岩柱）
+| [[风蚀恶地]]
+|-
+| {{BiomeSprite|modified-wooded-badlands-plateau}} 平顶山高原FM
+| [[繁茂的恶地高原变种]]
+|-
+| {{BiomeSprite|modified-badlands-plateau}} 平顶山高原M
+| [[恶地高原变种]]
+|}
+
+{{notelist|注}}
+
+== [[统计信息]] ==
+* 现在改变为带命名空间的了。
+** "通用"标签的格式是<code>minecraft.custom:minecraft.something</code>而不是<code>stat.something</code>，其中"something"必须为小写且用下划线分隔开。
+** 开采方块的格式是<code>-{}-minecraft.mined:namespace.(方块id)</code>而不是<code>-{}-stat.mineBlock.(方块id)</code>。
+** 损坏物品的格式是<code>minecraft.broken:namespace.(物品id)</code>而不是<code>stat.breakItem.(物品id)</code>。
+** 丢弃物品的格式是<code>minecraft.dropped:namespace.(物品id)</code>而不是<code>stat.drop.(物品id)</code>。
+** 使用物品的格式是 <code>minecraft.used:namespace.(物品id)</code>而不是<code>stat.useItem.(物品id)</code>。
+** 击杀生物的格式是<code>-{}-minecraft.killed:namespace.(实体id)</code>而不是<code>-{}-stat.killEntity.(实体id)</code>。
+*** 对所有实体都可用了，而不是仅仅能用刷怪蛋生成的实体。
+** 被实体击杀的格式是<code>-{}-minecraft.killed_by:namespace.(实体id)</code>而不是<code>-{}-stat.entityKilledBy.(实体id)</code>。
+*** 对所有实体都可用了，而不是仅仅能用刷怪蛋生成的实体。
+* 合并了方块和物品标签。
+
+== [[区块存储格式|NBT数据]] ==
+; [[物品格式]]
+* 移除了物品的数据根目录下的<code>Damage</code>数据。
+* <code>Damage</code>数据被添加进了<code>tag</code>标签，只为工具的耐久度所使用。
+* <code>map</code>整数数据被添加进了<code>tag</code>标签，只为[[地图]]所使用。
+* [[盾牌]]的<code>Base</code>数据拥有了与习惯相反的颜色序列。
+* [[魔咒]]的<code>ench</code>数据被重命名为<code>Enchantments</code>数据。
+* [[魔咒]]ID中的<code>Enchantments</code>数据和<code>StoredEnchantments</code>数据现在使用字符串ID。
+
+; [[实体数据格式]]
+* [[狼]]的<code>CollarColor</code>数据拥有了与习惯相反的颜色序列。
+* [[末影人]]的<code>carried</code>数据和<code>carriedData</code>数据合并成了<code>carriedBlockState</code>数据。<ref group="注" name="tag">这个标签拥有像<code>-{}-{Name:"<''方块ID''>",Properties:{state:"value"}}</code>这样的复合格式。</ref>
+* [[箭]]和[[光灵箭]]的<code>inTile</code>数据和<code>inData</code>数据合并成了<code>inBlockState</code>数据。<ref group="注" name="tag" />
+* [[矿车]]的<code>DisplayTile</code>数据和<code>DisplayData</code>数据合并成了<code>DisplayState</code>数据。<ref group="注" name="tag" />
+* [[下落的方块]]的<code>Block</code>数据和<code>Data</code>数据合并成了<code>BlockState</code>。<ref group="注" name="tag" />
+* [[区域效果云]]的<code>ParticleParams1</code>数据和<code>ParticleParams2</code>数据被移除了，并且和Particle合并了（与命令中的格式一样）。
+
+; [[区块存储格式|方块]]
+* 移除了[[花盆]]的方块实体。
+* 移除了[[音符盒]]的方块实体。
+* [[移动的活塞]]的<code>BlockId</code>数据和<code>BlockData</code>数据合并成了<code>blockState</code>数据。<ref group="注" name="tag" />
+* 移除了[[旗帜]]的<code>Base</code>数据。
+* 移除了[[生物头颅]]的<code>Rot</code>数据。
+* [[旗帜]]和[[盾牌]]的<code>Color</code>数据和<code>Patterns</code>数据拥有了与习惯相反的颜色序列。
+* 移除了[[音符盒]]的<code>Record</code>数据。
+
+{{notelist|注}}
+
+== [[命令]] ==
+* {{cmd|clear}}的<code><nowiki>[<data>]</nowiki></code>部分已被移除。<ref group="注" name="items">另见{{slink||NBT数据}}章节来了解其他数据值的变化和1.13里的[[Java版1.13|物品]]章节。</ref>
+* {{cmd|clone}}的<code><nowiki>[<data>]</nowiki></code>部分已和ID合并而且不再允许元数据。<ref group="注" name="blocks">另见1.13里的[[Java版1.13|物品]]章节。</ref>
+* {{cmd|execute detect}}已被修改为{{cmd|execute (if{{!}}unless) block}}，其中的<code><nowiki>[<data>]</nowiki></code>部分已和ID合并而且不再允许元数据。<ref group="注" name="blocks"/>
+* {{cmd|fill}}的<code><nowiki>[<data>]</nowiki></code>和<code>[<replaceData>]</code>部分已和ID合并而且不再允许元数据。<ref group="注" name="blocks"/>
+* {{cmd|give}}的<code><nowiki>[<data>]</nowiki></code>部分已被移除。<ref group="注" name="items"/>
+* {{cmd|replaceitem}}的<code><nowiki>[<data>]</nowiki></code>部分已被移除。<ref group="注" name="items"/>
+* {{cmd|setblock}}的<code><nowiki>[<data>]</nowiki></code>部分已和ID合并而且不再允许元数据。<ref group="注" name="blocks"/>
+* {{cmd|particle}}的<code>[<params>]</code>部分已与<code>name</code>合并，而且格式化为<code>block_id[states]</code>和<code>item_id</code>。
+
+{{notelist|注}}
+
+== [[进度]] ==
+* 移除了<code>icon</code>的<code>data</code>数据。
+* 移除了<code>item</code>条件中的<code>data</code>数据。
+
+== [[战利品表]] ==
+* 移除了<code>set_data</code>函数。
+
+== 游戏资源 ==
+* [[模型]]
+** 重命名成新的ID。
+* [[方块状态]]文件
+** 重命名成新的ID。
+** 无方块状态的方块现在使用空的字符串<code>""</code>而不是<code>"normal"</code>。
+** 物品展示框现在拥有<code>"map=false"</code>而不是<code>"normal"</code>和<code>"map=true"</code>而不是<code>"map"</code>。
+** 模型引用时不再从<code>models/block/</code>文件夹中引用，而是从<code>models/</code>中。
+* [[纹理]]
+** 重命名成新的ID。
+** 将<code>blocks</code>文件夹重命名成<code>block</code>。
+** 将<code>items</code>文件夹重命名成<code>item</code>。
+* [[配方]]
+** 重命名成新的ID。
+* [[进度]]
+** 配方进度重命名成新的ID。
+* [[语言]]文件
+** 方块本地化键名的格式是<code>block.namespace.block_id</code>而不是<code>tile.something.name</code>（其中"something"可以是任意的名字，比如[[荧石]]的"lightgem"；例如<code>"tile.lightgem.name": "Glowstone"</code>已经被<code>"block.minecraft.glowstone": "Glowstone"</code>所替代）
+** 物品本地化键名的格式是<code>item.namespace.item_id</code>而不是<code>item.something.name</code>（其中"something"可以是任意的名字，比如[[荧石粉]]的"yellowDust"；例如<code>"item.yellowDust.name": "Glowstone Dust"</code>已经被<code>"item.minecraft.glowstone_dust": "Glowstone Dust"</code>所替代）
+** 实体本地化键名的格式是<code>entity.namespace.entity_id</code>而不是<code>entity.something.name</code>（其中"something"可以是任意的名字，比如[[矿车]]的"MinecartRideable"；例如<code>"entity.MinecartRideable.name": "Minecart"</code>已经被<code>"entity.minecraft.minecart": "Minecart"</code>所替代）
+** 魔咒本地化键名的格式是<code>enchantment.namespace.enchantment_id</code>而不是<code>enchantment.something</code>（其中"something"可以是任意的名字，比如[[水下速掘]]的"waterWorker"；例如<code>"enchant.waterWorker": "Aqua Affinity"</code>已经被<code>"enchantment.minecraft.aqua_affinity": "Aqua Affinity"</code>所替代）
+** 状态效果本地化键名的格式是<code>effect.namespace.effect_id</code>而不是<code>effect.something</code>（其中"something"可以是任意的名字，比如[[状态效果|挖掘疲劳]]的"digSlowDown"；例如<code>"effect.digSlowDown": "Mining Fatigue"</code>已经被<code>"effect.minecraft.mining_fatigue": "Mining Fatigue"</code>所替代）
+** 通用统计本地化键名的格式是<code>stat.namespace.statistic_id</code>而不是<code>stat.statisticId</code>（其中"statisticId"可以是任意的统计名称，比如游玩时间的"playOneMinte"；例如<code>"stat.playOneMinute": "Time Played"</code>已经被<code>"stat.minecraft.play_one_minute": "Time Played"</code>所替代）
+** 统计信息本地化键名的格式是<code>stat_type.namespace.statistic_type</code>而不是<code>stat.statisticType</code>（其中"statisticType"可以是任意的统计种类，比如击杀生物的"entityKills"；例如<code>"stat.entityKills": "You killed %s %s"</code>已经被<code>"stat_type.minecraft.killed": "You killed %s %s"</code>所替代）
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=17w45a|命令格式不再使用元数据和损害值<code>Damage</code>，这让使用伤害值来区分的物品不能被命令所获得。}}
+|{{HistoryLine|||dev=17w47a|物品和方块ID被合并、删除、拆分或重命名。
+|方块状态的变化得到了实际应用。
+|移除物品的损坏值<code>Damage</code>数据，且把损坏值<code>Damage</code>数据添加进了<code>tag</code>标签中，仅由工具和盔甲使用。还为[[地图]]添加了<code>map</code>数据。
+|[[陷阱箱]]拥有了它们自己的方块实体ID<code>trapped_chest</code>。
+|元数据被完全移除。
+|粒子ID现在自带命名空间并且被重命名。
+|统计现在自带命名空间，而实体统计被移除。
+|翻译字符串现在与方块、物品和统计的ID一致了。}}
+|{{HistoryLine|||dev=17w47b|[[陷阱箱]]现在又使用方块实体ID<code>chest</code>。}}
+|{{HistoryLine|||dev=17w48a|实体统计被重新加入，而且应用在所有实体上。}}
+|{{HistoryLine|||dev=18w02a|画现在自带命名空间并且被重命名。
+|墙上的旗帜现在使用与其站立形式变种一样的本地化键名。
+|实体的本地化键名现在是<code>entity.<namespace>.<id></code>而不是<code>entity.<something>.name</code>。}}
+|{{HistoryLine|||dev=18w07b|将<code>turtle_shell_piece</code>重命名为<code>scute</code>。}}
+|{{HistoryLine|||dev=18w10b|以每种颜色为一种方块拆分了<code>dead_coral</code>。}}
+|{{HistoryLine|||dev=18w10c|将<code>water</code>和<code>flowing_water</code>合并了。
+|将<code>lava</code>和<code>flowing_lava</code>合并了。}}
+|{{HistoryLine|||dev=18w14b|将<code>$color_dead_coral</code>重命名为<code>dead_$variant_coral_block</code>。
+|将<code>$color_coral</code>重命名为<code>$variant_coral_block</code>。
+|将<code>$color_coral_plant</code>重命名为<code>$variant_coral</code>。
+|将<code>$color_coral_fan</code>重命名为<code>$variant_coral_fan</code>。}}
+|{{HistoryLine|||dev=18w19a|将<code>(tall_)sea_grass</code>重命名为<code>(tall_)seagrass</code>。
+|将实体<code>puffer_fish</code>重命名为<code>pufferfish</code>。
+|将小丑鱼重命名为[[热带鱼]]。}}
+|{{HistoryLine|||dev=18w20a|将<code>kelp_top</code>重命名为<code>kelp</code>。
+|将<code>kelp</code>重命名为<code>kelp_plant</code>。
+|将<code>prismarine_bricks_slab</code>重命名为<code>prismarine_brick_slab</code>。
+|将<code>prismarine_bricks_stairs</code>重命名为<code>prismarine_brick_stairs</code>。
+|将<code>cod_mob_spawn_egg</code>重命名为<code>cod_spawn_egg</code>。
+|将<code>salmon_mob_spawn_egg</code>重命名为<code>salmon_spawn_egg</code>。
+|将<code>cod_mob</code>重命名为<code>cod</code>。
+|将<code>salmon_mob</code>重命名为<code>salmon</code>。
+|将[[重质测重压力板]](Weighted Pressure Plate (Heavy))重命名为[[重质测重压力板]](Heavy Weighted Pressure Plate)。
+|将[[轻质测重压力板]](Weighted Pressure Plate (Light))重命名为[[轻质测重压力板]](Light Weighted Pressure Plate)。
+|将[[金马铠]]（Gold Horse Armor）重命名为[[金马铠]]（Golden Horse Armor）。
+|将[[锁链盔甲]]（Chain Helmet）重命名为[[锁链盔甲]]（Chainmail Helmet）。
+|将[[牛奶]]重命名为[[牛奶桶]]。
+|将[[小麦种子]]（Seeds）重命名为[[小麦种子]]（Wheat Seeds）。
+|将[[刷怪蛋|生成<生物>]]重命名为[[刷怪蛋|<生物>刷怪蛋]]。
+|重命名了一些方块的纹理。
+|重命名了一些结构的文件。}}
+|{{HistoryLine|||dev=18w20b|将<code>melon_block</code>重命名为<code>melon</code>。
+|将<code>melon</code>重命名为<code>melon_slice</code>。
+|将<code>speckled_melon</code>重命名为<code>glistering_melon_slice</code>。
+|将实体[[末地水晶]]（Ender Crystal）重命名为[[末地水晶]]（End Crystal）。
+|将实体[[TNT|TNT方块]]（Block of TNT）重命名为[[被激活的TNT]]（Primed TNT）。}}
+|{{HistoryLine|||dev=18w21a|NBT标签<code>ench</code>重命名为<code>Enchantments</code>，而且每个组合不再使用数字ID。}}
+|{{HistoryLine|||dev=18w22a|在[[树叶]]的方块状态中，<code>check_decay</code>和<code>decayable</code>两个布尔型变量变为<code>distance</code>（范围1-7）和一个<code>persistent</code>布尔型变量。}}
+|{{HistoryLine|||dev=18w22b|[[树皮]]现在拥有了<code><nowiki>axis=x|y|z</nowiki></code>的方块状态。}}
+|{{HistoryLine|||dev=pre3|<code>textures/blocks/</code>变为了<code>textures/block/</code>。
+|<code>textures/items/</code>变为了<code>textures/item/</code>。
+|方块状态文件现在使用<code>""</code>而不是<code>"normal"</code>去指定无方块状态。
+|方块状态文件现在从<code>models/</code>开始引用而不是从<code>models/block/</code>中。}}
+|{{HistoryLine|||dev=pre5|将<code>xp_orb</code>重命名为<code>experience_orb</code>。
+|将<code>xp_bottle</code>重命名为<code>experience_bottle</code>。
+|将<code>eye_of_ender_signal</code>重命名为<code>eye_of_ender</code>。
+|将<code>ender_crystal</code>重命名为<code>end_crystal</code>。
+|将实体<code>fireworks_rocket</code>重命名为<code>firework_rocket</code>。
+|将<code>commandblock_minecart</code>重命名为<code>command_block_minecart</code>。
+|将<code>villager_golem</code>重命名为<code>iron_golem</code>。
+|将<code>evocation_fangs</code>重命名为<code>evoker_fangs</code>。
+|将<code>evocation_illager</code>重命名为<code>evoker</code>。
+|将<code>vindication_illager</code>重命名为<code>vindicator</code>。
+|将<code>illusion_illager</code>重命名为<code>illusioner</code>。
+|将<code>evocation_illager_spawn_egg</code>重命名为<code>evoker_spawn_egg</code>。
+|将<code>vindication_illager_spawn_egg</code>重命名为<code>vindicator_spawn_egg</code>。
+|将<code>mob_spawner</code>重命名为<code>spawner</code>。
+|将<code>portal</code>重命名为<code>nether_portal</code>。
+|将<code>clownfish</code>重命名为<code>tropical_fish</code>。
+|将<code>clownfish_bucket</code>重命名为<code>tropical_fish_bucket</code>。
+|将<code>chorus_fruit_popped</code>重命名为<code>popped_chorus_fruit</code>。
+|将<code>$type_bark</code>重命名为<code>$type_wood</code>。
+|[[Java版声音事件|声音事件]]的变化得到了实际应用。
+|生物群系ID得到了实际应用。
+|[[魔咒]]的本地化键名现在是<code>enchantment.<namespace>.<id></code>而不是<code>enchantment.<something></code>。
+|[[状态效果]]的本地化键名现在是<code>effect.<namespace>.<id></code>而不是<code>effect.<something></code>。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+[[cs:1.13/Zploštění]]
+[[de:Versionen/Vollversion 1.13/Metadaten-Entfernung]]
+[[en:Java Edition Flattening]]
+[[es:Java Edition 1.13/Reestructuración]]
+[[fr:Édition Java 1.13/Aplanissement]]
+[[ja:Java Edition 1.13/平坦化]]
+[[pt:Nivelamento da Edição Java]]

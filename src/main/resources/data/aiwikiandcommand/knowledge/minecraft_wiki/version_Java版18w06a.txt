@@ -1,0 +1,130 @@
+# 页面: Java版18w06a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8818w06a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:20
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=18w06a
+|image=18w06a.png
+|image2=Java Edition 18w06a Simplified.png\Java Edition 18w06a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2018年2月9日
+|jsonhash=83670eeb3b4579b6f93d4228b7e2bc1f89475d71
+|clienthash=78ed8d3359453614d8f69bd982111e8aa6c8f612
+|serverhash=4e47158fd42d966884a7ffb7440b35d86c038049
+|parent=1.13
+|prevparent=1.12.2
+|prev=18w05a
+|next=18w07a
+|nextparent=1.13.1
+}}<onlyinclude>
+
+'''18w06a'''是[[Java版1.13]]的第17个快照，发布于2018年2月9日<ref>{{snap|18w06a|February 9, 2018}}</ref>，加入了技术性更新的内容，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[洞穴空气]]和[[虚空空气]]'''
+* 均与空气拥有完全相同的特性。
+* 洞穴空气在[[洞穴]]中生成。
+* 虚空空气在内部用于世界上方（Y≥256）和下方（Y<0）的方块，以及未加载的[[区块]]。
+
+=== 世界生成 ===
+'''[[生物群系]]'''
+* 加入了<code>minecraft:sky_island_low</code>（[[末地]] - 浮岛）、<code>minecraft:sky_island_medium</code>（末地 - 中型岛屿）、<code>minecraft:sky_island_high</code>（末地 - 高岛）和<code>minecraft:sky_island_barren</code>（末地 - 荒岛）。
+
+=== 命令格式 ===
+'''{{cmd|enchant}}'''
+* 重新加入了{{cmd|enchant}}，且取消了用{{cmd|modifyitem|link=none}}取而代之的计划。
+
+'''[[实体选择器]]'''
+* 为实体选择器加入了命令建议。
+
+=== 常规 ===
+'''[[配方书]]'''
+* 为[[熔炉]]加入了配方书。
+** 熔炉的配方已被移至json文件。
+*** 它们使用<code>"type": "smelting"</code>。
+*** <code>cookingtime</code>用来判定在熔炉中[[烧炼]]物品所花费的时间。
+*** <code>experience</code>用来判定玩家从熔炉中手动取出输出物品时应获得的[[经验值]]。
+*** [[燃料]]不在其列，仍为硬编码。
+* “解锁配方”的推送通知现在在左上角显示一个图标，来指明解锁的是合成配方还是烧炼配方。
+
+'''[[Java版标签|标签]]'''
+* 加入了新的普通方块标签。
+** {{cd|minecraft:banners|minecraft:wooden_pressure_plates|minecraft:wooden_slabs|minecraft:wooden_stairs|d=pretty}}。
+* 加入了新的普通物品标签。
+** {{cd|minecraft:banners|minecraft:boats|minecraft:wooden_pressure_plates|minecraft:wooden_slabs|minecraft:wooden_stairs|d=pretty}}。
+
+== 更改 ==
+=== 世界生成 ===
+'''世界生成系统'''
+* 重写了世界生成系统。
+
+'''大型[[云杉树]]'''
+* 现在在生长时会将附近的[[草方块]]变为[[灰化土]]。
+
+'''[[自定义/Java版1.13前|自定义]]世界类型'''
+* 被移除。
+
+=== 命令格式 ===
+'''[[目标选择器]]'''
+* 现在允许在实体选择器和方块状态参数中出现空格。
+
+'''{{cmd|locate}}'''
+* {{cmd|locate}}现在接受之前在<code>Temple</code>分组下所有结构的不同名称。
+** {{cd|Desert_Pyramid|Igloo|Jungle_Pyramid|Swamp_Hut|d=pretty}}。
+** 分别是[[沙漠神殿]]、[[雪屋]]、[[丛林神庙]]和[[沼泽小屋]]。
+
+== 修复 ==
+{{fixes|fixedin=18w06a|prefix=Minecraft|showdesc=1
+|;old
+|29490|1.7及以上版本有光照问题，会出现局部无光区域。
+|50640|不同方式产生的大型橡树形状不一致。
+|77488|{{key|Tab}}玩家列表按ASCII码顺序排序，而不是按字母表顺序排序。
+|96929|{{cmd|enchant|link=none}}命令的回显不显示具体被附魔的物品。
+|101232|大型树生成器会导致内存泄露。
+|103023|村庄中房屋会重叠在一起。
+|111341|沙漠中会生成平原村庄。
+|113577|新生成的平顶山和平顶山（岩柱）群系会按照上一次生成这两种群系的世界的种子生成。
+|124695|发射器中打火石的耐久度在未成功点燃时依然会被消耗。
+|;dev
+|121633|全屏模式下，打开配方书时切出再切入游戏时，配方书界面损坏。
+|121641|构造不可能出现的选择器组合时不会出现错误。
+|121644|配方书选项卡的声音会播放两次。
+|121811|NBT路径解析器过于宽松。
+|121901|命令中有右方括号而无对应左方括号时，游戏崩溃。
+|122673|{{cmd|locate|link=none}}命令始终返回Z{{=}}64。
+|123150|世界生成过程中，水不会生成黑曜石。
+|123482|{{filename|paintings.json}}配方表文件不使用<code>minecraft:wool</code>标签。
+|123628|{{cmd|execute store success score|link=none}}命令与函数一起使用时会出现预料外的行为。
+|123805|在命令提示中，显示的候选项会忽略不完整命名空间后的字符。
+|123888|对无任何物品的玩家执行{{cmd|clear|link=none}}命令时，会输出原始<code>TextComponent</code>对象。
+|124128|钓鱼竿浮漂缺少其相对应的翻译文本。
+|124372|{{key|Tab}}键补全功能中的排列顺序有误。
+|124424|<code>minecraft:load</code>标签在地图加载时不执行。
+|124649|不再能从侧面激活下界传送门。
+|;previous
+|124683|特定情况下，命令提示中的实体选择器右方括号与聊天栏输入位置不对齐。
+|124721|特定情况下，跟在选择器后面的命令提示可以为空。
+|124727|{{key|Tab}}键补全功能不能正常作用于标签。
+}}</onlyinclude>
+
+== 你知道吗 ==
+* 这是所谓{{tooltip|技术性更新|Java版1.13（水域更新）}}的最后一个快照。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:18w06a]]
+[[en:Java Edition 18w06a]]
+[[es:Java Edition 18w06a]]
+[[fr:Édition Java 18w06a]]
+[[ja:Java Edition 18w06a]]
+[[nl:18w06a]]
+[[pt:Edição Java 18w06a]]
+[[ru:18w06a (Java Edition)]]

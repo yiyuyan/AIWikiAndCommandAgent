@@ -1,0 +1,184 @@
+# 页面: Java版25w37a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8825w37a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:36
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=25w37a
+|image=25w37a.png
+|image2=Java Edition 25w37a Simplified.png\Java Edition 25w37a Traditional.png\Java Edition 25w37a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2025年9月9日
+|jsonhash=a3b3ac6c93468a31e4a94f589d625f26e0305570
+|clienthash=2d091382632a915e9dd1690b658fe025bd4533bf
+|clientmap=23834bc959ea1cdb405ab147c01699c7ebe23676
+|serverhash=9675164bd7a8ec5a876a05ac96637c77e9d82a24
+|servermap=b5eb11bfa30cc782b5c8510691fe082afd6c1c22
+|parent=1.21.9
+|prevparent=1.21.8
+|prev=25w36b
+|next=1.21.9-pre1
+|nextparent=1.21.10
+}}<onlyinclude>
+
+'''25w37a'''是[[Java版1.21.9]]的第9个，也是最后一个快照，发布于2025年9月9日<ref>{{snap|25w37a|Sep 09, 2025}}</ref>，将所需的OpenGL版本号由3.2提升至3.3，并修复了一些漏洞。
+
+== 新内容 ==
+=== 游戏内容 ===
+'''[[游戏规则]]'''
+* 加入了新游戏规则<code>[[游戏规则/spawnerBlocksEnabled|spawnerBlocksEnabled]]</code>，以控制是否启用[[刷怪笼]]，默认为<code>true</code>。
+
+=== 常规 ===
+'''[[调试工具]]'''
+* 开放了一些调试工具，这些调试工具原本会在编译时被移除。
+* 可以通过JVM属性启用各个值：
+** 使用<code>-DMC_DEBUG_ENABLED</code>或<code>-DMC_DEBUG_ENABLED=true</code>启用全局调试标志。
+** 特定的调试工具可以通过类似<code>-DMC_DEBUG_BRAIN</code>或<code>-DMC_DEBUG_BRAIN=true</code>的方式启用。
+** 添加<code>-DMC_DEBUG_PRINT_PROPERTIES</code>可以查看所有可用的调试工具列表。
+
+'''[[服务端配置文件格式]]'''
+* 加入了<code>management-server-tls-enabled</code>属性，控制Minecraft服务器管理协议是否启用TLS，默认为<code>true</code>。
+* 加入了<code>management-server-tls-keystore</code>属性，控制TLS使用的keystore文件路径，默认为空。
+** 如果启用TLS但不提供keystore，专用服务器不会启动。
+* 加入了<code>management-server-tls-keystore-password</code>属性，控制TLS使用的keystore文件的密码，默认为空。
+
+== 更改 ==
+=== 方块 ===
+'''[[测试实例方块]]'''
+* 现在会在世界重载期间保存错误标记。
+
+=== 生物 ===
+'''[[铜傀儡]]'''
+* 更改了判定箱，现在宽为0.49格，以允许通过狭窄的空间寻路。
+* 现在可以开门，以同步{{el|be}}。
+
+=== 游戏内容 ===
+'''[[游戏模式]]'''
+* 现在从旁观模式切换到创造模式时，玩家只在下方一格内有可碰撞表面且不位于方块或可碰撞实体内时取消飞行。
+
+'''[[生成]]'''
+* 现在生成生物的装备品质下限会在皮革质、铜质和金质中选择其一（此前在前二者中择一），且在此基础上品质每提升一级的概率由9.5%提升至10.87%。
+** 这保证皮革质、铜质和金质能作为常见装备生成的同时，更高品质装备的概率不会因为加入铜质装备而受到较大影响。例如此前钻石装备的生成概率降低到0.004%，而现在已恢复到0.04%。
+
+=== 常规 ===
+'''[[游戏规则]]'''
+* 将<code>enableCommandBlocks</code>游戏规则重命名为<code>[[游戏规则/commandBlocksEnabled|commandBlocksEnabled]]</code>，以匹配{{el|be}}。
+
+'''[[选项]]'''
+* 在主菜单中调整“{{tr|音乐和声音…|音樂和音效...|音樂與音效⋯⋯}}”下的部分选项时会播放预览音效。
+* 为资源包和数据包的选择屏幕加入了搜索框。
+
+'''[[Minecraft服务器管理协议]]'''
+* 客户端必须进行身份验证才能存取API。
+** 客户端需要提供带有服务端特定密钥的<code>Authorization</code>令牌头。
+*** 未经授权的请求将被以状态码<code>401 Unauthorized</code>拒绝。
+** 密钥在服务端配置文件中的<code>management-server-secret=</code>设置。
+*** 密钥必须是40个字母或数字组成的字符串。
+*** 如果没有手动设置，密钥将会自动生成。
+* TLS现在默认启用。
+** 可以通过在服务端配置文件中设置<code>management-server-tls-enabled=false</code>禁用。
+** 需要在服务端配置文件中通过<code>management-server-tls-keystore=path/to/keystore.p12</code>设置keystore文件。
+** keystore文件必须为PKCS12格式。
+** keystore密码可以通过下面方式设置，优先级从高到低：
+*** 环境变量：<code>MINECRAFT_MANAGEMENT_TLS_KEYSTORE_PASSWORD</code>
+*** JVM参数：<code>Dmanagement.tls.keystore.password=</code>
+*** 服务端配置文件：<code>management-server-tls-keystore-password=</code>
+
+'''[[服务端配置文件格式]]'''
+* <code>management-server-port</code>的默认值从25585改为0，每次启动管理服务器时将分配一个可用端口。
+
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|87.0}}。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|69.0}}。
+* 将<code>gui/container/villager.png</code>的结果栏向上移动了一个像素。
+
+'''[[着色器]]与后处理管线'''
+* 向下列着色器加入了<code>PER_FACE_LIGHTING</code>标签：
+** <code>core/entity.vsh</code>
+** <code>core/entity.fsh</code>
+* 当设置好基色光照时，前面和背面的光照将会单独计算。
+* 由于所需的OpenGL版本号提升至3.3，所有着色器的版本已经从150提升至330。
+
+'''[[闪烁标语]]'''
+* 将闪烁标语“Now on OpenGL 3.2 core profile!”改为“Now on OpenGL 3.3 core profile!”。
+
+'''常规'''
+* 将所需的OpenGL版本号由3.2提升至3.3。
+* 调整了实体的环境光，以更契合方块和游戏其他部分的视觉效果。
+** 平坦表面的背面现在会从该方向照亮，而不是从相反的方向。
+** 这项更改主要影响包含平坦或“空心”立方体的模型，例如：
+*** 穿在身上的盔甲和鞘翅
+*** 玩家的外层皮肤
+*** 骷髅和骷髅马的“肋骨”
+*** 鸡和青蛙的脚
+*** 幻翼和末影龙的翅膀
+*** 鱼的鳍
+
+== 修复 ==
+{{fixes|fixedin=25w37a|showdesc=1|new=1
+|;old
+|220913|趋同事项：声音设置中，在不在世界中时，调整滑动条不会播放对应分类的声音。
+|254052|{{cmd|locate|link=none}}不在建筑高度限制外生效。
+|;1.21.8的漏洞
+|301494|悬浮的沙子或沙砾不再显示下落粒子。
+|;dev
+|295841|交互碰撞检测路径损坏了。
+|300076|铜傀儡在搜索箱子时保持完全静止，导致其飘浮或使其无法被击退或推动。
+|300077|铜傀儡能沿对角穿过固体方块与箱子交互。
+|300299|铜傀儡能打开被阻挡的箱子。
+|300723|第二层盔甲在所有部件上仍未正常渲染。
+|301294|与25w31a之前相比，更高品质的生物盔甲不再那么常见。
+|301510|GUI精灵图九宫格切分性能倒退。
+|301531|服务端管理协议在收到无效的方法ID时回傳错误的响应。
+|301547|从旁观模式切换到创造模式现在会使玩家从天上掉下来。
+|301554|管理协议不支持{{tr|批处理|批次}}请求。
+|301558|铜傀儡不能通过较窄的方块寻路。
+|301563|拥有黑暗药水效果时，聊天、暂停菜单和F3中的字母、单词，以及物品会变暗。
+|301564|管理协议不支持基于字符串的请求ID。
+|301574|<code>spawnMonsters</code>游戏规则不在开关时生效。
+|301593|<code>spawnMonsters</code>游戏规则为<code>false</code>时，敌对生物能从刷怪笼中生成。
+|301599|进入界面时，行动键会卡住，以至于无法退出界面，除非其立刻重开。
+|301620|渲染了两个旗帜时，旗帜动画不相互独立。
+|301661|服务端管理协议在控制台中输出部分错误的格式化消息。
+|301711|游戏规则<code>enableCommandBlocks</code>的名称与基岩版不一致。
+|301748|借助闪电击中具有非默认氧化等级的避雷针会使周围的红石元件保持充能。
+|301751|玩家在玩家模型刷怪笼附近时，客户端崩溃。
+|301752|<code>profile.model</code>设为<code>wide</code>的玩家模型渲染为Steve皮肤。
+|301754|空手右键展示架时播放手部动画。
+|301758|盾牌模型穿过了展示架。
+|301759|Realms“世界”标签页内的元素未在使用{{key|Tab}}键时被有序选中。
+|;prev
+|301766|放置于展示架上的生物头颅似乎过高。
+|301768|旁观模式中，结构方块框架不显示。
+|301785|鱿鱼的墨粒子是黄色的。
+|301811|刷扫可疑的沙子时，战利品不会显示。
+|301833|<code>text_display</code>实体的文本在<code>see_through</code>属性设为<code>true</code>时更暗。
+|301869|服务端管理方法<code>minecraft:ip_bans</code>回傳<code>ip_ban</code>{{tr|对象|物件}}数组，尽管其规范描述此方式傳玩家数组。
+|301870|未指定原因的{{cmd|ban|link=none}}和{{cmd|ban-ip|link=none}}命令成功时，命令反馈不会发送到客户端。
+|301889|记录的回傳型別與服务端管理协议的清空方法不相符。
+|301891|服务端管理方法<code>minecraft:bans/clear</code>会清空允许名单而非封禁名单。
+|301899|交易GUI中的输出槽位未与其他槽位对齐。
+|301903|掉落的箱子（包含变种）不再向上转换。
+|301935|箱子渲染于展示架底部隔板上，尽管其他物品不在此处。
+|301952|激活的潮涌核心在显示时偏斜，且其眼睛不会张开。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:25w37a]]
+[[en:Java Edition 25w37a]]
+[[es:Java Edition 25w37a]]
+[[fr:Édition Java 25w37a]]
+[[ja:Java Edition 25w37a]]
+[[lzh:爪哇版二五週三七甲]]
+[[pt:Edição Java 25w37a]]
+[[ru:25w37a (Java Edition)]]
+[[uk:25w37a (Java Edition)]]

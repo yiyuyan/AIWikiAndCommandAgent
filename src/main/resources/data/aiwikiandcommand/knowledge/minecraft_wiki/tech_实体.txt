@@ -1,0 +1,961 @@
+# 页面: 实体
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9E%E4%BD%93
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用简单计算器的页面, 基岩版即将到来/26.40, 基岩版独有信息, 实体, 实验性内容/2026 年第 3 次更新, 教育版独有信息, 有未知版本的History模板的页面/Java版, 环境, 需要信息, 需要整理, 需要验证/基岩版
+# 抓取时间: 2026-07-14 17:25:13
+# 原始 Wikitext 内容:
+
+{{distinguish|方块实体}}
+[[File:MiscEntities.png|缩略图|右|一个玩家正站在一些实体前]]
+[[File:EntitiesHitboxes.png|缩略图|右|{{el|je}}中一些实体的[[判定箱]]，请注意蓝线为实体的朝向]]
+'''实体（Entity）'''包括在Minecraft中所有动态的、移动中的对象。
+
+== 一般行为 ==
+大部分实体拥有以下性质：
+* 占有特定的空间大小。此空间是一个固定长宽高的三维长方体（实体不偏斜时，俯视图为矩形）。
+* 当着[[火]]时，会受到[[伤害]]或消失，实体显示出被火焰包围的样子。
+* 可以拥有[[状态效果]]，主要由[[药水]]产生。
+
+部分实体能够{{ctrl|使用}}[[命名牌]]将其重命名。
+
+实体会根据所在位置的[[亮度]]等级被照亮。例如，如果[[矿车]]斜着撞进一个固体方块中，就会变成黑色（固体方块的亮度永远是0）；射出的[[箭]]有时候也会呈现黑色（尤其是几乎水平地卡在了天花板上时）。
+
+=== 详细说明 ===
+{{only|java|for=[[物品展示框]]、[[荧光物品展示框]]}}、[[画]]、[[拴绳结]]和{{in update|drop 3 2026|for=[[坐垫]]}}是实体，但与其他实体不同，它们和方块网格对齐，而且不能移动。
+
+==== 船和矿车 ====
+{{See also|运输}}
+
+船和矿车会随着时间推移恢复生命值。因此，船和矿车只能在受到快速的攻击后毁坏，而不会在空手攻击且攻击时间与停止时间间隔相同时被毁坏。船和矿车晃动的幅度标明了其当前的生命值。
+
+==== 下落的方块 ====
+{{Main|下落的方块}}
+[[File:Sandy Dungeon.png|缩略图|右|一个被掉落后的沙子覆盖的[[刷怪房]]]]
+
+受重力影响的方块包括[[沙子]]、[[沙砾]]、[[可疑的沙子]]、[[可疑的沙砾]]、[[红沙]]、[[滴水石锥]]、[[脚手架]]、[[铁砧]]、[[龙蛋]]、[[混凝土粉末]]和{{only|be|for=[[雪]]}}。
+
+正常情况下以方块形态存在。当一个方块的支持物消失后，方块会变成实体并掉落，直到撞击在另外一个支持物上方。此时实体会在最近的方块网格中转换成原始方块；如果此方块网格已被非固体方块占用（例如[[火把]]或[[台阶]]），则实体会转换成物品掉落。
+
+虽然这些方块通常竖直向下落，但是它们的轨迹可以被[[爆炸]]和带有[[黏液块]]的[[活塞]]、水中的[[气泡柱]]以及{{only|java|for=钓鱼竿（仅可移动滴水石锥）}}改变，也可以通过使用[[命令]]或第三方程序修改掉落的方块的速度和方向。重力的影响会使它们变成掉落物，如果下落的方块自生成后存在了至少{{convert|600}}也没有变成方块，或在建造高度外且自生成后存在了至少{{convert|100}}，就会直接消失，一般情况下会掉落为对应的方块物品。
+
+当世界生成时，洞穴生成在沙子底下时，游戏不会更新方块状态，而沙子会悬空，直到周围的方块发生变化。这时一个轻微的变化就会触发整个沙子区域的坍塌。{{in|be}}任何在洞穴、在刷怪房天花板或悬崖下产生的受重力影响的方块（例如沙子、沙砾和红沙）都将保持浮空状态，直到受到了方块更新为止。
+
+==== 交互 ====
+有些实体在被{{ctrl|交互}}时（例如幼年村民、驯服的狼、僵尸、矿车和船），手上物品的交互动作不会被阻止。例如，当玩家手持[[水桶]]对着驯服的狼{{ctrl|交互}}，狼会坐下或站起，而桶中的水也会倒出。
+
+==== 骑行 ====
+{{main|骑乘}}
+[[File:Skeleton-spider-desert.png|缩略图|右|一个蜘蛛骑士]]
+
+实体可以被骑行或与其他实体组合起来。在这种情况，只有组合体中较低/靠外的那个实体会与其他对象相碰撞，并且有权控制组合体的移动。但是也有例外：乘坐着[[矿车]]或[[船]]或骑着上[[鞍]]的马的玩家、骑着[[鸡]]的幼年[[僵尸]]和骑着马或乘船的[[骷髅]]。目前游戏中的常见实体组合体如：
+* 载着[[玩家]]或[[生物]]的[[船]]、[[矿车]]或[[运输船]]。
+* 戴上[[鞍]]被玩家骑行的[[猪]]、[[马]]、[[驴]]、[[骡]]、[[僵尸马]]、[[骷髅马]]或[[骆驼]]。
+* 戴上鞍被玩家或[[僵尸猪灵]]骑乘的[[炽足兽]]。
+* 戴上鞍被玩家或[[尸壳]]和[[焦骸]]骑乘的[[骆驼尸壳]]。
+* 被玩家骑行的[[羊驼]]、[[鹦鹉螺]]或{{in update|for=[[坐垫]]|drop 3 2026}}。
+* 被玩家或溺尸骑行的[[僵尸鹦鹉螺]]。
+* 所有骑着[[蜘蛛]]或{{only|be|for=[[洞穴蜘蛛]]}}的[[骷髅]]（[[蜘蛛骑士]]）。
+* 在玩家肩膀上的[[鹦鹉]]。
+* 骑着[[鸡]]（[[鸡骑士]]）或{{only|be|for=其他生物}}的[[幼年僵尸]]或{{only|je|for=[[僵尸猪灵]]}}。
+* [[骷髅陷阱马]]和骑着[[骷髅马]]的[[骷髅]]。
+* [[卫道士]]、[[掠夺者]]或[[唤魔者]]骑着的[[劫掠兽]]。
+
+更高级别的组合体是存在的，如在[[矿车]]里骑着[[猪]]的[[玩家]]。
+
+通过{{cmd|ride}}命令可以使实体骑乘其他实体，或生成骑着其他实体的实体。
+
+{{in|je}}通过{{cmd|summon}}命令生成可以在任何实体上面再骑乘一个实体，例如使用{{cmd|summon spider ~ ~ ~ {Passengers:[{id:"skeleton", equipment:{mainhand: {id:bow} } }]} }}会生成一个[[蜘蛛骑士]]。
+
+如果一个实体正在骑行另一个实体，那么最上层的实体不能传送，因为一旦传送成功，这个实体就会被传送回它骑乘的一个实体。由于游戏通过在新旧位置之间的位置显示实体来平滑移动，因此可能导致在骑乘另一个实体和它们的瞬移位置之间的多个位置处看到该实体。
+
+== 所有实体 ==
+{{Cleanup|section=1}}
+以下是目前Minecraft中的实体。
+
+大小既是以格长度为单位（以米计算，注意1格是1m<sup>3</sup>），也是在水平维度（X轴和Z轴）中特定宽度和Y轴中特定高度的[[wikipedia:Axis-aligned bounding box#Axis-aligned minimum bounding box|最小边界框]]的大小。这个边界框不会随实体视觉上的旋转而旋转。
+
+如果仅要获取实体的ID表，请前往[[数据值]]。
+{| class="wikitable sortable mw-collapsible center"
+! 种类
+! 是否会阻止其他实体的通过
+! class="unsortable" | 掉落物
+! 自然消失
+! 宽×高
+! 命名空间ID
+! class="unsortable" | 备注
+|-
+! {{EntityLink|id=Creeper|生物}}
+| {{tc|yes}}
+| 详见[[掉落物]]
+| 详见[[生成]]
+| 多种
+| 详见{{slink|Java版数据值|实体}}和{{slink|基岩版数据值|实体ID}}
+| &dash;
+|-
+! {{EntityLink|Boats}}
+| {{tc|yes}}
+| 1个对应的[[船]]
+| {{tc|no}}
+| {{only|je|for=1.375×0.5625}}<br>{{only|be|for=1.4×0.455}}
+| boat
+| {{only|je|for=每刻回复0.1生命值。}}<br>{{only|be|for=重新载入时生命值回满。}}
+|-
+! {{EntityLink|Boat with Chest}}
+| {{tc|yes}}
+| 1个对应的[[运输船]]与其内的所有物品
+| {{tc|no}}
+| {{only|je|for=1.375×0.5625}}<br>{{only|be|for=1.4×0.455}}
+| chest_boat
+| {{only|je|for=每刻回复0.1生命值。}}<br>{{only|be|for=重新载入时生命值回满。}}
+|-
+! {{EntityLink|Minecart}}
+| {{tc|partial|仅对于弹射物和[[矿车]]}}
+| 1个[[矿车]]
+| {{tc|no}}
+| 0.98×0.7
+| minecart
+| rowspan=7 |会逐渐回复生命值。<br>会接上附近的[[铁轨]]。
+|-
+! {{EntityLink|Minecart with Chest}}
+| {{tc|partial|仅对于弹射物和[[矿车]]}}
+| 1个[[运输矿车]]与其内的所有物品
+| {{tc|no}}
+| 0.98×0.7
+| chest_minecart
+|-
+! {{only|je|for={{EntityLink|Minecart with Furnace}}}}
+| {{tc|partial|仅对于弹射物和[[矿车]]}}
+| 1个[[动力矿车]]
+| {{tc|no}}
+| 0.98×0.7
+| furnace_minecart
+|-
+! {{EntityLink|Minecart with TNT}}
+| {{tc|partial|仅对于弹射物和[[矿车]]}}
+| 1个[[TNT矿车]]（发生爆炸除外）
+| {{tc|no}}
+| 0.98×0.7
+| tnt_minecart
+|-
+! {{EntityLink|Minecart with Hopper}}
+| {{tc|partial|仅对于弹射物和[[矿车]]}}
+| 1个[[漏斗矿车]]与其内的所有物品
+| {{tc|no}}
+| 0.98×0.7
+| hopper_minecart
+|-
+! {{only|je|for={{EntityLink|Minecart with Monster Spawner}}}}
+| {{tc|partial|仅对于弹射物和[[矿车]]}}
+| 1个[[矿车]]
+| {{tc|no}}
+| 0.98×0.7
+| spawner_minecart
+|-
+! {{EntityLink|Minecart with Command Block}}
+| {{tc|partial|仅对于弹射物和[[矿车]]}}
+| 1个[[矿车]]
+| {{tc|no}}
+| 0.98×0.7
+| command_block_minecart
+|-
+! {{EnvLink|id=items|物品（实体）|物品}}
+| {{tc|partial|仅对于[[船]]和[[矿车]]}}
+| [[潜影盒]]和[[收纳袋]]被摧毁时掉落其中储存的所有内容物。
+| {{tc|yes|5分钟（[[下界之星]]除外）}}
+| 0.25×0.25
+| item
+| 会被[[爆炸]]、[[火]]、[[熔岩]]和[[仙人掌]]摧毁，但是不能被攻击。例外是[[下界之星]]不能被爆炸摧毁，[[下界合金|下界合金质物品]]不会被火和熔岩摧毁，且会漂浮在熔岩上。
+|-
+! {{EntityLink|Experience Orb}}
+| {{tc|no}}
+| 不可用
+| {{tc|yes|5分钟}}
+| {{only|je|for=0.5×0.5}}<br>{{only|be|for=0.25×0.25}}
+| {{only|je|for=experience_orb}}<br>{{only|be|for=xp_orb}}
+| 与掉落的物品具有相同的行为；也会被玩家吸引。
+|-
+! {{EntityLink|Arrow}}<br>{{only|je|for={{EntityLink|Spectral Arrow}}}}
+| {{tc|partial|仅对于[[船]]和[[矿车]]}}
+| 不可用
+| {{tc|yes|1分钟}}
+| 0.25×0.25
+| 箭：arrow<br>{{only|je|for=光灵箭：spectral_arrow}}
+| 在移动中伤害其他实体。当卡在一个[[方块]]里时不具有伤害能力（当方块被摧毁时，箭会重新发射并会伤害其他实体）。如果箭被玩家发射，可以被任何在生存模式中的玩家捡起（除非它是从有[[无限]]附魔的[[弓]]射出）。
+|-
+! {{EntityLink|Trident}}
+| {{tc|no}}
+| 不可用
+| {{tc|yes|1分钟}}
+| 0.25×0.35
+| {{only|je|for=trident}}<br>{{only|be|for=thrown_trident}}
+| 与箭行为相同。
+|-
+! {{EntityLink|Snowball}}
+| 撞击后碎裂
+| 不可用
+| {{tc|no}}
+| 0.25×0.25
+| snowball
+| &dash;
+|-
+! {{EntityLink|Thrown Egg}}
+| 撞击后碎裂
+| 不可用
+| {{tc|no}}
+| 0.25×0.25
+| egg
+| 鸡蛋在受到撞击后有12.5%概率生成幼年[[鸡]]。
+|-
+! {{EntityLink|Llama Spit}}
+| 撞击后碎裂
+| 不可用
+| {{tc|no}}
+| 0.25×0.25
+| llama_spit
+| &dash;
+|-
+! {{ItemLink|Splash Potion}}
+| 撞击后碎裂
+| 不可用
+| {{tc|no}}
+| 0.25×0.25
+| splash_potion
+| &dash;
+|-
+! {{ItemLink|Lingering Potion}}
+| 撞击后碎裂
+| 不可用
+| {{tc|no}}
+| 0.25×0.25
+| lingering_potion
+| &dash;
+|-
+! {{EntityLink|Thrown Bottle o' Enchanting}}
+| 撞击后碎裂
+| 不可用
+| {{tc|no}}
+| 0.25×0.25
+| experience_bottle
+| 掷出的附魔之瓶破裂时会生成总计{{xp|3|11}}，并产生蓝色的[[粒子]]。
+|-
+! [[末影龙部件]]
+| {{tc|yes}}
+| 不可用
+| {{tc|no}}
+| 多种
+| {{Info needed}}
+| 不会被存储在世界中，而是在每一次加载末影龙时生成。<br>大多数方块与其接触时会被破坏，被破坏的方块不会掉落。
+|-
+! {{EntityLink|Thrown Ender Pearl}}
+| 撞击后碎裂
+| 不可用
+| {{tc|no}}
+| 0.25×0.25
+| ender_pearl
+| 撞击后传送玩家并对其造成{{hp|5}}坠落伤害。
+|-
+! {{EntityLink|Eye of Ender}}
+| {{tc|no}}
+| 1个末影之眼（{{frac|4|5}}概率）
+| {{tc|yes|约10秒}}
+| 0.25×0.25
+| {{only|je|for=eye_of_ender}}<br>{{only|be|for=eye_of_ender_signal}}
+| 飞向最近的[[要塞]]。
+|-
+! {{EntityLink|Fireball}}<br>{{EntityLink|Small Fireball}}<br>{{EntityLink|wither-skull}}<br>{{EntityLink|Dragon Fireball}}
+| 受到攻击后反弹/受到撞击后爆炸
+| 不可用
+| {{tc|yes|1分钟}}
+| 0.31×0.31<br>0.15×0.15（凋灵之首）
+| fireball<br>small_fireball<br>wither_skull<br>dragon_fireball
+| &dash;
+|-
+! {{EntityLink|Shulker Bullet}}
+| {{tc|no}}
+| 不可用
+| {{tc|no}}
+| 0.625×0.625
+| shulker_bullet
+| &dash;
+|-
+! {{EntityLink|Firework Rocket}}
+| {{tc|no}}
+| 不可用
+| {{tc|yes|爆炸}}
+| 0.25×0.25
+| {{only|be|for=fireworks_rocket}}<br>{{only|je|for=firework_rocket}}
+| &dash;
+|-
+! {{EntityLink|Primed Tnt}}
+| {{tc|no}}
+| 不可用
+| {{tc|yes|爆炸（4秒或更少）}}
+| 0.98×0.98
+| tnt
+| &dash;
+|-
+! {{BlockLink|id=sand|下落的方块}}
+| {{tc|no}}
+| 本身作为[[物品（实体）|物品]]（除非撞到地面）
+| {{tc|yes|大约4秒}}
+| 0.98×0.98
+| falling_block
+| 当掉落到非固体方块（例如[[火把]]）上时会掉落自身。
+|-
+! {{EntityLink|Fishing Bobber}}
+| {{tc|partial|仅对于[[船]]和[[矿车]]}}
+| 不可用
+| {{tc|yes|1分钟}}
+| 0.25×0.25
+| {{only|je|for=fishing_bobber}}<br>{{only|be|for=fishing_hook}}
+| &dash;
+|-
+! {{EntityLink|Lightning Bolt}}
+| {{tc|no}}
+| 不可用
+| {{tc|yes|1-3刻}}
+| 0×0
+| lightning_bolt
+| &dash;
+|-
+! {{EntityLink|leash-knot}}
+| {{tc|no}}
+| 1个[[拴绳]]
+| {{tc|no}}
+| 0.375×0.5
+| leash_knot
+| rowspan=3 |受到伤害时以物品形式掉落。
+|-
+! {{EntityLink|Painting}}
+| {{tc|no}}
+| 1个[[画]]
+| {{tc|no}}
+| 多种
+| painting
+|-
+! {{only|je|for={{EntityLink|Item Frame}}<br>{{EntityLink|Glow Item Frame}}}}
+| {{tc|no}}
+| 1个[[物品展示框]]或[[荧光物品展示框]]，以及其中的物品（如果有）。
+| {{tc|no}}
+| 0.5×0.5
+| 物品展示框：item_frame<br>荧光物品展示框：glow_item_frame
+|-
+! {{only|for={{ItemLink|id=shield|link=盾牌实体|text=盾牌实体}}|be}}
+| {{tc|no}}
+| 不可用
+| {{tc|no}}
+| 0.6×1.8
+| shield
+| 激活盾牌时生成。
+|-
+! {{EntityLink|Ender Crystal}}
+| {{tc|no}}
+| 不可用
+| {{tc|no}}
+| 1.0×1.0的基岩底座（若有）和2.0×2.0的本身
+| {{only|je|for=end_crystal}}<br>{{only|be|for=ender_crystal}}
+| 当被摧毁时会爆炸。
+|-
+! {{EntityLink|Evoker Fangs}}
+| {{tc|no}}
+| 不可用
+| {{tc|yes|1-2秒}}
+| 0.5×0.8
+| {{only|je|for=evoker_fangs}}<br>{{only|be|for=evocation_fang}}
+| &dash;
+|-
+! {{EntityLink|Area Effect Cloud}}
+| {{tc|no}}
+| 不可用
+| {{tc|yes|30或{{only|for=120秒|be}}}}
+| 多种
+| area_effect_cloud
+| 不同种类的区域效果云，尺寸和消失时间不同。
+|-
+! {{EntityLink|Wind Charge}}
+| 受到攻击后反弹/受到撞击后爆炸
+| 不可用
+| {{tc|yes|处于所在维度的最高建筑高度30格以上时爆炸}}
+| {{only|je|for=0.3125×0.3125}}<br>{{only|be|for=0.4×0.4}}
+| 风弹物品风弹；wind_charge<br>旋风人风弹：{{only|je|for=breeze_wind_charge}}<br>{{only|be|for=wind_charge_projectile}}
+| 风弹造成的爆炸不破坏方块、无爆炸伤害，且能改变[[门]]、[[活板门]]、[[栅栏门]]、[[拉杆]]、[[按钮]]、[[钟]]、[[蜡烛]]和[[插上蜡烛的蛋糕]]的方块状态。
+|-
+! {{EntityLink|Ominous Item Spawner}}
+| {{tc|no}}
+| 不可用
+| {{tc|yes|60-120刻}}
+| 0.25×0.25
+| ominous_item_spawner
+| 不祥之物生成器会发出灵魂火粒子、向下抛出物品对应物品实体并删除自己。如果所展示的物品存在对应的弹射物，则生成1个对应的弹射物实体，否则生成等量的物品实体。
+|-
+! {{in update|drop 3 2026|for={{EntityLink|cushion}}}}
+| {{tc|yes}}
+| 1个对应的[[坐垫]]
+| {{tc|no}}
+| 1×0.25
+| cushion
+| 每100[[游戏刻]]检查其是否能够存在。
+|-
+! {{only|je|for=[[交互实体]]}}
+| {{tc|no}}
+| 不可用
+| {{tc|no}}
+| 可自定义
+| interaction
+| &dash;
+|-
+! {{only|je|for=[[展示实体]]}}
+| {{tc|no}}
+| 不可用
+| {{tc|no}}
+| 0×0
+| 方块展示实体：block_display<br>物品展示实体：item_display<br>文本展示实体：text_display
+| &dash;
+|-
+! {{only|je|for=[[标记]]}}
+| {{tc|no}}
+| 不可用
+| {{tc|no}}
+| 0×0
+| marker
+| 标记只存在于服务端，只能通过命令来检查其是否存在。
+|-
+! {{only|ee|be|for={{EntityLink|Ice Bomb}}}}
+| {{tc|no}}
+| 不可用
+| {{tc|no}}
+| 0.25×0.25
+| ice_bomb
+| 破碎时，冰弹周围3×3×3立方体内的任何[[水]]（包括流动的水，但不包括含水方块）都会变为[[冰]]。
+|-
+! {{only|ee|be|for={{EntityLink|Balloons}}}}
+| 撞击后碎裂
+| 无
+| {{tc|yes|飞到Y{{=}}320时炸裂}}
+| 0.4×0.4
+| balloon
+| 可将气球与实体、栅栏或墙相连。
+|-
+! {{Only|for={{EntityLink|Primed Underwater Tnt}}|be}}
+| {{tc|no}}
+| 不可用
+| {{tc|yes|爆炸（4秒或更少）}}
+| 0.98×0.98
+| tnt
+| 被激活的水下TNT爆炸时无视范围内的[[水]]，其余性质与被激活的TNT一致。
+|}
+
+== 运动 ==
+{{see also|重力}}
+一般地，所有实体都具有速度（{{in|je|nc=1}}[[标记]]除外）、位置和[[朝向]]（以[[wzh:经典力学|{{tr|经典力学|古典力學|經典力學}}]]为依据）。一部分实体能被[[水]]流推动。包括玩家、生物、船、运输船、物品、被激活的TNT、经验球等。
+
+除[[恼鬼]]、[[末影龙]]和旁观模式的玩家外的大部分非弹射物实体的判定箱不能穿过固体方块，弹射物的坐标的移动轨迹不会穿过固体方块，但是其判定箱在自身移动时可以部分地卡在固体方块中。大多数实体会占用所在的空间，阻止方块的放置，除了掉落物和经验球会自动让出占用的空间。若实体确实与固体方块处在同一位置，如被掉落的[[沙子]]掩埋或被活动的[[门]]卡在一起，则可以自由走出方块所在的位置而不能重新进入。（例如，如果玩家和关闭的门卡在一起，头顶无阻碍时，玩家可以向上跳，站在门的下半格上）
+
+=== 运动的合成与分解 ===
+在游戏中，实体的运动和以下数据值有关：
+
+{{el|je}}：
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体的移动距离和方向。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+</div>
+
+{{el|be}}：
+<div class="treeview">
+实体共通标签：
+*{{nbt|compound}}：根标签。
+**{{nbt|list|Pos}}：三个浮点型数据值定义了实体的当前位置的坐标。
+*** {{nbt|float}}：X
+*** {{nbt|float}}：Y
+*** {{nbt|float}}：Z
+**{{nbt|list|Motion}}：（可能不存在）三个浮点型数据值定义实体的当前dX、dY和dZ速度，以米/刻为单位。
+*** {{nbt|float}}：dX
+*** {{nbt|float}}：dY
+*** {{nbt|float}}：dZ
+</div>
+
+可见，游戏中的速度和坐标都正交分解成了 <math>X</math> 轴方向，<math>Y</math> 轴方向和 <math>Z</math> 轴方向三个分量，把这些分量通过矢量相加的方式加起来就是实际运动效果。
+
+我们把 <math>X</math> 轴方向，<math>Y</math> 轴方向和 <math>Z</math> 轴方向上的速度分别记为 <math>v_X</math>，<math>v_Y</math> 和 <math>v_Z</math>，坐标记为 <math>s_X</math>，<math>s_Y</math> 和 <math>s_Z</math>。我们接下来的讨论都是在一个方向上的计算，如果要得到最终运动效果，只需要分别计算个方向上的结果，然后计算其矢量和。
+
+=== 运动相关数据 ===
+一般地，实体有以下3个数据，完全决定了实体的运动：
+* '''加速度''' <math>a</math>（米/[[刻]]<sup>2</sup>）：描述实体下一刻速度的变化量。此处的加速度是重力加速度，因为其他加速度的计算非常复杂，而且其相关的公式大多是不固定的。<ref group="注" name="爆炸类型不受重力">特别地，爆炸类物品和风弹不受重力影响，而是通过受损获得加速度。</ref>
+* '''“阻力”''' <math>f</math>：描述实体速度要乘的一个速度，以模拟阻力。竖直方向上的“阻力”和水平方向上的可能不同。“阻力”不应有单位，不然无论如何套公式都会在单位上出错，所以利用公式计算时也需要抛开单位不谈。
+* '''位置''' <math>s</math>：描述实体此时的位置。
+
+进而可以导出以下数据：
+* '''速度''' <math>v</math>（米/刻）：描述实体此时的速度，决定了下一刻实体的位置。这个数据可以由上述3个数据计算得到。
+* '''终端速度''' <math>v_\infty</math>（米/刻）：Minecraft通过“阻力”使得实体运动的速度不能无限快，而正常情况下，实体运动能达到的最大速度被称为“终端速度”。
+* '''水平最大位移乘数''' <math>k_{\infty}</math>（米（米/秒））：此物理量给出了当物体在某一根轴上以某一速度失去加速度后，仅在“阻力”的影响下能到达的最远距离的乘数，其乘以初速度后即得最大位移，即最大位移 <math>s'=k_{\infty}v_0</math>。
+
+下表就列出了不同实体的重力加速度（即<math>Y</math>轴方向上的加速度）、“阻力”、对3个值的计算顺序（详见下文）、各数据的值、浮点精度类型、终端速度和最大水平移动距离：{{verify|基岩版上的数据是否一样？|bedrock=1}}
+
+
+{| class="wikitable sortable"
+! 种类
+! 计算的顺序
+! 重力加速度 <math>a</math><br>（米/刻<sup>2</sup>）
+! “阻力”（竖直方向上）<math>f_{\text{v}}</math>
+! “阻力”（水平方向上）<math>f_{\text{h}}</math>
+! 终端速度 <math>v_{\infty}</math><br>（米/刻）
+! 终端速度 <math>v'_{\infty}</math><br>（米/秒）
+! 水平最大位移乘数 <math>k_{\infty}</math><br>（米（米/秒））
+<section end="tableheader"/>
+|-
+| 除了蜜蜂、鹦鹉和吸收了方块的硫方怪以外的{{EnvLink|Mob}}
+|rowspan=3| 位置，加速度，“阻力”
+| -0.08（双精度）
+|rowspan=2| 1-0.02&times;空气阻力修正系数（单精度）
+|rowspan=3| (1-0.09&times;空气阻力修正系数)&times;(1-(1-阻力系数))&times;摩擦力修正系数（单精度）
+| 3.92
+| 78.4
+|rowspan=2| <math>11.\dot{1}</math>
+|-
+| 带有{{EffectLink|Slow Falling}}效果的{{EnvLink|Mob}}
+| -0.01（双精度）
+| 0.49
+| 9.80
+|-
+| {{entityLink|bee}}、{{entityLink|parrot}}和吸收了方块的{{entityLink|sulfur cube}}
+| -0.08（双精度）
+| 1-0.09&times;空气阻力修正系数（单精度）
+| 3.92
+| 78.4
+| <math>11.\dot{1}</math>
+|-
+| {{EntityLink|Falling Block}} 、{{EntityLink|primed TNT}}
+|rowspan=5| 加速度，位置，“阻力”
+| -0.04（双精度）
+|colspan=2| 0.98（双精度）
+| 1.96
+| 39.2
+|rowspan=3| 50
+|-
+| {{EnvLink|Items|link=物品（实体）|text=物品}}
+| -0.04（双精度）
+| 0.98（双精度）
+| 0.98（单精度）
+| 1.96
+| 39.2
+|-
+| {{EntityLink|Experience orb}}
+| -0.03（双精度）
+|colspan=2| 0.98（单精度）
+| 1.47
+| 29.4
+|-
+| {{ItemLink|Minecart|link=矿车（消歧义）}}<ref group="注">矿车的X軸及Z軸最大速度为0.4，如果速度大于0.4，速度都会在更新位置之前重置为0.4。</ref>
+| -0.04（双精度）
+|colspan=2| {{only|je|for=0.95（双精度）}}或{{only|be|for=N/A}}<ref group="注" name="无阻力">实际上其并不受“阻力”，进而顺序于它而言不重要。</ref>
+| {{only|je|for=0.76}}或{{only|be|for=∞}}<ref group="注"name="速度上限"> {{in|be}}實體不能夠在一刻內移動超過16格，除了[[投射物]]等實體 。</ref>
+| {{only|je|for=15.2}}或{{only|be|for=∞}}<ref group="注"name="速度上限"/>
+| {{only|je|for=20}}或{{only|be|for=∞}}
+|-
+| {{EntitySprite|Fishing bobber}} [[钓鱼竿]]的浮漂
+| -0.03（双精度）
+|colspan=2| 0.92（双精度）
+| 0.345
+| 6.90
+| 12.5
+|-
+| {{EntityLink|Boat}}、{{EntityLink|Boat with Chest}}
+| 加速度，“阻力”，位置
+| -0.04（双精度）
+| N/A<ref group="注" name="无阻力"/>
+| {{only|je|for=0.90（单精度）}}或{{only|be|for=N/A}}<ref group="注" name="无阻力"/>
+| ∞<ref group="注"name="速度上限"/>
+| ∞<ref group="注"name="速度上限"/>
+| {{only|je|for=0.9}}或{{only|be|for=∞}}
+<section begin="projectiles"/>
+|-
+| {{EntityLink|Thrown Egg}}、{{EntityLink|Snowball}}和{{EntityLink|Ender pearl}}
+|rowspan=3| 加速度，“阻力”,位置<ref group="注">投掷物的顺序在[[Java版1.21.2]]中被更改，从位置，“阻力”，加速度变为目前这样。</ref>
+| -0.03（双精度）
+|rowspan=3| 0.99（单精度）
+|rowspan=3| 0.99（单精度）
+| 2.97
+| 59.4
+|rowspan=3| 99
+|-
+| 掷出的{{EntityLink|Splash Potion}}和{{EntityLink|Lingering Potion}}
+| -0.05（双精度）
+| 4.95
+| 99.0
+|-
+| 掷出的{{EntitySprite|Bottle o' Enchanting}} [[附魔之瓶]]
+| -0.07（双精度）
+| 6.93
+| 138.6
+|-
+| {{EntityLink|Fireball}}、{{EntityLink|Wither skull}}、{{EntityLink|Dragon Fireball}}、{{EntityLink|Shulker Bullet}}
+|rowspan=3| 加速度，“阻力”,位置
+|rowspan=3|  0.10（双精度）<ref group="注" name="爆炸类型不受重力"/>
+|colspan=2| 0.95（单精度）
+| 1.90
+| 38.0
+| 19
+|-
+| {{EntityLink|Dangerous Wither Skull}}
+|colspan=2| 0.73（单精度）
+| <math>0.2\dot{7}0\dot{3}</math>
+| <math>5.\dot{4}0\dot{7}</math>
+| <math>2.\dot{7}0\dot{3}</math>
+|-
+| {{EntityLink|Wind Charge}}
+|colspan=2| N/A<ref group="注" name="无阻力"/>
+| ∞
+| ∞
+| ∞
+|-
+| {{EntityLink|Llama Spit}}
+|rowspan=2| 位置，“阻力”，加速度
+| -0.06（双精度）
+|colspan=2| 0.99（单精度）
+| 6.00
+| 120.0
+|rowspan=2| 100
+|-
+| 射出的{{EntityLink|Arrow}} 和投出的{{EntityLink|Trident}}
+| -0.05（双精度）
+|colspan=2| 0.99（单精度）
+| 5.00
+| 100.0
+<section end="projectiles"/>
+|}
+
+==== 加速度 ====
+加速度分为水平方向（<math>X</math>轴方向和<math>Z</math>轴方向）上的加速度与竖直方向（<math>Y</math>轴方向）上的加速度，其中竖直方向上的加速度就是重力加速度。
+
+重力加速度的值在上表已经给出，除生物以外的水平方向的加速度是0，玩家的加速度由公式 <math>a=a_{1}a_{2}a_{3}+a_{4}</math> 给出。{{info needed|非玩家生物的加速度？}}
+
+其中 <math>a_1=\begin{cases}0.1,&\text{在地上},\\0.02,&\text{在空中}\end{cases}</math>；<math>a_2=\begin{cases}1,&\text{行走状态},\\1.13,&\text{疾跑状态}\end{cases}</math>；<math>a_3=\begin{cases}0.98,&\text{按1个键直行},\\1,&\text{按两个键侧行}\end{cases}</math>；<math>a_4=\begin{cases}0.2,&\text{直着走疾跑跳跃},\\0,&\text{其他状态。}\end{cases}</math>
+
+==== “阻力” ====
+加速度分为水平方向（<math>X</math>轴方向和<math>Z</math>轴方向）上的加速度与竖直方向（<math>Y</math>轴方向）上的加速度。
+
+非生物在两个方向上的“阻力”在上表已经给出。上一刻{{cd|OnGround}}属性为1（即在地面上运动）的生物运动时，设该方块的[[阻力系数]]为 <math>FB</math>，该生物的[[属性/摩擦力修正系数|摩擦力修正系数]]为 <math>F</math>，[[属性/空气阻力修正系数|空气阻力修正系数]]为 <math>A</math>，则竖直方向上的“阻力” <math>f_{\text{v}}=1-0.09A</math>，水平方向上的“阻力” <math>f_{\text{h}}=\left( 1-0.09A \right)\left( 1-\left( 1-FB \right)\times F \right)</math>。
+
+若上一刻生物不在地面上，则只需令阻力系数 <math>FB=0</math>，代入上式即得。
+
+==== 速度 ====
+我们用 <math>v_{t}</math> 表示这一游戏刻的速度，<math>v_{t-1}</math> 表示上一游戏刻的速度，<math>v_{0}</math> 表示初速度，<math>f</math>为“阻力”，<math>a</math> 为加速度，于是根据“阻力”和加速度的计算程序的顺序不同，在不发生碰撞的情况下，速度的公式有如下几种。每种情况里，第一种是递推公式，根据游戏机制立刻得到，满足所有情况；第二种是通项公式，只有整个运动过程中的加速度 <math>a</math> 和“阻力” <math>f</math> 都不变才可以使用：
+
+:“阻力”，加速度：
+:*<math>v_{t}=v_{t-1}f+a</math> 或 <math>v_{t}=\left( v_{0}-\frac{a}{1-f} \right)f^{t}+\frac{a}{1-f}</math>，<ref group="注" name="量纲">此处直接把速度和加速度相加，这在量纲上是不可行的，这里可以这么做是因为加速度<math>a</math>乘以了一个时间1[[刻]]，因为数值大小为1，所以直接省去了，故实际计算时需要不考虑量纲。</ref>
+:可以从中解出 <math>t=\log_{f}\frac{\left( 1-f \right)v_{t}-a}{\left( 1-f \right)v_{0}-a}</math>；
+
+
+:加速度，“阻力”：
+:*<math>v_{t}=\left( v_{t-1}+a \right)f</math> 或 <math>v_{t}=\left( v_{0}-\frac{af}{1-f} \right)f^{t}+\frac{af}{1-f}</math>，<ref group="注" name="量纲"/>
+:可以从中解出 <math>t=\log_{f}\frac{\left( 1-f \right)v_{t}-af}{\left( 1-f \right)v_{0}-af}</math>。
+
+<div class="collapsible collapsed" style="border: thin solid #aaa;margin: 1em 2em;padding: 0.5em 1em 0.4em;">
+<strong>速度公式的证明</strong>
+<div class="collapsible-content">
+对于通项公式，以第一种情况为例：
+
+对 <math>v_{t}=v_{t-1}f+a</math>，
+
+两遍同时除以 <math>f^{t}</math>，
+
+得到 <math>\frac{v_{t}}{f^{t}}=\frac{v_{t-1}}{f^{t-1}}+\frac{a}{f^t}</math>，
+
+令 <math>b_{t}=\frac{v_{t}}{f^{t}}</math>，
+
+于是
+
+<math>\begin{align} b_{t} 
+&=b_{t-1}+\frac{a}{f^t}\\ 
+&=b_{0}+\sum_{k=1}^{t}\frac{a}{f^k}\\ 
+&=b_{0}+a\sum_{k=1}^{t}\left( \frac{1}{f} \right)^{k}\\ 
+&=b_{0}+\underbrace{\frac{a}{f}\dfrac{1-\left( \frac{1}{f} \right)^{t}}{1-\frac{1}{f}}}_{\text{等比数列求和}}\\ 
+&=b_{0}+a\frac{1-\left( \frac{1}{f} \right) ^{t}}{f-1}\\ 
+&=b_{0}+a\frac{1-\frac{1}{f^t}}{f-1}.\end{align}</math>
+
+将 <math>b_{t}</math> 还原后化简即得。
+
+另外一种情况则只需将 <math>v_{t}=\left( v_{t-1}+a \right)f</math> 化成 <math>v_{t}=v_{t-1}f+af</math> 就同理可得。
+
+对于反解时间，是显然的。
+
+</div>
+</div>
+
+; {{Visible anchor|跳跃}}
+{{main|跳跃}}
+生物跳跃瞬间，会给予生物竖直方向上一个速度，速度方向竖直向上，大小由公式 <math>v_{0}=pjf+v_{l}+v_{s}</math> 给出，其中<math>j</math> 为[[属性/跳跃力度|跳跃力度]]，<math>f</math> 为[[跳跃乘数]]，<math>p</math>为跳跃蓄力程度，取决于生物种类：
+* 对于[[兔子]]，<math>p=\frac{50}{21}</math>；
+* 对于玩家骑乘的[[马]]、[[骷髅马]]、[[僵尸马]]、[[驴]]、[[骡]]、[[羊驼]]和[[行商羊驼]]，跳跃蓄力程度由当前跳跃蓄力条的进度决定，最小时为0，最大时为1；
+* 对于其他生物，<math>p=1</math>。
+如果生物具有等级为<math>l</math>的[[跳跃提升]]状态效果，则<math>v_{l}=0.1l</math>。
+* 如果生物是尺寸（尺寸={{cd|Size}}+1）为<math>s</math>的[[岩浆怪]]，则<math>v_s=0.1s</math>。
+
+;{{Visible anchor|弹性}}
+{{main|属性/弹性}}
+实体在一定情况下，以一定的速度与方块发生碰撞后，会保留一定的速度，方向变为原来的反向。
+
+对于非生物实体而言，其实体提供的弹性始终为0，且方块计算的弹性碰撞系数会减少20%；对于生物而言，其由{{attribute|bounciness}}决定。
+
+; 其他更复杂的运动
+{{main|滑翔|飞行#速度|游泳#速泳}}
+
+==== 位置 ====
+我们用 <math>s_{t}</math> 表示这一游戏刻的位置，<math>s_{t-1}</math> 表示上一游戏刻的位置，<math>s_{0}</math> 表示初位置，<math>f</math> 为“阻力”，<math>a</math> 为加速度，于是根据3个程序运算的顺序不同，位置的公式有如下几种。每种情况里，第一种是递推公式，根据游戏机制立刻得到，满足所有情况；第二种是通项公式，只有整个运动过程中的加速度 <math>a</math> 和“阻力” <math>f</math> 都不变才可以使用：
+:位置，“阻力”，加速度：
+:*<math>s_{t}=s_{t-1}+\left( v_{0}-\frac{a}{1-f} \right)f^{t-1}+\frac{a}{1-f}</math> 或 <math>s_{t}=s_{0}+\left( v_{0}-\frac{a}{1-f} \right)\frac{1-f^{t}}{1-f}+\frac{at}{1-f}</math>，
+:可以从中解出 <math>t=\frac{1}{\ln f}\ln\left( \frac{a\left( 1-f \right)}{\left( v_{0}\left( 1-f \right)-a \right)\ln f}W\left( \frac{\left( v_{0}\left( 1-f \right)-a \right)\ln f}{a\left( 1-f \right)}\exp\left( \frac{\left( v_{0}\left( 1-f \right)-a-\left( 1-f \right)^2\left( s_{t}-s_{0} \right) \right)\ln f}{a\left( 1-f \right)} \right) \right) \right)</math>；
+
+:“阻力”，加速度，位置：
+:*<math>s_{t}=s_{t-1}+\left( v_{0}-\frac{a}{1-f} \right)f^{t}+\frac{a}{1-f}</math> 或 <math>s_{t}=s_{0}+\left( v_{0}-\frac{a}{1-f} \right)\frac{\left( 1-f^{t} \right)f}{1-f}+\frac{at}{1-f}</math>，
+:可以从中解出 <math>t=\frac{1}{\ln f}\ln\left( \frac{a\left( 1-f \right)}{\left( v_{0}\left( 1-f \right)-a \right)f\ln f}W\left( \frac{\left( v_{0}\left( 1-f \right)-a \right)f\ln f}{a\left( 1-f \right)}\exp\left( \frac{\left( \left( v_{0}\left( 1-f \right)-a \right)f-\left( 1-f \right)^2\left( s_{t}-s_{0} \right) \right)\ln f}{a\left( 1-f \right)} \right) \right) \right)</math>；
+
+:位置，加速度，“阻力”：
+:*<math>s_{t}=s_{t-1}+\left( v_{0}-\frac{af}{1-f} \right)f^{t-1}+\frac{af}{1-f}</math> 或 <math>s_{t}=s_{0}+\left( v_{0}-\frac{af}{1-f} \right)\frac{1-f^{t}}{1-f}+\frac{aft}{1-f}</math>，
+:可以从中解出 <math>t=\frac{1}{\ln f}\ln\left( \frac{af\left( 1-f \right)}{\left( v_{0}\left( 1-f \right)-af \right)\ln f}W\left( \frac{\left( v_{0}\left( 1-f \right)-af \right)\ln f}{af\left( 1-f \right)}\exp\left( \frac{\left( v_{0}\left( 1-f \right)-af-\left( 1-f \right)^2\left( s_{t}-s_{0} \right)\right)\ln f}{af\left( 1-f \right)} \right) \right) \right)</math>；
+
+:加速度，“阻力”，位置：
+:*<math>s_{t}=s_{t-1}+\left( v_{0}-\frac{af}{1-f} \right)f^{t}+\frac{af}{1-f}</math> 或 <math>s_{t}=s_{0}+\left( v_{0}-\frac{af}{1-f} \right)\frac{\left( 1-f^{t} \right)f}{1-f}+\frac{aft}{1-f}</math>，
+:可以从中解出 <math>t=\frac{1}{\ln f}\ln\left( \frac{af\left( 1-f \right)}{\left( v_{0}\left( 1-f \right)-af \right)f\ln f}W\left( \frac{\left( v_{0}\left( 1-f \right)-af \right)f\ln f}{af\left( 1-f \right)}\exp\left( \frac{\left( \left( v_{0}\left( 1-f \right)-af \right)f-\left( 1-f \right)^2\left( s_{t}-s_{0} \right) \right)\ln f}{af\left( 1-f \right)} \right) \right) \right)</math>；
+
+:“阻力”，位置，加速度：
+:*<math>s_{t}=s_{t-1}+\left( v_{0}-\frac{a}{1-f} \right)f^{t}+\frac{af}{1-f}</math> 或 <math>s_{t}=s_{0}+\left( v_{0}-\frac{a}{1-f} \right)\frac{\left( 1-f^{t} \right)f}{1-f}+\frac{aft}{1-f}</math>，
+:可以从中解出 <math>t=\frac{1}{\ln f}\ln\left( \frac{af\left( 1-f \right)}{\left( v_{0}\left( 1-f \right)-a \right)f\ln f}W\left( \frac{\left( v_{0}\left( 1-f \right)-a \right)f\ln f}{af\left( 1-f \right)}\exp\left( \frac{\left( \left( v_{0}\left( 1-f \right)-a \right)f-\left( 1-f \right)^2\left( s_{t}-s_{0} \right) \right)\ln f}{af\left( 1-f \right)} \right) \right) \right)</math>；
+
+:加速度，位置，“阻力”：
+:*<math>s_{t}=s_{t-1}+\left( v_{0}-\frac{af}{1-f} \right)f^{t-1}+\frac{a}{1-f}</math> 或 <math>s_{t}=s_{0}+\left( v_{0}-\frac{af}{1-f} \right)\frac{1-f^{t}}{1-f}+\frac{at}{1-f}</math>，
+:可以从中解出 <math>t=\frac{1}{\ln f}\ln\left( \frac{a\left( 1-f \right)}{\left( v_{0}\left( 1-f \right)-af \right)f\ln f}W\left( \frac{\left( v_{0}\left( 1-f \right)-af \right)f\ln f}{a\left( 1-f \right)}\exp\left( \frac{\left( \left( v_{0}\left( 1-f \right)-af \right)f-\left( 1-f \right)^2\left( s_{t}-s_{0} \right) \right)\ln f}{a\left( 1-f \right)} \right) \right) \right)</math>。
+
+<div class="collapsible collapsed" style="border: thin solid #aaa;margin: 1em 2em;padding: 0.5em 1em 0.4em;">
+<strong>位置公式的证明</strong>
+<div class="collapsible-content">
+以“位置，‘阻力’，加速度”（第1种情况）为例，首先“阻力”比加速度先计算，所以速度公式采用
+
+<math>v_{t}=\left( v_{0}-\frac{a}{1-f} \right)f^{t}+\frac{a}{1-f}</math>
+
+递推公式由 <math>s_{t}=s_{t-1}+v_{t-1}</math> 代入速度公式即得；
+
+“‘阻力’，加速度，位置”（第2种情况）的递推公式是 <math>s_{t}=s_{t-1}+v_{t}</math>，同样代入速度公式即得；接下来2种情况（第3、4种情况）的递推公式同理，只是代入的速度公式不同；
+
+对于“‘阻力’，位置，加速度”（第5种情况），<math>v_{1}=v_{0}f</math>，对于其他正整数 <math>t</math>，<math>v_{t}=\left( v_{t-1}+a \right)f</math>，求得其通项公式 <math>v_{t}=v_{0}f^{t}+af\frac{1-f^{t-1}}{1-f}</math> 代入即可;
+
+对于“加速度，位置，‘阻力’”（第6种情况），<math>v_{1}=v_{0}+a</math>，对于其他正整数 <math>t</math>，<math>v_{t}=v_{t-1}f+a</math>，同样求出递推公式即可。
+
+对于通项公式，以“位置，‘阻力’，加速度”（第1种情况）为例，
+
+可见速度公式 <math>v_{t}=\left( v_{0}-\frac{a}{1-f} \right)f^{t}+\frac{a}{1-f}</math> 是等比数列，对其前 <math>\left( t-1 \right)</math> 项求和的结果便是 <math>x_{t}-x_{0}</math> 的结果，套等比数列公式即得。
+
+对这一式子 <math>\left( -v_{0}+v_{t} \right)</math> 即得“‘阻力’，加速度，位置”（第2种情况）的通项公式；接下来4种情况（第3、4、5、6种情况）的递推公式同理，只是代入的速度公式不同，其中第5、6种情况的通项公式上文已说明。
+
+对于反解时间，以“位置，‘阻力’，加速度”为例，先换元<math>B=v_{0}-\frac{a}{1-f}</math>，<math>C=s_t-s_0</math>，则原式变为<math>C=\frac{B\left( 1-f^t \right)}{1-f}+\frac{at}{1-f}</math>，等号两边同时乘以<math>1-f</math>，然后移项得到<math>Bf^{t}+at=B-\left( 1-f \right)C\triangleq D</math>，令<math>y=f^t</math>，<math>u=\frac{B\ln f}{a}y</math>，等式可写成<math>u\mathrm{e}^{u}=\frac{B\ln f}{a}\exp\left( \frac{D\ln f}{a} \right)</math>，使用[[wzh:朗伯W函数|朗伯W函数]]得到<math>u=W\left( \frac{B\ln f}{a}\exp\left( \frac{D\ln f}{a} \right) \right)</math>，回代<math>y=f^t=\frac{a}{B\ln f}u</math>，依据<math>t=\frac{\ln y}{\ln f}</math>可立刻得到。
+
+其余情况同理可得。
+
+</div>
+</div>
+
+==== 终端速度 ====
+如果“阻力”的计算比加速度优先，那么终端速度 <math>v_{\infty}=-\frac{a}{1-f}</math>；否则 <math>v_\infty=-\frac{af}{1-f}</math>。
+
+<div class="collapsible collapsed" style="border: thin solid #aaa;margin: 1em 2em;padding: 0.5em 1em 0.4em;">
+<strong>终端速度公式的证明</strong>
+<div class="collapsible-content">
+以第1种情况为例，根据递推速度公式
+
+<math>v_{t}=v_{t-1}f+a</math>
+
+以及<math>0<f\le1</math>，依不动点可知<math>\lim v_{t}</math>存在，只需要联立
+
+<math>v_{\infty}=v_{\infty}f+a</math>即得终端速度
+
+<math>v_{\infty}=\lim v_{n}=\frac{a}{1-f}</math>。
+
+另一种情况同理可得。
+
+</div>
+</div>
+
+==== 水平最大位移乘数 ====
+计算公式：如果位置的计算比“阻力”优先，那么水平最大位移乘数 <math>k_{\infty}=\frac{1}{1-f}</math>；否则 <math>k_{\infty}=\frac{f}{1-f}</math>。
+
+<div class="collapsible collapsed" style="border: thin solid #aaa;margin: 1em 2em;padding: 0.5em 1em 0.4em;">
+<strong>水平最大位移乘数的证明</strong>
+<div class="collapsible-content">
+对于“位置，‘阻力’”的情况，由于 <math>v_{t}=v_{t-1}f</math>，故 <math>v_{t-1}=v_{0}f^{t-1}</math>。由于 <math>s_{t}=s_{t-1}+v_{t-1}</math>，故 <math>s_{t}=s_{0}+\sum_{i=0}^{t-1}v_{0}f^{i}</math>，当 <math>t\to\infty</math> 时，得 <math>s_{\infty}=\sum_{i=0}^{\infty}v_{0}f^{i}=v_{0}\left(\frac{1}{1-f}\right)=\frac{v_{0}}{1-f}</math>，其中得到乘数 <math>k_{\infty}=\frac{1}{1-f}</math>；
+
+对于“‘阻力’，位置”的情况，由于 <math>v_{t}=v_{t-1}f</math>，故 <math>v_{t}=v_{0}f^{t}</math>。由于 <math>s_{t}=s_{t-1}+v_{t-1}</math>，故 <math>s_{t}=s_{0}+\sum_{i=1}^{t}v_{0}f^{i}</math>，当 <math>t\to\infty</math> 时，得 <math>s_{\infty}=\sum_{i=1}^{\infty}v_{0}f^{i}=v_{0}\sum_{i=0}^{\infty}v_{0}f^{i}=v_{0}f\left(\frac{1}{1-f}\right)=\frac{v_{0}f}{1-f}</math>，其中得到乘数 <math>k_{\infty}=\frac{f}{1-f}</math>。
+</div>
+</div>
+
+{{:计算器/实体运动}}
+
+== 實體類型標籤 ==
+實體會被歸類到一些實體類型標籤之中，使實體可以被[[实体谓词|實體述詞]]和[[目标选择器|目標選擇器]]等呼叫以測試實體類型。
+{{see also|[[Java版标签/实体类型|Java版標籤/實體類型]]}}
+
+== 数据值 ==
+{{main|实体数据格式}}
+{{el|je}}：
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+{{#lst:编码格式/Entity|codec_entity}}
+</div>
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 历史 ==
+{{see also|生物#历史}}
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.24_SURVIVAL_TEST|加入了[[物品实体]]。
+|加入了[[箭]]。}}
+|{{HistoryLine||0.27 SURVIVAL TEST|加入了[[TNT]]，激活后会成为实体。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||20100223|加入了[[画]]。}}
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100618|加入了[[矿车]]。
+|加入了[[下落的方块]]。}}
+|{{HistoryLine|java alpha}}
+|{{HistoryLine||v1.0.5|加入了[[雪球]]，可以投掷。}}
+|{{HistoryLine||v1.0.6|加入了[[船]]。}}
+|{{HistoryLine||v1.0.14|加入了[[运输矿车]]。
+|加入了[[动力矿车]]。}}
+|{{HistoryLine||v1.2.0|加入了[[火球]]。
+|现在[[钓鱼竿]]可以生成浮漂。}}
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.0|现在[[鸡蛋]]可以投掷。}}
+|{{HistoryLine||1.5|加入了[[闪电束]]。}}
+|{{HistoryLine||1.8|dev=pre1|加入了[[经验球]]。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|现在可以投掷[[末影珍珠]]以传送。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[喷溅药水]]，ID为{{cd|potion}}。
+|现在可以投掷[[末影之眼]]。
+|加入了[[末影龙部件]]，但无法正常生成。}}
+|{{HistoryLine|||dev=Beta 1.9-pre6|加入了[[末地水晶]]。
+|现在末影龙部件可以正常生成了。}}
+|{{HistoryLine||1.1|dev=?|玩家不再能在[[创造模式]]下与远方的实体进行交互。}}
+|{{HistoryLine||1.2.1|dev=12w04a|加入了[[附魔之瓶]]。
+|加入了[[小火球]]。}}
+|{{HistoryLine||1.4.2|dev=12w34a|实体现在可以穿过[[传送门]]。
+|加入了[[凋灵之首]]。
+|加入了[[物品展示框]]。}}
+|{{HistoryLine|||dev=12w37a|加入了蓝色凋灵之首。}}
+|{{HistoryLine||1.4.6|dev=12w49a|加入了[[烟花火箭]]。}}
+|{{HistoryLine||1.5|dev=13w02a|加入了[[TNT矿车]]。}}
+|{{HistoryLine|||dev=13w03a|加入了[[漏斗矿车]]。}}
+|{{HistoryLine|||dev=13w06a|加入了[[刷怪笼矿车]]。}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了[[拴绳结]]。}}
+|{{HistoryLine||1.7.2|dev=13w39a|加入了[[命令方块矿车]]。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了药箭和光灵箭。
+|稍微更改了弹射物的运动机制。<ref>https://www.reddit.com/r/Minecraft/comments/3f7m2y/minecraft_snowball_projectile_changes_snapshot/</ref>
+|加入了[[末影龙火球]]。
+|加入了[[潜影弹]]。}}
+|{{HistoryLine|||dev=15w33a|加入了[[滞留药水]]、滞留型水瓶，以及平凡药水、浓稠药水与粗制药水的滞留型变种，ID与[[喷溅药水]]相同。
+|加入了[[区域效果云]]。}}
+|{{HistoryLine|||dev=15w36a|大部分实体（物品和经验值除外）能够被另一个实体推动。}}
+|{{HistoryLine|||dev=15w45a|在一个1×1的洞中聚集的实体不再能推开接触相邻角落的实体。}}
+|{{HistoryLine|||dev=15w49a|玩家在坠落、使用鞘翅飞行或被击退时的动力现在会影响弹射物的运动轨迹，但在玩家步行、骑乘实体和在创造模式中飞行时除外。}}
+|{{HistoryLine||1.11|dev=16w32a|[[数据值/实体ID|实体ID]]现在改成了下划线，没有大写字母。ID前面也能加<code>minecraft:</code>，就像[[数据值/方块ID|方块ID]]那样。
+|人类的ID<code>Monster</code>和拉娜、史蒂夫（生物）、黑史蒂夫和野兽小子的ID<code>Mob</code>被移除。}}
+|{{HistoryLine|||dev=16w39a|加入了[[羊驼唾沫]]。
+|加入了[[唤魔者尖牙]]。}}
+|{{HistoryLine||1.13|dev=18w07a|加入了[[三叉戟]]，可以投掷。}}
+|{{HistoryLine||1.17|dev=21w03a|加入了荧光物品展示框。}}
+|{{HistoryLine|||dev=21w15a|加入了[[标记]]。}}
+|{{HistoryLine||1.19|dev=22w12a|加入了[[运输船]]。}}
+|{{HistoryLine||1.19.4|dev=23w06a|加入了[[展示实体]]。}}
+|{{HistoryLine|||dev=23w07a|加入了[[交互实体]]。}}
+|{{HistoryLine||1.20.3|exp=update_1_21|dev=23w45a|加入了[[风弹（实体）|风弹]]。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w13a|加入了[[不祥之物生成器]]。}}
+|{{HistoryLine||1.21|dev=24w18a|风弹和不祥之物生成器不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.5|dev=25w04a|[[滞留药水]]和[[喷溅药水]]实体被拆分为独立的ID。}}
+|{{HistoryLine||1.21.9|dev=25w36a|加入了[[玩家模型]]。}}
+|{{HistoryLine||26.3|dev=snapshot-3|加入了[[坐垫]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||Demo|加入了TNT，激活后会成为实体。}}
+|{{HistoryLine||0.2.0|加入了物品实体。}}
+|{{HistoryLine||0.3.3|加入了箭。}}
+|{{HistoryLine||0.4.0|现在可以投掷雪球。
+|加入了鸡蛋，可以投掷。}}
+|{{HistoryLine||0.5.0|加入了画。}}
+|{{HistoryLine||0.6.0|加入了下落的方块。}}
+|{{HistoryLine||0.8.0|dev=build 2|加入了矿车。}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了船和不同木材种类的变种。
+|加入了火球。
+|加入了钓鱼竿，可以生成浮漂。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了经验球。
+|加入了喷溅药水。
+|加入了附魔之瓶。
+|加入了闪电束。}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了运输矿车。
+|加入了TNT矿车。
+|加入了漏斗矿车。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了药箭。
+|加入了小火球。
+|加入了拴绳结。}}
+|{{HistoryLine||0.16.0|dev=build 4|加入了凋灵之首。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了滞留药水。
+|加入了区域效果云。
+|现在可以投掷末影珍珠以传送。
+|加入了末影之眼。
+|加入了末影龙火球。
+|加入了潜影弹。
+|加入了末地水晶。
+|加入了末影龙部件。}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了命令方块矿车。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了羊驼唾沫。
+|加入了唤魔者尖牙。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了烟花火箭。}}
+|{{HistoryLine||1.2.13|exg=1|dev=1.2.13.8|加入了三叉戟，可以投掷。}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|三叉戟不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.2.20.1|加入了[[冰弹]]、[[气球]]和[[水下TNT]]，需要打开“Education Edition”选项启用。}}
+|{{HistoryLine||1.6.0|dev=1.6.0.1|更改了末地水晶实体模型，现在其只包含2个正方体框架。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|加入了[[盾牌实体]]，手持盾牌潜行或骑乘生物时会生成。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.20|更改了末地水晶实体模型以匹配{{el|je}}，现在其包含3个正方形框架。}}
+|{{HistoryLine||1.18.30|exg=wild_update|dev=1.18.30.28|加入了运输船。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|运输船不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.20|增大了末地水晶实体的碰撞箱以匹配{{el|je}}。}}
+|{{HistoryLine||1.20.60|exg=updateAnnouncedLive2023|dev=1.20.60.20|加入了风弹。}}
+|{{HistoryLine||1.20.70|exg=updateAnnouncedLive2023|dev=1.20.70.20|更改了风弹的模型、纹理和动画。}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.21|加入了不祥之物生成器。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|风弹和不祥之物生成器不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.40|dev=1.21.40.20|實體現在不再能夠在一刻內移動超過16格。}}
+|{{HistoryLine||26.40|dev=26.40.30|exg=y_2026_drop_3|加入了[[坐垫]]。}}
+}}
+
+== 参见 ==
+* [[方块实体]] - 不像上述的实体那样，这是方块的简单储存的部分数据。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|All}}
+{{Navbox environment}}
+
+[[Category:实体|*]]
+
+[[cs:Subjekt]]
+[[de:Objekt]]
+[[en:Entity]]
+[[es:Entidad]]
+[[fr:Entité]]
+[[hu:Entitás]]
+[[it:Entità]]
+[[ja:エンティティ]]
+[[ko:개체]]
+[[lzh:實體]]
+[[nl:Entiteit]]
+[[pl:Byty]]
+[[pt:Entidade]]
+[[ru:Сущность]]
+[[th:เอนทิตี้]]
+[[uk:Сутність]]

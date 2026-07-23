@@ -1,0 +1,307 @@
+# 页面: 无效纹理与模型
+# 来源: https://zh.minecraft.wiki/w/%E6%97%A0%E6%95%88%E7%BA%B9%E7%90%86%E4%B8%8E%E6%A8%A1%E5%9E%8B
+# 分类: Java版独有信息, 基岩版独有信息, 需要信息, 需要补充的条目
+# 抓取时间: 2026-07-14 17:28:24
+# 原始 Wikitext 内容:
+
+{{redirect|missingno|闪烁标语彩蛋|彩蛋#missingno}}
+Minecraft使用'''无效纹理'''与'''无效模型'''以应对存在于游戏资源与[[资源包]]的潜在错误。
+
+== 无效纹理 ==
+[[File:Missing Texture.png|right|150px|class=pixel-image]]
+'''无效纹理'''，或'''丢失的纹理（Missing Texture）'''是一种特殊的[[纹理]]，它由游戏自动生成，自动添加到所有纹理图集中，并使用<code>minecraft:missingno</code>作为映射命名空间ID。同时，无效纹理也可以作为一个独立纹理，也使用<code>minecraft:missingno</code>作为此纹理的命名空间ID。
+
+无效纹理的尺寸固定为16×16，不随纹理图集大小而改变。其纹理呈棋盘状，由黑色（{{Color|#000000}}）与品红色（{{only|je|for={{Color|#F800F8}}}}或{{only|be|for={{Color|#FC00FF}}}}）组成，以在大多数情况下尽可能地显眼。类似的纹理也被其他游戏工作室使用。<ref>如[https://developer.valvesoftware.com/wiki/Missing_content Valve]。</ref>
+
+当游戏找不到指定的纹理时，游戏会自动将请求的命名空间ID引用到无效纹理，替代缺失的纹理。若指定的纹理的元数据加载产生错误，游戏也会使用无效纹理替代发生错误的纹理。
+
+游戏使用了无效纹理后，会在游戏的输出日志中生成报告：
+* 找不到纹理图集内的指定纹理时生成<code>|Using missing texture, unable to load [NAMESPACE]:textures/[TEXTURE].png : java.io.FileNotFoundException: [NAMESPACE]:textures/[TEXTURE].png</code>
+* 模型元素缺少对应的纹理时生成<code>Unable to resolve texture reference: #texture in [NAMESPACE]:block/[MODEL]</code>
+
+原版游戏也可以出现无效纹理，然而需要使用命令，游戏加载这些无效纹理时也不一定会在输出日志产生警告：{{more info|1.21.9后}}<!--more are added in 1.21.9, see en: page-->
+
+* 指定粒子使用空气粒子。
+** 将[[空气]]、[[洞穴空气]]或[[虚空空气]]应用于<code>minecraft:block_marker</code>粒子：<ref>{{bug|MC-239407|||WAI}}</ref>
+*** {{cmd|particle minecraft:block_marker{block_state: "minecraft:air"}<nowiki/>}}
+** 将空气的物品模型应用于物品，并使物品产生粒子：
+*** {{cmd|particle minecraft:item{item: {id: "minecraft:cookie", components: {"minecraft:item_model": "minecraft:air"}<nowiki/>}<nowiki/>}<nowiki/>}}
+* 指定不存在的资源路径，使游戏直接或间接调用无效纹理。
+** 无效的提示框纹理：<ref>{{bug|MC-276751|||Won't Fix}}</ref>
+*** {{cmd|give @s stick[minecraft:tooltip_style{{=}}"minecraft:missingno"]}}
+** 无效的装备模型：<ref>{{bug|MC-276772|||Won't Fix}}</ref>
+*** {{cmd|give @s stick[equippable{{=}}{slot:"chest",asset_id:"minecraft:missingno"}]}}
+** 无效的装备遮罩层：
+*** {{cmd|give @s stick[equippable{{=}}{slot:"chest",camera_overlay:"minecraft:missingno"}]}}
+** 无效的路径点样式：
+*** {{cmd|waypoint modify @s style set minecraft:missingno}}
+
+== 无效模型 ==
+{{about|异常方块模型的占位符||占位符方块|section=1}}
+[[File:Missing Model.png|right|150px]]
+'''无效模型'''，或'''丢失的模型（Missing Model）'''是一类特殊的[[模型]]。如果游戏没有找到模型，或在模型加载中产生了错误，游戏会自动将异常的模型替换为无效模型。
+
+无效模型的命名空间ID是<code>builtin/missing</code>，它的外观是一个6面纹理都是无效纹理的方块。其硬编码模型可以导出为：
+
+<syntaxhighlight lang="json">
+{
+  "textures": {
+    "particle":  "missingno",
+    "missingno": "missingno"
+  },
+  "elements": [
+    {
+      "from": [ 0,  0,  0],
+      "to":   [16, 16, 16],
+      "faces": {
+        "down":  { "texture": "#missingno", "uv": [0, 0, 16, 16], "cullface": "down"  },
+        "up":    { "texture": "#missingno", "uv": [0, 0, 16, 16], "cullface": "up"    },
+        "north": { "texture": "#missingno", "uv": [0, 0, 16, 16], "cullface": "north" },
+        "south": { "texture": "#missingno", "uv": [0, 0, 16, 16], "cullface": "south" },
+        "west":  { "texture": "#missingno", "uv": [0, 0, 16, 16], "cullface": "west"  },
+        "east":  { "texture": "#missingno", "uv": [0, 0, 16, 16], "cullface": "east"  }
+      }
+    }
+  ]
+}
+</syntaxhighlight>
+
+以下情况不使用无效模型：
+* 所有[[模型#动态模型|动态模型]]。这些模型被硬编码，无法通过资源包修改。
+* 被硬编码为隐形的方块：
+** {{BlockLink|Air}}
+** {{BlockLink|Cave Air}}
+** {{BlockLink|Void Air}}
+** {{BlockLink|Barrier}}
+** {{BlockLink|Light}}
+** {{BlockLink|Structure Void}}
+
+原版游戏也可以出现无效模型，然而需要使用命令，游戏加载无效模型时也不一定会在输出日志产生警告：
+
+* 指定不存在的模型映射，使游戏间接调用无效模型。
+** 无效的物品模型映射：<ref>{{bug|MC-276671|||WAI}}</ref>
+*** {{cmd|give @s stone[item_model{{=}}"minecraft:missingno"]}}
+
+== 历史 ==
+{{info needed section|
+* 需要从英文Wiki补充历史。
+* 需要补充造成Beta 1.4至13w17a平台差异的原因。
+* 需要确认是否存在一种品红色的纯色纹理？
+** https://youtu.be/q1UC2-6vtIw?t{{=}}4m16s
+** https://github.com/rwtema/DietHopper/issues/4
+}}
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.4|[[File:Missing Texture (Windows) JE1.png|32px]] 加入了无效纹理。其纹理取决于计算机系统（见下一章节）。
+|在此版本前，游戏会在纹理无法正常加载时直接崩溃。
+|该纹理在原版游戏文件中不是一张图片，其只能由修改游戏文件（例如移除{{filename|.jar}}文件中的纹理文件）或一些不能稳定复现的漏洞触发。<ref>https://www.minecraftforum.net/forums/archive/legacy-support/1805293-client-problems-game-isnt-even-playable</ref><ref>https://www.minecraftforum.net/forums/discussion/175235-most-usless-item-block/previous</ref><ref>https://www.minecraftforum.net/forums/archive/legacy-support/1841577-weird-rain-bug</ref><ref>https://www.minecraftforum.net/forums/support/java-edition-support/1947231-missing-tex-inventory-screen-and-other-item-uis</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w02a|[[File:Missing Texture (Windows) JE2.png|32px]] 更改了纹理以显示更多描述性的文本。
+|无效纹理出现在新的方块与物品纹理图集中({{filename|stitched_terrain.png}}和{{filename|stitched_items.png}})，由游戏自动生成。}}
+|{{HistoryLine||1.6.1|dev=13w18a|[[File:Missing Texture JE3.png|32px]] 将纹理更改为紫黑色棋盘纹样。}}
+|{{HistoryLine||1.7.2|dev=13w38a|[[File:Missing Texture (anisotropic filtering) JE3.png|32px]] 当各向异性过滤启用时，无效纹理显示为4×4棋盘纹样而非2×2的。<ref>https://web.archive.org/web/20140328101841/https://mojang.com/2014/03/minecraft-snapshot-14w10a/</ref>这是由于该选项会将每个纹理替换为3×3排列的9个相同纹理，并取中央的32×32。由于无效纹理的尺寸固定为16×16，其会取到上述的4×4纹理。}}
+|{{HistoryLine||1.8|dev=14w06b|[[File:Missing Model JE1.png|32px]] [[File:Missing Model (anisotropic filtering) JE1.png|32px]] 加入了无效模型，此时是一个在目录<samp>models/block/missingno.json</samp>下的模型文件。
+|在此版本前，若游戏试图渲染一个未定义模型的方块，游戏会因NullPointerException崩溃。<ref>{{bug|MC-47560|||Fixed}}</ref>
+|此时的无效模型是一个8×8×8的立方体，但映射了完整的16×16纹理。}}
+|{{HistoryLine|||dev=14w10a|[[File:Missing Model JE2.png|32px]] [[File:Missing Model (anisotropic filtering) JE2.png|32px]] 更改了无效模型的模型，现在是一个完整方块。}}
+|{{HistoryLine|||dev=14w18a|无效模型被硬编码，以防止模型被无效内容替换而导致游戏崩溃。<ref>{{bug|MC-50073|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=14w25a|由于移除了各向异性过滤选项，2×2棋盘状纹理再次成为唯一的无效纹理。
+|随着{{filename|blocks-atlas}}与{{filename|items-atlas}}合并为{{filename|textures-atlas}}，方块与物品现在使用同一个无效纹理。
+|[[File:Missing Model (inventory) JE1.png|32px]] 无效模型现在也应用于物品，其形状与普通方块无异。}}
+|{{HistoryLine||1.9|dev=15w31a|[[File:Missing Model (inventory) JE2.png|32px]] 无效模型的物品形式显示为2D的无效纹理。这是由于物品的渲染视角默认垂直于模型表面。
+|无效模型的物品形式（如掉落物、物品展示框展示内容、手持物等）现在是一个完整方块的大小。<ref>{{bug|MC-88105|||WAI}}</ref>}}
+|{{HistoryLine||1.13|dev=17w43a|[[File:Missing Texture JE4.png|32px]] [[File:Missing Model JE3.png|32px]] 更改了纹理。}}
+|{{HistoryLine||1.14|dev=19w06a|{{filename|particles.png-atlas}}取代了{{filename| particles.png}}，同时加入了其中的无效粒子纹理。}}
+|{{HistoryLine|||dev=19w07a|{{filename|paintings.png-atlas}}取代了{{filename|paintings_kristoffer_zetterstrand.png}}，同时加入了其中的无效画作纹理。}}
+|{{HistoryLine|||dev=19w08a|{{filename|mob_effects.png-atlas}}取代了{{filename|inventory.png}}中的状态效果图标，同时加入了其中的无效状态效果纹理。}}
+|{{HistoryLine||1.15|dev=pre1|{{filename|textures-atlas}}中的旗帜图案、盾牌图案、床、箱子、告示牌与潜影盒纹理分别拆分至{{filename|banner_patterns.png-atlas}}、{{filename|shield_patterns.png-atlas}}、{{filename|beds.png-atlas}}、{{filename|chest.png-atlas}}、{{filename|signs.png-atlas}}和{{filename|shulker_boxes.png-atlas}}，并各自使用自己的无效纹理。}}
+|{{HistoryLine||1.21.4|dev=24w45a|现在因缺少粒子纹理而使用无效纹理时总是会生成报告。<ref name="MC-236295">{{bug|MC-236295|||Fixed}}</ref>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 5|[[File:Missing Texture BE1.png|32px]] 加入了无效纹理。
+|其为一个预定义的文件，而非由游戏自动生成。}}
+}}
+
+=== Beta 1.4至13w17a平台差异 ===
+这些版本所使用的无效纹理取决于操作系统与Java版本。<ref>https://github.com/NeRdTheNed/MC-TextureGen/commit/efdaa6c6a637b1f8cf8d0160c4ac7c4f779f945e#commitcomment-56639065</ref>
+{| class="wikitable" data-description="Original missing texture platform differences"
+! colspan="2" | 纹理
+! rowspan="2" | 操作系统
+! rowspan="2" | Java版本
+! rowspan="2" | 注释
+|-
+! Beta 1.4 - 13w01b
+! 13w02a - 13w17a
+|-
+| rowspan="4" | [[File:Missing Texture (Windows) JE1.png|128px]]
+| rowspan="4" | [[File:Missing Texture (Windows) JE2.png|128px]]
+| Windows XP
+|
+* 6.0.370.6<ref>{{bug|MC-8149|||Fixed}}</ref>
+| rowspan="4" | 所有Windows版本的标准。<br>未平滑。
+|-
+| Windows 7<ref name="MC-6779">{{bug|MC-6779|||Fixed}}</ref>
+|
+* 7<ref name="MC-6779" />
+** Update 11<ref>{{bug|MC-10625|||Invalid}}</ref>
+** Update 13<ref>{{bug|MC-17999|||Incomplete}}</ref>
+** r15<ref>{{bug|MC-10355|||Fixed}}</ref>
+** Update 17<ref>{{bug|MC-12026|||Invalid}}</ref>
+|-
+| Windows 10
+|
+* 1.8.0_51<ref name="ClearedUp">https://github.com/NeRdTheNed/MC-TextureGen/issues/22#issuecomment-922438619</ref>
+|-
+| Solaris 10<ref>https://discord.com/channels/361634042317111296/433407899403026434/1071555493904011294</ref>
+| * 1.6.0_37<ref>https://discord.com/channels/361634042317111296/433407899403026434/1074447704450670672</ref>
+|-
+| [[File:Missing Texture (Windows 10, Java 16.0.2) JE1.png|128px]]
+| [[File:Missing Texture (Windows 10, Java 16.0.2) JE2.png|128px]]
+| Windows 10
+|
+* 11.0.10<ref name="ClearedUp"/>
+* 16.0.2
+| 字母“x”与“u”有些许差异。未平滑。
+|-
+| rowspan="4" | [[File:Missing Texture (MacOS 10.14.6, Apple legacy Java runtime 1.6.0 65-b14-468) JE1.png|128px]]
+| rowspan="4" | [[File:Missing Texture (MacOS 10.14.6, Apple legacy Java runtime 1.6.0 65-b14-468) JE2.png|128px]]
+| MacOS 10.3.9<ref name="Mac1039">https://github.com/NeRdTheNed/MC-TextureGen/commit/efdaa6c6a637b1f8cf8d0160c4ac7c4f779f945e#commitcomment-56642974</ref>
+|
+* 4<ref name="Mac1039"/>
+| rowspan="4" | 非{{w|视网膜显示屏}}的标准。未平滑。<ref name="ClearedUp"/>
+|-
+| MacOS 10.5.8
+|
+* 1.5.0_30<ref name="MC-7208">{{bug|MC-7208|||Fixed}}</ref>
+|-
+| MacOS 10.6.8<ref name="Mac1068">https://github.com/NeRdTheNed/MC-TextureGen/commit/efdaa6c6a637b1f8cf8d0160c4ac7c4f779f945e#commitcomment-56649619</ref>
+|
+* 6<ref name="Mac1068"/>
+|-
+| MacOS 10.14.6<ref name="ClearedUp"/>
+|
+* Apple legacy Java runtime 1.6.0_65-b14-468<ref name="ClearedUp"/>
+|-
+| [[File:Missing Texture (MacOS 10.14.6, Apple legacy Java runtime 1.6.0 65-b14-468, antialiased) JE1.png|128px]]
+| [[File:Missing Texture (MacOS 10.14.6, Apple legacy Java runtime 1.6.0 65-b14-468, antialiased) JE2.png|128px]]
+| MacOS 10.14.6<ref name="ClearedUp"/>
+|
+* Apple legacy Java runtime 1.6.0_65-b14-468<ref name="ClearedUp"/>
+| 视网膜显示屏的标准。单色平滑。<ref name="ClearedUp"/>
+|-
+| [[File:Missing Texture (MacOS 10.14.6, Apple legacy Java runtime 1.6.0 65-b14-468, smoothed) JE1.png|128px]]
+| [[File:Missing Texture (MacOS 10.14.6, Apple legacy Java runtime 1.6.0 65-b14-468, smoothed) JE2.png|128px]]
+| MacOS 10.14.6
+|
+* Apple legacy Java runtime 1.6.0_65-b14-468<ref>https://github.com/NeRdTheNed/MC-TextureGen/issues/22#issuecomment-922492792</ref>
+| 上一种纹理的多色平滑版本。
+|-
+| rowspan="2" |
+| rowspan="2" | [[File:Missing Texture (MacOS 10.5.8) JE2.png|128px]]
+| MacOS 10.3.9<ref name="comment9226">https://github.com/NeRdTheNed/MC-TextureGen/issues/22#issuecomment-922617901 (also refer to other specifications in source)</ref>
+|
+* 4<ref name="comment9226"/>
+| rowspan="2" | 单色平滑。与上方版本只有一个像素的差异。
+|-
+| MacOS 10.5.8<ref name="MC-7208"/>
+| 未知
+|-
+|
+| [[File:Missing Texture (MacOS 10.4.11) JE2.png|128px]]
+| MacOS 10.4.11
+|
+* 1.5.0_19<ref name="MC-7208" />
+| 多色平滑。
+|-
+| [[File:Missing Texture (MacOS 10.14.6, Java 1.7.0 80-b15) JE1.png|128px]]
+| [[File:Missing Texture (MacOS 10.14.6, Java 1.7.0 80-b15) JE2.png|128px]]
+| MacOS 10.14.6<ref name="ClearedUp"/>
+|
+* 1.7.0 80-b15<ref name="ClearedUp"/>
+* 1.8.0_51<ref name="ClearedUp"/>
+| 未平滑。
+|-
+| [[File:Missing Texture (MacOS 10.14.6) JE1.png|128px]]
+| [[File:Missing Texture (MacOS 10.14.6) JE2.png|128px]]
+| MacOS 10.14.6<ref name="ClearedUp"/>
+|
+* 1.8.0_301, GraalVM EE 21.2.0
+* 11.0.12, GraalVM EE 21.2.0
+* 16.0.2, GraalVM EE 21.2.0
+| 单色平滑。
+|-
+| [[File:Missing Texture (MacOS 12.3.0, Java 1.8.0 74 64 bit) JE1.png|128px]]
+| [[File:Missing Texture (MacOS 12.3.0, Java 1.8.0 74 64 bit) JE2.png|128px]]
+| MacOS 12.3.0<ref name="rightallalong">https://github.com/NeRdTheNed/MC-TextureGen/issues/22#issuecomment-1771775344</ref>
+|
+* 1.8.0_74 (64-bit)<ref name="rightallalong"/>
+| 似乎在单色平滑后将所有非白色像素替换为黑色。
+|-
+| [[File:Missing Texture (Old Linux) JE1.png|128px]]
+| [[File:Missing Texture (Old Linux) JE2.png|128px]]
+| Debian<ref name="Jan92023">https://discord.com/channels/361634042317111296/433407899403026434/1062142954837377105</ref>
+|
+* 1.8.0_351
+| 未平滑。
+|-
+| rowspan="6" | [[File:Missing Texture (Linux) JE1.png|128px]]
+| rowspan="6" | [[File:Missing Texture (Linux) JE2.png|128px]]
+| Debian<ref name="Jan92023"/>
+|
+* Zulu OpenJDK 1.8.0_352
+| rowspan="6" | 未平滑。
+|-
+| Debian under WSL2<ref>https://github.com/NeRdTheNed/MC-TextureGen/commit/efdaa6c6a637b1f8cf8d0160c4ac7c4f779f945e#commitcomment-56731586</ref>
+|
+* 11.0.11
+|-
+| Ubuntu
+|
+* 16.0.1<ref>https://web.archive.org/web/20230508203053/https://imgur.com/gallery/i3FaUkW</ref>
+|-
+| FreeBSD
+|
+* 16.0.2
+|-
+| OpenBSD
+|
+* 16.0.2
+|-
+| Solaris 11<ref>https://discord.com/channels/361634042317111296/433407899403026434/1074451519673483415</ref>
+| * 1.8.0_311<ref>https://discord.com/channels/361634042317111296/433407899403026434/1074447243018506280</ref>
+|-
+| [[File:Missing Texture (Arch) JE1.png|128px]]
+| [[File:Missing Texture (Arch) JE2.png|128px]]
+| Arch<ref>https://discord.com/channels/361634042317111296/433407899403026434/986983086845730856</ref>
+|
+* Temurin-17.0.3+7
+| 未平滑。
+|-
+| 
+| [[File:Missing Texture (Arch 6.1.1) JE2.png|128px]]
+| Arch 6.1.1<ref>https://discord.com/channels/361634042317111296/433407899403026434/1061086331247284295</ref>
+|
+* 1.8.0_352 (64-bit)
+| 未平滑。
+|}
+
+== 你知道吗 ==
+* [[14w10a]]与[[17w47a]]的更新横幅中均出现了无效纹理：
+<gallery>
+14w10a.png|14w10a
+17w47a.gif|17w47a
+</gallery>
+* [[13w24a]]的横幅中出现了用品红色与黑色羊毛拼成的无效纹理图案。
+* 无效模型的每个顶点只有2个面颜色相同，而非预期的3个面。<ref>{{bug|MC-239083|||Won't Fix}}</ref>
+* “missingno”来自游戏《宝可梦 红/绿》的[https://wiki.52poke.com/wiki/MissingNo. 一个著名的漏洞]。
+
+== 画廊 ==
+<gallery>
+Rain Missing Texture.png|使用无效纹理的雨
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+[[en:Missing textures and models]]
+[[ja:欠落したテクスチャとモデル]]
+[[pt:Texturas e modelos ausentes]]

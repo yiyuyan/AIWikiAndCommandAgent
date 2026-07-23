@@ -1,0 +1,52 @@
+# 页面: 黑曜石船/ED
+# 来源: https://zh.minecraft.wiki/w/%E9%BB%91%E6%9B%9C%E7%9F%B3%E8%88%B9/ED
+# 分类: 
+# 抓取时间: 2026-07-14 17:39:36
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt collapsed|实体共通标签|
+** {{nbt|string|id|existonsave=1|required=1}}：实体类型。此数据仅在持久化保存（存储入区块文件或作为乘客实体保存）时存在。{{cmd|entitydata}}无法获取此数据，也无法修改。
+** {{nbt|short|Air|existonsave=1}}：（{{interval|left=-20|right=实体最大空气值}}）当前实体所剩的空气值。在指定环境中每刻增加4直至实体最大空气值；在可窒息环境中逐渐减少直至-20，达到-20后如果实体仍然在可窒息环境中则会受到伤害，并将此值重置为0，继续减少进行循环。此值不存在时游戏默认为实体最大空气值。
+** {{nbt|compound|CommandStats}}：命令统计值，用于记录该实体执行的命令的返回值应该被存储至哪项记分项内。
+*** {{nbt|string|AffectedBlocksName}}：任意字符串，此实体执行命令时游戏会按照记分板玩家名、[[目标选择器]]的顺序动态解析为命令影响方块数应该被存储的分数持有者。
+*** {{nbt|string|AffectedBlocksObjective}}：存储命令所影响方块数的记分项。
+*** {{nbt|string|AffectedEntitiesName}}：任意字符串，此实体执行命令时游戏会按照记分板玩家名、目标选择器的顺序动态解析为命令影响实体数应该被存储的分数持有者。
+*** {{nbt|string|AffectedEntitiesObjective}}：存储命令所影响实体数的记分项。
+*** {{nbt|string|AffectedItemsName}}：任意字符串，此实体执行命令时游戏会按照记分板玩家名、目标选择器的顺序动态解析为命令影响物品数应该被存储的分数持有者。
+*** {{nbt|string|AffectedItemsObjective}}：存储命令所影响物品数的记分项。
+*** {{nbt|string|QueryResultName}}：任意字符串，此实体执行命令时游戏会按照记分板玩家名、目标选择器的顺序动态解析为命令查询结果应该被存储的分数持有者。
+*** {{nbt|string|QueryResultObjective}}：存储命令查询结果的记分项。
+*** {{nbt|string|SuccessCountName}}：任意字符串，此实体执行命令时游戏会按照记分板玩家名、目标选择器的顺序动态解析为命令成功计数应该被存储的分数持有者。
+*** {{nbt|string|SuccessCountObjective}}：存储命令成功次数的记分项。
+** {{nbt|string|CustomName}}：当前实体的自定义名称。会出现在玩家的死亡消息与村民的交易界面，以及玩家的光标指向的实体的上方。
+** {{nbt|bool|CustomNameVisible}}：表示实体是否一直渲染名称。如果为<samp>true</samp>，那么名称会一直在它们的上方渲染，而不受光标指向的影响。如果实体没有自定义名称，则渲染默认名称。此项不存在时游戏默认为<code>false</code>。
+** {{nbt|int|Dimension|existonsave=1|required=1}}：实体所处的维度。
+** {{nbt|float|fallDistance|existonsave=1|required=1}}：当前实体已经摔落的距离。值越大，实体落地时受到的摔落伤害越大。
+** {{nbt|short|Fire|existonsave=1|required=1}}：正值代表距离火熄灭剩余的时间，负值表示当前实体能够在火中站立而不着火的时间，单位为游戏刻。未着火且未接触火时，玩家为-{{convert|20}}，其他实体为-{{convert|1}}。
+** {{nbt|bool|Invulnerable|existonsave=1|required=1}}：实体是否能抵抗绝大多数伤害。如果为<samp>true</samp>，实体只会受到来自[[创造模式]]玩家或{{cmd|kill}}等造成的伤害。
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体将要移动的距离向量。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|bool|OnGround|existonsave=1|required=1}}：实体是否正在接触地面。
+** {{nbt|compound|Riding}}：此实体当前正在骑乘的实体。注意：如果实体处于骑乘状态，堆叠中“最高”的实体拥有{{nbt|list|Pos}}标签，而该标签指定了“最低”的实体的坐标。同样，“最低”的实体控制这堆实体的运动；当实体堆叠由刷怪笼生成时，生成条件由最上方的实体决定。
+*** 见[[实体数据格式]]。
+** {{nbt|int|PortalCooldown|existonsave=1|required=1}}：距离当前实体下一次可以穿过[[下界传送门]]传送的时间，以游戏刻计。在使用下界传送门传送后，此项根据玩家游戏模式和当前游戏规则设置冷却。当实体不接触下界传送门方块时，此值每游戏刻减1直至0，此时才可以再次使用下界传送门传送。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+** {{nbt|list|Rotation|existonsave=1|required=1}}：实体的旋转角度，使用角度制。如果角度值为无限或非数（NaN），则对应角度会被修改为0度。
+*** {{nbt|float}}：（{{interval|left=0|right=360}}）当前实体以Y轴为中心，与正南方以顺时针方向旋转的视角角度（即偏转角）。如果角度值超出对应值域，则在按照相同朝向重新限制到值域内。
+*** {{nbt|float}}：（{{interval|left=-90|right=90}}）当前实体与视角与水平面之间的倾斜角（即俯仰角）。水平面为0，正值表示面朝下方，相反则为上方。如果此值超过值域，则被强制修改以回到值域。
+** {{nbt|bool|Silent}}：实体是否不会发出任何声音。此项不存在时游戏默认为<code>false</code>。
+** {{nbt|long|UUIDLeast|existonsave=1|required=1}}：实体的UUID最低有效位。
+** {{nbt|long|UUIDMost|existonsave=1|required=1}}：实体的UUID最高有效位。
+** {{nbt|string|UUID}}：实体的UUID，是有连字符的十六进制的形式。此数据只用于计算{{nbt|long|UUIDLeast}}和{{nbt|long|UUIDMost}}，在实体加载完成后被移除。
+}}
+** {{nbt|bool|obsidian|existonsave=1|required=1}}：表示船是否为黑曜石船。
+</div><noinclude>
+[[Category:实体数据值页面]]
+</noinclude>

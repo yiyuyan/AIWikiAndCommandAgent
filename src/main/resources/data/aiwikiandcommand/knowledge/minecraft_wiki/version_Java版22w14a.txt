@@ -1,0 +1,250 @@
+# 页面: Java版22w14a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8822w14a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=22w14a
+|image=22w14a.png
+|image2=Java Edition 22w14a Simplified.png\Java Edition 22w14a Traditional.png\Java Edition 22w14a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2022年4月6日
+|jsonhash=d7a5cb72158d497983a74623b88f0e0cd423d46f
+|clienthash=1d186d967576d4e6043e5b1664da242c1b686a85
+|clientmap=9b86041edb4aa515fc8951f16e3d3be3e0c0533e
+|serverhash=cf4f3a6492c0a84e2e852fe0ea714080923ab6ad
+|servermap=7b9857a6a7f3d7910700528627a8912947512178
+|parent=1.19
+|prevparent=1.18.2
+|prev=22w13a
+|next=22w15a
+|nextparent=1.19.1
+}}<onlyinclude>
+
+'''22w14a'''是[[Java版1.19]]的第4个快照，发布于2022年4月6日<ref>{{snap|22w14a|April 6, 2022}}</ref>，加入了[[红树]]、[[红树林沼泽]]生物群系、[[回响碎片]]和[[追溯指针]]2种物品，以及[[黏土]]新的可再生途径，并修复了主要与[[远古城市]]和[[监守者]]相关的一些漏洞。
+
+== 新内容 ==
+=== 物品 ===
+'''[[回响碎片]]'''
+* 仅生成于[[远古城市]]的战利品箱中。
+* 可用于合成追溯指针。
+
+'''[[追溯指针]]'''
+* 指南针的新变种，会指向玩家上次死亡的位置。
+* 指针会在玩家没有死亡位置或者位置在其他维度中时无规则旋转。
+* 可使用指南针和8个回响碎片合成。
+
+=== 世界生成 ===
+'''[[红树林沼泽]]'''
+* 沼泽的新变种，生成在更加温暖潮湿的区域，水体呈浅青色，水面上会生成[[睡莲]]，通常靠近[[丛林]]和[[沙漠]]。
+* 含有[[红树]]，一种新的[[树木]]。
+** 形状独特，根须发达，树木的底部是可达13格高的[[红树根]]，[[红树原木]]、[[红树树叶]]在红树根之上生长。
+** 树叶侧面垂挂着茂密的[[藤蔓]]，一些树叶下悬挂着成熟的[[红树胎生苗]]。
+** 可能生成[[蜂巢（方块）|蜂巢]]。
+** 由[[红树胎生苗]]生长而成。
+* 自然生成白色[[青蛙]]和[[史莱姆]]，但不生成绵羊、牛、猪或鸡。
+* 不会生成[[沼泽小屋]]。
+* 地表被单层[[泥巴]]覆盖，偶尔会生成[[草方块]]斑簇和[[枯萎的灌木]]。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 加入了2个新进度。
+<!--
+版本页面的内容属于“历史内容”，进度描述请勿使用{{sc}}模板。
+要修改进度名称，请到{{Advancement name}}和{{sc}}中进行。
+在Crowdin approved前，请不要汉化尚未approved的进度名称和描述。每个中文变体都是如此。
+繁简/地区转换请用{{tr}}。
+-->
+** [[进度#advancements-anchor-husbandry.allay_deliver_item_to_player|{{Advancement name|husbandry.allay_deliver_item_to_player|zh|rev=1}}]]
+*** {{tr|让[[悦灵]]向你投掷物品|讓[[悅靈]]遞送物品給你|讓[[悦靈]]向你運送物品}}
+** [[进度#advancements-anchor-husbandry.allay_deliver_cake_to_note_block|{{Advancement name|husbandry.allay_deliver_cake_to_note_block|zh|rev=1}}]]
+*** {{tr|让悦灵向[[音符盒]]投掷一块[[蛋糕]]|讓悅靈朝音階盒投出一個[[蛋糕]]|令悦靈將[[蛋糕]]掟喺[[音符盒]]度}}
+* 加入了<code>item_delivered_to_player</code>进度触发器，会在[[悦灵]]给予玩家物品时触发。有以下可用条件：
+** <code>player</code>：执行此触发器的玩家
+* 加入了<code>allay_drop_item_on_block</code>进度触发器，会在悦灵往方块上投掷物品时触发。有以下可用条件：
+** <code>player</code>：执行此触发器的玩家
+** <code>location</code>：悦灵投掷的物品着落的方块的谓词
+** <code>item</code>：悦灵投掷的物品的谓词
+
+=== 常规 ===
+'''[[玩家数据格式]]'''
+* 加入了<code>LastDeathLocation</code>新字段，此字段包含<code>dimension</code>（字符型，维度ID），<code>pos</code>（整型数组，为玩家死亡时坐标的3个整数值）2个字段。
+
+'''[[Java版标签|标签]]'''
+* 加入了以下[[Java版标签/方块|方块标签]]：
+** {{TagLink|block|dead_bush_may_place_on}}：{{cd|d=pretty|#sand|#terracotta|#dirt|mud}}。
+** {{TagLink|block|mangrove_logs_can_grow_through}}：{{cd|d=pretty|mud|muddy_mangrove_roots|mangrove_roots|mangrove_leaves|mangrove_log|mangrove_propagule}}。
+** {{TagLink|block|mangrove_roots_can_grow_through}}：{{cd|d=pretty|mud|muddy_mangrove_roots|mangrove_roots}}。
+* 加入了以下[[Java版标签/物品|物品标签]]：
+** {{TagLink|item|compasses}}：{{cd|d=pretty|compass|recovery_compass}}。
+* 加入了以下[[Java版标签/实体类型|实体类型]]：
+** {{TagLink|entity|frog_food}}：{{cd|d=pretty|slime|magma_cube}}。
+* 加入了以下[[Java版标签/游戏事件|游戏事件标签]]：
+** {{TagLink|game_event|shrieker_can_listen}}：{{cd|sculk_sensor_tendrils_clicking}}
+* 加入了以下[[Java版标签/猫变种|猫变种标签]]（新类型）：
+** {{TagLink|cat_variant|default_spawns}}：{{cd|d=pretty|tabby|black|red|siamese|british|calico|persian|ragdoll|white|jellie}}。
+** {{TagLink|cat_variant|full_moon_spawns}}：{{cd|d=pretty|#default_spawns|all_black}}。
+
+== 更改 ==
+=== 方块 ===
+'''[[枯萎的灌木]]'''
+* 现在可以放在泥巴上面。
+
+'''[[红树胎生苗]]'''
+* 现在会长成红树，而非之前的橡树。
+
+'''[[泥巴]]'''
+* 现在将泥巴放在下方挂有[[滴水石锥]]的方块上一段时间后，其会转化为[[黏土]]。
+
+=== 生物 ===
+'''[[青蛙]]'''
+* 改为捕食时对猎物造成10点的基础攻击伤害，而非之前直接清除实体的方式。
+
+'''[[监守者]]'''
+* 现在所有与监守者发生接触的生物都会将其激怒，不再限于玩家。
+* 不再在[[水]]中生成。
+* 寻路时可穿过[[熔岩]]。
+* 增大了其阴影尺寸。
+
+=== 世界生成 ===
+'''[[远古城市]]'''
+* 移除了<code>small_portal_statue</code>、<code>intact_horizontal_wall_stairs_upward</code>、<code>top_piece</code>、<code>bottom_piece</code>及其变种结构，因为它们与现有结构重复。
+* 修改了一些结构。
+** 略微更改了<code>city_center_2</code>箱子周围的方块，使在此处产生的振动总会被下方的[[幽匿感测体]]检测到。
+** 为<code>bottom_1</code>的其中一个[[红石灯]]补上了幽匿感测体。
+** 将<code>ice_box_1</code>的蓝色和淡蓝色[[地毯]]替换为灰色地毯，且其中的[[活板门]]默认不再处于打开状态。
+** <code>entrance_path_5</code>现在可以自然生成。
+* 修改了箱子中的战利品：
+** 现在每个箱子都有一轮额外的战利品，可能的选项包括1-3个回声碎片。
+** 将<code>city_center_2</code>中的[[金胡萝卜]]替换为[[金苹果]]。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 进度“{{Advancement name|adventure.adventuring_time|zh|rev=1}}”现在还需要玩家到访红树林沼泽生物群系。
+* 从{{cd|d=pretty|location|slept_in_bed|hero_of_the_village|voluntary_exile}}进度触发器中移除了<code>location</code>字段，因为其处理方式与<code>player.location</code>完全相同。
+
+=== 常规 ===
+'''[[实体数据格式]]'''
+* 将[[猫]]的实体数据格式中的<code>CatType</code>字段更改为<code>variant</code>字段。
+** 新字段支持字符串类型的值（命名空间ID），而非原先的数值类型的值（例如：<code>5</code>现在改为<code>minecraft:calico</code>）。
+* [[青蛙]]的实体数据格式中的相应字段也有与上述内容相类似的变更。
+
+'''[[战利品表]]'''
+* 向[[史莱姆]]与[[岩浆怪]]战利品表中加入了与其大小相关的特殊战利品表，由数据驱动，并使用新的子谓词类型。
+* 青蛙捕食出的掉落物现在由被捕食生物的战利品表控制，取代了之前硬编码物品类型的方式。
+
+'''[[战利品表谓词]]'''
+* <code>type_specific</code>字段替代了{{cd|d=pretty|player|fishing_hook|lightning_bolt|catType}}字段。
+* <code>type_specific</code>具有字段<code>type</code>，内容与已移除的字段相同（即{{cd|d=、|player|fishing_hook|lightning_bolt}}或<code>cat</code>中的一种）。
+* 例如：
+:* 更改前：
+:::<syntaxhighlight lang="json">
+ "lightning_bolt": {
+   "blocks_set_on_fire": 0
+ }
+</syntaxhighlight>
+:* 更改后：
+:::<syntaxhighlight lang="json">
+  "type_specific": {
+    "type": "lightning",
+    "blocks_set_on_fire": 0
+  }
+</syntaxhighlight>
+* <code>catType</code>现在被置于对象之中，与新格式相匹配。现在使用的是猫的种类名称，而不是以前使用的纹理名称。
+:* 更改前：
+:::<syntaxhighlight lang="json">
+"catType": "minecraft:textures/entity/cat/british_shorthair.png"
+</syntaxhighlight>
+:* 更改后：
+:::<syntaxhighlight lang="json">
+ "type_specific": {
+    "type": "cat",
+    "variant": "minecraft:british"
+ }
+</syntaxhighlight>
+* 在<code>type_specific</code>中加入了以下新选项：
+** <code>frog</code>，其中有<code>variant</code>字段，与青蛙的几种变体（{{cd|d=、|minecraft:warm|minecraft:temperate}}或<code>minecraft:cold</code>）相匹配。
+** <code>slime</code>适用于史莱姆和岩浆怪，其中有<code>size</code>字段与史莱姆的大小相匹配（最小为1）。
+
+'''[[Java版标签|标签]]'''
+* 向{{cd|d=pretty|#allows_surface_slime_spawns|#has_closer_water_fog|#has_structure/mineshaft|#has_structure/ruined_portal_swamp|#is_overworld|#spawns_warm_variant_frogs|#water_on_map_outlines}}生物群系标签中加入了红树林沼泽。
+* 移除了{{cd|#ancient_city_center_replaceable}}方块标签，其中全部内容合并至{{cd|#ancient_city_replaceable}}方块标签中。
+* 将{{cd|#warden_events_can_listen}}游戏事件标签重命名为{{cd|#warden_can_listen}}，并移除了其中的{{cd|sculk_sensor_tendrils_clicking}}，向其中加入了{{cd|#shrieker_can_listen}}。
+
+== 修复 ==
+{{fixes|fixedin=22w14a|showdesc=1
+|;old
+|91364|不能指定小型岩浆怪和大型/中型史莱姆的生物战利品。
+|176621|实体生成的网络数据包的偏航角和俯仰角使用整数而非字节。
+|207289|羊毛吸收幽匿感测体接收的信号时有方向偏差。
+|207522|幽匿感测体不对马的嘶鸣声作出反应。
+|207635|全局方向（Global Direction）不同，幽匿感测体对此作出的反应也不同。
+|209905|幽匿感测体不对挤奶声作出反应。
+|228533|幽匿感测体不对玩家喂食可驯养生物的振动作出反应。
+|;dev
+|249075|幽匿尖啸体没有在创造模式物品栏装饰性方块分类中与其他的幽匿类方块放在一起。
+|249122|声音<code>block.sculk_catalyst.bloom</code>没有其对应的字幕。
+|249124|声音<code>block.sculk_shrieker.shriek</code>没有其对应的字幕。
+|249254|青蛙捕食已命名的史莱姆或岩浆怪时，控制台不记录与之相关的信息。
+|249255|青蛙击杀史莱姆或岩浆怪时，幽匿催发体不会催发。
+|249264|青蛙无法靠近目标时，即使没有张开嘴，也会发出吃东西的声音。
+|249369|青蛙突然击杀小型史莱姆，无论其总生命值和-{抗性}-。
+|249384|监守者钻回地底时会产生光方块、屏障方块或结构空位的粒子效果。
+|249386|监守者的实体阴影大小相对于其本身来说太小。
+|249387|监守者钻回地下时的音效与其从地下钻出时的音效一致。
+|249400|监守者在液体中垂直移动时过于敏感。
+|249401|监守者刷怪蛋没有按照字母排序。
+|249415|监守者免疫熔岩，但寻路时不会穿过熔岩。
+|249422|一些与监守者有关的字幕中，应当用所有格表示的地方没有使用所有格。
+|249426|被激怒的监守者在生存模式中被攻击时，其受伤音效上会叠加播放<code>entity.warden.listening_angry</code>音效。
+|249430|监守者会锁定处于创造模式中的玩家。
+|249447|玩家跑离被激活的幽匿尖啸体时不能生成监守者。
+|249451|监守者刷怪笼中不显示监守者。
+|249455|序列化被激怒的监守者时，日志中会出现“Not a string”的内容。
+|249473|一些监守者音效会在和平难度下播放。
+|249476|监守者会在水中生成。
+|249479|监守者会攻击其队友。
+|249496|监守者数量过多会导致性能问题。
+|249499|带有<code>silent</code>NBT标签的监守者仍会播放心跳声。
+|249504|<code>entity.warden.agitated</code>音效不被音乐和声音选项中的“敌对生物”选项控制。
+|249509|通过刷怪笼或刷怪蛋生成的监守者在生成的一瞬间是隐形的。
+|249517|监守者不会检测与其相碰撞的非玩家生物。
+|249526|玩家处于骑乘状态时，幽匿尖啸体不会被激活。
+|249530|监守者的判定箱会在和平难度下显示。
+|249531|监守者攻击具有<code>invulnerable</code>NBT标签的实体时会一直咆哮。
+|249646|监守者击杀生物后会过度嗅探。
+|249659|幽匿催发体和幽匿脉络只会在被附有精准采集的锄挖掘时才会掉落其对应的掉落物。
+|249674|世界重载后，监守者不再会锁定其之前已锁定的目标。
+|;previous
+|249712|加载含有带悦灵结构的区块时，服务端会挂起且游戏会无响应。
+|249714|悦灵死亡动画中，其翅膀有深度冲突现象。
+|249727|世界重载后，监守者不会侦测震动。
+|249728|远古城市中可以生成熔岩，导致羊毛被烧毁而使结构悬浮在半空中。
+|249729|可以从悦灵的头部下方观察到深度冲突现象。
+|249751|监守者UV重叠问题。
+|249758|悦灵手臂与身体相交处有深度冲突现象。
+|249761|远古城市冰窖中的活板门默认处于打开状态。
+|249764|远古城市中心的第二盏灯上缺少幽匿感测体。
+|249768|远古城市的<samp>entrance_path_5</samp>结构不生成。
+|249769|远古城市中有一些未使用的结构。
+|249800|远古城市中红石门上的幽匿感测体距离玩家过远，无法持续检测到玩家吃东西的行为。
+|249816|监守者从地下钻出或钻回地下时，其判定箱不会有相应的变化。
+|249825|青蛙忽略了<code>doMobLoot</code>游戏规则。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:22w14a]]
+[[en:Java Edition 22w14a]]
+[[es:Java Edition 22w14a]]
+[[fr:Édition Java 22w14a]]
+[[ja:Java Edition 22w14a]]
+[[pt:Edição Java 22w14a]]
+[[ru:22w14a (Java Edition)]]
+[[th:รุ่น Java 22w14a]]

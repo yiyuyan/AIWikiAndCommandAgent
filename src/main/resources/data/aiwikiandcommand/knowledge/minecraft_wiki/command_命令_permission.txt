@@ -1,0 +1,55 @@
+# 页面: 命令/permission
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/permission
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Exclusive|bedrock}}
+{{Infobox command
+|name=permission
+|alias={{cmd|ops}}
+|oplevel=4
+|nocmdblock=y
+|cheat=y
+}}
+枚举或重新加载权限列表，或设置玩家的权限等级。
+
+== 语法 ==
+:<code>permission list</code>
+::枚举当前使用的权限列表，仅[[BDS]]可用。
+:<code>permission reload</code>
+::在服务器上重新从<samp>permissions.json</samp>文件加载操作员列表，仅BDS可用。
+:<code>permission set <player: target> [permission: PermissionLevel]</code>
+::在客户端上设置玩家的权限等级，仅非BDS可用。但通常无法执行，因为其权限等级要求过高。<ref>{{bug|MCPE-161188||{{cmd|permission|link=none}}不能按照语法提示执行。}}</ref>
+
+== 参数 ==
+{{argument|be=1|player: target|CommandSelector<Player>}}
+: {{arg desc|be=player}}
+{{argument|be=1|permission: PermissionLevel|enum}}
+: 指定权限等级所对应的身份。必须为以下其中之一：
+:* <code>member</code> — 成员
+:* <code>operator</code> — 操作员
+:* <code>visitor</code> — 访客
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|命令不完整或参数未正确指定||unparseable}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器||fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|be}}
+|{{HistoryLine||1.10.0|加入了{{cmd|permission|link=none}}。}}}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/permission]]
+[[en:Commands/permission]]
+[[ja:コマンド/permission]]
+[[pt:Comandos/permission]]

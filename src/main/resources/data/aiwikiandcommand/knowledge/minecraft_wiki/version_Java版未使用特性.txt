@@ -1,0 +1,348 @@
+# 页面: Java版未使用特性
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%9C%AA%E4%BD%BF%E7%94%A8%E7%89%B9%E6%80%A7
+# 分类: Java版, Minecraft, 待更新条目, 未使用的特性, 需要信息
+# 抓取时间: 2026-07-14 17:15:25
+# 原始 Wikitext 内容:
+
+{{about|Java版的未使用特性|其他版本中未使用的特性|未使用的特性|已从Java版中移除的特性|Java版已移除特性|未实现的想法|Java版提及特性}}
+{{needs update|部分特性在新版本Minecraft中已被移除。}}{{upcoming in draft}}
+自从[[Minecraft]]的开发初期以来，有许多加入了游戏但没什么实际作用的特性。这些特性一些是被移除特性的残留物，或者只是作为新特性的占位符。
+
+== 方块 ==
+=== 方块状态组合 ===
+一些方块的方块状态组合不能在[[生存模式]]中正常使用，它们只能使用[[命令]]、[[调试棒]]或者在[[调试模式]]的世界类型中呈现。基于它们的特点，一些地图制作者会使用这些组合来作为画板或制作自定义方块模型。并且这些组合通常都是不稳定的。
+
+* [[藤蔓]]的所有方向的状态设置为<samp>false</samp>是不可能正常出现的。其模型与各方向状态均为<samp>true</samp>的藤蔓相同，但其轮廓线为一个完整方块。
+* [[墙]]也有一些不可能正常出现的组合，例如6个方向都设置为<samp>false</samp>的方块状态组合会导致墙完全不可见，当然还有一些不正常的组合可以导致可以看见墙的内侧纹理。
+* [[铁门]]和[[铁活板门]]独特的“open”和“powered”状态，正常情况下两者是同步（同时为true或false）的。因此不同步的组合不会正常出现。
+* [[红石粉]]在只连接到一个红石组件的情况下会延伸到组件相对的一侧，尽管存在有效的不同方块状态，这些状态视觉上只显示其中一个连接方向。此外在[[20w18a]]红石线有了不同的模型，因此在生存模式中这些方块状态组合不能正常出现。
+* [[营火]]在使用调试棒时既能含水又能点燃，但在正常情况下是不可能做到的。
+** 同样，[[蜡烛]]也可以既能含水又能点燃，但它的粒子效果必须从水里或将视频选项设置为''极佳！''才能被看见。
+* [[台阶]]可以既能是含水状态又能是双层状态，但在生存模式中是不可能做到的。
+* “unstable”设置为<samp>true</samp>的[[TNT]]能被玩家击打点燃。
+* [[紫颂植株]]的上下两面至少有一面设置为<samp>true</samp>，虽然可以放置，但会立即破裂。此外，上下面都设置为<samp>false</samp>，但有两个侧面设置为<samp>true</samp>的[[紫颂植株]]不能被放置。
+* “distance”设置为7的[[脚手架]]虽然可以被放置，但会立即成为一个下落的实体，它将落在任何可站立表面并变回方块，或者被破坏。
+* 所有方向状态设置为<samp>false</samp>的[[发光地衣]]和[[幽匿脉络]]在正常情况下是无法放置的。其模型与各方向状态均为<samp>true</samp>的对应方块相同，但其轮廓线为一个完整方块，且即使使用合适的工具采集时也没有掉落物。
+
+=== 无法实现的流体状态的组合 ===
+* 静止的[[水]]和[[熔岩]]都有一个名为“falling”的流体状态，此状态总为<samp>false</samp>。
+<!--请求帮忙更正翻译-->
+* [[水]]和[[熔岩]]在上方有方块时的流体状态“falling”都被设置为<samp>true</samp>，“height”被设置为8，而上方没有方块时流体状态“falling”被设置为<samp>false</samp>，“height”被设置为1到7，使得“falling”被设置为<samp>false</samp>，“height”被设置为8，以及“falling”被设置为<samp>true</samp>，“height”被设置为1到7的组合不可用。
+
+== 实体 ==
+=== 巨人 ===
+[[File:Zombie.png|100px|右]]
+{{main|巨人}}
+
+巨人是一种在[[Java版Indev|Indev]]中加入的未被使用的[[生物]]。它们看起来像是巨型[[僵尸]]。巨人沒有运动AI，因此它们无法自行移动。它们无法自然生成，因为游戏要求亮度等级大于11且小于8，而这些条件在原版中无法满足。这也使得它们无法通过[[刷怪笼]]产生。
+
+巨人只能通过{{cmd|summon giant}}生成。
+{{-}}
+
+=== 杀手兔 ===
+[[File:Killer Bunny.png|100px|右]]
+{{main|兔子#杀手兔}}
+
+杀手兔是兔子的一种攻击性变种，对所有的玩家和狼都有敌意。它拥有纯白色的皮毛，以及横向的血红色眼睛，和普通兔子的竖向眼睛明显不同。
+
+即使是在和平难度下，杀手兔也不会消失，尽管它属于敌对生物。它仍会攻击狼（不管是驯服还是未驯服的）。杀手兔于[[Java版1.8]]版本的快照中被加入游戏，曾作为兔子的一个罕见变种生成，但在正式版发布之前就被删除了。
+
+杀手兔只能通过{{cmd|summon rabbit ~ ~ ~ {RabbitType:99} }}命令生成。
+{{-}}
+
+=== 幻术师 ===
+[[File:Illusioner.png|100px|右]]
+{{main|幻术师}}
+
+幻术师是在[[Java版1.12]]加入的一种未使用的[[灾厄村民]]。它们会攻击距离其12格以内的玩家、村民和铁傀儡。它们会使用咒语和弓进行攻击。
+
+幻术师有两种咒语：一种是使其对手失明的咒语，另一种是生成分身并使本体隐身的咒语。
+
+幻术师只能通过命令{{cmd|summon illusioner}}生成。
+{{-}}
+
+=== 刷怪笼矿车 ===
+{{main|刷怪笼矿车}}
+[[File:Minecart with Spawner.png|100px|右]]
+刷怪笼矿车是[[刷怪笼]]与[[矿车]]的结合，它无法以物品形式获取，只能用{{cmd|summon}}命令生成。
+
+在矿车里的刷怪笼与普通的刷怪笼无异，但刷怪笼矿车的生成实体只能通过命令{{cmd|data modify}}修改。
+
+当刷怪笼矿车被摧毁时，它只会掉落1个矿车。
+
+== 药水 ==
+{{main|药水}}
+[[不可合成的药水]]和[[幸运药水]]存在于游戏中，但生存模式中无法获取。
+
+== 状态效果 ==
+{{main|状态效果}}
+
+在游戏中一些状态仍未使用。它们可以使用{{cmd|effect}}或修改NBT数据来获得。
+
+=== 幸运 ===
+[[幸运]]状态效果会增加玩家钓鱼时获得宝藏的概率。
+
+该效果可以通过在[[24w14potato]]中食用附魔金毒马铃薯获得。
+
+=== 霉运 ===
+[[霉运]]状态效果会减少玩家钓鱼时获得宝藏的概率。
+
+该效果可以通过在[[24w14potato]]中食用附魔金毒马铃薯获得。
+
+=== 生命提升 ===
+[[生命提升]]状态效果会暂时性地增加玩家的生命值上限。
+
+可以通过食用[[金苹果]]和[[附魔金苹果]]来达到类似的效果，不过它们给玩家的效果是[[伤害吸收]]而不是生命提升。
+
+== 声音 ==
+=== 循环音效 ===
+循环音效是一些未使用的声音，它们在游戏文件中找到，它们可能在当玩家处于一个特定类型的位置（在山洞里、森林、海洋和瀑布旁边）时播放。这些声音只在[[Java版Classic 0.0.14a_08|Classic 0.0.14a_08]]里的一个未公开的测试版中使用，但最后并没有加入到任何公开版本里。
+
+这些循环音效可以在<code>.minecraft/resources/sound/loops/</code>中找到，并可以转换为4个循环，这些音效有鸟鸣叫声、洞穴的风声、海洋和瀑布的吵闹声。
+
+[[Java版1.13]]和[[Java版1.16|1.16]]加入的水下和下界[[环境音效]]可以认为是这些循环音效的替代。
+
+{| class="wikitable sortable" style="width: auto; text-align: center; font-size: smaller"
+!'''循环音效名称'''
+! 音轨
+|-
+! 鸟鸣声
+| [[File:Birds screaming loop.ogg]]
+|-
+! 洞穴的风声
+| [[File:Cave chimes.ogg]]
+|-
+! 海洋
+| [[File:Ocean.ogg]]
+|-
+! 瀑布
+| [[File:Waterfall.ogg]]
+|-
+|}
+
+=== 其他 ===
+{| class="wikitable sortable" style="width: auto; text-align: center; font-size: smaller" data-description="其他音效"
+!'''其他'''
+! 音轨
+|-
+! 恶魂深情尖叫
+| [[File:Ghast affectionate scream.ogg]]
+|-
+! 经典受伤
+| [[File:Hurt Old.ogg]]
+|-
+! 呼吸
+| [[File:Player breathe.ogg]]
+|-
+! 狼嚎1
+| [[File:Wolf howl1.ogg]]
+|-
+! 狼嚎2
+| [[File:Wolf howl2.ogg]]
+|-
+|}
+
+{| class="wikitable sortable" style="width: auto; text-align: center; font-size: smaller"
+!'''蠹虫爬行音效'''
+! 音轨
+|-
+! 脚步声1
+| [[File:Silverfish step1.ogg]]
+|-
+! 脚步声2
+| [[File:Silverfish step2.ogg]]
+|-
+! 脚步声3
+| [[File:Silverfish step3.ogg]]
+|-
+! 脚步声4
+| [[File:Silverfish step4.ogg]]
+|-
+|}
+
+一些声音仍然可以在游戏内播放：
+* {{cmd|playsound minecraft:entity.ghast.scream master @a}}播放“恶魂深情尖叫”声音。
+* {{cmd|playsound minecraft:entity.player.breath master @a}}播放“喘息”声音。
+* {{cmd|playsound minecraft:entity.silverfish.step master @a}}播放“蠹虫行走”声音。
+
+== 资源 ==
+一些位于游戏{{code|assets}}文件夹的资源并未被使用。
+
+=== {{code|debug.png|debug2.png|delimiter=pretty}} ===
+<div style="float:right;">
+[[File:Debug.png|100px]]
+[[File:Debug2.png|100px]]
+</div>
+{{see also|调试屏幕}}
+
+这些纹理是在1.9快照[[15w31a]]中添加的。它们被开发人员用来制作方块[[模型]]。
+
+使用debug.png作为纹理的方块可以在[[18w07a]]中通过推动气泡柱来使其出现一瞬间，但推动后会立即消失，这个方块也不会生成。
+
+尽管这两个方块都没有使用过，但在[[愚人节玩笑#2018|2018年愚人节]]的更新中，这两个方块都被赋予了新的纹理：
+{{AprilFoolsSprite|debug}} {{AprilFoolsSprite|debug2}}。
+
+=== 僵尸猪人、守卫者和盔甲架的纹理签名 ===
+在[[纹理更新]]前，[[僵尸猪人]]纹理包含文本“THX XATHOBIA”；[[守卫者]]和[[远古守卫者]]纹理包含文本“jeb_”——[[Jens Bergensten]]的昵称；[[盔甲架]]纹理包含文本“Searge”——[[Michael Stoyke]]的昵称。
+
+[[纹理更新]]后，僵尸猪人和守卫者纹理内的文本均被删去，而盔甲架纹理中的文本“Searge”则得以保留，并且添加了文本“JAPPA”——新纹理作者[[Jasper Boerstra]]的昵称。[[Java版1.18-pre5]]中，盔甲架平滑石头底座的边框纹理得以更新，又添加了文本“CHIWI”——更新此纹理的Mojang职员Chi Wong的昵称。
+
+=== 旗帜部件 ===
+{{See also|旗帜}}
+
+实体纹理banner_base及物品纹理banner_overlay自[[14w30a]]被加入且用于白色旗帜，在[[14w30b]]开始未被使用，其可能将用于预先存在的彩色旗帜的缩略图，单独给覆盖层上色，类似皮革套装一样。
+
+banner_overlay现已被移除。{{More info|何时被移除？}}
+
+=== 地图图标 ===
+{{See also|地图}}
+
+一些额外的地图图标。仅有左上角的白色和绿色箭头图标被普遍使用，其中彩色的图标仅被用于基岩版和原主机版的多人游戏中。
+
+=== 骷髅及其变种的空手近战攻击 ===
+可以用命令生成没有武器的[[骷髅]]、[[流浪者]]、[[沼骸]]、[[焦骸]]或[[凋灵骷髅]]，它们会进行近战攻击。
+
+然而，骷髅和流浪者可以捡起剑等物品并进行近战攻击。
+
+=== 隐藏在透明度中的纹理 ===
+一些纹理的部分像素的不透明度被设置为0，这使得它们在用大多数图像查看器查看时显得透明而不可见。然而，这些像素的颜色信息仍然存在，可以通过禁用alpha通道来检索。这些纹理中的大多数可能是创建纹理时的遗留特性，编辑程序时没有删除，而是简单地将不透明度设置为0。这里列出的纹理都禁用了它们的alpha通道，以显示纹理中未使用/隐藏的像素。大多数不可见的像素是在开发纹理时产生的，或者在开发过程中将既有的纹理用作了模板。
+
+==== 实体 ====
+<gallery widths="64" heights="64">
+File:Lead knot noAlpha.png|[[箭]]的纹理被用作[[拴绳]]的模板
+File:Stray overlay noAlpha.png|[[锁链盔甲]]的纹理被用作[[流浪者]]长袍的模板
+File:Bell noAlpha.png|[[钟]]的纹理文件似乎有多余的面
+</gallery>
+
+==== 生物 ====
+这些生物的纹理有隐藏的像素。截至[[Java版1.16.5]]，除了豹猫和猫仍有隐藏像素外，其他的隐藏像素均被移除。{{More info}}
+
+===== 蠹虫 =====
+<gallery widths="64" heights="64">
+File:Silverfish noalpha.png|alt=Silverfish texture with hidden pixels revealed
+</gallery>
+[[蠹虫]]是在[[Java版Beta 1.8|Beta 1.8]]中加入的，但蠹虫纹理在[[Java版Beta 1.7|Beta 1.7]]中已被加入，隐藏像素由“毛发”纹理周围的一些不同颜色的像素区域组成。
+
+===== 末影螨 =====
+<gallery widths="64" heights="64">
+Endermite noAlpha.png
+</gallery>
+[[末影螨]]用于[[14w11a]]时模型的纹理像素被隐藏在了在新纹理的下方。
+
+===== 豹猫和猫 =====
+<gallery widths="64" heights="64" caption="1.14前">
+File:Ocelot noalpha.png|alt=显示出隐藏像素的豹猫旧纹理
+File:Cat black noalpha.png|alt=显示出隐藏像素的西服猫旧纹理
+File:Cat red noalpha.png|alt=显示出隐藏像素的红虎斑猫旧纹理
+File:Cat siamese noalpha.png|alt=显示出隐藏像素的暹罗猫旧纹理
+</gallery><gallery widths="64" heights="64" caption="新的猫的变种">
+File:Black cat noalpha.png|alt=显示出隐藏像素的黑猫纹理
+File:Tuxedo cat noalpha.png|alt=显示出隐藏像素的西服猫纹理
+File:British shorthair cat noalpha.png|alt=显示出隐藏像素的英国短毛猫纹理
+File:Calico cat noalpha.png|alt=显示出隐藏像素的花猫纹理
+File:Jellie cat noalpha.png|alt=显示出隐藏像素的Jellie猫纹理
+File:Persian cat noalpha.png|alt=显示出隐藏像素的波斯猫纹理
+File:Ragdoll cat noalpha.png|alt=显示出隐藏像素的布偶猫纹理
+File:Red cat noalpha.png|alt=显示出隐藏像素的红虎斑猫纹理
+File:Siamese cat noalpha.png|alt=显示出隐藏像素的暹罗猫纹理
+File:Tabby cat noalpha.png|alt=显示出隐藏像素的虎斑猫纹理
+File:White cat noalpha.png|alt=显示出隐藏像素的白猫纹理
+</gallery>
+在[[Java版1.2.1]]中加入了[[豹猫]]和[[猫]]的变种。[[豹猫]]的隐藏像素包含一个额外的头部纹理，而所有的猫纹理都有一个横跨黑色线条的橙色纹理。在Java版1.14更新后，豹猫纹理不再包含隐藏像素。大多数新的猫纹理都是由旧的纹理编辑而成的，正如类似的隐藏图案所显示的那样。这些纹理似乎也被裁剪过，因为旧的隐藏纹理的很大一部分都不见了，只有红猫纹理除外，似乎没有变化。
+
+===== 狼 =====
+<gallery widths="64" heights="64">
+File:Wolf noalpha.png|alt=Wolf texture with hidden pixels revealed
+File:Wolf angry noalpha.png|alt=Angry wolf texture with hidden pixels revealed
+File:Wolf collar noalpha.png|alt=Wolf collar texture with hidden pixels revealed
+File:Wolf tame noalpha.png|alt=Tame wolf texture with hidden pixels revealed
+</gallery>
+[[狼]]在[[Java版Beta 1.4|Beta 1.4]]中加入。当时所有四个狼的纹理文件都具有类似的隐藏纹理，这表明，它们是通过修改同一个文件创建的。最极端的是项圈纹理，它原本只包含项圈，但在透明像素中隐藏着整个狼的纹理。
+
+在[[24w03a]]中，项圈纹理中的额外纹理被去除。在[[24w10a]]中，新增的狼的每个变种的三个纹理文件也是由修改同一个文件的方式创建的。
+
+===== 凋灵 =====
+<gallery widths="64" heights="64">
+File:Wither armor noAlpha.png|alt=Wither's armor layer texture with hidden pixels revealed.
+File:Wither noAlpha.png|alt=Wither texture with hidden pixels revealed.
+File:Wither invulnerable noAlpha.png|alt=Invulnerable Wither texture with hidden pixels revealed.
+</gallery>
+[[凋灵]]的护甲纹理是基于[[闪电苦力怕]]的护甲纹理。在凋灵的纹理中，在较小的头颅下面有一个主头的重复纹理。浅蓝色的纹理在不去除透明度的情况下是可见的。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100205|[[File:Zombie JE1 BE1.png|50px]] 加入了巨人。
+|巨人的行为与其他敌对[[生物]]一样：朝[[玩家]]走去直到碰到玩家。但是，巨人无法“触摸”任何东西，除非站在它上面，这使它们很难与对手作战。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|[[File:Zombie Horse JE1 BE1.png|50px]] [[File:Baby Zombie Horse JE1 BE1.png|24px]] 加入了僵尸马。}}
+|{{HistoryLine|||dev=13w23b|[[File:Health Boost JE1 BE1.png|18px]] 加入了生命提升状态效果。
+|普通的[[金苹果]]现在给予1:30的生命提升效果。}}
+|{{HistoryLine|||dev=13w24b|普通的金苹果不再给予生命提升，而是给予伤害吸收效果。}}
+|{{HistoryLine||1.7.2|dev=13w36a|巨人现在可以不使用mod而使用新的{{cmd|summon}}[[命令]]生成。
+|[[File:Zombie Horse JE1 BE1.png|32px]] 加入{{cmd|summon}}命令使得僵尸马现在无需第三方工具即可生成。}}
+|{{HistoryLine||1.8|dev=14w06a|现在[[盔甲]]能在巨人身上渲染。[[14w05a]]中的一个错误导致所有[[生物]]渲染磨损的盔甲。在修复此错误时，[[Grum]]允许巨人装备盔甲。
+|移除了巨人的AI。}}
+|{{HistoryLine|||dev=14w28a|杀手兔的生成概率现在从{{frac|1|1000}}降低到了{{frac|1|2500}}。}}
+|{{HistoryLine|||dev=14w29a|杀手兔不再生成于和平[[难度]]下。}}
+|{{HistoryLine|||dev=14w31a|[[File:Killer Bunny JE2.png|30px]] 兔子现在有了[[声音]]，并且其模型经过修改，其中包括一条尾巴，现在可以承受坠落伤害。}}
+|{{HistoryLine|||dev=14w34a|[[File:Killer Bunny JE3.png|30px]] 敌对的兔子有了新的纹理和新的名字（“杀手兔”），它们现在会忽略[[创造]]模式的[[玩家]]。
+|杀手兔无法使用除了[[命令]]以外的方法生成。[[Jeb]]后来发表评论说，杀手兔被从正常游戏玩法中删除，因为“这是一个玩笑，并且在很多游戏中都被引用，”另一个原因是“它们基本上是随机死亡事件”。<ref name="minecraft.net">{{citation|url=https://minecraft.net/article/who-framed-killer-rabbit|title=Who framed the killer rabbit?|author=Marsh Davies|website=Minecraft.net|date=November 25, 2016}}</ref>
+|黑白斑驳皮毛兔子的眼睛的颜色现已从粉红色变为黑色。}}
+|{{HistoryLine|||dev=pre1|[[File:Killer Bunny JE4.png|32px]] 更改了杀手兔的纹理，不再有鲜血。}}
+|{{HistoryLine||1.9|dev=[[15w43a]]–[[15w44b|44b]]|slink=none|[[掉落物]]现在已针对僵尸马进行了多次更改。最终结果是，僵尸马现在总是掉落1个[[腐肉]]，不受[[抢夺]]附魔的影响。}}
+|{{HistoryLine|||dev=15w44b|[[File:Luck JE1.png|18px]] 加入了幸运状态效果。
+|[[File:Bad Luck JE1.png|18px]] 加入了霉运状态效果。}}
+|{{HistoryLine|||dev=15w47b|加入了僵尸马吃[[玩家]]给予的食物的[[声音]]。}}
+|{{HistoryLine|||dev=15w49a|[[File:Health Boost JE2 BE2.png|18px]] 更改了生命提升的图标。}}
+|{{HistoryLine||1.10|dev=16w20a|加入了僵尸马[[刷怪蛋]]。}}
+|{{HistoryLine|||dev=pre2|移除了僵尸马刷怪蛋。}}
+|{{HistoryLine||1.11|dev=16w32a|巨人的[[实体]]ID从<code>Giant</code>更改为<code>giant</code>。
+|僵尸马现在有了与[[马]]分开的ID：<code>zombie_horse</code>。
+|重新加入了僵尸马刷怪蛋。}}
+|{{HistoryLine||1.12|dev=17w16a|[[File:Illusioner JE1.png|32px]] 加入了幻术师。}}
+|{{HistoryLine|||dev=17w17a|幻术师的[[失明]]效果法术现在只有[[区域难度]]为3或以上时才会施放。
+|幻术师有了新的[[声音]]效果。}}
+|{{HistoryLine|||dev=17w17b|幻术师的失明法术现在只有当区域难度大于2时才会施展。}}
+|{{HistoryLine||1.13|dev=pre5|幻术师的[[实体]]ID从<code>illusion_illager</code>更改为<code>illusioner</code>。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Illusioner JE2.png|32px]] 更改了幻术师的纹理，现在它有着绿色的眼睛。
+|[[File:Luck JE2.png|18px]] 更改了幸运效果的图标。
+|[[File:Bad Luck JE2.png|18px]] 更改了霉运效果的图标。
+|[[File:Health Boost JE2 BE2.png|18px]] 再次更改了生命提升效果的图标。}}
+|{{HistoryLine|||dev=18w46a|加入了幻术师的[[战利品表]]。}}
+|{{HistoryLine|||dev=18w50a|巨人现在使用[[僵尸]]的AI和NBT数据。
+|巨人现在有[[僵尸]]的伤害[[声音]]效果。
+|巨人不再有[[玩家]]的伤害声音效果。
+|巨人现在移动的速度是僵尸的两倍，并在[[阳光]]中燃烧。
+|巨人现在攻击并感染[[村民]]。}}
+|{{HistoryLine|||dev=19w03a|回退了[[18w50a]]中关于巨人的更改。}}
+|{{HistoryLine|||dev=19w08a|[[File:Luck JE3.png|18px]] 再次更改了幸运效果的图标。
+|[[File:Bad Luck JE3.png|18px]] 再次更改了霉运效果的图标。
+|[[File:Zombie Horse JE5.png|50px]] [[File:Baby Zombie Horse JE5.png|60px]] 更改了僵尸马的纹理。}}
+|{{HistoryLine|||dev=19w13a|[[File:Illusioner celebrating.gif|32px]] 现在玩家在[[袭击]]事件中失败后[[幻术师]]会跳跃。
+|制箭师村民不再给予带有[[村庄英雄]]的玩家幸运之箭。}}
+|{{HistoryLine|||dev=pre1|制箭师村民不再出售[[幸运之箭]]。}}
+|{{HistoryLine||1.16|dev=20w09a|拴绳现在可以拴住[[僵尸马]]了。}}
+|{{HistoryLine||1.21.11|dev=25w41a|[[僵尸马]]现在可以自然生成了。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox version history}}
+{{Navbox Java Edition}}
+
+[[Category:Minecraft]]
+[[Category:未使用的特性]]
+
+[[cs:Neimplementovány funkce]]
+[[de:Ungenutzte Spielelemente]]
+[[en:Java Edition unused features]]
+[[es:Características no usadas de Java Edition]]
+[[it:Funzionalità non usate in Java Edition]]
+[[ja:使用されていない要素/Java Edition]]
+[[ko:Java Edition 미사용 기능]]
+[[pl:Nieużywane elementy w Java Edition]]
+[[pt:Recursos não implementados na Edição Java]]
+[[ru:Неиспользуемый контент (Java Edition)]]

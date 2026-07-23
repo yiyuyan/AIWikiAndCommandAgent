@@ -1,0 +1,93 @@
+# 页面: 服务器文件目录
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95
+# 分类: 
+# 抓取时间: 2026-07-14 17:28:36
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+[[服务端核心文件]]启动后，会生成一系列与服务器管理相关的文件。
+
+本文只介绍服务端启动主类下的目录结构，[[数据生成器]]和[[游戏测试#测试服务端|测试服务端]]主类下的目录结构请参见对应条目。
+
+== 启动流程 ==
+{{see also|服务端核心文件#启动行为}}
+服务端启动时，游戏会先解压库文件并添加类路径，如果对应文件的SHA-256散列值不同则尝试重新解压并在日志中输出警告信息。初始化完毕后，生成{{filename|eula.txt}}和[[服务端配置文件]]并检查玩家是否同意EULA，如果未同意则立刻中止服务端并提醒玩家需要同意EULA。
+
+玩家同意EULA后，服务器会正常启动并生成存档，并自动生成服务端配置文件和白名单等玩家文件。通常而言这些文件如果不存在，则服务端会自动生成新文件，{{filename|eula.txt}}等重要文件除外。
+
+== 目录结构 ==
+服务端文件目录具有多种与服务端相关的文件，这些文件按照一定的存储格式，在特定的路径上起到作用。下文中'''粗体'''代表文件一定存在，未标注粗体则代表文件不一定存在。假设服务端核心文件位于{{filepath|<''服务端根目录''>/server.jar}}，且{{filename|eula.txt}}检查成功的条件下启动过一次。
+
+<div class="treeview">
+* {{file|directory|<''服务端根目录''>}}
+** {{file|directory|codeofconduct}}：[[#服务器行为准则文件|服务器行为准则文件]]目录。
+** {{file|directory|crash-reports}}：[[崩溃报告文件]]目录。
+** {{file|directory|debug}}：各种调试文件的目录。
+** {{file|directory|'''libraries'''}}：游戏运行库目录。
+** {{file|directory|'''logs'''}}：游戏日志目录。
+** {{file|directory|'''versions'''}}：游戏服务端源代码，各个版本的文件位于其下的{{filepath|<''版本''>/server-<''版本''>.jar}}。
+** {{file|file|'''banned-ips.json'''}}：[[封禁列表存储格式|封禁IP列表存储文件]]。
+** {{file|file|'''banned-players.json'''}}：[[封禁列表存储格式|封禁玩家列表存储文件]]。
+** {{file|file|'''eula.txt'''}}：检查玩家是否同意EULA的文件，[[#eula.txt|见下]]。
+** {{file|file|'''ops.json'''}}：[[管理员列表存储格式|管理员列表存储文件]]。
+** {{file|file|'''server.properties'''}}：[[服务端配置文件]]。
+** {{file|file|server-icon.png}}：服务器图标。
+** {{file|file|'''whitelist.json'''}}：[[白名单存储格式|白名单存储文件]]。
+** '''存档文件，见下。'''
+</div>
+
+服务端启动参数<code>--universe</code>决定了存档的位置，默认情况下存档的目录就是服务端根目录，共包括下列文件：
+
+<div class="treeview">
+* {{file|directory|<''服务端存档根目录''>}}
+** {{file|directory|'''world'''}}：服务端存档。存档的实际位置会受到启动参数<code>--world</code>的影响。
+*** 见[[Java版存档格式]]。
+** {{file|file|allowed_symlinks.txt}}：[[信任符号链接列表文件格式|信任符号链接列表文件]]。
+** {{file|file|'''usercache.json'''}}：[[玩家档案缓存存储格式|玩家存档缓存存储文件]]。
+</div>
+
+== 文件行为 ==
+关于特定文件的行为，请参见上文目录结构章节链接指向的对应条目。
+
+=== eula.txt ===
+{{filename|'''eula.txt'''}}是判断玩家是否同意[[EULA]]（Minecraft最终用户许可协议）的文件。
+
+服务端启动时会检查此文件，如果不存在则立刻生成新文件，其内容如下：
+{{syntaxhighlight|lang="properties"|1=
+#By changing the setting below to TRUE you are indicating your agreement to our EULA (https://aka.ms/MinecraftEULA).
+#（时间戳）
+eula=false
+}}
+
+如果最后一行<code>eula=false</code>，则游戏日志会输出<code>You need to agree to the EULA in order to run the server. Go to eula.txt for more info.</code>并中止服务端运行。
+
+如果最后一行<code>eula=true</code>，则检查成功，正常启动服务端。
+
+=== 服务器行为准则文件 ===
+'''服务器行为准则文件'''位于{{filepath|<''服务端根目录''>/codeofconduct/<''文件名''>.txt}}，描述了服务器行为准则。
+
+当服务端配置文件[[服务端配置文件格式#enable-code-of-conduct|<code>enable-code-of-conduct</code>]]属性为<code>true</code>时，服务端会向所有注册表同步完毕的玩家发送服务器准则屏幕，屏幕中的准则内容即来自服务器行为准则文件。
+
+游戏会按照下列顺序获取准则内容：
+* 文件必须以<code>.txt</code>结尾。
+* 如果文件是符号链接，则其指向的文件必须存在，且也是{{filepath|codeofconduct}}目录下的文件。
+* 文件名称均不区分大小写，游戏会自动转为小写格式。
+* 如果存在与客户端语言代码相同名称的准则文件，则读取此文件的内容。
+* 如果不存在与客户端语言代码相同名称的准则文件，则使用美式英语的准则文件（{{filepath|codeofconduct/en_us.txt}}）。
+* 如果不存在美式英语的准则文件，则根据文件的加载顺序选择任意一个准则文件显示。
+
+服务器准则文件使用UTF-8编码，游戏会原样显示其内容，不支持[[格式化代码]]。在此规范下，尽管{{filename|codeofconduct}}目录下的任何文件都可以被游戏加载并显示在屏幕上，但仍然推荐直接使用资源包元数据内的语言代码作为文件名，以防止游戏加载不确定的文件。
+
+== 历史 ==
+{{stub|section=1}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.9|dev=25w34a|加入了服务器行为准则，以及对应的描述文件。}}
+|{{HistoryLine|||dev=25w34a|服务器行为准则文件不再接受格式化代码。}}
+}}
+
+== 导航 ==
+{{navbox Java files}}
+
+[[Category:游戏文件]]
+[[Category:服务器]]

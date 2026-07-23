@@ -1,0 +1,21 @@
+# 页面: 物品堆叠组件/equippable
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%A0%86%E5%8F%A0%E7%BB%84%E4%BB%B6/equippable
+# 分类: 已弃用的模板
+# 抓取时间: 2026-07-14 17:31:52
+# 原始 Wikitext 内容:
+
+<noinclude>{{deprecated|type=模板|historical=1|text=请使用[[编码格式/DataComponent]]代替。}}</noinclude>
+<div class="treeview">
+** {{nbt|compound|minecraft:equippable}} 物品堆叠组件
+*** {{nbt|string}}{{nbt|list|allowed_entities}}：（默认为全部生物）{{json ref|实体类型|tag=1|id_link=实体|tag_link=标签#实体类型}}可以穿戴此物品的生物。
+*** {{nbt|string|asset_id}}：（命名空间ID）物品被穿戴时的[[装备模型]]。如果此值不存在，游戏将不渲染此物品穿戴在生物上的模型。
+*** {{nbt|string|camera_overlay}}：（命名空间ID）当此项存在且物品被玩家穿戴时，玩家第一人称视角将渲染指定的纹理遮罩。此遮罩可以使用多个设置此标签的物品互相叠加，每个物品指定的遮罩都会被渲染，且渲染顺序按照主手、副手、头盔、胸甲、护腿、靴子、身体、鞍的顺序依次叠加渲染。当遮罩纹理渲染时，遮罩纹理被视为'''独立纹理'''，即无法作为动态纹理或GUI纹理渲染，但可以指定纹理过滤方式。
+*** {{nbt|bool|damage_on_hurt}}：（默认为<code>true</code>）生物在受到会影响损害盔甲的伤害时此物品是否会受损而减少耐久。
+*** {{nbt|bool|equip_on_interact}}：（默认为<code>false</code>）使用此物品时，是否可以让被交互的生物在允许的空槽位上穿戴此物品。
+*** {{nbt|string}}{{nbt|compound|equip_sound}}：（默认为<code>item.armor.equip_generic</code>）{{json_ref|声音事件|Java版声音事件|inline=1}}物品被穿戴时的声音。
+**** {{nbt inherit/sound event}}
+*** {{nbt|bool|dispensable}}：（默认为<code>true</code>）是否可以使用[[发射器]]使生物穿戴此物品。如果物品本身有特殊的发射器行为则此项无效。
+*** {{nbt|string|slot|existonsave=1|required=1}}：物品可被穿戴的[[装备槽位]]。可以为<code>mainhand</code>（主手）、<code>offhand</code>（副手）、<code>head</code>（头盔）、<code>chest</code>（胸甲）、<code>legs</code>（护腿）、<code>feet</code>（靴子）、<code>saddle</code>（鞍）和<code>body</code>（身体）。
+*** {{nbt|bool|swappable}}：（默认为<code>true</code>）物品是否可以直接{{ctrl|使用}}穿戴。
+</div><noinclude>
+</noinclude>

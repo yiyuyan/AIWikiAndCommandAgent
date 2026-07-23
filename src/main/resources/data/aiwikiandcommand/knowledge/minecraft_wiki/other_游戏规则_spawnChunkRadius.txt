@@ -1,0 +1,31 @@
+# 页面: 游戏规则/spawnChunkRadius
+# 来源: https://zh.minecraft.wiki/w/%E6%B8%B8%E6%88%8F%E8%A7%84%E5%88%99/spawnChunkRadius
+# 分类: 游戏规则, 覆写自动值的页面, 过时内容
+# 抓取时间: 2026-07-14 17:31:00
+# 原始 Wikitext 内容:
+
+{{Outdated|edition=java}}
+{{Infobox gamerule
+|java-category={{tp|gamerule.category.misc}}
+|type=整型
+|default-value=2
+|java-range={{range|0|32}}
+|nobe=1}}
+'''spawnChunkRadius'''是控制[[出生点区块]]的大小的[[游戏规则]]。
+
+== 行为 ==
+当spawnChunkRadius为0时，出生点区块会被完全禁用。
+
+出生点强加载区块的水平范围为边长为<math>2\times{spawnChunkRadius}-1</math>的正方形，如10代表强加载区块大小为19&times;19。
+
+使用{{cmd|gamerule}}修改出生点区块大小时，会先移除之前出生点区块的加载标签，再为出生点区块添加基础等级<math>32-spawnChunkRadius</math>级的加载标签。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|dev=24w03a|加入了游戏规则spawnChunkRadius。}}
+|{{HistoryLine||1.21.9|dev=25w31a|移除了游戏规则spawnChunkRadius。}}
+}}
+
+== 导航 ==
+{{Navbox gamerules}}

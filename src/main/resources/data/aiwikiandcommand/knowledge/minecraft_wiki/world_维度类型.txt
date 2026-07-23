@@ -1,0 +1,368 @@
+# 页面: 维度类型
+# 来源: https://zh.minecraft.wiki/w/%E7%BB%B4%E5%BA%A6%E7%B1%BB%E5%9E%8B
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:26
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+'''维度类型（Dimension Type）'''控制了维度的环境光照、建筑高度等诸多行为。'''维度类型定义文件'''是维度类型在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+维度类型在游戏内使用<code>DIMENSION_TYPE</code>注册表，数据包路径为{{filepath|dimension_type}}，即所有维度类型定义文件都需要在{{filepath|data/<''命名空间''>/dimension_type}}目录下定义，维度类型标签则需要在{{filepath|data/<''命名空间''>/tags/dimension_type}}目录下定义。
+
+维度类型定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|boolean|has_fixed_time}}：（默认为<code>false</code>）维度是否逻辑上拥有昼夜更替。详见下文{{slink||has_fixed_time}}。
+** {{nbt|boolean|has_skylight|required=1}}：维度是否具有天空光照，详见下文{{slink||has_skylight}}。
+** {{nbt|boolean|has_ceiling|required=1}}：维度是否具有天花板，详见下文{{slink||has_ceiling}}。
+** {{nbt|boolean|has_ender_dragon_fight|required=1}}：此维度是否可以启动[[末影龙战斗]]。
+** {{nbt|float|ambient_light|required=1}}：维度的环境光照，用于生物生成行走目标值、着色器[[着色器#lightmap|lightmap]]等计算。在原版着色器定义下此值应只在0至1之间取值。
+** {{nbt|double|coordinate_scale|required=1}}：（{{interval|left=0.00001|right=30000000.0}}）维度的坐标缩放值，影响下界传送门的传送和{{cmd|execute in ...}}的行为。
+** {{nbt|string}}{{nbt|list|infiniburn|required=1}}：维度内[[火]]能在哪些方块上永久燃烧。可以为一个方块ID、一个方块标签的ID或一个方块ID的列表。
+** {{nbt|int|min_y|required=1}}：（{{interval|left=-2032|right=2031}}，必须为16的倍数）维度可以存在方块的最低高度。因值必须为16的倍数，故此字段可用最大值为2016。
+** {{nbt|int|height|required=1}}：（{{interval|left=16|right=2032 - {{nbt|int|min_y|required=1}}}}，必须为16的倍数）维度可以存在方块的总高度。
+** {{nbt|int|logical_height|required=1}}：（{{interval|left=0|right={{nbt|int|height|required=1}}}}）维度的逻辑高度，[[紫颂果]]的传送和游戏创建的下界传送门不会超过此高度。
+** {{nbt|int|monster_spawn_block_light_limit|required=1}}：（{{interval|left=-0|right=15}}）怪物生成位置的最大[[方块光照]]。
+** {{nbt|int}}{{nbt|compound|monster_spawn_light_level|required=1}}：（{{interval|left=-0|right=15}}）怪物生成位置的最大光照，使用[[内部天空光照]]计算，但雷暴时天空光照视为天空光照减10。若指定一个范围，则游戏每次尝试生成时都会采样一次。
+*** {{nbt inherit/int provider}}
+** {{nbt|compound|attributes}}：维度的环境属性映射。如果有多个相同的环境属性，则游戏只使用最后一个值。
+*** {{nbt|any}}{{nbt|compound|<''环境属性ID''>}}：一项环境属性及其对应的值，详见[[环境属性]]。
+** {{nbt|string}}{{nbt|list|timelines}}：维度活动的[[时间线]]。可以为时间线的ID、时间线的标签或一个时间线ID的{{tr|列表|串列}}。如果多个时间线对同一个环境属性的变化进行了定义，则游戏只使用最后一个时间线定义的环境属性。
+** {{nbt|string|skybox}}：（默认为<code>overworld</code>）维度的天空盒。取值可以为<code>none</code>（无效果）、<code>end</code>（每隔一段时间出现[[末地闪光]]，使用世界时钟时间计算）、<code>overworld</code>（天空可以渲染太阳、月亮、星星等天体和日出日落效果）。
+** {{nbt|string|cardinal_light}}：（默认为<code>default</code>）维度的方块光照类型，取值可以为<code>default</code>和<code>nether</code>。与默认值相比，<code>nether</code>会使{{nbt|boolean|shade}}为<code>false</code>的方块的顶面和底面亮度降低10%而不是0和50%，而流体和{{nbt|boolean|shade}}为<code>true</code>的方块的所有面的亮度降低10%，详见{{slink|模型|模型元素}}。
+** {{nbt|string|default_clock}}：（命名空间ID）此维度所使用的[[世界时钟]]。不存在时在此维度不存在世界时钟。
+</div>
+
+== 定义行为 ==
+维度类型仅在服务端启动时加载一次，使用{{cmd|reload}}命令不可以使维度类型定义被重新加载，而必须重启服务端。
+
+尽管游戏支持在数据包和{{filepath|[[level.dat]]}}中对维度类型内联定义，但游戏不支持加载内联维度类型的维度。<ref>{{bug|MC-252538|||WAI}}</ref>
+
+维度类型控制了维度内所有与[[世界生成]]无关的效果，包括建筑高度限制、环境效果和部分方块或生物的行为等。
+
+=== 维度行为 ===
+下列为维度类型里较复杂的维度效果，对应的游戏行为均假定已满足其他条件。其余不由维度类型控制的维度行为见{{slink||其他行为}}。
+
+{{nbt|boolean|has_fixed_time}}{{anchor|has_fixed_time}}控制了维度逻辑上是否拥有[[昼夜更替]]。注意：此值不控制太阳的东升西落、亮度的昼夜变化等视觉上的行为，它仅会使部分生物对昼夜更替的判定失效，例如：
+* 玩家在任意游戏时间{{ctrl|使用}}床时均会尝试入睡。（本质上是影响环境属性<code>gameplay/bed_rule</code>的<code>when_dark</code>条件）
+* [[溺尸]]始终保持敌对状态。
+* [[流浪商人]]不再饮用[[隐身药水]]或[[奶桶]]。
+* [[灾厄巡逻队]]始终可以尝试生成。
+* [[末影人]]始终不会增加随机传送的概率。
+* [[狐狸]]始终不会前往村庄或尝试睡觉。
+* [[僵尸围城]]始终可以尝试生成。
+* 部分[[亡灵生物]]不会尝试躲避阳光。
+
+{{nbt|boolean|has_skylight}}{{anchor|has_skylight}}控制了下列行为：
+* 是否存在[[天空光照]]。
+** 同理影响[[阳光探测器]]的工作等。
+* 是否可以生成[[幻翼]]。
+* 是否拥有[[天气]]变化。
+
+{{nbt|boolean|has_ceiling}}{{anchor|has_ceiling}}控制了下列行为：
+* 初始动物生成寻找可生成方块时，其不会在对应的高度图选择方块，而是在对应高度图的高度上向下搜寻到首个上方为空气的非空气方块上选择方块。
+* 玩家是否倾向于生成在Y=64上，而不是生成在最高的方块上。但如果世界是超平坦世界，依然会生成在最顶层。
+* 影响部分[[地图存储格式#地图更新行为|地图更新行为]]。
+* 是否不拥有天气变化。
+
+=== 其他行为 ===
+一些维度行为被游戏硬编码，无法被修改。
+
+为便于描述，规定<code>overworld</code>维度为主世界维度，<code>the_nether</code>维度为下界维度，<code>the_end</code>维度为末地维度。游戏以它们的ID为判断依据。
+* 玩家总是生成在主世界。
+* [[下界传送门（方块）|下界传送门]]在非下界维度时会尝试将实体按维度缩放传送到下界维度，如果世界不存在下界维度则什么也不做；在下界维度时会将实体按维度缩放传送到主世界维度。
+* [[末地传送门（方块）|末地传送门]]在非末地维度时会尝试将实体传送到末地维度，如果世界不存在末地维度则什么也不做；在末地维度时会将实体传送到主世界维度。
+* 在末地维度的[[霜冰]]依赖[[方块光照]]而非[[内部天空光照]]融化。
+* 末地维度永远不会拥有天气。
+* 下界维度的地图的玩家图标会随机旋转。
+
+== 内置维度类型 ==
+游戏本体内置了四种维度类型：
+* <code>overworld</code>：[[主世界]]。
+* <code>the_nether</code>：[[下界]]。
+* <code>the_end</code>：[[末地]]。
+* <code>overworld_caves</code>：主世界洞穴。未被直接使用，只用于先前创建的洞穴世界类型的世界。
+
+以下为各内置维度类型数据的默认值：
+{| class="wikitable"
+! 属性
+! 主世界
+! 下界
+! 末地
+! 主世界洞穴
+|-
+| {{nbt|boolean|has_fixed_time}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+|-
+| {{nbt|boolean|has_skylight}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|yes|true}}
+|-
+| {{nbt|boolean|has_ceiling}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+|-
+| {{nbt|boolean|has_ender_dragon_fight}}
+| {{tc|no|false}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+|-
+| {{nbt|float|ambient_light}}
+| 0.0
+| 0.1
+| 0.25
+| 0.0
+|-
+| {{nbt|double|coordinate_scale}}
+| 1.0
+| 8.0
+| 1.0
+| 1.0
+|-
+| {{nbt|int|min_y}}
+| -64
+| 0
+| 0
+| -64
+|-
+| {{nbt|int|height}}
+| 384
+| 256
+| 256
+| 384
+|-
+| {{nbt|int|logical_height}}
+| 384
+| 128
+| 256
+| 384
+|-
+| {{nbt|int}}{{nbt|compound|monster_spawn_light_level}}
+| 0-7
+| 7
+| 15
+| 0-7
+|-
+| {{nbt|int|monster_spawn_block_light_limit}}
+| 0
+| 15
+| 0
+| 0
+|-
+| {{nbt|string|infiniburn}}
+| #infiniburn_overworld
+| #infiniburn_nether
+| #infiniburn_end
+| #infiniburn_overworld
+|-
+| {{nbt|compound|attributes}}
+|{{collapseH}}<syntaxhighlight lang="json">{
+  "minecraft:audio/ambient_sounds": {
+    "mood": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    }
+  },
+  "minecraft:audio/background_music": {
+    "creative": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "sound": "minecraft:music.creative"
+    },
+    "default": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "sound": "minecraft:music.game"
+    }
+  },
+  "minecraft:gameplay/bed_rule": {
+    "can_set_spawn": "always",
+    "can_sleep": "when_dark",
+    "error_message": {
+      "translate": "block.minecraft.bed.no_sleep"
+    }
+  },
+  "minecraft:gameplay/nether_portal_spawns_piglin": true,
+  "minecraft:gameplay/respawn_anchor_works": false,
+  "minecraft:visual/ambient_light_color": "#0a0a0a",
+  "minecraft:visual/cloud_color": "#ccffffff",
+  "minecraft:visual/cloud_height": 192.33,
+  "minecraft:visual/fog_color": "#c0d8ff",
+  "minecraft:visual/sky_color": "#78a7ff"
+}</syntaxhighlight>{{collapseE}}
+|{{collapseH}}<syntaxhighlight lang="json">{
+  "minecraft:gameplay/bed_rule": {
+    "can_set_spawn": "never",
+    "can_sleep": "never",
+    "explodes": true
+  },
+  "minecraft:gameplay/can_start_raid": false,
+  "minecraft:gameplay/fast_lava": true,
+  "minecraft:gameplay/piglins_zombify": false,
+  "minecraft:gameplay/respawn_anchor_works": true,
+  "minecraft:gameplay/sky_light_level": 4.0,
+  "minecraft:gameplay/snow_golem_melts": true,
+  "minecraft:gameplay/water_evaporates": true,
+  "minecraft:visual/ambient_light_color": "#302821",
+  "minecraft:visual/default_dripstone_particle": {
+    "type": "minecraft:dripping_dripstone_lava"
+  },
+  "minecraft:visual/fog_end_distance": 96.0,
+  "minecraft:visual/fog_start_distance": 10.0,
+  "minecraft:visual/sky_light_color": "#7a7aff",
+  "minecraft:visual/sky_light_factor": 0.0
+}</syntaxhighlight>{{collapseE}}
+|{{collapseH}}<syntaxhighlight lang="json">{
+  "minecraft:audio/ambient_sounds": {
+    "mood": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    }
+  },
+  "minecraft:audio/background_music": {
+    "default": {
+      "max_delay": 24000,
+      "min_delay": 6000,
+      "replace_current_music": true,
+      "sound": "minecraft:music.end"
+    }
+  },
+  "minecraft:gameplay/bed_rule": {
+    "can_set_spawn": "never",
+    "can_sleep": "never",
+    "explodes": true
+  },
+  "minecraft:gameplay/respawn_anchor_works": false,
+  "minecraft:visual/ambient_light_color": "#3f473f",
+  "minecraft:visual/fog_color": "#181318",
+  "minecraft:visual/sky_color": "#000000",
+  "minecraft:visual/sky_light_color": "#ac60cd",
+  "minecraft:visual/sky_light_factor": 0.0
+}</syntaxhighlight>{{collapseE}}
+|{{collapseH}}<syntaxhighlight lang="json">{
+  "minecraft:audio/ambient_sounds": {
+    "mood": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    }
+  },
+  "minecraft:audio/background_music": {
+    "creative": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "sound": "minecraft:music.creative"
+    },
+    "default": {
+      "max_delay": 24000,
+      "min_delay": 12000,
+      "sound": "minecraft:music.game"
+    }
+  },
+  "minecraft:gameplay/bed_rule": {
+    "can_set_spawn": "always",
+    "can_sleep": "when_dark",
+    "error_message": {
+      "translate": "block.minecraft.bed.no_sleep"
+    }
+  },
+  "minecraft:gameplay/nether_portal_spawns_piglin": true,
+  "minecraft:gameplay/respawn_anchor_works": false,
+  "minecraft:visual/ambient_light_color": "#0a0a0a",
+  "minecraft:visual/cloud_color": "#ccffffff",
+  "minecraft:visual/cloud_height": 192.33,
+  "minecraft:visual/fog_color": "#c0d8ff",
+  "minecraft:visual/sky_color": "#78a7ff"
+}</syntaxhighlight>{{collapseE}}
+|-
+| {{nbt|string|timelines}}
+| #in_overworld
+| #in_nether
+| #in_end
+| #in_overworld
+|-
+| {{nbt|string|skybox}}
+| overworld
+| none
+| end
+| overworld
+|-
+| {{nbt|string|cardinal_light}}
+| none
+| nether
+| none
+| none
+|-
+| {{nbt|string|default_clock}}
+| overworld
+| none
+| the_end
+| overworld
+|}
+
+== 历史 ==
+{{see also|维度类型/1.21.11前}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=pre1|向数据包中加入了维度类型。}}
+|{{HistoryLine||1.16.2|dev=pre1|维度类型从{{filepath|-{}-data/minecraft/dimension_type/<''命名空间''>/<''路径''>}}移动到{{filepath|-{}-data/<''命名空间''>/dimension_type/<''路径''>}}，和其他资源保持一致。}}
+|{{HistoryLine|||dev=pre2|加入了{{nbt|float|coordinate_scale}}字段。
+|移除了{{nbt|bool|shrunk}}字段。}}
+|{{HistoryLine||1.17|dev=20w49a|加入了{{nbt|integer|min_y}}和{{nbt|integer|height}}字段。}}
+|{{HistoryLine|||dev=21w05a|将{{nbt|integer|min_y}}字段的有效区间从-2048到2047调整为-2032到2031。
+|将{{nbt|integer|height}}字段的有效区间从0到4096调整为16到4064。}}
+|{{HistoryLine||1.18.2|dev=22w06a|现在{{nbt|string|infiniburn}}的值需要有<code>#</code>前缀。}}
+|{{HistoryLine||1.19|dev=22w11a|现在游戏会对维度进行验证，若使用了内联的维度类型将不再尝试加载。}}
+|{{HistoryLine|||dev=pre1|加入了{{nbt|int|monster_spawn_block_light_limit}}和{{nbt|int}}{{nbt|compound|monster_spawn_light_level}}字段。}}
+|{{HistoryLine||1.21.4|dev=pre1|现在{{nbt|boolean|natural}}不再控制时钟和指南针是否不会随机转动。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了{{nbt|int|cloud_height}}字段用以控制维度的云层高度，此前这项硬编码于{{nbt|string|effects}}内。}}
+|{{HistoryLine||1.21.11|dev=25w42a|加入了{{nbt|compound|attributes}}以指定维度环境属性。
+|移除了{{nbt|boolean|ultrawarm}}，其功能由环境属性<code>visual/default_dripstone_particle</code>、<code>gameplay/water_evaporates</code>和<code>gameplay/fast_lava</code>取代。
+|移除了{{nbt|boolean|bed_works}}，其功能由环境属性<code>gameplay/bed_rule</code>取代。
+|移除了{{nbt|boolean|respawn_anchor_works}}，其功能由环境属性<code>gameplay/respawn_anchor_works</code>取代。
+|移除了{{nbt|int|cloud_height}}，其功能由环境属性<code>visval/cloud_height</code>取代。
+|移除了{{nbt|boolean|piglin_safe}}，其功能由环境属性<code>gameplay/piglins_zombify</code>取代。
+|移除了{{nbt|boolean|has_raids}}，其功能由环境属性<code>gameplay/can_start_raid</code>取代。
+|将{{nbt|boolean|natural}}控制僵尸猪灵生成的行为转移到环境属性<code>gameplay/nether_portal_spawns_piglin</code>。
+|将{{nbt|string|effects}}控制迷雾效果的行为转移到环境属性<code>visual/extra_fog</code>。}}
+|{{HistoryLine|||dev=25w45a|加入了{{nbt|string|timeline}}、{{nbt|boolean|has_fixed_time}}、{{nbt|string|skybox}}和{{nbt|string|cardinal_light}}。
+|移除了{{nbt|boolean|natural}}，其剩余功能被环境属性<code>gameplay/eyeblossom_open</code>和<code>gameplay/creaking_active</code>取代。
+|移除了{{nbt|long|fixed_time}}，其控制游戏行为的行为被{{nbt|boolean|has_fixed_time}}取代，而所有与昼夜更替相关的视觉渲染功能被转移到环境属性。
+|移除了{{nbt|string|effects}}，其剩余功能已经被拆分为{{nbt|string|skybox}}和{{nbt|string|cardinal_light}}。}}
+|{{HistoryLine||26.1|dev=snapshot-3|加入了{{nbt|string|default_clock}}字段。}}
+|{{HistoryLine|||dev=snapshot-4|现在<code>end</code>天空盒下末地闪光的计算时间使用世界时钟时间而非游戏时间。}}
+|{{HistoryLine|||dev=snapshot-6|加入了{{nbt|boolean|has_ender_dragon_fight}}字段以替换<code>the_end</code>维度的维度类型是否是<code>the_end</code>的硬编码检查。}}
+|{{HistoryLine||26.2|dev=snapshot-1|<code>infiniburn</code>字段现在也接受方块ID和方块ID的列表，且不再接受不存在的方块标签。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 外部链接 ==
+* [https://misode.github.io/dimension-type/ misode.github.io上的维度类型生成器]
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Dimensionsarten]]
+[[en:Dimension type]]
+[[fr:Type de dimension]]
+[[ja:ディメンションタイプ]]
+[[pt:Tipo de dimensão]]

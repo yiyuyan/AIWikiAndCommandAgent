@@ -1,0 +1,103 @@
+# 页面: 命令/gametest
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/gametest
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{redirect|Gametest||游戏测试}}
+{{for|{{el|je}}中功能相似的命令|命令/test}}
+{{Stub|缺少示例}}
+{{exclusive|bedrock|education}}
+{{Infobox command
+|name=gametest
+|oplevel=1
+|cheat=y
+}}
+管理和运行[[游戏测试#基岩版|游戏测试框架]]。
+
+== 语法 ==
+: <code>gametest runthis</code>
+:: 执行或重新执行15格半径内的测试结构。
+: <code>gametest run <testName: string> <stopOnFailure: Boolean> <repeatCount: int> [rotationSteps: int]</code>
+: <code>gametest run <testName: string> [rotationSteps: int]</code>
+:: 执行一个特定的测试。
+: <code>gametest runsetuntilfail [tag: string] [rotationSteps: int]</code>
+:: 创建和执行所有测试，直到某个执行失败。
+: <code>gametest runset [tag: string] [rotationSteps: int]</code>
+:: 创建和执行所有测试。
+: <code>gametest clearall</code>
+:: 清除所有的测试。
+: <code>gametest pos</code>
+:: 在200格半径范围内寻找最近的测试结构。
+: <code>gametest stopall</code>
+:: 停止执行所有测试。
+: <code>gametest create <testName: string> [width: int] [height: int] [depth: int]</code>
+:: 创建测试。
+: <code>gametest runthese</code>
+:: 在200格半径范围内执行测试。
+
+== 参数 ==
+{{argument|be=1|testName: string|string}}
+: 指定测试的名称。
+: {{arg desc|be=string}}
+
+{{argument|be=1|repeatCount: int|int}}
+: 指定测试的执行次数。
+: {{arg desc|be=int}}且必须大于0。
+
+{{argument|be=1|stopOnFailure: Boolean|enum}}
+: {{arg desc|be=bool}}
+
+{{argument|be=1|rotationSteps: int|int}}
+: 指定测试的旋转角度。
+: 1为顺时针旋转90度；2为顺时针旋转180度；3为顺时针旋转270度。其他值不会使测试旋转。
+:{{arg desc|be=int}}
+
+{{argument|be=1|tag: string|string}}
+: 指定要执行的测试的名称。
+: {{arg desc|be=string}}
+
+{{argument|be=1|width: int|int}}
+: 指定结构的X轴大小。默认为5。
+: {{arg desc|be=int}}
+
+{{argument|be=1|height: int|int}}
+: 指定结构的Y轴大小。默认为5。
+: {{arg desc|be=int}}
+
+{{argument|be=1|depth: int|int}}
+: 指定结构的Z轴大小。默认为5。
+: {{arg desc|be=int}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|命令不完整或参数未正确指定||unparseable}}
+{{Result table|cmd=/gametest pos|执行者不是实体||fail}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.210|dev=1.16.210.60|exg=gametest_v1|加入了{{cmd|gametest|link=none}}。}}
+|{{HistoryLine||1.17.0|dev=1.16.230.50|exg=gametest_v1|将{{cmd|gametest runall|link=none}}命令重命名为{{cmd|gametest runset|link=none}}。}}
+|{{HistoryLine||1.18.30|dev=1.18.20.27|exg=gametest_v2|移除了{{cmd|gametest clearall|link=none}}命令的{{cd|radius}}参数。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.22|{{cmd|gametest|link=none}}不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.22|加入了{{cd|d=pretty|runsetuntilfail|stopall}}语法。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/gametest]]
+[[en:Commands/gametest]]
+[[ja:コマンド/gametest]]
+[[lzh:令/gametest]]
+[[pt:Comandos/gametest]]
+[[ru:Команды консоли/gametest]]

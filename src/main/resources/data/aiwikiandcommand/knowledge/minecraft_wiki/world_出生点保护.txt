@@ -1,0 +1,39 @@
+# 页面: 出生点保护
+# 来源: https://zh.minecraft.wiki/w/%E5%87%BA%E7%94%9F%E7%82%B9%E4%BF%9D%E6%8A%A4
+# 分类: 
+# 抓取时间: 2026-07-14 17:20:31
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+'''出生点保护（Spawn protection）'''是阻止玩家在[[世界出生点]]周围改变[[方块]]的机制。
+
+== 描述 ==
+出生点保护仅存在于专用服务器中，不适用于[[单人游戏]]或局域网游戏中。
+
+出生点保护区域是正方形的区域，忽略Y轴坐标。{{filename|[[server.properties]]}}文件中的<code>spawn-protection</code>字段决定其边长，边长为 <math>2x+1</math>。例如设置为1，会保护以出生点为中心的3×3的区域。设置为0或负值都将禁用出生点保护。
+
+如果服务器设有[[管理员]]（{{filename|[[ops.json]]}}文件中有玩家），则出生点保护对管理员不生效。如果服务器未设有管理员，则所有玩家皆不受出生点保护影响。
+
+玩家可以间接地改变保护区域内的方块，例如使用[[活塞]]、[[发射器]]、[[TNT]]等。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.3|添加了出生点保护。半径始终为16（保护33×33区域）。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w40a|{{filename|[[server.properties]]}}中加入了<code>spawn-protection</code>。
+|如果服务器没有任何管理员，则出生点保护不再启用。}}
+|{{HistoryLine||1.5|dev=13w05a|现在将<code>spawn-protection</code>设置为0会禁用出生点保护，而不是保护1×1的区域。<ref>{{bug|MC-666|||Fixed}}</ref>}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[en:Spawn protection]]
+[[fr:Zone protégée]]
+[[ja:リスポーン地点の保護]]
+[[pt:Proteção de geração]]
+[[ru:Защита спауна]]

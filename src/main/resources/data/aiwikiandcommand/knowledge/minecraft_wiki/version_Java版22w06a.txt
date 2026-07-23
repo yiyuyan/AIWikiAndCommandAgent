@@ -1,0 +1,99 @@
+# 页面: Java版22w06a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8822w06a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=22w06a
+|image=22w06a.png
+|image2=Java Edition 22w06a Simplified.png\Java Edition 22w06a Traditional.png\Java Edition 22w06a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2022年2月9日
+|jsonhash=3c6e119c0ff307accf31b596f9cd47ffa2ec6305
+|clienthash=b863174b1147a6a9d9ab4922d9ced4eee19452ac
+|clientmap=c0c33fbe60c9ba2f4a92bc831e52aadb46bb2651
+|serverhash=60c757a63f21877f8b053904ac76d04ff3cb76ef
+|servermap=e39e107d5387eb76fb1f68deb7a957e01be83369
+|parent=1.18.2
+|prevparent=1.18.1
+|prev=22w05a
+|next=22w07a
+|nextparent=1.19
+}}<onlyinclude>{{tr|mode=H|韩国|南韓}}
+
+'''22w06a'''是[[Java版1.18.2]]的第3个快照，发布于2022年2月9日<ref>{{snap|22w06a|February 9, 2022}}</ref>，引入了针对韩国玩家的合规性要求，加入了“通用标签”，修改了超平坦世界预设的生成，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''合规性要求'''
+* 根据韩国游戏相关法律要求，为韩国玩家加入了计时器，用于提醒其适时休息。其他地区的玩家不受此限制。
+
+'''[[资源包]]'''
+* 加入了与新合规性要求有关的<samp>regional_compliancies.json</samp>，位于<samp>assets/[命名空间]</samp>下。
+
+'''[[Java版标签|标签]]'''
+* 现在可以为所有在注册表（Registry）中出现的类型定义标签。在此之前，只有方块、物品、液体、实体类型、游戏事件以及函数可以定义标签。
+** 新类型的标签在数据包中存储于其各自的文件夹中（但原版数据包尚未使用这些文件夹），这些文件夹的名称基于这些新类型在<samp>registries.json</samp>中的名称，例如：
+*** 药水标签：<samp>/data/[命名空间]/tags/potion</samp>
+*** 生物群系标签：<samp>/data/[命名空间]/tags/worldgen/biome</samp>
+** 旧类型的标签在数据包中的存储位置尚未更改（即使它们目前使用了不符合新命名规则的复数名称）。
+
+== 更改 ==
+=== 世界生成 ===
+'''[[自定义世界生成]]'''
+* worldgen结构中以前只能使用元素ID{{tr|列表|串列}}的一些字段现在可以使用标签。
+** 这些字段现在可以接受<code>[id, ...]</code>、<code>id</code>（<code>[id]</code>的简写）以及<code>#tag</code>。
+** 更改了的字段如下：
+*** <code>feature.glow_lichen</code>配置中的<code>can_be_placed_on</code>
+*** <code>feature.spring_feature</code>配置中的<code>valid_blocks</code>
+*** <code>feature.simple_random_selector</code>配置中的<code>features</code>
+*** <code>block_predicate_type.matching_blocks</code>中的<code>blocks</code>
+*** <code>block_predicate_type.matching_fluids</code>中的<code>fluids</code>
+*** <code>biome</code>中的<code>features</code>的内部{{tr|列表|串列}}和<code>carvers</code>的映射值
+*** <code>biome_source.checkerboard</code>中的<code>biomes</code>
+* 一些标签字段现在要求在ID前面加上<code>#</code>，但是它们暂不接受元素{{tr|列表|串列}}：
+** <code>dimension_type</code>中的<code>infiniburn</code>
+** <code>feature.geode</code>配置中的<code>blocks.cannot_replace</code>和<code>blocks.invalid_blocks</code>
+** <code>feature.vegetation_patch</code>和<code>feature.waterlogged_vegetation_patch</code>配置中的<code>replaceable</code>
+** <code>feature.root_system</code>配置中的<code>root_replaceable</code>
+** <code>structure_processor.protected_blocks</code>中的<code>value</code>
+* 噪声设置中的结构字段不再将要塞与非要塞结构相独立，每种结构在JSON中的级别现在都是平等的，用其中的<code>type</code>指定结构的类型，可以是以下两种：
+** <code>concentric_rings</code>，适用于要塞结构。
+** <code>random_spread</code>，适用于非要塞结构。
+
+'''[[超平坦世界]]'''
+* 更改了“水世界”预设，将原先的[[沙子]]替换成[[沙砾]]，并在[[基岩]]层上方增加了64层[[深板岩]]，以解决此预设世界中[[海底神殿]]的生成问题。
+
+== 修复 ==
+{{fixes|fixedin=22w06a|showdesc=1
+|;1.18前正式版的漏洞
+|105317|结构方块加载时不会正确旋转实体。
+|129652|长文件名的存档备份后弹出的提示中显示的名称被截断。
+|138717|{{cmd|locate|link=none}}不能定位超平坦世界中的特定结构。
+|192361|即使要塞已生成，{{cmd|locate stronghold|link=none}}命令也不能用于定位要塞。
+|232822|一些结构不能在超平坦世界中生成。
+|;1.18的漏洞
+|238696|在超平坦世界中使用{{cmd|locate stronghold|link=none}}命令或投掷末影之眼，会找到一个实际不存在要塞的位置。
+|239708|1.18更新时，“水世界”超平坦预设并没有被一起修改。
+|;1.18.1的漏洞
+|245937|玩家穿着鞘翅，并使用烟花火箭向上推进时产生的粒子会闪烁。
+|247871|<code>Cannot invoke "com.mojang.datafixers.util.Either.left()" because "$$6" is null</code>。
+|248106|站在玩家身上的鹦鹉会由于玩家使用附有激流魔咒的三叉戟而死亡。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:22w06a]]
+[[en:Java Edition 22w06a]]
+[[es:Java Edition 22w06a]]
+[[fr:Édition Java 22w06a]]
+[[ja:Java Edition 22w06a]]
+[[ko:Java Edition 22w06a]]
+[[pt:Edição Java 22w06a]]
+[[ru:22w06a (Java Edition)]]

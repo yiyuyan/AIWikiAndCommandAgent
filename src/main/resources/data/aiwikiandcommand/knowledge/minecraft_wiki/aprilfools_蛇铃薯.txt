@@ -1,0 +1,131 @@
+# 页面: 蛇铃薯
+# 来源: https://zh.minecraft.wiki/w/%E8%9B%87%E9%93%83%E8%96%AF
+# 分类: 
+# 抓取时间: 2026-07-14 17:35:34
+# 原始 Wikitext 内容:
+
+{{about|游戏内显示名称为“马铃薯”的物品|正常的马铃薯|马铃薯}}{{move|烈毒马铃薯}}{{tr|mode=H|蛇铃薯|蛇鈴薯|薯仔蛇}}
+{{Joke feature|update=24w14potato}}
+{{Infobox item
+|group1={{tr|蛇铃薯|蛇鈴薯|薯仔蛇}}
+|1-1=Potato.png
+|group2=烈毒马铃薯
+|2-1=Venomous Potato.png
+|invimage=Potato
+|invimage2=[烈毒马铃薯]Venomous Potato
+|nobe=1
+|renewable=是
+|maxstack=16
+|creative-tab=马铃薯（Potatoes）
+|item-id-raw=snektato}}
+'''蛇铃薯（Snektato）'''<ref group="注">显示名称为“Potato”，但ID是<code>snektato</code>。</ref>是一种食用后会变为'''烈毒马铃薯（Venomous Potato）'''的物品。
+
+== 获取 ==
+=== 生物掉落物 ===
+{{DropTable|name=蛇铃薯|edition=java|mobdrop=1|nosource=1
+|{{DropLine|name=蝙薯|image=Batato|quantity=1|dropchance=0.1|multiplychance=1/2}}
+}}
+
+=== 马铃薯植株 ===
+挖掘[[马铃薯植株]]时有2%的概率掉落蛇铃薯，不受[[时运]]魔咒影响。
+
+== 用途 ==
+长按{{ctrl|使用}}键可以食用蛇铃薯，食用时长为{{convert|20}}。食用后玩家不会回复[[饥饿值]]与[[饱和度]]。
+
+首次食用蛇铃薯后，整叠物品变为烈毒马铃薯（仅改变显示名称和纹理，数据值仍为<code>snektato</code>）。
+
+食用烈毒马铃薯会受到{{hp|2}}魔法伤害，以及获得6秒（普通）或14秒（困难）的[[中毒]]效果，同时发出[[蜘蛛]]的嘶嘶声，但不消耗物品。
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|edition=java
+|showforms=y
+|generatetranslationkeys=y
+|displayname={{ItemSprite|Potato|text=-{}-Potato|link=none}}<br>{{ItemSprite|venomous potato|text=Venomous Potato|link=none}}
+|nameid=snektato
+|translationkey=item.minecraft.snektato,item.minecraft.snektato.revealed
+|form=item
+|foot=1}}
+
+=== 物品数据 ===
+{{see also|物品格式}}
+
+{| class="" style="width:100%"
+| style="padding:0;" |
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;background-color: var(--custom-nbt-inherit-color);"
+|-
+! style="text-align:left;" | 默认[[数据组件]]结构和字段<span>[</span>[[编码格式/DataComponent|源页面]]<span>]</span>
+|-
+|
+<div class="treeview">
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="物品共通组件">物品共通组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="物品共通组件">
+** {{nbt|compound}}{{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|list|modifiers}}：提供的属性修饰符。
+**** {{nbt|compound}}：一个修饰符。
+***** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+***** {{nbt|string|name|existonsave=1|required=1}}：当前[[属性修饰符]]的名称。
+***** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+***** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+***** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+***** {{nbt|int array|uuid|existonsave=1|required=1}}：当前属性修饰符的UUID。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示属性修饰符的提示框。
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|compound|levels}}：魔咒数据。
+**** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示魔咒的提示框。
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}：（[[文本组件]]）一行描述信息。
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+</div>
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="该物品的其他组件">该物品的其他组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="该物品的其他组件">
+** {{nbt|compound|minecraft:snek}} 数据组件
+*** {{nbt|boolean|revealed|existonsave=1|required=1}}：（默认为<samp>false</samp>）此蛇铃薯的物品堆叠是否已被使用过。若蛇铃薯初始不存在此组件，则使用后会自动添加此组件，并将此值设为<samp>true</samp>。
+</div>
+</div>
+|}
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;"
+|-
+! style="text-align:left;" | JSON
+|-
+|
+<syntaxhighlight copy="1" lang="json">{
+    "minecraft:enchantments": {
+        "levels": {}
+    },
+    "minecraft:attribute_modifiers": {
+        "modifiers": []
+    },
+    "minecraft:lore": [],
+    "minecraft:max_stack_size": 64,
+    "minecraft:repair_cost": 0,
+    "minecraft:rarity": "common",
+    "minecraft:snek" : {
+        "revealed": false
+    }
+}</syntaxhighlight>
+|}
+|}
+
+在默认组件的基础上，蛇铃薯使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt|compound|minecraft:snek}} 数据组件
+*** {{nbt|boolean|revealed|existonsave=1|required=1}}：（默认为<samp>false</samp>）此蛇铃薯的物品堆叠是否已被使用过。若蛇铃薯初始不存在此组件，则使用后会自动添加此组件，并将此值设为<samp>true</samp>。
+</div>
+
+== 注释 ==
+{{reflist|group=注}}
+
+== 导航 ==
+{{Navbox jokes|24w14potato}}
+
+[[Category:物品]]
+
+[[en:Venomous Potato]]
+[[ja:Venomous Potato]]

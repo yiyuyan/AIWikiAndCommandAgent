@@ -1,0 +1,149 @@
+# 页面: Java版14w10a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w10a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:11
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=14w10a
+|image=14w10a.png
+|image2=Java Edition 14w10a Simplified.png\Java Edition 14w10a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年3月6日
+|jsonhash=f857660a1be0a034e58e79bce8acfd846fd38cd2
+|clienthash=bc38e1cc8db9df50d0b5a1a68b74ec1d19450728
+|serverhash=03503dc8c3f615bf8b65d8e1ebbf923e81162e3e
+|exehash=16c8aa300b49f7d4b41553e70f57e7cfa7366acf
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w08a
+|next=14w10b
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w10a'''是[[Java版1.8]]的第14个快照，发布于2014年3月6日<ref>{{cite|url=https://web.archive.org/web/20140307083916/https://mojang.com/2014/03/minecraft-snapshot-14w10a/|title=Minecraft snapshot 14w10a|author=Dinnerbone|website=Mojang.com|date=Mar 6, 2014}}</ref>，加入了新的游戏规则、闪烁标语和统计信息，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|gamerule}}'''
+* 加入了<code>showDeathMessages</code>参数。
+** 切换死亡消息是否会在聊天内出现。
+
+=== 常规 ===
+'''[[闪烁标语]]'''
+* “So sweet, like a nice bon bon!”
+* “Popping tags!”
+
+'''[[统计]]'''
+* <code>stat.crouchOneCm</code>
+** 记录玩家在潜行时移动了多少{{tr|厘米|公分|厘米}}。
+* <code>stat.sprintOneCm</code>
+** 记录玩家在疾跑时移动了多少{{tr|厘米|公分|厘米}}。
+* <code>stat.timeSinceDeath</code>
+** 记录了从上次死亡后过了多长时间（单位为[[刻]]）。
+
+== 更改 ==
+=== 方块 ===
+'''方块[[模型]]'''
+* 转换了更多方块：中继器，比较器，床，漏斗，门，西瓜/南瓜梗，蛋糕和睡莲。
+* 旋转现在放宽至22.5度的倍数。
+* 现在不仅能覆盖一个方块的模型，而且能覆盖一个具体方块变种的模型。
+* 按下{{key|F3+T}}或{{key|F3+S}}来刷新模型。
+
+'''[[画]]'''
+* 改进了的定位处理。
+
+=== 生物 ===
+'''[[猫]]'''
+* 死后会向主人展示死亡消息。
+
+'''[[骷髅]]'''
+* 在被狼攻击时会开始逃窜而不是反击。
+
+'''[[狼]]'''
+* 现在会自动攻击骷髅，就像它们会自动攻击羊一样。
+
+=== 非生物实体 ===
+'''[[物品展示框]]'''
+* 改进了的定位处理。
+
+=== 命令格式 ===
+'''{{cmd|clone}}'''
+* 进行小幅度改动来使其更可靠。
+
+'''[[记分板]]'''
+* 测试分数现在也可以用于<code>@e</code>实体选择器了。
+*  添加了记分板队伍属性是否禁用死亡消息：{{cmd|scoreboard teams option <名称> deathMessageVisibility}}选项为<code>never</code>，<code>hideForOtherTeams</code>，<code>hideForOwnTeam</code>，<code>always</code>。
+* {{cmd|scoreboard players}}命令现在会由NBT数据过滤。
+
+=== 游戏内容 ===
+'''[[创造模式]]'''
+* 在创造模式的玩家能对标为无敌的实体造成伤害。
+
+'''物品标签'''
+* 药水NBT数据<code>HideFlags</code>现在有了第5个位元（数值32）来隐藏药水效果。
+
+'''[[交易]]'''
+* 新的[[NBT]]标签<code>rewardExp</code>来控制村民在交易后是否会给予经验
+
+=== 常规 ===
+'''Twitch转播'''
+* 现在会询问是否要进行转播。
+
+'''UUID'''
+* 所有的玩家列表现在会自动转换成UUID制。
+
+== 修复 ==
+{{fixes|fixedin=14w10a|prefix=Minecraft|showdesc=1
+|;old
+|208|画和物品展示框可以重叠。
+|3450|当玩家躺在床上时，附近的生物会朝着玩家的上方看。
+|11681|玩家在睡觉时，名牌过低。
+|31047|使用物品统计对应的是左键点击，而不是右键。
+|56701|雪人在客户端生成的雪球会与服务器上生成的不同步。
+|;dev
+|44851|当凋灵无敌时，{{cmd|kill|link=none}}不能杀死它。
+|46207|刷怪笼（包括地牢自然生成的）可以生成幽灵生物。
+|46223|<code>@a</code>，<code>@p</code>，<code>@e</code>或者<code>@r</code>选择器都不包含死亡玩家。
+|46428|旁观模式下，玩家的盔甲对于自己来说是可见的。
+|46430|旁观模式下，玩家可以在任何地方扔东西，但是不可以把它们捡起来。
+|46596|旁观模式下，生物仍然跟随玩家。
+|47028|<code>@e</code>选择器不接受非玩家实体的记分板参数。
+|47431|下蹲或潜行时，玩家的手可以往外移。
+|47571|钓线投在玩家下方。
+|47646|睡觉时，玩家视角有两格高。
+|47656|玩家正在挖掘或放置方块时，其他玩家不能看到该玩家的手部动画。
+|47696|如果使用左右键行走，则声音会失真。
+|47744|不能取消与村民交易时获得的经验。
+|48160|不能通过使用<code>HideFlags</code>来隐藏药水效果。
+|48476|落沙在被生成时不被显示。
+|48503|放置一个具有NBT标签的告示牌时，标签不会被应用上去。
+|48512|藤蔓不再有背面纹理。
+|48544|小牛眼睛的高度不对，并且导致它们在一格高的地方会窒息。
+|49057|在命令方块中使用<code>:blockdata ~ ~ ~ {SuccessCount:1}</code>并激活10次会导致游戏崩溃。
+|;previous
+|49142|{{cmd|fill|link=none}}命令导致的比较器输出错误。
+|49375|对着酿造台按{{key|ctrl}}+鼠标中键可以复制酿造台（但不能复制其中的物品）。
+}}
+'''其他修复'''
+* 修复了许多物品的<code>stat.useItem</code>。
+** 食物、牛奶、药水、弓、胡萝卜钓竿以及钓鱼竿可以使用<code>stat.useItem</code>。
+** 对于空桶来说，<code>stat.useItem</code>在舀水和盛熔岩时会增加，而挤奶时不增加。
+** 盔甲、拴绳、鞍、驯服、繁殖、熔岩桶、水桶以及木碗的仍然无法使用<code>stat.useItem</code>。
+* 修复了许多实体边界框的调试渲染。
+* 修复了在命令方块中{{cmd|blockdata|link=none}}命令潜在的“无限递归”问题。</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:14w10a]]
+[[en:Java Edition 14w10a]]
+[[es:Java Edition 14w10a]]
+[[fr:Édition Java 14w10a]]
+[[ja:Java Edition 14w10a]]
+[[pt:Edição Java 14w10a]]
+[[ru:14w10a (Java Edition)]]

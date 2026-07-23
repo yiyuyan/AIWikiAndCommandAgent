@@ -1,0 +1,268 @@
+# 页面: 重生锚
+# 来源: https://zh.minecraft.wiki/w/%E9%87%8D%E7%94%9F%E9%94%9A
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 功能方块, 可再生资源, 基岩版独有信息, 方块, 需要图像的页面
+# 抓取时间: 2026-07-14 17:37:17
+# 原始 Wikitext 内容:
+
+{{More images|缺少基岩版渲染图。}}
+{{Infobox block
+|group1=未充能
+|1-1=Respawn Anchor Charges 0.png
+|group2=能量等级1
+|2-1=Respawn Anchor Charges 1.gif
+|group3=能量等级2
+|3-1=Respawn Anchor Charges 2.gif
+|group4=能量等级3
+|4-1=Respawn Anchor Charges 3.gif
+|group5=能量等级4
+|5-1=Respawn Anchor Charges 4.gif
+|invimage=Respawn Anchor
+|light='''已充能'''：3、7、11、15<br>'''未充能'''：0
+}}
+'''重生锚（Respawn Anchor）'''是一种允许[[玩家]]在[[下界]]设置[[出生点#个人出生点|个人出生点]]的[[方块]]。
+
+== 生成 ==
+重生锚不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Crying Obsidian
+|B1= Crying Obsidian
+|C1= Crying Obsidian
+|A2= Glowstone
+|B2= Glowstone
+|C2= Glowstone
+|A3= Crying Obsidian
+|B3= Crying Obsidian
+|C3= Crying Obsidian
+|Output= Respawn Anchor
+|type= Decoration block
+}}
+
+== 破坏 ==
+挖掘重生锚的合适工具是[[镐]]。重生锚需要钻石镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+重生锚被破坏后会掉落自身。
+
+== 用途 ==
+類似於[[黑曜石]]以及[[哭泣的黑曜石]]，重生锚具有1200的[[爆炸抗性]]，且不能被活塞移动，也不能被[[末影龙]]破坏。
+
+=== 重生 ===
+[[File:Respawn_anchor_logic2.png|alt=|thumb|228x228px|玩家重生位置的优先度（1为最高）。所需的最小空间为1×2×1（即在上方重生）]]
+重生锚用于在[[下界]]设置重生点。
+
+对重生锚{{ctrl|使用}}[[荧石]]可以为其补充能量，同时其纹理将发生改变，其顶部纹理出现类似下界传送门方块的动态效果及其粒子效果，并发出亮度等级为3的光。4块荧石即可将能量补满，能量等级会显示在侧面刻度盘上：每增加一级，可填充刻度盘纹理的四分之一（按顺时针填充）。在使用第一块荧石后，每多使用一次荧石，重生锚的亮度等级都会再增加4。
+
+在玩家使用荧石激活一个重生锚时有一个特定的音效，在玩家对其按{{ctrl|使用}}键时和使用重生锚重生时有另外一个类似机械的音效。
+
+{{ctrl|使用}}有能量的重生锚可以重置玩家重生点（这会覆盖掉玩家用床设置的重生点）。玩家死亡后将重生在重生锚附近，同时其能量等级会减少一级。但如果重生锚被破坏，或者能量耗尽，又或是周围的环境无安全位置，玩家死亡后就会重生在世界出生点，并提示“{{tp|block.minecraft.spawn.not_valid}}”。
+
+=== 爆炸 ===
+{{only|be|for=在游戏规则{{cd|respawnBlocksExplode}}为{{samp|true}}时}}尝试在下界以外的维度{{note|{{in|je}}由环境属性[[环境属性#gameplay/respawn_anchor_works|<code>gameplay/respawn_anchor_works</code>]]控制。}}中{{ctrl|使用}}'''有能量'''的重生锚会导致其[[爆炸]]。
+
+重生锚导致的爆炸的爆炸威力为5，并且可以生成[[火]]。
+
+被重生锚炸死的生物的[[死亡消息]]为{{only|je|for=“{{tp|death.attack.badRespawnPoint.message|<u>'''死者'''</u>|[{{tp|death.attack.badRespawnPoint.link}}]}}”}}或{{only|be|for=“{{tr|<u>'''死者'''</u> 被 [刻意的游戏设计] 杀死了|<u>'''死者'''</u> 被 [蓄意遊戲設計] 殺死}}”}}。{{in|je}}“[{{tp|death.attack.badRespawnPoint.link}}]”文本可以点击并跳转至{{bug|MCPE-28723}}。
+
+=== 光源 ===
+能量等级为1、2、3、4的重生锚依次发出[[亮度]]为3、7、11、15的光。未充能的重生锚不会发光。
+[[File:Respawn Anchor Light.gif|thumb|270px|重生锚根据其能量等级而发出不同等级的光]]
+
+=== 红石元件 ===
+当其有能量时，[[红石比较器]]会根据其能量等级输出不同强度的红石信号：1级能量对应3级信号，2级对应7级信号，3级对应11级信号，4级对应15级信号。
+
+重生锚也可用[[发射器]]发射荧石补充能量。
+
+=== 生物 ===
+[[疣猪兽]]会主动远离17×9×17范围内的重生锚。
+
+生物可以[[生成]]在非4级能量的重生锚上。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Respawn Anchor charge1.ogg
+|sound2=Respawn Anchor charge2.ogg
+|sound3=Respawn Anchor charge3.ogg
+|subtitle={{tp|subtitles.block.respawn_anchor.charge}}
+|source={{tp|soundCategory.block}}
+|description=使用荧石为重生锚充能
+|id=block.respawn_anchor.charge
+|translationkey=subtitles.block.respawn_anchor.charge}}
+{{Sound table
+|sound=Respawn Anchor deplete1.ogg
+|sound2=Respawn Anchor deplete2.ogg
+|subtitle={{tp|subtitles.block.respawn_anchor.deplete}}
+|source={{tp|soundCategory.block}}
+|id=block.respawn_anchor.deplete
+|description=重生锚能量被消耗
+|translationkey=subtitles.block.respawn_anchor.deplete}}
+{{Sound table
+|sound=Respawn Anchor set spawn1.ogg
+|sound2=Respawn Anchor set spawn2.ogg
+|sound3=Respawn Anchor set spawn3.ogg
+|subtitle={{tp|subtitles.block.respawn_anchor.set_spawn}}
+|source={{tp|soundCategory.block}}
+|id=block.respawn_anchor.set_spawn
+|translationkey=subtitles.block.respawn_anchor.set_spawn
+|description=设置重生点
+}}
+{{Sound table
+|sound=Respawn Anchor ambient1.ogg
+|sound2=Respawn Anchor ambient2.ogg
+|sound3=Respawn Anchor ambient3.ogg
+|subtitle={{tp|subtitles.block.respawn_anchor.ambient}}
+|source={{tp|soundCategory.block}}
+|id=block.respawn_anchor.ambient
+|translationkey=subtitles.block.respawn_anchor.ambient
+|description=环境音效
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=block.respawn_anchor.charge1.wav
+|sound2=block.respawn_anchor.charge2.wav
+|sound3=block.respawn_anchor.charge3.wav
+|source=方块
+|description=使用荧石为重生锚充能
+|id=respawn_anchor.charge
+|typeid=respawn_anchor.charge
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=block.respawn_anchor.deplete1.wav
+|sound2=block.respawn_anchor.deplete2.wav
+|source=方块
+|description=重生锚能量被消耗
+|id=respawn_anchor.deplete
+|typeid=respawn_anchor.deplete
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=block.respawn_anchor.set_spawn1.wav
+|sound2=block.respawn_anchor.set_spawn2.wav
+|sound3=block.respawn_anchor.set_spawn3.wav
+|source=方块
+|description=设置重生点
+|id=respawn_anchor.set_spawn
+|typeid=respawn_anchor.set_spawn
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=block.respawn_anchor.ambient1.wav
+|sound2=block.respawn_anchor.ambient2.wav
+|sound3=block.respawn_anchor.ambient3.wav
+|source=方块
+|description=环境音效
+|id=respawn_anchor.ambient
+|typeid=respawn_anchor.ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance=7
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Respawn Anchor
+|spritetype=block
+|nameid=respawn_anchor
+|showblocktags=je
+|blocktags={{GameTag|block|respawn_anchor}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Respawn Anchor
+|spritetype=block
+|nameid=respawn_anchor
+|showblocktags=be
+|blocktags={{GameTagBE|block|respawn_anchor}}
+|foot=1
+}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+== 进度 ==
+{{load advancements|nether.charge_respawn_anchor}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w12a|{{animate|Respawn Anchor Charges 0 JE1 BE1.png;Respawn Anchor Charges 1 JE1 BE1.gif;Respawn Anchor Charges 2 JE1 BE1.gif;Respawn Anchor Charges 3 JE1 BE1.gif;Respawn Anchor Charges 4 JE1 BE1.gif|32px}} 加入了重生锚。}}
+|{{HistoryLine|||dev=20w13a|为重生锚加入了<code>dragon_immune</code>标签，因此末影龙不能破坏重生锚了。
+|重生锚现在可被[[发射器]]发射[[荧石]]补充能量。}}
+|{{HistoryLine|||dev=20w20a|加入了新进度“{{Advancement name|nether.charge_respawn_anchor|zh}}”，可通过将重生锚充满能量达成。}}
+|{{HistoryLine|||dev=pre1|重生锚在水下爆炸时不再能破坏方块了。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|{{animate|Respawn Anchor Charges 0 JE1 BE1.png;Respawn Anchor Charges 1 JE1 BE1.gif;Respawn Anchor Charges 2 JE1 BE1.gif;Respawn Anchor Charges 3 JE1 BE1.gif;Respawn Anchor Charges 4 JE1 BE1.gif|32px}} 加入了重生锚。}}
+|{{HistoryLine|||dev=1.16.0.63|重生锚在下界充能的时候现在不会爆炸了。
+|为重生锚添加了新音效。
+|现在可在未充能重生锚的旁边放置方块而不使之爆炸。
+|重生锚现在只有使用钻石[[镐]]和下界合金镐破坏才会掉落自身。<ref>{{bug|MCPE-72102|||Fixed}}</ref>
+|现在使用附有[[精准采集]]的镐采集已充能的重生锚会保存重生锚的能量。}}
+|{{HistoryLine||1.19.20|dev=1.19.20.22|[[末影龙]]不再能破坏重生锚。<ref>{{bug|MCPE-158343|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.60|dev=1.19.60.23|使用精准采集附魔镐开采或{{ctrl|选取方块}}功能获得的重生锚不再会保存其能量。<ref>{{bug|MCPE-145682|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|重生锚的爆炸抗性由720改为1200。}}
+|{{HistoryLine||1.20.50|dev=1.20.50.20|现在被重生锚炸死的生物会显示特有的死亡消息。}}
+}}
+
+== 你知道吗 ==
+* 重生锚的光照等级与比较器给出的红石信号强度一致。
+* 重生锚的两个环境音效{{sound||Respawn Anchor ambient2.ogg}}{{sound||Respawn Anchor ambient3.ogg}}截取自倒放后的[[下界传送门方块]]环境音效{{sound||Nether Portal ambient.ogg}}。<ref>{{tweet|slamp0000|1241065282501840897|And btw, so that’s why the ambient is reversed as well.|March 21, 2020}}</ref>并且相对于下界传送门方块，激活的重生锚的粒子及其顶面的传送门纹理动画都是逆向运动的。
+** 这些细节暗示重生锚是一个不同于下界传送门的单向出口，玩家“只出不进”。<ref>{{tweet|JasperBoerstra|1241051348709396486|Fun fact: the respawn anchor's portal is in reverse and the particles go outwards instead of inwards like the nether portal, indicating that you cannot go in, but only out!|March 21, 2020}}</ref>
+
+== 画廊 ==
+<gallery>
+File:Explosion comparasion.png|爆炸威力对比图，从左到右分别来自重生锚、[[闪电苦力怕]]、[[TNT]]和[[苦力怕]]
+File:Escape.png|疣猪兽逃离重生锚
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks}}
+
+[[Category:功能方块]]
+
+[[de:Seelenanker]]
+[[en:Respawn Anchor]]
+[[es:Nexo de reaparición]]
+[[fr:Ancre de réapparition]]
+[[it:Ancora della rinascita]]
+[[ja:リスポーンアンカー]]
+[[ko:리스폰 정박기]]
+[[pl:Kotwica odrodzenia]]
+[[pt:Âncora de Renascimento]]
+[[ru:Якорь возрождения]]
+[[th:หลักจุดเกิด]]
+[[uk:Якір відродження]]

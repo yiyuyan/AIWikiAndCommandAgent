@@ -1,0 +1,72 @@
+# 页面: 命令/testforblock
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/testforblock
+# 分类: 命令
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock|education}}
+{{outdated|edition=java}} 
+{{Infobox command
+|name=testforblock
+|oplevel=1
+|cheat=1
+}}
+
+探测某个方块是否在特定位置。
+
+== 语法 ==
+: <code>testforblock <position: x y z> <tileName: Block> [blockStates: block states]</code>
+
+== 参数 ==
+{{argument|be=1|position: x y z|CommandPosition}}
+: 指定待探测的方块的坐标。
+: {{arg desc|be=CommandPosition}}不可超出正常游戏范围。
+
+{{argument|be=1|tileName: Block|enum}}
+: 指定要探测的方块类型。
+: {{arg desc|be=Block}}
+
+{{argument|be=1|blockStates: block states|BlockStateCommandParam}}
+: 指定要探测的方块状态。
+: {{Arg desc|be=BlockStateCommandParam}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|命令未完整或参数未正确指定||unparseable}}
+{{Result table|指定的位置未加载或在世界外||fail}}
+{{Result table|指定位置上的方块与指定的方块ID或状态不匹配}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 检测坐标(0,64,0)处是否为箱子：<code>/testforblock 0 64 0 chest</code>
+
+* 检测下方方块是否为点亮的[[铜灯]]：<code>/testforblock ~ ~-1 ~ copper_bulb["lit"=true]</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w37a|加入了{{cmd|testforblock|link=none}}。}}
+|{{HistoryLine||1.11|dev=16w32a|为{{cmd|testforblock|link=none}}加入了[[方块状态]]的支持。}}
+|{{HistoryLine||1.13|dev=17w45a|移除了{{cmd|testforblock|link=none}}，并加入{{cmd|execute if block}}取代其功能。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|testforblock|link=none}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.70|dev=1.19.70.21|移除了{{cd|dataValue: int}}参数。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/testforblock]]
+[[en:Commands/testforblock]]
+[[es:Comandos/testforblock]]
+[[ja:コマンド/testforblock]]
+[[pt:Comandos/testforblock]]
+[[ru:Команды консоли/testforblock]]

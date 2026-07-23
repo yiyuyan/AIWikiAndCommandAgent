@@ -1,0 +1,509 @@
+# 页面: 史莱姆
+# 来源: https://zh.minecraft.wiki/w/%E5%8F%B2%E8%8E%B1%E5%A7%86
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 基岩版独有信息, 失效链接, 实体, 嵌入Bilibili视频的页面, 敌对生物, 有未知版本的History模板的页面/Java版, 需要验证历史/基岩版
+# 抓取时间: 2026-07-14 17:21:16
+# 原始 Wikitext 内容:
+
+{{for|衍生物品及方块|黏液球|和|黏液块|生成于下界的生物|岩浆怪|生成于硫黄洞穴的友好生物|硫方怪|}}
+{{Infobox entity
+|image=Slime.png
+|invimage=Slime Spawn Egg
+|health=大型：{{hp|16}}<br>中大型：{{hp|9}}<br>中型：{{hp|4}}<br>小型：{{hp|1}}
+|behavior=敌对生物
+|damage=
+'''近战攻击（低延迟，多选目标）（大型）：'''<br>{{AutoDmg|4}}<br>
+'''近战攻击（低延迟，多选目标）（中大型）：'''<br>{{AutoDmg|3}}<br>
+'''近战攻击（低延迟，多选目标）（中型）：'''<br>{{AutoDmg|2}}
+|size=
+'''大型'''：<br>高度：2.08格<br>宽度：2.08格<br>
+'''中大型'''：<br>高度：1.5625格<br>宽度：1.5625格<br>
+'''中型'''：<br>高度：1.04格<br>宽度：1.04格<br>
+'''小型'''：<br>高度：0.52格<br>宽度：0.52格
+|spawn=见{{slink||生成}}
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{relevant tutorial|史莱姆陷阱}}
+{{quote|{{Tr|史莱姆栖息在世界中的潮湿黑暗的地方，它们的攻击速度是其他非凝胶生物无法比拟的。|史萊姆居住在世界中潮濕、黑暗的空間，而且攻擊的速度是其他生物無法比擬的。}}|[[Minecraft Earth]]内描述}}
+
+'''史莱姆（Slime）'''是一种[[生成]]在部分区块地下和[[沼泽]]生物群系及其变种的敌对生物。
+
+== 生成 ==
+史莱姆生成在40[[海拔高度|层]]以下的特定的“史莱姆区块”里（无亮度要求）的[[生成#可生成位置|可生成方块]]上，它们也有可能生成在沼泽和红树林沼泽生物群系51-69层且[[亮度]]等级小于等于7的可生成方块上。
+
+只有1尺寸<ref group="注">为了方便表述，定义'''尺寸'''的值为<code>Size</code>+1。</ref>（小型）、2尺寸（中型）和4尺寸（大型）的史莱姆会自然生成在上述位置。{{in|java}}通过{{cmd|summon}}可以生成1-127（实体数据<code>Size</code>0-126）尺寸的史莱姆。
+
+史莱姆自然生成时统一以大型史莱姆的尺寸判断空间是否充足，因此任何尺寸的史莱姆生成都需要2.08×2.08×2.08的空间，它们生成的区域必须没有任何液体和方块碰撞。
+
+史莱姆在自然生成时的尺寸受[[副区域难度]]影响，三种尺寸的概率分别为小型16.5%-33%，中型34%，大型33%-49.5%。
+
+=== 沼泽 ===
+在[[沼泽]]和[[红树林沼泽]]中，史莱姆可能会在Y=51到Y=69且亮度等级小于等于7的地方生成。在[[满月]]时，它们的生成概率最大，而在[[新月]]时从不生成。
+
+更准确来说，游戏会检查两个因素：
+
+# 亮度等级是否小于等于一个随机整数（0-7）
+# 月亮的明亮部分所占比例是否大于一个随机小数（0-1）
+
+如果这些条件都符合且高度合适，那么就有50%的概率生成史莱姆。
+
+=== 史莱姆区块 ===
+{{anchor|Low layers}}
+史莱姆会在整个主世界（除[[蘑菇岛]]、[[深暗之域]]和{{only|for=[[河流]]|be}}<ref>{{bug|MCPE-161245}}</ref>）的特定[[区块]]Y=40以下生成，忽略亮度等级。平均每十个区块中会有一个是这种特定的“史莱姆区块”。
+
+{{Calculator|chunkbase|pois=Sc|zoom=1.1|terrain=false}}
+
+==== Java版 ====
+{{in|java}}“史莱姆区块”的决定是由[[世界种子]]和区块坐标结合起来的伪随机而成的：
+<syntaxhighlight lang="java">
+import java.util.Random; 
+
+public class CheckSlimeChunk { 
+
+    public static boolean isSlimeChunk(long worldSeed,     // 世界种子，一个64位整数，可以通过/seed获取
+                                       int  chunkX,        // 区块X轴坐标，32位整数
+                                       int  chunkZ) {      // 区块Z轴坐标，32位整数
+        Random rng = new Random(
+            worldSeed +
+            (long)(chunkX * chunkX * 4987142) +
+            (long)(chunkX * 5947611) +
+            (long)(chunkZ * chunkZ) * 4392871L +
+            (long)(chunkZ * 389711) ^ 987234911L
+        );
+        return rng.nextInt(10) == 0;
+    }
+}
+</syntaxhighlight>
+也就是说，使用区块坐标来帮助生成一个种子，进而生成一个0-9之间的伪随机数，如果生成的数字是0，那么那个区块就能生成史莱姆。要转换世界坐标到区块坐标，将坐标除以16并向下取整。
+
+==== 基岩版 ====
+{{in|be}}史莱姆区块的算法与[[Java版]]不同。算法并不依赖于生成世界的种子，因此史莱姆区块对于每个世界的生成是一样的。<ref>基岩版史莱姆区块算法已由@protolambda和@jocopa3逆向工程得出，并可在GitHub上找到：[https://github.com/depressed-pho/slime-finder-pe][https://gist.github.com/protolambda/00b85bf34a75fd8176342b1ad28bfccc]{{dead link}}</ref>
+
+=== 试炼刷怪笼 ===
+[[试炼密室]]中的小型近战型[[试炼刷怪笼]]包含史莱姆试炼刷怪笼，其周围标有[[苔藓块]]。其每次生成有75％概率生成尺寸为2的史莱姆，25％概率生成尺寸为3（中大型）的史莱姆。这是生存模式下仅有的可以生成尺寸为1、2和4之外的史莱姆的方式。
+
+=== 状态效果 ===
+拥有[[渗浆]]状态效果的生物在死亡时会产生2只中型史莱姆。
+
+== 掉落物 ==
+{{DropTable|name=Slime
+|{{DropLine|name=Slimeball|notes=small_slime,not_frog|quantity=0-2|lootingquantity=0-1}}
+|{{DropLine|name=Slimeball|notes=frog}}
+|notes=
+small_slime = 僅小型史萊姆。
+not_frog = 僅當'''不'''由[[青蛙]]擊殺時。
+frog = 僅當由[[青蛙]]擊殺時。
+}}
+
+* 大型史莱姆：
+** {{xp|4}}（被[[玩家]]或驯服的[[狼]]杀死时'''额外'''掉落）
+* 中大型史莱姆：
+** {{xp|3}}（被玩家或驯服的狼杀死时'''额外'''掉落）
+* 中型史莱姆：
+** {{xp|2}}（被玩家或驯服的狼杀死时'''额外'''掉落）
+* 小型史莱姆：
+** {{xp|1}}（被玩家或驯服的狼杀死时掉落）。
+
+== 行为 ==
+[[File:Slime.gif|thumb|right|upright|跳跃的史莱姆]]
+史莱姆通过跳跃移动，每过一段时间跳跃一下。不像其他生物，史莱姆在附近没有玩家时不会停止移动。
+
+史莱姆的生命值等于它们尺寸的平方，它的每个方向的大小是它尺寸的0.52倍，近战攻击伤害等于它的尺寸（除了没有攻击能力的1尺寸史莱姆）。
+
+史莱姆跳跃的距离取决于它们的尺寸，4尺寸的史莱姆可以跳约5.5格远距离，3尺寸的史莱姆可以跳约4.5格远距离，2尺寸的史莱姆可以跳约3.5格远的距离，1尺寸的史莱姆可以跳约2格远的距离。史莱姆跳跃的高度不受尺寸影响，1次只能跳到1个方块的高度。它们会在跳跃以及着陆时发出明显的声音，但空闲时不会发出声音。着陆时，会出现一定量的[[黏液球]]粒子，其尺寸为外表尺寸的{{fraction|1|8}}。
+
+史莱姆会在16格半径（球形）、高度以自身碰撞箱上下扩展4格的范围内搜索玩家、[[铁傀儡]]{{only|for=和[[雪傀儡]]|be}}，且史莱姆更倾向于搜索玩家。如果找不到目标，它们会等待10-30刻（0.5-1.5秒）。它们会随机转左或转右，改变方向的角度最大为57.26°（1弧度），跳跃，然后重复这个过程。如果找到目标，那么等待的时间将会变为未找到目标的{{fraction|1|3}}（3-10刻），然后就会在跳跃前将方向对准最近的目标。
+
+不像其他生物，史莱姆完全没有路径搜索能力，只会尝试向目标方向跳跃着前进。这意味着它们在追逐目标时，会掉下悬崖且不能绕过墙壁。
+
+{{in|je}}与其他生物不同，史莱姆的近战攻击没有频率限制，会持续进行攻击，且会同时对攻击距离内的所有目标进行攻击。[[受击后伤害免疫]]使史莱姆对目标生物每秒只能造成两次伤害，但使用[[盾牌]]阻挡伤害时将不会触发受击后伤害免疫，因此大型史莱姆会极快速地耗尽盾牌的耐久度。
+
+{{in|be}}史莱姆也会持续执行攻击，同时对攻击距离内的所有目标进行攻击，但每次攻击有0.5秒的冷却时间。
+
+尺寸大于1的史莱姆死亡时，会分裂出2-4只新的史莱姆。它们的尺寸会除以2，并向下取整。由史莱姆死亡后分裂而产生的新史莱姆会继承原史莱姆的状态效果、通过下界传送门的冷却时间和{{only|je|for=原史莱姆所属的[[队伍]]}}。当一个已被命名的大史莱姆分裂成小史莱姆时，所有分裂出的小史莱姆的名字将会与大史莱姆的名字相同。
+
+小型史莱姆没有攻击能力，即使修改其[[属性]]<code>attack_damage</code>。
+
+{{in|java}}史莱姆不会阻止玩家[[睡觉]]，但玩家仍会因受到尺寸大于1的史莱姆的攻击而惊醒。<ref>{{bug|MC-92719}}</ref>
+
+史莱姆免疫[[渗浆]]状态效果。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Slime attack1.ogg
+|sound2=Slime attack2.ogg
+|subtitle={{tp|subtitles.entity.slime.attack}}
+|source=敌对生物
+|description=攻击
+|id=entity.slime.attack
+|translationkey=subtitles.entity.slime.attack
+}}
+{{Sound table
+|sound=Slime big1.ogg
+|sound2=Slime big2.ogg
+|sound3=Slime big3.ogg
+|sound4=Slime big4.ogg
+|subtitle={{tp|subtitles.entity.slime.death}}
+|source=敌对生物
+|description=大型、中大型或中型史莱姆死亡
+|id=entity.slime.death
+|translationkey=subtitles.entity.slime.death
+}}
+{{Sound table
+|sound=Slime small1.ogg
+|sound2=Slime small2.ogg
+|sound3=Slime small3.ogg
+|sound4=Slime small4.ogg
+|sound5=Slime small5.ogg
+|subtitle={{tp|subtitles.entity.slime.death}}
+|source=敌对生物
+|description=小型史莱姆死亡
+|id=entity.slime.death_small
+|translationkey=subtitles.entity.slime.death
+|distance=16}}
+{{Sound table
+|sound=Slime big1.ogg
+|sound2=Slime big2.ogg
+|sound3=Slime big3.ogg
+|sound4=Slime big4.ogg
+|subtitle={{tp|subtitles.entity.slime.hurt}}
+|source=敌对生物
+|description=大型、中大型或中型史莱姆受伤
+|id=entity.slime.hurt
+|translationkey=subtitles.entity.slime.hurt
+|distance=16}}
+{{Sound table
+|sound=Slime small1.ogg
+|sound2=Slime small2.ogg
+|sound3=Slime small3.ogg
+|sound4=Slime small4.ogg
+|sound5=Slime small5.ogg
+|subtitle={{tp|subtitles.entity.slime.hurt}}
+|source=敌对生物
+|description=小型史莱姆受伤
+|id=entity.slime.hurt_small
+|translationkey=subtitles.entity.slime.hurt
+|distance=16}}
+{{Sound table
+|sound=Slime big1.ogg
+|sound2=Slime big2.ogg
+|sound3=Slime big3.ogg
+|sound4=Slime big4.ogg
+|subtitle={{tp|subtitles.entity.slime.squish}}
+|source=敌对生物
+|description=大型、中大型或中型史莱姆跳跃
+|id=entity.slime.jump
+|translationkey=subtitles.entity.slime.squish
+|distance=16}}
+{{Sound table
+|sound=Slime small1.ogg
+|sound2=Slime small2.ogg
+|sound3=Slime small3.ogg
+|sound4=Slime small4.ogg
+|sound5=Slime small5.ogg
+|subtitle={{tp|subtitles.entity.slime.squish}}
+|source=敌对生物
+|description=小型史莱姆跳跃
+|id=entity.slime.jump_small
+|translationkey=subtitles.entity.slime.squish}}
+{{Sound table
+|sound=Slime big1.ogg
+|sound2=Slime big2.ogg
+|sound3=Slime big3.ogg
+|sound4=Slime big4.ogg
+|subtitle={{tp|subtitles.entity.slime.squish}}
+|source=敌对生物
+|description=大型、中大型或中型史莱姆落地
+|id=entity.slime.squish
+|translationkey=subtitles.entity.slime.squish
+}}
+{{Sound table
+|sound=Slime small1.ogg
+|sound2=Slime small2.ogg
+|sound3=Slime small3.ogg
+|sound4=Slime small4.ogg
+|sound5=Slime small5.ogg
+|subtitle={{tp|subtitles.entity.slime.squish}}
+|description=小型史莱姆落地
+|source=敌对生物
+|id=entity.slime.squish_small
+|translationkey=subtitles.entity.slime.squish
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=-
+|source=-
+|description=空声音事件
+|id=-
+|typeid=ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.slime.small1.wav
+|sound2=mob.slime.small2.wav
+|sound3=mob.slime.small3.wav
+|sound4=mob.slime.small4.wav
+|sound5=mob.slime.small5.wav
+|source=友好生物
+|description=史莱姆受伤
+|id=mob.slime.small
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.slime.small1.wav
+|sound2=mob.slime.small2.wav
+|sound3=mob.slime.small3.wav
+|sound4=mob.slime.small4.wav
+|sound5=mob.slime.small5.wav
+|source=友好生物
+|description=史莱姆死亡
+|id=mob.slime.small
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.slime.big1.wav
+|sound2=mob.slime.big2.wav
+|sound3=mob.slime.big3.wav
+|sound4=mob.slime.big4.wav
+|source=敌对生物
+|description=大型、中大型或中型史莱姆跳跃
+|id=mob.slime.big
+|typeid=squish.big
+|soundvolume
+|soundpitch=0.512-1.152
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.slime.small1.wav
+|sound2=mob.slime.small2.wav
+|sound3=mob.slime.small3.wav
+|sound4=mob.slime.small4.wav
+|sound5=mob.slime.small5.wav
+|source=友好生物
+|description=小型史莱姆跳跃
+|id=mob.slime.small
+|typeid=squish.small
+|soundvolume
+|soundpitch=0.512-1.152
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.slime.big1.wav
+|sound2=mob.slime.big2.wav
+|sound3=mob.slime.big3.wav
+|sound4=mob.slime.big4.wav
+|source=敌对生物
+|description=所有种类的史莱姆落地
+|id=mob.slime.big
+|typeid=slime_landing
+|soundvolume
+|soundpitch=0.512-1.152
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=-
+|source=-
+|description=攻击<ref group="音效">实际上史莱姆的攻击声音事件是{{cd|mob.slime.attack}}，但被错误地使用了{{cd|mob.attack}}，这导致史莱姆攻击时没有声音。</ref>
+|id=mob.attack
+|typeid=attack
+|soundvolume
+|soundpitch=0.64-1.44
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Slime
+|spritetype=entity
+|nameid=slime
+|showentitytags=1|entitytags={{GameTag|entity|slime}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Slime
+|spritetype=entity
+|nameid=slime
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+史莱姆有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|Monster-Hunter;it-spreads}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.kill_a_mob;adventure.kill_all_mobs;adventure.kill_mob_near_sculk_catalyst}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 视频 ==
+{{bv|BV1xh4dz9EZN}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.11|[[File:Slime JE1.png|52px]] [[File:Slime JE1.png|42px]] [[File:Slime JE1.png|32px]] 加入了史莱姆。
+|史莱姆有四种尺寸：小型、中型、大型和巨型。}}
+|{{HistoryLine||v1.0.12|大型史莱姆不再在[[和平]]难度下生成。
+|史莱姆拥有了[[音效]]。
+|修正了史莱姆的目标和攻击。}}
+|{{HistoryLine||v1.0.13|[[File:Slime JE2 BE1.png|52px]] [[File:Slime JE2 BE1.png|42px]] [[File:Slime JE2 BE1.png|32px]] 更改了史莱姆的纹理。}}
+|{{HistoryLine||v1.0.14|由于史莱姆生成过于丰富，它们的生成被限制减少。
+|因为新限制中出现了计算错误，史莱姆只会在特定地点生成，导致史莱姆无法自然生成。}}
+|{{HistoryLine||v1.0.17|史莱姆现在可在[[多人联机|多人模式]]下生成。}}
+|{{HistoryLine||v1.2.0|完全移除了史莱姆生成代码。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.2_01|重新加入了史莱姆。
+|小型史莱姆现在会掉落0－2个[[黏液球]]。<ref>http://getsatisfaction.com/mojang/topics/will_slimes_ever_return_to_minecraft</ref>
+|史莱姆现在非常罕见。}}
+|{{HistoryLine||1.3|史莱姆变得更常见。}}
+|{{HistoryLine||1.4|修复了一个多人生存模式下的漏洞。这个漏洞是当史莱姆分裂时，只有使它们分裂的玩家才能看到它们，且史莱姆本身不会受到任何伤害。<ref>https://www.youtube.com/watch?v=wyNvBkn4E3U</ref>这是因为这些史莱姆存储在客户端上，玩家只能通过退出并重新登录服务器才能移除它们。}}
+|{{HistoryLine||1.5|史莱姆不再在和平模式下生成，且只有被激怒才会攻击玩家。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre5|史莱姆现在会在0-39层而不是0-16层生成，这使得它们变得更常见。}}
+|{{HistoryLine||1.1|dev=11w49a|加入了史莱姆[[刷怪蛋]]，允许[[玩家]]自己生成史莱姆。}}
+|{{HistoryLine||1.3.1|dev=12w15a|降低[[超平坦世界]]中史莱姆的生成率。}}
+|{{HistoryLine|||dev=12w25a|更多地降低了史莱姆在超平坦世界的生成率。}}
+|{{HistoryLine||1.4.2|dev=12w38a|史莱姆和[[岩浆怪]]拥有一样的新[[音效]]，使得它们的声音更真实。}}
+|{{HistoryLine|||dev=12w40a|史莱姆更容易在低亮度的[[沼泽]]生物群系中找到。由于史莱姆不会游泳，所以它们很有可能会跳进水中并最终[[溺水|淹死]]。}}
+|{{HistoryLine||1.5|dev=13w10a|史莱姆的生成速率取决于当时的[[月亮#月相|月相]]。}}
+|{{HistoryLine||1.7.2|dev=unknown|现在可以用[[命令方块]]来生成巨大的史莱姆。}}
+|{{HistoryLine||1.8|dev=14w06a|因为更新了史莱姆的AI，所以史莱姆会游泳了。
+|史莱姆现在会经常随机变换方向以减少被卡在角落或墙里的概率。
+|现在玩家不在史莱姆32个方块内时，史莱姆会被[[生物生成#清除|延迟清除]]了。
+|史莱姆的跳跃机能更改了。它们能够跳出相当于它们尺寸大小的距离；它们会跳出近似于它们长度的距离。在面对玩家的攻击时它们也会转身面对玩家了。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID由<code>Slime</code>改为<code>slime</code>。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Slime JE3 BE2.png|52px]] [[File:Slime JE3 BE2.png|42px]] [[File:Slime JE3 BE2.png|32px]] 更改了史莱姆的纹理。}}
+|{{HistoryLine||1.16|dev=20w06a|小型史莱姆现在拥有了跳跃和移动的音效。<ref>{{bug|MC-97958|||Fixed}}</ref>}}
+|{{HistoryLine||1.17|dev=21w10a|史莱姆的最大尺寸被减小到128。}}
+|{{HistoryLine||1.20|dev=23w18a|现在史莱姆会受到[[跳跃提升]]效果影响。<ref>{{bug|MC-48923||史莱姆和岩浆怪不受跳跃提升效果影响|Fixed}}</ref>}}
+|{{HistoryLine||1.20.3|dev=23w45a|exp=update_1_21|史莱姆现在可以生成于[[试炼密室]]中的史莱姆[[试炼刷怪笼]]，并且中大型史莱姆可以由史莱姆试炼刷怪笼生成。}}
+|{{HistoryLine||1.21|dev=24w18a|23w45a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.9.0|dev=build 1|[[File:Slime JE2 BE1.png|52px]] [[File:Slime JE2 BE1.png|42px]] [[File:Slime JE2 BE1.png|32px]] 加入了史莱姆。}}
+|{{HistoryLine|||dev=build 2|史莱姆现在有了[[音效]]。
+|史莱姆现在可自然生成。
+|史莱姆现在更常见。}}
+|{{HistoryLine||0.10.0|dev=build 1|史莱姆现在有了跳跃动作。}}
+|{{HistoryLine||0.12.1|dev=build 1|现在史莱姆跳跃时拥有粒子效果。
+|现在史莱姆会掉落[[黏液球]]了。{{verify|history=1|bedrock=1}}}}
+|{{HistoryLine||0.13.0|dev=build 3|现在史莱姆生成速度更快了。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Slime JE3 BE2.png|52px]] [[File:Slime JE3 BE2.png|42px]] [[File:Slime JE3 BE2.png|32px]] 更改了史莱姆的纹理。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.24|史莱姆不再会攻击[[雪傀儡]]。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.22|现在史莱姆又会攻击[[雪傀儡]]了。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.22|现在史莱姆能够同时攻击多个目标。
+|现在史莱姆能够对铁傀儡和雪傀儡造成伤害。
+|现在史莱姆每攻击一次会有0.5秒的冷却时间。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.24|将史莱姆的生成所需空间更改为2.08×2.08×2.08。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.20|exg=1.21|史莱姆现在可以生成于[[试炼密室]]中的史莱姆[[试炼刷怪笼]]，并且中大型史莱姆可以由史莱姆试炼刷怪笼生成。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|1.20.60.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.20|现在史莱姆会在分裂后保留其名称。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.23|现在新分裂出的史莱姆不再会被高速弹出。
+|现在史莱姆死亡时不再会对目标造成伤害。<ref>{{bug|MCPE-166394|||Fixed}}</ref>}}
+|{{HistoryLine||26.30|dev=26.30.20|加入了史莱姆落地时的定制声音事件。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Slime JE2 BE1.png|52px]] [[File:Slime JE2 BE1.png|42px]] [[File:Slime JE2 BE1.png|32px]] 加入了史莱姆。}}
+|{{HistoryLine||xbox=TU14|ps3=1.04|psvita=1.00|ps4=1.00|减少了史莱姆在超平坦世界的生成率。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Slime JE3 BE2.png|52px]] [[File:Slime JE3 BE2.png|42px]] [[File:Slime JE3 BE2.png|32px]] 更改了史莱姆的纹理。}}
+
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Slime JE2 BE1.png|52px]] [[File:Slime JE2 BE1.png|42px]] [[File:Slime JE2 BE1.png|32px]] 加入了史莱姆。}}
+}}
+
+== 你知道吗 ==
+* 玩家可以从大型史莱姆和它分裂的所有史莱姆最高获得28经验：最大的能获得4经验；分裂的最多获得8经验；再次分裂的最多获得16经验（每次分裂为4只）。
+* {{In|JE}}通过命令生成的尺寸为127的史莱姆是游戏中体型最大的生物。
+* 小型史莱姆是最弱的敌对生物，其生命值只有{{hp|1}}，且不具有造成伤害的能力。
+* 因为史莱姆的移动速度和它的大小有关，在平地上，8尺寸的史莱姆甚至比没有[[状态效果]]影响的玩家还要快。
+* 在史莱姆搜寻附近的玩家进行攻击或决定它们是否消失时，史莱姆不会从碰撞箱外侧边缘开始检查，而是从碰撞箱X轴和Z轴中间的那一点以及Y轴的底部开始检查。这意味着生成的自定义尺寸的巨大史莱姆可能会在玩家右前方，并且完全是被动型生物。如果足够大，这种史莱姆甚至会在其外边缘小于1格时消失。
+* {{in|be}}史莱姆能够自然生成在[[发光的黑曜石]]上，尽管发光的黑曜石已无法通过常规方法放置在世界中。
+
+== 画廊 ==
+<gallery>
+File:Smallslime.png|'''小'''：0.6格高
+File:Normalslime.png|'''中'''：1.2格高
+File:Bigslime.png|'''大'''：2.4格高
+File:Underground Slimes.png|洞穴里的史莱姆
+File:MinecartSlime.png|盖着矿车的大史莱姆
+File:Slimes In Village.png|在超平坦世界的村庄中看见的史莱姆
+File:Close-up Slimes.png|一群在[[村庄]]里的史莱姆
+File:Slimes in Swamp.png|生成在沼泽里的史莱姆
+File:Size127Slime.png|编辑生成的127尺寸的史莱姆
+File:Size10Slime.png|10尺寸的史莱姆
+File:Slimes-in-cave.jpg|在地下生成的史莱姆
+</gallery>
+
+=== 渲染图 ===
+<gallery>
+File:Slime without Outer.png|去除外层皮肤后的史莱姆
+</gallery>
+
+== 参见 ==
+* [[岩浆怪]] — 只在下界生成的一种相似生物。
+* [[硫方怪]] — 在硫黄洞穴中生成的相似生物。
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|mobs}}
+
+[[Category:敌对生物]]
+
+[[de:Schleim]]
+[[en:Slime]]
+[[es:Slime]]
+[[fr:Slime]]
+[[hu:Nyálka]]
+[[it:Gelatina]]
+[[ja:スライム]]
+[[ko:슬라임]]
+[[lzh:黏膠魔]]
+[[nl:Slijmkubus]]
+[[pl:Szlam]]
+[[pt:Slime]]
+[[ru:Слизень]]
+[[th:สไลม์]]
+[[uk:Слимак]]

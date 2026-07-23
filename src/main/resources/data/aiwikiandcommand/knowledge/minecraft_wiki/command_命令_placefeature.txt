@@ -1,0 +1,457 @@
+# 页面: 命令/placefeature
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/placefeature
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{removed|本条目所介绍的命令已在[[Java版22w18a]]中被{{cmd|place feature}}替代并在[[基岩版1.18.20.27]]中被移除}}
+{{Infobox command
+|name=placefeature
+|oplevel=2
+|cheat=1
+}}
+
+在满足条件的指定位置放置一个[[地物数据格式|地物]]。
+
+== 语法 ==<!--
+* '''Java版'''-->
+: <code>placefeature <feature> [<pos>]</code><!--
+
+* '''基岩版（暂不可用）'''
+: <code>/placefeature <featureName: Features> [position: x y z]</code>
+: <code>/placefeature <featureRule: featureRules> [position: x y z]</code>-->
+
+== 参数 ==
+{{argument|feature|resource_location}}
+: 指定要放置的可用地物（包含[[数据包]]内的地物）的[[命名空间ID]]。
+: 下表列举了原版数据包内所含的可用地物的命名空间ID：
+: {| class="wikitable sortable collapsible collapsed"
+! 地物 !! 命名空间ID<ref group="注">此处省略了默认的<code>minecraft:</code>命名空间</ref> || 放置要求<ref group="注">与<code>net.minecraft.data.worldgen.features</code>子类中定义的要求大体相同</ref>
+|-
+| [[金合欢树]] || <code>acacia</code> || 放置点满足金合欢树生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[紫晶洞]] || <code>amethyst_geode</code> || 放置点周围不存在空气和具有{{cd|#geode_invalid_blocks}}标签的方块。
+|-
+| [[杜鹃树]] || <code>azalea_tree</code> || 放置点满足杜鹃树生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[竹子]]（无[[灰化土]]） || <code>bamboo_no_podzol</code> || 放置处的方块是[[空气]]放置就能成功，但是只有在放置点下方是带有{{cd|#dirt}}标签的方块时才能真正放置。
+|-
+| 竹子（有灰化土） || <code>bamboo_some_podzol</code> || 放置处的方块是空气放置就能成功，但是只有在放置点下方是带有{{cd|#dirt}}标签的方块时才能真正放置。
+|-
+| [[竹林]]的[[丛林树]] || <code>bamboo_vegetation</code> || 放置点满足丛林树所有生长条件。
+|-
+| 玄武岩[[团簇]] || <code>basalt_blobs</code> || 放置点下方至少有一格下界岩。
+|-
+| [[玄武岩石柱林]] || <code>basalt_pillar</code> || 放置点是空气且放置点上方的一格方块不是空气。
+|-
+| [[桦树]] || <code>birch</code> || 放置点满足桦树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 桦树（有0.2%的概率生成[[蜂巢（方块）|蜂巢]]） || <code>birch_bees_0002</code> || 放置点满足桦树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 桦树（有2%的概率生成蜂巢） || <code>birch_bees_002</code> || 放置点满足桦树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 桦树（有5%的概率生成蜂巢） || <code>birch_bees_005</code> || 放置点满足桦树生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[高白桦]] || <code>birch_tall</code> || 放置点满足高桦树所有生长条件。
+|-
+| 下界岩中的[[黑石]]团簇 || <code>blackstone_blobs</code> || 放置点下方至少有一格下界岩。
+|-
+| [[蓝冰（地物）|蓝冰]] || <code>blue_ice</code> || 放置点高度低于海平面高度一格，放置点和放置点下方一格至少有一格水，放置点上东南西北5个方向至少有一格浮冰。
+|-
+| [[奖励箱]] || <code>bonus_chest</code> || 放置点所在区块的表面有至少一个方块能放置箱子。
+|-
+| [[洞穴藤蔓]] || <code>cave_vine</code> || 放置点是空气就能成功，但是只有放置点下方也是空气时才能真正放置。
+|-
+| 带有苔藓的洞穴藤蔓 || <code>cave_vine_in_moss</code> || 放置点是空气就能成功，但是只有放置点下方也是空气时才能真正放置。
+|-
+| [[紫颂植物]] || <code>chorus_plant</code> || 放置点是空气且下方方块是[[末地石]]。
+|-
+| 带有[[垂滴叶]]的[[黏土]]池 || <code>clay_pool_with_dripleaves</code> || 放置点周围有带有{{cd|#lush_ground_replaceable}}标签的方块。
+|-
+| 带有垂滴叶的黏土 || <code>clay_with_dripleaves</code> || 放置点周围有带有{{cd|#lush_ground_replaceable}}标签的方块。
+|-
+| [[绯红森林]]植被 || <code>crimson_forest_vegetation</code> || 放置点下方方块含有{{cd|#nylium}}标签。
+|-
+| 绯红森林植被（由[[骨粉]]催生） || <code>crimons_forest_vegetation_bonemeal</code> || 放置点下方方块含有{{cd|#nylium}}标签。
+|-
+| 绯红[[巨型菌]] || <code>crimson_fungus</code> || 放置点下方方块是绯红菌岩。
+|-
+| 绯红巨型菌（由绯红菌长成） || <code>crimson_fungus_planted</code> || 放置点下方方块是绯红菌岩。
+|-
+| [[黑森林]]中的树木以及[[巨型蘑菇]] || <code>dark_forest_vegetation</code> || 放置点满足深色橡树和巨型蘑菇所有生长条件。
+|-
+| [[深色橡树]] || <code>dark_oak</code> || 放置点满足深色橡木生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[三角洲]] || <code>delta</code> || 放置点周围平面存在至少存在一格位置满足该点方块不是熔岩、上方是空气且下东南西北5个方向不是空气。
+|-
+| [[沙漠水井]] || <code>desert_well</code> || 放置点下方最高方块是沙子并且以沙子为中心5x5区域内下方第一格和第二格至少有一格不是空气，地物将在这个沙子上放置。
+|-
+| 黏土[[圆盘]] || <code>disk_clay</code> || 放置点是水，且周围有泥土或黏土。
+|-
+| [[草方块]]圆盘 || <code>disk_grass</code> || 放置点是泥巴，且周围有泥土或泥巴，放置的草方块上方为非固体方块且不是水。
+|-
+| [[沙砾]]圆盘 || <code>disk_gravel</code> || 放置点是水，且周围有泥土或草方块。
+|-
+| [[沙子]]圆盘 || <code>disk_sand</code> || 放置点是水，且周围有泥土或草方块。
+|-
+| [[垂滴叶]] || <code>dripleaf</code> || 无放置要求。
+|-
+| [[滴水石簇]] || <code>dripstone_cluster</code> || 放置点是空气或水就放置成功，但是只有在周围有含有{{cd|#base_stone_overworld}}的方块时才能真正生成。
+|-
+| [[末地折跃门]]（由击败[[末影龙]]生成） || <code>end_gateway_delayed</code> || 无放置要求。
+|-
+| 末地折跃门（在外岛自然生成） || <code>end_gateway_return</code> || 无放置要求。
+|-
+| [[末地浮岛]] || <code>end_island</code> || 无放置要求。
+|-
+| 末地主岛[[黑曜石柱]] || <code>end_spike</code> || 无放置要求，但是只有在特定位置才会真正进行放置。这些位置和这个世界的末地主岛黑曜石柱所在位置相同。
+|-
+| [[大型珍异橡树]] || <code>fancy_oak</code> || 放置点满足大型橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 大型珍异橡树（带有蜂巢） || <code>fancy_oak_bees</code> || 放置点满足大型橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 大型珍异橡树（有0.2%的概率生成蜂巢） || <code>fancy_oak_bees_0002</code> || 放置点满足大型橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 大型珍异橡树（有2%的概率生成蜂巢） || <code>fancy_oak_bees_002</code> || 放置点满足大型橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 大型珍异橡树（有5%的概率生成蜂巢） || <code>fancy_oak_bees_005</code> || 放置点满足大型橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 常规花[[斑块]] || <code>flower_default</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| [[繁花森林]]花斑块 || <code>flower_flower_forest</code> || 以放置点为中心的13×5×13区域内至少有一个上方是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| [[草甸]]花斑块 || <code>flower_meadow</code> || 以放置点为中心的13×5×13区域内至少有一个上方是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| [[平原]]花斑块 || <code>flower_plain</code> || 以放置点为中心的13×5×13区域内至少有一个上方是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| [[沼泽]]花斑块 || <code>flower_swamp</code> || 以放置点为中心的13×5×13区域内至少有一个上方是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| [[森林]]花斑块 || <code>forest_flowers</code> || 以放置点为中心的15×7×15区域内至少有一个上方两格都是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| [[生苔的巨石]] || <code>forest_rock</code> || 放置点下方最高的含{{cd|#dirt}}或{{cd|#base_stone_overworld}}标签的方块高度大于{{cd|-{}-''世界底层高度'' - 4}}，并且地物将在这个方块上放置。<ref group="注" name="rock and piles bug">由于{{bug|MC-248187}}，生苔的巨石和方块堆类地物在放置后客户端不会立刻更新，需要手动更新才能看到结果。</ref>
+|-
+| [[化石]]（含有[[煤矿石]]） || <code>fossil_coal</code> || 放置点决定的结构位置包围盒至少有4个角不是空气、熔岩、水。结构位置在放置点正下方附近，高度是{{cd|-{}-''取最小值（高度表OCEAN_FLOOR_WG的值，放置点高度）''}}下面的第15~24格（且高于{{cd|-{}-''世界底层高度'' - 10}}）。<ref group="注" name="fossil update bug">由于{{bug|MC-248220}}，化石地物成功放置后在客户端不更新，需要手动更新才能看到放置结果。</ref>
+|-
+| 化石（含有[[深层钻石矿石]]） || <code>fossil_diamonds</code> || 放置点决定的结构位置包围盒至少有4个角不是空气、熔岩、水。结构位置在放置点正下方附近，高度是{{cd|-{}-''取最小值（高度表OCEAN_FLOOR_WG的值，放置点高度）''}}下面的第15~24格（且高于{{cd|-{}-''世界底层高度'' - 10}}）。<ref group="注" name="fossil update bug"/>
+|-
+| [[冰冻顶层]] || <code>freeze_top_layer</code> || 无放置要求，但是地物在寒冷群系才可能真正放置。
+|-
+| [[发光地衣]] || <code>glow_lichen</code> || 放置点是水或空气且在六个方向上的20格内离放置点最近的空气方块上至少能找到一个石头、安山岩、闪长岩、花岗岩、滴水石块、深板岩、凝灰岩或方解石。
+|-
+| [[荧石]]团簇 || <code>glowstone_extra</code> || 放置点是空气且放置点上方方块是下界岩、玄武岩或黑石。
+|-
+| 棕色[[巨型蘑菇]] || <code>huge_brown_mushroom</code> || 放置点为底面中心的棕色巨型蘑菇生长范围内不存在除了空气和带有{{cd|#leaves}}标签的方块，放置点下方是带有{{cd|#dirt}}或{{cd|#mushroom_grow_block}}标签的方块。
+|-
+| 红色巨型蘑菇 || <code>huge_red_mushroom</code> || 放置点为底面中心的红色巨型蘑菇生长范围内不存在除了空气和带有{{cd|#leaves}}标签的方块，放置点下方是带有{{cd|#dirt}}或{{cd|#mushroom_grow_block}}标签的方块。
+|-
+| [[浮冰]]圆盘 || <code>ice_patch</code> || 放置点正下方的第一个非空气方块是[[雪块]]，地物将在那里被放置。
+|-
+| [[冰刺]] || <code>ice_spike</code> || 放置点正下方的第一个非空气方块是雪块，地物将在那里被放置。
+|-
+| [[冰山]]（由蓝冰组成） || <code>iceberg_blue</code> || 无放置要求，地物将在世界海平面高度被放置。
+|-
+| 冰山（由浮冰组成） || <code>iceberg_packed</code> || 无放置要求，地物将在世界海平面高度被放置。
+|-
+| [[丛林灌木]] || <code>jungle_bush</code> || 放置点满足丛林灌木生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[丛林树]] || <code>jungle_tree</code> || 放置点满足小型丛林树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 小型丛林树（无[[藤蔓]]） || <code>jungle_tree_no_vine</code> || 放置点满足小型丛林树生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[海带]] || <code>kelp</code> || 放置点同水平位置高度为{{cd|''高度表OCEAN_FLOOR的值''}}的方块是水且下方方块是非岩浆块的上表面完整方块。
+|-
+| [[熔岩湖]] || <code>lake_lava</code> || 放置点高度大于{{cd|-{}-''世界底层高度'' - 4}}，放置点下方16×4×16的区域内（放置点位于平面最小点）内只存在固体方块或熔岩，上方16×4×16区域（放置点是平面最小点）不存在流体。
+|-
+| 大型[[玄武岩石柱林]] || <code>large_basalt_columns</code> || 放置点是低于海平面的熔岩。
+|-
+| [[大型滴水石]] || <code>large_dripstone</code> || 放置点上下30格内有[[滴水石块]]或含有{{cd|#dripstone_replaceable_blocks}}标签的方块组成的天花板和地板，且天花板到地板的距离大于4格。
+|-
+| 繁茂洞穴地表黏土 || <code>lush_caves_clay</code> || 放置点周围有带有{{cd|#lush_ground_replaceable}}标签的方块。
+|-
+| [[红树]] || <code>mangrove</code> || 放置点满足红树生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[高红树]] || <code>mangrove_vegetation</code> || 放置点满足高红树生长条件的空间要求。
+|-
+| 草甸的树木 || <code>meadow_trees</code> || 放置点满足橡树和桦树所有生长条件。
+|-
+| [[大型丛林树]] || <code>mega_jungle_tree</code> || 放置点满足大型丛林树生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[大型松树]] || <code>mega_pine</code> || 放置点满足大型丛林树生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[大型云杉]] || <code>mega_spruce</code> || 放置点满足大型云杉树生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[刷怪房]] || <code>monster_room</code> || 以放置点下方一格为中心的9x9水平区域与上方第四格为中心的9x9水平区域只存在固体方块，且以放置点为中心的7x7/7x9/9x9的水平环上有1-4个方块及它上方的方块不是固体方块。
+|-
+| [[苔藓]]斑块 || <code>moss_patch</code> || 放置点周围有带有{{cd|#moss_replaceable}}标签的方块。
+|-
+| 苔藓斑块（由骨粉催生） || <code>moss_patch_bonemeal</code> || 放置点周围有带有{{cd|#moss_replaceable}}标签的方块。
+|-
+| 在天花板上的苔藓斑块 || <code>moss_patch_ceiling</code> || 放置点周围有带有{{cd|#moss_replaceable}}标签的方块。
+|-
+| 苔藓植被 || <code>moss_vegetation</code> || 放置点下方是苔藓块等可以让草、覆地苔藓、杜鹃花丛在其上方生长的方块。
+|-
+| 巨型蘑菇（[[蘑菇岛]]） || <code>mushroom_island_vegetation</code> || 放置点满足巨型蘑菇生长条件。
+|-
+| [[下界苗]] || <code>nether_sprouts</code> || 放置点下方方块含有{{cd|#nylium}}标签。
+|-
+| 下界苗（由骨粉催生） || <code>nether_sprouts_bonemeal</code> || 放置点下方方块含有{{cd|#nylium}}标签。
+|-
+| [[橡树]] || <code>oak</code> || 放置点满足小型橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 橡树（有0.2%的概率生成蜂巢） || <code>oak_bees_0002</code> || 放置点满足小型橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 橡树（有2%的概率生成蜂巢） || <code>oak_bees_002</code> || 放置点满足小型橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 橡树（有5%的概率生成蜂巢） || <code>oak_bees_005</code> || 放置点满足小型橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 大型[[远古残骸]]团簇 || <code>ore_ancient_debris_large</code> || 无放置要求，但是只有在周围有具有{{cd|#base_stone_nether}}标签的方块时才可能真正成功放置。<ref group="注" name="ore update bug">由于{{bug|MC-248301}}，矿石类地物放置成功后在客户端不会立刻更新，需要手动更新后才能看到放置成功的矿石类方块。</ref>
+|-
+| 小型远古残骸团簇 || <code>ore_ancient_debris_small</code> || 无放置要求，但是只有在周围有具有{{cd|#base_stone_nether}}标签的方块时才可能真正成功放置。<ref group="注" name="ore update bug"/>
+|-
+| [[安山岩]]团簇 || <code>ore_andesite</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 7}}，且周围有具有{{cd|#base_stone_overworld}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[黑石]]团簇 || <code>ore_blackstone</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 5}}，且周围有[[下界岩]]。<ref group="注" name="ore update bug"/>
+|-
+| 黏土团簇 || <code>ore_clay</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 5}}，且周围有具有{{cd|#base_stone_overworld}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[煤矿石]]团簇 || <code>ore_coal</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| 煤矿石团簇（减少空气暴露。<ref group="注" name="reduce air exposure">当一个矿石方块即将被放置时，若其暴露在空气中，则有一定概率被跳过。</ref>）|| <code>ore_coal_buried</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| 大型[[铜矿石]]团簇 || <code>ore_copper_large</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| 小型铜矿石团簇 || <code>ore_copper_small</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[钻石矿石]]团簇（无空气暴露。<ref group="注" name="no air exposure">当一个矿石方块即将被放置时，若其暴露在空气中，则会被跳过。</ref>） || <code>ore_diamond_buried</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 3}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签且不暴露在空气中的方块。<ref group="注" name="ore update bug"/>
+|-
+| 大型钻石矿石团簇 || <code>ore_diamond_large</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| 小型钻石矿石团簇 || <code>ore_diamond_small</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 3}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[闪长岩]]团簇 || <code>ore_diorite</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 7}}，且周围有具有{{cd|#base_stone_overworld}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[泥土]]团簇 || <code>ore_dirt</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 5}}，且周围有具有{{cd|#base_stone_overworld}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[绿宝石矿石]]团簇 || <code>ore_emerald</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 3}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[金矿石]]团簇|| <code>ore_gold</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| 金矿石团簇（减少空气暴露。<ref group="注" name="reduce air exposure"/>） || <code>ore_gold_buried</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[花岗岩]]团簇 || <code>ore_granite</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 7}}，且周围有具有{{cd|#base_stone_overworld}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[沙砾]]团簇（生成于[[主世界]]） || <code>ore_gravel</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 5}}，且周围有具有{{cd|#base_stone_overworld}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| 沙砾团簇（生成于[[下界]]） || <code>ore_gravel_nether</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 5}}，且周围有下界岩。<ref group="注" name="ore update bug"/>
+|-
+| [[虫蚀方块]]团簇 || <code>ore_infested</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[铁矿石]]团簇 || <code>ore_iron</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| 小型铁矿石团簇 || <code>ore_iron_small</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 3}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[青金石矿石]]团簇 || <code>ore_lapis</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 3}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| 青金石矿石团簇（无空气暴露。<ref group="注" name="no air exposure"/>） || <code>ore_lapis_buried</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 3}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签且不暴露在空气中的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[岩浆块]]团簇 || <code>ore_magma</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 5}}，且周围有下界岩。<ref group="注" name="ore update bug"/>
+|-
+| [[下界金矿石]]团簇 || <code>ore_nether_gold</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有下界岩。<ref group="注" name="ore update bug"/>
+|-
+| [[下界石英矿石]]团簇 || <code>ore_quartz</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有下界岩。<ref group="注" name="ore update bug"/>
+|-
+| [[红石矿石]]团簇 || <code>ore_redstone</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 3}}，且周围有具有{{cd|#stone_ore_replaceables}}或{{cd|#deepslate_ore_replaceables}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[灵魂沙]]团簇 || <code>ore_soul_sand</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 4}}，且周围有下界岩。<ref group="注" name="ore update bug"/>
+|-
+| [[凝灰岩]]团簇 || <code>ore_tuff</code> || 放置高度≤{{cd|-{}-''周围高度表OCEAN_FLOOR_WG的最大值'' + 7}}，且周围有具有{{cd|#base_stone_overworld}}标签的方块。<ref group="注" name="ore update bug"/>
+|-
+| [[甜浆果丛]]斑块 || <code>patch_berry_bush</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的[[草方块]]。
+|-
+| 棕色[[蘑菇]]斑块 || <code>patch_brown_mushroom</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的方块上表面完整且亮度等级小于13或该方块是[[菌丝体]]。
+|-
+| [[仙人掌]]斑块 || <code>patch_cactus</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气且上方第二格不是液体的沙子、红沙或仙人掌。
+|-
+| 绯红[[菌索]]斑块 || <code>patch_crimson_roots</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的方块是带有{{cd|#dirt}}或{{cd|#nylium}}标签的方块或者是下界岩和耕地。
+|-
+| [[枯萎的灌木]]斑块 || <code>patch_dead_bush</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的沙子、红沙、泥土或所有类型的[[陶瓦]]。
+|-
+| [[火]]斑块 || <code>patch_fire</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的方块是下界岩。
+|-
+| [[草]]斑块 || <code>patch_grass</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| 草、[[蕨]]斑块（用于[[丛林]]） || <code>patch_grass_jungle</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的方块是带有{{cd|#dirt}}标签（但不包括灰化土）的方块或者是耕地。
+|-
+| 大型蕨斑块 || <code>patch_large_fern</code> || 以放置点为中心的15×7×15区域内至少有一个上方两格都是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| [[西瓜]]斑块 || <code>patch_melon</code> || 以放置点为中心的15×7×15区域内至少有一个上方是可替换方块的草方块。
+|-
+| [[南瓜]]斑块 || <code>patch_pumpkin</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的草方块。
+|-
+| 红色[[蘑菇]]斑块 || <code>patch_red_mushroom</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的方块上表面完整且亮度等级小于13或该方块是菌丝体。
+|-
+| [[灵魂火]]斑块 || <code>patch_soul_fire</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的方块是[[灵魂土]]。
+|-
+| [[甘蔗]]斑块 || <code>patch_sugar_cane</code> || 以放置点为中心的9×1×9区域内至少有一个周围临近水且上方为空气的方块是含有{{cd|#dirt}}标签的方块或者是沙子或红沙。
+|-
+| [[向日葵]]斑块 || <code>patch_sunflower</code> || 以放置点为中心的15×7×15区域内至少有一个上方两格都是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| 草、蕨斑块（用于[[针叶林]]） || <code>patch_taiga_grass</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| 高草斑块 || <code>patch_tall_grass</code> || 以放置点为中心的15×7×15区域内至少有一个上方两格都是空气的方块是带有{{cd|#dirt}}标签的方块或者是耕地。
+|-
+| [[睡莲]]斑块 || <code>patch_waterlily</code> || 以放置点为中心的15×7×15区域内至少有一个上方是空气的水方块或冰类方块。
+|-
+| [[干草捆]]堆 || <code>pile_hay</code> || 无放置要求，但是只有旁边有[[土径]]或者上表面完整方块才能真正放置。<ref group="注" name="rock and piles bug"/>
+|-
+| 浮冰、蓝冰堆|| <code>pile_ice</code> || 无放置要求，但是只有旁边有土径或者上表面完整方块才能真正放置。<ref group="注" name="rock and piles bug"/>
+|-
+| 西瓜堆 || <code>pile_melon</code> || 无放置要求，但是只有旁边有土径或者上表面完整方块才能真正放置。<ref group="注" name="rock and piles bug"/>
+|-
+| 南瓜堆 || <code>pile_pumpkin</code> || 无放置要求，但是只有旁边有土径或者上表面完整方块才能真正放置。<ref group="注" name="rock and piles bug"/>
+|-
+| [[雪块]]堆 || <code>pile_snow</code> || 无放置要求，但是只有旁边有土径或者上表面完整方块才能真正放置。<ref group="注" name="rock and piles bug"/>
+|-
+| 云杉树（松树形态） || <code>pine</code> || 放置点满足云杉树生长条件的空间要求，和放置点下方方块无关。
+|-
+| [[滴水石（地物）|滴水石锥]] || <code>pointed_dripstone</code> || 放置点上方或下方是滴水石块或带有{{cd|#dripstone_replaceable_blocks}}的方块。
+|-
+| 杜鹃树（带有[[缠根泥土]]） || <code>rooted_azalea_tree</code> || 放置点是空气就能成功，但是只有上方100格内有杜鹃树生长空间才能真正放置成功。
+|-
+| [[幽匿]]斑簇（[[远古城市]]） || <code>sculk_patch_ancient_city</code> || 放置点是空气或水源且不是[[幽匿感测体]]、[[幽匿催发体]]或[[幽匿尖啸体]]，并且周围有至少一个完整碰撞箱的方块。
+|-
+| 幽匿斑簇（[[深暗之域]]） || <code>sculk_patch_deep_dark</code> || 放置点是空气或水源且不是[[幽匿感测体]]、[[幽匿催发体]]或[[幽匿尖啸体]]，并且周围有至少一个完整碰撞箱的方块。
+|-
+| [[幽匿脉络]] || <code>sculk_vein</code> || 放置点是水或空气且在六个方向上的20格内离放置点最近的空气方块上至少能找到一个石头、安山岩、闪长岩、花岗岩、滴水石块、深板岩、凝灰岩或方解石。
+|-
+| [[海泡菜]] || <code>sea_pickle</code> || 放置点周围的高度为{{cd|''高度表OCEAN_FLOOR''}}的方块是水且下方方块是上表面完整方块。
+|-
+| [[海草]]（有60%的概率生成为高海草） || <code>seagrass_mid</code> || 放置点周围的高度为{{cd|''高度表OCEAN_FLOOR的值''}}的方块是水且下方方块是非岩浆块的上表面完整方块。
+|-
+| 海草（有30%的概率生成为高海草） || <code>seagrass_short</code> || 放置点周围的高度为{{cd|''高度表OCEAN_FLOOR的值''}}的方块是水且下方方块是非岩浆块的上表面完整方块。
+|-
+| 海草 || <code>seagrass_simple</code> || 放置点是水且下方方块是非岩浆块的上表面完整方块。
+|-
+| 海草（有40%的概率生成为高海草） || <code>seagrass_slightly_less_short</code> || 放置点周围的高度为{{cd|''高度表OCEAN_FLOOR的值''}}的方块是水且下方方块是非岩浆块的上表面完整方块。
+|-
+| 海草（有80%的概率生成为高海草） || <code>seagrass_tall</code> || 放置点周围的高度为{{cd|''高度表OCEAN_FLOOR的值''}}的方块是水且下方方块是非岩浆块的上表面完整方块。
+|-
+| 单个生成的[[草丛]] || <code>single_piece_of_grass</code> || 放置点下方方块是耕地或者带有{{cd|#dirt}}标签的方块。
+|-
+| 小型[[玄武岩柱]] || <code>small_basalt_columns</code> || 放置点是低于海平面的熔岩。
+|-
+| [[孢子花]] || <code>spore_blossom</code> || 放置点上方方块下表面完整且放置点是空气。
+|-
+| 熔岩[[涌泉]]（替换雪和浮冰） || <code>spring_lava_frozen</code> || 放置点上方一格和下方一格必须是雪块、细雪方块或浮冰且放置点东南西北4个方向的方块必须有一格空气和三格上方所述方块之一的方块。
+|-
+| [[熔岩]]涌泉（下界） || <code>spring_lava_nether</code> || 放置点上方一格和下方一格必须是下界岩、灵魂沙、沙砾、岩浆块或黑石且放置点东南西北4个方向的方块必须有一格空气和三格上方所述方块之一的方块。
+|-
+| 熔岩涌泉（主世界） || <code>spring_lava_overworld</code> || 放置点上方一格和下方一格必须是石头、安山岩、闪长岩、花岗岩、深板岩、凝灰岩、方解石或泥土且放置点东南西北4个方向的方块必须有一格空气和三格上方所述方块之一的方块。
+|-
+| 下界熔岩涌泉（隐藏） || <code>spring_nether_closed</code> || 放置点上下东南西北6个方向都是下界岩。
+|-
+| 下界熔岩涌泉（暴露于[[空气]]中） || <code>spring_nether_open</code> || 放置点上方一格和下方一格必须是下界岩且放置点东南西北4个方向的方块必须有一格空气和三格下界岩。
+|-
+| [[水]]涌泉 || <code>spring_water</code> || 放置点上方一格和下方一格必须是石头、安山岩、闪长岩、花岗岩、深板岩、凝灰岩、方解石、雪块、细雪方块、浮冰或泥土且放置点东南西北4个方向的方块必须有一格空气和三格上方所述方块之一的方块。
+|-
+| 云杉树 || <code>spruce</code> || 放置点满足云杉树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 高桦树（带有蜂巢） || <code>super_birch_bees</code> || 放置点满足高桦树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 高桦树（有0.2%的概率生成蜂巢）|| <code>super_birch_bees_0002</code> || 放置点满足高桦树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 沼泽橡树 || <code>swamp_oak</code> || 放置点满足沼泽橡树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 高红树 || <code>tall_mangrove</code> || 放置点满足高红树生长条件的空间要求，和放置点下方方块无关。
+|-
+| 橡树和桦树 || <code>trees_birch_and_oak</code> || 放置点满足橡树和桦树所有生长条件。
+|-
+| 树木（[[繁花森林]]） || <code>trees_flower_forest</code> || 放置点满足橡树和桦树所有生长条件。
+|-
+| 树木（[[雪林]]） || <code>trees_grove</code> || 放置点满足云杉树所有生长条件。
+|-
+| 树木（[[丛林]]） || <code>trees_jungle</code> || 放置点满足大型橡树和丛林树所有生长条件。
+|-
+| 树木（[[原始松木针叶林]]） || <code>trees_old_growth_pine_taiga</code> || 放置点满足云杉树所有生长条件。
+|-
+| 树木（[[原始云杉针叶林]]） || <code>trees_old_growth_spruce_taiga</code> || 放置点满足云杉树所有生长条件。
+|-
+| 树木（[[平原]]） || <code>trees_plains</code> || 放置点满足橡树所有生长条件。
+|-
+| 树木（[[热带草原]]） || <code>trees_savanna</code> || 放置点满足金合欢树和橡树所有生长条件。
+|-
+| 树木（[[稀疏丛林]]） || <code>trees_sparse_jungle</code> || 放置点满足橡树和丛林树所有生长条件。
+|-
+| 树木（[[针叶林]]） || <code>trees_taiga</code> || 放置点满足云杉树所有生长条件。
+|-
+| 水边的树木 || <code>trees_water</code> || 放置点满足橡树所有生长条件。
+|-
+| 树木（[[风袭丘陵]]） || <code>trees_windswept_hills</code> || 放置点满足橡树和云杉树所有生长条件。
+|-
+| [[缠怨藤]] || <code>twisting_vines</code> || 放置点是空气且放置点下方是下界岩、诡异菌岩或诡异疣块。
+|-
+| 缠怨藤（由[[骨粉]]催生） || <code>twisting_vines_bonemeal</code> || 放置点是空气且放置点下方是下界岩、诡异菌岩或诡异疣块。
+|-
+| 水下[[岩浆块]] || <code>underwater_magma</code> || 放置点位于水中并且下方5格内有非水方块。
+|-
+| [[藤蔓]] || <code>vines</code> || 放置点是空气且放置点上方和四周至少有一个完整表面。
+|-
+| [[虚空（生物群系）|虚空]]初始平台 || <code>void_start_platform</code> || 无放置要求，但是只有在放置点距离(0,0)区块小于1区块（曼哈顿距离）时才能真正放置。
+|-
+| [[珊瑚礁]] || <code>warm_ocean_vegetation</code> || 放置点是水或者上方是水而放置点是带有{{cd|#corals}}的方块。
+|-
+| 诡异森林植被 || <code>warped_forest_vegetation</code> || 放置点下方方块含有{{cd|#nylium}}标签。
+|-
+| 诡异森林植被（由骨粉催生） || <code>warped_forest_vegetation_bonemeal</code> || 放置点下方方块含有{{cd|#nylium}}标签。
+|-
+| 诡异巨型菌 || <code>warped_fungus</code> || 放置点下方方块是诡异菌岩。
+|-
+| 诡异巨型菌（由[[诡异菌]]长成） || <code>warped_fungus_planted</code> || 放置点下方方块是诡异菌岩。
+|-
+| [[垂泪藤]] || <code>weeping_vines</code> || 放置点是空气且放置点上方是下界岩或下界疣块。
+|}
+: {{arg desc|je=resource_location}}
+{{Notelist}}
+
+{{argument|pos|block_pos}}
+: 指定要放置的已配置地物的原点位置。
+: {{arg desc|je=block_pos}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|参数未正确指定|unparseable}}
+{{Result table|未满足所需放置地物的放置要求|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table}}
+
+== 示例 ==
+* 以命令执行者当前坐标为原点放置一项类型为金合欢树的地物：<code>/placefeature minecraft:acacia ~ ~ ~</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.18.2|dev=22w03a|加入了{{cmd|placefeature|link=none}}命令。}}
+|{{HistoryLine||1.19|dev=22w18a|移除了{{cmd|placefeature|link=none}}命令，其功能由{{cmd|place feature}}子命令继承。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.18.30|dev=1.18.20.25|加入了{{cmd|placefeature|link=none}}命令。
+|由于此命令尚未完全实现，下个测试版有可能会移除此命令。<ref>{{tweet|MattGartzke|1491601001618366467|@MCPE4theBeacon Not quite ready for full implementation. You might see it go away in the next beta, but the team is still working hard on it!}}</ref>}}
+|{{HistoryLine|||dev=1.18.20.27|移除了{{cmd|placefeature|link=none}}命令。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/placefeature]]
+[[en:Commands/placefeature]]
+[[fr:Commandes/placefeature]]
+[[ja:コマンド/placefeature]]
+[[pt:Comandos/placefeature]]

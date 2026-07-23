@@ -1,0 +1,182 @@
+# 页面: Java版26.2-snapshot-3
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8826.2-snapshot-3
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:39
+# 原始 Wikitext 内容:
+
+{{Dangerous version|在部分Mac系统上启动游戏会导致游戏崩溃。<ref>{{bug|MC-307539|||Fixed}}</ref>}}
+{{Infobox version
+|title=26.2-snapshot-3
+|image=26.2-snapshot-3.jpg
+|image2=Java Edition 26.2-snapshot-3 Simplified.png\Java Edition 26.2-snapshot-3 Traditional.png\Java Edition 26.2-snapshot-3 Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2026年4月14日
+|jsonhash=f8ce00355c7535323ad546f1f702e3aaaa48a99a
+|clienthash=b2fc8a4c04fc5984fe408aba387e316a8784d79b
+|serverhash=5f2e44493daf3cd4ab757e59921313c9c8d95151
+|parent=26.2
+|prevparent=26.1.2
+|prev=26.2-snapshot-2
+|next=26.2-snapshot-4
+|nextparent=26.3
+}}<onlyinclude>
+
+'''26.2-snapshot-3'''是[[Java版26.2]]的第3个快照，发布于2026年4月14日<ref>{{article|minecraft-26-2-snapshot-3|Minecraft 26.2 Snapshot 3|Apr 14, 2026}}</ref>，加入了[[硫黄尖锥]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[硫黄尖锥]]'''
+* 一种类似于[[滴水石锥]]的方块。
+* 在[[硫黄洞穴]]生物群系中的[[硫黄]]上自然生成。
+* 放置在方块下表面时为钟乳石形态，放置在上表面为石笋形态。
+* 满足特定条件时，钟乳石形态上方为硫黄时会缓慢生长，并会使下方的方块上开始缓慢生长石笋。
+* 邻近的石笋末端和钟乳石末端会连接为石柱形态，但如果是按住{{key|Shift}}时放置则不会。
+* 石笋形态下方没有方块支撑时会被破坏。
+* 不同於滴水石柱，摔落到石筍形態的尖端不會增加摔落傷害。
+* 钟乳石形态上方没有方块支撑时会变为下落的方块。
+* 下落的钟乳石形态会对实体产生较大伤害。
+* 钟乳石形态不会像滴水石锥一样滴落水或熔岩。
+* 可被[[三叉戟]]击中破坏。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 加入了下列方块标签：
+** <code>#speleothems</code>：滴水石锥和硫黄尖锥
+** <code>#sulfur_spike_replaceable_blocks</code>：硫黄和朱砂
+*** 硫黄尖锥生成时可以取代这些方块。
+
+'''[[实体谓词]]'''
+* 加入了实体子谓词<code>minecraft:entity_tags</code>。
+** 用来检查实体标签。（使用{{cmd|tag}}设置的标签）
+** 格式：
+*** <code>any_of</code>：可选的字符串列表，如果存在，则要匹配的实体必须至少有其中一个标签。
+*** <code>all_of</code>：可选的字符串列表，如果存在，则要匹配的实体必须有其中的全部标签。
+*** <code>none_of</code>：可选的字符串列表，如果存在，则要匹配的实体必须不具有其中任何一个标签。
+
+== 更改 ==
+=== 方块 ===
+'''[[雕纹朱砂]]、[[雕纹硫黄]]'''
+* 更改了纹理。
+
+'''[[磨制朱砂]]、[[朱砂砖]]、[[磨制硫黄]]、[[硫黄砖]]及其对应的[[楼梯]]、[[台阶]]和[[墙]]'''
+* 更改了纹理。
+* 磨制硫黄的英文名称从“Polished Sulfur Block”更改为“Polished Sulfur”。
+
+'''[[烈性硫黄]]'''
+* 不再能合成为[[硫黄]]。
+
+=== 生物 ===
+'''[[硫磺史萊姆|硫方怪]]'''
+* 不再能上[[船]]。
+
+'''[[鹦鹉螺]]'''
+* 更改了冲撞和冲撞冷却结束的音效。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>102.0</code>。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>86.0</code>。
+
+'''[[方块实体数据格式]]'''
+* 移除了方块实体<code>minecraft:bed</code>。
+
+'''[[实体谓词]]'''
+* 实体谓词格式已从多个可选字段的结构更改为类似于数据组件映射的结构。
+* 例如，<code>effects</code>此前是一个可选字段：<syntaxhighlight lang="json">{
+    "effects": {...}
+}</syntaxhighlight>现在它变成了一个组件式的子谓词项目：<syntaxhighlight lang="json">{
+    "minecraft:effects": {...}
+}</syntaxhighlight>
+* 主要更改：
+** 实体谓词所有的键名现在均为命名空间ID。
+*** 由于命名空间ID可以写成没有命名空间（默认为<code>minecraft</code>）的格式，现有的字段名依旧有效。
+*** 例外：字段<code>type</code>被重命名为<code>minecraft:entity_type</code>。
+** 现在未知的子谓词组件会被拒绝，此前未知的字段会被忽略。
+* 现有的特定类型的子谓词被重命名，且移动到顶级。
+** <code>minecraft:lightning</code>移动到<code>minecraft:type_specific/lightning</code>。
+** <code>minecraft:fishing_hook</code>移动到<code>minecraft:type_specific/fishing_hook</code>。
+** <code>minecraft:player</code>移动到<code>minecraft:type_specific/player</code>。
+** <code>minecraft:raider</code>移动到<code>minecraft:type_specific/raider</code>。
+** <code>minecraft:sheep</code>移动到<code>minecraft:type_specific/sheep</code>。
+** <code>minecraft:slime</code>移动到<code>minecraft:cube_mob</code><ref>由于{{bug|MC-307624}}，实际上为<code>minecraft:type_specific/slime</code>。</ref>，现在它在史莱姆和岩浆怪的基础上也包括[[硫磺史萊姆|硫方怪]]。
+* 例如：<syntaxhighlight lang="json">{
+  "type_specific": {
+    "type": "minecraft:player",
+    "looking_at": {
+      "type": "minecraft:ender_dragon"
+    }
+  }
+}</syntaxhighlight>将更改为<syntaxhighlight lang="json">{
+  "minecraft:type_specific/player": {
+    "looking_at": {
+      "minecraft:type": "minecraft:ender_dragon"
+    }
+  }
+}</syntaxhighlight>
+
+'''[[已配置的地物]]'''
+* 更改了地物类型<code>lake</code>：
+** 加入了<code>can_place_feature</code>字段：方块谓词，描述地物可以在哪些方块上放置方块。
+** 加入了<code>can_replace_with_air_or_fluid</code>字段：方块谓词，描述地物可以将哪些方块替换为空气或<code>fluid</code>提供的方块。
+** 加入了<code>can_replace_with_barrier</code>字段：方块谓词，描述地物可以将哪些方块替换为<code>barrier</code>提供的方块。
+
+'''[[物品模型映射]]'''
+* 移除了特殊模型类型<code>minecraft:bed</code>。
+
+'''[[Java版标签|标签]]'''
+* 将方块标签{{cd|d=pretty|#mineable/pickaxe|#happy_ghast_avoids}}中的滴水石锥替换为{{cd|#speleothems}}。
+* 向实体类型标签{{cd|#cannot_be_pushed_onto_boats}}中加入了硫方怪。
+
+== 修复 ==
+{{fixes|fixedin=26.2 Snapshot 3|showdesc=1|new=1
+|;26.2前正式版的漏洞
+|229057|用桶装起被拴绳拴住的美西螈时，拴绳会消失。
+|271008|床的纹理中有未使用的像素。
+|276733|床物品使用羊毛的粒子，而床方块使用木板的粒子。
+|277744|末影人手持使用发光纹理的方块时，方块发出的光较少。
+|302496|有发光效果的末影龙火球不再显示发光轮廓线。
+|306726|透明方块会在移动摄像头时颤动。
+|307227|用空的{{cd|Offers}}NBT标签禁用交易后，重新从NBT加载会导致交易重新启用。
+|307420|游戏会渲染不应渲染的液面。
+|307473|竹子上的方块破坏效果现在总是在方块的中心位置展示。
+|307177|启用JFR分析游戏性能会导致客户端在启动时崩溃。
+|;dev
+|307289|磨制硫黄英文名为“Polished Sulfur Block”，与其他磨制变种的石头类方块不一致。
+|307291|{{cd|friction_modifier}}属性设置为2.5的实体移动时，游戏崩溃。
+|307298|内部有方块的硫方怪在地上移动时播放脚步声。
+|307300|硫方怪内部的岩浆块不发光。
+|307315|现在青蛙会尝试捕食大的岩浆怪。
+|307316|岩浆怪不再掉落岩浆膏。
+|307340|史莱姆外层底面与地面发生深度冲突。
+|307347|从桶中放出并击杀硫方怪不会掉落其内部的方块。
+|307357|硫方怪内部有发光方块时不会发光。
+|307371|{{cd|#sulfur_cube_archetype/fast_flat}}物品标签包括了两个{{cd|pumpkin}}。
+|307405|用桶装起被拴绳拴住的硫方怪时，拴绳消失。
+|307483|在水下使用硫方怪桶时，硫方怪不会在对着的位置放出。
+}}</onlyinclude>
+
+== 影片 ==
+由[[slicedlime]]製作的影片：
+{{yt|yXBeZqfkXas}}
+{{yt|mD4nduuih1g}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|2026}}
+
+[[de:26.2-snapshot-3]]
+[[en:Java Edition 26.2 Snapshot 3]]
+[[es:Java Edition 26.2 Snapshot 3]]
+[[fr:Édition Java 26.2 Snapshot 3]]
+[[it:Java Edition 26.2 Snapshot 3]]
+[[ja:Java Edition 26.2 Snapshot 3]]
+[[nl:26.2 Snapshot 3]]
+[[pt:Edição Java 26.2 Snapshot 3]]
+[[ru:26.2 Snapshot 3 (Java Edition)]]
+[[th:รุ่น Java 26.2 Snapshot 3]]
+[[uk:26.2 Snapshot 3 (Java Edition)]]

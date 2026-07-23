@@ -1,0 +1,49 @@
+# 页面: 自定义Boss栏存储格式
+# 来源: https://zh.minecraft.wiki/w/%E8%87%AA%E5%AE%9A%E4%B9%89Boss%E6%A0%8F%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:34:50
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+'''自定义Boss栏存储文件'''是游戏存储自定义[[Boss栏]]所用的文件。
+
+== 存储格式 ==
+自定义Boss栏存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/custom_boss_events.dat}}。
+
+自定义Boss栏存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|compound|<''命名空间ID''>}}：一项自定义Boss栏数据。 
+**** {{nbt|string|Color|existonsave=1|required=1}}：Boss栏的颜色代码，可以为<code>pink</code>（粉色）、<code>blue</code>（蓝色）、<code>red</code>（红色）、<code>green</code>（绿色）、<code>yellow</code>（黄色）、<code>purple</code>（紫色）和<code>white</code>（白色）。
+**** {{nbt|bool|CreateWorldFog|existonsave=1|required=1}}：Boss栏是否创建世界迷雾效果。
+**** {{nbt|bool|DarkenScreen|existonsave=1|required=1}}：Boss栏是否会使天空变得黯淡。
+**** {{nbt|int|Max|existonsave=1|required=1}}：Boss栏的最大值。
+**** {{nbt|string}}{{nbt|compound}}{{nbt|list|Name|existonsave=1|required=1}}：（[[文本组件]]）Boss栏所显示的文本。
+**** {{nbt|string|Overlay|existonsave=1|required=1}}：Boss栏的显示样式。可以的值有<code>progress</code>（完整进度条）、<code>notched_6</code>（进度条分为6段）、<code>notched_10</code>（进度条分为10段）、<code>notched_12</code>（进度条分为12段）和<code>notched_20</code>（进度条分为20段）。
+**** {{nbt|bool|PlayBossMusic|existonsave=1|required=1}}：Boss栏是否播放boss音乐。
+**** {{nbt|list|Players|existonsave=1|required=1}}：可以看见Boss栏的玩家列表。
+***** {{nbt|int-array}}: （[[UUID]]）一个玩家。
+**** {{nbt|int|Value|existonsave=1|required=1}}：Boss栏的当前值。
+**** {{nbt|bool|Visible|existonsave=1|required=1}}：Boss栏是否对列表中的玩家可见。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此自定义Boss栏存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+加载存档时，如果不存在自定义Boss栏存储文件，则游戏会自动生成新文件。
+
+自定义Boss栏的所有数据由命令{{cmd|bossbar}}管理，游戏只会在存档保存时更新此文件。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=18w05a|加入了自定义Boss栏存储数据。
+|此时，自定义Boss栏数据存储于{{filename|[[level.dat]]}}的{{nbt|compound|CustomBossEvents}}标签下。}}
+|{{HistoryLine||26.1|dev=snapshot-6|加入了单独的自定义Boss栏存储文件，自定义Boss栏数据不再存储于{{filename|level.dat}}中。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

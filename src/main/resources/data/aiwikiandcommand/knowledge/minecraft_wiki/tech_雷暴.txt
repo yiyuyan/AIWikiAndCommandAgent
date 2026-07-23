@@ -1,0 +1,106 @@
+# 页面: 雷暴
+# 来源: https://zh.minecraft.wiki/w/%E9%9B%B7%E6%9A%B4
+# 分类: 基岩版独有信息, 环境
+# 抓取时间: 2026-07-14 17:38:28
+# 原始 Wikitext 内容:
+
+{{quote|呜哈哈！雷暴会降低[[亮度]]，这意味着白天在雷暴期间会生成[[怪物]]。这层大气真奇怪。|[[Notch]]|雷暴<ref>{{tweet|notch|57363403102105600|MUOAHAHA! Thunder Storms lower the brightness. That means daytime monsters during storms. This is freakily atmospheric.|April 11, 2011}}</ref>|Notchface.png}}
+[[File:LightningStrike.gif|thumb|在雷暴中，闪电击中了一棵树]]
+
+'''雷暴（Thunderstorm）'''是[[Minecraft]]中偶尔出现的一种危险的[[天气]]。
+
+== 行为 ==
+雷暴是在[[主世界]]随机生成的一种稀有的、全局的天气状况<ref>{{tweet|notch|55984678875836416}}</ref>。雷暴中具体的降水形式视[[生物群系#温度系统|生物群系温度]]和海拔[[高度]]而定。
+
+雷暴只能在[[降雨]]或[[降雪]]天气（下文简称为降雨）开始后随机出现。平均每场降雨持续0.5-1个[[昼夜更替#时间换算|游戏日]]，两场降雨间隔0.5-7.5个游戏日，而雨雪天气变成雷暴天气的概率非常小。具体为以下机制：
+* “降雨计时器”每[[游戏刻]]减少1，每当减少到0时切换当前的降雨状态。降雨“开始”时，初始值会重置为12000-24000的随机值（即0.5-1个游戏日）；降雨“结束”时，初始值会重置为12000-180000之间的随机值（即0.5-7.5个游戏日）。
+* “雷暴计时器”每游戏刻减少1，每当减少到0时切换当前的雷暴状态。但只有当前处于降雨天气时，雷暴才能真正发生。雷暴“开始”时，初始值会重置为3600-15600之间的随机值（即0.15-0.65个游戏日）；雷暴“结束”时，初始值会重置为12,000-180,000之间的随机值（即0.5-7.5个游戏日）。
+** 只有“降雨计时器”和“雷暴计时器”都处于“开始”周期时，游戏才会进入雷暴天气。因此，每个游戏刻后进入雷暴天气的概率仅为1.44%。
+* 此外，还存在只能使用命令开启的“晴天计时器”。这一计时器不为0时，每游戏刻减少1。为正值时，天气将固定为晴天。使用{{cmd|weather clear ''<持续时间>''}}可以设置初始值，也可以不设置参数来进入正常的天气循环。
+
+雷暴天气发生时，即使是在白天，玩家也可以使用[[床]]睡觉来跳过雷暴。此时天气会被设置为晴天，且“降雨计时器”与“雷暴计时器”都会进入“结束”周期并重置初始值，因此起床后短时间内不容易出现雷暴天气。反之，如果期待雷暴发生，就应当尽量保持不去睡觉。
+
+== 效果 ==
+[[File:Lightning.png|thumb|250px|闪电的外观]]
+像雨雪天气那样，雷暴时天空会变暗，[[太阳]]、[[月亮]]和[[星星]]会隐去。雷暴会使整个世界变暗，正午的光照会减至10（不过环境[[亮度]]更接近11.5，且光线中有淡淡的蓝色）。云将从白色变成灰色，不过降雨或闪电实际上并非由这些“乌云”制造。虽然太阳在雨中不可见，早晨和傍晚时地平线上的曙光和暮光仍然可见。
+
+而与雨雪天气不同，雷暴时敌对生物的生成系统判定天空光照被削弱10级，使得这些生物可以在一天中的任何时间生成。
+
+=== 闪电 ===
+{{anchor|闪电}}
+{{main|闪电}}
+'''闪电（Lightning）'''是雷暴天气的标志性特征之一，会在雷暴天气持续期间随机落下。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Thunder1.ogg
+|sound2=Thunder2.ogg
+|sound3=Thunder3.ogg
+|source=天气
+|description=雷鸣
+|subtitle={{tp|subtitles.entity.lightning_bolt.thunder}}
+|id=entity.lightning_bolt.thunder
+|translationkey=subtitles.entity.lightning_bolt.thunder
+|foot=1}}
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=ambient.weather.thunder1.wav
+|sound2=ambient.weather.thunder2.wav
+|sound3=ambient.weather.thunder3.wav
+|source=天气
+|description=雷鸣
+|id=ambient.weather.thunder
+|typeid=thunder
+|soundvolume=1000.0
+|soundpitch=0.6-1
+|sounddistance=100
+|soundpreload=1
+|foot=1
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|加入了雷暴和闪电。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w39a|在雷暴期间渲染亮度会降低。此前只有天空变暗，地面不变暗但会生成怪物。
+|现在云和天空在雷暴期间会变得更暗。}}
+|{{HistoryLine||1.13|dev=18w07a|现在若玩家在雷暴天气下向一个露天生物投掷带有[[引雷]]魔咒的[[三叉戟]]，一道闪电会生成并击中该生物。这是玩家不使用命令而手动生成闪电的唯一方式。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了雷暴和闪电。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了雷暴和闪电。}}
+}}
+
+== 你知道吗 ==
+* {{in|be}}如果雷暴天气正在发生时玩家退出游戏，则再进入时只会下雨。
+
+== 画廊 ==
+<gallery>
+File:Void Thunder.png|在虚空里发生雷暴时的样子
+File:Witch Brawl.png|雷暴中女巫互相攻击的场景
+File:Lightning Rod Strike.png|雷暴时[[闪电束]]击中[[避雷针]]
+</gallery>
+
+== 参见 ==
+* [[Tutorial:雷暴生存]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[de:Gewitter]]
+[[en:Thunderstorm]]
+[[es:Tormenta]]
+[[fr:Orage]]
+[[it:Tempesta]]
+[[ja:雷雨]]
+[[ko:뇌우#번개]]
+[[nl:Onweersbui]]
+[[pl:Burza]]
+[[pt:Tempestade]]
+[[ru:Погода#Гроза]]

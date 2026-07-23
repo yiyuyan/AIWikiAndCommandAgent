@@ -1,0 +1,225 @@
+# 页面: 讲台
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%B2%E5%8F%B0
+# 分类: Java版独有信息, 使用简单计算器的页面, 使用计算器的页面, 功能方块, 可再生资源, 基岩版独有信息, 方块, 红石
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|group1=空置
+|1-1=Lectern.png
+|1-2=Lectern BE.png
+|*-1caption={{el|je}}
+|*-2caption={{el|be}}
+|group2=放书
+|2-1=Lectern Book.png
+|2-2=Lectern Book BE.png
+|invimage=Lectern
+|invimage2=----
+|invimage3=Lectern BE
+|light=0
+}}
+{{quote|讲台是由Minecraft开发者[[Dinnerbone]]添加的，他于2012年在Reddit上写道，他已经着手于制作“书台”有一段时间了。多年来，他曾多次尝试完善这一设想，但直到2019年的村庄与掠夺更新，讲台才终于融入村民的生活。|[[Duncan Geere]]<ref>{{article|lectern|Taking Inventory: Lectern|November 23, 2023}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''讲台（Lectern）'''是一种可以用来放[[书]]供[[玩家]]阅读的方块，也是一种村民的[[工作站點]]。
+
+== 生成 ==
+=== 自然生成 ===
+讲台能在[[村庄]]的[[村庄/结构/图示#图书馆1|图书馆]]中生成。
+
+讲台还会在[[远古城市]]中心的红石地下室里生成。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1=Any wood Slab
+|B1=Any wood Slab
+|C1=Any wood Slab
+|A2=
+|B2=Bookshelf
+|C2=
+|A3=
+|B3=Any wood Slab
+|C3=
+|Output=Lectern
+|type=Redstone
+}}
+
+== 破坏 ==
+挖掘讲台的合适工具是斧。
+
+{{Breaking table}}
+
+讲台被破坏后会掉落自身和内容物。
+
+== 用途 ==
+讲台可以存放[[书与笔]]或[[成书]]，并使多个玩家可以同时阅读，但无法对书与笔进行编辑。拿着书与笔对空的讲台按下{{control|使用}}键可以把书与笔或成书放在讲台上。然后，再按{{control|使用}}键可以打开并阅读这部书。之后点击界面上的“取书”按钮可以将放在上面的书与笔或成书取下。
+
+{{in|Java}}讲台无法被活塞移动。
+
+=== 红石元件 ===
+{{see also|红石电路|红石元件列表}}
+当翻动放在讲台上的书的页面时，讲台会产生一次长度为{{convert|2}}的[[红石电路#信号与脉冲|红石脉冲]]。该次脉冲可以：
+
+* 激活毗邻（上下左右前后）的红石元件；
+* 激活毗邻的[[红石线]]，提供15强度的信号；
+* '''[[红石电路/充能与激活|强充能]]'''下方的方块至15强度。
+
+[[红石比较器]]可以检测翻页进度并发出红石信号，红石信号的强度取决于书被打开的页数和总页数。书仅有1页时，红石比较器总发出15强度的信号。当书的页数多于1页时，书翻到第1页时总发出1强度的信号，而翻到最后一页时总发出15强度的信号。对于多于1页的书，红石信号强度的计算方式为：
+
+<math>\left\lfloor 1+\frac{\text{当前打开的页码}-1}{\text{书的总页码}-1}\times14 \right\rfloor</math>，其中<math>\left\lfloor x \right\rfloor</math>表示向下取整。
+
+{{in|be}}讲台一次显示两页内容。只有最后一页的右侧上写有内容时，最后一页才会改变页码与红石信号强度的对应关系。因此，红石比较器检测3页的书得到的结果与检测写有内容的1页或2页的书相同，均为15强度的信号，如同{{in|je}}红石比较器检测1页书那样。对于4页或更多页的书，红石信号强度的计算方式为：
+
+<math>\left\lfloor 1+\frac{\left\lfloor \frac{\text{当前打开的页面中写有内容的页的最大页码数}}{2} \right\rfloor-1}{\left\lfloor \frac{\text{书的总页码}}{2} \right\rfloor-1}\times14 \right\rfloor</math>，其中<math>\left\lfloor x \right\rfloor</math>表示向下取整。
+
+红石比较器可以隔着红石导体检测讲台。
+
+=== 更改村民职业 ===
+{{See also|村民#工作站点与床}}
+如果一个讲台没有被[[村民]]认领，则附近的任意一个失业村民有机会转变[[职业]]为[[图书管理员]]。
+
+=== 燃料 ===
+讲台可以作为[[熔炉]]、[[高炉]]或[[烟熏炉]]的燃料，1个讲台可以烧制1.5个物品。
+
+=== 安全保护 ===
+{{exclusive|je|section=1}}
+{{Filetr|Lectern warning.png|thumb|300px|讲台的物品提示框警告信息}}
+{{in|je}}讲台属于“仅管理员可设置数据”的方块。
+
+非管理员玩家对讲台按下{{key|Ctrl}}+{{control|选取方块}}时不会复制方块实体数据，放置物品栏中已有的带有方块实体数据的讲台也不会将数据实际加载。
+
+管理员玩家的物品栏中带有方块实体数据的讲台的物品[[提示框]]中会显示警告信息。
+
+== 音效 ==
+{{Sound table/Block/Wood}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|showforms=y
+|generatetranslationkeys=java
+|Lectern
+|spritetype=block
+|nameid=lectern
+|showblocktags=je
+|blocktags={{GameTag|blocks|lectern}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=lectern
+|spritetype=block
+|nameid=lectern
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|showforms=y
+|generatetranslationkeys=bedrock
+|Lectern
+|spritetype=block
+|nameid=lectern
+|showblocktags=be
+|blocktags={{GameTagBE|block|lectern}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=lectern
+|spritetype=block
+|nameid=Lectern
+|foot=1
+}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+讲台拥有与其附加数据相关联的方块实体。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2012年8月18日|link=https://www.reddit.com/r/Minecraft/comments/yf5im/suggestion_storable_books/c5v03bq/?context=1|[[File:Lectern (pre-release).png|32px]] [[File:Lectern Book (pre-release).png|32px]] 讲台是[[Dinnerbone]]的一个旧计划。它的原意是作为[[成书]]的台，让玩家更容易地阅读。不过他在创造其中途时遇到了一些问题，所以他放弃了这个主意，但是他说不久后可能会重启加入讲台的工作。}}
+|{{HistoryLine||2013年12月18日|link=https://www.reddit.com/r/Minecraft/comments/1t6qn7/i_am_dinnerbone_a_minecraft_developer_ask_me/ce4z2v5/?context=3|Dinnerbone在他的[[wzh:Reddit|Reddit]] AMA说他考虑重新加入讲台，但他之后又打消了这个念头，因为“有些地方感觉不对劲”。}}
+|{{HistoryLine||2018年10月18日|link={{tweet|Dinnerbone|1052917362482122752}}|Dinnerbone透露讲台又一次在开发中了。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w44a|[[File:Lectern JE1.png|32px]] [[File:Invicon Lectern Revision 1.png|32px]]加入了讲台。
+|讲台只能从[[创造模式物品栏]]中获得，并没有任何功能。
+|讲台拥有与其附加数据相关联的方块实体。
+|讲台拥有一个{{code|BookItem}}槽位，它包含了展示中的[[书]]物品。但此槽位不可设定，它也没有被编写到讲台的方块实体。}}
+|{{HistoryLine|||dev=18w45a|[[File:Invicon Lectern.png|32px]] 更改了讲台的物品栏纹理。
+|[[File:Lectern JE2 BE1.png|32px]] 更改了讲台的纹理和UV。
+|更改了讲台的底部纹理，从[[File:Lectern (facing NWU) JE1.png|32px]]更改为[[File:Lectern (facing NWU) JE2.png|32px]]。}}
+|{{HistoryLine|||dev=18w47a|[[File:Lectern (facing NWU) JE3.png|32px]] 再次更改了讲台的底部纹理。}}
+|{{HistoryLine|||dev=18w48a|讲台现在会自然生成在平原[[村庄]]中。}}
+|{{HistoryLine|||dev=18w49a|讲台现在会自然生成在热带草原和积雪的冻原村庄里的图书馆中。}}
+|{{HistoryLine|||dev=19w02a|加入了讲台的合成配方。
+|[[File:Lectern Book JE1 BE1.png|32px]] 讲台现在可以用来放[[书]]。
+|现在当讲台上的书翻页时，讲台会发出一次红石脉冲。}}
+|{{HistoryLine|||dev=19w03a|一些方块不再能放置在讲台的上表面。<ref>{{bug|MC-141991|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=19w03c|讲台现在有正确的{{cd|cullface}}参数，并修改了在第一人称视角下，讲台在玩家右手时的变换。}}
+|{{HistoryLine|||dev=19w11a|讲台在可作为[[图书管理员]]村民的工作站点方块。}}
+|{{HistoryLine||1.17|dev=21w11a|更改了讲台的模型。}}
+|{{HistoryLine||1.18|dev=pre5|[[File:Lectern JE3 BE2.png|32px]] [[File:Lectern Book JE2 BE2.png|32px]] 更改了讲台的纹理。}}
+|{{HistoryLine||1.19|dev=22w13a|现在讲台可以生成于[[远古城市]]中心的地下室。}}
+|{{HistoryLine||1.21.4|dev=24w44a|加入了讲台的安全保护提示。}}
+|{{HistoryLine|Bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Lectern (S) BE1.png|32px]] [[File:Lectern Book (S) BE1.png|32px]] 加入了讲台。
+|加入了讲台的合成配方。
+|讲台可以用来放[[书]]。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|现在当讲台上的书被翻页时，讲台会发出一次红石脉冲。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.22|[[File:Lectern (S) BE2.png|32px]] [[File:Lectern Book (S) BE2.png|32px]] 更改了讲台的纹理。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.26|现在讲台可以生成于[[远古城市]]中心的地下室。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|讲台的硬度由2改为2.5。
+|讲台的爆炸抗性由2改为2.5。}}
+|{{HistoryLine|||dev=1.20.30.20|现在讲台使用方块状态{{cd|minecraft:cardinal_direction}}，并弃用了{{cd|direction}}。}}
+|{{HistoryLine|ps4}}
+|{{HistoryLine||1.90|[[File:Lectern JE3 BE2.png|32px]] [[File:Lectern Book JE2 BE2.png|32px]] 加入了讲台。}}
+|{{HistoryLine||1.91|现在当讲台上的书被翻页时，讲台会发出一次红石脉冲。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:Lectern1.png|第一张旧讲台的图片
+File:Lectern2.png|第二张旧讲台的图片
+File:New Lectern.jpg|正在开发中的新讲台<ref>{{tweet|Dinnerbone|1052917362482122752|sup|October 18, 2018}}</ref>
+File:Lectern with book.png|存放着书与笔的讲台
+File:Lectern with a book from above.png|上面有书的讲台（俯视图）
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:功能方块]]
+
+[[de:Lesepult]]
+[[en:Lectern]]
+[[es:Atril]]
+[[fr:Pupitre]]
+[[it:Leggio]]
+[[ja:書見台]]
+[[ko:독서대]]
+[[nl:Lessenaar]]
+[[pl:Pulpit]]
+[[pt:Atril]]
+[[ru:Кафедра]]
+[[th:แท่นอ่านหนังสือ]]
+[[uk:Катедра]]

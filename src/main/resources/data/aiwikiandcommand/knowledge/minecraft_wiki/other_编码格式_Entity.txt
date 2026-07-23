@@ -1,0 +1,955 @@
+# 页面: 编码格式/Entity
+# 来源: https://zh.minecraft.wiki/w/%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/Entity
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:35
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+此条目记录了实体继承树中各个实体父{{tr|类|類別}}的共通标签树。
+
+{{TOC|right}}
+
+本条目部分内容合并自其他页面，详见[[special:链入页面/编码格式/Entity|本页面的链入页面]]。
+
+下列结构需要与最新版本同步更新：
+
+{| class="wikitable"
+! 结构名称 !! 引用名称 !! 相关模板
+|-
+| 箭类弹射物共通标签 || <code>codec_abstract_arrow</code> || {{tl|nbt inherit/arrow}}
+|-
+| 携带物品的可骑乘生物数据 || <code>codec_abstract_chested_horse</code> || 嵌入
+|-
+| 马类共通标签 || <code>codec_abstract_horse</code> || {{tl|nbt inherit/horse}}<br>{{tl|nbt inherit/horse noage}}
+|-
+| 火球类弹射物共通标签 || <code>codec_abstract_hurting_projectile</code> || {{tl|nbt inherit/fireball}}
+|-
+| 矿车共通标签 || <code>codec_abstract_minecart</code> || {{tl|nbt inherit/minecart}}
+|-
+| 可成长生物共通标签 || <code>codec_ageable_mob</code> || {{tl|nbt inherit/breedable}}
+|-
+| 动物共通标签 || <code>codec_animal</code> || {{tl|nbt inherit/animal}}<br>{{tl|nbt inherit/animal noage}}
+|-
+| 容器运输实体共通标签 || <code>codec_container_entity</code> || {{tl|nbt inherit/container entity}}
+|-
+| 实体共通标签 || <code>codec_entity</code> || {{tl|nbt inherit/entity}}
+|-
+| 言论数据 || <code>codec_gossips</code> || 嵌入
+|-
+| 悬挂类实体共通标签 || <code>codec_hanging_entity</code> || {{tl|nbt inherit/hangable}}
+|-
+| 生物共通标签 || <code>codec_living_entity</code> || {{tl|nbt inherit/living entity}}
+|-
+| 交易数据 || <code>codec_merchant_offers</code> || 嵌入
+|-
+| AI生物共通标签 || <code>codec_mob</code> || {{tl|nbt inherit/mob}}
+|-
+| 状态效果实例数据 || <code>codec_mob_effect_instance</code> || {{tl|nbt inherit/effect}}
+|-
+| 中立生物共通标签 || <code>codec_neutral_mob</code> || {{tl|nbt inherit/angerable}}
+|-
+| 弹射物共通标签 || <code>codec_projectile</code> || {{tl|nbt inherit/projectile}}
+|-
+| 袭击者共通标签 || <code>codec_raider</code> || {{tl|nbt inherit/raidable}}
+|-
+| 玩家数据 || <code>codec_server_player</code> || 嵌入
+|-
+| 变种生成选择器 || <code>codec_spawn_priority_selector</code> || 嵌入
+|-
+| 可驯服动物共通标签 || <code>codec_tamable_animal</code> || {{tl|nbt inherit/tameable}}<br>{{tl|nbt inherit/tameable noage}}
+|-
+| 投掷物弹射物共通标签 || <code>codec_throwable_item_projectile</code> || {{tl|nbt inherit/item projectile}}
+|-
+| 村民数据 || <code>codec_villager_data</code> || 嵌入
+|-
+| 僵尸共通标签 || <code>codec_zombie</code> || {{tl|nbt inherit/zombie}}
+|}
+
+下列特定版本中出现的NBT结构：
+
+{| class="wikitable"
+! 结构名称 !! 版本 !! 引用名称
+|-
+| 实体共通标签 || [[23w13a_or_b]] || <code>codec_entity_23w13a_or_b</code>
+|-
+| 生物共通标签 || [[23w13a_or_b]] || <code>codec_living_entity_23w13a_or_b</code>
+|-
+| AI生物共通标签 || [[23w13a_or_b]] || <code>codec_mob_23w13a_or_b</code>
+|-
+| 状态效果实例数据 || [[23w13a_or_b]] || <code>codec_mob_effect_instance_23w13a_or_b</code>
+|-
+| 实体共通标签 || [[24w14potato]] || <code>codec_entity_24w14potato</code>
+|-
+| 生物共通标签 || [[24w14potato]] || <code>codec_living_entity_24w14potato</code>
+|-
+| AI生物共通标签 || [[24w14potato]] || <code>codec_mob_24w14potato</code>
+|-
+| 状态效果实例数据 || [[24w14potato]] || <code>codec_mob_effect_instance_24w14potato</code>
+|-
+| 僵尸共通标签 || [[24w14potato]] || <code>codec_zombie_24w14potato</code>
+|-
+| 实体共通标签 || [[25w14craftmine]] || <code>codec_entity_25w14craftmine</code>
+|-
+| 生物共通标签 || [[25w14craftmine]] || <code>codec_living_entity_25w14craftmine</code>
+|-
+| AI生物共通标签 || [[25w14craftmine]] || <code>codec_mob_25w14craftmine</code>
+|-
+| 状态效果实例数据 || [[25w14craftmine]] || <code>codec_mob_effect_instance_25w14craftmine</code>
+|-
+| 实体共通标签 || [[26w14a]] || <code>codec_entity_26w14a</code>
+|}
+
+== 当前版本 ==
+=== 箭类弹射物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.projectile.AbstractArrow}}
+<div class="treeview">
+* {{nbt|compound}} <code>AbstractArrow::readAdditionalSaveData</code> & <code>AbstractArrow::addAdditionalSaveData</code><section begin="codec_abstract_arrow"/>
+** {{nbt|bool|crit|required=1|existonsave=1}}：表示箭是否会造成暴击，当箭触地时此值会被设置为<samp>false</samp>。
+** {{nbt|double|damage|existonsave=1}}：箭的基础伤害，与箭的速度相乘得到箭的最终伤害。此项不存在时游戏默认为2。
+** {{nbt|compound|inBlockState}}：箭触地时所处的方块。
+*** {{nbt inherit/block state}} 
+** {{nbt|bool|inGround|required=1|existonsave=1}}：表示箭是否已经击中并插入方块。如果此值为<samp>false</samp>则箭无法被捡起。
+** {{nbt|compound|item|existonsave=1}}：箭被捡起时的物品。如果此项不存在游戏使用对应实体的默认物品。
+*** {{nbt inherit/itemnoslot}}
+** {{nbt|short|life|required=1|existonsave=1}}：箭的生存时间。箭触地时每游戏刻增大，开始移动时重置为0。当此项计至{{convert|1200}}时，箭被删除。
+** {{nbt|byte|pickup|required=1|existonsave=1}}：箭是否能被捡起。0表示不可以被玩家捡起，1表示可以被玩家在生存或创造模式中捡起，2表示仅可以被[[创造模式]]的玩家捡起。
+** {{nbt|byte|PierceLevel|required=1|existonsave=1}}：箭能射穿实体的数量。射穿实体时此值不会减少，如果射穿实体的数量大于此值则箭被删除，当箭触地时此值会被重置为0。
+** {{nbt|byte|shake|required=1|existonsave=1}}：该箭剩余的抖动时间，在此期间该箭不能被玩家捡起。箭在击中方块时该标签会被设定为{{convert|7}}。
+** {{nbt|string|SoundEvent}}：击中方块或生物时触发的声音事件的ID。如果此项不存在或对应声音事件不存在则使用默认击中音效。
+** {{nbt|compound|weapon}}：射出这支箭的武器。
+*** {{nbt inherit/itemnoslot}}
+<section end="codec_abstract_arrow"/>
+</div>
+
+=== 携带物品的可骑乘生物数据 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.animal.horse.AbstractChestedHorse}}
+<div class="treeview">
+* {{nbt|compound}} <code>AbstractChestedHorse::readAdditionalSaveData</code> & <code>AbstractChestedHorse::addAdditionalSaveData</code><section begin="codec_abstract_chested_horse"/>
+** {{nbt|bool|ChestedHorse|required=1|existonsave=1}}：表示{{#var:name|生物}}身上是否带箱子。
+** {{nbt|list|Items}}：（当{{nbt|bool|ChestedHorse|required=1|existonsave=1}}为<samp>true</samp>时存在并有效）物品栏列表。{{#var:name|生物}}共有{{#var:slots|15}}个槽位，超过槽位范围的物品无效。
+*** {{nbt|compound}}：一个物品。
+**** {{nbt inherit/item}}
+<section end="codec_abstract_chested_horse"/>
+</div>
+
+=== 马类共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.animal.horse.AbstractHorse}}
+<div class="treeview">
+* {{nbt|compound}} <code>AbstractHorse::readAdditionalSaveData</code> & <code>AbstractHorse::addAdditionalSaveData</code><section begin="codec_abstract_horse"/>
+** {{nbt|bool|Bred|required=1|existonsave=1}}：如果此项为<samp>true</samp>且此生物为幼年生物，则尝试跟随附近此值为<samp>true</samp>的成年生物。
+** {{nbt|bool|EatingHaystack|required=1|existonsave=1}}：此可骑乘生物是否正在吃草。
+** {{nbt|int-array|Owner}}: 记录驯服此生物的玩家[[UUID]]，对行为没有影响。如果此生物的{{nbt|bool|Tame}}为<samp>false</samp>，则此值不存在（可以被设置，但游戏不会处理）。
+** {{nbt|bool|Tame|required=1|existonsave=1}}：此可骑乘生物是否被驯服。
+** {{nbt|int|Temper|required=1|existonsave=1}}：（不小于0且不大于生物最大好感度）好感度，喂食会提高这项数值，但不会超过最大好感度。如果好感度不在值域内，则在喂食时会重置到0或最大好感度。更高的值会使其更容易驯服。
+<section end="codec_abstract_horse"/>
+</div>
+
+=== 火球类弹射物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.projectile.AbstractHurtingProjectile}}
+<div class="treeview">
+* {{nbt|compound}} <code>AbstractHurtingProjectile::readAdditionalSaveData</code> & <code>AbstractHurtingProjectile::addAdditionalSaveData</code><section begin="codec_abstract_hurting_projectile"/>
+** {{nbt|double|acceleration_power|existonsave=1}}：忽略阻力的加速度。此项不存在时默认为0.1。
+<section end="codec_abstract_hurting_projectile"/>
+</div>
+
+=== 矿车共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.vehicle.AbstractMinecart}}
+<div class="treeview">
+* {{nbt|compound}} <code>AbstractMinecart::readAdditionalSaveData</code> & <code>AbstractMinecart::addAdditionalSaveData</code><section begin="codec_abstract_minecart"/>
+** {{nbt|int|DisplayOffset}}：展示在矿车中的方块的偏移像素值。正值表示方块向上移动，负值表示向下。值为16会使方块恰好向上移动一倍。
+** {{nbt|compound|DisplayState}}：矿车中的自定义方块状态，不能指定为空标签。
+*** {{nbt inherit/block state}}
+** {{nbt|bool|FlippedRotation|required=1|existonsave=1}}：矿车的移动方向是否发生了反转。
+** {{nbt|bool|HasTicked|required=1|existonsave=1}}：实体是否已经经历过一次游戏刻计算。
+<section end="codec_abstract_minecart"/>
+</div>
+
+=== 可成长生物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.AgeableMob}}
+<div class="treeview">
+* {{nbt|compound}} <code>AgeableMob::readAdditionalSaveData</code> & <code>AgeableMob::addAdditionalSaveData</code><section begin="codec_ageable_mob"/>
+** {{nbt|int|Age|required=1|existonsave=1}}：表示生物的年龄。生物为幼体时为负值；生物为成体时为正值或0，如果为正值则表示距离生物能再次繁衍的时间。
+** {{nbt|boolean|AgeLocked|required=1|existonsave=1}}：表示生物的年龄是否不会随时间自然增长或减少。
+** {{nbt|int|ForcedAge|required=1|existonsave=1}}：生物成年后将被赋予的年龄值。当幼体生物被喂养时此值增大。
+<section end="codec_ageable_mob"/>
+</div>
+
+=== 动物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.animal.Animal}}
+<div class="treeview">
+* {{nbt|compound}} <code>Animal::readAdditionalSaveData</code> & <code>Animal::addAdditionalSaveData</code><section begin="codec_animal"/>
+** {{nbt|int|InLove|required=1|existonsave=1}}：距离生物失去繁衍意愿而停止寻找伴侣的时间。开始求爱模式时此值被设置为{{convert|600}}，每游戏刻此值减少1直至0时失去繁衍意愿。如果{{nbt|int|Age}}不为0则此值无法被设置为正值。
+** {{nbt|int-array|LoveCause}}：引起当前生物繁衍的实体的[[UUID]]。
+<section end="codec_animal"/>
+</div>
+
+=== 容器运输实体共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.vehicle.ContainerEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>ContainerEntity::readChestVehicleSaveData</code> & <code>ContainerEntity::addChestVehicleSaveData</code><section begin="codec_container_entity"/>
+** {{nbt|list|Items}}：（当{{nbt|string|LootTable}}不存在时存在并有效）容器内物品的列表。
+*** {{nbt|compound}}：一个物品。
+**** {{nbt inherit/item}}
+** {{nbt|string|LootTable}}：当容器将被开启或交互时用来填充容器的[[战利品表]]的[[命名空间ID]]。此标签会在物品已被生成后删除。
+** {{nbt|long|LootTableSeed}}：（当{{nbt|string|LootTable}}存在时有效）生成战利品表使用的种子，0或省略此项将会使用[[随机序列]]。此标签会在物品已被生成后删除。
+<section end="codec_container_entity"/>
+</div>
+
+=== 实体共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.Entity}}
+<div class="treeview">
+* {{nbt|compound}} <code>Entity::load</code> & <code>Entity::saveWithoutId</code> & <code>Entity::saveAsPassenger</code><section begin="codec_entity"/>
+** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）实体类型。此数据仅在持久化保存（存储入区块文件、[[结构模板]]、[[蜂巢（方块）|蜂巢]]、[[蜂箱]]数据或作为乘客实体保存）时存在。{{cmd|data}}无法获取此数据，也无法修改。
+** {{nbt|short|Air|existonsave=1}}：（{{interval|left=-20|right=实体最大空气值}}）当前实体所剩的空气值。在指定环境中每刻增加4直至实体最大空气值；在可窒息环境中逐渐减少直至-20，达到-20后如果实体仍然在可窒息环境中则会受到伤害，并将此值重置为0，继续减少进行循环。此值不存在时游戏默认为实体最大空气值。
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}：（[[文本组件]]）当前实体的自定义名称。会出现在玩家的死亡消息与村民的交易界面，以及玩家的光标指向的实体的上方。此项实体数据会被视为数据组件[[数据组件#custom_name|<code>custom_name</code>]]。
+** {{nbt|bool|CustomNameVisible}}：表示实体是否一直渲染名称。如果为<samp>true</samp>，那么名称会一直在它们的上方渲染，而不受光标指向的影响。如果实体没有自定义名称，则渲染默认名称。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|string}}{{nbt|compound|data}}：任意NBT数据。字符串形式只用于加载，游戏在保存时只使用复合标签形式。此项实体数据会被视为数据组件[[数据组件#custom_data|<code>custom_data</code>]]。
+** {{nbt|double|fall_distance|existonsave=1|required=1}}：当前实体已经摔落的距离。值越大，实体落地时受到的摔落伤害越大。
+** {{nbt|short|Fire|existonsave=1|required=1}}：正值代表距离火熄灭剩余的时间，负值表示当前实体能够在火中站立而不着火的时间，单位为游戏刻。未着火且未接触火时，玩家为-{{convert|20}}，其他实体为-{{convert|1}}。
+** {{nbt|bool|Glowing}}：实体是否有发光的轮廓线。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|HasVisualFire}}：表示实体是否视觉上正在着火。如果为<samp>true</samp>，实体会渲染为正在着火，但实际上可能没有着火。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|Invulnerable|existonsave=1|required=1}}：实体是否能抵抗绝大多数伤害。如果为<samp>true</samp>，实体只会受到来自[[创造模式]]玩家的伤害和属于{{TagLink|damage_type|bypasses_invulnerability}}标签的伤害。
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体的移动距离和方向。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|bool|NoGravity}}：实体是否不会受到重力的影响。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|OnGround|existonsave=1|required=1}}：实体是否正在接触地面。
+** {{nbt|list|Passengers}}：正在骑乘当前实体的实体的数据，递归标签。此值仅在使用{{cmd|summon}}指定标签生成实体、[[刷怪笼]]和[[试炼刷怪笼]]指定生成数据生成实体时此标签才可以有效设置，其他任何方式均无法有效设置。
+*** {{nbt|compound}}：一个乘客。
+**** 详见[[实体数据格式]]。
+** {{nbt|int|PortalCooldown|existonsave=1|required=1}}：距离当前实体下一次可以穿过[[下界传送门]]传送的时间，以游戏刻计。在使用下界传送门传送后，此项根据玩家游戏模式和当前游戏规则设置冷却。当实体不接触下界传送门方块时，此值每游戏刻减1直至0，此时才可以再次使用下界传送门传送。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+** {{nbt|list|Rotation|existonsave=1|required=1}}：实体的旋转角度，使用角度制。如果角度值为无限或非数（NaN），则对应角度会被修改为0度。
+*** {{nbt|float}}：当前实体以Y轴为中心，与正南方以顺时针方向旋转的视角角度（即偏转角）。如果角度值超出对应值域，则在按照相同朝向重新限制到值域内。
+*** {{nbt|float}}：（{{interval|left=-90|right=90}}）当前实体与视角与水平面之间的倾斜角（即俯仰角）。水平面为0，正值表示面朝下方，相反则为上方。如果此值超过值域，则被强制修改以回到值域。
+** {{nbt|bool|Silent}}：实体是否不会发出任何声音。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|list|Tags}}：实体的自定义[[目标选择器#记分板标签|记分板标签]]。不超过1024个。
+*** {{nbt|string}}：一项记分板标签。
+** {{nbt|int|TicksFrozen}}：实体的冷冻时间。当实体在[[细雪]]中时每刻增加1，离开细雪则每刻减少2。此项不存在时游戏默认为0。
+** {{nbt|int-array|UUID|existonsave=1|required=1}}：（[[UUID]]）实体的UUID。此值无法使用{{cmd|data}}修改。
+<section end="codec_entity"/>
+</div>
+
+=== 生物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.LivingEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>LivingEntity::readAdditionalSaveData</code> & <code>LivingEntity::addAdditionalSaveData</code><section begin="codec_living_entity"/>
+** {{nbt|float|AbsorptionAmount|existonsave=1|required=1}}：生物的[[伤害吸收值]]。
+** {{nbt|list|active_effects}}：该生物的状态效果的列表。如果当前生物没有状态效果则不存在此标签。
+*** {{nbt|compound}}：一项状态效果。
+**** {{nbt inherit/effect}}
+** {{nbt|list|attributes|existonsave=1}}：当前生物的[[属性]]的列表。
+*** {{nbt|compound}}：一个属性。
+**** {{nbt|string|id|required=1|existonsave=1}}：（命名空间ID）属性的命名空间ID。
+**** {{nbt|double|base|required=1|existonsave=1}}：属性的基础值。
+**** {{nbt|list|modifiers}}：限制本条属性的[[属性#修饰符|修饰符]]。修饰符在内部计算中调整基础值，但并不更改原值。修饰符永远不会使基础值调整后超过属性的最大值或最小值。
+***** {{nbt|compound}}：一个属性修饰符。
+****** {{nbt|string|id|required=1|existonsave=1}}：（命名空间ID）属性修饰符的命名空间ID。
+****** {{nbt|double|amount|required=1|existonsave=1}}：计算中修饰符调整基础值的数值。
+****** {{nbt|string|operation|required=1|existonsave=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算模式]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。如果设置值无效，则为<code>add_value</code>（Op0）。
+** {{nbt|compound|Brain|existonsave=1}}：当前生物需要记住的所有信息。
+*** {{nbt|compound|memories|required=1|existonsave=1}}：生物的记忆，用于[[生物AI]]的计算。
+**** 见[[生物记忆]]。
+** {{nbt|list|current_explosion_impact_pos}}：生物被任何爆炸击退时，此数据才存在，表示被爆炸击退时的坐标。当生物落地、陷入方块、使用[[末影珍珠]]和[[紫颂果]]传送，以及玩家切换为[[创造模式]]时此值被清除。
+*** {{nbt|double}}：击退时的X坐标。生物使用[[重锤]]猛击时，如果Y坐标高于生物当前位置，则会被设置为生物当前的X坐标。
+*** {{nbt|double}}：击退时的Y坐标。生物使用重锤猛击时，如果此值高于生物当前位置，则会被设置为生物当前的Y坐标。
+*** {{nbt|double}}：击退时的Z坐标。生物使用重锤猛击时，如果Y坐标高于生物当前位置，则会被设置为生物当前的Z坐标。
+** {{nbt|int|current_impulse_context_reset_grace_time|existonsave=1|required=1}}：爆炸击退减少摔落伤害的最长时间，按游戏刻计。生物被[[风弹|风弹物品风弹]]所产生的[[爆炸#风爆|风爆]]击退或使用重锤时此值被设置为{{convert|40}}，被其他爆炸波及、或{{nbt|list|current_explosion_impact_pos}}被清除时设置为0。此值达到0时清除{{nbt|list|current_explosion_impact_pos}}。
+** {{nbt|short|DeathTime|existonsave=1|required=1}}：距离生物死亡而被删除的时间，同时控制死亡动画。生物存活时为0，濒死时每游戏刻增加1，直至{{convert|20}}时生物被删除。
+** {{nbt|compound|equipment}}：生物装备的物品。玩家主手槽位的物品不在此处保存；如果生物是[[硫磺史萊姆]]，则其身体槽位<code>body</code>的实体数据会被视为数据组件[[数据组件#sulfur_cube_content|<code>sulfur_cube_content</code>]]。
+*** {{nbt|compound|<''[[装备槽位]]''>}}：指定装备槽位上拥有的物品。
+**** {{nbt inherit/itemnoslot}}
+** {{nbt|bool|FallFlying}}：表示生物是否处于滑翔状态。
+** {{nbt|float|Health|existonsave=1}}：（默认为当前生物的最大生命值）当前生物所拥有的生命值。当生命值被设置超过最大生命值时，如果生物受到伤害，生命值会被钳制到最大生命值内。
+** {{nbt|short|HurtTime|existonsave=1|required=1}}：生物被伤害后发红时间的倒计时。当刚刚被伤害时此值被设置为{{convert|10}}，每游戏刻减少1直到0。
+** {{nbt|int-array|last_hurt_by_mob}}：生物最近一次被生物攻击时的生物UUID信息，当攻击生物死亡或卸载时此值被清除。
+** {{nbt|int-array|last_hurt_by_player}}：生物最近一次被玩家攻击时的玩家UUID信息。
+** {{nbt|int|last_hurt_by_player_memory_time}}：（当{{nbt|int-array|last_hurt_by_player}}存在时存在并有效）生物被玩家攻击后此值被设置为{{convert|100}}，每游戏刻减少1，当此值降低到0以下时清除玩家UUID信息。
+** {{nbt|compound|locator_bar_icon}}：生物[[路径点]]图标数据，不存在时默认为<code>{"style":"minecraft:default"}</code>。
+*** {{nbt|int}}{{nbt|list|color}}：覆写此生物的路径点图标颜色，游戏只保存为整数形式。
+**** {{nbt inherit/rgb color}}
+*** {{nbt|string|style|existonsave=1|required=1}}：[[路径点样式]]的命名空间ID。
+** {{nbt|int array|sleeping_pos}}：当前生物正在睡觉的床的坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|string|Team}}：（不能导出和保存，仅可以加载或使用{{cmd|data}}修改）设置当前生物所属的[[队伍]]。
+** {{nbt|int|ticks_since_last_hurt_by_mob}}：（当{{nbt|int-array|last_hurt_by_mob}}存在时存在并有效）生物最近一次被生物攻击后，现在距离上次攻击的游戏刻数。
+<section end="codec_living_entity"/>
+</div>
+
+=== 言论数据 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.ai.gossip.GossipContainer}}
+<div class="treeview">
+* {{nbt|compound}} <code>GossipContainer::update</code> & <code>GossipContainer::store</code><section begin="codec_gossips"/>
+** {{#var:tag|{{nbt|list|Gossips}}}}：{{#var:entity|村民}}存储的[[村民#言论与声望|言论信息]]。
+*** {{nbt|compound}}：一条言论。
+**** {{nbt|int-array|Target|required=1|existonsave=1}}：引发言论的玩家的[[UUID]]。
+**** {{nbt|string|Type|required=1|existonsave=1}}：言论的类型。可以是{{cd|major_negative|minor_negative|major_positive|minor_positive|trading|d=pretty}}。
+**** {{nbt|int|Value|required=1|existonsave=1}}：（{{interval|left_open=0}}）此言论的强度。
+<section end="codec_gossips"/>
+</div>
+
+=== 悬挂类实体共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.decoration.BlockAttachedEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>BlockAttachedEntity::readAdditionalSaveData</code> & <code>BlockAttachedEntity::addAdditionalSaveData</code><section begin="codec_hanging_entity"/>
+** {{nbt|int array|block_pos|required=1|existonsave=1}}：该可悬挂实体的方块坐标。游戏会检查这个方块坐标与自身坐标的距离，超过16格（欧几里得距离）时游戏会在日志中输出警告<code>Block-attached entity at invalid position: <''位置''></code>并忽略此数据。
+<section end="codec_hanging_entity"/>
+</div>
+
+=== 交易数据 ===
+{{codec from source|type=nbt|net.minecraft.world.item.trading.MerchantOffers}}
+<div class="treeview">
+* {{nbt|compound}} <code>MerchantOffers::CODEC</code><section begin="codec_merchant_offers"/>
+** {{nbt|compound|{{#var:tag|Offers}}}}：交易数据。在玩家第一次打开交易菜单时产生。
+*** {{nbt|list|Recipes}}：交易列表。
+**** {{nbt|compound}}：单个交易选项。
+***** {{nbt|compound|buy|required=1|existonsave=1}}：第一个收购物品。如果物品基础数量为''n''，则收购数量为<math>n+\mathrm{max}(0,\lfloor ndm \rfloor)+s</math>，其中''d''为{{nbt|int|demand}}，''m''为{{nbt|float|priceMultiplier}}，''s''为{{nbt|int|specialPrice}}。
+****** {{nbt|string|id|required=1|existonsave=1}}：物品的[[命名空间ID]]，不允许为空气（<code>air</code>）。
+****** {{nbt|compound|components}}：（默认为空）检查收购物品的额外信息。
+******* {{nbt|any|<''物品堆叠组件''>}}：检查指定的物品堆叠组件。当物品与指定的物品堆叠组件限制相同时检查才能成功。
+******** 见[[物品堆叠组件]]。
+****** {{nbt|int|count}}：（{{interval|left_open=0}}，默认为1）收购物品的基础数量。
+***** {{nbt|compound|buyB}}：（默认为空）第二个收购物品。
+****** {{nbt|string|id|required=1|existonsave=1}}：物品的[[命名空间ID]]，不允许为空气（<code>air</code>）。
+****** {{nbt|compound|components}}：（默认为空）检查收购物品的额外信息。
+******* {{nbt|any|<''物品堆叠组件''>}}：检查指定的物品堆叠组件。当物品与指定的物品堆叠组件限制相同时检查才能成功。
+******** 见[[物品堆叠组件]]。
+****** {{nbt|int|count}}：（{{interval|left_open=0}}，默认为1）收购物品的基础数量。
+***** {{nbt|int|demand}}：（默认为0）此项交易的需求，影响第一个收购物品的数量。当生物补货时更新此字段。如果原值为''d''，则更新之后的值<math>d'=d+2u-m</math>，其中''u''是{{nbt|int|uses}}，''m''是{{nbt|int|maxUses}}。
+***** {{nbt|int|maxUses}}：（默认为4）表示在交易选项失效前能进行的最大交易次数。
+***** {{nbt|float|priceMultiplier}}：（默认为0）表示影响收购数量的乘数。
+***** {{nbt|bool|rewardExp}}：（默认为<samp>true</samp>）表示交易是否会提供经验球。
+***** {{nbt|compound|sell|required=1|existonsave=1}}：出售的物品。
+****** {{nbt inherit/itemnoslot}}
+***** {{nbt|int|specialPrice}}：（默认为0）调节第一个收购物品的数量。对于村民，此项受到[[村庄英雄]]和[[村民#言论与声望|言论机制]]的共同降价影响。
+***** {{nbt|int|uses}}：（默认为0）已经交易的次数。如果此值大于{{nbt|int|maxUses}}，此交易失效。
+***** {{nbt|int|xp}}：（默认为1）生物从此交易选项中能获得的经验值。
+<section end="codec_merchant_offers"/>
+</div>
+
+=== AI生物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.Mob}}
+<div class="treeview">
+* {{nbt|compound}} <code>Mob::readAdditionalSaveData</code> & <code>Mob::addAdditionalSaveData</code><section begin="codec_mob"/>
+** {{nbt|bool|CanPickUpLoot|required=1|existonsave=1}}：表示生物是否可以捡起战利品（穿戴捡起的盔甲，使用捡起的武器）。
+** {{nbt|string|DeathLootTable}}：决定当前生物被杀死后掉落物品的[[战利品表]]。
+** {{nbt|long|DeathLootTableSeed}}：生成战利品表的种子，0或未定义则使用[[随机序列]]。此标签必须和{{nbt|string|DeathLootTable}}一起设置否则不生效。
+** {{nbt|compound|drop_chances}}：生物死亡时各种装备槽位物品的掉落概率。没有在此处定义的装备槽位默认掉落概率为8.5%。
+*** {{nbt|float|<''[[装备槽位]]''>}}：（{{interval|left=0}}）指定装备槽位上物品的掉落概率。
+** {{nbt|int array|home_pos}}：生物尝试活动范围的中心，当生物被拴住或骑乘时也会改变。对于[[嘎枝]]而言也表示其绑定的嘎枝之心的位置，对于[[海龟]]而言也表示其生成位置。
+** {{nbt|int|home_radius}}：如果存在，则生物会尝试只在以{{nbt|int array|home_pos}}为球心、此值为半径的范围内活动。
+** {{nbt|int-array}}{{nbt|compound|leash}}：'''二选一'''，代表生物目前是否被拴绳拴住与被拴住时的信息。如果没有被拴住则不存在此标签。
+*** {{nbt condition|当生物被拴绳拴在一个栅栏上时，此标签为{{nbt|int-array|整型数组}}，内部的三个整数分别代表了位置的XYZ坐标值。}}
+*** {{nbt condition|当生物被另一个实体用拴绳拴住时，此标签为{{nbt|compound|复合标签}}，附加的标签如下：}}
+*** {{nbt|int-array|UUID|required=1|existonsave=1}}：拴绳连接到的实体的[[UUID]]。
+** {{nbt|bool|LeftHanded|required=1|existonsave=1}}：表示生物的主手是否为左手。
+** {{nbt|bool|NoAI}}：代表生物的AI是否被禁用。被禁用AI的生物不会尝试移动，也不会被动移动，在合适情况下也不会摔落。
+** {{nbt|bool|PersistenceRequired|required=1|existonsave=1}}：代表生物是否不会被自然删除。
+<section end="codec_mob"/>
+</div>
+
+=== 状态效果实例数据 ===
+{{codec from source|type=nbt|net.minecraft.world.effect.MobEffectInstance}}
+<div class="treeview">
+* {{nbt|compound}} <code>MobEffectInstance::CODEC</code><section begin="codec_mob_effect_instance"/>
+** {{nbt|bool|ambient}}：表示状态效果是否是被信标添加的，即生物发出的状态效果粒子是否有透明度。如果不存在则为<samp>false</samp>。
+** {{nbt|byte|amplifier}}：（无符号8位整数，{{interval|left=0|right=255}}）状态效果的倍率。0表示倍率0，即等级1，以此类推。由于此数字为无符号整数，当值超过127时显示为负数但实际为正数，保存数字''s''和实际代表数字''a''的关系为<math>a=256+s</math>。如果不存在则为0。
+** {{nbt|int|duration}}：距离状态效果失效的时间刻数。如果此值为-1，则此状态效果不会失效。如果不存在则为0。
+** {{nbt|compound|hidden_effect}}：与此状态效果类型相同，但因为等级更低而被覆盖的状态效果信息。当外层状态效果过期失效后，此层状态效果就会尝试生效。
+*** 具有除{{nbt|string|id|required=1|existonsave=1}}外的此结构所有标签，递归定义。
+** {{nbt|string|id|required=1|existonsave=1}}：状态效果的[[命名空间ID]]。
+** {{nbt|bool|show_icon}}：表示是否显示状态效果的图标。如果不存在则与{{nbt|bool|show_particles}}值相同。
+** {{nbt|bool|show_particles}}：表示是否显示粒子效果，以及在计算状态效果混合颜色时此状态效果实例是否参与计算。如果不存在则为<samp>true</samp>。
+<section end="codec_mob_effect_instance"/>
+</div>
+
+=== 中立生物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.NeutralMob}}
+<div class="treeview">
+* {{nbt|compound}} <code>NeutralMob::readPersistentAngerSaveData</code> & <code>NeutralMob::addPersistentAngerSaveData</code><section begin="codec_neutral_mob"/>
+** {{nbt|int-array|angry_at}}：（当{{nbt|long|anger_end_time|required=1|existonsave=1}}存在时存在并有效）引起该生物愤怒的生物的[[UUID]]。
+** {{nbt|long|anger_end_time|required=1|existonsave=1}}：该生物变为非敌对状态的游戏时间。当此值不大于0时该生物不敌对，否则该生物敌对。生物退出愤怒状态时此值为-1。
+<section end="codec_neutral_mob"/>
+</div>
+
+=== 弹射物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.projectile.Projectile}}
+<div class="treeview">
+* {{nbt|compound}} <code>Projectile::readAdditionalSaveData</code> & <code>Projectile::addAdditionalSaveData</code><section begin="codec_projectile"/>
+** {{nbt|bool|HasBeenShot|required=1|existonsave=1}}：表示此弹射物存在时间是否超过{{convert|1}}。游戏使用该标签确保其只触发一次<code>projectile_shoot</code>游戏事件。
+** {{nbt|bool|LeftOwner}}：当此弹射物从扔出者的[[碰撞箱]]首次离开后为<samp>true</samp>，之后此弹射物才可以和其他实体碰撞。
+** {{nbt|int-array|Owner}}：扔出此弹射物的实体[[UUID]]。
+<section end="codec_projectile"/>
+</div>
+
+=== 袭击者共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.monster.PatrollingMonster, net.minecraft.world.entity.raid.Raider}}
+<div class="treeview">
+* {{nbt|compound}} <code>PatrollingMonster/Raider::readAdditionalSaveData</code> & <code>PatrollingMonster/Raider::addAdditionalSaveData</code><section begin="codec_raider"/>
+** {{nbt|bool|CanJoinRaid|required=1|existonsave=1}}：表示此生物能否参与袭击并被计入袭击进度条。
+** {{nbt|int-array|patrol_target}}：巡逻队正在前往的坐标。内部的三个整数分别代表了位置的XYZ坐标值。
+** {{nbt|bool|PatrolLeader|required=1|existonsave=1}}：表示此生物是否为巡逻队领袖。
+** {{nbt|bool|Patrolling|required=1|existonsave=1}}：表示此生物是否正在巡逻。
+** {{nbt|int|RaidId}}：当前生物所归属的袭击队的数字ID。
+** {{nbt|int|Wave|required=1|existonsave=1}}：当前生物所参与的袭击波次。
+<section end="codec_raider"/>
+</div>
+
+=== 玩家数据 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.player.Player, net.minecraft.server.level.ServerPlayer}}
+<div class="treeview">
+* {{nbt|compound}} <code>Player/ServerPlayer::readAdditionalSaveData</code> & <code>Player/ServerPlayer::addAdditionalSaveData</code><section begin="codec_server_player"/>
+** {{nbt inherit/living entity}}
+** {{nbt|int|DataVersion|existonsave=1}}：保存此玩家存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是-1。
+** {{nbt|compound|abilities|existonsave=1}}：玩家拥有的能力。
+*** {{nbt|bool|flying|existonsave=1|required=1}}：玩家是否正在[[飞行]]。
+*** {{nbt|float|flySpeed|existonsave=1}}：玩家的飞行速度。如果此项不存在则游戏认为此项是0.05。
+*** {{nbt|bool|instabuild|existonsave=1|required=1}}：玩家是否可以立刻摧毁[[方块]]、选取方块时是否允许保存[[方块实体]]数据、使用铁砧是否不消耗经验值且不会过于昂贵、是否立刻破坏载具等。
+*** {{nbt|bool|invulnerable|existonsave=1|required=1}}：玩家是否能抵抗绝大多数伤害。如果为<samp>true</samp>，玩家不消耗饥饿值、通过[[下界传送门]]的时间被改变、身上的火可以快速熄灭，且只会受到带有{{TagLink|damage_type|bypasses_invulnerability}}标签的伤害。
+*** {{nbt|bool|mayBuild|existonsave=1}}：玩家是否可以摧毁、放置和调整方块和[[盔甲架]]。如果此项不存在则游戏认为此项是<samp>true</samp>。
+*** {{nbt|bool|mayfly|existonsave=1|required=1}}：玩家是否能飞行，阻止玩家因为飞行而被服务器踢出。
+*** {{nbt|float|walkSpeed|existonsave=1}}：步行速度。如果不存在则游戏认为此项是0.1。
+** {{nbt|string|Dimension}}：（[[命名空间ID]]）玩家所处[[维度]]。
+** {{nbt|list|ender_pearls}}：与玩家绑定的[[末影珍珠]]数据。如果玩家没有绑定的末影珍珠，则此项不存在。
+*** {{nbt|compound}}：一个末影珍珠的信息。与玩家绑定的末影珍珠将在玩家上线时被加载加入世界，并对所在区块添加标签以保持加载，下线时会被强制移除出世界。
+**** {{nbt|string|ender_pearl_dimension}}：末影珍珠所在的维度。
+**** 剩余标签见[[末影珍珠/ED]]。
+** {{nbt|list|EnderItems|existonsave=1}}：玩家末影箱里的物品。末影箱中一共有27个槽位，超出槽位范围的物品不会被加载。
+*** {{nbt|compound}}：末影箱里的一个物品。
+**** {{nbt inherit/item}}
+** {{nbt|list|entered_nether_pos}}：在玩家进入[[下界]]时，记录传送前在[[主世界]]的位置，用于[[进度]]触发器<code>-{}-[[进度定义格式#nether_travel|nether_travel]]</code>中。当玩家传送到非下界维度时此值被删除。内部的三个双精度浮点数分别对应X、Y、Z坐标。
+*** {{nbt|double}}：一个坐标。
+** {{nbt|float|foodExhaustionLevel|existonsave=1}}：玩家的[[消耗度]]。如果{{nbt|int|foodLevel}}不存在游戏默认为0。
+** {{nbt|int|foodLevel|existonsave=1}}：玩家的饥饿值。如果此项不存在游戏默认为20。
+** {{nbt|float|foodSaturationLevel|existonsave=1}}：玩家的饱和度。如果{{nbt|int|foodLevel}}不存在游戏默认为5。
+** {{nbt|int|foodTickTimer|existonsave=1}}：玩家的食物计刻器。如果{{nbt|int|foodLevel}}不存在游戏默认为0。
+** {{nbt|list|Inventory|existonsave=1|required=1}}：玩家的物品栏。其中槽位0-8代表快捷键槽，槽位9-35代表物品存放槽。在无效槽位的物品无法被加载。 
+*** {{nbt|compound}}：物品栏中的一个物品。
+**** {{nbt inherit/item}}
+** {{nbt|compound|LastDeathLocation|existonsave=1}}：玩家上次死亡的地点。
+*** {{nbt|string|dimension|existonsave=1|required=1}}：（命名空间ID）死亡地点的维度。
+*** {{nbt|int-array|pos|existonsave=1|required=1}}：死亡地点的坐标。内部的三个整数分别代表了位置的XYZ坐标值。
+** {{nbt|int|playerGameType|existonsave=1}}：玩家的[[游戏模式]]。0为[[生存模式]]，1为[[创造模式]]，2为[[冒险模式]]，3为[[旁观模式]]。如果此项不存在则游戏会使用存档中的游戏模式。如果存档强制指定游戏模式则此项无效。
+** {{nbt|int|previousPlayerGameType}}：玩家的上一个游戏模式，用于{{key|F3+N}}在上一个模式和旁观模式中切换。可用枚举值与{{nbt|int|playerGameType}}相同。
+** {{nbt|int-array|raid_omen_position}}：玩家触发[[袭击之兆]]的位置，当袭击之兆结束时被清除，用于计算[[袭击]]发生点。内部3个整数分别代表XYZ坐标。
+** {{nbt|compound|recipeBook|existonsave=1}}：玩家已解锁的配方。
+*** 见{{slink|配方书|数据值}}。
+** {{nbt|compound|respawn}}：玩家的重生数据。仅在玩家设置重生点后存在，在重生时检查重生点无效时被清除。
+*** {{nbt|int-array|pos}}：玩家重生点所处的方块位置。
+*** {{nbt|float|pitch}}：（{{interval|left=-90|right=90}}，默认为<code>0.0</code>）玩家重生时的俯仰角。
+*** {{nbt|float|yaw}}：（{{interval|left=-180|right=180}}，默认为<code>0.0</code>）玩家重生时的偏航角。
+*** {{nbt|string|dimension|required=1}}：（命名空间ID）玩家重生点所处的维度。
+*** {{nbt|bool|forced}}：（默认为<samp>false</samp>）玩家是否将被强制复活在重生点上，而不是在重生点无法重生时查找临近位置。此值也控制重生点是否永远有效。
+** {{nbt|compound|RootVehicle}}：玩家骑乘的根实体的数据。根实体即递归查找骑乘实体，直到找到不骑乘实体的实体。根实体的所有乘客（包括递归）中只有一个玩家时此项才存在，其他数量均不存在。
+*** {{nbt|int-array|Attach|existonsave=1|required=1}}：（[[UUID]]）玩家直接骑着的实体。
+*** {{nbt|compound|Entity|existonsave=1|required=1}}：玩家骑乘的根实体数据。
+**** 见[[实体数据格式]]。
+** {{nbt|int|Score|existonsave=1|required=1}}：玩家在死亡画面中显示的分数。
+** {{nbt|bool|seenCredits|existonsave=1|required=1}}：玩家是否曾通过[[返回传送门]]前往[[主世界]]，即是否看过鸣谢界面。
+** {{nbt|compound|SelectedItem}}：（不会被加载也不会被保存，仅能通过实体谓词中的NBT谓词、[[实体选择器]]中的[[实体选择器#实体的NBT标签|<code>nbt</code>]]选项或{{cmd|data get}}访问）玩家当前选中的物品。
+*** {{nbt inherit/itemnoslot}}
+** {{nbt|int|SelectedItemSlot|existonsave=1|required=1}}：玩家当前选中的快捷栏编号。
+** {{nbt|compound|ShoulderEntityLeft}}：玩家左肩上的实体。永远显示为一只鹦鹉。
+*** 见[[实体数据格式]]。
+** {{nbt|compound|ShoulderEntityRight}}：玩家右肩上的实体。永远显示为一只鹦鹉。
+*** 见[[实体数据格式]]。
+** {{nbt|short|SleepTimer|existonsave=1|required=1}}：自玩家开始睡觉之后经过的时间。控制渲染效果和猫给予礼物。
+** {{nbt|bool|spawn_extra_particles_on_fall}}：玩家落地时是否产生大范围的额外粒子。当使用重锤猛击击中在地面上的实体时被设置为<samp>true</samp>，落地时设置为<samp>false</samp>。
+** {{nbt|compound|warden_spawn_tracker|existonsave=1}}：追踪该玩家在[[监守者]]生成机制中的进程。
+*** {{nbt|int|cooldown_ticks|existonsave=1}}：（{{interval|left=0}}）警告等级能够再次增加前的冷却时间。每游戏刻减少1。警告等级增加后会被重置为{{convert|200}}。当此值不存在时游戏默认为0。
+*** {{nbt|int|ticks_since_last_warning|existonsave=1}}：（{{interval|left=0}}）距玩家上次被监守者生成机制警告后的时间。每游戏刻增加1。{{convert|12000||分}}后会被重置为0，并将警告等级减少1。当此值不存在时游戏默认为0。
+*** {{nbt|int|warning_level|existonsave=1}}：（{{interval|left=0|right=4}}）警告等级。监守者会在大于等于4级时生成。当此值不存在时游戏默认为0。
+** {{nbt|int|XpLevel|existonsave=1|required=1}}：玩家的[[经验等级]]。
+** {{nbt|float|XpP|existonsave=1|required=1}}：提升到下一经验等级的进度。
+** {{nbt|int|XpSeed|existonsave=1}}：[[附魔台]]选取附魔使用的随机数种子。当此值不存在时游戏会随机产生一个新的种子。
+** {{nbt|int|XpTotal|existonsave=1|required=1}}：玩家所获得的经验值总数。
+<section end="codec_server_player"/>
+</div>
+
+=== 变种生成选择器 ===
+{{codec from source|type=json|net.minecraft.world.entity.variant.SpawnPrioritySelectors}}
+<div class="treeview">
+* {{nbt|compound}} <code>SpawnPrioritySelectors::CODEC</code><section begin="codec_spawn_priority_selector"/>
+** {{nbt|compound|condition}}：此生成选择器可以生效的条件。不指定时默认为任何条件下都可以选择此生成选择器。
+*** {{nbt|string|type|required=1}}：生成选择器条件类型。
+*** {{nbt condition|如果{{nbt|string|type|required=1}}为<code>biome</code>，则检查当前生成点的生物群系。}}
+*** {{nbt|string}}{{nbt|list|biomes|required=1}}：检查生成点是否为给定的生物群系，是则选择器有效。可以为以<code>#</code>开头的生物群系标签、一个生物群系ID的字符串、或以多个生物群系ID组成的字符串列表。
+*** {{nbt condition|如果{{nbt|string|type|required=1}}为<code>moon_brightness</code>，则检查当前月亮亮度。}}
+*** {{nbt|double}}{{nbt|compound|range|required=1}}：月亮亮度的范围，当前亮度在给定范围内时选择器有效。满月时为1而新月时为0，具体值见{{slink|月亮|月亮亮度}}。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt condition|如果{{nbt|string|type|required=1}}为<code>structure</code>，则检查当前生成点是否在指定的结构片段内。}}
+*** {{nbt|string}}{{nbt|list|structures|required=1}}：检查生成点是否在指定结构的结构片段内，是则选择器有效。可以为以<code>#</code>开头的结构标签、一个结构ID的字符串、或以多个结构ID组成的字符串列表。
+** {{nbt|int|priority|required=1}}：选择此生成选择器的优先级。游戏会挑选所有变种中所有有效的生成选择器，在优先级并列最高的选择器中随机挑选其一并使用对应的变种进行生成。
+<section end="codec_spawn_priority_selector"/>
+</div>
+
+=== 可驯服动物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.TamableAnimal}}
+<div class="treeview">
+* {{nbt|compound}} <code>TamableAnimal::readAdditionalSaveData</code> & <code>TamableAnimal::addAdditionalSaveData</code><section begin="codec_tamable_animal"/>
+** {{nbt|int-array|Owner}}：拥有此生物的玩家[[UUID]]，以4个整数的形式存储。如果此生物没有主人则此项不存在。
+** {{nbt|bool|Sitting|required=1|existonsave=1}}：表示此生物是否正在坐着。
+<section end="codec_tamable_animal"/>
+</div>
+
+=== 投掷物弹射物共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.projectile.ThrowableItemProjectile}}
+<div class="treeview">
+* {{nbt|compound}} <code>ThrowableItemProjectile::readAdditionalSaveData</code> & <code>ThrowableItemProjectile::addAdditionalSaveData</code><section begin="codec_throwable_item_projectile"/>
+** {{nbt|compound|Item|existonsave=1}}：被投掷的物品，用于渲染实体和掉落物品。对于投掷的药水实体，此数据还控制了药水的性质和效果。如果没有设置此标签则默认为对应实体的默认物品。
+*** {{nbt inherit/itemnoslot}}
+<section end="codec_throwable_item_projectile"/>
+</div>
+
+=== 村民数据 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.npc.VillagerData}}
+<div class="treeview">
+* {{nbt|compound}} <code>VillagerData::CODEC</code><section begin="codec_villager_data"/>
+** {{nbt|compound|{{#var:tag|VillagerData}}|existonsave=1}}：关于村民职业的信息。
+*** {{nbt|int|level}}：（默认为1）村民当前交易选项等级，该值影响村民交易选项和徽章的纹理渲染。如果该值大于5，村民将无法升级也无法解锁新的交易。
+*** {{nbt|string|profession|existonsave=1}}：村民的职业，是一个[[命名空间ID]]。如果不存在或无效则设置为<code>minecraft:none</code>。
+*** {{nbt|string|type|existonsave=1}}：村民的种类，是一个命名空间ID。如果不存在或无效则设置为<code>minecraft:plains</code>。此项实体数据会被视为数据组件[[数据组件#villager/variant|<code>villager/variant</code>]]。
+<section end="codec_villager_data"/>
+</div>
+
+=== 僵尸共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.entity.monster.Zombie}}
+<div class="treeview">
+* {{nbt|compound}} <code>Zombie::readAdditionalSaveData</code> & <code>Zombie::addAdditionalSaveData</code><section begin="codec_zombie"/>
+** {{nbt|bool|CanBreakDoors|required=1|existonsave=1}}：表示此生物是否可以破坏门。
+** {{nbt|int|DrownedConversionTime}}：沉入水中转化完成（僵尸转变成溺尸或是尸壳转变成僵尸）的剩余时间。当生物没有转化时，此值为-1。
+** {{nbt|bool|IsBaby|required=1|existonsave=1}}：表示此生物是否为幼年个体。
+** {{nbt|int|InWaterTime|required=1|existonsave=1}}：此生物已在沉入水下的时间，当此值不小于{{convert|600}}时开始不可逆的转变。当此生物不在水下时，此值为-1。
+<section end="codec_zombie"/>
+</div>
+
+== 特定版本 ==
+=== 实体共通标签（23w13a_or_b） ===
+{{codec from source|type=nbt|version=23w13a_or_b|net.minecraft.world.entity.Entity}}
+<div class="treeview">
+* {{nbt|compound}} <code>Entity::load</code> & <code>Entity::saveWithoutId</code> & <code>Entity::saveAsPassenger</code><section begin="codec_entity_23w13a_or_b"/>
+** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）实体类型。此数据仅在持久化保存（存储入区块文件、[[结构模板]]、[[蜂巢（方块）|蜂巢]]、[[蜂箱]]数据或作为乘客实体保存）时存在。{{cmd|data}}无法获取此数据，也无法修改。
+** {{nbt|short|Air|existonsave=1}}：（{{interval|left=-20|right=实体最大空气值}}）当前实体所剩的空气值。在指定环境中每刻增加4直至实体最大空气值；在可窒息环境中逐渐减少直至-20，达到-20后如果实体仍然在可窒息环境中则会受到伤害，并将此值重置为0，继续减少进行循环。此值不存在时游戏默认为实体最大空气值。
+** {{nbt|string|CustomName}}：（[[文本组件]]）当前实体的自定义名称。会出现在玩家的死亡消息与村民的交易界面，以及玩家的光标指向的实体的上方。
+** {{nbt|bool|CustomNameVisible}}：表示实体是否一直渲染名称。如果为<samp>true</samp>，那么名称会一直在它们的上方渲染，而不受光标指向的影响。如果实体没有自定义名称，则渲染默认名称。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|float|FallDistance|existonsave=1|required=1}}：当前实体已经摔落的距离。值越大，实体落地时受到的摔落伤害越大。
+** {{nbt|short|Fire|existonsave=1|required=1}}：正值代表距离火熄灭剩余的时间，负值表示当前实体能够在火中站立而不着火的时间，单位为游戏刻。未着火且未接触火时，玩家为-{{convert|20}}，其他实体为-{{convert|1}}。
+** {{nbt|bool|Glowing}}：实体是否有发光的轮廓线。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|HasVisualFire}}：表示实体是否视觉上正在着火。如果为<samp>true</samp>，实体会渲染为正在着火，但实际上可能没有着火。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|Invulnerable|existonsave=1|required=1}}：实体是否能抵抗绝大多数伤害。如果为<samp>true</samp>，实体只会受到来自[[创造模式]]玩家的伤害和属于{{TagLink|damage_type|bypasses_invulnerability}}的伤害。
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体将要移动的距离向量。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|bool|NoGravity}}：实体是否不会受到重力的影响。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|OnGround|existonsave=1|required=1}}：实体是否正在接触地面。
+** {{nbt|list|Passengers}}：正在骑乘当前实体的实体的数据，递归标签。此值仅在使用{{cmd|summon}}指定标签生成实体、[[刷怪笼]]指定生成数据生成实体时此标签才可以有效设置，其他任何方式均无法有效设置。
+*** {{nbt|compound}}：一个乘客。
+**** 详见[[实体数据格式]]。
+** {{nbt|int|PortalCooldown|existonsave=1|required=1}}：距离当前实体下一次可以穿过[[下界传送门]]传送的时间，以游戏刻计。在使用下界传送门传送后，此项根据玩家游戏模式和当前游戏规则设置冷却。当实体不接触下界传送门方块时，此值每游戏刻减1直至0，此时才可以再次使用下界传送门传送。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+** {{nbt|list|Rotation|existonsave=1|required=1}}：实体的旋转角度，使用角度制。如果角度值为无限或非数（NaN），则对应角度会被修改为0度。
+*** {{nbt|float}}：（{{interval|left=0|right=360}}）当前实体以Y轴为中心，与正南方以顺时针方向旋转的视角角度（即偏转角）。如果角度值超出对应值域，则在按照相同朝向重新限制到值域内。
+*** {{nbt|float}}：（{{interval|left=-90|right=90}}）当前实体与视角与水平面之间的倾斜角（即俯仰角）。水平面为0，正值表示面朝下方，相反则为上方。如果此值超过值域，则被强制修改以回到值域。
+** {{nbt|bool|Silent}}：实体是否不会发出任何声音。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|list|Tags}}：实体的自定义[[目标选择器#记分板标签|记分板标签]]。不超过1024个。
+*** {{nbt|string}}：一项记分板标签。
+** {{nbt|int|TicksFrozen}}：实体的冷冻时间。当实体在[[细雪]]中时每刻增加1，离开细雪则每刻减少2。此项不存在时游戏默认为0。
+** {{nbt|int-array|UUID|existonsave=1|required=1}}：（[[UUID]]）实体的UUID。此值无法使用{{cmd|data}}修改。
+<section end="codec_entity_23w13a_or_b"/>
+</div>
+
+=== 生物共通标签（23w13a_or_b） ===
+{{codec from source|type=nbt|version=23w13a_or_b|net.minecraft.world.entity.LivingEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>LivingEntity::readAdditionalSaveData</code> & <code>LivingEntity::addAdditionalSaveData</code><section begin="codec_living_entity_23w13a_or_b"/>
+** {{nbt|float|AbsorptionAmount|existonsave=1|required=1}}：生物的[[伤害吸收值]]。
+** {{nbt|list|ActiveEffects}}：该生物的状态效果的列表。如果当前生物没有状态效果则不存在此标签。
+*** {{nbt|compound}}：一项状态效果。
+**** {{nbt collapsed link|状态效果|codec_mob_effect_instance_23w13a_or_b}}
+** {{nbt|list|Attributes|existonsave=1}}：当前生物的[[属性]]的列表。
+*** {{nbt|compound}}：一个属性。
+**** {{nbt|double|Base|existonsave=1|required=1}}：属性的基础值。
+**** {{nbt|list|Modifiers}}：限制本条属性的[[属性#修饰符|修饰符]]。修饰符在内部计算中调整基础值，但并不更改原值。修饰符永远不会使基础值调整后超过属性的最大值或最小值。
+***** {{nbt|compound}}：一个属性修饰符。
+****** {{nbt|double|Amount|existonsave=1}}：计算中修饰符调整基础值的数值。
+****** {{nbt|string|Name|existonsave=1|required=1}}：修饰符的名称。
+****** {{nbt|int|Operation|existonsave=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算模式]]。可以为<code>0</code>（Op0）、<code>1</code>（Op1）、<code>2</code>（Op2）。
+****** {{nbt|int-array|UUID|existonsave=1|required=1}}：该修饰符的[[UUID]]。
+**** {{nbt|string|Name|existonsave=1|required=1}}：属性的名称。
+** {{nbt|compound|Brain|existonsave=1}}：当前生物需要记住的所有信息。
+*** {{nbt|compound|memories}}：生物的记忆，用于[[生物AI]]的计算。
+**** 见[[生物记忆]]。
+** {{nbt|short|DeathTime|existonsave=1|required=1}}：距离生物死亡而被删除的时间，同时控制死亡动画。生物存活时为0，濒死时每游戏刻增加1，直至{{convert|20}}时生物被删除。
+** {{nbt|bool|FallFlying|existonsave=1}}：表示生物是否处于滑翔状态。
+** {{nbt|boolean|gold|existonsave=1}}：（默认为<samp>false</samp>）当前生物是否渲染为金质及是否拥有碰撞箱。此值设为<samp>true</samp>的同时会将尝试禁用生物AI。
+** {{nbt|float|Health|existonsave=1}}：当前生物所拥有的生命值。当生命值被设置超过最大生命值时，如果生物受到伤害，生命值会被钳制到最大生命值内。
+** {{nbt|int|HurtByTimestamp|existonsave=1|required=1}}：生物上次被伤害的时间，以距离生物被创建的时间为准。每当生物被伤害后都被更新到最近的值，并每101刻更新一次直到攻击实体消失。可以通过{{cmd|data}}变更，但指定的值不会影响该项自动更新，当生物受到伤害时仍会被覆盖。
+** {{nbt|short|HurtTime|existonsave=1|required=1}}：生物被伤害后发红时间的倒计时。当刚刚被伤害时此值被设置为{{convert|10}}，每游戏刻减少1直到0。
+** {{nbt|int|SleepingX}}：当前生物正在睡觉的床的X坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|int|SleepingY}}：当前生物正在睡觉的床的Y坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|int|SleepingZ}}：当前生物正在睡觉的床的Z坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|string|Team}}：（不能导出和保存，仅可以加载或使用{{cmd|data}}修改）设置当前生物所属的[[队伍]]。
+<section end="codec_living_entity_23w13a_or_b"/>
+</div>
+
+=== AI生物共通标签（23w13a_or_b） ===
+{{codec from source|type=nbt|version=23w13a_or_b|net.minecraft.world.entity.Mob}}
+<div class="treeview">
+* {{nbt|compound}} <code>Mob::readAdditionalSaveData</code> & <code>Mob::addAdditionalSaveData</code><section begin="codec_mob_23w13a_or_b"/>
+** {{nbt|list|ArmorDropChances}}：代表穿戴盔甲掉落概率的浮点数的列表。
+*** {{nbt|float}}：靴子的掉落概率。
+*** {{nbt|float}}：护腿的掉落概率。
+*** {{nbt|float}}：胸甲的掉落概率。
+*** {{nbt|float}}：头盔的掉落概率。
+** {{nbt|list|ArmorItems|existonsave=1}}：生物正在穿戴的盔甲的列表，顺序按照：足部、腿部、胸部、头部。
+*** {{nbt|compound}}：靴子栏中的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_23w13a_or_b_item}}
+*** {{nbt|compound}}：护腿栏中的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_23w13a_or_b_item}}
+*** {{nbt|compound}}：胸甲栏中的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_23w13a_or_b_item}}
+*** {{nbt|compound}}：头盔栏中的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_23w13a_or_b_item}}
+** {{nbt|bool|CanPickUpLoot|existonsave=1|required=1}}：表示生物是否可以捡起战利品（穿戴捡起的盔甲，使用捡起的武器）。
+** {{nbt|string|DeathLootTable}}：决定当前生物被杀死后掉落物品的[[战利品表]]。
+** {{nbt|long|DeathLootTableSeed}}：生成战利品表的种子，0或未定义则使用[[随机序列]]。此标签必须和{{nbt|string|DeathLootTable}}一起设置否则不生效。
+** {{nbt|list|HandDropChances}}：代表手持物品掉落概率的浮点数的列表。
+*** {{nbt|float}}：主手手持物品掉落的概率。
+*** {{nbt|float}}：副手手持物品掉落的概率。
+** {{nbt|list|HandItems|existonsave=1}}：列表手持的物品的列表，顺序由主手到副手。
+*** {{nbt|compound}}：生物正在主手手持的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_23w13a_or_b_item}}
+*** {{nbt|compound}}：生物正在副手手持的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_23w13a_or_b_item}}
+** {{nbt|compound|Leash}}：'''二选一'''，代表生物目前是否被拴绳拴住与被拴住时的信息。如果没有被拴住则不存在此标签。
+*** {{nbt condition|当生物被拴绳拴在一个栅栏上时，附加的标签如下：}}
+*** {{nbt|int|X|existonsave=1|required=1}}：X坐标。
+*** {{nbt|int|Y|existonsave=1|required=1}}：Y坐标。
+*** {{nbt|int|Z|existonsave=1|required=1}}：Z坐标。
+*** {{nbt condition|当生物被另一个实体用拴绳拴住时，附加的标签如下：}}
+*** {{nbt|int-array|UUID|existonsave=1|required=1}}：拴绳连接到的实体的[[UUID]]。
+** {{nbt|bool|LeftHanded|existonsave=1|required=1}}：表示生物的主手是否为左手。
+** {{nbt|bool|NoAI}}：代表生物的AI是否被禁用。被禁用AI的生物不会尝试移动，也不会被动移动，在合适情况下也不会摔落。
+** {{nbt|bool|PersistenceRequired|existonsave=1|required=1}}：代表生物是否不会被自然删除。
+{{nbt collapsed source|codec_mob_23w13a_or_b_item|{{#lst:编码格式/Item|codec_item_23w13a_or_b}}}}
+<section end="codec_mob_23w13a_or_b"/>
+</div>
+
+=== 状态效果实例数据（23w13a_or_b） ===
+{{codec from source|type=nbt|version=23w13a_or_b|net.minecraft.world.effect.MobEffectInstance}}
+<div class="treeview">
+* {{nbt|compound}} <code>MobEffectInstance::save</code> & <code>MobEffectInstance::writeDetailsTo</code><section begin="codec_mob_effect_instance_23w13a_or_b"/>
+** {{nbt|bool|Ambient}}：表示状态效果是否是被信标添加的。如果不存在则为<samp>false</samp>。
+** {{nbt|byte|Amplifier}}：（无符号8位整数，{{interval|left=0|right=255}}）状态效果的等级。0表示等级1，以此类推。由于此数字为无符号整数，当值超过127时显示为负数但实际为正数，保存数字''s''和实际代表数字''a''的关系为<math>a=256+s</math>。如果不存在则为0。
+** {{nbt|int|Duration}}：距离状态效果失效的时间刻数。如果此值为-1，则此状态效果不会失效。如果不存在则为0。
+** {{nbt|compound|HiddenEffect}}：与此状态效果类型相同，但因为等级更低而被覆盖的状态效果信息。当外层状态效果过期失效后，此层状态效果就会尝试生效。
+*** 具有除{{nbt|int|Id|required=1|existonsave=1}}外的此结构所有标签，递归定义。
+** {{nbt|int|Id|required=1|existonsave=1}}：状态效果的数字ID。
+** {{nbt|bool|ShowIcon}}：表示是否显示状态效果的图标。如果不存在则与{{nbt|bool|ShowParticles}}值相同。
+** {{nbt|bool|ShowParticles}}：表示是否显示粒子效果。如果不存在则为<samp>true</samp>。
+<section end="codec_mob_effect_instance_23w13a_or_b"/>
+</div>
+{{nbt collapsed source|codec_mob_effect_instance_23w13a_or_b|{{#lst:{{FULLPAGENAME}}|codec_mob_effect_instance_23w13a_or_b}}|no-remove=1}}
+
+=== 实体共通标签（24w14potato） ===
+{{codec from source|type=nbt|version=24w14potato|net.minecraft.world.entity.Entity}}
+<div class="treeview">
+* {{nbt|compound}} <code>Entity::load</code> & <code>Entity::saveWithoutId</code> & <code>Entity::saveAsPassenger</code><section begin="codec_entity_24w14potato"/>
+** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）实体类型。此数据仅在持久化保存（存储入区块文件、[[结构模板]]、[[蜂巢（方块）|蜂巢]]、[[蜂箱]]数据或作为乘客实体保存）时存在。{{cmd|data}}无法获取此数据，也无法修改。
+** {{nbt|short|Air|existonsave=1}}：（{{interval|left=-20|right=实体最大空气值}}）当前实体所剩的空气值。在指定环境中每刻增加4直至实体最大空气值；在可窒息环境中逐渐减少直至-20，达到-20后如果实体仍然在可窒息环境中则会受到伤害，并将此值重置为0，继续减少进行循环。此值不存在时游戏默认为实体最大空气值。
+** {{nbt|string|CustomName}}：（[[文本组件]]）当前实体的自定义名称。会出现在玩家的死亡消息与村民的交易界面，以及玩家的光标指向的实体的上方。
+** {{nbt|bool|CustomNameVisible}}：表示实体是否一直渲染名称。如果为<samp>true</samp>，那么名称会一直在它们的上方渲染，而不受光标指向的影响。如果实体没有自定义名称，则渲染默认名称。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|float|FallDistance|existonsave=1|required=1}}：当前实体已经摔落的距离。值越大，实体落地时受到的摔落伤害越大。
+** {{nbt|short|Fire|existonsave=1|required=1}}：正值代表距离火熄灭剩余的时间，负值表示当前实体能够在火中站立而不着火的时间，单位为游戏刻。未着火且未接触火时，玩家为-{{convert|20}}，其他实体为-{{convert|1}}。
+** {{nbt|bool|Glowing}}：实体是否有发光的轮廓线。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|HasVisualFire}}：表示实体是否视觉上正在着火。如果为<samp>true</samp>，实体会渲染为正在着火，但实际上可能没有着火。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|Invulnerable|existonsave=1|required=1}}：实体是否能抵抗绝大多数伤害。如果为<samp>true</samp>，实体只会受到来自[[创造模式]]玩家的伤害和属于{{TagLink|damage_type|bypasses_invulnerability}}的伤害。
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体将要移动的距离向量。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|bool|NoGravity}}：实体是否不会受到重力的影响。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|OnGround|existonsave=1|required=1}}：实体是否正在接触地面。
+** {{nbt|list|Passengers}}：正在骑乘当前实体的实体的数据，递归标签。此值仅在使用{{cmd|summon}}指定标签生成实体、[[刷怪笼]]和[[试炼刷怪笼]]指定生成数据生成实体时此标签才可以有效设置，其他任何方式均无法有效设置。
+*** {{nbt|compound}}：一个乘客。
+**** 详见[[实体数据格式]]。
+** {{nbt|int|PortalCooldown|existonsave=1|required=1}}：距离当前实体下一次可以穿过[[下界传送门]]传送的时间，以游戏刻计。在使用下界传送门传送后，此项根据玩家游戏模式和当前游戏规则设置冷却。当实体不接触下界传送门方块时，此值每游戏刻减1直至0，此时才可以再次使用下界传送门传送。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+** {{nbt|list|Rotation|existonsave=1|required=1}}：实体的旋转角度，使用角度制。如果角度值为无限或非数（NaN），则对应角度会被修改为0度。
+*** {{nbt|float}}：（{{interval|left=0|right=360}}）当前实体以Y轴为中心，与正南方以顺时针方向旋转的视角角度（即偏转角）。如果角度值超出对应值域，则在按照相同朝向重新限制到值域内。
+*** {{nbt|float}}：（{{interval|left=-90|right=90}}）当前实体与视角与水平面之间的倾斜角（即俯仰角）。水平面为0，正值表示面朝下方，相反则为上方。如果此值超过值域，则被强制修改以回到值域。
+** {{nbt|bool|Silent}}：实体是否不会发出任何声音。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|list|Tags}}：实体的自定义[[目标选择器#记分板标签|记分板标签]]。不超过1024个。
+*** {{nbt|string}}：一项记分板标签。
+** {{nbt|int|TicksFrozen}}：实体的冷冻时间。当实体在[[细雪]]中时每刻增加1，离开细雪则每刻减少2。此项不存在时游戏默认为0。
+** {{nbt|int-array|UUID|existonsave=1|required=1}}：（[[UUID]]）实体的UUID。此值无法使用{{cmd|data}}修改。
+<section end="codec_entity_24w14potato"/>
+</div>
+
+=== 生物共通标签（24w14potato） ===
+{{codec from source|type=nbt|version=24w14potato|net.minecraft.world.entity.LivingEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>LivingEntity::readAdditionalSaveData</code> & <code>LivingEntity::addAdditionalSaveData</code><section begin="codec_living_entity_24w14potato"/>
+** {{nbt|float|AbsorptionAmount|existonsave=1|required=1}}：生物的[[伤害吸收值]]。
+** {{nbt|list|active_effects}}：该生物的状态效果的列表。如果当前生物没有状态效果则不存在此标签。
+*** {{nbt|compound}}：一项状态效果。
+**** {{nbt collapsed link|状态效果|codec_mob_effect_instance_24w14potato}}
+** {{nbt|list|Attributes|existonsave=1}}：当前生物的[[属性]]的列表。
+*** {{nbt|compound}}：一个属性。
+**** {{nbt|double|Base|existonsave=1|required=1}}：属性的基础值。
+**** {{nbt|list|Modifiers}}：限制本条属性的[[属性#修饰符|修饰符]]。修饰符在内部计算中调整基础值，但并不更改原值。修饰符永远不会使基础值调整后超过属性的最大值或最小值。
+***** {{nbt|compound}}：一个属性修饰符。
+****** {{nbt|double|Amount|existonsave=1}}：计算中修饰符调整基础值的数值。
+****** {{nbt|string|Name|existonsave=1|required=1}}：修饰符的名称。
+****** {{nbt|int|Operation|existonsave=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算模式]]。可以为<code>0</code>（Op0）、<code>1</code>（Op1）、<code>2</code>（Op2）。
+****** {{nbt|int-array|UUID|existonsave=1|required=1}}：该修饰符的[[UUID]]。
+**** {{nbt|string|Name|existonsave=1|required=1}}：属性的名称。
+** {{nbt|compound|Brain|existonsave=1}}：当前生物需要记住的所有信息。
+*** {{nbt|compound|memories}}：生物的记忆，用于[[生物AI]]的计算。
+**** 见[[生物记忆]]。
+** {{nbt|short|DeathTime|existonsave=1|required=1}}：距离生物死亡而被删除的时间，同时控制死亡动画。生物存活时为0，濒死时每游戏刻增加1，直至{{convert|20}}时生物被删除。
+** {{nbt|bool|FallFlying|existonsave=1}}：表示生物是否处于滑翔状态。
+** {{nbt|float|Health|existonsave=1}}：当前生物所拥有的生命值。当生命值被设置超过最大生命值时，如果生物受到伤害，生命值会被钳制到最大生命值内。
+** {{nbt|int|HurtByTimestamp|existonsave=1|required=1}}：生物上次被伤害的时间，以距离生物被创建的时间为准。每当生物被伤害后都被更新到最近的值，并每101刻更新一次直到攻击实体消失。可以通过{{cmd|data}}变更，但指定的值不会影响该项自动更新，当生物受到伤害时仍会被覆盖。
+** {{nbt|short|HurtTime|existonsave=1|required=1}}：生物被伤害后发红时间的倒计时。当刚刚被伤害时此值被设置为{{convert|10}}，每游戏刻减少1直到0。
+** {{nbt|int|SleepingX}}：当前生物正在睡觉的床的X坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|int|SleepingY}}：当前生物正在睡觉的床的Y坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|int|SleepingZ}}：当前生物正在睡觉的床的Z坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|string|Team}}：（不能导出和保存，仅可以加载或使用{{cmd|data}}修改）设置当前生物所属的[[队伍]]。
+<section end="codec_living_entity_24w14potato"/>
+</div>
+
+=== AI生物共通标签（24w14potato） ===
+{{codec from source|type=nbt|version=24w14potato|net.minecraft.world.entity.Mob}}
+<div class="treeview">
+* {{nbt|compound}} <code>Mob::readAdditionalSaveData</code> & <code>Mob::addAdditionalSaveData</code><section begin="codec_mob_24w14potato"/>
+** {{nbt|list|ArmorDropChances}}：代表穿戴盔甲掉落概率的浮点数的列表。
+*** {{nbt|float}}：靴子的掉落概率。
+*** {{nbt|float}}：护腿的掉落概率。
+*** {{nbt|float}}：胸甲的掉落概率。
+*** {{nbt|float}}：头盔的掉落概率。
+** {{nbt|list|ArmorItems|existonsave=1}}：生物正在穿戴的盔甲的列表，顺序按照：足部、腿部、胸部、头部。
+*** {{nbt|compound}}：靴子栏中的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_24w14potato_item}}
+*** {{nbt|compound}}：护腿栏中的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_24w14potato_item}}
+*** {{nbt|compound}}：胸甲栏中的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_24w14potato_item}}
+*** {{nbt|compound}}：头盔栏中的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_24w14potato_item}}
+** {{nbt|float|body_armor_drop_chance}}：生物的身体盔甲物品的掉落概率。
+** {{nbt|compound|body_armor_item}}：生物的身体盔甲物品。
+*** {{nbt collapsed link|物品共通标签|codec_mob_24w14potato_item}}
+** {{nbt|bool|CanPickUpLoot|existonsave=1|required=1}}：表示生物是否可以捡起战利品（穿戴捡起的盔甲，使用捡起的武器）。
+** {{nbt|string|DeathLootTable}}：决定当前生物被杀死后掉落物品的[[战利品表]]。
+** {{nbt|long|DeathLootTableSeed}}：生成战利品表的种子，0或未定义则使用[[随机序列]]。此标签必须和{{nbt|string|DeathLootTable}}一起设置否则不生效。
+** {{nbt|list|HandDropChances}}：代表手持物品掉落概率的浮点数的列表。
+*** {{nbt|float}}：主手手持物品掉落的概率。
+*** {{nbt|float}}：副手手持物品掉落的概率。
+** {{nbt|list|HandItems|existonsave=1}}：列表手持的物品的列表，顺序由主手到副手。
+*** {{nbt|compound}}：生物正在主手手持的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_24w14potato_item}}
+*** {{nbt|compound}}：生物正在副手手持的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_24w14potato_item}}
+** {{nbt|int-array}}{{nbt|compound|leash}}：'''二选一'''，代表生物目前是否被拴绳拴住与被拴住时的信息。如果没有被拴住则不存在此标签。
+*** {{nbt condition|当生物被拴绳拴在一个栅栏上时，此标签为{{nbt|int-array|整型数组}}，内部的三个整数分别代表了位置的XYZ坐标值。}}
+*** {{nbt condition|当生物被另一个实体用拴绳拴住时，此标签为{{nbt|compound|复合标签}}，附加的标签如下：}}
+*** {{nbt|int-array|UUID|existonsave=1|required=1}}：拴绳连接到的实体的[[UUID]]。
+** {{nbt|bool|LeftHanded|existonsave=1|required=1}}：表示生物的主手是否为左手。
+** {{nbt|bool|NoAI}}：代表生物的AI是否被禁用。被禁用AI的生物不会尝试移动，也不会被动移动，在合适情况下也不会摔落。
+** {{nbt|bool|PersistenceRequired|existonsave=1|required=1}}：代表生物是否不会被自然删除。
+{{nbt collapsed source|codec_mob_24w14potato_item|{{#lst:编码格式/Item|codec_item_24w14potato}}}}
+<section end="codec_mob_24w14potato"/>
+</div>
+
+=== 状态效果实例数据（24w14potato） ===
+{{codec from source|type=nbt|version=24w14potato|net.minecraft.world.effect.MobEffectInstance}}
+<div class="treeview">
+* {{nbt|compound}} <code>MobEffectInstance::CODEC</code><section begin="codec_mob_effect_instance_24w14potato"/>
+** {{nbt|bool|ambient}}：表示状态效果是否是被信标添加的。如果不存在则为<samp>false</samp>。
+** {{nbt|byte|amplifier}}：（无符号8位整数，{{interval|left=0|right=255}}）状态效果的等级。0表示等级1，以此类推。由于此数字为无符号整数，当值超过127时显示为负数但实际为正数，保存数字''s''和实际代表数字''a''的关系为<math>a=256+s</math>。如果不存在则为0。
+** {{nbt|int|duration}}：距离状态效果失效的时间刻数。如果此值为-1，则此状态效果不会失效。如果不存在则为0。
+** {{nbt|compound|hidden_effect}}：与此状态效果类型相同，但因为等级更低而被覆盖的状态效果信息。当外层状态效果过期失效后，此层状态效果就会尝试生效。
+*** 具有除{{nbt|string|id|required=1|existonsave=1}}外的此结构所有标签，递归定义。
+** {{nbt|string|id|required=1|existonsave=1}}：状态效果的[[命名空间ID]]。
+** {{nbt|bool|show_icon}}：表示是否显示状态效果的图标。如果不存在则与{{nbt|bool|show_particles}}值相同。
+** {{nbt|bool|show_particles}}：表示是否显示粒子效果。如果不存在则为<samp>true</samp>。
+<section end="codec_mob_effect_instance_24w14potato"/>
+</div>
+{{nbt collapsed source|codec_mob_effect_instance_24w14potato|{{#lst:{{FULLPAGENAME}}|codec_mob_effect_instance_24w14potato}}|no-remove=1}}
+
+=== 僵尸共通标签（24w14potato） ===
+{{codec from source|type=nbt|version=24w14potato|net.minecraft.world.entity.monster.Zombie}}
+<div class="treeview">
+* {{nbt|compound}} <code>Zombie::readAdditionalSaveData</code> & <code>Zombie::addAdditionalSaveData</code><section begin="codec_zombie_24w14potato"/>
+** {{nbt|bool|CanBreakDoors|required=1|existonsave=1}}：表示此生物是否可以破坏门。
+** {{nbt|int|DrownedConversionTime|existonsave=1}}：沉入水中转化完成（僵尸转变成溺尸或是尸壳转变成僵尸）的剩余时间。当生物没有转化时，此值为-1。
+** {{nbt|bool|IsBaby|required=1|existonsave=1}}：表示此生物是否为幼年个体。
+** {{nbt|int|InWaterTime|required=1|existonsave=1}}：此生物已在沉入水下的时间，当此值不小于{{convert|600}}时开始不可逆的转变。当此生物不在水下时，此值为-1。
+<section end="codec_zombie_24w14potato"/>
+</div>
+
+=== 实体共通标签（25w14craftmine） ===
+{{codec from source|type=nbt|version=25w14craftmine|net.minecraft.world.entity.Entity}}
+<div class="treeview">
+* {{nbt|compound}} <code>Entity::load</code> & <code>Entity::saveWithoutId</code> & <code>Entity::saveAsPassenger</code><section begin="codec_entity_25w14craftmine"/>
+** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）实体类型。此数据仅在持久化保存（存储入区块文件、[[结构模板]]、[[蜂巢（方块）|蜂巢]]、[[蜂箱]]数据或作为乘客实体保存）时存在。{{cmd|data}}无法获取此数据，也无法修改。
+** {{nbt|short|Air|existonsave=1}}：（{{interval|left=-20|right=实体最大空气值}}）当前实体所剩的空气值。在指定环境中每刻增加4直至实体最大空气值；在可窒息环境中逐渐减少直至-20，达到-20后如果实体仍然在可窒息环境中则会受到伤害，并将此值重置为0，继续减少进行循环。此值不存在时游戏默认为实体最大空气值。
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}：（[[文本组件]]）当前实体的自定义名称。会出现在玩家的死亡消息与村民的交易界面，以及玩家的光标指向的实体的上方。此项实体数据会被视为数据组件<code>custom_name</code>。
+** {{nbt|bool|CustomNameVisible}}：表示实体是否一直渲染名称。如果为<samp>true</samp>，那么名称会一直在它们的上方渲染，而不受光标指向的影响。如果实体没有自定义名称，则渲染默认名称。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|string}}{{nbt|compound|data}}：任意NBT数据。字符串形式只用于加载，游戏在保存时只使用复合标签形式。此项实体数据会被视为数据组件<code>custom_data</code>。
+** {{nbt|double|fall_distance|existonsave=1|required=1}}：当前实体已经摔落的距离。值越大，实体落地时受到的摔落伤害越大。
+** {{nbt|short|Fire|existonsave=1|required=1}}：正值代表距离火熄灭剩余的时间，负值表示当前实体能够在火中站立而不着火的时间，单位为游戏刻。未着火且未接触火时，玩家为-{{convert|20}}，其他实体为-{{convert|1}}。
+** {{nbt|bool|Glowing}}：实体是否有发光的轮廓线。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|HasVisualFire}}：表示实体是否视觉上正在着火。如果为<samp>true</samp>，实体会渲染为正在着火，但实际上可能没有着火。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|Invulnerable|existonsave=1|required=1}}：实体是否能抵抗绝大多数伤害。如果为<samp>true</samp>，实体只会受到来自[[创造模式]]玩家的伤害和属于{{TagLink|damage_type|bypasses_invulnerability}}的伤害。
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体将要移动的距离向量。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|bool|NoGravity}}：实体是否不会受到重力的影响。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|OnGround|existonsave=1|required=1}}：实体是否正在接触地面。
+** {{nbt|list|Passengers}}：正在骑乘当前实体的实体的数据，递归标签。此值仅在使用{{cmd|summon}}指定标签生成实体、[[刷怪笼]]和[[试炼刷怪笼]]指定生成数据生成实体时此标签才可以有效设置，其他任何方式均无法有效设置。
+*** {{nbt|compound}}：一个乘客。
+**** 详见[[实体数据格式]]。
+** {{nbt|int|PortalCooldown|existonsave=1|required=1}}：距离当前实体下一次可以穿过[[下界传送门]]传送的时间，以游戏刻计。在使用下界传送门传送后，此项根据玩家游戏模式和当前游戏规则设置冷却。当实体不接触下界传送门方块时，此值每游戏刻减1直至0，此时才可以再次使用下界传送门传送。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+** {{nbt|list|Rotation|existonsave=1|required=1}}：实体的旋转角度，使用角度制。如果角度值为无限或非数（NaN），则对应角度会被修改为0度。
+*** {{nbt|float}}：（{{interval|left=0|right=360}}）当前实体以Y轴为中心，与正南方以顺时针方向旋转的视角角度（即偏转角）。如果角度值超出对应值域，则在按照相同朝向重新限制到值域内。
+*** {{nbt|float}}：（{{interval|left=-90|right=90}}）当前实体与视角与水平面之间的倾斜角（即俯仰角）。水平面为0，正值表示面朝下方，相反则为上方。如果此值超过值域，则被强制修改以回到值域。
+** {{nbt|bool|Silent}}：实体是否不会发出任何声音。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|list|Tags}}：实体的自定义[[目标选择器#记分板标签|记分板标签]]。不超过1024个。
+*** {{nbt|string}}：一项记分板标签。
+** {{nbt|int|TicksFrozen}}：实体的冷冻时间。当实体在[[细雪]]中时每刻增加1，离开细雪则每刻减少2。此项不存在时游戏默认为0。
+** {{nbt|int-array|UUID|existonsave=1|required=1}}：（[[UUID]]）实体的UUID。此值无法使用{{cmd|data}}修改。
+<section end="codec_entity_25w14craftmine"/>
+</div>
+
+=== 生物共通标签（25w14craftmine） ===
+{{codec from source|type=nbt|version=25w14craftmine|net.minecraft.world.entity.LivingEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>LivingEntity::readAdditionalSaveData</code> & <code>LivingEntity::addAdditionalSaveData</code><section begin="codec_living_entity_25w14craftmine"/>
+** {{nbt|float|AbsorptionAmount|existonsave=1|required=1}}：生物的[[伤害吸收值]]。
+** {{nbt|list|active_effects}}：该生物的状态效果的列表。如果当前生物没有状态效果则不存在此标签。
+*** {{nbt|compound}}：一项状态效果。
+**** {{nbt collapsed link|状态效果|codec_mob_effect_instance_25w14craftmine}}
+** {{nbt|list|attributes|existonsave=1}}：当前生物的[[属性]]的列表。
+*** {{nbt|compound}}：一个属性。
+**** {{nbt|string|id|required=1|existonsave=1}}：（命名空间ID）属性的命名空间ID。
+**** {{nbt|double|base|required=1|existonsave=1}}：属性的基础值。
+**** {{nbt|list|modifiers}}：限制本条属性的[[属性#修饰符|修饰符]]。修饰符在内部计算中调整基础值，但并不更改原值。修饰符永远不会使基础值调整后超过属性的最大值或最小值。
+***** {{nbt|compound}}：一个属性修饰符。
+****** {{nbt|string|id|required=1|existonsave=1}}：（命名空间ID）属性修饰符的命名空间ID。
+****** {{nbt|double|amount|required=1|existonsave=1}}：计算中修饰符调整基础值的数值。
+****** {{nbt|string|operation|required=1|existonsave=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算模式]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。如果设置值无效，则为<code>add_value</code>（Op0）。
+** {{nbt|compound|Brain|existonsave=1}}：当前生物需要记住的所有信息。
+*** {{nbt|compound|memories|required=1|existonsave=1}}：生物的记忆，用于[[生物AI]]的计算。
+**** 见[[生物记忆]]。
+** {{nbt|short|DeathTime|existonsave=1|required=1}}：距离生物死亡而被删除的时间，同时控制死亡动画。生物存活时为0，濒死时每游戏刻增加1，直至{{convert|20}}时生物被删除。
+** {{nbt|compound|equipment}}：生物装备的物品。玩家主手槽位的物品不在此处保存。
+*** {{nbt|compound|<''[[装备槽位]]''>}}：指定装备槽位上拥有的物品。
+**** {{nbt collapsed link|物品共通标签|codec_mob_25w14craftmine_item}}
+** {{nbt|bool|FallFlying}}：表示生物是否处于滑翔状态。
+** {{nbt|float|Health|existonsave=1}}：（默认为当前生物的最大生命值）当前生物所拥有的生命值。当生命值被设置超过最大生命值时，如果生物受到伤害，生命值会被钳制到最大生命值内。
+** {{nbt|int|HurtByTimestamp|required=1|existonsave=1}}：生物上次被伤害的时间，以距离生物被创建的时间为准。每当生物被伤害后都被更新到最近的值，并每101刻更新一次直到攻击实体消失。可以通过{{cmd|data}}变更，但指定的值不会影响该项自动更新，当生物受到伤害时仍会被覆盖。
+** {{nbt|short|HurtTime|existonsave=1|required=1}}：生物被伤害后发红时间的倒计时。当刚刚被伤害时此值被设置为{{convert|10}}，每游戏刻减少1直到0。
+** {{nbt|int-array|last_hurt_by_mob}}：生物最近一次被生物攻击时的生物UUID信息，当攻击生物死亡或卸载时此值被清除。
+** {{nbt|int-array|last_hurt_by_player}}：生物最近一次被玩家攻击时的玩家UUID信息。
+** {{nbt|int|last_hurt_by_player_memory_time}}：（当{{nbt|int-array|last_hurt_by_player}}存在时存在并有效）生物被玩家攻击后此值被设置为{{convert|100}}，每游戏刻减少1，当此值降低到0以下时清除玩家UUID信息。
+** {{nbt|int array|sleeping_pos}}：当前生物正在睡觉的床的坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|string|Team}}：（不能导出和保存，仅可以加载或使用{{cmd|data}}修改）设置当前生物所属的[[队伍]]。
+** {{nbt|int|ticks_since_last_hurt_by_mob}}：（当{{nbt|int-array|last_hurt_by_mob}}存在时存在并有效）生物最近一次被生物攻击后，现在距离上次攻击的游戏刻数。
+{{nbt collapsed source|codec_mob_25w14craftmine_item|{{#lst:编码格式/Item|codec_item_25w14craftmine}}}}
+<section end="codec_living_entity_25w14craftmine"/>
+</div>
+
+=== AI生物共通标签（25w14craftmine） ===
+{{codec from source|type=nbt|version=25w14craftmine|net.minecraft.world.entity.Mob}}
+<div class="treeview">
+* {{nbt|compound}} <code>Mob::readAdditionalSaveData</code> & <code>Mob::addAdditionalSaveData</code><section begin="codec_mob_25w14craftmine"/>
+** {{nbt|bool|CanPickUpLoot|required=1|existonsave=1}}：表示生物是否可以捡起战利品（穿戴捡起的盔甲，使用捡起的武器）。
+** {{nbt|string|DeathLootTable}}：决定当前生物被杀死后掉落物品的[[战利品表]]。
+** {{nbt|long|DeathLootTableSeed}}：生成战利品表的种子，0或未定义则使用[[随机序列]]。此标签必须和{{nbt|string|DeathLootTable}}一起设置否则不生效。
+** {{nbt|compound|drop_chances}}：生物死亡时各种装备槽位物品的掉落概率。没有在此处定义的装备槽位默认掉落概率为8.5%。
+*** {{nbt|float|<''[[装备槽位]]''>}}：（{{interval|left=0}}）指定装备槽位上物品的掉落概率。
+** {{nbt|int-array}}{{nbt|compound|leash}}：'''二选一'''，代表生物目前是否被拴绳拴住与被拴住时的信息。如果没有被拴住则不存在此标签。
+*** {{nbt condition|当生物被拴绳拴在一个栅栏上时，此标签为{{nbt|int-array|整型数组}}，内部的三个整数分别代表了位置的XYZ坐标值。}}
+*** {{nbt condition|当生物被另一个实体用拴绳拴住时，此标签为{{nbt|compound|复合标签}}，附加的标签如下：}}
+*** {{nbt|int-array|UUID|required=1|existonsave=1}}：拴绳连接到的实体的[[UUID]]。
+** {{nbt|bool|LeftHanded|required=1|existonsave=1}}：表示生物的主手是否为左手。
+** {{nbt|bool|NoAI}}：代表生物的AI是否被禁用。被禁用AI的生物不会尝试移动，也不会被动移动，在合适情况下也不会摔落。
+** {{nbt|bool|PersistenceRequired|required=1|existonsave=1}}：代表生物是否不会被自然删除。
+<section end="codec_mob_25w14craftmine"/>
+</div>
+
+=== 状态效果实例数据（25w14craftmine） ===
+{{codec from source|type=nbt|version=25w14craftmine|net.minecraft.world.effect.MobEffectInstance}}
+<div class="treeview">
+* {{nbt|compound}} <code>MobEffectInstance::CODEC</code><section begin="codec_mob_effect_instance_25w14craftmine"/>
+** {{nbt|bool|ambient}}：表示状态效果是否是被信标添加的。如果不存在则为<samp>false</samp>。
+** {{nbt|byte|amplifier}}：（无符号8位整数，{{interval|left=0|right=255}}）状态效果的等级。0表示等级1，以此类推。由于此数字为无符号整数，当值超过127时显示为负数但实际为正数，保存数字''s''和实际代表数字''a''的关系为<math>a=256+s</math>。如果不存在则为0。
+** {{nbt|int|duration}}：距离状态效果失效的时间刻数。如果此值为-1，则此状态效果不会失效。如果不存在则为0。
+** {{nbt|compound|hidden_effect}}：与此状态效果类型相同，但因为等级更低而被覆盖的状态效果信息。当外层状态效果过期失效后，此层状态效果就会尝试生效。
+*** 具有除{{nbt|string|id|required=1|existonsave=1}}外的此结构所有标签，递归定义。
+** {{nbt|string|id|required=1|existonsave=1}}：状态效果的[[命名空间ID]]。
+** {{nbt|bool|show_icon}}：表示是否显示状态效果的图标。如果不存在则与{{nbt|bool|show_particles}}值相同。
+** {{nbt|bool|show_particles}}：表示是否显示粒子效果。如果不存在则为<samp>true</samp>。
+<section end="codec_mob_effect_instance_25w14craftmine"/>
+</div>
+{{nbt collapsed source|codec_mob_effect_instance_25w14craftmine|{{#lst:{{FULLPAGENAME}}|codec_mob_effect_instance_25w14craftmine}}|no-remove=1}}
+
+=== 实体共通标签（26w14a） ===
+{{codec from source|type=nbt|version=26w14a|net.minecraft.world.entity.Entity}}
+<div class="treeview">
+* {{nbt|compound}} <code>Entity::load</code> & <code>Entity::saveWithoutId</code> & <code>Entity::saveAsPassenger</code><section begin="codec_entity_26w14a"/>
+** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）实体类型。此数据仅在持久化保存（存储入区块文件、[[结构模板]]、[[蜂巢（方块）|蜂巢]]、[[蜂箱]]数据或作为乘客实体保存）时存在。{{cmd|data}}无法获取此数据，也无法修改。
+** {{nbt|short|Air|existonsave=1}}：（{{interval|left=-20|right=实体最大空气值}}）当前实体所剩的空气值。在指定环境中每刻增加4直至实体最大空气值；在可窒息环境中逐渐减少直至-20，达到-20后如果实体仍然在可窒息环境中则会受到伤害，并将此值重置为0，继续减少进行循环。此值不存在时游戏默认为实体最大空气值。
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}：（[[文本组件]]）当前实体的自定义名称。会出现在玩家的死亡消息与村民的交易界面，以及玩家的光标指向的实体的上方。此项实体数据会被视为数据组件<code>custom_name</code>。
+** {{nbt|bool|CustomNameVisible}}：表示实体是否一直渲染名称。如果为<samp>true</samp>，那么名称会一直在它们的上方渲染，而不受光标指向的影响。如果实体没有自定义名称，则渲染默认名称。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|string}}{{nbt|compound|data}}：任意NBT数据。字符串形式只用于加载，游戏在保存时只使用复合标签形式。此项实体数据会被视为数据组件<code>custom_data</code>。
+** {{nbt|double|fall_distance|existonsave=1|required=1}}：当前实体已经摔落的距离。值越大，实体落地时受到的摔落伤害越大。
+** {{nbt|short|Fire|existonsave=1|required=1}}：正值代表距离火熄灭剩余的时间，负值表示当前实体能够在火中站立而不着火的时间，单位为游戏刻。未着火且未接触火时，玩家为-{{convert|20}}，其他实体为-{{convert|1}}。
+** {{nbt|bool|Glowing}}：实体是否有发光的轮廓线。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|HasVisualFire}}：表示实体是否视觉上正在着火。如果为<samp>true</samp>，实体会渲染为正在着火，但实际上可能没有着火。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|Invulnerable|existonsave=1|required=1}}：实体是否能抵抗绝大多数伤害。如果为<samp>true</samp>，实体只会受到来自[[创造模式]]玩家的伤害和属于{{TagLink|damage_type|bypasses_invulnerability}}标签的伤害。
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体的移动距离和方向。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|bool|NoGravity}}：实体是否不会受到重力的影响。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|bool|OnGround|existonsave=1|required=1}}：实体是否正在接触地面。
+** {{nbt|list|Passengers}}：正在骑乘当前实体的实体的数据，递归标签。此值仅在使用{{cmd|summon}}指定标签生成实体、[[刷怪笼]]和[[试炼刷怪笼]]指定生成数据生成实体时此标签才可以有效设置，其他任何方式均无法有效设置。
+*** {{nbt|compound}}：一个乘客。
+**** 详见[[实体数据格式]]。
+** {{nbt|int|PortalCooldown|existonsave=1|required=1}}：距离当前实体下一次可以穿过[[下界传送门]]传送的时间，以游戏刻计。在使用下界传送门传送后，此项根据玩家游戏模式和当前游戏规则设置冷却。当实体不接触下界传送门方块时，此值每游戏刻减1直至0，此时才可以再次使用下界传送门传送。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+** {{nbt|list|Rotation|existonsave=1|required=1}}：实体的旋转角度，使用角度制。如果角度值为无限或非数（NaN），则对应角度会被修改为0度。
+*** {{nbt|float}}：当前实体以Y轴为中心，与正南方以顺时针方向旋转的视角角度（即偏转角）。如果角度值超出对应值域，则在按照相同朝向重新限制到值域内。
+*** {{nbt|float}}：（{{interval|left=-90|right=90}}）当前实体与视角与水平面之间的倾斜角（即俯仰角）。水平面为0，正值表示面朝下方，相反则为上方。如果此值超过值域，则被强制修改以回到值域。
+** {{nbt|bool|Silent}}：实体是否不会发出任何声音。此项不存在时游戏默认为<samp>false</samp>。
+** {{nbt|list|Tags}}：实体的自定义[[目标选择器#记分板标签|记分板标签]]。不超过1024个。
+*** {{nbt|string}}：一项记分板标签。
+** {{nbt|int|TicksFrozen}}：实体的冷冻时间。当实体在[[细雪]]中时每刻增加1，离开细雪则每刻减少2。此项不存在时游戏默认为0。
+** {{nbt|int-array|UUID|existonsave=1|required=1}}：（[[UUID]]）实体的UUID。此值无法使用{{cmd|data}}修改。
+<section end="codec_entity_26w14a"/>
+</div>
+
+[[Category:顶级数据值页面]]
+[[Category:通过Nbt inherit加载的页面]]

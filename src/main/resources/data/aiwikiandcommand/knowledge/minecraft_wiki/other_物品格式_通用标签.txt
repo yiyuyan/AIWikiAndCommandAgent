@@ -1,0 +1,40 @@
+# 页面: 物品格式/通用标签
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E6%A0%BC%E5%BC%8F/%E9%80%9A%E7%94%A8%E6%A0%87%E7%AD%BE
+# 分类: 顶级数据值页面
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+<div class="treeview"><onlyinclude>
+** {{nbt|list|AttributeModifiers}}：包含了物品的[[属性#修饰符|属性修饰符]]。它将修改佩戴者或持有者的属性，如果物品不在{{nbt|string|Slot}}指定的槽位上则不起效果。如果物品本身具有这些属性，则此列表会覆盖原物品的修饰属性。
+*** {{nbt|compound}}：单个属性修饰符。
+**** {{nbt|double|Amount}}：计算中修饰符调整基础值的数值。
+**** {{nbt|string|AttributeName}}：此修饰符的属性名称，是一个[[命名空间ID]]。
+**** {{nbt|string|Name}}：修饰符的名称。
+**** {{nbt|int|Operation}}：定义修饰符对属性的基础值的[[属性#运算方法|运算方法]]。可以为<code>0</code>（Op0）、<code>1</code>（Op1）、<code>2</code>（Op2）。
+**** {{nbt|string|Slot}}：指定修饰符产生效果的槽位。值只能为<code>mainhand</code>（主手）、<code>offhand</code>（副手）、<code>head</code>（头盔）、<code>chest</code>（胸甲）、<code>legs</code>（护腿）、<code>feet</code>（靴子）和<code>body</code>（身体）。如果此值不存在，则上述所有槽位上此属性修饰符都可以发挥作用。
+**** {{nbt|int-array|UUID}}：（不能为全部为0）属性的[[UUID]]。
+** {{nbt|list|CanDestroy}}：[[冒险模式]]的玩家可以使用这个物品破坏的方块列表。
+*** {{nbt|string}}：方块的[[命名空间ID]]或[[Java版标签/方块|方块标签]]。
+** {{nbt|list|CanPlaceOn}}：冒险模式的玩家可以将此方块物品放置在其表面的方块。
+*** {{nbt|string}}：方块的命名空间ID或标签。
+** {{nbt|compound|CustomCreativeLock}}：无子标签。在创造模式保存的物品栏中拥有此标签的物品将无法交互，但仍可通过快捷键存储或加载到快捷栏，除此之外与正常物品没有区别。此标签默认附加到“已保存的快捷栏”中代表没有快捷栏信息的[[纸]]物品上。
+** {{nbt|int|CustomModelData}}：用于物品模型的覆盖。见[[模型/模型覆写|模型覆写]]。
+** {{nbt|int|Damage}}：物品的损坏值。如果物品没有最大耐久值则不存在损坏值，如果此标签不存在代表物品处于最大耐久值。
+** {{nbt|compound|display}}：物品显示属性。
+*** {{nbt|int|color}}：物品的染色信息，仅对皮革盔甲有实际作用。如果禁用高级提示框，则工具提示将显示“已染色”，否则将显示十六进制颜色值。只使用后24位，每个颜色通道占用8位，按RGB依次存储。
+*** {{nbt|list|Lore}}：物品提示框中显示的信息。
+**** {{nbt|string}}：一个[[文本组件]]（必须为[[JSON]]形式），表示一行显示信息。
+*** {{nbt|string|Name}}：一个文本组件（必须为JSON形式），表示物品的名称。
+** {{nbt|list|Enchantments}}：包含影响物品特征的[[附魔]]信息。
+*** {{nbt|compound}}：一条魔咒。
+**** {{nbt|string|id}}：魔咒的命名空间ID。
+**** {{nbt|short|lvl}}：（不小于0且不大于255）魔咒的等级。如果设置值小于0则重置为0，大于255则重置为255。
+** {{nbt|int|HideFlags}}：决定隐藏显示物品的哪些信息，以位域形式存储，每一位都代表一种信息。取值可为：<code>1</code>（隐藏{{nbt|list|Enchantments}}的附魔信息）、<code>2</code>（隐藏{{nbt|list|AttributeModifiers}}的属性修饰符信息）、<code>4</code>（隐藏{{nbt|bool|Unbreakable}}的无法破坏信息）、<code>8</code>（隐藏{{nbt|list|CanDestroy}}的可破坏方块信息）、<code>16</code>（隐藏{{nbt|list|CanPlace}}的可放置方块信息）、<code>32</code>（隐藏其他附加信息，包括[[附魔书]]存储的魔咒）、<code>64</code>（隐藏{{nbt|int|display.color}}的染色信息）、<code>128</code>（隐藏{{nbt|compound|Trim}}的盔甲纹饰信息）。若要同时隐藏多种信息，则将这些值相加即可。例如<code>255</code>（全部相加）将会隐藏所有附加信息。
+** {{nbt|int|RepairCost}}：当在[[铁砧]]上修理、合并或重命名当前物品时，表示在基础等级消耗之上额外增加的附魔等级。
+** {{nbt|compound|Trim}}：盔甲纹饰，如果物品不是盔甲则这个标签没有作用。
+*** {{nbt|string|material}}：材料的命名空间ID。
+*** {{nbt|string|pattern}}：盔甲纹饰的命名空间ID。
+** {{nbt|bool|Unbreakable}}：表示物品是否无法破坏。
+</onlyinclude></div><noinclude>
+[[Category:顶级数据值页面]]
+</noinclude>

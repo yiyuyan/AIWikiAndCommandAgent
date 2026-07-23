@@ -1,0 +1,441 @@
+# 页面: 自定义/Java版1.13前
+# 来源: https://zh.minecraft.wiki/w/%E8%87%AA%E5%AE%9A%E4%B9%89/Java%E7%89%881.13%E5%89%8D
+# 分类: 世界类型, 环境, 过时内容
+# 抓取时间: 2026-07-14 17:34:50
+# 原始 Wikitext 内容:
+
+{{outdated|edition=java}}
+[[File:Land of the Ork.png|250px|缩略图|右|自定义地形的示例图]]
+
+'''自定义（Customized）'''是一种[[世界类型]]，使用用自定的特性取代了世界的普通地形。
+
+== 自定内容 ==
+=== {{tr|基本设置|基本設定}} ===
+一共有19项自定内容，将影响到结构的生成和其他的环境元素。
+
+{| class="wikitable" style="width:100%"
+|-
+! scope="col" width="10%"| 自定选项
+! scope="col" width="50%"| 参数
+! scope="col" width="5%" | 默认
+! scope="col" | 描述
+|-
+| {{EnvSprite|ocean}} '''[[海平面]]'''
+| 1-255
+| 63
+| 决定海洋与河流自然生成的截面高度。如果海平面低于默认值的话，地面占整张Minecraft地图的面积也会同时变大。部分河流将很浅，或者完全干涸。低于63层的地面也会变为沙砾。在低设定下，海洋将会变得更像一个一个的小湖，这也许将会限制地底洞穴以及溶洞的生成，或者会导致它们不会生成。如果数值高于默认值，部分洼地——如沼泽，将会变得支离破碎，甚至会消失。过高的数值可能导致世界更像是自定义场景中的“水世界”预设地形。
+|-
+| {{EnvSprite|cave}} '''[[洞穴]]'''
+| 是/否
+| 开
+| 如果为否，洞穴将不会自然生成。
+|-
+| {{EnvSprite|stronghold}} '''[[要塞]]'''
+| 是/否
+| 开
+| 如果为否，要塞将不会自然生成。
+|-
+| {{EnvSprite|village}} '''[[村庄]]'''
+| 是/否
+| 开
+| 如果为否, 村庄将不会自然生成。
+|-
+| {{EnvSprite|abandoned-mineshaft}} '''[[废弃矿井]]'''
+| 是/否
+| 开
+| 如果为否，废弃矿井将不会自然生成。
+|-
+| {{EnvSprite|desert-temple}}{{EnvSprite|jungle-temple}}{{EnvSprite|witch-hut}}{{EnvSprite|igloo}} '''{{tr|神庙|神殿}}'''
+| 是/否
+| 开
+| 如果为否，沙漠神殿、丛林神庙、女巫小屋和雪屋将不会自然生成。
+|-
+| {{EnvSprite|ocean-monument}} '''[[海底神殿]]'''
+| 是/否
+| 开
+| 如果为否，海底神殿将不会自然生成。
+|-
+| {{EnvSprite|woodland-mansion}} '''[[林地府邸]]'''
+| 是/否
+| 开
+| 如果为否，林地府邸将不会自然生成。
+|-
+| {{EnvSprite|ravine}} '''[[峡谷]]'''
+| 是/否
+| 开
+| 如果为否，峡谷将不会自然生成。
+|-
+| {{EnvSprite|dungeon}} '''[[地牢]]'''
+| 是/否
+| 开
+| 如果为否，地牢将不会自然生成。
+|-
+| '''地牢数量'''
+| 1-100
+| 7
+| 改变游戏尝试在每个区块生成地牢的次数。这并不是实际的地牢数量，因为不是每次尝试都会成功，主要原因是Minecraft的地牢只会在理论“开放处”生成地牢。也就是说在满是沟壑的世界中，因为没有可联通的“开放处”，即使设置生成地牢100个也只会生成不到两个左右。
+|-
+| {{EnvSprite|lake}} '''湖泊'''
+| 是/否
+| 开
+| 如果为否，湖泊将不会生成。
+|-
+| '''{{tr|湖泊密度|湖泊稀有程度}}'''
+| 1-100
+| 4
+| 改变湖泊的稀有程度。数值越小，湖泊尝试生成的次数越多。
+|-
+| {{EnvSprite|lava-lake}} '''[[熔岩湖]]'''
+| 是/否
+| 开
+| 如果为否，熔岩湖将不会生成。这不会干涉Y=10以下填充洞穴的熔岩生成。
+|-
+|'''{{tr|熔岩湖密度|熔岩湖稀有程度}}'''
+| 1-100
+| 80
+| 改变熔岩湖的稀有程度。数值越小，熔岩湖尝试生成的次数越多。
+|-
+| {{EnvSprite|lava-sea}} '''熔岩海'''
+| 是/否
+| 关
+| 如果为是，海洋将会由熔岩而不是水组成。
+|-
+| {{EnvSprite|biomes}} '''[[生物群系]]'''
+| 全部、Ocean、Plains、Desert、Extreme Hills、Forest、Taiga、Swampland、River、FrozenOcean、FrozenRiver、Ice Plains、Ice Mountains、MushroomIsland、MushroomIslandShore、Beach、DesertHills、ForestHills、TaigaHills、Extreme Hills Edge、Jungle、JungleHills、JungleEdge、Deep Ocean、Stone Beach、Cold Beach、Birch Forest、Birch Forest Hills、Roofed Forest、Cold Taiga、Cold Taiga Hiills、Mega Taiga、Mega Taiga Hills、Extreme Hills+、Savanna、Savanna Plateau、Mesa、Mesa Plateau F、Mesa Plateau
+| 全部
+| 决定世界可生成何种生物群系。
+|-
+| '''{{tr|生物群系规模|生態域大小}}'''
+| 1-8
+| 4
+| 改变生物群系的生成规模。每增加一个数字会使生物群系扩展双倍大小。
+|-
+| '''{{tr|河的规模|河流大小}}'''
+| 1-5
+| 4
+| 改变河流的生成规模。数值越小，河流分布越广泛。
+|}
+
+=== 矿物{{tr|mode=A|设置|設定}} ===
+本段11种“矿物”的设置会改变其在地图中的生成设置。这些设置可用来修改几乎所有矿石的分布。唯一的例外是[[绿宝石矿石]]，因为绿宝石矿石只生成在峭壁生物群系里，且矿脉总是1格大。其分布已被硬编码进游戏中，不能修改。[[下界]]的资源分布也不能修改。
+
+除了上述的例外，矿脉大小、数量和分布均可修改。下面是矿物的默认设置：
+
+{| class="wikitable" style="width:100%"
+|-
+! scope="col" rowspan="2" | 自定选项
+! scope="col" rowspan="2" | 参数
+! scope="col" colspan="11" | {{tr|默认|預設值}}
+! scope="col" rowspan="2" | 描述 
+|-
+! scope="col" width="6%" | {{BlockSprite|dirt}}<br>[[泥土]]
+! scope="col" width="6%" | {{BlockSprite|gravel}}<br>[[沙砾]]
+! scope="col" width="6%" | {{BlockSprite|granite}}<br>[[花岗岩]]
+! scope="col" width="6%" | {{BlockSprite|diorite}}<br>[[闪长岩]]
+! scope="col" width="6%" | {{BlockSprite|andesite}}<br>[[安山岩]]
+! scope="col" width="6%" | {{BlockSprite|coal-ore}}<br>[[煤矿石]]
+! scope="col" width="6%" | {{BlockSprite|iron-ore}}<br>[[铁矿石]]
+! scope="col" width="6%" | {{BlockSprite|gold-ore}}<br>[[金矿石]]
+! scope="col" width="6%" | {{BlockSprite|redstone-ore}}<br>[[红石矿石]]
+! scope="col" width="6%" | {{BlockSprite|diamond-ore}}<br>[[钻石矿石]]
+! scope="col" width="7%" | {{BlockSprite|lapis-lazuli-ore}}<br>[[青金石矿石]]
+|-
+|生成规模
+|1-50
+|33
+|33
+|33
+|33
+|33
+|17
+|9
+|9
+|8
+|8
+|7
+|每个矿脉的最大方块数量
+|-
+|生成尝试
+|0-40
+|10
+|8
+|10
+|10
+|10
+|20
+|20
+|2
+|8
+|1
+|1
+|世界尝试在每个区块中生成矿脉的次数
+|-
+|最小高度
+|0-255
+|0
+|0
+|0
+|0
+|0
+|0
+|0
+|0
+|0
+|0
+|16<ref group="注" name="lapisException">青金石有其自己的规则： 并非最低与最高之间，青金石的生成基于一个中心高度和上下扩散的值。默认设置为16，意味青金石能在0到32的高度区间生成，且在16的高度生成最频繁。</ref>
+|矿脉生成的最小高度。
+|-
+|最大高度
+|0-255
+|256<ref group="注" name="height256">虽然256是最大的大小，但是滑动条只能在0-255间滑动。还原默认设置是唯一调回去的办法。</ref>
+|256<ref group="注" name="height256"/>
+|80
+|80
+|80
+|128
+|64
+|32
+|16
+|16
+|16<ref group="注" name="lapisException"/>
+|矿脉生成的最大高度。
+|-
+|}
+
+;注释
+<references group="注"/>
+
+=== {{tr|高级设置|進階設定}} ===
+一共有16项可被用于影响Minecraft地形生成器的自定选项。这些设定共有两页，一页使用滑动条而一页允许文字输入。在文字输入页，试图输入超过上限或下限的数值都会被自动调整到可允许的上限/下限数值。这些设置只更改陆地上山脉和峡谷的数量，结构和其他环境因素（在第1页中设置的）则不受影响。
+
+Minecraft使用Perlin噪点来保证地形的随机性。Perlin生成器的方法比“一般”的杂点能使地形过渡更平滑，看起来更自然。
+
+Minecraft世界生成器使用多组Perlin噪音数据集来生成地形。游戏会把3个数据集来组合为正常的丘陵：1个'''主要值'''、1个'''最低极限'''、1个'''最高极限'''。接着在数据集的每个对应的坐标(X,Z)中，从最低极限和最高极限间选择一个平均值对主要值的数据进行运算。'''基础高度'''（''深度''）决定每座标准山脉和峡谷的间隔，且该值独立于海平面高度值。<ref>https://www.reddit.com/r/Minecraft/comments/23o5cs/world_customization_preview_minecraft_18/cgyxzpn</ref>
+
+在完成生成的世界中还不能看到默认的景象，因为每个生物群系有特定的属性。例如平原是平坦的、丘陵有低和中等的高度、峭壁是极高的山脉、海洋有海底峡谷以及恶地有低山和平坦的高原等等。每种生物群系都有一个独立的'''生物群系深度'''和'''生物群系因子'''（''生物群系比重''）来生成生物群系多变的地形。
+
+{| class="wikitable" style="width:100%"
+|-
+! scope="col" width="12%" | 自定义选项
+! scope="col" width="7%"| 参数
+! scope="col" width="6%" | {{tr|默认|預設值}}
+! scope="col" | 描述
+|-
+| '''{{tr|主地形差异值 X|主雜訊比例 X}}'''<br>（平滑度）
+| 1–5000
+| 80
+| 以X轴的方向延长地形。越大的数值产生的地形越平滑。
+* 低于默认值：山的Z向减少，土地的Z轴变长。
+* 高于默认值：山（对Z轴来说）光滑且广泛，更紧凑，X轴边缘狭窄，土地的X轴变长，就像边境之地一样。
+|-
+| '''{{tr|主地形差异值 Y|主雜訊比例 Y}}'''<br>（陡峭度）
+| 1–5000
+| 160
+| 以Y轴（高度）的方向拉伸地形。
+* 低于默认值：山区变浅。
+* 高于默认值：山更紧凑、高大、陡峭。如果设置为一个较高的值，那么生成的地形类似[[放大化]]。
+|-
+| '''{{tr|主地形差异值 Z|主雜訊比例 Z}}'''<br>（平滑度）
+| 1–5000
+| 80
+| 以Z轴的方向拉伸地形。越大的数值产生的地形越平滑。
+|-
+| '''{{tr|X轴高度差异值|深度雜訊比例 X}}'''<br>（陡峭度）
+| 1–2000
+| 200
+| 在X轴的方向上创造更多样、更陡峭的地形。
+* 低于默认值：差异最小。
+* 高于默认值：Z方向边缘变长。
+|-
+| '''{{tr|Z轴高度差异值|深度雜訊比例 Z}}'''<br>（陡峭度）
+| 1–2000
+| 200
+| 在Z轴的方向上创造更多样、更陡峭的地形。
+* 低于默认值：差异最小。
+* 高于默认值：X方向边缘变长。
+|-
+| '''{{tr|高度差异指数|深度雜訊指數}}'''<br>（陡峭指数）
+| 0.01–20
+| 0.5
+| 定制在世界生成的地形的大小。
+* 低于默认值：差异小。
+* 高于默认值：只有细微差别。
+|-
+| '''{{tr|基准深度大小|深度基準大小}}'''
+| 1–25
+| 8.5
+| 该值将决定在一切操作前决定地面生成物的所在高度。但不像拉伸效果，这个选项涉及更多地表。任何1值的变化对应于基本高度3格变化。8.5的默认值对应于68的基础值，略高于海平面（63）。
+* 低于默认值：基础低于海平面，在不调整的情况下，区域被淹没。如果设置为1，对应于8格，比熔岩平面（11）低。如果已生成建筑，那么村庄将会以长长的泥土方块柱子作为支撑，而废弃矿洞则会浮在空中。
+* 高于默认值：这个值越高，加载的时间越长。如果是最大值，基地高度200。河谷被切开，并且干燥，因为它们没有达到海洋。山脉更高，超过了正常的基础高度。调整矿石的分布至基础高度是恰当的。
+|-
+| '''{{tr|平面比例|橫向座標比例}}'''<br>（绝对锋利（锐）度指数）
+| 1–6000
+| 684.412
+| 水平拉伸主世界的大小。这用于处理 "锐度"，一种能使地形差别更加明显的选项。增加该值能使边缘更明显，山峦更陡峭，更清晰。降低该值会使地形更平滑，有着更少的起伏。这个选项决定着山峰/丘陵生成的第一步，而不是后续的修饰。
+* 低于默认：山在横向范围内更平坦，它们的峰和裂缝消失了，它们比较平坦虽然高度几乎不改变。山和山谷的位置也不会改变。
+* 高于默认：山更尖锐和陡峭，峰更狭窄。山之间没有距离。山谷被小山覆盖，几乎没有平坦的地方。
+|-
+| '''{{tr|高度比例|縱向高度比例}}'''<br>（高度系数）
+| 1–6000
+| 684.412
+| 垂直拉伸主世界。这个选项决定着山峰/丘陵生成的第一步，而不是后续的修饰。
+* 低于默认值：山更圆，但稍低。
+* 高于默认值：平坦的区域更高更陡，即使山很低。
+|-
+|'''{{tr|高度伸展|高度伸展程度}}'''<br>（高度拉伸系数）
+| 0.01–50
+| 12
+| 一切都会沿着Y轴拉伸、分离。这个选项会向上拉动地形，数值越小越极端。
+* 低于默认：该数值越低，生成地形的时间越长。最小值高于250格时，低值导致更多的极端拉伸。这会失去光滑，但仍然形成基础截面。
+* 高于默认：所有高度无效，高山峡谷都是平的。
+|-
+| '''{{tr|规模上限|上限比例}}'''<br>（顶端高度差值系数）
+| 1–5000
+| 512
+| 使地形更紧密或疏松亦或更多岩洞，取决于与最低极限比例的差额。<!-- Make terrain more solid/riddled with holes depending on how close the values are to the lower limit scale values. Note however, that it is used in cave/cavern generation, and so setting them far apart with caves/caverns turned off doesn't give you holed terrain. -->
+|-
+| '''{{tr|规模下限|下限比例}}'''<br>（底端高度差值系数）
+| 1–5000
+| 512
+| 使地形更疏松或紧密亦或更多岩洞，取决于与最高极限比例的差额。<!-- Make terrain more solid/riddled with holes depending on how close the values are to the upper limit scale values. Note however, that it is used in cave/cavern generation, and so setting them far apart with caves/caverns turned off doesn't give you holed terrain. -->
+|-
+| '''生物群系深度比重'''<br>（生物群系大小系数）
+| 1–20
+| 1
+| 设置生物群系的密度，设置为0时生物群系将不会改变。随着生物群系的高度增加，它不会影响其余的景观。最大的20会让山变得奇怪，并且会超过最大高度256米，大峡谷景观产生于正常的群山之间（也就是说，山看起来就像撕裂了一样）。
+|-
+| '''{{tr|生物群系深度补偿|生態域深度偏移}}'''<br>（群系过渡基准坐标系数）
+| 0–20
+| 0
+| 这代表设置生物群系的变化需要多长的过渡——越大的数值代表越平滑、越大规模的过渡。生物群系的表面高度的提高，会失去原有的生物群系的特征（如小山）。例如，在平原生物群系设置0对生物群系高度没有任何影响。当设置为2，基础截面是100米，值若为5，表面会在150米至250米，若调整为10，该值的进一步增加会导致超过高度限制，不再升高。因此，在最大值20时，只有一个平滑的、绿色的截面在256的高度是可以在出生时看到的。
+|-
+| '''{{tr|生物群系规模比重|生態域大小比重}}'''<br>（群系变化（大小）系数）
+| 1–20
+| 1
+| 设置生物群系的密度，设置为0时生物群系将不会改变。随着数值的提高，这些特性会更糟糕。在最大值，以冰原为例，所有的冰原都会超过240米高。
+|-
+| '''{{tr|生物群系规模补偿|生態域大小偏移}}'''<br>（群系过度系数）
+| 0–20
+| 0
+|设置生物群系的变化需要多长的过渡——越大的数值代表越平滑、越大规模的过渡。
+|}
+
+=== {{tr|预设|方案集}} ===
+'''注：使用预设码编辑预设不会受到参数上下限的限制，但这样做可能导致未定义的行为。'''
+
+{| class="wikitable" style="width: 100%; table-layout: fixed;"
+|-
+! scope="col" style="width: 40px;" | 图像
+! scope="col" style="width: 12%;" | 预设
+! scope="col" | 预设
+! scope="col" | 描述
+|-
+| [[File:Worldwater.png|36px]]
+| '''水世界'''
+| 特殊性质:
+* 海平面 = 255
+* {{tr|主地形差异值 X|主雜訊比例 X}}= 5000，{{tr|主地形差异值 Y|主雜訊比例 Y}}= 1000；{{tr|主地形差异值 Z|主雜訊比例 Z}}= 5000
+* {{tr|高度伸展|高度伸展程度}}= 8
+* 生物群系深度比重= 2，{{tr|生物群系深度补偿|生態域深度偏移}}= 0.5，{{tr|生物群系规模比重|生態域大小比重}}= 2，{{tr|生物群系规模补偿|生態域大小偏移}}= 0.375
+<div style="width:100%;overflow: auto;"><code>{"coordinateScale":684.412,"heightScale":684.412,"lowerLimitScale":512.0,"upperLimitScale":512.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":5000.0,"mainNoiseScaleY":1000.0,"mainNoiseScaleZ":5000.0,"baseSize":8.5,"stretchY":8.0,"biomeDepthWeight":2.0,"biomeDepthOffset":0.5,"biomeScaleWeight":2.0,"biomeScaleOffset":0.375,"seaLevel":255,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":-1,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}</code></div>
+|全部是深海的世界。
+|-
+| [[File:Isles.png|36px]]
+| '''{{tr|空岛|天空島世界}}'''
+| 特殊性质:
+* {{tr|平面比例|橫向座標比例}}= 3000，{{tr|高度比例|縱向高度比例}}= 6000，{{tr|高度伸展|高度伸展程度}}= 10
+* {{tr|规模上限|上限比例}}= 250
+<div style="width:100%;overflow: auto;"><code>
+{"coordinateScale":3000.0,"heightScale":6000.0,"lowerLimitScale":512.0,"upperLimitScale":250.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":80.0,"mainNoiseScaleY":160.0,"mainNoiseScaleZ":80.0,"baseSize":8.5,"stretchY":10.0,"biomeDepthWeight":1.0,"biomeDepthOffset":0.0,"biomeScaleWeight":1.0,"biomeScaleOffset":0.0,"seaLevel":63,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":-1,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}</code></div>
+| 一个类似高山生物群系，有很多飘浮的岛。
+|-
+| [[File:Delight.png|36px]]
+| '''探洞者{{tr|的喜悦|世界}}'''
+| 特性:
+* {{tr|主地形差异值 X|主雜訊比例 X}}= 5000，{{tr|主地形差异值 Y|主雜訊比例 Y}}= 1000；{{tr|主地形差异值 Z|主雜訊比例 Z}}= 5000
+* {{tr|高度伸展|高度伸展程度}}= 5
+* 生物群系深度比重= 2，{{tr|生物群系深度补偿|生態域深度偏移}}= 1，{{tr|生物群系规模比重|生態域大小比重}}= 4，{{tr|生物群系规模补偿|生態域大小偏移}}= 1
+<div style="width:100%;overflow: auto;"><code>
+{"coordinateScale":684.412,"heightScale":684.412,"lowerLimitScale":512.0,"upperLimitScale":512.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":5000.0,"mainNoiseScaleY":1000.0,"mainNoiseScaleZ":5000.0,"baseSize":8.5,"stretchY":5.0,"biomeDepthWeight":2.0,"biomeDepthOffset":1.0,"biomeScaleWeight":4.0,"biomeScaleOffset":1.0,"seaLevel":63,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":-1,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}</code></div>
+|一个由漆黑巨大的洞穴以及巨大的空岛组成的世界。
+|-
+| [[File:Madness.png|36px]]
+| '''{{tr|山脉狂魔|懸崖峭壁}}'''
+| 特性:
+* {{tr|主地形差异值 X|主雜訊比例 X}}= 1355.9908，{{tr|主地形差异值 Y|主雜訊比例 Y}}= 745.5343；{{tr|主地形差异值 Z|主雜訊比例 Z}}= 1183.464
+* {{tr|X轴高度差异值|深度雜訊比例 X}}= 374.93652, {{tr|Z轴高度差异值|深度雜訊比例 Z}}= 288.65228, {{tr|高度差异指数|深度雜訊指數}}= 1.2092624, {{tr|基准深度大小|深度基準大小}}= 1.8758626
+* {{tr|平面比例|橫向座標比例}}= 738.41864，{{tr|高度比例|縱向高度比例}}= 157.69133，{{tr|高度伸展|高度伸展程度}}= 1.7137525
+* {{tr|规模上限|上限比例}}= 801.4267，{{tr|规模下限|下限比例}}= 1254.1643
+* 生物群系深度比重= 1.7553768，{{tr|生物群系深度补偿|生態域深度偏移}}= 3.4701107，{{tr|生物群系规模比重|生態域大小比重}}= 1.0，{{tr|生物群系规模补偿|生態域大小偏移}}= 2.535211
+<div style="width:100%;overflow: auto;"><code>
+{"coordinateScale":738.41864,"heightScale":157.69133,"lowerLimitScale":1254.1643,"upperLimitScale":801.4267,"depthNoiseScaleX":374.93652,"depthNoiseScaleZ":288.65228,"depthNoiseScaleExponent":1.2092624,"mainNoiseScaleX":1355.9908,"mainNoiseScaleY":745.5343,"mainNoiseScaleZ":1183.464,"baseSize":1.8758626,"stretchY":1.7137525,"biomeDepthWeight":1.7553768,"biomeDepthOffset":3.4701107,"biomeScaleWeight":1.0,"biomeScaleOffset":2.535211,"seaLevel":63,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":-1,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}</code></div>
+| 一个由高耸陡峭的山和众多的架空层，悬崖还有一些巨大的山洞组成的世界。
+|-
+| [[File:Drought.png|36px]]
+| '''{{tr|旱地|極度乾旱}}'''
+| 特性:
+* 海平面= 20
+* {{tr|主地形差异值 X|主雜訊比例 X}}= 1000，{{tr|主地形差异值 Y|主雜訊比例 Y}}= 3000；{{tr|主地形差异值 Z|主雜訊比例 Z}}= 1000
+* {{tr|高度伸展|高度伸展程度}}= 10  
+<div style="width:100%;overflow: auto;"><code>
+{"coordinateScale":684.412,"heightScale":684.412,"lowerLimitScale":512.0,"upperLimitScale":512.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":1000.0,"mainNoiseScaleY":3000.0,"mainNoiseScaleZ":1000.0,"baseSize":8.5,"stretchY":10.0,"biomeDepthWeight":1.0,"biomeDepthOffset":0.0,"biomeScaleWeight":1.0,"biomeScaleOffset":0.0,"seaLevel":20,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":-1,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}</code></div>
+|一个低海平面和小型湖泊以及大面积的沙砾组成的世界。
+|-
+| [[File:Chaos.png|36px]]
+| '''混沌{{tr|洞|地}}穴'''
+| 特性:
+* 海平面= 6
+* {{tr|规模上限|上限比例}}= 2，{{tr|规模下限|下限比例}}= 64
+<div style="width:100%;overflow: auto;"><code>
+{"coordinateScale":684.412,"heightScale":684.412,"lowerLimitScale":64.0,"upperLimitScale":2.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":80.0,"mainNoiseScaleY":160.0,"mainNoiseScaleZ":80.0,"baseSize":8.5,"stretchY":12.0,"biomeDepthWeight":1.0,"biomeDepthOffset":0.0,"biomeScaleWeight":1.0,"biomeScaleOffset":0.0,"seaLevel":6,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":-1,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}</code></div>
+| 拥有许多泉水的巨大山洞的世界。山洞有很多延伸至地表的缝隙和孔道所以有阳光射入并因此洞内有植被存在，洞顶还有很多奇异的结构。有时在靠近地表的洞中会有很多水，尽管这是一个低海拔的世界。空岛也是很常见的，尽管比空岛世界和放大化世界出现频率更少。
+|-
+| [[File:Luckpreset.png|36px]]
+| '''祝你好运'''
+| 特性:
+* 海平面= 40
+* 熔岩海= 是
+<div style="width:100%;overflow: auto;"><code>
+{"coordinateScale":684.412,"heightScale":684.412,"lowerLimitScale":512.0,"upperLimitScale":512.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":80.0,"mainNoiseScaleY":160.0,"mainNoiseScaleZ":80.0,"baseSize":8.5,"stretchY":12.0,"biomeDepthWeight":1.0,"biomeDepthOffset":0.0,"biomeScaleWeight":1.0,"biomeScaleOffset":0.0,"seaLevel":40,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":-1,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}</code></div>
+| 这是个岩石、沙砾的世界，拥有熔岩海以及干枯的河床，几乎或没有植物和动物。
+|-
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||2014年4月22日|link=https://www.youtube.com/watch?v=2rdgMwJyE6w|自定义世界的预览视频在TeamMojang的Youtube频道放出。}}
+|{{HistoryLine||1.8|dev=14w17a|加入自定义世界类型。}}
+|{{HistoryLine|||dev=14w25a|海底神殿的生成可被自定义。}}
+|{{HistoryLine||1.8.2|dev=1.8.2-pre7|自定义世界中草方块的生成现在与海平面保持一致。}}
+|{{HistoryLine||1.11|dev=16w39a|林地府邸的生成可被自定义。}}
+|{{HistoryLine||1.13|dev=18w06a|移除了自定义世界类型。
+|之前版本创建的自定义世界的存档不再被加载。}}
+|{{HistoryLine||2018年5月15日|link=none|[[Erik Broes]]在Reddit上指出自定义世界将会“在1.13之后”回归，但 “与此前的彻底地不同”，“不会再在屏幕上出现50个意义不明的滑块。”<ref>"Customized worlds will be returning. I can't speak for the extra options you mentioned though." – u/AlmightyZing<br>{{reddit|name=snapshot 18w20a|8jlzw4/minecraft_snapshot_18w20a|dz0rdqd|But after 1.13|_Grum|May 15, 2018}}</ref><ref>"Would you really not consider holding off 1.13 until customised worlds are finished? Seems pretty crazy to set a precedent for the chance of losing features for several updates.<br>We came so close to having access to customising structures in world gen this update too, a shame that hasn't made the cut" – u/DaUltraMarine<br>{{reddit|snapshot 18w20a|dz0ukhq|No, they will come back but completely different from before.|_Grum|May 15, 2018|context=3}}</ref><ref>"No customization until after 1.13, or the other things?" – u/Kobbett<br>{{reddit|snapshot 18w20a|dz19qpg|No more screens with 50 vague sliders indeed.|_Grum|May 15, 2018|context=3}}</ref>}}
+|{{HistoryLine||1.13|dev=pre8|之前版本创建的自定义世界的存档又可以被加载了，但新地形只会按照默认世界来生成。}}
+|{{HistoryLine||2019年4月10日|link={{reddit|ao4rms/one_year_later_dear_mojang_please_update_us_on|ekhp8k3|context=3}}|[[Helen Zbihlyj]]称1.14不会重新加入自定义世界。}}
+}}
+
+== 你知道吗 ==
+* 这个世界类型由[[Ryan Holtz]]在TeamMojang YouTube频道上发布视频预览，<ref>{{tweet|TheMogMiner|458568711926841344}}</ref>原型是他在2012年制作的一个叫[http://www.minecraftforum.net/topic/1077039- ''Wedge'']的Mod。<ref>{{tweet|TheMogMiner|458573880039604224}}</ref>
+* 以下预设能生成类似于[[放大化]]世界：<ref>http://www.minecraftforum.net/forums/minecraft-discussion/recent-updates-and-snapshots/2102053-what-is-the-default-preset-for-amplified</ref>
+
+<pre style="overflow: auto;">{"coordinateScale":684.412,"heightScale":684.412,"lowerLimitScale":512.0,"upperLimitScale":512.0,"depthNoiseScaleX":200.0,"depthNoiseScaleZ":200.0,"depthNoiseScaleExponent":0.5,"mainNoiseScaleX":80.0,"mainNoiseScaleY":160.0,"mainNoiseScaleZ":80.0,"baseSize":8.5,"stretchY":12.0,"biomeDepthWeight":2.0,"biomeDepthOffset":1.0,"biomeScaleWeight":4.0,"biomeScaleOffset":1.0,"seaLevel":63,"useCaves":true,"useDungeons":true,"dungeonChance":8,"useStrongholds":true,"useVillages":true,"useMineShafts":true,"useTemples":true,"useRavines":true,"useWaterLakes":true,"waterLakeChance":4,"useLavaLakes":true,"lavaLakeChance":80,"useLavaOceans":false,"fixedBiome":-1,"biomeSize":4,"riverSize":4,"dirtSize":33,"dirtCount":10,"dirtMinHeight":0,"dirtMaxHeight":256,"gravelSize":33,"gravelCount":8,"gravelMinHeight":0,"gravelMaxHeight":256,"graniteSize":33,"graniteCount":10,"graniteMinHeight":0,"graniteMaxHeight":80,"dioriteSize":33,"dioriteCount":10,"dioriteMinHeight":0,"dioriteMaxHeight":80,"andesiteSize":33,"andesiteCount":10,"andesiteMinHeight":0,"andesiteMaxHeight":80,"coalSize":17,"coalCount":20,"coalMinHeight":0,"coalMaxHeight":128,"ironSize":9,"ironCount":20,"ironMinHeight":0,"ironMaxHeight":64,"goldSize":9,"goldCount":2,"goldMinHeight":0,"goldMaxHeight":32,"redstoneSize":8,"redstoneCount":8,"redstoneMinHeight":0,"redstoneMaxHeight":16,"diamondSize":8,"diamondCount":1,"diamondMinHeight":0,"diamondMaxHeight":16,"lapisSize":7,"lapisCount":1,"lapisCenterHeight":16,"lapisSpread":16}</pre>
+
+* 将“{{tr|平面比例|橫向座標比例}}”设置的非常高可以使[[边境之地/Java版#边境之地|边境之地]]重新生成<ref>https://www.reddit.com/r/Minecraft/comments/5r348x/far_lands_generating_far_too_close_to_spawn_for/</ref>，而将"{{tr|高度比例|縱向高度比例}}"设置的非常高可以生成[[边境之地/Java版#天空边境之地|天空边境之地]]。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+{{Navbox removed features}}
+
+[[Category:环境]]
+[[Category:世界类型]]
+
+[[de:Angepasst/Vor 1.13]]
+[[en:Old Customized]]
+[[fr:Personnalisé/Avant 1.13]]
+[[pl:Dostosowany]]
+[[ru:Настраиваемый (тип мира)]]

@@ -1,0 +1,92 @@
+# 页面: 命令/execute/旧版
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/execute/%E6%97%A7%E7%89%88
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{about|[[Java版1.13]]和[[基岩版1.19.50]]之前的{{cmd|execute|link=none}}命令|当前版本中的此命令|命令/execute}}
+{{outdated}}
+{{Infobox command
+|name=execute
+|oplevel=2\1
+|becheat=1
+}}
+使用此命令执行者的权限，以其他玩家或实体的身份执行一条命令。可以添加一个{{cmd|testforblock}}格式的限制条件。
+
+== 语法 ==
+* '''Java版'''
+: {{cd|-{}-execute <''实体''> <''x''> <''y''> <''z''> <''命令''>}}
+
+: 可以限制在指定方块被检测到时才执行命令：
+
+: {{cd|execute <''实体''> <''x''> <''y''> <''z''> detect <''x2''> <''y2''> <''z2''> <''方块''> <''数据''{{!}}''状态''> <''命令''>}}
+
+* '''基岩版'''
+: {{cd|execute <origin: target> <position: x y z> <command: command>}}
+
+: 可以限制在指定方块被检测到时才执行命令：
+
+: {{cd|execute <origin: target> <position: x y z> detect <detectPos: x y z> <block: Block> <data: int> <command: command>}}
+
+== 参数 ==
+{{el|je|short=1}}：{{cd|-{}-''实体''}}<br>
+{{el|be|short=1}}：{{argument|be=1|origin: target|CommandSelector<Actor>}}
+: 指定目标命令执行者。必须为一个玩家名或[[目标选择器]]。若多个目标被选中，则每个目标各运行一次指定的命令。
+
+{{el|je|short=1}}：{{cd|''x y z''}}<br>
+{{el|be|short=1}}：{{argument|be=1|position: x y z|CommandPositionFloat}}
+: 指定命令运行的位置。''x''和''z''必须在[[世界界限|-30,000,000到30,000,000]]内（含）。使用波浪号指定的[[相对坐标]]的参考点为命令代行者所处位置，而非此命令的执行位置。
+
+{{el|je|short=1}}：{{cd|-{}-''命令''}}<br>
+{{el|be|short=1}}：{{argument|be=1|command: command|unique_ptr<Command>}}
+: 指定要运行的命令。必须为一个有效命令。
+
+{{el|je|short=1}}：{{cd|''x2 y2 z2''}}（仅在{{cd|detect}}模式可用）<br>
+{{el|be|short=1}}：{{argument|be=1|detectPos: x y z|CommandPosition}}（仅在{{cd|detect}}模式可用）
+: 指定要检测方块的位置。''x2''和''z2''必须在[[世界界限|-30,000,000到30,000,000]]内（含）。可使用波浪号来指定与(''x'',''y'',''z'')的[[相对坐标]]。
+
+{{el|je|short=1}}：{{cd|-{}-''方块''}}（仅在{{cd|detect}}模式可用）<br>
+{{el|be|short=1}}：{{argument|be=1|block: Block|Block}}（仅在{{cd|detect}}模式可用）
+: 指定[[方块ID]]，必须与(''x2'',''y2'',''z2'')处的方块相同，命令才会执行。''方块''必须是有效的方块ID（例如，{{cd|minecraft:stone}}）。
+
+{{el|je|short=1}}：{{cd|-{}-''数据''}}（仅在{{cd|detect}}模式可用）<br>
+{{el|be|short=1}}：{{argument|be=1|data: int|int}}（仅在{{cd|detect}}模式可用）
+: 必须与测试方块的方块数据相等，命令才会执行。设为{{cd|-1}}可匹配任意的方块数据。
+
+{{el|je|short=1}}：{{cd|-{}-''状态''}}
+: 必须与测试方块的方块状态相等，命令才会执行。设为{{cd|*}}可匹配任意的方块状态。
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|fail|unparseable}}
+{{Result table|{{cd|-{}-''实体''}}或{{cd|origin: target}}未能选中一个或多个有效实体（指定的玩家必须在线上）||fail}}
+{{Result table|{{cd|''x y z''}}或{{cd|position: x y z}}所指定的位置未加载或位于世界外。}}
+{{Result table|未通过测试或出现下列情形之一：
+* {{cd|''x2 y2 z2''}}或{{cd|detectPos: x y z}}所指定的位置未加载或位于世界外。}}
+{{Result table|指定的命令执行失败}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 在所有僵尸的位置上召唤闪电：
+*: {{cmd|1=execute @e[type=zombie] ~ ~ ~ summon lightning_bolt}}
+* 在所有站在任意种类沙子的僵尸的位置上召唤闪电：
+*: {{cmd|1=execute @e[type=zombie] ~ ~ ~ detect ~ ~-1 ~ minecraft:sand -1 summon lightning_bolt}}
+* 让最近10个实体在其最近一位玩家的位置上召唤一只苦力怕：
+*: {{cmd|1=execute @e[c=10] ~ ~ ~ execute @p ~ ~ ~ summon creeper ~ ~ ~}}
+* 在指定玩家的位置上召唤末影龙：
+*: {{cmd|1=execute <''玩家名''> ~ ~ ~ summon ender_dragon}}
+
+== 历史 ==
+{{main|命令/execute#历史}}
+
+[[de:Befehl/execute/Vor 1.13]]
+[[en:Commands/execute (old)]]
+[[ko:명령어/execute/이전]]
+[[pt:Comandos/execute/Antes]]

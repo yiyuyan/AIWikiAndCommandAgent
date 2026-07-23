@@ -1,0 +1,67 @@
+# 页面: 命令/stopwatch
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/stopwatch
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|返回|回傳|返回}}{{exclusive|java}}
+{{Infobox command
+|name=stopwatch
+|oplevel=2
+}}
+
+管理秒表以记录现实时间。秒表的时间不受{{cmd|tick freeze}}影响，相关存储格式参见[[秒表存储格式]]。
+
+== 语法 ==
+: <code>stopwatch create <id></code>
+:: 创建新的秒表。
+: <code>stopwatch query <id> [<scale>]</code>
+:: 查询指定的秒表的时间，以秒为单位（精确到小数点后3位）。如果给定<code><scale></code>参数，则将时间值乘以<code><scale></code>向下取整后返回。
+: <code>stopwatch restart <id></code>
+:: 重置指定的秒表的时间。
+: <code>stopwatch remove <id></code>
+:: 移除指定的秒表。
+
+== 参数 ==
+{{argument|id|resource_location}}
+: 指定秒表的ID。
+: {{arg desc|je=resource_location}}
+
+{{argument|scale|double}}
+: <code>/stopwatch query ...</code>的返回值乘数，默认为1。
+: {{arg desc|je=double}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/stopwatch create ...|指定的秒表已经存在|fail}}
+{{Result table|cmd=/stopwatch query ...<br>/stopwatch restart ...<br>/stopwatch remove ...|指定的秒表不存在}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/stopwatch query ...|执行成功|1|1|指定的秒表的时间乘以<code><scale></code>后向下取整所得值}}
+{{Output table|cmd=/stopwatch create ...<br>/stopwatch restart ...<br>/stopwatch remove ...|执行成功|1|1|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了{{cmd|stopwatch|link=none}}。}}
+|{{HistoryLine|||dev=25w42a|修改了<code><id></code>参数的位置，先前格式为<code>-{}-/stopwatch <id> <''操作''></code>而不是<code>-{}-/stopwatch <''操作''> <id></code>。
+|向<code>query</code>子命令添加了可选参数<code>scale</code>，为返回值的乘数。
+|<code>query</code>子命令现在返回秒表的时间乘以乘数，先前只返回<code>1</code>。}}
+}}
+
+== 你知道吗 ==
+* 该命令之所以被添加，是为了取代之前版本中使用{{cmd|worldborder}}来测量现实时间流逝的方法。
+
+== 导航 ==
+{{navbox commands}}
+
+[[de:Befehl/stopwatch]]
+[[en:Commands/stopwatch]]
+[[ja:コマンド/stopwatch]]
+[[pt:Comandos/stopwatch]]

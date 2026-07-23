@@ -1,0 +1,92 @@
+# 页面: Brigadier
+# 来源: https://zh.minecraft.wiki/w/Brigadier
+# 分类: Java版, Java版独有特性
+# 抓取时间: 2026-07-14 17:11:17
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{infobox
+|title=Brigadier
+|image=none
+|rows= 
+{{infobox row|最新版本|[https://github.com/Mojang/brigadier/releases/latest 1.0.18]}}
+{{infobox row|GitHub仓库|[https://github.com/Mojang/brigadier/ brigadier]}}
+{{infobox row|编写语言|[[wzh:Java|Java]]}}
+{{infobox row|开发作者|[[Mojang Studios]]}}
+{{infobox row|授权协议|[[wzh:MIT协议|MIT协议]]}}
+}}
+
+{{quote|我真为这个名字感到自豪！Brigadier是Minecraft使用的命令库的名字。|[[Dinnerbone]]|Brigadier<ref>{{article|programmers-play-minecrafts-inner-workings|Programmers: Play with Minecraft's Inner Workings!}}</ref>|Nathan Adams Mojang avatar.png}}
+
+'''Brigadier'''（意为“-{准}-将”）是一个为[[Java版]]设计和开发的[[命令]]读取执行库，<ref>{{link|url=https://github.com/Mojang/brigadier|title=Mojang/brigadier: Brigadier is a command parser & dispatcher, designed and developed for Minecraft: Java Edition.|website=GitHub}}</ref>主要由[[Dinnerbone]]维护。<ref>{{link|url=https://github.com/Mojang/brigadier/graphs/contributors|title=Contributors to Mojang/brigadier|website=GitHub}}</ref>它是Mojang以开源许可放出的第一个Java版使用的库。<ref>{{tweet|Dinnerbone|1045022190079479809|We just pulled in our very first community contributed code into a Minecraft Java Edition official library. Woo! 🎉 Want to help out? The first library we've opened is our command engine - it's MIT licensed so you can freely use it in your own projects!}}</ref>
+
+== 用途 ==
+Brigadier可以用来读取和执行字符串命令。
+
+=== 特性 ===
+* 命令节点可由变量或直接量分支定义。
+** [[命令#命令列表及其概述|Java版中所有的命令]]实际上均为根命令节点的直接量分支，而非实际执行的命令。<ref>{{Link|url=https://github.com/Mojang/brigadier/pull/8#discussion_r220457388|quote=I'd argue that most people identify command by first literal after root, so that would make "command" a sub-tree and not just path leading to leaf node. /bikeshedding|author=[[boq]]|title=Added copyright header, LICENSE, and README.md by Dinnerbone · Pull Request #8 · Mojang/brigadier|website=Mojang/brigadier – GitHub}}</ref>
+* 命令来源可由命令上下文修改/复制。
+** 多个实体被[[目标选择器]]选定时，{{cmd|execute as <''目标选择器''>}}可以将命令来源也修改为多个。
+* 命令解析时动态检查错误。<ref>{{Link|url=https://github.com/Mojang/brigadier#inspecting-a-command|title=Inspecting a command|website=Mojang/brigadier – GitHub}}</ref>
+* 枚举当前命令节点可能到达的所有命令。<ref>{{Link|url=https://github.com/Mojang/brigadier#displaying-usage-info|title=Displaying usage info|website=Mojang/brigadier – GitHub}}</ref>
+* 命令执行成功/失败时的结果即时处理。
+** {{cmd|execute store}}支持将命令结果存储至[[方块实体数据格式|方块]]、[[实体数据格式|实体]]的NBT数据或者[[记分板]]。
+* 命令节点的递归重定向。
+** {{cmd|execute run}}会重定向到原版游戏命令调度器的根节点。
+
+== 内容 ==
+=== 字符串读取器 ===
+Brigadier实现了解析器用于解析命令字串。
+
+其通过游标（cursor）以逐字读取字符串。当游标值增加时，可看作游标向主字符串末尾方向移动。
+
+其提供一系列方法方便游戏读取命令字串。并内建解析引号括起的字符串，支持反斜杠转义，及一些基础的数字、布尔值解析器。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2014年10月25日|link=https://bugs.mojang.com/browse/MC-10880#comment-205438|Dinnerbone在{{bug|MC-10880}}中提到Brigadier。}}
+|{{HistoryLine||2017年7月27日|link={{tweet|Dinnerbone|890548451372564480}}|Dinnerbone披露未来将有一个未混淆的叫“Brigadier”的命令读取库。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=17w45a|现在由Brigadier处理[[命令]]。
+|Minecraft将Brigadier添加至其依赖库中。}}
+|{{HistoryLine||2018年9月26日|link={{tweet|Dinnerbone|1045022190079479809}}|Brigadier现以MIT许可开源。<ref>[https://github.com/Mojang/brigadier/pull/8#issue-217673918 "Preparation for OSS :)" - Preparing for the open source software]  – Mojang/brigadier – GitHub</ref>}}
+|{{HistoryLine||1.14|dev=19w08a|允许在命令中使用单引号表示纯字符串。<ref>{{Link|url=https://github.com/Mojang/brigadier/pull/52|title=Allow single quote in strings by boq · Pull Request #52 |website=Mojang/brigadier – GitHub}}</ref>}}
+}}
+
+=== 版本历史 ===
+{| class=wikitable
+! 版本 !! 日期 !! 更改
+|-
+! 1.0.15
+| 2018年9月26日<ref>{{cite|url=https://github.com/Mojang/brigadier/releases/tag/1.0.15|title=Release 1.0.15 &middot; Mojang/brigadier|website=GitHub}}</ref>
+|
+* 发布初始版本
+|-
+! 1.0.17
+| 2019年2月19日<ref>{{cite|url=https://github.com/Mojang/brigadier/releases/tag/1.0.17|title=Release 1.0.17 &middot; Mojang/brigadier|website=GitHub}}</ref>
+|
+* 允许字符串中出现单引号
+* 加入了<code>long</code>参数类型
+* 实现任意位置的文本提示计算
+* 不再依赖于Guava
+|-
+! 1.0.18
+| 2021年7月16日<ref>{{cite|url=https://github.com/Mojang/brigadier/releases/tag/1.0.18|title=Release 1.0.18 &middot; Mojang/brigadier|website=GitHub}}</ref>
+|
+* 性能优化
+|}<!-- Uncomment when dfu page is done
+== See also ==
+* [[Data Fixer Upper]]: 另一个开源库，用于在不同数据版本之间更新[[Java版]]存档。
+-->
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[en:Brigadier]]
+[[fr:Brigadier]]
+[[ja:Brigadier]]
+[[pt:Brigadier]]

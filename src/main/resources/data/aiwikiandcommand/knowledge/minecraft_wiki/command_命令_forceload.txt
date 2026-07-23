@@ -1,0 +1,91 @@
+# 页面: 命令/forceload
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/forceload
+# 分类: Java版独有特性, 命令
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{about|{{el|je}}强制加载区块的命令|{{el|be|ee}}强制加载区块的命令|命令/tickingarea|Java版曾經存在的拥有类似机制的区块|出生点区块}}
+{{exclusive|java}}
+{{Infobox command
+|name=forceload
+|oplevel=2
+}}
+
+强制或取消强制[[区块]]保持加载，或查询强制加载的区块。
+
+== 用法 ==
+被强制加载的区块会获得加载等级为31的加载标签，这与玩家加载范围内获得加载标签的区块相同。这意味着被强制加载的区块中会处理所有的游戏内容，且加载等级会扩散到相邻的区块。不过由于每向相邻区块扩散一次都会使加载等级增加1，相邻区块并不会处理所有的游戏内容。参见[[区块]]。
+
+指定的坐标是目标区块内的任意[[坐标#方块坐标|方块坐标]]。为了强制加载区块<code>0,0</code>到区块<code>1,2</code>间的所有区块（共2×3=6个区块），[[玩家]]应该使用例如{{cmd|forceload add 0 0 31 47|link=none}}的命令。使用命令{{cmd|forceload add 0 0 10 30|link=none}}则将会加载区块<code>0,0</code>到区块<code>0,1</code>（1个区块在x/z坐标方向包含16×16方块）。
+
+== 语法 ==
+: <code>forceload add <from> [<to>]</code>
+:: 强制<code><from></code>（如果指定了<code><to></code>，则是从<code><from></code>到<code><to></code>）处的区块加载。
+: <code>forceload remove <from> [<to>]</code>
+:: 取消<code><from></code>（如果指定了<code><to></code>，则是从<code><from></code>到<code><to></code>）处的区块的强制加载。
+: <code>forceload remove all</code>
+:: 取消当前维度所有被强制加载的区块。
+: <code>forceload query [<pos>]</code>
+:: 查询区块坐标<code><pos></code>处的区块是否被强制加载；若不指定<code><pos></code>，列出当前维度中所有被强制加载的区块。
+
+== 参数 ==
+{{argument|from|column_pos}} 和 {{argument|to|column_pos}}
+: X、Z轴的方块坐标值，将在命令内部被转换为区块坐标。
+: {{arg desc|je=column_pos}}
+
+{{argument|pos|column_pos}}
+: 以区块坐标指定要查询的区块。
+: {{arg desc|je=column_pos}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/forceload add ...|指定了超过256个区块|fail}}
+{{Result table|存在指定的区块在世界之外}}
+{{Result table|所有指定的区块都处于强制加载状态}}
+{{Result table|cmd=/forceload remove <from> [<to>]|所有指定的区块都没有处于强制加载状态}}
+{{Result table|cmd=/forceload query <pos>|指定的区块没有被强制加载}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/forceload add ...|执行成功|1|1|新增加的强制加载区块的数量}}
+{{Output table|cmd=/forceload remove <from> [<to>]|执行成功|1|1|被删除的强制加载区块的数量}}
+{{Output table|cmd=/forceload remove all|执行成功|1|1|0}}
+{{Output table|cmd=/forceload query|执行成功|1|1|当前[[维度]]中强制加载区块的数量}}
+{{Output table|cmd=/forceload query <pos>|执行成功|1|1|1}}
+{{Output table}}
+
+== 示例 ==
+* 将当前维度的区块<code>0,0</code>标记为强制加载：<code>/forceload add 0 0</code>
+* 将当前维度的区块<code>0,-1</code>到<code>0,0</code>标记为强制加载：<code>/forceload add 0 -1 1 0</code>
+* 查看当前维度的区块<code>0,0</code>是否被标记为强制加载：<code>/forceload query 0 0</code>
+* 将当前维度的区块<code>0,0</code>解除强制加载：<code>/forceload remove 0 0</code>
+* 将当前维度的区块<code>0,-1</code>到<code>0,0</code>解除强制加载：<code>/forceload remove 0 -1 1 0</code>
+* 解除标记当前维度所有的强制加载区块：<code>/forceload remove all</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13.1|dev=18w31a|加入了{{cmd|chunk|link=none}}。}}
+|{{HistoryLine||1.13.1|dev=pre1|将{{cmd|chunk|link=none}}重命名为{{cmd|forceload|link=none}}。}}
+|{{HistoryLine||1.14|dev=19w05a|{{cmd|forceload query|link=none}}现在可以在命令方块和函数中执行。}}
+|{{HistoryLine||1.14.4|dev=pre4|{{cmd|forceload|link=none}}现在对[[权限等级]]大于等于2的玩家可用。}}
+|{{HistoryLine||1.17|dev=20w45a|区块加载现在是异步的，所以现在使用{{cmd|forceload|link=none}}不能保证区块在同一游戏刻内完全加载。<ref>{{bug|MC-227930|||WAI}}</ref>}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/forceload]]
+[[en:Commands/forceload]]
+[[es:Comandos/forceload]]
+[[fr:Commandes/forceload]]
+[[ja:コマンド/forceload]]
+[[pt:Comandos/forceload]]
+[[ru:Команды консоли/forceload]]

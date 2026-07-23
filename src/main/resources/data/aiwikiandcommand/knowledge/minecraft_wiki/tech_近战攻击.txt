@@ -1,0 +1,631 @@
+# 页面: 近战攻击
+# 来源: https://zh.minecraft.wiki/w/%E8%BF%91%E6%88%98%E6%94%BB%E5%87%BB
+# 分类: Java版独有信息, 使用计算器的页面, 基岩版独有信息, 待更新条目, 有未知版本的History模板的页面/Java版, 游戏内容
+# 抓取时间: 2026-07-14 17:36:59
+# 原始 Wikitext 内容:
+
+{{redirect|攻击|远程攻击|弹射物|其他生物的攻击|伤害/伤害来源#生物攻击}}
+{{update|由于{{bug|MCPE-235423}}，基岩版近战攻击计算顺序有变化，文章可能需要重新布局。}}
+'''近战攻击（Melee Attack）'''是生物通过极近距离接触目标来造成伤害的攻击方式，由大量生物使用。
+
+== 攻击场景 ==
+近战攻击使用生物基础近战攻击力，并会对目标生物造成生物攻击类型的伤害。绝大多数生物每秒进行1次近战攻击，对有意攻击的单一目标进行近战攻击，且不会误伤其他目标。
+
+部分生物使用不同的近战攻击方式和特殊的攻击效果：
+* [[玩家]]在持有任何物品时都可以通过按下{{Control|攻击}}键对一个生物进行近战攻击来造成伤害。玩家拥有大于其他大多数生物的近战攻击距离以及不受限制的攻击频率，能够在不被多数生物触及的情况下持续攻击目标。
+* 玩家在被具有[[激流]]魔咒的[[三叉戟]]推进时撞击到生物，会自动对被撞击到的生物执行一次近战攻击。
+* [[僵尸]]、[[僵尸村民]]、[[尸壳]]、[[僵尸猪灵]]、[[猪灵]]持有[[矛]]时，会且仅会以冲锋的方式使用矛，并导致它们的近战攻击可以误伤非目标。
+* [[洞穴蜘蛛]]、[[尸壳]]、[[凋灵骷髅]]、[[蜜蜂]]在近战攻击时会对被攻击生物施加[[状态效果]]。
+* [[铁傀儡]]、[[疣猪兽]]、[[僵尸疣猪兽]]将攻击目标向上击飞至空中。
+* [[北极熊]]靠两条后腿直立，挥舞前爪来近战攻击。
+* [[卫道士]]、[[猪灵蛮兵]]等持有[[斧]]的生物和[[监守者]]在近战攻击时会停用目标的[[盾牌]]{{convert|100}}。
+* {{in|be}}生命值低于50%的[[凋灵]]会以冲撞的形式进行近战攻击，冲撞期间会破坏其接触的大部分方块，并对其范围内的所有目标造成伤害。
+* {{in|je}}[[史莱姆]]和[[岩浆怪]]会对攻击距离内的所有目标进行攻击而不仅限于一个目标，且近战攻击没有频率限制，会持续执行攻击。[[受击后伤害免疫]]使它们对目标生物每秒只能造成两次伤害，但使用盾牌阻挡伤害时将不会触发受击后伤害免疫并极快速地耗尽盾牌的耐久度。{{in|be}}史莱姆和岩浆怪也会持续执行攻击，同时对攻击距离内的所有目标进行攻击，但每次攻击有0.5秒的冷却时间。
+
+== 攻击范围 ==
+<!-- 此段落需要基岩版代码验证，已测得安卓和Windows的距离和Java版十分近似 -->
+近战攻击具有攻击范围，超出攻击范围就无法进行近战攻击。
+
+对于绝大多数生物，攻击范围是自身碰撞箱水平扩展一定宽度的一块区域，下文中称之为'''攻击包围盒'''。同样，被攻击的实体也有一定范围，在这个范围内才会被攻击到，下文称之为'''受击包围盒'''。当攻击包围盒与受击包围盒相交时，生物才可以近战攻击对方。
+
+攻击包围盒以下列方式计算：
+* 获取生物碰撞箱。如果生物正在[[骑乘]]其他实体，则使用本生物和骑乘实体碰撞箱的外接轴对齐包围盒，高度范围取生物碰撞箱高度范围。
+* 将此碰撞箱水平方向扩展<math>\sqrt{2.04}-0.6</math>（约等于0.828格）即为攻击包围盒。
+* 如果生物是[[劫掠兽]]，则攻击包围盒水平方向缩减0.5格。
+
+受击包围盒以下列方式计算：
+* 如果实体没有骑乘任何实体，则受击包围盒就是实体碰撞箱。
+* 如果实体骑乘了其他实体，则受击包围盒的最低点会被设置为实体碰撞箱最低点和实体骑乘位置中的最大值。
+
+除玩家外的生物近战攻击时，也需要保证视线能看到被攻击的实体，否则不会产生近战攻击，以防止穿过方块进行攻击。由于生物不能看见自己，因此生物不能对自己发动近战攻击。
+
+对于玩家，攻击范围就是可触及的范围。{{in|JE}}取决于[[属性]]<code>entity_interaction_range</code>的计算值，默认为3格，创造模式受[[属性修饰符]]影响变为5格。
+
+{{in|be}}除[[玩家]]、[[北极熊]]、[[恼鬼]]、[[劫掠兽]]和[[凋灵]]外，其他生物的近战攻击无法攻击到乘坐船、运输船或矿车且处于同一水平高度的身高大于等于1.9格且具有坐姿的生物，这些生物包括：
+* {{EntitySprite|zombie}} {{EntitySprite|zombie villager}} {{EntitySprite|drowned}} {{EntitySprite|husk}} {{EntitySprite|zombified piglin}}成年[[僵尸]]及其变种
+* {{EntitySprite|skeleton}} {{EntitySprite|stray}} {{EntitySprite|bogged}} {{EntitySprite|parched}} {{EntitySprite|wither skeleton}}[[骷髅]]及其变种
+* {{EntitySprite|pillager}} {{EntitySprite|vindicator}} {{EntitySprite|evoker}}[[灾厄村民]]
+* {{EntitySprite|piglin}} {{EntitySprite|piglin brute}}成年[[猪灵]]和[[猪灵蛮兵]]
+
+== 基础近战攻击力 ==
+在近战攻击中，如果不考虑使用物品的[[魔咒]]、额外附加的攻击力、是否暴击{{only|for=和攻击冷却|je}}等额外因素，生物都具有一个'''基础近战攻击力'''。基础近战攻击力的计算包括生物的基础攻击力、主手[[物品]]攻击力和[[状态效果]]。
+
+=== Java版 ===
+{{in|je}}基础近战攻击力就是[[属性]]<code>attack_damage</code>的计算值，主手物品攻击力和状态效果本质上是Op0属性修饰符。使用{{cmd|attribute}}修改此属性基值或修饰符可以修改对应生物的基础近战攻击力。以带有[[力量（状态效果）|力量]]II状态效果的玩家拿着木剑时的基础近战攻击力举例：
+
+<pre>-{}-
+  1 （玩家攻击力基值）
++ 3 （木剑攻击力，修饰符Op0，修饰值3）
++ 6 （力量II状态效果，修饰符Op0，修饰值6）
+= 10
+</pre>
+
+主手物品攻击力如下表（不含玩家{{Hp|1}}的基础攻击力，故较游戏中显示少1）：
+
+{| class="wikitable"
+! 物品 !! colspan=7 | 攻击力
+|-
+| [[剑]] 
+| {{ItemSprite|Wooden Sword}} +{{Hp|3}}
+| {{ItemSprite|Golden Sword}} +{{Hp|3}}
+| {{ItemSprite|Stone Sword}} +{{Hp|4}}
+| {{ItemSprite|Copper Sword}} +{{Hp|4}}
+| {{ItemSprite|Iron Sword}} +{{Hp|5}}
+| {{ItemSprite|Diamond Sword}} +{{Hp|6}}
+| {{ItemSprite|Netherite Sword}} +{{Hp|7}}
+|-
+| [[锹]] 
+| {{ItemSprite|Wooden Shovel}} +{{Hp|1.5}}
+| {{ItemSprite|Golden Shovel}} +{{Hp|1.5}}
+| {{ItemSprite|Stone Shovel}} +{{Hp|2.5}}
+| {{ItemSprite|Copper Shovel}} +{{Hp|2.5}}
+| {{ItemSprite|Iron Shovel}} +{{Hp|3.5}}
+| {{ItemSprite|Diamond Shovel}} +{{Hp|4.5}}
+| {{ItemSprite|Netherite Shovel}} +{{Hp|5.5}}
+|-
+| [[镐]] 
+| {{ItemSprite|Wooden Pickaxe}} +{{Hp|1}}
+| {{ItemSprite|Golden Pickaxe}} +{{Hp|1}}
+| {{ItemSprite|Stone Pickaxe}} +{{Hp|2}}
+| {{ItemSprite|Copper Pickaxe}} +{{hp|2}}
+| {{ItemSprite|Iron Pickaxe}} +{{Hp|3}}
+| {{ItemSprite|Diamond Pickaxe}} +{{Hp|4}}
+| {{ItemSprite|Netherite Pickaxe}} +{{Hp|5}}
+|-
+| [[斧]] 
+| {{ItemSprite|Wooden Axe}} +{{Hp|6}}
+| {{ItemSprite|Golden Axe}} +{{Hp|6}}
+| {{ItemSprite|Stone Axe}} +{{Hp|8}}
+| {{ItemSprite|Copper Axe}} +{{Hp|8}}
+| {{ItemSprite|Iron Axe}} +{{Hp|8}}
+| {{ItemSprite|Diamond Axe}} +{{Hp|8}}
+| {{ItemSprite|Netherite Axe}} +{{Hp|9}}
+|-
+| [[矛]]
+| {{ItemSprite|Wooden Spear}} +{{Hp|0}}
+| {{ItemSprite|Golden Spear}} +{{Hp|0}}
+| {{ItemSprite|Stone Spear}} +{{Hp|1}}
+| {{ItemSprite|Copper Spear}} +{{Hp|1}}
+| {{ItemSprite|Iron Spear}} +{{Hp|2}}
+| {{ItemSprite|Diamond Spear}} +{{Hp|3}}
+| {{ItemSprite|Netherite Spear}} +{{Hp|4}}
+|-
+| [[锄]] 
+| colspan=7 align=center | {{ItemSprite|Wooden Hoe}} {{ItemSprite|Golden Hoe}} {{ItemSprite|Stone Hoe}} {{ItemSprite|Copper Hoe}}{{ItemSprite|Iron Hoe}} {{ItemSprite|Diamond Hoe}} {{ItemSprite|Netherite Hoe}} +{{Hp|0}}
+|-
+| [[三叉戟]]
+| colspan=7 align=center | {{ItemSprite|Trident}} +{{Hp|8}}
+|-
+| [[重锤]]
+| colspan=7 align=center | {{ItemSprite|Mace}} +{{Hp|5}}
+|-
+| 其他物品
+| colspan=7 align=center | +{{Hp|0}}
+|}
+
+[[力量（状态效果）|力量]]状态效果每级增加{{Hp|3}}攻击力，[[虚弱]]状态效果每级减少{{Hp|4}}攻击力。
+
+=== 基岩版 ===
+{{el|be}}的基础近战攻击力在不同生物之间计算不同：
+
+对于[[玩家]]，基础近战攻击力的计算顺序如下：
+# 获取玩家攻击力基值。
+# 添加主手物品攻击力。
+# 计算力量状态效果。
+# 计算虚弱状态效果。
+
+以同时带有力量II和虚弱I状态效果的玩家拿着木剑时的基础近战攻击力举例：
+
+<pre>-{}-
+1（玩家攻击力基值）+ 4（木剑攻击力）= 5
+(5 &times; 1.3 + 1) &times; 1.3 + 1 = 10.75（力量II）
+10.75 &times; 0.8 - 0.5 = 8.1（虚弱I）
+</pre>
+
+对于玩家外的绝大多数生物，基础近战攻击力计算顺序如下：
+# 获取生物攻击力基值。
+# 计算力量状态效果。
+# 计算虚弱状态效果。
+# 添加主手物品攻击力。
+
+以同时带有力量II和虚弱I状态效果的[[僵尸]]拿着木剑时的基础近战攻击力举例：
+
+<pre>-{}-
+3（僵尸攻击力基值）
+(3 &times; 1.3 + 1) &times; 1.3 + 1 = 7.37（力量II）
+7.37 &times; 0.8 - 0.5 = 5.396（虚弱I）
+5.396 + 4（木剑攻击力）= 9.396
+</pre>
+
+主手物品攻击力如下表（不含玩家{{Hp|1}}的基础攻击力，与游戏中显示相同）：
+
+{| class="wikitable"
+! 物品 !! colspan="7" | 攻击力
+|-
+| [[剑]] 
+| {{ItemSprite|Wooden Sword}} +{{Hp|4}}
+| {{ItemSprite|Golden Sword}} +{{Hp|4}}
+| {{ItemSprite|Stone Sword}} +{{Hp|5}}
+| {{ItemSprite|Copper Sword}} +{{Hp|5}}
+| {{ItemSprite|Iron Sword}} +{{Hp|6}}
+| {{ItemSprite|Diamond Sword}} +{{Hp|7}}
+| {{ItemSprite|Netherite Sword}} +{{Hp|8}}
+|-
+| [[锹]] 
+| {{ItemSprite|Wooden Shovel}} +{{Hp|1}}
+| {{ItemSprite|Golden Shovel}} +{{Hp|1}}
+| {{ItemSprite|Stone Shovel}} +{{Hp|2}}
+| {{ItemSprite|Copper Shovel}} +{{Hp|2}}
+| {{ItemSprite|Iron Shovel}} +{{Hp|3}}
+| {{ItemSprite|Diamond Shovel}} +{{Hp|4}}
+| {{ItemSprite|Netherite Shovel}} +{{Hp|5}}
+|-
+| [[镐]] 
+| {{ItemSprite|Wooden Pickaxe}} +{{Hp|2}}
+| {{ItemSprite|Golden Pickaxe}} +{{Hp|2}}
+| {{ItemSprite|Stone Pickaxe}} +{{Hp|3}}
+| {{ItemSprite|Copper Pickaxe}} +{{Hp|3}}
+| {{ItemSprite|Iron Pickaxe}} +{{Hp|4}}
+| {{ItemSprite|Diamond Pickaxe}} +{{Hp|5}}
+| {{ItemSprite|Netherite Pickaxe}} +{{Hp|6}}
+|-
+| [[斧]] 
+| {{ItemSprite|Wooden Axe}} +{{Hp|3}}
+| {{ItemSprite|Golden Axe}} +{{Hp|3}}
+| {{ItemSprite|Stone Axe}} +{{Hp|4}}
+| {{ItemSprite|Copper Axe}} +{{Hp|4}}
+| {{ItemSprite|Iron Axe}} +{{Hp|5}}
+| {{ItemSprite|Diamond Axe}} +{{Hp|6}}
+| {{ItemSprite|Netherite Axe}} +{{Hp|7}}
+|-
+| [[矛]]
+| {{ItemSprite|Wooden Spear}} +{{Hp|1}}
+| {{ItemSprite|Golden Spear}} +{{Hp|1}}
+| {{ItemSprite|Stone Spear}} +{{Hp|2}}
+| {{ItemSprite|Copper Spear}} +{{Hp|2}}
+| {{ItemSprite|Iron Spear}} +{{Hp|3}}
+| {{ItemSprite|Diamond Spear}} +{{Hp|4}}
+| {{ItemSprite|Netherite Spear}} +{{Hp|5}}
+|-
+| [[锄]] 
+| {{ItemSprite|Wooden Hoe}} +{{Hp|2}}
+| {{ItemSprite|Golden Hoe}} +{{Hp|2}}
+| {{ItemSprite|Stone Hoe}} +{{Hp|3}}
+| {{ItemSprite|Copper Hoe}} +{{Hp|3}}
+| {{ItemSprite|Iron Hoe}} +{{Hp|4}}
+| {{ItemSprite|Diamond Hoe}} +{{Hp|5}}
+| {{ItemSprite|Netherite Hoe}} +{{Hp|6}}
+|-
+| [[三叉戟]]
+| colspan="7" align="center" | {{ItemSprite|Trident}} +{{Hp|8}}
+|-
+| [[重锤]]
+| colspan="7" align="center" | {{ItemSprite|Mace}} +{{Hp|5}}
+|-
+| 其他物品
+| colspan="7" align="center" | +{{Hp|0}}
+|}
+
+力量状态效果可以由递推公式<math>d_n=1.3d_{n-1}+1</math>或通项公式<math>d_n=1.3^nd_0+\frac{1.3^n-1}{0.3}</math>计算，其中<math>d_0</math>是输入的攻击力，<math>d_n</math>是输出的攻击力，<math>n</math>为力量状态效果的等级。
+
+虚弱状态效果可以由递推公式<math>d_n=0.8d_{n-1}-0.5</math>或通项公式<math>d_n=0.8^nd_0+\frac{0.8^n-1}{0.4}</math>计算，其中<math>d_0</math>是输入的攻击力，<math>d_n</math>是输出的攻击力，<math>n</math>为虚弱状态效果的等级。如果计算结果小于0，则输出攻击力为0。
+
+== 魔咒攻击力 ==
+在主手上的物品包含的[[魔咒]]会影响攻击伤害，在这里被称为'''魔咒攻击力'''。
+
+对于不同的生物，魔咒产生的攻击力也不同：
+* [[锋利]]对所有生物起效。{{in|je}}攻击力为<math>0.5n+0.5</math>，其中<math>n</math>为锋利魔咒的等级；{{in|be}}每一级产生{{Hp|1.25}}攻击力。
+* [[亡灵杀手]]只对[[亡灵生物]]起效，每一级产生{{Hp|2.5}}攻击力。
+* [[节肢杀手]]只对[[节肢生物]]起效，每一级产生{{Hp|2.5}}攻击力。
+* [[穿刺]]只对{{only|je|for=[[水生生物]]}}或{{only|be|for=与[[水]]或[[降雨|雨水]]接触的生物}}起效，每一级产生{{Hp|2.5}}攻击力。
+
+所有魔咒攻击力的总和就是当前的魔咒攻击力。{{in|be}}魔咒攻击力在计算总和后会向下取整，例如锋利I和亡灵杀手I同时起效时，魔咒攻击力为{{hp|3}}而不是{{hp|3.75}}。
+
+== 额外攻击力 ==
+{{See also|重锤#下落攻击}}
+游戏在计算基础近战攻击力和魔咒伤害后，还会根据当前主手物品的性质和当前攻击实体的状态判断是否添加一个'''额外攻击力'''。目前只有[[重锤]]有额外攻击力。
+
+重锤的额外攻击力只有在攻击实体下落高度大于1.5格且{{only|for=不处于滑翔状态|java}}时才可以生效，并根据下落高度大小调整额外攻击力：
+* 如果下落高度''f''大于1.5格但不大于3格，那么额外攻击力为<math>4f</math>。
+* 如果下落高度''f''大于3格但不大于8格，那么额外攻击力为<math>2f+6</math>。
+* 如果下落高度''f''大于8格，那么额外攻击力为<math>f+14</math>。
+* 如果重锤具有[[致密]]魔咒，且魔咒等级为''l''，则根据下落高度''f''，再追加<math>0.5lf</math>点额外攻击力。
+
+== 暴击 ==
+{{Redirect|暴击|[[弓]]在满弦时或[[弩]]发射的暴击箭|箭#箭伤害|Minecraft Dungeons中的魔咒|MCD:暴击}}
+[[File:crits.png|缩略图|对一只剪过毛的绵羊造成了暴击]]
+'''暴击（Critical Hit）'''是玩家能够进行的相比普通攻击造成额外伤害的近战攻击。使用除[[矛]]以外的任何物品（包括空手）进行近战攻击都可以造成暴击。
+
+造成暴击需要满足下列条件：
+* 玩家必须正在[[摔落|下落]]，即下落高度必须大于0。这也要求了玩家不能具有[[缓降]]或[[飘浮]]效果。
+* 玩家不能接触地面，即不能站在任何固体阻挡碰撞箱的可站立表面上。
+* 玩家不能处于任何可攀爬的方块（[[梯子]]、[[藤蔓]]、[[蜘蛛网]]、{{Only|je|for=在梯子正上方在同侧开启的[[活板门]]}}等）的内部。
+* 玩家不能接触[[水]]。
+* 玩家不能正在骑乘一个[[实体]]。
+* 玩家不能具有[[失明]]效果。
+* {{in|je}}玩家必须攻击一个[[生物]]。这使得玩家不能暴击[[末影龙]]，因为在攻击末影龙时本质是攻击[[末影龙部件]]实体，而此实体不是生物，所以无法造成暴击。
+* {{in|je}}玩家[[#攻击冷却|攻击冷却]]完成度不小于90%。
+* {{in|je}}玩家不能正在[[疾跑]]。
+** 如果玩家在离开地面之前开始疾跑，且在空中没有任何停止疾跑的条件满足时，此时被认为是疾跑状态而无法暴击。
+** 如果玩家在离开地面前没有疾跑，或在空中取消了疾跑状态（例如攻击了其他实体并产生了有效击退而自动停止疾跑，或是在空中松开了前进键位），此时可以进行暴击。
+*** 在空中仍然有可能重新进入疾跑状态，但因为服务端与客户端之间的数据不完全同步，服务端的停止疾跑信息可能被客户端忽略使得客户端不再发出重新开始疾跑信息，造成客户端认为当前正在疾跑而服务端认为没有疾跑，满足暴击条件。此时需要在客户端满足取消疾跑条件而停止疾跑后再尝试疾跑才会强制同步数据以实现重新正确计算疾跑状态。
+
+{{in|je}}暴击会使得基础近战攻击力和额外攻击力提升50%，不影响魔咒攻击力<ref>{{bug|MC-272004|||Invalid}}</ref>；{{in|be}}暴击会使得近战攻击伤害总体提升50%。
+
+以拿着亡灵杀手IV[[木棍]]的玩家对骷髅进行暴击为例：
+
+<pre>-{}-
+基础近战攻击力：1（玩家攻击力基值）
+魔咒攻击力：2.5 &times; 4 = 10（亡灵杀手IV）
+Java版暴击：1 &times; 1.5 + 10 = 11.5
+基岩版暴击：(1 + 10) &times; 1.5 = 16.5
+</pre>
+以玩家在有力量II的状态效果下使用锋利V的下界合金剑对生物进行暴击为例：
+
+{{el|JE}}：
+<pre>-{}-
+1（玩家攻击力基值）+ 7（下界合金剑攻击力）= 8
+8 + 3 &times; 2 = 14（力量II）
+14 &times; 1.5 = 21（暴击）
+21 + 0.5 &times; 5 + 0.5 = 24（锋利V）
+</pre>
+{{el|BE}}：
+<pre>-{}-
+1（玩家攻击力基值）+ 8（下界合金剑攻击力）= 9
+(9 &times; 1.3 + 1) &times; 1.3 + 1 = 17.51（力量II）
+17.51 + floor(1.25 &times; 5) = 23.51（锋利V）
+23.51 &times; 1.5 = 35.625（暴击）
+</pre>
+
+成功造成暴击时，被暴击的实体身上都会迸出小型星状粒子。除此之外还会产生猛烈的声音区别于普通的攻击。
+
+== 冲锋 ==
+{{main|矛#冲锋}}
+冲锋是一种仅适用于矛的攻击模式，其伤害取决于攻击者与被攻击实体的相对速度。冲锋在符合条件时还可以造成击退和击落效果。
+
+== 攻击冷却 ==
+{{exclusive|Java|section=1}}
+[[File:AttackIndicatorCrosshair.png|缩略图|攻击指示器（十字准星下），空的和满的|class=pixel-image]]
+[[File:AttackIndicatorHotbar.png|缩略图|180px|攻击指示器（快捷栏旁），空的和满的|class=pixel-image]]
+
+玩家会受到攻击冷却的影响，使玩家在近战攻击过快会降低伤害值。这使玩家进行近战攻击时需要控制攻击频率，而不是猛烈且不健康地高频率敲击按键。
+
+玩家从一次近战攻击、破坏方块、切换主手物品到下一次可以进行完整伤害的近战攻击的时间就是'''攻击冷却时间'''，从上述行为到现在的时间与整个攻击冷却时间之比为'''攻击冷却完成度'''，玩家{{convert|20}}内能进行完整伤害近战攻击的次数为'''攻击速度'''。
+
+攻击速度由属性<code>attack_speed</code>控制，默认为4，即每{{convert|20}}能产生4次完整伤害的近战攻击。主手上的物品可以影响当前的攻击速度。
+
+[[急迫]]每等级增加10%攻击速度，[[挖掘疲劳]]每等级降低10%攻击速度。
+
+攻击冷却时间可以由攻击速度计算而来。如果攻击速度为<math>s</math>，则攻击冷却时间<math>T</math>为<math>\frac{20}{s}</math>游戏刻。由于游戏刻不存在小数，实际上的攻击冷却时间是这个值进行舍入：小数部分大于0.5向上取整，否则向下取整。
+
+攻击冷却完成度也可以从这些数据计算出来，如果距离上次近战攻击、破坏方块、切换主手物品的时间为<math>t</math>游戏刻，那么攻击冷却完成度<math>p</math>为<math>\text{clamp}(\frac{t+0.5}{T}, 0, 1)</math>。和攻击冷却完成度相关的渲染显示组件就是'''攻击指示器'''，它的渲染百分比与攻击冷却完成度有细微差别，为<math>\text{clamp}(\frac{t}{T}, 0, 1)</math>，即显示与实际差半游戏刻。
+
+
+{| class="wikitable"
+! colspan=2 | 物品
+! 攻击速度
+! 90%冷却时间（{{tooltip|刻|计算后，已舍入）}}）
+! 攻击冷却时间（{{tooltip|刻|计算后，已舍入）}}）
+|-
+| colspan=2 |{{ItemLink|Sword|text=剑（任意种类）}}
+|1.6
+|11
+|12
+|-
+| colspan=2 |{{ItemLink|Shovel|text=锹（任意种类）}}
+|1
+|18
+|20
+|-
+| colspan=2 |{{ItemLink|Pickaxe|text=镐（任意种类）}} 
+|1.2
+|15
+|17
+|-
+| rowspan=6 | [[斧]] 
+| {{ItemLink|Wooden Axe}} 
+|0.8
+|22
+|25
+|-
+| {{ItemLink|Golden Axe}}
+|1
+|18
+|20
+|-
+| {{ItemLink|Stone Axe}} 
+|0.8
+|23
+|25
+|-
+| {{ItemLink|Iron Axe}} 
+|0.9
+|20
+|22
+|-
+| {{ItemLink|Diamond Axe}} 
+|1
+|18
+|20
+|-
+| {{ItemLink|Netherite Axe}} 
+|1
+|18
+|20
+|-
+| rowspan=6 | [[锄]] 
+| {{ItemLink|Wooden Hoe}} 
+|1
+|18
+|20
+|-
+| {{ItemLink|Golden Hoe}} 
+|1
+|18
+|20
+|-
+| {{ItemLink|Stone Hoe}} 
+|2
+|9
+|10
+|-
+| {{ItemLink|Iron Hoe}} 
+|3
+|6
+|7
+|-
+| {{ItemLink|Diamond Hoe}} 
+|4
+|5
+|5
+|-
+| {{ItemLink|Netherite Hoe}}
+|4
+|5
+|5
+|-
+| colspan=2 | {{ItemLink|Trident}} 
+|1.1
+|16
+|18
+|-
+| colspan=2 | {{ItemLink|Mace}} 
+|0.6
+|30
+|33
+|-
+| colspan=2 | 其他物品
+|4
+|5
+|5
+|}
+
+攻击冷却对基础近战攻击力、魔咒攻击力和额外攻击力的影响不同。设攻击冷却完成度为<math>p</math>，则基础近战攻击力会变为原先的<math>0.2+0.8p^2</math>倍，魔咒攻击力会变为原先的<math>p</math>倍，对额外攻击力则无影响。对基础近战攻击力的影响可以和暴击叠加。
+
+以带有力量II状态效果的玩家拿着锋利V木斧，在近战攻击后第23游戏刻暴击举例：
+
+<pre>-{}-
+基础近战攻击力
+    1 （玩家攻击力基值）
+  + 6 （木斧攻击力，修饰符Op0，修饰值6）
+  + 6 （力量II状态效果，修饰符Op0，修饰值6）
+  = 13
+魔咒攻击力
+    0.5 &times; 5 + 0.5 （锋利V）
+  = 3
+攻击冷却完成度 
+    (23 + 0.5) / (20 / 0.8)
+  = 94%
+
+修正基础近战攻击力
+  &times; (0.2 + 0.8 &times; 0.94 &times; 0.94) （攻击冷却）
+  &times; 1.5 （暴击）
+  = 17.68416
+修正魔咒攻击力
+  &times; 0.94 （攻击冷却）
+  = 2.82
+  
+最终攻击伤害 17.68416 + 2.82 = 20.50416
+</pre>
+
+== 伤害计算器 ==
+
+{{Calculator|meleeDamage}}
+
+== 攻击结算与攻击失败 ==
+当进行近战攻击时，游戏先计算攻击者可以造成的攻击伤害，再对被攻击的实体进行伤害，并尝试禁用[[盾牌]]。在伤害后，会计算[[#击退|击退]]、{{only|je|for=[[#横扫攻击|横扫攻击]]}}、[[火焰附加]]，计算被攻击生物的[[荆棘]]魔咒反弹伤害、节肢杀手魔咒对节肢生物附加[[缓慢|{{tr|缓慢|緩速|緩慢}}]]状态效果，并可能产生暴击粒子，最后提升玩家的[[消耗度]]（每次成功近战攻击增加0.1）。
+
+近战攻击有可能会失败，失败的近战攻击不会造成伤害。
+* 如果生物的基础近战攻击力不大于{{hp|0}}，并且魔咒攻击力为{{hp|0}}，那么近战攻击一定会失败，且不会发出任何声音，不产生伤害事件。这也导致了玩家在这种情况下不能通过近战攻击伤害[[末地水晶]]和[[盔甲架]]。
+* 如果生物可以产生大于{{hp|0}}的攻击伤害，但被攻击的生物免疫此伤害或正在濒死状态，那么近战攻击也会失败，产生特殊的声音区别于成功的近战攻击。
+* 如果生物可以产生的攻击伤害不高于被攻击的生物的[[受击后伤害免疫]]的最后伤害，那么近战攻击也会失败，产生特殊的声音区别于成功的近战攻击。
+* 在其他情况下，近战攻击都被判定为成功，即使造成的攻击伤害全部被被攻击生物防御、或被其受伤害行为完全消除。
+
+近战攻击失败时，不会对用于近战攻击的物品产生耐久度消耗，不会产生击退、{{only|je|for=横扫攻击}}、火焰附加等魔咒附加效果和禁用盾牌，也不会产生暴击粒子和提升玩家的消耗度。
+
+== 击退 ==
+在产生近战攻击伤害后，被攻击的实体会被这次攻击向后推动，这就是击退。击退的水平方向与攻击生物的视角一致。
+
+击退的力度大小与是否疾跑和主手物品有关，在这里用'''击退力量'''进行说明。击退力量默认为0，当主手持有带有[[击退]]魔咒的物品时击退力量增加击退魔咒的等级。对于玩家，如果正在疾跑，且攻击冷却完成度大于90%{{only|je}}，则击退力量再加上1。只有当击退力量大于0时，才会产生击退。
+
+{{in|je}}只有玩家可以击退非生物实体。击退力量可以计算得出'''击退速度'''，击退速度值为击退力量的一半。如果击退目标是一个非生物实体，则对实体施加向上0.1米每刻（2米每秒）的垂直推动速度和水平的击退速度。如果击退目标是一个生物，则先按照对应生物的击退抗性减少击退速度（属性<code>knockback_resistance</code>），如果击退抗性为1，则不产生击退。然后，将生物的水平移动速度削减一半，并施加击退速度。如果生物接触地面，则垂直速度也会减半，并施加向上的击退速度，但最终垂直速度不会超过0.4米每刻（8米每秒）。在击退后，攻击生物会立刻停止疾跑，水平速度变为原先的60%。
+
+<!-- need be -->
+== 横扫攻击 ==
+{{exclusive|Java|section=1}}
+在玩家使用剑进行近战攻击时，可以对周围的生物进行横扫攻击，并产生“剑气”粒子。
+
+进行横扫攻击需要满足下列条件：
+* 攻击冷却完成度不小于90%。
+* 玩家不能进行暴击。
+* 玩家不能处于疾跑状态。
+* 玩家必须接触地面，即必须站在任何可站立表面上。
+* 玩家的主手武器必须是剑。
+* 玩家的近战攻击必须成功。
+* 玩家这一游戏刻和上一游戏刻移动距离之差不能超过属性<code>movement_speed</code>的计算值（默认为0.1米每游戏刻），即瞬时速度不能超过该属性计算值×20米每秒（默认为2米每秒）。
+
+横扫攻击的范围由被攻击的实体和玩家位置共同决定。以被攻击实体碰撞箱为基础，向水平方向各扩展1格，垂直方向上下扩展0.25格内，所有距离玩家3格内的生物（除了
+正在攻击的玩家本身、被近战攻击的实体、{{nbt|bool|Marker}}为<samp>true</samp>的[[盔甲架]]）都会被横扫攻击。
+
+横扫攻击默认产生{{Hp|1}}攻击伤害，但可以使用{{tp|attribute.name.player.sweeping_damage_ratio}}属性<code>sweeping_damage_ratio</code>增加横扫攻击的伤害。设属性<code>sweeping_damage_ratio</code>计算值为''r''，基础近战攻击力与额外攻击力之和为''d''，则横扫攻击伤害为<math>1+rd</math>。
+
+[[横扫之刃]]魔咒可以提升{{tp|attribute.name.player.sweeping_damage_ratio}}属性计算值从而增加横扫攻击伤害。设横扫之刃魔咒等级为''n''，则{{tp|attribute.name.player.sweeping_damage_ratio}}增加<math>\frac{nd}{n+1}</math>。默认情况下，横扫之刃I级、II级、III级分别可以为横扫攻击增加50%、67%、75%基础近战攻击力与额外攻击力伤害。
+
+和近战攻击类似，横扫攻击也会产生击退，但横扫攻击产生的击退不受击退魔咒和疾跑的影响，在对应生物击退抗性为0时产生0.4米每游戏刻的击退速度。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Critical attack1.ogg
+|sound2=Critical attack2.ogg
+|sound3=Critical attack3.ogg
+|subtitle={{tp|subtitles.entity.player.attack.crit}}
+|source=玩家
+|description=玩家使用近战攻击造成了暴击
+|id=entity.player.attack.crit
+|translationkey=subtitles.entity.player.attack.crit
+}}
+{{Sound table
+|sound=Sweep attack1.ogg
+|sound2=Sweep attack2.ogg
+|sound3=Sweep attack3.ogg
+|sound4=Sweep attack4.ogg
+|sound5=Sweep attack5.ogg
+|sound6=Sweep attack6.ogg
+|sound7=Sweep attack7.ogg
+|subtitle={{tp|subtitles.entity.player.attack.sweep}}
+|source=玩家
+|description=玩家使用横扫攻击
+|id=entity.player.attack.sweep
+|translationkey=subtitles.entity.player.attack.sweep
+}}
+{{Sound table
+|sound=Knockback attack1.ogg
+|sound2=Knockback attack2.ogg
+|sound3=Knockback attack3.ogg
+|sound4=Knockback attack4.ogg
+|subtitle={{tp|subtitles.entity.player.attack.knockback}}
+|source=玩家
+|description=玩家疾跑时使用近战攻击
+|id=entity.player.attack.knockback
+|translationkey=subtitles.entity.player.attack.knockback
+}}
+{{Sound table
+|sound=Strong attack1.ogg
+|sound2=Strong attack2.ogg
+|sound3=Strong attack3.ogg
+|sound4=Strong attack4.ogg
+|sound5=Strong attack5.ogg
+|sound6=Strong attack6.ogg
+|subtitle={{tp|subtitles.entity.player.attack.strong}}
+|source=玩家
+|description=玩家使用强的近战攻击
+|id=entity.player.attack.strong
+|translationkey=subtitles.entity.player.attack.strong
+}}
+{{Sound table
+|sound=Weak attack1.ogg
+|sound2=Weak attack2.ogg
+|sound3=Weak attack3.ogg
+|sound4=Weak attack4.ogg
+|subtitle={{tp|subtitles.entity.player.attack.weak}}
+|source=玩家
+|description=玩家使用弱的近战攻击
+|id=entity.player.attack.weak
+|translationkey=subtitles.entity.player.attack.weak
+|distance=16
+}}
+{{Sound table
+|sound=Weak attack1.ogg
+|sound2=Weak attack2.ogg
+|sound3=Weak attack3.ogg
+|sound4=Weak attack4.ogg
+|subtitle={{tp|subtitles.entity.player.attack.weak}}
+|source=玩家
+|description=玩家使用无伤害的近战攻击
+|id=entity.player.attack.nodamage
+|translationkey=subtitles.entity.player.attack.weak
+|distance=16
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=mob.player.attack.weak1.wav
+|sound2=mob.player.attack.weak2.wav
+|sound3=mob.player.attack.weak3.wav
+|sound4=mob.player.attack.weak4.wav
+|source=玩家
+|description=玩家使用无伤害的近战攻击
+|id=game.player.attack.nodamage
+|typeid=attack.nodamage
+|soundvolume=0.2
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.player.attack.strong1.wav
+|sound2=mob.player.attack.strong2.wav
+|sound3=mob.player.attack.strong3.wav
+|sound4=mob.player.attack.strong4.wav
+|sound5=mob.player.attack.strong5.wav
+|sound6=mob.player.attack.strong6.wav
+|source=玩家
+|description=玩家使用近战攻击
+|id=game.player.attack.strong
+|typeid=attack.strong
+|soundvolume=0.2
+|soundpitch=0.8-1.2
+|soundpreload=1
+|foot=1
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|空手伤害从{{hp|1}}增加至{{hp|2}}。}}
+|{{HistoryLine||1.8|dev=pre1|空手伤害从{{hp|2}}降回了{{hp|1}}。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||?<!-- 1.4.7 - 1.8.9 -->|现在生物的攻击伤害不高于被攻击的生物的[[受击后伤害免疫]]的最后伤害时近战攻击会失败。}}
+|{{HistoryLine||1.9|dev=15w34b|加入“攻击速度”属性。}}
+|{{HistoryLine|||dev=15w34c|加入剑的横扫攻击机制，只会产生击退效果。}}
+|{{HistoryLine|||dev=15w49a|现在使用剑横扫攻击会对生物造成{{hp|1}}的伤害。}}
+|{{HistoryLine||1.15.2|dev=pre1|移除了暴击粒子纹理右下角的一个多余像素。}}
+|{{HistoryLine||1.20.2|dev=23w33a|更改了生物近战攻击的攻击距离的计算方法。}}
+|{{HistoryLine||1.21|dev=24w18a|将横扫攻击的伤害乘数从近战攻击总伤害改为基础近战攻击力与额外攻击力之和。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.18.30|dev=1.18.30.20|将玩家徒手攻击的伤害由{{hp|2}}降低至{{hp|1}}以匹配{{el|je}}。}}
+|{{HistoryLine||1.20.50|dev=1.20.50.22|更改了生物近战攻击的攻击距离的计算方法。}}
+}}
+
+== 参考 ==
+
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[en:Melee attack]]
+[[pt:Ataque corpo a corpo]]

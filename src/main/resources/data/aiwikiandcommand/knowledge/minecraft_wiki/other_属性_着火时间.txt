@@ -1,0 +1,58 @@
+# 页面: 属性/着火时间
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E7%9D%80%E7%81%AB%E6%97%B6%E9%97%B4
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:31
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox attribute}}
+
+'''着火时间（Burning Time）'''是影响设置生物剩余着火时间的效果的[[属性]]。
+
+== 行为 ==
+{{main|着火}}
+
+任何为生物的剩余着火时间设置最低值的效果，应用的剩余着火时间与此属性计算值相乘，得到最终的剩余着火时间。
+
+假设生物本应被着火''t''[[游戏刻]]，此属性计算值为''r''，则生物的剩余着火时间将不会低于<math>\lceil tr \rceil</math>。
+
+此属性只影响设置剩余着火时间的效果，其计算值的变化不会影响已经着火的生物的剩余着火时间。
+
+此属性不影响[[火]]基于时间增加持续剩余着火时间的效果。
+
+当此属性计算值为0时，生物将无法因[[火]]以外的因素而着火。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| 所有生物
+| 1
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| enchantment.fire_protection/head<br>enchantment.fire_protection/chest<br>enchantment.fire_protection/legs<br>enchantment.fire_protection/feet<br>enchantment.fire_protection/body
+| add_multiplied_base (Op1)
+| ''等级''×-0.15
+| 否
+| [[火焰保护]]魔咒，{{tr|应用|套用}}于<code>armor</code>（盔甲）槽位集合
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21|dev=24w18a|加入了着火时间属性，ID为<code>generic.burning_time</code>。}}
+|{{HistoryLine|||dev=24w21a|火焰保护魔咒修饰符的ID现在是<code>-{}-enchantment.fire_protection/''槽位''</code>，此前为<code>B572ECD2-AC0C-4071-ABDE-9594AF072A37</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|着火时间属性的ID从<code>generic.burning_time</code>重命名为<code>burning_time</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

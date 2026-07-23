@@ -1,0 +1,567 @@
+# 页面: 创建新的世界
+# 来源: https://zh.minecraft.wiki/w/%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E4%B8%96%E7%95%8C
+# 分类: 
+# 抓取时间: 2026-07-14 17:20:35
+# 原始 Wikitext 内容:
+
+{{About|用于创建新世界的界面|编辑已有世界的界面|编辑世界|游戏内部规则|游戏规则}}
+'''创建新的世界（Create New World）'''界面是一个允许玩家预先设置[[世界]]选项的[[菜单屏幕]]。
+
+== Java版 ==
+{{filetr|NewWorld.png|thumb|创建世界屏幕中的“游戏”选项卡}}
+“创建新的世界”屏幕的主页允许玩家在创建世界之前选择一个世界名称并更改各种选项。界面包含3个标签页，选项多为可单击循环切换的按钮。
+
+=== 游戏 ===
+; {{tp|selectWorld.enterName}}（编辑框）
+: 允许将世界名称设置为自定义字符串。该名称与{{filepath|[[.minecraft]]/saves}}中的文件夹名称相关，在该文件夹中可以找到世界存档。默认名称为“{{tr|新的世界|新的世界|新嘅世界}}”。
+
+; {{tp|selectWorld.gameMode}}
+: 允许更改世界的默认的[[游戏模式]]。可选[[生存]]（默认）、[[极限]]和[[创造]]。
+
+; {{tp|options.difficulty}}
+: 允许更改默认的[[难度]]设置。可选和平、简单、普通（默认）和困难。
+
+; {{tp|selectWorld.allowCommands.new}}
+: 决定是否可以使用[[命令]]和[[游戏模式切换器]]。选择创造模式后默认为打开，其他模式下默认为关闭。
+
+; {{tp|selectWorld.experiments}}
+: 打开一个界面以供玩家选择需要启用的[[实验性内容]]。
+: 此处的按钮仅快照版本显示。
+
+=== 世界 ===
+; {{tp|selectWorld.mapType}}
+: 控制[[世界预设|世界类型]]。可选默认、[[超平坦]]、[[巨型生物群系]]、[[放大化]]、[[单一生物群系]]；当按住{{key|Alt}}时，亦可以选择[[调试模式]]。选择超平坦或单一生物群系时，可点击“自定义”按钮，并修改该世界类型的设置。对于超平坦的世界类型，自定义按钮选项会显示“自定义超平坦世界”界面；若使用单一生物群系，单击按钮可进入选择生物群系的界面。
+
+; {{tp|selectWorld.enterSeed}}（编辑框）
+: 允许更改创建[[世界]]时使用的[[种子（世界生成）|{{tr|种子|種子碼}}]]。任何字符串都可以放在这里，若留空将随机生成。
+
+; {{tp|selectWorld.mapFeatures}}
+: 控制[[结构]]（例如[[村庄]]和[[沉船]]等）是否应该在世界中生成，默认为打开。
+
+; {{tp|selectWorld.bonusItems}}
+: 决定玩家第一次进入世界时是否应该在玩家附近生成一个装满新手战利品的[[奖励箱]]，默认为关闭。
+
+=== 更多 ===
+; {{tp|selectWorld.gameRules}}
+: 打开一个界面以供玩家设置将默认启用或禁用的[[游戏规则]]，即使允许命令被禁用。
+
+;{{tp|selectWorld.experiments}}
+: 打开一个界面以供玩家选择需要启用的[[实验性内容]]。
+
+; {{tp|selectWorld.dataPacks}}
+: 打开一个界面以供玩家选择需要启用的[[数据包]]。
+
+== 基岩版 ==
+{{UsesInGameTranslations|bedrock|section=1}}
+
+{{filetr|Create new world.png|thumb|“创建新世界”界面的“{{tr|通用|一般}}”选项卡}}
+[[File:World preview default.jpg|thumb|默认世界缩略图]]
+
+“创建新世界”界面允许玩家更改各种设置并启用[[附加包|资源包]]和[[行为包]]。
+
+开启作弊或[[实验性玩法]]、使用任何不来自[[市场]]的[[附加包]]、选择创造模式或创建为[[超平坦世界]]会导致该世界无法获取[[成就]]。
+<!-- Json UI和Ore UI的选项名称和位置可能不同，不能直接复制。 -->
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+|-
+| style="font-size: larger;" | ''缩略图''
+| 显示世界的缩略图。
+|-
+| {{mcui|创造|oreui|primary}}
+| 点击后即可创建世界。
+|-
+| {{mcui|在 Realms 上{{tr|创建|建立}}|oreui|realms}}
+| 禁用多人游戏选项时不可用。{{info needed}}
+|}
+
+=== {{tr|通用|一般}} ===
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | 世界名称
+| 编辑世界名称。
+| style="text-align: center;" | 我的世界
+|-
+| style="font-size: larger;" | 游戏模式
+| 设置世界默认的[[游戏模式]]。
+* [[生存]]
+* [[创造]]
+| style="text-align: center;" | 生存
+|-
+| style="font-size: larger;" | {{tr|难度|難易度}}
+| 更改世界的[[难度]]。
+* 和平
+* 简单
+* 一般
+* 困难
+| style="text-align: center;" | 一般
+|-
+| style="font-size: larger;" | 极限
+| 选择是否启用[[极限模式]]。
+| style="text-align: center;" | [[File:BE Ore UI Hardcore off.png|55px|link=]]
+|}
+
+=== {{tr|高级|進階}} ===
+
+{{filetr|Create new world Advanced.png|thumb|“创建新世界”界面的“{{tr|高级|進階}}”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | 世界种子
+| 编辑[[世界]]生成时使用的[[种子（世界生成）|种子]]，创建世界后不可修改。默认总是显示{{code|3257840388504953787}}，但若不修改则会使用随机种子生成。<ref>{{bug|MCPE-156612||创建新世界界面中的“世界种子”区域具有误导性。}}</ref>
+* 在编辑框的右侧有“{{tr|模板|範本}}”按钮，点击后会进入[[种子模板]]页面。
+| style="text-align: center;" | 随机
+|-
+| style="font-size: larger;" | {{tr|平坦的世界|平地世界}}
+| 
+{| class="mw-collapsible mw-collapsed"
+| 选择是否创建[[超平坦世界]]，创建世界后不可修改。开启后需要从以下8种[[超平坦世界#自定义|世界预设]]中选择一个：
+|-
+| 
+{| class="mw-collapsible mw-collapsed"
+| {{tr|经典平坦|經典平地}}（默认）：
+|-
+|
+{{BlockLink|grass block}} ×1<br>{{BlockLink|dirt}} ×2<br>{{BlockLink|bedrock}} ×1
+|}
+{| class="mw-collapsible mw-collapsed"
+| {{tr|挖掘者之梦|礦工的夢想}}：
+|-
+|
+{{BlockLink|Grass Block}} ×1<br>{{BlockLink|Dirt}} ×5<br>{{BlockLink|Stone}} ×230<br>{{BlockLink|Bedrock}} ×1
+|}
+{| class="mw-collapsible mw-collapsed"
+| 水世界：
+|-
+|
+{{BlockLink|Water}} ×90<br>{{BlockLink|Gravel}} ×5<br>{{BlockLink|Dirt}} ×5<br>{{BlockLink|Stone}} ×5<br>{{BlockLink|Deepslate}} ×64<br>{{BlockLink|Bedrock}} ×1
+|}
+{| class="mw-collapsible mw-collapsed"
+| 主世界：
+|-
+|
+{{BlockLink|Grass Block}} ×1<br>{{BlockLink|Dirt}} ×3<br>{{BlockLink|Stone}} ×59<br>{{BlockLink|Bedrock}} ×1
+|}
+{| class="mw-collapsible mw-collapsed"
+| {{tr|冰雪王国|白雪王國}}：
+|-
+|
+{{BlockLink|Snow}} ×1<br>{{BlockLink|Grass Block}} ×1<br>{{BlockLink|Dirt}} ×3<br>{{BlockLink|Stone}} ×59<br>{{BlockLink|Bedrock}} x1
+|}
+{| class="mw-collapsible mw-collapsed"
+| {{tr|无底洞|無底坑}}：
+|-
+|
+{{BlockLink|Grass Block}} ×1<br>{{BlockLink|Dirt}} ×3<br>{{BlockLink|Cobblestone}} ×2
+|}
+{| class="mw-collapsible mw-collapsed"
+| 沙漠：
+|-
+|
+{{BlockLink|Sand}} ×8<br>{{BlockLink|Sandstone}} ×52<br>{{BlockLink|Stone}} ×3<br>{{BlockLink|Bedrock}} ×1
+|}
+{| class="mw-collapsible mw-collapsed"
+| {{tr|红石就绪|紅石準備就緒}}：
+|-
+|
+{{BlockLink|Sandstone}} ×116<br>{{BlockLink|Stone}} ×3<br>{{BlockLink|Bedrock}} ×1
+|}
+{| class="mw-collapsible mw-collapsed"
+| 虚空：
+|-
+|
+* 一个[[石头平台]]，一格厚，悬浮在虚空之中。
+|}
+|}
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px|link=]]
+|-
+| style="font-size: larger;" | {{tr|初始地图|起始地圖}}
+| 选择玩家第一次进入世界时是否获得一个尺寸为1024×1024的带定位器的[[空地图|空白未探索地图]]。创建世界后不可修改。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px|link=]]
+|-
+| style="font-size: larger;" | {{tr|奖励箱子|贈品箱}}
+| 选择是否生成[[奖励箱]]。创建世界后不可修改。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/showCoordinates|显示坐标]]
+| 选择在游玩世界时，屏幕左上角是否显示玩家所处[[坐标]]。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/showDaysPlayed|{{tr|显示游玩的天数|顯示遊玩天數}}]]
+| 选择在游玩世界时，屏幕左上角是否显示玩家游玩天数。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/recipesUnlock|配方解锁]]
+| 选择配方是否需要解锁。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/doFireTick|{{tr|火焰蔓延|火焰會蔓延}}]]
+| 选择[[火]]是否会传播、烧毁方块和熄灭，以及熔岩是否会点燃附近的可燃方块。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/tntExplodes|{{tr|TNT 爆炸|炸藥會爆炸}}]]
+| 选择[[TNT]]和[[TNT矿车]]是否会可被激活。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/doMobLoot|生物战利品]]
+| 选择生物死亡后是否会掉落物品。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/naturalRegeneration|{{tr|自然生命恢复|自然再生}}]]
+| 选择玩家是否会在饥饿值足够时恢复生命值。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[方块掉落|{{tr|方块掉落|磚塊掉落物品}}]]
+| 选择破坏方块时是否正常产生掉落物。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | {{tr|通过睡觉跳过夜晚|用睡眠跳過夜晚}}
+| 选择能否使用[[床]]跳过夜晚。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/playersSleepingPercentage|{{tr|需要睡觉的玩家|所需睡眠玩家數}}]]
+| 允许修改跳过夜晚所需的入睡玩家所占百分比，仅开启“{{tr|通过睡觉跳过夜晚|用睡眠跳過夜晚}}”时可用。
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | [[游戏规则/doImmediateRespawn|立即重生]]
+| 选择玩家死亡之后是否立即[[重生]]。若打开则在玩家死亡后会立即回到重生点；若关闭则玩家死亡后会显示“你死了”的字样、玩家的[[死亡消息]]以及重生和回到主界面两个按钮。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/respawnBlocksExplode|重生方块爆炸]]
+| 选择在非对应的维度使用[[床]]或[[重生锚]]是否会使其爆炸。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/spawnRadius|重生半径]]
+| 调整重生随机范围。可选择0~128（含）之间的整数。
+| style="text-align: center;" | 10
+|-
+| style="font-size: larger;" | [[模拟距离]]
+| 更改模拟距离。选择范围视设备性能而定。
+| style="text-align: center;" | 4
+|}
+
+=== 多人游戏 ===
+
+{{filetr|Create new world Multiplayer.png|thumb|“创建新世界”界面的“多人游戏”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | 多人游戏
+| 选择该世界是否启用多人游戏。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | {{tr|玩家访问|玩家存取}}
+| 切换哪些玩家可以进入该世界。
+* 受邀玩家
+* 好友
+* 好友的好友
+| style="text-align: center;" | 好友
+|-
+| style="font-size: larger;" | {{tr|默认玩家权限|預設玩家權限}}
+| 调整任何加入世界的玩家的默认权限等级。
+* 访客（无法与世界交互）
+* 成员（能与世界交互，但不能使用命令）
+* {{tr|操作员|操作者}}（前者基础上可使用命令）
+| style="text-align: center;" | 成员
+|-
+| style="font-size: larger;" | {{tr|对局域网内玩家可见|LAN 玩家可見}}
+| 选择在该世界中游玩且“多人游戏”为开启时，局域网内的其他玩家是否可以发现该世界。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/pvp|{{tr|误伤|友方誤傷}}]]
+| 选择玩家之间能否互相攻击。打开即可以，反之亦然。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/locatorBar|{{tr|定位栏|定位列}}]]
+| 选择是否显示[[定位栏]]。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px|link=]]
+|}
+
+=== {{tr|无敌模式|作弊}} ===
+
+{{filetr|Create new world Cheats.png|thumb|“创建新世界”界面的“{{tr|无敌模式|作弊}}”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tr|无敌模式|作弊}}
+| 选择是否启用[[作弊]]。启用后才能调整下方其他选项。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px|link=]]
+|-
+| style="font-size: larger;" | 日照时长
+| 选择[[时间]]是否流逝。
+* [[游戏规则/doDaylightCycle|{{tr|普通|一般}}]]
+* [[命令/daylock|{{tr|终为白日|永為白晝}}]]
+| style="text-align: center;" | {{tr|普通|一般}}
+|-
+| style="font-size: larger;" | [[游戏规则/keepInventory|保留物品栏]]
+| 选择玩家死亡时是否掉落身上的[[物品]]和[[经验值]]。
+| style="text-align: center;" | [[File:BE Ore UI off locked.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/doMobSpawning|{{tr|生物生成|生物重生}}]]
+| 选择世界中生物是否能自然生成。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/mobGriefing|{{tr|生物破坏|生物惡意破壞}}]]
+| 选择生物能否与世界内方块互动或对其造成影响。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/doEntityDrops|实体掉落战利品]]
+| 选择非生物实体在被破坏时是否产生对应的掉落物。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/doWeatherCycle|{{tr|天气更替|天氣循環}}]]
+| 选择世界中的天气是否会变化。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px|link=]]
+|-
+| style="font-size: larger;" | [[游戏规则/commandBlocksEnabled|{{tr|命令方块|指令方塊}}]]
+| 选择[[命令方块]]能否运行。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px|link=]]
+|-
+| style="font-size: larger;" | Education Edition
+| 是否在此世界启用部分[[教育版独有特性]]。
+| style="text-align: center;" | [[File:BE Ore UI off locked.png|55px|link=]]
+|-
+| style="font-size: larger;" |[[游戏规则/randomTickSpeed|随机刻速度]]
+| 编辑世界中[[随机刻|随机事件发生率]]的数字，可选择0~4096（含）之间的整数编辑框右侧有一个重置按钮。
+| style="text-align: center;" | 1
+|}
+
+=== 资源包 ===
+
+{{filetr|Create new world Resource packs.png|thumb|“创建新世界”界面的“资源包”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tr|共享包|共用套件}}
+| 选择是否要求加入世界的其他玩家下载该世界已启用的[[资源包]]。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px|link=]]
+|-
+| style="font-size: larger;" | {{tr|活跃|啟動}}
+| 列出已激活的资源包。
+|-
+| style="font-size: larger;" | {{tr|可用|可使用}}
+| 列出所有未激活的资源包。
+|-
+| style="font-size: larger;" | 已拥有（折叠栏）
+| 列出所有从[[市场]]获得的资源包，以及前往市场的按钮。
+|-
+| style="font-size: larger;" | Marketplace Pass
+| {{info needed}}
+|-
+| style="font-size: larger;" | {{tr|获取更多包|取得更多套件}}（折叠栏）
+| {{tr|获取更多包|取得更多套件}}（折叠栏）
+|}
+
+=== {{tr|行为包|行為套件}} ===
+
+{{filetr|Create new world Behavior packs.png|thumb|“创建新世界”界面的“{{tr|行为包|行為套件}}”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+|-
+| style="font-size: larger;" | {{tr|活跃|啟動}}
+| 列出已激活的行为包。
+|-
+| style="font-size: larger;" | {{tr|可用|可使用}}
+| 列出所有未激活的行为包。
+|}
+
+=== {{tr|实验性游戏内容|實驗性玩法}} ===
+
+{{filetr|Create new world Experiments.png|thumb|“创建新世界”界面的“{{tr|实验性游戏内容|實驗性玩法}}”选项卡}}
+
+此处列出可以启用的[[实验性玩法]]选项，全部默认为关。
+{{-}}
+
+== 音效 ==
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=fire.ignite.wav
+|source=声音
+|description=点击极限按钮时播放此声音
+|id=ui.hardcore_toggle_press
+|typeid=ui.hardcore_toggle_press
+|soundvolume=0.5
+|soundpitch=
+|sounddistance=
+}}
+{{Sound table
+|bedrock=1
+|sound=hardcore_enable.wav
+|source=声音
+|description=启用极限时播放此声音
+|id=ui.hardcore_enable
+|typeid=ui.hardcore_enable
+|soundvolume=0.4
+|soundpitch=
+|sounddistance=
+}}
+{{Sound table
+|bedrock=1
+|sound=hardcore_disable.wav
+|source=声音
+|description=禁用极限时播放此声音
+|id=ui.hardcore_disable
+|typeid=ui.hardcore_disable
+|soundvolume=0.4
+|soundpitch=
+|sounddistance=
+|foot=1
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java classic}}
+|{{HistoryLine||0.0.14a|加入了创建新的世界屏幕，用于控制世界大小，有小型、中型和大型三种选项。}}
+|{{HistoryLine|java indev}}
+|{{HistoryLine||0.31|dev=20100106-2158|加入了世界类型选项，有岛屿、浮岛、平坦和原始四种选项。
+|加入了世界形状选项，有方型、长型和深型三种选项。}}
+|{{HistoryLine|||dev=20100107-1851|加入了世界主题选项，有普通和地狱两种选项。}}
+|{{HistoryLine|||dev=20100109-1939|原始（Original）世界类型被重命名为内陆（Inland）。}}
+|{{HistoryLine||20100214|加入了天堂和森林两种世界主题。}}
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100327|移除了创建新的世界屏幕，现在可使用[[选择世界菜单]]来新建世界。}}
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.3|重新加入了创建新的世界屏幕。
+|加入了[[种子（世界生成）|种子]]选项。}}
+|{{HistoryLine||1.8|dev=pre1|加入了[[创造模式]]。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|加入了[[极限模式]]。}}
+|{{HistoryLine||1.1|dev=12w01a|重新加入了世界类型。
+|加入了[[超平坦]]世界类型。}}
+|{{HistoryLine||1.3.1|dev=12w16a|加入了{{tr|[[奖励箱]]|[[贈品箱]]}}选项。
+|加入了“{{tr|允许作弊|允許作弊|容許作弊}}”选项。}}
+|{{HistoryLine|||dev=12w17a|现在当选中极限模式时，奖励箱和作弊选项会被禁用。}}
+|{{HistoryLine|||dev=12w19a|加入了[[巨型生物群系]]世界类型。}}
+|{{HistoryLine||1.4.2|dev=12w37a|加入了超平坦世界的自定义按钮。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了[[放大化]]世界类型。}}
+|{{HistoryLine||1.8|dev=14w17a|加入了[[自定义/Java版1.13前|自定义]]世界类型。}}
+|{{HistoryLine|||dev=14w26a|加入了[[调试模式]]世界类型。}}
+|{{HistoryLine|||dev=14w27a|现在当“世界类型”选中“调试模式”时，世界生成选项会被禁用。}}
+|{{HistoryLine||1.13|dev=18w06a|移除了自定义世界。}}
+|{{HistoryLine|||dev=18w16a|加入了[[自选世界类型]]。}}
+|{{HistoryLine||1.14|dev=19w12a|现在在创建重复名称的世界时会在最后添加一个括号括起来的数字，而不是添加连字符。}}
+|{{HistoryLine||1.16|dev=20w17a|加入了“游戏规则”按钮。
+|加入了“难度”按钮。}}
+|{{HistoryLine|||dev=20w21a|加入了“导入设置”按钮。
+|自选世界类型被拆分为“单一生物群系”、“洞穴”、“浮岛”3个选项。}}
+|{{HistoryLine|||dev=pre1|加入了“数据包”按钮。}}
+|{{HistoryLine||1.17|dev=20w45a|将“游戏模式”按钮的循环顺序从“生存→极限→创造”改为“生存→创造→极限”。}}
+|{{HistoryLine|||dev=21w03a|撤销了循环顺序的更改。}}
+|{{HistoryLine||1.19.4|dev=23w05a|重新设计了布局，现在被分为3个标签页。
+|移除了“导入设置”和“导出设置”按钮。}}
+|{{HistoryLine|||dev=23w06a|现在各标签页可通过按{{key|Crtl+Tab}}和{{key|Ctrl+Shift+Tab}}键切换。
+|现在可通过{{key|Ctrl}} + {{cd|-{}-''标签页序号''}}切换至指定标签页。
+|加入了“实验性内容”按钮，可从“更多”和“游戏”（仅快照）标签页进入。}}
+|{{HistoryLine|||dev=pre1|现在使用新的标签页设计，取代了之前的按钮式标签页。
+|现在标签页在屏幕上居中对齐。
+|现在标签页内容在屏幕顶端对齐。}}
+|{{HistoryLine|||dev=pre2|现在将鼠标指针放在世界名称上时会显示存档文件夹名称。}}
+|{{HistoryLine||1.20.5|dev=24w04a|将“{{tr|允许作弊|允許作弊|容許作弊}}”选项重命名为“允许命令”。}}
+
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|加入了“创建新的世界”页面。此时只有更改世界名称和种子的设置。}}
+|{{HistoryLine||0.2.0|加入了游戏模式选项，现在可以选择[[创造模式]]和[[生存模式]]。}}
+|{{HistoryLine||0.9.0|dev=build 1|加入了世界类型。
+|加入了[[超平坦]]世界类型，但没有加入自定义超平坦生存选项。
+|加入了无限世界类型。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了{{tr|[[奖励箱]]|[[贈品箱]]}}选项。}}
+|{{HistoryLine||1.2.13|dev=1.2.13.8|加入了“实验性玩法”开关，用于启用[[实验性玩法]]。}}
+|{{HistoryLine||1.18.30|dev=1.18.20.21|加入了新的UI设计，暂时处于预览阶段，仅部分玩家可见。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.22|加入了“配方解锁”选项。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|加入了“极限”选项。}}
+|{{HistoryLine|||dev=1.21.0.23|加入了“{{tr|显示游玩的天数|顯示遊玩天數}}”选项。}}
+|{{HistoryLine|||dev=正式版|“极限”选项在该正式版中不可用。}}
+|{{HistoryLine||1.21.40|“极限”选项现在在正式版中可用。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|加入了“{{tr|床铺工作|床舖有效}}”选项和“{{tr|需要睡觉的玩家|所需睡眠玩家數}}”滑块。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.24|将“{{tr|床铺工作|床舖有效}}”选项重命名为“{{tr|通过睡觉跳过夜晚|用睡眠跳過夜晚}}”。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.20|加入了“{{tr|定位栏|定位列}}”选项。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU5|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了[[超平坦]]世界类型。
+|加入了{{tr|[[奖励箱]]|[[贈品箱]]}}选项。}}
+|{{HistoryLine||xbox=TU25|xbone=CU14|ps3=1.17|psvita=1.17|ps4=1.17|wiiu=none|switch=none|现在可以自定义超平坦世界了。}}
+|{{HistoryLine||xbox=none|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=none|switch=none|加入了[[放大化]]世界类型。}}
+}}
+
+== 画廊 ==
+=== Java版 ===
+{{gallery|
+Java edition Preparing for world creation.png|convert|生成世界界面
+NewWorld.png|convert|“{{tp|createWorld.tab.game.title}}”选项卡
+NewWorld World.png|convert|“{{tp|createWorld.tab.world.title}}”选项卡
+NewWorld More.png|convert|“{{tp|createWorld.tab.more.title}}”选项卡
+Create New World Gamerule.png|convert|“{{tp|editGamerule.title}}”
+BuffetWorldCustomization.png|convert|“{{tp|createWorld.customize.buffet.title}}”
+Experiments Screen Warning.png|convert|“{{tp|selectWorld.experiments}}”
+Data Packs Screen Warning.png|convert|“{{tp|selectWorld.experimental.title}}”
+Datapack selection.png|convert|“{{tp|dataPack.title}}”
+}}
+
+=== 基岩版 ===
+{{gallery|
+Create new world General.png|convert|“{{tr|通用|一般}}”选项卡
+Create new world Advanced.png|convert|“{{tr|高级|進階}}”选项卡
+Create new world Multiplayer.png|convert|“多人游戏”选项卡
+Create new world Cheats.png|convert|“{{tr|无敌模式|作弊}}”选项卡
+Create new world Resource packs.png|convert|“资源包”选项卡
+Create new world Behavior packs.png|convert|“{{tr|行为包|行為套件}}”选项卡
+Create new world Experiments.png|convert|“{{tr|实验性游戏内容|實驗性玩法}}”选项卡
+}}
+
+=== 历史 ===
+==== Java版 ====
+{{gallery|
+Create_New_World - Indev.png|Java版[[Java版Indev|Indev]]和早期[[Java版Infdev|Infdev]]版本中的创建新的世界界面
+Select world (Beta 1.2).png|[[Java版Beta 1.2]]中的选择世界界面
+Create world menu (Beta 1.6).png|[[Java版Beta 1.6]]中的创建新的世界界面
+Create New World (1.17.1).png|convert|[[Java版1.17.1]]创建新的世界界面
+More World Options (1.17.1).png|convert|[[Java版1.17.1]]中的“更多世界的选项”
+}}
+
+==== 基岩版 ====
+{{gallery|
+World Menu 0.6.1.png|[[携带版0.7.0]]以前的创建新的世界界面
+World Menu 0.8.1.png|从携带版0.7.0到[[携带版0.8.1|0.8.1]]间的创建新的世界界面
+World Menu.png|[[携带版0.9.0]]创建世界时的高级选项
+BE1.2 Create New World.png|convert|[[基岩版1.2.0]]后的创建新的世界界面
+Game settings (BE).png|[[基岩版1.18.30]]之前的创建新的世界界面
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Minecraft}}
+
+[[en:Create New World]]
+[[es:Crear un mundo nuevo]]
+[[fr:Créer un nouveau monde]]
+[[ja:ワールド新規作成]]
+[[ko:새로운 세계 만들기]]
+[[pt:Criar um novo mundo]]

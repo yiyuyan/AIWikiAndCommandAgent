@@ -1,0 +1,474 @@
+# 页面: 袭击
+# 来源: https://zh.minecraft.wiki/w/%E8%A2%AD%E5%87%BB
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 游戏内容, 需要检查源代码/基岩版, 需要补充的条目
+# 抓取时间: 2026-07-14 17:35:49
+# 原始 Wikitext 内容:
+
+{{about|袭击者在村庄中生成的游戏事件|僵尸无视正常生成条件在村庄中生成的游戏事件|僵尸围城}}
+{{missing information|需要基岩版信息}}
+[[File:Raid.png|275px|thumb|right|正在进行中的袭击]]
+{{relevant tutorial|触发及战胜袭击|袭击农场}}
+
+'''袭击（Raid）'''是一种生成多波次大量[[#袭击者|袭击者]]攻击[[村庄]]的[[不祥事件]]。
+
+== 生成 ==
+=== 袭击触发 ===
+非[[和平]]难度下，带有[[不祥之兆]]效果的[[玩家]]进入[[Tutorial:村庄机制|村庄区域]]时，如果玩家所处的位置当前没有正在进行的袭击，{{only|je|for=或者正在进行的袭击的袭击之兆等级低于V级，}}则该玩家的不祥之兆效果会被移除，转化为30秒{{only|for=相同等级|je}}或{{only|for=1级|be}}的[[袭击之兆]]效果。同时该位置将被标记，存储在[[玩家数据格式|玩家数据]]的{{nbt|int array|raid_omen_position}}字段中。当这个玩家带有的袭击之兆状态效果因超时而失效时，就会在该位置触发袭击事件。
+
+==== Java版 ====
+当该玩家的袭击之兆效果因超时而失效时，如果该玩家处于非[[旁观模式]]，该位置所在的环境属性[[环境属性#gameplay/can_start_raid|<code>gameplay/can_start_raid</code>]]值为<code>true</code>{{fn|{{in|je}}只有[[下界]]不满足此条。}}，并且{{gamerule|raids}}为<code>true</code>，袭击之兆将触发袭击，并开始计算袭击中心的位置。
+
+如果该位置半径64格内有至少一个被认领的带有{{TagLink|point_of_interest_type|village}}标签的[[兴趣点]]，则袭击中心位于这些兴趣点位置的[[wzh:质心|质心]]处（结果中坐标向下取整），否则位于该位置原处。
+
+如果袭击中心半径96格内没有正在进行的袭击，则在该位置开始一场新的袭击之兆等级与该玩家的袭击之兆效果等级相同的袭击；否则取距离最近的袭击，并将其袭击之兆等级增加与该玩家的袭击之兆效果等级相同的级数，最大可增加至V级。如果该场袭击原本已经达到V级，则玩家的袭击之兆效果将不会产生任何影响，玩家也不会触发[[进度定义格式#voluntary_exile|<code>minecraft:voluntary_exile</code>进度触发器]]。
+
+==== 基岩版 ====
+当非[[旁观模式]]的玩家携带[[不祥之兆]]效果进入任意村庄范围时，玩家的不祥之兆效果将会被转换为[[袭击之兆]]效果并同时保存袭击坐标。在袭击之兆效果倒计时结束后玩家将会被添加袭击触发器（该触发器属于组件系统），添加后玩家将刷新自身组件触发袭击事件，并由袭击触发系统在原本保存的袭击坐标处搜索村庄并创建袭击。
+
+如果玩家被添加袭击触发器时村庄不存在，则袭击生成失败并移除袭击触发器与袭击坐标。
+
+=== 袭击者 ===
+'''袭击者（Raider）'''是可加入袭击的生物的统称，包括所有[[灾厄村民]]、[[女巫]]以及[[劫掠兽]]。
+
+袭击者分为多个波次生成，袭击的规模会随着波次增加而扩大，袭击者的数量和种类也会随之增多。
+
+==== Java版 ====
+袭击处于冷却时，每{{convert|5}}尝试一次获取生成位置（旋转8次）。如果冷却结束时仍未获取到则立刻尝试6次获取生成位置（旋转20次），若仍未获取到则袭击中止。
+
+{{CollapseH|以下是使用[[wzh:伪代码|{{tr|伪代码|虛擬碼}}]]描述的简化过的Java版中尝试获取生成位置的算法：}}
+<syntaxhighlight lang="python">
+findSpawnPosition(rotations):
+    f = 0.22 * floor(leftCooldownSeconds) - 0.24
+    g = a random angle between 0 and 2π
+    i = 0
+    while (i < rotations):
+       g = g + π / 8
+       x = center.x + floor(cos(g) * 32 * f) + (a random integer between 0 and 2) * floor(f)
+       z = center.z + floor(sin(g) * 32 * f) + (a random integer between 0 and 2) * floor(f)
+       y = the height of the highest non-air block at (x, z)
+       if (|y - center.y| <= 96):
+          if ((x, y, z) is in village area or leftCooldownSeconds < 8)
+             if ((x, y, z) is loaded and raiders can spawn at (x, y, z))
+                return (x, y, z)
+    return NIL
+</syntaxhighlight>
+{{CollapseE}}<!--
+
+袭击生成时会检测在玩家周围半径64格内所有已被[[村民]]认领的工作方块，并且将其坐标取平均值作为该袭击中心点。袭击会在中心点半径64格范围内尝试生成一次袭击，若尝试失败则缩小范围至半径32格再尝试生成，否则会缩小范围至半径5格区域内最上方的方块进行最后尝试，如果袭击有被迁移过则会在选择的区块中心偏X、Z正值往外5格的方形区域最上层的方块尝试生成一次袭击。若上述条件皆未满足则袭击生成失败。
+
+袭击者总是会生成在范围内最上方的方块，而非地底下。即使地底下有适合袭击者生成的空间，若最上层无法生成袭击者（最上层为液体、透明方块、台阶下半部分等），仍然会判定生成失败。
+
+进入村庄的袭击队伍会非常主动和有序地搜索村庄内每一个带有[[木门]]或者[[床]]的房屋，并且会在放置[[钟]]的区域附近来回走动，它们在找到村民、[[铁傀儡]]或者玩家之前会不断的在房屋内外重复搜寻，否则袭击事件中的袭击者永远不会停止行走。袭击队伍中的[[女巫]]会在队伍生成后会第一时间尝试向队伍成员投掷喷溅型再生药水。由于袭击的生物在袭击事件下的移速会有较大的提升（类似疾跑），[[卫道士]]总会优先进入村庄范围，它们会积极地寻找并打开木门尝试把村民赶出房屋，[[唤魔者]]和[[幻术师]]在袭击模式下会提升移动速度3倍。
+-->
+袭击的总波数由[[难度]]决定，简单难度下为3波，普通为5波，困难为7波，若袭击之兆等级大于1，则在最后额外生成1附加波。每个波次生成时，[[#音效|不祥号角]]会在生成处鸣响。
+
+每种袭击者每波次生成的数量由两部分组成：固定的基数以及基于难度生成的附加数量。附加波无视波数而使用与上一波相同的基数。
+
+{| class="wikitable" style="text-align: center;"
+|+ 袭击者每波次生成数量
+! rowspan="2" |生物
+! colspan="7" |基数/波次
+! rowspan="2" |附加数量
+|-
+! 1
+! 2
+! 3
+! 4
+! 5
+! 6
+! 7
+|-
+! {{EntityLink|Pillager}}
+| 4 || 3 || 3 || 4 || 4 || 4 || 2
+|简单难度下为0-1，普通为1，困难为2
+|-
+! {{EntityLink|Vindicator}}
+| || 2 || || 1 || 4 || 2 || 5
+|简单难度下为0-1，普通为1，困难为2
+|-
+! {{EntityLink|Ravager}}{{fn|第5波生成的劫掠兽载着掠夺者；第7波及之后生成的劫掠兽中，1只载着唤魔者，其余载着卫道士。乘客不计入基数。|group=生成}}
+| || || 1 || || 1 || || 2
+|普通和困难难度下的附加波中为1，其余为0
+|-
+! {{EntityLink|Witch}}
+| || || || 3 || || || 1
+|普通和困难难度下的第3、5、6、7及附加波中为1，其余为0
+|-
+! {{EntityLink|Evoker}}
+| || || || || 1 || 1 || 2
+|0
+|}
+
+生成的袭击者持有的武器有一定概率带有[[附魔]]。带有附魔的概率由袭击之兆等级决定：I级为0，II级为10%，III级为25%，IV级为50%，V级为75%。具体的魔咒由波次决定。
+
+{| class="wikitable" style="text-align: center;"
+|+ 生成的袭击者持有武器的魔咒
+|-
+! 波次 !! {{EntityLink|pillager}}的{{ItemLink|Crossbow}} !! {{EntityLink|vindicator}}的{{ItemLink|Iron Axe}}
+|-
+| 1 || rowspan="3" | 无 || rowspan="5" | [[锋利]]I<ref group="生成">由[[魔咒提供器]]{{filepath|raid/vindicator}}控制</ref>
+|-
+| 2 
+|-
+| 3 
+|-
+| 4 || rowspan="2" |[[快速装填]]I<ref group="生成">由魔咒提供器{{filepath|raid/pillager_post_wave_3}}控制</ref>
+|-
+| 5 
+|-
+| 6 || rowspan="3" |快速装填II<ref group="生成">由魔咒提供器{{filepath|raid/pillager_post_wave_5}}控制</ref>
+| rowspan="3" | 锋利II<ref group="生成">由魔咒提供器{{filepath|raid/vindicator_post_wave_5}}控制</ref>
+|-
+| 7 
+|-
+| 8 
+|}{{Notelist|生成}}
+
+==== 基岩版 ====
+袭击生成时共有6种尝试方式，前5种方式尝试进行10次，第6种生成只进行1次。
+
+前5种尝试需要在村庄中心Y坐标上下8格范围内寻找生成点（除树叶以外具有碰撞箱的方块），并随后以生成点为中心17×17×17范围内再次寻找除树叶以外具有碰撞箱的方块进行生成。前5种尝试的袭击者不一定会生成在范围内最上方的方块。只要有适合袭击者生成的空间，袭击者就可以生成在范围内的任意高度上。
+
+第6种尝试会在村庄中心水平半径8格的圆环范围内选取一点，由世界最高点向下寻取生成点。
+
+第6种尝试还会在以生成点的17×17×17范围再次寻找基准点，最终在基准点17×17×17范围内寻找除树叶以外具有碰撞箱的方块进行生成，生成点必须是除树叶和玻璃以外具有碰撞箱的方块（可以是被树叶覆盖的非透明方块）。{{ctc|bedrock=1}}
+
+若上述尝试皆未找到满足条件的生成点则袭击生成失败。每个波次生成时，钟会自动敲响。
+
+袭击队伍会成群结队进入村庄并优先攻击房屋外的目标，但它们并不会主动搜寻村民以及进入房屋内，它们会分散开并且在村庄范围内游荡和停留，类似正常情况下的生物。袭击队伍中的卫道士不会主动的破坏木门，它们只会在追逐躲进房屋内的村民或者路过的时候才会尝试破坏木门。若玩家长时间没有攻击袭击者，每过一段时间就会有随机一个灾厄村民发出袭击号角声提醒玩家它们的位置。村庄内非玩家制造的[[铁傀儡]]总是能最快找到袭击波数的生成地点并且前往该处，村庄内自然生成的铁傀儡甚至能透过方块感知袭击者的位置。
+
+袭击的总波数由[[难度]]决定，简单难度下为3波，普通为5波，困难为7波。基岩版的袭击总波数与袭击之兆的效果等级无关，同时也不会生成额外波次。
+{| class="wikitable" style="text-align: center;"
+|+ 每个波次中的生物数量
+! 生物
+! 波次1
+! 波次2
+! 波次3
+! 波次4
+! 波次5
+! 波次6
+! 波次7
+|-
+! {{EntityLink|Pillager}}
+| 4 || 3 || 3 || 3 || || 5 ||
+|-
+! {{EntityLink|Vindicator}}
+|  || 2 || || || 4 || 2 || 6
+|-
+! {{EntityLink|Ravager}}
+| || || 1 || || 1 || ||
+|-
+! {{EntityLink|Witch}}
+| || || || 3 ||  || || 1
+|-
+! {{EntityLink|Evoker}}
+| || || || || 1 || 1 || 2
+|-
+! {{EntityLink|Pillager}}骑着{{EntityLink|Ravager}}
+| || || || || 1 ||  || 1
+|-
+! {{EntityLink|Evoker}}骑着{{EntityLink|Ravager}}
+| || || || || || || 1
+|}
+
+骑着劫掠兽的卫道士没有在袭击中实装，但[[生成事件]]中有它们的数据，可通过{{cmd|summon ravager ~ ~ ~ ~ ~ minecraft:spawn_with_vindicator_rider}}生成。
+
+== 行为 ==
+{{Filetr|Raid bar.png|frame|袭击的Boss栏（{{el|je}}）}}
+{{Filetr|Raid bar BE.png|frame|袭击的Boss栏（{{el|be}}）}}
+请注意，本段中袭击的胜利和失败与游戏Boss栏内的提示一致，其基于玩家视角，即玩家成功抵御袭击称为袭击'''胜利'''，未能抵御袭击称为袭击'''失败'''。
+
+=== Boss栏 ===
+每场袭击拥有一个[[Boss栏]]用于显示袭击进度，其颜色为红色<code>red</code>，样式为<code>notched_10</code>{{only|je}}或<code>progress</code>{{only|be}}。
+
+{{in|je}}玩家可见自身位置半径96格范围内最近的袭击的Boss栏，袭击Boss栏每{{convert|20}}更新一次可见自己的玩家。
+
+此Boss栏的进度在袭击处于冷却时为<code>-{}-已经过冷却时间/总冷却时间</code>，袭击胜利时为0，其他阶段为<code>-{}-剩余袭击者的生命值总和/该波次袭击者的最大生命值总和</code>。
+
+该Boss栏的名称在袭击胜利时为“{{tp|event.minecraft.raid.victory.full}}”，在袭击失败时显示为“{{tp|event.minecraft.raid.defeat.full}}”，在剩余袭击者数量小于等于2时为“{{tp|event.minecraft.raid}} - {{tp|event.minecraft.raid.raiders_remaining|x}}”（其中x为剩余袭击者数量），其余时刻为“{{tp|event.minecraft.raid}}”。
+
+=== 袭击者 ===
+未加入袭击的袭击者若进入袭击中心半径96格范围内，则会加入该场袭击当前波次，其生命值计入袭击Boss栏的进度计算。若袭击中的袭击者离开袭击中心半径112格范围，则退出该场袭击。
+
+正在参与袭击的袭击者不会因为区块卸载而消失。
+
+中途加入袭击的袭击者的行为会与袭击开始时生成的袭击者行为一致，但不会跟随任何[[袭击队长]]进行袭击。
+
+如果袭击被判定为胜利，但村庄范围内仍存在除[[女巫]]和[[恼鬼]]外的袭击者，则该袭击者将会消失。
+
+{{in|je}}敲[[钟]]会对钟的位置半径48格内的袭击者{{fn|此处的“袭击者”可由{{TagLink|entity_type|raiders}}标签控制。}}施加3秒[[发光]]效果。
+
+{{in|be}}所有参与袭击的袭击者在袭击失败后都会因为区块卸载而消失，即使这些袭击者是通过刷怪蛋或命令生成中途加入袭击的。
+
+==== 女巫 ====
+袭击中的女巫不主动攻击村民<ref>{{bug|MC-139947|||WAI}}</ref>，而是向除女巫外的其他袭击者扔出[[喷溅型再生药水]]，如果该生物的生命值不高于{{hp|4}}，则改为喷溅型治疗药水。
+
+{{in|be}}当袭击结束时，参与过此次袭击的女巫依然具有袭击行为，女巫会向与它参与过同次袭击事件的灾厄村民和劫掠兽丢掷药水。这可能导致女巫无法正常地欢呼。
+
+==== 袭击队长 ====
+{{exclusive|je|section=1}}
+{{main|袭击队长}}
+当一波袭击队伍中的袭击队长被杀死后，袭击中的其他灾厄村民会停止当前的攻击并优先尝试捡起队长掉落的[[不祥旗帜]]，成为新的队长。
+
+灾厄村民在袭击中捡起并替换佩戴不祥旗帜时，其头部原本佩戴着的物品或者方块会被无视，而作为掉落物掉在地上。
+
+=== 额外掉落物 ===
+{{exclusive|be|section=1}}
+袭击中生成的掠夺者和卫道士会额外掉落：
+* 0-1 {{ItemLink|Emerald}}
+袭击者在简单和普通难度中有65%概率以及在困难难度中有80%概率掉落：
+* 0-1 {{ItemLink|Emerald}}（{{frac|10|39}}概率）
+* 2-3 {{ItemLink|Emerald}}（{{frac|5|39}}概率）
+* 4-5 {{ItemLink|Emerald}}（{{frac|2|39}}概率）
+* 1 {{ItemLink|Enchanted Book}}（{{frac|2|39}}概率）
+* 1 {{ItemLink|Iron Axe}}（{{frac|5|78}}概率）
+* 1 {{ItemLink|Iron Pickaxe}}（{{frac|5|78}}概率）
+* 1 {{ItemLink|Iron Shovel}}（{{frac|5|78}}概率）
+* 1 {{ItemLink|Iron Sword}}（{{frac|5|78}}概率）
+* 1 {{ItemLink|Iron Helmet}}（{{frac|5|78}}概率）
+* 1 {{ItemLink|Iron Chestplate}}（{{frac|5|78}}概率）
+* 1 {{ItemLink|Iron Leggings}}（{{frac|5|78}}概率）
+* 1 {{ItemLink|Iron Boots}}（{{frac|5|78}}概率）
+注意：
+* 袭击者掉落的铁质装备有概率具有魔咒，取决于[[难度]]。简单为0%，普通为33%，困难为50%
+* 袭击者掉落的铁质装备具有30%到90%的耐久。
+* 绿宝石是袭击者的常规掉落物同时也是额外掉落物。
+* 绿宝石的掉落受[[抢夺]]魔咒影响，魔咒每高一级增加1个绿宝石。
+* 附魔书的魔咒出现的概率与[[附魔台]]上30级的魔咒相同，可以施加[[灵魂疾行]]、[[风爆]]和[[迅捷潜行]]以外的[[宝藏型魔咒]]，多个魔咒出现的概率亦不会降低。
+
+=== 迁移 ===
+{{in|je}}袭击生成时会在每个游戏刻检测袭击中心是否位于村庄区域，若检测不到，则会尝试迁移袭击中心到袭击中心所在子区块为中心5×5×5子区块范围内距离袭击中心最近的位于村庄区域的子区块中心，若未找到这类子区块，则判定袭击以失败告终，但如果此时尚未生成首个波次，则袭击会中止。
+
+{{in|be}}袭击波次中的袭击者遵循就近加入原则。当袭击者脱离袭击检测范围即前五种生成的生成与散布范围且离其他村庄的中心更近，袭击者会被视为已迁移出原有村庄，同时袭击进度条会增加进度。如果袭击者生成高度与村庄边界垂直距离大于48格，袭击者也可以被迁移出原有村庄，同时袭击进度条会改变进度。
+
+=== 冷却 ===
+在除最后一波袭击以外的波次中：
+
+当一波袭击者中仅剩的最后一名袭击者被杀死后，袭击将进入15秒的冷却时间再生成下一波袭击队伍。
+
+{{in|java}}当一波袭击者中仅剩的最后一名袭击者退出袭击后，本波袭击与下一波袭击之间将不会有冷却时间，下一波袭击者会立刻生成。
+
+冷却期间若有袭击者加入袭击，则冷却时间会暂停计时，袭击Boss栏也会恢复至冷却外的状态，直到袭击者再次被全部杀死或退出袭击后，再从暂停的时刻起继续计时。
+
+=== 袭击之兆等级 ===
+{{exclusive|je|section=1}}
+每场袭击都有'''袭击之兆等级（Bad Omen Level）'''属性。至少为I级，最大可达到V级。袭击之兆等级会影响掠夺者和卫道士武器的附魔，且袭击之兆等级超过I的袭击会生成附加波。
+
+=== 结束 ===
+==== 失败 ====
+[[File:Illager Celebrating.png|thumb|{{el|be}}中一群正在庆祝袭击的灾厄村民]]
+{{in|je}}生成首波袭击者后，如果袭击中心已不再位于村庄区域且未能找到迁移点，则判定袭击事件以失败告终。
+
+{{in|be}}如果村庄内的村民被全部杀死或所有村民的床被摧毁，则判定袭击失败。
+
+袭击事件结算为失败后，在场的袭击者会做出庆祝动作。所有袭击者会跳动并发出“庆祝”的[[#音效|音效]]，其中{{only|be|for=[[掠夺者]]}}、[[卫道士]]和[[唤魔者]]还会挥舞双臂。
+
+==== 胜利 ====
+最后一波袭击者中的最后一名袭击者被杀死或退出袭击后，袭击以胜利告终。在本场袭击中击杀过至少一名袭击者的玩家（旁观模式除外）会获得和本场袭击的袭击之兆等级相同级数的{{convert|48000||分}}[[村庄英雄]]效果。
+
+袭击事件结算为胜利后，袭击中心半径96格内的村民会在没有方块遮挡的空地上燃放“喷发状”形状效果的[[烟花火箭]]并发出“庆祝”的[[#音效|音效]]，持续30秒。
+
+==== 停战 ====
+如果袭击持续进行{{convert|48000||分}}后仍未结束，或者无法再继续生成袭击者，则袭击会直接中止，以平局告终。此时，Boss栏会直接消失，且{{in|be|nc=1}}还会出现一条消息：“{{tr|一次劫掠已过期|一場戰鬥已經過期}}”。
+
+如果袭击以停战告终，袭击者不会因袭击结束而消失，但不再拥有袭击进行时的统一进攻行为。
+
+=== 村民 ===
+在袭击中，村民会像天黑或雷暴那样跑进它们的屋子。
+
+{{in|je}}村民头上还会出现像汗的粒子效果。
+
+袭击开始时和每个袭击波次结束时，村民会前往[[钟]]的位置敲钟。{{in|je}}村民敲钟会对钟的位置半径48格内未生成的袭击者在生成后施加3秒[[发光]]效果。村民可能隔墙敲钟。
+
+== 存储格式 ==
+{{main|袭击存储格式}}
+{{exclusive|java|section=1}}
+
+每个维度中都有一个袭击存储文件，以保存当前维度内存在的袭击数据。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound = Event raidhorn1.ogg
+|sound2 = Event raidhorn2.ogg
+|sound3 = Event raidhorn3.ogg
+|sound4 = Event raidhorn4.ogg
+|subtitle = {{tp|subtitles.event.raid.horn}}
+|source = 环境
+|description = 新一波袭击生成
+|id = event.raid.horn
+|translationkey = subtitles.event.raid.horn
+}}
+{{Sound table
+|sound = Pillager celebrate1.ogg
+|sound2 = Pillager celebrate2.ogg
+|sound3 = Pillager celebrate3.ogg
+|sound4 = Pillager celebrate4.ogg
+|subtitle = {{tp|subtitles.entity.pillager.celebrate}}
+|source = 敌对生物
+|description = 袭击失败
+|id = entity.pillager.celebrate
+|translationkey = subtitles.entity.pillager.celebrate
+}}
+{{Sound table
+|sound = Vindicator celebrate1.ogg
+|sound2 = Vindicator celebrate2.ogg
+|subtitle = {{tp|subtitles.entity.vindicator.celebrate}}
+|source = 敌对生物
+|description = 袭击失败
+|id = entity.vindicator.celebrate
+|translationkey = subtitles.entity.vindicator.celebrate
+}}
+{{Sound table
+|sound = Ravager celebrate1.ogg
+|sound2 = Ravager celebrate2.ogg
+|subtitle = {{tp|subtitles.entity.ravager.celebrate}}
+|source = 敌对生物
+|description = 袭击失败
+|id = entity.ravager.celebrate
+|translationkey = subtitles.entity.ravager.celebrate
+}}
+{{Sound table
+|sound = Witch celebrate.ogg
+|subtitle = {{tp|subtitles.entity.witch.celebrate}}
+|source = 敌对生物
+|description = 袭击失败
+|id = entity.witch.celebrate
+|translationkey = subtitles.entity.witch.celebrate
+}}
+{{Sound table
+|sound = Evoker celebrate.ogg
+|subtitle = {{tp|subtitles.entity.evoker.celebrate}}
+|source = 敌对生物
+|description = 袭击失败
+|id = entity.evoker.celebrate
+|translationkey = subtitles.entity.evoker.celebrate
+}}
+{{Sound table
+|sound = Villager yes1.ogg
+|sound2 = Villager yes2.ogg
+|sound3 = Villager yes3.ogg
+|subtitle = {{tp|subtitles.entity.villager.celebrate}}
+|source = 友好生物
+|description = 袭击胜利
+|id = entity.villager.celebrate
+|translationkey = subtitles.entity.villager.celebrate
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Event raidhorn1.ogg
+|sound2=Event raidhorn2.ogg
+|sound3=Event raidhorn3.ogg
+|sound4=Event raidhorn4.ogg
+|source=友好生物
+|description=袭击事件开始
+|id=raid.horn
+|typeid=raid.horn
+|soundvolume=12.0
+|soundpitch
+|sounddistance=192
+|foot=1
+}}
+
+== 成就 ==
+{{load achievements|feeling-ill;kill-the-beast;were-being-attacked;sound-the-alarm;ive-got-a-bad-feeling-about-this}}
+
+== 进度 ==
+{{load advancements|adventure.hero_of_the_village}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w47a|加入了袭击事件。}}
+|{{HistoryLine|||dev=18w49a|现在每一级[[不祥之兆]]效果将会生成两波灾厄村民。
+|现在一个波次必须结束才可能开始下一波次。
+|现在袭击的Boss栏会在触发袭击或者波次完成时缓慢回复。}}
+|{{HistoryLine|||dev=18w50a|现在玩家杀死巡逻队队长会获得1-3级的不祥之兆效果，杀死前哨站队长会获得1级的不祥之兆效果。
+|现在巡逻队队长会在前哨站生成了。
+|现在劫掠兽在第2波开始生成，女巫开始于第4波，唤魔者开始于第10波。}}
+|{{HistoryLine|||dev=19w13a|现在玩家会在击败袭击后获得[[村庄英雄]]状态效果。
+|平衡了所有波数的生物生成与难度，特定的生物会在特定的波次中大量生成，增加了较早波次的难度。
+|现在袭击的波数由游戏[[难度]]决定：简单模式为3波，普通模式为5波，困难模式为7波。第3波会出现劫掠兽，第5波会出现唤魔者，第7波会出现女巫。
+|现在当不祥之兆效果等级大于一级时，会在袭击最后出现额外一波灾厄村民，和原本的最后一波中的灾厄村民种类、数量相同。}}
+|{{HistoryLine||1.14.3|dev=pre3|现在可以使用游戏规则{{cd|disableRaids}}来启用或禁用袭击了。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w13a|加入了袭击事件的新设计。}}
+|{{HistoryLine||1.21|dev=24w18a|袭击事件的新设计不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|dev=24w33a|现在如果[[灾厄巡逻队]]的三次随机生成点分别在袭击中心点半径64格外、32格外或5格外，则袭击不会开始。}}
+|{{HistoryLine|||dev=24w35a|现在如果袭击者不能在目标村庄中心垂直96格内找到可生成位置，则袭击不会开始。
+|降低了袭击时袭击者无法找到可生成位置的概率。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||exg=1|1.11.0|dev=1.11.0.1|加入了袭击事件。}}
+|{{HistoryLine|||dev=1.11.0.3|现在袭击可以由玩家触发。
+|现在袭击中可以听到钟声。}}
+|{{HistoryLine|||dev=1.11.0.4|现在玩家会在击败袭击后获得[[村庄英雄]]状态效果。}}
+|{{HistoryLine|||dev=1.11.0.5|现在如果一个村庄在袭击中村民全部死亡或所有床被摧毁，玩家会获得[[不祥之兆]]。}}
+|{{HistoryLine|||dev=1.11.0.7|现在袭击过后的2-3个游戏日会出现一条消息。
+|将生成在村庄附近的袭击的最大生成距离从52提升到了1024。}}
+|{{HistoryLine|||exg=none|dev=正式版|袭击事件不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.9|加入了袭击胜利后的村民庆祝音效。
+|现在袭击中村民全部死亡或所有床被摧毁时，玩家不再获得[[不祥之兆]]。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.20|袭击Boss栏的颜色由品红色更改为红色，以近似匹配{{el|je}}。}}
+|{{HistoryLine|||dev=1.18.0.22|现在袭击Boss栏会随着袭击者生命值的减少而减少，以同步{{el|je}}。}}
+|{{HistoryLine||1.20.30|dev=1.20.30.21|现在袭击中生成的女巫会向灾厄村民扔出喷溅型再生和治疗药水。}}
+|{{HistoryLine||1.20.50|dev=1.20.50.20|现在灾厄村民、女巫和劫掠兽可以加入袭击。}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.21|加入了袭击事件的新设计。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|袭击事件的新设计不再属于[[实验性玩法]]。}}
+|{{HistoryLine|PS4}}
+|{{HistoryLine||1.91|加入了袭击事件。}}
+}}
+
+== 你知道吗 ==
+[[File:Old villagers, raid fail.png|thumb|右|基岩版中袭击失败后袭击者们在庆祝，即使旧版村民还活着]]
+*  {{in|be}}如果通过从[[市场]]下载世界，[[村民/村庄与掠夺前|旧版村民]]和[[村民|新版村民]]可以被同时生成。袭击需要新版村民才能触发，因此一旦新版村民被全部杀死，袭击就以失败告终，即使旧版村民仍然存活。
+* 袭击的号角声是由[[Mojang]]员工用螺旋形[[wzh:Didgeridoo|迪吉里杜管]]录制的。<ref>{{ytl|CvqmhgmO2Bg|Ask Mojang #3: The Villager Prank|Minecraft|August 28, 2019|t=150s}}</ref>
+* {{in|be}}玩家可使用命令生成带有袭击行为的灾厄村民，例如生成一个袭击事件中可以破坏木门的卫道士：{{cmd|summon vindicator ~ ~ ~ minecraft:spawn_for_raid}}。
+* [[女巫]]不属于[[灾厄村民]]，不会攻击村民，但也会与它们在袭击中合作。开发者[[Cory Scheviak]]说女巫“只是跟着凑热闹而已”。<ref>{{bug|MC-182733||女巫不被视为灾厄村民|WAI}}</ref>
+
+== 画廊 ==
+<gallery>
+VillagerSweating.png|袭击事件中一个流汗的[[村民]]
+Illager beast extending neck.png|在袭击中攻击[[铁傀儡]]的一只[[劫掠兽]]
+PillagersMinecon.png|[[Minecon Earth]]里展示的袭击事件
+Pillager&Ravager Celebrating.png|{{el|be}}中正在庆祝袭击的[[掠夺者]]和劫掠兽
+Vindicator Celebrating.png|基岩版中正在庆祝袭击的[[卫道士]]
+</gallery>
+
+=== 渲染图 ===
+<gallery>
+Pillager celebrating.gif|{{in|je|nc=1}}正在庆祝袭击的掠夺者
+Pillager celebrating BE.gif|{{in|be|nc=1}}正在庆祝袭击的掠夺者
+Vindicator celebrating.gif|正在庆祝袭击的卫道士
+Evoker celebrating.gif|正在庆祝袭击的唤魔者
+Witch celebrating.gif|正在庆祝袭击的[[女巫]]
+Illusioner celebrating.gif|{{in|je|nc=1}}正在庆祝袭击的[[幻术师]]
+</gallery>
+
+== 参见 ==
+* [[Tutorial:村庄机制]]
+* [[兴趣点]]
+
+== 注释 ==
+{{fnlist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[cs:Nájezd]]
+[[de:Überfall]]
+[[en:Raid]]
+[[es:Invasión]]
+[[fr:Invasion]]
+[[it:Incursione]]
+[[ja:襲撃]]
+[[ko:습격]]
+[[pl:Najazd]]
+[[pt:Invasão]]
+[[ru:Набег]]
+[[th:กลุ่มปล้นสะดม]]
+[[uk:Набіг]]

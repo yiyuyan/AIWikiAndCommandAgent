@@ -1,0 +1,204 @@
+# 页面: Java版24w10a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w10a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w10a
+|image=24w10a.png
+|image2=Java Edition 24w10a Simplified.png\Java Edition 24w10a Traditional.png\Java Edition 24w10a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年3月6日
+|jsonhash=39222ffc70b35f3193b39eb0268bb446cfc6b7e6
+|clienthash=099bf3a8ad10d4a4ca8acc3f7347458ed7db16ec
+|clientmap=cd2395447a7c169f1b00cc13dc685a73cbaa3ce6
+|serverhash=9f8e96ebe4db0323653111b28df63f66395cb19d
+|servermap=22749bb13951c94cf5d21fe16b9884a81d1c6225
+|parent=1.20.5
+|prevparent=1.20.4
+|prev=24w09a
+|next=24w11a
+|nextparent=1.20.6
+}}<onlyinclude>
+
+'''24w10a'''是[[Java版1.20.5]]的第11个快照，发布于2024年3月6日<ref>{{snap|24w10a|March 6, 2024}}</ref>，加入了[[狼]]的新变种和[[物品堆叠组件]]的简化格式，更新了[[物品栏]]槽位名称，让物品堆叠组件可在部分[[配方]]中生效，并修复了一些漏洞。
+
+== 新内容 ==
+=== 生物 ===
+'''[[狼]]'''
+* 加入了狼的多个变种，生成的变种取决于其自然生成时所处的[[生物群系]]，或是繁殖生成时其双亲所属的变种。
+** {{EntityLink|Pale Wolf}}，即使用先前纹理的狼，在[[针叶林]]中以4只为一群生成。
+** {{EntityLink|Woods Wolf}}，在[[森林]]中以4只为一群生成。
+** {{EntityLink|Ashen Wolf}}，在[[积雪针叶林]]中以4只为一群生成。
+** {{EntityLink|Black Wolf}}，在[[原始松木针叶林]]中以2-4只为一群生成。
+** {{EntityLink|Chestnut Wolf}}，在[[原始云杉针叶林]]中以2-4只为一群生成。
+** {{EntityLink|Rusty Wolf}}，在[[稀疏丛林]]中以2-4只为一群生成。
+** {{EntityLink|Spotted Wolf}}，在[[热带高原]]中以4-8只为一群生成。
+** {{EntityLink|Striped Wolf}}，在[[疏林恶地]]中以4-8只为一群生成。
+** {{EntityLink|Snowy Wolf}}，在[[雪林]]中罕见地生成一只。
+* 在除以上的其他生物群系使用[[刷怪蛋]]及[[命令]]生成的狼均为苍狼。
+
+=== 常规 ===
+'''实体谓词'''
+* 加入了实体副谓词<code>slots</code>，用于比较任何实体的单个或多个槽位。
+** 比较时，槽位区间中的任意槽位符合条件即视为整项通过。
+** 格式：槽位名称与物品谓词的键值对。
+** 示例：
+:: <syntaxhighlight lang="json">{
+    "condition": "minecraft:entity_properties",
+    "entity": "this",
+    "predicate": {
+        "slots": {
+            "container.*": {
+                "items": "dirt"
+            }
+        }
+    }
+}</syntaxhighlight>
+
+'''[[物品栏]]'''
+* 加入了下列新的槽位名称：
+** <code>container.*</code>：包含<code>container.0</code>到<code>container.53</code>。
+** <code>hotbar.*</code>：包含<code>hotbar.0</code>到<code>hotbar.8</code>。
+** <code>inventory.*</code>：包含<code>inventory.0</code>到<code>inventory.26</code>。
+** <code>enderchest.*</code>：包含<code>enderchest.0</code>到<code>enderchest.26</code>。
+** <code>villager.*</code>：包含<code>villager.0</code>到<code>villager.7</code>。
+** <code>horse.*</code>：包含<code>horse.0</code>到<code>horse.14</code>。
+** <code>weapon.*</code>：包含{{cd|d=pretty|weapon.mainhand|weapon.offhand}}。
+** <code>armor.*</code>：包含{{cd|d=pretty|armor.head|armor.chest|armor.legs|armor.feed|armor.body}}。
+** <code>player.cursor</code>：[[创造模式物品栏]]外玩家的鼠标持有的物品。<ref>{{bug|MC-269127|||WAI}}</ref>
+** {{cd|d=pretty|player.crafting.0|player.crafting.1|player.crafting.2|player.crafting.3|player.crafting.*}}：玩家物品栏中的合成栏。
+** <code><slot></code>参数不可使用以<code>*</code>为后缀的槽位区间。
+
+== 更改 ==
+=== 方块 ===
+'''[[砂轮]]'''
+* 现在不接受具有{{nbt|compound|unbreakable}}组件但没有魔咒的物品。
+** 如果上方物品允许存在耐久度，则可使用下方附魔的无法破坏物品为其修复，输出的物品不会继承{{nbt|compound|unbreakable}}组件；如果交换物品顺序，则既不可祛魔也不可修复；如果只存在附魔的无法破坏物品，则仅祛魔而保留{{nbt|compound|unbreakable}}组件。
+* 现在不可同时为两本附魔书祛魔。
+
+'''[[玩家的头]]'''
+* 现在于<code>custom_name</code>标签中储存物品名称。
+* NBT标签{{cd|d=pretty|SkullOwner|ExtraType}}被<code>profile</code>替代以与物品形式的组件格式统一。
+
+=== 物品 ===
+'''常规'''
+* 现在物品数为1时<code>count</code>又会被储存了。
+** 如果该字段无效则默认为1。
+
+=== 生物 ===
+'''[[狼]]'''
+* 现在可以在[[砂土]]和[[灰化土]]上生成。
+* 现在会生成于[[稀疏丛林]]、[[热带高原]]和[[疏林恶地]]生物群系中。
+
+=== 世界生成 ===
+'''[[雪林]]'''
+* 不再生成[[鸡]]、[[猪]]、[[牛]]和[[绵羊]]。
+
+=== 命令格式 ===
+'''{{cmd|execute}}'''
+* 条件子命令现在可用新类型<code>items</code>以比较物品或为物品计数。
+** <code><nowiki>execute if|unless items <source> <slots> <item_predicate></nowiki></code>
+*** <code><nowiki><source></nowiki></code>：用法与{{cmd|item}}中相同。
+**** 示例：<code>block <x> <y> <z></code>或<code>entity <target></code>（可返回多个实体）。
+*** <code><slots></code>：可以为单个槽位（如<code>container.0</code>）或槽位区间（如<code>container.*</code>）
+*** <code><item_predicate></code>：用法与{{cmd|clear}}中的物品谓词相同。
+* 如果单独使用，则会返回符合条件的物品堆中物品的总数。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>34</code>。
+* 现在旗帜图案会从<code>-{}-data/<''命名空间''>/banner_pattern/<''id''></code>中加载到动态注册表中。
+<div class="treeview">
+:* {{nbt|compound}}：根标签。
+:** {{nbt|string|asset_id}}：（命名空间ID）用于解析纹理位置。示例：<code>custom:pattern</code>会被解析为<code>assets/custom/textures/entity/banner/pattern.png</code>和<code>assets/custom/textures/entity/shield/pattern.png</code>。
+:** {{nbt|string|translation_key}}：一个翻译键前缀。示例：<code>block.minecraft.banner.custom.pattern</code>会被解析为<code>-{}-block.minecraft.banner.custom.pattern.<''所染颜色''></code>。
+</div>
+
+'''[[提示框]]'''
+* 鼠标悬停于元素外时，按钮提示框不再显示。
+
+'''[[配方]]'''
+* 现在可以指定物品组件。
+** {{cd|d=pretty|crafting_shaped|crafting_shapeless|stonecutting|smithing_transform}}的{{nbt|compound|result}}物品堆现在接受{{nbt|compound|components}}。
+** {{cd|d=pretty|smelting|blasting|smoking|campfire_cooking}}类型配方的{{nbt|string|result}}字段现在改为无数量的物品堆叠格式，即必须指定{{nbt|string|id}}且可指定{{nbt|compound|components}}数据。
+
+'''[[Java版标签|标签]]'''
+* 在方块标签{{cd|#wolves_spawnable_on}}中加入了{{cd|d=pretty|coarse_dirt|podzol}}。
+
+'''[[物品堆叠组件]]'''
+* {{nbt|string}}{{nbt|compound|profile}}不再需要{{nbt|string|name}}字段。
+* 现在某些组件支持用于代替的简单定义：
+** {{nbt|compound|profile}}现在也可以定义为{{nbt|string|profile}}来表示玩家名称。示例：<code>profile="jeb_"</code>。
+** {{nbt|compound|dyed_color}}现在也可以定义为{{nbt|int|dyed_color}}。示例：<code>dyed_color=16711680</code>。
+** {{nbt|compound|attribute_modifiers}}现在可以直接定义为{{nbt|list|attribute_modifiers}}。示例：<code>attribute_modifiers=[{type:'generic.scale',uuid:[1,2,3,4],name:'大！',amount:1.0,operation:'add_multiplied_base'}]</code>。
+** {{nbt|compound|potion_contents}}现在可以定义为单一药水ID{{nbt|string|potion_contents}}。示例：<code>potion_contents="invisibility"</code>。
+** {{nbt|compound|enchantments}}和{{nbt|compound|stored_enchantments}}现在可以定义为包含[[魔咒]]ID和等级的内联键值对。示例：<code>enchantments={sharpness:1}</code>。
+** 这些定义仅为简化替代，它们总是以完整形式存储。
+* 现在{{nbt|compound|container}}组件适用于所有的[[容器]]而不只有[[潜影盒]]。
+* 将{{nbt|compound|lodestone_target}}组件重命名为{{nbt|compound|lodestone_tracker}}。
+** {{nbt|int-array|pos}}和{{nbt|string|dimension}}现在被移入{{nbt|compound|target}}（可选）。
+** {{nbt|compound|target}}不存在时，指南针会旋转。
+* {{nbt|list|lore}}和{{nbt|list|fireworks/explosions}}的项数最大值现在被提升到256。
+* 具有{{nbt|compound|can_break}}和{{nbt|compound|can_place_on}}组件的物品现在可以正常堆叠了，此前仅能堆叠1个物品。
+
+== 更改（实验性） ==
+=== 方块 ===
+'''[[宝库]]'''
+* 再次更改了未激活状态的宝库的纹理。
+
+== 修复 ==
+{{fixes|fixedin=24w10a|veralias=1|showdesc=1
+|;old
+|131636|JSON文本组件的末尾允许存在一个额外字符。
+|140397|将两个附魔的无法破坏的物品放入砂轮，会输出两个堆叠的物品。
+|157133|使用砂轮能将诅咒附魔书堆叠。
+|167324|多个UI按钮同时高亮。
+|174496|玩家的头被放置后丢失名称。
+|187746|“编辑游戏规则”屏幕中的游戏规则按钮即使被遮盖，也会被高亮。
+|217084|玩家的头的NBT<code>ExtraType</code>在不使用<code>DataFixerUpper</code>升级路径时不再被存储。
+|;dev
+|268392|属性<code>generic.gravity</code>为0.0的玩家会因飞行而被踢出服务器。
+|268462|拥有饱和效果的谜之炖菜现在给予7秒效果而非7刻。
+|;prev
+|268800|所有工具均为4攻击伤害和1.6攻击速度。
+|268801|保存于快捷栏中的潜影盒从NBT数据到物品组件的更新不一致。
+|268813|在给玩家一个带有未知或无效标签的<code>can_break</code>或<code>can_place_on</code>组件的物品时崩溃。
+|268824|从砂轮中祛魔的书不与物品栏中的书堆叠。
+|268830|用指定无粒子效果的{{cmd|effect|link=none}}命令时粒子效果出现。
+|268834|宝库的纹理不一致。
+|268842|在保存有物品形式的{{tr|画|繪畫|畫}}的世界时崩溃。
+|268845|在创造模式下，带有<code>can_break</code>或<code>can_place_on</code>组件的物品总在更改物品栏时更新。
+|268850|切换快捷栏中物品时属性修饰符的效果未更新。
+|268851|弩不发出射箭音效。
+|268853|不能加载任何变种的{{tr|画|繪畫|畫}}。
+|268856|加载带有单个无效物品的潜影盒或收纳袋会使其所有组件失效。
+|268864|具有重复物品堆叠组件的物品修饰符会阻止（重新）加载整个数据包而不是在加载数据包时忽略此物品修饰符。
+|268879|损坏高损伤值的物品导致游戏崩溃。
+|268897|带有数量为1的物品堆的实体不能被目标选择器选中。
+|268904|谜之炖菜不给予状态效果。
+|268921|卸载世界后，箭失去粒子。
+|268971|破坏磁石指针绑定的磁石后，磁石指针停止工作。
+|269005|来源于24w07a的玩家的头有时导致游戏崩溃，有时数据转化异常。
+|269062|右键单击删除过<code>bundle_contents</code>组件的收纳袋后，该组件还原。
+|269066|物品修饰符不能删除<code>custom_name</code>。
+|269091|具有失效字段的<code>AttributeModifiers</code>NBT未正确地升级为组件。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.20}}
+
+[[de:24w10a]]
+[[en:Java Edition 24w10a]]
+[[es:Java Edition 24w10a]]
+[[fr:Édition Java 24w10a]]
+[[ja:Java Edition 24w10a]]
+[[lzh:爪哇版二四週一〇甲]]
+[[pt:Edição Java 24w10a]]
+[[ru:24w10a (Java Edition)]]
+[[uk:24w10a (Java Edition)]]

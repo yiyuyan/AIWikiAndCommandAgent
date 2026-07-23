@@ -1,0 +1,146 @@
+# 页面: Java版14w05a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w05a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:11
+# 原始 Wikitext 内容:
+
+{{Dangerous version|玩家进入屏障方块内部时会导致游戏崩溃。<ref>{{bug|MC-46576|||Fixed}}</ref>}}{{Infobox version
+|title=14w05a
+|image=14w05a.png
+|image2=Java Edition 14w05a Simplified.png\Java Edition 14w05a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年1月30日
+|jsonhash=fb2600e556a199c81b238795ee3a3a05ddb02c59
+|clienthash=3b7c6e09b60d4aecdddf1e453a8b10ebd90becd4
+|serverhash=27abecb729cab3a6e11f635dae2cf9be5f620a75
+|exehash=66baa6d77dd04a432734aad75ef7270da321675e
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w04b
+|next=14w05b
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w05a'''是[[Java版1.8]]的第8个快照，发布于2014年1月30日<ref>{{cite|url=http://mojang.com/2014/01/minecraft-snapshot-14w05a/|archive-url=1|archive=1|title=Minecraft snapshot 14w05a|author=Dinnerbone|website=Mojang.com|date=Jan 30, 2014}}</ref>，加入了[[屏障]]、[[旁观模式]]以及新的[[着色器]]和[[闪烁标语]]，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[屏障]]'''
+* 性质与固体方块相同但是全透明的。
+** 允许红石信号被传递和方块在其上方放置。
+* 和[[基岩]]一样是坚不可摧的。
+* 可通过{{cmd|give @p minecraft:barrier}}获得。
+* 使用熔岩纹理作为破坏粒子。
+
+=== 游戏内容 ===
+'''[[旁观模式]]'''
+* 用法：{{cmd|gamemode spectator}}、{{cmd|gamemode sp}}或{{cmd|gamemode 3}}
+* 无法与世界互动
+** 玩家可以穿过任何实体和方块，且不会影响它们
+** 收集和使用物品是不可能的，放置，破坏或与方块互动也是不可能的
+*** 一个漏洞导致允许玩家可以在热键栏内选择物品扔出
+** 玩家可以查看物品栏和方块界面，但无法与其互动
+*** [[HUD]]被禁用，除了在看生物时会出现十字标
+** 命令内的玩家选择器可以选择旁观者
+*** 对旁观者使用{{cmd|give}}会使物品在他们的位置掉落
+** 生物不会注意到旁观者，也不会触发刷怪笼和生成机制
+*** 旁观者的存在能避免生物消失
+** 只有[[虚空]]和{{cmd|kill}}能伤害旁观者
+* 飞行模式
+** 不可能着陆，玩家可以穿过地面
+** 鼠标滚轮，疾跑键，及其迟缓和迅捷效果都会影响飞行速度
+* 透过别的玩家或生物的第一人称视角
+** 对实体左击会使旁观者的视角和位置皆锁定在那个实体上
+** 旁观者物品控制实体的移动和视角
+** 一些生物会有不同的视觉效果
+*** 苦力怕会应用新的{{filename|creeper.json}}着色器
+*** 末影人会应用{{filename|invert.json}}着色器
+*** 蜘蛛和洞穴蜘蛛会应用新的{{filename|spider.json}}着色器
+** 使用{{key|F5}}来查看自认只会显示所在的实体
+** 按下脱离键（默认为{{key|Shift}}）将让玩家返回飞行模式
+* 视觉特性
+** 旁观者能看到别的旁观者
+*** 将以半透明的头颅出现
+*** 热栏中所需的物品也会可见
+** 能看到隐身的玩家和生物，不过是半透明的
+
+'''[[着色器]]'''
+* {{filename|creeper.json}}
+** 展示一个被绿化的世界，与{{filename|green.json}}相似
+** 在苦力怕上使用旁观模式时应用
+* {{filename|spider.json}}
+** 多眼效果
+** 在蜘蛛上使用旁观模式时应用
+'''[[闪烁标语]]'''
+* pls rt
+* Do you want to join my server?
+* Put a little fence around it!
+* Throw a blanket over it!
+* One day, somewhere in the future, my work will be quoted!
+* Now with additional stuff!
+* Extra things!
+
+== 更改 ==
+=== 方块 ===
+'''[[激活铁轨]]'''
+* 充能的激活铁轨现在会使矿车抖动，使玩家脱离。
+
+'''[[末地传送门方块]]'''
+* 物品栏图标现显示无纹理方块而不再是下界传送门。
+
+=== 物品 ===
+'''[[盔甲]]'''
+* 当被生物/玩家穿着时，受伤时不再闪烁颜色。
+
+'''[[成书]]'''
+* 复制成书将它们标记为{{tr|原稿的副本|複本}}或{{tr|副本的副本|複本的複本}}。
+* 这个标记将在显示作者的下一行内显示。
+* {{tr|副本的副本|複本的複本}}无法被复制。
+
+=== 常规 ===
+'''[[调试屏幕]]'''
+* 文字现在有了背景。
+* 将x、y,、z、b、bl和其他标签换成了更具体的标签。
+* “Light”现在指的是地面水平的亮度而不是眼睛水平。
+* 目前缺失LC值。
+
+'''GUI编码'''
+* 改进了编码，允许“更棒的东西”出现。<ref>{{tweet|Dinnerbone|428161570867519488}}</ref>
+
+== 修复 ==
+{{fixes|fixedin=14w05a|prefix=Minecraft|showdesc=1
+|;old
+|9752|命令方块可以检测到已死亡但是尚未点击重生按钮的玩家。
+|38944|正在加入Realms服务器时，界面上的“取消”按钮的位置不对。
+|;dev
+|44521|只要玩家死亡过，<code>@a</code>，<code>@e</code>以及任何对其UUID的引用都不能正确工作。
+|45041|对一个方块实体使用{{cmd|setblock|link=none}}命令时，“<code>replace</code>”的处理方式看起来不起作用。
+|45050|使用<code>/fill … skull</code>命令时，头颅显示的位置与其碰撞箱不符
+|45159|使用{{cmd|clone|link=none}}或{{cmd|fill|link=none}}命令将空气方块放置到具有方块实体的方块时，原方块不会被清除。
+|45239|在14w03b中，命令{{cmd|clear @a|link=none}}无法工作。
+|45453|放置在物品展示框中的物品和方块被不正确渲染。
+|45470|地面掉落物渲染不正确。
+|45478|村民可以破坏作物但是不能再种植它们。
+|45492|透明方块会更暗。
+|45554|两种高的花的变种不能自然生成。
+|;previous
+|45764|地图在物品展示框中不显示。
+|45795|村民不能放置或拾起任何作物。
+|45847|使用{{cmd|summon|link=none}}命令生成的农民的NBT标签<code>canPickUpLoot</code>默认被设置为0。 
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:14w05a]]
+[[en:Java Edition 14w05a]]
+[[es:Java Edition 14w05a]]
+[[fr:Édition Java 14w05a]]
+[[ja:Java Edition 14w05a]]
+[[pt:Edição Java 14w05a]]
+[[ru:14w05a (Java Edition)]]
+[[uk:14w05a (Java Edition)]]

@@ -1,0 +1,131 @@
+# 页面: 命令/schedule
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/schedule
+# 分类: Java版独有信息, 命令
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=schedule
+|oplevel=2\1
+|becheat=1
+}}
+计划执行函数。
+
+== 用法 ==
+{{in|java}}在经过指定的时间后执行一个[[Java版函数|函数]]或一个[[Java版标签/函数|函数标签]]中的所有函数。
+
+{{in|be}}在指定的区域全部被加载时执行一个[[基岩版函数|函数]]。
+
+{{IN|java}}同一个函数或同一个函数标签不能有在同一个时间执行的两个计划。
+
+{{IN|java}}默认使用<code>replace</code>模式，即在一个函数或函数标签已有未执行的计划时，直接覆盖此计划。例如，如果计划5秒后执行一个函数，在五秒内要修改执行时间，可以使用<code>replace</code>模式设置新计划覆盖原计划。若使用<code>append</code>模式则在原有的计划后追加，不覆盖相同函数的计划。
+
+计划的函数以服务端为执行者执行，执行位置为[[世界出生点]]。
+
+== 语法 ==
+* '''Java版'''
+: <code><nowiki>schedule function <function> <time> [append|replace]</nowiki></code>
+:: 指定函数在<code><nowiki><time></nowiki></code>时间后运行。
+: <code>schedule clear <function></code>
+:: 将之前指定的函数从计划中移除。
+* '''基岩版'''
+: <code><nowiki>schedule delay add <function: filepath> <time: int> [replace|append]</nowiki></code>
+: <code><nowiki>schedule delay add <function: filepath> <time: int>D [replace|append]</nowiki></code>
+: <code><nowiki>schedule delay add <function: filepath> <time: int>S [replace|append]</nowiki></code>
+: <code><nowiki>schedule delay add <function: filepath> <time: int>T [replace|append]</nowiki></code>
+:: 将指定函数延时运行。
+: <code>schedule on_area_loaded add <from: x y z> <to: x y z> <function: filepath></code>
+: <code>schedule on_area_loaded add circle <center: x y z> <radius: int> <function: filepath></code>
+: <code>schedule on_area_loaded add tickingarea <name: string> <function: filepath></code>
+:: 当指定区域被加载后，执行所计划的函数。
+: <code>schedule clear <function: filepath></code>
+: <code>schedule on_area_loaded clear function <function: filepath></code>
+: <code>schedule on_area_loaded clear tickingarea <name: string> [function: filepath]</code>
+: <code>schedule delay clear <function: filepath></code>
+:: 将之前指定的函数从计划中移除。
+
+== 参数 ==
+{{argument|function|function|function: filepath|CommandFilePath}}
+: 指定要计划运行的函数。
+: {{arg desc|je=function|be=commandfilepath}}
+
+{{argument|time|time|time: int|int}}
+: 指定等待的时间。为0时执行失败。
+: {{arg desc|je=time|be=int|min=0}}
+
+{{el|je|short=1}}：{{argument|function|string}}（对于{{cd|/schedule clear ...}}）
+: 指定要从计划中移除的函数。应为一个函数或函数标签的命名空间ID（都必须写明前缀<code>minecraft:</code>）。
+: {{arg desc|je=string|type=greedy}}
+
+{{el|je|short=1}}：<code>append|replace</code><br>
+{{el|be|short=1}}：<code>replace|append</code>
+: 指定是否取代还在等待执行的函数或函数标签。
+:* <code>append</code> —— 为此函数或函数标签添加新的计划。
+:* <code>replace</code> —— （默认值）取代此函数或函数标签的现有计划。
+
+{{el|be|short=1}}：{{argument|be=1|from: x y z|CommandPosition}}和{{argument|be=1|to: x y z|CommandPosition}}
+: 指定用于定义矩形加载区域的两个对角坐标。
+: {{arg desc|be=CommandPosition}}
+: 小于-30,000,000或大于30,000,000的<code>x</code>和<code>z</code>坐标会被视为-30,000,000或30,000,000。
+
+{{el|be|short=1}}：{{argument|be=1|center: x y z|CommandPosition}}
+: 指定用于定义圆形加载区域的圆心的坐标。
+: {{arg desc|be=CommandPosition}}
+: 小于-30,000,000或大于30,000,000的<code>x</code>和<code>z</code>坐标会被视为-30,000,000或30,000,000。
+
+{{el|be|short=1}}：{{argument|be=1|radius: int|int}}
+: 指定圆形常加载区域的半径作为从中心到圆周的区块数。
+: {{arg desc|be=int}}应为从0到2,147,483,647之间的整数。
+
+{{el|be|short=1}}：{{argument|be=1|name: string|basic_string}}
+: 指定常加载区域的名称。当此常加载区域被添加时执行函数。
+: 必须为1个完整的单词（无空格）或1个被引号包围的字符串。
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|指定函数或函数标签不存在|fail|fail}}
+{{Result table|cmd=/schedule function ...|<code><<nowiki/>time></code>为0||N/A}}
+{{Result table|cmd=/schedule clear ...|指定函数或函数标签目前没有计划}}
+{{Result table|cmd=/schedule on_area_loaded add <from: x y z> <to: x y z> ...<br>/schedule on_area_loaded add circle ...|指定区域大于2,147,483,647个区块|N/A|fail}}
+{{Result table|cmd=/schedule on_area_loaded add circle ...|<code>radius: int</code>小于0}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/schedule function ...|执行成功|1|1|函数将要执行游戏时间（游戏刻）}}
+{{Output table|cmd=/schedule clear ...|执行成功|1|1|被清除的计划的数量}}
+{{Output table|edition=be|cmd=|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* {{IN|java}}在3秒后运行函数<code>foo:bar</code>：<code>schedule function foo:bar 3s</code>
+
+* {{IN|java}}在5天后运行标签<code>foo:bar</code>里的函数：<code>schedule function #foo:bar 5d</code>
+
+* {{IN|bedrock}}在名称为<code>temp</code>的常加载区域被添加时运行函数<code>a</code>：<code>schedule on_area_loaded add tickingarea temp a</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w43a|加入了{{cmd|schedule|link=none}}。}}
+|{{HistoryLine||1.15|dev=19w38a|加入了{{cd|clear}}语法和可选的{{cd|append/replace}}参数（默认为{{cd|replace}}）。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.100|dev=1.16.100.59|加入了{{cmd|schedule|link=none}}。}}
+|{{HistoryLine||1.21.40|dev=1.21.40.20|加入了用于清除队列函数的语法。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|加入了用于延时运行函数的语法。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/schedule]]
+[[en:Commands/schedule]]
+[[es:Comandos/schedule]]
+[[fr:Commandes/schedule]]
+[[ja:コマンド/schedule]]
+[[pt:Comandos/schedule]]
+[[ru:Команды консоли/schedule]]

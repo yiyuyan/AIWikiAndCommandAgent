@@ -1,0 +1,106 @@
+# 页面: 统计存储格式
+# 来源: https://zh.minecraft.wiki/w/%E7%BB%9F%E8%AE%A1%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:26
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''统计存储文件'''是存档内保存各个玩家[[统计信息]]的文件。
+
+== 存储格式 ==
+统计存储文件位于{{filepath|<''存档根目录''>/players/stats/<''玩家UUID''>.json}}。对于进入过此存档的所有玩家，每个玩家都对应一个统计存储文件。
+
+{{Calculator|playerUuid|player=MinecraftWiki}}
+
+统计存储文件以JSON文件格式保存，并具有下列JSON结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|int|DataVersion|existonsave=1}}：保存此统计存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+** {{nbt|compound|stats|existonsave=1|required=1}}：统计信息。
+*** {{nbt|compound|<''统计类型命名空间ID''>}}：对于指定统计类型的存储数据。如果指定的统计类型不存在，则在加载时在日志中警告<code>-{}-Invalid statistic type in <''统计存储文件路径''>: Don't know what <''统计类型''> is</code>。
+**** {{nbt|int|<''统计数据项命名空间ID''>}}：对于指定统计数据项的数据。如果指定的统计数据项不存在，则在加载时在日志中警告<code>-{}-Invalid statistic type in <''统计存储文件路径''>: Don't know what <''统计类型''> is for key <''统计数据项''></code>。
+</div>
+
+游戏只会保存与默认值不一致的统计数据，以缩减文件体积。例如当玩家从未破坏[[橡木原木]]时，统计类型<code>minecraft:mined</code>中的<code>minecraft:oak_log</code>就不存在；当玩家破坏后，此数据项才会被记录在统计存储文件中。
+
+== 存储行为 ==
+每个玩家都对应一个统计存储文件。当玩家进入世界时，游戏会立刻读取玩家对应的统计存储文件：
+* 如果对应的统计存储文件不存在：
+** 检查{{filepath|-{}-<''存档根目录''>/stats}}目录内是否有名称为{{filename|-{}-<''玩家名称''>.json}}的文件。如果有，则将此文件重命名以符合统计存储文件的通常名称，并加载此文件。这是为了与早期版本兼容。
+** 如果上述文件也不存在，则认为玩家第一次进入世界，静默处理。
+* 如果对应的统计存储文件存在，则加载对应文件。
+** 如果读取过程中产生了I/O异常，则游戏日志报错<code>-{}-Couldn't read statistics file <''统计存储文件路径''></code>，且玩家统计信息全部丢失。
+** 如果文件无法转换为统计信息（例如文件格式错误），则游戏日志报错<code>-{}-Couldn't parse statistics file <''统计存储文件路径''></code>，且玩家统计信息全部丢失。
+
+当玩家退出世界时，此文件会被立刻保存，而不是等待存档整体保存时一同保存。
+
+== 历史 ==
+
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.5|加入了统计存储文件。
+|此时统计存储文件是全局的，格式如下：
+{{collapseH}}{{Pipe escape|
+统计存储文件位于{{filepath|<''游戏数据根目录''>/stats/stats_<''玩家名称''>_unsent.dat}}，每个玩家对应一个统计存储文件。
+
+统计存储文件是一个文本文件，经过ASCII解码后内部为JSON数据，并具有下列JSON结构：
+
+<div class{{=}}"treeview">
+* {{nbt|compound}} JSON元素根对象
+** {{nbt|compound|user|existonsave{{=}}1}}：玩家数据。
+*** {{nbt|string|name|existonsave{{=}}1}}：玩家的名称。
+*** {{nbt|string|sessionid|existonsave{{=}}1}}：无任何作用，始终为<code>local</code>。
+** {{nbt|list|stats-change|required{{=}}1|existonsave{{=}}1}}：玩家统计数据。
+*** {{nbt|compound}}：一项统计数据。游戏只会保存与默认值不一致的统计数据，每一项统计数据均使用一行。
+**** {{nbt|int|<''统计ID''>|existonsave{{=}}1}}：此项统计的值。
+** {{nbt|string|checksum|required{{=}}1|existonsave{{=}}1}}：字符串<code>local</code>拼接按统计顺序拼接的字符串<code>-{}-<''统计内部值''>,<''值''>,</code>而生成的字符串经[[wzh:MD5|MD5散列]]计算后去除第一位字符的十六进制字符串，其中<code>-{}-<''统计内部值''></code>来自{{filename|achievement/map.txt}}，每一行的格式为<code><''统计ID''>:<''统计内部值''></code>。
+</div>
+
+JSON元素每层缩进为2个字符，以<code>\r\n</code>换行。
+
+游戏在保存统计数据时，也会在{{filename|stats_<''玩家名称''>_unsent.old}}保存备份。如果文件读取失败或散列验证失败，则重置所有统计为默认值。
+
+统计ID的格式如下：
+* 对于所有“通用”标签页的统计数据，'''统计ID'''就是它们的内部ID。
+* 对于“方块”和“物品”标签页的统计数据，其'''统计ID'''需要根据统计类型和统计的对象生成：
+** 合成方块统计：16842752（<code>0x1010000</code>） + 方块ID
+** 使用方块统计：16908288（<code>0x1020000</code>） + 方块ID
+** 挖掘方块统计：16777216（<code>0x1000000</code>） + 方块ID
+** 物品损坏统计：16973824（<code>0x1030000</code>） + 物品ID
+** 合成物品统计：16842752（<code>0x1010000</code>） + 物品ID
+** 使用物品统计：16908288（<code>0x1020000</code>） + 物品ID
+* 对于成就统计，其'''统计ID'''为5242880（<code>0x500000</code>） + 成就ID，统计的值为获得过此成就的次数。}}
+{{collapseE}}
+}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w36a|现在统计存储文件是存档数据，各存档独立保存。
+|更改了存储格式。
+{{collapseH}}{{Pipe escape|
+统计存储文件位于{{filepath|<''存档根目录''>/stats/<''玩家名称''>.dat}}，每个玩家对应一个统计存储文件。
+
+统计存储文件以JSON文件格式保存，并具有下列JSON结构：
+
+<div class{{=}}"treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|int|<''统计ID''>}}：（<code>achievement.exploreAllBiomes</code>除外）一项统计与统计的值。
+** {{nbt|compound|achievement.exploreAllBiomes}}：“{{Achievements/JE/name|Adventuring Time}}”的统计数据。
+*** {{nbt|int|value}}：是否已获得成就“{{Achievements/JE/name|Adventuring Time}}”。
+*** {{nbt|list|progress}}：玩家已到访的生物群系。
+**** {{nbt|string}}：一个生物群系的名称。
+</div>
+}}
+{{collapseE}}
+}}
+|{{HistoryLine||1.7.6|dev=pre1|现在统计存储文件的名称为玩家UUID，而不是玩家名称。}}
+|{{HistoryLine||1.12|dev=17w13a|统计存储文件不再保存成就数据。}}
+|{{HistoryLine||1.13|dev=17w47a|更改了存储格式。
+|加入了{{nbt|int|DataVersion}}保存最后一次保存此文件的游戏的数据版本。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将统计数据目录从{{filepath|<''存档根目录''>/stats}}移动到{{filepath|<''存档根目录''>/players/stats}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

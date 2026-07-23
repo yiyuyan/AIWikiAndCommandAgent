@@ -1,0 +1,121 @@
+# 页面: Ore UI
+# 来源: https://zh.minecraft.wiki/w/Ore%20UI
+# 分类: UI, 基岩版, 基岩版独有特性, 来源请求
+# 抓取时间: 2026-07-14 17:16:40
+# 原始 Wikitext 内容:
+
+{{upcoming in draft}}
+{{Exclusive|Bedrock}}
+{{Infobox program
+| image= Ore UI.png
+| imagesize= 200px
+| author= Paulo Ragonha, [[Oleg Kozitsyn]], Fernando Vía Canel, Marlon Huber-Smith, Anna Päärni, Danila Dergachev, Omar ElGaml, James Nicholls
+| publisher= [[Mojang Studios]]
+| platform= {{el|bedrock}}
+| programming language= {{w|TypeScript}}和{{w|JavaScript}}
+| version= React Facet: [https://github.com/Mojang/ore-ui/releases/tag/v0.6.2 v0.6.2]
+| date= 初次提交于2021年10月11日<ref>{{cite|url=https://github.com/Mojang/ore-ui/commit/a899c6ac2d3935556e38befd5a350127f8114284|title=first commit · Mojang/ore-ui@a899c6a|website=GitHub}}</ref>
+| license= {{w|MIT License}}
+| size= 1.18 MB
+| source available= 是
+| website= https://github.com/Mojang/ore-ui
+}}
+
+'''Ore UI'''是一套专为使用{{w|Web技术}}构建{{w|电子游戏}}{{w|用户界面}}而设计的开源包集合。它基于{{w|React}}和{{w|TypeScript}}开发，为{{w|电子游戏开发}}和通用{{w|web应用}}提供可复用的构建模块。<ref name="ore-ui-github">{{cite|url=https://github.com/Mojang/ore-ui|title=Mojang/ore-ui: 💎 Building blocks to construct game UIs using web tech.|website=GitHub}}</ref>目前，Ore UI已被应用于[[基岩版]]和[[Minecraft Legends]]等游戏中。
+
+[[File:Ore UI Design System.png|缩略图|{{el|bedrock}}的新UI设计系统大改<ref>{{tweet|pirelenito|1452914034605494277|Thanks for everyone that attended my talk live at @ReactAdvanced. For anyone that couldn't attend, I'll post a link here once it is available for everyone. It was a developer conference, but if you were waiting for a sneak peek on the new UI components... here it is ☺️}}</ref>]]
+
+开发团队正采用Coherent Labs<ref name="react-advanced-2021-ore-ui"/><ref name="dotjs-hummingbird-tech-preview">{{ytl|qDevZETe8OE|dotJS 2018 - Tobias Ahlin - Adding JavaScript to Minecraft|March 4, 2019}}</ref><ref name="powered-by-coherent-labs">{{cite|url=https://www.coherent-labs.com/powered-by-coherent-labs/|title=Powered by Coherent Labs|website=Coherent Labs}}</ref>研发的Gameface引擎（前身为Hummingbird）<ref name="gameface-former-hummingbird">{{cite|url=https://wiki.bedrock.dev/meta/gametest-qna.html#hummingbird-ui|title=GameTest Q&A 2021/08/06|website=Bedrock Wiki}}</ref>构建全新UI设计系统，这使得运行{{w|JavaScript}}、{{w|HTML}}和{{w|CSS}}等现代Web技术成为可能。
+
+与JSON UI不同，Ore UI是硬编码的，不能被[[附加包]]修改。<ref name="bedrock-wiki-json-ui-intro">{{cite|url=https://wiki.bedrock.dev/json-ui/json-ui-intro.html#introduction|title=Intro to JSON UI|website=Bedrock Wiki}}</ref>
+
+== 历史 ==
+=== 基岩版UI的全面改造 ===
+2018年11月9日，Mojang工作室的首席体验设计师[[Tobias Ahlin]]宣布将对基于Hummingbird引擎的{{el|bedrock}}UI进行大改，它运行HTML和CSS的子集，并且基于React框架构建设计系统。<ref name="dotjs-hummingbird-tech-preview"/> {{el|bedrock}}标题屏幕重新设计的技术预览展示了对用户更为友好的触摸、控制器和键盘输入方式。该公告在2018年dotJS开发者大会上发布。
+
+[[File:DotJS 2018 Bedrock's UI redesign tech preview.png|缩略图|在dotJS2018开发者大会上展示的{{el|bedrock}}重新设计技术预览]]
+技术预览版的新标题屏幕有两个页面。顶部界面显示了玩家最近游玩的世界，背景会随着世界缩略图的变化而变化；底部界面设有五个交互式功能按钮：
+
+* “Play”可能用于启动已存储的世界；
+* “Store”可能用于打开市场页面（类似于现在的[[市场]]）；
+* “Skins”可能用于玩家自定义个人皮肤（类似于现在的[[角色创建器]]）；
+* “Achievements”和“Settings”可以让玩家查看自己的成就和打开设置。
+
+界面右上角有一个包含玩家头像的档案按钮，推测为[[档案|个人资料]]界面入口。
+
+[[Minecraft]] JavaScript API技术文档曾通过特定链接开放访问，这个链接可以在演讲结束时看到，文档提供了技术预览界面，用户可以在其中自由地与重新设计的UI交互。<ref name="dotjs-hummingbird-tech-preview"/>原始链接现已重定向至无关站点，技术文档目前处于完全不可获取状态，已被视为{{w|散失媒体}}。
+
+2018年年中，Minecraft官方网站（[[Minecraft.net]]和[[Minecraft Feedback]]）开始接收一些基于新UI设计系统的用户界面更新。{{citation needed}}
+
+2020年7月31日，[[基岩版1.16.100.50]]首次展示了新的[[成就]]屏幕，并逐步向5%的玩家推出。<ref name="achievement-new-ui-rollout">{{tweet|Volgar|1289257749751058432|Uh-oh! I think I pressed something, and now 5% of #Minecraft beta users will see the new achievements screen. Well, might as well ask for feedback here: https://aka.ms/mcAchievementBeta.|July 31, 2020}}</ref>在接下来的9周内，可以使用新成就界面的玩家数量从5%缓慢增加到75%。<ref name="achievement-new-ui-rollut-75">{{tweet|Volgar|1337166293431169024|I'll provide more context later, but... jam. It gets everywhere. Hence a whopping 75% of #Minecraft players have a chance to see the new achievements screen both in the latest release and the latest beta. Stay tuned! Ta-tah!}}</ref>
+
+=== React Facet ===
+2021年10月18日，React Facet源代码在{{w|MIT许可证|MIT许可}}下的[https://github.com/Mojang/ore-ui Ore UI GitHub存储库]上发布。<ref name="github-ore-ui-react-facet">{{cite|url=https://github.com/Mojang/ore-ui/commit/96c107cea826379efbd76342fdf1e37789b53b36|title=Importing codebase from internal repository (#1) · Mojang/ore-ui@96c107c|website=GitHub}}</ref>
+
+2021年10月25日，<ref name="react-advanced-ragonha-talk-date">{{cite|url=https://reactadvanced.com/2021/#schedule|title=Schedule|website=React Advanced}}</ref>在React Advanced 2021开发者大会上，Mojang Studios的技术主管Paulo Ragonha宣布推出React Facet，这是一种基于{{w|观察者模式|可观察模式}}的React内置电子游戏用户界面状态管理。<ref name="react-advanced-2021-ore-ui">{{ytl|Vyg1oQI1VaA|Using React to Build Performant Game UIs in Minecraft - Paulo Ragonha, React Advanced 2021|December 27, 2021}}</ref>在演讲中Ragonha展示了React Facet如何通过引入一个连接{{w|Frontend and backend|后端}}C++游戏引擎（游戏状态所在的位置）和{{w|Frontend and backend|前端}}JavaScript UI的系统来桥接游戏数据。这种连接依赖于一个称为'''分面'''的概念，它是表示游戏状态切片的轻量级可观察对象。这些分面允许UI订阅来自游戏引擎的特定数据，例如玩家运行状况、库存或环境变化，并在游戏中的状态发生变化时接收实时更新。
+
+在[[基岩版1.20.30.22]]中，游戏界面经过重新设计，采用了类似于成就菜单的新设计元素。
+
+在[[基岩版1.21.20]]和[[基岩版1.21.30.23]]中，成就按钮已更改为个人资料按钮，并且出现新的个人资料屏幕，它显示了玩家的[[统计信息]]、[[成就]]和[[截图]]。
+
+== 画廊 ==
+=== 截图 ===
+{{gallery|
+AchievementsMenuBE.png|convert|[[成就]]菜单的Ore UI翻新版本
+Play Menu All Worlds Tab (empty).png|convert|[[选择世界菜单#基岩版|选择世界菜单]]的Ore UI翻新版本
+Ore UI - Play Screen Realms Tab (Bedrock).png|选择世界菜单内Realms标签页的Ore UI翻新版本
+Featured Servers.png|convert|选择世界菜单内服务器标签页的Ore UI翻新版本
+Create new world.png|convert|[[创建新世界#基岩版|创建新世界]]内“通用”标签页的Ore UI翻新版本
+Edit world General.png|convert|编辑世界菜单内“通用”标签页的Ore UI翻新版本
+Ore UI - Sleep Screen Menu (Bedrock).png|convert|在床上入睡屏幕的Ore UI翻新版本
+Bedrock Death Scene 1.20.51.png|在[[生存模式]]和[[冒险模式]]下[[生命#死亡|死亡菜单]]的Ore UI翻新版本
+BE hardcore death screen.png|convert|在[[极限模式]]下死亡后游戏结束菜单的Ore UI翻新版本
+Ore UI - Profile Screen Menu (Bedrock).png|convert|档案菜单的Ore UI翻新版本
+Search for Players Screen Menu BE OreUI.png|convert|convert|搜索玩家界面的Ore UI翻新版本
+Ore UI - Inbox Screen Menu (Bedrock).png|convert|收件箱界面的Ore UI翻新版本
+Ore UI - Settings Touch - Control Mode Screen Menu (Bedrock).png|convert|控制模式屏幕菜单中[[設定|触摸设置]]的Ore UI翻新版本
+Ore UI - Player Permissions Screen Menu (Bedrock).png|convert|玩家权限菜单的Ore UI翻新版本：[[基岩版1.21.70.22]]
+Disconnected Screen BE OreUI.png|convert|断开连接界面的Ore UI翻新版本
+OreUI_Settings_screenshot.jpg|[[设置]]菜单的Ore UI翻新版本
+}}
+
+=== 开发截图 ===
+==== 容器和快捷栏UI ====
+<gallery>
+File:Ore_UI_development_barrel_container.jpg|[[木桶]]界面的预览图<ref name="ore-ui-containers-sneak-peek">{{tweet|xKingDarkYT|1873038637899890855|OreUI versions of the container screens}}</ref>
+File:Ore_UI_development_shulker_box_container.jpg|[[潜影盒]]界面的预览图<ref name="ore-ui-containers-sneak-peek"/>
+File:Ore_UI_development_ender_chest_container.jpg|[[末影箱]]界面的预览图<ref name="ore-ui-containers-sneak-peek"/>
+File:Ore_UI_development_chest_container.jpg|[[箱子]]界面的预览图<ref name="ore-ui-containers-sneak-peek"/>
+File:Ore_UI_development_hotbar.jpg|[[物品栏]]UI的预览图<ref name="ore-ui-hotbar-sneak-peek">{{tweet|xKingDarkYT|1873038723509829786|So far the HUD only has the hotbar.}}</ref>
+</gallery>
+
+==== 成就和世界屏幕UI ====
+<gallery>
+File:OreUI development achievements.jpg|开发中的Ore UI[[成就]]界面
+File:Achieve.png|成就界面的预览图
+File:OreUI development create world 1.png|[[创建新世界]]菜单的预览图，展示了世界缩略图、“创建”按钮和“通用”标签页的一部分
+File:OreUI development create world 2.png|创建新世界菜单的另一个预览图，展示了世界的难度选择控件
+File:OreUI development create world 3.png|创建新世界菜单的预览图，展示了世界资源包列表中的拖拽控件和资源包索引序号
+</gallery>
+
+=== dotJS 2018 ===
+<gallery>
+File:DotJS 2018 Bedrock's UI redesign early prototype.jpg|{{el|bedrock}}标题屏幕UI重新设计的早期原型
+File:DotJS 2018 Bedrock's UI redesign tech preview.png|{{el|bedrock}}标题屏幕UI重新设计的技术预览
+File:dotJS 2018 Bedrock's UI redesign tech preview, improved 2020.jpg|更新于2020年的技术预览改进版，全景图已更新至[[水域更新]]<ref>{{tweet|xKingDarkYT|1650311684630642689|A look at early abandoned designs of the Start Screen (Main Menu)<br>Left image is from 2019<br>Right image is from 2020}}</ref>
+File:DotJS_2018_Bedrock's_UI_redesign_achievement.jpg|{{el|bedrock}}重新设计的[[成就]]UI<ref>{{tweet|xKingDarkTV|1650372641637687296}}</ref>
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 外部链接 ==
+* [https://github.com/Mojang/ore-ui Github]上的Ore UI
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+
+[[Category:UI]]
+
+[[en:Ore UI]]
+[[pt:Ore UI]]

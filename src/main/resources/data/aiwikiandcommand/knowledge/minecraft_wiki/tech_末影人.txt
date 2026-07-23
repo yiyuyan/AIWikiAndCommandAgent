@@ -1,0 +1,574 @@
+# 页面: 末影人
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%AB%E5%BD%B1%E4%BA%BA
+# 分类: Java版独有信息, 下界生物, 使用DynamicPageList4的页面, 使用简单计算器的页面, 基岩版独有信息, 实体, 待更新条目, 敌对生物, 有未知版本的History模板的页面/未知, 末地生物, 需要测试, 需要验证
+# 抓取时间: 2026-07-14 17:28:43
+# 原始 Wikitext 内容:
+
+{{Needs update|部分末影人渲染图使用了旧纹理}}{{for|Minecraft Dungeons中的同名生物|MCD:末影人}}
+{{Infobox entity
+|image1=Enderman.png
+|image1caption={{el|je}}
+|image2=Enderman BE.png
+|image2caption={{el|be}}
+|imagesize=250px
+|image2size=250px
+|invimage=Enderman Spawn Egg
+|health={{hp|40}}
+|behavior=敌对生物
+|damage='''近战攻击：'''<br>{{AutoDmg|7}}
+|size=高度：2.9格<br>宽度：0.6格
+|spawn=见{{slink||生成}}
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{relevant tutorial|末影人陷阱}}
+{{quote|细长的四肢，紫色的眼睛；这比黑夜更黑暗的生物可不是你瞪眼的理想对象。它们通常出现在下界和末地，在主世界较为稀有。而更为稀有的，是曾经与它的眼神接触，然后幸存下来讲述其恐怖经历的玩家。不过我是其中一个。|[[Tom Stone]]<ref name="meet-enderman">{{article|meet-enderman|Meet the Enderman|March 20, 2017}}</ref>||Tom Stone Mojavatar.png}}
+
+'''末影人（Enderman）'''是一种来自[[末地]]、会瞬移的高大黑色敌对生物。
+
+== 生成 ==
+[[File:Purpleenderman 2.png|400px|缩略图|一只在主世界的末影人]]
+末影人会在[[主世界]]亮度等级为0、[[末地]]{{only|be|for=亮度等级为0}}或{{only|je|for=天空光照小于等于15且方块光照等于0}}、[[下界]]亮度等级小于等于7的可生成方块上生成，这使其成为唯一能在3个[[维度]]中自然生成的[[生物]]。
+
+=== 主世界 ===
+末影人会在除[[蘑菇岛]]和[[深暗之域]]之外的所有生物群系的地表或[[洞穴]]里罕见地生成。
+
+=== 下界 ===
+末影人会在[[诡异森林]]频繁生成，还会罕见地生成于[[下界荒地]]和[[灵魂沙峡谷]]。
+
+=== 末地 ===
+末影人会十分频繁地生成于[[末地]]的任何生物群系。
+
+== 掉落物 ==
+{{DropTable|name=Enderman
+|{{DropLine|name=Ender Pearl|quantity=0-1|lootingquantity=0-1}}
+}}
+* {{xp|5}}（当被[[玩家]]或驯服的[[狼]]杀死后）
+* 它手中拿着的[[方块]]（详见[[#移动方块|下文]]）
+
+== 行为 ==
+{{quote|如果你攻击这个生物（容易避免）或者只是注视它（天哪），它就会变得充满敌意。它要冲过来袭击你，满世界地瞬移并且坚持不懈地追踪你，只因你用错误的方式看了它一眼；因此，我们给你一个友好的建议：不要盯着它看。你应该在你的眼皮里纹个记号来时刻提醒自己。日后再谢我们。|[[Tom Stone]]<ref name="meet-enderman"/>||Tom Stone Mojavatar.png}}
+[[File:Enderman Screaming.gif|360px|缩略图|右|愤怒的末影人]]
+
+末影人属于[[敌对生物]]，会阻止附近的玩家使用[[床]]睡觉，但不会主动攻击，只会在被激怒后进行反击（[[山羊]]和[[恶魂]]除外）。
+
+末影人会主动攻击64格内的[[末影螨]]。
+
+末影人可以走上1格高的方块而无需跳跃。
+
+末影人在触碰到[[水]]或[[雨]]时会受到伤害，并且会避免进入水或雨中。但{{in|java}}末影人站在装有水的[[炼药锅]]里时不会受到伤害<ref>{{bug|MC-106813|||Won't Fix}}</ref>。
+
+末影人的眼睛拥有发亮的纹理，在暗处也清楚可见，但不会影响周围方块的实际[[亮度]]。即使末影人处于[[隐身]]状态，它的眼睛仍然是可见的。
+
+{{in|be}}当末影人发现目标时，即使目标处于隐身状态，末影人仍然会继续锁定其位置并攻击目标。
+
+=== 激怒 ===
+末影人受[[玩家]]或除[[恶魂]]和[[山羊]]外的生物的伤害时会被激怒。玩家在64格距离内注视末影人的头部达到{{convert|5}}也会激怒它们。
+
+戴着[[雕刻南瓜]]看末影人不会将其激怒。这一判定基于方块的[[碰撞箱]]（若方块为[[水]]和[[熔岩]]时无视其碰撞），玩家眼睛与末影人头部连线上不存在方块碰撞箱时算作正在注视。
+
+用[[命名牌]]命名為「Dinnerbone」或「Grumm」的終界使者頭部判定位置與命名前相同，不受彩蛋影響。
+
+玩家[[潜行]]或拥有[[隐身]]效果时，注视末影人头部将其激怒的有效距离会缩小。玩家拥有隐身效果时，被末影人探测到的范围取决于所穿盔甲的数量。下表为末影人探测隐身玩家的范围：
+{| class="wikitable"
+|+ 探测隐身玩家的范围
+! 盔甲数量
+! 潜行时
+! 一般情况
+|-
+| 0
+| 3
+| 4
+|-
+| 1
+| 8
+| 11
+|-
+| 2
+| 17
+| 22
+|-
+| 3
+| 26
+| 33
+|-
+| 4
+| 35
+| 44
+|}
+
+因被玩家注视而愤怒的末影人会发出又长又刺耳的示威声。愤怒的末影人会张开嘴巴{{only|je|for=并发抖}}。<ref>{{tweet|notch|113639625364480001|Did some tweaks to the endermen, then ran home. Working on Minecraft again is so much fun!|September 13, 2011}}</ref>末影人优先攻击激怒自己的玩家，此时不会轻易改变自己的目标。
+
+=== 水 ===
+当末影人在因为触碰到[[水]]或者[[雨]]而受伤的时候会立即尝试瞬移。如果下雨时附近没有掩体，末影人会不断在世界中瞬移，直至雨停止、末影人找到掩体或是死亡。
+
+=== 弹射物 ===
+末影人会在各种[[箭]]、[[雪球]]、[[三叉戟]]、[[鸡蛋]]等弹射物即将命中自己时或{{only|je|for=能够影响自己的[[喷溅型伤害药水]]即将破碎时}}立即尝试瞬移，对于其他的喷溅药水与滞留药水（包括[[滞留型伤害药水]]）则不会进行躲避。
+
+喷溅型水瓶、{{only|je|for=滞留型水瓶}}、{{only|be|for=滞留型基础药水形成的[[区域效果云]]}}会对末影人造成{{hp|1}}伤害。
+
+{{in|java}}当避无可避时，弹射物可能会打中末影人，但无论如何，喷溅型与滞留型水瓶之外的弹射物都无法直接击中末影人并造成伤害与击退效果。
+
+=== 瞬移 ===
+空闲时，末影人会随机尝试瞬移，除此之外，它们也会在受到任何伤害时随机尝试瞬移。
+
+被玩家激怒时，末影人会随机尝试瞬移到激怒它的玩家后方一段距离之内，{{only|je|for=但在与其他生物战斗时不会因此瞬移}}。
+
+{{in|je}}末影人被激怒它的玩家注视头部时，如果当前距离该玩家4-16格，它将终止移动并在原地静止，距离小于4格时则会立即瞬移。
+
+站在[[灵魂沙]]上或处于悬空状态的末影人不会随机瞬移，但不影响会让它们立即瞬移的行为。
+
+末影人在瞬移时，每次会选择以原本位置为中心，{{only|je|for=64×64×64}}或{{only|be|for=32×32×32}}的立方体内的随机位置，然后从被选择的位置向下寻找，直至下面的方块是固体方块（这可能导致末影人瞬移后距离玩家过远）。若没有液体或[[固体方块]]阻碍它们站立，瞬移尝试就会成功。因此在目标位置上方需要有至少3个非固体方块。例外的是不在固体方块上面的[[地毯]]和10层及以上的[[雪]]，因为虽然它们会阻碍移动，但并未被认为是阻碍移动的方块。如果在选定的位置下方找不到合适的位置，则此次尝试失败。
+
+末影人被喷溅或滞留型水瓶伤害或被弹射物即将命中时，至多尝试64次瞬移，其余情况下均只尝试1次瞬移。
+
+末影人传送的音效仅会在其目的地播放。<ref>{{bug|MC-94481}}</ref>
+
+末影人在主世界白天、所在位置露天、已无攻击目标{{convert|600}}以上且[[内部光照等级]]≥13时，有<math>P = \frac{11L_i - 120}{225(20 - L_i)}</math>的概率进行瞬移，其中<math>L_i</math>为末影人眼睛所在位置的内部光照等级。
+
+{{in|je}}当末影人在[[矿车]]或[[船]]里尝试瞬移时，它们会在同一刻被拉回矿车或船。即便如此，末影人瞬移出的瞬间若位置恰当仍可以攻击。{{needs testing|是否会触发绊线？}}{{in|be}}末影人在矿车或船里时不会尝试瞬移，此时弹射物可以击中末影人并造成伤害<ref>{{bug|MCPE-189878}}</ref>。
+
+{{in|be}}末影人死亡时也有概率瞬移，但掉落物会留在原地。
+
+=== 移动方块 ===
+<div style='float:right'>{{animate|Enderman Holding.png;Enderman (holding Sand).png;Enderman (holding Cactus).png;Enderman (holding Netherrack).png;Enderman (holding TNT).png;Enderman (holding Dandelion).png|180px}}</div>
+当[[游戏规则]]{{gamerule|mob_griefing|mobGriefing}}为<code>true</code>时，末影人会不声不响地<ref>{{bug|MC-167370|||Invalid}}</ref>从以自身位置为中心向上4×3×4区域内随机搬起方块，这意味着末影人'''无法'''在完全平坦的区域搬起方块。末影人在死亡时会掉落它们手中的方块。
+
+末影人能够搬起下列方块：
+{{columns-list|colwidth=16em|
+* {{BlockLink|Grass Block}}
+* {{BlockLink|Mycelium}}
+* {{BlockLink|Podzol}}
+* {{BlockLink|Dirt}}
+* {{BlockLink|Coarse Dirt}}
+* {{BlockLink|Rooted Dirt}}
+* {{BlockLink|Mud}}
+* {{BlockLink|Muddy Mangrove Roots}}
+* {{BlockLink|Crimson Nylium}}
+* {{BlockLink|Warped Nylium}}
+* {{BlockLink|Sand}}
+* {{BlockLink|Red Sand}}
+* {{BlockLink|Gravel}}
+* {{BlockLink|Clay}}
+* {{BlockLink|Moss Block}}
+* {{BlockLink|Pale Moss Block}}
+* {{BlockLink|TNT}}
+* {{BlockLink|Cactus}}
+* {{BlockLink|Pumpkin}}
+* {{BlockLink|Carved Pumpkin}}
+* {{BlockLink|Melon}}
+* {{BlockLink|Flowers|小型花}}
+* {{BlockLink|Red Mushroom}}
+* {{BlockLink|Brown Mushroom}}
+* {{BlockLink|Crimson Fungus}}
+* {{BlockLink|Warped Fungus}}
+* {{BlockLink|Crimson Roots}}
+* {{BlockLink|Warped Roots}}
+* {{BlockLink|Cactus Flower}}
+}}
+
+{{in|je}}可以通过修改方块标签{{tagLink|blocks|minecraft:enderman_holdable}}来更改末影人可以搬起的方块。
+
+当{{gamerule|mob_griefing|mobGriefing}}为<code>true</code>时，手持方块的末影人会随机在以自身为中心2×2×2的区域内尝试放置它，并且同样不发出任何声音<ref>{{bug|MC-167369|||Invalid}}</ref>。目标位置需要满足以下条件才能放置方块：
+* 目标位置是[[空气]]。
+* 目标位置下方是完整碰撞体积方块，且不是空气或[[基岩]]。
+* 手持的方块在目标位置可以正常存在。
+
+末影人可以在愤怒状态下搬起或放下方块。
+
+手持方块的末影人不会自然消失。<ref name=MC-124812/>
+
+{{in|je}}可通过修改{{code|carriedBlockState}}实体数据生成拿着任意方块的末影人。例如，生成一个拿着{{BlockLink|Netherrack}}的末影人，可使用命令：{{cmd|summon enderman ~ ~ ~ {carriedBlockState:{Name:"netherrack"<nowiki>}}</nowiki>}}
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Enderman idle1.ogg
+|sound2=Enderman idle2.ogg
+|sound3=Enderman idle3.ogg
+|sound4=Enderman idle4.ogg
+|sound5=Enderman idle5.ogg
+|subtitle={{tp|subtitles.entity.enderman.ambient}}
+|description=空闲时随机播放此声音
+|source=敌对生物
+|id=entity.enderman.ambient
+|translationkey=subtitles.entity.enderman.ambient
+}}
+{{Sound table
+|sound=Enderman death.ogg
+|subtitle={{tp|subtitles.entity.enderman.death}}
+|description=死亡
+|source=敌对生物
+|id=entity.enderman.death
+|translationkey=subtitles.entity.enderman.death
+}}
+{{Sound table
+|sound=Enderman hit1.ogg
+|sound2=Enderman hit2.ogg
+|sound3=Enderman hit3.ogg
+|sound4=Enderman hit4.ogg
+|subtitle={{tp|subtitles.entity.enderman.hurt}}
+|description=受伤
+|source=敌对生物
+|id=entity.enderman.hurt
+|translationkey=subtitles.entity.enderman.hurt
+}}
+{{Sound table
+|sound=Enderman stare.ogg
+|subtitle={{tp|subtitles.entity.enderman.stare}}
+|description=末影人被激怒
+|source=敌对生物
+|id=entity.enderman.stare
+|translationkey=subtitles.entity.enderman.stare
+}}
+{{Sound table
+|sound=Enderman scream1.ogg
+|sound2=Enderman scream2.ogg
+|sound3=Enderman scream3.ogg
+|sound4=Enderman scream4.ogg
+|subtitle={{tp|subtitles.entity.enderman.scream}}
+|description=敌对状态下空闲时随机播放此声音
+|source=敌对生物
+|id=entity.enderman.scream
+|translationkey=subtitles.entity.enderman.scream
+}}
+{{Sound table
+|sound=Teleport1.ogg
+|sound2=Teleport2.ogg
+|subtitle={{tp|subtitles.entity.enderman.teleport}}
+|description=瞬移
+|source=敌对生物
+|id=entity.enderman.teleport
+|translationkey=subtitles.entity.enderman.teleport
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=mob.endermen.idle1.wav
+|sound2=mob.endermen.idle2.wav
+|sound3=mob.endermen.idle3.wav
+|sound4=mob.endermen.idle4.wav
+|sound5=mob.endermen.idle5.wav
+|source=敌对生物
+|description=空闲时随机播放此声音
+|id=mob.endermen.idle
+|typeid=ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.endermen.hit1.wav
+|sound2=mob.endermen.hit2.wav
+|sound3=mob.endermen.hit3.wav
+|sound4=mob.endermen.hit4.wav
+|source=敌对生物
+|description=受伤
+|id=mob.endermen.hit
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.endermen.death.wav
+|source=敌对生物
+|description=死亡
+|id=mob.endermen.death
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.endermen.scream1.wav
+|sound2=mob.endermen.scream2.wav
+|sound3=mob.endermen.scream3.wav
+|sound4=mob.endermen.scream4.wav
+|source=敌对生物
+|description=敌对状态下空闲时随机播放此声音
+|id=mob.endermen.scream
+|typeid=mad
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.endermen.stare.wav
+|source=敌对生物
+|description=末影人被激怒
+|id=mob.endermen.stare
+|typeid=stare
+|soundvolume
+|soundpitch=1.0
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Teleport1.ogg
+|sound2=Teleport2.ogg
+|source=敌对生物
+|description=瞬移
+|id=mob.endermen.portal
+|typeid=portal
+|soundvolume
+|soundpitch
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Enderman
+|spritetype=entity
+|nameid=enderman
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Enderman
+|spritetype=entity
+|nameid=enderman
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+末影人有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|Monster-Hunter;it-spreads}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|prefix=adventure|kill_a_mob;kill_all_mobs}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||unknown|起初Notch还在设计末影人的时候觉得这种生物还不够可怕。他觉得应该设计一种玩家想要躲避的情形，令末影人更加可怕。因此Notch加入了“对视”的元素，当玩家用准星指着末影人的脸时会诱发一场紧张的对峙，移开视线则会引来攻击；而末影人的瞬移能力更是不可小视的，所以看末影人的脸将会使玩家承担相应后果。<ref>{{notch|8208212863|The psychology of the reticle and the feeling of control|July 29, 2011}}</ref>|
+据{{w|en:Rooster Teeth Productions|Rooster Teeth Productions}}的{{w|en:Burnie Burns|Burnie Burns}}说，当Notch提到他需要一个杀死一群末影人的方法时，Burnie的儿子建议用[[水]]，于是末影人就有了怕水的弱点。<ref>http://roosterteeth.com/podcast/episode.php?id=132</ref>}}
+|{{HistoryLine||2011年7月28日|link=none|Notch描述说末影人将会很友善，除非你直视它们，这样的话，当你停止凝视时，它们都会冲过来进行攻击<ref>{{tweet|notch|96612584727388160}}</ref><ref>{{tweet|notch|96690003601670145}}</ref><ref>{{tweet|notch|96690477541228544}}</ref><ref>{{tweet|notch|96690925354500096}}</ref>。}}
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=PAX Prime|slink=Java版Beta 1.8 (PAX Prime)|末影人的掉落物为[[钻石]]而非[[末影珍珠]]。}}
+|{{HistoryLine|||dev=pre1|[[File:Enderman JE1.png|20px]] 加入了末影人。此时的末影人拥有搬起'''任何'''[[方块]]的能力，包括[[基岩]]。它们拥有绿色的眼睛以及散发着黑色粒子的身体。}}
+|{{HistoryLine|||dev=pre2|[[File:Enderman JE2.png|64px]] 末影人眼睛的颜色变为紫色。
+|末影人现在有与[[下界传送门]]相同的粒子，而不是黑色的烟雾粒子。
+|末影人不再能够搬起无法获取的方块（如[[基岩]]、[[双层台阶]]、[[刷怪笼]]）或容器方块（如[[箱子]]、[[发射器]]、[[熔炉]]），但仍然能够拾取其他完整方块。}}
+|{{HistoryLine||2011年9月20日|link={{tweet|notch|116186387878920193}}|[[Notch]]表示末影人搬起方块的能力很可怕且需要进行削弱。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|[[箭]]、[[雪球]]和[[鸡蛋]]不再能伤害末影人，因为它们会在其造成伤害前瞬移走。
+|现在处于敌对状态的末影人在接触水后会瞬移走并变回中立状态。}}
+|{{HistoryLine|||dev=Beta 1.9-pre2|末影人不再能搬起所有的方块了。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|Notch说：“现在的末影人很糟糕，因为它们很烦人，也因为我把它们削弱了，把它们设计得太简单了。我会改进这一点。”<ref>{{tweet|notch|118903247212773376}}</ref>
+|末影人现在有{{hp|40}}点生命值而不是{{hp|20}}。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[末地]]，末影人会频繁地该维度生成。<ref name="reddit.com">https://www.reddit.com/r/Minecraft/comments/l3jgm/enderdragons_decrypt_w_rot13_via_notch/c2ph1f1</ref><ref name="ReferenceA">https://www.reddit.com/r/Minecraft/comments/l3jgm/enderdragons_decrypt_w_rot13_via_notch/c2ph3nd</ref>
+|末影人不再会在阳光下[[着火]]。
+|当玩家在白天接近末影人的时候，它们会瞬移离开，从而使非常难以接近去杀死它们。}}
+|{{HistoryLine|||dev=rc1|加入了末影人的声音。在此之前，末影人使用僵尸的声音来暂时代替<!--，在2011年11月13日确实已经做好了末影人的声音方案，最显著的是当玩家凝视着它的时候会发出一个长的呻吟，声音实际上是在说“Hi”或“What's Up”但十分模糊-->。<ref name="reddit.com">https://www.reddit.com/r/Minecraft/comments/l3jgm/enderdragons_decrypt_w_rot13_via_notch/c2ph1f1</ref><ref name="ReferenceA">https://www.reddit.com/r/Minecraft/comments/l3jgm/enderdragons_decrypt_w_rot13_via_notch/c2ph3nd</ref>}}
+|{{HistoryLine||1.3.1|dev=12w22a|修复了末影人在被盯着时不会颤抖和张开大嘴的漏洞。}}
+|{{HistoryLine||1.4.2|dev=12w38a|末影人有了新的音效，现在只要看着它（或者它颤抖地张开大嘴）就会播放一个背景音效，直到其被杀死或恢复为中立。}}
+|{{HistoryLine||1.7.2|dev=1.7-pre|玩家在创造模式攻击末影人不再会激怒它了。}}
+|{{HistoryLine||1.8|dev=14w06a|末影人现在有了一个新的AI寻路系统。}}
+|{{HistoryLine|||dev=14w11a|现在末影人移动快了一点。
+|末影人传送时会生成[[末影螨]]，生成一只的概率为15%。每生成一只末影螨降低1%生成概率。
+|末影人总是与末影螨敌对。}}
+|{{HistoryLine|||dev=14w17a|末影人不再与非由末影珍珠生成的末影螨敌对。}}
+|{{HistoryLine|||dev=14w28a|末影人传送时不再生成末影螨。}}
+|{{HistoryLine||1.9|dev=15w31a|末影人在接触水后会保持与玩家敌对。
+|末影人在死亡时会掉落手中的方块。
+|末影人现在攻击时有动画了。}}
+|{{HistoryLine||1.10|dev=16w20a|末影人可以非常罕见地在[[下界]]生成了。
+|末影人能搬起[[下界岩]]了。}}
+|{{HistoryLine||1.11|dev=16w32a|末影人的实体ID由<code>Enderman</code>更改至<code>enderman</code>。}}
+|{{HistoryLine|||dev=16w35a|[[喷溅型水瓶]]会对末影人造成{{hp|1}}的伤害。}}
+|{{HistoryLine||1.14|dev=19w07a|现在末影人被玩家注视激怒后不再会立即瞬移，而是会先盯住玩家一段时间。<ref>{{bug|MC-71256|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=19w11a|现在末影人会躲避[[烟花火箭]]。<ref>{{bug|MC-144928|||Fixed}}</ref>}}
+|{{HistoryLine||1.14.3|dev=pre3|现在喷溅型水瓶不再对末影人造成伤害。<ref name=MC-166423>{{bug|MC-166423|||Fixed}}</ref>
+|现在末影人被玩家掷出的喷溅型或滞留型药水杀死时会正常掉落经验球。<ref>{{bug|MC-110004|||Fixed}}</ref>}}
+|{{HistoryLine||1.16|dev=20w06a|现在会生成于[[灵魂沙峡谷]]和[[诡异森林]]生物群系。}}
+|{{HistoryLine|||dev=20w07a|末影人不再能够搬起下界岩。
+|现在可以搬起[[菌岩]]、[[菌索]]和[[下界菌]]。}}
+|{{HistoryLine|||dev=20w19a|现在末影人在[[简单]]难度下的[[末地]]也会生成。<ref>{{bug|MC-164205|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=20w22a|现在末影人手持方块时不再会消失。<ref name=MC-124812>{{bug|MC-124812|||Fixed}}</ref>
+|现在末影人会躲避[[凋灵之首]]。<ref>{{bug|MC-178441|||Fixed}}</ref>}}
+|{{HistoryLine||1.16.2|dev=pre1|末影人不再会将搬起的方块放在基岩上。}}
+|{{HistoryLine||1.17|dev=20w46a|现在末影人又会与非由末影珍珠生成的末影螨敌对。
+|末影人现在能够搬起[[缠根泥土]]、[[盛开的杜鹃花丛]]和[[盛开的杜鹃树叶]]。}}
+|{{HistoryLine|||dev=pre1|末影人不再能够搬起盛开的杜鹃花丛和盛开的杜鹃树叶了。}}
+|{{HistoryLine||1.18|dev=exp1|现在末影人只能在[[方块光照]]等级为0的地方自然生成。}}
+|{{HistoryLine|||dev=21w37a|现在喷溅型水瓶又可以对末影人造成伤害了。<ref name=MC-166423/>}}
+|{{HistoryLine||1.19|dev=pre1|现在下界的末影人可以在方块光照等级小于等于11的地方自然生成。}}
+|{{HistoryLine||1.19.3|dev=22w46a|现在下界的末影人在方块光照等级小于等于7的地方才能自然生成。
+|现在末影人死亡时掉落的手持的方块由[[战利品表]]控制。}}
+|{{HistoryLine||1.19.4|dev=pre1|exp=update_1_20|末影人现在能够搬起[[火把花]]。}}
+|{{HistoryLine||1.20|dev=23w12a|1.19.4-pre1中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|dev=24w39a|[[File:Enderman JE3.png|64px]] 现在末影人的眼白由白色调整为紫色，以同步{{el|be}}。<ref>{{bug|MC-123742|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.5|dev=25w10a|末影人现在能够搬起[[仙人掌花]]。}}
+|{{HistoryLine||1.21.9|dev=25w33a|末影人随末地天空光照变化更新了[[寻路]]AI，现在不会趋向移动到暗处。
+|现在末影人可以在末地[[天空光照]]小于等于15且[[方块光照]]等于0的地方自然生成。}}
+|{{HistoryLine||26.1|dev=snapshot-5|现在末影人能够搬起[[金蒲公英]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.9.0|dev=build 1|[[File:Enderman BE1.png|64px]] 加入了末影人。}}
+|{{HistoryLine|||dev=build 2|末影人现在会瞬移躲开[[弹射物]]弹道。}}
+|{{HistoryLine|||dev=build 3|末影人现在有了音效。}}
+|{{HistoryLine|||dev=build 8|更改了末影人的攻击力以匹配{{el|je}}。}}
+|{{HistoryLine||0.12.1|dev=build 10|末影人现在会躲开[[水]]。}}
+|{{HistoryLine||0.14.0|dev=build 1|末影人在死亡时会掉落手中的[[方块]]。}}
+|{{HistoryLine||0.15.0|dev=build 1|末影人可以非常罕见地生成在[[下界]]。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|末影人现在会掉落[[末影珍珠]]了。
+|末影人现在会在[[末地]]生成了。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|末影人在愤怒时不再发抖了。
+|末影人死亡后会掉落它手中的方块。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|末影人现在会生成于[[诡异森林]]生物群系。
+|末影人不再能够搬起下界岩。
+|末影人现在能够搬起[[菌岩]]、[[菌索]]和[[下界菌]]。}}
+|{{HistoryLine|||dev=1.16.0.59|现在会生成于[[灵魂沙峡谷]]生物群系。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.30|现在下界的末影人可以在方块光照等级小于等于10的地方自然生成。}}
+|{{HistoryLine||1.19.30|dev=1.19.30.23|将末影人的瞬移范围改为32×32×32。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.20|将末影人的跟随范围由32格更改至64格。<ref>{{bug|MCPE-35306|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.60|dev=1.19.60.22|现在下界的末影人在方块光照等级小于等于7的地方才能自然生成。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.25|现在末影人会在玩家注视它时正确地延时进入敌对状态。<ref>{{bug|MCPE-23544|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=1.21.60.27|现在末影人无法在[[船]]和[[矿车]]里瞬移。<ref>{{bug|MCPE-31761|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.70|dev=1.21.70.23|末影人现在能够搬起[[仙人掌花]]。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.21|末影人现在能够搬起Java版中能够搬起的所有方块。{{verify|此更改同步了哪些可搬起方块？}}}}
+|{{HistoryLine||26.10|dev=26.10.23|现在末影人能够搬起[[金蒲公英]]。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU5|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Enderman JE2.png|64px]] 加入了末影人。}}
+|{{HistoryLine||xbox=TU14|ps3=1.04|psvita=1.00|ps4=1.00|当被激怒时，末影人会张开它们的嘴巴并发抖。
+|末影人会停在[[玩家]]面前，当玩家试图攻击它的时候会瞬移到玩家后面。}}
+|{{HistoryLine||xbox=TU43|xbone=CU33|ps3=1.36|psvita=1.36|ps4=1.36|wiiu=Patch 13|末影人可以非常罕见地生成在[[下界]]。
+|末影人能搬起[[下界岩]]了。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Enderman BE1.png|64px]] 加入了末影人。}}
+}}
+
+== 你知道吗 ==
+* [[Notch]]公开声称末影人是对“[[wzh:瘦长人|Slenderman]]”（瘦长鬼影）的一个“微妙”的借鉴。它与那个都市传说中的怪物外形很像，并且名字（英文名）也很像。考虑到之后开发的末地（The End），他可能早已想好了Enderman这个名字，而非使用Reddit论坛上的建议。<ref>{{reddit|j09ma/notch_posts_images_of_new_mob|c282dzr}}</ref>
+* 末影人的声音像是修改过的英文语音：
+** 'idle1'听起来像是倒放的“here”。
+** 'idle2'听起来像是倒放的“hiya”。
+** 'idle3'听起来像是降调的“whats up?”或“this way!”。
+** 'idle4'听起来像是降调倒放的“forever!”。
+** 'idle5'听起来像是倒放的“uh oh!”。
+* Dinnerbone说末影人的集合名词是“a haunting of Endermen”（大致意思是“一帮组团闹鬼的末影人”）。<ref>{{Tweet|Dinnerbone|443348580058021888}}</ref>
+** 另外，在[[Minecraft: Story Mode]]第三章「{{SMEp|3}}」中，当Lukas询问末影人的量词时玩家操纵的角色需要正确指定末影人的集合名词“a haunting of Endermen”（游戏内称“一大群阴魂不散的末影人”）的语法顺序，这支持了Dinnerbone的说法。
+* {{in|je}}从[[旁观模式]]进入末影人视角会使屏幕变为负片色调。在末影人视角中，[[末地石]]近似于蓝色的[[圆石]]，[[末地]]的天空是白色的，[[黑曜石柱]]是白色的，其他末影人是带有绿色眼睛的白色生物，[[末影龙]]也是白色的。
+* 如果一个生物与被激怒的末影人距离64-72格（4-4.5个区块），末影人会直接传送至它们身边。
+* 末影人发出的紫色粒子是在代码中硬编码到游戏里的，所以无法通过非Mod手段改变其样式。
+* 末影人眼睛的纹理与其身体的纹理文件是分开的，从而允许它们只有眼睛会发光。
+* 末影人的颌部纹理其实位于它的外层皮肤，正常状态下与内层的头部重叠；被激怒时其头部上移，因而显露出张大的嘴巴。
+** {{in|be}}用{{cmd|playanimation}}命令将末影人的恼怒动画（{{cd|animation.enderman.scary_face}}）应用于[[溺尸]]也会出现同样的效果，使其头部被抽离外层皮肤。
+* 末影人瞬移时看起来像是“高速移动”过去的，但这只是一个动画效果，实际上还是瞬移过去的。
+* 末影人只能被近战或喷溅型水瓶攻击，因为使用其他攻击方式会导致末影人瞬移。
+** 例外的是，当末影人无法瞬移的时候，使用[[弓]]攻击时箭会{{only|for=被弹开|je}}或{{only|for=穿过末影人|be}}。
+* 玩家使用[[末影珍珠]]或[[紫颂果]]瞬移时也会播放末影人的瞬移音效。
+* 由于末影人可以搬起和放置[[雕刻南瓜]]，末影人可能会在无意间建造出[[铁傀儡]]、[[雪傀儡]]或[[铜傀儡]]，但铁傀儡和雪傀儡仍会试图攻击该末影人。
+* {{in|je}}末影人会被末影龙冲撞而伤到，因而被其激怒并试图攻击末影龙，此时如果玩家注视末影人，末影人会短暂地恢复至非敌对状态。
+
+== 画廊 ==
+<gallery>
+File:He be stealing my TNT.png|一间全是TNT的房间里拿着TNT的末影人
+File:Endermeninadesert.png|在沙漠[[生物群系]]中成群的末影人
+File:Three Endermen.png|村庄里的3个末影人
+File:Endermans Attack.png|两个末影人在攻击一个玩家
+File:Front view of Enderman.png|从正面看末影人
+File:Enderman Party.png|末地的末影人
+File:Dandelion Enderman.png|一个末影人拿着一个蒲公英，注意它被缩减成了正常大小的一半
+File:Endermen Glitch.jpg|当末影人抬头向上看玩家的时候，它的眼睛是白色的，这是一个漏洞，于[[24w39a]]修复
+File:InvisibleEndermen.jpg|隐身状态下的末影人
+File:Ender Eye.png|通过末影人的眼睛看末地
+File:NetherEnderman.png|一个自然生成于下界的末影人
+File:Enderman Cactus.png|一个抱着[[仙人掌]]的末影人
+File:Enderman Fishing.png|被钓鱼竿钩住的末影人
+File:Pumpkin Head Inside.png|虽然穿戴雕刻南瓜允许玩家看着末影人，但是它阻挡了视线
+File:Enderman (texture) JE1.png|Notch最初发布的末影人基础纹理文件
+File:Enderman Moving Many Blocks.png|经过一段时间，末影人移动了很多方块
+File:Enderman and endermite.png|一群愤怒的末影人围在末影螨旁边
+</gallery>
+
+=== 旧纹理 ===
+<gallery>
+File:Original enderman screenshot.png|末影人的第一张截图
+File:Tierra ender 1.8.png|[[Java版Beta 1.8]]中一只被攻击的末影人
+File:Cavern1.8.2 ender.png|Java版Beta 1.8中末影人的会发光的眼睛。注意眼睛的颜色是绿色的而不是紫色的
+File:EndermenRedditEnhanced.jpg|官方图像里的两只末影人，右边的那只末影人拿着一个草方块
+File:Enderman trailer.png|在Beta 1.8官方预告片中末影人在攻击镜头
+File:Endermanheight.png|末影人与玩家的身高对比
+File:Beta 1.8-pre enderman.png|正在攻击玩家的2只末影人
+</gallery>
+
+=== 渲染图 ===
+<gallery>
+File:Enderman Screaming.png|{{only|je|for=愤怒的末影人}}
+File:Enderman Screaming BE.png|{{only|be|for=愤怒的末影人}}
+</gallery>
+
+=== 其他媒体 ===
+==== Minecraft: Story Mode ====
+<gallery>
+File:Enderman Story Mode.png|Minecraft: Story Mode中的末影人
+File:Enderman Costume Story Mode.jpg|Jesse穿上了末影人服装
+File:Enderman Water Story Mode.png|末影人在水里受伤
+</gallery>
+
+==== 任天堂明星大乱斗特别版 ====
+<gallery>
+File:Enderman SSBU.png|《任天堂明星大乱斗 特别版》中末影人的渲染图
+</gallery>
+
+==== 其他 ====
+<gallery>
+File:Enderman Mobestiary.jpg|Minecraft生物图鉴中的末影人
+File:Enderman Artwork.png|末影人的官方艺术作品
+File:Enderman Cards.png|末影人面部主题的纸牌
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|Mobs}}
+
+[[Category:敌对生物]]
+[[Category:下界生物]]
+[[Category:末地生物]]
+
+[[cs:Enderman]]
+[[de:Enderman]]
+[[en:Enderman]]
+[[es:Enderman]]
+[[fr:Enderman]]
+[[hu:Enderman]]
+[[it:Enderman]]
+[[ja:エンダーマン]]
+[[ko:엔더맨]]
+[[lzh:終眇使]]
+[[nl:Enderman]]
+[[pl:Enderman]]
+[[pt:Enderman]]
+[[ru:Странник Края]]
+[[tr:Enderman]]
+[[uk:Ендермен]]

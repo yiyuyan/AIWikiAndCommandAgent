@@ -1,0 +1,303 @@
+# 页面: 难度
+# 来源: https://zh.minecraft.wiki/w/%E9%9A%BE%E5%BA%A6
+# 分类: Java版即将到来/26.3, Java版独有信息, 基岩版独有信息, 游戏内容, 需要信息
+# 抓取时间: 2026-07-14 17:38:19
+# 原始 Wikitext 内容:
+
+{{for|Minecraft Dungeons中的“难度”|MCD:难度}}
+[[File:Skeleton_Golden.png|缩略图|350px|在较高难度下，身披盔甲的怪物更加常见]]
+'''难度（Difficulty）'''直接影响了Minecraft游戏的难易程度。其由整个世界全局性的'''世界难度（Difficulty）'''和依赖于特定位置的'''区域难度（Regional difficulty）'''两部分组成。
+
+== 世界难度 ==
+{{Filetr|DifficultyButton.gif|右}}
+
+目前游戏中有四种难度设置：和平、简单、普通、困难。它们可以在[[选项]]中或通过命令{{cmd|difficulty}}更改，{{in|je|nc=1}}还可以在选项中锁定。[[极限模式]]下，[[玩家]]的游戏难度会被锁定为困难。
+
+=== 和平 ===
+{{relevant tutorial|在和平难度中收集资源}}
+不会生成除[[潜影贝]]、{{only|be|for=[[疣猪兽]]}}、[[猪灵]]和[[末影龙]]以外的[[敌对生物]]，并且它们不会攻击玩家（末影龙除外）。使用{{cmd|summon}}命令召唤这些敌对生物会执行失败。使用刷怪蛋生成这些敌对生物时，生物不会生成，{{in|be|nc=1}}若为生存模式，则还会消耗刷怪蛋。生物不会攻击玩家，也无法对玩家造成伤害。玩家的[[生命值]]会随时间恢复，但是受伤速度过快或受到致命伤害时仍可能[[死亡]]。[[饥饿值]]永远不会消耗，即使低于最大值也会快速恢复。{{in|je}}只能食用[[金苹果]]、[[附魔金苹果]]、[[紫颂果]]、[[谜之炖菜]]和[[蜂蜜]]；{{in|be}}所有[[食物]]都可以食用。
+
+尽管[[骆驼尸壳]]、[[骷髅马]]和[[僵尸马]]属于友好生物，但它们不会在和平难度下自然生成，因为它们的生成机制与敌对生物相关。
+
+目前，在大多数情况下，和平难度下不可通关Minecraft，除非使用含已开启的[[末地传送门]]的[[种子（世界生成）|种子]]，否则无法进入[[末地]]。在大多数情况下，杀死[[烈焰人]]从而获得[[烈焰棒]]，合成[[烈焰粉]]并进一步合成[[末影之眼]]是激活末地传送门的必要条件。不过，自然生成的末地传送门中的每个[[末地传送门框架|框架]]都各有10%的概率是已经嵌入末影之眼的，因此有极其微小的概率（10{{^|-12}}）会直接生成已激活的末地传送门，从而允许玩家不获得烈焰棒直接进入末地。在和平难度下[[进度]]或[[成就]]不能被全部达成。
+
+难度为和平且{{gamerule|natural_health_regeneration|naturalRegeneration}}为<code>true</code>时，玩家每{{convert|20}}增加{{hp|1}}生命值。
+
+{{in|je}}难度为和平且{{gamerule|natural_health_regeneration}}为<code>true</code>时，玩家每{{convert|10}}增加{{hunger|1}}饥饿值，且每{{convert|20}}增加1点[[饱和度]]。
+
+{{in|be}}难度为和平时，玩家每{{convert|10}}增加{{hunger|1}}饥饿值。
+
+=== 简单 ===
+会生成敌对生物，不过造成的伤害比普通难度低。饥饿值会消耗，并在耗尽时使玩家的生命值逐渐降至{{hp|10}}。[[洞穴蜘蛛]]和[[蜜蜂]]在简单难度中不会使目标[[中毒|中-{}-毒]]，[[凋灵]]也不会给予玩家[[凋零]]效果，但[[凋灵骷髅]]会给予玩家凋零效果。[[闪电]]只会让击中的方块起火，而不会直接导致周围的方块着火。[[僵尸]]不会将[[村民]]感染为[[僵尸村民]]。
+
+=== 普通 ===
+会生成敌对生物，能造成标准量的伤害。饥饿值会消耗，并在耗尽时使玩家的生命值逐渐降至{{hp|1}}。[[僵尸]]有50%概率将[[村民]]感染为[[僵尸村民]]。
+
+=== 困难 ===
+会生成敌对生物，能造成的伤害比普通难度更高。饥饿值会消耗并在耗尽时让玩家饿死。[[僵尸]]能够破坏[[木门]]及[[铜门]]，且{{in|je|nc=1}}可能在受到攻击时生成[[增援]]僵尸。[[僵尸]]杀死[[村民]]时总是会将其感染为[[僵尸村民]]。{{in|java}}[[蜘蛛]]生成时可能会带有[[迅捷]]、[[力量（状态效果）|力量]]、[[生命恢复]]或[[隐身]]这四种[[效果]]中的一种。
+
+== 区域难度 ==
+[[File:Local Difficulty Debug.png|缩略图|400px|[[调试屏幕]]下显示的区域难度值（对应[[调试选项]]{{cd|local_difficulty}}）]]
+
+区域难度是一个介于0.00和6.75之间的值，基于不同的因素计算得到。这些因素包括当前区块的“占据时间”、在世界里总共游玩的时长、[[月相]]以及当前难度设置。{{in|je}}当前区域难度在[[调试屏幕]]上显示为“Local Difficulty”（本地难度）之后的第一个值。
+
+在本段中：
+* 区块的“占据时间”随着玩家在区块所经过的每一刻而增加。多个玩家的时间会累积起来——如果50个玩家在某区块中度过了1个小时，相当于1个玩家在该区块度过了50个小时。
+* {{in|be}}“占据时间”不存在。
+* 世界的“总时间”指{{cmd|time query daytime}}获取到的值加上调试屏幕上的天数转换为刻的值，即<math>\text{总时间} = \text{天数} \times 24000 + \text{当日时间}</math>，不等同于世界的实际游玩时间（{{cmd|time query gametime}}获取到的值）。
+
+和平难度下，区域难度总为0。下文的“难度”不包含和平难度。
+
+世界的总时间将在第3个游戏日后开始影响区域难度，随后影响逐渐增大，在63个游戏日时不再继续增大影响。游戏将根据该值计算“总时间因子”。总时间大于63个游戏日时，总时间因子为0.25（即与63个游戏日时的总时间因子相同）；小于3个游戏日时，总时间因子为0；不小于3个游戏日但不大于63个游戏日时，<math>\text{总时间因子} = \frac{(\text{总时间刻数} - 72000)}{5760000}</math>。
+
+区块的占据时间对区域难度的影响最多是50个小时。游戏将根据占据时间、月相计算“区块因子”：
+# 困难难度下，如果占据时间大于50个小时，则这一步的值为1，否则为<math>\frac{\text{占据时间刻数}}{3600000}</math>；其他难度下的值为困难难度下的值的{{frac|3|4}}；
+# 将上一步的值加上总时间因子、月亮亮度的{{frac|1|4}}中的较小者，两者相等则加上该相等的值；
+# 简单难度下，最终的值为上一步的值的一半，其他难度下最终的值即为上一步的值。
+
+最后，计算<math>0.75 + \text{总时间因子} + \text{区块因子}</math>，在简单，普通或困难难度下分别将该值保持不变、乘2或乘3，就得到最终的区域难度。
+
+在简单难度中区域难度的范围是0.75–1.5，在普通难度时为1.5–4.0，在困难难度时为2.25–6.75。
+
+=== 副区域难度 ===
+{{Filetr|Regional difficulty to Clamped regional difficulty.png|缩略图|325px|“区域难度”和“副区域难度”的关系}}
+'''副区域难度（Clamped<ref group="注">此处“Clamped”指“值被限定在一个区域内”，即其范围在0.00至1.00之间。</ref> regional difficulty）'''是一个介于0.00和1.00之间的值，基于区域难度计算得到。{{in|je}}当前副区域难度在调试屏幕上显示为“Local Difficulty”之后的第二个值。
+
+设区域难度为<math>R</math>，副区域难度为<math>C</math>，副区域难度与区域难度的关系式为：<math>C = \begin{cases}0.0, & R < 2.0 \\\dfrac{R - 2.0}{2.0}, & 2.0 \leq R \leq 4.0 \\ 1.0, & R > 4.0 \end{cases}</math>
+
+该计算过程的Java代码如下所示，其中<code>RegionalDifficulty</code>代表区域难度的值，<code>value</code>代表副区域难度的值。
+<syntaxhighlight lang="java">
+ if ( RegionalDifficulty < 2.0 ) {
+     value = 0.0;
+ } else if ( RegionalDifficulty > 4.0 ) {
+     value = 1.0;
+ } else {
+     value = ( RegionalDifficulty - 2.0 ) / 2.0;
+ }
+</syntaxhighlight>
+
+因此，在简单难度下，由于区域难度最高为1.5，该值将始终为0；在困难难度下，由于区域难度最低为2.25，该值将至少为0.125；。
+
+在简单难度中区域难度没有影响；普通难度中且满月时在一个区块中游玩21小时将达到最大影响；而困难难度中且满月时在区块中只要游玩{{frac|4|1|6}}小时就能达到最大影响，并且在游玩超过{{frac|16|2|3}}小时时将保持最大影响。
+
+{{in|be}}区域难度不单独使用，仅作为副区域难度计算的中间量使用。
+
+{{in|be}}由于漏洞，在困难难度中，几乎总为1{{info needed|何时不为1？}}；在普通难度中，仅随月相变化，在{{range|0.0|0.25}}之间。
+
+== 影响 ==
+=== 生物伤害 ===
+{{see also|伤害#难度影响}}
+{{:伤害/生物}}
+
+=== 其他效果 ===
+{| class="wikitable col-1-left col-2-left" style="text-align:center" data-description="由于难度因素而导致的不同行为"
+! rowspan="2" | 行为
+! rowspan="2" | 备注
+! colspan="4" | 因素
+|-
+! 世界难度
+! 区域难度（RD）
+! 副区域难度（CRD）
+|-
+| {{hp|1|notag=1}} 生物和爆炸对玩家造成更高伤害
+| 简单：0.5×普通难度下的伤害+{{hp|1}}<br>困难：1.5×普通难度下的伤害
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{EntityLink|guardian}}或[[远古守卫者]]有更高的激光伤害
+| 简单/普通：+{{hp|1}}<ref group="注" name ="守卫者">该伤害在难度伤害计算之后再增加。</ref><br>困难：+{{hp|3}}<ref group="注" name ="守卫者"></ref>
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{EffectSprite|Hunger}} 饥饿更严重地影响生命
+| 简单/普通/困难：饥饿值为{{hunger|0|total=20}}时，生命值最终会降至{{hp|10}}/降至{{hp|1}}/完全耗尽
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{EffectSprite|Raid Omen}} 玩家进入村庄时，身上的不祥之兆转化为袭击之兆
+| 非和平：{{EffectLink|Bad Omen}}会转化为持续30秒的{{EffectLink|Raid Omen}}并将当前方块位置设为袭击位置
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{EffectSprite|Raid Omen}} [[袭击]]的基础波数
+| 简单/普通/困难：袭击至少生成3/5/7波
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{ItemSprite|diamond-helmet}} 生物在生成时可能穿戴更多盔甲
+| 简单/普通：75%/56%/42%概率分别对应2/3/4件盔甲<br>困难：90%/81%/73%概率分别对应2/3/4件盔甲
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{ItemSprite|iron-sword}} 僵尸在生成时更可能持有武器
+| 简单/普通：1%<br>困难：5%
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{ItemSprite|golden-helmet}} {{only|je|short=1|for=僵尸能够产生[[增援]]}}
+| 仅困难
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{ItemSprite|oak-door}} 僵尸更有可能破坏木门或铜门
+| 仅困难，概率：{{only|je|short=1|for=（（9.5×{{tooltip|CRD|副区域难度}}+5）×{{tooltip|CRD|副区域难度}}）%}}或{{only|be|short=1|for=10%}}
+| {{tc|Yes}} || {{tc|No}} || {{tc|Yes}}
+|-
+| {{EntitySprite|zombie-villager}} 村民被僵尸感染成为僵尸村民
+| 简单：0%<br>普通：50%<br>困难：100%
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{EntityLink|zombified-piglin}}更有可能生成在主世界的下界传送门旁边
+| 简单：每随机刻{{frac|1|2000}}<br>普通：每随机刻{{frac|2|2000}}<br>困难：每随机刻{{frac|3|2000}}
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{ItemSprite|Bow}} 骷髅或流浪者使用弓箭攻击的冷却时间
+| 简单/普通：2秒<br>困难：1秒
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{only|je|short=1|for={{EntityLink|Bogged}}使用弓箭攻击的冷却时间}}
+| 简单/普通：3.5秒<br>困难：2.5秒
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{ItemSprite|Arrow}} 骷髅、流浪者或沼骸的“射击误差”数值
+| 简单/普通/困难对应为10/6/2
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{ItemSprite|Arrow}} 受到箭的伤害会稍微增加
+| 简单/普通/困难对应为+0.11/+0.22/+0.33
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{only|je|short=1|for={{EntityLink|Spider}}在生成时更可能带有[[状态效果]]}}
+| 仅困难，概率：（10×{{tooltip|CRD|副区域难度}}）%
+| {{tc|Yes}} || {{tc|No}} || {{tc|Yes}}
+|-
+| {{EntityLink|Cave Spider}}给予的中毒效果持续时间更长
+| 普通/困难：7s/15s
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{EffectSprite|Wither}} 凋灵之首给予的凋零效果持续时间更长
+| 普通/困难：10s/40s
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{BlockLink|wither-rose}}给予生物凋零效果
+| 仅简单/普通/困难
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{BlockLink|wither-skeleton-skull}}生成凋灵
+| 仅简单/普通/困难
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{EntityLink|wither}}在空闲时发射凋灵之首
+| 仅普通/困难
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{only|be|short=1|for={{EntityLink|wither}}生命值低于一半时会生成3-4只凋灵骷髅}}
+| 仅普通/困难
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{EntityLink|lightning-bolt}}会导致火的蔓延，而不仅仅是让击中的方块着火
+| 仅普通/困难
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{BlockLink|Fire}}持续更长时间
+| 在调整火的age，湿度和雨水之前方块围绕火的原先''[[火#可燃方块|引燃几率]]''值在简单/普通/困难下分别+47/+54/+61{{info needed}}
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{ItemSprite|leather-boots}} 在追赶目标时，生物更愿意承受[[摔落]]伤害<ref group="注">如果摔落伤害不会将其生命值降至其上限的33%以下（向上取整至{{hp|1}}），生物就会从高处跳下以追赶目标。在简单和普通难度中，此值还会加上一个基于难度的修正值。这一机制也适用于那些本不会受到摔落伤害的生物。</ref>
+| 简单：33%×最大生命值+{{hp|8}}<br>普通：33%×最大生命值+{{hp|4}}<br>困难：33%×最大生命值
+| {{tc|Yes}} || {{tc|No}} || {{tc|No}}
+|-
+| {{EntitySprite|skeleton-horse}} 雷暴天气更有可能生成[[骷髅陷阱马]]
+| 概率：（{{tooltip|RD|区域难度}}）%
+| {{tc|No}} || {{tc|Yes}} || {{tc|No}}
+|-
+| {{BlockSprite|fire}} [[着火]]的僵尸更有可能使玩家着火，且着火时间更长
+| 概率：（30×{{tooltip|RD|区域难度}}）%，着火时间：2×{{tooltip|RD|区域难度}}秒
+| {{tc|No}} || {{tc|Yes}} || {{tc|No}}
+|-
+| {{EntityLink|Husk}}给予的饥饿效果会持续更长时间
+| {{only|je|short=1|for=7×{{tooltip|RD|区域难度}}秒}}或{{only|be|short=1|for=30秒}}
+| {{tc|No}} || {{tc|Yes}} || {{tc|No}}
+|-
+| {{only|je|short=1|for={{EntityLink|Illusioner}}会导致失明}}
+| 仅在{{tooltip|RD|区域难度}}>2时
+| {{tc|No}} || {{tc|Yes}} || {{tc|No}}
+|-
+| {{EnvSprite|items}} 部分[[亡灵生物]]有能力捡起掉落物
+| （55×{{tooltip|CRD|副区域难度}}）%
+| {{tc|No}} || {{tc|No}} || {{tc|Yes}}
+|-
+| {{EnvSprite|mobs}} 僵尸有更大的追赶范围
+| 如果（随机的＃在0-1.5范围内）×{{tooltip|CRD|副区域难度}}大于1，这成为跟随距离的增幅乘数。{{info needed}}
+| {{tc|No}} || {{tc|No}} || {{tc|Yes}}
+|-
+| {{ItemSprite|golden-helmet}} {{only|je|short=1|for=僵尸更加可能成为“领袖”（得到更多的生命值，更有可能生成增援以及破门）}}
+| 任何所选的僵尸变为“领袖”：（5×{{tooltip|CRD|副区域难度}}）%
+| {{tc|No}} || {{tc|No}} || {{tc|Yes}}
+|-
+| {{ItemSprite|diamond-helmet}} 生物在生成时更可能穿有盔甲
+| 概率：（15×{{tooltip|CRD|副区域难度}}）%
+| {{tc|No}} || {{tc|No}} || {{tc|Yes}}
+|-
+| {{ItemSprite|enchanted-book}} 生物持有的武器更可能附有[[魔咒]]
+| 概率：（25×{{tooltip|CRD|副区域难度}}）%
+| {{tc|No}} || {{tc|No}} || {{tc|Yes}}
+|-
+| {{ItemSprite|enchanted-book}} 生物穿戴的盔甲更可能附有魔咒
+| 每件盔甲的概率：（50×{{tooltip|CRD|副区域难度}}）%
+| {{tc|No}} || {{tc|No}} || {{tc|Yes}}
+|-
+| {{BlockSprite|enchantment-table}} 生物装备的附魔物品将会有更高等级的魔咒
+| 等级：5+18×{{tooltip|CRD|副区域难度}}
+| {{tc|No}} || {{tc|No}} || {{tc|Yes}}
+|-
+| {{EntityLink|slime}}在生成时更有可能出现较大的尺寸
+| 小型：（33×（1-{{tooltip|CRD|副区域难度}}/2））%<br>中型：34%<br>大型：（33×（1+{{tooltip|CRD|副区域难度}}/2））%
+| {{tc|No}} || {{tc|No}} || {{tc|Yes}}
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年6月14日|link={{notch|123343045/my-vision-for-survival}}|[[Notch]]讨论[[生存模式]]将如何引入难度的概念：“在生成新世界或加创造模式世界时，你还可以选择难度。因为我希望游戏很难，所以难度级别可能从“挑战”到“不可能”不等。如果人们觉得总是被挑战并不好玩，我会加入更容易的难度。”}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100205-2241|加入了难度及其选项。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||2010年10月22日|link={{tweet|notch|28442263772}}|[[Notch]]在2010年10月22日发表了一个推特，表示他会“把困难变为现实。最低设置<nowiki>=</nowiki>[[创造]]。最高设置<nowiki>=</nowiki>[[生命|饿死]]”。这从未实现过，不过后来加入了[[极限模式]]。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|加入了极限模式。}}
+|{{HistoryLine||1.8|dev=14w02a|现在每个世界的难度都是独立的。|默认难度从简单改为普通。|每个世界的难度现在可以被锁定，锁定后无法撤消。使用{{cmd|difficulty}}命令仍能改变被锁定的难度。}}
+|{{HistoryLine||1.16|dev=20w17a|现在可以在创建世界时选择难度。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.4.0|加入了和平难度。}}
+|{{HistoryLine||0.12.1|加入了简单和困难难度。}}
+|{{HistoryLine||0.16.0|现在每个世界的难度都是独立的，此前难度是全局的。难度设置从全局设置移到了世界设置。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|difficulty}}命令。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|加入了极限模式。}}
+|{{HistoryLine|||dev=正式版|极限模式在该正式版中不可用。}}
+|{{HistoryLine||1.21.40|极限模式现在在正式版中可用。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|现在游戏难度为和平或简单时，游戏规则{{cd|keepInventory}}的默认值为<code>true</code>。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.23|回退了1.21.50.20中的更改。}}
+}}
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 参见 ==
+* [[生命值]]
+* [[饥饿值]]
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[cs:Obtížnost]]
+[[de:Schwierigkeitsgrad]]
+[[en:Difficulty]]
+[[es:Dificultad]]
+[[fr:Difficulté]]
+[[it:Difficoltà]]
+[[ja:難易度]]
+[[ko:난이도]]
+[[lzh:難易度]]
+[[nl:Niveau]]
+[[pl:Poziomy trudności]]
+[[pt:Dificuldade]]
+[[ru:Сложность]]
+[[th:ระดับความยาก]]
+[[uk:Складність]]

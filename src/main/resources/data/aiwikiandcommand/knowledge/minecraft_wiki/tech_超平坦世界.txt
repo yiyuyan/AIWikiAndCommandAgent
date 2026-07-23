@@ -1,0 +1,363 @@
+# 页面: 超平坦世界
+# 来源: https://zh.minecraft.wiki/w/%E8%B6%85%E5%B9%B3%E5%9D%A6%E4%B8%96%E7%95%8C
+# 分类: Java版独有信息, 世界类型, 基岩版独有信息, 有未知版本的History模板的页面/携带版Alpha, 环境
+# 抓取时间: 2026-07-14 17:36:29
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|预设|方案}}
+[[File:Flatland.png|缩略图|300px|一个超平坦世界]]
+{{relevant tutorial|超平坦世界生存|在超平坦世界中管理史莱姆}}
+'''超平坦（Superflat）'''{{fn|{{in|je}}称为'''超平坦（Superflat）'''，{{in|be}}称为'''平坦（Flat）'''。}}通常指基岩版中的一种[[世界类型]]，或Java版中的一种[[世界预设]]，其会替换掉[[主世界]]普通的多变地形，并生成一层层完全平坦的地形。
+
+{{in|je}}超平坦也可以指维度的生成器类型，使用此生成器类型可以在特定维度中生成出需要的完全平坦的地形。参见[[维度定义格式]]和[[世界预设定义格式]]。
+
+== 组成 ==
+在默认的超平坦世界中，地形由1层[[基岩]]、2层[[泥土]]和1层[[草方块]]构成，世界表面[[高度]]为Y=-60，整个世界都是[[平原]]生物群系。
+* {{in|je}}创建超平坦世界时开启“{{tp|selectWorld.mapFeatures}}”选项，[[村庄]]就会频繁生成，[[要塞]]也会生成；
+* {{in|be}}超平坦世界不会生成任何地物和结构。
+
+在默认的超平坦世界中，除村庄以及其他启用的结构外是完全平坦的。[[实体]]仍会正常生成。由于整个世界的高度偏低，[[史莱姆]]会在史莱姆区块中大量生成。
+
+超平坦世界允许玩家通过一般的方式进入[[下界]]或[[末地]]。下界和末地会像普通世界一样生成地形、结构和地物，不受超平坦世界影响。
+
+== 多人游戏 ==
+{{in|je}}在[[多人游戏]]创建超平坦世界，{{filename|[[server.properties]]}}中的''level-type''必须设为<code>flat</code>而不是默认的<code>default</code>。若需要自定义层数、生物群系和结构，则需要定义用于指定预设的''generator-settings''，其格式为一段JSON文本：
+
+<div class="treeview">
+* {{nbt|compound}}：根对象。
+** {{Nbt inherit/flat generator settings}}
+</div>
+
+{{in|be}}{{filename|[[server.properties]]}}中的''level-type''设为FLAT时会生成超平坦世界。
+
+== 自定义 ==
+[[File:Superflat Button.png|thumb|250px|{{el|je}}中的超平坦世界类型按钮]]
+
+{{in|je}}超平坦生成器默认为一层[[草方块]]、两层泥土和一层基岩，生物群系为[[平原]]，并可以生成村庄和要塞。而这些内容可以被自定义。
+
+当选择“超平坦”世界类型时，其右方的“自定义”按钮会变得可用。在自定义菜单中，共有两个按钮可以自定义超平坦世界，其一为“{{tp|createWorld.customize.flat.removeLayer}}”，用于移除不想要的地层。其二为“{{tp|createWorld.customize.presets}}”，用于填写预设码，或者选择“超平坦世界生成预设”，有九种原版的预设，也可以使用数据包自定义预设，详见[[超平坦世界生成预设]]。注意，默认的超平坦与“{{tp|flat_world_preset.minecraft.classic_flat}}”预设有所不同，默认的超平坦（不使用任何预设）可以生成要塞，而“{{tp|flat_world_preset.minecraft.classic_flat}}”预设中没有要塞。
+
+在预设码框中填写符合{{slink||预设码格式}}的文本可以自定义超平坦世界的模样。
+
+要注意，预设码目前无法完整描述一个超平坦世界生成预设，有关地物和结构的设置不会出现在预设码中。使用预设码和“{{tp|createWorld.customize.flat.removeLayer}}”功能只能保证每层的方块相同，不能保证地物或结构的设置一致。当使用预设码时，有关地物和结构的设置继承了所选中的预设，如果没有选中预设，则默认生成村庄和要塞。例如，如果选中了“{{tp|flat_world_preset.minecraft.classic_flat}}”预设，则只生成村庄。
+
+[[File:Flatworldbe.png|thumb|250px|{{el|be}}中的超平坦世界类型按钮]]
+
+{{in|be}}当选择“平坦”类型时，可以选择“平坦世界预设”。玩家也可以使用外部编辑器在存档的{{filename|[[基岩版存档格式#level.dat|level.dat]]}}文件里更改<code>FlatWorldLayers</code>以自定义平坦世界。
+
+在[[基岩版编辑器]]中，“平坦世界预设”选项不可用。
+{{-}}
+
+=== 原版中的预设 ===
+{| class="wikitable" style="width:100%"
+! width=15%|预设
+! width=15%|地层
+! width=15%|[[生物群系]]
+! width=15%|[[结构]]{{only|je|short=1}}
+! width=5%|生成[[地物]]{{only|je|short=1}}
+! width=5%|生成[[熔岩湖]]{{only|je|short=1}}
+! width=30%|注释
+|-
+| {{InvSprite|Grass Block}}
+{{tp|flat_world_preset.minecraft.classic_flat}}<br><span style="font-size:80%">{{np|flat_world_preset.minecraft.classic_flat}}</span>
+| {{BlockLink|grass block}} ×1<br>{{BlockLink|dirt}} ×2<br>{{BlockLink|bedrock}} ×1
+| {{BiomeLink|plains}}
+| {{EnvLink|Village}}
+| {{tc|no}}
+| {{tc|no}}
+| {{in|je}}与默认（不使用预设）的超平坦有所不同：默认的超平坦可以生成要塞，而此预设中没有要塞。
+|-
+| {{InvSprite|Stone}}
+{{tp|flat_world_preset.minecraft.tunnelers_dream}}<br><span style="font-size:80%">{{np|flat_world_preset.minecraft.tunnelers_dream}}</span>
+| {{BlockLink|Grass Block}} ×1<br>{{BlockLink|Dirt}} ×5<br>{{BlockLink|Stone}} ×230<br>{{BlockLink|Bedrock}} ×1
+| {{BiomeLink|Windswept Hills}}
+| {{EnvLink|Stronghold}}<br>{{EnvLink|Abandoned Mineshaft}}
+| {{tc|yes}}
+| {{tc|yes}}
+|此预设中[[矿石|矿物]]生成的高度与默认世界是相同的。顶部会降雪
+|-
+| {{InvSprite|Water Bucket}}
+{{tp|flat_world_preset.minecraft.water_world}}<br><span style="font-size:80%">{{np|flat_world_preset.minecraft.water_world}}</span>
+| {{BlockLink|Water}} ×90<br>{{BlockLink|Gravel}} ×5<br>{{BlockLink|Dirt}} ×5<br>{{BlockLink|Stone}} ×5<br>{{BlockLink|Deepslate}} ×64<br>{{BlockLink|Bedrock}} ×1
+| {{BiomeLink|Deep Ocean}}
+| {{EnvLink|Ocean Monument}}<br>{{EnvLink|Ocean Ruins}}<br>{{EnvLink|Shipwreck}}
+| {{tc|no}}
+| {{tc|no}}
+| 
+|-
+| {{InvSprite|Grass}}
+{{tp|flat_world_preset.minecraft.overworld}}<br><span style="font-size:80%">{{np|flat_world_preset.minecraft.overworld}}</span>
+| {{BlockLink|Grass Block}} ×1<br>{{BlockLink|Dirt}} ×3<br>{{BlockLink|Stone}} ×59<br>{{BlockLink|Bedrock}} ×1
+| {{BiomeLink|Plains}}
+| {{EnvLink|Pillager Outpost}}<br>{{EnvLink|Stronghold}}<br>{{EnvLink|Village}}<br>{{EnvLink|Abandoned Mineshaft}}<br>{{EnvLink|id=overworld-ruined-portal|Ruined Portal}}
+| {{tc|yes}}
+| {{tc|yes}}
+| 模拟[[Java版1.18|1.18]]前默认[[主世界]]的[[高度]]、[[矿物分布|矿物]]以及地物与结构生成。<ref>{{bug|MC-215423||某些超平坦世界预设设置于1.18更新而言已经过时|Invalid}}</ref>
+|-
+| {{InvSprite|Snow}}
+{{tp|flat_world_preset.minecraft.snowy_kingdom}}<br><span style="font-size:80%">{{np|flat_world_preset.minecraft.snowy_kingdom}}</span>
+| {{BlockLink|Snow}} ×1<br>{{BlockLink|Grass Block}} ×1<br>{{BlockLink|Dirt}} ×3<br>{{BlockLink|Stone}} ×59<br>{{BlockLink|Bedrock}} x1
+| {{BiomeLink|Snowy Plains}}
+| {{EnvLink|Village}}<br>{{EnvLink|Igloo}}
+| {{tc|no}}
+| {{tc|no}}
+|
+|-
+| {{InvSprite|Feather}}
+{{tp|flat_world_preset.minecraft.bottomless_pit}}<br><span style="font-size:80%">{{np|flat_world_preset.minecraft.bottomless_pit}}</span>
+| {{BlockLink|Grass Block}} ×1<br>{{BlockLink|Dirt}} ×3<br>{{BlockLink|Cobblestone}} ×2
+| {{BiomeLink|Plains}}
+| {{EnvLink|Village}}
+| {{tc|no}}
+| {{tc|no}}
+| 底层的基岩被换成了圆石，从而可以在[[生存模式]]中前往虚空。
+|-
+| {{InvSprite|Sand}}
+{{tp|flat_world_preset.minecraft.desert}}<br><span style="font-size:80%">{{np|flat_world_preset.minecraft.desert}}</span>
+| {{BlockLink|Sand}} ×8<br>{{BlockLink|Sandstone}} ×52<br>{{BlockLink|Stone}} ×3<br>{{BlockLink|Bedrock}} ×1
+| {{BiomeLink|Desert}}
+| {{EnvLink|Stronghold}}<br>{{EnvLink|Village}}<br>{{EnvLink|Desert Pyramid}}<br>{{EnvLink|Abandoned Mineshaft}}
+| {{tc|no}}
+| {{tc|yes}}
+| 与默认世界中的沙漠相比，砂岩和石头的层数被对调了。<ref>{{bug|MC-105285||沙漠超平坦预设的砂岩/石头层数被弄混|Invalid}}</ref>
+|-
+| {{InvSprite|Redstone Dust}}
+{{tp|flat_world_preset.minecraft.redstone_ready}}<br><span style="font-size:80%">{{np|flat_world_preset.minecraft.redstone_ready}}</span>
+| {{BlockLink|Sandstone}} ×116<br>{{BlockLink|Stone}} ×3<br>{{BlockLink|Bedrock}} ×1
+| {{BiomeLink|Desert}}
+| 无
+| {{tc|no}}
+| {{tc|no}}
+|
+|-
+| {{InvSprite|Barrier}}
+{{tp|flat_world_preset.minecraft.the_void}}<br><span style="font-size:80%">{{np|flat_world_preset.minecraft.the_void}}</span>
+| {{BlockLink|Air}} ×1
+| {{BiomeLink|The Void}}{{only|je|short=1}}<br/>{{BiomeLink|Plains}}{{only|be|short=1}}
+| 无
+| {{tc|yes}}
+| {{tc|no}}
+| 没有平常的地物和生成结构。玩家会在一个正中心为圆石的33×33[[虚空平台|石头平台]]上生成。
+|}
+
+=== 预设码格式 ===
+{{exclusive|je|section=1}}
+预设码是一个最多1230个字符组成的字符串，由由数字、分号（;）、冒号（:）、逗号（,）、星号（*）和字母组成。目前预设码包含两部分，这两部分之间由分号隔开，按照顺序依次为：
+* '''方块层列表'''；
+** 方块层列表为一份用逗号隔开的[[数据值#方块ID|方块ID]]表，逗号隔开的每一项的格式为<code>-{}-<''层数''>*<''方块的命名空间ID''></code>，代表了一层方块，按照顺序依次从低到高生成。
+*** <code><''层数''></code>可以不存在，此时游戏会视为只有一层。
+*** 每一项之间可以重复，例如<code>minecraft:glass,minecraft:glass,minecraft:glass,minecraft:glass</code>会被游戏视为<code>4*minecraft:glass</code>。
+*** 每一层的方块会在界面上显示为对应的[[方块物品]]。没有方块物品的方块通常会显示为空气，例外为如果方块是水，则显示为水桶；如果方块是熔岩，则显示为熔岩桶。
+** 因为不可能设置方块属性，因而所有拥有方块状态的方块均使用默认的方块状态。<ref name="MC-118624">{{bug|MC-118624}}</ref>
+* '''生物群系'''
+** 生物群系为一个[[数据值#生物群系ID|生物群系的命名空间ID]]，代表此超平坦世界的生物群系。
+
+输入预设码时可以使用空格隔开参数，但游戏加载完数据后会自动去掉所有空格。
+
+尝试使用拼写错误的预设码会使游戏采用默认的经典预设。
+
+==== 预设码示例 ====
+<pre style="word-break:break-all">minecraft:mossy_cobblestone,250*minecraft:air,minecraft:obsidian,minecraft:snow;minecraft:windswept_hills</pre>
+
+它由下列元素组成：
+* <code>minecraft:mossy_cobblestone,250*minecraft:air,minecraft:obsidian,minecraft:snow</code> — 方块层列表部分。
+** <code>minecraft:mossy_cobblestone</code> — 在Y=-64附上一层[[苔石]]。
+** <code>250*minecraft:air</code> — 填充250层的[[空气]]，从Y=-63到186。
+** <code>minecraft:obsidian</code> — 在Y=187添加[[黑曜石]]。
+** <code>minecraft:snow</code> — 在Y=188覆盖一层[[雪]]。
+* <code>minecraft:windswept_hills</code> — 生物群系部分。在本例中为[[风袭丘陵]]。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java pre-Classic}}
+|{{HistoryLine||rd-132211|地形生成从原来的散乱随机地形（展示于[[Cave Game]][{{ytl|NEwKBy3babg}} 技术测试视频]）变成完全平坦。这在多种地形加入后被移除。}}
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.13a|现在地形是平坦的。}}
+|{{HistoryLine||0.0.13a_03<!-- was it this version? or _01 or 2? -->|现在地形恢复为不平坦。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||2012年1月4日|link={{tweet|jeb_|154558535219421186}}|[[Jeb]]宣布了“超平坦世界选项”并分享了其第一张截图。}}
+|{{HistoryLine||1.1|dev=12w01a|加入了超平坦世界类型。}}
+|{{HistoryLine||1.3.1|dev=12w18a|现在游戏会正确处理超平坦世界中玩家的出生点。此前，除非玩家使用[[床]]设置了出生点，否则玩家可能会在看不见此前生成点的地方重生。}}
+|{{HistoryLine|||dev=12w25a|减少了超平坦世界中[[史莱姆]]的生成数量。}}
+|{{HistoryLine||1.4.2|dev=12w36a|向[[level.dat]]中加入了generatorOptions字段，通过修改此字段玩家可以自定义超平坦世界。}}
+|{{HistoryLine||2012年9月10日|link={{tweet|dinnerbone|245142327801290752}}|[[Dinnerbone]]提到他正在为新的自定义特性加入预设。}}
+|{{HistoryLine||1.4.2|dev=12w37a|加入了自定义超平坦界面。
+|加入了7种预设：“经典平坦”“{{tr|挖掘工的梦想|隧道工人的夢想}}”“水世界”“主世界”“{{tr|雪之王国|雪之王國|冰雪王國}}”“无底深渊”和“沙漠”。
+|在此版本中，添加和编辑层的功能尚未完全实现，只有对应的灰色按钮。
+|目前“无底深渊”预设是损坏的。}}
+|{{HistoryLine|||dev=12w39b|修复了“无底深渊”预设。}}
+|{{HistoryLine||2012年10月2日|link={{tweet|dinnerbone|253133589775007744}}|Dinnerbone展示了一张自然生成在超平坦世界的树木的图片。}}
+|{{HistoryLine||1.4.2|dev=12w40a|将超平坦预设码改为“2”。
+|预设码格式由<code>-{}-1;<''方块层列表''>;<''生物群系ID''></code>改为<code>-{}-2;<''方块层列表''>;<''生物群系ID''>;<''地物生成选项''></code>。
+|[[生成结构]]与[[地物]]现在能在超平坦中生成。
+|加入了“{{tr|红石俱备|為紅石準備}}”预设。此预设有52层砂岩、3层石头和1层基岩，不会生成结构，也不会有其他地形特性。
+|重新加入了“添加层”和“编辑层”按钮。}}
+|{{HistoryLine||1.7.2|dev=13w36a|超平坦世界的要塞不再生成在空中。}}
+|{{HistoryLine||1.8|dev=14w08a|将超平坦预设码版本号改为“3”。
+|现在使用命名空间ID而非数字ID来表示每一层的组成方块。<ref>https://mojang.com/2014/02/minecraft-snapshot-14w08a/</ref>
+|方块层的格式由<code>-{}-<''层数''>x<''ID''></code>更改为<code>-{}-<''层数''>*<''ID''></code>。}}
+|{{HistoryLine||1.9|dev=15w37a|加入了“虚空”预设，}}
+|{{HistoryLine||1.13|dev=17w47a|删除了预设码版本号。<ref>{{bug|MC-123228||Superflat generator strings no longer contain generator version|WAI}}</ref>
+|预设码格式由<code>-{}-3;<''方块层列表''>;<''生物群系ID''>;<''地物生成选项''></code>改为<code>-{}-<''方块层列表''>;<''生物群系ID''>;<''地物生成选项''></code>。
+|现在预设码的方块部分只接受命名空间ID，游戏不再尝试将数字ID及对应的数据值转换为对应的方块状态，同步移除了指定特定方块状态的能力。<ref name="MC-118624"></ref>{{note|例如，填写<code>44:13</code>时，游戏自动转换为<code>minecraft:stone_slab:13</code>，此时会放置上半石砖台阶。}}}}
+|{{HistoryLine|||dev=pre5|现在生物群系在预设码中会以命名空间ID表示。}}
+|{{HistoryLine||1.16|dev=20w21a|由于世界生成的更改，预设码现在无法正确配置结构和地物的生成，从预设码中移除了地物生成选项。}}
+|{{HistoryLine||1.17|dev=21w06a|现在超平坦世界现在从Y{{=}}-64开始生成。}}
+|{{HistoryLine|||dev=21w15a|现在超平坦世界再次从Y{{=}}0开始生成，除非使用了[[洞穴与山崖预览数据包]]。}}
+|{{HistoryLine||1.18|dev=21w37a|现在超平坦世界现在又从Y{{=}}-64开始生成。}}
+|{{HistoryLine||1.18.2|dev=22w05a|更改了“红石俱备”预设中砂岩的层数，由原先的52层增加为116层，以解决[[史莱姆]]会在此预设世界中生成的问题。<ref>{{bug|MC-243152|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=22w06a|更改了“水世界”预设，将原先的沙子替换成沙砾，并在基岩层上方增加了64层深板岩，以解决此预设世界中[[海底神殿]]的生成问题。<ref>{{bug|MC-239708|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=22w07a|默认超平坦中现在可以生成[[要塞]]。但“{{tp|flat_world_preset.minecraft.classic_flat}}”预设中依旧不能。}}
+|{{HistoryLine||1.19|dev=22w11a|在数据包中加入了“超平坦世界生成预设”，可以实现自定义显示在{{tp|createWorld.customize.presets}}屏幕的预设。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.9.0|dev=build 1|加入了平坦世界类型，但不能在游戏内自定义生成选项。}}
+|{{HistoryLine|||dev=build 5|通过编辑[[options.txt]]中的{{cd|game_flatworldlayers}}项，玩家可创建自定义平坦世界。<ref>{{tweet|tomcc|479177777103769600|Hey modders, what about sand flatworlds? Hint- this is a thing in the next build: 'game_flatworldlayers:[7, 12,12,12&#93;'|2014年6月18日}}</ref>}}
+|{{HistoryLine||?|通过编辑{{cd|level.dat}}中的{{cd|FlatWorldLayers}}项，玩家可创建自定义平坦世界。}}
+|{{HistoryLine||?|不再可以通过{{cd|options.txt}}自定义平坦世界。}}
+|{{HistoryLine|Bedrock}}
+|{{HistoryLine||1.17.40|exg=caves_and_cliffs|dev=1.17.40.21|现在超平坦世界会从Y{{=}}-64开始生成。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.20|1.17.40.21中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.22|加入了超平坦世界预设功能。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.20|现在雪之王国预设会生成[[雪]]而非[[雪块]]，以匹配{{el|je}}。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.23|加入了虚空预设。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU5|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了超平坦世界类型。
+|不同于其他版本，[[下界]]在超平坦中也是平坦的。}}
+|{{HistoryLine||xbox=TU25|xbone=CU14|ps3=1.17|psvita=1.17|ps4=1.17|加入了超平坦自定义UI。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|加入了平坦世界类型。}}
+}}
+
+=== 地物生成选项 ===
+地物生成选项是一个由逗号隔开的字符串，每一项的格式为<code>-{}-<''地物名称''>(<''参数1''>=<''值''>,...)</code>。例如<code>village(distance=10,size=5)</code>。<code>-{}-<''地物名称''></code>只有下列值对游戏有实际意义：
+
+{| class="wikitable" style="width:100%"
+! 地物生成选项
+! 额外参数
+! 介绍
+! 生物群系
+|-
+| village
+| size<br>distance
+| 决定[[村庄]]能否在特定生物群系里被生成。太大的大小值和太低的距离值会生成许多紧靠在一起的村庄。<br>'''''size''''' 决定村庄大小（默认为1，非超平坦世界为0，最大值为65535）<br>'''''distance''''' 决定村庄距离（最小为9，默认为32）
+| 平原<br>沙漠<br>热带草原<br>针叶林<br>雪原<br>积雪针叶林
+|-
+| mineshaft
+| chance
+| 用于生成[[废弃矿井]]。注意如果没有地形可以覆盖废弃矿井，废弃矿井会生成在空中。<br>'''''chance''''' （0.0-1.0，默认0.01）决定废弃矿道的稀有度。值越高，废弃矿井就越常见。
+| 所有
+|-
+| stronghold
+| count<br>distance<br>spread
+| 决定[[要塞]]能否被生成。<br>'''''distance''''' 决定离出生点和其他要塞的距离（最小为1.0，默认为32.0）。<br>'''''count''''' 决定每个世界生成的数量（默认为3）。<br>'''''spread''''' 决定要塞距离其生成点有多集中（最小为1，默认为3）。数字越小，集中度越低。
+| 所有
+|-
+| biome_1
+| distance
+| 决定[[雪屋]]、[[沙漠神殿]]、[[丛林神庙]]、[[沼泽小屋]]、[[沉船]]、[[海底废墟]]能否生成。<br>'''''distance'''''决定结构之间的距离（最小为9，默认为32）。
+| 所有
+|-
+| decoration
+| 无
+| 决定树木、草、花、南瓜装饰能否在特定生物群系中，在最上层方块适宜的情况下被生成。亦会将高度适宜的石头层用沙砾、泥土和矿石填充。
+| 所有
+|-
+| lake
+| 无
+| 决定湖能否被生成，同时湖周边可能会用沙子和甘蔗装饰。
+| 所有
+|-
+| lava_lake
+| 无
+| 决定熔岩湖及其周围的石头能否被生成。如果在开启熔岩湖的预设中移除了所有的石头层，矿石会在熔岩湖的适当[[高度]]的石头周围生成。
+| 所有
+|-
+| fortress
+| 无
+| 决定[[下界要塞]]能否被生成。
+| 下界
+|-
+| mansion
+| distance
+| 决定[[林地府邸]]能否被生成。
+| 黑森林
+|-
+| oceanmonument
+| spacing<br>separation
+| 决定能否在水中生成[[海底神殿]]。<br>'''''spacing''''' 决定海底神殿所生成的网格的大小，单位为区块（最小是1，默认是32）。<br>'''''separation''''' 决定海底神殿之间的距离，单位为区块。（最小是1，默认是5）。<br>'''警告'''：spacing的值必须大于separation的值，否则游戏会崩溃。
+| 深海<br>温水深海<br>冷水深海<br>冰冻深海
+|-
+| endcity
+| distance
+| 决定[[末地城]]能否被生成。
+| 末地高岛
+|-
+| pillager_outpost
+| 无
+| 决定[[掠夺者前哨站]]能否被生成。
+| 平原<br>沙漠<br>热带草原<br>针叶林<br>积雪针叶林<br>雪原
+|-
+| ruined_portal
+| 无
+| 决定[[废弃传送门]]能否被生成。
+| 所有
+|-
+| bastion_remnant
+| 无
+| 决定[[堡垒遗迹]]能否被生成。
+| 下界荒地<br>绯红森林<br>诡异森林<br>灵魂沙峡谷
+|}
+
+注意一些地物出现之前需要满足一些条件：
+* 生物群系ID必须正确。例如，现有村庄只能够出现在生物群系ID为<code>plains</code>、<code>desert</code>、<code>taiga</code>、<code>savanna</code>、<code>snowy_taiga</code>或<code>snowy_tundra</code>的世界中。
+* 在世界设置中必须打开结构选项（此选项只影响结构地物而不影响普通地物。）
+* 必须有适合地物出现的地形，这适用于除了废弃矿井和要塞之外的大多数地物。
+** 村庄有一部分是例外，它们不会生成在空中，但会在由固体方块组成的一层中生成。
+*** 村庄总是至少在虚空上方2格处生成。
+
+虽然游戏内示例提供了<code>dungeon</code>，但其没有任何用处。
+
+例如，要使超平坦中的“末地”生成黑曜石柱，其生物群系ID必须为<code>the_end</code>，并且表层方块必须是末地石。在这个例子中不需要在世界选项中打开“结构”选项。
+
+== 你知道吗 ==
+* {{in|je}}虚空预设中[[虚空平台|石头平台]]的海拔和经典平坦的地面相同。
+
+== 画廊 ==
+{{gallery|
+Superflat Preset.png|convert|超平坦世界预设选项
+Superflat Customization.png|convert|超平坦世界自定义选项
+SuperflatSlimes.png|[[史莱姆]]出生于超平坦世界
+JebVillageSuperflat.png|[[Jeb]]发布的一个[[村庄]]生成于超平坦世界的图片<ref>{{tweet|jeb_|157390390788489216}}</ref>
+Superflatoverview.png|旧的超平坦世界选项概览
+Superflat Village.png|一个村庄生成于超平坦世界
+SuperflatMap.png|超平坦世界的一张[[地图]]
+Superflatsandy.png|超平坦生成器选项中的其中一种可能
+}}
+
+== 参见 ==
+* [[世界预设]]
+* [[世界类型]]
+* [[Tutorial:超平坦世界生存]]
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[Category:世界类型]]
+
+[[de:Flachland]]
+[[en:Superflat]]
+[[es:Extraplano]]
+[[fr:Monde plat]]
+[[ja:スーパーフラット]]
+[[ko:완전한 평지]]
+[[nl:Supervlak]]
+[[pl:Całkiem płaski]]
+[[pt:Superplano]]
+[[ru:Суперплоскость]]
+[[uk:Надплаский]]

@@ -1,0 +1,169 @@
+# 页面: 计算器/伤害减免
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%A1%E7%AE%97%E5%99%A8/%E4%BC%A4%E5%AE%B3%E5%87%8F%E5%85%8D
+# 分类: 使用简单计算器的页面, 计算器与互动式工具
+# 抓取时间: 2026-07-14 17:36:06
+# 原始 Wikitext 内容:
+
+该工具可以计算不同[[盔甲]]、[[魔咒]]、[[抗性提升]]状态效果对不同[[伤害]]的减免。
+
+<onlyinclude><div style="border: 1px solid #ccc;border-radius: 4px; padding: 1em;">
+{{Simplecalc label|codex=1|label=玩家伤害减免计算器|id=title}}
+<!-- 选择盔甲 -->
+{| class="wikitable"
+|
+{{Simplecalc label|codex=1|label=头盔|id=helmetlabel}}
+<!-- 选择头盔 -->
+{{Simplecalc codex radio|id=helmet0|name=helmettype|label=无头盔|default=1}}
+{{Simplecalc codex radio|id=helmet1|name=helmettype|label=皮革帽子}}
+{{Simplecalc codex radio|id=helmet2|name=helmettype|label=铜头盔}}
+{{Simplecalc codex radio|id=helmet3|name=helmettype|label=金头盔}}
+{{Simplecalc codex radio|id=helmet4|name=helmettype|label=锁链头盔}}
+{{Simplecalc codex radio|id=helmet5|name=helmettype|label=铁头盔}}
+{{Simplecalc codex radio|id=helmet6|name=helmettype|label=钻石头盔}}
+{{Simplecalc codex radio|id=helmet7|name=helmettype|label=下界合金头盔}}
+{{Simplecalc codex radio|id=helmet8|name=helmettype|label=海龟壳}}
+<!-- 选择头盔魔咒 -->
+{{Simplecalc-hideifzero|formula=helmet0-1|block=1|starthidden=1|1=
+{{Simplecalc label|codex=1|label=魔咒|description=等级为0即为无魔咒。|id=helmetenchantlabel}}
+{{Simplecalc codex radio|id=helmetenchant1|name=helmetenchanttype|label=保护}}
+{{Simplecalc codex radio|id=helmetenchant2|name=helmetenchanttype|label=火焰保护}}
+{{Simplecalc codex radio|id=helmetenchant3|name=helmetenchanttype|label=爆炸保护}}
+{{Simplecalc codex radio|id=helmetenchant4|name=helmetenchanttype|label=弹射物保护}}
+魔咒等级：{{Simplecalc|type=range|min=0|max=4|step=1|id=helmetenchantlevel|default=0}} {{Simplecalc|type=plain|formula=helmetenchantlevel|default=0}}
+}}
+<!-- 计算头盔提供的护甲值 -->
+{{Simplecalc|type=hidden|id=helmetarmor|formula=helmet1*1+helmet2*2+helmet3*2+helmet4*2+helmet5*2+helmet6*3+helmet7*3+helmet8*2|default=0}}
+|
+{{Simplecalc label|codex=1|label=胸甲|id=chestplatelabel}}
+<!-- 选择胸甲 -->
+{{Simplecalc codex radio|id=chestplate0|name=chestplatetype|label=无胸甲|default=1}}
+{{Simplecalc codex radio|id=chestplate1|name=chestplatetype|label=皮革外套}}
+{{Simplecalc codex radio|id=chestplate2|name=chestplatetype|label=铜胸甲}}
+{{Simplecalc codex radio|id=chestplate3|name=chestplatetype|label=金胸甲}}
+{{Simplecalc codex radio|id=chestplate4|name=chestplatetype|label=锁链胸甲}}
+{{Simplecalc codex radio|id=chestplate5|name=chestplatetype|label=铁胸甲}}
+{{Simplecalc codex radio|id=chestplate6|name=chestplatetype|label=钻石胸甲}}
+{{Simplecalc codex radio|id=chestplate7|name=chestplatetype|label=下界合金胸甲}}
+<!-- 选择胸甲魔咒 -->
+{{Simplecalc-hideifzero|formula=chestplate0-1|block=1|starthidden=1|1=
+{{Simplecalc label|codex=1|label=魔咒|description=等级为0即为无魔咒。|id=chestplateenchantlabel}}
+{{Simplecalc codex radio|id=chestplateenchant1|name=chestplateenchanttype|label=保护}}
+{{Simplecalc codex radio|id=chestplateenchant2|name=chestplateenchanttype|label=火焰保护}}
+{{Simplecalc codex radio|id=chestplateenchant3|name=chestplateenchanttype|label=爆炸保护}}
+{{Simplecalc codex radio|id=chestplateenchant4|name=chestplateenchanttype|label=弹射物保护}}
+魔咒等级：{{Simplecalc|type=range|min=0|max=4|step=1|id=chestplateenchantlevel|default=0}} {{Simplecalc|type=plain|formula=chestplateenchantlevel|default=0}}
+}}
+<!-- 计算胸甲提供的护甲值 -->
+{{Simplecalc|type=hidden|id=chestplatearmor|formula=chestplate1*3+chestplate2*4+chestplate3*5+chestplate4*5+chestplate5*6+chestplate6*8+chestplate7*8|default=0}}
+|
+{{Simplecalc label|codex=1|label=护腿|id=leggingslabel}}
+<!-- 选择护腿 -->
+{{Simplecalc codex radio|id=leggings0|name=leggingstype|label=无护腿|default=1}}
+{{Simplecalc codex radio|id=leggings1|name=leggingstype|label=皮革裤子}}
+{{Simplecalc codex radio|id=leggings2|name=leggingstype|label=铜护腿}}
+{{Simplecalc codex radio|id=leggings3|name=leggingstype|label=金护腿}}
+{{Simplecalc codex radio|id=leggings4|name=leggingstype|label=锁链护腿}}
+{{Simplecalc codex radio|id=leggings5|name=leggingstype|label=铁护腿}}
+{{Simplecalc codex radio|id=leggings6|name=leggingstype|label=钻石护腿}}
+{{Simplecalc codex radio|id=leggings7|name=leggingstype|label=下界合金护腿}}
+<!-- 选择护腿魔咒 -->
+{{Simplecalc-hideifzero|formula=leggings0-1|block=1|starthidden=1|1=
+{{Simplecalc label|codex=1|label=魔咒|description=等级为0即为无魔咒。|id=leggingsenchantlabel}}
+{{Simplecalc codex radio|id=leggingsenchant1|name=leggingsenchanttype|label=保护}}
+{{Simplecalc codex radio|id=leggingsenchant2|name=leggingsenchanttype|label=火焰保护}}
+{{Simplecalc codex radio|id=leggingsenchant3|name=leggingsenchanttype|label=爆炸保护}}
+{{Simplecalc codex radio|id=leggingsenchant4|name=leggingsenchanttype|label=弹射物保护}}
+魔咒等级：{{Simplecalc|type=range|min=0|max=4|step=1|id=leggingsenchantlevel|default=0}} {{Simplecalc|type=plain|formula=leggingsenchantlevel|default=0}}
+}}
+<!-- 计算护腿提供的护甲值 -->
+{{Simplecalc|type=hidden|id=leggingsarmor|formula=leggings1*2+leggings2*3+leggings3*3+leggings4*4+leggings5*5+leggings6*6+leggings7*6|default=0}}
+|
+{{Simplecalc label|codex=1|label=靴子|id=bootslabel}}
+<!-- 选择靴子 -->
+{{Simplecalc codex radio|id=boots0|name=bootstype|label=无靴子|default=1}}
+{{Simplecalc codex radio|id=boots1|name=bootstype|label=皮革靴子}}
+{{Simplecalc codex radio|id=boots2|name=bootstype|label=铜靴子}}
+{{Simplecalc codex radio|id=boots3|name=bootstype|label=金靴子}}
+{{Simplecalc codex radio|id=boots4|name=bootstype|label=锁链靴子}}
+{{Simplecalc codex radio|id=boots5|name=bootstype|label=铁靴子}}
+{{Simplecalc codex radio|id=boots6|name=bootstype|label=钻石靴子}}
+{{Simplecalc codex radio|id=boots7|name=bootstype|label=下界合金靴子}}
+<!-- 选择靴子魔咒 -->
+{{Simplecalc-hideifzero|formula=boots0-1|block=1|starthidden=1|1=
+{{Simplecalc label|codex=1|label=魔咒|description=等级为0即为无魔咒。|id=bootsenchantlabel}}
+{{Simplecalc codex radio|id=bootsenchant1|name=bootsenchanttype|label=保护}}
+{{Simplecalc codex radio|id=bootsenchant2|name=bootsenchanttype|label=火焰保护}}
+{{Simplecalc codex radio|id=bootsenchant3|name=bootsenchanttype|label=爆炸保护}}
+{{Simplecalc codex radio|id=bootsenchant4|name=bootsenchanttype|label=弹射物保护}}
+保护类魔咒等级：{{Simplecalc|type=range|min=0|max=4|step=1|id=bootsenchantlevel|default=0}} {{Simplecalc|type=plain|formula=bootsenchantlevel|default=0}}
+
+摔落缓冲魔咒等级：{{Simplecalc|type=range|min=0|max=4|step=1|id=bootsenchantlevel2|default=0}} {{Simplecalc|type=plain|formula=bootsenchantlevel2|default=0}}
+}}
+<!-- 计算靴子提供的护甲值 -->
+{{Simplecalc|type=hidden|id=bootsarmor|formula=boots1*1+boots2*1+boots3*1+boots4*1+boots5*2+boots6*3+boots7*3|default=0}}
+|}
+----
+<!-- 这里是计算护甲值、盔甲韧性和魔咒保护系数的地方，读者也可以直接自定义 -->
+{{Simplecalc codex checkbox|id=customizedarmor|label=自定义盔甲属性|default=0}}
+{{Simplecalc-hideifzero|formula=customizedarmor|block=1|starthidden=1|1=
+{{Simplecalc label|codex=1|label=[[护甲值]]|description=该值上限为30，生存模式中只能取得最高{{armor|20}}的护甲值。|id=armorlabel}}<div class="cdx-text-input">{{Simplecalc|type=number|min=0|size=4|id=armorsum|default=0|formula=helmetarmor+chestplatearmor+leggingsarmor+bootsarmor+0*customizedarmor|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+
+{{Simplecalc label|codex=1|label=[[盔甲韧性]]|description=该值上限为20，生存模式中只能取得最高12点的盔甲韧性。|id=toughnesslabel}}<div class="cdx-text-input">{{Simplecalc|type=number|min=0|size=4|id=toughnesssum|default=0|formula=helmet6*2+helmet7*3+chestplate6*2+chestplate7*3+leggings6*2+leggings7*3+boots6*2+boots7*3+0*customizedarmor|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+
+{{Simplecalc label|codex=1|label=[[魔咒保护系数]]（EPF）|description=该值上限为20。|id=epflabel}}
+保护：<div class="cdx-text-input">{{Simplecalc|type=number|min=0|size=4|id=protectionepf|default=0|formula=helmetenchant1*helmetenchantlevel*(1-helmet0)+chestplateenchant1*chestplateenchantlevel*(1-chestplate0)+leggingsenchant1*leggingsenchantlevel*(1-leggings0)+bootsenchant1*bootsenchantlevel*(1-boots0)+0*customizedarmor|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+
+火焰保护：<div class="cdx-text-input">
+{{Simplecalc|type=number|min=0|size=4|id=fireprotectionepf|default=0|formula=(helmetenchant2*helmetenchantlevel*(1-helmet0)+chestplateenchant2*chestplateenchantlevel*(1-chestplate0)+leggingsenchant2*leggingsenchantlevel*(1-leggings0)+bootsenchant2*bootsenchantlevel*(1-boots0))*2+0*customizedarmor|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+
+爆炸保护：<div class="cdx-text-input">
+{{Simplecalc|type=number|min=0|size=4|id=blastprotectionepf|default=0|formula=(helmetenchant3*helmetenchantlevel*(1-helmet0)+chestplateenchant3*chestplateenchantlevel*(1-chestplate0)+leggingsenchant3*leggingsenchantlevel*(1-leggings0)+bootsenchant3*bootsenchantlevel*(1-boots0))*2+0*customizedarmor|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+
+弹射物保护：<div class="cdx-text-input">
+{{Simplecalc|type=number|min=0|size=4|id=projectileprotectionepf|default=0|formula=(helmetenchant4*helmetenchantlevel*(1-helmet0)+chestplateenchant4*chestplateenchantlevel*(1-chestplate0)+leggingsenchant4*leggingsenchantlevel*(1-leggings0)+bootsenchant4*bootsenchantlevel*(1-boots0))*2+0*customizedarmor|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+
+摔落缓冲：<div class="cdx-text-input">
+{{Simplecalc|type=number|min=0|size=4|id=featherfallingepf|default=0|formula=bootsenchantlevel2*(1-boots0)*3+0*customizedarmor|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+}}
+----
+
+{{Simplecalc label|codex=1|label=抗性提升等级|description=效果等级大于等于5级时，伤害会被降低至{{hp|0}}。生存模式中只能取得最高4级的抗性提升。|id=resistancelabel}}
+{{Simplecalc|type=range|min=0|max=5|step=1|id=resistance|default=0}} {{Simplecalc|type=plain|formula=resistance|default=0}}
+
+{{Simplecalc label|codex=1|label=攻击者手持有[[破甲]]魔咒的等级|description=生存模式中只能取得最高4级的破甲魔咒。此处设置为0表示没有破甲魔咒。|id=breachlevel}}
+{{Simplecalc|type=range|min=0|max=4|step=1|id=breach|default=0}} {{Simplecalc|type=plain|formula=breach|default=0}}
+
+{{Simplecalc label|codex=1|label=原始伤害|id=damagelabel}}<div class="cdx-text-input">
+{{Simplecalc|type=number|min=0|id=damage|default=0|class-live=cdx-text-input__input|style=max-width:256px}}</div>
+
+{{Simplecalc label|codex=1|label=伤害来源|id=damagetypelabel}}
+{{Simplecalc codex radio|id=damage0|name=damagetypes|label=除下列项外的所有伤害|default=1}}
+{{Simplecalc codex radio|id=damage1|name=damagetypes|label=[[饥饿]]、[[虚空伤害|虚空]]或{{cmd|kill}}}}
+{{Simplecalc codex radio|id=damage2|name=damagetypes|label=[[监守者]]（远程攻击）}}
+{{Simplecalc codex radio|id=damage3|name=damagetypes|label=[[窒息]]、[[溺水]]、[[魔法伤害|魔法]]、[[动能伤害|动能]]或[[冰冻伤害|冰冻]]}}
+{{Simplecalc codex radio|id=damage4|name=damagetypes|label=[[着火]]}}
+{{Simplecalc codex radio|id=damage5|name=damagetypes|label=[[熔岩]]、[[岩浆块]]或[[小火球]]}}
+{{Simplecalc codex radio|id=damage6|name=damagetypes|label=[[爆炸伤害|爆炸]]}}
+{{Simplecalc codex radio|id=damage7|name=damagetypes|label=[[弹射物伤害|弹射物]]}}
+{{Simplecalc codex radio|id=damage8|name=damagetypes|label=[[摔落伤害|摔落]]}}
+<!-- 计算各情况下减免后的伤害。关于伤害来源对伤害减免的影响，见[[Special:PermanentLink/1086984]] -->
+{{Simplecalc|type=hidden|id=receiveddamage0|formula=damage0*damage*min(1, 1-min(0.8, max(0.008*armorsum, 0.04*armorsum-damage/(50+6.25*toughnesssum)))+0.15*breach)*(1-protectionepf/25)*(1-0.2*resistance)|default=0}}
+{{Simplecalc|type=hidden|id=receiveddamage1|formula=damage1*damage|default=0}}
+{{Simplecalc|type=hidden|id=receiveddamage2|formula=damage2*damage*(1-0.2*resistance)|default=0}}
+{{Simplecalc|type=hidden|id=receiveddamage3|formula=damage3*damage*(1-protectionepf/25)*(1-0.2*resistance)|default=0}}
+{{Simplecalc|type=hidden|id=receiveddamage4|formula=damage4*damage*(1-min(20, protectionepf+fireprotectionepf)/25)*(1-0.2*resistance)|default=0}}
+{{Simplecalc|type=hidden|id=receiveddamage5|formula=damage5*damage*min(1, 1-min(0.8, max(0.008*armorsum, 0.04*armorsum-damage/(50+6.25*toughnesssum)))+0.15*breach)*(1-min(20, protectionepf+fireprotectionepf)/25)*(1-0.2*resistance)|default=0}}
+{{Simplecalc|type=hidden|id=receiveddamage6|formula=damage6*damage*min(1, 1-min(0.8, max(0.008*armorsum, 0.04*armorsum-damage/(50+6.25*toughnesssum)))+0.15*breach)*(1-min(20, protectionepf+blastprotectionepf)/25)*(1-0.2*resistance)|default=0}}
+{{Simplecalc|type=hidden|id=receiveddamage7|formula=damage7*damage*min(1, 1-min(0.8, max(0.008*armorsum, 0.04*armorsum-damage/(50+6.25*toughnesssum)))+0.15*breach)*(1-min(20, protectionepf+projectileprotectionepf)/25)*(1-0.2*resistance)|default=0}}
+{{Simplecalc|type=hidden|id=receiveddamage8|formula=damage8*damage*(1-min(20, protectionepf+featherfallingepf)/25)*(1-0.2*resistance)|default=0}}
+----
+<!-- 选择伤害来源之后，这一项就是1，其他项全为0，所以直接把每种情况的减免后伤害相加即为最终结果 -->
+{{Simplecalc label|codex=1|label=减免后伤害|id=receiveddamagelabel}}
+{{Simplecalc|type=plain|size=4|formula=receiveddamage0+receiveddamage1+receiveddamage2+receiveddamage3+receiveddamage4+receiveddamage5+receiveddamage6+receiveddamage7+receiveddamage8|id=receiveddamage|default=0|decimals=2}}</div></onlyinclude>
+
+== 导航 ==
+{{Navbox calculators}}
+
+[[en:Calculators/Armor protection]]
+[[ko:계산기/피해 감소]]
+[[pt:Calculadoras/Proteção de armadura]]

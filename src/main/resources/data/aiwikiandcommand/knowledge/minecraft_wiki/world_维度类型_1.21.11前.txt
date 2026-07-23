@@ -1,0 +1,227 @@
+# 页面: 维度类型/1.21.11前
+# 来源: https://zh.minecraft.wiki/w/%E7%BB%B4%E5%BA%A6%E7%B1%BB%E5%9E%8B/1.21.11%E5%89%8D
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:26
+# 原始 Wikitext 内容:
+
+{{outdated|edition=java}}
+'''维度类型定义文件'''是'''维度类型（Dimension Type）'''在数据包中的数据驱动定义文件。
+
+== 定义格式 ==
+维度类型在游戏内使用<code>DIMENSION_TYPE</code>注册表，数据包路径为{{filepath|dimension_type}}，即所有维度类型定义文件都需要在{{filepath|data/<''命名空间''>/dimension_type}}目录下定义。
+
+维度类型定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|long|fixed_time}}：若指定本字段，则本维度的时间会固定在此值，详见下文{{slink||fixed_time}}。
+** {{nbt|boolean|has_skylight|required=1}}：维度是否具有天空光照，详见下文{{slink||has_skylight}}。
+** {{nbt|boolean|has_ceiling|required=1}}：维度是否具有天花板，详见下文{{slink||has_ceiling}}。
+** {{nbt|boolean|natural|required=1}}：维度是否是“自然的”，详见下文{{slink||natural}}。
+** {{nbt|boolean|ultrawarm|required=1}}：维度是否是“温暖的”，详见下文{{slink||ultrawarm}}。
+** {{nbt|float|ambient_light|required=1}}：维度的环境光照，用于着色器[[着色器#lightmap|lightmap]]计算。在原版定义下此值应只在0至1之间取值。
+** {{nbt|double|coordinate_scale|required=1}}：（{{interval|left=0.00001|right=30000000.0}}）维度的坐标缩放值，影响下界传送门的传送和{{cmd|execute in ...}}的行为。
+** {{nbt|string|effects}}：（命名空间ID）维度的环境效果，不存在时默认为<code>overworld</code>，可用取值及效果详见下文{{slink||effects}}。
+** {{nbt|string|infiniburn|required=1}}：（[[Java版标签/方块|方块标签]]）维度内[[火]]能在哪些方块上永久燃烧。
+** {{nbt|int|min_y|required=1}}：（{{interval|left=-2032|right=2031}}，必须为16的倍数）维度可以存在方块的最低高度。因值必须为16的倍数，故此字段可用最大值为 2016。
+** {{nbt|int|height|required=1}}：（{{interval|left=16|right=2032 - {{nbt|int|min_y|required=1}}}}，必须为16的倍数）维度可以存在方块的总高度。
+** {{nbt|int|logical_height|required=1}}：（{{interval|left=0|right={{nbt|int|height|required=1}}}}）维度的逻辑高度，[[紫颂果]]的传送和游戏创建的下界传送门不会超过此高度。
+** {{nbt|int|cloud_height}}：（{{interval|left=-2032|right=2031}}）若指定，则此高度为维度的云层。
+** {{nbt|boolean|bed_works|required=1}}：当玩家尝试使用[[床]]时，床是否不会爆炸。
+** {{nbt|boolean|respawn_anchor_works|required=1}}：当玩家尝试使用[[重生锚]]时，重生锚是否不会爆炸。
+** {{nbt|boolean|piglin_safe|required=1}}：维度内的[[猪灵]]和[[疣猪兽]]是否不会僵尸化。
+** {{nbt|boolean|has_raids|required=1}}：维度内是否可以触发[[袭击]]。
+** {{nbt|int|monster_spawn_block_light_limit|required=1}}：（{{interval|left=-0|right=15}}）怪物生成位置的最大方块光照。
+** {{nbt|int}}{{nbt|compound|monster_spawn_light_level|required=1}}：（{{interval|left=-0|right=15}}）怪物生成位置的最大光照。该光照雷雨时为<math>max( internalSkyLight - 10, blockLight )</math>，其他天气时为<math>max( internalSkyLight, blockLight )</math>。
+*** {{nbt inherit/int provider}}
+</div>
+
+== 定义行为 ==
+维度类型仅在服务端启动时加载一次，使用{{cmd|reload}}命令不可以使维度类型定义被重新加载，而必须重启服务端。
+
+维度类型控制了维度内所有与[[世界生成]]无关的效果，包括建筑高度限制、环境效果和部分方块或生物的行为等。
+
+=== 维度行为 ===
+下列为维度类型里较复杂的维度效果，对应的游戏行为均假定已满足其他条件。其余不由维度类型控制的维度行为见{{slink||其他行为}}。
+
+{{nbt|long|fixed_time}}{{anchor|fixed_time}}控制了维度是否有[[昼夜更替]]。若指定本字段，则维度采用固定的时间，且生物的各种需要判断白昼黑夜的机制失效，例如：
+* 玩家在任意游戏时间{{ctrl|使用}}床时均会尝试入睡。
+* [[蜜蜂]]可在任意游戏时间离开蜂巢。
+* [[亡灵生物]]始终不会自燃。
+* [[溺尸]]始终保持敌对状态。
+* [[流浪商人]]不再饮用[[隐身药水]]或[[奶桶]]。
+* [[灾厄巡逻队]]始终可以尝试生成。
+* [[末影人]]始终不会增加随机传送的概率。
+* [[狐狸]]始终不会前往村庄或尝试睡觉。
+* [[僵尸围城]]始终可以尝试生成。
+* 僵尸类生物和骷髅类生物不会尝试躲避阳光。
+
+{{nbt|long|fixed_time}}不会影响游戏时间的流逝。因此它不影响月相更替、村民日程表等依赖游戏时间的游戏行为。
+
+{{nbt|boolean|has_skylight}}{{anchor|has_skylight}}控制了下列行为：
+* 是否存在[[天空光照]]。
+** 同理影响[[阳光探测器]]的工作等。
+* 是否可以生成[[幻翼]]。
+* 是否拥有[[天气]]变化。
+
+{{nbt|boolean|has_ceiling}}{{anchor|has_ceiling}}控制了下列行为：
+* 初始动物生成寻找可生成方块时，其不会在对应的高度图选择方块，而是在对应高度图的高度上向下搜寻到首个上方为空气的非空气方块上选择方块。
+* 玩家是否倾向于生成在Y=64上，而不是生成在最高的方块上。但如果世界是超平坦世界，依然会生成在最顶层。
+* 影响部分[[地图存储格式#地图更新行为|地图更新行为]]。
+* 是否不拥有天气变化。
+
+{{nbt|boolean|ultrawarm}}{{anchor|ultrawarm}}控制了下列行为：
+* [[水桶]]是否不可以放出水。
+** 由流体标签{{TagLink|fluid|water}}控制，即如果熔岩属于此标签则熔岩桶也不能放出熔岩。
+* [[冰]]和[[霜冰]]尝试生成水时是否不可以生成水。
+* [[滴水石锥]]是否不可以转化[[泥巴]]。
+* [[湿海绵]]被放置时是否立刻被蒸干。
+* [[熔岩]]的流动速度、推动实体的速度是否更大。
+* 熔岩的流动距离是否更远。
+* 各种涉及水和熔岩的粒子效果。
+
+{{nbt|boolean|natural}}{{anchor|natural}}控制了下列行为：
+* 玩家是否可以使用床设置重生点并睡觉。
+* [[下界传送门方块]]是否可以生成[[僵尸猪灵]]。
+* [[眼眸花]]（包括盆栽）是否可以转化。
+* [[嘎枝之心]]是否可以生成[[嘎枝]]。
+* [[萤火虫灌木丛]]是否可以生成萤火虫粒子。
+* [[快乐恶魂]]是否可以在云层（{{interval|left={{nbt|int|cloud_height}}|right={{nbt|int|cloud_height}} + 4}}）自然回复生命。
+
+{{nbt|string|effects}}{{anchor|effects}}控制了维度的环境效果，共有3种：
+* <code>overworld</code>具有通常的天空，且天空中会渲染太阳、月亮、星星等天体，昼夜交替时也会渲染红晕。
+* <code>the_nether</code>具有通常的天空，迷雾的渲染距离更近且效果更重，影响环境光照对方块的渲染效果。
+** 渲染影响如下：对于{{nbt|boolean|shade}}为<code>false</code>的方块，顶面和底面亮度降低10%而不是0和50%；对于流体和{{nbt|boolean|shade}}为<code>true</code>的方块，所有面的亮度降低10%，详见{{slink|模型|模型元素}}。
+* <code>the_end</code>具有黑暗的、斑驳的天空，无视生物群系定义的天空颜色。天空每间隔一段时间播放闪光效果。
+
+== 内置维度类型 ==
+游戏本体内置了四种维度类型：
+* <code>overworld</code>：[[主世界]]。
+* <code>the_nether</code>：[[下界]]。
+* <code>the_end</code>：[[末地]]。
+* <code>overworld_caves</code>：主世界洞穴。未被直接使用，只用于先前创建的洞穴世界类型的世界。
+
+以下为各内置维度类型数据的默认值：
+{| class="wikitable"
+! 属性
+! 主世界
+! 下界
+! 末地
+! 主世界洞穴
+|-
+| {{nbt|boolean|ultrawarm}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|no|false}}
+|-
+| {{nbt|boolean|natural}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+|-
+| {{nbt|boolean|piglin_safe}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|no|false}}
+|-
+| {{nbt|boolean|respawn_anchor_works}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|no|false}}
+|-
+| {{nbt|boolean|bed_works}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+|-
+| {{nbt|boolean|has_raids}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|yes|true}}
+|-
+| {{nbt|boolean|has_skylight}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|yes|true}}
+|-
+| {{nbt|boolean|has_ceiling}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+| {{tc|no|false}}
+| {{tc|yes|true}}
+|-
+| {{nbt|double|coordinate_scale}}
+| 1.0
+| 8.0
+| 1.0
+| 1.0
+|-
+| {{nbt|long|fixed_time}}
+| {{tc|unknown|未指定}}
+| 18000
+| 6000
+| {{tc|unknown|未指定}}
+|-
+| {{nbt|float|ambient_light}}
+| 0.0
+| 0.1
+| 0.25
+| 0.0
+|-
+| {{nbt|int|min_y}}
+| -64
+| 0
+| 0
+| -64
+|-
+| {{nbt|int|height}}
+| 384
+| 256
+| 256
+| 384
+|-
+| {{nbt|int|logical_height}}
+| 384
+| 128
+| 256
+| 384
+|-
+| {{nbt|int|cloud_height}}
+| 192
+| 192
+| {{tc|unknown|未指定}}
+| {{tc|unknown|未指定}}
+|-
+| {{nbt|int}}{{nbt|compound|monster_spawn_light_level}}
+| 0-7
+| 7
+| 15
+| 0-7
+|-
+| {{nbt|int|monster_spawn_block_light_limit}}
+| 0
+| 15
+| 0
+| 0
+|-
+| {{nbt|string|infiniburn}}
+| #infiniburn_overworld
+| #infiniburn_nether
+| #infiniburn_end
+| #infiniburn_overworld
+|-
+| {{nbt|string|effects}}
+| overworld
+| the_nether
+| the_end
+| overworld
+|}
+
+[[Category:数据包]]

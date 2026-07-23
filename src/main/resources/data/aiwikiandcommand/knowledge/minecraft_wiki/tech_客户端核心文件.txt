@@ -1,0 +1,171 @@
+# 页面: 客户端核心文件
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:25:19
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+
+'''客户端核心文件'''是游戏客户端的核心代码，控制了游戏的所有行为。
+
+== 获取 ==
+客户端核心文件通常由[[启动器]]在安装某个版本时自动下载，并被放在{{filepath|-{}-<''客户端根目录''>/versions/<''游戏版本''>/<''游戏版本''>.jar}}。本Wiki版本介绍界面右侧的“下载”中的“客户端”链接指向该版本在启动器中使用的下载地址，你可以从此处下载名为{{filepath|client.jar}}的对应版本客户端核心文件。
+
+== 文件结构 ==
+客户端核心文件是一个[[wzh:JAR (文件格式)|JAR文件]]，内部包含了程序所需的类和部分资产文件。按照不同的目录划分，各个文件都有它们的功能：
+* {{filepath|assets/}}目录是原版[[资源包]]，不包含[[散列资源文件]]。
+** {{filepath|assets/.mcassetsroot}}是游戏为识别原版资源包作为标记的文件，内部不包含数据。
+* {{filepath|data/}}目录是原版[[数据包]]。
+** {{filepath|data/.mcassetsroot}}是游戏为识别原版数据包作为标记的文件，内部不包含数据。
+* {{filepath|META-INF/}}目录是JAR文件规范中的元数据，控制JAR文件被执行时的行为。
+** {{filepath|META-INF/MANIFEST.MF}}是清单文件，包含了主类数据和JAR内各个文件的SHA-384散列值。
+** {{filepath|META-INF/MOJANGCS.RSA}}是用于验证JAR的文件，其中包含了Mojang所使用的签名公钥（RSA，2048位）。
+** {{filepath|META-INF/MOJANGCS.SF}}是JAR的签名，内部包含了JAR内所有文件使用Mojang的签名私钥以SHA384withRSA算法计算得到的散列值。
+* {{filepath|flightrecorder-config.jfc}}是[https://openjdk.org/jeps/328 Java Flight Recorder]的配置文件，用于{{cmd|jfr}}的分析。
+* {{filepath|versions.json}}是[[版本信息文件格式|版本信息文件]]，用于记录此核心文件的版本信息。
+* {{filepath|META-INF/LICENSE}}包含游戏的许可协议。内容如下：
+<pre>
+Use of the contents of this archive is subject to the Minecraft End-User License Agreement (EULA) and the Microsoft Services Agreement.
+
+Minecraft EULA: https://aka.ms/MinecraftEULA
+Microsoft Services Agreement: https://www.microsoft.com/msa
+</pre>
+
+客户端核心文件中不包含库文件（如LWJGL库），因此其不能独立启动，必须使用使用如Java的<code>-cp</code>参数包含库文件后才能启动。库文件的列表可通过{{filepath|-{}-<''客户端根目录''>/versions/<''游戏版本''>/<''游戏版本''>.json}}中的“libraries”子项获取，但由于数量繁多，更推荐直接获取运行中的Minecraft的命令行参数，并通过其中的<code>-cp</code>参数获取。
+
+== 启动参数 ==
+
+作为一个JAR文件，Java可以使用此文件运行内部的代码。客户端核心文件有下列可运行的主类：
+* <code>net.minecraft.client.data.Main</code>：客户端[[数据生成器]]程序入口点。
+* <code>net.minecraft.client.main.Main</code>：客户端程序入口点，也是清单文件中定义的主类。游戏客户端使用此类启动。
+* <code>net.minecraft.data.Main</code>：数据生成器程序入口点。
+* <code>net.minecraft.gametest.Main</code>：[[游戏测试#测试服务端|测试服务端]]程序入口点。
+* <code>net.minecraft.server.Main</code>：专用服务端程序入口点。
+
+虽然客户端核心文件主要用于启动客户端，但实际上它有作为专用服务端、数据生成器等能力，客户端核心文件包含服务端核心文件的所有代码。
+
+下列仅介绍'''游戏客户端'''（<code>net.minecraft.client.main.Main</code>）的启动参数，有关于其他启动方式的参数，请见对应条目。
+
+=== 命令行传入参数 ===
+==== 游戏基本参数 ====
+* <code>-{}---assetsDir <''散列资源文件根目录''></code>：设置[[散列资源文件]]的路径。如果此选项不存在游戏以{{filepath|assets/}}作为散列资源文件根目录。
+* <code>-{}---assetsIndex <''资源索引名称''></code>：设置使用指定资源索引的散列资源文件。
+* <code>-{}---gameDir <''客户端根目录''></code>：设置游戏的客户端根目录，影响游戏读取所有游戏文件的路径。如果此选项不存在游戏将以运行目录作为客户端根目录。
+* <code>-{}---resourcePackDir <''资源包根目录''></code>：设置游戏读取可用资源包的路径。如果此选项不存在游戏以{{filepath|resourcepacks/}}作为资源包根目录。
+* <code>-{}---version <''版本名称''></code>：设置游戏在[[调试屏幕]]、崩溃日志和内置服务端中显示的版本。
+* <code>-{}---versionType <''版本类型''></code>：设置游戏在调试屏幕中显示的版本类型，控制[[主菜单]]中显示的版本。如果不存在此选项则为<code>release</code>。如果此选项为<code>release</code>，游戏显示版本时不会附加版本类型显示。
+
+==== 授权与登录选项 ====
+* <code>-{}---accessToken <''访问令牌''></code>：用于登录与验证的访问令牌，此项应由服务器使用[[Mojang API]]的登录流程获取后以此选项传入游戏。如果此选项不存在或者令牌无效，游戏将以离线模式启动。
+* <code>-{}---username <''玩家名称''></code>：设置游戏玩家名称。如果启动时没有设定此选项，则游戏会以<code>-{}-Player<''启动时3位毫秒数''></code>作为玩家名称启动。
+* <code>-{}---userType <''玩家类型''></code>：设置玩家的类型。可以为<code>legacy</code>（早期登录类型）、<code>mojang</code>（Mojang登录）和<code>msa</code>（微软登录），不存在此选项时默认为<code>legacy</code>。如果需要在线模式游戏，必须设置为<code>msa</code>，否则游戏将以离线模式启动。
+* <code>-{}---uuid <''玩家UUID''></code>：设置游戏玩家的UUID，不带连字符。如果启动时没有设定此选项，则游戏会按照离线玩家UUID计算算法自动生成UUID。
+* <code>-{}---clientId <''客户端ID''></code>：用于发送遥测数据的客户端ID。如果启动时没有设定此选项，则游戏在发送遥测数据时不会附加客户端ID数据。
+* <code>-{}---xuid <''玩家ID''></code>：用于发送遥测数据的玩家ID。如果启动时没有设定此选项，则游戏在发送遥测数据时不会附加玩家ID数据。
+
+==== 游戏状态参数 ====
+* <code>--demo</code>：游戏以[[演示模式]]启动。
+* <code>--disableMultiplayer</code>：禁用[[多人游戏]]。在此情况下[[主菜单]]中的多人游戏按钮将被禁用。
+* <code>--disableChat</code>：禁用聊天，玩家将无法打开[[聊天屏幕]]发送消息。
+* <code>--jfrProfile</code>：在游戏启动的同时启动Java Flight Recorder。
+* <code>--tracy</code>：在游戏启动的同时初始化[https://github.com/wolfpld/tracy Tracy]。
+* <code>--tracyNoImages</code>：不将游戏渲染结果截图发送到Tracy Profiler。
+
+==== 显示参数 ====
+* <code>--fullscreen</code>：游戏将以全屏模式启动。
+* <code>-{}---fullscreenHeight <''纵向分辨率''></code>：设置游戏在全屏模式下纵向分辨率。
+* <code>-{}---fullscreenWidth <''横向分辨率''></code>：设置游戏在全屏模式下横向分辨率。
+* <code>-{}---height <''高度''></code>：游戏窗口高度。如果此选项不存在则为480。
+* <code>-{}---width <''宽度''></code>：游戏窗口宽度。如果此选项不存在则为854。
+
+==== 渲染调试参数 ====
+* <code>--renderDebugLabels</code>：为游戏渲染时使用的缓冲、纹理、着色器等对象添加调试标签。
+** 如果使用OpenGL渲染后端，则需要当前上下文中支持[https://registry.khronos.org/OpenGL/extensions/KHR/KHR_debug.txt GL_KHR_debug]或[https://registry.khronos.org/OpenGL/extensions/ARB/ARB_debug_output.txt GL_ARB_debug_output]扩展时才可生效。
+** 如果使用Vulkan渲染后端，则需要当前上下文中支持[https://docs.vulkan.org/refpages/latest/refpages/source/VK_EXT_debug_utils.html VK_EXT_debug_utils]扩展时才可生效。
+** 此选项在下列情况下默认自动开启，无法关闭：
+*** 使用Vulkan渲染后端，且使用<code>--vulkanValidation</code>启动参数。
+*** 使用Vulkan渲染后端，且程序环境变量<code>ENABLE_VULKAN_RENDERDOC_CAPTURE</code>为1。此环境变量通常被用于[https://renderdoc.org/docs/behind_scenes/vulkan_support.html RenderDoc]调试Vulkan渲染。
+* <code>-{}---graphicsBackend <''渲染后端''></code>：设置游戏使用的渲染后端。可选值包括<code>default</code>（优先使用Vulkan）、<code>opengl</code>（优先使用OpenGL）和<code>vulkan</code>（与<code>default</code>一致）。此参数优先级高于选项中的渲染后端设置。
+* <code>--vulkanValidation</code>：启用[https://github.com/KhronosGroup/Vulkan-ValidationLayers Vulkan校验层]。此选项仅在Vulkan作为渲染后端时有效，且需要当前上下文中支持[https://vulkan.lunarg.com/doc/view/latest/windows/khronos_validation_layer.html VK_LAYER_KHRONOS_validation]层。
+
+==== 快速进入游戏设置 ====
+* <code>-{}---quickPlayPath <''日志路径''></code>：设置[[快速进入游戏]]日志的路径。如果此项不存在游戏就不会记录快速进入游戏日志。
+* <code>-{}---quickPlaySingleplayer <''存档名称''></code>：游戏在启动时立刻加载指定存档进入对应世界。
+* <code>-{}---quickPlayMultiplayer <''名称或地址''></code>：游戏在启动时立刻尝试加入指定的服务器。此选项可以指定[[服务器列表]]内已经存在的服务器名称，也可以直接写服务器地址。
+* <code>-{}---quickPlayRealms <''号码''></code>：游戏在启动时立刻尝试加入指定的Realms服务器。
+
+如果上述3个快速进入游戏参数不止存在一个，那么游戏优先读取<code>--quickPlaySingleplayer</code>，然后是<code>--quickPlayMultiplayer</code>，最后读取<code>--quickPlayRealms</code>。
+
+==== 代理设置 ====
+* <code>-{}---proxyHost <''主机''></code>：设置SOCKS代理的主机。如果此项不存在游戏不会设置代理。
+* <code>-{}---proxyPort <''端口''></code>：设置SOCKS代理的端口。如果此项不存在游戏默认为8080。
+* <code>-{}---proxyUser <''用户名''></code>：设置SOCKS代理的用户名。
+* <code>-{}---proxyPass <''密码''></code>：设置SOCKS代理的密码。此项与用户名同时存在时游戏才会使用此数据。
+
+==== 无作用选项 ====
+如果启动参数内有未识别的选项，游戏会在日志中产生下列警告：
+
+<pre>
+-{}-Completely ignored arguments: <未识别的选项>
+</pre>
+
+下列参数虽然对游戏本身不起到任何作用，但游戏会读取这些选项，且不产生警告：
+* <code>--checkGlErrors</code>
+* <code>-{}---profileProperties <''属性映射JSON''></code>
+* <code>-{}---userProperties <''属性映射JSON''></code>
+
+=== 系统属性 ===
+系统属性是Java提供的一种机制，游戏可以读取这些属性。在启动时，这些属性使用JVM选项传入，格式为<code>-{}--D<''系统属性名''>=<''值''></code>。
+
+下列为与游戏本身有强关联的系统属性：
+* <code>log4j.configurationFile</code>：游戏日志使用的配置文件。此项由启动器从资源服务器下载后，传入游戏启动参数内。
+* <code>max.bg.threads</code>：最大后台线程数，用于控制各种并发任务的并行数量，默认为255。此值必须在1-255之间，否则游戏将在日志中报错，并将此值视为255。
+* <code>minecraft.launcher.brand</code>：启动器铭牌。
+* <code>realms.environment</code>：Realms运行环境。可以为<code>production</code>（生产环境，默认）、<code>stage/staging</code>和<code>local</code>（本地测试环境）。
+* <code>SuffixArray.printComparisons</code>：仅供游戏调试，用于游戏搜索名称机制。
+* <code>SuffixArray.printArray</code>：仅供游戏调试，用于游戏搜索名称机制。
+
+==== 调试工具 ====
+这些系统属性系游戏本体的调试工具。
+
+* <code>MC_DEBUG_ENABLED</code>：是否启用调试工具。
+* <code>MC_DEBUG_PRINT_PROPERTIES</code>：若指定，则在游戏日志输出所有调试工具的系统属性。
+
+可用的系统属性参见[[调试工具]]。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w21a|加入了<code>--disableMultiplayer</code>和<code>--disableChat</code>启动参数。}}
+|{{HistoryLine|||dev=pre1|加入了<code>--dataPackDir</code>启动参数。}}
+|{{HistoryLine||1.17|dev=21w14a|移除了<code>--dataPackDir</code>启动参数。}}
+|{{HistoryLine||1.18|dev=21w37a|加入了<code>--jfrProfile</code>启动参数。}}
+|{{HistoryLine|||dev=21w38a|加入了<code>max.bg.threads</code>系统属性调整最大后台线程数。
+|加入了<code>--xuid</code>和<code>--clientId</code>启动参数。}}
+|{{HistoryLine||1.20|dev=23w14a|移除了<code>--server</code>和<code>--port</code>启动参数，改用快速进入游戏功能替代。}}
+|{{HistoryLine||1.21.2|dev=24w37a|加入了<code>--tracy</code>和<code>--tracyNoImages</code>启动参数。}}
+|{{HistoryLine||1.21.4|dev=24w45a|加入了客户端数据生成器主类。}}
+|{{HistoryLine||1.21.5|dev=25w03a|加入了测试服务端主类。}}
+|{{HistoryLine||1.21.6|dev=25w19a|现在<code>--quickPlaySingleplayer</code>启动参数可以不指定存档名称，此时会启动上次游玩的世界。}}
+|{{HistoryLine||1.21.9|dev=25w37a|加入了调试工具相关的系统属性。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了<code>--vulkanValidation</code>启动参数。}}
+|{{HistoryLine|||dev=snapshot-2|加入了<code>--graphicsBackend</code>启动参数。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Minecraft.jar]]
+[[en:Client.jar]]
+[[es:Client.jar]]
+[[fr:Client.jar]]
+[[it:Client.jar]]
+[[ja:Client.jar]]
+[[ko:Client.jar]]
+[[nl:Minecraft.jar]]
+[[pl:Minecraft.jar]]
+[[pt:client.jar]]
+[[ru:Client.jar]]
+[[uk:client.jar]]

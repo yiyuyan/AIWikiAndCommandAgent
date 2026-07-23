@@ -1,0 +1,93 @@
+# 页面: 调试棒
+# 来源: https://zh.minecraft.wiki/w/%E8%B0%83%E8%AF%95%E6%A3%92
+# 分类: Java版独有信息, 不可再生资源, 基岩版独有信息, 物品
+# 抓取时间: 2026-07-14 17:36:24
+# 原始 Wikitext 内容:
+
+{{Infobox item
+|image=Debug Stick.gif
+|invimage=Debug Stick
+}}
+
+'''调试棒（Debug Stick）'''是一个用于修改[[方块]]的[[方块状态]]的[[物品]]，它的外观是一个有[[光效]]的[[木棍]]。
+
+{{in|be}}调试棒在公开零售版本中不存在，它只在[[基岩版#开发者版本|开发者版本]]中存在。
+
+== 获取 ==
+{{see also|Tutorial:获取任意物品}}
+调试棒无法在未开启[[作弊]]的[[生存模式]]的世界中获取。使用[[创造模式]]或启用[[作弊]]，调试棒可以通过{{only|for=[[创造模式物品栏]]（需要启用“{{tp|options.operatorItemsTab}}”，或“{{tp|itemGroup.hotbar}}”中有调试棒）|JE}}或[[命令]]等方式获得。
+
+== 用途 ==
+调试棒能被用于调整方块状态。对[[方块]]{{control|敲击}}可以指定所想要更改的方块状态。例如，可以为[[命令方块]]修改<code>conditional</code>与<code>facing</code>这两个方块状态。对[[方块]]{{control|使用}}将循环改变指定的方块状态。例如，如果选择了<code>facing</code>这个方块状态，可以让[[命令方块]]朝向<code>north</code>（北）、<code>south</code>（南）、<code>east</code>（东）或<code>west</code>（西）。{{control|潜行}}点击将会使它反向循环。
+
+对于可交互的方块（如[[箱子]]、[[拉杆]]、[[蛋糕]]、[[告示牌]]等），{{control|使用}}调试棒并不会改变其方块状态，而是直接使用该方块，除非玩家是在{{control|潜行}}点击。<ref>{{bug|MC-200199|||Invalid}}</ref>
+
+调试棒在[[生存模式]]和[[冒险模式]]下不会发挥作用，但使用时仍会播放交互动画。
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Debug Stick
+|spritetype=item
+|nameid=debug_stick
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Debug Stick
+|spritetype=item
+|nameid=debug_stick
+|foot=1}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+在默认组件的基础上，调试棒使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt transclude|编码格式/DataComponent|codec_debug_stick_state_component}}
+</div>
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=17w47a|[[File:Debug Stick.gif|32px]] 加入了调试棒。}}
+|{{HistoryLine||1.16|dev=20w10a|由于[[火]]现在有判定箱，现在可以用调试棒调整火。}}
+|{{HistoryLine||1.19.3|dev=22w44a|现在调试棒可从创造模式物品栏中获取。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.14.0|dev=1.14.0.1|[[File:Debug Stick.gif|32px]] 加入了调试棒，但只在开发者版本中可以获取并使用。}}
+}}
+
+== 你知道吗 ==
+* 玩家和一些人-{}-形生物手持长条状物品（调试棒、[[木棍]]、[[骨头]]、[[竹子]]、[[烈焰棒]]、[[旋风棒]]）的方式和手持工具类似。
+
+== 参考 ==
+{{Reflist}}
+
+== 参见 ==
+* [[方块状态]]
+
+== 导航 ==
+{{Navbox items|Others}}
+
+[[de:Debug-Stab]]
+[[en:Debug Stick]]
+[[es:Palo de desarrollo]]
+[[fr:Bâton de débogage]]
+[[ja:デバッグ棒]]
+[[ko:디버그 막대기]]
+[[lzh:勘誤棍]]
+[[pl:Patyk debugujący]]
+[[pt:Graveto de Depuração]]
+[[ru:Палка отладки]]
+[[uk:Палиця налагодження]]

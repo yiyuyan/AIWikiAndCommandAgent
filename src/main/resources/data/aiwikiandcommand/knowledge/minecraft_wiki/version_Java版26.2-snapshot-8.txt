@@ -1,0 +1,122 @@
+# 页面: Java版26.2-snapshot-8
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8826.2-snapshot-8
+# 分类: Java版26.2快照
+# 抓取时间: 2026-07-14 17:14:42
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=26.2-snapshot-8
+|image=26.2-snapshot-8.jpg
+|image2=Java Edition 26.2-snapshot-8 Simplified.png\Java Edition 26.2-snapshot-8 Traditional.png\Java Edition 26.2-snapshot-8 Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2026年5月19日
+|jsonhash=025fe805f5cd551ba502766eebe54025593196ba
+|clienthash=0bcaab1cb9c287ee8003f1c5e84fc11d05ff5ce0
+|serverhash=63a80c132f2270af2f43161db596fce69e3e5339
+|parent=26.2
+|prevparent=26.1.2
+|prev=26.2-snapshot-7
+|next=26.2-pre-1
+|nextparent=26.3
+}}<onlyinclude>
+
+'''26.2-snapshot-8'''是[[Java版26.2]]的第8个，也是最后一个快照，发布于2026年5月19日<ref>{{article|minecraft-26-2-snapshot-8|Minecraft 26.2 Snapshot 8|May 19, 2026}}</ref>，修复了一些漏洞。
+
+== 新内容 ==
+=== 游戏内容 ===
+'''[[伤害类型]]'''
+* 加入了伤害类型<code>minecraft:sulfur_cube_hot</code>，用于接触吸收了[[岩浆块]]的硫方怪以产生新的[[死亡消息]]。
+
+=== 命令格式 ===
+'''{{cmd|unpublish}}'''
+* 如果当前为集成服务端，则取消开放世界。
+
+== 更改 ==
+=== 方块 ===
+'''[[床]]'''
+* 将弹性从66%提高至75%，以匹配{{el|be}}。
+
+=== 生物 ===
+'''[[硫方怪]]'''
+* 现在吸收了方块的硫方怪会免疫接触[[岩浆块]]或其他吸收了岩浆块的硫方怪造成的伤害，以匹配{{el|be}}。
+
+'''[[狐狸]]'''
+* 更改了幼年白色狐狸睡觉时的纹理，以匹配成年个体。
+
+=== 世界生成 ===
+'''[[硫磺洞穴]]'''
+* 现在在地表生成的硫磺洞穴拥有在地下生成的硫磺洞穴的所有地物。
+
+=== 命令格式 ===
+'''{{cmd|publish}}'''
+* {{cmd|publish|link=none}}命令现在还需要一个额外的布尔参数，用来指定服务器是开放在线多人游戏还是本地多人游戏。
+** 默认值：<code>true</code>（在线多人）
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>106.0</code>。
+
+'''图形API'''
+* 现在默认使用OpenGL图形API。
+
+'''[[选项]]'''
+* 更改了“图形API”视频设置。
+** “优先使用Vulkan”选项现在被标记为“实验性”。
+*** 如果愿意，仍然可以使用此选项。它在大多数常见系统上运行良好，但在某些其他系统上可能会降低性能或导致不稳定。
+** “默认”选项现在会使用OpenGL。
+** 所有玩家的此项设置都将被重置为“默认”。
+
+== 修复 ==
+{{fixes|fixedin=26.2 Snapshot 8|showdesc=1|new=1
+|;26.2前正式版的漏洞
+|306673|睡觉状态幼年白色狐狸的眼睛颜色与成年狐狸的不一致。
+|306738|有时方块在被破坏后仍然会在视觉上留在原地。
+|306750|幼年嗅探兽的纹理包含未使用的像素。
+|306962|{{tr|截图|擷取螢幕畫面|截圖}}的绑定按键设置为鼠标按键时不会运作。
+|307212|幼年溺尸右臂底部的纹理有一条颜色有误的像素。
+|307833|有特定交易集的村民升级时，世界冻结。
+|;dev
+|307363|幼年疣猪兽身上的鬃毛不再会在两侧同时出现。
+|307899|向纹理图集添加较大的动态纹理可能会导致Vulkan渲染后端耗尽内存。
+|307911|死于吸收了岩浆块的硫方怪产生的死亡消息是“<玩家>{{tr|发现了地板是熔岩做的|察覺地面是片熔岩|發現地板是熔巖}}”。
+|;prev
+|308035|邻近方块的站立的告示牌现在有一个额外的暗面。
+|308047|{{cd|Friends service forbidden (403) — user may lack an active profile}}
+|308048|{{cd|options.inGameNotification}}字符串没有正确大写。
+|308058|接触仙人掌的硫方怪持续发出受伤音效。
+|308061|使用{{cmd|publish|link=none}}开放的世界在多人游戏选项屏幕中显示为离线。
+|308073|减小分辨率时，好友列表警告屏幕中的文本可能会溢出窗口。
+|308102|仅允许好友加入的世界也能让同一网络中的非好友加入。
+|308103|告示牌编辑界面不再会区分站立的告示牌和墙上的告示牌。
+|308104|墙上的告示牌侧面邻近方块时不会被剔除。
+|308114|模拟仅好友聊天的调试属性名称有重复的“DEBUG_”。
+|308145|通过Xbox选项限制聊天为仅好友时无法看到自己的聊天消息。
+|308163|被间歇泉向上推动的实体会在落地时受到与悬停时间成正比的摔落伤害。
+|308168|举报皮肤屏幕上的皮肤预览图不再能竖直旋转。
+|308181|{{tr|村民交易的平衡性调整|重新平衡村民交易|重新平衡村民交易}}实验性内容启用时，音乐唱片Bounce不会生成。
+}}</onlyinclude>
+
+== 影片 ==
+由[[slicedlime]]製作的影片：
+{{yt|_HVPuOONThk}}
+{{yt|oLE92xooUs8}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|2026}}
+
+[[de:26.2-snapshot-8]]
+[[en:Java Edition 26.2 Snapshot 8]]
+[[es:Java Edition 26.2 Snapshot 8]]
+[[fr:Édition Java 26.2 Snapshot 8]]
+[[it:Java Edition 26.2 Snapshot 8]]
+[[ja:Java Edition 26.2 Snapshot 8]]
+[[lzh:爪哇版二六點二之快照八]]
+[[nl:26.2 Snapshot 8]]
+[[pt:Edição Java 26.2 Snapshot 8]]
+[[ru:26.2 Snapshot 8 (Java Edition)]]
+[[th:รุ่น Java 26.2 Snapshot 8]]
+[[uk:26.2 Snapshot 8 (Java Edition)]]

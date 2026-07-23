@@ -1,0 +1,461 @@
+# 页面: 判定箱
+# 来源: https://zh.minecraft.wiki/w/%E5%88%A4%E5%AE%9A%E7%AE%B1
+# 分类: Java版独有信息, 基岩版独有信息, 有未知版本的History模板的页面/Java版, 游戏内容, 需要补充的条目
+# 抓取时间: 2026-07-14 17:20:38
+# 原始 Wikitext 内容:
+
+'''判定箱（Hitbox）'''定义了[[方块]]和[[实体]]的物理边界（或其近似值），用于计算碰撞和选取。
+
+和方块模型不同的是，所有方块和大部分实体的判定箱都是硬编码的，无法通过数据包修改，只能通过[[Mod]]改变。
+
+== 方块 ==
+=== 轮廓箱 ===
+'''轮廓箱（Outline Box）'''会在玩家看向指定方块时显示。当十字准星指向方块时，会有黑框线描出该方块的轮廓。
+
+一个方块的轮廓箱并不是固定的，在不同的方块状态下可能具有不同的轮廓箱。例如上半台阶和下半台阶属于同一种方块，但具有不同的轮廓箱。{{only|BE|for=[[隐形基岩]]}}、[[液体]]、[[空气]]{{only|je|for=及其变种}}不具有轮廓箱。
+
+{{in|be}}黑框线会渲染为一个包含了自身和[[门]]、[[床]]等方块的另一半所有轮廓箱的长方体轮廓，但交互时仍以自身轮廓箱进行判断。
+
+=== 碰撞箱 ===
+'''碰撞箱（Collision Box）'''主要用于管理与实体间的碰撞。
+
+并非所有方块都具有碰撞箱。下列这些方块没有碰撞箱，实体可以自由穿过它们：
+{{columns-list|columns=2|
+* {{BlockSprite|Air|text=[[空气]]}}/[[虚空空气]]/[[洞穴空气]]
+* {{BlockLink|Structure Void}}
+* {{BlockLink|Light}}
+* {{BlockLink|Bamboo Shoot}}
+* {{BlockLink|Bubble Column}}
+* {{BlockSprite|Attached Melon Stem}}{{BlockSprite|Attached Pumpkin Stem}}{{BlockSprite|Melon Stem}}{{BlockSprite|Pumpkin Stem|text=[[南瓜茎]]和[[西瓜茎]]}}
+* {{BlockSprite|Beetroots}}{{BlockSprite|Carrots}}{{BlockSprite|Potatoes}}{{BlockSprite|Nether Wart}}{{BlockSprite|Sugar Cane}}{{BlockSprite|Wheat Crops|text=各种[[农作物]]}}
+* {{BlockLink|Short Grass}}和{{BlockLink|Tall Grass}}
+* {{BlockLink|Fern}}和{{BlockLink|Large Fern}}
+* {{BlockLink|Short Dry Grass}}和{{BlockLink|Tall Dry Grass}}
+* {{BlockLink|Flowers}}
+* {{BlockLink|Saplings}}
+* {{BlockLink|Small Dripleaf}}和{{BlockLink|Big Dripleaf Stem}}
+* {{BlockLink|Vines}}和{{BlockLink|Cave Vines}}
+* {{BlockLink|Nether Sprouts}}、{{BlockLink|Twisting Vines}}和{{BlockLink|Weeping Vines}}
+* {{BlockLink|Kelp}}、{{BlockLink|Seagrass}}和{{BlockLink|Tall Seagrass}}
+* {{BlockLink|Bush}}和{{BlockLink|Firefly Bush}}
+* {{BlockLink|Dead Bush}}
+* {{BlockLink|Sweet Berry Bush}}
+* {{BlockLink|Hanging Roots}}
+* {{BlockLink|Pale Hanging Moss}}
+* {{BlockLink|Spore Blossom}}
+* {{BlockLink|Cactus Flower}}
+* {{BlockLink|Pink Petals}}、{{BlockLink|Wildflowers}}和{{BlockLink|Leaf Litter}}
+* {{BlockLink|Torchflower}}和{{BlockLink|Torchflower Crop}}
+* {{BlockLink|Pitcher Plant}}
+* {{BlockLink|Glow Lichen}}和{{BlockLink|Sculk Vein}}
+* {{BlockLink|Mushrooms}}
+* {{BlockLink|Coral}}和{{BlockLink|Coral Fans}}
+* {{BlockLink|Frogspawn}}
+* {{BlockLink|Fire}}和{{BlockLink|Soul Fire}}
+* {{BlockLink|Torch}}、{{BlockLink|Soul Torch}}、{{BlockLink|Redstone Torch}}和{{BlockLink|Copper Torch}}
+* {{BlockLink|Banners}}
+* {{BlockLink|Signs}}和{{BlockLink|Hanging Signs}}（放在方块底面的）
+* {{BlockLink|Button}}
+* {{BlockLink|Pressure Plates}}
+* {{BlockLink|Lever}}
+* {{BlockSprite|Activator Rail}}{{BlockSprite|Detector Rail}}{{BlockSprite|Powered Rail}}{{BlockSprite|Rail|text=[[铁轨（消歧义）|各种铁轨]]}}
+* {{BlockLink|Redstone Wire}}
+* {{BlockLink|Tripwire}}和{{BlockLink|Tripwire Hook}}
+* {{BlockLink|Cobweb}}
+* {{BlockLink|End Gateway}}、{{BlockLink|End Portal}}和{{BlockLink|Nether Portal}}
+* 打开的{{BlockLink|Fence Gate}}
+}}
+* {{BlockLink|Lava}}、{{BlockLink|Water}}（对于可以站立在对应液体上的生物，碰撞箱高度为{{frac|1|2}}格）
+
+具有碰撞箱的方块其碰撞箱默认与轮廓箱形状相同，但下列这些方块碰撞箱与轮廓箱不同：
+* {{BlockLink|id=bamboo-stalk|竹子}}：碰撞箱宽度为{{frac|3|16}}格，而非轮廓箱的{{frac|6|16}}格或{{frac|10|16}}格。
+* {{BlockLink|Big Dripleaf}}：只有上方的叶子部分有碰撞箱，下面的茎没有碰撞箱。
+* {{BlockLink|Cactus}}：{{in|je|nc=1}}碰撞箱高度为{{frac|15|16}}格，而{{in|BE|nc=1}}高度为轮廓箱的1格。
+* {{BlockLink|Composter}}：{{in|je|nc=1}}碰撞箱始终与0层堆肥的轮廓箱相同。{{in|BE|nc=1}}碰撞箱会随着堆肥层数变化而变化。
+* {{BlockLink|Fences}}：碰撞箱高度为1.5格，而非轮廓箱的1格。
+* {{BlockLink|Fence Gates}}：关闭时碰撞箱高度为1.5格，而非轮廓箱的1格。开启时无碰撞箱。
+* {{BlockLink|Honey Block}}：{{only|je|for=碰撞箱高度为{{frac|15|16}}格}}，宽度为{{frac|14|16}}格，而非轮廓箱的1格。
+* {{BlockLink|Lectern}}：讲台桌面的碰撞箱是一个长方体且不旋转，而非轮廓箱那样随方块方向旋转而旋转。
+* {{BlockLink|Moving Piston}}：碰撞箱与当前移动的活塞移动程度有关。
+* {{BlockLink|Mud}}：碰撞箱高度为{{frac|14|16}}格，而非轮廓箱的1格。
+* {{BlockLink|Soul Sand}}：碰撞箱高度为{{frac|14|16}}格，而非轮廓箱的1格。
+* {{BlockLink|Powder Snow}}：{{only|je|for=对于超过2.5格下落高度的任何实体碰撞箱高度为0.9格}}，对于细雪上方[[下落的方块]]和穿戴了[[皮革靴子]]的生物碰撞箱为完整方块，其他条件下没有碰撞箱。
+* {{BlockLink|Scaffolding}}：如果实体从上方向下落，并且脚手架具有底部，则碰撞箱只包含底部的16×2×16区域；如果实体向下落且脚手架不具有底部，则没有碰撞箱。其他条件下与放置在地面上的脚手架轮廓箱相同。在基岩版中，除了浮空脚手架为无碰撞箱外，其他条件下与放置在地面上的脚手架碰撞箱相同。
+* {{BlockLink|Sculk Shrieker}}：碰撞箱高度为{{frac|8|16}}格，而非轮廓箱的1格。{{in|BE|nc=1}}轮廓箱与碰撞箱高度一致为0.5格。
+* {{BlockLink|Snow}}：碰撞箱高度比轮廓箱低{{frac|1|8}}格，单层雪无碰撞箱。
+* {{BlockLink|Walls}}：碰撞箱高度为1.5格。
+* {{BlockLink|Wall Hanging Signs}}：只有上方的栏杆有碰撞箱。
+* {{BlockLink|End Portal}}：{{only|BE|for=碰撞箱高度为0.3格}}。
+* {{BlockLink|End Gateway}}：{{only|BE|for=在非末地的维度时具有1格的完整碰撞箱}}。
+* {{BlockLink|glass pane}}：{{only|BE|for=当处于链接状态时链接方向的对侧碰撞箱会消失，即只保留链接侧的0.5格碰撞箱}}。
+
+{| class="wikitable sortable" data-description="碰撞箱不完整方块高度列表"
+|+ 常见碰撞箱不完整方块高度列表
+|-
+! colspan="3" | 碰撞箱高度
+! rowspan="2" | 方块种类
+|-
+! 小数形式
+! class="unsortable" | 分数形式
+! class="unsortable" | 像素形式
+|-
+| rowspan="2" | 1.5
+| rowspan="2" | {{frac|1|1|2}} 
+| rowspan="2" | 24
+| {{BlockSprite|Shulker Box}}完全打开的[[潜影盒]]
+|-
+| {{BlockLink|Fences}}、{{BlockLink|Walls}}、{{BlockSprite|Fence Gates}}关闭的[[栅栏门]]
+|-
+| 0.95
+| {{frac|19|20}} 
+| 15.2
+| {{only|be|for={{BlockLink|Chest}}、{{BlockLink|Copper Chest}}、{{BlockLink|Ender Chest}}、{{BlockLink|Trapped Chest}}}}
+|-
+| rowspan="2" | 0.9375
+| rowspan="2" | {{frac|15|16}} 
+| rowspan="2" | 15
+| {{BlockLink|Dirt Path}}、{{BlockLink|Farmland}}、{{only|je|for={{BlockLink|Honey Block}}}}、附着在方块侧面的{{BlockLink|Bell}}的顶部
+|-
+| {{BlockLink|Cactus}}{{only|je|for=}}、未倾斜的{{BlockLink|Big Dripleaf}}
+|-
+| 0.9
+| {{frac|9|10}}
+|14.4 
+| {{only|be|for={{BlockLink|Lectern}}}}
+|-
+| rowspan="2" | 0.875
+| rowspan="2" | {{frac|7|8}} 
+| rowspan="2" | 14
+| {{BlockLink|Soul sand}}、{{BlockLink|Mud}}、{{BlockSprite|Snow}}8层[[雪]]
+|-
+| {{only|je|for={{BlockLink|Chest}}、{{BlockLink|Copper Chest}}、{{BlockLink|Ender Chest}}、{{BlockLink|Trapped Chest}}、{{BlockLink|Lectern}}顶部、{{BlockLink|Cake with Candle}}的蜡烛部分}}、附着在方块侧面的{{BlockLink|Grindstone}}的石头部分、{{BlockLink|Brewing Stand}}顶部、{{only|be|for={{BlockLink|copper golem statue}}}}
+|-
+| rowspan="2" | 0.8125
+| rowspan="2" | {{frac|13|16}} 
+| rowspan="2" | 13
+| 无[[末影之眼]]的{{BlockLink|End Portal Frame}}、有末影之眼的{{BlockLink|End Portal Frame|id=End Portal Frame active}}{{only|BE|for=}}、有末影之眼的{{BlockLink|End Portal Frame|id=End Portal Frame active}}的边框部分、{{only|je|for=附着在方块侧面或底面的{{BlockLink|Bell}}的钟部分}}、{{only|BE|for=附着在方块底面的{{BlockLink|Bell}}的钟顶部}}
+|-
+| <code>up=false</code>的{{BlockLink|Chorus Plant}}、倾斜的{{BlockLink|Big Dripleaf}}、附着在方块侧面的{{BlockSprite|Medium Amethyst Bud}}{{BlockSprite|Large Amethyst Bud}}{{BlockSprite|Amethyst Cluster}}中、大型紫晶芽和[[紫水晶簇]]
+|-
+| rowspan="2" | 0.75
+| rowspan="2" | {{frac|3|4}} 
+| rowspan="2" | 12
+| {{BlockLink|Enchantment table}}、{{BlockSprite|Snow}}7层[[雪]]、{{only|je|for=附着在方块底面的{{BlockLink|Grindstone}}的石头部分}}
+|-
+| {{BlockLink|Cocoa|可可果}}、{{BlockSprite|Mob Heads}}墙上的[[生物头颅]]、附着在方块侧面的{{BlockLink|Small Amethyst Bud}}
+|-
+| 0.6875
+| {{frac|11|16}} 
+| 11
+| {{BlockLink|Conduit}}、{{BlockLink|Hopper}}内部、{{only|je|for=附着在方块侧面的{{BlockLink|Grindstone}}的脚上半部分}}、{{BlockLink|pointed dripstone}}顶部{{only|be|for=}}、{{BlockLink|sulfur spike}}顶部{{only|be|for=}}
+|-
+| rowspan="2" | 0.625
+| rowspan="2" | {{frac|5|8}} 
+| rowspan="2" | 10
+| {{BlockSprite|Snow}}6层[[雪]]
+|-
+| {{BlockSprite|End Rod}}{{BlockSprite|Lightning Rod}}水平的[[末地烛]]和[[避雷针]]、{{only|je|for=附着在方块侧面的{{BlockLink|Grindstone}}的脚下半部分}}、{{only|be|for={{BlockSprite|Lantern}}{{BlockSprite|Soul Lantern}}悬挂的[[灯笼]]頂部}}、{{only|be|for={{BlockLink| dried ghast}}}}
+|-
+| 0.59375
+| {{frac|19|32}} 
+| {{frac|9|1|2}} 
+| {{BlockSprite|Iron Chain}}{{BlockSprite|Copper Chain}}水平的[[铁链]]和[[铜链]]
+|-
+| 0.5625
+| {{frac|9|16}} 
+| 9
+| {{BlockLink|All Beds|link=床|床}}、{{BlockLink|Stonecutter}}、{{only|je|for={{BlockSprite|Lantern}}{{BlockSprite|Soul Lantern}}未悬挂的[[灯笼]]顶部、附着在方块底面的{{BlockLink|Grindstone}}的脚下半部分}}
+|-
+| rowspan="2" | 0.5
+| rowspan="2" | {{frac|1|2}} 
+| rowspan="2" | 8
+| {{BlockSprite|Slabs}}底部的[[台阶]]、{{BlockSprite|Snow}}5层[[雪]]
+|-
+| {{BlockSprite|Mob heads}}地上的[[生物头颅]]、{{BlockSprite|Stairs}}[[楼梯]]下半部分、{{BlockLink|Cake}}{{only|be|for={{BlockLink|Cake with Candle}}}}、{{only|je|for={{BlockLink|Cake with Candle}}的蛋糕部分、{{BlockSprite|Lantern}}{{BlockSprite|Soul Lantern}}悬挂的[[灯笼]]下半部分}}、{{only|be|for={{BlockSprite|Lantern}}{{BlockSprite|Soul Lantern}}未悬挂的[[灯笼]]頂部}}、{{BlockLink|Sculk Sensor}}、{{BlockLink|Calibrated Sculk Sensor}}、{{BlockLink|Sculk Shrieker}}、{{BlockLink|Heavy Core}}
+|-
+| rowspan="1" | 0.45
+| rowspan="1" | {{frac|9|20}} 
+| rowspan="1" | 7.2
+| {{only|be|for={{BlockLink|Turtle Egg}}}}
+|-
+| rowspan="1" | 0.4375
+| rowspan="1" | {{frac|7|16}} 
+| rowspan="1" | 7
+| {{BlockLink|Campfire}}、{{BlockLink|Soul Campfire}}、{{only|je|for={{BlockLink|Turtle Egg}}、4个{{BlockLink|Sea Pickle}}、{{BlockSprite|Lantern}}{{BlockSprite|Soul Lantern}}未悬挂的[[灯笼]]下半部分}}、底部的{{BlockLink|Amethyst Cluster}}
+|-
+| rowspan="2" | 0.375
+| rowspan="2" | {{frac|3|8}} 
+| rowspan="2" | 6
+| {{BlockLink|Daylight Detector}}、{{BlockSprite|Snow}}4层[[雪]]、{{only|je|for=附着在方块侧面的{{BlockLink|Bell}}底部}}
+|-
+| {{BlockLink|Flower Pot}}、{{only|je|for=1-3个{{BlockLink|Sea Pickle}}}}、{{BlockLink|Candle}}
+|-
+| 0.3125
+| {{frac|5|16}} 
+| 5
+| {{only|je|for={{BlockLink|Anvil}}底座内侧}}、{{only|be|for={{BlockLink|Cauldron}}内部}}、底部的{{BlockLink|Large Amethyst Bud}}、<code>age</code>为0的{{BlockLink|Pitcher Plant}}{{only|JE|for=}}、<code>age</code>为1-4的{{BlockLink|pitcher crop}}{{only|BE|for=}}
+|-
+|0.3
+|{{frac|3|10}}
+|4.8
+|{{only|be|for={{BlockLink|End Portal}}}}
+|-
+| rowspan="2" | 0.25
+| rowspan="2" | {{frac|1|4}} 
+| rowspan="2" | 4
+| {{BlockSprite|Snow}}3层[[雪]]
+|-
+| {{only|je|for={{BlockLink|Anvil}}底座外侧、{{BlockLink|Cauldron}}内部}}、底部的{{BlockLink|Medium Amethyst Bud}}
+|-
+| rowspan="1" | 0.1825
+| rowspan="1" | {{frac|73|400}} 
+| rowspan="1" | 2.92
+| {{only|be|for={{BlockSprite|Trapdoors}}底部的[[活板门]]}}
+|-
+| 0.1875 || {{frac|3|16}} || 3
+| {{only|je|for={{BlockSprite|Trapdoors}}底部的[[活板门]]}}、底部的{{BlockLink|Small Amethyst Bud}}、<code>age</code>为0的{{BlockLink|pitcher crop}}{{only|BE|for=}}
+|-
+| rowspan="2" | 0.125
+| rowspan="2" | {{frac|1|8}} 
+| rowspan="2" | 2
+| {{BlockLink|Redstone Repeater}}、{{BlockLink|Redstone Comparator}}、{{BlockSprite|Snow}}2层[[雪]]、{{only|je|for=浮空的{{BlockLink|Scaffolding}}底部}}
+|-
+| {{BlockLink|Brewing Stand}}底座、{{only|je|for={{BlockLink|Lectern}}底座}}、{{BlockLink|Composter}}内部
+|-
+| rowspan="1" | 0.09375
+| rowspan="1" | {{frac|3|32}} 
+| rowspan="1" | 1.5
+| {{BlockLink|Lily Pad}}
+|-
+| 0.0625 || {{frac|1|16}} || 1
+| {{BlockLink|Carpets}}、{{BlockLink|Moss Carpet}}、{{BlockLink|Pale Moss Carpet}}
+|-
+|}
+{{in|be}}雪對於[[物品实体]]、[[北極熊]]及[[兔子]]，會增加2像素的高度。即8層雪16像素、7層雪14像素、6層雪12像素、5層雪10像素、4層雪8像素、3層雪6像素、2層雪4像素、1層雪2像素。
+
+若一个方块的碰撞箱不能和一个与坐标网格对齐的1×1×1的正方体完全重合，那么无论碰撞箱大小如何，这个碰撞箱都被认为是不完整的，而这个方块就是'''碰撞箱不完整方块'''。绝大多数碰撞箱不完整的方块都不是红石导体，也不能使生物窒息。生物也不能自然生成在任何碰撞箱完整的方块内部。
+
+{{in|je}}大多数高度为0.375、0.625、0.75、0.875的方块和方块碰撞箱包含这几个高度的平面的方块在碰撞计算时内部会产生多个平面，可以让实体在这些平面上停留而不是直接穿过方块。这些平面并不是真正的方块碰撞箱，而是计算过程中产生的错误计算面。<ref>{{bug|MC-153191}}</ref>
+
+=== 互动箱 ===
+[[File:Interaction box usage.png|''上面''：视线与铁砧轮廓箱的某一个上表面碰撞，选择方向为上方。<br>''下面''：视线与堆肥桶轮廓箱的某一个水平表面碰撞，但由于堆肥桶有一个完整方块大小的互动箱，且视线与互动箱上表面碰撞，所以最终选择方向为上方。|thumb]]
+
+'''互动箱（Interaction Box）'''用于处理选中方块后的选择方向。如果一个方块可以被选中（由轮廓箱判定），并且视线与方块的互动箱相交，那么选择方向不取决于轮廓箱与视线的碰撞面，而是取决于互动箱与视线的碰撞面。
+
+绝大多数方块的互动箱都不存在，选择方向只取决于轮廓箱。只有下方这些方块具有互动箱：
+* {{BlockLink|Cauldron}}：炼药锅内的空间是互动箱。
+* {{BlockLink|Composter}}：堆肥桶的互动箱是整个方块。
+* {{BlockLink|Hopper}}：漏斗的互动箱与方块状态有关。当漏斗指向下方，互动箱为漏斗内部的空间；当漏斗指向某一个水平方向，互动箱位于对应漏斗方向上，覆盖漏斗的指向部分。
+* {{BlockLink|Scaffolding}}：脚手架的互动箱是整个方块。
+
+=== 方块支撑形状 ===
+[[File:Block support shape of hopper.png|漏斗的支撑面（蓝色正方体上的各个面）|thumb]]
+
+'''方块支撑形状（Block Support Shape）'''主要用于判断一个方块表面是否可以附着另一个依附型方块。
+
+方块支撑形状默认与碰撞箱相同，但下列方块不同：
+* {{BlockLink|Hanging Signs}}：方块支撑形状与轮廓箱相同。
+* {{BlockLink|Chorus Flower}}：方块支撑形状在各个方向上都比轮廓箱小{{frac|1|16}}格。
+* {{BlockLink|Fence Gates}}：打开时方块支撑形状不存在，关闭时为碰撞箱下方缩减{{frac|5|16}}格。
+* {{BlockLink|Leaves}}：方块支撑形状不存在。
+* {{BlockLink|Mud}}：方块支撑形状为完整的方块。
+* {{BlockLink|Shulker Box}}：关闭时方块支撑形状为完整的方块，开启时方块支撑形状向对应方向拉伸。
+* {{BlockLink|Snow}}：方块支撑形状与轮廓箱相同。
+* {{BlockLink|Soul Sand}}：方块支撑形状为完整的方块。
+
+方块支撑形状和一个与坐标网格对齐的1×1×1正方体的某个面重合的所有面的并集就是这个方块在某个方向上的'''支撑面'''。
+* 如果某个方向上的支撑面是一个1×1的正方形，则这个面'''完整'''。
+* 如果某个方向上的中心{{frac|1|8}}×{{frac|1|8}}的正方形都属于支撑面，则这个面'''中心完整'''。
+* 如果某个方向上的宽度为{{frac|1|8}}的边缘都属于支撑面，则这个面'''边缘完整'''。
+* 如果一个方块的所有支撑面都完整，则这个方块是方块支撑形状完整的方块，简称'''{{text anchor|完整方块}}'''，否则为'''{{text anchor|不完整方块}}'''。
+
+例如漏斗的上表面是不完整的，因为上表面中间缺失了{{frac|3|4}}×{{frac|3|4}}的区域，同时它的上表面中心不完整，但边缘完整，而漏斗这个方块是不完整方块。
+
+依附型方块判断支撑面的类型来决定它们是否能依附于要依附方块的某个面上。直立的[[火把]]、[[灯笼]]等方块只能放置于上表面中心完整的方块上；[[红石比较器]]、[[红石中继器]]、[[铁轨]]等方块只能放置于上表面边缘完整的方块上；[[按钮]]、[[拉杆]]等方块只能放置于完整的支撑面上。
+
+绝大多数上表面不完整的方块上方不能生成任何生物。
+
+=== 遮挡形状 ===
+'''遮挡形状（Occlusion Shape）'''主要用于计算[[亮度]]和方块的某一面是否可见。
+
+遮挡形状默认与轮廓箱相同，但下列方块不同：
+* {{BlockLink|Fences}}：栅栏的遮挡形状比轮廓箱高度更低、宽度更小，并且下方是空的。
+* {{BlockLink|Fence Gates}}：栅栏门的遮挡形状取决于它是否连接到了其他的栅栏或墙上。如果没有连接，遮挡形状会更高；如果连接了其他的栅栏或墙，那么遮挡形状也会相应降低。
+* {{BlockLink|Lectern}}：讲台的遮挡形状只包含下面的底座和支柱，上面的桌面不属于遮挡形状。
+* {{BlockLink|Pointed Dripstone}}：滴水石锥没有遮挡形状。
+* {{BlockLink|Powder Snow}}：细雪没有遮挡形状。
+* {{BlockLink|Sculk Shrieker}}：幽匿尖啸体的遮挡形状与碰撞箱相同。
+* {{BlockLink|Mob Heads}}：生物头颅没有遮挡形状。
+
+如果一个方块的遮挡形状不能和一个与坐标网格对齐的1×1×1的正方体完全重合，那么无论遮挡形状大小如何，这个遮挡形状都被认为是不完整的，而这个方块就是'''遮挡形状不完整方块'''。所有可以遮挡光线且遮挡形状完整的方块都是'''完全固体渲染方块'''。
+
+与方块支撑形状类似，遮挡形状也有对应'''遮挡面'''的属性。它主要用于剔除方块多余的渲染面。如果一个方块的某个渲染面被另一个方块的遮挡面完全遮挡，那么这个渲染面就不会渲染。
+
+=== 视觉遮挡形状 ===
+'''视觉遮挡形状（Visual Shape）'''用于判断视角能否透过方块观察到自身，确定第三人称视角的最佳位置。
+
+视觉遮挡形状默认与碰撞箱相同，但下列这些方块是例外：
+* {{BlockLink|Glass}}、{{BlockLink|Stained Glass}}、{{BlockLink|Tinted Glass}}：所有类型的玻璃都不存在视觉遮挡形状。
+* {{BlockLink|Fences}}：栅栏的视觉遮挡形状与轮廓箱相同。
+* {{BlockLink|Iron Bars}}、{{BlockLink|Copper Bars}}：铁栏杆和铜栏杆没有视觉遮挡形状。
+* {{BlockLink|Mud}}：泥巴的视觉遮挡形状是一个完整的方块。
+* {{BlockLink|Powder Snow}}：细雪没有视觉遮挡形状。
+* {{BlockLink|Snow}}：雪的视觉遮挡形状与轮廓箱相同。
+* {{BlockLink|Soul Sand}}：灵魂沙的视觉遮挡形状是一个完整的方块。
+* {{BlockLink|Copper Grate}}：所有的铜格栅都没有视觉遮挡形状。
+
+视觉遮挡形状也用于试炼刷怪笼检测玩家以激活和嘎枝检测玩家以判断是否看向自己。
+
+== 实体 ==
+{{info needed section|实体边界箱和视平线列表。}}
+所有实体的判定箱都是一个以正方形为底的长方体，无视实体的实际形状。比如，[[女巫]]的判定箱不包括顶部的帽子，而[[凋灵]]的判定箱不包括两侧的头。[[末影龙]]除本体外还有8个身体构件，所以末影龙本质上是多个实体的组合，它的判定箱也由这些子实体组合而成。
+
+=== 边界箱 ===
+{{in|je}}实体的'''边界箱（Boundary Box）'''可以通过{{keys|F3+B}}调试快捷方式查看。当玩家选中实体的边界箱后才能与其交互。同时，实体的边界箱也是它们的碰撞箱。
+
+=== 视平线 ===
+'''视平线（Eye Level）'''具有红色的轮廓，且只会出现在实体的判定箱中。视平线负责判定窒息和溺水伤害，当一个生物的视平线处于窒息方块或水中时，该生物就会受到窒息伤害或因耗尽氧气而溺水。当视平线位于[[水]]或[[熔岩]]中时，屏幕也会产生不同的渲染效果。
+
+== 历史 ==
+=== 方块 ===
+==== 碰撞箱 ====
+{{info needed section|部分方块的碰撞箱历史、基岩版历史。}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.4|dev=1.4.3|更改了[[墙]]的碰撞箱，现在不再与栅栏相同。<ref>{{bug|MC-1332|||Fixed}}</ref>}}
+|{{HistoryLine||1.5|dev=13w06a|更改了栅栏的碰撞箱，凹型的角落现在有了更贴近它们形状的判定箱，而不是以前会产生隐形部分的凸型判定箱。}}
+|{{HistoryLine||1.9|dev=15w38a|修复了大量有关于碰撞箱的漏洞。<ref>{{bug|MC-1635|||Fixed}}</ref><ref>{{bug|MC-73302|||Fixed}}</ref><ref>{{bug|MC-1720|||Fixed}}</ref>}}
+|{{HistoryLine||1.13|dev=17w47a|更改了[[墙]]的碰撞箱，现在被正确地做成凸形。<ref>{{bug|MC-2666|||Fixed}}</ref>}}
+}}
+
+==== 轮廓与互动箱 ====
+{{HistoryTable
+|{{HistoryLine|java pre-Classic}}
+|{{HistoryLine||rd-132211|被选中的方块现在会显示明暗闪烁的视觉效果。}}
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.13a|被选中的方块现在会显示轮廓箱。}}
+|{{HistoryLine||0.24_SURVIVAL_TEST|明暗闪烁的判定箱被移除，只留下轮廓箱。}}
+|{{HistoryLine||0.26 SURVIVAL TEST|某些方块（花、蘑菇、火把）的判定箱不再是完整的方块，而是更贴近它们各自的大小。}}
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100313|link=Minecraft Infdev|slink=Java版Infdev 20100313|在此版本以前，轮廓箱会[[距离现象/Java版#历史|随着离世界原点越远]]而越不精确。在所有受支持的硬体设备中，轮廓箱的位置会不规律地微幅抖动，而某些显卡甚至会使轮廓箱呈现非长方体的扭曲形状。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||?|[[楼梯]]的缺角不再能够被十字准星选中，然而它的轮廓箱仍然是完整的方块。}}
+|{{HistoryLine||?|某些随机不对齐的方块如高草丛，它们的判定箱现在也会跟着偏移以更完整地包含该方块。}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|[[栅栏]]现在在xz平面上不再有完整一格方块的判定箱，而是更贴近它们的视觉形状。}}
+|{{HistoryLine||1.1|dev=12w01a|[[栅栏门]]的判定箱也被更改，以更符合先前针对栅栏的更改。}}
+|{{HistoryLine||1.5|dev=13w06a|修复了栅栏、栅栏门与墙在远离世界原点时出现的判定箱扭曲问题。}}
+|{{HistoryLine||1.9|dev=15w38a|[[蛋糕]]的轮廓箱现在永远会出现在(0,0,0)的位置上，无论选中的蛋糕真正的位置在哪里。这同时也造成了一个距离漏洞，详见下方15w49a。}}
+|{{HistoryLine|||dev=15w46a|[[红石线]]的判定箱现在只会根据线路的排列，而只覆盖下方方块的一部份。}}
+|{{HistoryLine|||dev=15w49a|在此版本以前，蛋糕与仙人掌的轮廓箱会[[距离现象/Java版#历史|在离世界原点极远时]]变得异常拉伸与扭曲。}}
+|{{HistoryLine|||dev=15w49b|[[末地传送门方块]]的判定箱高度由原本的{{frac|1|16}}格高改为{{frac|3|4}}格高。}}
+|{{HistoryLine||1.11|dev=16w35a|蛋糕的判定箱再次显示在正确的位置上了。<ref>{{bug|MC-106300|||Fixed}}</ref>}}
+|{{HistoryLine||1.13|dev=17w47a|[[铁砧]]和[[漏斗]]的轮廓箱更符合其模型。
+|[[酿造台]]的中轴现在计入判定箱。<ref>{{bug|MC-4504|||Fixed}}</ref>
+|[[栅栏]]在直角方向的分支的轮廓箱现在是正确的L形、T形或十字形。<ref>{{bug|MC-12000|||Fixed}}</ref>
+|[[仙人掌]]现在有一个正确的长方体轮廓箱。<ref>{{bug|MC-59610|||Fixed}}</ref>
+|优化了包含多个[[藤蔓]]的方块轮廓箱。
+|[[玻璃板]]和[[铁栏杆]]在分支时有更明确的轮廓箱。
+|[[末地传送门框架]]的轮廓箱现在可以正确地囊括末影之眼。
+|[[活塞]]和[[睡莲]]的轮廓箱已被更改。
+|[[墙]]的碰撞箱已被正确地做成凹形。<ref>{{bug|MC-2666|||Fixed}}</ref>}}
+|{{HistoryLine||1.14|dev=18w48a|现在[[床]]的轮廓箱更符合其视觉形状。}}
+|{{HistoryLine|||dev=19w13a|[[炼药锅]]的轮廓箱现在更符合模型，允许它下面的方块被选取。<ref>{{bug|MC-129205|||Fixed}}</ref>}}
+|{{HistoryLine||1.16|dev=20w10a|[[火]]和[[灵魂火]]现在有一个轮廓箱，<ref>{{bug|MC-163655|||Fixed}}</ref>使它更符合其他方块。}}
+|{{HistoryLine|||dev=20w18a|[[红石线]]的轮廓箱现在更接近其视觉形状。例如，红石线在不同方向上的分支会导致其轮廓箱自身在所述方向上分支，<ref>{{bug|MC-137336|||Fixed}}</ref>对应了栅栏、玻璃板、铁栏杆和墙的行为。并且，如果攀升至一个方块的侧面，红石粉的垂直部分现在也可以被选取。<ref>{{bug|MC-153508|||Fixed}}</ref>}}
+|{{HistoryLine||1.17|dev=20w49a|[[滴水石锥]]的轮廓箱整体宽度缩减了{{frac|1|8}}格。}}
+}}
+
+=== 实体 ===
+==== 边界箱 ====
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.4|dev=1.4.3|现在可以通过{{key|F3+B}}来查看[[实体]]的判定箱，此时判定箱为白色不透明的，且无法与实际轮廓相符。}}
+|{{HistoryLine||1.7.2|dev=1.7.1|在视觉上对实体判定箱做调整，以使其变得更符合直觉。}}
+|{{HistoryLine||1.21.6|dev=25w16a|按下{{key|F3+B}}后生存模式物品栏中不再显示玩家的判定箱。}}
+|{{HistoryLine||26.1|更改了多个实体的边界箱。
+{{Pipe escape|
+{| class{{=}}"wikitable", style{{=}}"text-align:center"
+! rowspan{{=}}"2" | 生物 !! colspan{{=}}"2" | [[Java版1.21.11|1.21.11]] !! colspan{{=}}"2" | [[Java版26.1|26.1]] !! rowspan{{=}}2 | 更改版本
+|-
+! width{{=}}"100px" | 宽 !! width{{=}}"100px" | 高 !! width{{=}}"100px" | 宽 !! width{{=}}"100px" | 高
+|-
+| 幼年[[骆驼]] || 0.765 || 1.06875 || 1.02 || 1.425 || [[Java版26.1-snapshot-6|26.1-snapshot-6]]
+|-
+| 幼年[[骆驼尸壳]] || 0.765 || 1.06875 || colspan{{=}}"2" {{tc|no|移除了幼年变体}} || [[Java版26.1-snapshot-6|26.1-snapshot-6]]
+|-
+| 幼年[[鸡]] || 0.2 || 0.35 || 0.3 || 0.4 || [[Java版26.1-snapshot-2|26.1-snapshot-2]]
+|-
+| 幼年[[发光鱿鱼]] || 0.4 || 0.4 || 0.5 || 0.63 || [[Java版26.1-snapshot-5|26.1-snapshot-5]]
+|-
+| 幼年[[马]] || 0.6982 || 0.8 || 0.97755 || 1.12 || [[Java版26.1-snapshot-4|26.1-snapshot-4]]
+|-
+| 成年[[兔子]] || 0.4 || 0.5 || 0.49 || 0.6 || [[Java版26.1-snapshot-2|26.1-snapshot-2]]
+|-
+| 幼年[[兔子]] || 0.25 || 0.2 || 0.24 || 0.4 || [[Java版26.1-snapshot-2|26.1-snapshot-2]]
+|-
+| 幼年[[骷髅马]] || 0.6982 || 0.8 || 0.97755 || 1.12 || [[Java版26.1-snapshot-4|26.1-snapshot-4]]
+|-
+| 幼年[[鱿鱼]] || 0.4 || 0.4 || 0.5 || 0.63 || [[Java版26.1-snapshot-5|26.1-snapshot-5]]
+|-
+| 幼年[[僵尸马]] || 0.6982 || 0.8 || 0.97755 || 1.12 || [[Java版26.1-snapshot-4|26.1-snapshot-4]]
+|-
+| 幼年[[山羊]] || 0.45 || 0.65 || 0.495 || 0.715 || [[Java版26.1-snapshot-6|26.1-snapshot-6]]
+|-
+| 幼年[[村民]] || 0.3 || 0.975 || 0.49 || 0.99 || [[Java版26.1-snapshot-8|26.1-snapshot-8]]
+|-
+| 幼年[[美西螈]] || 0.375 || 0.21 || 0.5 || 0.25 || [[Java版26.1-snapshot-5|26.1-snapshot-5]]
+|-
+| 幼年[[狐狸]] || 0.3 || 0.35 || 0.36 || 0.42 || [[Java版26.1-snapshot-6|26.1-snapshot-6]]
+|-
+| 幼年[[猪灵]] || 0.3 || 0.975 || 0.49 || 0.99 || [[Java版26.1-snapshot-8|26.1-snapshot-8]]
+|-
+| 幼年[[僵尸]] || 0.3 || 0.975 || 0.49 || 0.99 || [[Java版26.1-snapshot-8|26.1-snapshot-8]]
+|-
+| 幼年[[溺尸]] || 0.3 || 0.975 || 0.49 || 0.99 || [[Java版26.1-snapshot-8|26.1-snapshot-8]]
+|-
+| 幼年[[尸壳]] || 0.3 || 0.975 || 0.49 || 0.99 || [[Java版26.1-snapshot-8|26.1-snapshot-8]]
+|-
+| 幼年[[僵尸猪灵]] || 0.3 || 0.975 || 0.49 || 0.99 || [[Java版26.1-snapshot-8|26.1-snapshot-8]]
+|-
+| 幼年[[僵尸村民]] || 0.3 || 0.975 || 0.49 || 0.99 || [[Java版26.1-snapshot-8|26.1-snapshot-8]]
+|}
+{| class{{=}}"wikitable collapsible collapsed", style{{=}}"text-align:center"
+|+ 附表
+|-
+! rowspan{{=}}"2" | 生物 !! colspan{{=}}"2" | [[Java版26.1-snapshot-7|26.1-snapshot-7]]
+|-
+! width{{=}}"100px" | 宽 !! width{{=}}"100px" | 高
+|-
+| 幼年[[村民]] || 0.5 || 0.93
+|-
+| 幼年[[猪灵]] || 0.55 || 0.95
+|-
+| 幼年[[僵尸]] || 0.5 || 1.07
+|-
+| 幼年[[溺尸]] || 0.55 || 1.08
+|-
+| 幼年[[尸壳]] || 0.55 || 1.125
+|-
+| 幼年[[僵尸猪灵]] || 0.55 || 0.95
+|-
+| 幼年[[僵尸村民]] || 0.5 || 1.0
+|}
+}}}}
+}}
+
+== 参见 ==
+* [[Tutorial:利用碰撞箱]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[de:Hitbox]]
+[[en:Hitbox]]
+[[es:Caja de colisión]]
+[[ja:当たり判定]]
+[[pl:Hitbox]]
+[[pt:Caixa de colisão]]
+[[ru:Хитбокс]]

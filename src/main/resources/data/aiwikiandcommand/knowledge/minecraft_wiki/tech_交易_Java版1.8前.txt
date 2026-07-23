@@ -1,0 +1,648 @@
+# 页面: 交易/Java版1.8前
+# 来源: https://zh.minecraft.wiki/w/%E4%BA%A4%E6%98%93/Java%E7%89%881.8%E5%89%8D
+# 分类: 过时内容
+# 抓取时间: 2026-07-14 17:19:59
+# 原始 Wikitext 内容:
+
+{{about|1.8版本前的交易系统|村庄与掠夺版本前的交易系统|交易/村庄与掠夺前|当前版本的交易系统|交易}}
+{{outdated}}
+
+在[[Java版1.8]]更新中，交易系统进行了全面翻新。本页面介绍的是1.8版本之前的交易内容。
+
+== 区别 ==
+* 每种颜色袍子的[[村民]]只有一种职业。
+** 交易GUI界面不会显示村民职业。
+* 村民们开始只有一种交易组合。
+** 进行交易会随机解锁一个组合。
+** 不分层，新的交易组合完全随机。
+** 新的交易组合不会覆盖旧的。
+* 交易会在关闭再打开交易页面前就被锁定并且关闭前没有提示信息。
+** 只有进行最后一项交易后才会解锁被锁定的交易。
+* 村民会忽略损害值。例如，有色羊毛也会被当作白色羊毛进行交易。
+* 交易不会获得[[经验值]]。
+* 收购[[金锭]]被用来当做备用的交易——当开启新交易时如果村民没有其他交易组合，会选择收购金锭。这也是这个交易很少见，以及绿色村民只提供这一交易的原因。
+* 交易需求的绿宝石有可能超过64个——只有在向图书管理员购买包含5级魔咒的附魔书时出现。
+
+== 交易选项 ==
+下面的表格列出了1.8版本前村民进行交易时的交易价格以及数量范围：
+
+=== 农民 ===
+[[File:Farmer.png|右|125px]]
+
+{| class="wikitable"
+! colspan="5" | 收购
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]计算的价格
+! 概率值<br><ref group="注" name="probability">大多数交易组合在游戏源代码中具有自己对应的概率值。这个值越大，这种交易组合就越可能出现——然而这并不能完全描述交易组合的出现概率：游戏首先列出可能的交易组合列表，但概率值仅用于决定交易组合是否应当被包括在列表里（也就是说，概率学上，具有概率值的不同交易组合出现的事件是'''相互独立'''的）。最后游戏在这个列表中随机抽取一项作为实际新生成的交易组合。</ref>
+! 实际概率<br><ref group="注" name="actualProb">运用概率学相关知识从概率值得到的交易组合的实际概率。这个概率即为你在游戏中遇到某一种交易组合的实际概率。</ref>
+|-
+| {{ItemLink|id=wheat|小麦}} 
+| align="center" | 18-21
+| align="center" | 1
+| align="center" | 0.9
+| align="center" | 16.0271%
+|-
+| {{BlockLink|id=wool|羊毛}} 
+| align="center" | 14-21
+| align="center" | 1
+| align="center" | 0.5
+| align="center" | 8.2163%
+|-
+| {{ItemLink|id=raw-chicken|生鸡肉}}
+| align="center" | 14-17
+| align="center" | 1
+| align="center" | 0.5
+| align="center" | 8.2163%
+|-
+| {{ItemLink|id=cooked-fish|熟鱼}} 
+| align="center" | 9-12
+| align="center" | 1
+| align="center" | 0.4
+| align="center" | 6.4622% 
+|-
+| {{ItemLink|id=gold-ingot|金锭}} 
+| align="center" | 8-9
+| align="center" | 1
+| align="center" | 未定义<ref group="注" name="gold">含有金锭的交易组合在源代码中并没有对应的概率值（铁匠的其中一个组合除外）。如果列表中并未生成任何交易组合，那么系统默认将金锭作为实际产生的交易组合。也正因为如此，金锭交易组合十分罕见。</ref>
+| align="center" | 0.0044%
+|}
+
+{| class="wikitable"
+! colspan="5" | 出售
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 概率值
+! 实际<br>概率
+|-
+| {{ItemLink|id=bread|面包}} 
+| align="center" | 3-4
+| align="center" | 1
+| align="center" | 0.9
+| align="center" | 16.0271%
+|-
+| {{ItemLink|id=melon-slice|西瓜片}}
+| align="center" | 5-8
+| align="center" | 1
+| align="center" | 0.3
+| align="center" | 4.7690%
+|-
+| {{ItemLink|id=apple|苹果}} 
+| align="center" | 5-8
+| align="center" | 1
+| align="center" | 0.3
+| align="center" | 4.7690%
+|-
+| {{ItemLink|id=cookie|曲奇}} 
+| align="center" | 8-10
+| align="center" | 1
+| align="center" | 0.3
+| align="center" | 4.7690%
+|-
+| {{ItemLink|id=shears|剪刀}}
+| align="center" | 1
+| align="center" | 3
+| align="center" | 0.3
+| align="center" | 4.7690%
+|-
+| {{ItemLink|id=flint-and-steel|打火石}}
+| align="center" | 1
+| align="center" | 3
+| align="center" | 0.3
+| align="center" | 4.7690%
+|-
+| {{ItemLink|id=cooked-chicken|熟鸡肉}} 
+| align="center" | 7-8
+| align="center" | 1
+| align="center" | 0.3
+| align="center" | 4.7690%
+|-
+| {{ItemLink|id=arrow|箭}}
+| align="center" | 9-12
+| align="center" | 1
+| align="center" | 0.5
+| align="center" | 8.2163%
+|-
+| {{ItemLink|id=flint|燧石}}
+| align="center" | 4-5
+| align="center" | 10 {{BlockLink|id=gravel|沙砾}}与<br>1 {{ItemLink|id=emerald|绿宝石}}
+| align="center" | 0.5
+| align="center" | 8.2163%
+|}
+
+=== 图书管理员 ===
+[[File:Librarian.png|右|125px]]
+
+{| class="wikitable"
+! colspan="5" | 收购
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 概率值
+! 实际<br>概率
+|-
+| {{ItemLink|id=paper|纸}} 
+| align="center" | 24-35
+| align="center" | 1
+| align="center" | 0.8
+| align="center" | 25.2944%
+|-
+| {{ItemLink|id=book|书}} 
+| align="center" | 11-12
+| align="center" | 1
+| align="center" | 0.8
+| align="center" | 25.2944%
+|-
+| {{ItemLink|id=written-book|成书}} 
+| align="center" | 1
+| align="center" | 1
+| align="center" | 0.3
+| align="center" | 8.0744%
+|-
+| {{ItemLink|id=gold-ingot|金锭}}
+| align="center" | 8-9
+| align="center" | 1
+| align="center" | 未定义<ref group="注" name="gold" />
+| align="center" | 0.28672%
+|}
+
+{| class="wikitable"
+! colspan="5" | 出售
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 概率值
+! 实际<br>概率
+|-
+| {{BlockLink|id=bookshelf|书架}}
+| align="center" | 1
+| align="center" | 3
+| align="center" | 0.8
+| align="center" | 25.2944%
+|-
+| {{ItemLink|id=enchanted-book|附魔书}}
+| align="center" | 1
+| align="center" | 1 {{ItemLink|id=book|书}} + <br>5-71 {{ItemLink|id=emerald|绿宝石}}
+| align="center" | 0.07
+| align="center" | 1.7573%
+|-
+| {{BlockLink|id=glass|玻璃}} 
+| align="center" | 4-5
+| align="center" | 1
+| align="center" | 0.2
+| align="center" | 5.2520%
+|-
+| {{ItemLink|id=compass|指南针}}
+| align="center" | 1
+| align="center" | 10-11
+| align="center" | 0.2
+| align="center" | 5.2520%
+|-
+| {{ItemLink|id=clock|时钟}}
+| align="center" | 1
+| align="center" | 10-11
+| align="center" | 0.2
+| align="center" | 5.2520%
+|}
+
+=== 牧师 ===
+[[File:Priest.png|右|125px]]
+
+{| class="wikitable"
+! colspan="5" | 收购
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 概率值
+! 实际<br>概率
+|-
+| {{ItemLink|id=gold-ingot|金锭}}
+| align="center" | 8-9
+| align="center" | 1
+| align="center" | 未定义<ref group="注" name="gold" />
+| align="center" | 15.6036%
+|}
+
+{| class="wikitable"
+! colspan="5" | 出售
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 概率值
+! 实际<br>概率
+|-
+| {{ItemLink|id=eye-of-ender|末影之眼}}
+| align="center" | 1
+| align="center" | 7-10
+| align="center" | 0.3
+| align="center" | 16.1039%
+|-
+| {{ItemLink|id=bottle-o'-enchanting|附魔之瓶}} 
+| align="center" | 2-4
+| align="center" | 1
+| align="center" | 0.2
+| align="center" | 10.2716%
+|-
+| {{ItemLink|id=redstone|红石粉}} 
+| align="center" | 2-4
+| align="center" | 1
+| align="center" | 0.4
+| align="center" | 22.5541%
+|-
+| {{BlockLink|id=glowstone|荧石块}} 
+| align="center" | 2-3
+| align="center" | 1
+| align="center" | 0.3
+| align="center" | 16.1039%
+|}
+
+{| class="wikitable"
+! colspan="4" | [[附魔]]<ref group="注" name="enchant">牧师会向你提供已经被附魔的物品。每次附魔需要花费2-4个绿宝石，而且需要将你想附魔的物品放在第一栏。交易附魔物品会'''修理物品'''，所以只要有足够的绿宝石，就可以拥有无限耐久的物品（这可能是一个漏洞）。
+
+当生成附魔组合时，游戏使用随机的范围为5-19的等级。详见[[附魔]]条目。</ref>
+|-
+! width="204px" | 物品
+! 用[[绿宝石]]<br>计算的价格
+! 概率值
+! 实际<br>概率
+|-
+| {{ItemLink|id=iron-sword|剑|铁剑}}
+| align="center" | 2-4
+| align="center" | 0.1
+| align="center" | 2.4204%
+|-
+| {{ItemLink|id=iron-pickaxe|镐|铁镐}}
+| align="center" | 2-4
+| align="center" | 0.1
+| align="center" | 2.4204%
+|-
+| {{ItemLink|id=iron-axe|斧|铁斧}}
+| align="center" | 2-4
+| align="center" | 0.1
+| align="center" | 2.4204%
+|-
+| {{ItemLink|id=diamond-sword|剑|钻石剑}}
+| align="center" | 2-4
+| align="center" | 0.1
+| align="center" | 2.4204%
+|-
+| {{ItemLink|id=diamond-pickaxe|镐|钻石镐}}
+| align="center" | 2-4
+| align="center" | 0.1
+| align="center" | 2.4204%
+|-
+| {{ItemLink|id=diamond-axe|斧|钻石斧}}
+| align="center" | 2-4
+| align="center" | 0.1
+| align="center" | 2.4204%
+|-
+| {{ItemLink|id=iron-chestplate|盔甲|铁胸甲}}
+| align="center" | 2-4
+| align="center" | 0.1
+| align="center" | 2.4204%
+|-
+| {{ItemLink|id=diamond-chestplate|盔甲|钻石胸甲}}
+| align="center" | 2-4
+| align="center" | 0.1
+| align="center" | 2.4204%
+|}
+
+=== 铁匠 ===
+[[File:Blacksmith.png|右|125px]]
+
+{| class="wikitable"
+! colspan="6" | 收购
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 用[[绿宝石]]<br>计算的单价
+! 概率值
+! 实际概率
+|-
+| {{ItemLink|id=coal|煤炭}}
+| align="center" | 16-23
+| align="center" | 1
+| align="center" | 0.0435 - 0.0625
+| align="center" | 0.7
+| align="center" | 9.6382%
+|-
+| {{ItemLink|id=iron-ingot|铁锭}}
+| align="center" | 8-9
+| align="center" | 1
+| align="center" | 0.111 - 0.125
+| align="center" | 0.5
+| align="center" | 6.6765%
+|-
+| {{ItemLink|id=gold-ingot|金锭}}
+| align="center" | 8-9
+| align="center" | 1
+| align="center" | 0.111 - 0.125
+| align="center" | 0.5
+| align="center" | 6.6817%<ref group="注" name="gold" /><ref group="注" name="smith">铁匠事实上有两次机会提供金锭交易组合，这是因为铁匠本身的固有交易组合也包括金锭（概率值为0.5，实际概率为6.6765%），与此同时（与其他村民一样）没有有效交易组合时默认会采用金锭。但一名铁匠永远不会同时提供两个金锭交易组合（因为属于同一物品）。</ref>
+|-
+| {{ItemLink|id=diamond|钻石}} 
+| align="center" | 4-5
+| align="center" | 1
+| align="center" | 0.2 - 0.25
+| align="center" | 0.5
+| align="center" | 6.6765%
+|}
+
+{| class="wikitable"
+! colspan="6" | 出售
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 每单位材料<br>的价格<ref group="注" name="perunit">“每单位材料的价格”指与工具或武器对应的矿物合成材料的换算单价。对于[[链甲]]，由于链甲无法人工合成，本数据仅供参考比较。计算中忽略了合成所需的[[木棍]]。</ref>
+! 概率值
+! width="123px" | 实际概率
+|-
+| {{ItemLink|id=iron-sword|剑|铁剑}}
+| align="center" | 1
+| align="center" | 7-10
+| align="center" | 3.5 - 5
+| align="center" | 0.5
+| align="center" | 6.6765%
+|-
+| {{ItemLink|id=iron-axe|斧|铁斧}}
+| align="center" | 1
+| align="center" | 6-7
+| align="center" | 2 - 2.33
+| align="center" | 0.3
+| align="center" | 3.8961%
+|-
+| {{ItemLink|id=iron-pickaxe|镐|铁镐}}
+| align="center" | 1
+| align="center" | 7-8
+| align="center" | 2.33 - 2.67
+| align="center" | 0.5
+| align="center" | 6.6765%
+|-
+| {{ItemLink|id=iron-shovel|锹|铁锹}}
+| align="center" | 1
+| align="center" | 4-5
+| align="center" | 4-5
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=iron-hoe|锄|铁锄}}
+| align="center" | 1
+| align="center" | 4-5
+| align="center" | 2 - 2.5
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=diamond-sword|剑|钻石剑}}
+| align="center" | 1
+| align="center" | 12-13
+| align="center" | 6 - 6.5
+| align="center" | 0.5
+| align="center" | 6.6765%
+|-
+| {{ItemLink|id=diamond-axe|斧|钻石斧}}
+| align="center" | 1
+| align="center" | 9-10
+| align="center" | 3 - 3.67
+| align="center" | 0.3
+| align="center" | 3.8961%
+|-
+| {{ItemLink|id=diamond-pickaxe|镐|钻石镐}}
+| align="center" | 1
+| align="center" | 10-11
+| align="center" | 3.33 - 3.67
+| align="center" | 0.5
+| align="center" | 6.6765%
+|-
+| {{ItemLink|id=diamond-shovel|锹|钻石锹}}
+| align="center" | 1
+| align="center" | 7
+| align="center" | 7
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=diamond-hoe|锄|钻石锄}}
+| align="center" | 1
+| align="center" | 7 
+| align="center" | 3.5
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=iron-helmet|盔甲|铁头盔}}
+| align="center" | 1
+| align="center" | 4-5
+| align="center" | 0.8 - 1
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=iron-chestplate|盔甲|铁胸甲}}
+| align="center" | 1
+| align="center" | 10-13
+| align="center" | 1.25 - 1.625
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=iron-leggings|盔甲|铁护腿}}
+| align="center" | 1
+| align="center" | 8-9
+| align="center" | 1.14 - 1.29
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=iron-boots|盔甲|铁靴子}}
+| align="center" | 1
+| align="center" | 4-5
+| align="center" | 1 - 1.25
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=diamond-helmet|盔甲|钻石头盔}}
+| align="center" | 1
+| align="center" | 7
+| align="center" | 1.4
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=diamond-chestplate|盔甲|钻石胸甲}}
+| align="center" | 1
+| align="center" | 16-18
+| align="center" | 2 - 2.25
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=diamond-leggings|盔甲|钻石护腿}}
+| align="center" | 1
+| align="center" | 11-13
+| align="center" | 1.57 - 1.86
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=diamond-boots|盔甲|钻石靴子}}
+| align="center" | 1
+| align="center" | 7
+| align="center" | 1.75
+| align="center" | 0.2
+| align="center" | 2.5638%
+|-
+| {{ItemLink|id=chainmail-helmet|盔甲|链甲头盔}}
+| align="center" | 1
+| align="center" | 5-6
+| align="center" | 1-1.2
+| align="center" | 0.1
+| align="center" | 1.2659%
+|-
+| {{ItemLink|id=chainmail-chestplate|盔甲|链甲胸甲}}
+| align="center" | 1
+| align="center" | 11-14
+| align="center" | 1.375-1.75
+| align="center" | 0.1
+| align="center" | 1.2659%
+|-
+| {{ItemLink|id=chainmail-leggings|盔甲|链甲护腿}}
+| align="center" | 1
+| align="center" | 9-10
+| align="center" | 1.29-1.43
+| align="center" | 0.1
+| align="center" | 1.2659%
+|-
+| {{ItemLink|id=chainmail-boots|盔甲|链甲靴子}}
+| align="center" | 1
+| align="center" | 5-6
+| align="center" | 1.25 - 1.5
+| align="center" | 0.1
+| align="center" | 1.2659%
+|}
+
+=== 屠夫 ===
+[[File:Butcher.png|右|125px]]
+
+{| class="wikitable"
+! colspan="5" | 收购
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 概率值
+! 实际<br>概率
+|-
+| {{ItemLink|id=coal|煤炭}}或[[木炭]]
+| align="center" | 16-23
+| align="center" | 1
+| align="center" | 0.7
+| align="center" | 21.0549%
+|-
+| {{ItemLink|id=raw-porkchop|生猪排}}
+| align="center" | 14-17
+| align="center" | 1
+| align="center" | 0.5
+| align="center" | 14.0096%
+|-
+| {{ItemLink|id=raw-beef|生牛肉}}
+| align="center" | 14-17
+| align="center" | 1
+| align="center" | 0.5
+| align="center" | 14.0096%
+|-
+| {{ItemLink|id=gold-ingot|金锭}}
+| align="center" | 8-9
+| align="center" | 1
+| align="center" | 未定义<ref group="注" name="gold" />
+| align="center" | 0.794%
+|}
+
+{| class="wikitable"
+! colspan="5" | 出售
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 概率值
+! 实际<br>概率
+|-
+| {{ItemLink|id=saddle|鞍}}
+| align="center" | 1
+| align="center" | 6-7
+| align="center" | 0.1
+| align="center" | 2.5177%
+|-
+| {{ItemLink|id=leather-helmet|盔甲|皮革头盔}}
+| align="center" | 1
+| align="center" | 2-3
+| align="center" | 0.3
+| align="center" | 7.9357%
+|-
+| {{ItemLink|id=leather-chestplate|盔甲|皮革胸甲}}
+| align="center" | 1
+| align="center" | 4
+| align="center" | 0.3
+| align="center" | 7.9357%
+|-
+| {{ItemLink|id=leather-leggings|盔甲|皮革护腿}}
+| align="center" | 1
+| align="center" | 2-3
+| align="center" | 0.3
+| align="center" | 7.9357%
+|-
+| {{ItemLink|id=leather-boots|盔甲|皮革靴子}}
+| align="center" | 1
+| align="center" | 2-3
+| align="center" | 0.3
+| align="center" | 7.9357%
+|-
+| {{ItemLink|id=steak|牛排}}
+| align="center" | 6-7
+| align="center" | 1
+| align="center" | 0.3
+| align="center" | 7.9357%
+|-
+| {{ItemLink|id=cooked-porkchop|熟猪排}}
+| align="center" | 6-7
+| align="center" | 1
+| align="center" | 0.3
+| align="center" | 7.9357%
+|}
+
+=== 绿色上衣的村民 ===
+''注：绿色衣服的村民只能通过系统命令或者MOD得到。这种村民无法自然生成，也无法用[[刷怪蛋]]刷出。但可以通过[[服务器命令]]、第三方工具或是MOD创建能够生成绿色上衣村民的[[刷怪笼]]。''
+
+{| class="wikitable"
+! colspan="5" | 收购
+|-
+! width="145px" | 物品
+! 数量
+! 用[[绿宝石]]<br>计算的价格
+! 概率值
+! 实际<br>概率
+|-
+| {{ItemLink|id=gold-ingot|金锭}}
+| align="center" | 8-9
+| align="center" | 1
+| align="center" | 未定义<ref group="注" name="gold" />
+| align="center" | 100%
+|}
+
+== 画廊 ==
+<gallery>
+Villager trading preview.png|Jeb公布的第一张交易系统的截图，物品栏中的货币物品为红宝石（后来更新为绿宝石）
+Villagenhanced.jpg|前图的增亮版
+Trading-Chart.png|快速交易指南
+</gallery>
+
+== 备注 ==
+<references group="注"/>
+
+[[de:Handel/Vor 1.8]]
+[[en:Trading/Before Java Edition 1.8]]
+[[es:Comercio/Antes de Java Edition 1.8]]
+[[ja:取引/1.8以前]]
+[[pt:Comércio/Antes da 1.8]]
+[[ru:Торговля/до 1.8]]
+[[uk:Торгівля/до 1.8]]

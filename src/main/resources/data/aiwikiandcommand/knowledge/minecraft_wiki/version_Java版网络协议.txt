@@ -1,0 +1,218 @@
+# 页面: Java版网络协议
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE
+# 分类: Java版, Java版独有特性, 使用计算器的页面, 网络协议
+# 抓取时间: 2026-07-14 17:15:25
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|数据包|封包}}<!-- 全文中不会出现Data pack数据包，均代表网络数据包 -->
+{{exclusive|je}}
+
+Minecraft具有服务端和客户端，为了在两种逻辑端间传输数据，Minecraft使用了一种'''网络协议（Network Protocol）'''进行数据交换。
+
+== 逻辑端 ==
+无论在单人游戏还是多人游戏，当玩家加入世界时，游戏就同时存在'''服务端线程（Server Thread）'''和'''渲染线程（Render Thread）'''：
+* 在单人游戏中，服务端线程和渲染线程同时由游戏客户端创建。这种方式创建的服务端线程为'''集成服务端（Integrated Server）'''，服务端线程和渲染线程通过'''内存连接（Memory Connection）'''进行通信。
+* 在局域网联机中，服务端线程由发起局域网联机的游戏客户端进行创建，所有连接到此局域网世界的游戏客户端创建对应的渲染线程。这种情况下，服务端线程仍然为集成服务端，发起局域网联机的游戏客户端内使用内存连接，而其他游戏客户端渲染线程使用'''网络连接（Network Connection）'''。
+* 使用服务端核心文件时，服务端线程由服务端核心文件进行创建，所有连接到此世界的游戏客户端创建对应的渲染线程。这种方式创建的服务端线程为'''专用服务端（Dedicated Server）'''，所有渲染线程均使用网络连接与服务端线程通信。
+
+在网络协议中，为了简化多种连接情况，通常将这两个线程称为'''逻辑端'''：服务端线程及相应的服务端线程池（线程名通常以<code>Netty (Epoll/Local) Client IO</code>开头）通常被称为逻辑服务端，而渲染线程被称为逻辑客户端。网络协议就是在两种逻辑端中交换数据使用的规范。与逻辑端相对应的是'''物理端'''，服务端核心文件和客户端核心文件都可以作为物理服务端，客户端核心文件可作为物理客户端。在下文中所有服务端和客户端未指定为物理端时均代表逻辑端。
+
+网络协议中发送的数据具有方向。其中，由客户端发向服务端的网络包被称为'''上行数据包（Serverbound Packet）'''，下文中简写为'''C2S'''，此时客户端为编码端，服务端为解码端；由服务端发向客户端的网络包被称为'''下行数据包（Clientbound Packet）'''，下文中简写为'''S2C'''，此时客户端为解码端，服务端为编码端。C2S包绝大多数包含了客户端玩家的动作和查询行为，而S2C包绝大多数用于向客户端发送和同步世界信息。
+
+== 网络阶段 ==
+在逻辑端间进行通信时，客户端从连接开始需要先进行身份验证，服务端需要将初始数据发送到客户端，之后两个逻辑端开始进行互相的数据交换。换言之，数据交换随网络连接的建立时间变化而发生改变。在游戏中，连接的不同时段被分为不同的'''网络阶段'''或'''网络状态（State）'''。游戏内共有下列网络阶段：
+* '''握手阶段（Handshake）'''：客户端与服务端建立连接后进入此网络阶段，此时客户端需要发送'''意向数据包（Intention Packet）'''确认要开始服务端列表查询、登录或转移。
+* '''服务端列表查询阶段（Status）'''：客户端不进行登录或转移，而是查询服务端信息和延迟，并获取服务端的MOTD（Message Of The Day）。
+* '''登录阶段（Login）'''：客户端要求进入服务端世界，服务端向验证服务器验证客户端并发送登录信息，建立压缩和加密通信。
+* '''转移阶段（Transfer）'''：与登录阶段类似，但在转移阶段中服务端可以向客户端查询Cookie信息。
+* '''配置阶段（Configuration）'''：服务端将注册表信息、配方信息等关键性数据同步到客户端，并可以指定客户端存储Cookie。
+* '''游戏中阶段（Play）'''：服务端与客户端互相同步世界信息，此时在物理客户端中世界可以正常渲染和交互。
+
+客户端可能与服务端有不同的网络阶段，此时两个逻辑端间会进行同步，使用指定网络数据包进行切换。例如，握手阶段时客户端使用意向数据包要求切换到服务端列表查询阶段、登录阶段或转移阶段，游戏中阶段可以使用<code>start_configuration</code>S2C包要求切换到配置阶段。
+
+在大多数情况下，一次完整的连接包括下列网络阶段切换：
+* 如果客户端在服务端列表屏幕，按下刷新按钮后，客户端对服务端列表内的所有服务端建立连接，连接的网络阶段按时间顺序分别为：（建立连接）->握手->服务端列表查询->（中止连接）。
+* 如果客户端进入指定的服务端，则网络阶段按时间顺序分别为：（建立连接）->握手->登录->配置->游戏中->（中止连接）。
+
+== 协议基础内容 ==
+{{el|je}}网络协议是建立在'''TCP协议'''上的应用层协议。未压缩的所有'''网络连接'''数据包（除旧版兼容服务端列表查询数据包）均使用下列基础结构：
+
+{| class="wikitable"
+! 偏移（按字节计） !! 名称 !! 类型 !! 作用
+|-
+| 0 || 数据包长度''Length'' || 变长32位整数（varint） || 确认数据包的长度
+|-
+| 1-3 || 数据包编码''ID'' || 变长32位整数（varint） || 识别数据包的类型
+|-
+| 2-6 || 数据包负载''Payload'' || 根据数据包类型不同 || 数据包具有的数据
+|}
+
+<!-- 此处应添加协议数据计算器，暂时先使用源数据仓库代替 -->
+不同的网络阶段数据包的类型和ID不同，所有协议数据包的内部字段可在[https://github.com/Nickid2018/MC_Protocol_Data 此仓库]查询。
+
+数据包长度''Length''是用于分割不同数据包的字段，以处理TCP分段重组，记录数据包编码''ID''和负载''Payload''总长度，不会超过2<sup>21</sup>-1（2097151）字节。如果一个数据包长度超过了这个限制，在编码端会报错<code>Packet too large: size <''长度''> is over 8</code>，在解码端会报错<code>length wider than 21-bit</code>。如果一个数据包的负载长度小于数据包记录的长度，解码端会报错<code>-{}-Packet <''数据包类型''> was larger than I expected, found <''冗余长度''> bytes extra whilst reading packet <''数据包类型''></code>。
+
+{{Calculator|protocol}}
+
+=== 基础数据类型 ===
+在数据传输中，网络协议定义了各种基本类型用于统一数据读写。游戏中使用下列基本数字类型：
+* 对于所有定长整数类型（8、16、32及64位，包括无符号和有符号类型，还包括128位整数用于代表UUID），均使用大端序（Big Endian）写入。
+* 布尔值为一个字节，0为假1为真，游戏识别非0值全部为真。
+* 浮点数（32位与64位）使用[[wzh:IEEE 754|IEEE 754]]标准，使用大端序写入。
+* 变长整数（32位与64位）使用每个字节的低7位存储数字，并使用最高位代表是否有后续分段。变长32位整数最长占用5字节，64位整数最长占用10字节，负数永远使用最长字节数。
+
+{{CollapseH|展开以显示变长32位整数的写入与读取方法}}
+<syntaxhighlight lang="java">
+// net.minecraft.network.VarInt
+
+public static final int MAX_VARINT_SIZE = 5;
+private static final int DATA_BITS_MASK = 127;
+private static final int CONTINUATION_BIT_MASK = 128;
+private static final int DATA_BITS_PER_BYTE = 7;
+
+public static int getByteSize(final int value) {
+   for (int i = 1; i < 5; i++) {
+      if ((value & -1 << i * 7) == 0) {
+         return i;
+      }
+   }
+
+   return 5;
+}
+
+public static boolean hasContinuationBit(final byte in) {
+   return (in & 128) == 128;
+}
+
+public static int read(final ByteBuf input) {
+   int out = 0;
+   int bytes = 0;
+
+   byte in;
+   do {
+      in = input.readByte();
+      out |= (in & 127) << bytes++ * 7;
+      if (bytes > 5) {
+         throw new RuntimeException("VarInt too big");
+      }
+   } while (hasContinuationBit(in));
+
+   return out;
+}
+
+public static ByteBuf write(final ByteBuf output, int value) {
+   while ((value & -128) != 0) {
+      output.writeByte(value & 127 | 128);
+      value >>>= 7;
+   }
+
+   output.writeByte(value);
+   return output;
+}
+</syntaxhighlight>
+{{CollapseE}}
+
+字符串类型使用标准UTF-8编码写入缓冲区，而不使用变体UTF-8。<ref>https://netty.io/4.1/api/io/netty/buffer/ByteBufUtil.html#writeUtf8-io.netty.buffer.ByteBufAllocator-java.lang.CharSequence-</ref>绝大多数情况下，字符串不允许超过32767字符，且编码后不允许超过98301字节。
+
+NBT类型写入与读取见[[NBT格式]]。网络中传输的NBT绝大多数允许无限制长度，最大嵌套深度为512，但部分网络数据包有严格限制，如果超出对应的限制解码端将报错并中止连接，编码端则不受影响。
+
+=== 握手 ===
+在连接建立后，连接立刻进入握手阶段。此阶段只有一个C2S包<code>intention</code>，即意向数据包。客户端必须在连接建立的30秒内发送此数据包，否则服务端将以连接超时中止连接。
+
+意向数据包包含下列数据：
+* <code>protocolVersion</code>：客户端的[[协议版本]]。协议版本用于服务端校验客户端是否能与自己建立兼容的连接，如果协议版本不一致，服务端将立刻发送<code>login_disconnect</code>与客户端断开连接。绝大多数情况下协议版本一致代表逻辑端互相兼容，例外是有些版本具有同样的协议版本但不具有相同的固有注册表导致不能兼容。
+* <code>hostName</code>：客户端连接服务端时使用的主机名称，原版服务端不使用此数据。
+* <code>port</code>：客户端连接服务端时使用的端口，原版服务端不使用此数据。
+* <code>intention</code>：客户端要进行的操作。可以为1（服务器列表查询）、2（登录）或3（转移）。服务端按照此字段切换网络阶段并进行相应处理。
+
+除意向数据包外，客户端还可以发送旧版兼容服务端列表查询数据包，此数据包必须作为第一个发送的数据包才可以被识别。当服务端接收到此包后会立刻返回数据并中止连接。
+
+=== 压缩连接 ===
+如果[[服务端配置文件格式|服务端配置文件]]内设置了<code>network-compression-threshold</code>，且设置值大于0，服务端会在登录阶段发送<code>login_compression</code>S2C包用于通知客户端将启用压缩连接，后续所有数据包将使用下列结构发送：
+
+{| class="wikitable"
+! 偏移（按字节计） !! 名称 !! 类型 !! 作用
+|-
+| 0 || 数据包长度''Length'' || 变长32位整数（varint） || 确认数据包的长度
+|-
+| 1-3 || 压缩长度''CLength'' || 变长32位整数（varint） || 压缩后数据的长度
+|-
+| 2-8 || 原始数据包数据''Data'' || 压缩或未压缩的数据包编码''ID''和数据包负载''Payload'' || 压缩或未压缩后的数据
+|}
+
+<code>login_compression</code>包中仅包含字段<code>compressionThreshold</code>，用于指示这次压缩连接中使用的压缩阈值。压缩连接中根据原始数据包中数据包编码''ID''和数据包负载''Payload''的总长度是否超过阈值进行不同处理：
+* 如果总长度超过2<sup>23</sup>（8388608）字节，编码端将报错<code>Packet too big (is <''长度''>, should be less than 8388608)</code>。
+* 如果总长度小于阈值，则数据包将以原样填入''Data''字段发送，压缩长度''CLength''置为0。
+* 如果总长度大于或等于阈值，则数据包编码''ID''和数据包负载''Payload''将使用ZLib（RFC1950）算法进行压缩并填入''Data''字段，压缩长度''CLength''设置为原始数据的长度。
+
+解码端接收到启用压缩连接的数据包后，会先读取不会被压缩的数据包长度''Length''和压缩长度''CLength''，并按照数据包长度''Length''进行TCP分段重组，之后再判断压缩长度''CLength''判断是否进行解压缩：
+* 如果压缩长度''CLength''为0，则直接使用后续的原始数据。
+* 如果压缩长度''CLength''不为0，但压缩连接指定的阈值小于压缩长度，在服务端作为解码端时将报错<code>Badly compressed packet - size of <''压缩长度''> is below server threshold of <''压缩阈值''></code>。
+* 如果压缩长度''CLength''不为0，但压缩长度大于2<sup>23</sup>（8388608）字节，在服务端作为解码端时将报错<code>Badly compressed packet - size of <''压缩长度''>  is larger than protocol maximum of 8388608</code>。
+* 其他情况下，解码端将使用ZLib算法解码后续数据并读取数据包编码和负载。
+** 客户端作为解码端时不会检验压缩连接的有效性，因此服务端可以发送无限制长度的数据包到客户端进行解析。
+
+=== 加密连接 ===
+在登录阶段时，服务端可以要求客户端使用加密连接进行通信。在[[服务端配置文件格式|服务端配置文件]]内<code>online-mode</code>设置为<code>true</code>（在线模式）时所有连接都将启用加密连接，为<code>false</code>（离线模式）时为可选操作。在原版服务端核心文件中，离线模式下不会启用也无法使用加密连接，使用修改后的服务端可以允许离线模式启用加密连接。
+
+在服务端启动时，服务端会先生成一个1024位的[[wzh:RSA|RSA]]密钥对，并作为服务端密钥对存储在内存中。
+
+加密连接的第一个请求数据包为<code>hello</code>S2C包，此数据包在<code>hello</code>C2S包接收后发送，包含下列内容：
+* <code>serverId</code>：用于登录验证的基础服务端ID字符串，不超过20个字符。原版服务端中此项固定为空字符串。
+* <code>publicKey</code>：服务端密钥对的公钥数据，以[[wzh:X.509|X.509]]标准中的<code>SubjectPublicKeyInfo</code>结构使用[[wzh:ASN.1|ASN.1]] [[wikipedia:X.690#DER encoding|DER编码]]。<ref>https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/security/spec/X509EncodedKeySpec.html</ref>
+* <code>challenge</code>：服务端在每个连接建立时生成的随机4字节的[[wzh:CHAP|挑战]]，用于验证客户端身份。
+* <code>shouldAuthenticate</code>：客户端是否要进行登录验证。见下文{{slink||登录验证}}。
+
+客户端接收到此包后，需要在客户端内生成一个128位的[[wzh:AES|AES]]密钥作为这次加密连接的密钥，并发送<code>key</code>C2S包。此数据包包含下列内容：
+* <code>keybytes</code>：使用服务端公钥加密的AES密钥数据。
+* <code>encryptedChallenge</code>：使用服务端公钥加密的挑战。
+
+服务端接收到<code>key</code>C2S包后，会对<code>encryptedChallenge</code>使用服务端私钥解密，并比对是否与发送的<code>challenge</code>一致。如果不一致，则抛出<code>Protocol error</code>错误。
+
+在服务端解析处理<code>key</code>C2S包后，加密连接建立流程结束，两个逻辑端都会使用上文的AES密钥使用<code>AES/CFB8/NoPadding</code>算法创建密码（Cipher），并使用AES密钥作为初始向量。加密的内容包括发送的所有数据，包括用于TCP分段重组的长度字段''Length''。在整个加密连接的过程中，密码不会被重置。
+
+=== 登录验证 ===
+如果<code>online-mode</code>为<code>true</code>，服务端会要求客户端使用验证服务器进行登录验证。此流程与加密连接的建立一起进行。
+
+在服务端发送<code>hello</code>S2C包时，如果要进行登录验证，服务端进行加密连接流程并将<code>shouldAuthenticate</code>字段设置为<code>true</code>。
+
+客户端接收此数据包，在AES密钥生成之后，需要调用[[Mojang API#客户端登录验证|客户端登录验证API]]，提供基础服务端ID、服务端公钥和AES密钥计算作为服务器ID，提供访问令牌用于验证账号登录状态，并提供自身的UUID提交验证服务器。验证服务器可能返回下列信息，客户端如果接收到错误信息则立刻中止连接：
+* “{{tp|disconnect.loginFailedInfo.serversUnavailable}}”：客户端不能正常连接到验证服务器。
+* “{{tp|disconnect.loginFailedInfo.invalidSession}}”：客户端的账号登录失效或没有登录。
+* “{{tp|disconnect.loginFailedInfo.insufficientPrivileges}}”：账号设置中禁用了多人游戏权限。
+* “{{tp|disconnect.loginFailedInfo.userBanned}}”：账号被封禁。
+* 如果验证成功，API返回204 No Content状态码。
+
+服务端在接收<code>key</code>C2S包后，会调用[[Mojang API#服务器登录验证|服务端登录验证API]]，提供客户端的玩家名称（由客户端在<code>hello</code>C2S包中提供）和上文所述的服务端ID。如果服务端配置文件内设置<code>prevent-proxy-connections</code>为<code>true</code>，则还会提供客户端连入的IP。验证服务器可能返回下列信息，服务端如果接收到错误信息则立刻中止连接：
+* “{{tp|multiplayer.disconnect.unverified_username}}”：服务端不能验证客户端的登录状态。可能的原因包括客户端玩家名称错误、<code>prevent-proxy-connections</code>为<code>true</code>时客户端连入IP和客户端请求IP不一致。
+* “{{tp|multiplayer.disconnect.authservers_down}}”：服务端不能正常连接到验证服务器。
+* 如果验证成功，API返回玩家信息，服务端将向客户端发送登录成功等数据包通知客户端验证成功。
+
+=== 登录流程 ===
+将压缩连接、加密连接和登录验证三个功能结合起来，就是客户端与服务端登录阶段的所有工作。按照时间顺序，逻辑端从握手阶段到配置阶段开始经历下列数据交换：
+# 客户端发起网络连接，并发送<code>intention</code>C2S包，指定<code>intention</code>字段为<code>Login</code>（2）。客户端切换到登录阶段。
+# 服务端接收<code>intention</code>，切换到登录阶段。
+# 客户端发送<code>hello</code>C2S包，发送玩家名称和UUID。
+# 服务端接收<code>hello</code>C2S包，检查是否需要建立加密连接。
+#* 如果启用加密连接，服务端发送<code>hello</code>S2C包，交换公钥和挑战。
+#* 如果不启用加密连接，跳转到第7步。
+# （启用加密连接）客户端接收<code>hello</code>S2C包，生成AES密钥，初始化密码，发送<code>key</code>C2S包，交换密钥和挑战响应。
+#* 如果服务端要求登录验证，客户端需要调用客户端登录验证API。
+# （启用加密连接）服务端接收<code>key</code>，获取AES密钥，初始化密码，加密连接建立完成。
+#* 如果服务端要求登录验证，服务端需要调用服务端登录验证API。
+# （启用压缩连接）如果服务端启用压缩连接，服务端发送<code>login_compression</code>S2C包，设置压缩阈值。
+# （启用压缩连接）客户端接收<code>login_compression</code>，设置压缩阈值。
+# 服务端发送<code>login_finished</code>S2C包，完成登录阶段。
+# 客户端接收<code>login_finished</code>，发送<code>login_acknowledged</code>C2S包，切换到配置阶段。
+# 服务端接收<code>login_acknowledged</code>，切换到配置阶段。
+
+如果客户端由其他服务端转移而连接，从握手阶段到配置阶段开始的流程与登录流程基本一致，差异点主要为第一步的<code>intention</code>字段为<code>Transfer</code>（3），且服务端需要额外在第2步检查配置文件内的<code>accepts-transfers</code>是否为<code>true</code>，如果不为<code>true</code>服务端会主动使用<code>login_disconnect</code>S2C包断开连接。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox protocol}}
+{{Navbox Java Edition}}
+
+[[Category:网络协议]]

@@ -1,0 +1,207 @@
+# 页面: 铁轨
+# 来源: https://zh.minecraft.wiki/w/%E9%93%81%E8%BD%A8
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 待更新条目, 方块, 机制, 红石, 红石机制, 覆写自动值的页面, 需要验证, 需要验证/基岩版
+# 抓取时间: 2026-07-14 17:37:46
+# 原始 Wikitext 内容:
+
+{{about|普通铁轨}}
+{{Infobox block
+|image=Rail.png
+|invimage=Rail
+|block-cut-redstone-wire='''{{el|je}}'''：否<br>'''{{el|be}}'''：是（拐弯时）<br>否（不拐弯时）
+}}
+{{quote|Minecraft如果没有{{ruby|采矿|Mine}}就不能称之为Minecraft，但是进出你的矿洞会是一件痛苦的事情。如果你是我这种人，你最终会挖出一个长长的倾斜通道直达基岩，其中许多需要跳跃的部分一直保留到你挖出足够多的圆石来铺上楼梯。就算这样也还是有一点……步行的乏味。但是有另一条路。一条更好的路，更快的路，更平稳的路。一条让你大喊“哇啊啊啊啊啊啊啊”、洞穴的墙壁从你身边呼啸而过的路。一条铁路。|[[Duncan Geere]]<ref>{{article|taking-inventory--rails|Taking Inventory: Rails|Mar 29, 2019}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''铁轨（Rail）'''是用来提供[[矿车]]行进路线的非固体方块。
+
+== 生成 ==
+=== 自然生成 ===
+铁轨可以在[[废弃矿井]]和[[林地府邸]]的地板上生成。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 箱子战利品 ===
+{{LootChestItem|rail}}
+
+=== 合成 ===
+{{Crafting
+|A1= Iron Ingot |C1= Iron Ingot
+|A2= Iron Ingot |B2= Stick |C2= Iron Ingot
+|A3= Iron Ingot |C3= Iron Ingot
+|Output= Rail,16
+|type= Transportation
+}}
+
+== 破坏 ==
+挖掘铁轨的合适工具是镐。
+
+{{Breaking table}}
+
+铁轨被破坏后会掉落自身。
+
+== 用途 ==
+{{see also|Tutorial:矿车}}
+
+铁轨可作为[[矿车]]的轨道，或用作[[红石元件]]。一系列相连的铁轨（包括普通铁轨、[[动力铁轨]]、[[探测铁轨]]和[[激活铁轨]]）被称作'''轨道'''。
+
+与大多数需要附着另一方块而放置的方块不同，铁轨可被[[活塞]]推动，可被[[黏性活塞]]推动或拉动，在推动或拉动的过程中不会掉落为物品。
+
+铁轨会在没有合适[[方块]]支撑（见{{slink||放置}}）{{verify|for=且接收到[[NC更新]]|bedrock=1}}，或{{only|for=[[水]]流过|bedrock}}时[[掉落]]为[[物品]]。
+
+{{in|be}}如果[[熔岩]]流过铁轨，铁轨将会被摧毁且不会掉落物品。
+
+=== 生物 ===
+{{in|je}}除了[[监守者]]以外的所有生物在寻路时不会将铁轨视为可以走上或跨越的方块，除非它们正站在任意类型的铁轨上。
+
+=== 放置 ===
+[[File:All linked rails.png|thumb|铁轨可能连接到的所有位置，图中以普通铁轨为基准]]
+铁轨只能放置在上表面[[方块支撑形状|边缘完整]]的方块上。尝试把铁轨放置在方块的侧面或底面时，如果这些面邻近的顶面符合条件，铁轨会放在邻近的顶面上。
+
+铁轨可以和水平方向上相邻一格的铁轨相连，也可以和这些相邻铁轨上方或下方一格的铁轨相连。铁轨可以和其他种类的[[铁轨（消歧义）|铁轨]]相连。
+
+放置铁轨时，铁轨会{{only|for=朝向玩家|je}}或{{only|for=呈南-北方向|be}}。然后，新放置的铁轨和临近的铁轨会立即检查自己是否可以与其他铁轨相连并改变方向：
+* 如果有1个铁轨可供连接，铁轨会呈直线连接已有铁轨，朝南-北方向或东-西方向；
+* 如果有2个铁轨可供连接，铁轨会直接连接这两个铁轨；
+* 如果有超过2个的铁轨可供连接，会优先连接东和南方向的铁轨。
+<gallery mode="packed">
+File:Teesbeforefilling.png|放置铁轨前的丁字路口（上方为北）
+File:Tjunctionsafter.png|放置铁轨后的丁字路口（上方为北）
+File:Up down rails.png|一些组合了上行和弯道的铁轨，注意左侧的铁轨在弯道处没有连接
+File:4wayjoined.png|图中上方为北
+</gallery>
+
+在这个检查的过程中，已经以南-北或东-西方式连接了其他铁轨的铁轨会被忽略。
+
+铁轨可能会因为弯道处的铁轨不能改变高度、一些其他种类的铁轨不能转弯等原因无法直接连接。
+
+=== 红石电路元件 ===
+丁字路口交叉处{{only|be|for=和十字路口交叉处}}的弯道铁轨可以通过红石信号改变其拐弯方向。
+<gallery mode="packed">
+File:Teeswitchleft.png
+File:Teeswitchright.png
+</gallery>
+
+== 音效 ==
+{{Sound table/Block/Metal}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table|generatetranslationkeys=java
+|Rail|spritetype=block|nameid=rail
+|showblocktags=je
+|showitemtags=je
+|blocktags={{GameTag|blocks|rail}}
+|itemtags={{GameTag|items|rail}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table|generatetranslationkeys=bedrock
+|Rail|spritetype=block|nameid=rail|showblocktags=be|blocktags={{GameTagBE|block|rail}}|foot=1}}
+
+=== 方块数据值 ===
+{{See also|基岩版数据值}}
+
+在[[基岩版]]中，铁轨的方块数据指定其连接的方向。
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+== 成就 ==
+{{load achievements|on-a-rail}}
+
+== 视频 ==
+{{bv|BV1M4411z7wd}}
+
+== 历史 ==
+{{needs update|section=1|需要从英文wiki更新渲染图。}}
+{{HistoryTable
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100618|
+[[File:Rail (NS) JE1.png|32px]] 加入了铁轨。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.2.0|[[File:Rail (NS) JE2 BE1.png|32px]] 更改了铁轨的纹理。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.6|现在并排的铁轨不再能提高矿车行驶速度。}}
+|{{HistoryLine||1.8|dev=pre1|铁轨现在能够从[[废弃矿井]]的箱子里获得。
+|铁轨现在自然生成在[[废弃矿井]]中。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|由于漏洞，铁轨现在会被[[降雪]]摧毁。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|铁轨的部分行为因西南规则变成了[[东南规则]]而改变。}}
+|{{HistoryLine|||dev=Beta 1.9-pre5|修复了1.9-pre1的漏洞。}}
+|{{HistoryLine|||dev=Beta 1.9-pre6|现在[[镐]]可用于更快地破坏铁轨。}}
+|{{HistoryLine||1.3.1|dev=12w25a|铁轨现在可以置于倒置的[[楼梯]]和上半[[台阶]]上。}}
+|{{HistoryLine||1.5|dev=13w04a|现在所有生物都不会主动走上铁轨。}}
+|{{HistoryLine||1.9|dev=15w38a|倾斜铁轨的判定箱高度从{{frac|10|16}}格降低到{{frac|5|32}}格。}}
+|{{HistoryLine|||dev=15w44a|将[[废弃矿井]]箱子中铁轨的生成概率提高了20多倍{{verify|具体是多少倍？}}。
+|生物不再生成于铁轨上。}}
+|{{HistoryLine||1.10|dev=16w21a|倾斜铁轨的判定箱高度从{{frac|5|32}}格增加到1格。}}
+|{{HistoryLine||1.11|dev=16w32b|倾斜铁轨的判定箱高度从1格降低到0.5格。}}
+|{{HistoryLine|||dev=16w39a|铁轨现在会在[[林地府邸]]生成。}}<!--（在相关其他页面无法找到，英文Wiki也没有这句话）
+|{{HistoryLine||1.12.1|除了蜘蛛外{{verify}}一切生物的寻路系统不再将铁轨视为可跨越的方块。但是兔子的移动方式让它们能够在无意中跳上铁轨，从而跨越铁轨。}}-->
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，铁轨的数字ID是66。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Rail (NS) JE3 BE2.png|32px]] 更改了铁轨的纹理。}}
+|{{HistoryLine||1.15|dev=19w39a|放置未连接到其他铁轨的铁轨现在会朝向玩家面向的方向，而不再总是南北朝向。}}
+|{{HistoryLine|||dev=19w12b|铁轨现在可以放置在[[玻璃]]、[[染色玻璃]]、[[冰]]、[[荧石]]和[[海晶灯]]上表面。}}
+|{{HistoryLine||1.17|dev=20w45a|铁轨现在可以放置在水下。
+|铁轨现在不会被水流和熔岩流冲毁。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.8.0|dev=build 1|[[File:Rail (NS) JE2 BE1.png|32px]] 加入了铁轨。}}
+|{{HistoryLine||0.9.0|dev=build 1|铁轨现在会自然生成在[[废弃矿井]]中。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|铁轨现在会在[[林地府邸]]生成。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|铁轨现在可以放置在水下。}}
+|{{HistoryLine||1.7.0|dev=1.7.0.2|铁轨现在会被水流破坏。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Rail (NS) JE3 BE2.png|32px]] 更改了铁轨的纹理。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Rail (NS) JE2 BE1.png|32px]] 加入了铁轨。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Rail (NS) JE3 BE2.png|32px]] 更改了铁轨的纹理。}}
+}}
+
+== 你知道吗 ==
+* 在上面有铁轨的[[方块]]上行走会产生铁轨下面方块的[[音效]]，但如果[[玩家]]在铁轨上[[跳跃]]着前行则会产生铁轨的音效。
+* 通过计量轨道之间的距离可以得出，Minecraft中的铁轨为轨距750mm的[[wzh:窄轨|窄轨]]。
+* 自然生成在[[废弃矿井]]里的铁轨可能悬空，但是一旦方块更新了它们就会掉下来。
+* 在一连串转弯的普通铁轨上行驶比[[动力铁轨]]更快。
+* 虽然{{in|je}}绝大部分生物在寻路时不会将铁轨视为可以走上或跨越的方块，但兔子的移动方式让它们能够在无意中跳上铁轨，从而跨越铁轨。
+
+== 画廊 ==
+<gallery>
+File:Railtrack.png|有弯道和坡道的铁轨
+File:Minecraft roller coaster.png|轨道过山车的示例
+File:RailBug.png|在废弃矿井中发现的随机生成的错位铁轨
+File:Floating rails.png|另一个在废弃矿井里的浮空铁轨
+File:Mine craft train.png|村民乘坐铁轨上的矿车
+File:Rail stop front.png|一个不使用红石换轨的轨道站，完全基于单向十字铁路而设计
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks|others}}
+{{Navbox redstone}}
+
+[[Category:机制]]
+[[Category:红石机制]]
+
+[[cs:Kolej]]
+[[de:Schiene]]
+[[en:Rail]]
+[[es:Raíl]]
+[[fr:Rails]]
+[[hu:Sín]]
+[[it:Binario]]
+[[ja:レール]]
+[[ko:레일]]
+[[lzh:軌]]
+[[nl:Spoor]]
+[[pl:Tory]]
+[[pt:Trilho]]
+[[ru:Рельсы]]
+[[uk:Рейки]]

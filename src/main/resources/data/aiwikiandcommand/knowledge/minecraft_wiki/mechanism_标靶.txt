@@ -1,0 +1,137 @@
+# 页面: 标靶
+# 来源: https://zh.minecraft.wiki/w/%E6%A0%87%E9%9D%B6
+# 分类: 
+# 抓取时间: 2026-07-14 17:29:11
+# 原始 Wikitext 内容:
+
+{{redirect|Target|指令中選擇實體的參數|目标选择器}}
+{{Infobox block
+|image=Target.png
+|invimage=Target
+|light=0
+|block-redstone-conductor='''{{el|je}}'''：是<br>'''{{el|be}}'''：是（未激活时）<br>否（激活时）
+|block-cut-redstone-wire='''{{el|je}}'''：是<br>'''{{el|be}}'''：是（未激活时）<br>否（激活时）
+}}
+{{quote|Minecraft中没有圆形，所以我们的标靶图案是同心正方形。这样可以提供更大的射击区域，对玩家来说是个好消息。|[[Duncan Geere]]<ref>{{article|block-week--target|Block of the Week: Target|Jun 18, 2020}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''标靶（Target）'''是一种被[[弹射物]]击中时能够发出[[红石信号]]的方块。
+
+== 生成 ==
+=== 自然生成 ===
+标靶会在[[远古城市]]中心的红石地下室里生成。
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A2=Redstone Dust
+|B1=Redstone Dust
+|B2=Hay Bale
+|B3=Redstone Dust
+|C2=Redstone Dust
+|Output= Target
+|type= Redstone
+}}
+
+== 破坏 ==
+挖掘标靶的合适工具是锄。
+
+{{Breaking table}}
+
+标靶被破坏后会掉落自身。
+
+== 用途 ==
+标靶是一种信号源元件，可改变红石粉的指向方向且可被充能。以此可引导红石线以减小红石结构体积。
+
+[[File:BE redstone dust and target block.png|thumb|350px|{{in|be}}羊毛上的红石粉在渲染上被标靶吸引，但在逻辑上仍然指向红石灯，因此激活了红石灯]]
+{{in|be}}受限于有向图搜索逻辑，标靶改变红石线逻辑指向时具有以下性质：
+* 出发自'''其他元件'''的连接，经过标靶四周的红石线时，是“假引线”。
+** 只能使红石粉主动额外指向标靶，不能改变其原有指向。
+** 即便渲染上不会指向，逻辑上仍会指向原有方向，如缩略图中所示。
+* 出发自'''标靶'''的连接，经过标靶四周的红石线时，是“真引线”。
+** 和其他信号源元件相同，如[[红石块]]和[[唱片机]]。
+** 和{{el|je}}中的引线行为相同。
+
+=== 红石元件 ===
+标靶在被任意[[弹射物]]击中时会发出一定强度的[[红石信号]]并且触发方块更新。
+
+若标靶被三叉戟或箭击中，其发出的红石信号将持续{{convert|20|刻}}；若被其他弹射物击中，则红石信号将持续{{convert|8|刻}}。弹射物击中的位置越靠近靶心，发出的红石信号越强，强度范围为1-15。
+
+标靶输出信号时会：
+* 激活毗邻的[[红石线]]和四周输入端朝向标靶的[[红石中继器]]和[[红石比较器]]，强度取决于弹射物击中标靶的位置。
+* 激活附着其上的[[红石火把]]使其熄灭。
+* 激活毗邻的[[红石元件#机械元件|红石元件]]，面向标靶的[[活塞]]除外。
+
+== 音效 ==
+{{sound table/Block/Grass}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table|generatetranslationkeys=java
+|Target
+|showblocktags=je
+|blocktags={{GameTag|block|target}}
+|spritetype=block|nameid=target|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table|generatetranslationkeys=bedrock
+|Target|spritetype=block|nameid=target|showblocktags=be|blocktags={{GameTagBE|block|target}}|foot=1}}
+
+=== 方块状态 ===
+{{Block states table}}
+
+== 成就 ==
+{{load achievements|bullseye}}
+
+== 进度 ==
+{{load advancements|adventure.bullseye}}
+
+== 视频 ==
+{{bv|BV1zy4y1h7jY}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2019年9月28日|link={{ytl|OZqNaEX8208}}|[[MINECON Live 2019]]展示了标靶。}} 
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w09a|[[File:Target JE1 BE1.png|32px]] 加入了标靶。}}
+|{{HistoryLine|||dev=20w10a|现在可以在标靶侧面放置[[梯子]]和[[绊线钩]]。
+|现在标靶是可燃的了。
+|现在标靶被[[末影珍珠]]和[[附魔之瓶]]击中时也会发出红石信号。
+|现在标靶在被[[活塞]]或[[黏性活塞]]推动时不会再保留红石信号了。}}
+|{{HistoryLine|||dev=20w11a|现在用[[锄]]可以更快速地破坏标靶。}}
+|{{HistoryLine|||dev=20w18a|现在标靶可以被红石充能了。
+|现在标靶可以改变红石粉的连接方向。}}
+|{{HistoryLine||1.19|dev=22w13a|现在标靶可以生成于[[远古城市]]中心的地下室。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|exg=1|dev=1.16.0.51|[[File:Target JE1 BE1.png|32px]] 加入了标靶，目前只能通过[[实验性玩法]]获取。}}
+|{{HistoryLine|||exg=none|dev=1.16.0.57|现在标靶的红石信号持续时间基于弹射物的种类。
+|标靶不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.17.30|dev=1.17.20.20|现在标靶可以被红石充能了。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.26|现在标靶可以生成于[[远古城市]]中心的地下室。}}
+}}
+
+== 画廊 ==
+<gallery>
+TargetBlock.png|[[MINECON Live 2019]]中展示的标靶
+Target Artwork.png|标靶的官方艺术作品
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[de:Zielblock]]
+[[en:Target]]
+[[es:Diana]]
+[[fr:Cible]]
+[[ja:的]]
+[[ko:과녁]]
+[[pl:Tarcza strzelecka]]
+[[pt:Alvo]]
+[[ru:Мишень]]
+[[uk:Мішень]]

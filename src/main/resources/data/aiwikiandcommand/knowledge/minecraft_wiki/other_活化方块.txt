@@ -1,0 +1,219 @@
+# 页面: 活化方块
+# 来源: https://zh.minecraft.wiki/w/%E6%B4%BB%E5%8C%96%E6%96%B9%E5%9D%97
+# 分类: 
+# 抓取时间: 2026-07-14 17:30:11
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=26w14a}}{{stub}}
+{{Infobox entity
+|image=none
+|size='''内部为方块时'''：<br>高度：0.98格<br>宽度：0.98格<br>'''内部为物品时'''：<br>高度：0.5格<br>宽度：0.5格
+|nobe=0
+|id-raw=living_block
+}}
+
+'''活化方块（Living Block）'''是用来模拟[[方块]]和[[物品]]的实体。
+
+== 生成 ==
+活化方块会在所有可能会生成物品的场景中生成，包括但不限于方块的掉落物、容器被破坏后的内容物、实体的掉落物、钓鱼钓上的物品、可疑的方块扫刷出的物品、猪灵的以物易物、发射器投掷的物品、生物给予的物品、附魔台和堆肥桶等方块输出的物品等。
+
+活化方块也会在[[合成方格（26w14a）|合成方格]]或活化方块死亡时的合成输出和玩家投掷[[末影之眼]]时生成。
+
+创造模式下的玩家对准方块按下[[选取方块]]组合键后，会在瞄准的一侧生成选中的方块对应的活化方块。
+
+== 行为 ==
+活化方块不会自主移动，只有玩家对其进行操作时才会产生行为，方块形式的活化方块会翻滚移动，方块形式的活化方块在移动时会播放该方块被破坏时的对应音效。
+
+活化方块可以被[[拴绳]]拴住。
+
+活化方块具有“生命值”和“最大生命值”，其中“最大生命值”默认为10。活化方块的“最大生命值”会随着活化方块的种类而变化，但最低为2，最高为200。活化[[箱子]]、[[铜箱子]]、[[潜影盒]]、[[木桶]]和[[末影箱]]的“生命值”为{{hp|200}}，对于除了箱子、铜箱子、潜影盒、木桶和末影箱之外的方块的活化方块，其“生命值”大小为{{cd|-{}-3&times;[[爆炸抗性]]}}；对于[[收纳袋]]的活化方块，其“生命值”大小为{{hp|2}}{{note|实际上“最大生命值”等于收纳袋的最大耐久度，但由于正常游戏流程中不存在具有耐久度属性的收纳袋故只可能为2。}}；对于其他物品的活化方块，如果物品最大耐久度高于0，则其“最大生命值”大小为{{cd|-{}-[[物品耐久]]&div;10}}，否则为默认值10。
+
+对于方块的活化方块，其生命值减少后会在外观上呈现挖掘方块的挖掘动画，且{{gamerule|natural_health_regeneration}}为<code>true</code>时每秒会回复{{hp|1}}。
+
+活化方块会被[[铁傀儡]]、[[北极熊]]、[[杀手兔]]、[[狼]]、[[女巫]]、[[烈焰人]]、[[末影螨]]、[[恶魂]]、[[劫掠兽]]、[[蠹虫]]、[[史莱姆]]、[[岩浆怪]]、[[恼鬼]]、[[唤魔者]]、[[幻术师]]、[[掠夺者]]、[[卫道士]]、[[骷髅]]、[[凋灵骷髅]]、[[流浪者]]、[[焦骸]]、[[僵尸]]、[[僵尸村民]]、[[僵尸猪灵]]、[[尸壳]]和[[溺尸]]攻击。除铁傀儡为受击后反击外，这些生物攻击活化方块的触发条件和玩家一致。
+
+活化方块死亡时，如果存在只需要其内部一个物品即可合成的配方，则会生成新的活化方块实体，内部包含合成结果。例如击杀橡木木板的活化方块后会生成橡木按钮的活化方块。特别地，如果活化方块是受火焰伤害死亡，如果其内部物品可作为烧炼配方的输入，则会生成新的活化方块实体，内部包含烧炼结果。
+
+如果活化方块找不到创建其自身的实体，则会在5分钟后清除自身。
+
+猪灵捡起非金锭的活化方块后，被捡起的活化方块内部的物品会变成空气，以这种方式生成的空气会导致游戏获取移动方式时出错，进而导致崩溃。
+
+=== 特殊功能 ===
+若无特别说明，下列所述的方块均指活化方块。下述活化方块具有特殊的功能：
+* [[羊毛]]会向上飘浮。如果有同时有3个或更多的羊毛连接着玩家，玩家可以跳得更高，同时下降得更慢，并免除摔落伤害。
+** 同时有3个或更多的羊毛连接着玩家后，尽管玩家不再连接羊毛，玩家仍然可以跳得更高，同时下降得更慢，但摔落伤害不再被免除。{{more info|什么情况下可以断开与羊毛的连接后不再跳得更高且下落的更慢？}}
+* [[玻璃]]从超过1格高的位置摔落会受到摔落伤害，每摔落1格，会受到{{hp|1}}的伤害。
+* [[拉杆]]会自动随机切换状态。
+* [[床]]可以正常用于睡觉，睡觉时玩家的视角会随着床滚动。
+** 睡觉可以设置[[重生点]]，但重生点不会随着床移动而移动，也不会因为床破坏而移除。
+* [[熔炉]]、[[高炉]]、[[烟熏炉]]或[[营火]]靠近可烧炼的物品时，会开始烧炼该物品，不需要使用燃料。
+** 熔炉、高炉、烟熏炉或营火远离正在烧炼的物品时，烧炼会中断。
+* [[箱子]]、[[木桶]]、[[潜影盒]]或[[末影箱]]靠近活化方块时，会将物品放入容器中，但潜影盒仍然无法装入潜影盒。右键容器可以查看容器内物品。{{ctrl|攻击}}该容器时，里面的物品会掉出。如果直接杀死容器（如使用{{cmd|kill}}）后，里面的物品会直接消失，不会掉出。
+** 特别地，潜影盒受到攻击后会像[[潜影贝]]一样传送。
+* [[TNT]]死亡后会变为被激活的TNT，在{{convert|20}}后爆炸。
+
+=== 特殊组合功能 ===
+若无特别说明，下列所述的方块均指活化方块。下列多个不同的活化方块相互靠近时会触发特殊的效果：
+* 1个任意种类的[[门]]靠近23个任意种类[[原木]]、[[去皮原木]]、[[木板]]、[[木头]]或[[圆石]]（可以混搭），会生成一个3&times;3&times;3的简单房子。
+** 组成房子的方块是普通方块，而'''不是'''活化方块。
+** 生成受标签{{cd|#builds_into_house}}控制。
+{{layered blueprint|name=builds_into_house|default=第3层
+|c=Cobblestone|d=Oak Door+bottom|D=Oak Door+top
+|----第1层|
+ccc
+c c
+cdc
+|----第2层|
+ccc
+c c
+cDc
+|----第3层|
+ccc
+ccc
+ccc
+}}
+* 272个[[圆石]]、16个[[玻璃]]和4个[[火把]]靠近会生成一个大房子。
+{{layered blueprint|name=nine_by_nine
+|c=Cobblestone|t=Torch|g=Glass|default=第6层
+|----第1层|
+ccccccccc
+ccccccccc
+ccccccccc
+ccccccccc
+ccccccccc
+ccccccccc
+ccccccccc
+ccccccccc
+ccccccccc
+|----第2至3层|
+ccccccccc
+c       c
+c       c
+c       c
+c       c
+c       c
+c       c
+c       c
+cccc cccc
+|----第4层|
+ccccccccc
+c   t   c
+c       c
+c       c
+ct     tc
+c       c
+c       c
+c   t   c
+ccccccccc
+|----第5层|
+ccccccccc
+c       c
+c       c
+c       c
+c       c
+c       c
+c       c
+c       c
+ccccccccc
+|----第6层|
+ccccccccc
+ccccccccc
+ccggcggcc
+ccggcggcc
+ccccccccc
+ccggcggcc
+ccggcggcc
+ccccccccc
+ccccccccc
+}}
+* 8个[[铁栏杆]]或[[铜栏杆]]靠近时，会形成一个[[铁陷阱]]或[[铜陷阱]]，其中铜陷阱的氧化程度取决于铜栏杆的氧化程度。
+* [[骨粉]]靠近[[树苗]]会通过消耗骨粉催熟树苗，但无法通过类似的方法催熟其他农作物。
+* [[打火石]]或[[火焰弹]]靠近[[TNT]]时，TNT会被点燃。
+* 打火石靠近12个[[黑曜石]]会生成一个[[下界传送门]]。
+** 组成下界传送门的方块是普通方块，而'''不是'''活化方块。
+** 生成后，打火石会直接消失，而不是消耗耐久。
+** 即使只使用了12个黑曜石生成下界传送门，但生成的下界传送门由14个黑曜石组成。
+* [[末影之眼]]靠近[[末地传送门框架]]会生成填有末影之眼的末地传送门框架，12个填有末影之眼的末地传送门框架靠近会形成一个[[末地传送门]]。
+** 组成[[末地传送门]]的方块是普通方块，而'''不是'''活化方块。
+* 可以通过活化方块相互靠近生成通过放置方块生成的生物。
+** 4个[[灵魂沙]]和3个[[凋灵骷髅头颅]]靠近会生成[[凋灵]]，生成的凋灵会跳过生成动画。
+** 2个[[雪块]]和1个[[雕刻南瓜]]靠近会生成[[雪傀儡]]。
+** 4个[[铁块]]和1个[[雕刻南瓜]]靠近会生成[[铁傀儡]]。
+** 1个[[铜块]]和1个[[雕刻南瓜]]靠近会生成[[铜傀儡]]，生成的铜傀儡氧化程度取决于铜块的氧化程度。
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|firstcolumnname=实体
+|generatetranslationkeys=java
+|活化方块
+|nameid=living_block
+|translationkey=entity.minecraft.living_block
+|spritetype=block
+|spritename=air
+|foot=1
+}}
+
+=== 实体数据 ===
+{{main|实体数据格式}}
+活化方块有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt collapsed|{{tooltip|实体|Java类名：Entity}}共通标签|{{#lst:编码格式/Entity|codec_entity_26w14a}}|Entity}}
+** {{nbt|int-array}}{{nbt|compound|leash}}：'''二选一'''，代表生物目前是否被拴绳拴住与被拴住时的信息。如果没有被拴住则不存在此标签。
+*** {{nbt condition|当生物被拴绳拴在一个栅栏上时，此标签为{{nbt|int-array|整型数组}}，内部的三个整数分别代表了位置的XYZ坐标值。}}
+*** {{nbt condition|当生物被另一个实体用拴绳拴住时，此标签为{{nbt|compound|复合标签}}，附加的标签如下：}}
+*** {{nbt|int-array|UUID|required=1|existonsave=1}}：拴绳连接到的实体的[[UUID]]。
+** {{nbt|compound|item}}：表示活化方块内部的物品。
+*** {{nbt collapsed|物品共通标签|
+** {{nbt|string|id|required=1|existonsave=1}}：（[[命名空间ID]]）表示某种类的物品堆叠。若未指定，游戏会在加载区块或者生成物品时将其变更为空气。
+** {{nbt|compound|components}}：当前物品的组件修订，将修改物品的[[数据组件]]信息。
+*** {{nbt|any|<''数据组件ID''>}}：一项组件和其对应的数据，代表物品拥有此组件。设置组件数据时可以不写命名空间，但游戏在导出时会自行加上<code>minecraft:</code>前缀。
+*** {{nbt|compound|!<''数据组件ID''>}}：存在时，使一个数据组件失效。此复合标签的内容不影响行为。设置组件数据时可以不写命名空间，但游戏在导出时会自行加上<code>minecraft:</code>前缀。
+** {{nbt|int|count}}：（{{interval|left_open=0|right=物品最大堆叠数量}}）[[物品]]的堆叠数。不存在或无效时则默认为1。
+|item_stack}}
+** {{nbt|int array|attack_target}}：活化方块正在攻击的实体。
+** {{nbt|int array|owner}}：创建此活化方块的生物。
+** {{nbt|int array|commander}}：向活化方块发出命令的实体。
+** {{nbt|float|health|existonsave=1}}：表示活化方块的生命值。
+** {{nbt|float|max_health|existonsave=1}}：（默认为10）表示活化方块的最大生命值。
+** {{nbt|string|group|existonsave=1}}：（默认为<code>none</code>）表示活化方块的分组。取值可以为<code>none</code>、<code>red</code>、<code>blue</code>、<code>lime</code>、<code>yellow</code>、<code>purple</code>、<code>aqua</code>或<code>all</code>。
+** {{nbt|boolean|pinned|existonsave=1}}：（默认为<code>false</code>）活化方块是否不会响应命令。
+** {{nbt|boolean|selected|existonsave=1}}：（默认为<code>false</code>）活化方块是否被玩家选中。
+** {{nbt|int|despawn_ticks|existonsave=1}}：（默认为6000）活化方块消失的时间。当活化方块周围50格不存在玩家，或不存在创建者时此值每刻减少1，为0时清除自身。
+** {{nbt|compound|container_behavior_data|existonsave=1}}：（仅限容器类方块或物品的活化方块）容器类方块和物品的附加数据。
+*** {{nbt|list|items}}：容器内的物品。
+**** {{nbt collapsed|物品共通标签|
+** {{nbt|string|id|required=1|existonsave=1}}：（[[命名空间ID]]）表示某种类的物品堆叠。若未指定，游戏会在加载区块或者生成物品时将其变更为空气。
+** {{nbt|compound|components}}：当前物品的组件修订，将修改物品的[[数据组件]]信息。
+*** {{nbt|any|<''数据组件ID''>}}：一项组件和其对应的数据，代表物品拥有此组件。设置组件数据时可以不写命名空间，但游戏在导出时会自行加上<code>minecraft:</code>前缀。
+*** {{nbt|compound|!<''数据组件ID''>}}：存在时，使一个数据组件失效。此复合标签的内容不影响行为。设置组件数据时可以不写命名空间，但游戏在导出时会自行加上<code>minecraft:</code>前缀。
+** {{nbt|int|count}}：（{{interval|left_open=0|right=物品最大堆叠数量}}）[[物品]]的堆叠数。不存在或无效时则默认为1。
+** {{nbt|byte|Slot}}：当前物品所在的物品槽位。
+|item_stack_with_slot}}
+</div>
+
+== 进度 ==
+{{load advancements|page=进度/26w14a|adventure.mine_a_block;adventure.craft_table;adventure.door;adventure.obsidian;adventure.craft_chest;adventure.craft_sword;adventure.wooden_pickaxe;adventure.build_house;adventure.craft_nether_portal;adventure.barrel_roll;adventure.kill_a_mob;adventure.furnace;nether.barrel_roll;adventure.kill_all_mobs;adventure.iron_ingot;nether.obtain_blaze_rod;end.barrel_roll;adventure.crafter;story.obtain_armor;adventure.build_trap;adventure.eye_frame_combination;adventure.craft_end_portal;end.kill_dragon}}
+
+== 你知道吗 ==
+* 在游戏源代码中，负责活化方块形式的羊毛减小玩家重力的方法名为<code>playerChaseTheSkies</code>，这同时也是对[[追逐天空]]小更新的引用。
+
+== 画廊 == 
+=== 渲染图 ===
+<gallery>
+Small House (26w14a).png|活化方块生成的小房子（以橡木门和圆石作为示例）
+Nine by Nine.png|活化方块生成的大房子
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 导航 ==
+{{Navbox jokes|26w14a}}
+
+[[Category:实体]]
+
+[[en:Living Block]]
+[[ja:Living Block]]

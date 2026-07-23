@@ -1,0 +1,248 @@
+# 页面: 物品格式
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+{{for|[[Java版1.20.5]]前物品存储数据的格式|物品格式/Java版1.20.5前|基岩版的物品格式|基岩版存档格式/物品格式}}
+{{exclusive|je}}
+
+'''物品堆叠（Item Stack）'''是游戏使用[[物品]]的一种形式，其以统一的格式存储于各个游戏文件中。
+
+== 数据格式 ==
+物品数据存在于游戏各处，例如生物[[物品栏]]、[[村民交易]]内容和[[物品实体]]等实体数据，容器物品栏等方块实体的数据。
+
+物品存储有两种方式：
+* 带槽位存储：带有{{nbt|byte|Slot}}标签指定物品所在的槽位，比如在箱子中。
+* 不带槽位存储：物品不在槽位中，而是作为某个属性类的数据或配置项，例如物品实体。
+
+物品存储格式如下：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+{{#lst:编码格式/Item|codec_item}}
+</div>
+
+== 物品堆叠 ==
+物品堆叠为单纯的物品类型提供了附加的物品数据，包括物品堆叠数量、组件修订等。
+
+当游戏需要使用物品的[[数据组件]]数据时，会从两部分获取：一部分来源于物品的默认组件，另一部分来源于物品数据中的组件修订。游戏会在默认组件的基础上进行组件修订，得到实际使用的组件数据。{{key|F3+H}}显示的高级[[提示框]]中的组件数量即实际使用的组件数量。
+
+=== 编码格式 ===
+游戏定义了多种不同的物品堆叠格式：
+
+* 基础数据格式：必须指定物品ID，物品数量和组件修订可选。此格式是游戏使用最广泛的格式，上文的存储格式即使用此格式。
+* 可选数据格式：物品堆叠可以为空，只用于[[快捷栏]]。
+
+'''严格性验证'''{{anchor|严格性验证}}
+{{Filetr|Invalid Item Stack.png|thumb|无效的物品}}
+
+游戏会在部分场景下对物品进行进行严格性验证。严格性验证分为两步，依次进行，只要其中一个条件不满足则视为验证失败：
+
+* 对物品堆叠组件的验证：
+** 若物品带有<code>max_damage</code>组件，则物品最大堆叠数不能大于1，否则验证失败。
+** 若物品带有<code>container</code>组件，则要求物品栏内每个物品都通过对物品堆叠数量的验证。
+** 若物品带有<code>bundle_contents</code>组件，则要求物品栏内每个物品都通过对物品堆叠数量的验证，且总容量不允许超过1组物品。
+** 若物品带有<code>charged_projectiles</code>组件，则要求物品栏内每个物品都通过对物品堆叠数量的验证。
+* 对物品堆叠数量的验证：
+** 若物品堆叠的数量大于其最大堆叠数，则验证失败。
+
+简而言之，严格性验证使得物品不能既可堆叠又可损坏，其堆叠数量也不能超出最大堆叠数。
+
+游戏会在定义物品堆叠和对既有物品进行组件修订时（如{{cmd|give}}和{{cmd|item}}）进行严格性验证。此外，<code>container</code>、<code>bundle_contents</code>和<code>charged_projectiles</code>组件自身中的所有物品以及其他部分游戏场景使用的物品也会进行严格性验证。
+
+如果严格性验证失败，则游戏会认为这是一个无效物品，对应的命令执行失败，对应的文件加载失败。
+
+=== 物品默认组件 ===
+未经游戏外部途径修改而获取的物品均拥有默认组件。
+
+在游戏内，物品默认组件可定义为：使用{{cmd|give}}命令且不指定组件修订时所获取物品的组件。
+
+物品默认组件不会序列化为物品数据，因此无法被{{cmd|data}}获取，且当某组件值被设定为默认值时游戏也不会在物品数据中存储此组件。
+
+物品默认组件与物品类型具有强关联性，物品的默认组件不会被其他物品继承。发生物品替换时，如果替换行为会保留原物品的物品堆叠组件，则只有被序列化为物品数据的组件修订会被结果物品继承。
+
+[[创造模式物品栏]]中，物品可能还有其他组件，这些组件依靠物品数据生效。当物品现有组件与创造模式物品栏给定组件完全一致时，该物品：
+* [[创造模式]]下，在物品提示框中以蓝色字显示其分类。
+* 如果物品堆叠上限大于1，则可与创造模式物品栏给定物品堆叠。
+
+物品至少拥有12个默认组件，不同物品的默认组件可能不同。
+
+{| class="wikitable sortable mw-collapsible"
+! 命名空间ID !! 默认拥有此组件的物品 !! 默认值
+|-
+| attack_range || [[矛]] || 见对应条目
+|-
+| attribute_modifiers || 所有物品 || 通常为空列表，[[生物头颅]]、[[雕刻南瓜]]、使用工具材料或盔甲材料的物品具有特殊值
+|-
+| banner_patterns || 旗帜和盾牌 || 空列表
+|-
+| bees || [[蜂巢（方块）|蜂巢]]和[[蜂箱]] || 空列表
+|-
+| block_state || [[光源方块]]、[[测试方块]]、[[蜂巢（方块）|蜂巢]]和[[蜂箱]] || 光源方块：<code>{"light": "15"}</code><br>测试方块：<code>{"mode": "start"}</code><br>蜂巢和蜂箱：<code>{"honey_level": "0"}</code>
+|-
+| blocks_attacks || [[盾牌]] || 见{{slink|盾牌#用途}}
+|-
+| break_sound || 所有物品 || 盾牌：<code>minecraft:item.shield.break</code><br>狼铠：<code>minecraft:item.wolf_armor.break</code><br>其他：<code>minecraft:entity.item.break</code>
+|-
+| bucket_entity_data || [[生物桶]] || 空标签
+|-
+| bundle_contents || [[收纳袋]] || 空列表
+|-
+| charged_projectiles || [[弩]] || 空列表
+|-
+| chicken/variant || [[鸡蛋]]及其变种 || 对应的鸡变种ID
+|-
+| consumable || [[食物]]、[[奶桶]]、[[药水]]和[[不祥之瓶]] || 通常为空标签，干海带和消耗后有特殊效果的物品具有特殊值
+|-
+| container || 容器方块、[[营火]]、[[灵魂营火]]、[[雕纹书架]]和[[饰纹陶罐]] || 空列表
+|-
+| damage || 所有可损伤且不可堆叠的物品 || <code>0</code>
+|-
+| damage_resistant || [[远古残骸]]、所有下界合金质物品和[[下界之星]] || 下界之星：{{tagLink|damage_type|is_explosion}}<br>其他：{{tagLink|damage_type|is_fire}}
+|-
+| damage_type || [[矛]] || <code>spear</code>
+|-
+| death_protection || [[不死图腾]] || 见{{slink|不死图腾#用途}}
+|-
+| debug_stick_state || [[调试棒]] || 空标签
+|-
+| enchantable || 使用[[工具材料]]或[[盔甲材料]]的物品（生物盔甲除外）、[[弓]]、[[弩]]、[[三叉戟]]、[[重锤]]、[[书]]和[[钓鱼竿]] || 见[[附魔能力]]
+|-
+| enchantments || 所有物品 || 空标签
+|-
+| enchantment_glint_override || [[下界之星]]、[[末地水晶]]、[[附魔之瓶]]、[[附魔金苹果]]、[[附魔书]]、[[成书]]和[[调试棒]] || <code>true</code>
+|-
+| entity_data || [[刷怪蛋]] || <code>-{}-{"id": "<''对应的实体ID''>"}</code>
+|-
+| equippable|| 使用盔甲材料的物品、[[鞍]]、[[地毯]]、[[鞘翅]]、[[盾牌]]、[[生物头颅]]、[[雕刻南瓜]]和[[挽具]] || 取决于物品ID
+|-
+| fireworks || [[烟花火箭]] || <code>{"flight_duration": 1}</code>
+|-
+| food || 所有以物品形式食用的食物 || 取决于物品ID，详见[[食物]]
+|-
+| glider || [[鞘翅]] || 空标签
+|-
+| instrument || [[山羊角]] || <code>ponder_goat_horn</code>
+|-
+| item_model || 所有物品 || 物品的命名空间ID
+|-
+| item_name || 所有物品 || <code>-{}-{translate: "<''物品名称对应的本地化键名''>"}</code>
+|-
+| jukebox_playable || [[音乐唱片]] || 对应的唱片机曲目ID
+|-
+| kinetic_weapon || [[矛]] || 见对应条目
+|-
+| lore || 所有物品 || 空列表
+|-
+| map_color || [[地图]] || <code>4603950</code>（0x46402E）
+|-
+| map_decorations || [[地图]] || 空标签
+|-
+| max_damage || 所有可损坏且不可堆叠的物品 || 取决于物品ID，详见{{slink|物品耐久|所有物品的最大耐久度}}
+|-
+| max_stack_size || 所有物品 || 通常为64、16或1，取决于物品ID
+|-
+| minimum_attack_charge || [[矛]] || 1.0
+|-
+| ominous_bottle_amplifier || [[不祥之瓶]] || <code>0</code>
+|-
+| piercing_weapon || [[矛]] || 见对应条目
+|-
+| potion_contents || [[药水]]、[[喷溅药水]]、[[滞留药水]]和[[药箭]] || 空标签
+|-
+| pot_decorations || [[饰纹陶罐]] || <code>["minecraft:brick", "minecraft:brick", "minecraft:brick", "minecraft:brick"]</code>
+|-
+| potion_duration_scale || [[滞留药水]]和[[药箭]] || 滞留药水：<code>0.25</code><br>药箭：<code>0.125</code>
+|-
+| provides_banner_patterns || [[旗帜图案]] || 对应的旗帜图案标签
+|-
+| provides_trim_material || 锻造原材料物品 || 对应的盔甲纹饰材料ID
+|-
+| rarity || 所有物品 || 通常为<code>common</code>，详见[[稀有度]]
+|-
+| recipes || [[知识之书]] || 空列表
+|-
+| repairable || 使用[[工具材料]]或[[盔甲材料]]的物品（马铠除外）、[[盾牌]]、[[重锤]]和[[鞘翅]] || 盾牌：<code>{items: "#minecraft:wooden_tool_materials"}</code><br>重锤：<code>{items: "minecraft:breeze_rod"}</code><br>鞘翅：<code>{items: "minecraft:phantom_membrane"}</code><br>其余取决于对应的工具材料或盔甲材料
+|-
+| repair_cost || 所有物品 || <code>0</code>
+|-
+| stored_enchantments || [[附魔书]] || 空标签
+|-
+| suspicious_stew_effects || [[谜之炖菜]] || 空列表
+|-
+| swing_animation || 所有物品 || [[矛]]：<code>{type: stab, duration: 20}</code><br>其他物品：默认值
+|-
+| tool || 使用[[工具材料]]的物品、[[三叉戟]]、[[重锤]]和[[剪刀]] || 取决于物品ID
+|-
+| tooltip_display || 所有物品 || 空标签
+|-
+| use_cooldown || [[紫颂果]]、[[末影珍珠]]和[[风弹（物品）|风弹]] || 风弹：<code>{seconds: 0.5f}</code><br>其他：<code>{seconds: 1.0f}</code>
+|-
+| use_effects || 所有物品 || [[矛]]：<code>{can_sprint: true, interact_vibrations: false, speed_multiplier: 1}</code><br>其他：默认值
+|-
+| use_remainder || [[药水]]、[[蜂蜜瓶]]、[[蘑菇煲]]、[[兔肉煲]]、[[甜菜汤]]、[[谜之炖菜]]和[[奶桶]] || 瓶装：<code>{count: 1, id: "minecraft:glass_bottle"}</code><br>碗装：<code>{count: 1, id: "minecraft:bowl"}</code><br>桶装：<code>{count: 1, id: "minecraft:bucket"}</code>
+|-
+| weapon || 使用工具材料的物品、[[三叉戟]]和[[重锤]] || 剑、三叉戟、重锤：空标签<br>斧：<code>{disable_blocking_for_seconds: 5.0, item_damage_per_attack: 2}</code><br>其他：<code>{item_damage_per_attack: 2}</code>
+|-
+| writable_book_content || [[书与笔]] || 空标签
+|}
+
+== 历史 ==
+{{needs update|1.21.11的更改|section=1}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|dev=24w09a|物品存储格式被重写。
+|将{{nbt|byte|Count}}重命名为{{nbt|int|count}}，且数量为1时不再保存。
+|移除了非结构化的{{nbt|compound|tag}}，被结构化的{{nbt|compound|components}}取代。
+|加入了对物品数量和物品最大堆叠数限制的严格性验证。
+|现在所有物品都默认具有{{cd|d=pretty|attribute_modifiers|enchantments|lore|repair_cost}}组件。}}
+|{{HistoryLine|||dev=24w10a|现在{{nbt|int|count}}即使为1也会保存。
+|现在所有容器方块物品都默认具有<code>container</code>组件。}}
+|{{HistoryLine|||dev=24w12a|现在所有物品都默认具有{{cd|d=pretty|max_stack_size|rarity}}组件。
+|现在所有食物默认具有<code>food</code>组件。
+|现在所有可损坏的物品默认具有<code>max_damage</code>组件。
+|现在远古残骸和所有下界合金制品默认具有<code>fire_resistant</code>组件。
+|现在所有挖掘工具默认具有<code>tool</code>组件。}}
+|{{HistoryLine|||dev=24w13a|现在不祥之瓶默认具有<code>ominous_bottle_amplifier</code>组件。}}
+|{{HistoryLine|||dev=pre1|加入了对物品最大堆叠数和物品最大耐久度限制的严格性验证。}}
+|{{HistoryLine||1.21|dev=24w21a|现在所有音乐唱片默认具有<code>jukebox_playable</code>组件。}}
+|{{HistoryLine||1.21.2|dev=24w33a|现在所有可在铁砧上使用非自身修复的工具和鞘翅默认具有<code>repairable</code>组件。
+|现在所有可在附魔台上附魔的工具默认具有<code>enchantable</code>组件。}}
+|{{HistoryLine|||dev=24w34a|现在所有可被食用或饮用的物品和不祥之瓶默认具有<code>consumable</code>组件，若使用后有返还物品则还具有<code>use_remainder</code>组件。
+|不祥之瓶默认不再具有<code>food</code>组件。}}
+|{{HistoryLine|||dev=24w35a|现在雪球、风弹等具有使用后冷却时间的物品默认具有<code>use_cooldown</code>组件。}}
+|{{HistoryLine|||dev=24w36a|现在所有物品都默认具有{{cd|d=pretty|item_model|item_name}}组件。
+|现在所有可装备物品默认具有<code>equippable</code>组件。
+|现在所有盔甲默认具有{{cd|d=pretty|enchantable|equippable|repairable}}组件和非空的<code>attribute_modifiers</code>组件。
+|现在鞘翅默认具有{{cd|d=pretty|equippable|glider}}组件。}}
+|{{HistoryLine|||dev=24w37a|现在远古残骸和所有下界合金制品默认不再具有<code>fire_resistant</code>组件。
+|现在下界之星、远古残骸和所有下界合金制品默认具有<code>damage_resistant</code>组件。
+|现在不死图腾默认具有<code>death_protection</code>组件。}}
+|{{HistoryLine|||dev=pre1|现在马铠默认不再具有{{cd|d=pretty|damage|max_damage|repairable}}组件。}}
+|{{HistoryLine||1.21.4|dev=24w45a|现在光源方块默认具有<code>block_state</code>组件。}}
+|{{HistoryLine||1.21.5|dev=25w02a|现在滞留药水和药箭默认具有<code>potion_duration_scale</code>组件。
+|现在所有工具和武器默认具有<code>weapon</code>组件。}}
+|{{HistoryLine|||dev=25w03a|现在鞍默认具有<code>equippable</code>组件。}}
+|{{HistoryLine|||dev=25w03a|现在所有物品都默认具有{{cd|d=pretty|break_sound|tooltip_display}}组件。
+|现在盾牌默认具有<code>blocks_attacks</code>组件。
+|现在所有旗帜图案默认具有<code>provides_banner_patterns</code>组件。
+|现在所有可作为盔甲纹饰材料的物品默认具有<code>provides_trim_material</code>组件。
+|现在蜂巢和蜂箱默认具有<code>block_state</code>组件。}}
+|{{HistoryLine|||dev=25w06a|现在所有鸡蛋具有<code>chicken/variant</code>组件。}}
+|{{HistoryLine||1.21.6|dev=25w15a|现在雕刻南瓜和生物头颅默认具有非空的<code>attribute_modifiers</code>组件。}}
+|{{HistoryLine||1.21.9|dev=25w31a|现在刷怪蛋默认具有<code>entity_data</code>组件。}}
+|{{HistoryLine||26.1|dev=snapshot-3|现在<code>damage_type</code>、<code>jukebox_playable</code>、<code>instrument</code>、<code>provides_trim_material</code>和<code>chicken/variant</code>组件会正确处理默认值，而非靠内部名称引用默认值。<ref>{{bug|MC-299992|||Fixed}}</ref>
+|现在游戏也会对<code>bundle_contents</code>组件和<code>charged_projectiles</code>组件进行严格性验证，且<code>container</code>组件和其也会对所有非空内容物进行严格性验证。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java files}}
+{{Navbox Java customizable}}
+
+[[Category:开发]]
+
+[[ja:アイテムフォーマット]]

@@ -1,0 +1,79 @@
+# 页面: 命令/inputpermission
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/inputpermission
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{Exclusive|bedrock|education}}
+{{Infobox command
+|name=inputpermission
+|oplevel=1
+|cheat=1
+}}
+
+对玩家的权限状态进行指定操作。
+
+== 语法 ==
+:<code>inputpermission query <targets: target> <permission: permission> [state: state]</code>
+::查询目标的指定权限的状态。
+:<code>inputpermission set <targets: target> <permission: permission> <state: state></code>
+::修改目标的指定权限的状态。
+
+== 参数 ==
+{{argument|targets: target|CommandSelector<Player>|be=1}}
+:指定权限的拥有者。
+:{{arg desc|type=players|be=CommandSelector<Player>}}
+
+{{argument|permission: permission|enum|be=1}}
+:指定操作所作用的权限。
+:必须为以下其中之一：
+:* {{cd|camera}} — 转动相机视角
+:* {{cd|dismount}} — 停止骑乘
+:* {{cd|jump}} — 跳跃和向上飞行
+:* {{cd|lateral_movement}} — 移动
+:* {{cd|mount}} — 骑乘
+:* {{cd|move_backward}} — 向后移动
+:* {{cd|move_forward}} — 向前移动
+:* {{cd|move_left}} — 向左移动
+:* {{cd|move_right}} — 向右移动
+:* {{cd|movement}} — 移动、潜行、跳跃和飞行
+:* {{cd|sneak}} — 潜行和向下飞行
+
+{{argument|state: state|enum|be=1}}
+:指定权限的状态。
+:必须为<code>enabled</code>（启用）或<code>disabled</code>（禁用）。
+:对于<code>... query ...</code>，如果未指定，则会查询所有的状态；如果已指定，则仅在当前权限状态为指定状态时命令执行成功。
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|<code>targets: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器||fail}}
+{{Result table|<code>targets: target</code>未能选中一个或多个在线玩家}}
+{{Result table|cmd=|success}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|edition=be|失败|0}}
+{{Output table|成功|被选中的玩家数}}
+{{Output table}}
+
+== 示例 ==
+* 禁用所有玩家的转动相机视角权限：<code>/inputpermission set @a camera disabled</code>
+* 禁用所有玩家的移动权限：<code>/inputpermission set @a movement disabled</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|加入了{{cmd|inputpermission|link=none}}。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|现在{{cmd|inputpermission|link=none}}命令的<code>permission: permission</code>参数接受更多值。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/inputpermission]]
+[[en:Commands/inputpermission]]
+[[ja:コマンド/inputpermission]]
+[[lzh:令/inputpermission]]
+[[pt:Comandos/inputpermission]]

@@ -1,0 +1,47 @@
+# 页面: 命令/enableencryption
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/enableencryption
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{Stub|缺少输出、缺少示例、缺少历史}}{{Exclusive|bedrock|education}}
+{{Infobox command
+|name=enableencryption
+|hidden=1
+|oplevel=0
+|cheat=1
+}}
+为WebSocket连接开启加密。
+
+== 用法 ==
+此命令仅允许被玩家所连接的WebSocket端执行。
+
+当玩家开启“需要加密的 Websocket”选项后，则连接的WebSocket服务器必须执行此命令。
+
+== 语法 ==
+: <code>-{}-enableencryption <publicKey: string> <salt: string> [ciper_mode: EncryptionCommandCipher]</code>
+
+== 参数 ==
+{{argument|be=1|publicKey: string|basic_string}}
+: 指定WebSocket连接所使用的公钥。
+{{argument|be=1|salt: string|basic_string}}
+: 指定用于干扰解密的盐值。
+{{argument|be=1|ciper_mode: EncryptionCommandCipher|enum}}
+: 指定加密算法。必须为以下其中之一：
+:* <code>cfb</code>
+:* <code>cfb128</code>
+:* <code>cfb8</code>
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|命令不完整或参数未正确指定||unparseable}}
+{{Result table|提供的<code>publicKey: string</code>错误||fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/enableencryption]]
+[[en:Commands/enableencryption]]
+[[ja:コマンド/enableencryption]]

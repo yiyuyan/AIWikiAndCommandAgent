@@ -1,0 +1,89 @@
+# 页面: 测试实例定义格式
+# 来源: https://zh.minecraft.wiki/w/%E6%B5%8B%E8%AF%95%E5%AE%9E%E4%BE%8B%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:30:11
+# 原始 Wikitext 内容:
+
+{{redirect|测试实例|运行测试实例的方块|测试实例方块}}
+{{exclusive|je}}
+
+'''测试实例（Test Instance）'''是游戏可运行的测试示例，定义了单个测试的基本信息。'''测试实例定义文件'''是测试实例在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+测试实例在游戏内使用<code>TEST_INSTANCE</code>注册表，数据包路径为<code>test_instance</code>，即所有测试实例定义文件都需要在{{filepath|-{}-data/<''命名空间''>/test_instance}}目录内定义，测试实例标签则需要在{{filepath|-{}-data/<''命名空间''>/tags/test_instance}}目录内定义。
+
+测试实例定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string}}{{nbt|compound|environment|required=1}}：运行此测试实例时的测试环境。
+*** {{nbt collapsed|测试环境定义|{{#lst:测试环境定义格式|codec_test_environment}}}}
+** {{nbt|bool|manual_only}}：（默认为<code>false</code>）此测试实例是否需要手动测试而不属于自动测试实例。非自动测试实例无法在[[游戏测试#测试服务端|测试服务端]]内测试。
+** {{nbt|int|max_attempts}}：（{{interval|left_open=0}}，默认为1）此测试实例最多运行次数，游戏会不断运行此实例直到达到指定通过次数通过测试或运行次数超过此次数而失败。
+** {{nbt|int|max_ticks|required=1}}：（{{interval|left_open=0}}）运行此测试实例时允许持续运行的最大游戏刻数。当运行时间超出此限制时，测试实例单次测试超时失败。
+** {{nbt|int|padding}}：（{{interval|left=0|right=128}}，默认为0）测试结构放置的偏移量，测试实例方块将以相对坐标<code>[padding, padding + 1, padding + 1]</code>为原点放置测试结构。
+** {{nbt|bool|required}}：（默认为<code>true</code>）整体测试套件是否必须需要此测试实例测试通过才能测试通过。
+** {{nbt|int|required_successes}}：（{{interval|left_open=0}}，默认为1）此测试实例在多次运行中必须通过的次数，如果通过次数达不到此次数则此测试实例测试失败。
+** {{nbt|string|rotation}}：（默认为<code>none</code>）放置方块结构时进行的旋转。可以为<code>none</code>（不旋转）、<code>clockwise_90</code>（顺时针旋转90度）、<code>180</code>（旋转180度）或<code>counterclockwise_90</code>（逆时针旋转90度）。 
+** {{nbt|int|setup_ticks}}：（{{interval|left=0}}，默认为0）每次运行此测试实例需要在放置方块结构后指定游戏刻后才可运行。
+** {{nbt|bool|sky_access}}：（默认为<code>false</code>）此测试实例是否需要天空。如果不需要天空，则方块结构上方存在[[屏障]]天花板。
+** {{nbt|string|structure|required=1}}：（命名空间ID）运行此测试实例时使用的方块结构。每次运行前游戏都会重新放置此方块结构。
+** {{nbt|string|type|required=1}}：测试实例的类型。
+** {{nbt condition|如果{{nbt|string|type|required=1}}为<code>block_based</code>，则使用指定方块结构并利用其中的[[测试方块]]进行测试。}}
+** {{nbt condition|如果{{nbt|string|type|required=1}}为<code>function</code>，则调用指定的内置测试函数。}}
+** {{nbt|string|function|required=1}}：内置测试函数的命名空间ID。
+</div>
+
+== 定义行为 ==
+测试实例定义数据仅在服务端启动时被加载一次，使用{{cmd|reload}}命令不可以使测试实例定义被重新加载，而必须重启服务端。
+
+=== 单次测试 ===
+游戏从放置方块结构开始，到得出测试结果结束称为'''单次测试'''。
+
+游戏在开始单次测试时，会先获取这次测试所需要的方块结构和旋转。结构的旋转由两种旋转组合而成，一部分来自于测试实例内定义的{{nbt|string|rotation}}，另一部分则来自于{{cmd|test}}或测试服务端运行测试实例产生的旋转。获取后，游戏会在测试位置放置一个[[测试实例方块]]，然后强制加载测试位置、清除测试位置方块结构范围内的所有实体、并以严格放置模式放置方块结构，然后将整个方块结构以屏障包装起来（天花板是否存在由测试实例中的{{nbt|bool|sky_access}}决定）。放置后，游戏再次清除测试位置方块结构范围内的所有计划刻和方块事件以防止测试方块结构意外接收方块更新，并检查当前的测试环境，以确认进入了正确的测试环境。
+
+之后，单次测试会等待{{nbt|int|setup_ticks}}游戏刻。如果此值为0，那么下一游戏刻这个单次测试就会正式开始运行。单次测试运行后有多种情况会停止运行并产生测试结果：
+* 如果单次测试运行时间（不计算{{nbt|int|setup_ticks}}）超过了测试实例中定义的{{nbt|int|max_ticks}}，单次测试以超时失败停止。
+* 运行测试过程中出现任何一处异常，单次测试就会因为异常停止，且不会进行后续操作；相反，如果整个测试过程中没有任何异常并触发结束，则单次测试通过，且游戏会自动将测试结构范围内的非玩家实体清除。
+
+运行测试的具体流程、如何决定异常和结束由测试实例类型控制。
+
+==== 基于方块的测试 ====
+基于方块的测试完全根据方块结构内的测试方块状态决定测试结果。这类测试要求方块结构中启动模式的测试方块有且仅有一个，否则测试立刻以失败结束。
+
+当测试开始时，游戏会触发启动模式测试方块，将测试方块方块实体标记为已触发，使其发出一次以此方块为中心的一阶NC更新核的更新，并在日志中记录一条信息。之后，游戏每游戏刻都会监听方块结构内的测试方块，按照下列顺序检查：
+# 先检查接受模式测试方块是否被触发。如果被触发，此测试以通过结束。
+# 检查所有失败模式测试方块是否被触发。如果被触发，读取测试方块内的错误信息，并以此错误将测试以失败结束。
+# 检查所有日志模式测试方块是否被触发。如果被触发，读取测试方块内的信息并记录到日志内。
+
+==== 内置函数测试 ====
+内置函数测试依赖于硬编码的函数进行测试。这些函数需要使用额外的Java代码编译并注册到游戏的<code>TEST_FUNCTION</code>注册表内才可以被使用。
+
+这类测试的行为完全由编写的代码决定。根据代码内执行<code>success</code>或<code>fail</code>的情况，决定测试的最终结果。
+
+原版游戏内只包含了一种内置函数<code>always_pass</code>，此测试永远立刻通过。
+
+=== 运行测试实例 ===
+测试实例可以只运行一次单次测试，但也可以运行多次测试。
+
+测试实例定义中，{{nbt|int|max_attempts}}和{{nbt|int|required_successes}}决定了测试实例的多次测试行为。前者决定了测试实例可以包含多少次单次测试（下文记为''A''），后者决定了测试实例整体通过或失败的条件，并影响真正运行多少次单次测试（下文记为''S''）。假设当前单次测试通过了''s''次，一共运行了''a''次单次测试，当''a''小于等于''A''时，''s''就已经达到了''S''，那么测试结束，不需要继续运行至''A''次，且测试结果为通过；否则游戏在运行''A''次后测试失败。从执行流程中可以看出，如果''A''小于''S''，则测试实例将永远失败；如果''A''等于''S''，那么测试实例的每次单次测试都必须通过，否则测试失败。
+
+如果使用{{cmd|test}}运行测试实例，且设置了<code>[<numberOfTimes>]</code>参数不为1，那么游戏将不再使用{{nbt|int|max_attempts}}和{{nbt|int|required_successes}}决定运行次数，而是使用<code>[<numberOfTimes>]</code>参数值''N''和<code>[<untilFailed>]</code>参数。如果<code>[<untilFailed>]</code>为<samp>false</samp>，那么测试就会执行''N''次，如果''N''为0，则代表此测试会运行无限次；如果<code>[<untilFailed>]</code>为<samp>true</samp>，那么测试要么以单次测试失败结束，或执行''N''次后结束，如果''N''为0，则代表测试只有在失败后才会停止。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.5|dev=25w03a|加入了测试实例定义文件及其对应的注册表。}}
+|{{HistoryLine|||dev=25w04a|将{{nbt|string}}{{nbt|compound|batch}}和{{nbt|bool|sky_accesss}}字段重命名为{{nbt|string}}{{nbt|compound|environment}}和{{nbt|bool|sky_access}}。}}
+|{{HistoryLine||26.1|dev=snapshot-2|加入了{{nbt|int|padding}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Testinstanzdefinition]]
+[[en:Test instance definition]]
+[[fr:Définition d'instance de test]]
+[[pt:Definição de instância de teste]]

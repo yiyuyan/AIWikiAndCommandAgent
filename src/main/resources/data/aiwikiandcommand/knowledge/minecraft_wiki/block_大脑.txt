@@ -1,0 +1,215 @@
+# 页面: 大脑
+# 来源: https://zh.minecraft.wiki/w/%E5%A4%A7%E8%84%91
+# 分类: 使用简单计算器的页面, 可再生资源, 愚人节玩笑特性, 方块, 本地化模块需更新, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:25:04
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=24w14potato}}{{Infobox block
+|image=Big Brain.png
+|invimage=[&a大脑]Big Brain
+|breaking-tool={{BreakingToolTooltip|1=axe}}
+|nobe=1
+|renewable=是
+|light=0
+|blast-resistance=3
+|lava-flammable=否
+|rarity=Potato
+|block-id-raw=big_brain
+|item-id-raw=big_brain
+|hardness=2
+|maxstack=64
+|java-solid=是
+|push-reaction=不可推动，不可拉动
+|instrument=贝斯
+|creative-tab=马铃薯（Potatoes）
+|suffocating=否
+|redstone-conductor=否
+|replaceable=否
+|block-map-color={{color|#007C00}}
+}}
+
+'''大脑（Big Brain）'''是一种用于储存[[经验]]的方块。
+
+== 生成 ==
+大脑不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1=Poisonous Potato|B1=Poisonous Potato |C1=Poisonous Potato
+|A2=Poisonous Potato|B2=Zombie Head    |C2=Poisonous Potato
+|A3=Poisonous Potato|B3=Poisonous Potato |C3=Poisonous Potato
+|Output=[&a大脑]Big Brain
+|Olink=none
+|ignoreusage=1}}
+
+== 破坏 ==
+挖掘大脑的合适工具是斧。
+
+{{Breaking table/manual|only=je|nocopper=1|
+{{BlockSprite|big-brain}} 大脑|2|axe
+}}
+
+大脑被破坏后会掉落自身和一个[[知识之薯]]。
+
+== 用途 ==
+
+=== 获取知识之薯 ===
+大脑会吸收附近的[[经验球]]。被破坏时，其会掉落与其吸收经验值等同经验的[[知识之薯]]。吸收经验球后，如果其已吸收的经验值达到1000，每1000储存的经验值会掉落一个包含1000经验的知识之薯。
+
+== 音效 ==
+{{Sound table
+|sound=Slime big1.ogg
+|sound2=Slime big2.ogg
+|sound3=Slime big3.ogg
+|sound4=Slime big4.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source=方块
+|description=破坏方块
+|id=block.slime_block.break
+|translationkey=subtitles.block.generic.break}}
+{{Sound table
+|sound=Slime small1.ogg
+|sound2=Slime small2.ogg
+|sound3=Slime small3.ogg
+|sound4=Slime small4.ogg
+|sound5=Slime small5.ogg
+|subtitle=MC-177082
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.slime_block.fall
+|translationkey=-}}
+{{Sound table
+|sound=Slime small1.ogg
+|sound2=Slime small2.ogg
+|sound3=Slime small3.ogg
+|sound4=Slime small4.ogg
+|sound5=Slime small5.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source=方块
+|description=挖掘方块
+|id=block.slime_block.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Slime big1.ogg
+|sound2=Slime big2.ogg
+|sound3=Slime big3.ogg
+|sound4=Slime big4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source=方块
+|description=放置方块
+|id=block.slime_block.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Slime small1.ogg
+|sound2=Slime small2.ogg
+|sound3=Slime small3.ogg
+|sound4=Slime small4.ogg
+|sound5=Slime small5.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.slime_block.step
+|translationkey=subtitles.block.generic.footsteps
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|spritetype=block
+|Big Brain
+|blocktags=mineable/axe
+|showblocktags=1
+|nameid=big_brain
+|generatetranslationkeys=java
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=big-brain
+|spritetype=block
+|nameid=big_brain
+|foot=1}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{/BS}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+每个大脑都有相对应的方块实体，储存了关于大脑的附加数据。
+
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+=== 物品数据 ===
+{{see also|物品格式}}
+
+{| class="" style="width:100%"
+| style="padding:0;" |
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;background-color: var(--custom-nbt-inherit-color);"
+|-
+! style="text-align:left;" | 默认[[数据组件]]结构和字段<span>[</span>[[编码格式/DataComponent|源页面]]<span>]</span>
+|-
+|
+<div class="treeview">
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="物品共通组件">物品共通组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="物品共通组件">
+** {{nbt|compound}}{{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|list|modifiers}}：提供的属性修饰符。
+**** {{nbt|compound}}：一个修饰符。
+***** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+***** {{nbt|string|name|existonsave=1|required=1}}：当前[[属性修饰符]]的名称。
+***** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+***** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+***** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+***** {{nbt|int array|uuid|existonsave=1|required=1}}：当前属性修饰符的UUID。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示属性修饰符的提示框。
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|compound|levels}}：魔咒数据。
+**** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示魔咒的提示框。
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}：（[[文本组件]]）一行描述信息。
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+</div>
+</div>
+|}
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;"
+|-
+! style="text-align:left;" | JSON
+|-
+|
+<syntaxhighlight copy="1" lang="json">{
+    "minecraft:enchantments": {
+        "levels": {}
+    },
+    "minecraft:attribute_modifiers": {
+        "modifiers": []
+    },
+    "minecraft:lore": [],
+    "minecraft:max_stack_size": 64,
+    "minecraft:repair_cost": 0,
+    "minecraft:rarity": "potato"
+}</syntaxhighlight>
+|}
+|}
+
+在默认组件的基础上，大脑使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt|int|minecraft:xp}}：大脑储存的经验值。
+</div>
+
+==导航==
+{{Navbox jokes|24w14potato}}
+
+[[Category:方块]]
+
+[[en:Big Brain]]
+[[ja:Big Brain]]
+[[ko:큰 뇌]]
+[[ru:Большой мозг]]

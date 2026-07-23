@@ -1,0 +1,21 @@
+# 页面: 玩家模型/ED
+# 来源: https://zh.minecraft.wiki/w/%E7%8E%A9%E5%AE%B6%E6%A8%A1%E5%9E%8B/ED
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:08
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt inherit/living entity}}
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|description}}：（[[文本组件]]，默认为<code>{"translate": "entity.minecraft.mannequin.label"}</code>）在玩家模型的<code>below_name</code>记分板显示位置处显示的文本。
+** {{nbt|bool|hide_description}}：（默认为<code>false</code>）玩家模型是否不显示<code>below_name</code>记分板显示位置处的文本。
+** {{nbt|list|hidden_layers|required=1|existonsave=1}}：不渲染的外层皮肤列表。
+*** {{nbt|string}}：要隐藏的一个外层皮肤。取值可以为<code>cape</code>（{{tp|options.modelPart.cape}}）、<code>jacket</code>（{{tp|options.modelPart.jacket}}）、<code>left_sleeve</code>（{{tp|options.modelPart.left_sleeve}}）、<code>right_sleeve</code>（{{tp|options.modelPart.right_sleeve}}）、<code>left_pants_leg</code>（{{tp|options.modelPart.left_pants_leg}}）、<code>right_pants_leg</code>（{{tp|options.modelPart.right_pants_leg}}）和<code>hat</code>（{{tp|options.modelPart.hat}}）。
+** {{nbt|bool|immovable|required=1|existonsave=1}}：（默认为<code>false</code>）玩家模型是否不能被移动。
+** {{nbt|string|main_hand|required=1|existonsave=1}}：玩家模型的主手，可以为{{cd|d=或|left|right}}。
+** {{nbt|string|pose|required=1|existonsave=1}}：（默认为<code>standing</code>）玩家模型的姿势。取值可以为<code>standing</code>（站立）、<code>crouching</code>（潜行）、<code>swimming</code>（游泳）、<code>fall_flying</code>（滑翔）和<code>sleeping</code>（睡觉）。
+** {{nbt|string}}{{nbt|compound|profile|required=1|existonsave=1}}：玩家模型的档案数据，影响其皮肤渲染。此项实体数据会被视为数据组件[[数据组件#profile|<code>profile</code>]]。
+*** {{nbt inherit/resolvable_profile}}
+</div><noinclude>
+[[Category:实体数据值页面]]
+</noinclude>

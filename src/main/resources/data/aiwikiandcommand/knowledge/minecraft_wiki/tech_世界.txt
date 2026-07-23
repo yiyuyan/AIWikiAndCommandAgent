@@ -1,0 +1,102 @@
+# 页面: 世界
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%96%E7%95%8C
+# 分类: Java版独有信息, 基岩版独有信息, 教育版独有信息, 未确定的译名, 游戏内容, 环境, 需要信息
+# 抓取时间: 2026-07-14 17:19:45
+# 原始 Wikitext 内容:
+
+{{distinguish|地图|维度|主世界}}
+{{Filetr|World Selection Menu.png|thumb|{{el|je}}的选择世界菜单}}
+{{filetr|NewWorld.png|thumb|{{el|je}}的创建世界菜单}}
+
+'''世界（World）'''，又稱'''存檔（Level）'''，是指游戏内所有[[维度]]组成的游戏空间。原版的世界由[[主世界]]、[[下界]]和[[末地]]三个维度组成。玩家可以通过在[[主菜单]]中的[[选择世界菜单]]来进入世界，并且可以使用[[创建新的世界]]按钮来创建一个世界。
+
+== 性质 ==
+每个未加载任何数据包的世界都分为三个[[维度]]，它们均由多种方块组成，所有方块都排列在[[Wzh:立方体堆砌|网格]]中。世界中还有[[流体]]、[[实体]]和[[粒子]]，以及亮度不同的[[光照]]，同时也分布着各种[[生物群系]]。方块和实体可以附带着其他属性，例如[[物品]]、[[状态效果]]以及[[魔咒]]。{{only|for=如启用“{{tp|selectWorld.mapFeatures}}”世界选项|je}}，世界各地还会生成不同的[[结构]]，其内还会生成装有[[战利品]]的[[箱子]]。
+
+== 储存 ==
+=== Java版 ===
+{{main|Java版存档格式}}
+每个世界都保存在{{filename|[[.minecraft]]/saves}}目录下的单独文件夹中。文件夹名称与世界最初创建时的名称一致（若与现有文件夹重名则会在名字的后面再加{{code| (1)}}、{{code| (2)}}等带括号的数字）。主世界存储在{{filepath|/dimensions/minecraft/overworld}}中，下界则存储在{{filepath|/dimensions/minecraft/the_nether}}中，末地则存储在{{filepath|/dimensions/minecraft/the_end}}中。每个维度都有其自己的{{filename|data}}、{{filename|poi}}和{{filename|region}}文件夹。
+
+=== 基岩版 ===
+{{main|基岩版存档格式}}
+每个世界都保存在<code>[[com.mojang]]/minecraftWorlds</code>目录下的单独文件夹中。文件夹名称为后加一个等于号的一串随机的字母，世界名则存放在世界文件夹下的<code>levelname.txt</code>和<code>level.dat</code>文件中。基岩版在对应世界文件夹的<code>db</code>文件夹中以LevelDB键值形式存储区块数据，不同维度的数据不分开。
+
+'''{{text anchor|目录结构}}'''
+<div class="treeview">
+* {{file|directory|<''世界内部ID或名称''>}}
+** {{file|directory|behavior_packs}}：见[[行为包]]。
+** {{file|directory|resource_packs}}：见[[附加包|资源包]]。
+** {{file|directory|photo_items}}{{only|edu}}
+*** {{file|file|<''UUID''>.jpeg}}
+** {{file|directory|photos}}{{only|edu}}
+*** {{file|directory|<''玩家ID''>}}{{fn|未登录时为{{cd|-4294967295}}。}}
+**** {{file|file|<''UUID''>.jpeg}}
+** {{file|directory|texts}}：存放自定义语言文件，常出现在[[#世界模板|世界模板]]中。
+*** {{file|file|<''语言代-{}-码''>.lang}}
+*** {{file|file|languages.json}}
+** {{file|directory|db}}
+*** {{file|file|<''区域ID''>.ldb}}：用于储存不包含玩家的区域。
+*** {{file|file|<''区域ID''>.log}}：用于储存包含玩家的区域。
+*** {{file|file|CURRENT}}{{fn|name=dat|此文件采用{{filename|.dat}}格式储存，但不含文件扩展名。}}
+*** {{file|file|LOCK}}{{info needed|它是否取决于世界的模式？}}{{fn|name=dat}}{{fn|name=may_not_exist|可能不存在。}}
+*** {{file|file|LOG.old}}{{fn|name=may_not_exist}}
+*** {{file|file|MANIFEST-<''ID''>}}{{fn|name=dat}}
+*** {{file|directory|lost}}{{fn|name=may_not_exist}}
+**** {{file|file|<''区域ID''>.log}}
+**** {{file|file|MANIFEST-<''ID''>}}{{fn|name=dat}}
+** {{file|file|CLOUD_TIMESTAMP}}：目前在Windows的[[Minecraft Preview]]中，启用[[云存储]]的世界会出现该文件，用于存放最后上传云端时的时间戳。
+** {{file|file|education.json}}{{only|edu}}{{info needed|怎样使其出现，或其作用是什么？}}
+** {{file|file|[[基岩版存档格式#level.dat|level.dat]]}}
+** {{file|file|level.dat_old}}
+** {{file|file|levelname.txt}}
+** {{file|file|markers.txt}}：用于标记世界中存在的[[村庄]]。{{fn|仅在[[超平坦]]世界从[[基岩版1.18.0]]以下版本更新到其以上时出现。}}
+** {{file|file|manifest.json}}：仅出现在[[#世界模板|世界模板]]中。
+** {{file|file|photomanifest}}{{only|edu}}{{fn|name=may_not_exist}}
+** {{file|file|world_behavior_packs_history.json}}{{fn|name=may_not_exist}}
+** {{file|file|world_behavior_packs.json}}
+** {{file|file|world_icon.jpeg}}
+** {{file|file|world_resource_packs_history.json}}{{fn|name=may_not_exist}}
+** {{file|file|world_resource_packs.json}}
+</div>
+
+== 世界模板 ==
+{{Exclusive|bedrock|section=1}}
+
+世界文件可以转换为世界模板，以便轻松修改其内容（例如附加组件和世界名称的额外语言），从而让玩家能够使用模板中存储的数据创建新世界。<ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/documents/createaworldtemplate?view=minecraft-bedrock-stable|title=Create a World Template from an Exported World|website=Microsoft Learn|date=2023-12-05T18:59:28.000Z}} </ref>世界模板采用与常规世界相同的目录结构，额外包含的{{file|directory|texts|inline=1}}用于本地化和{{file|file|manifest.json|inline=1}}用于定义模板。
+
+其中，{{filename|[[manifest.json]]}}文件必须存在，并且需要用{{cd|world_template}}属性指定类型。其内部默认包含世界的名称和描述（分别为{{cd|pack.name}}和{{cd|pack.description}}），此时会采用语言文件中的对应文本。可以添加{{cd|"allow_random_seed": true}}用来覆盖数据中储存的世界种子，然后随机生成一个新世界。
+
+世界模板可以打包为{{filename|.mctemplate}}文件，打开文件后会自动将其导入为世界模板，并存储在{{filepath|[[com.mojang]]/world_templates}}目录下。世界模板也可以从[[市场]]购买，在创建世界时会显示市场及市场通行证的世界模板列表，这些模板可创建与自定义世界模板相似的世界。
+
+[[File:Vibrant Visuals older versions.png|thumb|世界模板版本锁定在[[基岩版1.17.0|1.17.0]]的世界，采用了旧版世界生成机制且云层高度较低。{{pa|Vibrant Visuals}}作为客户端设置仍可启用，但无法使用PBR纹理。]]
+
+世界模板的<code>base_game_version</code>可设置为[[基岩版1.13.0|1.13.0]]之后的任意版本。<ref>{{Citation|url=https://learn.microsoft.com/en-us/minecraft/creator/documents/basegameversioning?view=minecraft-bedrock-stable|title=World Templates and Base Game Versioning|website=Microsoft Learn|date=2023-11-29T18:04:56.000Z}}</ref>当设置为旧版本时，生成的世界将不再包含更高版本的附加包。此时，世界被锁定在旧版本中，功能表现不同、外观陈旧，且无法使用新功能，部分功能的行为与实际版本存在差异。
+
+== 参见 ==
+* [[存档格式]]
+* [[区域文件格式]]
+* [[世界类型]]
+* [[世界大小]]
+* [[世界边界]]
+* [[世界界限]]
+* [[世界生成]]
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+{{Navbox environment}}
+
+[[de:Spielstand-Speicherung]]
+[[en:World]]
+[[es:Mundo]]
+[[fr:Monde]]
+[[ja:ワールド]]
+[[pt:Mundo]]
+[[ru:Мир]]
+[[uk:Світ]]

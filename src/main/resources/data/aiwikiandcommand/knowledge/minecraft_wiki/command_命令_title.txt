@@ -1,0 +1,144 @@
+# 页面: 命令/title
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/title
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{redirect|标题|游戏的标题|徽标|展示徽标的画面|主菜单{{!}}標題畫面}}
+{{Infobox command
+|name=title
+|oplevel=2\1
+|becheat=1
+}}
+{{Infobox command
+|name=titleraw{{only|be}}
+|oplevel=1
+|cheat=1
+}}
+
+控制屏幕标题。
+
+== 用法 ==
+屏幕标题会以一行粗体大号文字的形式出现在玩家屏幕的中央，并且可以附加第二行作为副标题。此命令还可以玩家的[[动作栏]]显示指定文本。标题、副标题和动作栏文本既可以使用纯文本，也可以使用[[文本组件]]。
+
+屏幕标题可以设置为淡入淡出过渡时间，以及显示持续时间。屏幕标题的大小取决于[[视频设置|{{tp|options.guiScale}}]]设置，而过长的标题不会自动换行（只会溢出屏幕之外）。
+
+每个玩家的淡入、持续、淡出时间在使用此命令修改后，只发送到它们自己的客户端而不存储在服务端，并且这些值对于客户端来说是跨存档、跨服务器的。只有客户端重启后会重置这些值，默认为10游戏刻（0.5秒）、70游戏刻（3.5秒）和 20游戏刻（1秒）。
+
+== 语法 ==
+* '''Java版'''
+: <code>title <targets> (clear|reset)</code>
+: <code>title <targets> (title|subtitle|actionbar) <title></code>
+: <code>title <targets> times <fadeIn> <stay> <fadeOut></code>
+
+* '''基岩版（纯文本）'''
+: <code>title <player: target> <clear|reset></code>
+: <code>title <player: target> <title|subtitle|actionbar> <titleText: message></code>
+: <code>title <player: target> times <fadeIn: int> <stay: int> <fadeOut: int></code>
+
+* '''基岩版（JSON文本）'''
+: <code>titleraw <player: target> <clear|reset></code>
+: <code>titleraw <player: target> <titleLocation: TileRawSet> <raw json titleText: json></code>
+: <code>titleraw <player: target> times <fadeIn: int> <stay: int> <fadeOut: int></code>
+
+=== 详细信息 ===
+: <code>... clear</code>
+:: 清除指定玩家屏幕标题。
+: <code>... reset</code>
+:: 将指定玩家的淡入、持续、淡出时间设为默认值（10[[游戏刻]]、70游戏刻、20游戏刻）。{{in|je}}还会清空其标题和副标题。
+: <code>... subtitle ...</code>
+:: 若指定玩家的屏幕上有标题显示，则将其副标题改为指定文本；否则，将指定文本作为指定玩家下一屏幕标题的副标题。
+: <code>... title ...</code>
+:: 向指定玩家显示屏幕标题，或将当前屏幕标题改变为指定文本。标题淡出后，清空副标题，但不重置淡入、持续、淡出时间。
+: <code>... actionbar ...</code>
+:: 在指定玩家的[[动作栏]]显示指定文本。
+: <code>... times ...</code>
+:: 更改指定玩家屏幕标题的淡入、持续、淡出时间。
+
+== 参数 ==
+{{argument|targets|entity|player: target|CommandSelector<Player>}}
+: 指定要显示屏幕标题的玩家。
+: {{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+{{el|je|short=1}}：{{argument|title|component}}<br>
+{{el|be|short=1}}：{{argument|be=1|titleText: message|CommandMessage}}或{{argument|be=1|raw json titleText: json|Json::Value}}
+: 指定标题、副标题、动作栏上方要显示的文本。
+: {{in|je}}{{arg desc|je=component}}
+: {{in|be|nc=1}}：
+:* 对于<code>titleText: message</code>，{{arg desc|be=CommandMessage}}
+:* 对于<code>raw json titleText: json</code>，{{arg desc|be=Json::Value}}
+
+{{el|je|short=1}}：{{argument|fadeIn|integer}}、{{argument|stay|integer}}、{{argument|fadeOut|integer}}<br>
+{{el|be|short=1}}：{{argument|be=1|fadeIn: int|int}}、{{argument|be=1|stay: int|int}}、{{argument|be=1|fadeOut: int|int}}
+: 指定屏幕标题的淡入、持续、淡出时间的时长。默认为10（0.5秒）、70（3.5秒）、20（1秒），单位[[游戏刻]]。
+: {{in|be}}单位为[[游戏刻]]，且小于0的值将被视为0。
+: {{arg desc|je=time|min=0|be=int}}
+
+{{el|be|short=1}}：{{argument|be=1|titleLocation: TileRawSet|enum}}
+: 指定屏幕标题的类型，必须为{{cd|actionbar}}、{{cd|subtitle}}或{{cd|title}}，描述见{{slink||详细信息}}。
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code>raw json message: json</code>不是一个[[文本组件]]|N/A|fail}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器}}
+{{Result table|<code><targets></code>或<code>player: target</code>无法选中一个或多个在线玩家|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|被选中的玩家数}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|被选中的玩家数}}
+{{Output table}}
+
+== 示例 ==
+[[File:Title_command.png|缩略图|{{cmd|title|link=none}}命令的执行示例]]
+
+给所有玩家显示主标题为粗体的“第一章”，副标题为灰色斜体“故事的开始…”的标题：
+
+; Java版（纯文本）
+* <code>title @a title "\u00a7l第一章"</code>
+* <code>-{}-title @a subtitle "\u00a77\u00a7o故事的开始…"</code>
+
+; Java版（JSON文本）
+* <code>title @a title {"text":"第一章","bold":true}</code>
+* <code>-{}-title @a subtitle {"text":"故事的开始…","color":"gray","italic":true}</code>
+
+; 基岩版（纯文本）
+* <code>/title @a title §l第一章</code>
+* <code>-{}-/title @a subtitle §7§o故事的开始…</code>
+
+; 基岩版（JSON文本）
+* <code>/titleraw @a title {"rawtext": [{"translate":"§l第%%s章","with":["一"]}]}</code>
+* <code>-{}-/titleraw @a subtitle {"rawtext": [{"text":"§7§o故事的开始…"}]}</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w20a|加入了{{cmd|title|link=none}}。}}
+|{{HistoryLine||1.11|dev=16w32b|为{{cmd|title|link=none}}加入了在[[动作栏]]上显示文本的能力。}}
+|{{HistoryLine||1.19.4|dev=23w03a|指定时长的参数现在可以在数值末尾指定时间单位。}}
+
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|title|link=none}}。}}
+
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.9.0|dev=1.9.0.2|加入了{{cmd|titleraw|link=none}}。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.20|现在{{cmd|title|link=none}}会在未指定{{cd|titleText: message}}时报错。<ref>{{bug|MCPE-185429|||Fixed}}</ref>}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/title]]
+[[en:Commands/title]]
+[[fr:Commandes/title]]
+[[ja:コマンド/title]]
+[[pt:Comandos/title]]
+[[ru:Команды консоли/title]]

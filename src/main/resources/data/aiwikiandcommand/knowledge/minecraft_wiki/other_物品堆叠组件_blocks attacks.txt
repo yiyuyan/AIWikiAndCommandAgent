@@ -1,0 +1,28 @@
+# 页面: 物品堆叠组件/blocks attacks
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%A0%86%E5%8F%A0%E7%BB%84%E4%BB%B6/blocks%20attacks
+# 分类: 已弃用的模板
+# 抓取时间: 2026-07-14 17:31:52
+# 原始 Wikitext 内容:
+
+<noinclude>{{deprecated|type=模板|historical=1|text=请使用[[编码格式/DataComponent]]代替。}}</noinclude>
+<div class="treeview">
+** {{nbt|compound|minecraft:blocks_attacks}}
+*** {{nbt|float|block_delay_seconds}}：（{{interval|left=0}}，默认为<code>0</code>）成功阻挡攻击前需要按住右键的秒数。
+*** {{nbt|string}}{{nbt|compound|block_sound}}：成功阻挡攻击时播放的声音事件。
+**** {{nbt inherit/sound event}}
+*** {{nbt|string|bypassed_by}}：（[[伤害类型]]标签）设置指定标签的伤害类型可以无视此物品的阻挡而造成实际伤害。
+*** {{nbt|list|damage_reductions}}：控制可阻挡多少伤害。未指定时，可阻挡一切伤害。
+**** {{nbt|compound}}：控制可挡下的伤害量和伤害类型。阻挡成功时，伤害减少<code>-{}-clamp(base + factor * ''所受攻击伤害'', 0, ''所受攻击伤害'')</code>。
+***** {{nbt|float|base|required=1|existonsave=1}}：固定阻挡的伤害。
+***** {{nbt|float|factor|required=1|existonsave=1}}：应被阻挡的伤害比例。
+***** {{nbt|float|horizontal_blocking_angle}}：（{{interval|left_open=0}}，角度制，默认为90）在水平方向上，以当前玩家视角的水平分量向量为基准，如果受伤害方向与基准方向夹角小于此角度则伤害可被阻挡，否则不能阻挡。任何无来源伤害均被视为需要180度才能阻挡。
+***** {{nbt|string}}{{nbt|list|type}}：可阻挡的伤害类型。允许单个ID、列表或标签。未指定则表示对所有伤害有效。
+*** {{nbt|float|disable_cooldown_scale}}：（{{interval|left=0}}，默认为<code>1</code>）被可停用阻挡的攻击击中时，物品冷却时长的乘数。为<code>0</code>时，此物品不能被攻击禁用。
+*** {{nbt|string}}{{nbt|compound|disabled_sound}}：此物品被攻击停用时播放的声音事件。
+**** {{nbt inherit/sound event}}
+*** {{nbt|compound|item_damage}}：控制攻击对物品造成的耐久损耗。未指定时，每次攻击损耗物品1点耐久。物品耐久最终损耗<code>-{}-floor(threshold, base + factor * ''所受攻击伤害'')</code>。最终值可以为负数以使物品修复。
+**** {{nbt|float|base|required=1|existonsave=1}}：损耗物品固定耐久度。
+**** {{nbt|float|factor|required=1|existonsave=1}}：所受攻击伤害的乘数。
+**** {{nbt|float|threshold|required=1|existonsave=1}}：（{{interval|left=0}}）攻击对此物品造成的最低耐久度损耗。
+</div><noinclude>
+</noinclude>

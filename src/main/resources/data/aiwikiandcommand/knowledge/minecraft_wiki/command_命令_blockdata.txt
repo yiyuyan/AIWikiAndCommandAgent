@@ -1,0 +1,64 @@
+# 页面: 命令/blockdata
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/blockdata
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 过时内容
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{Outdated|edition=java|此命令在Java版1.13中已被[[命令/data|/data]]命令替代。}}
+{{Infobox command
+|name=blockdata
+|oplevel=2
+}}
+
+更改[[方块]]的NBT标签。
+
+== 语法 ==
+: <code>-{}-blockdata <''x''> <''y''> <''z''> <''NBT标签''></code>
+
+== 参数 ==
+<code>''x y z''</code>
+: 指定要修改的方块实体的坐标。可使用[[相对坐标]]来指定与命令执行处的相对距离。
+
+<code>-{}-''NBT标签''</code>
+: 指定要对方块实体添加或覆盖的[[NBT标签]]元素。必须是一个复合[[NBT标签]]（例如<code>{CustomName:Fred}</code>）。
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|指定方块不是方块实体|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table}}
+
+== 示例 ==
+* 将（0, 64, 0）处信标的主增益效果更改为[[急迫]]：<code>blockdata 0 64 0 {Primary:3}</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w02a|加入了{{cmd|blockdata|link=none}}命令。}}
+|{{HistoryLine||1.13|dev=17w45a|现在<code><''NBT标签''></code>参数是可选的，以直接查询方块实体的NBT数据。}}
+|{{HistoryLine|||dev=17w47a|移除了{{cmd|blockdata|link=none}}命令。}}
+}}
+
+== 参见 ==
+* [[方块实体数据格式]] — 定义方块实体的NBT标签
+* {{cmd|entitydata}} — 更改实体的NBT标签
+* {{cmd|item}}{{only|Java}}或{{cmd|replaceitem}}{{only|bedrock}} — 替换方块物品栏中的物品
+* {{cmd|setblock}} – 将方块替换为其他方块
+* {{cmd|stats}} — 设置方块的命令统计值
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/blockdata]]
+[[en:Commands/blockdata]]
+[[es:Comandos/blockdata]]
+[[ja:コマンド/blockdata]]
+[[pt:Comandos/blockdata]]
+[[ru:Команды консоли/blockdata]]

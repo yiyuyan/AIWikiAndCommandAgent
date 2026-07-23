@@ -1,0 +1,348 @@
+# 页面: 熔炉
+# 来源: https://zh.minecraft.wiki/w/%E7%86%94%E7%82%89
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 功能方块, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 待更新条目, 方块, 需要检查版本
+# 抓取时间: 2026-07-14 17:31:34
+# 原始 Wikitext 内容:
+
+{{about|可烧炼多种物品的方块|专用于烧制矿物的方块|高炉|专用于烧制食物的方块|烟熏炉|Minecraft Earth中的生物|MCE:熔炉傀儡}}
+{{Infobox block
+|group1=熔炉
+|1-1=Furnace.png
+|1-2=Furnace BE.png
+|group2=燃烧的熔炉
+|2-1=Lit Furnace.png
+|2-2=Lit Furnace BE.png
+|*-1caption={{el|je}}
+|*-2caption={{el|be}}
+|invimage=Furnace
+|invimage2=----
+|invimage3=[点燃熔炉（基岩版）]Lit Furnace BE
+|light=13 <small>（燃料燃烧时）</small>
+}}
+{{relevant tutorial|自动化烧炼|选择燃料}}
+{{quote|熔炉的主要用途是用来烧炼。烧炼需要燃料——通常为煤和木炭、和其他可被作为燃料的物品。打开熔炉界面，你就会见到显示烧炼过程的进度条；当烧炼完成后，你就会得到一个新的物品。注意你选择的燃料，因为某些燃料相比之下要更划算。|[[Duncan Geere]]<ref>{{article|block-week-furnace|Block of the Week: Furnace|September 15, 2017}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''熔炉（Furnace）'''是一种可以[[烧炼]]物品的方块。
+
+== 生成 ==
+=== 自然生成 ===
+每个[[平原]]和[[沙漠]][[村庄]]的铁匠铺里会生成两个熔炉，每个[[雪屋]]中会生成一个熔炉。
+
+熔炉也会在[[雪原]]村庄的某些小屋、[[针叶林]]村庄和{{only|be|for=[[积雪针叶林]]村庄}}小屋中生成。
+
+熔炉也会在[[古迹废墟]]的匠铺中生成。
+
+熔炉还会作为红石电路的一部分在[[远古城市]]<code>ancient_city/city_center/city_center_2</code>结构的地下室里生成，其燃料槽有1把木[[锹]]、产物槽有24个[[深板岩]]。
+
+{{Block distribution}}
+
+== 获取 ==
+{{IN|java}}燃烧的熔炉只能通过命令如{{cmd|give @s <nowiki>minecraft:furnace[minecraft:block_state={lit:"true"}]</nowiki>}}获得，但在物品栏中它不是燃烧着的。{{in|bedrock}}可以通过修改物品栏来获得。无论里面有没有物品，它都会一直保持点亮状态。
+
+=== 箱子战利品 ===
+{{LootChestItem|furnace}}
+
+=== 合成 ===
+{{Crafting
+|A1= Any stone-tier block
+|B1= Any stone-tier block
+|C1= Any stone-tier block
+|A2= Any stone-tier block
+|C2= Any stone-tier block
+|A3= Any stone-tier block
+|B3= Any stone-tier block
+|C3= Any stone-tier block
+|Output= Furnace
+|type= Decoration block
+}}
+
+== 破坏 ==
+挖掘熔炉的合适工具是镐。熔炉需要木镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+熔炉被破坏后会掉落自身、内容物和储存的经验值。
+
+== 用途 ==
+{{in|Java}}熔炉不能被[[活塞]]推动。
+
+=== 烧炼 ===
+{{main|烧炼}}
+{{Filetr|Furnace GUI.png|thumb|right|熔炉的界面}}
+
+{| class="wikitable" data-description="熔炉烧炼界面"
+! [[烧炼]]配方
+|-
+| {{Furnace}}
+|}
+
+熔炉的主要用途是[[烧炼]]，速度为每{{convert|200}}烧炼一个物品，即每分钟烧炼6个物品。
+
+{{ctrl|使用}}熔炉可打开它的界面。下方的槽位为“燃料槽”，用于放置燃料（最多1组）；上方的槽位为“烧炼槽”，用于放置烧炼物（最多1组）；右侧的槽位为“成品槽”，烧炼成品会存放于此（最多1组）。
+
+熔炉的烧炼速度是[[高炉]]和[[烟熏炉]]的一半，但熔炉可进行全部烧炼配方，包括高炉和烟熏炉的配方及高炉和烟熏炉都不能进行的配方。
+
+连接到熔炉上面的[[漏斗]]会向烧炼槽中添加烧炼物，连接到熔炉侧面的[[漏斗]]会向燃料槽中添加燃料，熔炉下面的[[漏斗]]会取走成品槽的物品和燃料槽的[[铁桶]]或[[水桶]]，如果燃料槽与成品槽同时存在物品会优先吸取{{only|for=成品槽|je}}或{{only|for=燃料槽|be}}。烧炼产生的经验会存储在熔炉中，当玩家取出成品槽中的成品或熔炉被破坏时一并给予玩家。
+
+燃烧中的熔炉会生成烟雾和火焰[[粒子]]。
+
+=== 红石比较器 ===
+[[红石比较器]]可检测熔炉的内容物占空比，烧炼槽、燃料槽和成品槽都会被统计。
+
+=== 光源 ===
+燃烧中的熔炉会发出[[亮度]]等级为13级的光。
+
+=== 合成材料 ===
+{{crafting usage|Furnace}}
+
+=== 自定义名称 ===
+熔炉界面的标题默认为“熔炉”，可以在未放置之前使用[[铁砧]]重命名来进行更改，{{in|je}}也可以通过使用{{cmd|data}}命令修改熔炉的<code>CustomName</code>标签进行更改。
+
+=== 上锁 ===
+{{exclusive|je|section=1}}
+熔炉可以被<code>lock</code>标签上锁。如果熔炉的该标签不是空白的，那么这个熔炉必须使用符合该标签表示的物品谓词的物品打开。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Furnace fire crackle1.ogg
+|sound2=Furnace fire crackle2.ogg
+|sound3=Furnace fire crackle3.ogg
+|sound4=Furnace fire crackle4.ogg
+|sound5=Furnace fire crackle5.ogg
+|subtitle={{tp|subtitles.block.furnace.fire_crackle}}
+|source={{tp|soundCategory.block}}
+|description=燃烧时随机播放
+|id=block.furnace.fire_crackle
+|translationkey=subtitles.block.furnace.fire_crackle
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=block.furnace.fire_crackle1.wav
+|sound2=block.furnace.fire_crackle2.wav
+|sound3=block.furnace.fire_crackle3.wav
+|sound4=block.furnace.fire_crackle4.wav
+|sound5=block.furnace.fire_crackle5.wav
+|source=方块
+|description=燃烧时随机播放
+|id=block.furnace.lit
+|typeid=block.furnace.lit
+|soundvolume=3
+|soundpitch
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Furnace
+|spritetype=block
+|nameid=furnace
+|showblocktags=je
+|blocktags={{GameTag|block|furnace}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=Furnace
+|spritetype=block
+|nameid=furnace
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Furnace
+|spritetype=block
+|nameid=furnace
+|showblocktags=be
+|blocktags={{GameTagBE|block|furnace}}
+}}
+{{ID table
+|generatetranslationkeys=bedrock
+|spritename=Lit Furnace
+|displayname=燃烧中的熔炉
+|spritetype=block
+|nameid=lit_furnace
+|blocktags={{GameTagBE|block|lit_furnace}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=Furnace
+|spritetype=block
+|nameid=Furnace
+|foot=1
+}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table|熔炉|熔炉,燃烧中的熔炉}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+熔炉拥有与其相关联的方块实体，以保存熔炉方块的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{load achievements|hot-topic;Acquire-Hardware;smelt-everything;Renewable-Energy;Delicious-Fish;Dry-Spell;Super-Fuel;Alternative-Fuel}}
+
+== 进度 ==
+{{load advancements|story.smelt_iron}}
+
+== 视频 ==
+{{bv|BV1Nt411K7Rz}}
+
+== 历史 ==
+{{update|0.9.0 build1，熔炉受环境光遮蔽的程度减小了。|section=1}}
+{{HistoryTable
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||20100219|[[File:Furnace (N) JE1.png|32px]] [[File:Furnace (E) JE1.png|32px]] [[File:Furnace (S) JE1.png|32px]] [[File:Furnace (W) JE1.png|32px]] [[File:Lit Furnace (N) JE1.png|32px]] [[File:Lit Furnace (E) JE1.png|32px]] [[File:Lit Furnace (S) JE1.png|32px]] [[File:Lit Furnace (W) JE1.png|32px]] 加入了熔炉。}}
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100227-1414|[[File:Lit Furnace (N) JE1.png|32px]] [[File:Lit Furnace (N) JE1.png|32px]] [[File:Lit Furnace (N) JE1.png|32px]] [[File:Lit Furnace (N) JE1.png|32px]] [[File:Lit Furnace (N) JE1.png|32px]] [[File:Lit Furnace (N) JE1.png|32px]] [[File:Lit Furnace (N) JE1.png|32px]] [[File:Lit Furnace (N) JE1.png|32px]] 更改了熔炉的纹理。}}
+|{{HistoryLine||20100313|[[File:Furnace (N) JE1.png|32px]] [[File:Furnace (E) JE1.png|32px]] [[File:Furnace (S) JE1.png|32px]] [[File:Furnace (W) JE1.png|32px]] [[File:Lit Furnace (N) JE1.png|32px]] [[File:Lit Furnace (E) JE1.png|32px]] [[File:Lit Furnace (S) JE1.png|32px]] [[File:Lit Furnace (W) JE1.png|32px]] 回退了上述更改。}}
+|{{HistoryLine||20100320|熔炉现在能被正常打开。}}
+|{{HistoryLine||20100325-1545|熔炉现在可以完全正常使用。}}
+|{{HistoryLine||20100327|熔炉的[[烧炼]]时间从8秒缩短至4秒。}}
+|{{HistoryLine||20100330-1203|每个物品在熔炉中的[[烧炼]]时间从4秒增加到了8秒。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.14|熔炉现在可用于合成[[动力矿车]]。}}
+|{{HistoryLine||v1.2.0|现在熔炉在放置时会朝向玩家，而不是朝向其他方向。<ref>{{tweet|notch|29202275279}}</ref>}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.2|[[File:Furnace (N) JE2 BE1.png|32px]] [[File:Furnace (E) JE2 BE1.png|32px]] [[File:Furnace (S) JE2 BE1.png|32px]] [[File:Furnace (W) JE2 BE1.png|32px]] [[File:Lit Furnace (N) JE2 BE1.png|32px]] [[File:Lit Furnace (E) JE2 BE1.png|32px]] [[File:Lit Furnace (S) JE2 BE1.png|32px]] [[File:Lit Furnace (W) JE2 BE1.png|32px]] 更改了熔炉的纹理。}}
+|{{HistoryLine||1.5_01|现在无法再将物品放入熔炉的输出槽中了。}}
+|{{HistoryLine||1.8|dev=Pre-release|熔炉现在会生成在[[村庄]]的铁匠铺中。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|缩短了挖掘熔炉的时间。}}
+|{{HistoryLine|||dev=Beta 1.9-pre6|熔炉的破坏时间大幅缩短，且破坏时间取决于[[品质|镐的品质]]。}}
+|{{HistoryLine||1.2.4|[[猫]]会尝试坐在正在烧炼的熔炉上，此时熔炉不可使用。}}
+|{{HistoryLine||1.2.5|dev=pre|现在使用{{key|Shift}}可以更容易地把物品放进熔炉里。}}
+|{{HistoryLine||1.3.1|dev=12w22a|现在用熔炉烧炼[[矿石]]会给予玩家[[经验值]]。}}
+|{{HistoryLine||1.4.2|dev=12w39a|熔炉现在只会照亮它前方的方块。<ref>{{tweet|dinnerbone|250905223713914880}}</ref><ref>http://imgur.com/a/cFaAn</ref>它的亮度等级仍然为13，但光只会从熔炉的前面发出。}}
+|{{HistoryLine|||dev=12w40a|回退了上述更改。}}
+|{{HistoryLine||1.4.6|dev=12w49a|现在当按住[[潜行]]键时，玩家可直接将[[方块]]和[[物品]]（例如[[红石]]、[[红石中继器]]和[[拉杆]]）放置在熔炉上。}}
+|{{HistoryLine||1.5|dev=13w02a|现在熔炉在[[铁砧]]中重命名后其界面中会显示新名字。}}
+|{{HistoryLine||1.8|dev=14w02a|现在当熔炉的燃料用尽时，烧炼进度会暂停而不是重置。
+|熔炉现在可以具有方块实体数据{{nbt|string|Lock}}，用于锁定熔炉。若该标签存在，该熔炉只能用自定义名称与该标签相同的物品打开。}}
+|{{HistoryLine|||dev=14w04a|现在当熔炉的燃料用尽时，烧炼进度会以2倍速度倒退。}}
+|{{HistoryLine|||dev=14w25a|[[File:Furnace (N) JE3.png|32px]] [[File:Furnace (E) JE3.png|32px]] [[File:Furnace (S) JE3.png|32px]] [[File:Furnace (W) JE3.png|32px]] [[File:Lit Furnace (N) JE3.png|32px]] [[File:Lit Furnace (E) JE3.png|32px]] [[File:Lit Furnace (S) JE3.png|32px]] [[File:Lit Furnace (W) JE3.png|32px]] 现在熔炉的顶部纹理会随着熔炉的朝向而旋转。}}
+|{{HistoryLine|||dev=14w26a|熔炉的燃料槽现在只允许放入燃料或1个空桶。}}
+|{{HistoryLine||1.9|dev=15w43a|熔炉现在会在[[雪屋]]中生成。}}
+|{{HistoryLine|||dev=15w49a|<code>lit_furnace</code>方块的物品形式不再能够获得。}}
+|{{HistoryLine|||dev=15w50a|为熔炉加入了音效：<code>block.furnace.fire_crackle</code>}}
+|{{HistoryLine||1.13|dev=17w47a|熔炉的不同方块ID合并为一个ID。
+|加入了熔炉的点燃状态。
+|在[[扁平化]]之前，此方块的数字ID为61和62。}}
+|{{HistoryLine|||dev=18w06a|为熔炉加入了配方书，它只能被用于输入槽。}}
+|{{HistoryLine|||dev=18w09a|当使用[[漏斗]]从熔炉中取出成品时，[[经验值]]现在会累积在熔炉内，并在[[玩家]]下次手动取出成品时释放。<ref>{{bug|MC-7046||当熔炉连接了漏斗时，不会给予经验值。|Fixed}}</ref>}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Furnace (S) JE4.png|32px]] [[File:Lit Furnace (S) JE4.png|32px]] 更改了熔炉的纹理。}}
+|{{HistoryLine|||dev=18w49a|现在熔炉会在[[雪原村庄]]的房屋中自然生成。
+|现在熔炉可以在雪原村庄房屋的箱子中找到。}}
+|{{HistoryLine|||dev=18w50a|熔炉现在可以在[[针叶林村庄]]的房屋中自然生成。
+|现在针叶林村庄的武器匠铺中不再会生成熔炉。
+|熔炉现在可用于合成[[高炉]]和[[烟熏炉]]。}}
+|{{HistoryLine||1.16|dev=20w15a|现在熔炉可用[[黑石]]来合成。}}
+|{{HistoryLine|||dev=20w17a|现在熔炉被破坏时会正常获得烧炼物品的经验。<ref>{{bug|MC-1601|||Fixed}}</ref>}}
+|{{HistoryLine||1.17|dev=21w07a|现在熔炉可用[[深板岩]]来合成。}}
+|{{HistoryLine||1.17|dev=21w08a|现在熔炉不再可以使用深板岩合成。
+|现在熔炉可用[[深板岩圆石]]来合成。}}
+|{{HistoryLine||1.19|dev=22w13a|现在熔炉会在[[远古城市]]中心的一种地下室里生成。}}
+|{{HistoryLine||1.20|dev=23w12a|现在熔炉会在[[古迹废墟]]的匠铺中生成。}}
+|{{HistoryLine||1.21.2|dev=24w39a|将熔炉的方块实体数据{{nbt|string|Lock}}重命名为{{nbt|compound|lock}}，并支持物品谓词。}}
+|{{HistoryLine||1.21.4|dev=pre2|将熔炉的数据字段{{nbt|short|CookTime}}、{{nbt|short|CookTimeTotal}}和{{nbt|short|BurnTime}}分别重命名为{{nbt|short|cooking_time_spent}}、{{nbt|short|cooking_total_time}}和、{{nbt|short|lit_time_remaining}}。
+|加入了{{nbt|short|lit_total_time}}字段，表示熔炉应燃烧的总时长。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.3.2|[[File:Furnace (N) JE2 BE1.png|32px]] [[File:Furnace (E) JE2 BE1.png|32px]] [[File:Furnace (S) JE2 BE1.png|32px]] [[File:Furnace (W) JE2 BE1.png|32px]] [[File:Lit Furnace (N) JE2 BE1.png|32px]] [[File:Lit Furnace (E) JE2 BE1.png|32px]] [[File:Lit Furnace (S) JE2 BE1.png|32px]] [[File:Lit Furnace (W) JE2 BE1.png|32px]] 加入了熔炉。}}
+|{{HistoryLine||0.3.3|熔炉现在需要8个[[圆石]]来合成，而不是5个。}}
+|{{HistoryLine||0.9.0|dev=build 1|熔炉现在会在[[村庄]]中生成。}}
+|{{HistoryLine||0.11.0|dev=build 1|熔炉界面中不再显示合成描述。}}
+|{{HistoryLine||0.11.0|dev=build 3|现在熔炉被破坏时物品会掉落成组而非分开掉落。}}
+|{{HistoryLine||0.15.0|dev=build 1|现在熔炉可被[[活塞]]推动或拉动。}}
+|{{HistoryLine||0.16.0|dev=build 1|向不使用控制器的设备优化描述（输入、燃料、结果）。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|现在熔炉会在[[雪屋]]中生成。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Furnace (N) JE3 BE2.png|32px]] [[File:Furnace (E) BE2.png|32px]] [[File:Furnace (S) BE2.png|32px]] [[File:Furnace (W) JE3 BE2.png|32px]] [[File:Lit Furnace (N) BE2.png|32px]] [[File:Lit Furnace (E) BE2.png|32px]] [[File:Lit Furnace (S) BE2.png|32px]] [[File:Lit Furnace (W) BE2.png|32px]] 更改了熔炉的纹理。
+|现在熔炉可用于合成[[高炉]]和[[烟熏炉]]。
+|现在熔炉会在新的村庄内生成。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|现在熔炉会在积雪针叶林村庄的小屋中自然生成。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|现在熔炉可用[[黑石]]合成。}}
+|{{HistoryLine||1.16.20|dev=1.16.20.50|现在破坏熔炉会掉落其内积累的烧炼经验。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.50|现在熔炉可用[[深板岩圆石]]来合成。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.26|现在熔炉会在[[远古城市]]中心的一种地下室里生成。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.22|exg=next_major_update|现在熔炉会在[[古迹废墟]]的匠铺中生成。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|1.19.80.22中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.20.30|dev=1.20.30.20|现在熔炉使用方块状态{{cd|minecraft:cardinal_direction}}，并弃用了{{cd|direction}}。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.24|现在熔炉只会在使用镐挖掘时掉落，以匹配{{el|je}}。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Furnace (N) JE2 BE1.png|32px]] [[File:Furnace (E) JE2 BE1.png|32px]] [[File:Furnace (S) JE2 BE1.png|32px]] [[File:Furnace (W) JE2 BE1.png|32px]] [[File:Lit Furnace (N) JE2 BE1.png|32px]] [[File:Lit Furnace (E) JE2 BE1.png|32px]] [[File:Lit Furnace (S) JE2 BE1.png|32px]] [[File:Lit Furnace (W) JE2 BE1.png|32px]] 加入了熔炉。}}
+|{{HistoryLine||xbox=TU5|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|为熔炉添加了快速移动物品的功能。}}
+|{{HistoryLine||xbox=TU12|[[猫]]会尝试坐在正在烧炼的熔炉上，此时熔炉不可使用。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|现在当熔炉的燃料用尽时，[[烧炼]]进度会以2倍速度倒退。
+|熔炉的燃料槽现在只允许放入燃料或1个[[空桶]]。}}
+|{{HistoryLine||xbox=TU43|xbone=CU33|ps3=1.36|psvita=1.36|ps4=1.36|wiiu=Patch 13|switch=1.0.1|熔炉会生成在[[雪屋]]中。}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|switch=1.0.1|为点燃的熔炉加入了音效。{{check version}}}}
+|{{HistoryLine||xbox=TU53|xbone=CU43|ps3=1.49|psvita=1.49|ps4=1.50|wiiu=Patch 23|switch=1.0.3|更多[[物品]]现在可以做熔炉的燃料。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Furnace (S) BE2.png|32px]] [[File:Lit_Furnace (S) BE2.png|32px]] 更改了熔炉的纹理。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.91|wiiu=none|switch=none|熔炉现在可以被[[活塞]]推动。{{check version}}
+|熔炉现在会生成在新版的[[村庄]]中。
+|熔炉现在可以用来合成[[高炉]]和[[烟熏炉]]。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Furnace (N) JE2 BE1.png|32px]] [[File:Furnace (E) JE2 BE1.png|32px]] [[File:Furnace (S) JE2 BE1.png|32px]] [[File:Furnace (W) JE2 BE1.png|32px]] [[File:Lit Furnace (N) JE2 BE1.png|32px]] [[File:Lit Furnace (E) JE2 BE1.png|32px]] [[File:Lit Furnace (S) JE2 BE1.png|32px]] [[File:Lit Furnace (W) JE2 BE1.png|32px]] 加入了熔炉。}}
+}}
+
+== 你知道吗 ==
+* 熔炉将多种现实设备的功能集于一个方块：锻铁炉、高炉、熔炼炉、转炉和焙烧炉（用于烧炼矿石），熟食炉（用于烘焙和烹饪），炭坑（用于燃烧木头），窑（用于烤制黏土和玻璃）以及精炼炉（用于精炼粗矿）。
+
+== 画廊 ==	
+{{gallery|
+Torch On Furnace.png|插在熔炉上的[[火把]]
+Furnaces in Village.png|[[村庄]]里自然生成的熔炉
+Furnace GUI.png|convert|Java版中熔炉的GUI
+Iglooinside.png|雪屋内部自然生成的熔炉
+Ancient city rs6.png|远古城市地下室中自然生成的熔炉
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks|redstone blocks}}
+
+[[Category:功能方块]]
+
+[[cs:Pec]]
+[[de:Ofen]]
+[[en:Furnace]]
+[[es:Horno]]
+[[fr:Fourneau]]
+[[hu:Kemence]]
+[[it:Fornace]]
+[[ja:かまど]]
+[[ko:화로]]
+[[lzh:爐]]
+[[nl:Oven]]
+[[pl:Piec]]
+[[pt:Fornalha]]
+[[ru:Печь]]
+[[th:เตาเผา]]
+[[uk:Піч]]

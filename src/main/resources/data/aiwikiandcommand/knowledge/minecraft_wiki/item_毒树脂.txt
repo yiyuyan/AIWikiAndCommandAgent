@@ -1,0 +1,202 @@
+# 页面: 毒树脂
+# 来源: https://zh.minecraft.wiki/w/%E6%AF%92%E6%A0%91%E8%84%82
+# 分类: 使用简单计算器的页面, 可再生资源, 愚人节玩笑特性, 本地化模块需更新, 物品, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:29:44
+# 原始 Wikitext 内容:
+
+{{about|愚人节玩笑版本中的物品|正式版中的类似物品|树脂}}
+{{Joke feature|update=24w14potato}}
+{{Infobox item
+|image=Toxic Resin.png
+|invimage=[毒树脂]Toxic Resin[&7清晰度：糟糕/杂质：气泡]
+|nobe=1
+|renewable=是
+|creative-tab=马铃薯（Potatoes）
+|item-id-raw=toxic_resin}}
+
+'''毒树脂（Toxic Resin）'''是一种可在[[制箭台/24w14potato|制箭台]]中转换为[[琥珀宝石]]的物品。
+
+== 获取 ==
+=== 挖掘 ===
+当使用未带有[[精准采集]]魔咒的[[锄]]挖掘[[树脂矿石]]时会掉落1个杂质为“气泡”，清晰度为“糟糕”（{{frac|4|9}}概率）、“暗淡”（{{frac|1|3}}概率）或“终极”（{{frac|2|9}}概率）的毒树脂。
+
+=== 生物掉落物 ===
+{{DropTable|name=毒鳍台阶|edition=java|mobdrop=1|nosource=1
+|{{DropLine|name=毒鳍台阶|image=Toxifin Slab|quantity=0-1|lootingquantity=0-1|notes=clarity_clouded}}
+|{{DropLine|name=毒鳍台阶|image=Toxifin Slab|notes=clarity_jewel|dropchance=0.1|lootingquantity=0-1|lootingchance=0.02}}
+|notes=
+clarity_clouded = 掉落时杂质为“鱼腥”、清晰度为“暗淡”。
+clarity_jewel = 掉落时杂质为“鱼腥”、清晰度为“宝石”。
+}}
+
+=== 制箭台 ===
+毒树脂可在制箭台中升高清晰度、随机更改杂质。
+
+=== 烧炼 ===
+烧炼[[毒马铃薯油]]可获得杂质随机、清晰度为“糟糕”的毒树脂。
+
+毒树脂的烧炼时间为{{convert|125}}，比普通物品更快。
+
+{{Smelting
+|ingredients=毒马铃薯油 +<br>任意[[燃料]]
+|[毒马铃薯油]Poisonous Potato Oil[&9非常滑/&c中毒（00&#58;10）]
+|[毒树脂]Toxic Resin[&7清晰度：糟糕/杂质：气泡]
+|0.1
+|Ilink=毒马铃薯油
+|Olink=none
+|ignoreusage=1
+}}
+
+== 用途 ==
+=== 属性 ===
+毒树脂拥有2个属性：“清晰度”（Clarity）和“杂质”（Impurities），每个属性都有随机的修饰符。游戏中总共有160种不同的组合。这些修饰符会随机分配给每个毒树脂。
+
+毒树脂有10个清晰度种类，从低到高依次为：
+* 糟糕（Abysmal）
+* 瑕疵（Blemished）
+* 暗淡（Clouded）
+* 钝感（Dull）
+* 终极（Eventual）
+* 模糊（Faint）
+* 微光（Glimmering）
+* 朦胧（Hazy）
+* 冰状（Icy）
+* 宝石（Jewel）
+
+毒树脂有16个杂质种类：
+* 气泡（Air Bubble）
+* 虫子（Bug）
+* 药物（Chemical）
+* 闪长（Diorite）
+* 末影（Ender）
+* 鱼腥（Fishy）
+* 银河（Galactic）
+* 蜂蜜（Honey）
+* 昆虫（Insect）
+* 神灵（Jinn）
+* 海妖（Kraken）
+* 月球（Lunar）
+* 金属（Metallic）
+* 下界（Nether）
+* 有机（Organic）
+* 色素（Pigment）
+
+通过创造模式物品栏和{{cmd|give}}获得的未指定属性的毒树脂默认为“糟糕”清晰度和“气泡”杂质。
+
+=== 制箭 ===
+毒树脂可在制箭台中升高一个清晰度等级并随机更改杂质。当毒树脂的清晰度达到“宝石”时，其总是会转换为琥珀宝石。
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|edition=java
+|showforms=y
+|generatetranslationkeys=y
+|displayname=Toxic Resin
+|spritetype=item
+|spritename=toxic-resin
+|nameonlyjava=1
+|nameid=toxic_resin
+|form=item
+|translationkey=item.minecraft.toxic_resin
+|foot=1}}
+
+=== 物品数据 ===
+{{see also|物品格式}}
+
+{| style="width:100%"
+| style="padding:0;" |
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;background-color: var(--custom-nbt-inherit-color);"
+|-
+! style="text-align:left;" | 默认[[数据组件]]结构和字段<span>[</span>[[编码格式/DataComponent|源页面]]<span>]</span>
+|-
+|
+<div class="treeview">
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="物品共通组件">物品共通组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="物品共通组件">
+** {{nbt|compound}}{{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|list|modifiers}}：提供的属性修饰符。
+**** {{nbt|compound}}：一个修饰符。
+***** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+***** {{nbt|string|name|existonsave=1|required=1}}：当前[[属性修饰符]]的名称。
+***** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+***** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+***** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+***** {{nbt|int array|uuid|existonsave=1|required=1}}：当前属性修饰符的UUID。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示属性修饰符的提示框。
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|compound|levels}}：魔咒数据。
+**** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示魔咒的提示框。
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}：（[[文本组件]]）一行描述信息。
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+</div>
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="该物品的其他组件">该物品的其他组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="该物品的其他组件">
+** {{nbt|compound|minecraft:resin}} 数据组件
+*** {{nbt|string|quality|existonsave=1|required=1}}：单个字符，表示毒树脂的清晰度。每种清晰度对应的字符即为它们的英文首字母，从低到高恰好分别为<code>a</code>到<code>j</code>。如果字符串长度大于1，则只取首个字符。
+*** {{nbt|string|impurities|existonsave=1|required=1}}：单个字符，表示毒树脂的杂质。每种杂质对应的字符即为它们的英文首字母。如果字符串长度大于1，则只取首个字符。
+</div>
+</div>
+|}
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;"
+|-
+! style="text-align:left;" | JSON
+|-
+|
+<syntaxhighlight copy="1" lang="json">{
+    "minecraft:enchantments": {
+        "levels": {}
+    },
+    "minecraft:attribute_modifiers": {
+        "modifiers": []
+    },
+    "minecraft:lore": [],
+    "minecraft:max_stack_size": 64,
+    "minecraft:repair_cost": 0,
+    "minecraft:rarity": "common",
+    "minecraft:resin" : {
+        "impurities": "a",
+        "quality": "a"
+    }
+}</syntaxhighlight>
+|}
+|}
+
+在默认组件的基础上，毒树脂使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt|compound|minecraft:resin}} 数据组件
+*** {{nbt|string|quality|existonsave=1|required=1}}：单个字符，表示毒树脂的清晰度。每种清晰度对应的字符即为它们的英文首字母，从低到高恰好分别为<code>a</code>到<code>j</code>。如果字符串长度大于1，则只取首个字符。
+*** {{nbt|string|impurities|existonsave=1|required=1}}：单个字符，表示毒树脂的杂质。每种杂质对应的字符即为它们的英文首字母。如果字符串长度大于1，则只取首个字符。
+</div>
+
+== 你知道吗 ==
+在游戏的翻译文件中存在一种名为“品质”（Quality）的未被使用的属性。
+
+* 此属性的修饰符为：
+** 浑浊（Opaque）
+** 混浊（Murky）
+** 朦胧（Cloudy）
+** 清澈（Clear）
+** 纯净（Pure）
+** 无瑕（Flawless）
+** 完美（Perfect）
+** 超凡（Transcendent）
+** 神圣（Divine）
+** 虚无（Ethereal）
+** 天界（Celestial）
+* 其下方有一条注释：
+** “对以上的注释：这些词很好，但我找不到它们的用途[G]。点赞、评论并订阅！我们下次再见，拜拜！”（Comment on ^: These are nice, but I can't find a use for them [G]. Leave a like, leave a comment, and subscribe!, and see you in the next one, bye!）
+
+== 导航 ==
+{{Navbox jokes|24w14potato}}
+[[Category:物品]]
+
+[[en:Toxic Resin]]
+[[es:Resina tóxica]]
+[[ja:Toxic Resin]]

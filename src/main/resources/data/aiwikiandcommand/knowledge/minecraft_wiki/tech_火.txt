@@ -1,0 +1,406 @@
+# 页面: 火
+# 来源: https://zh.minecraft.wiki/w/%E7%81%AB
+# 分类: Java版独有信息, 使用简单计算器的页面, 使用计算器的页面, 基岩版独有信息, 教育版独有信息, 方块, 没有方块物品的方块
+# 抓取时间: 2026-07-14 17:31:15
+# 原始 Wikitext 内容:
+
+{{about|能造成伤害的火方块|在灵魂沙或灵魂土上的蓝色火|灵魂火|实体着火的状态|着火|其他含义|火焰（消歧义）}}
+{{Infobox block
+|image=Fire.gif
+|image2=Fire BE.gif
+|image1caption={{el|je}}
+|image2caption={{el|be}}
+|invimage=Fire.gif<!-- 用于基岩版，请勿移除 -->
+|noitem=1
+|light=15
+}}
+
+'''火（Fire）'''是一种能够扩散并破坏方块和伤害生物的方块。
+
+== 生成 ==
+火能够生成火（见{{slink||传播}}）。
+
+{{control|使用}}[[打火石]]和[[火焰弹]]可以生成火。
+
+以任何方式在一个下方是[[灵魂沙]]或[[灵魂土]]{{note|name=soul_fire_base_blocks|{{in|java}}该特性由方块标签{{TagLink|block|soul_fire_base_blocks}}控制。}}的位置放置火时，会改为放置[[灵魂火]]。
+
+=== 自然生成 ===
+火以[[随机斑块]]的形式在[[下界]]中生成。
+
+{{Block distribution}}
+
+=== 爆炸 ===
+能够产生火的[[爆炸]]，爆炸后在爆炸范围内的每一个位置若下方可以容许上方点火，则有{{frac|1|3}}的概率在这个位置生成火。
+
+这些爆炸包括：
+* 在[[主世界]]以外的维度使用[[床]]时引发的爆炸。
+* 在[[下界]]以外的维度使用[[重生锚]]时引发的爆炸。
+* [[火球]]引发的爆炸。
+
+=== 熔岩 ===
+{{main|熔岩#生成火}}
+
+熔岩会在周围的方块上生成火。
+
+=== 末地水晶 ===
+{{main|末地水晶#行为}}
+生成在末地的[[末地水晶]]会在其位置处连续生成火。
+
+=== 小火球 ===
+{{main|小火球#着火}}
+
+小火球会在命中位置生成火。
+
+=== 闪电束 ===
+{{main|闪电束#生成火}}
+
+闪电会在命中区域内生成火。
+
+=== 发射器 ===
+正在使用打火石的[[发射器]]会在其面对的方向生成火。
+
+=== 实验台 ===
+{{exclusive|section=1|be|edu}}
+{{education feature|section=1}}
+
+在[[实验台]]中合成产品时，如果组合的材料不能合成产品，点击“合成”后实验台的顶部可能会生成火。
+
+== 获取 ==
+{{in|java}}火没有对应的物品形式。
+
+{{in|bedrock}}火的物品形式只能通过编辑物品栏获得。
+
+== 破坏 ==
+火被挖掘时会立刻被破坏。[[剪刀]]用于挖掘火时，耐久度不会下降。
+
+{{Breaking table}}
+
+火被破坏后不会掉落。
+
+== 用途 ==
+[[File:Fire position.png|thumb|火附近有可燃尽方块时的生成位置]]
+
+在游戏计算中，火的行为由[[计划刻]]控制，不受[[随机刻速率]]的影响。火从一次更新到下一次更新的间隔为{{convert|30}}到{{convert|40}}。
+
+当[[游戏规则]]{{gamerule||doFireTick}}为<samp>false</samp>时{{only|be}}或{{gamerule|fire_spread_radius_around_player}}内不含玩家时{{only|je}}，火将停止被更新：
+* 火不会被游戏更新状态。
+* 火不会破坏方块。
+* 火不会传播。
+* 火不会熄灭。
+* 熔岩不会产生火。
+
+火仍能在不被更新的情况下对实体造成伤害。
+
+[[水]]和[[熔岩]]在流动时会冲毁沿途的火。在火方块的位置放置方块也能将火取代掉。
+
+{{control|击打}}正在燃烧的方块的一侧会让那一侧的火被扑灭，并发出嘶嘶声。
+
+[[喷溅型水瓶]]和[[滞留型水瓶]]会扑灭范围内的火。
+
+当火失去了支撑自身的方块时，火会直接被移除。
+
+=== 光源 ===
+火发出[[亮度]]等级为15的光。
+
+=== 伤害实体 ===
+火会对身处其中的实体持续造成每{{convert|1}}两次{{hp|1}}的[[伤害#火焰伤害|火焰伤害]]（然而[[受击后伤害免疫]]会将其减慢至每0.5秒受到一次{{hp|1}}的伤害）。
+
+[[僵尸猪灵]]、[[恶魂]]、[[凋灵骷髅]]、[[烈焰人]]、[[炽足兽]]、[[岩浆怪]]、[[潜影贝]]、[[僵尸疣猪兽]]、[[监守者]]、[[末影龙]]、[[凋灵]]、绑定[[嘎枝之心]]的[[嘎枝]]、[[下界合金]]质[[物品实体]]和具有[[抗火]]效果的生物不会受到火造成的火焰伤害。
+
+=== 使实体着火 ===
+{{main|着火}}
+
+生物在接触到火时，其'''剩余着火时间'''会持续增加，无视生物的具有[[火焰保护]]魔咒的盔甲。
+* 当生物处于火中时，剩余着火时间不会下降。
+* 当生物的剩余着火时间不高于0时，剩余着火时间将会每{{convert|1}}增加{{convert|1}}。
+* 当生物的剩余着火时间高于0时，剩余着火时间将会每{{convert|20}}增加{{convert|1}}。
+* 当生物在火中移动时，剩余着火时间将会额外每{{convert|1}}增加{{convert|1}}。
+
+一旦生物的剩余着火时间高于0，其剩余着火时间将被设置为至少{{convert|160}}，该效果受到[[火焰保护]]魔咒的影响。
+<!-- 生物在接触到火时，其'''剩余着火时间'''{{note|{{el|je}}中实体的{{nbt|short|Fire}}数据值}}会持续增加。
+* 当生物的剩余着火时间小于等于0时，剩余着火时间将会每游戏刻增加{{convert|1}}。
+* 当生物的剩余着火时间大于0时，剩余着火时间将会每秒增加{{convert|1}}。
+* 当生物在火中移动时，剩余着火时间将会额外每游戏刻增加{{convert|1}}。
+
+一旦生物的剩余着火时间高于0，其剩余着火时间将被设置为至少{{convert|160}}，[[火焰保护]]魔咒可以降低这个最小值。 -->
+=== 传播 ===
+[[File:Fire-safe-building.png|右|缩略图|火周围的安全建筑区域]]
+火可以在'''引燃几率'''大于0的方块表面上传播，这类方块也被称为'''{{text anchor|可燃方块}}'''。[[含水]]的可燃方块会被视为不可燃方块。
+
+火可以在以自身为中心3×3水平范围的区域内传播，最高可传播至向上4格，最低可传播至向下1格。对于区域内的每个位置，如果位置上的方块不是空气，那么这里无法放置火；如果这个位置毗邻的方块都不是可燃方块，那么火也无法传播至此。火无视阻挡，可以穿越方块传播引燃其他方块。
+
+火传播区域内根据高度有不同的'''基础引燃度'''。以火方块为中心的3×3×3范围内，基础引燃度为100；距离火两格高的位置基础引燃度为200，距离三格为300，距离四格为400。每个传播位置根据周围方块的不同也有它们的'''引燃度'''，其公式为<math>\left [ \frac{i+7d+40}{a+30}\right ]</math>。其中：
+* ''i''为所有毗邻方块的最大引燃几率；
+* ''d''为[[难度]]，从和平到困难分别对应0-3；
+* ''a''为火的方块属性<code>age</code>的值。
+如果火位于可加速燃烧的生物群系{{note|name=increased_fire_burnout|{{in|je}}由环境属性{{cd|[[环境属性#gameplay/increased_fire_burnout|gameplay/increased_fire_burnout]]}}控制。}}（[[丛林]]、[[竹林]]、[[沼泽]]、[[红树林沼泽]]、[[蘑菇岛]]、[[积雪山坡]]、[[尖峭山峰]]或[[冰封山峰]]）内，则引燃度减半并向下取整。如果引燃度为0，或是[[雨]]可以直接落到这个位置或其水平毗邻的4个方块，那么这个位置就无法传播火。如果位置满足条件，每个计划刻这个位置可以传播火的概率为{{frac|a|b}}，其中''a''为引燃度，''b''为基础引燃度。火燃烧得越久、传播得越远，传播的速度也会变慢。
+
+=== 烧毁方块 ===
+[[File:BurningVillage.png|缩略图|处于火灾中的村庄和森林，四处蔓延的火破坏了沿途的多数方块]]
+火可以烧毁毗邻的方块。每种方块都具有'''烧毁几率'''，烧毁几率大于0则可以被火烧毁。设某一个方块的烧毁几率为''b''，如果火在这个方块的侧面，则火接受到计划刻时这个方块有{{frac|b|300}}的概率被烧毁；如果火在上面或者下面，则为{{frac|b|250}}。如果火位于可加速燃烧的生物群系{{note|name=increased_fire_burnout}}内，在侧面的烧毁概率变为{{frac|b|250}}，在上下面的烧毁概率变为{{frac|b|200}}。
+
+被火烧毁的方块不会掉落。当[[TNT]]被火烧毁时，会被直接激活并随后爆炸。如果被烧毁的方块位置上不会接触到雨，在被烧毁之后有{{frac|5|10+a}}（''a''为执行烧毁的火方块属性<code>age</code>的值）的概率在原地生成火，其<code>age</code>方块属性有80%的概率与执行烧毁的火相同，有20%的概率再加1。
+
+=== 熄灭 ===
+火在燃烧一段时间后会自行熄灭，熄灭行为主要由方块属性<code>age</code>决定。
+
+* 接收到计划刻时，<code>age</code>有{{frac|1|3}}的概率增加1。
+* 如果[[雨]]直接落到火或其水平毗邻的4个方块，在每一个计划刻，火都有<math>20+3a</math>%的概率熄灭，其中''a''为<code>age</code>的值。
+* 如果火没有毗邻任何可燃方块，且下方方块上表面不完整或<code>age</code>值大于3，那么火在接收到计划刻时会立刻熄灭。
+* 如果<code>age</code>值为15，且火下方没有可燃方块，那么火在接收到计划刻时会有25%的概率熄灭。
+* {{in|BE}}在雨中的火几乎会瞬间熄灭。<ref>{{bug|MCPE-115037}}</ref>
+
+=== 永久燃烧 ===
+[[File:Infinite Fire.png|thumb|250px|在下界岩上燃烧的火永远不会熄灭]]
+维度可以指定部分方块上的火永久燃烧，使其不会熄灭，无法被[[雨]]扑灭，但可以人为扑灭。
+
+在所有维度中，[[下界岩]]和[[岩浆块]]上的火均可永久燃烧。
+
+在[[末地]]中，[[基岩]]上的火也可永久燃烧。
+
+{{in|java}}该特性由[[维度类型]]指定的[[Java版标签/方块|方块标签]]控制，如{{TagLink|block|infiniburn_overworld}}（主世界）、{{TagLink|block|infiniburn_nether}}（下界）、{{TagLink|block|infiniburn_end}}（末地）。
+
+=== 激活下界传送门 ===
+{{main|下界传送门}}
+在合法的下界传送门框架内生成火可以将其激活，即使火没有毗邻一个可用的方块表面，无论火是因什么原因而被生成的。
+
+这只在火被生成时有效：已经生成的火在可以被激活的下界传送门出现后，也不会将其激活。
+
+这允许玩家在不使用打火石的情况下，通过放置可燃物引导火的传播来激活下界传送门。
+
+=== 蜜蜂 ===
+对[[蜂箱]]或[[蜂巢（方块）|蜂巢]]点火会导致[[蜜蜂]]逃离该方块。
+
+=== 灵魂火 ===
+火下方的方块变为[[灵魂沙]]或[[灵魂土]]{{note|name=soul_fire_base_blocks}}时，会转变为[[灵魂火]]。
+
+=== 化学设备 ===
+{{exclusive|section=1|be|edu}}
+{{education feature|section=1}}
+
+当[[化合物创建器]]、[[实验台]]、[[材料分解器]]或[[元素构造器]]顶部着火时，其将无法使用。
+
+== 方块燃烧行为列表 ==
+{{main|火/方块燃烧相关属性}}
+
+== 音效 ==
+{{edition|je}}：
+{{Sound table
+|sound=Fire.ogg
+|subtitle={{tp|subtitles.block.fire.ambient}}
+|source={{tp|soundCategory.block}}
+|description=火的燃烧声
+|id=block.fire.ambient
+|translationkey=subtitles.block.fire.ambient}}
+{{Sound table
+|sound=Fizz.ogg
+|subtitle={{tp|subtitles.entity.generic.extinguish_fire}}
+|source={{tp|soundCategory.block}}
+|description=火焰被{{control|击打}}熄灭
+|id=block.fire.extinguish
+|translationkey=subtitles.block.fire.extinguish}}
+{{Sound table
+|sound=Ghast fireball4.ogg
+|subtitle={{tp|subtitles.item.firecharge.use}}
+|source={{tp|soundCategory.block}}
+|description=使用火焰弹点火
+|id=item.firecharge.use
+|translationkey=subtitles.item.firecharge.use}}
+{{Sound table
+|sound=Fire_ignite.ogg
+|subtitle={{tp|subtitles.item.flintandsteel.use}}
+|source={{tp|soundCategory.block}}
+|description=使用打火石点火
+|id=item.flintandsteel.use
+|translationkey=subtitles.item.flintandsteel.use
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=fire.fire.wav
+|source=方块
+|description=火的燃烧声
+|id=fire.fire
+|typeid=fire
+|soundvolume=1-2
+|soundpitch=0.3-1
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=random.fizz.wav
+|source=方块
+|description=火焰被{{control|击打}}熄灭
+|id=random.fizz
+|typeid=extinguish.fire
+|soundvolume=0.5
+|soundpitch=1.8-2.4
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=fire.ignite.wav
+|source=方块
+|description=使用打火石点火
+|id=fire.ignite
+|typeid=ignite
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Ghast fireball4.ogg
+|source=主音量
+|description=使用火焰弹点火
+|id=mob.blaze.shoot
+|typeid=shoot
+|soundvolume=3.0
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|je}}：
+{{ID table|generatetranslationkeys=java
+|Fire|spritetype=block|nameid=fire
+|showblocktags=je
+|blocktags={{GameTag|block|fire}}
+|foot=1}}
+
+{{edition|be}}：
+{{ID table|generatetranslationkeys=bedrock
+|Fire|spritetype=block|nameid=fire|foot=1}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100109-1939|[[File:Fire JE1.png|32px]] 加入了火。
+|火可以像其他方块那样直接放置。
+|火的[[模型]]不会渲染背面，仅从正面可见。}}
+|{{HistoryLine|||dev=20100110|熔岩现在会向可燃方块传播火。
+|所有的物品和生物现在可以着火。
+|火现在可以通过[[打火石]]放置。}}
+|{{HistoryLine|||dev=20100125|火现在有粒子效果。}}
+|{{HistoryLine|||dev=20100129-1447|可通过把[[矿石]]扔到火里面[[烧炼]]。}}
+|{{HistoryLine||20100212-1210| 火现在可以合成锁链[[盔甲]]。
+{{Collapse|content={{Crafting Table
+|Output=Chainmail Helmet;Chainmail Chestplate;Chainmail Leggings;Chainmail Boots
+|A1=Fire;Fire;Fire;       |B1=Fire;;Fire;  |C1=Fire;Fire;Fire;
+|A2=Fire;Fire;Fire;Fire   |B2=;Fire;;      |C2=Fire;Fire;Fire;Fire
+|A3=;Fire;Fire;Fire       |B3=;Fire;;      |C3=;Fire;Fire;Fire
+}}}}
+}}
+|{{HistoryLine||20100219|随着[[熔炉]]的加入，现在不再能使用火直接烧炼掉落的[[矿石]]。}}
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100617-1531|[[File:Fire (placeholder texture) JE1.png|32px]] 添加了一个火的占位符纹理，用于动画无法加载的情况。}}
+|{{HistoryLine||20100624|[[File:Fire (placeholder texture) JE2.png|32px]] 更改了火的占位符纹理，写有“FIRE TEX! HNST”，即“Fire texture! Honest”。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.2.0|dev=preview|火现在会生成在[[下界]]中。}}
+|{{HistoryLine||v1.2.6|熔岩可以导致周围的可燃方块燃烧。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.2|火现在使用两张相似的纹理。
+|[[File:Fire (placeholder texture) JE2.png|32px]] 添加了另一张重复的火的占位符纹理，位于{{filename|[[terrain.png]]}}中。}}
+|{{HistoryLine||1.2_02|移除了方块永久燃烧的机制。此前，可燃方块在四周被不可燃方块包围时会永久燃烧。}}
+|{{HistoryLine||1.6|dev=Test Build 3|由于火的传播机制被限制，火不能再无限传播了。<ref>{{tweet|notch|72582596294483969}}</ref>}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.2.1|dev=12w06a|现在在创造模式下点击火不会移除火下面的方块。}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了[[游戏规则]]<code>doFireTick</code>。}}
+|{{HistoryLine||1.4.2|dev=12w34a|火传播速度现在基于[[游戏难度]]。}}
+|{{HistoryLine|||dev=12w40a|火传播机制再次被轻微限制以进一步防止火的无限传播。}}
+|{{HistoryLine||1.5|dev=13w02a|火的纹理文件现在可以被找到了。在此之前，其纹理被隐藏在代码里，不能通过任何常规方法获得。}}
+|{{HistoryLine||1.8|dev=14w17a|[[File:Fire JE2.png|32px]]更改了火的模型，其侧面现在是竖直的而非向内倾斜的了，但背面仍不可见。}}
+|{{HistoryLine|||dev=14w25a|[[File:Fire JE3.png|32px]] 火现在受环境光遮蔽，最靠南的内部平面现在也缺失了。|现在无法通过{{cmd|give}}命令获得火。|移除了火的[[物品]]形式。|移除了有关火的[[合成配方]]。}}
+|{{HistoryLine|||dev=14w28b|[[File:Fire JE4.png|32px]] 修复了丢失的内部平面。}}
+|{{HistoryLine|||dev=14w31a|[[File:Fire JE5.png|32px]] 火现在不受环境光遮蔽。
+|火现在被某些方式破坏或踩踏时会播放羊毛音效。}}
+|{{HistoryLine||1.9|dev=15w31a|[[File:Fire JE6.png|32px]] 火的模型加入了额外的平面，但外部的平面偏移了1个像素。|火的方块状态{{cd|alt}}和{{cd|flip}}被移除，{{cd|upper}}状态被改变为字节型状态{{cd|up}}，但火的行为未被改变。}}
+|{{HistoryLine|||dev=15w33c|[[File:Fire JE7.png|32px]] 修复了火外部平面的位置偏移。}}
+|{{HistoryLine|||dev=15w38a|暴露在[[雨]]中的火每[[方块刻]]的熄灭概率从100%降低到0-45%，概率取决于火的{{cd|age}}状态。}}
+|{{HistoryLine|||dev=15w49a|暴露在雨中的火每方块刻的熄灭概率更改为20-65%，概率取决于火的{{cd|age}}状态。}}
+|{{HistoryLine||1.12|dev=17w06a|火现在能在岩浆块上一直燃烧。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，该方块的数字ID为51。}}
+|{{HistoryLine||1.16|dev=20w06a|由于漏洞，火不再燃烧[[物品]]。<ref>{{bug|MC-170881|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=20w07a|修复了上述漏洞，火重新可以燃烧[[物品]]。}}
+|{{HistoryLine|||dev=20w10a|火现在拥有正常的碰撞箱（{{frac|1|16}}格）。
+|在[[创造模式]]下，使用[[剑]]或[[三叉戟]]不会再熄灭火。
+|火现在可以用[[调试棒]]调整方块状态了。
+|火现在可以通过{{key|F3}}正确读取方块状态与信息。
+|火被破坏时会产生[[Java版粒子|粒子]]。}}
+|{{HistoryLine|||dev=20w11a|现在可以在灵魂沙上点燃普通的火。<ref>{{bug|MC-170836|||Fixed}}</ref>
+|火被破坏时不再产生粒子。
+|火现在拥有了关联的[[战利品表]]，默认为空。}}
+|{{HistoryLine|||dev=20w12a|现在在灵魂沙上点火会生成灵魂火而不是普通的火。
+|现在在方块上生成火还是灵魂火由方块标签决定。
+|加入了[[重生锚]]，在[[下界]]以外维度中{{control|使用}}时爆炸并产生火。}}
+|{{HistoryLine|||dev=20w16a|火现在会自然生成于[[堡垒遗迹]]中。}}
+|{{HistoryLine||1.20.2|dev=23w32a|火焰被[[喷溅药水]]扑灭时，会发出频率为<code>12</code>的<code>block_destroy</code>[[振动]]。}}
+|{{HistoryLine||1.21.5|dev=25w06a|现在当周围8个区块内不含玩家时，火不再燃烧或蔓延。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|加入了火。
+|由于漏洞，此时的火是隐形的。当玩家踏入火中时，游戏下半部分画面会被一层橙色的半透明方形纹理遮盖。
+|火的传播机制存在漏洞，允许其传播到任何[[方块]]。<ref>https://youtu.be/3hrz7KK2EJs</ref>}}
+|{{HistoryLine||0.3.3|为了临时修复[[携带版Alpha 0.1.0]]的漏洞，火不再能生成和传播了。}}
+|{{HistoryLine||0.7.0||[[File:Fire BE1.png|32px]] 火现在有纹理，但被错误的渲染了。<ref>{{bug|MCPE-2458|||Fixed}}</ref>| 火又可以生成了，同时引入了[[Java版Beta 1.6]]中火的传播机制。
+|火现在可以通过打火石放置。}}
+|{{HistoryLine||0.7.1|[[File:Fire BE2.png|32px]] 火现在正常渲染了。|火现在能在[[下界岩]]上永久燃烧。}}
+|{{HistoryLine||0.8.0|dev=build 4|火点燃[[TNT]]变得更容易了。}}
+|{{HistoryLine||0.9.0|dev=build 2|火在[[丛林]]和[[黑森林]]燃烧的速度更快了。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.59|现在在[[灵魂沙]]上的火会变为[[灵魂火]]。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Fire Console.png|32px]] 加入了火。}}
+|{{HistoryLine||xbox=TU54|xbone=CU44|ps3=1.52|psvita=1.52|ps4=1.52|wiiu=Patch 24|switch=1.0.4|火现在可以在[[岩浆块]]上永久燃烧。}}
+|{{HistoryLine|new3ds}}
+|{{HistoryLine||0.1.0|[[File:Fire BE2.png|32px]] 加入了火。}}
+}}
+
+== 你知道吗 ==
+* 火的外焰和内焰使用两种不同的纹理。
+
+== 画廊 ==
+<gallery>
+SWPE fire1.png|燃烧前
+SWPE fire3.png|燃烧时
+SWPE fire5.png|燃烧后
+A bad house.png|一个着火的房屋
+Lava Tree.png|由[[熔岩]]引起的一场自然火灾
+Wildfire.png|火传播到几棵树上
+Fire in 0.3.0.png|火在早期的携带版中是隐形的，甚至能烧掉像泥土和石头这类不可燃方块
+Forestfire.png|一场森林大火
+Soul Fire and Fire.png|灵魂火和火
+</gallery>
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[cs:Oheň]]
+[[de:Feuer]]
+[[en:Fire]]
+[[es:Fuego]]
+[[fr:Feu]]
+[[hu:Tűz]]
+[[it:Fuoco]]
+[[ja:炎]]
+[[ko:불]]
+[[nl:Vuur]]
+[[pl:Ogień]]
+[[pt:Fogo]]
+[[ru:Огонь]]
+[[th:ไฟ]]
+[[uk:Вогонь]]

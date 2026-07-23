@@ -1,0 +1,223 @@
+# 页面: 末地传送门（方块）
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%AB%E5%9C%B0%E4%BC%A0%E9%80%81%E9%97%A8%EF%BC%88%E6%96%B9%E5%9D%97%EF%BC%89
+# 分类: Java版独有信息, 使用简单计算器的页面, 基岩版独有信息, 待更新条目, 方块, 末地方块, 没有方块物品的方块, 需要图像的页面, 需要补充的条目
+# 抓取时间: 2026-07-14 17:28:39
+# 原始 Wikitext 内容:
+
+{{about|能够提供传送功能的方块|用来当作框架的方块|末地传送门框架|其他含义|传送门|相似的完整方块|末地折跃门（方块）}}{{more images|缺失基岩版渲染图。}}
+{{Infobox block
+|title=末地传送门
+|image=End Portal (block).gif
+|invimage=[末地传送门]End Portal BE
+|noitem=1
+|light=15
+}}
+
+'''末地传送门（End Portal）'''是当[[末地传送门]]建构成形时会生成出现的方块。接触到它的实体会被传送到[[末地]]或从末地被传送到[[主世界]]。
+
+== 生成 ==
+=== 末地传送门 ===
+末地传送门方块是激活的[[末地传送门]]结构的一部分。
+
+=== 返回传送门 ===
+末地传送门方块是激活的[[返回传送门]]结构的一部分。
+
+返回传送门会在状态更新时重新生成。
+
+== 获取 ==
+{{in|java}}末地传送门方块没有对应的物品形式。
+
+{{in|bedrock}}末地传送门方块的物品形式只能通过[[附加包]]或编辑物品栏获得。
+
+== 破坏 ==
+末地传送门不能被挖掘破坏。
+
+{{Breaking table|末地传送门}}
+
+末地传送门被破坏后不会掉落。
+
+== 用途 ==
+末地传送门方块可以用来传送玩家进出[[末地]]。当实体位于[[主世界]]、[[下界]]或{{only|je|for=[[自定义维度]]}}时，接触到末地传送门方块会立刻被传送到末地。当实体位于[[末地]]时，它将会被传送到主世界。单独的末地传送门方块依然有效。
+
+当实体通过末地传送门方块进入末地时，其会出现在[[黑曜石平台]]上，每次传送都会使黑曜石平台重新生成。通过末地传送门方块进入主世界的玩家会被传送到他们的[[个人出生点]]，其他实体会被传送到[[世界出生点]]。
+
+{{in|java}}如果一个[[自定义]]世界没有定义{{cd|minecraft:the_end}}维度，末地传送门仍然可以被激活并创建末地传送门方块，但其不能传送任何实体。
+
+=== 特性 ===
+* 末地传送门方块可以在创造模式下破坏，且不会影响相邻的末地传送门。
+* 与[[下界传送门]]不同，末地传送门方块不会在对应的末地传送门框架被破坏时自动破坏。
+* {{in|be}}玩家无法从下面看见末地传送门方块的纹理。
+* {{in|je}}末地传送门方块不会减少摔落伤害。
+* 末地传送门方块的顶部表面为{{only|je|for={{frac|3|4}}}}/{{only|be|for={{frac|3|10}}}}格高。
+* 末地传送门方块没有常规实体纹理的图片，[[末地折跃门方块]]也是如此。
+* [[TNT]]和其他爆炸物不能炸毁末地传送门方块。
+* {{in|be}}被骑乘的实体及其骑乘者接触末地传送门方块时不会被传送。
+* 浮漂不能被末地传送门传送。
+** {{in|je}}浮漂会无视末地传送门穿过。
+** {{in|be}}浮漂会停留在末地传送门中。
+* [[末影龙]]和绑定了嘎枝之心的[[嘎枝]]不能被末地传送门传送。
+* {{in|je}}[[凋灵]]不能被末地传送门传送。
+* {{in|je}}未看过[[胜利屏幕]]的玩家掷出的[[末影珍珠]]不能被处于末地的末地传送门传送。
+* {{in|be}}向末地传送门丢入末影珍珠相当于直接进入末地传送门，因此会被传送到个人重生点。
+* {{in|je}}末地传送门方块可能因为末地传送门框架的位置或方向不同而出现在不同的位置。<ref>{{bug|MC-97216}}</ref>
+* 末地传送门方块不能被[[凋灵]]和[[末影龙]]破坏。
+* {{in|be}}无法在末地传送门方块下方三格放置[[床]]。
+** 先放置床，再放置末地传送门方块是可行的。但即使如此，在此设置重生点的玩家也不会生成在末地传送门方块中。
+
+=== 光源 ===
+末地传送门会发出[[亮度]]等级为15的光。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=End Portal activation.ogg
+|subtitle={{tp|subtitles.block.end_portal.spawn}}
+|source={{tp|soundCategory.hostile}}
+|description=末地传送门被启动
+|id=block.end_portal.spawn
+|translationkey=subtitles.block.end_portal.spawn
+}}
+{{Sound table
+|sound=Nether_Portal_travel.ogg
+|subtitle={{tp|subtitles.block.portal.travel}}
+|source={{tp|soundCategory.ambient}}
+|description=被传送后播放
+|id=block.portal.travel
+|translationkey=subtitles.block.portal.travel
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=block.end_portal.endportal.wav
+|source=方块
+|description=末地传送门被启动
+|id=block.end_portal.spawn
+|typeid=block.end_portal.spawn
+|soundvolume=0.7
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=portal.travel.wav
+|source=环境
+|description=被传送后播放
+|id=portal.travel
+|typeid=portal.travel
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|End Portal
+|spritetype=block
+|nameid=end_portal
+|showblocktags=je
+|blocktags={{GameTag|block|end_portal}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=end-portal
+|spritetype=block
+|nameid=end_portal
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|End Portal
+|spritetype=block
+|nameid=end_portal
+|foot=1}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=end-portal
+|spritetype=block
+|nameid=EndPortal
+|foot=1}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+末地传送门都拥有一个与其相关的方块实体来存储该方块的额外数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 历史 ==
+{{update|参考[[:en:Technical_blocks/End_Portal]]以添加更多信息；末地传送门在1.7.10和最新版中不同，但目前的渲染图并没有体现该差异，且部分文段由于上述原因缺少渲染图。|section=1}}
+{{Incomplete section|[[:en:End Portal (block)]] - there were many more changes than just in 16w40a}}
+{{HistoryTable
+|{{HistoryLine||2011年10月5日|link={{tweet|notch|121664078308577280}}|[[Notch]]展示了末地传送门。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre3-1350|加入了末地传送门，此时没有任何功能。
+|[[File:End Portal (block item) JE1.png|32px]] 如果使用{{cmd|give}}命令来获取末地传送门，其六面会使用未着色的草方块顶面纹理。
+|[[TNT]]能够把末地传送门炸毁。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3-1402|将鼠标放置在末地传送门上不再会使游戏崩溃。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|末地传送门现在有功能了。
+|[[File:End Portal (block item) JE2.png|32px|link=]] 更改了末地传送门在物品栏中的纹理。}}
+|{{HistoryLine|||dev=Beta 1.9-pre5|[[File:End Portal (block item) JE3.png|32px]] 由于更改了草方块顶面的纹理，末地传送门的物品纹理也随着更改了。}}
+|{{HistoryLine||1.2.5|现在在创造模式下，玩家可以通过{{control|选取方块}}获取末地传送门。}}
+|{{HistoryLine||1.3.1|dev=12w17a|现在无法通过选取方块获取末地传送门了。}}
+|{{HistoryLine||1.4.2|dev=12w36a|所有实体都能够穿梭进入传送门。}}
+|{{HistoryLine||1.5|dev=13w02a|[[File:NetherPortal.gif|32px]] 末地传送门在物品栏中的纹理变成了[[下界传送门（方块）|下界传送门]]。}}
+|{{HistoryLine||1.8|dev=14w05a|[[File:Missing Texture JE3.png|32px]] 末地传送门在物品栏中的纹理变成了[[无效纹理]]。}}
+|{{HistoryLine|||dev=14w25a|移除了物品形式的末地传送门（ID 119）。}}
+|{{HistoryLine||1.9|dev=15w37a|不能再通过在末地传送门方块的位置放置液体来破坏末地传送门方块了。}}
+|{{HistoryLine|||dev=15w49b|末地传送门轮廓箱从{{frac|1|16}}格增加到{{frac|3|4}}格。
+|[[凋灵]]和[[末影龙]]不能通过传送门传送了。}}
+|{{HistoryLine||1.11|dev=16w32a|方块实体ID由<code>AirPortal</code>更改为<code>end_portal</code>。}}
+|{{HistoryLine|||dev=16w40a|[[File:End Portal.png|32px]] 更改了末地传送门的纹理。 它不再相对于玩家的视角而改变，而是相对于游戏屏幕保持静态。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]前，方块的数字ID为119。}}
+|{{HistoryLine|||dev=17w48a|现在浮漂不再可以通过末地传送门传送。}}
+|{{HistoryLine||1.17|dev=21w13a|末地传送门方块从下方看不再是透明的。}}
+|{{HistoryLine||1.20.5|dev=24w03a|现在任意进入末地传送门的实体会使目标[[区块]]保持[[区块加载|加载]]15秒，以与[[下界传送门（方块）|下界传送门]]的表现同步。}}
+|{{HistoryLine||1.21|dev=24w21a|加入了游戏规则<code>entitiesWithPassengersCanUsePortals</code>以在启用时允许被骑乘的实体无延迟地穿越末地传送门方块。此前，有乘客或[[坐骑]]的实体不能被传送。}}
+|{{HistoryLine|||dev=pre1|移除了24w21a中加入的游戏规则。现在被骑乘的实体穿越末地传送门方块的行为与此规则启用时相同。
+|现在末影珍珠能穿过末地传送门方块并将玩家传送至末地。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|[[File:End Portal.png|32px]] 加入了末地传送门。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.13.0|现在不能再通过在末地传送门方块的位置放置液体来破坏末地传送门方块了。<ref>{{bug|MCPE-48264|||Fixed}}</ref>}}
+|{{HistoryLine||26.0|dev=26.0.23|现在末地传送门方块拥有显示名称。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU9|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|[[File:End Portal.png|32px]] 加入了末地传送门和返回传送门。}}
+}}
+
+== 你知道吗 ==
+* 末地传送门方块同时只会渲染上下表面其中之一，四周永远不会被渲染。具体渲染面由[[玩家]]的头部与传送门方块的相对位置决定，由于正常游戏无法破坏[[末地传送门框架]]，如此可以隐蔽地优化渲染。
+
+== 画廊 ==
+<gallery>
+File:Frames.png|两个末地传送门叠在一起
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[Category:末地方块]]
+
+[[en:End Portal (block)]]
+[[es:Portal del End (bloque)]]
+[[fr:Portail de l'End (bloc)]]
+[[it:Portale dell'End (blocco)]]
+[[ja:エンドポータル (ブロック)]]
+[[ko:엔드 차원문 (블록)]]
+[[pt:Portal do End (bloco)]]
+[[ru:Блок портала Края]]

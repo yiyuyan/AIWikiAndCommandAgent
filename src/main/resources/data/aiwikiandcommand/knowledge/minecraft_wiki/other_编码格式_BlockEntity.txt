@@ -1,0 +1,210 @@
+# 页面: 编码格式/BlockEntity
+# 来源: https://zh.minecraft.wiki/w/%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/BlockEntity
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:30
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+此条目记录了各种方块实体中的共通标签。
+
+{{TOC|right}}
+
+本条目部分内容合并自其他页面，详见[[special:链入页面/编码格式/BlockEntity|本页面的链入页面]]。
+
+下列结构需要与最新版本同步更新：
+
+{| class="wikitable"
+! 结构名称 !! 引用名称 !! 相关模板
+|-
+| 熔炉共通标签 || <code>codec_abstract_furnace</code> || 嵌入
+|-
+| 容器方块实体共通标签 || <code>codec_base_container</code> || 嵌入
+|-
+| 刷怪笼共通标签 || <code>codec_base_spawner</code> || {{tl|nbt inherit/spawner}}
+|-
+| 方块实体共通标签 || <code>codec_block_entity</code> || {{tl|nbt inherit/blockentity}}
+|-
+| 战利品容器方块实体共通标签 || <code>codec_randomizable_container</code> || 嵌入
+|-
+| 生成数据 || <code>codec_spawn_data</code> || {{tl|nbt inherit/spawn data}}
+|-
+| 振动监听器 || <code>codec_vibration_listener</code> || {{tl|nbt inherit/vibration listener}}
+|-
+|}
+
+下列特定版本中出现的NBT结构：
+
+{| class="wikitable"
+! 结构名称 !! 版本 !! 引用名称
+|-
+| 方块实体共通标签 || [[20w14∞]] || <code>codec_block_entity_20w14infinite</code>
+|-
+| 方块实体共通标签 || [[23w13a_or_b]] || <code>codec_block_entity_23w13a_or_b</code>
+|-
+| 方块实体共通标签 || [[24w14potato]] || <code>codec_block_entity_24w14potato</code>
+|-
+| 方块实体共通标签 || [[25w14craftmine]] || <code>codec_block_entity_25w14craftmine</code>
+|}
+
+== 当前版本 ==
+=== 熔炉共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>AbstractFurnaceBlockEntity::loadAdditional</code> & <code>AbstractFurnaceBlockEntity::saveAdditional</code><section begin="codec_abstract_furnace"/>
+** {{nbt|short|cooking_time_spent|required=1|existonsave=1}}：烧炼物已被烧炼的时间。当该值等于{{nbt|short|cooking_total_time}}时，本次烧炼完成，此值重置为0。若{{nbt|short|lit_time_remaining}}为0，此值每游戏刻减少2。若此值大于{{nbt|short|cooking_total_time}}，则无法完成烧炼。
+** {{nbt|short|cooking_total_time|required=1|existonsave=1}}：烧炼物完成烧炼所需时间。
+** {{nbt|list|Items|required=1|existonsave=1}}：当前{{#var:name|熔炉}}内物品的列表，超出槽位范围的物品无效。槽位0存放烧炼物数据；槽位1存放燃料数据；槽位2存放烧炼成品数据。
+*** {{nbt|compound}}：物品数据。
+**** {{nbt inherit/item}}
+** {{nbt|short|lit_time_remaining|required=1|existonsave=1}}：当前使用的燃料剩余的燃烧时间。
+** {{nbt|short|lit_total_time|required=1|existonsave=1}}：{{#var:name|熔炉}}应燃烧的总时长。
+** {{nbt|compound|RecipesUsed}}：{{#var:name|熔炉}}从最后一次玩家取出成品到现在已烧炼的配方数，用于计算经验值。
+*** {{nbt|int|<''[[配方]]的命名空间ID''>}}：此配方烧炼完成的次数。
+<section end="codec_abstract_furnace"/>
+</div>
+
+=== 容器方块实体共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.level.block.entity.BaseContainerBlockEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>BaseContainerBlockEntity::loadAdditional</code> & <code>BaseContainerBlockEntity::saveAdditional</code><section begin="codec_base_container"/>
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|CustomName}}：（[[文本组件]]）当前{{#var:name|容器}}的名称，会取代默认名称出现在{{#var:name|容器}}的界面中。此项方块实体数据会被视为数据组件[[数据组件#custom_name|<code>custom_name</code>]]。
+** {{nbt|compound|lock}}：如果存在，{{#var:name|容器}}只能用符合该物品谓词的物品打开。此项方块实体数据会被视为数据组件[[数据组件#lock|<code>lock</code>]]。
+*** {{nbt inherit/item predicate}}
+<section end="codec_base_container"/>
+</div>
+
+=== 刷怪笼共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.level.BaseSpawner}}
+<div class="treeview">
+* {{nbt|compound}} <code>BaseSpawner::load</code> & <code>BaseSpawner::save</code><section begin="codec_base_spawner"/>
+** {{nbt|short|Delay|required=1|existonsave=1}}：距离下次生成的时间。如果此值为-1，则玩家接近时此值会重置为一个随机的生成延迟；如果此值不大于0，则玩家接近时立刻生成。
+** {{nbt|short|MaxNearbyEntities|existonsave=1}}：（默认为6）生成实体的范围内具有与刷怪笼生成实体类型相同的实体的最大数量。如果附近符合条件的实体数量超过此值则刷怪笼不再生成实体。
+** {{nbt|short|MaxSpawnDelay|existonsave=1}}：（默认为{{convert|800}}，与{{nbt|short|MinSpawnDelay|existonsave=1}}一起设置时生效）随机生成延迟的上限。
+** {{nbt|short|MinSpawnDelay|existonsave=1}}：（默认为{{convert|200}}）随机生成延迟的下限。
+** {{nbt|short|RequiredPlayerRange|existonsave=1}}：（默认为16，与{{nbt|short|MaxNearbyEntities|existonsave=1}}一起设置时生效）玩家激活刷怪笼所需的距离。每游戏刻刷怪笼都会检查当前世界的所有玩家，确定是否有玩家进入该范围。若为负数则无视玩家距离激活。
+** {{nbt|short|SpawnCount|existonsave=1}}：（默认为4，与{{nbt|short|MinSpawnDelay|existonsave=1}}一起设置时生效）每次尝试生成实体的数量。
+** {{nbt|compound|SpawnData}}：下一次生成实体的数据。在决定生成一次实体后，此项数据会从{{nbt|list|SpawnPotentials}}中随机挑选一项作为自身的数据，并覆盖之前的数据。
+*** {{nbt inherit/spawn data}}
+** {{nbt|list|SpawnPotentials|existonsave=1}}：一个包含可能生成的实体的列表。如该标签不存在，但存在{{nbt|compound|SpawnData}}，游戏会在刷怪笼下次尝试生成实体时生成此列表，列表中仅有一个从{{nbt|compound|SpawnData}}得到的项目。
+*** {{nbt|compound}}：一次可能的生成。在试炼刷怪笼进行一次尝试生成'''后'''，游戏将会随机从中选择一项用于下次生成。
+**** {{nbt|compound|data|required=1|existonsave=1}}：一项生成项，与{{nbt|compound|SpawnData}}结构相同。
+***** {{nbt inherit/spawn data}}
+**** {{nbt|int|weight|required=1|existonsave=1}}：（{{interval|left=0}}）相对其他生成项的选中此生成项的权重。
+** {{nbt|short|SpawnRange|existonsave=1}}：（默认为4）生成实体的范围，采用切比雪夫距离，越靠近刷怪笼生成在此位置的概率越大。
+<section end="codec_base_spawner"/>
+</div>
+
+=== 方块实体共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.level.block.entity.BlockEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>BlockEntity::loadWithComponents/loadCustomOnly/loadStatic</code> & <code>BlockEntity::saveWithFullMetadata/saveWithId/saveCustomOnly</code><section begin="codec_block_entity"/>
+** {{nbt|int|x|existonsave=1|required=1}}：当前方块实体的X坐标。
+** {{nbt|int|y|existonsave=1|required=1}}：当前方块实体的Y坐标。
+** {{nbt|int|z|existonsave=1|required=1}}：当前方块实体的Z坐标。
+** {{nbt|string|id|existonsave=1|required=1}}：{{#if:{{#var:id|}}|<code>{{#var:id|}}</code>|（命名空间ID）方块实体的类型。}}
+** {{nbt|compound|components}}：方块实体的[[数据组件]]信息。当使用此方块实体对应的物品放置此方块实体时，物品额外持有的且不会被继承序列化处理的数据组件会被复制存储入此标签内。
+*** {{nbt|any|<''数据组件ID''>}}：一项数据组件和其对应的数据。
+<section end="codec_block_entity"/>
+</div>
+
+=== 战利品容器方块实体共通标签 ===
+{{codec from source|type=nbt|net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code><T extends RandomizableContainerBlockEntity> T::loadAdditional</code> & <code><T extends RandomizableContainerBlockEntity> T::saveAdditional</code><section begin="codec_randomizable_container"/>
+** {{nbt|list|Items}}：（当{{nbt|string|LootTable}}不存在时存在且有效）当前{{#var:name|容器}}内物品的列表，超出槽位范围的物品无效。如果战利品未生成，则此项不存在。{{#var:slots|}}此项方块实体数据会被视为数据组件[[数据组件#container|<code>container</code>]]。
+*** {{nbt|compound}}：一个物品。
+**** {{nbt inherit/item}}
+** {{nbt|string|LootTable}}：决定{{#var:name|容器}}第一次被打开时，生成战利品所用的[[战利品表]]的[[命名空间ID]]。此项将在战利品生成之后被删除。此项方块实体数据会被视为数据组件[[数据组件#container_loot|<code>container_loot</code>]]的战利品表数据。
+** {{nbt|long|LootTableSeed}}：（当{{nbt|string|LootTable}}存在时有效）生成战利品使用的种子，0或不输入将使用[[随机序列]]。此项将在战利品生成之后被删除。此项方块实体数据会被视为数据组件[[数据组件#container_loot|<code>container_loot</code>]]的随机序列数据。
+<section end="codec_randomizable_container"/>
+</div>
+
+=== 生成数据 ===
+{{codec from source|type=nbt|net.minecraft.world.level.SpawnData}}
+<div class="treeview">
+* {{nbt|compound}} <code>SpawnData::CODEC</code><section begin="codec_spawn_data"/>
+** {{nbt|object|custom_spawn_rules}}：自定义生成条件，若指定则覆盖默认生成规则。
+*** {{nbt|int}}{{nbt|list}}{{nbt|compound|block_light_limit}}：（{{interval|left=0|right=15}}）方块光照限制。复合标签形式只用于加载，游戏只保存为整数（上下限相同时）或列表（上下限不同且不为[0,15]时）形式。
+**** {{nbt inherit/int inclusive range}}
+*** {{nbt|int}}{{nbt|list}}{{nbt|compound|sky_light_limit}}：（{{interval|left=0|right=15}}）天空光照限制，格式与方块光照限制相同。
+**** {{nbt inherit/int inclusive range}}
+** {{nbt|object|entity|required=1}}：要生成的实体。
+*** 见[[实体数据格式]]。
+** {{nbt|object|equipment}}：设置生成生物的装备及掉率。
+*** {{nbt|string|loot_table|required=1}}：（命名空间ID）战利品表，将获得的物品装备到生成的生物上。
+*** {{nbt|float}}{{nbt|object|slot_drop_chances}}：（默认全部槽位为0.085）设置生物死亡时指定槽位物品的掉落概率。使用{{nbt|float|单精度浮点数}}形式时代表所有槽位按照此概率掉落。
+**** {{nbt|float|<''[[装备槽位]]''>}}：（{{interval|left=0|right=1}}）此槽位的掉落概率。
+<section end="codec_spawn_data"/></div>
+
+=== 振动监听器 ===
+{{codec from source|type=nbt|net.minecraft.world.level.gameevent.vibrations.VibrationSystem.Data}}
+<div class="treeview">
+* {{nbt|compound}} <code>Data::CODEC</code><section begin="codec_vibration_listener"/>
+** {{nbt|compound|event}}：振动监听器正在监听的[[游戏事件]]。当没有能使此振动监听器触发的游戏事件时，此项不存在。
+*** {{nbt|float|distance|required=1|existonsave=1}}：（{{interval|left=0}}）振动监听器与振动源的距离。
+*** {{nbt|string|game_event|required=1|existonsave=1}}：触发振动监听器的游戏事件的[[命名空间ID]]。
+*** {{nbt|list|pos|required=1|existonsave=1}}：振动源的位置。
+**** {{nbt|double}}：X坐标。
+**** {{nbt|double}}：Y坐标。
+**** {{nbt|double}}：Z坐标。
+*** {{nbt|int-array|projectile_owner}}：如果产生振动的实体是弹射物，此项保存投掷此弹射物的实体的[[UUID]]。
+*** {{nbt|int-array|source}}：产生振动的实体的UUID。
+** {{nbt|int|event_delay|existonsave=1}}：（{{interval|left=0}}，默认为0）振动到达前的时间。
+** {{nbt|compound|selector|required=1|existonsave=1}}：振动选择器的数据。
+*** {{nbt|long|tick|required=1|existonsave=1}}：振动发生时的游戏时间，如果没有振动可供选择则为-1。
+*** {{nbt|compound|event}}：候选的游戏事件，与上文的{{nbt|compound|event}}标签结构相同。
+<section end="codec_vibration_listener"/>
+</div>
+
+== 特定版本 ==
+=== 方块实体共通标签（20w14∞） ===
+{{codec from source|type=nbt|version=20w14∞|net.minecraft.world.level.block.entity.BlockEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>BlockEntity::load/loadStatic</code> & <code>BlockEntity::save/saveMetadata</code><section begin="codec_block_entity_20w14infinite"/>
+** {{nbt|int|x|existonsave=1|required=1}}：当前方块实体的X坐标。
+** {{nbt|int|y|existonsave=1|required=1}}：当前方块实体的Y坐标。
+** {{nbt|int|z|existonsave=1|required=1}}：当前方块实体的Z坐标。
+** {{nbt|string|id|existonsave=1|required=1}}：{{#if:{{#var:id|}}|<code>{{#var:id|}}</code>|（命名空间ID）方块实体的类型。}}
+<section end="codec_block_entity_20w14infinite"/>
+</div>
+
+=== 方块实体共通标签（23w13a_or_b） ===
+{{codec from source|type=nbt|version=23w13a_or_b|net.minecraft.world.level.block.entity.BlockEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>BlockEntity::loadStatic</code> & <code>BlockEntity::saveWithFullMetadata/saveWithId</code><section begin="codec_block_entity_23w13a_or_b"/>
+** {{nbt|int|x|existonsave=1|required=1}}：当前方块实体的X坐标。
+** {{nbt|int|y|existonsave=1|required=1}}：当前方块实体的Y坐标。
+** {{nbt|int|z|existonsave=1|required=1}}：当前方块实体的Z坐标。
+** {{nbt|string|id|existonsave=1|required=1}}：{{#if:{{#var:id|}}|<code>{{#var:id|}}</code>|（命名空间ID）方块实体的类型。}}
+<section end="codec_block_entity_23w13a_or_b"/>
+</div>
+
+=== 方块实体共通标签（24w14potato） ===
+{{codec from source|type=nbt|version=24w14potato|net.minecraft.world.level.block.entity.BlockEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>BlockEntity::loadStatic</code> & <code>BlockEntity::saveWithFullMetadata/saveWithId/saveCustomOnly</code><section begin="codec_block_entity_24w14potato"/>
+** {{nbt|int|x|existonsave=1|required=1}}：当前方块实体的X坐标。
+** {{nbt|int|y|existonsave=1|required=1}}：当前方块实体的Y坐标。
+** {{nbt|int|z|existonsave=1|required=1}}：当前方块实体的Z坐标。
+** {{nbt|string|id|existonsave=1|required=1}}：{{#if:{{#var:id|}}|<code>{{#var:id|}}</code>|（命名空间ID）方块实体的类型。}}
+** {{nbt|compound|components}}：方块实体的[[数据组件]]信息。当使用此方块实体对应的物品放置此方块实体时，物品额外持有的且不会被继承序列化处理的数据组件会被复制存储入此标签内。
+*** {{nbt|any|<''数据组件ID''>}}：一项数据组件和其对应的数据。
+<section end="codec_block_entity_24w14potato"/>
+</div>
+
+=== 方块实体共通标签（25w14craftmine） ===
+{{codec from source|type=nbt|version=25w14craftmine|net.minecraft.world.level.block.entity.BlockEntity}}
+<div class="treeview">
+* {{nbt|compound}} <code>BlockEntity::loadWithComponents/loadCustomOnly/loadStatic</code> & <code>BlockEntity::saveWithFullMetadata/saveWithId/saveCustomOnly</code><section begin="codec_block_entity_25w14craftmine"/>
+** {{nbt|int|x|existonsave=1|required=1}}：当前方块实体的X坐标。
+** {{nbt|int|y|existonsave=1|required=1}}：当前方块实体的Y坐标。
+** {{nbt|int|z|existonsave=1|required=1}}：当前方块实体的Z坐标。
+** {{nbt|string|id|existonsave=1|required=1}}：{{#if:{{#var:id|}}|<code>{{#var:id|}}</code>|（命名空间ID）方块实体的类型。}}
+** {{nbt|compound|components}}：方块实体的[[数据组件]]信息。当使用此方块实体对应的物品放置此方块实体时，物品额外持有的且不会被继承序列化处理的数据组件会被复制存储入此标签内。
+*** {{nbt|any|<''数据组件ID''>}}：一项数据组件和其对应的数据。
+<section end="codec_block_entity_25w14craftmine"/>
+</div>
+
+[[Category:顶级数据值页面]]
+[[Category:通过Nbt inherit加载的页面]]

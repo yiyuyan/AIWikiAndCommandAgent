@@ -1,0 +1,109 @@
+# 页面: 命令/bossbar
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/bossbar
+# 分类: Java版独有特性, 命令
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox command
+|name=bossbar
+|oplevel=2
+}}{{tr|mode=H|Boss栏|Boss狀態條}}
+
+用于创建、修改或查询自定义[[Boss栏]]。
+
+== 语法 ==
+:<code>bossbar add <id> <name></code>
+::创建新的自定义Boss栏（储存在[[level.dat]]的<code>CustomBossEvents</code>中）。
+:<code>bossbar get <id> (max|players|value|visible)</code>
+::显示指定设置项目的当前值，也可被{{cmd|execute store result ...}}储存。
+:<code>bossbar list</code>
+::显示当前所有的自定义Boss栏。
+:<code>bossbar remove <id></code>
+::移除一个自定义Boss栏。
+:<code>bossbar set <id> (color|max|name|players|style|value|visible)</code>
+::<code>... color (blue|green|pink|purple|red|white|yellow)</code>
+:::设置文本默认颜色（可被[[文本组件]]指定的颜色覆盖）和自定义Boss栏的颜色。刚创建时为<code>white</code>。
+::<code>... max <max></code>
+:::设置自定义Boss栏的最大值。刚创建时为<code>100</code>。
+::<code>... name <name></code>
+:::设置自定义Boss栏的名称。
+::<code>... players [<targets>]</code>
+:::修改可以看到此自定义Boss栏的玩家。刚创建时没有玩家可以看到。
+::<code>... style (notched_6|notched_10|notched_12|notched_20|progress)</code>
+:::设置自定义Boss栏在视觉上分成几段，分别为：6段、10段、12段、20段和连续。刚创建时为<code>progress</code>。
+::<code>... value <value></code>
+:::设置自定义Boss栏的当前值。刚创建时为<code>0</code>。
+::<code>... visible <visible></code>
+:::设置自定义Boss栏的可见性值。刚创建时为<code>true</code>。
+
+== 参数 ==
+{{argument|id|resource_location}}
+: 指定一个Boss栏。
+: {{arg desc|je=resource_location}}
+
+{{argument|name|component}}
+:: 指定Boss栏的名称。
+: {{arg desc|je=component}}
+
+{{argument|max|integer}}
+:: 指定Boss栏的最大值。
+: {{arg desc|je=integer|min=1}}
+
+{{argument|targets|entity}}
+:: 指定哪些玩家可以看见Boss栏。
+: {{arg desc|je=entity|amount=multiple|type=players}}
+
+{{argument|value|integer}}
+:: 指定Boss栏的当前值。
+: {{arg desc|je=integer|min=0}}
+
+{{argument|visible|bool}}
+:: 指定Boss栏的可见性。
+: {{arg desc|je=bool}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/bossbar set ...<br>/bossbar remove ...<br>/bossbar get|指定的自定义Boss栏不存在|fail}}
+{{Result table|cmd=/bossbar add ...|已有相同ID的自定义Boss栏}}
+{{Result table|cmd=/bossbar set ...|指定值与原值相同}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/bossbar add ...<br>/bossbar list<br>/bossbar remove ...|执行成功|1|1|命令执行后所存在的自定义Boss栏数量<br>注意游戏本身的Boss栏（如[[末影龙]]的）不计入其中。}}
+{{Output table|cmd=/bossbar get <<nowiki/>id> max<br>/bossbar set <<nowiki/>id> max|执行成功|1|1|命令执行后指定Boss栏的最大值。}}
+{{Output table|cmd=/bossbar get <<nowiki/>id> value<br>/bossbar set <<nowiki/>id> value|执行成功|1|1|命令执行后指定Boss栏的当前值。}}
+{{Output table|cmd=/bossbar get <<nowiki/>id> players<br>/bossbar set <<nowiki/>id> players|执行成功|1|1|命令执行后可以见到该Boss栏的玩家数。}}
+{{Output table|cmd=/bossbar get <<nowiki/>id> visible|执行成功|1|1|若该Boss栏可见，输出1，否则输出0。}}
+{{Output table|cmd=other|执行成功|1|1|0}}
+{{Output table}}
+
+== 示例 ==
+* 创建一个新的名称为“name”、ID为<code>foo:bar</code>的自定义Boss栏：<code>/bossbar add foo:bar "name"</code>
+* 获取ID为<code>foo:bar</code>的自定义Boss栏现在是否可见：<code>/bossbar get foo:bar visible</code>
+* 显示当前所有的自定义Boss栏：<code>/bossbar list</code>
+* 将ID为<code>foo:bar</code>的自定义Boss栏改为可见：<code>/bossbar set foo:bar visible true</code>
+* 移除ID为<code>foo:bar</code>的自定义Boss栏：<code>/bossbar remove foo:bar</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=18w05a|加入了{{cmd|bossbar|link=none}}命令。}}
+|{{HistoryLine||1.21.5|dev=25w05a|现在{{cmd|bossbar|link=none}}中的文本组件会以<code>@s</code>为执行者[[文本组件#组件解析|解析]]。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/bossbar]]
+[[en:Commands/bossbar]]
+[[es:Comandos/bossbar]]
+[[fr:Commandes/bossbar]]
+[[ja:コマンド/bossbar]]
+[[pt:Comandos/bossbar]]
+[[ru:Команды консоли/bossbar]]
+[[uk:Команди консолі/bossbar]]

@@ -1,0 +1,327 @@
+# 页面: 中毒
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%AD%E6%AF%92
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 教育版独有信息, 状态效果, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:19:52
+# 原始 Wikitext 内容:
+
+{{for|基岩版独有的会致命的变种|中毒（致命）}}
+{{Infobox effect
+|title=中毒
+|image=Poison.png
+|invimage=Potion of Poison
+|invimage2=Splash Potion of Poison
+|invimage3=Lingering Potion of Poison
+|invimage4=Arrow of Poison
+|invimage5=----
+|invimage6=Potion of Poison Extended
+|invimage7=Splash Potion of Poison Extended
+|invimage8=Lingering Potion of Poison Extended
+|invimage9=Arrow of Poison Extended
+|invimage10=----
+|invimage11=Potion of Poison Enhanced
+|invimage12=Splash Potion of Poison Enhanced
+|invimage13=Lingering Potion of Poison Enhanced
+|invimage14=Arrow of Poison Enhanced
+|status-effect-cannot-affect=
+{{EntityLink|bogged}}<br>
+{{EntityLink|camel husk}}<br>
+{{EntityLink|cave spider}}<br>
+{{EntityLink|drowned}}<br>
+{{EntityLink|ender dragon}}<br>
+{{EntityLink|husk}}<br>
+{{EntityLink|nautilus}}<br>
+{{EntityLink|parched}}<br>
+{{EntityLink|phantom}}<br>
+{{EntityLink|skeleton}}<br>
+{{EntityLink|skeleton horse}}<br>
+{{EntityLink|spider}}<br>
+{{EntityLink|stray}}<br>
+吸收了方块的{{EntityLink|sulfur cube}}{{only|be}}<br>
+{{EntityLink|wither}}<br>
+{{EntityLink|wither skeleton}}<br>
+{{EntityLink|zoglin}}<br>
+{{EntityLink|zombie}}<br>
+{{EntityLink|zombie horse}}<br>
+{{EntityLink|zombie nautilus}}<br>
+{{EntityLink|zombie villager}}<br>
+{{EntityLink|zombified piglin}}
+}}
+
+'''中毒（Poison）'''是一种使生物持续受到伤害，但不会致命的[[状态效果]]。
+
+== 效果 ==
+受影响生物的生命值高于{{hp|1}}时，每隔一段时间受到无来源的{{hp|1}}魔法伤害，间隔取决于效果等级。
+
+{| class="wikitable" style="text-align:right"
+ ! 等级 !! 伤害周期 !! 每秒伤害量
+ |-
+ | 1 || {{convert|25}} || {{hp|0.8}}
+ |-
+ | 2 || {{convert|12}} || {{hp|1.6}}
+ |-
+ | 3<ref group="注" name ="immunity 1">此时伤害间隔已经低于[[受击后伤害免疫]]的持续时间，在3级和4级时实际有效的伤害时段为12刻（0.6秒每次，每秒{{hp|1.6}}伤害）。</ref> || {{convert|6}} || {{hp|3.33}}
+ |-
+ | 4<ref group="注" name ="immunity 1" /> || {{convert|3}} || {{hp|6.67}}
+ |-
+ | 5+<ref group="注" name ="immunity 2">此时伤害间隔已经低于[[受击后伤害免疫]]的持续时间，在5级及以上实际有效的伤害时段为10刻（0.5秒每次，每秒{{hp|2}}伤害）。</ref> || {{convert|1}} || {{hp|20}}
+|}
+
+{{fnlist|group=注}}
+
+当效果的剩余时间的游戏刻数是周期的正整倍数时，执行一次效果。如果效果的剩余时间被持续设置，会导致伤害会持续进行或不进行。
+
+生命值不超过{{hp|1}}时，中毒不会再造成伤害。如果中毒的效果结束前受到治疗，生命值增长到{{hp|1}}以上时，伤害会继续。
+
+玩家具有该效果时，生命条中的红心会变成黄绿色{{Healthbar|2|poisoned=1}}{{Healthbar|2|poisoned=1|hardcore=1}}。
+
+如果被赋予效果倍率值0-31（对应等级1-32）范围以外的值，实际生效的倍率值则取[[wikipedia:Modulo_operation|模除]]32后的值。
+
+饮用[[蜂蜜瓶]]或{{only|for=[[解毒剂]]|bedrock|education}}可以解除中毒。
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+ ! 来源
+ ! 效果等级
+ ! 时长
+ ! 伤害总量
+ ! 备注
+ |-
+ | {{ItemLink|Potion of Poison}}
+ | I
+ | 0:45
+ | {{hp|36}}
+ |
+ |-
+ | {{ItemLink|Potion of Poison}}（延长版）
+ | I
+ | 1:30{{only|je|short=1}}<br>2:00{{only|be|short=1}}
+ | {{hp|72}}{{only|je|short=1}}<br>{{hp|96}}{{only|be|short=1}}
+ |
+ |-
+ | {{ItemLink|Potion of Poison}}（增强版）
+ | II
+ | 0:21{{only|je|short=1}}<br>0:22{{only|be|short=1}}
+ | {{hp|35}}{{only|je|short=1}}<br>{{hp|37}}{{only|be|short=1}}
+ |
+ |-
+ | {{ItemLink|Splash Potion of Poison}}
+ | I
+ | 0:45
+ | {{hp|36}}
+ | {{EntityLink|Witch}}会对生命值不低于{{hp|8}}的目标丢出该喷溅药水
+ |-
+ | {{ItemLink|Splash Potion of Poison}}（延长版）
+ | I
+ | 1:30{{only|je|short=1}}<br>2:00{{only|be|short=1}}
+ | {{hp|72}}{{only|je|short=1}}<br>{{hp|96}}{{only|be|short=1}}
+ |
+ |-
+ | {{ItemLink|Splash Potion of Poison}}（增强版）
+ | II
+ | 0:21{{only|je|short=1}}<br>0:22{{only|be|short=1}}
+ | {{hp|35}}{{only|je|short=1}}<br>{{hp|37}}{{only|be|short=1}}
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Poison}}
+ | I
+ | 0:11
+ | {{hp|8}}
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Poison}}（延长版）
+ | I
+ | 0:22{{only|je|short=1}}<br>0:30{{only|be|short=1}}
+ | {{hp|17}}{{only|je|short=1}}<br>{{hp|24}}{{only|be|short=1}}
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Poison}}（增强版）
+ | II
+ | 0:05
+ | {{hp|8}}
+ |
+ |-
+ | {{ItemLink|Arrow of Poison}}
+ | I
+ | 0:05
+ | {{hp|4}}
+ | {{EntityLink|Bogged}}会射出此箭。{{only|be}}
+ |-
+ | {{ItemLink|Arrow of Poison}} （延长版）
+ | I
+ | 0:11{{only|je|short=1}}<br>0:15{{only|be|short=1}}
+ | {{hp|8}}{{only|je|short=1}}<br>{{hp|12}}{{only|be|short=1}}
+ | 
+ |- 
+ | {{ItemLink|Arrow of Poison}}（增强版）
+ | II
+ | 0:02
+ | {{hp|3}}
+ |
+ |-
+ | {{ItemLink|Arrow}}（带中毒效果）{{only|je}}
+ | I
+ | 0:05
+ | {{hp|4}}
+ | {{EntityLink|Bogged}}会射出此箭。
+ |-
+ | {{ItemLink|Arrow}}（带剧毒药水效果）{{only|je}}
+ | I
+ | 0:45
+ | {{hp|36}}
+ | 不祥之物生成器会射出此箭。
+ |-
+ | {{ItemLink|Cookie}}{{only|je|short=1}}
+ | I
+ | 0:45
+ | {{hp|36}}
+ | [[鹦鹉]]用其喂食时（{{in|be|nc=1}}该效果被[[中毒（致命）]]替代）
+ |- 
+ | {{ItemLink|Poisonous Potato}}
+ | I
+ | 0:05
+ | {{hp|4}}
+ | 每次食用有60%的概率生效
+ |- 
+ | {{ItemLink|Spider Eye}}
+ | I
+ | 0:05
+ | {{hp|4}}
+ | 
+ |- 
+ | {{ItemLink|Pufferfish}}（物品）
+ | II
+ | 1:00
+ | {{hp|48}}
+ | 
+ |- 
+ | rowspan="2" | {{ItemLink|Suspicious Stew}}
+ | rowspan="2" | I
+ | 0:11
+ | {{hp|9}}
+ | 必须使用{{BlockLink|Lily of the Valley}}合成
+ |-
+ | 0:10-0:20
+ | {{hp|8}}-{{hp|16}}
+ | 从[[沉船]]的补给箱中获得<br>与{{only|for=专家|je|short=1}}或{{only|for=大师|be|short=1}}等级的农民[[村民]]交易获得
+ |- 
+ | {{EntityLink|Cave Spider}}
+ | I
+ | 0:07（普通）<br>0:15（困难）
+ | {{hp|5}}（普通）<br>{{hp|12}}（困难）
+ | 实体被洞穴蜘蛛攻击后生效
+ |- 
+ | {{EntityLink|Pufferfish}}
+ | I
+ | 0:03（半膨胀）{{only|je|short=1}}<br>0:06{{only|je|short=1}}/0:10{{only|be|short=1}}（完全膨胀）
+ | {{hp|2}}（半膨胀）{{only|je|short=1}}<br>{{hp|4}}{{only|je|short=1}}/{{hp|7}}{{only|be|short=1}}（完全膨胀）
+ | 实体被河豚触碰后生效
+ |-
+ | {{EntityLink|Bee}}
+ | I
+ | 0:10（普通）<br>0:18（困难）
+ | {{hp|8}}（普通）<br>{{hp|14}}（困难）
+ | 实体被蜜蜂攻击后生效
+ |-
+ | {{BlockLink|Open Eyeblossom}}
+ | I
+ | 0:01.25{{only|je|short=1}}<br>0:25{{only|be|short=1}}
+ | {{hp|1}}{{only|je|short=1}}<br>{{hp|20}}{{only|be|short=1}}
+ | 蜜蜂对张开的眼眸花{{tr|采粉|採粉}}或被喂食之时生效
+|}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|spritetype=effect
+|Poison
+|nameid=poison
+|foot=1
+}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|spritetype=effect
+|Poison
+|nameid=poison
+|showaliasids=1
+|aliasid=19
+|foot=1
+}}
+
+== 成就 ==
+{{load achievements|taste-of-your-own-medicine}}
+
+== 进度 ==
+{{load advancements|prefix=nether|all_potions;all_effects}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了中毒。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|[[File:Poison JE1 BE1.png|32px]] 加入了中毒的图标。
+|加入了药水，可以提供中毒，但无法正常获得。
+|现在饮用[[奶]]会移除中毒效果。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|现在可以通过[[酿造台]]酿造[[剧毒药水]]，可以提供中毒。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[喷溅型剧毒药水]]，可以提供中毒。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了[[剧毒之箭]]，可以提供中毒。}}
+|{{HistoryLine|||dev=15w33a|加入了[[滞留型剧毒药水]]，可以提供中毒。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Poison JE2.png|32px]] 更改了图标纹理。
+|现在中毒效果可通过食用[[谜之炖菜]]获得。}}
+|{{HistoryLine|||dev=18w43b|[[File:Poison JE3 BE2.png|32px]] 修复了图标纹理。}}
+|{{HistoryLine||1.15|dev=19w34a|加入了[[蜜蜂]]，可以使玩家中-{}-毒。}}
+|{{HistoryLine|||dev=19w35a|中毒效果现在可以通过饮用[[蜂蜜]]来消除。}}
+|{{HistoryLine||1.17|dev=20w46a|将食用[[河豚（物品）|河豚]]给予的中毒效果由IV级降至II级。}}
+|{{HistoryLine||1.19.4|dev=pre3|将中毒的颜色由{{color|#4E9331}}改为{{color|#87A363}}。}}
+|{{HistoryLine||1.20.2|dev=23w32a|在此版本前，中毒的存档ID是19。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w07a|现在中毒可从[[沼骸]]的射出的箭获得。}}
+|{{HistoryLine||1.21|dev=24w18a|24w07a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.4|dev=24w44a|现在蜜蜂被喂食眼眸花或与之交互时会获得中毒效果。}}
+|{{HistoryLine|||dev=24w45a|蜜蜂与闭合的眼眸花交互时不再获得中毒效果了。
+|现在食用[[谜之炖菜]]获得的中毒效果的持续时间由12秒降低至11秒，以匹配{{el|be}}。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Poison JE1 BE1.png|32px]] 加入了中毒。}}
+|{{HistoryLine||0.12.1|dev=build 1|使用腐肉不再使玩家中-{}-毒。
+|食用[[毒马铃薯]]、[[蜘蛛眼]]、和使用[[喷溅型剧毒药水]]可以让玩家中-{}-毒。}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了[[女巫]]，会丢出喷溅型剧毒药水，并可以一定程度抵抗中毒。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了[[剧毒之箭]]，使目标中-{}-毒。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|中毒效果可以通过[[滞留型剧毒药水]]获得。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.20.1|现在可以通过饮用[[解毒剂]]移除中毒效果。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.5|[[File:Poison JE3 BE2.png|32px]] 更改了图标纹理。}} 
+|{{HistoryLine||1.13.0|dev=1.13.0.9|现在中毒效果可通过食用[[谜之炖菜]]获得。}} 
+|{{HistoryLine||1.14.0|dev=1.14.0.1|加入了[[蜜蜂]]，可以使玩家中-{}-毒。
+|中毒效果现在可以通过饮用[[蜂蜜]]来消除。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.23|将食用[[河豚（物品）|河豚]]给予的中毒效果由IV级降至II级。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|将中毒的粒子的颜色由{{color|#4E9331}}改为{{color|#87A363}}。}}
+|{{HistoryLine|||dev=1.19.80.22|回退了上个版本对粒子颜色的更改。}}
+|{{HistoryLine||1.20.0|exg=next_major_update|dev=1.20.0.20|将中毒的颜色由{{color|#4E9331}}改为{{color|#87A363}}。}}
+|{{HistoryLine|||exg=none|dev=1.20.0.21|1.20.0.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.20.70|exg=updateAnnouncedLive2023|dev=1.20.70.24|现在中毒可从[[沼骸]]的剧毒之箭获得。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|1.20.70.24中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.25|现在蜜蜂与眼眸花交互时会获得中毒效果。}}
+|{{HistoryLine|||dev=1.21.50.28|蜜蜂与眼眸花交互时不再获得中毒效果了。
+|现在蜜蜂被喂食张开的眼眸花时会获得中毒效果。}}
+|{{HistoryLine|||dev=1.21.50.29|现在蜜蜂再次会在接触张开的眼眸花时获得中毒效果。}}
+}}
+
+== 画廊 ==
+<gallery>
+Yellowhbar.png|玩家被洞穴蜘蛛攻击后获得中毒效果，生命条变为黄色
+</gallery>
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Vergiftung (Statuseffekt)]]
+[[en:Poison]]
+[[es:Veneno]]
+[[fr:Poison]]
+[[ja:毒]]
+[[ko:독]]
+[[pt:Veneno]]
+[[ru:Отравление]]

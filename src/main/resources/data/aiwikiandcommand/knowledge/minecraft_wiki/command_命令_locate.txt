@@ -1,0 +1,107 @@
+# 页面: 命令/locate
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/locate
+# 分类: Java版独有信息, 命令
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=locate
+|oplevel=2\1
+|becheat=1
+}}
+
+在聊天框中为命令执行者显示给定的[[结构]]、[[生物群系]]或{{only|JE|for=[[兴趣点]]}}的最近坐标和[[距离]]。{{fn|由于{{bug|MC-138887}}，有时该命令显示的结果并非是距离最近的。}}{{in|je}}点击返回的坐标后，会自动在聊天框输入{{cmd|tp @s ''坐标''}}。若指令是在[[Java版函數|函數]]中執行，則不會顯示訊息。<ref>{{bug|MC-298295|||WAI}}</ref>
+
+== 语法 ==
+* '''Java版'''
+:<code>locate biome <biome></code>
+:<code>locate poi <poi></code>
+:<code>locate structure <structure></code>
+
+* '''基岩版'''
+:<code>locate biome <biome: Biome></code>
+:<code>locate structure <structure: Structure> [useNewChunksOnly: Boolean]</code>
+
+== 参数 ==
+{{el|je|short=1}}：{{argument|biome|resource_or_tag}}<br>
+{{el|be|short=1}}：{{argument|be=1|biome: Biome|enum}}
+: 指定要定位的生物群系的命名空间ID或{{only|for=生物群系标签|JE}}。参见[[生物群系/ID]]及{{slink|Java版标签/生物群系}}以查看所有可用的生物群系ID和生物群系标签。
+
+{{el|je|short=1}}：{{argument|poi|resource_or_tag}}
+: 指定要定位的兴趣点的命名空间ID或兴趣点标签。参见{{slink|兴趣点|兴趣点类型}}及{{slink|Java版标签/兴趣点类型}}以查看所有可用的兴趣点ID和兴趣点标签。
+
+{{el|je|short=1}}：{{argument|structure|resource_or_tag_key}}（区分大小写）<br>
+{{el|be|short=1}}：{{argument|be=1|structure: Structure|enum}}
+: 指定要定位的结构的命名空间ID或{{only|for=结构标签|JE}}。参见{{slink|生成结构|可被定位的结构}}及{{slink|Java版标签/结构}}以查看所有可用的结构ID和结构标签。
+
+{{el|be|short=1}}：{{argument|be=1|useNewChunksOnly: Boolean|enum}}
+: 仅定位在尚未生成的区块中的结构，默认为<code>false</code>。
+: {{arg desc|be=bool}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|当前[[维度]]中不生成所请求的对象|fail|fail}}
+{{Result table|{{cd|biome: Biome}}不含命名空间|N/A}}
+{{Result table|cmd=/locate structure ...|无法在201×201区块的正方形区域中找到请求的结构|fail}}
+{{Result table|cmd=/locate biome ...|无法在12801×12801方块的正方形区域中找到请求的生物群系||N/A}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|失败|0|0|0}}
+{{Output table|成功|1|1|执行者与对象之间的水平距离}}
+{{Output table|edition=be|失败|0}}
+{{Output table|成功|1|1}}
+{{Output table}}
+
+== 示例 ==
+* 获得最近的[[林地府邸]]的坐标：{{cmd|link=none|locate structure mansion}}
+* 获得最近的[[沙漠]]生物群系的坐标：{{cmd|link=none|locate biome desert}}
+* 获得最近的[[讲台]]的坐标：{{cmd|link=none|locate poi librarian}}{{only|java}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.11|dev=16w39a|加入了{{cmd|locate|link=none}}命令。}}
+|{{HistoryLine||1.13|dev=18w06a|{{cmd|locate|link=none}}现在接受之前在<code>Temple</code>分组下所有结构的不同名称<code>Desert_Pyramid</code>、<code>Igloo</code>、<code>Jungle_Pyramid</code>、<code>Swamp_Hut</code>。}}
+|{{HistoryLine|||dev=18w08a|为{{cmd|locate|link=none}}命令输出的坐标添加了可点击的传送链接（将传送命令输入至聊天窗口）。}}
+|{{HistoryLine||1.14|dev=18w47a|{{cmd|locate|link=none}}现在接受<code>Pillager_Outpost</code>。}}
+|{{HistoryLine|||dev=18w48a|{{cmd|locate|link=none}}现在接受<code>New_Village</code>。}}
+|{{HistoryLine||1.16|dev=20w11a|{{cmd|locate|link=none}}现在接受<code>Nether_Fossil</code>。}}
+|{{HistoryLine|||dev=20w21a|现在结构ID全部使用小写字母。}}
+|{{HistoryLine||1.18.2|dev=22w03a|现在结构ID使用命名空间ID，而不是之前的硬编码值。}}
+|{{HistoryLine|||dev=pre1|现在支持标签，用<code>#</code>前缀与一般的ID做区分。
+|参数类型由结构类型（Structure Type）改为配置的结构（Configured Structure）。}}
+|{{HistoryLine||1.19|dev=22w19a|将{{cmd|locatebiome}}作为子命令{{cmd|locate biome|link=none}}并入了{{cmd|locate|link=none}}。
+|{{cmd|locate|link=none}}原有的功能由{{cmd|locate structure|link=none}}继承。
+|加入了{{cmd|locate poi|link=none}}子命令。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了{{cmd|locate|link=none}}命令。}}
+|{{HistoryLine|||dev=0.17.0.2|移除了{{cmd|locate|link=none}}命令。}}
+|{{HistoryLine|||dev=1.0.0.0|重新加入了{{cmd|locate|link=none}}命令，但仅接受<code>Stronghold</code>。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|{{cmd|locate|link=none}}现在可查找其他结构。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.30|dev=1.17.30.22|{{cmd|locate|link=none}}现在可用于只查找在未生成区块中的结构。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.23|加入了{{cmd|locate biome|link=none}}和{{cmd|locate structure|link=none}}子命令，分别用于定位生物群系和结构。}}
+|{{HistoryLine||1.19.30|dev=1.19.30.20|现在只有{{cmd|locate structure|link=none}}可用于定位结构。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.20|现在{{cd|biome: Biome}}必须包含命名空间。}}
+}}
+
+== 注释 ==
+{{notelist}}
+== 參考 ==
+{{reflist}}
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/locate]]
+[[en:Commands/locate]]
+[[es:Comandos/locate]]
+[[fr:Commandes/locate]]
+[[ja:コマンド/locate]]
+[[ko:명령어/locate]]
+[[pt:Comandos/locate]]
+[[ru:Команды консоли/locate]]
+[[uk:Команди консолі/locate]]

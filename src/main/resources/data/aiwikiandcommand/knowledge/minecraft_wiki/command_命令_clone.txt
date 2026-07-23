@@ -1,0 +1,151 @@
+# 页面: 命令/clone
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/clone
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 有未知版本的History模板的页面/基岩版
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=clone
+|oplevel=2\1
+|becheat=1
+}}
+
+在指定区域之间复制方块结构。
+
+== 语法 ==
+* '''Java版'''
+: <code>clone ... </code>
+: <code>clone from <sourceDimension> ... </code>
+:: <code>... <begin> <end> ...</code>
+::: <code>... <destination> ...</code>
+::: <code>... to <targetDimension> <destination> ...</code>
+:::: <code>... [replace|masked]</code>
+:::: <code>... (replace|masked) [force|move|normal]</code>
+:::: <code>... filtered <filter> [force|move|normal]</code>
+:::: <code>... strict ...</code>
+::::: <code>... [replace|masked]</code>
+::::: <code>... (replace|masked) [force|move|normal]</code>
+::::: <code>... filtered <filter> [force|move|normal]</code>
+
+* '''基岩版'''
+: <code>clone <begin: x y z> <end: x y z> <destination: x y z> [maskMode: MaskMode]</code>
+: <code>clone <begin: x y z> <end: x y z> <destination: x y z> <maskMode: MaskMode> [cloneMode: CloneMode]</code>
+: <code>clone <begin: x y z> <end: x y z> <destination: x y z> filtered <cloneMode: CloneMode> <tileName: Block> [blockStates: block states]</code>
+
+== 参数 ==
+{{el|je|short=1}}：{{argument|begin|block_pos}}和{{argument|end|block_pos}}<br>
+{{el|be|short=1}}：{{argument|be=1|begin: x y z|CommandPosition}}和{{argument|be=1|end: x y z|CommandPosition}}
+: 定义源区域的两组对角方块坐标。
+: 构成边角的方块在此方块的坐标正方向上延伸。因此，各轴上较小的坐标将会正好贴合区域边界，但较大的坐标将会超过边界1方块，源区域的体积则为(x<sub>大</sub> - x<sub>小</sub> + 1) × (y<sub>大</sub> - y<sub>小</sub> + 1) × (z<sub>大</sub> - z<sub>小</sub> + 1)。例如：<code>0 0 0 0 0 0</code>的体积为1方块，<code>0 0 0 1 1 1</code>与<code>1 1 1 0 0 0</code>都指定同一块8方块大小的区域。
+: {{arg desc|je=block_pos|be=CommandPosition}}
+
+{{argument|destination|block_pos|destination: x y z|CommandPosition}}
+: 定义目标区域的西北方向较低（即在各轴上坐标值最小）的点的坐标，游戏会根据<code><begin></code>与<code><end></code>的坐标算出目标区域的范围。
+: {{arg desc|je=block_pos|be=CommandPosition}}
+
+{{el|je|short=1}}：{{cd|replace{{!}}masked}}<br>
+{{el|be|short=1}}：{{argument|be=1|maskMode: MaskMode|enum}}
+: 指定是否过滤被复制方块。必须为下列之一：
+:* <code>masked</code> — 仅复制非空气方块。会保持目的区域中原本会被替换为空气的方块不变。
+:* <code>replace</code> — 复制所有方块，用源区域的方块覆盖目标区域中的''所有''方块。
+: 若未定义，默认为<code>replace</code>。
+
+{{el|je|short=1}}：{{cd|strict}}
+: 使命令在放置方块时不触发自身及紧挨着的方块的方块更新和形状更新。
+
+{{cd|filtered}}
+: 使命令只复制指定方块，需要额外指定一个方块。
+
+{{el|je|short=1}}：{{cd|force{{!}}move{{!}}normal}}<br>
+{{el|be|short=1}}：{{argument|be=1|cloneMode: CloneMode|enum}}
+: 指定对源区域的操作。必须为下列之一：
+:* <code>force</code> — 强制复制，即使源区域与目标区域有重叠。
+:* <code>move</code> — 将源区域复制到目标区域，并将源区域替换为空气。在filtered遮罩模式下，只有被复制的方块才会被替换为空气。
+:* <code>normal</code> — 不执行force与move。
+: 若未指定，默认为<code>normal</code>。
+
+{{argument|filter|block_predicate|tileName: Block|Block}}
+: 指定在<code>filtered</code>模式下时要复制的方块ID。
+: {{arg desc|je=block_predicate|be=Block}}
+
+{{el|je|short=1}}：{{argument|sourceDimension|dimension}}
+: 指定复制区域的来源维度。
+: {{arg desc|je=dimension}}
+
+{{el|je|short=1}}：{{argument|targetDimension|dimension}}
+: 指定复制区域的目的维度。
+: {{arg desc|je=dimension}}
+
+{{el|be|short=1}}：{{argument|be=1|blockStates: block states|BlockStateCommandParam}}
+: 指定复制时需要符合的方块状态。
+: {{Arg desc|be=BlockStateCommandParam}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|指定的维度不存在|fail|N/A}}
+{{Result table|指定的区域处于已卸载的或在世界外的区块中||fail}}
+{{Result table|源区域被选中的方块数量超过655360<ref>因为漏洞{{bug|MCPE-183836}}导致的计算误差，实际方块数量上限最大可为655361×2×2=2621444。</ref>{{only|be}}或<br>{{gamerule|max_block_modifications}}的设定值{{only|je}}}}
+{{Result table|cmd=/clone ... normal ...|源区域和目标区域重叠}}
+{{Result table|cmd=/clone ... move ...|源区域和目标区域重叠|success}}
+{{Result table|cmd=/clone ... filtered ...|源区域内无指定方块|fail}}
+{{Result table|cmd=/clone ... replace ...|源区域内所有方块为屏障<ref name="barrier">{{bug|MC-231566}}</ref>||N/A}}
+{{Result table|cmd=/clone ... filtered ...|指定方块为屏障<ref name="barrier"/>}}
+{{Result table|cmd=/clone ... masked ...|源区域内无非空气或非屏障方块{{only|je}}<ref name="barrier"/>||fail}}
+{{Result table|cmd=/clone ... force ...<br>/clone ... normal ...|目标区域中没有方块被更改}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|失败时|0|0|0}}
+{{Output table|成功时|1|1|目标区域中被更改的方块数}}
+{{Output table|edition=be|失败时|0}}
+{{Output table|成功时|1}}
+{{Output table}}
+
+== 示例 ==
+[[File:Clone Command Masked Mode Example.png|thumb|{{cd|masked}}模式类似于使用结构空位替换结构方块选区中的空气方块，复制后的目标区域（右）将会忽略这些方块]]
+* 以某位置为原点，形成XYZ轴长度分别为3格、5格、3格的源区域，复制到距离原点Z轴正方向4格的目标区域（如图，左侧两紫色方块决定源区域，右侧黄色方块决定目标区域位置）：{{cd|/clone ~ ~ ~ ~2 ~4 ~2 ~ ~ ~4}}
+* 如图，复制左侧区域到右侧，使用{{cd|masked}}模式以防止右侧树木的下的花和灯笼被替换为空气：{{cd|/clone ~ ~ ~ ~2 ~4 ~2 ~ ~ ~4 masked}}
+* 移动源区域到目标区域（使用{{cd|masked}}除去源区域中的空气方块，{{cd|move}}即复制后清除源区域）：{{cd|/clone ~ ~ ~ ~2 ~4 ~2 ~ ~ ~4 masked move}}
+* 根据当前执行位置，选择相应的下界源区域并复制到主世界目标区域{{only|je}}：<syntaxhighlight lang="mcfunction">/execute in minecraft:the_nether run clone from minecraft:the_nether ~ ~ ~ ~ ~ ~ to minecraft:overworld ~ ~ ~</syntaxhighlight>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w03a|加入了{{cmd|clone|link=none}}命令。}}
+|{{HistoryLine|||dev=14w10a|加入了{{cd|force}}选项。}}
+|{{HistoryLine|||dev=14w20a|加入了{{cd|move}}选项。}}
+|{{HistoryLine||1.13|dev=17w45a|修改了{{cmd|clone|link=none}}的语法。}}
+|{{HistoryLine||1.19.4|dev=23w03a|现在支持指定来源维度和目的维度。
+|现在可以通过{{cd|commandModificationBlockLimit}}游戏规则控制单次执行可更改的最大方块数。}}
+|{{HistoryLine||1.21.5|dev=25w02a|加入了{{cd|strict}}选项。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|clone|link=none}}命令。
+|{{cmd|clone|link=none}}命令不能使用{{cd|force}}克隆模式。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.210|dev=1.16.210.53|加入了{{cmd|clone|link=none}}中对[[方块状态]]的支持。}}
+|{{HistoryLine|||dev=1.16.210.57|克隆相同类型的方块不再被视为操作失败。}}
+|{{HistoryLine||1.18.0|dev=?|{{cmd|clone|link=none}}命令可更改的最大方块数现在为655360。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.21|移除了{{cd|tileData: int}}参数。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|{{cd|blockStates: block states}}参数现在为可选项。}}
+}}
+
+== 参见 ==
+* {{cmd|fill}} — 用一类方块填充整个区域
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/clone]]
+[[en:Commands/clone]]
+[[es:Comandos/clone]]
+[[ja:コマンド/clone]]
+[[ko:명령어/clone]]
+[[pt:Comandos/clone]]
+[[ru:Команды консоли/clone]]
+[[uk:Команди консолі/clone]]

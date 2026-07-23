@@ -1,0 +1,174 @@
+# 页面: 属性/速度
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E9%80%9F%E5%BA%A6
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:31
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+{{Infobox attribute}}
+
+'''速度（Speed）'''是控制生物移动加速度的[[属性]]。
+
+== 行为 ==
+此属性与最高持续移动速度的关系为<math>\frac{0.21168a}{(1-0.91f)f^3}</math>（单位为米每[[游戏刻]]），其中''a''代表此项属性值，''f''代表生物脚下方块的[[阻力系数]]。
+
+速度属性会增加玩家的视场角（FOV），玩家速度属性值（包含修饰符）为<math>s</math>，玩家速度基本属性值（无修饰符）为<math>m</math>，视场角修饰符<math>f</math>公式为：<math>f=\frac{s}{2\times m}+0.5</math>，如果处于飞行状态，这个值会×1.1。
+
+最终玩家视角=玩家选项中视场角的值×视场角修饰符<math>f</math>。
+
+由于[[生物AI]]的作用，除玩家外的生物几乎不能达到此理论最高持续移动速度。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Dolphin}}
+| 1.2
+|-
+| {{EntityLink|Axolotl}}<br>{{EntityLink|Frog}}<br>{{EntityLink|Tadpole}}
+| 1
+|-
+| {{EntityLink|Bat}}<br>{{EntityLink|Cod}}<br>{{EntityLink|Ender Dragon}}<br>{{EntityLink|Ghast}}<br>{{EntityLink|Glow Squid}}<br>{{EntityLink|Phantom}}<br>{{EntityLink|Pufferfish}}<br>{{EntityLink|Salmon}}<br>{{EntityLink|Shulker}}<br>{{EntityLink|Squid}}<br>{{EntityLink|Tropical Fish}}<br>{{EntityLink|Vex}}<br>{{EntityLink|Wandering Trader}}
+| 0.7
+|-
+| {{EntityLink|Breeze}}<br>{{EntityLink|Wither}}
+| 0.6
+|-
+| {{EntityLink|Evoker}}<br>{{EntityLink|Giant}}<br>{{EntityLink|Guardian}}<br>{{EntityLink|Illusioner}}
+| 0.5
+|-
+| {{EntityLink|Creaking}}
+| 0.4
+|-
+| {{EntityLink|Piglin}}<br>{{EntityLink|Piglin Brute}}<br>{{EntityLink|Pillager}}<br>{{EntityLink|Vindicator}}
+| 0.35
+|-
+| {{EntityLink|Bee}}<br>{{EntityLink|Cat}}<br>{{EntityLink|Cave Spider}}<br>{{EntityLink|Elder Guardian}}<br>{{EntityLink|Enderman}}<br>{{EntityLink|Fox}}<br>{{EntityLink|Hoglin}}<br>{{EntityLink|Ocelot}}<br>{{EntityLink|Rabbit}}<br>{{EntityLink|Spider}}<br>{{EntityLink|Warden}}<br>{{EntityLink|Wolf}}<br>{{EntityLink|Zoglin}}<br>{{EntityLink|Ravager}}
+| 0.3
+|-
+| {{EntityLink|Chicken}}<br>{{EntityLink|Creeper}}<br>{{EntityLink|Endermite}}<br>{{EntityLink|Iron Golem}}<br>{{EntityLink|Pig}}<br>{{EntityLink|Polar Bear}}<br>{{EntityLink|Silverfish}}<br>{{EntityLink|Skeleton}}<br>{{EntityLink|Stray}}<br>{{EntityLink|Bogged}}<br>{{EntityLink|Turtle}}<br>{{EntityLink|Witch}}<br>{{EntityLink|Wither Skeleton}}
+| 0.25
+|-
+| {{EntityLink|Blaze}}<br>{{EntityLink|Drowned}}<br>{{EntityLink|Husk}}<br>{{EntityLink|Sheep}}<br>{{EntityLink|Zombie}}<br>{{EntityLink|Zombie Villager}}<br>{{EntityLink|Zombified Piglin}}
+| 0.23
+|-
+| {{EntityLink|Horse}}
+| data-sort-value="0.225" | 0.1125 – 0.3375<br>均匀分布随机数
+|-
+| {{EntityLink|Slime}}
+| data-sort-value="0.4" | 0.2+0.1×''[[史莱姆#cite_note-1|尺寸]]''
+|-
+| {{EntityLink|Copper Golem}}<br>{{EntityLink|Cow}}<br>{{EntityLink|Goat}}<br>{{EntityLink|Magma Cube}}<br>{{EntityLink|Mooshroom}}<br>{{EntityLink|Parrot}}<br>{{EntityLink|Skeleton Horse}}<br>{{EntityLink|Zombie Horse}}
+| 0.2
+|-
+| {{EntityLink|Donkey}}<br>{{EntityLink|Llama}}<br>{{EntityLink|Mule}}<br>{{EntityLink|Strider}}<br>{{EntityLink|Trader Llama}}
+| 0.175
+|-
+| {{EntityLink|Panda}}（非懒惰的）
+| 0.15
+|-
+| {{EntityLink|Armadillo}}
+| 0.14
+|-
+| {{EntityLink|Allay}}<br>{{EntityLink|Sniffer}}<br>{{EntityLink|Player}}
+| 0.1
+|-
+| {{EntityLink|Camel}}
+| 0.09
+|-
+| {{EntityLink|Panda}}（懒惰的）
+| 0.07
+|-
+| {{EntityLink|Happy Ghast}}
+| 0.05
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| enchantment.soul_speed/feet
+| add_value（Op0）
+| 0.03×(1+''等级''×0.35)
+| 否
+| [[灵魂疾行]]魔咒，{{tr|应用|套用}}于<code>feet</code>（靴子）槽位，脚下方块是[[灵魂沙]]或[[灵魂土]]时
+|-
+| effect.slowness
+| add_multiplied_total（Op2）
+| ''等级''×-0.15
+| 是
+| [[迟缓]]状态效果
+|-
+| effect.speed
+| add_multiplied_total（Op2）
+| ''等级''×0.2
+| 是
+| [[迅捷]]状态效果
+|-
+| attacking
+| add_value（Op0）
+| 0.15
+| 否
+| [[末影人]]有攻击目标时
+|-
+| attacking
+| add_value（Op0）
+| 0.05
+| 否
+| [[僵尸猪灵]]有攻击目标时
+|-
+| drinking
+| add_value（Op0）
+| -0.25
+| 否
+| [[女巫]]正在饮用药水
+|-
+| baby
+| add_multiplied_base（Op1）
+| 0.5
+| 否
+| 幼年的僵尸、溺尸、尸壳、僵尸村民或僵尸猪灵
+|-
+| baby
+| add_multiplied_base（Op1）
+| 0.2
+| 否
+| 幼年的猪灵
+|-
+| powder_snow
+| add_value（Op0）
+| ''被冰冻的百分比''×-0.05
+| 否
+| [[冰冻]]
+|-
+| sprinting
+| add_multiplied_total（Op2）
+| 0.3
+| 否
+| [[疾跑]]时
+|-
+| suffocating
+| add_multiplied_base（Op1）
+| -0.34
+| 否
+| [[炽足兽]]脚下方块不是[[熔岩]]时
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了速度属性，ID为<code>Speed</code>。}}
+|{{HistoryLine|||dev=13w21a|加入了{{cd|potion.moveSpeed|potion.moveSlowdown|d=pretty}}修饰符。
+|加入了{{cd|Sprinting speed boost|Fleeing speed bonus|Attacking speed boost|Drinking speed penalty|Baby speed boost|d=pretty}}修饰符。
+|速度属性的ID重命名为<code>generic.movementSpeed</code>，现在适用于所有生物。}}
+|{{HistoryLine||1.16|dev=20w14a|重命名{{cd|generic.movementSpeed|d=到|generic.movement_speed}}。}}
+|{{HistoryLine||1.21.2|dev=24w33a|速度属性的ID从<code>generic.movement_speed</code>重命名为<code>movement_speed</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

@@ -1,0 +1,151 @@
+# 页面: 命令/summon
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/summon
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 待扩充段落
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=summon
+|oplevel=2\1
+|becheat=1
+}}
+
+召唤一个[[实体]]。
+
+== 语法 ==
+* '''Java版'''
+: <code>summon <entity> [<pos>]</code>
+: <code>summon <entity> <pos> [<nbt>]</code>
+
+* '''基岩版'''
+: <code>summon <entityType: EntityType> [spawnPos: x y z] [yRot: float] [xRot: float] [spawnEvent: string] [nameTag: string]</code>
+: <code>summon <entityType: EntityType> <nameTag: string> [spawnPos: x y z]</code>
+: <code>summon <entityType: EntityType> [spawnPos: x y z] facing <lookAtEntity: target> [spawnEvent: string] [nameTag: string]</code>
+: <code>summon <entityType: EntityType> [spawnPos: x y z] facing <position: x y z> [spawnEvent: string] [nameTag: string]</code>
+
+== 参数 ==
+{{argument|entity|resource|entityType: EntityType}}
+: 指定要被召唤的实体类型。
+: {{arg desc|je=resource|registry=minecraft:entity_type|be=enum}}
+: {{IN|java}}玩家（{{code|minecraft:player}}）和浮漂（{{code|minecraft:fishing_bobber}}）实体无法被召唤。尝试召唤这两种实体会使命令执行失败。
+: {{IN|bedrock}}只有特定实体类型允许被召唤。允许召唤的实体类型可见于命令的自动补全建议列表。指定列表外的实体类型会使命令无法解析。
+
+{{argument|pos|vec3|spawnPos: x y z|CommandPositionFloat}}
+: 指定该实体的召唤位置。如果未指定，默认为命令执行位置。
+: {{arg desc|je=vec3|be=CommandPositionFloat}}
+
+{{el|je|short=1}}：{{argument|nbt|nbt_compound_tag}}
+: 指定该[[实体数据格式|实体的NBT]]。
+: {{arg desc|je=nbt_compound_tag}}
+
+{{el|be|short=1}}：{{Argument|be=1|yRot: value|RelativeFloat}}和{{Argument|be=1|xRot: value|RelativeFloat}}
+: 指定该实体生成时的旋转角度。
+: 必须为两个单精度浮点数组成的朝向，分别表示绕Y轴旋转和绕X轴旋转，以度为单位。
+:* 绕Y轴旋转时，-180.0表示北，-90.0表示东，0.0表示南，90.0表示西。
+:* 绕X轴旋转时，竖直上方为-90.0，至竖直下方90.0。
+: 加上波浪号前缀将相对于执行朝向进行旋转。
+
+{{el|be|short=1}}：{{Argument|be=1|lookAtEntity: target|CommandSelector<Actor>}}
+: 指定该实体生成时的要朝向的实体。
+: {{arg desc|be=CommandSelector<Actor>}}
+
+{{el|be|short=1}}：{{Argument|be=1|lookAtPosition: x y z|CommandPositionFloat}}
+: 指定该实体生成时的要朝向的坐标。
+: {{arg desc|be=CommandPositionFloat}}
+
+{{el|be|short=1}}：{{argument|be=1|spawnEvent: string|basic_string}}
+: 指定该实体的召唤时附带的实体事件，应为一个行为包内适用于实体的[[生成事件]]的名称。
+: {{arg desc|be=basic_string}}
+
+{{el|be|short=1}}：{{argument|be=1|nameTag: string|basic_string}}
+: 指定该实体的名称，生成时为该实体命名。
+: {{arg desc|be=basic_string}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code>entityType: EntityType</code>不是允许生成的实体类型。|N/A}}
+{{Result table|<code><entity></code>是{{code|minecraft:player}}或{{code|minecraft:fishing_bobber}}实体。|fail|N/A}}
+{{Result table|指定的位置未加载||fail}}
+{{Result table|尝试在[[和平]]难度下生成无法在和平难度生成的[[敌对生物]]}}
+{{Result table|尝试生成UUID与其他实体重复的实体||N/A}}
+{{Result table|指定的<''x''>或<''z''>超出[-30000000, 30000000)或<''y''>超出[-20000000, 20000000)||success}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* 在当前位置往西面10格处生成[[闪电]]：
+** <code>/summon lightning_bolt ~-10 ~ ~</code>
+* 在坐标(0,0,0)处生成一只[[猪]]：
+** <code>/summon pig 0 0 0</code>
+
+{{el|je}}：
+* 在当前位置生成一只名为“充能苦力怕”的[[闪电苦力怕]]：
+** <code>/summon creeper ~ ~ ~ {powered:1b,CustomName:"充能苦力怕"}</code>
+* 在当前位置生成一只[[蜘蛛骑士]]（骷髅已装备弓）：
+** <code>/summon spider ~ ~ ~ {Passengers:[{id:"minecraft:skeleton",equipment:{mainhand:{id:"minecraft:bow",count:1}}}]}</code>
+* 在当前位置生成数量为64的[[钻石]]掉落物：
+** <code>/summon item ~ ~ ~ {Item:{id:"minecraft:diamond",count:64}}</code>
+* 在当前位置生成一只被禁用AI、朝向西面的[[骷髅]]：
+** <code>/summon skeleton ~ ~ ~ {NoAI:1b,Rotation:[90F,0F]}</code>
+* 在当前位置生成一只向上飞的[[猪]]：
+** <code>/summon pig ~ ~ ~ {Motion:[0d,5d,0d]}</code>
+* 在当前位置生成一只蓝色[[美西螈]]：
+** <code>/summon axolotl ~ ~ ~ {Variant:4}</code>
+* 在当前位置生成一只装备了[[钻石头盔]]且[[尺寸]]为0.1的[[幼年僵尸]]：
+** <code>/summon zombie ~ ~ ~ {IsBaby:1b,equipment:{head:{id:"diamond_helmet"}},attributes:[{id:"scale",base:0.1d}]}</code>
+*在当前位置生成一只不会长大的[[小恶魂]]：
+** <code>/summon happy_ghast ~ ~ ~ {Age:-1,AgeLocked:1b}</code>
+
+{{el|be}}：
+* 在当前位置生成一只名为“充能苦力怕”的闪电苦力怕：
+** <code>/summon creeper ~ ~ ~ ~ ~ minecraft:become_charged "充能苦力怕"</code>
+* 在当前位置生成一只[[掠夺者]][[袭击队长]]：
+** <code>/summon pillager ~ ~ ~ ~ ~ minecraft:spawn_as_illager_captain</code>
+* 在当前位置生成一只属于[[灾厄巡逻队]]的掠夺者袭击队长：
+** <code>/summon pillager ~ ~ ~ ~ ~ minecraft:promote_to_patrol_captain</code>
+* 在当前位置生成一只名为“{{fc|#FFAA00|海豚}}”的[[海豚]]：
+** <code>/summon dolphin "§6海豚" ~ ~ ~</code>
+* 在当前位置往东面5格处生成一只朝向当前坐标的[[僵尸]]：
+** <code>/summon zombie ~5 ~ ~ facing ~ ~ ~</code>
+
+== 历史 ==
+{{stub|section=1}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了{{cmd|summon|link=none}}。}}
+|{{HistoryLine||1.8|dev=14w30a|现在可以使用{{cmd|summon|link=none}}来生成[[闪电]]。}}
+|{{HistoryLine||1.16|dev=20w06a|{{cmd|summon|link=none}}现在不允许<''x''>或<''z''>超出[-30000000, 30000000)或<''y''>超出[-20000000, 20000000)。}}
+|{{HistoryLine|||dev=20w11a|现在可以使用{{cmd|summon|link=none}}来生成[[火球]]。
+|现在不再可以使生成位置的<x>或<z>超出[-30000000, 30000000)或<y>超出[-20000000, 20000000)。}}
+|{{HistoryLine||1.16.2|dev=20w30a|现在使用{{cmd|summon|link=none}}尝试生成UUID与其他实体重复的实体时，会出现错误提示“UUID重复，无法召唤实体”。}}
+|{{HistoryLine||1.19.3|dev=22w42a|{{code|<entity>}}现在使用参数类型{{code|resource}}。在此之前使用的参数类型为{{code|entity_summon}}。}}
+|{{HistoryLine||1.21.9|dev=25w31a|现在在和平难度下尝试召唤无法在和平难度生成的敌对生物会执行失败。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|summon|link=none}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.40|dev=1.19.40.21|加入了旋转参数。}}
+|{{HistoryLine|||dev=1.19.40.23|暂时移除了旋转参数。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.23|重新加入了旋转参数。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.20|加入了{{cd|facing}}语法。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/summon]]
+[[en:Commands/summon]]
+[[es:Comandos/summon]]
+[[fr:Commandes/summon]]
+[[ja:コマンド/summon]]
+[[pt:Comandos/summon]]
+[[ru:Команды консоли/summon]]
+[[uk:Команди консолі/summon]]

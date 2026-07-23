@@ -1,0 +1,219 @@
+# 页面: 存档基础数据存储格式
+# 来源: https://zh.minecraft.wiki/w/%E5%AD%98%E6%A1%A3%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:10
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|串列}}{{about|{{el|je}}的存档基础数据存储格式|{{el|be}}中有类似功能的文件及格式|基岩版存档格式#level.dat}}
+{{exclusive|je}}
+
+'''存档基础数据存储文件'''是存档的核心文件，存储世界[[难度]]、[[世界出生点]]等各种存档基础信息。
+
+== 存储格式 ==
+存档基础数据存储文件位于{{filepath|-{}-<''存档根目录''>/level.dat}}。在不同情况下，此文件会有多个副本，见下文{{slink||存储行为}}。
+
+存档基础数据存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|Data|existonsave=1|required=1}}：存档基础数据。
+*** {{nbt|int|DataVersion|existonsave=1}}：保存此存档基础数据存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是-1。
+*** {{nbt|bool|allowCommands|existonsave=1}}：存档是否启用命令。如果此项不存在，则游戏判断{{nbt|int|GameType}}是否为1（创造模式）。如果是则为<code>true</code>，否则为<code>false</code>。
+*** {{nbt|compound|DataPacks}}：存档启用和禁用的[[数据包]]。此值不存在时游戏默认为仅启用<code>vanilla</code>数据包。
+**** {{nbt|list|Disabled|existonsave=1|required=1}}：禁用的数据包。
+***** {{nbt|string}}：数据包名称。
+**** {{nbt|list|Enabled|existonsave=1|required=1}}：启用的数据包。
+***** {{nbt|string}}：数据包名称。
+*** {{nbt|compound|difficulty_settings|exisonsave=1}}
+**** {{nbt|string|difficulty|existonsave=1}}：存档的游戏[[难度]]。{{cd|peaceful}}、{{cd|easy}}、{{cd|normal}}、{{cd|hard}}分别为和平、简单、普通和困难。当此项不存在时游戏默认为<code>normal</code>。
+**** {{nbt|bool|hardcore|existonsave=1}}：存档内玩家死亡后是否自动转变为旁观模式。当此项不存在时游戏默认为<code>false</code>。
+**** {{nbt|bool|locked|existonsave=1}}：此存档难度是否被锁定。当此项不存在时游戏默认为<code>false</code>。
+*** {{nbt|list|enabled_features}}：启用的功能开关。此值不存在时游戏默认为仅启用<code>vanilla</code>功能开关。
+**** {{nbt|string}}：（命名空间ID）一项功能开关。
+*** {{nbt|int|GameType|existonsave=1}}：存档的默认[[游戏模式]]，控制玩家进入世界或重生时的游戏模式。0为[[生存模式]]，1为[[创造模式]]，2为[[冒险模式]]，3为[[旁观模式]]。如果此项不存在则游戏默认为0，即生存模式。
+*** {{nbt|bool|initialized|existonsave=1}}：存档是否被正确初始化。如果此项为<samp>false</samp>，游戏在加载存档之后会重新寻找世界出生点并重新放置[[奖励箱]]。当此项不存在时游戏默认为<code>true</code>。
+*** {{nbt|long|LastPlayed|existonsave=1}}：上次保存此存档的[[wzh:UNIX时间|时间戳]]。当此项不存在时默认为0。
+*** {{nbt|string|LevelName|existonsave=1}}：存档的名称。当此项不存在时游戏默认为空字符串。
+*** {{nbt|int-array|singleplayer_uuid}}：存档引用的玩家信息UUID。此信息只在单人游戏存档中有效。独立服务端存档中无此数据。
+*** {{nbt|list|removed_features}}：此项无游戏逻辑作用，仅在[[崩溃]]中的<code>Removed feature flags</code>部分记录。
+**** {{nbt|string}}：一个字符串。
+*** {{nbt|list|ServerBrands|existonsave=1}}：打开过此存档的服务端的铭牌列表。
+**** {{nbt|string}}：一个服务端铭牌。
+*** {{nbt|compound|spawn|existonsave=1}}：[[世界出生点]]数据。
+**** {{nbt|string|dimension|existonsave=1}}：存档世界出生点的维度。如果此项不存在则游戏默认为主世界（<code>minecraft:overworld</code>）。
+**** {{nbt|int array|pos|existonsave=1}}：存档世界出生点的坐标。如果此项不存在则游戏默认为<code>[0, 0, 0]</code>。
+**** {{nbt|float|pitch|existonsave=1}}：（{{interval|left=-90|right=90}}）存档世界出生点出生时所看向的俯仰角。如果此项不存在则游戏默认为0。
+**** {{nbt|float|yaw|existonsave=1}}：（{{interval|left=-180|right=180}}）存档世界出生点出生时所看向的偏航角，以顺时针角度计，为0时代表Z轴正方向（正南方）。如果此项不存在则游戏默认为0。
+*** {{nbt|long|Time|existonsave=1}}：存档的游戏时间。此时间从存档被创建开始计时，单位为[[游戏刻]]。如果此项不存在则游戏默认为0。
+*** {{nbt|int|version|existonsave=1|required=1}}：存档区块文件的版本，对于Anvil文件格式（当前）为19133，对于MCRegion格式为19132，如果不为这两个值游戏获取存档信息时报错<code>-{}-Unknown data version: <''16进制此值''></code>。
+*** {{nbt|compound|Version|existonsave=1|required=1}}：存储此存档时游戏的详细版本信息。
+**** {{nbt|int|Id|existonsave=1}}：游戏的数据版本。如果此项不存在则使用当前正在加载此存档的游戏的数据版本。
+**** {{nbt|string|Name|existonsave=1}}：游戏的版本名称。如果此项不存在则使用当前正在加载此存档的游戏的版本名称。
+**** {{nbt|string|Series|existonsave=1}}：开发系列，用于标识开发分支。常规正式版和快照为<code>main</code>。如果此项不存在则使用当前正在加载此存档的游戏的开发系列。
+**** {{nbt|bool|Snapshot|existonsave=1}}：表示此版本是否为快照版。如果此项不存在则使用当前正在加载此存档的游戏的类型。
+*** {{nbt|bool|WasModded|existonsave=1}}：存档是否被修改过的客户端或服务端加载并保存。如果此项不存在游戏默认为<code>false</code>。
+</div>
+
+== 存储行为 ==
+每个存档都至少有一个存档基础数据存储文件。如果一个目录下不存在{{filename|level.dat}}和{{filename|level.dat_old}}文件，那么这个目录就不会被作为存档识别。
+
+游戏有两种读取存档基础数据存储文件的方式：
+* 在[[选择世界菜单]]中，游戏会读取游戏存档目录，查找所有带有存档基础数据存储文件的目录作为存档，并读取这些文件的部分基础信息显示在菜单内。
+* 在游戏加载存档时，游戏会将存档基础数据存储文件的数据全部加载。
+
+由于存档基础数据存储文件是存档最重要的文件，此文件在保存时会留下一个备份以减少数据损坏的可能性：
+# 先将新的数据写入到{{filename|-{}-level<''随机字符串''>.dat}}内。
+# 将原先的{{filename|level.dat}}移动到{{filename|level.dat_old}}。
+# 删除{{filename|level.dat}}。
+# 将刚才写入的{{filename|-{}-level<''随机字符串''>.dat}}移动到{{filename|level.dat}}。
+# 如果有任何一步出错，都将{{filename|level.dat_old}}移动回{{filename|level.dat}}。
+
+备份文件与主文件的结构相同，当主文件损坏时，游戏会自动尝试恢复：
+# 先将原先的{{filename|level.dat}}移动到{{filename|-{}-level.dat_corrupted_<''时间戳''>}}。
+# 删除{{filename|level.dat}}。
+# 将{{filename|level.dat_old}}移动到{{filename|level.dat}}。
+# 如果有任何一步出错，都将{{filename|-{}-level.dat_corrupted_<''时间戳''>}}移动回{{filename|level.dat}}。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了{{nbt|boolean|MapFeatures}}。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.1|dev=12w01a|加入了{{nbt|string|generatorName}}。}}
+|{{HistoryLine||1.2.1|dev=12w03a|加入了{{nbt|int|generatorVersion}}。}}
+|{{HistoryLine||1.3.1|dev=12w16a|加入了{{nbt|boolean|allowCommands}}。}}
+|{{HistoryLine|||dev=12w18a|加入了{{nbt|boolean|initialized}}。}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了{{nbt|object|GameRules}}。
+|加入了{{nbt|long|DayTime}}。}}
+|{{HistoryLine|||dev=12w36a|加入了{{nbt|string|generatorOptions}}。}}
+|{{HistoryLine||1.8|dev=14w02a|加入了{{nbt|byte|Difficulty}}和{{nbt|boolean|DifficultyLocked}}。}}
+|{{HistoryLine|||dev=14w07a|加入了{{nbt|int|clearWeatherTime}}。}}
+|{{HistoryLine|||dev=14w17a|加入了{{nbt|double|BorderCenterX}}、{{nbt|double|BorderCenterZ}}和{{nbt|double|BorderSize}}。}}
+|{{HistoryLine|||dev=14w19a|加入了{{nbt|double|BorderDamagePerBlock}}、{{nbt|double|BorderSafeZone}}、{{nbt|double|BorderSizeLerpTarget}}、{{nbt|int|BorderSizeLerpTime}}、{{nbt|double|BorderWarningBlocks}}和{{nbt|double|BorderWarningTime}}。}}
+|{{HistoryLine|||dev=14w31a|将{{cd|BorderSizeLerpTime}}的数据类型更改为长整型{{nbt|long}}。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了{{nbt|object|DimensionData}}，末影龙战斗数据存于其{{nbt|object|1.DragonFight}}下。}}
+|{{HistoryLine|||dev=15w32a|加入了{{nbt|object|Version}}和{{nbt|int|DataVersion}}。}}
+|{{HistoryLine||1.13|dev=17w43a|加入了{{nbt|object|DataPacks}}。}}
+|{{HistoryLine|||dev=18w05a|加入了{{nbt|object|CustomBossEvents}}。}}
+|{{HistoryLine|||dev=pre8|移除了{{nbt|string|generatorOptions}}，由{{nbt|object|generatorOptions}}代替。}}
+|{{HistoryLine||1.14|dev=19w05a|加入了{{nbt|int|WanderingTraderSpawnChance}}、{{nbt|int|WanderingTraderSpawnDelay}}和{{nbt|int-array|WanderingTraderId}}。}}
+|{{HistoryLine||1.16|dev=20w17a|加入了{{nbt|boolean|BonusChest}}。}}
+|{{HistoryLine||1.16|dev=20w20a|将所有世界生成相关设置都集中到了{{nbt|compound|WorldGenSettings}}内。}}
+|{{HistoryLine|||dev=20w21a|移除了{{nbt|long|SizeOnDisk}}。
+|末影龙战斗数据被移到{{nbt|object|Data}}下，而非{{nbt|object|Data.DimensionData.1}}下。}}
+|{{HistoryLine||1.18|dev=21w37a|加入了{{nbt|string|Series}}标识开发分支。}}
+|{{HistoryLine||1.19.3|dev=22w42a|加入了{{nbt|list|enabled_features}}。}}
+|{{HistoryLine||1.20|dev=23w12a|加入了{{nbt|list|removed_features}}。}}
+|{{HistoryLine||1.21.9|dev=25w36a|移除了所有世界边界相关的标签，见{{slink|世界边界存储格式#历史}}。}}
+|{{HistoryLine|||dev=pre1|修改了世界出生点的格式。此前由{{nbt|float|SpawnAngle|existonsave=1}}控制水平角度，{{nbt|int|SpawnX|existonsave=1}}、{{nbt|int|SpawnY|existonsave=1}}和{{nbt|int|SpawnZ|existonsave=1}}控制坐标。}}
+|{{HistoryLine||1.21.11|dev=25w44a|将游戏规则标签{{nbt|compound|GameRules}}移至{{nbt|compound|game_rules}}，且游戏规则数据类型现在不再只是字符串。}}
+|{{HistoryLine||26.1|dev=snapshot-3|移除了表示游戏总时间的{{nbt|int|DayTime}}字段。
+|加入了{{nbt|compound|world_clocks}}字段。}}
+|{{HistoryLine|||dev=snapshot-6|此文件现在不再保存玩家数据，而是引用玩家数据。表示单人存档玩家数据的{{nbt|compound|Player}}被{{nbt|int-array|singleplayer_uuid}}取代。
+|与难度相关的设置移动到{{nbt|compound|difficulty_settings}}标签中。
+* {{nbt|int|Difficulty}}被{{nbt|string|difficulty}}取代。
+* {{nbt|bool|DifficultyLocked}}被重命名为{{nbt|bool|locked}}。
+* {{nbt|boolean|hardcore}}仅移动，未作其他更改。
+|移除了末影龙战斗数据，见{{slink|末影龙战斗存储格式#历史}}。
+|移除了流浪商人数据，见{{slink|流浪商人数据存储格式#历史}}。
+|移除了{{nbt|compound|CustomBossEvents}}，见{{slink|自定义Boss栏存储格式#历史}}。
+|移除了{{nbt|compound|ScheduledEvents}}，见{{slink|计划事件存储格式#历史}}。
+|移除了{{nbt|compound|game_rules}}，见{{slink|游戏规则存储格式#历史}}。
+|移除了{{nbt|compound|WorldGenSettings}}，见{{slink|世界生成设置存储格式#历史}}。
+|移除了{{nbt|compound|world_clocks}}，见{{slink|世界时钟存储格式#历史}}。}}
+}}
+
+=== 26.1前 ===
+{{collapseH}}
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|Data|existonsave=1|required=1}}：存档基础数据。
+*** {{nbt|int|DataVersion|existonsave=1}}：保存此存档基础数据存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是-1。
+*** {{nbt|bool|allowCommands|existonsave=1}}：存档是否启用命令。如果此项不存在，则游戏判断{{nbt|int|GameType}}是否为1（创造模式）。如果是则为<code>true</code>，否则为<code>false</code>。
+*** {{nbt|int|clearWeatherTime|existonsave=1}}：存档内世界晴天剩余时间，在此期间天气将保持晴天，但此值大于0不是晴天的必要条件。当此值不存在时游戏默认为0。
+*** {{nbt|compound|CustomBossEvents}}：自定义[[Boss栏]]数据。 
+**** {{nbt|compound|<''Boss栏命名空间ID''>}}：一项自定义Boss栏数据。 
+***** {{nbt|string|Color|existonsave=1|required=1}}：Boss栏的颜色代码，可以为<code>pink</code>（粉色）、<code>blue</code>（蓝色）、<code>red</code>（红色）、<code>green</code>（绿色）、<code>yellow</code>（黄色）、<code>purple</code>（紫色）和<code>white</code>（白色）。
+***** {{nbt|bool|CreateWorldFog|existonsave=1|required=1}}：Boss栏是否创建世界迷雾效果。
+***** {{nbt|bool|DarkenScreen|existonsave=1|required=1}}：Boss栏是否会使天空变得黯淡。
+***** {{nbt|int|Max|existonsave=1|required=1}}：Boss栏的最大值。
+***** {{nbt|string}}{{nbt|compound}}{{nbt|list|Name|existonsave=1|required=1}}：（[[文本组件]]）Boss栏所显示的文本。
+***** {{nbt|string|Overlay|existonsave=1|required=1}}：Boss栏的显示样式。可以的值有<code>progress</code>（完整进度条）、<code>notched_6</code>（进度条分为6段）、<code>notched_10</code>（进度条分为10段）、<code>notched_12</code>（进度条分为12段）和<code>notched_20</code>（进度条分为20段）。
+***** {{nbt|bool|PlayBossMusic|existonsave=1|required=1}}：Boss栏是否播放boss音乐。
+***** {{nbt|list|Players|existonsave=1|required=1}}：可以看见Boss栏的玩家列表。
+****** {{nbt|int-array}}: （[[UUID]]）一个玩家。
+***** {{nbt|int|Value|existonsave=1|required=1}}：Boss栏的当前值。
+***** {{nbt|bool|Visible|existonsave=1|required=1}}：Boss栏是否对列表中的玩家可见。
+*** {{nbt|compound|DataPacks}}：存档启用和禁用的[[数据包]]。此值不存在时游戏默认为仅启用<code>vanilla</code>数据包。
+**** {{nbt|list|Disabled|existonsave=1|required=1}}：禁用的数据包。
+***** {{nbt|string}}：数据包名称。
+**** {{nbt|list|Enabled|existonsave=1|required=1}}：启用的数据包。
+***** {{nbt|string}}：数据包名称。
+*** {{nbt|long|DayTime|existonsave=1}}：存档中游戏按照游戏昼夜循环而非游戏刻计算的游戏时间，可以被{{cmd|time}}修改。当此值不存在时游戏默认为0。
+*** {{nbt|byte|Difficulty|existonsave=1}}：存档的游戏[[难度]]。0-3分别为和平、简单、普通和困难。当此项不存在时游戏默认为2，即普通。
+*** {{nbt|bool|DifficultyLocked|existonsave=1}}：此存档难度是否被锁定。当此项不存在时游戏默认为<code>false</code>。
+*** {{nbt|compound|DragonFight|existonsave=1}}：[[末影龙]]战斗数据。
+{{:末影龙/战斗数据|**}}
+*** {{nbt|list|enabled_features}}：启用的功能开关。此值不存在时游戏默认为仅启用<code>vanilla</code>功能开关。
+**** {{nbt|string}}：（命名空间ID）一项功能开关。
+*** {{nbt|compound|game_rules|required=1}}：存档的[[游戏规则]]。
+**** {{nbt|any|<''游戏规则命名空间ID''>}}：一项游戏规则和对应的值。
+*** {{nbt|int|GameType|existonsave=1}}：存档的默认[[游戏模式]]，控制玩家进入世界或重生时的游戏模式。0为[[生存模式]]，1为[[创造模式]]，2为[[冒险模式]]，3为[[旁观模式]]。如果此项不存在则游戏默认为0，即生存模式。
+*** {{nbt|bool|hardcore|existonsave=1}}：存档内玩家死亡后是否自动转变为旁观模式。当此项不存在时游戏默认为<code>false</code>。
+*** {{nbt|bool|initialized|existonsave=1}}：存档是否被正确初始化。如果此项为<samp>false</samp>，游戏在加载存档之后会重新寻找世界出生点并重新放置[[奖励箱]]。当此项不存在时游戏默认为<code>true</code>。
+*** {{nbt|long|LastPlayed|existonsave=1}}：上次保存此存档的[[wzh:UNIX时间|时间戳]]。当此项不存在时默认为0。
+*** {{nbt|string|LevelName|existonsave=1}}：存档的名称。当此项不存在时游戏默认为空字符串。
+*** {{nbt|compound|Player}}：存档保存的玩家信息。此信息只在单人游戏存档中有效，且优先级高于玩家数据存储文件。独立服务端存档中无此数据。
+**** 见[[玩家数据格式]]。
+*** {{nbt|bool|raining|existonsave=1}}：当前存档内世界是否正在降雨。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|int|rainTime|existonsave=1}}：如果存档内世界目前不处于降雨天气，此值代表距离下一次降雨的时间。如果目前正处于降雨天气，此值表示距离降雨结束的时间。此值按游戏刻计算。如果此项不存在游戏默认为0。
+*** {{nbt|list|removed_features}}：此项无游戏逻辑作用，仅在[[崩溃]]中的<code>Removed feature flags</code>部分记录。
+**** {{nbt|string}}：一个字符串。
+*** {{nbt|list|ScheduledEvents|existonsave=1|required=1}}：存档内未处理的计划事件。
+**** {{nbt|compound}}：一项计划事件。
+***** {{nbt|compound|Callback|existonsave=1|required=1}}：事件回调数据。
+****** {{nbt|string|Type|existonsave=1|required=1}}：（命名空间ID）事件回调类型。
+****** {{nbt condition|如果{{nbt|string|Type}}为<code>function</code>，则执行指定[[Java版函数|函数]]。}}
+****** {{nbt|string|Name|existonsave=1|required=1}}：（命名空间ID）要执行的函数。
+****** {{nbt condition|如果{{nbt|string|Type}}为<code>function_tag</code>，则执行带有指定函数[[Java版标签|标签]]的函数。}}
+****** {{nbt|string|Name|existonsave=1|required=1}}：（命名空间ID）要执行的函数标签。
+***** {{nbt|string|Name|existonsave=1|required=1}}：此事件的名称。
+***** {{nbt|long|TriggerTime|existonsave=1|required=1}}：此事件的触发时间。以游戏时间作为基准。
+*** {{nbt|list|ServerBrands|existonsave=1}}：打开过此存档的服务端的铭牌列表。
+**** {{nbt|string}}：一个服务端铭牌。
+*** {{nbt|compound|spawn|existonsave=1}}：[[世界出生点]]数据。
+**** {{nbt|string|dimension|existonsave=1}}：存档世界出生点的维度。如果此项不存在则游戏默认为主世界（<code>minecraft:overworld</code>）。
+**** {{nbt|int array|pos|existonsave=1}}：存档世界出生点的坐标。如果此项不存在则游戏默认为<code>[0, 0, 0]</code>。
+**** {{nbt|float|pitch|existonsave=1}}：（{{interval|left=-90|right=90}}）存档世界出生点出生时所看向的俯仰角。如果此项不存在则游戏默认为0。
+**** {{nbt|float|yaw|existonsave=1}}：（{{interval|left=-180|right=180}}）存档世界出生点出生时所看向的偏航角，以顺时针角度计，为0时代表Z轴正方向（正南方）。如果此项不存在则游戏默认为0。
+*** {{nbt|bool|thundering|existonsave=1}}：当前存档内世界是否正处于[[雷暴]]天气。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|int|thunderTime|existonsave=1}}：如果存档内世界目前不处于雷暴天气，此值代表距离下一次雷暴的时间。如果目前正处于雷暴天气，此值表示距离雷暴结束的时间。此值按游戏刻计算。如果此项不存在游戏默认为0。
+*** {{nbt|long|Time|existonsave=1}}：存档的游戏时间。此时间从存档被创建开始计时，单位为[[游戏刻]]。如果此项不存在则游戏默认为0。
+*** {{nbt|int|version|existonsave=1|required=1}}：存档区块文件的版本，对于Anvil文件格式（当前）为19133，对于MCRegion格式为19132，如果不为这两个值游戏获取存档信息时报错<code>-{}-Unknown data version: <''16进制此值''></code>。
+*** {{nbt|compound|Version|existonsave=1|required=1}}：存储此存档时游戏的详细版本信息。
+**** {{nbt|int|Id|existonsave=1}}：游戏的数据版本。如果此项不存在则使用当前正在加载此存档的游戏的数据版本。
+**** {{nbt|string|Name|existonsave=1}}：游戏的版本名称。如果此项不存在则使用当前正在加载此存档的游戏的版本名称。
+**** {{nbt|string|Series|existonsave=1}}：开发系列，用于标识开发分支。常规正式版和快照为<code>main</code>。如果此项不存在则使用当前正在加载此存档的游戏的开发系列。
+**** {{nbt|bool|Snapshot|existonsave=1}}：表示此版本是否为快照版。如果此项不存在则使用当前正在加载此存档的游戏的类型。
+*** {{nbt|int-array|WanderingTraderId}}：（[[UUID]]）上一次成功生成的[[流浪商人]]的UUID。
+*** {{nbt|int|WanderingTraderSpawnChance|existonsave=1}}：游戏尝试生成流浪商人的成功概率。游戏加载时除以1000计算真实概率。如50表示5%的生成概率。如果此项不存在则游戏默认为0。
+*** {{nbt|int|WanderingTraderSpawnDelay|existonsave=1}}：距下次尝试生成流浪商人的时间，以游戏刻为单位。如果此项不存在则游戏默认为0。
+*** {{nbt|bool|WasModded|existonsave=1}}：存档是否被修改过的客户端或服务端加载并保存。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|compound|WorldGenSettings|existonsave=1|required=1}}：此存档的[[世界生成]]设置。
+**** {{nbt|bool|bonus_chest|existonsave=1}}：玩家首次进入游戏时，是否在出生点附近生成奖励箱。如果此项不存在游戏默认为<code>false</code>。
+**** {{nbt|compound|dimensions|existonsave=1|required=1}}：定义存档包含的所有维度及其世界生成设置。
+***** {{nbt|compound|''<维度命名空间ID>''}}：一个维度和对应的数据。
+****** 见[[维度定义格式]]。
+**** {{nbt|bool|generate_features|existonsave=1}}：世界是否生成结构。如果此项不存在游戏默认为<code>true</code>。
+**** {{nbt|string|legacy_custom_options}}：对世界生成不起到任何作用。存在此标签代表这个存档曾使用旧版自定义设置调整世界生成，在加载此存档时游戏会给出警告。
+**** {{nbt|long|seed|existonsave=1|required=1}}：数字形式的[[世界种子]]。
+</div>
+{{collapseE}}
+
+== 参见 ==
+* [[存档基础数据存储格式/世界生成格式/1.16前]]
+* [[存档基础数据存储格式/世界生成格式/1.16-1.18.1]]
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

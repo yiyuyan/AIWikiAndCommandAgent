@@ -1,0 +1,192 @@
+# 页面: 唱片机
+# 来源: https://zh.minecraft.wiki/w/%E5%94%B1%E7%89%87%E6%9C%BA
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 功能方块, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 已过期的视频, 方块
+# 抓取时间: 2026-07-14 17:22:24
+# 原始 Wikitext 内容:
+
+{{About|播放[[音乐唱片]]的方块|播放单个音符的方块|音符盒}}
+{{Infobox block
+|image=Jukebox.png
+|invimage=Jukebox
+}}
+{{quote|怎样让Minecraft中的房屋舒适如家？温暖的壁炉、地板上的地毯和墙上的画都是不错的选择。但对我来说，在一个完备的住所中，唱片机才是那最美好的一部分。|[[Duncan Geere]]<ref name="block-week-jukebox">{{article|block-week-jukebox|Block of the Week: Jukebox|May 26, 2017}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''唱片机（Jukebox）'''是一种用来播放[[音乐唱片]]的[[方块]]。
+
+== 生成 ==
+唱片机不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Any Planks
+|B1= Any Planks
+|C1= Any Planks
+|A2= Any Planks
+|B2= Diamond
+|C2= Any Planks
+|A3= Any Planks
+|B3= Any Planks
+|C3= Any Planks
+|Output= Jukebox
+|type= Decoration block
+}}
+
+== 破坏 ==
+挖掘唱片机的合适工具是斧。
+
+{{Breaking table}}
+
+唱片机被破坏后会掉落自身和内容物。
+
+== 用途 ==
+=== 播放唱片 ===
+对空的唱片机{{Ctrl|使用}}[[音乐唱片]]会将该音乐唱片插入唱片机，并且会播放与音乐唱片相对应的音乐。对着已经装有音乐唱片的唱片机{{Control|交互}}将会弹出其中的音乐唱片并停止正在播放的音乐。
+
+唱片机在音乐唱片弹出并重新插入之前只会播放一次音乐。唱片机发出的声音可以向各个方向传播大约65格。唱片机支持游戏中所有可用的[[音乐唱片]]。开始播放音乐唱片时，[[动作栏]]会出现{{only|java|for=彩色}}或{{only|bedrock|for=粉红色}}的“{{tp|record.nowPlaying|<唱片名称>}}”文本消息。
+
+[[漏斗]]和[[投掷器]]也可用于插入音乐唱片。
+
+正在播放音乐唱片的唱片机会不停发出音符[[粒子]]，且颜色会不断变化。粒子和[[音符盒]]调音时发出的粒子相同。
+
+[[悦灵]]和被驯服的[[鹦鹉]]会在唱片机播放音乐唱片时跳舞。
+
+=== 红石元件 ===
+{{see also|红石电路}}
+唱片机播放音乐唱片时会开启。
+
+唱片机开启时会：
+* 为毗邻的[[红石线]]提供15点信号强度。
+* 为毗邻且朝向正确（主输入端面向唱片机）的[[红石中继器]]提供15点信号强度。
+* 激活附着其上的[[红石火把]]，使其熄灭。
+* 激活毗邻且朝向正确（若需要，如[[活塞]]）的任何[[红石元件#机械元件|机械元件]]。
+
+[[红石比较器]]可检测唱片机内的音乐唱片的ID（无需唱片机开启），并根据ID输出不同强度的信号。不同音乐唱片所对应的红石信号强度如下：
+
+{{:音乐唱片/信号强度}}
+
+=== 循环播放 ===
+正在播放音乐唱片的唱片机会发出红石信号，从而使与其紧邻的[[漏斗]]停止工作。由于漏斗在歌曲播放完毕后会重新工作，漏斗可以用于自动插入和移除音乐唱片以实现循环播放。<ref>{{tweet|birdlegscass|1024133021564190722}}</ref>
+但其不适用于使用了[[红石比较器]]的情况，因为红石比较器只会检测唱片机内是否存在音乐唱片，而不会检查音乐唱片是否正在播放。
+
+=== 燃料 ===
+唱片机可作为[[熔炉]]、[[高炉]]或[[烟熏炉]]的[[燃料]]使用，每个唱片机可以烧炼1.5个物品。
+
+== 音效 ==
+{{Sound table/Block/Wood}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Jukebox|spritetype=block
+|showblocktags=je
+|blocktags={{GameTag|block|jukebox}}
+|nameid=jukebox|foot=1}}
+{{ID table|displayname=方块实体|spritename=jukebox|spritetype=block|nameid=jukebox|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table|generatetranslationkeys=bedrock
+|Jukebox|spritetype=block|nameid=jukebox|showblocktags=be|blocktags={{GameTagBE|block|jukebox}}|foot=1}}
+{{ID table|notnamespaced=y|displayname=方块实体|spritename=jukebox|spritetype=block|nameid=Jukebox|foot=1}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+每个唱片机都有相应的方块实体，储存了关于唱片机的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{load achievements|sound-of-music}}
+
+== 进度 ==
+{{load advancements|prefix=adventure|play_jukebox_in_meadows}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.14|[[File:Jukebox JE1 BE1.png|32px]] 加入了唱片机。
+|唱片机最多支持15张[[音乐唱片]]，使用了它们的数据值：0为空，1为包含音乐唱片“13”，2为包含音乐唱片“cat”。3-15的值支持任何其他的音乐唱片。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.6|dev=Test Build 3|由于唱片机现在使用[[方块实体]]以通过它们的物品ID来保存音乐唱片的音轨，现在唱片机可以支持超过15张不同的音乐唱片。
+|唱片机不再使用单独的数据值。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre6|现在使用[[斧]]可以更快地破坏唱片机。}}
+|{{HistoryLine||1.5|dev=13w04a|激活的唱片机可以在旁边有红石比较器时放出一个红石信号，信号强度由里面的音乐唱片决定。}}
+|{{HistoryLine||1.11|dev=16w32a|方块实体ID从<code>RecordPlayer</code>变为<code>jukebox</code>。}}
+|{{HistoryLine||1.12|dev=17w14a|现在[[鹦鹉]]会在唱片机播放音乐唱片时跳舞。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]前，唱片机的数字ID是84。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Jukebox JE2 BE2.png|32px]] 更改了唱片机的纹理。}}
+|{{HistoryLine||1.19.1|dev=22w24a|现在[[悦灵]]会在唱片机播放音乐唱片时跳舞。}}
+|{{HistoryLine||1.19.4|dev=23w06a|现在唱片机播放唱片时会不断发出音符粒子。}}
+|{{HistoryLine|||dev=23w07a|现在唱片机播放[[音乐唱片]]时会直接发出强度为15的红石信号。
+|现在唱片机可以与[[漏斗]]和[[投掷器]]交互。}}
+|{{HistoryLine||1.20|dev=23w18a|将唱片机加入至创造模式物品栏的“红石方块”标签页。}}
+|{{HistoryLine||1.20.2|dev=23w33a|现在唱片机使用木质方块的音效，而非石质方块。<ref>{{bug|MC-200484|||Fixed}}</ref>}}
+|{{HistoryLine||1.21|dev=24w21a|移除了唱片机方块实体数据中的{{cd|d=pretty|IsPlaying|RecordStartTick|TickCount}}字段，取而代之的是<code>ticks_since_song_started</code>字段。唱片的总时长现在从唱片物品数据中获取。}}
+
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|[[File:Jukebox JE1 BE1.png|32px]] 加入了唱片机。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Jukebox JE2 BE2.png|32px]] 更改了唱片机的纹理。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.22|现在[[悦灵]]会在唱片机播放音乐唱片时跳舞。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|唱片机的硬度由0.8改为2。
+|唱片机的爆炸抗性由0.8改为6。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Jukebox JE1 BE1.png|32px]] 加入了唱片机。}}
+|{{HistoryLine||xbox=TU9|增加了唱片机的音乐能听到的距离。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Jukebox JE2 BE2.png|32px]] 更改了唱片机的纹理。}}
+}}
+
+== 视频 ==
+{{video note|该视频中没有列出目前所有的音乐唱片。|outdated}}
+{{bv|BV1qt411u7e2}}
+
+== 你知道吗 ==
+[[File:C418 skin.png|100px|右|缩略图|C418的皮肤]]
+* Minecraft音乐制作者之一[[C418]]的[[皮肤]]是有着唱片机头部的Steve。
+* 使用[[钻石]]作为唱片机合成配方的一部分可能是参考了[[wzh:留声机圆筒|爱迪生留声机]]使用的钻石指针。
+* 唱片机的侧面和底面的纹理与[[音符盒]]相同。
+* 唱片机必须通过[[宝库]]战利品才能实现可再生。这是因为可用于制造唱片机的[[钻石]]同样依赖宝库战利品实现可再生，而宝库可以被每个玩家打开无限次数<ref>{{bug|MC-274049|||WAI}}</ref>，且[[试炼钥匙]]和[[不祥试炼钥匙]]是[[可再生资源]]。
+
+== 参见 ==
+* [[音乐]]
+* [[音符盒]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks|redstone blocks}}
+
+[[Category:功能方块]]
+
+[[de:Plattenspieler]]
+[[el:Τζούκμποξ]]
+[[en:Jukebox]]
+[[es:Tocadiscos]]
+[[fr:Jukebox]]
+[[hu:Zenegép]]
+[[it:Giradischi]]
+[[ja:ジュークボックス]]
+[[ko:주크박스]]
+[[nl:Jukebox]]
+[[pl:Szafa grająca]]
+[[pt:Toca-discos]]
+[[ru:Проигрыватель]]
+[[th:ตู้เพลง]]
+[[tr:Müzik Kutusu]]
+[[uk:Програвач]]

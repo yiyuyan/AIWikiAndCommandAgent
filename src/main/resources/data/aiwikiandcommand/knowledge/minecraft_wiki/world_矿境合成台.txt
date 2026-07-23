@@ -1,0 +1,202 @@
+# 页面: 矿境合成台
+# 来源: https://zh.minecraft.wiki/w/%E7%9F%BF%E5%A2%83%E5%90%88%E6%88%90%E5%8F%B0
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:54
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=25w14craftmine}}
+{{Infobox block
+|image = Mine Crafter.gif
+|invimage = [矿境合成台]Mine Crafter[&e价值：&r0.0/将此物品带到矿境出口可转换为经验值]
+|block-breaking-tool = ''无''
+|block-hardness = -1
+|block-blast-resistance = 0
+|block-lava-flammable = 否
+|block-suffocating = 是
+|block-redstone-conductor = 是
+|block-java-solid = 是
+|block-replaceable = 否
+|block-push-reaction = 不可推动，不可拉动
+|block-instrument = 贝斯
+|block-map-color={{color|#8F7748}}
+|block-id-raw = mine_crafter
+|item-creative-tab = {{tp|itemGroup.functional}}
+|item-renewable = 否
+|item-id-raw = mine_crafter
+|nobe = 1
+}}
+'''矿境合成台（Mine Crafter）'''是用于生成前往新的矿境的矿境传送方块的[[方块]]。
+
+== 生成 ==
+=== 自然生成 ===
+在大厅结构的中央会生成1个矿境合成台。
+
+== 获取 ==
+矿境合成台只能通过破坏对应方块获得。
+
+== 破坏 ==
+矿境合成台不能被挖掘破坏。
+{{Breaking table/manual|only=je|nocopper=1
+|{{BlockSprite|Mine Crafter}} 矿境合成台|-1}}
+矿境合成台被破坏后会掉落自身，以及所有非内置物品的内容物。
+
+== 用途 ==
+玩家对着矿境合成台按下{{ctrl|使用}}键后会视情况触发不同的效果。
+
+如果玩家手持[[矿境原料]]与其交互，则矿境原料内所有未解锁的矿境效果都会被解锁，并向所有玩家在[[聊天栏]]和[[动作栏]]中广播一条消息：“Unlocked new Mine Ingredient: ''<效果名称>''”，且整叠物品都会被消耗。
+
+否则，将打开矿境合成台的交互界面。
+
+=== 界面交互 ===
+==== 捐赠 ====
+界面的上方为升级的进度条以及“Donate（捐赠）”按钮，将鼠标放在按钮上会显示[[提示框]]：
+* DONATE（捐赠）
+* Use 20 of your experience to work towards upgrading the Minecrafter Table（使用20点经验值升级矿境合成台）
+
+按下按钮后会尝试扣除自身并使进度条增加20经验值，进度条满后矿境合成台会增加一级，第<math>n</math>级升级所需经验为<math>\begin{cases}
+60n + 40, 1 \leq n \leq 5 \\
+160n - 560, 6 \leq n \leq 15 \\
+400n - 2400, n \geq 16 \\
+\end{cases}</math>。同一[[世界]]中的所有的矿境合成台的等级和经验值都相同。
+
+==== 合成矿境 ====
+当玩家打开矿境合成台的界面时，若下一个矿境是特殊矿境，则界面只会显示一个[[矿境（物品）|矿境物品]]。否则，将显示矿境合成界面。
+
+界面下方为当前世界已经解锁的矿境效果；右侧为未解锁的[[矿境效果]]，将鼠标悬浮其上还会提示此效果的解锁方式；上方为合成区域。玩家只能将下方的矿境原料移动到上方槽位以及将其取下，而其他矿境原料均不可交互。
+
+默认情况下，合成区域的第一个矿境原料（以中心槽位沿螺旋线计序）带有多种矿境效果，且至少包含一种世界类型、出口类型、生物群系、友好生物、敌对生物和基础岩石类型类的矿境效果；而后面的<code>-{}-<''槽位数量''> / 3</code>（向下取整）个槽位也预置了带有随机矿境效果的矿境原料，但是永远不会出现“矿境事件”“如鱼失水”“柯伊伯带世界”“末影龙Boss战”“愤怒恶魂Boss战”“袭击！”“凋灵Boss战”“末影人Boss战”“惊悚恐怖骷髅头”{{note|此处有关内容是根据进度中的描述撰写的。语言文件中不存在该矿境效果的英文文本。}}“凋灵Boss战”“监守者Boss战”和“小怪物大麻烦Boss战”，且如果矿境效果未解锁则权重降低90%。
+
+当玩家将至少一个矿境原料提交后，合成区域中心槽位会生成一个矿境物品。如果矿境效果之间存在冲突，则较后槽位的矿境效果优先级更高。合成结果即中心槽位的矿境物品。
+
+=== 生成矿境传送方块 ===
+点击中心槽位的矿境物品后，玩家会立刻退出界面，且矿境合成台上方会生成一个[[矿境传送方块]]。此时矿境合成台的界面中所有物品都会旋转，除中心槽位外的所有槽位也会沿螺旋线移动。
+
+=== 生成奖励 ===
+当玩家挑战结束矿境后，矿境合成台会生成一个对应的矿境物品。若玩家挑战成功，则还会生成经验值和[[微光钥匙]]。
+
+=== 容器 ===
+矿境合成台最初具有3个槽位，每升一级会增加1个槽位，在48级时达到50个槽位后不再增加。
+
+== 音效 ==
+{{Sound table
+|sound=Wood dig1.ogg
+|sound2=Wood dig2.ogg
+|sound3=Wood dig3.ogg
+|sound4=Wood dig4.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source=方块
+|description=破坏方块
+|id=block.wood.break
+|translationkey=subtitles.block.generic.break
+|nocat=
+}}
+{{Sound table
+|sound=Wood step1.ogg
+|sound2=Wood step2.ogg
+|sound3=Wood step3.ogg
+|sound4=Wood step4.ogg
+|sound5=Wood step5.ogg
+|sound6=Wood step6.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.wood.fall
+|translationkey=subtitles.block.generic.fall
+}}
+{{Sound table
+|sound=Wood step1.ogg
+|sound2=Wood step2.ogg
+|sound3=Wood step3.ogg
+|sound4=Wood step4.ogg
+|sound5=Wood step5.ogg
+|sound6=Wood step6.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source=方块
+|description=挖掘方块
+|id=block.wood.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Wood dig1.ogg
+|sound2=Wood dig2.ogg
+|sound3=Wood dig3.ogg
+|sound4=Wood dig4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source=方块
+|description=放置方块
+|id=block.wood.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Wood step1.ogg
+|sound2=Wood step2.ogg
+|sound3=Wood step3.ogg
+|sound4=Wood step4.ogg
+|sound5=Wood step5.ogg
+|sound6=Wood step6.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.wood.step
+|translationkey=subtitles.block.generic.footsteps
+}}
+{{Sound table
+|sound=Loom take result1.ogg
+|sound2=Loom take result2.ogg
+|subtitle={{tp|subtitles.ui.loom.take_result}}
+|source=方块
+|description=挑战矿境成功
+|id=ui.loom.take_result
+|translationkey=subtitles.ui.loom.take_result
+}}
+{{Sound table
+|sound=Villager no1.ogg
+|sound2=Villager no2.ogg
+|sound3=Villager no3.ogg
+|subtitle={{tp|subtitles.entity.villager.no}}
+|source=方块
+|id=entity.villager.no
+|translationkey=subtitles.entity.villager.no
+|description=挑战矿境失败
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|Mine Crafter
+|spritetype=block
+|nameid=mine_crafter
+|generatetranslationkeys=java
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=Mine Crafter
+|spritetype=block
+|nameid=mine_crafter
+|foot=1}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+矿境合成台拥有与其相关联的方块实体，以保存矿境合成台的附加数据。
+
+{{see also|方块实体数据格式}}
+
+{{/BE}}
+
+== 进度 ==
+{{Load advancements|page=进度/25w14craftmine|adventure.mine_crafter_upgraded}}
+
+== 注释 ==
+{{notelist}}
+
+== 导航 ==
+{{Navbox jokes|25w14craftmine}}
+
+[[Category:方块]]
+
+[[de:25w14craftmine/Mine Crafter]]
+[[en:Mine Crafter]]
+[[ja:Mine Crafter]]
+[[pl:Mine Crafter]]
+[[pt:Edição Java 25w14craftmine/Mine Crafter]]
+[[ru:Сборщик шахт]]

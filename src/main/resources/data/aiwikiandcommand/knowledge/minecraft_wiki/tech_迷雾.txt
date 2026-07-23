@@ -1,0 +1,337 @@
+# 页面: 迷雾
+# 来源: https://zh.minecraft.wiki/w/%E8%BF%B7%E9%9B%BE
+# 分类: 基岩版独有信息, 环境
+# 抓取时间: 2026-07-14 17:37:09
+# 原始 Wikitext 内容:
+
+{{for|{{el|bedrock}}中相关的命令|命令/fog}}
+'''迷雾（Fog'''，亦称'''雾）'''是一种用于限制玩家观测范围的渲染效果，通常用来营造环境氛围，或用来模糊远处[[区块]]的直线边界。
+
+== Java版 ==
+=== 迷雾属性 ===
+当前迷雾有颜色、起始距离、可见距离、形状四个属性。
+
+迷雾的透明度在起始距离以内为完全透明，随距离增加不透明度呈线性增长，在大于等于可见距离处为完全不透明。起始距离可能为负，这时不存在完全透明的范围。
+
+迷雾的形状有两种：
+* 球形：距离使用欧几里得距离计算，形成球形的迷雾范围。
+* 圆柱形：分别计算水平距离和垂直距离，取两者的较大值作为最终距离，从而形成圆柱形的迷雾。
+
+=== 迷雾类型 ===
+迷雾有6种类型。当前的迷雾根据相机所处的环境在这几种中切换。
+
+==== 距离迷雾 ====
+[[File:Distance Fog.png|thumb|距离迷雾遮挡了天空颜色的界线和区块的渲染边缘]]
+'''距离迷雾'''指在正常情况下在[[渲染距离]]处渲染的迷雾，在低渲染距离时变得更明显。
+
+距离迷雾的可见距离等于当前的渲染距离，形状为圆柱体。其起始距离取决于该迷雾是遮挡天空还是其他物体，如为天空，起始距离为0，否则为<math>clamp(0.9x,x-64,x-4)</math>，其中<math>x</math>为渲染距离，以方块为单位。它的颜色主要取决于当前相机所处的[[生物群系]]，并受以下因素的影响：
+* 当前一天中的时间，以及当前的维度。迷雾的效果由环境属性控制，只有主世界定义了时间对迷雾效果的影响。
+** 对于主世界，颜色随一天中的时间变化而变化。其颜色变化乘数''B''可以由以下公式计算出，其中''T''是一天中的时间。
+*** <math>A=\max\left\{0, \min\left\{0.5 + 2\cos(2\pi T), 1\right\}\right\}</math>
+*** <math>B=
+\left[ {\begin{array}{cc}
+ 0.94A+0.06\\
+ 0.94A+0.06\\
+ 0.91A+0.09\\
+\end{array} } \right]</math>
+** 对于下界，颜色的亮度不受一天中时间的影响。
+** 对于末地，颜色的亮度不受一天中时间的影响，而是取生物群系迷雾颜色亮度的15%。
+* 当前天空的颜色（受生物群系、一天中的时间、天气和闪电的影响）和渲染距离。
+** 渲染距离越小，迷雾的颜色就越接近天空颜色。
+** 当渲染距离为32个区块时，迷雾的颜色不再受天空颜色的影响。
+* 如果渲染距离不小于4个区块，则在日出或日落期间，迷雾的颜色受玩家所面对的方向影响。
+* 当前的[[天气]]。
+
+==== 水下迷雾 ====
+当相机在[[水]]中时，使用'''水下迷雾'''。水下迷雾为球形，起始距离为-8格，其颜色取决于相机所在的生物群系。当相机在水中从一个群系进入另一个群系时，水下迷雾的颜色需要5秒的时间逐渐过渡。
+
+刚入水时可见距离较小，为24格，显得迷雾十分浓厚。随着在水下时间的延长，可见距离而逐渐变大，最大为96个方块；且颜色不断变暗，最暗为生物群系水下迷雾颜色<math>(R,G,B)</math>的<math>\frac{1}{\max(R,G,B)}</math>倍。
+
+[[沼泽]]和[[红树林沼泽]]中的水下迷雾可见距离为正常情况下的0.85倍，比大多数其他生物群系显得更浓，由[[环境属性]]<code>visual/water_fog_radius</code>控制，它们具有0.85倍率的乘算修饰符。
+
+在[[旁观模式]]下，若正处于其他生物视角，则不存在刚入水时的过渡，可见距离永远为96，亮度永远为生物群系水下迷雾颜色<math>(R,G,B)</math>的<math>\frac{1}{\max(R,G,B)}</math>倍。
+
+如果水下迷雾的可见距离超过了渲染距离，则使用渲染距离作为可见距离，且形状变为圆柱形。
+
+==== 熔岩迷雾 ====
+当相机处于[[熔岩]]中时，会应用'''熔岩迷雾'''。熔岩迷雾为球形，其颜色为{{color|hsl(10,100%,30%)|RGB(0.6,0.1,0.0)}}。熔岩迷雾的可见距离极小，只有1个方块。其起始距离为0.25格。拥有[[抗火]]效果可以使可见距离变为5个方块，起始距离变为0格。在[[旁观模式]]下，熔岩迷雾的起始距离为-8格，可见距离为渲染距离的一半。
+
+==== 细雪迷雾 ====
+当相机处于[[细雪]]中时，会应用'''细雪迷雾'''。细雪迷雾为球形，其颜色为{{color|rgb(158.865,187.17,200.175)|RGB(0.623, 0.734, 0.785)}}。细雪迷雾的可见距离只有2个方块。其起始距离为0格。在[[旁观模式]]下，细雪迷雾的起始距离为-8格，可见距离为渲染距离的一半。
+
+==== 大气迷雾 ====
+当相机处于空气中时，会应用'''大气迷雾'''。大气迷雾为球形，其颜色同距离迷雾。大气迷雾的起始距离和可见距离随降雨的大小和[[天空光照]]变化：相机所在位置不降雨或天空光照小于等于8时，起始距离为0格，可见距离为1024格；随着降雨逐渐变强、天空光照由8逐渐增长到15，起始距离会逐渐降低到-160格，可见距离会逐渐降低到768格。不降雨的生物群系的距离衰减强度只有会降雨生物群系的一半。
+
+若玩家在下界维度，则迷雾的起始距离为10格，可见距离为96格。
+
+若玩家处于发生[[末影龙]]Boss事件的维度时，则迷雾的起始距离至多为10格，此效果在其他大气迷雾距离修饰计算后使用。
+
+=== 迷雾修饰器 ===
+==== 高度 ====
+如果维度不是[[超平坦]]的，距离迷雾和水下迷雾的亮度受高度影响，为原本亮度的<code>power(clamp((Y-MinY)*0.03125,0.0,1.0))</code>倍，这意味着颜色从<code>MinY+32</code>开始逐渐变暗，直到<code>MinY</code>处变为纯黑色。
+
+==== 失明和黑暗 ====
+[[失明]]和[[黑暗]]状态效果会改变距离迷雾和水下迷雾，使其颜色变为纯黑色，形状变为球形。失明效果将起始距离改为1.25个方块，可见距离改为5个方块；而黑暗则将起始距离改为11.25个方块，可见距离改为15个方块。
+
+失明的优先级比黑暗更高。黑暗效果有淡入和淡出，而失明没有淡入，只有淡出。
+
+==== 凋灵 ====
+如果当前存在[[凋灵]]Boss事件，迷雾的颜色变得更暗并且偏红。
+
+==== 夜视 ====
+拥有[[夜视]]状态效果且没有[[黑暗]]效果，会使距离迷雾、熔岩迷雾和细雪迷雾的颜色变得更亮。
+
+== 基岩版 ==
+{{IN|bedrock}}迷雾有六种'''类型'''，当前的迷雾根据相机所处的环境在这六种中切换：
+* <code>air</code>：当相机在空气中时；
+* <code>water</code>：当相机在水中时；
+* <code>lava</code>：当相机处于熔岩中，且没有[[抗火]]状态效果时；
+* <code>lava_resistance</code>：当相机处于熔岩中，且有[[抗火]]状态效果时；
+* <code>weather</code>：当相机处于空气中，且当前正在下雨时；
+* <code>powder_snow</code>：当相机在细雪中时。
+
+在资源包中，一个'''迷雾设定（Fog Setting）'''文件中可以配置上述一种或多种类型的迷雾。
+
+当前所使用的迷雾设定可以来源于以下四个方面：
+* 自定义迷雾栈（来自命令{{cmd|fog}}）；
+* 当前生物群系所使用的迷雾设定；
+* 生物群系默认迷雾设定；
+* 基岩游戏引擎的硬编码默认迷雾设定。
+
+以上四个方面的迷雾设定按顺序放入同一个列表中，当游戏需要获取当前应使用的迷雾设定时，它会从列表顶部（自定义迷雾栈中的最新迷雾设定）到底部（基岩游戏引擎的硬编码默认迷雾设定）依次查找，直到找到一个配置了当前迷雾类型的迷雾设定。
+
+换言之，这相当于这四个方面的所有迷雾设定都按顺序从底部（基岩游戏引擎的硬编码默认迷雾设定）到顶部（自定义迷雾栈中的最新迷雾设定）逐个应用。后应用的迷雾设定中的迷雾类型配置将覆盖先应用的迷雾设定中的配置。各个迷雾类型相互独立。
+
+另请参阅[https://learn.microsoft.com/en-us/minecraft/creator/reference/content/fogsreference/examples/fogsintroduction 此官方文档]。
+
+=== 生物群系中的水雾 ===
+处于不同[[生物群系]]中的[[水]]有不同的水雾颜色与距离设定。
+{| class="wikitable" style="text-align:center" data-description="Water Fog Color & Distance in Bedrock Edition"
+! 生物群系 !! 水雾颜色 !! 水雾距离
+|-
+| {{BiomeLink|Plains}} || rowspan="2" | {{color|#44AFF5}} || rowspan="2" | &ndash;
+|-
+| {{BiomeLink|Sunflower Plains}}
+|-
+| {{BiomeLink|Desert}} || {{color|#32A598}} || &ndash;
+|-
+| {{BiomeLink|Windswept Hills}} || {{color|#007BF7}} || &ndash;
+|-
+| {{BiomeLink|Forest}} || {{color|#1E97F2}} || &ndash;
+|-
+| {{BiomeLink|Flower Forest}} || {{color|#20A3CC}} || &ndash;
+|-
+| {{BiomeLink|Taiga}} || {{color|#287082}} || &ndash;
+|-
+| {{BiomeLink|Taiga Mountains}} || {{color|#1E6B82}} || &ndash;
+|-
+| {{BiomeLink|Swamp}} || {{color|#4C6559}} || 8
+|-
+| {{BiomeLink|Swamp Hills}} || {{color|#4C6156}} || 8
+|-
+| {{BiomeLink|River}} || {{color|#0084FF}} || 30
+|-
+| {{BiomeLink|Nether Wastes}} || rowspan="4" | {{color|#905957}} || rowspan="4" | &ndash;
+|-
+| {{BiomeLink|Crimson Forest}}
+|-
+| {{BiomeLink|Warped Forest}}
+|-
+| {{BiomeLink|Soul Sand Valley}}
+|-
+| {{BiomeLink|The End}} || {{color|#62529E}} || &ndash;
+|-
+| {{BiomeLink|Frozen River}} || {{color|#185390}} || 20
+|-
+| {{BiomeLink|Snowy Plains}} || rowspan="2" | {{color|#14559B}} || rowspan="2" | &ndash;
+|-
+| {{BiomeLink|Ice Spikes}}
+|-
+| {{BiomeLink|Snowy Mountains}} || {{color|#1156A7}} || &ndash;
+|-
+| {{BiomeLink|Mushroom Fields}} || {{color|#8A8997}} || &ndash;
+|-
+| {{BiomeLink|Mushroom Field Shore}} || {{color|#818193}} || &ndash;
+|-
+| {{BiomeLink|Beach}} || {{color|#157CAB}} || 60
+|-
+| {{BiomeLink|Desert Hills}} || {{color|#1A7AA1}} || &ndash;
+|-
+| {{BiomeLink|Wooded Hills}} || {{color|#056BD1}} || &ndash;
+|-
+| {{BiomeLink|Taiga Hills}} || {{color|#236583}} || &ndash;
+|-
+| {{BiomeLink|Mountain Edge}} || {{color|#045CD5}} || &ndash;
+|-
+| {{BiomeLink|Jungle}} || rowspan="2" | {{color|#14A2C5}} || rowspan="2" | &ndash;
+|-
+| {{BiomeLink|Bamboo Jungle}}
+|-
+| {{BiomeLink|Jungle Hills}} || rowspan="3" | {{color|#1B9ED8}} || rowspan="3" | &ndash;
+|-
+| {{BiomeLink|Modified Jungle}}
+|-
+| {{BiomeLink|Bamboo Jungle Hills}}
+|-
+| {{BiomeLink|Sparse Jungle}} || rowspan="2" | {{color|#0D8AE3}} || rowspan="2" | &ndash;
+|-
+| {{BiomeLink|Modified Jungle Edge}}
+|-
+| {{BiomeLink|Stony Shore}} || {{color|#0D67BB}} || &ndash;
+|-
+| {{BiomeLink|Snowy Beach}} || {{color|#1463A5}} || 50
+|-
+| {{BiomeLink|Birch Forest}} || {{color|#0677CE}} || &ndash;
+|-
+| {{BiomeLink|Birch Forest Hills}} || {{color|#0A74C4}} || &ndash;
+|-
+| {{BiomeLink|Dark Forest}} || {{color|#3B6CD1}} || &ndash;
+|-
+| {{BiomeLink|Pale Garden}} || {{color|#556980}} || &ndash;
+|-
+| {{BiomeLink|Snowy Taiga}} || rowspan="2" | {{color|#205E83}} || rowspan="2" | &ndash;
+|-
+| {{BiomeLink|Snowy Taiga Mountains}}
+|-
+| {{BiomeLink|Snowy Taiga Hills}} || {{color|#245B78}} || &ndash;
+|-
+| {{BiomeLink|Old Growth Pine Taiga}} || rowspan="3" | {{color|#2D6D77}} || rowspan="3" | &ndash;
+|-
+| {{BiomeLink|Old Growth Spruce Taiga}}
+|-
+| {{BiomeLink|Giant Spruce Taiga Hills}}
+|-
+| {{BiomeLink|Giant Tree Taiga Hills}} || {{color|#286378}} || &ndash;
+|-
+| {{BiomeLink|Windswept Forest}} || rowspan="3" | {{color|#0E63AB}} || rowspan="3" | &ndash;
+|-
+| {{BiomeLink|Windswept Gravelly Hills}}
+|-
+| {{BiomeLink|Gravelly Mountains}}
+|-
+| {{BiomeLink|Savanna}} || {{color|#2C8B9C}} || &ndash;
+|-
+| {{BiomeLink|Windswept Savanna}} || rowspan="2" | {{color|#2590A8}} || rowspan="2" | &ndash;
+|-
+| {{BiomeLink|Savanna Plateau}}
+|-
+| {{BiomeLink|Badlands}} || {{color|#4E7F81}} || &ndash;
+|-
+| {{BiomeLink|Eroded Badlands}} || rowspan="2" | {{color|#497F99}} || rowspan="2" | &ndash;
+|-
+| {{BiomeLink|Wooded Badlands}}
+|-
+| {{BiomeLink|Badlands Plateau}} || rowspan="2" | {{color|#55809E}} || rowspan="2" | &ndash;
+|-
+| {{BiomeLink|Modified Badlands Plateau}}
+|-
+| {{BiomeLink|Mangrove Swamp}} || {{color|#3A7A6A}} || &ndash;
+|-
+| {{BiomeLink|Cherry Grove}} || {{color|#5DB7EF}} || &ndash;
+|-
+| {{BiomeLink|Ocean}} || {{color|#1165B0}} || 60
+|-
+| {{BiomeLink|Deep Ocean}} || {{color|#1463A5}} || 60
+|-
+| {{BiomeLink|Warm Ocean}} || {{color|#0289D5}} || 60
+|-
+| {{BiomeLink|Deep Warm Ocean}} || {{color|#0686CA}} || 60
+|-
+| {{BiomeLink|Lukewarm Ocean}} || {{color|#0A74C4}} || 60
+|-
+| {{BiomeLink|Deep Lukewarm Ocean}} || {{color|#0E72B9}} || 60
+|-
+| {{BiomeLink|Cold Ocean}} || {{color|#14559B}} || 60
+|-
+| {{BiomeLink|Deep Cold Ocean}} || {{color|#185390}} || 60
+|-
+| {{BiomeLink|Frozen Ocean}} || {{color|#174985}} || 60
+|-
+| {{BiomeLink|Deep Frozen Ocean}} || {{color|#1A4879}} || 60
+|-
+| 默认<br>（未在上方列出的生物群系） || {{color|#44AFF5}} || 15
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java classic}}
+|{{HistoryLine||0.0.12a|加入了水下和熔岩迷雾。
+|此版本中的熔岩迷雾类似于水下迷雾，只是颜色为橙色。}}
+|{{HistoryLine||0.0.13a|熔岩迷雾现在更红了。}}
+|{{HistoryLine||0.0.14a|加入了距离迷雾。}}
+|{{HistoryLine|java indev}}
+|{{HistoryLine||0.31|dev=20100122-2251|迷雾的颜色现在可以通过地图编辑进行修改。}}
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100227-1414|随着[[Indev世界格式]]的弃用，迷雾的颜色不再可自定义。}}
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了[[虚空迷雾]]。}}
+|{{HistoryLine|||dev=pre2|调整了虚空迷雾的强度，减弱了极端程度。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.1|dev=11w48a|在创造模式下不再有虚空迷雾。}}
+|{{HistoryLine||1.7.2|dev=13w36a|迷雾的起始距离变为原来的两倍。}}
+|{{HistoryLine|||dev=13w38a|回退了13w36a的更改。
+|迷雾现在覆盖25%的渲染距离，而13w36a之前为75%。
+|现在迷雾颜色会随着玩家所处位置的光照变化，亮度越低，迷雾越暗。<ref name="MC-31681">{{bug|MC-31681|||Fixed}}</ref>}}
+|{{HistoryLine||1.8|dev=14w34c|移除了虚空迷雾<ref>{{tweet|TheMogMiner|501766046681153536}}</ref>和虚空[[粒子]]。}}
+|{{HistoryLine||1.13|dev=18w08b|现在，在入水后随着时间的推移水下迷雾逐渐变稀薄。|[[水下呼吸（魔咒）|水下呼吸]]魔咒和[[水下呼吸（状态效果）|水下呼吸]]状态效果不再对水下迷雾有影响。}}
+|{{HistoryLine|||dev=18w10a|水下迷雾颜色现在因生物群系而异。|在[[旁观模式]]下，水下迷雾不再有刚入水时的过渡。}}
+|{{HistoryLine||1.13.1|dev=pre1|天空远处的颜色不再根据玩家所处位置的光照而变化。<ref name="MC-31681"/>}}
+|{{HistoryLine||1.16|dev=20w09a|现在下界生物群系迷雾之间会平滑过渡。<ref>{{bug|MC-170879|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=pre3|现在当玩家拥有[[抗火]]状态效果时，在熔岩中的能见度会略有提高。}}
+|{{HistoryLine||1.16.2|dev=pre1|加入[[维度类型/1.21.11前|维度效果]]，在自定义维度中的迷雾受维度效果影响。}}
+|{{HistoryLine||1.17|dev=20w46a|加入了[[细雪]]，及其专用的迷雾类型。}}
+|{{HistoryLine|||dev=20w48a|更改了相机浸入熔岩的判定方式。<ref>{{bug|MC-3615|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=21w10a|距离迷雾现在是球形的，不再根据视角而改变角度。<ref>{{bug|MC-32452|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=21w11a|现在，水下迷雾在[[旁观模式]]下要更稀薄。<ref>{{bug|MC-214186}}</ref>
+|现在，熔岩迷雾在[[旁观模式]]下要更稀薄。<ref>{{bug|MC-71530|||Fixed}}</ref><ref>{{bug|MC-219893}}</ref>
+|现在，细雪迷雾在[[旁观模式]]下要更稀薄。<ref>{{bug|MC-213743|||Fixed}}</ref><ref>{{bug|MC-219894}}</ref>}}
+|{{HistoryLine||1.18.1|dev=pre1|世界迷雾会从离玩家更远的位置上开始显示，以提高远处地形的可见度。
+|现在迷雾以圆柱形范围显示，而不是以前的球形。}}
+|{{HistoryLine||1.21.6|dev=25w19a|加入了2种迷雾类型：维度或Boss迷雾和大气迷雾。
+|更改了迷雾效果，以及降雨或雷暴天气时迷雾效果会更强。
+|大气迷雾强度现在会随天空光照等级降低。
+|现在失明和黑暗迷雾修饰器在水下迷雾之前生效，使其不再影响水下迷雾。<ref name="MC-298856">{{bug|MC-298856|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=25w20a|降低了大气迷雾强度。
+|现在大气迷雾强度会在天空光照降低到8时达到最低值，即强化了天空光照对大气迷雾强度的影响。}}
+|{{HistoryLine||1.21.7|dev=rc1|现在失明迷雾和黑暗迷雾能正常影响水下迷雾。<ref name="MC-298856"/>}}
+|{{HistoryLine||1.21.11|dev=25w42a|现在水下的生物群系迷雾的颜色和距离会根据玩家的位置相应混合，以与通常情况下的生物群系迷雾和天空颜色保持一致。}}
+|{{HistoryLine|||dev=25w44a|移除了维度或Boss迷雾，其效果由大气迷雾重新实现。此前，它的起始距离为渲染距离的0.05倍，可见距离为渲染距离的一半，但不会超过96格。}}
+|{{HistoryLine|||dev=pre1|现在大气迷雾的初始距离不会低于96。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|增加了距离迷雾、水下迷雾和熔岩迷雾。
+|所有迷雾类型都是基于相机角度的圆柱形。距离迷雾从渲染距离的50%开始，可见距离为渲染距离。水下和熔岩迷雾起始距离都为0，可见距离分别为32个方块和3个方块。}}
+|{{HistoryLine||0.5.0|距离迷雾现在起始距离为渲染距离的90%。}}
+|{{HistoryLine||0.6.0|距离迷雾现在起始距离为渲染距离的60%。}}
+|{{HistoryLine||0.8.0|dev=build 1|距离迷雾现在起始距离为渲染距离的70%。
+|由于在此版本中对块渲染进行了更改，迷雾现在仅在距离玩家足够远的区块里可见。这可能会导致有和没有距离迷雾的区域之间出现清晰的边界，尤其是在较低的渲染距离设置下。水下和熔岩迷雾也不再可见，因为这个版本使得在水下或熔岩中不会渲染远距离的区块。}}
+|{{HistoryLine|||dev=build 4|水和熔岩迷雾再次近距离区块中可见。}}
+|{{HistoryLine||0.9.0|dev=build 1|距离迷雾现在起始距离为<math>x-(x/2+8)</math>，<math>x</math>为渲染距离。
+|现在限制72个方块为最小起始距离，如果玩家将渲染距离设置为4个区块，则会导致故障行为。}}
+|{{HistoryLine|||dev=build 2|修复了上一个版本中的故障行为，现在限制该<math>\max(x-4,72)</math>为最小起始距离，其中<math>x</math>为渲染距离。}}
+|{{HistoryLine||0.10.0|dev=build 1|距离迷雾现在起始距离为<math>x-(x/3.2+30)</math>，<math>x</math>为渲染距离。
+|距离迷雾的可见距离现在为渲染距离的80%。
+|移除了72个方块的最小起始距离限制。
+|水下和熔岩迷雾的可见距离分别更改为8个方块和1个方块。}}
+|{{HistoryLine|||dev=build 2|现在所有迷雾都是球形的。
+|距离迷雾现在起始距离为<math>x-(x/2+32)</math>，<math>x</math>为渲染距离。
+|距离迷雾的可见距离更改回了渲染距离。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入<code>weather</code>迷雾类型。}}
+|{{HistoryLine||0.14.2|距离迷雾现在起始距离为<math>x-(x/2+12)</math>，<math>x</math>为渲染距离。
+|距离迷雾的可见距离更改为渲染距离减16个方块。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|加入了<code>lava_resistance</code>迷雾类型。}}
+|{{HistoryLine||1.16.200|exg=caves_and_cliffs|dev=1.16.200.52|加入了<code>powder_snow</code>迷雾类型。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[de:Nebel]]
+[[en:Fog]]
+[[es:Niebla]]
+[[ja:霧]]
+[[lzh:霧]]
+[[pt:Neblina]]

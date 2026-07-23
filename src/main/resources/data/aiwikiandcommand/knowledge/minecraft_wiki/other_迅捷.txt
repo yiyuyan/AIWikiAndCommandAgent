@@ -1,0 +1,208 @@
+# 页面: 迅捷
+# 来源: https://zh.minecraft.wiki/w/%E8%BF%85%E6%8D%B7
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 状态效果
+# 抓取时间: 2026-07-14 17:36:52
+# 原始 Wikitext 内容:
+
+{{about|一种状态效果|玩家通过不同方法移动的各种不同的速度|运输#方式|一种属性|属性/速度}}
+{{Infobox effect
+|image=Speed.png
+|invimage=Potion of Swiftness
+|invimage2=Splash Potion of Swiftness
+|invimage3=Lingering Potion of Swiftness
+|invimage4=Arrow of Swiftness
+|invimage5=----
+|invimage6=Potion of Swiftness Extended
+|invimage7=Splash Potion of Swiftness Extended
+|invimage8=Lingering Potion of Swiftness Extended
+|invimage9=Arrow of Swiftness Extended
+|invimage10=----
+|invimage11=Potion of Swiftness Enhanced
+|invimage12=Splash Potion of Swiftness Enhanced
+|invimage13=Lingering Potion of Swiftness Enhanced
+|invimage14=Arrow of Swiftness Enhanced
+}}
+
+'''迅捷（Speed）'''是一种提升[[生物]]行走速度的[[状态效果]]。
+
+== 效果 ==
+受影响生物的行走速度增加20%×效果等级。
+
+增加玩家的视场角（FOV），玩家速度属性值（包含修饰符）为<math>s</math>，玩家速度基本属性值（无修饰符）为<math>m</math>，视场角修饰符<math>f</math>公式为：<math>f=\frac{s}{2\times m}+0.5</math>，如果处于飞行状态，这个值会×1.1。
+
+最终玩家视角=玩家选项中视场角的值×视场角修饰符<math>f</math>。
+
+该效果只能影响生物与地面接触时的移动，不能影响[[幻翼]]、[[恼鬼]]、[[潜影贝]]等使用其他方式移动的生物<ref>{{bug|MC-40949||属性movement_speed不对飞行生物生效}}</ref>，也不能影响玩家在下落、跳跃、飞行等时的移动<ref>{{bug|MC-2112}}</ref>，尽管视场角仍会改变。
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+ ! 来源
+ ! 效果等级
+ ! 时长
+ ! 备注
+ |-
+ | {{ItemLink|Potion of Swiftness}}
+ | I
+ | 3:00
+ | 如果目标距离足够远，{{EntityLink|Witch}}会喝下此药水。
+ |-
+ | {{ItemLink|Potion of Swiftness}}（延长版）
+ | I
+ | 8:00
+ |
+ |-
+ | {{ItemLink|Potion of Swiftness}}（增强版）
+ | II
+ | 1:30
+ |
+ |-
+ | {{ItemLink|Splash Potion of Swiftness}}
+ | I
+ | 3:00
+ |
+ |-
+ | {{ItemLink|Splash Potion of Swiftness}}（延长版）
+ | I
+ | 8:00
+ |
+ |-
+ | {{ItemLink|Splash Potion of Swiftness}}（增强版）
+ | II
+ | 1:30
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Swiftness}}
+ | I
+ | 0:45
+ | [[不祥之物生成器]]会生成此药水
+ |-
+ | {{ItemLink|Lingering Potion of Swiftness}}（延长版）
+ | I
+ | 2:00
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Swiftness}}（增强版）
+ | II
+ | 0:22
+ |
+ |-
+ | {{ItemLink|Arrow of Swiftness}}
+ | I
+ | 0:22
+ | 
+ |-
+ | {{ItemLink|Arrow of Swiftness}}（延长版）
+ | I
+ | 1:00
+ | 
+ |-
+ | {{ItemLink|Arrow of Swiftness}}（增强版）
+ | II
+ | 0:11
+ | 
+ |-
+ | 增益效果设置为迅捷的{{BlockLink|Beacon}}
+ | I
+ | 0:05 - 0:17
+ | 在范围内不断给予玩家效果
+ |-
+ | 增益效果设置为迅捷II的{{BlockLink|Beacon}}
+ | II
+ | 0:05 - 0:17
+ | 在范围内不断给予玩家效果；需要信标等级为4
+ |-
+ | 自然生成{{only|JE}}
+ | I
+ | 无限
+ | 只对困难难度中的{{EntityLink|spider}}有效。
+ |}
+
+== 数据值 ==
+=== ID ===
+{{el|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Speed
+|spritetype=effect
+|nameid=speed
+|foot=1}}
+
+{{el|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Speed
+|spritetype=effect
+|nameid=speed
+|translationkey=potion.moveSpeed
+|showaliasids=1
+|aliasid=1
+|foot=1}}
+
+== 进度 ==
+{{load advancements|prefix=nether|all_potions;all_effects}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了迅捷，目前无法获得。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|[[File:Speed JE1 BE1.png|32px]] 加入了迅捷效果的图标。
+|加入了药水，可以提供迅捷，但无法正常获得。
+|现在饮用[[奶]]会移除迅捷效果。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|现在可以通过[[酿造台]]酿造迅捷药水。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[喷溅型迅捷药水]]，可以提供迅捷。}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了[[信标#历史|Work in Progress]]方块，可以为玩家提供迅捷效果。}}
+|{{HistoryLine|||dev=12w34a|移除了Work in Progress方块。}}
+|{{HistoryLine|||dev=12w36a|加入了[[信标]]，可以为玩家提供迅捷效果。}}
+|{{HistoryLine||1.6.1|dev=13w24a|在困难难度中，生成的蜘蛛现在有概率带有迅捷效果。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了[[迅捷之箭]]，可以提供迅捷。}}
+|{{HistoryLine|||dev=15w33a|加入了[[滞留型迅捷药水]]，可以提供迅捷。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Speed JE2.png|32px]] 更改了图标纹理。
+|现在迅捷可以通过食用[[谜之炖菜]]获得。}}
+|{{HistoryLine|||dev=18w43b|[[File:Speed JE3 BE2.png|32px]] 修复了图标纹理。}}
+|{{HistoryLine||1.19.4|dev=pre3|将迅捷的颜色由{{color|#7CAFC6}}改为{{color|#33EBFF}}。}}
+|{{HistoryLine||1.20.2|dev=23w32a|在此版本前，迅捷的存档ID是1。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w13a|加入了会生成滞留型迅捷药水的[[不祥之物生成器]]。}}
+|{{HistoryLine||1.21|dev=24w18a|24w13a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Speed JE1 BE1.png|32px]] 加入了迅捷效果，但无法获取。}}
+|{{HistoryLine||0.12.1|dev=build 1|迅捷可以通过药水和[[喷溅药水]]获得。}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了女巫，会给自己服下迅捷药水来获得迅捷。}}
+|{{HistoryLine||0.15.0|dev=build 1|迅捷可以通过[[迅捷之箭]]获得。}}
+|{{HistoryLine||0.16.0|dev=build 4|迅捷可以通过信标获得。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|迅捷可以通过[[滞留药水]]获得。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.11.0|dev=1.11.0.5|[[File:Speed JE3 BE2.png|32px]] 更改了图标纹理。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|将迅捷粒子的颜色由{{color|#7CAFC6}}改为{{color|#33EBFF}}。}}
+|{{HistoryLine|||dev=1.19.80.22|回退了上个版本对粒子颜色的更改。}}
+|{{HistoryLine||1.20.0|exg=next_major_update|dev=1.20.0.20|将迅捷的颜色由{{color|#7CAFC6}}改为{{color|#33EBFF}}。}}
+|{{HistoryLine|||exg=none|dev=1.20.0.21|1.20.0.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.23|[[不祥之物生成器]]现在会生成滞留型迅捷药水。}}
+}}
+
+== 你知道吗 ==
+* 具有高等级迅捷效果时，玩家可以走得比区块加载得还快。
+* {{in|java}}迅捷允许[[史莱姆]]跳得更远，高等级的迅捷效果可以使史莱姆一下子就跳出玩家视野。
+
+== 画廊 ==
+<gallery>
+Swiftnessspider.png|自然生成的带有迅捷效果的蜘蛛
+Swiftness Effect.png|带有迅捷效果的玩家
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Schnelligkeit]]
+[[en:Speed]]
+[[es:Velocidad]]
+[[fr:Rapidité]]
+[[ja:移動速度上昇]]
+[[ko:속도 증가]]
+[[pt:Velocidade]]
+[[ru:Скорость]]
+[[uk:Швидкість]]

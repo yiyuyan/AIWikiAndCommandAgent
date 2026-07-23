@@ -1,0 +1,217 @@
+# 页面: Java版23w03a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8823w03a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=23w03a
+|image=23w03a.png
+|image2=Java Edition 23w03a Simplified.png\Java Edition 23w03a Traditional.png\Java Edition 23w03a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2023年1月18日
+|jsonhash=b958db10f1540e51b61f70dbaf0be86b40def147
+|clienthash=dd6cb06d65063769f7581ac2f5f800fe9531e28a
+|clientmap=f7de4f767c3d8d9c5c4779933f175eeb738d7f65
+|serverhash=b033d57035b293a9eda548db0615c1c89c21ea28
+|servermap=030aa6a26885d62a55864b16e1a2000ba91de726
+|parent=1.19.4
+|prevparent=1.19.3
+|prev=
+|next=23w04a
+|nextparent=1.20
+}}<onlyinclude>{{tr|mode=H|滑块|滑桿}}{{tr|mode=H|协议|協定}}{{tr|mode=H|重置|重設}}{{tr|mode=H|会话|session|對談}}
+
+'''23w03a'''是[[Java版1.19.4]]的首个快照，发布于2023年1月18日<ref>{{snap|23w03a|January 18, 2023}}</ref>，加入了{{cmd|ride}}命令和新的[[菜单屏幕]]交互方式，做了一些技术性更改，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''[[游戏规则]]'''
+* 加入了{{cd|commandModificationBlockLimit}}，默认为{{cd|32768}}，用于控制{{cmd|clone}}、{{cmd|fill}}和{{cmd|fillbiome}}命令单次执行可更改的最大方块数。
+
+'''{{cmd|ride}}'''
+* 加入了{{cmd|link=none|ride}}命令，用于使一个[[实体]]骑乘另一个实体，或停止骑乘任何实体。语法如下：
+** {{cmd|link=none|ride <target> mount <vehicle>}}，用于使单个实体骑乘于另一个实体上，遇下列情况时执行失败：
+*** {{cd|vehicle}}为一[[玩家]]；
+*** {{cd|target}}已骑乘一实体；
+*** {{cd|target}}和{{cd|vehicle}}为同一实体；
+*** {{cd|vehicle}}已为{{cd|target}}的直接或间接骑乘者。
+** {{cmd|link=none|ride <target> dismount}}，用于取消{{cd|target}}的骑乘状态。{{cd|target}}未骑乘任何实体时执行失败。
+
+=== 常规 ===
+'''[[菜单屏幕]]'''
+* 加入了辅助功能引导屏幕，会在玩家首次启动游戏时出现。
+* 加入了方向键导航功能。
+** 现在菜单屏幕可以使用方向键进行导航。
+** 用方向键导航时，若需更改滑块值，需要先通过按下{{key|Enter}}或{{key|Space}}以激活滑块。
+
+'''[[选项]]'''
+* 加入了“{{tr|通知显示时长|通知顯示時長}}”辅助功能选项，用于更改已解锁[[配方]]、[[进度]]、[[字幕]]、选择的[[方块]]名称等通知的显示时长。
+
+'''协议'''
+* 加入了一个新的网络协议功能，用于将打包起来的{{tr|数据包|封包}}强制在客户端侧的同刻中处理。
+** 客户端现在可接收一种新的分隔{{tr|数据包|封包}}。
+** 两个分隔{{tr|数据包|封包}}间的所有{{tr|数据包|封包}}保证会在同刻处理。
+** 出于安全考虑，客户端向服务端发送的数据流不支持此功能。
+
+'''[[Java版标签|标签]]'''
+* 加入了下列[[生物群系]]标签：
+** {{cd|#increased_fire_burnout}}
+*** 包含{{cd|d=pretty|bamboo_jungle|mushroom_fields|mangrove_swamp|snowy_slopes|frozen_peaks|jagged_peaks|swamp|jungle}}。
+*** [[火]]会在此处定义的生物群系中更快地熄灭。
+** {{cd|#snow_golem_melts}}
+*** 包含{{cd|d=pretty|badlands|basalt_deltas|crimson_forest|desert|eroded_badlands|nether_wastes|savanna|savanna_plateau|soul_sand_valley|warped_forest|windswept_savanna|wooded_badlands}}。
+*** [[雪傀儡]]会在此处定义的生物群系中融化。
+** {{cd|#spawns_snow_foxes}}
+*** 包含{{cd|d=pretty|snowy_plains|ice_spikes|frozen_ocean|snowy_taiga|frozen_river|snowy_beach|frozen_peaks|jagged_peaks|snowy_slopes|grove}}。
+*** 白色[[狐狸]]会在此处定义的生物群系中生成。
+** {{cd|#spawns_white_rabbits}}
+*** 包含{{cd|d=pretty|snowy_plains|ice_spikes|frozen_ocean|snowy_taiga|frozen_river|snowy_beach|frozen_peaks|jagged_peaks|snowy_slopes|grove}}。
+*** 白色[[兔子]]会在此处定义的生物群系中生成。
+
+== 更改 ==
+=== 生物 ===
+'''[[驴]]、[[骡]]、[[骷髅马]]和[[僵尸马]]'''
+* 更改了其[[鞍]]和[[箱子]]的纹理。
+
+'''[[恼鬼]]'''
+* 更改了其空手时的蓄力动画。
+
+'''[[盔甲架]]'''
+* 现在在放置和破坏时会保留自定义名称。
+
+=== 命令格式 ===
+'''[[聊天]]组件'''
+* 向{{cd|translate}}文本组件中加入了可选的{{cd|fallback}}字段。
+** 此字段为一字符串，用于在翻译文本缺失时显示此内容。
+** 若{{cd|fallback}}缺失，则直接显示本地化键名（旧处理方法）。
+* {{cd|translate}}格式中的越界参数不再被直接忽略而不显示任何错误。
+
+'''{{cmd|clone}}'''
+* 现在支持指定来源[[维度]]和目的维度，新语法如下：
+** {{cmd|link=none|clone [from <sourceDimension>] <begin> <end> [to <targetDimension>] <destination> ...}}
+*** {{cd|sourceDimension}}：要复制的区域的来源维度ID。
+*** {{cd|targetDimension}}：将区域复制到的维度的ID。
+
+'''{{cmd|data}}'''
+* 加入了新的{{cd|string}}数据源，用于从字符串中截取一段内容作为新值，语法如下：
+** {{cd|... ''(insert <index>{{!}}prepend{{!}}append{{!}}set{{!}}merge)'' string (block <sourcePos>{{!}}entity <<nowiki/>source>{{!}}storage <<nowiki/>source>) [<sourcePath>] [<start>] [<end>]}}
+*** {{cd|start}}：源字符串中需要包含在新字符串起始位置上的首个字符位置（索引值）。
+*** {{cd|end}}：源字符串中需要被排除在新字符串外的首个字符位置（索引值）。
+
+'''{{cmd|execute}}'''
+* 加入了以下条件子命令：
+** {{cd|... loaded <pos>}}，用于检查给定位置是否被完全加载（对于方块和实体而言）。
+*** {{cd|pos}}：要被检查的方块位置。
+** {{cd|... dimension <dimension>}}，用于检查命令执行维度是否在匹配的维度上。
+*** {{cd|dimension}}：维度的命名空间ID。
+* 加入了新的{{cd|on}}修饰子命令，基于与当前执行实体间的关系选择实体，语法如下：
+** {{cd|... on (attacker{{!}}controller{{!}}leasher{{!}}owner{{!}}passengers{{!}}target{{!}}vehicle) -> execute}}
+*** {{cd|attacker}}：最近5秒内对当前执行实体造成伤害的最后实体。
+*** {{cd|controller}}：控制当前执行实体的实体（如船前半部的玩家）。
+*** {{cd|leasher}}：用[[拴绳]]牵引当前执行实体的实体（若已拴在栅栏上，则可能为拴绳结）。
+*** {{cd|owner}}：当前执行实体（可驯服，如[[猫]]、[[狼]]或[[鹦鹉]]）的主人。
+*** {{cd|passengers}}：直接骑乘于当前执行实体（无次级乘客）的实体。
+*** {{cd|target}}：当前执行实体的攻击目标。
+*** {{cd|vehicle}}：正在被当前执行实体骑乘的实体。
+** 若指定的关系不适用于当前执行实体，或此关系下没有匹配实体，则返回0个元素。
+
+'''{{cmd|title}}'''
+* {{cmd|link=none|title times}}命令中所有时间参数现在均改为时长参数，且需要在其后添加{{cd|d=pretty|t|s|d}}后缀。
+
+'''{{cmd|weather}}'''
+* 若未指定时长，[[天气]]变化的持续时间现在会与游戏的常规天气周期相匹配。
+* {{cd|duration}}参数的默认单位现在改为刻，且可以用{{cd|d=pretty|t|s|d}}后缀来指定单位。
+** 若要保持旧命令功能不变，需要在原{{cd|duration}}参数后加{{cd|s}}后缀。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 版本更改为{{cd|11}}。
+
+'''[[菜单屏幕]]'''
+* 为资源包屏幕加入了键盘导航功能。
+
+'''[[选项]]'''
+* 自动跳跃选项现在默认关闭。
+
+'''协议'''
+* 客户端现在会在收到登录{{tr|数据包|封包}}时重置其安全聊天会话状态。
+
+'''[[Java版标签|标签]]'''
+* 向{{cd|#goats_spawnable_on}}方块标签中加入了{{cd|#animals_spawnable_on}}。
+* 将{{cd|#only_allows_snow_and_gold_rabbits}}生物群系标签重命名为{{cd|#spawns_gold_rabbits}}。
+
+'''用户界面'''
+* 略微移动了[[配方书]]界面上的搜索图标。
+
+== 新内容（实验性） ==
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 加入了以下物品标签：
+** {{cd|#noteblock_top_instruments}}：{{cd|d=pretty|zombie_head|skeleton_skull|creeper_head|dragon_head|wither_skeleton_skull|piglin_head|player_head}}。
+
+== 更改（实验性）==
+=== 方块 ===
+'''[[生物头颅]]'''
+* 现在可以在非潜行状态下放置到[[音符盒]]上。
+
+== 修复 ==
+{{fixes|fixedin=23w03a|showdesc=1
+|;1.19前正式版的漏洞
+|26678|受到伤害的倾斜动画不再反映伤害的来源方向。
+|30403|脱离可骑乘生物时，已有的疾跑状态不会被取消。
+|121048|实体死亡时，战斗追踪器只记录致命一击。
+|122595|执行持续时长指定为0的{{cmd|weather|link=none}}命令会保持当前天气状态，而不是立即随机切换一个天气。
+|136534|使用局部坐标时，命令方块始终将南方作为基准方向。
+|149144|按{{key|Tab}}键选中按钮后用鼠标按另一个按钮，之后再按{{key|Tab}}键，可以使多个按钮被选中。
+|155433|漏斗矿车不从一堆混合物品中拾起与其相匹配的物品。
+|165595|{{samp|level.dat}}中的{{cd|Time}}超过特定值时，守卫者激光不渲染。
+|181832|使用{{cmd|execute|link=none}}命令指定了维度的{{cmd|spreadplayers|link=none}}命令不会将实体在指定的维度中分散开来。
+|191942|多人游戏菜单中的按钮间距不均匀。
+|222518|骷髅马、僵尸马、驴和骡的鞍与箱子的纹理过时或有错误。
+|224960|{{cmd|spectate|link=none}}命令不能跨维度使用。
+|230678|冻洋生物群系中的炼药锅积累细雪时，天空中却看起来是在下雨。
+|233893|冻洋生物群系的温暖区域中，雨不会熄灭生物身上的火焰。
+|235260|原点处的漏斗矿车传输物品的速度比正常的慢。
+|238904|降雨在冻洋生物群系不播放音效。
+|247836|激流魔咒在冻洋生物群系的雨中不起作用。
+|257082|玩家骑乘生物或穿着鞘翅飞行时按疾跑会更改视场角。
+|;1.19的漏洞
+|252461|山羊不会作为击杀者显示在玩家的死亡消息中。
+|252773|有其他NBT标签，但无{{cd|instrument}}或{{cd|instrument}}内容不正确的山羊角不播放音效。
+|254132|狼的纹理在冻洋生物群系的雨中不会变成深灰色。
+|;1.19.2的漏洞
+|255545|岩浆怪阴影的大小不随其自身大小而变。
+|255811|即便正在下雨，{{cd|Level#isRainingAt(BlockPos)}}方法总会对积雪类和冰冻类生物群系返回{{cd|false}}值。
+|256292|世界生成完成后，山羊不能再在草方块上生成。
+|257755|当玩家不是任何Realms中的成员时，Realms菜单中用{{key|Tab}}键选中的按钮不是按顺序选中的。
+|;1.19.3的漏洞
+|256555|骆驼生成时会短暂坐下。
+|256576|骑上已有其他玩家骑乘的未上鞍的骆驼的玩家会获得控制权。
+|256838|骆驼的实际朝向与模型朝向不相符。
+|257346|空手的恼鬼会做出冒犯性的手势。
+|257418|骆驼受到伤害时会短暂坐下。
+|257875|生存模式或冒险模式下，使用火焰弹点燃苦力怕不消耗火焰弹。
+|258163|{{cd|ClientboundSectionBlocksUpdatePacket}}方法会在序列化2^19个方块状态后中止。
+|258173|睡觉过程中进入末地传送门会使床被永久占用。
+|258246|“遥测{{tr|数据|資料|數據}}”按钮文本中缺少省略号。
+|258295|附近有工作站点时，村民AI会停止工作。
+|258430|{{cd|LastPoseTime}}值过大的骆驼会导致玩家视野模型出现奇怪的偏移。
+|258625|客户端的玩家死亡消息会随玩家按下“重生”按钮而立即消失，即使玩家由于延迟仍然停留在死亡界面。
+|258953|“{{tr|内存溢出|記憶體不足|記憶體已耗盡}}”屏幕上有未被翻译的原始消息。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:23w03a]]
+[[en:Java Edition 23w03a]]
+[[es:Java Edition 23w03a]]
+[[fr:Édition Java 23w03a]]
+[[ja:Java Edition 23w03a]]
+[[pt:Edição Java 23w03a]]
+[[ru:23w03a (Java Edition)]]

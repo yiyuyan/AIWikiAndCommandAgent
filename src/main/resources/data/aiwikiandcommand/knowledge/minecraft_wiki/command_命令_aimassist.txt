@@ -1,0 +1,69 @@
+# 页面: 命令/aimassist
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/aimassist
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:02
+# 原始 Wikitext 内容:
+
+{{Exclusive|bedrock|edu}}
+{{Infobox command
+|name=aimassist
+|oplevel=1
+|cheat=1
+}}
+修改玩家的[[瞄准辅助]]。
+
+== 语法 ==
+: <code>aimassist <players: target> clear</code>
+:: 清除瞄准辅助。
+: <code>aimassist <players: target> set [x angle: float] [y angle: float] [max distance: float] [target mode: AimAssistTargetMode] [preset id: string]</code>
+:: 设定瞄准辅助。
+
+== 参数 ==
+{{argument|be=1|players: target|CommandSelector<Player>}}
+: 指定将被修改瞄准辅助的玩家。
+: {{arg desc|be=player}}
+{{argument|be=1|x angle: float|float}}
+: 指定X轴角度，默认为50。
+: {{arg desc|be=float}}且必须在10和90之间（含）。
+{{argument|be=1|y angle: float|float}}
+: 指定Y轴角度，默认为50。
+: {{arg desc|be=float}}且必须在10和90之间（含）。
+{{argument|be=1|max distance: float|float}}
+: 指定最大距离，默认为8。
+: {{arg desc|be=float}}且必须在1和16之间（含）。
+{{argument|be=1|target mode: AimAssistTargetMode|enum}}
+: 指定瞄准模式，默认为{{cd|angle}}。必须为以下其中之一：
+:* {{cd|angle}} — 角度
+:* {{cd|distance}} — 距离
+{{argument|be=1|preset id: string|basic_string}}
+: 指定预设ID。
+: {{arg desc|be=basic_string}}
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|命令不完整或参数未正确指定||unparseable}}
+{{Result table|<code>players: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器||fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|执行失败|0}}
+{{Output table|执行成功|被修改的玩家数}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.50|dev=1.21.50.25|exg=camera_aim_assist|加入了{{cmd|aimassist|link=none}}命令。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.23|{{cmd|aimassist|link=none}}不再属于[[实验性玩法]]。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/aimassist]]
+[[en:Commands/aimassist]]
+[[ja:コマンド/aimassist]]
+[[pt:Comandos/aimassist]]
+[[ru:Команды консоли/aimassist]]

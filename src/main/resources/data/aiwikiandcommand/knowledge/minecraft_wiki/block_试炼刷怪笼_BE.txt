@@ -1,0 +1,33 @@
+# 页面: 试炼刷怪笼/BE
+# 来源: https://zh.minecraft.wiki/w/%E8%AF%95%E7%82%BC%E5%88%B7%E6%80%AA%E7%AC%BC/BE
+# 分类: 方块实体页面
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 方块实体数据
+** {{nbt inherit/blockentity}}
+** {{nbt|long|cooldown_ends_at}}：冷却的结束时间。不存在此项时游戏默认为0。
+** {{nbt|list|current_mobs}}：当前还存活的由试炼刷怪笼生成的生物。
+*** {{nbt|int-array}}：生物的[[UUID]]。
+** {{nbt|string|ejecting_loot_table}}：（[[命名空间ID]]）正在喷出物品的战利品表。
+** {{nbt|long|next_mob_spawns_at}}：下一个生物生成的最早时间。不存在此项时游戏默认为0。
+** {{nbt|string}}{{nbt|compound|normal_config}}：正常变种的试炼刷怪笼使用的[[试炼刷怪笼配置定义格式|试炼刷怪笼配置数据]]，可以为命名空间ID也可以内联定义。内联格式下的所有字段若指定为默认值则不会被保存。
+*** {{nbt collapsed|试炼刷怪笼配置|{{#lst:试炼刷怪笼配置定义格式|codec_trial_spawner_config}}}}
+** {{nbt|string}}{{nbt|compound|ominous_config}}：不祥变种的试炼刷怪笼使用的[[试炼刷怪笼配置定义格式|试炼刷怪笼配置数据]]，格式与{{nbt|string}}{{nbt|compound|normal_config}}相同。
+*** {{nbt collapsed|试炼刷怪笼配置|{{#lst:试炼刷怪笼配置定义格式|codec_trial_spawner_config}}}}
+** {{nbt|list|registered_players}}：加入试炼的玩家列表。
+*** {{nbt|int-array}}：玩家的[[UUID]]。
+** {{nbt|int|required_player_range}}：（{{interval|left=1|right=128}}，默认为14）检测加入试炼玩家的范围，采用欧几里得距离。
+** {{nbt|compound|spawn_data}}：下一次生成生物的数据。在决定生成一次生物后，此项数据会从配置字段的{{nbt|list|spawn_potentials}}中随机挑选一项作为自身的数据，并覆盖之前的数据。
+*** {{nbt inherit/spawn data}}
+** {{nbt|int|target_cooldown_length}}：（{{interval|left=0}}，默认为{{convert|36000||分}}）从试炼刷怪笼生成的所有生物被杀死开始，到下一次可以进行试炼的冷却时间。
+** {{nbt|int|total_mobs_spawned}}：（{{interval|left=0}}）从试炼开始到现在生成的总生物数量。不存在此项时游戏默认为0。
+</div><noinclude>
+[[Category:方块实体页面]]
+[[en:Trial Spawner/BE]]
+[[fr:Générateur des épreuves/BE]]
+[[ja:試練のスポナー/BE]]
+[[lzh:煉孳衍籠/BE]]
+[[pt:Gerador do desafio/BE]]
+</noinclude>

@@ -1,0 +1,287 @@
+# 页面: 天空
+# 来源: https://zh.minecraft.wiki/w/%E5%A4%A9%E7%A9%BA
+# 分类: Java版独有信息, 含空白段落的条目, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:25:04
+# 原始 Wikitext 内容:
+
+{{about||Java版中已移除的维度|天域|愚人节快照[[25w14craftmine]]中的同名方块|天空（方块）}}
+{{needs update|此条目缺少基岩版信息、缺少末地天空描述（可参见[[:en:End sky]]）}}
+[[File:Sun in night sky.png|thumb|夜空中的太阳]]
+'''天空（Sky）'''是游戏视觉效果的重要组成部分，其环绕着[[维度|整个世界]]，为[[太阳]]、[[月亮]]等天体提供渲染背景。
+
+== 机制 ==
+天空是提供世界背景的视觉效果，其较少直接影响游戏玩法。在分析天空造成的影响时，通常分析的是当前维度的天空效果，而非天空本身。天空效果具有天空颜色和天体等基本属性。
+
+虽然天空自身较少影响游戏玩法，但它可以作为指示器提醒玩家当前环境，例如主世界的天空逐渐变黑时，说明当前时间正从白天进入夜晚，进而可以得知一系列与昼夜相关的游戏机制的变化。
+
+{{in|je}}天空盒的边缘在某些情况下可见。<ref>{{bug|MC-220195}}</ref>
+
+{{in|be}}天空盒的位置稍微高一些。<ref>{{bug|MCPE-164447|||Won't Fix}}</ref>
+
+=== 主世界天体渲染机制 ===
+主世界的太阳和月亮均会随昼夜更替而切换并消失在地平线之下，具体切换方式{{In|JE|BE|nc=1}}存在一定差异。
+
+{{In|JE}}主世界的太阳和月亮作为天空盒上固定位置的一部分，会随着昼夜更替逐渐旋转到地平线之下，故其通常不可见，但在晴天且下半部分天空不为{{Color|#000000}}时，可以通过以下方法看见下半部分天空，并在当前时间应在天空中显示太阳或月亮的位置的相反的方向看到另一天体：
+
+* 在早晨或傍晚且太阳和月亮均有一部分处于地平线之上时观测；
+* 来到高空，使地平线之下的部分方块因距离过远而不渲染；
+* 直接破坏基岩层和上方方块并在高处向底层虚空中看去；
+* 其他符合条件的方式。
+
+{{In|BE}}类似于星星，当太阳和月亮旋转到地平线之下'''一定角度后'''，会直接消失，而不是显示在天空的下半部分中。
+
+星星会在夜晚的天空中出现，散布于整个天空（包括下半部分天空）。{{In|JE|BE}}星星均会在进入白昼时逐渐消失，而不是隐藏在地平线之下。
+
+== 天空颜色 ==
+=== Java版 ===
+[[File:Sky when camera above 63.png|thumb]]
+[[File:Sky when camera below 63.png|thumb|玩家在海平面以下时的天空]]
+天空颜色会受到多种因素影响，游戏将天空分为上下两部分，两部分使用不同的颜色。不论是哪部分，游戏都需要确定天空基础颜色，然后再根据环境变化对天空颜色进行修饰。
+
+首先获取天空基础颜色：
+* 对于上半部分天空：
+** 获取当前维度指定的天空颜色。
+*** [[主世界]]的天空颜色默认为{{color|#78A7FF}}。
+*** [[下界]]和[[末地]]的天空颜色默认为{{color|#000000}}。
+** 如果维度为主世界，且当前[[生物群系]]拥有独立的天空颜色，则使用此颜色。
+* 对于下半部分天空：
+** 对于主世界，获取主世界指定的天空[[迷雾]]颜色，默认为{{color|#C0D8FF}}。
+*** 如果当前生物群系拥有独立的天空迷雾颜色，则使用此颜色。
+*** 由于下半部分天空本质上使用迷雾颜色填充，因而其他类型的迷雾也会影响基础颜色。
+*** 如果玩家视角在常规世界的Y为-32至63的区域，或在[[超平坦世界]]的世界范围之下时，则下半部分天空的绝大部分为{{color|#000000}}。
+*** 如果玩家视角在常规世界的Y<-32的区域，或在超平坦世界的世界最低高度之上1格之下时，则上述剩余部分也将过渡为{{color|#000000}}。
+** 对于其他维度，固定为{{color|#000000}}。
+** 其他修饰见{{slink|迷雾|迷雾修饰器}}。
+
+然后对基础颜色进行修饰：
+* 对于主世界：
+** 如果玩家在天空颜色不同的生物群系交界处，则天空颜色会加权平均混合。
+** 如果当前时间为晚上，则天空颜色为{{color|#000000}}。白天与黑夜交替时会在全黑和不修饰之间平滑过渡。
+** 如果当前[[天气]]为[[降雨]]或[[雷暴]]，则修饰天空颜色使其略微变暗变灰。天气变化时此修饰会平滑过渡。
+** 如果有[[闪电]]产生，则上半部分天空在一瞬间变成白色。
+
+上述计算不考虑状态效果、迷雾效果、天体自身纹理和[[#日出日落效果|日出日落效果]]等造成的影响。
+
+=== 基岩版 ===
+{{empty section}}
+
+=== 天空颜色列表 ===
+以下为各生物群系定义的天空颜色。
+
+{{in|je}}部分颜色由生物群系所在的维度定义，这些颜色以特殊背景标记。例如，虽然末地生物群系在末地维度时天空颜色为{{color|#000000}}，但使用[[单一生物群系]]使它们生成在主世界时天空颜色为{{color|#78a7ff}}。
+
+{| class="wikitable sortable mw-collapsible mw-collapsed" style="text-align:center"
+! 维度
+! 生物群系
+! 天空颜色
+! 迷雾颜色
+|-
+! rowspan="18" | 主世界
+| {{BiomeLink|Plains}}<br>{{BiomeLink|Beach}}<br>{{BiomeLink|Sunflower Plains}}<br>{{BiomeLink|Deep Dark}}<br>{{only|for={{BiomeLink|Dripstone Caves}}|je|short=1}}<br>{{BiomeLink|Mangrove Swamp}}<br>{{BiomeLink|Swamp}}
+| {{tc|upcoming|}} {{color|#78a7ff}}
+| rowspan="17" {{tc|upcoming|}} {{only|for={{color|#c0d8ff}}|JE|short=1}}<br>{{only|for={{color|#abd2ff}}|BE|short=1}}
+|-
+| {{BiomeLink|Warm Ocean}}<br>{{BiomeLink|Lukewarm Ocean}}<br>{{BiomeLink|Deep Lukewarm Ocean}}<br>{{BiomeLink|Ocean}}<br>{{BiomeLink|Deep Ocean}}<br>{{BiomeLink|Cold Ocean}}<br>{{BiomeLink|Deep Cold Ocean}}<br>{{BiomeLink|River}}<br>{{only|for={{BiomeLink|Deep Frozen Ocean}}}|je|short=1}}<br>{{only|for={{BiomeLink|The Void}}|je|short=1}}<br>{{only|for={{BiomeLink|Lush Caves}}|je|short=1}}<br>{{only|for={{BiomeLink|Meadow}}|je|short=1}}<br>{{only|for={{BiomeLink|Cherry Grove}}|je|short=1}}
+| {{Color|#7ba4ff}}
+|-
+| {{only|for={{BiomeLink|Lush Caves}}|be|short=1}}<br>{{BiomeLink|Jungle}}<br>{{BiomeLink|Bamboo Jungle}}<br>{{BiomeLink|Sparse Jungle}}<br>{{BiomeLink|Mushroom Fields}}
+| {{Color|#77a8ff}}
+|-
+| {{only|for={{BiomeLink|Dripstone Caves}}|be|short=1}}<br>{{BiomeLink|Windswept Gravelly Hills}}<br>{{BiomeLink|Windswept Forest}}<br>{{BiomeLink|Windswept Hills}}<br>{{BiomeLink|Stony Shore}}
+| {{Color|#7da2ff}}
+|-
+| {{BiomeLink|Frozen River}}<br>{{BiomeLink|Frozen Ocean}}<br>{{only|for={{BiomeLink|Deep Frozen Ocean}}|be|short=1}}<br>{{BiomeLink|Snowy Plains}}<br>{{only|for={{BiomeLink|Ice Spikes}}|je|short=1}}<br>{{only|for={{BiomeLink|Ice Spikes}}|be|short=1}}<br>{{BiomeLink|Snowy Beach}}
+| {{Color|#7fa1ff}}
+|-
+| {{BiomeLink|Grove}}
+| {{Color|#81a0ff}}
+|-
+| {{BiomeLink|Frozen Peaks}}<br>{{BiomeLink|Jagged Peaks}}
+| {{Color|#859dff}}
+|-
+| {{BiomeLink|Snowy Slopes}}
+| {{Color|#829fff}}
+|-
+| {{BiomeLink|Snowy Taiga}}
+| {{Color|#839eff}}
+|-
+| {{BiomeLink|Desert}}<br>{{only|for={{BiomeLink|Savanna}}|je|short=1}}<br>{{only|for={{BiomeLink|Savanna Plateau}}|je|short=1}}<br>{{only|for={{BiomeLink|Windswept Savanna}}|je|short=1}}<br>{{BiomeLink|Badlands}}<br>{{BiomeLink|Wooded Badlands}}<br>{{BiomeLink|Eroded Badlands}}
+| {{Color|#6eb1ff}}
+|-
+| {{only|for={{BiomeLink|Savanna}}|be|short=1}}
+| {{Color|#75aaff}}
+|-
+| {{only|for={{BiomeLink|Savanna Plateau}}|be|short=1}}<br>{{BiomeLink|Stony Peaks}}
+| {{Color|#76a8ff}}
+|-
+| {{only|for={{BiomeLink|Windswept Savanna}}|be|short=1}}
+| {{Color|#76a9ff}}
+|-
+| {{BiomeLink|Forest}}<br>{{BiomeLink|Flower Forest}}<br>{{BiomeLink|Dark Forest}}
+| {{Color|#79a6ff}}
+|-
+| {{BiomeLink|Birch Forest}}<br>{{BiomeLink|Old Growth Birch Forest}}
+| {{Color|#7aa5ff}}
+|-
+| {{only|for={{BiomeLink|Old Growth Pine Taiga}}<br>{{BiomeLink|Meadow}}|be|short=1}}<Br>{{only|for={{BiomeLink|Cherry Grove}}|be|short=1}}
+| {{Color|#7ca3ff}}
+|-
+| {{BiomeLink|Old Growth Spruce Taiga}}<br>{{BiomeLink|Taiga}}
+| {{Color|#7da3ff}}
+|-
+| {{BiomeLink|Pale Garden}}
+| {{Color|#817770}}
+| {{color|#817770}}
+|-
+! rowspan="5" | 下界
+| {{BiomeLink|Nether Wastes}}
+| rowspan="5" {{tc|upcoming|}} {{Color|#6eb1ff}}
+| {{Color|#330808}}
+|-
+| {{BiomeLink|Warped Forest}}
+| {{Color|#1a051a}}
+|-
+| {{BiomeLink|Crimson Forest}}
+| {{Color|#330303}}
+|-
+| {{BiomeLink|Soul Sand Valley}}
+| {{Color|#1b4745}}
+|-
+| {{BiomeLink|Basalt Deltas}}
+| {{Color|#685f70}}
+|-
+! 末地
+| {{BiomeLink|The End}}<br>{{only|for={{BiomeLink|End Highlands}}|je|short=1}}<br>{{only|for={{BiomeLink|End Midlands}}|je|short=1}}<br>{{only|for={{BiomeLink|Small End Islands}}|je|short=1}}<br>{{only|for={{BiomeLink|End Barrens}}|je|short=1}}
+| {{tc|upcoming|}} {{Color|#000000}}
+| {{tc|upcoming|}} {{Color|#181318}}<br>{{only|for={{Color|#0b080c}}|be|short=1}}
+|}
+
+== 天体 ==
+=== 太阳 ===
+{{main|太阳}}
+'''太阳（Sun）'''是出现在主世界天空的天体，在白日的天空中东升西落。
+
+=== 月亮 ===
+{{main|月亮}}
+'''月亮（Moon）'''是出现在主世界天空的天体，在夜晚的天空中东升西落。
+
+=== 星星 ===
+{{main|星星}}
+'''星星（Star）'''是出现在主世界天空的天体。
+
+=== 末地闪光 ===
+[[File:End Flash BE vibrant visuals.jpeg|thumb|基岩版启用{{pa|Vibrant Visuals|}}时的末地闪光]]
+'''末地闪光（End Flash）'''是出现在末地的天体，{{in|be|nc=1}}必须启用{{pa|Vibrant Visuals|}}或「{{tr|花式|華麗}}」圖形模式后才会出现。
+
+末地的天空会每间隔30秒出现一次末地闪光，每次末地闪光持续5至17秒。末地闪光会随机出现在末地的天空，出现位置的[[俯仰角]]在-60至10之间，[[偏航角]]在-180至180之间。
+
+末地闪光出现时会播放末地闪光音效，整个末地在视觉上都会更亮更紫。{{in|be}}末地闪光是一个定向光源，产生的光线效果允许在遮挡方向上产生阴影。
+
+末地闪光的渲染效果可以通过[[选项]]开关。{{in|je}}{{tp|options.accessibility.title}}“{{tp|options.hideLightningFlashes}}”为开时，末地闪光将只渲染天体部分。{{in|be}}{{tr|可访问性|協助工具}}选项“隐藏天空闪光”为开时，末地闪光不会渲染。
+
+== 其他效果 ==
+=== 日出日落效果 ===
+[[File:Sunrise and Sunset.png|thumb]]
+'''日出日落效果（Sunrise and Sunset Effect）'''是出现在主世界日出日落时的天空效果，它会使天空一侧出现橙红色效果，在昼夜更替时其颜色效果从不可见到效果最强再到不可见。{{in|je}}日出日落效果会受到天气影响。
+
+日出日落效果也会影响下半部分的天空颜色。如果摄像机面向具有日出日落效果的水平方向（即东西方向），则下半部分的天空颜色会被日出日落效果的橙红色填充。如果摄像机完全面向日出日落效果的中心，则填充效果达到最强。日出日落效果不会影响摄像机在世界高度足够低的区域时出现的黑色效果。
+
+=== 云 ===
+{{main|云}}
+'''云（Cloud）'''是出现在主世界天空的画面效果，自东向西缓缓移动。它既不属于天空本身，也不属于天体，但也以天空作为背景渲染出现，丰富天空效果。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=End Flash1.ogg
+|sound2=End Flash2.ogg
+|sound3=End Flash3.ogg
+|sound4=End Flash4.ogg
+|sound5=End Flash5.ogg
+|sound6=End Flash6.ogg
+|sound7=End Flash7.ogg
+|sound8=End Flash8.ogg
+|source=天气
+|description=末地闪光时播放此声音
+|id=weather.end_flash
+|subtitle={{tp|subtitles.weather.end_flash}}
+|translationkey=subtitles.weather.end_flash
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=end_flash1.wav
+|sound2=end_flash2.wav
+|sound3=end_flash3.wav
+|sound4=end_flash4.wav
+|sound5=end_flash5.wav
+|sound6=end_flash6.wav
+|sound7=end_flash7.wav
+|sound8=end_flash8.wav
+|source=天气
+|description=末地闪光时播放此声音
+|id=ambient.weather.the_end_light_flash
+|typeid=ambient.weather.the_end_light_flash
+|soundvolume=6.25
+|soundpitch=0.8-1.0
+|sounddistance=100
+|foot=1
+}}
+
+== 历史 ==
+{{stub|section=1|缺少基岩版历史、缺少Java版正式版的历史}}
+{{HistoryTable
+|{{HistoryLine|java pre-classic}}
+|{{HistoryLine||rd-131655|加入了天空。}}
+|{{HistoryLine|java classic}}
+|{{HistoryLine||0.0.14a|加入了[[云]]。}}
+|{{HistoryLine|java indev}}
+|{{HistoryLine||0.31|dev=20100107-1851|加入了“[[Indev世界选项#世界主题|世界主题]]”，不同的世界主题中的天空颜色会有所不同。}}
+|{{HistoryLine||0.31|dev=20100122-2251|现在世界中的天空颜色存储于<code>.mclevel</code>文件中。}}
+|{{HistoryLine||20100211-2327|加入了[[太阳]]、[[月亮]]与[[昼夜更替]]。}}
+|{{HistoryLine|java infdev}}
+|{{HistoryLine||20100227-1414|加入了一个大小为1536×1536的“天空盒”，颜色为{{color|#0000FF}}，其会在X/Z{{=}}+1,024/-512处停止渲染。
+|天空颜色不再存储于<code>.mclevel</code>文件中。
+|移除了“[[Indev世界选项#世界主题|世界主题]]”，现在所有世界的天空颜色都是相同的。
+|暂时移除了[[昼夜更替]]。}}
+|{{HistoryLine||20100313|移除了“天空盒”。
+|重新加入了[[昼夜更替]]。}}
+|{{HistoryLine|java alpha}}
+|{{HistoryLine||v1.2.0|dev=preview|加入了[[生物群系]]，现在天空颜色随生物群系而变化。}}
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.5|加入了[[天气]]，现在天空颜色随天气而变化。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w29a|加入了“使用顶点缓冲器”选项，为开时下半部分天空不再为蓝色。}}
+|{{HistoryLine||1.10|dev=pre1|下半部分天空不再为蓝色。<ref>{{bug|MC-257056|||WAI}}</ref>}}
+|{{HistoryLine||1.21.9|dev=25w33a|加入了末地闪光。}}
+|{{HistoryLine|||dev=25w34a|现在可以通过“隐藏天空闪烁效果”来禁用末地闪光。}}
+|{{HistoryLine||1.21.11|dev=25w42a|现在维度拥有独立的天空颜色，部分生物群系的天空颜色将使用维度的颜色而不是自身定义。此更改未影响原版的天空颜色。}}
+|{{HistoryLine|||dev=25w45a|现在日出日落效果会受到天气影响。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.80|dev=1.21.80.25|exg=experimental_graphics|加入了末地闪光。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.20|在Xbox平台上，末地的环境不再闪烁，而是保持蓝色常亮。其他平台的末地光照则是完全损坏的。<ref>{{bug|MCPE-217579|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=1.21.90.23|修复了末地光照，末地闪光再次可见。}}
+|{{HistoryLine|||dev=1.21.90.26|为末地闪光加入了音效。由于一个漏洞，该音效在玩家离开末地后仍会播放。<ref>{{bug|MCPE-220298|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.111|dev=1.21.110.26|现在末地闪光的可见性由{{tr|可访问性|協助工具}}设置中的“隐藏天空闪光”选项控制。}}
+|{{HistoryLine||26.20|dev=26.20.20|为“{{tr|花式|華麗}}”图形模式加入了末地闪光。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:End Flash JE.png|Java版末地闪光
+File:BE vibrant visuals end flash.jpeg|基岩版末地主岛的末地闪光
+File:Old blue void effect.png|Java版旧版本中下半部分天空的蓝色效果
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[de:Himmel]]
+[[en:Sky]]
+[[es:Cielo]]
+[[pt:Céu]]

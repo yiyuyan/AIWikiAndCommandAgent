@@ -1,0 +1,283 @@
+# 页面: 散列资源文件
+# 来源: https://zh.minecraft.wiki/w/%E6%95%A3%E5%88%97%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6
+# 分类: Java版独有特性, 待扩充段落, 游戏文件, 需要信息, 非官方名称
+# 抓取时间: 2026-07-14 17:28:08
+# 原始 Wikitext 内容:
+
+{{conjecture}}
+{{exclusive|je}}
+'''散列资源文件'''是游戏在每次运行前从Mojang服务器下载的、以该文件[[wzh:散列函数|散列值]]为文件名的资源文件。
+
+== 概述 ==
+从[[13w16a]]开始，Minecraft不再将所有的资源文件打包在{{filename|[[client.jar]]}}；次要或过大的资源文件存储在Mojang的资源分发服务器<ref>https://resources.download.minecraft.net/</ref>上，待游戏启动时再按需下载。这些文件按照散列值储存，因此被称作'''散列'''资源文件。由于游戏按照[[资源路径]]访问资源，游戏为各版本设置了'''资源索引文件'''，以便用资源路径查询文件散列值。
+
+== 路径 ==
+散列资源文件的文件名与路径通过该文件的'''SHA1散列值'''决定。
+
+在资源服务器上，散列资源文件的下载地址为<code>-{}-<nowiki>https://resources.download.minecraft.net/</nowiki><散列的前两位>/<散列></code>。
+
+下载后的散列资源文件同样以散列值命名。在{{filename|[[.minecraft]]}}文件夹中，散列资源文件存储在{{filepath|.minecraft/assets/objects/<散列的前两位>/<散列>}}处。
+
+为兼容旧版本{{more info|具体哪些版本？}}，旧版本的文件除存储在上述路径外，还会在{{filepath|.minecraft/assets/virtual/&lt;pre-1.6或legacy>}}<ref>[[13w24a]]至[[13w48b]]为<samp>legacy</samp>，[[13w23b]]及以前为<samp>pre-1.6</samp>。</ref>按[[资源路径]]存储。
+
+按资源路径调用散列资源文件时，游戏将在该版本的[[#资源索引|资源索引文件]]中查询该资源路径对应的散列值，再根据此散列值查找相应文件。
+
+== 获取 ==
+安装新的游戏版本时，[[启动器]]将按照{{filename|[[client.json]]}}中的地址下载该版本的资源索引文件，随后根据资源索引依次下载其中的所有资源文件，并放置在{{filepath|.minecraft/assets/objects}}。所下载的资源索引文件将被放置在{{filepath|.minecraft/assets/indexes}}。
+
+启动游戏时，如在启动器中配置了“最新版本”选项，游戏将会联网更新{{filename|client.json}}，据此更新索引文件，再据此更新相应的散列资源文件。
+
+== 内容 ==
+根据资源索引文件中的资源路径，散列资源文件包括如下内容：
+{| class="collapsible collapse-button-none" data-description="文件列表"
+! 文件列-{}-表 <!--按25.json核验-->
+|-
+|<div class="file-hierarchy treeview">
+* pack.mcmeta
+* (assets)
+** icons
+*** icon_''(尺寸)''.png
+*** minecraft.icns
+*** snapshot
+**** icon_''(尺寸)''.png
+**** minecraft.icns
+** minecraft
+*** font
+**** include
+***** unifont.json
+***** unifont_pua.json
+**** unifont.zip
+**** unifont_jp.zip
+**** unifont_pua.zip
+*** lang
+**** ''(语言)''.json（除en_us.json）
+*** resourcepacks
+**** high_contrast.zip
+**** programmer_art.zip
+*** sounds.json
+*** sounds
+**** ''(声音文件)''
+*** textures
+**** gui
+***** title
+****** background
+******* panorama_''(编号)''.png
+** realms
+*** lang
+**** en_us.json
+*** textures
+**** ''([[Realms]]图像)''
+</div>
+|}
+
+== 资源索引 ==
+'''资源索引文件'''是一系列<samp>json</samp>文件，用于根据资源路径查询相应散列资源文件的散列值，以便调用文件；此外，游戏启动时，也会参照该文件检查资源文件是否完整。资源索引文件放置在{{filepath|.minecraft/assets/indexes}}中。
+
+资源索引文件的格式如下：
+<div class="treeview">
+* {{nbt|compound}}根标签
+** {{nbt|compound|objects}}：该索引中的所有资源文件。
+*** {{nbt|compound|<资源路径>}}：单个资源文件。'''<资源路径>'''剔除了{{filepath|assets}}一层文件夹。
+**** {{nbt|string|hash}}：该文件的散列值。
+**** {{nbt|int|size}}：该文件的大小。
+</div>
+
+对于给定的版本，对应资源索引文件的名称可以在该版本{{filename|[[client.json]]}}中的{{nbt|string|assetIndex.id}}字段查询到。
+
+资源索引文件不是恒定不变的。若Mojang更新了散列资源文件，相关的资源索引文件也会随之更新，以更新该文件的散列值；下次联网启动游戏时，将会自动更新受更改的索引文件，并以此为基准更新相应的资源文件。
+
+=== 索引名称 ===
+在[[22w42a]]以前，资源索引文件的名称大致对应该版本或其对应正式版的版本号；自22w42a起，资源索引文件的名称为从1开始单增的数字。当前，资源索引名称与版本的对应关系如下：
+
+{| class="wikitable mw-collapsible"
+! 索引名称 !! 版本
+|- 
+| <code>pre-1.6</code>
+| [[Java版1.6.1|1.6.1]]快照[[13w23b]]及以前
+|- 
+| <code>legacy</code>
+| [[Java版1.6.1|1.6.1]]快照[[13w24a]]到[[Java版1.7.4|1.7.4]]快照[[13w48b]]
+|- 
+| <code>1.7.3</code>
+| [[Java版1.7.4|1.7.4]]快照[[13w49a]]到预发布版[[Java版1.7.3|1.7.3]]
+|- 
+| <code>1.7.4</code>
+|[[Java版1.7.4|1.7.4]]正式版到[[Java版1.7.10|1.7.10]]预发布版[[Java版1.7.10-pre3|1.7.10-pre3]]及[[Java版1.8|1.8]]快照[[14w02a]]到[[14w21b]]
+|- 
+| <code>1.7.10</code>
+| [[Java版1.7.10|1.7.10]]预发布版[[Java版1.7.10-pre4|1.7.10-pre4]]到正式版
+|- 
+| <code>14w25a</code>
+| [[Java版1.8|1.8]]快照[[14w25a]]到[[14w30c]]
+|- 
+| <code>14w31a</code>
+| [[Java版1.8|1.8]]快照[[14w31a]]到预发布版[[Java版1.8-pre3|1.8-pre3]]
+|- 
+| <code>1.8</code>
+| [[Java版1.8|1.8]]正式版到[[Java版1.9|1.9]]快照[[15w42a]]（含愚人节版本[[15w14a]]）
+|- 
+| <code>1.9</code>
+| [[Java版1.9|1.9]]快照[[15w43a]]到[[Java版1.10|1.10]]预发布版[[Java版1.10-pre1|1.10-pre1]]
+|- 
+| <code>1.9-aprilfools</code>
+| 愚人节版本[[Java版1.RV-Pre1|1.RV-Pre1]]
+|- 
+| <code>1.10</code>
+| [[Java版1.10|1.10]]预发布版[[Java版1.10-pre2|1.10-pre2]]到[[Java版1.11|1.11]]快照[[16w32a]]
+|- 
+| <code>1.11</code>
+| [[Java版1.11|1.11]]快照[[16w32b]]到[[Java版1.12|1.12]]快照[[17w06a]]
+|- 
+| <code>1.12</code>
+| [[Java版1.12|1.12]]快照[[17w13a]]到[[Java版1.13|1.13]]快照[[18w01a]]
+|- 
+| <code>1.13</code>
+| [[Java版1.13|1.13]]快照[[18w02a]]到正式版
+|- 
+| <code>1.13.1</code>
+| [[Java版1.13.1|1.13.1]]快照[[18w30a]]到[[Java版1.13.2|1.13.2]]正式版
+|- 
+| <code>1.14</code>
+| [[Java版1.14|1.14]]快照[[18w43a]]到[[Java版1.14.4|1.14.4]]正式版
+|-
+| <code>1.14-af</code>
+| 愚人节版本[[Java版3D Shareware v1.34|3D Shareware v1.34]]
+|- 
+| <code>1.15</code>
+| [[Java版1.15|1.15]]快照[[19w34a]]到[[Java版1.15.2|1.15.2]]正式版
+|- 
+| <code>1.16</code>
+| [[Java版1.16|1.16]]快照[[20w06a]]到[[Java版1.16.5|1.16.5]]正式版（含愚人节版本[[20w14∞]]）
+|- 
+| <code>1.17</code>
+| [[Java版1.17|1.17]]快照[[20w45a]]到[[Java版1.17.1|1.17.1]]正式版及[[Java版1.18|1.18]]的所有实验性快照
+|- 
+| <code>1.18</code>
+| [[Java版1.18|1.18]]快照[[21w37a]]到[[Java版1.18.2|1.18.2]]正式版
+|-
+| <code>1.19_deep_dark_side_snapshot</code>
+| [[Java版1.19|1.19]]实验性快照[[Java版1.19-exp1|1.19-exp1]]
+|- 
+| <code>1.19</code>
+| [[Java版1.19|1.19]]快照[[22w11a]]到[[Java版1.19.2|1.19.2]]正式版（含愚人节版本[[22w13oneBlockAtATime]]）
+|- 
+| <code>1</code>
+| [[Java版1.19.3|1.19.3]]快照[[22w42a]]到[[22w44a]]
+|- 
+| <code>2</code>
+| [[Java版1.19.3|1.19.3]]快照[[22w45a]]到[[Java版1.19.4|1.19.4]]快照[[23w07a]]
+|- 
+| <code>3</code>
+| [[Java版1.19.4|1.19.4]]预发布版[[Java版1.19.4-pre1|1.19.4-pre1]]到[[Java版1.20|1.20]]快照[[23w13a]]（含愚人节版本[[23w13a_or_b]]）
+|- 
+| <code>4</code>
+| [[Java版1.20|1.20]]快照[[23w14a]]到[[23w16a]]
+|-
+| <code>5</code>
+| [[Java版1.20|1.20]]快照[[23w17a]]到[[Java版1.20.1|1.20.1]]正式版
+|-
+| <code>6</code>
+| [[Java版1.20.2|1.20.2]]快照[[23w31a]]
+|-
+| <code>7</code>
+| [[Java版1.20.2|1.20.2]]快照[[23w32a]]到预发布版[[Java版1.20.2-pre1|1.20.2-pre1]]
+|-
+| <code>8</code>
+| [[Java版1.20.2|1.20.2]]预发布版[[Java版1.20.2-pre2|1.20.2-pre2]]到[[Java版1.20.3|1.20.3]]快照[[23w41a]]
+|-
+| <code>9</code>
+| [[Java版1.20.3|1.20.3]]快照[[23w42a]]
+|-
+| <code>10</code>
+| [[Java版1.20.3|1.20.3]]快照[[23w43a]]到[[23w44a]]
+|-
+| <code>11</code>
+| [[Java版1.20.3|1.20.3]]快照[[23w45a]]到[[23w46a]]
+|-
+| <code>12</code>
+| [[Java版1.20.3|1.20.3]]预发布版[[Java版1.20.3-pre1|1.20.3-pre1]]到[[Java版1.20.5|1.20.5]]快照[[24w05b]]
+|-
+| <code>13</code>
+| [[Java版1.20.5|1.20.5]]快照[[24w06a]]到[[24w07a]]
+|-
+| <code>14</code>
+| [[Java版1.20.5|1.20.5]]快照[[24w09a]]到[[24w10a]]
+|-
+| <code>15</code>
+| [[Java版1.20.5|1.20.5]]快照[[24w11a]]到[[24w12a]]及愚人节版本[[24w14potato]]
+|-
+| <code>16</code>
+| [[Java版1.20.5|1.20.5]]快照[[24w13a]]到[[Java版1.20.6|1.20.6]]正式版
+|-
+| <code>17</code>
+| [[Java版1.21|1.21]]快照[[24w18a]]到[[Java版1.21.2|1.21.2]]快照[[24w35a]]
+|-
+| <code>18</code>
+| [[Java版1.21.2|1.21.2]]快照[[24w36a]]到[[Java版1.21.3|1.21.3]]正式版
+|-
+| <code>19</code>
+| [[Java版1.21.4|1.21.4]]快照[[24w44a]]到正式版
+|-
+| <code>20</code>
+| [[Java版1.21.5|1.21.5]]快照[[25w02a]]
+|-
+| <code>21</code>
+| [[Java版1.21.5|1.21.5]]快照[[25w03a]]到[[25w04a]]
+|-
+| <code>22</code>
+| [[Java版1.21.5|1.21.5]]快照[[25w05a]]
+|-
+| <code>23</code>
+| [[Java版1.21.5|1.21.5]]快照[[25w06a]]到[[25w07a]]
+|-
+| <code>24</code>
+| [[Java版1.21.5|1.21.5]]快照[[25w08a]]到正式版及愚人节版本[[25w14craftmine]]
+|-
+| <code>25</code>
+| [[Java版1.21.6|1.21.6]]快照[[25w15a]]到[[25w20a]]
+|-
+| <code>26</code>
+| [[Java版1.21.6|1.21.6]]快照[[25w21a]]到[[Java版1.21.8|1.21.8]]正式版
+|-
+| <code>27</code>
+| [[Java版1.21.9|1.21.9]]快照[[25w31a]]到[[Java版1.21.10|1.21.10]]正式版
+|-
+| <code>28</code>
+| [[Java版1.21.11|1.21.11]]快照[[25w41a]]到[[25w46a]]
+|-
+| <code>29</code>
+| [[Java版1.21.11|1.21.11]]预发布版[[Java版1.21.11-pre1|1.21.11-pre1]]到[[Java版26.1|26.1]]快照[[Java版26.1-snapshot-1|26.1-snapshot-1]]
+|-
+| <code>30</code>
+| [[Java版26.1|26.1]]快照[[Java版26.1-snapshot-2|26.1-snapshot-2]]到[[Java版26.1.2|26.1.2]]正式版
+|-
+| <code>31</code>
+| [[Java版26.2|26.2]]快照[[Java版26.2-snapshot-1|26.2-snapshot-1]]到[[Java版26.2-snapshot-8|26.2-snapshot-8]]
+|-
+| <code>32</code>
+| [[Java版26.2|26.2]]预发布版[[Java版26.2-pre-1|26.2-pre-1]]到正式版
+|-
+| <code>33</code>
+| [[Java版26.3|26.3]]快照[[Java版26.3-snapshot-1|26.3-snapshot-1]]及以后
+|}
+
+== 历史 ==
+{{stub|section=1}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了散列资源文件，以减少{{filename|[[client.jar]]}}中打包的资源文件。
+|资源索引文件使用与版本号相关的名称。}}
+|{{HistoryLine||1.19.3|dev=22w42a|更改了资源索引文件的命名格式。
+|现在资源索引文件的名称从1开始，使用自增的编号。}}<!-- 似为误记
+|{{HistoryLine||1.21.2|dev=24w37a|将[[24w36a]]的索引名称由<code>17</code>更改为<code>18</code>。}}-->
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[ja:ハッシュ化リソースファイル]]

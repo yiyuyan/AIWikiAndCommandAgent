@@ -1,0 +1,149 @@
+# 页面: 诡异菌岩
+# 来源: https://zh.minecraft.wiki/w/%E8%AF%A1%E5%BC%82%E8%8F%8C%E5%B2%A9
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:19
+# 原始 Wikitext 内容:
+
+{{distinguish|菌丝体}}
+{{for|红色的菌岩变种|绯红菌岩}}
+{{Infobox block
+|image=Warped Nylium.png
+|invimage=Warped Nylium
+}}
+
+'''诡异菌岩（Warped Nylium）'''是一种在[[下界]]自然生成的方块。
+
+== 生成 ==
+=== 自然生成 ===
+诡异菌岩在[[诡异森林]]中自然生成。
+
+{{Block distribution}}
+
+=== 人工生成 ===
+对在诡异菌岩旁的[[下界岩]]{{ctrl|使用}}[[骨粉]]可以使下界岩变为诡异菌岩。激活朝向下界岩的内有骨粉的[[发射器]]也能使下界岩转变成诡异菌岩。{{in|je}}此过程中下界岩的上方必须是[[空气]]。
+
+==== 传播规则 ====
+如果在以下界岩为中心3×3×3的区域内有诡异菌岩，那么对下界岩使用[[骨粉]]时就能转变为诡异菌岩。
+
+== 获取 ==
+=== 末影人 ===
+手中搬着诡异菌岩的[[末影人]]会在死亡时掉落诡异菌岩。
+
+== 破坏 ==
+挖掘诡异菌岩的合适工具是[[镐]]。诡异菌岩需要木镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+没有被具有[[精准采集]]的工具挖掘破坏时，诡异菌岩被破坏后会掉落1个[[下界岩]]。
+
+被具有精准采集的工具挖掘破坏时，诡异菌岩被破坏后会掉落自身。
+
+== 用途 ==
+类似于[[草方块]]和[[菌丝体]]，当上方放有下表面[[遮挡形状]]完整的固体方块时诡异菌岩会退化为下界岩（基于[[随机刻]]）。但不同的是，当上方有[[水]]或[[熔岩]]时诡异菌岩不会退化。
+
+{{in|je}}当[[雪]]覆盖在诡异菌岩上时，诡异菌岩也会退化。<ref>{{bug|MC-174639|||WAI}}</ref>
+
+[[诡异菌]]必须种在诡异菌岩上才能用骨粉使其生长为对应的[[巨型诡异菌]]。
+
+[[末影人]]可以搬起及放下诡异菌岩。将[[游戏规则]]{{gamerule|mob_griefing|mobGriefing}}的值设为<code>false</code>将阻止该行为。
+
+=== 骨粉 ===
+类似于草方块，玩家可以对诡异菌岩{{ctrl|使用}}[[骨粉]]。被使用的诡异菌岩、其附近的诡异菌岩和绯红菌岩上方对[[诡异菌岩]]{{ctrl|使用}}[[骨粉]]有概率会在其上方5×5水平范围内的两种菌岩上生成下界苗。会生成两种[[菌索]]（包括[[绯红菌索]]<ref>{{bug|MC-182102||对诡异菌岩使用骨粉会生成绯红菌和绯红菌索|WAI}}</ref>）、两种[[下界菌]]（多数是诡异菌）和[[下界苗]]，还有{{frac|1|8}}的概率在其上下7×7水平范围内生成[[缠怨藤]]。
+
+; 生成细节
+<!-- mojmap data.worldgen.features.NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL -->
+{{in|je}}游戏首先会在该菌岩上方一格的水平偏移各2格内{{note|偏移量均符合中心为0的三角分布。|name=bias_triangular}}随机选取9次方块，并试图在此处按固定权重生成以下方块：
+
+{| class=wikitable
+! 方块 !! 概率
+|-
+| {{BlockLink|Warped Roots}} || {{frac|85|100}}
+|-
+| {{BlockLink|Crimson Roots}} || {{frac|1|100}}
+|-
+| {{BlockLink|Warped Fungus}} || {{frac|13|100}}
+|-
+| {{BlockLink|Crimson Fungus}} || {{frac|1|100}}
+|}
+
+如果目标位置为空气且可放置所选中的方块，则成功生成。
+
+<!-- mojmap data.worldgen.features.NetherFeatures.NETHER_SPROUTS_BONEMEAL -->
+随后，游戏会在该菌岩上方一格的水平偏移各2格内{{note|name=bias_triangular}}随机选取9次方块，并试图在此处生成[[下界苗]]；如果目标位置为空气且可放置所选中的方块，则成功生成。
+
+<!-- mojmap data.worldgen.features.NetherFeatures.TWISTING_VINES_BONEMEAL -->
+最后，游戏有{{frac|1|8}}的概率试图生成[[缠怨藤]]：如果该菌岩上方此时为空气，游戏将在该菌岩上方一格的水平偏移各3格、竖直偏移1格内{{note|偏移量均符合均匀分布。}}选取9次方块，并向下寻找第一个下方为非空气的空气方块{{note|包括该方块自身。}}，如果此位置存在且下方为下界岩、诡异菌岩或诡异疣块则在此放置缠怨藤。缠怨藤的高度在{{range|1|2}}中均匀抽取，然后以{{frac|1|6}}的概率翻倍，然后以{{frac|1|5}}的概率重置为1。缠怨藤顶端方块的<code>age</code>方块属性在{{range|17|25}}中均匀抽取。
+
+{| class=wikitable
+|+ 缠怨藤的高度分布
+! 高度 !! 概率
+|-
+| 1 || {{frac|8|15}}
+|-
+| 2 || {{frac|6|15}}
+|-
+| 4 || {{frac|1|15}}
+|}
+
+== 音效 ==
+{{Sound table/Block/Nylium}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Warped Nylium|spritetype=block|nameid=warped_nylium
+|showblocktags=je
+|blocktags={{GameTag|block|warped_nylium}}
+|showitemtags=je
+|itemtags={{GameTag|item|warped_nylium}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Warped Nylium
+|spritetype=block
+|nameid=warped_nylium
+|showblocktags=be
+|blocktags={{GameTagBE|block|warped_nylium}}
+|showitemtags=be
+|itemtags={{GameTagBE|item|warped_nylium}}
+|foot=1}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w06a|[[File:Warped Nylium JE1 BE1.png|32px]] 加入了诡异菌岩。}}
+|{{HistoryLine|||dev=20w07a|诡异菌岩现在可以通过和[[猪灵]]以物易物获得，这使得其可再生。}}
+|{{HistoryLine|||dev=20w10a|诡异菌岩不再能通过和猪灵以物易物获得，这使得其不可再生。}}
+|{{HistoryLine|||dev=20w12a|现在可对诡异菌岩使用[[骨粉]]来使其长出[[菌索]]、[[下界菌]]和[[下界苗]]。}}
+|{{HistoryLine|||dev=20w22a|诡异菌岩现在必须使用带有[[精准采集]]魔咒的工具采集，否则只会掉落[[下界岩]]。}}
+|{{HistoryLine||1.16.2|dev=20w27a|现在诡异菌岩拥有了[[方块标签]]{{cd|mushroom_grow_block}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|[[File:Warped Nylium JE1 BE1.png|32px]] 加入了诡异菌岩。
+|可以对诡异菌岩使用骨粉来生成[[诡异菌索]]、下界菌和下界苗。}}
+|{{HistoryLine||1.17.30|dev=1.17.30.23|现在可以对诡异菌岩使用骨粉来生成[[绯红菌索]]。}}
+}}
+
+== 你知道吗 ==
+* 菌岩的英文名称nylium是“'''N'''ether（[[下界]]）”和“M'''y'''ce'''lium'''（[[菌丝体]]）”的混成词。<ref>{{cite|url=https://www.minecraft.net/en-us/article/block-month--nylium|title=Block of the Month: Nylium|quote=Nether Mycelium}}</ref>
+
+== 画廊 ==
+<gallery>
+Warped Forest.png|在诡异森林大量生成的诡异菌岩
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|natural blocks}}
+
+[[en:Warped Nylium]]
+[[ko:진홍빛 네사체]]
+[[pt:Nicélio Carmesim]]

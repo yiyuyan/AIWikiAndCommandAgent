@@ -1,0 +1,128 @@
+# 页面: 技术迷苦力怕/ED
+# 来源: https://zh.minecraft.wiki/w/%E6%8A%80%E6%9C%AF%E8%BF%B7%E8%8B%A6%E5%8A%9B%E6%80%95/ED
+# 分类: 
+# 抓取时间: 2026-07-14 17:26:27
+# 原始 Wikitext 内容:
+
+{{nbt collapsed source|物品共通标签|no-remove=1|
+** {{nbt|string|id|required=1|existonsave=1}}：（[[命名空间ID]]）表示某种类的物品堆叠。若未指定，游戏会在加载区块或者生成物品时将其变更为空气。
+** {{nbt|byte|Count}}：[[物品]]的堆叠数，不存在时则默认为1。当此值不大于0时在游戏系统中将此物品视为空气。
+** {{nbt|compound|tag}}：关于当前物品的额外信息，详细内容见[[物品格式/Java版1.20.5前|物品格式]]。此标签对于多数物品来说都是非必须项。
+}}
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt collapsed|实体共通标签|
+** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）实体类型。此数据仅在持久化保存（存储入区块文件、[[结构模板]]、[[蜂巢（方块）|蜂巢]]、[[蜂箱]]数据或作为乘客实体保存）时存在。{{cmd|data}}无法获取此数据，也无法修改。
+** {{nbt|short|Air|existonsave=1}}：（{{interval|left=-20|right=实体最大空气值}}）当前实体所剩的空气值。在指定环境中每刻增加4直至实体最大空气值；在可窒息环境中逐渐减少直至-20，达到-20后如果实体仍然在可窒息环境中则会受到伤害，并将此值重置为0，继续减少进行循环。此值不存在时游戏默认为实体最大空气值。
+** {{nbt|string|CustomName}}：（[[文本组件]]）当前实体的自定义名称。会出现在玩家的死亡消息与村民的交易界面，以及玩家的光标指向的实体的上方。
+** {{nbt|bool|CustomNameVisible}}：表示实体是否一直渲染名称。如果为<samp>true</samp>，那么名称会一直在它们的上方渲染，而不受光标指向的影响。如果实体没有自定义名称，则渲染默认名称。此项不存在时游戏默认为<code>false</code>。
+** {{nbt|float|FallDistance|existonsave=1|required=1}}：当前实体已经摔落的距离。值越大，实体落地时受到的摔落伤害越大。
+** {{nbt|short|Fire|existonsave=1|required=1}}：正值代表距离火熄灭剩余的时间，负值表示当前实体能够在火中站立而不着火的时间，单位为游戏刻。未着火且未接触火时，玩家为-{{convert|20}}，其他实体为-{{convert|1}}。
+** {{nbt|bool|Glowing}}：实体是否有发光的轮廓线。此项不存在时游戏默认为<code>false</code>。
+** {{nbt|bool|HasVisualFire}}：表示实体是否视觉上正在着火。如果为<samp>true</samp>，实体会渲染为正在着火，但实际上可能没有着火。此项不存在时游戏默认为<code>false</code>。
+** {{nbt|bool|Invulnerable|existonsave=1|required=1}}：实体是否能抵抗绝大多数伤害。如果为<samp>true</samp>，实体只会受到来自[[创造模式]]玩家的伤害。
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体将要移动的距离向量。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|bool|NoGravity}}：实体是否不会受到重力的影响。此项不存在时游戏默认为<code>false</code>。
+** {{nbt|bool|OnGround|existonsave=1|required=1}}：实体是否正在接触地面。
+** {{nbt|list|Passengers}}：正在骑乘当前实体的实体的数据，递归标签。此值仅在使用{{cmd|summon}}指定标签生成实体、[[刷怪笼]]指定生成数据生成实体时此标签才可以有效设置，其他任何方式均无法有效设置。
+*** {{nbt|compound}}：一个乘客。
+**** 详见[[实体数据格式]]。
+** {{nbt|int|PortalCooldown|existonsave=1|required=1}}：距离当前实体下一次可以穿过[[下界传送门]]传送的时间，以游戏刻计。在使用下界传送门传送后，此项根据玩家游戏模式和当前游戏规则设置冷却。当实体不接触下界传送门方块时，此值每游戏刻减1直至0，此时才可以再次使用下界传送门传送。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+** {{nbt|list|Rotation|existonsave=1|required=1}}：实体的旋转角度，使用角度制。如果角度值为无限或非数（NaN），则对应角度会被修改为0度。
+*** {{nbt|float}}：（{{interval|left=0|right=360}}）当前实体以Y轴为中心，与正南方以顺时针方向旋转的视角角度（即偏转角）。如果角度值超出对应值域，则在按照相同朝向重新限制到值域内。
+*** {{nbt|float}}：（{{interval|left=-90|right=90}}）当前实体与视角与水平面之间的倾斜角（即俯仰角）。水平面为0，正值表示面朝下方，相反则为上方。如果此值超过值域，则被强制修改以回到值域。
+** {{nbt|bool|Silent}}：实体是否不会发出任何声音。此项不存在时游戏默认为<code>false</code>。
+** {{nbt|list|Tags}}：实体的自定义[[记分板标签]]。不超过1024个。
+*** {{nbt|string}}：一项记分板标签。
+** {{nbt|long|UUIDLeast|existonsave=1|required=1}}：实体的UUID最低有效位。
+** {{nbt|long|UUIDMost|existonsave=1|required=1}}：实体的UUID最高有效位。
+** {{nbt|string|UUID}}：实体的UUID，是有连字符的十六进制的形式。此数据只用于计算{{nbt|long|UUIDLeast}}和{{nbt|long|UUIDMost}}，在实体加载完成后被移除。
+}}
+** {{nbt collapsed|生物共通标签|
+** {{nbt|float|AbsorptionAmount|existonsave=1|required=1}}：生物的[[伤害吸收值]]。
+** {{nbt|list|ActiveEffects}}：该生物的状态效果的列表。如果当前生物没有状态效果则不存在此标签。
+*** {{nbt|compound}}：一项状态效果。
+**** {{nbt collapsed|状态效果|
+** {{nbt|bool|Ambient}}：表示状态效果是否是被信标添加的。如果不存在则为<code>false</code>。
+** {{nbt|byte|Amplifier}}：（无符号8位整数，{{interval|left=0|right=255}}）状态效果的等级。0表示等级1，以此类推。由于此数字为无符号整数，当值超过127时显示为负数但实际为正数，保存数字''s''和实际代表数字''a''的关系为<math>a=256+s</math>。如果不存在则为0。
+** {{nbt|int|Duration}}：距离状态效果失效的时间刻数。如果此值为-1，则此状态效果不会失效。如果不存在则为0。
+** {{nbt|int|Id|required=1|existonsave=1}}：状态效果的数字ID。
+** {{nbt|bool|ShowIcon}}：表示是否显示状态效果的图标。如果不存在则与{{nbt|bool|ShowParticles}}值相同。
+** {{nbt|bool|ShowParticles}}：表示是否显示粒子效果。如果不存在则为<code>true</code>。
+}}
+** {{nbt|list|Attributes|existonsave=1}}：当前生物的[[属性]]的列表。
+*** {{nbt|compound}}：一个属性。
+**** {{nbt|double|Base|existonsave=1|required=1}}：属性的基础值。
+**** {{nbt|list|Modifiers}}：限制本条属性的[[属性#修饰符|修饰符]]。修饰符在内部计算中调整基础值，但并不更改原值。修饰符永远不会使基础值调整后超过属性的最大值或最小值。
+***** {{nbt|compound}}：一个属性修饰符。
+****** {{nbt|double|Amount|existonsave=1}}：计算中修饰符调整基础值的数值。
+****** {{nbt|string|Name|existonsave=1|required=1}}：修饰符的名称。
+****** {{nbt|int|Operation|existonsave=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算模式]]。可以为<code>0</code>（Op0）、<code>1</code>（Op1）、<code>2</code>（Op2）。
+****** {{nbt|long|UUIDLeast|existonsave=1|required=1}}：该修饰符的UUID最低有效位。
+****** {{nbt|long|UUIDMost|existonsave=1|required=1}}：该修饰符的UUID最高有效位。
+**** {{nbt|string|Name|existonsave=1|required=1}}：属性的名称。
+** {{nbt|compound|Brain|existonsave=1}}：当前生物需要记住的所有信息。
+*** {{nbt|compound|memories}}：生物的记忆，用于[[生物AI]]的计算。
+**** 见[[生物记忆]]。
+** {{nbt|short|DeathTime|existonsave=1|required=1}}：距离生物死亡而被删除的时间，同时控制死亡动画。生物存活时为0，濒死时每游戏刻增加1，直至{{convert|20}}时生物被删除。
+** {{nbt|bool|FallFlying|existonsave=1}}：表示生物是否处于滑翔状态。
+** {{nbt|float|Health|existonsave=1}}：当前生物所拥有的生命值。当生命值被设置超过最大生命值时，如果生物受到伤害，生命值会被钳制到最大生命值内。
+** {{nbt|int|HurtByTimestamp|existonsave=1|required=1}}：生物上次被伤害的时间，以距离生物被创建的时间为准。每当生物被伤害后都被更新到最近的值，并每101刻更新一次直到攻击实体消失。可以通过{{cmd|data}}变更，但指定的值不会影响该项自动更新，当生物受到伤害时仍会被覆盖。
+** {{nbt|short|HurtTime|existonsave=1|required=1}}：生物被伤害后发红时间的倒计时。当刚刚被伤害时此值被设置为{{convert|10}}，每游戏刻减少1直到0。
+** {{nbt|int|SleepingX}}：当前生物正在睡觉的床的X坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|int|SleepingY}}：当前生物正在睡觉的床的Y坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|int|SleepingZ}}：当前生物正在睡觉的床的Z坐标，如果当前生物不在睡觉则不存在此标签。
+** {{nbt|string|Team}}：（不能导出和保存，仅可以加载或使用{{cmd|data}}修改）设置当前生物所属的[[队伍]]。
+}}
+** {{nbt collapsed|AI生物共通标签|
+** {{nbt|list|ArmorDropChances}}：代表穿戴盔甲掉落概率的浮点数的列表。
+*** {{nbt|float}}：靴子的掉落概率。
+*** {{nbt|float}}：护腿的掉落概率。
+*** {{nbt|float}}：胸甲的掉落概率。
+*** {{nbt|float}}：头盔的掉落概率。
+** {{nbt|list|ArmorItems|existonsave=1}}：生物正在穿戴的盔甲的列表，顺序按照：足部、腿部、胸部、头部。
+*** {{nbt|compound}}：靴子栏中的物品。
+**** {{nbt collapsed link|物品共通标签}}
+*** {{nbt|compound}}：护腿栏中的物品。
+**** {{nbt collapsed link|物品共通标签}}
+*** {{nbt|compound}}：胸甲栏中的物品。
+**** {{nbt collapsed link|物品共通标签}}
+*** {{nbt|compound}}：头盔栏中的物品。
+**** {{nbt collapsed link|物品共通标签}}
+** {{nbt|bool|CanPickUpLoot|existonsave=1|required=1}}：表示生物是否可以捡起战利品（穿戴捡起的盔甲，使用捡起的武器）。
+** {{nbt|string|DeathLootTable}}：决定当前生物被杀死后掉落物品的[[战利品表]]。
+** {{nbt|long|DeathLootTableSeed}}：生成战利品表的种子，0或未定义则使用[[随机序列]]。此标签必须和{{nbt|string|DeathLootTable}}一起设置否则不生效。
+** {{nbt|list|HandDropChances}}：代表手持物品掉落概率的浮点数的列表。
+*** {{nbt|float}}：主手手持物品掉落的概率。
+*** {{nbt|float}}：副手手持物品掉落的概率。
+** {{nbt|list|HandItems|existonsave=1}}：列表手持的物品的列表，顺序由主手到副手。
+*** {{nbt|compound}}：生物正在主手手持的物品。
+**** {{nbt collapsed link|物品共通标签}}
+*** {{nbt|compound}}：生物正在副手手持的物品。
+**** {{nbt collapsed link|物品共通标签}}
+** {{nbt|compound|Leash}}：'''二选一'''，代表生物目前是否被拴绳拴住与被拴住时的信息。如果没有被拴住则不存在此标签。
+*** {{nbt condition|当生物被拴绳拴在一个栅栏上时，附加的标签如下：}}
+*** {{nbt|int|X|existonsave=1|required=1}}：X坐标。
+*** {{nbt|int|Y|existonsave=1|required=1}}：Y坐标。
+*** {{nbt|int|Z|existonsave=1|required=1}}：Z坐标。
+*** {{nbt condition|当生物被另一个实体用拴绳拴住时，附加的标签如下：}}
+*** {{nbt|int-array|UUID|existonsave=1|required=1}}：拴绳连接到的实体的[[UUID]]。
+** {{nbt|bool|LeftHanded|existonsave=1|required=1}}：表示生物的主手是否为左手。
+** {{nbt|bool|NoAI}}：代表生物的AI是否被禁用。被禁用AI的生物不会尝试移动，也不会被动移动，在合适情况下也不会摔落。
+** {{nbt|bool|PersistenceRequired|existonsave=1|required=1}}：代表生物是否不会被自然删除。
+}}
+** {{nbt|bool|d20|existonsave=1|required=1}}：表示苦力怕是否为技术迷苦力怕。
+** {{nbt|byte|ExplosionRadius|existonsave=1}}：苦力怕爆炸的威力。不存在此值时游戏默认为3。
+** {{nbt|short|Fuse|existonsave=1}}：此苦力怕从引燃到爆炸的时间。当苦力怕的内部爆炸计时器达到此值时苦力怕爆炸。不存在此值时游戏默认为{{convert|30}}。
+** {{nbt|bool|ignited|existonsave=1}}：表示此苦力怕是否被玩家用物品点燃。
+** {{nbt|bool|powered}}：（当此值为<samp>true</samp>时存在）表示此苦力怕是否为闪电苦力怕。
+</div><noinclude>
+[[Category:实体数据值页面]]
+</noinclude>

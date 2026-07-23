@@ -1,0 +1,25 @@
+# 页面: 流浪商人/ED
+# 来源: https://zh.minecraft.wiki/w/%E6%B5%81%E6%B5%AA%E5%95%86%E4%BA%BA/ED
+# 分类: 实体数据值页面
+# 抓取时间: 2026-07-14 17:30:11
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt inherit/mob}}
+** {{nbt|int|Age|required=1|existonsave=1}}：此项对流浪商人没有用处。
+** {{nbt|int|DespawnDelay|existonsave=1}}：（默认为0）流浪商人强制消失前剩余的时间。如果此数值小于等于0则流浪商人不会强制消失。如果流浪商人正在与玩家交易则此值不减少。
+** {{nbt|int|ForcedAge|required=1|existonsave=1}}：此项对流浪商人没有用处。
+** {{nbt|list|Inventory|required=1|existonsave=1}}：流浪商人的物品栏，此标签最多容纳8组物品。当读取时，如果列表数量超过8，则超出范围的物品尝试与范围内的物品合并，如果无法合并则被删除。 
+*** {{nbt|compound}}：物品栏中的一个物品。
+**** {{nbt inherit/itemnoslot}}
+** {{nbt transclude|编码格式/Entity|codec_merchant_offers}}
+** {{nbt|int-array|wander_target}}：流浪商人的目的地。内部的三个整数分别代表了位置的XYZ坐标值。
+</div><noinclude>
+[[Category:实体数据值页面]]
+[[en:Wandering Trader/ED]]
+[[fr:Marchand ambulant/ED]]
+[[ja:行商人/ED]]
+[[th:Wandering Trader/ED]]
+[[uk:Мандрівний крамар/ДС]]
+</noinclude>

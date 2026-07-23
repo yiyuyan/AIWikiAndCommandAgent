@@ -1,0 +1,441 @@
+# 页面: 编辑世界
+# 来源: https://zh.minecraft.wiki/w/%E7%BC%96%E8%BE%91%E4%B8%96%E7%95%8C
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:35
+# 原始 Wikitext 内容:
+
+{{About|编辑已有世界的界面|创建新世界的界面|创建新的世界|游戏内部规则|游戏规则}}
+
+'''编辑世界（Edit World）'''是用于编辑已有世界的菜单。多数选项均为不同的[[游戏规则]]。
+
+== Java版 ==
+{{filetr|World Selection Menu Edit.png|thumb|{{tp|selectWorld.edit.title}}菜单}}
+在{{tp|selectWorld.title}}菜单选中一个世界后，屏幕下方的按钮可用于编辑该世界。点击“{{tp|selectWorld.edit}}”进入{{tp|selectWorld.edit.title}}菜单后会提供更多选项。
+{| class="wikitable"
+|-
+! 位置
+! 按钮
+! 介绍
+|-
+| style="font-size: larger; text-align: center;" rowspan="4" | {{tp|selectWorld.title}}菜单
+| style="font-size: larger; text-align: center;" | {{mcui|{{tp|selectWorld.select}}}}
+| 进入所选世界。双击一个世界或点击缩略图上的图标也可以进入。
+|-
+| style="font-size: larger; text-align: center;" | {{mcui|{{tp|selectWorld.deleteButton}}}}
+| 在确认后永久删除该世界。
+|-
+| style="font-size: larger; text-align: center;" | {{mcui|{{tp|selectWorld.recreate}}}}
+| 使用相同的[[种子（世界生成）|种子]]和世界选项重新创建一个世界。
+|-
+| style="font-size: larger; text-align: center;" | {{mcui|{{tp|selectWorld.edit}}}}
+| 打开{{tp|selectWorld.edit.title}}菜单。
+|-
+| style="font-size: larger; text-align: center;" rowspan="6" | {{tp|selectWorld.edit.title}}菜单
+| style="font-size: larger; text-align: center;" | {{mcui|{{tp|selectWorld.enterName}}}}
+| 显示世界的名称。重新输入即可为世界重命名。
+注意{{filename|.minecraft}}中的文件夹名称不会被修改。
+|-
+| style="font-size: larger; text-align: center;" | {{mcui|{{tp|selectWorld.edit.resetIcon}}}}
+| 删除该世界的{{filename|icon.png}}以便使用新的世界缩略图。新的世界缩略图会在下次点击“{{tp|menu.returnToMenu}}”时拍摄。{{verify}}
+|-
+| style="font-size: larger; text-align: center;" | {{mcui|{{tp|selectWorld.edit.openFolder}}}}
+| 打开{{filepath|.minecraft/saves/<选中的世界>/}}文件夹。
+|-
+| style="font-size: larger; text-align: center;" | {{mcui|{{visible anchor|备份世界|text={{tp|selectWorld.edit.backup}}}}}}
+| 在{{filepath|.minecraft/backups/}}中为选中的世界创建{{filename|.zip}}备份。文件名格式为{{filename|YYYY-MM-DD_hh-mm-ss_<世界文件夹名称>.zip}}。
+示例：{{filename|2020-12-24_13-32-00_新的世界.zip}}。此世界名为“新的世界”，创建于2020年12月24日13：32（下午1：32）。世界文件夹名称为'''创建该世界时'''使用的名称，不一定是该世界目前的名称。
+|-
+| style="font-size: larger; text-align: center;" | {{mcui|{{tp|selectWorld.edit.backupFolder}}}}
+| 打开{{filepath|.minecraft/backups/}}文件夹。
+|-
+| style="font-size: larger; text-align: center;" | {{mcui|{{visible anchor|优化世界|text={{tp|selectWorld.edit.optimize}}}}}}
+| 打开一个屏幕用于升级该世界的数据。升级后的世界不再兼容旧存档格式。共有四个选项：
+* '''{{tp|selectWorld.backupEraseCache}}''' 删除世界的数据，如亮度等级和生物群系数据。之后需要重新生成。
+* '''{{tp|selectWorld.backupJoinConfirmButton}}''' 在{{filepath|.minecraft/backups/}}备份该世界后开始优化。
+* '''{{tp|selectWorld.backupJoinSkipButton}}''' 不创建备份而直接开始优化。
+* '''{{tp|gui.cancel}}''' 取消优化进程。
+点击任何按钮之后，会开始优化该世界。[[Java版1.19|1.19]]及之后版本生成的[[区块]]会被跳过，因为这些区块已经使用了新格式。其余区块会被优化。
+|}
+
+== 基岩版 ==
+{{UsesInGameTranslations|bedrock|section=1}}
+
+{{filetr|Edit world General.png|thumb|“编辑世界”界面的“{{tr|通用|一般}}”选项卡}}
+[[File:World preview default.jpg|thumb|默认世界缩略图]]
+
+“编辑世界”界面允许玩家编辑已有世界的部分世界选项、启用和禁用资源包和行为包，删除、复制或导出世界。
+
+开启作弊或[[实验性玩法]]、使用任何不来自[[市场]]的[[附加包]]或选择创造模式会导致该世界无法获取[[成就]]。
+<!-- Json UI和Ore UI的选项名称和位置可能不同，不能直接复制。 -->
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | ''缩略图''
+| 显示世界的缩略图。
+|-
+| style="font-size: larger;" | {{mcui|[[File:BE icon edit-image.png|20px|class=pixel-image|link=]]|section}}
+|点击后会弹出“世界缩略图”窗口，显示内容如下：
+* 更改缩略图
+** 点击后会跳转到“选择屏幕截图”界面，玩家可在这里选择自己的[[截图#基岩版|截图]]作为该世界的缩略图。未登录时会提示玩家登录。
+* 重置为默认值
+** 将缩略图重置为使用自定义缩略图前的图片。
+|-
+| style="font-size: larger;" | {{mcui|{{tr|游戏|進行游戲}}|oreui|primary}}
+| 点击后即可进入世界。
+|-
+| style="font-size: larger;" | {{mcui|在 Realms 上{{tr|开始游戏|游玩}}|oreui|realms}}
+| 禁用多人游戏选项时不可用。{{info needed}}
+|}
+
+=== {{tr|通用|一般}} ===
+
+{{filetr|Edit world General.png|thumb|“编辑世界”界面的“{{tr|通用|一般}}”选项卡}}
+{{filetr|Edit world General Exportation settings.png|thumb|“{{tr|导出世界|匯出設定}}”界面}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | 世界名称
+| 编辑世界名称。
+| style="text-align: center;" | 我的世界
+|-
+| style="font-size: larger;" | 游戏模式
+| 设置世界默认的[[游戏模式]]。
+* [[生存]]
+* [[创造]]
+* [[冒险]]
+| style="text-align: center;" | 生存
+|-
+| style="font-size: larger;" | {{tr|难度|難易度}}
+| 更改世界的[[难度]]。
+* 和平
+* 简单
+* 一般
+* 困难
+| style="text-align: center;" | 一般
+|-
+| style="font-size: larger;" | 极限
+| 查看创建该世界是否启用了[[极限模式]]。不可修改。
+| style="font-size: larger;" | [[File:Toggle oreui hardcore off locked.png|55px]]
+|-
+| style="font-size: larger;" | 复制世界
+| 点击后会复制当前世界，并在新复制出的世界名称后添加序号，如“（1）”“（2）”等，以此类推。
+|-
+| style="font-size: larger;" | 删除世界
+| 点击后会弹出“删除世界”窗口，显示内容如下：<br>
+你确定吗？<br>
+{{tr|如果删除这个世界，它将会永远消失。|如果您刪除這個世界，它將不復存在。}}
+* 继续编辑
+* 删除世界
+|-
+| style="font-size: larger;" | {{tr|导出世界|匯出設定}}
+| 仅在Windows上可用，点击后会进入{{tr|导出世界|匯出設定}}菜单。
+|-
+! colspan="4" | {{tr|导出世界|匯出設定}}
+|-
+| style="font-size: larger;" | {{tr|清除玩家数据|清除玩家資料}}
+| 选择导出世界时是否不保存玩家数据。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px]]
+|-
+| style="font-size: larger;" | {{tr|以硬核模式导出|匯出為硬派模式}}
+| 目前没有效果。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px]]
+|-
+| style="font-size: larger;" | {{tr|导出为模板|匯出為範本}}
+| 目前没有效果。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px]]
+|-
+| style="font-size: larger;" | 取消
+| 点击后会退出{{tr|导出世界|匯出設定}}菜单。
+|-
+| style="font-size: larger;" | {{tr|导出|匯出}}
+| 点击后会弹出一个窗口，用于选择导出文件的位置。
+|}
+
+=== {{tr|高级|進階}} ===
+
+{{filetr|Edit world Advanced.png|thumb|“编辑世界”界面的“{{tr|高级|進階}}”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | 世界种子
+| 查看[[世界]]生成时使用的[[种子（世界生成）|种子]]，创建世界后不可修改。
+* 在编辑框的右侧有“复制种子”按钮，点击后会复制该世界的种子。
+| style="text-align: center;" | 创建世界时使用的种子
+|-
+| style="font-size: larger;" | {{tr|平坦的世界|平地世界}}
+| 查看该世界是否是以{{tr|平坦的世界|平地世界}}创建的。不可修改。
+| style="text-align: center;" | [[File:BE Ore UI off locked.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/showCoordinates|显示坐标]]
+| 选择在游玩世界时，屏幕左上角是否显示玩家所处[[坐标]]。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/showDaysPlayed|{{tr|显示游玩的天数|顯示遊玩天數}}]]
+| 选择在游玩世界时，屏幕左上角是否显示玩家游玩天数。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/recipesUnlock|配方解锁]]
+| 选择配方是否需要解锁。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/doFireTick|{{tr|火焰蔓延|火焰會蔓延}}]]
+| 选择[[火]]是否会传播、烧毁方块和熄灭，以及熔岩是否会点燃附近的可燃方块。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/tntExplodes|{{tr|TNT 爆炸|炸藥會爆炸}}]]
+| 选择[[TNT]]和[[TNT矿车]]是否会可被激活。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/doMobLoot|生物战利品]]
+| 选择生物死亡后是否会掉落物品。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/naturalRegeneration|{{tr|自然生命恢复|自然再生}}]]
+| 选择玩家是否会在饥饿值足够时恢复生命值。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[方块掉落|{{tr|方块掉落|磚塊掉落物品}}]]
+| 选择破坏方块时是否正常产生掉落物。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | {{tr|通过睡觉跳过夜晚|用睡眠跳過夜晚}}
+| 选择能否使用[[床]]跳过夜晚。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/playersSleepingPercentage|{{tr|需要睡觉的玩家|所需睡眠玩家數}}]]
+| 允许修改跳过夜晚所需的入睡玩家所占百分比，仅开启“{{tr|通过睡觉跳过夜晚|用睡眠跳過夜晚}}”时可用。
+| style="text-align: center;" | 100%
+|-
+| style="font-size: larger;" | [[游戏规则/doImmediateRespawn|立即重生]]
+| 选择玩家死亡之后是否立即[[重生]]。若打开则在玩家死亡后会立即回到重生点；若关闭则玩家死亡后会显示“你死了”的字样、玩家的[[死亡消息]]以及重生和回到主界面两个按钮。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/respawnBlocksExplode|重生方块爆炸]]
+| 选择在非对应的维度使用[[床]]或[[重生锚]]是否会使其爆炸。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/spawnRadius|重生半径]]
+| 调整重生随机范围。可选择0~128（含）之间的整数。
+| style="text-align: center;" | 10
+|-
+| style="font-size: larger;" | [[模拟距离]]
+| 更改模拟距离。选择范围视设备性能而定。
+| style="text-align: center;" | 4
+|-
+| style="font-size: larger;" | {{tr|初始地图|起始地圖}}
+| 查看创建世界时是否启用了{{tr|初始地图|起始地圖}}。不可修改。
+| style="text-align: center;" | [[File:BE Ore UI off locked.png|55px]]
+|-
+| style="font-size: larger;" | {{tr|奖励箱子|贈品箱}}
+| 查看创建世界时是否启用了{{tr|奖励箱子|贈品箱}}。不可修改。
+| style="text-align: center;" | [[File:BE Ore UI off locked.png|55px]]
+|}
+
+=== 多人游戏 ===
+
+{{filetr|Edit world Multiplayer.png|thumb|“编辑世界”界面的“多人游戏”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | 多人游戏
+| 选择该世界是否启用多人游戏。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | {{tr|玩家访问|玩家存取}}
+| 切换哪些玩家可以进入该世界。
+* 受邀玩家
+* 好友
+* 好友的好友
+| style="text-align: center;" | 好友
+|-
+| style="font-size: larger;" | {{tr|默认玩家权限|預設玩家權限}}
+| 调整任何加入世界的玩家的默认权限等级。
+* 访客（无法与世界交互）
+* 成员（能与世界交互，但不能使用命令）
+* {{tr|操作员|操作者}}（前者基础上可使用命令）
+| style="text-align: center;" | 成员
+|-
+| style="font-size: larger;" | {{tr|对局域网内玩家可见|LAN 玩家可見}}
+| 选择在该世界中游玩且“多人游戏”为开启时，局域网内的其他玩家是否可以发现该世界。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/pvp|{{tr|误伤|友方誤傷}}]]
+| 选择玩家之间能否互相攻击。打开即可以，反之亦然。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/locatorBar|{{tr|定位栏|定位列}}]]
+| 选择是否显示[[定位栏]]。
+| style="text-align: center;" | [[File:BE Ore UI on.png|55px]]
+|}
+
+=== {{tr|无敌模式|作弊}} ===
+
+{{filetr|Edit world Cheats.png|thumb|“编辑世界”界面的“{{tr|无敌模式|作弊}}”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tr|无敌模式|作弊}}
+| 选择是否启用[[作弊]]。启用后才能调整下方其他选项。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px]]
+|-
+| style="font-size: larger;" | 日照时长
+| 选择[[时间]]是否流逝。
+* [[游戏规则/doDaylightCycle|{{tr|普通|一般}}]]
+* [[命令/daylock|{{tr|终为白日|永為白晝}}]]
+* [[游戏规则/doDaylightCycle|锁定时间]]
+| style="text-align: center;" | {{tr|普通|一般}}
+|-
+| style="font-size: larger;" | [[游戏规则/keepInventory|保留物品栏]]
+| 选择玩家死亡时是否掉落身上的[[物品]]和[[经验值]]。
+| style="text-align: center;" | [[File:BE Ore UI off locked.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/doMobSpawning|{{tr|生物生成|生物重生}}]]
+| 选择世界中生物是否能自然生成。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/mobGriefing|{{tr|生物破坏|生物惡意破壞}}]]
+| 选择生物能否与世界内方块互动或对其造成影响。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/doEntityDrops|实体掉落战利品]]
+| 选择非生物实体在被破坏时是否产生对应的掉落物。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/doWeatherCycle|{{tr|天气更替|天氣循環}}]]
+| 选择世界中的天气是否会变化。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px]]
+|-
+| style="font-size: larger;" | [[游戏规则/commandBlocksEnabled|{{tr|命令方块|指令方塊}}]]
+| 选择[[命令方块]]能否运行。
+| style="text-align: center;" | [[File:BE Ore UI on locked.png|55px]]
+|-
+| style="font-size: larger;" | Education Edition
+| 是否在此世界启用部分[[教育版独有特性]]。
+| style="text-align: center;" | [[File:BE Ore UI off locked.png|55px]]
+|-
+| style="font-size: larger;" |[[游戏规则/randomTickSpeed|随机刻速度]]
+| 编辑世界中[[随机刻|随机事件发生率]]的数字，可选择0~4096（含）之间的整数编辑框右侧有一个重置按钮。
+| style="text-align: center;" | 1
+|}
+
+=== 资源包 ===
+
+{{filetr|Edit world Resource packs.png|thumb|“编辑世界”界面的“资源包”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tr|共享包|共用套件}}
+| 选择是否要求加入世界的其他玩家下载该世界已启用的[[资源包]]。
+| style="text-align: center;" | [[File:BE Ore UI off.png|55px]]
+|-
+| style="font-size: larger;" | {{tr|活跃|啟動}}
+| 列出已激活的资源包。
+|-
+| style="font-size: larger;" | {{tr|可用|可使用}}
+| 列出所有未激活的资源包。
+|-
+| style="font-size: larger;" | 已拥有（折叠栏）
+| 列出所有从[[市场]]获得的资源包，以及前往市场的按钮。
+|-
+| style="font-size: larger;" | Marketplace Pass
+| {{info needed}}
+|-
+| style="font-size: larger;" | {{tr|获取更多包|取得更多套件}}（折叠栏）
+| {{tr|获取更多包|取得更多套件}}（折叠栏）
+|}
+
+=== {{tr|行为包|行為套件}} ===
+
+{{filetr|Edit world Behavior packs.png|thumb|“编辑世界”界面的“{{tr|行为包|行為套件}}”选项卡}}
+
+{| class="wikitable" 
+|-
+! 选项
+! 描述
+! 默认
+|-
+| style="font-size: larger;" | {{tr|活跃|啟動}}
+| 列出已激活的行为包。
+|-
+| style="font-size: larger;" | {{tr|可用|可使用}}
+| 列出所有未激活的行为包。
+|}
+
+=== {{tr|实验性游戏内容|實驗性玩法}} ===
+
+{{filetr|Edit world Experiments.png|thumb|“编辑世界”界面的“{{tr|实验性游戏内容|實驗性玩法}}”选项卡}}
+
+此处列出可以启用的[[实验性玩法]]选项，已启用的选项不可关闭。
+{{-}}
+
+== 历史 ==
+{{stub|缺失世界选项的详细历史信息|section=1}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||2018年7月16日|link=https://web.archive.org/web/20190712192453/twitter.com/Dinnerbone/status/1018773041227227136|[[File:World Converter.jpg|x32px]]Dinnerbone提到有可能会添加优化世界屏幕，并展示了一张早期版本的图片。}}
+|{{HistoryLine||1.13|dev=pre10|添加了优化世界屏幕。}}
+|{{HistoryLine|||dev=正式版|现在优化世界屏幕还会显示升级、跳过和总区块数。}}
+|{{HistoryLine||1.20|dev=pre1|更换了背景纹理。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.60|dev=1.20.60.23|现在编辑世界屏幕使用Ore UI。}}
+|{{HistoryLine||1.21.51|现在使用Ore UI的编辑世界屏幕在正式版可用。<ref>{{tweet|Volgar|1872771566146338897|Oh, by the way, the Ore UI version of the Edit World screen should now be available to all players. Happy holidays!}}</ref>}}
+}}
+
+== 画廊 ==
+=== Java版 ===
+{{gallery|
+World Selection Menu.png|convert|“{{tp|selectWorld.title}}”菜单
+World Selection Menu Optimize.png|convert|“{{tp|selectWorld.edit.title}}”菜单
+World Selection Menu Delete.png|convert|“{{tp|selectWorld.deleteQuestion}}”
+}}
+
+=== 基岩版 ===
+{{gallery|
+Edit world General.png|convert|“{{tr|通用|一般}}”选项卡
+Edit world Advanced.png|convert|“{{tr|高级|進階}}”选项卡
+Edit world Multiplayer.png|convert|“多人游戏”选项卡
+Edit world Cheats.png|convert|“{{tr|无敌模式|作弊}}”选项卡
+Edit world Resource packs.png|convert|“资源包”选项卡
+Edit world Behavior packs.png|convert|“{{tr|行为包|行為套件}}”选项卡
+Edit world Experiments.png|convert|“{{tr|实验性游戏内容|實驗性玩法}}”选项卡
+}}
+
+<!-- === 历史 ===
+<gallery>
+Edit World JE-1.20.1.png|A [[world]]'s edit screen in Java Edition 1.20.1.
+</gallery> -->
+
+== 另请参阅 ==
+* [[Ore UI]]，{{el|be}}中的全新UI。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Minecraft}}
+
+[[en:World Options]]
+[[pt:Opções do mundo]]

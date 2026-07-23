@@ -1,0 +1,1834 @@
+# 页面: 动画
+# 来源: https://zh.minecraft.wiki/w/%E5%8A%A8%E7%94%BB
+# 分类: 
+# 抓取时间: 2026-07-14 17:20:48
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock}}
+{{stub|补充内容、改进说明}}
+
+'''动画（Animation）'''是基岩版的技术性标签，用于指定[[实体]]播放的动画，可用于命令{{cmd|playanimation}}和制作[[附加包]]，使用json文件编辑。
+<!--- en:Animation页面目前和此页面的内容不同，此页面目前在整理基岩版命令/playanimantion的动画字符串 --->
+
+== 列表 ==
+下列为目前版本的动画： <!-- 整理完后在此处添加“所有” -->
+{| class="wikitable sortable"
+! 实体
+! 动画字符串
+! 说明
+! 是否循环
+! 动画长度
+|-
+| rowspan=3 | {{EntityLink|agent}}
+| {{cd|animation.agent.move}}
+| 智能体移动动画
+| 是
+| N/A
+|-
+| {{cd|animation.agent.swing_arms}}
+| 智能体抬起手臂动画
+| 是
+| N/A
+|-
+| {{cd|animation.agent.shrug}}
+| 智能体执行命令失败动画
+| 否
+| 1.5
+|-
+| rowspan=6 | {{EntityLink|allay}}
+| {{cd|animation.allay.dance}}
+| 悦灵跳舞动画
+| 是
+| 2.75
+|-
+| {{cd|animation.allay.fly}}
+| 悦灵飞行动画
+| 是
+| 2
+|-
+| {{cd|animation.allay.hold_item}}
+| 悦灵手持物品动画
+| 停留到最后一帧
+| 2
+|-
+| {{cd|animation.allay.hold_item_fly}}
+| 悦灵手持物品飞行动画
+| 是
+| 2
+|-
+| {{cd|animation.allay.idle}}
+| 悦灵空闲动画
+| 是
+| 2
+|-
+| {{cd|animation.allay.look_at_target.default}}
+| 悦灵看向目标动画
+| 是
+| N/A
+|-
+| rowspan=13 | {{EntityLink|armadillo}}
+| {{cd|animation.armadillo.look_at_target}}
+| 犰狳看向目标
+| 是
+| N/A
+|-
+| {{cd|animation.armadillo.walk}}
+| 犰狳移动动画
+| 是
+| 1.45833<!-- 35/24 -->
+|-
+| {{cd|animation.armadillo.roll_up}}
+| 犰狳蜷缩动画
+| 停留到最后一帧
+| 0.5
+|-
+| {{cd|animation.armadillo.rolled_up}}
+| 犰狳蜷缩后动画
+| 停留到最后一帧
+| N/A
+|-
+| {{cd|animation.armadillo.peek}}
+| 犰狳窥视动画
+| 停留到最后一帧
+| 2.5
+|-
+| {{cd|animation.armadillo.unroll}}
+| 犰狳起身动画
+| 停留到最后一帧
+| 1.5
+|-
+| {{cd|animation.armadillo.unroll_fast}}
+| 犰狳快速起身动画
+| 停留到最后一帧
+| 0.05
+|-
+| {{cd|animation.armadillo.baby_walk}}
+| 幼年犰狳移动动画
+| 是
+| 1.4583
+|-
+| {{cd|animation.armadillo.baby_roll_up}}
+| 幼年犰狳蜷缩动画
+| 停留到最后一帧
+| 0.5
+|-
+| {{cd|animation.armadillo.baby_rolled_up}}
+| 幼年犰狳蜷缩后动画
+| 停留到最后一帧
+| N/A
+|-
+| {{cd|animation.armadillo.baby_peek}}
+| 幼年犰狳窥视动画
+| 停留到最后一帧
+| 2.5
+|-
+| {{cd|animation.armadillo.baby_unroll}}
+| 幼年犰狳起身动画
+| 停留到最后一帧
+| 1.5
+|-
+| {{cd|animation.armadillo.baby_unroll_fast}}
+| 幼年犰狳快速起身动画
+| 停留到最后一帧
+| 1.5
+|-
+| rowspan=4 | {{ItemLink|armor}}
+| {{cd|animation.armor.helmet.offset}}
+| 装备头盔动画
+| 是
+| N/A
+|-
+| {{cd|animation.armor.chestplate.offset}}
+| 装备胸甲动画
+| 是
+| N/A
+|-
+| {{cd|animation.armor.leggings.offset}}
+| 装备护腿动画
+| 是
+| N/A
+|-
+| {{cd|animation.armor.boots.offset}}
+| 装备靴子动画
+| 是
+| N/A
+|-
+| rowspan=15 | {{EntityLink|armor-stand}}
+| {{cd|animation.armor_stand.athena_pose}}
+| 盔甲架[[wzh:雅典娜|雅典娜]]姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.brandish_pose}}
+| 盔甲架挥剑姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.cancan_a_pose}}
+| 盔甲架[[wzh:康康舞|康康舞]]姿势（向右）
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.cancan_b_pose}}
+| 盔甲架康康舞姿势（向左）
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.default_pose}}
+| 盔甲架默认姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.entertain_pose}}
+| 盔甲架招待姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.hero_pose}}
+| 盔甲架勇者姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.holding_heavy_core}}
+| 盔甲架持有[[沉重核心]]
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.honor_pose}}
+| 盔甲架致敬姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.no_pose}}
+| 盔甲架无姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.riposte_pose}}
+| 盔甲架回刺反击姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.salute_pose}}
+| 盔甲架行礼姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.solemn_pose}}
+| 盔甲架典仪姿势
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.wiggle}}
+| 盔甲架摆动（受伤时）
+| 是
+| N/A
+|-
+| {{cd|animation.armor_stand.zombie_pose}}
+| 盔甲架僵尸姿势
+| 是
+| N/A
+|-
+| {{EntityLink|arrow}}
+| {{cd|animation.arrow.move}}
+| 箭移动动画
+| 是
+| N/A
+|-
+| rowspan=14 | {{EntityLink|axolotl}}
+| {{cd|animation.axolotl.idle_underwater}}
+| 美西螈水中空闲动画
+| 是
+| 5.2
+|-
+| {{cd|animation.axolotl.idle_floor}}
+| 美西螈地面空闲动画
+| 是
+| 2.8
+|-
+| {{cd|animation.axolotl.idle_floor_underwater}}
+| 美西螈水底空闲动画
+| 是
+| 5.12
+|-
+| {{cd|animation.axolotl.play_dead}}
+| 美西螈装死动画
+| 是
+| N/A
+|-
+| {{cd|animation.axolotl.swim}}
+| 美西螈游泳动画
+| 是
+| 1
+|-
+| {{cd|animation.axolotl.swim_angle}}
+| 美西螈斜向游泳动画
+| 是
+| N/A
+|-
+| {{cd|animation.axolotl.walk_floor}}
+| 美西螈地面移动动画
+| 是
+| 2.72
+|-
+| {{cd|animation.axolotl.walk_floor_underwater}}
+| 美西螈水底移动动画
+| 是
+| 2.04
+|-
+| {{cd|animation.axolotl.baby_idle_underwater}}
+| 幼年美西螈水中空闲动画
+| 是
+| 5.2
+|-
+| {{cd|animation.axolotl.baby_idle_floor}}
+| 幼年美西螈地面空闲动画
+| 是
+| 2.88
+|-
+| {{cd|animation.axolotl.baby_idle_floor_underwater}}
+| 幼年美西螈水底空闲动画
+| 是
+| 5.12
+|-
+| {{cd|animation.axolotl.baby_swim}}
+| 幼年美西螈游泳动画
+| 是
+| 1
+|-
+| {{cd|animation.axolotl.baby_walk_floor}}
+| 幼年美西螈地面移动动画
+| 是
+| 2.72
+|-
+| {{cd|animation.axolotl.baby_walk_floor_underwater}}
+| 幼年美西螈水底移动动画
+| 是
+| 2.04
+|-
+| rowspan=2 | {{EntityLink|bat}}
+| {{cd|animation.bat.resting}}
+| 蝙蝠倒挂休息动画
+| 是
+| N/A
+|-
+| {{cd|animation.bat.flying}}
+| 蝙蝠飞行动画
+| 是
+| 0.5
+|-
+| rowspan=4 | {{EntityLink|bee}}
+| {{cd|animation.bee.flying}}
+| 蜜蜂飞行动画
+| 是
+| 2.55
+|-
+| {{cd|animation.bee.sting}}
+| 蜜蜂攻击动画
+| 是
+| N/A
+|-
+| {{cd|animation.bee.no_stinger}}
+| 蜜蜂失去螯针动画
+| 是
+| N/A
+|-
+| {{cd|animation.bee.bobbing}}
+| 蜜蜂采粉动画
+| 是
+| N/A
+|-
+| {{EntityLink|blaze}}
+| {{cd|animation.blaze.move}}
+| 烈焰人空闲动画
+| 是
+| N/A
+|-
+| rowspan=2 | {{ItemLink|bow}}
+| {{cd|animation.bow.wield}}
+| 使用弓动画
+| 是
+| N/A
+|-
+| {{cd|animation.bow.wield_first_person_pull}}
+| 第一人称使用弓动画
+| 是
+| N/A
+|-
+| rowspan=7 | {{EntityLink|breeze}}
+| {{cd|animation.breeze.idle}}
+| 旋风人空闲动画
+| 是
+| 2
+|-
+| {{cd|animation.breeze.idle_ground_particles}}
+| 旋风人空闲生成地面粒子动画
+| 否
+| 0.1
+|-
+| {{cd|animation.breeze.jump}}
+| 旋风人跳跃动画
+| 是
+| 1.125
+|-
+| {{cd|animation.breeze.slide}}
+| 旋风人滑行动画
+| 停留到最后一帧
+| 0.2
+|-
+| {{cd|animation.breeze.slide_ground_particles}}
+| 旋风人生成地面粒子动画
+| 是
+| 0.1
+|-
+| {{cd|animation.breeze.shoot}}
+| 旋风人射击动画
+| 否
+| 1.125
+|-
+| {{cd|animation.breeze.whirl_sound}}
+| 旋风人播放空闲音效动画
+| 是
+| 1.5
+|-
+| rowspan=13 | {{EntityLink|camel}}<br>{{EntityLink|camel husk}}
+| {{cd|animation.camel.dash}}
+| 成年骆驼和骆驼尸壳冲刺动画
+| 是
+| 0.5
+|-
+| {{cd|animation.camel.dash_sound}}
+| 骆驼播放冲刺音效动画
+| 否
+| 0.5
+|-
+| {{cd|animation.camel.idle}}
+| 成年骆驼和骆驼尸壳空闲动画
+| 是
+| 4
+|-
+| {{cd|animation.camel.sit}}
+| 成年骆驼和骆驼尸壳坐时动画
+| 是
+| N/A
+|-
+| {{cd|animation.camel.sit_down}}
+| 成年骆驼和骆驼尸壳坐下动画
+| 停留到最后一帧
+| 2
+|-
+| {{cd|animation.camel.stand_up}}
+| 成年骆驼和骆驼尸壳起身动画
+| 停留到最后一帧
+| 2.6
+|-
+| {{cd|animation.camel.walk}}
+| 成年骆驼和骆驼尸壳移动动画
+| 是
+| 1.5
+|-
+| {{cd|animation.camel.baby_dash}}
+| 幼年骆驼冲刺动画，未使用
+| 是
+| 0.5
+|-
+| {{cd|animation.camel.baby_idle}}
+| 幼年骆驼空闲动画
+| 是
+| 4
+|-
+| {{cd|animation.camel.baby_sit}}
+| 幼年骆驼坐时动画
+| 是
+| N/A
+|-
+| {{cd|animation.camel.baby_sit_down}}
+| 幼年骆驼坐下动画
+| 停留到最后一帧
+| 2
+|-
+| {{cd|animation.camel.baby_stand_up}}
+| 幼年骆驼起身动画
+| 停留到最后一帧
+| 2.6
+|-
+| {{cd|animation.camel.baby_walk}}
+| 幼年骆驼移动动画
+| 是
+| 1.5
+|-
+| rowspan=8 | {{EntityLink|cat}}
+| {{cd|animation.cat.baby_transform}}
+| 猫幼年体型，未使用
+| 是
+| N/A
+|-
+| {{cd|animation.cat.lie_down}}
+| 猫躺下动画
+| 是
+| N/A
+|-
+| {{cd|animation.cat.sit}}
+| 猫坐下动画
+| 是
+| N/A
+|-
+| {{cd|animation.cat.sneak}}
+| 猫潜行动画
+| 是
+| N/A
+|-
+| {{cd|animation.cat.sprint}}
+| 猫疾跑动画
+| 是
+| N/A
+|-
+| {{cd|animation.cat.walk}}
+| 猫移动动画
+| 是
+| N/A
+|-
+| {{cd|animation.cat.baby_lie_down}}
+| 幼年猫躺下动画
+| 是
+| 0.0417
+|-
+| {{cd|animation.cat.baby_sit}}
+| 幼年猫坐下动画
+| 是
+| 0.0417
+|-
+| rowspan=4 | {{EntityLink|Chicken}}
+| {{cd|animation.chicken.baby_transform}}
+| 幼年鸡体型，未使用
+| 是
+| N/A
+|-
+| {{cd|animation.chicken.general}}
+| 鸡空闲动画
+| 是
+| N/A
+|-
+| {{cd|animation.chicken.general.v1.0}}
+| 鸡空闲动画（v1.0）
+| 是
+| N/A
+|-
+| {{cd|animation.chicken.move}}
+| 鸡移动动画
+| 是
+| N/A
+|-
+| rowspan=2 | {{EntityLink|Cod}}
+| {{cd|animation.cod.flop}}
+| 鳕鱼扑腾动画
+| 是
+| N/A
+|-
+| {{cd|animation.cod.swim}}
+| 鳕鱼游泳动画
+| 是
+| N/A
+|-
+| rowspan=10 | {{EntityLink|Copper Golem}}
+| {{cd|animation.copper_golem.walk}}
+| 铜傀儡移动动画
+| 是
+| 0.8333
+|-
+| {{cd|animation.copper_golem.spin}}
+| 铜傀儡旋转头部动画
+| 否
+| 3.5
+|-
+| {{cd|animation.copper_golem.spin.weathered}}
+| 锈蚀的铜傀儡旋转头部动画，未使用
+| 否
+| 3.5
+|-
+| {{cd|animation.copper_golem.spin.oxidized}}
+| 氧化的铜傀儡旋转头部动画，未使用
+| 否
+| 3.5
+|-
+| {{cd|animation.copper_golem.walk_holding_item}}
+| 铜傀儡手持物品移动动画
+| 是
+| 0.8333
+|-
+| {{cd|animation.copper_golem.hold_item}}
+| 铜傀儡手持物品空闲动画
+| 是
+| 0.8333
+|-
+| {{cd|animation.copper_golem.chest_interaction.put_item}}
+| 铜傀儡放入物品动画
+| 是
+| 3
+|-
+| {{cd|animation.copper_golem.chest_interaction.put_item_fail}}
+| 铜傀儡放入物品失败动画
+| 是
+| 3
+|-
+| {{cd|animation.copper_golem.chest_interaction.take_item}}
+| 铜傀儡取出物品动画
+| 是
+| 3
+|-
+| {{cd|animation.copper_golem.chest_interaction.take_item_fail}}
+| 铜傀儡取出物品失败动画
+| 是
+| 3
+|-
+| rowspan=3 | {{EntityLink|Cow}}
+| {{cd|animation.cow.baby_transform}}
+| 幼年牛体型，未使用
+| 是
+| N/A
+|-
+| {{cd|animation.cow.setup}}
+| 牛模型配置动画
+| 是
+| N/A
+|-
+| {{cd|animation.cow.setup.v1.0}}
+| 牛模型配置动画（v1.0）
+| 是
+| N/A
+|-
+| rowspan=5 | {{EntityLink|creaking}}
+| {{cd|animation.creaking.attack}}
+| 嘎枝攻击动画
+| 否
+| 0.7083<!-- 17/24 -->
+|-
+|{{cd|animation.creaking.look_at_target}}
+| 嘎枝看向目标动画
+| 是
+| N/A
+|-
+| {{cd|animation.creaking.sway}}
+| 嘎枝摆动动画（受伤时）
+| 否
+| 0.275
+|-
+| {{cd|animation.creaking.twitch}}
+| 嘎枝抽搐动画
+| 停留到最后一帧
+| 2.25
+|-
+| {{cd|animation.creaking.walk}}
+| 嘎枝移动动画
+| 是
+| 1.125
+|-
+| rowspan=2 | {{EntityLink|creeper}}
+| {{cd|animation.creeper.legs}}
+| 苦力怕移动动画
+| 是
+| N/A
+|-
+| {{cd|animation.creeper.swelling}}
+| 苦力怕即将爆炸时的膨胀动画
+| 是
+| N/A
+|-
+| rowspan=2 | {{ItemLink|crossbow}}
+| {{cd|animation.crossbow.wield}}
+| 使用弩动画
+| 是
+| N/A
+|-
+| {{cd|animation.crossbow.wield_first_person_pull}}
+| 第一人称使用弩动画
+| 是
+| N/A
+|-
+| {{EntityLink|dolphin}}
+| {{cd|animation.dolphin.move}}
+| 海豚游泳动画
+| 是
+| N/A
+|-
+| rowspan=4 | {{EntityLink|drowned}}
+| {{cd|animation.drowned.attack.rotations}}
+| 溺尸旋转角度
+| 是
+| N/A
+|-
+| {{cd|animation.drowned.attack.rotations.v1.0}}
+| 溺尸旋转角度（v1.0）
+| 是
+| N/A
+|-
+| {{cd|animation.drowned.attack.baby_rotations}}
+| 幼年溺尸旋转角度
+| 是
+| N/A
+|-
+| {{cd|animation.drowned.swimming.v1.0}}
+| 溺尸游泳动画（v1.0）
+| 是
+| N/A
+|-
+| rowspan=5 | {{ItemLink|elytra}}
+| {{cd|animation.elytra.default}}
+| 鞘翅默认动画
+| 是
+| N/A
+|-
+| {{cd|animation.elytra.gliding}}
+| 鞘翅[[滑翔]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.elytra.sneaking}}
+| 潜行时鞘翅动画
+| 是
+| N/A
+|-
+| {{cd|animation.elytra.sleeping}}
+| 睡觉时鞘翅动画
+| 是
+| N/A
+|-
+| {{cd|animation.elytra.swimming}}
+| 游泳时鞘翅动画
+| 是
+| N/A
+|-
+| {{EntityLink|ender-crystal}}
+| {{cd|animation.ender_crystal.move}}
+| 末地水晶上下移动动画
+| 是
+| N/A
+|-
+| rowspan=5 | {{EntityLink|Ender Dragon}}
+| {{cd|animation.ender_dragon.setup}}
+| 末影龙配置动画
+| 是
+| N/A
+|-
+| {{cd|animation.ender_dragon.jaw_movement}}
+| 末影龙下颌运动动画
+| 是
+| N/A
+|-
+| {{cd|animation.ender_dragon.neck_head_movement}}
+| 末影龙颈部和头部运动动画
+| 是
+| N/A
+|-
+| {{cd|animation.ender_dragon.wings_limbs_movement}}
+| 末影龙翅膀运动动画
+| 是
+| N/A
+|-
+| {{cd|animation.ender_dragon.tail_movement}}
+| 末影龙尾部运动动画
+| 是
+| N/A
+|-
+| rowspan=6 | {{EntityLink|enderman}}
+| {{cd|animation.enderman.arms_legs}}
+| 末影人四肢控制动画
+| 是
+| N/A
+|-
+| {{cd|animation.enderman.base_pose}}
+| 末影人默认姿势
+| 是
+| N/A
+|-
+| {{cd|animation.enderman.base_pose_v1.0}}
+| 末影人默认姿势（v1.0）
+| 是
+| N/A
+|-
+| {{cd|animation.enderman.carrying}}
+| 末影人手持方块动画
+| 是
+| N/A
+|-
+| {{cd|animation.enderman.scary_face}}
+| 末影人被激怒动画
+| 是
+| N/A
+|-
+| {{cd|animation.enderman.scary_face_v1.0}}
+| 末影人被激怒动画（v1.0）
+| 是
+| N/A
+|-
+| {{EntityLink|Endermite}}
+| {{cd|animation.endermite.move}}
+| 末影螨移动动画
+| 是
+| N/A
+|-
+| rowspan=5 | {{EntityLink|evoker}}
+| {{cd|animation.evoker.casting}}
+| 唤魔者诅咒施法动画
+| 是
+| N/A
+|-
+| {{cd|animation.evoker.casting.v1.0}}
+| 唤魔者诅咒施法动画（v1.0）
+| 是
+| N/A
+|-
+| {{cd|animation.evoker.general}}
+| 唤魔者默认姿势
+| 是
+| N/A
+|-
+| {{cd|animation.evoker.general.v1.0}}
+| 唤魔者默认姿势（v1.0）
+| 是
+| N/A
+|-
+| {{cd|animation.evoker.move}}
+| 唤魔者移动动画
+| 是
+| N/A
+|-
+| {{EntityLink|Evoker Fangs}}
+| {{cd|animation.evocation_fang.bite}}
+| 唤魔者尖牙攻击动画
+| 是
+| N/A
+|-
+| {{EntityLink|Firework Rocket}}
+| {{cd|animation.fireworks_rocket.move}}
+| 烟花火箭移动动画
+| 是
+| N/A
+|-
+| rowspan=12 | {{EntityLink|Fox}}
+| {{cd|animation.fox.crouch}}
+| 狐狸潜行动画
+| 是
+| N/A
+|-
+| {{cd|animation.fox.pounce}}
+| 狐狸跳跃动画
+| 是
+| N/A
+|-
+| {{cd|animation.fox.setup}}
+| 狐狸模型配置动画
+| 是
+| N/A
+|-
+| {{cd|animation.fox.sit}}
+| 狐狸坐下动画
+| 是
+| N/A
+|-
+| {{cd|animation.fox.sleep}}
+| 狐狸睡觉动画
+| 是
+| N/A
+|-
+| {{cd|animation.fox.stuck}}
+| 狐狸陷进雪中动画
+| 是
+| N/A
+|-
+| {{cd|animation.fox.wiggle}}
+| 狐狸跳跃前左右扭动动画
+| 是
+| N/A
+|-
+| {{cd|animation.fox.baby_walk}}
+| 幼年狐狸移动动画
+| 是
+| 0.5
+|-
+| {{cd|animation.fox.baby_pounce}}
+| 幼年狐狸跳跃动画
+| 是
+| 1.625
+|-
+| {{cd|animation.fox.baby_sit}}
+| 幼年狐狸坐下动画
+| 停留到最后一帧
+| 0.25
+|-
+| {{cd|animation.fox.baby_sleep}}
+| 幼年狐狸睡觉动画
+| 停留到最后一帧
+| 0.7083
+|-
+| {{cd|animation.fox.baby_wiggle}}
+| 幼年狐狸跳跃前扭动动画
+| 是
+| 1.5
+|-
+| rowspan=6 | {{EntityLink|frog}}
+| {{cd|animation.frog.croak}}
+| 青蛙鼓动鸣囊动画
+| 否
+| 3
+|-
+| {{cd|animation.frog.idle.water}}
+| 青蛙水中空闲动画
+| 是
+| 3
+|-
+| {{cd|animation.frog.jump}}
+| 青蛙跳跃动画
+| 停留到最后一帧
+| 0.375
+|-
+| {{cd|animation.frog.swim}}
+| 青蛙游泳动画
+| 是
+| 1.04167 <!-- 25/24 -->
+|-
+| {{cd|animation.frog.tongue}}
+| 青蛙捕食动画
+| 否
+| 0.5
+|-
+| {{cd|animation.frog.walk}}
+| 青蛙移动动画
+| 是
+| 1.25
+|-
+| rowspan=5 | {{EntityLink|goat}}
+| {{cd|animation.goat.attack}}
+| 山羊冲撞动画
+| 是
+| N/A
+|-
+| {{cd|animation.goat.baby_scaling}}
+| 山羊幼年体型
+| 是
+| N/A
+|-
+| {{cd|animation.goat.look_at_target}}
+| 山羊看向目标动画
+| 是
+| N/A
+|-
+| {{cd|animation.goat.ram_attack}}
+| 山羊准备冲撞动画
+| 是
+| N/A
+|-
+| {{cd|animation.goat.walk}}
+| 山羊移动动画
+| 是
+| N/A
+|-
+| rowspan=2 | {{EntityLink|happy-ghast}}
+| {{cd|animation.happy_ghast.move}}
+| 快乐恶魂默认移动动画
+| 是
+| N/A
+|-
+| {{cd|animation.happy_ghast.scale}}
+| ？
+| 是
+| N/A
+|-
+| rowspan=4 | {{EntityLink|Iron-golem}}
+| {{cd|animation.iron_golem.attack}}
+| 铁傀儡攻击动画
+| 停留到最后一帧
+| N/A 
+|-
+| {{cd|animation.iron_golem.flower}}
+| 铁傀儡给予幼年村民或铜傀儡花动画
+| 停留到最后一帧
+| N/A
+|-
+| {{cd|animation.iron_golem.move}}
+| 铁傀儡默认移动动画
+| 停留到最后一帧
+| N/A
+|-
+| {{cd|animation.iron_golem.walk}}
+| 铁傀儡追击实体动画
+| 停留到最后一帧
+| N/A
+|-
+| rowspan=2 | {{EntityLink|phantom}}
+| {{cd|animation.phantom.base_pose}}
+| 幻翼默认姿势
+| 是
+| N/A
+|-
+| {{cd|animation.phantom.move}}
+| 幻翼移动动画
+| 是
+| 2.417 <!-- 29/12 -->
+|-
+| rowspan=53 | {{EntityLink|player}}
+| {{cd|animation.player.attack.positions}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.player.attack.rotations}}
+| 玩家旋转角度
+| 是
+| N/A
+|-
+| {{cd|animation.player.base_pose.upside_down}}
+| 玩家翻转默认姿势<ref group="注" name="inverted" >用于名为Dinnerbone或Grumm的实体。</ref>
+| 是
+| N/A
+|-
+| {{cd|animation.player.bob}}
+| 玩家手臂轻微摆动动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.bob.stationary}}
+| 玩家手臂轻微摆动
+| 是
+| N/A
+|-
+| {{cd|animation.player.bow_equipped}}
+| 玩家拉[[弓]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.cape}}
+| 披风动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.crawl}}
+| 玩家[[爬行]]动画
+| 是
+| 1.3
+|-
+| {{cd|animation.player.crawl.legs}}
+| 玩家腿部[[爬行]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.crossbow_equipped}}
+| 玩家装填[[弩]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.crossbow_hold}}
+| 玩家手持[[弩]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.attack_rotation}}
+| 玩家攻击动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.attack_rotation_item}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.base_pose}}
+| 玩家默认姿势（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.crossbow_equipped}}
+| 玩家装填[[弩]]动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.crossbow_hold}}
+| 玩家手持[[弩]]动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.breathing_bob}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.empty_hand}}
+| 玩家空手动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.map_hold}}
+| 玩家手持[[地图]]动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.map_hold_attack}}
+| 玩家手持地图[[攻击]]动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.map_hold_main_hand}}
+| 玩家主手持[[地图]]动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.map_hold_off_hand}}
+| 玩家副手持[[地图]]动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.swap_item}}
+| 玩家切换主副手物品动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.shield_block}}
+| 玩家使用[[盾牌]]动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.vr_attack_rotation}}
+| ？ <!-- [[VR]] -->
+| 是
+| N/A
+|-
+| {{cd|animation.player.first_person.walk}}
+| 玩家移动动画（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.player.glide}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.player.holding}}
+| 玩家手持物品动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.holding_heavy_core}}
+| 玩家手持[[沉重核心]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.holding.zombie}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.player.look_at_target.inverted}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.player.look_at_target.ui}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.player.move.arms}}
+| 玩家手臂摆动动画（移动时）
+| 是
+| N/A
+|-
+| {{cd|animation.player.move.arms.single}}
+| 玩家右手摆动动画（移动时）
+| 是
+| N/A
+|-
+| {{cd|animation.player.move.arms.stationary}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.player.move.arms.statue_of_liberty}}
+| 玩家自由女神像姿势
+| 是
+| N/A
+|-
+| {{cd|animation.player.move.arms.zombie}}
+| 玩家僵尸手臂动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.move.legs}}
+| 玩家腿部摆动动画（移动时）
+| 是
+| N/A
+|-
+| {{cd|animation.player.move.legs.inverted}}
+| 玩家翻转腿部摆动动画<ref group="注" name="inverted" />
+| 是
+| N/A
+|-
+| {{cd|animation.player.move.legs.single}}
+| 玩家右腿摆动动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.move.legs.stationary}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.player.riding.arms}}
+| 玩家手臂骑乘动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.riding.arms.zombie}}
+| 玩家僵尸手臂骑乘动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.riding.legs}}
+| 玩家腿部骑乘动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.shield_block_main_hand}}
+| 玩家主手使用[[盾牌]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.shield_block_off_hand}}
+| 玩家副手使用[[盾牌]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.sleeping}}
+| 玩家[[睡觉]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.sneaking}}
+| 玩家[[潜行]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.sneaking.inverted}}
+| 玩家翻转[[潜行]]动画<ref group="注" name="inverted" />
+| 是
+| N/A
+|-
+| {{cd|animation.player.swim}}
+| 玩家[[游泳]]动画
+| 是
+| 1.3
+|-
+| {{cd|animation.player.swim.legs}}
+| 玩家腿部[[游泳]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.swim.legs.single}}
+| 玩家右腿[[游泳]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.player.swim.legs.stationary}}
+| ？
+| 是
+| N/A
+|-
+| rowspan=5 |{{ItemLink|shield}}
+| {{cd|animation.shield.wield_main_hand_first_person}}
+| 盾牌主手格挡（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.shield.wield_off_hand_first_person}}
+| 盾牌副手格挡（第一人称）
+| 是
+| N/A
+|-
+| {{cd|animation.shield.wield_main_hand_first_person_blocking}}
+| 盾牌主手格挡成功（第一人称）
+| 停留到最后一帧
+| N/A
+|-
+| {{cd|animation.shield.wield_off_hand_first_person_blocking}}
+| 盾牌副手格挡成功（第一人称）
+| 停留到最后一帧
+| N/A
+|-
+| {{cd|animation.shield.wield_third_person}}
+| 盾牌格挡（第三人称）
+| 是
+| N/A
+|-
+| {{EntityLink|skeleton}}
+| {{cd|animation.skeleton.attack}}
+| 骷髅近战攻击动画
+| 是
+| N/A
+|-
+| rowspan=8 | {{EntityLink|sniffer}}
+| {{cd|animation.sniffer.baby_transform}}
+| 嗅探兽幼年体型
+| 是
+| N/A
+|-
+| {{cd|animation.sniffer.dig}}
+| 嗅探兽刨挖动画
+| 是
+| 8
+|-
+| {{cd|animation.sniffer.feeling_happy}}
+| 嗅探兽刨挖结束动画
+| 是
+| 2
+|-
+| {{cd|animation.sniffer.longsniff}}
+| 嗅探兽用力闻嗅动画
+| 否
+| 1
+|-
+| {{cd|animation.sniffer.search}}
+| 嗅探兽连续嗅探动画
+| 是
+| 2
+|-
+| {{cd|animation.sniffer.sniffsniff}}
+| 嗅探兽闻嗅动画
+| 是
+| 8
+|-
+| {{cd|animation.sniffer.stand_up}}
+| 嗅探兽停止刨挖动画
+| 停留到最后一帧
+| 3
+|-
+| {{cd|animation.sniffer.walk}}
+| 嗅探兽移动动画
+| 是
+| 2
+|-
+| rowspan=2 | {{ItemLink|spyglass}}
+| {{cd|animation.spyglass.holding}}
+| 手持望远镜
+| 是
+| N/A
+|-
+| {{cd|animation.spyglass.scoping}}
+| 使用望远镜
+| 是
+| N/A
+|-
+| rowspan=2 | {{EntityLink|squid}}<br>{{EntityLink|glow-squid}}
+| {{cd|animation.squid.move}}
+| （{{tr|发光|螢光|熒光}}）鱿鱼移动动画
+| 是
+| N/A
+|-
+| {{cd|animation.squid.rotate}}
+| （{{tr|发光|螢光|熒光}}）鱿鱼旋转动画
+| 是
+| N/A
+|-
+| {{EntityLink|tadpole}}
+| {{cd|animation.tadple.swim}}
+| 蝌蚪游泳动画
+| 是
+| 2
+|-
+| rowspan=6 | {{EntityLink|trident}}
+| {{cd|animation.trident.wield_first_person}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.trident.wield_first_persom_raise}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.trident.wield_first_person_raise_shake}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.trident.wield_first_person_riptide}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.trident.wield_third_person}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.trident.wield_third_person_raise}}
+| ？
+| 是
+| N/A
+|-
+| rowspan=2 | {{EntityLink|vex}}
+| {{cd|animation.vex.charge}}
+| 恼鬼蓄力动画
+| 是
+| N/A
+|-
+| {{cd|animation.vex.idle}}
+| 恼鬼空闲动画
+| 是
+| N/A
+|-
+| rowspan=6 | {{EntityLink|vindicator}}
+| {{cd|animation.vindicator.attack}}
+| 卫道士近战攻击动画
+| 是
+| N/A
+|-
+| {{cd|animation.vindicator.base}}
+| 卫道士默认姿势
+| 是
+| N/A
+|-
+| {{cd|animation.vindicator.hand_attack}}
+| 卫道士空手攻击动画
+| 是
+| N/A
+|-
+| {{cd|animation.vindicator.riding.arms}}
+| 卫道士手臂骑乘动画
+| 是
+| N/A
+|-
+| {{cd|animation.vindicator.riding.legs}}
+| 卫道士腿部骑乘动画
+| 是
+| N/A
+|-
+| {{cd|animation.vindicator.walk}}
+| 卫道士移动动画
+| 是
+| N/A
+|-
+| rowspan=10 | {{EntityLink|warden}}
+| {{cd|animation.warden.attack}}
+| 监守者近战攻击动画
+| 否
+| 0.33333 <!-- 1/3 -->
+|-
+| {{cd|animation.warden.bob}}
+| 监守者身体摆动动画
+| 是
+| N/A
+|-
+| {{cd|animation.warden.dig}}
+| 监守者钻入地面动画
+| 停留到最后一帧
+| 5
+|-
+| {{cd|animation.warden.emerge}}
+| 监守者钻出地面动画
+| 否
+| 6.64
+|-
+| {{cd|animation.warden.look_at_target.default}}
+| 监守者看向目标动画
+| 是
+| N/A
+|-
+| {{cd|animation.warden.move}}
+| 监守者移动动画
+| 是
+| N/A
+|-
+| {{cd|animation.warden.roar}}
+| 监守者怒吼动画
+| 否
+| 4.2
+|-
+| {{cd|animation.warden.shiver}}
+| 监守者感应振动动画
+| 是
+| N/A
+|-
+| {{cd|animation.warden.sniff}}
+| 监守者嗅探动画
+| 是
+| N/A
+|-
+| {{cd|animation.warden.sonic_boom}}
+| 监守者远程攻击动画
+| 否
+| 3
+|-
+| {{EntityLink|wind-charge}}
+| {{cd|animation.wind_charge.rotate}}
+| 风弹旋转动画
+| 是
+| N/A
+|-
+| rowspan=3 | {{EntityLink|wither}}
+| {{cd|animation.wither_boss.look_at_target}}
+| 凋灵看向目标动画
+| 是
+| N/A
+|-
+| {{cd|animation.wither_boss.move}}
+| 凋灵移动动画
+| 是
+| N/A
+|-
+| {{cd|animation.wither_boss.scale}}
+| 凋灵体型
+| 是
+| N/A
+|-
+| rowspan=8 | {{EntityLink|wolf}}
+| {{cd|animation.wolf.angry}}
+| 狼愤怒动画
+| 是
+| N/A
+|-
+| {{cd|animation.wolf.baby_scaling}}
+| 幼年狼体型
+| 是
+| N/A
+|-
+| {{cd|animation.wolf.head_rot_z}}
+| 狼乞求食物动画
+| 是
+| N/A
+|-
+| {{cd|animation.wolf.leg_default}}
+| 狼腿部动画
+| 是
+| N/A
+|-
+| {{cd|animation.wolf.setup}}
+| 狼起身动画
+| 是
+| N/A
+|-
+| {{cd|animation.wolf.shaking}}
+| 狼甩动身体动画
+| 是
+| N/A
+|-
+| {{cd|animation.wolf.sitting}}
+| 狼坐下动画
+| 是
+| N/A
+|-
+| {{cd|animation.wolf.tail_default}}
+| 狼尾巴默认高度
+| 是
+| N/A
+|-
+| rowspan=2 | {{EntityLink|zombie}}<br>{{EntityLink|zombie-villager}}<br>{{EntityLink|husk}}<br>{{EntityLink|zombified-piglin}}
+| {{cd|animation.zombie.attack_bare_hand}}
+| 僵尸空手攻击动画
+| 是
+| N/A
+|-
+| {{cd|animation.zombie.swimming}}
+| 僵尸游泳动画
+| 是
+| N/A
+|-
+| rowspan=23 | 其他
+| {{cd|animation.actor.billboard}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.base_pose}}
+| 默认姿势
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.big_head}}
+| 大头动画，未使用
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.bob}}
+| 手臂轻微摆动动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.bow_and_arrow}}
+| 使用[[弓]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.brandish_spear}}
+| 持[[剑]]攻击动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.holding_spyhlass}}
+| 使用[[望远镜]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.tooting_goat_horn}}
+| 使用[[山羊角]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.holding_brush}}
+| 手持[[刷子]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.brushing}}
+| 使用[[刷子]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.celebrating}}
+| 庆祝动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.charging}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.damage_nearby_mobs}}
+| 近战攻击动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.holding}}
+| 手持物品动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.look_at_target.default}}
+| 默认看向目标动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.look_at_target_gilding}}
+| ？
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.look_at_target.swimming}}
+| 游泳时看向目标动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.move}}
+| 移动动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.riding.arms}}
+| 手臂骑乘动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.riding.legs}}
+| 腿部骑乘动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.sneaking}}
+| [[潜行]]动画
+| 是
+| N/A
+|-
+| {{cd|animation.humanoid.swimming}}
+| [[游泳]]动画
+| 是
+| 1.3
+|-
+| {{cd|animation.humanoid.use_item_progress}}
+| ？
+| 是
+| N/A
+|-
+| rowspan=36 | [[角色创建器]]中的角色{{Info needed}}
+| {{cd|animation.idle_arm_1}}
+|
+| 是
+| N/A
+|-
+| {{cd|animation.idle_back_1}}
+|
+| 是
+| N/A
+|-
+| {{cd|animation.idle_bottom_1}}
+|
+| 是
+| N/A
+|-
+| {{cd|animation.idle_torso_1}}
+|
+| 是
+| N/A
+|-
+| {{cd|animation.react_arm_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_arm_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_back_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_back_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_bored_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_bored_arm_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_bored_back_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_bored_bottom_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_bored_head_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_bored_torso_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_bottom_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_bottom_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_bottom_3}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_confirm_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_confirm_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_head_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_head_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_idle}}
+|
+| 是
+| N/A
+|-
+| {{cd|animation.react_offer_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_arm_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_arm_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_back_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_back_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_bottom_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_bottom_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_head_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_head_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_torso_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_offer_torso_2}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_torso_1}}
+|
+| 否
+| N/A
+|-
+| {{cd|animation.react_torso_2}}
+|
+| 否
+| N/A
+|}
+{{notelist|注}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}

@@ -1,0 +1,224 @@
+# 页面: Com.mojang
+# 来源: https://zh.minecraft.wiki/w/Com.mojang
+# 分类: 基岩版, 基岩版独有特性, 教育版独有特性, 有未知版本的History模板的页面/基岩版, 游戏文件, 需要信息
+# 抓取时间: 2026-07-14 17:11:46
+# 原始 Wikitext 内容:
+
+{{DISPLAYTITLE:<samp>com.mojang</samp>}}
+{{tr|mode=H|访问|存取}}
+{{about|{{el|be}}和{{el|edu}}的数据文件夹|{{el|je}}的数据文件夹|{{filename|[[.minecraft]]}}}}
+{{distinguish|Mojang.com}}
+{{exclusive|be|edu}}
+
+{{File|directory|'''com.mojang'''|inline=1}}是Minecraft的内部文件夹。里面包含了世界存档、JSON数据和其他游戏运行所需的文件。
+
+== 位置 ==
+=== 基岩版 ===
+{{/path}}
+在Xbox One上，文件存储在本地{{info needed}}。如果登录了Xbox Live，它们也会存储于线上。
+
+在iOS上，于“文件（Files）”应用程序中查找{{filename|com.mojang}}即可访问此文件夹。
+
+=== 教育版 ===
+下面的表格展示了{{filename|com.mojang}}文件夹的默认位置。
+{|class="wikitable"
+! 平台
+! 位置
+|-
+| Windows，正式版
+| {{filepath|%LOCALAPPDATA%\Packages\Microsoft.MinecraftEducationEdition_8wekyb3d8bbwe\LocalState\games\com.mojang}}
+|-
+| Windows，预览版
+| {{filepath|%LOCALAPPDATA%\Packages\Microsoft.MinecraftEducationPreview_8wekyb3d8bbwe\LocalState\games\com.mojang}}
+|-
+| Android，正式版
+| 应用程序：{{filepath|-{}-/data/data/com.mojang.minecraftedu/games/com.mojang}}
+外部：{{filepath|-{}-/sdcard/Android/data/com.mojang.minecraftedu/files/games/com.mojang}}
+|-
+| Android，预览版
+| 应用程序：{{filepath|-{}-/data/data/com.mojang.minecraftedu_preview/games/com.mojang}}
+外部：{{filepath|-{}-/sdcard/Android/data/com.mojang.minecraftedu_preview/files/games/com.mojang}}
+|}
+
+== 结构层次 ==
+<div class="treeview">
+* {{file|directory|com.mojang}}
+** {{file|directory|behavior_packs}}：内含[[行为包]]。
+** {{file|directory|custom_skins}}
+*** {{file|file|<''UUID''>.png}}
+** {{file|directory|development_behavior_packs}}
+** {{file|directory|development_resource_packs}}
+** {{file|directory|development_skin_packs}}
+** {{file|directory|logs}}
+*** {{file|file|ClientCorrelation<''ID''>.dat{{info needed}}}}
+** {{file|directory|minecraftpe}}
+*** {{file|directory|editor}}：[[基岩版编辑器]]中储存的文件。
+**** {{file|file|editoroptions.txt}}{{info needed}}
+*** {{file|directory|pack_settings}}：附加包的设置项。
+**** {{file|file|pack_<''资源包UUID''>.json}}
+*** {{file|file|catalog_info.json}}
+*** {{file|file|clientId.txt}}
+*** {{file|file|external_servers.txt}}
+*** {{file|file|global_resource_packs.json}}
+*** {{file|file|hs}}
+*** {{file|file|hs.hex}}
+*** {{file|file|NonAssertErrorLog.txt}}
+*** {{file|file|[[options.txt]]}}
+*** {{file|file|splitscreen_appearance.json}}{{info needed}}
+*** {{file|file|telemetry_info.json}}
+** {{file|directory|minecraftWorlds}}
+*** {{file|directory|<''世界内部ID或名称''>}}：目录结构见[[世界#目录结构|世界]]。
+** {{file|directory|resource_packs}}：内含[[附加包|资源包]]。
+** {{file|directory|Screenshots}}{{sic}}：见[[截图#基岩版|截图]]。
+*** {{file|directory|<''Xbox UID''>}}
+**** {{file|file|<''UUID''>.jpeg}}
+**** {{file|file|<''UUID''>.json}}
+**** {{file|file|<''UUID''>.mc}}
+** {{file|directory|skin_packs}}：内含[[皮肤包]]。
+** {{file|file|ud<''ID''>}}（可能多于1个）
+** {{file|file|ud<''ID''>.dat}}（可能多于1个）
+** {{file|directory|world_templates}}：内含[[世界模板]]。
+** {{file|directory|xal}}{{info needed|是XBL（xboxlive）的账号数据还是什么？}}
+</div>
+
+=== 附加包 ===
+{{main|附加包#结构层次}}
+每个世界和世界模板，以及{{file|directory|com.mojang|inline=1}}文件夹本身，都带有一个{{file|directory|behavior_packs|inline=1}}和{{file|directory|resource_packs|inline=1}}文件夹。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|加入了{{file|directory|com.mojang}}文件夹，层次结构如下：
+<div class{{=}}"treeview">
+* {{file|directory|com.mojang}}
+** {{file|directory|minecraftWorlds}}
+*** {{file|directory|<''世界名称''>}}
+**** {{file|file|chunks.dat}}：储存[[区块]]数据。
+**** {{file|file|[[基岩版存档格式#level.dat|level.dat]]}}：储存世界的信息。
+**** {{file|file|player.dat}}：储存[[玩家]]数据。
+</div>
+}}
+|{{HistoryLine||0.2.0|加入了{{file|file|-{}-<''世界名称''>/entities.dat}}，用于储存[[实体]]数据。
+|{{file|file|player.dat}}的功能由{{file|file|level.dat}}取代。旧的{{file|file|player.dat}}仍然存在但不再更新。}}
+<!--疑似漏洞，不收录
+|{{HistoryLine||0.3.3|This version creates unused duplicate folders under {{filepath|.../games/games/com.mojang/minecraftWorlds}}. {{file|directory|minecraftWorlds}} does not have any additional subfolders or files.}}-->
+|{{HistoryLine||0.5.0|在{{file|directory|-{}-<''世界名称''>}}文件夹中加入了{{file|file|level.dat_old}}作为{{file|file|level.dat}}的备份。}}
+|{{HistoryLine||0.7.0|加入了{{file|directory|minecraftpe}}文件夹，内含{{file|file|clientId.txt}}和{{file|file|[[options.txt]]}}两个文件。
+|加入了{{file|directory|-{}-<''世界名称''>/players}}文件夹。}}
+|{{HistoryLine||0.7.3|加入了{{file|directory|minecraftWorlds/_LevelCache}}文件夹。}}
+|{{HistoryLine||0.9.0|dev=build 1|
+{{Collapse|title=世界格式更改为[[基岩版存档格式|LevelDB格式]]，现在{{file|directory|com.mojang}}的层次结构如下（<span class="history-deleted">划线标记</span>指的是旧格式世界转为新格式过程中生成的临时文件）：|content=
+<div class="treeview">
+* {{file|directory|com.mojang}}
+** {{file|directory|minecraftpe}}
+*** {{file|file|clientId.txt}}
+*** {{file|file|options.txt}}
+** {{file|directory|minecraftWorlds}}
+*** {{file|directory|_LevelCache}}
+*** {{file|directory|<''世界名称''>}}
+**** {{file|directory|db}}
+***** {{file|file|######.ldb}}
+***** {{file|file|######.log}}
+***** {{file|file|CURRENT}}：内容为“MANIFEST-######”。
+***** {{file|file|LOCK}}：一个空文件。
+***** {{file|file|MANIFEST-######}}
+**** {{file|file|<span class{{=}}"history-deleted">chunks.dat</span>}}
+**** {{file|file|<span class{{=}}"history-deleted">entities.dat</span>}}
+**** {{file|file|<span class{{=}}"history-deleted">importedchunks.dat</span>}}：标记哪些区块已被转为新格式。
+**** {{file|file|level.dat}}
+</div>}}
+|游戏不再新建或更新{{file|file|level.dat_old}}文件，但已存在的文件仍在发挥作用。}}
+|{{HistoryLine|||dev=build 4|在{{file|directory|db}}文件夹中加入了{{file|file|LOG}}和{{file|file|LOG.old}}。}}
+|{{HistoryLine|||dev=build 8|移除了{{file|directory|_LevelCache}}文件夹。}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了{{file|directory|minecraftpe/snooper}}文件夹，包括名为{{file|file|bundle#.txt}}的一个至多个文件，以及{{file|file|meta.txt}}。
+|现在新创建的世界文件夹名为{{file|directory|-{}-<''内部世界ID''>}}而非{{file|directory|-{}-<''世界名称''>}}。
+|加入了{{file|file|-{}-<''内部世界ID''>/levelname.txt}}。
+|现在在编辑世界菜单中更改设置时，会创建{{file|file|level.dat_old}}并覆盖{{file|file|level.dat}}，尽管后者在进入世界时会重新创建。}}
+|{{HistoryLine||0.13.0|dev=build 1|{{file|directory|snooper}}文件夹从{{filepath|.../games/com.mojang/minecraftpe/snooper}}移动至{{filepath|.../games/com.mojang/snooper}}。旧的{{file|directory|snooper}}文件夹仍然存在但不再更新。}}
+|{{HistoryLine||0.14.2|游戏不再新建或更新{{file|directory|snooper}}文件夹。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了{{file|file|minecraftpe/r.txt}}，内容为“{{samp|Vanilla}}”。
+|游戏不再新建{{file|file|LOG}}和{{file|file|LOG.old}}文件。}}
+|{{HistoryLine|||dev=build 2|加入了{{file|file|minecraftpe/r2.txt}}，内容为“{{samp|Minecraft}}”。
+|游戏不再新建{{file|file|r.txt}}文件。
+|玩家退出世界时，游戏会生成{{file|file|level.dat_old}}。}}
+|{{HistoryLine|||dev=正式版|加入了{{file|file|minecraftpe/resource_packs.txt}}，内容为“{{samp|Minecraft}}”。
+|游戏不再新建{{file|file|r2.txt}}文件。}}
+|{{HistoryLine||0.16.0|dev=build 1|现在{{file|file|resource_packs.txt}}默认为空。
+|现在会在每个{{file|directory|-{}-<''内部世界ID''>}}文件夹中新建{{file|file|resource_packs.txt}}。}}
+|{{HistoryLine|||dev=build 4|加入了{{file|file|minecraftpe/global_resource_packs.txt}}，默认为空。}}
+|{{HistoryLine|||dev=build 5|在{{file|directory|com.mojang}}文件夹中加入了{{file|directory|behavior_packs}}和{{file|directory|resource_packs}}两个文件夹，均默认为空。
+|加入了{{file|file|Perf_Log.csv}}。
+|{{file|file|global_resource_packs.txt}}文件被{{file|file|global_resource_packs.json}}取代。
+|在{{file|directory|-{}-<''内部世界ID''>}}文件夹中加入了{{file|directory|behavior_packs}}和{{file|directory|resource_packs}}两个文件夹，均默认为空。
+|在{{file|directory|-{}-<''内部世界ID''>}}文件夹中加入了{{file|file|world_behavior_packs.json}}和{{file|file|world_resource_packs.json}}两个文件。
+|游戏不再新建{{file|file|resource_packs.txt}}。
+|
+{{Collapse|title=现在{{file|directory|com.mojang}}的层次结构如下：|content=
+<div class="treeview">
+* {{file|directory|com.mojang}}
+** {{file|directory|behavior_packs}}
+** {{file|directory|minecraftpe}}
+*** {{file|file|clientId.txt}}
+*** {{file|file|global_resource_packs.json}}
+*** {{file|file|options.txt}}
+** {{file|directory|minecraftWorlds}}
+*** {{file|directory|<''内部世界ID''>}}
+**** {{file|directory|behavior_packs}}
+**** {{file|directory|db}}
+***** {{file|file|######.ldb}}
+***** {{file|file|######.log}}
+***** {{file|file|CURRENT}}
+***** {{file|file|LOCK}}
+***** {{file|file|MANIFEST-######}}
+**** {{file|directory|resource_packs}}
+**** {{file|file|level.dat}}
+**** {{file|file|levelname.txt}}
+**** {{file|file|world_behavior_packs.json}}
+**** {{file|file|world_resource_packs.json}}
+** {{file|directory|resource_packs}}
+** {{file|file|Perf_Log.csv}}
+</div>}}
+}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.18.0|dev=1.18.0.21|Android平台由于升级到了Google API 30，{{file|directory|com.mojang}}文件夹的存储位置被更改了。
+|新位置现在位于{{filepath|-{}-/storage/emulated/''<Android用户ID''><ref group="注" name="auid">Android系统给使用者分配的用户ID，一般情况下设备拥有者的用户ID为0。</ref>/Android/data/com.mojang.minecraftpe/files/games/com.mojang}}，而旧位置位于{{filepath|-{}-/storage/emulated/''<Android用户ID''><ref group="注" name="auid"/>/games/com.mojang}}}}
+|{{HistoryLine||1.20.0|dev=1.20.0.22|游戏不再新建{{file|directory|logs}}、{{file|directory|minecraftpe}}和{{file|directory|xal}}文件夹。<ref name="mcpe">{{bug|MCPE-176675|||Fixed}}</ref>
+|游戏不再新建{{file|file|.nomedia}}和{{file|file|ud<''id''>.dat}}。}}
+|{{HistoryLine||1.20.10|dev=1.20.10.20|现在游戏会新建{{file|directory|logs}}文件夹。}}
+|{{HistoryLine||1.20.70|dev=1.20.70.20|现在游戏会新建{{file|directory|minecraftpe}}文件夹。<ref name="mcpe"/>
+|现在游戏会新建{{file|file|.nomedia}}和{{file|file|ud<''id''>.dat}}。<ref name="mcpe"/>}}
+<!-- 加入版本至多为1.21.2 -->
+|{{HistoryLine||?|游戏现在会新建{{file|file|minecraftpe/splitscreen_appearance.json}}。}}
+<!-- 1.21.2仍然存在，1.21.50不存在 -->
+|{{HistoryLine||?|游戏不再新建{{file|file|minecraftpe/custom.png}}，取而代之的是{{file|directory|custom_skins}}文件夹。
+|游戏会在每次启动时将{{file|file|minecraftpe/custom.png}}复制到{{file|file|custom_skins/<''UUID''>.png}}。}}
+<!-- 1.21.2仍然存在，1.21.50不存在 -->
+|{{HistoryLine||?|游戏不再新建{{file|file|minecraftpe/invalid_known_packs.json}}和{{file|file|minecraftpe/valid_known_packs.json}}。}}
+|{{HistoryLine||1.21.120|dev=1.21.120.21|由于Windows平台现在在最新的GDK（游戏开发工具包）上运行，{{file|directory|com.mojang}}文件夹的存储位置被更改了。
+|[[Minecraft Preview]]上的新位置现在位于：
+* 独立内容：{{filepath|%APPDATA%\Minecraft Bedrock Preview\Users\<''用户ID''><ref group="注" name="uid">Minecraft给使用者分配的用户ID，区分不同的微软账户与离线账户。</ref>\games\com.mojang}}<br>
+* 共享内容：{{filepath|%APPDATA%\Minecraft Bedrock Preview\Users\Shared\games\com.mojang}}<
+|而旧位置位于{{filepath|%localappdata%\Packages\Microsoft.MinecraftWindowsBeta_8wekyb3d8bbwe\LocalState\games\com.mojang}}。}}
+|{{HistoryLine|||dev=正式版|正式版上的新位置现在位于：
+* 独立内容：{{filepath|%APPDATA%\Minecraft Bedrock\Users\<''用户ID''><ref group="注" name="uid" />\games\com.mojang}}<br>
+* 共享内容：{{filepath|%APPDATA%\Minecraft Bedrock\Users\Shared\games\com.mojang}}<br>
+|而旧位置位于{{filepath|%localappdata%\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang}}。}}
+}}
+
+== 注释 ==
+{{notelist|注}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+
+[[Category:游戏文件]]
+
+[[en:Com.mojang]]
+[[es:Com.mojang]]
+[[fr:Com.mojang]]
+[[ja:Com.mojang]]
+[[lzh:Com.mojang]]
+[[pt:Com.mojang]]

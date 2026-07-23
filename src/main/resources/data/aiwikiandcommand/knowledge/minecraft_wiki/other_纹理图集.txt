@@ -1,0 +1,337 @@
+# 页面: 纹理图集
+# 来源: https://zh.minecraft.wiki/w/%E7%BA%B9%E7%90%86%E5%9B%BE%E9%9B%86
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:19
+# 原始 Wikitext 内容:
+
+{{about|Java版现行的动态生成的纹理图集机制}}
+{{exclusive|je}}
+[[File:Debug generated block texture atlas.png|thumb|游戏自动生成的方块纹理图集]]
+
+'''纹理图集（Texture Atlas）'''是游戏对纹理渲染使用的一种优化手段，也是一种动态生成纹理的方案。对多个纹理进行合并，合并而成的大纹理就被称为纹理图集，而组成纹理图集的各个小纹理被称为'''精灵图（Sprite）'''。
+
+== 使用 ==
+{{see also|纹理}}
+由于纹理图集自身就是一张大纹理，故游戏生成的纹理图集也可以通过命名空间ID的方式引用。对于纹理图集<code>-{}-minecraft:<''标识符''></code>而言，生成的纹理位于{{filepath|assets/minecraft/textures/atlas/<''标识符''>}}，即<code>-{}-minecraft:atlas/<''标识符''></code>。
+
+在游戏中按下“{{tp|key.debug.dumpDynamicTextures}}”（默认为{{key|F3+S}}）可以导出所有纹理图集，并同时导出所有精灵图命名空间ID和纹理图集位置的映射文件。
+
+纹理图集的长和宽永远是2的整数次幂，且为正方形或长是宽两倍的长方形，最大尺寸为16384×16384。使用这种尺寸的纹理可以使纹理精确渲染，而不会因为精度损失造成渲染问题。
+
+如果纹理图集内有一个纹理本身加载失败，那么它仍然会被纹理图集记录，但会随机映射到一个精灵图位置。如果纹理的元数据加载失败，则纹理图集不会记录这个纹理，在引用此纹理时会被替换引用为[[纹理#无效纹理|无效纹理]]。
+
+== 定义格式 ==
+游戏不支持定义新的纹理图集，但是支持对[[#原版纹理图集|原版定义的纹理图集]]的内容进行增删。
+
+纹理图集定义文件都在资源包的{{filepath|assets/minecraft/atlases}}目录下，且均为JSON文件。在资源包实际的加载过程中，游戏只会读取原版定义的纹理图集对应的JSON文件以'''合并'''纹理图集。纹理图集内的精灵图在解析时会根据精灵图的命名空间ID自动转换为{{filepath|-{}-assets/<''命名空间''>/textures/<''ID''>.png}}的对应路径。
+
+如果不同的纹理图集出现了相同的精灵图，则游戏会在日志中警告<code>-{}-Duplicate sprite <''精灵图ID''> from atlas <''纹理图集ID''>, already defined in atlas <''另一个纹理图集ID''>. This will be rejected in a future version</code>。精灵图引用的纹理的内容可以不同，游戏将精灵图的ID作为判定依据。
+
+纹理图集内只包含纹理图集源数据，按照资源包的顺序和每个资源包内对应纹理图集数据列表的顺序依次执行。
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根元素
+** {{nbt|list|sources|required=1}}：纹理图集内包含精灵图的源。
+*** {{nbt|compound}}：纹理图集源。
+**** {{nbt|string|type|required=1}}：纹理图集源的类型。
+**** {{nbt condition|如果{{nbt|string|type}}为<code>directory</code>，则引入所有资源包所有命名空间中某路径下的所有纹理：}}
+**** {{nbt|string|source|required=1}}：指定一个来源路径。该路径为从<code>textures</code>目录开始的一个子目录。游戏将通过该路径索引到相应的目录下，并匹配其中的所有<code>.png</code>纹理文件。
+**** {{nbt|string|prefix|required=1}}：指定所引入纹理文件的命名空间ID路径前缀。例如，若{{nbt|string|source}}为<code>s</code>，{{nbt|string|prefix}}为<code>p</code>，则对于命名空间x下的纹理文件{{filepath|textures/s/foo/abc.png}}，游戏会先得到其命名空间ID为<code>x:foo/abc</code>，最后为其添加前缀，变为<code>x:p/foo/abc</code>。
+**** {{nbt condition|如果{{nbt|string|type}}为<code>filter</code>，则筛选已经添加到纹理图集的纹理资源：}}
+**** {{nbt|compound|pattern|required=1}}：对每个纹理资源映射后的命名空间ID进行正则筛选。
+***** {{nbt|string|namespace}}：对命名空间进行正则匹配，必须为[[wzh:正则表达式|正则表达式]]。游戏会删除匹配成功的命名空间的精灵图。
+***** {{nbt|string|path}}：对ID进行正则匹配，必须为正则表达式。游戏会删除匹配成功的ID的精灵图。
+**** {{nbt condition|如果{{nbt|string|type}}为<code>paletted_permutations</code>，则利用调色板置换颜色在内存中动态生成纹理：}}
+**** {{nbt|list|textures|required=1}}：定义原始纹理。原始纹理即被置换的纹理。原始纹理只能包含原始调色板所定义的RGB三通道颜色，A通道不做要求，在置换时，保留其A通道，使用置换调色板置换RGB通道。
+***** {{nbt|string}}：（命名空间ID）一个原始纹理。对于使用置换调色板P的原始纹理T，所生成的精灵图命名空间ID是<code>-{}-<''T''><''分隔符''><''P''></code>。
+**** {{nbt|string|palette_key|required=1}}：（命名空间ID）原始调色板，表示一组用于置换原始纹理的颜色。同时也定义了原始纹理内的RGB三通道颜色。{{inUpcoming|je 26.3}}游戏会将此值解析为{{filepath|assets/<''命名空间''>/textures/palettes/<''路径''>.png}}。
+**** {{nbt|compound|permutations|required=1}}：定义置换调色板。置换调色板纹理必须和原始调色板纹理尺寸一致——置换调色板纹理的每个像素与原始调色板的每个像素一一对应。这种对应关系用于将原始纹理中的符合原始调色板的颜色换为置换调色板所对应的颜色。
+***** {{nbt|string|<''置换调色板名称''>}}：（命名空间ID）定义一个置换调色板命名空间ID，表示置换调色板纹理文件的位置。{{inUpcoming|je 26.3}}游戏会将此值解析为{{filepath|assets/<''命名空间''>/textures/palettes/<''路径''>.png}}。
+**** {{nbt|string|separator}}：（默认为<code>_</code>）精灵图ID中，在原始纹理与置换调色板之间的分隔符。
+**** {{nbt condition|如果{{nbt|string|type}}为<code>single</code>，则直接引入单个纹理：}}
+**** {{nbt|string|resource|required=1}}：（命名空间ID）纹理资源所在的位置。
+**** {{nbt|string|sprite}}：（默认为{{nbt|string|resource}}，命名空间ID）此纹理资源映射到的命名空间ID。
+**** {{nbt condition|如果{{nbt|string|type}}为<code>unstitch</code>，则从一个纹理中截取一系列区域作为精灵图：}}
+**** {{nbt|double|divisor_x}}：（默认为1）将整个图像按照X轴，拆分为每个长度为{{nbt|double|divisor_x}}的块，影响每个区域中{{nbt|double|x}}和{{nbt|double|width}}的计算方式。
+**** {{nbt|double|divisor_y}}：（默认为1）将整个图像按照Y轴，拆分为每个长度为{{nbt|double|divisor_y}}的块，影响每个区域中{{nbt|double|y}}和{{nbt|double|height}}的计算方式。
+**** {{nbt|list|regions|required=1}}：（至少包含一个元素）截取区域的列表。
+***** {{nbt|compound}}：一个区域。
+****** {{nbt|string|sprite|required=1}}：（命名空间ID）此区域生成的精灵图映射到的命名空间ID。
+****** {{nbt|double|x|required=1}}：截取区域的左上角X坐标，对应像素X坐标是<math>\lfloor xw_t/d_x \rfloor</math>，其中''x''为此值，<math>w_t</math>是原始纹理宽度，<math>d_x</math>为{{nbt|double|divisor_x}}的值。
+****** {{nbt|double|y|required=1}}：截取区域的左上角Y坐标，对应像素Y坐标是<math>\lfloor yh_t/d_y \rfloor</math>，其中''y''为此值，<math>h_t</math>是原始纹理高度，<math>d_y</math>为{{nbt|double|divisor_y}}的值。
+****** {{nbt|double|width|required=1}}：截取区域的宽度，对应像素宽度是<math>\lfloor ww_t/d_x \rfloor</math>，其中''w''为此值，<math>w_t</math>是原始纹理宽度，<math>d_x</math>为{{nbt|double|divisor_x}}的值。
+****** {{nbt|double|height|required=1}}：截取区域的高度，对应像素高度是<math>\lfloor hh_t/d_y \rfloor</math>，其中''h''为此值，<math>h_t</math>是原始纹理高度，<math>d_y</math>为{{nbt|double|divisor_y}}的值。
+**** {{nbt|string|resource|required=1}}：（命名空间ID）截取纹理源的位置。
+</div>
+
+== 原版纹理图集 ==
+原版的纹理图集定义文件如下所示：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|minecraft}}
+*** {{file|directory|atlases}}
+**** {{file|file|armor_trims.json}}：包含所有与实体模型有关的盔甲纹饰。
+**** {{file|file|banner_patterns.json}}：包含所有旗帜图案。
+**** {{file|file|blocks.json}}：包含所有方块使用的纹理。此纹理图集可以拥有MipMap版本。
+**** {{file|file|celestials.json}}：包含所有天体纹理。
+**** {{file|file|chests.json}}：包含所有箱子纹理。
+**** {{file|file|decorated_pot.json}}：包含所有饰纹陶罐相关的陶片图案纹理。
+**** {{file|file|gui.json}}：包含所有GUI相关的纹理。
+**** {{file|file|items.json}}：包含所有物品使用的纹理。
+**** {{file|file|map_decorations.json}}：包含所有地图图标纹理。
+**** {{file|file|paintings.json}}：包含所有画的纹理。
+**** {{file|file|particles.json}}：包含所有粒子纹理。
+**** {{file|file|shield_patterns.json}}：包含所有盾牌图案的纹理。
+**** {{file|file|shulker_boxes.json}}：包含所有潜影盒、潜影贝纹理。
+</div>
+
+=== armor_trims ===
+{{removed in development|jev=26.3|section=1}}
+[[File:Texture_atlas_armor_trims.png|thumb]]
+此纹理图集控制了所有[[盔甲纹饰]]纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|minecraft}}
+*** {{file|directory|textures}}
+**** {{file|directory|trims}}
+***** {{file|directory|color_palettes}}
+****** {{file|file|trim_palette.png}}：盔甲纹饰的原始调色板。
+****** {{file|file|<''盔甲纹饰材料字符串''>.png}}：各种盔甲纹饰材料对应的调色板。
+****** {{file|directory|entity}}
+******* {{file|directory|humanoid}}
+******** {{file|file|<''盔甲纹饰图案ID''>.png}}
+******* {{file|directory|humanoid_leggings}}
+******** {{file|file|<''盔甲纹饰图案ID''>.png}}
+</div>
+
+所生成图集中，每张精灵图的命名空间ID格式为<code>-{}-trims/entity/<''[[装备模型]]预设模型类型''>/<''盔甲纹饰图案ID''>_<''盔甲纹饰材料字符串''></code>。
+{{-}}
+=== banner_patterns ===
+[[File:Texture_atlas_banner_patterns.png|thumb]]
+此纹理图集控制了所有旗帜相关的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|minecraft}}
+*** {{file|directory|textures}}
+**** {{file|directory|entity}}
+***** {{file|file|banner_base.png}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|entity}}
+***** {{file|directory|banner}}
+****** 该目录下的所有png文件。
+</div>
+{{-}}
+
+=== blocks ===
+[[File:Textures atlas blocks.png|thumb]]
+此纹理图集控制了大多数方块的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|block}}：所有方块纹理。
+***** 该目录下的所有png文件。所对应的精灵图命名空间ID为<code>-{}-<''命名空间''>:block/<''方块纹理文件名称''></code>。
+**** {{file|directory|entity}}
+***** {{file|directory|conduit}}：所有潮涌核心相关纹理。
+****** 该目录下的所有png文件。所对应的精灵图命名空间ID为<code>-{}-<''命名空间''>:entity/conduit/<''[[潮涌核心]]纹理文件名称''></code>。
+** {{file|directory|minecraft}}
+*** {{file|directory|textures}}
+**** {{file|directory|entity}}
+***** {{file|directory|bell}}
+****** {{file|file|bell_body.png}}：钟纹理。
+***** {{file|directory|decorated_pot}}
+****** {{file|file|decorated_pot_side.png}}：饰纹陶罐侧面纹理。
+***** {{file|directory|enchantment}}
+****** {{file|file|enchanting_table_book.png}}：附魔台书纹理。
+</div>
+{{-}}
+
+=== celestials ===
+[[File:Texture_atlas_celestials.png|thumb]]
+此纹理图集控制天体相关的纹理，星星由于硬编码生成不由纹理图集控制。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|environment}}
+***** {{file|directory|celestial}}
+****** 该目录下的所有png文件。
+</div>
+
+所生成图集中，每张精灵图的命名空间ID格式为<code>-{}-<''命名空间''>:<''天体名称''></code>。
+{{-}}
+=== chests ===
+[[File:Texture_atlas_chest.png|thumb]]
+此纹理图集控制所有箱子的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|entity}}
+***** {{file|directory|chest}}
+****** 该目录下的所有png文件。
+</div>
+
+=== decorated_pot ===
+[[File:Texture_atlas_decorated_pot.png|thumb]]
+此纹理图集控制所有饰纹陶罐的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|entity}}
+***** {{file|directory|decorated_pot}}
+****** 该目录下的所有png文件。
+</div>
+{{-}}
+=== gui ===
+[[File:Texture_atlas_gui.png|thumb]]
+此纹理图集控制所有用户界面图片的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|gui}}
+***** {{file|directory|sprites}}
+****** 该目录下的所有png文件。所生成图集中，每张精灵图的命名空间ID格式为<code>-{}-<''命名空间''>:<''GUI精灵图名称''></code>。
+**** {{file|directory|mob_effect}}
+***** 该目录下的所有png文件。
+</div>
+{{-}}
+=== items ===
+此纹理图集控制所有物品的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+[[File:Textures atlas items.png|thumb|450px]]
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|item}}：所有物品纹理。
+***** 该目录下的所有png文件。所对应的精灵图命名空间ID为<code>-{}-<''命名空间''>:item/<''物品纹理文件名称''></code>。
+** {{file|directory|minecraft}}
+*** {{file|directory|textures}}
+**** {{file|directory|trims}}：在所生成的图集中，所对应的每张精灵图的命名空间ID为<code>-{}-minecraft:trims/items/<''盔甲类型''>_trim_<''盔甲纹饰材料''></code>。
+***** {{file|directory|color_palettes}}：用于盔甲纹饰颜色的像素色盘。
+****** {{file|file|trim_palette.png}}：原始纹饰色盘。
+****** {{file|file|<''盔甲纹饰材料字符串''>.png}}：相应盔甲纹饰材料对应的色盘。
+***** {{file|directory|items}}：所有物品纹饰纹理。
+****** {{file|file|helmet_trim.png}}：头盔纹饰。
+****** {{file|file|chestplate_trim.png}}：胸甲纹饰。
+****** {{file|file|leggings_trim.png}}：护腿纹饰。
+****** {{file|file|boots_trim.png}}：靴子纹饰。
+</div>
+{{-}}
+=== map_decorations ===
+[[File:Texture_atlas_map_decorations.png|thumb]]
+此纹理图集控制所有地图图标纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|map}}
+***** {{file|directory|map/decorations}}
+****** 该目录下的所有png文件。
+</div>
+
+所生成图集中，每张精灵图的命名空间ID格式为<code>-{}-<''命名空间''>:<''地图图标纹理文件名称''></code>。
+{{-}}
+=== paintings ===
+[[File:Texture_atlas_paintings.png|thumb]]
+此纹理图集控制所有画的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|painting}}
+***** 该目录下的所有png文件。
+</div>
+
+所生成图集中，每张精灵图的命名空间ID格式为<code>-{}-<''命名空间''>:<''画纹理文件名称''></code>。
+
+=== particles ===
+[[File:Texture_atlas_particles.png|thumb]]
+此纹理图集控制所有粒子的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|<资源包>}}
+** {{file|directory|assets}}
+*** {{file|directory|<''任意命名空间''>}}
+**** {{file|directory|textures}}
+***** {{file|directory|particle}}
+****** 该目录下的所有png文件。
+</div>
+
+所生成图集中，每张精灵图的命名空间ID格式为<code>-{}-<''命名空间''>:<''粒子纹理文件名称''></code>。
+{{-}}
+=== shield_patterns ===
+[[File:Texture_atlas_shield_patterns.png|thumb]]
+此纹理图集控制所有盾牌的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|entity}}
+***** {{file|directory|shield}}
+****** 该目录下的所有png文件。
+</div>
+{{-}}
+
+=== shulker_boxes ===
+[[File:Texture_atlas_shulker_boxes.png|thumb]]
+此纹理图集控制所有潜影盒的纹理。对于原版游戏而言，构成该图集的纹理来源于：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|<''任意命名空间''>}}
+*** {{file|directory|textures}}
+**** {{file|directory|entity}}
+***** {{file|directory|shulker}}
+****** 该目录下的所有png文件。
+</div>
+{{-}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19.3|dev=22w46a|更改了纹理加载机制，加入了纹理图集。}}
+|{{HistoryLine||1.19.4|dev=23w04a|加入了纹理图集源类型<code>paletted_permutations</code>。}}
+|{{HistoryLine||1.20.2|dev=23w31a|拆分并重新整理了GUI纹理，加入了纹理图集<code>gui</code>。}}
+|{{HistoryLine|||dev=24w12a|拆分了地图图标纹理，加入了纹理图集<code>map_decorations</code>。}}
+|{{HistoryLine|||dev=25w04a|向纹理图集源<code>paletted_permutations</code>加入新字段{{nbt|string|separator}}控制分隔符，此前固定为{{cd|_}}。}}
+|{{HistoryLine|||dev=25w19a|移除了纹理图集<code>mob_effects</code>，现在状态效果图标归GUI图集管理。}}
+|{{HistoryLine||1.21.9|dev=25w31a|盔甲纹饰、箱子、潜影盒、床、告示牌、饰纹陶罐、旗帜和盾牌的纹理图集不再生成Mipmap版本，它们事实上也从未使用过Mipmap版本的纹理图集。<ref>{{bug|MC-276568|||Fixed}}</ref><ref>{{bug|MC-277447|||Fixed}}</ref><ref>{{bug|MC-277450|||Fixed}}</ref><ref>{{bug|MC-277470|||Fixed}}</ref><ref>{{bug|MC-277471|||Fixed}}</ref><ref>{{bug|MC-277473|||Fixed}}</ref><ref>{{bug|MC-277481|||Fixed}}</ref><ref>{{bug|MC-277483|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了纹理图集<code>celestials</code>。}}
+|{{HistoryLine|||dev=25w45a|加入了纹理图集<code>items</code>。
+|在此版本前，方块和物品相关的纹理共用图集<code>blocks</code>。}}
+|{{HistoryLine|||dev=25w46a|现在多个纹理图集加载相同的精灵图时游戏会输出警告信息。}}
+|{{HistoryLine||26.1|dev=snapshot-2|由于实体相关纹理的移动，盾牌基础文件被移动到{{filepath|entity/shield}}目录下，附魔台的书被移动到{{filepath|entity/enchantment}}目录下，而非直接在{{filepath|entity}}目录下。}}
+|{{HistoryLine||26.2|dev=snapshot-3|现在床重新使用方块模型，与之相关的纹理现在由<code>blocks</code>而非<code>beds</code>图集管理。}}
+|{{HistoryLine|||dev=snapshot-4|移除了残留的<code>beds</code>图集。}}
+|{{HistoryLine|||dev=snapshot-7|现在告示牌和悬挂式告示牌使用方块模型，移除了<code>signs</code>图集。}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在<code>paletted_permutations</code>纹理图集源类型的调色板字段会按照调色板根目录解析，而不是从纹理根目录解析。
+|移除了<code>armor_trims</code>图集。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:资源包]]
+[[Category:纹理图集]]
+
+[[de:Atlasdaten]]
+[[en:Atlas]]
+[[ja:テクスチャ#テクスチャアトラス]]

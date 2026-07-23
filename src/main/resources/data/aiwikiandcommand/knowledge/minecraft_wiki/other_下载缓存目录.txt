@@ -1,0 +1,67 @@
+# 页面: 下载缓存目录
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%8B%E8%BD%BD%E7%BC%93%E5%AD%98%E7%9B%AE%E5%BD%95
+# 分类: 
+# 抓取时间: 2026-07-14 17:19:41
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''下载缓存目录'''是游戏客户端下载和缓存下载文件的目录。
+
+== 目录结构 ==
+
+下载缓存目录以下列的目录结构组织，以快速查找到下载后的文件缓存。
+
+<div class="treeview">
+* {{file|directory|-{}-<''客户端根目录''>}}
+** {{file|directory|downloads}}：下载缓存目录。
+*** {{file|file|log.json}}：下载缓存日志文件。
+*** {{file|directory|<''UUID''>}}：下载数据的存放位置。
+**** {{file|file|-{}-<''SHA-1散列值''>}}：一项下载数据，其[[wzh:SHA家族|SHA-1散列值]]与文件名称一致。
+</div>
+
+下载缓存日志文件本质上不是一个JSON文件，而是[[wikipedia:JSON_streaming#Newline-delimited JSON|以换行符分割的JSON流式文件]]，即每一行都是JSON，每个JSON都代表了一条下载缓存日志：
+
+<div class="treeview">
+* {{nbt|compound}} JSON根对象
+** {{nbt|string|error}}：下载过程中发生的错误信息。如果下载数据时出现了错误，则包含此项。
+** {{nbt|compound|file}}：下载后的文件信息。此项与{{nbt|string|error}}只会有一个存在。
+*** {{nbt|string|name|existonsave=1}}：文件名称，即相对于下载缓存目录的相对路径。
+*** {{nbt|long|size|existonsave=1}}：文件大小，按字节计。
+** {{nbt|string|hash}}：下载数据的SHA-1散列值。
+** {{nbt|string|id|existonsave=1}}：下载数据的UUID，与存放位置的UUID一致。
+** {{nbt|string|url|existonsave=1}}：下载数据的[[wzh:URL|URL]]。
+** {{nbt|string|time|existonsave=1}}：下载时间，日期格式为[[wzh:ISO 8601|ISO 8601]]。
+</div>
+
+== 存储行为 ==
+
+当游戏客户端启动时，游戏会读取下载缓存目录内所有文件的信息，按照最后修改时间查找出最新的20个文件，其余文件会被删除，所有空目录也会被一起连带删除，以保证下载缓存目录内文件不会太多。
+
+下载缓存目录设计上是为了客户端下载任意文件，但实际上客户端只有一种情况会下载外部文件，即加入外部服务端时下载世界指定资源包。
+
+当客户端加入外部服务端时，如果服务端的[[服务端配置文件格式|服务端配置文件]]内设置了<code>resource-pack</code>，那么服务端就会发送<code>resource_pack_push</code>网络数据包要求客户端是否要使用资源包，同步下列数据：
+* 资源包URL（来自<code>resource-pack</code>）。
+* 资源包SHA-1散列值（来自<code>resource-pack-sha1</code>或<code>resource-pack-hash</code>，可能为空字符串）。
+* 资源包UUID（来自<code>resource-pack-id</code>，服务端未设置时使用UUIDv4算法使用资源包URL作为输入生成UUID）。
+* 资源包是否必选（来自<code>require-resource-pack</code>）。
+* 资源包选择提示（来自<code>resource-pack-prompt</code>）。
+
+如果客户端接受资源包，则开始下载流程。如果客户端检查到当前下载缓存目录内有对应文件（{{filepath|-{}-<''资源包UUID''>/<''资源包SHA-1散列值''>}}）且散列值对应，则直接使用此文件；否则开始下载文件。下载文件不允许超过250MB，客户端使用以下HTTP标头下载文件：
+* <code>X-Minecraft-Username</code>：当前玩家用户名。
+* <code>X-Minecraft-UUID</code>：当前玩家UUID。
+* <code>X-Minecraft-Version</code>：游戏版本名称。
+* <code>X-Minecraft-Version-ID</code>：游戏版本ID。
+* <code>X-Minecraft-Pack-Format</code>：游戏资源包版本。
+* <code>User-Agent</code>：固定为<code>-{}-Minecraft Java/<''游戏版本名称''></code>。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.3|dev=pre1|修改了资源包下载机制，从而引入了下载缓存目录。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

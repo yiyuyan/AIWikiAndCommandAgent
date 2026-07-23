@@ -1,0 +1,126 @@
+# 页面: 装备资产
+# 来源: https://zh.minecraft.wiki/w/%E8%A3%85%E5%A4%87%E8%B5%84%E4%BA%A7
+# 分类: 
+# 抓取时间: 2026-07-14 17:35:53
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+'''装备资产（Equipment Asset）'''<ref>{{snap|25w03a}}</ref>，曾称'''装备模型（Equipment Model）'''<ref>{{snap|24w36a}}</ref>，是对[[盔甲]]类装备外观的核心定义。
+
+== 定义格式 ==
+装备资产定义文件都在[[资源包]]{{filepath|assets/<''命名空间''>/equipment}}目录内，且均为JSON文件。
+
+此文件的格式如下：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|compound|layers}}：装备在各个不同的装备槽位时，在生物身上渲染的模型。
+*** {{nbt|list|<''预设模型类型''>}}：当装备模型在某个生物身上渲染时，游戏会根据生物对应的预设模型层类型选择使用哪个具体的模型层信息。预设模型见下文。
+**** {{nbt|compound}}：一项模型层信息。
+***** {{nbt|compound|dyeable}}：设置此模型层受到染色影响，其颜色会由[[数据组件#dyed_color|<code>dyed_color</code>]]物品堆叠组件决定。此项不存在时物品的染色无法影响模型层的渲染。
+****** {{nbt|int}}{{nbt|list|color_when_undyed}}：物品未被染色时，模型层的着色。如果此项不存在，当物品未着色时模型层直接不着色，使用纹理本来的颜色。
+******* {{nbt inherit/rgb color}}
+***** {{nbt|string|texture|required=1}}：（命名空间ID）模型使用的纹理，纹理将被如何切分和绑定取决于选择的预设模型类型。游戏在渲染时将此值解析为{{filepath|-{}-assets/<''命名空间''>/textures/entity/equipment/<''预设模型类型''>/<''路径''>.png}}。
+***** {{nbt|bool|use_player_texture}}：（默认为<code>false</code>）如果预设模型类型为<code>wings</code>，此值代表是否使用玩家披风纹理渲染翅膀模型。
+** {{nbt|compound|trim_palette_replacements}}{{upcoming|je 26.3}}：纹饰调色板置换规则。如果目前使用此装备资产的装备的盔甲纹饰数据的调色板ID在此映射中，则使用对应的替换调色板。参见{{slink|盔甲纹饰定义格式#纹理}}。
+*** {{nbt|string|<''调色板命名空间ID''>}}：（命名空间ID）要覆盖使用的调色板ID。
+</div>
+
+== 定义行为 ==
+装备资产定义了特定模型层上渲染指定纹理的映射：每一个装备资产都定义了它在特定模型层上应该使用何种纹理。
+
+游戏提供了以下可被装备资产使用的预设模型类型：
+
+'''人形盔甲'''
+* <code>humanoid</code>：人形生物（[[玩家]]、[[玩家模型]]、[[盔甲架]]、[[巨人]]、[[猪灵]]、[[猪灵蛮兵]]、[[僵尸]]类生物和[[骷髅]]类生物）的头部、胸部和脚部盔甲模型。
+* <code>humanoid_leggings</code>：人形生物的腿部盔甲模型。
+* <code>humanoid_baby</code>：除盔甲架外，幼年人形生物的盔甲模型，此模型层无法渲染[[盔甲纹饰]]。对于这些生物的幼年个体，将只渲染此模型，而不渲染<code>humanoid</code>和<code>humanoid_leggings</code>。
+* <code>wings</code>：玩家、玩家模型和盔甲架的翅膀模型。此模型使用胸部盔甲模型且可以和<code>humanoid</code>的胸部盔甲模型共存。如果游戏渲染了此模型，就不会渲染披风模型。
+
+'''动物盔甲'''
+* <code>wolf_body</code>：[[狼]]的身体盔甲模型。
+* <code>horse_body</code>：[[马]]、[[骷髅马]]和[[僵尸马]]的身体盔甲模型。
+* <code>llama_body</code>：[[羊驼]]和[[行商羊驼]]的身体盔甲模型。
+* <code>happy_ghast_body</code>：[[快乐恶魂]]的身体盔甲模型。
+* <code>nautilus_body</code>：[[鹦鹉螺]]和[[僵尸鹦鹉螺]]的身体盔甲模型。
+
+'''鞍'''
+* <code>pig_saddle</code>：[[猪]]的[[鞍]]模型。
+* <code>strider_saddle</code>：[[炽足兽]]的鞍模型。
+* <code>camel_saddle</code>：[[骆驼]]的鞍模型。
+* <code>camel_husk_saddle</code>：[[骆驼尸壳]]的鞍模型。
+* <code>horse_saddle</code>：[[马]]的鞍模型。
+* <code>donkey_saddle</code>：[[驴]]的鞍模型。
+* <code>mule_saddle</code>：[[骡]]的鞍模型。
+* <code>skeleton_horse_saddle</code>：[[骷髅马]]的鞍模型。
+* <code>zombie_horse_saddle</code>：[[僵尸马]]的鞍模型。
+* <code>nautilus_saddle</code>：[[鹦鹉螺]]和[[僵尸鹦鹉螺]]的鞍模型。
+
+游戏在渲染盔甲模型时，只要对应的盔甲槽位吻合，游戏就会渲染对应预设模型类型的模型层。如果盔甲模型没有设置对应预设模型类型的模型层，那么游戏就不渲染对应的模型。当<code>humanoid</code>和<code>wings</code>同时存在时，这两个模型可被同时渲染。
+
+{| class="wikitable"
+! 预设模型类型 !! 模型（正面） !! 模型（背面） !! UV映射
+|-
+|<code>humanoid</code>
+|[[File:Equipment Model Humanoid (front).png|120px]]
+|[[File:Equipment Model Humanoid (back).png|120px]]
+|[[File:Equipment Texture Humanoid.png|120px]]
+|-
+|<code>humanoid_leggings</code>
+|[[File:Equipment Model Humanoid Leggings (front).png|120px]]
+|[[File:Equipment Model Humanoid Leggings (back).png|120px]]
+|[[File:Equipment Texture Humanoid Leggings.png|120px]]
+|-
+|<code>wings</code>
+|[[File:Equipment Model Wings (front).png|120px]]
+|[[File:Equipment Model Wings (back).png|120px]]
+|[[File:Equipment Texture Wings.png|120px]]
+|-
+|<code>wolf_body</code>
+|[[File:Equipment Model Wolf Body (front).png|120px]]
+|[[File:Equipment Model Wolf Body (back).png|120px]]
+|[[File:Equipment Texture Wolf Body.png|120px]]
+|-
+|<code>happy_ghast_body</code>
+|[[File:Equipment Model Happy Ghast Body (front).png|120px]]
+|[[File:Equipment Model Happy Ghast Body (back).png|120px]]
+|[[File:Equipment Texture Happy Ghast Body.png|120px]]
+|-
+|<code>horse_body</code>
+|[[File:Equipment Model Horse Body (front).png|120px]]
+|[[File:Equipment Model Horse Body (back).png|120px]]
+|[[File:Equipment Texture Horse Body.png|120px]]
+|-
+|<code>llama_body</code>
+|[[File:Equipment Model Llama Body (front).png|120px]]
+|[[File:Equipment Model Llama Body (back).png|120px]]
+|[[File:Equipment Texture Llama Body.png|120px]]
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.2|dev=24w36a|加入了装备模型。}}
+|{{HistoryLine||1.21.4|dev=24w45a|装备资产的文件路径由{{filepath|models/equipment}}移动到{{filepath|equipment}}。
+|在游戏内部将装备模型重命名为装备资产。}}
+|{{HistoryLine||1.21.5|dev=25w03a|加入了装备模型预设层{{cd|d=pretty|pig_saddle|strider_saddle|camel_saddle|horse_saddle|donkey_saddle|mule_saddle|skeleton_horse_saddle|zombie_horse_saddle}}。}}
+|{{HistoryLine|||dev=25w08a|移除了装备资产染色层{{nbt|compound|dyeable}}生效需要对应物品在<code>#dyeable</code>物品标签的限制。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了装备模型预设层<code>happy_ghast_body</code>。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了装备模型预设层<code>nautilus_body</code>和<code>nautilus_saddle</code>。}}
+|{{HistoryLine|||dev=25w44a|加入了装备模型预设层<code>camel_husk_saddle</code>。}}
+|{{HistoryLine||26.1|dev=snapshot-7|加入了装备模型预设层<code>humanoid_baby</code>，用来单独表示幼年人形生物的模型。}}
+|{{HistoryLine|||dev=snapshot-10|小型盔甲架不再使用预设层<code>humanoid_baby</code>。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了{{nbt|compound|trim_palette_replacements}}，取代了盔甲纹饰定义对盔甲纹饰的覆写行为。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:资源包]]
+
+[[de:Ausrüstungsplatz]]
+[[en:Equipment]]
+[[pt:Equipamento]]

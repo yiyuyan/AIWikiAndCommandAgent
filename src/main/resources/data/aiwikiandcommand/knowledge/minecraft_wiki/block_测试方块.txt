@@ -1,0 +1,154 @@
+# 页面: 测试方块
+# 来源: https://zh.minecraft.wiki/w/%E6%B5%8B%E8%AF%95%E6%96%B9%E5%9D%97
+# 分类: 
+# 抓取时间: 2026-07-14 17:30:11
+# 原始 Wikitext 内容:
+
+{{for|运行[[测试实例]]的方块|测试实例方块}}
+{{exclusive|je}}
+{{Infobox block
+|group1=启动模式
+|1-1=Test Block start.png
+|group2=日志输出模式
+|2-1=Test Block log.png
+|group3=失败模式
+|3-1=Test Block fail.png
+|group4=接受模式
+|4-1=Test Block accept.png
+|invimage=Test Block start
+|invimage2=Test Block log
+|invimage3=Test Block fail
+|invimage4=Test Block accept
+|light=0
+|nobe=1
+}}
+
+'''测试方块（Test Block）'''是一种用于实现基于方块的测试的技术性方块。
+
+== 生成 ==
+测试方块不会生成在世界中。
+
+== 获取 ==
+测试方块无法在未开启[[作弊]]的[[生存模式]]的世界中获取。使用[[创造模式]]或启用[[作弊]]，测试方块可以通过[[创造模式物品栏]]（需要启用“{{tp|options.operatorItemsTab}}”，或“{{tp|itemGroup.hotbar}}”中有测试方块）、[[创造模式]]中使用{{ctrl|选取方块}}或[[命令]]等方式获得。
+
+== 破坏 ==
+测试方块不能被挖掘破坏。
+
+[[权限等级]]不足<code>2</code>的玩家，即使处于创造模式也不能破坏测试方块。
+
+{{Breaking table}}
+
+测试方块被破坏后不会掉落。
+
+== 用途 ==
+{{Filetr|Test Block Start GUI.png|thumb|启动模式测试方块的界面}}
+{{Filetr|Test Block Log GUI.png|thumb|{{tr|日志输出|記錄}}模式测试方块的界面}}
+{{Filetr|Test Block Fail GUI.png|thumb|失败模式测试方块的界面}}
+{{Filetr|Test Block Accept GUI.png|thumb|接受模式测试方块的界面}}
+玩家无法在生存模式和冒险模式下放置测试方块、打开测试方块的交互界面并修改其内容或更改其模式。
+
+测试方块不能在[[生存模式]]中或以非管理员身份破坏，也不能被[[凋灵]]和[[末影龙]]破坏。
+
+测试方块不能被点燃，不能被[[活塞]]推动，还有和[[基岩]]一样的[[爆炸抗性]]。
+
+测试方块可以被[[红石信号]]所[[#激活|激活]]，也可以发出红石信号。
+
+除{{tr|日志输出|記錄}}模式测试方块外，测试方块都必须在测试结构中才能发挥其作用。
+
+=== 设置 ===
+处于[[创造模式]]且拥有相关权限的玩家对测试方块点击{{ctrl|使用}}键能打开其界面。
+
+在[[单人游戏]]中打开测试方块界面时会暂停游戏。
+
+; 方块模式
+左下角，即在“完成”上方的按钮用于切换测试方块的模式。
+
+点击“启动模式/{{tr|日志输出|記錄}}模式/失败模式/接受模式”按钮可以改变测试方块的模式。“启动模式”为测试方块的默认模式。模式改变时，测试方块的纹理也会随之改变。
+
+加载方块实体数据时，若<code>mode</code>字段为无效值，则测试方块会变为失败模式。
+* 启动模式测试方块：顾名思义，这种方块表示测试的起点。处于启动模式的测试方块不受[[NC更新]]影响。当测试启动时，它会激活并产生一次[[红石电路#信号强度|信号强度]]为15的红石脉冲。方块被重置时，它会取消激活。
+* {{tr|日志输出|記錄}}模式测试方块：在运行基于方块的测试实例期间，测试方块被触发时，将所储存的消息输出为一条“Test <''模式名称''> (at <''方块位置''>{{fn|方块位置格式如<code>-{}-BlockPos(x{{=}}<''方块的X坐标''>, y{{=}}<''方块的Y坐标''>, z{{=}}<''方块的Z坐标''>)</code>。|name=BlockPos}}): <''消息''>”日志。
+* 失败模式测试方块：在运行基于方块的测试实例期间，测试方块被触发时，这条测试实例分支失败。
+* 接受模式测试方块：在运行基于方块的测试实例期间，触发时，这条测试实例分支成功。只要在触发此方块前测试未超时，测试实例就不会停止。
+
+; 消息
+处于“{{tr|日志输出|記錄}}模式/失败模式/接受模式”模式的测试方块能编辑其被触发后输出到日志中的消息。
+
+虽然启动模式不会显示消息文本框，但原有的消息文本不会因切换模式而丢失。
+
+; 完成
+点击“完成”按钮或按{{key|Enter}}会保存消息、模式和方块状态并退出界面。
+
+; 取消
+点击“取消”按钮或按{{key|Esc}}会在不保存任何修改的情况下退出界面。
+
+=== 激活 ===
+当处于“{{tr|日志输出|記錄}}模式/失败模式/接受模式”模式下，测试方块属于[[红石元件#机械元件|机械元件]]，可被下列形式激活：
+* 毗邻的开启的'''[[红石元件#电源|电源]]'''（例外：[[红石火把]]不会激活其所附着的测试方块，[[侦测器]]只会激活指向的测试方块）。
+* 毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻的指向测试方块且激活的[[红石中继器]]、[[红石比较器]]或[[红石线]]（包括测试方块上方的红石线）；毗邻但未指向测试方块的红石线不会激活测试方块。
+
+被激活的测试方块会添加“已被激活”的标签，且{{tr|日志输出|記錄}}模式下的测试方块还会输出“Test <''模式名称''> (at <''方块位置''>{{fn|name=BlockPos}}): <''消息''>”日志信息。
+
+== 音效 ==
+{{Sound table/Block/Stone/JE}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=java
+|Test Block
+|spritetype=block
+|nameid=test_block
+|showblocktags=je
+|blocktags={{GameTag|block|test_block}}
+|foot=1
+}}
+{{ID table
+|displayname=方块实体
+|spritename=test-blocks
+|spritetype=block
+|nameid=test_block
+|foot=1
+}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table|only=je}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+测试方块有包含方块附加数据的方块实体。
+
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.5|dev=25w03a|[[File:Test Block start JE1.png|32px]] [[File:Test Block log JE1.png|32px]] [[File:Test Block fail JE1.png|32px]] [[File:Test Block accept JE1.png|32px]] 加入了测试方块。}}
+|{{HistoryLine|||dev=25w04a|将测试方块的方块状态名称由<code>test_block_mode</code>更改为<code>mode</code>。}}
+|{{HistoryLine|||dev=25w10a|[[File:Test Block start JE2.png|32px]] [[File:Test Block log JE2.png|32px]] [[File:Test Block fail JE2.png|32px]] [[File:Test Block accept JE2.png|32px]] 更改了测试方块的纹理。}}
+}}
+
+== 注释 ==
+{{Fnlist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+{{Navbox redstone}}
+
+[[Category:红石电路]]
+
+[[de:Testblock]]
+[[en:Test Block]]
+[[es:Bloque de pruebas]]
+[[fr:Bloc de test]]
+[[it:Blocco di collaudo]]
+[[ja:テストブロック]]
+[[ko:테스트 블록]]
+[[pl:Blok testowy]]
+[[pt:Bloco de Teste]]
+[[ru:Блок-тестер]]
+[[uk:Тестовий блок]]

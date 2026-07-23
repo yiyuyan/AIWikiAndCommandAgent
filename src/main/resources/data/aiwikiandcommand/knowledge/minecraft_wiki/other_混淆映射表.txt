@@ -1,0 +1,96 @@
+# 页面: 混淆映射表
+# 来源: https://zh.minecraft.wiki/w/%E6%B7%B7%E6%B7%86%E6%98%A0%E5%B0%84%E8%A1%A8
+# 分类: Java版, 过时内容
+# 抓取时间: 2026-07-14 17:30:45
+# 原始 Wikitext 内容:
+
+{{Removed|edition=je|[[Java版26.1]]移除了混淆，因此不再提供混淆映射表。}}
+'''混淆映射表（Obfuscation Map）'''又称'''反混淆表'''，是[https://www.guardsquare.com/en/products/proguard Proguard]输出的映射了被混淆的类和类成员在混淆前后的名称的文本文件。<ref>{{link|url=https://www.guardsquare.com/manual/configuration/usage#obfuscationoptions|title=ProGuard manual &#124; Usage|website=Guardsquare}}</ref>自[[Java版19w36a|19w36a]]以来所有版本的[[client.json]]中都会导出混淆映射表。在19w36a发布一小段时间后，[[Java版1.14.4|1.14.4]]的client.json也获得更新，导出了混淆映射表。<ref>{{tweet|Dinnerbone|1169257039597645824|I've been pushing for this for a while, so I'm really happy that we were finally able to release the obfuscation mappings public. @SeargeDP had a great idea to release the 1.14.4 mappings as comparison, so those are going out right now.|September 4th, 2019}}</ref>
+
+2025年10月29日，Mojang宣布从[[群骑纷争]]的下一个小更新的首个快照（即[[Java版26.1-snapshot-1|26.1-snapshot-1]]）开始，Java版代码将不再被混淆，因此混淆映射表将会被移除。此外，在[[Java版25w45a|25w45a]]至[[Java版1.21.11|1.21.11]]的所有版本中，Mojang同时发布了已混淆和未混淆的核心文件，以帮助模组作者进行过渡。<ref>{{article|removing-obfuscation-in-java-edition|Removing obfuscation in Java Edition|Oct 29, 2025}}</ref>
+
+== 用途 ==
+混淆映射表原意是用来反混淆被混淆后的堆栈记录的（例如[[崩溃|崩溃报告]]中的堆栈记录）。<ref>{{link|url=https://www.guardsquare.com/en/products/proguard/manual/usage|title=ProGuard manual &#124; Retrace|website=Guardsquare}}</ref>对应教程[[Tutorial:获取崩溃报告#对报告进行反混淆|在此]]。
+
+[[Dinnerbone]]和[[Adrian Östergård]]表示混淆映射表会使编写[[Mod]]更方便。<ref>{{tweet|Dinnerbone|1168818898101293056|Tomorrow's snapshot has a small surprise for modders! Should make one or two people happy :)|September 3rd, 2019}}</ref><ref>{{tweet|adrian_ivl|1169234792984002561|Happy modding!|September 4th, 2019}}</ref>[[Searge]]表示混淆映射表可以替代一些[[辅助程序与编辑器]]，例如[[Mod Coder Pack]]。<ref>{{tweet|SeargeDP|1169247787529248770|This should answer the questions of everyone who kept asking about MCP updates for newer versions of Minecraft. Spoiler: there won't be any, they are finally not necessary anymore.|September 4th, 2019}}</ref>
+
+=== 第三方用途 ===
+{{disclaimer|section=1}}
+混淆映射表中包含的信息足以反混淆Minecraft使之反编译出容易理解的代码。可能有[[辅助程序与编辑器]]能够方便地反编译反混淆后的Minecraft。
+
+根据许可证，这类反混淆反编译后的代码只能以修改后的版本发布，或作为更大的项目的一部分。
+
+== 许可证 ==
+每个混淆映射表开头都有一行字，表示这些映射表的许可证。
+
+=== 原文 ===
+该许可证自21w03a起使用。
+
+<blockquote><pre># (c) 2020 Microsoft Corporation. These mappings are provided "as-is" and you bear the risk of using them. You may copy and use the mappings for development purposes, but you may not redistribute the mappings complete and unmodified. Microsoft makes no warranties, express or implied, with respect to the mappings provided here.  Use and modification of this document or the source code (in any form) of Minecraft: Java Edition is governed by the Minecraft End User License Agreement available at https://account.mojang.com/documents/minecraft_eula.</pre></blockquote>
+
+==== 21w03a以前的许可证 ====
+{{Collapse|title=这些许可证内容稍有不同。|content=
+<blockquote><pre># (c) 2020 Microsoft Corporation. All rights reserved. These mappings are provided "as-is" and you bear the risk of using them. You may copy and use the mappings for development purposes, but you may not redistribute the mappings complete and unmodified. Microsoft makes no warranties, express or implied, with respect to the mappings provided here.  Use and modification of source code for Minecraft: Java Edition is governed by the Minecraft End User License Agreement available at https://account.mojang.com/documents/minecraft_eula.</pre></blockquote>}}
+
+==== 2020年8月14日以前发布的版本 ====
+{{Collapse|title=这些版本（如[[Java版Combat Test]]）以更旧的许可证授权。|content=
+<blockquote><pre># (c) 2019 Microsoft Corporation.  All rights reserved.  This information is provided "as-is" and you bear the risk of using it. This information does not provide you with any legal rights to any intellectual property in any Microsoft product. You may copy and use this information for your internal, reference purposes. Microsoft makes no warranties, express or implied, with respect to the information provided here.</pre></blockquote>}}
+
+=== 参考译文 ===
+{{msgbox
+| class = msgbox-red
+| icon = 2
+| title = 这是一些被翻译过的文本，不可视为[[#原文|原文本]]的替代。
+| text = These are some translated versions of (and are not substitutes for) the [[#原文|original text]].
+| mini = 1
+}}
+
+<blockquote><pre>-{}-# (c) 2020 微软公司。这些映射“按其现状”提供，且您使用它时需要自担风险。您可以以开发的目的复制、使用这些映射，但您不能完整无修改地再分发这些映射。对于此处提供的映射，微软不提供任何明示或暗示的担保。对本文-{}-件及Minecraft：Java版源代码的任何形式的使用和修改受Minecraft最终用户许可协议管理，见https://account.mojang.com/documents/minecraft_eula。</pre></blockquote>
+
+==== 21w03a以前的许可证 ====
+{{Collapse|content=
+<blockquote><pre>-{}-# (c) 2020 微软公司。保留所有权利。这些映射“按其现状”提供，且您使用它时需要自担风险。您可以以开发的目的复制、使用这些映射，但您不能完整无修改地再分发这些映射。对于此处提供的映射，微软不提供任何明示或暗示的担保。对Minecraft：Java版源代码的使用和修改受Minecraft最终用户许可协议管理，见https://account.mojang.com/documents/minecraft_eula。</pre></blockquote>}}
+
+==== 2020年8月14日以前发布的版本 ====
+{{Collapse|content=
+<blockquote><pre>-{}-# (c) 2019 微软公司。保留所有权利。这些信息“按其现状”提供，且您使用它时需要自担风险。这些信息不为您提供任何微软产品中含有的任何知识产权的任何法律权利。您可以在您内部、以参考为目的复制、使用这些信息。对于此处提供的信息，微软不提供任何明示或暗示的担保。</pre></blockquote>}}
+
+根据Dinnerbone所言，在2020年8月14日更新许可证前发布的混淆映射表除了仍然按照旧许可证授权外，也会以新的许可证授权。<ref>{{tweet|Dinnerbone|1293597333238800390|Existing mappings will still be available under the old terms, but we will also republish them with the new terms on Friday. All new mappings provided in the future will be under the new terms.|Aug 12, 2020}}</ref>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2019年9月3日|link={{tweet|Dinnerbone|1168818898101293056}}|[[Dinnerbone]]提到[[19w36a]]中会有一个“给Mod制作者的小惊喜”。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.15|dev=19w36a|现在[[client.json]]中包含客户端和服务端的混淆映射表下载信息。}}
+|{{HistoryLine||2019年9月4日|link={{tweet|Dinnerbone|1169257039597645824}}|Dinnerbone发布了[[Java版1.14.4]]的混淆映射表。}}
+|{{HistoryLine||2020年8月12日|link={{tweet|Dinnerbone|1293597326561488897}}|Dinnerbone提到混淆映射表的许可证将会更新，以此鼓励Mod制作者使用Mojang的混淆映射表。他在[{{tweet|Dinnerbone|1293597329854009344}} 另一条推文]中说这将“有助于兼容性”。
+|Dinnerbone同时也发布了[https://gist.github.com/Dinnerbone/07b20a9f02e50a569217df6449cc1185 新许可证的预览]。}}
+|{{HistoryLine||2020年8月14日|link={{tweet|Dinnerbone|1294305236392259590}}|更新了混淆映射表的许可证。
+|更新了[[version_manifest.json]]，现在1.14.4版本的[[client.json]]有了映射表，自19w36a起的版本现在使用更新许可证后的映射表。}}
+|{{HistoryLine||1.17|dev=21w03a|更改了许可证的部分用词。}}
+|{{HistoryLine||2025年10月29日|link={{article|removing-obfuscation-in-java-edition}}|Mojang宣布Java版将不再被混淆，届时新版本也不再发布混淆映射表。}}
+|{{HistoryLine||1.21.11|dev=25w45a|作为移除混淆的过渡，此版本起同时发布了已混淆和未混淆的核心文件。}}
+|{{HistoryLine||26.1|dev=snapshot-1|核心文件不再被混淆，同时混淆映射表也不再发布。}}
+}}
+
+== 你知道吗 ==
+* 到2020年8月16日许可证更新为止，当年发布的版本在其混淆映射表文件的许可证中仍然使用<code># (c) 2019 Microsoft Corporation.</code>。
+* 在客户端混淆映射表中，第一个方法是<code>youJustLostTheGame()</code>，这是致敬[[wzh:The Game (游戏)|The Game]]的一个彩蛋。
+** 这个方法用于在按住调试按键{{key|Ctrl+F3+C}}十秒后触发游戏崩溃。
+** 在[[21w13a]]至[[24w33a]]之间的版本的混淆映射表中，该方法的位置被重排到了第四位。<ref>{{Bug|MC-270510|||Fixed}}</ref>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[de:Obfuscation Map]]
+[[en:Obfuscation map]]
+[[es:Mapa de ofuscación]]
+[[fr:Carte d'obfuscation]]
+[[ja:難読化マップ]]
+[[ko:난독화 맵]]
+[[pt:Mapas de ofuscação]]
+[[ru:Карта обфускации]]
+[[uk:Карта обфускації]]

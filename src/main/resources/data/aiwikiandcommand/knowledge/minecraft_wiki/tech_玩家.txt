@@ -1,0 +1,1103 @@
+# 页面: 玩家
+# 来源: https://zh.minecraft.wiki/w/%E7%8E%A9%E5%AE%B6
+# 分类: Java版独有信息, 使用计算器的页面, 基岩版即将到来/26.40, 基岩版独有信息, 实体, 有未知版本的History模板的页面/基岩版, 本地化模块需更新, 环境, 生物, 需要验证历史/Java版
+# 抓取时间: 2026-07-14 17:32:08
+# 原始 Wikitext 内容:
+
+{{redirect|史蒂夫|过时的同名生物|Indev MD3格式生物||人类}}
+{{Infobox entity
+|group1=Steve
+|1-1=Steve.png
+|group2=Alex
+|2-1=Alex.png
+|group3=Ari
+|3-1=Ari.png
+|group4=Efe
+|4-1=Efe.png
+|group5=Kai
+|5-1=Kai.png
+|group6=Makena
+|6-1=Makena.png
+|group7=Noor
+|7-1=Noor.png
+|group8=Sunny
+|8-1=Sunny.png
+|group9=Zuri
+|9-1=Zuri.png
+|*-1size=x250px
+|behavior=玩家
+|health={{hp|20}}
+|armor={{armor|0}}
+|damage='''近战攻击（低延迟，长距离）'''：<br>{{AutoDmg|d1=1|d2=1|d3=1|jed=不受难度影响}}
+|size=高度：1.8格<br>宽度：0.6格<br>
+'''潜行时：'''<br>高度：1.5{{only|short=1|JE}}或1.49{{only|short=1|BE}}格<br>宽度：0.6格<br>
+'''游泳、爬行或滑翔时：'''<br>高度：0.6格<br>宽度：0.6格<br>
+'''睡觉时：'''<br>高度：0.2{{only|short=1|JE}}或0.15{{only|short=1|BE}}格<br>宽度：0.2格
+|spawn=世界出生点（当使用[[床]]、[[命令]]、[[重生锚]]变更后在个人出生点）
+}}
+
+'''玩家（Player）'''是[[Minecraft]]中可控制的[[生物]]。
+
+== 档案 ==
+{{main|档案}}
+[[档案]]用于自定义玩家的名称、外观（[[皮肤]]、[[披风]]）等内容，也用于在服务器中区分不同的游戏用户。以一个游戏档案加入服务器后，就得到一个对应的玩家实体。
+
+== 生成 ==
+{{Main|出生点}}
+玩家会在世界出生点进入世界并开始游戏。
+
+玩家可以通过[[床]]、[[重生锚]]或使用{{cmd|spawnpoint}}命令来更改个人出生点。当玩家死亡后，将会在个人出生点重生。如果玩家死亡时个人出生点不可用（被阻挡、被破坏或重生锚能量耗尽等），将会重生在世界出生点。
+
+如果[[游戏规则]]{{gamerule|immediate_respawn|doImmediateRespawn}}为<code>true</code>，玩家在死亡后会立即重生。在非[[极限模式]]的情况下，玩家重生后与重生前的游戏模式始终保持一致。在极限模式下，玩家死亡后游戏模式会被改为[[旁观模式]]。
+
+== 掉落物 ==
+玩家仅在游戏规则{{gamerule|keep_inventory|keepInventory}}为<code>false</code>且不处于[[旁观模式]]时才会有掉落物。否则，玩家在死亡时将保留他们的物品栏和经验值，并携带着物品和经验值重生。
+
+如果{{gamerule|keep_inventory|keepInventory}}为<code>false</code>，玩家在死亡时将会失去所有物品，掉落物品栏中所有不具有[[消失诅咒]]的物品，且不受[[抢夺]]魔咒影响。这些掉落物可以被任何玩家、生物捡起或被漏斗吸取，亦或是被环境摧毁。无论玩家因何种原因身亡，玩家始终会掉落等同于自身7×经验等级的经验值，至多能掉落{{xp|100}}。
+
+== 行为 ==
+作为游戏的核心部分，包括[[合成]]在内的多种游戏机制都围绕着玩家进行，绝大多数物品、功能性方块和[[生物]]互动仅能由玩家使用，大部分[[状态效果]]也只对玩家有实际作用。玩家也是敌对生物主动攻击的第一目标。
+
+玩家接受设备输入进行直接[[控制]]，从而进行自主移动和交互。
+
+=== 玩家名称标签 ===
+玩家名称会显示在玩家头上的一个标签上。这个标签有三个可见度级别：明亮、暗淡、不可见。[[潜行]]或标签被方块阻挡可以使其降低一个可见度级别，被挡住的同时潜行将使其不可见。标签可以只被方块挡住一部分，这使其不同的部分可以有不同的可见度。标签对不同玩家的可见度也可能是不同的。
+
+在视野外的玩家的标签不可见。
+
+{{in|be}}如果在视频设置选项卡中将“{{tr|游戏内玩家昵称|玩家遊戲名稱}}”设置为“关闭”，那么在多人游戏中就无法看到其他玩家的标签。
+
+{{in|java}}如果玩家处于一个不显示名称标签的[[队伍]]中，其他相应的玩家将始终无法看见其玩家名称；如果玩家所处的队伍被指定了颜色，那么玩家名称也会使用这个颜色。
+
+=== 平视显示器 ===
+{{Main|平视显示器}}
+显示在屏幕上的[[平视显示器]]（HUD）是玩家用于监测自身健康和游戏状态的主要方式，其中包括玩家的[[生命值]]、[[饥饿]]、[[经验]]与[[快捷栏]]，并显示十字准星和手持的物品（或玩家的手臂）。[[盔甲]]条会在玩家穿戴盔甲时显示在生命值上方。玩家在潜水时会显示氧气条。界面的右边栏也会在需要时显示记分板。
+
+=== 物品栏 ===
+{{Main|物品栏}}
+玩家拥有36个物品栏槽位、1个[[副手]]槽以及4个盔甲槽。
+
+每个玩家同时还拥有27个[[末影箱]]槽位，存储在其中的物品不会因玩家的死亡而失去，且不能被其他玩家访问。
+
+=== 合成 ===
+{{Main|合成}}
+玩家物品栏中有2×2的合成方格，可以合成部分物品。合成方格不能用于储存物品，仅在玩家打开物品栏时可被使用。
+
+=== 挖掘 ===
+{{Main|挖掘}}
+玩家可以进行挖掘来破坏方块，默认按键设置下可通过对准方块按住鼠标左键进行，即使不使用任何工具也能采集相当多种类的方块，在没有[[镐]]的情况下也能徒手破坏任何可破坏的方块来清除障碍。
+
+=== 近战攻击 ===
+{{Main|近战攻击}}
+默认情况下，玩家的基础近战攻击力为{{hp|1}}，玩家的近战攻击距离为3。通过在主手上持有工具或武器，玩家能够造成更高的近战伤害。玩家能够进行近战攻击[[伤害#暴击|暴击]]，造成更大的伤害。
+
+玩家能够快速造成伤害，攻击间隔时间短于生物的[[受击后伤害免疫]]时间，足以使大多数生物被持续击退而无法靠近。玩家和其他大部分生物相比具有压倒性的近战攻击距离优势，使玩家能够在其他生物不能近战攻击的距离对其进行近战攻击，甚至是利用地形来完全阻止自身被近战攻击的同时还能进行近战攻击。
+
+{{in|java}}玩家的近战攻击会受到攻击冷却的影响。
+
+{{in|java}}玩家使用[[剑]]攻击时可以进行横扫攻击，在对目标生物造成主手所持武器的对应伤害的同时，对周围其他生物造成伤害，但伤害较低。
+
+=== 饥饿 ===
+{{Main|饥饿}}
+饥饿值是玩家日常活动中消耗的主要资源，可以通过食用[[食物]]来恢复。
+
+食用食物来恢复饥饿值是玩家恢复生命值的主要手段。
+
+疾跑、跳跃、攻击、挖掘、生命恢复等动作会逐渐消耗玩家的饥饿值。当难度不为和平且饥饿值不足{{hunger|18}}时，生命值将不会自动恢复。当玩家的饥饿值小于等于{{hunger|6}}时，玩家将无法疾跑。当饥饿值下降到{{hunger|0}}时，玩家将会持续承受来自饥饿的伤害，在简单难度下将玩家的生命值降低至{{hp|10}}，在普通难度下降低至{{hp|1}}，在困难难度下降低至{{hp|0}}。饥饿伤害无视玩家的一切防护效果（[[盔甲]]、[[保护]]、[[抗性提升]]）。
+
+=== 经验 ===
+{{Main|经验}}
+玩家可以通过经验球{{only|je|for=或完成挑战[[进度]]}}来获得经验。
+
+经验可以用来[[附魔台]]或[[铁砧]]上消耗来改造物品，为武器、工具、盔甲添加[[魔咒]]、重命名、修复[[物品耐久|剩余耐久度]]。
+
+获得足够的经验值后，经验等级会升级。经验是一种消耗性资源，积攒经验不能直接使玩家变强。
+
+=== 游戏模式 ===
+{{main|游戏模式|生存模式|创造模式|冒险模式|旁观模式}}
+* 在[[生存模式]]中，玩家可以放置与挖掘方块，使用所有可用的工具。敌对生物会主动攻击玩家。玩家受到[[生命]]、[[饥饿]]等多种因素的限制，并且挖掘方块会耗费一定的时间。
+* 在[[创造模式]]中，玩家可以通过双击{{ctrl|跳跃}}键飞行，不受任何生存因素的制约，可以任意获取绝大多数物品和方块，并无限地使用这些资源。生物不会攻击玩家。玩家不会受到伤害{{only|for=（除了掉进虚空和{{cmd|kill}}）|JE}}，可以瞬间挖掘方块，并获得大幅增强的互动范围。
+* 在[[冒险模式]]中，玩家的大多数游戏内容与生存模式一致。不同的是，玩家不能挖掘或放置任何方块，除非手上持有的工具拥有对应方块的<code>can_place_on</code>或者<code>can_break</code>组件。处于这个模式下的玩家在生成时将直接被精准地放置到世界出生点上而不是其周围的随机位置。这个模式只有在开启[[作弊]]后输入[[命令]]{{cmd|gamemode adventure}}、{{only|je|for=按下{{key|F3+F4}}打开游戏模式切换器}}或{{only|be|for=在设置中更改个人游戏模式}}才能开启。
+* 在[[旁观模式]]中，玩家会始终处于飞行状态，可以穿过方块、打开物品栏、{{only|for=在[[实体]]内部使用其视角观察世界|JE}}，但不能挖掘方块或修改物品栏，无法与世界做出任何互动。{{in|java}}旁观模式也是[[调试模式]]世界预设下的默认游戏模式。
+<!--极限模式不是玩家游戏模式，而是世界设置，不应被添加至此段落 -->
+
+=== 难度影响 ===
+[[难度]]为和平且游戏规则{{gamerule|natural_health_regeneration|naturalRegeneration}}为<code>true</code>时，玩家每{{convert|20}}恢复{{hp|1}}生命值。
+
+{{in|je}}难度为和平且{{gamerule|natural_health_regeneration}}为<code>true</code>时，玩家每{{convert|10}}增加{{hunger|1}}饥饿值，且每{{convert|20}}增加1点[[饱和度]]。
+
+{{in|be}}难度为和平时，玩家每{{convert|10}}增加{{hunger|1}}饥饿值。
+
+=== 移动 ===
+{{See also|控制#可设置的键位|运输}}
+玩家的步行移动速度为每秒4.317米（格）。这意味着Minecraft中的一天能够走动5181格（约5.2千米）。
+
+{|class="wikitable" data-description="Movement speed by method"
+! 运动模式
+! 速度（米/秒）
+! 速度（公里/小时）
+|-
+| 步行
+| 4.317
+| 15.54
+|-
+| 疾跑
+| 5.612
+| 20.20
+|-
+| 潜行
+| 1.295
+| 4.663
+|-
+| 飞行
+| 10.89
+| 39.20
+|-
+| 飞行时疾跑
+| 21.78
+| 78.40
+|-
+| 坠落
+| 最高78.4
+| 最高282.24
+|}
+
+==== 疾跑 ====
+{{Main|疾跑}}
+玩家能够疾跑。在疾跑时，玩家的饥饿值将会消耗得比平常要快。玩家的疾跑速度大约是5.612格/秒，比常规速度4.317格/秒要快。在没有状态效果的情况下，玩家在疾跑时最多可以水平跳过4格远的距离。玩家不能在自身饥饿值小于或等于{{Hunger|6}}疾跑。可以通过双击{{ctrl|前进}}键后按住不放，或按下{{ctrl|疾跑}}键进行疾跑。
+
+==== 潜行 ====
+{{Main|潜行}}
+{{ctrl|潜行}}可以防止玩家从高于1格的位置跌落，这使得它在架空层上水平向外建造时非常地有用。玩家在方块的边缘上停止潜行时不会从那个方块上掉下来，除非玩家继续移动。此外，当玩家在潜行时仍然可以从方块上跳下。
+
+==== 跳跃 ====
+{{main|跳跃}}
+{{ctrl|跳跃}}是玩家跨越地形的基本方式。在没有[[跳跃提升]]状态效果的情况下，玩家最高大约可以跳到1.25219格。
+
+==== 游泳 ====
+{{main|游泳}}
+当玩家处于水中尝试移动将会进行游泳。
+
+==== 速泳 ====
+{{main|速泳}}
+当玩家处于水中尝试{{ctrl|疾跑}}将会进行速泳。
+
+==== 爬行 ====
+{{main|爬行}}
+玩家被迫处于1格高缺口或游泳游入无水方块的1格高的隧道时，玩家会开始爬行。爬行时为0.6格高，宽度为0.6格。
+
+==== 滑翔 ====
+{{main|鞘翅#滑翔}}
+装备了鞘翅的玩家可以在空中时按下{{control|跳跃}}进入滑翔状态。
+
+==== 飞行 ====
+{{main|飞行}}
+在[[创造模式]]和[[旁观模式]]下的玩家可以进行飞行。在[[创造模式]]中，玩家在任何海拔高度均可以双击{{control|跳跃}}切换飞行状态。在[[飞行]]状态下疾跑会大幅增加移动速度。在旁观模式下，玩家无法关闭飞行状态。
+
+=== 受伤害行为 ===
+{{main|伤害}}
+玩家受到的来自非玩家生物或[[爆炸]]的伤害值会受到[[难度]]影响。
+
+{{in|je}}玩家免疫难度修正后、[[受击后伤害免疫]]修正前伤害值为{{hp|0}}的伤害，如[[雪球]]造成的伤害，以及和平[[难度]]中受难度影响而导致伤害值变为0的伤害。
+
+[[游戏规则]]{{gamerule|drowning_damage|drowningDamage}}为<code>false</code>时，玩家免疫溺水伤害。
+
+游戏规则{{gamerule|fall_damage|fallDamage}}为<code>false</code>时，玩家免疫摔落伤害。
+
+游戏规则{{gamerule|fire_damage|fireDamage}}为<code>false</code>时，玩家免疫火焰伤害。
+
+游戏规则{{gamerule|freeze_damage|freezeDamage}}为<code>false</code>时，玩家免疫冰冻伤害。
+
+=== 着火 ===
+{{main|着火}}
+玩家的剩余着火时间（实体属性<code>Fire</code>）在不着火时会被设置为-20，而不是其他生物的-1。这使玩家能够在与[[火]]接触不到1秒时脱离的情况下不会着火。
+
+=== 命中反馈 ===
+{{main|箭}}
+{{exclusive|java|section=25}}
+由玩家使用[[弓]]或[[弩]]发射的箭在命中其他玩家时，发射者会听到一个高音调的“叮”的声音，与玩家获取经验的声音相同。
+
+=== 箭与螫针 ===
+{{exclusive|java|section=1}}
+玩家被没有穿透魔咒标签的[[箭]]击中，或被[[蜜蜂]]成功攻击后，会增加玩家的“箭数量”和“螫针数量”。
+
+玩家具有“箭数量”或“螫针数量”时，会在模型上渲染指定数量的物体插在玩家身上，位置取决于以玩家实体编号为种子的随机生成结果，与受到攻击的角度无关。
+
+“箭数量”和“螫针数量”各自有一个计时器，在其值高于0时，每隔<code>-{}-(30-当前数量)×20</code>[[游戏刻]]（<code>-{}-30-当前数量</code>秒）会减少1。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Succesfull Hit.ogg
+|subtitle={{tp|subtitles.entity.experience_orb.pickup}}
+|source=玩家
+|description=获得经验
+|id=entity.experience_orb.pickup
+|translationkey=subtitles.entity.experience_orb.pickup
+}}
+{{Sound table
+|sound=Random levelup.ogg
+|subtitle={{tp|subtitles.entity.player.levelup}}
+|source=玩家
+|description=等级升到5的倍数
+|id=entity.player.levelup
+|translationkey=subtitles.entity.player.levelup
+}}
+{{Sound table
+|sound=Critical attack1.ogg
+|sound2=Critical attack2.ogg
+|sound3=Critical attack3.ogg
+|subtitle={{tp|subtitles.entity.player.attack.crit}}
+|source=玩家
+|description=使用近战攻击造成了暴击
+|id=entity.player.attack.crit
+|translationkey=subtitles.entity.player.attack.crit
+}}
+{{Sound table
+|sound=Sweep attack1.ogg
+|sound2=Sweep attack2.ogg
+|sound3=Sweep attack3.ogg
+|sound4=Sweep attack4.ogg
+|sound5=Sweep attack5.ogg
+|sound6=Sweep attack6.ogg
+|sound7=Sweep attack7.ogg
+|subtitle={{tp|subtitles.entity.player.attack.sweep}}
+|source=玩家
+|description=使用横扫攻击
+|id=entity.player.attack.sweep
+|translationkey=subtitles.entity.player.attack.sweep
+}}
+{{Sound table
+|sound=Knockback attack1.ogg
+|sound2=Knockback attack2.ogg
+|sound3=Knockback attack3.ogg
+|sound4=Knockback attack4.ogg
+|subtitle={{tp|subtitles.entity.player.attack.knockback}}
+|source=玩家
+|description=疾跑时使用近战攻击
+|id=entity.player.attack.knockback
+|translationkey=subtitles.entity.player.attack.knockback
+}}
+{{Sound table
+|sound=Strong attack1.ogg
+|sound2=Strong attack2.ogg
+|sound3=Strong attack3.ogg
+|sound4=Strong attack4.ogg
+|sound5=Strong attack5.ogg
+|sound6=Strong attack6.ogg
+|subtitle={{tp|subtitles.entity.player.attack.strong}}
+|source=玩家
+|description=使用强的近战攻击
+|id=entity.player.attack.strong
+|translationkey=subtitles.entity.player.attack.strong
+}}
+{{Sound table
+|sound=Weak attack1.ogg
+|sound2=Weak attack2.ogg
+|sound3=Weak attack3.ogg
+|sound4=Weak attack4.ogg
+|subtitle={{tp|subtitles.entity.player.attack.weak}}
+|source=玩家
+|description=使用弱的近战攻击
+|id=entity.player.attack.weak
+|translationkey=subtitles.entity.player.attack.weak
+|distance=16
+}}
+{{Sound table
+|sound=Weak attack1.ogg
+|sound2=Weak attack2.ogg
+|sound3=Weak attack3.ogg
+|sound4=Weak attack4.ogg
+|subtitle={{tp|subtitles.entity.player.attack.weak}}
+|source=玩家
+|description=使用无伤害的近战攻击
+|id=entity.player.attack.nodamage
+|translationkey=subtitles.entity.player.attack.weak
+|distance=16
+}}
+{{Sound table
+|sound=Bow shoot.ogg
+|subtitle={{tp|subtitles.entity.arrow.shoot}}
+|source=玩家
+|description=用弓射箭
+|id=entity.arrow.shoot
+|translationkey=subtitles.entity.arrow.shoot}}
+{{Sound table
+|sound=Crossbow shoot1.ogg
+|sound2=Crossbow shoot2.ogg
+|sound3=Crossbow shoot3.ogg
+|subtitle={{tp|subtitles.item.crossbow.shoot}}
+|source=玩家
+|description=用弩射箭
+|id=item.crossbow.shoot
+|translationkey=subtitles.item.crossbow.shoot
+|distance=16}}
+{{Sound table
+|sound=Succesfull Hit.ogg
+|subtitle={{tp|subtitles.entity.arrow.hit_player}}
+|source=玩家
+|description=玩家发射箭击中其他玩家
+|id=entity.arrow.hit_player
+|translationkey=subtitles.entity.arrow.hit_player}}
+{{Sound table
+|sound=Trident throw1.ogg
+|sound2=Trident throw2.ogg
+|subtitle={{tp|subtitles.item.trident.throw}}
+|source=玩家
+|description=投掷三叉戟
+|id=item.trident.throw
+|translationkey=subtitles.item.trident.throw
+|distance=16}}
+{{Sound table
+|sound=Bow shoot.ogg
+|source=玩家
+|description=投掷鸡蛋
+|subtitle={{tp|subtitles.entity.egg.throw}}
+|id=entity.egg.throw
+|translationkey=subtitles.entity.egg.throw}}
+{{Sound table
+|sound=Bow shoot.ogg
+|source=玩家
+|description=投掷雪球
+|subtitle={{tp|subtitles.entity.snowball.throw}}
+|id=entity.snowball.throw
+|translationkey=subtitles.entity.snowball.throw}}
+{{Sound table
+|sound=Bow shoot.ogg
+|source=玩家
+|description=投掷末影珍珠
+|subtitle={{tp|subtitles.entity.ender_pearl.throw}}
+|id=entity.ender_pearl.throw
+|translationkey=subtitles.entity.ender_pearl.throw}}
+{{Sound table
+|sound=Ender Eye launch1.ogg
+|sound2=Ender Eye launch2.ogg
+|source=玩家
+|description=投掷末影之眼
+|subtitle={{tp|subtitles.entity.ender_eye.launch}}
+|id=entity.ender_eye.launch
+|translationkey=subtitles.entity.ender_eye.launch}}
+{{Sound table
+|sound=Bow shoot.ogg
+|subtitle={{tp|subtitles.entity.potion.throw}}
+|source=玩家
+|description=投掷喷溅药水或滞留药水
+|id=entity.potion.throw
+|translationkey=subtitles.entity.potion.throw}}
+{{Sound table
+|sound=Player hurt1.ogg
+|sound2=Player hurt2.ogg
+|sound3=Player hurt3.ogg
+|subtitle={{tp|subtitles.entity.player.hurt}}
+|source=玩家
+|description=受伤
+|id=entity.player.hurt
+|translationkey=subtitles.entity.player.hurt
+}}
+{{Sound table
+|sound=Player hurt fire1.ogg
+|sound2=Player hurt fire2.ogg
+|sound3=Player hurt fire3.ogg
+|subtitle={{tp|subtitles.entity.player.hurt_on_fire}}
+|source=玩家
+|description=被火烧伤
+|id=entity.player.hurt_on_fire
+|translationkey=subtitles.entity.player.hurt_on_fire
+}}
+{{Sound table
+|sound=Fizz.ogg
+|subtitle={{tp|subtitles.entity.generic.extinguish_fire}}
+|source=方块
+|description=身上的火被熄灭
+|id=block.fire.extinguish
+|translationkey=subtitles.block.fire.extinguish}}
+{{Sound table
+|sound=Player hurt freeze1.ogg
+|sound2=Player hurt freeze2.ogg
+|sound3=Player hurt freeze3.ogg
+|sound4=Player hurt freeze4.ogg
+|sound5=Player hurt freeze5.ogg
+|subtitle={{tp|subtitles.entity.player.freeze_hurt}}
+|source=方块
+|description=在细雪内冻伤
+|id=entity.player.hurt_freeze
+|translationkey=subtitles.entity.player.freeze_hurt
+}}
+{{Sound table
+|sound=Player hurt drowning1.ogg
+|sound2=Player hurt drowning2.ogg
+|sound3=Player hurt drowning3.ogg
+|sound4=Player hurt drowning4.ogg
+|subtitle={{tp|subtitles.entity.player.hurt_drown}}
+|source=玩家
+|description=在水下氧气耗尽
+|id=entity.player.hurt_drown
+|translationkey=subtitles.entity.player.hurt_drown
+}}
+{{Sound table
+|sound=Player hurt sweet berry bush1.ogg
+|sound2=Player hurt sweet berry bush2.ogg
+|subtitle={{tp|subtitles.entity.player.hurt}}
+|source=玩家
+|description=被甜浆果丛刺伤
+|id=entity.player.hurt_sweet_berry_bush
+|translationkey=subtitles.entity.player.hurt
+}}
+{{Sound table
+|sound=Player hurt1.ogg
+|sound2=Player hurt2.ogg
+|sound3=Player hurt3.ogg
+|subtitle={{tp|subtitles.entity.player.death}}
+|source=玩家
+|description=死亡
+|id=entity.player.death
+|translationkey=subtitles.entity.player.death
+}}
+{{Sound table
+|sound=Fall damage small.ogg
+|subtitle={{tp|subtitles.entity.generic.small_fall}}
+|source=玩家
+|description=从4-7格高坠落到地面
+|id=entity.player.small_fall
+|translationkey=subtitles.entity.generic.small_fall
+}}
+{{Sound table
+|sound=Fall damage big.ogg
+|subtitle={{tp|subtitles.entity.generic.big_fall}}
+|source=玩家
+|description=从大于8格高坠落到地面
+|id=entity.player.big_fall
+|translationkey=subtitles.entity.generic.big_fall
+}}
+{{Sound table
+|sound=Nether_Portal_travel.ogg
+|subtitle={{tp|subtitles.block.portal.travel}}
+|source=方块
+|description=通过传送门传送到别的维度
+|id=block.portal.travel
+|translationkey=subtitles.block.portal.travel
+}}
+{{Sound table
+|sound=Eat1.ogg
+|sound2=Eat2.ogg
+|sound3=Eat3.ogg
+|subtitle={{tp|subtitles.entity.generic.eat}}
+|source=玩家
+|description=进食
+|id=entity.generic.eat
+|translationkey=subtitles.entity.generic.eat
+}}
+{{Sound table
+|sound=Burp.ogg
+|subtitle={{tp|subtitles.entity.player.burp}}
+|source=玩家
+|description=进食或饮用结束
+|id=entity.player.burp
+|translationkey=subtitles.entity.player.burp
+}}
+{{Sound table
+|sound=Drink.ogg
+|subtitle={{tp|subtitles.entity.generic.drink}}
+|source=玩家
+|description=饮用液体
+|id=entity.generic.drink
+|translationkey=subtitles.entity.generic.drink
+}}
+{{Sound table
+|sound=Bottle drink honey1.ogg
+|sound2=Bottle drink honey2.ogg
+|sound3=Bottle drink honey3.ogg
+|subtitle={{tp|subtitles.item.honey_bottle.drink}}
+|description=饮用蜂蜜
+|source=玩家
+|id=item.honey_bottle.drink
+|translationkey=subtitles.item.honey_bottle.drink}}
+{{Sound table
+|sound=Water splash1.ogg
+|sound2=Water splash2.ogg
+|subtitle={{tp|subtitles.entity.generic.splash}}
+|source=玩家
+|description=进入水中
+|id=entity.player.splash
+|translationkey=subtitles.entity.generic.splash
+|distance=16
+}}
+{{Sound table
+|sound=Water heavy splash.ogg
+|subtitle={{tp|subtitles.entity.generic.splash}}
+|source=玩家
+|description=快速进入水中
+|id=entity.player.splash_high_speed
+|translationkey=subtitles.entity.generic.splash
+|distance=16
+}}
+{{Sound table
+|sound=Entering water.ogg
+|subtitle=-
+|source=环境
+|description=玩家头部进入水中
+|id=ambient.underwater.enter
+|translationkey=-
+|distance=16
+}}
+{{Sound table
+|sound=Exiting water.ogg
+|subtitle=-
+|source=环境
+|description=玩家头部离开水面
+|id=ambient.underwater.exit
+|translationkey=-
+|distance=16
+}}
+{{Sound table
+|sound=Swim5.ogg
+|sound2=Swim6.ogg
+|sound3=Swim7.ogg
+|sound4=Swim8.ogg
+|sound5=Swim9.ogg
+|sound6=Swim10.ogg
+|sound7=Swim11.ogg
+|sound8=Swim12.ogg
+|sound9=Swim13.ogg
+|sound10=Swim14.ogg
+|sound11=Swim15.ogg
+|sound12=Swim16.ogg
+|sound13=Swim17.ogg
+|sound14=Swim18.ogg
+|subtitle={{tp|subtitles.entity.generic.swim}}
+|source=玩家
+|description=游泳
+|id=entity.player.swim
+|translationkey=subtitles.entity.generic.swim
+}}
+{{Sound table
+|sound=Player breathe.ogg
+|subtitle=-
+|source=''无''
+|description=未使用的声音事件
+|id=entity.player.breath
+|translationkey=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Succesfull Hit.ogg
+|source=玩家
+|description=获得经验
+|id=random.orb
+|typeid=orb
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Random levelup.ogg
+|source=玩家
+|description=等级升到5的倍数
+|id=random.levelup
+|typeid=levelup
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Bow shoot.ogg
+|source=友好生物
+|description=用弓射箭
+|id=random.bow
+|typeid=bow
+|soundvolume=0.5
+|soundpitch=0.83-1.25
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Crossbow shoot1.ogg
+|sound2=Crossbow shoot2.ogg
+|sound3=Crossbow shoot3.ogg
+|source=友好生物
+|description=用弩射箭
+|id=crossbow.shoot
+|typeid=crossbow.shoot
+}}
+{{Sound table
+|bedrock=1
+|sound=item.trident.throw1.wav
+|sound2=item.trident.throw2.wav
+|source=玩家
+|description=投掷三叉戟
+|id=item.trident.throw
+|typeid=item.trident.throw
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=random.bow.wav
+|source=玩家
+|description=投掷弹射物
+|id=random.bow
+|typeid=throw
+|soundvolume=0.5
+|soundpitch=0.33-0.5
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=damage.hit1.wav
+|sound2=damage.hit2.wav
+|sound3=damage.hit3.wav
+|source=玩家
+|description=受伤
+|id=game.player.hurt
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=damage.hit1.wav
+|sound2=damage.hit2.wav
+|sound3=damage.hit3.wav
+|source=玩家
+|description=死亡
+|id=game.player.die
+|typeid=death
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Player hurt fire1.ogg
+|sound2=Player hurt fire2.ogg
+|sound3=Player hurt fire3.ogg
+|source=玩家
+|description=被火烧伤
+|id=mob.player.hurt_on_fire
+|typeid=mob.player.hurt_on_fire
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Player hurt freeze1.ogg
+|sound2=Player hurt freeze2.ogg
+|sound3=Player hurt freeze3.ogg
+|sound4=Player hurt freeze4.ogg
+|sound5=Player hurt freeze5.ogg
+|source=玩家
+|description=在细雪内冻伤
+|id=mob.player.hurt_freeze
+|typeid=mob.player.hurt_freeze
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Player hurt drowning1.ogg
+|sound2=Player hurt drowning2.ogg
+|sound3=Player hurt drowning3.ogg
+|sound4=Player hurt drowning4.ogg
+|source=玩家
+|description=在水下氧气耗尽
+|id=mob.player.hurt_drown
+|typeid=mob.player.hurt_drown
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.player.attack.weak1.wav
+|sound2=mob.player.attack.weak2.wav
+|sound3=mob.player.attack.weak3.wav
+|sound4=mob.player.attack.weak4.wav
+|source=玩家
+|description=使用无伤害的近战攻击
+|id=game.player.attack.nodamage
+|typeid=attack.nodamage
+|soundvolume=0.2
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.player.attack.strong1.wav
+|sound2=mob.player.attack.strong2.wav
+|sound3=mob.player.attack.strong3.wav
+|sound4=mob.player.attack.strong4.wav
+|sound5=mob.player.attack.strong5.wav
+|sound6=mob.player.attack.strong6.wav
+|source=玩家
+|description=使用近战攻击
+|id=game.player.attack.strong
+|typeid=attack.strong
+|soundvolume=0.2
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=damage.fallsmall.wav
+|source=友好生物
+|description=从4-7格高坠落到地面
+|id=damage.fallsmall
+|typeid=fall.small
+|soundvolume=0.75
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=damage.fallbig.wav
+|source=友好生物
+|description=从大于8格高坠落到地面
+|id=damage.fallbig
+|typeid=fall.big
+|soundvolume=0.75
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=portal.travel.wav
+|source=环境
+|description=通过传送门传送到别的维度
+|id=portal.travel
+|typeid=portal.travel
+|soundvolume
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=random.splash.wav
+|source=玩家
+|description=进入水中
+|id=random.splash
+|typeid=splash
+|soundpitch=0.6-1.4
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=random.swim1.wav
+|sound2=random.swim2.wav
+|sound3=random.swim3.wav
+|sound4=random.swim4.wav
+|source=玩家
+|description=游泳
+|id=random.swim
+|typeid=swim
+|soundpitch=0.6-1.4
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=random.fizz.wav
+|source=方块
+|description=身上的火被熄灭
+|id=random.fizz
+|typeid=fizz
+|soundvolume=0.7
+|soundpitch=1.2-2.0
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=random.drink.wav
+|source=玩家
+|description=饮用液体
+|id=random.drink
+|typeid=drink
+|soundvolume=0.35
+|soundpitch=0.9-1.1
+}}
+{{Sound table
+|bedrock=1
+|sound=Bottle drink honey1.ogg
+|sound2=Bottle drink honey2.ogg
+|sound3=Bottle drink honey3.ogg
+|source=玩家
+|description=饮用蜂蜜
+|id=random.drink_honey
+|typeid=drink.honey
+|soundvolume=0.75
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=random.eat1.wav
+|sound2=random.eat2.wav
+|sound3=random.eat3.wav
+|source=玩家
+|description=进食
+|id=random.eat
+|typeid=eat
+|soundvolume=0.5-1.1
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=burp.ogg
+|source=玩家
+|description=进食或饮用结束
+|id=random.burp
+|typeid=burp
+|soundvolume=0.5
+|soundpitch=0.9-1.0
+}}
+{{Sound table
+|bedrock=1
+|sound=Player hurt sweet berry bush1.ogg
+|sound2=Player hurt sweet berry bush2.ogg
+|source=方块
+|description=被甜浆果丛刺伤
+|id=block.sweet_berry_bush.hurt
+|typeid=block.sweet_berry_bush.hurt
+|soundvolume
+|soundpitch=1.0
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Player
+|spritetype=entity
+|nameid=player
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Player
+|spritetype=entity
+|nameid=player
+|foot=1}}
+
+=== 实体数据 ===
+{{/ED}}
+
+=== UUID计算 ===
+{{Calculator|playerUuid|player=MinecraftWiki}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java pre-Classic}}
+|{{HistoryLine||rd-131655|“玩家”的概念出现，有1.72格高，但还没有可视化模型。}}
+|{{HistoryLine||rd-132328|[[File:Steve JE1.png|32px]] 加入了[[生物（已移除实体）|人类]]，之后加入的玩家模型和皮肤都取于此。}}
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.15a|为新加入的[[多人游戏]]模式添加了玩家可视化模型和皮肤。}}
+|{{HistoryLine||0.0.20a|现在玩家皮肤颜色变得更深了。}}
+|{{HistoryLine||0.24 SURVIVAL TEST|[[File:Steve JE2.png|32px]] 将玩家的-{}-头发纹理移至外层。{{verify|history=1|java=1}}}}
+|{{HistoryLine||0.28|[[File:Steve JE3 BE1.png|32px]] 将玩家皮肤重新改为单层，且去掉了胡须。{{verify|history=1|java=1}}}}
+|{{HistoryLine||0.30|玩家影子测试。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.9|在此版本之前，玩家行走时会大幅度地挥动手臂。<ref>可以在[https://minecraft.wiki/images/archive/20101112102341%21Steve.png 此图片]、[http://www.youtube.com/watch?v=LWPk5zlKAEM#t=40s Minecraft Classic 2009的一个视频]和[http://www.youtube.com/watch?v=9Vmy-ZNbGXE Notch的僵尸小镇]中看到，Notch的视频还包含了已移除的[[生物（已移除实体）|人类]]。</ref>此动作仍在[[Java版Classic|Classic]]中使用。}}
+|{{HistoryLine||v1.0.14|玩家的横向跳跃距离从3格降到了2格。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|空手伤害从{{hp|1}}增加至{{hp|2}}。}}
+|{{HistoryLine||1.8|dev=pre1|玩家现在有了经验值和饥饿系统。
+|现在玩家疾跑时可以跳4格远。
+|空手伤害从{{hp|2}}降回了{{hp|1}}。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=rc1|现在玩家受到任何物理伤害时会发出肉体撞击的声音，受到摔落伤害时会发出像是骨头破裂的声音。
+|玩家受到伤害时不再发出低沉的男声“Ooh！”，使其显得更中性。}}
+|{{HistoryLine||1.3.1|dev=12w18a|用名称“[[Notch]]”登录的玩家死亡后不再掉落[[苹果]]。<ref>{{bug|MC-96781}}</ref>}}
+|{{HistoryLine||1.4.2|dev=12w38a|修改了玩家受伤时的声音。}}
+|{{HistoryLine||1.8|dev=pre1|[[File:Alex JE1 BE1.png|32px]] 加入了拥有更细手臂的新玩家模型以及名为“Alex”的新玩家皮肤。}}
+|{{HistoryLine||2015年2月4日|link={{tweet|KrisJelbring|562916800871297024}}|现在玩家可以更改用户名。}}
+|{{HistoryLine||1.9|dev=15w42a|玩家[[潜行]]时的碰撞箱从1.8格高下降到1.65格高，在使用[[鞘翅]]飞行时为0.6格高。}}
+|{{HistoryLine|||dev=15w45a|玩家跳跃高度从{{frac|1|3|16}}格高增加到了{{frac|1|4|16}}格高。}}
+|{{HistoryLine||1.11|dev=16w32a|玩家的实体ID从<code>Player</code>变成<code>player</code>。}}
+|{{HistoryLine||1.12|dev=17w13a|现在玩家后退时身体会完全面向正前方。<ref>{{bug|MC-114900|||WAI}}</ref><ref>{{reddit|66s2px/in_17w16b_players_can_now_run_backwards_without|dglwcfv|It actually is a bug, it tries to rotate the body to the direction you are walking, but it can only do it so far, that is also why it basically picks a 'random direction'. Now it can actually understand when it is walking backwards and it stopped doing that weird behavior.|_Grum|April 22, 2017}}</ref>
+|此前，玩家后退时身体会转向一侧，看起来好像在向后方侧走。}}
+|{{HistoryLine||1.13|dev=18w07a|加入了全新的[[游泳]]能力。}}
+|{{HistoryLine|||dev=18w15a|在水面疾跑不再使玩家游泳，而使玩家不停地保持在一个高度。
+|玩家现在可以游过1格高的空间。<ref>{{bug|MC-125240|||Fixed}}</ref>}}
+|{{HistoryLine||1.14|dev=18w44a|玩家现在存在对应的[[战利品表]]。}}
+|{{HistoryLine|||dev=19w12a|玩家潜行时的碰撞箱从1.65格高下降到1.5格高。}}
+|{{HistoryLine|||dev=19w14a|加入了[[爬行]]能力。}}
+|{{HistoryLine||2022年8月19日|link=启动器2.3.376|[[File:Steve JE4 BE4.png|32px]] [[File:Alex JE2 BE2.png|32px]] 更新了内置的Steve和Alex的皮肤。}}
+|{{HistoryLine||1.19.3|dev=22w45a|内置的玩家皮肤现在按两种模型分别存储。
+|[[File:Steve JE5.png|32px]] [[File:Alex JE3.png|32px]] 再次更新了内置的Steve和Alex的皮肤。
+|[[File:Ari (classic) JE1.png|32px]] [[File:Efe (classic) JE1.png|32px]] [[File:Kai (classic) JE1.png|32px]] [[File:Makena (classic) JE1.png|32px]] [[File:Noor (classic) JE1.png|32px]] [[File:Sunny (classic) JE1.png|32px]] [[File:Zuri (classic) JE1.png|32px]]<br>[[File:Ari (slim) JE1.png|32px]] [[File:Efe (slim) JE1.png|32px]] [[File:Kai (slim) JE1.png|32px]] [[File:Makena (slim) JE1.png|32px]] [[File:Noor (slim) JE1.png|32px]] [[File:Sunny (slim) JE1.png|32px]] [[File:Zuri (slim) JE1.png|32px]] 内置了Ari、Efe、Kai、Makena、Noor、Sunny和Zuri的皮肤。
+|现在，离线模式玩家可以被分配到几种新加入的皮肤。}}
+|{{HistoryLine||1.21|dev=24w21a|现在玩家重生时总会恢复到最大生命值而非固定{{hp|20}}生命值。}}
+|{{HistoryLine||1.21.4|dev=24w45a|现在客户端加载完成后，加载保护赋予玩家的[[无懈可击]]会立即停止，而不再持续到超时。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||Demo|[[File:Steve JE3 BE1.png|32px]] 加入了玩家。}}
+|{{HistoryLine||0.8.0|dev=build 1||[[File:Steve BE2.png|32px]]由于未知原因，Steve的身体被加亮了。}}
+|{{HistoryLine||0.10.0|dev=build 1||[[File:Steve BE2.png|32px]][[File:Steve Head (facing NWU) BE3.png|64px]]移除了Steve头部底部的洞。}}
+|{{HistoryLine||0.11.0|dev=build 1||将Steve的纹理回退到了Demo版本。|现在可以自定义玩家皮肤。
+|[[File:Alex JE1 BE1.png|32px]] 加入了拥有更细手臂的新玩家模型以及名为“Alex”的新玩家皮肤。}}
+|{{HistoryLine||0.12.1|dev=build 10|现在玩家受到任何物理伤害时会发出肉体撞击的声音，受到摔落伤害时会发出像是骨头破裂的声音。
+|玩家受到伤害时不再发出低沉的男声“Ooh！”，使其显得更中性。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.13|exg=1|dev=1.2.13.8|加入了全新的游泳能力。}}
+|{{HistoryLine||1.4.0|dev=1.2.20.1|1.2.13.8中的变更不再属于[[实验性玩法]]。
+|玩家现在可以游过1格高的空间。}}
+|{{HistoryLine||1.5.0|dev=1.5.0.0|改进了玩家在水面游泳的能力。}}
+|{{HistoryLine||1.13.0|dev=?|当玩家空闲或环顾四周时，腿部不再会轻微抖动了。}}
+|{{HistoryLine|||dev=1.13.0.15|现在玩家的视觉高度和手臂宽度可以在[[角色创建器]]自定义。
+|现在使用默认Steve、Alex皮肤或在角色创建器中自定义皮肤的玩家可以眨眼了。}}
+|{{HistoryLine||1.14.0|dev=1.14.0.1|现在玩家在水面上只会冲刺，而不会游泳。}}
+|{{HistoryLine||1.17.0|加入了被火烧伤、在水下氧气耗尽、在细雪内冻伤的玩家受伤音效，在此之前，统一使用默认的受伤音效。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.20|将玩家徒手攻击的伤害由{{hp|2}}降低至{{hp|1}}以匹配{{el|je}}。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.21|[[File:Steve JE4 BE4.png|32px]] [[File:Alex JE2 BE2.png|32px]] 更新了角色创建器中的Steve和Alex的皮肤。
+|<!-- 暂用JE，现无BE渲染 -->[[File:Ari (classic) JE1.png|32px]] [[File:Efe (classic) JE1.png|32px]] [[File:Kai (classic) JE1.png|32px]] [[File:Makena (classic) JE1.png|32px]] [[File:Noor (classic) JE1.png|32px]] [[File:Sunny (classic) JE1.png|32px]] [[File:Zuri (classic) JE1.png|32px]]<br>[[File:Ari (slim) JE1.png|32px]] [[File:Efe (slim) JE1.png|32px]] [[File:Kai (slim) JE1.png|32px]] [[File:Makena (slim) JE1.png|32px]] [[File:Noor (slim) JE1.png|32px]] [[File:Sunny (slim) JE1.png|32px]] [[File:Zuri (slim) JE1.png|32px]] 在角色创建器中加入了Ari、Efe、Kai、Makena、Noor、Sunny和Zuri的皮肤。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.20|玩家潜行时的碰撞箱从1.8格高下降到1.49格高。}}
+|{{HistoryLine|||dev=1.19.70.24|暂时回退了玩家潜行时碰撞箱降低至1.49格的更改。}}
+|{{HistoryLine||1.19.80|exg=short_sneaking_v1|dev=1.19.80.20|重新加入了玩家潜行时碰撞箱降低至1.49格的更改。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.20|略微加深了Steve的皮肤的肤色。}}
+|{{HistoryLine||1.20.10|exg=short_sneaking_v2|dev=1.20.10.20|加入了[[爬行]]能力。}}
+|{{HistoryLine|||exg=none|dev=1.20.10.21|1.19.80.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.22|爬行不再属于[[实验性玩法]]。}}
+|{{HistoryLine||26.40|dev=26.40.26|现在击中[[创造模式]]玩家的[[箭]]和[[三叉戟]]会被弹开，此前它们会直接穿过玩家。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Steve JE3 BE1.png|32px]] 加入了玩家。}}
+|{{HistoryLine||xbox=TU24|xbone=CU12|ps3=1.16|psvita=1.16|ps4=1.16|[[File:Alex JE1 BE1.png|32px]] 加入了Alex皮肤。}}
+}}
+{{-}}
+
+== 你知道吗 ==
+* 玩家的脚与躯干并不完美地处于同一直线上，这个特性是用来防止在穿戴盔甲时的[[wikipedia:z-fighting|深度冲突]]。
+* 在[[Java版1.14]]之前，视角被定位在玩家的腿部，因此世界在玩家的视野中应该低于1.8格。<ref>{{tweet|Dinnerbone|1099982036339748865}}</ref>
+** 同样，在玩家睡觉时，世界会根据玩家而旋转，而不是玩家的视野在旋转，从而引发一些视觉上的漏洞。<ref>{{tweet|Dinnerbone|1100001119407878150}}</ref>
+* 当玩家的游戏ID为“Grumm”或“Dinnerbone”时，玩家的皮肤模型将会上下颠倒。
+* {{in|be}}默认用户名为“Steve”，而大多数时候默认的皮肤却为其他角色。
+
+=== Steve和Alex ===
+[[File:Zombie getting punched.png|缩略图|僵尸与Steve十分相似]]
+* Steve有着与[[僵尸]]相似的纹理。
+** 在[[Java版1.14]]（[[Java版18w43a|18w43a]]）和[[基岩版1.10]]（[[基岩版1.10.0.3]]）前，Steve和僵尸穿着完全一致的服装，并拥有相同的皮肤图案。
+* Mojang说Alex“从一些角度看起来有些像[[Jeb]]”。<ref>https://mojang.com/2015/04/new-skins-achievements-music/</ref>
+* Steve脸部的络腮胡于[[生存测试]]中被移除，在2022年8月19日发布的[[启动器2.3.376]]，以及[[Java版1.19.3]]、[[基岩版1.19.50]]中，Steve的胡子才被重新加入。
+* 在LEGO Club杂志的2016年7-8月刊中，提到Steve是Alex的男朋友，以及Steve是一个矿工、建筑师和炼金术士，而Alex则是一个建筑师、探险家和猎人。
+
+=== 外部关联 ===
+* Steve在LEGO系列[[乐高Minecraft|21102 LEGO Minecraft Micro World]]中与一只[[苦力怕]]被设定为微型生物。
+* 在Steam版本的游戏《超级食肉男孩》中，Steve是一个以“Mr. Minecraft”为名称的可解锁角色。它比其他角色跳的低，并且可以在平台的水平面上开挖和放置它们。
+* 在Xbox Arcade游戏{{tr|《混血战士》（''Hybrid''）|''Hybrid''}}中，Steve的头是一个可解锁的头盔。
+* 在游戏《{{tr|无主之地2|邊緣禁地2}}》（''Borderlands 2''）中，Steve的头是一个可穿戴物品。
+* 在游戏《恐龙快跑：特别版》（''DinoRun SE''）中，Steve的头是一个可穿戴帽子。
+* 在游戏''Transformice''中，Steve的头是一个可穿戴帽子。
+* 在游戏《荒野老城》中，Steve是一个可游玩角色。
+* 在游戏《黑道圣徒4》中，Steve是一件被命名为“Craft Miner”的制服。
+* 在游戏''Alone in the park''里，Steve是一个可解锁角色，并且拥有一个类似于石镐的射弹。
+* 在游戏《小猫突击队 2》里，Steve是一套名为“Pitman”的装备，挥舞着一个铁镐并且可以打破障碍。
+* 在游戏《创造世界》（''Createrria: craft your games''）里，角色“Mr.Pixel”有着和Steve相似的面部。
+* 在游戏''BowMasters''中，Steve是一个可游玩角色。
+* 在游戏《火柴人至高对决》（''Supreme Duelist Stickman''）中，Steve的头是一个可穿戴帽子，此外还有可放置圆石，TNT以及活塞等方块的镐。
+* 在游戏《[[任天堂明星大乱斗特别版]]》中，Steve作为DLC参战斗士登场，而Alex则以“附加颜色”的方式登场。
+
+== 画廊 ==
+<gallery>
+File:Fly.png|一个正在飞行的玩家
+</gallery>
+=== 经典玩家皮肤 ===
+<gallery>
+File:Steve JE3 BE1.png|在[[Java版1.19.3]]和[[基岩版1.19.50.21]]前的Steve
+File:Alex JE1 BE1.png|在[[Java版1.19.3]]和[[基岩版1.19.50.21]]前的Alex
+</gallery>
+
+=== {{el|je}}早期开发 ===
+<gallery>
+File:Steve_JE1.png|在早期拥有络腮胡的Steve外观
+File:Pre-Beta-1.8-HUD.png|在冒险更新之前出现的盔甲栏
+</gallery>
+
+=== 基岩版 ===
+<gallery>
+File:Player size comparison.png|基岩版中Steve和Alex的四种身高对比
+File:Steve Eye blink BE.gif|基岩版中眨眼的Steve
+File:Alex Eye blink BE.gif|基岩版中眨眼的Alex
+File:Version differences.png|基岩版和Java版的Steve和Alex渲染对比
+</gallery>
+
+=== 艺术作品 ===
+<gallery>
+File:Adventure Update.png|[[冒险更新]]中的Steve
+File:Steve Artwork.png|Steve的艺术作品
+File:Horse Update Artwork.png|一幅为[[马匹更新]]创作的Steve的艺术作品
+File:Combat Update Artwork.png|一幅为[[战斗更新]]创作的Steve与Alex的艺术作品
+File:Steve % 26 Alex Combat Update.png|将前图的Steve与Alex裁剪了出来
+File:Exploration Update Artwork.jpg|一幅为[[探险更新]]创作的Steve与Alex的艺术作品
+File:World of Color Update Artwork.png|一幅为[[多彩世界更新]]创作的Steve与Alex的艺术作品
+File:Update Aquatic Artwork.jpg|一幅为[[水域更新]]创作的Steve与Alex的艺术作品
+File:Steve & Alex Aquatic Update Artwork.png|将前图的Steve与Alex裁剪了出来
+File:Mojang114.jpg|一幅为[[村庄与掠夺]]创作的Alex的艺术作品
+File:Defend Alex.png|将前图的Alex裁剪了出来
+File:Buzzy Bees Artwork.jpg|一幅为[[嗡嗡蜂群]]创作的Steve与Alex的艺术作品
+File:Alex Buzzy Bees.png|Alex采集蜂蜜的艺术作品
+File:Nether Update Artwork.png|一幅为[[下界更新]]创作的Alex的艺术作品
+File:Alex Nether Update.gif|将前图的Alex和灵魂火裁剪了出来
+File:Caves & Cliffs (Part II) Artwork.jpg|一幅为[[洞穴与山崖]]第二部分创作的Steve与Alex的艺术作品
+File:MC-Caves-and-Cliffs Media-Block-Amythest 475x322.png|Alex与望远镜、紫水晶的艺术作品
+File:Wild Update Artwork.jpg|一幅为[[荒野更新]]创作的Steve与Alex的艺术作品（Sunny和Noor也在图像中，但当时在游戏中尚未实现）
+File:Alex and Allay.png|Alex与悦灵、红树木运输船的艺术作品
+File:Trails & Tales Artwork.jpg|一幅为[[足迹与故事]]创作的Steve、Alex、Ari、Zuri和Sunny的艺术作品
+File:Combatlogo.png|[[Java版Combat Test]]中的Steve和Alex
+File:1.7.10.png|[[Realms]]宣传画中的Steve
+File:ATaleofTwoVillagesBannerEdu.png|[[教育版1.14.50]]宣传画中的Alex
+File:Steve-Alex-Noor-pigs.jpg|Alex、Steve和Noor在美国爱猪日骑猪的艺术作品
+File:Akira slide.jpg|Alex骑乘猪滑行的艺术作品，致敬了电影《阿基拉》（''Akira''）
+File:Arbor-Day.jpg|Zuri、Sunny和Efe在植树节种树的艺术作品
+File:Tricky Trials Key Art.png|一幅为[[棘巧试炼]]创作的Steve、Alex、Efe、Kai和Makena的艺术作品
+File:Bundles of Bravery Key Art.png|一幅为[[勇气之袋]]创作的Ari的艺术作品
+File:Spring to Life Artwork.jpg|一幅为[[春意盎然]]创作的Zuri、Steve和Makena的艺术作品
+File:Chase the Skies Key Art.jpg|一幅为[[追逐天空]]创作的Alex、Makena、Sunny、Zuri、Ari和Steve的艺术作品
+File:The Copper Age Key Art.png|一幅为[[铜器时代]]创作的Sunny的艺术作品
+File:Mounts of Mayhem Key Art.png|一幅为[[群骑纷争]]创作的Alex、Makena、Sunny、Efe和Noor的艺术作品
+File:Tiny Takeover Key Art.png|一幅为[[小鬼当家]]创作的Steve和Makena的艺术作品
+File:Chaos Cubed Key Art.png|一幅为[[混沌立方]]创作的Steve、Alex、Makena、Efe和Zuri的艺术作品
+</gallery>
+
+=== 其他媒介 ===
+<gallery>
+File:Steve SSBU.png|[[任天堂明星大乱斗特别版]]中的Steve
+File:Alex SSBU.png|[[任天堂明星大乱斗特别版]]中的Alex
+File:Tennis Steve SSBU.png|[[任天堂明星大乱斗特别版]]中的网球Steve
+File:Tennis Alex SSBU.png|[[任天堂明星大乱斗特别版]]中的网球Alex
+File:Scottish Steve SSBU.png|[[任天堂明星大乱斗特别版]]中的苏格兰Steve
+File:Swedish Alex SSBU.png|[[任天堂明星大乱斗特别版]]中的瑞典Alex
+File:LEGO Minecraft Micro-Mobs.jpg|[[乐高Minecraft]]中微型生物的Steve和苦力怕
+File:LEGO Steve Minifigure.png|[[乐高Minecraft]]中的Steve人偶
+File:LEGO Alex.png|[[乐高Minecraft]]中的Alex人偶
+</gallery>
+
+== 参见 ==
+* [[人类]]
+* [[皮肤]]
+* [[MCE:我的生物|我的生物]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|Mobs}}
+{{Navbox environment}}
+
+[[Category:生物]]
+
+[[cs:Hráč]]
+[[de:Spieler]]
+[[el:Παίκτης]]
+[[en:Player]]
+[[es:Jugador]]
+[[fr:Joueur]]
+[[hu:Játékos]]
+[[it:Giocatore]]
+[[ja:プレイヤー]]
+[[ko:플레이어]]
+[[lzh:戲者]]
+[[nl:Speler]]
+[[pl:Gracz]]
+[[pt:Jogador]]
+[[ru:Игровой персонаж]]
+[[th:ผู้เล่น]]
+[[tr:Oyuncu]]
+[[uk:Гравець]]

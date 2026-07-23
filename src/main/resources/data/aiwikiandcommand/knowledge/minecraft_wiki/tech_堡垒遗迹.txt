@@ -1,0 +1,2162 @@
+# 页面: 堡垒遗迹
+# 来源: https://zh.minecraft.wiki/w/%E5%A0%A1%E5%9E%92%E9%81%97%E8%BF%B9
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用计算器的页面, 基岩版独有信息, 生成结构, 需要验证/基岩版
+# 抓取时间: 2026-07-14 17:24:46
+# 原始 Wikitext 内容:
+
+{{Infobox structure
+| image = Bastion Remnant 2.png;Bastion Remnant 4.png;Bastion Remnant 3.png;Bastion Remnant 1.png
+| imagesize = 250px
+| biome = {{BiomeLink|Crimson Forest}}<br>{{BiomeLink|Nether Wastes}}<br>{{BiomeLink|Soul Sand Valley}}<br>{{BiomeLink|Warped Forest}}
+| blocks = 见{{slink||结构}}
+| id = bastion_remnant<br>bastionremnant{{only|BE}}
+}}
+{{relevant tutorial|征服堡垒遗迹}}
+{{quote|尽管深埋于下界岩之中，这些高耸威严的结构在下界的烟雾弥漫的昏暗光线中仍清晰可辨。它们规模宏大——多达数层高——由黑石与玄武岩构筑而成。内部更是充满猪灵。除玄武岩三角洲外，几乎所有的下界生物群系都能发现它们的身影。|[[Duncan Geere]]<ref>{{article|bastion-remnant|Building Blocks: Bastion Remnant|Nov 15, 2025}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''堡垒遗迹（Bastion Remnant）'''是[[下界]]中一种少见的城堡状[[结构]]。
+
+== 生成 ==
+{{Filetr|Java Nether Structure Generation1.svg|thumb|300px|{{in|java|nc=1}}下界结构生成示意图。每个黑线框代表一个区域，黑点代表一个坐标。结构可生成于绿色位置而不能生成于红色位置}}
+{{Filetr|Bedrock Nether Structure Generation.svg|thumb|300px|{{in|Bedrock|nc=1}}下界结构生成示意图。每个黑线框代表一个区域，黑点代表一个坐标。结构可生成于绿色位置而不能生成于红色位置}}
+
+堡垒遗迹能在除了[[玄武岩三角洲]]以外的下界[[生物群系]]中发现，但可能有部分结构会延伸进该生物群系。
+
+为了生成这一结构，游戏首先将下界按照一定的方式分割成一些区域，每个区域中只会生成堡垒遗迹或[[下界要塞]]之间的一种。{{IN|java}}区域的大小为432×432（27×27个区块）；而{{IN|Bedrock|nc=1}}区域的大小则是480×480（30×30个区块）。每个区域的南侧和东侧有宽度为64（4个区块）的区域，在这个区域中下界要塞与堡垒遗迹都无法生成。这就代表着{{IN|java}}只有368×368的区域能够生成这两种结构；{{IN|Bedrock|nc=1}}该区域的大小则是416×416。两个结构不会在同一个区域中生成，尽管它们可能会在两个区域的边缘生成，从而产生重叠的可能。{{IN|java}}每区域中堡垒遗迹的生成概率为{{frac|3|5}}（60%）；{{IN|Bedrock}}堡垒遗迹的生成概率为{{frac|2|3}}（66.6%）。
+
+在堡垒遗迹中生成的[[猪灵]]、[[猪灵蛮兵]]和[[疣猪兽]]既不会自然消失，也不会互相攻击。其中猪灵蛮兵只随堡垒遗迹的生成而生成，除非被杀死，或者将难度设置为和平，否则它们不会消失。与[[末地城]]中的[[潜影贝]]类似，猪灵蛮兵被杀死后不会再生成新的个体，但堡垒遗迹依旧会依据所处的生物群系生成其他生物。
+
+{{Calculator|chunkbase|dimension=nether|pois=Br|zoom=0.25}}
+
+== 结构 ==
+{{for|详细的结构图示和方块构成|堡垒遗迹/结构}}
+
+堡垒遗迹的结构有4种类型：桥、疣猪兽棚、居住区和藏宝室。一座堡垒遗迹只由4种结构中的一种构成。
+
+猪灵、猪灵蛮兵和疣猪兽会在堡垒遗迹大量生成。
+
+与下界要塞不同，如果堡垒遗迹位于熔岩海的上方，它不会生成一条直通地面的固体支柱，而是悬浮在海上。
+
+堡垒遗迹是唯一能自然找到[[音乐唱片]]''Pigstep''、[[猪鼻旗帜图案]]和[[下界合金升级]]与[[猪鼻盔甲纹饰]]锻造模板的地方。此外，这里也能找到[[钻石工具]]（[[钻石斧]]和[[钻石锄]]除外）和[[钻石盔甲]]。
+
+=== 结构目录 ===
+堡垒遗迹的结构文件存储在<samp>[[client.jar]]/data/minecraft/structure/bastion</samp>{{only|je}}或<samp>data/behavior_packs/vanilla/structures/bastion</samp>{{only|be}}当中。
+{| class="collapsible collapsed collapse-button-none" data-description="结构目录"
+! 结构目录
+|-
+|<div class="file-hierarchy treeview">
+* bastion
+** blocks
+*** air.nbt
+*** gold.nbt
+** bridge
+*** bridge_pieces
+**** bridge.nbt
+*** connectors
+**** back_bridge_bottom.nbt
+**** back_bridge_top.nbt
+*** legs
+**** leg_0.nbt
+**** leg_1.nbt
+*** rampart_plates
+**** plate_0.nbt
+*** ramparts
+**** rampart_0.nbt
+**** rampart_1.nbt
+*** starting_pieces
+**** entrance.nbt
+**** entrance_base.nbt
+**** entrance_face.nbt
+*** walls
+**** wall_base_0.nbt
+**** wall_base_1.nbt
+** hoglin_stable
+*** air_base.nbt
+*** connectors
+**** end_post_connector.nbt
+*** large_stables
+**** inner_0.nbt
+**** inner_1.nbt
+**** inner_2.nbt
+**** inner_3.nbt
+**** inner_4.nbt
+**** outer_0.nbt
+**** outer_1.nbt
+**** outer_2.nbt
+**** outer_3.nbt
+**** outer_4.nbt
+*** posts
+**** end_post.nbt
+**** stair_post.nbt
+*** rampart_plates
+**** rampart_plate_1.nbt
+*** ramparts
+**** ramparts_1.nbt
+**** ramparts_2.nbt
+**** ramparts_3.nbt
+*** small_stables
+**** inner_0.nbt
+**** inner_1.nbt
+**** inner_2.nbt
+**** inner_3.nbt
+**** outer_0.nbt
+**** outer_1.nbt
+**** outer_2.nbt
+**** outer_3.nbt
+*** stairs
+**** stairs_1_0.nbt
+**** stairs_1_1.nbt
+**** stairs_1_2.nbt
+**** stairs_1_3.nbt
+**** stairs_1_4.nbt
+**** stairs_2_0.nbt
+**** stairs_2_1.nbt
+**** stairs_2_2.nbt
+**** stairs_2_3.nbt
+**** stairs_2_4.nbt
+**** stairs_3_0.nbt
+**** stairs_3_1.nbt
+**** stairs_3_2.nbt
+**** stairs_3_3.nbt
+**** stairs_3_4.nbt
+*** starting_pieces
+**** stairs_0_mirrored.nbt
+**** stairs_1_mirrored.nbt
+**** stairs_2_mirrored.nbt
+**** stairs_3_mirrored.nbt
+**** stairs_4_mirrored.nbt
+**** starting_stairs_0.nbt
+**** starting_stairs_1.nbt
+**** starting_stairs_2.nbt
+**** starting_stairs_3.nbt
+**** starting_stairs_4.nbt
+*** walls
+**** side_wall_0.nbt
+**** side_wall_1.nbt
+**** wall_base.nbt
+** mobs
+*** crossbow_piglin.nbt
+*** empty.nbt
+*** hoglin.nbt
+*** melee_piglin.nbt
+*** melee_piglin_always.nbt
+*** sword_piglin.nbt
+** treasure
+*** bases
+**** centers
+***** center_0.nbt
+***** center_1.nbt
+***** center_2.nbt
+***** center_3.nbt
+**** lava_basin.nbt
+*** big_air_full.nbt
+*** brains
+**** center_brain.nbt
+*** connectors
+**** center_to_wall_middle.nbt
+**** center_to_wall_top.nbt
+**** center_to_wall_top_entrance.nbt
+*** corners
+**** bottom
+***** corner_0.nbt
+***** corner_1.nbt
+**** edges
+***** bottom.nbt
+***** middle.nbt
+***** top.nbt
+**** middle
+***** corner_0.nbt
+***** corner_1.nbt
+**** top
+***** corner_0.nbt
+***** corner_1.nbt
+*** entrances
+**** entrance_0.nbt
+*** extensions
+**** empty.nbt
+**** fire_room.nbt
+**** house_0.nbt
+**** house_1.nbt
+**** large_bridge_0.nbt
+**** large_bridge_1.nbt
+**** large_bridge_2.nbt
+**** large_bridge_3.nbt
+**** roofed_bridge.nbt
+**** small_bridge_0.nbt
+**** small_bridge_1.nbt
+**** small_bridge_2.nbt
+**** small_bridge_3.nbt
+*** ramparts
+**** bottom_wall_0.nbt
+**** lava_basin_main.nbt
+**** lava_basin_side.nbt
+**** mid_wall_main.nbt
+**** mid_wall_side.nbt
+**** top_wall.nbt
+*** roofs
+**** center_roof.nbt
+**** corner_roof.nbt
+**** wall_roof.nbt
+*** stairs
+**** lower_stairs.nbt
+*** walls
+**** bottom
+***** wall_0.nbt
+***** wall_1.nbt
+***** wall_2.nbt
+***** wall_3.nbt
+**** entrance_wall.nbt
+**** lava_wall.nbt
+**** mid
+***** wall_0.nbt
+***** wall_1.nbt
+***** wall_2.nbt
+**** outer
+***** bottom_corner.nbt
+***** medium_outer_wall.nbt
+***** mid_corner.nbt
+***** outer_wall.nbt
+***** tall_outer_wall.nbt
+***** top_corner.nbt
+**** top
+***** main_entrance.nbt
+***** wall_0.nbt
+***** wall_1.nbt
+** units
+*** air_base.nbt
+*** center_pieces
+**** center_0.nbt
+**** center_1.nbt
+**** center_2.nbt
+*** edges
+**** edge_0.nbt
+*** fillers
+**** stage_0.nbt
+*** pathways
+**** pathway_0.nbt
+**** pathway_wall_0.nbt
+*** rampart_plates
+**** plate_0.nbt
+*** ramparts
+**** ramparts_0.nbt
+**** ramparts_1.nbt
+**** ramparts_2.nbt
+*** stages
+**** rot
+***** stage_1_0.nbt
+**** stage_0_0.nbt
+**** stage_0_1.nbt
+**** stage_0_2.nbt
+**** stage_0_3.nbt
+**** stage_1_0.nbt
+**** stage_1_1.nbt
+**** stage_1_2.nbt
+**** stage_1_3.nbt
+**** stage_2_0.nbt
+**** stage_2_1.nbt
+**** stage_3_0.nbt
+**** stage_3_1.nbt
+**** stage_3_2.nbt
+**** stage_3_3.nbt
+*** wall_units
+**** edge_0_large.nbt
+**** unit_0.nbt
+*** walls
+**** connected_wall.nbt
+**** wall_base.nbt
+
+</div>
+|}
+
+=== 桥 ===
+桥的较近侧是一面损毁的大型墙壁，形如一张猪灵的脸，其“嘴部”有[[磨制玄武岩]]组成的“獠牙”，内部地面高度不一且两侧被[[熔岩]]包围。而桥是从它的“嘴”延伸出去的，桥的较远侧有一座[[金块]]雕塑，桥下方有立柱支撑。
+
+{| class="wikitable collapsible collapsed"
+! 结构名称 !! 描述 !! 包含 !! 图片
+|-
+| <code>bastion/bridge/bridge_pieces/bridge</code>
+| 大型桥梁结构。
+|
+1,384 {{BlockLink|Polished Blackstone Bricks}}<br>
+316 {{BlockLink|Blackstone}}<br>
+155 {{BlockLink|Basalt}}<br>
+45 {{BlockLink|Polished Basalt}}<br>
+16 {{BlockLink|Block of Gold}}<br>
+8 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+5 {{BlockLink|Iron Chain}}<br>
+5 {{BlockLink|Lantern}}<br>
+4 {{BlockLink|Chiseled Polished Blackstone}}<br>
+4 {{BlockLink|Quartz Block}}<br>
+2 {{BlockLink|Smooth Quartz Block}}<br>
+2 {{BlockLink|Smooth Quartz Slab}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group">有10%的概率生成猪灵蛮兵，40%的概率生成携带金剑的猪灵，40%的概率生成携带弩的猪灵，10%的概率不会生成。</ref>
+| [[File:Bastion Remnant bridge.png|250px]]
+|-
+| <code>bastion/bridge/connectors/back_bridge_bottom</code>
+| 中型连接部件。
+|
+75 {{BlockLink|Polished Blackstone Bricks}}<br>
+16 {{BlockLink|Blackstone}}
+| [[File:Bastion Remnant back_bridge_bottom.png|250px]]
+|-
+| <code>bastion/bridge/connectors/back_bridge_top</code>
+| 中型连接部件。
+|
+48 {{BlockLink|Polished Blackstone Bricks}}<br>
+40 {{BlockLink|Blackstone}}
+| [[File:Bastion Remnant back_bridge_top.png|250px]]
+|-
+| <code>bastion/bridge/legs/leg_0</code>
+| 大型柱状结构。
+|
+115 {{BlockLink|Polished Blackstone Bricks}}<br>
+40 {{BlockLink|Blackstone}}
+| [[File:Bastion Remnant leg_0.png|75px]]
+|-
+| <code>bastion/bridge/legs/leg_1</code>
+| 大型柱状结构。
+|
+120 {{BlockLink|Polished Blackstone Bricks}}<br>
+38 {{BlockLink|Blackstone}}
+| [[File:Bastion Remnant leg_1.png|75px]]
+|-
+| <code>bastion/bridge/ramparts/rampart_0</code>
+| 非常大的结构，其中有几条过道。
+|
+2,955 {{BlockLink|Polished Blackstone Bricks}}<br>
+491 {{BlockLink|Blackstone}}<br>
+235 {{BlockLink|Basalt}}<br>
+89 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+15 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+| [[File:Bastion Remnant rampart_0.png|250px]]
+|-
+| <code>bastion/bridge/ramparts/rampart_1</code>
+| 非常大的结构，其中有几条过道和宝箱。
+|
+4,372 {{BlockLink|Polished Blackstone Bricks}}<br>
+496 {{BlockLink|Blackstone}}<br>
+346 {{BlockLink|Basalt}}<br>
+146 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+40 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Chest|战利品箱}}（普通）<br>
+1 {{BlockLink|Lantern}}<br>
+3 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+3 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group">有{{frac|5|6}}的概率生成猪灵蛮兵，{{frac|1|6}}的概率生成携带金剑的猪灵。</ref>
+| [[File:Bastion Remnant rampart_1.png|250px]]
+|-
+| <code>bastion/bridge/rampart_plates/plate_0</code>
+| 在几根柱子上的薄墙。
+|
+260 {{BlockLink|Polished Blackstone Bricks}}<br>
+82 {{BlockLink|Basalt}}<br>
+38 {{BlockLink|Blackstone}}<br>
+26 {{BlockLink|Cracked Polished Blackstone Bricks}}
+| [[File:Bastion Remnant plate_0.png|250px]]
+|-
+| <code>bastion/bridge/starting_pieces/entrance</code>
+| 非常大的结构，底部两侧充满了熔岩。
+|
+6,556 {{BlockLink|Polished Blackstone Bricks}}<br>
+827 {{BlockLink|Blackstone}}<br>
+82 {{BlockLink|Basalt}}<br>
+47 {{BlockLink|Polished Basalt}}<br>
+38 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+30 {{BlockLink|Lava|熔岩源}}<br>
+11 {{BlockLink|Chiseled Polished Blackstone}}<br>
+11 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+9 {{BlockLink|Blackstone Slab}}<br>
+7 {{BlockLink|Block of Gold}}<br>
+3 {{BlockLink|Iron Chain}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Chest|战利品箱}}（桥）<br>
+14 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+2 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group">有{{frac|1|3}}的概率不会生成。</ref><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+| [[File:Bastion Remnant entrance.png|250px]]
+|-
+| <code>bastion/bridge/starting_pieces/entrance_base</code>
+| 非常大的结构，其中有几条过道，屋顶有熔岩。 
+|
+10,685 {{BlockLink|Blackstone}}<br>
+2,953 {{BlockLink|Polished Blackstone Bricks}}<br>
+396 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+52 {{BlockLink|Lava|熔岩源}}<br>
+10 {{BlockLink|Basalt}}<br>
+7 {{BlockLink|Chiseled Polished Blackstone}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+7 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+| [[File:Bastion Remnant entrance_base.png|250px]]
+|-
+| <code>bastion/bridge/starting_pieces/entrance_face</code>
+| 脸状的中等大小的薄结构。
+|
+517 {{BlockLink|Polished Blackstone Bricks}}<br>
+136 {{BlockLink|Basalt}}<br>
+49 {{BlockLink|Blackstone}}<br>
+13 {{BlockLink|Polished Basalt}}<br>
+12 {{BlockLink|Netherrack}}
+| [[File:Bastion Remnant entrance_face.png|250px]]
+|-
+| <code>bastion/bridge/walls/wall_base_0</code>
+| 非常大的结构，其中有几条过道。
+|
+4854 {{BlockLink|Blackstone}}<br>
+228 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+3 {{BlockLink|Block of Gold}}<br>
+2 {{BlockLink|Chiseled Polished Blackstone}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+| [[File:Bastion Remnant wall_base_0.png|250px]]
+|-
+| <code>bastion/bridge/walls/wall_base_1</code>
+| 非常大的结构，其中有几条过道。
+|
+5034 {{BlockLink|Blackstone}}<br>
+213 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+2 {{BlockLink|Chiseled Polished Blackstone}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Polished Blackstone Bricks}}
+| [[File:Bastion Remnant wall_base_1.png|250px]]
+|}
+
+=== 疣猪兽棚 ===
+疣猪兽棚由一个两边都受损的开放房间组成。
+{| class="wikitable collapsible collapsed"
+! 结构名称 !! 描述 !! 包含 !! 图片
+|-
+| {{cd|bastion/hoglin_stable/air_base}}
+| 技术性连接结构。
+| 无
+| 不适用
+|-
+| {{cd|bastion/hoglin_stable/connectors/end_post_connector}}
+| 技术性连接结构，位于支柱之间。
+| 无
+| 不适用
+|-
+| {{cd|bastion/hoglin_stable/large_stables/inner_0}}
+| rowspan="10" |大型疣猪兽棚。
+|
+168 {{BlockLink|Polished Blackstone Bricks}}<br>
+74 {{BlockLink|Basalt}}<br>
+7 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+5 {{BlockLink|Blackstone Slab}}<br>
+5 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Lantern}}
+| [[File:large_stables_inner_0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/large_stables/inner_1}}
+|
+146 {{BlockLink|Polished Blackstone Bricks}}<br>
+61 {{BlockLink|Basalt}}<br>
+19 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+16 {{BlockLink|Blackstone}}<br>
+11 {{BlockLink|Blackstone Slab}}<br>
+7 {{BlockLink|Polished Blackstone Stairs}}<br>
+2 {{BlockLink|Blackstone Wall}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Soul Sand}}<br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/>
+| [[File:large_stables_inner_1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/large_stables/inner_2}}
+|
+225 {{BlockLink|Polished Blackstone Bricks}}<br>
+39 {{BlockLink|Basalt}}<br>
+29 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+7 {{BlockLink|Blackstone Slab}}<br>
+5 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Soul Sand}}<br>
+2 {{BlockLink|Blackstone Wall}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/>
+| [[File:large_stables_inner_2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/large_stables/inner_3}}
+|
+253 {{BlockLink|Polished Blackstone Bricks}}<br>
+33 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+32 {{BlockLink|Basalt}}<br>
+3 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Blackstone Wall}}<br>
+2 {{BlockLink|Lava}}<br>
+1 {{BlockLink|Blackstone}}<br>
+1 {{BlockLink|Chest|战利品箱}}（疣猪兽棚）<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+| [[File:large_stables_inner_3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/large_stables/inner_4}}
+|
+235 {{BlockLink|Polished Blackstone Bricks}}<br>
+47 {{BlockLink|Basalt}}<br>
+47 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+3 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/>
+| [[File:large_stables_inner_4.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/large_stables/outer_0}}
+|
+166 {{BlockLink|Polished Blackstone Bricks}}<br>
+76 {{BlockLink|Basalt}}<br>
+7 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+5 {{BlockLink|Blackstone Slab}}<br>
+3 {{BlockLink|Blackstone Wall}}<br>
+3 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+| [[File:large_stables_outer_0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/large_stables/outer_1}}
+|
+145 {{BlockLink|Polished Blackstone Bricks}}<br>
+62 {{BlockLink|Basalt}}<br>
+19 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+15 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Blackstone Slab}}<br>
+7 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Soul Sand}}<br>
+1 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group">只有25%的概率出现。在其他情况下，空气会取代其生成。</ref><br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/>
+| [[File:large_stables_outer_1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/large_stables/outer_2}}
+|
+225 {{BlockLink|Polished Blackstone Bricks}}<br>
+38 {{BlockLink|Basalt}}<br>
+30 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+7 {{BlockLink|Blackstone Slab}}<br>
+5 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Soul Sand}}<br>
+2 {{BlockLink|Blackstone Wall}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+| [[File:large_stables_outer_2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/large_stables/outer_3}}
+|
+252 {{BlockLink|Polished Blackstone Bricks}}<br>
+33 {{BlockLink|Basalt}}<br>
+32 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+5 {{BlockLink|Blackstone Wall}}<br>
+4 {{BlockLink|Blackstone}}<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Lava|熔岩源}}<br>
+| [[File:large_stables_outer_3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/large_stables/outer_4}}
+|
+235 {{BlockLink|Polished Blackstone Bricks}}<br>
+48 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+46 {{BlockLink|Basalt}}<br>
+4 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Lantern}}
+| [[File:large_stables_outer_4.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/posts/end_post}}
+| 兽棚之间的一根支柱。
+|96 {{BlockLink|Polished Blackstone Bricks}}
+| [[File:hoglin_stable_posts_end_post.png|35px]]
+|-
+| {{cd|bastion/hoglin_stable/posts/stair_post}}
+| 兽棚之间的两根支柱。
+|192 {{BlockLink|Polished Blackstone Bricks}}
+| [[File:hoglin_stable_posts_stair_post.png|100px]]
+|-
+| {{cd|bastion/hoglin_stable/rampart_plates/rampart_plate_1}}
+| <code>bastion/hoglin_stable/ramparts<br>/ramparts_1</code>的一面墙。
+|
+260 {{BlockLink|Polished Blackstone Bricks}}<br>
+81 {{BlockLink|Basalt}}<br>
+38 {{BlockLink|Blackstone}}<br>
+26 {{BlockLink|Cracked Polished Blackstone Bricks}}
+| [[File:hoglin_stable_rampart_plate_1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/ramparts/ramparts_1}}
+| rowspan="3" | 堡垒一部分的上半段。
+|
+4064 {{BlockLink|Polished Blackstone Bricks}}<br>
+459 {{BlockLink|Blackstone}}<br>
+346 {{BlockLink|Basalt}}<br>
+130 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+40 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+4 {{BlockLink|Block of Gold}}<br>
+4 {{BlockLink|Lantern}}<br>
+3 {{BlockLink|Chest|战利品箱}}（普通）<br>
+3 {{BlockLink|Chiseled Polished Blackstone}}<br>
+6 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+| [[File:hoglin_stable_ramparts_1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/ramparts/ramparts_2}}
+|
+2895 {{BlockLink|Polished Blackstone Bricks}}<br>
+437 {{BlockLink|Blackstone}}<br>
+236 {{BlockLink|Basalt}}<br>
+77 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+15 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Chest|战利品箱}}（普通）<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+| [[File:hoglin_stable_ramparts_2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/ramparts/ramparts_3}}
+|
+1285 {{BlockLink|Polished Blackstone Bricks}}<br>
+467 {{BlockLink|Blackstone}}<br>
+74 {{BlockLink|Basalt}}<br>
+10 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+| [[File:hoglin_stable_ramparts_3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/small_stables/inner_0}}
+| rowspan="8" |小型疣猪兽棚。
+|
+69 {{BlockLink|Polished Blackstone Bricks}}<br>
+53 {{BlockLink|Basalt}}<br>
+35 {{BlockLink|Blackstone}}<br>
+29 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+9 {{BlockLink|Blackstone Slab}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/>
+| [[File:small_stables_inner_0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/small_stables/inner_1}}
+|
+91 {{BlockLink|Polished Blackstone Bricks}}<br>
+43 {{BlockLink|Basalt}}<br>
+17 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+14 {{BlockLink|Blackstone Slab}}<br>
+9 {{BlockLink|Blackstone}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group"/><br>
+1 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/>
+| [[File:small_stables_inner_1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/small_stables/inner_2}}
+|
+128 {{BlockLink|Polished Blackstone Bricks}}<br>
+59 {{BlockLink|Basalt}}<br>
+21 {{BlockLink|Blackstone}}<br>
+21 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+12 {{BlockLink|Blackstone Slab}}<br>
+7 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Blackstone Wall}}<br>
+2 {{BlockLink|Soul Sand}}<br>
+1 {{BlockLink|Chest|战利品箱}}（疣猪兽棚）<br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+| [[File:small_stables_inner_2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/small_stables/inner_3}}
+|
+84 {{BlockLink|Polished Blackstone Bricks}}<br>
+31 {{BlockLink|Basalt}}<br>
+25 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+14 {{BlockLink|Blackstone Slab}}<br>
+6 {{BlockLink|Blackstone}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+| [[File:small_stables_inner_3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/small_stables/outer_0}}
+|
+69 {{BlockLink|Polished Blackstone Bricks}}<br>
+53 {{BlockLink|Basalt}}<br>
+35 {{BlockLink|Blackstone}}<br>
+28 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+9 {{BlockLink|Blackstone Slab}}<br>
+4 {{BlockLink|Blackstone Wall}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+| [[File:small_stables_outer_0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/small_stables/outer_1}}
+|
+90 {{BlockLink|Polished Blackstone Bricks}}<br>
+43 {{BlockLink|Basalt}}<br>
+17 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+14 {{BlockLink|Blackstone Slab}}<br>
+10 {{BlockLink|Blackstone}}<br>
+4 {{BlockLink|Blackstone Wall}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group"/><br>
+1 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/>
+| [[File:small_stables_outer_1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/small_stables/outer_2}}
+|
+126 {{BlockLink|Polished Blackstone Bricks}}<br>
+59 {{BlockLink|Basalt}}<br>
+22 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+21 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Blackstone Slab}}<br>
+7 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Blackstone Wall}}<br>
+2 {{BlockLink|Soul Sand}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/>
+| [[File:small_stables_outer_2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/small_stables/outer_3}}
+|
+86 {{BlockLink|Polished Blackstone Bricks}}<br>
+32 {{BlockLink|Basalt}}<br>
+25 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+14 {{BlockLink|Blackstone Slab}}<br>
+6 {{BlockLink|Blackstone}}<br>
+4 {{BlockLink|Blackstone Wall}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Hoglin}}<ref group="n" name="hoglin group"/>
+| [[File:small_stables_outer_3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_1_0}}
+| rowspan="27" | 连接兽棚上下层的阶梯。
+|
+180 {{BlockLink|Polished Blackstone Bricks}}<br>
+57 {{BlockLink|Basalt}}<br>
+31 {{BlockLink|Blackstone}}<br>
+18 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+6 {{BlockLink|Magma Block}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Lantern}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable stairs 1 0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_1_1}}
+|
+225 {{BlockLink|Polished Blackstone Bricks}}<br>
+49 {{BlockLink|Basalt}}<br>
+27 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+24 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+4 {{BlockLink|Magma Block}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+2 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Lantern}}
+| [[File:hoglin stable stairs 1 1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_1_2}}
+|
+184 {{BlockLink|Polished Blackstone Bricks}}<br>
+49 {{BlockLink|Basalt}}<br>
+25 {{BlockLink|Blackstone}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+10 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Lantern}}
+| [[File:hoglin stable stairs 1 2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_1_3}}
+|
+167 {{BlockLink|Polished Blackstone Bricks}}<br>
+65 {{BlockLink|Blackstone}}<br>
+39 {{BlockLink|Basalt}}<br>
+30 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+11 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Magma Block}}<br>
+2 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Lantern}}
+| [[File:hoglin stable stairs 1 3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_1_4}}
+|
+129 {{BlockLink|Polished Blackstone Bricks}}<br>
+51 {{BlockLink|Blackstone}}<br>
+32 {{BlockLink|Basalt}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+6 {{BlockLink|Magma Block}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Polished Basalt}}
+| [[File:hoglin stable stairs 1 4.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_2}}
+|
+180 {{BlockLink|Polished Blackstone Bricks}}<br>
+61 {{BlockLink|Basalt}}<br>
+28 {{BlockLink|Blackstone}}<br>
+20 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable stairs 2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_2_0}}
+|
+185 {{BlockLink|Polished Blackstone Bricks}}<br>
+57 {{BlockLink|Basalt}}<br>
+28 {{BlockLink|Blackstone}}<br>
+21 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Lantern}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable stairs 2 0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_2_1}}
+|
+227 {{BlockLink|Polished Blackstone Bricks}}<br>
+49 {{BlockLink|Basalt}}<br>
+28 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+25 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable stairs 2 1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_2_2}}
+|
+184 {{BlockLink|Polished Blackstone Bricks}}<br>
+49 {{BlockLink|Basalt}}<br>
+25 {{BlockLink|Blackstone}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+10 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable stairs 2 2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_2_3}}
+|
+170 {{BlockLink|Polished Blackstone Bricks}}<br>
+64 {{BlockLink|Blackstone}}<br>
+44 {{BlockLink|Basalt}}<br>
+26 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+11 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable stairs 2 3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_2_4}}
+|
+130 {{BlockLink|Polished Blackstone Bricks}}<br>
+53 {{BlockLink|Blackstone}}<br>
+32 {{BlockLink|Basalt}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Polished Basalt}}
+| [[File:hoglin stable stairs 2 4.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_3}}
+|
+180 {{BlockLink|Polished Blackstone Bricks}}<br>
+61 {{BlockLink|Basalt}}<br>
+28 {{BlockLink|Blackstone}}<br>
+20 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable stairs 3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_3_0}}
+|
+182 {{BlockLink|Polished Blackstone Bricks}}<br>
+57 {{BlockLink|Basalt}}<br>
+27 {{BlockLink|Blackstone}}<br>
+19 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+9 {{BlockLink|Magma Block}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Lantern}}
+| [[File:hoglin stable stairs 3 0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_3_1}}
+|
+217 {{BlockLink|Polished Blackstone Bricks}}<br>
+49 {{BlockLink|Basalt}}<br>
+28 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+26 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+9 {{BlockLink|Magma Block}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable stairs 3 1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_3_2}}
+|
+184 {{BlockLink|Polished Blackstone Bricks}}<br>
+49 {{BlockLink|Basalt}}<br>
+25 {{BlockLink|Blackstone}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+10 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Magma Block}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+| [[File:hoglin stable stairs 3 2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_3_3}}
+|
+170 {{BlockLink|Polished Blackstone Bricks}}<br>
+63 {{BlockLink|Blackstone}}<br>
+44 {{BlockLink|Basalt}}<br>
+26 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+11 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Iron Chain}}
+| [[File:hoglin stable stairs 3 3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/stairs/stairs_3_4}}
+|
+127 {{BlockLink|Polished Blackstone Bricks}}<br>
+53 {{BlockLink|Blackstone}}<br>
+32 {{BlockLink|Basalt}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+4 {{BlockLink|Magma Block}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Polished Basalt}}
+| [[File:hoglin stable stairs 3 4.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/stairs_0_mirrored}}
+|
+185 {{BlockLink|Polished Blackstone Bricks}}<br>
+58 {{BlockLink|Basalt}}<br>
+28 {{BlockLink|Blackstone}}<br>
+21 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+4 {{BlockLink|Glowstone}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable starting pieces stairs 0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/stairs_1_mirrored}}
+|
+227 {{BlockLink|Polished Blackstone Bricks}}<br>
+50 {{BlockLink|Basalt}}<br>
+28 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+25 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable starting pieces stairs 1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/stairs_2_mirrored}}
+|
+184 {{BlockLink|Polished Blackstone Bricks}}<br>
+50 {{BlockLink|Basalt}}<br>
+25 {{BlockLink|Blackstone}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+10 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable starting pieces stairs 2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/stairs_3_mirrored}}
+|
+170 {{BlockLink|Polished Blackstone Bricks}}<br>
+63 {{BlockLink|Blackstone}}<br>
+45 {{BlockLink|Basalt}}<br>
+26 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+11 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable starting pieces stairs 3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/stairs_4_mirrored}}
+|
+131 {{BlockLink|Polished Blackstone Bricks}}<br>
+53 {{BlockLink|Blackstone}}<br>
+33 {{BlockLink|Basalt}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Polished Basalt}}
+| [[File:hoglin stable starting pieces stairs 4.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/starting_stairs_0}}
+|
+184 {{BlockLink|Polished Blackstone Bricks}}<br>
+57 {{BlockLink|Basalt}}<br>
+27 {{BlockLink|Blackstone}}<br>
+21 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+8 {{BlockLink|Magma Block}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Lantern}}
+| [[File:hoglin stable starting stairs 0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/starting_stairs_1}}
+|
+227 {{BlockLink|Polished Blackstone Bricks}}<br>
+47 {{BlockLink|Basalt}}<br>
+28 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+25 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Polished Blackstone Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Magma Block}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+| [[File:hoglin stable starting stairs 1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/starting_stairs_2}}
+|
+184 {{BlockLink|Polished Blackstone Bricks}}<br>
+49 {{BlockLink|Basalt}}<br>
+25 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+10 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Polished Basalt}}<br>
+2 {{BlockLink|Magma Block}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Lantern}}<br>
+| [[File:hoglin stable starting stairs 2.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/starting_stairs_3}}
+|
+167 {{BlockLink|Polished Blackstone Bricks}}<br>
+55 {{BlockLink|Blackstone}}<br>
+44 {{BlockLink|Basalt}}<br>
+23 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+14 {{BlockLink|Magma Block}}<br>
+11 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Polished Basalt}}<br>
+1 {{BlockLink|Blackstone Stairs}}
+| [[File:hoglin stable starting stairs 3.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/starting_pieces/starting_stairs_4}}
+|
+129 {{BlockLink|Polished Blackstone Bricks}}<br>
+51 {{BlockLink|Blackstone}}<br>
+32 {{BlockLink|Basalt}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+4 {{BlockLink|Magma Block}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Polished Basalt}}
+| [[File:hoglin stable starting stairs 4.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/walls/side_wall_0}}
+| rowspan="3" | 堡垒一侧的下半段。
+|
+4684 {{BlockLink|Blackstone}}<br>
+220 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+12 {{BlockLink|Chiseled Polished Blackstone}}<br>
+5 {{BlockLink|Polished Blackstone Bricks}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）<br>
+3 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+| [[File:hoglin stable side wall 0.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/walls/side_wall_1}}
+|
+4924 {{BlockLink|Blackstone}}<br>
+173 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+26 {{BlockLink|Chiseled Polished Blackstone}}<br>
+12 {{BlockLink|Block of Gold}}<br>
+7 {{BlockLink|Polished Blackstone Bricks}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+5 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+| [[File:hoglin stable side wall 1.png|250px]]
+|-
+| {{cd|bastion/hoglin_stable/walls/wall_base}}
+|
+5287 {{BlockLink|Blackstone}}<br>
+66 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+27 {{BlockLink|Blackstone Stairs}}<br>
+4 {{BlockLink|Chiseled Polished Blackstone}}<br>
+2 {{BlockLink|Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+| [[File:hoglin stable wall base.png|250px]]
+|}
+
+=== 居住区 ===
+居住区包含了中央庭院以及围绕中央庭院的墙壁，中央庭院中种有[[下界疣]]，并包含1个战利品箱。
+{| class="wikitable collapsible collapsed"
+! 结构名称 !! 描述 !! 包含 !! 图片
+|-
+| {{cd|bastion/units/center_pieces/center_0}}
+| rowspan="3" | 种有[[下界疣]]的中央庭院。
+|
+72 {{BlockLink|Polished Blackstone Bricks}}<br>
+21 {{BlockLink|Blackstone}}<br>
+15 {{BlockLink|Chiseled Polished Blackstone}}<br>
+15 {{BlockLink|Soul Sand}}<br>
+9 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+7 {{BlockLink|Blackstone Slab}}<br>
+6 {{BlockLink|Nether Wart}}<br>
+2 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）
+| [[File:Bastion units center 0.png|250px]]
+|-
+| {{cd|bastion/units/center_pieces/center_1}}
+|
+32 {{BlockLink|Polished Blackstone Bricks}}<br>
+23 {{BlockLink|Blackstone}}<br>
+11 {{BlockLink|Blackstone Slab}}<br>
+7 {{BlockLink|Chiseled Polished Blackstone}}<br>
+7 {{BlockLink|Soul Sand}}<br>
+4 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）<br>
+1 {{BlockLink|Nether Wart}}
+|[[File:Bastion units center 1.png|250px]]
+|-
+| {{cd|bastion/units/center_pieces/center_2}}
+|
+71 {{BlockLink|Polished Blackstone Bricks}}<br>
+26 {{BlockLink|Blackstone}}<br>
+22 {{BlockLink|Soul Sand}}<br>
+8 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+5 {{BlockLink|Blackstone Slab}}<br>
+5 {{BlockLink|Chiseled Polished Blackstone}}<br>
+5 {{BlockLink|Nether Wart}}<br>
+1 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）
+|[[File:Bastion units center 2.png|250px]]
+|-
+| {{cd|bastion/units/pathways/pathway_0}}
+| rowspan="2" | 连接中心与居住区的过道。
+|
+6 {{BlockLink|Blackstone}}
+| [[File:Bastion units pathways.png|250px]]
+|-
+| {{cd|bastion/units/pathways/pathway_wall_0}}
+|
+6 {{BlockLink|Blackstone}}
+| [[File:Bastion units pathways.png|250px]]
+|-
+| {{cd|bastion/units/rampart_plates/plate_0}}
+| <code>bastion/units/ramparts/ramparts_0</code>的一面墙。
+|
+260 {{BlockLink|Polished Blackstone Bricks}}<br>
+81 {{BlockLink|Basalt}}<br>
+38 {{BlockLink|Blackstone}}<br>
+26 {{BlockLink|Cracked Polished Blackstone Bricks}}
+|[[File:Bastion units plate 0.png|250px]]
+|-
+| {{cd|bastion/units/ramparts/ramparts_0}}
+| rowspan="3" | 堡垒一侧的上半段。
+|
+4441 {{BlockLink|Polished Blackstone Bricks}}<br>
+494 {{BlockLink|Blackstone}}<br>
+342 {{BlockLink|Basalt}}<br>
+114 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+40 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Chest|战利品箱}}（普通）<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+|[[File:Bastion units ramparts 0.png|250px]]
+|-
+| {{cd|bastion/units/ramparts/ramparts_1}}
+|
+3022 {{BlockLink|Polished Blackstone Bricks}}<br>
+482 {{BlockLink|Blackstone}}<br>
+236 {{BlockLink|Basalt}}<br>
+79 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+15 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+6 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+|[[File:Bastion units ramparts 1.png|250px]]
+|-
+| {{cd|bastion/units/ramparts/ramparts_2}}
+|
+1417 {{BlockLink|Polished Blackstone Bricks}}<br>
+531 {{BlockLink|Blackstone}}<br>
+74 {{BlockLink|Basalt}}<br>
+13 {{BlockLink|Cracked Polished Blackstone Bricks}}
+|[[File:Bastion units ramparts 2.png|250px]]
+|-
+| {{cd|bastion/units/edges/edge_0}}
+| rowspan="19" | 居住区和屋顶。
+|
+240 {{BlockLink|Polished Blackstone Bricks}}<br>
+31 {{BlockLink|Basalt}}<br>
+6 {{BlockLink|Blackstone}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}
+|[[File:Bastion units edge 0.png|250px]]
+|-
+| {{cd|bastion/units/fillers/stage_0}}
+|
+241 {{BlockLink|Polished Blackstone Bricks}}<br>
+30 {{BlockLink|Basalt}}<br>
+6 {{BlockLink|Blackstone}}<br>
+2 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+|[[File:Bastion units stage 0.png|250px]]
+|-
+| {{cd|bastion/units/stages/rot/stage_1_0}}
+|
+177 {{BlockLink|Polished Blackstone Bricks}}<br>
+29 {{BlockLink|Basalt}}<br>
+24 {{BlockLink|Blackstone}}<br>
+13 {{BlockLink|Cracked Polished Blackstone Bricks}}
+|[[File:Bastion units rot stage 1 0.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_0_0}}
+|
+239 {{BlockLink|Polished Blackstone Bricks}}<br>
+31 {{BlockLink|Basalt}}<br>
+6 {{BlockLink|Blackstone}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:Bastion units stage 0 0.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_0_1}}
+|
+268 {{BlockLink|Polished Blackstone Bricks}}<br>
+34 {{BlockLink|Basalt}}<br>
+9 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+6 {{BlockLink|Blackstone}}<br>
+4 {{BlockLink|Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Lava}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:Bastion units stage 0 1.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_0_2}}
+|
+279 {{BlockLink|Polished Blackstone Bricks}}<br>
+27 {{BlockLink|Basalt}}<br>
+7 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+6 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group"/><br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+|[[File:Bastion units stage 0 2.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_0_3}}
+|
+231 {{BlockLink|Polished Blackstone Bricks}}<br>
+31 {{BlockLink|Basalt}}<br>
+13 {{BlockLink|Blackstone}}<br>
+10 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:Bastion units stage 0 3.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_1_0}}
+|
+178 {{BlockLink|Polished Blackstone Bricks}}<br>
+29 {{BlockLink|Basalt}}<br>
+24 {{BlockLink|Blackstone}}<br>
+13 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+2 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:Bastion units stage 1 0.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_1_1}}
+|
+281 {{BlockLink|Polished Blackstone Bricks}}<br>
+8 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group"/><br>
+1 {{BlockLink|Lava}}
+|[[File:Bastion units stage 1 1.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_1_2}}
+|
+244 {{BlockLink|Polished Blackstone Bricks}}<br>
+18 {{BlockLink|Basalt}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Chest|战利品箱}}（普通）<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+|[[File:Bastion units stage 1 2.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_1_3}}
+|
+279 {{BlockLink|Polished Blackstone Bricks}}<br>
+9 {{BlockLink|Basalt}}<br>
+5 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group"/><br>
+1 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:Bastion units stage 1 3.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_2_0}}
+|
+176 {{BlockLink|Polished Blackstone Bricks}}<br>
+29 {{BlockLink|Basalt}}<br>
+23 {{BlockLink|Blackstone}}<br>
+13 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:Bastion units stage 2 0.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_2_1}}
+|
+170 {{BlockLink|Polished Blackstone Bricks}}<br>
+29 {{BlockLink|Basalt}}<br>
+23 {{BlockLink|Blackstone}}<br>
+13 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:Bastion units stage 2 1.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_3_0}}
+|
+79 {{BlockLink|Polished Blackstone Bricks}}<br>
+6 {{BlockLink|Blackstone}}<br>
+2 {{BlockLink|Polished Blackstone Brick Stairs}}
+|[[File:Bastion units stage 3 0.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_3_1}}
+|
+69 {{BlockLink|Polished Blackstone Bricks}}<br>
+8 {{BlockLink|Blackstone}}<br>
+2 {{BlockLink|Polished Blackstone Brick Stairs}}
+|[[File:Bastion units stage 3 1.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_3_2}}
+|
+69 {{BlockLink|Polished Blackstone Bricks}}<br>
+20 {{BlockLink|Blackstone}}<br>
+2 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Lava}}
+|[[File:Bastion units stage 3 2.png|250px]]
+|-
+| {{cd|bastion/units/stages/stage_3_3}}
+|
+60 {{BlockLink|Polished Blackstone Bricks}}<br>
+15 {{BlockLink|Blackstone}}<br>
+2 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Lava}}
+|[[File:Bastion units stage 3 3.png|250px]]
+|-
+| {{cd|bastion/units/wall_units/edge_0_large}}
+|
+290 {{BlockLink|Polished Blackstone Bricks}}<br>
+31 {{BlockLink|Basalt}}<br>
+12 {{BlockLink|Blackstone}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Cracked Polished Blackstone Bricks}}
+|[[File:Bastion units edge 0 large.png|250px]]
+|-
+| {{cd|bastion/units/wall_units/unit_0}}
+|
+241 {{BlockLink|Polished Blackstone Bricks}}<br>
+31 {{BlockLink|Basalt}}<br>
+6 {{BlockLink|Blackstone}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Block of Gold}}<ref group="n" name="gold group"/>
+|[[File:Bastion units wall unit 0.png|250px]]
+|-
+| {{cd|bastion/units/walls/connected_wall}}
+| 堡垒一侧的上半段。
+|
+4806 {{BlockLink|Blackstone}}<br>
+158 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+12 {{BlockLink|Basalt}}<br>
+5 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chiseled Polished Blackstone}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/>
+|[[File:Bastion units connected wall.png|250px]]
+|-
+| {{cd|bastion/units/walls/wall_base}}
+| 堡垒一侧的上半段，连接着不同的居住区。
+|
+4654 {{BlockLink|Blackstone}}<br>
+191 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+16 {{BlockLink|Blackstone Stairs}}<br>
+12 {{BlockLink|Block of Gold}}<br>
+11 {{BlockLink|Chiseled Polished Blackstone}}<br>
+8 {{BlockLink|Polished Blackstone Bricks}}<br>
+2 {{BlockLink|Chest|战利品箱}}（普通）<br>
+7 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:Bastion units wall base.png|250px]]
+|-
+| {{cd|bastion/units/air_base}}
+|技术性连接结构。
+|
+1 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:Polished_Blackstone_Bricks.png|200px]]
+|}
+
+=== 藏宝室 ===
+这个结构由被扶壁支撑的大型墙组成，一座桥梁连接了扶壁与藏宝室本身。
+
+藏宝室结构中包含多座悬挂在熔岩上方的桥。在藏宝室的底部，有一个[[岩浆怪]]刷怪笼和一个中心战利品区域。中心战利品区域由金块组成，同时会生成1或2个箱子。
+
+{| class="wikitable collapsible collapsed"
+! 结构名称 !! 描述 !! 包含 !! 图片
+|-
+| {{cd|bastion/treasure/bases/centers/center_0}}
+| rowspan="4"| 藏宝室中熔岩池上的战利品存放中心。
+|
+121 {{BlockLink|Polished Blackstone Bricks}}<br>
+19 {{BlockLink|Block of Gold}}<br>
+14 {{BlockLink|Blackstone}}<br>
+4 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Chest|战利品箱}}（藏宝室）<br>
+1 {{EntityLink|Piglin Brute}}
+|[[File:bastion treasure center 0.png|250px]]
+|-
+| {{cd|bastion/treasure/bases/centers/center_1}}
+|
+118 {{BlockLink|Polished Blackstone Bricks}}<br>
+17 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Block of Gold}}<br>
+2 {{BlockLink|Chest|战利品箱}}（藏宝室）<br>
+2 {{EntityLink|Piglin Brute}}
+|[[File:bastion treasure center 1.png|250px]]
+|-
+| {{cd|bastion/treasure/bases/centers/center_2}}
+|
+134 {{BlockLink|Polished Blackstone Bricks}}<br>
+16 {{BlockLink|Block of Gold}}<br>
+11 {{BlockLink|Blackstone}}<br>
+6 {{BlockLink|Blackstone Wall}}<br>
+1 {{BlockLink|Chest|战利品箱}}（藏宝室）<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+1 {{EntityLink|Piglin Brute}}
+|[[File:bastion treasure center 2.png|250px]]
+|-
+| {{cd|bastion/treasure/bases/centers/center_3}}
+|
+75 {{BlockLink|Polished Blackstone Bricks}}<br>
+13 {{BlockLink|Block of Gold}}<br>
+5 {{BlockLink|Blackstone}}<br>
+1 {{BlockLink|Chest|战利品箱}}（藏宝室）<br>
+1 {{EntityLink|Piglin Brute}}
+|[[File:bastion treasure center 3.png|250px]]
+|-
+| {{cd|bastion/treasure/bases/lava_basin}}
+| 藏宝室底部的熔岩池，其上有一座桥。
+|
+956 {{BlockLink|Lava}}<br>
+802 {{BlockLink|Polished Blackstone Bricks}}<br>
+129 {{BlockLink|Blackstone}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Magma Cube Spawner|text=岩浆怪刷怪笼|link=刷怪笼}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/><br>
+1 {{EntityLink|Piglin Brute}}
+|[[File:bastion treasure bases lava.png|250px]]
+|-
+| {{cd|bastion/treasure/brains/center_brain}}
+| rowspan="4"| 技术性连接结构。
+| 无
+| 不适用
+|-
+| {{cd|bastion/treasure/connectors/center_to_wall_middle}}
+| 无
+| 不适用
+|-
+| {{cd|bastion/treasure/connectors/center_to_wall_top}}
+| 无
+| 不适用
+|-
+| {{cd|bastion/treasure/connectors/center_to_wall_top_entrance}}
+| 无
+| 不适用
+|-
+| {{cd|bastion/treasure/corners/bottom/corner_0}}
+| rowspan="2"| 藏宝室前三层走廊的拐角。
+|
+191 {{BlockLink|Polished Blackstone Bricks}}<br>
+20 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+19 {{BlockLink|Basalt}}<br>
+7 {{BlockLink|Blackstone}}<br>
+7 {{BlockLink|Polished Blackstone Brick Stairs}}
+|[[File:bastion treasure bottom corner 0.png|125px]]
+|-
+| {{cd|bastion/treasure/corners/bottom/corner_1}}
+|
+89 {{BlockLink|Polished Blackstone Bricks}}<br>
+60 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+43 {{BlockLink|Basalt}}<br>
+1 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Polished Basalt}}<br>
+|[[File:bastion treasure bottom corner 1.png|125px]]
+|-
+| {{cd|bastion/treasure/corners/edges/bottom}}
+| rowspan="3"| 墙的边角。
+|
+64 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure bottom edge.png|50px]]
+|-
+| {{cd|bastion/treasure/corners/edges/middle}}
+|
+60 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure middle edge.png|50px]]
+|-
+| {{cd|bastion/treasure/corners/edges/top}}
+|
+68 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure top edge.png|50px]]
+|-
+| {{cd|bastion/treasure/corners/middle/corner_0}}
+| rowspan="2"| 藏宝室第4到6层走廊的拐角。
+|
+86 {{BlockLink|Polished Blackstone Bricks}}<br>
+25 {{BlockLink|Basalt}}<br>
+21 {{BlockLink|Blackstone}}<br>
+2 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+2 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Blackstone Slab}}
+|[[File:bastion treasure middle corner 0.png|125px]]
+|-
+| {{cd|bastion/treasure/corners/middle/corner_1}}
+|
+74 {{BlockLink|Polished Blackstone Bricks}}<br>
+29 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+27 {{BlockLink|Basalt}}<br>
+5 {{BlockLink|Blackstone}}<br>
+2 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Lantern}}
+|[[File:bastion treasure middle corner 1.png|125px]]
+|-
+| {{cd|bastion/treasure/corners/top/corner_0}}
+| rowspan="2"| 藏宝室第7、8层走廊的拐角。
+|
+67 {{BlockLink|Polished Blackstone Bricks}}<br>
+40 {{BlockLink|Basalt}}<br>
+25 {{BlockLink|Blackstone}}<br>
+19 {{BlockLink|Cracked Polished Blackstone Bricks}}
+|[[File:bastion treasure top corner 0.png|125px]]
+|-
+| {{cd|bastion/treasure/corners/top/corner_1}}
+|
+74 {{BlockLink|Polished Blackstone Bricks}}<br>
+39 {{BlockLink|Basalt}}<br>
+14 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+11 {{BlockLink|Blackstone}}<br>
+1 {{BlockLink|Polished Blackstone Stairs}}
+|[[File:bastion treasure top corner 1.png|125px]]
+|-
+| {{cd|bastion/treasure/entrances/entrance_0}}
+| 通往藏宝室的桥。
+|
+292 {{BlockLink|Polished Blackstone Bricks}}<br>
+13 {{BlockLink|Blackstone}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:bastion treasure entrance 0.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/empty}}
+| rowspan="4"| 从走廊中延伸出的结构。
+|1 {{BlockLink|Basalt}}
+|[[File:Basalt_Axis_Y.png|200px]]
+|-
+| {{cd|bastion/treasure/extensions/fire_room}}
+|
+355 {{BlockLink|Polished Blackstone Bricks}}<br>
+66 {{BlockLink|Blackstone}}<br>
+18 {{BlockLink|Basalt}}<br>
+13 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+4 {{BlockLink|Fire}}<br>
+4 {{BlockLink|Netherrack}}<br>
+1 {{BlockLink|Blackstone Slab}}
+|[[File:bastion treasure fire room.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/house_0}}
+|
+124 {{BlockLink|Polished Blackstone Bricks}}<br>
+47 {{BlockLink|Blackstone}}<br>
+7 {{BlockLink|Basalt}}<br>
+1 {{BlockLink|Polished Blackstone Stairs}}
+|[[File:bastion treasure house 0.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/house_1}}
+|
+151 {{BlockLink|Polished Blackstone Bricks}}<br>
+42 {{BlockLink|Blackstone}}<br>
+11 {{BlockLink|Basalt}}<br>
+2 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Blackstone Slab}}
+|[[File:bastion treasure house 1.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/large_bridge_0}}
+| rowspan="4"| 从走廊中延伸出的桥。
+|
+20 {{BlockLink|Polished Blackstone Bricks}}<br>
+18 {{BlockLink|Blackstone}}<br>
+9 {{BlockLink|Basalt}}
+|[[File:bastion treasure large bridge 0.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/large_bridge_1}}
+|
+20 {{BlockLink|Polished Blackstone Bricks}}<br>
+8 {{BlockLink|Blackstone}}<br>
+7 {{BlockLink|Basalt}}
+|[[File:bastion treasure large bridge 1.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/large_bridge_2}}
+|
+37 {{BlockLink|Blackstone}}<br>
+31 {{BlockLink|Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Lava}}
+|[[File:bastion treasure large bridge 2.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/large_bridge_3}}
+|
+46 {{BlockLink|Polished Blackstone Bricks}}<br>
+42 {{BlockLink|Basalt}}<br>
+3 {{BlockLink|Blackstone}}
+|[[File:bastion treasure large bridge 3.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/roofed_bridge}}
+| 从走廊中延伸出的有天花板的桥。
+|
+92 {{BlockLink|Polished Blackstone Bricks}}<br>
+27 {{BlockLink|Blackstone}}
+|[[File:bastion treasure roofed bridge.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/small_bridge_0}}
+| rowspan="4"| 从走廊中延伸出的桥。
+|
+7 {{BlockLink|Polished Blackstone Bricks}}<br>
+6 {{BlockLink|Blackstone}}
+|[[File:bastion treasure small bridge 0.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/small_bridge_1}}
+|
+19 {{BlockLink|Polished Blackstone Bricks}}<br>
+12 {{BlockLink|Basalt}}
+|[[File:bastion treasure small bridge 1.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/small_bridge_2}}
+|
+11 {{BlockLink|Polished Blackstone Bricks}}<br>
+10 {{BlockLink|Blackstone}}
+|[[File:bastion treasure small bridge 2.png|250px]]
+|-
+| {{cd|bastion/treasure/extensions/small_bridge_3}}
+|
+34 {{BlockLink|Polished Blackstone Bricks}}<br>
+23 {{BlockLink|Basalt}}
+|[[File:bastion treasure small bridge 3.png|250px]]
+|-
+| {{cd|bastion/treasure/ramparts/bottom_wall_0}}
+| 堡垒一侧的下半段。
+|
+2571 {{BlockLink|Blackstone}}<br>
+109 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+16 {{BlockLink|Magma Block}}<br>
+12 {{BlockLink|Basalt}}<br>
+24 {{BlockLink|Lava|熔岩源}}<br>
+2 {{BlockLink|Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Chiseled Polished Blackstone}}
+|[[File:bastion treasure bottom wall 0.png|250px]]
+|-
+| {{cd|bastion/treasure/ramparts/lava_basin_main}}<!--This is structurally the same as lava_basin_side, they just have different jigsaw blocks-->
+| 连接堡垒和藏宝室的桥下的熔岩池。
+|
+7250 {{BlockLink|Polished Blackstone Bricks}}<br>
+357 {{BlockLink|Lava|熔岩源}}<br>
+55 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+13 {{BlockLink|Chiseled Polished Blackstone}}
+|[[File:bastion treasure lava basin.png|250px]]
+|-
+| {{cd|bastion/treasure/ramparts/lava_basin_side}}
+| 堡垒和藏宝室之间左侧的熔岩池。
+|
+7250 {{BlockLink|Polished Blackstone Bricks}}<br>
+357 {{BlockLink|Lava|熔岩源}}<br>
+55 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+13 {{BlockLink|Chiseled Polished Blackstone}}
+|[[File:bastion treasure lava basin.png|250px]]
+|-
+| {{cd|bastion/treasure/ramparts/mid_wall_main}}
+| 堡垒中心偏右的部分，与桥相连。
+|
+3088 {{BlockLink|Polished Blackstone Bricks}}<br>
+86 {{BlockLink|Basalt}}<br>
+42 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+41 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+29 {{BlockLink|Blackstone}}<br>
+6 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Chest|战利品箱}}（塔尖）<br>
+1 {{BlockLink|Block of Gold}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/><br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+1 {{EntityLink|Piglin Brute}}
+|[[File:bastion treasure ramparts mid wall 0.png|250px]]
+|-
+| {{cd|bastion/treasure/ramparts/mid_wall_side}}
+| 堡垒中心偏左的部分。
+|
+2941 {{BlockLink|Polished Blackstone Bricks}}<br>
+103 {{BlockLink|Basalt}}<br>
+47 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+26 {{BlockLink|Blackstone}}<br>
+15 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+5 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Chest|战利品箱}}（塔尖）<br>
+1 {{BlockLink|Block of Gold}}<br>
+3 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/><br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:bastion treasure ramparts mid wall 1.png|250px]]
+|-
+| {{cd|bastion/treasure/ramparts/top_wall}}
+| 堡垒一侧的上半段。
+|
+1187 {{BlockLink|Polished Blackstone Bricks}}<br>
+39 {{BlockLink|Blackstone}}<br>
+38 {{BlockLink|Basalt}}<br>
+25 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+6 {{BlockLink|Block of Gold}}<br>
+2 {{BlockLink|Lantern}}
+|[[File:bastion treasure ramparts top wall.png|250px]]
+|-
+|{{cd|bastion/treasure/roofs/center_roof}}
+| rowspan="3"| 藏宝室的屋顶。
+|
+1152 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure roof center.png|250px]]
+|-
+|{{cd|bastion/treasure/roofs/corner_roof}}
+|
+50 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure roof corner.png|250px]]
+|-
+|{{cd|bastion/treasure/roofs/wall_roof}}
+|
+240 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure roof wall.png|250px]]
+|-
+|{{cd|bastion/treasure/stairs/lower_stairs}}
+| <code>bastion/treasure/bases/lava_basin</code>中桥上的楼梯。
+|
+13 {{BlockLink|Polished Blackstone Bricks}}<br>
+10 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+7 {{BlockLink|Blackstone}}
+|[[File:bastion treasure stairs.png|250px]]
+|-
+|{{cd|bastion/treasure/walls/bottom/wall_0}}
+| rowspan="4"| 藏宝室前三层的走廊。
+|
+1043 {{BlockLink|Polished Blackstone Bricks}}<br>
+83 {{BlockLink|Blackstone}}<br>
+45 {{BlockLink|Basalt}}<br>
+37 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+15 {{BlockLink|Iron Chain}}<br>
+6 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+4 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Lava}}<br>
+1 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+1 {{EntityLink|Piglin Brute}}
+|[[File:bastion treasure wall bottom 0.png|250px]]
+|-
+|{{cd|bastion/treasure/walls/bottom/wall_1}}
+|
+983 {{BlockLink|Polished Blackstone Bricks}}<br>
+108 {{BlockLink|Basalt}}<br>
+40 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+30 {{BlockLink|Blackstone}}<br>
+21 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Lantern}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:bastion treasure wall bottom 1.png|250px]]
+|-
+|{{cd|bastion/treasure/walls/bottom/wall_2}}
+|
+1075 {{BlockLink|Polished Blackstone Bricks}}<br>
+111 {{BlockLink|Basalt}}<br>
+54 {{BlockLink|Blackstone}}<br>
+12 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+10 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+4 {{BlockLink|Lantern}}<br>
+3 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:bastion treasure wall bottom 2.png|250px]]
+|-
+|{{cd|bastion/treasure/walls/bottom/wall_3}}
+|
+952 {{BlockLink|Polished Blackstone Bricks}}<br>
+130 {{BlockLink|Basalt}}<br>
+51 {{BlockLink|Blackstone}}<br>
+26 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+9 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Lava}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:bastion treasure wall bottom 3.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/mid/wall_0}}
+| rowspan="3"| 藏宝室第4到6层的走廊。
+|
+434 {{BlockLink|Polished Blackstone Bricks}}<br>
+123 {{BlockLink|Basalt}}<br>
+27 {{BlockLink|Blackstone}}<br>
+25 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+20 {{BlockLink|Polished Basalt}}<br>
+13 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Lava}}<br>
+1 {{BlockLink|Blackstone Stairs}}<br>
+1 {{BlockLink|Chest|战利品箱}}（塔尖）<br>
+1 {{BlockLink|Lantern}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/><br>
+1 {{EntityLink|Piglin Brute}}
+|[[File:bastion treasure wall mid 0.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/mid/wall_1}}
+|
+412 {{BlockLink|Polished Blackstone Bricks}}<br>
+198 {{BlockLink|Basalt}}<br>
+77 {{BlockLink|Blackstone}}<br>
+40 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+2 {{BlockLink|Iron Chain}}<br>
+2 {{BlockLink|Lantern}}<br>
+2 {{BlockLink|Lava}}<br>
+2 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Polished Basalt}}<br>
+3 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:bastion treasure wall mid 1.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/mid/wall_2}}
+|
+575 {{BlockLink|Polished Blackstone Bricks}}<br>
+130 {{BlockLink|Basalt}}<br>
+33 {{BlockLink|Blackstone}}<br>
+21 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+3 {{BlockLink|Iron Chain}}<br>
+3 {{BlockLink|Lava|熔岩源}}<br>
+2 {{BlockLink|Blackstone Stairs}}<br>
+2 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Polished Basalt}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:bastion treasure wall mid 2.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/outer/bottom_corner}}
+| rowspan="6"| 藏宝室的围墙。
+|
+160 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure wall 1.png|100px]]
+|-
+| {{cd|bastion/treasure/walls/outer/medium_outer_wall}}
+|
+768 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure wall 2.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/outer/mid_corner}}
+|
+150 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure wall 3.png|100px]]
+|-
+| {{cd|bastion/treasure/walls/outer/outer_wall}}
+|
+720 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure wall 4.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/outer/tall_outer_wall}}
+|
+816 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure wall 5.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/outer/top_corner}}
+|
+170 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure wall 6.png|100px]]
+|-
+| {{cd|bastion/treasure/walls/top/main_entrance}}
+| 藏宝室第7、8层的走廊，与外面的桥相连。
+|
+593 {{BlockLink|Polished Blackstone Bricks}}<br>
+105 {{BlockLink|Basalt}}<br>
+79 {{BlockLink|Blackstone}}<br>
+72 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+11 {{BlockLink|Polished Basalt}}<br>
+8 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+6 {{BlockLink|Lantern}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin melee group"/><br>
+1 {{EntityLink|Piglin Brute}}
+|[[File:bastion treasure wall top main.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/top/wall_0}}
+| rowspan="2" | 藏宝室第7、8层的走廊。
+|
+502 {{BlockLink|Polished Blackstone Bricks}}<br>
+102 {{BlockLink|Blackstone}}<br>
+55 {{BlockLink|Basalt}}<br>
+53 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+10 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+7 {{BlockLink|Lantern}}<br>
+6 {{BlockLink|Blackstone Stairs}}<br>
+2 {{BlockLink|Blackstone Slab}}<br>
+2 {{BlockLink|Iron Chain}}<br>
+2 {{BlockLink|Chiseled Polished Blackstone}}<br>
+2 {{BlockLink|Lava}}
+|[[File:bastion treasure wall top 0.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/top/wall_1}}
+|
+602 {{BlockLink|Polished Blackstone Bricks}}<br>
+134 {{BlockLink|Basalt}}<br>
+116 {{BlockLink|Blackstone}}<br>
+52 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+8 {{BlockLink|Blackstone Wall}}<br>
+5 {{BlockLink|Iron Chain}}<br>
+3 {{BlockLink|Blackstone Slab}}<br>
+3 {{BlockLink|Lantern}}<br>
+1 {{BlockLink|Lava|熔岩源}}<br>
+2 {{EntityLink|Piglin}}或{{EntityLink|Piglin Brute}}<ref group="n" name="piglin group"/>
+|[[File:bastion treasure wall top 1.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/entrance_wall}}
+| 藏宝室的围墙，与外部的桥相连。
+|
+763 {{BlockLink|Polished Blackstone Bricks}}<br>
+12 {{BlockLink|Basalt}}
+|[[File:bastion treasure wall 0.png|250px]]
+|-
+| {{cd|bastion/treasure/walls/lava_wall}}
+| 藏宝室和熔岩池之间的围墙，位于左侧。
+|
+840 {{BlockLink|Polished Blackstone Bricks}}
+|[[File:bastion treasure wall 7.png|100px]]
+|-
+| {{cd|bastion/treasure/big_air_full}}
+| 技术性连接结构。
+|无
+|不适用
+|}
+
+=== 构成方块 ===
+{| class="wikitable"
+! 方块
+|-
+| <div style="-moz-column-count: 3; -webkit-column-count: 3; column-count: 3;">
+* {{BlockLink|Basalt}}
+* {{BlockLink|Blackstone}}
+* {{BlockLink|Blackstone Slab}}
+* {{BlockLink|Blackstone Stairs}}
+* {{BlockLink|Blackstone Wall}}
+* {{BlockLink|Chest}}
+* {{BlockLink|Chiseled Polished Blackstone}}
+* {{BlockLink|Cracked Polished Blackstone Bricks}}
+* {{BlockLink|Fire}}
+* {{BlockLink|Gilded Blackstone}}
+* {{BlockLink|Glowstone}}
+* {{BlockLink|Block of Gold}}
+* {{BlockLink|Iron Chain}}
+* {{BlockLink|Lantern}}
+* {{BlockLink|Lava}}
+* {{BlockLink|Magma Block}}
+* {{BlockLink|Magma Cube Spawner|text=岩浆怪刷怪笼|link=刷怪笼}}
+* {{BlockLink|Nether Wart}}
+* {{BlockLink|Netherrack}}
+* {{BlockLink|Polished Basalt}}
+* {{BlockLink|Polished Blackstone Brick Stairs}}
+* {{BlockLink|Polished Blackstone Bricks}}
+* {{BlockLink|Quartz Block}}
+* {{BlockLink|Smooth Quartz}}
+* {{BlockLink|Smooth Quartz Slab}}
+* {{BlockLink|Soul Sand}}
+</div>
+|}
+
+<references group="n"/>
+
+在实际生成过程中，结构中的方块有概率被替换。按照游戏替换方块的顺序，各个结构依次为：{{verify|bedrock=1}}
+* 对于[[#桥|桥]]：
+** <code>bastion/bridge/starting_pieces/entrance</code>：
+*** 雕纹磨制黑石砖有50%的概率被空气替代；
+*** 金块有60%的概率被裂纹磨制黑石砖替代；
+*** 镶金黑石有50%的概率被黑石替代；
+*** 黑石有1%的概率被镶金黑石替代。
+** <code>bastion/bridge/bridge_pieces/bridge</code>：
+*** 磨制黑石砖有30%的概率被裂纹磨制黑石砖替代；
+*** 黑石有0.01%的概率被空气替代。
+** <code>bastion/bridge/walls/wall_base_0</code>、<code>bastion/bridge/ramparts/rampart_0</code>和<code>bastion/bridge/rampart_plates/plate_0</code>：
+*** 磨制黑石砖有40%的概率被裂纹磨制黑石砖替代；
+*** 黑石有1%的概率被裂纹磨制黑石砖替代；
+*** 磨制黑石砖有0.01%的概率被空气替代；
+*** 黑石有0.01%的概率被空气替代；
+*** 金块有30%的概率被裂纹磨制黑石砖替代；
+*** 镶金黑石有50%的概率被黑石替代；
+*** 黑石有1%的概率被镶金黑石替代。
+** <code>bastion/bridge/starting_pieces/entrance_face</code>、<code>bastion/bridge/legs/leg_0</code>、<code>bastion/bridge/legs/leg_1</code>、<code>bastion/bridge/connectors/back_bridge_top</code>和<code>bastion/bridge/connectors/back_bridge_bottom</code>：
+*** 磨制黑石砖有30%的概率被裂纹磨制黑石砖替代；
+*** 黑石有1%的概率被裂纹磨制黑石砖替代；
+*** 金块有30%的概率被裂纹磨制黑石砖替代；
+*** 镶金黑石有50%的概率被黑石替代；
+*** 黑石有1%的概率被镶金黑石替代。
+* 对于[[#疣猪兽棚|疣猪兽棚]]：
+** 堡垒一侧的下半段（<code>hoglin_stable/walls/*</code>）：
+*** 雕纹磨制黑石砖有50%的概率被空气替代；
+*** 金块有10%的概率被裂纹磨制黑石砖替代；
+*** 镶金黑石有50%的概率被黑石替代；
+*** 黑石有1%的概率被镶金黑石替代。
+** 除堡垒一侧的下半段外所有的结构：
+*** 磨制黑石砖有10%的概率被裂纹磨制黑石砖替代；
+*** 黑石有0.01%的概率被空气替代；
+*** 镶金黑石有50%的概率被黑石替代；
+*** 黑石有1%的概率被镶金黑石替代。
+* 对于[[#居住区|居住区]]：
+** 磨制黑石砖有30%的概率被裂纹磨制黑石砖替代；
+** 黑石有0.01%的概率被空气替代；
+** 镶金黑石有50%的概率被黑石替代；
+** 黑石有1%的概率被镶金黑石替代。
+* 对于[[#藏宝室|藏宝室]]：
+** 藏宝室的围墙（<code>bastion/treasure/walls/outer/*</code>，包括<code>bastion/treasure/walls/entrance_wall</code>）、墙的边角（<code>bastion/treasure/corners/edges/*</code>）：
+*** 磨制黑石砖有1%的概率被空气替代；
+*** 磨制黑石砖有50%的概率被裂纹磨制黑石砖替代；
+*** 磨制黑石砖有30%的概率被黑石替代；
+*** 镶金黑石有50%的概率被黑石替代。
+** 堡垒一侧的下半段（<code>bastion/treasure/ramparts/bottom_wall_0</code>）：
+*** 岩浆块有75%的概率被裂纹磨制黑石砖替代；
+*** 裂纹磨制黑石砖有15%的概率被磨制黑石砖替代；
+*** 镶金黑石有50%的概率被黑石替代；
+*** 黑石有1%的概率被镶金黑石替代。
+** 堡垒一侧的上半段（<code>bastion/treasure/ramparts/top_wall</code>）：
+*** 岩浆块有75%的概率被裂纹磨制黑石砖替代；
+*** 所有方块根据其到结构起始生成点的距离<code>d</code>以<code>(d + 5)/100</code>的概率被空气替代；
+*** 镶金黑石有50%的概率被黑石替代。
+** 藏宝室的屋顶（<code>bastion/treasure/roofs/*</code>）：
+*** 磨制黑石砖有30%的概率被裂纹磨制黑石砖替代；
+*** 磨制黑石砖有15%的概率被空气替代；
+*** 磨制黑石砖有30%的概率被黑石替代。
+** 除上述结构外所有的结构：
+*** 磨制黑石砖有35%的概率被裂纹磨制黑石砖替代；
+*** 雕纹磨制黑石砖有10%的概率被裂纹磨制黑石砖替代；
+*** 镶金黑石有50%的概率被黑石替代；
+*** 黑石有1%的概率被镶金黑石替代。
+
+方块处理是有序的，即对于同一个结构而言，前面几步的处理过程会影响后面的方块处理。
+
+== 战利品 == 
+{{see also|战利品表}}
+{{LootChest|bastion_bridge|bastion_other|bastion_treasure|bastion_hoglin_stable}}
+{{Loot notelist}}
+
+== 数据值 ==
+=== ID ===
+为了便于表示，在下面列出了各结构名称，但这些名称实际上并不显示在游戏中。
+
+{{el|je}}：
+{{ID table
+|Bastion Remnant
+|spritetype=env
+|nameid=bastion_remnant
+|foot=1
+}}
+
+{{el|be}}：
+{{ID table
+|Bastion Remnant
+|spritetype=env
+|nameid=bastionremnant<br>bastion_remnant
+|foot=1
+}}
+
+== 进度 ==
+{{load advancements|prefix=nether|find_bastion;loot_bastion}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2019年9月28日|link={{article|everything-we-announced-minecon-live-2019}}|在[[MINECON Live 2019]]上提及了堡垒遗迹。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w16a|加入了堡垒遗迹。}}
+|{{HistoryLine|||dev=20w17a|调整了堡垒遗迹战利品。
+|堡垒遗迹中的远古残骸和下界合金碎片变得更加稀有了。
+|堡垒遗迹中下界合金装备现在会被钻石装备所替换了。
+|向堡垒遗迹的战利品表添加了随机附魔的[[弩]]。
+|调整了各种物品的概率和堆叠数。
+|[[屏障]]不再会生成于熔岩湖。<ref>{{bug|MC-178797|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=20w19a|略微降低了堡垒遗迹的生成率。}}
+|{{HistoryLine|||dev=pre3|此前无法生成的{{tooltip|部分内部结构|bastion/hoglin_stable/large_stables/inner_4和bastion/hoglin_stable/large_stables/outer_4}}现在可以正常生成了。|移除了{{tooltip|部分未使用的内部结构|bastion/hoglin_stable/stairs/stairs_0_mirrored、bastion/hoglin_stable/stairs/stairs_2和bastion/hoglin_stable/stairs/stairs_3|d=preety}}。|移除了{{cd|bastion/treasure/big_air_full}}中的绿宝石块。}}
+|{{HistoryLine||1.16.2|dev=20w27a|现在堡垒遗迹会生成[[猪灵蛮兵]]。}}
+|{{HistoryLine|||dev=20w30a|再次调整了堡垒遗迹战利品。
+|堡垒遗迹内的宝箱现在更有可能生成在[[镶金黑石]]上。}}
+|{{HistoryLine||1.19.4|exp=update_1_20|dev=23w04a|向堡垒遗迹的战利品表添加了下界合金升级和猪鼻盔甲纹饰[[锻造模板]]。}}
+|{{HistoryLine||1.20|dev=23w12a|23w04a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.11|dev=25w41a|向堡垒遗迹的战利品表添加了[[钻石矛]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|加入了堡垒遗迹。}}
+|{{HistoryLine|||dev=1.16.0.59|[[岩浆怪]]刷怪笼现在会正确地生成了。
+|调整了堡垒遗迹中宝箱的战利品表。}}
+|{{HistoryLine|||dev=1.16.0.63|调整了战利品的权重和堆叠量，修改了战利品池内容和抽取机制。
+|堡垒遗迹中的下界合金装备现在被钻石装备替代。}}
+|{{HistoryLine||1.16.20|dev=1.16.20.50|现在堡垒遗迹会生成[[猪灵蛮兵]]。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.21|调整了堡垒遗迹箱子的战利品以同步{{el|je}}。}}
+|{{HistoryLine||1.19.30|dev=1.19.30.21|为堡垒遗迹加入了与{{el|je}}一致的ID<code>bastion_remnant</code>。}}
+|{{HistoryLine||1.19.80|exg=next_major_update|dev=1.19.80.21|向堡垒遗迹的战利品表添加了下界合金升级和猪鼻盔甲纹饰[[锻造模板]]。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|1.19.80.21中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.20|向堡垒遗迹的战利品表添加了[[钻石矛]]。}}
+}}
+
+== 你知道吗 ==
+* 堡垒遗迹可能会和临近的下界要塞连通，此时凋灵骷髅和猪灵之间的敌对关系将导致一场永无休止的恶斗。
+* 在[[基岩版1.16.0.59]]之前，基岩版的堡垒遗迹战利品表中包含光灵箭，但光灵箭在基岩版中并不存在。
+** 但这似乎不是因复制[[Java版]]的战利品表而出现的错误，因为当时这两个版本的战利品有很大的差别。
+[[File:abandoned jigsaw test 1.png|thumb|基岩版中的{{cd|bastion/jigsaw_test}}]]
+* 结构{{cd|bastion/hoglin_stable/starting_pieces/stairs_1_mirrored}}虽然包含mirrored（镜像）一词，但并不是像其他镜像楼梯结构一样以镜像存储的。由于[[拼图方块]]在结构中的放置，这种非镜像存储对其生成并无影响。
+[[File:abandoned jigsaw test 2.png|thumb|{{cd|bastion/jigsaw_test}}中的告示牌]]
+* {{IN|Java}}在版本[[Java版1.16-pre3|1.16-pre3]]之前曾经有多个未使用的结构文件。
+** 两种未使用的大型兽棚结构：{{cd|bastion/hoglin_stable/large_stables/inner_4|bastion/hoglin_stable/large_stables/outer_4|d=pretty}}。
+** 三种未使用的楼梯结构：{{cd|bastion/hoglin_stable/stairs/stairs_0_mirrored|bastion/hoglin_stable/stairs/stairs_2|bastion/hoglin_stable/stairs/stairs_3|d=pretty}}。这些结构在1.16-pre3中已经被移除。
+* {{IN|Bedrock}}也有多个未使用的结构文件。但与[[Java版]]不同，这些结构更加偏向技术用途。
+** 名为{{cd|bastion/units/wall_units/edge_0|bastion/treasure/ramparts/lava_basin|d=pretty}}的两个文件包含未被添加至游戏的方块，包括{{cd|blackstone_bricks|blackstone_brick_stairs|cracked_blackstone_bricks|chiseled_blackstone_bricks|d=pretty}}。
+** 测试结构文件{{cd|bastion/jigsaw_test}}包含两个橡木告示牌、数个拼图方块、染色玻璃和石头。
+
+== 画廊 ==
+<gallery>
+BuriedBastionRemnant.png|先前被掩埋的堡垒遗迹显露出来
+Bastion Remnant Bridge.png|一座“藏宝室”类型的堡垒遗迹
+NetherRuinsBridge.png|堡垒遗迹里的一座桥
+BastionAndFortress.png|堡垒遗迹和附近的下界要塞联通
+Bastion Stable in Basalt Delta.png|堡垒遗迹意外生成在了玄武岩三角洲的边界上
+EncasedBastion.png|一座几乎被下界岩包围的“居住区”类型的堡垒遗迹
+Bastion Remnant in Crimson Forest.png|一处位于绯红森林的堡垒遗迹
+</gallery>
+
+== 参见 ==
+* [[Tutorial:征服堡垒遗迹]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox world features|structures}}
+
+[[de:Bastionsruine]]
+[[en:Bastion Remnant]]
+[[es:Bastión en ruinas]]
+[[fr:Vestiges de bastion]]
+[[it:Resti di bastione]]
+[[ja:砦の遺跡]]
+[[ko:보루 잔해]]
+[[lzh:砦堡古跡]]
+[[pl:Ruiny bastionu]]
+[[pt:Bastião em Ruínas]]
+[[ru:Развалины бастиона]]
+[[uk:Залишки бастіону]]

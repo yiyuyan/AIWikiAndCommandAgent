@@ -1,0 +1,181 @@
+# 页面: 弹窗
+# 来源: https://zh.minecraft.wiki/w/%E5%BC%B9%E7%AA%97
+# 分类: Java版独有信息, UI, 基岩版独有信息, 游戏内容
+# 抓取时间: 2026-07-14 17:25:58
+# 原始 Wikitext 内容:
+
+{{For|命名为Toast的兔子|兔子#Toast兔}}
+
+'''弹窗（Toast）'''是出现在游戏画面上的{{only|java|for=右上角、左上角}}或{{only|be|for=顶部}}的临时性文本框，用于通知玩家一些事项。
+
+== 机制 ==
+=== Java版 ===
+[[File:Java Toast.png|250px|thumb|Java版的弹窗，展示了船的合成配方的解锁]]
+大部分弹窗会出现在屏幕的右上角，而音乐弹窗出现在屏幕的左上角。弹窗由图标、标题和正文组成。
+
+弹窗会在0.5秒中从右侧向左移动进入屏幕，停留5秒，然后在0.5秒中向右移动从屏幕中移出。
+
+一些效果会直接变更已经激活的弹窗。激活的弹窗被变更后，停留时间会重置；如果正在播放退出动画的弹窗被变更，退出动画会立刻被取消并开始播放进入动画；正在播放进入动画的弹窗被变更不会影响动画。
+
+弹窗的停留时间可以通过[[选项]]中的“辅助功能设置”中的“通知显示时长”来更改，设置为0.5倍到10倍之间的一个值，对应的停留时间为2.5秒到50秒；弹窗的进入和退出时间不能通过该选项更改。
+
+同一时间会出现至多5个弹窗，从上到下垂直排布。更多的弹窗会在先前的弹窗消失后才会出现。
+
+弹窗出现时和消失时都会播放音效。完成挑战型进度的弹窗出现时，还会额外播放一个独特的响亮音效。
+
+游戏中有以下的弹窗：
+* [[教学提示]]：方角的白色弹窗，带有一个进度条。
+** 教学提示弹窗会一直停留，直到对应的教学提示完成。
+* 解锁新[[配方]]：圆角的白色弹窗。
+** 解锁配方时若已经有激活的配方弹窗，则向该弹窗追加新的配方，而非产生新的弹窗。
+** 配方弹窗图标会轮播解锁的配方，大图标显示物品，左上角的小图标显示物品加工方块。轮播的循环周期是固定的，其中的配方越多，每个配方的显示时间就越短。
+* 完成[[进度]]：圆角的灰黑色弹窗。
+* 程序消息：方角的青蓝色弹窗，使用黄色的感叹号作为图标。
+** 世界备份制作完成。
+** 文本转语音选项预览。
+*** 有新消息产生时，会变更已经激活的弹窗而非生成新的弹窗。
+** 世界生成器配置加载失败。
+** [[数据包]]加载失败。
+** 游玩时长提醒（针对韩国地区玩家）。
+*** 每隔1小时显示一次。
+{{Filetr|Music toast.png|thumb|游戏菜单中的音乐弹窗}}
+* [[音乐]]：圆角的灰黑色弹窗。
+** 可通过[[选项]]中的“显示音乐弹窗”来开启。启用时，开始播放时会在屏幕左上角出现一个弹窗。在音乐播放过程中，该弹窗会也在[[游戏菜单]]的左上角始终显示。
+** 弹窗左侧的图标为三个上下跳动的音符，且音符的颜色会渐变，右侧显示音乐信息。
+
+=== 基岩版 ===
+[[File:Bedrock Toast.png|250px|thumb|基岩版的弹窗，展示了关于[[Minecraft Legends]]的直播活动]]
+弹窗会出现在屏幕的顶部。弹窗仅由单行文本组成。
+
+弹窗会从上方向下移动进入屏幕，停留一段时间，然后向上移动从屏幕中移出。
+
+弹窗的停留时间可以通过“{{tr|可访问性{{sic}}|協助工具}}”设置中的“{{tr|吐司通知持续时间{{sic}}|彈出通知持續時間}}”选项来更改，可设置为3秒、10秒或30秒，默认为10秒；弹窗的进入和退出时间不能通过该选项更改。
+
+同一时间会出现至多1个弹窗。更多的弹窗会在先前的弹窗消失后才会出现。
+
+弹窗出现时会播放音效。
+
+游戏中有以下的弹窗：
+* [[市场]]内容的推送。
+* 市场内容下载开始、完成或失败。
+* 官方直播活动预告。
+* [[世界]]、[[皮肤]]、[[资源包]]或[[行为包]]加载、导入成功或失败。
+* 游戏因低内存而减少自定义资源包显示精度的警告。
+* 好友邀请加入游戏的通知。
+* 新配方解锁。
+
+{{-}}
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=In.ogg
+|source=主音量
+|subtitle=MC-200463
+|description=常规弹窗出现
+|id=ui.toast.in
+|translationkey=-
+}}
+{{Sound table
+|sound=Out.ogg
+|source=主音量
+|subtitle=MC-200463
+|description=常规弹窗结束显示
+|id=ui.toast.out
+|translationkey=-
+}}
+{{Sound table
+|sound=Challenge complete.ogg
+|subtitle=MC-200463
+|source=主音量
+|description=挑战型[[进度]]完成
+|id=ui.toast.challenge_complete
+|translationkey=-
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Random.toast.wav
+|description=顶部弹窗出现
+|source=声音
+|id=random.toast
+|typeid=random.toast
+}}
+{{Sound table
+|sound=In.ogg
+|description=解锁配方弹窗出现
+|source=声音
+|id=random.toast_recipe_unlocking_in
+|typeid=random.toast_recipe_unlocking_in
+}}
+{{Sound table
+|bedrock=1
+|sound=Out.ogg
+|description=解锁配方弹窗结束显示
+|source=声音
+|id=random.toast_recipe_unlocking_out
+|typeid=random.toast_recipe_unlocking_out
+|foot=1
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|加入了弹窗。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=17w13a|解锁配方现在会以弹窗形式通知玩家。}}
+|{{HistoryLine|||dev=正式版|slink=none|加入了弹窗的音效。}}
+|{{HistoryLine||1.13|dev=18w06a|解锁配方的弹窗现在会在左上角顶部显示一个图标，以告诉玩家解锁的是什么类型的配方。}}
+|{{HistoryLine||1.17|dev=21w05a|加入了[[收纳袋]]的使用提示弹窗。}}
+|{{HistoryLine||1.21.2|dev=24w33a|移除了收纳袋的提示弹窗。}}
+|{{HistoryLine||1.21.5|dev=25w02a|现在使用命令{{cmd|advancement grant @s everything}}获得进度时不再显示进度弹窗。}}
+|{{HistoryLine||1.21.6|dev=25w20a|加入了音乐弹窗。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了弹窗。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.10|dev=1.20.10.21|解锁配方现在会以弹窗形式通知玩家。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.20|更改了新配方解锁弹窗的音效以匹配{{el|je}}。}}
+}}
+
+== 你知道吗 ==
+* {{in|be}}顶部弹窗音效使用了与Xbox Live通知相同的音效。
+
+== 画廊 ==
+<gallery>
+Nervous Toasts.jpg|愚人节版本[[23w13a_or_b]]中，因为玩家迟迟不按下{{key|v}}导致弹窗频繁出现
+</gallery>
+
+=== Java版 ===
+{{gallery|
+File:AdvancementMade.png|convert|进度完成弹窗
+File:GoalReached.png|convert|目标进度完成弹窗
+File:ChallengeComplete.png|convert|挑战进度完成弹窗
+File:Toast Now Playing.png|音乐播放弹窗
+File:Toast Recipe Crafting Table.png|convert|合成配方弹窗
+File:Toast Recipe Furnace.png|convert|熔炉烧炼配方弹窗
+File:Toast Recipe Blast Furnace.png|convert|高炉烧炼配方弹窗
+File:Toast Recipe Smoker.png|convert|烟熏炉烧炼配方弹窗
+File:Toast Recipe Campfire.png|convert|营火配方弹窗
+File:Toast Recipe Smithing Table.png|convert|锻造配方弹窗
+File:Toast Recipe Stonecutter.png|convert|切石机配方弹窗
+File:Toast Tutorial Movement.png|convert|教学提示弹窗，下同
+File:Toast Tutorial Find Tree.png|convert
+File:Toast Tutorial Punch Tree.png|convert
+File:Toast Tutorial Open Inventory.png|convert
+File:Toast Tutorial Craft Planks.png|convert
+File:Toast Tutorial Social Interactions.png|convert|社交屏幕提示弹窗
+File:Toast Tutorial Bundle.png|convert|收纳袋使用提示弹窗（仅1.21.2前）
+}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:UI]]
+
+[[de:Toast]]
+[[en:Toasts]]
+[[ja:トースト]]
+[[lzh:幕]]
+[[pt:Balões]]
+[[uk:Тости]]

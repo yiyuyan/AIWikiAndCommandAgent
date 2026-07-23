@@ -1,0 +1,421 @@
+# 页面: 脚手架
+# 来源: https://zh.minecraft.wiki/w/%E8%84%9A%E6%89%8B%E6%9E%B6
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 可再生资源, 基岩版独有信息, 方块, 需要信息
+# 抓取时间: 2026-07-14 17:34:46
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|group1=常规
+|1-1=Standing Scaffolding.png
+|group2=浮空
+|2-1=Floating Scaffolding.png
+|invimage=Scaffolding
+|invimage2=----
+|invimage3=Scaffolding BE
+|light=0
+}}
+{{quote|脚手架可帮助你轻松到达建筑的顶部。你走到哪就放置到哪吧！脚手架也可以帮你巧妙地避免摔落伤害，因为你精巧的身体可以依凭它们轻轻地下降，而不是单纯地从悬崖上跳下来，还指望着自己能落在一只格外柔软的苦力怕身上（顺便说一句，这根本不可能）。|[[Tom Stone]]<ref>{{article|new-year-new-builds|New Year, New Builds|January 10, 2019}}</ref>||Tom Stone Mojavatar.png}}
+
+'''脚手架（Scaffolding）'''是一种用[[竹子]]和[[线]]合成的方块，能够帮助玩家在建筑时到达高处，也能让玩家从高处安全降落而不受伤害。
+
+== 生成 ==
+脚手架不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{crafting
+|A1=Bamboo
+|A2=Bamboo
+|A3=Bamboo
+|B1=String
+|C1=Bamboo
+|C2=Bamboo
+|C3=Bamboo
+|Output=Scaffolding,6
+|type= Decoration block
+}}
+
+=== 箱子战利品 ===
+{{LootChestItem|scaffolding}}
+
+== 破坏 ==
+脚手架被挖掘时会立刻被破坏。
+
+{{Breaking table}}
+
+脚手架被破坏后会掉落自身。
+
+== 用途 ==
+脚手架可以[[含水]]。
+
+=== 延展 ===
+{{schematic
+|caption=水平延展距离示意
+|sf-$+3|sf-$+2|sf-$+1|      |-
+|      |      |sf-$+1|sf-$+0|-
+|sf-$+0|sf-$+1|sf-$+2|SB    |-
+|SB    |      |      |
+}}
+从直接放置在其他方块上的脚手架起，脚手架可以水平延展至多6格。
+
+<!-- je ScaffoldingBlock::getDistance -->
+具体而言，脚手架会计算其水平延展距离：直接放置在顶面[[方块支撑形状|支撑面完整]]的实心方块上时，延展距离为0；否则，延展距离等于正下方1格脚手架的延展距离，或水平相邻脚手架延展距离加1，取最小可能值。
+
+如延展结构变化使已放置的脚手架延展距离超过6格，该脚手架会直接破坏并掉落物品。<!--这使得玩家更容易建造临时结构。-->
+
+{{-}}
+
+=== 放置 ===
+[[File:Scaffolding building.gif|缩略图|仅通过点击底部脚手架方块的侧面而放置的一组脚手架]]
+
+与其他方块一样，脚手架可以用{{ctrl|使用}}键来放置，但其有独特的放置方式：
+
+{{in|je}}脚手架的轮廓箱不完整，玩家可以隔着脚手架与其他方块互动，但当玩家手持脚手架时，客户端中脚手架的轮廓箱将会变成一个完整方块，方便玩家点击脚手架的侧面。
+
+* 当玩家的视角不在脚手架中时，对着脚手架的顶面放置会将其放置在与玩家面向相同的等高侧面上，对着脚手架的其余部位放置会将其放置在该位置上最高的脚手架的顶部，使玩家可以在地面向更高处建造脚手架结构。
+
+* 当玩家的视角处于脚手架中时，脚手架的放置位置取决于玩家的俯角：如果玩家的俯角大于等于45度，脚手架会放置在与玩家面向相同的等高侧面上；其他情况下，脚手架会放置在该位置上最高的脚手架的顶部。
+
+* 当玩家{{ctrl|潜行}}且视角不在脚手架中时，脚手架的放置规则与其他方块相同。
+
+* 当玩家{{ctrl|潜行}}且视角处于脚手架中时，如果俯角大于45度，无法在原位置堆叠脚手架；如果仰角大于等于45度，脚手架会放置在该位置上最高的脚手架的顶部；其他情况下，脚手架会放置在与玩家面向相同的等高侧面上。
+
+{{in|be}}脚手架的轮廓箱不完整，玩家可以隔着脚手架与其他方块互动。与[[Java版]]不同，玩家{{ctrl|潜行}}不影响脚手架的放置位置。
+
+* 当玩家对着任意脚手架底部（这包括了悬空的脚手架和多个脚手架中的一个）放置，或者对着支撑脚手架的方块顶面放置，又或者对着与脚手架相邻的方块放置时，不论视角如何，都会将脚手架放置在该位置上最高的脚手架的顶部。其他情况下有通用的放置规则：
+
+:* 当玩家的视角不在脚手架中时，脚手架的放置规则与其他方块相同。
+
+:* 当玩家的视角处于脚手架中时，如果选中了脚手架的轮廓箱，脚手架会放置在该位置上最高的脚手架的顶部或相邻侧面。{{Info needed|何时会放到侧面}}
+
+沿侧面放置的脚手架最多延伸6格，否则会变成[[下落的方块]]。参见{{slink||下落的方块}}。
+
+{{in|java}}脚手架可以放置在熔岩里。自身不会被熔岩引燃，但是会被[[火]]烧毁。
+
+{{in|bedrock}}脚手架不能放置在熔岩中。如果脚手架旁边有熔岩或火，脚手架会被立即破坏。如果脚手架下落到熔岩或火中，它也会被立即破坏。
+
+=== 下落的方块 ===
+[[File:ScaffoldingHowToPlayFile.png|缩略图|游戏指南中的脚手架，图中演示了它最多只能向外延伸6格的特性]]
+{{main|下落的方块}}
+<!-- je ScaffoldingBlock::tick-->
+如脚手架在放置时计算得到的延展距离即达到7格，该脚手架会在下一游戏刻变成[[下落的方块]]。
+
+=== 碰撞判定 ===
+生物在脚手架顶部时，脚手架的[[碰撞箱]]只有顶面；生物在脚手架内部时，脚手架的碰撞箱只有底面；生物在脚手架下时，脚手架会忽略自身的碰撞箱。{{in|je}}依附在其他脚手架上的悬空脚手架的底面也有碰撞判定。
+
+{{in|java}}如果脚手架下方的方块可生成生物，体积较小的生物（如鸡）可以在脚手架方块的空间内生成。
+
+{{in|bedrock}}如果脚手架下方的方块可生成生物，生物可以在脚手架方块的空间内生成。
+
+=== 移动 ===
+[[玩家]]可以在脚手架中按住{{control|跳跃}}键向上移动或按住{{control|潜行}}键向下移动。当玩家在脚手架中上下移动时，脚手架的碰撞判定会如前一节所示变化。
+
+脚手架可以重置[[潜行]]状态玩家的下落距离，即可用于减免摔落伤害。在脚手架中上下移动时，所有生物和玩家的速度都会减慢。
+
+=== 红石元件 ===
+{{exclusive|je|section=1}}
+脚手架底部与[[判定箱#方块支撑形状|可支撑方块]]的连接状态发生变化（如开关[[活板门]]）会导致1[[游戏刻]]后自身方块属性<code>distance</code>和<code>bottom</code>改变。
+
+在水平距离6格内，改变脚手架底部与可支撑方块的连接状态会导致其自身方块状态被改变，进而导致范围内其他的脚手架在收到[[方块更新#PP更新|PP更新]]后1游戏刻改变自身方块属性<code>bottom</code>。
+
+朝向脚手架的[[侦测器]]能侦测到上述变化，并在2游戏刻后输出一个持续2游戏刻的脉冲。因此脚手架可以用于水平方向或自下而上传输红石信号。
+
+=== 燃料 ===
+脚手架可以用作[[熔炉]]、[[高炉]]或[[烟熏炉]]的燃料，每个脚手架可以[[烧炼]]0.25个物品。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Scaffolding step1.ogg
+|sound2=Scaffolding step2.ogg
+|sound3=Scaffolding step3.ogg
+|sound4=Scaffolding step4.ogg
+|sound5=Scaffolding step5.ogg
+|sound6=Scaffolding step6.ogg
+|sound7=Scaffolding step7.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source={{tp|soundCategory.block}}
+|description=挖掘方块
+|id=block.scaffolding.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Scaffolding step1.ogg
+|sound2=Scaffolding step2.ogg
+|sound3=Scaffolding step3.ogg
+|sound4=Scaffolding step4.ogg
+|sound5=Scaffolding step5.ogg
+|sound6=Scaffolding step6.ogg
+|sound7=Scaffolding step7.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.scaffolding.fall
+|translationkey=subtitles.block.generic.fall
+}}
+{{Sound table
+|sound=Scaffolding place1.ogg
+|sound2=Scaffolding place2.ogg
+|sound3=Scaffolding place3.ogg
+|sound4=Scaffolding place4.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source={{tp|soundCategory.block}}
+|description=破坏方块
+|id=block.scaffolding.break
+|translationkey=subtitles.block.generic.break}}
+{{Sound table
+|sound=Scaffolding place1.ogg
+|sound2=Scaffolding place2.ogg
+|sound3=Scaffolding place3.ogg
+|sound4=Scaffolding place4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source={{tp|soundCategory.block}}
+|description=放置方块
+|id=block.scaffolding.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Scaffolding step1.ogg
+|sound2=Scaffolding step2.ogg
+|sound3=Scaffolding step3.ogg
+|sound4=Scaffolding step4.ogg
+|sound5=Scaffolding step5.ogg
+|sound6=Scaffolding step6.ogg
+|sound7=Scaffolding step7.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.scaffolding.step
+|translationkey=subtitles.block.generic.footsteps
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=block.scaffold.place1.wav
+|sound2=block.scaffold.place2.wav
+|sound3=block.scaffold.place3.wav
+|sound4=block.scaffold.place4.wav
+|source=方块
+|description=方块作为物品使用时发出的音效
+|id=block.scaffolding.place
+|typeid=item.use.on
+|soundvolume=0.9
+|soundpitch=0.8
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=block.scaffold.place1.wav
+|sound2=block.scaffold.place2.wav
+|sound3=block.scaffold.place3.wav
+|sound4=block.scaffold.place4.wav
+|source=方块
+|description=破坏方块
+|id=block.scaffolding.break
+|typeid=break
+|soundvolume=0.8
+|soundpitch=1.12-1.4
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=step.scaffold1.wav
+|sound2=step.scaffold2.wav
+|sound3=step.scaffold3.wav
+|sound4=step.scaffold4.wav
+|sound5=step.scaffold5.wav
+|sound6=step.scaffold6.wav
+|sound7=step.scaffold7.wav
+|source=方块
+|description=挖掘方块
+|id=block.scaffolding.hit
+|typeid=hit
+|soundvolume=0.25
+|soundpitch=0.5
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=block.scaffold.place1.wav
+|sound2=block.scaffold.place2.wav
+|sound3=block.scaffold.place3.wav
+|sound4=block.scaffold.place4.wav
+|source=方块
+|description=放置方块
+|id=block.scaffolding.place
+|typeid=place
+|soundvolume=0.9
+|soundpitch=0.8-0.9
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=step.scaffold1.wav
+|sound2=step.scaffold2.wav
+|sound3=step.scaffold3.wav
+|sound4=step.scaffold4.wav
+|sound5=step.scaffold5.wav
+|sound6=step.scaffold6.wav
+|sound7=step.scaffold7.wav
+|source=方块
+|description=带有摔落伤害时摔落在方块上
+|id=block.scaffolding.fall
+|typeid=fall
+|soundvolume=0.4
+|soundpitch
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=step.scaffold1.wav
+|sound2=step.scaffold2.wav
+|sound3=step.scaffold3.wav
+|sound4=step.scaffold4.wav
+|sound5=step.scaffold5.wav
+|sound6=step.scaffold6.wav
+|sound7=step.scaffold7.wav
+|source=方块
+|description=在方块上行走
+|id=block.scaffolding.step
+|typeid=step
+|soundvolume=0.3
+|soundpitch
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=jump.wood1.wav
+|sound2=jump.wood2.wav
+|sound3=jump.wood3.wav
+|sound4=jump.wood4.wav
+|source=方块
+|description=在方块上跳跃
+|id=jump.wood
+|typeid=jump
+|soundvolume=0.15
+|soundpitch
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=step.scaffold1.wav
+|sound2=step.scaffold2.wav
+|sound3=step.scaffold3.wav
+|sound4=step.scaffold4.wav
+|sound5=step.scaffold5.wav
+|sound6=step.scaffold6.wav
+|sound7=step.scaffold7.wav
+|source=方块
+|description=在方块上着陆
+|id=block.scaffolding.fall
+|typeid=land
+|soundvolume=0.2
+|soundpitch
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Scaffolding
+|spritetype=block
+|nameid=scaffolding
+|showblocktags=je
+|blocktags={{GameTag|blocks|scaffolding}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Scaffolding
+|spritetype=block
+|nameid=scaffolding
+|showblocktags=be
+|blocktags={{GameTagBE|block|scaffolding}}
+|foot=1
+}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+== 成就 ==
+{{load achievements|top-of-the-world}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2018年9月29日|link={{ytl|HoMDyRqMNMA|t=19m54s}}|脚手架在[[MINECON Earth 2018]]宣布。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w45a|[[File:Standing Scaffolding JE1.png|32px]] [[File:Floating Scaffolding JE1.png|32px]] 加入了脚手架。}}
+|{{HistoryLine|||dev=18w46a|脚手架可向外延伸格数由4格改为6格。
+|每个脚手架可烧炼0.25个物品。}}
+|{{HistoryLine|||dev=19w03a|从底部建造时，脚手架现在可以正常替换上方的[[水]]和[[藤蔓]]。<ref>{{bug|MC-139018|||Fixed}}</ref><ref>{{bug|MC-141080|||Fixed}}</ref>
+|[[File:Floating Scaffolding JE2.png|32px]] 更改了悬空的脚手架的模型。}}
+|{{HistoryLine|||dev=19w04a|现在脚手架拥有了地图基色{{color|#F7E9A3}}。<ref>{{bug|MC-142231|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=19w05a|脚手架现在可以被瞬间破坏。}}
+|{{HistoryLine|||dev=19w11a|现在含水的脚手架可以攀爬。<ref>{{bug|MC-133188|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=19w12a|[[File:Standing Scaffolding JE2.png|32px]] [[File:Floating Scaffolding JE3.png|32px]] 略微更改了脚手架的纹理。<ref>{{bug|MC-140409|||Fixed}}</ref>}}
+|{{HistoryLine||1.15|dev=pre1|作为燃料时，脚手架现在可以[[烧炼]]2个[[物品]]，而不是0.25个。}}
+|{{HistoryLine||1.19|dev=22w11a|现在每个脚手架只能烧炼0.25个物品。}}
+|{{HistoryLine||1.19.3|dev=22w42a|生物不再会在脚手架上生成。<ref>{{bug|MC-150488|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=22w45a|[[File:Standing Scaffolding JE3.png|32px]] [[File:Floating Scaffolding JE4.png|32px]] 更改了脚手架的纹理，以与新的竹质方块相匹配。}}
+|{{HistoryLine||1.20.3|dev=23w45a|exp=update_1_21|脚手架现在可以在[[试炼密室]]的战利品箱中获得。}}
+|{{HistoryLine||1.21|dev=24w18a|23w45a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|[[File:Standing Scaffolding BE1.png|32px]] [[File:Floating Scaffolding BE1.png|32px]] 加入了脚手架。}}
+|{{HistoryLine|||dev=1.8.0.10|[[File:Standing Scaffolding BE2.png|32px]] [[File:Floating Scaffolding BE2.png|32px]] 脚手架现在具有3D的网孔。<ref>{{bug|MCPE-38057|||Fixed}}</ref>
+|为脚手架加入了音效。
+|加入了脚手架的菜单游戏指南。
+|脚手架现在会被[[熔岩]]点燃。}}
+|{{HistoryLine|||dev=1.8.0.11|修复了脚手架在触屏设备上时的飞行控制。}}
+|{{HistoryLine||1.9.0|dev=1.9.0.2|[[File:Standing Scaffolding BE3.png|32px]] [[File:Floating Scaffolding BE3.png|32px]] 更改了脚手架的模型和纹理，以近似匹配{{el|je}}。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.4|脚手架可向外延伸格数由4格改为6格。}}
+|{{HistoryLine||1.17.30|dev=1.17.30.23|现在坠入脚手架内不会再造成摔落伤害。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.22|现在每个脚手架只能烧炼0.25个物品，以匹配{{el|je}}。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.20|[[File:Standing Scaffolding BE4.png|32px]] [[File:Floating Scaffolding BE4.png|32px]] 更改了脚手架的纹理，以与新的竹质方块相匹配。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|脚手架的硬度由0.6改为0，此前，脚手架的合适挖掘工具是斧。
+|脚手架的爆炸抗性由0.9改为0。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.20|exg=updateAnnouncedLive2023|脚手架现在可以在[[试炼密室]]的战利品箱中获得。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|1.20.60.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.20|[[File:Standing Scaffolding BE5.png|32px]] [[File:Floating Scaffolding BE5.png|32px]] 脚手架不再具有3D的网孔。<ref>{{bug|MCPE-120910|||Fixed}}</ref>}}
+|{{HistoryLine|ps4}}
+|{{HistoryLine||1.83|[[File:Standing Scaffolding BE2.png|32px]] [[File:Floating Scaffolding BE2.png|32px]] 加入了脚手架。}}
+|{{HistoryLine||1.91|脚手架可向外延伸格数由4格改为6格。}}
+}}
+
+== 画廊 ==
+<gallery>
+Scaffolding BE beta.jpg|脚手架发布的第一张图片
+Scaffolding Breaking.gif|当底部的方块被破坏时，其上方的脚手架会被全部破坏
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks}}
+
+[[de:Gerüst]]
+[[en:Scaffolding]]
+[[es:Andamio]]
+[[fr:Échafaudage]]
+[[it:Impalcatura]]
+[[ja:足場]]
+[[ko:비계]]
+[[nl:Steiger]]
+[[pl:Rusztowanie]]
+[[pt:Andaime]]
+[[ru:Строительные леса]]
+[[th:นั่งร้าน]]
+[[uk:Риштування]]

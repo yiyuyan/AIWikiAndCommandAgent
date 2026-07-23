@@ -1,0 +1,253 @@
+# 页面: 投掷器
+# 来源: https://zh.minecraft.wiki/w/%E6%8A%95%E6%8E%B7%E5%99%A8
+# 分类: Java版独有信息, 使用简单计算器的页面, 储物, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 方块, 红石
+# 抓取时间: 2026-07-14 17:26:27
+# 原始 Wikitext 内容:
+
+{{about|投掷物品的方块|与其纹理相似而能够发射和激活物品的方块|发射器}}{{Infobox block
+|image=Dropper.png
+|invimage=Dropper
+|light=0
+}}
+'''投掷器（Dropper）'''是一种可以丢出[[物品]]，或将物品转移到另外一个[[容器]]中的[[方块]]。
+
+== 生成 ==
+投掷器不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Cobblestone |B1= Cobblestone |C1= Cobblestone
+|A2= Cobblestone |B2=             |C2= Cobblestone
+|A3= Cobblestone |B3= Redstone Dust    |C3= Cobblestone
+|Output= Dropper
+|type= Redstone
+}}
+
+== 破坏 ==
+挖掘投掷器的合适工具是镐。投掷器需要木镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+投掷器被破坏后会掉落自身。
+
+== 用途 ==
+投掷器可以作为储存物品的容器，或用作转移物品的[[红石元件]]。
+
+若要放置投掷器，应对着方块表面{{ctrl|放置方块}}。投掷器可朝向任何一个方向，包括上方和下方。投掷器在被放置时面向玩家。
+
+[[水]]和[[熔岩]]流会绕开投掷器。
+
+{{in|je}}投掷器不能被活塞移动。
+
+=== 容器 ===
+投掷器有9个物品槽位。对投掷器按下{{ctrl|使用}}可打开投掷器的界面。
+
+[[红石比较器]]可检测投掷器存储物品的占空比。
+
+投掷器界面的标题默认为“投掷器”，可以在放置前使用[[铁砧]]重命名来进行更改，{{in|je}}也可以通过使用{{cmd|data}}命令修改投掷器的<code>CustomName</code>标签进行更改（例如，要将坐标(0,64,0)处的投掷器命名为“我的投掷器”，可以使用命令{{cmd|data merge block 0 64 0 {CustomName:"\"我的投掷器\""} }}）。
+
+{{in|je}}投掷器可以被<code>lock</code>标签上锁。若投掷器的该标签不是空白的，那么这个投掷器必须使用符合该标签表示的物品谓词的物品打开。
+
+=== 红石元件 ===
+{{see also|红石电路}}
+投掷器可以丢出物品，或将物品转移到另外一个[[容器]]中。
+
+'''激活'''
+
+投掷器是[[红石元件#机械元件|机械元件]]，可被下列形式激活：
+* 毗邻的开启的'''[[红石元件#电源|电源]]'''（例外：[[红石火把]]不会激活其所附着的投掷器，[[侦测器]]只会激活指向的投掷器）。
+* 毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻的指向投掷器且激活的[[红石中继器]]、[[红石比较器]]或[[红石粉]]（包括投掷器上方的红石粉）；毗邻但未指向投掷器的红石粉不会激活投掷器。
+
+{{in|je}}投掷器还能通过[[半连接性]]激活。若上述途径对于投掷器正上方的方块（种类不限，包括[[空气]]方块或非红石导体）成立，投掷器会在收到方块更新（狭义）时被激活。
+
+{{in|be}}在同一红石刻内，电容器更新阶段前存在，但在电容器更新阶段被取消的信号无法激活投掷器。
+
+'''行为'''
+
+被激活后，投掷器会产生1个计划刻，在延时2红石刻（4游戏刻，0.2秒）后投掷一个物品。在这4游戏刻内，投掷器不会响应其他红石信号。
+
+投掷器只在激活信号到达（[[红石电路#信号与脉冲|上升沿]]）时投掷物品，保持激活时不会连续投掷物品。若要连续投掷物品，需用[[时钟电路]]反复激活投掷器。
+
+若投掷器储存空间的多个槽位被物品占据，则会投掷随机一个槽位中的物品。随机选择的过程在投掷时完成，而非投掷器被激活时；在这个短暂的间隔内，玩家可以移进移出投掷器中的物品。
+
+若投掷器直接面向一个容器，则被投掷的物品会直接存放到容器中，若该容器已满，则物品会留在投掷器内；若投掷器未面向容器，那么投掷的物品会从投掷器正面向外掷出，与玩家使用{{ctrl|丢弃物品}}键效果相同。
+
+当投掷器投掷物品时，它会发出清脆的响声。若激活时投掷器里面为空，则清脆响声的音调稍高。投掷器的音效最远可在16格外听到。投掷器向容器传递物品时不发出响声。
+
+投掷器是[[红石导体]]，因此可以充能投掷器，被充能的投掷器也能作为充能方块激活毗邻的其他元件。
+
+=== 合成材料 ===
+{{Crafting usage|Dropper}}
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Click.ogg
+|subtitle={{tp|subtitles.block.dispenser.dispense}}<ref group="音效" name="StupidSubtitles">投掷器重复使用发射器的音效事件而不是独立的音效事件。参见{{bug|MC-98316}}。</ref>
+|source={{tp|soundCategory.block}}
+|description=投掷器投掷物品
+|id=block.dispenser.dispense
+|iddesc=<ref group="音效" name="StupidSubtitles"/>
+|translationkey=subtitles.block.dispenser.dispense
+|translationkeydesc=<ref group="音效" name="StupidSubtitles"/>
+|volume=1.0
+|pitch=1.0
+|distance=16}}
+{{Sound table
+|sound=Click pitch1.2.ogg
+|subtitle={{tp|subtitles.block.dispenser.fail}}<ref group="音效" name="StupidSubtitles"/>
+|source={{tp|soundCategory.block}}
+|description=投掷器投掷失败
+|id=block.dispenser.fail
+|iddesc=<ref group="音效" name="StupidSubtitles"/>
+|translationkey=subtitles.block.dispenser.fail
+|translationkeydesc=<ref group="音效" name="StupidSubtitles"/>
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=Click.ogg
+|source=方块
+|description=投掷器投掷物品
+|id=random.click
+|typeid=power.on
+|soundvolume=0.2
+|soundpitch=1.0
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Click pitch1.2.ogg
+|source=方块
+|description=投掷器投掷失败
+|id=random.click
+|typeid=power.off
+|soundvolume=0.2
+|soundpitch=1.2
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+[[Java版]]：
+{{ID table|generatetranslationkeys=java
+|Dropper
+|showblocktags=je
+|blocktags={{GameTag|block|dropper}}
+|spritetype=block|nameid=dropper|foot=1}}
+{{ID table|Dropper|displayname=方块实体|spritetype=block|nameid=dropper|foot=1}}
+
+[[基岩版]]：
+{{ID table|generatetranslationkeys=bedrock
+|Dropper|spritetype=block|nameid=dropper|foot=1}}
+{{ID table|Dropper|displayname=方块实体|spritetype=block|nameid=Dropper|foot=1}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+在基岩版中，投掷器的方块数据定义其朝向及激活状态：
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+投掷器的方块实体包含了投掷器的更多数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 视频 ==
+{{bv|BV1r4411B7iP}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w03a|[[File:Dropper Revision 1.png|32px]] 加入了投掷器。{{pipe escape|
+{|class{{=}}"wikitable collapsible collapsed"
+! 合成配方
+|-
+|{{crafting Table
+|A1=Cobblestone|B1=Cobblestone|C1=Cobblestone
+|A2=Cobblestone|B2=Hopper|C2=Cobblestone
+|A3=Cobblestone|B3=Redstone Dust|C3=Cobblestone
+|Output=Dropper
+}}
+|}
+}}
+}}
+|{{HistoryLine|||dev=13w04a|[[File:Dropper (U) Revision 1.png|32px]] 投掷器可以面向6个不同方向。
+|移除了合成配方中的[[漏斗]]。}}
+|{{HistoryLine|||dev=13w10b|已激活的投掷器在接收到方块更新后不会再投掷物品。}}
+|{{HistoryLine||1.8|dev=14w02a|投掷器现在可以具有方块实体数据{{nbt|string|Lock}}，用于锁定投掷器。若存在该标签，该投掷器只能用自定义名称与该标签相同的物品打开。}}
+|{{HistoryLine||1.9.1|dev=pre1|现在可使用[[战利品表]]。}}
+|{{HistoryLine||1.13|dev=17w47a|
+在[[扁平化]]之前，该方块的数字ID为158。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Dropper.png|32px]][[File:Dropper (U).png|32px]] 更改了投掷器的纹理。}}
+|{{HistoryLine||1.20.3|dev=23w42a|exp=update_1_21|现在投掷器可用于合成[[合成器]]。}}
+|{{HistoryLine||1.21|dev=24w18a|23w42a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|dev=24w39a|将方块实体数据{{nbt|string|Lock}}重命名为{{nbt|compound|lock}}，并支持物品谓词。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.14.0|dev=build 1|[[File:Dropper Revision 1.png|32px]][[File:Dropper (U) Revision 1.png|32px]] 加入了投掷器。}}
+|{{HistoryLine||0.15.0|dev=build 1|投掷器现在可以被活塞推动。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Dropper.png|32px]][[File:Dropper (U).png|32px]] 更改了投掷器的纹理。}}
+|{{HistoryLine||1.20.50|dev=1.20.50.21|exg=updateAnnouncedLive2023|现在投掷器可用于合成[[合成器]]。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|1.20.50.21中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.24|现在投掷器只会在使用镐挖掘时掉落。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.27|现在投掷器不再能同时拥有多个计划刻。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.22|回退了1.21.60.27中的变更。<ref>{{bug|MCPE-189895|||Fixed}}</ref>}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|[[File:Dropper Revision 1.png|32px]] [[File:Dropper (U) Revision 1.png|32px]] 加入了投掷器。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Dropper.png|32px]][[File:Dropper (U).png|32px]] 更改了投掷器的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Dropper Revision 1.png|32px]] [[File:Dropper (U) Revision 1.png|32px]] 加入了投掷器。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:DropperPlacement.png|投掷器可朝向上方和下方，以及朝向侧面的各个方向
+File:1st image of new Dispenser slash dropper Placement.png|[[Dinnerbone]][{{tweet|Dinnerbone|293667947434631168}} 发布]的第一张投掷器图片（下方）
+File:13w03a.png|在快照13w03a宣传图中可以看到一个投掷器和[[漏斗矿车]]
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 参见 ==
+* {{slink|教程:物品运输|投掷器}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:储物]]
+
+[[de:Spender]]
+[[en:Dropper]]
+[[es:Soltador]]
+[[fr:Dropper]]
+[[it:Gettatore]]
+[[ja:ドロッパー]]
+[[ko:공급기]]
+[[nl:Dropper]]
+[[pl:Podajnik]]
+[[pt:Liberador]]
+[[ru:Выбрасыватель]]
+[[uk:Викидач]]

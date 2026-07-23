@@ -1,0 +1,118 @@
+# 页面: Java版1.9.1
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.9.1
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:58
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|会话ID|Session ID}}
+{{Infobox version
+|title=1.9.1
+|image=1.9.1.png
+|image2=Java Edition 1.9.1 Simplified.png\Java Edition 1.9.1 Traditional.png
+|edition=Java
+|date=2016年3月30日
+|jsonhash=a7c5c055718d8e7d709f3f2338b4e8f1125b5aae
+|clienthash=9bc7f02323d90b9385c1a5dbd47fb144a3fb8835
+|serverhash=bf95d9118d9b4b827f524c878efd275125b56181
+|prevparent=1.9
+|prev=
+|next=1.9.2
+|nextparent=1.10
+}}
+
+'''1.9.1'''是{{el|je}}的一次次要更新，发布于2016年3月30日<ref>{{cite|url=http://mojang.com/2016/03/minecraft-191/|archive-url=1|archive=1|title=Minecraft 1.9.2|author=Searge|website=Mojang.com|date=Mar 30, 2016}}</ref>，加入了鞘翅的音效以及盔甲的属性，并修复了连接错误和一些其他漏洞<ref>{{tweet|SeargeDP|715191753595232257}}</ref><ref>{{tweet|SeargeDP|707609845688569857|Elytras have sounds? Well, in 1.9.1 pre-release 1 they do. Read about that (and more) at http://mojang.com/2016/03/minecr …|Mar 9, 2016}}</ref>。由于该版本在多人游戏上有一个灾难性的漏洞，1.9.2在1.9.1发布的当天发布。此版本不兼容1.9的服务端。
+
+== 新内容 ==
+=== 物品 ===
+'''[[鞘翅]]'''
+* 加入了使用[[鞘翅]]飞行时的音效。
+** 声音事件<code>item.elytra.flying</code>。
+
+'''[[盔甲]]'''
+* 加入了盔甲属性：盔甲韧性<code>generic.armorToughness</code>，计算公式为：
+** <math>totalDamage=damage\times(1-\frac{max(\frac{defensePoints}{5},defensePoints-\frac{damage}{2+\frac{toughness}{4}})}{25})</math>
+*** 其中，<math>totalDamage</math>为总伤害值；<math>damage</math>为伤害值；<math>defensePoints</math>为护甲值；<math>toughness</math>为盔甲韧性。
+** 增加盔甲韧性意味着被强力攻击时更少的护甲值会被忽视。
+** 钻石甲有两点盔甲韧性，其他的盔甲均为0点盔甲韧性。一整套钻石甲会给予8点盔甲韧性。
+
+== 更改 ==
+=== 方块 ===
+'''[[发射器]]'''
+* 把每游戏刻执行事件的次数限制从1000提高到了65536。
+* [[丛林神庙]]里装着弓箭的发射器现在也以战利品表的形式工作。
+
+'''[[漏斗]]'''
+* [[漏斗]]现在可以从上方被遮挡的箱子里取出东西。
+
+=== 物品 ===
+'''[[盾牌]]'''
+* 现在盾牌在受到较弱攻击（{{hp|3}}以下伤害）时不会减少[[耐久度]]。
+
+=== 生物 ===
+'''常规'''
+* 改进了AI。
+
+'''[[骷髅]]'''
+* [[骷髅]]在简单和普通难度射击速度没有那么快了。
+
+=== 非生物实体 ===
+'''[[运输矿车]]和[[漏斗矿车]]'''
+* 物品栏名称和物品对应。
+
+=== 命令格式 ===
+'''[[目标选择器]]'''
+* 实体[[命令|选择器]] <code>c</code> (数量) 现在使用真正的坐标计算, 不再基于整数坐标<ref>{{bug|MC-96927|||Fixed}}</ref>。
+
+=== 游戏内容 ===
+'''战斗'''
+* [[伤害|攻击指示器]]（指针）现在默认开启{{fn|已经玩过1.9之前版本的玩家仍然需要手动开启指针选项（或删除{{filename|[[options.txt]]}}以重置为默认值）。}}。
+* 如果武器没有打中的话不再会进入冷却时间。
+
+=== 常规 ===
+'''[[战利品表]]'''
+* 现在也可以在[[发射器]]和[[投掷器]]上工作。
+
+'''会话ID'''
+* 会话ID不再由游戏显示到日志信息和启动器<ref>{{bug|MCL-4420||会话ID在启动器中显示为{{cd|<censored>}}，但已正确写入日志文件。|WAI}}</ref>。
+
+== 修复 ==
+{{fixes|fixedin=1.9.1,1.9.1 Pre-Release 3,1.9.1 Pre-Release 2,1.9.1 Pre-Release 1|prefix=Minecraft|showdesc=1
+|;1.9前正式版的漏洞
+|7961|箱子不能开启时，不能用漏斗向其中添加物品，也不能从其中取出物品。
+|56162|{{cmd|worldborder damage amount 0|link=none}}命令不起效果。
+|95352|空间目标参数<code>c</code>、<code>dx</code>、<code>dy</code>和<code>dz</code>的行为异常且不一致。
+|;1.9的漏洞
+|90257|命令方块链可能需要1刻以上的时间来完全执行。
+|93074|无法为“召唤的箭头”分配记分板值（太多的箭与光灵键导致命令执行失败）。
+|96219|可以使用活塞复制方块（幽灵方块）。
+|96927|选择器中的<code>C{{=}}</code>指向的是不准确的实体位置。
+|98327|鞘翅纹理有透明度问题。
+|98461|一些语言（至少有弗里斯兰语、塔罗萨语、利普里安语、逻辑语和LOLCAT语）无法被选择，<code>Eesti (Eesti)</code>被显示为<code>Inglise (US)</code>。
+|98587|有时命令方块的逻辑会随意地失败。
+|99060|鞘翅有发光效果时，一直显示为黑色。
+|99697|漏斗矿车和运输矿车名字有误，被写作<code>container.minecart</code>。
+|;dev
+|99396|缺少玩家的攻击动画。
+|;other
+|1.|修复了游戏引擎尝试错误地随机生成不存在的生物的漏洞。<ref name="fixref1">"Paper patch 0078" – https://github.com/starlis/Paper/blob/b2dd99e74e91fbe5f7c28fe29faa58b7162c1aa6/Spigot-Server-Patches/0078-Optimize-Navigation-Listener.patch</ref><ref name="fixref2">{{cite|url=http://mojang.com/2016/03/minecraft-191-pre-release-1/|archive-url=1|archive=1|title=Minecraft 1.9.1 Pre-Release 3|author=Searge|website=Mojang.com|date=Mar 9, 2016}}</ref>。
+|2.|修复了寻路代码导致崩溃的漏洞（并发修改异常）。<ref name="fixref2"/>。
+|3.|修复了另一个寻路代码导致崩溃的漏洞（空指针异常）。<ref name="fixref2"/>
+}}
+
+== 注释 ==
+{{Fnlist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:1.9.1]]
+[[en:Java Edition 1.9.1]]
+[[es:Java Edition 1.9.1]]
+[[fr:Édition Java 1.9.1]]
+[[ja:Java Edition 1.9.1]]
+[[pl:1.9.1]]
+[[pt:Edição Java 1.9.1]]
+[[ru:1.9.1 (Java Edition)]]

@@ -1,0 +1,246 @@
+# 页面: Java版17w47a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8817w47a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:20
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=17w47a
+|image=17w47a.gif
+|image2=Java Edition 17w47a Simplified.png\Java Edition 17w47a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2017年11月22日
+|jsonhash=602e8ef598d492f707621954685e029434f27ede
+|clienthash=4485b04ad6358eef525aeeb246fe2b6b23d232ee
+|serverhash=0cec7f11d7bf9c36464b1815e5bbcb0afe6db019
+|parent=1.13
+|prevparent=1.12.2
+|prev=17w46a
+|next=17w47b
+|nextparent=1.13.1
+}}<onlyinclude>
+
+'''17w47a'''是[[Java版1.13]]的第6个快照，发布于2017年11月22日<ref>{{snap|17w47a|November 22, 2017}}</ref>，进行了[[扁平化]]，加入了许多木质方块的另外5种变种，以及平滑方块、调试棒、蘑菇柄和新的选项，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[活板门]]、[[按钮]]和[[压力板]]'''
+* 加入了全部木材的6种变种。
+
+'''[[南瓜]]'''
+* 没有脸图案的南瓜。此前的南瓜改名为“[[雕刻南瓜]]”。
+** 手持[[剪刀]]对南瓜{{ctrl|使用}}会将其变为雕刻南瓜，并掉落4份[[南瓜种子]]。
+
+'''[[树皮]]'''
+* 从[[原木]]中被拆分出来。
+* 加入了全部6种[[树皮]]方块的物品形式。
+
+'''[[台阶]]'''
+* 加入了石化橡木台阶（纹理为橡木台阶的石台阶）及其物品形式。
+
+'''[[方块|平滑方块]]'''
+* 加入平滑石英块、平滑砂岩、平滑红砂岩与平滑石头的物品形式。
+
+'''[[蘑菇方块]]'''
+* 加入红色与棕色[[蘑菇方块]]和蘑菇柄的物品形式。
+
+=== 物品 ===
+'''[[调试棒]]'''
+* 用于切换不同的方块状态。
+** 左键点击在方块变种间切换；右键点击在不同值间切换。
+** 只能通过[[命令]]获得。
+
+=== 常规 ===
+'''[[选项]]'''
+* 编辑世界时可保存备份，打开备份文件夹的选项。
+* 在聊天设置中切换自动命令提示的选项（默认为开，点击关闭）。
+
+== 更改 ==
+=== 方块 ===
+* 曾无底部纹理的方块现在有了底部纹理。（例如中继器、比较器、火把等）
+* 拉动[[拉杆]]现在显示红石粒子。
+* [[床]]现在要求底部有支撑方块。曾经这一要求仅在放置时有，支撑方块可以在之后移除而床不会掉落。
+* [[箱子]]与[[陷阱箱]]现在可以直接在它们的大号变种旁放置而不用分隔方块。
+** 手持箱子或陷阱箱按住{{key|Shift}}并鼠标右键点击箱子或陷阱箱不会形成大号的变种。
+* 放置[[雕刻南瓜]]与[[栅栏门]]不再需要下方有支撑方块。
+* 蠹虫的怪物蛋方块现在可以立即破坏，而无关工具。
+* 现在[[发射器]]被放置时朝向玩家朝向的反方向。
+* [[绊线]]破坏立即引起[[绊线钩]]的{{Cd|attached}}状态变化时，绊线的位置不论是否被方块占据，均重新生成绊线。此前此处仅在被空气以外的方块（一般是[[液体]]）占据时生成绊线。
+
+=== 物品 ===
+'''[[烟花火箭]]'''
+* 现在渐变效果可以通过将[[烟火之星]]与[[染料]]共同合成获得。
+
+=== 命令格式 ===
+'''{{cmd|blockdata}}'''
+* 已移除，以对应{{cmd|data}}。
+
+'''{{cmd|particle}}'''
+<div class="collapsible collapsed" style="width:13em;">
+* 粒子名称修改：
+<div class="collapsible-content" style="width:404px;">
+* <code>-{}-旧名称</code> → <code>-{}-现名称</code>
+** <code>mobspellambient</code> → <code>ambient_entity_effect</code>
+** <code>angryvillager</code> → <code>angry_villager</code>
+** <code>blockdust, blockcrack</code> → <code>block</code>
+** <code>damageindicator</code> → <code>damage_indicator</code>
+** <code>dragonbreath</code> → <code>dragon_breath</code>
+** <code>driplava</code> → <code>dripping_lava</code>
+** <code>dripwater</code> → <code>dripping_water</code>
+** <code>reddust</code> → <code>dust</code>
+** <code>spell</code> → <code>effect</code>
+** <code>mobappearance</code> → <code>elder_guardian</code>
+** <code>enchantmenttable</code> → <code>enchant</code>
+** <code>magiccrit</code> → <code>enchanted_hit</code>
+** <code>endrod</code> → <code>end_rod</code>
+** <code>mobspell</code> → <code>entity_effect</code>
+** <code>largeexplosion</code> → <code>explosion</code>
+** <code>hugeexplosion</code> → <code>explosion_emmiter</code>
+** <code>fallingdust</code> → <code>falling_dust</code>
+** <code>fireworksspark</code> → <code>firework</code>
+** <code>wake</code> → <code>fishing</code>
+** <code>happyvillager</code> → <code>happy_villager</code>
+** <code>instantspell</code> → <code>instant_effect</code>
+** <code>iconcrack</code> → <code>item</code>
+** <code>slime</code> → <code>item_slime</code>
+** <code>snowballpoof</code> → <code>item_snowball</code>
+** <code>largesmoke</code> → <code>large_smoke</code>
+** <code>townaura</code> → <code>mycelium</code>
+** <code>explode</code> → <code>poof</code>
+** <code>droplet</code> → <code>rain</code>
+** <code>sweepattack</code> → <code>sweep_attack</code>
+** <code>totem</code> → <code>totem_of_undying</code>
+** <code>suspended</code> → <code>underwater</code>
+** <code>witchmagic</code> → <code>witch</code>
+** <code>take</code> → 移除
+** <code>footstep</code> → 移除
+** <code>depthsuspend</code> → 移除
+</div></div>
+
+'''{{cmd|playsound}}'''
+* 按{{key|Tab}}可以自动完成自定义的声音事件。
+
+=== 常规 ===
+'''[[扁平化]]'''
+* 数字-{}-型方块元数据彻底淘汰，以方块状态取代。
+* 许多方块、方块状态、方块实体以及物品被拆分、合并、新建、移除或重命名。
+** 曾因数据值不同而改变的方块与物品获得了独立ID，例如<code>white_wool</code>替代了<code>wool:0</code>。
+** 损害值移动到<code>tag</code>标签，仅由工具、盔甲与地图使用。
+** 文件与命令停止使用<code>data</code>与<code>set_data</code>。
+
+'''[[统计]]'''
+* 统计功能正在升级。
+
+'''[[创造模式物品栏]]'''
+* 鉴于[[扁平化]]，某些方块与物品在各自分类内的位置有变动，例如[[紫珀块]]现在在[[黑曜石]]后。
+* [[蘑菇方块]]、[[耕地]]与[[草径]]现在加入物品栏，在“装饰方块”下。此外，空的[[烟花火箭]]加入了“杂项”分类。
+
+== 修复 ==
+{{fixes|fixedin=17w47a|prefix=Minecraft|showdesc=1
+|;old
+|1511|铁砧可以直接放到某些方块的位置上。
+|1947|南瓜和南瓜灯只能放置在实体方块上。
+|2208|具有特殊放置方式的方块可以放在玩家或实体内部。
+|2666|圆石墙的拐角的碰撞箱错误。
+|3582|活板门不会被台阶上的压力板激活。
+|4504|酿造台的判定箱不包含烈焰棒。
+|12000|木栅栏拐角的碰撞箱与判定箱不同。
+|26739|门被红石激活时不会更新。
+|34365|出现三连箱子的问题。
+|39948|仅数据值不同和方块或物品在统计信息中没有分开列出。
+|53439|在两格高的植物的底部放置一个方块会使其上部暂时变为牡丹或向日葵。
+|59610|仙人掌有完整的碰撞箱。
+|59691|方块/物品名中的brick/bricks用法不一致。
+|61821|挖掘雪层会额外掉落一个雪球。
+|63820|沼泽小屋里的花盆是空的。
+|64455|一些方块的翻译丢失。
+|70188|一些方块无法用{{cmd|setblock|link=none}}命令或带有数据值或方块状态的{{cmd|fill|link=none}}命令面对墙放置。
+|73495|表达物品名称的命令使用了错误的物品名称。
+|74231|花盆的方块数据不会有可见的更新。
+|75430|末影人手持的方块没有完全从旧的方块ID系统更改过来。
+|75940|设置方块{{cd|log2}}和{{cd|leaves2}}为特定数据值时会使游戏崩溃。
+|79255|首次使用{{cmd|trigger|link=none}}命令将玩家的分数设置为0时，分数不会在记分板上显示。
+|81746|下落的方块实体并不检测数据值，将沙子转换为了红沙。
+|84173|活板门在被推或拉到信号源旁边时会受到更新，但被推或拉走时却不会。
+|92901|放置在坐标值很高的位置的末地水晶会有位置偏移。
+|93129|弱加载区块中下落的沙子行为不正确。
+|94027|末影人的{{cd|carried}}标签以字符串和短整型两种方式读取数据。
+|94186|{{cd|BlockDragonEgg}}类不是{{cd|BlockFalling}}的继承。
+|100584|向矿车使用投掷器时会在x轴和z轴负方向上有0.5格的偏移。
+|101332|可以利用下落的沙子穿过圆石墙或苔石墙。
+|102545|调试世界中有352个不同的花盆。
+|103035|龙蛋不会产生{{cd|fallingdust}}粒子。
+|105820|与方块相关的相对浮点坐标命令效果不一致。
+|106024|使用命令放置木栅栏门时不会更新{{cd|in_wall}}方块状态。
+|106127|一些方块无法被给予某些方块状态。
+|108756|地牢中会生成三连箱子。
+|109348|由于同一个位置上有多个方块实体，加载世界时会导致游戏{{cd|java.lang.StackOverflowError}}崩溃。
+|109591|无法探测未存储在元数据中的方块状态。
+|109659|用侦测器检测门的上半部分时，只能检测到被红石信号（按钮，拉杆等等）开关的更新，但不能检测到被手开关的更新。
+|111472|游戏根本不会保存大箱子的方块状态。
+|112394|一些命令中仍然可以使用数字ID。
+|112891|下落的方块实体会掉落含有物品元数据的方块，以至于产生错误的掉落物。
+|113001|尝试使用一些物品时在客户端表现得像成功使用（尽管物品可能并没有使用成功）。
+|113347|铁轨在被推动时会旋转。
+|114965|放置绊线钩会更新同一轴上反方向的绊线钩周围的方块。
+|115799|彩色的床在放置或破坏时会变为一闪而过的红色。
+|116580|铁活板门在破坏信号源后始终保持开启，直到被更新后才会关闭。
+|117032|统计信息中的“完成”按钮有偏移。
+|117166|放置在拐角楼梯上的火把，拉杆，按钮等方块在连接拐角的楼梯被破坏时不会更新。
+|117837|玩家放置的树叶会在它周围的原木被破坏时更新。
+|117932|床的粒子效果会导致深度冲突。
+|118153|混凝土粉末只有掉入熔岩源方块时才能被固化。
+|118202|铁栏杆和玻璃板等拐角处的判定箱错误。
+|118221|藤蔓无法被放置在非固体方块下方。
+|120790|红石灯和红石粉会在被命令{{cmd|setblock|link=none}}放置时检测是否被点亮，但其他方块却不会。
+|121271|激活铁轨不会更新。
+|121742|方块状态无法在命令{{cmd|give|link=none}}，{{cmd|clear|link=none}}和{{cmd|replaceitem|link=none}}使用，但在命令{{cmd|setblock|link=none}}，{{cmd|fill|link=none}}，{{cmd|execute detect|link=none}}和{{cmd|testforblock|link=none}}中却可以。
+|;dev
+|121693|使用空的目标选择器<code>[x_rotation{{=}}]</code>或<code>[y_rotation{{=}}]</code>会崩溃。
+|121699|在一些命令中使用占位符{{cd|*}}会提示“未知的分数持有者”。
+|121700|方块坐标参数为浮点数时会提示无效语法。
+|121752|记分板中，“没有分数”和“0分”不同步。
+|121783|{{cmd|gamerule|link=none}}命令完全不起作用。
+|121786|{{cmd|tellraw|link=none}}命令不起作用。
+|121787|可以将实体传送到无限或<code>NaN</code>坐标处。
+|121790|Tab补全不会更改按Tab键之前键入的字符的大小写。
+|121795|{{cmd|particle|link=none}}命令中的{{cd|speed}}参数无法使用浮点数。
+|121858|{{cmd|scoreboard players get|link=none}}命令对于只读对象不起作用。
+|;previous
+|121970|{{cmd|blockdata|link=none}}命令仍然存在。
+|121975|数据包的顺序在关闭世界后不会保持。
+|121976|{{cmd|datapack disable vanilla|link=none}}命令不会刷新玩家的进度。
+|121982|{{key|Tab}}补全时的空格不一致。
+|121985|使用鼠标滚轮在诸如{{cmd|experience|link=none}}命令和{{cmd|gamemode|link=none}}命令的各参数间切换时会导致崩溃。
+|121996|<code>gameLoopFunction</code>中的距离过滤器似乎不起作用。
+|122004|使用空格补全命令会插入两个空格。
+|122020|无法给一个玩家的分数加上0。
+|122074|{{key|Tab}}无法补全命令中的物品。
+|122108|无序配方中无法使用附魔的或已被命名的物品。
+|;private
+|111317|未公开的安全漏洞。
+}}</onlyinclude>
+
+== 你知道吗 ==
+[[File:17w47aTrapdoor.jpg|缩略图|显示无效纹理的帧]]
+* 快照的横幅图像是动态的图像。在一些帧里，新的五种[[活板门]]显示为紫黑色的[[无效纹理]]。
+{{-}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:17w47a]]
+[[en:Java Edition 17w47a]]
+[[es:Java Edition 17w47a]]
+[[fr:Édition Java 17w47a]]
+[[it:Java Edition 17w47a]]
+[[ja:Java Edition 17w47a]]
+[[ko:Java Edition 17w47a]]
+[[nl:17w47a]]
+[[pt:Edição Java 17w47a]]
+[[ru:17w47a (Java Edition)]]
+[[uk:17w47a (Java Edition)]]

@@ -1,0 +1,94 @@
+# 页面: 属性/生物跟随距离
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E7%94%9F%E7%89%A9%E8%B7%9F%E9%9A%8F%E8%B7%9D%E7%A6%BB
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:31
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+{{Infobox attribute}}
+
+'''生物跟随距离（Mob Follow Range）'''是控制生物能追踪其他生物的最大距离的[[属性]]。
+
+== 行为 ==
+{{main|生物AI|寻路}}
+
+生物跟随距离影响了绝大多数生物的索敌意向，控制了生物探测其他生物的距离。
+
+当生物尝试启动一个索敌意向后，游戏每次执行生物的指定索敌意向时，都会检查攻击对象是否与自身距离小于此属性计算值。如果生物与攻击对象距离超过此属性计算值，则索敌意向不满足运行条件而被终止，生物将失去攻击对象。
+
+锁定最近生物索敌意向（Nearest Attackable Target Goal）是绝大多数生物使用的索敌意向，此索敌意向的启动条件中要求了可以作为攻击对象的生物必须距离本生物此属性计算值范围以内。换言之，绝大多数生物只可以发现并尝试攻击此属性计算值内的生物，而超出范围的生物则无法被发现也无法跟随。
+
+除索敌外，生物跟随距离也影响了生物一次[[寻路]]可以查找路径的最远范围，超出生物跟随距离的区域游戏会判定为不可寻路。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Ghast}}
+| 100
+|-
+| {{EntityLink|Enderman}}
+| 64
+|-
+| {{EntityLink|Blaze}}
+| 48
+|-
+| {{EntityLink|Wither}}
+| 40
+|-
+| {{EntityLink|Zombie}}<br>{{EntityLink|Husk}}<br>{{EntityLink|Drowned}}<br>{{EntityLink|Zombie Villager}}<br>{{EntityLink|Zombified Piglin}}
+| 35
+|-
+| {{EntityLink|Creaking}}<br>{{EntityLink|Fox}}<br>{{EntityLink|Pillager}}<br>{{EntityLink|Ravager}}
+| 32
+|-
+| {{EntityLink|Breeze}}<br>{{EntityLink|Warden}}
+| 24
+|-
+| {{EntityLink|Polar Bear}}
+| 20
+|-
+| {{EntityLink|Illusioner}}
+| 18
+|-
+| {{EntityLink|Evoker}}<br>{{EntityLink|Piglin Brute}}<br>{{EntityLink|Vindicator}}
+| 12
+|-
+| 其他所有[[AI生物]]
+| 16
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| random_spawn_bonus
+| add_multiplied_base（Op1）
+| 0-0.11485三角形分布随机数
+| 是
+| AI生物生成时随机增加跟随距离
+|-
+| zombie_random_spawn_bonus
+| add_multiplied_total（Op2）
+| 1-''[[副区域难度]]''&times;1.5均匀分布随机数
+| 是
+| {{EntityLink|Zombie}}、{{EntityLink|Husk}}、{{EntityLink|Drowned}}、{{EntityLink|Zombie Villager}}、{{EntityLink|Zombified Piglin}}生成时随机增加跟随距离<br>根据副区域难度值决定是否添加，如果副区域难度低于{{frac|2|3}}则不产生此修饰符
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了生物跟随距离属性，ID为<code>Follow Range</code>。}}
+|{{HistoryLine|||dev=13w21a|生物跟随距离的ID重命名为<code>generic.followRange</code>。}}
+|{{HistoryLine||1.16|dev=20w14a|生物跟随距离的ID重命名为<code>generic.follow_range</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|生物跟随距离属性的ID从<code>generic.follow_range</code>重命名为<code>follow_range</code>。
+|现在生物跟随距离属性会影响猪灵、猪灵蛮兵和灾厄巡逻队的跟随范围，还会影响AI生物的随机游荡范围。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

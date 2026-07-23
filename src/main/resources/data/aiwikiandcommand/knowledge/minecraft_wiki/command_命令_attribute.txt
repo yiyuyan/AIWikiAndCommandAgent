@@ -1,0 +1,112 @@
+# 页面: 命令/attribute
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/attribute
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{tr|mode=H|基值|基礎值}}
+{{Infobox command
+|name=attribute
+|oplevel=2
+}}
+
+用于更改或读取[[属性]]。
+
+== 语法 ==
+: <code>attribute <target> <attribute> get [<scale>]</code>
+:: 返回指定属性的总值。
+: <code>attribute <target> <attribute> base get [<scale>]</code>
+:: 返回指定属性的基值。
+: <code>attribute <target> <attribute> base reset</code>
+:: 重置指定属性的基值为默认值。
+: <code>attribute <target> <attribute> base set <value></code>
+:: 用给定值覆盖指定属性的基值。
+: <code>attribute <target> <attribute> modifier add <id> <value> (add_value|add_multiplied_total|add_multiplied_base)</code>
+:: 如果已不存在具有相同命名空间ID的修饰符，则添加具有指定属性的属性修饰符。
+:<code>attribute <target> <attribute> modifier remove <id></code>
+::删除具有指定命名空间ID的属性修饰符。
+:<code>attribute <target> <attribute> modifier value get <id> [<scale>]</code>
+::返回具有指定命名空间ID的修饰符的值。
+
+== 参数 ==
+{{argument|target|entity}}
+: 应用[[属性]]的实体。注意只有[[生物]]才有属性。
+: {{arg desc|je=entity|type=entities|amount=single}}
+
+{{argument|attribute|resource}}
+: 指定[[属性]]的[[命名空间ID]]。
+: {{arg desc|je=resource|registry=minecraft:attribute}}
+
+{{argument|scale|double}}
+:用于<code>-{}-/[[命令/execute#存储子命令|execute]] store result</code>命令，将获取的值与该值相乘的数字后再储存（小数会被截断取整）。
+: {{arg desc|je=double}}
+
+{{argument|id|resource_location}}
+:指定[[属性#修饰符|修饰符]]的[[命名空间ID]]。
+: {{arg desc|je=resource_location}}
+: 只要多个属性修饰符的ID互不相同，该参数并不影响最终指令的结果。
+
+{{argument|value|double}}
+: 指定要使用的值。
+: {{arg desc|je=double}}
+
+<code>add_value|add_multiplied_total|add_multiplied_base</code>
+: <code>add_value</code> — 累加值
+: <code>add_multiplied_total</code> — 累加总值乘积
+: <code>add_multiplied_base</code> — 累加基值乘积
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|<code><target></code>无法选出单个[[生物]]（指定的玩家必须在线上）|fail}}
+{{Result table|指定实体不存在该属性（例如玩家没有<code>minecraft:horse.jump_strength</code>属性）}}
+{{Result table|cmd=/... modifier add ...|相同命名空间ID的修饰符已存在}}
+{{Result table|cmd=/... modifier remove ... <br>/... modifier value get ...|不存在具有指定命名空间ID的修饰符}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/... get [<scale>]|执行成功|1|1|指定属性的值 （乘以 {{cd|<倍率>}}），小数会被截断取整)}}
+{{Output table|cmd=/... base get [<scale>]|执行成功|1|1|指定属性的基值 （乘以 {{cd|<倍率>}}），小数会被截断取整)}}
+{{Output table|cmd=/... modifier value get <id> [<scale>]|执行成功|1|1|指定属性修饰符的值 （乘以 {{cd|<倍率>}}），小数会被截断取整)}}
+{{Output table|cmd=/... base set ...<br>/... modifier add ...<br>/... modifier remove ...|执行成功|1|1|1}}
+{{Output table}}
+
+== 示例 ==
+将自己的基础护甲值设定为5：
+* <code>/attribute @s minecraft:armor base set 5</code>
+
+将所有玩家的最大生命值设置为1（经典极限生存）：
+* <code>/execute as @a run attribute @s minecraft:max_health base set 1</code>
+
+为最近一个玩家的[[属性/重力|重力]]属性添加命名空间ID为{{cd|test:antigravity}}的“反重力”属性修饰符。
+* <code>/attribute @p minecraft:gravity modifier add test:antigravity -0.16 add_value</code>
+
+移除最近一个玩家的“反重力”属性修饰符{{cd|test:antigravity}}。
+* <code>/attribute @p minecraft:gravity modifier remove test:antigravity</code>
+
+将最近一个玩家的重力属性基值重置为默认值。
+* <code>/attribute @p minecraft:gravity base reset</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w17a|加入了{{cmd|attribute|link=none}}。}}
+|{{HistoryLine||1.18.2|dev=1.18.2-pre3|属性参数的[[参数类型]]从{{cd|resource_location}}改为{{cd|resource}}。}}
+|{{HistoryLine||1.20.5|dev=24w09a|更改了<code>operation</code>参数的可能值：<code>add</code>-><code>add_value</code>，<code>multiply_base</code>-><code>add_multiplied_base</code>，<code>multiply</code>-><code>add_multiplied_total</code>。}}
+|{{HistoryLine||1.21|dev=24w21a|移除了修饰符的<code>uuid</code>和<code>name</code>参数，现在均以命名空间ID<code>id</code>取代。}}
+|{{HistoryLine||1.21.4|dev=24w44a|加入了用于重置实体的属性默认值的子命令。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/attribute]]
+[[en:Commands/attribute]]
+[[es:Comandos/attribute]]
+[[fr:Commandes/attribute]]
+[[ja:コマンド/attribute]]
+[[pt:Comandos/attribute]]

@@ -1,0 +1,129 @@
+# 页面: 开发资源
+# 来源: https://zh.minecraft.wiki/w/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90
+# 分类: Minecraft, 基岩版独有信息, 开发
+# 抓取时间: 2026-07-14 17:25:56
+# 原始 Wikitext 内容:
+
+Minecraft {{el|je}}是用Java编写的，{{el|be}}则是用C++编写的。尽管其源代码经过混淆，但社区已经了解Minecraft的大多数代码是如何运作的。随着官方[[混淆映射表]]的发布，{{el|je}}的绝大多数代码已经可读。从26.1-snapshot-1开始，Java版代码不再被混淆。Notch给出了关于Minecraft所使用的[[NBT格式]]笔记。对此，社区已经得到了使用NBT格式文件的信息。
+
+== NBT格式 ==
+[[NBT格式]]几乎用于所有Minecraft中的文件。它是一个由'''标签'''组成的经过GZip压缩或{{only|be|for=zlib压缩}}的树状结构，每个标签具有类型、名称和基于类型的负载。
+
+== 存档格式 ==
+每个Minecraft的版本都有自己的存档格式。以下的信息是介绍不同的存档格式，可让软件开发者用来创建[[辅助程序与编辑器|地图编辑器]]、服务器、地图生成器及其他程序。
+[[方块]]、[[物品]]和[[数据值]]是各存档共通的。
+
+* [[Classic世界格式]]被旧的[[Java版Classic|Classic]]版Minecraft所使用：[[生存模式]]、[[创造模式]]以及[[多人游戏]]。
+* [[Indev世界格式]]用于[[Java版Indev|Indev]]版。
+* [[Alpha世界格式]]用于[[Java版Alpha|Alpha]]版（旧称[[Java版Infdev|Minecraft Infdev]]）。
+* [[Java版存档格式]]用于Minecraft[[Java版]]。
+** [[玩家数据格式]]用于存储玩家的状态。
+** [[区域文件格式]]用于存储各个区块内的数据。
+*** [[区块存储格式]]用于包含在区域中的单独的16×384×16区块。
+** [[地图存储格式]]用于存储可合成的[[地图]]物品的颜色。
+** [[Villages.dat格式]]用于存储地图中村庄的状态。
+** [[结构存储格式]]用于存储[[结构方块]]保存的结构.
+* [[基岩版存档格式]]用于Minecraft[[基岩版]]。
+
+== 其他格式 ==
+* [[服务器列表存储格式]]用于存储保存的多人服务器列表。
+* [[Schematic文件格式|Schematic档案]]是一种基于[[NBT]]的格式，用于第三方应用程序储存地图的某段区域以便之后使用。
+
+== 程序库 ==
+这些是由社区创建的库，用于各类文件与Minecraft进行交互。
+{| class="wikitable" width="100%"
+|-
+! 名称/链接
+! 语言
+! 描述
+|-
+| [https://github.com/LB--/MCModify MCModify]
+| Java/C++
+| 允许加载、操纵和保存所有Minecraft格式的库。
+|-
+| [http://www.minecraftforum.net/topic/245996-sdk-substrate-map-editing-library-for-cnet-060/ Substrate]
+| C#
+| 可以用来载入和编辑关卡的C#类。
+|-
+| [https://github.com/SirCmpwn/Craft.Net Craft.Net]
+| C#
+| 编写服务器软件和改变世界等的C#库。
+|-
+| [https://github.com/udoprog/c10t c10t]
+| C++
+| 一个开源的制图工具。
+|-
+| [https://github.com/ljfa-ag/libnbtplusplus libnbt++]
+| C++
+| 读写NBT结构的C++库。
+|-
+| [http://www.minecraftforum.net/viewtopic.php?f=25&t=35221 CNBT]
+| C
+| 读写NBT结构的C语言库。
+|-
+| [https://github.com/kevinbosak/Minecraft-Perl Minecraft-Perl]
+| Perl
+| 可以用来编辑Minecraft档案的Perl库。
+|-
+| [http://www.minecraftforum.net/viewtopic.php?f=25&t=24585 Python NBT Parser]
+| Python
+| 可以用来编辑NBT结构的Python库。
+|-
+| [http://www.minecraftforum.net/viewtopic.php?f=25&t=28518 pymclevel]
+| Python
+| 可以用来编辑Minecraft关卡的Python库。MCEdit是在这个库上构建的。
+|-
+| [https://github.com/MorbZ/J2Blocks J2Blocks]
+| Java
+| 可以用于生成简单Minecraft世界的Java库。
+|-
+| [https://github.com/vberlier/nbtlib nbtlib]
+| Python
+| 可以用来读写nbt数据的现代python库。
+|}
+
+== Mod编写工具 ==
+* [[Minecraft Coder Pack|Minecraft编辑者包]]即Minecraft Coder Pack，简称MCP，用于编写所有单机或多人Mod的基本程序。
+* [http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-tools/2187221-1-2-1-mcanimator-windows-mac-linux-better MCAnimator] - 一个全新的建模工具：用于创建可以具有纹理和动画的自定义模型。拥有许多工具可以帮助你完成创建过程。你可以导出到所有最新的Minecraft版本。它拥有一个完美的动画控制库。
+* [http://www.minecraftforum.net/viewtopic.php?f=1022&t=217348 Techne] - 模型架构器：用于建立能用于游戏的自创模型，并且能使用基本模型的程序。
+* [http://www.minecraftforum.net/viewtopic.php?f=1022&t=269231 FMCModeler] 用于建立能用于游戏的自创模型, 亦可从Java程序代码建构出模型（有一些限制）。以Glash写成。此程序似乎已经放弃开发, 但依然可以用于CustomRenderer。
+
+== 服务器协议 ==
+[[Classic服务器协议]]用于Minecraft Classic Creative Multiplayer服务器。
+
+若需要当前的多人协议相关信息，请参照[[:en:Minecraft_Wiki:Projects/wiki.vg_merge/Protocol|英文Wiki]]。
+
+== 资源 ==
+{| border="1" cellpadding="2" class="wikitable"
+!width="250"|网址
+!width="150"|程序
+!width="100"|操作系统
+!width="250"|备注
+
+|-valign="top"
+|[http://www.delorie.com/djgpp/ http://www.delorie.com/djgpp/] || Djgpp，专供Windows系统的GCC|| Windows ||
+|-valign="top"
+|[http://www.cygwin.com/ http://www.cygwin.com/] || Cygwin,在Windows系统的Linux模拟器（Unix环境）|| Windows || 对Windows用户很有帮助（提供POSIX)
+|-valign="top"
+|[http://www.mingw.org/ http://www.mingw.org/] || MinGW/MSYS,Windows系统下的GNU开发环境|| Windows || 在Windows下有更好的兼容性
+|-valign="top"
+|[https://visualstudio.microsoft.com/ https://visualstudio.microsoft.com/] || Microsoft Visual Studio || Windows || Visual Studio, 一个用于C++、C#和Visual Basic的IDE和编译程序。
+|-valign="top"
+|[https://www.oracle.com/java/technologies/javase-downloads.html https://www.oracle.com/java/technologies/javase-downloads.html] || Java开发工具包下载 || 跨平台 || 若你需要执行Java程序代码，这是必须的。
+|}
+
+== 导航 ==
+{{Navbox Minecraft}}
+
+[[Category:开发]]
+
+[[en:Development resources]]
+[[es:Recursos de desarrollo]]
+[[fr:Aide au développement]]
+[[hu:Fejlesztési források]]
+[[it:Risorse per lo sviluppo]]
+[[ja:開発技術情報]]
+[[ko:개발 리소스]]
+[[nl:Ontwikkelingsbronnen]]
+[[pt:Recursos de desenvolvimento]]
+[[ru:Для разработчиков]]

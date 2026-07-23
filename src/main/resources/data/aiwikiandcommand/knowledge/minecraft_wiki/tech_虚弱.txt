@@ -1,0 +1,187 @@
+# 页面: 虚弱
+# 来源: https://zh.minecraft.wiki/w/%E8%99%9A%E5%BC%B1
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 教育版独有信息, 有未知版本的History模板的页面/Java版, 状态效果, 需要验证历史/Java版
+# 抓取时间: 2026-07-14 17:35:30
+# 原始 Wikitext 内容:
+
+{{for|Minecraft Dungeons里的魔咒|MCD:虚弱}}
+{{Infobox effect
+|image=Weakness.png
+|invimage=Potion of Weakness
+|invimage2=Splash Potion of Weakness
+|invimage3=Lingering Potion of Weakness
+|invimage4=Arrow of Weakness
+|invimage5=----
+|invimage6=Potion of Weakness Extended
+|invimage7=Splash Potion of Weakness Extended
+|invimage8=Lingering Potion of Weakness Extended
+|invimage9=Arrow of Weakness Extended
+}}
+'''虚弱（Weakness）'''是一种降低[[近战攻击]]伤害的[[状态效果]]。
+
+== 效果 ==
+对着带有虚弱效果的[[僵尸村民]]使用[[金苹果]]可将其治愈。
+
+{{in|be|ee}}饮用[[灵药]]能消除虚弱。
+
+=== Java版 ===
+受影响生物的基础近战攻击伤害降低{{hp|4}}×效果等级，其结算在[[近战攻击#暴击|暴击]]和[[魔咒]]之前。
+
+=== 基岩版 ===
+{{in|be}}受虚弱影响生物的近战攻击伤害结算在魔咒之后，暴击之前。
+
+伤害大小可以由递推公式<math>d_n=0.8d_{n-1}-0.5</math>或通项公式<math>d_n=0.8^nd_0+\frac{0.8^n-1}{0.4}</math>计算，其中<math>d_0</math>是输入的攻击力，<math>d_n</math>是输出的攻击力，<math>n</math>为虚弱状态效果的等级。如果得出的值为负数，则不受到伤害。<ref>https://docs.google.com/document/d/1GtZ9ceTfVGbEkKkbZAfzpKKGk2FQ0FwmeUyw5ja14B8/edit?usp=sharing</ref>
+
+当[[力量（状态效果）|力量]]效果和虚弱效果同时存在时，会先使用力量的计算公式，得出的值会作为<math>d_0</math>的值使用。
+
+[[铁傀儡]]的近战攻击伤害不会被虚弱效果降低。<ref>{{bug|MCPE-45823}}</ref>
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+ ! 来源
+ ! 效果等级
+ ! 时长
+ ! 备注
+ |-
+ | {{ItemLink|Potion of Weakness}}
+ | I
+ | 1:30
+ |
+ |-
+ | {{ItemLink|Potion of Weakness}}（延长版）
+ | I
+ | 4:00
+ |
+ |-
+ | {{ItemLink|Splash Potion of Weakness}}
+ | I
+ | 1:30
+ | 
+{{EntityLink|Witch}}有25%的概率向其3格内没有虚弱效果的玩家投掷[[虚弱药水]]。
+ |-
+ | {{ItemLink|Splash Potion of Weakness}}（延长版）
+ | I
+ | 4:00
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Weakness}}
+ | I
+ | 0:22
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Weakness}}（延长版）
+ | I
+ | 1:00
+ |
+ |-
+ | {{ItemLink|Arrow of Weakness}}
+ | I
+ | 0:11
+ | {{EntityLink|Parched}}会射出此箭。{{only|be|short=1}}
+ |-
+ | {{ItemLink|Arrow of Weakness}}（延长版）
+ | I
+ | 0:30
+ |
+ |-
+ | {{ItemLink|Arrow}}（带虚弱效果）
+ | I
+ | 0:30
+ | {{EntityLink|Parched}}会射出此箭。{{only|je|short=1}}
+ |- 
+ | {{ItemLink|Suspicious Stew}}
+ | I
+ | 0:07
+ | 必须使用{{BlockLink|id=Tulips|郁金香}}合成。
+ |-
+ | {{ItemLink|Suspicious Stew}}
+ | I
+ | 0:06-0:08
+ | 能在[[沉船]]的战利品箱中找到。<br>能从专家农民[[村民]]处购买。{{only|java|short=1}}
+|}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}；
+{{ID table
+|generatetranslationkeys=java
+|Weakness
+|spritetype=effect
+|nameid=weakness
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Weakness
+|spritetype=effect
+|nameid=weakness
+|showaliasids=1
+|aliasid=18
+|foot=1}}
+
+== 成就 ==
+{{load achievements|zombie-doctor}}
+
+== 进度 ==
+{{load advancements|story.cure_zombie_villager;nether.all_effects;nether.all_potions}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了虚弱，目前无法获得。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|[[File:Weakness JE1 BE1.png|32px]] 加入了虚弱效果的图标。
+|加入了药水，可以提供虚弱，但无法正常获得。
+|现在饮用[[奶]]会移除虚弱效果。
+|现在虚弱起作用了。{{verify|history=1|java=1}}}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|现在可以通过[[酿造台]]酿造虚弱药水。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[喷溅型虚弱药水]]，可以提供虚弱。}}
+|{{HistoryLine||1.4.2|dev=12w32a|现在虚弱效果可用于治疗[[僵尸村民]]。}}
+|{{HistoryLine|||dev=12w38a|加入了[[女巫]]，会投掷喷溅型虚弱药水以提供虚弱。}}
+|{{HistoryLine||1.6.1|dev=?|虚弱效果由之前的每等级降低{{hp|1}}的伤害改为每等级降低{{hp|0.5}}的伤害。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了[[虚弱之箭]]，可以提供虚弱。}}
+|{{HistoryLine|||dev=15w33a|加入了[[滞留型虚弱药水]]，可以提供虚弱。
+|虚弱效果由之前的每等级降低{{hp|0.5}}的伤害改为每等级降低{{hp|4}}的伤害。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Weakness JE2.png|32px]] 更改了效果图标。
+|现在虚弱效果可通过食用[[谜之炖菜]]获得。}}
+|{{HistoryLine|||dev=18w43b|[[File:Weakness JE3 BE2.png|32px]] 修复了效果图标。}}
+|{{HistoryLine||1.20.2|dev=23w32a|在此版本前，虚弱的存档ID是18。}}
+|{{HistoryLine||1.21.4|dev=24w45a|现在食用谜之炖菜获得的虚弱效果的持续时间由9秒降低至7秒，以近似匹配{{el|be}}。}}
+|{{HistoryLine||1.21.11|dev=25w44a|现在虚弱可从[[焦骸]]发射的箭获得。}}
+|{{HistoryLine|||dev=25w46a|现在焦骸会免疫虚弱。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Weakness JE1 BE1.png|32px]] 加入了虚弱，目前无法获得。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了[[虚弱药水]]和[[喷溅型虚弱药水]]，可以提供虚弱。
+|现在虚弱效果可用于治疗[[僵尸村民]]。}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了[[女巫]]，会投掷喷溅型虚弱药水以提供虚弱。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了[[虚弱之箭]]，可以提供虚弱。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了[[滞留型虚弱药水]]，可以提供虚弱。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.20.1|现在食用[[灵药]]会移除虚弱效果。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.5|[[File:Weakness JE3 BE2.png|32px]] 更改了效果图标。}} 
+|{{HistoryLine||1.13.0|dev=1.13.0.9|现在虚弱效果可通过食用[[谜之炖菜]]获得。}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.20|加入了会生成喷溅型虚弱药水的[[不祥试炼刷怪笼]]。}}
+|{{HistoryLine|||dev=1.21.0.21|加入了会生成喷溅型虚弱药水的[[不祥之物生成器]]，取代了不祥试炼刷怪笼直接生成喷溅型虚弱药水的行为。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|1.21.0.20和1.21.0.21中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.0.23|回退了1.21.0.20和1.21.0.21中的变更。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.23|现在通过食用[[谜之炖菜]]获得的虚弱效果会持续7秒而不再是8秒。}}
+|{{HistoryLine||1.21.111|dev=1.21.110.20|交换了虚弱效果和魔咒攻击力在[[近战攻击]]中的计算顺序，此前受虚弱影响生物的近战攻击伤害结算在魔咒之前。<ref>{{bug|MCPE-235423}}</ref>}}
+|{{HistoryLine||1.21.130|dev=1.21.130.24|现在虚弱可从[[焦骸]]的虚弱之箭获得。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Schwäche]]
+[[en:Weakness]]
+[[es:Debilidad]]
+[[fr:Faiblesse]]
+[[ja:弱体化]]
+[[ko:나약함]]
+[[pt:Fraqueza]]
+[[ru:Слабость]]

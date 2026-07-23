@@ -1,0 +1,798 @@
+# 页面: Mojang API
+# 来源: https://zh.minecraft.wiki/w/Mojang%20API
+# 分类: CC-BY-SA页面, Java版, 待更新条目
+# 抓取时间: 2026-07-14 17:16:22
+# 原始 Wikitext 内容:
+
+'''Mojang API'''是[[Mojang]]提供的应用程序编程接口，允许用户使用自编程序检索玩家数据，它适用于第三方启动器开发人员、服务器运营商和插件开发人员。
+
+所有查询目前限制为每10分钟600次。对于没有购买游戏的注册账户，也可以进行部分信息的查询。
+
+== 服务器的请求与响应 ==
+服务器能接受很多请求，如果没有特殊说明，对于具有负载的请求服务器有下面的限制：
+* 请求头中的<code>Content-Type</code>必须是<samp>application/json</samp>。如果不是，服务器将返回HTTP状态码415。
+* 如果请求中要求负载，则负载必须是一个有效的JSON文本。如果不是，服务器将返回HTTP状态码400。
+
+如果请求成功，服务器会做出如下的响应：
+* 一个成功的HTTP状态码（2XX）。
+* 返回一个空的负载（这时服务器返回状态码204）或是一个JSON文本。
+
+如果请求失败，服务器会返回一个非2XX的HTTP状态码并返回形式如下方的负载：
+
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|error}}：对于错误的简短介绍。
+** {{Nbt|string|errorMessage}}：错误信息。
+** {{Nbt|string|cause}}：错误原因。
+</div>
+
+下面列出了一些常见的错误，在下文中不再重复说明。
+{| class="wikitable mw-collapsible mw-collapsed"
+! HTTP状态码
+! 错误（error）
+! 错误具体信息（errorMessage）
+! 错误说明
+|-
+| rowspan=3 | 400
+| IllegalArgumentException
+| rowspan=3 | （与具体API有关）
+| 请求中包含了错误或无效的参数。
+|-
+| MismatchedInputException
+| rowspan=2 | 请求负载中的JSON文本不满足API要求的格式或请求负载不是有效的JSON文本。
+|-
+| JsonParseException
+|-
+| rowspan=2 | 401
+| （返回空负载）
+| （返回空负载）
+| API要求使用访问令牌，但是请求头中没有包含<code>Authorization</code>或请求中的访问令牌无效。
+|-
+| Unauthorized
+| The request requires user authentication
+| API要求使用访问令牌，但是请求头中没有包含<code>Authorization</code>。
+|-
+| 403
+| ForbiddenOperationException
+| Forbidden
+| 访问令牌无效。
+|-
+| 404
+| Not Found
+| The server has not found anything matching the request URI
+| 服务器找不到请求的URI。
+|-
+| 405
+| Method Not Allowed
+| The method specified in the request is not allowed for the resource identified by the request URI
+| 接收到了错误请求方法的请求。
+|-
+| 415
+| Unsupported Media Type
+| The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method
+| 不支持的媒体类型，即请求头{{cd|Content-Type}}不是API要求的类型。
+|}
+
+== 获取玩家信息 ==
+获取玩家信息的API都不需要身份验证得到的访问令牌，部分API可以查询没有购买游戏的注册账户。
+
+=== 获取玩家的UUID ===
+; 输入
+玩家的名称（不区分大小写）。 
+
+; GET请求
+* <code>-{}-<nowiki>https://api.mojang.com/users/profiles/minecraft/</nowiki><''玩家名称''></code>
+* <code>-{}-<nowiki>https://api.minecraftservices.com/minecraft/profile/lookup/name/</nowiki><''玩家名称''></code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|id}}：玩家的[[UUID]]。
+** {{Nbt|string|name}}：正确大写的玩家名称。 
+** {{Nbt|bool|legacy}}：如果此账户没有迁移到Mojang账户，输出中包含此项。
+** {{Nbt|bool|demo}}：如果是没有购买游戏的注册账户，输出中包含此项。
+</div>
+
+; 示例
+<code><nowiki>https://api.mojang.com/users/profiles/minecraft/jeb_</nowiki></code><br>提供玩家<samp>jeb_</samp>的UUID。
+
+<syntaxhighlight lang="json">
+ {
+   "name": "jeb_",
+   "id": "853c80ef3c3749fdaa49938b674adae6"
+ }</syntaxhighlight>
+
+; 错误信息
+* 如果没有命名为这个名字的玩家，返回HTTP状态码404。
+
+=== 批量获取玩家UUID ===
+; 负载
+一个存储小于10个的玩家名称字符串的JSON列表，玩家名称不区分大小写。
+
+; POST请求
+<code><nowiki>https://api.mojang.com/profiles/minecraft</nowiki></code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|list}} 给定玩家的所有UUID列表。对于不存在的玩家名称，将不返回任何结果。
+** {{Nbt|compound}} 玩家名称。
+*** {{Nbt|string|id}}：玩家的UUID。
+*** {{Nbt|string|name}}：正确大小写的玩家名称。
+*** {{Nbt|bool|legacy}}：如果此账户没有迁移到Mojang账户，输出中包含此项。
+*** {{Nbt|bool|demo}}：如果是没有购买游戏的注册账户，输出中包含此项。
+</div>
+
+; 示例
+发送<code><nowiki>["jeb_","notch"]</nowiki></code>。
+<syntaxhighlight lang="json">
+ [
+   {
+     "id": "853c80ef3c3749fdaa49938b674adae6",
+     "name": "jeb_"
+   },
+   {
+     "id": "069a79f444e94726a5befca90e38aaf5",
+     "name": "Notch"
+   }
+ ]</syntaxhighlight>
+
+; 错误信息
+{| class="wikitable mw-collapsible mw-collapsed"
+! HTTP状态码
+! 错误（error）
+! 错误具体信息（errorMessage）
+! 错误说明
+|-
+| rowspan=3 | 400
+| rowspan=3 | CONSTRAINT_VIOLATION
+| rowspan=2 | size must be between 1 and 10
+| 请求负载的JSON列表为空。
+|-
+| 请求负载的JSON列表中元素数量大于10个。
+|-
+| Invalid profile name
+| 请求负载的JSON列表中含有空字符串。
+|}
+
+=== 获取玩家名称 ===
+; 输入
+玩家的UUID。
+
+; GET请求
+<code><nowiki>https://api.minecraftservices.com/minecraft/profile/lookup/</nowiki><''UUID''></code>
+
+; 响应
+同[[#获取玩家的UUID|获取玩家UUID]]。
+
+; 示例
+<code><nowiki>https://api.minecraftservices.com/minecraft/profile/lookup/853c80ef3c3749fdaa49938b674adae6</nowiki></code><br>返回如下结果：
+<syntaxhighlight lang="json">
+{
+  "id" : "853c80ef3c3749fdaa49938b674adae6",
+  "name" : "jeb_"
+}
+</syntaxhighlight>
+
+; 错误信息
+{| class="wikitable mw-collapsible mw-collapsed"
+! HTTP状态码
+! 错误（error）
+! 错误具体信息（errorMessage）
+! 错误说明
+|-
+| 404
+| NOT_FOUND
+| Not Found
+| 此UUID不代表任何玩家。
+|-
+| 400
+| CONSTRAINT_VIOLATION
+| Invalid UUID string: <''输入的参数''>
+| URI中的UUID无效。
+|}
+
+=== 获取玩家的皮肤和披风 ===
+; 输入
+玩家的UUID以及[[wikipedia:Digital signature|签名]]的请求。可以在一分钟后最早重复对给定UUID的查询。
+
+; GET请求
+<code><nowiki>https://sessionserver.mojang.com/session/minecraft/profile/</nowiki><''UUID''></code> 或<br><code><nowiki>https://sessionserver.mojang.com/session/minecraft/profile/</nowiki><''UUID''>?unsigned=false</code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|id}}：玩家的[[UUID]]。
+** {{Nbt|string|name}}：正确大写的玩家名称。
+** {{Nbt|boolean|legacy}}：如果这个账户是一个旧的Minecraft账户，这项才存在。
+** {{Nbt|list|properties}}：玩家属性的列表。
+*** {{Nbt|string|name}}：玩家属性的名称。到目前为止只有<code>textures</code>（玩家纹理）这一属性。 
+*** {{Nbt|string|signature}}：只有在请求<code>unsigned=false</code>时，使用<samp>Yggdrasil</samp>私钥的签名才会作为Base64字符串传递。
+*** {{Nbt|string|value}}：[[wikipedia:Base64|Base64]]字符串，其中包含玩家所有的纹理（皮肤和披风）。解码后的字符串内容如下：
+**** {{Nbt|compound}} 纹理对象。
+***** {{Nbt|int|timestamp}}：[[wikipedia:Unixtime|Unix时间戳]]，以毫秒为单位，时间为调用纹理数据的时间。
+***** {{Nbt|string|profileId}}：玩家的UUID，不带连字符。
+***** {{Nbt|string|profileName}}: 玩家名称。
+***** {{Nbt|boolean|signatureRequired}}: 只有在请求<code>unsigned=false</code>时才存在。
+***** {{Nbt|compound|textures}}：纹理。
+****** {{Nbt|compound|SKIN}}：[[皮肤]]纹理。如果这名玩家没有自定义皮肤，这项不存在。
+******* {{Nbt|string|url}}：皮肤纹理的URL链接。
+******* {{Nbt|compound|metadata}}：可选。皮肤的元数据。
+******** {{Nbt|string|model}}：固定值<code>slim</code>。当皮肤模型为<samp>Alex</samp>时这一项才存在，模型为<samp>Steve</samp>则无该元数据。
+****** {{Nbt|compound|CAPE}}：[[披风]]纹理。如果这名玩家没有披风，这项不存在。
+******* {{Nbt|string|url}}：披风纹理的URL链接。默认没有披风，仅当Mojang在玩家的账户数据中输入了披风时，才会显示披风。
+</div>
+
+; 示例
+<code><nowiki>https://sessionserver.mojang.com/session/minecraft/profile/853c80ef3c3749fdaa49938b674adae6</nowiki></code><br>返回如下结果：
+<syntaxhighlight lang="json">
+ {
+   "id": "853c80ef3c3749fdaa49938b674adae6",
+   "name": "jeb_",
+   "properties":
+   [
+     {
+       "name": "textures",
+       "value": "ewogICJ0aW1lc3R..."
+     }
+   ]
+ }
+</syntaxhighlight>
+其中{{Nbt|string|value}}使用Base64解码之后的内容为：
+<syntaxhighlight lang="json">
+{
+  "timestamp" : 1653838459263,
+  "profileId" : "853c80ef3c3749fdaa49938b674adae6",
+  "profileName" : "jeb_",
+  "textures" : {
+    "SKIN" : {
+      "url" : "http://textures.minecraft.net/texture/7fd9ba42a7c81eeea22f1524271ae85a8e045ce0af5a6ae16c6406ae917e68b5"
+    },
+    "CAPE" : {
+      "url" : "http://textures.minecraft.net/texture/9e507afc56359978a3eb3e32367042b853cddd0995d17d0da995662913fb00f7"
+    }
+  }
+}
+</syntaxhighlight>
+
+; 错误信息
+{| class="wikitable mw-collapsible mw-collapsed"
+! HTTP状态码
+! 错误（error）
+! 错误具体信息（errorMessage）
+! 错误说明
+|-
+| 204
+| （返回空负载）
+| （返回空负载）
+| 此UUID不代表任何玩家。
+|-
+| 400
+| （无）
+| Not a valid UUID: <''输入的参数''>
+| URI中的UUID无效。
+|}
+
+== Microsoft身份验证 ==
+该过程包含多个步骤并且需要不同的令牌，但最终会获取到一个标准的'''Minecraft'''令牌。目前所有的账户均已启用这一新的验证系统。
+
+在使用Microsoft验证之前，必须要先通过创建[https://docs.microsoft.com/zh-cn/azure/active-directory/develop/quickstart-register-app Microsoft Azure应用程序]来获得[https://docs.microsoft.com/zh-cn/azure/active-directory/develop/v2-oauth2-auth-code-flow OAuth 2.0]客户端ID（无需获取密钥）；之后根据[https://help.minecraft.net/hc/en-us/articles/16254801392141p 这篇支持文档]，还需填写[https://aka.ms/mce-reviewappid 此表单]以申请API访问权限，否则使用{{cd|api.minecraftservices.com}}域名下的任意API时都只会返回{{cd|403}}。之后，就可以获取Microsoft令牌。
+
+请注意：在获取令牌时，{{cd|tenant}}参数'''必须'''为{{cd|consumers}}，{{cd|scope}}参数中'''必须'''包含{{cd|XboxLive.signin}}，否则无法进行获取Xbox Live令牌等操作。
+
+=== 使用Microsoft令牌获取Xbox Live令牌 ===
+; 负载
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|compound|Properties}}：验证属性。
+*** {{Nbt|string|AuthMethod}}：登录方法。固定值<code>RPS</code>。
+*** {{Nbt|string|SiteName}}：网站名称。固定值<code>user.auth.xboxlive.com</code>。
+*** {{Nbt|string|RpsTicket}}：登录使用的票据。值为<code>-{}-d=<''Microsoft访问令牌''></code>。
+** {{Nbt|string|RelyingParty}}：依赖的平台。固定值<code>http://auth.xboxlive.com</code>。
+** {{Nbt|string|TokenType}}：访问令牌的类型。固定值<code>JWT</code>。
+</div>
+
+; POST请求
+<code><nowiki>https://user.auth.xboxlive.com/user/authenticate</nowiki></code>
+
+要求SSL实现支持SSL重协商。
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|IssueInstant}}：获取Xbox Live令牌的时间。
+** {{Nbt|string|NotAfter}}：Xbox Live令牌过期时间。
+** {{Nbt|string|Token}}：Xbox Live访问令牌。
+** {{Nbt|compound|DisplayClaims}}：未知。
+*** {{Nbt|list|xui}}：未知。
+**** {{Nbt|compound}}
+***** {{Nbt|string|uhs}}：用户的哈希码。
+</div>
+
+=== 使用Xbox Live令牌获取XSTS令牌 ===
+; 负载
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|compound|Properties}}：验证属性。
+*** {{Nbt|string|SandboxId}}：沙盒ID。固定值<code>RETAIL</code>。
+*** {{Nbt|list|UserTokens}}：用户的Xbox Live令牌。
+**** {{Nbt|string}}：用户的Xbox Live令牌，在上一步获取。
+** {{Nbt|string|RelyingParty}}：依赖的平台。固定值<code>rp://api.minecraftservices.com/</code>。
+** {{Nbt|string|TokenType}}：访问令牌的类型。固定值<code>JWT</code>。
+</div>
+
+; POST请求
+<code><nowiki>https://xsts.auth.xboxlive.com/xsts/authorize</nowiki></code>
+
+要求SSL实现支持SSL重协商。
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|IssueInstant}}：获取XSTS令牌的时间。
+** {{Nbt|string|NotAfter}}：XSTS令牌过期时间。
+** {{Nbt|string|Token}}：XSTS访问令牌。
+** {{Nbt|compound|DisplayClaims}}：未知。
+*** {{Nbt|list|xui}}：未知。
+**** {{Nbt|compound}}
+***** {{Nbt|string|uhs}}：用户的哈希码。
+</div>
+
+; 错误信息
+如果没有成功获取XSTS令牌，服务器返回HTTP状态码401。
+
+=== 通过XSTS令牌获取Minecraft访问令牌 ===
+; 负载
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|identityToken}}：身份令牌。值为<code>-{}-XBL3.0 x=<''用户哈希码''>;<''XSTS访问令牌''></code>。
+</div>
+
+; POST请求
+<code><nowiki>https://api.minecraftservices.com/authentication/login_with_xbox</nowiki></code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|username}}：一个UUID，但不是账户的UUID。
+** {{Nbt|list|roles}}：未知，为空。
+** {{Nbt|string|access_token}}：Minecraft访问令牌。
+** {{Nbt|string|token_type}}：令牌类型。固定值<code>Bearer</code>。
+** {{Nbt|string|expires_in}}：有效时间，以秒为单位。
+</div>
+
+=== 验证账户是否拥有Minecraft ===
+; 请求头
+<code>Authorization</code>要求为<code>-{}-Bearer <''有效的Minecraft访问令牌''></code>。
+
+; GET请求
+<code><nowiki>https://api.minecraftservices.com/entitlements/mcstore</nowiki></code>
+
+; 响应
+如果账户拥有Minecraft，服务器将会返回下面的负载：
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|list|items}}：数据和签名列表。
+*** {{Nbt|string|name}}：数据名称，<code>product_minecraft</code>或<code>game_minecraft</code>。
+*** {{Nbt|string|signature}}：数据的JWT签名。
+** {{Nbt|string|signature}}：JWT签名。
+** {{Nbt|string|keyID}}：未知。
+</div>
+
+如果账户不拥有Minecraft或者是XGP用户，服务器将返回空负载。
+
+== 玩家配置操作 ==
+操作玩家配置的API基本都在<code><nowiki>https://api.minecraftservices.com</nowiki></code>服务器下，并且都要求请求头包含<code>Authorization</code>，且值为<samp>Bearer <''有效的Minecraft访问令牌''></samp>。如果请求头不包含访问令牌信息或者访问令牌无效，服务器将返回HTTP状态码401。
+
+=== 获取配置信息 ===
+; GET请求
+<code>/minecraft/profile</code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|id}}：玩家的UUID。
+** {{Nbt|string|name}}：玩家名称。
+** {{Nbt|list|skins}}：玩家拥有的所有皮肤信息。
+*** {{Nbt|compound}}：一个皮肤。
+**** {{Nbt|string|id}}：皮肤的UUID。
+**** {{Nbt|string|state}}：皮肤的使用状态。
+**** {{Nbt|string|url}}：皮肤的URL。
+**** {{Nbt|string|variant}}：皮肤类型。如果是Steve模型的皮肤这一项是<code>CLASSIC</code>，如果是Alex模型的皮肤这一项是<code>SLIM</code>。
+** {{Nbt|list|capes}}：玩家拥有的所有披风信息。
+*** {{Nbt|compound}}：一个披风。
+**** {{Nbt|string|id}}：披风的UUID。
+**** {{Nbt|string|state}}：披风的使用状态。
+**** {{Nbt|string|url}}：披风的URL。
+**** {{Nbt|string|alias}}：披风的别名。
+</div>
+
+=== 获取玩家属性 ===
+; GET请求
+<code>/player/attributes</code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|compound|privileges}}：玩家的能力。
+*** {{Nbt|compound|onlineChat}}：玩家接受聊天信息的能力。
+**** {{Nbt|boolean|enable}}：为真时玩家可以接受聊天信息，为假时不能。
+*** {{Nbt|compound|multiplayerServer}}：玩家加入多人服务器的能力。
+**** {{Nbt|boolean|enable}}：为真时玩家可以加入多人服务器，为假时不能。
+*** {{Nbt|compound|multiplayerRealms}}：玩家加入Realms的能力。
+**** {{Nbt|boolean|enable}}：为真时玩家可以加入Realms，为假时不能。
+*** {{Nbt|compound|telemetry}}：玩家发送遥测数据的能力。
+**** {{Nbt|boolean|enable}}：为真时玩家可以发送遥测数据。
+*** {{Nbt|compound|optionalTelemetry}}：玩家发送可选遥测数据的能力。
+**** {{Nbt|boolean|enable}}：为真时玩家可以发送可选遥测数据。
+** {{Nbt|compound|profanityFilterPreferences}}：玩家Realms聊天过滤选项。
+*** {{Nbt|boolean|profanityFilterOn}}：是否开启Realms聊天过滤。
+** {{Nbt|compound|banStatus}}：玩家封禁状态。
+*** {{Nbt|compound|bannedScopes}}：玩家封禁的范围。
+**** {{Nbt|compound}}：玩家的封禁范围对象。如果玩家未被封禁，则不存在这些对象。目前只有<code>MULTIPLAYER</code>项。
+***** {{Nbt|string|banId}}：封禁的UUID。
+***** {{Nbt|string|expires}}：封禁到期时间。如果玩家被永久封禁，这一项不存在。
+***** {{Nbt|string|reason}}：封禁原因。
+***** {{Nbt|string|reasonMessage}}：封禁消息。
+</div>
+
+=== 启用/禁用Realms聊天过滤 ===
+; 负载
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|compound|profanityFilterPreferences}}：玩家Realms聊天过滤选项。
+*** {{Nbt|boolean|profanityFilterOn}}：是否开启Realms聊天过滤。
+</div>
+
+; POST请求
+<code>/player/attributes</code>
+
+; 响应
+与获取玩家属性的响应相同。
+
+=== 获取屏蔽玩家列表 ===
+; GET请求
+<code>/privacy/blocklist</code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|list|blockedProfiles}}：被屏蔽的玩家列表。这些玩家的聊天信息和Realms邀请将不可见。
+*** {{Nbt|string}}：被屏蔽玩家的UUID。
+</div>
+
+=== 获得签名密钥对 ===
+; POST请求
+<code>/player/certificates</code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|compound|keyPair}}：签名使用的密钥对。
+*** {{Nbt|string|privateKey}}：私钥。以{{cd|-----BEGIN RSA PRIVATE KEY-----}}开头并以{{cd|-----END RSA PRIVATE KEY-----}}结束。
+*** {{Nbt|string|publicKey}}：公钥。以{{cd|-----BEGIN RSA PUBLIC KEY-----}}开头并以{{cd|-----END RSA PUBLIC KEY-----}}结束。
+** {{Nbt|string|publicKeySignature}}：在刚加入签名时使用的公钥签名。目前最新版本已经不再使用此签名，而是V2版本的签名。
+** {{Nbt|string|publicKeySignatureV2}}：公钥签名。
+** {{Nbt|string|expiresAt}}：密钥对到期时间。
+** {{Nbt|string|refreshedAfter}}：密钥对刷新时间。
+</div>
+
+=== 获取玩家名称信息 ===
+; GET请求
+<code>/minecraft/profile/namechange</code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|changedAt}}：最近一次的名称修改时间。
+** {{Nbt|string|createdAt}}：玩家配置创建的时间。
+** {{Nbt|boolean|nameChangeAllowed}}：是否允许修改名称。
+</div>
+
+=== 检查礼品卡是否有效 ===
+; GET请求
+<code>/productvoucher/giftcode</code>
+
+; 响应
+如果礼品卡有效，服务器会返回HTTP状态码200或者204。如果礼品卡无效，服务器将会返回HTTP状态码404。
+
+=== 检查名称可用性 ===
+; GET请求
+<code>-{}-/minecraft/profile/name/<''要检查的名称''>/available</code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|status}}：名称的状态。如果是<code>DUPLICATE</code>代表名称已被占用，如果是<code>AVAILABLE</code>代表名称可用，如果是<code>NOT_ALLOWED</code>代表名称不符合要求。
+</div>
+
+=== 修改名称 ===
+; 输入
+修改的名称。
+
+; PUT请求
+<code>-{}-/minecraft/profile/name/<''修改的名称''></code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|id}}：玩家的UUID。
+** {{Nbt|string|name}}：修改之后的玩家名称。
+** {{Nbt|list|skins}}：玩家拥有的所有皮肤信息。
+*** {{Nbt|compound}}：一个皮肤。
+**** {{Nbt|string|id}}：皮肤的UUID。
+**** {{Nbt|string|state}}：皮肤的使用状态。
+**** {{Nbt|string|url}}：皮肤的URL。
+**** {{Nbt|string|variant}}：皮肤类型。如果是Steve模型的皮肤这一项是<code>CLASSIC</code>，如果是Alex模型的皮肤这一项是<code>SLIM</code>。
+** {{Nbt|list|capes}}：玩家拥有的所有披风信息。
+*** {{Nbt|compound}}：一个披风。
+**** {{Nbt|string|id}}：披风的UUID。
+**** {{Nbt|string|state}}：披风的使用状态。
+**** {{Nbt|string|url}}：披风的URL。
+**** {{Nbt|string|alias}}：披风的别名。
+</div>
+
+; 错误信息
+{| class="wikitable mw-collapsible mw-collapsed"
+! HTTP状态码
+! 错误（error）
+! 错误具体信息（errorMessage）
+! 错误说明
+|-
+| 400
+| CONSTRAINT_VIOLATION
+| changeProfileName.profileName: Invalid profile name
+| 名称不符合要求（大于16个字符或含有非数字、字母和下划线的字符）。
+|-
+| 403
+| （无）
+| Could not change name for profile
+| 不可以修改名称。如果<code>detail.status</code>是<samp>DUPLICATE</samp>说明此名称已被占用。
+|-
+| 429
+| -
+| -
+| 发送了太多次改名请求。
+|}
+
+=== 更换皮肤 ===
+; 负载
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|variant}}：皮肤模型。如果是Steve模型要使用<code>classic</code>，如果是Alex模型要使用<code>slim</code>。
+** {{Nbt|string|url}}：皮肤的URL。
+</div>
+
+; POST请求
+<code>/minecraft/profile/skins</code>
+
+; 响应
+如果更换成功，服务器将返回空负载。
+
+=== 上传皮肤 ===
+; 负载
+负载由两部分组成。
+
+* {{cd|variant}}：皮肤模型。如果是Steve模型要使用<code>classic</code>，如果是Alex模型要使用<code>slim</code>。
+* {{cd|file}}：图片数据。在上传之后会将玩家的皮肤设置为新上传的这个皮肤。
+
+; POST请求
+<code>/minecraft/profile/skins</code>
+
+; 举例
+<syntaxhighlight lang="bash">
+curl -X POST -H "Authorization: Bearer <access token>" -F variant=classic -F file="@steeevee.png;type=image/png" https://api.minecraftservices.com/minecraft/profile/skins
+</syntaxhighlight>
+
+; 响应
+如果上传成功，服务器将返回空负载。
+
+=== 重置皮肤 ===
+; 输入
+玩家的UUID。
+
+; DELETE请求
+<code>/minecraft/profile/skins/active</code>
+
+; 响应
+如果操作成功，服务器将返回HTTP状态码200。
+
+=== 隐藏披风 ===
+; DELETE请求
+<code>/minecraft/profile/capes/active</code>
+
+; 响应
+如果操作成功，服务器将返回空负载。
+
+=== 显示披风 ===
+; 负载
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|capeId}}：要显示的披风的UUID。
+</div>
+
+; PUT请求
+<code>/minecraft/profile/capes/active</code>
+
+; 响应
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|id}}：玩家的UUID。
+** {{Nbt|string|name}}：玩家名称。
+** {{Nbt|list|skins}}：玩家拥有的所有皮肤信息。
+*** {{Nbt|compound}}：一个皮肤。
+**** {{Nbt|string|id}}：皮肤的UUID。
+**** {{Nbt|string|state}}：皮肤的使用状态。
+**** {{Nbt|string|url}}：皮肤的URL。
+**** {{Nbt|string|variant}}：皮肤类型。如果是Steve模型的皮肤这一项是<code>CLASSIC</code>，如果是Alex模型的皮肤这一项是<code>SLIM</code>。
+** {{Nbt|list|capes}}：玩家拥有的所有披风信息。
+*** {{Nbt|compound}}：一个披风。
+**** {{Nbt|string|id}}：披风的UUID。
+**** {{Nbt|string|state}}：披风的使用状态。
+**** {{Nbt|string|url}}：披风的URL。
+**** {{Nbt|string|alias}}：披风的别名。
+</div>
+
+; 错误信息
+{| class="wikitable mw-collapsible mw-collapsed"
+! HTTP状态码
+! 错误（error）
+! 错误具体信息（errorMessage）
+! 错误说明
+|-
+| 400
+| （无）
+| profile does not own cape
+| 玩家没有指定的披风。
+|}
+
+== 好友操作 ==
+
+{{Needs update|trans|extra=该部分内容存在错误和信息缺失，在该完成修订前，建议首先参考英文 Minecraft Wiki 中的对应内容|section=1}}
+
+好友操作的API都在<code><nowiki>https://api.minecraftservices.com</nowiki></code>服务器下，且与玩家配置操作一样都要求请求头包含<code>Authorization</code>。
+
+好友操作有请求频率限制。在上一条请求发出后，10秒内不能再次请求好友操作API，否则服务器将以HTTP状态码429拒绝请求。同步在线状态API则没有请求频率限制。
+
+=== 获取好友列表 ===
+; GET请求
+<code>/friends</code>
+
+; 响应
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|list|friends}}：已添加的好友列表。
+*** {{nbt|compound}}：一条好友信息。
+**** {{nbt|string|profileId}}：玩家档案ID。
+**** {{nbt|string|name}}：玩家名称。
+** {{nbt|list|incomingRequests}}：好友申请列表。
+*** {{nbt|compound}}：一条好友信息。
+**** {{nbt|string|profileId}}：玩家档案ID。
+**** {{nbt|string|name}}：玩家名称。
+** {{nbt|list|outgoingRequests}}：好友请求列表。
+*** {{nbt|compound}}：一条好友信息。
+**** {{nbt|string|profileId}}：玩家档案ID。
+**** {{nbt|string|name}}：玩家名称。
+** {{nbt|bool|empty}}：无作用。
+</div>
+
+=== 调整玩家列表 ===
+; 负载
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|string|updateType}}：操作类型。可以为<code>ADD</code>（添加好友：包括发送好友请求和接受他人请求）或<code>REMOVE</code>（移除好友：包括删除好友和拒绝他人请求）。
+** {{nbt|string|name}}：玩家名称。游戏仅在添加好友时使用此字段。
+** {{nbt|string|profileId}}：玩家档案UUID。
+</div>
+
+; PUT请求
+<code>/friends</code>
+
+; 响应
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|list|friends}}：已添加的好友列表。
+*** {{nbt|compound}}：一条好友信息。
+**** {{nbt|string|profileId}}：玩家档案ID。
+**** {{nbt|string|name}}：玩家名称。
+** {{nbt|list|incomingRequests}}：好友申请列表。
+*** {{nbt|compound}}：一条好友信息。
+**** {{nbt|string|profileId}}：玩家档案ID。
+**** {{nbt|string|name}}：玩家名称。
+** {{nbt|list|outgoingRequests}}：好友请求列表。
+*** {{nbt|compound}}：一条好友信息。
+**** {{nbt|string|profileId}}：玩家档案ID。
+**** {{nbt|string|name}}：玩家名称。
+** {{nbt|bool|empty}}：无作用。
+</div>
+
+=== 同步在线状态 ===
+; 负载
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|string|status}}：当前玩家状态。可选值包括：<code>ONLINE</code>（在线）、<code>PLAYING_OFFLINE</code>（单人游戏中）、<code>PLAYING_REALMS</code>（Realm游戏中）、<code>PLAYING_SERVER</code>（多人游戏中）、<code>PLAYING_HOSTED_SERVER</code>（作为主机进行多人游戏中）和<code>OFFLINE</code>（离线）。
+** {{nbt|compound|joinInfo}}：玩家加入多人世界的信息。
+*** {{nbt|string|value}}：固定值<code>null</code>。
+*** {{nbt|list|invites}}：已邀请的玩家列表。
+**** {{nbt|string}}：玩家档案的UUID。
+</div>
+
+; POST请求
+<code>/presence</code>
+
+; 响应
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|list|presence}}：在线玩家列表。服务器仅返回非离线玩家列表。
+*** {{nbt|compound}}：一条在线玩家信息。
+**** {{nbt|string|profileId}}：玩家档案UUID。
+**** {{nbt|string|pmid}}：对等端ID。
+**** {{nbt|string|status}}：玩家状态，可选值与上文中可选值一致。
+**** {{nbt|string|lastUpdated}}：状态最后一次同步的时间。
+</div>
+
+== 服务器操作 ==
+=== 获取屏蔽服务器信息 ===
+; GET请求
+<code><nowiki>https://sessionserver.mojang.com/blockedservers</nowiki></code>
+
+; 响应
+服务器将返回一个文本，每一行都是被屏蔽的服务器的哈希码。
+
+=== 客户端登录验证 ===
+; 负载
+<div class="treeview">
+* {{Nbt|compound}} 根标签
+** {{Nbt|string|accessToken}}：有效的Minecraft访问令牌。
+** {{Nbt|string|selectedProfile}}：不带有连字符的玩家UUID。
+** {{Nbt|string|serverId}}：服务器的ID。
+</div>
+
+其中服务器的ID由下方算法计算而成：
+
+<syntaxhighlight lang="java">
+public static String generateServerId(String baseServerId,   // 服务器的基础ID，通常为空字符串""
+                                      PublicKey publicKey,   // 服务器的RSA公钥
+                                      SecretKey secretKey    // 服务器与客户端之间使用的对称加密AES密钥
+                                     ) throws Exception { 
+    MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+    messageDigest.update(baseServerId.getBytes("ISO_8859_1"));
+    messageDigest.update(secretKey.getEncoded());
+    messageDigest.update(publicKey.getEncoded());
+    byte[] digestData = messageDigest.digest();
+    return new BigInteger(digestData).toString(16);
+}
+</syntaxhighlight>
+
+; POST请求
+<code><nowiki>https://sessionserver.mojang.com/session/minecraft/join</nowiki></code>
+
+; 响应
+如果验证成功，服务器返回HTTP状态码204。
+
+=== 服务器登录验证 ===
+; 输入
+不区分大小写的玩家名称、由上方算法得出的服务器ID和客户端IP（可选）。
+
+; GET请求
+<code>-{}-<nowiki>https://sessionserver.mojang.com/session/minecraft/hasJoined?</nowiki>username=<''玩家名称''>&serverId=<''服务器ID''>&ip=<''客户端IP''></code>
+
+; 响应
+如果验证成功，服务器将返回和上方获取玩家的皮肤和披风一样的负载。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2014年4月14日|link=https://github.com/Mojang/AccountsClient|Mojang API发布。}}
+|{{HistoryLine||2020年11月|link=https://bugs.mojang.com/browse/WEB-3367|获取玩家UUID的API不再支持at参数。}}
+|{{HistoryLine||2021年10月8日|link=https://bugs.mojang.com/browse/WEB-2303?focusedCommentId=1086543&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-1086543|查询Mojang API状态的API被移除。在此之前，此API为<code><nowiki>https://status.mojang.com/check</nowiki></code>。}}
+|{{HistoryLine||2022年5月8日|link={{tweet|Mojang_Ined|1501541417784852484}}|获取销量统计数据的API被移除。在此之前，此API为<code><nowiki>https://api.mojang.com/orders/statistics</nowiki></code>。}}
+|{{HistoryLine||2022年9月13日|link=https://help.minecraft.net/hc/en-us/articles/8969841895693-Username-History-API-Removal-FAQ-|查询玩家历史名称的API被移除。在此之前，此API为<code><nowiki>https://api.mojang.com/user/profiles/</nowiki><''UUID''>/names</code>。}}
+}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+{{License wiki.vg}}
+
+[[de:Mojang API]]
+[[en:Mojang API]]
+[[lzh:魔贊卯口]]

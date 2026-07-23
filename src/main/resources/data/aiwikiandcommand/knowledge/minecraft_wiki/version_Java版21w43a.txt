@@ -1,0 +1,121 @@
+# 页面: Java版21w43a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8821w43a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=21w43a
+|image=21w43a.png
+|image2=Java Edition 21w43a Simplified.png\Java Edition 21w43a Traditional.png\Java Edition 21w43a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2021年10月27日
+|jsonhash=d70716c04bc31b12276583475629e351f969cbc6
+|clienthash=ad67ea7db46f4ebbb1d8d5f9286401660a26ebbf
+|clientmap=4e269077dc7847d754cd0a827347f5423798dafe
+|serverhash=5c774a8b4e4407133eec7c4e1449c5f35974c589
+|servermap=c8ad3102e97c03cfa15bd7bb3e7c8bff6797e922
+|parent=1.18
+|prevparent=1.17.1
+|prev=21w42a
+|next=21w44a
+|nextparent=1.18.1
+}}<onlyinclude>{{tr|mode=H|生成|產生}}
+
+'''21w43a'''是[[Java版1.18]]的第7个快照，发布于2021年10月27日<ref>{{snap|21w43a|October 27, 2021}}</ref>，优化了升级存档时新旧地形的融合，同时对地形生成做了一些调整和修复。
+
+== 新内容 ==
+=== 世界生成 ===
+'''旧世界升级'''
+* 在旧区块周围生成新区块时，地形会根据旧区块进行调整，更好地贴合旧区块。
+* 现在旧区块中Y=0到Y=4处的基岩层会由[[深板岩]]替代。
+* 若Y=0处为基岩，则其下方会以深板岩填充。
+** 洞穴不会在此生成，但[[紫晶洞]]和熔岩湖可能会生成。
+* 新的基岩层位于Y=-64处。
+* 在此快照中升级存档的过程中对区块进行的更改是永久性的。
+* 此功能尚未开发完毕，可能会持续改进。
+
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 加入了<code>big_dripleaf_placeable</code>方块标签。
+** 包含[[耕地]]、<code>dirt</code>方块标签和<code>small_dripleaf_placeable</code>方块标签。
+** [[大型垂滴叶]]能被放置在拥有此标签的方块上方。
+
+== 更改 ==
+=== 方块 ===
+'''[[大型垂滴叶]]'''
+* 现在只能放置在[[黏土]]、[[砂土]]、[[泥土]]、[[耕地]]、[[草方块]]、[[苔藓块]]、[[菌丝体]]、[[灰化土]]和[[缠根泥土]]上。
+
+=== 世界生成 ===
+'''[[含水层]]'''
+* 降低了含水层水位高度发生变化的频率，因此大片水位相同的区域更加常见了。
+* 略微减少了[[熔岩]]含水层的数量。
+
+'''[[洞穴]]'''
+* 减少了[[河流]]和[[海洋]]岸边充水的洞穴生成的数量。
+
+'''[[海洋]]'''
+* 移除了[[暖水深海]]。
+** [[暖水海洋]]现在会在深水区生成。
+
+'''[[种子（世界生成）|种子]]'''
+* 再次被完全更改，新生成的世界不与之前快照的一致。<ref>{{tweet|henrikkniberg|1453406170157359109|Unfortunately the seeds have been shuffled again, so worlds will not look like they did in previous snapshots. Hopefully world seeds will be stable after this though, so let the real seed hunt begin!|October 27, 2021}}</ref>
+
+=== 常规 ===
+'''[[区块存储格式]]'''
+* 移除了区块中的<code>Level</code>，并将其内部的内容移出。
+** <code>Level.Entities</code>移至<code>entities</code>。
+** <code>Level.TileEntities</code>移至<code>block_entities</code>。
+** <code>Level.TileTicks</code>和<code>Level.ToBeTicked</code>移至<code>block_ticks</code>。
+** <code>Level.LiquidTicks</code>和<code>Level.LiquidsToBeTicked</code>移至<code>fluid_ticks</code>。
+** <code>Level.Sections</code>移至<code>sections</code>。
+** <code>Level.Structures</code>移至<code>structures</code>。
+** <code>Level.Structures.Starts</code>移至<code>structures.starts</code>。
+** <code>Level.Sections[].block_states</code>移至<code>sections[].block_states</code>。
+** <code>Level.Sections[].biomes</code>移至<code>sections[].biomes</code>。
+* 加入了<code>yPos</code> ，以记录区块内子区块Y轴位置的最小值。
+* 加入了<code>below_zero_retrogen</code>，以支持Y=0以下的地形生成。
+* 加入了<code>blending_data</code>，包含了支持新区块与旧区块间地形生成混合算法的数据。
+
+'''[[选项]]'''
+* 将视频设置里的“{{tr|更新优先项|更新優先度|渲染更新優先度}}”重命名为“{{tr|区块构建器|區塊生成器|區塊構建器}}”。三个选项各自新增了一条鼠标{{tr|悬停|暫留}}时的注释，并被重命名：
+** “{{tr|邻近|周圍|附近}}” → “全阻塞”；
+** “{{tr|玩家影响|玩家|根據玩家}}” → “半阻塞”；
+** “无” → “{{tr|线程化|依執行緒|線程}}”。
+
+'''[[刻]]'''
+* 更改了方块计划刻和液体计划刻的内部细节，以使存档保存得更快。
+
+== 修复 ==
+{{fixes|fixedin=21w43a|showdesc=1
+|;old
+|49010|用{{cmd|clone|link=none}}命令克隆正处于激活状态的压力板或按钮会使其永久保持被按下的状态。
+|131930|暖水深海中不生成珊瑚和海泡菜。
+|156616|恶地地层不正确生成。
+|217379|暖水深海中不生成河豚。
+|224205|用{{cmd|clone|link=none}}命令克隆倾斜值不为<code>none</code>的大型垂滴叶会使其永久保持倾斜的状态。
+|228745|大型垂滴叶不能被放置在耕地上。
+|238073|装饰器独立于世界种子。
+|;dev
+|236615|{{tr|更新优先项|更新優先度|渲染更新優先度}}选项的英文大小写不正确。
+|236624|暖水深海没有被计入进度“{{Advancement name|adventure.adventuring_time|zh|rev=1}}”的达成条件中。
+|236970|Y{{=}}160及以上处，恶地地层会被橙色陶瓦覆盖。
+|238939|石头会在下界生成。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:21w43a]]
+[[en:Java Edition 21w43a]]
+[[es:Java Edition 21w43a]]
+[[fr:Édition Java 21w43a]]
+[[it:Java Edition 21w43a]]
+[[ja:Java Edition 21w43a]]
+[[pt:Edição Java 21w43a]]
+[[ru:21w43a (Java Edition)]]
+[[th:รุ่น Java 21w43a]]

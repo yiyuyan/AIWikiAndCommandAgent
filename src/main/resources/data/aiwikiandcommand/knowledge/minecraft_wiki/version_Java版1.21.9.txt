@@ -1,0 +1,864 @@
+# 页面: Java版1.21.9
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.21.9
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:49
+# 原始 Wikitext 内容:
+
+{{Undecided translation|tw=1}}
+{{Infobox version
+|title=1.21.9
+|image=1.21.9.png
+|image2=Java Edition 1.21.9 Simplified.png\Java Edition 1.21.9 Traditional.png\Java Edition 1.21.9 Traditional HK.png
+|edition=Java
+|name=[[铜器时代]]
+|date=2025年9月30日
+|jsonhash=5ec1a8f499396c99b4971eb05658fbcf1545e5d0
+|clienthash=ce92fd8d1b2460c41ceda07ae7b3fe863a80d045
+|clientmap=3641ccb54eac2153c7e8274823c5a8e046beaba0
+|serverhash=11e54c2081420a4d49db3007e66c80a22579ff2a
+|servermap=587e016fe8a876cbc1cc98d73f9d0d79bfb32b2c
+|prevparent=1.21.6
+|prev=1.21.8
+|next=1.21.10
+|nextparent=1.21.11
+}}{{Relevant guide|Java版指南/铜器时代}}
+
+'''1.21.9'''是'''[[铜器时代]]'''的首个正式版，也是{{el|je}}的一次小更新，发布于2025年9月30日<ref>{{article|minecraft-java-edition-1-21-9|Minecraft Java Edition 1.21.9|Sept 30, 2025}}</ref>，加入了[[铜箱子]]、[[铜傀儡]]、[[铜傀儡像]]、[[铜粒]]、[[展示架]]以及[[铜盔甲]]、[[铜剑]]和[[铜质工具]]等，并修复了一些漏洞。此版本不兼容1.21到1.21.8的服务端。
+
+== 新内容 ==
+=== 方块 ===
+'''[[铜箱子]]'''
+* [[箱子]]的铜质变种，有斑驳、锈蚀、氧化以及对应的涂蜡变种。
+* 可由8个[[铜锭]]和1个箱子合成。
+* 能够氧化，也可以被涂蜡、除蜡或除锈。
+
+'''[[铜傀儡像]]'''
+* 新的装饰性方块，有斑驳、锈蚀、氧化以及对应的涂蜡变种。
+* 对未涂蜡且未氧化的铜傀儡像使用[[斧]]会生成[[铜傀儡]]。
+* 能够[[氧化]]，也可以被涂蜡、除蜡或除锈。
+* 与其交互可改变其姿势。
+* 与[[红石比较器]]连接时会根据当前姿势发出红石信号。
+* 被[[活塞]]推动时会被破坏并掉落对应物品。
+
+'''[[避雷针]]'''
+* 加入了斑驳、锈蚀、氧化以及对应的涂蜡变种，以与铜傀儡头顶的避雷针保持一致。
+** 现在避雷针能够氧化，也可以被涂蜡、除蜡或除锈。
+
+'''[[展示架]]'''
+* 新的装饰性方块，有12种木质变种。
+* 可用6个相同的[[去皮原木]]、[[去皮菌柄]]或[[去皮竹块]]合成6个，合成时需要将3×3合成方格的顶行和底行填满。
+* 正面有3个槽位，可存放最多3组物品。
+** 与任意槽位交互时，玩家的主手物品会与所交互槽位的物品交换。
+** 类似于[[物品展示框]]，展示架会在正面展示其包含的所有物品。
+* 被红石信号充能时，展示架的正面纹理会随之改变；充能的展示架可以连接到同方向的展示架，最多可以连接3个。
+** 与单个展示架交互时，其包含的所有物品会与玩家快捷栏最右侧的3个物品交换。
+** 与两个相连接的展示架交互时，其包含的所有物品会与玩家快捷栏最右侧的6个物品交换。
+** 与三个相连接的展示架交互时，其包含的所有物品会与玩家快捷栏的所有物品交换。
+* 与其相接的[[红石比较器]]会按照槽位中是否有物品输出红石信号。
+** 类似于二进制，槽位内无物品视为0，而有物品视为1。个位数在最左侧的槽位，即信号等级=左+中&times;2+右&times;4，范围为{{range|000<sub>(2)</sub>|111<sub>(2)</sub>}}，即{{range|0|7}}。
+** 与是否被红石信号充能无关。
+
+'''[[铜火把]]'''
+* [[火把]]的铜质变种。
+* 由[[铜粒]]、[[煤炭]]和[[木棍]]合成。
+
+'''[[铜栏杆]]'''
+* [[铁栏杆]]的铜质变种。
+* 由6个[[铜锭]]合成。
+* 能够氧化、被涂蜡、脱蜡或除锈。
+
+'''[[铜链]]'''
+* 铁链的铜质变种。
+* 由2个铜粒和1个铜锭合成。
+* 能够氧化、被涂蜡、脱蜡或除锈。
+
+'''[[铜灯笼]]'''
+* [[灯笼]]的铜质变种。
+* 由8个铜粒和1个铜火把合成。
+* 能够氧化、被涂蜡、除蜡或除锈。
+** 氧化程度仅会改变外观，不会影响亮度。
+
+=== 物品 ===
+'''[[盔甲]]'''
+* 加入了铜盔甲，即[[头盔]]、[[胸甲]]、[[护腿]]和[[靴子]]的铜质变种。
+** 可由[[铜锭]]合成。
+** 提供的[[护甲值]]高于皮革盔甲，但略低于金盔甲。
+** [[耐久度]]高于皮革盔甲，但低于锁链盔甲和铁盔甲。
+** [[附魔能力]]为8，低于铁盔甲。
+
+'''[[马铠]]'''
+* 加入了铜马铠。
+** 提供{{Armor|4}}护甲值。
+** 会在包含铁马铠的战利品表中出现，且生成概率与铁马铠相同。
+
+'''[[工具]]'''
+* 加入了铜质工具，即[[斧]]、[[锄]]、[[镐]]、[[锹]]和[[剑]]的铜质变种。
+** 可由[[铜锭]]和[[木棍]]合成。
+** 攻击伤害与石质工具相同，但耐久度高于石质工具。
+** 挖掘速度快于石质工具，但慢于铁质工具。
+** 附魔能力为13，高于钻石质工具，但略低于铁质工具。
+
+'''[[铜粒]]'''
+* 可由[[铜锭]]分解而成，也可通过烧炼铜盔甲和铜质工具获得。
+* 可重新合成为铜锭。
+
+'''[[刷怪蛋]]'''
+* 加入了铜傀儡刷怪蛋。
+
+=== 生物 ===
+'''[[铜傀儡]]'''
+* 将[[雕刻南瓜]]或[[南瓜灯]]放置在[[铜块]]的任意一面即可生成对应氧化程度的铜傀儡。
+** 铜傀儡会在放置雕刻南瓜或南瓜灯的位置上生成。
+** 铜傀儡的[[氧化]]程度与铜块相同，并且这个铜块会转变为对应的[[铜箱子]]。
+* 死亡后会掉落1-3个[[铜锭]]。
+* 能够分类箱子中的物品。
+** 未手持物品时，铜傀儡会尝试搜寻附近的铜箱子，从其中收集物品。
+*** 每次最多可以收集16个物品。
+*** 所有物品均可收集。
+** 手持物品时，铜傀儡会尝试搜寻附近的[[箱子]]或[[陷阱箱]]，将手持的物品放入其中。
+*** 该容器必须是空的，或包含与铜傀儡手持物品种类相同的物品。
+** 会按顺序与最多10个箱子（或陷阱箱）或铜箱子进行交互。
+** 未能找到匹配的箱子时，铜傀儡会进入7秒的空闲状态，随后再次进行尝试。
+** 搜寻范围为自身位置水平方向32格，垂直方向8格。
+* 与铜质方块不同，铜傀儡的氧化基于游戏时间而非[[随机刻]]。
+** 因此游戏规则{{gamerule|doDaylightCycle}}被设为<code>false</code>时铜傀儡也会氧化。
+* 处于完全氧化状态时会转变为[[铜傀儡像]]。
+** 转变后，铜傀儡会以随机姿势保持静止，并掉落手持物品和穿戴的装备。
+** 会保留转变前通过[[命名牌]]获得的名字。
+* 玩家与铜傀儡交互时，铜傀儡会掉落其手持物品。
+* 头盔槽位的虞美人可用[[剪刀]]剪下。
+
+'''[[玩家模型]]'''
+* 一种技术性实体，仅能由{{cmd|summon}}生成。
+* 相当于没有连接上玩家的实体模型。
+* 行为继承类似[[盔甲架]]，可以穿戴装备、手持物品、受到状态效果和属性影响、受到伤害，等等。
+* 在玩家的<code>below_score</code>[[记分板#显示位置|记分板显示位置]]处默认显示“NPC”。
+* 在[[生物#实体数据|生物数据格式]]的基础上，额外有如下字段：
+<div class="treeview">
+:* {{nbt|compound}} 实体数据
+:** {{nbt|string}}{{nbt|compound|profile}}：指定玩家游戏档案（格式同<code>profile</code>[[数据组件]]）或玩家模型档案。玩家模型档案格式见下：
+:** {{nbt|list|hidden_layers}}：需隐藏的外部皮肤层列表，可以包含{{cd|d=pretty|cape|jacket|left_sleeve|right_sleeve|left_pants_leg|right_pants_leg|hat}}。
+:** {{nbt|string|main_hand}}：哪只手是玩家模型的主手，可以为{{cd|d=或|left|right}}。
+:** {{nbt|string|pose}}：（默认为<code>standing</code>）玩家模型的姿势。可以为{{cd|d=pretty|standing|crouching|swimming|fall_flying|sleeping}}之一。
+:** {{nbt|bool|immovable}}：（默认为<code>false</code>）玩家模型是否不能被移动。
+:** {{nbt|bool|hide_description}}：（默认为<code>false</code>）玩家模型不显示描述。
+:** {{nbt|compound|description}}：（[[文本组件]]，默认为“NPC”，即<code>entity.minecraft.mannequin.label</code>）在玩家的<code>below_score</code>记分板显示位置处显示的文本。
+</div>
+* {{nbt|string}}{{nbt|compound|profile}}字段与<code>profile</code>数据组件具有相同的格式（即已扩展且允许覆写），且默认为<code>{}</code>（即{{cd|d=pretty|id|name}}均不存在的静态游戏档案）。
+* 刷怪蛋中的<code>profile</code>组件可以对玩家模型生效。
+
+=== 世界生成 ===
+'''[[末地闪光]]'''
+* 出现于末地的天空，表现为不定时出现的紫色光芒。
+** 出现时，维度的天空光照随之增长。
+** 此为即将到来的{{pa|Vibrant Visuals|}}的一部分特性。
+* 可以通过“隐藏天空闪烁效果”选项来禁用末地闪光改变世界的天空光照和亮度的功能。
+** 仍可看见末地闪光源，也可以听见音效。
+* 末影龙[[迷雾]]激活时，末地闪光源会隐藏，且末地闪光对世界的亮度影响会降低。
+
+'''[[世界加载屏幕]]'''
+* 加入了一个显示在世界加载时所有需加载区块的加载进度条，包括：
+** {{cmd|forceload}}加载的区块。
+** 传送门活动的区块。
+** 单人游戏中，末影珍珠加载的区块。
+** 单人游戏中，玩家周围的区块。
+** 创建世界时，分配世界出生点所需的区块。
+
+'''[[噪声设置]]'''
+* 在噪声设置定义文件中加入了<code>preliminary_surface_level</code>字段以取代<code>initial_density_without_jaggedness</code>。
+** 原字段<code>initial_density_without_jaggedness</code>是通过扫描密度函数值>0.390625的首个点确定近似地表高度的3D密度函数。
+** 现字段<code>preliminary_surface_level</code>是直接生成近似地表Y坐标的2D密度函数。
+** 可用<code>find_top_surface</code>密度函数复现原字段的扫描行为。
+
+'''[[密度函数]]'''
+* 加入了<code>find_top_surface</code>密度函数，用于近似计算指定密度函数的顶层表面。
+** 此函数会从上限扫描到下限来定位密度函数值由负转正的位置。
+** 上限应尽可能接近实际地表以保证最佳性能，且不能低于实际地表高度。
+** 格式如下：
+<div class="treeview">
+::* {{nbt|compound}} 根对象
+::** {{nbt|string|type}}：<code>find_top_surface</code>。
+::** {{nbt|string}}{{nbt|double}}{{nbt|compound|density}}：所计算表面的密度函数。
+::** {{nbt|string}}{{nbt|double}}{{nbt|compound|upper_bound}}：提供最高有效Y值的2D密度函数。
+::** {{nbt|int|lower_bound}}：最低有效Y值。
+::** {{nbt|int|cell_height}}：（{{interval|left_open=0}}）所扫描网格的分辨率。
+</div>
+* 加入了<code>invert</code>密度函数，用于计算<code>1/argument</code>。
+** 格式如下：
+<div class="treeview">
+::* {{nbt|compound}} 根对象
+::** {{nbt|string|type}}：<code>invert</code>。
+::** {{nbt|string}}{{nbt|double}}{{nbt|compound|argument}}：输入的密度函数。
+</div>
+
+=== 游戏内容 ===
+'''[[Java版粒子|粒子]]'''
+* 加入了<code>copper_fire_flame</code>。
+
+'''[[游戏规则]]'''
+* 加入了<code>[[游戏规则/pvp|pvp]]</code>游戏规则，取代了{{filename|[[server.properties]]}}中的<code>pvp</code>选项，以同步{{el|be}}。
+** 为<code>false</code>时，[[玩家]]之间无法相互造成伤害。
+** 默认为<code>true</code>。
+* 加入了<code>[[游戏规则/allowEnteringNetherUsingPortals|allowEnteringNetherUsingPortals]]</code>游戏规则，取代了{{filename|[[server.properties]]}}中的<code>allow-nether</code>选项。
+** 为<code>false</code>时，[[实体]]无法通过[[下界传送门]]进入[[下界]]。
+** 默认为<code>true</code>。
+* 加入了<code>[[游戏规则/commandBlocksEnabled|commandBlocksEnabled]]</code>游戏规则，取代了{{filename|[[server.properties]]}}中的<code>enable-command-block</code>选项，以同步{{el|be}}。
+** 为<code>false</code>时，无法使用[[命令方块]]。
+** 默认为<code>true</code>。
+* 加入了<code>[[游戏规则/spawnMonsters|spawnMonsters]]</code>游戏规则，取代了{{filename|[[server.properties]]}}中的<code>spawn-monsters</code>选项。
+** 为<code>false</code>时，[[敌对生物]]无法自然生成。
+** 默认为<code>true</code>。
+* 加入了<code>[[游戏规则/spawnerBlocksEnabled|spawnerBlocksEnabled]]</code>游戏规则，以控制是否启用[[刷怪笼]]。
+** 默认为<code>true</code>。
+
+=== 命令格式 ===
+'''{{cmd|fetchprofile}}'''
+* 用于获取玩家档案内容。
+* 此命令会异步执行，期间游戏不会暂停。
+* 只有当获取操作完成后，才会输出为一条包含结果的消息。点击输出文本后可以：
+** 复制已完全解析的<code>profile</code>组件的内容。
+** 执行包含上述组件的给予[[玩家的头]]的{{cmd|give @s minecraft:player_head}}命令。
+** 复制玩家头像的文本组件键值对。
+** 生成带有相应档案的玩家模型。
+* 由于执行时结果未知，此命令永远回傳<code>1</code>。
+* 语法：
+** <code>fetchprofile name <player name></code>
+*** 由玩家名称解析档案，不区分大小写。
+** <code>fetchprofile id <uuid></code>
+*** 由玩家[[UUID]]解析档案。
+
+=== 常规 ===
+'''[[调试屏幕]]'''
+* 加入了调试选项屏幕，使用{{key|F3+F6}}打开。
+** 用于配置哪些调试信息需隐藏/仅在调试屏幕中显示/始终可见。
+** 其他{{key|F3}}调试组合键也可通过此屏幕开关。
+** 之前未向社区开放的调试功能（比如子区块八叉树）现在可通过此屏幕开关。
+** 调试选项屏幕有以下预设配置。
+*** {{tr|默认配置|預設設定檔|預設設定}}：将所有选项重置为默认状态。
+*** {{tr|性能监控配置|效能設定檔|效能概況設定}}：仅显示如FPS的简单性能指标。
+
+'''[[选项]]'''
+* 在“{{tr|辅助功能设置|協助工具設定|無障礙功能設定}}”界面中加入了“{{tr|按键控制…|按鍵設定...|按鍵設定⋯⋯}}”按钮。
+** 此界面中的“自动跳跃”、“潜行”和“疾跑”设定键已移除。
+* 在“{{tr|按键控制|按鍵設定}}”界面中加入了用于调整“{{tr|攻击/摧毁|攻擊／破壞}}”及“{{tr|使用物品/放置方块|使用物品／放置方塊}}”按键绑定模式（“按住”或“切换”）的按钮。
+* 在“{{tr|按键控制|按鍵設定}}”界面中加入了“{{tr|疾跑间隔|跑步觸發間隔|跑步時間間隔}}”滑动条，控制双击前进键疾跑时双击有效的窗口期，单位为刻，最大为10，为“关”时无法通过双击前进键以疾跑。
+* 在“鼠标设置”界面中加入了“{{tr|反转鼠标X轴|反轉滑鼠 X 軸}}”按钮。
+** 原来的“鼠标反转”已重命名为“{{tr|反转鼠标Y轴|反轉滑鼠 Y 軸}}”。
+* 在“鼠标设置”界面中加入了“{{tr|允许光标变化|允許游標變化|允許光標變更}}”选项，默认为<code>true</code>。
+* 在“聊天设置”中加入了“{{tr|保存未发送的聊天消息|儲存未傳送的聊天訊息}}”选项，默认为关。
+** 启用时，未发送的消息会在玩家主动关闭聊天框时保存。
+
+'''[[盔甲材料]]'''
+* 加入了铜质材料。
+
+'''[[工具材料]]'''
+* 加入了铜质材料。
+
+'''{{tr|服务器行为准则|伺服器行為準則|伺服器行為守則}}屏幕'''
+* 加入服务器时显示此屏幕。玩家只有同意此{{tr|准则|準則|守則}}，才能在此服务器上游玩。
+* 屏幕中存在一个复选框，以允许在下一次加入此服务器且{{tr|准则|準則|守則}}未改变时跳过此屏幕。
+
+'''[[语言]]'''
+* 加入了[[wzh:加利西亚 (东欧)|哈利奇那语]]（Halychian）。
+
+'''[[服务器]]'''
+* 加入了[[Minecraft服务器管理协议]]。
+** 用于管理服务端而开放的API。
+** 基于WebSocket和JSON-RPC 2.0协议进行双向通信。
+** 由[[服务端配置文件]]中的{{code|management-server-enabled}}控制开启与关闭。
+** 要求客户端连入时必须携带认证数据。
+** 如有需求，可以设置令牌（口令）。
+** 如有需求，可以设置传输层安全性协议（TLS）。
+
+'''[[服务端配置文件格式]]'''
+* 向{{filename|server.properties}}中加入了新布尔型字段<code>enable-code-of-conduct</code>。
+** 设为<code>true</code>时，服务端会在{{filename|server.properties}}所在目录的{{filepath|codeofconduct}}子目录下寻找{{tr|服务器行为准则|伺服器行為準則|伺服器行為守則}}文件。
+** 每个{{tr|服务器行为准则|伺服器行為準則|伺服器行為守則}}文件的格式应为{{filename|<-{}-语言代码>.txt}}。
+* 向{{filename|server.properties}}中加入了新布尔型字段<code>management-server-enabled</code>。
+** 设为<code>true</code>时，服务端会启用[[服务端管理协议]]。
+* 向{{filename|server.properties}}中加入了新字符串型字段<code>management-server-host</code>。
+** 设置[[服务端管理协议]]绑定的主机名（默认为<code>localhost</code>）。
+* 向{{filename|server.properties}}中加入了新整数型字段<code>management-server-port</code>。
+** 设置[[服务端管理协议]]绑定的端口。如果此值为<code>0</code>，游戏将绑定当前未被占用的可绑定端口。（默认为<code>0</code>）。
+* 向{{filename|server.properties}}中加入了新整数型字段<code>status-heartbeat-interval</code>。
+** 设置[[服务端管理协议]]中向已连接的客户端发送心跳通知的间隔，设置为<code>0</code>会禁用此功能。(默认为<code>0</code>)。
+* 向{{filename|server.properties}}中加入了新字符串型字段<code>management-server-secret</code>。
+** 设置[[服务端管理协议]]中用于认证的令牌（口令），必须为只包含大写字母、小写字母及数字的长度为40的字符串（即满足正则表达式{{code|^[a-zA-Z0-9]{40}$}}）。
+* 向{{filename|server.properties}}中加入了新布尔型字段<code>management-server-enabled</code>。
+** 设置[[服务端管理协议]]中是否启用传输层安全性协议（TLS）。默认为<code>true</code>。
+* 向{{filename|server.properties}}中加入了新字符串型字段<code>management-server-tls-keystore</code>。
+** 设置[[服务端管理协议]]中保存服务端用于TLS的私钥和证书的KeyStore文件路径。
+* 向{{filename|server.properties}}中加入了新字符串型字段<code>management-server-tls-keystore-password</code>。
+** 设置[[服务端管理协议]]中用于保存KeyStore的密码。
+
+'''[[调试工具]]'''
+* 开放了一些调试工具，这些调试工具原本会在编译时被移除。
+* 可以通过JVM属性启用各个值：
+** 使用<code>-DMC_DEBUG_ENABLED</code>或<code>-DMC_DEBUG_ENABLED=true</code>启用全局调试标志。
+** 特定的调试工具可以通过类似<code>-DMC_DEBUG_BRAIN</code>或<code>-DMC_DEBUG_BRAIN=true</code>的方式启用。
+** 添加<code>-DMC_DEBUG_PRINT_PROPERTIES</code>可以查看所有可用的调试工具列表。
+
+'''[[文本组件]]'''
+* 加入了<code>object</code>文本组件类型。
+** 用于以字符形式显示纹理图集中的一个精灵图。
+** 精灵图总会显示为8&times;8像素的矩形。
+** 格式：
+<div class="treeview">
+::* {{nbt|compound}} 复合标签格式根标签
+::** {{nbt|string|type}}：<code>object</code>。
+::** {{nbt|string|object}}：精灵图类型。若不指定，游戏会自动判断精灵图类型；若指定，则可加快解析速度。
+::** {{nbt condition|如果精灵图类型为<code>atlas</code>，则渲染纹理图集的精灵图：}}
+::** {{nbt|string|atlas}}：（默认为<code>minecraft:blocks</code>）纹理图集的命名空间ID。
+::** {{nbt|string|sprite}}：图集中精灵图的命名空间ID。示例：<code>item/porkchop</code>。
+::** {{nbt condition|如果精灵图类型为<code>player</code>，则渲染玩家的头的正面图像：}}
+::** {{nbt|string}}{{nbt|compound|player}}：玩家游戏档案数据，与<code>minecraft:profile</code>组件格式一致。
+::** {{nbt|boolean|hat}}：是否渲染“{{tr|帽子|帽子|帽}}”部分，默认为<code>true</code>。
+</div>
+
+'''[[数据组件]]'''
+* 向<code>profile</code>组件中加入了新的字段：
+<div class="treeview">
+:* {{nbt|compound}} 父标签
+:** {{nbt|string|texture}}：（[[命名空间ID]]）皮肤纹理，会解析为{{filepath|textures/<''texture''>.png}}。例如<code>entity/player/wide/steve</code>会使用宽型Steve皮肤。
+:** {{nbt|string|cape}}：（命名空间ID）披风纹理，解析行为同{{nbt|string|texture}}。
+:** {{nbt|string|elytra}}：（命名空间ID）鞘翅纹理，解析行为同{{nbt|string|texture}}。玩家模型穿着鞘翅时，如果此字段不存在或没有被覆写，将会使用披风的纹理；如果{{nbt|string|cape}}字段也不存在，将会使用默认的鞘翅纹理。
+:** {{nbt|string|model}}：可以为<code>wide</code>或<code>slim</code>。
+</div>
+
+'''[[玩家数据格式]]'''
+* 在{{nbt|compound|respawn}}{{tr|对象|物件}}中加入了必选字段{{nbt|float|pitch}}。
+
+'''[[Java版标签|标签]]'''
+* 加入了下列方块标签：
+** {{cd|#copper_chests}}：{{cd|d=pretty|copper_chest|exposed_copper_chest|weathered_copper_chest|oxidized_copper_chest|waxed_copper_chest|waxed_exposed_copper_chest|waxed_weathered_copper_chest|waxed_oxidized_copper_chest}}
+** {{cd|#copper}}：{{cd|d=pretty|copper_block|exposed_copper|weathered_copper|oxidized_copper|waxed_copper_block|waxed_exposed_copper|waxed_weathered_copper|waxed_oxidized_copper}}
+** {{cd|#incorrect_for_copper_tool}}：{{cd|d=pretty|#needs_diamond_tool|#needs_iron_tool}}
+** {{cd|#copper_golem_statues}}：{{cd|d=pretty|copper_golem_statue|exposed_copper_golem_statue|weathered_copper_golem_statue|oxidized_copper_golem_statue|waxed_copper_golem_statue|waxed_exposed_copper_golem_statue|waxed_weathered_copper_golem_statue|waxed_oxidized_copper_golem_statue}}
+** {{cd|#lightning_rods}}：{{cd|d=pretty|lightning_rod|exposed_lightning_rod|weathered_lightning_rod|oxidized_lightning_rod|waxed_lightning_rod|waxed_exposed_lightning_rod|waxed_weathered_lightning_rod|waxed_oxidized_lightning_rod}}
+** {{cd|#wooden_shelves}}：{{cd|d=pretty|acacia_shelf|bamboo_shelf|birch_shelf|cherry_shelf|crimson_shelf|dark_oak_shelf|jungle_shelf|mangrove_shelf|oak_shelf|pale_oak_shelf|spruce_shelf|warped_shelf}}
+** {{cd|#chains}}：{{cd|d=pretty|chain|copper_chain|waxed_copper_chain|exposed_copper_chain|waxed_exposed_copper_chain|weathered_copper_chain|waxed_weathered_copper_chain|oxidized_copper_chain|waxed_oxidized_copper_chain}}。
+** {{cd|#lanterns}}：{{cd|d=pretty|lantern|soul_lantern|copper_lantern|waxed_copper_lantern|exposed_copper_lantern|waxed_exposed_copper_lantern|weathered_copper_lantern|waxed_weathered_copper_lantern|oxidized_copper_lantern|waxed_oxidized_copper_lantern}}。
+** {{cd|#bars}}：{{cd|d=pretty|iron_bars|copper_bars|waxed_copper_bars|exposed_copper_bars|waxed_exposed_copper_bars|weathered_copper_bars|waxed_weathered_copper_bars|oxidized_copper_bars|waxed_oxidized_copper_bars}}。
+* 加入了下列物品标签：
+** {{cd|#copper_chests}}：{{cd|d=pretty|copper_chest|exposed_copper_chest|weathered_copper_chest|oxidized_copper_chest|waxed_copper_chest|waxed_exposed_copper_chest|waxed_weathered_copper_chest|waxed_oxidized_copper_chest}}
+** {{cd|#copper}}:{{cd|d=pretty|copper_block|exposed_copper|weathered_copper|oxidized_copper|waxed_copper_block|waxed_exposed_copper|waxed_weathered_copper|waxed_oxidized_copper}}
+** {{cd|#copper_tool_materials}}：{{cd|copper_ingot}}
+** {{cd|#repairs_copper_armor}}：{{cd|copper_ingot}}
+** {{cd|#copper_golem_statues}}：{{cd|d=pretty|copper_golem_statue|exposed_copper_golem_statue|weathered_copper_golem_statue|oxidized_copper_golem_statue|waxed_copper_golem_statue|waxed_exposed_copper_golem_statue|waxed_weathered_copper_golem_statue|waxed_oxidized_copper_golem_statue}}
+** {{cd|#lightning_rods}}：{{cd|d=pretty|lightning_rod|exposed_lightning_rod|weathered_lightning_rod|oxidized_lightning_rod|waxed_lightning_rod|waxed_exposed_lightning_rod|waxed_weathered_lightning_rod|waxed_oxidized_lightning_rod}}
+** {{cd|#wooden_shelves}}：{{cd|d=pretty|acacia_shelf|bamboo_shelf|birch_shelf|cherry_shelf|crimson_shelf|dark_oak_shelf|jungle_shelf|mangrove_shelf|oak_shelf|pale_oak_shelf|spruce_shelf|warped_shelf}}
+** {{cd|#chains}}：{{cd|d=pretty|chain|copper_chain|waxed_copper_chain|exposed_copper_chain|waxed_exposed_copper_chain|weathered_copper_chain|waxed_weathered_copper_chain|oxidized_copper_chain|waxed_oxidized_copper_chain}}。
+** {{cd|#lanterns}}：{{cd|d=pretty|lantern|soul_lantern|copper_lantern|waxed_copper_lantern|exposed_copper_lantern|waxed_exposed_copper_lantern|weathered_copper_lantern|waxed_weathered_copper_lantern|oxidized_copper_lantern|waxed_oxidized_copper_lantern}}。
+** {{cd|#bars}}：{{cd|d=pretty|iron_bars|copper_bars|waxed_copper_bars|exposed_copper_bars|waxed_exposed_copper_bars|weathered_copper_bars|waxed_weathered_copper_bars|oxidized_copper_bars|waxed_oxidized_copper_bars}}。
+** {{cd|#shearable_from_copper_golem}}：{{cd|poppy}}。
+*** 可从铜傀儡头部剪下的物品。
+* 加入了下列实体类型标签：
+** {{cd|#accepts_iron_golem_gift}}：{{cd|copper_golem}}。
+*** 会将铁傀儡的赠礼戴到头上的实体。
+** {{cd|#candidate_for_iron_golem_gift}}：{{cd|d=pretty|villager|#accepts_iron_golem_gift}}。
+*** 会被铁傀儡赠予虞美人的实体。
+** {{cd|#cannot_be_pushed_onto_boats}}：{{cd|d=pretty|player|elder_guardian|cod|pufferfish|salmon|tropical_fish|dolphin|squid|glow_squid|tadpole|creaking}}。
+*** 不会被推进[[船]]的实体。
+* 向{{cd|#stronghold_biased_to}}生物群系标签中加入了{{cd|cherry_grove}}。
+* 向{{cd|#cluster_max_harvestables}}物品标签中加入了{{cd|copper_pickaxe}}。
+* 向方块标签<code>#impermeable</code>中加入了<code>barrier</code>。
+
+'''[[魔咒效果]]'''
+* 向<code>explode</code>魔咒效果中加入了{{nbt|list|block_particles}}字段，以指定爆炸时产生的每种方块粒子。
+** 格式如下：
+<div class="treeview">
+::* {{nbt|list|block_particles}}
+::** {{nbt|compound}}：一种方块粒子。
+::*** {{nbt|int|weight|required=1}}：（{{interval|left_open=0}}）此项被随机选中的权重。
+::*** {{nbt|compound|particle|required=1}}：要渲染的粒子。
+::*** {{nbt|float|scaling}}：（默认为<code>1.0</code>）爆炸中心和方块位置间距离的乘数。
+::*** {{nbt|float|speed}}：（默认为<code>1.0</code>）粒子的速度乘数。
+</div>
+
+'''[[模型#渲染变换|模型渲染变换]]'''
+* 加入了<code>on_shelf</code>渲染变换，用于模型在展示架上的变换。
+
+'''[[纹理]]'''
+* 加入了纹理<code>environment/end_flash.png</code>。
+
+'''[[声音事件]]'''
+* 加入了声音事件{{cd|d=pretty|entity.copper_golem.shear|weather.end_flash}}。
+
+== 更改 ==
+=== 方块 ===
+'''[[箱子]]和[[陷阱箱]]'''
+* 现在音效音量更低。
+
+'''[[铜活板门]]'''
+* 配方由6个[[铜锭]]合成2个更改为4个铜锭合成1个。
+
+'''[[龙蛋]]'''
+* 现在不会传送至所在维度的建筑高度限制之外。
+
+'''[[铁链]]'''
+* 锁链（Chain）现在被重命名为铁链（Iron Chain）。
+* ID由{{cd|chain}}改为{{cd|iron_chain}}。
+
+'''[[生物头颅]]'''
+* 方块实体数据{{nbt|string}}{{nbt|compound|profile}}字段格式已随<code>profile</code>数据组件更改。
+
+'''[[霜冰]]'''
+* [[末地]]中的霜冰是否融化现在取决于方块光照而非内部天空光照。
+
+'''[[测试实例方块]]'''
+* 现在会在世界重载期间保存错误标记。
+
+=== 物品 ===
+'''[[染料]]'''
+* 更新了染料的纹理。
+
+'''[[刷怪蛋]]'''
+* 现在在[[和平]]难度中，生成怪物的刷怪蛋会显示提示框文本“{{tr|已在和平难度下禁用|已於和平難易度下停用|已於和平模式下停用}}”。
+* 现在在和平难度中，怪物不会生成。
+
+'''[[附魔书]]'''
+* 现在[[稀有度]]由“少见”更改为“稀有”。
+
+=== 生物 ===
+'''[[快乐恶魂]]'''
+* 现在成年快乐恶魂的音效可在64个方块内听到。
+
+'''[[僵尸]]、[[骷髅]]及其变种'''
+* 现在有概率装备铜盔甲。
+** 铜盔甲的出现概率大于皮革盔甲，略低于金盔甲。
+** 为了使更高品质盔甲的概率不会因为加入铜盔甲而受到较大影响，在皮革、铜或金盔甲（三者有均等概率作为基础品质）基础上品质每提升一级的概率由9.5%提升至10.87%。
+
+'''[[铁傀儡]]'''
+* 现在会将[[虞美人]]赠予附近的铜傀儡，接受的铜傀儡会将其戴到头上。
+
+'''[[末影人]]'''
+* 随末地天空光照变化更新了[[寻路]]AI，现在不会趋向移动到暗处。
+
+'''[[蜜蜂]]'''
+* 现在末地的蜜蜂不会再在[[主世界]]降雨时归巢。
+
+=== 非生物实体 ===
+'''[[动力矿车]]'''
+* 手中没有可作为燃料的物品或动力矿车燃料充足时，按{{ctrl|使用}}键与其交互不再使动力矿车方向改变为玩家点击时的方向。
+
+=== 世界生成 ===
+'''[[生物群系]]'''
+* 现在即使温度低于0.15，不[[降雨]]的生物群系也不会降雪。
+
+'''[[区块加载]]'''
+* 与存在玩家活动或存在强制加载区块的维度相同，现在满足下方任一条件的维度也会被视为“活跃”并持续处理区块和实体。
+** 存在活动的传送门。
+** 存在飞行中的[[末影珍珠]]。
+
+'''[[出生点区块]]'''
+* 移除了用于永久加载[[世界出生点]]附近区块的出生点加载标签和计算标签。
+** 世界出生点仍有用于寻找玩家出生位置的加载标签。
+
+'''[[末地]]'''
+* 现在具有天空光照和环境光照。
+* 怪物生成位置的最大天空光照现在为15。
+
+'''[[世界加载屏幕]]'''
+* 现在显示玩家将进入的周围区块，而非围绕世界出生点加载的区块。
+
+'''[[结构定义格式#jigsaw|拼图结构定义格式]]'''
+* {{nbt|int|max_distance_from_center}}字段现在可以指定垂直与水平轴不同的限制。
+** 格式如下：
+<div class="treeview">
+::* {{nbt|compound|max_distance_from_center}}
+::** {{nbt|int|horizontal|required=1}}：（{{interval|left=1|right=128}}）
+::** {{nbt|int|vertical}}：（{{interval|left=1|right=4096}}，默认为4096）
+</div>
+:* 示例：<code>"max_distance_from_center": { "horizontal": 20, "vertical": 500 }</code>。
+
+=== 游戏内容 ===
+'''[[游戏规则]]'''
+* 移除了{{cd|[[游戏规则/spawnChunkRadius|spawnChunkRadius]]}}。
+
+'''[[爆炸]]'''
+* 现在爆炸时会与[[Java版1.15-pre1|1.15-pre1]]前一样生成{{cd|d=pretty|poof|smoke}}[[Java版粒子|粒子]]。
+
+'''[[世界边界]]'''
+* 现在每个维度的世界边界相互独立。
+** 现在可以为每个维度单独设置世界边界的尺寸、位置等。
+
+'''[[游戏模式]]'''
+* 现在从旁观模式切换到创造模式时，玩家只在下方一格内有可碰撞表面且不位于方块或可碰撞实体内时取消飞行。
+
+=== 命令格式 ===
+'''{{cmd|test}}'''
+* {{cmd|test pos [<var>]|link=none}}子命令：
+** 搜索半径由200格更改为250格。
+* {{cmd|test clearall [<radius>]|link=none}}子命令：
+** {{cd|<radius>}}的默认值由200更改为250。
+
+'''{{cmd|summon}}'''
+* 现在在和平难度下尝试召唤无法在和平难度生成的敌对生物会执行失败。
+
+'''{{cmd|setworldspawn}}'''
+* 移除了可选参数{{cd|<angle>}}，并以可选参数{{cd|<rotation>}}代替。
+** 现在可以在此设置玩家重生时面朝的垂直角度。
+* 现在可以在主世界以外的[[维度]]执行。
+
+'''{{cmd|spawnpoint}}'''
+* 移除了可选参数{{cd|<angle>}}，并以可选参数{{cd|<rotation>}}代替。
+** 现在可以在此设置玩家重生时面朝的垂直角度。
+
+=== 常规 ===
+'''[[调试屏幕]]'''
+* 现在也可以在世界以外的屏幕中启用，且始终置于顶层。
+* 现在默认会显示较少的信息，包括FPS、TPS、游戏版本、系统规格、内存使用、玩家位置、玩家区段坐标和3D准星。
+
+'''用户界面'''
+* 将新服务器添加到服务器列表时，不再预填充名称；如果留空，则使用默认名称。
+* 更多文本输入现在支持通过鼠标拖动选择文本鼠标光标。
+* 现在一些UI组件（如文本框、数值滑块、按钮、滚动条）会改变鼠标光标的形状。
+* 文本的可点击部分（如链接）会将鼠标光标的形状改为手型光标。
+* 现在双击编辑界面的文本会选中该文本。
+
+'''[[音乐]]'''
+* 将音乐分类“{{tr|声音/语音|聲音／語音}}”重命名为“{{tr|复述功能/语音|朗讀功能／語音}}”。
+
+'''[[命令]]'''
+* 现在服务端命令会在出生点所在的维度执行，而不总是在主世界执行。
+
+'''[[选项]]'''
+* 将“显示字幕”选项重命名为“{{tr|隐藏式字幕|隱藏式字幕|隱閉式字幕}}”，以更准确地描述它的作用。
+* 将辅助功能选项“{{tr|隐藏闪电的闪烁效果|隱藏閃電效果|隱藏雷電閃光}}”重命名为了“隐藏天空闪烁效果”以支持禁用末地闪光。
+* 在主菜单中调整“{{tr|音乐和声音…|音樂和音效...|音樂與音效⋯⋯}}”下的部分选项时会播放预览音效。
+* 为资源包和数据包的选择屏幕加入了搜索框。
+
+'''[[控制]]'''
+* 被分配相同按键的多个操作现在会同时工作，先前只有一个工作。
+** 例如，现在可以为“{{tr|向前移动|前進|向前移動"}}”和“{{tr|跳跃|跳躍}}”同时绑定{{keys|W}}键，则按下该键会同时执行前进和跳跃操作。
+** 因此，先前提示多个操作分配同一按键的红色指示条改为了黄色。
+* 旁观模式玩家快捷栏现在可以绑定按键。
+** 其与既有的“{{tr|高亮玩家|標示玩家}}”共同在新分类“{{tr|旁观|旁觀者|旁觀}}”下。
+
+'''[[聊天]]'''
+* 现在可以在[[下界传送门]]中打开聊天。
+* 玩家传送到其他维度后，之前打开的聊天仍会保持开启且保留内容。
+* 聊天被强制（例如死亡或打开对话框时）而非主动关闭时，未发送的聊天内容现在会以聊天草稿形式保存。
+** 下次聊天打开时，聊天草稿会被填入消息框。
+** 草稿文本在完全恢复前呈灰色，通过如下任一交互可使草稿恢复为普通文本：
+*** 输入附加文本
+*** 使用方向键移动光标
+*** 点击文本
+*** 选取文本，使文本高亮
+** 草稿恢复前，按下{{key|Enter}}可发送此消息。
+** 草稿恢复前，按下{{key|Backspace}}会删除此消息。
+
+'''[[社交屏幕]]'''
+* 现在在服务器中见过的玩家总会在社交屏幕中显示，即使他们处于离线状态。
+
+'''[[全景图]]'''
+* 更新了主菜单全景图以匹配[[铜器时代]]。
+** 其使用{{el|be}}种子<code>7904846446833094596</code>在坐标X=119, Y=65, Z=-6271的地方拍摄。
+
+'''[[闪烁标语]]'''
+* 将闪烁标语“Now on OpenGL 3.2 core profile!”改为“Now on OpenGL 3.3 core profile!”。
+
+'''[[统计信息]]'''
+* 更改了标签页栏的样式。
+** 现在使用新的标签页设计，取代了之前的按钮式标签页。
+** 现在标签页在屏幕顶端对齐。
+
+'''性能'''
+* 改进了实体渲染顺序以提高性能。
+* 改进了方块实体和物品的渲染性能。
+* 现在玩家视野外的粒子不再渲染，以提升部分场景下的性能。
+
+'''[[服务端配置文件格式]]'''
+* 移除了{{cd|d=pretty|allow-nether|spawn-monsters|enable-command-block|pvp}}选项。
+** 它们已被对应的[[游戏规则]]所取代，以允许在服务器运行时进行更改。
+
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|88.0}}。
+* 数据包版本号现在包含次要版本号。
+** 次要版本号允许同一主要版本号下的数据包向后兼容。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|69.0}}。
+* 资源包版本号现在包含次要版本号。
+** 次要版本号允许同一主要版本号下的资源包向后兼容。
+
+'''{{filename|[[pack.mcmeta]]}}'''
+* 更新了格式：
+** 弃用了{{nbt|int}}{{nbt|list}}{{nbt|compound|supported_formats}}。
+*** 如果数据包/资源包需要兼容1.21.9之前的版本，则仍然必选，否则必须删除。
+** {{nbt|int|pack_format}}现在是可选的。
+** 加入了必选字段{{nbt|int}}{{nbt|int-array|min_format}}和{{nbt|int}}{{nbt|int-array|max_format}}。
+*** 标准格式为包含两个整数的数组，如<code>[74, 1]</code>。
+*** 对于最低版本号，单个整数被视为次要版本号为0，比如{{cd|d=pretty|74|[74]|[74, 0]}}是等价的。
+*** 对于最高版本号，单个整数（也包括只有一个整数的数组）被视为<code>0x7fffffff</code>，即任何小版本号都接受。
+** 在{{nbt|compound|overlays}}中的{{nbt|int}}{{nbt|list}}{{nbt|compound|formats}}也被移除，并同样被{{nbt|list|entries}}内的{{nbt|int}}{{nbt|int-array|min_format}}和{{nbt|int}}{{nbt|int-array|max_format}}取代。
+* 支持的最低包版本号由{{cd|16}}降低至{{cd|15}}。
+
+'''[[文本组件]]'''
+* <code>run_command</code>文本组件：
+** 命令为{{cd|d=pretty|/say|/me|/msg|/tell|/w|/teammsg|/tm}}这类署名命令时，现在会显示一个窗口，以允许玩家将此命令输入到聊天窗口，或在无法打开聊天窗口时将此命令复制到剪贴板。
+
+'''[[数据组件]]'''
+* 更改了<code>block_attacks</code>组件：
+** 不大于0的伤害现在不会触发抵挡行为，不会使具有<code>block_attacks</code>组件的物品进入冷却，也不会因抵挡而受到击退。
+* 更改了<code>profile</code>组件。
+** 现在组件内容不再在游戏档案完全解析（即从Minecraft服务中下载）时改变，即解析值也不再会被储存。
+** 此组件现在会有以下两种行为：
+*** '''静态'''：当此组件具有{{nbt|list}}{{nbt|compound|properties}}字段、同时具有{{nbt|string|name}}和{{nbt|int-array|id}}字段亦或上述两字段均无时。
+**** 此状态下，游戏档案会按原样渲染。
+**** 如果缺失{{nbt|list}}{{nbt|compound|properties}}字段，则与离线模式中一样使用根据{{nbt|int-array|id}}选择的默认皮肤。
+**** 这意味着所展示的皮肤会在此组件创建时冻结。
+**** 这一项更利于装饰用途。
+*** '''动态'''：{{nbt|string|name}}和{{nbt|int-array|id}}字段二者只有其一时。
+**** 包含此游戏档案的物品在客户端渲染时，此游戏档案会被解析为最近的数据。
+**** 即此物品总会展示目标玩家的当前皮肤。
+***** 注：如果不重启客户端，玩家在游戏运行时更改的皮肤在客户端看不见。
+**** 解析会有延迟，期间会以默认皮肤显示。
+**** 若仅有{{nbt|string|name}}，则物品名称会被其替代。
+**** 此物品的物品提示框中会显示“{{tr|实时显示|動態}}”，以与静态游戏档案相区分。
+** 旧版世界中未加载的生物头颅升级后通常会转换为动态游戏档案。
+** 现在可以有额外的字段，可以替换用于渲染的多种值。
+** 如果省略了任何字段，将会使用已解析的组件的值，即便这是默认皮肤的。
+
+'''[[战利品上下文]]'''
+* 加入了战利品上下文参数集<code>entity_interact</code>，提供以下参数：
+** <code>target_entity</code>：被交互的实体
+** <code>interacting_entity</code>：（可选）与<code>target_entity</code>交互的实体
+** <code>tool</code>：与<code>target_entity</code>交互所用的工具
+* 加入了战利品上下文参数集<code>block_interact</code>，提供以下参数：
+** <code>block_state</code>：被交互方块实体的方块状态
+** <code>block_entity</code>：被交互的方块实体
+** <code>interacting_entity</code>：（可选）与<code>block_state</code>交互的实体
+** <code>tool</code>：与<code>block_state</code>交互所用的工具
+* 加入了战利品上下文参数{{cd|d=pretty|target_entity|interacting_entity}}。
+
+'''[[战利品表]]'''
+* 为实体被闪电苦力怕杀死时的掉落物加入了<code>charged_creeper/</code>战利品表。
+** 根战利品表<code>charged_creeper/root</code>根据具体实体类型分配到下列子表：
+*** {{cd|d=list|list-level=***|charged_creeper/piglin|charged_creeper/creeper|charged_creeper/skeleton|charged_creeper/wither_skeleton|charged_creeper/zombie}}
+* 加入了下列战利品表：
+** <code>brush/armadillo</code>：刷扫犰狳
+** <code>gameplay/turtle_grow</code>：幼年海龟成年
+** <code>harvest/beehive</code>：用剪刀采集蜂箱/蜂巢
+** <code>harvest/cave_vine</code>：采集洞穴藤蔓上的发光浆果
+** <code>carve/pumpkin</code>：用剪刀雕刻-{}-南瓜
+* <code>harvest/sweet_berry_bush</code>：采摘甜浆果丛
+
+'''[[战利品表函数]]'''
+* <code>minecraft:copy_name</code>的<code>source</code>字段现在接受新的值：
+** <code>direct_attacker</code>
+** <code>target_entity</code>
+** <code>interacting_entity</code>
+* <code>minecraft:copy_components</code>的<code>source</code>字段现在接受新的值：
+** <code>this</code>
+** <code>attacker</code>
+** <code>direct_attacker</code>
+** <code>attacking_player</code>
+** <code>target_entity</code>
+** <code>interacting_entity</code>
+** <code>tool</code>
+
+'''[[粒子数据格式]]'''
+* <code>dragon_breath</code>粒子现在可以接受参数<code>power</code>（浮点数，默认为1），在随机数计算完毕后初始速度将乘上此值。
+* <code>instant_effect</code>和<code>effect</code>粒子现在可以接受参数<code>power</code>（浮点数，默认为1）和<code>color</code>（RGB颜色，默认为<code>0xFFFFFF</code>）。
+* <code>flash</code>现在必须指定参数<code>color</code>（ARGB颜色）。
+
+'''[[玩家数据格式]]'''
+* 更改了{{nbt|compound|respawn}}：
+** <code>angle</code>被重命名为<code>yaw</code>，且现在是必选字段。
+** <code>dimension</code>现在是必选字段。
+
+'''[[着色器]]与后处理管线'''
+* 移除了{{cd|d=pretty|core/blit_screen.vsh|post/blit.vsh|post/blur.vsh|post/invert.vsh|post/sobel.vsh|post/screenquad.vsh}}顶点着色器，现在由{{cd|core/screenquad.vsh}}替代。
+* 用于后处理效果、亮度图生成和全屏位块传输的顶点着色器不再传递<code>Position</code>属性，而须通过<code>gl_VertexID</code>分配顶点坐标。
+* 移除了未使用的着色器：
+** {{cd|d=*|core/position_color_lightmap.vsh|core/position_color_lightmap.fsh|core/position_color_tex_lightmap.vsh|core/position_color_tex_lightmap.fsh}}
+* 修改了{{cd|core/terrain.vsh}}中函数{{cd|minecraft_sample_lightmap}}中UV计算的部分。
+* 向下列着色器加入了<code>PER_FACE_LIGHTING</code>标签：
+** <code>core/entity.vsh</code>
+** <code>core/entity.fsh</code>
+* 当设置好基色光照时，前面和背面的光照将会单独计算。
+* 由于所需的OpenGL版本号提升至3.3，所有着色器的版本已经从150提升至330。
+
+'''常规'''
+* 将所需的OpenGL版本号由3.2提升至3.3。
+* 调整了实体的环境光，以更契合方块和游戏其他部分的视觉效果。
+** 平坦表面的背面现在会从该方向照亮，而不是从相反的方向。
+** 这项更改主要影响包含平坦或“空心”立方体的模型，例如：
+*** 穿在身上的盔甲和鞘翅
+*** 玩家的外层皮肤
+*** 骷髅和骷髅马的“肋骨”
+*** 鸡和青蛙的脚
+*** 幻翼和末影龙的翅膀
+*** 鱼的鳍
+
+== 修复 ==
+{{fixes|fixedin=25w31a,25w32a,25w33a,25w34a,25w34b,25w35a,25w36a,25w36b,25w37a,1.21.9 Pre-Release 1,1.21.9 Pre-Release 2,1.21.9 Pre-Release 3,1.21.9 Pre-Release 4,1.21.9 Release Candidate 1|beforeVersion=25w31a|showdesc=1|new=1
+|;old
+|383|选择世界屏幕中，世界名称、版本和时间戳会从列表中溢出到右边。
+|26334|死亡时，聊天界面被强制清空。
+|36783|物品展示框/荧光物品展示框不会在包含地图时改变其判定箱。
+|46503|在旁观实体时执行{{cmd|kill|link=none}}命令可保留实体着色器效果。
+|46634|{{tr|雷鸣|雷聲|行雷聲}}音量不受“天气”音量设置影响。
+|59413|水和熔岩能在屏障中产生滴粒子。
+|69216|钓鱼时切换到旁观模式会保留鱼线。
+|73881|在和平难度中生成怪物会使其出现1游戏刻。
+|89142|将跳跃键绑定至{{key|Enter}}会使玩家在补全聊天消息时跳跃。
+|94610|闪电苦力怕的生物头颅掉落物缺少战利品表项。
+|98200|除了主音量外的所有音量滑动条都会被指定高音量的{{cmd|playsound|link=none}}忽略。
+|98322|由旁观模式切换到创造模式后保持飞行。
+|99785|能在旁观模式中牵引实体。
+|119417|玩家上床并切换到旁观模式后卧床不起。
+|147784|在旁观模式下右键制箭台时，工作台的GUI会闪烁约一秒。
+|160528|末地传送门不减免摔落伤害。
+|163218|“潜行”选项设为“切换”时，玩家能在游戏界面打开期间潜行。
+|165991|自1.15-pre1起，TNT爆炸不再显示更多烟雾粒子。
+|173730|持水桶对可含水方块{{key|Shift}}+右键单击不会在此方块旁边放置水。
+|174759|龙蛋能传送到虚空之下的高度。
+|183776|用{{key|F3+F4}}切换游戏模式后，需要通过连按两次{{key|F3}}来{{tr|开关|開啟及關閉}}调试屏幕。
+|183784|缩放窗口后，游戏模式切换器调试菜单存在视觉漏洞。
+|187850|若聊天被隐藏，成书中的<code>run_command</code>点击事件无效。
+|191669|玩家向方块或普通障碍物疾跑时，将游戏模式切换到旁观模式会取消疾跑。
+|192907|{{key|F3}}调试菜单不能在聊天打开时{{tr|开关|開啟及關閉}}。
+|196443|<code>reducedDebugInfo</code>为<code>true</code>时，即使没有效果，按下{{key|F3+B}}和{{key|F3+G}}仍会在聊天中告诉玩家相应功能已开启或关闭。
+|197247|使用{{key|F3+D}}清除待处理消息时，新消息会保留之前的延迟。
+|203401|无法禁用或修改双击前进键的疾跑按键绑定。
+|220842|在旁观具有着色器效果的生物时打开游戏模式切换器会{{tr|开关|開啟及關閉}}效果。
+|220913|原版趋同：声音设置中，在不在世界中时，调整滑动条不会播放对应分类的声音。
+|223142|玩家能在旁观标记时移动。
+|225088|亮度低时，主世界表层比之前更暗。
+|232968|旁观模式与非旁观模式玩家同时查看箱子或木桶的内容能禁用其关闭动画。
+|234479|能向已收到邀请或已经加入Realm中的玩家多次发送加入自己Realm的邀请。
+|234737|“EmtyPoolElement”异常信息中包含错误拼写。
+|235780|鼠标指针悬停于信标GUI内的“完成”和“取消”按钮上时会错展示“信标”提示框。
+|236508|“{{tr|添加服务器|新增伺服器}}”菜单内的标题显示为“{{tr|编辑服务器信息|編輯伺服器資訊}}”。
+|237016|即使游戏被暂停，聊天延迟功能也会继续输出消息。
+|237590|渲染距离和模拟距离滑动条内的“chunks”一词存在不当大小写。
+|237843|观看终末之诗和鸣谢名单时的玩家能因处于空闲状态而被踢出。
+|238146|在睡觉期间切换到旁观模式后，夜晚永不跳过。
+|238273|“{{tr|被另一个正在运行的Minecraft实例锁定|被另一個正在執行的 Minecraft 鎖定|被另一個開啟的 Minecraft 程式鎖定}}”缺少标点符号。
+|243759|与实体眼部距离为0的爆炸不会伤害该实体。
+|249205|在创造模式下通过{{ctrl|使用}}水瓶创造泥巴会导致<code>minecraft.used:minecraft.potion</code>增加2。
+|250062|游戏中有几个字符串包含逗号拼接。
+|250193|服务器日志在加密过程中断开连接时未使用玩家游戏档案的字符串表示。
+|254052|{{cmd|locate|link=none}}不在建筑高度限制外生效。
+|254668|在死亡屏幕的标题屏幕警告上按下{{key|Esc}}会使玩家重生。
+|257540|绵羊吃草的频率只有21w39a之前的一半。
+|257792|交易菜单的输出槽位偏离中心。
+|258191|根部系统地物允许垂根的垂直跨度为0，导致报错。
+|259347|用铁桶右键位于建筑高度限制的方块顶部时会显示高度限制警告消息。
+|259571|玩家死亡或游戏重载后，玩家上次的游戏模式不会被保存。
+|259673|创建世界屏幕和统计信息屏幕中的标签选项卡效果不同。
+|259692|在界面刚关闭时松开潜行/疾跑对应的输入按键会使这两种状态被不符预期地激活或切换。
+|259935|生物群系的降水性为<code>NONE</code>时仍可以降雪。
+|260591|{{cmd|execute on origin|link=none}}或{{cmd|execute on owner|link=none}}会失败于寻找处于不同维度中的目标实体。
+|260822|信标GUI内的“完成”和“取消”按钮不再在鼠标指针悬停其上时展示提示框。
+|260920|统计信息屏幕的{{tr|列|行}}无法由键盘导航{{tr|访问|存取}}。
+|261387|红树放置器中存在冗余的<code>block_predicate_filter</code>检查。
+|262000|未使用的纹理：{{filename|misc/white.png}}。
+|262370|部分多人游戏字符串不可翻译。
+|263597|末影龙重生噪音不能通过“敌对生物”音量滑动条降低。
+|264962|包含给定行为的两个输入的字符串具有不一致的字距和省略号。
+|265290|使用{{key|Tab}}键时，命令方块界面内的元素未按顺序选中。
+|265807|生物不会在其<code>Air</code>NBT低于-19时溺水。
+|269838|修剪南瓜的掉落物被硬编码为南瓜种子。
+|269839|修剪蜂巢和蜂箱的掉落物被硬编码为蜜脾。
+|270172|被勾住的玩家将游戏模式切换到旁观模式时，客户端与服务端失去同步。
+|270190|在织布机界面中，在旗帜图案上悬停不会显示提示框。
+|270669|翻译键<code>argument.block.property.novalue</code>中的参数顺序错误。
+|270918|生物头颅的战利品表缺少包含<code>custom_name</code>的<code>copy_components</code>战利品表函数。
+|272584|受到<code>Owner</code>为玩家的实体所造成爆炸而被改变方向的火球不再属于玩家。
+|275244|{{filename|configured_carver}}文件中的<code>width_smoothness</code>设置为0会导致游戏冻结或崩溃。
+|275432|字幕在屏幕中难以观察。
+|276431|龙蛋传送到建筑高度上限之上而使自己被删除。
+|276568|游戏会生成盔甲纹饰图集的Mipmap版本。
+|276629|洞穴藤蔓的掉落物似乎被硬编码为发光浆果。
+|276759|刷扫犰狳的掉落物被硬编码为犰狳鳞甲。
+|276931|附魔书的稀有度错误。
+|277447|Minecraft会为箱子生成未使用的Mipmap纹理。
+|277450|Minecraft会为潜影盒生成未使用的Mipmap纹理。
+|277470|Minecraft会为床生成未使用的Mipmap纹理。
+|277471|Minecraft会为告示牌生成未使用的Mipmap纹理。
+|277473|Minecraft会为饰纹陶罐生成未使用的Mipmap纹理。
+|277481|Minecraft会为旗帜生成未使用的Mipmap纹理。
+|277483|Minecraft会为盾牌生成未使用的Mipmap纹理。
+|277770|<code>block_age</code>处理器类型总是将台阶属性<code>type</code>改为<code>bottom</code>。
+|277975|物品提示框中命令执行警告的首行缺少标点符号。
+|278435|即使原版数据包中指定了蘑菇岛生物群系生成南瓜斑块，南瓜斑块也不会在蘑菇岛生成。
+|278550|在创造模式或旁观模式中飞行时，水面会使玩家停止冲刺。
+|278965|樱花树林不属于<code>#stronghold_biased_to</code>标签。
+|279123|部分引用Minecraft Realms的字符串使用不一致的动词形式或缺少动词。
+|279153|部分提及属性基值的字符串缺少冠词。
+|279173|<code>chat.disabled.invalid_command_signature</code>字符串中的“Command”一词前缺少一个冠词。
+|279174|<code>gamerule.spawnChunkRadius.description</code>字符串中的“Amount”一词前缺少一个冠词。
+|279175|部分多人游戏断开连接字符串中缺少冠词和指示代词。
+|279176|<code>gamerule.commandModificationBlockLimit.description</code>字符串中的“Number”一词前缺少一个冠词。
+|279212|部分旁白字符串缺失冠词和所有格限定词。
+|279548|TNT矿车在因摔落爆炸时不会记忆将其点燃的来源。
+|279793|驾驶马、驴、骡、僵尸马、骷髅马和骆驼不再强制玩家面向前方。
+|289348|重新加载后，位于末地的末影珍珠不会在末地没有玩家时加载区块。
+|295829|测试实例方块GUI使用“批次”而非“环境”。
+|295841|交互式碰撞检测路径已损坏。
+|296054|非弹射物实体的高速正向移动可能无法触发起始位置周围方块的方块效果。
+|296055|非弹射物实体的缓慢移动可能无法触发起始方块的方块效果。
+|296057|非弹射物实体的侧向移动可能无法触发起始位置周围方块的方块效果。
+|296372|自1.21.5起，展示实体位置与视线旋转的变化插值<code>teleport_duration</code>不可靠。
+|296789|测试实例方块界面内的文本颜色与其他相似界面中的不一致。
+|298274|某些无效命令会输出无附加信息的“{{tr|错误见下|錯誤如下}}”。
+|298805|盾牌即使没有阻挡攻击也会被斧停用。
+|;1.21.6的漏洞
+|297126|升级25w15a或25w16a的世界时频繁出现“Failed to read field...”<!--日志文本不翻译-->错误。
+|297496|Java版Realms信息框内的文本在被选中时完全消失。
+|297593|从底部与炼药锅接触现在也会受到其中装有的物质影响。
+|297898|进入对话框会暂时关闭聊天并清除玩家当前正在输入的内容。
+|298605|创建“水世界”超平坦世界时，玩家在海底出生。
+|298732|光标不再在非末行的行尾显示。
+|298883|通过导航键{{key|Tab}}在Realms中选中可用的世界时，此栏未高亮。
+|299067|多人游戏中，箭会因为玩家断开连接而丢失从属关系。
+|299105|Tears和Lava Chicken音乐唱片的“desc”翻译未使用。
+|299115|被反弹的箭会因为其主人离线而丢失<code>Owner</code>标签。
+|;1.21.7的漏洞
+|299314|以特定方式破坏唱片机不会使正在播放的音乐停下。
+|299450|在书与笔界面中，不再能通过双击选取字符。
+|299451|在书与笔中翻页时，页面不再自动聚焦。
+|299548|若聊天被隐藏，<code>run_command</code>对话框行为不会生效。
+|299566|书与笔界面中的光标距左侧过远。
+|299627|高速弹射物实体插值非常不准确。
+|299628|骑乘中的玩家或生物会在世界加载时触发幽匿感测体。
+|299770|即使<code>enderPearlsVanishOnDeath</code>被设为<code>false</code>，由末影珍珠加载的区块仍会在玩家死亡后永远卸载。
+|299782|在拼图结构中保存的僵尸村民会在世界生成后遗忘其生物群系变种和职业。
+|;1.21.8的漏洞
+|299823|Minecraft着色器引发C7050警告。
+|299837|在同一游戏刻中执行两个及以上{{cmd|rotate|link=none}}命令只会{{tr|应用|套用}}最后一个命令的旋转。
+|299872|被冰冻的玩家接触火时，冰冻遮罩闪烁。
+|299873|对话框中纯文本消息的选择框会被切断。
+|299896|能将已过期Realms的世界移至空槽位，但这会导致在没有有效Realms订阅时误导性产生创建世界提示。
+|299913|“{{tr|你似乎还没有Realm…|你似乎還沒有 Realm…|你似乎並未擁有 Realm⋯⋯}}”可聚焦文本部件现在拥有黑色背景。
+|300021|村民交易屏幕中的部分元素现在渲染于光标所持物品上方。
+|300034|海豚会上船。
+|300092|F3饼图中粒子子项缺少名称。
+|300340|连续点击欢迎页面中的“继续”会重置按钮的消失动画进度。
+|300457|{{cd|d=或|action|exit_action}}被设为<code>run_command</code>且设置了一条会产生署名的聊天消息的命令时无法退出对话框。
+|300856|书署名屏幕中的I型光标的颜色错误。
+|301619|控制台消息中使用的游戏模式翻译键会在无权限的玩家尝试切换其游戏模式时发出。
+|301494|悬浮的沙子或沙砾不再显示下落粒子。
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:1.21.9]]
+[[en:Java Edition 1.21.9]]
+[[es:Java Edition 1.21.9]]
+[[fr:Édition Java 1.21.9]]
+[[ja:Java Edition 1.21.9]]
+[[ko:Java Edition 1.21.9]]
+[[lzh:爪哇版一點二一點九]]
+[[pl:Java Edition 1.21.9]]
+[[pt:Edição Java 1.21.9]]
+[[ru:1.21.9 (Java Edition)]]
+[[th:รุ่น Java 1.21.9]]
+[[uk:1.21.9 (Java Edition)]]

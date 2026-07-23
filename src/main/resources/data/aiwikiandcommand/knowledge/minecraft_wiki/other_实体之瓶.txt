@@ -1,0 +1,144 @@
+# 页面: 实体之瓶
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9E%E4%BD%93%E4%B9%8B%E7%93%B6
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:13
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=23w13a_or_b}}
+{{Infobox item
+|title=实体之瓶、虚空之瓶
+|image=Bottle of Entity.png
+|image2=Splash Bottle of Entity.png
+|image3=Bottle of Void.png
+|invimage1 = [实体之瓶]Bottle of Entity
+|invimage2 = [喷溅型实体之瓶]Splash Bottle of Entity
+|invimage3 = [虚空之瓶]Bottle of Void
+|creative-tab= {{tp|itemGroup.foodAndDrink}}
+|renewable= 是
+|maxstack= 1
+|id-raw='''实体之瓶'''：bottle_of_entity<br>'''喷溅型实体之瓶'''：splash_bottle_of_entity<br>'''虚空之瓶'''：bottle_of_void
+|nobe=1
+}}
+'''实体之瓶（Bottle of Entity）'''是饮用时将[[玩家]][[变身]]为特定[[实体]]的饮品。
+
+'''喷溅型实体之瓶（Splash Bottle of Entity）'''是可投掷的实体之瓶。
+
+'''虚空之瓶（Bottle of Void）'''是可将玩家从非玩家实体[[变身#还原|还原]]的物品。
+
+== 获取 ==
+非[[生物]]实体的实体之瓶只能通过[[命令]]获取。
+
+=== 转化 ===
+手持虚空之瓶对着[[生物]]{{control|使用}}后，其会转化为对应生物的实体之瓶。
+
+启用{{cd|drink_air}}规则后，{{ctrl|饮用}}[[玻璃瓶]]会返还虚空之瓶。
+
+=== 酿造 ===
+{{main|酿造}}
+{{brewing
+|showname=1
+|name=对应喷溅型实体之瓶
+|ingredients=[[火药]] +<br>任意实体之瓶
+|Gunpowder
+|[喷溅型实体之瓶]Splash Bottle of Entity
+|base=[实体之瓶]Bottle of Entity
+|I2link=none
+|Olink=none
+}}
+与[[药水]]类似，向实体之瓶中加入[[火药]]能酿造对应的喷溅型实体之瓶。
+
+== 用途 ==
+实体之瓶被饮用后会变为1个空玻璃瓶，并且不会返还任何物品。
+
+虚空之瓶被饮用后不会返还任何物品。
+
+=== 变身 ===
+饮用某种非玩家实体的实体之瓶会[[变身]]为对应实体。
+
+若使用的实体之瓶没有指定其对应的实体，则无法变身。
+
+=== 还原 ===
+已变身的玩家{{ctrl|饮用}}虚空之瓶后，会受到{{hp|8}}点[[虚空伤害]]，同时：
+* 若玩家拥有[[状态效果]]，会去除其拥有的某一状态效果，并获得带有所去除状态效果的[[不可合成的药水]]；
+* 若玩家此前变身实体为非生物实体，其虚空之瓶会转化为猪之瓶；
+* 若玩家因该虚空伤害从变身中脱离，其虚空之瓶会转化为猪之瓶；
+* 否则，玩家形态会被[[变身#还原|还原]]，其虚空之瓶会转化为此前变身实体对应的实体之瓶。
+
+=== 投掷 ===
+类似于[[喷溅药水]]，{{ctrl|使用}}喷溅型实体之瓶可以将其投掷出去，生成弹射物。
+
+[[发射器]]也可以射出喷溅型实体之瓶。
+
+喷溅型实体之瓶被投掷后会破裂而不会返还空瓶。
+
+== 行为 ==
+喷溅型实体之瓶的行为类似于[[喷溅药水]]，不同的是其不会向生物施加状态效果，而是将其作用范围内的生物[[变身]]为对应的非玩家实体。
+
+若使用的喷溅型实体之瓶没有指定其对应的实体，则无法变身。
+
+== 音效 ==
+<!--喷溅型实体之瓶使用时没有投掷音效-->
+{{Sound table
+|sound =Bottle fill1.ogg
+|sound2=Bottle fill2.ogg
+|sound3=Bottle fill3.ogg
+|sound4=Bottle fill4.ogg
+|subtitle={{tp|subtitles.item.bottle.fill}}
+|source=友好生物
+|description=使用虚空之瓶收集实体或状态效果
+|id=item.bottle.fill
+|translationkey=subtitles.item.bottle.fill
+}}
+{{Sound table
+|sound=Drink.ogg
+|subtitle={{tp|subtitles.entity.generic.drink}}
+|source=玩家
+|description=玩家饮用虚空之瓶或实体之瓶
+|id=entity.generic.drink
+|translationkey=subtitles.entity.generic.drink
+}}
+{{Sound table
+|sound=Glass break1.ogg
+|sound2=Glass break2.ogg
+|sound3=Glass break3.ogg
+|subtitle={{tp|subtitles.entity.potion.splash}}
+|source=友好生物
+|description=喷溅型实体之瓶碎裂<ref group=音效>该音效会同时播放六次</ref>
+|id=entity.splash_potion.break
+|translationkey=subtitles.entity.potion.splash
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|Bottle of Entity
+|displayname=Bottle of Entity<br>Bottle of ''<实体名称>''
+|edition=java
+|generatetranslationkeys=y
+|spritetype=item
+|nameid=bottle_of_entity
+|translationkey=item.minecraft.bottle_of_entity,item.minecraft.bottle_of_entity.specific}}
+{{ID table
+|Splash Bottle of Entity
+|displayname=Splash Bottle of Entity<br>Splash Bottle of ''<实体名称>''
+|generatetranslationkeys=y
+|spritetype=item
+|nameid=splash_bottle_of_entity
+|translationkey=item.minecraft.splash_bottle_of_entity,item.minecraft.splash_bottle_of_entity.specific}}
+{{ID table
+|Bottle of Void
+|generatetranslationkeys=y
+|spritetype=item
+|nameid=bottle_of_void
+|translationkey=item.minecraft.bottle_of_void
+|foot=1}}
+
+== 导航 ==
+{{Navbox jokes|23w13a_or_b}}
+
+[[Category:物品]]
+
+[[en:Bottle of Entity]]
+[[ja:Bottle of Entity]]
+[[pt:Edição Java 23w13a or b/Bottle of Entity]]

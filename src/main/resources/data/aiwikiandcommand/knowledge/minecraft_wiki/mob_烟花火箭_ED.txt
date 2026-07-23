@@ -1,0 +1,22 @@
+# 页面: 烟花火箭/ED
+# 来源: https://zh.minecraft.wiki/w/%E7%83%9F%E8%8A%B1%E7%81%AB%E7%AE%AD/ED
+# 分类: 实体数据值页面
+# 抓取时间: 2026-07-14 17:31:28
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt inherit/projectile}}
+** {{nbt|compound|FireworksItem|existonsave=1}}：发射此烟花火箭的物品，决定烟火样式和伤害。此项不存在时游戏默认使用烟花火箭物品。
+*** {{nbt inherit/itemnoslot}}
+** {{nbt|int|Life|required=1|existonsave=1}}：这个烟花火箭已经飞行的时间。当此值大于{{nbt|int|LifeTime}}时，烟花火箭爆裂。
+** {{nbt|int|LifeTime|required=1|existonsave=1}}：这个烟花火箭从开始飞行到爆裂的时间。其值会在烟花火箭发射时随机决定，计算公式为：<math>10(f+1)+\mathrm{rand}(6)+\mathrm{rand}(7)</math>，其中，''f''表示{{nbt|byte|[[烟花火箭#物品数据|flight_duration]]}}的值，<math>\mathrm{rand}(x)</math>返回<math>[0,x-1]</math>的随机整数。
+** {{nbt|bool|ShotAtAngle|existonsave=1}}：（默认为<samp>false</samp>）表示此烟花火箭是否由弩或发射器射出。如果此值为<samp>true</samp>，则烟花火箭在水平方向上会逐渐加速。
+</div><noinclude>
+[[Category:实体数据值页面]]
+[[en:Firework Rocket#Entity data]]
+[[fr:Fusée de feu d'artifice/ED]]
+[[ja:ロケット花火/ED]]
+[[nl:Vuurpijl/ED]]
+[[pt:Fogo de Artifício/ED]]
+</noinclude>

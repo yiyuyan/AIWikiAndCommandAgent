@@ -1,0 +1,122 @@
+# 页面: Boss栏
+# 来源: https://zh.minecraft.wiki/w/Boss%E6%A0%8F
+# 分类: Java版独有信息, UI, 基岩版独有信息, 游戏内容
+# 抓取时间: 2026-07-14 17:11:14
+# 原始 Wikitext 内容:
+
+{{For|创建或修改Boss栏的命令|命令/bossbar}}
+'''Boss栏（Bossbar）'''是显示在[[平视显示器]]正上方的进度条指示器，表示[[生物#Boss生物|Boss生物]]的[[生命]]或[[袭击]]的状态。
+
+== 机制 ==
+{{Filetr|Many bossbars.png|缩略图|172px|{{in|je}}多个Boss栏同时显示}}
+Boss栏仅由一个进度条和其上方的名称构成。进度条显示<code>-{}-当前值/最大值</code>，根据比例显示进度条的长度，但不会直接显示具体值。
+
+Boss栏的颜色有{{code|d=pretty|blue|green|pink|purple|red|white|yellow}}，样式有{{code|d=pretty|progress|notched_6|notched_10|notched_12|notched_20}}。
+
+如果有多个Boss栏，Boss栏之间会垂直排列，较新出现的Boss栏会显示在最下方。
+
+{{in|je}}游戏界面最多只能同时显示前9个Boss栏；{{in|be}}最多只能同时显示前3个。
+
+=== 末影龙Boss栏 ===
+{{see also|末影龙}}
+{{Filetr|Bossbar of Ender Dragon.png|frame|末影龙的Boss栏|class=pixel-image}}
+[[末影龙]]有与其相关的Boss栏，其值为<code>-{}-当前生命值/最大生命值</code>，颜色为粉色<code>pink</code>，样式为<code>progress</code>。
+
+{{in|je}}末影龙的Boss栏会在[[末地]]的(0,128,0)位置距玩家192格以内，且与末影龙的战斗进行中时显示；{{in|be}}末影龙的Boss栏会在其距玩家125格以内时显示。
+
+{{in|je}}末影龙的Boss栏是由游戏的末影龙战斗系统控制的，而非末影龙实体控制的，因此只有被游戏追踪的末影龙会显示其Boss栏，同一时间只会显示至多一个末影龙Boss栏；{{in|be}}每一个末影龙都会有各自的Boss栏，多个末影龙的Boss栏可以同时显示。
+
+该Boss栏的名称使用末影龙的名称，如果末影龙被重命名，则Boss栏也会被重命名。
+
+=== 凋灵Boss栏 ===
+{{see also|凋灵}}
+{{Filetr|Bossbar of Wither.png|frame|凋灵的Boss栏|class=pixel-image}}
+[[凋灵]]有与其相关的Boss栏，其值为<code>-{}-当前生命值/最大生命值</code>，颜色为紫色<code>purple</code>，但{{el|be}}比{{el|je}}的颜色更深<ref>{{bug|MCPE-174971}}</ref>，样式为<code>progress</code>。
+
+{{in|je}}凋灵的Boss栏会在其距玩家水平距离76格及以内时出现，水平距离80格及以外时消失；{{in|be}}凋灵的Boss栏会在其距玩家55格以内时显示。每一个凋灵都会有各自的Boss栏，多个凋灵的Boss栏可以同时显示。
+
+该Boss栏的名称使用凋灵的名称，如果凋灵被重命名，则Boss栏也会被重命名。
+
+{{in|je}}该Boss栏在凋灵的AI被关闭时不会发生变化。<ref>{{bug|MC-84243}}</ref>
+
+=== 袭击Boss栏 ===
+{{see also|袭击#Boss栏}}
+{{Filetr|Raid bar.png|frame|袭击的Boss栏（{{el|je}}）|class=pixel-image}}
+{{Filetr|Raid bar BE.png|frame|袭击的Boss栏（{{el|be}}）|class=pixel-image}}
+[[袭击]]有与其相关的Boss栏，其颜色为红色<code>red</code>，样式为<code>notched_10</code>{{only|je}}或<code>progress</code>{{only|be}}。
+
+每场袭击有各自的Boss栏，玩家位于袭击中心96格内时会显示距离最近的袭击的Boss栏。
+
+袭击处于冷却时，该Boss栏显示<code>-{}-已经过冷却时间/总冷却时间</code>，其他时刻显示<code>-{}-剩余袭击者生命值总和/该波次袭击者的最大生命值总和</code>。
+
+该Boss栏的名称还会用于显示其他的额外信息，总共有以下的显示：
+* 剩余存活袭击者不超过2名时：{{tp|event.minecraft.raid}} - {{tp|event.minecraft.raid.raiders_remaining|''x''}}（x为袭击者数量）
+* 袭击胜利后：{{tp|event.minecraft.raid.victory.full}}
+* 袭击失败后：{{tp|event.minecraft.raid.defeat.full}}
+* 其他时刻：{{tp|event.minecraft.raid}}
+
+=== 自定义Boss栏 ===
+{{see also|命令/bossbar|命令/execute#store (result&verbar;success) bossbar}}
+{{exclusive|java|section=1}}
+[[File:Bossbar custom.png|frame|使用{{cmd|bossbar}}自定义的Boss栏，其值为<code>1/2</code>，颜色为<code>blue</code>，样式为<code>notched_20</code>|class=pixel-image]]
+
+{{cmd|bossbar}}可以创建自定义的Boss栏。Boss栏的值、颜色、样式、可见性均可自由设计。
+
+{{cmd|execute}}的存储子命令<code>store (result|success) bossbar</code>可以将命令结果存储至一个Boss栏的值。
+
+{{-}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre6|为末影龙加入了Boss栏。}}
+|{{HistoryLine||1.4.2|dev=12w34a|隨凋灵的加入，加入了凋灵的Boss栏。|加入了<code>bars.png</code>，有多种颜色和分割样式。}}
+|{{HistoryLine|||dev=12w34b|末影龙的Boss栏名称从“Boss 生命值”改为“末影龙”。|凋灵的Boss栏名称现在会显示凋灵的名称。}}
+|{{HistoryLine||1.9|dev=15w31a|凋灵的Boss栏改为紫色<code>purple</code>。
+|多个Boss栏现在可以同时显示，而不是全部叠在一起。
+|Boss栏不再会在世界被创建后短暂地显示。<ref>{{bug|MC-4474|||Fixed}}</ref>
+|Boss栏现在无需玩家看着生物也可以显示。<ref>{{bug|MC-68062|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=16w02a|末影龙的Boss栏不再是末影龙实体控制的了，因此使用{{cmd|summon}}生成的末影龙也不再会有Boss栏。}}
+|{{HistoryLine||1.11|dev=16w32a|被重命名的末影龙的Boss栏现在会显示其名称。<ref name="MC-83571">{{bug|MC-83571|||Fixed}}</ref>}}
+|{{HistoryLine||1.11.1|dev=16w50a|被重命名的凋灵的Boss栏现在会显示其名称。<ref name="MC-83571"/><ref>{{bug|MC-110234|||Fixed}}</ref>}}
+|{{HistoryLine||1.13|dev=18w02a|未命名的末影龙的Boss栏的名称显示为“<code>entity.EnderDragon.name</code>”，而不是“末影龙”。<ref name="MC-124113">{{bug|MC-124113|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=18w03a|未命名的末影龙的Boss栏的名称再次显示为“末影龙”。<ref name="MC-124113"/>}}
+|{{HistoryLine|||dev=18w05a|加入了{{cmd|bossbar}}命令，可以用于创建自定义的Boss栏。}}
+|{{HistoryLine||1.14|dev=18w47a|隨袭击的加入，加入了袭击的Boss栏。}}
+|{{HistoryLine|||dev=18w49a|现在袭击的Boss栏会在触发袭击或者一波完成的时候缓慢增加。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 4|隨凋灵的加入，加入了凋灵的Boss栏。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|隨末影龙的加入，加入了末影龙的Boss栏。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|隨袭击的加入，加入了袭击的Boss栏。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.20|袭击Boss栏的颜色由粉色<code>pink</code>更改为红色<code>red</code>，以近似匹配{{el|je}}。}}
+|{{HistoryLine|||dev=1.18.0.22|现在袭击Boss栏会随着袭击者生命值的减少而减少，以同步{{el|je}}。}}
+|{{HistoryLine||1.20.40|dev=1.20.40.21|凋灵Boss栏的颜色由粉色<code>pink</code>更改为紫色<code>purple</code>，以近似匹配{{el|je}}。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU9|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了末影龙和末影龙的Boss栏。}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|加入了凋灵和凋灵的Boss栏。}}
+|{{HistoryLine|PS4}}
+|{{HistoryLine||1.91|隨袭击的加入，加入了袭击的Boss栏。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||1.3.12|隨凋灵的加入，加入了凋灵的Boss栏。}}
+|{{HistoryLine||1.7.10|隨末影龙的加入，加入了末影龙的Boss栏。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:Bars.png|所有种类的Boss栏
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:UI]]
+
+[[en:Bossbar]]
+[[fr:Barre de boss]]
+[[ja:ボスバー]]
+[[pt:Barra de chefes]]

@@ -1,0 +1,133 @@
+# 页面: 紫晶洞
+# 来源: https://zh.minecraft.wiki/w/%E7%B4%AB%E6%99%B6%E6%B4%9E
+# 分类: 使用计算器的页面, 地物
+# 抓取时间: 2026-07-14 17:33:45
+# 原始 Wikitext 内容:
+
+{{Infobox structure
+| group1 = 有裂缝的
+| 1-1 = Amethyst Geode.png
+| group2 = 无裂缝的
+| 2-1 = Amethyst Geode (uncracked).png
+| biome = 所有[[主世界]]生物群系
+| blocks = 
+* {{BlockLink|Amethyst Cluster}}
+* {{BlockLink|Large Amethyst Bud}}
+* {{BlockLink|Medium Amethyst Bud}}
+* {{BlockLink|Small Amethyst Bud}}
+* {{BlockLink|Block of Amethyst}}
+* {{BlockLink|Budding Amethyst}}
+* {{BlockLink|Calcite}}
+* {{BlockLink|Smooth Basalt}}
+| canspawn = 否
+| id = 见{{slink||数据值}}
+}}
+
+'''紫晶洞（Amethyst Geode）'''是一种地下[[地物]]，是[[紫水晶碎片]]和[[方解石]]的来源。
+
+== 生成 ==
+紫晶洞在主世界Y=30和[[基岩层]]之间的区域罕见地生成。每个[[区块]]平均有{{frac|1|24}}的概率尝试生成1个紫晶洞；若生成时选取的分布点位置有超过1个位于[[空气]]、[[基岩]]、[[水]]、[[熔岩]]、[[冰]]、[[浮冰]]或[[蓝冰]]中，生成会失败。紫晶洞生成时会替换大多数天然方块，因此常会截断或阻塞[[洞穴]]和[[废弃矿井]]；但基岩、[[刷怪笼]]、[[箱子]]等特定方块不会被其替换。紫晶洞也可能被后续生成的其他结构或地物覆盖。
+
+由于紫晶洞最高可在Y=30附近生成，其生成范围高于部分海床高度，因此在深海中有可能找到从海床上露出来的紫晶洞。
+
+{{Calculator|chunkbase|pois=Ag|zoom=0.75}}
+
+== 结构 ==
+{{for|详细的结构图示和方块构成|紫晶洞/结构}}
+
+紫晶洞的整体形状由{{range|3|4}}个随机分布点决定。生成时会在固定范围内逐格检查方块位置，并计算该位置到所有分布点的距离。每个分布点对该位置的影响近似按<math>\frac{1}{\sqrt{d^2 + o}}</math>计算，其中<math>d</math>为该位置到分布点的距离，<math>o</math>为该分布点的偏移值，因此距离越近影响越强，距离越远影响越弱；多个分布点的影响会叠加。若某个位置受到的总影响达到对应阈值，该位置就会成为紫晶洞的一部分，并根据总影响强弱被划分为内部[[空气]]、[[紫水晶块]]层、[[方解石]]层和[[平滑玄武岩]]层。
+
+因此，分布点的数量和相对位置会直接影响紫晶洞形状。分布点越多，总影响越容易达到阈值，紫晶洞通常越大；分布点越集中，影响会在同一区域叠加，形状通常更圆润、厚实；分布点越分散，达到阈值的区域会被拉向不同方向，形状通常更拉长、不规则，但总体方块数不一定更多。每个分布点还带有一个偏移值，偏移值越小，该点对附近位置的影响越强，紫晶洞通常略大；偏移值越大，影响越弱，紫晶洞通常略小。少量噪声会进一步使边缘产生不规则起伏。
+
+紫晶洞由三层组成，外层是平滑玄武岩，中层方解石，内层是紫水晶块，内侧为空腔。其中8.3%的紫水晶块会被替换为[[紫水晶母岩]]。
+
+所有紫水晶母岩生成完成后，每个紫水晶母岩有35%的概率尝试生成一个附着物；附着物会在[[小型紫晶芽]]、[[中型紫晶芽]]、[[大型紫晶芽]]和[[紫水晶簇]]中等概率随机选择。随后会按下、上、北、南、西、东的固定方向顺序检查紫水晶母岩的6个面，找到第一个可供晶芽或晶簇生长的位置后，将其放置在该面上；若相邻位置都不可生长，则不会生成附着物。
+
+紫晶洞有95%的概率产生裂缝，露出内部。洞穴不能切入紫晶洞，所以通常会被紫晶洞阻塞，除非裂缝与洞穴相交。
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|firstcolumnname=已配置的地物
+|displayname=[无显示名称]
+|spritename=geode
+|spritetype=env
+|nameid=amethyst_geode
+|featuretype=geode
+|foot=1
+}}
+
+{{el|be}}：
+{{ID table
+|firstcolumnname=地物
+|displayname=[无显示名称]
+|spritename=geode
+|spritetype=env
+|nameid=amethyst_geode_feature
+|foot=1}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2020年10月3日|link={{ytl|DBvZ2Iqmm3M|t=23m14s}}|[[Minecraft Live 2020]]中展示了紫晶洞。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=20w45a|[[File:Amethyst Geode JE1.png|32px]] [[File:Amethyst Geode (uncracked) JE1.png|32px]] 加入了紫晶洞。}}
+|{{HistoryLine|||dev=21w08a|[[File:Amethyst Geode JE2 BE1.png|32px]] [[File:Amethyst Geode (uncracked) JE2 BE1.png|32px]] [[平滑玄武岩]]取代了紫晶洞最外层的[[凝灰岩]]。}}
+|{{HistoryLine|||dev=21w20a|每个区块生成紫晶洞的概率由{{frac|1|30}}降低到{{frac|1|53}}。}}
+|{{HistoryLine||1.18|dev=21w41a|现在紫晶洞仅在Y{{=}}30以下生成。
+|每个区块生成紫晶洞的概率由{{frac|1|53}}上升到{{frac|1|24}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.0|exg=caves_and_cliffs|dev=1.17.0.50|[[File:Amethyst Geode JE2 BE1.png|32px]] [[File:Amethyst Geode (uncracked) JE2 BE1.png|32px]] 加入了紫晶洞。}}
+|{{HistoryLine|||exg=none|dev=1.17.0.52|紫晶洞不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.17.0.56|每个区块生成紫晶洞的概率由{{frac|1|48}}降低到{{frac|1|53}}。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.21|现在紫晶洞仅在Y{{=}}30以下生成。
+|每个区块生成紫晶洞的概率由{{frac|1|53}}上升到{{frac|1|24}}。}}
+}}
+
+== 你知道吗 ==
+* {{el|be}}中已无法创建的[[旧世界类型]]无法生成[[洞穴]]和[[峡谷]]等地下结构，但紫晶洞仍然可以生成。
+
+== 画廊 ==
+<gallery>
+Amethyst geode.png|一处开裂的紫晶洞
+Small Geode.png|一处完好无损的紫晶洞
+ASmallGeode.png|一处小型紫晶洞
+3 Close Geodes.png|三处紫晶洞
+Geode tumor.png|一处紫晶洞的外层、中层和内层；注意该紫晶洞外层有明显的突起，但内层形状不受其影响
+</gallery>
+
+=== 反常生成 ===
+<gallery>
+Shpiwreck in geode.png|紫晶洞和[[沉船]]重叠生成
+An Amethyt Geode Where It Should Be An End Portal.png|旧版本中紫晶洞和[[要塞]]重叠生成，并且覆盖掉了末地传送门框架<ref>{{bug|MCPE-129861|||Fixed}}</ref>
+Amethyst Geode & Mineshaft.png|紫晶洞和[[废弃矿井]]重叠生成
+Amethyst Geode & Dungeon.png|紫晶洞和[[刷怪房]]重叠生成
+Geode and Fossil.png|[[化石]]生成在紫晶洞中
+Amethyst geode with stronghold.png|新版本中紫晶洞和要塞仍会重叠生成，但并没有覆盖掉末地传送门框架
+</gallery>
+
+=== 概念图 ===
+<gallery>
+Geode concept art 1.jpg|紫晶洞的一个早期设计
+Geode concept art 2.jpg|紫晶洞的另一个早期设计
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox world features|features}}
+
+[[de:Amethystgeode]]
+[[en:Amethyst Geode]]
+[[es:Geoda de amatista]]
+[[fr:Géode d'améthyste]]
+[[it:Geode di ametista]]
+[[ja:アメジストジオード]]
+[[ko:자수정 정동]]
+[[lzh:紫玉窟]]
+[[pl:Geoda ametystowa]]
+[[pt:Geodo de ametista]]
+[[ru:Аметистовая жеода]]
+[[th:จีโอดแอเมทิสต์]]
+[[uk:Аметистова жеода]]

@@ -1,0 +1,151 @@
+# 页面: 命令/give
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/give
+# 分类: Java版即将到来/26.3, Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=give
+|oplevel=2\1
+|cheat=1}}
+
+给予玩家指定数量的物品。
+
+== 用法 ==
+给予玩家指定数量的物品，若<code><targets></code>或<code>player: target</code>指定了多个目标，每个目标都会收到指定数量的物品。
+
+{{in|je}}将在目标位置生成指定的[[物品实体]]。当目标物品栏有剩余空间或处于[[创造模式]]时，该物品实体与实际给予的物品无关，无法被捡起且会在1[[刻]]后消失；若目标物品栏已满，则此物品实体为物品栏无法容纳的部分，可以被立即捡起，且只有目标玩家能捡起此掉落物。
+
+== 语法 ==
+* '''Java版'''
+: <code>give <targets> <item> [<count>]</code>
+
+* '''基岩版'''
+: <code>give <player: target> <itemName: Item> [amount: int] [data: int] [components: json]</code>
+
+== 参数 ==
+{{argument|targets|entity|player: target|CommandSelector<Player>}}
+:{{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+{{argument|item|item_stack|itemName: Item|CommandItem}}
+:指定给予的物品。
+:{{arg desc|je=item_stack|be=CommandItem}}
+
+{{argument|count|integer|amount: int|int}}
+:指定给予的物品数量。必须在{{only|je|for=1~100组（目标物品最大堆叠数&times;100，一般为6400）}}或{{only|be|for=1~32767}}间（含）。若未指定，默认为1。
+
+{{el|be|short=1}}：{{argument|be=1|data: int|int}}
+:指定所给予物品的[[基岩版数据值|数据值]]。必须为介于0和32767之间的整数（含），但是当数据值对于指定的物品ID无效时，会被重置为0。若未指定，默认为0。
+
+{{el|be|short=1}}：{{argument|be=1|components: json|Json::Value}}
+:指定所给予物品的[[基岩版物品堆叠组件|物品堆叠组件]]。
+:{{arg desc|be=Json::Value}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><targets></code>或<code>player: target</code>未能选中一个或多个玩家|fail|fail}}
+{{Result table|<code><item></code>或<code>itemName: item</code>为不可获得物品}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器|N/A}}
+{{Result table|<code>amount: int</code>小于1或大于32767}}
+{{Result table|<code>data: int</code>小于0或大于32767}}
+{{Result table|<code><count></code>多于100组物品|fail|N/A}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0}}
+{{Output table|执行成功|1|1|被给予物品的玩家数}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|被给予物品的玩家数}}
+{{Output table}}
+
+== 示例 ==
+* 给予执行者64个泥土：
+** <code>/give @s dirt 64</code>
+* 给予所有玩家一瓶夜视药水：
+** {{el|je|short=1}}：<code>/give @a potion[minecraft:potion_contents={potion:"minecraft:night_vision"}]</code>
+** {{el|be|short=1}}：<code>/give @a potion 1 5</code>
+* 给予自己一把在[[冒险模式]]下可以破坏草方块的铁锹：
+** {{el|je|short=1}}：<code>/give @s iron_shovel[minecraft:can_break={blocks:"minecraft:grass_block"}] 1</code>
+** {{el|be|short=1}}：<code>/give @s iron_shovel 1 0 {"minecraft:can_destroy":{"blocks":["grass"]}}</code>
+* {{in|je}}给予最近的玩家一把钻石剑，物品附加描述“Sword”：
+** <code>/give @p minecraft:diamond_sword[minecraft:lore=["Sword"]] 1</code>
+* {{in|je}}给予自己一把带有[[锋利]]X的钻石剑：
+** <code>/give @s minecraft:diamond_sword[minecraft:enchantments={"minecraft:sharpness":10}]</code>
+* 给予自己一块在冒险模式中能放置在泥土上、且可破坏石英块的钻石块：
+** {{el|je|short=1}}：<code>/give @s minecraft:diamond_block[minecraft:can_place_on={blocks:"minecraft:dirt"},minecraft:can_break={blocks:"minecraft:quartz_block"}] 1</code>
+** {{el|be|short=1}}：<code><nowiki>/give @s diamond_block 1 0 {"minecraft:can_place_on":{"blocks":["dirt"]},"minecraft:can_destroy":{"blocks":["quartz_block"]}}</nowiki></code>
+* {{in|je}}给予所有玩家一瓶带有[[击退]]X效果的2级“[[衰变药水]]”：
+** {{cmd|1=give @a minecraft:potion[minecraft:potion_contents={custom_effects:[{id:"minecraft:wither", amplifier:1b, duration:420}], custom_color:5653821}, minecraft:custom_name={type:"text", text:"衰变药水", italic:false}, minecraft:enchantments={"minecraft:knockback":10}] 1|long=1|link=none}}
+* 给予自己一块在冒险模式下可以放置在石头上的草方块：
+** {{el|je|short=1}}：<code>/give @s grass_block[can_place_on={blocks:"stone"}] 1</code>
+** {{el|be|short=1}}：<code>/give @s grass 1 0 {"minecraft:can_place_on":{"blocks":["stone"]}}</code>
+* {{in|je}}给予自己一个在放置后会生成村庄的盔甲匠的战利品宝箱：
+** <code>/give @s chest[block_entity_data={id:"chest",LootTable:"chests/village/village_armorer"}] 1</code>
+** 或：<code>/give @s chest[container_loot={loot_table:"chests/village/village_armorer"}] 1</code>
+* 给予自己一把已消耗58点耐久度的木镐：
+** {{el|je|short=1}}：<code>/give @s wooden_pickaxe[damage=58] 1</code>
+** {{el|be|short=1}}：<code>/give @s wooden_pickaxe 1 58</code>
+* {{in|je}}给予自己一把无法破坏的钻石剑：
+** <code>/give @s diamond_sword[unbreakable={}]</code>
+
+{{collapseH|Java版旧格式示例}}
+*给予自己一把无法破坏的钻石剑：
+** 1.13 – 1.20.4：<code><nowiki>/give @s minecraft:diamond_sword{Unbreakable:1b}</nowiki></code>
+* 给予最近的玩家一把钻石剑，物品附加描述“Sword”：
+** 1.13 – 1.20.4：<code><nowiki>/give @p minecraft:diamond_sword{display:{Lore:['"Sword"']}} 1</nowiki></code>
+** 1.20.5 – 1.21.4：<code><nowiki>/give @p minecraft:diamond_sword[minecraft:lore=['"Sword"']] 1</nowiki></code>
+* 给予所有玩家一瓶夜视药水：
+** 1.13 – 1.20.4：<code>/give @a potion{Potion:"minecraft:night_vision"}</code>
+* 给予自己一把带有锋利X的钻石剑：
+** 1.13 – 1.20.4：<code>/give @s minecraft:diamond_sword{Enchantments:[{id:"minecraft:sharpness",lvl:10}]} 1</code>
+* 给予自己一块在冒险模式中能放置在泥土上、且可破坏石英块的钻石块：
+** 1.13 – 1.20.4：<code>/give @s minecraft:diamond_block{CanPlaceOn:["minecraft:dirt"],CanDestroy:["minecraft:quartz_block"]} 1</code>
+** 1.20.5 – 1.21.4：<code>/give @s minecraft:diamond_block[minecraft:can_place_on={predicates:[{blocks:"minecraft:dirt"}]},minecraft:can_break={predicates:[{blocks:"minecraft:quartz_block"}]}] 1</code>
+* 给予自己一个在放置后会生成村庄的盔甲匠的战利品宝箱：
+** 1.13 – 1.20.4：<code>/give @s chest{BlockEntityTag:{LootTable:"chests/village/village_armorer"}} 1</code>
+* 给予自己一把已消耗58点耐久度的木镐：
+** 1.7.2 – 1.12.2：<code>/give @s wooden_pickaxe 1 58</code>
+{{collapseE}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.15|（[[Java版Alpha服务器0.1.0]]）加入了{{cmd|give|link=none}}。命令用于给予特定玩家的单个物品，并且只能使用数字ID。}}
+|{{HistoryLine||v1.0.16_01|加入了数量参数。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre4|加入了耐久值参数。}}
+|{{HistoryLine||1.3.1|dev=12w16a|现在能在单人游戏中使用。}}
+|{{HistoryLine||1.4.2|dev=12w38a|{{cmd|give|link=none}}现在会把物品直接放入玩家的物品栏内，而不是扔到地上。}}
+|{{HistoryLine||1.5|dev=13w04a|{{cmd|give|link=none}}现在可以接受[[Java版数据值/扁平化前|数据值]]作为其第四个参数。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了{{cd|dataTag}}参数。}}
+|{{HistoryLine|||dev=13w37a|<code>''物品''</code>参数现在也可以接受名称ID。}}
+|{{HistoryLine||1.8|dev=14w03b|<code>''物品''</code>参数不再接受数字ID。}}
+|{{HistoryLine|||dev=14w25a|更改了物品渲染的方式和方块数据值的内部表示法。}}
+|{{HistoryLine|||dev=14w32b|现在<code>''物品''</code>参数无法突破堆叠限制。}}
+|{{HistoryLine||1.12|dev=17w16b|当<code>-{}-''目标''</code>指定为玩家自己时，实际上会使用<code>@s</code>选择器作为目标。}}
+|{{HistoryLine||1.13|dev=17w45a|移除了数据值和NBT标签参数。}}
+|{{HistoryLine||1.17|dev=21w10a|加入了数量限制，现在一次性只能给予玩家等价于100组的物品了。}}
+|{{HistoryLine||1.20.5|dev=24w09a|更改了语法，现在不再使用物品<code>-{}-''NBT标签''</code>，而是<code>-{}-''物品堆叠组件''</code>。}}
+|{{HistoryLine||26.1|dev=snapshot-5|现在在<code><item></code>参数指定无效的物品时，命令会执行失败，而不是无法解析。}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在当物品数量超过上限时，命令会返回错误而不是打印错误信息并返回0。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|give|link=none}}命令。|用法与[[Java版1.10]]中基本相同：不支持NBT标签，且{{cd|player}}目标是可选的。}}
+}}
+
+== 参见 ==
+* {{cmd|summon}} — 在任意位置生成任何实体
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/give]]
+[[en:Commands/give]]
+[[es:Comandos/give]]
+[[fr:commandes/give]]
+[[ja:コマンド/give]]
+[[pt:Comandos/give]]
+[[ru:Команды консоли/give]]
+[[uk:Команди консолі/give]]

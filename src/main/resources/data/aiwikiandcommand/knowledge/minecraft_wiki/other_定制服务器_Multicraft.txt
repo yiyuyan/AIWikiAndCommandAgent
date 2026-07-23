@@ -1,0 +1,178 @@
+# 页面: 定制服务器/Multicraft
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9A%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/Multicraft
+# 分类: 自定义软件
+# 抓取时间: 2026-07-14 17:25:13
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|访问|存取}}
+{{Disclaimer}}
+{{Infobox 3rd party tool
+| image = Mc_screen_small.png
+| author = [http://www.xhost.ch xhost.ch GmbH]
+| platform = {{OS|linux|win}}
+| programming language = Python, PHP
+| version = b1.4.0
+| date = 2011-10-20
+| size = 20MB
+| license = 多种
+| source available = 前端
+| nether support = 是
+| minecraft version = 所有
+| website = http://www.multicraft.org
+| forum = http://www.minecraftforum.net/viewtopic.php?f=10&t=112935
+}}
+[[File:Multicraft.png|左|32px]]
+'''Multicraft''' 是一个允许用户在一个基于 web 的用户界面上管理多个服务器的 Minecraft 服务器控制面板。这些服务器可以运行在多个物理或虚拟机器上。
+
+Multicraft 的 [http://www.facebook.com/multicraft Facebook]、 [http://twitter.com/multicraftcp Twitter]和 [http://www.youtube.com/multicraftcp YouTube]。
+
+== 功能 ==
+* 从一个地方管理多个服务器
+* 独立的 Minecraft 更新
+* 适合大规模部署
+* Ajax 动态日志/聊天/玩家界面
+* 支持 Mod
+* 可用 API
+* 计费集成可用（如 ''WHMCS'' 和 ''BoxBilling''）
+* 支持 Vanilla 和 Bukkit
+
+== 版本 ==
+=== 免费版 ===
+这是基础版的Muticraft，玩家可以在一个机器上管理一个Minecraft[[服务器]]，包含指出此服务器由Multicraft运行的文本广告。
+
+=== 拥有版 ===
+这个版本允许在1台机器上拥有2个 Minecraft 服务器实例。
+
+=== 动态版 ===
+这个许可证允许管理任何数量的 Minecraft 服务器，每个月都会有折扣价，取决于服务器数量。服务器运行的机器数量不对价格造成影响。
+
+== 安全漏洞 ==
+<!-- 
+Before you add/remove to this section, consider the following
+ - Has this security issue been fixed in later versions? Maybe you'd like to look over all the issues and check. 
+ - If updating and a user is still affected than it is STILL a security issue.
+ - Validate that it IS still a security issue BEFORE adding the issue
+ - Validate that it ISN'T still a security issue BEFORE removing the issue
+-->
+
+Multicraft 拥有多个已知的安全漏洞，<ref>http://www.multicraft.org/site/page?view=security</ref>，当安全建议不遵循正确的规则时可能会导致问题。这些漏洞[http://www.multicraft.org/site/page?view=security 已经列出在他们的网站上]。
+
+下列是已知的安全漏洞，并且需要用户手动修复：
+* 被 "protected"（保护）的目录未被保护：被一位恶意用户使用未被披露的漏洞（不仅仅是在 Multicraft，例如还有 Apache）读写这个目录里的内容。
+* API 访问被滥用：如果一位恶意用户获得了 API 的详细信息，API 可能被滥用，因此如果没有必要，它应该是关闭的。
+* 拥有无限制超级用户权限：一位恶意用户通过你的控制面板获得无限制超级用户权限。
+* 拥有 Multicrafts 保护进程的公共权限：这是一个很大的安全问题，允许强行攻击。
+* 面板数据库与保护进程不分离：如果一起工作，一旦保护进程被恶意用户入侵，那么整个 Multicraft 网络将会岌岌可危。
+* 不在多用户模式中运行保护进程：没有多用户模式，用户和服务端并不是分离的，那么插件可能“黑”进服务器里进行恶意破坏。
+* Multicraft 不会自动加密备份数据：备份数据未被加密，服务器上的插件可通过一个公共数据读取端口读取它们。
+* Java 安全管理器未被自动配置：Java 安全管理器未被正确配置，这需要令人沮丧的巨大安装。
+
+== 其他服务 ==
+其他服务也通过 Multicraft 提供，<ref>http://www.multicraft.org/site/page?view=services</ref>这些通常需要支付费用的。
+
+=== BoxBilling Module ===
+购买 The BoxBilling Module 需要 €4.99 （~$6.75 美金）。可“实现自动管理你的服务器和 Multicraft 上的用户安装的功能”。[http://www.multicraft.org/site/page?view=boxbilling 这里]是完整文档。
+
+=== WHMCS Module ===
+购买 The WHMCS Module 需要 €4.99 (~美金 $6.75)。可“实现自动管理你的服务器和 Multicraft 上的用户安装的功能”。这个安装比 BoxBilling 的安装时间还要多一点点。<ref>http://www.multicraft.org/site/page?view=whmcs</ref>[http://www.multicraft.org/site/page?view=whmcs 这里]是完整文档。
+
+=== 自定义 ===
+Multicraft 向自定义服务器提供他们的控制面板。
+
+“Multicraft 可以被在任何数量的途径的应用程序中被自定义，想要你的 Multicraft 用户变成你的社区用户？想要在你的网站上拥有完整的 Multicraft 功能？所有的事情都可以完成，留下你的留言和详细信息来联系我们。”<ref>http://www.multicraft.org/site/page?view=services</ref>
+
+=== Linux 安装 ===
+Multicraft 提供了控制面板的安装程序。
+
+包括：
+* 控制面板 × 1
+* 保护线程 × 1
+* 只能在一台机器上运行。
+
+这将花费 €49.90 （$67.48 美元）。没有任何的文档提供（或需要），除了 Multicraft 文档。
+== 使用 Multicraft 的托管提供商 ==
+这里是托管提供商在他们的服务器上运行 Multicraft 的名单。如果在该名单上找不到你公司的名字，请添加。
+
+
+* [https://3gsnhosting.com/ 3GSN Hosting]
+* [http://akliz.net/minecraft Akliz Minecraft Servers]
+* [http://www.apexminecrafthosting.com Apex Minecraft Hosting]
+* [http://asciidigital.com/minecraft.php ASCIIDiGital]
+* [http://astralgameservers.com/ Astral Game Servers]
+* [http://avantehosting.net/ Avante Hosting]
+* [http://beastnode.com/ Beastnode]
+* [http://blacksun.ca/ Blacksun Hosting]
+* [http://blockhost.de/ Blockhost]
+* [http://clostinginnovations.com/ Closting Innovations]
+* [http://cloudboo.org/ CloudBoo Minecraft Hosting]
+* [http://cloudfrosthosting.com/ CloudFrost Hosting]
+* [http://cookiehosting.net/ CookieHosting]
+* [http://craftbuy.ru/ CraftBuy]
+* [http://www.craftdot.net/ Craftdot]
+* [http://craftserve.pl/ CraftServe]
+* [http://mc.cr-sa.net/ Creativity Host]
+* [https://cubedhost.com/ CubedHost]
+* [http://daddycheese.com/ Daddycheese Hosting]
+* [http://dedishops.com/ DediZones Hosting]
+* [http://deluxemchost.com/ DeluxeMcHost]
+* [http://dotvps.net/ DotVPS]
+* [http://dutchhosts.nl/ DutchHosts]
+* [http://ease-host.com/ Ease Host]
+* [http://edgevps.net/ EdgeVPS]
+* [http://embercore.com/ EmberCore]
+* [http://exodushosting.net/ Exodus Hosting]
+* [http://gamerealm.net/ GameRealm Hosting]
+* [http://gamingservers.us/ GamingServers]
+* [https://ggservers.net/ GGServers]
+* [http://hooplahosting.com/ Hoopla Hosting]
+* [http://hostaltitude.com/ Host Altitude]
+* [http://hosthorde.com/ Hosthorde]
+* [http://hypanova.com/ Hypanova]
+* [http://mcprohosting.com/ MC Pro Hosting]
+* [http://mcserv.ru/ McServ]
+* [http://minecraftedge.com/ MinecraftEdge]
+* [http://minecraftlayer.com/ MinecraftLayer]
+* [http://minehoster.co.uk/ MineHoster]
+* [http://minecraft-node.com/ Minecraft Node Hosting]
+* [http://minecraft.com.pt/ Minecraft PR Servers]
+* [http://minecraft4u.com/ Minecraft4u]
+* [http://minecraftnode.net/ Minecraft Node]
+* [http://minecraft-heros.com/ Minecraft Heros]
+* [http://minecraftserver.net/ Minecraft Server]
+* [http://minecraftts.com/ MinecraftTS]
+* [http://morinhosting.com/ Morin Hosting]
+* [http://mossycobble.com/ Mossycobble Minecraft Hosting]
+* [http://mymcserv.com/ MyMCServ]
+* [http://nettor.se/ Nettor IT Solutions]
+* [http://webinterface.nolimit-host.eu/ NoLimit-Host.eu]
+* [http://nrtservers.com/ NRT Servers]
+* [http://ociushost.com/ OciusHost]
+* [http://orangelemon.nl/ Orange Lemon]
+* [http://orca-host.com/ Orca Host]
+* [http://peak-hosting.com/ Peak Hosting]
+* [http://redrangerhosting.com/ Red Ranger Hosting]
+* [http://redstonehosting.net/ Redstone Hosting]
+* [http://reptilehosting.com/ Reptile Hosting]
+* [http://beuteugeu.com/ RWD]
+* [http://rox-heberg.com/ Rox Heberg]
+* [http://shadyshosting.com/ Shadyshosting]
+* [http://shockbyte.com/ Shockbyte]
+* [http://squirrelservers.com/ Squirrel Servers]
+* [http://standouthost.com/ StandOut Host]
+* [http://swiftmchosting.com/ SwiftMCHosting]
+* [http://tactical-gameservers.com/ Tactical Gameservers]
+* [http://thewebgamer.net/ TheWebGamer]
+* [http://thundercloudgames.com ThunderCloud games]
+* [http://ultiminer.com/ UltiMiner]
+* [http://venomservers.net/ VenomServers]
+* [http://voidhosting.co.uk/ Void Hosting]
+* [http://voodooservers.com/ Voodoo Servers]
+* [http://xhost.ch/ Xhost]
+* [http://minecraft.xtremeserverhost.com/ XtremeServerHost]
+* [http://zadehosting.net/ ZadeHosting]
+* [http://hosting.zestycraft.com/ ZestyCraft Hosting]
+
+== 参考 ==
+<references/>
+
+[[Category:自定义软件]]

@@ -1,0 +1,800 @@
+# 页面: 环境属性
+# 来源: https://zh.minecraft.wiki/w/%E7%8E%AF%E5%A2%83%E5%B1%9E%E6%80%A7
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:11
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|应用|套用}}
+{{exclusive|java}}
+{{relevant tutorial|环境属性}}
+'''环境属性（Environment Attribute）'''是根据不同环境来控制各种视觉效果和游戏机制等玩法的机制。
+
+{{TOC limit|3}}
+
+== 环境属性 ==
+环境属性提供了基于不同环境而具有不同游戏玩法和视觉效果的机制。所谓“环境”，即'''环境属性源（Environment Attribute Source）'''，目前游戏共有四个环境属性源，按照应用顺序依次为[[维度]]、[[生物群系]]、[[时间线]]和[[天气]]。
+
+维度和天气提供了全局的环境属性，时间线提供了基于时间的环境属性，生物群系提供了基于特定位置的环境属性。
+
+=== 修饰符 ===
+不同的环境属性源可能提供相同的环境属性，游戏会将其叠加操作后作为实际应用的环境属性，而'''修饰符（Modifiers）'''决定了叠加操作的方式。
+
+修饰符的可用值取决于具体的环境属性，所有的环境属性均具有'''覆盖操作（<code>override</code>）'''这一种修饰符，其效果为仅应用最后一个应用的环境属性。
+
+例如：若主世界维度指定天空颜色为蓝色，平原生物群系指定天空颜色为绿色，其他主世界生物群系未定义天空颜色，则玩家在主世界的平原生物群系时，天空颜色为绿色；在主世界的其他生物群系时，天空颜色为蓝色。
+
+=== 插值 ===
+部分环境属性可插值，当玩家在环境属性不同的区域间移动时，游戏不会立刻切换环境效果，而是会对其进行平滑过渡。游戏会在插值计算时一并应用修饰符。
+
+环境属性的可插值是其固有性质，游戏并不总是进行插值计算。目前游戏会在下列情况下使用插值：
+* 计算部分以摄像机坐标获取的环境属性。在摄像机周围半径10格内占据区域最多的生物群系会对插值产生最大的影响。
+* 计算时间线的环境属性轨道。根据属性轨道和时间进行插值。
+
+例如：若主世界维度指定云层高度为100，平原生物群系指定云层高度为1700，其他主世界生物群系未定义云层高度，则摄像机在主世界的平原生物群系与其他生物群系的交界处时云层高度可以是100至1700之间的任何值，但对于快乐恶魂而言云层高度只有100和1700两个值。
+
+== 定义格式 ==
+环境属性目前有两种格式：
+* '''环境属性映射'''：环境属性映射可以定义在[[维度类型|维度类型定义文件]]和[[生物群系定义格式|生物群系定义文件]]的{{nbt|compound|attributes}}字段内，分别对应维度和生物群系环境属性源。环境属性映射的即多个环境属性ID与其修饰符的映射，格式如下。
+* '''环境属性轨道'''：环境属性轨道可以定义在时间线定义文件内，定义了环境属性随时间变化的值，格式详见{{slink|时间线定义格式|定义格式}}。
+
+<div class="treeview">
+* {{nbt|compound}} 环境属性映射根节点
+** {{nbt|any|<''环境属性ID''>}}：环境属性ID对应的环境属性值。这将被视为使用了默认的<code>override</code>修饰符。
+** {{nbt|compound|<''环境属性ID''>}}：另一种格式，允许指定其他类型的修饰符。见{{slink||环境属性修饰符}}。
+*** {{nbt|string|modifier|required=1}}：要应用的修饰符类型，必须与相应环境属性的数据类型对应。
+*** {{nbt|any|argument|required=1}}：该修饰符的参数，不同的修饰符具有不同的可用参数。
+</div>
+
+目前天气环境属性被硬编码，不可修改。其效果见{{slink||天气环境属性}}。
+
+== 通用结构 ==
+以下为被不同环境属性和环境属性修饰符使用的较为复杂的数据类型。
+
+=== RGB颜色 ===
+<div class="treeview">
+* {{nbt|string}}{{nbt|int}}{{nbt|list}} RGB颜色
+{{#lst:编码格式/Color|codec_string_rgb_color}}
+</div>
+
+=== ARGB颜色 ===
+<div class="treeview">
+* {{nbt|string}}{{nbt|int}}{{nbt|list}} ARGB颜色
+{{#lst:编码格式/Color|codec_string_argb_color}}
+</div>
+
+== 环境属性列表 ==
+=== 视觉效果 ===
+{|class="floatright sortable wikitable"
+! 环境属性<br>（省略visual前缀） !! class="unsortable" | 主要作用
+|-
+| <code>[[#visual/fog_color|fog_color]]</code>
+| 迷雾颜色
+|-
+| <code>[[#visual/fog_start_distance|fog_start_distance]]</code>
+| 迷雾起始距离
+|-
+| <code>[[#visual/fog_end_distance|fog_end_distance]]</code>
+| 迷雾可见距离
+|-
+| <code>[[#visual/sky_fog_end_distance|sky_fog_end_distance]]</code>
+| 天空迷雾可见距离
+|-
+| <code>[[#visual/cloud_fog_end_distance|cloud_fog_end_distance]]</code>
+| 云层迷雾可见距离
+|-
+| <code>[[#visual/water_fog_color|water_fog_color]]</code>
+| 水下迷雾颜色
+|-
+| <code>[[#visual/water_fog_start_distance|water_fog_start_distance]]</code>
+| 水下迷雾起始距离
+|-
+| <code>[[#visual/water_fog_end_distance|water_fog_end_distance]]</code>
+| 水下迷雾可见距离
+|-
+| <code>[[#visual/sky_color|sky_color]]</code>
+| 天空颜色
+|-
+| <code>[[#visual/sunrise_sunset_color|sunrise_sunset_color]]</code>
+| 日出日落效果颜色
+|-
+| <code>[[#visual/cloud_color|cloud_color]]</code>
+| 云层颜色
+|-
+| <code>[[#visual/cloud_height|cloud_height]]</code>
+| 云层高度
+|-
+| <code>[[#visual/sun_angle|sun_angle]]</code>
+| 太阳角度
+|-
+| <code>[[#visual/moon_angle|moon_angle]]</code>
+| 月亮角度
+|-
+| <code>[[#visual/star_angle|star_angle]]</code>
+| 星星角度
+|-
+| <code>[[#visual/moon_phase|moon_phase]]</code>
+| 月相
+|-
+| <code>[[#visual/star_brightness|star_brightness]]</code>
+| 星星亮度
+|-
+| <code>[[#visual/block_light_tint|block_light_tint]]</code>
+| 方块光照颜色
+|-
+| <code>[[#visual/sky_light_color|sky_light_color]]</code>
+| 天空光照颜色
+|-
+| <code>[[#visual/sky_light_factor|sky_light_factor]]</code>
+| 天空光照渲染强度
+|-
+| <code>[[#visual/night_vision_color|night_vision_color]]</code>
+| 夜视效果提供的渲染光照颜色
+|-
+| <code>[[#visual/ambient_light_color|ambient_light_color]]</code>
+| 维度环境光照颜色
+|-
+| <code>[[#visual/default_dripstone_particle|default_dripstone_particle]]</code>
+| 滴水石锥默认粒子效果
+|-
+| <code>[[#visual/ambient_particles|ambient_particles]]</code>
+| 环境粒子
+|}
+
+这些环境属性主要影响游戏的视觉效果。
+
+==== visual/fog_color ====
+控制[[迷雾]]的颜色。迷雾的最终颜色也会被[[昼夜更替]]、[[药水效果]]等因素影响。
+
+数据类型为[[#RGB颜色|RGB颜色]]，默认值为{{color|#000000}}，可使用[[#RGB颜色修饰符|RGB颜色修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/fog_start_distance ====
+控制迷雾的起始距离，以方块为单位。迷雾的起始距离是迷雾从完全透明到开始有影响的距离，如果为负数，则迷雾将初始存在，就像它从摄像机后面开始产生影响一样。迷雾的最终起始距离也会受天气等因素影响。
+
+数据类型为{{nbt|float|浮点数}}，默认值为<code>0.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/fog_end_distance ====
+控制迷雾的结束距离，以方块为单位。迷雾的结束距离也被称为可见距离，是迷雾达到最大浓度的距离，超过结束距离后迷雾将完全不透明。迷雾的最终结束距离也会受天气等因素影响，且不会小于96格。
+
+数据类型为{{nbt|float|浮点数}}，且必须大于0，默认值为<code>1024.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/sky_fog_end_distance ====
+控制天空迷雾的结束距离，以方块为单位。
+
+数据类型为{{nbt|float|浮点数}}，且必须大于0，默认值为<code>512.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/cloud_fog_end_distance ====
+控制云层迷雾的结束距离，以方块为单位。
+
+数据类型为{{nbt|float|浮点数}}，且必须大于0，默认值为<code>2048.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/water_fog_color ====
+控制[[迷雾#水下迷雾|水下迷雾]]的颜色。水下迷雾的最终颜色也会被昼夜更替、药水效果等因素影响。
+
+数据类型为[[#RGB颜色|RGB颜色]]，默认值为{{color|#050533}}，可使用[[#RGB颜色修饰符|RGB颜色修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/water_fog_start_distance ====
+控制水下迷雾的起始距离，以方块为单位。如果为负数，则迷雾将初始存在，就像它从摄像机后面开始产生影响一样。
+
+数据类型为{{nbt|float|浮点数}}，默认值为<code>-8.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/water_fog_end_distance ====
+控制水下迷雾的结束距离，以方块为单位。水下迷雾的最终结束距离也和玩家在水下的时长有关。
+
+数据类型为{{nbt|float|浮点数}}，且必须大于0，默认值为<code>96.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/sky_color ====
+控制天空颜色。
+
+数据类型为[[#RGB颜色|RGB颜色]]，默认值为{{color|#000000}}，可使用[[#RGB颜色修饰符|RGB颜色修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/sunrise_sunset_color ====
+控制[[天空#日出日落效果|日出日落效果]]颜色。如果完全透明则不会渲染日出日落效果。日出日落效果仅在<code>overworld</code>天空盒下才会渲染，在天空东侧还是西侧渲染取决于太阳的位置。
+
+数据类型为[[#ARGB颜色|ARGB颜色]]，默认值为{{color|#00000000}}，可使用[[#ARGB颜色修饰符|ARGB颜色修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/cloud_color ====
+控制[[云层]]颜色。如果完全透明则不会渲染云，且实体也不会认为自身在云中，例如[[快乐恶魂]]对云层的判定。
+
+数据类型为[[#ARGB颜色|ARGB颜色]]，默认值为{{color|#00000000}}，可使用[[#ARGB颜色修饰符|ARGB颜色修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/cloud_height ====
+控制云层高度。如果云层透明度不为0，则实体在世界界限内、云层高度至云层高度之上4格内的区域时会认为自身在云中。
+
+数据类型为{{nbt|float|浮点数}}，默认值为<code>192.33</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/sun_angle ====
+控制[[太阳]]的高度角，单位为度，为0时恰好在摄像机正上方，从东到西顺时针计算。太阳仅在<code>overworld</code>天空盒下才会渲染。它也影响[[时钟]]的角度和[[阳光探测器]]的部分计算。
+
+数据类型为{{nbt|float|浮点数}}，默认值为<code>0.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值。获取位置如下：
+* 天空中的太阳渲染：摄像机位置。
+* 物品模型：物品持有者的位置。
+* 阳光探测器：阳光探测器的位置。
+
+当初始值和目标值之差对360.0取余超过90.0时，游戏直接跳到目标值，不进行插值。
+
+==== visual/moon_angle ====
+控制[[月亮]]的高度角，单位为度，为0时恰好在摄像机正上方，从东到西顺时针计算。月亮仅在<code>overworld</code>天空盒下才会渲染。
+
+数据类型为{{nbt|float|浮点数}}，默认值为<code>0.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+当初始值和目标值之差对360.0取余超过90.0时，游戏直接跳到目标值，不进行插值。
+
+==== visual/star_angle ====
+控制[[星星]]的高度角，单位为度，为0时恰好在摄像机正上方，从东到西顺时针计算。星星仅在<code>overworld</code>天空盒下才会渲染。
+
+数据类型为{{nbt|float|浮点数}}，默认值为<code>0.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+当初始值和目标值之差对360.0取余超过90.0时，游戏直接跳到目标值，不进行插值。
+
+==== visual/moon_phase ====
+控制[[月相]]，包括月亮渲染、月亮亮度、物品模型等一系列与月相相关的机制。
+
+数据类型为字符串枚举，默认值为<code>full_moon</code>，仅接受<code>override</code>修饰符。不可插值，获取位置如下：
+* 天空中的月亮渲染：摄像机位置。
+* 物品模型：物品持有者的位置。
+* 月亮亮度计算：对应的位置。
+
+可用枚举值如下：
+* <code>full_moon</code>（满月）
+* <code>waning_gibbous</code>（亏凸月）
+* <code>third_quarter</code>（下弦月）
+* <code>waning_crescent</code>（残月）
+* <code>new_moon</code>（新月）
+* <code>waxing_crescent</code>（峨眉月）
+* <code>first_quarter</code>（上弦月）
+* <code>waxing_gibbous</code>（盈凸月）
+
+==== visual/star_brightness ====
+控制星星的亮度。在原版定义下夜晚为0.5，白天为0。
+
+数据类型为{{nbt|float|浮点数}}，且必须在0至1之间，默认值为<code>0.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/block_light_tint ====
+控制方块光照的色调。方块光照颜色在低光照下为灰色，中等光照时会被此属性染色，高等级光照时为白色。该色调适合明亮的颜色，适用于所有的光源，但单个光源无法拥有不同的色调。技术上而言此环境属性提供了着色器lightmap的参数<code>BlockLightTint</code>。
+
+数据类型为[[#RGB颜色|RGB颜色]]，默认值为{{color|#FFD88C}}，可使用[[#RGB颜色修饰符|RGB颜色修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/sky_light_color ====
+控制[[天空光照]]的视觉颜色。对于天空光照为0或环境属性<code>visual/sky_light_factor</code>为0的区域没有任何效果。技术上而言此环境属性提供了[[着色器#lightmap|着色器lightmap]]的参数<code>SkyLightColor</code>。
+
+数据类型为[[#RGB颜色|RGB颜色]]，默认值为{{color|#FFFFFF}}，可使用[[#RGB颜色修饰符|RGB颜色修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/sky_light_factor ====
+控制天空光照的视觉亮度。天空光照的最终渲染将使用环境属性<code>visual/sky_light_color</code>的颜色乘上此值。技术上而言此环境属性提供了着色器lightmap的参数<code>SkyFactor</code>。
+
+数据类型为{{nbt|float|浮点数}}，且必须在0至1之间，默认值为<code>0.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/night_vision_color ====
+影响夜视光照的颜色，R、G、B每个通道都会选择此属性和<code>visual/ambient_light_color</code>属性提供的通道的最大值。技术上而言此环境属性提供了着色器lightmap的参数<code>NightVisionColor</code>。
+
+数据类型为[[#RGB颜色|RGB颜色]]，默认值为{{color|#999999}}，可使用[[#RGB颜色修饰符|RGB颜色修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/ambient_light_color ====
+控制环境光照的颜色。技术上而言此环境属性提供了着色器lightmap的参数<code>AmbientColor</code>。
+
+数据类型为[[#RGB颜色|RGB颜色]]，默认值为{{color|#FFFFFF}}，可使用[[#RGB颜色修饰符|RGB颜色修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== visual/default_dripstone_particle ====
+控制[[滴水石锥]]上方没有液体时滴落的默认粒子。
+
+数据类型为[[粒子数据格式|粒子选项]]，默认值为<code>{"type": "minecraft:dripping_dripstone_water"}</code>，仅接受<code>override</code>修饰符。不可插值，获取位置为滴水石锥的位置。
+
+==== visual/ambient_particles ====
+控制在摄像机周围渲染的环境粒子。游戏会尝试每刻在摄像机周围的每一个碰撞箱不完整的方块上尝试生成此粒子。
+
+数据类型较复杂（见下），默认为空数组，仅接受<code>override</code>修饰符。不可插值，获取位置为每个尝试生成环境粒子的方块坐标。
+
+<div class="treeview">
+* {{nbt|list}}
+** {{nbt|compound}}：单个环境粒子。
+*** {{nbt|compound|particle|required=1}}：要使用的粒子。
+**** 见[[粒子数据格式]]。
+*** {{nbt|float|probability|required=1}}: （{{interval|left=0|right=1}}）产生此粒子的概率。
+</div>
+
+=== 声音效果 ===
+{|class="floatright sortable wikitable"
+! 环境属性<br>（省略audio前缀） !! class="unsortable" | 主要作用
+|-
+| <code>[[#audio/background_music|background_music]]</code>
+| 音乐
+|-
+| <code>[[#audio/music_volume|music_volume]]</code>
+| 音乐音量
+|-
+| <code>[[#audio/ambient_sounds|ambient_sounds]]</code>
+| 环境音效
+|-
+| <code>[[#audio/firefly_bush_sounds|firefly_bush_sounds]]</code>
+| 萤火虫粒子条件判定
+|}
+这些环境属性主要影响游戏的声音效果。
+
+==== audio/background_music ====
+控制背景音乐。背景音乐的声音归属<code>music</code>（{{tp|soundCategory.music}}）分类，始终跟随玩家播放。若开启了{{tp|options.showNowPlayingToast}}选项，则游戏会将声音资源文件路径的<code>/</code>替换为<code>.</code>作为音乐弹窗名称的本地化键名。
+
+数据类型较复杂（见下），默认为空{{tr|对象|物件}}，仅接受<code>override</code>修饰符。不可插值，获取位置为摄像机的位置。
+
+<div class="treeview">
+* {{nbt|compound}}
+** {{nbt|compound|default}}：默认音乐。如果此值不存在，则不会播放音乐。
+*** {{nbt|string}}{{nbt|compound|sound|required=1}}：要播放的音乐。
+**** {{nbt inherit/sound event}}
+*** {{nbt|int|min_delay|required=1}}：两次播放间最小延迟。会受到{{tp|options.music_frequency}}[[选项]]的限制，因此实际最小延迟不会超过{{convert|24000||分}}。
+*** {{nbt|int|max_delay|required=1}}：两次播放间最大延迟。会受到{{tp|options.music_frequency}}选项的限制，因此实际最大延迟不会超过{{convert|24000||分}}。
+*** {{nbt|boolean|replace_current_music|required=1}}：是否立即替换正在播放的音乐。
+** {{nbt|compound|underwater}}：如果存在，则玩家在水下时会播放此音乐。
+*** 格式同{{nbt|compound|default}}。
+** {{nbt|compound|creative}}：如果存在，则玩家在创造模式时会播放此音乐。
+*** 格式同{{nbt|compound|default}}。
+</div>
+
+==== audio/music_volume ====
+控制背景音乐的音量。
+
+数据类型为{{nbt|float|浮点数}}，且必须在0至1之间，默认值为<code>1.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为摄像机的位置。
+
+==== audio/ambient_sounds ====
+控制环境音效。环境音效包括三类声音：分别是循环音效、附加音效和氛围音效。三种音效会互相独立地计算播放条件与播放声音，声音分类都归属<code>ambient</code>（{{tp|soundCategory.ambient}}）分类。
+* 循环音效会在玩家处于生物群系中时立刻播放，循环播放。声音始终跟随玩家播放，且音量会在玩家进出生物群系时淡入淡出。
+* 附加音效会在玩家处于此生物群系时每刻随机播放。声音始终跟随玩家播放。
+* 氛围音效会在特定条件下播放，条件计算方法参见{{slink|环境音效|氛围算法}}。氛围音效的声音音量会线性衰减。
+
+数据类型较复杂（见下），默认为空{{tr|对象|物件}}，仅接受<code>override</code>修饰符。不可插值，获取位置为摄像机的位置。
+
+<div class="treeview">
+* {{nbt|compound}}
+** {{nbt|string}}{{nbt|object|loop}}：控制循环音效。
+*** {{nbt inherit/sound event}}
+** {{nbt|compound|mood}}：控制氛围音效。
+*** {{nbt|string}}{{nbt|object|sound|required=1}}：氛围音效使用的声音事件。
+**** {{nbt inherit/sound event}}
+*** {{nbt|int|tick_delay|required=1}}：两次播放间的最小延迟。
+*** {{nbt|int|block_search_extent|required=1}}：决定了氛围音效播放位置的正方体范围的大小。此正方体范围以玩家为中心，棱长为此值的2倍。
+*** {{nbt|double|offset|required=1}}：值越大，声源距离玩家越远。
+** {{nbt|list|additions|required=1}}：控制附加音效。
+*** {{nbt|compound}}
+**** {{nbt|string}}{{nbt|object|sound|required=1}}：附加音效使用的声音事件。
+***** {{nbt inherit/sound event}}
+**** {{nbt|double|tick_chance|required=1}}：每一游戏刻中开始播放的概率。高于1的值相当于1，低于0的值相当于0。
+</div>
+
+==== audio/firefly_bush_sounds ====
+控制[[萤火虫灌木丛]]是否可以产生环境音效、发出萤火虫粒子。萤火虫灌木丛本身仍然需要满足露天等条件。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为萤火虫灌木丛的位置。
+
+=== 游戏玩法 ===
+{|class="floatright sortable wikitable"
+! 环境属性<br>（省略gameplay前缀） !! class="unsortable" | 主要作用
+|-
+| <code>[[#gameplay/sky_light_level|sky_light_level]]</code>
+| 天空光照
+|-
+| <code>[[#gameplay/can_start_raid|can_start_raid]]</code>
+| 袭击触发判定
+|-
+| <code>[[#gameplay/water_evaporates|water_evaporates]]</code>
+| 水蒸发判定
+|-
+| <code>[[#gameplay/bed_rule|bed_rule]]</code>
+| 床的使用后行为
+|-
+| <code>[[#gameplay/respawn_anchor_works|respawn_anchor_works]]</code>
+| 重生锚工作判定
+|-
+| <code>[[#gameplay/straw_bed_rule|straw_bed_rule]]</code>{{upcoming|je 26.3}}
+| {{pa|Straw Bed}}的使用后行为
+|-
+| <code>[[#gameplay/nether_portal_spawns_piglin|nether_portal_spawns_piglin]]</code>
+| 下界传送门的僵尸猪灵生成判定
+|-
+| <code>[[#gameplay/fast_lava|fast_lava]]</code>
+| 熔岩是否流动得更快
+|-
+| <code>[[#gameplay/increased_fire_burnout|increased_fire_burnout]]</code>
+| 火是否加快燃烧
+|-
+| <code>[[#gameplay/eyeblossom_open|eyeblossom_open]]</code>
+| 眼眸花的状态
+|-
+| <code>[[#gameplay/turtle_egg_hatch_chance|turtle_egg_hatch_chance]]</code>
+| 海龟蛋孵化几率
+|-
+| <code>[[#gameplay/piglins_zombify|piglins_zombify]]</code>
+| 猪灵僵尸化判定
+|-
+| <code>[[#gameplay/snow_golem_melts|snow_golem_melts]]</code>
+| 雪傀儡融化判定
+|-
+| <code>[[#gameplay/creaking_active|creaking_active]]</code>
+| 嘎枝之心活动
+|-
+| <code>[[#gameplay/surface_slime_spawn_chance|surface_slime_spawn_chance]]</code>
+| 地表史莱姆生成几率
+|-
+| <code>[[#gameplay/cat_waking_up_gift_chance|cat_waking_up_gift_chance]]</code>
+| 猫给予礼物概率
+|-
+| <code>[[#gameplay/bees_stay_in_hive|bees_stay_in_hive]]</code>
+| 蜜蜂入巢判定
+|-
+| <code>[[#gameplay/monsters_burn|monsters_burn]]</code>
+| 生物着火判定
+|-
+| <code>[[#gameplay/can_pillager_patrol_spawn|can_pillager_patrol_spawn]]</code>
+| 灾厄巡逻队生成判定
+|-
+| <code>[[#gameplay/villager_activity|villager_activity]]</code>
+| 成年村民时刻表
+|-
+| <code>[[#gameplay/baby_villager_activity|baby_villager_activity]]</code>
+| 幼年村民时刻表
+|}
+这些环境属性主要影响游戏的游戏玩法。
+
+==== gameplay/sky_light_level ====
+控制天空光照的强度。只影响诸如幻翼生成、阳光探测器计算、生物生成光照等游戏行为，不影响任何游戏亮度渲染属性。
+
+数据类型为{{nbt|float|浮点数}}，且必须在0至15之间，默认值为<code>15.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值。
+
+此环境属性不可随位置变化，游戏始终从整个维度中获取此属性。
+
+==== gameplay/can_start_raid ====
+控制带有[[不祥之兆]]的玩家是否可以触发[[袭击]]。此环境属性不会同步到客户端。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>true</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为袭击中心。
+
+==== gameplay/water_evaporates ====
+控制水是否蒸发。具体行为如下：
+* [[水桶]]是否无法放出[[水]]。获取位置为放置位置。
+** 由流体标签{{tagLink|fluid|water}}控制，不局限于水桶。
+* [[冰]]尝试生成水时是否无法生成水。获取位置为冰的位置。
+* [[湿海绵]]是否立刻变干。获取位置为放置位置。
+* [[滴水石锥]]是否无法将[[泥巴]]转化为[[黏土]]。获取位置为钟乳石整体的依附方块，即泥巴下方的方块。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值。
+
+==== gameplay/bed_rule ====
+控制床是否可睡觉和设置出生点等行为。此环境属性不会同步到客户端。
+
+数据类型较复杂（见下），仅接受<code>override</code>修饰符。不可插值，获取位置为床头的位置。
+
+<div class="treeview">
+* {{nbt|compound}}
+** {{nbt|string|can_sleep|required=1}}：床可以入睡的条件。取值可以为<code>always</code>（总是成功）、<code>when_dark</code>（[[内部天空光照]]不大于11时成功）和<code>never</code>（总是失败）。
+** {{nbt|string|can_set_spawn|required=1}}：床可以设置重生点的条件。可用值及意义与{{nbt|string|can_sleep|required=1}}相似。
+** {{nbt|boolean|explodes}}{{until|je 26.3}} {{nbt|boolean|destory_on_use}}{{upcoming|je 26.3}}: （默认为<code>false</code>）与床交互后床是否会爆炸。
+** {{nbt|string}}{{nbt|list}}{{nbt|compound|error_message|required=1}}：（[[文本组件]]）与床交互失败后动作栏显示的文本。只有无法设置重生点或无法睡觉的文本才使用此值，其他失败因素（如距离过远、存在怪物）的文本不由此值控制。
+</div>
+
+如果维度类型{{nbt|boolean|has_fixed_time}}为<code>true</code>，则<code>when_dark</code>条件永远成功。
+
+{{collapseH|默认值：}}
+<syntaxhighlight lang="json">{
+  "can_sleep": "when_dark", 
+  "can_set_spawn": "always", 
+  "error_message": {
+    "translate": "block.minecraft.bed.no_sleep"
+  }
+}</syntaxhighlight>
+{{collapseE}}
+
+==== gameplay/respawn_anchor_works ====
+玩家是否可以使用[[重生锚]]。如果不可使用，则重生锚会爆炸。此环境属性不会同步到客户端。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为重生锚的位置。
+
+==== gameplay/straw_bed_rule ====
+{{in development|jev=26.3|section=1}}
+控制{{pa|Straw Bed}}是否可睡觉和设置出生点等行为。此环境属性不会同步到客户端。
+
+数据类型较复杂（见下），仅接受<code>override</code>修饰符。不可插值，获取位置为床头的位置。
+
+<div class="treeview">
+* {{nbt|compound}}
+** {{nbt|string|can_sleep|required=1}}：{{pa|Straw Bed}}可以入睡的条件。取值可以为<code>always</code>（总是成功）、<code>when_dark</code>（[[内部天空光照]]不大于11时成功）和<code>never</code>（总是失败）。
+** {{nbt|string|can_set_spawn|required=1}}：{{pa|Straw Bed}}可以设置重生点的条件。可用值及意义与{{nbt|string|can_sleep|required=1}}相似。
+** {{nbt|boolean|destory_on_use}}: （默认为<code>false</code>）与{{pa|Straw Bed}}交互后{{pa|Straw Bed}}是否会被摧毁。
+** {{nbt|boolean|destroy_on_leave}}：（默认为<code>false</code>）离开{{pa|Straw Bed}}时{{pa|Straw Bed}}是否会被摧毁。
+** {{nbt|string}}{{nbt|list}}{{nbt|compound|error_message|required=1}}：（[[文本组件]]）与{{pa|Straw Bed}}交互失败后动作栏显示的文本。只有无法设置重生点或无法睡觉的文本才使用此值，其他失败因素（如距离过远、存在怪物）的文本不由此值控制。
+</div>
+
+如果维度类型{{nbt|boolean|has_fixed_time}}为<code>true</code>，则<code>when_dark</code>条件永远成功。
+
+{{collapseH|默认值：}}
+{{stub|section=1}}<!--
+<syntaxhighlight lang="json">{
+  "can_sleep": "when_dark", 
+  "can_set_spawn": "always", 
+  "error_message": {
+    "translate": "block.minecraft.bed.no_sleep"
+  }
+}</syntaxhighlight>-->
+{{collapseE}}
+
+==== gameplay/nether_portal_spawns_piglin ====
+控制[[下界传送门方块]]是否可生成[[僵尸猪灵]]。此环境属性不会同步到客户端。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为下界传送门方块的位置。
+
+==== gameplay/fast_lava ====
+控制[[熔岩]]是否流动得更快，流动的距离更远，对实体具有更大的推力。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值。
+
+此环境属性不可随位置变化，游戏始终从整个维度中获取此属性。
+
+==== gameplay/increased_fire_burnout ====
+控制火是否会更快燃烧，有更高的概率[[火#烧毁方块|烧毁方块]]。此环境属性不会同步到客户端。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为火的位置。
+
+==== gameplay/eyeblossom_open ====
+控制[[眼眸花]]的转化行为，对于盆栽也有效。此环境属性不会同步到客户端。
+
+数据类型为字符串枚举，默认值为<code>default</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为眼眸花或眼眸花盆栽的位置。
+
+可用枚举值如下：
+* <code>open</code>（闭合的眼眸花会转化为张开的眼眸花）
+* <code>close</code>（张开的眼眸花会转化为闭合的眼眸花）
+* <code>default</code>（永不转化）
+
+==== gameplay/turtle_egg_hatch_chance ====
+[[海龟蛋]]每次接收到随机刻时，都有此概率孵化进下一阶段。此环境属性不会同步到客户端。
+
+数据类型为{{nbt|float|浮点数}}，且必须在0至1之间，默认值为<code>0.002</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为海龟蛋的位置。
+
+==== gameplay/piglins_zombify ====
+控制[[猪灵]]、[[猪灵蛮兵]]和[[疣猪兽]]是否会僵尸化。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>true</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为实体的位置。
+
+==== gameplay/snow_golem_melts ====
+控制[[雪傀儡]]是否每游戏刻受到1点火焰伤害。此环境属性不会同步到客户端。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为雪傀儡的位置。
+
+==== gameplay/creaking_active ====
+控制[[嘎枝之心]]的激活行为。为<code>true</code>时，结构放置正确的嘎枝之心会进入激活状态并生成嘎枝，否则只进入休眠状态。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为嘎枝之心的位置。
+
+==== gameplay/surface_slime_spawn_chance ====
+控制[[史莱姆]]在属于生物群系标签{{TagLink|biome|allows_surface_slime_spawns}}的生物群系的地表尝试生成的基础概率。月亮亮度也会影响史莱姆生成。此环境属性不会同步到客户端。
+
+数据类型为{{nbt|float|浮点数}}，且必须在0至1之间，默认值为<code>0.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为尝试生成史莱姆的位置。
+
+==== gameplay/cat_waking_up_gift_chance ====
+玩家醒来时，[[猫]]给予玩家礼物的概率。此环境属性不会同步到客户端。
+
+数据类型为{{nbt|float|浮点数}}，且必须在0至1之间，默认值为<code>0.0</code>，可使用[[#浮点修饰符|浮点修饰符]]。可插值，获取位置为猫的位置。
+
+==== gameplay/bees_stay_in_hive ====
+[[蜜蜂]]是否总是倾向归巢，且[[蜂巢（方块）|蜂巢]]或[[蜂箱]]内的蜜蜂也不会主动离巢。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为蜜蜂的位置或蜂巢的位置。
+
+==== gameplay/monsters_burn ====
+控制生物是否会自行[[着火]]。此环境属性不会同步到客户端。
+
+生物着火取决于下列因素，所有的条件必须满足，否则不会着火：
+* 不是玩家、玩家模型或盔甲架，且属于实体类型标签{{TagLink|entity_type|burn_in_daylight}}。
+* 生物所处位置的<code>gameplay/monsters_burn</code>环境属性值为<code>true</code>。
+* 生物不处于水中、雨中或细雪中。
+* 生物眼睛位置的天空光照为15。
+* 设当前生物眼睛位置的内部光照是''i''，维度环境光照为''a''，则<math>\frac{60a-4ai+i}{60-3i}</math>大于0.5。
+* 生物的头盔槽位（僵尸马和僵尸鹦鹉螺使用身体盔甲槽位判断）没有任何物品。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>false</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为生物的位置。
+
+==== gameplay/can_pillager_patrol_spawn ====
+控制[[灾厄巡逻队]]是否可以生成。
+
+数据类型为{{nbt|boolean|布尔值}}，默认值为<code>true</code>，可使用[[#布尔修饰符|布尔修饰符]]。不可插值，获取位置为将生成灾厄巡逻队的位置。
+
+==== gameplay/villager_activity ====
+控制成年[[村民]]的时刻表活动，每秒获取一次。此环境属性不会同步到客户端。
+
+数据类型为生物活动，默认值为<code>idle</code>，仅接受<code>override</code>修饰符。不可插值，获取位置为村民的位置。
+
+{{collapseH|只有下列活动对成年村民有实际意义，其他活动村民均会视为<code>idle</code>。}}
+* <code>core</code>
+* <code>hide</code>
+* <code>idle</code>
+* <code>meet</code>
+* <code>panic</code>
+* <code>pre_raid</code>
+* <code>raid</code>
+* <code>rest</code>
+* <code>work</code>
+{{collapseE}}
+
+==== gameplay/baby_villager_activity ====
+控制幼年村民的时刻表活动，每秒获取一次。此环境属性不会同步到客户端。
+
+数据类型为生物活动，默认值为<code>idle</code>，仅接受<code>override</code>修饰符。不可插值，获取位置为村民的位置。
+
+{{collapseH|只有下列活动对幼年村民有实际意义，其他活动村民均会视为<code>idle</code>。}}
+* <code>core</code>
+* <code>hide</code>
+* <code>idle</code>
+* <code>meet</code>
+* <code>panic</code>
+* <code>play</code>
+* <code>pre_raid</code>
+* <code>raid</code>
+* <code>rest</code>
+{{collapseE}}
+
+== 环境属性修饰符 ==
+'''环境属性修饰符（Environment Attribute Modifiers）'''是游戏进行修饰操作的方法。游戏在进行环境属性之间的计算时，会使用到3个参数：
+* '''输入值'''：此上下文将被修改的值。
+* '''参数值'''：修饰符进行修饰时的附加参数。
+* '''修饰符类型'''
+
+不同的场合会使用不同的修饰符格式，但都具有这三个参数，其中输入值由游戏自动获取，参数值必须手动提供，修饰符类型可选。
+
+为便于展示，下文使用环境属性映射的格式展示修饰符。
+
+=== 覆写修饰符 ===
+“覆写（override）”即直接使用一个新的值覆盖相应的环境属性值。
+
+当直接设置一个环境属性ID到其对应值的映射时，将隐式使用<code>override</code>修饰符：
+<div class="treeview">
+* {{nbt|any|<''环境属性ID''>}}：要设置的环境属性值。需要与相应环境属性的数据类型对应。
+</div>
+
+或者也可以显式定义<code>override</code>修饰符：
+<div class="treeview">
+* {{nbt|compound|<''环境属性ID''>}}
+** {{nbt|string|modifier}}：<code>override</code>
+** {{nbt|any|argument}}：要设置的环境属性值。需要与相应环境属性的数据类型对应。
+</div>
+
+能够使用以下通用修饰符的环境属性都可以使用覆写修饰符来直接设值。
+
+=== 布尔修饰符 ===
+此类修饰符用于修饰布尔值。
+
+<div class="treeview">
+* {{nbt|compound|<''环境属性ID''>}}
+** {{nbt|string|modifier|required=1}}：要应用的布尔修饰符。
+** {{nbt|boolean|argument|required=1}}：提供的布尔值，用于修饰符计算。
+</div>
+
+可用修饰符如下：
+* <code>and</code>：[[wzh:逻辑与|{{tr|与|及|與}}操作]]，仅当输入值与参数值均为<code>true</code>时为<code>true</code>。
+* <code>nand</code>：[[wzh:逻辑与非|{{tr|与非|反及|與非}}操作]]，仅当输入值与参数值均为<code>true</code>时为<code>false</code>。
+* <code>or</code>：[[wzh:逻辑或|或操作]]，仅当输入值与参数值均为<code>false</code>时为<code>false</code>。
+* <code>nor</code>：[[wzh:逻辑或非|{{tr|或非|反或|或非}}操作]]，仅当输入值与参数值均为<code>false</code>时为<code>true</code>。
+* <code>xor</code>：[[wzh:逻辑异或|{{tr|异或|互斥或|異或}}操作]]，仅当输入值与参数值不同时为<code>true</code>。
+* <code>xnor</code>：[[wzh:当且仅当|{{tr|同或|反互斥或|同或}}操作]]，仅当输入值与参数值相同时为<code>true</code>。
+
+=== 浮点修饰符 ===
+此类修饰符用于修饰浮点数。
+
+<div class="treeview">
+* {{nbt|compound|<''环境属性ID''>}}
+** {{nbt|string|modifier|required=1}}：要应用的浮点修饰符。
+** {{nbt condition|如果浮点修饰符是<code>alpha_blend</code>，附加参数如下：}}
+** {{nbt|float}}{{nbt|compound|argument|required=1}}：用于修饰符计算的参数。指定为浮点数时默认仅指定<code>value</code>。
+*** {{nbt|float|value|required=1}}：[[wzh:线性插值|线性插值]]区间的终点。
+*** {{nbt|float|alpha}}：（{{interval|left=0|right=1}}，默认为1）插值的取样点。
+** {{nbt condition|对于其他浮点修饰符，附加参数如下：}}
+** {{nbt|float|argument|required=1}}：提供的浮点数，用于修饰符计算。
+</div>
+
+可用修饰符如下：
+* <code>add</code>：将输入值与参数值作和。
+* <code>subtract</code>：将输入值与参数值作差。即输入值减去参数值。
+* <code>multiply</code>：将输入值与参数值作积。
+* <code>minimum</code>：取输入值与参数值的最小值。
+* <code>maximum</code>：取输入值与参数值的最大值。
+* <code>alpha_blend</code>：在输入值和<code>value</code>的区间内进行线性插值计算。
+** <code>alpha</code>为1时，实质上就是覆盖操作。
+
+=== 颜色修饰符 ===
+{{anchor|RGB颜色修饰符}}{{anchor|ARGB颜色修饰符}}
+此类修饰符用于修饰颜色。不论是哪种修饰符，每个通道的计算结果都会钳制在<code>[0, 255]</code>之间。
+
+颜色修饰符分为两类：RGB颜色修饰符和ARGB颜色修饰符，分别修饰RGB颜色和ARGB颜色。
+
+<div class="treeview">
+* {{nbt|compound|<''环境属性ID''>}}
+** {{nbt|string|modifier|required=1}}：要应用的颜色修饰符。
+** {{nbt condition|如果颜色修饰符是<code>alpha_blend</code>，附加参数如下：}}
+** {{nbt|string}}{{nbt|int}}{{nbt|list|argument|required=1}}：提供的ARGB颜色，用于修饰符计算。
+*** {{nbt inherit/string argb color}}
+** {{nbt condition|如果颜色修饰符是<code>blend_to_gray</code>，附加参数如下：}}
+** {{nbt|compound|argument|required=1}}：提供的ARGB颜色，用于修饰符计算。
+*** {{nbt|float|brightness|required=1}}：（{{interval|left=0|right=1}}）应用到灰度值的倍率。
+*** {{nbt|float|factor|required=1}}：（{{interval|left=0|right=1}}）计算使用的因子。
+** {{nbt condition|对于其他颜色修饰符，附加参数如下：}}
+** {{nbt condition|如果是RGB颜色修饰符，则必须使用RGB颜色：}}
+** {{nbt|string}}{{nbt|int}}{{nbt|list|argument|required=1}}：提供的颜色，用于修饰符计算。
+*** {{nbt inherit/string rgb color}}
+** {{nbt condition|如果是ARGB颜色修饰符，则可以使用RGB颜色和ARGB颜色：}}
+** {{nbt|string}}{{nbt|int}}{{nbt|list|argument|required=1}}：提供的颜色，用于修饰符计算。如果提供RGB颜色，则不允许字符串格式，游戏会将其A通道视为255。
+*** {{nbt inherit/rgb color}}
+*** {{nbt inherit/string argb color}}
+</div>
+
+可用修饰符如下：
+* <code>add</code>：将输入值与参数值作和。每个通道单独计算。
+* <code>subtract</code>：将输入值与参数值作差。即输入值减去参数值，每个通道单独计算。
+* <code>multiply</code>：将输入值与参数值作积。每个通道单独计算。
+* <code>alpha_blend</code>：对颜色进行[[wzh:alpha混合|alpha混合]]。对于输入值的通道K而言的计算结果为<code>K * (1 + A/255)</code>，R、G、B、A四个通道均进行计算。
+** A通道为1时，实质上就是使用参数值进行覆盖操作。
+* <code>blend_to_gray</code>：对输入值进行灰度处理，计算的亮度和因子由参数提供。
+** 先计算灰度<code>gray</code>：<code>brightness * (0.3 * R + 0.59 * G + 0.11 * B)</code>，其中RGB为输入值的通道值。
+** 再计算输出值的对应通道：<code>-{}-lerp(factor, <''输入颜色对应通道''>, gray)</code>，即输入颜色的对应通道与灰度区间上以因子作为采样点经线性插值得到的值。
+
+{{Calculator|decimalColor}}
+
+== 天气环境属性 ==
+天气环境属性源被硬编码。游戏会先判断当前维度是否允许拥有天气（{{nbt|boolean|has_skylight}}为<code>true</code>、{{nbt|boolean|has_ceiling}}为<code>false</code>且当前维度不是末地），如果允许才会应用天气环境属性。
+
+{|class="wikitable collapsed collapsible"
+! rowspan="2" | 环境属性 !! colspan="2" | 降雨 !! colspan="2" | 雷暴
+|-
+! 修饰符 !! 参数 !! 修饰符 !! 参数
+|-
+| visual/sky_color || blend_to_gray || {brightness: 0.6, factor: 0.75} || blend_to_gray || {brightness: 0.24, factor: 0.94}
+|-
+| visual/fog_color || multiply || [1.0, 0.5, 0.5, 0.6] || multiply ||  [1.0, 0.2, 0.2, 0.3]
+|-
+| visual/cloud_color || blend_to_gray || {brightness: 0.24, factor: 0.5} || blend_to_gray || {brightness: 0.095, factor: 0.5}
+|-
+| gameplay/sky_light_level || alpha_blend || {value:4.0, alpha:0.3125} || alpha_blend || {value:4.0, alpha:0.52734375}
+|-
+| visual/sky_light_color || alpha_blend || [0.3125, 0.48, 0.48, 1.0] || alpha_blend || [0.52734375, 0.48, 0.48, 1.0]
+|-
+| visual/sky_light_factor || alpha_blend || {value:0.24, alpha:0.3125} || alpha_blend || {value:0.24, alpha:0.52734375}
+|-
+| visual/star_brightness || override || 0.0 || override || 0.0
+|-
+| visual/sunrise_sunset_color || multiply || [1.0, 0.5, 0.5, 0.6] || multiply ||  [1.0, 0.2, 0.2, 0.3]
+|-
+| gameplay/bee_stay_in_hive || override || true || override || true
+|}
+
+== 其他用法 ==
+[[战利品表谓词]]<code>environment_attribute_check</code>可以判断服务端的某个环境属性是否为精确值。
+
+[[数值提供器]]<code>environment_attribute</code>可以获取数值类型（浮点数和天体角度，不包括颜色）的服务端的环境属性的值，以供给战利品表系统和村民交易系统相关的计算。
+
+注：在这些场景中，游戏只会获取服务端的环境属性，且获取的位置始终为战利品上下文参数<code>origin</code>提供的位置。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.11|dev=25w42a|加入了环境属性。}}
+|{{HistoryLine|||dev=25w44a|加入了ARGB颜色修饰符。
+|加入了环境属性{{cd|d=pretty|visual/water_fog_start_distance|visual/fog_start_distance|visual/fog_end_distance|visual/sky_fog_end_distance|visual/cloud_fog_end_distance|visual/cloud_color}}。
+|重命名<code>visual/water_fog_radius</code>为<code>visual/water_fog_end_distance</code>。
+|重命名<code>visual/cloud_opacity</code>为<code>visual/cloud_color</code>，数据类型由0至1浮点数更改为ARGB颜色。
+|移除了<code>visual/extra_fog</code>，此前它控制是否启用维度或Boss迷雾，数据类型为布尔值。}}
+|{{HistoryLine|||dev=25w45a|加入了RGB修饰符和ARGB修饰符<code>blend_to_gray</code>。
+|加入了环境属性{{cd|d=pretty|visual/sunrise_sunset_color|visual/sun_angle|visual/moon_angle|visual/star_angle|visual/moon_phase|visual/star_brightness|visual/sky_light_color|visual/sky_light_factor|audio/firefly_bush_sounds|gameplay/sky_light_level|gameplay/eyeblossom_open|gameplay/turtle_egg_hatch_chance|gameplay/creaking_active|gameplay/surface_slime_spawn_chance|gameplay/cat_waking_up_gift_chance|gameplay/bees_stay_in_hive|gameplay/monsters_burn|gameplay/can_pillager_patrol_spawn|gameplay/villager_activity|gameplay/baby_villager_activity}}。
+|加入了时间线和天气作为环境属性源。}}
+|{{HistoryLine|||dev=pre1|现在天气环境属性会对<code>gameplay/monsters_burn</code>进行后期修饰。}}
+|{{HistoryLine|||dev=rc3|现在天气环境属性不再影响<code>gameplay/monsters_burn</code>。}}
+|{{HistoryLine||26.1|dev=snapshot-1|加入了环境属性{{cd|d=pretty|visual/block_light_tint|visual/ambient_light_color|visual/night_vision_color}}。}}
+|{{HistoryLine|||dev=snapshot-5|将环境属性<code>gameplay/turtle_egg_hatch_chance</code>的默认值由0.0改为0.002。}}
+}}
+
+== 参见 ==
+* [[生物群系定义格式]]
+* [[维度类型]]
+* [[时间线定义格式]]
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Umgebungsattribut]]
+[[en:Environment attribute]]
+[[ja:環境属性]]
+[[pt:Atributo de ambiente]]

@@ -1,0 +1,80 @@
+# 页面: 命令/fetchprofile
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/fetchprofile
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox command
+|name=fetchprofile
+|oplevel=2
+}}
+
+获取玩家[[档案]]内容。
+
+== 用法 ==
+对于{{cmd|fetchprofile id|link=none}}和{{cmd|fetchprofile name|link=none}}子命令，游戏会从Mojang服务器获取档案。命令会异步执行，期间游戏不会暂停。获取到的档案会解析为命令执行时的档案快照，也即不会随着后续档案的变更而动态更改。
+
+对于{{cmd|ferchprofile entity|link=none}}子命令，游戏将获取实体的档案：
+* 如果选中的实体为[[玩家]]，则获取玩家登录游戏时的档案。
+* 如果选中的实体为[[玩家模型]]，则获取实体数据<code>profile</code>的值。
+
+获取成功后，会输出一条包含结果的消息，通过这条消息：
+* 可以复制对应玩家已解析的<code>profile</code>[[组件]]的内容。
+* 可以执行命令获取含上述组件的[[玩家的头]]。
+* 可以执行命令召唤含上述组件的[[玩家模型]]。
+* 可以复制渲染出对应玩家头像的[[文本组件]]的内容。
+
+== 语法 ==
+: <code>fetchprofile id <id></code>
+:: 根据玩家的UUID获取档案。
+: <code>fetchprofile name <name></code>
+:: 根据玩家名称获取档案。
+: <code>fetchprofile entity <entity></code>
+:: 获取某个实体的档案数据。
+
+== 参数 ==
+{{argument|id|uuid}}
+: 指定玩家的[[UUID]]。
+: {{arg desc|je=uuid}}
+
+{{argument|name|string}}
+: 指定玩家名，不区分大小写。
+: {{arg desc|je=string}}
+
+{{argument|entity|entity}}
+: 指定要获取档案的实体。目前只有玩家和玩家模型有档案数据。
+: {{arg desc|je=entity|amount=single|type=entities}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/fetchprofile id<br>/fetchprofile name|玩家档案解析失败|fail}}
+{{Result table|cmd=/fetchprofile entity|选中的实体没有档案数据}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|cmd=/fetchprofile id<br>/fetchprofile name|执行成功或执行失败|1|1|1}}
+{{Output table|cmd=/fetchprofile entity|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.9|dev=25w34a|加入了{{cmd|fetchprofile|link=none}}命令。}}
+|{{HistoryLine||1.21.9|dev=25w35a|现在可在输出消息中复制玩家头像的文本组件键值对。}}
+|{{HistoryLine||1.21.9|dev=pre1|现在可在输出消息中执行命令召唤对应的[[玩家模型]]。}}
+|{{HistoryLine||26.1|dev=snapshot-8|加入了{{cd|entity}}子命令，用于输出世界中实体的档案信息。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/fetchprofile]]
+[[en:Commands/fetchprofile]]
+[[ja:コマンド/fetchprofile]]
+[[pt:Comandos/fetchprofile]]
+[[ru:Команды консоли/fetchprofile]]

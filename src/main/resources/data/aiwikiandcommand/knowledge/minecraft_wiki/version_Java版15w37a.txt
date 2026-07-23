@@ -1,0 +1,116 @@
+# 页面: Java版15w37a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8815w37a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:14
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=15w37a
+|image=Java Edition 15w37a Simplified.png\Java Edition 15w37a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2015年9月10日
+|jsonhash=e94380c8f89d89e5ec3ef0a087af5907c67a3a97
+|clienthash=0480d8e610a57fe18c78cb40eb76be50469accee
+|serverhash=0f29d64f94ccc40d01ebc1ddd0c506edca7b5dfb
+|exehash=1b945df5c6464b4694e20087c9c74b6f5b0594dd
+|parent=1.9
+|prevparent=1.8.9
+|prev=15w36d
+|next=15w38a
+|nextparent=1.9.1
+}}<onlyinclude>
+
+'''15w37a'''是[[Java版1.9]]的第23个快照，发布于2015年9月10日<ref>{{cite|url=http://mojang.com/2015/09/minecraft-snapshot-15w37a/|archive-url=1|archive=1|title=Minecraft 1.9 snapshot 15w37a|author=Dinnerbone|website=Mojang.com|date=Sep 10, 2015}}</ref>，加入了一条新的游戏规则，新的NBT标签以及一种新的超平坦预设，将虚空的性质改为生物群系，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|gamerule}}'''
+* 新的游戏规则：<code>spectatorsGenerateChunks</code>。
+** 禁止旁观模式的玩家生成区块。
+
+'''NBT标签'''
+* 关于实体<code>MinecartHopper</code> （漏斗矿车）：
+** <code>Enabled</code> (byte型)：决定矿车的漏斗是否会将物品收到它的物品栏中。
+*** 例子：<code>/summon MinecartHopper ~ ~1 ~ {Enabled:1b}</code>。
+
+=== 世界生成 ===
+'''[[超平坦]]'''
+* 新的超平坦预设：虚空。
+** 将玩家生成在[[虚空平台]]上，由33×33的石头平面组成（中间是圆石），且不再生成其他结构。
+** 虚空现在是一种生物群系了（数字ID为127）。
+
+== 更改 ==
+=== 物品 ===
+'''[[金苹果]]'''
+* 提供的生命恢复等级从II削减为I。
+
+'''[[附魔金苹果]]'''
+* 提供的生命恢复等级从V削减为II。
+* 提供的生命恢复时间从30秒削减为20秒。
+* 提供的伤害吸收等级从I提升为IV以达成平衡。
+
+'''[[紫颂果]]'''
+* 传送区间从±32削减为±8。
+
+=== 游戏内容 ===
+'''战斗机制'''
+* 弓可在副手使用了。
+* 对[[盾牌]]再平衡。
+** 有了新的合成配方。
+** 不再有基础颜色。
+** 纹理为木质平面。
+** 将盾牌与[[旗帜]]合成仍然可以做出有图案的盾牌。
+** 箭可以从盾牌上弹射来伤害到别的实体。
+* 剑的攻速从1.45提升到1.6。
+* 斧的攻速将取决于类型，不再全类型为0.8。
+** 木斧和石斧是0.8。
+** 铁斧是0.9。
+** 金斧和钻石斧为1。
+* 修改斧的攻击伤害
+** 石斧和钻石斧会造成9点伤害，原本分别为8和10。
+
+'''[[极限模式]]'''
+* 如果玩家在极限模式中死亡，他们可以选择进入旁观模式而防止地图被删除。
+
+== 修复 ==
+{{fixes|fixedin=15w37a|prefix=Minecraft|showdesc=1
+|;old
+|3330|发射器射出的箭在插入其前方的楼梯后可以在远距离处被玩家拾起。
+|46710|4×4的画需要占用4×5的空间。
+|58073|物品栏中的耕地纹理缺失。
+|76679|世界加载进入传送门或世界加载时玩家的手会显示在屏幕中间。
+|77604|被活塞推动后的凋灵之首会隐形。
+|79980|骷髅和苦力怕在逃离生物时落入水中会损坏其寻路机制。
+|86513|关闭物品栏后会强制退出潜行状态。
+|88095|多人游戏中将最后一位睡觉的玩家的游戏模式更改为旁观模式后夜晚将无法跳过。
+|88098|重新加载世界后上锁的漏斗矿车会解锁。
+|88349|客户端内存溢出：不会对地图数据进行垃圾回收。
+|;dev
+|82923|副手所持的弓无法正常使用。
+|86486|潜行时副手的放置功能与主手不一致。
+|86811|使用斧、锹和镐破坏方块后攻击动画会被重置。
+|86989|新版快照中不会记录世界最后一次保存的日期。
+|87851|当弓的耐久度为0时进行射击会导致弓的数量显示为0。
+|87872|重生或转换维度后命令方块界面无法打开。
+|87877|重生后破坏命令方块不会出现粒子效果。
+|87918|重生后放置命令方块时的手部动画会停止播放。
+|;previous
+|88206|重载世界后楼梯和树叶会短暂消失或被替换为附近的门。
+|88277|<code>Hopper: java.lang.NullPointerException: Updating screen events</code>。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:15w37a]]
+[[en:Java Edition 15w37a]]
+[[es:Java Edition 15w37a]]
+[[fr:Édition Java 15w37a]]
+[[it:Java Edition 15w37a]]
+[[ja:Java Edition 15w37a]]
+[[pt:Edição Java 15w37a]]
+[[ru:15w37a (Java Edition)]]

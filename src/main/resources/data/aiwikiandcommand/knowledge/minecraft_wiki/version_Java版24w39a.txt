@@ -1,0 +1,123 @@
+# 页面: Java版24w39a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w39a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w39a
+|image=24w39a.png
+|image2=Java Edition 24w39a Simplified.png\Java Edition 24w39a Traditional.png\Java Edition 24w39a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年9月25日
+|jsonhash=2b6f8eddb01877162fd33b3bbb25f569b7582ee9
+|clienthash=e7d80731fe16c07a14cb324229f9316746c01812
+|clientmap=9f34397089f375ab89b39d9205c460e362e23a37
+|serverhash=31bc8a4f3c73e3873f4a0d42e7c65a7ae43cc44a
+|servermap=3b9c91614ac343e0a244eaefb87f10733965cd4f
+|parent=1.21.2
+|prevparent=1.21.1
+|prev=24w38a
+|next=24w40a
+|nextparent=1.21.3
+}}<onlyinclude>
+
+'''24w39a'''是[[Java版1.21.2]]的第7个快照，发布于2024年9月25日<ref>{{snap|24w39a|September 25, 2024}}</ref>，将“{{tr|收纳袋|束口袋}}”[[实验性内容]]正式加入到游戏内，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[Java版标签|标签]]'''
+* 加入了物品标签<code>#map_invisibility_equipment</code>：<code>carved_pumpkin</code>。
+** 能被装备以隐藏在其他玩家地图上的玩家标记的物品。
+* 加入了实体类型标签<code>#boat</code>：{{cd|d=pretty|oak_boat|spruce_boat|birch_boat|jungle_boat|acacia_boat|cherry_boat|dark_oak_boat|mangrove_boat|bamboo_raft}}。
+** 用于{{filename|husbandry/ride_a_boat_with_a_goat.json}}进度文件。
+
+== 更改 ==
+=== 方块 ===
+'''[[容器]]'''
+* 方块实体数据<code>Lock</code>现在被重命名为<code>lock</code>，其内容现在是一个[[物品谓词]]。
+** 任意匹配此谓词的物品都能打开此容器。
+
+=== 物品 ===
+'''[[收纳袋]]'''
+* 不再属于[[实验性内容]]。
+
+'''[[地图]]'''
+* 在头部装备[[雕刻南瓜]]的玩家不再会在其他玩家的地图上显示玩家标记。
+** 具体物品可通过新加入的物品标签{{cd|#map_invisibility_equipment}}修改。
+
+=== 生物 ===
+'''[[溺尸]]'''
+* 现在增援溺尸只能在有足够空间的液体中生成。
+
+'''[[生物转化]]'''
+* 发生僵尸变种与僵尸变种之间的生物转化时，<code>CanBreakDoors</code>标签也会被继承。
+
+=== 非生物实体 ===
+'''[[船]]和[[运输船]]'''
+* 拆分了每种船和运输船的实体类型ID，因此移除了<code>Type</code>字段。
+** 移除了{{cd|d=pretty|boat|chest_boat}}。
+** 加入了{{cd|d=pretty|oak_boat|spruce_boat|birch_boat|jungle_boat|acacia_boat|cherry_boat|dark_oak_boat|mangrove_boat|bamboo_raft|oak_chest_boat|spruce_chest_boat|birch_chest_boat|jungle_chest_boat|acacia_chest_boat|cherry_chest_boat|dark_oak_chest_boat|mangrove_chest_boat|bamboo_chest_raft}}。
+
+=== 游戏内容 ===
+'''[[物品栏]]'''
+* 更新了GUI槽位高亮，以提高物品纹理的可见度。
+** 旧版本纹理已添加到Programmer Art[[资源包]]中。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|55}}。
+* 移除了<code>bundle</code>实验性数据包和功能开关。
+
+'''[[物品堆叠组件]]'''
+* <code>lock</code>组件现在是一个物品谓词。
+
+'''[[实体子谓词]]'''
+* 移除了<code>boat</code>实体子谓词。
+
+== 修复 ==
+{{fixes|fixedin=24w39a|veralias=1|showdesc=1
+|;old
+|123742|末影人的眼睛在白天向上看时变白。
+|219083|和平模式下关闭{{tr|生命值自然恢复|自然回血|自然恢復生命值}}时，客户端/服务端的饥饿系统失去同步。
+|;dev
+|275216|给狼喂食兔肉煲时，碗也会被消耗。
+|275544|溺尸不再召唤增援。
+|276305|未启用功能开关时，收纳袋不再可用。
+|276341|在火中不再增加剩余着火时间。
+|276426|分裂产生的史莱姆或岩浆怪同步继承状态效果。
+|276588|运输船的物品栏名称不再具有“{{tr|运输|儲物箱}}”前缀。
+|276598|<code>slot_highlight_front</code>纹理在缺少配方物品的后面渲染得异常。
+|276610|末影珍珠与气泡柱的交互损坏了。
+|276611|被转化的生物不会保留<code>CanBreakDoors</code>标签。
+|276615|被治愈的僵尸村民会保留<code>CanPickUpLoot:0b</code>。
+|276638|玩家死亡重生后，服务器控制台或局域网游戏重复输出“<samp>PLAYER moved too quickly!</samp>”。
+|276646|马铠独有的声音事件不再使用。
+|276674|具有自发光眼眸的实体没有正确地受到任意雾的影响。
+|276707|水下的火球持续播放火焰熄灭音效。
+|276724|箭和药水不随气泡柱上浮。
+|276727|击中方块或实体后的弹射物在移动时颤动。
+|276807|所有在夜晚中或所处位置的光照等级低于15的方块和实体闪烁。
+|;prev
+|276817|传送命令的偏移被错误应用。
+|276843|在旁观模式下接触过末地传送门方块的玩家会在脱离旁观模式后被传送。
+|276919|传送处有方块时，{{cmd|tp|link=none}}会传送到两倍相对距离。
+|;priv
+ |1.|容器lock可通过手持物品custom_name泄露，并可在铁砧中复制利用。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:24w39a]]
+[[en:Java Edition 24w39a]]
+[[es:Java Edition 24w39a]]
+[[fr:Édition Java 24w39a]]
+[[ja:Java Edition 24w39a]]
+[[pt:Edição Java 24w39a]]
+[[ru:24w39a (Java Edition)]]
+[[uk:24w39a (Java Edition)]]

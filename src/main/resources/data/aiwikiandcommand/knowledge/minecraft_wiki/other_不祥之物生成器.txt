@@ -1,0 +1,151 @@
+# 页面: 不祥之物生成器
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%8D%E7%A5%A5%E4%B9%8B%E7%89%A9%E7%94%9F%E6%88%90%E5%99%A8
+# 分类: Java版独有信息, 实体, 本地化模块需更新
+# 抓取时间: 2026-07-14 17:19:41
+# 原始 Wikitext 内容:
+
+{{distinguish|不祥试炼刷怪笼}}
+{{Infobox entity
+|image=Ominous Item Spawner.png
+|size='''{{el|je}}：'''<br>
+高度：0.25格<br>
+宽度：0.25格<br>
+'''{{el|be}}：'''<br>
+高度：1.8格<br>
+宽度：0.7格<br>
+}}
+'''不祥之物生成器（Ominous Item Spawner）'''是展示并发射物品或弹射物的[[实体]]。
+
+== 生成 ==
+不祥之物生成器由激活的[[不祥试炼刷怪笼]]每{{convert|160}}生成于距离不祥试炼刷怪笼欧几里得距离14格内的生物和[[生存]]和[[冒险模式]]的玩家的上方{{range|2|6}}格，所展示的物品由不祥试炼刷怪笼从[[战利品表]]中选取。
+
+{{LootChest|items_to_drop_when_ominous}}
+{{Loot notelist}}
+
+== 行为 ==
+不祥之物生成器在生成后{{convert|60}}-{{convert|120}}内所展示的物品会不停旋转，同时从周围聚集<code>ominous_spawning</code>粒子。
+
+这段时间后，不祥之物生成器会发出灵魂火粒子、向下抛出物品对应物品实体并删除自己。如果所展示的物品存在对应的[[弹射物]]，则生成1个对应的弹射物实体，否则生成等量的[[物品实体]]。
+
+{{in|je}}不祥之物生成器不能被[[骑乘]]。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Trial Spawner about to spawn item.ogg
+|subtitle={{tp|subtitles.block.trial_spawner.about_to_spawn_item}}
+|source=友好生物
+|description=不祥之物生成器即将生成物品或弹射物
+|id=block.trial_spawner.about_to_spawn_item
+|translationkey=subtitles.block.trial_spawner.about_to_spawn_item
+}}
+{{Sound table
+|sound=Trial Spawner spawn item1.ogg
+|sound2=Trial Spawner spawn item2.ogg
+|sound3=Trial Spawner spawn item3.ogg
+|subtitle={{tp|subtitles.block.trial_spawner.spawn_item}}
+|source=方块
+|description=不祥之物生成器生成物品或弹射物
+|id=block.trial_spawner.spawn_item
+|translationkey=subtitles.block.trial_spawner.spawn_item
+}}
+{{Sound table
+|sound=Trial Spawner spawn item begin1.ogg
+|sound2=Trial Spawner spawn item begin2.ogg
+|sound3=Trial Spawner spawn item begin3.ogg
+|subtitle={{tp|subtitles.block.trial_spawner.spawn_item_begin}}
+|source=方块
+|description=不祥之物生成器被生成
+|id=block.trial_spawner.spawn_item_begin
+|translationkey=subtitles.block.trial_spawner.spawn_item_begin
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Trial Spawner about to spawn item.ogg
+|source=方块
+|description=不祥之物生成器即将生成物品或弹射物
+|id=ominous_item_spawner.about_to_spawn_item
+|typeid=ominous_item_spawner.about_to_spawn_item
+|soundvolume=1.0
+|soundpitch=0.8-1.1
+}}
+{{Sound table
+|bedrock=1
+|sound=Trial Spawner spawn item1.ogg
+|sound2=Trial Spawner spawn item2.ogg
+|sound3=Trial Spawner spawn item3.ogg
+|source=方块
+|description=不祥之物生成器生成物品或弹射物
+|id=ominous_item_spawner.spawn_item
+|typeid=ominous_item_spawner.spawn_item
+|soundvolume=1.0
+|soundpitch=0.8-1.1
+}}
+{{Sound table
+|sound=Trial Spawner spawn item begin1.ogg
+|sound2=Trial Spawner spawn item begin2.ogg
+|sound3=Trial Spawner spawn item begin3.ogg
+|source=方块
+|description=不祥之物生成器被生成
+|id=ominous_item_spawner.spawn_item_begin
+|typeid=ominous_item_spawner.spawn_item_begin
+|soundvolume=1.0
+|soundpitch=0.8-1.1
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|spritetype=entity
+|Ominous Item Spawner
+|nameid=ominous_item_spawner
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|spritetype=entity
+|Ominous Item Spawner
+|nameid=ominous_item_spawner
+|foot=1}}
+
+=== 实体数据 ===
+不祥之物生成器有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{el|java}}：
+{{main|实体数据格式}}
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w13a|加入了不祥之物生成器。}}
+|{{HistoryLine||1.21|dev=24w18a|不祥之物生成器不再属于[[实验性内容]]。}}
+|{{HistoryLine|||dev=24w21a|现在{{nbt|long|spawn_item_after_ticks}}数据字段可被修改。<ref>{{bug|MC-269964|||Fixed}}</ref>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.21|加入了不祥之物生成器。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|不祥之物生成器不再属于[[实验性玩法]]。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|non-mobs}}
+
+[[de:Unheilvoller Gegenstands-Spawner]]
+[[en:Ominous Item Spawner]]
+[[es:Generador de objetos ominoso]]
+[[fr:Générateur d'objets funeste]]
+[[ja:不吉なアイテムスポナー]]
+[[pt:Gerador de Item Sombrio]]
+[[ru:Зловещий спаунер предметов]]

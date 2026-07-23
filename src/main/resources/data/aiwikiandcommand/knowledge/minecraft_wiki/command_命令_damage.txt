@@ -1,0 +1,96 @@
+# 页面: 命令/damage
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/damage
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{Redirect|Damage|游戏机制|伤害}}
+{{Infobox command
+|name=damage
+|oplevel=2\1
+|becheat=1
+}}
+对指定实体造成指定类型的伤害。
+
+== 语法 ==
+* '''Java版'''
+: <code>damage <target> <amount> [<damageType>] [at <location>]</code>
+: <code>damage <target> <amount> [<damageType>] [by <entity>] [from <source>]</code>
+
+* '''基岩版'''
+: <code>damage <target: target> <amount: int> <cause: DamageCause> entity <damager: target></code>
+: <code>damage <target: target> <amount: int> [cause: DamageCause]</code>
+
+== 参数 ==
+{{argument|target|entity|target: target|CommandSelector<Actor>}}
+: 指定要被伤害的目标实体。
+: {{arg desc|je=entity|amount=single|type=entities|be=actor}}
+{{argument|amount|float|amount: int|int}}
+: 指定要造成的伤害值。
+: {{in|je}}{{arg desc|je=float}}{{in|be}}{{arg desc|be=int}}
+{{argument|damageType|resource|cause: DamageCause|enum}}
+: 指定伤害的成因，即要造成的[[伤害类型]]，默认为{{only|for=<code>minecraft:generic</code>|je}}或{{only|for=<code>none</code>|be}}，其会影响的游戏内容如[[死亡消息]]。
+: {{in|je}}{{arg desc|je=resource|registry=minecraft:damage_type}}
+: {{in|be}}{{arg desc|be=enum}}所有伤害类型参见[https://learn.microsoft.com/en-us/minecraft/creator/reference/content/vanillalistingsreference/addonentitydamagesources 官方附加包文档]。
+{{el|je|short=1}}：{{argument|location|vec3|je=1}}
+: 指定伤害来源的位置。
+: {{arg desc|je=vec3}}
+{{argument|entity|entity|damager: target|CommandSelector<Actor>}}
+: 指定伤害的直接来源，这会影响伤害造成的击退方向。可用于指定[[弹射物]]或[[被激活的TNT]]为伤害的直接来源，同时指定其发射者为伤害的实际来源。
+: {{arg desc|je=entity|amount=single|type=entities|be=actor}}
+{{el|je|short=1}}：{{argument|source|entity|je=1}}
+: 指定伤害的实际来源，视为由该生物造成此伤害并增加相关[[统计]]，导致生物反击或声望下降，且造成死亡时为击杀者。没有指定时，<code><entity></code>参数指定的实体视为实际来源。
+: {{arg desc|je=entity|amount=single|type=entities}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|<code>amount: int</code>超出范围（0-2147483647）|n/a|fail}}
+{{Result table|<code>cause: DamageCause</code>为无效的伤害类型}}
+{{Result table|cmd=/... entity ...|<code>damager: target</code>选中多个目标}}
+{{Result table|cmd=|<code>target: target</code>找不到目标}}
+{{Result table|cmd=/... entity ...|<code>damager: target</code>找不到目标}}
+{{Result table|cmd=|<code><target></code>选中多个目标|unparseable|n/a}}
+{{Result table|<code>damageType</code>为无效的伤害类型}}
+{{Result table|<code><amount></code>超出范围（0.0-3.402835E38）}}
+{{Result table|cmd=/... by ...|<code><entity></code>选中多个目标}}
+{{Result table|cmd=/... by ... from ...|<code>&lt;source&gt;</code>选中多个目标}}
+{{Result table|cmd=|<code><target></code>找不到目标|fail}}
+{{Result table|cmd=/... by ...|<code><entity></code>找不到目标}}
+{{Result table|cmd=/... by ... from ...|<code>&lt;source&gt;</code>找不到目标}}
+{{Result table|cmd=|目标免疫该伤害}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|失败|0|0|0}}
+{{Output table|成功|1|1|1}}
+{{Output table|edition=be|失败|0}}
+{{Output table|成功|被伤害的实体数}}
+{{Output table}}
+
+== 示例 ==
+* 让一个名称为<code>dummy</code>的村民对一只铁傀儡造成{{hp|1}}的伤害：
+** {{cmd|link=none|damage @e[type{{=}}iron_golem, limit{{=}}1] 1 generic by @e[type{{=}}villager, limit{{=}}1, name{{=}}"dummy"]}}{{only|JE}}
+** {{cmd|link=none|damage @e[type{{=}}iron_golem, c{{=}}1] 1 entity_attack entity @e[type{{=}}villager, c{{=}}1, name{{=}}"dummy"]|long=1}}{{only|BE}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19.4|dev=23w06a|加入了{{cmd|damage|link=none}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.18.10|dev=1.18.10.26|加入了{{cmd|damage|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/damage]]
+[[en:Commands/damage]]
+[[es:Comandos/damage]]
+[[fr:Commandes/damage]]
+[[ja:コマンド/damage]]
+[[ko:명령어/damage]]
+[[pt:Comandos/damage]]
+[[ru:Команды консоли/damage]]

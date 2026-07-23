@@ -1,0 +1,241 @@
+# 页面: 命令/loot
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/loot
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=loot
+|oplevel=2\1
+|becheat=1
+}}
+将指定的战利品放入物品栏或世界。
+
+== 语法 ==
+* '''Java版'''
+: <code>-{}-loot <''目标''> <''来源''></code>
+
+: 其中：
+:: <code>-{}-<''目标''></code>可以为：
+::: <code>give <players></code>
+:::: 给予玩家物品。空物品堆叠会被直接忽略。
+::: <code>insert <targetPos></code>
+:::: 将物品发放到容器方块中。空物品堆叠会被直接忽略。
+::: <code>spawn <targetPos></code>
+:::: 生成[[物品实体]]。空物品堆叠也会生成，但会立即消失。
+::: <code>replace block <targetPos> <slot></code>
+::: <code>replace entity <entities> <slot></code>
+:::: 用物品堆叠按顺序逐一替换连续的[[槽位]]。空物品堆叠会清空一个槽位。
+::: <code>replace block <targetPos> <slot> <count></code>
+::: <code>replace entity <entities> <slot> <count></code>
+:::: 清空指定数量的连续的[[槽位]]，并将物品按顺序放置至其中。空物品堆叠也会正常放置。若生成的物品堆叠数量超过指定的槽位数量，超出的物品堆叠直不会生成。
+:: <code>-{}-<''来源''></code>可以为：
+::: <code>fish <loot_table> <pos> [<tool>|mainhand|offhand]</code>
+:::: 模拟在指定位置使用指定工具[[钓鱼]]。
+::: <code>kill <target></code>
+:::: 模拟杀死指定实体。
+::: <code>loot <loot_table></code>
+:::: 直接使用指定[[战利品表]]。
+::: <code>mine <pos> [<tool>|mainhand|offhand]</code>
+:::: 模拟使用指定工具挖掘指定位置的方块。
+
+::各个来源所提供的[[战利品上下文]]为：
+:::{|class="wikitable collapsible collapsed
+! <''来源''> !! 提供的战利品上下文参数
+|-
+| fish
+| {{loot context|this_entity=命令执行者实体（如果有）|origin=指定方块位置的方块正中心|tool=指定的工具}}
+|-
+| kill
+| {{loot context|this_entity=指定的实体|last_damage_player=命令执行玩家（如果执行者是玩家）|attacking_entity=命令执行者实体（如果有）|direct_attacking_entity=命令执行者实体（如果有）|damage_source=<code>magic</code>[[伤害类型]]|origin=命令执行位置}}
+|-
+| loot
+| {{loot context|this_entity=命令执行者实体（如果有）|origin=命令执行位置}}
+|-
+| mine
+| {{loot context|this_entity=命令执行者实体（如果有）|origin=方块的正中心|block_state=指定的方块|block_entity=方块实体（如果有）|tool=指定的工具}}
+|}
+
+* '''基岩版'''
+: <code>-{}-loot <''目标''> <''来源''></code>
+
+: 其中：
+:: <code>-{}-<''目标''></code>可以为：
+::: <code>give <player: target></code>
+:::: 给予玩家物品。空物品堆叠会被直接忽略。
+::: <code>insert <position: x y z></code>
+:::: 将物品发放到容器方块中。空物品堆叠会被直接忽略。
+::: <code>spawn <position: x y z></code>
+:::: 生成[[物品实体]]。空物品堆叠会被直接忽略。
+::: <code>replace block <position: x y z> slot.container <slotId: int></code>
+::: <code>replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int></code>
+:::: 用物品堆叠按顺序逐一替换连续的[[槽位]]。空物品堆叠会清空一个槽位。
+::: <code>replace block <position: x y z> slot.container <slotId: int> [count: int]</code>
+::: <code>replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> [count: int]</code>
+:::: 清空指定数量的连续的[[槽位]]，并将物品按顺序放置至其中。空物品堆叠也会正常放置。若生成的物品堆叠数量超过指定的槽位数量，超出的物品堆叠直接忽略。要求一个实体或目标容器必须存在指定数量的连续槽位，才会进行清除和放置。
+:: <code>-{}-<''来源''></code>可以为：
+::: <code>kill <entity: target> ["<tool>|mainhand|offhand": string]</code>
+:::: 模拟使用指定工具杀死指定实体。
+::: <code>loot <loot_table: string> ["<tool>|mainhand|offhand": string]</code>
+:::: 模拟使用指定工具获取指定战利品表。
+::: <code>mine <TargetBlockPosition: x y z> ["<tool>|mainhand|offhand": string]</code>
+:::: 模拟使用指定工具挖掘指定位置的方块。
+
+== 参数 ==
+{{el|je|short=1}}：{{argument|loot_table|loot_table}}<br>
+{{el|be|short=1}}：{{argument|be=1|loot_table: string|string}} 
+: 指定所使用的[[战利品表]]。
+: {{in|je}}{{arg desc|je=loot_table}}
+: {{in|be}}{{arg desc|be=string}}且应指向路径为<code>loot_tables/loot_table: string.json</code>的战利品表。
+
+{{el|je|short=1}}：{{argument|tool|item_stack}} 
+: 指定用来模拟挖掘或钓鱼的工具物品。
+: {{arg desc|je=item_stack}}
+
+{{el|be|short=1}}：{{argument|be=1|"<tool>{{!}}mainhand{{!}}offhand": string|string}} 
+: 指定用来模拟杀死生物或获取战利品的工具。
+: {{arg desc|be=string}}可以为<code>mainhand</code>（使用执行者主手的物品）、<code>offhand</code>（使用执行者副手的物品），或指定物品ID。
+
+{{argument|target|entity|entity: target|CommandSelector<Actor>}}（来源为<code>kill</code>）
+: 指定要模拟杀死的实体。
+: {{arg desc|je=entity|amount=single|type=entities|be=actor}}
+
+{{argument|players|entity|player: target|CommandSelector<Player>}} 
+: 指定要给予物品的一个或多个玩家。
+: {{arg desc|je=entity|amount=multiple|type=players|be=CommandSelector<Player>}}
+
+{{el|je|short=1}}：{{argument|pos|block_pos}}和{{argument|targetPos|block_pos}}（仅<code>replace block</code>或<code>insert</code>模式）<br>
+{{el|be|short=1}}：{{argument|be=1|TargetBlockPosition: x y z|CommandPositionFloat}}和{{argument|be=1|position: x y z|CommandPositionFloat}} (仅<code>replace block</code>或<code>insert</code>模式) 
+: 指定方块坐标。
+: {{in|je}}{{arg desc|je=block_pos}}
+: {{in|be}}{{arg desc|be=CommandPositionFloat}}
+
+{{argument|targetPos|block_pos|position: x y z|CommandPositionFloat}}（仅<code>spawn</code>模式） 
+: 指定要生成物品实体的位置。
+: {{arg desc|je=vec3|be=CommandPositionFloat}}
+
+{{argument|entities|entity|entity: target|CommandSelector<Actor>}} 
+: 指定要修改的一个或多个实体。
+: {{arg desc|je=entity|amount=multiple|type=entities|be=actor}}
+
+{{argument|count|integer|count: int|int}} 
+: 指定要清空并放入物品的连续槽位数。
+: {{arg desc|je=integer|min=0|be=int}}
+
+{{el|je|short=1}}：{{argument|slot|item_slot}}<br>
+{{el|be|short=1}}：{{argument|be=1|slotType: EntityEquipmentSlot|enum}}，<code>slot.container</code>和{{argument|be=1|slotId: int|int}}  
+: 指定要修改的物品栏[[槽位]]。
+: {{arg desc|je=item_slot|be=int}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|cmd=/... fish ...<br>/... mine ...|<code><pos></code>或{{cd|position: x y z}}位于世界外或未被加载|fail|fail}}
+{{Result table|cmd=/... mainhand<br>... offhand|命令执行者不是[[生物]]||success}}
+{{Result table|命令执行者不是[[实体]]||fail}}
+{{Result table|cmd=/... kill ...|<code><target></code>或<code>entity: target</code>无法选出单个实体（指定的玩家必须在线上）}}
+{{Result table|目标实体不是生物||success}}
+{{Result table|目标实体无战利品表|N/A|fail}}
+{{Result table|cmd=/... loot ...|{{cd|loot_table: string}}非有效的战利品表}}
+{{Result table|cmd=/loot replace entity ...|<code><entities></code>或<code>entity: target</code>无法选中一个或多个实体（指定的玩家必须在线上）|fail}}
+{{Result table|cmd=-{}-/loot replace entity <entities> <slot> <''来源''><br>/loot replace entity ... <slotId: int> <''来源''>|<code>-{}-<''来源''></code>提供了一个或多个物品堆叠，且所有目标实体都无指定的单个槽位|success}}
+{{Result table|cmd=-{}-/loot replace entity <entities> <slot> <count> <''来源''><br>/loot replace entity ... <slotId: int> <count: int> <''来源''>|<code>-{}-<''来源''></code>提供了一个或多个物品堆叠，且所有目标实体都不完整拥有指定的多个连续的槽位}}
+{{Result table|cmd=/loot give ...|<code><entities></code>或<code>player: target</code>无法选中一个或多个玩家（指定的玩家必须在线上）|fail}}
+{{Result table|cmd=/loot insert ...<br>/loot replace block ...|<code><targetPos></code>或<code>position: x y z</code>位于世界外或未被加载}}
+{{Result table|指定位置的方块不是容器}}
+{{Result table|cmd=/loot replace block ...|目标方块无指定的单个槽位}}
+{{Result table|cmd=-{}-/loot replace block <targetPos> <slot> <''来源''><br>/loot replace block ... <slotId: int> <''来源''>|获取的物品堆叠的数量加上<code><slot></code>超过了该容器的槽位编号上限|exception|success}}
+{{Result table|cmd=/loot replace block <targetPos> <slot> <count> <''来源''><br>/loot replace block ... <slotId: int> <count: int> <''来源''>|指定的{{cd|slotId: int}}（或{{cd|<slot>}}）加上{{cd|count: int}}（或{{cd|<cound>}}）超过了该容器的槽位编号上限||fail}}
+{{Result table|cmd=|success}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/loot spawn ...|执行成功|1|1|获取的物品堆叠的数量}}
+{{Output table|cmd=/loot give ...|执行成功|1|1|各个玩家被给予的物品堆叠的个数之和}}
+{{Output table|cmd=/loot insert ...|执行成功|1|1|容器被放入的物品堆叠的个数}}
+{{Output table|cmd=/loot replace block ...|执行成功|1|1|容器被放入的物品堆叠的个数}}
+{{Output table|执行出错|0|不变|不变}}
+{{Output table|cmd=/loot replace entity ...|执行成功|1|1|各个实体被放入的物品堆叠的个数之和}}
+{{Output table|执行出错|0|不变|不变}}
+{{Output table|edition=be|cmd=|执行失败|0}}
+{{Output table|cmd=loot give ...|执行成功|{{needs testing}}}}
+{{Output table|cmd=loot spawn ...<br>loot insert ...|执行成功|1}}
+{{Output table|cmd=-{}-/loot replace entity ... <slotId: int> <''来源''>|执行成功|若<''来源''>提供了0个物品堆叠，输出1。否则输出拥有指定的单个槽位的实体的数量}}
+{{Output table|cmd=-{}-/loot replace entity ... <slotId: int> <count: int> <''来源''>|执行成功|若<''来源''>提供了0个物品堆叠，输出1。否则输出完整拥有指定的多个连续的槽位的实体数量}}
+{{Output table}}
+
+== 示例 ==
+<syntaxhighlight lang="mcfunction">
+loot give @s loot minecraft:entities/zombie
+</syntaxhighlight>
+* 根据战利品表{{cd|minecraft:entities/zombie}}生成物品并给予执行者。
+
+<syntaxhighlight lang="mcfunction">
+loot insert 1 2 3 loot minecraft:chests/end_city_treasure
+</syntaxhighlight>
+* 根据战利品表{{cd|minecraft:chests/end_city_treasure}}生成物品，并将生成的物品插入到位于(1, 2, 3)处的容器方块中。
+
+<syntaxhighlight lang="mcfunction">
+loot replace block 1 2 3 container.0 3 loot minecraft:chests/abandoned_mineshaft
+</syntaxhighlight>
+* 根据战利品表{{cd|minecraft:chests/abandoned_mineshaft}}生成3个物品堆叠，并将(1, 2, 3)处容器方块{{cd|container.0}}槽位及其之后一共3个格子中的物品替换为生成的物品。
+
+<syntaxhighlight lang="mcfunction">
+loot spawn 1 2 3 loot minecraft:equipment/trial_chamber
+</syntaxhighlight>
+* 根据战利品表{{cd|minecraft:equipment/trial_chamber}}生成物品，该物品将以掉落物的形式生成在主世界的(1.5, 2.5, 3.5)坐标处（坐标经过了中心修正）。
+
+<syntaxhighlight lang="mcfunction">
+loot give @s fish minecraft:gameplay/fishing/treasure 1 2 3 mainhand
+</syntaxhighlight>
+* {{in|je}}根据战利品表{{cd|minecraft:gameplay/fishing/treasure}}生成物品并给予执行者。该过程如同执行者使用主手物品从(1, 2, 3)位置进行了一次“钓鱼”。
+
+<syntaxhighlight lang="mcfunction">
+loot give @s kill @r[type=minecraft:pig]
+</syntaxhighlight>
+* 根据战利品表{{cd|minecraft:entities/pig}}生成物品并给予执行者。所给予的物品如同击杀某只猪后所掉落的物品。
+
+<syntaxhighlight lang="mcfunction">
+loot give @s mine 1 2 3 mainhand
+</syntaxhighlight>
+* 如果(1, 2, 3)位置处为一个铁矿石，则会根据其战利品表生成物品并给予执行者，所给予的物品如同执行者使用主手挖掘该铁矿石后所掉落的物品。{{in|je}}即使主手未持有石镐或品质更好的镐，仍会掉落1个粗铁。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w43a|加入了{{cmd|drop|link=none}}。}}
+|{{HistoryLine|||dev=18w44a|删除了<code>-{}-<''来源''></code>中的award。}}
+|{{HistoryLine|||dev=18w45a|将{{cmd|drop|link=none}}重命名为{{cmd|loot|link=none}}并重做。}}
+|{{HistoryLine||1.20.5|dev=24w09a|更改了语法，现在不再使用物品<code>-{}-''NBT标签''</code>，而是<code>-{}-''物品堆叠组件''</code>。}}
+|{{HistoryLine|||dev=24w12a|现在接受内联战利品定义。}}
+|{{HistoryLine||1.21.2|dev=24w35a|现在会在尝试生成无对应战利品表的方块掉落物时报错。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.18.0|dev=1.18.0.21|加入了{{cmd|loot|link=none}}。}}
+|{{HistoryLine|||dev=1.18.0.22|移除了{{cmd|loot|link=none}}。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.21|重新加入了{{cmd|loot|link=none}}。}}
+|{{HistoryLine|||dev=1.18.10.24|加入了{{cmd|loot spawn ... kill ...|link=none}}语法。}}
+|{{HistoryLine||1.18.30|dev=1.18.20.21|加入了<code>give</code>语法。}}
+|{{HistoryLine|||dev=1.18.30.20|加入了<code>insert</code>语法。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.30|加入了<code>replace entity</code>语法。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.20|加入了<code>replace block</code>语法。}}
+|{{HistoryLine||1.21.50|exg=upcoming_creator_features|dev=1.21.50.20|加入了<code>mine</code>语法。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.23|<code>mine</code>语法不再属于[[实验性玩法]]。}}
+}}
+
+== 参见 ==
+* {{cmd|give}} — 不通过战利品表，直接给予玩家指定物品。
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/loot]]
+[[en:Commands/loot]]
+[[es:Comandos/loot]]
+[[fr:Commandes/loot]]
+[[ja:コマンド/loot]]
+[[ko:명령어/loot]]
+[[pt:Comandos/loot]]
+[[ru:Команды консоли/loot]]
+[[uk:Команди консолі/loot]]

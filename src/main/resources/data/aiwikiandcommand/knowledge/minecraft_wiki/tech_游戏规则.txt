@@ -1,0 +1,235 @@
+# 页面: 游戏规则
+# 来源: https://zh.minecraft.wiki/w/%E6%B8%B8%E6%88%8F%E8%A7%84%E5%88%99
+# 分类: Java版独有信息, 基岩版独有信息, 实验性内容/矿车改进, 有未知版本的History模板的页面/基岩版, 游戏内容, 游戏规则
+# 抓取时间: 2026-07-14 17:30:54
+# 原始 Wikitext 内容:
+
+{{about|用于更改世界玩法的选项|对其进行设置或查询的命令|命令/gamerule|愚人节快照[[23w13a_or_b]]中投票决定的规则|投票规则}}
+'''游戏规则（Game Rule）'''是调整世界内游戏玩法的选项。
+
+== 机制 ==
+{{Filetr|Create New World Gamerule.png|thumb|{{edition|java}}中创建新的世界时的“编辑游戏规则”屏幕}}
+游戏规则有以下基本属性：
+* 对于每一个显示在世界选项中的游戏规则，有'''名称'''、'''描述'''、'''分类'''。
+** {{in|je}}玩家能够在[[创建新世界]]时或在[[游戏菜单]]中通过“编辑游戏规则”屏幕中的选项来对该世界的游戏规则修改。游戏规则的分类有“{{tp|gamerule.category.chat}}”、“{{tp|gamerule.category.drops}}”、“{{tp|gamerule.category.misc}}”、“{{tp|gamerule.category.mobs}}”、“{{tp|gamerule.category.player}}”、“{{tp|gamerule.category.spawning}}”、“{{tp|gamerule.category.updates}}”。
+** {{in|be}}创建新的世界和[[编辑世界]]使用[[Ore UI]]呈现游戏规则编辑。游戏规则的分类有“{{tr|高级|進階}}”、“多人游戏”、“{{tr|无敌模式|作弊}}”。
+** {{in|be}}在游戏内编辑世界使用经典UI呈现游戏规则编辑。游戏规则的分类有“作弊”、“世界选项”。
+** 没有显示在上述界面中的游戏规则只能通过{{cmd|gamerule}}修改。
+* 游戏规则有接受值的'''值类型'''。
+** 布尔值的游戏规则的接受值为{{samp|d=pretty|false|true}}。
+** 整型的游戏规则的接受值为[[参数类型#brigadier:integer|有符号32位整数]]。
+* 游戏规则有其'''默认值'''，在世界创建后未被修改前默认使用。
+
+部分游戏规则还具有对接受值的额外要求。
+
+在游戏中，玩家可以使用{{cmd|gamerule}}命令实时修改游戏规则。
+{{-}}
+
+== 游戏规则列表 ==
+{{for|[[Java版1.21.11]]前使用[[wzh:驼峰式大小写|驼峰命名法]]的游戏规则列表|游戏规则/Java版1.21.11前}}
+下表列出了所有可用游戏规则。
+{{#invoke:autovalue builders|gamerulesTable
+|minecartMaxSpeed-tagje={{in exp|exp=矿车改进}}
+<!-- 在这行以下填写游戏规则的效果概括 -->
+|allowEnteringNetherUsingPortals=实体是否能通过下界传送门进入[[下界]]。
+|allowFireTicksAwayFromPlayer=远离玩家的火是否由熔岩生成、蔓延及自然熄灭。
+|announceAdvancements=是否在聊天框中公告玩家[[进度]]的达成。
+|blockExplosionDropDecay=由[[床]]或[[重生锚]]爆炸炸毁的方块是否会有概率不掉落。
+|commandBlockOutput=[[命令方块]]执行命令时是否在聊天框中向管理员显示。
+|commandBlocksEnabled=[[命令方块]]在游戏中是否被启用。
+|commandModificationBlockLimit=指定单次命令执行可更改的最大方块数。
+|disableElytraMovementCheck=是否让服务器检查使用[[鞘翅]]玩家的移动速度。关闭时有助于减轻因服务器延迟而导致的飞行卡顿，但有可能导致生存模式下玩家飞行过快（作弊）。
+|disablePlayerMovementCheck=是否让服务器检查并限制玩家的移动速度。
+|disableRaids=是否启用[[袭击]]。
+|doDaylightCycle=是否进行[[昼夜更替]]和[[月亮#月相|月相]]变化。
+|doEntityDrops=非生物实体是否掉落物品。
+|doFireTick=火是否蔓延及自然熄灭。
+|doImmediateRespawn=玩家死亡时是否不显示死亡界面直接重生。
+|doInsomnia=[[幻翼]]是否在夜晚生成。
+|doLimitedCrafting=玩家的合成配方是否需要解锁才能使用。
+|doMobLoot=生物在死亡时是否掉落物品。
+|doMobSpawning=[[生物]]是否[[生成#周期生成|自然生成]]。不影响[[刷怪笼]]及{{cmd|summon}}生成生物。
+|doPatrolSpawning=控制[[灾厄巡逻队]]的生成。
+|doTileDrops=方块被破坏时是否掉落物品。
+|doTraderSpawning=控制[[流浪商人]]的生成。
+|doVinesSpread=决定[[藤蔓]]是否会向周围扩散，不影响[[洞穴藤蔓]]、[[缠怨藤]]和[[垂泪藤]]。
+|doWardenSpawning=[[监守者]]是否生成。
+|doWeatherCycle=天气是否变化。
+|drowningDamage=玩家是否承受窒息伤害。
+|enderPearlsVanishOnDeath=被掷出的[[末影珍珠]]是否会在掷出它的玩家死亡后消失。
+|fallDamage=玩家是否承受{{tr|摔落|摔落|跌落}}伤害。
+|fireDamage=玩家是否承受火焰伤害。
+|fire_spread_radius_around_player=决定了玩家周围会发生火的蔓延、自然熄灭及熔岩生成火的范围。将其设为0将禁用火的更新，设为-1则即使火在附近没有玩家时也可更新。
+|forgiveDeadPlayers=当被激怒的条件敌对生物的目标玩家死亡时，该生物是否恢复未激怒状态。
+|freezeDamage=玩家是否承受冰冻伤害。
+|functionCommandLimit=通过{{cmd|function}}命令执行命令的最大数量。
+|globalSoundEvents=玩家是否能听到可无视距离播放给全部玩家的特定游戏事件音效。
+|keepInventory=玩家死亡后是否保留物品栏物品、经验（死亡时物品不掉落、经验不清空）。
+|lavaSourceConversion=流动的熔岩是否可产生熔岩源。
+|locator_bar=是否启用[[定位栏]]和[[路径点]]。
+|locatorBar=是否启用[[定位栏]]和[[路径点]]。
+|logAdminCommands=是否在服务器日志中记录管理员使用过的命令。
+|maxCommandChainLength=决定了连锁型命令方块和[[Java版函数|函数]]能连锁执行的总数量。
+|maxCommandForkCount=决定了命令能使用的命令上下文的总数量。
+|maxEntityCramming=控制[[挤压]]机制。同一位置的可推动实体的上限超过该游戏规则的数量时会引发挤压伤害。设置成0可以停用挤压机制。
+|minecartMaxSpeed=控制[[矿车]]在铁轨上移动的最大速度，单位为格每秒。水下矿车的最大水平速度是此值的一半。
+|mobExplosionDropDecay=由生物源爆炸炸毁的方块是否会有概率不掉落。
+|mobGriefing-je=生物是否能够进行破坏性行为，包括[[苦力怕]]、[[僵尸]]、[[末影人]]、[[恶魂]]、[[凋灵]]、[[末影龙]]、[[兔子]]、[[绵羊]]、[[村民]]和[[雪傀儡]]是否能放置、修改或破坏方块，生物是否能捡拾物品，以及[[唤魔者]]是否能将蓝色的绵羊变为红色。这个规则也会影响生物（如[[僵尸猪灵]]和[[溺尸]]）寻找[[海龟蛋]]的能力。这还将会阻止[[村民]]的[[繁殖]]。这一游戏规则不会影响[[TNT]]和[[末地水晶]]。
+|mobGriefing-be=生物是否能够进行破坏性行为，包括[[苦力怕]]、[[僵尸]]、[[末影人]]、[[恶魂]]、[[凋灵]]、[[末影龙]]、[[兔子]]、[[绵羊]]、[[村民]]和[[雪傀儡]]是否能放置、修改或破坏方块，生物是否能捡拾物品。这个规则也会影响生物（如[[僵尸猪灵]]和[[溺尸]]）寻找[[海龟蛋]]的能力。这还将会阻止[[村民]]的[[繁殖]]。这一游戏规则不会影响[[TNT]]。
+|naturalRegeneration=玩家是否能在饥饿值足够时自然恢复生命值（不影响外部治疗效果，如[[金苹果]]、[[生命恢复]]状态效果等）。
+|playersNetherPortalCreativeDelay=[[创造模式]]下的玩家需要待在[[下界传送门（方块）|下界传送门]]内多少游戏刻才能进入另一个维度。
+|playersNetherPortalDefaultDelay=非创造模式下的玩家需要待在下界传送门内多少游戏刻才能进入另一个维度。
+|playersSleepingPercentage=设置跳过夜晚所需的入睡玩家所占百分比。设置为0时，1个玩家入睡即可跳过夜晚。设置为大于100的值会使玩家无法通过入睡跳过夜晚。
+|playerWaypoints=控制[[定位栏]]显示玩家[[路径点]]的行为。
+|projectilesCanBreakBlocks=[[弹射物]]能否破坏[[紫颂花]]、[[滴水石锥]]以及[[饰纹陶罐]]。
+|pvp=玩家之间能否造成伤害。
+|randomTickSpeed=每游戏刻每区段中随机的[[方块刻]]发生的频率（例如植物生长，树叶腐烂等）。为0时禁用随机刻，较高的数字将增大随机刻频率。
+|recipesUnlock=配方是否需要解锁。
+|reducedDebugInfo=[[调试屏幕]]是否简化而非显示详细信息；同时影响实体碰撞箱（通过{{key|F3+B}}查看）和区块边界（通过{{key|F3+G}}查看）效果的显示。
+|respawnBlocksExplode=玩家在非主世界维度使用床或在非下界维度使用[[重生锚]]时是否会爆炸。
+|sendCommandFeedback=玩家执行命令的返回信息是否在聊天框中显示。同时影响命令方块是否保存命令输出文本。
+|showBorderEffect=边界是否发出红色粒子。
+|showCoordinates=是否在聊天框区域持续实时显示玩家坐标。
+|showDaysPlayed=是否在屏幕左上角显示游玩天数。
+|showDeathMessages-je=是否在聊天框中显示玩家的死亡消息。同样影响是否在宠物死亡时通知它的主人。
+|showDeathMessages-be=是否在聊天框中显示玩家的死亡消息。同样影响是否在宠物死亡时广播给世界中的每一个玩家。
+|showRecipeMessages=是否在解锁新配方时显示消息。
+|showTags=是否展示物品的物品组件。
+|snowAccumulationHeight=下雪时可在一格方块空间内堆积的雪的最高层数。
+|spawnerBlocksEnabled=是否允许[[刷怪笼]]与[[试炼刷怪笼]]运作。
+|spawnMonsters=[[生物#敌对生物|敌对生物]]是否能自然生成。
+|spawnRadius=首次进入服务器的玩家和没有重生点的死亡玩家在重生时与[[世界出生点]]坐标的距离。
+|spectatorsGenerateChunks=是否允许[[旁观模式]]的玩家生成区块。
+|tntExplodes=[[TNT]]是否会爆炸。
+|tntExplosionDropDecay=由TNT爆炸炸毁的方块是否会有概率不掉落。
+|universalAnger=被激怒的条件敌对生物是否攻击附近任何玩家（而非只攻击激怒它们的玩家）。当{{cd|forgiveDeadPlayers}}关闭时会有更好的效果。
+|waterSourceConversion=流动的水是否可产生水源。
+<!-- 在这行以上填写游戏规则的效果概括 -->
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了游戏规则[[游戏规则/doFireTick|doFireTick]]、[[游戏规则/doMobLoot|doMobLoot]]、[[游戏规则/doMobSpawning|doMobSpawning]]、[[游戏规则/doTileDrops|doTileDrops]]、[[游戏规则/keepInventory|keepInventory]]和[[游戏规则/mobGriefing|mobGriefing]]。}}
+|{{HistoryLine|||dev=12w38a|加入了游戏规则[[游戏规则/commandBlockOutput|commandBlockOutput]]。}}
+|{{HistoryLine||1.6.1|dev=13w23a|加入了游戏规则[[游戏规则/naturalRegeneration|naturalRegeneration]]。}}
+|{{HistoryLine|||dev=13w24a|加入了游戏规则[[游戏规则/doDaylightCycle|doDaylightCycle]]。}}
+|{{HistoryLine||1.8|dev=14w03a|加入了游戏规则[[游戏规则/logAdminCommands|logAdminCommands]]。}}
+|{{HistoryLine|||dev=14w10a|加入了游戏规则[[游戏规则/showDeathMessages|showDeathMessages]]。}}
+|{{HistoryLine|||dev=14w17a|加入了游戏规则[[游戏规则/randomTickSpeed|randomTickSpeed]]。}}
+|{{HistoryLine|||dev=14w26a|加入了游戏规则[[游戏规则/sendCommandFeedback|sendCommandFeedback]]。}}
+|{{HistoryLine|||dev=14w29a|加入了游戏规则[[游戏规则/reducedDebugInfo|reducedDebugInfo]]。
+|加入了创建自定义游戏规则的能力。}}
+|{{HistoryLine||1.8.1|dev=pre1|加入了游戏规则[[游戏规则/doEntityDrops|doEntityDrops]]。}}
+|{{HistoryLine||1.9|dev=15w37a|加入了游戏规则[[游戏规则/spectatorsGenerateChunks|spectatorsGenerateChunks]]。}}
+|{{HistoryLine|||dev=15w51a|加入了游戏规则[[游戏规则/spawnRadius|spawnRadius]]。}}
+|{{HistoryLine|||dev=16w07a|加入了游戏规则[[游戏规则/disableElytraMovementCheck|disableElytraMovementCheck]]。}}
+|{{HistoryLine||1.11|dev=16w38a|加入了游戏规则[[游戏规则/doWeatherCycle|doWeatherCycle]]和[[游戏规则/maxEntityCramming|maxEntityCramming]]。}}
+|{{HistoryLine||1.12|dev=17w13a|加入了游戏规则[[游戏规则/doLimitedCrafting|doLimitedCrafting]]。}}
+|{{HistoryLine|||dev=17w16b|加入了游戏规则[[游戏规则/maxCommandChainLength|maxCommandChainLength]]。}}
+|{{HistoryLine|||dev=17w18a|加入了游戏规则[[游戏规则/announceAdvancements|announceAdvancements]]。}}
+|{{HistoryLine|||dev=pre1|加入了游戏规则[[游戏规则/gameLoopFunction|gameLoopFunction]]，用于设置每游戏刻触发的函数。}}
+|{{HistoryLine||1.13|dev=17w45a|现在游戏不再接受自定义游戏规则。}}
+|{{HistoryLine|||dev=17w49b|移除了游戏规则gameLoopFunction，改为使用函数标签{{cd|minecraft:tick}}。}}
+|{{HistoryLine||1.14.3|dev=pre3|加入了游戏规则[[游戏规则/disableRaids|disableRaids]]。}}
+|{{HistoryLine||1.15|dev=19w36a|加入了游戏规则[[游戏规则/doInsomnia|doInsomnia]]、[[游戏规则/doImmediateRespawn|doImmediateRespawn]]、[[游戏规则/drowningDamage|drowningDamage]]、[[游戏规则/fallDamage|fallDamage]]和[[游戏规则/fireDamage|fireDamage]]。}}
+|{{HistoryLine||1.15.2|dev=pre1|加入了游戏规则[[游戏规则/doPatrolSpawning|doPatrolSpawning]]和[[游戏规则/doTraderSpawning|doTraderSpawning]]。}}
+|{{HistoryLine||1.16|dev=20w17a|现在创建新的世界时可以编辑游戏规则。}}
+|{{HistoryLine||1.16|dev=pre1|加入了游戏规则[[游戏规则/universalAnger|universalAnger]]和[[游戏规则/forgiveDeadPlayers|forgiveDeadPlayers]]。}}
+|{{HistoryLine||1.17|dev=20w48a|加入了游戏规则[[游戏规则/freezeDamage|freezeDamage]]。}}
+|{{HistoryLine|||dev=20w51a|加入了游戏规则[[游戏规则/playersSleepingPercentage|playersSleepingPercentage]]。}}
+|{{HistoryLine||1.19|dev=22w16a|加入了游戏规则[[游戏规则/doWardenSpawning|doWardenSpawning]]。}}
+|{{HistoryLine||1.19.3|dev=22w44a|加入了游戏规则[[游戏规则/blockExplosionDropDecay|blockExplosionDropDecay]]、[[游戏规则/globalSoundEvents|globalSoundEvents]]、[[游戏规则/lavaSourceConversion|lavaSourceConversion]]、[[游戏规则/mobExplosionDropDecay|mobExplosionDropDecay]]、[[游戏规则/snowAccumulationHeight|snowAccumulationHeight]]、[[游戏规则/tntExplosionDropDecay|tntExplosionDropDecay]]和[[游戏规则/waterSourceConversion|waterSourceConversion]]。}}
+|{{HistoryLine||1.19.4|dev=23w03a|加入了游戏规则[[游戏规则/commandModificationBlockLimit|commandModificationBlockLimit]]。}}
+|{{HistoryLine|||dev=23w06a|加入了游戏规则[[游戏规则/doVinesSpread|doVinesSpread]]。}}
+|{{HistoryLine||1.20.2|dev=pre1|加入了游戏规则[[游戏规则/enderPearlsVanishOnDeath|enderPearlsVanishOnDeath]]。}}
+|{{HistoryLine||1.20.3|dev=23w42a|加入了游戏规则[[游戏规则/playersNetherPortalDefaultDelay|playersNetherPortalDefaultDelay]]、[[游戏规则/playersNetherPortalCreativeDelay|playersNetherPortalCreativeDelay]]和[[游戏规则/projectilesCanBreakBlocks|projectilesCanBreakBlocks]]。}}
+|{{HistoryLine||1.20.5|dev=24w03a|加入了游戏规则[[游戏规则/spawnChunkRadius|spawnChunkRadius]]。}}
+|{{HistoryLine||1.21|dev=24w21a|加入了游戏规则[[游戏规则/entitiesWithPassengersCanUsePortals|entitiesWithPassengersCanUsePortals]]，用于控制带有乘客的实体是否可以穿过传送门。}}
+|{{HistoryLine|||dev=pre1|移除了游戏规则entitiesWithPassengersCanUsePortals。}}
+|{{HistoryLine||1.21.2|exp=minecart_improvements|dev=24w33a|加入了游戏规则[[游戏规则/minecartMaxSpeed|minecartMaxSpeed]]，用于控制矿车水平移动的最大速度。}}
+|{{HistoryLine|||exp=none|dev=pre1|加入了游戏规则[[游戏规则/disablePlayerMovementCheck|disablePlayerMovementCheck]]。}}
+|{{HistoryLine||1.21.5|dev=25w06a|加入了游戏规则[[游戏规则/allowFireTicksAwayFromPlayer|allowFireTicksAwayFromPlayer]]。}}
+|{{HistoryLine|||dev=25w10a|加入了游戏规则[[游戏规则/tntExplodes|tntExplodes]]。}}
+|{{HistoryLine||1.21.6|exp=locator_bar|dev=25w15a|加入了游戏规则[[游戏规则/useLocatorBar|useLocatorBar]]。}}
+|{{HistoryLine|||exp=none|dev=25w17a|将游戏规则useLocatorBar重命名为[[游戏规则/locatorBar|locatorBar]]，以匹配{{el|be}}。
+|游戏规则[[游戏规则/locatorBar|locatorBar]]不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.9|dev=25w31a|移除了游戏规则spawnChunkRadius。}}
+|{{HistoryLine|||dev=25w35a|加入了游戏规则[[游戏规则/pvp|pvp]]、[[游戏规则/allowEnteringNetherUsingPortals|allowEnteringNetherUsingPortals]]、[[游戏规则/enableCommandBlocks|enableCommandBlocks]]和[[游戏规则/spawnMonsters|spawnMonsters]]。}}
+|{{HistoryLine|||dev=25w37a|加入了游戏规则[[游戏规则/spawnerBlocksEnabled|spawnerBlocksEnabled]]。
+|将游戏规则enableCommandBlocks重命名为[[游戏规则/commandBlocksEnabled|commandBlocksEnabled]]，以匹配{{el|be}}。}}
+|{{HistoryLine||1.21.11|dev=25w44a|加入了游戏规则[[游戏规则/fire_spread_radius_around_player|fire_spread_radius_around_player]]，以取代allowFireTicksAwayFromPlayer和doFireTick。
+|现在游戏规则已经移动到[[注册表]]，这意味着所有驼峰式命名的游戏规则ID均已重命名为资源路径的下划线式的ID。
+|下列游戏规则已被进一步重命名：
+* announceAdvancements -> show_advancement_messages
+* commandBlocksEnabled -> command_blocks_work
+* commandModificationBlockLimit -> max_block_modifications
+* disableElytraMovementCheck -> elytra_movement_check
+** 在使用资源路径时此游戏规则的值的意义与之前相反。
+* disablePlayerMovementCheck -> player_movement_check
+** 在使用资源路径时此游戏规则的值的意义与之前相反。
+* disableRaids -> raids
+** 在使用资源路径时此游戏规则的值的意义与之前相反。
+* doDaylightCycle -> advance_time
+* doEntityDrops -> entity_drops
+* doImmediateRespawn -> immediate_respawn
+* doInsomnia -> spawn_phantoms
+* doLimitedCrafting -> limited_crafting
+* doMobLoot -> mob_drops
+* doMobSpawning -> spawn_mobs
+* doPatrolSpawning -> spawn_patrols
+* doTileDrops -> block_drops
+* doTraderSpawning -> spawn_wandering_traders
+* doVinesSpread -> spread_vines
+* doWardenSpawning -> spawn_wardens
+* doWeatherCycle -> advance_weather
+* maxCommandChainLength -> max_command_sequence_length
+* maxCommandForkCount -> max_command_forks
+* minecartMaxSpeed -> max_minecart_speed
+* naturalRegeneration -> natural_health_regeneration
+* snowAccumulationHeight -> max_snow_accumulation_height
+* spawnRadius -> respawn_radius
+* spawnerBlocksEnabled -> spawner_blocks_work}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了游戏规则[[游戏规则/commandBlockOutput|commandBlockOutput]]、[[游戏规则/drowningDamage|drowningDamage]]、[[游戏规则/fallDamage|fallDamage]]、[[游戏规则/fireDamage|fireDamage]]、[[游戏规则/pvp|pvp]]和[[游戏规则/sendCommandFeedback|sendCommandFeedback]]。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了游戏规则[[游戏规则/doDaylightCycle|doDaylightCycle]]、[[游戏规则/doEntityDrops|doEntityDrops]]、[[游戏规则/doFireTick|doFireTick]]、[[游戏规则/doMobLoot|doMobLoot]]、[[游戏规则/doMobSpawning|doMobSpawning]]、[[游戏规则/doTileDrops|doTileDrops]]、[[游戏规则/doWeatherCycle|doWeatherCycle]]、[[游戏规则/keepInventory|keepInventory]]和[[游戏规则/mobGriefing|mobGriefing]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了游戏规则[[游戏规则/doStartWithMap|doStartWithMap]]、[[游戏规则/tntExplodes|tntExplodes]]和[[游戏规则/naturalRegeneration|naturalRegeneration]]。}}
+|{{HistoryLine|||dev=1.2.0.11|移除了游戏规则doStartWithMap。}}
+|{{HistoryLine|||dev=1.2.0.31|加入了游戏规则[[游戏规则/showCoordinates|showCoordinates]]。}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|加入了游戏规则[[游戏规则/maxCommandChainLength|maxCommandChainLength]]。}}
+|{{HistoryLine||1.6.0|dev=1.6.0.6|加入了游戏规则[[游戏规则/doInsomnia|doInsomnia]]。}}
+|{{HistoryLine||1.7.0|dev=1.7.0.2|加入了游戏规则[[游戏规则/commandBlocksEnabled|commandBlocksEnabled]]。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|加入了游戏规则[[游戏规则/randomTickSpeed|randomTickSpeed]]。}}
+|{{HistoryLine||1.9.0|dev=1.9.0.0|加入了游戏规则[[游戏规则/doImmediateRespawn|doImmediateRespawn]]、[[游戏规则/showDeathMessages|showDeathMessages]]。}}|{{HistoryLine|||dev=1.9.0.2|加入了游戏规则[[游戏规则/functionCommandLimit|functionCommandLimit]]。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|加入了游戏规则[[游戏规则/spawnRadius|spawnRadius]]。}}
+|{{HistoryLine||1.14.0|加入了游戏规则[[游戏规则/showTags|showTags]]。}}
+|{{HistoryLine||?|现在不再接受未知值（自定义游戏规则）。}}
+|{{HistoryLine||1.16.210|dev=1.16.210.53|加入了游戏规则[[游戏规则/freezeDamage|freezeDamage]]。}}
+|{{HistoryLine||1.17.30|dev=1.17.20.20|加入了游戏规则[[游戏规则/respawnBlocksExplode|respawnBlocksExplode]]。}}
+|{{HistoryLine|||dev=1.17.30.20|加入了游戏规则[[游戏规则/showBorderEffect|showBorderEffect]]。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|加入了游戏规则[[游戏规则/playersSleepingPercentage|playersSleepingPercentage]]和[[游戏规则/recipesUnlock|recipesUnlock]]。}}
+|{{HistoryLine|||dev=1.20.30.20|加入了游戏规则[[游戏规则/doLimitedCrafting|doLimitedCrafting]]。}}
+|{{HistoryLine||1.20.50|dev=1.20.50.20|加入了游戏规则[[游戏规则/showRecipeMessages|showRecipeMessages]]。}}
+|{{HistoryLine|||dev=1.20.50.22|加入了游戏规则[[游戏规则/projectilesCanBreakBlocks|projectilesCanBreakBlocks]]。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.20|加入了游戏规则[[游戏规则/tntExplosionDropDecay|tntExplosionDropDecay]]。}}
+|{{HistoryLine|||dev=1.21.0.23|加入了游戏规则[[游戏规则/showDaysPlayed|showDaysPlayed]]。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.25|加入了游戏规则[[游戏规则/locatorBar|locatorBar]]。}}
+|{{HistoryLine||26.30|dev=26.30.20|移除了游戏规则[[游戏规则/locatorBar|locatorBar]]，并加入[[游戏规则/playerWaypoints|playerWaypoints]]以取代。}}
+}}
+
+== 导航 ==
+{{Navbox gamerules}}
+{{Navbox gameplay}}
+
+[[Category:游戏规则|*]]
+
+[[de:Spielregel]]
+[[en:Game rule]]
+[[es:Reglas del juego]]
+[[fr:Règle de jeu]]
+[[ja:ゲームルール]]
+[[ko:게임 규칙]]
+[[pt:Regra de jogo]]
+[[ru:Игровые правила]]
+[[uk:Ігрове правило]]

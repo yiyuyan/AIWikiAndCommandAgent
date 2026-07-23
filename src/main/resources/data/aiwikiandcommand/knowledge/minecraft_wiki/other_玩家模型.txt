@@ -1,0 +1,153 @@
+# 页面: 玩家模型
+# 来源: https://zh.minecraft.wiki/w/%E7%8E%A9%E5%AE%B6%E6%A8%A1%E5%9E%8B
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:08
+# 原始 Wikitext 内容:
+
+{{about|可展示玩家外观的生物|{{el|be|ee}}中外观与村民相似的可交互生物|NPC}}
+{{exclusive|java}}
+{{Infobox entity
+|image=Alex.png
+|imagesize=x350px
+|behavior=友好生物
+|health={{hp|20}}
+|size=高度：1.8格<br>宽度：0.6格
+|nobe=1
+}}
+
+'''玩家模型（Mannequin）'''是一种具有[[玩家]]外观的[[生物]]。
+
+== 生成 ==
+玩家模型不会自然生成，游戏中亦不存在玩家模型的[[刷怪蛋]]，但可以通过{{cmd|summon mannequin}}命令等方式生成。
+
+== 掉落物 ==
+玩家模型死亡时不掉落任何[[物品]]或[[经验]]。
+
+== 行为 ==
+[[File:Mannequin with wheat.png|thumb|玩家模型持有的小麦无法吸引绵羊，持有的小麦种子无法吸引鸡]]
+玩家模型的<code>below_name</code>[[记分板#显示位置|记分板显示位置]]处默认显示“{{tp|entity.minecraft.mannequin.label}}”。
+
+玩家模型的外形与玩家类似，其实体数据有许多与玩家渲染相关的实体属性，在外观上可以被视为一个玩家。
+
+除了生物的普遍特性外，玩家模型与玩家几乎没有任何相同之处，在所有游戏行为场景中都不会被视为一个玩家。
+
+玩家模型不能被[[拴绳]]牵引，无法设置[[战利品表]]。
+
+=== 生物行为 ===
+玩家模型不具有任何[[生物AI]]，但仍有作为生物的基本行为：
+* 可以[[受伤]]，有[[受击后伤害免疫]]。
+* 需要[[呼吸]]。
+* 作为[[实体]]可以自由不受方格限制地移动，能站立在[[台阶]]等不完整方块上，并被[[水流]]、[[活塞]]或[[钓鱼竿]]移动。
+* 受[[重力]]影响而下落，且具有生物的重力加速度和终端速度。
+* 可以获得[[属性]]和[[状态效果]]。
+* 能由其取得部分需求为生物的[[进度]]（见{{slink||进度}}）。
+
+对其他生物可以产生的效果，大多数也能正确对玩家模型生效：
+* [[发射器]]能将可穿戴物品装备到玩家模型上。
+* [[狐狸]]会拒绝在相异[[队伍]]的玩家模型附近睡觉。
+* [[僵尸疣猪兽]]会试图攻击玩家模型。
+* [[山羊]]会冲撞玩家模型。
+* [[河豚]]在玩家模型靠近时会膨胀，并使玩家模型中毒。
+* [[幽匿催发体]]会在玩家模型死亡时被激活。
+* [[生物AI]]有反击行为的生物受到来自玩家模型的伤害时（如利用{{cmd|damage}}产生来源为玩家模型的伤害），它们也会试图攻击玩家模型。
+
+玩家模型装备的盔甲的一些[[魔咒]]可以生效：
+* [[冰霜行者]]魔咒会在玩家模型被推动时把[[水]]变成[[霜冰]]。
+* [[深海探索者]]魔咒会减缓玩家模型被水流推动的速度。
+* [[荆棘]]魔咒会对攻击玩家模型的生物造成伤害。
+
+== 音效 ==
+{{Sound table
+|sound=Player hurt1.ogg
+|sound2=Player hurt2.ogg
+|sound3=Player hurt3.ogg
+|subtitle={{tp|subtitles.entity.generic.hurt}}
+|source=友好生物
+|description=受伤
+|id=entity.generic.hurt
+|translationkey=subtitles.entity.generic.hurt
+}}
+{{Sound table
+|sound=Player hurt1.ogg
+|sound2=Player hurt2.ogg
+|sound3=Player hurt3.ogg
+|subtitle={{tp|subtitles.entity.generic.death}}
+|source=友好生物
+|description=死亡
+|id=entity.generic.death
+|translationkey=subtitles.entity.generic.death
+}}
+{{Sound table
+|sound=Fall damage small.ogg
+|subtitle={{tp|subtitles.entity.generic.small_fall}}
+|source=友好生物
+|description=从4-7格高坠落到地面
+|id=entity.player.small_fall
+|translationkey=subtitles.entity.generic.small_fall
+}}
+{{Sound table
+|sound=Fall damage big.ogg
+|subtitle={{tp|subtitles.entity.generic.big_fall}}
+|source=友好生物
+|description=从大于8格高坠落到地面
+|id=entity.player.big_fall
+|translationkey=subtitles.entity.generic.big_fall
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=java
+|Mannequin
+|spritetype=entity
+|nameid=mannequin
+|foot=1}}
+
+=== 实体数据 ===
+{{main|实体数据格式}}
+玩家模型有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+== 进度 ==
+{{main|进度}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.9|dev=25w36a|加入了玩家模型。
+|[[File:Steve (slim) JE2.png|32px]]玩家模型目前默认使用宽型Steve皮肤和纤细型模型。}}
+|{{HistoryLine|||dev=25w37a|[[File:Steve JE5.png|32px]]玩家模型目前默认使用宽型Steve皮肤和宽型模型。}}
+|{{HistoryLine|||dev=pre1|[[File:Alex JE3.png|32px]]玩家模型目前默认使用纤细型Alex皮肤和纤细型模型。
+|现在可以配置玩家模型描述文本。
+|为玩家模型加入了新的数据字段，并将<code>profile</code>数据字段与<code>profile</code>组件绑定。
+|{{cd|CustomNameVisible}}标签现在适用于玩家模型。在这之前，玩家模型默认显示其名称。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:Gliding mannequins.png|仰视两个滑翔姿势的玩家模型
+File:Mannequin with display name.png|玩家模型的“NPC”标签
+</gallery>
+
+== 导航 ==
+{{Navbox entities|Mobs}}
+
+[[Category:友好生物]]
+[[Category:未使用的生物]]
+
+[[de:Spielerpuppe]]
+[[en:Mannequin]]
+[[es:Maniquí]]
+[[fr:Mannequin]]
+[[it:Manichino]]
+[[ja:マネキン]]
+[[ko:마네킹]]
+[[lzh:人偶]]
+[[pl:Manekin]]
+[[pt:Manequim]]
+[[ru:Манекен]]

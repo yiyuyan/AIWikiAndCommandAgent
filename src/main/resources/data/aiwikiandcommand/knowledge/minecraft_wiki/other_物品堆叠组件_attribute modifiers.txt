@@ -1,0 +1,30 @@
+# 页面: 物品堆叠组件/attribute modifiers
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%A0%86%E5%8F%A0%E7%BB%84%E4%BB%B6/attribute%20modifiers
+# 分类: 已弃用的模板
+# 抓取时间: 2026-07-14 17:31:52
+# 原始 Wikitext 内容:
+
+<noinclude>{{deprecated|type=模板|historical=1|text=请使用[[编码格式/DataComponent]]代替。}}</noinclude>
+<div class="treeview">
+** {{nbt|list|attribute_modifiers}} 物品堆叠组件
+*** {{nbt|compound}}：单个属性修饰符。
+**** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）属性修饰符的命名空间ID。
+**** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+**** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。如果设置值无效，则为<code>add_value</code>（Op0）。
+**** {{nbt|string|slot}}：（默认为<code>any</code>）指定修饰符产生效果的槽位。可以为<code>mainhand</code>（主手）、<code>offhand</code>（副手）、<code>head</code>（头盔）、<code>chest</code>（胸甲）、<code>legs</code>（护腿）、<code>feet</code>（靴子）、<code>hand</code>（双手）、<code>armor</code>（所有护甲）、<code>body</code>（身体）、<code>saddle</code>（鞍）和<code>any</code>（任何槽位）。
+**** {{nbt|string|type|existonsave=1|required=1}}：{{json ref|属性|属性#已知属性项}}，表示属性修饰符所要修饰的属性。
+**** {{nbt|compound|display|existonsave=1|required=1}}：属性修饰符在提示框的显示方式。
+***** {{nbt|string|type|existonsave=1|required=1}}：显示类型，枚举值见下。
+***** {{nbt condition|当{{nbt|string|type}}为{{cd|default}}时，显示此项计算后的属性修饰符值。}}
+***** {{nbt condition|当{{nbt|string|type}}为{{cd|hidden}}时，不显示此项属性修饰符值。}}
+***** {{nbt condition|当{{nbt|string|type}}为{{cd|override}}时，替换所显示的属性修饰符文本，附加字段如下：}}
+***** {{nbt|string}}{{nbt|compound}}{{nbt|list|value|existonsave=1|required=1}}：（[[文本组件]]）替换后的文本。
+</div><noinclude>
+[[en:Data component format/attribute modifiers]]
+[[fr:Format de composant de données/attribute modifiers]]
+[[ja:データコンポーネント/attribute modifiers]]
+[[ko:데이터 구성 요소 형식/attribute modifiers]]
+[[pt:Formato de componente de dado/attribute modifiers]]
+[[ru:Формат компонента данных/attribute modifiers]]
+[[uk:Формат компонента даних/attribute modifiers]]
+</noinclude>

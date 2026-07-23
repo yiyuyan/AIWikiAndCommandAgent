@@ -1,0 +1,71 @@
+# 页面: 玩家列表
+# 来源: https://zh.minecraft.wiki/w/%E7%8E%A9%E5%AE%B6%E5%88%97%E8%A1%A8
+# 分类: Java版独有信息
+# 抓取时间: 2026-07-14 17:32:08
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|清單}}
+{{about|屏幕上的信息|有类似用途的命令|命令/list}}
+{{stub|需要扩充历史段落、基岩版有关信息、設置“{{tp|options.allowServerListing}}”}}
+'''玩家列表（Player Tab Overlay）'''用于显示玩家的-{}-头像、名称与{{only|for=延迟|je}}等信息。
+
+{{in|je}}玩家列表在第三方服务器中、有两名以上玩家或使用了<code>list</code>位置的[[记分板]]时按住“{{tp|key.playerlist}}”键（默认为{{key|Tab}}）时展示。玩家列表会在查看服务器在线人数、服务器在线玩家、自己和其他玩家的延迟状态时发挥很大用处。
+
+{{in|be}}玩家列表始终会在游戏菜单中展示，无论是否为多人游戏。
+
+== 显示位置 ==
+=== Java版 ===
+[[File:Player tab overlay in singleplayer.png|thumb|{{el|je}}的单人游戏中使用了<code>list</code>位置记分板的玩家列表]]
+玩家列表会显示在屏幕上方中心，距离屏幕顶部有一定距离，与[[Boss栏]]同时存在时会挡住BOSS栏的一部分。
+
+=== 基岩版 ===
+玩家列表会显示在[[游戏菜单]]右侧。
+
+== 显示内容 ==
+{{in|je}}玩家列表可以有多列，每列不超过20名玩家，从左到右分别显示玩家头像<ref group="注">在服务器未启用正版验证时不显示。</ref>、玩家在服务器中的名称（颜色会显示为该玩家的队伍颜色）、玩家的记分项<ref group="注" name="nolist">无<code>list</code>位置的记分项时不显示。</ref>、玩家的延迟状态（用延迟图标表示）。
+
+{{in|be}}玩家列表仅有一列，从左到右分别显示玩家头像、玩家名称和玩家记分项<ref group="注" name="nolist"/>或玩家权限等级图示<ref group="注">在存在<code>list</code>位置的记分项且具有其数值时会被记分项覆盖。</ref>。
+
+=== 玩家头像 ===
+{{in|je}}当服务器启用正版验证时，每列玩家列表的左侧会显示该玩家的头像，当该名玩家的实体被客户端渲染时会显示双层皮肤头像，没有被客户端渲染时会显示单层皮肤头像。可以利用这一特性判断该玩家与自己的距离。
+
+{{in|be}}每名玩家的名称左侧会显示该玩家的Minecraft账户头像。未登录的玩家没有头像。
+
+=== 记分项 ===
+{{See also|记分板#显示位置}}
+[[File:Scoreboard Display List Integer.png|缩略图|250px|{{el|je}}中将记分项位置设置为<code>list</code>的效果，渲染类型为<code>integer</code>]]
+[[File:Scoreboard Display List Hearts.gif|缩略图|250px|{{el|je}}中将记分项位置设置为<code>list</code>的效果，渲染类型为<code>heart</code>]]
+
+当记分项位置设置为<code>list</code>时，记分项会显示在玩家列表中。
+
+{{in|je}}记分项在玩家列表中以黄色文字在玩家名称后显示分数信息（默认为{{key|tab}}键），而不会显示其名称。
+
+{{in|be}}在游戏菜单的玩家列表显示分数信息。
+
+=== 玩家延迟 ===
+{{exclusive|java|section=1}}
+[[File:Ping.png|thumb|延迟图标]]
+
+玩家列表的最右侧会用类似信号大小的图标显示玩家当前的延迟，从1格信号到5格信号的延迟区间分别是1000/600/300/150/0毫秒，如果该玩家延迟未知则会在没有信号的图标上加一个红×来表示。
+
+== 历史 ==
+{{Stub|section=5}}
+{{HistoryTable
+|{{HistoryLine|java classic}}
+|{{HistoryLine||0.0.17a|现在可以按下{{key|Tab}}键查看已登录的玩家列表。}}
+|{{HistoryLine||0.0.23a|点击玩家列表中的某个玩家名字会将其用户名粘贴到聊天栏中。}}
+|{{HistoryLine|java indev}}
+|{{HistoryLine||0.31|dev=20091223-0040|多人模式被部分禁用（虽然多人代码仍存在并可重新启用），因此无法打开聊天窗口，也无法打开玩家列表。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w20a|使其在展示生命值目标时更加稳定和更加美观。
+|现在会将队伍放在一起。
+|现在以玩家名排列。
+|现在列表的长度会根据玩家数量变化。}}
+|{{HistoryLine||1.8|dev=14w25a|玩家列表现在显示玩家的脸部。}}
+}}
+
+== 注释 ==
+{{Notelist}}
+
+== 导航 ==
+{{Navbox gameplay}}

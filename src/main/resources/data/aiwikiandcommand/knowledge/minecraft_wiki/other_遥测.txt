@@ -1,0 +1,576 @@
+# 页面: 遥测
+# 来源: https://zh.minecraft.wiki/w/%E9%81%A5%E6%B5%8B
+# 分类: 
+# 抓取时间: 2026-07-14 17:37:13
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|匿名信息反馈|資訊蒐集}}{{exclusive|java|customtext=基岩版存在遥测，但此条目没有基岩版的任何信息。}}
+{{Filetr|Telemetry Data.png|thumb|遥测数据屏幕}}
+'''遥测（Telemetry）'''是Mojang获取玩家或世界的数据的功能，旨在官方人员了解玩家的游戏情况以改进游戏。<ref>{{snap|21w38a}}</ref>
+
+== 遥测数据 ==
+遥测数据是发送给Mojang的数据。游戏将其分为了若干遥测事件，每个遥测事件包含若干数据。在遥测数据收集屏幕上，遥测事件作为章节标题，其下每一行都是此事件的数据。
+
+目前共有7种遥测事件：{{tp|telemetry.event.graphics_capabilities.title}}、{{tp|telemetry.event.world_loaded.title}}、{{tp|telemetry.event.world_unloaded.title}}、{{tp|telemetry.event.performance_metrics.title}}、{{tp|telemetry.event.world_load_times.title}}、{{tp|telemetry.event.advancement_made.title}}和{{tp|telemetry.event.game_load_times.title}}。其中{{tp|telemetry.event.graphics_capabilities.title}}、{{tp|telemetry.event.world_loaded.title}}和{{tp|telemetry.event.world_unloaded.title}}永远会发送，其他遥测事件可以设定是否发送。
+
+游戏也会将遥测数据以日志的形式保存，遥测日志文件位于{{filepath|<''客户端根目录''>/logs/telemetry}}目录下，最多保存7天内的日志。日志为JSON文件，其内容每一{{tr|行|列}}都是一个JSON{{tr|对象|物件}}，记录了某个遥测事件的数据。
+
+=== 共通属性 ===
+多项遥测事件发送了一些共通的数据，这些共通数据如下：
+
+==== 全局属性 ====
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.user_id.title}}
+| 如果客户端没有遥测玩家ID，则不发送，且在日志中记录为<code>${auth_xuid}</code>
+| user_id
+| 字符串
+|-
+| {{tp|telemetry.property.client_id.title}}
+| 如果客户端没有遥测客户端ID，则不发送，且在日志中记录为<code>${clientid}</code>
+| client_id
+| 字符串
+|-
+| {{tp|telemetry.property.minecraft_session_id.title}}
+| 游戏每次启动时随机生成的UUID
+| minecraft_session_id
+| 字符串，且是十六进制带连字符格式的UUID
+|-
+| {{tp|telemetry.property.game_version.title}}
+| 等同于[[版本信息文件格式|版本信息文件]]中{{nbt|string|id}}的值
+| game_version
+| 字符串
+|-
+| {{tp|telemetry.property.operating_system.title}}
+| -
+| operating_system
+| 字符串枚举：
+* linux
+* solaris
+* windows
+* mac
+* unknown
+|-
+| {{tp|telemetry.property.platform.title}}
+| 游戏会调用<code>System.getProperty("os.name")</code>来获取名称
+| platform
+| 字符串
+|-
+| {{tp|telemetry.property.client_modded.title}}
+| 如果游戏未检测到客户端被修改，则不发送
+| client_modded
+| 布尔值
+|-
+| {{tp|telemetry.property.launcher_name.title}}
+| -
+| launcher_name
+| 字符串
+|-
+| {{tp|telemetry.property.event_timestamp_utc.title}}
+| 客户端整理本次遥测数据的时间
+| event_timestamp_utc
+| 字符串，且格式遵守[[wzh:ISO_8601|ISO 8601]]
+|-
+| {{tp|telemetry.property.opt_in.title}}
+| 是否发送可选的遥测数据
+| opt_in
+| 布尔值
+|}
+
+==== 世界属性 ====
+世界属性在全局属性的基础上增加了下列数据：
+
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.world_session_id.title}}
+| 玩家进入世界时随机生成的UUID
+| world_session_id
+| 字符串，且是十六进制带连字符格式的UUID
+|-
+| {{tp|telemetry.property.server_modded.title}}
+| -
+| server_modded
+| 布尔值
+|-
+| {{tp|telemetry.property.server_type.title}}
+| -
+| server_type
+| 字符串枚举（数据传输使用整型）：
+* realm，0（[[Realms]]）
+* local，1（[[单人游戏]]）
+* server，2（其他类型的服务端）
+|-
+| {{tp|telemetry.property.server_session_id.title}}
+| 服务端创建时随机生成的UUID
+| server_session_id
+| 字符串，且是十六进制带连字符格式的UUID
+|}
+
+=== {{tp|telemetry.event.graphics_capabilities.title}}{{anchor|graphics_capabilities}} ===
+{{tp|telemetry.event.graphics_capabilities.title}}的遥测数据在游戏启动后发送。其ID是<code>graphics_capabilities</code>，在全局属性的基础上增加了下列数据：
+
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.backend_name.title}}
+| 游戏使用的图形API
+| backend_name
+| 字符串
+|-
+| {{tp|telemetry.property.backend_failure_message.title}}
+| 图形后端创建失败的异常消息，未触发异常时为空字符串
+| backend_failure_message
+| 字符串
+|-
+| {{tp|telemetry.property.backend_failure_reason.title}}
+| 图形后端创建失败的原因，未触发异常时为空字符串
+| backend_failure_reason
+| 字符串
+|-
+| {{tp|telemetry.property.backend_failure_missing_capabilities.title}}
+| 图形后端创建所需但当前环境未提供的功能，未触发异常时为空字符串
+| backend_failure_missing_capabilities
+| 字符串
+|}
+
+=== {{tp|telemetry.event.world_loaded.title}}{{anchor|world_loaded}} ===
+{{tp|telemetry.event.world_loaded.title}}的遥测数据在玩家加入世界与退出世界时发送。其ID是<code>world_loaded</code>，在世界属性的基础上增加了下列数据：
+
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.game_mode.title}}
+| -
+| game_mode
+| 字符串枚举（数据传输使用整型）：
+* survival，0（生存模式，且存档不是极限模式）
+* creative，1（创造模式）
+* adventure，2（冒险模式）
+* spectator，3（旁观模式）
+* hardcore，4（极限模式，只有以生存模式进入的极限模式存档才为此项）
+|-
+| {{tp|telemetry.property.realms_map_content.title}}
+| -
+| realms_map_content
+| 字符串
+|}
+
+=== {{tp|telemetry.event.world_unloaded.title}}{{anchor|world_unloaded}} ===
+{{tp|telemetry.event.world_unloaded.title}}的遥测数据在玩家退出世界时发送。此遥测事件的ID是<code>world_unloaded</code>，在世界属性的基础上增加了下列数据：
+
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.seconds_since_load.title}}
+| 世界加载总时间，单位为秒
+| seconds_since_load
+| 整型
+|-
+| {{tp|telemetry.property.ticks_since_load.title}}
+| 世界加载总时间，单位为游戏刻
+| ticks_since_load
+| 整型
+|}
+
+=== {{tp|telemetry.event.performance_metrics.title}}{{anchor|performance_metrics}} ===
+{{tp|telemetry.event.performance_metrics.title}}自玩家加入世界开始计算，待玩家退出世界时结束计算。各采样事件默认60000毫秒采样一次，每10次采样发送一次。此遥测事件的ID是<code>performance_metrics</code>，在世界属性的基础上增加了下列数据：
+
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.frame_rate_samples.title}}
+| 游戏的帧率，每次采样都获取一次
+| frame_rate_samples
+| 长整型数组
+|-
+| {{tp|telemetry.property.render_time_samples.title}}
+| 游戏渲染用时，单位为纳秒，每次采样都获取一次
+| render_time_samples
+| 长整型数组
+|-
+| {{tp|telemetry.property.used_memory_samples.title}}
+| 游戏使用的内存，每次采样都获取一次
+| used_memory_samples
+| 长整型数组
+|-
+| {{tp|telemetry.property.number_of_samples.title}}
+| 采样总次数
+| number_of_samples
+| 整型
+|-
+| {{tp|telemetry.property.render_distance.title}}
+| 选项设置的渲染距离
+| render_distance
+| 整型
+|-
+| {{tp|telemetry.property.dedicated_memory_kb.title}}
+| {{tp|telemetry.event.performance_metrics.title}}计算自身耗费的内存
+| dedicated_memory_kb
+| 整型
+|}
+
+=== {{tp|telemetry.event.world_load_times.title}}{{anchor|world_load_times}} ===
+{{tp|telemetry.event.world_load_times.title}}在玩家加入世界时发送。此遥测事件的ID是<code>world_load_times</code>，在世界属性的基础上增加了下列数据：
+
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.world_load_time_ms.title}}
+| 从开始加载世界到进入世界的时间
+| world_load_time_ms
+| 整型
+|-
+| {{tp|telemetry.property.new_world.title}}
+| 加载的世界是否是新的世界
+| new_world
+| 布尔值
+|}
+
+=== {{tp|telemetry.event.advancement_made.title}}{{anchor|advancement_made}} ===
+{{tp|telemetry.event.advancement_made.title}}的遥测数据在玩家达成进度时发送，且达成的进度必须允许发送遥测数据且命名空间是<code>minecraft</code>。此遥测事件的ID是<code>advancement_made</code>，在世界属性的基础上增加了下列数据：
+
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.advancement_id.title}}
+| -
+| advancement_id
+| 字符串
+|-
+| {{tp|telemetry.property.advancement_game_time.title}}
+| -
+| advancement_game_time
+| 长整型
+|}
+
+=== {{tp|telemetry.event.game_load_times.title}}{{anchor|game_load_times}} ===
+{{tp|telemetry.event.game_load_times.title}}游戏初始化完毕时发送。此遥测事件的ID是<code>game_load_times</code>，在全局属性的基础上增加了下列数据：
+
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.load_time_total_time_ms.title}}
+| -
+| load_time_total_time_ms
+| 整型
+|-
+| {{tp|telemetry.property.load_time_pre_window_ms.title}}
+| -
+| load_time_pre_window_ms
+| 整型
+|-
+| {{tp|telemetry.property.load_time_bootstrap_ms.title}}
+| -
+| load_time_bootstrap_ms
+| 整型
+|-
+| {{tp|telemetry.property.load_time_loading_overlay_ms.title}}
+| -
+| load_time_loading_overlay_ms
+| 整型
+|}
+<!--
+=== {{tp|telemetry.event.p2p_connection.title}}{{anchor|p2p_connection}} ===
+{{tp|telemetry.event.p2p_connection.title}}的遥测数据在p2p连接握手阶段发送。其ID是<code>p2p_connection</code>，在全局属性的基础上增加了下列数据：
+
+{| class="wikitable"
+! 游戏内名称
+! 描述
+! ID
+! 有效值
+|-
+| {{tp|telemetry.property.p2p_connection_successful.title}}
+| p2p连接是否成功
+| p2p_connection_successful
+| 布尔值
+|-
+| {{tp|telemetry.property.p2p_connection_failure_stage.title}}
+| p2p连接失败的阶段
+| p2p_connection_failure_stage
+| 字符串枚举：
+* SIGNALING
+* ICE_CONNECT
+* TIMEOUT
+|-
+| {{tp|telemetry.property.p2p_connection_ice_path.title}}
+| p2p连接的网络类型
+| p2p_connection_ice_path
+| 字符串枚举：
+* host
+* srflx
+* prflx
+* relay
+|-
+| {{tp|telemetry.property.p2p_connection_local_candidate_type.title}}
+|
+| p2p_connection_local_candidate_type
+| 字符串枚举：
+* LOCAL
+* DIRECT
+* RELAY
+* UNKNOWN
+|-
+| {{tp|telemetry.property.p2p_connection_remote_candidate_type.title}}
+|
+| p2p_connection_remote_candidate_type
+| 字符串枚举：
+* LOCAL
+* DIRECT
+* RELAY
+* UNKNOWN
+|-
+| {{tp|telemetry.property.p2p_connection_total_time_ms.title}}
+|
+| p2p_connection_total_time_ms
+| 长整型
+|-
+| {{tp|telemetry.property.p2p_connection_signaling_time_ms.title}}
+|
+| p2p_connection_signaling_time_ms
+| 长整型
+|-
+| {{tp|telemetry.property.p2p_connection_ice_connect_time_ms.title}}
+|
+| p2p_connection_ice_connect_time_ms
+| 长整型
+|}-->
+
+== 匿名信息反馈 ==
+{{outdated feature|section=1|edition=java}}
+{{Filetr|Snooper Settings.png|thumb|Java版1.13.2中的匿名信息反馈设置屏幕}}
+'''匿名信息反馈（Snooper）'''是Mojang曾经获取玩家数据的系统。
+
+所有数据按字母排序显示，如果玩家进入世界后则还会区分此数据是客户端数据还是服务端数据，游戏先显示客户端数据，再显示服务端数据。
+
+'''客户端数据'''
+{|class="wikitable sortable collapsible collapsed"
+|-
+! 名称
+! class="unsortable" | 值
+|-
+| memory_total
+| Java堆内存
+|-
+| memory_max
+| Java最大堆内存
+|-
+| memory_free
+| Java堆内空闲内存
+|-
+| cpu_cores
+| Java虚拟机可用的处理器数量
+|-
+| fps
+| 游戏帧率
+|-
+| vsync_enabled
+| 是否启用了垂直同步
+|-
+| display_frequency
+| 屏幕刷新率
+|-
+| display_type
+| 屏幕类型，只可能为下列值：
+* fullscreen（全屏）
+* windowed（窗口）
+|-
+| run_time
+| 启动信息收集的时间，单位为秒
+|-
+| current_action
+| 当前的游戏场景，只可能为下列值：
+* singleplayer（单人游戏）
+* hosting_lan（开放局域网的单人游戏）
+* multiplayer（多人游戏）
+* playing_lan（局域网连接的多人游戏）
+* out_of_game（不在世界中）
+|-
+| language
+| 客户端的语言代码，无效时视为en_us
+|-
+| endianness
+| 系统的字节序，只可能为下列值：
+* big（大端序）
+* little（小端序）
+|-
+| subtitles
+| 是否启用了字幕
+|-
+| touchscreen
+| 触屏模式设置，只可能为下列值：
+* touch（启用）
+* mouse（禁用）
+|-
+| resource_packs
+| 仅在除内置资源包外不存在任何资源包时存在，固定为0。
+|-
+| resource_pack[<''数字''>]
+| 仅在除内置资源包外存在其他资源包时存在，<''数字''>为资源包数量，值为资源包的ID（与options.txt中的相同）
+|-
+| snooper_partner
+| 仅在单人游戏世界中存在，为随机生成的UUID
+|}
+
+'''服务端数据'''
+{|class="wikitable sortable collapsible collapsed"
+|-
+! 名称
+! class="unsortable" | 值
+|-
+| memory_total
+| Java堆内存
+|-
+| memory_max
+| Java最大堆内存
+|-
+| memory_free
+| Java堆内空闲内存
+|-
+| cpu_cores
+| Java虚拟机可用的处理器数量
+|-
+| whitelist_enabled
+| 是否启用了白名单，非专用服务端始终为false
+|-
+| whitelist_count
+| 白名单中的玩家数量，非专用服务端始终为0
+|-
+| players_current
+| 仅在服务端有玩家时存在，当前的玩家数量
+|-
+| players_max
+| 仅在服务端有玩家时存在，服务端的最大玩家数量
+|-
+| players_seen
+| 仅在服务端有玩家时存在，主世界维度的玩家数量
+|-
+| uses_auth
+| 是否启用了在线验证
+|-
+| gui_state
+| 是否启用了服务端GUI，只可能为下列值：
+* enabled（启用）
+* disabled（禁用）
+|-
+| run_time
+| 启动信息收集的时间，单位为秒
+|-
+| avg_tick_ms
+| 每毫秒平均游戏刻
+|-
+| world[n][dimension]
+| 第n个维度的ID，只可能为下列值：
+* minecraft:overworld（主世界）
+* minecraft:the_nether（下界）
+* minecraft:the_end（末地）
+|-
+| world[n][mode]
+| 第n个维度的游戏模式，只可能为下列值：
+* NOT_SET
+* SURVIVAL（生存模式）
+* CREATIVE（创造模式）
+* ADVENTURE（冒险模式）
+* SPECTATOR（旁观模式）
+|-
+| world[n][difficulty]
+| 第n个维度的难度，只可能为下列值：
+* PEACEFUL（和平）
+* EASY（简单）
+* NORMAL（普通）
+* HARD（困难）
+|-
+| world[n][hardcore]
+| 第n个维度是否启用了极限模式
+|-
+| world[n][generator_name]
+| 第n个维度的生成器类型，只可能为下列值：
+* default（默认）
+* flat（超平坦）
+* largeBiomes（巨型生物群系）
+* amplified（放大化）
+* customized（自定义）
+* buffet（自选）
+* debug_all_block_states（调试模式）
+* default_1_1
+|-
+| world[n][generator_version]
+| 第n个维度的生成器版本
+|-
+| world[n][height]
+| 第n个维度的最大建筑高度
+|-
+| world[n][chunks_loaded]
+| 第n个维度正在加载的区块数量
+|-
+| worlds
+| 维度总数量
+|-
+| snooper_partner
+| 仅在单人游戏世界中存在，为随机生成的UUID
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3|dev=12w30a|加入了匿名信息反馈（Snooper）。}}
+|{{HistoryLine||1.7.4|dev=13w48a|将协议版本更改为2。}}
+|{{HistoryLine||1.11|dev=16w35a|更改了匿名信息反馈设置屏幕的内容。}}
+|{{HistoryLine||1.13|dev=18w21a|由于[[wzh:歐盟一般資料保護規範|GDPR]]，匿名信息反馈被强制禁用，无法开启。<ref>{{bug|MC-130179|||WAI}}</ref>
+|移除了JVM参数、Java版本、OpenGL拓展参数、设备信息和游戏启动参数数据。}}
+|{{HistoryLine||1.14|dev=19w11a|移除了匿名信息反馈设置屏幕。}}
+|{{HistoryLine||1.18|dev=21w38a|重新加入了遥测功能，但功能不同于先前的匿名信息反馈。
+|匿名信息反馈的残余设置被移除。}}
+|{{HistoryLine|||dev=21w43a|移除了匿名信息反馈的残余代码。}}
+|{{HistoryLine||1.19.3|dev=22w46a|加入了遥测数据收集屏幕。}}
+|{{HistoryLine||1.20|dev=23w18a|加入了遥测属性<code>launcher_name</code>，在所有遥测事件中发送。
+|在遥测事件<code>world_loaded</code>中加入了遥测属性<code>realms_map_content</code>。
+|加入了遥测事件<code>advancement_made</code>。
+|加入了遥测事件<code>game_load_times</code>。}}
+|{{HistoryLine||1.20.2|dev=23w31a|在遥测数据收集屏幕中加入了至Microsoft Privacy Statement（微软隐私声明）的链接。}}
+|{{HistoryLine||26.2|dev=snapshot-4|加入了遥测事件<code>graphics_capabilities</code>。
+|加入了遥测属性<code>backend_name</code>、<code>backend_failure_message</code>、<code>backend_failure_reason</code>和<code>backend_failure_missing_capabilities</code>。}}
+|{{HistoryLine|||dev=snapshot-7|加入了遥测事件<code>p2p_connection</code>。
+|加入了遥测属性<code>p2p_connection_successful</code>、<code>p2p_connection_ice_path</code>、<code>p2p_connection_local_candidate_type</code>、<code>p2p_connection_remote_candidate_type</code>、<code>p2p_connection_total_time_ms</code>、<code>p2p_connection_signaling_time_ms</code>、<code>p2p_connection_ice_connect_time_ms</code>和<code>p2p_connection_failure_stage</code>。}}
+|{{HistoryLine|||dev=pre-1|加入了遥测属性<code>server_session_id</code>。
+|移除了遥测事件<code>p2p_connection</code>。
+|移除了遥测属性<code>p2p_connection_successful</code>、<code>p2p_connection_ice_path</code>、<code>p2p_connection_local_candidate_type</code>、<code>p2p_connection_remote_candidate_type</code>、<code>p2p_connection_total_time_ms</code>、<code>p2p_connection_signaling_time_ms</code>、<code>p2p_connection_ice_connect_time_ms</code>和<code>p2p_connection_failure_stage</code>。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[en:Telemetry]]
+[[fr:Télémétrie]]
+[[pt:Telemetria]]

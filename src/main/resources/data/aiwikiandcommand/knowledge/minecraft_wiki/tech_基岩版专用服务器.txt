@@ -1,0 +1,241 @@
+# 页面: 基岩版专用服务器
+# 来源: https://zh.minecraft.wiki/w/%E5%9F%BA%E5%B2%A9%E7%89%88%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8
+# 分类: 基岩版, 基岩版独有信息, 基岩版独有特性, 教育版独有信息, 教育版独有特性, 服务器
+# 抓取时间: 2026-07-14 17:24:36
+# 原始 Wikitext 内容:
+
+{{exclusive|bedrock|education}}
+{{Infobox program
+| author = [[File:Mojang Studios logo.svg|x20px|link=Mojang Studios]] [[Mojang Studios]]
+| platform = {{os|Windows|Linux}}
+| programming language = {{w|C++}}
+| version = 
+'''基岩版服务器'''
+* 正式版：{{v|bedrock-dedicated-server}}{{#if: {{v|bedrock-dedicated-server-preview}}|
+* 测试版：{{v|bedrock-dedicated-server-preview}}}}
+'''教育版服务器'''
+* 正式版：{{v|education-dedicated-server}}{{#if: {{v|education-dedicated-server-preview}}|
+* 测试版：{{v|education-dedicated-server-preview}}}}
+| date = 2018年8月28日
+| source available = 闭源
+| ratings = 与其对应客户端版本一致
+| license = [https://www.minecraft.net/eula 最终用户许可协议]<br>[https://edusupport.minecraft.net/hc/articles/4405348643092 教育版最终用户许可协议]
+| website = https://www.minecraft.net/download/server/bedrock
+| size = [[基岩版26.3]]：
+* '''Linux：'''78.0 MB
+* '''Windows：'''53.1 MB
+[[教育版1.21.132]]：
+* '''Linux：'''67.2 MB
+* '''Windows：'''47.9 MB
+}}
+[[File:Bedrock Dedicated Server Icon.png|thumb|基岩版专用服务器图标]]
+
+'''基岩版专用服务器（Bedrock Dedicated Server, BDS）'''是一款供免费下载的服务器软件，其允许玩家在[[wzh:Windows|Windows]]或[[wzh:Linux|Linux]]系统上搭建自己的专用服务端。目前，BDS提供了正式版与测试版两种软件版本。
+
+== 描述 ==
+基岩版专用服务器是一个类似于Java版[[服务器]]的服务器托管工具，附带{{filename|bedrock_server_how_to.html}}文件作为使用说明。和Java版一样，它有一个{{filename|[[server.properties]]}}和{{filename|allowlist.json}}文件。不过服务器的权限清单存储在{{filename|permissions.json}}文件中，而不是{{filename|[[ops.json]]}}。[[资源包]]和[[行为包]]分别存储于根目录或世界的文件夹中的{{filename|resource_packs}}和{{filename|behavior_packs}}文件夹，世界的文件夹中与之对应的JSON文件可配置要使用的附加包。新生成的世界能在服务端文件夹中的{{filename|worlds}}文件夹找到。第一次启动时，如果{{filename|worlds}}文件夹中没有{{filename|server.properties}}配置中的世界，将会由基岩版专用服务器按{{filename|server.properties}}配置中的<code>level-seed</code>为种子生成一个名为{{filename|server.properties}}配置中的<code>level-name</code>的世界。基岩版专用服务器与基岩版的世界格式互相兼容，但不会使用部分单机玩家数据。基岩版专用服务器与[[Realms]]使用的服务器软件相同。<ref name=":0">{{tweet|_b4njo|1039495573089542145|We just released the dedicated server for Bedrock on minecraft.net. This is the server we run on Realms. Go download it now!|2018-09-11T12:47:12.000Z}}</ref>
+
+=== 教育版 ===
+特别地，教育版BDS默认禁用，启用条件如下：<ref>{{cite|url=https://edusupport.minecraft.net/hc/en-us/articles/46370720373908|title=The Dedicated Server Admin Portal is here!|website=Minecraft Education Support|date=2026-02-17T22:08:45Z}}</ref>
+* 在Microsoft Entra租户中拥有全局管理员角色。
+* 访问[https://aka.ms/dedicatedservers https://aka.ms/dedicatedservers]并登录，然后开启“Allow Servers”设置项。
+** 若希望服务器允许跨租户进入或被教师与合作伙伴管理，可以参考该页面的其他设置项。
+
+运行教育版BDS后，会自动生成登录会话文件，并提供用于进入服务器的ID（共12位，由字母和数字组成，不区分大小写），在客户端中输入此ID即可添加服务器。
+
+== 目录结构 ==
+<div class="treeview">
+* {{File|directory|<''工作目录''>}}：根目录。
+** {{File|directory|behavior_packs}}：与原版[[行为包]]目录一致。
+** {{File|directory|config}}
+*** {{File|directory|default}}
+**** {{File|file|permissions.json}}：允许使用的脚本API模块列表。
+** {{File|directory|data}}
+*** {{File|file|bootstrap.json}}：启动配置文件。专用服务器在 server.properties 中 enable-profiler=true 时读取它，用其中的 profile 配置初始化性能分析器的分组、默认详细级别、表头和栈深度等。
+** {{File|directory|definitions}}：包含服务器所需的部分资源。
+*** {{File|directory|attachables}}：包含原版中诸如动画和渲染控制器的JSON文件。
+*** {{File|directory|disconnection_errors}}：包含错误代码和URL的服务器断开连接消息。
+**** {{File|file|disconnection_error_messaging.json}}：断开连接错误消息的主映射表。按断开原因配置错误代号、标题、正文和帮助链接等字段，用于客户端断开连接界面的显示。
+**** {{File|file|disconnection_error_messaging_edu.json}}：{{el|edu}}断开连接错误消息覆盖表。教育版客户端会在读取主映射表后再读取此文件，用于覆盖部分断开原因的显示文本。
+*** {{File|directory|feature_rules}}：包含原版中影响世界生成时[[地物]]规则的JSON文件。
+*** {{File|directory|features}}：包含原版中影响世界生成时[[地物]]的JSON文件。
+*** {{File|directory|persona}}：包含原版中所有内置玩家皮肤的默认设置和UUID的JSON文件。
+*** {{File|directory|sdl_layouts}}：包含原版[[更衣室]]控件配置的JSON文件。
+*** {{File|directory|spawn_groups}}：包含原版中所有不同[[袭击]]波次生成配置的JSON文件。
+** {{File|directory|development_behavior_packs}}：世界自定义[[行为包]]目录。第一次运行时生成。
+** {{File|directory|development_resource_packs}}：世界自定义[[附加包|资源包]]目录。第一次运行时生成。
+** {{File|directory|development_skin_packs}}：第一次运行时生成。
+** {{File|directory|minecraftpe}}：仅Linux。第一次运行时生成。
+** {{File|directory|premium_cache}}：仅Linux。第一次运行时生成。
+** {{File|directory|resource_packs}}：与原版[[附加包|资源包]]目录一致。
+** {{File|directory|treatments}}：仅Linux。第一次运行时生成。
+*** {{File|directory|treatment_packs2}}：仅Linux。第一次运行时生成。
+** {{File|directory|world_templates}}：第一次运行时生成。
+** {{File|directory|worlds}}：第一次运行时生成，若配置中对应名称的世界文件夹不存在，也会自动生成。
+** {{File|file|allowlist.json}}：用于指定允许加入服务器的玩家。
+** {{File|file|bedrock_server}}{{only|BE}}或{{File|file|bedrock_server_edu}}{{only|EE}}：仅Linux。服务器软件的可执行文件。
+** {{file|file|bedrock_server.exe}}：仅Windows。服务器软件的可执行文件。
+** {{File|file|bedrock_server_how_to.html}}：一份HTML手册，描述了如何使用服务器软件。
+** {{File|file|Dedicated_Server.txt}}：仅Linux，日志文件。第一次运行时生成。
+** {{File|file|edu_server_session.json}}：仅{{el|ee}}。用于存储登录会话的文件。登录账号后生成。
+** {{File|file|packetlimitconfig.json}}：用于配置数据包发包限制。
+** {{File|file|packet-statistics.txt}}：第一次运行时生成。需要正常关闭服务器。
+** {{File|file|permissions.json}}：用于指定玩家的[[权限等级]]。
+** {{File|file|profanity_filter.wlist}}：为过滤不雅用语功能提供词语列表的文件。
+** {{File|file|release-notes.txt}}：包含一些注释、更新日志以及指向[[漏洞追踪器]]的链接。
+** {{File|file|[[server.properties]]}}：储存主要配置的文件。
+</div>
+
+除非另有说明，所有文件均属于分布式归档的一部分。
+
+== 系统需求 ==
+根据[https://www.minecraft.net/download/server/bedrock 官方BDS下载页面]底部及[https://edusupport.minecraft.net/hc/articles/46913335157140 教育版服务器系统要求页面]：
+
+; 操作系统
+: '''Windows'''：Windows 10版本1703（build 15063.0）或更高、Windows 11、Windows Server 2016或更高。
+: '''Linux'''：官方仅支持Ubuntu 18.04（建议Ubuntu 22.04）或更高，但该程序可在任何安装了正确库文件的x86及x64架构Linux发行版上运行（含glibc 2.35或更高）。
+
+; 处理器
+: 最低配置要求为双核处理器，建议使用64位四核处理器。运行频率至少3 GHz或更高，推荐Intel i5 Ivy Bridge、AMD FX-4100或更高型号。最低配置要求为Intel Core i3 3210、AMD A8 7600 APU及同等性能产品。
+
+; 内存
+: 最低要求1 GB，建议配备4 GB。若同时在线玩家超过10人，可能需要更多内存。BDS不像[[server.jar|Java版服务器软件]]那样会消耗大量内存，但无法指定内存的最小值和最大值。
+
+; 传输网速
+: 每10名玩家需要5 Mbps上传速度和10 Mbps下载速度。DSL连接通常无法提供足够带宽来运行互联网服务器。在局域网内托管服务器无需互联网连接。
+
+; 网络
+: 以太网连接通常比Wi-Fi连接更快、更稳定。100 Mbps以太网即可满足需求，无需千兆LAN。
+: 用于托管服务器的计算机在网络中应分配一个静态IP地址，而不是使用DHCP。
+: 若要允许客户端通过互联网连接到服务器，需要转发服务器使用的端口。
+
+; 存储空间
+: 最少需要180 MB可用存储空间，建议配备1 GB空间。
+
+== 连接 ==
+{{see also|基岩版#平台差异}}
+与使用TCP协议的Java版不同，基岩版使用UDP协议。其IPv4的默认端口为19132，IPv6的默认端口为19133。这些可以在{{filename|server.properties}}的<code>server-port</code>与<code>server-portv6</code>配置项中更改。使用Xbox、PlayStation和Nintendo Switch设备的基岩版玩家只能通过自定义DNS或LAN连接加入服务器。
+
+== 允许名单 ==
+'''允许名单'''亦称'''白名单'''。目前默认启用允许名单，禁用/启用允许名单需要修改{{filename|[[server.properties]]}}文件的<code>allow-list</code>配置项的布尔值。启用后，服务器将只允许{{filename|allowlist.json}}文件列出的玩家加入游戏，且你需要知道所有想加入服务器的玩家的Xbox Live玩家代号或XUID并添加进{{filename|allowlist.json}}文件。无法在不开启允许名单且未安装拒绝名单插件的服务器里封禁玩家。
+
+如果你在自己的服务器上遇到了恶意玩家，开启允许名单可能是解决问题的好方法。
+
+== 社区资源 ==
+{{disclaimer|section=1}}
+
+=== 插件加载器 ===
+'''由于Mojang在1.21.20停止公开提供调试信息<ref>{{bug|BDS-19375|||WAI}}</ref>，基于BDS的原生插件将难以开发。'''
+
+'''Mojang在1.21.50已经与社区达成协议，将支持社区加载器的开发。'''<ref>{{ytl|6Y27kZBc6HI|BDS Modding Meeting (Season Finale) - 12/08/24|Frederox|2024-08-12T08:37:17-07:00}}</ref>
+
+* [https://github.com/LiteLDev/LeviLamina LeviLamina]是一个非官方的模组加载器，旨在为基岩版提供必不可少的API支持。它拥有全面的API，一系列的实用接口，一个强大的事件系统，以及对基本接口的全面支持。它提供了一个广泛的API，一个强大的事件系统，以及丰富的封装开发基础设施接口，为增强基岩版的附加游戏特征和功能提供了坚实的基础。利用模组，扩展游戏功能的过程变得轻而易举，具有用户友好的开发过程和灵活的方法。开发者可以轻松地用C++编写模组。这种无缝集成赋予了轻松扩展和个性化游戏功能的能力，促进了直观的学习体验和无与伦比的灵活性。同时支持Windows版客户端和服务端。
+* [https://github.com/LiteLDev/LegacyScriptEngine LegacyScriptEngine]是一个用于在[https://github.com/LiteLDev/LeviLamina LeviLamina]上运行LLSE插件的插件引擎。
+* [https://github.com/LiteLDev/LeviStone LeviStone]是一个用于在[https://github.com/LiteLDev/LeviLamina LeviLamina]上运行[https://github.com/EndstoneMC/endstone Endstone]插件的运行时。
+* [https://github.com/EndstoneMC/endstone Endstone]是一个现代化的插件加载器，为基岩版专用服务器提供高级插件API，支持Python和C++。它允许开发人员扩展基岩版专用服务器，而无需处理低级钩子的麻烦。Endstone用户将受益于所有原版特性和对Windows和Linux的原生支持。
+* [https://github.com/bdsx/bdsx BDSX]基于官方BDS软件修改，支持Node.js。包含原版的所有功能，同时具备其他辅助功能，例如可以通过钩子函数和数据包改变行为。
+
+=== 初始化与维护脚本 ===
+* [https://github.com/chegele/BDSAddonInstaller BDSAddonInstaller]是一个基于Node.js的工具，可用于自动安装、更新和卸载附加包。
+* [https://github.com/TapeWerm/MCscripts MCscripts]可用于备份、自动更新以及向聊天机器人发送日志的systemd单元和脚本。
+* [https://github.com/TheRemote/MinecraftBedrockServer MinecraftBedrockServer]可在Ubuntu、Debian、Raspbian和Armbian系统上搭建BDS服务器，支持自动更新、备份及开机自动运行功能。
+* [https://foxynotail.com/software/mcbe-play/ MCBEPlay]是一个基于Windows 10的官方BDS系统图形界面软件，用户无需大量服务器系统知识即可控制和管理BDS。具备自动备份功能，可自动保存数据，并支持自动重启。
+* [https://github.com/Bannini/WinMSSScripts WinMSSScripts]是一个基础的批处理文件，用于在Windows系统上运行官方BDS系统时，有助于创建和维护世界文件及日志文件的备份。
+* [https://hub.docker.com/r/tchorwat/bedrock-in-docker bedrock-in-docker]可用于安装、更新、备份与恢复以及运行BDS的Docker镜像。
+* [https://github.com/ColinLabDev/MC-BDS-PWSH MC-BDS-PWSH]可以通过PowerShell更新BDS。
+
+== 缺陷 ==
+此服务器软件仍然存在很多缺陷以及缺少Java版服务端中许多的自带功能。<ref>{{cite|url=https://feedback.minecraft.net/hc/en-us/community/posts/360059965732|title=Expand Bedrock Dedicated Server (BDS) Configuration/Customization Options|website=Minecraft Feedback|date=2020-03-25}}</ref>
+
+* {{cmd|reload}}命令并不能像Java版服务端那样重载服务器，导致每次重新调整服务端设置或添加/移除附加包都需要重启服务器。
+* 缺少类似于[[Realms]]的，允许主机用户连接服务器的邀请系统。
+* 不能直接运行在非amd64架构的处理器上。
+* 默认无法使用类似于{{cmd|wsserver}}的websocket服务器。
+* 缺少远程控制台。
+* 经常会出现各种漏洞，且官方修复恶性漏洞的积极性非常低。
+* 基岩版专用服务器在某些多核多线程低频率的服务器CPU上的性能表现不佳，反而单核性能更强的高主频消费级CPU更适合基岩版专用服务器。
+* 在高负载的情况下（例如大量生物实体堆积/加载复杂区块），有时会出现服务器突然卡顿但是CPU占用率很低的情况。
+* 在1.19.80及以下版本中存在一个高危漏洞，其允许恶意用户以其他人的身份登录并使用操作员权限。因此强烈建议不要在生产环境中使用任何旧版本。
+* 不支持为域名配置SRV记录。
+* 不支持设置[[MOTD]]。尽管默认[[服务器列表]]中的服务器均有使用。
+* 对社区[[模组]]和插件的支持较差，与社区更庞大的Java版拥有的Spigot和Paper等成熟框架不同。但可以使用[https://geysermc.org/ Geyser]实现跨版本兼容，使基岩版玩家得以加入Java版服务器。
+
+== 历史 ==
+{{see also|基岩版专用服务器版本记录|基岩版专用服务器版本记录/测试版|教育版专用服务器版本记录|教育版专用服务器版本记录/测试版}}
+基岩版专用服务器的发布遵循客户端的发布周期。<ref>https://discordapp.com/channels/302094807046684672/489043421072195585/489067565843349504</ref>
+{{HistoryTable|disableAutoUpcoming=1
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.6.0.15|link=基岩版1.6.0|第一个可下载的版本。}}
+|{{HistoryLine||1.6.1.0|link=基岩版1.6.1|基岩版专用服务器正式发布。<ref>{{tweet|Minecraft|1039527221835309058|Hear ye Bedrock players! We've pre-released the Minecraft Bedrock Edition Server|2018-09-11T14:52:57.000Z}}</ref><ref>{{tweet|jeb_|1039483667515625472|There is now a dedicated server available for Bedrock|2018-09-11T11:59:53.000Z}}</ref>
+|内含一个{{filename|bedrock_server_how_to.html}}文件作为手册。
+|[[漏洞追踪器]]开始支持其反馈。
+|适用于Windows的服务端中移除了{{filename|bedrock_server.pdb}}文件。}}
+|{{HistoryLine||1.8.0.24|link=基岩版1.8.0|修复了{{bug|BDS-43}}、{{bug|BDS-104}}和{{bug|BDS-198}}。
+|使用{{filename|permissions.json}}文件代替{{filename|ops.json}}文件。}}
+|{{HistoryLine||1.9.0.15|link=基岩版1.9.0|适用于Windows的服务端中恢复了{{filename|bedrock_server.pdb}}文件。}}
+|{{HistoryLine||1.14.30.2|link=基岩版1.14.30|修复了{{bug|BDS-948}}和{{bug|BDS-2170}}。}}
+|{{HistoryLine||1.14.32.1|link=基岩版1.14.30|修复了{{bug|BDS-1682}}、{{bug|BDS-2272}}、{{bug|BDS-3245}}和{{bug|BDS-3357}}。}}
+|{{HistoryLine||1.14.60.5|link=基岩版1.14.60|适用于Linux的服务端中加入了{{filename|bedrock_server_realms.debug}}文件。}}
+|{{HistoryLine||1.16.0.2|link=基岩版1.16.0|控制台增加<code>save</code>命令。
+|新的崩溃处理系统。
+|背包处理由客户端转移到服务器。
+|适用于Linux的服务端中移除了{{filename|bedrock_server_realms.debug}}文件。
+|修复了{{bug|BDS-1085}}、{{bug|BDS-3051}}、{{bug|BDS-3141}}和{{bug|BDS-4387}}。}}
+|{{HistoryLine||1.16.201.02|link=基岩版1.16.201|修复了{{bug|BDS-2341}}、{{bug|BDS-6285}}和{{bug|BDS-8855}}。}}
+|{{HistoryLine||1.16.201.03|link=基岩版1.16.201|修复了{{bug|BDS-10666}}。}}
+|{{HistoryLine||1.16.210.05|link=基岩版1.16.210|修复了{{bug|BDS-2341}}和{{bug|BDS-6825}}。}}
+|{{HistoryLine||1.16.220.02|link=基岩版1.16.220
+|适用于Linux的服务端中移除了{{filename|libCrypto.so}}文件。
+|适用于Linux的服务端中加入了{{filename|bedrock_server_symbols.debug}}文件、{{filename|cmake_install.cmake}}文件和{{filename|Makefile}}文件。
+|修复了{{bug|BDS-2574}}。}}
+|{{HistoryLine||1.17.0.03|link=基岩版1.17.0|适用于Linux的服务端中移除了{{filename|bedrock_server_symbols.debug}}文件、{{filename|cmake_install.cmake}}文件和{{filename|Makefile}}文件。}}
+|{{HistoryLine||1.17.10.04|link=基岩版1.17.10|适用于Linux的服务端中恢复了{{filename|bedrock_server_symbols.debug}}文件。
+|修复了{{bug|BDS-13482}}。}}
+|{{HistoryLine||1.18.11.01|link=基岩版1.18.10|使用{{filename|allowlist.json}}文件代替{{filename|whitelist.json}}文件。
+|修复了{{bug|BDS-14119}}。}}
+|{{HistoryLine||1.18.12.01|link=基岩版1.18.12|修复了{{bug|BDS-8068}}和{{bug|BDS-9943}}。}}
+|{{HistoryLine||1.18.30.04|link=基岩版1.18.30|适用于Windows的服务端中移除了对<code>chakra</code>的依赖。}}
+|{{HistoryLine||1.19.10.20|首次发布测试版服务器软件。}}
+|{{HistoryLine||1.19.1.01|link=基岩版1.19.0|加入了服务器遥测。
+|在下载页中移除了Alpha字样。
+|修复了{{bug|BDS-3791}}。}}
+|{{HistoryLine||1.19.40.02|link=基岩版1.19.40|修复了{{bug|BDS-17746}}。}}
+|{{HistoryLine||1.19.50.02|link=基岩版1.19.50|修复了{{bug|BDS-1094}}。}}
+|{{HistoryLine||1.19.51.01|link=基岩版1.19.51|修复了{{bug|BDS-16913}}。}}
+|{{HistoryLine||1.20.10.23|修复了{{bug|BDS-18133}}。}}
+|{{HistoryLine||1.20.1.02|link=基岩版1.20.1|修复了{{bug|BDS-3989}}。}}
+|{{HistoryLine||1.20.30.02|link=基岩版1.20.30|修复了{{bug|BDS-17527}}。}}
+|{{HistoryLine||1.21.10.22|适用于Windows的服务端中移除了{{filename|bedrock_server.pdb}}文件。
+|适用于Linux的服务端中移除了{{filename|bedrock_server_symbols.debug}}文件。}}
+|{{HistoryLine||1.21.20.03|link=基岩版1.21.20|适用于Windows的服务端中移除了{{filename|bedrock_server.pdb}}文件。
+|适用于Linux的服务端中移除了{{filename|bedrock_server_symbols.debug}}文件。}}
+|{{HistoryLine||1.26.30.27|link=基岩版26.30.27|现在默认启用允许名单，需添加玩家后才可加入服务器。}}
+|{{HistoryLine|education}}
+|{{HistoryLine||1.21.110.1|首次发布测试版服务器软件，也是第一个可下载的版本。}}
+|{{HistoryLine||1.21.132.1|link=教育版1.21.132|首次发布正式版服务器软件。}}
+}}
+
+== 参见 ==
+* {{filename|[[server.jar]]}} — 用于托管{{el|je}}服务器的软件。
+* [[Realms]] — 官方服务器托管服务，其内部采用BDS。
+
+== 参考 ==
+{{reflist}}
+
+== 外部链接 ==
+* [https://minecraft.net/download/server/bedrock/ 下载地址]
+* [https://bugs.mojang.com/projects/BDS/ 漏洞追踪器]
+* [https://reddit.com/user/ProfessorValko/comments/9f438p/bedrock_dedicated_server_tutorial/ 使用教程]
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+{{Navbox Bedrock Dedicated Server versions|all}}
+
+[[Category:服务器]]
+
+[[de:Bedrock Dedicated Server]]
+[[en:Bedrock Dedicated Server]]
+[[es:Servidor dedicado de Bedrock]]
+[[ja:Bedrock Dedicated Server]]
+[[pt:Servidor dedicado da Edição Bedrock]]
+[[uk:Bedrock Dedicated Server]]

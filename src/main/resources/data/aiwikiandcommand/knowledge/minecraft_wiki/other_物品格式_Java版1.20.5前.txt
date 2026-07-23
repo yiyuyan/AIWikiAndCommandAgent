@@ -1,0 +1,242 @@
+# 页面: 物品格式/Java版1.20.5前
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E6%A0%BC%E5%BC%8F/Java%E7%89%881.20.5%E5%89%8D
+# 分类: 开发, 过时内容
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+{{outdated|edition=java}}
+物品存在于游戏的多个存储文件中，它们都使用统一的格式进行存储。
+
+== 物品存储格式 ==
+物品数据可以用于[[玩家]]的物品栏和[[末影箱]]物品栏、[[箱子]]中的物品、[[物品实体]]、[[熔炉]]方块实体、[[酿造台]]方块实体和[[村民]]交易内容中。
+
+物品存储有两种方式：
+* 带槽位存储：带有{{nbt|byte|Slot}}标签指定物品所在的槽位，比如在箱子中。
+* 不带槽位存储：物品不在槽位中，而是作为某个属性类的数据或配置项，例如物品实体。
+
+物品不仅会存储它的[[命名空间ID]]和数量，也会存储物品内部的附加信息，即{{nbt|compound|tag}}。绝大多数物品并没有这些信息，所以这项为空或不存在。在{{nbt|compound|tag}}内部定义的标签'''都是可选的'''，但物品没有这些信息它的行为可能会变得异常。
+
+物品存储格式如下：
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|string|id}}：物品的[[命名空间ID]]。若未指定，游戏会在加载区块或者生成物品时将其变更为空气。
+** {{nbt|byte|Count}}：（大于0）堆叠的[[物品]]数量，此数字不受到对应物品的最大堆叠数量限制。当此值不大于0时在游戏系统中将此物品视为空气。
+** {{nbt|compound|tag}}：（可选）关于当前物品的额外信息，详细内容见下。此标签对于多数物品来说都是非必需项。
+</div>
+
+== 通用标签 ==
+物品可以使用多个标签控制其提示框信息，影响玩家属性。这些标签同样记录了物品的附魔和累积惩罚。对于有耐久的物品，下面的这些标签可以记录物品的损坏值或使其无法破坏。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/通用标签}}
+</div>
+
+== 方块标签 ==
+方块物品可以被赋予标签指定放置时附加上哪些方块实体标签和方块属性。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/方块}}
+</div>
+
+== 生成实体标签 ==
+[[盔甲架]]、[[物品展示框]]、[[画]]、各种[[刷怪蛋]]、各种[[船]]和各种[[矿车]]可能包含内部实体的数据。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/实体生成器}}
+</div>
+
+== 收纳袋 ==
+[[收纳袋]]使用NBT标签保存收纳袋中收纳的物品。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/收纳袋}}
+</div>
+
+== 指南针 ==
+[[指南针]]使用NBT格式储存可能存在的磁石指针相关的数据。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/指南针}}
+</div>
+
+== 弩 ==
+[[弩]]使用NBT标签保存弩中装载的物品。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/弩}}
+</div>
+
+== 调试棒 ==
+[[调试棒]]使用NBT格式储存对每个方块编辑的方块状态。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/调试棒}}
+</div>
+
+== 附魔书 ==
+附魔书使用NBT标签保存内部含有的[[魔咒]]。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/附魔书}}
+</div>
+
+== 烟火之星 ==
+[[烟火之星]]存储有关其效果的信息。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/烟火之星}}
+</div>
+
+== 烟花火箭 ==
+[[烟花火箭]]存储有关其效果的信息。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/烟花火箭}}
+</div>
+
+== 生物桶 ==
+[[生物桶]]可能包含内部实体的数据。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/生物桶}}
+</div>
+
+== 山羊角 ==
+[[山羊角]]使用NBT标签储存种类。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/山羊角}}
+</div>
+
+== 知识之书 ==
+[[知识之书]]使用NBT标签储存内部的[[配方]]数据。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/知识之书}}
+</div>
+
+== 地图 ==
+[[地图]]存储了对应地图的信息。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/地图}}
+</div>
+
+== 药水效果 ==
+[[药水]]、[[喷溅药水]]、[[滞留药水]]和[[药箭]]可以通过物品数据指定施加给生物的状态效果，并可以更改药水本身的颜色。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/药水}}
+</div>
+
+== 盾牌 ==
+[[盾牌]]存储了添加在其上的旗帜的信息。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/盾牌}}
+</div>
+
+== 玩家头颅 ==
+[[玩家头颅]]可以被一名指定用户名的玩家的皮肤头颅取代。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/玩家头颅}}
+</div>
+
+== 谜之炖菜 ==
+[[谜之炖菜]]储存了它们的[[状态效果]]。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/谜之炖菜}}
+</div>
+
+== 书与笔 ==
+[[书与笔]]储存了它们的内容信息。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/书与笔}}
+</div>
+
+== 成书 ==
+[[成书]]的内容信息和作者信息等都储存在'''tag'''标签里。
+<div class="treeview">
+* {{nbt|compound|tag}}：父标签。
+{{:物品格式/成书}}
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre3|加入了{{nbt|list|ench}}标签。}}
+|{{HistoryLine||1.4.2|dev=12w34a|对皮革盔甲加入了{{nbt|int|display.color}}标签。}}
+|{{HistoryLine|||dev=12w34b|对地图加入了{{nbt|byte|map_scale_direction}}标签。}}
+|{{HistoryLine|||dev=12w37a|对玩家的头加入了{{nbt|string|SkullOwner}}标签。}}
+|{{HistoryLine|||dev=12w39a|对药水加入了{{nbt|list|CustomPotionEffects}}标签。}}
+|{{HistoryLine|||dev=12w40a|加入了{{nbt|string|display.Name}}和{{nbt|list|display.Lore}}标签。}}
+|{{HistoryLine|||dev=12w41a|加入了{{nbt|int|RepairCost}}标签。}}
+|{{HistoryLine||1.4.6|dev=12w49a|加入了烟火之星及{{nbt|object|Explosion}}标签。
+|加入了烟花火箭及{{nbt|object|Fireworks}}标签。
+|加入了附魔书及{{nbt|list|StoredEnchantments}}标签。}}
+|{{HistoryLine||1.6.1|dev=13w21a|加入了{{nbt|list|AttributeModifiers}}标签。}}
+|{{HistoryLine||1.7.2|dev=13w37a|加入了{{nbt|bool|Unbreakable}}标签。}}
+|{{HistoryLine||1.8|dev=14w02a|加入了{{nbt|list|CanDestroy}}标签。}}
+|{{HistoryLine|||dev=14w03a|将物品ID的格式由{{nbt|short|id}}更改为{{nbt|string|id}}，值由数字ID更改为命名空间ID。}}
+|{{HistoryLine|||dev=14w05a|对成书加入了{{nbt|int|generation}}标签。}}
+|{{HistoryLine|||dev=14w06a|加入了{{nbt|list|CanPlaceOn}}和{{nbt|int|HideFlags}}标签。}}
+|{{HistoryLine|||dev=14w07a|对方块物品加入了{{nbt|compound|BlockEntityTag}}标签。}}
+|{{HistoryLine|||dev=14w10a|将Flag 32添加到{{nbt|int|HideFlags}}标签以隐藏药水效果。}}
+|{{HistoryLine|||dev=14w25a|现在成书的{{nbt|list|pages}}标签内使用JSON文本。}}
+|{{HistoryLine||1.9|dev=15w31a|对药水和喷溅药水加入了{{nbt|string|Potion}}标签。
+|药水效果不再以损伤值{{nbt|short|Damage}}区分。}}
+|{{HistoryLine|||dev=15w35a|向{{nbt|list|AttributeModifiers}}标签内部元素加入了{{nbt|string|Slot}}。}}
+|{{HistoryLine|||dev=15w49a|将{{nbt|list|AttributeModifiers}}标签内{{nbt|string|Slot}}的取值<code>torso</code>重命名为<code>chest</code>。}}
+|{{HistoryLine||1.11|dev=16w39a|加入了{{nbt|string|display.LocName}}标签用来根据语言显示物品名称，优先级低于{{nbt|string|display.Name}}标签。
+|对药水、喷溅药水、滞留药水和药箭加入了{{nbt|int|CustomPotionColor}}标签。
+|对地图加入了{{nbt|int|display.MapColor}}和{{nbt|list|Decorations}}标签。}}
+|{{HistoryLine||1.12|dev=17w06a|加入了{{nbt|object|CustomCreativeLock}}标签。}}
+|{{HistoryLine|||dev=17w13a|加入了知识之书及{{nbt|list|Recipes}}标签。}}
+|{{HistoryLine||1.13|dev=17w47a|移除了损伤值{{nbt|short|Damage}}。
+|对物品加入了{{nbt|int|Damage}}标签。
+|对地图加入了{{nbt|int|map}}标签。
+|加入了调试棒及{{nbt|object|DebugProperty}}标签。}}
+|{{HistoryLine|||dev=18w01a|现在{{nbt|string|display.Name}}标签使用JSON文本。
+|移除了{{nbt|string|display.LocName}}标签。}}
+|{{HistoryLine|||dev=18w10a|加入了热带鱼桶及{{nbt|int|BucketVariantTag}}标签。}}
+|{{HistoryLine|||dev=18w19a|现在{{nbt|list|CanDestroy}}和{{nbt|list|CanPlaceOn}}标签可以正常设置方块标签。<ref>{{bug|MC-123053|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=18w21a|将{{nbt|list|ench}}标签重命名为{{nbt|list|Enchantments}}。}}
+|{{HistoryLine||1.14|dev=18w43a|现在{{nbt|list|Lore}}标签的内容使用JSON文本。
+|加入了{{nbt|int|CustomModelData}}标签。
+|加入了谜之炖菜及{{nbt|list|Effects}}标签。
+|加入了弩及{{nbt|boolean|Charged}}和{{nbt|list|ChargedProjectiles}}标签。}}
+|{{HistoryLine|||dev=19w02a|对地图加入了{{nbt|boolean|map_to_lock}}标签。}}
+|{{HistoryLine|||dev=19w06a|对方块物品加入了{{nbt|compound|BlockStateTag}}标签。}}
+|{{HistoryLine||1.16|dev=20w12a|现在{{nbt|list|AttributeModifiers}}标签内部元素的{{nbt|int|UUIDLeast}}和{{nbt|int|UUIDMost}}被{{nbt|int-array|UUID}}取代。}}
+|{{HistoryLine|||dev=20w13a|对指南针加入了{{nbt|string|LodestoneDimension}}和{{nbt|object|LodestonePos}}标签。}}
+|{{HistoryLine|||dev=20w14a|对指南针加入了{{nbt|boolean|LodestoneTracked}}标签。}}
+|{{HistoryLine||1.16.2|dev=20w27a|将Flag 64添加到{{nbt|int|HideFlags}}以隐藏[[皮革盔甲]]的染色信息。<ref>{{bug|MC-49476|||Fixed}}</ref>}}
+|{{HistoryLine||1.17|dev=20w45a|加入了收纳袋及{{nbt|list|Items}}标签。}}
+|{{HistoryLine|||dev=21w07a|加入了{{nbt|object|filtered_pages}}和{{nbt|string|filtered_title}}标签。}}
+|{{HistoryLine|||dev=21w13a|对生物桶加入了{{nbt|bool|Glowing}}、{{nbt|float|Health}}、{{nbt|bool|Invulnerable}}、{{nbt|bool|NoAI}}、{{nbt|bool|NoGravity}}、{{nbt|bool|Silent}}、{{nbt|int|Age}}、{{nbt|long|HuntingCooldown}}和{{nbt|int|Variant}}标签。}}
+|{{HistoryLine||1.17.1|dev=pre1|<code>Enchantments.lvl</code>标签现在按照{{nbt|short|short}}读取，并且值会被限定到0至255之间。<ref>{{bug|MC-131290|||Fixed}}</ref>}}
+|{{HistoryLine||1.19|dev=22w17a|加入了山羊角及{{nbt|int|SoundVariant}}标签，取值为0到7。}}
+|{{HistoryLine|||dev=22w18a|将{{nbt|int|SoundVariant}}重做为{{nbt|string|instrument}}。}}
+|{{HistoryLine||1.19.4|dev=23w04a|对盔甲加入了{{nbt|object|Trim}}标签。
+|将Flag 128添加到{{nbt|int|HideFlags}}以隐藏[[盔甲]]的盔甲纹饰信息。}}
+|{{HistoryLine||1.20.2|dev=23w32a|将药水、喷溅药水、滞留药水和药箭的{{nbt|list|CustomPotionEffects}}标签重命名为{{nbt|list|custom_potion_effects}}。
+|将谜之炖菜的{{nbt|list|Effects}}及其子标签下的{{nbt|int|EffectId}}和{{nbt|int|EffectDuration}}分别重命名为{{nbt|list|effects}}、{{nbt|string|id}}和{{nbt|int|duration}}。}}
+|{{HistoryLine||1.20.5|dev=24w09a|物品NBT格式被结构化的[[物品堆叠组件]]取代。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:开发]]
+
+[[de:Gegenstandsdaten/Vor 1.20.5]]
+[[en:Item format/Before 1.20.5]]
+[[fr:Format d'objet]]
+[[ja:アイテムフォーマット/1.20.5以前]]
+[[pt:Formato de item]]

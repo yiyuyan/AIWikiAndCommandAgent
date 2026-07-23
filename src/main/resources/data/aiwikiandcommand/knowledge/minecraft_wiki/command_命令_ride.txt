@@ -1,0 +1,162 @@
+# 页面: 命令/ride
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/ride
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Redirect|Ride|实体被连接到另一个实体上的现象|骑乘}}
+{{Infobox command
+|name=ride
+|oplevel=2\1
+|becheat=y
+}}
+用于使实体骑乘或停止骑乘其他实体。{{in|be}}可使坐骑逐出其乘客，亦可召唤坐骑或乘客。
+
+== 用法 ==
+{{main|骑乘}}
+该命令不能为玩家、{{only|for=[[标记]]|je}}、[[拴绳结]]、[[闪电束]]和[[浮漂]]添加乘客。
+
+{{in|be}}某些实体不允许其他实体对其进行骑乘，主要是靠数据驱动。可通过行为包文件中的{{cd|minecraft:rideable}}组件来控制（参见[[骑乘]]和[https://learn.microsoft.com/minecraft/creator/reference/content/entityreference/examples/entitycomponents/minecraftcomponent_rideable 官方文档]）。
+
+== 语法 ==
+* '''Java版'''
+: <code>ride <target> mount <vehicle></code>
+:: 让指定的乘客骑乘指定的坐骑。
+
+: <code>ride <target> dismount</code>
+:: 让指定的乘客停止骑乘。
+
+* '''基岩版'''
+: <code>ride <riders: target> start_riding <ride: target> [teleportRules: TeleportRules] [howToFill: FillType]</code>
+:: 让指定的乘客骑乘指定的坐骑。
+
+: <code>ride <riders: target> stop_riding</code>
+:: 让指定的乘客停止骑乘。
+
+: <code>ride <rides: target> evict_riders</code>
+:: 让指定的坐骑逐出它的乘客。
+
+: <code>ride <rides: target> summon_rider <entityType: EntityType> [spawnEvent: string] [nameTag: string]</code>
+:: 对于每个指定的坐骑，如果可被骑乘且没有满载，则在其所在的位置召唤一个实体，然后让它们骑乘到坐骑上。
+
+: <code>ride <riders: target> summon_ride <entityType: EntityType> [rideRules: RideRules] [spawnEvent: string] [nameTag: string]</code>
+:: 在每个指定的乘客的位置召唤一个实体，然后让乘客骑乘所召唤的实体。
+
+== 参数 ==
+{{el|je|short=1}}：{{argument|target|entity}}
+: 指定乘客。
+: {{arg desc|je=entity|amount=single|type=entities}}
+
+{{el|je|short=1}}：{{argument|vehicle|entity}}
+: 指定坐骑。
+: {{arg desc|je=entity|amount=single|type=entities}}
+
+{{el|be|short=1}}：{{argument|be=1|riders: target|CommandSelector<Actor>}}
+: 指定乘客。
+: 如果处于<code>start_riding</code>模式并且<code>teleportRules: TeleportRules</code>是<code>teleport_ride</code>时，应仅有一个实体。
+: {{arg desc|be=actor}}
+
+{{el|be|short=1}}：{{argument|be=1|ride: target|CommandSelector<Actor>}}
+: 指定坐骑。
+: 应仅有一个实体。
+: {{arg desc|be=actor}}
+
+{{el|be|short=1}}：{{argument|be=1|rides: target|CommandSelector<Actor>}}
+: 指定坐骑。
+: {{arg desc|be=actor}}
+
+{{el|be|short=1}}：{{argument|be=1|teleportRules: TeleportRules|enum}}
+: 指定将被传送的实体。
+: 必须是<code>teleport_ride</code>（传送坐骑至乘客）或<code>teleport_rider</code>（传送乘客至坐骑）。
+: 如果未指定，默认为<code>teleport_rider</code>。
+
+{{el|be|short=1}}：{{argument|be=1|howToFill: FillType|enum}}
+: 必须是<code>if_group_fits</code>或<code>until_full</code>。
+:* <code>if_group_fits</code>只会在指定的所有<code><riders: target></code>都能一起骑上指定的坐骑时才会使它们骑乘。
+:* <code>until_full</code>让指定的<code><riders: target></code>逐个尝试骑乘至指定的坐骑上，直到该坐骑满载。
+:* 如果未指定，默认为<code>until_full</code>。
+
+{{el|be|short=1}}：{{argument|be=1|entityType: EntityType|enum}}
+: 指定召唤的实体。
+: 必须是一个实体类型的ID。
+: 只有特定实体类型允许被召唤。允许召唤的实体类型可见于命令的自动补全建议列表。指定列表外的实体类型会是命令无法解析。
+
+{{el|be|short=1}}：{{argument|be=1|spawnEvent: string|basic_string}}
+: 指定实体生成时执行的事件。应为一个[[生成事件]]（行为包中的实体事件）的名称。
+
+{{el|be|short=1}}：{{argument|be=1|nameTag: string|basic_string}}
+: 指定实体生成时的名字。
+: {{arg desc|be=string}}
+
+{{el|be|short=1}}：{{argument|be=1|rideRules: RideRules|enum}}
+: 必须是<code>no_ride_change</code>， <code>reassign_rides</code>或 <code>skip_riders</code>。
+:* <code>skip_riders</code>仅为没有在骑乘的<code><riders: target></code>召唤实体。
+:* <code>no_ride_change</code>仅为没有骑乘且没有被骑乘的<code><riders: target></code>召唤实体。
+:* <code>reassign_rides</code>使正在骑乘的<code><riders: target></code>停止骑乘，然后为所有<code><riders: target></code>召唤实体。
+:* 如果未指定，默认为<code>reassign_rides</code>。
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><target></code>或<code><vehicle></code>无法选出单个实体（指定名称的玩家必须在线上）|fail|N/A}}
+{{Result table|cmd=/ride ... mount ...|<code><target></code>已骑乘在某个实体上}}
+{{Result table|<code>vehicle</code>为一个玩家或一个[[标记]]实体}}
+{{Result table|检测到循环骑乘（<code>vehicle</code>正骑着<code><target></code>或其乘客、或其乘客的乘客等等）}}
+{{Result table|<code><target></code>和<code><vehicle></code>处在不同维度}}
+{{Result table|cmd=/ride ... dismount|<code><target></code>没有骑乘在任何实体上}}
+{{Result table|cmd=|<code>riders: target</code>、<code>rides: target</code>或<code>ride: target</code>没有选中至少一个实体（指定名称的玩家必须在线上）|N/A|fail}}
+{{Result table|cmd=/... start_riding ...|<code>ride: target</code>所选择的实体数量大于1}}
+{{Result table|<code>ride: target</code>所选择的实体在命令执行前已经满载}}
+{{Result table|<code>teleportRules: TeleportRules</code>是<code>teleport_ride</code>，并且<code><riders: target></code>选中的实体数量大于1}}
+{{Result table|<code>howToFill: FillType</code>未指定或是<code>until_full</code>，且所有的<code>riders: target</code>都不可骑乘<code>ride: target</code>}}
+{{Result table|<code>howToFill: FillType</code>是<code>if_group_fits</code>，且<code><riders: target></code>选中的实体过多而无法一起骑乘到坐骑上}}
+{{Result table|<code>howToFill: FillType</code>是<code>if_group_fits</code>，并且<code>ride: target</code>对至少一个<code><riders: target></code>不可骑乘}}
+{{Result table|cmd=/... stop_riding|<code>riders: target</code>所选实体没有一个骑乘于其他实体}}
+{{Result table|cmd=/... evict_riders|<code><rides: target></code>所选实体没有一个被其他实体骑乘}}
+{{Result table|cmd=/... summon_rider ...|所有<code><rides: target></code>已经满载或对于召唤的实体来说不可骑乘}}
+{{Result table|尝试在和平难度下召唤敌对生物}}
+{{Result table|cmd=/... summon_ride ...|所有<code><riders: target></code>都不可骑乘所召唤的实体骑乘}}
+{{Result table|尝试在和平难度下召唤敌对生物}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table|edition=be|cmd=|执行失败|0}}
+{{Output table|cmd=/... start_riding ...|执行成功|骑上坐骑的实体的数量}}
+{{Output table|cmd=/... stop_riding ...|执行成功|离开坐骑的实体的数量}}
+{{Output table|cmd=/... evict_riders ...|执行成功|逐出其乘客的实体的数量}}
+{{Output table|cmd=/... summon_rider ...|执行成功|召唤的实体中骑上了其坐骑的数量}}
+{{Output table|cmd=/... summon_ride ...|执行成功|召唤的实体中被乘客骑上的数量}}
+{{Output table}}
+
+== 示例 ==
+* {{in|je}}将自己骑乘到猪上:
+** <code>/ride @s mount @e[limit=1,type=minecraft:pig]</code>
+* {{in|je}}使自己骑到最近的箭上：
+** <code>/ride @s mount @n[type=arrow]</code>
+* {{in|be}}在每个具有“A”[[记分板#标签|标签]]的玩家处生成一支箭：
+** <code>/ride @a[tag=A] summon_ride arrow</code>
+* {{in|be}}在每个具有“A”[[记分板#标签|标签]]的玩家处生成一只[[闪电苦力怕]]：
+** <code>/ride @a[tag=A] summon_ride creeper reassign_rides minecraft:become_charged</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19.4|dev=23w03a|加入了{{cmd|ride|link=none}}。}}
+|{{HistoryLine||1.21.2|dev=24w40a|现在{{cmd|ride|link=none}}不再能使实体骑乘[[拴绳结]]、[[闪电束]]和[[浮漂]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.100|dev=1.16.100.52|加入了{{cmd|ride|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/ride]]
+[[en:Commands/ride]]
+[[fr:Commandes/ride]]
+[[ja:コマンド/ride]]
+[[pt:Comandos/ride]]
+[[ru:Команды консоли/ride]]

@@ -1,0 +1,79 @@
+# 页面: 命令/dialogue
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/dialogue
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{distinguish|命令/dialog}}
+{{Exclusive|bedrock|edu}}
+{{Infobox command
+|name=dialogue
+|oplevel=1
+|cheat=1
+}}
+
+为玩家打开或改变[[NPC]]的对话框。
+
+== 语法 ==
+:<code>dialogue open <npc: target> <player: target> [sceneName: string]</code>
+::打开NPC的对话，或以该NPC为活动对象进行场景对话。
+:<code>dialogue change <npc: target> <sceneName: string> [players: target]</code>
+::通过场景文件改变NPC的对话。
+
+== 参数 ==
+{{argument|be=1|npc: target|CommandSelector<Actor>}}
+:指定要打开或改变的NPC目标。
+:{{arg desc|be=CommandSelector<Actor>}}且必须为单个NPC。
+
+{{argument|be=1|sceneName: string|basic_string}}
+:指定从导入的行为包中对话文件显示的场景。
+: {{arg desc|be=string}}
+* 必须是一个场景名称（无空格）或有双引号字符串（可含有空格）。
+* 在<code>open</code>中为可选参数，如果未指定，将使用该NPC最后的场景进行对话。
+* 在<code>change</code>中必须指定场景，否则改变无效。
+
+{{argument|be=1|player: target|CommandSelector<Player>}}
+:指定打开NPC对话框的目标玩家，{{arg desc|be=CommandSelector<Player>}}
+:对于NPC内置的命令界面，有一个特有的选择器变量为[[目标选择器#@initiator|@initiator]]，它可以选择当前与该NPC进行交互（例如打开NPC对话框、使用NPC按钮和关闭NPC对话框）的玩家。如果该选择器用于NPC内置命令以外的命令，则不会选择到任何目标，也不会报错。
+* 在<code>open</code>中为必选参数，用于指定打开对话的目标玩家；
+* 在<code>change</code>中为可选参数，用于决定是否仅改变该NPC对该玩家的对话，若为空，则改变该NPC对全局的对话。
+
+== 结果 ==
+{{Result table|onlybe=1}}
+{{Result table|参数未正确指定||unparseable}}
+{{Result table|<code>npc: target</code>未能选中一个NPC||fail}}
+{{Result table|<code>player: target</code>未能选中一个或多个在线玩家}}
+{{Result table|<code>sceneName: string</code>场景文件不存在}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table|onlybe=1}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|被选中的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 为Steve打开距离自己最近的NPC对话框：
+: <code>/dialogue open @e[type=npc,c=1] Steve</code>
+* 以最近的NPC为活动对象给Steve从场景文件中打开名为chat_1的对话：
+: <code>/dialogue open @e[type=npc,c=1] Steve chat_1</code>
+* 将最近的NPC的对话改变为场景文件中名为chat_2的对话:
+: <code>/dialogue change @e[type=npc,c=1] chat_2</code>
+* 将最近的NPC对Steve的对话改变为场景文件中名为chat_3的对话:
+: <code>/dialogue change @e[type=npc,c=1] chat_3 Steve</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.10|dev=1.17.10.22|加入了{{cmd|dialogue|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/dialogue]]
+[[en:Commands/dialogue]]
+[[ja:コマンド/dialogue]]
+[[lzh:令/dialogue]]
+[[pt:Comandos/dialogue]]

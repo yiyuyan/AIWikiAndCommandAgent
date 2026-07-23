@@ -1,0 +1,229 @@
+# 页面: 纹理
+# 来源: https://zh.minecraft.wiki/w/%E7%BA%B9%E7%90%86
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:19
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+{{relevant tutorial|制作资源包/纹理}}
+'''纹理（Texture）'''是游戏中不可或缺的成分，它组成了游戏内几乎一切可视元素，是游戏画面的基础。
+
+== 目录结构 ==
+原版资源包中纹理的目录结构如下：
+
+<div class="treeview">
+* {{file|directory|assets}}
+** {{file|directory|minecraft}}
+*** {{file|directory|textures}}
+**** {{file|directory|colormap}}：{{slink||颜色图}}。
+**** {{file|directory|effect}}：[[着色器#后处理管线|后处理管线]]输入渲染目标绑定的纹理。
+**** {{file|directory|entity}}：实体纹理。也包括箱子等使用动态模型的方块纹理。
+**** {{file|directory|environment}}：环境纹理，包括云、雨和末地天空纹理等。
+**** {{file|directory|font}}：字体纹理。
+**** {{file|directory|gui}}：GUI纹理。
+***** {{file|directory|sprites}}：{{slink||GUI精灵图纹理}}。
+**** {{file|directory|item}}：物品纹理。
+**** {{file|directory|map}}：[[地图]]相关纹理。
+**** {{file|directory|misc}}：杂项纹理，包括魔咒光效、望远镜视野纹理等。
+**** {{file|directory|mob_effect}}：[[状态效果]]纹理。
+**** {{file|directory|painting}}：[[画]]纹理。
+**** {{file|directory|particle}}：[[粒子]]纹理。
+**** {{file|directory|trims}}：[[盔甲纹饰]]相关的纹理。
+***** {{file|directory|color_palettes}}：盔甲纹饰调色板，用于盔甲纹饰着色。
+***** {{file|directory|entity}}：实体模型上的盔甲纹饰。
+***** {{file|directory|items}}：物品模型上的盔甲纹饰。
+</div>
+
+== 纹理属性 ==
+所有纹理都放置在[[资源包]]{{filepath|-{}-assets/<''命名空间''>/textures}}的各个子目录下。虽然它们的作用各不相同，但是都具有相同的基本属性。
+
+按照纹理在内存和显存中的保存方式，纹理分为两种：
+* '''独立纹理'''：纹理被单独加载，不与其他纹理互相结合。这类纹理相对较少，包括游戏标题纹理、<code>misc</code>目录下的纹理等。
+* '''精灵图纹理'''：多个精灵图纹理共同合并为一张[[纹理图集]]，减少显存内的纹理数量，提高使用效率。
+
+按照纹理的渲染模式，纹理又分为两种：
+* '''静态纹理'''：渲染的纹理内容不会随着时间的变化而变化，在渲染时仅使用一张纹理。
+* '''动态纹理'''：渲染的纹理内容会根据时间的变化而不断变化，在渲染时本质上是不同的纹理数据不断上传到显存中，以达到动态效果。
+
+每个独立纹理都有它们的基本属性，而这些基本属性可以通过对应的元数据文件（<code>*.png.mcmeta</code>）设置：
+
+<div class="treeview">
+* {{nbt|compound}} 元数据根标签
+** {{nbt|compound|texture|required=1}}：纹理元数据根标签。
+*** {{nbt|bool|blur}}：（默认为<code>false</code>）决定游戏使用何种[[wzh:材质过滤|纹理过滤]]。如果设置此项为<samp>false</samp>，游戏将使用最近邻插值，形成颗粒感较强的图像；如果为<samp>true</samp>，则使用（双）线性插值，形成平滑但更为模糊的图像。
+*** {{nbt|bool|clamp}}：（默认为<code>false</code>）决定超出纹理坐标的部分应该如何取色。如果设置此项为<samp>false</samp>，纹理将不断重复以填充超出纹理坐标的部分；如果为<samp>true</samp>，则重复纹理的边缘使得超出纹理坐标的部分变成边缘的拉伸。
+*** {{nbt|string|mipmap_strategy}}：（默认为<code>auto</code>）生成MipMap纹理的方式。
+*** {{nbt|float|alpha_cutoff_bias}}：（默认为0）cutout纹理的透明度，小于-1或超出1的值为未定义行为。通常而言对于远距离过于透明的纹理应适当提高，仅用于较低等级的MipMap，不改变第一个等级的MipMap纹理。
+** {{nbt|compound|palette}}{{upcoming|je 26.3}}：调色板元数据根标签。
+*** {{nbt|string|base_palette|required=1}}：（命名空间ID）基础调色板纹理的ID，详见{{slink|盔甲纹饰定义格式|纹理}}。
+</div>
+
+可用的MipMap生成方式如下：
+* <code>mean</code>：计算当前MipMap等级下颜色和透明度的平均值，每四个像素为一组，以生成下一等级的MipMap像素。原版用于绝大多数固体方块或半透明完整方块。
+* <code>dark_cutout</code>：与<code>mean</code>相似，但混合颜色的方式会使cutout像素变暗。原版用于红树根和沾泥的红树根，来模拟较黑暗的方块内部。
+* <code>cutout</code>：基于原始纹理而不是上一MipMap等级的纹理生成MipMap纹理。
+* <code>strict_cutout</code>：<code>cutout</code>的变种，使用更严格的透明通道截止值，会导致使用此值的纹理在高MipMap等级时不可见。原版用于花等类似方块来避免伪影。
+* <code>auto</code>：如果像素为完全透明像素，则使用<code>mean</code>方案取平均值，否则使用<code>cutout</code>方案处理。
+
+对于精灵图纹理，它们不能设置自身的基本属性，因为纹理图集本质上是一张集合了众多精灵图纹理的大纹理，所以内部各个精灵图不能设置单独的基本属性。纹理图集本身使用最近邻插值。
+
+除了上述的所有属性外，纹理还有另一项属性：'''尺寸（Size）'''。纹理的尺寸大多没有严格的限制，在使用时长宽可能根据需要进行自由拉伸。但对于方块和物品的纹理，如果没有保证长宽相等，那么在渲染时可能会产生非预期的效果。如果纹理是精灵图纹理，那么尺寸会影响最终纹理图集的最高[[wzh:Mipmap|Mipmap]]等级：如果尺寸不可以被2整除，那么对应的纹理图集无法生成Mipmap；如果尺寸可以被2整除，但不能被4整除，那么对应的纹理图集最高只能生成1级Mipmap，以此类推。
+
+== 纹理图集 ==
+[[File:Debug generated block texture atlas.png|thumb|游戏自动生成的方块纹理图集]]
+{{main|纹理图集}}
+'''纹理图集（Texture Atlas）'''是游戏对纹理渲染使用的一种优化手段，也是一种动态生成纹理的方案。对多个纹理进行合并，合并而成的大纹理就被称为纹理图集，而组成纹理图集的各个小纹理被称为'''精灵图（Sprite）'''。
+
+在游戏中按下“{{tp|key.debug.dumpDynamicTextures}}”（默认为{{key|F3+S}}）可以导出所有纹理图集，并同时导出所有精灵图命名空间ID和纹理图集位置的映射文件。在游戏中内可通过<code>-{}-minecraft:atlas/<''纹理图集ID''></code>来引用生成的纹理图集。
+
+游戏支持设置纹理图集可以加载哪些纹理。关于其定义格式和原版纹理图集定义的内容，详见[[纹理图集]]。
+
+在部分游戏场景中，游戏并非直接加载纹理，而是先将纹理加载到纹理图集中，再从纹理图集引用精灵图。所有通过纹理图集加载的纹理都有设置动态纹理的能力，若纹理图集是GUI图集则还可以设置[[#GUI精灵图纹理|GUI纹理]]属性。
+
+== 动态纹理 ==
+{{redirect|动态纹理|游戏默认可导出的动态纹理|调试屏幕#动态纹理}}
+动态纹理可以使纹理随着时间的变化而自动变化。在实际运行过程中，动态纹理的每帧都在重复上传到同一个纹理的位置，使得渲染时纹理产生变化。
+
+动态纹理一定是精灵图纹理。纹理图集负责处理动态纹理的加载，并将动态纹理解析为精灵图放置在纹理图集内。相对应的，独立纹理不能成为动态纹理，即使使用元数据设置动态纹理信息也不能让独立纹理随时间自行变化。
+
+根据原版游戏的纹理图集定义，支持设置动态纹理的纹理如下：
+* 方块和物品纹理。
+* 旗帜和盾牌纹理。
+* 一些方块实体的纹理：床、箱子、潮涌核心、饰纹陶罐、附魔台书、钟、潜影盒以及告示牌纹理。
+* 物品展示框和画纹理。
+* GUI精灵图、状态效果图标纹理。
+* 地图图标纹理。
+* 粒子纹理。
+* 盔甲纹饰纹理。但由于原版游戏使用精灵图源类型{{code|paletted_permutations}}动态生成盔甲纹饰，且此精灵图源不支持动态纹理，因而原版游戏的盔甲纹饰不会有动态纹理。<ref>{{bug|MC-268543|||Invalid}}</ref>
+* 太阳、月亮、末地闪光等天体内容。
+
+与静态纹理不同，动态纹理对尺寸有严格的标准：动态纹理本身是多个帧纹理拼接而成的，而这些帧必须尺寸一致，并且动态纹理本身的高度和宽度也必须为帧高度和宽度的倍数。如果尺寸不满足要求，则动态纹理加载时会被认为无效，并被替换为无效纹理。
+
+按照帧纹理对于整张动态纹理的位置，每个帧纹理都有它们的编号。左上角的帧纹理永远为0号，之后按照这一行的顺序依次编号，在这一行结束后从下一行的最左侧的帧纹理继续编号，以此类推，直到所有帧纹理编号结束。
+
+定义动态纹理需要设置对应的元数据文件（<code>*.png.mcmeta</code>，比如对于石头纹理<code>stone.png</code>，对应的动态纹理元数据文件为<code>stone.png.mcmeta</code>）：
+<div class="treeview">
+* {{nbt|compound}} 元数据根标签
+** {{nbt|compound|animation|required=1}}：包含了动态纹理数据的标签。如果不包含此标签，则此纹理会作为静态纹理渲染。
+*** {{nbt|int|height}}：（大于0）帧纹理的高度，以像素为单位。如果指定高度的同时不指定宽度，则帧纹理的宽度为整个纹理的宽度。如果宽度和高度都不指定，则帧纹理的大小为正方形，边长为高度和宽度的较小值。如果指定的高度大于纹理的高度，则这个纹理会被作为静态纹理渲染。设置为-1则与不设置此值无差别。
+*** {{nbt|int|width}}：（大于0）帧纹理的宽度，以像素为单位。如果指定宽度的同时不指定高度，则帧纹理的高度为整个纹理的高度。如果宽度和高度都不指定，则帧纹理的大小为正方形，边长为高度和宽度的较小值。如果指定的宽度大于纹理的宽度，则这个纹理会被作为静态纹理渲染。设置为-1则与不设置此值无差别。
+*** {{nbt|list|frames}}：一个帧列表，列表内的帧按照顺序依次播放，当播放到最后一帧完毕时从头开始继续播放。如果此列表不存在或为空，则按照帧纹理的顺序作为播放顺序。
+**** {{nbt|int}}：指定这一帧显示帧纹理的编号。如果帧纹理的编号小于0或大于帧纹理数量，则这一帧不会被播放。
+**** {{nbt|compound}}：指定一个帧的数据。
+***** {{nbt|int|index|required=1}}：（不小于0）指定这一帧显示帧纹理的编号。如果帧纹理的编号小于0或大于帧纹理数量，则这一帧不会被播放。
+***** {{nbt|int|time}}：（大于0）这一帧的持续时间，覆盖{{nbt|int|frametime}}的值。如果此值不大于0，则这一帧不会被播放。
+*** {{nbt|int|frametime}}：（大于0，默认为1）设置每一帧渲染持续多少[[游戏刻]]。
+*** {{nbt|bool|interpolate}}：（默认为<code>false</code>）表示是否在帧之间进行插值渲染。如果为<samp>true</samp>，游戏将根据当前渲染帧的时间混合前后两帧的纹理进行渲染。
+</div>
+
+== 特殊纹理 ==
+=== 无效纹理 ===
+{{main|无效纹理与模型}}
+[[File:Missing Model.png|150px|thumb|6面都是无效纹理的方块]]
+'''无效纹理'''，或'''丢失的纹理（Missing Texture）'''是一种特殊的纹理，它由游戏自动生成，自动添加到所有纹理图集中，并使用<code>minecraft:missingno</code>作为映射命名空间ID。同时，无效纹理也可以作为一个独立纹理，也使用<code>minecraft:missingno</code>作为此纹理的命名空间ID。
+
+无效纹理由两种颜色组成：紫色（{{color|#F800F8}}）和黑色（{{color|#000000}}）。左上角和右下角是黑色，左下角和右上角是紫色。无效纹理的尺寸固定为16×16，不随纹理图集大小而改变。
+
+当游戏找不到纹理图集内的指定纹理，游戏会自动将请求的命名空间ID引用到无效纹理，作为不存在纹理的替代。如果指定命名空间的纹理的元数据加载产生错误，游戏也会使用无效纹理替代发生错误的纹理。
+
+=== 加载屏幕 ===
+游戏加载屏幕中的[[Mojang Studios]] Logo是一个特殊的纹理，它位于<code>assets/minecraft/gui/title/mojangstudios.png</code>，是一个独立纹理。游戏不会加载任何资源包内的此纹理，只会加载游戏JAR文件内的对应纹理，使得此纹理无法通过资源包替换纹理而修改。
+
+=== 颜色图 ===
+{{main|生物群系#着色}}
+[[File:Foliage Colormap.png|thumb|150x150px|主世界生物群系在树叶颜色图的位置标记]]
+<code>assets/minecraft/textures/colormap</code>目录下有3张纹理，它们用于生物群系着色。这些纹理尺寸都是256×256，都是独立纹理且不能设置元数据。如果纹理像素数量小于65536，对于{{filename|grass.png}}，超出纹理像素数量的索引使用颜色{{color|#FF00FF}}；对于{{filename|foilage.png}}，超出纹理像素数量的索引使用颜色{{color|#48B518}}；对于{{filename|dry_foliage.png}}，超出纹理像素数量的索引使用颜色{{color|#B269D2}}。
+
+=== GUI精灵图纹理 ===
+{{anchor|GUI纹理}}
+GUI精灵图纹理都位于<code>-{}-assets/<''命名空间''>/textures/gui/sprites</code>目录内，且都是精灵图纹理。
+
+GUI精灵图纹理有更多的元数据用于控制多种变换尺寸的行为。所有元数据需要在对应的元数据文件（<code>*.png.mcmeta</code>）内定义：
+
+<div class="treeview">
+* {{nbt|compound}} 元数据根标签
+** {{nbt|compound|gui|required=1}}：GUI数据。
+*** {{nbt|compound|scaling|required=1}}：GUI变换尺寸行为的数据。
+**** {{nbt|string|type|required=1}}：变换尺寸行为的类型。
+**** {{nbt condition|如果{{nbt|string|type}}为<code>nine_slice</code>，则对原纹理进行九宫格划分，对中间部分纹理进行平铺，对左右边垂直平铺，对上下边水平平铺，4个角不进行平铺：}}
+**** {{nbt|int}}{{nbt|compound|border|required=1}}：（为{{nbt|int}}时大于0）九宫格除中心宫格外8个宫格组成的边缘信息。如果使用{{nbt|int}}形式则等价为内部所有值设置为此值。
+***** {{nbt|int|left|required=1}}：（不小于0）左边缘的宽度。
+***** {{nbt|int|top|required=1}}：（不小于0）上边缘的高度。
+***** {{nbt|int|right|required=1}}：（不小于0）右边缘的宽度。
+***** {{nbt|int|bottom|required=1}}：（不小于0）下边缘的高度。
+**** {{nbt|int|height|required=1}}：（大于0）九宫格整体的高度。纹理会拉伸以适配九宫格整体的高度，之后再进行九宫格划分渲染。
+**** {{nbt|int|width|required=1}}：（大于0）九宫格整体的宽度。纹理会拉伸以适配九宫格整体的宽度，之后再进行九宫格划分渲染。
+**** {{nbt|bool|stretch_inner}}：（默认为<code>false</code>）九宫格中间的纹理是否拉伸渲染而非进行平铺。
+**** {{nbt condition|如果{{nbt|string|type}}为<code>stretch</code>，则在变换尺寸时会对原纹理进行拉伸以适配尺寸，无附加字段。}}
+**** {{nbt condition|如果{{nbt|string|type}}为<code>tile</code>，则在变换尺寸时平铺原纹理：}}
+**** {{nbt|int|height|required=1}}：（大于0）一个平铺单元的高度。纹理会拉伸以适配平铺单元的高度，之后再进行平铺。
+**** {{nbt|int|width|required=1}}：（大于0）一个平铺单元的宽度。纹理会拉伸以适配平铺单元的宽度，之后再进行平铺。
+</div>
+
+=== 村民纹理 ===
+村民（包括僵尸村民，下同）使用了比较复杂的实体模型，所以使用的纹理也更加复杂。村民纹理包含三种纹理：村民生物群系服装纹理、村民职业服装纹理和村民职业徽章纹理。其中生物群系服装和职业服装纹理的帽子部分可能会产生渲染上的冲突，所以这两种纹理需要使用元数据文件（<code>*.png.mcmeta</code>）进行特殊设置：
+
+<div class="treeview">
+* {{nbt|compound}} 元数据根标签
+** {{nbt|compound|villager|required=1}}：村民纹理数据。
+*** {{nbt|string|hat|required=1}}：村民纹理帽子的渲染方式。必须为<code>none</code>、<code>partial</code>或<code>full</code>。不存在元数据时默认为<code>none</code>。
+</div>
+
+如果村民职业服装纹理帽子渲染方式为<code>none</code>，或职业服装渲染方式为<code>partial</code>时生物群系服装纹理不为<code>full</code>，则渲染村民生物群系服装中的帽子纹理；其他情况下，则不渲染村民生物群系服装中的帽子纹理。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.4|dev=13w48a|现在不再能更改Mojang徽标。}}
+|{{HistoryLine||1.8|dev=14w25a|加入了用于动态纹理的<code>interpolate</code>标签。}}
+|{{HistoryLine||1.17|dev=20w45a|更改部分纹理文件的名称。}}
+|{{HistoryLine|||dev=21w05a|<samp>toasts.png</samp> GUI纹理为收纳袋教程提供了一个新图标。}}
+|{{HistoryLine||1.19.1|dev=22w24a|在<samp>social_interactions.png</samp>中加入了3个与聊天举报功能有关的图标。}}
+|{{HistoryLine|||dev=pre1|将与聊天举报功能有关的3个图标移至<samp>report_button.png</samp>中。}}
+|{{HistoryLine|||dev=pre2|加入了<samp>chat_tags.png</samp>，其中包含2个与聊天消息信任状态有关的图标。}}
+|{{HistoryLine||1.19.3|dev=22w46a|更改了纹理加载机制，现在部分纹理由纹理图集加载。}}
+|{{HistoryLine|||dev=pre1|附魔光效现在使用两个不同的纹理文件：<samp>enchanted_glint_entity.png</samp>和<samp>enchanted_glint_item.png</samp>。}}
+|{{HistoryLine||1.20.2|dev=23w31a|拆分了GUI纹理图集，重新整理了GUI纹理文件，并将[[Realms]]相关的纹理移动至<code>minecraft</code>命名空间下。
+|现在被拆分出来的GUI图集纹理支持<samp>.mcmeta</samp>文件，可以通过<code>gui</code>部分自定义变换行为，通过<code>animation</code>部分添加动态纹理。}}
+|{{HistoryLine|||dev=23w32a|修正了拆分出的<samp>food_full.png</samp>和<samp>food_half.png</samp>文件名颠倒的问题。}}
+|{{HistoryLine|||dev=pre2|在[[地图]]的图集纹理中加入了新的图标。}}
+|{{HistoryLine|||dev=23w43a|更改了[[蝙蝠]]的模型，因此也更改了蝙蝠的纹理映射。}}
+|{{HistoryLine||1.20.5|dev=24w11a|将<samp>options_background.png</samp>和<samp>light_dirt_background.png</samp>分别拆分为<samp>menu_background.png</samp>、<samp>menu_list_background.png</samp>、<samp>inworld_menu_background.png</samp>以及<samp>inworld_menu_list_background.png</samp>。
+|加入了<samp>inworld_header_separator.png</samp>和<samp>inworld_footer_separator.png</samp>。}}
+|{{HistoryLine|||dev=24w12a|拆分了地图图标的纹理图集。}}
+|{{HistoryLine||1.21.2|dev=24w36a|为九宫格类GUI纹理添加了{{nbt|bool|stretch_inner}}调整中间宫格纹理是否拉伸渲染。
+|物品提示框现在可由GUI纹理指定。
+|更改了盔甲及盔甲纹饰的纹理路径。}}
+|{{HistoryLine||1.21.4|dev=24w44a|更改了一些GUI纹理，包括空槽位纹理的拆分和移动。}}
+|{{HistoryLine||1.21.5|dev=25w02a|更改了猪的纹理映射。}}
+|{{HistoryLine|||dev=25w03a|与鞍相关的纹理被拆分、移动以供装备模型控制。}}
+|{{HistoryLine|||dev=25w05a|更改了牛的纹理映射，并移动了牛和猪的部分纹理。}}
+|{{HistoryLine|||dev=25w06a|移动了鸡的纹理。}}
+|{{HistoryLine|||dev=25w07a|修改了哞菇的模型和纹理映射。}}
+|{{HistoryLine|||dev=25w08a|修改了绵羊和刷怪蛋的纹理与着色。
+|加入了用于枯叶堆着色的<samp>dry_foliage.png</samp>颜色图。}}
+|{{HistoryLine||1.21.6|dev=25w15a|现在游戏始终遵循{{cd|*.png.mcmeta}}的{{nbt|bool|textures.blur}}参数渲染。}}
+|{{HistoryLine||1.21.11|dev=25w41a|拆分了月亮的纹理图集。
+|加入了纹理属性{{nbt|boolean|darkened_cutout_mipmap}}。
+|现在动态纹理只在MipMap级别为0或1时设置动画。}}
+|{{HistoryLine|||dev=25w43a|撤销了25w41a对动态纹理的修改。
+|将纹理属性{{nbt|boolean|darkened_cutout_mipmap}}替换为{{nbt|string|mipmap_strategy}}。}}
+|{{HistoryLine|||dev=pre1|加入了纹理属性{{nbt|float|alpha_cutoff_bias}}。}}
+|{{HistoryLine||26.3|dev=snapshot-1|重新整理了盔甲纹饰相关纹理。
+|加入了调色板元数据{{nbt|compound|palette}}。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:资源包]]
+
+[[en:Textures]]
+[[es:Texturas]]
+[[fr:Textures]]
+[[ja:テクスチャ]]
+[[ko:텍스처]]
+[[pt:Texturas]]

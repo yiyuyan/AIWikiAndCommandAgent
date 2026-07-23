@@ -1,0 +1,151 @@
+# 页面: 属性/护甲值
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E6%8A%A4%E7%94%B2%E5%80%BC
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+{{Infobox attribute}}
+
+'''护甲值（Armor）'''是与[[属性/盔甲韧性|盔甲韧性]]共同作用，减少生物受到伤害的[[属性]]。
+
+== 行为 ==
+{{main|盔甲机制}}
+每{{armor|1}}护甲值使伤害减少4%、至多被伤害降低至下限0.8%，在{{armor|20}}时达到16%~80%，在{{armor|30}}时达到24%~120%。最终提供的伤害减免不能超过80%。
+
+单次伤害中的每{{hp|0.5}}伤害值使护甲值提供的伤害减少比例减少1%，直到下限。每1[[属性/盔甲韧性|盔甲韧性]]使减少1%减少比例需要的伤害增加{{hp|0.0625}}。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Killer Bunny}}
+| 8
+|-
+| {{EntityLink|Wither}}
+| 4
+|-
+| {{EntityLink|Magma cube}}
+| 3&times;(''体型''+1)
+|-
+| {{EntityLink|Zombie}}<br>{{EntityLink|Husk}}<br>{{EntityLink|Drowned}}<br>{{EntityLink|Zombie Villager}}<br>{{EntityLink|Zombified Piglin}}
+| 2
+|-
+| 所有其他生物
+| 0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! colspan = "2" | 值
+! 数据持久化
+! 来源
+|-
+| rowspan = "3" | armor.helmet
+| rowspan = "3" | add_value（Op0）
+| {{ItemLink|Leather Cap}}
+| 1
+| rowspan = "3" | 否
+| rowspan = "3" | {{ItemLink|Helmet}}，{{tr|应用|套用}}于<code>head</code>（头盔）槽位
+|-
+| {{ItemLink|Copper Helmet}}<br>{{ItemLink|Golden Helmet}}<br>{{ItemLink|Chainmail Helmet}}<br>{{ItemLink|Iron Helmet}}<br>{{ItemLink|Turtle Shell}}
+| 2
+|-
+| {{ItemLink|Diamond Helmet}}<br>{{ItemLink|Netherite Helmet}}
+| 3
+|-
+| rowspan = "5" | armor.chestplate
+| rowspan = "5" | add_value（Op0）
+| {{ItemLink|Leather Tunic}}
+| 3
+| rowspan = "5" | 否
+| rowspan = "5" | {{ItemLink|Chestplate}}，{{tr|应用|套用}}于<code>chest</code>（胸甲）槽位
+|-
+| {{ItemLink|Copper Chestplate}}
+| 4
+|-
+| {{ItemLink|Golden Chestplate}}<br>{{ItemLink|Chainmail Chestplate}}
+| 5
+|-
+| {{ItemLink|Iron Chestplate}}
+| 6
+|-
+| {{ItemLink|Diamond Chestplate}}<br>{{ItemLink|Netherite Chestplate}}
+| 8
+|-
+| rowspan = "5" | armor.leggings
+| rowspan = "5" | add_value（Op0）
+| {{ItemLink|Leather Pants}}
+| 2
+| rowspan = "5" | 否
+| rowspan = "5" | {{ItemLink|Leggings}}，{{tr|应用|套用}}于<code>legs</code>（护腿）槽位
+|-
+| {{ItemLink|Copper Leggings}}<br>{{ItemLink|Golden Leggings}}
+| 3
+|-
+| {{ItemLink|Chainmail Leggings}}
+| 4
+|-
+| {{ItemLink|Iron Leggings}}
+| 5
+|-
+| {{ItemLink|Diamond Leggings}}<br>{{ItemLink|Netherite Leggings}}
+| 6
+|-
+| rowspan = "3" | armor.boots
+| rowspan = "3" | add_value（Op0）
+| {{ItemLink|Leather Boots}}<br>{{ItemLink|Copper Boots}}<br>{{ItemLink|Golden Boots}}<br>{{ItemLink|Chainmail Boots}}
+| 1
+| rowspan = "3" | 否
+| rowspan = "3" | {{ItemLink|Boots}}，{{tr|应用|套用}}于<code>feet</code>（靴子）槽位
+|-
+| {{ItemLink|Iron Boots}}
+| 2
+|-
+| {{ItemLink|Diamond Boots}}<br>{{ItemLink|Netherite Boots}}
+| 3
+|-
+| rowspan = "6" | armor.body
+| rowspan = "6" | add_value（Op0）
+| {{ItemLink|Leather Horse Armor}}
+| 3
+| rowspan = "6" | 否
+| rowspan = "6" | {{ItemLink|Horse Armor}}、{{ItemLink|Wolf Armor}}和{{ItemLink|Nautilus Armor}}，{{tr|应用|套用}}于<code>body</code>（身体）槽位
+|-
+| {{ItemLink|Copper Horse Armor}}<br>{{ItemLink|Copper Nautilus Armor}}
+| 4
+|-
+| {{ItemLink|Iron Horse Armor}}<br>{{ItemLink|Iron Nautilus Armor}}
+| 5
+|-
+| {{ItemLink|Golden Horse Armor}}<br>{{ItemLink|Golden Nautilus Armor}}
+| 7
+|-
+| {{ItemLink|Diamond Horse Armor}}<br>{{ItemLink|Wolf Armor}}<br>{{ItemLink|Diamond Nautilus Armor}}
+| 11
+|-
+| {{ItemLink|Netherite Horse Armor}}<br>{{ItemLink|Netherite Nautilus Armor}}
+| 19
+|-
+| covered
+| add_value（Op0）
+| colspan = "2" | 20
+| 否
+| {{EntityLink|Shulker}}闭合外壳
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w36d|加入了护甲值属性，ID为<code>generic.armor</code>。}}
+|{{HistoryLine||1.20.5|dev=24w05a|移除了马匹盔甲修饰<code>Horse armor bonus</code>。现在狼铠和马铠提升护甲值使用<code>Armor Modifier</code>修饰符。}}
+|{{HistoryLine||1.21|dev=24w21a|将<code>Armor Modifier</code>修饰符提高护甲值的行为拆分至{{cd|d=pretty|armor.helmet|armor.chestplate|armor.leggings|armor.boots|armor.body}}。
+|移除了UUID为<code>7E0292F2-9434-48D5-A29F-9583AF7DF27F</code>的潜影贝覆盖盔甲加成（<code>Covered armor bonus</code>）修饰符，现以ID为<code>covered</code>的修饰符取代。}}
+|{{HistoryLine||1.21.2|dev=24w33a|护甲属性从<code>generic.armor</code>重命名为<code>armor</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

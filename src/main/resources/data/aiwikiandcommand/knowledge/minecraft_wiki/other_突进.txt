@@ -1,0 +1,181 @@
+# 页面: 突进
+# 来源: https://zh.minecraft.wiki/w/%E7%AA%81%E8%BF%9B
+# 分类: 
+# 抓取时间: 2026-07-14 17:33:13
+# 原始 Wikitext 内容:
+
+{{Infobox enchantment}}
+'''突进（Lunge）'''是一种使用[[矛]]进行戳刺攻击时将攻击者向前推进的[[魔咒]]。
+
+== 获取 ==
+{{Enchantminlvl}}
+
+== 用途 ==
+{{see also|矛#戳刺}}
+突进魔咒仅影响矛的戳刺攻击，且需要攻击者不在水中、不处于滑翔状态或骑乘状态。
+
+在使用具有突进的矛进行戳刺攻击时，攻击者会获得一个向正前方的水平速度{{note|如无额外说明，均指实体下一刻的位移变化量Delta Movement而非当前的移动速度，下同。}}，每级增加9.16米/秒。此水平速度是理论值，增加的水平速度的方向是当前生物视角方向的在水平面上的投影的方向，也即生物的视角越偏向水平方向，获得的速度就越接近理论值，而生物视角正向上方或下方时无法获得额外速度。
+
+设突进魔咒的等级为<math>n</math>，玩家视线与水平方向的夹角为<math>\alpha</math>，则获得的最终水平速度为<math>9.16n\cos\alpha</math>，单位：公尺/秒。
+
+{| class="wikitable"
+|+
+! 魔咒等级
+! I
+! II
+! III
+! 更高
+|-
+! {{tooltip|minetip=1|速度|在攻击时对攻击者施加的速度，单位米/秒。}}
+| 9.16
+| 18.32
+| 27.48
+| ''等级''×9.16
+|}
+
+突进魔咒每生效一次，矛就会损失1点耐久度，此损失和矛攻击造成的耐久消耗独立计算，可以被[[耐久]]魔咒减少。
+
+如果攻击者是玩家，则突进魔咒生效还需要玩家饥饿值大于{{hunger|6}}，且魔咒生效时还会增加玩家的[[消耗度]]，每级增加4点消耗度。在饱和度为0的情况下，这相当于每级突进魔咒会额外消耗{{hunger|1}}饥饿值。创造模式的玩家不受饥饿值限制。
+{| class="wikitable"
+|+
+! 魔咒等级
+! I
+! II
+! III
+! 更高
+|-
+! 额外增加的消耗度
+| 4
+| 8
+| 12
+| ''等级''×4，最大为40
+|-
+! 额外损耗的饥饿值<br>（饱和度为0时）
+| {{hunger|1}}
+| {{hunger|2}}
+| {{hunger|3}}
+| ''等级''，最大为{{hunger|9}}
+|}
+
+由于[[僵尸]]、[[僵尸村民]]、[[尸壳]]、[[僵尸猪灵]]和[[猪灵]]仅会使用矛进行冲锋攻击，因此它们事实上无法使用突进魔咒。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Spear lunge1.ogg
+|source = [[声音#实体依赖分类|取决于发动魔咒的实体]]
+|description = I级突进魔咒发动
+|id = item.spear.lunge_1
+|translationkey = subtitles.item.spear.lunge
+|subtitle = {{tp|subtitles.item.spear.lunge}}
+}}
+{{Sound table
+|sound=Spear lunge2.ogg
+|source = [[声音#实体依赖分类|取决于发动魔咒的实体]]
+|description = II级突进魔咒发动
+|id = item.spear.lunge_2
+|translationkey = subtitles.item.spear.lunge
+|subtitle = {{tp|subtitles.item.spear.lunge}}
+}}
+{{Sound table
+|sound=Spear lunge3.ogg
+|source = [[声音#实体依赖分类|取决于发动魔咒的实体]]
+|description = III级突进魔咒发动
+|id = item.spear.lunge_3
+|translationkey = subtitles.item.spear.lunge
+|subtitle = {{tp|subtitles.item.spear.lunge}}
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=item.enchant.lunge1.wav
+|source=玩家
+|description=I级突进魔咒发动
+|id=item.enchant.lunge1
+|typeid=item.enchant.lunge1
+|soundvolume
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=item.enchant.lunge2.wav
+|source=玩家
+|description=II级突进魔咒发动
+|id=item.enchant.lunge2
+|typeid=item.enchant.lunge2
+|soundvolume
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=item.enchant.lunge3.wav
+|source=玩家
+|description=III级突进魔咒发动
+|id=item.enchant.lunge3
+|typeid=item.enchant.lunge3
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|translationtype=enchantment
+|displayname=突进
+|nameid=lunge
+|showenchantmenttags=1
+|enchantmenttags={{GameTag|enchantment|lunge}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|translationtype=enchantment
+|displayname=突进
+|nameid=lunge
+|foot=1}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了突进。}}
+|{{HistoryLine|||dev=25w42a|现在突进不再与[[经验修补]]冲突。}}
+|{{HistoryLine|||dev=25w43a|现在突进不再额外消耗矛的耐久度，而是消耗玩家的[[饱和度]]和饥饿值，与疾跑和跳跃类似。
+|此前，每级突进魔咒会额外消耗（2^(1 + ''等级''× 2)）点耐久度；[[耐久]]魔咒可以降低此消耗量。}}
+|{{HistoryLine|||dev=25w44a|现在突进总是额外消耗1点耐久度。
+|调低了突进消耗的饱和度和饥饿值；此前，每级突进魔咒会额外增加（''等级''× 4 + 8）点消耗度。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.130|dev=1.21.130.20|加入了突进。}}
+|{{HistoryLine|||dev=1.21.130.24|现在突进只会额外消耗矛的1点耐久度，并且会像疾跑和跳跃那样消耗玩家的饱和度和饥饿值。
+|此前，每级突进魔咒会额外消耗（2^(1 + ''等级''× 2)）点耐久度，且可以被耐久魔咒减免。}}
+}}
+
+== 你知道嗎 ==
+* 開發者選擇消耗[[飢餓]]作為突刺的使用代價的原因之一是突刺（Lunge）和午餐（Lunch）諧音。<ref>https://youtu.be/aZxc-av4eps?si=97rjhIsMHhalAFw9&t=3m25s</ref>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{navbox enchantments}}
+
+[[de:Ausfallschritt]]
+[[en:Lunge]]
+[[es:Estocada]]
+[[fr:Élan]]
+[[it:Affondo]]
+[[ja:突進]]
+[[lzh:揕]]
+[[pt:Estocada]]
+[[ru:Рывок]]

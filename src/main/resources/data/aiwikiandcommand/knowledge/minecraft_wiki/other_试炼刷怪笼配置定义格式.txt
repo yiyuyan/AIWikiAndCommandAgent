@@ -1,0 +1,73 @@
+# 页面: 试炼刷怪笼配置定义格式
+# 来源: https://zh.minecraft.wiki/w/%E8%AF%95%E7%82%BC%E5%88%B7%E6%80%AA%E7%AC%BC%E9%85%8D%E7%BD%AE%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+
+'''试炼刷怪笼配置（Trial Spawner configurations）'''是[[试炼刷怪笼]]试炼行为的配置数据。'''试炼刷怪笼配置定义文件'''是试炼刷怪笼配置在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+试炼刷怪笼配置数据在游戏内使用{{cd|TRIAL_SPAWNER_CONFIG}}注册表，数据包路径为{{filepath|trial_spawner}}，即所有试炼刷怪笼配置定义文件都需要在{{filepath|-{}-data/<''命名空间''>/trial_spawner}}目录内定义，试炼刷怪笼标签则需要在{{filepath|-{}-data/<''命名空间''>/tags/trial_spawner}}目录内定义。
+
+试炼刷怪笼配置定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|object}} JSON文件根对象<section begin="codec_trial_spawner_config"/>
+** {{nbt|string|items_to_drop_when_ominous}}：（命名空间ID）战利品表，控制不祥状态的试炼刷怪笼激活状态时生成的不祥之物生成器实体内的物品。此项不存在时游戏默认为<code>spawners/trial_chamber/items_to_drop_when_ominous</code>。
+** {{nbt|list|loot_tables_to_eject}}：加权列表，决定试炼刷怪笼喷出的奖励物品。决定奖励时，游戏会从此列表中先抽出一项战利品表，然后根据参与试炼的玩家决定抽取次数。此项不存在时游戏默认为<code>spawners/trial_chamber/consumables</code>和<code>spawners/trial_chamber/key</code>，权重均为1。
+*** {{nbt|object}}：一项战利品项。
+**** {{nbt|string|data|required=1}}：（命名空间ID）战利品表。
+**** {{nbt|int|weight|required=1}}：（{{interval|left_open=0}}）此项的权重。
+** {{nbt|float|simultaneous_mobs}}：（{{interval|left=0}}，默认为2）同时存活的生成生物的最少数量，即仅一个玩家加入试炼时同时存活的生物数量。
+** {{nbt|float|simultaneous_mobs_added_per_player}}：（{{interval|left=0}}，默认为1）每增加一个加入试炼玩家，同时存活生物数量的增加值。设<code>simultaneous_mobs</code>为''t''，此值为''p''，加入试炼的玩家总数量为''n''，则本次试炼的最大同时存活数量为<math>\lfloor t+p(n-1) \rfloor</math>。
+** {{nbt|list|spawn_potentials}}：（默认为空）加权列表，包含了可能生成的实体。在试炼刷怪笼进行一次尝试生成'''后'''，游戏将会随机从中选择一项用于下次生成。
+*** {{nbt|object}}：一次可能的生成。
+**** {{nbt|object|data|required=1}}：一项生成数据。
+***** {{nbt inherit/spawn data}}
+**** {{nbt|int|weight|required=1}}：（{{interval|left_open=0}}）此项的权重。
+** {{nbt|int|spawn_range}}：（{{interval|left=1|right=128}}，默认为4）生成生物的范围，采用切比雪夫距离，越靠近试炼刷怪笼生成在此位置的概率越大。
+** {{nbt|float|total_mobs}}：（{{interval|left=0}}，默认为6）生成生物的最少总数量，即仅一个玩家加入试炼时生成的总生物数量。
+** {{nbt|float|total_mobs_added_per_player}}：（{{interval|left=0}}，默认为2）每增加一个加入试炼玩家，生成生物总数量的增加值。设<code>total_mobs</code>为''t''，此值为''p''，加入试炼的玩家总数量为''n''，则本次试炼的生物总数量为<math>\lfloor t+p(n-1) \rfloor</math>。
+** {{nbt|int|ticks_between_spawn}}：（{{interval|left=0}}，默认为{{convert|40}}）两次尝试生成生物的最小间隔时间。
+<section end="codec_trial_spawner_config"/></div>
+
+== 定义行为 ==
+{{see also|试炼刷怪笼#用途|不祥试炼刷怪笼#用途}}
+试炼刷怪笼配置定义数据仅在服务端启动时被加载一次，使用{{cmd|reload}}命令不可以使试炼刷怪笼配置定义被重新加载，而必须重启服务端。
+
+试炼刷怪笼配置数据控制了实体生成数据，也控制了试炼结束后产生的战利品。
+
+配置数据需要在试炼刷怪笼的下述[[试炼刷怪笼#方块实体|方块实体数据]]中使用。试炼开启后会使用与方块状态<code>ominous</code>对应的配置数据，任何未填写的字段均被视为默认值。
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|string}}{{nbt|compound|normal_config}}：正常变种（方块状态<code>ominous</code>为<samp>false</samp>）使用的配置数据。
+** {{nbt|string}}{{nbt|compound|ominous_config}}：不祥变种（方块状态<code>ominous</code>为<samp>true</samp>）使用的配置数据。
+** ...
+</div>
+
+=== 抽取物品 ===
+试炼刷怪笼有两种抽取行为：不祥试炼刷怪笼生成的不祥之物生成器和试炼结束后的奖励。
+
+{{nbt|string|items_to_drop_when_ominous}}决定了随机生成的[[不祥之物生成器]]内存储的物品。游戏会使用战利品上下文参数集<code>empty</code>从战利品表内生成一项物品，并将获得的物品的数量设为1作为结果。因此生成{{tr|不祥之物|不祥物品}}的战利品表不能使用任何战利品上下文参数。
+
+{{nbt|list|loot_tables_to_eject}}决定了试炼结束后喷出的奖励。游戏会从中选取一项战利品表，并使用战利品上下文参数集<code>empty</code>从其中生成并一次性弹出奖励物品，每有一个玩家参与试炼就会弹出一次奖励。因此生成试炼刷怪笼奖励的战利品表不能使用任何战利品上下文参数。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.2|dev=24w35a|加入了{{cd|TRIAL_SPAWNER_CONFIG}}可写注册表和试炼刷怪笼配置定义格式。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Prüfungs-Spawner-Definition]]
+[[en:Trial_spawner_configuration]]
+[[fr:Configuration de générateur des épreuves]]
+[[pt:Configuração do gerador de desafio]]
+[[uk:Конфігурація спавнера випробувань]]

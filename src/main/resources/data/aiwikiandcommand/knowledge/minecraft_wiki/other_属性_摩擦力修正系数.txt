@@ -1,0 +1,117 @@
+# 页面: 属性/摩擦力修正系数
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E6%91%A9%E6%93%A6%E5%8A%9B%E4%BF%AE%E6%AD%A3%E7%B3%BB%E6%95%B0
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+{{Infobox attribute}}
+
+'''摩擦力修正系数（Friction Modifier）'''是控制生物在地面上行走时受到的阻力的[[属性]]。
+
+== 行为 ==
+{{main|实体#运动}}
+设此属性的计算值是<math>F</math>，方块的[[阻力系数]]是<math>FB</math>。
+
+生物在空气中运动时，如果站在了某个平面上，则受到的来自方块的阻力为<math>1 - (1 - FB) \times F</math>。使用的阻力系数为实体站立位置的方块的阻力系数，计算结果低于0时视为0，高于1时视为1。
+
+如果生物没有站在某个平面上，则来自方块的阻力视为1。
+
+== 适用的生物 ==
+{| class="wikitable sortable"
+! 生物
+! 基值
+|-
+| 所有生物
+| 1.0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| bouncy_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.7
+| 否
+| [[硫方怪]]吸收方块后，且原型为弹性
+|-
+| explosive_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.7
+| 否
+| 硫方怪吸收方块后，且原型为爆炸
+|-
+| fast_flat_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.9
+| 否
+| 硫方怪吸收方块后，且原型为快速平移
+|-
+| fast_sliding_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.95
+| 否
+| 硫方怪吸收方块后，且原型为快速滑行
+|-
+| high_resistance_mul_friction_modifier
+| add_multiplied_total (Op2)
+| 0.0
+| 否
+| 硫方怪吸收方块后，且原型为高阻力
+|-
+| hot_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.7
+| 否
+| 硫方怪吸收方块后，且原型为高温
+|-
+| light_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.7
+| 否
+| 硫方怪吸收方块后，且原型为轻盈
+|-
+| regular_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.7
+| 否
+| 硫方怪吸收方块后，且原型为普通
+|-
+| slow_bouncy_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.7
+| 否
+| 硫方怪吸收方块后，且原型为缓慢弹性
+|-
+| slow_flat_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.7
+| 否
+| 硫方怪吸收方块后，且原型为缓慢平移
+|-
+| slow_sliding_mul_friction_modifier
+| add_multiplied_total (Op2)
+| -0.95
+| 否
+| 硫方怪吸收方块后，且原型为缓慢滑行
+|-
+| sticky_mul_friction_modifier
+| add_multiplied_total (Op2)
+| 1.0
+| 否
+| 硫方怪吸收方块后，且原型为黏性
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了摩擦力修正系数。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

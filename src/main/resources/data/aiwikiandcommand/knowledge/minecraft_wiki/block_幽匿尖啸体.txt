@@ -1,0 +1,424 @@
+# 页面: 幽匿尖啸体
+# 来源: https://zh.minecraft.wiki/w/%E5%B9%BD%E5%8C%BF%E5%B0%96%E5%95%B8%E4%BD%93
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:49
+# 原始 Wikitext 内容:
+
+{{more images|缺失基岩版渲染图。}}
+{{tr|尖啸体|嘯口|尖嘯器|mode=H}}
+{{Infobox block
+|group1=可召唤监守者
+|1-1=Sculk Shrieker.gif
+|group2=不可召唤监守者
+|2-1=Sculk Shrieker Inactive.gif
+|invimage=Sculk Shrieker
+|light=0
+}}
+{{quote|在现实世界中探索洞穴的人还未能抵达监守者或深暗之域所在的深度（即便有，至少没人活着汇报），所以我们不知道地球上是否存在幽匿尖啸体。它们可能并不存在。或许吧。|[[Duncan Geere]]<ref>{{article|sculk-shrieker|Block of the Month: Sculk Shrieker|June 20, 2024}}</ref>||Duncan Geere Mojavatar.png}}
+'''幽匿尖啸体（Sculk Shrieker）'''是一种激活后给予玩家[[黑暗]]状态效果并最终生成[[监守者]]的[[幽匿]]类方块。
+
+== 生成 ==
+=== 自然生成 ===
+幽匿尖啸体自然生成于[[深暗之域]]生物群系。
+
+{{Block distribution}}
+
+=== 幽匿催发体 ===
+{{main|幽匿催发体#用途}}
+死后会掉落[[经验]]的[[生物]]在距[[幽匿催发体]]半径{{only|je|for=8格|short=1}}/{{only|be|for=10格|short=1}}内的位置死亡时，周围的[[幽匿块]]上有1%的概率生成幽匿尖啸体，每次生成消耗1点经验。
+
+== 获取 ==
+幽匿尖啸体只能通过破坏幽匿尖啸体获得。
+
+== 破坏 ==
+挖掘幽匿尖啸体的合适工具是锄。
+
+{{Breaking table}}
+
+没有被具有[[精准采集]]的工具挖掘破坏时，幽匿尖啸体被破坏后会掉落{{xp|5}}。
+
+被具有[[精准采集]]的工具挖掘破坏时，幽匿尖啸体被破坏后会掉落自身。
+
+== 用途 ==
+幽匿尖啸体可[[含水]]。
+
+根据[[方块状态]]<code>can_summon</code>的不同，幽匿尖啸体具有不同的行为。
+* 在世界生成期间自然生成的幽匿尖啸体，其<code>can_summon</code>值为<samp>true</samp>，顶部的旋转纹理更亮，旋转速度更快，且沿顺时针旋转，能够给玩家施加[[黑暗]]状态效果并最终生成[[监守者]]。
+* 由玩家手动放置或由[[幽匿催发体]]生成的幽匿尖啸体，其<code>can_summon</code>值为<samp>false</samp>，顶部的旋转纹理偏暗，旋转速度较慢，且沿逆时针旋转，不可给予玩家黑暗状态效果及生成监守者。
+
+使用命令{{cmd|setblock ~ ~-1 ~ sculk_shrieker[can_summon{{=}}true]}}{{only|je}}或{{cmd|setblock ~ ~-1 ~ sculk_shrieker["can_summon"{{=}}true]}}{{only|be}}可以在玩家脚下放置一个<code>can_summon</code>值为<samp>true</samp>的幽匿尖啸体。
+
+=== 激活 ===
+幽匿尖啸体必须由玩家直接或间接激活。下列实体在满足条件时可以激活幽匿尖啸体：
+* 玩家本身
+* 玩家正在[[骑乘]]的生物（不包含[[玩家模型]]{{only|je}}和[[盔甲架]]）
+* 由玩家投掷或发射的[[弹射物]]
+* 由玩家丢出的[[物品实体]]
+
+幽匿尖啸体有2种激活途径：
+* 被上述实体直接踩踏时激活。
+* [[幽匿感测体]]或[[校频幽匿感测体]]被上述实体（不包括[[羊毛]]和[[地毯]]的物品实体）激活时，会传递信号给半径8格内未被羊毛阻挡的幽匿尖啸体，将其激活。
+
+对于<code>can_summon</code>值为<samp>true</samp>的幽匿尖啸体，其在满足下列任一情况下时不能被激活：
+* 幽匿尖啸体周围24格内存在监守者。
+* 激活幽匿尖啸体的玩家的监守者计时器处于冷却状态，或幽匿尖啸体周围16格内有非[[旁观模式]]玩家的监守者计时器处于冷却状态。
+
+如果[[难度]]为和平，或{{in|je|nc=1}}游戏规则{{gamerule|spawn_wardens}}为<samp>false</samp>，那么<code>can_summon</code>值为<samp>true</samp>的幽匿尖啸体的激活不受上述条件约束，但此时不会给予黑暗效果及生成监守者。
+
+[[File:Shriek.png|缩略图|右|幽匿尖啸体产生的粒子|class=pixel-image]]
+幽匿尖啸体激活后会立即发出尖啸声，持续{{convert|90}}，并在顶部产生环状呼啸粒子。含水的幽匿尖啸体不会发出尖啸音效。
+
+=== 生成监守者 ===
+如果幽匿尖啸体的<code>can_summon</code>值为<samp>true</samp>{{only|je|for=且{{gamerule|spawn_wardens}}为<samp>true</samp>|short=1}}，且难度不为和平，则其在尖啸时会同时计算玩家的警告等级，即使尖啸过程中该幽匿尖啸体被破坏也不会影响玩家警告等级计算。激活幽匿尖啸体的玩家和幽匿尖啸体周围16格的非旁观模式玩家都被认为是参与了这次激活的玩家，这些玩家的最大警告等级+1就是这次激活的警告等级。警告等级不会大于4，如果原先的警告等级已经到4则不会继续增加。所有参与这次激活的玩家的警告等级会被设置为这次激活的警告等级，并会获得{{convert|200}}的冷却时间，在此期间内这些玩家不能再次激活幽匿尖啸体。
+
+在尖啸完毕后，系统会播放监守者警告音效或生成监守者，同时对周围40格内不存在黑暗状态效果或黑暗状态效果剩余时间小于{{convert|200}}的[[生存]]或[[冒险]]模式玩家施加{{convert|260}}的黑暗状态效果。如果警告等级为1-3，则会播放警告音效，{{in|je|nc=1}}警告音效在[[字幕]]中分别表现为“{{tr|接近|接近|迫近}}”“{{tr|逼近|靠近|慢慢逼近}}”和“{{tr|迫近|貼近|接近}}”。如果警告等级为4，则尝试在其周围11×13×11空间内下方方块上表面完整的位置生成监守者，如果尝试20次仍然没有找到合适的位置生成监守者，那么只会播放监守者的咆哮声。
+
+当玩家不参与激活幽匿尖啸体时，玩家的警告等级每{{convert|12000||分}}降低一级直到为0。
+
+== 音效 ==
+{{needs update|section=1|基岩版音效出现了根本不存在的声音事件，需要重新整理}}
+{{el|je}}：
+{{Sound table
+|sound=Sculk Shrieker break1.ogg
+|sound2=Sculk Shrieker break2.ogg
+|sound3=Sculk Shrieker break3.ogg
+|sound4=Sculk Shrieker break4.ogg
+|sound5=Sculk Shrieker break5.ogg
+|sound6=Sculk Shrieker break6.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source={{tp|soundCategory.block}}
+|description=破坏方块
+|id=block.sculk_shrieker.break
+|translationkey=subtitles.block.generic.break
+|volume=0.9
+}}
+{{Sound table
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.sculk_shrieker.fall
+|translationkey=subtitles.block.generic.fall
+}}
+{{Sound table
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source={{tp|soundCategory.block}}
+|description=挖掘方块
+|id=block.sculk_shrieker.hit
+|translationkey=subtitles.block.generic.hit
+}}
+{{Sound table
+|sound=Sculk Shrieker place1.ogg
+|sound2=Sculk Shrieker place2.ogg
+|sound3=Sculk Shrieker place3.ogg
+|sound4=Sculk Shrieker place4.ogg
+|sound5=Sculk Shrieker place5.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source={{tp|soundCategory.block}}
+|description=放置方块
+|id=block.sculk_shrieker.place
+|translationkey=subtitles.block.generic.place
+|volume=0.9
+}}
+{{Sound table
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.sculk_shrieker.step
+|translationkey=subtitles.block.generic.footsteps
+}}
+
+{{Sound table
+|sound=Sculk Shrieker shriek1.ogg
+|sound2=Sculk Shrieker shriek2.ogg
+|sound3=Sculk Shrieker shriek3.ogg
+|sound4=Sculk Shrieker shriek4.ogg
+|sound5=Sculk Shrieker shriek5.ogg
+|subtitle={{tp|subtitles.block.sculk_shrieker.shriek}}
+|source={{tp|soundCategory.block}}
+|description=激活
+|id=block.sculk_shrieker.shriek
+|translationkey=subtitles.block.sculk_shrieker.shriek
+|volume=0.85
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Sculk_Shrieker_place1.wav
+|sound2=Sculk_Shrieker_place2.wav
+|sound3=Sculk_Shrieker_place3.wav
+|sound4=Sculk_Shrieker_place4.wav
+|sound5=Sculk_Shrieker_place5.wav
+|source=方块
+|description=方块作为物品使用时发出的音效
+|typeid=item.use.on
+|id=place.sculk_shrieker
+|soundvolume=0.8-1.0
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Shrieker_break1.wav
+|sound2=Sculk_Shrieker_break2.wav
+|sound3=Sculk_Shrieker_break3.wav
+|sound4=Sculk_Shrieker_break4.wav
+|sound5=Sculk_Shrieker_break5.wav
+|sound6=Sculk_Shrieker_break6.wav
+|source=方块
+|description=破坏方块
+|typeid=break
+|id=break.sculk_shrieker
+|soundvolume=0.8-1.0
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.wav
+|sound2=Sculk step2.wav
+|sound3=Sculk step3.wav
+|sound4=Sculk step4.wav
+|sound5=Sculk step5.wav
+|sound6=Sculk step6.wav
+|source=方块
+|description=挖掘方块
+|typeid=hit
+|id=hit.sculk_shrieker
+|soundvolume=0.3
+|soundpitch=0.5
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Shrieker_break1.wav
+|sound2=Sculk_Shrieker_break2.wav
+|sound3=Sculk_Shrieker_break3.wav
+|sound4=Sculk_Shrieker_break4.wav
+|sound5=Sculk_Shrieker_break5.wav
+|sound6=Sculk_Shrieker_break6.wav
+|source=方块
+|description=放置方块
+|typeid=place
+|id=break.sculk_shrieker
+|soundvolume=0.8-1.0
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.wav
+|sound2=Sculk step2.wav
+|sound3=Sculk step3.wav
+|sound4=Sculk step4.wav
+|sound5=Sculk step5.wav
+|sound6=Sculk step6.wav
+|source=方块
+|description=带有摔落伤害时摔落在方块上
+|typeid=fall
+|id=fall.sculk_shrieker
+|soundvolume=0.4
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.wav
+|sound2=Sculk step2.wav
+|sound3=Sculk step3.wav
+|sound4=Sculk step4.wav
+|sound5=Sculk step5.wav
+|sound6=Sculk step6.wav
+|source=方块
+|description=在方块上行走
+|typeid=step
+|id=step.sculk_shrieker
+|soundvolume=0.17
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.wav
+|sound2=Sculk step2.wav
+|sound3=Sculk step3.wav
+|sound4=Sculk step4.wav
+|sound5=Sculk step5.wav
+|sound6=Sculk step6.wav
+|source=方块
+|description=在方块上跳跃
+|typeid=jump
+|id=jump.sculk_shrieker
+|soundvolume=0.12
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.wav
+|sound2=Sculk step2.wav
+|sound3=Sculk step3.wav
+|sound4=Sculk step4.wav
+|sound5=Sculk step5.wav
+|sound6=Sculk step6.wav
+|source=方块
+|description=在方块上着陆
+|typeid=land
+|id=land.sculk_shrieker
+|soundvolume=0.14
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Shrieker_place1.wav
+|sound2=Sculk_Shrieker_place2.wav
+|sound3=Sculk_Shrieker_place3.wav
+|sound4=Sculk_Shrieker_place4.wav
+|sound5=Sculk_Shrieker_place5.wav
+|source=方块
+|description=放置方块（独特音效）
+|typeid=block.sculk_shrieker.place
+|id=place.sculk_shrieker
+|soundvolume
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk_Shrieker_shriek1.wav
+|sound2=Sculk_Shrieker_shriek2.wav
+|sound3=Sculk_Shrieker shriek3.wav
+|sound4=Sculk_Shrieker_shriek4.wav
+|sound5=Sculk_Shrieker_shriek5.wav
+|source=方块
+|description=激活
+|typeid=block.sculk_shrieker.shriek
+|id=shriek.sculk_shrieker
+|soundvolume=2.0
+|soundpitch=0.6-1.0
+|sounddistance=32
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Sculk Shrieker
+|nameid=sculk_shrieker
+|spritetype=block
+|showblocktags=je
+|blocktags={{GameTag|block|sculk_shrieker}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Sculk Shrieker
+|nameid=sculk_shrieker
+|spritetype=block
+|showblocktags=be
+|blocktags={{GameTagBE|block|sculk_shrieker}}
+|foot=1
+}}
+
+=== 方块状态 ===
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+幽匿尖啸体拥有与其相关联的[[方块实体]]，以保存幽匿尖啸体[[方块]]的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2021年10月16日|link={{ytl|w6zLprHHZOk|t=6479}}|[[File:Sculk Shrieker Minecraft Live.gif|32px]] [[Minecraft Live 2021]]的片段中展示了幽匿尖啸体。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19|dev=exp1|[[File:Sculk Shrieker JE1 BE2.gif|32px]] 加入了幽匿尖啸体。
+|幽匿尖啸体可以在多次激活后生成[[监守者]]。}}
+|{{HistoryLine|||dev=22w11a|在常规快照中加入了幽匿尖啸体。
+|由于监守者未加入此快照，幽匿尖啸体的大部分功能均未实现，目前仅具有装饰用途。
+|幽匿尖啸体被带有[[精准采集]]魔咒的工具挖掘时不再掉落自身。}}
+|{{HistoryLine|||dev=22w12a|在常规快照中加入了幽匿尖啸体的功能。
+|由于漏洞，幽匿尖啸体不再能被[[幽匿催发体]]催生出。<ref>{{bug|MC-249437|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=22w13a|修复了上述22w12a的漏洞。
+|现在幽匿尖啸体又可以被精准采集工具开采了。
+|现在只有自然生成的幽匿尖啸体会促使监守者生成，其{{cd|can_summon}}方块状态值为{{cd|true}}。
+|[[File:Sculk Shrieker Inactive JE1 BE1.gif|32px]] {{cd|can_summon}}值为{{cd|false}}时，其顶部纹理会逆时针旋转。}}
+|{{HistoryLine|||dev=22w15a|[[File:Sculk Shrieker JE2 BE3.gif|32px]] [[File:Sculk Shrieker Inactive JE2 BE2.gif|32px]] 更改了模型及侧面纹理，将其上半部分的高度减小了1个像素。
+|幽匿尖啸体不再能被[[红石信号]]激活。<ref>{{bug|MC-250200|||WAI}}</ref>}}
+|{{HistoryLine|||dev=22w18a|幽匿尖啸体现在会侦测最近的振动信号，而非之前的1刻内的首个振动信号。}}
+|{{HistoryLine|||dev=22w19a|幽匿尖啸体现在需要激活4次才会生成监守者，此前仅需激活3次。}}
+|{{HistoryLine||1.20|dev=23w14a|幽匿尖啸体现在会在[[含水]]时静音。
+|将幽匿尖啸体加入到了创造模式物品栏中的“红石方块”标签页。}}
+|{{HistoryLine|||dev=23w16a|现在若有振动计划被幽匿尖啸体接收，此振动会在临近全部区块均被加载和计算前留在等待队列中。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.30|dev=1.17.30.22|基岩版测试版文档中出现了幽匿尖啸体。}}
+|{{HistoryLine|||dev=1.17.30.23|[[洞穴与山崖]]内部纹理文件中出现了幽匿尖啸体的纹理。}}
+|{{HistoryLine||1.18.0|exg=vanilla_experiments|dev=1.18.0.22|[[File:Sculk Shrieker BE1.gif|32px]] 加入了幽匿尖啸体。}}
+|{{HistoryLine||1.18.10|exg=wild_update|dev=1.18.10.21|现在幽匿尖啸体属于[[实验性玩法]]中的“{{experiment|wild_update|exg=1}}”部分。}}
+|{{HistoryLine||1.18.30|exg=wild_update|dev=1.18.30.20|现在幽匿尖啸体会被[[幽匿感测体]]激活。
+|现在幽匿尖啸体每次呼啸会触发一个阶段。}}
+|{{HistoryLine|||dev=1.18.30.22|[[File:Sculk Shrieker JE1 BE2.gif|32px]] 更改了幽匿尖啸体的模型以匹配{{el|je}}。
+|现在幽匿尖啸体可由[[幽匿催发体]]生成。}}
+|{{HistoryLine|||dev=1.18.30.28|现在幽匿尖啸体可以在[[深暗之域]]生物群系中自然生成。
+|幽匿尖啸体被带有精准采集魔咒的工具挖掘时不再掉落自身。}}
+|{{HistoryLine|||dev=1.18.30.32|现在幽匿尖啸体会在第四阶段生成[[监守者]]。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|幽匿尖啸体不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.19.0.24|现在只有自然生成的幽匿尖啸体会促使监守者生成，其{{cd|can_summon}}方块状态值为{{cd|true}}。
+|[[File:Sculk Shrieker Inactive JE1 BE1.gif|32px]] {{cd|can_summon}}值为{{cd|false}}时，其顶部纹理会逆时针旋转。
+|幽匿尖啸体不再能被[[红石信号]]激活。
+|现在幽匿尖啸体又可以被精准采集工具开采了。}}
+|{{HistoryLine|||dev=1.19.0.26|[[File:Sculk Shrieker JE2 BE3.gif|32px]] [[File:Sculk Shrieker Inactive JE2 BE2.gif|32px]] 更改了模型及侧面纹理，将其上半部分的高度减小了1个像素。}}
+|{{HistoryLine||1.19.20|dev=1.19.20.20|幽匿尖啸体现在会侦测最近的振动信号，而非之前的1刻内的首个振动信号。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.23|幽匿尖啸体激活音效的衰减距离更改为32格。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|幽匿尖啸体现在会在含水时静音。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|幽匿尖啸体的爆炸抗性由1.8改为3。}}
+}}
+
+== 你知道吗 ==
+* 幽匿尖啸体的设计灵感源自{{w|喉|人类的喉部}}。<ref>{{ytl|w6zLprHHZOk|Minecraft Live 2021 @ 1:52:36|Minecraft|October 15, 2021|t=6756s}}</ref>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|natural blocks|redstone blocks}}
+
+[[de:Sculk-Kreischer]]
+[[en:Sculk Shrieker]]
+[[es:Chillador de sculk]]
+[[fr:Hurleur sculk]]
+[[ja:スカルクシュリーカー]]
+[[ko:스컬크 비명체]]
+[[pl:Sculkowe wrzeszczydło]]
+[[pt:Emissor de Sculk]]
+[[ru:Скалковый крикун]]

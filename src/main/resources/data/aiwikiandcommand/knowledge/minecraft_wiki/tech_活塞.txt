@@ -1,0 +1,432 @@
+# 页面: 活塞
+# 来源: https://zh.minecraft.wiki/w/%E6%B4%BB%E5%A1%9E
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 方块, 有未知版本的History模板的页面/基岩版, 红石, 红石机制, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:30:11
+# 原始 Wikitext 内容:
+
+{{about|一种机械元件方块|活塞或黏性活塞工作时创建出的正在移动的方块|移动的活塞}}
+{{Infobox block
+|title=活塞
+|group1=收回的活塞
+|1-1=Piston.png
+|1-2=Piston BE.png
+|group2=伸出的活塞
+|2-1=Piston (extend).png
+|2-2=Piston (extend) BE.png
+|group3=收回的黏性活塞
+|3-1=Sticky Piston.png
+|3-2=Sticky Piston BE.png
+|group4=伸出的黏性活塞
+|4-1=Sticky Piston (extend).png
+|4-2=Sticky Piston (extend) BE.png
+|*-1caption={{el|je}}
+|*-2caption={{el|be}}
+|invimage=Piston
+|invimage2=Sticky Piston
+|suffocating='''收回时'''：是<br>'''伸出时'''：否
+|push-reaction='''收回时'''：可推动，可拉动<br>'''伸出时'''：不可推动，不可拉动
+|block-id=活塞;黏性活塞;活塞头
+|item-id=活塞;黏性活塞
+|block-id-raw='''[[Java版]]'''：<br>
+'''活塞'''：piston<br>
+'''黏性活塞'''：sticky_piston<br>
+'''活塞头'''：piston_head<br>
+'''[[基岩版]]'''：<br>
+'''活塞'''：piston<br>
+'''黏性活塞'''：sticky_piston<br>
+'''活塞头'''：piston_arm_collision<br>
+'''黏性活塞头'''：sticky_piston_arm_collision
+}}
+{{relevant tutorial|活塞使用|活塞电路|零刻活塞}}
+{{quote|当收到红石信号时，活塞可以推动最多12个方块。信号输入时，活塞会在不到一秒的时间内伸出活塞臂。任何挡道的实体都会被它推动，包括玩家，而且，如果你在活塞前端放一块黏液块，它们就会被弹走。弹弹弹！|[[Duncan Geere]]<ref>{{article|block-week-piston|Block of the Week: Piston|October 13, 2017}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''活塞（Piston）'''和'''黏性活塞（Sticky Piston）'''是一种被[[红石信号]]激活时可以推动大多数[[方块]]和[[实体]]的[[红石元件]]方块，并在过程中产生[[移动方块结构]]。其中黏性活塞在收回时会拉动方块，活塞在收回时不会拉动方块。
+
+'''活塞头（Piston Head）'''，又称'''活塞臂（Piston Arm）'''，是活塞保持伸出时存在于其面向方向的方块。
+
+== 生成 ==
+普通的活塞不会生成在世界中。
+
+=== 自然生成 ===
+[[丛林神庙]]中会自然生成3个黏性活塞。
+
+[[远古城市]]中心的红石地下室里会自然生成5个黏性活塞。
+
+{{Block distribution|黏性活塞,活塞头}}
+
+== 获取 ==
+{{in|je}}活塞头没有对应的[[方块物品]]。{{in|be}}使用{{cmd|give @s pistonarmcollision}}和{{cmd|give @s stickypistonarmcollision}}可分别获得活塞头和黏性活塞头的方块物品。
+
+=== 合成 ===
+{{Crafting
+  |head=1
+  |A1=Any Planks
+  |B1=Any Planks
+  |C1=Any Planks
+  |A2=Cobblestone
+  |B2=Iron Ingot
+  |C2=Cobblestone
+  |A3=Cobblestone
+  |B3=Redstone Dust
+  |C3=Cobblestone
+  |Output=Piston
+  |type=Redstone
+}}
+{{Crafting
+  |B2=Slimeball
+  |B3=Piston
+  |Output=Sticky Piston
+  |type=Redstone
+  |foot=1
+}}
+
+== 破坏 ==
+挖掘活塞、黏性活塞和活塞头<ref>{{bug|MC-171370||活塞头用镐破坏的速度比用斧头破坏得更快|WAI}}</ref>的合适工具是镐。
+
+{{Breaking table|活塞,黏性活塞,活塞头}}
+
+活塞和黏性活塞被破坏后会掉落自身，其前方的活塞头（若有）也会立即被破坏。
+
+活塞头被破坏后不会掉落任何物品，其后方的活塞也会立即被破坏。
+
+== 用途 ==
+{{see also|Tutorial:活塞使用{{!}}利用活塞|Tutorial:活塞电路{{!}}活塞电路}}
+活塞在被放置时永远朝向玩家。附着性方块（比如拉杆）可以放在活塞或黏性活塞上{{only|je|for=，但不可以放在激活的活塞侧面}}。
+
+当活塞被激活时，活塞的木质表面（活塞头）会在[[#启动延迟|启动延迟]]后尝试伸出，并移动在其前方的方块；当活塞被取消激活时，活塞头会被收回。如果是黏性活塞，活塞头被收回时也会尝试将前方的方块拉回。
+
+虽然黏性活塞在收回时会拉动方块，静止的黏性活塞或黏性活塞头上的方块不会被黏住。
+
+在活塞推出和拉回时会发出声音，以活塞为中心31×31×31的区域内都能听到。
+
+=== 活塞头 ===
+当活塞头的后方接收到{{only|je|for=[[PP更新]]}}或{{only|be|for=更新}}时，它会检查自己的后方是否正确连接到了一个对应的活塞上。若没有连接到一个活塞或是活塞的方向与活塞头不对应，那么活塞头会被立刻破坏。
+
+活塞头没有其他行为，其存在对活塞的收回行为运作不是必须的，如无头黏性活塞可以拉回面向方向2格处的方块。
+
+{{in|je}}活塞头有两种模型，完整的活塞头和短活塞头，后者在活塞未完全推出时的[[移动的活塞]]渲染时使用。{{in|je}}活塞头具有方块状态<code>short</code>用于控制是否为短活塞头模型，在正常运作的活塞中、包括移动的活塞中永远为<code>false</code>，只用于在[[调试模式]]中展示短活塞头模型。
+
+{{in|je}}活塞头使用一个方块状态来定义它是一个普通活塞头还是一个黏性活塞头。{{in|be}}两种活塞头使用不同的方块ID定义。
+
+=== 红石元件 ===
+[[File:PistonTrick.png|缩略图|{{in|je}}用红石线激活活塞。下面的活塞被[[半连接性]]激活]]
+
+==== 激活 ====
+活塞是[[红石元件#机械元件|机械元件]]，可被下列形式激活：
+* 除活塞面向的毗邻的开启的'''[[红石元件#电源|电源]]'''（例外：[[红石火把]]不会激活其所附着的活塞，[[侦测器]]只会激活指向的活塞）。
+* 除活塞面向的毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 除活塞面向的毗邻的指向活塞且激活的[[红石中继器]]、[[红石比较器]]或[[红石粉]]（包括活塞上方的红石粉）；毗邻但未指向活塞的红石粉{{only|je|for=不会激活活塞}}或{{only|be|for=会主动指向活塞并激活活塞}}。
+
+{{in|je}}活塞还能通过[[半连接性]]激活。若以上所述的途径对于活塞正上方的方格（不需要实际存在红石元件，[[空气]]方块或非红石导体均可）成立，则活塞可以被激活。该激活方式可能使活塞进入[[BUD]]状态，详见[[Tutorial:半连接性]]。
+
+{{in|be}}在同一红石刻内，电容器更新阶段前存在，但在电容器更新阶段被取消的信号无法激活活塞。
+
+活塞不是红石导体，不可充能。
+
+==== 行为 ====
+活塞被激活或取消激活后会在启动延迟后推出或拉回。{{in|be}}活塞正在推拉时不响应输入变化。
+
+{{in|je}}活塞在被放置和受到[[NC更新]]时检测红石信号，检测到当前状态与信号不符方可计划推出或拉回的方块事件，计划推出还需[[移动的活塞#创建规则|可创建移动方块结构]]；执行方块事件时重新检查信号和移动方块结构（若尝试推出且无法创建移动方块结构则失败）。由于判断是否计划方块事件时以当前状态为标准，活塞在推出过程中能够忽略部分下降沿而短暂进入[[BUD]]状态；能否创建移动方块结构的条件改变时也可使活塞形成[[Tutorial:方块更新感应器#满足活塞推出条件但并不给活塞更新信号|满足推出条件但不给更新信号的BUD]]。方块事件详细的执行过程见[[移动的活塞#Java版]]（不限于移动方块结构的创建，也包括活塞施加于自身和被移动方块的动作）。
+
+=== 启动延迟 ===
+活塞被激活或取消激活后不会立刻推出或拉回，从输入变化到活塞真正开始推拉的时延就是启动延迟。
+
+{{in|be}}启动延迟固定为{{convert|2}}，即活塞输入变化后{{convert|2}}后开始推出或拉回。
+
+{{in|je}}启动延迟取决于活塞输入变化发生在游戏计算的什么阶段：
+* 若活塞输入变化在计算[[计划刻]]、区块刻、方块事件时产生（'''早于或位于方块事件阶段'''），那么活塞的方块事件会在这一游戏刻的方块事件阶段被执行。<br>此时启动延迟为{{convert|0}}，即“同刻启动”。
+* 若活塞输入变化在计算实体、方块实体、玩家运算时产生（'''晚于方块事件阶段'''），活塞的方块事件需要等候下一刻的方块事件阶段再被执行。<br>此时启动延迟为{{convert|1}}，即“下一刻启动”。
+
+=== 创建移动方块结构 ===
+{{main|移动的活塞}}
+工作的活塞会让方块被推动或拉动，从而使这些方块及其关联的方块跟随活塞的推拉而移动，此过程会创建出[[移动方块结构]]。通常情况下，移动方块结构会在{{convert|2}}后到位。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Piston out.ogg
+|subtitle={{tp|subtitles.block.piston.move}}
+|source={{tp|soundCategory.block}}
+|description=活塞伸出
+|id=block.piston.extend
+|translationkey=subtitles.block.piston.move
+|distance=16}}
+{{Sound table
+|sound=Piston in.ogg
+|subtitle={{tp|subtitles.block.piston.move}}
+|source={{tp|soundCategory.block}}
+|description=活塞缩回
+|id=block.piston.contract
+|translationkey=subtitles.block.piston.move
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=tile.piston.out.wav
+|source=方块
+|description=活塞伸出
+|id=tile.piston.out
+|typeid=piston.out
+|soundvolume=0.5
+|soundpitch=0.6-0.75
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=tile.piston.in.wav
+|source=方块
+|description=活塞缩回
+|id=tile.piston.in
+|typeid=piston.in
+|soundvolume=0.5
+|soundpitch=0.6-0.75
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Piston
+|spritetype=block
+|nameid=piston
+|showblocktags=je
+|rowspan=3
+|blocktags={{GameTag|blocks|piston,sticky_piston,piston_head}}
+}}
+{{ID table
+|Sticky Piston
+|spritetype=block
+|nameid=sticky_piston}}
+{{ID table
+|Piston Head
+|spritetype=block
+|nameid=piston_head
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|showaliasids=y
+|generatetranslationkeys=bedrock
+|Piston
+|spritetype=block
+|nameid=piston
+|showblocktags=be
+|blocktags={{GameTagBE|block|piston}}
+}}
+{{ID table
+|Sticky Piston
+|spritetype=block
+|nameid=sticky_piston
+|blocktags={{GameTagBE|block|sticky_piston}}
+}}
+{{ID table
+|Piston Head
+|spritetype=block
+|nameid=piston_arm_collision
+|aliasid=pistonArmCollision
+|blocktags={{GameTagBE|block|piston_arm_collision}}
+}}
+{{ID table
+|Piston Head
+|displayname=黏性活塞头
+|spritetype=block
+|nameid=sticky_piston_arm_collision
+|aliasid=stickyPistonArmCollision
+|blocktags={{GameTagBE|block|sticky_piston_arm_collision}}
+|foot=1
+}}
+{{ID table
+|Moving Piston
+|displayname=活塞方块实体
+|spritetype=block
+|nameid=PistonArm
+|foot=1
+}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table|活塞,黏性活塞,活塞头|活塞,黏性活塞,活塞头,黏性活塞头}}
+
+=== 方块实体 ===
+{{see also|基岩版存档格式/方块实体格式}}
+{{exclusive|bedrock|section=1}}
+
+== 成就 ==
+{{load achievements|inception}}
+
+== 视频 ==
+{{bv|BV1Gt411u7xH}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年5月21日|link=wordofnotch:110762705|[[Notch]]表示有兴趣添加当接收到来自线路的脉冲时可以拉动和推动其他方块的方块; 他把这种方块分别称为“Pulley1”与“Pulley2”。“Pulley1”会拉动一个方块，而“Pulley2”则会推动一个方块。}}
+|{{HistoryLine||2011年3月28日|link=none|[[File:Piston normal mod.png|32px]] [[File:Piston normal extended mod.png|32px]] [[File:Sticky piston mod.png|32px]] [[File:Piston sticky extended mod.png|32px]] 最初的活塞是由Hippoplatimus发布在[[Minecraft Forum|Minecraft官方论坛]]上的一个Mod。<ref>http://www.minecraftforum.net/viewtopic.php?t=247686&f=1032</ref>这个Mod的活塞源代码随后被交到了[[Jeb]]手中，Jeb随后将其加入到了原版[[Minecraft]]中；Hippoplatimus位列游戏鸣谢名单中的“补充程序员（Additional Programming）”一栏，这一栏用于感谢作品得以被加入原版Minecraft的Mod制作者。
+|另一位用户DiEvAl也在私下提交过代码，他提出了利用[[方块实体]]追踪移动的方块的想法。<ref>http://www.reddit.com/r/Minecraft/comments/hvkmo/attribution_of_the_piston_mod_in_vanilla_minecraft/</ref><ref>http://imageshack.us/photo/my-images/51/jebf.jpg/</ref>
+|然而，由于当时Jeb正忙于[[携带版]]的开发，活塞并没有在Beta 1.5和Beta 1.6被加入游戏。}}
+|{{HistoryLine||2011年6月7日|link={{tweet|jeb|78167135435759617}}||[[File:Piston (pre-release).png|32px]] [[Jeb]]在动态中发布了一张开发中的活塞的图片。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.7|[[File:Piston (U) JE1.png|32px]] [[File:Piston (N) JE1 BE1.png|32px]] [[File:Piston (E) JE1 BE1.png|32px]] [[File:Piston (S) JE1 BE1.png|32px]] [[File:Piston (W) JE1 BE1.png|32px]] [[File:Piston (D) JE1 BE1.png|32px]]<br>[[File:Sticky Piston (U) JE1.png|32px]] [[File:Sticky Piston (N) JE1 BE1.png|32px]] [[File:Sticky Piston (E) JE1 BE1.png|32px]] [[File:Sticky Piston (S) JE1 BE1.png|32px]] [[File:Sticky Piston (W) JE1 BE1.png|32px]] [[File:Sticky Piston (D) JE1 BE1.png|32px]]<br>[[File:Headless Piston (U) JE1 BE1.png|32px]] [[File:Headless Piston (N) JE1 BE1.png|32px]] [[File:Headless Piston (E) JE1 BE1.png|32px]] [[File:Headless Piston (S) JE1 BE1.png|32px]] [[File:Headless Piston (W) JE1 BE1.png|32px]] [[File:Headless Piston (D) JE1 BE1.png|32px]]<br>[[File:Piston Head (U) JE1.png|32px]] [[File:Piston Head (N) JE1.png|32px]] [[File:Piston Head (E) JE1.png|32px]] [[File:Piston Head (S) JE1.png|32px]] [[File:Piston Head (W) JE1.png|32px]] [[File:Piston Head (D) JE1.png|32px]]<br>[[File:Sticky Piston Head (U) JE1.png|32px]] [[File:Sticky Piston Head (N) JE1.png|32px]] [[File:Sticky Piston Head (E) JE1.png|32px]] [[File:Sticky Piston Head (S) JE1.png|32px]] [[File:Sticky Piston Head (W) JE1.png|32px]] [[File:Sticky Piston Head (D) JE1.png|32px]]<br> 加入了活塞、黏性活塞和对应活塞头。
+|[[File:Piston (no direction) JE1.png|32px]] [[File:Sticky_Piston_(no_direction)_JE1.png|32px]] 六面活塞作为活塞的极端数据值变种而存在。}}
+|{{HistoryLine||1.7_01|黏性活塞不再会在它们缩回时黏住方块。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.2.4|[[云杉木板]]、[[白桦木板]]以及[[丛林木板]]现在可以用来合成活塞。}}
+|{{HistoryLine||1.2.5|活塞头方块现在可以通过选取方块键获得。}}
+|{{HistoryLine||1.3.1|dev=12w16a|活塞头方块不再可以通过选取方块键获得。}}
+|{{HistoryLine|||dev=12w22a|[[黏性活塞]]现在可以在[[丛林神庙]]中自然生成，用于[[陷阱#黏性活塞陷阱|弓箭陷阱]]和[[Tutorial:暗门#活塞的隐蔽门|隐藏宝藏]]。}}
+|{{HistoryLine|||dev=12w27a|改进了活塞来使它们不那么容易出错，这也代表它们会更新得更慢一些。同时这也更改了活塞的工作原理，使得[[玩家]]可能需要调整其[[中继器]]的延迟以及其他类似的红石装置。由于这次改动，活塞现在需要2[[红石刻]]（4[[游戏刻]]）的时间来伸缩，但它们仍然会瞬间缩回。}}
+|{{HistoryLine||1.7.2|dev=13w37a|活塞头（34号方块）从{{cmd|give}}命令中移除。}}
+|{{HistoryLine|||dev=1.7.1|[[金合欢木板]]与[[深色橡木木板]]现在可以用来合成活塞。}}
+|{{HistoryLine||1.8|dev=14w17a|[[File:Piston (U) JE2 BE1.png|32px]] [[File:Piston (D) JE1 BE1.png|32px]] [[File:Sticky Piston (U) JE2 BE1.png|32px]] [[File:Sticky Piston (D) JE1 BE1.png|32px]] [[File:Headless Piston (U) JE2.png|32px]] [[File:Headless Piston (D) JE1 BE1.png|32px]] [[File:Piston Head (U) JE2.png|32px]] [[File:Piston Head (D) JE1.png|32px]] [[File:Sticky Piston Head (U) JE2.png|32px]] [[File:Sticky Piston Head (D) JE1.png|32px]] 更改了活塞及相关方块正面朝上和朝下的纹理。}}
+|{{HistoryLine|||dev=14w26a|活塞现在使用方块状态，取代了之前的数据值。因此六面活塞已被移除。}}
+|{{HistoryLine|||dev=14w29a|[[File:Short Piston Head (U) JE1.png|32px]] [[File:Short Piston Head (N) JE1.png|32px]] [[File:Short Piston Head (E) JE1.png|32px]] [[File:Short Piston Head (S) JE1.png|32px]] [[File:Short Piston Head (W) JE1.png|32px]] [[File:Short Piston Head (D) JE1.png|32px]]<br>[[File:Short Sticky Piston Head (U) JE1.png|32px]] [[File:Short Sticky Piston Head (N) JE1.png|32px]] [[File:Short Sticky Piston Head (E) JE1.png|32px]] [[File:Short Sticky Piston Head (S) JE1.png|32px]] [[File:Short Sticky Piston Head (W) JE1.png|32px]] [[File:Short Sticky Piston Head (D) JE1.png|32px]]<br>为活塞头的方块状态加入了<code>short{{=}}true/false</code>，为<code>true</code>时使用短活塞头的模型，此方块状态仅用于在[[调试模式]]中展示短活塞头。}}
+|{{HistoryLine||1.9|dev=15w49a|没有伸长的活塞、面朝下的活塞和面朝上的活塞头现在[[方块支撑形状]]上表面完整，就像倒置的[[楼梯]]和上半顶部的[[台阶]]。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，黏性活塞的数字ID为29。
+|在[[扁平化]]之前，活塞的数字ID为33。
+|在[[扁平化]]之前，活塞头的数字ID为34。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Piston (U) JE3.png|32px]] [[File:Piston (N) JE2.png|32px]] [[File:Piston (E) JE2.png|32px]] [[File:Piston (S) JE2.png|32px]] [[File:Piston (W) JE2.png|32px]] [[File:Piston (D) JE3.png|32px]]<br>[[File:Sticky Piston (U) JE3.png|32px]] [[File:Sticky Piston (N) JE2.png|32px]] [[File:Sticky Piston (E) JE2.png|32px]] [[File:Sticky Piston (S) JE2.png|32px]] [[File:Sticky Piston (W) JE2.png|32px]] [[File:Sticky Piston (D) JE3.png|32px]]<br>[[File:Headless Piston (U) JE3.png|32px]] [[File:Headless Piston (N) JE2.png|32px]] [[File:Headless Piston (E) JE2.png|32px]] [[File:Headless Piston (S) JE2.png|32px]] [[File:Headless Piston (W) JE2.png|32px]] [[File:Headless Piston (D) JE3.png|32px]]<br>[[File:Piston Head (U) JE3.png|32px]] [[File:Piston Head (N) JE2.png|32px]] [[File:Piston Head (E) JE2.png|32px]] [[File:Piston Head (S) JE2.png|32px]] [[File:Piston Head (W) JE2.png|32px]] [[File:Piston Head (D) JE3.png|32px]]<br>[[File:Sticky Piston Head (U) JE3.png|32px]] [[File:Sticky Piston Head (N) JE2.png|32px]] [[File:Sticky Piston Head (E) JE2.png|32px]] [[File:Sticky Piston Head (S) JE2.png|32px]] [[File:Sticky Piston Head (W) JE2.png|32px]] [[File:Sticky Piston Head (D) JE3.png|32px]]<br>[[File:Short Piston Head (U) JE2.png|32px]] [[File:Short Piston Head (N) JE2.png|32px]] [[File:Short Piston Head (E) JE2.png|32px]] [[File:Short Piston Head (S) JE2.png|32px]] [[File:Short Piston Head (W) JE2.png|32px]] [[File:Short Piston Head (D) JE2.png|32px]]<br>[[File:Short Sticky Piston Head (U) JE2.png|32px]] [[File:Short Sticky Piston Head (N) JE2.png|32px]] [[File:Short Sticky Piston Head (E) JE2.png|32px]] [[File:Short Sticky Piston Head (S) JE2.png|32px]] [[File:Short Sticky Piston Head (W) JE2.png|32px]] [[File:Short Sticky Piston Head (D) JE2.png|32px]]<br>更改了活塞和黏性活塞的纹理。}}
+|{{HistoryLine|||dev=18w44a|收回的活塞现在会阻挡[[光照]]传播。}}
+|{{HistoryLine|||dev=18w46a|伸出的活塞现在允许光透过某些面。}}
+|{{HistoryLine||1.16|dev=20w06a|活塞的硬度由0.5增加到了1.5。
+|[[镐]]现在可以更快地破坏活塞。
+|放置在活塞背部的红石部件不再会在活塞收回时掉落。
+|[[绯红木板]]和[[诡异木板]]现在可以用来合成活塞。}}
+|{{HistoryLine||1.17|dev=20w45a|被活塞破坏的方块现在会产生[[粒子]]。}}
+|{{HistoryLine||1.19|dev=22w11a|[[红树木板]]现在可以用来合成活塞。}}
+|{{HistoryLine|||dev=22w13a|现在黏性活塞和活塞头会生成在[[远古城市]]中心的地下室内。}}
+|{{HistoryLine|||dev=22w17a|[[File:Piston (U) JE4.png|32px]] [[File:Sticky Piston (U) JE4.png|32px]] 更改了活塞和黏性活塞的纹理，使得活塞头的橡木木板部分颜色与实际一致。<ref>{{bug|MC-248841|||WAI}}</ref>}}
+|{{HistoryLine||1.21|dev=24w20a|{{Sound||Piston_extend_JE2.ogg|Piston_contract_JE2.ogg}}更改了活塞伸出和收缩的音效。}}
+|{{HistoryLine|||dev=24w21a|回退了24w20a的音效更改，并降低了原音效的音量和衰减距离。}}
+|{{HistoryLine||1.21.5|dev=25w10a|现在被活塞破坏的方块会播放其破坏音效。<ref>{{bug|MC-203550|||Fixed}}</ref>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.15.0|dev=build 1|[[File:Piston (U) JE2 BE1.png|32px]] [[File:Sticky Piston (U) JE2 BE1.png|32px]] 加入了活塞和黏性活塞，它们拥有独有的动画和推动方块实体的能力。
+|[[File:Weird Piston.png|32px]] 存在数据值不在正常范围内的“六面”活塞，但数据值为6的活塞无法激活。这种活塞推动的每个方块间会隔1格。}}
+|{{HistoryLine||0.16.0|dev=build 1|数据值为6的活塞可以激活了，但数据值为7的活塞无法激活了。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.7|“六面”活塞无法激活了。}}
+|{{HistoryLine|Bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|[[File:Piston (S) BE2.png|32px]] [[File: Sticky Piston (S) BE2.png|32px]] [[File:Piston (S) (facing NWU) BE2.png|32px]] [[File:Sticky Piston (S) (facing NWU) BE2.png|32px]] 由于漏洞，特定朝向的活塞和黏性活塞的上侧面与下侧面纹理损坏。<ref name="MCPE-38053">{{bug|MCPE-38053|||Fixed}}</ref>}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Piston (U) BE2.png|32px]] [[File:Sticky Piston (U) BE2.png|32px]] [[File:Piston (S) BE3.png|32px]] [[File:Sticky Piston (S) BE3.png|32px]] [[File:Piston (S) (facing NWU) BE3.png|32px]] [[File:Sticky Piston (S) (facing NWU) BE3.png|32px]] 更改了活塞的纹理。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.1|移除了“六面”活塞。
+|特定朝向的活塞和黏性活塞的上侧面与下侧面纹理现在会正确地显示。<ref name="MCPE-38053"/>}}
+|{{HistoryLine|||dev=?|黏性活塞头现在是独立的[[方块]]，分离于普通的活塞头，不再由方块状态决定。命名空间ID现在是<code>stickypistonarmcollision</code>，数字ID为472。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.26|活塞头、黏性活塞头的ID分别由{{cd|pistonarmcollision}}、{{cd|stickypistonarmcollision}}更改为{{cd|piston_arm_collision}}、{{cd|sticky_piston_arm_collision}}。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.26|现在黏性活塞可以生成于[[远古城市]]中心的地下室。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.20|现在活塞头与黏性活塞头推出和收回的动画更加流畅。<ref>{{bug|MCPE-155987|||Fixed}}</ref>
+|现在活塞推动方块的动画更加流畅。<ref>{{bug|MCPE-146597|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.51|方块在被活塞推动时被破坏后不再会重新出现。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|活塞和黏性活塞的硬度由0.5改为1.5。
+|活塞的爆炸抗性由0.5改为1.5。}}
+|{{HistoryLine|||dev=1.20.30.20|[[镐]]现在可以更快地破坏活塞。}}
+|{{HistoryLine||26.10|dev=26.10.24|黏性活塞头的英文名称由“Sticky Sticky Piston Arm Collision”更改为“Sticky Piston Arm Collision”。}}
+
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU3|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Piston (U) JE1.png|32px]] [[File:Sticky Piston (U) JE1.png|32px]] 加入了活塞和黏性活塞。}}
+|{{HistoryLine||xbox=TU14|ps3=1.04|psvita=1.00|ps4=1.00|活塞现在花费双倍的时间（2红石刻或4[[游戏刻]]）来延长，但它们仍然立即收缩。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Piston (U) BE2.png|32px]] [[File:Sticky Piston (U) BE2.png|32px]] 更改了活塞的纹理。}}
+
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|[[File:Piston (U) JE2 BE1.png|32px]] [[File:Sticky Piston (U) JE2 BE1.png|32px]] 加入了活塞和黏性活塞。}}
+}}
+
+== 你知道吗 ==
+* Mojang曾经声称活塞只能推动12个方块的限制不会被改动，因为“现有的限制是有意设计的”。<ref>
+{{cite
+|url=https://feedback.minecraft.net/hc/en-us/articles/360005029872-Previously-Considered-Suggestions
+|title=Piston Push Limits (and increases). The current limitations are by design.
+|website=Minecraft Feedback
+|date=January 3, 2019}}
+</ref>
+* {{in|je}}当活塞托举着一个受重力影响的方块（例如[[沙子]]）并不断迅速地伸缩，该方块很有可能最终掉落为[[物品]]。因为该方块所对应的实体要变回对应方块时，活塞臂刚好伸出了。不过，[[沙砾]]不会掉落为[[燧石]]。
+* {{in|je}}如果通过短脉冲充能的黏性活塞直接推动含水方块，那么含水方块在被推动到新地点后还会保持含水。
+* 生物可以在活塞头方块中生成。
+* [[地毯]]和[[覆地苔藓]]可以放在活塞头上，如果用{{cmd|setblock}}替换活塞头的话，地毯还会留在原位。
+* {{in|be}}使用命令放置的活塞头是不可见且是没有碰撞箱的，并且方块也不能覆盖活塞头。
+* 活塞头在基岩版中与Java版形状略有不同。
+* 如果一个活塞在世界的顶部，并且面向上，或者在底部且面向下，它就不能伸出。
+* 一个活塞不能推动另一个被激活的活塞。
+* [[水]]和[[熔岩]]在常规状态下不能被破坏，但是{{in|be}}通过活塞推动可以破坏水或熔岩并使其产生方块被破坏的粒子。
+* {{in|je}}如果一个生物的头部陷入一个向下伸出的活塞头，那么该活塞在收回时会给该生物累积少许下落高度，同时使得该生物短暂处于悬空状态。
+
+== 画廊 ==
+<gallery>
+File:OldPiston.png|在活塞的起源Mod中活塞的样子
+File:Pistonscreen.png|第一张活塞的截图，注意在头上还有带子
+File:PistonParadox.png|Notch对于活塞柄部（柄部在伸出时的长度为一整个方块长）如何缩回活塞基座的解释（基座内纵深即一个方块长''减去''活塞面的宽）<ref>{{tweet|notch|83513677654929408}}</ref>
+File:Pistongates.png|完全由活塞与[[红石中继器]]构成的基础逻辑门。从左上角顺时针看分别为：与门，或门，异或门，非门
+File:Pistonslowclockgenerator.png|由红石线、红石火把、红石中继器与活塞组成的长周期时钟
+File:Sticky Piston Mechanic.jpg|Beta 1.7中的黏性活塞
+File:Piston Waterflow control.png|活塞控制水流的例子
+File:Glassp.gif|黏性活塞与[[玻璃板]]配合的例子
+File:Sticky_piston_rails.gif|黏性活塞与铁轨配合的例子
+File:Sticky_piston_fence.gif|黏性活塞与栅栏配合的例子
+File:PistonHeadInv.png|旧版本中一个在物品栏里的活塞头
+File:Piston Light.png|光从伸出的活塞中透出
+File:Pocket Edition Pistons.jpg|{{in|pe|nc=1|nocat=1}}连接至活塞的红石
+</gallery>
+
+=== 艺术作品 ===
+<gallery>
+File:Piston Artwork.png|活塞的官方艺术作品，描绘了一个连接到[[拉杆]]的活塞
+</gallery>
+
+=== 渲染图 ===
+==== Java版 ====
+<gallery>
+File:Piston.png|收回的活塞
+File:Sticky Piston.png|收回的黏性活塞
+File:Piston (extend).png|伸出的活塞
+File:Sticky Piston (extend).png|伸出的黏性活塞
+File:Headless Piston.png|无头活塞
+File:Piston Head.png|活塞头
+File:Sticky Piston Head.png|黏性活塞头
+</gallery>
+
+==== 基岩版 ====
+<gallery>
+File:Piston BE.png|收回的活塞
+File:Sticky Piston BE.png|收回的黏性活塞
+File:Piston (extend) BE.png|伸出的活塞
+File:Sticky Piston (extend) BE.png|伸出的黏性活塞
+File:Headless Piston BE.png|无头活塞
+File:Piston Head BE.png|活塞头
+File:Sticky Piston Head BE.png|黏性活塞头
+</gallery>
+
+== 参见 ==
+* [[黏液球]]
+* [[红石粉]]
+* [[红石电路]]
+* [[Tutorial:无头活塞]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:红石机制]]
+
+[[de:Kolben]]
+[[en:Piston]]
+[[es:Pistón]]
+[[fr:Piston]]
+[[hu:Dugattyú]]
+[[it:Pistone]]
+[[ja:ピストン]]
+[[ko:피스톤]]
+[[nl:Zuiger]]
+[[pl:Tłok]]
+[[pt:Pistão]]
+[[ru:Поршень]]
+[[th:ลูกสูบ]]
+[[uk:Поршень]]

@@ -1,0 +1,424 @@
+# 页面: 守卫者
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%88%E5%8D%AB%E8%80%85
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 基岩版独有信息, 实体, 敌对生物, 水生生物
+# 抓取时间: 2026-07-14 17:25:10
+# 原始 Wikitext 内容:
+
+{{about|普通守卫者|体型更大的灰色变种|远古守卫者|Minecraft Dungeons中的同名生物|Minecraft Dungeons:守卫者}}
+{{redirect|守卫|}}
+{{tr|{{distinguish|监守者}}|{{nowrap|}}}}
+{{Infobox entity
+|title= 守卫者
+|image=Guardian.gif
+|imagesize=280px
+|invimage=Guardian Spawn Egg
+|health={{hp|30}}
+|behavior=敌对生物
+|classification=水生生物
+|damage=
+'''直接伤害（激光）{{only|je|short=1}}：'''<br>{{AutoDmg|6}}<br>
+'''直接伤害（激光）{{only|be|short=1}}：'''<br>{{AutoDmg|5}}<br>
+'''魔法（激光）：'''<br>{{AutoDmg|1|d3=4.5}}<br>
+'''魔法（尖-{}-刺）{{only|je|short=1}}：'''<br>{{AutoDmg|2}}<br>
+'''魔法（尖-{}-刺）{{only|be|short=1}}：'''<br>{{AutoDmg|d1=2|d2=2|d3=2}}
+|spawn={{EnvLink|Ocean Monument}}
+|size= 高度：0.85格<br>宽度：0.85格
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{relevant tutorial|守卫者陷阱}}
+{{quote|这些家伙可能会很棘手，但那布满尖-{}-刺的皮肤包裹着的正是其美味的内在。守卫者死后，有40%的概率掉落一条完好无损的生鱼。|Emily Richardson<ref>{{article|meet-guardian|Meet the Guardian|September 25, 2017}}</ref>||Emily Richardson Mojang avatar.png}}
+
+'''守卫者（Guardian）'''是一种生成于[[海底神殿]]的敌对生物。
+
+== 生成 ==
+
+守卫者只在[[海底神殿]]的结构范围内，在Y=39（海底神殿地板）到Y=61（比海底神殿顶端高1格）之间生成。
+
+守卫者仅在[[水]]中生成。当一个水方块与其下方方块皆为水方块（静止的水或流动的水均可）并且上方不是红石导体时，守卫者才会在这个水方块生成。
+
+=== Java版 ===
+在封闭性水域/被覆盖的水域（如[[海底神殿]]内部）中，守卫者的自然生成概率会比开放性水域中大。具体的概率是这样的：如果守卫者生成位置所在水方块低于海平面（默认Y=63），且此生成位置与海平面之间、海平面与天空之间无阻碍[[天空光照]]的方块（例如[[树叶]]、[[蜘蛛网]]。特别地，海平面下的[[流体]]不算），那么生成失败的概率高达95%。如果守卫者生成的方块恰好在Y=63或者更高的位置上，且没有任何红石导体阻碍用于生成的水方块，失败的概率也高达95%。也就是说在开放性水域中，守卫者更难生成，使守卫者更集中地生成在海底神殿内部，而外部较为稀少。
+
+=== 基岩版 ===
+{{see also|生成#结构生成}}
+
+{{FakeImage|{{Animate|Ocean monument spawnpoint 1.png; Ocean monument spawnpoint 2.png; Ocean monument spawnpoint 3.png; Ocean monument spawnpoint 4.png|300px}}|基岩版海底神殿守卫者生成点位置示例，金块代表生成点}}
+
+守卫者会在[[海底神殿]]范围内的25个固定地点生成，每次生成2-4只。生成点必须有水，无亮度限制，其空间检测范围为1×1×1，空气检测如果连续使用了伪露天（延伸空气）类则需要保证最上方是真空气类，且在结构生成的结构范围内才可生成。生成点的X坐标为X+2、X+13、X+29、X+45和X+55（X为海底神殿的西侧边界），Z坐标为Z+2、Z+13、Z+29、Z+45和Z+55。守卫者生成于生成点的西北角，如果西北角有下界传送门或末地传送门，生成时会被立刻传送至下界或末地，也就是说其可以生成在传送门之中。守卫者生成总体可以分为两种生成方式。
+# 检测一个水方块其下方需要是一个可生成方块。
+# 检测一个水方块且其下方连续存在一个水方块。则在下方的水中生成，不需要可生成方块，且会检测海底神殿为中心的5×5区块中的“水”，影响其生成。
+
+[[File:Bedrock Edition Guardian spawn process.png|thumb|基岩版守卫者生成流程]]
+守卫者属于硬编码生成。守卫者的生成方式取决于产生硬编码生成的露天生成尝试的点位是否包含多层水。当露天生成尝试的点位上方一格没有水或者上方只有一层水，则只会进行第一种生成方式的尝试；如果露天生成尝试的点位上方具有多层水，则两种生成方式都能生成。注意，在露天生成尝试的点位上方有多层水的情况下，守卫者只会生成在第一个通过两种生成方式之一的点位处。
+
+== 掉落物 ==
+{{see also|Tutorial:守卫者陷阱{{!}}守卫者陷阱}}
+{{DropTable|name=Guardian
+|{{DropLine|name=Prismarine Shard|quantity=0-2|lootingquantity=0-1}}
+|{{DropLine|name=Prismarine Crystals|lootingquantity=0-1|multiplychance=2/5}}
+|{{DropLine|name=Raw Cod|notes=je_not_player,je_not_burn|lootingquantity=0-1|multiplychance=2/5}}
+|{{DropLine|name=Raw Cod|edition=java|notes=player,je_not_burn|lootingquantity=0-1|multiplychance=2/5
+|independent={{DropLine|dropchance=2.5%|lootingchance=1%|multiplychance=60%}}}}
+|{{DropLine|name=Cooked Cod|edition=java|notes=je_not_player,burn|lootingquantity=0-1|multiplychance=2/5}}
+|{{DropLine|name=Cooked Cod|edition=java|notes=player,burn|lootingquantity=0-1|multiplychance=2/5
+|independent={{DropLine|dropchance=2.5%|lootingchance=1%|multiplychance=60%}}}}
+|{{DropLine|name=Raw Salmon|edition=java|notes=player,je_not_burn|dropchance=2.5%|lootingchance=1%|multiplychance=25%}}
+|{{DropLine|name=Cooked Salmon|edition=java|notes=player,burn|dropchance=2.5%|lootingchance=1%|multiplychance=25%}}
+|{{DropLine|name=Pufferfish|edition=java|notes=player|multiplychance=13%|dropchance=2.5%|lootingchance=1%}}
+|{{DropLine|name=Tropical Fish|edition=java|notes=player|dropchance=2.5%|lootingchance=1%|multiplychance=2%}}
+|notes=
+je_not_player.java = 僅當'''不'''被[[玩家]]或玩家馴服的[[狼]]殺死時。
+je_not_burn.java => not_burn_or_fire_aspect
+}}
+
+当被玩家或驯服的狼杀死时，守卫者会掉落{{xp|10}}。
+
+== 行为 ==
+守卫者会在水中游动，会主动攻击约16格激光射程内的[[玩家]]、[[鱿鱼]]、[[发光鱿鱼]]和[[美西螈]]。它们的游泳方式是快速甩动尾巴进行突然的冲刺，并且游泳时它们的尖-{}-刺会收回。守卫者在玩家靠近或受到攻击时逃跑。在不进行攻击或游泳时它们会缓慢下沉，并伸出它们颤抖的尖-{}-刺。
+
+守卫者的眼睛会看向附近的任何玩家，并且始终直视它们正在攻击的目标。{{in|je}}它们的眼睛不会跟随完全没有装备[[盔甲]]的隐身玩家，也不会攻击他们。在[[隐身]]状态下，穿着一件盔甲的玩家也不会被攻击。
+
+静止的守卫者可被水流推动，但游动的守卫者不可以。水平推动守卫者的速度明显大于其他生物被水流推动的速度。
+
+守卫者离开水时会到处扑腾，并发出愤怒的吱吱声。它们在空气中不会窒息，在陆地上可以一直存活下去。在陆地上它们的尖-{}-刺总是伸出的。
+
+=== 生物族群 ===
+{{main|水生生物}}
+
+守卫者是水生生物。{{in|java}}被具有[[穿刺]]魔咒的武器近战攻击，或被具有穿刺魔咒的[[三叉戟]]弹射物命中时会受到额外的伤害。
+
+=== 攻击 ===
+守卫者有2种攻击方式：发射激光和伸出防御性的尖-{}-刺（与[[荆棘]]魔咒类似）。与多数敌对生物不同，守卫者没有追逐行为，不会尝试靠近或远离目标。若目标跑出它们的视线，它们会一直游荡直至目标再次进入视线，然后开始激光充能进行攻击。
+
+守卫者会主动攻击[[玩家]]、[[美西螈]]、[[鱿鱼]]和[[发光鱿鱼]]。除这些生物以外，守卫者并不会使用激光反击攻击它的生物（如铁傀儡），但它的尖-{}-刺仍可对这些攻击者造成伤害。
+
+;激光{{anchor|激光}}
+激光需要几秒钟的充能时间，在充能期间没有任何伤害。正在蓄能的激光会从紫色逐渐变成亮黄色，能量充满后，激光就会突然消失并对目标造成连续两次伤害。守卫者在再次攻击前会游动3秒。如果在激光充能时接近守卫者，充能会被取消，守卫者会退到一个合适的距离后再继续进行攻击。激光不能躲避或使用[[盾牌]]抵挡。激光的最大射程约为15格。若目标跑出激光的射程或守卫者无法看见目标，守卫者会停止充能，不造成任何伤害。
+
+守卫者的激光消失时，会按照顺序先后造成两次伤害：
+* 在简单、普通、困难难度下分别造成{{AutoDmg|1|d3=4.5|join=、|info=}}魔法伤害，不会被护甲值降低。
+* 在简单、普通、困难难度下分别造成{{AutoDmg|6|join=、|info=}}{{only|JE}}/{{AutoDmg|5|join=、|info=}}{{only|BE}}生物伤害，会被护甲值降低。由于[[受击后伤害免疫]]，此攻击伤害会被削减到此次伤害和上次伤害的差值，此差值经过[[盔甲机制|护甲值计算]]后才会对生物造成真正的对应伤害。
+
+以{{el|je}}困难难度下，玩家穿着不带有魔咒的全套钻石盔甲为例：激光消失时，玩家先受到{{hp|4.5}}的魔法伤害，此伤害不被护甲值降低，所以最终伤害为{{hp|4.5}}；之后再受到一次{{hp|9}}点生物攻击伤害，由于受击后伤害免疫，此伤害被削弱到这次伤害与上次伤害的差值{{hp|4.5}}，再根据护甲值计算得出修正后的伤害为{{hp|1.1025}}，因此这次激光攻击的总伤害为{{hp|5.6025}}。
+
+;尖-{}-刺
+每次近战攻击伸出尖-{}-刺的守卫者会受到{{hp|2}}点伤害（普通难度），类似于[[荆棘]]魔咒，且会导致与荆棘魔咒一致的[[死亡消息]]。与荆棘魔咒不同，这一效果只对近战攻击有效。如果守卫者被逼入角落，它们通常会伸展出它们的尖-{}-刺的同时使用激光攻击目标。
+
+=== 趋光性 ===
+守卫者会朝任何光源（包括激活的[[潮涌核心]]）移动，并群聚在其周围。然而，完整框架激活的潮涌核心会攻击守卫者并对其造成伤害。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound = Guardian ambient1.ogg
+|sound2 = Guardian ambient2.ogg
+|sound3 = Guardian ambient3.ogg
+|sound4 = Guardian ambient4.ogg
+|subtitle = {{tp|subtitles.entity.guardian.ambient}}
+|source = 敌对生物
+|description = 在水中空闲时随机播放此声音
+|id = entity.guardian.ambient
+|translationkey = subtitles.entity.guardian.ambient
+}}
+{{Sound table
+|sound = Guardian land idle1.ogg
+|sound2 = Guardian land idle2.ogg
+|sound3 = Guardian land idle3.ogg
+|sound4 = Guardian land idle4.ogg
+|subtitle = {{tp|subtitles.entity.guardian.ambient_land}}
+|source = 敌对生物
+|description = 在陆地上空闲时随机播放此声音
+|id = entity.guardian.ambient_land
+|translationkey = subtitles.entity.guardian.ambient.land
+}}
+{{Sound table
+|sound = Guardian death.ogg
+|subtitle = {{tp|subtitles.entity.guardian.death}}
+|source = 敌对生物
+|description = 在水中死亡
+|id = entity.guardian.death
+|translationkey = subtitles.entity.guardian.death
+}}
+{{Sound table
+|sound = Guardian land death.ogg
+|subtitle = {{tp|subtitles.entity.guardian.death}}
+|source = 敌对生物
+|description = 在陆地上死亡
+|id = entity.guardian.death_land
+|translationkey = subtitles.entity.guardian.death
+}}
+{{Sound table
+|sound = Guardian flop1.ogg
+|sound2 = Guardian flop2.ogg
+|sound3 = Guardian flop3.ogg
+|sound4 = Guardian flop4.ogg
+|subtitle = {{tp|subtitles.entity.guardian.flop}}
+|source = 敌对生物
+|description = 在陆地上弹跳
+|id = entity.guardian.flop
+|translationkey = subtitles.entity.guardian.flop
+}}
+{{Sound table
+|sound = Guardian hit1.ogg
+|sound2 = Guardian hit2.ogg
+|sound3 = Guardian hit3.ogg
+|sound4 = Guardian hit4.ogg
+|subtitle = {{tp|subtitles.entity.guardian.hurt}}
+|source = 敌对生物
+|description = 在水中受伤
+|id = entity.guardian.hurt
+|translationkey = subtitles.entity.guardian.hurt
+}}
+{{Sound table
+|sound = Guardian land hit1.ogg
+|sound2 = Guardian land hit2.ogg
+|sound3 = Guardian land hit3.ogg
+|sound4 = Guardian land hit4.ogg
+|subtitle = {{tp|subtitles.entity.guardian.hurt}}
+|source = 敌对生物
+|description = 在陆地上受伤
+|id = entity.guardian.hurt_land
+|translationkey = subtitles.entity.guardian.hurt
+}}
+{{Sound table
+|sound = Guardian attack loop.ogg
+|subtitle = {{tp|subtitles.entity.guardian.attack}}
+|source = 敌对生物
+|description = 激光射击
+|id = entity.guardian.attack
+|translationkey = subtitles.entity.guardian.attack
+|foot = 1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.land_idle1.wav
+|sound2=mob.guardian.land_idle2.wav
+|sound3=mob.guardian.land_idle3.wav
+|sound4=mob.guardian.land_idle4.wav
+|source=敌对生物
+|description=在陆地上空闲时随机播放此声音
+|id=mob.guardian.land_idle
+|typeid=ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.land_hit1.wav
+|sound2=mob.guardian.land_hit2.wav
+|sound3=mob.guardian.land_hit3.wav
+|sound4=mob.guardian.land_hit4.wav
+|source=敌对生物
+|description=在陆地上受伤
+|id=mob.guardian.land_hit
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.land_death.wav
+|source=敌对生物
+|description=在陆地上死亡
+|id=mob.guardian.land_death
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.ambient1.wav
+|sound2=mob.guardian.ambient2.wav
+|sound3=mob.guardian.ambient3.wav
+|sound4=mob.guardian.ambient4.wav
+|source=敌对生物
+|description=在水中空闲时随机播放此声音
+|id=mob.guardian.ambient
+|typeid=ambient.in.water
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.guardian_hit1.wav
+|sound2=mob.guardian.guardian_hit2.wav
+|sound3=mob.guardian.guardian_hit3.wav
+|sound4=mob.guardian.guardian_hit4.wav
+|source=敌对生物
+|description=在水中受伤
+|id=mob.guardian.hit
+|typeid=hurt.in.water
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.guardian_death.wav
+|source=敌对生物
+|description=在水中死亡
+|id=mob.guardian.death
+|typeid=death.in.water
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.guardian.flop1.wav
+|sound2=mob.guardian.flop2.wav
+|sound3=mob.guardian.flop3.wav
+|sound4=mob.guardian.flop4.wav
+|source=敌对生物
+|description=在陆地上弹跳
+|id=mob.guardian.flop
+|typeid=guardian.flop
+|soundvolume
+|soundpitch=1.0
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Guardian attack loop.ogg
+|source=敌对生物
+|description=激光射击
+|id=mob.guardian.attack_loop
+|typeid=attack.loop
+|soundvolume
+|soundpitch
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}:
+{{ID table
+|generatetranslationkeys=java
+|Guardian
+|spritetype=entity
+|nameid=guardian
+|showentitytags=1|entitytags={{GameTag|entity|guardian}}
+|foot=1}}
+
+{{edition|bedrock}}:
+{{ID table
+|generatetranslationkeys=bedrock
+|Guardian
+|spritetype=entity
+|nameid=guardian
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+守卫者有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|Monster-Hunter;it-spreads}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.kill_a_mob;adventure.kill_all_mobs;adventure.kill_mob_near_sculk_catalyst}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2014年6月3日|link={{tweet|jeb_|473854701554135041}}|Jeb表示他正在制作一种在水下的攻击型生物，但目前进展不是很大。}}
+|{{HistoryLine||2014年6月8日|link={{tweet|jeb_|475573277835165696}}|Jeb公布了这种生物的更多细节：它使用范围攻击，对[[鱿鱼]]和玩家敌对。他建议在困难难度时装备好整套[[钻石盔甲]]、[[水肺药水]]和[[水下呼吸（魔咒）|{{tr|水下呼吸|水中呼吸}}]]魔咒头盔进行战斗。}}
+|{{HistoryLine||2014年6月9日|link=http://www.reddit.com/r/Minecraft/comments/27om1c/heres_another_teaser_of_the_new_mob/|Jeb发表了一张艺术化的守卫者图片。这是守卫者外观的雏形。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w25a|[[File:Guardian JE1 BE1.png|42px]] 加入了守卫者。}}
+|{{HistoryLine|||dev=14w26a|现在守卫者会正确地受到[[火焰伤害]]。<ref>{{bug|MC-56862|||Fixed}}</ref>}}
+|{{HistoryLine||1.9|dev=15w43a|改变掉落生鱼和海晶砂粒的概率。之前是33%的概率掉落生鱼，如果没有掉落生鱼，则33%掉落海晶砂粒，抢夺魔咒影响两者的概率。现在是40%生鱼，40%海晶砂粒和20%两者不掉落，抢夺魔咒影响两者的数量。}}
+|{{HistoryLine|||dev=15w47b|为守卫者的防御性尖-{}-刺攻击加入声音。}}
+|{{HistoryLine||1.11|dev=16w32a|守卫者的实体ID由<code>Guardian</code>变为<code>guardian</code>。
+|移除了<code>Elder</code>标签。}}
+|{{HistoryLine|||dev=16w38a|如果被火杀死，守卫者将掉落[[熟鱼]]，而不是[[生鱼]]。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Guardian JE2 BE2.png|42px]] 更改了守卫者的纹理。}}
+|{{HistoryLine|||dev=19w08a|现在守卫者不再能看见[[隐身]]状态下的玩家。}}
+|{{HistoryLine||1.15|dev=19w34a|守卫者现在会受到[[岩浆块]]的伤害。<ref>{{bug|MC-102267|||Fixed}}</ref>}}
+|{{HistoryLine||1.17|dev=20w51a|守卫者现在会主动攻击[[美西螈]]。}}
+|{{HistoryLine|||dev=21w11a|[[File:Guardian tailfin change 21w11a.gif|42px]] 略微更改了守卫者的纹理，移除了纹理中多余的像素。}}
+|{{HistoryLine|||dev=21w13a|现在着[[火]]时被杀死或被火源杀死的守卫者会掉落[[熟鳕鱼]]或[[熟鲑鱼]]，而不是[[生鳕鱼]]或[[生鲑鱼]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|[[File:Guardian JE1 BE1.png|42px]] 加入了守卫者。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.20.2|守卫者现在会攻击鱼。}}
+|{{HistoryLine||1.6.0|dev=1.6.0.5|守卫者现在不再攻击鱼。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Guardian JE2 BE2.png|42px]] 更改了守卫者的纹理。}}
+|{{HistoryLine||1.17.0|dev=1.17.0.50|[[File:Guardian tailfin change 21w11a.gif|42px]] 略微更改了守卫者的纹理，移除了纹理中多余的像素。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.20|守卫者现在会主动攻击[[美西螈]]。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|switch=1.0.1|[[File:Guardian JE1 BE1.png|42px]] 加入了守卫者。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Guardian JE2 BE2.png|42px]] 更改了守卫者的纹理。}}
+|{{HistoryLine|3DS}}
+|{{HistoryLine||1.3.12|[[File:Guardian JE1 BE1.png|42px]] 加入了守卫者。}}
+}}
+
+== 你知道吗 ==
+* 守卫者会转动的“眼睛”实际上对应的是其他生物模型中“头”的部分。
+* 在水下，守卫者发出深沉的、咆哮般的声音，但是在陆地上它们则发出高亢的吱吱尖叫声。
+* [[力量（状态效果）|力量]]通常只能增强近战攻击，但是{{in|je}}若守卫者被赋予了力量[[状态效果]]，它的激光攻击力会增强。
+* 当守卫者被放在一个黏液块上时，守卫者会越蹦越高，最后可达到17个方块高。
+* 在[[纹理更新]]前，守卫者的贴图文件右下角写有“jeb”字样。
+* 即使守卫者经由[[命令/summon|召唤命令]]等方式被赋予 <code>{NoAI:1}</code> 的标签，它们的眼睛仍然会跟随玩家。
+* 如果守卫者被置于1.5格高度的空间内，它能够更快地移动。
+
+== 画廊 ==
+=== 游戏截图 ===
+<gallery>
+File:Underwater mob jeb instagram.png|Jeb的Instagram生物展示
+File:GuardianInside.png|守卫者的内部
+File:Guardian Beach.jpg|守卫者的"眼睛"会盯着玩家，无论玩家在什么位置
+File:Guardian Squid.jpg|守卫者正在攻击鱿鱼
+File:Guardians Attack.png|一群守卫者正在保卫它们的海底神殿
+File:Guardian Size.png|守卫者和[[远古守卫者]]的大小比较
+File:Guardian (texture) JE1 BE1.png|守卫者在[[纹理更新]]前的纹理文件, 右下角写着“jeb”
+File:Guardian in Boat.png|一只坐在船里的守卫者
+</gallery>
+
+=== 其他媒介 ===
+<gallery>
+File:BossUpdatePE.png|[[Boss更新]]宣传图中的守卫者
+File:LEGO Guardian.png|[[乐高Minecraft]]中的守卫者
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|mobs}}
+
+[[Category:敌对生物]]
+[[Category:水生生物]]
+
+[[de:Wächter]]
+[[en:Guardian]]
+[[es:Guardián]]
+[[fr:Gardien]]
+[[hu:Őrszem]]
+[[it:Guardiano]]
+[[ja:ガーディアン]]
+[[ko:가디언]]
+[[nl:Bewaker]]
+[[pl:Strażnik]]
+[[pt:Guardião]]
+[[ru:Страж]]
+[[uk:Вартовий]]

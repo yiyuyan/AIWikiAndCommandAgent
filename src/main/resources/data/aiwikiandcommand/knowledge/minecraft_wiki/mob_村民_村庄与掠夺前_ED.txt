@@ -1,0 +1,40 @@
+# 页面: 村民/村庄与掠夺前/ED
+# 来源: https://zh.minecraft.wiki/w/%E6%9D%91%E6%B0%91/%E6%9D%91%E5%BA%84%E4%B8%8E%E6%8E%A0%E5%A4%BA%E5%89%8D/ED
+# 分类: 实体数据值页面
+# 抓取时间: 2026-07-14 17:29:01
+# 原始 Wikitext 内容:
+
+{{el|je}}：
+<div class="treeview">
+* {{nbt|compound}} 实体数据值
+** {{nbt inherit/mob}}
+** {{nbt inherit/breedable}}
+** {{nbt|int|Profession}}: 村民的纹理[[村民#职业|ID]]。这同时会影响到交易选项。
+** {{nbt|int|Riches}}: 暂未使用。随着村民收到绿宝石而上升。
+** {{nbt|int|Career}}: 村民的职业[[村民#职业|ID]]。这同时也会影响到交易选项，并且对它的在GUI里的实体名（如果它没有被命名）有影响。如果值是0，在下一次交易菜单刷新时，游戏会给它设置一个新的职业并且将它的职业等级（CareereLevel）重设为Lv.1。
+** {{nbt|int|CareerLevel}}: 村民交易选项中目前的等级。会影响到村民形成的交易选项，如果它的值比这个职业的最大等级还要大，将不会形成新的交易选项。随着一次交易完成并刷新而增长。如果它的值为零，下一次交易的进行会给村民分配一个新的职业并将它的职业等级(CareereLevel)重设为Lv.1.设置一个比这个职业还要高的值不会形成新的交易选项。
+** {{nbt|byte|Willing}}: 1 或 0 (true/false) - true代表这个村民愿意进行交配。会在进行过一个确定的交易（是交易菜单刷新的交易）后变成 true，然后在交配后变成false。
+** {{nbt|list|Inventory}}: 每个属于此列表下的标签和物品会放在村民的背包里，最高有8个位次。如果有相同可堆叠物品在两个格子，会合并到第一个格子里。如果放入的格子超过8个，最后的格子会被移除直到格子总数为8.如果首位两个格子是可堆叠的，最后一个格子的物品会显示并且首位两个格子合并。
+*** {{nbt|compound}} 一个物品在背包里，不包括位次标签
+**** {{nbt inherit/itemnoslot|indent=****}}
+** {{nbt|compound|Offers}}: 在第一次打开交易菜单时产生
+*** {{nbt|list|Recipes}}: 交易列表
+**** {{nbt|compound}} 单个交易选项
+***** {{nbt|byte|rewardExp}}: 1 或 0 (true/false) - true代表交易会提供经验球。
+***** {{nbt|int|maxUses}}: 代表在关闭选项前能进行的最大交易次数。当交易被刷新时，以2到12的随机数增加。
+***** {{nbt|int|uses}}: 已经交易的次数，如果大于或等于maxUses，该交易将被关闭。
+***** {{nbt|compound|buy}}: 第一个收购项目，没有槽位标签。
+****** {{nbt inherit/itemnoslot|indent=******}}
+***** {{nbt|compound|buyB}}: 可能不存在。第二个收购项目，没有槽位标签。
+****** {{nbt inherit/itemnoslot|indent=******}}
+***** {{nbt|compound|sell}}: 出售项目，没有槽位标签。
+****** {{nbt inherit/itemnoslot|indent=******}}
+</div>
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}<noinclude>
+[[Category:实体数据值页面]]
+
+[[en:Villager (old)/ED]]
+[[ja:村人/ヴィレッジ・アンド・ピレッジ以前/ED]]
+[[th:ชาวบ้าน/ก่อนการอัพเดต 1.14/ED]]
+</noinclude>

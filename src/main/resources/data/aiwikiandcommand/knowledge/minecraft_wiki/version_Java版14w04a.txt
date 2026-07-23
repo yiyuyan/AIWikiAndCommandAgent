@@ -1,0 +1,179 @@
+# 页面: Java版14w04a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w04a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:11
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=14w04a
+|image=14w04a.png
+|image2=Java Edition 14w04a Simplified.png\Java Edition 14w04a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年1月23日
+|downloads=
+; 原始版本
+: {{dl|3034b21f0091e779b38d43d687f98037b4ac76c9|client}}（{{dl|3be1cf3e471a51e4a8346337a58d9379175f4bd4|json|name=14w04a}}）
+: [https://vault.omniarchive.uk/archive/java/server-release/1.8/pre/14w04a-1526.jar 服务端]（{{dl|a8a97c14b22c15903c491436ad0430dff50b4574|exe}}）
+; 重新上传
+: {{dl|bd483603d1b07d3ce3fde76a35abfb0489933d72|server}}（{{dl|a8a97c14b22c15903c491436ad0430dff50b4574|exe}}）
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w03b
+|next=14w04b
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w04a'''是[[Java版1.8]]的第6个快照，发布于2014年1月23日<ref>{{cite|url=http://mojang.com/2014/01/minecraft-snapshot-14w04a/|archive-url=1|archive=1|title=Minecraft snapshot 14w04a|author=Dinnerbone|website=Mojang.com|date=Jan 23, 2014}}</ref>，加入了命令{{cmd|particle}}，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|particle}}'''
+* 在指定区域内生成[[粒子]]。
+** 可以在[[实体]]的相对位置生成。
+* 用法：{{cmd|particle <name> <x> <y> <z> <xd> <yd> <zd> <速度> [数量] [玩家：实体]}}
+** 示例：{{cmd|1=particle lava ~ ~1 ~ 1 1 1 0.5 2 @e[type=Chicken]}}
+** 粒子列表：<code>hugeexplosion</code>、<code>largeexplode</code>、<code>fireworksSpark</code>、<code>bubble</code>、<code>suspended</code>、<code>depthsuspend</code>、<code>townaura</code>、<code>crit</code>、<code>magicCrit</code>、<code>smoke</code>、<code>mobSpell</code>、<code>mobSpellAmbient</code>、<code>spell</code>、<code>instantSpell</code>、<code>witchMagic</code>、<code>note</code>、<code>portal</code>、<code>enchantmenttable</code>、<code>explode</code>、<code>flame</code>、<code>lava</code>、<code>footstep</code>、<code>splash</code>、<code>wake</code>、<code>largesmoke</code>、<code>cloud</code>、<code>reddust</code>、<code>snowballpoof</code>、<code>dripWater</code>、<code>dripLava</code>、<code>snowshovel</code>、<code>slime</code>、<code>heart</code>、<code>angryVillager</code>、<code>happyVillager</code>、<code>iconcrack_(ID)_(DATA)</code>、<code>blockcrack_(ID)_(DATA)</code>和<code>blockdust_(ID)_(DATA)</code>。
+
+== 更改 ==
+=== 方块 ===
+'''[[铁砧]]'''
+* 之前的工作成本增加从线性（每修复1次）变为指数（每次修复2次+1）。
+* 用“牺牲”的方式修复现在花费2个等级而不是1个等级。
+
+'''[[按钮]]'''
+* 现在可放置在天花板/地板上。
+
+'''[[苔石]]'''
+* 现在可以使用[[圆石]]和[[藤蔓]]合成。
+
+'''[[熔炉]]'''
+* 当[[烧炼#燃料效率|燃料]]耗尽时，[[熔炼]]过程将以正常速度的两倍反转。
+
+'''[[枯萎的灌木]]'''
+* 现在是可燃的。
+
+=== 生物 ===
+'''[[铁傀儡]]'''
+* 现在又会在死亡时掉落[[铁锭]]了。
+* 现在可以使用[[发射器]]来放置[[南瓜]]来生成。
+
+'''[[雪傀儡]]'''
+* 现在可以使用发射器来放置南瓜来生成。
+
+'''[[凋灵]]'''
+* 现在可以使用发射器来放置[[凋灵骷髅头颅]]来生成。
+
+'''[[村民]]'''
+* 村民现在会收割、收集和补种[[小麦]]、[[马铃薯]]和[[胡萝卜]]。
+** 村民不会拥有无限种子，种子必须被补充才能补种农作物。
+* 村民会将小麦合成[[面包]]，并给予其他村民。
+* 村民现在能通过给予食物来变得愿意繁殖：3个面包或12个马铃薯或12个胡萝卜。
+
+'''[[僵尸猪人]]'''
+* 现在又会在死亡时掉落[[金粒]]了。
+
+=== 非生物实体 ===
+'''[[物品展示框]]'''
+* 放在框内的物品现在可以被旋转45度（总共8个方向）。
+* 物品展示框现在会根据物品的方向而向[[红石比较器]]传递信号。
+** 信号强度如下：0：空；1：有物品；2：物品被旋转1次；3：物品被旋转2次……8：物品被旋转7次。
+
+=== 命令格式 ===
+'''{{cmd|fill}}'''
+* 加入了过滤方块的能力，前提是不包含方块实体。
+** 仅能在{{cd|replace}}模式中的“正常”方块使用。
+** 语法：{{cmd|fill [x] [y] [z] [x] [y] [z] [方块名] [数据] replace [过滤方块名] [过滤数据]}}
+
+=== 游戏内容 ===
+'''[[魔咒]]'''
+* [[抢夺]]魔咒现在每等级会给予额外1%的概率获得稀有掉落物。
+
+'''[[Tutorial:村庄机制|村庄机制]]'''
+* [[门]]将被添加至最近的[[村庄]]。
+** 这不会破坏[[铁锭]]农场，但会“稍微”改变它们。<ref>{{tweet|_grum|426299865673777152}}</ref>
+
+=== 常规 ===
+'''[[调试屏幕]]'''
+[[File:Crosshairsindebug14w04a.png|缩略图|调试屏幕中展示XYZ轴的十字准星]]
+* 当面向东西方向时，X坐标栏会被加粗，Y坐标栏则会在面向南北方向时被加粗。
+* 普通的十字标将显示出3条彩色的短线，分别指向每个轴的方向：X/红色，Y/绿色，Z/蓝色。
+
+'''[[皮肤]]'''
+* 现在会在第一人称视角中显示右手的第二层皮肤。
+* 皮肤和[[披风]]信息现在由服务器发送。
+** 皮肤服务器将减少过期的现象。
+** 服务器是无法更改皮肤/披风的，只有URL被保存在服务器中。
+** 更换皮肤不再需要客户端重启来显示，最坏的情况仅需重新登录服务器来为所有人更新。
+** 相同的皮肤不再需要被下载两次。
+** 服务器流量几乎不会受影响。
+
+'''渲染'''
+* 只有透明的方块会被渲染成透明（消除了透视纹理包的使用）。
+
+== 修复 ==
+{{fixes|fixedin=14w04a|prefix=Minecraft|showdesc=1
+|;old
+|888|{{cmd|difficulty|link=none}}命令不能修改单人模式暂停菜单中的默认难度。
+|1253|梯子、告示牌、栅栏、栅栏门、活板门会导致它们放置的地方变暗。
+|1580|按住{{key|Shift}}键交易时出现幽灵物品。
+|5824|仙人掌可以在方块相邻位置生长。
+|8662|展示框中的物品居中不正确。
+|9582|全字选择在聊天中表现不正常。
+|16457|制成雪人后，南瓜的纹理会被翻转。
+|18284|使用新AI的生物可以看见隐身玩家。
+|25370|鼠标指针在使用{{key|Escape}}键返回上一个菜单时被居中。
+|29999|Realms按钮在快照版客户端中依然可见。
+|30995|使用{{cmd|setblock|link=none}}命令不能替换具有不同方块实体或NBT数据的相同方块。
+|31081|虫蚀石头可以生成2只蠹虫。
+|31203|熔炉中的进度条在更改材料后仍然存在。
+|32301|熔岩的嘶嘶声每当空气方块被熔岩方块破坏时都会被播放。
+|36847|世界选项中的游戏模式设置中的“模式”后面没有冒号。
+|37355|{{filename|server-icon.png}}中alpha通道的显示不正确。
+|;dev
+|44368|使用命令方块更改了已锁定难度的世界的难度后，界面上显示的难度不是已被命令方块修改过的难度。
+|44467|花在湖边过分生成。
+|44551|蠹虫可以侵蚀安山岩、闪长岩和花岗岩。
+|44592|熔岩引起的火焰的蔓延范围超出预期。
+|44700|使用命令<code>/me @e</code>导致崩溃。
+|44890|门被反复添加到村庄门列表中。
+|44893|{{cmd|kill|link=none}}命令不能杀死无敌实体。
+|45011|{{cmd|clone|link=none}}命令不能复制TileEntity的朝向。
+|45084|第一人称视角下，外层皮肤不可见。
+|;previous
+|45056|<code>Hopper: java.lang.NullPointerException: Loading entity NBT</code>。
+|45063|绊线不可见。
+|45071|当末影人被击中时，世界会卡住。
+|45087|熟鱼的ID是<code>minecraft:cooked_fished</code>。
+|45172|装备了附魔裤子时，新皮肤模型中上身的外层皮肤会被表现为被附魔的状态。
+|45235|可以按两次{{key|Shift}}键疾跑。
+|45278|使用命令{{cmd|spawnpoint|link=none}}两次，则在重载世界前，出生点都不会被更新为最后设置的坐标。
+|45345|{{cmd|fill|link=none}}Tile Entity:<code>java.lang.ClassCastException</code>.
+|45459|调试代码在服务器控制台上显示。
+|;hotfix
+|45557|服务器不能产生日志文件。
+|45595|服务器被锁定在调试模式，并且在控制台上刷屏。
+}}
+
+== 重新上传 ==
+该版本的服务端于17:40（UTC）被重新上传，原因未知。</onlyinclude>
+
+== 你知道吗 ==
+* 此版本曾经在[[启动器]]中移除，但在2018年9月重新加入。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[Category:重新上传过的版本]]
+
+[[de:14w04a]]
+[[en:Java Edition 14w04a]]
+[[es:Java Edition 14w04a]]
+[[fr:Édition Java 14w04a]]
+[[ja:Java Edition 14w04a]]
+[[pt:Edição Java 14w04a]]
+[[ru:14w04a (Java Edition)]]
+[[uk:14w04a (Java Edition)]]

@@ -1,0 +1,116 @@
+# 页面: 随机序列存储格式
+# 来源: https://zh.minecraft.wiki/w/%E9%9A%8F%E6%9C%BA%E5%BA%8F%E5%88%97%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:38:19
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''随机序列（Random Sequences）'''是游戏内提供可控随机化的随机数发生器序列。'''随机序列存储文件'''是存档内存储随机序列所使用的文件。
+
+== 存储格式 ==
+随机序列存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/random_sequences.dat}}。
+
+随机序列存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：随机序列数据。
+*** {{nbt|bool|include_sequence_id|existonsave=1}}：计算随机序列时是否代入随机序列的命名空间ID计算。此项可由{{cmd|random reset *}}修改。如果不存在则认为是<code>true</code>。
+*** {{nbt|bool|include_world_seed|existonsave=1}}：计算随机序列时是否代入世界种子计算，如果不代入世界种子则任何存档内此随机序列行为一致。此项可由{{cmd|random reset *}}修改。如果不存在则认为是<code>true</code>。
+*** {{nbt|int|salt|existonsave=1}}：初始化随机序列时掺入的[[wzh:盐 (密码学)|盐]]。如果不存在则认为是0。
+*** {{nbt|compound|sequences|existonsave=1|required=1}}：当前存档内已创建的随机序列。
+**** {{nbt|compound|<''命名空间ID''>}}：一个随机序列。
+***** {{nbt|long-array|source|existonsave=1|required=1}}：随机数源数据。
+****** {{nbt|long}}：随机数种子的低64位。
+****** {{nbt|long}}：随机数种子的高64位。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此强制加载区块存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 随机序列 ==
+
+=== 创建 ===
+[[File:Random Sequence Xoroshiro Random Source Creating.png|350px|thumb|right|构造Xoroshiro128++随机数发生器的过程]]
+
+创建随机序列需要有3个参数：随机序列的[[命名空间ID]]''identifier''、[[世界种子]]''worldSeed''和盐''salt''。根据{{nbt|bool|include_sequence_id}}和{{nbt|bool|include_world_seed}}，游戏会决定是否将命名空间ID和世界种子加入计算中以提高随机序列的随机化程度。
+
+游戏使用的随机数发生器是[https://prng.di.unimi.it/xoroshiro128plusplus.c Xoroshiro128++]，这个随机数发生器使用128位的种子。
+
+游戏首先计算出来一个64位的'''初始种子'''，再将初始种子拆开成为128位的'''未混合的种子'''：
+
+<syntaxhighlight lang="java">
+long initialSeed = salt;
+if (include_world_seed)
+	initialSeed ^= worldSeed;
+long unmixedLo64 = initialSeed ^ 0x6A09E667F3BCC909L;
+long unmixedHi64 = unmixedLo64 + 0x9E3779B97F4A7C15L;
+</syntaxhighlight>
+
+此处如果指定了{{nbt|bool|include_world_seed}}，那么游戏会把世界种子代入计算，使得同样配置的随机序列在不同的存档中产生的随机数发生器种子不同。
+
+接下来，如果随机序列指定了{{nbt|bool|include_sequence_id}}为<samp>true</samp>，则计算命名空间ID的[[wzh:MD5|MD5]]值，并与未混合的种子进行异或。这使得同一个存档中，不同命名空间ID的随机序列可以具有不同的随机数发生器种子。
+
+<syntaxhighlight lang="java">
+if (include_sequence_id) {
+	byte[] md5sum = computeMD5(identifier);
+    long md5Lo64 = md5Low64bit(md5sum);
+    long md5Hi64 = md5High64bit(md5sum);
+    unmixedLo64 ^= md5Lo64;
+    unmixedHi64 ^= md5Hi64;
+}
+</syntaxhighlight>
+
+最后，将未混合的种子进行混合，得到Xoroshiro128++随机数发生器的种子。
+
+<syntaxhighlight lang="java">
+public static long mixStafford13(long l) {
+	l = (l ^ l >>> 30) * 0xBF58476D1CE4E5B9L;
+	l = (l ^ l >>> 27) * 0x94D049BB133111EBL;
+	return l ^ l >>> 31;
+}
+
+long mixedLo64 = mixStafford13(unmixedLo64);
+long mixedHi64 = mixStafford13(unmixedHi64);
+</syntaxhighlight>
+
+如果计算生成的种子为0，那么游戏会将低64位设置为-7046029254386353131L，高64位设置为7640891576956012809L。
+
+=== 生成随机数 ===
+
+当游戏需要使用随机序列生成整数时，游戏会根据Xoroshiro128++随机数发生器算法产生随机数；如果生成的是浮点数，则根据浮点数的位数生成对应的随机浮点数；如果生成的是符合高斯分布的浮点数，则需要附加使用[[wikipedia:Marsaglia polar method|Marsaglia极坐标高斯方法]]生成。
+
+== 存储行为 ==
+
+当随机序列存储文件不存在或不完整时，游戏按照下列参数初始化文件：
+* {{nbt|bool|include_sequence_id}}初始化为<code>true</code>。
+* {{nbt|bool|include_world_seed}}初始化为<code>true</code>。
+* {{nbt|int|salt}}初始化为0。
+
+当游戏使用随机序列时，随机序列会被取出，计算后更新为新的种子再被放回。如果使用随机序列时命名空间ID对应的随机序列不存在，游戏会[[#创建|创建]]对应的随机序列。
+
+游戏内绝大多数[[战利品表]]计算都使用了随机序列，包括[[掉落物#方块掉落物|破坏方块时的掉落物]]、[[掉落物#生物掉落物|杀死实体时的掉落物]]、[[钓鱼|钓鱼时可以钓上的物品]]和[[以物易物|猪灵的以物易物]]等，但世界生成过程中产生的战利品箱不由随机序列控制，而受到世界种子的直接影响。
+
+使用{{cmd|random reset}}会重置指定的随机序列，并根据给出的参数重新创建随机序列。{{cmd|random reset *}}会重置创建所有随机序列，并且给出的参数会被同步入随机序列存储文件内。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20|dev=pre1|加入了随机序列。}}
+|{{HistoryLine||1.20.2|dev=23w31a|修改了随机序列的初始化方式。}}
+|{{HistoryLine||26.1|dev=snapshot-6|现在随机序列是世界数据而非维度数据。这意味着游戏不再能在{{filepath|<''存档根目录''>/data/random_sequences.dat}}不存在时使用各维度独立的随机序列存储文件。
+|将主世界的随机数序列数据从{{filepath|<''存档根目录''>/data/random_sequences.dat}}移动到{{filepath|<''存档根目录''>/data/minecraft/random_sequences.dat}}作为世界数据。
+|下界（{{filepath|<''存档根目录''>/DIM-1/data/random_sequences.dat}}）、末地（{{filepath|<''存档根目录''>/DIM1/data/random_sequences.dat}}）和其他维度（{{filepath|<''维度根目录''>/data/random_sequences.dat}}）的随机序列数据被丢弃。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+{{Navbox Java customizable}}
+
+[[Category:游戏文件]]
+
+[[de:Zufallssequenzdaten]]
+[[en:Random sequence format]]
+[[fr:Format de séquence aléatoire]]
+[[ja:乱数列フォーマット]]
+[[pt:Formato de sequência aleatória]]
+[[ru:Формат случайной последовательности]]

@@ -1,0 +1,186 @@
+# 页面: 瞬间伤害
+# 来源: https://zh.minecraft.wiki/w/%E7%9E%AC%E9%97%B4%E4%BC%A4%E5%AE%B3
+# 分类: Java版独有信息, 基岩版独有信息, 状态效果
+# 抓取时间: 2026-07-14 17:32:43
+# 原始 Wikitext 内容:
+
+{{Infobox effect
+|image=Instant Damage.png
+|invimage=Potion of Harming
+|invimage2=Splash Potion of Harming
+|invimage3=Lingering Potion of Harming
+|invimage4=Arrow of Harming
+|invimage5=----
+|invimage6=Potion of Harming Enhanced
+|invimage7=Splash Potion of Harming Enhanced
+|invimage8=Lingering Potion of Harming Enhanced
+|invimage9=Arrow of Harming Enhanced
+}}
+'''瞬间伤害（Instant Damage）'''是一种能对非亡灵生物造成[[伤害]]或恢复亡灵生物的[[生命值]]的[[状态效果]]。
+
+== 效果 ==
+瞬间伤害是一种即时生效效果。因此与其他效果有多种不同的特性。
+
+对于饮下[[药水]]、被[[喷溅药水]]击中或停留在[[滞留药水]]产生的[[区域效果云]]里的生物：
+
+* 生物不是亡灵生物，则在生效时立即受到{{hp|3}}×2<sup>等级</sup>魔法伤害。
+* 生物是亡灵生物，则在生效时立即恢复{{hp|2}}×2<sup>等级</sup>{{only|je}}或{{hp|3}}×2<sup>等级</sup>{{only|be}}生命值。
+* 受这种方式影响的生物直接结算伤害或治疗，因此即使生物免疫状态效果（如[[凋灵]]、[[末影龙]]），也仍会被伤害或治疗。
+
+效果由喷溅药水施加时，随距离增加而减少的是伤害或治疗的量而非持续时间；效果由区域效果云施加时，伤害或治疗量减半。
+
+对于被[[药箭]]击中，或由{{cmd|effect}}赋予瞬间伤害效果的生物：
+
+* 受影响生物不是亡灵生物时，每[[刻]]受到{{hp|3}}×2<sup>等级</sup>魔法伤害。
+** 因[[受击后伤害免疫]]机制，实际伤害间隔变为10刻。
+* 受影响生物是亡灵生物时，每刻恢复{{hp|2}}×2<sup>等级</sup>{{only|je}}或{{hp|3}}×2<sup>等级</sup>{{only|be}}生命值。
+* {{only|je|for=[[凋灵]]}}、[[末影龙]]免疫此类来源的瞬间伤害效果。
+
+命令可以使效果有更高的持续时间，使用{{cmd|effect}}时持续时间参数为游戏刻而非秒数。
+
+如果被赋予效果倍率值0-31（对应等级1-32）范围以外的值，实际生效的倍率值则取[[wikipedia:Modulo_operation|模除]]32后的值。
+
+{{in|je}}等级30-32的瞬间伤害效果不会为亡灵生物恢复生命值。
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+ ! 来源
+ ! 效果等级
+ ! 伤害
+ ! 治疗
+ ! 时长
+ ! 备注
+ |-
+ | {{ItemLink|Potion of Harming}}
+ | I
+ | {{hp|6}}
+ | {{hp|4}}{{only|je|short=1}}<br>{{hp|6}}{{only|be|short=1}}
+ | {{convert|1}}
+ | 
+ |-
+ | {{ItemLink|Potion of Harming}}（增强版）
+ | II
+ | {{hp|12}}
+ | {{hp|8}}{{only|je|short=1}}<br>{{hp|12}}{{only|be|short=1}}
+ | {{convert|1}}
+ |
+ |-
+ | {{ItemLink|Splash Potion of Harming}}
+ | I
+ | {{hp|6}}
+ | {{hp|4}}{{only|je|short=1}}<br>{{hp|6}}{{only|be|short=1}}
+ | {{convert|1}}
+ | {{EntityLink|Witch}}会对目标丢出药水
+ |-
+ | {{ItemLink|Splash Potion of Harming}}（增强版）
+ | II
+ | {{hp|12}}
+ | {{hp|8}}{{only|je|short=1}}<br>{{hp|12}}{{only|be|short=1}}
+ | {{convert|1}}
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Harming}}
+ | I
+ | {{hp|3}}
+ | {{hp|2}}{{only|je|short=1}}<br>{{hp|3}}{{only|be|short=1}}
+ | {{convert|1}}
+ | 每0.5秒生效一次，最多可生效5次。
+ |-
+ | {{ItemLink|Lingering Potion of Harming}}（增强版）
+ | II
+ | {{hp|6}}
+ | {{hp|4}}{{only|je|short=1}}<br>{{hp|6}}{{only|be|short=1}}
+ | {{convert|1}}
+ | 每0.5秒生效一次，最多可生效5次。
+ |-
+ | {{ItemLink|Arrow of Harming}}
+ | I
+ | {{hp|6}}
+ | {{hp|4}}{{only|je|short=1}}<br>{{hp|6}}{{only|be|short=1}}
+ | {{convert|1}}
+ |
+ |-
+ | {{ItemLink|Arrow of Harming}}（增强版）
+ | II
+ | {{hp|12}}
+ | {{hp|8}}{{only|je|short=1}}<br>{{hp|12}}{{only|be|short=1}}
+ | {{convert|1}}
+ |
+ |-
+ | {{only|for={{EntityLink|Ender Dragon}}（栖息）|JE}}
+ | I
+ | {{hp|3}}
+ | {{hp|2}}
+ | {{convert|1}}
+ | 每0.5秒生效一次，最多可生效10次。
+ |-
+ | {{only|for={{EntityLink|Dragon Fireball}}|JE}}
+ | II
+ | {{hp|6}}
+ | {{hp|4}}
+ | {{convert|1}}
+ | 每0.5秒生效一次，最多可生效30次。
+ |}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Instant Damage
+|spritetype=effect
+|nameid=instant_damage
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Instant Damage
+|nameid=instant_damage
+|translationkey=potion.harm
+|showaliasids=1
+|aliasid=7
+|foot=1}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了瞬间伤害，目前无法获得。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|加入了药水，可以提供瞬间伤害，但无法正常获得。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|现在可以通过[[酿造台]]酿造伤害药水。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[喷溅型伤害药水]]，可以提供瞬间伤害。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了[[伤害之箭]]，可以提供瞬间伤害。}}
+|{{HistoryLine|||dev=15w33a|加入了[[滞留型伤害药水]]，可以提供瞬间伤害。}}
+|{{HistoryLine||1.15|dev=19w41a|[[File:Instant Damage JE1.png|32px]] 加入了瞬间伤害的图标。}}
+|{{HistoryLine||1.19.4|dev=pre3|将瞬间伤害的颜色由{{color|#430A09}}改为{{color|#A9656A}}。}}
+|{{HistoryLine||1.20.2|dev=23w32a|在此版本前，瞬间伤害的存档ID是7。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了不可获得的瞬间伤害。}}
+|{{HistoryLine||0.12.1|dev=build 1|瞬间伤害可以通过[[伤害药水]]获得。}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了女巫，通过喷溅药水使目标受到瞬间伤害。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了[[伤害之箭]]，使目标受到瞬间伤害。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|瞬间伤害效果可以通过滞留药水获得。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|将瞬间伤害的粒子的颜色由{{color|#430A09}}改为{{color|#A9656A}}。}}
+|{{HistoryLine|||dev=1.19.80.22|回退了上个版本对粒子颜色的更改。}}
+|{{HistoryLine||1.20.0|exg=next_major_update|dev=1.20.0.20|将瞬间伤害的颜色由{{color|#430A09}}改为{{color|#A9656A}}。}}
+|{{HistoryLine|||exg=none|dev=1.20.0.21|1.20.0.20中的变更不再属于[[实验性玩法]]。}}
+}}
+
+== 你知道吗 ==
+* {{in|je}}使用特定等级（即<code>amplifier</code>值为32n + 29（0 ≤ n ≤ 3））的喷溅型瞬间伤害药水投掷生物会引发非预期行为：
+** 向[[亡灵生物]]投掷时，会因单次治疗量溢出为负数，导致生物直接死亡且不会掉落任何物品。
+** 连续向非亡灵生物投掷时，可能会造成极大伤害，该伤害甚至可以让带有抗性提升4且满生命值的[[监守者]]瞬间死亡。这一现象产生的原因是生物第一次[[受击后伤害免疫]]期间又受到了相似的伤害，因而在承受两次随机伤害间差值时死亡。
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Direktschaden]]
+[[en:Instant Damage]]
+[[es:Daño instantáneo]]
+[[fr:Dégâts instantanés]]
+[[ja:即時ダメージ]]
+[[pt:Dano Instantâneo]]
+[[ru:Моментальный урон]]

@@ -1,0 +1,73 @@
+# 页面: Schematic文件格式
+# 来源: https://zh.minecraft.wiki/w/Schematic%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F
+# 分类: Java版, Java版独有特性, 开发
+# 抓取时间: 2026-07-14 17:17:55
+# 原始 Wikitext 内容:
+
+{{disclaimer}}
+{{exclusive|je}}
+'''Schematic文件格式'''为一种由玩家社区所创建的用于存储Minecraft世界信息，进而可以通过[[辅助程序与编辑器|第三方应用程序]]（如'''[[辅助程序与编辑器/地图工具|McEdit]]'''、'''[[辅助程序与编辑器/Minecraft Note Block Studio|Minecraft Note Block Studio]]'''、'''[[辅助程序与编辑器/专业工具|红石模拟器]]'''、'''[http://www.sk89q.com/projects/worldedit/ WorldEdit]'''以及[http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1285818-schematica Schematica]等）进行编辑。地形以[[NBT格式]]储存并大致基于[[Indev世界格式]]。方块和数据的目录以YZX的排序存储，也就是说X坐标的变化最频繁。这与[[Java版Classic|Classic]]、[[Java版Indev|Indev]]以及[[Anvil]]文件格式中的方块排序相似。这种格式不能将应该覆盖已有方块的空气方块和不应覆盖已有方块的空气方块区分开。
+
+== NBT结构 ==
+示意图中的坐标范围从(0,0,0)到(宽-1,高-1,长-1)。
+<div class="treeview">
+* {{nbt|compound|Schematic}}: Schematic数据。
+** {{nbt|short|Width}}: 沿X轴方向的尺寸。
+** {{nbt|short|Height}}: 沿Y轴方向的尺寸。
+** {{nbt|short|Length}}: 沿Z轴方向的尺寸。
+** {{nbt|string|Materials}}: 如果为[[Java版Classic|Classic]]版本的世界，此处则为'''"Classic"'''；如果为[[携带版]]的世界，此处则为'''"Pocket"'''；如果为[[Java版Alpha|Alpha]]及其之后版本的世界，此处则为'''"Alpha"'''。
+** {{nbt|byte-array|Blocks}}: 在地形中所用到的[[Java版数据值#方块|方块ID]]，每个方块8位。依次按高（从底部到顶部）、长和宽排序——也就是说，坐标为(x,y,z)的方块的索引为(Y×长度 + Z)×宽度 + X。
+** {{nbt|byte-array|AddBlocks}}: 可用于进一步定义地形的额外位（可选）。两个半字节被放入数组中的每个索引中。与普通区块不同，偶数索引使用高半字节并且奇数索引使用低半字节。
+** {{nbt|byte-array|<s>Add</s>}} ''<small>已弃用</small>'': 与AddBlocks相同，使用在旧版本的Schematica格式中。属于字节数组，其中每个字节包含用于定义地形的附加数据。编辑时不应该输入这个标签。
+** {{nbt|byte-array|Data}}: 在地形中额外用到的方块数据。在每字节中只使用低四位。（与[[区块存储格式]]不同，Schematic格式的方块数据每个占用一个完整字节。）
+** {{nbt|list|Entities}}: 复合标签列表。
+*** {{nbt|compound}} 在Schematic中的每一个实体。
+**** 请参见[[实体数据格式]]。
+** {{nbt|list|TileEntities}}: 复合标签列表。
+*** {{nbt|compound}} 在Schematic中的每一个实体。
+**** 请参见[[方块实体数据格式]]。
+** {{nbt|compound|Icon}}: 由Schematica用作地形图标的物品。
+*** {{nbt inherit/itemnoslot|indent=***}}
+** {{nbt|compound|SchematicaMapping}}: 此地形所保存版本的ID映射，由Schematica使用。仅提供在地形中使用的材料。
+*** {{nbt|short|[名称]}}: 表示该名称代表被给定的ID（例如：'''[名称]'''数值为1，其表示<code>minecraft:stone</code>）。
+** {{nbt|compound|ExtendedMetadata}}: Schematica为扩展而提供的任意附加数据。可选，并且只有在不为空的情况下才会提供。
+** {{nbt|int|WEOriginX}}: 仅WorldEdit。X的中心坐标。可选，但如果被提供，其余的部分也需要被提供。
+** {{nbt|int|WEOriginY}}: 仅WorldEdit。Y的中心坐标。可选，但如果被提供，其余的部分也需要被提供。
+** {{nbt|int|WEOriginZ}}: 仅WorldEdit。Z的中心坐标。可选，但如果被提供，其余的部分也需要被提供。
+** {{nbt|int|WEOffsetX}}: 仅WorldEdit。X的偏移坐标。可选，但如果被提供，其余的部分也需要被提供。
+** {{nbt|int|WEOffsetY}}: 仅WorldEdit。Y的偏移坐标。可选，但如果被提供，其余的部分也需要被提供。
+** {{nbt|int|WEOffsetZ}}: 仅WorldEdit。Z的偏移坐标。可选，但如果被提供，其余的部分也需要被提供。
+** {{nbt|byte|itemStackVersion}}: 仅MCEdit2。如果使用数字ID（[[Java版1.7]]）则为17，并且如果使用文本ID（[[Java版1.8]]）则为18。
+** {{nbt|compound|BlockIDs}}: 仅MCEdit2。将数字方块ID映射到文本方块ID。
+*** {{nbt|string|[编号]}}: 该编号所表示的文本ID（例如：'''[编号]'''为1且值为<code>minecraft:stone</code>）。
+** {{nbt|compound|ItemIDs}}: 仅MCEdit2。将数字物品ID映射到文本方块ID。 仅在itemStackVersion为17时生效。
+*** {{nbt|string|[编号]}}: 该编号所表示的文本ID（例如：'''[编号]'''为1且值为<code>minecraft:stone</code>）。
+** {{nbt|list|TileTicks}}: 仅MCEdit-Unified。队列中方块更新的列表。
+*** 见{{slink|区块存储格式|计划刻存储格式}}。
+** {{nbt|byte-array|Biomes}}: 仅MCEdit-Unified。包含地形中所有生物群系的字节数组。
+</div>
+
+== 实现 ==
+* [https://github.com/sk89q/WorldEdit/blob/master/worldedit-core/src/main/java/com/sk89q/worldedit/schematic/MCEditSchematicFormat.java WorldEdit]
+* [https://github.com/mcedit/mcedit2/blob/master/src/mceditlib/schematic.py MCEdit2]
+** [https://github.com/mcedit/pymclevel/blob/master/schematic.py legacy MCEdit]
+** [https://github.com/Khroki/MCEdit-Unified/blob/master/pymclevel/schematic.py MCEdit-Unified]
+* [https://github.com/Lunatrius/Schematica/blob/master/src/main/java/com/github/lunatrius/schematica/world/schematic/SchematicAlpha.java Schematica]
+* [https://github.com/CzechPMDevs/BuilderTools BuilderTools - PocketMine]
+* [https://github.com/maruohon/litematica litematica]
+
+== 参见 ==
+* [[结构存储格式]]
+
+== 外部链接 ==
+* [http://www.minecraft-schematics.com minecraft-schematics.com]
+* [http://www.minecraft-schematics.net minecraft-schematics.net]
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[Category:开发]]
+
+[[en:Schematic file format]]
+[[fr:Format de fichier .schematic]]
+[[nl:Schematisch bestandsformaat]]

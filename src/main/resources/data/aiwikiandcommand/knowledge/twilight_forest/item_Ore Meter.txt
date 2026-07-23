@@ -1,0 +1,35 @@
+The Ore Meter is an extremely useful item that can measure the quantity of any ore hidden within a set radius around the player. Findable only through Small Hollow Hills, this is surely one of the most useful tools that any devoted cave raider would wish to have up their sleeve! If paired with the functionalities of an Ore Magnet and Ore Map, anyone would be more than capable to find resources without the smallest bit of troubles!
+
+## Usage
+When Right-Clicked, the Ore Meter will begin it's search for ores within the desired chunk radius, flashing green and emiting soft crackling noises as it's searches. It's search process works by going out in all cardinal directions from the chunk center, one chunk at a time, to measure the quantity of all ores within the set number of chunks. To change the chunk radius the Ore Meter will search in, Crouch-Right Clicking in the air will set it to the next available value. By default, the Ore Meter's chunk radius is set to 1, and will increase to 2 chunks. Changing it again will set the chunk radius to 0, which will measure the exact chunk the player is standing in. The results are then displayed in the upper-left hand corner of the screen, and can be cleared out by Left-Clicking in the air.
+
+One of the special functionalities of the Ore Meter is that it can search for a specific block, if the user so desires. By default, the Ore Meter is only set to search for anything under the #forge:ores tag, allowing searching for any type of normal ore, as the name implies. However, if this device were to be Crouch Right-Clicked while targeting a specific ore or block under the ore_meter_targetable tag, which includes the below blocks and tags, the chosen block will be scanned for across the set chunk radius. This can be extremely helpful for searching for rare ores like Diamonds and Ancient Debris!
+
+*Budding Amethyst
+*Calcite
+*Soul Sand & Soil
+*#minecraft:base_stone_overworld
+*#minecraft:base_stone_nether
+*#minecraft:dirt
+*#minecraft:nylium
+*#minecraft:terracotta
+*#forge:gravel
+*#forge:ores
+*#forge:sand
+*#forge:sandstone
+
+### UI
+The resulting UI may seem a bit confusing at first, but is organised nicely into several sections: The desired chunk radius, the chunk the player is standing in, the total number of blocks scanned, and a table of all scanned ores. The table shown is divided into "Block", "Count", and "Ratio", all meaning as expected, and is always organized from the least scanned ores to the most scanned (An ore that was scanned twice will show before an ore that was scanned four times). The ratio and percentage is calculated by comparing an ore to the total number of scanned blocks, which can vary depending on the world type, dimension, and chunk radius. This typically results in a value that is less than 0.1%.
+
+## Image Gallery
+
+## History
+【历史更新】
+• 1.11.4：Added Ore Meter. Marked as WIP.
+• 1.17.2：Fixed some bugs with the Ore Meter.
+• 4.4.2235：Fully implemented the Ore Meter!
+Right-Click with the Ore Meter to detect nearby ore(s).
+Shift Right-Click in the air to set the Ore Meter's chunk range (A 0-2 chunk radius).
+Shift Right-Click a block to lock targeting to that block. The Ore Meter will only detect blocks of that type nearby. This behavior is controlled via a tag (ore_meter_targetable).
+Left-Click with the Ore Meter to wipe all its current data.
+• 4.4.2276：Fixed the Ore Meter not properly wiping its info with left-click.

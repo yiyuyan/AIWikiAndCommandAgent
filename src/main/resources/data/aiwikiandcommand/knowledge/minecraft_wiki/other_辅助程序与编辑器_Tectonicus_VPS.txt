@@ -1,0 +1,494 @@
+# 页面: 辅助程序与编辑器/Tectonicus/VPS
+# 来源: https://zh.minecraft.wiki/w/%E8%BE%85%E5%8A%A9%E7%A8%8B%E5%BA%8F%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8/Tectonicus/VPS
+# 分类: 需要验证
+# 抓取时间: 2026-07-14 17:36:44
+# 原始 Wikitext 内容:
+
+{{disclaimer}}
+
+该教程仅用于一台VPS/Headless机器。
+
+注意：若你的Headless服务器的图形适配器只安装了libgl1-mesa-swx11，可能会遇到问题。
+
+注意：本教程使用的是Java6的jdk，但该方法应能在其他版本的openjdk上工作。
+
+注意：注意不要只安装一个Headless jdk（例如openjdk-7-jre-headless），因为你将使用一个虚拟的Head，就像一个VNC服务器一样。
+
+== Ubuntu 10.04 ==
+本部分教程将介绍如何在EC2 Ubuntu 10.04 Lucid机器上运行Tectonicus。
+
+* 安装最小化xserver堆栈：<pre>sudo apt-get install xvfb libgl1-mesa-swx11 libxcursor1 libxrandr2 libxxf86vm1</pre>
+* 为测试安装情况并试用xvfb-run glxinfo和xvfb-run glxgears，需安装：<pre>apt-get install mesa-utils and try xvfb-run glxinfo xvfb-run glxgears</pre>
+* 同时也要测试<code>xvfb-run -a xrandr</code>。若遇到以下错误：<pre>/usr/bin/xvfb-run: 182: xrandr: not found</pre>，可按如下方式安装x11-xserver-utils：<pre>sudo apt-get install x11-xserver-utils</pre>
+
+至此，你已安装好Tectonicus的所有依赖项，更多信息详见{{slink||安装Tectonicus}}。
+
+== Ubuntu 10.10 64位 ==
+* 首次运行建议输入：<pre>sudo apt-get install xvfb libgl1-mesa-swx11 libxcursor1 libxrandr2 libxxf86vm1</pre>
+* 注意：不确定libxcursor1、libxrandr2、libxxf86vm1这些包是否为必需。
+* 若遇到以下错误：<pre>Exception in thread "main" java.lang.UnsatisfiedLinkError: /opt/java/64/jre1.6.0_24/lib/amd64/xawt/libmawt.so: libXtst.so.6: cannot open shared object file: No such file or directory</pre>
+* 可运行以下命令解决：sudo apt-get install libxtst6 libxt6
+
+== Ubuntu 11.04 ==
+* 无法正常工作。需要安装xvfb包{{verify}}。
+
+== Ubuntu 11.10 oneiric 64位 ==
+可完全不使用xvfb，跳过补丁及更多操作，因为部分必要组件会被移除，以允许xvfb使用randr。
+
+实践表明，Real VNC Server能完成以下步骤。
+
+; 安装
+* $>sudo apt-get install vnc4server
+* 可能需要：$>sudo apt-get install libgl1-mesa-swx11 libxcursor1 libxrandr2 libxxf86vm1
+
+; 运行
+* $>vncserver :1
+* $>export DISPLAY=:1
+* $>java -jar Tectonicus.jar config=config.xml
+
+; 清理
+* $>vncserver -kill :1
+* $>export DISPLAY=
+
+在config.xml中可无需设置force64BitNatives="true"。
+
+所有操作都可轻松编写为脚本并作为计划任务运行。
+
+== Ubuntu 12.10 (Quantal) 64位 ==
+与上述版本操作相同。唯一区别是在该版本Ubuntu中，'''libgl1-mesa-swx11'''已被弃用。
+
+解决方案是从[http://packages.ubuntu.com/precise/amd64/libgl1-mesa-swx11/download 此处]下载该包（从12.04/Precise提取），并通过dpkg手动安装。此方法需要移除libgl的所有安装信息，因此请确认这是你所需的操作（即确保不会破坏其他程序）。
+
+完成上述操作后，按照前面的步骤运行，Tectonicus应该能正常工作。
+
+这并非最理想的解决方案，但目前没有其他更好的办法（除非有更优方案出现）。
+
+== Debian（所有恰当的分支，包括Ubuntu 10.04之前版本） ==
+本部分教程将介绍如何在EC2 Debian 5.0 Lenny机器上运行Tectonicus。
+
+要运行Tectonicus，需要重新编译xvfb（因存在一行代码漏洞，这确实令人遗憾）。
+
+* sudo apt-get build-dep xvfb
+* 需在/etc/apt/sources.list中添加deb-src仓库
+* sudo apt-get source xvfb
+* 此时会得到一个名为xorg-server-X.X.X的目录，接下来需要对源代码打补丁
+* wget https://bugs.launchpad.net/xorg-server/+bug/516123/+attachment/1126330/+files/xvfb-fbScreenInit-handling.patch
+* wget https://bugs.launchpad.net/xorg-server/+bug/516123/+attachment/1126331/+files/xvfb-randr.patch
+* '''必须按正确顺序应用这些补丁'''
+* patch -p1 xorg-server-X.X.X/hw/vfb/InitOutput.c xvfb-fbScreenInit-handling.patch
+* patch -p1 xorg-server-X.X.X/hw/vfb/InitOutput.c xvfb-randr.patch
+* sudo apt-get install fakeroot
+* cd xorg-server-X.X.X
+* 下一步可能需要数小时
+* dpkg-buildpackage -rfakeroot -uc -b
+* cd ..
+* dpkg -i xvfb_*.deb
+* sudo apt-get install libgl1-mesa-swx11 libxcursor1 libxrandr2 libxxf86vm1 x11-xserver-utils xfonts-base
+* 尝试运行xvfb-run -a xrandr。若一切正常，应无错误提示
+* 为测试，安装mesa-utils并尝试运行xvfb-run glxinfo和xvfb-run glxgears
+
+现在已安装好Tectonicus的所有依赖项，更多信息详见{{slink||安装Tectonicus}}。
+
+注意：若有人知道更简单的修复xvfb的方法或能提供相关debs包，将非常棒。
+
+== Debian 6.0（Squeeze） ==
+按照上述步骤构建xvfb，同时还需安装一个mesa库：
+<pre>sudo apt-get install libgl1-mesa-swx11</pre>
+
+== OpenSuse ==
+更多内容即将呈现。
+
+== Archlinux ==
+对于Extra/Core仓库：
+
+<blockquote>
+sudo pacman -Sy xorg-server-xvfb xorg-server-utils xorg-server libxcursor libgl mesa libxrandr xorg-xrandr libxxf86vm
+</blockquote>
+
+以上是我目前所做的操作。若有人能查出相关依赖项，可共同完善本部分教程。
+
+更多内容即将呈现。
+
+== RHEL/CentOS 5（以及其他RPM分支（可能）） ==
+
+=== 方法1 ===
+ # sudo yum install xorg-x11-server-Xvfb xorg-x11-server-utils glx-utils 
+* 将xvfb-run脚本复制到/usr/local/bin
+* 为测试目的运行：
+ # xvfb-run glxinfo
+ # xvfb-run glxgears
+ # xvfb-run -a xrandr
+
+你现在已经安装了Tectonicus的所有依赖项，更多信息详见{{slink||安装Tectonicus}}。
+
+'''注意'''：原本可以将Debian中所需的包应用到xorg-x11-server-${VERSION}.src.rpm，然后重新构建（至少适用于RHEL/CentOS 5），否则“xvfb-run -a xrandr”命令会失败。
+
+CentOS 5.6 Source RPM（好不容易找到的）
+[ftp://ftp.pbone.net/mirror/ftp.centos.org/5.6/updates/SRPMS/xorg-x11-server-1.1.1-48.76.el5_6.4.src/Spm]
+
+=== 方法2 ===
+如何修补XORG，作者AltairPT
+
+本教程展示如何修补XORG，请按步骤操作，以便不太了解Linux的新手也能使用。抱歉让大家花时间阅读这个长教程。
+
+要修补xorg，需要一个新的用户账号（也可以用root，但新账号可防止出错）。这里不做解释，网上有很多相关教程。
+
+1 - 默认的RHEL/CentOS 5使用/usr/src/redhat作为%_topdir宏的位置。应更改该位置以防出错。
+
+在~/.rpmmacros中添加以下内容：
+
+  # Path to top of build area
+  %_topdir    /home/you/src/rpm
+
+
+2 - 若从未使用过RPM，可按以下方法创建目录：
+
+ # mkdir -p ~/src/rpm
+ # cd ~/src/rpm
+ # mkdir BUILD RPMS SOURCES SPECS SRPMS
+ # mkdir RPMS/{i386,i486,i586,i686,noarch,athlon}
+
+
+3 - 现在下载xvfb源码：
+
+ # cd ~/src/rpm/
+ # wget ftp://ftp.pbone.net/mirror/ftp.centos.org/5.6/updates/SRPMS/xorg-x11-server-1.1.1-48.76.el5_6.4.src.rpm
+
+
+4 - 通过安装xvfb获取xorg-x11-server.spec：
+
+ # rpm -ivh xorg-x11-server-1.1.1-48.76.el5_6.4.src.rpm
+
+
+现在文件已足够，可进行下一步。
+
+
+5 - 从Debian部分的源获取包：
+
+ # cd ~/src/rpm/SOURCES
+ # wget https://bugs.launchpad.net/xorg-server/+bug/516123/+attachment/1126330/+files/xvfb-fbScreenInit-handling.patch
+ # wget https://bugs.launchpad.net/xorg-server/+bug/516123/+attachment/1126331/+files/xvfb-randr.patch
+
+6 - 安装xvfb需编辑.spec文件：
+若没有nano，可使用喜欢的文本编辑器或下载它。
+
+若无SUDO权限，请以root身份安装：
+
+ # sudo yum install nano
+
+编辑xorg-x11-server.spec：
+
+ # cd ..
+ # cd SPECS
+ # nano xorg-x11-server.spec
+
+向下滚动，找到：
+
+ ...
+ Patch3518:  xserver-1.1.1-randr-fix-mouse-crossing.patch
+ Patch3519:  xserver-1.1.1-xfree86-check-remainders-for-Nan.patch
+
+在其下方添加：
+
+ Patch3520: xvfb-fbScreenInit-handling.patch
+ Patch3521: xvfb-randr.patch
+
+最终如下：
+
+ ...
+ Patch3518:  xserver-1.1.1-randr-fix-mouse-crossing.patch
+ Patch3519:  xserver-1.1.1-xfree86-check-remainders-for-Nan.patch
+ Patch3520: xvfb-fbScreenInit-handling.patch
+ Patch3521: xvfb-randr.patch
+ 
+ %define moduledir       %{_libdir}/xorg/modules
+ %define drimoduledir    %{_libdir}/dri
+ %define sdkdir          %{_includedir}/xorg
+
+然后在%prep段末尾，所有%patch语句之后添加：
+
+ %patch3520 -p0
+ %patch3521 -p0
+
+按CTRL + X，选择Y保存并退出nano。
+
+
+7 - 重构包（此步骤耗时较长，可趁此时吃点小吃或做点别的）：
+
+ # cd ~/src/rpm
+ # rpmbuild -ba SPECS/xorg-x11-server.spec
+
+'''注意'''：这步可能有些操作，但对我来说没问题。
+
+8 - 安装包：
+
+ # cd ~/src/rpm/SRPMS 
+ # rpm -ivh xorg-x11-server-1.1.1-48.76.4.src.rpm
+
+安装后，测试xvfb：
+
+ # xvfb-run -a xrandr
+
+若能运行，恭喜，已成功修补并安装XORG。
+
+若不能运行，请重新按教程步骤操作，更仔细些。
+
+Tectonicus可能运行不佳（出现Rasterizer错误），但我正在解决。找到修复方法后会贴在这里。
+
+
+9 - 手动修补（若需要）：
+按前面7个步骤操作后，Tectonicus仍无法运行，请阅读以下解决方案。需要按步骤进行。
+
+'''注意：'''本部分教程任何步骤出错都会导致编译失败，请反复检查代码。
+
+我会再次使用nano。也可使用其他喜欢的文本编辑器，甚至下载后在自己电脑上使用。
+
+
+ # cd ~/src/rpm/BUILD/xorg-server-1.1.1/hw/vfb
+ # nano InitOutput.c
+
+按CTRL + W，搜索：
+
+ #include "miline.h"
+
+修改为：
+
+ #endif /* HAS_SHM */
+ #include "dix.h"
+ #include "miline.h"
+ #include "randrstr.h"
+ 
+ #define VFB_DEFAULT_WIDTH      1280
+ #define VFB_DEFAULT_HEIGHT     1024
+
+
+现在搜索：
+
+ ret = fbScreenInit
+
+修改为：
+
+ ret = fbScreenInit(pScreen, pbits, pvfb->width, pvfb->height, dpix, dpiy, pvfb->paddedWidth,pvfb->bitsPerPixel);
+     if (!ret) return FALSE;
+ 
+  #ifdef RENDER
+  
+     if (Render) 
+  	fbPictureInit (pScreen, 0, 0);
+  #endif
+ 
+      if (!miRandRInit(pScreen))
+          /* Not sure how to emit warnings in xorg. Should warn here though:
+  	 * ("Could not initialise RANDR\n");
+   	 */
+          return FALSE;
+  
+      miInitializeBackingStore(pScreen);
+  
+      /*
+
+以上就是手动修补的所有步骤。
+
+重新编译：
+
+ # cd ~/src/rpm/BUILD/xorg-server-1.1.1
+ # sudo ./configure
+ # sudo make
+ # sudo make install
+
+
+接着，测试xvfb：
+
+ # xvfb-run -a xrandr
+
+
+若能运行，恭喜，已成功修补并安装XORG。
+
+若不能运行，请重新按教程步骤操作，更仔细些。
+
+Tectonicus可能运行不佳（出现Rasterizer错误），但我正在解决。找到修复方法后会贴在这里。
+
+希望本教程对大家有用，若有任何问题，请在[http://forums.superialbuilders.com]给“Altair”发消息，或发邮件至altair@sgc-clan.com，我会尽力帮忙。
+
+== xvfb-run脚本 ==
+* 专为无法获取指定平台脚本的情况而列出：
+
+ #!/bin/sh
+ #
+ # xvfb-run - 在虚拟X服务器中运行指定命令
+ #
+ # 此脚本启动Xvfb（“虚拟”X服务器）实例，在该服务器可用的情况下运行命令，
+ # 命令完成后终止X服务器。命令的返回值将作为此脚本的返回值。
+ #
+ # 若有人使用此脚本构建Debian包，请确保该包的Build-Depends包含xvfb、xbase-clients和xfonts-base。
+ #
+ set -e
+ #
+ PROGNAME=xvfb-run
+ SERVERNUM=99
+ AUTHFILE=$(pwd)/.Xauthority
+ ERRORFILE=/dev/null
+ STARTWAIT=3
+ XVFBARGS="-screen 0 640x480x8"
+ LISTENTCP="-nolisten tcp"
+ XAUTHPROTO=.
+ #
+ # 显示使用说明
+ usage () {
+     cat << EOF
+ 用法: $PROGNAME [选项...] 命令
+ #
+ 在虚拟X服务器环境中运行命令（通常是X客户端）
+ #
+ 选项:
+ -a        --auto-servernum   尝试获取空闲服务器编号，从--server-num开始
+ -e 文件   --error-file=文件  用于存储xauth错误和Xvfb输出的文件
+                              （默认: $ERRORFILE）
+ -f 文件   --auth-file=文件   用于存储身份验证cookie的文件
+                              （默认: ./.Xauthority）
+ -h        --help             显示此使用说明并退出
+ -n 编号    --server-num=编号  要使用的服务器编号（默认: $SERVERNUM）
+ -l        --listen-tcp       在X服务器中启用TCP端口监听
+ -p 协议    --xauth-protocol=协议  要使用的X身份验证协议名称
+                                    （默认为xauth的默认值）
+ -s 参数    --server-args=参数  传递给Xvfb服务器的参数（除服务器编号和-nolisten tcp外）
+                                    （默认: "$XVFBARGS"）
+ -w 延迟    --wait=延迟        等待Xvfb启动的延迟时间（秒）
+                              （默认: $STARTWAIT）
+ EOF
+     :;
+ }
+ #
+ # 通过查看/tmp中的.X*-lock文件找到空闲服务器编号
+ find_free_servernum() {
+     # ldv: FIXME: 存在竞争条件。
+     i=$SERVERNUM
+     while [ -f /tmp/.X$i-lock ]; do
+         i=$(($i + 1))
+     done
+     echo $i;
+ }
+ #
+ # 解析命令行
+ ARGS=$(getopt --options +ae:f:hn:lp:s:w: \
+        --long auto-servernum,error-file:auth-file:,help,server-num:,listen-tcp,xauth-protocol:,server-args:,wait: \
+        --name "$PROGNAME" -- "$@")
+ #
+ if [ $? -ne 0 ]; then
+     echo "$PROGNAME: 获取选项时出错" >&2
+     exit 1
+ fi
+ #
+ eval set -- "$ARGS"
+ #
+ while :; do
+     case "$1" in
+         -a|--auto-servernum) SERVERNUM=$(find_free_servernum) ;;
+         -e|--error-file) ERRORFILE="$2"; shift ;;
+         -f|--auth-file) AUTHFILE="$2"; shift ;;
+         -h|--help) SHOWHELP="yes" ;;
+         -n|--server-num) SERVERNUM="$2"; shift ;;
+         -l|--listen-tcp) LISTENTCP="" ;;
+         -p|--xauth-protocol) XAUTHPROTO="$2"; shift ;;
+         -s|--server-args) XVFBARGS="$2"; shift ;;
+         -w|--wait) STARTWAIT="$2"; shift ;;
+         --) shift; break ;;
+         *) echo "$PROGNAME: 解析选项\"$1\"时出错" >&2; USAGE=$(usage); echo "$USAGE" >&2; exit 1 ;;
+     esac
+     shift
+ done
+ #
+ if [ "$SHOWHELP" ]; then
+     usage
+     exit 0
+ fi
+ #
+ if [ -z "$*" ]; then
+     echo "$PROGNAME: 需要运行一个命令" >&2
+     exit 2
+ fi
+ #
+ if ! which xauth > /dev/null; then
+     echo "$PROGNAME: 未找到xauth命令；退出。" >&2
+     exit 3
+ fi
+ #
+ # 启动Xvfb
+ rm -f $AUTHFILE
+ MCOOKIE=$(mcookie)
+ XAUTHORITY=$AUTHFILE xauth add :$SERVERNUM $XAUTHPROTO $MCOOKIE > $ERRORFILE 2>&1
+ XAUTHORITY=$AUTHFILE Xvfb :$SERVERNUM $XVFBARGS $LISTENTCP > $ERRORFILE 2>&1 &
+ XVFBPID=$!
+ sleep $STARTWAIT
+ #
+ # 启动命令并保存其退出状态
+ set +e
+ DISPLAY=:$SERVERNUM XAUTHORITY=$AUTHFILE $@ 2>&1
+ RETVAL=$?
+ set -e
+ #
+ # 命令退出后终止Xvfb
+ kill $XVFBPID
+ #
+ # 清理
+ XAUTHORITY=$AUTHFILE xauth remove :$SERVERNUM > $ERRORFILE 2>&1
+ rm $AUTHFILE
+ #
+ # 返回所执行命令的退出状态
+ exit $RETVAL
+ #
+ # vim:set ai et sts=4 sw=4 tw=0:
+
+== Windows 7/Server 2008 R2 ==
+在Windows 7或Server 2008 R2系统中运行Tectonicus，需要借助VNC软件。大多数VNC程序会模拟显示服务器的一块区域，因此你需要为它们连接一个监听器。
+
+'''注意：'''本教程仅适用于Windows 7和Server 2008 R2操作系统。更早的版本或许也能运行，但未经过验证。
+
+目前仅Teamviewer测试成功，建议优先使用该软件，直至无法继续操作。
+
+'''Teamviewer使用说明：'''
+
+* 在服务器上下载并安装Teamviewer。
+* 安装过程中，出现提示时选择“Yes”以开启服务器的远程控制功能。
+* 安装完成后，打开Teamviewer，依次进入“Extra's”>“Options”。
+* 切换到“Security”标签页，为无人值守访问设置密码。
+* 将“Access Control”设置为允许完全访问。
+* 若有需要，可在“Remote Control”标签页中安装显示质量相关组件。
+
+此时服务器已设置完毕，随时可以使用。注意服务器的ID是连接的关键。
+
+接下来，在笔记本电脑、台式机或其他设备上安装Teamviewer作为客户端，用于连接服务器。客户端无需额外设置，若想更便捷，可注册账号并将服务器添加到联系人列表中。
+
+'''防火墙相关说明：'''
+
+Teamviewer工作在80端口，这是HTTP协议的默认端口。除非你禁止所有HTTP请求连接服务器，否则该端口默认处于开放状态。
+
+不过，若你确实需要使用其他端口，需将服务器切换到指定端口，并在防火墙中开放该端口。
+
+'''安装后注意事项：'''
+
+若未登出服务器就关闭Teamviewer，服务器会认为Tectonicus仍在渲染屏幕。这种情况下，你可以通过计划任务管理器设置Tectonicus定期启动。但要注意，不可使用远程控制，否则会重启屏幕，导致Tectonicus渲染所需的硬件无法正常工作。
+
+服务器的显卡及驱动可能随时出现问题，因此若在Teamviewer中运行失败，可尝试用直接连接到服务器的屏幕再试一次。
+
+== 安装Tectonicus ==
+你需要一个minecraft.jar（并非从minecraft.net下载的那个）。启动游戏后，它会自动下载到“.minecraft/bin”目录，该目录通常位于你的用户主目录下。
+
+请将所有“/path/to/”替换为正确的路径。
+
+如果在生物群系方面遇到错误，可为Tectonicus使用以下标签：<pre>useBiomeColours=false</pre> 当然，你也可以使用[[辅助程序与编辑器/Tectonicus/从命令行中控制Tectonicus]]中的其他标签。
+
+* 64位系统
+<code>xvfb-run -a '--server-args=-screen 0 1024x768x16' java -Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true -Dorg.lwjgl.opengl.Display.noinput=true -jar /path/to/Tectonicus_v1.17.jar mode=cmd worldDir=/path/to/world signs=all outputDir=/path/to/output_dir minecraftJar=/path/to/downloaded/minecraft.jar force64BitNatives=true verbose=true numSamples=0</code>
+* 32位系统
+<code>xvfb-run -a '--server-args=-screen 0 1024x768x16' java -Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true -Dorg.lwjgl.opengl.Display.noinput=true -jar /path/to/Tectonicus_v1.17.jar mode=cmd worldDir=/path/to/world signs=all outputDir=/path/to/output_dir minecraftJar=/path/to/downloaded/minecraft.jar verbose=true numSamples=0</code>
+
+注意：Tectonicus通常通过两种方式运行，一种是命令行，另一种是控制台。因此，任何替换了XML文件中的选项且使用64位系统的用户，需要开启force64BitNatives命令，才能使用XML配置文件。
+
+* 64位系统配置文件使用：
+<code>xvfb-run -a '--server-args=-screen 0 1024x768x16' java -Dorg.lwjgl.opengl.Display.allowSoftwareOpenGL=true -Dorg.lwjgl.opengl.Display.noinput=true -jar /path/to/Tectonicus_v1.17.jar config=/path/to/config.xml</code>
+
+== 反馈 ==
+请在[http://www.minecraftforum.net/viewtopic.php?f=1022&t=95739 Minecraft社区]中反馈，或发送电子邮件至wallnuss13@gmail.com反馈。
+
+[[en:Tutorials/Programs and editors/Tectonicus/VPS]]

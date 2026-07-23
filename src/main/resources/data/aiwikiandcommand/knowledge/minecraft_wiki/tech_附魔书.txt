@@ -1,0 +1,206 @@
+# 页面: 附魔书
+# 来源: https://zh.minecraft.wiki/w/%E9%99%84%E9%AD%94%E4%B9%A6
+# 分类: Java版独有信息, 使用简单计算器的页面, 可再生资源, 基岩版独有信息, 物品, 需要补充的条目
+# 抓取时间: 2026-07-14 17:38:14
+# 原始 Wikitext 内容:
+
+{{for||书（消歧义）}}
+{{Infobox item
+|image=Enchanted Book.gif
+|invimage=Enchanted Book
+}}
+
+'''附魔书（Enchanted Book）'''是用来给特定物品添加[[魔咒]]的[[物品]]。
+
+== 获取 ==
+=== 箱子战利品 ===
+{{LootChestItem|enchanted_book}}
+{{Loot notelist}}
+
+=== 钓鱼 ===
+{{main|钓鱼#垃圾与宝藏}}
+{{only|je|for=在[[开阔水域]]}}[[钓鱼]]时，附魔书可作为[[钓鱼#垃圾与宝藏|宝藏]]被钓起。使用附有[[海之眷顾]]魔咒的[[钓鱼竿]]会提高其概率。
+
+这些附魔书的[[附魔等级]]是30级，可以包含[[宝藏型魔咒]]（[[灵魂疾行]]、[[风爆]]与[[迅捷潜行]]除外）。
+
+=== 交易 ===
+{{Trade sources}}
+
+=== 以物易物 ===
+{{see also|以物易物}}
+[[猪灵]]获得[[金锭]]后有{{frac|5|469}}的概率给予玩家1本随机等级的[[灵魂疾行]]附魔书。
+
+=== 掉落 ===
+{{Exclusive|section=1|bedrock}}
+{{Drop sources|Enchanted Book|edition=bedrock}}
+
+=== 附魔 ===
+{{filetr|Enchanted Book 4x.png|缩略图|150px|一本附有多个高级魔咒的附魔书}}
+{{filetr|Similar enchantments.png|缩略图|150px|一本附有多个高级魔咒的附魔书。所有魔咒可以应用到同一个物品上}}
+玩家可以在[[附魔台]]给[[书]]附魔来制作附魔书。一本书获得多重附魔的概率较低，因为将要生成多个魔咒时会随机移除其中一个，并且书附到的魔咒的等级比大多数物品低。宝藏魔咒无法从附魔台获得。
+
+== 用途 ==
+附魔书拥有[[光效]]。
+
+=== 储存魔咒 ===
+{{missing information|section=1|缺失基岩版附魔书的魔咒的行为}}
+附魔书的标志性功能是存储魔咒。
+
+{{in|je}}附魔书在其[[物品堆叠组件]]<code>stored_enchantments</code>而非<code>enchantments</code>中存储魔咒，在<code>enchantment_glint_override</code>组件中储存光效。这意味着附魔书实际上并不具有魔咒，其存储的魔咒均不会生效。例如，存储了[[锋利]]的附魔书不会增加[[近战攻击]]的魔咒攻击力，持有存储了[[时运]]的附魔书不能增加[[挖掘]]的方块的掉落物。
+
+{{in|be}}附魔书以类似其他附魔物品的方式存储魔咒，这意味着附魔书具有魔咒。这导致部分魔咒会在附魔书上生效：具有[[火焰附加]]的附魔书可用于点燃[[TNT矿车]]<ref>{{bug|MCPE-235016}}</ref>，具有[[风爆]]的附魔书可用于产生[[爆炸#风爆|风爆效果]]。<ref>{{bug|MCPE-236575}}</ref>
+
+=== 铁砧操作 ===
+{{main|铁砧机制}}
+附魔书唯一的设计用途是在[[铁砧]]上作为消耗物品使用，从而为另一个物品（可以是附魔书）添加魔咒和升级魔咒。在铁砧上使用后，附魔书会消失。
+
+在生存模式中，在铁砧上消耗附魔书是为不能在[[附魔台]]上[[附魔（物品修饰）|附魔]]的物品（如[[剪刀]]、[[盾牌]]）添加魔咒的唯一方式。
+
+=== 祛魔 ===
+在[[砂轮]]上将附魔书祛魔会移除其上所有非诅咒魔咒，如果魔咒被全部移除，附魔书会变为普通的[[书]]。
+
+=== 雕纹书架 ===
+手持附魔书对[[雕纹书架]]按{{ctrl|使用}}键可将附魔书放入其中。
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Enchanted Book
+|spritetype=item
+|nameid=enchanted_book
+|showitemtags=je
+|itemtags={{GameTag|item|enchanted_book}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Enchanted Book
+|spritetype=item
+|nameid=enchanted_book
+|showitemtags=be
+|itemtags={{GameTagBE|item|enchanted_book}}
+|foot=1
+}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+在默认组件的基础上，附魔书使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt transclude|编码格式/DataComponent|codec_stored_enchantments_component}}
+</div>
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||2012年11月24日|link=none|[[Dinnerbone]]提到他想通过使用纸来添加一种新的附魔方法。}}
+|{{HistoryLine||2012年12月6日|link={{tweet|Dinnerbone|276777823996366848}}|[[Dinnerbone]]公布了首张附魔书的截图，显示用一本携带抢夺II魔咒的附魔书附魔一把钻石剑，消耗6等级经验值。他同时表示“这就是我原本想要加入铁砧的原因”。}}
+|{{HistoryLine||1.4.6|dev=12w49a|[[File:Enchanted Book Revision 1.png|32px]] 加入了附魔书。附魔书可以应用在所有物品上。}}
+|{{HistoryLine|||dev=12w50a|现在在[[生存模式]]里，附魔书可以用于不能通过附魔台附魔的几种物品。在[[创造模式]]中，玩家仍旧可以对任何物品使用附魔书，且被宣称是有意设计的。<ref>{{Tweet|Dinnerbone|277084371146665984}}</ref><ref>{{bug|MC-4203|||Fixed}}</ref>|[[图书管理员]]现在会在交易中以一本5-64[[绿宝石]]的价格提供附魔书。|附魔书现在会出现在[[地牢]]、[[废弃矿井]]、[[沙漠神殿]]、[[要塞]]与[[村庄]]中铁匠的[[箱子]]里。}}
+|{{HistoryLine|||dev=pre|为[[创造模式物品栏]]加入了附魔书。}}
+|{{HistoryLine||1.5.1|dev=13w11a|现在将拥有相同等级魔咒的附魔书合并可以将该魔咒提升一级。}}
+|{{HistoryLine||1.7.2|dev=13w36a|现在[[钓鱼]]可以得到属于“宝藏”的附魔书。这些附魔书可能拥有多个魔咒。}}
+|{{HistoryLine|||dev=13w39a|在对书附魔时，现在也能获得多重魔咒了。}}
+|{{HistoryLine||1.8|dev=14w25a|加入了[[深海探索者]]附魔书，最高等级为3级，可以使玩家更快的在水下移动。}}
+|{{HistoryLine||1.9|dev=15w42a|加入了[[冰霜行者]]附魔书，最高等级为2级，可以使玩家经过的水变成[[霜冰]]。
+|加入了[[经验修补]]附魔书，可以使玩家在拾取经验球时修复工具、武器或盔甲。}}
+|{{HistoryLine|||dev=15w43a|在[[要塞]]的图书馆内获得附魔书的概率翻了三倍多。}}
+|{{HistoryLine|||dev=15w44a|大幅增加了玩家在[[沙漠神殿]]、[[废弃矿井]]和[[地牢]]里发现附魔书的概率。在这些附魔书上的魔咒现在变得完全随机，而不是只在30级。}}
+|{{HistoryLine||1.11|dev=16w39a|附魔书现在可以在新的[[林地府邸]]的箱子中找到，带有完全随机的魔咒。
+|加入了[[绑定诅咒]]附魔书，会使玩家无法移除已经装备了的被诅咒的盔甲。
+|加入了[[消失诅咒]]附魔书，被诅咒的物品会在死亡时消失。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，此物品的数字ID是403。}}
+|{{HistoryLine|||dev=18w09a|附魔书现在有概率在[[水下遗迹]]的箱子中生成。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Enchanted Book.png|32px]] 更改了纹理。}}
+|{{HistoryLine|||dev=18w47a|附魔书现在有概率在[[掠夺者前哨站]]的箱子中生成。}}
+|{{HistoryLine||1.16|dev=20w11a|加入了[[灵魂疾行]]附魔书，最高等级为3级，可以让玩家更快地在[[灵魂沙]]和[[灵魂土]]上移动。其只能通过[[以物易物]]获得。}}
+|{{HistoryLine|||dev=20w16a|[[灵魂疾行]]附魔书现在会在[[堡垒遗迹]]的箱子中生成。}}
+|{{HistoryLine||1.19|dev=exp1|加入了[[迅捷潜行]]附魔书，最高等级为3级，可以加快玩家的[[潜行]]速度。其只能从[[远古城市]]的箱子中获得。}}
+|{{HistoryLine||1.19.3|exp=update_1_20|dev=22w42a|加入了[[雕纹书架]]，可以使用附魔书与之交互。}}
+|{{HistoryLine||1.20|dev=23w12a|22w42a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.20.3|exp=update_1_21|dev=23w45a|附魔书现在可以在[[试炼密室]]的奖励箱中获得。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w05a|现在可以从[[宝库]]中获得[[风爆]]、[[破甲]]和[[致密]]三种附魔书。}}
+|{{HistoryLine||1.21|dev=24w18a|23w45a和24w05a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.9|dev=25w34a|附魔书的[[稀有度]]由“少见”更改为“稀有”。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|[[File:Enchanted Book Revision 1.png|32px]] 加入了附魔书。}}
+|{{HistoryLine||0.13.0|dev=build 1|附魔书现在会在[[沙漠神殿]]的箱子中生成。}}
+|{{HistoryLine||0.14.0|dev=build 1|附魔书现在会在[[废弃矿井]]的箱子中生成。}}
+|{{HistoryLine||0.15.0|dev=build 1|附魔书现在会在[[地牢]]和[[丛林神庙]]的箱子中生成。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|附魔书现在会在[[末地城]]中生成。}}
+|{{HistoryLine||1.0.4|dev=1.0.4.0|附魔书现在可以从图书管理员[[村民]]用5-64个绿宝石交易而得，作为该村民的1、4、5级交易。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|附魔书现在会在[[林地府邸]]中生成。
+|加入了[[经验修补]]和[[冰霜行者]]附魔书。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.20.1|附魔书现在有概率在[[水下遗迹]]的箱子中生成。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Enchanted Book.png|32px]] 更改了纹理。|附魔书现在有概率在[[掠夺者前哨站]]的箱子中生成。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.4|在袭击中生成的卫道士和掠夺者现在有概率掉落附魔书。
+|更改了交易，附魔书可以从和图书管理员的交易获得，需要5至64个绿宝石。
+|图书管理员现在有50%的概率出售附魔书，作为它们的第1、2、3级交易，并且有三分之一的概率在第四层交易中出售出售该物品。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|加入了[[灵魂疾行]]附魔书，其只能通过[[以物易物]]和在[[堡垒遗迹]]的箱子中获得。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.24|加入了[[迅捷潜行]]附魔书，最高等级为3级，可以加快玩家的[[潜行]]速度。其只能从[[远古城市]]的箱子中获得。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.22|现在使用带有时运的附魔书挖掘马铃薯、胡萝卜、西瓜、下界疣、向日葵、丁香、玫瑰丛、牡丹、荧石和沙砾时会增加物品的掉落概率。}}
+|{{HistoryLine||1.20.60|exg=updateAnnouncedLive2023|dev=1.20.60.20|附魔书现在可以在[[试炼密室]]的奖励箱中获得。}}
+|{{HistoryLine|||exg=none|dev=1.20.60.23|现在使用带有时运的附魔书挖掘向日葵、丁香、玫瑰丛和牡丹时不再会增加物品的掉落概率。}}
+|{{HistoryLine|||dev=1.20.60.24|现在使用带有时运的附魔书挖掘马铃薯、胡萝卜、西瓜、甜浆果丛<ref group="注">由于{{bug|MCPE-172622}}，甜浆果丛的掉落并没有改变。</ref>、下界疣、荧石和沙砾时不再会增加物品的掉落概率。}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.20|[[击退]]、[[冲击]]、[[亡灵杀手]]、[[抢夺]]和[[多重射击]]附魔书现在可以从[[不祥宝库]]稀有战利品中获得。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|1.20.60.20和1.21.0.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.0.23|现在[[致密]]、[[破甲]]和[[风爆]]附魔书可以从不祥宝库稀有战利品中获得，以近似匹配{{el|je}}。
+|将[[不祥宝库]]稀有战利品中[[击退]]和[[冲击]]附魔书的最大等级由V减少至II以近似匹配{{el|je}}。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.21|附魔书的稀有度由少见改为常见。<ref>{{bug|MCPE-184791}}</ref>}}
+|{{HistoryLine||1.21.100|dev=1.21.100.22|现在火焰附加附魔书不再能用于点燃[[蜡烛]]、[[营火]]和[[TNT]]。<ref name="MCPE-100021">{{bug|MCPE-100021|||Fixed}}</ref>}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU14|xbone=CU1|ps3=1.04|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Enchanted Book Revision 1.png|32px]] 加入了附魔书。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Enchanted Book.png|32px]] 更改了纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Enchanted Book Revision 1.png|32px]] 加入了附魔书。}}
+}}
+
+== 你知道吗 ==
+* 通过{{cmd|give}}命令获得附魔书时，如果命令不包含任何已有的魔咒类型，附魔书将不会带有任何魔咒，但是还是会有[[光效]]。
+
+== 画廊 ==
+<gallery>
+File:Dinnerbones enchanted Books.png|[[Dinnerbone]]首次公布的附魔书截图
+File:DungeonBook.png|一本在地牢里发现的附魔书
+</gallery>
+
+== 参见 ==
+* [[书（消歧义）]]
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox items|Ingredients}}
+
+[[de:Verzaubertes Buch]]
+[[en:Enchanted Book]]
+[[es:Libro encantado]]
+[[fr:Livre enchanté]]
+[[hu:Varázskönyv]]
+[[it:Libro incantato]]
+[[ja:エンチャントの本]]
+[[ko:마법이 부여된 책]]
+[[lzh:淬靈書]]
+[[nl:Betoverd boek]]
+[[pl:Zaklęta książka]]
+[[pt:Livro Encantado]]
+[[ru:Зачарованная книга]]
+[[th:หนังสือร่ายมนตร์]]
+[[uk:Зачарована книга]]

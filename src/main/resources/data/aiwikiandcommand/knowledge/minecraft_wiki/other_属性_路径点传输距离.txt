@@ -1,0 +1,68 @@
+# 页面: 属性/路径点传输距离
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E8%B7%AF%E5%BE%84%E7%82%B9%E4%BC%A0%E8%BE%93%E8%B7%9D%E7%A6%BB
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:31
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}
+{{Infobox attribute}}
+
+'''路径点传输距离（Waypoint Transmit Range）'''是控制生物向周围玩家传输路径点的[[属性]]。
+
+== 行为 ==
+{{main|路径点}}
+[[File:Waypoint Range Of Players.png|230px|thumb|红色范围表示路径点传输距离，蓝色范围表示路径点接收距离。仅当Alex的传输范围包含Steve且Steve的接收范围包含Alex时（即第二种情况），Steve才能看到Alex的路径点图标]]
+
+路径点传输距离大于0的生物会被标记为路径点传输器（或称为路径点源），并创建一个路径点。
+
+只有接收者与路径点源的距离小于等于源的路径点传输距离和接收者的{{attribute|waypoint_receive_range}}，这个路径点才能在定位栏中显示。
+
+此属性被修改后，如果路径点传输距离为0，则该生物的路径点会被移除。
+
+== 适用的生物 ==
+{| class="wikitable collapsible sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Player}}
+| 60000000
+|-
+| 其他生物
+| 0
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! {{tooltip|修饰符ID|省略命名空间}}
+! 操作
+! 值
+! 数据持久化
+! 来源
+|-
+| effect.waypoint_transmit_range_hide
+| add_multiplied_total (Op2)
+| -1
+| 是
+| [[隐身]]状态效果
+|-
+| waypoint_transmit_range_crouch
+| add_multiplied_total (Op2)
+| -1
+| 否
+| 玩家[[潜行]]时添加，脱离潜行状态时移除
+|-
+| waypoint_transmit_range_hide
+| add_multiplied_total (Op2)
+| -1
+| 否
+| {{BlockLink|Head}}和{{BlockLink|Carved Pumpkin}}，应用于<code>head</code>（头盔）槽位
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了路径点传输距离属性，ID为<code>waypoint_transmit_range</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

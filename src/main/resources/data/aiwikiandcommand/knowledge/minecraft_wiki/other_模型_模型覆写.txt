@@ -1,0 +1,206 @@
+# 页面: 模型/模型覆写
+# 来源: https://zh.minecraft.wiki/w/%E6%A8%A1%E5%9E%8B/%E6%A8%A1%E5%9E%8B%E8%A6%86%E5%86%99
+# 分类: 
+# 抓取时间: 2026-07-14 17:29:23
+# 原始 Wikitext 内容:
+
+{{Outdated|edition=java|模型覆写的功能已于[[Java版1.21.4]]被[[物品模型映射]]取代。}}
+
+'''模型覆写（Model Overrides）'''允许指定一个模型在某些情况下是否要使用其他模型。
+
+== 格式 ==
+模型覆写仅对烘焙模型使用，烘焙模型文件以JSON格式存储于资源包{{filepath|-{}-assets/<''命名空间''>/models}}目录下，具有下列结构：
+
+<div class="treeview">
+* {{nbt|object}}：根对象。
+** {{nbt|list|overrides}}：指定一些不使用此模型而使用其他模型的情况。
+*** {{nbt|object}}：覆写模型的一种情况。
+**** {{nbt|object|predicate|required=1}}：使用覆写模型的条件，可以定义多种条件。
+***** {{nbt|float|<''模型覆写条件''>}}：一项要检查的条件和要求阈值。
+**** {{nbt|string|model|required=1}}：（命名空间ID）覆写条件成功时使用的模型，解析时自动转换为{{filepath|assets/<''命名空间''>/models/<''路径''>.json}}。
+**其他字段的定义与使用参见{{slink|模型#烘焙模型}}。
+</div>
+
+== 行为 ==
+<!--取自模型的旧版本页面，有修改-->
+烘焙模型包括绝大部分方块模型与绝大部分物品模型，其中物品模型可视为方块模型的一种特殊情况。但{{nbt|list|overrides}}数据只在模型文件作为物品模型读取时才有效，作为方块模型读取时会忽略。
+
+模型覆写不允许出现循环覆写的情况。假设模型A定义了覆写为模型B的一种情况，模型B又定义了覆写为模型A的一种情况，即使两种条件完全互斥不能同时满足，游戏也不允许这种覆写存在。尝试加载有循环覆写的资源包时游戏会抛出栈溢出错误，并终止所有资源包加载且卸载所有加载完成的资源包。
+
+=== 继承 ===
+模型覆写没有继承性，每一个模型文件定义的{{nbt|list|overrides}}数据单独读取。即使父模型定义的模型覆写条件检查成功，游戏也不会因此对子模型进行覆写。
+
+这也适用于覆写间的“继承”：假如模型A定义覆写为模型B，模型B定义覆写为模型C，那么即使这两个覆写条件都满足，模型A也只应用模型B，不会应用模型C。<ref>{{bug|MC-267813|||Invalid}}</ref>
+
+=== 条件检查 ===
+游戏会根据每一种情况定义的模型覆写条件计算出相应的浮点数用于比较，当游戏计算出的浮点数'''不小于给定的阈值'''时这此项条件检查成功，否则失败。如果一种情况定义了多种条件，则需要所有条件都满足阈值才检查成功；如果指定的模型覆写条件不适配对应的模型，那么计算出的浮点数是负无穷大，检查永远不可能成功。
+
+覆写模型的检查是'''有序的'''：在{{nbt|list|overrides}}列表内定义的覆写模型越靠前，其检查顺序就越靠后，游戏按照倒序一一检查模型覆写是否成功。只要有一种情况检查成功，那么就会应用此覆写，并不会检查其他模型覆写数据。因此模型覆写条件中的浮点数在模型覆写数据列表中需要从小到大排序，如果排序不合理，游戏可能会错误选择覆写模型。
+
+== 模型覆写条件 ==
+游戏为物品模型提供了各种模型覆写条件（也被称为'''物品标签谓词'''），使物品可以根据不同的情况切换模型。
+
+下列为有效的模型覆写条件与它们的适用物品：
+
+{| class="wikitable"
+! 模型覆写条件 !! 适用物品 !! 值域 !! 条件计算值说明
+|-
+| angle
+| {{ItemLink|Compass}}<br>{{ItemLink|Recovery Compass}}
+| 0~1，不包括1 ||
+* 与目标位置的水平角度，其中指向右侧为0.25，前方为0，左侧为0.75，后方为0.5
+* 此物品与目标位置不在同一个维度时为随机值
+* 指南针在非[[主世界]]维度时为随机值<ref group="注" name="natural_false">由[[维度类型]]的{{nbt|boolean|natural}}决定，为<code>false</code>时为随机值。</ref>
+|-
+| blocking
+| {{ItemLink|Shield}}
+| 0或1 ||
+* 盾牌正在格挡时为1，否则为0
+* 不在生物物品栏或生物没有正在使用此物品时为0
+|-
+| broken
+| 所有物品
+| 0或1 ||
+* 物品剩余耐久值为1时为1，否则为0
+|-
+| brushing
+| {{ItemLink|Brush}}
+| 0~1，间隔不小于0.1 ||
+* 刷子持续使用时间，以0.5秒为周期，周期开始时为1，结束时为0
+* 没有使用刷子时为0
+|-
+| cast
+| {{ItemLink|Fishing Rod}}
+| 0或1 ||
+* 钓鱼竿浮漂已抛出时为1，否则为0
+|-
+| charged
+| {{ItemLink|CrossBow}}
+| 0或1 ||
+* 弩装填了弹射物时为1，否则为0
+|-
+| cooldown
+| 所有物品
+| 0~1 ||
+* 物品的使用冷却百分比，冷却开始时为1，结束时为0
+* 物品没有使用冷却属性（即不存在{{nbt|object|use_cooldown}}物品堆叠组件）时为0
+** 盾牌的停用和山羊角的吹奏冷却也被视为使用冷却
+* 物品不在玩家物品栏时为0
+|-
+| custom_model_data
+| 所有物品
+| 单精度浮点数范围内 ||
+* 检查物品的{{nbt|int|custom_model_data}}[[物品堆叠组件]]的值。检查过程中会先将{{nbt|int|custom_model_data}}的整型数值转换为单精度浮点数后再比较，被转换的整型值[[wikipedia:Single-precision floating-point format#Precision limitations on integer values|在超过16777216时损失精度]]
+* 物品不存在这个物品堆叠组件时为0
+|-
+| damage
+| 所有物品<ref group="注" name="has_max_damage">仅对具有耐久度属性（即存在{{nbt|int|max_damage}}物品堆叠组件）的物品有效</ref>
+| 0~1 ||
+* 物品的损坏程度，损坏值为0时为1，与最大耐久度相同时为0
+|-
+| damaged
+| 所有物品<ref group="注" name="has_max_damage"/>
+| 0或1 ||
+* 物品未损坏或无法损坏时为0，否则为1
+|-
+| filled
+| {{ItemLink|bundles}}
+| 0~1 ||
+* 收纳袋的填充程度，为空时为0，已满时为1
+|-
+| firework
+| {{ItemLink|CrossBow}}
+| 0或1 ||
+* 弩装填了烟花火箭时为1，否则为0
+|-
+| honey_level
+| {{BlockLink|bee-nest}}<br>{{BlockLink|Beehive}}
+| 0或1 ||
+* 蜂巢或蜂箱物品的<code>honey_level</code>属性值为5时为1，否则为0
+|-
+| lefthanded
+| 所有物品
+| 0或1 ||
+* 持有此物品的生物主手是左手时为1，否则为0
+* 物品不在生物物品栏时为0
+|-
+| level
+| {{BlockLink|Light}}
+| 0~1，间隔0.0625 ||
+* 光源方块的亮度等级，按照亮度分为16个等级，每一等级增量0.0625（{{frac|1|16}}）
+* 光源方块物品不存在亮度等级属性数据时为1
+|-
+| pull
+| {{ItemLink|Bow}}<br>{{ItemLink|CrossBow}}
+| 0~1 ||
+* 弓或弩被拉伸的程度，没有拉伸为0，满弦为1
+* 不在生物物品栏或生物没有正在使用此物品时为0
+|-
+| pulling
+| {{ItemLink|Bow}}<br>{{ItemLink|CrossBow}}
+| 0或1 ||
+* 弓或弩被拉伸时为1，否则为0
+* 不在生物物品栏或生物没有正在使用此物品时为0
+|-
+| throwing
+| {{ItemLink|Trident}}
+| 0或1 ||
+* 三叉戟正在被准备抛出时为1，否则为0
+* 不在生物物品栏或生物没有正在使用此物品时为0
+|-
+| time
+| {{ItemLink|Clock}}
+| 0~1 ||
+* 一天中的时间，其中正午时为0<ref group="注" name="time_noon">实际上1也为此值，若同时设置0和1则会在正午时随机选择</ref>，午夜时为0.5
+* 时钟在非主世界维度时为随机值<ref group="注" name="natural_false"/>
+|-
+| tooting
+| {{ItemLink|Goat Horn}}
+| 0或1 ||
+* 山羊角被吹响时为1，否则为0
+* 不在生物物品栏或生物没有正在使用此物品时为0
+|-
+| trim_type
+| 所有物品
+| 0~1 ||
+* 检查物品的{{nbt|object|trim}}[[物品堆叠组件]]的盔甲纹饰材料{{nbt|string}}{{nbt|compound|material}}的{{nbt|float|item_model_index}}值，以判定物品纹饰是由哪种材料构成的
+* {{nbt|float|item_model_index}}大于1时为1，小于0时为0
+* 物品不存在这个物品堆叠组件时为0
+|}
+{{notelist|注}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w31a|加入了模型覆写。
+|时钟现在使用覆写条件<code>clock</code>而不是继承<code>builtin/clock</code>。
+|指南针现在使用覆写条件<code>angle</code>而不是继承<code>builtin/compass</code>。
+|弓和钓鱼竿现在使用模型覆写统一引用，而不是分立的模型。}}
+|{{HistoryLine|||dev=15w33c|加入了覆写条件<code>blocking</code>。}}
+|{{HistoryLine|||dev=15w34c|加入了覆写条件<code>cooldown</code>。}}
+|{{HistoryLine|||dev=15w41a|加入了覆写条件<code>broken</code>。}}
+|{{HistoryLine||1.13|dev=18w07a|加入了覆写条件<code>throwing</code>。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了覆写条件<code>charged</code>、<code>custom_model_data</code>和<code>firework</code>。
+|现在覆写条件<code>pull</code>和<code>pulling</code>对弩也可用。}}
+|{{HistoryLine||1.17|dev=20w45a|加入了覆写条件<code>filled</code>。}}
+|{{HistoryLine|||dev=21w05a|提升了覆写的性能。}}
+|{{HistoryLine|||dev=21w13a|加入了覆写条件<code>level</code>。}}
+|{{HistoryLine|||dev=21w20a|现在覆写条件<code>level</code>的取值不再是0至15的整数。
+|现在覆写条件<code>filled</code>不再支持大于1的取值。<ref>{{bug|MC-226213|||Fixed}}</ref>}}
+|{{HistoryLine||1.19|dev=22w14a|现在覆写条件<code>angle</code>对追溯指针也可用。}}
+|{{HistoryLine|||dev=22w17a|加入了覆写条件<code>tooting</code>。}}
+|{{HistoryLine||1.19.4|dev=23w04a|加入了覆写条件<code>trim_type</code>，始终返回负无穷。}}
+|{{HistoryLine|||exp=update_1_20|dev=23w04a|现在覆写条件<code>trim_type</code>会根据指定物品的盔甲纹饰数据返回0至1之间的值。}}
+|{{HistoryLine|||exp=none|dev=23w07a|加入了覆写条件<code>brushing</code>。}}
+|{{HistoryLine||1.20|dev=23w12a|23w04a中覆写条件<code>trim_type</code>返回值的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.20.5|dev=24w09a|现在覆写条件<code>trim_type</code>对所有物品可用，此前仅对属于<code>#trimmable_armor</code>标签的物品可用。}}
+|{{HistoryLine||1.21.2|dev=24w35a|加入了覆写条件<code>honey_level</code>。}}
+|{{HistoryLine|||dev=24w36a|现在覆写条件<code>broken</code>对所有物品可用，此前仅对鞘翅可用。}}
+|{{HistoryLine|||dev=pre1|现在覆写条件<code>filled</code>对染色的收纳袋也可用。}}
+|{{HistoryLine||1.21.4|dev=24w45a|从烘焙模型中移除了{{nbt|list|overrides}}字段，模型覆写的功能被[[物品模型映射]]取代。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+[[Category:资源包]]

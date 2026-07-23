@@ -1,0 +1,166 @@
+# 页面: 游戏测试
+# 来源: https://zh.minecraft.wiki/w/%E6%B8%B8%E6%88%8F%E6%B5%8B%E8%AF%95
+# 分类: 
+# 抓取时间: 2026-07-14 17:30:54
+# 原始 Wikitext 内容:
+
+-{-|批次}-{{about|游戏测试系统||命令/gametest}}
+{{stub}}
+'''游戏测试（GameTest/Game Test）'''是用于测试游戏各项行为的[[wzh:集成测试|{{tr|集成测试|整合測試}}]]。<ref name="25w03a">{{snap|25w03a}}</ref>
+
+游戏测试系统是一个较独立的游戏系统，被设计于在标准[[超平坦世界]]中运行，与其他游戏系统共同运行会导致未定义的行为。<ref name="25w03a"/><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/documents/gametestgettingstarted}}</ref>
+
+== Java版 ==
+=== 测试实例 ===
+{{main|测试实例定义格式}}
+'''测试实例（Test Instance）'''定义了单个测试的基本信息。包括'''[[测试环境]]（Test Environment）'''、'''测试结构'''和'''测试的成败条件'''等必要信息，也包括一些与有关测试的参数，例如测试的超时后失败时间、最大可运行次数，是否必需，是否不可在测试服务端中运行等。
+
+测试环境是游戏运行测试的游戏环境，例如特定的[[天气]]、[[世界时钟定义格式|时间]]和[[游戏规则]]等。
+
+测试结构是运行测试时使用的方块结构。方块结构可以被[[结构方块]]或[[测试实例方块]]保存。
+
+测试实例有'''基于方块的测试（Block-Based Test）'''和'''内置函数测试（Built-in Function Test）'''两种类型。
+
+==== 基于方块的测试 ====
+{{see also|测试方块}}
+基于方块的测试，其测试的成败取决于测试结构中的测试方块。测试启动时，启动模式的测试方块会发出红石信号，以激活其他测试方块。
+
+==== 内置函数测试 ====
+内置函数测试，其测试的成败取决于硬编码测试函数。与基于方块的测试不同，内置函数测试往往可以提供更有价值的错误信息，包括失败的具体位置和原因。
+
+关于测试函数的注册方法和使用细节，请参见[https://www.minecraft.net/zh-hans/article/minecraft-snapshot-25w03a 官方示例]以及[https://docs.fabricmc.net/develop/automatic-testing#game-tests Fabric]和[https://docs.neoforged.net/docs/misc/gametest NeoForge]提供的文档。
+
+==== 运行测试实例 ====
+游戏提供了下列运行测试的方法：
+* 通过[[测试实例方块]]直接运行。在测试实例方块的界面中输入测试实例的ID，点击“加载并运行”按钮后此测试实例方块就会运行指定的测试实例。
+* 通过命令{{cmd|test}}。命令{{cmd|test}}控制了测试的多项行为，包括清除测试、运行测试、重新运行测试、重新运行已失败的测试等，由命令提供的测试参数会覆盖测试实例的参数。
+* 通过游戏内置的测试服务端，其可以自动运行测试实例。
+
+不论是哪种方式，都依赖于测试实例方块。测试实例方块负责了渲染信标光柱以标识测试的运行与成败、保存错误标记以记录具有失败坐标的测试的失败位置的信息以及保存测试结束后的测试总结消息。在世界中运行的测试会在[[聊天栏]]输出测试相关的消息，测试服务端会在日志中输出测试相关的消息。游戏按批次运行测试，当同时运行多个测试时，游戏会在这一批次的测试全部运行完毕后，再运行下一批次的测试。
+
+=== 测试服务端 ===
+测试服务端位于[[客户端核心文件]]和[[服务端核心文件]]内，作为可运行主类存在于两种文件的代码中。
+
+测试服务端的类名为<code>net.minecraft.gametest.Main</code>。
+
+==== 启动参数 ====
+因为核心文件清单文件中定义的主类并非测试服务端类，所以必须指定JVM参数运行测试服务端。
+
+如果要运行测试服务端，需要下列命令：
+
+{{syntaxhighlight|lang=bash|<nowiki>
+java -cp client.jar net.minecraft.gametest.Main <启动参数>                     # 客户端核心文件运行方式（需要额外指定类路径）
+java -DbundlerMainClass=net.minecraft.gametest.Main -jar server.jar <启动参数> # 服务端核心文件运行方式
+</nowiki>}}
+
+下列为测试服务端启动参数：
+* <code>--help</code>：输出测试服务端的命令帮助。此参数具有最高优先级，其他参数会被此项参数忽略。
+* <code>-{}---packs <''路径''></code>：指定存档要使用的[[数据包]]的目录。在此目录下任何具有有效[[pack.mcmeta|数据包元数据]]的文件夹或zip压缩包均会被游戏视为有效数据包。
+* <code>-{}---report <''路径''></code>：指定类似于JUnit的XML报告导出的路径，名称相同时会替换已有的报告。
+* <code>-{}---tests <''选择''></code>：指定要运行的测试。不指定或指定空ID时默认可运行所有测试，格式参见{{slink|参数类型|resource_selector}}。
+* <code>-{}---universe <''路径''></code>：指定存档的目录。默认为<code>gametestserver</code>，名称相同时会替换已有的存档。
+** 存档自身的文件名称为<code>gametestworld</code>，不可修改。
+* <code>-{}---verify <''布尔值''></code>：是否启用测试验证，默认为<code>false</code>。启用时，每个测试的每个角度（0、90、180、270）均会各运行100次。
+
+==== 世界行为 ====
+测试服务端创建的服务端世界存档名为“Test Level”，允许命令，默认游戏模式为创造模式，世界为标准超平坦世界。
+
+初始化世界完成后，游戏会根据传入参数筛选出所有可用的测试实例，排除掉所有手动运行（{{nbt|boolean|manual_only}}为<code>true</code>）的测试实例后，在世界的<code>[-14999992, -59, -14999992]</code>至<code>[14999992, -59, 14999992]</code>范围内随机选取一处作为世界出生点，并从此处开始自动运行测试，每行运行8个。
+
+==== 日志监测 ====
+测试服务端启动时世界内没有任何玩家，故不能直接查看测试的结果，但是游戏会将测试的结果输出到日志中。
+
+如果测试未开始，则开始测试。每经过20游戏刻，游戏会输出一行文本，按照单个测试的加载顺序展示测试结果：
+* 测试结构的总格式为<code>[ ... ]</code>，由一对方括号括起，其中的每个字符都代表一个测试。
+** 如果测试未开始，则对应的位置输出空白字符。
+** 如果测试成功，则对应的位置输出<code>+</code>。
+** 如果测试失败，则检测测试是否必须成功（{{nbt|boolean|required}}为<code>true</code>），如果是则对应的位置输出<code>X</code>，否则输出<code>x</code>。
+** 其他情况下（如测试已经开始但尚未结束）对应的位置输出<code>_</code>。
+
+如果没有任何可以进行的测试，或者所有测试均测试完毕，那么测试服务端会自动停止运行。服务端停止运行后会再次按上述格式输出测试的结果，同时输出总结性的日志，包括测试的成功数量和失败数量等，失败的测试也会输出测试信息和失败信息。
+
+例如，以下运行了4个测试，其中2个可选2个必选，2个成功2个失败，日志输出如下：
+
+<pre>
+[01:30:44] [Server thread/INFO]: 4 tests are now running at position 2052574, -59, 8521725!
+[01:30:45] [Server thread/INFO]: Running test environment 'minecraft:default' batch 0 (4 tests)...
+[01:30:45] [Server thread/INFO]: [xX++]
+[01:30:45] [Server thread/INFO]: [xX++]
+[01:30:45] [Server thread/INFO]: ========= 4 GAME TESTS COMPLETE IN 980.8 ms ======================
+[01:30:45] [Server thread/INFO]: 1 required tests failed :(
+[01:30:45] [Server thread/INFO]:    - example:fail_required: Test structure missing Start block on tick 0
+[01:30:45] [Server thread/INFO]: 1 optional tests failed
+[01:30:45] [Server thread/INFO]:    - example:fail_optional: Test structure missing Start block on tick 0
+[01:30:45] [Server thread/INFO]: ====================================================
+</pre>
+
+==== XML报告 ====
+如果指定了<code>--report</code>，则游戏会将第一批次的测试结果保存到报告中。报告使用XML结构，根元素永远是<code><testsuite></code>，一级子元素永远是<code>-{}-<testsuite time="<''测试总时长''>" timestamp="<''时间戳''>"></code>。一级子元素下每一个二级子元素都代表一项测试实例，如果测试成功则输出<code>-{}-<testcase classname="<''测试结构ID''>" name="<''命名空间ID''>" time="<''测试时长''>"/></code>，否则会增加一个三级子元素，内容为<code>-{}-<failure message="(<''X''>, <''Y''>, <''Z''>) <''测试失败的原因''>"/></code>（必需测试失败）或<code>-{}-<skipped message="(<''X''>, <''Y''>, <''Z''>) <''测试失败的原因''>"/></code>（可选测试失败）。其中时间的单位为秒，<code><''X''></code>、<code><''Y''></code>和<code><''Z''></code>为测试失败的测试实例所对应的测试实例方块的方块坐标。
+
+以上文日志检测的示例为例：
+
+<syntaxhighlight lang="xml">
+<testsuite>
+  <testsuite time="9.088" timestamp="2026-04-22T17:30:36.786133400Z">
+    <testcase classname="minecraft:empty" name="example:fail_optional" time="0.004">
+      <skipped message="(2052574, -59, 8521725) Test structure missing Start block on tick 0"/>
+    </testcase>
+    <testcase classname="minecraft:empty" name="example:fail_required" time="0.011">
+      <failure message="(2052580, -59, 8521725) Test structure missing Start block on tick 0"/>
+    </testcase>
+    <testcase classname="minecraft:empty" name="example:success_optional" time="0.001"/>
+    <testcase classname="minecraft:empty" name="example:success_required" time="0.0"/>
+  </testsuite>
+</testsuite>
+</syntaxhighlight>
+
+==== 退出代码 ====
+{| class="wikitable"
+! 场景 !! 退出代码
+|-
+| 所有测试均测试成功 || 0
+|-
+| 存在测试失败的测试 || 失败次数
+|-
+| 没有测试被启动 || -1
+|-
+| 游戏崩溃 || 1
+|}
+
+== 基岩版 ==
+{{Experimental|gametest|section=1}}
+基岩版的游戏测试系统被称为'''游戏测试框架（GameTest Framework）'''，游戏测试由[[附加包]]驱动，测试函数使用JavaScript编写。这些测试可由命令{{cmd|gametest}}运行。
+
+Mojang提供了一系列与游戏测试框架相关的文档和实例：
+* [https://learn.microsoft.com/en-us/minecraft/creator/documents/gametestgettingstarted 游戏测试框架介绍]
+* [https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server-gametest/minecraft-server-gametest <code>@minecraft/server-gametest</code>脚本API文档]
+* [https://github.com/microsoft/minecraft-gametests <code>@minecraft/server-gametest</code>样例]
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.15|dev=19w35a|在代码中加入了游戏测试框架。}}
+|{{HistoryLine||1.21.5|dev=25w03a|重写了游戏测试框架，加入了测试服务端主类，并允许数据包和Mod访问游戏测试系统。}}
+|{{HistoryLine|||dev=25w04a|现在测试服务端会正确加载zip格式的数据包。<ref>{{bug|MC-279522|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.9|dev=25w37a|现在会在世界重载期间保存错误标记。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.210|dev=1.16.210.60|exg=gametest_v1|加入了游戏测试框架。}}
+}}
+
+== 画廊 ==
+{{gallery|
+File:GameTest error markers.png|convert|一个失败了多次的测试
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{Navbox Bedrock Edition}}
+
+[[de:Spieltest]]
+[[en:GameTest]]
+[[ja:ゲームテスト]]
+[[pt:GameTest]]
+[[ru:Игровой тест]]

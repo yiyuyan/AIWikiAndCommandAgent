@@ -1,0 +1,203 @@
+# 页面: 着色器/Java版1.9前
+# 来源: https://zh.minecraft.wiki/w/%E7%9D%80%E8%89%B2%E5%99%A8/Java%E7%89%881.9%E5%89%8D
+# 分类: Java版独有特性
+# 抓取时间: 2026-07-14 17:32:43
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|访问|存取}}
+{{about|观看生物视角时所启用的一个功能|资源包中的着色器|资源包#着色器|当前版本中的着色器|着色器}}
+{{exclusive|java}}
+
+'''着色器（Shader）'''是在旁观模式下观看生物视角时所启用的一个功能，切换到第三人称视角会使着色器被禁用。着色器无法在不支持OpenGL 2.1的电脑上使用，因为OpenGL 2引入了GLSL（OpenGL的着色器语言）。
+
+目前，着色器存储在[[minecraft.jar]]中的''assets/minecraft/shaders/''文件夹中。正在使用的着色器文件目录会显示在[[调试屏幕]]中。
+
+要注意的是有些着色器间的差异非常微妙，因此有时候需要点击图片来查看更高分辨率的图片才能看出差别。
+
+== 着色器 ==
+{| class="wikitable stikitable"
+! width=15%|名字
+! width=50%|描述
+! width="300" |示例图片
+|-
+|Default
+|不使用任何着色器。此处列举是为了与下方图片对比。
+|[[File:Default.png|475px]]
+|-
+|Notch
+|仅使用了游戏一半的分辨率和8位色，并具有抖动效果。
+这是Notch对许多其他他制作的游戏使用的类似的叠加层的参考。
+|[[File:NotchShader.png|475px]]
+|-
+|FXAA
+|这个着色器加入了少许抗锯齿效果（平滑锯齿边缘），在沿着地平线出现的树木上最为明显。
+|[[File:Fxaa.png|475px]]
+|-
+|Art
+|图像越靠外越模糊，导致了会移动的物体会闪烁。
+|[[File:Art.png|475px]]
+|-
+|Bumpy
+|描绘色差，给予一种3D的感觉 (在完整分辨率下观看截图更明显。)
+|[[File:Bumpy.png|475px]]
+|-
+|Blobs2
+|接近Art，但颜色不那么强烈。
+|[[File:Blobs2.png|475px]]
+|-
+|Pencil
+|给予世界一种铅笔素描的外观。
+|[[File:Pencil.png|475px]]
+|-
+|Color convolve
+|增强并添加更多的颜色，增添活力。
+|[[File:Color convolve.png|475px]]
+|-
+|Deconverge
+|偏移了红色，绿色和蓝色通道。
+|[[File:Deconverge.png|475px]]
+|-
+|Flip
+|垂直反转玩家视角。
+|[[File:Flip.png|475px]]
+|-
+|Invert
+|反转颜色，在Super Secret Settings中设置或使用{{cmd|gamemode 3}}命令开启旁观模式后查看末影人的旁观视角来观察。
+|[[File:Invert.png|475px]]
+|-
+|NTSC
+|给玩家一种CRT显示器/电视屏幕的视角。
+|[[File:Ntsc.png|475px]]
+|-
+|Outline
+|描绘色差。和Bumpy相似，但不那么复杂。
+|[[File:Outline.png|475px]]
+|-
+|Phosphor
+|屏幕上像素会拖移，当移动的时候会在离远前“拖出”。
+|[[File:Phosphor.png|475px]]
+|-
+|Scan pincushion
+|接近NTSC，但没有模糊而且色彩少一点强烈。
+|[[File:Scan pincushion.png|475px]]
+|-
+|Sobel
+|把除了物件的边缘外的景象变成黑色。
+|[[File:Sobel.png|475px]]
+|-
+|Bits
+|把视角转为低像素并使用8位元色彩。
+|[[File:Bits.png|475px]]
+|-
+|Desaturate
+|降低画面的饱和度。
+|[[File:Desaturate.png|475px]]
+|-
+|Green
+|在Scan pincushion和Bits的基础上覆盖一层绿色。
+|[[File:Green.png|475px]]
+|-
+|Blur
+|模糊画面，除了正在显示的物品
+|[[File:Blur.png|475px]]
+|-
+|Wobble
+|颜色在色调范围内循环。所有显示的像素通过正弦计算上下移动120°。但是应当注意的是，正在被显示的它这仅影响屏幕平面，而不是顶点，作为观察屏幕的边缘显示的像素被移动了。
+|[[File:Wobble.png|475px]]
+|-
+|Blobs
+|类似Blobs2和Art，但当靠近时斑点很小，而在远处斑点很大。
+|[[File:Blobs.png|475px]]
+|-
+|Antialias
+|模糊像素的边缘以减少锯齿。这比FXAA模糊，但在消除纹理和方块的锯齿状边缘方面更好。
+|[[File:Antialias.png|475px]]
+|-
+|Creeper
+|与Green相似，但是没有黑色边框或较低的分辨率，可以在[[旁观模式]]进入苦力怕的旁观视角中观察。 
+|[[File:CreeperShaderFrom1dot8.png|475px]]
+|-
+|Spider
+|5个“眼睛”屏幕与模糊之间，类似蜘蛛的脸，在[[旁观模式]]进入蜘蛛的旁观视角来观察。
+|[[File:SpiderShaderFrom1dot8.png|475px]]
+|-
+|}
+
+== 访问 ==
+{| class="wikitable" data-description="Shader passes"
+|-
+! 源文件 !! 用于 !! 片段着色器（Fragment Shader） !! 顶点着色器（Vertex Shader）
+|-
+| antialias.json || Antialias || antialias.fsh || blobs.vsh
+|-
+| bits.json || Bits, Creeper, Green || bits.fsh || sobel.vsh
+|-
+| blit.json || Most shaders except Blur || blit.fsh || blit.vsh
+|-
+| blobs.json || Blobs || blobs.fsh || blobs.vsh
+|-
+| blobs2.json || Art, Blobs2 || blobs2.fsh || blobs.vsh
+|-
+| blur.json || Art, Blur, NTSC, Spider || blur.fsh || sobel.vsh
+|-
+| bumpy.json || Bumpy || bumpy.fsh || bumpy.vsh
+|-
+| color_convolve.json || Color convolve, Creeper,<br>Desaturate, Green, NTSC || color_convolve.fsh || sobel.vsh
+|-
+| deconverge.json || Deconverge, NTSC || deconverge.fsh || sobel.vsh
+|-
+| downscale.json ||  || downscale.fsh || downscale.vsh
+|-
+| flip.json || Flip || blit.fsh || flip.vsh
+|-
+| fxaa.json || FXAA || fxaa.fsh || fxaa.vsh
+|-
+| invert.json || Invert || invert.fsh || blit.vsh
+|-
+| notch.json || Notch || notch.fsh || sobel.vsh
+|-
+| ntsc_decode.json || NTSC || ntsc_decode.fsh || sobel.vsh
+|-
+| ntsc_encode.json || NTSC || ntsc_encode.fsh || sobel.vsh
+|-
+| outline.json || Outline || outline.fsh || sobel.vsh
+|-
+| outline_combine.json || Art || outline_combine.fsh || sobel.vsh
+|-
+| outline_soft.json || Pencil || outline_soft.fsh || sobel.vsh
+|-
+| outline_watercolor.json || Art || outline_watercolor.fsh || sobel.vsh
+|-
+| overlay.json ||  || overlay.fsh || blit.vsh
+|-
+| phosphor.json || NTSC, Phosphor || phosphor.fsh || sobel.vsh
+|-
+| scan_pincushion.json || Green, NTSC, Scan pincushion || scan_pincushion.fsh || sobel.vsh
+|-
+| sobel.json || Sobel || sobel.fsh || sobel.vsh
+|-
+| spider.json || Spider || spiderclip.fsh || rotscale.vsh
+|-
+| wobble.json || Wobble || wobble.fsh || sobel.vsh
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w38a|加入了最早的一组着色器：Antialias, Deconverge, Outline, Art, Desaturate, Pencil, Bits, Flip, Phosphor, Blobs, FXAA, Scan pincushion, Blobs2, Green, Sobel, Blur, Invert, Wobble, Color convolve, NTSC。}}
+|{{HistoryLine|||dev=13w38b|加入了Bumpy着色器。}}
+|{{HistoryLine||1.7.4|dev=13w47a|加入了Notch着色器。}}
+|{{HistoryLine||1.8|dev=14w05a|加入了Creeper和Spider着色器。在[[旁观模式]]中作为[[苦力怕]]、[[蜘蛛]]或[[末影人]]观察世界时，着色器会自动启用。}}
+|{{HistoryLine|||dev=14w05b|现在当玩家在更换视角和在观察生物时，着色器被移除。<ref name="NoBug">{{bug|MC-46727#comment-219617}}</ref>|{{key|F4}}现在会切换不同的着色器，而不是关闭着色器。<ref name="NoBug"/>}}
+|{{HistoryLine|||dev=14w06a|加入了实体轮廓线着色器。}}
+|{{HistoryLine||1.9|dev=15w31a|由于一个内部重写，移除了“超级秘密选项”按钮。<ref>{{tweet|_grum|627141591942209536}}</ref>}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+[[de:Shaderdaten/Vor 1.9]]
+[[en:Super Secret Settings]]
+[[es:Sombreador/Antes de la 1.9]]
+[[pt:Super Secret Settings]]
+[[ru:Super Secret Settings]]

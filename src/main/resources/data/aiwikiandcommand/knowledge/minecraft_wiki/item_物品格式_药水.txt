@@ -1,0 +1,34 @@
+# 页面: 物品格式/药水
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E6%A0%BC%E5%BC%8F/%E8%8D%AF%E6%B0%B4
+# 分类: 顶级数据值页面
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+<div class="treeview"><onlyinclude>
+** {{nbt|list|custom_potion_effects}}：当前药水或药箭所含有的自定义[[状态效果]]。
+*** {{nbt|compound}}：一项状态效果。
+**** {{nbt|bool|ambient}}：表示状态效果是否是被信标添加的。如果不存在则为<code>false</code>。
+**** {{nbt|byte|amplifier}}：（无符号8位整数，{{interval|left=0|right=255}}）状态效果的倍率。0表示倍率0，即等级1，以此类推。由于此数字为无符号整数，当值超过127时显示为负数但实际为正数，保存数字''s''和实际代表数字''a''的关系为<math>a=256+s</math>。如果不存在则为0。
+**** {{nbt|int|duration}}：距离状态效果失效的时间刻数。如果此值为-1，则此状态效果不会失效。如果不存在则为0。
+**** {{nbt|compound|factor_calculation_data}}：计算状态效果因子的数据，这些数据主要影响黑暗的渲染效果。
+***** {{nbt|int|effect_changed_timestamp}}：（不小于0）渲染效果改变的时间。
+***** {{nbt|float|factor_current}}：因子的当前值。
+***** {{nbt|float|factor_previous_frame}}：上一帧的因子值。
+***** {{nbt|float|factor_start}}：因子的起始值。
+***** {{nbt|float|factor_target}}：因子的结束值。
+***** {{nbt|bool|had_effect_last_tick}}：在此刻之前是否有渲染效果。
+***** {{nbt|int|padding_duration}}：（不小于0）渲染效果的时间周期。
+**** {{nbt|compound|hidden_effect}}：与此状态效果类型相同，但因为等级更低而被覆盖的状态效果信息。当外层状态效果过期失效后，此层状态效果就会尝试生效。
+***** 具有除{{nbt|string|id|required=1|existonsave=1}}外的此结构所有标签，递归定义。
+**** {{nbt|string|id|required=1|existonsave=1}}：状态效果的[[命名空间ID]]。
+**** {{nbt|bool|show_icon}}：表示是否显示状态效果的图标。如果不存在则与{{nbt|bool|show_particles}}值相同。
+**** {{nbt|bool|show_particles}}：表示是否显示粒子效果。如果不存在则为<code>true</code>。
+** {{nbt|int|CustomPotionColor}}：物品渲染中，药水部分使用的颜色。只使用后24位，每个颜色通道占用8位，按RGB依次存储。
+** {{nbt|string|Potion}}：[[药水效果]]，决定物品的名称。
+</onlyinclude></div><noinclude>
+[[Category:顶级数据值页面]]
+[[en:Item format/Potion]]
+[[fr:Format d'objet/Potion]]
+[[ja:アイテムフォーマット/1.20.5以前/Potion]]
+[[pt:Formato de item/Poção]]
+</noinclude>

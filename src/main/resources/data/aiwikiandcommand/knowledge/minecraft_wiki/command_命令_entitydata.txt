@@ -1,0 +1,60 @@
+# 页面: 命令/entitydata
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/entitydata
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{distinguish|实体数据格式}}
+{{Outdated|edition=java|此命令在Java版1.13中已被'''[[命令/data|data]]'''命令替代。}}
+{{Infobox command
+|name=entitydata
+|oplevel=2
+}}
+
+修改[[实体]]的NBT标签。
+
+== 语法 ==
+: <code>-{}-/entitydata <''实体''> <''NBT标签''></code>
+
+== 参数 ==
+<code>-{}-''实体''</code>
+: 指定要修改数据的实体。必须是[[目标选择器]]或[[UUID]]，且不能为玩家。
+
+<code>-{}-''NBT标签''</code>
+: 对于目标实体，指定要添加、覆盖的[[NBT标签]]元素（NBT标签不能被移除，字符串不能被设定为空值）。必须是复合型[[NBT标签]]（例如<code>{CustomName:"ming"}</code>）。
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|未能成功更改任何NBT|fail}}
+{{Result table|尝试更改玩家实体的NBT}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|1}}
+{{Output table}}
+
+== 示例 ==
+* 阻止所有现有僵尸捡起战利品：<code>/entitydata @e[type=zombie] {CanPickUpLoot:0b}</code>
+* 给身边的物品（实体）添加无法破坏的物品标签：<code><nowiki>/entitydata @e[type=item,r=5] {Item:{tag:{Unbreakable:1b}}}</nowiki></code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w32b|加入了{{cmd|entitydata|link=none}}。}}
+|{{HistoryLine||1.13|dev=17w45a|现在<code><''NBT标签''></code>参数是可选的，以直接查询包括玩家在内的实体的NBT数据。}}
+|{{HistoryLine|||dev=17w45b|移除了{{cmd|entitydata|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/entitydata]]
+[[en:Commands/entitydata]]
+[[es:Comandos/entitydata]]
+[[ja:コマンド/entitydata]]
+[[pt:Comandos/entitydata]]
+[[ru:Команды консоли/entitydata]]

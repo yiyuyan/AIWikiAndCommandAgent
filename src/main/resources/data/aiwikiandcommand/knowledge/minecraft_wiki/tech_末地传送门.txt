@@ -1,0 +1,309 @@
+# 页面: 末地传送门
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%AB%E5%9C%B0%E4%BC%A0%E9%80%81%E9%97%A8
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 生成结构, 结构, 需要整理, 需要检查版本, 需要验证
+# 抓取时间: 2026-07-14 17:28:39
+# 原始 Wikitext 内容:
+
+{{about|用于传送到[[末地]]的[[结构]]|同名方块|末地传送门（方块）||传送门}}
+{{cleanup}}
+{{upcoming in draft}}
+{{Infobox structure
+| title = 末地传送门
+| group1 = 已激活
+| 1-1 = End Portal (Active).png
+| group2 = 未激活
+| 2-1 = End Portal (Inactive).png
+| biome = [[主世界]]中任何生物群系
+| blocks =
+* {{BlockLink|Stone Bricks}}
+* {{BlockLink|Mossy Stone Bricks}}
+* {{BlockLink|Cracked Stone Bricks}}
+* {{BlockLink|Infested Stone}} （如果蠹虫进入石砖其变种中{{only|bedrock|short=y}}）
+* {{BlockLink|Infested Stone Bricks}}（自然生成或如果蠹虫进入石砖中）
+* {{BlockLink|Infested Mossy Stone Bricks}}（如果蠹虫进入苔石砖中）
+* {{BlockLink|Infested Cracked Stone Bricks}}（如果蠹虫进入裂纹石砖中）
+* {{BlockLink|Stone Brick Stairs}}
+* {{BlockLink|Iron Bars}}
+* {{BlockLink|Lava}}
+* {{BlockLink|Silverfish Spawner|蠹虫刷怪笼|link=刷怪笼}}
+* {{BlockLink|End Portal Frame}}
+* {{BlockLink|End Portal|末地传送门方块}}（如果末地传送门已被激活）
+| canspawn = 否
+}}
+
+'''末地传送门（End Portal）'''为一种自然生成的[[结构]]，可用于到达[[末地]]。它只能在[[要塞]]的传送门房间中找到。
+
+== 结构 ==
+{{FakeImage
+|{{BlockGrid
+    |f=End Portal Frame|F=End Portal Frame+sideways
+    | fff 
+    |F   F
+    |F   F
+    |F   F
+    | fff 
+  }}
+|未激活的末地传送门
+}}
+{{FakeImage
+|{{BlockGrid
+    |f=End Portal Frame+active|p=End Portal|F=End Portal Frame+sideways active
+    | fff 
+    |FpppF
+    |FpppF
+    |FpppF
+    | fff 
+  }}
+|已激活的末地传送门
+}}
+在[[生存模式]]中，玩家必须进入要塞才能激活一个已有的末地传送门，因为[[末地传送门框架]]无法正常获得。当在每个末地传送门框架中放置了[[末影之眼]]时，末地传送门会被激活，从而在结构内生成9个[[末地传送门方块]]。末影之眼无法从末地传送门框架中移除。
+
+在[[创造模式]]下，玩家除了通过进入要塞也可以通过将12个末地传送门框架方块放置在一个3×3正方形外部的封闭环，每个框架的正面均朝向内侧的3×3区域，并在每个末地传送门框架中放置一个末影之眼，以构建一个末地传送门。
+
+{{in|java}}一些其他的摆放方式也可以激活末地传送门<ref>{{bug|MC-97216}}</ref>（见后文“[[末地传送门#行为|行为]]”）。
+
+{{in|be}}为了可以正确激活，末地传送门框架的方向必须正确。这可以通过玩家站在传送门区域的中心并旋转放置末地传送门框架在它们周围的环中来实现。
+
+注意：[[末地传送门方块]]不依赖于[[末地传送门框架]]的存在，因此可以使用命令创建独立的传送门。
+
+== 生成 ==
+{{see also|要塞#生成}}
+
+末地传送门位于[[要塞]]的传送门房间中，水平悬挂在[[熔岩]]池之上，并有一排通往传送门的楼梯。楼梯中镶嵌着一个生成[[蠹虫]]的[[刷怪笼]]。每个末地传送门框架有10％的概率被插上末影之眼。这意味着末地传送门上平均有1.2个末影之眼，也意味着有{{frac|1|10<sup>12</sup>}}的概率所有12个末地传送门框架都带有末影之眼，并在初始生成时激活末地传送门。下表根据二项分布列出了一个天然的末地传送门上末影之眼数量对应的近似概率：
+
+{| class="wikitable collapsible collapsed collapse-button-none" data-description="生成概率" style="text-align:center;"
+|-
+!scope="col" | 数量
+!scope="col" | 概率
+|-
+!scope="row" | 0
+| 28.2%
+|-
+!scope="row" | 1
+| 37.7%
+|-
+!scope="row" | 2
+| 23.0%
+|-
+!scope="row" | 3
+| 8.52%
+|-
+!scope="row" | 4
+| 2.13%
+|-
+!scope="row" | 5
+| 0.379%
+|-
+!scope="row" | 6
+| 4.91×10<sup>-4</sup>
+|-
+!scope="row" | 7
+| 4.68×10<sup>-5</sup>
+|-
+!scope="row" | 8
+| 3.25×10<sup>-6</sup>
+|-
+!scope="row" | 9
+| 1.60×10<sup>-7</sup>
+|-
+!scope="row" | 10
+| 5.35×10<sup>-9</sup>
+|-
+!scope="row" | 11
+| 1.08×10<sup>-10</sup>
+|-
+!scope="row" | 12
+| 1×10<sup>-12</sup>
+|}
+
+== 行为 ==
+{{main|末地传送门方块}}
+进入激活的末地传送门会立即出现加载界面，并将玩家传送到末地——末地传送门并没有让玩家取消进入的时间。进入末地后，将以方块坐标(100，48，0)为中心生成5×5的水平[[黑曜石]]平台，玩家生成在其上方（100，49，0，面朝西）。
+
+激活末地传送门时，位于中间3×3范围内的任何方块，包括基岩或其他末地传送门框架，会被破坏并掉落。破坏[[流体]]时，如果没有破坏源头方块，它则会立即流回。如果在[[刷怪笼]]上生成了一个末地传送门方块，则火粒子会被保留。方块破坏时不会有任何声音，也不会掉落为物品。有时由方块破坏触发的事件不会发生：如[[虫蚀方块]]无法生成蠹虫。但是，容器（除[[潜影盒]]和[[末影箱]]外）仍会掉落存储的物品。生物（{{only|je|for=[[凋灵]]}}、[[末影龙]]和与[[嘎枝之心]]绑定的[[嘎枝]]除外）和玩家一样能进入传送门。
+
+{{in|be}}类似于[[下界传送门]]，末地传送门方块在末地传送门框架被破坏时会被破坏。但与之不同的是，破坏一个末地传送门方块并不会导致其他末地传送门方块也被破坏。
+
+{{in|be}}有[[乘客]]或[[坐骑]]的实体不能被传送<ref>{{bug|MCPE-47288}}</ref>，[[箭类弹射物]]也不能被传送。
+
+{{in|java}}如果一个[[自定义]]世界没有定义ID为<code>minecraft:the_end</code>的维度，末地传送门仍然可以被激活并创建[[末地传送门方块]]，但不会传送任何实体。
+
+实体如果通过要塞的末地传送门但因任何原因没有被传送，则会直接坠入传送门框架下方的3×3熔岩池。
+
+{{in|je}}可以构建末地传送门方块生成在其结构外部的末地传送门。由于末地传送门的生成机制和铁傀儡及雪傀儡的机制相同，游戏允许构建翻转的末地传送门。因此，{{in|je}}一个有效的末地传送门应该满足以下三条规则：
+# 每条边的三个框架朝向必须相同。
+# 对边上的框架朝向必须相反。
+# 四个方向必须都出现。
+当构建了一个有效的末地传送门后，我们称向西和向北的边的交点为末地传送门的“结构原点”。在12个末地传送门框架都被填充之后，如果以原点为东南角，向西北方向的向下的5×5×5的正方体中有任意一个末地传送门框架被填充，则末地传送门将会被激活，末地传送门方块将会出现在原点的西北角（不一定在框架内）。由于允许沿三轴任意旋转，甚至可以构造出直立的末地传送门框架。
+{| class="wikitable collapsible collapsed"
+|+Java版中有效的末地传送门示例（上北）
+!传送门框架旋转
+!传送门框架及其结构原点
+!激活判定范围
+!生成的传送门
+|-
+|{{BlockGrid
+    |?vvv?
+     |>???<|>???<|>???<
+    |?^^^?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air}}
+不旋转
+|{{BlockGrid
+    |?vvv?
+     |>???<|>???<|>???<
+    |?^^^o|v=End portal frame|^=End portal frame|>=End portal frame-sideways|<=End portal frame-sideways|?=Air|o=Red Concrete}}
+|{{BlockGrid
+    |?vvv?
+     |>???<|>???<|>???<
+    |?^^^o|v=End portal frame|^=End portal frame|>=End portal frame-sideways|<=End portal frame-sideways|?=Yellow stained glass|o=Red Concrete}}
+|{{BlockGrid
+    |?vvv?
+     |>xxx<|>xxx<|>xxx<
+    |?^^^?|v=End portal frame+eye|^=End portal frame+eye|>=End portal frame-sideways+eye|<=End portal frame-sideways+eye|?=Air|o=Red Concrete|x=End Portal}}
+正常激活。
+|-
+|{{BlockGrid
+    |?>>>?
+     |^xxxv|^xxxv|^xxxv
+    |?<<<?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=Air}}
+沿Y轴顺时针旋转90°
+|{{BlockGrid
+    |F=End portal frame
+    |?SSS?
+     |F???F|F???F|F???F
+    |oSSS?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=End Portal
+    |S=End portal frame-sideways}}
+|{{BlockGrid
+    |F=End portal frame
+    |yyyyySSS?
+     |yyyyF???F|yyyyF???F|yyyyF???F
+    |yyyyoSSS?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=End Portal?End Portal (block)|S=End portal frame-sideways|y=Yellow stained glass}}
+|{{BlockGrid
+    |F=End portal frame+eye
+    |?????SSS?
+     |?xxxF???F|?xxxF???F|?xxxF???F|?????SSS?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=End Portal|S=End portal frame-sideways+eye}}
+在西面激活。
+|-
+|{{BlockGrid
+    |?^^^?
+     |>xxx<|>xxx<|>xxx<
+    |?vvv?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=Air}}
+沿X轴旋转180°
+|{{BlockGrid
+    |?vvvo
+     |>???<|>???<|>???<
+    |?^^^?|v=End portal frame|^=End portal frame|>=End portal frame-sideways|<=End portal frame-sideways|?=Air|o=Red Concrete}}
+|{{BlockGrid
+    |F=End portal frame
+    |yyyyy
+     |yyyyy|yyyyy|yyyyy|yFFFo|S???S|S???S|S???S|?FFF?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=End Portal?End Portal (block)|S=End portal frame-sideways|y=Yellow stained glass}}
+|{{BlockGrid
+    |F=End portal frame+eye
+    |?????|?xxx?|?xxx?|?xxx?|?FFF?|S???S|S???S|S???S|?FFF?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=End Portal|S=End portal frame-sideways+eye|y=Yellow stained glass}}
+在北面激活。
+|-
+|{{BlockGrid
+    |?<<<?
+     |^xxxv|^xxxv|^xxxv|?>>>?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=Air}}
+沿X轴旋转180°
+然后沿Y轴逆时针旋转90°
+|{{BlockGrid
+    |F=End portal frame
+    |oSSS?
+     |F???F|F???F|F???F
+    |?SSS?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=End Portal?End Portal (block)|S=End portal frame-sideways}}
+|{{BlockGrid
+    |F=End portal frame
+    |yyyyy????
+     |yyyyy????|yyyyy????|yyyyy????|yyyyoFFF?|????S???S|????S???S|????S???S|?????FFF?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=End Portal?End Portal (block)|S=End portal frame-sideways|y=Yellow stained glass}}
+|{{BlockGrid
+    |F=End portal frame+eye
+    |?????????|?xxx?????|?xxx?????|?xxx?????|?????FFF?|????S???S|????S???S|????S???S|?????FFF?|v=Magenta Glazed Terracotta-rot180|^=Magenta Glazed Terracotta|>=Magenta Glazed Terracotta-rot90|<=Magenta Glazed Terracotta-rot270|?=Air|o=Red Concrete|x=End Portal|S=End portal frame-sideways+eye|y=Yellow stained glass}}
+无法正常激活，需要在判定范围内手动放置一个末地传送门框架并填充以激活。
+|}
+{{in|je}}共有24种有效的末地传送门框架摆放方式。其中有8种在XZ平面上，有8种在XY平面上，有8种ZY平面上。
+
+== 成就 ==
+{{load achievements|the-end?}}
+
+== 进度 ==
+{{load advancements|story.enter_the_end;end.root}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre3|末地传送门出现，但是不能使用。
+|末地传送门可以被爆炸破坏。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|末地传送门可以使用了。
+|末地传送门框架有了新的纹理，并且不能被任何方式破坏。}}
+|{{HistoryLine||1.3.1|dev=12w18a|由于单人游戏被改为本地服务器，{{filename|travel.ogg}}不再在使用末地传送门时播放。}}
+|{{HistoryLine||1.4.2|dev=12w34a|现在所有实体都可以通过末地传送门传送。{{verify|所有实体都能？确定没有例外吗？}}}}
+|{{HistoryLine||1.6.1|dev=13w24a|现在进入末地传送门会给予玩家[[成就/Java版#结束了？|结束了？]]成就，而不是[[成就/Java版#我们需要更深入|我们需要更深入]]成就。}}
+|{{HistoryLine||1.8|dev=14w29a|末地传送门现在可以在[[下界]]和[[末地]]中建造。}}
+|{{HistoryLine||1.9|dev=15w49a|[[凋灵]]和[[末影龙]]不再能通过-{}-末地传送门传送。}}
+|{{HistoryLine|||dev=16w02a|使用末地传送门现在又会播放{{filename|travel.ogg}}。}}
+|{{HistoryLine|||dev=16w03a|现在需要末地传送门的环框内部为空才能被激活。<ref>{{bug|MC-95910|||Fixed}}</ref>}}
+|{{HistoryLine||1.10|dev=16w21a|现在末地传送门的环框内部无需为空也能被激活，激活后此范围内的方块会被末地传送门方块替代。}}
+|{{HistoryLine||1.12|dev=17w17a|现在激活末地传送门和将[[末影之眼]]放置到[[末地传送门框架]]上拥有独特的音效。}}<!--
+|{{HistoryLine||1.13|dev=17w47a|末地传送门在激活时现在会更新相邻的方块。}} 英文Wiki引用的漏洞报告是基岩版的，且标注为“failed verification”，此条历史是否属实待验证 -->
+|{{HistoryLine||1.14|dev=19w12a|由于声音系统被重写，末地传送门的激活音效不再具有特定的播放位置，这意味着在其播放音量不会随着距离远近而改变。}}
+|{{HistoryLine||1.16|dev=20w22a|现在[[要塞]]内的末地传送门不再会被[[化石]]、[[海底神殿]]或[[刷怪房]]替代。}}
+|{{HistoryLine||1.16.2|dev=20w28a|末地传送门现在会将玩家传送至[[末地平台]]中心，而不是其西北角。}}
+|{{HistoryLine||1.16.2|dev=pre1|现在[[箭]]、[[三叉戟]]、[[喷溅药水]]、[[滞留药水]]、[[投掷物]]和[[潜影弹]]可以通过末地传送门传送。<ref>{{bug|MC-96007|||Fixed}}</ref><ref>{{bug|MC-102967|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.3|dev=22w44a|添加了[[游戏规则]]<code>globalSoundEvents</code>，禁用该规则时可阻止末地传送门的激活音效播放。}}
+|{{HistoryLine||1.20.5|dev=24w03a|现在任意进入末地传送门的实体会使目标区块保持加载15秒，以与[[下界传送门]]的表现同步。}}
+|{{HistoryLine||1.21|dev=24w21a|加入了游戏规则<code>entitiesWithPassengersCanUsePortals</code>，用于控制带有[[乘客]]的实体能否穿过末地传送门。此前，有乘客或[[坐骑]]的实体不能被传送。}}
+|{{HistoryLine|||dev=pre1|移除了游戏规则<code>entitiesWithPassengersCanUsePortals</code>，现在带有乘客的实体可以无延迟地穿过末地传送门。
+|现在对末地传送门掷出末影珍珠可以将玩家传送至末地。}}
+|{{HistoryLine||1.21.5|dev=25w03a|现在末地传送门激活时，被传送门方块替换掉的方块会正常掉落。<ref>{{bug|MC-227097|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.9|dev=pre1|现在进入末地传送门总是会重置[[摔落#下落高度|下落高度]]。<ref>{{bug|MC-160528|||Fixed}}</ref>}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0|dev=0.17.0.1|加入了末地传送门。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.6.0|dev=1.6.0.8|现在激活传送门时不再需要环框内部为空，激活后此范围内的方块会被末地传送门方块替代。<ref>{{bug|MCPE-28344|||Fixed}}</ref>}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||1.7.10|加入了末地传送门。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU7|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了末地传送门。由于[[末地传送门框架]]无法被[[末影之眼]]填充，因此该传送门无法发挥作用。}}
+|{{HistoryLine||xbox=TU9|要塞中的末地传送门现在可以正常运作并能被激活。}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|现在所有实体都可以通过末地传送门传送。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|末地传送门现在可以在下界和末地中建造。{{check version}}}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|使用末地传送门现在会播放<code>travel.ogg</code>音效。与其他版本不同，此声音没有随机音高变化。}}
+|{{HistoryLine||xbox=TU53|xbone=CU43|ps3=1.49|psvita=1.49|ps4=1.50|wiiu=Patch 23|switch=1.0.3|为激活末地传送门加入了新的音效。}}
+}}
+
+== 你知道吗 ==
+* [[下落的方块]]进入末地传送门时会使黑曜石平台重新生成，然后落在黑曜石平台上。其他实体通过末地传送门时会破坏该方块。
+* {{in|be}}末地传送门任意组成方块下三格内均不能放置[[床]]。但先放置床再建造末地传送门是可行的，不过玩家仍然不会生成在末地传送门内部。
+** 考虑到[[返回传送门]]也有摧毁后立刻重置的特性，这可能是为了防止玩家被困在末地无法回到主世界而设计的。
+
+== 画廊 ==
+<gallery>
+File:New Portal.png|在Jeb的直播流中看到的Beta 1.9-pre4风格的传送门。它似乎有用于[[末影之眼]]的槽<ref>{{tweet|notch|121664078308577280}}</ref>
+File:Old Completed End Portal.png|Beta 1.9-pre3中经过完全修复的末地传送门
+Active End Portal.png|已激活的末地传送门
+</gallery>
+
+== 参见 ==
+* [[下界传送门]]
+* [[末地]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox world features|structures}}
+
+[[Category:结构]]
+
+[[de:Endportal]]
+[[en:End portal]]
+[[es:Portal del End]]
+[[fr:Portail de l'air]]
+[[it:Blocchi tecnici]]
+[[ja:エンドポータル]]
+[[ko:엔드 차원문]]
+[[lzh:終界結界門]]
+[[nl:End Portaal]]
+[[pl:Portal Kresu]]
+[[pt:Portal do Fim]]
+[[uk:Портал Енду]]

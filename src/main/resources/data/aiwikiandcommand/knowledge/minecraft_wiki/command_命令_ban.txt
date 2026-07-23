@@ -1,0 +1,145 @@
+# 页面: 命令/ban
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/ban
+# 分类: Java版独有特性, 命令, 有未知版本的History模板的页面/Java版Indev
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+
+这类命令能控制服务器的[[封禁列表]]。封禁操作将取消已有的白名单。
+
+封禁列表存储在{{filename|[[banned-players.json]]}}文件。
+
+== ban ==
+{{Infobox command
+|name=ban
+|oplevel=3
+|serveronly=1
+}}
+
+将玩家档案列入封禁列表。在封禁列表中的玩家档案阻止具有相同UUID的玩家进入服务器。
+
+=== 语法 ===
+: <code>ban <targets> [<reason>]</code>
+
+=== 参数 ===
+{{argument|targets|game_profile}}
+: 需要封禁的玩家档案。
+: {{arg desc|je=game_profile}}
+
+{{argument|reason|message}}
+: 要展示给被封禁玩家、其他管理员以及服务器日志中的信息。若未指定，默认为<code>Banned by an operator.</code><!--无本地化-->。
+: {{arg desc|je=message}}
+
+=== 结果 ===
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|目标选择器未能选中至少一个在线玩家实体|fail}}
+{{Result table|没有新的玩家档案被加入封禁列表}}
+{{Result table|succeed}}
+{{Result table}}
+
+=== 输出 ===
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|被新加入封禁列表的玩家档案数量}}
+{{Output table}}
+
+== ban-ip ==
+{{Infobox command
+|name=ban-ip
+|oplevel=3
+|serveronly=1
+}}
+
+把一个IP地址加入封禁列表。将指定IP地址或服务器中在线上的指定玩家的IP地址添加到服务器封禁列表中，阻止任何人从该IP地址连接到服务器。
+
+=== 语法 ===
+:<code>ban-ip <target> [<reason>]</code>
+
+=== 参数 ===
+{{argument|target|string}}
+: 一名在线的玩家的名称或IP地址。
+: {{arg desc|je=string|type=word}}这导致通过此命令封禁IPv6地址成为不可能。<ref>{{Bug|MC-97885}}</ref>
+
+{{argument|reason|message}}
+: 要展示给被封禁玩家、其他管理员以及服务器日志中的信息。若未指定，默认为<code>Banned by an operator.</code><!--无本地化-->。
+: {{arg desc|je=message}}
+
+=== 结果 ===
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|<code>targets</code>既不是有效的IP地址也不是一名服务器中在线的玩家的名称|fail}}
+{{Result table|没有新IP地址被加入封禁列表|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+=== 输出 ===
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|当前使用该IP地址连入服务器的玩家数量}}
+{{Output table}}
+
+== banlist ==
+{{Infobox command
+|name=banlist
+|oplevel=3
+|serveronly=y
+}}
+
+显示服务器的封禁列表。
+
+=== 语法 ===
+: <code>banlist ips</code>
+: <code>banlist players</code>
+
+=== 结果 ===
+{{Result table|onlyje=1}}
+{{Result table|命令不完整|unparseable}}
+{{Result table|succeed}}
+{{Result table}}
+
+=== 输出 ===
+{{Output table}}
+{{Output table|edition=je|执行成功|N/A|1|指定封禁列表中项目的数量}}
+{{Output table}}
+
+== banip ==
+{{Outdated feature|edition=java|section=1}}
+{{Infobox command
+|name=banip
+}}
+封禁一个IP地址。不能在游戏中撤销。{{filename|banned-ip.txt}}必须手动更改。
+
+此命令是Classic时期{{cmd|ban-ip|link=none}}的等价命令。
+
+=== 语法 ===
+: <code>banip (<address>|<name>) [<reason>]</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.16a|加入了{{cmd|ban|link=none}}和{{cmd|banip|link=none}}。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=?|移除了所有命令。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.16|加入了{{cmd|ban|link=none}}、{{cmd|ban-ip|link=none}}和{{cmd|banlist|link=none}}。}}
+}}
+
+== 参见 ==
+* {{cmd|whitelist}}
+* {{cmd|pardon}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/ban]]
+[[en:Commands/ban]]
+[[es:Comandos/ban]]
+[[ja:コマンド/ban]]
+[[pt:Comandos/ban]]
+[[ru:Команды консоли/ban]]
+[[uk:Команди консолі/ban]]

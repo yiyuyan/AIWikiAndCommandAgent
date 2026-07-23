@@ -1,0 +1,220 @@
+# 页面: 力量（状态效果）
+# 来源: https://zh.minecraft.wiki/w/%E5%8A%9B%E9%87%8F%EF%BC%88%E7%8A%B6%E6%80%81%E6%95%88%E6%9E%9C%EF%BC%89
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 状态效果
+# 抓取时间: 2026-07-14 17:20:48
+# 原始 Wikitext 内容:
+
+{{tr|力量（魔咒）|強力|mode=H}}
+{{about|状态效果|魔咒|力量（魔咒）|其他含义|力量}}
+{{Infobox effect
+|title=力量
+|image=Strength.png
+|invimage=Potion of Strength
+|invimage2=Splash Potion of Strength
+|invimage3=Lingering Potion of Strength
+|invimage4=Arrow of Strength
+|invimage5=----
+|invimage6=Potion of Strength Extended
+|invimage7=Splash Potion of Strength Extended
+|invimage8=Lingering Potion of Strength Extended
+|invimage9=Arrow of Strength Extended
+|invimage10=----
+|invimage11=Potion of Strength Enhanced
+|invimage12=Splash Potion of Strength Enhanced
+|invimage13=Lingering Potion of Strength Enhanced
+|invimage14=Arrow of Strength Enhanced
+}}
+
+'''力量（Strength）'''是一种增加[[近战攻击]]伤害的[[状态效果]]。
+
+== 效果 ==
+=== Java版 ===
+受影响生物的基础近战攻击伤害增加{{hp|3}}×效果等级，结算在[[近战攻击#暴击|暴击]]和[[魔咒]]之前。
+
+=== 基岩版 ===
+{{in|be}}受影响生物的受力量效果影响后的近战攻击伤害结算在[[魔咒]]之后，[[近战攻击#暴击|暴击]]之前。
+
+伤害大小可以由递推公式<math>d_n=1.3d_{n-1}+1</math>或通项公式<math>d_n=1.3^nd_0+\frac{1.3^n-1}{0.3}</math>计算，其中<math>d_0</math>是输入的攻击力，<math>d_n</math>是输出的攻击力，<math>n</math>为力量状态效果的等级。<ref>{{bug|MCPE-34981#comment-634545}}</ref>
+
+当力量和[[虚弱]]状态效果同时存在时，会先使用力量的计算公式，并将得出的值以虚弱效果的计算公式处理。
+
+[[铁傀儡]]的近战攻击伤害不受力量状态效果影响。<ref>{{bug|MCPE-45823}}</ref>
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+ ! 来源
+ ! 效果等级
+ ! 时长
+ ! 备注
+ |-
+ | {{ItemLink|Potion of Strength}}
+ | I
+ | 3:00
+ |
+ |-
+ | {{ItemLink|Potion of Strength}}（延长版）
+ | I
+ | 8:00
+ |
+ |-
+ | {{ItemLink|Potion of Strength}}（增强版）
+ | II
+ | 1:30
+ |
+ |-
+ | {{ItemLink|Splash Potion of Strength}}
+ | I
+ | 3:00
+ |
+ |-
+ | {{ItemLink|Splash Potion of Strength}}（延长版）
+ | I
+ | 8:00
+ |
+ |-
+ | {{ItemLink|Splash Potion of Strength}}（增强版）
+ | II
+ | 1:30
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Strength}}
+ | I
+ | 0:45
+ | [[不祥之物生成器]]会生成此药水
+ |-
+ | {{ItemLink|Lingering Potion of Strength}}（延长版）
+ | I
+ | 2:00
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Strength}}（增强版）
+ | II
+ | 0:22
+ |
+ |-
+ | {{ItemLink|Arrow of Strength}}
+ | I
+ | 0:22
+ | 
+ |-
+ | {{ItemLink|Arrow of Strength}}（延长版）
+ | I
+ | 1:00
+ | 
+ |- 
+ | {{ItemLink|Arrow of Strength}}（增强版）
+ | II
+ | 0:11
+ |
+ |- 
+ | {{BlockLink|Beacon}}
+ | I
+ | 0:05 – 0:17
+ | 在范围内不断给予玩家效果；需要信标等级为3。
+ |- 
+ | {{BlockLink|Beacon}}
+ | II
+ | 0:17
+ | 在范围内不断给予玩家效果；需要信标等级为4。
+ |- 
+ | {{EntityLink|zombie villager}}
+ | I
+ | {{only|for=3:00 – 5:00|je}}<br>{{only|for=5:00|be}}
+ | 在简单、普通和{{only|for=困难|be}}[[难度]]下被治愈
+ |- 
+ | {{EntityLink|zombie villager}}
+ | II
+ | 3:00 – 5:00
+ | {{only|for=在困难难度下被治愈|je}}
+ |-
+ | {{only|for=自然生成|je}}
+ | I
+ | 无限
+ | 只对[[困难]]难度中的{{EntityLink|spider}}有效
+ |}
+<!--It may be worth including a section here later on about how high a Atrength leave combined with Sharpness is required to one-hit a mob, analogously to tie Haste page. Just an idea.-->
+
+{{fnlist}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Strength
+|spritetype=effect
+|nameid=strength
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Strength
+|spritetype=effect
+|nameid=strength
+|translationkey=potion.damageBoost
+|showaliasids=1
+|aliasid=5
+|foot=1}}
+
+== 进度 ==
+{{load advancements|prefix=nether|all_potions;all_effects}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了力量，目前无法获得。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|[[File:Strength JE1 BE1.png|32px]] 加入了力量的图标。
+|现在饮用[[奶]]会移除力量效果。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|加入了[[力量药水]]，可以提供力量。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[喷溅型力量药水]]，可以提供力量效果。
+|现在力量效果每等级增加{{hp|3}}的伤害。}}
+|{{HistoryLine||1.4.2|dev=12w32a|[[信标#历史|Work in Progress]]方块现在可以为玩家提供力量效果。}}
+|{{HistoryLine|||dev=12w34a|移除了可以为玩家提供力量效果的Work in Progress方块。}}
+|{{HistoryLine|||dev=12w36a|[[信标]]现在可以为玩家提供获得力量效果。}}
+|{{HistoryLine||1.6.1|dev=1.6|现在力量效果每等级增加130%的伤害。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了[[力量之箭]]，可以提供力量。}}
+|{{HistoryLine|||dev=15w33a|加入了[[滞留型力量药水]]，可以提供力量。
+|现在力量效果每等级增加{{hp|3}}的伤害。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Strength JE2.png|32px]] 更改了效果图标。}}
+|{{HistoryLine|||dev=18w43b|[[File:Strength JE3 BE2.png|32px]] 修复了效果图标。}}
+|{{HistoryLine||1.19.4|dev=pre3|将力量的颜色由{{color|#932423}}改为{{color|#FFC700}}。}}
+|{{HistoryLine||1.20.2|dev=23w32a|在此版本前，力量的存档ID是5。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w13a|加入了会生成滞留型力量药水的[[不祥之物生成器]]。}}
+|{{HistoryLine||1.21|dev=24w18a|24w13a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Strength JE1 BE1.png|32px]] 加入了力量，目前无法获得。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了[[力量药水]]和[[喷溅型力量药水]]，可以提供力量。
+|现在[[僵尸村民]]被治愈时会获得力量效果。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了[[力量之箭]]，可以提供力量。}}
+|{{HistoryLine||0.16.0|dev=build 4|现在力量效果可以从[[信标]]范围内获得。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了[[滞留型力量药水]]，可以提供力量。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.11.0|dev=1.11.0.5|[[File:Strength JE3 BE2.png|32px]] 更改了效果图标。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|将力量的粒子的颜色由{{color|#932423}}改为{{color|#FFC700}}。}}
+|{{HistoryLine|||dev=1.19.80.22|回退了上个版本对粒子颜色的更改。}}
+|{{HistoryLine||1.20.0|exg=next_major_update|dev=1.20.0.20|将力量的颜色由{{color|#932423}}改为{{color|#FFC700}}。}}
+|{{HistoryLine|||exg=none|dev=1.20.0.21|1.20.0.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.20|加入了会生成喷溅型力量药水的[[不祥试炼刷怪笼]]。}}
+|{{HistoryLine|||dev=1.21.0.21|加入了会生成喷溅型力量药水的[[不祥之物生成器]]，取代了不祥试炼刷怪笼直接生成喷溅型力量药水的行为。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|1.21.0.20和1.21.0.21中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.0.23|不祥之物生成器现在会生成滞留型力量药水，而非喷溅型力量药水。}}
+|{{HistoryLine||1.21.111|dev=1.21.110.20|交换了力量效果和魔咒攻击力在[[近战攻击]]中的计算顺序，此前受力量影响生物的近战攻击伤害结算在魔咒之前。<ref>{{bug|MCPE-235423}}</ref>}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Stärke (Statuseffekt)]]
+[[en:Strength]]
+[[es:Fuerza]]
+[[fr:Force]]
+[[ja:攻撃力上昇]]
+[[ko:힘 (효과)]]
+[[pt:Força (efeito)]]
+[[ru:Сила]]

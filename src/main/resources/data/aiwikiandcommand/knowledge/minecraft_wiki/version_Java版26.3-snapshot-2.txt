@@ -1,0 +1,355 @@
+# 页面: Java版26.3-snapshot-2
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8826.3-snapshot-2
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:42
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|串列}}{{tr|mode=H|对象|物件}}{{Dangerous version|启用“{{tr|改进透明显示|改善透明顯示|改進透明顯示}}”选项时，在GUI外渲染[[地图]]的物品纹理会导致游戏崩溃。<ref>{{bug|MC-309394}}</ref>}}{{undecided translation|tw=1|hk=1}}
+{{Infobox version
+|title=26.3-snapshot-2
+|image=26.3-snapshot-2.jpg
+|image2=Java Edition 26.3-snapshot-2 Simplified.png\Java Edition 26.3-snapshot-2 Traditional.png\Java Edition 26.3-snapshot-2 Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2026年6月30日
+|jsonhash=c31a68e24b83cd059aa613aff4abb62c7f773b95
+|clienthash=647abf5c48ac9211f7fa26b137519880b36b20a8
+|serverhash=a6e2ae24c95dc838456927661a82434d26936d2f
+|parent=26.3
+|prevparent=26.2
+|prev=26.3-snapshot-1
+|next=26.3-snapshot-3
+|nextparent=
+}}<onlyinclude>
+'''26.3-snapshot-2'''是[[Java版26.3]]的第2个快照，发布于2026年6月30日<ref>{{article|minecraft-26-3-snapshot-2|Minecraft 26.3 Snapshot 2|Jun 30, 2026}}</ref>，修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[自定义世界生成]]'''
+* 加入了<code>minecraft:height_range</code>方块谓词。
+** 检查位置高度是否处在指定范围内。
+** 格式：
+*** <code>min_inclusive</code>：垂直锚点，指定所需的最小高度。
+*** <code>max_inclusive</code>：垂直锚点，指定所需的最大高度。
+* 为垂直锚点加入了新选项<code>relative_to_sea_level</code>，指定相对所处维度海平面的偏移量。
+* 加入了<code>minecraft:copy_properties_provider</code>方块状态提供器。
+** 将共通的方块状态属性从评估位置处的方块复制到输出的方块状态。
+** 格式为具有以下字段的对象：
+*** <code>source_block_state_provider</code>{{note|更新日志中为<code>block_state_provider</code>。}}：方块状态提供器，提供属性要复制到的方块状态。
+**** 只会复制来源和目标方块间共通的属性。
+
+'''[[数据组件]]'''
+* 加入了<code>block_transformer</code>组件。
+** 该组件可让物品在玩家交互时使方块转变为另一方块。
+** 格式如下：
+<div class="treeview">
+::* {{nbt|list|minecraft:block_transformer}}
+::** {{nbt|compound}}：一项转变规则。
+::*** {{nbt|compound|existonsave=1|required=1|block_state_provider}}：转变之后的方块状态，与世界生成中使用的方块状态提供器格式相同。若未返回结果，则尝试下一项转变规则。
+::*** {{nbt|string}}{{nbt|compound|sound}}：玩家交互时播放的声音事件。若未指定则默认不播放声音事件。
+::*** {{nbt|string|particle}}：（默认为<code>none</code>）玩家交互时显示的粒子。取值为{{cd|none|scrape|wax_on|wax_off|d=pretty|finaldelimiter=或}}。
+::*** {{nbt|list|disallowed_faces}}：（默认为空列表）指定不可交互的面。若在这些面上交互，则会尝试下一项转变规则。
+::**** {{nbt|string}}：面的方向。取值为{{cd|up|down|north|south|east|west|d=pretty|finaldelimiter=或}}。
+::*** {{nbt|string|loot}}：成功转变时掉落的物品使用的战利品表。若未指定则默认为无战利品表。
+::*** {{nbt|string|drop_strategy}}：（默认为<code>from_middle</code>）配置掉落物应从方块的哪个位置掉落。取值为<code>from_middle</code>（从中间掉落）或<code>clicked_face</code>（从点击的面处掉落）。
+::*** {{nbt|string|transform_type}}：（默认为<code>single_block</code>）配置此转变将如何影响周围的方块。取值为<code>single_block</code>或<code>copper_chest</code>。当值为<code>single_block</code>时，仅影响交互的方块；当值为<code>copper_chest</code>时，若转变前后的方块均为铜箱子或其任意锈蚀、涂蜡变种，此转变会同时影响大型铜箱子的两个部分。
+::*** {{nbt|bool|consume_on_use}}：（默认为<code>true</code>）决定是否应消耗物品，仅适用于可堆叠物品。
+::*** {{nbt|int|item_damage_per_use}}：（{{interval|left=0}}，默认为1）决定每次使用会消耗多少耐久度，仅适用于不可堆叠物品。
+</div>
+
+'''[[已配置的地物]]'''
+* 加入了<code>minecraft:overlay</code>地物类型。
+** 在同一位置放置一组地物。注意与<code>minecraft:sequence</code>不同，所有的地物都会放置，不受单个地物放置的成败影响。
+** 格式：
+*** <code>features</code>：已放置的地物ID、含已放置的地物ID的非空列表或带<code>#</code>的已放置的地物标签，指定要放置的地物。
+* 加入了<code>minecraft:projected_random_patch_square</code>地物类型。
+** 生成一个正方形，其中每个方块的放置概率基于其与正方形中心的距离，且位于中心的方块相比边缘的方块更可能生成。若满足相应条件，每个已放置的方块可向下投影。
+** 格式：
+*** <code>block</code>：方块状态提供器，指定要放置的方块。
+*** <code>project_through</code>：方块谓词，指定投影时应忽略哪些方块而将其穿过。
+*** <code>size</code>：整数提供器（{{interval|left=1|right=16}}），决定正方形的大小，从中心到边缘测量。
+*** <code>max_projection_height</code>：非负整数，表示正方形中各方块相较原高度而言，在放置时的高度最大变化量。
+
+'''[[战利品表]]'''
+* 加入了<code>till/rooted_dirt</code>战利品表，用于控制[[缠根泥土]]被[[锄]]刨去根时的掉落物。
+
+'''整数提供器'''
+* 加入了<code>minecraft:very_biased_to_bottom</code>整数提供器类型。
+** 在提供的范围内选择一个随机数，对最小值有二次偏向。
+** 格式：带有字段的对象：
+*** <code>min_inclusive</code>：整数，可被选择的最小值（闭区间）
+*** <code>max_inclusive</code>：整数，可被选择的最大值（闭区间）
+
+'''[[Java版标签|标签]]'''
+* 加入了<code>#cannot_place_basalt_pillar_on</code>方块标签。
+* 加入了<code>#turns_into_dirt_path</code>方块标签，包含可以被[[锹]]转变为[[土径]]的方块。
+* 加入了<code>#turns_into_farmland</code>方块标签，包含可以被[[锄]]转变为[[耕地]]的方块。
+* 加入了<code>#dowses_campfires</code>物品标签，包含可用于熄灭[[营火]]的物品。
+
+== 更改 ==
+=== 方块 ===
+'''[[羊毛台阶]]和[[羊毛楼梯]]'''
+* 现在能用作燃料。
+* 现在合适挖掘工具是[[剪刀]]。
+
+'''[[杨树树苗]]'''
+* 现在能用作燃料。
+* 现在会被水流破坏。
+
+'''[[杨木告示牌]]'''
+* 更改了方块纹理。
+
+'''[[杨木门]]'''
+* 更改了方块和物品纹理。
+
+'''[[洞穴空气]]'''
+* 不再会在下界的洞穴中生成。
+
+'''[[层孔菇]]'''
+* 更改了碰撞箱。
+** 将阶段1层孔菇的碰撞箱大小从0.625×0.625×0.4375格更改为上半部分0.625×0.4375×0.125格和下半部分0.375×0.25×0.0625格两部分。
+** 将阶段2层孔菇的碰撞箱大小从0.875×0.875×0.625格更改为上半部分0.875×0.625×0.1875格和下半部分0.5×0.375×0.125格两部分。
+* 更改了纹理文件和UV。
+* 现在其[[方块物品]]使用最初阶段的模型。
+* 现在被人形生物穿戴于头盔槽时会渲染于嘴部，而非头顶。
+* 现在其方块碎片粒子使用单独的纹理。
+
+=== 物品 ===
+'''[[盾牌]]'''
+* 现在当盾牌在副手时按下{{ctrl|使用}}会举盾而不是触发主手的[[锄]]或[[锹]]。
+
+=== 生物 ===
+'''[[溺尸]]'''
+* 现在携带[[三叉戟]]的溺尸距离目标不超过3格时会使用近战攻击，以匹配{{el|be}}。
+
+'''[[流浪商人]]'''
+* 现在会出售[[杨木原木]]。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>109.0</code>。
+* 将注册表<code>worldgen/configured_carver</code>重命名为<code>worldgen/carver</code>。
+
+'''[[服务端配置文件格式]]'''
+* 将<code>white-list</code>的默认值改为<code>true</code>。
+
+'''[[已配置的地物]]'''
+* 将地物类型<code>minecraft:basalt_columns</code>重命名为<code>minecraft:stepped_column_cluster</code>，并暴露了更多对于地物功能的控制。
+** 加入了以下字段：
+*** <code>block</code>：方块状态提供器，指定要放置的方块。
+*** <code>can_replace</code>：方块谓词，指定哪些方块可被该柱替换。
+*** <code>continue_through</code>：方块谓词，指定哪些已有的方块可保留为该柱的一部分。
+*** <code>cannot_place_on</code>：方块ID、方块ID的列表或带<code>#</code>的方块标签ID，指定开始放置时要避开的方块。
+*** <code>column_count</code>：整数提供器（{{interval|left=1|right=150}}），要生成的柱的数量。
+*** <code>cluster_reach</code>：整数提供器（{{interval|left=1|right=13}}），尝试生成柱的正方形区域大小。
+**** 有效生成范围亦受<code>height</code>限制。
+** 将字段<code>reach</code>重命名为<code>column_reach</code>。
+* 将地物类型<code>minecraft:basalt_pillar</code>重命名为<code>minecraft:single_block_pillar</code>，并暴露了更多对于地物功能的控制。
+** 加入了以下字段：
+*** <code>block</code>：方块状态提供器，指定要放置的方块。
+*** <code>can_replace</code>：方块谓词，指定哪些方块可被替换。
+*** <code>direction</code>：该柱的竖直方向，取值为<code>up</code>（向上）或<code>down</code>（向下）。
+*** <code>chance_to_continue</code>：（可选，{{interval|left=0|right=1}}，默认为1）柱连接到另一方块的概率（假设<code>can_replace</code>匹配）。
+*** <code>cap_feature</code>：（可选）已放置的地物，会放置在柱的末端。
+* 将地物类型<code>minecraft:glowstone_blob</code>重命名为<code>minecraft:random_neighbor_spread</code>，并暴露了更多对于地物功能的控制。
+** 加入了以下字段：
+*** <code>block</code>：方块状态提供器，指定要放置的方块。
+*** <code>accepted_neighbors</code>：方块ID、方块ID的列表或带<code>#</code>的方块标签ID，指定哪些方块可视为有效的毗邻方块。
+*** <code>can_replace</code>：方块谓词，指定哪些方块可被替换。
+*** <code>attempts</code>：整数提供器（{{interval|left=1|right=3000}}），尝试放置的次数。
+*** <code>xy_offset</code>{{note|更新日志中为<code>xz_offset</code>。}}：整数提供器（{{interval|left=-16|right=16}}），沿X轴和Z轴的尝试偏移量。
+*** <code>y_offset</code>：整数提供器（{{interval|left=-16|right=16}}），沿Y轴的尝试偏移量。
+
+'''[[选项]]'''
+* 将“{{tr|改进透明显示|改善透明顯示|改進透明顯示}}”选项的实现方式更换为新的[[wikipedia:Order-independent transparency|顺序无关透明（OIT）]]算法，预计可以更好地解决透明渲染问题。
+
+'''[[已放置的地物]]'''
+* 将放置修饰器<code>random_offset</code>重命名为<code>offset</code>。
+** 移除了<code>xz_spread</code>和<code>y_spread</code>字段。
+** 加入了{{cd|x|y|z|d=、}}字段：整数提供器（{{interval|left=-16|right=16}}），依轴指定偏移量。
+
+'''[[噪声设置]]'''
+* <code>spawn_target</code>字段已经更新为允许使用任何密度函数，而不是<code>noise_router</code>字段定义的子集。
+* 候选的出生点位置根据在n维空间中计算一组超立方体的欧几里得距离来确定。
+* 例如，一个轴可以是<code>temperature</code>，另一个轴可以是<code>erosion</code>，适用性由<code>temperature=0.1, erosion=0.2</code>和<code>temperature=0.3, erosion=0.5</code>之间的距离的平方决定。这将优先考虑这些范围内的候选生成，并惩罚远远超出此范围的候选生成。
+* 格式：一个目标超立方体的列表。
+** 目标格式：密度函数ID和轴范围的映射：
+*** 范围可以是这些格式：
+**** 浮点数，一个准确的数值
+**** 两个浮点数组成的数组，来自<code>[min, max]</code>的目标范围
+**** 一个带有字段的对象：
+***** <code>min</code>：浮点数，目标范围的最小值
+***** <code>max</code>：浮点数，目标范围的最大值
+
+'''[[已配置的雕刻器]]'''
+* 注册表<code>worldgen/configured_carver</code>被重命名为<code>carver</code>
+* 更改了<codE>minecraft:cave</code>雕刻器类型：
+** 所有之前在<code>config</code>字段下的字段现在均被内联到顶层。
+** 加入了<code>count</code>字段：非负整数提供器，种子区块将要创建的洞穴隧道的数量。
+** 重命名<code>yScale</code>为<code>room_vertical_radius_multiplier</code>。
+** 加入了可选的<code>start_vertical_radius_multiplier</code>字段：浮点提供器，作为第一个洞穴隧道的竖直半径的缩放倍率。
+*** 如果未指定，默认为<code>1.0</code>。
+** 加入了<code>thickness</code>字段：非负浮点提供器，作为雕刻隧道的半径的缩放倍率。
+** 加入了可选字段<code>weird_thickness_bias</code>：布尔值
+*** 如果为<code>true</code>，厚度会有10%的概率乘上<code>random(0, 1) * random(0, 3) + 1 </code>。
+*** 如果未指定，默认为<code>false</code>。
+** 移除了<code>replaceable</code>字段，雕刻器现在会替换所有方块，除了地物的方块。
+** 移除了<code>lava_level</code>字段，流体现在总是由维度配置的<code>aquifer</code>或<code>sea_level</code>选择。
+** 移除了<code>debug_settings</code>字段。
+* 更改了<code>minecraft:canyon</code>雕刻器类型：
+** 所有之前在<code>config</code>字段下的字段现在均被内联到顶层。
+** 重命名<code>yScale</code>为<code>shape.y_scale</code>。
+** 移除了<code>replaceable</code>字段，雕刻器现在会替换所有方块，除了地物的方块。
+** 移除了<code>lava_level</code>字段，流体现在总是由维度配置的<code>aquifer</code>或<code>sea_level</code>选择。
+** 移除了<code>debug_settings</code>字段。
+* 移除了<code>minecraft:nether_cave</code>雕刻器类型：
+** 被<code>minecraft:cave</code>雕刻器类型替代。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>90.0</code>。
+
+'''[[着色器]]与后处理管线'''
+* 加入了以下着色器，以支持顺序无关透明算法：
+** <code>core/oit_composite.fsh</code>
+** <code>include/oit.glsl</code>
+** <code>include/oit_add_transmittance.glsl</code>
+** <code>include/oit_common.glsl</code>
+** <code>include/oit_depth_bounds.glsl</code>
+** <code>include/oit_depth_sample.glsl</code>
+** <code>include/oit_sample.glsl</code>
+* 将纹理采样逻辑从<code>core/terrain.fsh</code>提取至<code>include/texture_sampling.glsl</code>。
+* 重命名了以下核心着色器：
+** <code>core/rendertype_clouds.vsh</code> -> <code>core/clouds.vsh</code>
+** <code>core/rendertype_clouds.fsh</code> -> <code>core/clouds.fsh</code>
+** <code>core/rendertype_world_border.vsh</code> -> <code>core/world_border.vsh</code>
+** <code>core/rendertype_world_border.fsh</code> -> <code>core/world_border.fsh</code>
+* 更新了核心着色器，以支持顺序无关透明算法。
+** 引入了以下新定义项：
+*** <code>OIT</code>：布尔值，表示是否启用OIT。
+*** <code>OIT_DEPTH_BOUNDS</code>：布尔值，表示是否正在执行深度边界通道。
+*** <code>OIT_TRANSMITTANCE</code>：布尔值，表示是否正在执行透射率通道。
+*** <code>OIT_ACCUMULATE</code>：布尔值，表示是否正在执行累积通道。
+*** <code>OIT_ALPHA_ONLY</code>：布尔值，表示是否正在执行深度边界或透射率通道。
+*** <code>OIT_ADDITIVE</code>：布尔值，表示OIT算法应对当前执行管线模拟加法混合。
+*** <code>OIT_OPAQUE_PARTS_THRESHOLD</code>：浮点数，用于确定片段在何种alpha阈值以上应被视为不透明而不经过OIT处理。
+*** <code>WAVELET_RANK</code>：OIT算法内部的整数。
+*** <code>COEFF_COUNT</code>：OIT算法内部的整数。
+*** <code>COEFF_ATTACHMENT_COUNT</code>：OIT算法内部的整数。
+*** <code>B3D_IS_ZERO_TO_ONE</code>：布尔值，表示当前渲染后端是否使用[0, 1]深度范围，该定义独立于OIT设置，全局适用于所有着色器。
+*** 受影响的着色器：
+**** <code>core/block.fsh</code>
+**** <code>core/block.vsh</code>
+**** <code>core/clouds.fsh</code>
+**** <code>core/clouds.vsh</code>
+**** <code>core/entity.fsh</code>
+**** <code>core/entity.vsh</code>
+**** <code>core/item.fsh</code>
+**** <code>core/item.vsh</code>
+**** <code>core/particle.fsh</code>
+**** <code>core/position_color.fsh</code>
+**** <code>core/rendertype_beacon_beam.fsh</code>
+**** <code>core/rendertype_clouds.fsh</code>
+**** <code>core/rendertype_crumbling.fsh</code>
+**** <code>core/rendertype_entity_shadow.fsh</code>
+**** <code>core/rendertype_lightning.fsh</code>
+**** <code>core/rendertype_lines.fsh</code>
+**** <code>core/rendertype_world_border.fsh</code>
+**** <code>core/terrain.fsh</code>
+**** <code>core/terrain.vsh</code>
+**** <code>core/text.fsh</code>
+**** <code>core/text_background.fsh</code>
+**** <code>core/world_border.fsh</code>
+**** <code>core/world_border.vsh</code>
+* 移除了旧的透明后处理链：
+** <code>post_effect/transparency.json</code>
+** <code>shaders/post/transparency.fsh</code>
+
+'''[[Java版标签|标签]]'''
+* 将<code>poplar_sapling</code>添加到<code>#saplings</code>方块和物品标签。
+* 将<code>#wool_slabs</code>和<code>#wool_stairs</code>添加到<code>#shears_major_breaking_speed</code>方块标签。
+* 将<code>bamboo_sapling</code>和<code>cobweb</code>添加到<code>#washed_away_by_fluids</code>方块标签。
+* 移除了<code>#overworld_carver_replaceables</code>和<code>#nether_carver_replaceables</code>方块标签。
+
+'''[[数据生成器]]'''
+* 移除了方块报告<code>blocks.json</code>中的<code>definition</code>字段。
+
+'''已知问题'''
+* 在Mac上使用Vulkan时，世界无法渲染，只会显示粉红色屏幕。
+* 实体上的光照不正确，例如顶面渲染得过暗。
+
+== 修复 ==
+{{fixes|fixedin=26.3 Snapshot 2|showdesc=1|new=1
+|;26.3前正式版的漏洞
+|161885|很多视觉透明物体在史莱姆后面时不渲染。
+|161898|透明粒子会导致其他粒子不可见。
+|161926|挖掘冰或染色玻璃的方块破坏动画更透明。
+|168653|生物、粒子、云、水和视觉透明方块在潜影弹的透明部分后面时不渲染。
+|190203|视觉透明和特殊渲染的方块、实体、云、水和粒子在风弹和闪电苦力怕、凋灵和旋风人的外层皮肤后面时不渲染。
+|202197|实体的名牌背景会在视觉透明物体后面渲染。
+|210584|水在默认没有半透明纹理的物品的半透明纹理后面时不渲染。
+|223559|视觉透明方块、粒子和云在半透明的“标记”盔甲架后面时不渲染。
+|229405|启用“{{tr|改进透明显示|改善透明顯示|改進透明顯示}}”选项时，船的内部会阻止大部分半透明物体的渲染。
+|252369|数据包可能因游戏错误检测到不存在的地物循环而加载失败。
+|259812|方块展示实体、物品展示实体、床、云、告示牌、潜影盒和半透明方块、实体在文本展示实体后面时不渲染。
+|265743|实体、方块实体、云和半透明方块会在启用了{{cd|see_through}}的文本展示实体前面渲染。
+|271069|未渲染的海豚捡起物品实体时，后者会在视觉上向玩家飞来。
+|275111|引诱船内的两个动物时，它们会看着别的方向而不是玩家。
+|295678|穿过区块边界时，水上方的半透明方块会闪烁。
+|296006|船内的实体不会正确面向玩家。
+|298659|半透明方块和部分实体会在启用了{{cd|see_through}}的文本展示实体前面渲染。
+|303626|启用“{{tr|改进透明显示|改善透明顯示|改進透明顯示}}”选项时，方块轮廓箱、粒子、半透明方块和非方块物品会在实体判定箱后面渲染。
+|305422|玩家有时会因为客户端处理路径点数据包失败而被踢出。
+|306127|半透明物品后面的方块轮廓箱不再可见。
+|306156|启用“{{tr|改进透明显示|改善透明顯示|改進透明顯示}}”选项时，位于半透明方块或液体之间的旋风人、史莱姆和玩家视觉上位于前者的后面。
+|306231|启用“{{tr|改进透明显示|改善透明顯示|改進透明顯示}}”选项时，半透明方块后面的船视觉上充满了水。
+|306318|启用“{{tr|改进透明显示|改善透明顯示|改進透明顯示}}”选项时，半透明物品会穿过头上穿戴了半透明物品的玩家的头部渲染。
+|307285|硫方怪后面的半透明方块不会渲染。
+|307345|烈性硫黄产生的烟雾粒子不在染色玻璃后面渲染。
+|307902|硫方怪内部的半透明方块没有正确渲染。
+|308798|海豚需要更长时间来捡起物品。
+|309081|能在冒险模式下用弹射物破坏饰纹陶罐和紫颂花。
+|;prev
+|309022|层孔菇生成时方向错误。
+|309027|指定了坐标的{{cmd|teleport|link=none}}的成功消息汇报说它影响了0个实体。
+|309043|地毯不再能合成。
+|309056|杨树树苗不会被水破坏。
+|309067|羊毛台阶和楼梯不能用作燃料。
+|309075|对玩家站着的层孔菇使用骨粉会导致玩家穿过它。
+|309082|流浪商人不出售杨木原木。
+|309084|快捷栏中的层孔菇模型突出槽位。
+|309105|剪刀不能加速对羊毛楼梯和台阶的破坏。
+|309117|斑驳森林中的草和杨树树叶在地图上显示为绿色。
+|309123|层孔菇的方块破坏粒子没有正确渲染。
+|309133|杨木告示牌的正面纹理与其他告示牌的正面纹理不一致。
+|309136|层孔菇的碰撞箱太大。
+|309173|层孔菇的物品模型展示的是大型层孔菇的方块模型，尽管它放置的是小型的。
+|309184|在数据包中指定多个{{cd|no_op}}类型的地物会阻止世界加载。
+|309205|杨树树苗不能用作燃料。
+|309206|蜘蛛网不会被水破坏。
+|309275|杨木门上半部分纹理有3个错误着色的像素点。
+|309302|杨树树苗不在{{cd|#sapling}}中。
+|309330|杨木门的物品纹理没有铰链，与其他门的物品纹理不同。
+}}</onlyinclude>
+
+== 影片 ==
+由[[slicedlime]]製作的影片：
+{{yt|O_xO9IhPNWw}}
+{{yt|35K0jTiCi5I}}
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|2026}}
+
+[[de:26.3-snapshot-2]]
+[[en:Java Edition 26.3 Snapshot 2]]
+[[es:Java Edition 26.3 Snapshot 2]]
+[[ja:Java Edition 26.3 Snapshot 2]]
+[[lzh:爪哇版二六點三之快照二]]
+[[pt:Edição Java 26.3 Snapshot 2]]
+[[ru:26.3 Snapshot 2 (Java Edition)]]
+[[uk:26.3 Snapshot 2 (Java Edition)]]

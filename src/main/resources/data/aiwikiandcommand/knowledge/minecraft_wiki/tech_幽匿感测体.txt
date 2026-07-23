@@ -1,0 +1,486 @@
+# 页面: 幽匿感测体
+# 来源: https://zh.minecraft.wiki/w/%E5%B9%BD%E5%8C%BF%E6%84%9F%E6%B5%8B%E4%BD%93
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 基岩版独有信息, 实验性内容/2026 年第 3 次更新, 方块, 红石, 过长的自动值输出
+# 抓取时间: 2026-07-14 17:25:49
+# 原始 Wikitext 内容:
+
+{{for|可以只接受特定频率振动的变种|校频幽匿感测体|幽匿系列其他方块|幽匿{{!}}{{tr|幽匿|伏聆（消歧義）|沉靈}}}}
+{{redirect|感测体||探测器（消歧义）}}
+{{Infobox block
+|group1=未激活
+|1-1=Inactive Sculk Sensor.gif
+|1-1caption={{el|je}}
+|1-2=Inactive Sculk Sensor BE.gif
+|1-2caption={{el|be}}
+|group2=激活
+|2-1=Active Sculk Sensor JE.gif
+|2-1caption={{el|je}}
+|2-2=Active Sculk Sensor BE.gif
+|2-2caption={{el|be}}
+|group3=冷却
+|3-1=Cooldown Sculk Sensor JE.gif
+|3-1caption={{el|je}}
+|3-2=Cooldown Sculk Sensor BE.gif
+|3-2caption={{el|be}}
+|invimage=Sculk Sensor
+|invimage2=----
+|invimage3=Sculk Sensor BE
+|light=1
+}}
+
+'''幽匿感测体（Sculk Sensor）'''是一种可以检测振动并发出[[红石信号]]、激活附近[[幽匿尖啸体]]的方块。
+
+== 生成 ==
+=== 自然生成 ===
+幽匿感测体可作为[[幽匿斑块]]的一部分自然生成于[[深暗之域]]生物群系，也可以作为红石元件自然生成于[[远古城市]]中心的灯柱和地下室。
+
+{{Block distribution}}
+
+=== 幽匿催发体 ===
+{{main|幽匿催发体#用途}}
+死后会掉落[[经验]]的[[生物]]在距[[幽匿催发体]]半径{{only|je|for=8格}}或{{only|be|for=10格}}内的位置死亡时，周围的[[幽匿块]]上有9%的概率生成幽匿感测体，每次生成消耗1点经验。
+
+== 获取 ==
+=== 箱子战利品 ===
+{{LootChestItem|sculk_sensor}}
+
+== 破坏 ==
+挖掘幽匿感测体的合适工具是锄。
+
+{{Breaking table}}
+
+没有被具有[[精准采集]]的工具挖掘破坏时，幽匿感测体被破坏后会掉落{{xp|5}}。
+
+被具有[[精准采集]]的工具挖掘破坏时，幽匿感测体被破坏后会掉落自身。
+
+== 用途 ==
+=== 合成材料 ===
+{{crafting usage|Sculk Sensor}}
+
+=== 振动检测 ===
+[[File:Vibration (texture) JE1 BE1.gif|thumb|幽匿感测体检测振动的粒子效果|class=pixel-image]]
+幽匿感测体可以检测半径8格范围内由物体的动作产生的振动，但它们不会检测[[潜行]]的生物发出的部分振动（如行走、摔落或掷出弹射物时发出的振动；潜行时踩踏该幽匿感测体的振动除外）、[[监守者]]发出的所有振动和其他幽匿感测体发出的振动。
+
+当幽匿感测体检测到振动时，振动源会以每游戏刻1格，即每秒20格的速度向其发出信号粒子；信号到达时，幽匿感测体会激活1.5秒，并在周围产生渐变色粒子；激活时间过后，幽匿感测体还会有0.5秒的冷却时间。从信号开始发出到冷却时间结束，幽匿感测体都不会再检测其他振动，因此不可能出现多个信号同时传向同一个幽匿感测体的情况，也不会发生幽匿感测体被自身取消激活的振动反复激活的情况。冷却时间结束后，幽匿感测体才能继续检测振动。
+
+[[羊毛]]会吸收经过的信号，被吸收的信号不会被幽匿感测体接收。
+
+羊毛、{{in update|for=[[羊毛楼梯]]、[[羊毛台阶]]|drop 3 2026}}、[[地毯]]的[[物品实体]]掉在地上，在上述方块上行走以及放置上述方块{{Upcoming|JE 26.3|for=或[[坐垫]]实体}}发出的振动不会被检测。
+
+幽匿感测体可[[含水]]。含水的幽匿感测体不会发出任何声音，但仍可检测周围的振动。
+
+当[[实体]]位于幽匿感测体上时，幽匿感测体会持续地周期性激活。
+
+=== 幽匿尖啸体 ===
+幽匿感测体被玩家的行为激活时会发送信号给半径8格内的[[幽匿尖啸体]]，将其激活。
+
+=== 红石元件 ===
+[[File:A visualization of the redstone output when triggering Sculk Sensors at difference distances.jpg|thumb|300px|在不同距离触发幽匿感测体时，红石输出的可视化效果<ref>{{tweet|kingbdogz|1643612593573986307|A visualization of what the redstone output will now be when triggering Sculk Sensors at difference distances.|April 5, 2023}}</ref>]]
+
+幽匿感测体被激活时会：
+* 激活毗邻的红石线，并改变水平方向上毗邻的红石线的指向。信号强度取决于幽匿感测体到振动源的距离。
+* 激活四周背对幽匿感测体的[[红石中继器]]和[[红石比较器]]。信号强度取决于幽匿感测体到振动源的距离。
+* 激活毗邻的[[红石元件|机械元件]]（如[[门]]、[[红石灯]]等），包括幽匿感测体上面的和下面的机械元件（但不能激活一些拒绝该方向输入的机械元件，如面朝该幽匿感测体的[[活塞]]）。
+
+幽匿感测体发出的红石信号强度与幽匿感测体到振动源的距离呈负相关性质，即振动传播距离越短，幽匿感测体发出的红石信号越强。
+: 具体公式为：<math>\max(1,15-\lfloor\text{距离}\times1.875\rfloor)</math>
+
+当振动源位于幽匿感测体正上方（距离为0）时，幽匿感测体会输出最大的红石信号强度15。
+
+当幽匿感测体探测到它上面的实体时，输出的红石信号强度始终为15。
+
+==== 振动频率 ====
+游戏内每种振动都有不同的频率，幽匿感测体收到的振动的频率可以被[[红石比较器]]检测并作为主输入端输入。红石比较器检测幽匿感测体得到的信号仅与振动频率相关，与振动的远近无关。玩家可以借此探知幽匿感测体周围发生的事件类型。
+
+当幽匿感测体探测到它上面的实体时，其振动频率为1。
+
+幽匿感测体检测到振动时，与之相邻的[[紫水晶块]]会发生'''共振'''，即发送一个频率相同的振动。
+
+{{:幽匿感测体/振动频率}}
+
+=== 光源 ===
+幽匿感测体无论是否被激活[[亮度]]都为1级，但激活时在视觉上会发出更亮的偏黄的光。
+
+== 音效 ==
+{{edition|java}}：
+{{Sound table
+|sound=Sculk Sensor break1.ogg
+|sound2=Sculk Sensor break2.ogg
+|sound3=Sculk Sensor break3.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source={{tp|soundCategory.block}}
+|description=破坏方块
+|id=block.sculk_sensor.break
+|translationkey=subtitles.block.generic.break}}
+{{Sound table
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.sculk_sensor.fall
+|translationkey=subtitles.block.generic.fall}}
+{{Sound table
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source={{tp|soundCategory.block}}
+|description=挖掘方块
+|id=block.sculk_sensor.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Sculk Sensor place1.ogg
+|sound2=Sculk Sensor place2.ogg
+|sound3=Sculk Sensor place3.ogg
+|sound4=Sculk Sensor place4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source={{tp|soundCategory.block}}
+|description=放置方块
+|id=block.sculk_sensor.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.sculk_sensor.step
+|translationkey=subtitles.block.generic.footsteps}}
+{{Sound table
+|sound=Sculk Sensor clicking stop1.ogg
+|sound2=Sculk Sensor clicking stop2.ogg
+|sound3=Sculk Sensor clicking stop3.ogg
+|sound4=Sculk Sensor clicking stop4.ogg
+|sound5=Sculk Sensor clicking stop5.ogg
+|subtitle={{tp|subtitles.block.sculk_sensor.clicking_stop}}
+|source={{tp|soundCategory.block}}
+|description=取消激活
+|id=block.sculk_sensor.clicking_stop
+|translationkey=subtitles.block.sculk_sensor.clicking_stop}}
+{{Sound table
+|sound=Sculk Sensor clicking1.ogg
+|sound2=Sculk Sensor clicking2.ogg
+|sound3=Sculk Sensor clicking3.ogg
+|sound4=Sculk Sensor clicking4.ogg
+|sound5=Sculk Sensor clicking5.ogg
+|subtitle={{tp|subtitles.block.sculk_sensor.clicking}}
+|source={{tp|soundCategory.block}}
+|description=激活
+|id=block.sculk_sensor.clicking
+|translationkey=subtitles.block.sculk_sensor.clicking
+|foot=1}}
+
+{{edition|bedrock}}：
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=方块
+|description=方块作为物品使用时发出的音效
+|id=use.sculk_sensor
+|typeid=item.use.on
+|soundvolume
+|soundpitch=0.8
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=方块
+|description=挖掘方块
+|id=hit.sculk_sensor
+|typeid=hit
+|soundvolume=0.35
+|soundpitch=0.5
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk Sensor place1.ogg
+|sound2=Sculk Sensor place2.ogg
+|sound3=Sculk Sensor place3.ogg
+|sound4=Sculk Sensor place4.ogg
+|sound5=Sculk Sensor place5.wav
+|source=方块
+|description=放置方块
+|id=place.sculk_sensor
+|typeid=place
+|soundvolume
+|soundpitch=0.8-1.0
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=玩家
+|description=带有摔落伤害时摔落在方块上
+|id=fall.sculk_sensor
+|typeid=fall
+|soundvolume=0.4
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=玩家
+|description=在方块上行走
+|id=step.sculk_sensor
+|typeid=step
+|soundvolume=0.17
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=玩家
+|description=在方块上跳跃
+|id=jump.sculk_sensor
+|typeid=jump
+|soundvolume=0.12
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=玩家
+|description=在方块上着陆
+|id=land.sculk_sensor
+|typeid=land
+|soundvolume=0.14
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk Sensor clicking1.ogg
+|sound2=Sculk Sensor clicking2.ogg
+|sound3=Sculk Sensor clicking3.ogg
+|sound4=Sculk Sensor clicking4.ogg
+|sound5=Sculk Sensor clicking5.ogg
+|source=方块
+|description=激活
+|id=power.on.sculk_sensor
+|typeid=power.on.sculk_sensor
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk Sensor clicking stop1.ogg
+|sound2=Sculk Sensor clicking stop2.ogg
+|sound3=Sculk Sensor clicking stop3.ogg
+|sound4=Sculk Sensor clicking stop4.ogg
+|sound5=Sculk Sensor clicking stop5.ogg
+|source=方块
+|description=取消激活
+|id=power.off.sculk_sensor
+|typeid=power.off.sculk_sensor
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=java
+|Sculk Sensor
+|spritetype=block
+|nameid=sculk_sensor
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=Sculk Sensor
+|spritetype=block
+|blocktags={{GameTag|block|sculk_sensor}}
+|nameid=sculk_sensor
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Sculk Sensor
+|nameid=sculk_sensor
+|spritetype=block
+|showblocktags=be
+|blocktags={{GameTagBE|block|sculk_sensor}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=Sculk Sensor
+|spritetype=block
+|nameid=SculkSensor
+|foot=1
+}}
+
+=== 方块状态 ===
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+幽匿感测体拥有与其相关联的方块实体，以保存幽匿感测体方块的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{Load achievements|sneak-100}}
+
+== 进度 ==
+{{Load advancements|prefix=adventure|avoid_vibration}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2020年10月3日|link={{ytl|DBvZ2Iqmm3M|t=23m14s}}|[[File:Sculk Sensor (pre-release 1).gif|32px]] [[Minecraft Live 2020]]展示了幽匿感测体。
+|[[File:Sculk Sensor (pre-release item).png|32px]] 幽匿感测体在物品栏中的模型缺少“卷须”，因为这一部分会作为实体渲染，类似于[[附魔台]]上的书。}}
+|{{HistoryLine||2020年11月13日|link={{tweet|kingbdogz|1327265084352180224}}|[[File:Sculk Sensor (pre-release 2).gif|32px]] [[Brandon Pearce]]在推文中展示了幽匿感测体的新纹理和触发动画。}}
+|{{HistoryLine||2020年11月23日|link={{tweet|kingbdogz|1330993128099229697}}|[[File:Sculk Sensor (pre-release 3).gif|32px]] Brandon Pearce在推文中展示了幽匿感测体的新纹理和触发动画。}}
+|{{HistoryLine||2020年11月27日|link={{tweet|kingbdogz|1332335160038191105}}|[[File:Sculk Sensor JE1.png|32px]] Brandon Pearce在推文中展示了幽匿感测体的新的最终纹理。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=20w49a|[[File:Inactive Sculk Sensor JE1.gif|32px]] [[File:Active Sculk Sensor JE1.gif|32px]] [[File:Cooldown Sculk Sensor JE1.gif|32px]] 加入了幽匿感测体。}}
+|{{HistoryLine|||dev=20w51a|幽匿感测体不再检测开始进食、走在羊毛上和羊毛掉在地上发出的振动。
+|调整了部分振动频率。
+|幽匿感测体含水时不再会发出声音。}}
+|{{HistoryLine|||dev=21w05a|现在幽匿感测体可以检测鸣钟、方块变化、饮用完毕、引爆、生物互动、装备物品、剪切、劫掠兽咆哮、放置实体、杀死实体、潜影贝关闭和潜影贝打开事件。}}
+|{{HistoryLine|||dev=21w19a|从[[创造模式物品栏]]移除了幽匿感测体。}}
+|{{HistoryLine||1.18|dev=exp1|重新将幽匿感测体加入到了创造模式物品栏。}}
+|{{HistoryLine|||dev=21w37a|再次从创造模式物品栏移除了幽匿感测体。}}
+|{{HistoryLine||1.19|dev=exp1|重新将幽匿感测体加入到了创造模式物品栏。
+|现在幽匿感测体可以在[[深暗之域]]生物群系中自然生成。
+|现在幽匿感测体会出现在[[远古城市]]的箱子中。
+|现在幽匿感测体只能使用[[精准采集]]附魔工具开采，使用其他方式破坏则只会掉落经验。
+|现在幽匿感测体被[[潜行]]的玩家踩踏时也会激活。}}
+|{{HistoryLine|||dev=22w11a|上述实验性快照中幽匿感测体会出现在[[远古城市]]的箱子中，以及被潜行的玩家踩踏会激活的特性尚未在此快照中实现。}}
+|{{HistoryLine|||dev=22w12a|现在幽匿感测体被潜行的玩家踩踏时又会激活了。}}
+|{{HistoryLine|||dev=22w18a|幽匿感测体现在会侦测最近的振动信号，而非之前的1刻内的首个振动信号。}}
+|{{HistoryLine|||dev=pre1|现在幽匿感测体可以感测到玩家“使用”具有开始和结束状态的物品（例如[[弓]]、[[弩]]、[[山羊角]]、[[盾牌]]和[[食物]]）时，在开始和结束节点上的物品交互振动。
+|现在不再感测玩家潜行时的物品交互振动。
+|现在幽匿感测体可以感测音符盒播放和吹奏山羊角事件，振动频率为6和15。
+|现在实体踩踏幽匿感测体时，幽匿感测体通过红石比较器传出的信号强度为1而不是上次触发振动的频率。}}
+|{{HistoryLine|||dev=pre2|现在幽匿感测体可以感测实体传送事件，振动频率为5。}}
+|{{HistoryLine|||dev=pre3|幽匿感测体不再感测物品交互的开始节点的振动。}}
+|{{HistoryLine||1.19.1|dev=22w24a|现在幽匿感测体可以检测唱片机播放与停止播放音乐唱片的事件，振动频率均为0。}}
+|{{HistoryLine|||dev=pre1|22w24a中加入的2个游戏事件不再能被感测到。}}
+|{{HistoryLine||1.19.4|dev=23w06a|现在幽匿感测体可以感测实体骑乘和离开骑乘事件，振动频率分别为7和6。
+|加入了一些[[23w06a#新可感测动作|可感测到的动作]]。}}
+|{{HistoryLine|||dev=pre1|将游戏事件{{cd|item_interact_finish}}的振动频率由14调整为2。}}
+|{{HistoryLine||1.20|dev=23w12a|加入了15个可感测到的{{cd|resonate}}游戏事件。
+|[[23w12a#vbchanges|更改]]了大量游戏事件的振动频率，更改前的见[[幽匿感测体/振动频率/1.20前]]。}}
+|{{HistoryLine|||dev=23w14a|现在幽匿感测体可感测到[[嗅探兽]]刨挖种子。
+|调整了幽匿感测体的红石信号输出方式，使其更适合距离计算。
+|现在幽匿感测体会强充能下方的方块。}}
+|{{HistoryLine|||dev=23w16a|现在若有振动计划被幽匿感测体接收，此振动会在临近全部区块均被加载和计算前留在等待队列中。}}
+|{{HistoryLine|||dev=23w17a|将幽匿感测体的激活时长由40游戏刻改为30游戏刻，冷却时长由1游戏刻改为10游戏刻。}}
+|{{HistoryLine|||dev=23w18a|现在在方块边缘上行走时会正常触发幽匿感测体。<ref>{{bug|MC-207290|||Fixed}}</ref>
+|现在在羊毛或地毯边缘上行走时不再会触发幽匿感测体。<ref>{{bug|MC-257269|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了一些[[23w31a#可感测动作|可感测到的动作]]。}}
+|{{HistoryLine|||dev=23w32a|振动不再会因为[[模拟距离]]限制而丢失。
+|加入了一些[[23w32a#可感测动作|可感测到的动作]]。}}
+|{{HistoryLine||1.21|dev=24w19a|现在幽匿感测体可以感测[[冰霜行者]]魔咒生成[[霜冰]]，振动频率为13。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.210|exg=caves_and_cliffs_en|dev=1.16.210.56|[[File:Sculk Sensor BE1.gif|32px]] 加入了幽匿感测体，它拥有与Java版不同的纹理。}}
+|{{HistoryLine||1.16.210|由于不存在“{{experiment|caves_and_cliffs_en|exg=1}}”选项，幽匿感测体在此正式版中不可用。}}
+|{{HistoryLine||1.17.10|exg=caves_and_cliffs|dev=1.17.10.20|[[File:Inactive Sculk Sensor BE2.gif|32px]] [[File:Active Sculk Sensor BE2.gif|32px]] [[File:Cooldown Sculk Sensor BE2.gif|32px]] 更改了幽匿感测体的纹理以匹配{{el|je}}。但动画仍与之前一致。}}
+|{{HistoryLine|||dev=正式版|现在幽匿感测体在正式版中可通过开启[[实验性玩法]]来启用。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.20|幽匿感测体不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||exg=vanilla_experiments|dev=1.18.0.22|现在幽匿感测体属于[[实验性玩法]]中的“{{experiment|vanilla_experiments|exg=1}}”部分。
+|现在可以使用[[锄]]来更快地破坏幽匿感测体。}}
+|{{HistoryLine||1.18.10|exg=wild_update|dev=1.18.10.21|现在幽匿感测体属于[[实验性玩法]]中的“{{experiment|wild_update|exg=1}}”部分。}}
+|{{HistoryLine||1.18.30|exg=wild_update|dev=1.18.30.22|现在幽匿感测体可以含水。
+|现在[[羊毛]]会阻挡幽匿感测体感应振动。}}
+|{{HistoryLine|||dev=1.18.30.28|现在幽匿感测体可以在[[深暗之域]]生物群系中自然生成。}}
+|{{HistoryLine|||dev=1.18.30.32|现在幽匿感测体会作为[[远古城市]]的一部分生成，也会出现在远古城市的箱子中。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|幽匿感测体不再属于[[实验性玩法]]。
+|现在幽匿感测体能够检测更多种类的振动。
+|现在幽匿感测体被[[潜行]]的玩家踩踏时也会激活。}}
+|{{HistoryLine|||dev=1.19.0.24|现在幽匿感测体只能使用[[精准采集]]附魔工具开采，使用其他方式破坏则只会掉落经验。}}
+|{{HistoryLine||1.19.20|dev=1.19.20.20|幽匿感测体现在会侦测最近的振动信号，而非之前的1刻内的首个振动信号。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.20|将{{cd|item_interact_finish}}游戏事件的振动频率由14调整为2。
+|游戏事件{{cd|item_interact_start}}不再能被感测到。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|现在幽匿感测体会强充能下方的方块。}}
+|{{HistoryLine|||dev=1.20.0.22|将幽匿感测体的激活时长由40游戏刻改为30游戏刻，冷却时长由1游戏刻改为10游戏刻。}}
+|{{HistoryLine||1.20.10|dev=1.20.10.20|加入了一些[[基岩版1.20.10.20#可感测动作|可感测到的动作]]。}}
+|{{HistoryLine||1.20.30|dev=1.20.30.20|加入了一些[[基岩版1.20.30.20#可感测动作|可感测到的动作]]。}}
+|{{HistoryLine|||dev=1.20.30.21|加入了一些[[基岩版1.20.30.21#可感测动作|可感测到的动作]]。}}
+|{{HistoryLine||1.20.40|dev=1.20.40.20|现在幽匿感测体能检测关闭[[运输船]]或[[运输矿车]]的动作。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.28|现在幽匿感测体能检测[[眼眸花]]张开和闭合的动作。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.21|现在幽匿感测体能检测[[嘎枝之心]]生成[[树脂团]]的动作。}}
+|{{HistoryLine|||dev=1.21.60.25|现在幽匿感测体能够检测[[嘎枝]]被攻击时晃动身体的动作。}}
+}}
+
+== 画廊 ==
+<gallery>
+JE 1.17 Development Sculk family.png|[[Minecraft Live 2020]]展示的幽匿系列方块，包括幽匿感测体
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|natural blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[de:Sculk-Sensor]]
+[[en:Sculk Sensor]]
+[[es:Sensor de sculk]]
+[[fr:Capteur sculk]]
+[[it:Sensore di sculk]]
+[[ja:スカルクセンサー]]
+[[lzh:幽匿探子]]
+[[pl:Skulkowy czujnik]]
+[[pt:Sensor de Sculk]]
+[[ru:Скалк-сенсор]]
+[[uk:Скалковий сенсор]]

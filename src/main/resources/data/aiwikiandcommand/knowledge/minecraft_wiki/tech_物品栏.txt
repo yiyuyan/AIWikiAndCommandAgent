@@ -1,0 +1,398 @@
+# 页面: 物品栏
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E6%A0%8F
+# 分类: Java版独有信息, UI, 使用DynamicPageList4的页面, 基岩版独有信息, 教育版独有信息, 游戏内容, 需要信息, 需要验证
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+{{redirect|GUI|游玩时出现的如生命条和十字准星|平视显示器}}
+{{for}}
+{{tr|mode=H|经典UI|傳統UI}}{{tr|mode=H|携带版UI|Pocket UI}}
+[[File:Inventory.png|thumb|{{el|je}}中生存模式物品栏]]
+
+'''物品栏（Inventory）'''是用于管理物品和与部分方块交互的界面。
+
+== 概述 ==
+物品栏是用于管理物品和与部分方块交互的界面。在生存模式物品栏中，玩家可以管理背包中的[[物品]]和装备[[盔甲]]。在[[创造模式物品栏]]中，玩家可以获取无限的物品用于创造。玩家也可以使用外部物品栏与部分其他方块和实体交互。
+
+物品栏在玩家退出世界或服务器时会被保存，因此，当玩家重新进入世界或服务器时，玩家将拥有与他们最后离开这个世界时相同的物品。
+
+{{in|be}}为了适应不同平台的游玩方式，游戏提供了两种UI，两种UI设置下的物品栏布局不同。此选项可在[[设置#Video|视频选项]]处更改。
+* 经典UI：更适合键鼠和手柄，默认在PC和主机平台启用。除[[创造模式物品栏]]外，经典UI下的多数界面与Java版大致相同。
+* 携带版UI：更适合小屏幕设备和触屏操作，默认在Android和iOS设备上启用。携带版UI为了适配触屏操作和移动设备的屏幕大小，GUI会显示得更大或全屏显示，一些菜单的内容也被分成了几个不同的标签页，以防止页面元素过多图标过小难以点击。
+
+虽然这两种UI是为不同的控制方式设计的，但其设置并不局限于某种平台或操作方式。两种UI均可在任何平台和设备，使用任意控制方式时使用。不过，可能会出现某些操作无法完成的问题。
+
+[[File:BE_GUI_Animation.gif|thumb|{{el|be}}中的物品栏界面移动动画]]
+{{in|be}}所有物品栏和类似物品栏的GUI在出现时会从屏幕底部淡入并上移至屏幕中心，关闭时会向屏幕底部下移并淡出。此屏幕动画受“{{tr|屏幕动画|螢幕動畫}}”[[选项]]控制，默认开启。
+{{-}}
+
+== 储存槽 ==
+{{see_also|槽位}}
+[[File:Items slot number.png|thumb|数字用于指明玩家生存模式物品栏中的存储槽，图片为{{el|je}}]]
+物品栏通常由数个格子组成。大多数格子都能放入所有的物品，部分格子只能放入特定的物品或用于取出物品（如玩家的盔甲栏、{{only|be|for=副手槽}}和[[熔炉]]等）。
+
+大多数物品在一个格子中可以堆叠64个，某些物品无法堆叠，比如[[工具]]（[[时钟]]和[[指南针]]除外）、[[盔甲]]和[[药水]]。此外，通过[[命令]]增加了某些[[物品堆叠组件]]的物品无法与正常的同种物品堆叠。某些物品只能堆叠至16个，如[[雪球]]、[[鸡蛋]]、[[旗帜]]和[[末影珍珠]]等。
+
+将光标指在物品上面时，会出现一个[[提示框]]，其中包含该物品的名称、[[魔咒]]及某些物品的特定属性，例如[[附魔书]]的种类。{{in|je}}按{{key|F3+H}}将使物品显示更多信息，例如其[[命名空间ID]]、[[耐久度]]、[[数据组件]]数量和某些物品具有的特殊信息，如[[皮革盔甲]]的颜色值及[[地图]]的放大尺寸。
+
+对着带有物品栏的方块（例如[[箱子]]、[[工作台]]、[[酿造台]]或[[熔炉]]）按下{{ctrl|使用}}键将打开其界面，此时玩家可以在自己的物品栏（包括27个主槽位和9个快捷栏槽位）与方块的物品栏界面之间移动物品。
+
+== 玩家物品栏 ==
+玩家物品栏（有时单独称为物品栏）分为生存模式物品栏和[[创造模式物品栏]]。创造模式物品栏只能在[[创造模式]]打开，生存模式物品栏则可以在[[创造模式]]、[[生存模式]]、[[冒险模式]]和{{only|je|for=[[旁观模式]]}}打开。
+
+{{in|je}}玩家物品栏可以通过按下键盘上的{{key|E}}来打开或关闭。此键可以从游戏中的[[选项]]菜单更改。也可以使用{{key|Esc}}来关闭物品栏。
+
+{{in|be}}玩家物品栏可以通过按下{{ctrl|物品栏}}键来打开，也可以通过再次按下{{key|E}}来关闭。此键可以从游戏中的[[选项]]菜单更改。使用触屏操作时可以按快捷栏最右侧的[[File:Inventory Button.png|20px|class=pixel-image]]按钮来打开。关闭物品栏可以使用{{key|Esc}}、点击界面右上方的×、Android返回键或按手柄返回键来完成。
+
+=== 生存模式物品栏 ===
+生存模式物品栏是游戏里玩家用来管理自己所携带的物品的弹出式菜单栏。在这个界面，玩家可以装备盔甲，可以在2×2的方格里[[合成]]物品，也可以装备[[工具]]、[[方块]]和[[物品]]。[[玩家]]的[[皮肤]]也在此显示。
+
+生存模式物品栏界面共包含有4个盔甲槽、27个物品存放槽、9个快捷栏槽位以及1个[[副手]]槽，在{{only|be|for=[[创造模式]]}}、[[生存模式]]、[[冒险模式]]和{{only|je|for=[[旁观模式]]}}中，生存模式物品栏中还有一个2×2的[[合成方格]]，可以用来[[合成]]物品，但不能用来储存物品。
+
+[[盔甲]]只有装备在盔甲槽时才能起作用。不在盔甲槽中的盔甲不会被磨损，也不会提供保护。手持盔甲按{{control|使用}}键也可以装备或替换盔甲，[[头颅]]和[[雕刻南瓜]]也可以装备在盔甲槽中的头盔槽中，不过它们不会提供保护，也不会消耗耐久度。
+
+==== Java版 ====
+点击[[File:Knowledge Book JE2.png|25px|class=pixel-image]]可以开关配方书。
+<Gallery>
+Inventory.png|{{el|je}}中生存模式物品栏
+</Gallery>
+
+==== 基岩版 ====
+===== 经典UI =====
+点击右上方的[[File:BE Recipe Book and Inventory icon.png|35px|class=pixel-image]]和[[File:BE Inventory icon.png|20px|class=pixel-image]]可以切换是否显示配方书。
+
+<Gallery>
+BE Inventory Classic UI.png|{{el|be}}中经典UI下的生存模式物品栏
+</Gallery>
+
+===== 携带版UI =====
+点击右下角的[[File:BE Crafting Tab icon.png|20px|class=pixel-image]]或[[File:BE Armor Tab icon.png|20px|class=pixel-image]]可以切换到“合成”标签页或“盔甲”标签页，这两个菜单只能同时显示一个。
+
+点击左下角的[[File:BE Inventory Tab icon.png|20px|class=pixel-image]]可以切换到物品栏标签页，或点击左上方的任意图标来打开对应配方书标签页，这些菜单同样只能同时显示一个。
+
+无论处于什么菜单，快捷栏都随时可见。
+{{gallery|widths=240|
+BE Crafting Tab Pocket UI.png|携带版UI下的“合成”标签页
+BE Armor Tab Pocket UI.png|convert|携带版UI下的“盔甲”标签页
+}}
+
+==== 配方书 ====
+{{main|配方书}}
+
+配方书是Minecraft中提供的[[配方]]列表和指导[[合成]]的机制。它会显示玩家拥有所需材料的相关合成配方。
+
+{{in|je}}配方会在不同的标签栏里展示：
+* {{InvSprite|Compass|scale=0.5}} - 顶部第一个标签栏包含所有已解锁的配方。
+* {{InvSprite|Iron Axe|scale=0.5}} - 第二个标签栏包含工具、武器和盔甲。
+* {{InvSprite|Bricks|scale=0.5}} - 第三个标签栏包含建筑方块。
+* {{InvSprite|Lava Bucket|scale=0.5}} - 第四个标签栏包含[[食物]]和杂项。
+* {{InvSprite|Redstone Dust|scale=0.5}} - 第五个标签栏包含[[红石]]元件。
+
+<gallery widths="240">
+File:Crafting Recipe Book (inventory).png|玩家物品栏里的配方书
+</gallery>
+
+{{in|be}}配方会在不同的标签栏里展示，这些标签栏与[[创造分类]]相同：
+* “[[File:BE icon recipe construction.png|px|class=pixel-image]]建筑”标签栏，包含建筑材料。
+* “[[File:BE icon recipe equipment.png|20px|class=pixel-image]]装备”标签栏，包含战斗用品、部分工具和熟食。
+* “[[File:BE icon recipe item.png|20px|class=pixel-image]]物品”标签栏，包含功能方块、交通工具、[[红石元件]]和原材料。
+* “[[File:BE icon recipe nature.png|20px|class=pixel-image]]自然”标签栏，包含自然方块、[[农作物]]、[[染料]]和生食。
+* 另有“[[File:BE icon recipe all.png|20px|class=pixel-image]]全部”标签栏用于搜索配方和显示所有已解锁的配方。使用经典UI时显示在最右侧。使用携带版UI时显示在左上方。
+
+{{gallery|widths=240|
+BE Recipe Book Inventory Classic UI.png|convert|经典UI下玩家物品栏里的配方书
+BE Recipe Book Inventory Pocket UI.png|convert|携带版UI下玩家物品栏里的配方书
+}}
+
+=== 状态效果 ===
+{{see also|状态效果#监测}}
+
+{{in|je}}状态效果显示在物品栏右侧。{{in|be}}展示状态效果的生物效果屏幕通过按下{{ctrl|生物效果}}键或点击效果图标来打开。
+
+{{gallery|widths=240|
+PackInventoryWindowWithEffect.png|convert|{{el|je}}中有状态效果时的物品栏
+BE Mob Effects.png|convert|{{el|be}}中的生物效果屏幕
+}}
+
+=== 创造模式物品栏 ===
+{{main|创造模式物品栏}}
+创造模式的玩家可以访问创造模式物品栏，从而无限地获取几乎任何物品，包括许多在生存模式中无法获取的物品。
+{{gallery|widths=240|
+Creative Inventory JE.png|convert|{{el|je}}中的创造模式物品栏
+Creative Inventory BE (Classic).png|{{el|be}}中经典UI下的创造模式物品栏
+Creative Inventory BE (Pocket).png|{{el|be}}中携带版UI下的创造模式物品栏
+}}
+
+== 物品管理 ==
+许多界面中拥有“格子”状的物品槽位，通过与格子交互，可实现物品的排列与转移。不同的输入设备管理物品时的交互逻辑可能有所不同。
+
+{{in|be}}使用手柄时，下文中的左键和右键分别对应于Xbox手柄的{{xbtn|A}}和{{xbtn|X}}，{{verify|for=PlayStation手柄的{{psbtn|x}}和{{psbtn|sq}}}}{{info needed|对应Switch手柄的什么？}}。
+
+基础鼠标操作：
+* 鼠标能以类似“抓”住物品的形式移动物品：
+** {{in|be}}选取的物品的图标会被放大。
+** 通常情况下，在物品栏中左键单击有物品的格子，会将所点击物品组中的物品全部移动至鼠标上。
+** 通常情况下，在物品栏中右键单击有物品的格子，会将所点击物品组中的半数（向上取整）移动至鼠标上。
+* 鼠标上有物品时，通过鼠标左右键点击一个目标格，可将物品以不同的方式放置：
+** 若目标格为空或放有与鼠标所带物品相同的物品，左键将会尝试将鼠标上的全部物品放入目标格，而右键将会尝试将鼠标上物品中的一个放入目标格。所有放下物品的“尝试”会在格子中的物品达到最大堆叠后停止，剩余物品留在鼠标上。
+** 点击左右键时，若目标格放有与鼠标上所带物品不同的物品，两者交换。
+*** 耐久度、魔咒等物品组件有差异但ID一致的物品，视为不同的物品。
+* 左键点击物品栏界面中暗色的无内容处会将鼠标上的物品全部丢出。按右键则只会丢出一个。
+* 在{{el|je}}的[[创造模式]]中，{{ctrl|选取}}任意有物品的格子将复制出等于堆叠上限的该组物品到鼠标上。若按住{{ctrl|选取}}并拖动，将在每个划过的空格子或装有相同物品的格子中放置整组该物品。
+
+便捷鼠标操作：
+* 双击物品将同时尝试拿起物品栏中的全部相同物品，直到达到最大堆叠数量。寻找同类物品时，会按照从左上至右下的顺序逐行寻找。
+** {{in|be}}当双击的物品已满一组、没有其他物品来补充成一组或不可堆叠时，该物品将会快速移动至其他地方（若有），效果与按{{key|shift}}+左键一致。
+* 鼠标上有物品时，可以通过按下并拖动左右键将物品以不同的方式分配在按下期间划过的所有空格子或放有同类物品的格子上。
+** 按下左键并拖动，物品将平均分配在按下期间划过的所有格子，余数物品会留在鼠标上。
+** 按下右键并拖动，将会在按下期间划过的所有格子中放置一个。
+*** 在此期间，每个格子只会被影响一次，原路返回无法取消操作对格子的波及。
+**** 在任何时候，当所有被波及的格子只能分配到一个物品且鼠标上无剩余物品时，不会再影响更多的格子。
+**** {{in|je}}每次拖动时影响的格子会高亮，类似“多选”，直到松开鼠标，放有不同物品的格子会被忽略，不会高亮。已经被影响的格子仍然会在松手前高亮。
+**** 例如，将9个物品平均分配在三个格子中时有两种可行操作：将其左键拖过三个格子，或将其右键拖过相同的三个格子三次。
+***** 若方案一中不小心拖过了四个格子，则必须松开鼠标重新整理，此时拖过的四个格子各有2个物品，鼠标上剩余一个物品。
+***** 不论方案一或二，如果划过了9个格子，则这9个格子都将分配一个物品，{{only|je|for=且继续滑动鼠标不会让更多格子高亮}}。
+*** 影响放有同类物品的格子时，不会使堆叠数量超过上限。
+**** 若左键拖动的平均分配操作使物品超过上限，超出部分会返回鼠标，且不会二次分配。
+**** {{in|je}}遣返了物品的物品堆的物品数目会在本次操作期间变为黄色。
+**** 若期间继续划过了更多格子，则会重新计算，此时原本移除的数目便可能恰好合适甚至不会达到最大数目。
+**** {{in|je}}若右键拖动时划过已满的物品堆，则仅会高亮这对物品，堆叠数目的数字颜色不变。
+**** 例如：有一个格子带有62个物品，而鼠标上有6个同类物品，此时按住左键拖动，划过了有62个物品的格子与一个空格子，此时鼠标上剩余1个被遣返的物品，原本62个物品的格子变为64个{{only|je|for=且数目标黄}}，另一个空格子有3个物品。
+***** 若多划过一个空格子，则有64个、2个、2个三堆物品，若再多划过一个空格子，则有63个、1个、1个、1个四堆物品，鼠标剩余2个。
+
+键鼠结合操作：
+* 按住{{key|Shift}}并点击物品栏中的某物品将会使此物品从物品栏中迅速传递到快捷栏中，反过来也可以将物品传回物品栏。打开容器时，将会在物品栏和快捷栏组成的整体与容器之间传递物品。
+** 若目标位置有相同但堆叠未满的物品，则会优先进入该格子。多出的物品和没有可堆叠位置的物品会遵循以下移动方式（下文中称为“新物品”）。
+** 在物品栏和快捷栏之间快速移动物品时，或将物品快速移动至容器中时，新物品会优先进入'''最靠上排最靠左'''的格子。
+** {{in|je}}从容器向玩家物品栏移动物品时会优先将新物品移动至快捷栏'''最靠右'''的格子。若物品栏没有可以移动的位置，则优先移动到物品栏'''最靠下排最靠右'''的位置。
+** {{in|be}}从容器向玩家物品栏移动物品时会优先将新物品移动至快捷栏'''最靠左'''的格子。如果物品栏没有可以移动的位置，则优先移动到物品栏'''最靠上排最靠左'''的位置。
+** {{in|be}}快速移动物品时有物品移动的动画效果。
+** {{in|je}}在创造模式物品栏中除了生存模式选项卡以外的分类下，按住{{key|Shift}}并点击某物品不会将该物品快速移动到玩家物品栏，而是会拿出等于堆叠上限的该组物品到鼠标上。
+* {{in|je}}鼠标上带有某物品时，按住{{key|Shift}}并双击物品栏中的同种物品将会使一部分中所有相同的物品传递至另一部分，反之亦然。
+** 这种方法无法将物品栏中的物品传递至快捷栏，而是会让物品集中在物品栏前部。
+** 当目标部分无法容纳更多物品，剩余物品会留在原处。
+* {{in|je}}鼠标悬停在任意格子上时，按{{key|1-9}}或{{key|F}}会将该物品移动至对应的快捷栏或副手槽中，如果其中有物品则会交换两者的位置。
+* 在{{el|je}}的创造模式中，按下{{key|{{ctrl|保存快捷栏}}+1-9}}会将当前的快捷栏保存至“{{tp|itemGroup.hotbar}}”选项卡中，并且可通过按下{{key|{{ctrl|加载快捷栏}}+1-9}}加载。
+* 当鼠标悬停在物品栏或容器中的某个物品上时，点击{{ctrl|丢弃}}将会扔出1个物品，按住{{key|Ctrl+{{ctrl|丢弃}}}}将会扔出整组物品。
+
+{{only|be|for=触摸操作}}：
+* 短按带有物品的格子作为来源格，会选中其中所有物品。此后，点击另一格子作为目标格，会将来源格的物品与目标格交换。若目标格与来源格放有相同物品，则会尝试在目标格合并这两组物品。目标格的物品堆叠数目达到上限后，超出部分会留在来源格。
+* 长按带有物品的格子作为来源格，会出现一个指示条，显示当前选中物品的数量，指示条的绿色部分代表选中数量占该格该物品总数的占比。一开始会选中半数物品（向上取整），保持长按向左划会减少选中数量（至少1个），向右划则增加选中数量（直至选中全部物品）。松手后，可以点击一个空格子或放有同类物品的格子作为目标格，将选中数量的物品移动到目标格中。目标格的物品堆叠数目达到上限后，超出部分会留在来源格中。
+
+== 生物物品栏 ==
+一些[[生物]]拥有自己的物品栏，它们有特定的用途：
+* [[村民]]和[[猪灵]]都有8个槽位，对玩家不可见，用于存放它们拾取的物品（详见{{slink|村民|拾取物品}}和{{slink|猪灵|拾取物品}}）。
+* [[驴]]和[[骡]]在装备[[箱子]]后有15个槽位，可供玩家存储物品。
+* [[羊驼]]在装备箱子后有3、6、9、12或15个槽位（数量由<code>Strength</code>决定），可供玩家存储物品。
+* [[悦灵]]有1个槽位，对玩家不可见，用于储存收集的物品。
+* {{in|be|ee}}[[智能体]]有27个槽位，玩家可通过其界面访问，也可通过编程访问。
+
+== 外部物品栏 ==
+{{redirect|容器|其他相關方塊|箱子（消歧义）|、|雕纹书架|、|饰纹陶罐|或|展示架}}
+许多方块和非玩家实体都具有类似物品栏的GUI。下方列出了这些GUI的样子。
+
+=== Java版 ===
+{{gallery|
+Crafting Table GUI.png|convert|{{BlockLink|Crafting Table}}
+Enchanting Table GUI.png|convert|{{BlockLink|Enchantment Table}}
+Beacon GUI.png|convert|{{BlockLink|Beacon}}
+Anvil GUI.png|convert|{{BlockLink|Anvil}}
+Grindstone GUI.png|convert|{{BlockLink|Grindstone}}
+Cartography Table GUI.png|convert|{{BlockLink|Cartography Table}}
+Stonecutter GUI.png|convert|{{BlockLink|Stonecutter}}
+Loom GUI.png|convert|{{BlockLink|Loom}}
+Smithing Table GUI.png|convert|{{BlockLink|Smithing Table}}
+Trading GUI.png|convert|{{EntityLink|Villager}}
+Horse GUI.png|convert|{{EntityLink|Horse}}<br>{{EntityLink|Zombie Horse}}
+Donkey UI.png|convert|{{EntityLink|Donkey}}（带箱子）<br>{{EntityLink|Mule}}（带箱子）
+Camel GUI.png|convert|{{EntityLink|Camel}}<br>{{EntityLink|Camel Husk}}
+Llama Strength 5 GUI.png|convert|{{EntityLink|Llama}}<br>（带箱子，<code>Strength</code>为5）
+Nautilus GUI.png|convert|{{EntityLink|Nautilus}}<br>{{EntityLink|Zombie Nautilus}}
+}}
+
+; 容器
+{{gallery|
+Chest GUI.png|convert|{{BlockLink|Chest}}<br>{{BlockLink|Trapped Chest}}<br>{{BlockLink|Copper Chest}}<br>{{BlockLink|Ender Chest}}<br>{{BlockLink|Shulker Box}}<br>{{BlockLink|Barrel}}<br>{{ItemLink|Minecart with Chest}}<br>{{ItemLink|Boat with Chest}}
+Large Chest GUI.png|convert|{{BlockSprite|Chest left}}{{BlockSprite|Chest right}} [[大型箱子]]<br>{{BlockSprite|Trapped Chest left}}{{BlockSprite|Trapped Chest right}} [[大型陷阱箱]]<br>{{BlockSprite|Copper Chest left}}{{BlockSprite|Copper Chest right}} [[大型铜箱子]]
+Furnace GUI.png|convert|{{BlockLink|Furnace}}<br>{{BlockLink|Smoker}}<br>{{BlockLink|Blast Furnace}}
+Brewing Stand GUI.png|convert|{{BlockLink|Brewing Stand}}
+Dispenser GUI.png|convert|{{BlockLink|Dispenser}}<br>{{BlockLink|Dropper}}
+Hopper GUI.png|convert|{{BlockLink|Hopper}}<br>{{ItemLink|Minecart with Hopper}}
+Crafter GUI.png|convert|{{BlockLink|Crafter}}
+}}
+
+=== 基岩版 ===
+==== 经典UI ====
+{{gallery|
+BE Crafting Table GUI Classic UI.png|convert|{{BlockLink|Crafting Table}}
+BE Enchanting Table GUI Classic UI.png|convert|{{BlockLink|Enchantment Table}}
+BE Beacon GUI Classic UI.png|convert|{{BlockLink|Beacon}}
+BE Anvil GUI Classic UI.png|convert|{{BlockLink|Anvil}}
+BE Grindstone GUI Classic UI.png|convert|{{BlockLink|Grindstone}}
+BE Cartography Table GUI Classic UI.png|convert|{{BlockLink|Cartography Table}}
+BE Stonecutter Block GUI Classic UI.png|convert|{{BlockLink|Stonecutter}}
+BE Loom GUI Classic UI.png|convert|{{BlockLink|Loom}}
+BE Smithing Table GUI Classic UI.png|convert|{{BlockLink|Smithing Table}}
+BE Trading GUI Classic UI.png|convert|{{EntityLink|Villager}}
+BE Horse GUI Classic UI.png|convert|{{EntityLink|Horse}}<br>{{EntityLink|Zombie Horse}}
+BE Donkey GUI Classic UI.png|convert|{{EntityLink|Donkey}}（带箱子）<br>{{EntityLink|Mule}}（带箱子）
+BE Camel GUI Classic UI.png|convert|{{EntityLink|Camel}}<br>{{EntityLink|Camel Husk}}
+BE Llama GUI Classic UI.png|convert|{{EntityLink|Llama}}
+BE Nautilus GUI.png|convert|{{EntityLink|Nautilus}}<br>{{EntityLink|Zombie Nautilus}}
+}}
+
+; 容器
+{{gallery|
+BE Chest GUI Classic UI.png|convert|{{BlockLink|Chest}}<br>{{BlockLink|Trapped Chest}}<br>{{BlockLink|Ender Chest}}<br>{{BlockLink|Shulker Box}}<br>{{BlockLink|Barrel}}<br>{{ItemLink|Minecart with Chest}}<br>{{ItemLink|Boat with Chest}}
+BE Large Chest GUI Classic UI.png|convert|{{BlockSprite|Chest left}}{{BlockSprite|Chest right}} [[大型箱子]]<br>{{BlockSprite|Trapped Chest left}}{{BlockSprite|Trapped Chest right}} [[大型陷阱箱]]<br>{{BlockSprite|Copper Chest left}}{{BlockSprite|Copper Chest right}} [[大型铜箱子]]
+BE Furnace GUI Classic UI.png|convert|{{BlockLink|Furnace}}<br>{{BlockLink|Smoker}}<br>{{BlockLink|Blast Furnace}}
+BE Brewing Stand GUI Classic UI.png|convert|{{BlockLink|Brewing Stand}}
+BE Dropper GUI Classic UI.png|convert|{{BlockLink|Dropper}}<br>{{BlockLink|Dispenser}}
+BE Hopper GUI Classic UI.png|convert|{{BlockLink|Hopper}}<br>{{ItemLink|Minecart with Hopper}}
+BE Crafter GUI Classic UI.png|convert|{{BlockLink|Crafter}}
+}}
+
+==== 携带版UI ====
+{{gallery|widths=240|
+BE Crafting Table GUI Pocket UI.png|convert|{{BlockLink|Crafting Table}}
+BE Enchanting Table GUI Pocket UI.png|convert|{{BlockLink|Enchantment Table}}
+BE Beacon GUI Pocket UI.png|convert|{{BlockLink|Beacon}}
+BE Anvil GUI Pocket UI.png|convert|{{BlockLink|Anvil}}
+BE Grindstone GUI Pocket UI.png|convert|{{BlockLink|Grindstone}}
+BE Cartography Table GUI Pocket UI.png|convert|{{BlockLink|Cartography Table}}
+BE Stonecutter Block GUI Pocket UI.png|convert|{{BlockLink|Stonecutter}}
+BE Loom GUI Pocket UI.png|convert|{{BlockLink|Loom}}
+BE Smithing Table GUI Pocket UI.png|convert|{{BlockLink|Smithing Table}}
+BE Trading GUI Pocket UI.png|convert|{{EntityLink|Villager}}
+BE Horse GUI Pocket UI.png|{{EntityLink|Horse}}
+BE Donkey GUI Pocket UI.png|{{EntityLink|Donkey}}（带箱子）<br>{{EntityLink|Mule}}（带箱子）
+BE Camel GUI Pocket UI.png|{{EntityLink|Camel}}
+BE Llama GUI Pocket UI.png|{{EntityLink|Llama}}
+}}
+
+; 容器
+{{gallery|widths=240|
+BE Chest GUI Pocket UI.png|convert|此界面全屏显示<br>{{BlockLink|Chest}}<br>{{BlockLink|Trapped Chest}}<br>{{BlockLink|Ender Chest}}<br>{{BlockLink|Shulker Box}}<br>{{BlockLink|Barrel}}<br>{{ItemLink|Minecart with Chest}}<br>{{ItemLink|Boat with Chest}}
+BE Large Chest GUI Pocket UI.png|convert|此界面全屏显示<br>{{BlockSprite|Chest left}}{{BlockSprite|Chest right}} [[大型箱子]]<br>{{BlockSprite|Trapped Chest left}}{{BlockSprite|Trapped Chest right}} [[大型陷阱箱]]<br>{{BlockSprite|Copper Chest left}}{{BlockSprite|Copper Chest right}} [[大型铜箱子]]
+BE Furnace GUI Pocket UI.png|convert|{{BlockLink|Furnace}}<br>{{BlockLink|Smoker}}<br>{{BlockLink|Blast Furnace}}
+BE Brewing Stand GUI Pocket UI.png|convert|{{BlockLink|Brewing Stand}}
+BE Dropper GUI Pocket UI.png|convert|此界面全屏显示<br>{{BlockLink|Dropper}}<br>{{BlockLink|Dispenser}}
+BE Hopper GUI Pocket UI.png|convert|此界面全屏显示<br>{{BlockLink|Hopper}}<br>{{ItemLink|Minecart with Hopper}}
+BE Crafter GUI Pocket UI.png|convert|此界面全屏显示<br>{{BlockLink|Crafter}}
+}}
+
+== 成就 ==
+{{load achievements|taking-inventory}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.20a|玩家的物品栏现在可以通过按{{key|B}}键打开。}}
+|{{HistoryLine||2009年8月4日|link={{notch|155882307/a-video-showing-what-i-did-today-are-vids-like}}|现在打破方块后，可以捡起它们并放置，并在物品栏中增加或减少相应物品。}}
+|{{HistoryLine||0.24 SURVIVAL TEST|快捷栏中已选择的方块会出现在视野中。
+|当在快捷栏中没有选中物品时会显示玩家的胳膊。}}
+|{{HistoryLine||0.26 SURVIVAL TEST|物品栏界面测试。}}
+|{{HistoryLine||0.30|加入了创造模式物品栏，取代了生存模式物品栏。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20100129|移除了创造模式物品栏，重新加入了生存模式物品栏。|玩家现在可以查看物品栏界面了。
+|由Notch的一个视频可知，此时玩家的物品栏是一个合成菜单，并且该合成菜单的界面和现在工作台的界面一样。<ref>https://www.youtube.com/watch?v=OpmK7rDU5bA</ref>
+|物品栏打开时可以走动。}}
+|{{HistoryLine|||dev=20100130|加入了工作台，因此物品栏里的合成方格由3×3变成了2×2。
+|当物品栏关闭时，2×2合成方格上的物品依旧会停留在里面。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.15|物品栏打开时不再能走动了。}}
+|{{HistoryLine||v1.1.0|物品栏现在会被储存在多人游戏服务器中。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.0|在Alpha版本中，玩家可以把物品放置于2×2的合成方格中，而不会因为关闭了物品栏界面造成这些物品被丢出来。但这个情况在Beta版本中有所改变，在关闭物品栏界面的同时，合成方格立即被清空，里面的物品马上会掉落出来。}}
+|{{HistoryLine||1.4|打开物品栏的默认按键{{key|I}}被改为了{{Key|E}}键，原因是Notch发现这样会变得更为有效率。<ref>{{tweet|notch|50500645144375296|(I changed the default from "I" to "E", which is five times better)|March 23, 2011}}</ref>}}
+|{{HistoryLine||1.8|dev=pre1|加入了创造模式，因此也加入了创造模式物品栏。
+|在创造模式中只能打开创造模式物品栏。
+|创造模式的物品栏变成了含有所有物品的、没有文字的物品选择页面，这与[[Java版Classic|Classic]] 0.30创造模式中的物品栏相似。
+|在创造模式中，如果在快捷栏已满的情况下捡起方块，它将像生存模式一样被放入物品栏中。查看它的唯一方式是打开自己的物品栏。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.2.4|重新引入了物品栏盔甲槽旁的玩家预览。}}
+|{{HistoryLine||1.3.1|dev=12w21b|为创造模式物品栏加入了创造标签页，因此现在可以在创造模式中访问生存模式物品栏。|物品栏按钮不会关闭物品栏而是打开搜索标签，所以，玩家需要按下{{key|Esc}}来关闭物品栏}}
+|{{HistoryLine|||dev=12w22a|工具、武器以及其他物品的朝向由朝左变为朝右。
+|玩家可以在创造模式下更换装备了。
+|除非玩家按聊天键（默认为{{Key|T}}），否则搜索标签页不会自动打开，以便于可以再次按下{{key|E}}来关闭物品栏。}}
+|{{HistoryLine||1.5|dev=13w01a|改善了物品栏管理，现在可以：
+* 双击以集中堆叠物品。
+* 左键拖动以于经过的空槽位中平均分散物品。
+* 右键拖动以于经过的空槽位中单个放置物品。
+<!--* {{key|Shift}} + double click items in a crafting area to place all items in the inventory.-->
+* {{key|Shift}}+双击以将容器中的相同物品集中移至物品栏。
+* 按{{key|Q}}以丢弃鼠标悬浮着的物品。
+* 按{{ctrl|使用}}以装备盔甲。}}
+|{{HistoryLine||1.9|dev=15w31a|重新布置生存模式物品栏和创造模式中的“生存模式物品栏”，以容纳新的副手槽。
+|统一物品栏中大部分物品的朝向。}}
+|{{HistoryLine||1.16|dev=pre3|现在把鼠标悬停在物品栏中的物品上时，也能与副手{{Control|交换物品}}了。<ref name="MC-84610">{{Bug|MC-84610||副手快捷键无法在物品栏中生效|Fixed}}</ref>}}
+|{{HistoryLine||1.21.2|dev=24w39a|更新了GUI槽位高亮，以提高物品纹理的可见度。旧版本纹理添加到了Programmer Art资源包中。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||Demo|加入了物品栏。
+|由于游戏只有创造模式，因此暂时只存在创造模式物品栏。}}
+|{{HistoryLine||0.1.1|物品栏有了新的界面。}}
+|{{HistoryLine||0.2.0|旧版本中的物品栏现在用于创造模式中。
+|加入了生存模式物品栏。玩家仍然可以在创造模式下看到这些方块，但是不能放置它们，除非采集了相应的方块。
+|由于合成还没实现，所以玩家生成时，物品栏中会含有无限数量的需合成物品。}}
+|{{HistoryLine||0.3.0|物品栏现在有了背景方格。
+|生存模式物品栏现在有了2×2合成格。}}
+|{{HistoryLine||0.6.0|生存模式物品栏现在有了盔甲栏了。}}
+|{{HistoryLine||0.9.0|重新设计了生存模式物品栏，使其与创造模式物品栏匹配。|合成界面现在会显示目前可以合成的物品的配方了。}}
+|{{HistoryLine||0.11.0|将生存模式物品栏的图标由砖块更改为箱子。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了UI选择，可以在“携带版”和“经典（类似于[[Windows 10版]]）”之间切换。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了副手槽。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|重新设计了物品栏，且加入了配方书。}}
+}}
+
+== 你知道吗 ==
+* 如果在玩家死亡时打开物品栏，玩家模型会显示为倒下的姿势并带有红色色调，这与直接观察到的玩家死亡动画是相同的。
+* 如果在玩家乘船、骑猪或乘坐矿车等时打开物品栏，玩家模型会显示为坐下的状态。
+** 玩家在[[床]]上睡觉时是躺下的姿势，但如果在睡觉时打开物品栏，玩家模型会显示为直立状态。
+* 在生存模式物品栏界面中，{{only|be|for=使用键盘与鼠标或手柄控制且使用经典UI时}}，[[第三人称视角|玩家模型]]的头会一直盯着玩家的光标移动。
+* 有鹦鹉站在玩家的肩膀上时，打开物品栏也能够看见鹦鹉站在玩家的肩膀上。
+
+== 画廊 ==
+{{gallery|
+InventoryClassicCreative.png|在[[Java版Classic|Classic]]版中的物品栏
+Creative Inventory pre-12w21b.png|在12w21b前的创造模式物品栏
+Inventory Pocket Edition 0.1.0.png|在携带版0.1.0中的物品栏
+Death while in Inventory.png|{{el|java}}中当玩家死亡时的物品栏
+Parrot in Inventory.png|{{el|be}}中当鹦鹉站在玩家的肩膀上时打开物品栏
+player inventory.png|{{el|java}}中一个分类填充的物品栏
+BonusChest Loot.png|convert|{{el|java}}中箱子的物品栏
+}}
+
+== 参见 ==
+* [[合成]]
+* [[烧炼]]
+* [[物品修复]]
+* [[物品]]
+* [[物品耐久]]
+* [[方块]]
+* [[实体]]
+* [[槽位]]
+* [[平视显示器]]
+* [[属性]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:UI]]
+
+[[de:Inventar]]
+[[en:Inventory]]
+[[es:Inventario]]
+[[fr:Inventaire]]
+[[ja:インベントリ]]
+[[ko:보관함]]
+[[nl:Inventaris]]
+[[pl:Ekwipunek]]
+[[pt:Inventário]]
+[[ru:Инвентарь]]
+[[tr:Envanter]]
+[[uk:Інвентар]]

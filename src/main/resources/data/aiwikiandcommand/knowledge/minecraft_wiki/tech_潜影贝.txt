@@ -1,0 +1,496 @@
+# 页面: 潜影贝
+# 来源: https://zh.minecraft.wiki/w/%E6%BD%9C%E5%BD%B1%E8%B4%9D
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 基岩版独有信息, 实体, 敌对生物, 有未知版本的History模板的页面/基岩版, 末地生物, 需要验证
+# 抓取时间: 2026-07-14 17:31:12
+# 原始 Wikitext 内容:
+
+{{about|末地城和末地船中的敌对生物||潜影}}
+{{Infobox entity
+|group1=张开
+|1-1=Shulker.png
+|group2=闭合
+|2-1=Shulker Box.png
+|*-1size=132px
+|*-2size=150px
+|extratext={{tr|查看|檢視}}[[#渲染图|所有渲染图]]
+|invimage=Shulker Spawn Egg
+|health={{hp|30}}
+|behavior=敌对生物
+|damage='''弹射物（{{EntityLink|Shulker Bullet}}）{{only|je|short=1}}：'''<br>{{AutoDmg|4|jed=造成10秒{{EffectLink|Levitation}}I}} <br>'''弹射物（{{EntityLink|Shulker Bullet}}）{{only|be|short=1}}：'''<br>{{AutoDmg|d1=4|d2=4|d3=4|jed=造成10秒{{EffectLink|Levitation}}I}}
+|armor=外壳关闭时：{{armor|20}}<br>外壳打开时：{{armor|0}}
+|size='''外壳关闭时：'''<br>高度：1.0格<br>宽度：1.0格<br>
+'''偷窥时：'''<br>高度：1.2格<br>宽度：1.0格<br>
+'''外壳打开时：'''<br>高度：2.0格<br>宽度：1.0格<br>
+|spawn=
+{{EnvLink|End City}}<br>
+{{EnvLink|End Ship}}
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{relevant tutorial|潜影贝农场}}
+{{quote|探险者应谨慎地探索末地外围岛屿——潜影贝藏在它们狡猾的伪装里，蛰伏于末地城内紫珀块的雕砌中。靠近几步，它们方形的外壳就会开启，里面软软的小脑袋会发射一颗跟踪子弹！|[[Marsh Davies]]<ref>{{article|meet-shulker|Meet the Shulker|Jan 30, 2017}}</ref>||Marsh Davies Mojang avatar.png}}
+
+'''潜影贝（Shulker）'''是生成在[[末地城]]和[[末地船]]中伪装成方块的敌对生物。它们会将自己隐藏在贝壳里，和末地城的[[紫珀块]]混在一起。
+
+== 生成 ==
+=== 自然生成 ===
+潜影贝会随着[[末地]]外岛的[[末地城]]和[[末地船]]一同生成，它们经常会出现在末地城的墙壁上。潜影贝不会自然消失，即使是在和平难度下。潜影贝随着末地城和末地船一同生成后不会再次自然生成。
+
+=== 人为生成 ===
+一只'''打开壳'''的潜影贝被其他潜影贝（或自己）发射的子弹击中时，有概率在原地生成一只潜影贝，并且将自己传送走。
+
+* 被击中的潜影贝会检查以该潜影贝为中心17&times;17&times;17范围内的方块是否满足[[#行为|传送条件]]，会尝试5次。若尝试成功，一只新的潜影贝将会生成在被击中的潜影贝原先附着的地方，否则不会有新的潜影贝生成。
+* 若潜影贝被击中时生命值少于一半，则会有25%的概率不生成新的潜影贝。
+* 在被击中的潜影贝为中心的8格方块之内，每有一只其他潜影贝，则生成新的潜影贝概率将会降低20%。若该范围内有着5只及以上的潜影贝，则不会有新的潜影贝生成。
+*{{in|be}}当被击中的潜影贝因这次攻击死亡时，会在原位置重新生成一只潜影贝。在被击中的潜影贝为中心的9&times;9&times;9范围内若有超过一只其他潜影贝，则重新生成的概率会降低{{verify|具体降低多少？}}。
+
+== 掉落物 ==
+{{see also|Tutorial:潜影贝农场}}
+
+{{DropTable|name=Shulker
+|{{DropLine|name=Shulker Shell|edition=java|dropchance=0.5|lootingchance=0.0625}}
+|{{DropLine|name=Shulker Shell|edition=bedrock|quantity=0-1|lootingquantity=0-1}}
+}}
+
+潜影贝被[[玩家]]或驯服的[[狼]]杀死时会掉落{{xp|5}}。
+
+== 行为 ==
+[[File:Shulker shooting.gif|thumb|250px|潜影贝射击]]
+潜影贝一般保持静止，附着在附近方块的碰撞箱完整表面上。若没有方块发生变化且不被攻击，潜影贝会一直停留在自身的位置。
+
+潜影贝的传送需满足以下的其中一个条件：
+* 潜影贝所附着的方块已经消失
+* 潜影贝检测不到所附着方块的碰撞箱
+* 当前占用的方块已不是空气方块
+* 无法打开壳
+* 生命值低于一半时受到伤害（25%概率）
+当条件满足时，潜影贝会尝试传送（每1游戏刻尝试5次）到距离该潜影贝[[切比雪夫距离]]内8格的范围内随机一个'''[[碰撞箱]]完整的表面'''上，并根据其依靠的方块表面调整自身朝向。如果没有发现可供传送的合适表面（例如处于虚空中），则不会传送。
+
+另外对于和潜影贝同一高度的脚手架，会主动传送到脚手架下表面，但是传送以后检测不到脚手架的碰撞箱就会往其他合适的地方传送。
+
+如果脚手架有下表面则会阻挡潜影贝从侧面打开外壳，脚手架没有下表面的时候不会阻挡潜影贝从侧面打开外壳。
+
+潜影贝免疫[[伤害#摔落伤害|摔落伤害]]，可被[[钓鱼竿]]勾住，但不能被拖动，免疫[[熔岩]]和[[火]]造成的燃烧伤害，{{only|be|for=但仍会在熔岩中溺亡}}，碰到水时也会传送。潜影贝受到伤害时不会被击退。
+
+{{in|je}}潜影贝不会阻止附近的玩家使用[[床]]入睡。
+
+尽管潜影贝与方块有相似之处，但它们与方块有很多差异。例如，生物会试图通过潜影贝寻找路径，而不是绕开<ref>{{bug|MC-94831|||Won't Fix}}</ref>或跳过它们，<ref>{{bug|MC-94115|||Won't fix}} </ref>从高处落到它们上时不会产生粒子效果。<ref>{{bug|MC-129795|||Won't Fix}}</ref>它们的[[刷怪蛋]]也不会破坏[[草丛]]等方块。<ref>{{bug|MC-130571|||WAI}}</ref>
+
+{{in|be}}具有[[隐身]]效果的潜影贝全身都不会隐形。<ref>{{bug|MCPE-46219}}</ref>
+
+难度不为和平时，潜影贝主动攻击16格内的玩家，被攻击时会进行反击，且{{in|JE}}当一只潜影贝受到攻击时，附近的所有潜影贝将对攻击者进行反击。在和平难度下，潜影贝{{only|je|for=不会进行攻击<ref>{{bug|MC-227168}}</ref>}}/{{only|be|for=不会攻击玩家，但在受到其他生物的攻击后仍会反击}}。它们永远不会因误伤而互相攻击。
+
+潜影贝会偶尔将外壳微微打开1~3秒，偷看外面的环境。当攻击目标在16格内时，潜影贝便完全打开外壳，每隔1~5.5秒便会发射出一颗沿XYZ轴移动的、追踪目标的[[潜影弹]]。{{in|be}}攻击间隔取决于与目标之间的距离，但即使二者完全重合也无法达到1秒的极限间隔，而是会保持张开但不发射[[潜影弹]]。
+
+当潜影贝关闭外壳时，会获得{{armor|20}}护甲值并可以弹开[[箭]]（包括由具有[[穿透]]魔咒的弩射出的箭）。打开外壳时，潜影贝就会丧失这一天然盔甲并且正常地受到伤害。
+
+与多数敌对生物不同，潜影贝永远不会自然消失，在不死亡的情况下会永远保留在世界中。
+
+=== 染色 ===
+潜影贝可以获得不同的颜色，就像[[潜影盒]]一样。生成的潜影贝为默认颜色。
+
+{{in|je}}潜影贝只能通过命令来染色；{{in|be}}[[创造模式]]的玩家可以对潜影贝{{ctrl|使用}}任意一种[[染料]]，使其染上对应的颜色。
+
+=== 队伍 ===
+{{exclusive|java|section=1}}
+当潜影贝位于一个[[队伍]]中时，会主动攻击不在同一队伍中的除[[恶魂]]外的所有敌对生物。
+
+拥有队伍的潜影贝是游戏中极少数会主动攻击[[苦力怕]]的生物。潜影贝不会主动攻击[[铁傀儡]]和[[雪傀儡]]，但这些生物会主动攻击潜影贝，潜影贝在受伤后仍然会反击。
+
+在多人游戏或冒险类存档设计中，玩家可以利用潜影贝的这一特性建造一个以潜影贝为守卫的炮台，固守一个特定位置。
+
+=== 隐偏航性 ===
+{{exclusive|java|section=1}}
+
+尽管潜影贝模型实际上看上去并无旋转，但潜影贝的[[实体数据格式|实体数据]]中同其他实体一样具有[[朝向]]字段——包括水平旋转属性，即[[偏航角]]。潜影贝在自然生成时会获得随机的偏航角，此后不能够主动改变自身的偏航角。
+
+而由于实体在乘坐[[船#行为|船]]时，其偏航角会被约束在相对于船的水平朝向的<code>[-105°, +105°]</code>范围内，对潜影贝也是如此。潜影贝在乘坐船而导致偏航角改变后，由于其依旧不会主动改动自身的偏航角，这个被改变的值能一直保留到下船之后。
+
+同时，因为船的下客位置由乘客的偏航角决定，故此后潜影贝下船的方向也将随之改变。<ref>https://github.com/Youmiel/ArticlesAndDevNotes/blob/main/articles/2025-09__shulker_rotation/2025-09__shulker_rotation.md</ref>
+
+=== 运输 ===
+[[File:Shulkerinboat.png|缩略图|150px|在[[Java版]]中被陆路运输的潜影贝。利用活塞推船上坡]]
+
+潜影贝可以被[[船]]或[[矿车]]运输。它们会进入推进它们所在位置的船和矿车。在船上，潜影贝将默认朝上，无视其登船前的朝向。船的边沿会阻挡部分射出的潜影弹。{{in|JE}}除非被其他矿车推动，搭载潜影贝的矿车只有底部未被潜影贝覆盖的部分可以被其他实体推动。
+
+当一只潜影贝被推入[[返回传送门]]时，它会被传送到主世界出生点。由于潜影贝会在其附近没有固体方块时传送自己，它们可以沿着返回传送门柱被[[活塞]]向下推至传送门中，或使用铁轨与矿车将潜影贝推下传送门。
+
+== 音效 ==
+=== 潜影贝 ===
+{{el|je}}：
+{{Sound table
+|sound=Shulker ambient1.ogg
+|sound2=Shulker ambient2.ogg
+|sound3=Shulker ambient3.ogg
+|sound4=Shulker ambient4.ogg
+|sound5=Shulker ambient5.ogg
+|sound6=Shulker ambient6.ogg
+|sound7=Shulker ambient7.ogg
+|subtitle={{tp|subtitles.entity.shulker.ambient}}
+|source=敌对生物
+|description=空闲时随机播放此声音
+|id=entity.shulker.ambient
+|translationkey=subtitles.entity.shulker.ambient
+}}
+{{Sound table
+|sound=Shulker close1.ogg
+|sound2=Shulker close2.ogg
+|sound3=Shulker close3.ogg
+|sound4=Shulker close4.ogg
+|sound5=Shulker close5.ogg
+|subtitle={{tp|subtitles.entity.shulker.close}}
+|source=敌对生物
+|description=关闭外壳
+|id=entity.shulker.close
+|translationkey=subtitles.entity.shulker.close
+}}
+{{Sound table
+|sound=Shulker death1.ogg
+|sound2=Shulker death2.ogg
+|sound3=Shulker death3.ogg
+|sound4=Shulker death4.ogg
+|subtitle={{tp|subtitles.entity.shulker.death}}
+|source=敌对生物
+|description=死亡
+|id=entity.shulker.death
+|translationkey=subtitles.entity.shulker.death
+}}
+{{Sound table
+|sound=Shulker hurt1.ogg
+|sound2=Shulker hurt2.ogg
+|sound3=Shulker hurt3.ogg
+|sound4=Shulker hurt4.ogg
+|subtitle={{tp|subtitles.entity.shulker.hurt}}
+|source=敌对生物
+|description=打开外壳时受伤
+|id=entity.shulker.hurt
+|translationkey=subtitles.entity.shulker.hurt
+}}
+{{Sound table
+|sound=Shulker open1.ogg
+|sound2=Shulker open2.ogg
+|sound3=Shulker open3.ogg
+|sound4=Shulker open4.ogg
+|sound5=Shulker open5.ogg
+|subtitle={{tp|subtitles.entity.shulker.open}}
+|source=敌对生物
+|description=打开外壳
+|id=entity.shulker.open
+|translationkey=subtitles.entity.shulker.open
+}}
+{{Sound table
+|sound=Shulker shoot1.ogg
+|sound2=Shulker shoot2.ogg
+|sound3=Shulker shoot3.ogg
+|sound4=Shulker shoot4.ogg
+|subtitle={{tp|subtitles.entity.shulker.shoot}}
+|source=敌对生物
+|description=发射潜影弹
+|id=entity.shulker.shoot
+|translationkey=subtitles.entity.shulker.shoot
+}}
+{{Sound table
+|sound=Teleport1.ogg
+|sound2=Teleport2.ogg
+|subtitle={{tp|subtitles.entity.shulker.teleport}}
+|source=敌对生物
+|description=瞬移
+|id=entity.shulker.teleport
+|translationkey=subtitles.entity.shulker.teleport
+}}
+{{Sound table
+|sound=Shulker hurt closed1.ogg
+|sound2=Shulker hurt closed2.ogg
+|sound3=Shulker hurt closed3.ogg
+|sound4=Shulker hurt closed4.ogg
+|sound5=Shulker hurt closed5.ogg
+|subtitle={{tp|subtitles.entity.shulker.hurt}}
+|source=敌对生物
+|description=关闭外壳时受伤
+|id=entity.shulker.hurt_closed
+|translationkey=subtitles.entity.shulker.hurt
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=mob.shulker.ambient1.wav
+|sound2=mob.shulker.ambient2.wav
+|sound3=mob.shulker.ambient3.wav
+|sound4=mob.shulker.ambient4.wav
+|sound5=mob.shulker.ambient5.wav
+|sound6=mob.shulker.ambient6.wav
+|sound7=mob.shulker.ambient7.wav
+|source=敌对生物
+|description=空闲时随机播放此声音
+|id=mob.shulker.ambient
+|typeid=ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.shulker.hurt1.wav
+|sound2=mob.shulker.hurt2.wav
+|sound3=mob.shulker.hurt3.wav
+|sound4=mob.shulker.hurt4.wav
+|source=敌对生物
+|description=打开外壳时受伤
+|id=mob.shulker.hurt
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.shulker.death1.wav
+|sound2=mob.shulker.death2.wav
+|sound3=mob.shulker.death3.wav
+|sound4=mob.shulker.death4.wav
+|source=敌对生物
+|description=死亡
+|id=mob.shulker.death
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.shulker.open1.wav
+|sound2=mob.shulker.open2.wav
+|sound3=mob.shulker.open3.wav
+|sound4=mob.shulker.open4.wav
+|sound5=mob.shulker.open5.wav
+|source=敌对生物
+|description=打开外壳
+|id=mob.shulker.open
+|typeid=shulker.open
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.shulker.close1.wav
+|sound2=mob.shulker.close2.wav
+|sound3=mob.shulker.close3.wav
+|sound4=mob.shulker.close4.wav
+|sound5=mob.shulker.close5.wav
+|source=敌对生物
+|description=关闭外壳
+|id=mob.shulker.close
+|typeid=shulker.close
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.shulker.shoot1.wav
+|sound2=mob.shulker.shoot2.wav
+|sound3=mob.shulker.shoot3.wav
+|sound4=mob.shulker.shoot4.wav
+|source=敌对生物
+|description=射击
+|id=mob.shulker.shoot
+|typeid=shoot
+|soundvolume=2.0
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Enderman teleport1.ogg
+|sound2=Enderman teleport2.ogg
+|source=敌对生物
+|description=瞬移
+|id=mob.shulker.teleport
+|typeid=teleport
+|soundvolume=2.0
+|soundpitch=0.8-1.2
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Shulker
+|spritetype=entity
+|nameid=shulker
+|showentitytags=1|entitytags={{GameTag|entity|shulker}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Shulker
+|spritetype=entity
+|nameid=shulker
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+潜影贝有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|Monster-Hunter;great-view-from-up-here;it-spreads}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.kill_a_mob;adventure.kill_all_mobs;story.deflect_arrow;end.levitate;adventure.kill_mob_near_sculk_catalyst}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w31a|[[File:Shulker JE1 BE1.png|30px]] 加入了潜影贝。}}
+|{{HistoryLine|||dev=15w32b|当潜影贝的<code>NoAI</code>值被设为1时不再自行传送。
+|现在潜影贝能通过{{cmd|tp}}或{{cmd|spreadplayers}}被传送。}}
+|{{HistoryLine|||dev=15w40a|现在潜影贝在和平难度下不会攻击玩家。}}
+|{{HistoryLine|||dev=15w45a|加入潜影贝被攻击的声音。}}
+|{{HistoryLine|||dev=15w47a|潜影贝现在会掉落经验。}}
+|{{HistoryLine|||dev=15w47b|加入潜影贝环境、被激怒和死亡的声音。}}
+|{{HistoryLine||1.11|dev=16w32a|潜影贝的实体ID由<code>Shulker</code>更改至<code>shulker</code>。}}
+|{{HistoryLine|||dev=16w39a|潜影贝有新的掉落物[[潜影壳]]。
+|[[File:White Shulker JE1 BE1.png|30px]] [[File:Orange Shulker JE1 BE1.png|30px]] [[File:Magenta Shulker JE1 BE1.png|30px]] [[File:Light Blue Shulker JE1 BE1.png|30px]] [[File:Yellow Shulker JE1 BE1.png|30px]] [[File:Lime Shulker JE1 BE1.png|30px]] [[File:Pink Shulker JE1 BE1.png|30px]] [[File:Gray Shulker JE1 BE1.png|30px]] [[File:Light Gray Shulker JE1 BE1.png|30px]] [[File:Cyan Shulker JE1 BE1.png|30px]] [[File:Blue Shulker JE1 BE1.png|30px]] [[File:Brown Shulker JE1 BE1.png|30px]] [[File:Green Shulker JE1 BE1.png|30px]] [[File:Red Shulker JE1 BE1.png|30px]] [[File:Black Shulker JE1 BE1.png|30px]] 潜影贝的颜色可以通过使用<code>Color</code>标签改变。}}
+|{{HistoryLine|||dev=16w39c|可以用[[刷怪蛋]]在方块的侧面与底部生成潜影贝。}}
+|{{HistoryLine||1.12|dev=17w16a|[[File:White Shulker JE2 BE2.png|30px]] [[File:Orange Shulker JE2 BE2.png|30px]] [[File:Magenta Shulker JE2 BE2.png|30px]] [[File:Light Blue Shulker JE2 BE2.png|30px]] [[File:Yellow Shulker JE2 BE2.png|30px]] [[File:Lime Shulker JE2 BE2.png|30px]] [[File:Pink Shulker JE2 BE2.png|30px]] [[File:Gray Shulker JE2 BE2.png|30px]] [[File:Light Gray Shulker JE2 BE2.png|30px]] [[File:Cyan Shulker JE2 BE2.png|30px]] [[File:Purple Shulker JE2 BE2.png|30px]] [[File:Blue Shulker JE2 BE2.png|30px]] [[File:Brown Shulker JE2 BE2.png|30px]] [[File:Green Shulker JE2 BE2.png|30px]] [[File:Red Shulker JE2 BE2.png|30px]] [[File:Black Shulker JE2 BE2.png|30px]] 更改了潜影贝的纹理。}}
+|{{HistoryLine|||dev=17w17a|[[File:Purple Shulker JE1 BE1.png|30px]] 回退了对紫色潜影贝纹理的更改。}}
+|{{HistoryLine||1.13|dev=18w10b|[[File:Shulker JE1 BE1.png|30px]] 加入了默认的潜影贝。
+|[[File:Purple Shulker.png|30px]] 将紫色潜影贝的纹理改回[[17w16a]]使用的纹理。}}
+|{{HistoryLine||1.17|dev=20w45a|现在潜影贝被其他潜影贝发射的导弹击中时有概率生成一只新的潜影贝。}}
+|{{HistoryLine|||dev=21w03a|现在在默认情况下使用刷怪笼及{{cmd|summon}}生成的潜影贝不再是白色的而是淡紫色。}}
+|{{HistoryLine||1.21.2|dev=24w33a|现在具有[[隐身]]效果的潜影贝不再显示头部。<ref>{{bug|MC-278123}}</ref>}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|[[File:White Shulker JE1 BE1.png|30px]] [[File:Orange Shulker JE1 BE1.png|30px]] [[File:Magenta Shulker JE1 BE1.png|30px]] [[File:Light Blue Shulker JE1 BE1.png|30px]] [[File:Yellow Shulker JE1 BE1.png|30px]] [[File:Lime Shulker JE1 BE1.png|30px]] [[File:Pink Shulker JE1 BE1.png|30px]] [[File:Gray Shulker JE1 BE1.png|30px]] [[File:Light Gray Shulker JE1 BE1.png|30px]] [[File:Cyan Shulker JE1 BE1.png|30px]] [[File:Purple Shulker JE1 BE1.png|30px]] [[File:Blue Shulker JE1 BE1.png|30px]] [[File:Brown Shulker JE1 BE1.png|30px]] [[File:Green Shulker JE1 BE1.png|30px]] [[File:Red Shulker JE1 BE1.png|30px]] [[File:Black Shulker JE1 BE1.png|30px]] 加入了潜影贝。
+|可以在[[创造模式]]中对潜影贝使用染料来给它染色。}}
+|{{HistoryLine|||dev=1.0.0.0|潜影贝的生命值由{{hp|10}}更改为{{hp|30}}。
+|现在具有[[隐身]]效果的潜影贝的头部不会隐形。}}
+|{{HistoryLine|||dev=1.0.0.1|潜影贝现在可以掉落[[潜影壳]]。
+|加入了潜影贝射击的音效。}}
+|{{HistoryLine||1.0.4|dev=1.0.4.0|潜影贝的[[模型]]现在可以通过[[附加包]]来进行编辑了。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.9|[[File:White Shulker JE2 BE2.png|30px]] [[File:Orange Shulker JE2 BE2.png|30px]] [[File:Magenta Shulker JE2 BE2.png|30px]] [[File:Light Blue Shulker JE2 BE2.png|30px]] [[File:Yellow Shulker JE2 BE2.png|30px]] [[File:Lime Shulker JE2 BE2.png|30px]] [[File:Pink Shulker JE2 BE2.png|30px]] [[File:Gray Shulker JE2 BE2.png|30px]] [[File:Light Gray Shulker JE2 BE2.png|30px]] [[File:Cyan Shulker JE2 BE2.png|30px]] [[File:Purple Shulker JE2 BE2.png|30px]] [[File:Blue Shulker JE2 BE2.png|30px]] [[File:Brown Shulker JE2 BE2.png|30px]] [[File:Green Shulker JE2 BE2.png|30px]] [[File:Red Shulker JE2 BE2.png|30px]] [[File:Black Shulker JE2 BE2.png|30px]] 更改了潜影贝的纹理。
+|现在潜影贝在受到火焰伤害时会传送。}}
+|{{HistoryLine||1.1.1|dev=1.1.1.0|[[File:Purple Shulker JE1 BE1.png|30px]] 回退了对紫色潜影贝纹理的更改。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|[[File:Shulker JE1 BE1.png|30px]] 加入了默认颜色的潜影贝。
+|[[File:Purple Shulker_JE2 BE2.png|30px]] 更改了紫色潜影贝的纹理。}}
+|{{HistoryLine||1.12.0|dev=?|现在具有隐身效果的潜影贝全身都不会隐形。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.22|现在潜影贝被潜影弹击中时有概率生成一只新的潜影贝。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.28|现在潜影贝免疫火焰伤害。
+|现在潜影贝在[[熔岩]]中会消耗氧气值。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|[[File:Shulker JE1 BE1.png|30px]] 加入了潜影贝。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||1.7.10|[[File:Shulker JE1 BE1.png|30px]] 加入了潜影贝。}}
+}}
+
+== 你知道吗 ==
+* 潜影贝的英文名称“Shulker”是“Shell Lurker（贝壳潜伏者）”的简称。<ref>{{ytl|h3vjmzCV8PY|t=12m01s}}</ref>
+* 如果用[[命名牌]]将一只潜影贝命名为“[[Dinnerbone]]”或“[[Grumm]]”，潜影贝会上下颠倒过来，露出底部的螺旋花纹。倒过来的潜影贝离地约{{fraction|1|16}}个方块的高度。
+** 潜影贝的尺寸为一个全体积方块，但从其模型来看比一个全体积方块略微小了一点。
+* 当玩家把受重力影响的方块如[[沙砾]]和[[铁砧]]放在潜影贝上方时，方块会掉落成物品。
+*在游戏的纹理文件中，潜影贝的导弹被命名为<samp>spark.png</samp>。
+**潜影贝的纹理文件在[[Java版1.9.4]]中被命名为<code>endergolem.png</code>{{tr|（末影傀儡）|（終界魔像）|}}，并且潜影贝在当前游戏文件中仍然继承<code>AbstractGolem</code>。
+* 当玩家站在潜影贝的壳上时，可以潜行并且不会掉下来，就像站在方块上一样。如果外壳往侧向打开，则相当于一级垂直的[[台阶]]，玩家仍然可以站在上面并且不会掉落下来，除非壳关闭了。
+* 在潜影贝关闭的壳上射[[箭]]，箭将从外壳反弹，这类似于对[[创造]]模式下或拿着[[盾牌]]的玩家射箭。但{{in|be}}[[药箭]]效果仍然会生效。
+* 如果潜影贝的顶面和侧面存在方块时，会附着到其侧面方块上。
+
+== 画廊 ==
+<gallery>
+File:First Shulker.jpg|关于潜影贝的第一张截图
+File:Shulkblaze.jpg|一张潜影贝和烈焰人在下界里大战的图片，由Jeb_发布
+File:ShulkerAttack.png|一只潜影贝正在攻击玩家
+File:ShulkerCamouflage.png|一只潜影贝藏在[[末地城]]里，混在[[紫珀块]]中难以发现
+File:ShulkersFighting.png|一只潜影贝正在攻击另一只潜影贝
+File:Shulkerbottom.png|潜影贝的底部
+File:ShulkerInvisiblity.png|[[24w33a]]前[[隐身]]效果下的潜影贝
+File:AllShulkerColors.png|[[Java版1.12]]前潜影贝的16种颜色
+File:Sideways Shulker.png|侧立的潜影贝，外壳微微打开，正在寻找目标
+File:Shulkerinminecart.png|潜影贝在矿车里
+</gallery>
+
+=== 渲染图 ===
+==== 张开 ====
+<gallery>
+File:Shulker.png
+File:White Shulker.png
+File:Light Gray Shulker.png
+File:Gray Shulker.png
+File:Black Shulker.png
+File:Brown Shulker.png
+File:Red Shulker.png
+File:Orange Shulker.png
+File:Yellow Shulker.png
+File:Lime Shulker.png
+File:Green Shulker.png
+File:Cyan Shulker.png
+File:Light Blue Shulker.png
+File:Blue Shulker.png
+File:Purple Shulker.png
+File:Magenta Shulker.png
+File:Pink Shulker.png
+</gallery>
+
+==== 闭合 ====
+<gallery>
+File:Shulker Box.png
+File:White Shulker Box.png
+File:Light Gray Shulker Box.png
+File:Gray Shulker Box.png
+File:Black Shulker Box.png
+File:Brown Shulker Box.png
+File:Red Shulker Box.png
+File:Orange Shulker Box.png
+File:Yellow Shulker Box.png
+File:Lime Shulker Box.png
+File:Green Shulker Box.png
+File:Cyan Shulker Box.png
+File:Light Blue Shulker Box.png
+File:Blue Shulker Box.png
+File:Purple Shulker Box.png
+File:Magenta Shulker Box.png
+File:Pink Shulker Box.png
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|mobs}}
+
+[[Category:敌对生物]]
+[[Category:末地生物]]
+
+[[cs:Shulker]]
+[[de:Shulker]]
+[[en:Shulker]]
+[[es:Shulker]]
+[[fr:Shulker]]
+[[hu:Kagylapuló]]
+[[it:Shulker]]
+[[ja:シュルカー]]
+[[ko:셜커]]
+[[lzh:匿贆]]
+[[nl:Shulker]]
+[[pl:Shulker]]
+[[pt:Shulker]]
+[[ru:Шалкер]]
+[[th:ชัลเกอร์]]
+[[uk:Шалкер]]

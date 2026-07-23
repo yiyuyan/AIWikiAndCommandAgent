@@ -1,0 +1,174 @@
+# 页面: 瞬间治疗
+# 来源: https://zh.minecraft.wiki/w/%E7%9E%AC%E9%97%B4%E6%B2%BB%E7%96%97
+# 分类: Java版独有信息, 基岩版独有信息, 状态效果
+# 抓取时间: 2026-07-14 17:32:43
+# 原始 Wikitext 内容:
+
+{{Infobox effect
+|image=Instant Health.png
+|invimage=Potion of Healing
+|invimage2=Splash Potion of Healing
+|invimage3=Lingering Potion of Healing
+|invimage4=Arrow of Healing
+|invimage5=----
+|invimage6=Potion of Healing Enhanced
+|invimage7=Splash Potion of Healing Enhanced
+|invimage8=Lingering Potion of Healing Enhanced
+|invimage9=Arrow of Healing Enhanced
+}}
+'''瞬间治疗（Instant Health）'''是一种能恢复非亡灵生物的[[生命值]]或对亡灵生物造成[[伤害]]的[[状态效果]]。
+
+== 效果 ==
+瞬间治疗是一种即时生效效果。因此与其他效果有多种不同的特性。
+
+对于饮下[[药水]]、被[[喷溅药水]]击中或停留在[[滞留药水]]产生的[[药水云]]里的生物：
+
+* 生物不是亡灵生物，则在生效时立即恢复{{hp|2}}×2<sup>等级</sup>生命值。
+* 生物是亡灵生物，则在生效时立即受到{{hp|3}}×2<sup>等级</sup>{{only|je}}或{{hp|2}}×2<sup>等级</sup>{{only|be}}魔法伤害。
+* 受这种方式影响的生物直接结算治疗或伤害，因此即使生物免疫状态效果（如[[凋灵]]、[[末影龙]]），也仍会被治疗或伤害。
+
+效果由喷溅药水施加时，随距离增加而减少的是治疗或伤害的量而非持续时间；效果由[[区域效果云]]施加时，治疗或伤害量减半。
+
+对于被[[药箭]]击中，或由{{cmd|effect}}赋予瞬间治疗效果的生物：
+
+* 受影响生物不是亡灵生物时，每[[刻]]恢复{{hp|2}}×2<sup>等级</sup>生命值。
+* 受影响生物是亡灵生物时，每刻受到{{hp|3}}×2<sup>等级</sup>{{only|je}}或{{hp|2}}×2<sup>等级</sup>{{only|be}}魔法伤害。
+** 因[[受击后伤害免疫]]机制，实际伤害间隔变为10刻。
+* {{only|je|for=[[凋灵]]}}、[[末影龙]]免疫此类来源的瞬间治疗效果。
+
+命令可以使效果有更高的持续时间，使用{{cmd|effect}}时持续时间参数为游戏刻而非秒数。
+
+如果被赋予效果倍率值0-31（对应等级1-32）范围以外的值，实际生效的倍率值则取[[wikipedia:Modulo_operation|模除]]32后的值。
+
+{{in|je}}等级30-32的瞬间治疗效果不会为非亡灵生物恢复生命值。
+
+{{in|be}}非亡灵生物，拥有该效果时，若受到的伤害不足以致命，将不会产生受伤音效，也没有受伤动画，且不会被除了[[爆炸]]、[[监守者]]的声波、[[山羊]]的冲撞攻击、附有[[击退]]魔咒的武器近战攻击和附有[[冲击]]魔咒的[[弓]]射出的[[箭]]以外的其他任何攻击所击退；[[盔甲]]仍能正常运作，但[[荆棘]]魔咒无法生效。
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+ ! 来源
+ ! 效果等级
+ ! 治疗
+ ! 伤害
+ ! 时长
+ ! 备注
+ |-
+ | {{ItemLink|Potion of Healing}}
+ | I
+ | {{hp|4}}
+ | {{hp|6}}{{only|je|short=1}}<br>{{hp|4}}{{only|be|short=1}}
+ | {{convert|1}}
+ | {{EntityLink|Witch}}受到伤害时喝下药水。
+ |-
+ | {{ItemLink|Potion of Healing}}（增强版）
+ | II
+ | {{hp|8}}
+ | {{hp|12}}{{only|je|short=1}}<br>{{hp|8}}{{only|be|short=1}}
+ | {{convert|1}}
+ | 在[[末地船]]的[[酿造台]]上可以找到两瓶药水。
+ |-
+ | {{ItemLink|Splash Potion of Healing}}
+ | I
+ | {{hp|4}}
+ | {{hp|6}}{{only|je|short=1}}<br>{{hp|4}}{{only|be|short=1}}
+ | {{convert|1}}
+ | {{EntityLink|Witch}}在[[袭击]]时会向生命值小于等于{{hp|4}}的除女巫之外的[[袭击者]]投掷此药水。
+ |-
+ | {{ItemLink|Splash Potion of Healing}}（增强版）
+ | II
+ | {{hp|8}}
+ | {{hp|12}}{{only|je|short=1}}<br>{{hp|8}}{{only|be|short=1}}
+ | {{convert|1}}
+ |
+ |-
+ | {{ItemLink|Lingering Potion of Healing}}
+ | I
+ | {{hp|2}}
+ | {{hp|3}}{{only|je|short=1}}<br>{{hp|2}}{{only|be|short=1}}
+ | {{convert|1}}
+ | 每1秒生效一次，最多可生效5次。
+ |-
+ | {{ItemLink|Lingering Potion of Healing}}（增强版）
+ | II
+ | {{hp|4}}
+ | {{hp|6}}{{only|je|short=1}}<br>{{hp|4}}{{only|be|short=1}}
+ | {{convert|1}}
+ | 每1秒生效一次，最多可生效5次。
+ |-
+ | {{ItemLink|Arrow of Healing}}
+ | I
+ | {{hp|4}}
+ | {{hp|6}}{{only|be|short=1}}<br>{{hp|4}}{{only|be|short=1}}
+ | {{convert|1}}
+ |
+ |-
+ | {{ItemLink|Arrow of Healing}}（增强版）
+ | II
+ | {{hp|8}}
+ | {{hp|12}}{{only|je|short=1}}<br>{{hp|8}}{{only|be|short=1}}
+ | {{convert|1}}
+ |
+ |}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Instant Health
+|spritetype=effect
+|nameid=instant_health
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Instant Health
+|nameid=instant_health
+|translationkey=potion.heal
+|showaliasids=1
+|aliasid=6
+|foot=1}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了瞬间治疗，目前无法获得。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|加入了药水，可以提供瞬间治疗，但无法正常获得。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|加入了[[治疗药水]]的配方。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了[[喷溅型治疗药水]]，可以提供瞬间治疗。}}
+|{{HistoryLine||1.4.2|dev=12w38a|加入了[[女巫]]，受到伤害时会喝下治疗药水。}}
+|{{HistoryLine||1.6.1|dev=13w23a|瞬间治疗现在会回复{{hp|2}}×2<sup>''等级''</sup>生命值，而不再是{{hp|3}}×2<sup>''等级''</sup>。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了[[治疗之箭]]。}}
+|{{HistoryLine|||dev=15w33a|加入了[[滞留型治疗药水]]。}}
+|{{HistoryLine||1.14|dev=18w47a|现在[[女巫]]在[[袭击]]时会使用喷溅型瞬间治疗药水来恢复[[灾厄村民]]和[[劫掠兽]]的生命值。}}
+|{{HistoryLine||1.15|dev=19w41a|[[File:Instant Health JE1.png|32px]] 加入了瞬间治疗的图标。}}
+|{{HistoryLine||1.20.2|dev=23w32a|在此版本前，瞬间治疗的存档ID是6。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了瞬间治疗，目前无法获得。}}
+|{{HistoryLine||0.12.1|dev=build 1|瞬间治疗可以通过[[治疗药水]]及其喷溅变种获得。}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了[[女巫]]，受到伤害时会喝下治疗药水。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了[[治疗之箭]]。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|现在瞬间治疗效果可以通过滞留型治疗药水获得。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.30|dev=1.20.30.21|现在[[女巫]]在[[袭击]]时会使用喷溅型瞬间治疗药水来恢复[[灾厄村民]]和[[劫掠兽]]的生命值。}}
+}}
+
+== 你知道吗 ==
+* {{in|je}}使用特定等级（即<code>amplifier</code>值为<math>32n+29\left( 0\le n\le3 \right)</math>）的喷溅型瞬间治疗药水投掷生物会引发非预期行为：
+** 向包括创造模式玩家在内的非[[亡灵生物]]投掷时，可能导致生物“死亡”，实际原因是单次治疗量溢出为负数，因生命值归零而移除。玩家因此被移除时，死亡界面不会有死亡消息，且身上的物品与经验会被清空。其他通常在生物死亡时触发的行为也无法生效（如掉落战利品，村民解绑工作站点或床，宠物通知主人等）。
+** 连续向亡灵生物投掷时，可能会造成极大伤害，该伤害甚至可以让满生命值的[[凋灵]]瞬间死亡。这一现象产生的原因是生物第一次[[受击后伤害免疫]]期间里又受到了相似的伤害，因而在承受两次随机伤害间差值时死亡。
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Direktheilung]]
+[[en:Instant Health]]
+[[es:Curación instantánea]]
+[[fr:Soin instantané]]
+[[ja:即時回復]]
+[[ko:즉시 치유]]
+[[pt:Vida Instantânea]]
+[[ru:Исцеление]]

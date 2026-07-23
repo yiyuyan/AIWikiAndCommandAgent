@@ -1,0 +1,22 @@
+# 页面: 幽匿催发体/BE
+# 来源: https://zh.minecraft.wiki/w/%E5%B9%BD%E5%8C%BF%E5%82%AC%E5%8F%91%E4%BD%93/BE
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:49
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 方块实体数据
+** {{nbt inherit/blockentity}}
+** {{nbt|list|cursors|required=1|existonsave=1}}：包含储存蔓延信号的列表。
+*** {{nbt|compound}}：一个信号。
+**** {{nbt|int|charge|existonsave=1}}：（{{interval|left=0|right=1000}}）该信号拥有的能量。此值不存在或无效时游戏默认为0。
+**** {{nbt|int|decay_delay|existonsave=1}}：（0或1）与延迟无关，信号经过了幽匿块或幽匿脉络后为1，否则为0。为1时，信号可以自由蔓延；为0时，若蔓延至非幽匿类方块，则信号中的所有能量丢失。此值不存在或无效时默认为1。
+**** {{nbt|int-array|pos|required=1|existonsave=1}}：信号目前所在的坐标。内部的三个整数分别代表了位置的XYZ坐标值。
+**** {{nbt|int|update_delay|existonsave=1}}：（{{interval|left=0}}）距离下一次蔓延的时间。当方块刚刚被转化时为{{convert|1}}，否则为0。此值不存在或无效时默认为0。
+**** {{nbt|list|facings}}：如果目前要转化的方块是[[空气]]或[[水]]，信号会尝试把这个方块转化为幽匿脉络，并储存幽匿脉络所有的面。如果要转化的方块不是空气或水，或者此列表为空时，信号会尝试向毗邻方块蔓延幽匿脉络。
+***** {{nbt|string}}：一个方向。可以为{{cd|north|south|east|west|up|down|d=pretty}}。
+</div><noinclude>
+[[Category:方块实体页面]]
+[[en:Sculk Catalyst/BE]]
+[[ja:スカルクカタリスト/BE]]
+</noinclude>

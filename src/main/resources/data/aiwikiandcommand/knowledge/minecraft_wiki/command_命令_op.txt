@@ -1,0 +1,79 @@
+# 页面: 命令/op
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/op
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 有未知版本的History模板的页面/Java版Indev
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=op
+|oplevel=3\2
+|nocmdblock=1
+|others=仅专用服务器{{only|je|short=1}}
+}}
+
+给予玩家管理员身份。
+
+{{in|java}}此命令会将玩家添加进<samp>ops.json</samp>文件，权限等级设为[[server.properties]]中<code>op-permission-level</code>所设置的权限等级。
+
+{{in|bedrock}}此命令将玩家在“玩家权限”屏幕中的权限改为“操作员”。在[[BDS|专用服务器]]中，玩家还会被记录在<samp>permissions.json</samp>文件里。<samp>permissions.json</samp>文件可以由{{cmd|permission}}命令重新加载。
+
+== 语法 ==
+* '''Java版'''
+:<code>/op <targets></code>
+* '''基岩版'''
+:<code>/op <player: target></code>
+
+== 参数 ==
+{{argument|targets|game_profile|player: target|CommandSelector<Player>}}
+: 指定要被授予管理员权限的玩家。
+: {{in|je}}{{arg desc|je=game_profile}}
+: {{in|be}}{{arg desc|be=player}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><targets></code>是目标选择器但无法选中一个或多个在线的玩家|fail|N/A}}
+{{Result table|<code><targets></code>是玩家名，但不是真实存在的玩家名且服务器开启了线上模式}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器|N/A|fail}}
+{{Result table|<code>player: target</code>无法选中一个或多个在线的玩家}}
+{{Result table|所有指定的玩家都是管理员或拥有管理员以上级别的权限|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|新增的管理员数}}
+{{Output table}}
+
+== 示例 ==
+* 给Steve管理员身份：<code>/op Steve</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.15a|加入了{{cmd|op|link=none}}命令。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=?|移除了所有命令。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.16|重新加入{{cmd|op|link=none}}命令。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|op|link=none}}命令。}}
+}}
+
+== 参见 ==
+* {{cmd|deop}} — 撤销管理员身份。
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/op]]
+[[en:Commands/op]]
+[[es:Comandos/op]]
+[[fr:Commandes/op]]
+[[ja:コマンド/op]]
+[[ko:명령어/op]]
+[[lzh:令/op]]
+[[pt:Comandos/op]]
+[[ru:Команды консоли/op]]
+[[uk:Команди консолі/op]]

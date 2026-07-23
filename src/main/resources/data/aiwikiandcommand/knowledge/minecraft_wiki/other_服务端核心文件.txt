@@ -1,0 +1,118 @@
+# 页面: 服务端核心文件
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6
+# 分类: 
+# 抓取时间: 2026-07-14 17:28:36
+# 原始 Wikitext 内容:
+
+{{about|{{filename|server.jar}}文件自身|运行{{filename|server.jar}}后产生的服务器文件|服务器文件目录}}
+{{exclusive|je}}
+
+'''服务端核心文件'''是游戏服务端所需所有代码的集合，作为可以独立执行的可执行文件。
+
+== 文件结构 ==
+
+服务端核心文件可以由官方提供的链接下载。与客户端核心文件不同，服务端核心文件不需要启动器就可以执行，因为运行库内置在了服务端核心文件内，在执行时会自动解压并自动添加类路径，所以服务端核心文件可以独立启动。
+
+服务器核心文件是一个[[wzh:JAR (文件格式)|JAR文件]]，内部的文件按下列结构组织：
+* {{filepath|versions.json}}是[[版本信息文件格式|版本信息文件]]，记录此文件的版本信息。
+* {{filepath|META-INF/libraries/}}是运行库目录，所有服务端需要的运行库都在此以Maven公约格式放置在此目录下。当服务端启动时，会从这个目录解压出所有运行库文件到文件系统内。
+* {{filepath|-{}-META-INF/versions/<''版本''>/server-<''版本''>.jar}}是真正的游戏源代码，所有服务端的行为都由此文件控制。与客户端核心文件不同，这里的文件仅包含了服务端所需部分，客户端的渲染等代码在此不存在。
+* {{filepath|META-INF/MANIFEST.MF}}是清单文件，定义了主类是<code>net.minecraft.bundler.Main</code>。
+* {{filepath|META-INF/classpath-joined}}是运行库解压后各个运行库应该所处的相对路径，游戏以此文件内容作为运行时的类路径以链接这些运行库。
+* {{filepath|META-INF/libraries.list}}是运行库列表文件。此文件每一行都代表了一个运行库，按照制表符<code>\t</code>分割为三个信息：SHA-256散列值、运行库名称、运行库相对路径。
+* {{filepath|META-INF/main-class}}是内置主类名称，即未指定系统属性时游戏执行的主类。通常为<code>net.minecraft.server.Main</code>。
+* {{filepath|META-INF/versions.list}}是内置核心JAR文件信息，按照制表符<code>\t</code>分割为三个信息：SHA-256散列值、版本名称、核心JAR相对路径。
+
+内置核心JAR文件具有下列的结构：
+* {{filepath|assets/}}目录是原版[[资源包]]，仅包含了美式英语的语言文件（{{cd|en_us.json}}）和<code>[[资源包#键排除与替换|deprecated.json]]</code>。
+** {{filepath|assets/.mcassetsroot}}是游戏为识别原版资源包作为标记的文件，内部不包含数据。
+* {{filepath|data/}}目录是原版[[数据包]]。
+** {{filepath|data/.mcassetsroot}}是游戏为识别原版数据包作为标记的文件，内部不包含数据。
+* {{filepath|META-INF/}}目录是JAR文件规范中的元数据，控制内置核心JAR文件被执行时的行为。
+** {{filepath|META-INF/MANIFEST.MF}}是清单文件，包含了主类数据和内置核心JAR内各个文件的SHA-384散列值。
+** {{filepath|META-INF/MOJANGCS.RSA}}是用于验证JAR的文件，其中包含了Mojang所使用的签名公钥（RSA，2048位）。
+** {{filepath|META-INF/MOJANGCS.SF}}是JAR的签名，内部包含了内置核心JAR内所有文件使用Mojang的签名私钥以SHA384withRSA算法计算得到的散列值。
+* {{filepath|flightrecorder-config.jfc}}是[https://openjdk.org/jeps/328 Java Flight Recorder]的配置文件，用于{{cmd|jfr}}的分析。
+* {{filepath|versions.json}}是[[版本信息文件格式|版本信息文件]]，用于记录此内置核心JAR文件的版本信息。
+* {{filepath|META-INF/LICENSE}}包含游戏的许可协议。内容如下：
+<pre>
+Use of the contents of this archive is subject to the Minecraft End-User License Agreement (EULA) and the Microsoft Services Agreement.
+
+Minecraft EULA: https://aka.ms/MinecraftEULA
+Microsoft Services Agreement: https://www.microsoft.com/msa
+</pre>
+
+== 启动行为 ==
+
+与客户端核心文件不同，服务端核心文件多了一层添加运行库的代码，所以启动时可以根据启动参数调整要执行的主类。
+
+下列两个系统属性可以影响启动行为：
+* <code>bundlerMainClass</code>：要启动的主类，如果此系统属性不存在则使用{{filepath|META-INF/main-class}}内定义的主类。如果此项被设置为空，游戏将报错<code>Empty main class specified, exiting</code>。内置核心JAR文件下列可用的主类：
+** <code>net.minecraft.data.Main</code>：[[数据生成器]]程序入口点。
+** <code>net.minecraft.gametest.Main</code>：[[游戏测试#测试服务端|测试服务端]]程序入口点。
+** <code>net.minecraft.server.Main</code>：专用服务端程序入口点。
+* <code>bundlerRepoDir</code>：数据解压根目录''D''。游戏的运行库和内置核心JAR会按照指定的路径解压。如果此项不存在则为当前目录。
+
+当运行服务端核心文件时，游戏先检查位于{{filepath|''D''/libraries/}}的运行库和位于{{filepath|-{}-''D''/versions/<''版本''>/}}的核心JAR的SHA-256散列值，对不存在或散列值不同的文件则会解压自带的对应文件并替换到对应位置。在解压过程中，游戏会根据列表文件（{{filename|.list}}）中的SHA-256散列值校验解压文件的完整性。如果散列值与实际计算值不对应，游戏会在日志中报错<code>-{}-Expected file <''文件''> to have hash <''正确SHA-256散列值''>, but got <''计算值''></code>。
+
+解压后，游戏将把所有解压库加入类路径，并执行指定主类，并传入指定的命令行参数。
+
+以启动无GUI服务端举例，启动命令应如下文所写：
+
+<syntaxhighlight lang="bash">
+java -jar server.jar --nogui
+</syntaxhighlight>
+
+再以启动数据生成器为例：
+
+<syntaxhighlight lang="bash">
+java -DbundlerMainClass=net.minecraft.data.Main -jar server.jar --all
+</syntaxhighlight>
+
+== 启动参数 ==
+内置核心JAR文件有多个主类，在这里只介绍服务端启动参数，即主类为<code>net.minecraft.server.Main</code>的参数。其他主类的参数请见对应条目。
+
+=== 服务端管理选项 ===
+* <code>--demo</code>：设置服务端以[[演示模式]]启动。
+* <code>--nogui</code>：不启动服务端图形化控制台。任意选项中包含<code>nogui</code>都会被记为此选项，如<code>-nogui</code>和<code>nogui</code>都会被解析为此选项。
+* <code>--help</code>：输出帮助信息。
+* <code>--initSettings</code>：仅初始化{{filename|eula.txt}}和{{filename|server.properties}}，之后停止服务端。如果对应文件已存在则不执行任何操作。
+* <code>--jfrProfile</code>：在服务端启动的同时启动Java Flight Recorder。
+* <code>-{}---pidFile <''文件''></code>：服务端启动时将程序进程ID（Process ID）写入到指定文件。
+* <code>-{}---port <''端口''></code>：设置服务端绑定的端口，此项覆盖{{filename|server.properties}}内的设置。如果此选项不存在则使用{{filename|server.properties}}内的<code>server-port</code>。
+* <code>-{}---serverId <''服务端ID''></code>：设置服务端ID，此项与登录流程有关。不设置此项时为空字符串。
+* <code>-{}---universe <''路径''></code>：设置服务端根目录。如果不设置则为当前目录。
+
+=== 存档管理选项 ===
+* <code>--bonusChest</code>：启用[[奖励箱]]地物。
+* <code>--forceUpgrade</code>：将存档内的所有区块数据强制更新到当前服务端版本。
+* <code>--eraseCache</code>：清除区块内的光照信息和高度图信息，以减少存档体积。此项必须和<code>--forceUpgrade</code>或<code>--recreateRegionFiles</code>同时使用，否则无效。
+* <code>--recreateRegionFiles</code>：重建所有[[区域文件]]，重建后的区域文件将强制使用{{filename|server.properties}}中<code>region-file-compression</code>中的区域文件压缩算法。
+* <code>--safeMode</code>：禁用非原版数据包，仅使用原版数据包加载存档。
+* <code>-{}---world <''存档名称''></code>：设置存档的位置，此位置相对于服务端根路径。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w20b|专用服务端主类从<code>net.minecraft.server.MinecraftServer</code>修改为<code>net.minecraft.server.Main</code>。}}
+|{{HistoryLine|||dev=20w22a|加入了<code>--safeMode</code>启动参数。}}
+|{{HistoryLine||1.18|dev=21w37a|加入了<code>--jfrProfile</code>启动参数。}}
+|{{HistoryLine|||dev=21w39a|修改了服务端核心文件的文件结构，不再将所有库整合到文件内，而是将各个库独立打包后添加类路径加载，以解决Java模块限制造成的错误。}}
+|{{HistoryLine||1.20|dev=23w06a|加入了<code>--pidFile</code>启动参数。}}
+|{{HistoryLine||1.20.2|dev=23w31a|移除了<code>--singleplayer</code>启动参数。}}
+|{{HistoryLine||1.20.5|dev=24w04a|加入了<code>--recreateRegionFiles</code>启动参数。}}
+|{{HistoryLine||1.21.5|dev=25w03a|加入了测试服务端主类。}}
+|{{HistoryLine||1.21.9|dev=25w37a|加入了调试工具相关的系统属性。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+[[Category:服务器]]
+
+[[de:server.jar]]
+[[en:server.jar]]
+[[fr:server.jar]]
+[[ja:Server.jar]]
+[[pt:Server.jar]]

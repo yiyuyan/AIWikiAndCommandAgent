@@ -1,0 +1,210 @@
+# 页面: 微光钥匙
+# 来源: https://zh.minecraft.wiki/w/%E5%BE%AE%E5%85%89%E9%92%A5%E5%8C%99
+# 分类: 
+# 抓取时间: 2026-07-14 17:26:02
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|微光|微光|閃光}}{{Joke feature|update=25w14craftmine}}
+{{Infobox item
+|image = Shimmering Key.png
+|invimage = [微光钥匙]Shimmering Key.png
+|renewable = 是
+|maxstack = 64
+|item-id-raw = shimmering_key
+|item-creative-tab = {{tp|itemGroup.functional}}
+|nobe = 1
+}}
+'''微光钥匙（Shimmering Key）'''是一种用于打开[[微光之门]]的物品。
+
+== 获取 ==
+当玩家通过一个[[特殊矿境]]时，必定会在[[矿境合成台]]上生成一个随机的微光钥匙。
+
+当玩家通过普通[[矿境]]时，有10%的概率在矿境合成台上生成一个随机的微光钥匙。
+
+微光钥匙生成时，其可以解锁的结构如下：
+{| class="wikitable sortable"
+! 名称 !! 描述 !! 权重
+|-
+| <code>barrels</code>
+| 储物间（木桶）
+| 2
+|-
+| <code>hanging</code> 
+| 储物间（悬挂木桶）
+| 2
+|-
+| <code>corridor_simple</code>
+| 无聊的长廊
+| 2
+|-
+| <code>fountain</code>
+| 喷泉
+| 2
+|-
+| <code>storage1</code>
+| 储物间（简易）
+| 2
+|-
+| <code>storage2</code>
+| 储物间（不太简易）
+| 2
+|-
+| <code>tree</code>
+| 树
+| 2
+|-
+| <code>carpet</code>
+| 休闲室
+| 2
+|-
+| <code>grassy_h</code>
+| 交叉路口（草丛）
+| 2
+|-
+| <code>sugar_h</code>
+| 交叉路口（甘蔗）
+| 2
+|-
+| <code>wheat_h</code>
+| 交叉路口（小麦）
+| 2
+|-
+| <code>house</code>
+| 哇哦，一整栋房子？就这个价格？
+| 2
+|-
+| <code>pool</code>
+| 深水池
+| 2
+|-
+| <code>ship</code>
+| 船
+| 2
+|-
+| <code>stairs</code>
+| 楼梯间
+| 2
+|-
+| <code>trophy</code>
+| 古典奖杯室
+| 2
+|-
+| <code>tunnel</code>
+| 长廊
+| 2
+|-
+| <code>useless</code>
+| 无用的房间
+| 2
+|-
+| <code>workshop</code>
+| 工坊
+| 2
+|-
+| <code>boiler</code>
+| 锅炉房
+| 2
+|-
+| <code>labyrinth</code>
+| 迷宫
+| 1
+|}
+
+== 用途 ==
+微光钥匙默认带有[[光效]]。
+
+=== 微光之门 ===
+{{see also|微光之门#用途}}
+微光钥匙可以与微光之门交互，使用后会打开一个菜单，菜单中会显示生成结构的伪俯视图预览。若所用钥匙有效，且门后有足够空间生成钥匙对应的结构，那么就会基于该钥匙生成一个结构。各结构的描述参见{{slink|大厅|小房间}}。
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|Shimmering Key
+|spritetype=item
+|form=item
+|nameid=shimmering_key
+|generatetranslationkeys=java
+|foot=1}}
+
+=== 物品数据 ===
+{{see also|物品格式}}
+
+{| class="" style="width:100%"
+| style="padding:0;" |
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;background-color: var(--custom-nbt-inherit-color);"
+|-
+! style="text-align:left;" | 默认[[数据组件]]结构和字段<span>[</span>[[编码格式/DataComponent|源页面]]<span>]</span>
+|-
+|
+<div class="treeview">
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="物品共通组件">物品共通组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="物品共通组件">
+** {{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|compound}}：一个修饰符。
+**** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+**** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）当前[[属性修饰符]]的ID。
+**** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+**** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+**** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+** {{nbt|string}}{{nbt|object|minecraft:break_sound}}：物品耐久度耗尽时播放的声音事件。
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+** {{nbt|string|minecraft:item_model}}：（[[命名空间ID]]）为当前物品绑定一个[[物品模型映射]]。
+** {{nbt|string}}{{nbt|object}}{{nbt|list|minecraft:item_name}}：（[[文本组件]]）物品的默认名称。
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}{{nbt|object}}{{nbt|list}}：（[[文本组件]]）一行描述信息。
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+** {{nbt|object|minecraft:tooltip_display}}：物品提示框的显示数据。
+*** {{nbt|boolean|hide_tooltip}}：（默认为<code>false</code>）物品提示框是否总是隐藏。
+*** {{nbt|list|hidden_components}}：（默认为空列表）一个物品组件ID列表，列表内的所有组件提供的提示框文本都会被隐藏。如果组件不提供提示框文本，则对其没有效果。
+**** {{nbt|string}}：（命名空间ID）一个物品组件。
+</div>
+</div>
+|}
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;"
+|-
+! style="text-align:left;" | JSON
+|-
+|
+<syntaxhighlight copy="1" lang="json">{
+    "minecraft:attribute_modifiers": [],
+    "minecraft:break_sound": "minecraft:entity.item.break",
+    "minecraft:enchantments": {},
+    "minecraft:item_model": "minecraft:shimmering_key",
+    "minecraft:item_name": {
+      "translate": "block.minecraft.shimmering_key"
+    },
+    "minecraft:lore": [],
+    "minecraft:max_stack_size": 64,
+    "minecraft:rarity": "common",
+    "minecraft:repair_cost": 0,
+    "minecraft:tooltip_display": {}
+}</syntaxhighlight>
+|}
+|}
+
+在默认组件的基础上，微光钥匙使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt|compound|minecraft:instant_room}} 数据组件
+*** {{nbt|string|structure|existonsave=1|required=1}}（命名空间ID）使用的结构模板，游戏会自动将此值解析为{{filepath|-{}-<''命名空间''>/hub/room/<''路径''>.nbt}}。
+</div>
+
+== 进度 ==
+{{Load advancements|page=进度/25w14craftmine|feats.shimmering_key}}
+
+== 你知道吗 ==
+* 微光钥匙看似是[[不祥试炼钥匙]]的重绘版本，但它只有1个头部（而非3个），整体呈蓝色，外观少了几分“邪恶感”。
+* 游戏内部有两个未使用的结构，它们也可以用微光钥匙解锁。其ID分别为<code>simple</code>（测试用房间请忽略）和<code>test</code>（''无显示名称''）。
+
+== 导航 ==
+{{Navbox jokes|25w14craftmine}}
+
+[[Category:物品]]
+
+[[en:Shimmering Key]]
+[[ja:Shimmering Key]]

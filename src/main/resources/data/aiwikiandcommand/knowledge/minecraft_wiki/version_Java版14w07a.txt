@@ -1,0 +1,168 @@
+# 页面: Java版14w07a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w07a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:11
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=14w07a
+|image=Java Edition 14w07a Simplified.png\Java Edition 14w07a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年2月14日
+|jsonhash=b3f18dabae1e9c1b4888e26f2a7ee0fc4ca13cdd
+|clienthash=d6a73ccba25f4c30d56af73f43a2d3c9a5458a1e
+|serverhash=de78ac487cf3fb6770e8c15f83e2219d4df851ae
+|exehash=a2c16840eeb7d900c8bf7f9f9f228e1c856637d9
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w06b
+|next=14w08a
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w07a'''是[[Java版1.8]]的第12个快照，发布于2014年2月14日<ref>{{cite|url=http://mojang.com/2014/02/minecraft-snapshot-14w07a/|archive-url=1|archive=1|title=Minecraft snapshot 14w07a|author=Dinnerbone|website=Mojang.com|date=Feb 14, 2014}}</ref>，加入了铁活板门，新的命令{{cmd|execute}}、{{cmd|testforblocks}}和目标选择器，此外还更新了记分板，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[铁活板门]]'''
+* 仅能通过红石信号开关，与[[铁门]]相似。
+* 通过在2×2的合成方格里放满铁锭来合成1个铁活板门。
+
+=== 命令格式 ===
+'''{{cmd|execute}}'''
+* 允许命令在实体的位置执行。
+* 示例：{{cmd|execute @e[type{{=}}Chicken] ~ ~ ~ fill ~-1 ~-1 ~-1 ~1 ~1 ~1 minecraft:glass}}
+
+'''{{cmd|testforblocks}}'''
+* 比较世界上的两个区域。
+* 示例：{{cmd|testforblocks 100 64 100 107 69 107 0 64 0 masked}}
+
+'''目标选择器'''
+* 新的选择器参数可以选定有特定面向角度的实体：
+** {{cd|rxm}}：x轴最小角度
+** {{cd|rx}}：x轴最大角度
+** {{cd|rym}}：y轴最小角度
+** {{cd|ry}}：y轴最大角度
+*** 示例：<code>@a[rxm=-15,rx=15,rym=-45,ry=45], /say @a[rx=30], don't look down!</code>。
+
+'''[[记分板]]'''
+* 名字开头为“#”的记分板目标将永不会出现在侧栏中。
+* 新的{{cmd|scoreboard}}子命令：{{cmd|scoreboard operation}}和{{cmd|scoreboard test}}。
+** <code>operation</code>子命令可以对分数进行算术运算（+ – * / %）和累计玩家的分数。
+*** 示例：{{cmd|1=scoreboard players operation #teamscores redScore += @a[team=red] blueKills}}将每个红队玩家的杀蓝队数加到红队的杀敌数上。
+** <code>test</code>子命令可以用来检测一个记分板数值是否在指定的最小值和最大值之间。
+*** 示例：{{cmd|scoreboard players test #global anObjective 12 19}}将检测一个目标的分数是否在12和19之间。
+* 不同的队伍可以有不同的目标显示在侧栏中。
+** 示例：{{cmd|scoreboard objectives setdisplay sidebar.team.yellow anotherObjective}}（指的是队伍颜色，而非队伍名字）。
+* 队伍现在可以设定它们的名字是否显示：{{cmd|scoreboard teams option red nametagVisibility hideForOtherTeam}}还可以被设为{{cd|hideForOwnTeam}}、{{cd|never}}或{{cd|always}}（默认）。
+
+== 更改 ==
+=== 方块 ===
+'''常规'''
+* 更新了方块模型的格式。
+** 可利用性降低。
+** UV必须为[0,1]（纹理现在不能从相邻的方块纹理中“借用”了）。
+** 平面至少要有1轴相同（向x，y，或z轴对齐）。
+*** 平面倾斜角度只能是单轴的-45/45°旋转。
+** UV方位现在以“像素空间”为单位（方块的十六分之一）。
+** 翻转了方块底面的UV。
+
+'''[[命令方块]]'''
+* 现在会显示（{{cd|@e}}）实体参数。
+
+'''[[发射器]]'''
+* 现在能放置[[命令方块]]了。
+
+'''[[火把]]和[[红石火把]]'''
+* 放置在墙上的火把和红石火把现在有了倾斜的顶部。
+
+=== 物品 ===
+'''[[烈焰棒]]'''
+* 现在与拿着[[工具]]的方式相似。
+
+=== 命令格式 ===
+'''{{cmd|testfor}}、{{cmd|testforblock}}、{{cmd|clear}}'''
+* 能测试NBT列表中的部分匹配。
+** 示例：{{cmd|testfor @p {Inventory:[{Slot:6b,id:"minecraft:diamond_sword"}],SelectedItemSlot:6} }}
+
+'''{{cmd|tellraw}}'''
+* 现在能在消息内显示记分板里的分数。
+** 示例：{{cmd|tellraw @p {text:"Have ",extra:[{score:{name:"Searge",objective:"reward"}<nowiki/>},{text:" diamonds"}]} }}
+
+=== 游戏内容 ===
+'''[[创造模式]]'''
+* 在创造模式中，玩家可以使用{{key|ctrl}}+[[选取方块]]键（默认为鼠标滚轮键）来将方块复制到快捷栏中，包括NBT数据。
+
+'''[[旁观模式]]'''
+* 现在可以分享LAN世界。
+
+=== 常规 ===
+'''[[资源包]]'''
+* 资源包现在可以与一个世界打包在一起，通过将其放置在存档的目录内并命名为{{filename|resources.zip}}。
+* 示例：{{filepath|.minecraft/saves/新的世界/resources.zip}}
+
+'''[[调试屏幕]]'''
+* 在看某个方块时会显示那个方块的坐标。
+* 方块的物品现在能储存自定义的NBT标签并在放置后融入[[方块实体]]中。
+** 示例：{{cmd|give @p command_block 1 0 {BlockEntityTag:{Command:"setblock ~ ~ ~ minecraft:diamond_block"}<nowiki/>} }}
+
+'''[[物品栏]]'''
+* 重写了物品栏系统。
+** 不包含在[[Java版1.8]]正式版内。<ref>{{reddit|31z5gz/dinnerbone_working_with_inventories|cq6k74n}}</ref><ref>{{tweet|dinnerbone|586076509565284352}}</ref>
+* 修复了些漏洞，提升了性能和使改进变得更简单。
+* 允许游戏不处理的自定义的NBT数据被储存在物品中。
+** 即使物品的NBT数据在游戏内被修改（如重命名），自定义的标签仍会保持原样。
+
+== 修复 ==
+{{fixes|fixedin=14w07a|prefix=Minecraft|showdesc=1
+|;old
+|1818|在创造模式中，使用选取键获得头颅时，头颅的<code>Skullowner</code>标签会消失。
+|7133|在物品栏中，燃烧的熔炉（ID为62）的纹理不显示熔炉的正面。
+|11270|记分板对离线或不存在的玩家不起作用。
+|36947|使用{{cmd|weather clear|link=none}}时，晴天的时长比给定的时间要短。
+|41594|生成一匹背上有末地水晶的马导致游戏崩溃。
+|44829|不能加载Twitch运行库。
+|46431|铁傀儡会扯断拴绳。
+|;dev
+|44489|{{cmd|kill @e|link=none}}命令不能杀死末影龙。
+|45106|<code>Mipmapping</code>值不适用于非标准方块。
+|45571|农民不会在没有草的超平坦世界生成。
+|45773|地牢中的箱子不生成。
+|46400|玩家在旁观模式中按三次{{key|F5}}后切换到创造模式时手臂不可见。
+|46559|观察生物时，玩家视角固定为两格高。
+|46838|{{cmd|testfor|link=none}}命令中NBT解析错误。
+|47520|玩家处于方块下水或熔岩的顶端时，视野会加上蓝色或红色的滤镜。
+|47543|向地上生成一个具有<code>PickupDelay</code>标签的物品，如果此物品与其他没有此标签的物品合并，则合并后的所有物品都适用此标签。
+|47545|木门的<code>CanPlaceOn</code>标签不起作用。
+|47555|不能放置船。
+|47596|同种掉落物会无视数据值而合并在一起。
+|47598|甘蔗的颜色不会随着群系的改变而改变。
+|47796|树叶、草以及高草的纹理很鲜艳。
+|;previous
+|47212|对背包使用{{cmd|testfor|link=none}}命令有错误。
+|47642|<code>Hopper: java.lang.ArrayIndexOutOfBoundsException: 4</code>。
+|47653|火把被放置在一个方块下方时，会短暂出现无效纹理。
+|47685|<code>Hopper: java.lang.ArrayIndexOutOfBoundsException: 3</code>。
+|47817|幼年僵尸猪人的跑步时的速度很奇怪。
+|47821|和平难度下，恶魂不会消失。
+|48043|手持烈焰棒时，烈焰棒不在手上。
+|48341|使用{{cmd|blockdata|link=none}}不能锁定箱子、熔炉等方块，并且显示“此方块不保存blockdata”。
+|48357|在{{cmd|kill|link=none}}命令中，方形范围选择器返回的是无序结果。
+|48784|可以利用重力复制物品。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:14w07a]]
+[[en:Java Edition 14w07a]]
+[[es:Java Edition 14w07a]]
+[[fr:Édition Java 14w07a]]
+[[ja:Java Edition 14w07a]]
+[[pt:Edição Java 14w07a]]
+[[ru:14w07a (Java Edition)]]
+[[uk:14w07a (Java Edition)]]

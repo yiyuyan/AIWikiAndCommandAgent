@@ -1,0 +1,36 @@
+# 页面: 饰纹陶罐图案定义格式
+# 来源: https://zh.minecraft.wiki/w/%E9%A5%B0%E7%BA%B9%E9%99%B6%E7%BD%90%E5%9B%BE%E6%A1%88%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:39:00
+# 原始 Wikitext 内容:
+
+{{added in development|jev=26.3}}<!--{{Exclusive|java}}-->
+'''饰纹陶罐图案（Decorated Pot Pattern）'''定义了[[饰纹陶罐]]可用使用的图案类型。'''饰纹陶罐图案定义文件'''是饰纹陶罐图案在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+饰纹陶罐图案在游戏内使用{{cd|DECORATED_POT_PATTERN}}注册表，数据包路径为{{filepath|decorated_pot_pattern}}，即所有饰纹陶罐图案定义文件都需要在{{filepath|-{}-data/<''命名空间''>/decorated_pot_pattern}}目录内定义，饰纹陶罐图案标签则需要在{{filepath|-{}-data/<''命名空间''>/tags/decorated_pot_pattern}}目录内定义。
+
+饰纹陶罐图案定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|asset_id|required=1|existonsave=1}}：（[[命名空间ID]]）饰纹陶罐图案使用的纹理，游戏在渲染时会将此值解析为{{filepath|assets/<''命名空间''>/textures/entity/decorated_pot/<''路径''>.png}}。
+</div>
+
+== 定义行为 ==
+饰纹陶罐图案定义数据仅在服务端启动时被加载一次，使用{{cmd|reload}}命令不可以使饰纹陶罐图案定义被重新加载，而必须重启服务端。
+
+游戏在渲染饰纹陶罐的侧面时，会先获取饰纹陶罐的图案数据，然后根据每个面的物品进行渲染。如果对应面的物品不存在，或物品没有[[数据组件#provides_pottery_pattern|<code>provides_pottery_pattern</code>]]组件，则这一面渲染为无图案（<code>minecraft:decorated_pot_side</code>）；否则，根据物品<code>provides_pottery_pattern</code>组件指定的饰纹陶罐样式所对应的精灵图进行渲染。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了饰纹陶罐图案定义格式。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[ja:飾り壺の模様のカスタマイズ]]

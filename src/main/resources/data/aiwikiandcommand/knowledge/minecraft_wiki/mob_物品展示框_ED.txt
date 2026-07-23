@@ -1,0 +1,27 @@
+# 页面: 物品展示框/ED
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%B1%95%E7%A4%BA%E6%A1%86/ED
+# 分类: 实体数据值页面
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt inherit/entity}}
+** {{nbt inherit/hangable}}
+** {{nbt|byte|Facing|required=1|existonsave=1}}：（{{interval|left=0|right=5}}）当前物品展示框面对的方向。从0到5分别对应下上北南西东，如果超过值域则对6{{tr|取余|取餘}}并取绝对值后对应方向。
+** {{nbt|bool|Fixed|required=1|existonsave=1}}：表示物品展示框是否被固定。如果为<samp>true</samp>，物品展示框将不再因失去支撑方块、被移动（如被活塞推动）、受到伤害而掉落，但也不能在物品展示框内放置、移除或旋转物品。
+** {{nbt|bool|Invisible|required=1|existonsave=1}}：表示物品展示框是否处于隐形状态。在隐形状态下，物品展示框内包含的物品和地图依然可见。
+** {{nbt|compound|Item}}：物品展示框内的物品。
+*** {{nbt inherit/itemnoslot}}
+** {{nbt|float|ItemDropChance}}：（默认为1）物品展示框被破坏时内部物品掉落的概率。当物品展示框内有物品时此标签才有效。
+** {{nbt|byte|ItemRotation}}：（{{interval|left=0|right=7}}，{{nbt|compound|Item}}存在时此项存在并有效）展示物品的方向，从0到7分别代表了物品展示框中物品的8个方向，如果超过值域则对8{{tr|取余|取餘}}后对应方向。当物品展示框内有物品时此标签才有效。
+</div><noinclude>
+[[Category:实体数据值页面]]
+
+[[en:Item Frame/ED]]
+[[fr:Cadre/ED]]
+[[ja:額縁/ED]]
+[[pt:Moldura/ED]]
+[[th:กรอบโชว์สิ่งของ/ED]]
+[[uk:Рамка для предметів/ДС]]
+</noinclude>

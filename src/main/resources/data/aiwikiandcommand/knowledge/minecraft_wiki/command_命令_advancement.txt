@@ -1,0 +1,93 @@
+# 页面: 命令/advancement
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/advancement
+# 分类: Java版独有特性, 命令
+# 抓取时间: 2026-07-14 17:22:02
+# 原始 Wikitext 内容:
+
+{{about|管理进度的命令|进度系统|进度|已移除的用于管理[[成就/Java版|成就]]的命令|命令/achievement}}
+{{exclusive|java}}
+{{Infobox command
+|name=advancement 
+|oplevel=2
+}}
+
+给予或移除玩家的[[进度]]或某一进度的一项[[进度定义格式#准则|准则]]（Criterion）。
+
+== 语法 ==
+: <code>advancement (grant|revoke) <targets> everything</code>
+:: 授予（grant）或移除（revoke）玩家的全部已载入进度。
+: <code>advancement (grant|revoke) <targets> only <advancement> [<criterion>]</code>
+:: 授予或移除玩家指定的进度或进度的一项准则。
+: <code>advancement (grant|revoke) <targets> from <advancement></code>
+:: 授予或移除玩家指定进度及其下游的全部进度。
+:: 进度的遍历顺序是<code>-{}-指定进度 > 下游进度 > 下游进度的下游进度 > ……</code>，以[[wzh:深度优先搜索|DFS]]遍历（即优先列举节点的子节点，而后才列举节点的兄弟节点）。
+: <code>advancement (grant|revoke) <targets> through <advancement></code>
+:: 授予或移除玩家指定进度及其全部上游和下游进度。
+:: 进度的遍历顺序是<code>until</code>和<code>from</code>的结合，首先进行<code>until</code>，然后进行<code>from</code>，即<code>-{}-上游进度 > 上游进度的上游进度 > …… > 根进度 > 指定进度 > 下游进度 > 下游进度的下游进度 > ……</code>。
+: <code>advancement (grant|revoke) <targets> until <advancement></code>
+:: 授予或移除玩家指定进度及其全部上游进度。
+:: 进度的遍历顺序是<code>-{}-上游进度 > 上游进度的上游进度 > …… > 根进度 > 指定进度</code>。
+
+<gallery>
+Advancement Command Schematic Diagram.png|黄色为<code>only</code>的影响范围，绿色为<code>through</code>的影响范围，蓝色为<code>from</code>的影响范围，红色为<code>until</code>的影响范围
+</gallery>
+
+== 参数 ==
+{{argument|targets|entity}}
+: 指定一个或多个玩家。
+: {{arg desc|je=entity|amount=multiple|type=players}}
+
+{{argument|advancement|resource_location}}
+: 指定要给予或移除的[[进度]]识别符。
+: {{arg desc|je=resource_location}}
+
+{{argument|criterion|string}}
+: 指定要授予或移除的[[进度定义格式#准则|进度准则]]。
+: 若未指定，授予或移除整个进度。
+: 若指定，只授予或移除进度中指定的这条准则，而不是整个进度。
+: {{arg desc|je=string|type=greedy}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|<code><targets></code>未能选中至少一个在线玩家|fail}}
+{{Result table|没有任何玩家的进度（或准则）被授予或移除}}
+{{Result table|cmd=/... only <advancement> <criterion>|指定的{{cd|<criterion>}}对{{cd|<advancement>}}不可用}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|从每个玩家授予或移除的进度（或准则）总数、所有玩家改变的进度状态数量和改变影响到的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 授予自己“{{Advancement name|story.shiny_gear|zh}}”进度：<code>advancement grant @s only minecraft:story/shiny_gear</code>
+* 授予所有玩家所有进度：<code>advancement grant @a everything</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=17w13a|加入了{{cmd|advancement|link=none}}命令。}}
+|{{HistoryLine||1.13|dev=17w45a|移除了{{cmd|advancement test|link=none}}的用法，以应对实体选择器的修改。}}
+|{{HistoryLine||1.20.3|dev=23w45a|{{cd|/advancement}}不再抛出未处理的异常。}}
+|{{HistoryLine||26.2|dev=snapshot-1|现在使用{{cd|/advancement}}执行成功时，会输出所有玩家改变的进度状态数量和改变影响到的玩家数量。}}
+}}
+
+== 参见 ==
+* [[游戏规则/show_advancement_messages]]
+* [[进度]]
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/advancement]]
+[[en:Commands/advancement]]
+[[es:Comandos/advancement]]
+[[ja:コマンド/advancement]]
+[[lzh:令/advancement]]
+[[nl:Opdrachten/advancement]]
+[[pt:Comandos/advancement]]
+[[ru:Команды консоли/advancement]]
+[[uk:Команди консолі/advancement]]

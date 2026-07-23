@@ -1,0 +1,203 @@
+# 页面: 袭击队长
+# 来源: https://zh.minecraft.wiki/w/%E8%A2%AD%E5%87%BB%E9%98%9F%E9%95%BF
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 停用自动值的页面, 基岩版独有信息, 需要信息, 需要检查源代码/基岩版
+# 抓取时间: 2026-07-14 17:35:49
+# 原始 Wikitext 内容:
+
+{{About|Minecraft中的袭击队长|Minecraft Dungeons中的袭击队长|MCD:袭击队长}}
+{{Infobox entity
+|group1=掠夺者
+|1-1=Pillager with Ominous Banner.png
+|1-2=Pillager with Ominous Banner BE.png
+|group2=卫道士
+|2-1=Vindicator with Ominous Banner.png
+|group3=唤魔者
+|3-1=Evoker with Ominous Banner.png
+|group4=幻术师
+|4-1=Illusioner with Ominous Banner.png
+|1-1caption={{el|je}}
+|1-2caption={{el|be}}
+|3-1caption={{el|je}}
+|4-1caption={{el|je}}
+|*-1size=x300px
+|*-2size=x300px
+|size=高度：1.95格<br>宽度：0.6格
+|spawn=
+[[灾厄巡逻队]]<br>
+[[掠夺者前哨站]]<br>
+{{only|for=[[袭击]]|java}}
+|autovalue-disabled-fields=entity id
+}}
+
+'''袭击队长（Raid Captain）'''{{fn|{{in|java}}被称为'''Raid Captain'''。{{in|bedrock}}被称为'''Illager Captain（灾厄村民队长）'''。}}是头顶戴有[[不祥旗帜]]的[[灾厄村民]]，{{in|je}}任何灾厄村民都可以是袭击队长；{{in|be}}只有掠夺者和卫道士可以是袭击队长。
+
+== 生成 ==
+袭击队长的生成条件与灾厄村民相同，生成完全随机。{{Info needed|成为袭击队长的概率。}}
+
+{{in|be}}它们可以使用{{cmd|summon}}命令附加[[生成事件]]生成，例如生成一个掠夺者袭击队长（非巡逻队队长）为{{cmd|summon pillager ~ ~ ~ ~ ~ minecraft:spawn_as_illager_captain}}。使用{{cmd|event}}可以使一个掠夺者或卫道士晋升为袭击队长（例如{{cmd|1=event entity @e[type=pillager,c=1] minecraft:promote_to_illager_captain}}，使一个掠夺者晋升为袭击队长）。
+
+{{in|je}}它们可以使用{{cmd|summon}}命令生成，例如生成一个掠夺者袭击队长为{{cmd|long=1|summon minecraft:pillager ~ ~ ~ {PatrolLeader: 1b,equipment: {head: {components: {"minecraft:item_name": {translate: "block.minecraft.ominous_banner"}, "minecraft:tooltip_display": {hidden_components: ["minecraft:banner_patterns"]}, "minecraft:rarity": "uncommon", "minecraft:banner_patterns": [{color: "cyan", pattern: "minecraft:rhombus"}, {color: "light_gray", pattern: "minecraft:stripe_bottom"}, {color: "gray", pattern: "minecraft:stripe_center"}, {color: "light_gray", pattern: "minecraft:border"}, {color: "black", pattern: "minecraft:stripe_middle"}, {color: "light_gray", pattern: "minecraft:half_horizontal"}, {color: "light_gray", pattern: "minecraft:circle"}, {color: "black", pattern: "minecraft:border"}]}, count: 1, id: "minecraft:white_banner"<nowiki>}}}</nowiki>}}。
+
+{| class="wikitable" style="text-align: center;"
+|+袭击队长的生成状况（{{el|je}}）
+! 灾厄村民种类
+! 灾厄巡逻队
+! 袭击
+! 掠夺者前哨站
+! 林地府邸
+|-
+| {{EntityLink|Pillager}}
+| {{tc|always|是，多次}}
+| {{tc|always|是，多次}}
+| {{tc|always|是，多次}}
+| {{tc|no|否}}
+|-
+| {{EntityLink|Vindicator}}
+| {{tc|no|否}}
+| {{tc|always|是，多次}}
+| {{tc|no|否}}
+| {{tc|no|否}}
+|-
+| {{EntityLink|Evoker}}
+| {{tc|no|否}}
+| {{tc|partial|是，偶尔}}
+| {{tc|no|否}}
+| {{tc|no|否}}
+|-
+| {{EntityLink|Illusioner}}
+| {{tc|no|否}}
+| {{tc|no|否}}
+| {{tc|no|否}}
+| {{tc|no|否}} 
+|}
+
+{| class="wikitable" style="text-align: center;"
+|+袭击队长的生成状况（{{el|be}}）
+! 灾厄村民种类
+! 灾厄巡逻队
+! 掠夺者前哨站
+|-
+| {{EntityLink|Pillager}}
+| {{tc|always|是，多次}}
+| {{tc|always|是，多次}}
+|-
+| {{EntityLink|Vindicator}}
+| {{tc|no|否}}
+| {{tc|no|否}}
+|}
+{{-}}
+
+{{in|je}}虽然幻术师不会自然生成，但是使用命令生成的幻术师也有概率成为袭击队长。{{in|be}}卫道士袭击队长不会自然生成，但可以使用命令生成。
+
+=== 灾厄巡逻队 ===
+袭击队长作为[[灾厄巡逻队]]（成员皆为[[掠夺者]]）的一部分生成。
+
+=== 袭击 ===
+在{{el|je}}的[[袭击]]中，袭击队长可以作为一组掠夺者的一员生成，有时还会骑着劫掠兽生成。处于袭击中的袭击队长在被击杀时不会掉落[[不祥之瓶]]，但当它的旗帜掉落时，其他灾厄村民会尝试捡起旗帜并成为新的袭击队长。
+
+{{in|be}}袭击队长不会在袭击中自然生成，但是代码中有相应的内容。{{ctc|bedrock=1}}
+
+=== 掠夺者前哨站 ===
+[[掠夺者前哨站]]内会生成1-3个袭击队长，且总会是[[掠夺者]]。
+
+== 掉落物 ==
+=== 常规 ===
+{{see also|掠夺者#掉落物|卫道士#掉落物|唤魔者#掉落物|幻术师#掉落物}}
+当袭击队长死亡时，会掉落:
+* 1个{{BlockLink|Ominous Banner}}，总会掉落，且[[抢夺]]魔咒对其无效。
+* 1个{{ItemLink|Ominous Bottle}}，仅当袭击队长为不在袭击中的掠夺者或{{only|for=卫道士|be}}时掉落，且抢夺魔咒对其无效，每种等级掉落概率相同。
+**{{in|be}}被玩家驯服的[[狼]]杀死的袭击队长不会掉落不祥之瓶。<ref>{{bug|MCPE-183055}}</ref>
+=== 参与袭击者 ===
+{{exclusive|be|section=1}}
+袭击中生成的袭击队长会额外掉落：
+* 0-1个{{ItemLink|Emerald}}
+
+附加掉落物取决于难度，在简单和普通难度下有65%的概率掉落，在困难难度下80%的概率掉落。
+
+附加掉落物对应以下选项之一：
+* 0-1个{{ItemLink|Emerald}}（{{frac|10|39}}）
+* 2-3个{{ItemLink|Emerald}}（{{frac|5|39}}）
+* 4-5个{{ItemLink|Emerald}}（{{frac|2|39}}）
+* 1个{{ItemLink|Enchanted Book}}（{{frac|2|39}}）
+* 1个{{ItemLink|Iron Pickaxe}}（{{frac|5|78}}）
+* 1个{{ItemLink|Iron Axe}}（{{frac|5|78}}）
+* 1个{{ItemLink|Iron Shovel}}（{{frac|5|78}}）
+* 1个{{ItemLink|Iron Sword}}（{{frac|5|78}}）
+* 1个{{ItemLink|Iron Helmet}}（{{frac|5|78}}）
+* 1个{{ItemLink|Iron Chestplate}}（{{frac|5|78}}）
+* 1个{{ItemLink|Iron Leggings}}（{{frac|5|78}}）
+* 1个{{ItemLink|Iron Boots}}（{{frac|5|78}}）
+注：
+* 掉落的铁装备有50%的概率带有随机魔咒。
+* 掉落的铁装备会是严重损坏的。
+* 以上掉落物也受[[抢夺]]魔咒影响。
+* 在袭击中，绿宝石既是袭击队长的常规掉落物也是其附加掉落物。
+* 附魔书的魔咒出现的概率与[[附魔台]]上30级的魔咒相同，可以施加[[灵魂疾行]]和[[迅捷潜行]]以外的[[宝藏型魔咒]]，多个魔咒出现的概率亦不会降低。
+
+== 行为 ==
+灾厄巡逻队中的袭击队长的行为与普通[[灾厄村民]]相同，但其他灾厄村民会在其后跟随，表现为队长在前面领队。
+
+袭击期间，若袭击队长因死亡而掉落{{BlockLink|Ominous Banner}}，附近的灾厄村民将会尝试捡起该旗帜并成为下一个队长。
+
+=== 传播攻击目标 ===
+{{exclusive|je|section=1}}
+袭击队长会将自己当前的攻击目标传播给周围8×8×8范围内其他同属于灾厄巡逻队的成员，这一过程无视[[隐身]]效果。
+
+若袭击队长是带有<code>Johnny</code>标签的卫道士，可能会导致同灾厄巡逻队的成员错误地自相残杀，罕见情况下会导致生物攻击自己。
+
+== 成就 ==
+{{load achievements|ive-got-a-bad-feeling-about-this}}
+
+== 进度 ==
+{{load advancements|adventure.voluntary_exile}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w45a|加入了袭击队长，可作为[[灾厄巡逻队]]的一部分生成。}}
+|{{HistoryLine|||dev=18w47a|加入了[[袭击]]事件，其中包括袭击队长。}}
+|{{HistoryLine|||dev=18w49a|可以多次击杀袭击队长叠加[[不祥之兆]]效果。}}
+|{{HistoryLine|||dev=18w50a|袭击队长可生成于[[掠夺者前哨站]]。|掠夺者前哨站中的袭击队长会给予1级的不祥之兆，而巡逻队中的袭击队长能给予1-3级的不祥之兆。}}
+|{{HistoryLine|||dev=19w13a|击杀袭击队长现在只会给予1级的不祥之兆。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w13a|禁用了袭击队长给予玩家不祥之兆的特性。}}
+|{{HistoryLine||1.21|dev=24w18a|24w13a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.11.0|exg=1|dev=1.11.0.1|加入了袭击队长。|目前击杀袭击队长不会给予玩家不祥之兆。}}
+|{{HistoryLine|||dev=1.11.0.3|灾厄村民可能会跟随袭击队长。|现在击杀袭击队长给予玩家不祥之兆。}}
+|{{HistoryLine|||exg=none|dev=正式版|袭击队长不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|袭击队长现在被击杀时会正确地掉落它们的旗帜。
+|不祥之兆现在只有在击杀袭击队长时才会获得，而不是用远程武器攻击它们时。
+|灾厄村民现在可以正确地通过tag标签转变为袭击队长。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|当袭击队长被杀死时，附近的掠夺者现在会冲向附近3格范围内掉落的不祥旗帜，并捡起以成为新的袭击队长。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.20|卫道士和其队长变种不再自然生成于灾厄巡逻队中。}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.20|禁用了袭击队长给予玩家不祥之兆的特性。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|1.21.0.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine|PS4}}
+|{{HistoryLine||1.91|加入了袭击队长。}}
+}}
+
+== 你知道吗 ==
+* {{in|JE}}不祥旗帜装备在袭击队长的头部装备槽位，{{in|BE}}不祥旗帜装备在袭击队长的胸甲装备槽位。
+* {{in|BE|nc=1}}：
+** 尽管卫道士队长无法自然生成，但仍可以通过[[生成事件]]命令召唤。
+** 唤魔者没有袭击队长变种，因此无法通过命令所召唤。
+** 袭击队长和巡逻队队长{{fn|在官网中的基岩版更新日志中，掠夺者和卫道士队长合称Illager captain，巡逻队队长为Patrol captain。}}的代码为<code>minecraft:illager_squad_captain</code>和<code>minecraft:patrol_captain</code>。
+
+== 画廊 ==
+<gallery>
+Vindicator with Ominous Banner 18w45a.png|[[18w45a]]中的卫道士袭击队长
+Vindicator with Ominous Banner BE.png|基岩版中未使用的卫道士袭击队长
+BE Pillager Captain Back (example).jpg|基岩版掠夺者队长的背部（旗杆与Java版不同）
+</gallery>
+
+== 注释 ==
+{{fnlist}}
+
+[[de:Räuberhauptmann]]
+[[en:Raid captain]]
+[[es:Capitán de invasión]]
+[[fr:Capitaine d'invasion]]
+[[it:Capitano dell'incursione]]
+[[ja:襲撃隊の大将]]
+[[ko:습격 대장]]
+[[pt:Capitão invasor]]

@@ -1,0 +1,1715 @@
+# 页面: 创造模式物品栏
+# 来源: https://zh.minecraft.wiki/w/%E5%88%9B%E9%80%A0%E6%A8%A1%E5%BC%8F%E7%89%A9%E5%93%81%E6%A0%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:20:35
+# 原始 Wikitext 内容:
+
+{{about|仅能在创造模式打开的物品栏||物品栏（消歧义）}}
+
+'''创造模式物品栏（Creative Inventory）'''是[[创造模式]]的玩家无限获取[[物品]]的基本方式。
+
+== 机制 ==
+处于创造模式的玩家按下{{ctrl|物品栏}}键或{{only|be|for=快捷栏最右侧的[[File:Inventory Button.png|20px|class=pixel-image]]}}时，会打开创造模式物品栏。创造模式物品栏中包含了在生存模式能够得到的几乎所有物品，以及一些无法在生存模式中获得的物品，如[[刷怪蛋]]和[[基岩]]。玩家可以从这里获得几乎任何物品，并且可以无限使用。
+
+=== Java版 ===
+{{Filetr|Creative Inventory JE.png|缩略图|创造模式物品栏搜索页}}
+
+创造模式物品栏的基本分组方式是'''创造标签页（Creative tab）'''。物品的创造标签页是物品的基本属性之一，且物品可以有任意数量的创造标签页。大多数物品都有一个创造标签页，部分物品有多个，极少数物品如[[知识之书]]没有创造标签页。
+
+对创造模式物品栏中的物品单击鼠标左键可以抓取一个物品，并且抓取该物品的堆叠个数会随着单击该物品次数的增加而增加。对准堆叠物品单击左键和右键会分别抓取单个物品和一组物品，这时鼠标单击其他物品将会对鼠标单击的物品和开头抓取的物品进行位置交换。右键单击一组物品也将只抓取一个物品，但第二次右击时将会把那个物品放下，而不是拾起更多。按住{{Keys|Shift}}单击物品可抓取一组物品。在将鼠标悬停在某个物品上方时按下数字键，则会立即将鼠标悬停的整堆物品放入与该数字相对应的准备栏中。
+
+将物品放入创造模式物品栏会摧毁这一堆叠的物品，包括直接点击物品将其拖入或按住{{key|Shift}}点击物品堆叠。
+
+==== 搜索物品 ====
+创造模式物品栏的右上角有一个搜索页，在搜索页以外的创造标签页按下{{key|T}}可以切换到搜索页。在右上角输入栏中直接输入物品在当前语言中的名称或其[[物品提示框]]中可能出现的文字即可搜索到此物品。输入栏为空时，所有物品都会在此显示。除此以外，输入<code>-{}-<''命名空间''>:<''物品ID''></code>能以英文ID搜索指定命名空间下的物品，命名空间可省略，但“:”不可省略；输入<code>-{}-#<''物品标签的命名空间ID''></code>会呈现这个[[Java版标签/物品|物品标签]]内的所有物品，命名空间也可省略。
+
+搜索物品提示框时，物品栏会忽略由{{cd|d=pretty|base_attack_damage|base_attack_speed}}[[属性修饰符]]带来的特殊属性文本，而直接匹配常规ID下的原文。如搜索“5”时会显示下界合金镐（6 攻击伤害），因为非特殊属性修饰符会将其显示为“+5 攻击伤害”；搜索“+”或“-”时，所有的剑、镐、斧、锹、锄、重锤、三叉戟都会显示，即使它们的提示框中不包含“+”、“-”字符。
+
+==== 已保存的快捷栏 ====
+创造模式物品栏中有'''已保存的快捷栏'''。在创造模式中按下{{key|C}}+{{key|1-9}}会将当前的快捷栏保存至“{{tp|itemGroup.hotbar}}”选项卡中，并且可通过按下{{key|X}}+{{key|1-9}}加载。
+
+已存储的快捷栏存储在客户端的{{filename|[[hotbar.nbt]]}}文件中，因此可以用于在不同世界之间复制物品。
+
+==== 物品销毁 ====
+在创造模式物品栏的“生存模式物品栏”一栏右下角有一个打叉的红色格子。将物品放入其中会摧毁这个堆叠的物品。按住{{key|Shift}}时点击该格子会清除物品栏中的所有物品。
+
+{{-}}
+
+=== 基岩版 ===
+创造模式物品栏的基本分组方式是'''创造分类（Creative category）'''。物品的创造分类是物品的基本属性之一，物品只能有一个创造分类。大多数物品都有一个创造分类，少数物品如[[命令方块]]和[[结构方块]]没有创造分类。
+
+创造模式物品栏共有5个标签页：4个创造分类标签页（“[[File:BE icon recipe construction.png|20px|class=pixel-image]]建筑”、“[[File:BE icon recipe equipment.png|20px|class=pixel-image]]{{tr|装备|用品}}”、“[[File:BE icon recipe item.png|20px|class=pixel-image]]物品”和“[[File:BE icon recipe nature.png|20px|class=pixel-image]]自然”）和1个“[[File:BE icon recipe all.png|20px|class=pixel-image]]全部”标签页。创造分类标签页会显示所有对应分类的物品，“全部”标签页则会显示所有物品，同时在顶部提供一个搜索栏。
+
+玩家处于[[创造模式]]时，创造模式物品栏会代替[[配方书#基岩版|配方书]]出现。
+
+; {{tr|经典UI|傳統UI}}
+[[File:Creative Inventory BE (Classic).png|缩略图|{{tr|经典UI|傳統UI}}下的“全部”标签页]]
+: 4个创造分类标签页可在左上方切换，从左到右排序，“全部”标签页显示在顶部靠近中间的位置。
+: 在右上角可切换[[File:BE Fullscreen icon.png|30px|class=pixel-image]]全屏显示创造分类界面、[[File:BE Recipe Book and Inventory icon.png|35px|class=pixel-image]]显示创造分类界面和生存模式物品栏或[[File:BE Inventory icon.png|20px|class=pixel-image]]仅显示生存模式物品栏。生存模式物品栏中有一个2&times;2的[[合成方格]]。
+
+; {{tr|携带版UI|Pocket UI}}
+[[File:Creative Inventory BE (Pocket).png|缩略图|{{tr|携带版UI|Pocket UI}}下的“全部”标签页]]
+: 全部5个标签页可在左侧切换，从上到下排序，“全部”标签页显示在最顶部。点击左下角的[[File:BE Inventory Tab icon.png|20px|class=pixel-image]]会显示玩家的[[物品栏]]。
+: 点击右侧的[[File:BE Crafting Tab icon.png|20px|class=pixel-image]]或[[File:BE Armor Tab icon.png|20px|class=pixel-image]]可切换在屏幕右侧显示[[合成方格]]或[[物品栏#携带版UI|盔甲菜单]]，或点击[[File:BE Fullscreen Tab icon.png|20px|class=pixel-image]]隐藏这两个界面以全屏显示屏幕左侧的内容。
+
+对创造标签页内的物品按下左键、{{tooltip|minetip=1|{{tr|拿起|撿起}}|默认为手柄右侧的上键。}}键或点击时会拿起一组对应物品，按下右键或{{tooltip|minetip=1|{{tr|获取一个|拿起一項}}|默认为手柄右侧的下键。}}键时则只会拿起一个物品。
+* 使用键盘和鼠标时，对物品按下{{key|shift}}+左键/右键时，会将一组该物品移至快捷栏中最靠左的空格子或物品相同但数量不满一组的格子内（不满一组的格子优先），若快捷栏已满，则物品会进入物品栏。
+* 使用手柄时，按下{{tooltip|minetip=1|{{tr|拿起|撿起}}|默认为手柄右侧的上键。}}和{{tooltip|minetip=1|{{tr|获取一个|拿起一項}}|默认为手柄右侧的下键。}}键时，会将该物品移至快捷栏中最靠左的空格子或物品相同但数量不满一组的格子内（不满一组的格子优先），同时手柄光标将留在原地。若没有可用的空格子或移动物品后有剩余物品时，则手柄光标会自动移至快捷栏最左侧的格子上，以方便玩家进行其他操作。
+
+除“全部”外的标签页里会有一些相似的物品被集合起来，成为物品组。物品组可以通过按下带“+”符号的物品打开，通过按下“-”折叠。
+
+将物品移入创造模式物品栏，或在全屏显示创造模式物品栏时对快捷栏中的物品按下{{key|Shift}}+左键/右键、{{tooltip|minetip=1|{{tr|摧毁|移除}}|默认为手柄右侧的上键。}}键或双击会摧毁这一物品。
+{{-}}
+
+=== 原主机版 ===
+[[File:LCE Creative Inventory.png|缩略图|原主机版的创造模式物品栏界面]]
+原主机版的创造模式物品栏与Java版类似，但选项卡和物品有所不同。
+{{-}}
+
+=== New Nintendo 3DS版 ===
+[[File:3DS creative inventory.png|缩略图|New Nintendo 3DS版的创造模式物品栏界面]]
+New Nintendo 3DS版的创造模式物品栏显示在下屏幕，与Java版类似，但选项卡和物品有所不同，右侧的滚动条也被替换为按钮。
+{{-}}
+
+== 物品列表 ==
+=== Java版 ===
+共有14个创造标签页，其中有3个标签页有特殊的行为且没有物品与其关联。
+
+搜索栏里可以找到所有魔咒的所有等级的附魔书，而“{{tp|itemGroup.ingredients}}”中只有所有魔咒的最高等级的附魔书。
+
+<div>{{InvSprite|text='''{{tp|itemGroup.hotbar}}'''|Bookshelf|scale=0.5}}：显示{{tp|itemGroup.hotbar}}，并给出保存快捷栏的方式。</div>
+<div>{{InvSprite|text='''搜索栏'''|Compass|scale=0.5}}：列出全部可用方块和物品，或按给出的搜索词匹配名称或命名空间ID的全部或部分内容。</div>
+<div>{{InvSprite|text='''{{tp|itemGroup.inventory}}'''|Chest|scale=0.5}}：显示{{tp|itemGroup.inventory}}。</div>
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.buildingBlocks}}'''|Bricks|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+* {{BlockLink|Logs}}及衍生方块<ref group="建">依次为对应的[[木头]]、[[去皮原木]]、[[去皮木头]]、[[木板]]、[[楼梯]]、[[台阶]]、[[栅栏]]、[[栅栏门]]、[[门]]、[[活板门]]、[[压力板]]、[[按钮]]</ref>
+* {{BlockLink|Block of Bamboo}}及衍生方块<ref group="建">依次为[[去皮竹块]]、[[竹板]]、[[竹马赛克]]、[[竹楼梯]]、[[竹马赛克楼梯]]、[[台阶]]、[[竹马赛克台阶]]、[[竹栅栏]]、[[竹栅栏门]]、[[竹门]]、[[竹活板门]]、[[竹压力板]]、[[竹按钮]]</ref>
+* {{BlockLink|Stems}}及衍生方块<ref group="建">依次为对应的[[菌核]]、[[去皮菌柄]]、[[去皮菌核]]、[[木板]]、[[楼梯]]、[[台阶]]、[[栅栏]]、[[栅栏门]]、[[门]]、[[活板门]]、[[压力板]]、[[按钮]]</ref>
+* {{BlockLink|Stone}}及衍生方块<ref group="建" name="石头">依次为[[楼梯]]、[[台阶]]、[[墙]]、[[压力板]]、[[按钮]]</ref>
+* {{BlockLink|Cobblestone}}及衍生方块<ref group="建" name="圆石">依次为[[楼梯]]、[[台阶]]、[[墙]]</ref>
+* {{BlockLink|Mossy Cobblestone}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Smooth Stone}}和{{BlockLink|Smooth Stone Slab}}
+* {{BlockLink|Stone Bricks}}及衍生方块<ref group="建" name="石砖">依次为裂纹版本，与自己对应的[[楼梯]]、[[台阶]]、[[墙]]</ref>
+* {{BlockLink|Chiseled Stone Bricks}}
+* {{BlockLink|Mossy Stone Bricks}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Granite}}及衍生方块<ref group="建" name="花岗岩">依次为[[楼梯]]、[[台阶]]、[[墙]]，磨制版本与对应的楼梯、台阶</ref>
+* {{BlockLink|Diorite}}及衍生方块<ref group="建" name="花岗岩"/>
+* {{BlockLink|Andesite}}及衍生方块<ref group="建" name="花岗岩" />
+* {{BlockLink|Deepslate}}
+* {{BlockLink|Cobbled Deepslate}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Chiseled Deepslate}}
+* {{BlockLink|Polished Deepslate}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Deepslate Bricks}}及衍生方块<ref group="建" name="石砖" />
+* {{BlockLink|Deepslate Tiles}}及衍生方块<ref group="建" name="石砖" />
+* {{BlockLink|Reinforced Deepslate}}
+* {{BlockLink|Tuff}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Chiseled Tuff}}
+* {{BlockLink|Polished Tuff}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Tuff Bricks}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Chiseled Tuff Bricks}}
+* {{BlockLink|Bricks}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Packed Mud}}
+* {{BlockLink|Mud Bricks}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Resin Bricks}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Chiseled Resin Bricks}}
+* {{BlockLink|Sandstone}}及衍生方块<ref group="建" name="砂岩">依次为[[楼梯]]、[[台阶]]、[[墙]]，雕纹版本，平滑版本与对应的楼梯、台阶</ref>
+* {{BlockLink|Red Sandstone}}及所有衍生方块<ref group="建" name="砂岩" />
+* {{BlockLink|Cinnabar}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Chiseled Cinnabar}}
+* {{BlockLink|Polished Cinnabar}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Cinnabar Bricks}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Sulfur}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Chiseled Sulfur}}
+* {{BlockLink|Polished Sulfur}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Sulfur Bricks}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Sea Lantern}}
+* {{BlockLink|Prismarine}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Prismarine Bricks}}及衍生方块<ref group="建" name="海晶石砖">依次为[[楼梯]]、[[台阶]]</ref>
+* {{BlockLink|Dark Prismarine}}及衍生方块<ref group="建" name="海晶石砖" />
+* {{BlockLink|Netherrack}}
+* {{BlockLink|Nether Bricks}}及衍生方块<ref group="建" name="石砖" />
+* {{BlockLink|Nether Brick Fence}}
+* {{BlockLink|Chiseled Nether Bricks}}
+* {{BlockLink|Red Nether Bricks}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Basalt}}及[[平滑玄武岩|平滑]]、[[磨制玄武岩|磨制]]版本
+* {{BlockLink|Blackstone}}
+* {{BlockLink|Gilded Blackstone}}
+* {{BlockLink|Blackstone}}的衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Chiseled Polished Blackstone}}
+* {{BlockLink|Polished Blackstone}}的衍生方块<ref group="建" name="石头" />
+* {{BlockLink|Polished Blackstone Bricks}}及衍生方块<ref group="建" name="石砖">依次为裂纹版本，与自己对应的[[楼梯]]、[[台阶]]、[[墙]]</ref>
+* {{BlockLink|End Stone}}
+* {{BlockLink|End Stone Bricks}}及衍生方块<ref group="建" name="圆石" />
+* {{BlockLink|Purpur Block}}及衍生方块<ref group="建">依次为[[紫珀柱]]、[[紫珀楼梯]]、[[紫珀台阶]]</ref>
+* {{BlockLink|Block of Coal}}
+* {{BlockLink|Block of Iron}}及衍生方块<ref group="建">依次为[[铁栏杆]]、[[铁门]]、[[铁活板门]]、[[重质测重压力板]]和[[铁链]]</ref>
+* {{BlockLink|Block of Gold}}和{{BlockLink|Light Weighted Pressure Plate}}
+* {{BlockLink|Block of Redstone}}
+* {{BlockLink|Block of Emerald}}
+* {{BlockLink|Block of Lapis Lazuli}}
+* {{BlockLink|Block of Diamond}}
+* {{BlockLink|Block of Netherite}}
+* {{BlockLink|Block of Quartz}}及衍生方块<ref group="建">依次为[[石英楼梯]]、[[石英楼梯]]、[[石英台阶]]、[[雕纹石英块]]、[[石英砖]]、[[石英柱]]、[[平滑石英]]、[[平滑石英楼梯]]和[[平滑石英台阶]]</ref>
+* {{BlockLink|Block of Amethyst}}
+* {{BlockLink|Block of Copper}}及衍生方块<ref group="建">依次为[[雕纹铜块]]，[[铜格栅]]，[[切制铜块]]与对应的[[楼梯]]、[[台阶]]，[[铜栏杆]]，[[铜门]]，[[铜活板门]]，[[铜灯]]和[[铜链]]</ref>
+*  {{BlockLink|Block of Copper|link=none}}及衍生方块的全部氧化与涂蜡版本
+}}
+<references group="建" />
+}}
+
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.coloredBlocks}}'''|Cyan Wool|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+* {{BlockLink|Wool}}，所有颜色<ref group="色" name="color">依次为白色、淡灰色、灰色、黑色、棕色、红色、橙色、黄色、黄绿色、绿色、青色、淡蓝色、蓝色、紫色、品红色和粉红色</ref>
+* {{BlockLink|Carpets}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Terracotta}}
+* {{BlockLink|Colored Terracotta}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Concrete}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Concrete Powder}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Glazed Terracotta}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Glass}}
+* {{BlockLink|Tinted Glass}}
+* {{BlockLink|Stained Glass}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Glass Pane}}
+* {{BlockLink|Stained Glass Pane}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Shulker Box}}
+* {{BlockLink|Dyed Shulker Box|id=shulker boxes}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Beds}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Candle}}
+* {{BlockLink|Candle|text=染色蜡烛}}，所有颜色<ref group="色" name="color"/>
+* {{BlockLink|Banners}}，所有颜色<ref group="色" name="color"/>
+}}
+<references group="色" />
+}}
+
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.natural}}'''|Grass Block|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+* {{BlockLink|Grass Block}}
+* {{BlockLink|Podzol}}
+* {{BlockLink|Mycelium}}
+* {{BlockLink|Dirt Path}}
+* {{BlockLink|Dirt}}
+* {{BlockLink|Coarse Dirt}}
+* {{BlockLink|Rooted Dirt}}
+* {{BlockLink|Farmland}}
+* {{BlockLink|Mud}}
+* {{BlockLink|Clay}}
+* {{BlockLink|Gravel}}
+* {{BlockLink|Sand}}
+* {{BlockLink|Sandstone}}
+* {{BlockLink|Red Sand}}
+* {{BlockLink|Red Sandstone}}
+* {{BlockLink|Ice}}
+* {{BlockLink|Packed Ice}}
+* {{BlockLink|Blue Ice}}
+* {{BlockLink|Snow Block}}
+* {{BlockLink|Snow}}
+* {{BlockLink|Moss Block}}
+* {{BlockLink|Moss Carpet}}
+* {{BlockLink|Pale Moss Block}}
+* {{BlockLink|Pale Moss Carpet}}
+* {{BlockLink|Pale Hanging Moss}}
+* {{BlockLink|Stone}}
+* {{BlockLink|Deepslate}}
+* {{BlockLink|Granite}}
+* {{BlockLink|Diorite}}
+* {{BlockLink|Andesite}}
+* {{BlockLink|Calcite}}
+* {{BlockLink|Tuff}}
+* {{BlockLink|Dripstone Block}}
+* {{BlockLink|Pointed Dripstone}}
+* {{BlockLink|Prismarine}}
+* {{BlockLink|Cinnabar}}
+* {{BlockLink|Sulfur}}
+* {{BlockLink|Sulfur Spike}}
+* {{BlockLink|Potent Sulfur}}
+* {{BlockLink|Magma Block}}
+* {{BlockLink|Obsidian}}
+* {{BlockLink|Crying Obsidian}}
+* {{BlockLink|Netherrack}}
+* {{BlockLink|Crimson Nylium}}
+* {{BlockLink|Warped Nylium}}
+* {{BlockLink|Soul Sand}}
+* {{BlockLink|Soul Soil}}
+* {{BlockLink|Bone Block}}
+* {{BlockLink|Blackstone}}
+* {{BlockLink|Basalt}}
+* {{BlockLink|Smooth Basalt}}
+* {{BlockLink|End Stone}}
+* {{BlockLink|Coal Ore}}
+* {{BlockLink|Deepslate Coal Ore}}
+* {{BlockLink|Iron Ore}}
+* {{BlockLink|Deepslate Iron Ore}}
+* {{BlockLink|Copper Ore}}
+* {{BlockLink|Deepslate Copper Ore}}
+* {{BlockLink|Gold Ore}}
+* {{BlockLink|Deepslate Gold Ore}}
+* {{BlockLink|Redstone Ore}}
+* {{BlockLink|Deepslate Redstone Ore}}
+* {{BlockLink|Emerald Ore}}
+* {{BlockLink|Deepslate Emerald Ore}}
+* {{BlockLink|Lapis Lazuli Ore}}
+* {{BlockLink|Deepslate Lapis Lazuli Ore}}
+* {{BlockLink|Diamond Ore}}
+* {{BlockLink|Deepslate Diamond Ore}}
+* {{BlockLink|Nether Gold Ore}}
+* {{BlockLink|Nether Quartz Ore}}
+* {{BlockLink|Ancient Debris}}
+* {{BlockLink|Block of Raw Iron}}
+* {{BlockLink|Block of Raw Copper}}
+* {{BlockLink|Block of Raw Gold}}
+* {{BlockLink|Glowstone}}
+* {{BlockLink|Block of Amethyst}}
+* {{BlockLink|Budding Amethyst}}
+* {{BlockLink|Small Amethyst Bud}}
+* {{BlockLink|Medium Amethyst Bud}}
+* {{BlockLink|Large Amethyst Bud}}
+* {{BlockLink|Amethyst Cluster}}
+* {{BlockLink|Oak Log}}
+* {{BlockLink|Spruce Log}}
+* {{BlockLink|Birch Log}}
+* {{BlockLink|Jungle Log}}
+* {{BlockLink|Acacia Log}}
+* {{BlockLink|Dark Oak Log}}
+* {{BlockLink|Mangrove Log}}
+* {{BlockLink|Mangrove Roots}}
+* {{BlockLink|Muddy Mangrove Roots}}
+* {{BlockLink|Cherry Log}}
+* {{BlockLink|Pale Oak Log}}
+* {{BlockLink|Mushroom Stem}}
+* {{BlockLink|Crimson Stem}}
+* {{BlockLink|Warped Stem}}
+* {{BlockLink|Oak Leaves}}
+* {{BlockLink|Spruce Leaves}}
+* {{BlockLink|Birch Leaves}}
+* {{BlockLink|Jungle Leaves}}
+* {{BlockLink|Acacia Leaves}}
+* {{BlockLink|Dark Oak Leaves}}
+* {{BlockLink|Mangrove Leaves}}
+* {{BlockLink|Cherry Leaves}}
+* {{BlockLink|Pale Oak Leaves}}
+* {{BlockLink|Azalea Leaves}}
+* {{BlockLink|Flowering Azalea Leaves}}
+* {{BlockLink|Brown Mushroom Block}}
+* {{BlockLink|Red Mushroom Block}}
+* {{BlockLink|Nether Wart Block}}
+* {{BlockLink|Warped Wart Block}}
+* {{BlockLink|Shroomlight}}
+* {{BlockLink|Oak Sapling}}
+* {{BlockLink|Spruce Sapling}}
+* {{BlockLink|Birch Sapling}}
+* {{BlockLink|Jungle Sapling}}
+* {{BlockLink|Acacia Sapling}}
+* {{BlockLink|Dark Oak Sapling}}
+* {{BlockLink|Mangrove Propagule}}
+* {{BlockLink|Cherry Sapling}}
+* {{BlockLink|Pale Oak Sapling}}
+* {{BlockLink|Azalea}}
+* {{BlockLink|Flowering Azalea}}
+* {{BlockLink|Brown Mushroom}}
+* {{BlockLink|Red Mushroom}}
+* {{BlockLink|Crimson Fungus}}
+* {{BlockLink|Warped Fungus}}
+* {{BlockLink|Grass}}
+* {{BlockLink|Fern}}
+* {{BlockLink|Short Dry Grass}}
+* {{BlockLink|Bush}}
+* {{BlockLink|Dead Bush}}
+* {{BlockLink|Dandelion}}
+* {{BlockLink|Poppy}}
+* {{BlockLink|Blue Orchid}}
+* {{BlockLink|Allium}}
+* {{BlockLink|Azure Bluet}}
+* {{BlockLink|Red Tulip}}
+* {{BlockLink|Orange Tulip}}
+* {{BlockLink|White Tulip}}
+* {{BlockLink|Pink Tulip}}
+* {{BlockLink|Oxeye Daisy}}
+* {{BlockLink|Cornflower}}
+* {{BlockLink|Lily of the Valley}}
+* {{BlockLink|Torchflower}}
+* {{BlockLink|Cactus Flower}}
+* {{BlockLink|Closed Eyeblossom}}
+* {{BlockLink|Open Eyeblossom}}
+* {{BlockLink|Wither Rose}}
+* {{BlockLink|Pink Petals}}
+* {{BlockLink|Wildflowers}}
+* {{BlockLink|Leaf Litter}}
+* {{BlockLink|Spore Blossom}}
+* {{BlockLink|Firefly Bush}}
+* {{BlockLink|Bamboo}}
+* {{BlockLink|Sugar Cane}}
+* {{BlockLink|Cactus}}
+* {{BlockLink|Crimson Roots}}
+* {{BlockLink|Warped Roots}}
+* {{BlockLink|Nether Sprouts}}
+* {{BlockLink|Weeping Vines}}
+* {{BlockLink|Twisting Vines}}
+* {{BlockLink|Vines}}
+* {{BlockLink|Tall Grass}}
+* {{BlockLink|Large Fern}}
+* {{BlockLink|Tall Dry Grass}}
+* {{BlockLink|Sunflower}}
+* {{BlockLink|Lilac}}
+* {{BlockLink|Rose Bush}}
+* {{BlockLink|Peony}}
+* {{BlockLink|Pitcher Plant}}
+* {{BlockLink|Big Dripleaf}}
+* {{BlockLink|Small Dripleaf}}
+* {{BlockLink|Chorus Plant}}
+* {{BlockLink|Chorus Flower}}
+* {{BlockLink|Glow Lichen}}
+* {{BlockLink|Hanging Roots}}
+* {{BlockLink|Frogspawn}}
+* {{BlockLink|Turtle Egg}}
+* {{BlockLink|Sniffer Egg}}
+* {{BlockLink|Dried Ghast}}
+* {{ItemLink|Wheat Seeds}}
+* {{ItemLink|Cocoa Beans}}
+* {{ItemLink|Pumpkin Seeds}}
+* {{ItemLink|Melon Seeds}}
+* {{ItemLink|Beetroot Seeds}}
+* {{ItemLink|Torchflower Seeds}}
+* {{ItemLink|Pitcher Pod}}
+* {{ItemLink|Glow Berries}}
+* {{BlockLink|Sweet Berries}}
+* {{BlockLink|Nether Wart}}
+* {{BlockLink|Lily Pad}}
+* {{BlockLink|Seagrass}}
+* {{BlockLink|Sea Pickle}}
+* {{BlockLink|Kelp}}
+* {{BlockLink|Dried Kelp Block}}
+* {{BlockLink|Coral Blocks}}<ref group="自然" name="coral">顺序依次为管珊瑚、脑纹珊瑚、气泡珊瑚、火珊瑚和鹿角珊瑚</ref>
+* {{BlockLink|Dead Coral Blocks}}<ref group="自然" name="coral"/>
+* {{BlockLink|Coral}}<ref group="自然" name="coral"/>
+* {{BlockLink|Dead Coral}}<ref group="自然" name="coral"/>
+* {{BlockLink|Coral Fans}}<ref group="自然" name="coral"/>
+* {{BlockLink|Dead Coral Fans}}<ref group="自然" name="coral"/>
+* {{BlockLink|Sponge}}
+* {{BlockLink|Wet Sponge}}
+* {{BlockLink|Melon}}
+* {{BlockLink|Pumpkin}}
+* {{BlockLink|Carved Pumpkin}}
+* {{BlockLink|Jack o'Lantern}}
+* {{BlockLink|Hay Bale}}
+* {{BlockLink|Bee Nest}}
+* {{BlockLink|Honeycomb Block}}
+* {{BlockLink|Slime Block}}
+* {{BlockLink|Honey Block}}
+* {{BlockLink|Block of Resin}}
+* {{BlockLink|Ochre Froglight}}
+* {{BlockLink|Verdant Froglight}}
+* {{BlockLink|Pearlescent Froglight}}
+* {{BlockLink|Sculk}}
+* {{BlockLink|Sculk Vein}}
+* {{BlockLink|Sculk Catalyst}}
+* {{BlockLink|Sculk Shrieker}}
+* {{BlockLink|Sculk Sensor}}
+* {{BlockLink|Cobweb}}
+* {{BlockLink|Bedrock}}
+}}
+<references group="自然" />
+}}
+
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.functional}}'''|Oak Sign|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+* {{BlockLink|Torch}}
+* {{BlockLink|Soul Torch}}
+* {{BlockLink|Copper Torch}}
+* {{BlockLink|Redstone Torch}}
+* {{BlockLink|Lantern}}
+* {{BlockLink|Soul Lantern}}
+* {{BlockLink|Copper Lantern}}及全部氧化与涂蜡版本
+* {{BlockLink|Iron Chain}}
+* {{BlockLink|Copper Chain}}及全部氧化与涂蜡版本
+* {{BlockLink|End Rod}}
+* {{BlockLink|Sea Lantern}}
+* {{BlockLink|Redstone lamp}}
+* {{BlockLink|Copper Bulb}}及全部氧化与涂蜡版本
+* {{BlockLink|Glowstone}}
+* {{BlockLink|Shroomlight}}
+* {{BlockLink|Ochre Froglight}}
+* {{BlockLink|Verdant Froglight}}
+* {{BlockLink|Pearlescent Froglight}}
+* {{BlockLink|Crying obsidian}}
+* {{BlockLink|Glow Lichen}}
+* {{BlockLink|Magma Block}}
+* {{BlockLink|Crafting Table}}
+* {{BlockLink|Stonecutter}}
+* {{BlockLink|Cartography Table}}
+* {{BlockLink|Fletching Table}}
+* {{BlockLink|Smithing Table}}
+* {{BlockLink|Grindstone}}
+* {{BlockLink|Loom}}
+* {{BlockLink|Furnace}}
+* {{BlockLink|Smoker}}
+* {{BlockLink|Blast Furnace}}
+* {{BlockLink|Campfire}}
+* {{BlockLink|Soul Campfire}}
+* {{BlockLink|Anvil}}
+* {{BlockLink|Chipped Anvil}}
+* {{BlockLink|Damaged Anvil}}
+* {{BlockLink|Composter}}
+* {{BlockLink|Note Block}}
+* {{BlockLink|Jukebox}}
+* {{BlockLink|Enchanting Table}}
+* {{ItemLink|End Crystal}}
+* {{BlockLink|Brewing Stand}}
+* {{BlockLink|Cauldron}}
+* {{BlockLink|Bell}}
+* {{BlockLink|Beacon}}
+* {{BlockLink|Conduit}}
+* {{BlockLink|Lodestone}}
+* {{BlockLink|Ladder}}
+* {{BlockLink|Scaffolding}}
+* {{BlockLink|Bee Nest}}
+* {{BlockLink|Beehive}}
+* {{BlockLink|Suspicious Sand}}
+* {{BlockLink|Suspicious Gravel}}
+* {{BlockLink|Lightning Rod}}及全部氧化与涂蜡版本
+* {{BlockLink|Flower Pot}}
+* {{BlockLink|Decorated Pot}}
+* {{ItemLink|Armor Stand}}
+* {{BlockLink|Item Frame}}
+* {{BlockLink|Glow Item Frame}}
+* {{ItemLink|Painting}}，包含随机的画和生存可放置的所有种类
+* {{BlockLink|Bookshelf}}
+* {{BlockLink|Chiseled Bookshelf}}
+* {{BlockLink|Oak Shelf}}
+* {{BlockLink|Spruce Shelf}}
+* {{BlockLink|Birch Shelf}}
+* {{BlockLink|Jungle Shelf}}
+* {{BlockLink|Acacia Shelf}}
+* {{BlockLink|Dark Oak Shelf}}
+* {{BlockLink|Mangrove Shelf}}
+* {{BlockLink|Cherry Shelf}}
+* {{BlockLink|Pale Oak Shelf}}
+* {{BlockLink|Bamboo Shelf}}
+* {{BlockLink|Crimson Shelf}}
+* {{BlockLink|Warped Shelf}}
+* {{BlockLink|Lectern}}
+* {{BlockLink|Tinted Glass}}
+* {{BlockLink|Oak Sign}}
+* {{BlockLink|Oak Hanging Sign}}
+* {{BlockLink|Spruce Sign}}
+* {{BlockLink|Spruce Hanging Sign}}
+* {{BlockLink|Birch Sign}}
+* {{BlockLink|Birch Hanging Sign}}
+* {{BlockLink|Jungle Sign}}
+* {{BlockLink|Jungle Hanging Sign}}
+* {{BlockLink|Acacia Sign}}
+* {{BlockLink|Acacia Hanging Sign}}
+* {{BlockLink|Dark Oak Sign}}
+* {{BlockLink|Dark Oak Hanging Sign}}
+* {{BlockLink|Mangrove Sign}}
+* {{BlockLink|Mangrove Hanging Sign}}
+* {{BlockLink|Cherry Sign}}
+* {{BlockLink|Cherry Hanging Sign}}
+* {{BlockLink|Pale Oak Sign}}
+* {{BlockLink|Pale Oak Hanging Sign}}
+* {{BlockLink|Bamboo Sign}}
+* {{BlockLink|Bamboo Hanging Sign}}
+* {{BlockLink|Crimson Sign}}
+* {{BlockLink|Crimson Hanging Sign}}
+* {{BlockLink|Warped Sign}}
+* {{BlockLink|Warped Hanging Sign}}
+* {{BlockLink|Chest}}
+* {{BlockLink|Copper Chest}}及全部氧化与涂蜡版本
+* {{BlockLink|Barrel}}
+* {{BlockLink|Ender Chest}}
+* {{BlockLink|Shulker Box}}
+* {{BlockLink|Dyed Shulker Box|id=shulker boxes}}，所有颜色<ref group="功能" name="color">依次为白色、淡灰色、灰色、棕色、红色、橙色、黄色、黄绿色、绿色、青色、淡蓝色、蓝色、紫色、品红色和粉红色</ref>
+* {{BlockLink|Respawn Anchor}}
+* {{BlockLink|Beds}}，所有颜色<ref group="功能" name="color"/>
+* {{BlockLink|Candle}}
+* {{BlockLink|Candle|text=染色蜡烛}}，所有颜色<ref group="功能" name="color"/>
+* {{BlockLink|Banners}}，所有颜色<ref group="功能" name="color"/>
+* {{BlockLink|Ominous Banner}}
+* {{BlockLink|Skeleton Skull}}
+* {{BlockLink|Wither Skeleton Skull}}
+* {{BlockLink|Player Head}}
+* {{BlockLink|Zombie Head}}
+* {{BlockLink|Creeper Head}}
+* {{BlockLink|Piglin Head}}
+* {{BlockLink|Dragon Head}}
+* {{BlockLink|Dragon Egg}}
+* {{BlockLink|End Portal Frame}}
+* {{BlockLink|Vault}}
+* {{ItemLink|Eye of Ender}}
+* {{BlockLink|Copper Golem Statue}}及全部氧化与涂蜡版本
+* {{BlockLink|Infested Stone}}
+* {{BlockLink|Infested Cobblestone}}
+* {{BlockLink|Infested Stone Bricks}}
+* {{BlockLink|Infested Mossy Stone Bricks}}
+* {{BlockLink|Infested Cracked Stone Bricks}}
+* {{BlockLink|Infested Chiseled Stone Bricks}}
+* {{BlockLink|Infested Deepslate}}
+}}
+<references group="功能" />
+}}
+
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.redstone}}'''|Redstone Dust|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+* {{ItemLink|Redstone Dust}}
+* {{BlockLink|Redstone Torch}}
+* {{BlockLink|Block of Redstone}}
+* {{ItemLink|Redstone Repeater}}
+* {{ItemLink|Redstone Comparator}}
+* {{BlockLink|Target}}
+* {{BlockLink|Waxed Copper Bulb}}及全部氧化版本
+* {{BlockLink|Lever}}
+* {{BlockLink|Oak Button}}
+* {{BlockLink|Stone Button}}
+* {{BlockLink|Oak Pressure Plate}}
+* {{BlockLink|Stone Pressure Plate}}
+* {{BlockLink|Light Weighted Pressure Plate}}
+* {{BlockLink|Heavy Weighted Pressure Plate}}
+* {{BlockLink|Sculk Sensor}}
+* {{BlockLink|Calibrated Sculk Sensor}}
+* {{BlockLink|Sculk Shrieker}}
+* {{BlockLink|Block of Amethyst}}
+* {{BlockLink|White Wool}}
+* {{BlockLink|Tripwire Hook}}
+* {{ItemLink|String}}
+* {{BlockLink|Lectern}}
+* {{BlockLink|Daylight Detector}}
+* {{BlockLink|Waxed Lightning Rod}}
+* {{BlockLink|Piston}}
+* {{BlockLink|Sticky Piston}}
+* {{BlockLink|Slime Block}}
+* {{BlockLink|Honey Block}}
+* {{BlockLink|Dispenser}}
+* {{BlockLink|Dropper}}
+* {{BlockLink|Crafter}}
+* {{BlockLink|Hopper}}
+* {{BlockLink|Chest}}
+* {{BlockLink|Waxed Copper Chest}}
+* {{BlockLink|Barrel}}
+* {{BlockLink|Chiseled Bookshelf}}
+* {{BlockLink|Oak Shelf}}
+* {{BlockLink|Furnace}}
+* {{BlockLink|Trapped Chest}}
+* {{BlockLink|Jukebox}}
+* {{BlockLink|Decorated Pot}}
+* {{BlockLink|Observer}}
+* {{BlockLink|Note Block}}
+* {{BlockLink|Composter}}
+* {{BlockLink|Cauldron}}
+* {{BlockLink|Rail}}
+* {{BlockLink|Powered Rail}}
+* {{BlockLink|Detector Rail}}
+* {{BlockLink|Activator Rail}}
+* {{ItemLink|Minecart}}
+* {{ItemLink|Minecart with Hopper}}
+* {{ItemLink|Minecart with Furnace}}
+* {{ItemLink|Minecart with Chest}}
+* {{ItemLink|Minecart with TNT}}
+* {{ItemLink|Oak boat with chest}}
+* {{ItemLink|Bamboo raft with chest}}
+* {{BlockLink|Oak Door}}
+* {{BlockLink|Iron Door}}
+* {{BlockLink|Oak Fence Gate}}
+* {{BlockLink|Oak Trapdoor}}
+* {{BlockLink|Iron Trapdoor}}
+* {{BlockLink|TNT}}
+* {{BlockLink|Redstone Lamp}}
+* {{BlockLink|Bell}}
+* {{BlockLink|Big Dripleaf}}
+* {{ItemLink|Armor Stand}}
+* {{BlockLink|Redstone Ore}}
+}}
+}}
+
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.tools}}'''|Diamond Pickaxe|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+* {{ItemLink|Wooden Shovel}}
+* {{ItemLink|Wooden Pickaxe}}
+* {{ItemLink|Wooden Axe}}
+* {{ItemLink|Wooden Hoe}}
+* {{ItemLink|Stone Shovel}}
+* {{ItemLink|Stone Pickaxe}}
+* {{ItemLink|Stone Axe}}
+* {{ItemLink|Stone Hoe}}
+* {{ItemLink|Copper Shovel}}
+* {{ItemLink|Copper Pickaxe}}
+* {{ItemLink|Copper Axe}}
+* {{ItemLink|Copper Hoe}}
+* {{ItemLink|Iron Shovel}}
+* {{ItemLink|Iron Pickaxe}}
+* {{ItemLink|Iron Axe}}
+* {{ItemLink|Iron Hoe}}
+* {{ItemLink|Golden Shovel}}
+* {{ItemLink|Golden Pickaxe}}
+* {{ItemLink|Golden Axe}}
+* {{ItemLink|Golden Hoe}}
+* {{ItemLink|Diamond Shovel}}
+* {{ItemLink|Diamond Pickaxe}}
+* {{ItemLink|Diamond Axe}}
+* {{ItemLink|Diamond Hoe}}
+* {{ItemLink|Netherite Shovel}}
+* {{ItemLink|Netherite Pickaxe}}
+* {{ItemLink|Netherite Axe}}
+* {{ItemLink|Netherite Hoe}}
+* {{ItemLink|Bucket}}
+* {{ItemLink|Water Bucket}}
+* {{ItemLink|Bucket of Cod}}
+* {{ItemLink|Bucket of Salmon}}
+* {{ItemLink|Bucket of Pufferfish}}
+* {{ItemLink|Bucket of Tropical Fish}}
+* {{ItemLink|Bucket of Axolotl}}
+* {{ItemLink|Bucket of Tadpole}}
+* {{ItemLink|Bucket of Sulfur Cube}}
+* {{ItemLink|Lava Bucket}}
+* {{ItemLink|Powder Snow Bucket}}
+* {{ItemLink|Milk Bucket}}
+* {{ItemLink|Fishing Rod}}
+* {{ItemLink|Flint and Steel}}
+* {{ItemLink|Fire Charge}}
+* {{ItemLink|Bone Meal}}
+* {{ItemLink|Shears}}
+* {{ItemLink|Brush}}
+* {{ItemLink|Name Tag}}
+* {{ItemLink|Lead}}
+* {{ItemLink|Bundles}}
+* {{ItemLink|Compass}}
+* {{ItemLink|Recovery Compass}}
+* {{ItemLink|Clock}}
+* {{ItemLink|Spyglass}}
+* {{ItemLink|Empty Map}}
+* {{ItemLink|Book and Quill}}
+* {{ItemLink|Wind Charge}}
+* {{ItemLink|Ender Pearl}}
+* {{ItemLink|Eye of Ender}}
+* {{ItemLink|Elytra}}
+* {{ItemLink|Firework Rocket}}，无效果，所有飞行时间
+* {{ItemLink|Saddle}}
+* {{ItemLink|Harness}}，所有颜色<ref group="工具" name="color">依次为白色、淡灰色、灰色、棕色、红色、橙色、黄色、黄绿色、绿色、青色、淡蓝色、蓝色、紫色、品红色和粉红色</ref>
+* {{ItemLink|Carrot on a Stick}}
+* {{ItemLink|Warped Fungus on a Stick}}
+* {{ItemLink|Oak Boat}}
+* {{ItemLink|Oak Boat with Chest}}
+* {{ItemLink|Spruce Boat}}
+* {{ItemLink|Spruce Boat with Chest}}
+* {{ItemLink|Birch Boat}}
+* {{ItemLink|Birch Boat with Chest}}
+* {{ItemLink|Jungle Boat}}
+* {{ItemLink|Jungle Boat with Chest}}
+* {{ItemLink|Acacia Boat}}
+* {{ItemLink|Acacia Boat with Chest}}
+* {{ItemLink|Dark Oak Boat}}
+* {{ItemLink|Dark Oak Boat with Chest}}
+* {{ItemLink|Mangrove Boat}}
+* {{ItemLink|Mangrove Boat with Chest}}
+* {{ItemLink|Cherry Boat}}
+* {{ItemLink|Cherry Boat with Chest}}
+* {{ItemLink|Pale Oak Boat}}
+* {{ItemLink|Pale Oak Boat with Chest}}
+* {{ItemLink|Bamboo Raft}}
+* {{ItemLink|Bamboo Raft with Chest}}
+* {{BlockLink|Rail}}
+* {{BlockLink|Powered Rail}}
+* {{BlockLink|Detector Rail}}
+* {{BlockLink|Activator Rail}}
+* {{ItemLink|Minecart}}
+* {{ItemLink|Minecart with Hopper}}
+* {{ItemLink|Minecart with Furnace}}
+* {{ItemLink|Minecart with Chest}}
+* {{ItemLink|Minecart with TNT}}
+* {{ItemLink|Goat Horn}}，所有类型
+* {{ItemLink|Music Disc 13|音乐唱片（13）}}
+* {{ItemLink|Music Disc Cat|音乐唱片（cat）}}
+* {{ItemLink|Music Disc Blocks|音乐唱片（blocks）}}
+* {{ItemLink|Music Disc Chirp|音乐唱片（chirp）}}
+* {{ItemLink|Music Disc Far|音乐唱片（far）}}
+* {{ItemLink|Music Disc Mall|音乐唱片（mall）}}
+* {{ItemLink|Music Disc Mellohi|音乐唱片（mellohi）}}
+* {{ItemLink|Music Disc Stal|音乐唱片（stal）}}
+* {{ItemLink|Music Disc Strad|音乐唱片（strad）}}
+* {{ItemLink|Music Disc Ward|音乐唱片（ward）}}
+* {{ItemLink|Music Disc 11|音乐唱片（11）}}
+* {{ItemLink|Music Disc Creator Music Box|link=音乐唱片Creator（八音盒）|音乐唱片（Creator (Music Box)）}}
+* {{ItemLink|Music Disc Wait|音乐唱片（wait）}}
+* {{ItemLink|Music Disc Creator|音乐唱片（Creator）}}
+* {{ItemLink|Music Disc Precipice|音乐唱片（Precipice）}}
+* {{ItemLink|Music Disc Otherside|音乐唱片（otherside）}}
+* {{ItemLink|Music Disc Relic|音乐唱片（Relic）}}
+* {{ItemLink|Music Disc 5|音乐唱片（5）}}
+* {{ItemLink|Music Disc Pigstep|音乐唱片（Pigstep）}}
+* {{ItemLink|Music Disc Tears|音乐唱片（Tears）}}
+* {{ItemLink|Music Disc Lava Chicken|音乐唱片（Lava Chicken）}}
+}}
+<references group="工具" />
+}}
+
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.combat}}'''|Netherite Sword|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+* {{ItemLink|Wooden Sword}}
+* {{ItemLink|Stone Sword}}
+* {{ItemLink|Copper Sword}}
+* {{ItemLink|Iron Sword}}
+* {{ItemLink|Golden Sword}}
+* {{ItemLink|Diamond Sword}}
+* {{ItemLink|Netherite Sword}}
+* {{ItemLink|Wooden Spear}}
+* {{ItemLink|Stone Spear}}
+* {{ItemLink|Copper Spear}}
+* {{ItemLink|Iron Spear}}
+* {{ItemLink|Golden Spear}}
+* {{ItemLink|Diamond Spear}}
+* {{ItemLink|Netherite Spear}}
+* {{ItemLink|Wooden Axe}}
+* {{ItemLink|Stone Axe}}
+* {{ItemLink|Copper Axe}}
+* {{ItemLink|Iron Axe}}
+* {{ItemLink|Golden Axe}}
+* {{ItemLink|Diamond Axe}}
+* {{ItemLink|Netherite Axe}}
+* {{ItemLink|Trident}}
+* {{ItemLink|Mace}}
+* {{ItemLink|Shield}}
+* {{ItemLink|Leather Cap}}
+* {{ItemLink|Leather Tunic}}
+* {{ItemLink|Leather Pants}}
+* {{ItemLink|Leather Boots}}
+* {{ItemLink|Copper Helmet}}
+* {{ItemLink|Copper Chestplate}}
+* {{ItemLink|Copper Leggings}}
+* {{ItemLink|Copper Boots}}
+* {{ItemLink|Chainmail Helmet}}
+* {{ItemLink|Chainmail Chestplate}}
+* {{ItemLink|Chainmail Leggings}}
+* {{ItemLink|Chainmail Boots}}
+* {{ItemLink|Iron Helmet}}
+* {{ItemLink|Iron Chestplate}}
+* {{ItemLink|Iron Leggings}}
+* {{ItemLink|Iron Boots}}
+* {{ItemLink|Golden Helmet}}
+* {{ItemLink|Golden Chestplate}}
+* {{ItemLink|Golden Leggings}}
+* {{ItemLink|Golden Boots}}
+* {{ItemLink|Diamond Helmet}}
+* {{ItemLink|Diamond Chestplate}}
+* {{ItemLink|Diamond Leggings}}
+* {{ItemLink|Diamond Boots}}
+* {{ItemLink|Netherite Helmet}}
+* {{ItemLink|Netherite Chestplate}}
+* {{ItemLink|Netherite Leggings}}
+* {{ItemLink|Netherite Boots}}
+* {{ItemLink|Turtle Shell}}
+* {{ItemLink|Leather Horse Armor}}
+* {{ItemLink|Copper Horse Armor}}
+* {{ItemLink|Iron Horse Armor}}
+* {{ItemLink|Golden Horse Armor}}
+* {{ItemLink|Diamond Horse Armor}}
+* {{ItemLink|Netherite Horse Armor}}
+* {{ItemLink|Wolf Armor}}
+* {{ItemLink|Copper Nautilus Armor}}
+* {{ItemLink|Iron Nautilus Armor}}
+* {{ItemLink|Golden Nautilus Armor}}
+* {{ItemLink|Diamond Nautilus Armor}}
+* {{ItemLink|Netherite Nautilus Armor}}
+* {{ItemLink|Totem of Undying}}
+* {{BlockLink|TNT}}
+* {{ItemLink|End Crystal}}
+* {{ItemLink|Snowball}}
+* {{ItemLink|Egg}}
+* {{ItemLink|Brown Egg}}
+* {{ItemLink|Blue Egg}}
+* {{ItemLink|Wind Charge}}
+* {{ItemLink|Bow}}
+* {{ItemLink|Crossbow}}
+* {{ItemLink|Firework Rocket}}，无效果，所有飞行时间
+* {{ItemLink|Arrow}}
+* {{ItemLink|Spectral Arrow}}
+* {{ItemLink|Tipped Arrow}}，除不可合成的药箭外的所有药箭
+}}
+}}
+
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.foodAndDrink}}'''|Golden Apple|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+* {{ItemLink|Apple}}
+* {{ItemLink|Golden Apple}}
+* {{ItemLink|Enchanted Golden Apple}}
+* {{ItemLink|Melon Slice}}
+* {{ItemLink|Sweet Berries}}
+* {{ItemLink|Glow Berries}}
+* {{ItemLink|Chorus Fruit}}
+* {{ItemLink|Carrot}}
+* {{ItemLink|Golden Carrot}}
+* {{ItemLink|Potato}}
+* {{ItemLink|Baked Potato}}
+* {{ItemLink|Poisonous Potato}}
+* {{ItemLink|Beetroot}}
+* {{BlockLink|Golden Dandelion}}
+* {{ItemLink|Dried Kelp}}
+* {{ItemLink|Raw Beef}}
+* {{ItemLink|Steak}}
+* {{ItemLink|Raw Porkchop}}
+* {{ItemLink|Cooked Porkchop}}
+* {{ItemLink|Raw Mutton}}
+* {{ItemLink|Cooked Mutton}}
+* {{ItemLink|Raw Chicken}}
+* {{ItemLink|Cooked Chicken}}
+* {{ItemLink|Raw Rabbit}}
+* {{ItemLink|Cooked Rabbit}}
+* {{ItemLink|Raw Cod}}
+* {{ItemLink|Cooked Cod}}
+* {{ItemLink|Raw Salmon}}
+* {{ItemLink|Cooked Salmon}}
+* {{ItemLink|Tropical Fish}}
+* {{ItemLink|Pufferfish}}
+* {{ItemLink|Bread}}
+* {{ItemLink|Cookie}}
+* {{ItemLink|Cake}}
+* {{ItemLink|Pumpkin Pie}}
+* {{ItemLink|Rotten Flesh}}
+* {{ItemLink|Spider Eye}}
+* {{ItemLink|Mushroom Stew}}
+* {{ItemLink|Beetroot Soup}}
+* {{ItemLink|Rabbit Stew}}
+* {{ItemLink|Suspicious Stew}}，可合成的所有类型
+* {{ItemLink|Milk Bucket}}
+* {{ItemLink|Honey Bottle}}
+* {{ItemLink|Ominous Bottle}}，所有等级
+* {{ItemLink|Potion}}，除不可合成的药水外的所有药水
+* {{ItemLink|Splash Potion}}，除不可合成的喷溅型药水外的所有喷溅型药水
+* {{ItemLink|Lingering Potion}}，除不可合成的滞留型药水外的所有滞留型药水
+}}
+}}
+
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.ingredients}}'''|Iron Ingot|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+
+* {{ItemLink|Coal}}
+* {{ItemLink|Charcoal}}
+* {{ItemLink|Raw Iron}}
+* {{ItemLink|Raw Copper}}
+* {{ItemLink|Raw Gold}}
+* {{ItemLink|Emerald}}
+* {{ItemLink|Lapis Lazuli}}
+* {{ItemLink|Diamond}}
+* {{BlockLink|Ancient Debris}}
+* {{ItemLink|Nether Quartz}}
+* {{ItemLink|Amethyst Shard}}
+* {{ItemLink|Copper Nugget}}
+* {{ItemLink|Iron Nugget}}
+* {{ItemLink|Gold Nugget}}
+* {{ItemLink|Copper Ingot}}
+* {{ItemLink|Iron Ingot}}
+* {{ItemLink|Gold Ingot}}
+* {{ItemLink|Netherite Scrap}}
+* {{ItemLink|Netherite Ingot}}
+* {{ItemLink|Stick}}
+* {{ItemLink|Flint}}
+* {{ItemLink|Wheat}}
+* {{ItemLink|Bone}}
+* {{ItemLink|Bone Meal}}
+* {{ItemLink|String}}
+* {{ItemLink|Feather}}
+* {{ItemLink|Snowball}}
+* {{ItemLink|Egg}}
+* {{ItemLink|Brown Egg}}
+* {{ItemLink|Blue Egg}}
+* {{ItemLink|Leather}}
+* {{ItemLink|Rabbit Hide}}
+* {{ItemLink|Honeycomb}}
+* {{ItemLink|Resin Clump}}
+* {{ItemLink|Ink Sac}}
+* {{ItemLink|Glow Ink Sac}}
+* {{ItemLink|Scute}}
+* {{ItemLink|Slimeball}}
+* {{ItemLink|Clay Ball}}
+* {{ItemLink|Prismarine Shard}}
+* {{ItemLink|Prismarine Crystals}}
+* {{ItemLink|Nautilus Shell}}
+* {{ItemLink|Heart of the Sea}}
+* {{ItemLink|Fire Charge}}
+* {{ItemLink|Blaze Rod}}
+* {{ItemLink|Breeze Rod}}
+* {{BlockLink|Heavy Core}}
+* {{ItemLink|Nether Star}}
+* {{ItemLink|Ender Pearl}}
+* {{ItemLink|Eye of Ender}}
+* {{ItemLink|Shulker Shell}}
+* {{ItemLink|Popped Chorus Fruit}}
+* {{ItemLink|Echo Shard}}
+* {{ItemLink|Disc Fragment 5}}
+* {{ItemLink|White Dye}}
+* {{ItemLink|Light Gray Dye}}
+* {{ItemLink|Gray Dye}}
+* {{ItemLink|Black Dye}}
+* {{ItemLink|Brown Dye}}
+* {{ItemLink|Red Dye}}
+* {{ItemLink|Orange Dye}}
+* {{ItemLink|Yellow Dye}}
+* {{ItemLink|Lime Dye}}
+* {{ItemLink|Green Dye}}
+* {{ItemLink|Cyan Dye}}
+* {{ItemLink|Light Blue Dye}}
+* {{ItemLink|Blue Dye}}
+* {{ItemLink|Purple Dye}}
+* {{ItemLink|Magenta Dye}}
+* {{ItemLink|Pink Dye}}
+* {{ItemLink|Bowl}}
+* {{ItemLink|Brick}}
+* {{ItemLink|Nether Brick}}
+* {{ItemLink|Resin Brick}}
+* {{ItemLink|Paper}}
+* {{ItemLink|Book}}
+* {{ItemLink|Firework Star}}（无效果）
+* {{ItemLink|Glass Bottle}}
+* {{ItemLink|Nether Wart}}
+* {{ItemLink|Redstone Dust}}
+* {{ItemLink|Glowstone Dust}}
+* {{ItemLink|Gunpowder}}
+* {{ItemLink|Dragon's Breath}}
+* {{ItemLink|Fermented Spider Eye}}
+* {{ItemLink|Blaze Powder}}
+* {{ItemLink|Sugar}}
+* {{ItemLink|Rabbit's Foot}}
+* {{ItemLink|Glistering Melon Slice}}
+* {{ItemLink|Spider Eye}}
+* {{ItemLink|Pufferfish}}
+* {{ItemLink|Magma Cream}}
+* {{ItemLink|Golden Carrot}}
+* {{ItemLink|Ghast Tear}}
+* {{ItemLink|Turtle Shell}}
+* {{ItemLink|Phantom Membrane}}
+* {{ItemLink|Field Masoned Banner Pattern}}
+* {{ItemLink|Bordure Indented Banner Pattern}}
+* {{ItemLink|Flower Charge Banner Pattern}}
+* {{ItemLink|Creeper Charge Banner Pattern}}
+* {{ItemLink|Skull Charge Banner Pattern}}
+* {{ItemLink|Thing Banner Pattern}}
+* {{ItemLink|Globe Banner Pattern}}
+* {{ItemLink|Snout Banner Pattern}}
+* {{ItemLink|Flow Banner Pattern}}
+* {{ItemLink|Guster Banner Pattern}}
+* {{ItemLink|Angler Pottery Sherd}}
+* {{ItemLink|Archer Pottery Sherd}}
+* {{ItemLink|Arms Up Pottery Sherd}}
+* {{ItemLink|Blade Pottery Sherd}}
+* {{ItemLink|Brewer Pottery Sherd}}
+* {{ItemLink|Burn Pottery Sherd}}
+* {{ItemLink|Danger Pottery Sherd}}
+* {{ItemLink|Explorer Pottery Sherd}}
+* {{ItemLink|Flow Pottery Sherd}}
+* {{ItemLink|Friend Pottery Sherd}}
+* {{ItemLink|Guster Pottery Sherd}}
+* {{ItemLink|Heart Pottery Sherd}}
+* {{ItemLink|Heartbreak Pottery Sherd}}
+* {{ItemLink|Howl Pottery Sherd}}
+* {{ItemLink|Miner Pottery Sherd}}
+* {{ItemLink|Mourner Pottery Sherd}}
+* {{ItemLink|Plenty Pottery Sherd}}
+* {{ItemLink|Prize Pottery Sherd}}
+* {{ItemLink|Sheaf Pottery Sherd}}
+* {{ItemLink|Shelter Pottery Sherd}}
+* {{ItemLink|Skull Pottery Sherd}}
+* {{ItemLink|Snort Pottery Sherd}}
+* {{ItemLink|Scrape Pottery Sherd}}
+* {{ItemLink|Netherite Upgrade Smithing Template}}
+* {{ItemLink|Sentry Armor Trim Smithing Template}}
+* {{ItemLink|Vex Armor Trim Smithing Template}}
+* {{ItemLink|Wild Armor Trim Smithing Template}}
+* {{ItemLink|Coast Armor Trim Smithing Template}}
+* {{ItemLink|Dune Armor Trim Smithing Template}}
+* {{ItemLink|Wayfinder Armor Trim Smithing Template}}
+* {{ItemLink|Raiser Armor Trim Smithing Template}}
+* {{ItemLink|Shaper Armor Trim Smithing Template}}
+* {{ItemLink|Host Armor Trim Smithing Template}}
+* {{ItemLink|Ward Armor Trim Smithing Template}}
+* {{ItemLink|Silence Armor Trim Smithing Template}}
+* {{ItemLink|Tide Armor Trim Smithing Template}}
+* {{ItemLink|Snout Armor Trim Smithing Template}}
+* {{ItemLink|Rib Armor Trim Smithing Template}}
+* {{ItemLink|Eye Armor Trim Smithing Template}}
+* {{ItemLink|Spire Armor Trim Smithing Template}}
+* {{ItemLink|Bolt Armor Trim Smithing Template}}
+* {{ItemLink|Flow Armor Trim Smithing Template}}
+* {{ItemLink|Bottle o' Enchanting}}
+* {{ItemLink|Trial Key}}
+* {{ItemLink|Ominous Trial Key}}
+* {{ItemLink|Enchanted Book}}，最高等级，所有类型
+}}
+}}
+
+{{Collapse
+|title={{InvSprite|text='''{{tp|itemGroup.spawnEggs}}'''|Creeper Spawn Egg|scale=0.5}}
+|content={{columns-list|colwidth=18em|
+* {{BlockLink|Monster Spawner}}
+* {{BlockLink|Trial Spawner}}
+* {{BlockLink|Creaking Heart}}
+* 所有{{ItemLink|Spawn Egg}}，末影龙和凋灵除外
+}}
+}}
+
+{{Collapse
+|title=[[File:Invicon Command Block.gif|16px|link=]] '''{{tp|itemGroup.op}}'''（仅当打开{{tp|options.operatorItemsTab}}[[选项]]时出现）
+|content={{columns-list|colwidth=18em|
+* {{BlockLink|Command Block}}
+* {{BlockLink|Chain Command Block}}
+* {{BlockLink|Repeating Command Block}}
+* {{ItemLink|Minecart with Command Block}}
+* {{BlockLink|Jigsaw Block}}
+* {{BlockLink|Structure Block}}
+* {{BlockLink|Structure Void}}
+* {{BlockLink|Barrier}}
+* {{ItemLink|Debug stick}}
+* {{BlockLink|Test Instance Block}}
+* {{BlockLink|Test Blocks}}，所有模式
+* {{BlockLink|Light}}，所有亮度等级
+* {{ItemLink|Painting}}，生存不可放置的所有种类
+}}
+}}
+
+=== 基岩版 ===
+共有4个创造分类。
+
+<!--按照顺序整理，无子分类不合并，若无必要不展开子分类 -->
+{{Collapse
+|title=[[File:BE icon recipe construction.png|class=pixel-image]] '''建筑'''
+|content={{columns-list|colwidth=18em|
+* {{BlockLink|Planks}}，所有类型，包括{{BlockLink|Bamboo Mosaic}}
+* {{BlockLink|Walls}}，所有类型
+* {{BlockLink|Fences}}，所有类型
+* {{BlockLink|Fence Gates}}，所有类型
+* {{BlockLink|Stairs}}，所有类型
+* {{BlockLink|Doors}}，所有类型
+* {{BlockLink|Trapdoors}}，所有类型
+* {{blockLink|Iron Bars|link=none|text=栏杆}}
+** {{BlockLink|Iron Bars}}
+** {{BlockLink|Copper Bars}}，所有类型
+* {{BlockLink|Glass}}，所有颜色，包括{{BlockLink|Tinted Glass}}
+* {{BlockLink|Glass Pane}}，所有颜色
+* {{BlockLink|Ladder}}
+* {{BlockLink|Scaffolding}}
+* {{BlockLink|Bricks}}
+* {{BlockLink|Slabs}}，除[[石化橡木台阶]]外的所有类型
+* {{BlockLink|Stone Bricks|link=none|text=砖类}}
+** {{BlockLink|Stone Bricks}}
+** {{BlockLink|Mossy Stone Bricks}}
+** {{BlockLink|Cracked Stone Bricks}}
+** {{BlockLink|Chiseled Stone Bricks}}
+** {{BlockLink|Smooth Stone}}
+** {{BlockLink|End Stone Bricks}}
+** {{BlockLink|Polished Blackstone Bricks}}
+** {{BlockLink|Cracked Polished Blackstone Bricks}}
+** {{BlockLink|Gilded Blackstone}}
+** {{BlockLink|Chiseled Polished Blackstone}}
+** {{BlockLink|Deepslate Tiles}}
+** {{BlockLink|Cracked Deepslate Tiles}}
+** {{BlockLink|Deepslate Bricks}}
+** {{BlockLink|Tuff Bricks}}
+** {{BlockLink|Cracked Deepslate Bricks}}
+** {{BlockLink|Chiseled Deepslate}}
+** {{BlockLink|Chiseled Tuff}}
+** {{BlockLink|Chiseled Tuff Bricks}}
+** {{BlockLink|Cinnabar Bricks}}
+** {{BlockLink|Chiseled Cinnabar}}
+** {{BlockLink|Sulfur Bricks}}
+** {{BlockLink|Chiseled Sulfur}}
+* {{BlockLink|Cobblestone}}
+* {{BlockLink|Mossy Cobblestone}}
+* {{BlockLink|Cobbled Deepslate}}
+* {{BlockLink|Sandstone}}，所有变种
+* {{BlockLink|Block of Coal}}
+* {{BlockLink|Dried Kelp Block}}
+* {{BlockLink|Block of Copper}}，所有类型
+* {{BlockLink|Block of Iron}}
+* {{BlockLink|Block of Gold}}
+* {{BlockLink|Block of Emerald}}
+* {{BlockLink|Block of Diamond}}
+* {{BlockLink|Block of Lapis Lazuli}}
+* {{BlockLink|Block of Raw Iron}}
+* {{BlockLink|Block of Raw Copper}}
+* {{BlockLink|Block of Raw Gold}}
+* {{BlockLink|Block of Quartz}}
+* {{BlockLink|Quartz Bricks}}
+* {{BlockLink|Quartz Pillar}}
+* {{BlockLink|Chiseled Quartz Block}}
+* {{BlockLink|Smooth Quartz Block}}
+* {{BlockLink|Prismarine}}
+* {{BlockLink|Prismarine Bricks}}
+* {{BlockLink|Dark Prismarine}}
+* {{BlockLink|Slime Block}}
+* {{BlockLink|Honey Block}}
+* {{BlockLink|Honeycomb Block}}
+* {{BlockLink|Block of Resin}}
+* {{BlockLink|Hay Bale}}
+* {{BlockLink|Bone Block}}
+* {{BlockLink|Resin Bricks}}
+* {{BlockLink|Chiseled Resin Bricks}}
+* {{BlockLink|Nether Bricks}}
+* {{BlockLink|Red Nether Bricks}}
+* {{BlockLink|Chiseled Nether Bricks}}
+* {{BlockLink|Cracked Nether Bricks}}
+* {{BlockLink|Block of Netherite}}
+* {{BlockLink|Lodestone}}
+* {{BlockLink|Wool}}，所有颜色
+* {{BlockLink|Carpets}}，所有颜色
+* {{BlockLink|Concrete Powder}}，所有颜色
+* {{BlockLink|Concrete}}，所有颜色
+* {{BlockLink|Terracotta}}，及所有颜色
+* {{BlockLink|Glazed Terracotta}}，所有颜色
+* {{BlockLink|Purpur Block}}
+* {{BlockLink|Purpur Pillar}}
+* {{BlockLink|Packed Mud}}
+* {{BlockLink|Mud Bricks}}
+* {{BlockLink|Element|id=hydrogen}}，所有类型（若开启“Education Edition”选项）
+}}
+}}
+{{Collapse
+|title=[[File:BE icon recipe equipment.png|class=pixel-image]] '''{{tr|装备|用品}}'''
+|content={{columns-list|colwidth=18em|
+* {{ItemLink|Helmet|id=leather-helmet}}，所有类型
+* {{ItemLink|Chestplate|id=leather-chestplate}}，所有类型
+* {{ItemLink|Leggings|id=leather-leggings}}，所有类型
+* {{ItemLink|Boots|id=leather-boots}}，所有类型
+* {{ItemLink|Sword|id=wooden-sword}}，所有类型
+* {{ItemLink|Spear|id=wooden-spear}}，所有类型
+* {{ItemLink|Axe|id=wooden-axe}}，所有类型
+* {{ItemLink|Pickaxe|id=wooden-pickaxe}}，所有类型
+* {{ItemLink|Shovel|id=wooden-shovel}}，所有类型
+* {{ItemLink|Hoe|id=wooden-hoe}}，所有类型
+* {{ItemLink|Bow}}
+* {{ItemLink|Crossbow}}
+* {{ItemLink|Mace}}
+* {{ItemLink|Trident}}
+* {{ItemLink|Arrow}}，所有类型
+* {{ItemLink|Shield}}
+* {{ItemLink|Cooked Chicken|link=none|text=熟食}}
+** {{ItemLink|Cooked Chicken}}
+** {{ItemLink|Cooked Porkchop}}
+** {{ItemLink|Steak}}
+** {{ItemLink|Cooked Mutton}}
+** {{ItemLink|Cooked Rabbit}}
+** {{ItemLink|Cooked Cod}}
+** {{ItemLink|Cooked Salmon}}
+* {{ItemLink|Bread|link=none|text=其他食物}}
+** {{ItemLink|Bread}}
+** {{ItemLink|Mushroom Stew}}
+** {{ItemLink|Beetroot Soup}}
+** {{ItemLink|Rabbit Stew}}
+** {{ItemLink|Suspicious Stew}}，所有类型
+** {{ItemLink|Baked Potato}}
+** {{ItemLink|Cookie}}
+** {{ItemLink|Pumpkin Pie}}
+** {{ItemLink|Cake}}
+** {{ItemLink|Dried Kelp}}
+* {{ItemLink|Fishing Rod}}
+* {{ItemLink|Carrot on a Stick}}
+* {{ItemLink|Warped Fungus on a Stick}}
+* {{ItemLink|Snowball}}
+* {{ItemLink|Wind Charge}}
+* {{ItemLink|Shears}}
+* {{ItemLink|Flint and Steel}}
+* {{ItemLink|Lead}}
+* {{ItemLink|Clock}}
+* {{ItemLink|Compass}}
+* {{ItemLink|Recovery Compass}}
+* {{ItemLink|Goat Horn}}，所有类型
+* {{ItemLink|Empty Map}}
+* {{ItemLink|id=empty-map|link=地图|空定位地图}}
+* {{ItemLink|Saddle}}
+* {{ItemLink|Harness}}，所有颜色
+* {{ItemLink|Bundle}}，及所有颜色
+* {{ItemLink|Horse Armor|id=leather-horse-armor}}，所有类型
+* {{ItemLink|Wolf Armor}}
+* {{ItemLink|Nautilus Armor|id=copper-nautilus-armor}}，所有类型
+* {{ItemLink|Turtle Shell}}
+* {{ItemLink|Elytra}}
+* {{ItemLink|Totem of Undying}}
+* {{ItemLink|Glass Bottle}}
+* {{ItemLink|Bottle o' Enchanting}}
+* {{ItemLink|Potion}}，所有类型，包括{{ItemLink|Water Bottle}}
+* {{ItemLink|Splash Potion}}，所有类型
+* {{ItemLink|Lingering Potion}}，所有类型
+* {{ItemLink|Ominous Bottle}}，所有类型
+* {{ItemLink|Spyglass}}
+* {{ItemLink|Brush}}
+}}
+}}
+{{Collapse
+|title=[[File:BE icon recipe item.png|class=pixel-image]] '''物品'''
+|content={{columns-list|colwidth=18em|
+* {{ItemLink|Stick}}
+* {{BlockLink|Beds}}，所有颜色
+* {{BlockLink|Torch}}
+* {{BlockLink|Soul Torch}}
+* {{BlockLink|Copper Torch}}
+* {{BlockLink|Sea Pickle}}
+* {{BlockLink|Lantern|link=none}}
+** {{BlockLink|Lantern}}
+** {{BlockLink|Soul Lantern}}
+** {{BlockLink|Copper Lantern}}，所有类型
+* {{ItemLink|Candle}}，及所有颜色
+* {{BlockLink|Crafting Table}}
+* {{BlockLink|Cartography Table}}
+* {{BlockLink|Fletching Table}}
+* {{BlockLink|Smithing Table}}
+* {{BlockLink|Beehive}}
+* {{BlockLink|Suspicious Sand}}
+* {{BlockLink|Suspicious Gravel}}
+* {{BlockLink|Campfire}}
+* {{BlockLink|Soul Campfire}}
+* {{BlockLink|Furnace}}
+* {{BlockLink|Blast Furnace}}
+* {{BlockLink|Smoker}}
+* {{BlockLink|Respawn Anchor}}
+* {{BlockLink|Brewing Stand}}
+* {{BlockLink|Anvil}}，除[[破碎的铁砧|破碎变种]]外的损坏阶段
+* {{BlockLink|Grindstone}}
+* {{BlockLink|Enchanting Table}}
+* {{BlockLink|Bookshelf}}
+* {{BlockLink|Chiseled Bookshelf}}
+* {{BlockLink|Shelf}}，所有类型
+* {{BlockLink|Lectern}}
+* {{ItemLink|Cauldron}}
+* {{BlockLink|Composter}}
+* {{BlockLink|Chest|link=none}}
+** {{BlockLink|Chest}}
+** {{BlockLink|Trapped Chest}}
+** {{BlockLink|Ender Chest}}
+** {{BlockLink|Copper Chest}}，所有类型
+* {{BlockLink|Barrel}}
+* {{BlockLink|Shulker Box}}，及所有颜色
+* {{ItemLink|Armor Stand}}
+* {{BlockLink|Copper Golem Statue}}，所有类型
+* {{BlockLink|Note Block}}
+* {{BlockLink|Jukebox}}
+* {{ItemLink|Music Discs}}，所有类型
+* {{ItemLink|Disc Fragment}}
+* {{ItemLink|Glowstone Dust}}
+* {{BlockLink|Glowstone}}
+* {{BlockLink|Redstone Lamp}}
+* {{BlockLink|Sea Lantern}}
+* {{BlockLink|id=all-signs|Sign}}，所有类型
+* {{BlockLink|id=all-hanging-signs|Hanging Sign}}，所有类型
+* {{ItemLink|Painting}}
+* {{ItemLink|Item Frame}}
+* {{ItemLink|Glow Item Frame}}
+* {{ItemLink|Honey Bottle}}
+* {{ItemLink|Flower Pot}}
+* {{ItemLink|Bowl}}
+* {{ItemLink|Bucket}}
+* {{ItemLink|Milk Bucket}}
+* {{ItemLink|Water Bucket}}
+* {{ItemLink|Lava Bucket}}
+* {{ItemLink|Cod Bucket}}
+* {{ItemLink|Salmon Bucket}}
+* {{ItemLink|Tropical Fish Bucket}}
+* {{ItemLink|Pufferfish Bucket}}
+* {{ItemLink|Powder Snow Bucket}}
+* {{ItemLink|Bucket of Axolotl}}
+* {{ItemLink|Bucket of Tadpole}}
+* {{ItemLink|Bucket of Sulfur Cube}}
+* {{BlockLink|Heads}}，所有类型
+* {{BlockLink|Lightning Rod}}，所有类型
+* {{BlockLink|Beacon}}
+* {{BlockLink|Bell}}
+* {{BlockLink|Conduit}}
+* {{BlockLink|Stonecutter}}
+* {{ItemLink|Coal}}
+* {{ItemLink|Charcoal}}
+* {{ItemLink|Diamond}}
+* {{ItemLink|Iron Nugget}}
+* {{ItemLink|Raw Iron}}
+* {{ItemLink|Raw Gold}}
+* {{ItemLink|Copper Nugget}}
+* {{ItemLink|Raw Copper}}
+* {{ItemLink|Copper Ingot}}
+* {{ItemLink|Iron Ingot}}
+* {{ItemLink|Netherite Scrap}}
+* {{ItemLink|Netherite Ingot}}
+* {{ItemLink|Gold Nugget}}
+* {{ItemLink|Gold Ingot}}
+* {{ItemLink|Emerald}}
+* {{ItemLink|Nether Quartz}}
+* {{ItemLink|Clay Ball}}
+* {{ItemLink|Brick}}
+* {{ItemLink|Nether Brick}}
+* {{ItemLink|Resin Brick}}
+* {{ItemLink|Prismarine Shard}}
+* {{ItemLink|Amethyst Shard}}
+* {{ItemLink|Prismarine Crystals}}
+* {{ItemLink|Nautilus Shell}}
+* {{ItemLink|Heart of the Sea}}
+* {{ItemLink|Turtle Scute}}
+* {{ItemLink|Armadillo Scute}}
+* {{ItemLink|Phantom Membrane}}
+* {{ItemLink|String}}
+* {{ItemLink|Feather}}
+* {{ItemLink|Flint}}
+* {{ItemLink|Gunpowder}}
+* {{ItemLink|Leather}}
+* {{ItemLink|Rabbit Hide}}
+* {{ItemLink|Rabbit's Foot}}
+* {{ItemLink|Fire Charge}}
+* {{ItemLink|Blaze Rod}}
+* {{ItemLink|Breeze Rod}}
+* {{BlockLink|Heavy Core}}
+* {{ItemLink|Blaze Powder}}
+* {{ItemLink|Magma Cream}}
+* {{ItemLink|Fermented Spider Eye}}
+* {{ItemLink|Echo Shard}}
+* {{ItemLink|Dragon's Breath}}
+* {{ItemLink|Shulker Shell}}
+* {{ItemLink|Ghast Tear}}
+* {{ItemLink|Slimeball}}
+* {{ItemLink|Ender Pearl}}
+* {{ItemLink|Eye of Ender}}
+* {{ItemLink|Nether Star}}
+* {{BlockLink|End Rod}}
+* {{ItemLink|End Crystal}}
+* {{ItemLink|Paper}}
+* {{ItemLink|Book}}
+* {{ItemLink|Book and Quill}}
+* {{ItemLink|Enchanted Book}}，所有级别和附魔
+* {{ItemLink|id=oak-boat|Boat}}，所有类型
+* {{ItemLink|id=oak-boat-with-chest|Boat with Chest}}，所有类型
+* {{BlockLink|Rail}}，所有类型
+* {{ItemLink|Minecart}}，除[[命令方块矿车]]外的所有类型
+* {{ItemLink|Redstone}}
+* {{BlockLink|Block of Redstone}}
+* {{BlockLink|id=redstone-torch-revision-2|Redstone Torch}}
+* {{BlockLink|Lever}}
+* {{BlockLink|Buttons}}，所有类型
+* {{BlockLink|Tripwire Hook}}
+* {{BlockLink|id=wooden-pressure-plates|Pressure Plates}}，所有类型
+* {{BlockLink|Observer}}
+* {{BlockLink|Daylight Detector}}
+* {{ItemLink|Redstone Repeater}}
+* {{ItemLink|Redstone Comparator}}
+* {{BlockLink|Hopper}}
+* {{BlockLink|Dropper}}
+* {{BlockLink|Dispenser}}
+* {{BlockLink|Crafter}}
+* {{BlockLink|id=piston-face|Piston}}
+* {{BlockLink|id=piston-face-sticky|Sticky Piston}}
+* {{BlockLink|TNT}}
+* {{ItemLink|Name Tag}}
+* {{BlockLink|Loom}}
+* {{BlockLink|Banners}}，所有基本颜色及不祥变种
+* {{ItemLink|Banner Pattern}}，所有类型
+* {{ItemLink|Pottery Sherd}}，所有类型
+* {{ItemLink|Smithing Template}}，所有类型
+* {{ItemLink|Firework Rocket}}，多种预设
+* {{ItemLink|Firework Star}}，小型球状、所有颜色
+* {{BlockLink|Chain|link=none}}
+** {{BlockLink|Iron Chain}}
+** {{BlockLink|Copper Chain}}，所有类型
+* {{BlockLink|Target}}
+* {{BlockLink|Decorated Pot}}
+* {{ItemLink|Trial Key}}
+* {{ItemLink|Ominous Trial Key}}
+* {{BlockLink|Chemistry Table}}（若开启“Education Edition”选项）
+* {{ItemLink|Compound}}，除木炭、糖、墨囊外的所有化合物（若开启“Education Edition”选项）
+* {{ItemLink|Balloons|link=none|text=化学物品}}（若开启“Education Edition”选项）
+** {{ItemLink|Super Fertilizer}}
+** {{ItemLink|Ice Bomb}}
+** {{ItemLink|Bleach}}
+** {{BlockLink|Underwater Torch}}
+** {{BlockLink|Underwater TNT}}
+** {{BlockLink|Heat Block}}
+** {{BlockLink|Blue Torch|text=彩色火把}}，所有4种
+** {{ItemLink|Medicine}}，所有4种
+** {{BlockLink|Hardened Glass}}
+** {{BlockLink|Hardened Glass Pane}}
+** {{BlockLink|Hardened Stained Glass}}，所有颜色
+** {{BlockLink|Hardened Stained Glass Pane}}，所有颜色
+** {{ItemLink|Balloons}}，所有颜色
+** {{ItemLink|Glow Sticks}}，除黑色和淡灰色外的所有颜色，未激活
+** {{ItemLink|Sparklers}}，蓝色、绿色、橙色、紫色和红色，未激活
+}}
+}}
+{{Collapse
+|title=[[File:BE icon recipe nature.png|class=pixel-image]] '''自然'''
+|content={{columns-list|colwidth=18em|
+* {{BlockLink|Nether Wart Block}}
+* {{BlockLink|Warped Wart Block}}
+* {{BlockLink|Shroomlight}}
+* {{BlockLink|Crimson Nylium}}
+* {{BlockLink|Warped Nylium}}
+* {{BlockLink|Netherrack}}
+* {{BlockLink|Soul Soil}}
+* {{BlockLink|Grass Block}}
+* {{BlockLink|Podzol}}
+* {{BlockLink|Mycelium}}
+* {{BlockLink|Dirt Path}}
+* {{BlockLink|Dirt}}
+* {{BlockLink|Coarse Dirt}}
+* {{BlockLink|Rooted Dirt}}
+* {{BlockLink|Farmland}}
+* {{BlockLink|Mud}}
+* {{BlockLink|Clay}}
+* {{BlockLink|Iron Ore|link=矿石|text=矿石}}，所有主世界矿石及其深层变种，[[下界石英矿石]]、[[下界金矿石]]和[[远古残骸]]
+* {{BlockLink|Stone|link=none}}
+** {{BlockLink|Stone}}
+** {{BlockLink|Granite}}，及磨制变种
+** {{BlockLink|Diorite}}，及磨制变种
+** {{BlockLink|Andesite}}，及磨制变种
+** {{BlockLink|Blackstone}}，及磨制变种
+** {{BlockLink|Deepslate}}，及磨制变种
+** {{BlockLink|Tuff}}，及磨制变种
+** {{BlockLink|Basalt}}，及磨制、平滑变种
+** {{BlockLink|Cinnabar}}，及磨制变种
+** {{BlockLink|Sulfur}}，及磨制变种
+** {{BlockLink|Potent Sulfur}}
+* {{BlockLink|Gravel}}
+* {{BlockLink|Sand}}
+* {{BlockLink|Red Sand}}
+* {{BlockLink|Cactus}}
+* {{BlockLink|Logs|text=原木和菌柄}}，所有普通种类及去皮变种
+* {{BlockLink|Wood|text=木头、菌核和竹块}}，所有普通种类及去皮变种
+* {{BlockLink|Leaves}}，所有变种
+* {{BlockLink|Saplings}}，所有变种
+* {{BlockLink|Bee Nest}}
+* {{ItemLink|Seeds|link=none}}
+** {{ItemLink|Wheat Seeds}}
+** {{ItemLink|Pumpkin Seeds}}
+** {{ItemLink|Melon Seeds}}
+** {{ItemLink|Beetroot Seeds}}
+** {{ItemLink|Torchflower Seeds}}
+** {{ItemLink|Pitcher Pod}}
+* {{ItemLink|Wheat|link=none|text=农作物}}
+** {{ItemLink|Wheat}}
+** {{ItemLink|Beetroot}}
+** {{ItemLink|Potato}}
+** {{ItemLink|Poisonous Potato}}
+** {{ItemLink|Carrot}}
+** {{ItemLink|Golden Carrot}}
+** {{ItemLink|Apple}}
+** {{ItemLink|Golden Apple}}
+** {{ItemLink|Enchanted Golden Apple}}
+** {{BlockLink|Melon}}
+** {{ItemLink|Melon Slice}}
+** {{ItemLink|Glistering Melon}}
+** {{ItemLink|Sweet Berries}}
+** {{ItemLink|Glow Berries}}
+** {{BlockLink|Pumpkin}}
+* {{BlockLink|Carved Pumpkin}}
+* {{BlockLink|Jack o'Lantern}}
+* {{ItemLink|Honeycomb}}
+* {{ItemLink|Resin Clump}}
+* {{BlockLink|Fern|link=none|text=地被植物}}
+** {{BlockLink|Fern}}
+** {{BlockLink|Large Fern}}
+** {{BlockLink|Grass}}
+** {{BlockLink|Tall Grass}}
+** {{BlockLink|Short Dry Grass}}
+** {{BlockLink|Tall Dry Grass}}
+** {{BlockLink|Bush}}
+** {{BlockLink|Nether Sprouts}}
+* {{BlockLink|Coral|link=none|text=[[珊瑚]]和[[珊瑚扇]]}}，所有类型及失活变种
+* {{BlockLink|Flowers}}，所有种类
+* {{ItemLink|id=yellow-dye|Dyes}}，所有种类
+* {{ItemLink|Ink Sac}}
+* {{ItemLink|Glow Ink Sac}}
+* {{ItemLink|Cocoa Beans}}
+* {{ItemLink|Lapis Lazuli}}
+* {{ItemLink|Bone Meal}}
+* {{BlockLink|Vines}}
+* {{BlockLink|id=weeping-vine-plant|Weeping Vines}}
+* {{BlockLink|Twisting Vines}}
+* {{BlockLink|Lily Pad}}
+* {{BlockLink|Seagrass}}
+* {{ItemLink|Kelp}}
+* {{BlockLink|Dead Bush}}
+* {{ItemLink|Bamboo}}
+* {{BlockLink|Snow Block}}
+* {{BlockLink|Ice}}
+* {{BlockLink|Packed Ice}}
+* {{BlockLink|Blue Ice}}
+* {{BlockLink|Snow|顶层雪}}
+* {{BlockLink|Pointed Dripstone}}
+* {{BlockLink|Dripstone Block}}
+* {{BlockLink|Moss Carpet}}
+* {{BlockLink|Moss Block}}
+* {{BlockLink|Pale Moss Carpet}}
+* {{BlockLink|Pale Moss Block}}
+* {{BlockLink|Pale Hanging Moss}}
+* {{BlockLink|Hanging Roots}}
+* {{BlockLink|Mangrove Roots}}
+* {{BlockLink|Muddy Mangrove Roots}}
+* {{BlockLink|Big Dripleaf}}
+* {{BlockLink|Small Dripleaf}}
+* {{BlockLink|Spore Blossom}}
+* {{BlockLink|Firefly Bush}}
+* {{BlockLink|Azalea}}
+* {{BlockLink|Flowering Azalea}}
+* {{BlockLink|Glow Lichen}}
+* {{BlockLink|Block of Amethyst}}
+* {{BlockLink|Budding Amethyst}}
+* {{BlockLink|Amethyst Cluster}}
+* {{BlockLink|Large Amethyst Bud}}
+* {{BlockLink|Medium Amethyst Bud}}
+* {{BlockLink|Small Amethyst Bud}}
+* {{BlockLink|Calcite}}
+* {{BlockLink|Sulfur Spike}}
+* {{ItemLink|Raw Chicken|link=none|text=生食}}
+** {{ItemLink|Raw Chicken}}
+** {{ItemLink|Raw Porkchop}}
+** {{ItemLink|Raw Beef}}
+** {{ItemLink|Raw Mutton}}
+** {{ItemLink|Raw Rabbit}}
+** {{ItemLink|Raw Cod}}
+** {{ItemLink|Raw Salmon}}
+** {{ItemLink|Tropical Fish}}
+** {{ItemLink|Pufferfish}}
+* {{BlockLink|Mushrooms|link=none}}
+** {{BlockLink|Brown Mushroom}}
+** {{BlockLink|Red Mushroom}}
+** {{BlockLink|Crimson Fungus}}
+** {{BlockLink|Warped Fungus}}
+** {{BlockLink|Brown Mushroom Block}}
+** {{BlockLink|Red Mushroom Block}}
+** {{BlockLink|Mushroom Stem}}
+* {{ItemLink|Egg}}
+* {{ItemLink|Brown Egg}}
+* {{ItemLink|Blue Egg}}
+* {{ItemLink|Sugar Cane}}
+* {{ItemLink|Sugar}}
+* {{ItemLink|Rotten Flesh}}
+* {{ItemLink|Bone}}
+* {{BlockLink|Cobweb}}
+* {{ItemLink|Spider Eye}}
+* {{BlockLink|Spawner}}
+* {{BlockLink|Trial Spawner}}
+* {{BlockLink|Vault}}
+* {{BlockLink|Creaking Heart}}
+* {{BlockLink|End Portal Frame}}
+* {{BlockLink|Infested Blocks}}，所有类型
+* {{BlockLink|Dragon Egg}}
+* {{BlockLink|Turtle Egg}}
+* {{BlockLink|Sniffer Egg}}
+* {{BlockLink|Dried Ghast}}
+* {{BlockLink|Frogspawn}}
+* {{BlockLink|Pearlescent Froglight}}
+* {{BlockLink|Verdant Froglight}}
+* {{BlockLink|Ochre Froglight}}
+* {{ItemLink|id=Chicken Spawn Egg|刷怪蛋}}，除末影龙和凋灵外所有种类
+* {{BlockLink|Obsidian}}
+* {{BlockLink|Crying Obsidian}}
+* {{BlockLink|Bedrock}}
+* {{BlockLink|Soul Sand}}
+* {{BlockLink|Magma Block}}
+* {{ItemLink|Nether Wart}}
+* {{BlockLink|End Stone}}
+* {{BlockLink|Chorus Plant}}
+* {{BlockLink|Chorus Flower}}
+* {{ItemLink|Chorus Fruit}}
+* {{ItemLink|Popped Chorus Fruit}}
+* {{BlockLink|Sponge}}
+* {{BlockLink|Wet Sponge}}
+* {{BlockLink|Coral Blocks}}，所有类型及失活变种
+* {{BlockLink|Sculk|link=none|text=幽匿}}
+** {{BlockLink|Sculk}}
+** {{BlockLink|Sculk Vein}}
+** {{BlockLink|Sculk Catalyst}}
+** {{BlockLink|Sculk Shrieker}}
+** {{BlockLink|Sculk Sensor}}
+** {{BlockLink|Calibrated Sculk Sensor}}
+* {{BlockLink|Reinforced Deepslate}}
+}}
+}}
+此外，另有[[File:BE icon recipe all.png|20px|class=pixel-image]]'''全部'''标签用于搜索物品和展示所有物品。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.20a|加入了创造模式物品栏。}}
+|{{HistoryLine||0.24_SURVIVAL_TEST|移除了创造模式物品栏，加入了生存模式物品栏。}}
+|{{HistoryLine||0.28|加入了创造模式物品栏，取代了生存模式物品栏。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20091231-1856|移除了创造模式物品栏，重新加入了生存模式物品栏。}}
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了创造模式，因此也加入了创造模式物品栏。
+|在创造模式中只能打开创造模式物品栏。
+|创造模式物品栏变成了含有所有物品的、没有文字的物品选择页面，这与[[Java版Classic 0.0.20a|Classic 0.0.20a]]至[[Java版Indev 0.31 20091223-1459|Indev 0.31 20091223-1459]]创造模式中的物品栏相似。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w21b|加入了创造标签页。
+|创造模式物品栏现在被分为十类：建筑方块、{{tr|装饰性方块|裝飾方塊}}、红石、{{tr|交通运输|交通工具|交通運輸}}、杂项、{{tr|食物|食品|食物}}、工具、战斗、酿造和材料。
+|现在可以在创造模式中访问生存模式物品栏。
+|现在点击物品栏按钮不再会关闭物品栏，而是打开搜索标签页，因此玩家需要按下{{key|Esc}}来关闭物品栏。}}
+|{{HistoryLine|||dev=12w22a|现在玩家可以在创造模式下更换装备。
+|除非玩家按聊天键（默认为{{Key|T}}），否则搜索标签页不会自动打开，以便于可以再次按下{{key|E}}来关闭物品栏。}}
+|{{HistoryLine||1.9|dev=15w31a|统一了物品栏中大部分物品的朝向。}}
+|{{HistoryLine||1.12|dev=17w06a|加入了{{tr|已保存的快捷栏|已儲存的快捷欄}}。
+|现在“材料”类别跟“杂项”合并。}}
+|{{HistoryLine|||dev=pre6|优化了创造模式物品栏里的搜索功能：命名空间不再被识别（输入“minecraft:”仍会搜索命名空间）。}}
+|{{HistoryLine||1.13|dev=17w47a|由于[[扁平化]]，一些只能通过[[命令]]获得的方块现在在创造模式物品栏里可用：[[蘑菇方块]]、[[耕地]]和[[土径]]被加入到了“{{tr|装饰性方块|裝飾方塊}}”里；空的[[烟花火箭]]被加入到了“杂项”里；[[木头]]、[[台阶|平滑石头]]、[[砂岩]]、[[红砂岩]]和[[石英块]]被加入到了“建筑方块”里。
+|移动了一些方块和物品：现在[[紫珀块]]位于[[黑曜石]]的后面。}}
+|{{HistoryLine||1.16|dev=20w19a|现在方块分类与标签名称不再使用粗体。}}
+|{{HistoryLine||1.17|dev=21w07a|“红石”标签页现在按照方块使用频率重新排序。
+|与[[红石]]相关的[[物品]]和[[方块]]现在按照以下方式进行分组：基础物品、特殊红石电源、杂项、普通红石电源（即[[按钮]]和[[压力板]]）、可开合的方块（即[[门]]、[[活板门]]和[[栅栏门]]）。}}
+|{{HistoryLine|||dev=21w08a|[[黏液块]]与[[蜂蜜块]]被移至“红石”类别，同时也影响到了[[配方书]]的分类。
+|调整了[[讲台]]在“红石”标签页的位置。}}
+|{{HistoryLine|||dev=21w15a|调整了“建筑方块”标签页部分方块的排序。}}
+|{{HistoryLine||1.19.3|dev=22w42a|对创造模式物品栏进行了重新分类和排序，现在同一个物品可以在多个分类中找到了。
+|更改了搜索结果的排序依据。
+|从创造模式物品栏中移除了[[石化橡木台阶]]。}}
+|{{HistoryLine|||dev=22w43a|更改了创造模式物品栏各标签的图标。
+|再次对创造模式物品栏的分类方案和物品排序做了更改。
+|向创造模式物品栏中加入了[[龙蛋]]、[[灾厄旗帜]]和[[刷怪笼]]。}}
+|{{HistoryLine|||dev=22w44a|现在，玩家拥有管理员权限时，可从创造模式物品栏的“红石方块”类别中获取一些仅能由管理员使用的方块和物品，即[[屏障]]、所有种类的[[命令方块]]、[[调试棒]]、[[拼图方块]]、[[光源方块]]、[[命令方块矿车]]和[[结构空位]]，但不包括[[结构方块]]。
+|再次对创造模式物品栏的分类方案和物品排序做了更改。}}
+|{{HistoryLine|||dev=22w45a|将所有需要管理员权限的物品移至新的“{{tr|管理员用品|管理員實用物品|管理員實用工具}}”类别中，并向其中加入了上个版本中未加入的结构方块以及其他亮度等级的光源方块。
+|加入了“{{tr|染色方块|染色方塊}}”类别。
+|再次对创造模式物品栏的分类方案和物品排序做了更改。}}
+|{{HistoryLine|||dev=22w46a|重新排序了红石类别中的方块和物品。
+|向“{{tr|工具与实用物品|工具及實用物品|工具與實用物品}}”类别中加入了[[铁轨（消歧义）|所有种类的铁轨]]，位于矿车前面。}}
+|{{HistoryLine||1.19.4|dev=23w06a|向“功能方块”类别中加入了各种[[画|{{tr|画|繪畫|畫}}]]，4种不能在[[生存模式]]下获取的{{tr|画|繪畫|畫}}则位于“{{tr|管理员用品|管理員實用物品|管理員用品}}”中。
+|向“原材料”类别中加入了[[火焰弹]]。}}
+|{{HistoryLine||1.20|dev=23w14a|向“红石-{}-方块”类别中加入了[[紫水晶块]]和[[幽匿尖啸体]]。}}
+|{{HistoryLine|||dev=23w18a|向“红石-{}-方块”类别中加入了[[唱片机]]。}}
+|{{HistoryLine|||dev=pre2|现在[[鱼桶]]的顺序与鱼物品一致。
+|现在[[失活的珊瑚块]]的顺序与珊瑚块一致。
+|现在[[凋灵玫瑰]]与其他小型花排在一起。
+|现在[[红树根]]和[[沾泥的红树根]]与[[原木]]而不是[[树叶]]排在一起。}}
+|{{HistoryLine||1.20.3|dev=23w42a|向“红石-{}-方块”类别中加入了[[饰纹陶罐]]。}}
+|{{HistoryLine||1.21|dev=24w18a|现在[[画]]的变种按画的尺寸和ID排序。
+|现在[[附魔书]]按其中魔咒ID排序。}}
+|{{HistoryLine||1.21.2|dev=24w33a|画的{{cd|d=pretty|earth|wind|fire|water|wither}}变种不再显示作者提示框文本。}}
+|{{HistoryLine|||dev=24w38a|现在玩家在创造模式物品栏中持续丢弃物品的速度上限会逐渐限制到每{{convert|20}}丢出1物品。<ref>{{bug|MC-276822|||WAI}}</ref>}}
+|{{HistoryLine||1.21.5|dev=25w08a|刷怪蛋一栏的图标由[[猪刷怪蛋]]改为[[苦力怕刷怪蛋]]。}}
+|{{HistoryLine||1.21.11|dev=25w46a|现在创造模式物品栏中的刷怪蛋按主题来排列。}}
+|{{HistoryLine|||dev=pre1|[[矛]]的位置現在在[[劍]]之後。}}
+|{{HistoryLine||26.3|dev=snapshot-3|将杨木系列方块的位置从红树木系列方块后更改为苍白橡木系列方块后。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|游戏只有创造模式，因此物品栏也是创造模式物品栏。}}
+|{{HistoryLine||0.2.0|旧版本中的物品栏现在用于创造模式中。}}
+|{{HistoryLine||0.8.0|dev=build 2|重新设计了创造模式物品栏，加入了创造分类（建筑方块、{{tr|装饰性方块|裝飾方塊}}、战斗和杂项）。}}
+|{{HistoryLine||0.14.0|为创造模式物品栏添加了生存模式的标签页。}}
+|{{HistoryLine||0.16.0|dev=build 1|为[[Windows 10版]]的创造模式物品栏添加了搜索标签页。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|重新设计了创造模式物品栏。}}
+|{{HistoryLine||1.21.40|dev=1.21.40.21|重新排序了创造模式物品栏中的部分方块和物品，以使整体排序更加符合直觉。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.27|现在创造模式物品栏中的刷怪蛋按主题来排列。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU5|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了创造模式物品栏。}}
+|{{HistoryLine|new3ds}}
+|{{HistoryLine||0.1.0|加入了创造模式物品栏。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:UI]]
+
+[[en:Creative inventory]]
+[[fr:Inventaire#Inventaire en mode Créatif]]
+[[ko:크리에이티브 보관함]]
+[[lzh:創囊]]
+[[pt:Inventário do Criativo]]

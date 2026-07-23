@@ -1,0 +1,184 @@
+# 页面: 探测铁轨
+# 来源: https://zh.minecraft.wiki/w/%E6%8E%A2%E6%B5%8B%E9%93%81%E8%BD%A8
+# 分类: Java版独有信息, 使用简单计算器的页面, 可再生资源, 基岩版独有信息, 嵌入Bilibili视频的页面, 方块, 红石, 红石机制
+# 抓取时间: 2026-07-14 17:26:51
+# 原始 Wikitext 内容:
+
+{{for|其他种类的铁轨|铁轨（消歧义）}}
+{{Infobox block
+|group1=未开启
+|1-1=Detector Rail.png
+|group2=开启
+|2-1=Powered Detector Rail.png
+|invimage=Detector Rail
+}}
+
+'''探测铁轨（Detector Rail）'''是一种功能类似于[[压力板]]的[[铁轨]]。
+
+== 生成 ==
+探测铁轨不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1= Iron Ingot
+|C1= Iron Ingot
+|A2= Iron Ingot
+|B2= Stone Pressure Plate
+|C2= Iron Ingot
+|A3= Iron Ingot
+|B3= Redstone Dust
+|C3= Iron Ingot
+|Output= Detector Rail,6
+|type= Transportation
+}}
+
+=== 箱子战利品 ===
+{{LootChestItem|detector_rail}}
+
+== 破坏 ==
+挖掘探测铁轨的合适工具是镐。
+
+{{Breaking table}}
+
+探测铁轨被破坏后会掉落自身。
+
+== 用途 ==
+{{see also|铁轨|Tutorial:矿车}}
+
+探测铁轨是铁轨和[[红石元件]]。一系列相连的铁轨（包括普通[[铁轨]]、[[动力铁轨]]、探测铁轨和[[激活铁轨]]）被称作'''轨道'''。
+
+探测铁轨会在没有合适方块（见{{slink||放置}}）支撑或{{only|for=[[水]]流过|bedrock}}时[[掉落]]为[[物品]]。
+
+{{in|be}}如果熔岩流过探测铁轨，探测铁轨将会被摧毁且不会掉落物品。
+
+=== 生物 ===
+{{in|je}}除了玩家和[[监守者]]以外的所有生物在寻路时不会将探测铁轨视为可以走上或跨越的方块，除非它们正站在任意类型的铁轨上。
+
+=== 放置 ===
+{{main|动力铁轨#放置}}
+[[File:All linked rails.png|thumb|铁轨可能连接到的所有位置，图中以普通铁轨为基准]]
+
+探测铁轨只能放置在上表面[[方块支撑形状|边缘完整]]的方块上。
+
+探测铁轨可以和水平方向上相邻一格的铁轨相连，也可以和这些相邻铁轨上方或下方一格的铁轨相连。探测铁轨可以和其他种类的[[铁轨（消歧义）|铁轨]]相连。
+
+=== 铁轨 ===
+{{main|矿车#行为}}
+
+探测铁轨（和其他铁轨）充当供矿车通行的铁路。矿车从两端进入探测铁轨都会继续移动，只会失去一点点速度（速度可由[[动力铁轨]]再次增加）。从侧面进入探测铁轨的矿车会转向东边或南边（取决于探测铁轨朝向），从侧面进入倾斜的探测铁轨的矿车会向下移动。
+
+=== 红石元件 ===
+[[File:detector comparator strength.gif|缩略图|一个满载（27组）的矿车以及一个一半满（14组）的矿车的信号输出强度的示例]]
+{{see also|红石电路}}
+
+探测铁轨可探测其上方的矿车。
+
+==== 开启 ====
+{{in|je}}在探测铁轨所在方块的(0.2,0,0.2)到(0.8,0.8,0.8)这个长方体之内有任意矿车时（即使矿车只有一小部分在其中）探测铁轨会开启。
+
+{{in|be}}當矿车中心x-0.29,y-0.15,z-0.29到x+0.29,y+0.35,z+0.29的长方体在探测铁轨所在的格子内时，探测铁轨会开启。
+
+探测铁轨开启后每隔{{convert|20}}更新一次状态。更新状态时如果发现在上方没有矿车，探测铁轨会关闭。矿车驶离以及[[运输矿车]]、[[漏斗矿车]]或[[命令方块矿车]]发生变化时，探测铁轨不会立即更新。
+
+==== 行为 ====
+[[File:Detector-comparator-diff.png|缩略图|右|红石比较器只会在运输矿车或漏斗矿车在探测铁轨上面时收到信号]]
+探测铁轨开启时会：
+* 为毗邻的[[红石线]]提供15信号强度。
+* 为毗邻且朝向正确（主输入端面向探测铁轨）的[[红石中继器]]提供15信号强度。
+* 为毗邻或相隔1个方块的，且朝向正确（主输入端面向探测铁轨）的[[红石比较器]]提供对应信号强度（对应[[运输矿车]]或[[漏斗矿车]]装载量或[[命令方块矿车]]的执行成功次数）。
+** 相隔方块的需求见{{slink|红石比较器|检测特定方块或实体状态}}。
+* 激活毗邻且朝向正确（若需要，如[[活塞]]）的任何{{slink|红石元件|机械元件}}。
+* '''[[强充能]]'''自身附着的[[红石导体]]（含机械元件）至充能等级15。
+
+若在探测铁轨的矿车是[[运输矿车]]、[[漏斗矿车]]或[[命令方块矿车]]，探测铁轨毗邻或相隔1个方块的主输入端朝向探测铁轨的红石比较器，会收到信号强度对应矿车装载程度或命令执行成功次数的信号。信号强度可以为0，也可以大于15。对于其他类型的矿车（包括有玩家或[[村民]]乘坐的普通矿车），红石比较器的输入是0。
+
+{{in|je}}[[活板门]]上的探测铁轨会在活板门打开时锁定信号，直接输出的信号不再变化。
+* 锁定在'''未开启'''状态的探测铁轨'''不可以'''作为红石比较器的主要输入，会在活板门关闭时恢复。
+* 锁定在'''开启'''状态的探测铁轨'''可以'''作为红石比较器的主要输入，但上面的矿车变化时不更新红石比较器，被[[活塞]]移动才能恢复。
+
+== 音效 ==
+{{Sound table/Block/Metal}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table|generatetranslationkeys=java
+|Detector Rail|spritetype=block|nameid=detector_rail
+|showblocktags=je
+|showitemtags=je
+|blocktags={{GameTag|blocks|detector_rail}}
+|itemtags={{GameTag|items|detector_rail}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table|generatetranslationkeys=bedrock
+|Detector Rail|spritetype=block|nameid=detector_rail|showblocktags=be|blocktags={{GameTagBE|block|detector_rail}}|foot=1}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+探测铁轨的方块数据存储着其朝向和开关状态：
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+== 视频 ==
+{{bv|BV1M4411z7wd}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|[[File:Detector Rail (NS) JE1 BE1.png|32px]] 加入了探测铁轨。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|由于漏洞，探测铁轨现在会被[[降雪]]摧毁。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|探测铁轨的部分行为因西南规则变成了[[东南规则]]而改变。}}
+|{{HistoryLine|||dev=Beta 1.9-pre5|修复了1.9-pre1的漏洞。}}
+|{{HistoryLine|||dev=Beta 1.9-pre6|现在[[镐]]可用于更快地破坏探测铁轨。}}
+|{{HistoryLine||1.3.1|dev=12w25a|探测铁轨现在可以置于倒置的[[楼梯]]和上半[[台阶]]上。}}
+|{{HistoryLine||1.5|dev=13w04a|现在所有生物都不会主动走上探测铁轨。}}
+|{{HistoryLine|||dev=13w10a|[[File:Powered Detector Rail (NS) JE1 BE1.png|32px]] 现在激活的探测铁轨拥有独特的纹理。}}
+|{{HistoryLine||1.9|dev=15w38a|倾斜探测铁轨的判定箱高度从{{frac|10|16}}格降低到{{frac|5|32}}格。}}
+|{{HistoryLine|||dev=15w44a|探测铁轨现在可以在[[废弃矿井]]内的[[运输矿车]]中找到。}}
+|{{HistoryLine||1.10|dev=16w21a|倾斜探测铁轨的判定箱高度从{{frac|5|32}}格降低到1格。}}
+|{{HistoryLine||1.11|dev=16w32b|倾斜探测铁轨的判定箱高度都从1格减少到了0.5格。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，探测铁轨的数字ID是28。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Detector Rail (NS) JE2 BE2.png|32px]] [[File:Powered Detector Rail (NS) JE2 BE2.png|32px]] 更改了探测铁轨的纹理。}}
+|{{HistoryLine|||dev=19w12b|探测铁轨现在可以放在[[玻璃]]、[[冰]]、[[荧石]]、[[海晶灯]]和关闭的顶部[[活板门]]上，但不能锁定。}}
+|{{HistoryLine||1.15|dev=19w39a|放置新的未连接到其他铁轨的铁轨现在会朝向玩家面向的方向，而不再总是南北朝向。}}
+|{{HistoryLine||1.16.2|dev=pre2|活板门上的探测铁轨现在可以锁定。}}
+|{{HistoryLine||1.17|dev=20w45a|探测铁轨现在可[[含水]]。
+|探测铁轨现在不会被水流和熔岩流冲毁。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|[[File:Detector Rail (NS) JE1 BE1.png|32px]] [[File:Powered Detector Rail (NS) JE1 BE1.png|32px]] 加入了探测铁轨。}}
+|{{HistoryLine||0.14.0|dev=build 1|探测铁轨现在可以在废弃矿井内的运输矿车中找到。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|探测铁轨现在可以放置在水下。}}
+|{{HistoryLine||1.7.0|dev=1.7.0.2|探测铁轨现在会被水流破坏。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Detector Rail (NS) JE2 BE2.png|32px]] [[File:Powered Detector Rail (NS) JE2 BE2.png|32px]] 更改了探测铁轨的纹理。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Detector Rail (NS) JE1 BE1.png|32px]] [[File:Powered Detector Rail (NS) JE1 BE1.png|32px]] 加入了探测铁轨。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Detector Rail (NS) JE2 BE2.png|32px]] [[File:Powered Detector Rail (NS) JE2 BE2.png|32px]] 更改了探测铁轨的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Detector Rail (NS) JE1 BE1.png|32px]] [[File:Powered Detector Rail (NS) JE1 BE1.png|32px]] 加入了探测铁轨。}}
+}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks|others}}
+{{Navbox redstone}}
+
+[[Category:红石机制]]
+
+[[de:Sensorschiene]]
+[[en:Detector Rail]]
+[[es:Raíl detector]]
+[[fr:Rails détecteurs]]
+[[ko:탐지 레일]]
+[[nl:Detectiespoor]]
+[[pl:Tory z czujnikiem]]
+[[pt:Trilho detector]]
+[[ru:Нажимные рельсы]]
+[[uk:Детекторні рейки]]

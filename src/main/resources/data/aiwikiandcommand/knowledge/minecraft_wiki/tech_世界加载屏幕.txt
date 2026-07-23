@@ -1,0 +1,179 @@
+# 页面: 世界加载屏幕
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%96%E7%95%8C%E5%8A%A0%E8%BD%BD%E5%B1%8F%E5%B9%95
+# 分类: Java版, Java版独有信息, UI, 基岩版, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:19:45
+# 原始 Wikitext 内容:
+
+{{Redirect|加载|区块的加载|区块#区块加载}}
+
+'''世界加载屏幕（Loading World Screen）'''是生成或加载[[世界]]时显示的屏幕，显示了世界加载的进度。
+
+== Java版 ==
+[[File:Chunk colormap.gif|thumb|使用“0”为种子时生成的区块颜色图]]
+
+{{in|Java}}世界加载屏幕显示了一张'''颜色图'''和上方的世界加载进度条。颜色图可视化地显示了玩家周围区块的状态。区块加载时，其中的彩色像素点不断变色并扩展。每个像素点都代表着一个区块，其颜色显示了区块的状态。
+
+{| class="wikitable" data-description="Color codes" style="text-align:center;"
+|-
+! colspan = 2 | 区块状态
+! colspan = 4 | 对应颜色
+|-
+! 描述 !! ID
+! R !! G !! B !! <abbr title="十六进制颜色码">Hex</abbr>
+|-
+| 未知状态
+| -
+| 0
+| 0
+| 0
+| {{color|#000000}}
+|-
+| 未进行生成
+| {{cd|empty}}
+| 84
+| 84
+| 84
+| {{color|#545454}}
+|-
+| 生成[[结构]]范围
+| {{cd|structure_starts}}
+| 153
+| 153
+| 153
+| {{color|#999999}}
+|-
+| 计算结构引用
+| {{cd|structure_references}}
+| 95
+| 97
+| 145
+| {{color|#5F6191}}
+|-
+| 填充[[生物群系]]
+| {{cd|biomes}}
+| 128
+| 178
+| 82
+| {{color|#80B252}}
+|-
+| 填充初始[[自定义世界生成#噪声设置|噪声]]地形
+| {{cd|noise}}
+| 209
+| 209
+| 209
+| {{color|#D1D1D1}}
+|-
+| 应用[[自定义世界生成|表面规则]]
+| {{cd|surface}}
+| 114
+| 104
+| 9
+| {{color|#726809}}
+|-
+| 地形雕刻
+| {{cd|carvers}}
+| 48
+| 53
+| 114
+| {{color|#303572}}
+|-
+| 生成[[地物]]
+| {{cd|features}}
+| 33
+| 198
+| 0
+| {{color|#21C600}}
+|-
+| 初始化[[光照]]计算
+| {{cd|initialize_light}}
+| 204
+| 204
+| 204
+| {{color|#CCCCCC}}
+|-
+| 计算初始光照
+| {{cd|light}}
+| 255
+| 224
+| 160
+| {{color|#FFE0A0}}
+|-
+| 生成初始实体
+| {{cd|spawn}}
+| 242
+| 96
+| 96
+| {{color|#F26060}}
+|-
+| 区块生成完毕
+| {{cd|full}}
+| 255
+| 255
+| 255
+| {{color|#FFFFFF}}
+|}
+
+== 基岩版 ==
+{{filetr|Bedrock Loading Screen.png|alt=|thumb|基岩版的加载屏幕}}
+{{filetr|Bedrock Loading Screen Modified_World.png|thumb|启用了行为包的世界的加载屏幕}}
+{{in|bedrock}}世界加载屏幕以[[菜单屏幕]]背景全景图为背景，徽标下方的白色区域会显示带有加载动画的“{{tr|正在加载…|正在載入 …}}”文本，若启用了[[行为包]]则会变为“{{tr|改造后的世界|已改造的世界}}”；黑色区域顶部会显示[[加载提示]]，黑色区域底部会显示一个[[经验]]进度条表示加载进度。进度条加载完毕后，加载提示和进度条消失。若游戏模式为[[生存模式]]或[[创造模式]]，则黑色区域顶部会短暂显示玩家的游戏模式；若为创建新的世界时无法选择的模式，则会短暂显示“{{tr|出发吧！|我們開始吧！}}”文本。
+{{-}}
+
+== 原主机版 ==
+[[File:Loading Screen Legacy Console Edition.png|alt=|thumb|原主机版的加载屏幕]]
+{{in|console|nocat=1}}世界加载屏幕以[[菜单屏幕]]背景全景图为背景，在其上显示一个纯绿进度条以及一些文字，屏幕底部也会显示[[加载提示]]。
+{{-}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.12a|加入了“Generating level”屏幕。}}
+|{{HistoryLine||0.0.13a_03|背景的泥土变得更暗了。
+|现在加载存档屏幕有了进度条。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w18a|移除了加载存档屏幕的进度条，提示文字现在与登入服务器时显示的一致。}}
+|{{HistoryLine|||dev=12w21a|移除了加载存档屏幕上的所有提示。}}
+|{{HistoryLine|||dev=12w25a|将加载存档屏幕上的提示文本恢复到单人游戏应该显示的内容，但并未恢复进度条。}}
+|{{HistoryLine||1.13|dev=17w43a|为提示文本加入了百分比。}}
+|{{HistoryLine|||dev=17w45a|移除了除生成地形阶段提示文本外其他提示文本中的百分比。}}
+|{{HistoryLine||1.14|dev=18w43a|为生成地形阶段提示文本加入了更详细的内容。}}
+|{{HistoryLine|||dev=19w02a|加入了加载[[世界]]时显示的区块颜色图。}}
+|{{HistoryLine||1.14.1|dev=pre1|把区块颜色图的显示范围从45×45个区块变成了43×43个，并在填充完的颜色图周围加了黑边框。}}
+|{{HistoryLine||1.20|dev=23w16a|删除了流体雕刻阶段和生成高度图阶段，添加了初始化光照计算阶段。}}
+|{{HistoryLine||1.21.9|dev=25w31a|现在显示玩家将进入的周围区块，而非围绕世界出生点加载的区块。
+|加入了一个显示在世界加载时所有需加载区块的加载进度条，这包括{{cmd|forceload}}加载的区块；传送门活动的区块；单人游戏中末影珍珠加载的区块；单人游戏中玩家周围的区块和创建世界时，分配世界出生点所需的区块。
+|移除了生成地形阶段提示文本的百分比。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|加入了加载屏幕。和Java版1.3.1以前的样式相同。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|为加载屏幕加入了[[加载提示]]。
+|更改了加载存档屏幕的进度条，使其看起来更像Java版里的[[命令/bossbar|Boss栏]]。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.20|为外观的加载过程加入了进度条。}}
+|{{HistoryLine||1.20.70|dev=1.20.70.20|现在进度条加载完毕后会显示玩家的游戏模式。
+|现在显示世界模式之前均会显示加载提示和进度条。
+|加载提示上方不再显示除游戏模式外的文本。}}
+|{{HistoryLine|||dev=1.20.70.24|现在加载屏幕只会显示一个游戏模式文本。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.21|现在加载提示上方会显示带有加载动画的“{{tr|正在加载…|正在載入 …}}”文本。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了加载屏幕。
+|为加载屏幕加入了加载提示。}}
+}}
+
+== 画廊 ==
+{{gallery|
+File:Progress bar.png|[[Java版1.3.1]]更新前的进度条
+File:Java Loading Screen.png|convert|[[25w31a]]之后的世界加载屏幕
+}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{Navbox Bedrock Edition}}
+
+[[Category:UI]]
+
+[[de:Welt-Ladebildschirm]]
+[[en:Loading world screen]]
+[[es:Pantalla de carga de mundo]]
+[[fr:Écran de chargement du monde]]
+[[ja:ワールド読み込み画面]]
+[[pt:Tela de carregamento do mundo]]

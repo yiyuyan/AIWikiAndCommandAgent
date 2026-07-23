@@ -1,0 +1,738 @@
+# 页面: 实体数据格式
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 有未知版本的History模板的页面/Java版, 游戏文件
+# 抓取时间: 2026-07-14 17:25:13
+# 原始 Wikitext 内容:
+
+{{for|基岩版中的实体格式|基岩版存档格式/实体格式}}
+{{exclusive|je}}
+
+各种实体都有它们各自的数据，对应了不同的数据格式。
+
+{{TOC|limit=3|none}}
+
+== 数据格式 ==
+
+所有实体都有一部分相同的数据格式，以保存实体的最基础的信息：
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据根标签
+{{#lst:编码格式/Entity|codec_entity}}
+</div>
+
+各种不同的实体在这个数据格式的基础上，附加了自身额外的信息。下列是{{el|je}}中所有实体的数据格式：
+
+=== 生物 ===
+{| class="wikitable" style="position:relative; z-index:1; float:right; margin-right:0" data-description="生物实体ID"
+|-
+! colspan="2" | 生物实体
+|-
+! 实体ID
+! 名称
+|-
+| allay
+| [[悦灵]]
+|-
+| armadillo
+| [[犰狳]]
+|-
+| armor_stand
+| [[盔甲架]]
+|-
+| axolotl
+| [[美西螈]]
+|-
+| bat
+| [[蝙蝠]]
+|-
+| bee
+| [[蜜蜂]]
+|-
+| blaze
+| [[烈焰人]]
+|-
+| breeze
+| [[旋风人]]
+|-
+| camel
+| [[骆驼]]
+|-
+| cat
+| [[猫]]
+|-
+| cave_spider
+| [[洞穴蜘蛛]]
+|-
+| chicken
+| [[鸡]]
+|-
+| cod
+| [[鳕鱼]]
+|-
+| copper_golem
+| [[铜傀儡]]
+|-
+| cow
+| [[牛]]
+|-
+| creaking
+| [[嘎枝]]
+|-
+| creeper
+| [[苦力怕]]
+|-
+| dolphin
+| [[海豚]]
+|-
+| donkey
+| [[驴]]
+|-
+| drowned
+| [[溺尸]]
+|-
+| elder_guardian
+| [[远古守卫者]]
+|-
+| ender_dragon
+| [[末影龙]]
+|-
+| enderman
+| [[末影人]]
+|-
+| endermite
+| [[末影螨]]
+|-
+| evoker
+| [[唤魔者]]
+|-
+| fox
+| [[狐狸]]
+|-
+| frog
+| [[青蛙]]
+|-
+| ghast
+| [[恶魂]]
+|-
+| giant
+| [[巨人]]
+|-
+| glow_squid
+| [[发光鱿鱼]]
+|-
+| goat
+| [[山羊]]
+|-
+| guardian
+| [[守卫者]]
+|-
+| happy_ghast
+| [[快乐恶魂]]
+|-
+| hoglin
+| [[疣猪兽]]
+|-
+| horse
+| [[马]]
+|-
+| husk
+| [[尸壳]]
+|-
+| illusioner
+| [[幻术师]]
+|-
+| iron_golem
+| [[铁傀儡]]
+|-
+| llama
+| [[羊驼]]
+|-
+| magma_cube
+| [[岩浆怪]]
+|-
+| mannequin
+| [[玩家模型]]
+|-
+| mooshroom
+| [[哞菇]]
+|-
+| mule
+| [[骡]]
+|-
+| nautilus
+| [[鹦鹉螺]]
+|-
+| ocelot
+| [[豹猫]]
+|-
+| panda
+| [[熊猫]]
+|-
+| parrot
+| [[鹦鹉]]
+|-
+| player
+| [[玩家]]
+|-
+| phantom
+| [[幻翼]]
+|-
+| pig
+| [[猪]]
+|-
+| piglin
+| [[猪灵]]
+|-
+| piglin_brute
+| [[猪灵蛮兵]]
+|-
+| pillager
+| [[掠夺者]]
+|-
+| polar_bear
+| [[北极熊]]
+|-
+| pufferfish
+| [[河豚]]
+|-
+| rabbit
+| [[兔子]]
+|-
+| ravager
+| [[劫掠兽]]
+|-
+| salmon
+| [[鲑鱼]]
+|-
+| sheep
+| [[绵羊]]
+|-
+| shulker
+| [[潜影贝]]
+|-
+| silverfish
+| [[蠹虫]]
+|-
+| skeleton
+| [[骷髅]]
+|-
+| skeleton_horse
+| [[骷髅马]]
+|-
+| slime
+| [[史莱姆]]
+|-
+| sniffer
+| [[嗅探兽]]
+|-
+| snow_golem
+| [[雪傀儡]]
+|-
+| spider
+| [[蜘蛛]]
+|-
+| squid
+| [[鱿鱼]]
+|-
+| stray
+| [[流浪者]]
+|-
+| strider
+| [[炽足兽]]
+|-
+| tadpole
+| [[蝌蚪]]
+|-
+| trader_llama
+| [[行商羊驼]]
+|-
+| tropical_fish
+| [[热带鱼]]
+|-
+| turtle
+| [[海龟]]
+|-
+| vex
+| [[恼鬼]]
+|-
+| villager
+| [[村民]]
+|-
+| vindicator
+| [[卫道士]]
+|-
+| wandering_trader
+| [[流浪商人]]
+|-
+| warden
+| [[监守者]]
+|-
+| witch
+| [[女巫]]
+|-
+| wither
+| [[凋灵]]
+|-
+| wither_skeleton
+| [[凋灵骷髅]]
+|-
+| wolf
+| [[狼]]
+|-
+| zombie
+| [[僵尸]]
+|-
+| zombie_horse
+| [[僵尸马]]
+|-
+| zombie_nautilus
+| [[僵尸鹦鹉螺]]
+|-
+| zombified_piglin
+| [[僵尸猪灵]]
+|-
+| zombie_villager
+| [[僵尸村民]]
+|-
+| zoglin
+| [[僵尸疣猪兽]]
+|}
+
+每个[[生物]]都有额外的标签来储存它们的血量、状态、效果。
+
+玩家数据格式见[[玩家数据格式]]。
+
+{{Data transclude|entity|悦灵/ED|title=allay}}
+{{Data transclude|entity|犰狳/ED|title=armadillo}}
+{{Data transclude|entity|盔甲架/ED|title=盔甲架|link=盔甲架|icon=armor-stand}}
+{{Data transclude|entity|美西螈/ED|title=axolotl}}
+{{Data transclude|entity|蝙蝠/ED|title=bat}}
+{{Data transclude|entity|蜜蜂/ED|title=bee}}
+{{Data transclude|entity|烈焰人/ED|title=blaze}}
+{{Data transclude|entity|旋风人/ED|title=breeze}}
+{{Data transclude|entity|骆驼/ED|title=camel}}
+{{Data transclude|entity|猫/ED|title=cat}}
+{{Data transclude|entity|洞穴蜘蛛/ED|title=cave spider}}
+{{Data transclude|entity|鸡/ED|title=chicken}}
+{{Data transclude|entity|鳕鱼/ED|title=cod}}
+{{Data transclude|entity|铜傀儡/ED|title=copper golem}}
+{{Data transclude|entity|牛/ED|title=cow}}
+{{Data transclude|entity|嘎枝/ED|title=creaking}}
+{{Data transclude|entity|苦力怕/ED|title=creeper}}
+{{Data transclude|entity|海豚/ED|title=dolphin}}
+{{Data transclude|entity|驴/ED|title=donkey}}
+{{Data transclude|entity|溺尸/ED|title=drowned}}
+{{Data transclude|entity|远古守卫者/ED|title=elder guardian}}
+{{Data transclude|entity|末影龙/ED|title=ender dragon}}
+{{Data transclude|entity|末影人/ED|title=enderman}}
+{{Data transclude|entity|末影螨/ED|title=endermite}}
+{{Data transclude|entity|唤魔者/ED|title=evoker}}
+{{Data transclude|entity|青蛙/ED|title=frog}}
+{{Data transclude|entity|狐狸/ED|title=fox}}
+{{Data transclude|entity|恶魂/ED|title=ghast}}
+{{Data transclude|entity|巨人/ED|title=giant}}
+{{Data transclude|entity|发光鱿鱼/ED|title=glow squid}}
+{{Data transclude|entity|山羊/ED|title=goat}}
+{{Data transclude|entity|守卫者/ED|title=guardian}}
+{{Data transclude|entity|快乐恶魂/ED|title=happy ghast}}
+{{Data transclude|entity|疣猪兽/ED|title=hoglin}}
+{{Data transclude|entity|马/ED|title=horse}}
+{{Data transclude|entity|尸壳/ED|title=husk|icon=husk}}
+{{Data transclude|entity|幻术师/ED|title=illusioner}}
+{{Data transclude|entity|铁傀儡/ED|title=Iron Golem}}
+{{Data transclude|entity|岩浆怪/ED|title=magma cube}}
+{{Data transclude|entity|玩家模型/ED|title=mannequin}}
+{{Data transclude|entity|哞菇/ED|title=mooshroom}}
+{{Data transclude|entity|骡/ED|title=mule}}
+{{Data transclude|entity|鹦鹉螺/ED|title=nautilus}}
+{{Data transclude|entity|豹猫/ED|title=ocelot}}
+{{Data transclude|entity|熊猫/ED|title=panda}}
+{{Data transclude|entity|鹦鹉/ED|title=parrot}}
+{{Data transclude|entity|幻翼/ED|title=phantom}}
+{{Data transclude|entity|猪/ED|title=pig}}
+{{Data transclude|entity|猪灵/ED|title=piglin}}
+{{Data transclude|entity|猪灵蛮兵/ED|title=piglin brute}}
+{{Data transclude|entity|掠夺者/ED|title=pillager}}
+{{Data transclude|entity|北极熊/ED|title=polar bear}}
+{{Data transclude|entity|河豚/ED|title=pufferfish}}
+{{Data transclude|entity|兔子/ED|title=rabbit}}
+{{Data transclude|entity|劫掠兽/ED|title=ravager}}
+{{Data transclude|entity|鲑鱼/ED|title=salmon}}
+{{Data transclude|entity|绵羊/ED|title=sheep}}
+{{Data transclude|entity|羊驼/ED|title=llama}}
+{{Data transclude|entity|潜影贝/ED|title=shulker}}
+{{Data transclude|entity|蠹虫/ED|title=silverfish}}
+{{Data transclude|entity|骷髅/ED|title=skeleton}}
+{{Data transclude|entity|骷髅马/ED|title=skeleton horse}}
+{{Data transclude|entity|史莱姆/ED|title=slime}}
+{{Data transclude|entity|雪傀儡/ED|title=snow golem}}
+{{Data transclude|entity|嗅探兽/ED|title=sniffer}}
+{{Data transclude|entity|蜘蛛/ED|title=spider}}
+{{Data transclude|entity|鱿鱼/ED|title=squid}}
+{{Data transclude|entity|流浪者/ED|title=stray}}
+{{Data transclude|entity|炽足兽/ED|title=strider}}
+{{Data transclude|entity|蝌蚪/ED|title=tadpole}}
+{{Data transclude|entity|行商羊驼/ED|title=trader llama}}
+{{Data transclude|entity|热带鱼/ED|title=tropical fish}}
+{{Data transclude|entity|海龟/ED|title=turtle}}
+{{Data transclude|entity|恼鬼/ED|title=vex}}
+{{Data transclude|entity|村民/ED|title=villager}}
+{{Data transclude|entity|卫道士/ED|title=vindicator}}
+{{Data transclude|entity|流浪商人/ED|title=wandering trader}}
+{{Data transclude|entity|监守者/ED|title=warden}}
+{{Data transclude|entity|女巫/ED|title=witch}}
+{{Data transclude|entity|凋灵/ED|title=wither}}
+{{Data transclude|entity|凋灵骷髅/ED|title=wither skeleton}}
+{{Data transclude|entity|狼/ED|title=wolf}}
+{{Data transclude|entity|僵尸/ED|title=zombie}}
+{{Data transclude|entity|僵尸马/ED|title=zombie horse}}
+{{Data transclude|entity|僵尸鹦鹉螺/ED|title=zombie nautilus}}
+{{Data transclude|entity|僵尸猪灵/ED|title=zombified piglin}}
+{{Data transclude|entity|僵尸村民/ED|title=zombie villager}}
+{{Data transclude|entity|僵尸疣猪兽/ED|title=zoglin}}
+{{-}}
+
+=== 弹射物 ===
+{| class="wikitable" style="position:relative; z-index:1; float:right; margin-right:0"
+|-
+! colspan="2" | 弹射物实体
+|-
+! 实体ID
+! 名称
+|-
+| arrow
+| [[箭]]
+|-
+| breeze_wind_charge
+| [[风弹（实体）|旋风人风弹]]
+|-
+| dragon_fireball
+| [[末影龙火球]]
+|-
+| egg
+| [[掷出的鸡蛋]]
+|-
+| ender_pearl
+| [[掷出的末影珍珠]]
+|-
+| experience_bottle
+| [[掷出的附魔之瓶]]
+|-
+| fireball
+| [[恶魂#火球|火球]]（恶魂火球）
+|-
+| fishing_bobber
+| [[浮漂]]
+|-
+| lingering_potion
+| [[滞留药水]]
+|-
+| llama_spit
+| [[羊驼唾沫]]
+|-
+| shulker_bullet
+| [[潜影弹]]
+|-
+| small_fireball
+| [[小火球]]
+|-
+| snowball
+| [[雪球]]
+|-
+| spectral_arrow
+| [[光灵箭]]
+|-
+| splash_potion
+| [[喷溅药水]]
+|-
+| trident
+| [[三叉戟]]
+|-
+| wind_charge
+| [[风弹（实体）|风弹]]
+|-
+| wither_skull
+| [[凋灵之首]]
+|}
+
+{{Data transclude|entity|箭/ED|title=arrow}}
+{{Data transclude|entity|末影龙火球/ED|title=dragon-fireball}}
+{{Data transclude|entity|鸡蛋/ED|title=egg}}
+{{Data transclude|entity|末影珍珠/ED|title=Ender Pearl}}
+{{Data transclude|entity|附魔之瓶/ED|title=Bottle o' Enchanting}}
+{{Data transclude|entity|火球/ED|title=fireball}}
+{{data transclude|entity|钓鱼竿/ED|title=钓鱼竿浮漂|link=浮漂|icon=fishing-bobber}}
+{{Data transclude|entity|喷溅药水/ED|title=lingering-potion}}
+{{data transclude|entity|羊驼唾沫/ED|title=羊驼唾沫|link=羊驼唾沫|icon=llama-spit}}
+{{Data transclude|entity|喷溅药水/ED|title=splash-potion}}
+{{data transclude|entity|潜影弹/ED|title=shulker-bullet}}
+{{Data transclude|entity|小火球/ED|title=small-fireball}}
+{{Data transclude|entity|雪球/ED|title=snowball}}
+{{Data transclude|entity|箭/ED1|title=光灵箭|icon=arrow}}
+{{data transclude|entity|三叉戟/ED|title=trident}}
+{{Data transclude|entity|风弹（实体）/ED|title=wind-charge}}
+{{Data transclude|entity|凋灵之首/ED|title=凋灵之首|link=凋灵之首|icon=wither-skull}}
+{{-}}
+
+=== 交通工具 ===
+{| class="wikitable" style="float:right;margin-right:0"
+|-
+! colspan="2" | 交通工具实体
+|-
+! 实体 ID
+! 名称
+|-
+| acacia_boat
+| [[金合欢木船]]
+|-
+| acacia_chest_boat
+| [[金合欢木运输船]]
+|-
+| birch_boat
+| [[白桦木船]]
+|-
+| birch_chest_boat
+| [[白桦木运输船]]
+|-
+| cherry_boat
+| [[樱花木船]]
+|-
+| cherry_chest_boat
+| [[樱花木运输船]]
+|-
+| dark_oak_boat
+| [[深色橡木船]]
+|-
+| dark_oak_chest_boat
+| [[深色橡木运输船]]
+|-
+| jungle_boat
+| [[丛林木船]]
+|-
+| jungle_chest_boat
+| [[丛林木运输船]]
+|-
+| mangrove_boat
+| [[红树木船]]
+|-
+| mangrove_chest_boat
+| [[红树木运输船]]
+|-
+| oak_boat
+| [[橡木船]]
+|-
+| oak_chest_boat
+| [[橡木运输船]]
+|-
+| pale_oak_boat
+| [[苍白橡木船]]
+|-
+| pale_oak_chest_boat
+| [[苍白橡木运输船]]
+|-
+| bamboo_raft
+| [[竹筏]]
+|-
+| bamboo_chest_raft
+| [[运输竹筏]]
+|-
+| minecart
+| [[矿车]]
+|-
+| chest_minecart
+| [[运输矿车]]
+|-
+| command_block_minecart
+| [[命令方块矿车]]
+|-
+| furnace_minecart
+| [[动力矿车]]
+|-
+| hopper_minecart
+| [[漏斗矿车]]
+|-
+| spawner_minecart
+| [[刷怪笼矿车]]
+|-
+| tnt_minecart
+| [[TNT矿车]]
+|}
+
+{{Data transclude|entity|船/ED|link=船|title=boats|icon=boats}}
+{{Data transclude|entity|运输船/ED|link=运输船|title=运输船|icon=boats with chests}}
+{{Data transclude|entity|矿车/ED|link=矿车|title=minecart|icon=minecart}}
+{{Data transclude|entity|运输矿车/ED|link=运输矿车|title=运输矿车|icon=minecart with chest}}
+{{Data transclude|entity|命令方块矿车/ED|link=命令方块矿车|title=命令方块矿车|icon=minecart with command block}}
+{{Data transclude|entity|动力矿车/ED|link=动力矿车|title=动力矿车|icon=minecart with furnace}}
+{{Data transclude|entity|漏斗矿车/ED|link=漏斗矿车|title=漏斗矿车|icon=minecart with hopper}}
+{{Data transclude|entity|刷怪笼矿车/ED|link=刷怪笼矿车|title=刷怪笼矿车|icon=minecart with spawner}}
+{{Data transclude|entity|TNT矿车/ED|link=TNT矿车|title=TNT矿车|icon=minecart with tnt}}
+{{-}}
+
+=== 其他 ===
+{| class="wikitable" style="float:right;margin-right:0"
+|-
+! colspan="2" | 其他实体
+|-
+! 实体ID
+! 名称
+|-
+| area_effect_cloud
+| [[区域效果云]]
+|-
+| block_display
+| [[方块展示实体]]
+|-
+| end_crystal
+| [[末地水晶]]
+|-
+| evoker_fangs
+| [[唤魔者尖牙]]
+|-
+| experience_orb
+| [[经验球]]
+|-
+| eye_of_ender
+| [[末影之眼]]
+|-
+| falling_block
+| [[下落的方块]]
+|-
+| firework_rocket
+| [[烟花火箭]]
+|-
+| interaction
+| [[交互实体]]
+|-
+| item
+| [[物品（实体）|物品]]
+|-
+| item_display
+| [[物品展示实体]]
+|-
+| item_frame
+| [[物品展示框]]
+|-
+| leash_knot
+| [[拴绳结]]
+|-
+| lightning_bolt
+| [[闪电束]]
+|-
+| marker
+| [[标记]]
+|-
+| ominous_item_spawner
+| [[不祥之物生成器]]
+|-
+| painting
+| [[画]]
+|-
+| text_display
+| [[文本展示实体]]
+|-
+| tnt
+| [[被激活的TNT]]
+|}
+
+{{data transclude|effect|区域效果云/ED|title=区域效果云|link=区域效果云|icon=particle-absorption}}
+{{data transclude|block|展示实体/ED|title=展示实体|link=展示实体|icon=air}}
+{{data transclude|entity|末地水晶/ED|title=末地水晶|link=末地水晶|icon=ender crystal}}
+{{data transclude|entity|唤魔者尖牙/ED|title=唤魔者尖牙|link=唤魔者尖牙|icon=evoker-fangs}}
+{{data transclude|entity|经验球/ED|title=经验球|link=经验球|icon=experience-orb}}
+{{data transclude|entity|末影之眼/ED|title=末影之眼|link=末影之眼|icon=eye of ender}}
+{{data transclude|entity|下落的方块/ED|title=下落的方块|link=下落的方块|icon=falling-block}}
+{{data transclude|item|烟花火箭/ED|title=烟花火箭|link=烟花火箭|icon=firework rocket}}
+{{data transclude|block|交互实体/ED|title=交互实体|link=交互实体|icon=air}}
+{{data transclude|env|物品（实体）/ED|title=物品|link=物品（实体）|icon=items}}
+{{data transclude|entity|物品展示框/ED|title=物品展示框|link=物品展示框|icon=item frame}}
+{{data transclude|entity|拴绳结/ED|title=拴绳结|link=拴绳结|icon=leash-knot}}
+{{data transclude|entity|闪电束/ED|title=闪电束|link=闪电束|icon=lightning-bolt}}
+{{data transclude|block|标记/ED|title=标记|link=标记|icon=air}}
+{{data transclude|entity|不祥之物生成器/ED|title=不祥之物生成器|icon=ominous-item-spawner}}
+{{data transclude|entity|画/ED|title=painting}}
+{{Data transclude|entity|TNT/ED|title=被激活的TNT|link=被激活的TNT|icon=tnt}}
+{{-}}
+
+== 存储格式 ==
+
+实体数据存储文件是一种区块数据，以[[区域文件格式]]为载体，存储于{{filepath|-{}-<''维度根目录''>/entities}}内。例如，主世界的实体数据存储文件全部位于{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/overworld/entities}}，下界的全部位于{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/the_nether/entities}}。
+
+在每个区块数据内，实体数据都有下列存储格式：
+
+<div class="treeview">
+* {{nbt|compound}} 区域文件区块根标签
+** {{nbt|int|DataVersion|existonsave=1}}：保存此实体数据存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是-1。
+** {{nbt|int-array|Position|existonsave=1|required=1}}：数组的两个元素分别代表区块的X和Z坐标。如果区块位置和此值不对应，则游戏报错<code>-{}-Chunk file at <''区块位置''> is in the wrong location. (Expected <''区块位置''>, got <''Position数据位置''>)</code>。
+** {{nbt|list|Entities|existonsave=1|required=1}}：区块内保存的实体。
+*** {{nbt|compound}}：一个实体对应的实体数据。如果实体是一个乘客（即正在[[骑乘]]另一个实体），则其本身数据由根实体（递归找到不骑乘其他实体的实体）负责记录，自身不再单独创建一个实体数据项。
+**** 见上文{{slink||数据格式}}。
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w34b|向AI生物加入了{{nbt|boolean|CanPickUpLoot}}标签。}}
+|{{HistoryLine||1.8|dev=14w21a|加入了{{nbt|string|CustomName}}和{{nbt|boolean|CustomNameVisible}}标签，现在适用于所有实体。}}
+|{{HistoryLine|||dev=14w30a|加入了{{nbt|boolean|Silent}}标签。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了{{nbt|boolean|Glowing}}标签。
+|删除了生物的{{nbt|list|DropChances}}和{{nbt|list|Equipment}}标签。
+|向AI生物加入了{{nbt|list|ArmorDropChances}}、{{nbt|list|HandDropChances}}、{{nbt|list|ArmorItems}}、{{nbt|list|HandItems}}和{{nbt|boolean|LeftHanded}}标签。}}
+|{{HistoryLine|||dev=15w32b|加入了{{nbt|list|Tags}}标签。}}
+|{{HistoryLine|||dev=15w33a|向生物加入{{nbt|float|Health}}标签，取代了{{nbt|float|HealF}}标签和早已弃用的{{nbt|short|Health}}标签。}}
+|{{HistoryLine|||dev=15w41a|加入了{{nbt|list|Passengers}}标签，取代了{{nbt|compound|Riding}}标签。}}
+|{{HistoryLine|||dev=15w43a|向AI生物加入了{{nbt|string|DeathLootTable}}和{{nbt|long|DeathLootTableSeed}}标签。}}
+|{{HistoryLine||1.10|dev=16w20a|加入了{{nbt|boolean|NoGravity}}标签，此前为盔甲架独有标签。}}
+|{{HistoryLine|||dev=16w21a|向生物加入{{nbt|boolean|FallFlying}}标签。}}
+|{{HistoryLine||1.11|dev=16w40a|删除了火球、小火球、末影龙火球和凋灵之首的{{nbt|int|xTile}}、{{nbt|int|yTile}}、{{nbt|int|zTile}}、{{nbt|short|inTile}}和{{nbt|short|life}}标签。}}
+|{{HistoryLine|||dev=16w42a|向箭类弹射物加入{{nbt|boolean|crit}}标签。}}
+|{{HistoryLine||1.13|dev=17w45a|删除了{{nbt|compound|CommandStats}}标签。}}
+|{{HistoryLine|||dev=17w47a|向箭类弹射物加入{{nbt|compound|inBlockState}}标签，取代了{{nbt|short|inTile}}和{{nbt|short|inData}}标签。}}
+|{{HistoryLine||1.14|dev=18w43a|向箭类弹射物加入{{nbt|byte|PierceLevel}}和{{nbt|boolean|ShotFromCrossbow}}标签。}}
+|{{HistoryLine||?|删除了箭类弹射物的{{nbt|int|xTile}}、{{nbt|int|yTile}}和{{nbt|int|zTile}}标签。}}
+|{{HistoryLine||1.16|dev=20w12a|加入了{{nbt|int array|UUID}}标签，取代了{{nbt|long|UUIDLeast}}和{{nbt|long|UUIDMost}}标签。
+|向马类生物加入了{{nbt|int array|Owner}}标签，取代了{{nbt|string|OwnerUUID}}标签。}}
+|{{HistoryLine||1.17|dev=20w45a|实体的储存被从主要地形区块分离到了单独的实体文件夹中（类似POI的储存方式）。这些新文件仍然为NBT格式的区域文件。}}
+|{{HistoryLine|||dev=20w46a|加入了{{nbt|int|TicksFrozen}}标签。}}
+|{{HistoryLine|||dev=21w13a|将{{nbt|int|TicksFrozen}}标签的最大值由300改为140。}}
+|{{HistoryLine||1.20.2|dev=23w32a|向生物加入{{nbt|list|active_effects}}标签，取代了{{nbt|list|ActiveEffects}}标签。}}
+|{{HistoryLine||1.20.3|dev=23w43a|向箭类弹射物加入{{nbt|compound|item}}标签。}}
+|{{HistoryLine||1.20.5|dev=24w05a|向AI生物加入了{{nbt|float|body_armor_drop_chance}}和{{nbt|compound|body_armor_item}}标签。}}
+|{{HistoryLine|||dev=24w06a|向AI生物加入了{{nbt|int array}}{{nbt|compound|leash}}标签，取代了{{nbt|compound|Leash}}标签。}}
+|{{HistoryLine||1.21|dev=24w18a|向箭类弹射物加入{{nbt|compound|weapon}}标签，并删除了{{nbt|boolean|ShotFromCrossbow}}标签。}}
+|{{HistoryLine|||dev=24w19a|向火球类弹射物加入{{nbt|double|acceleration_power}}标签，并删除了{{nbt|list|power}}标签。}}
+|{{HistoryLine|||dev=24w21a|向生物加入{{nbt|list|attributes}}标签，取代了{{nbt|list|Attributes}}标签。}}
+|{{HistoryLine||1.21.5|dev=25w02a|<code>CustomName</code>标签不再是JSON文本字符串。
+|向AI生物加入了{{nbt|list|drop_chances}}标签，取代了{{nbt|list|ArmorDropChances}}、{{nbt|list|HandDropChances}}和{{nbt|float|body_armor_drop_chance}}标签，且若为默认值则不再保存。
+|向生物加入了{{nbt|int array|last_hurt_by_mob}}、{{nbt|int array|last_hurt_by_player}}、{{nbt|int|last_hurt_by_player_memory_time}}和{{nbt|int|ticks_since_last_hurt_by_mob}}标签。}}
+|{{HistoryLine|||dev=25w03a|加入了{{nbt|double|fall_distance}}标签，取代了{{nbt|float|FallDistance}}标签。
+|删除了马类生物的{{nbt|compound|SaddleItem}}标签，被{{nbt|compound|equipment.saddle}}取代。
+|向AI生物加入了{{nbt|compound|equipment}}标签，取代了{{nbt|list|ArmorItems}}、{{nbt|list|HandItems}}、{{nbt|compound|body_armor_item}}标签。}}
+|{{HistoryLine|||dev=25w06a|现在{{nbt|compound|equipment}}标签是生物共同标签。}}
+|{{HistoryLine|||dev=25w07a|修改了大量标签的名称和游戏存储时是否必须保存的特性，包括将分离存储的坐标整合进统一数组内存储，方块状态字段不允许设置空标签。
+|现在项数不正确的{{nbt|list|Pos}}、{{nbt|list|Motion}}和{{nbt|list|Rotation}}标签会被完全弃用，而不再只选择已指定的组件。
+|删除了矿车的{{nbt|boolean|CustomDisplayTile}}标签。}}
+|{{HistoryLine|||dev=25w09a|修改了大量标签的默认值。
+|现在{{nbt|short|Air}}标签若未指定，则默认为最大值。
+|现在{{nbt|boolean|FallFlying}}标签被移除后不再保留。}}
+|{{HistoryLine|||dev=25w10a|加入了{{nbt|string}}{{nbt|compound|data}}标签，此前为标记独有标签。}}
+|{{HistoryLine||1.21.6|dev=25w15a|向生物加入{{nbt|compound|locator_bar_icon}}标签。}}
+|{{HistoryLine|||dev=25w18a|向AI生物加入了{{nbt|int array|home_pos}}和{{nbt|int|home_radius}}标签，此前{{nbt|int array|home_pos}}为嘎枝和海龟的独有标签。}}
+|{{HistoryLine||26.1|dev=snapshot-5|将主世界的实体数据从{{filepath|<''存档根目录''>/entities}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/overworld/entities}}。
+|将下界的实体数据从{{filepath|<''存档根目录''>/DIM-1/entities}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_nether/entities}}。
+|将末地的实体数据从{{filepath|<''存档根目录''>/DIM1/entities}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_end/entities}}。}}
+|{{HistoryLine|||dev=snapshot-6|删除了生物的{{nbt|int|HurtByTimestamp}}标签。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Objektdaten]]
+[[en:Entity format]]
+[[fr:Format d'entité]]
+[[ja:エンティティフォーマット]]
+[[ko:개체 형식]]
+[[pt:Formato de entidade]]

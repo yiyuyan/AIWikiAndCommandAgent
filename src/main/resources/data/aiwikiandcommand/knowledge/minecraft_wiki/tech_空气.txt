@@ -1,0 +1,165 @@
+# 页面: 空气
+# 来源: https://zh.minecraft.wiki/w/%E7%A9%BA%E6%B0%94
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用简单计算器的页面, 使用计算器的页面, 可再生资源, 基岩版独有信息, 方块, 物品, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:33:13
+# 原始 Wikitext 内容:
+
+{{for|愚人节版本的空气物品|空气（23w13a_or_b）}}{{Infobox block
+|image=Air.png
+|image2=Air (shown) JE2.png
+|invimage=Air
+|block-id-raw='''空气'''：air<br>'''洞穴空气'''{{only|je|short=1}}：cave_air<br>'''虚空空气'''{{only|je|short=1}}：void_air
+}}
+'''空气（Air）'''是用来表示其所在的空间未被占用的方块和物品。
+
+'''洞穴空气（Cave air）'''{{only|java}}是[[结构]]内的地下的空气，生成于[[洞穴]]中。
+
+'''虚空空气（Void air）'''{{only|java}}是内部用于建造区域外的方块位置的空气。
+
+== 生成 ==
+空气存在于任何未被[[方块]]占用的空间里。
+
+{{in|java}}虚空空气存在于任何不属于可建造区域的空间里，包括未加载的区块、高于或低于建造高度的区域，例如[[虚空]]中。受限于存档保存，游戏并不会真正在这些区域生成虚空空气，仅仅是当游戏需要使用这些区域的方块时认为这些方块是虚空空气。
+
+=== 自然生成 ===
+许多[[结构]]都包含空气，在生成时将其他方块替换为空气。
+
+{{in|java}}地上结构生成普通空气（除了暴露在[[恶地]]里的[[废弃矿井]]和地表的[[湖泊]]，它们会生成洞穴空气<ref>{{bug|MC-125112||平顶山地表的废弃矿井使用洞穴空气|Won't Fix}}</ref><ref>{{bug|MC-128250||地表的水和熔岩池使用洞穴空气|Won't Fix}}</ref>），地下结构生成洞穴空气。
+
+{{Block distribution|空气,洞穴空气}}
+
+== 获取 ==
+空气物品存在于任何未被[[物品]]占用的物品槽位里。
+
+一些[[战利品表]]中包含空气，使其在一次生成尝试中生成空气，即不生成任何物品。
+
+== 破坏 ==
+空气没有[[轮廓箱]]，因此不能挖掘空气。
+
+[[虚空]]中的空气不能被破坏，尝试破坏只会使这些方块留在原处而不被改变。
+{{Breaking table|空气,洞穴空气,虚空空气}}
+空气被破坏后不会掉落。
+
+== 用途 ==
+=== 空气方块 ===
+{{Filetr|InvisibleBlocksShow.png|缩略图|250px|{{in|java}}空气（左一）以及游戏中的其他隐形方块被渲染出的立方体框外观}}
+
+空气被用于表示没有方块存在的位置。通过{{cmd|setblock}}或{{cmd|fill}}来放置空气，可以移除其他的方块。
+
+空气和非固体方块享有着一些类似的属性，包括在玩家或生物移动中不会受到[[伤害#窒息|窒息]]伤害。玩家或生物在受[[伤害#溺水|溺水]]伤害时也在水中有空气的地方得到呼吸。
+
+{{in|java}}空气是一种“隐形方块”，处于开启了“显示隐形方块”的存储模式[[结构方块]]的存储区域范围内的空气会显示出一个淡蓝色的立方体框，空气的种类不会影响渲染外观。
+
+<gallery>
+Air (shown) JE2.png|[[结构方块]]启用的渲染
+</gallery>
+
+=== 空气物品 ===
+[[File:Air Item on MakeCode.png|缩略图|250px|在[[代码连接]]和[[基岩版编辑器]]展现的空气的图标，然而在游戏内不能以此纹理显示，即使已在代码连接中编写了有关代码]]
+
+空气物品用于表示没有物品存在的位置。玩家并不能像对其他物品那样对空气物品进行操作，如对其在[[物品栏]]进行转移或放置它。空气物品被选中时不会在[[HUD]]显示其名称。
+
+使用命令可以替换某个物品槽位的物品为空气，這將移除该位置的其他物品。
+
+{{in|je}}尝试通过{{cmd|item}}读取一个没有物品的物品槽位会读取到一个空气物品。
+
+可以利用{{cmd|give}}命令“给予”玩家一个空气物品，但除了提示成功给予外不会有任何實際效果。<ref>{{bug|MCPE-44464||空气方块在{{cmd|give}}命令中可用|WAI}}</ref>
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|firstcolumnname=方块
+|generatetranslationkeys=java
+|showblocktags=je
+|Air
+|spritetype=block
+|blocktags={{GameTag|block|air}}
+|nameid=air}}
+{{ID table
+|Cave Air
+|spritetype=block
+|rowspan=2|blocktags={{GameTag|block|cave_air,void_air}}
+|nameid=cave_air}}
+{{ID table
+|Void Air
+|spritetype=block
+|nameid=void_air
+|foot=1}}
+{{ID table
+|firstcolumnname=流体
+|displayname=空
+|spritename=air
+|spritetype=block
+|nameid=empty
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|firstcolomnname=Air
+|generatetranslationkeys=bedrock
+|Air
+|spritetype=block
+|nameid=air
+|foot=1}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java pre-Classic}}
+|{{HistoryLine||rd-131655|加入了空气，但它尚未被列为游戏的一种[[方块]]。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|空气影响水平方向上邻近的[[液体]]方块。如果空气接触到液体方块，有{{frac|2|3}}的概率液体方块会消失并让液体后退，有{{frac|1|3}}的概率液体方块会填充空气，让液体流动。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.7.2|dev=13w38b|[[File:Missing Texture JE3.png|32px]] 空气成为了方块<ref>{{tweet|Dinnerbone|381055646806077440}}</ref>并且可以放在物品栏里，使用[[无效纹理]]。}}
+|{{HistoryLine|||dev=13w38c|空气无法再被放在[[物品栏]]中了，但实际上还是能够作为[[方块]]被玩家手持。}}
+|{{HistoryLine||1.10|dev=16w20a|空气现在可以通过使用[[结构方块]]而变得可见。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，此方块的数字ID为0。}}
+|{{HistoryLine|||dev=18w06a|加入了两种新的空气变种：洞穴空气和虚空空气。
+|[[洞穴]]现在产生洞穴空气而不是正常空气。
+|虚空空气现在替代正常空气生成于在Y值小于0或大于256，以及在未加载的[[区块]]里。}}
+|{{HistoryLine||1.18|dev=21w37a|虚空空气现在替代正常空气生成于在Y值小于-64或大于319，以及在未加载的[[区块]]里。}}
+|{{HistoryLine||1.21.2|dev=pre2|物品转变[[配方]]的输出物品不再可以是空气。}}
+|{{HistoryLine||26.3|dev=snapshot-2|[[洞穴#下界|下界洞穴]]现在产生正常空气而不是洞穴空气。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||Demo|加入了空气。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.5.0|dev=1.5.0.1|空气的数字ID被更改为<code>-158</code>。}}
+|{{HistoryLine||26.30|dev=26.30.29|现在物品栏和容器中的空气不再显示其数量。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了空气。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|加入了空气。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox items|Others}}
+{{Navbox blocks|others}}
+
+[[cs:Vzduch]]
+[[de:Luft]]
+[[en:Air]]
+[[es:Aire]]
+[[fr:Air]]
+[[hu:Levegő]]
+[[it:Aria]]
+[[ja:空気]]
+[[ko:공기]]
+[[lzh:氣]]
+[[nl:Lucht]]
+[[pl:Powietrze]]
+[[pt:Ar]]
+[[ru:Воздух]]
+[[th:อากาศ]]
+[[uk:Повітря]]

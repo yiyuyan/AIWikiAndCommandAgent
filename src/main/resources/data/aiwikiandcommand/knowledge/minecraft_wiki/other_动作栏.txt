@@ -1,0 +1,141 @@
+# 页面: 动作栏
+# 来源: https://zh.minecraft.wiki/w/%E5%8A%A8%E4%BD%9C%E6%A0%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:20:48
+# 原始 Wikitext 内容:
+
+{{stub}}
+
+[[File:JukeboxActionbar.png|thumb|right|动作栏显示正在播放的曲目，位于物品名称文本的上方]]
+'''动作栏（Actionbar）'''是玩家屏幕中下方的一个文本区域。
+
+== 机制 ==
+当玩家进行某些操作时，一段提示性文字会立即叠加在玩家的视野上，持续、淡出时间约为{{convert|40}}、{{convert|20}}{{Verify}}。此时长无法通过[[选项]]修改，也不会受{{el|je}}中的“{{tp|options.notifications.display_time}}”选项影响。
+
+游戏界面只能显示1个动作栏消息，当有新的动作栏内容时，原先的消息会被新的内容覆盖。
+
+{{in|je}}动作栏文本没有背景；{{in|be}}动作栏文本带有黑色背景，{{tr|可访问性|協助工具}}设置中的“{{tr|操作栏背景不透明度|動作列背景不透明度}}”滑块允许玩家修改背景的不透明度。
+
+下表列出了游戏中会出现的所有动作栏文本。
+
+{| class="wikitable"
+! style="width: 400px" rowspan=2 | 玩家动作
+! style="width: 400px" colspan=2 | 动作栏文本
+|-
+! {{el|JE}}
+! {{el|BE}}
+|-
+| 对{{BlockLink|Jukebox}}{{ctrl|使用}}{{ItemLink|Music Discs}}
+| colspan=2 style="text-align:center" | {{tp|record.nowPlaying|''曲目名称''}}
+|-
+| 坐上{{EntityLink|Boats}}
+| rowspan=3 | {{tp|mount.onboard|''按键''}}
+| {{tc|no|无}}
+|-
+| 坐上{{EntityLink|Minecart}}
+| {{tr|轻触跃下离开矿车|點擊取消乘坐以離開礦車}}
+|-
+| 骑上生物
+| {{tr|轻触跃下可以下马|點擊取消乘坐以取消乘坐}}
+|-
+| 在白天且未出现[[雷暴]]天气时{{ctrl|使用}}{{BlockLink|Beds}}
+| {{tp|block.minecraft.bed.no_sleep}}
+| {{tr|你只能在晚上和雷雨天睡觉|您只能在晚上和有雷雨時睡覺}}<ref group="注" name="bed">文本显示于聊天框而非动作栏。</ref>
+|-
+| 在夜晚且附近有[[敌对生物]]时{{ctrl|使用}}{{BlockLink|Beds}}
+| {{tp|block.minecraft.bed.not_safe}}
+| {{tr|你现在不能休息，周围有怪物在游荡|有怪物在附近遊蕩，現在不能休息}}<ref group="注" name="bed"/>
+|-
+| 在距离过远时{{ctrl|使用}}{{BlockLink|Beds}}
+| {{tp|block.minecraft.bed.too_far_away}}
+| {{tr|床太远了|床舖距離太遠}}<ref group="注" name="bed"/>
+|-
+| {{ctrl|使用}}被其他生物占据的{{BlockLink|Beds}}
+| {{tp|block.minecraft.bed.occupied}}
+| {{tr|这张床已被占用|這張床舖已經有人佔據了}}<ref group="注" name="bed"/>
+|-
+| {{ctrl|使用}}上方有[[窒息]]方块的{{BlockLink|Beds}}
+| {{tp|block.minecraft.bed.obstructed}}
+| {{tr|床被阻挡|床被阻擋了}}<ref group="注" name="bed"/>
+|-
+| [[多人游戏]]中，入睡玩家数量发生变化并且足以跳过夜晚
+| {{tp|sleep.skipping_night}}
+| {{tr|整夜睡觉|一覺到天亮}}
+|-
+| 多人游戏中，入睡玩家数量发生变化并且不足以跳过夜晚
+| {{tp|sleep.players_sleeping|''已睡数''|''总数''}}
+| {{tr|''已睡数''/''总数'' 名玩家已入睡|''已睡數''/''總數'' 名玩家正在睡覺}}
+|-
+| 多人游戏中，入睡玩家数量发生变化，但“[[入睡占比]]”游戏规则的值大于{{cd|100}}
+| {{tp|sleep.not_possible}}
+| {{tr|今晚不能再休息了|今晚不能再略過休息了}}
+|}
+
+{| class="wikitable"
+|+ {{el|je}}独有文本
+! style="width: 400px" | 玩家动作
+! 动作栏文本
+|-
+| 未持有[[容器]]的{{cd|lock}}标签所指定物品时{{ctrl|使用}}该容器
+| {{tp|container.isLocked|''容器''}}
+|-
+| [[旁观模式]]下{{ctrl|使用}}包含{{nbt|string|LootTable}}标签的[[容器]]
+| {{tp|container.spectatorCantOpen}}
+|-
+| [[创造模式物品栏#已保存的快捷栏|保存快捷栏]]
+| {{tp|inventory.hotbarSaved|''按键''|''数字键''}}
+|-
+| 尝试在建筑高度上限以上放置方块
+| {{tp|build.tooHigh|''数值''}}
+|-
+| 尝试在建筑高度下限以下放置方块
+| {{tp|build.tooLow|''数值''}}
+|-
+| 游戏规则{{code|[[tntExplodes]]}}为{{code|false}}时点燃TNT
+| {{tp|block.minecraft.tnt.disabled}}
+|-
+| 在单人游戏中尝试打开[[社交屏幕]]
+| {{tp|multiplayer.socialInteractions.not_available}}
+|-
+| 聊天在客户端选项中被禁用时，尝试打开[[聊天屏幕]]
+| {{tp|chat.disabled.options}}
+|-
+| 聊天在启动器选项中被禁用时，尝试打开聊天屏幕
+| {{tp|chat.disabled.launcher}}
+|-
+| 聊天在账户设置中被禁用时，尝试打开聊天屏幕
+| {{tp|chat.disabled.profile|''按键''}}
+|-
+| 聊天在账户设置中被禁用时，再次尝试打开聊天屏幕
+| {{tp|chat.disabled.profile.moreInfo}}
+|}
+
+=== 命令 ===
+{{main|命令/title}}
+玩家可以使用<code>/title <targets> actionbar <title></code>命令使动作栏显示指定文本。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了骑乘时的动作栏提示。}}
+|{{HistoryLine||1.11|dev=16w32a|现在试图使用[[床]]产生的消息会出现在动作栏上。}}
+|{{HistoryLine|||dev=16w32b|为{{cmd|title}}加入了在动作栏上显示文本的能力。}}
+|{{HistoryLine||1.12|dev=17w06a|加入了创造模式下保存快捷栏时的动作栏提示。}}
+|{{HistoryLine||1.13|dev=?|将动作栏文本“你只能在晚上睡觉”改为“{{tr|你只能在夜间或雷暴中入眠|你只能在晚上或暴風雨中入睡}}”。}}
+|{{HistoryLine||1.16.4|dev=pre1|加入了在单人游戏尝试打开社交屏幕时的动作栏提示。}}
+|{{HistoryLine||1.17|dev=20w51a|加入了在游戏规则{{code|[[playersSleepingPercentage]]}}设置为100以上时尝试入睡的动作栏提示。}}
+|{{HistoryLine||1.21.5|dev=25w10a|加入了在游戏规则{{code|[[tntExplodes]]}}设为{{code|false}}时尝试点燃[[TNT]]的动作栏提示。}}
+|{{HistoryLine||26.1|dev=snapshot-8|加入了在建筑高度下限以下尝试放置方块时的动作栏提示。}}
+}}
+
+== 注释 ==
+{{notelist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:UI]]
+
+[[en:Action bar]]
+[[ja:アクションバー]]
+[[pt:Barra de ação]]

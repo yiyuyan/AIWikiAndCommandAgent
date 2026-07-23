@@ -1,0 +1,335 @@
+# 页面: 光源方块
+# 来源: https://zh.minecraft.wiki/w/%E5%85%89%E6%BA%90%E6%96%B9%E5%9D%97
+# 分类: Java版独有信息, 不可再生资源, 使用简单计算器的页面, 基岩版独有信息, 方块, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:20:16
+# 原始 Wikitext 内容:
+
+{{tr|mode=T|光源方块|光源|光（方塊）}}
+{{For|泛指会发光的方块|亮度#发光方块}}
+{{Infobox block
+|image=Light 0 JE3.png
+|image2=Light 0 BE1.png
+|imagecaption={{el|je}}
+|image2caption={{el|be}}
+|extratext={{tr|查看|檢視}}[[#渲染图|所有渲染图]]
+|invimage=Light 0
+|invimage2=Light 1
+|invimage3=Light 2
+|invimage4=Light 3
+|invimage5=Light 4
+|invimage6=Light 5
+|invimage7=Light 6
+|invimage8=Light 7
+|invimage9=Light 8
+|invimage10=Light 9
+|invimage11=Light 10
+|invimage12=Light 11
+|invimage13=Light 12
+|invimage14=Light 13
+|invimage15=Light 14
+|invimage16=Light 15
+|invimage17=----
+|invimage18=----
+|invimage19=Light Block 0
+|invimage20=Light Block 1
+|invimage21=Light Block 2
+|invimage22=Light Block 3
+|invimage23=Light Block 4
+|invimage24=Light Block 5
+|invimage25=Light Block 6
+|invimage26=Light Block 7
+|invimage27=Light Block 8
+|invimage28=Light Block 9
+|invimage29=Light Block 10
+|invimage30=Light Block 11
+|invimage31=Light Block 12
+|invimage32=Light Block 13
+|invimage33=Light Block 14
+|invimage34=Light Block 15
+|light=0-15
+|block-map-color='''含水时'''：{{color|#4040FF}}
+|item-id-raw='''{{el|je}}'''：light<br>'''{{el|be}}'''：见{{slink||数据值}}
+|block-id-raw='''{{el|je}}'''：light<br>'''{{el|be}}'''：见{{slink||数据值}}
+}}
+
+'''光源方块（Light）'''是一种隐形的方块，可以产生0到15级的亮度，主要用于地图制作。
+
+== 生成 ==
+光源方块不会生成在世界中。
+
+== 获取 ==
+{{see also|Tutorial:获取任意物品}}
+光源方块无法在未开启[[作弊]]的[[生存模式]]的世界中获取。使用[[创造模式]]或启用[[作弊]]，光源方块可以通过{{only|for=[[创造模式物品栏]]（需要启用“{{tp|options.operatorItemsTab}}”，或“{{tp|itemGroup.hotbar}}”中有光源方块）|JE}}、[[创造模式]]中使用{{ctrl|选取方块}}或[[命令]]等方式获得。
+
+{{in|je}}使用命令{{cmd|give <''目标''> minecraft:light[minecraft:block_state{{=}}{level:"<int>"<nowiki/>}]}}可获得指定亮度与物品模型的光源方块。若亮度小于0，则物品会使用亮度为0的纹理，大于15则使用亮度为15的纹理。若亮度未指定或不在0-15范围内，其会发出亮度为15的光。
+
+{{in|be}}使用命令{{cmd|give <''目标''> light_block [amount: int] [data: int (0 - 15)] [components: json]}}可获得指定亮度与物品模型的光源方块，数据值未指定则默认为0级。
+
+== 破坏 ==
+光源方块不能被挖掘破坏。
+
+{{Breaking table}}
+
+光源方块被破坏后不会掉落。
+
+== 用途 ==
+{{Filetr|InvisibleBlocksShow.png|缩略图|250px|{{in|je}}光源方块（右一）以及游戏中的其他隐形方块被渲染出的立方体框外观}}
+作为一种被设计为隐藏自身存在的方块，光源方块有许多与[[结构空位]]相似的性质。
+
+光源方块通常是不可见的，并且没有碰撞箱。
+
+光源方块不会被[[水]]或{{only|for=[[熔岩]]|je}}冲毁，{{only|for=能够阻止[[水]]或[[熔岩]]通过。|je}}
+
+光源方块会阻碍植物生长。
+
+光源方块具有一个完整方块大小的判定箱，但只在玩家手持光源方块时才可以选中，否则玩家只能选中其后方的物体。
+
+光源方块是[[可替代方块]]，因此如果在光源方块所在的位置放置其他方块，那么该方块会取代光源方块。<ref>{{bug|MC-263398|||WAI}}</ref>
+
+光源方块可以含水。含水的光源方块可以通过在光源方块中放置水来获得，允许玩家创造发光且不会结冰或被[[熔岩]]破坏的水体。
+
+[[file:Light (shown) JE1.png|缩略图|200px|[[结构方块]]启用的渲染]]
+
+{{in|je}}光源方块是一种“隐形方块”，位于开启了“显示隐形方块”的储存模式[[结构方块]]的存储区域范围内的光源方块会显示出一个淡黄色的立方体框。
+
+{{in|je}}光源方块不可被[[活塞]]或[[黏性活塞]]推动和拉动<ref>{{bug|MC-221603||活塞的推动会被光源方块阻挡}}</ref>；而{{in|be}}光源方块可被[[活塞]]或[[黏性活塞]]推动和拉动<ref>{{bug|MCPE-59059||活塞可推动光源方块，黏液块可拉动光源方块。|WAI}}</ref>。
+
+=== 等级 ===
+每个光源方块（无论为[[方块]]还是[[物品]]形式）都有一定的等级，可以是0-15中的任何整数值。物品形式的光源方块纹理为“灯泡”图案，且在等级不为0时，“灯泡”看上去是发光的。纹理左上角还标有显示亮度等级的数字。光源方块的等级决定了其方块形式的亮度等级。
+
+{{in|je}}光源方块的等级由其方块状态{{cd|level}}控制，光源方块的物品形式的等级则由物品数据{{cd|"minecraft:block_state"/level}}控制。
+
+{{in|be}}光源方块的不同等级具有不同ID。
+
+在创造模式中，对放置的光源方块按{{ctrl|使用}}键可以顺次更改亮度等级，每次交互会增加1级亮度等级，等级为15时交互则会降回0。
+
+光源方块的判定箱只有在玩家手持光源方块物品时才能选中，因此玩家需要持有光源方块才能与其交互。
+
+除了发出光以外，光源方块还有许多独特的特性，因此玩家可以使用等级为0的光源方块来利用这些特性而不产生光。
+
+=== 粒子 ===
+类似于[[屏障]]，在[[创造模式]]下，当玩家手持物品形式的光源方块时，所有已经放置的光源方块会以[[粒子效果]]的方式显示其物品图标。{{in|je}}图标将在玩家手持光源方块后随机显示，每个粒子显示{{convert|80|刻|秒}}。距离越近显示概率越大，最终在32格（[[切比雪夫距离]]）外完全不显示；{{in|be}}它们将在玩家手持光源方块后立即全部显示。这个效果是客户端处理的，而且在生存模式中拿着光源方块不会出现此粒子效果。{{in|je}}当[[视频设置|{{tp|options.particles}}]]设置为“最少”时，光源方块粒子将不会被显示。
+
+=== 光源 ===
+{{in|je}}光源方块发出亮度等级等同于其方块状态level存储的等级的光。{{in|be}}对应ID的光源方块发出对应的亮度等级的光。
+
+等级为0的光源方块不会发光。
+
+== 音效 ==
+{{Sound table/Block/Stone}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Light
+|spritetype=block
+|nameid=light
+|showblocktags=je
+|blocktags={{GameTag|block|light}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 0
+|spritetype=block
+|nameid=light_block_0
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 1
+|spritetype=block
+|nameid=light_block_1
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 2
+|spritetype=block
+|nameid=light_block_2
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 3
+|spritetype=block
+|nameid=light_block_3
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 4
+|spritetype=block
+|nameid=light_block_4
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 5
+|spritetype=block
+|nameid=light_block_5
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 6
+|spritetype=block
+|nameid=light_block_6
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 7
+|spritetype=block
+|nameid=light_block_7
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 8
+|spritetype=block
+|nameid=light_block_8
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 9
+|spritetype=block
+|nameid=light_block_9
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 10
+|spritetype=block
+|nameid=light_block_10
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 11
+|spritetype=block
+|nameid=light_block_11
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 12
+|spritetype=block
+|nameid=light_block_12
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 13
+|spritetype=block
+|nameid=light_block_13
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 14
+|spritetype=block
+|nameid=light_block_14
+|translationkey=tile.light_block.name}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Light Block 15
+|spritetype=block
+|nameid=light_block_15
+|translationkey=tile.light_block.name
+|foot=1}}
+
+=== 方块数据 ===
+{{see also|基岩版数据值}}
+
+{{/DV}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table|光源方块|光源方块（0）,光源方块（1）,光源方块（2）,光源方块（3）,光源方块（4）,光源方块（5）,光源方块（6）,光源方块（7）,光源方块（8）,光源方块（9）,光源方块（10）,光源方块（11）,光源方块（12）,光源方块（13）,光源方块（14）,光源方块（15）}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=21w13a|[[File:Light 0 JE1.png|32px]] [[File:Light 1 JE1.png|32px]] [[File:Light 2 JE1.png|32px]] [[File:Light 3 JE1.png|32px]] [[File:Light 4 JE1.png|32px]] [[File:Light 5 JE1.png|32px]] [[File:Light 6 JE1.png|32px]] [[File:Light 7 JE1.png|32px]] [[File:Light 8 JE1.png|32px]] [[File:Light 9 JE1.png|32px]] [[File:Light 10 JE1.png|32px]] [[File:Light 11 JE1.png|32px]] [[File:Light 12 JE1.png|32px]] [[File:Light 13 JE1.png|32px]] [[File:Light 14 JE1.png|32px]] [[File:Light 15 JE1.png|32px]] 加入了光源方块。
+|[[File:Light (held) JE1.png|32px]] 与[[基岩版]]不同，当玩家手持光源方块时，{{cd|light}}[[粒子]]会显现在放置出的光源方块上。}}
+|{{HistoryLine||1.17|dev=21w18a|[[File:Light 0 JE2.png|32px]] [[File:Light 1 JE2.png|32px]] [[File:Light 2 JE2.png|32px]] [[File:Light 3 JE2.png|32px]] [[File:Light 4 JE2.png|32px]] [[File:Light 5 JE2.png|32px]] [[File:Light 6 JE2.png|32px]] [[File:Light 7 JE2.png|32px]] [[File:Light 8 JE2.png|32px]] [[File:Light 9 JE2.png|32px]] [[File:Light 10 JE2.png|32px]] [[File:Light 11 JE2.png|32px]] [[File:Light 12 JE2.png|32px]] [[File:Light 13 JE2.png|32px]] [[File:Light 14 JE2.png|32px]] [[File:Light 15 JE2.png|32px]] 更改了光源方块的物品纹理。
+|此前，光源方块的物品纹理使用高分辨率（32&times;32，普通分辨率为16&times;16）纹理。}}
+|{{HistoryLine||1.17|dev=21w20a|[[File:Light 0 JE3.png|32px]] [[File:Light 1 JE3.png|32px]] [[File:Light 2 JE3.png|32px]] [[File:Light 3 JE3.png|32px]] [[File:Light 4 JE3.png|32px]] [[File:Light 5 JE3.png|32px]] [[File:Light 6 JE3.png|32px]] [[File:Light 7 JE3.png|32px]] [[File:Light 8 JE3.png|32px]] [[File:Light 9 JE3.png|32px]] [[File:Light 10 JE3.png|32px]] [[File:Light 11 JE3.png|32px]] [[File:Light 12 JE3.png|32px]] [[File:Light 13 JE3.png|32px]] [[File:Light 14 JE3.png|32px]] [[File:Light 15 JE3.png|32px]] 再次更改了光源方块的物品纹理。
+|[[File:Light (shown) JE1.png|32px]] 现在光源方块可由储存模式的[[结构方块]]显示出来。}}
+|{{HistoryLine||1.18|dev=21w42a|现在当玩家手持光源方块时，已放置的光源方块会将其物品纹理作为粒子显示，取代了原先的亮色星形<code>light</code>粒子。<ref>{{bug|MC-233771|||Fixed}}</ref>
+|原先的亮色星形<code>light</code>粒子现在仅用作物品模型的占位符纹理。}}
+|{{HistoryLine||1.19|dev=22w11a|[[凋灵]]与[[末影龙]]不再能[[破坏]]光源方块。}}
+|{{HistoryLine||1.19.3|dev=22w44a|现在光源方块可从创造模式物品栏中获取，但只有亮度等级为15的。此时被归类在红石方块标签下。}}
+|{{HistoryLine|||dev=22w45a|现在所有亮度等级的光源方块都可从创造模式物品栏中获取，并被归类到新的管理员用品标签下。}}
+|{{HistoryLine||1.21.4|dev=24w45a|现在光源方块物品默认具有<code>block_state</code>组件。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.13.0|dev=1.13.0.4|加入了光源方块的纹理。}}
+|{{HistoryLine|||dev=1.13.0.9|[[File:Light 0 BE1.png|32px]] [[File:Light 1 BE1.png|32px]] [[File:Light 2 BE1.png|32px]] [[File:Light 3 BE1.png|32px]] [[File:Light 4 BE1.png|32px]] [[File:Light 5 BE1.png|32px]] [[File:Light 6 BE1.png|32px]] [[File:Light 7 BE1.png|32px]] [[File:Light 8 BE1.png|32px]] [[File:Light 9 BE1.png|32px]] [[File:Light 10 BE1.png|32px]] [[File:Light 11 BE1.png|32px]] [[File:Light 12 BE1.png|32px]] [[File:Light 13 BE1.png|32px]] [[File:Light 14 BE1.png|32px]] [[File:Light 15 BE1.png|32px]] 加入了光源方块。}}
+|{{HistoryLine||1.17.30|dev=1.17.20.22|现在当玩家手持光源方块时，放置出的光源方块会以粒子效果的形式显示其物品纹理。}}
+|{{HistoryLine|||dev=1.17.30.20|修改了光源方块的判定箱。
+|现在对着光源方块按下右键可顺次更改其亮度等级。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.22|现在光源方块免疫爆炸效果。}}
+|{{HistoryLine||1.19.20|dev=1.19.20.22|末影龙不再能破坏光源方块。<ref>{{bug|MCPE-158343|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|光源方块的爆炸抗性由3600000改为3600000.75。}}
+|{{HistoryLine||1.20.70|dev=1.20.70.22|现在光源方块被破坏后不再掉落自身。}}
+|{{HistoryLine||1.21.20|dev=1.21.20.21|拆分了光源方块的ID<code>light_block</code>，现在16种不同亮度的光源方块拥有了自己的ID，同时弃用了方块状态<code>block_light_level</code>。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.22|光源方块的英文名称由“Light Block”变为“Light”，以匹配{{el|je}}。}}
+}}
+
+== 你知道吗 ==
+* {{in|be}}光源方块和[[元素]]的纹理分辨率都为32&times;32。
+
+== 画廊 ==
+=== 渲染图 ===
+<gallery>
+Cube Outline Box.png|线框
+</gallery>
+
+==== Java版 ====
+<gallery>
+Light 0 JE3.png
+Light 1 JE3.png
+Light 2 JE3.png
+Light 3 JE3.png
+Light 4 JE3.png
+Light 5 JE3.png
+Light 6 JE3.png
+Light 7 JE3.png
+Light 8 JE3.png
+Light 9 JE3.png
+Light 10 JE3.png
+Light 11 JE3.png
+Light 12 JE3.png
+Light 13 JE3.png
+Light 14 JE3.png
+Light 15 JE3.png
+File:Light (held) JE1.png
+</gallery>
+
+==== 基岩版 ====
+<gallery>
+Light 0 BE1.png
+Light 1 BE1.png
+Light 2 BE1.png
+Light 3 BE1.png
+Light 4 BE1.png
+Light 5 BE1.png
+Light 6 BE1.png
+Light 7 BE1.png
+Light 8 BE1.png
+Light 9 BE1.png
+Light 10 BE1.png
+Light 11 BE1.png
+Light 12 BE1.png
+Light 13 BE1.png
+Light 14 BE1.png
+Light 15 BE1.png
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[de:Lichtblock]]
+[[en:Light (block)]]
+[[es:Luz (bloque)]]
+[[fr:Lumière (bloc)]]
+[[ja:ライトブロック]]
+[[ko:빛 (블록)]]
+[[pl:Blok światła]]
+[[pt:Luz (bloco)]]
+[[ru:Блок света]]
+[[uk:Світло (блок)]]

@@ -1,0 +1,611 @@
+# 页面: 伤害类型
+# 来源: https://zh.minecraft.wiki/w/%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B
+# 分类: 游戏内容, 需要补充的条目
+# 抓取时间: 2026-07-14 17:20:06
+# 原始 Wikitext 内容:
+
+{{about|游戏中的所有伤害类型|伤害类型的数据驱动实现|伤害类型定义格式}}
+'''伤害类型（Damage type）'''是[[伤害]]的基本属性之一。伤害类型决定了该伤害能被如何防护和免疫，影响生物受到伤害时的反应，控制伤害是否能造成击退，以及伤害是否受到难度影响。
+
+== Java版 ==
+下表中列出了{{el|je}}中的所有伤害类型。
+* 伤害类型：伤害在数据包中注册的名称，省略<code>minecraft:</code>命名空间。
+* 标签：包含此伤害类型的[[Java版标签/伤害类型|伤害类型标签]]，决定了该伤害类型的伤害会有何种行为。
+* 死亡消息：该伤害类型的伤害导致的死亡使用的[[死亡消息]]名称。
+* 额外参数：
+** 死亡消息类型：额外的死亡消息生成方式。
+** [[声音]]效果：玩家受到该伤害类型的伤害时使用的音效。
+** 总是受[[难度]]影响：玩家受到的该伤害类型的伤害总是受到难度影响，无论伤害是否有来源实体。
+* 消耗度增加：玩家每次受到该伤害类型的伤害时，饥饿值的[[饥饿#饥饿因素|消耗度]]。
+* 来源：能造成该伤害类型的伤害的场景。
+{| class="wikitable collapsible sortable"
+|+ [[Java版]]伤害类型
+|-
+! style="width:20%;" | 伤害类型
+! style="width:20%;" | 标签
+! style="width:20%;" | 死亡消息
+! style="width:20%;" | 额外参数
+! style="width:5%;" | 消耗度增加
+! style="width:15%;" | 来源
+|-
+| <code>arrow</code>
+| {{GameTag|damage_type|arrow|cd=1}}
+| <code>arrow</code>
+|
+| 0.1
+|
+* 被[[箭]]击中
+|-
+| <code>bad_respawn_point</code>
+| {{GameTag|damage_type|bad_respawn_point|cd=1}}
+| <code>badRespawnPoint</code>
+| 死亡消息类型：<code>intentional_game_design</code><br>总是受难度影响
+| 0.1
+|
+* [[床]]或[[重生锚]]的[[爆炸]]
+|-
+| <code>cactus</code>
+| {{GameTag|damage_type|cactus|cd=1}}
+| <code>cactus</code>
+|
+| 0.1
+|
+* 接触[[仙人掌]]
+|-
+| <code>campfire</code>
+| {{GameTag|damage_type|campfire|cd=1}}
+| <code>inFire</code>
+| 声音效果：<code>burning</code>
+| 0.1
+|
+* 站在[[营火]]或[[灵魂营火]]上
+|-
+| <code>cramming</code>
+| {{GameTag|damage_type|cramming|cd=1}}
+| <code>cramming</code>
+|
+| 0.0
+|
+* [[挤压]]
+|-
+| <code>dragon_breath</code>
+| {{GameTag|damage_type|dragon_breath|cd=1}}
+| <code>dragonBreath</code>
+|
+| 0.0
+|
+* ''无''{{fn|曾用于龙息。15w31c后，龙息不再造成此伤害类型，参见{{bug|MC-84595}}。}}
+|-
+| <code>drown</code>
+| {{GameTag|damage_type|drown|cd=1}}
+| <code>drown</code>
+| 声音效果：<code>drowning</code>
+| 0.0
+|
+* [[溺水]]
+|-
+| <code>dry_out</code>
+| {{GameTag|damage_type|dry_out|cd=1}}
+| <code>dryout</code>
+|
+| 0.1
+|
+* [[脱水]]
+|-
+| <code>ender_pearl</code>
+| {{GameTag|damage_type|ender_pearl|cd=1}}
+| <code>fall</code>
+| 死亡消息类型：<code>fall_variants</code>
+| 0.0
+|
+* [[末影珍珠]]传送
+|-
+| <code>explosion</code>
+| {{GameTag|damage_type|explosion|cd=1}}
+| <code>explosion</code>
+| 总是受难度影响
+| 0.1
+|
+* [[爆炸]]
+|-
+| <code>fall</code>
+| {{GameTag|damage_type|fall|cd=1}}
+| <code>fall</code>
+| 死亡消息类型：<code>fall_variants</code>
+| 0.0
+|
+* [[摔落]]
+|-
+| <code>falling_anvil</code>
+| {{GameTag|damage_type|falling_anvil|cd=1}}
+| <code>anvil</code>
+|
+| 0.1
+|
+* 被[[下落的方块|下落的铁砧]]砸中
+|-
+| <code>falling_block</code>
+| {{GameTag|damage_type|falling_block|cd=1}}
+| <code>fallingBlock</code>
+|
+| 0.1
+|
+* 被[[下落的方块]]砸中
+|-
+| <code>falling_stalactite</code>
+| {{GameTag|damage_type|falling_stalactite|cd=1}}
+| <code>fallingStalactite</code>
+|
+| 0.1
+|
+* 被[[下落的方块|下落的滴水石锥]]砸中
+|-
+| <code>fireball</code>
+| {{GameTag|damage_type|fireball|cd=1}}
+| <code>fireball</code>
+| 声音效果：<code>burning</code>
+| 0.1
+|
+* 被[[火球]]击中
+* 被[[小火球]]击中
+|-
+| <code>fireworks</code>
+| {{GameTag|damage_type|fireworks|cd=1}}
+| <code>fireworks</code>
+|
+| 0.1
+|
+* 被[[烟花火箭]]的爆裂波及
+|-
+| <code>fly_into_wall</code>
+| {{GameTag|damage_type|fly_into_wall|cd=1}}
+| <code>flyIntoWall</code>
+|
+| 0.0
+|
+* 使用[[鞘翅]]滑翔时高速撞击方块侧面
+|-
+| <code>freeze</code>
+| {{GameTag|damage_type|freeze|cd=1}}
+| <code>freeze</code>
+| 声音效果：<code>freezing</code>
+| 0.0
+|
+* [[冰冻]]
+|-
+| <code>generic</code>
+| {{GameTag|damage_type|generic|cd=1}}
+| <code>generic</code>
+|
+| 0.0
+|
+* [[蜜蜂]]失去螫针
+* [[鹦鹉]]被使用[[曲奇]]
+|-
+| <code>generic_kill</code>
+| {{GameTag|damage_type|generic_kill|cd=1}}
+| <code>genericKill</code>
+|
+| 0.0
+|
+* {{cmd|kill}}
+|-
+| <code>hot_floor</code>
+| {{GameTag|damage_type|hot_floor|cd=1}}
+| <code>hotFloor</code>
+| 声音效果：<code>burning</code>
+| 0.1
+|
+* 站在[[岩浆块]]上
+|-
+| <code>in_fire</code>
+| {{GameTag|damage_type|in_fire|cd=1}}
+| <code>inFire</code>
+| 声音效果：<code>burning</code>
+| 0.1
+|
+* 接触[[火]]
+|-
+| <code>in_wall</code>
+| {{GameTag|damage_type|in_wall|cd=1}}
+| <code>inWall</code>
+|
+| 0.0
+|
+* [[窒息]]
+|-
+| <code>indirect_magic</code>
+| {{GameTag|damage_type|indirect_magic|cd=1}}
+| <code>indirectMagic</code>
+|
+| 0.0
+|
+* 饮用[[伤害药水]]
+* [[喷溅型伤害药水]]击中非亡灵生物
+* [[喷溅型治疗药水]]击中亡灵生物
+* [[瞬间伤害]]效果的[[区域效果云]]对非亡灵生物
+* [[瞬间治疗]]效果的[[区域效果云]]对亡灵生物
+* [[末影龙]]的龙息攻击
+* [[唤魔者尖牙]]攻击
+* [[守卫者]]的激光攻击
+|-
+| <code>lava</code>
+| {{GameTag|damage_type|lava|cd=1}}
+| <code>lava</code>
+| 声音效果：<code>burning</code>
+| 0.1
+|
+* 接触[[熔岩]]
+|-
+| <code>lightning_bolt</code>
+| {{GameTag|damage_type|lightning_bolt|cd=1}}
+| <code>lightningBolt</code>
+|
+| 0.1
+|
+* 被[[闪电束]]雷击
+|-
+| <code>magic</code>
+| {{GameTag|damage_type|magic|cd=1}}
+| <code>magic</code>
+|
+| 0.0
+|
+* [[瞬间伤害]]对非亡灵生物
+* [[瞬间治疗]]对亡灵生物
+* [[中毒]]
+* [[潮涌核心]]攻击
+* 不由[[唤魔者]]召唤的[[唤魔者尖牙]]的攻击
+|-
+| <code>mace_smash</code>
+| {{GameTag|damage_type|mace_smash|cd=1}}
+| <code>mace_smash</code>
+|
+| 0.1
+|
+* 生物下落1.5格后使用[[重锤]]攻击
+|-
+| <code>mob_attack</code>
+| {{GameTag|damage_type|mob_attack|cd=1}}
+| <code>mob</code>
+|
+| 0.1
+|
+* 绝大多数生物的[[近战攻击]]
+|-
+| <code>mob_attack_no_aggro</code>
+| {{GameTag|damage_type|mob_attack_no_aggro|cd=1}}
+| <code>mob</code>
+|
+| 0.1
+|
+* [[山羊]]的[[近战攻击]]
+|-
+| <code>mob_projectile</code>
+| {{GameTag|damage_type|mob_projectile|cd=1}}
+| <code>mob</code>
+|
+| 0.1
+|
+* 被[[潜影弹]]击中
+|-
+| <code>on_fire</code>
+| {{GameTag|damage_type|on_fire|cd=1}}
+| <code>onFire</code>
+| 声音效果：<code>burning</code>
+| 0.0
+|
+* [[着火]]
+* [[雪傀儡#行为|雪傀儡因高温受伤]]
+|-
+| <code>out_of_world</code>
+| {{GameTag|damage_type|out_of_world|cd=1}}
+| <code>outOfWorld</code>
+|
+| 0.0
+|
+* [[虚空]]
+|-
+| <code>outside_border</code>
+| {{GameTag|damage_type|outside_border|cd=1}}
+| <code>outsideBorder</code>
+|
+| 0.0
+|
+* [[世界边界]]
+|-
+| <code>player_attack</code>
+| {{GameTag|damage_type|player_attack|cd=1}}
+| <code>player</code>
+|
+| 0.1
+|
+* [[玩家]]的[[近战攻击]]
+|-
+| <code>player_explosion</code>
+| {{GameTag|damage_type|player_explosion|cd=1}}
+| <code>explosion.player</code>
+| 总是受难度影响
+| 0.1
+|
+* [[爆炸]]
+|-
+| <code>sonic_boom</code>
+| {{GameTag|damage_type|sonic_boom|cd=1}}
+| <code>sonic_boom</code>
+| 总是受难度影响
+| 0.0
+|
+* [[监守者]]的远程攻击
+|-
+| <code>spear</code>
+| {{GameTag|damage_type|spear|cd=1}}
+| <code>spear</code>
+|
+| 0.1
+|
+* 被戳刺或冲锋攻击
+|-
+| <code>spit</code>
+| {{GameTag|damage_type|spit|cd=1}}
+| <code>mob</code>
+|
+| 0.1
+|
+* 被[[羊驼唾沫]]击中
+|-
+| <code>stalagmite</code>
+| {{GameTag|damage_type|stalagmite|cd=1}}
+| <code>stalagmite</code>
+|
+| 0.0
+|
+* 摔落到作为石笋尖端的[[滴水石锥]]上
+|-
+| <code>starve</code>
+| {{GameTag|damage_type|starve|cd=1}}
+| <code>starve</code>
+|
+| 0.0
+|
+* [[饥饿]]耗尽
+|-
+| <code>sting</code>
+| {{GameTag|damage_type|sting|cd=1}}
+| <code>sting</code>
+|
+| 0.1
+|
+* [[蜜蜂]]的[[近战攻击]]
+|-
+| <code>sulfur_cube_hot</code>
+| {{GameTag|damage_type|sulfur_cube_hot|cd=1}}
+| <code>sulfur_cube_hot</code>
+|
+| 
+|
+* 吸收了[[岩浆块]]的[[硫方怪]]的[[近战攻击]]
+|-
+| <code>sweet_berry_bush</code>
+| {{GameTag|damage_type|sweet_berry_bush|cd=1}}
+| <code>sweetBerryBush</code>
+| 声音效果：<code>poking</code>
+| 0.1
+|
+* 在[[甜浆果丛]]中移动
+|-
+| <code>thorns</code>
+| {{GameTag|damage_type|thorns|cd=1}}
+| <code>thorns</code>
+| 声音效果：<code>thorns</code>
+| 0.1
+|
+* [[荆棘]]
+* [[守卫者]]的尖-{}-刺效果
+|-
+| <code>thrown</code>
+| {{GameTag|damage_type|thrown|cd=1}}
+| <code>thrown</code>
+|
+| 0.1
+|
+* 被[[雪球]]击中
+* 被[[鸡蛋]]击中
+* 被[[末影珍珠]]击中
+|-
+| <code>trident</code>
+| {{GameTag|damage_type|trident|cd=1}}
+| <code>trident</code>
+|
+| 0.1
+|
+* 被[[三叉戟]]击中
+|-
+| <code>unattributed_fireball</code>
+| {{GameTag|damage_type|unattributed_fireball|cd=1}}
+| <code>onFire</code>
+| 声音效果：<code>burning</code>
+| 0.1
+|
+* 被无发射源的[[火球]]击中
+* 被无发射源的[[小火球]]击中
+|-
+| <code>wind_charge</code>
+| {{GameTag|damage_type|wind_charge|cd=1}}
+| <code>mob</code>
+|
+| 0.1
+|
+* 被[[风弹（实体）|风弹]]击中
+|-
+| <code>wither</code>
+| {{GameTag|damage_type|wither|cd=1}}
+| <code>wither</code>
+|
+| 0.0
+|
+* [[凋零]]
+|-
+| <code>wither_skull</code>
+| {{GameTag|damage_type|wither_skull|cd=1}}
+| <code>witherSkull</code>
+|
+| 0.1
+|
+* 被[[凋灵之首]]击中
+|}
+
+=== 定义格式 ===
+{{main|伤害类型定义格式}}
+
+== 基岩版 ==
+下表中列出了{{el|be}}中的所有伤害类型。
+* 伤害类型：伤害在<code>ActorDamageCause</code>类中定义的名称。
+* 来源：能造成该伤害类型的伤害的场景。
+{| class="wikitable collapsible sortable" style="table-layout: fixed;width: 100%;"
+|+ [[基岩版]]伤害类型
+|-
+! style="width:20%;" | 伤害类型
+! style="width:80%;" | 来源
+|-
+| <code>all</code>
+|
+|-
+| <code>anvil</code>
+| 被[[下落的方块|下落的铁砧]]砸中
+|-
+| <code>block_explosion</code>
+| 方块[[爆炸]]
+|-
+| <code>campfire</code>
+| <!-- 1.21.110.25和1.21.101的测试结果表明并非营火 -->
+|-
+| <code>charging</code>
+| 被[[火球（消歧义）|火球]]击中
+|-
+| <code>contact</code>
+| 接触[[仙人掌]]，在[[甜浆果丛]]中移动
+|-
+| <code>drowning</code>
+| [[溺水]]
+|-
+| <code>entity_attack</code>
+| [[近战攻击]]
+|-
+| <code>entity_explosion</code>
+| 实体[[爆炸]]
+|-
+| <code>fall</code>
+| [[摔落]]
+|-
+| <code>falling_block</code>
+| 被[[下落的方块|下落的铁砧]]砸中
+|-
+| <code>fire</code>
+| 接触[[火]]或[[营火]]<!-- 最近一次验证：1.21.110.25和1.21.101 -->
+|-
+| <code>fire_tick</code>
+| [[着火]]
+|-
+| <code>fireworks</code>
+| 被[[烟花火箭]]的爆裂波及
+|-
+| <code>fly_into_wall</code>
+| 使用[[鞘翅]]滑翔时高速撞击方块侧面
+|-
+| <code>freezing</code>
+| [[冰冻]]
+|-
+| <code>lava</code>
+| 接触[[熔岩]]
+|-
+| <code>lightning</code>
+| 被[[闪电]]雷击
+|-
+| <code>mace_smash</code>
+| [[重锤]]下落攻击
+|-
+| <code>magic</code>
+| [[瞬间伤害]]及该效果的[[区域效果云]]对非亡灵生物，[[瞬间治疗]]及该效果的[[区域效果云]]对亡灵生物，[[中毒]]，玩家饮用[[伤害药水]]，[[喷溅型伤害药水]]击中非亡灵生物，[[喷溅型治疗药水]]击中亡灵生物，[[末影龙]]的龙息攻击，[[唤魔者尖牙]]，[[守卫者]]的激光攻击
+|-
+| <code>magma</code>
+| 站在[[岩浆块]]上
+|-
+| <code>none</code>
+|
+|-
+| <code>override</code>
+|
+|-
+| <code>piston</code>
+| [[活塞]]
+|-
+| <code>projectile</code>
+| 被[[弹射物]]击中
+|-
+| <code>ram_attack</code>
+| 被[[山羊]]冲撞到
+|-
+| <code>self_destruct</code>
+| {{cmd|kill}}
+|-
+| <code>sonic_boom</code>
+| [[监守者]]的远程攻击
+|-
+| <code>soul_campfire</code>
+| <!-- 1.21.110.25和1.21.101的测试结果表明并非灵魂营火 -->
+|-
+| <code>stalactite</code>
+| 被[[下落的方块|下落的滴水石锥]]砸中
+|-
+| <code>stalagmite</code>
+| 摔落到作为石笋尖端的[[滴水石锥]]上
+|-
+| <code>starve</code>
+| [[饥饿]]值耗尽
+|-
+| <code>suffocation</code>
+| [[窒息]]
+|-
+| <code>temperature</code>
+| [[雪傀儡]]处于高温生物群系中
+|-
+| <code>thorns</code>
+| [[荆棘]]
+|-
+| <code>void</code>
+| [[虚空]]
+|-
+| <code>wither</code>
+| [[凋零]]
+|}
+
+== 历史 ==
+{{info needed section}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19.4|dev=23w06a|为[[数据包]]加入了伤害类型。}}
+|{{HistoryLine||1.20|dev=pre1|加入了伤害类型{{cd|d=pretty|outside_border|generic_kill}}。}}
+|{{HistoryLine||1.21|dev=24w18a|加入了伤害类型<code>campfire</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了新的伤害类型<code>mace_smash</code>，用于[[重锤]]猛击以产生新的[[死亡消息]]。
+|加入了伤害类型<code>ender_pearl</code>，玩家被传送到其他维度时仍能受到此类型伤害。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了伤害类型<code>spear</code>。}}
+|{{HistoryLine||26.2|dev=snapshot-8|加入了伤害类型<code>sulfur_cube_hot</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.70|dev=1.20.70.21|将伤害类型<code>suicide</code>重命名为<code>self_destruct</code>。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.22|加入了新的伤害类型<code>mace_smash</code>，用于[[重锤]]猛击以产生新的[[死亡消息]]。}}
+}}
+
+== 注释 ==
+{{Fnlist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:游戏内容]]
+
+[[de:Schadensarten]]
+[[en:Damage type]]
+[[fr:Type de dégâts]]
+[[ja:ダメージの種類]]
+[[pt:Tipo de dano]]

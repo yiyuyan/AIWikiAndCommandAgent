@@ -1,0 +1,511 @@
+# 页面: 试炼刷怪笼
+# 来源: https://zh.minecraft.wiki/w/%E8%AF%95%E7%82%BC%E5%88%B7%E6%80%AA%E7%AC%BC
+# 分类: Java版独有信息, 不可再生资源, 使用简单计算器的页面, 使用计算器的页面, 基岩版独有信息, 方块, 需要信息, 需要测试
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+{{For|不祥变种|不祥试炼刷怪笼|其他结构中的刷怪笼|刷怪笼|试炼密室中有着相似纹理的方块|宝库}}
+{{redirect|试炼}}
+{{Hatnote|如无特殊说明，下文中的“试炼刷怪笼”一词均不包括“不祥试炼刷怪笼”。}}
+{{Infobox block
+|group1=冷却
+|1-1=Trial Spawner (inactive).png
+|group2=激活
+|2-1=Trial Spawner (active).png
+|group3=喷出奖励
+|3-1=Trial Spawner (ejecting).png
+|invimage1=Trial Spawner
+|invimage2=----
+|invimage3=Trial Spawner BE
+|light = '''冷却时'''：0<br>'''等待玩家时'''：4<br>'''激活或喷出战利品时'''：8
+}}
+
+'''试炼刷怪笼（Trial Spawner）'''是一种只能在[[试炼密室]]中生成的方块，会根据周围[[玩家]]的数量调整刷怪总数。
+
+== 生成 ==
+=== 自然生成 ===
+试炼刷怪笼自然生成于[[试炼密室]]的柱廊和决斗室结构中。试炼刷怪笼生成的生物种类可由其底座方块的种类判断，详见{{slink|试炼密室|试炼刷怪笼}}。
+
+{{Block distribution}}
+=== 不祥试炼刷怪笼 ===
+[[不祥试炼刷怪笼]]冷却时间结束后会变为试炼刷怪笼。
+
+== 获取 ==
+{{see also|Tutorial:获取任意物品}}
+试炼刷怪笼无法在未开启[[作弊]]的[[生存模式]]的世界中获取。使用[[创造模式]]或启用[[作弊]]，试炼刷怪笼可以通过[[创造模式物品栏]]、[[创造模式]]中使用{{ctrl|选取方块}}或[[命令]]等方式获得。
+
+== 破坏 ==
+没有工具可以加速对试炼刷怪笼的挖掘。
+
+{{Breaking table}}
+
+试炼刷怪笼被破坏后不会掉落。
+
+== 用途 ==
+{{see also|不祥试炼刷怪笼#用途}}
+与[[刷怪笼]]和[[不祥试炼刷怪笼]]一样，自然生成的试炼刷怪笼均已设置好生成的生物种类；由玩家放置出的试炼刷怪笼默认未设置生物种类（内部为空），对其{{ctrl|使用}}[[刷怪蛋]]可以设置生物种类，但不会写入刷怪蛋中生物的附加数据。
+
+{{in|je}}若游戏规则{{gamerule|spawner_blocks_work}}为<code>false</code>，试炼刷怪笼无法运作并生成生物。
+
+=== 激活 ===
+处于[[生存模式]]或[[冒险模式]]的玩家距离试炼刷怪笼14格以内，玩家头部进入其视线{{more info|需要更具体的表述}}，试炼刷怪笼已设置生物种类且不处于[[#冷却|冷却状态]]时，试炼刷怪笼会被激活，开始尝试在周围生成生物。玩家只要激活了刷怪笼就被视为参与了试炼，即便玩家离开此范围或退出游戏也是如此。
+
+试炼刷怪笼从等待玩家状态转为激活状态时亮度会增加，产生上升的[[粒子#trial_spawner_detection|火花粒子]]，并且激活状态下其内部的生物模型旋转得更快、火焰粒子更加密集。
+
+试炼刷怪笼在[[和平]]难度下或[[游戏规则]]{{gamerule|spawn_mobs|doMobSpawning}}为<code>false</code>时<ref>{{bug|MC-266487}}</ref>始终保持等待玩家状态，即使它要生成的生物能够存在于这些情况下也是如此。
+
+=== 转变 ===
+当试炼刷怪笼满足以下条件时，它将变成[[不祥试炼刷怪笼]]：
+* 难度不为[[和平]]。
+* [[游戏规则]]{{gamerule|spawn_mobs|doMobSpawning}}为<code>true</code>。
+* 检测到处于[[生存模式]]或[[冒险模式]]且带有[[试炼之兆]]状态效果的玩家。
+* 满足以下条件之一：
+** 它正在等待玩家或正在激活阶段。
+** 它在冷却阶段中，但上一次激活时没有变为不祥试炼刷怪笼。
+
+试炼刷怪笼变成不祥试炼刷怪笼会跳过冷却时间、重置挑战并清除由它生成的所有在场生物。
+
+=== 生成生物 ===
+[[File:Spawnerrange.png|thumb|俯视视角下，试炼刷怪笼生成生物的范围（{{el|je}}为白色+红色羊毛区域，{{el|be}}为白色羊毛区域）]]
+
+激活的试炼刷怪笼运作时，会在一个以试炼刷怪笼为中心的空间体积内生成对应实体，实体的底面中心点会在这个区域内，{{in|be}}对应实体的碰撞箱大小不影响生成，只需实体底面中心点不被阻挡即可。{{in|je}}这个空间体积范围为垂直距离1格、水平[[切比雪夫距离]]4格；{{in|be}}这个空间体积范围为垂直距离1格、水平[[曼哈顿距离]]4格<ref>{{ytl|hAXPnt6V7K4}}</ref>。越靠近试炼刷怪笼，生成在此位置的概率越大。
+
+试炼刷怪笼生成生物不受[[亮度]]影响，但它也需要满足刷怪笼的[[刷怪笼#生成需求|部分生物生成需求]]；并且试炼刷怪笼中心到刷怪点的视线必须不被[[视野阻挡方块]]遮挡（也就是说，当六个面都被阻挡时，试炼刷怪笼将无法生成生物）。
+
+激活的试炼刷怪笼每隔一段时间生成1个生物，48格内同时存活的生物数量达到规定的上限后会停止生成。一次试炼中目标数量的生物全部生成并退场<ref group="注">生物死亡或位于试炼刷怪笼48格以外时被视为退场；[[史莱姆]]和[[岩浆怪]]分裂产生的新生物不被计入。</ref>后，试炼刷怪笼结束运作，试炼完成。
+
+下表展示了不同试炼刷怪笼生成生物的频率和数量上限，其中<math>n</math>代表参与试炼的玩家总数。
+{| class="wikitable" style="text-align:center"
+! 生成于
+! 生物类型
+! 生成间隔
+! 同时存活的生物数量上限
+! 生成生物总数
+|-
+| 由玩家放置
+| 任意
+| {{convert|40}}
+| <math>n+1</math>
+| <math>2n+4</math>
+|-
+| [[试炼密室]]
+| {{EntityLink|Zombie|幼年僵尸|link=僵尸#幼年僵尸}}
+| {{convert|20}}
+| <math>\left\lfloor 0.5\left( n+3 \right) \right\rfloor</math><ref group="注" name="向下取整"><math>\left\lfloor x \right\rfloor</math>表示向下取整。</ref>
+| <math>2n+4</math>
+|-
+| 试炼密室
+| {{EntityLink|Zombie}}<br>{{EntityLink|Husk}}<br>{{EntityLink|Skeleton}}<br>{{EntityLink|Stray}}<br>{{EntityLink|Bogged}}
+| {{convert|20}}
+| <math>\left\lfloor 0.5\left( n+5 \right) \right\rfloor</math><ref group="注" name="向下取整"/>
+| <math>2n+4</math>
+|-
+| 试炼密室
+| {{EntityLink|Slime}}<br>{{EntityLink|Spider}}<br>{{EntityLink|Cave Spider}}<br>{{EntityLink|Silverfish}}
+| {{convert|20}}
+| <math>\left\lfloor 0.5\left( n+7 \right) \right\rfloor</math><ref group="注" name="向下取整"/>
+| <math>2n+4</math>
+|-
+| 试炼密室中的<br>{{cd|d=pretty|chamber_8|encounter_4}}结构
+| {{EntityLink|Skeleton}}<br>{{EntityLink|Stray}}<br>{{EntityLink|Bogged}}
+| {{convert|160}}
+| <math>2n+2</math>
+| <math>2n+4</math>
+|-
+| 试炼密室中的<br>{{cd|d=pretty|chamber_1|assembly|eruption|pedestal|slanted}}结构
+| {{EntityLink|Breeze}}
+| {{convert|20}}
+| <math>\left\lfloor 0.5\left( n+1 \right) \right\rfloor</math><ref group="注" name="向下取整"/>
+| <math>n+1</math>
+|}
+
+=== 奖励 ===
+玩家完成一次试炼后，试炼刷怪笼顶部的“闸门”会开启，并弹出奖励。试炼刷怪笼会先从下列两个战利品表中选择一个，再随机抽取物品作为奖励弹出，每个战利品表被选中的概率为50%，选中后直到冷却状态前不再更改。抽取次数等于参与试炼的玩家数量。
+
+{{LootChest|key_spawner|consumables_spawner}}
+
+由刷怪蛋添加或更改过生物种类的试炼刷怪笼使用试炼刷怪笼的战利品表。
+
+=== 冷却 ===
+试炼刷怪笼生成奖励之后会进入{{convert|36000|游戏刻|分钟}}的冷却状态，亮度等级转为0，试炼刷怪笼顶部的橙色边角变灰。冷却结束后才能再次激活。
+
+即使所在区块被卸载，试炼刷怪笼依然会继续计算冷却倒计时。
+
+=== 安全保护 ===
+{{exclusive|je|section=1}}
+{{Filetr|Trial Spawner warning.png|thumb|300px|试炼刷怪笼的物品提示框警告信息}}
+{{in|je}}试炼刷怪笼属于“仅管理员可设置数据”的方块。
+
+非管理员玩家对试炼刷怪笼按下{{key|Ctrl}}+{{control|选取方块}}时不会复制方块实体数据，放置物品栏中已有的带有方块实体数据的试炼刷怪笼也不会将数据实际加载。
+
+管理员玩家的物品栏中带有方块实体数据的试炼刷怪笼的物品[[提示框]]中会显示警告信息。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Trial Spawner break1.ogg
+|sound2=Trial Spawner break2.ogg
+|sound3=Trial Spawner break3.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source={{tp|soundCategory.block}}
+|description=破坏方块
+|id=block.trial_spawner.break
+|translationkey=subtitles.block.generic.break}}
+{{Sound table
+|sound=Trial Spawner step1.ogg
+|sound2=Trial Spawner step2.ogg
+|sound3=Trial Spawner step3.ogg
+|sound4=Trial Spawner step4.ogg
+|sound5=Trial Spawner step5.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.trial_spawner.fall
+|translationkey=subtitles.block.generic.fall}}
+{{Sound table
+|sound=Trial Spawner step1.ogg
+|sound2=Trial Spawner step2.ogg
+|sound3=Trial Spawner step3.ogg
+|sound4=Trial Spawner step4.ogg
+|sound5=Trial Spawner step5.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source={{tp|soundCategory.block}}
+|description=挖掘方块
+|id=block.trial_spawner.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Trial Spawner place1.ogg
+|sound2=Trial Spawner place2.ogg
+|sound3=Trial Spawner place3.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source={{tp|soundCategory.block}}
+|description=放置方块
+|id=block.trial_spawner.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Trial Spawner step1.ogg
+|sound2=Trial Spawner step2.ogg
+|sound3=Trial Spawner step3.ogg
+|sound4=Trial Spawner step4.ogg
+|sound5=Trial Spawner step5.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.trial_spawner.step
+|translationkey=subtitles.block.generic.footsteps}}
+{{Sound table
+|sound=Trial Spawner ambient1.ogg
+|sound2=Trial Spawner ambient2.ogg
+|sound3=Trial Spawner ambient3.ogg
+|sound4=Trial Spawner ambient4.ogg
+|sound5=Trial Spawner ambient5.ogg
+|subtitle={{tp|subtitles.block.trial_spawner.ambient}}
+|source={{tp|soundCategory.block}}
+|description=激活时随机播放
+|id=block.trial_spawner.ambient
+|translationkey=subtitles.block.trial_spawner.ambient}}
+{{Sound table
+|sound=Trial Spawner detect player1.ogg
+|sound2=Trial Spawner detect player2.ogg
+|sound3=Trial Spawner detect player3.ogg
+|subtitle={{tp|subtitles.block.trial_spawner.detect_player}}
+|source={{tp|soundCategory.block}}
+|description=有效玩家靠近
+|id=block.trial_spawner.detect_player
+|translationkey=subtitles.block.trial_spawner.detect_player}}
+{{Sound table
+|sound=Trial Spawner spawn1.ogg
+|sound2=Trial Spawner spawn2.ogg
+|sound3=Trial Spawner spawn3.ogg
+|sound4=Trial Spawner spawn4.ogg
+|subtitle={{tp|subtitles.block.trial_spawner.spawn_mob}}
+|source={{tp|soundCategory.block}}
+|description=生成生物
+|id=block.trial_spawner.spawn_mob
+|translationkey=subtitles.block.trial_spawner.spawn_mob}}
+{{Sound table
+|sound=Trial Spawner open shutter.ogg
+|subtitle={{tp|subtitles.block.trial_spawner.open_shutter}}
+|source={{tp|soundCategory.block}}
+|description=顶部的闸门开启
+|id=block.trial_spawner.open_shutter
+|translationkey=subtitles.block.trial_spawner.open_shutter}}
+{{Sound table
+|sound=Trial Spawner close shutter.ogg
+|subtitle={{tp|subtitles.block.trial_spawner.close_shutter}}
+|source={{tp|soundCategory.block}}
+|description=顶部的闸门关闭
+|id=block.trial_spawner.close_shutter
+|translationkey=subtitles.block.trial_spawner.close_shutter}}
+{{Sound table
+|sound=Trial Spawner eject item1.ogg
+|subtitle={{tp|subtitles.block.trial_spawner.eject_item}}
+|source={{tp|soundCategory.block}}
+|description=喷出战利品
+|id=block.trial_spawner.eject_item
+|translationkey=subtitles.block.trial_spawner.eject_item
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Trial Spawner break1.ogg
+|sound2=Trial Spawner break2.ogg
+|sound3=Trial Spawner break3.ogg
+|source=方块
+|description=破坏方块
+|id=trial_spawner.break
+|typeid=break
+|soundpitch=0.8
+}}
+{{Sound table
+|sound=Trial Spawner step1.ogg
+|sound2=Trial Spawner step2.ogg
+|sound3=Trial Spawner step3.ogg
+|sound4=Trial Spawner step4.ogg
+|sound5=Trial Spawner step5.ogg
+|source=方块
+|description=挖掘方块
+|id=trial_spawner.step
+|typeid=hit
+|soundvolume=0.38
+}}
+{{Sound table
+|sound=Trial Spawner place1.ogg
+|sound2=Trial Spawner place2.ogg
+|sound3=Trial Spawner place3.ogg
+|source=方块
+|description=放置方块
+|id=trial_spawner.place
+|typeid=place
+|soundpitch=0.8
+}}
+{{Sound table
+|sound=Trial Spawner step1.ogg
+|sound2=Trial Spawner step2.ogg
+|sound3=Trial Spawner step3.ogg
+|sound4=Trial Spawner step4.ogg
+|sound5=Trial Spawner step5.ogg
+|source=方块
+|description=带有摔落伤害时摔落在方块上
+|id=trial_spawner.step
+|typeid=fall
+|soundvolume=0.4
+}}
+{{Sound table
+|sound=Trial Spawner step1.ogg
+|sound2=Trial Spawner step2.ogg
+|sound3=Trial Spawner step3.ogg
+|sound4=Trial Spawner step4.ogg
+|sound5=Trial Spawner step5.ogg
+|source=方块
+|description=在方块上行走
+|id=trial_spawner.step
+|typeid=step
+|soundvolume=0.15
+}}
+{{Sound table
+|sound=Trial Spawner step1.ogg
+|sound2=Trial Spawner step2.ogg
+|sound3=Trial Spawner step3.ogg
+|sound4=Trial Spawner step4.ogg
+|sound5=Trial Spawner step5.ogg
+|source=方块
+|description=在方块上跳跃
+|id=trial_spawner.step
+|typeid=jump
+|soundvolume=0.12
+}}
+{{Sound table
+|sound=Trial Spawner step1.ogg
+|sound2=Trial Spawner step2.ogg
+|sound3=Trial Spawner step3.ogg
+|sound4=Trial Spawner step4.ogg
+|sound5=Trial Spawner step5.ogg
+|source=方块
+|description=在方块上着陆
+|id=trial_spawner.step
+|typeid=land
+|soundvolume=0.2
+}}
+{{Sound table
+|sound=Trial Spawner open shutter.ogg
+|source=方块
+|description=顶部的闸门开启
+|id=trial_spawner.open_shutter
+|typeid=trial_spawner.open_shutter
+}}
+{{Sound table
+|sound=Trial Spawner eject item1.ogg
+|source=方块
+|description=喷出战利品
+|id=trial_spawner.eject_item
+|typeid=trial_spawner.eject_item
+|soundpitch=0.8-1.1
+}}
+{{Sound table
+|sound=Trial Spawner ambient1.ogg
+|sound2=Trial Spawner ambient2.ogg
+|sound3=Trial Spawner ambient3.ogg
+|sound4=Trial Spawner ambient4.ogg
+|sound5=Trial Spawner ambient5.ogg
+|source=方块
+|description=激活时随机播放
+|id=trial_spawner.ambient
+|typeid=trial_spawner.ambient
+|soundvolume=0.75-1.0
+|soundpitch=0.5-1.5
+}}
+{{Sound table
+|sound=Trial Spawner detect player1.ogg
+|sound2=Trial Spawner detect player2.ogg
+|sound3=Trial Spawner detect player3.ogg
+|source=方块
+|description=有效玩家靠近
+|id=trial_spawner.detect_player
+|typeid=trial_spawner.detect_player
+|soundpitch=0.76-1.14
+}}
+{{Sound table
+|sound=Trial Spawner close shutter.ogg
+|source=方块
+|description=顶部的闸门关闭
+|id=trial_spawner.close_shutter
+|typeid=trial_spawner.close_shutter
+}}
+{{Sound table
+|sound=Trial Spawner spawn1.ogg
+|sound2=Trial Spawner spawn2.ogg
+|sound3=Trial Spawner spawn3.ogg
+|sound4=Trial Spawner spawn4.ogg
+|source=方块
+|description=生成生物
+|id=trial_spawner.spawn_mob
+|typeid=trial_spawner.spawn_mob
+|soundpitch=0.8-1.2
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Trial Spawner
+|spritetype=block
+|nameid=trial_spawner
+|showblocktags=je
+|blocktags={{GameTag|block|trial_spawner}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=trial-spawner
+|spritetype=block
+|nameid=trial_spawner
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Trial Spawner
+|spritetype=block
+|nameid=trial_spawner
+|showblocktags=be
+|blocktags={{GameTagBE|block|trial_spawner}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=trial-spawner
+|spritetype=block
+|nameid=TrialSpawner
+|foot=1
+}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+每个试炼刷怪笼都有相对应的方块实体，储存了关于试炼刷怪笼的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2023年10月15日|link=https://www.youtube.com/watch?v=DnY5xz11lR0&ab_channel=Minecraft|[[Minecraft Live 2023]]展示了试炼刷怪笼。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.3|exp=update_1_21|dev=23w45a|[[File:Trial Spawner (inactive) JE1 BE1.png|32px]] [[File:Trial Spawner (active) JE1 BE1.png|32px]] [[File:Trial Spawner (ejecting) JE1 BE1.png|32px]] 加入了试炼刷怪笼。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w13a|加入了方块属性<code>ominous</code>，为<code>true</code>时其会渲染为[[不祥试炼刷怪笼]]。
+|现在试炼刷怪笼只会在玩家进入其视线时激活。
+|在<code>spawn_potentials</code>生成数据中加入了可选的<code>equipment_loot_table</code>字符串值。
+|对于试炼密室中的非旋风人刷怪笼，同时存活的生物数量增加值（<code>simultaneous_mobs_added_per_player</code>）由2改为0.5。
+|对于试炼密室中的[[幼年僵尸]]刷怪笼，同时存活的生物数量基础值（<code>simultaneous_mobs</code>）由3改为2。
+|向补给战利品表加入了[[腐肉]]、[[面包]]、[[熟鸡肉]]和[[迅捷药水]]，移除了[[发光浆果]]、[[金胡萝卜]]、[[力量药水]]、[[绿宝石]]和[[末影珍珠]]。}}
+|{{HistoryLine|||dev=pre1|[[File:Trial Spawner (inactive) JE2 BE2.png|32px]] [[File:Trial Spawner (active) JE2 BE2.png|32px]] [[File:Trial Spawner (ejecting) JE2 BE2.png|32px]] 更改了试炼刷怪笼的纹理。}}
+|{{HistoryLine||1.21|dev=24w18a|试炼刷怪笼不再属于[[实验性内容]]。
+|难度为和平或游戏规则<code>doMobSpawning</code>为<code>false</code>时，试炼刷怪笼将保持“等待玩家”而非“未激活”状态。}}
+|{{HistoryLine|||dev=24w19a|[[File:Trial Spawner (inactive) JE3.png|32px]] [[File:Trial Spawner (active) JE3.png|32px]] [[File:Trial Spawner (ejecting) JE3.png|32px]] 更改了试炼刷怪笼的纹理。}}
+|{{HistoryLine|||dev=pre2|[[File:Trial Spawner (inactive) JE4 BE3.png|32px]] [[File:Trial Spawner (active) JE4 BE3.png|32px]] [[File:Trial Spawner (ejecting) JE4 BE3.png|32px]] 更改了试炼刷怪笼的底部纹理以匹配{{el|be}}。}}
+|{{HistoryLine||1.21.2|dev=24w35a|字段{{cd|d=pretty|normal_config|ominous_config}}现在可写为命名空间ID以引用对应的试炼刷怪笼配置数据。}}
+|{{HistoryLine|||dev=24w40a|试炼刷怪笼不再需要木质工具或品质更好的工具来挖掘。}}
+|{{HistoryLine||1.21.4|dev=24w44a|加入了试炼刷怪笼的安全保护提示。}}
+|{{HistoryLine||1.21.9|dev=25w37a|加入了游戏规则<code>[[游戏规则/spawnerBlocksEnabled|spawnerBlocksEnabled]]</code>，用于控制试炼刷怪笼有效性。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.60|exg=1.21|dev=1.20.60.20|[[File:Trial Spawner (inactive) JE1 BE1.png|32px]] [[File:Trial Spawner (active) JE1 BE1.png|32px]] [[File:Trial Spawner (ejecting) JE1 BE1.png|32px]] 加入了试炼刷怪笼。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|试炼刷怪笼不再属于[[实验性玩法]]。
+|[[File:Trial Spawner (inactive) JE2 BE2.png|32px]] [[File:Trial Spawner (active) JE2 BE2.png|32px]] [[File:Trial Spawner (ejecting) JE2 BE2.png|32px]] 更改了试炼刷怪笼的纹理。}}
+|{{HistoryLine|||dev=1.21.0.23|现在试炼刷怪笼进入不祥状态时会发出<code>trial_omen_single</code>粒子，而不是<code>sculk_soul_particle</code>粒子。}}
+|{{HistoryLine|||dev=1.21.0.24|更改了试炼刷怪笼的战利品表以匹配{{el|je}}。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.20|[[File:Trial Spawner (inactive) JE4 BE3.png|32px]] [[File:Trial Spawner (active) JE4 BE3.png|32px]] [[File:Trial Spawner (ejecting) JE4 BE3.png|32px]] 更改了试炼刷怪笼的纹理。}}
+}}
+
+== 画廊 ==
+=== 开发截图 ===
+<gallery>
+File:SpawnerParticles2.png|试炼刷怪笼在激活时发出的粒子
+File:Breeze TrialSpawner Defeated.jpg|冷却中的旋风人试炼刷怪笼
+File:Breeze room.jpeg|中间有旋风人试炼刷怪笼的房间
+</gallery>
+
+=== 变种 ===
+<gallery>
+File:Breeze trial spawner.png|[[旋风人]]试炼刷怪笼
+File:Slime trial spawner.png|[[史莱姆]]试炼刷怪笼
+File:Zombie trial spawner.png|[[僵尸]]试炼刷怪笼
+File:Baby zombie trial spawner.png|幼年僵尸试炼刷怪笼
+File:Husk trial spawner.png|[[尸壳]]试炼刷怪笼
+File:Skeleton trial spawner.png|[[骷髅]]试炼刷怪笼
+File:Poison skeleton trial spawner.png|[[沼骸]]试炼刷怪笼
+File:Stray trial spawner.png|[[流浪者]]试炼刷怪笼
+File:Spider trial spawner.png|[[蜘蛛]]试炼刷怪笼
+File:Cave spider trial spawner.png|[[洞穴蜘蛛]]试炼刷怪笼
+File:Silverfish trial spawner.png|[[蠹虫]]试炼刷怪笼
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[de:Prüfungs-Spawner]]
+[[en:Trial Spawner]]
+[[es:Generador de desafío]]
+[[fr:Générateur des épreuves]]
+[[ja:試練のスポナー]]
+[[ko:시련 생성기]]
+[[pl:Przyzywacz prób]]
+[[pt:Gerador do Desafio]]
+[[ru:Спаунер испытаний]]
+[[uk:Породжувач випробувань]]

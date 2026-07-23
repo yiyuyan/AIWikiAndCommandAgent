@@ -1,0 +1,187 @@
+# 页面: 火球
+# 来源: https://zh.minecraft.wiki/w/%E7%81%AB%E7%90%83
+# 分类: 
+# 抓取时间: 2026-07-14 17:31:18
+# 原始 Wikitext 内容:
+
+{{about|恶魂发射的弹射物|烈焰人或发射器发射的弹射物|小火球|}}
+{{Infobox entity
+|title=火球
+|spawn=[[恶魂]]发射
+|image=Fire Charge.png
+|imagesize=100px
+|size=高度：1.0格<br>宽度：1.0格
+}}
+
+'''火球（Fireball）'''是由[[恶魂]]发射的[[弹射物]]。
+
+== 生成 ==
+[[恶魂]]会向其攻击目标发射火球。
+
+== 行为 ==
+火球是一种弹射物，可以触发[[标靶]]。
+
+火球拥有不受重力影响的无限远的直线弹道。
+
+火球可以被[[弹射物]]或[[玩家]]使用[[近战攻击]]让它们偏离弹道。当两个火球相撞时，其中一个火球的移动会偏移到一个角度{{Info needed|暂未知悉偏移角度的具体规律}}，而另一个会爆炸。
+
+[[盾牌]]在被使用时可以阻挡其有效角度内来袭的火球。
+
+由恶魂发射的火球是匀速的，具有加速度的火球只能由[[命令]]生成。
+
+=== 造成伤害 ===
+火球在直接击中实体时，会对其造成{{hp|6}}伤害。{{in|je}}与[[小火球]]不同，火球不会设置实体的剩余着火时间<ref>{{bug|MC-176741|||WAI}}</ref>；{{in|be}}与小火球一样，火球会设置实体的剩余着火时间为{{convert|100|tick}}。
+
+火球命中实体造成的伤害同时属于[[弹射物伤害]]和[[火焰伤害]]，并同时受到[[弹射物保护]]和[[火焰保护]]的减免，也会被[[抗火]]效果无效化。
+
+恶魂被玩家反弹的火球命中时，会受到{{hp|1000}}的直接命中伤害，此伤害无视上述免疫效果。
+
+=== 造成爆炸 ===
+{{main|爆炸}}
+
+火球在击中实体或方块时，会造成[[爆炸威力]]为其实体数据<code>ExplosionPower</code>的[[爆炸]]，默认为1。
+
+火球造成的爆炸可以生成[[火]]。
+
+火球仅在[[游戏规则]]{{gamerule|mob_griefing|mobGriefing}}为<code>true</code>才能造成可以破坏方块和生成[[火]]的爆炸。
+
+承受1威力的火球爆炸的最低[[爆炸抗性]]为4.034（等价于1个[[蜘蛛网]]）。因此，火球无法摧毁爆炸抗性为6的[[石头]]、[[圆石]]、[[下界砖块]]等石质方块。
+
+=== 着火 ===
+火球默认是[[着火]]的。{{in|je}}着火的火球始终不会熄灭，穿过[[雨]]或[[水]]时会保持着火，即使修改其实体数据<code>Fire</code>也不能将其熄灭。
+
+即使不爆炸破坏方块，火球会点燃[[TNT]]，可以点燃熄灭的[[营火]]，可以破坏其穿过的[[细雪]]。
+
+=== 与方块交互 ===
+火球可以触发其击中的[[标靶]]，可以敲响[[钟]]，但火球造成的[[爆炸]]可能会将这些方块破坏。
+
+火球可以激活[[木质压力板]]。{{in|java}}火球可以触发[[绊线]]和[[探测铁轨]]（探测铁轨需要使用[[Tutorial:比较器更新感应器|比较器更新感应器]]检测）。当火球穿过这些方块时，这些开关会保持开启状态。其他开关则不受火球的影响。由于火球不能像[[箭]]或[[三叉戟]]一样插在方块上，通常很难开关保持长时间开启，且火球很容易炸毁这些开关。通过[[命令]]生成的静止不动的火球会一直保持其位置的开关开启。
+
+== 音效 ==
+{{edition|java}}：
+ {{Sound table
+| sound =Explosion1.ogg
+|sound2=Explosion2.ogg
+|sound3=Explosion3.ogg
+|sound4=Explosion4.ogg
+|subtitle={{tp|subtitles.entity.generic.explode}}
+|source=方块
+|description=火球击中实体或方块时
+|id=entity.generic.explode
+|translationkey=subtitles.entity.generic.explode
+|distance=16}}
+{{sound table
+|sound=Ghast fireball4.ogg
+|subtitle={{tp|subtitles.entity.ghast.shoot}}
+|source=敌对生物
+|description=发射火球
+|id=entity.ghast.shoot
+|translationkey=subtitles.entity.ghast.shoot
+|distance=16
+|foot=1}}
+
+{{edition|bedrock}}：
+{{Sound table
+|bedrock=1
+|sound=Explosion1.ogg
+|sound2=Explosion2.ogg
+|sound3=Explosion3.ogg
+|sound4=Explosion4.ogg
+|source=方块
+|description=火球击中实体或方块时
+|id=random.explode
+|typeid=explode
+|soundvolume=4.0
+|soundpitch=1.0
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.ghast.fireball4.wav
+|source=敌对生物
+|description=发射火球
+|id=mob.ghast.fireball
+|typeid=shoot
+|soundvolume=0.35
+|soundpitch=0.8-1.2
+|sounddistance=0-80
+|foot=1
+}}
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Fireball
+|spritetype=entity
+|nameid=fireball
+|showentitytags=1|entitytags={{GameTag|entity|fireball}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Fireball
+|spritetype=entity
+|nameid=fireball
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+
+火球有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{load achievements|return-to-sender}}
+
+==进度==
+{{load advancements|nether.return_to_sender;story.deflect_arrow}}
+
+==历史==
+{{HistoryTable
+|{{HistoryLine|java alpha}}
+|{{HistoryLine||v1.2.0|dev=preview|[[File:Snowball JE1 BE1.png|32px]] 加入了火球。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|[[File:Fire Charge JE1 BE1.png|32px]] 更改了火球的纹理。}}
+|{{HistoryLine|||dev=Beta 1.9-pre5|现在恶魂发出的火球可以被玩家反弹回去而打中恶魂，这会杀死恶魂，同时这会获得[[成就/Java版|成就]]“见鬼去吧”。}}
+|{{HistoryLine||1.5|dev=13w02a|[[File:Fireball_JE3.png|32px]] 更改了火球的纹理。<ref>{{bug|MC-6758|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=13w02b|[[File:Fire Charge JE1 BE1.png|32px]] 回退了上述更改。}}
+|{{HistoryLine||1.6.1|dev=13w24a|[[File:Fireball_JE5.png|32px]] 更改了火球的纹理。<ref>{{bug|MC-17827|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=13w24b|[[File:Fire Charge JE1 BE1.png|32px]] 回退了上述更改。}}
+|{{HistoryLine||1.11|dev=16w32a|火球的实体ID由<code>Fireball</code>更改为<code>fireball</code>。}}
+|{{HistoryLine|||dev=16w40a|移除了火球[[实体数据格式#弹射物|实体数据]]中的<code>xTile</code>、<code>yTile</code>、<code>zTile</code>、<code>inTile</code>和<code>inGround</code>标签。
+|<code>life</code>标签不再被使用，但仍能够被写入/读取。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Fire Charge JE2 BE2.png|32px]] 更改了火球的纹理。}}
+|{{HistoryLine||1.16|dev=20w10a|移除了火球实体数据中的<code>life</code>和<code>direction</code>标签。}}
+|{{HistoryLine||1.21.2|dev=24w33a|火球现在会在撞击[[世界边界]]时破裂。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Fire Charge JE1 BE1.png|32px]] 加入了火球。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|火球的实体ID由<code>largefireball</code>更改为<code>large_fireball</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Fire Charge JE2 BE2.png|32px]] 更改了火球的纹理。}}
+|{{HistoryLine||1.19.30|dev=1.19.30.20|更改了火球的碰撞箱以匹配{{el|je}}。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Fire Charge JE1 BE1.png|32px]] 加入了火球。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Fire Charge JE2 BE2.png|32px]] 更改了火球的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Fire Charge JE1 BE1.png|32px]] 加入了火球。}}
+}}
+
+== 你知道吗 ==
+* [[火焰弹]]、[[小火球]]、火球使用了相同的纹理。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|Non-mobs}}
+
+[[en:Fireball]]
+[[es:Bola de fuego]]

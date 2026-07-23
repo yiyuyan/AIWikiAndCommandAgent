@@ -1,0 +1,426 @@
+# 页面: 校频幽匿感测体
+# 来源: https://zh.minecraft.wiki/w/%E6%A0%A1%E9%A2%91%E5%B9%BD%E5%8C%BF%E6%84%9F%E6%B5%8B%E4%BD%93
+# 分类: 
+# 抓取时间: 2026-07-14 17:29:14
+# 原始 Wikitext 内容:
+
+{{more images|校频幽匿感测体的三种状态不应合并到同一张渲染图中，且缺少基岩版的渲染图。'''请勿直接搬运英文Wiki的内容（那里的图是错的）'''。请参考[[幽匿感测体]]的信息框。}}
+{{Infobox block
+|image=Calibrated Sculk Sensor.gif
+|invimage=Calibrated Sculk Sensor
+|invimage2=Calibrated Sculk Sensor BE
+|light=1
+}}
+
+'''{{zh pron|校|cn=jiào}}{{tr|频|準}}幽匿感测体（Calibrated Sculk Sensor）'''是[[幽匿感测体]]的变种，可以根据输入信号来接收特定振动频率的振动。
+
+== 生成 ==
+校频幽匿感测体不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|ingredients=
+|B1= Amethyst Shard
+|A2= Amethyst Shard|B2= Sculk Sensor|C2= Amethyst Shard
+|Output= Calibrated Sculk Sensor
+|type= Redstone
+}}
+
+== 破坏 ==
+挖掘校频幽匿感测体的合适工具是锄。
+
+{{Breaking table}}
+
+没有被具有[[精准采集]]的工具挖掘破坏时，校频幽匿感测体被破坏后会掉落{{xp|5}}。
+
+被具有[[精准采集]]的工具挖掘破坏时，校频幽匿感测体被破坏后会掉落自身。
+
+== 用途 ==
+校频幽匿感测体有朝向，其信号输入面朝向的方向使用紫水晶的纹理标出，该面可接收[[红石信号]]。它被玩家放置时会朝向玩家。
+
+=== 振动检测 ===
+校频幽匿感测体可以检测半径16格范围内由物体的动作产生的振动，但它们不会检测[[潜行]]的生物发出的部分振动（如行走、摔落或掷出弹射物时发出的振动；潜行时踩踏该校频幽匿感测体的振动除外）、[[监守者]]发出的所有振动和其他校频幽匿感测体发出的振动。
+
+当校频幽匿感测体检测到振动时，振动源会以每游戏刻1格，即每秒20格的速度向其发出信号粒子；信号到达时，校频幽匿感测体会激活0.5秒，并在周围产生渐变色粒子；激活时间过后，校频幽匿感测体还会有0.5秒的冷却时间。从信号开始发出到冷却时间结束，校频幽匿感测体都不会再检测其他振动，因此不可能出现多个信号同时传向同一个校频幽匿感测体的情况，也不会发生校频幽匿感测体被自身取消激活的振动反复激活的情况。冷却时间结束后，校频幽匿感测体才能继续检测振动。
+
+[[羊毛]]会吸收经过的信号，被吸收的信号不会被校频幽匿感测体接收。羊毛或[[地毯]]的[[物品实体]]掉在地上、在羊毛或地毯上行走以及放置羊毛或地毯发出的振动不会被检测。
+
+校频幽匿感测体可[[含水]]。含水的校频幽匿感测体不会发出任何声音，但仍可检测周围的振动。
+
+当[[实体]]位于校频幽匿感测体上时，校频幽匿感测体会持续地周期性激活。
+
+==== 过滤振动 ====
+校频幽匿感测体的信号输入面接收到红石信号时，它将只能检测到振动频率与该红石信号强度相等数值的振动。例如紫水晶侧输入强度为5的红石信号，则此校频幽匿感测体将只能接收振动频率为5的振动。
+
+一些游戏行为会同时产生多个振动。例如食用物品会产生两个振动，振动频率分别为3（结束使用物品）和8（进食）；击杀生物会产生两个振动，振动频率分别为7（实体受伤）和15（实体死亡）。校频幽匿感测体通常会检测振动频率最大的振动，而通过输入信号限制则可以过滤非指定频率的振动。
+
+=== 红石元件 ===
+校频幽匿感测体被激活时会：
+* 激活毗邻（除了校频幽匿感测体的信号输入面方向）的红石线，并改变水平方向上毗邻的红石线的指向。信号强度取决于校频幽匿感测体到振动源的距离。
+* 激活任何四周（除了校频幽匿感测体的信号输入面方向）背对的[[红石中继器]]和[[红石比较器]]。信号强度取决于校频幽匿感测体到振动源的距离。
+* 激活任何毗邻（除了校频幽匿感测体的信号输入面方向）的[[红石元件|机械元件]]（如[[门]]、[[红石灯]]等），包括校频幽匿感测体上面的和下面的机械元件（但不能激活一些拒绝该方向输入的机械元件，如面朝该校频幽匿感测体的[[活塞]]）。
+
+校频幽匿感测体发出的红石信号强度与校频幽匿感测体到振动源的距离呈负相关性质，即振动传播距离越短，校频幽匿感测体发出的红石信号越强。
+: 具体公式为：<code>-{}-max{1, 15 - floor(''距离'' * 0.9375)}</code>
+
+当振动源位于校频幽匿感测体正上方（距离为0）时，校频幽匿感测体会输出最大的红石信号强度15。
+
+当校频幽匿感测体探测到它上面的实体时，输出的红石信号强度始终为15。
+
+==== 振动频率 ====
+游戏内每种振动都有不同的频率，校频幽匿感测体收到的振动的频率可以被[[红石比较器]]检测并作为主输入端输入。红石比较器检测校频幽匿感测体得到的信号仅与振动频率相关，与振动的远近无关。玩家可以借此探知校频幽匿感测体周围发生的事件类型。
+
+当校频幽匿感测体探测到它上面的实体时，其振动频率为1。
+
+校频幽匿感测体检测到振动时，与之相邻的[[紫水晶块]]会发生'''共振'''，即发送一个频率相同的振动。
+
+{{:幽匿感测体/振动频率}}
+
+=== 幽匿尖啸体 ===
+校频幽匿感测体被玩家的行为激活时会发送信号给半径8格内的[[幽匿尖啸体]]，将其激活。
+
+=== 光源 ===
+无论是否被激活，校频幽匿感测体都会发出[[亮度]]为1的光，但激活时发出的光在视觉上更亮而偏黄。
+
+== 音效 ==
+{{edition|java}}：
+{{Sound table
+|sound=Sculk Sensor break1.ogg
+|sound2=Sculk Sensor break2.ogg
+|sound3=Sculk Sensor break3.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source={{tp|soundCategory.block}}
+|description=破坏方块
+|id=block.sculk_sensor.break
+|translationkey=subtitles.block.generic.break}}
+{{Sound table
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.sculk_sensor.fall
+|translationkey=subtitles.block.generic.fall}}
+{{Sound table
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source={{tp|soundCategory.block}}
+|description=挖掘方块
+|id=block.sculk_sensor.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Sculk Sensor place1.ogg
+|sound2=Sculk Sensor place2.ogg
+|sound3=Sculk Sensor place3.ogg
+|sound4=Sculk Sensor place4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source={{tp|soundCategory.block}}
+|description=放置方块
+|id=block.sculk_sensor.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.sculk_sensor.step
+|translationkey=subtitles.block.generic.footsteps}}
+{{Sound table
+|sound=Sculk Sensor clicking stop1.ogg
+|sound2=Sculk Sensor clicking stop2.ogg
+|sound3=Sculk Sensor clicking stop3.ogg
+|sound4=Sculk Sensor clicking stop4.ogg
+|sound5=Sculk Sensor clicking stop5.ogg
+|subtitle={{tp|subtitles.block.sculk_sensor.clicking_stop}}
+|source={{tp|soundCategory.block}}
+|description=取消激活
+|id=block.sculk_sensor.clicking_stop
+|translationkey=subtitles.block.sculk_sensor.clicking_stop}}
+{{Sound table
+|sound=Sculk Sensor clicking1.ogg
+|sound2=Sculk Sensor clicking2.ogg
+|sound3=Sculk Sensor clicking3.ogg
+|sound4=Sculk Sensor clicking4.ogg
+|sound5=Sculk Sensor clicking5.ogg
+|subtitle={{tp|subtitles.block.sculk_sensor.clicking}}
+|source={{tp|soundCategory.block}}
+|description=激活
+|id=block.sculk_sensor.clicking
+|translationkey=subtitles.block.sculk_sensor.clicking
+|foot=1}}
+
+{{edition|bedrock}}：
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=方块
+|description=方块作为物品使用时发出的音效
+|id=use.sculk_sensor
+|typeid=item.use.on
+|soundvolume
+|soundpitch=0.8
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=方块
+|description=挖掘方块
+|id=hit.sculk_sensor
+|typeid=hit
+|soundvolume=0.35
+|soundpitch=0.5
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk Sensor place1.ogg
+|sound2=Sculk Sensor place2.ogg
+|sound3=Sculk Sensor place3.ogg
+|sound4=Sculk Sensor place4.ogg
+|sound5=Sculk Sensor place5.wav
+|source=方块
+|description=放置方块
+|id=place.sculk_sensor
+|typeid=place
+|soundvolume
+|soundpitch=0.8-1.0
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=玩家
+|description=带有摔落伤害时摔落在方块上
+|id=fall.sculk_sensor
+|typeid=fall
+|soundvolume=0.4
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=玩家
+|description=在方块上行走
+|id=step.sculk_sensor
+|typeid=step
+|soundvolume=0.17
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=玩家
+|description=在方块上跳跃
+|id=jump.sculk_sensor
+|typeid=jump
+|soundvolume=0.12
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk step1.ogg
+|sound2=Sculk step2.ogg
+|sound3=Sculk step3.ogg
+|sound4=Sculk step4.ogg
+|sound5=Sculk step5.ogg
+|sound6=Sculk step6.ogg
+|source=玩家
+|description=在方块上着陆
+|id=land.sculk_sensor
+|typeid=land
+|soundvolume=0.14
+|soundpitch
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk Sensor clicking1.ogg
+|sound2=Sculk Sensor clicking2.ogg
+|sound3=Sculk Sensor clicking3.ogg
+|sound4=Sculk Sensor clicking4.ogg
+|sound5=Sculk Sensor clicking5.ogg
+|source=方块
+|description=激活
+|id=power.on.sculk_sensor
+|typeid=power.on.sculk_sensor
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=Sculk Sensor clicking stop1.ogg
+|sound2=Sculk Sensor clicking stop2.ogg
+|sound3=Sculk Sensor clicking stop3.ogg
+|sound4=Sculk Sensor clicking stop4.ogg
+|sound5=Sculk Sensor clicking stop5.ogg
+|source=方块
+|description=取消激活
+|id=power.off.sculk_sensor
+|typeid=power.off.sculk_sensor
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Calibrated Sculk Sensor
+|spritetype=block
+|showblocktags=je
+|blocktags={{GameTag|block|calibrated_sculk_sensor}}
+|blocktagsmerge=0
+|nameid=calibrated_sculk_sensor
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=Calibrated Sculk Sensor
+|spritetype=block
+|nameid=calibrated_sculk_sensor
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Calibrated Sculk Sensor
+|spritetype=block
+|nameid=calibrated_sculk_sensor
+|showblocktags=be
+|blocktags={{GameTagBE|block|calibrated_sculk_sensor}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=Calibrated Sculk Sensor
+|spritetype=block
+|nameid=CalibratedSculkSensor
+|foot=1
+}}
+
+=== 方块状态 ===
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+校频幽匿感测体拥有与其相关联的方块实体，以保存校频幽匿感测体方块的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{Load achievements|sneak-100}}
+
+== 进度 ==
+{{Load advancements|prefix=adventure|avoid_vibration}}
+
+== 历史 ==
+{{More images|section=1}}
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=20w49a|[[File:Sculk Sensor (calibrated top texture) JE1.png|32px]] [[File:Sculk Sensor (calibrated side texture) JE1.png|32px]] 游戏文件中加入了校频幽匿感测体的上表面和侧面纹理。}}
+|{{HistoryLine|||dev=21w13a|移除了未使用的校频幽匿感测体纹理。}}
+|{{HistoryLine||1.20|dev=23w12a|[[File:Calibrated Sculk Sensor JE1.gif|32px]] 加入了校频幽匿感测体，使用了新的纹理。}}
+|{{HistoryLine|||dev=23w14a|将校频幽匿感测体的激活时长由40游戏刻改为20游戏刻，感测距离由8格提升至16格。
+|现在校频幽匿感测体接收红石信号的方式与其他红石元件更加一致。
+|现在校频幽匿感测体可感测到[[嗅探兽]]刨挖种子。
+|调整了校频幽匿感测体的红石信号输出方式，使其更适合距离计算。
+|现在校频幽匿感测体会强充能下方的方块。
+|现在校频幽匿感测体会在激活时发出在视觉上更亮的光。}}
+|{{HistoryLine|||dev=23w16a|[[File:Calibrated Sculk Sensor JE2.gif|32px]] 更改了校频幽匿感测体的模型，使紫水晶部分与[[紫水晶簇]]一致。<ref>{{bug|MC-261214|||Fixed}}</ref>
+|现在若有振动计划被校频幽匿感测体接收，此振动会在临近全部区块均被加载和计算前留在等待队列中。}}
+|{{HistoryLine|||dev=23w17a|将校频幽匿感测体的激活时长由20游戏刻改为10游戏刻，冷却时长由1游戏刻改为10游戏刻。}}
+|{{HistoryLine|||dev=23w18a|现在在方块边缘上行走时会正常触发校频幽匿感测体。<ref>{{bug|MC-207290|||Fixed}}</ref>
+|现在在羊毛或地毯边缘上行走时不再会触发校频幽匿感测体。<ref>{{bug|MC-257269|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=23w32a|振动不再会因为[[模拟距离]]限制而丢失。
+|加入了一些[[23w32a#可感测动作|可感测到的动作]]。}}
+|{{HistoryLine||1.21|dev=24w19a|现在校频幽匿感测体可以感测[[冰霜行者]]魔咒生成[[霜冰]]，振动频率为13。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.19.80|exg=next_major_update|dev=1.19.80.22|[[File:Calibrated Sculk Sensor BE1.gif|32px]] 加入了校频幽匿感测体。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|校频幽匿感测体不再属于[[实验性玩法]]。
+|将校频幽匿感测体的激活时长由40游戏刻改为20游戏刻，感测距离由8格提升至16格。
+|现在校频幽匿感测体会强充能下方的方块。}}
+|{{HistoryLine|||dev=1.20.0.22|将校频幽匿感测体的激活时长由20游戏刻改为10游戏刻，冷却时长由1游戏刻改为10游戏刻。}}
+|{{HistoryLine||1.20.10|dev=1.20.10.20|加入了一些[[基岩版1.20.10.20#可感测动作|可感测到的动作]]。}}
+|{{HistoryLine||1.20.30|dev=1.20.30.20|加入了一些[[基岩版1.20.30.20#可感测动作|可感测到的动作]]。
+|现在校频幽匿感测体使用方块状态{{cd|minecraft:cardinal_direction}}，并弃用了{{cd|direction}}。}}
+|{{HistoryLine|||dev=1.20.30.21|加入了一些[[基岩版1.20.30.21#可感测动作|可感测到的动作]]。}}
+|{{HistoryLine||1.20.40|dev=1.20.40.20|现在校频幽匿感测体能检测关闭[[运输船]]或[[运输矿车]]的动作。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.28|现在校频幽匿感测体能检测[[眼眸花]]张开和闭合的动作。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.21|现在校频幽匿感测体能检测[[嘎枝之心]]生成[[树脂团]]的动作。}}
+|{{HistoryLine|||dev=1.21.60.25|现在校频幽匿感测体能够检测[[嘎枝]]被攻击时晃动身体的动作。}}
+}}
+
+== 画廊 ==
+<gallery>
+Calibrated Sculk Sensor (recreated model).gif|使用20w49a加入的纹理可能的校频幽匿感测体的外观
+Calibrated Sculk Sensor (recreated model).png|另一种可能的外观
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[en:Calibrated Sculk Sensor]]
+[[es:Sensor de sculk calibrado]]
+[[fr:Capteur sculk calibré]]
+[[ko:조율한 스컬크 감지체]]
+[[pt:Sensor de Sculk Calibrado]]
+[[ru:Откалиброванный скалк-сенсор]]
+[[uk:Відкалібрований скалковий сенсор]]

@@ -1,0 +1,112 @@
+# 页面: 命令/clear
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/clear
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{upcoming in draft}}
+{{Infobox command
+|name=clear
+|oplevel=2\1
+|becheat=1
+}}
+
+清除玩家物品栏的物品。
+
+== 用法 ==
+可以清除物品栏中的物品，当从容器（箱子、工作台等）中用光标拿起物品时，此类物品也可以清除。
+
+{{in|be}}还可以清除光标持有的、来自物品栏的物品，而{{in|je}}此类物品只能在非创造模式下清除。
+
+{{in|je}}还可以清除玩家的2×2合成槽位中的物品。
+
+== 语法 ==
+* '''Java版'''
+: <code>clear [<targets>] [<item>] [<maxCount>]</code>
+
+* '''基岩版'''
+: <code>clear [player: target] [itemName: Item] [data: int] [maxCount: int]</code>
+
+== 参数 ==
+{{argument|targets|entity|player: target|CommandSelector<Player>}}
+: 指定要被清除物品的玩家。如果未指定，默认为命令执行者。
+: {{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+{{argument|item|item_predicate|itemName: Item|CommandItem}}
+: 指定要被清除的物品。如果未指定，默认为所有物品。
+: {{arg desc|je=item_predicate|be=CommandItem}}
+
+{{argument|be=1|data: int|int}}
+: 指定要被清除物品的[[基岩版数据值|数据值]]。如果未指定或为{{cd|-1}}，则不考虑物品的数据值；如果指定数据值对该物品无效，默认为{{cd|0}}。
+: {{arg desc|be=int}}应该在-1到2147483647之间（含）。
+
+{{argument|maxCount|integer|maxCount: int|int}}
+: 指定要被清除物品的最大值。如果未指定{{only|be|for=或为{{cd|-1}}}}，则默认清除所有符合要求的物品；如果为{{cd|0}}，则不会清除物品，而是返回指定物品的数量。
+: {{arg desc|be=int|je=integer|min=0}}{{in|be}}应该在-1到2147483647之间（含）。
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|未指定<code><targets></code>或<code>player: target</code>参数，且命令执行者不是玩家|fail|fail}}
+{{Result table|<code><targets></code>或<code>player: target</code>未能选中在线玩家}}
+{{Result table|玩家物品栏中不存在指定物品}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器|N/A}}
+{{Result table|<code>data :int</code>或<code>maxCount: int</code>小于-1}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|被清除或被检测到的物品总数}}
+{{Output table|edition=be|执行失败|0}}
+{{Output table|执行成功|拥有指定物品的玩家数}}
+{{Output table}}
+
+== 示例 ==
+* 清除自己的所有物品：<code>clear</code>
+* 清除Alice的所有物品：<code>clear Alice</code>
+* 清除Alice的所有羊毛：<code>clear Alice #minecraft:wool</code>{{only|java}}或<code>clear Alice minecraft:wool</code>{{only|bedrock}}
+* 清除所有玩家的橙色羊毛：<code>clear @a minecraft:orange_wool</code>或<code>clear @a wool 1</code>{{only|bedrock}}
+* 清除距离最近玩家的带有“[[锋利]] I”[[附魔]]的金剑：<code>clear @p minecraft:golden_sword[minecraft:enchantments[{"minecraft:sharpness":1}]</code>{{only|JE}}
+* 检测一个随机玩家的物品栏内是否拥有石头：<code>clear @r minecraft:stone -1 0</code>{{only|Bedrock}}或<code> clear @r minecraft:stone 0</code>{{only|Java}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w37a|加入了{{cmd|clear|link=none}}命令。 }}
+|{{HistoryLine|||dev=12w38a|向{{cmd|clear|link=none}}加入了{{cd|item}}参数。}}
+|{{HistoryLine||1.8|dev=14w02a|向{{cmd|clear|link=none}}加入了{{cd|data}}参数。}}
+|{{HistoryLine||1.9|dev=15w31b|{{cmd|clear|link=none}}现在可以更改副手槽位的物品。}}
+|{{HistoryLine||1.13|dev=17w45a|{{cmd|clear|link=none}}的语法从{{cmd|clear [<targets>] [<item>] [<data>] [<count>] [<nbt>]|link=none}}变为{{cmd|clear [<targets>] [<item>] [<count>]|link=none}}。}}
+|{{HistoryLine||1.16|dev=20w07a|{{cmd|clear|link=none}}现在会清除玩家合成栏中的物品。}}
+|{{HistoryLine|||dev=20w22a|{{cmd|clear|link=none}}现在会正确地清除玩家合成栏中的物品。<ref>{{bug|MC-172272|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.5|dev=24w09a|更改了语法，现在不再使用物品[[NBT标签]]，而是[[物品堆叠组件]]。
+|现在目标物品必须具有每个与指定键值对完全相同的组件。若有未指定的组件则视为目标物品含有该组件的默认值。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|clear|link=none}}命令。}}
+}}
+
+== 参见 ==
+* {{cmd|data}}{{only|java}} — 更改或移除实体物品栏和容器内的物品和NBT
+* {{cmd|give}} — 给予玩家物品
+* {{cmd|kill}} — 清除实体
+* {{cmd|item}}{{only|Java}} — 修改方块或实体的物品栏中的物品
+* {{cmd|replaceitem}}{{only|bedrock}} — 替换方块或实体的物品栏中的物品
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/clear]]
+[[en:Commands/clear]]
+[[es:Comandos/clear]]
+[[fr:Commandes/clear]]
+[[ja:コマンド/clear]]
+[[ko:명령어/clear]]
+[[pt:Comandos/clear]]
+[[ru:Команды консоли/clear]]
+[[th:คำสั่ง/clear]]
+[[uk:Команди консолі/clear]]

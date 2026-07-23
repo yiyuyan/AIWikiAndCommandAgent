@@ -1,0 +1,237 @@
+# 页面: 隐身
+# 来源: https://zh.minecraft.wiki/w/%E9%9A%90%E8%BA%AB
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 状态效果
+# 抓取时间: 2026-07-14 17:38:19
+# 原始 Wikitext 内容:
+
+{{redirect|隐形|基岩版中无形且只能用命令破坏的固体方块|隐形基岩}}
+{{Infobox effect
+|image=Invisibility.png
+|invimage=Potion of Invisibility
+|invimage2=Splash Potion of Invisibility
+|invimage3=Lingering Potion of Invisibility
+|invimage4=Arrow of Invisibility
+|invimage5=----
+|invimage6=Potion of Invisibility Extended
+|invimage7=Splash Potion of Invisibility Extended
+|invimage8=Lingering Potion of Invisibility Extended
+|invimage9=Arrow of Invisibility Extended
+}}
+'''隐身（Invisibility）'''是一种使生物隐形的[[状态效果]]。
+
+== 效果 ==
+[[File:Invisible Mobs.png|{{el|JE}}中带有装饰的羊驼、末影人、带有鞍的猪、潜影贝、闪电苦力怕和蜘蛛的未隐形部分|缩略图|295px]]
+受影响生物从其他生物的视野中消失，尽管生物本身仍然存在。
+
+隐身只能防止生物被发现。生物已经被发现并被关注时，隐身不能防止生物被追逐和被攻击。
+
+=== 外观透明 ===
+隐身会导致生物变得不可见，其模型纹理与名称（若有）以全透明方式渲染。
+
+{{in|je|nc=1}}，少数情况下，玩家可以看见隐身的生物：
+* 处于[[旁观模式]]的玩家可以看见任何隐身的生物。<ref>{{bug|MCPE-172588|||Invalid}}</ref>
+* 玩家与该生物处于同一队伍，且队伍参数<code>seeFriendlyInvisibles</code>为<code>true</code>。
+
+若玩家能够看见该隐身的生物，则其纹理渲染为半透明而非透明。
+
+以下[[生物]]特征不受隐身影响：
+* 生物手持的[[物品]]
+* 生物正在散发的[[粒子]]
+* 生物装备的[[盔甲]]
+* {{in|je}}生物装备的其他若干物品：
+** [[马]]、[[驴]]、[[骡]]、[[骷髅马]]、[[僵尸马]]、[[猪]]、[[炽足兽]]、[[骆驼]]和[[骆驼尸壳]]披着的[[鞍]]
+** 马和僵尸马装备的[[马铠]]
+** [[羊驼]]和[[行商羊驼]]装饰着的[[地毯]]
+** [[快乐恶魂]]装备着的[[挽具]]
+* [[末影人]]、[[蜘蛛]]、[[洞穴蜘蛛]]、[[幻翼]]和{{tr|已激活|活化}}的[[嘎枝]]的眼睛
+* {{in|je}}插在[[玩家]]身上的[[箭]]和[[蜜蜂]]螫针
+* {{in|je}}[[旋风人]]的眉毛、眼睛和风场
+* {{in|je}}[[闪电苦力怕]]的蓝色电弧
+* {{in|be}}潜影贝的全身<ref>{{bug|MCPE-46219}}</ref>
+* [[硫方怪]]含在身体内部的[[方块]]
+
+=== 防止生物关注 ===
+隐身会显著降低受影响生物被其他生物察觉的范围。
+
+* {{in|je}}[[生物]]在更近的距离才会感知到或攻击玩家或其他实体：
+** 没有装备盔甲、[[鞘翅]]或非对应生物的[[生物头颅]]的玩家或其他实体在原距离的7%范围内才会被探测到。
+** 有任一盔甲、鞘翅或非对应生物的生物头颅则会提升到原距离的17.5%，每增加一件就额外再提升17.5%的原距离。
+** 检测到玩家或其他实体后，生物会忽视隐形状态继续感知玩家或相关实体。
+* {{in|je}}生物探测极限半径不会小于2格。即使玩家隐形并[[潜行]]，接近生物小于2格时仍然可以被探测到。
+* 在{{el|be}}中：
+** 未装备盔甲的玩家或其他实体会影响以下组件的判定：
+*** 对于<samp>minecraft:target_nearby_sensor</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitycomponents/minecraftcomponent_target_nearby_sensor|title=Entity Documentation - minecraft:target_nearby_sensor|website=Microsoft Learn}}</ref>，若<code>must_see</code>参数的值为<code>true</code>则无法将上述实体选中。
+*** 对于带<samp>entity_types</samp>结构<ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/definitions/nestedtables/entity_types|title=Entity Documentation - entity_types|website=Microsoft Learn}}</ref>的组件，若<samp>entity_types</samp>结构中的或该组件中的<code>must_see</code>参数的值为<code>true</code>则无法将上述实体选中，如：
+**** <samp>minecraft:behavior.defend_trusted_target</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_defend_trusted_target|title=Entity Documentation - minecraft:behavior.defend_trusted_target|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.follow_caravan</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_follow_caravan|title=Entity Documentation - minecraft:behavior.follow_caravan|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.hurt_by_target</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_hurt_by_target|title=Entity Documentation - minecraft:behavior.hurt_by_target|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.nearest_attackable_target</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_nearest_attackable_target|title=Entity Documentation - minecraft:behavior.nearest_attackable_target|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.nearest_prioritized_attackable_target</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_nearest_prioritized_attackable_target|title=Entity Documentation - minecraft:behavior.nearest_prioritized_attackable_target|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.owner_hurt_by_target</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_owner_hurt_by_target|title=Entity Documentation - minecraft:behavior.owner_hurt_by_target|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.owner_hurt_target</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_owner_hurt_target|title=Entity Documentation - minecraft:behavior.owner_hurt_target|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.share_items</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_share_items|title=Entity Documentation - minecraft:behavior.share_items|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.sneeze</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_sneeze|title=Entity Documentation - minecraft:behavior.sneeze|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.vex_copy_owner_target</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_vex_copy_owner_target|title=Entity Documentation - minecraft:behavior.vex_copy_owner_target|website=Microsoft Learn}}</ref>
+**** <samp>minecraft:behavior.wither_target_highest_damage</samp><ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/entitygoals/minecraftbehavior_wither_target_highest_damage|title=Entity Documentation - minecraft:behavior.wither_target_highest_damage|website=Microsoft Learn}}</ref>
+** 部分组件中存在<code>must_see</code>参数的值为<code>false</code>的情况：
+*** [[僵尸]]、[[僵尸村民]]和[[尸壳]]可以感知并攻击玩家、[[雪傀儡]]、[[铁傀儡]]、[[村民]]和[[流浪商人]]。
+*** [[溺尸]]可以感知并攻击[[美西螈]]、雪傀儡、铁傀儡、村民和流浪商人。
+*** [[唤魔者]]和[[卫道士]]可以感知并攻击雪傀儡、铁傀儡、村民和流浪商人。
+*** [[掠夺者]]可以感知并攻击铁傀儡、村民和流浪商人。
+*** [[恼鬼]]可以感知并攻击玩家、铁傀儡、村民和流浪商人。
+*** [[猫]]可以感知并攻击[[兔子]]和幼年[[海龟]]。
+*** [[豹猫]]可以感知并攻击[[鸡]]和幼年海龟。
+*** [[羊驼]]和[[行商羊驼]]可以感知并攻击未驯服的[[狼]]。
+*** [[蠹虫]]和[[女巫]]可以感知并攻击玩家、雪傀儡和铁傀儡。
+*** [[幻翼]]、[[蜜蜂]]和[[烈焰人]]可以感知并攻击玩家。
+*** [[骷髅]]、[[流浪者]]、[[沼骸]]和[[焦骸]]可以感知并攻击铁傀儡和幼年海龟。
+*** [[猪灵]]和[[猪灵蛮兵]]可以感知并攻击[[凋灵骷髅]]。
+*** 凋灵骷髅可以感知并攻击铁傀儡、幼年海龟、猪灵和猪灵蛮兵。
+*** [[北极熊]]可以感知并攻击玩家和[[狐狸]]。
+*** 狼可以感知并攻击[[绵羊]]、狐狸、兔子、幼年海龟、骷髅、凋灵骷髅、流浪者、沼骸和焦骸。
+*** 狐狸可以感知并攻击鸡、兔子、幼年海龟、[[鲑鱼]]、[[鳕鱼]]和[[热带鱼]]。
+*** 雪傀儡可以感知并攻击所有[[族]]为<code>monster</code>的实体。
+*** [[旋风人]]可以感知并攻击玩家和铁傀儡。
+** 拥有隐身效果的溺尸仍然会被其他生物察觉。<ref>{{bug|MCPE-189139}}</ref>
+* 玩家拥有隐身效果时，注视[[末影人]]头部来将其激怒的有效距离会缩小。
+* 多人游戏中，玩家拥有隐身效果时不会在[[定位栏]]上显示。
+* 其他削弱生物探测的方法有：
+** [[潜行]]能将范围降低到80%，与隐身效果叠加。
+** 穿戴对应的[[生物头颅]]可以削弱[[骷髅]]、僵尸、[[苦力怕]]与猪灵50%的探测范围，与隐身效果叠加。
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+! 来源
+! 效果等级
+! 时长
+! 备注
+|-
+| {{ItemLink|Potion of Invisibility}}
+| I
+| 3:00
+| {{in|be}}{{EntityLink|Wandering Trader}}还会在被除玩家以外的任意生物攻击（造成[[近战攻击|近战伤害]]、[[魔法伤害]]和[[弹射物伤害]]）或躲避[[僵尸]]及其变种、[[僵尸疣猪兽]]、[[灾厄村民]]和[[恼鬼]]时喝下。
+|-
+| {{ItemLink|Potion of Invisibility}}（延长版）
+| I
+| 8:00
+| {{EntityLink|Wandering Trader}}在时间为12000和18000之间喝下。
+|-
+| {{ItemLink|Splash Potion of Invisibility}}
+| I
+| 3:00
+|
+|-
+| {{ItemLink|Splash Potion of Invisibility}}（延长版）
+| I
+| 8:00
+|
+|-
+| {{ItemLink|Lingering Potion of Invisibility}}
+| I
+| 0:45
+|
+|-
+| {{ItemLink|Lingering Potion of Invisibility}}（延长版）
+| I
+| 2:00
+|
+|-
+| {{ItemLink|Arrow of Invisibility}}
+| I
+| 0:22
+| 
+|-
+| {{ItemLink|Arrow of Invisibility}}（延长版）
+| I
+| 1:00
+| 
+|-
+| {{EntityLink|Illusioner}}{{only|java}}
+| I
+| 1:00
+| 仅适用于{{EntityLink|illusioner}}施展隐身法术时。
+|-
+| 自然生成{{Only|JE}}
+| I
+| 无限
+| 仅适用于困难难度下的{{EntityLink|spider}}。
+|}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Invisibility
+|spritetype=effect
+|nameid=invisibility
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Invisibility
+|spritetype=effect
+|nameid=invisibility
+|showaliasids=1
+|aliasid=14
+|foot=1}}
+
+== 进度 ==
+{{load advancements|prefix=nether|all_potions;all_effects}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了隐身，目前无法获得。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|[[File:Invisibility JE1 BE1.png|32px]] 加入了隐身效果的图标。
+|加入了药水，可以提供隐身，但无法正常获得。
+|现在饮用[[奶]]会移除隐身效果。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|重做了酿造系统，隐身不再可以从药水获得。}}
+|{{HistoryLine||1.4.2|dev=12w34a|隐身现在有用了，使生物隐形。带此效果玩家不会被其他玩家看见。
+|加入了隐身药水和喷溅型隐身药水，可以提供隐身。}}
+|{{HistoryLine||1.6.1|dev=13w24a|在困难难度中，自然生成的蜘蛛现在有小概率带有隐身效果。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了[[隐身之箭]]，可以提供隐身。}}
+|{{HistoryLine|||dev=15w33a|加入了[[滞留型隐身药水]]，可以提供隐身。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Invisibility JE2 BE2.png|32px]] 更改了图标纹理。}}
+|{{HistoryLine|||dev=19w06a|现在流浪商人会在日落时喝下隐身药水。}}
+|{{HistoryLine|||dev=19w08a|改进了隐身效果，使其正常工作。
+|[[守卫者]]不再能发现隐形的玩家。
+|僵尸和灾厄村民不再能看见隐形的流浪商人。
+|[[凋灵]]不再能看见隐形的玩家。
+|铁傀儡不再能看见隐形的敌对生物。}}
+|{{HistoryLine||1.16.2|dev=pre1|现在生物探测半径至少为2格，使实体不能完全不被发现。}}
+|{{HistoryLine||1.19.4|dev=pre3|将隐身的颜色由{{color|#7F8392}}改为{{color|#F6F6F6}}。}}	
+|{{HistoryLine||1.20.2|dev=23w32a|在此版本前，隐身的存档ID是14。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Invisibility JE1 BE1.png|32px]] 加入了隐身，目前无法获得。}}
+|{{HistoryLine||0.12.1|dev=build 1|现在隐身效果可以通过药水和喷溅药水获得。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了隐身之箭，使目标获得隐形。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|隐身效果可以通过滞留药水获得。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.11.0|dev=1.11.0.3|现在流浪商人会在日落时、受到除玩家以外的生物攻击或躲避僵尸及其变种、灾厄村民和恼鬼时喝下隐身药水来隐形。
+|僵尸和灾厄村民不再能看见隐形的流浪商人。
+|改进了隐身效果，使其正常工作。}}
+|{{HistoryLine|||dev=1.11.0.5|[[File:Invisibility JE2 BE2.png|32px]] 更改了图标纹理。}} 
+|{{HistoryLine||1.19.80|dev=1.19.80.21|将粒子的颜色由{{color|#7F8392}}改为{{color|#F6F6F6}}。}}
+|{{HistoryLine|||dev=1.19.80.22|回退了上个版本对粒子颜色的更改。}}
+|{{HistoryLine||1.20.0|exg=next_major_update|dev=1.20.0.20|将隐身的颜色由{{color|#7F8392}}改为{{color|#F6F6F6}}。}}
+|{{HistoryLine|||exg=none|dev=1.20.0.21|1.20.0.20中的变更不再属于[[实验性玩法]]。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Unsichtbarkeit]]
+[[en:Invisibility]]
+[[es:Invisibilidad]]
+[[fr:Invisibilité]]
+[[ja:透明化]]
+[[ko:투명]]
+[[pt:Invisibilidade]]
+[[ru:Невидимость]]

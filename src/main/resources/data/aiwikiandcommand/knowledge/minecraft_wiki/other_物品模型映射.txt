@@ -1,0 +1,1224 @@
+# 页面: 物品模型映射
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E6%A8%A1%E5%9E%8B%E6%98%A0%E5%B0%84
+# 分类: Java版独有特性
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}{{tr|mode=H|返回|回傳|返回}}
+{{TOC|right}}
+
+'''物品模型映射'''，官方称之为'''物品模型（Item Model）'''<ref>{{snap|24w45a}}</ref>、'''客户端物品信息（client-side item info）'''<ref>{{article|minecraft-1-21-4-pre-release-1|Minecraft 1.21.4 Pre-Release 1}}</ref>，是根据物品堆叠的各项条件以选择物品{{tr|应用|套用}}哪种[[烘焙模型]]的机制。
+
+== 定义格式 ==
+物品模型映射定义文件都在{{filepath|assets/<''命名空间''>/items}}目录内，且均为JSON文件。如果物品模型映射文件定义无效，则游戏会自动使用[[无效模型]]渲染。在原版游戏下，每个物品都使用{{filepath|assets/minecraft/items/<''物品ID''>}}作为自己的模型映射。
+
+物品模型映射定义文件包含两部分：物品模型的选择机制和客户端物品的基础属性。此文件的格式如下：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根元素
+** {{nbt|bool|hand_animation_on_swap}}：（默认为<code>true</code>）玩家在快捷栏切换到此物品堆叠时是否应该渲染切换过渡动画。如果物品堆叠只有耐久度属性不同（以<code>damege</code>组件判定），则始终不会渲染切换过渡动画。
+** {{nbt|boolean|oversized_in_gui}}：（默认为<code>false</code>）在GUI内渲染时是否允许物品渲染超出槽位大小。
+** {{Nbt|float|swap_animation_scale}}：（默认为1）玩家切换手持物品至该物品时切换动画的速度倍率。模型更大的物品设置为更大值可以保证物品能完整展示。
+** {{nbt|compound|model|required=1}}：一个物品模型映射，决定游戏如何选择物品的[[烘焙模型]]。
+*** 见下文。
+</div>
+
+很多时候，需要根据堆叠物品的某个数据或状态来选取不同烘焙模型。物品模型映射将一个与堆叠物品有关的条件和一个烘焙模型建立关联，从而实现了堆叠物品模型的条件性选取。
+
+物品模型映射的JSON结构如下：
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt|string|type|required=1}}：（命名空间ID）物品模型映射的类型。
+** 与类型有关的其他字段。详见下文。
+{{nbt collapsed source|布尔条件型物品模型共通字段|no-remove=1|{{#lst:{{PAGENAME}}|codec_item_model_condition}}}}
+{{nbt collapsed source|值调配型物品模型共通字段|no-remove=1|{{#lst:{{PAGENAME}}|codec_item_model_range_dispatch}}}}
+{{nbt collapsed source|枚举条件型物品模型共通字段|no-remove=1|{{#lst:{{PAGENAME}}|codec_item_model_select}}}}
+{{nbt collapsed source|物品模型变换|no-remove=1|{{#lst:{{PAGENAME}}|transformation}}}}
+</div><includeonly><section begin="transformation"/>
+** {{nbt|list}}{{nbt|compound|transformation}}：（默认为单位变换）物品模型的渲染变换，以物品堆叠自身所在的位置为原点，'''永远在物品的烘焙模型<code>display</code>指定的如主手副手的渲染变换之后进行'''。参见{{slink|展示实体|变换}}。
+*** {{nbt condition|若为{{nbt|list}}：使用矩阵形式。其中包含16个浮点数元素，描述一个{{tr|行主序（Row-major）|列主序（Row-major）}}矩阵：}}
+*** {{nbt|float}}：矩阵中的一个值。其中第13、第14、第15个值对于变换没有任何效果；第16个值会将前12个值进行缩放，即将前12个数字除以此数字。
+*** {{nbt condition|若为{{nbt|compound}}：使用分解形式。此标签必须包含下列所有标签，且各个标签按下方列出的顺序依次{{tr|应用|套用}}：}}
+*** {{nbt|list}}{{nbt|compound|right_rotation|required=1}}：初始[[wzh:旋转矩阵#角-轴表示和四元数表示|旋转]]。此标签对应矩阵形式中矩阵左上角的3x3矩阵[[wzh:奇异值分解|奇异值分解]]后的右奇异向量矩阵。
+**** {{nbt condition|若为{{nbt|list}}：使用[[wzh:四元数与空间旋转|四元数]]表示旋转（非单位四元数还会使模型缩放）。其中包含4个浮点数。}}
+**** {{nbt|float}}：四元数中的一个元素。
+**** {{nbt condition|若为{{nbt|compound}}：使用[[wzh:轴角|轴-角度形式]]表示旋转。必须包含下列所有标签：}}
+**** {{nbt|float|angle|required=1}}：表示绕旋转轴的旋转角度（以弧度为单位）。
+**** {{nbt|list|axis|required=1}}：（列表长度为3）一个3维向量，表示旋转轴。
+***** {{nbt|float}}：一个向量分量。
+*** {{nbt|list|scale|required=1}}：以原点为中心缩放模型。此标签对应矩阵形式中的矩阵左上角的3x3矩阵奇异值分解后的奇异值。此标签为含有3个元素的浮点数列表：
+**** {{nbt|float}}：向量的一个分量。
+*** {{nbt|list}}{{nbt|compound|left_rotation|required=1}}：再次旋转模型。此标签对应矩阵形式中矩阵左上角的3x3矩阵奇异值分解后的左奇异向量矩阵。
+**** {{nbt condition|若为{{nbt|list}}：使用四元数表示旋转（非单位四元数还会使模型缩放）。其中包含4个浮点数。}}
+**** {{nbt|float}}：四元数中的一个元素。
+**** {{nbt condition|若为{{nbt|compound}}：使用轴-角度形式表示旋转。必须包含下列所有标签：}}
+**** {{nbt|float|angle|required=1}}：表示绕旋转轴的旋转角度（以弧度为单位）。
+**** {{nbt|list|axis|required=1}}：（列表长度为3）一个3维向量，表示旋转轴。
+***** {{nbt|float}}：一个向量分量。
+*** {{nbt|list|translation|required=1}}：平移变换。此标签对应矩阵形式中的最后一{{tr|列|行}}的前3个元素。此标签为含有3个元素的浮点数列表：
+**** {{nbt|float}}：向量的一个分量。
+<section end="transformation"/></includeonly>
+
+== 类型 ==
+物品模型映射有下列类型，不同的映射类型决定了游戏在渲染指定物品堆叠时将使用的物品模型和参数。
+
+{| class="wikitable"
+! 命名空间ID !! 物品模型映射行为
+|-
+! colspan=2 | 复合物品模型映射
+|-
+| [[#composite|composite]] || 按照数组次序依次渲染物品模型映射
+|-
+| [[#condition|condition]] || 根据指定的物品堆叠，计算给定的谓词，选择物品模型映射
+|-
+| [[#range_dispatch|range_dispatch]] || 根据指定的物品堆叠，计算数值并查找数值区间，选择物品模型映射
+|-
+| [[#select|select]] || 根据指定的物品堆叠，计算属性值并查找枚举，选择物品模型映射
+|-
+! colspan=2 | 渲染物品模型映射
+|-
+| [[#bundle/selected_item|bundle/selected_item]] || 渲染收纳袋内选中的物品堆叠
+|-
+| empty || 不渲染任何物品模型
+|-
+| [[#model|model]] || 按照指定的参数渲染指定的物品模型
+|-
+| [[#special|special]] || 使用指定的特殊模型渲染物品
+|}
+
+=== bundle/selected_item ===
+此物品模型映射类型会让游戏渲染当前收纳袋内被选中的物品堆叠。
+
+此渲染器要求渲染的物品堆叠必须具有<code>bundle_contents</code>组件，否则这个渲染器不会渲染任何东西。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}}
+** {{nbt|string|type|required=1}}：<code>bundle/selected_item</code>。
+</div>
+
+=== composite ===
+此物品模型映射类型会先计算数组内所有物品模型映射，再根据数组次序从后向前依次渲染。
+
+由于此物品模型映射包含子节点，故变换在子节点的变换之上进行。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+* <section begin="codec_item_model_composite" />
+** {{nbt|string|type|required=1}}：<code>composite</code>。
+** {{nbt|list|models|required=1}}：从后向前依次渲染的物品模型映射。
+*** {{nbt|compound}}：一个物品模型映射。
+**** 递归定义物品模型映射。
+** {{nbt collapsed link|物品模型变换}}
+* <section end="codec_item_model_composite" />
+</div>
+
+在原版资源包中，该类型的物品模型映射用于将收纳袋的前、中、后三层纹理进行组合。其中，中间层纹理由{{cd|bundle/selected_item}}类型的物品模型映射定义。
+
+{{collapse|title=示例|content=
+收纳袋物品模型映射JSON文件的部分代码如下，该部分代码会在玩家选取收纳袋中某物品时生效：
+{{syntaxhighlight|lang="json"|
+            ... 此处省略部分代码
+            "type": "minecraft:composite",
+            "models": [
+              {
+                "type": "minecraft:model",
+                "model": "minecraft:item/bundle_open_back"
+              },
+              {
+                "type": "minecraft:bundle/selected_item"
+              },
+              {
+                "type": "minecraft:model",
+                "model": "minecraft:item/bundle_open_front"
+              }
+            ]
+            ... 此处省略部分代码
+}}
+}}
+
+=== condition ===
+布尔条件型物品模型映射类型。此物品模型映射类型会先计算物品堆叠内给定的谓词，当属性为真时选择一个物品模型映射，为假时选择另一个。
+
+由于此物品模型映射包含子节点，故变换在子节点的变换之上进行。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** <section begin="codec_item_model_condition" />
+** {{nbt|string|type|required=1}}：<code>condition</code>。
+** {{nbt|compound|on_false|required=1}}：谓词为假时选择的物品模型映射。
+*** 递归定义物品模型映射。具体格式详见上文。
+** {{nbt|compound|on_true|required=1}}：谓词为真时选择的物品模型映射。
+*** 递归定义物品模型映射。具体格式详见上文。
+** {{nbt collapsed link|物品模型变换}}
+** <section end="codec_item_model_condition" />
+** {{nbt|string|property|required=1}}：（命名空间ID）检查给定的物品模型映射谓词类型。
+** 其他元素见下文。
+</div>
+
+{{collapse|title=示例1|content=
+收纳袋物品模型映射JSON文件的部分代码如下，根据玩家是否选中收纳袋内物品切换模型：
+<syntaxhighlight lang="json">
+       ...
+        "model": {
+          "type": "minecraft:condition",
+          "property": "minecraft:bundle/has_selected_item",
+          "on_false": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/bundle"
+          },
+          "on_true": {
+            "type": "minecraft:composite",
+            "models": [
+              {
+                "type": "minecraft:model",
+                "model": "minecraft:item/bundle_open_back"
+              },
+              {
+                "type": "minecraft:bundle/selected_item"
+              },
+              {
+                "type": "minecraft:model",
+                "model": "minecraft:item/bundle_open_front"
+              }
+            ]
+          }
+        },
+        ...
+</syntaxhighlight>
+}}
+
+{{collapse|title=示例2|content=
+原版鞘翅物品模型映射JSON文件如下，当鞘翅即将损坏时将更换为破损鞘翅模型：
+<syntaxhighlight lang="json">
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:broken",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/elytra"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/elytra_broken"
+    }
+  }
+}
+</syntaxhighlight>
+}}
+
+可用的物品模型映射谓词如下表所示：
+
+{| class="wikitable"
+! 命名空间ID !! 具有附加元素 !! 作用
+|-
+| broken || 否 || 检查物品堆叠是否将要损坏，即当前耐久度只剩下1点；如果物品堆叠不可损坏（没有<code>max_damage</code>和<code>damage</code>组件，或具有<code>unbreakable</code>组件），则返回假
+|-
+| bundle/has_selected_item || 否 || 检查玩家是否选中了此收纳袋内的物品堆叠；如果物品堆叠不包含<code>bundle_contents</code>组件则返回假
+|-
+| carried || 否 || 检查玩家是否容器屏幕中使用光标拾取了这个物品堆叠
+|-
+| [[#custom_model_data|custom_model_data]] || 是 || 读取物品堆叠的<code>custom_model_data</code>组件获取谓词结果
+|-
+| [[#component|component]] || 是 || 检查物品堆叠是否满足指定的数据组件谓词
+|-
+| damaged || 否 || 检查物品堆叠损坏程度（<code>damage</code>组件）是否为0；如果物品堆叠不可损坏，则返回假
+|-
+| extended_view || 否 || 检查当前客户端是否按下了{{key|shift}}且物品在GUI内被渲染
+|-
+| fishing_rod/cast || 否 || 检查钓鱼钩是否已经被抛出<br>游戏先检查玩家是否正在钓鱼，没有钓鱼时直接返回假，再检查钓鱼竿在主手还是副手上，如果都没有握住钓鱼竿默认为副手<br>如果物品堆叠刚好和游戏认为钓鱼竿的位置一致（如钓鱼竿不在双手中，当前物品堆叠在副手上），就返回真
+|-
+| [[#has_component|has_component]] || 是 || 检查物品堆叠是否有给定的物品堆叠组件
+|-
+| [[#keybind_down|keybind_down]] || 是 || 检查键位绑定是否被按下
+|-
+| selected || 否 || 检查玩家是否在快捷栏内选择了这个物品堆叠
+|-
+| using_item || 否 || 检查物品堆叠是否正在被使用，比如食用食物
+|-
+| view_entity || 否 || 检查持有此物品堆叠的生物是否为当前作为摄像机的实体，即非旁观模式下是否为当前玩家，旁观模式下是否为当前旁观的实体
+|}
+
+其他带有附加元素的谓词如下文所示：
+
+==== custom_model_data ====
+读取物品堆叠的<code>custom_model_data</code>组件其中的{{nbt|list|flags}}，将给定下标的布尔值作为谓词结果。
+
+如果物品堆叠没有<code>custom_model_data</code>组件，或下标超过了{{nbt|list|flags}}的长度范围，则返回假。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|布尔条件型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>custom_model_data</code>。
+** {{nbt|int|index}}：（{{interval|left=0}}，默认为0）检查给定物品堆叠<code>custom_model_data</code>组件中{{nbt|list|flags}}对应下标的元素是否为真。
+</div>
+
+{{collapseH|示例}}
+自定义模型映射，使用此映射的物品的{{cd|custom_model_data.flags.[1]}}若存在且为{{cd|true}}时渲染成钻石，否则为铁锭：
+{|class="wikitable"
+! 模型映射 !! custom_model_data !! 渲染结果
+|-
+| rowspan="3" |
+<syntaxhighlight lang="json">
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:custom_model_data",
+    "index": 1,
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/iron_ingot"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/diamond"
+    }
+  }
+}
+</syntaxhighlight>
+|{{snbt|bg=block|<nowiki>{flags:[true,false,true],...}</nowiki>}}
+| 铁锭
+|-
+|{{snbt|bg=block|<nowiki>{flags:[true],...}</nowiki>}}
+| 铁锭
+|-
+|{{snbt|bg=block|<nowiki>{flags:[false,true,false,false],...}</nowiki>}}
+| 钻石
+|}
+{{collapseE}}
+
+==== component ====
+检查物品堆叠是否满足指定的[[数据组件谓词]]。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|布尔条件型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>component</code>。
+** {{nbt|string|predicate|required=1}}：指定数据组件谓词类型。
+** {{nbt|any|value|required=1}}：指定谓词内容。
+</div>
+
+{{collapse|title=示例|content=
+自定义模型映射，当使用此映射的附魔书存储了不大于3级的锋利魔咒时渲染成钻石：
+<syntaxhighlight lang="json">
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:component",
+    "predicate": "minecraft:stored_enchantments",
+    "value": [
+      {
+        "enchantments": "minecraft:sharpness",
+        "levels": {
+          "max": 3
+        }
+      }
+    ],
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/enchanted_book"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/diamond"
+    }
+  }
+}
+</syntaxhighlight>
+}}
+
+==== has_component ====
+检查物品堆叠是否有给定的物品堆叠组件。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|布尔条件型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>has_component</code>。
+** {{nbt|string|component|required=1}}：（物品堆叠组件类型）检查物品堆叠是否具有此组件。
+** {{nbt|bool|ignore_default}}：（默认为<code>false</code>）若当前的物品堆叠组件内容与物品默认物品堆叠组件内容一致时是否认为此组件不存在而返回假。
+</div>
+
+{{collapse|title=示例|content=
+原版指南针物品模型映射JSON文件的部分代码如下：
+{{syntaxhighlight|lang="json"|
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "minecraft:lodestone_tracker",
+    "on_false": {
+      ...  当lodestone_tracker组件不存在时，若维度为主世界，则获取获取指南针相对玩家出生点的朝向；否则，获取随机朝向。最后根据朝向选取不同的烘焙模型。
+    },
+    "on_true": {
+      ... 当lodestone_tracker组件存在时，指南针相对磁石的朝向，根据朝向选取不同的烘焙模型。
+    }
+  }
+}
+}}
+}}
+
+==== keybind_down ====
+检查键位绑定是否被按下。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|布尔条件型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>keybind_down</code>。
+** {{nbt|string|keybind|required=1}}：（[[控制#可设置的键位|键位的本地化键名]]）检查键位绑定是否被按下。
+</div>
+
+=== model ===
+指定游戏使用哪一个物品模型进行渲染，并且指定各个着色索引使用的颜色。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt|string|type|required=1}}：<code>model</code>。
+** {{nbt|string|model|required=1}}：用于渲染的物品模型，游戏解析时转换为{{filepath|-{}-assets/<''命名空间''>/models/<''路径''>.json}}。
+** {{nbt|list|tints}}：（默认为空数组）指定物品模型各个着色索引使用的颜色，数组下标对应着色索引。
+*** {{nbt|compound}}：颜色提供器。
+**** {{nbt|string|type|required=1}}：颜色来源。
+**** {{nbt condition|如果<code>type</code>为<code>custom_model_data</code>，游戏将使用<code>custom_model_data</code>组件信息作为着色颜色。}}
+**** {{nbt|int}}{{nbt|list|default|required=1}}：当物品堆叠不存在<code>custom_model_data</code>组件，或下标超过{{nbt|list|colors}}范围时使用的着色颜色。
+***** {{nbt inherit/rgb color}}
+**** {{nbt|int|index}}：（{{interval|left=0}}，默认为0）将给定物品堆叠<code>custom_model_data</code>组件中{{nbt|list|colors}}对应下标的元素作为着色颜色。
+**** {{nbt condition|如果<code>type</code>为<code>constant</code>，则使用固定颜色。}}
+**** {{nbt|int}}{{nbt|list|value|required=1}}：着色颜色。
+***** {{nbt inherit/rgb color}}
+**** {{nbt condition|如果<code>type</code>为<code>grass</code>，游戏将按照生物群系着色中的[[生物群系#植物颜色|植物颜色]]算法，使用温度值和降水值计算颜色，[[纹理#颜色图|颜色图]]使用<samp>grass.png</samp>。}}
+**** {{nbt|float|downfall|required=1}}：（{{interval|left=0|right=1}}）降水值。
+**** {{nbt|float|temperature|required=1}}：（{{interval|left=0|right=1}}）温度值。
+**** {{nbt condition|如果<code>type</code>为<code>firework</code>，游戏将使用烟火之星颜色，即<code>firework_explosion</code>组件中{{nbt|int array|colors}}内各个颜色的平均值作为着色颜色。}}
+**** {{nbt condition|如果<code>type</code>为<code>dye</code>，游戏将使用物品染色，即<code>dyed_color</code>组件信息作为着色颜色。}}
+**** {{nbt condition|如果<code>type</code>为<code>potion</code>，游戏将使用药水颜色，即<code>potion_contents</code>组件中的药水颜色作为着色颜色。}}
+**** {{nbt condition|如果<code>type</code>为<code>map_color</code>，游戏将使用地图颜色，即<code>map_color</code>组件信息作为着色颜色。}}
+**** {{nbt condition|如果<code>type</code>为<code>team</code>，游戏将获取持有此物品堆叠的生物的队伍颜色作为着色颜色。}}
+**** {{nbt condition|上述5种类型均使用下列格式。}}
+**** {{nbt|int}}{{nbt|list|default|required=1}}：游戏获取不到指定信息时（如不存在对应物品堆叠组件）使用的着色颜色。
+***** {{nbt inherit/rgb color}}
+** {{nbt collapsed link|物品模型变换}}
+</div>
+
+{{Calculator|decimalColor}}
+
+{{collapse|title=示例|content=
+原版已绘制的地图的烘焙模型有两层，分别是底层和图案层。底层固定着色，而图案层根据{{nbt|int|map_color}}值变化，使得探险家地图可以显示与常规地图不同的纹理。
+<syntaxhighlight lang="json">
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "minecraft:item/filled_map",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -1
+      },
+      {
+        "type": "minecraft:map_color",
+        "default": 4603950
+      }
+    ]
+  }
+}
+</syntaxhighlight>
+}}
+
+=== range_dispatch ===
+值调配型物品模型映射类型。此物品模型映射类型会先计算并返回物品堆叠内给定的一个数值属性，游戏会按照给定阈值从小到大排序，找到数值属性第一个超过或等于的阈值，并使用对应物品模型映射。如果数值属性小于所有阈值，则使用回落映射。
+
+由于此物品模型映射包含子节点，故变换在子节点的变换之上进行。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** <section begin="codec_item_model_range_dispatch" />
+** {{nbt|string|type|required=1}}：<code>range_dispatch</code>。
+** {{nbt|list|entries|required=1}}：定义各个阈值和对应的物品模型映射，此列表不需要排序，游戏会在运行时对这个列表排序。
+*** {{nbt|compound}}：一项阈值和对应的物品模型映射。
+**** {{nbt|compound|model|required=1}}：阈值对应的物品模型映射。
+***** 递归定义物品模型映射。具体格式详见上文。
+**** {{nbt|float|threshold|required=1}}：阈值。
+** {{nbt|compound|fallback}}：回落物品模型映射。如果检查数值小于所有阈值则使用此映射。如果此项不存在，且检查数值小于所有阈值，则使用无效模型。
+*** 递归定义物品模型映射。具体格式详见上文。
+** {{nbt|float|scale}}：（默认为1）与获取的数值属性相乘获得最后的检查数值。
+** {{nbt collapsed link|物品模型变换}}
+** <section end="codec_item_model_range_dispatch" />
+** {{nbt|string|property|required=1}}：（命名空间ID）检查给定的物品模型映射数值属性类型。
+** 其他元素见下文。
+</div>
+
+游戏中总共有以下几种物品模型映射数值属性：
+
+{| class="wikitable"
+! 命名空间ID !! 具有附加元素 !! 数值来源
+|-
+| bundle/fullness || 否 || 获取收纳袋的容量，此浮点数只会在0-1之间，如果物品堆叠没有<code>bundle_contents</code>组件则返回0
+|-
+| [[#compass|compass]] || 是 || 获取指南针的指向方向
+|-
+| cooldown || 否 || 获取物品堆叠的冷却程度；如果物品不在玩家物品栏内，则返回0
+|-
+| [[#count|count]] || 是 || 获取物品堆叠的物品数量
+|-
+| crossbow/pull || 否 || 弩被拉伸的程度；如果物品堆叠没有<code>charged_projectiles</code>组件，或物品堆叠不在任何生物身上，则返回0
+|-
+| [[#custom_model_data_2|custom_model_data]] || 是 || 读取物品堆叠的<code>custom_model_data</code>组件中的{{nbt|list|floats}}
+|-
+| [[#damage|damage]] || 是 || 获取物品堆叠的损坏程度
+|-
+| [[#time|time]] || 是 || 获取当前维度时间并归一化，用于时钟的渲染
+|-
+| [[#use_cycle|use_cycle]] || 是 || 根据物品堆叠使用进度按周期返回浮点数
+|-
+| [[#use_duration|use_duration]] || 是 || 获取物品堆叠使用进度
+|}
+
+带有附加元素的属性及其附加元素如下所示：
+
+==== custom_model_data ====
+读取物品堆叠的<code>custom_model_data</code>组件中的{{nbt|list|floats}}，获取指定下标的浮点数。如果下标超过{{nbt|list|floats}}的长度范围，或物品堆叠不存在<code>custom_model_data</code>组件，则返回0。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|值调配型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>custom_model_data</code>。
+** {{nbt|int|index}}：（{{interval|left=0}}，默认为0）获取给定物品堆叠<code>custom_model_data</code>组件中{{nbt|list|floats}}对应下标的浮点数。
+</div>
+
+==== compass ====
+读取指南针信息，计算指南针指针摆动进度作为返回值，返回值取值为0-1的闭区间。如果指向目标不存在，或指向目标和当前维度不一致，或当前位置与指向目标的距离小于1e-5时，指针摆动进度会使用随机浮点数。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|值调配型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>compass</code>。
+** {{nbt|string|target|required=1}}：指南针指向的目标。
+** {{nbt|bool|wobble}}：（默认为<code>true</code>）摆动进度是否会有额外摆动浮动。如果没有浮动，摆动进度会立刻平滑到当前的正确值，而不是在正确值附近浮动。
+</div>
+
+{{nbt|string|target}}可用值和意义如下：
+
+{| class="wikitable"
+! 类型 !! 作用
+|-
+| lodestone || 读取物品堆叠的<code>lodestone_tracker</code>组件作为指向目标，如果没有此组件则不存在
+|-
+| none || 不指向任何目标，指南针的摆动进度将被设置为随机数
+|-
+| spawn || 读取[[世界出生点]]作为指向目标
+|-
+| recovery || 将持有此物品堆叠的玩家的上次死亡地点作为指向目标，如果玩家没有死亡过或不在玩家身上，则不存在
+|}
+
+{{collapse|title=示例|content=
+指南针物品模型映射JSON文件的部分代码如下，这段代码会在指南针无{{cd|lodestone_tracker}}物品堆叠组件时生效。游戏会获取指南针的指向出生点的数据并乘以32.0，然后和entries中的每一项的threshold进行比对并选择相应烘焙模型。
+{{syntaxhighlight|lang="json"|
+         ... 此处省略部分代码 
+          "model": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:compass",
+            "scale": 32.0,
+            "target": "spawn",
+            "entries": [
+              {
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_16"
+                },
+                "threshold": 0.0
+              },
+              {
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_17"
+                },
+                "threshold": 0.5
+              },
+              ... 此处省略若干关于threshold的枚举,
+              {
+                "model": {
+                  "type": "minecraft:model",
+                  "model": "minecraft:item/compass_16"
+                },
+                "threshold": 31.5
+              }
+            ]
+          }
+          ... 此处省略部分代码 
+}}
+另一段与之相应的代码则表达了当前物品有{{cd|lodestone_tracker}}物品堆叠组件时所要使用的烘焙模型：
+{{syntaxhighlight|lang="json"|
+      ... 此处省略部分代码 
+      "type": "minecraft:range_dispatch",
+      "property": "minecraft:compass",
+      "scale": 32.0,
+      "target": "lodestone",
+      "entries": [
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/compass_16"
+          },
+          "threshold": 0.0
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/compass_17"
+          },
+          "threshold": 0.5
+        },
+        ... 此处省略若干关于threshold的枚举,
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/compass_16"
+          },
+          "threshold": 31.5
+        }
+      ]
+      ... 此处省略部分代码 
+}}
+}}
+
+==== count ====
+读取物品堆叠的物品数量作为返回值。如果物品数量大于物品最大堆叠数量，则返回物品最大堆叠数量。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|值调配型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>count</code>。
+** {{nbt|bool|normalize}}：（默认为<code>true</code>）返回物品数量和物品最大堆叠数量之比，而不是当前的物品数量。
+</div>
+
+==== damage ====
+读取物品堆叠的损坏值（<code>damage</code>组件）。如果物品没有损坏或无法损坏，则返回0。如果损坏值大于最大耐久度（<code>max_damage</code>组件），则返回最大耐久度。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|值调配型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>damage</code>。
+** {{nbt|bool|normalize}}：（默认为<code>true</code>）返回物品的损坏进度（即损坏值除以最大耐久度，取值为0-1闭区间），而不是当前的损坏值。
+</div>
+
+==== time ====
+读取当前维度的时间，计算并平滑模拟时钟摆动进度，将时钟摆动进度作为返回值返回，返回值取值为0-1的闭区间。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|值调配型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>time</code>。
+** {{nbt|string|source|required=1}}：时间获取源。可以为<code>daytime</code>（昼夜时间）、<code>random</code>（随机数）或<code>moon_phase</code>（[[月相]]）。所有数字均在0到1的闭区间内。
+** {{nbt|bool|wobble}}：（默认为<code>true</code>）摆动进度是否会有额外摆动浮动。如果没有浮动，摆动进度会立刻平滑到当前的正确值，而不是在正确值附近浮动。
+</div>
+
+时间源{{nbt|string|source}}指定为月相<code>moon_phase</code>时的返回值可参考下表：
+
+{|class="wikitable"
+! 月相 !! 游戏内天数 !! 返回值
+|-
+| {{EnvSprite|full-moon}} 满月 || 8N+1 || 0.000
+|-
+| {{EnvSprite|waning-gibbous-moon}} 亏凸月 || 8N+2 || 0.125
+|-
+| {{EnvSprite|last-quarter-moon}} 下弦月 || 8N+3 || 0.250
+|-
+| {{EnvSprite|waning-crescent-moon}} 残月 || 8N+4 || 0.375
+|-
+| {{EnvSprite|new-moon}} 新月 || 8N+5 || 0.500
+|-
+| {{EnvSprite|waxing-crescent-moon}} 蛾眉月 || 8N+6 || 0.625
+|-
+| {{EnvSprite|first-quarter-moon}} 上弦月 || 8N+7 || 0.750
+|-
+| {{EnvSprite|waxing-gibbous-moon}} 盈凸月 || 8N || 0.875
+|}
+
+{{collapse|title=示例|content=
+原版时钟物品模型映射JSON文件如下。当维度为主世界时，根据昼夜时间来选取不同的模型；否则根据随机时间选取模型。
+{{syntaxhighlight|lang="json"|
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:context_dimension",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:range_dispatch",
+          "property": "minecraft:time",
+          "scale": 64.0,
+          "source": "daytime",
+          "entries": [
+            {
+              "model": {
+                "type": "minecraft:model",
+                "model": "minecraft:item/clock_00"
+              },
+              "threshold": 0.0
+            },
+            {
+              "model": {
+                "type": "minecraft:model",
+                "model": "minecraft:item/clock_01"
+              },
+              "threshold": 0.5
+            },
+            {
+              "model": {
+                "type": "minecraft:model",
+                "model": "minecraft:item/clock_02"
+              },
+              "threshold": 1.5
+            },
+            ... 省略若干关于threshold的枚举情况,
+            {
+              "model": {
+                "type": "minecraft:model",
+                "model": "minecraft:item/clock_00"
+              },
+              "threshold": 63.5
+            }
+          ]
+        },
+        "when": "minecraft:overworld"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:range_dispatch",
+      "property": "minecraft:time",
+      "scale": 64.0,
+      "source": "random",
+      "entries": [
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/clock_00"
+          },
+          "threshold": 0.0
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/clock_01"
+          },
+          "threshold": 0.5
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/clock_02"
+          },
+          "threshold": 1.5
+        },
+        ... 省略若干关于threshold的枚举情况,
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/clock_00"
+          },
+          "threshold": 63.5
+        }
+      ]
+    }
+  }
+}
+}}
+}}
+
+==== use_cycle ====
+读取当前物品堆叠的剩余使用时间，并对给定的周期取模作为返回值。如果物品堆叠不在任何生物身上，或生物没有使用这个物品堆叠，则返回0。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|值调配型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>use_cycle</code>。
+** {{nbt|float|period}}：（{{interval|left_open=0}}，默认为1）周期。
+</div>
+
+{{collapse|title=示例|content=
+原版刷子物品模型映射JSON文件如下。这里对物品堆叠的剩余使用时间取关于10.0的模，然后乘以0.1，然后根据三种阈值选取不同烘焙模型。item/brush_brushing_0到item/brush_brushing_2的刷子模型仅改变了第三人称下的模型角度，模拟第三人称下的刷子摆动动画效果。
+<syntaxhighlight lang="json">
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "period": 10.0,
+    "property": "minecraft:use_cycle",
+    "scale": 0.1,
+    "entries": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/brush_brushing_0"
+        },
+        "threshold": 0.25
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/brush_brushing_1"
+        },
+        "threshold": 0.5
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/brush_brushing_2"
+        },
+        "threshold": 0.75
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/brush"
+    }
+  }
+}
+</syntaxhighlight>
+}}
+
+==== use_duration ====
+读取物品堆叠的使用时间或剩余使用时间作为返回值。如果物品堆叠不在任何生物身上，或生物没有使用这个物品堆叠，则返回0。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|值调配型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>use_duration</code>。
+** {{nbt|bool|remaining}}：（默认为<code>false</code>）使用物品堆叠的剩余使用时间而非使用时间。
+</div>
+
+{{collapse|title=示例|content=
+原版弓物品模型映射JSON文件如下。这里没有设定remaining字段，默认为玩家的拉弓时长。这里指定了use_duration属性，当玩家正在拉弓时，游戏将根据拉弓剩余时间选取不同弓状态下的模型。item/bow_pulling_2模型可表示弓完全拉开，item/bow_pulling_1模型可表示弓半拉开。
+<syntaxhighlight lang="json">
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:using_item",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/bow"
+    },
+    "on_true": {
+      "type": "minecraft:range_dispatch",
+      "property": "minecraft:use_duration",
+      "scale": 0.05,
+      "entries": [
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/bow_pulling_1"
+          },
+          "threshold": 0.65
+        },
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "minecraft:item/bow_pulling_2"
+          },
+          "threshold": 0.9
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "minecraft:item/bow_pulling_0"
+      }
+    }
+  }
+}
+</syntaxhighlight>
+}}
+
+=== select ===
+枚举条件型物品模型映射类型。此物品模型映射类型会先计算物品堆叠内给定的一个枚举属性，游戏会使用枚举属性值对应的物品模型映射。如果没有{{tr|匹配|相符}}的枚举值，则使用回落物品模型映射。
+
+由于此物品模型映射包含子节点，故变换在子节点的变换之上进行。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** <section begin="codec_item_model_select" />
+** {{nbt|string|type|required=1}}：<code>select</code>。
+** {{nbt|list|cases|required=1}}：定义枚举值和对应的物品模型映射。枚举值不能重复出现，否则游戏将报错<code>-{}-Duplicate case conditions: <''重复的枚举值列表''></code>。
+*** {{nbt|compound}}：一项枚举值列表和对应的物品模型映射。
+**** {{nbt|compound|model|required=1}}：阈值对应的物品模型映射。
+***** 递归定义物品模型映射。具体格式详见上文。
+**** {{nbt|any}}{{nbt|list|when|required=1}}：匹配此映射的枚举值。
+***** {{nbt|any}}：一项枚举值。
+** {{nbt|compound|fallback}}：回落物品模型映射。如果读取结果不匹配任何一个枚举值，则使用此映射。如果此项不存在，且读取结果不匹配任何一个枚举值，则使用无效模型。
+*** 递归定义物品模型映射。具体格式详见上文。
+** {{nbt collapsed link|物品模型变换}}
+** <section end="codec_item_model_select" />
+** {{nbt|string|property|required=1}}：（命名空间ID）检查给定的物品模型映射枚举属性类型。
+** 其他元素见下文。
+</div>
+
+{{collapse|title=示例1|content=
+原版指南针JSON文件的部分代码如下。这里首先判断维度是否为主世界，若是，则指定指针朝向为玩家出生点，否则不指定指针朝向，此时指针为随机朝向。
+{{syntaxhighlight|lang="json"|
+      ...
+      "type": "minecraft:select",
+      "property": "minecraft:context_dimension",
+      "cases": [
+        {
+          "when": "minecraft:overworld",
+          "model": {
+            "type": "minecraft:range_dispatch",
+            "property": "minecraft:compass",
+            "scale": 32.0,
+            "target": "spawn",
+            "entries": [
+              ... 若干关于threshold的枚举...
+            ]
+          }
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:range_dispatch",
+        "property": "minecraft:compass",
+        "scale": 32.0,
+        "target": "none",
+        "entries": [
+          ... 若干关于threshold的枚举...
+        ]
+      }
+      ...
+}}
+}}
+
+{{collapse|title=示例2|content=
+原版锁链靴JSON文件的部分代码如下。这里根据trim组件的纹饰材料来选取不同的烘焙模型，从而实现显示带不同颜色纹饰的锁链靴子物品模型。
+{{syntaxhighlight|lang="json"|
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:trim_material",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/chainmail_boots_quartz_trim"
+        },
+        "when": "minecraft:quartz"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/chainmail_boots_iron_trim"
+        },
+        "when": "minecraft:iron"
+      },
+      ... 若干关于纹饰材料的枚举...
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/chainmail_boots_resin_trim"
+        },
+        "when": "minecraft:resin"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/chainmail_boots"
+    }
+  }
+}
+}}
+}}
+
+物品模型映射枚举属性类型如下所示：
+
+{| class="wikitable"
+! 命名空间ID !! 具有附加元素 !! 枚举值格式 !! 枚举来源
+|-
+| [[#block_state|block_state]] || 是 || rowspan="2" | {{nbt|string|字符串}} || 读取物品堆叠的<code>block_state</code>组件获取方块状态数据
+|-
+| charge_type || 否 || 弩内部包含的物品类型，检查物品堆叠的<code>charged_projectiles</code>组件<br>如果此组件为空或不存在，则为<code>none</code>；如果组件内存在[[烟花火箭]]，则为<code>rocket</code>；其他情况下为<code>arrow</code>
+|-
+| [[#component_2|component]] || 是 || 取决于组件ID || 读取物品堆叠的可持久化组件
+|-
+| context_dimension || 否 || rowspan="7" | {{nbt|string|字符串}} || 当前玩家所在维度的命名空间ID
+|-
+| context_entity_type || 否 || 持有此物品堆叠的实体类型，且只有生物才存在持有信息
+|-
+| [[#custom_model_data_3|custom_model_data]] || 是 || 读取物品堆叠的<code>custom_model_data</code>组件中的{{nbt|list|strings}}
+|-
+| display_context || 否 || 获取当前物品堆叠渲染位置，枚举值见{{slink|模型|渲染变换}}
+|-
+| [[#local_time|local_time]] || 是 || 读取时间并格式为字符串
+|-
+| main_hand || 否 || 获取玩家的主手是左手（<code>left</code>）还是右手（<code>right</code>）；如果物品堆叠不在玩家身上，则为null，无法匹配
+|-
+| trim_material || 否 || 读取物品堆叠的<code>trim</code>组件并获取盔甲纹饰材料；如果物品堆叠无此组件则为null，无法匹配
+|}
+
+带有附加元素的类型如下所示：
+
+==== block_state ====
+读取物品堆叠的<code>block_state</code>组件，并获取指定方块属性的值作为返回值。如果物品堆叠不存在此组件，或方块不具有对应方块属性，则返回null，无法匹配。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|枚举条件型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>block_state</code>。
+** {{nbt|string|block_state_property|required=1}}：获取方块的指定方块属性。
+</div>
+
+{{collapse|title=示例|content=
+原版蜂巢、蜂箱物品模型映射文件就利用该属性来根据{{cd|honey_level}}方块状态显示不同烘焙模型。如下两个烘焙模型仅纹理有所差别，实现了蜂巢蜜满和未满时分别显示不同纹理。
+<syntaxhighlight lang="json">
+{
+  "model": {
+    "type": "minecraft:select",
+    "block_state_property": "honey_level",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:block/bee_nest_honey"
+        },
+        "when": "5"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:block/bee_nest_empty"
+    },
+    "property": "minecraft:block_state"
+  }
+}
+</syntaxhighlight>
+}}
+
+==== component ====
+读取物品堆叠的可持久化组件数据，获取此组件的数据作为返回值。指定不可持久化的组件或枚举值不符合对应组件的数据要求时此模型映射会直接加载失败。
+
+游戏会完全匹配物品模型映射指定的组件值和物品的组件值。例如，对于<code>[[数据组件#custom_data|custom_data]]</code>组件而言，<code>{a:data,b:true}</code>和<code>"{\"a\":\"data\",\"b\":true}"</code>最终会转变为相同的内容（SNBT导出均为<code>{a: data,b :true}</code>），因此这两种写法尽管形式不同，但会被视为相同的组件值：枚举值同时指定会被游戏警告重复的枚举值，物品数据定义和枚举值定义使用任何一种形式都被视为匹配成功。由于游戏会完全匹配，因此不能单独筛选组件中某个键值对的精确值<ref>{{bug|MC-279557|||Invalid}}</ref>，例如枚举值<code>{"a":"data"}</code>不会匹配上述示例。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|枚举条件型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>component</code>。
+** {{nbt|string|component|required=1}}：获取物品堆叠的指定组件。
+</div>
+
+==== custom_model_data ==== 
+读取物品堆叠的<code>custom_model_data</code>组件中的{{nbt|list|strings}}，获取指定下标的字符串。如果下标超过{{nbt|list|strings}}的长度范围，或物品堆叠不存在<code>custom_model_data</code>组件，则返回null，无法匹配。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|枚举条件型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>custom_model_data</code>。
+** {{nbt|int|index}}：（{{interval|left=0}}，默认为0）获取给定物品堆叠<code>custom_model_data</code>组件中{{nbt|list|strings}}对应下标的字符串。
+</div>
+
+====  local_time ==== 
+读取当前时间，并根据指定时区、地区设置和日期格式获得日期字符串。此字符串每秒最多获取一次。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt collapsed link|枚举条件型物品模型共通字段}}
+** {{nbt|string|property|required=1}}：<code>local_time</code>。
+** {{nbt|string|locale}}：（默认为空字符串）时间格式化为字符串时使用的地区设置。格式可参照[https://unicode-org.github.io/icu-docs/apidoc/dev/icu4j/com/ibm/icu/util/ULocale.html#ULocale-java.lang.String- 此文档]和[https://www.ietf.org/rfc/rfc3066.txt RFC3066]。
+** {{nbt|string|pattern|required=1}}：根据时区获取当前时间后，游戏将时间格式化为字符串的日期格式。日期格式可参照[https://unicode-org.github.io/icu-docs/apidoc/dev/icu4j/com/ibm/icu/text/SimpleDateFormat.html 此文档]。
+** {{nbt|string|time_zone}}：（默认为系统设置的时区）获取时间使用的时区。格式可参照[https://unicode-org.github.io/icu-docs/apidoc/dev/icu4j/com/ibm/icu/util/TimeZone.html#getTimeZone-java.lang.String- 此文档]和[[wikipedia:List of tz database time zones|此条目]]。
+</div>
+
+{{collapse|title=示例|content=
+原版箱子的物品模型JSON文件如下。这里pattern为MM-dd，表示“月-日”格式。通过when设定仅在每年12月24到26日使用圣诞箱子模型，否则使用普通箱子模型。
+<syntaxhighlight lang="json">
+{
+  "model": {
+    "type": "minecraft:select",
+    "pattern": "MM-dd",
+    "property": "minecraft:local_time",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:special",
+          "base": "minecraft:item/chest",
+          "model": {
+            "type": "minecraft:chest",
+            "texture": "minecraft:christmas"
+          }
+        },
+        "when": [
+          "12-24",
+          "12-25",
+          "12-26"
+        ]
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:special",
+      "base": "minecraft:item/chest",
+      "model": {
+        "type": "minecraft:chest",
+        "texture": "minecraft:normal"
+      }
+    }
+  }
+}
+</syntaxhighlight>
+}}
+
+=== special ===
+调用游戏的特殊模型渲染物品堆叠。物品堆叠渲染时的渲染变换、粒子纹理变量等可以从物品模型中获取。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 物品模型映射
+** {{nbt|string|type|required=1}}：<code>special</code>。
+** {{nbt|string|base|required=1}}：（命名空间ID）特殊模型使用的基础物品模型。游戏会读取物品模型中的渲染变换、GUI光照和粒子纹理变量。
+** {{nbt|compound|model|required=1}}：特殊模型的配置。
+*** {{nbt|string|type|required=1}}：（命名空间ID）使用的特殊模型类型。
+*** 其他元素见下文。
+** {{nbt collapsed link|物品模型变换}}
+</div>
+
+游戏内包含下列特殊模型类型：
+
+{| class="wikitable"
+! 命名空间ID !! 具有附加元素 !! 渲染内容
+|-
+| [[#banner|banner]] || 是 || 渲染[[旗帜]]
+|-
+| bell || 否 || 渲染[[钟]]的动画部分
+|-
+| [[#book|book]] || 是 || 渲染附魔台和讲台上的书
+|-
+| conduit || 否 || 渲染[[潮涌核心]]
+|-
+| [[#chest|chest]] || 是 || 渲染[[箱子]]
+|-
+| [[#copper_golem_statue|copper_golem_statue]] || 是 || 渲染[[铜傀儡像]]
+|-
+| [[#end_cube|end_cube]] || 是 || 渲染[[末地折跃门（方块）|末地折跃门]]或[[末地传送门（方块）|末地传送门]]
+|-
+| decorated_pot || 否 || 渲染[[饰纹陶罐]]，四个面取决于{{cd|pot_decorations}}组件
+|-
+| [[#head|head]] || 是 || 渲染[[生物头颅]]
+|-
+| player_head || 否 || 渲染[[玩家的头]]，皮肤取决于{{cd|profile}}组件
+|-
+| [[#shulker_box|shulker_box]] || 是 || 渲染[[潜影盒]]
+|-
+| shield || 否 || 渲染[[盾牌]]，底色和图案取决于{{cd|base_color}}和{{cd|banner_patterns}}组件
+|-
+| trident || 是 || 渲染[[三叉戟]]
+|}
+
+==== banner ====
+根据底色和{{cd|banner_patterns}}物品堆叠组件渲染旗帜。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 硬编码特殊模型
+** {{nbt|string|type|required=1}}：<code>banner</code>。
+** {{nbt|string|attachment}}：（默认为<code>ground</code>）指定旗帜的渲染方式。取值可以为<code>wall</code>（墙上的旗帜）和<code>ground</code>（站立的旗帜）。
+** {{nbt|string|color|required=1}}：旗帜底色，可用枚举值见[[颜色]]。
+</div>
+
+==== book ====
+根据指定的角度渲染书。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 硬编码特殊模型
+** {{nbt|string|type|required=1}}：<code>book</code>。
+** {{nbt|float|open_angle|required=1}}：书的封面和书的中轴线的角度，按角度制计。为0时表示书完全合上，为90时表示书完全摊平。
+** {{nbt|float|page1|required=1}}：第一个书页的位置。为0.0时表示在书的最左侧，为1.0时表示在书的最右侧。
+** {{nbt|float|page2|required=1}}：第二个书页的位置，同{{nbt|float|page1}}。
+</div>
+
+==== chest ====
+根据指定的纹理和开合程度渲染箱子。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 硬编码特殊模型
+** {{nbt|string|type|required=1}}：<code>chest</code>。
+** {{nbt|string|chest_type}}：（默认为<code>single</code>）指定箱子的渲染方式。取值可以为<code>single</code>（小箱子）、<code>left</code>（大箱子的左半侧）和<code>right</code>（大箱子的右半侧）。
+** {{nbt|float|openness}}：（默认为0）箱子打开的程度。
+** {{nbt|string|texture|required=1}}：（命名空间ID）渲染箱子使用的纹理。游戏在渲染时将纹理解析为{{filepath|-{}-assets/<''命名空间''>/textures/entity/chest/<''路径''>.png}}。
+</div>
+
+==== copper_golem_statue ====
+根据指定的纹理渲染铜傀儡像。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 硬编码特殊模型
+** {{nbt|string|type|required=1}}：<code>copper_golem_statue</code>。
+** {{nbt|string|pose|required=1}}：铜傀儡像的姿势，可以为{{cd|standing|sitting|running|star|d=pretty}}。
+** {{nbt|string|texture|required=1}}：（命名空间ID）渲染铜傀儡像使用的纹理。游戏在渲染时将纹理解析为{{filepath|-{}-assets/<''命名空间''>/<''路径''>}}。
+</div>
+
+==== end_cube ====
+根据指定的纹理渲染一个特殊效果的立方体。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 硬编码特殊模型
+** {{nbt|string|type|required=1}}：<code>end_cube</code>。
+** {{nbt|string|effect|required=1}}：渲染的效果，必须为<code>portal</code>（末地传送门）或<code>gateway</code>（末地折跃门）之一。
+</div>
+
+==== head ====
+按照指定的头颅类型渲染生物头颅。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 硬编码特殊模型
+** {{nbt|string|type|required=1}}：<code>head</code>。
+** {{nbt|float|animation}}：（默认为0）头颅动画进度，控制龙首和猪灵的头渲染时动态部分的动画进度。此值仅当{{nbt|string|kind|required=1}}为<code>dragon</code>或<code>piglin</code>时才有实际作用。
+** {{nbt|string|kind|required=1}}：头颅类型，可以为{{cd|creeper|dragon|piglin|player|skeleton|wither_skeleton|zombie|d=pretty}}。此项决定了游戏使用哪种动态模型渲染。
+** {{nbt|string|texture}}：（命名空间ID）使用指定的纹理渲染对应的头颅，游戏在渲染时将纹理解析为{{filepath|-{}-assets/<''命名空间''>/textures/entity/<''路径''>.png}}。
+</div>
+
+==== shulker_box ====
+根据指定的纹理、开合程度和方向渲染潜影盒。
+
+<div class="treeview">
+* {{nbt|compound|model|required=1}} 硬编码特殊模型
+** {{nbt|string|type|required=1}}：<code>shulker_box</code>。
+** {{nbt|float|openness}}：（默认为0）潜影盒打开的程度。
+** {{nbt|string|texture|required=1}}：（命名空间ID）渲染潜影盒使用的纹理。游戏在渲染时将纹理解析为{{filepath|-{}-assets/<''命名空间''>/textures/entity/shulker/<''路径''>.png}}。
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.4|dev=24w45a|加入了物品模型映射。}}
+|{{HistoryLine|||dev=24w46a|加入了枚举属性<code>local_time</code>和<code>holder_type</code>。
+|加入了布尔属性<code>keybind_down</code>。
+|移除了布尔属性<code>xmas</code>，先前它用于判断当前时间是否是12月24日至12月26日。
+|移除了布尔属性<code>shift_down</code>，先前它用于判断是否按下了{{key|shift}}按键。
+|加入了特殊模型类型<code>standing_sign</code>和<code>hanging_sign</code>。
+|为特殊模型<code>head</code>加入了可选字段{{nbt|string|texture}}。}}
+|{{HistoryLine|||dev=pre1|加入了{{nbt|boolean|hand_animation_on_swap}}字段。
+|加入了<code>empty</code>类型物品模型映射。
+|加入了着色来源<code>team</code>。
+|为特殊模型<code>head</code>加入了可选字段{{nbt|float|animation}}。
+|加入了布尔属性<code>view_entity</code>。
+|加入了枚举属性<code>context_dimension</code>。
+|将枚举属性<code>holder_type</code>重命名为<code>context_entity_type</code>。
+|移除了数值属性<code>time</code>的{{nbt|boolean|natural_only}}字段，并加入了{{nbt|string|source}}字段。先前此字段用来检查上下文维度的维度类型<code>natural</code>是否为<code>true</code>。
+|向数值属性<code>compass</code>的{{nbt|string|target}}字段加入了可选值<code>none</code>。}}
+|{{HistoryLine||1.21.5|dev=25w03a|加入了枚举属性<code>component</code>。}}
+|{{HistoryLine|||dev=25w04a|加入了布尔属性<code>component</code>。
+|现在枚举属性<code>component</code>的枚举值若来自注册表且当前数据包并未提供该值，则其将被静默忽略而不是使模型映射加载失败。}}
+|{{HistoryLine||1.21.6|dev=pre1|加入了{{nbt|boolean|oversized_in_gui}}字段。
+|加入了特殊模型<code>player_head</code>，取代了特殊模型<code>head</code>对<code>profile</code>组件的渲染行为。}}
+|{{HistoryLine||1.21.9|dev=25w31a|加入了特殊模型<code>copper_golem_statue</code>。}}
+|{{HistoryLine|||dev=25w36a|现在特殊模型<code>copper_golem_statue</code>可以选择铜傀儡像的姿势。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了{{nbt|float|swap_animation_scale}}字段。}}
+|{{HistoryLine||26.1|dev=snapshot-11|现在物品模型映射可以额外指定展示实体使用的渲染变换，除<code>empty</code>和<code>bundle/selected_item</code>外的所有模型映射均可指定<code>transformation</code>字段。
+|因此，部分特殊模型使用的变换已被导出到物品模型映射文件自身，而不是由渲染器硬编码，并移除了特殊模型类型<code>shulker_box</code>表示潜影盒的朝向的<code>orientation</code>字段。
+|加入了特殊模型<code>bell</code>和<code>book</code>。
+|特殊模型<code>bed</code>现在仅渲染一半床，并加入了<code>part</code>以选择渲染那一部分。
+|特殊模型<code>banner</code>、<code>sign</code>和<code>hanging_sign</code>加入了<code>attachment</code>字段，现在可配置渲染何种方块状态下的模型。
+|特殊模型<code>chest</code>加入了<code>chest_type</code>字段。}}
+|{{HistoryLine|||dev=pre-1|加入了特殊模型类型<code>end_cube</code>。}}
+|{{HistoryLine||26.2|dev=snapshot-3|移除了特殊模型类型<code>bed</code>。}}
+|{{HistoryLine|||dev=snapshot-7|移除了特殊模型类型<code>minecraft:standing_sign</code>和<code>minecraft:hanging_sign</code>。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:资源包]]
+
+[[de:Gegenstandsmodelldefinition]]
+[[en:Items model definition]]

@@ -1,0 +1,165 @@
+# 页面: 命令/time
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/time
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{about|命令|[[主世界]]中昼夜交替过程|昼夜更替}}
+{{Infobox command
+|name=time
+|oplevel=2\1
+|becheat=1
+}}
+控制或查询世界{{only|be}}/[[世界时钟]]{{only|je}}的[[时间]]。
+
+== 用法 ==
+{{needs update|section=1}}
+在游戏正常运行时，内部的计时系统会自动累加[[游戏刻]]数，除非游戏的常规运行逻辑被暂停（例如，{{IN|java}}打开游戏菜单等界面或使用{{cmd|tick}}命令冻结游戏刻，或在维度区块未完成加载时）。
+* '''游戏时间（GameTime）'''：世界存档累计正常运行的游戏刻数。
+* '''昼夜更替时间（DayTime）'''：当游戏规则{{gamerule|advance_time|doDaylightCycle}}为<code>true</code>时，世界存档累计正常运行的游戏刻数。
+
+命令中的参数：
+* <code>gametime</code>等价于<code>GameTime</code>，不超过整型上限。
+* <code>daytime</code>等于<code>DayTime&ensp;% 24000</code>，不超过整型上限。
+* <code>day</code>等于<code>DayTime / 24000</code>，不超过整型上限。
+
+{{in|java}}<code>/time set ...</code>命令直接将游戏的昼夜更替时间设置为指定的数字。但{{in|bedrock}}如果使用{{cd|time: TimeSpec}}参数，只会'''增加'''昼夜更替时间使其符合{{cd|time: TimeSpec}}对应的当日时间。
+
+例如：
+:{{In|java}}执行<code>/time set day</code>或<code>/time set 1000</code>命令，都会直接将内部的昼夜更替时间设置为1000，相对应的<code>day</code>被计算为0。
+:{{IN|bedrock}}执行<code>/time set 1000</code>命令也会将昼夜更替时间设为1000。但对于<code>/time set day</code>命令，例如如果当前昼夜更替时间为25001（1游戏日+1001游戏刻），执行后不会变为25000或1000，因为使用{{cd|time: TimeSpec}}参数只能使昼夜更替时间增加，所以实际上会变为49000（2游戏日+1000游戏刻），因而游戏天数变为2。如果当前昼夜更替时间为25000（1游戏日+1000游戏刻），执行<code>/time set day</code>后，其保持25000不变。
+
+== 语法 ==
+* '''Java版'''
+: <code>time of <clock> add &lt;time></code>
+: <code>time add &lt;time></code>
+:: 增加世界时钟的昼夜更替时间，并立即强制将时间同步到所有客户端。
+: <code>time of <clock> pause</code>
+: <code>time pause</code>
+:: 暂停世界时钟。
+: <code>time query gametime</code>
+:: 查询整个世界经过的总[[刻]]数。
+: <code>time of <clock> query time</code>
+: <code>time query time</code>
+:: 查询世界时钟经过的总刻数。
+: <code>time of <clock> query &lt;timeline> repetition</code>
+: <code>time query &lt;timeline> repetition</code>
+:: 查询使用此世界时钟的时间线所经过的周期数。
+: <code>time of <clock> query &lt;timeline></code>
+: <code>time query &lt;timeline></code>
+:: 查询使用此世界时钟的时间线在本周期所经过的刻数。
+: <code>time [of <clock>] rate <rate></code>
+:: 设定世界时钟的流逝速率。
+: <code>time of <clock> resume</code>
+: <code>time resume</code>
+:: 取消暂停世界时钟。
+: <code>time of <clock> set &lt;time></code>
+: <code>time of <clock> set <timemarker></code>
+: <code>time set &lt;time></code>
+: <code>time set <timemarker></code>
+:: 设置世界时钟的昼夜更替时间，并立即强制将时间同步到所有客户端。
+
+* '''基岩版'''
+: <code>time add <amount: int></code>
+:: 增加昼夜更替时间。
+: <code>time query <daytime|gametime|day></code>
+:: 查询当前的时间，可以查询当日时间、游戏时间或游戏天数。
+: <code>time set <amount: int></code>
+: <code>time set &lt;time: TimeSpec></code>
+:: 设置昼夜更替时间。
+
+== 参数 ==
+{{argument|time|time|amount: int|int}}
+: 指定要增加或设置的时间。
+: {{arg desc|je=time|min=0|be=int}}
+
+{{code|daytime{{!}}gametime{{!}}day}}<!--{{until|JE 26.1}}
+{{el|be|short=1}}：{{code|daytime{{!}}gametime{{!}}day}}{{upcoming|JE 26.1}}-->
+: 指定要查询的数据。必须为<code>daytime</code>、<code>gametime</code>或<code>day</code>。
+:* <code>daytime</code> - 当日时间。
+:* <code>gametime</code> - 游戏时间。
+:* <code>day</code> - 游戏天数。
+
+{{el|je|short=1}}：{{code|day{{!}}night{{!}}noon{{!}}midnight}}<br><!--{{until|JE 26.1}}-->
+{{el|be|short=1}}：{{argument|be=1|time: TimeSpec|enum}}
+: 指定要设置的时间节点。
+: 必须为<code>day</code>、<code>night</code>、<code>noon</code>、<code>midnight</code>、{{only|bedrock|for=<code>sunrise</code>或<code>sunset</code>}}。
+:* <code>day</code> = 1,000
+:* <code>night</code> = 13,000
+:* <code>noon</code> = 6,000
+:* <code>midnight</code> = 18,000
+:* <code>sunrise</code> = 23,000{{only|bedrock}}
+:* <code>sunset</code> = 12,000{{only|bedrock}}
+
+{{el|je|short=1}}：{{argument|clock|resource}}
+: 指定要操作的世界时钟。若未指定，则操作执行维度的默认世界时钟。
+: {{arg desc|je=resource|registry=minecraft:world_clock}}
+
+{{el|je|short=1}}：{{argument|timemarker|resource_location}}
+: 指定要设置的时间标记。
+: {{arg desc|je=resource_location}}
+
+{{el|je|short=1}}：{{argument|timeline|resource}}
+: 指定要查询的时间线。
+: {{arg desc|je=resource|registry=minecraft:timeline}}
+
+{{el|je|short=1}}：{{argument|rate|float}}
+: 指定要设置的速率。作为参照，世界时钟的流逝速率默认为1。
+: {{arg desc|je=float|min=0.00001|max=1000}}
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|cmd=/time of ... set ...,/time set ...|该世界时钟中不存在{{cd|<timemarker>}}|fail|N/A}}
+{{Result table|cmd=/time of ... query ...,/time query ...|{{cd|&lt;timeline>}}对于该世界时钟无效}}
+{{Result table|cmd=|未指定{{cd|<clock>}}且执行维度中没有默认的世界时钟}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|cmd=/time of ... query ...,/time query ...|执行成功|1|1|查询数据得到的值}}
+{{Output_table|cmd=/time of ... pause,/time of ... rate,/time of ... resume,/time pause,/time rate,/time resume|执行成功|1|1|1}}
+{{Output table|cmd=other|执行成功|1|1|世界时钟经过的总刻数}}
+{{Output table|cmd=|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+: 设置昼夜更替时间为1000：<code>time set 1000</code>或<code>time set day</code>或<code>time set 50s</code>{{only|java}}
+
+: 将昼夜更替时间增加一天：<code>time add 24000</code>或<code>time add 1d</code>{{only|java}}或<code>time add 1200s</code>{{only|java}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.3|加入了{{cmd|time|link=none}}，现在可以使用<code>add</code>和<code>set</code>语法。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w16a|{{cmd|time|link=none}}现在可在单人游戏里使用。
+|{{cmd|time set|link=none}}现在接受<code>day</code>（值为0）和<code>night</code>（值为12500）。}}
+|{{HistoryLine||1.7|dev=13w36a|{{cmd|time set day|link=none}}的值现在是1000，并且{{cmd|time set night|link=none}}的值现在是13000。}}
+|{{HistoryLine||1.8|dev=14w29a|加入了{{cmd|time query|link=none}}，接受的参数是<code>daytime</code>和<code>gametime</code>。}}
+|{{HistoryLine||1.9|dev=15w49b|{{cmd|time query|link=none}}现在接受{{cd|day}}的值。}}
+|{{HistoryLine||1.13|dev=18w01a|向{{cmd|time set|link=none}}加入了选项{{cd|noon}}和{{cd|midnight}}。}}
+|{{HistoryLine||26.1|dev=snapshot-3|加入了{{cmd|time pause|link=none}}和{{cmd|time resume|link=none}}，分别用于暂停和取消暂停世界时钟。
+|{{cmd|time|link=none}}现在基于世界时钟，并且可以指定世界时钟，而不再影响所有维度。
+|{{cmd|time set|link=none}}和{{cmd|time add|link=none}}的返回值现在是世界时钟经过的总刻数，而不再是当前时间。}}
+|{{HistoryLine|||dev=pre-1|加入了<code>time [of <clock>] rate <rate></code>子命令。}}
+
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|time|link=none}}。}} 
+
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.30|dev=1.17.30.20|现在{{cd|/time set <amount: int>}}会直接设置昼夜更替时间，而不再通过增加来达到指定的当日时间。}} 
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/time]]
+[[en:Commands/time]]
+[[es:Comandos/time]]
+[[ja:コマンド/time]]
+[[pt:Comandos/time]]
+[[ru:Команды консоли/time]]
+[[uk:Команди консолі/time]]

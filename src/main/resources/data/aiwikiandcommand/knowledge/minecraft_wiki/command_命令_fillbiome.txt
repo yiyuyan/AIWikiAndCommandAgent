@@ -1,0 +1,79 @@
+# 页面: 命令/fillbiome
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/fillbiome
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox command
+|oplevel=2
+}}
+
+设置指定区域的[[生物群系]]。
+
+== 用法 ==
+生物群系以元胞为单位存储，4×4×4方块为一个元胞，该命令应用于选中的每一元胞，而不是方块。
+
+尽管生物群系是按元胞存储的，但元胞间的生物群系存在平滑过渡，生物群系的形状会变得不规则。
+
+该命令只会改变生物群系，并不会对其中的方块造成改变。例如，使用该命令将一片森林改为沙漠，并不会把草方块变成沙子，也不会长出仙人掌，但是兔子会在新“沙漠”中生成，这片“沙漠”看起来依然像个森林。
+<gallery heights="100" mode="packed" style="text-align:left">
+File:Fillbiome example-before.png|使用该命令尝试将两个石头间的生物群系变为沙漠
+File:Fillbiome example-after.png|可以看到，生物群系并没有按照指定的准确坐标改变
+</gallery>
+
+== 语法 ==
+: <code>/fillbiome <from> <to> <biome></code>
+: <code>/fillbiome <from> <to> <biome> replace <filter></code>
+
+== 参数 ==
+{{argument|from|block_pos}}和{{argument|to|block_pos}}
+: 指定填充区域的两个对角方块的坐标。注意：由于生物群系信息并非按方块存储，最终起效的范围不一定精准匹配给出的范围。
+: {{arg desc|je=block_pos}}
+
+{{argument|biome|resource}}
+: 指定要设置的生物群系的命名空间ID。参见[[生物群系#数据值]]以查看所有可用的生物群系ID。
+: {{arg desc|je=resource|registry=minecraft:worldgen/biome}}
+
+{{argument|filter|resource_or_tag}}
+: 指定要被替换的生物群系。
+: 若未指定，所有生物群系都将被替换。
+: {{arg desc|je=resource_or_tag|registry=minecraft:worldgen/biome}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|指定的区域位于世界外或未被加载|fail}}
+{{Result table|选择区域方块数大于{{gamerule|max_block_modifications}}的设定值}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|被改变群系的元胞总数}}
+{{Output table}}
+
+== 示例 ==
+* 将范围为<code>0 0 0</code>到<code>32 28 32</code>的区域的生物群系设置为恶地：<code>/fillbiome 0 0 0 32 28 32 minecraft:badlands</code>
+* 将范围为<code>0 0 0</code>到<code>32 28 32</code>的区域内的虚空生物群系替换为恶地：<code>/fillbiome 0 0 0 32 28 32 minecraft:badlands replace minecraft:the_void</code>
+* 将范围为<code>0 0 0</code>到<code>32 28 32</code>的区域内能自然生成远古城市的生物群系替换为恶地：<code>/fillbiome 0 0 0 32 28 32 minecraft:badlands replace #minecraft:has_structure/ancient_city</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19.3|dev=22w46a|加入了{{cmd|link=none|fillbiome}}命令。}}
+|{{HistoryLine|||dev=pre1|加入了{{cd|replace}}语法。}}
+|{{HistoryLine||1.19.4|dev=23w03a|现在可以通过{{cd|commandModificationBlockLimit}}游戏规则控制单次执行可更改的最大方块数。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/fillbiome]]
+[[en:Commands/fillbiome]]
+[[es:Comandos/fillbiome]]
+[[fr:Commandes/fillbiome]]
+[[ja:コマンド/fillbiome]]
+[[pt:Comandos/fillbiome]]
+[[ru:Команды консоли/fillbiome]]

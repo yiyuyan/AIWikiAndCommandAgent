@@ -1,0 +1,359 @@
+# 页面: Java版18w19a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8818w19a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:20
+# 原始 Wikitext 内容:
+
+{{Dangerous version|在铁砧界面中放入带NBT的物品会导致游戏崩溃。<ref>{{bug|MC-129221|||Fixed}}</ref>}}
+{{Infobox version
+|title=18w19a
+|image=18w19a.png
+|image2=Java Edition 18w19a Simplified.png\Java Edition 18w19a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2018年5月8日
+|jsonhash=cc868f094a6cdec8e1a24ed90dde12c8006e308c
+|clienthash=d52b2e8f15a764000c1ca6dabab4440069ff97a4
+|serverhash=97ad982d57fb7b7cb9dc28ffd87c79538b1901f6
+|parent=1.13
+|prevparent=1.12.2
+|prev=18w16a
+|next=18w19b
+|nextparent=1.13.1
+}}<onlyinclude>
+
+'''18w19a'''是[[Java版1.13]]的第33个快照，发布于2018年5月8日<ref name="article_18w19a">{{snap|18w19a|May 8, 2018}}</ref>，加入了新的自选世界生成类型、新的状态效果，分离了方块和液体的一些逻辑，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[水]]和[[熔岩]]'''
+* 分离了方块和液体的一些逻辑<ref>{{tweet|Dinnerbone|987293762069155841|<nowiki>Trying to extract parts of BlockState into StateHolder<T> and turn BlockStateDefinition into StateDefinition<T> so I can use the same system for liquids</nowiki>|April 20, 2018}}</ref>。
+** 目前液体：
+*** <code>minecraft:empty</code>
+*** <code>minecraft:flowing_water</code>
+*** <code>minecraft:water</code>
+*** <code>minecraft:flowing_lava</code>
+*** <code>minecraft:lava</code>
+** 一个位置的液体当前取决于该位置的方块; 目前仍有水方块和熔岩方块。<!-- i.e. this change hasn't happened yet: https://twitter.com/Dinnerbone/status/988712909315493888 -->
+* 加入了新的液体[[Java版标签|标签]]：<code>minecraft:lava</code>和<code>minecraft:water</code>。
+* 该系统主要是内部的；它不能直接与之交互。
+
+=== 世界生成 ===
+'''[[自选世界类型]]'''
+* 新的自选世界生成类型：洞穴。
+** 与下界的生成相似。
+
+=== 游戏内容 ===
+'''[[状态效果]]'''
+* {{EffectLink|Dolphin's Grace}}
+** 让玩家游得更快。
+** 在[[海豚]]附近游泳获得。
+
+== 更改 ==
+=== 方块 ===
+'''常规'''
+* 为数个[[方块]]修改了ID与名称：
+{| class="wikitable" data-description="更改的方块名称及ID"
+! 旧名称 !! 新名称 !! 译名 !! 旧ID !! 新ID
+|-
+| Sea Grass || Seagrass || 海草 || <code>minecraft:sea_grass</code> || <code>minecraft:seagrass</code>
+|-
+| Tall Sea Grass || Tall Seagrass || 高海草 || <code>minecraft:tall_sea_grass</code> || <code>minecraft:tall_seagrass</code>
+|}
+
+'''[[海龟蛋]]'''
+* 更改了[[海龟蛋]]的手持纹理。
+
+'''[[海草]]'''
+* 现在会在水下洞穴内生成。
+
+=== 物品 ===
+'''常规'''
+* 为数个[[物品]]修改了ID与名称：
+{| class="wikitable" data-description="更改的物品名称及ID"
+! 旧名称 !! 旧译名 !! 新名称 !! 新译名 !! 旧ID !! 新ID
+|-
+| Clownfish || 小丑鱼 || Tropical Fish || 热带鱼 || <code>minecraft:clownfish</code> || <code>minecraft:tropical_fish</code>
+|-
+| Puffer Fish Bucket || 河豚桶 || Pufferfish Bucket || 河豚桶 || <code>minecraft:puffer_fish_bucket</code> || <code>minecraft:pufferfish_bucket</code>
+|}
+
+'''[[热带鱼桶]]'''
+* ID由<code>clownfish_bucket</code>更改为<code>tropical_fish_bucket</code>。
+
+'''[[刷怪蛋]]'''
+* [[幻翼]]的[[刷怪蛋]]现在视觉效果更贴近原本生物更新过的纹理。
+
+'''[[海洋之心]]'''
+* 现在生成于埋藏的宝藏箱中（以一组1个的形式存在）。
+
+=== 生物 ===
+'''常规'''
+* 为数个[[生物]]修改了ID与名称：
+{| class="wikitable" data-description="更改的生物名称及ID"
+! 旧名称 !! 新名称 !! 译名 !! 旧ID !! 新ID
+|-
+| Puffer Fish || Pufferfish || 河豚 || <code>minecraft:puffer_fish</code> || <code>minecraft:pufferfish</code>
+|}
+
+'''亡灵生物'''
+* 除了[[僵尸马]]外，亡灵生物现在会沉入水中。
+
+'''[[骷髅马]]'''
+* [[骷髅马]]现在能够在水中骑乘。
+
+'''[[幻翼]]'''
+* 现在拍动翅膀更加流畅快速。
+* 现在会掉落经验。
+
+'''[[鹦鹉]]'''
+* 现在会模仿[[幻翼]]与[[溺尸]]的叫声。
+
+'''[[海豚]]'''
+* 当[[海豚]]溺水时, 它们现在会游回水面。
+
+=== 非生物实体 ===
+'''[[经验球]]'''
+* 现在会浮出水面。
+
+=== 世界生成 ===
+'''常规'''
+* 由于新的世界生成机制，之前快照中生成的世界将不再可用。
+
+'''[[自选世界类型]]'''
+* 生成器“主世界”和“末地”被重命名为“地表”和“浮岛”。
+
+'''[[生物群系]]'''
+* 为数个[[生物群系]]修改了名称：
+{| class="wikitable collapsible" data-description="更改的生物群系名称"
+! ID !! 旧名称 !! 旧译名 !! 新名称 !! 新译名
+|-
+| <code>minecraft:extreme_hills</code> || <code>Extreme Hills</code> || 峭壁 || <code>Mountains</code> || 山地
+|-
+| <code>minecraft:swampland</code> || <code>Swampland</code> || 沼泽 || <code>Swamp</code> || 沼泽
+|-
+| <code>minecraft:ice_flats</code> || <code>Ice Plains</code> || 冰原 || <code>Snowy Tundra</code> || 积雪的冻原
+|-
+| <code>minecraft:ice_mountains</code> || <code>Ice Mountains</code> || 冰山 || <code>Snowy Mountains</code> || 雪山
+|-
+| <code>minecraft:mushroom_island</code> || <code>Mushroom Island</code> || 蘑菇岛 || <code>Mushroom Fields</code> || 蘑菇岛
+|-
+| <code>minecraft:mushroom_island_shore</code> || <code>Mushroom Island Shore</code> || 蘑菇岛岸 || <code>Mushroom Field Shore</code> || 蘑菇岛岸
+|-
+| <code>minecraft:forest_hills</code> || <code>Forest Hills</code> || 森林丘陵 || <code>Wooded Hills</code> || 繁茂的丘陵
+|-
+| <code>minecraft:smaller_extreme_hills</code> || <code>Extreme Hills Edge</code> || 悬崖 || <code>Mountain Edge</code> || 山地边缘
+|-
+| <code>minecraft:stone_beach</code> || <code>Stone Beach</code> || 石滩 || <code>Stone Shore</code> || 石岸
+|-
+| <code>minecraft:cold_beach</code> || <code>Cold Beach</code> || 寒冷沙滩 || <code>Snowy Beach</code> || 积雪沙滩
+|-
+| <code>minecraft:roofed_forest</code> || <code>Roofed Forest</code> || 黑森林 || <code>Dark Forest</code> || 黑森林
+|-
+| <code>minecraft:taiga_cold</code> || <code>Cold Taiga</code> || 冷针叶林 || <code>Snowy Taiga</code> || 积雪针叶林
+|-
+| <code>minecraft:taiga_cold_hills</code> || <code>Cold Taiga Hills</code> || 冷针叶林山丘 || <code>Snowy Taiga Hills</code> || 积雪的针叶林丘陵
+|-
+| <code>minecraft:redwood_taiga</code> || <code>Mega Taiga</code> || 大型针叶林 || <code>Giant Tree Taiga</code> || 巨型针叶林
+|-
+| <code>minecraft:redwood_taiga_hills</code> || <code>Mega Taiga Hills</code> || 大型针叶林山丘 || <code>Giant Tree Taiga Hills</code> || 巨型针叶林丘陵
+|-
+| <code>minecraft:extreme_hills_with_trees</code> || <code>Extreme Hills+</code> || 峭壁+ || <code>Wooded Mountains</code> || 繁茂的山地
+|-
+| <code>minecraft:mesa</code> || <code>Mesa</code> || 平顶山 || <code>Badlands</code> || 恶地
+|-
+| <code>minecraft:mesa_rock</code> || <code>Mesa Forest Plateau</code> || 平顶山森林高原 || <code>Wooded Badlands Plateau</code> || 繁茂的恶地高原
+|-
+| <code>minecraft:mesa_clear_rock</code> || <code>Mesa Plateau</code> || 平顶山高原 || <code>Badlands Plateau</code> || 恶地高原
+|-
+| <code>minecraft:sky_island_low</code> || <code>The End - Floating island</code> || - || <code>Small End Islands</code> || 末地小型岛屿
+|-
+| <code>minecraft:sky_island_medium</code> || <code>The End - Medium island</code> || - || <code>End Midlands</code> || 末地内陆
+|-
+| <code>minecraft:sky_island_high</code> || <code>The End - High island</code> || - || <code>End Highlands</code> || 末地高地
+|-
+| <code>minecraft:sky_island_barren</code> || <code>The End - Barren island</code> || - || <code>End Barrens</code> || 末地荒地
+|-
+| <code>minecraft:warm_deep_ocean</code> || <code>Warm Deep Ocean</code> || 暖水深海 || <code>Deep Warm Ocean</code> || 暖水深海
+|-
+| <code>minecraft:lukewarm_deep_ocean</code> || <code>Lukewarm Deep Ocean</code> || 温水深海 || <code>Deep Lukewarm Ocean</code> || 温水深海
+|-
+| <code>minecraft:cold_deep_ocean</code> || <code>Cold Deep Ocean</code> || 冷水深海 || <code>Deep Cold Ocean</code> || 冷水深海
+|-
+| <code>minecraft:frozen_deep_ocean</code> || <code>Frozen Deep Ocean</code> || 封冻深海 || <code>Deep Frozen Ocean</code> || 冰冻深海
+|-
+| <code>minecraft:mutated_desert</code> || <code>Mutated Desert</code> || 沙漠变种 || <code>Desert Lakes</code> || 沙漠湖泊
+|-
+| <code>minecraft:mutated_extreme_hills</code> || <code>Mutated Extreme Hills</code> || 峭壁变种 || <code>Gravelly Mountains</code> || 沙砾山地
+|-
+| <code>minecraft:mutated_taiga</code> || <code>Mutated Taiga</code> || 针叶林变种 || <code>Taiga Mountains</code> || 针叶林山地
+|-
+| <code>minecraft:mutated_swampland</code> || <code>Mutated Swampland</code> || 沼泽变种 || <code>Swamp Hills</code> || 沼泽丘陵
+|-
+| <code>minecraft:mutated_ice_flats</code> || <code>Ice Plains Spikes</code> || 冰刺平原 || <code>Ice Spikes</code> || 冰刺之地
+|-
+| <code>minecraft:mutated_jungle</code> || <code>Mutated Jungle</code> || 丛林变种 || <code>Modified Jungle</code> || 丛林变种
+|-
+| <code>minecraft:mutated_jungle_edge</code> || <code>Mutated Jungle Edge</code> || 丛林边缘变种 || <code>Modified Jungle Edge</code> || 丛林边缘变种
+|-
+| <code>minecraft:mutated_birch_forest</code> || <code>Mutated Birch Forest</code> || 桦木森林变种 || <code>Tall Birch Forest</code> || 高大桦木森林
+|-
+| <code>minecraft:mutated_birch_forest_hills</code> || <code>Mutated Birch Forest Hills</code> || 桦木森林丘陵变种 || <code>Tall Birch Hills</code> || 高大桦木丘陵
+|-
+| <code>minecraft:mutated_roofed_forest</code> || <code>Mutated Roofed Forest</code> || 黑森林变种 || <code>Dark Forest Hills</code> || 黑森林丘陵
+|-
+| <code>minecraft:mutated_taiga_cold</code> || <code>Mutated Cold Taiga</code> || 冷针叶林变种 || <code>Snowy Taiga Mountains</code> || 积雪的针叶林山地
+|-
+| <code>minecraft:mutated_redwood_taiga</code> || <code>Mega Spruce Taiga</code> || 大型云杉针叶林 || <code>Giant Spruce Taiga</code> || 巨型云杉针叶林
+|-
+| <code>minecraft:mutated_redwood_taiga_hills</code> || <code>Mutated Redwood Taiga Hills</code> || 红木森林丘陵变种 || <code>Giant Spruce Taiga Hills</code> || 巨型云杉针叶林丘陵
+|-
+| <code>minecraft:mutated_extreme_hills_with_trees</code> || <code>Mutated Extreme Hills+</code> || 峭壁变种+ || <code>Gravelly Mountains+</code> || 沙砾山地+
+|-
+| <code>minecraft:mutated_savanna</code> || <code>Mutated Savanna</code> || 热带草原变种 || <code>Shattered Savanna</code> || 破碎的热带草原
+|-
+| <code>minecraft:mutated_savanna_rock</code> || <code>Mutated Savanna Plateau</code> || 热带高原变种 || <code>Shattered Savanna Plateau</code> || 破碎的热带高原
+|-
+| <code>minecraft:mutated_mesa</code> || <code>Mesa (Bryce)</code> || 平顶山（岩柱） || <code>Eroded Badlands</code> || 风蚀恶地
+|-
+| <code>minecraft:mutated_mesa_rock</code> || <code>Mutated Mesa Forest Plateau</code> || 平顶山森林高原变种 || <code>Modified Wooded Badlands Plateau</code> || 繁茂的恶地高原变种
+|-
+| <code>minecraft:mutated_mesa_clear_rock</code> || <code>Mutated Mesa Plateau</code> || 平顶山高原变种 || <code>Modified Badlands Plateau</code> || 恶地高原变种
+|}
+
+=== 命令格式 ===
+'''{{cmd|seed}}'''
+* 输出现在能够被复制。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* “{{Advancement name|nether.all_effects|zh}}”现在包含潮涌能量的[[状态效果]]。
+
+=== 常规 ===
+'''[[音效]]'''
+* [[信标]]和[[潮涌核心]]有新的音效。
+
+'''路径'''
+* 改进了旧版本的升级路径。
+
+'''制作人员名单'''
+* 更新了制作人员名单。
+
+== 修复 ==
+{{fixes|fixedin=18w19a|prefix=Minecraft|showdesc=1
+|;old
+|7908|部分种子的玩家出生点位于海洋（或熔岩海）的中央。
+|56529|世界边界过小会导致玩家生成于海洋底部。
+|86016|部分制作人员尚未在<samp>credits.txt</samp>中列出。
+|118072|巨型云杉针叶林丘陵生物群系的英文名被错误命名为“Redwood Taiga Hills M”。
+|;dev
+|121285|在启动器配置中更改游戏分辨率会导致游戏在启动期间崩溃。
+|121636|多人游戏的命令在单人游戏中依然可用且效果与多人游戏不同。
+|121661|执行{{cmd|help ''[<无效命令>]''|link=none}}会输出“{{cd|java.util.NoSuchElementException}}”信息。
+|121799|无法使用{{cmd|summon|link=none}}命令产生闪电。
+|121999|非OP玩家执行{{cmd|help|link=none}}时仍会列出仅OP可用的命令。
+|122557|生成大小为0（或接近于0）的dust粒子会导致游戏因{{cd|ArithmeticException}}而崩溃。
+|122630|{{cmd|help|link=none}}所列出的命令中不包含斜杠“/”。
+|122632|{{cmd|help ''[<命令>]''|link=none}}所列出的参数中并未包含主命令作为前缀。
+|123053|使用带有{{cd|CanDestroy}}或{{cd|CanPlaceOn}}标签的物品会使游戏崩溃。
+|123606|在村民反复开关门时将门破坏会导致服务器因{{cd|ClassCastException}}崩溃。
+|123778|在玩家重新连接服务器前玩家列表和侧边栏中的队伍颜色不会正常生效。
+|123813|输出Json文本时队伍名称的颜色并未正常显示。
+|123835|侧边栏中带有颜色的槽位无法正确显示。
+|123852|发光状态效果的颜色不会随着队伍颜色的变化而变化。
+|123856|点击死亡界面上的[刻意的游戏设计]不会跳转到{{bug|MCPE-28723}}页面。
+|124091|队伍颜色不会应用到玩家头上的名称标签中。
+|124092|部分队伍选项参数失效。
+|124098|名称为jeb_的绵羊不会变色。
+|124102|成书签名时作者名称会以字符串的形式显示。
+|124147|使用刷怪蛋和命令生成的僵尸马不可见，且重载世界后会被替换为僵尸。
+|124237|命令语法提示并未正确显示在输入框上方。
+|124560|服务器完成加载后会在日志中输出“For help, type help or ?”，然而输入“?”会提示无法识别。
+|124633|当队伍选项“seeFriendlyInvisibles”为false时，执行{{cmd|team option seeFriendlyInvisibles false|link=none}}命令会输出错误的结果。
+|124720|无法以可视化用户界面的形式来启动服务器。
+|124750|{{cmd|particle|link=none}}命令会在所有维度中同一坐标处产生粒子，即使限制其产生维度。
+|124889|玩家不能通过按{{keys|Shift}}+鼠标左键的方式将物品移动至熔炉的槽位中。
+|124894|超平坦世界的结构中不会生成箱子和发射器。
+|124895|树木有时会紧贴在一起生成。
+|124898|熔炉的配方书中“杂项”选项卡的图标显示为苹果。
+|124949|树木会生成在村庄的建筑内部。
+|124956|熔炉的配方书中过滤器提示显示错误。
+|125060|熔炉的配方书中的图标显示为工作台。
+|125107|废弃矿井生成时，若其上方有其他方块阻挡，则该废弃矿井的附加结构不会正常生成。
+|125115|命令语法提示中的数字并未按从小到大的顺序排序。
+|125130|语法提示中对于目标选择器的描述错误。
+|125174|超平坦世界中无法生成矿脉。
+|125232|和平模式下的幻翼仍会主动攻击玩家。
+|125283|丛林生物群系中的树木生成过于密集。
+|125381|神龟药水不显示所给予的效果的倍率。
+|125442|丛林生物群系会导致严重的卡顿。
+|125466|钓鱼所获得的物品不会自动转移到玩家处。
+|125550|经验球不会漂浮在水面上。
+|125607|旁观模式下的玩家进入气泡柱仍会播放对应音效。
+|125803|{{cd|NoGravity}}实体标签对物品无效。
+|125915|僵尸可以在海龟蛋上方1.5格高的位置踩碎海龟蛋。
+|125946|幻翼可以生成于方块内部。
+|125997|封冻深海并未被完全封冻。
+|126139|扑腾的鳕鱼以及部分热带鱼的鱼鳍与地面形成深度冲突。
+|126178|对海带、海草、珊瑚和珊瑚扇使用水桶会将其破坏。
+|126190|鲑鱼有时会停止游动。
+|126198|除玩家外的实体不会受到河豚的中毒效果。
+|126218|第一人称视角中海龟蛋物品的显示位置过低。
+|126261|海龟会将海龟蛋产在奇怪的位置。
+|126362|若熔炉界面中的燃料槽已有物品，则通过{{keys|Shift}}+鼠标左键为燃料槽添加燃料的行为仅在客户端生效。
+|126380|获得南瓜时会解锁南瓜灯的配方而不是雕刻南瓜。
+|126656|灵魂沙之间的气泡柱只有相隔一个方块的距离才能产生。
+|126734|树木会错误地生成在村庄的建筑内部,而且该树木并不包含树干。
+|126762|玩家攻击无效的热带鱼变种时屏幕会变红。
+|126800|热带鱼的物品名称显示为“小丑鱼”（Clownfish）。
+|126815|地图上的图标在多人游戏中显示异常。
+|126859|北极熊和兔子不会在积雪的冻原生物群系中生成。
+|126950|在水下乘坐船会使其停止下沉。
+|127069|使用命令生成的巨型幻翼会导致游戏崩溃。
+|127166|鹦鹉不会模仿海豚、幻翼和溺尸的声音。
+|127253|{{keys|F3+Q}}提示列表中的内容并未按首字母排序。
+|127291|僵尸转化为溺尸后掉落其原有装备的概率为100%。
+|127295|僵尸在转化为溺尸后有概率会凭空获得三叉戟或钓鱼竿。
+|127337|{{keys|F3+C}}复制玩家当前坐标到剪贴板的功能不会同时复制当前维度。
+|127388|世界加载时河豚会呈现出膨胀的模型。
+|127516|烟火之星合成配方中的错误会引发物品复制、消失、物品栏不同步以及游戏卡顿等多个漏洞。
+|127593|含水方块会阻止其周围气泡柱的生成。
+|127924|缓降状态效果被分类到负面效果中。
+|127969|海草会错误生成于沉船的楼梯上方。
+|127998|海泡菜不能被放置于非固体方块的顶部。
+|127999|在玩家所站立的方块上放置四个海泡菜会使玩家无法移动。
+|128039|幻翼刷怪蛋的颜色与其新纹理不符。
+|128242|玩家在游泳时切换至第三人称视角会导致第一人称视角中玩家的手臂消失。
+|128264|生物可以在冰上生成。
+|128285|带有{{cd|NoAI}}标签的海豚会在一段时间后死亡。
+|128336|海带会生成于沉船的活板门、楼梯、台阶和箱子上。
+|128463|进度“{{Advancement name|nether.all_effects|zh}}”的条件中不包括潮涌能量状态效果。
+|128557|溺水的海豚不会主动游到水面上呼吸空气。
+|;previous
+|128666|岩浆块会将其上方的流动水替换为水源。
+|128674|创建世界类型为自选的世界后，玩家可能会生成于虚空上方。
+|128712|被玩家击杀的幻翼不会掉落任何经验球。
+|128733|冰的{{cd|frosted_ice}}方块标签丢失。
+|128766|镐不能加快蓝冰的采集速度。
+|128779|世界类型的选项中“调试模式”排在“自选”之前。
+|128857|同一格中的海龟蛋不会随着数量的增加而改变其命中箱大小。
+|129143|调试屏幕上的Biome信息中显示的是生物群系的名称而非ID。
+|;private
+|122684|向局域网的开放的世界中，玩家可以将作为服务端主机的玩家踢出或封禁。<ref name="article_18w19a"/>
+|127274|启用简化调试信息后{{keys|F3+C}}复制玩家当前坐标的功能依然有效。<ref name="article_18w19a"/>
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.13}}
+
+[[de:18w19a]]
+[[en:Java Edition 18w19a]]
+[[es:Java Edition 18w19a]]
+[[fr:Édition Java 18w19a]]
+[[ja:Java Edition 18w19a]]
+[[nl:18w19a]]
+[[pt:Edição Java 18w19a]]
+[[ru:18w19a (Java Edition)]]

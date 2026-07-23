@@ -1,0 +1,296 @@
+# 页面: Java版指南/嗡嗡蜂群
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%8C%87%E5%8D%97/%E5%97%A1%E5%97%A1%E8%9C%82%E7%BE%A4
+# 分类: Java版指南, 使用DynamicPageList4的页面
+# 抓取时间: 2026-07-14 17:15:22
+# 原始 Wikitext 内容:
+
+{{for|该指南的基岩版版本|基岩版指南/嗡嗡蜂群}}
+{{Infobox guide
+|edition=Java版
+|name=嗡嗡蜂群
+|vers=
+* [[Java版1.15|1.15]]
+* [[Java版1.15.1|1.15.1]]
+* [[Java版1.15.2|1.15.2]]
+|prev=村庄与掠夺
+|next=下界更新
+}}
+
+这篇指南简要概述了[[嗡嗡蜂群]]（[[Java版]]1.15.x）更新的内容。本指南假定读者对[[村庄与掠夺]]更新（Java版1.14.x）的内容有基本了解。
+
+== 生物 ==
+=== 新内容 ===
+{| class = "wikitable"
+! 名称 !! 外观 !! 生成于 !! 掉落 !! 备注
+|-
+| [[蜜蜂]] || [[File:Bee.gif|128px]] || 生成在[[蜂巢（方块）|蜂巢]]附近。
+|
+* {{xp|1|3}}（若被[[玩家]]或驯服的[[狼]]杀死）
+|
+* 被激怒后会给玩家造成[[中毒]]效果。
+* 会成群攻击。
+* 只能对所攻击的目标造成一次伤害，此后即会死亡。
+|}
+
+=== 更改 ===
+{| class = "wikitable"
+! 名称 !! 外观 !! 更改
+|-
+| 所有生物
+|| ||
+* 更好地避免从熔岩中寻路。
+|-
+| 可繁殖的生物
+|| ||
+* 自然成群生成时可以生成幼年个体。
+** [[狐狸]]、[[牛]]、[[绵羊]]、[[猪]]和[[鸡]]的概率是5%，[[狼]]、[[羊驼]]和[[马]]的概率是10%。
+|-
+| [[末影龙]] || [[File:Ender Dragon.gif|128px]]||
+* 移除了翅膀纹理中透明部分的一个黑点。
+* 移除了死亡中末影龙的翅膀底部的部分纹理。
+|-
+| [[铁傀儡]] || {{animate|Iron Golem.png;Iron Golem Cracked Low.png;Iron Golem Cracked Medium.png;Iron Golem Cracked High.png|128px}}||
+* 现在使用{{cd|generic.attackDamage}}属性。<!-- what does this mean for gameplay? this is too technical here -->
+* 受伤时会开裂。
+** 在铁傀儡死亡前会经历从未开裂到完全开裂共4个阶段。
+* 可以用[[铁锭]]来治疗，一个铁锭恢复{{hp|25}}。
+** 将生命为{{hp|1}}的铁傀儡治疗至满生命值需要4个铁锭。
+|-
+| [[岩浆怪]]、[[豹猫]]和[[史莱姆]]|| {{animate|Magma Cube JE2.png;Ocelot.png;Slime.png|128px}}||
+* 现在使用{{cd|generic.attackDamage}}属性。
+|-
+| [[鹦鹉]] || {{animate|Red Parrot JE1 BE1.png;Blue Parrot JE1 BE1.png;Green Parrot JE1 BE1.png;Cyan Parrot JE1 BE1.png;Gray Parrot JE1 BE1.png;Sitting Red Parrot JE1 BE1.png;Sitting Blue Parrot JE1 BE1.png;Sitting Green Parrot JE1 BE1.png;Sitting Cyan Parrot JE1 BE1.png;Sitting Gray Parrot JE1 BE1.png|128px}}||
+* 现在当玩家骑乘其他实体时仍能坐在玩家肩上。
+* 不再模仿[[末影人]]、[[北极熊]]、[[狼]]和[[僵尸猪人]]的音效。
+|-
+| 傻子[[村民]] || {{animate|Plains Nitwit.png;Desert Nitwit.png;Jungle Nitwit.png;Savanna Nitwit.png;Snowy Nitwit.png;Swamp Nitwit.png;Taiga Nitwit.png|128px}}||
+* 腰部不再有等级徽章的纹理。
+|-
+| [[僵尸村民]] || {{animate|Plains Zombie Villager Base.png;Desert Zombie Villager Base.png;Jungle Zombie Villager Base.png;Savanna Zombie Villager Base.png;
+Snowy Zombie Villager Base.png;Swamp Zombie Villager Base.png;Taiga Zombie Villager Base.png|128px}}||
+* 从[[村民]]转化来的僵尸村民不再消失。
+|}
+
+== 方块 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=嗡嗡蜂群新增方块
+|rows=1
+| 0=Beehive | Bee Nest | Honey Block | Honeycomb Block }}
+|嗡嗡蜂群新增方块一览
+}}
+{| class = "wikitable"
+! 名称 !! 外观 !! 获得方法 !! 采集工具 !! 用途
+|-
+| [[蜂箱]] || [[File:Beehive.png|84px]] ||
+{{Crafting|A1=Any Planks|B1=Any Planks|C1=Any Planks|A2=Honeycomb|B2=Honeycomb|C2=Honeycomb|A3=Any Planks|B3=Any Planks|C3=Any Planks|Output=Beehive}}
+|| 
+* 可以使用任意工具挖掘，但[[斧]]是最快的。
+||
+* 容纳蜜蜂。
+* 如果玩家破坏了蜂箱或从其中收集蜂蜜、蜜脾，蜂箱里的蜜蜂会和玩家敌对。
+** 如果用附有[[精准采集]]的工具采集蜂箱，其里面的蜜蜂不会变得敌对，但外面的蜜蜂会。
+** 如果蜂箱下面有[[营火]]，收集蜂蜜瓶或蜜脾时蜜蜂不会变得敌对。
+|-
+| [[蜂巢（方块）|蜂巢]] || [[File:Bee Nest.png|84px]] ||
+自然生成在[[繁花森林]]、[[平原]]和[[向日葵平原]]生物群系一些[[树木]]的树干上。
+|| 
+* 需要用附有精准采集的任意工具来采集，但斧是最快的。
+||
+* 功能和蜂箱相同。
+|-
+| [[蜂蜜块]] || [[File:Honey Block.png|84px]] ||
+{{Crafting|A2=Honey Bottle|B2=Honey Bottle|A3=Honey Bottle|B3=Honey Bottle|Output=Honey Block}}
+|| 
+* 可以用任意工具挖掘，当被挖掘时会被立即破坏。
+||
+* 功能和[[黏液块]]基本相同。
+** 不会和黏液块粘在一起。
+* 和黏液块不同，被移动时会带着上面的生物一起移动。
+* 生物通常会避免在蜂蜜块上行走。
+* 合成时会返还[[玻璃瓶]]。
+|-
+| [[蜜脾块]] || [[File:Honeycomb Block.png|84px]] ||
+{{Crafting|A2=Honeycomb|B2=Honeycomb|A3=Honeycomb|B3=Honeycomb|Output=Honeycomb Block}}
+|| 
+* 可以用任意工具挖掘。
+||
+* 装饰性方块。
+|}
+
+=== 更改 ===
+{| class = "wikitable"
+! 名称 !! 外观 !! 更改
+|-
+| [[钟]] || [[File:Bell.png|84px]] ||
+* 现在被红石信号激活后会发出响声。
+|-
+| [[营火]] || [[File:Campfire.png|84px]] ||
+* 现在可以用[[锹]]熄灭。
+|-
+| [[堆肥桶]] || [[File:Composter.png|84px]] ||
+{{Crafting|A1=Any wood Slab|C1=Any wood Slab|A2=Any wood Slab|C2=Any wood Slab|A3=Any wood Slab|B3=Any wood Slab|C3=Any wood Slab|Output=Composter}}
+* 现在由木[[台阶]]合成（和[[基岩版]]一致），而不是木栅栏和木板。
+|-
+| [[发射器]] || [[File:Dispenser.png|84px]] ||
+* 现在能对着满的蜂巢和蜂箱发射[[剪刀]]来收获蜜脾。
+** 收获的蜜脾物品会掉落在地面上。
+* 现在能对着满的蜂巢和蜂箱发射[[玻璃瓶]]来收获蜂蜜瓶。
+* 现在能对着水发射玻璃瓶来收获水瓶。
+* 现在能放置盔甲架。
+* 从发射器发射出的火焰弹现在能点燃营火。
+* 从发射器发射出的烟花火箭现在沿着发射的方向飞行。
+|-
+| [[末地石砖]] || [[File:End Stone Bricks.png|84px]] ||
+* 爆炸抗性和硬度现在和合成它的[[末地石]]相同。
+|-
+| [[耕地]] || [[File:Farmland.png|84px]] ||
+* 手动放置在耕地上不会使其变为泥土的方块现在被活塞推到耕地上时也不会使其变为泥土了。
+|-
+| [[铁门]] || [[File:Iron Door.png|84px]] ||
+* 现在必须用镐来挖掘才能使其掉落为物品。
+|-
+| [[大型蕨]] || [[File:Large Fern.png|84px]] ||
+* 现在掉落小麦种子。
+|-
+| [[西瓜梗]]和[[南瓜梗]] || [[File:Attached Stem.png|84px]] ||
+* 连接西瓜或南瓜的梗被破坏时又会掉落对应的种子了。
+|-
+| [[铁轨]] || [[File:Rail.png|84px]] ||
+* 现在放置时会朝向玩家，而不总是南北朝向。
+|-
+| [[红石比较器]] || [[File:Redstone Comparator.png|84px]] ||
+* 现在能探测蜂巢和蜂箱里蜂蜜有多少。
+** 输出的信号强度等于蜂巢或蜂箱里蜂蜜的数量。
+|-
+| [[去皮木头]] || {{animate|Stripped Oak Wood.png;Stripped Spruce Wood.png;Stripped Birch Wood.png;Stripped Jungle Wood.png;Stripped Acacia Wood.png;Stripped Dark Oak Wood.png|84px}} ||
+{{Crafting|A2=Matching Stripped Log|B2=Matching Stripped Log|A3=Matching Stripped Log|B3=Matching Stripped Log|Output=Matching Stripped Wood,3}}
+* 现在可以用去皮原木合成。
+|-
+| [[湿海绵]] || [[File:Wet Sponge.png|84px]] ||
+* 现在放置在[[下界]]中会立即变{{tr|干|乾}}。
+|-
+| [[暗海晶石]] || [[File:Dark Prismarine.png|84px]] ||
+{{Crafting|A1=Prismarine Shard|B1=Prismarine Shard|C1=Prismarine Shard|A2=Prismarine Shard|B2=Black Dye|C2=Prismarine Shard|A3=Prismarine Shard|B3= Prismarine Shard|C3=Prismarine Shard|Output=Dark Prismarine}}
+* 现在需要黑色染料来合成。
+|-
+|}
+
+== 物品 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=嗡嗡蜂群新增物品
+|rows=1
+| 0=Honey Bottle | Honeycomb | Bee Spawn Egg Revision 1 }}
+|嗡嗡蜂群新增物品一览
+}}
+{| class = "wikitable"
+! 名称 !! 外观 !! 获得方法 !! 用途
+|-
+|[[蜂蜜瓶]]
+|[[File:Honey Bottle.png|84px]]
+|
+* 对着{{cd|honey_level}}为5的蜂巢或蜂箱使用玻璃瓶获得。
+|
+* 恢复{{fp|6|1.2}}，同时解除玩家的[[中毒]]效果。
+* 可以合成蜂蜜块。
+|-
+|[[蜜脾]]
+|[[File:Honeycomb.png|84px]]
+|
+* 对着{{cd|honey_level}}为5的蜂巢或蜂箱使用剪刀获得。
+|
+* 可以合成蜂箱和蜜脾块。
+|-
+| 
+蜜蜂[[刷怪蛋]]
+|[[File:Bee Spawn Egg JE2 BE1.png|84px]]
+|
+* 只能在创造模式物品栏中获得。
+|
+* 和其他刷怪蛋功能相同。
+|}
+
+=== 更改 ===
+{| class = "wikitable"
+! 名称 !! 外观 !! 更改
+|-
+| [[船]] || {{animate|Oak Boat JE4 BE2.png;Spruce Boat JE3 BE2.png;Birch Boat JE3 BE2.png;Jungle Boat JE3 BE2.png;Acacia Boat JE3 BE2.png;Dark Oak Boat JE3 BE2.png|84px}} ||
+* 1个船现在可烧炼6个物品。
+|-
+| 
+[[刷怪蛋]]（溺尸、尸壳、僵尸猪人、僵尸和僵尸村民）
+|| ||
+* 现在对着这些生物的成年个体使用可生成幼年个体。
+|}
+
+== 非生物实体 ==
+=== 更改 ===
+{| class = "wikitable"
+! 名称 !! 外观 !! 更改
+|-
+| [[末影龙火球]]
+| [[File:Dragon Fireball JE2.png|128px]]
+|
+* 更改了纹理。现在的纹理类似于[[纹理更新]]后的[[火焰弹]]。
+|-
+| [[经验球]]
+| [[File:Experience Orb.gif|128px]]
+|
+* 经验球现在会在实体被杀死后与掉落物同时出现在同一位置。
+* 再次被渲染为半透明态。
+|}
+
+== 生物群系 ==
+=== 更改 ===
+{| class = "wikitable"
+! 名称 !! 外观 !! 更改
+|-
+| [[黑森林]] || [[File:Dark Forest.png|184px]] ||
+* 重新加入了生成[[桦树]]的特性。
+|-
+| [[巨型针叶林]] || [[File:Old Growth Pine Taiga.png|184px]] ||
+* 现在会生成[[甜浆果丛]]。
+|-
+| [[针叶林]] || [[File:Taiga.png|184px]] ||
+* 现在所有变种都会生成[[狐狸]]。
+|}
+
+== 状态效果 ==
+=== 更改 ===
+{| class = "wikitable"
+! 名称 !! 图标 !! 更改
+|-
+| [[瞬间伤害]]
+| [[File:Instant Damage.png]]
+|
+* 加入了状态效果图标。
+|-
+| [[瞬间治疗]]
+| [[File:Instant Health.png]]
+|
+* 加入了状态效果图标。
+|-
+| [[饱和]]
+| [[File:Saturation.png]]
+|
+* 加入了状态效果图标。
+|}
+
+== 进度 ==
+=== 新内容 ===
+{{load advancements|husbandry.safely_harvest_honey;husbandry.silk_touch_nest;adventure.honey_block_slide|main=none}}
+
+== 导航 ==
+{{Navbox guides|je}}
+
+[[en:Java Edition guides/Buzzy Bees]]
+[[es:Guías de Java Edition/Buzzy Bees]]
+[[ja:ガイド/Java Edition/バジー・ビー]]
+[[pt:Guias da Edição Java/Buzzy Bees]]
+[[ru:Обзоры версий Java Edition/Buzzy Bees]]
+[[uk:Керівництва з Java Edition/Buzzy Bees]]

@@ -1,0 +1,54 @@
+# 页面: 末影龙战斗存储格式
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%AB%E5%BD%B1%E9%BE%99%E6%88%98%E6%96%97%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:28:45
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+'''末影龙战斗存储文件'''是游戏存储每个维度[[末影龙战斗]]信息所用的文件。
+
+== 存储格式 ==
+末影龙战斗存储文件位于{{filepath|-{}-<''维度根目录''>/data/minecraft/ender_dragon_fight.dat}}。例如，末地的末影龙战斗存储文件位于{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/the_end/data/minecraft/ender_dragon_fight.dat}}。
+
+末影龙战斗存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|int-array|dragon_uuid}}：（[[UUID]]）当前末影龙的UUID。
+*** {{nbt|bool|dragon_killed}}：末影龙是否已经死亡。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|int-array|exit_portal_location}}：末影龙被击败后会飞往的地方，即[[返回传送门]]的位置。内部包含3个整数，分别代表XYZ坐标。
+*** {{nbt|list|gateways}}：包含即将生成的[[末地折跃门]]的位置。刚创建时各维度有20个数字，末影龙每死亡一次此列表长度减1，直到为全部清空后此项不再保存。
+**** {{nbt|int}}：折跃门的角度，0为东方，数字按顺时针方向递增。
+*** {{nbt|bool|needs_state_scanning|existonsave=1|required=1}}：此维度是否未开启过末影龙战斗。为<code>true</code>时，游戏会对当前维度进行全面检查，确保旧版本的末影龙战斗数据不会和新版本冲突。此值不存在时游戏默认为<code>true</code>。
+*** {{nbt|bool|previously_killed|existonsave=1|required=1}}：末影龙是否被击败过，决定下次击败末影龙获得的经验值。如果此项不存在游戏默认为<code>false</code>。
+*** {{nbt|list|respawn_crystals}}：末影龙重生时有效的[[末地水晶]]。
+**** {{nbt|int array}}：（UUID）一个末地水晶的UUID。
+*** {{nbt|string|respawn_stage}}：末影龙重生的阶段。取值可以为<code>start</code>（末地水晶向X=0，Y=128，Z=0发射光柱）、<code>preparing_to_summon_pillars</code>（持续100刻，只会播放音效）、<code>summoning_pillars</code>（黑曜石柱按序重新生成）、<code>summoning_dragon</code>（准备生成末影龙）和<code>end</code>（正式生成末影龙，并立刻移除本字段）。
+*** {{nbt|int|respawn_time|existonsave=1|required=1}}：自末影龙重生开始后经过的时间，单位为刻。如果此项不存在游戏默认为0。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此末影龙战斗存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+游戏在创建末影龙战斗时，会先检查当前维度是否允许开启末影龙战斗，依据当前维度的[[维度类型]]的{{nbt|boolean|has_ender_dragon_fight}}来判断。只有具有末影龙战斗的维度才具有末影龙战斗及对应的末影龙战斗存储文件，游戏不会读取不具有末影龙战斗的维度的存储文件。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w31a|加入了末影龙战斗数据。
+|此时末影龙战斗数据存储于{{filename|[[level.dat]]}}中，位于{{nbt|compound|DimensionData.1.DragonFight}}标签下。}}
+|{{HistoryLine||1.16|dev=20w21a|将末影龙战斗数据移动到{{nbt|compound|DragonFight}}标签下。}}
+|{{HistoryLine||26.1|dev=snapshot-6|加入了单独的末影龙战斗存储文件，末影龙战斗数据不再存储于{{filename|level.dat}}中。
+|此前格式如下：
+<div class{{=}}"treeview">
+* {{nbt|compound}} '''level.dat根标签'''
+** {{nbt|compound|Data}}
+*** {{nbt|compound|DragonFight|existonsave=1}}：末影龙战斗数据。
+{{:末影龙/战斗数据|**}}
+</div>}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

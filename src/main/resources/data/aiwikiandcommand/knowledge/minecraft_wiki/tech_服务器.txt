@@ -1,0 +1,127 @@
+# 页面: 服务器
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%8D%E5%8A%A1%E5%99%A8
+# 分类: Java版, Java版独有信息, 基岩版, 基岩版独有信息, 服务器, 需要图像的页面
+# 抓取时间: 2026-07-14 17:28:33
+# 原始 Wikitext 内容:
+
+{{about|Java版和基岩版多人游戏软件|其他用法|服务器（消歧义）}}
+
+'''Minecraft服务器（Minecraft Server）'''可以使[[玩家]]在线或通过本地局域网络和其他玩家一起玩Minecraft。在游戏内部，游戏为单人游戏运行服务器，这样做是为了使单人游戏体验与多人游戏体验保持一致，并使得对游戏所做的更改（例如错误修复）既适用于单人游戏又适用于多人游戏。
+
+{{TOC limit|3}}
+
+== 服务器的种类 ==
+{{see also|Tutorial:游玩服务器}}
+
+目前有多种服务器以独特的游戏内容、规则以及引入的社会结构而闻名。没有任何两个服务器是完全相同的，服务器类型之间的界线通常是模糊的无法区分的。许多特殊种类的服务器使用地图编辑器或在[[创造模式]]中来建造自定义地图，使用[[Bukkit#CraftBukkit|CraftBukkit]]软件来提供附加功能。这些服务器有的面向[[Tutorial:PvP|PvP]]，有的面向生存模式、创造模式和极限模式，有些服务器拥有经济系统，有些服务器有内置小游戏。
+
+如果粗略划分，如果一个服务器是以[[生存模式]]为基础的服务器称为生存服务器；一个服务器是以多种小游戏作为游玩基础的服务器称为小游戏服务器；亦或是提供一个服务器用以交流建筑经验的服务器称为建筑服务器；以RPG为基础的服务器称为RPG服务器；可能兼备以上多种功能的服务器且内含不同种服务器的服务器称为群组服务器。
+
+== 架设服务器 ==
+有许多工具提供给玩家以便玩家能够架设、运行和管理一个服务器。注意，服务器有一些[[服务器/需求|服务器需求]]，以便能够高效流畅地运行。
+* '''官方多人游戏服务端'''可从Mojang处免费下载和使用，Windows、macOS以及类UNIX操作系统（GNU/Linux、BSD……）可用。详见[[Tutorial:架设服务器|Minecraft多人游戏服务器教程]]以及Mojang的[https://minecraft.net/download/server Minecraft 多人游戏服务器下载]页面以获取帮助。
+* '''向局域网开放'''提供一个在未在路由器设定转发的情况下与你同一本地网络的玩家可{{tr|访问|存取}}的服务器。详见[[Tutorial:本地局域网联机|搭建局域网服务器教程]]来获取更多信息。
+* '''第三方的服务端'''如[[Bukkit]]、[[定制服务器/SpigotMC|Spigot]]和[https://www.spongepowered.org/ Sponge]为玩家提供一种向服务器添加插件的方法。这些服务端通常用在较大的服务器上，他们可以运行插件来[[Tutorial:防止恶意破坏|防止恶意破坏]]、提供额外的玩法和获得比默认多人游戏服务端更强的多核性能。
+* '''租用服务器'''是由其他公司外部托管的服务器。这些托管服务器并不是免费使用的，玩家必须定期支付服务器租金。
+* '''[[Realms]]'''是Mojang官方托管服务器服务，允许一定数量的玩家在服务器游玩。
+* '''专用服务器'''是提供更广泛功能的服务器。这些服务器更加灵活，几乎可以完全控制。
+详见{{slink|教程|服务器设置}}以获取如何使用这些软件的教程。
+
+== 管理和维护服务器 ==
+{{See also|Tutorial:服务器维护}}
+{{anchor|服主|管理员|操作员}}
+服务器主要由'''服主'''和'''管理员'''管理。服主一般负责服务器。可能服务器在服主的机器上运行，或者只有他们拥有服务器的管理权。管理员一般协助服主管理服务器，并防止破坏。管理员和服主都能使用各种[[命令]]来保证服务器平稳运行。在一个默认服务器上，管理员或服主可以用{{cmd|op}}命令或在服务器文件中编辑json文件（{{only|je|for=ops.json}}或{{only|be|for=permissions.json}}）并重启服务器使游戏玩家成为管理员。
+
+本地服务器并不一定要连接到{{only|je|for=minecraft.net}}或{{only|be|for=xbox}}，所以可以在无互联网连接的本地网络中游玩。{{only|je|for=minecraft.net}}或{{only|be|for=xbox}}作为这些服务器的玩家皮肤储存地、账户数据库并防止黑客与熊孩子使用其他用户名。这些和其他设置可以在[[server.properties]]文本文件中更改。
+
+如果区块发生更改，服务器默认每30秒就将世界保存在指定文件夹。
+
+=== 退出消息 ===
+退出消息在管理员踢出玩家或服务器错误发生时会显示。
+
+* '''{{tp|multiplayer.disconnect.server_shutdown}}''' - 服务器已关闭连接。
+* '''{{tp|disconnect.endOfStream}}''' - 服务器已停止向客户端发送数据。
+* '''{{tp|disconnect.exceeded_packet_rate}}''' - 服务器接收数据包的平均速率超过了速率限制。
+* '''{{tp|disconnect.ignoring_status_request}}''' - 服务器状态为空。
+* '''{{tp|disconnect.loginFailedInfo.invalidSession}}''' - 客户端尝试连接服务器时，与服务器会话失败。
+* '''{{tp|disconnect.loginFailedInfo.serversUnavailable}}''' - 身份验证服务器不可用。
+* '''{{tp|disconnect.loginFailedInfo.userBanned}}''' - 用户名不可用或已被封禁。
+* '''{{tp|disconnect.lost}}''' - 服务器数据为空。
+* '''{{tp|disconnect.packetError}}''' - 无法处理数据包。
+* '''{{tp|disconnect.spam}}''' - 短时间内发送超过20条聊天消息。
+* '''{{tp|disconnect.timeout}}''' - 服务器无法找到玩家的连接。
+* '''{{tp|disconnect.transfer}}''' - 成功转移到另一个服务器。
+* '''{{tp|disconnect.unknownHost}}''' - 无法解析服务器地址。
+* '''{{tp|multiplayer.disconnect.authservers_down}}''' – 身份验证服务器不可用。
+* '''{{tp|multiplayer.disconnect.banned}}''' – 玩家被{{cmd|ban}}命令封禁。
+* '''{{tp|multiplayer.disconnect.chat_validation_failed}}''' – 无法验证聊天消息来源。
+* '''{{tp|multiplayer.disconnect.duplicate_login}}''' – 另一个客户端已使用玩家的用户名登录到玩家正在玩的服务器。
+* '''{{tp|multiplayer.disconnect.expired_public_key}}''' – 个人信息公钥过期。
+* '''{{tp|multiplayer.disconnect.flying}}''' – 玩家在生存或冒险模式尝试飞行超过5秒。
+* '''{{tp|multiplayer.disconnect.generic}}''' – 玩家使用了主菜单的断开连接按钮。
+* '''{{tp|multiplayer.disconnect.idling}}''' – 玩家挂机的时间超过规定的允许最大挂机时间。
+* '''{{tp|multiplayer.disconnect.illegal_characters}}''' – 客户端被拒绝发送特定字符，如§符号。
+* '''{{tp|multiplayer.disconnect.incompatible|''版本''}}''' – 客户端版本与服务器不兼容。
+* '''{{tp|multiplayer.disconnect.invalid_entity_attacked}}''' – 玩家尝试攻击自己、[[物品实体]]、[[经验球]]等不可攻击的实体时触发。
+* '''{{tp|multiplayer.disconnect.invalid_packet}}''' – 服务器正向客户端发送未知信息。
+* '''{{tp|multiplayer.disconnect.invalid_player_data}}''' – 服务器无法放置玩家。
+* '''{{tp|multiplayer.disconnect.invalid_player_movement}}''' – 玩家位置为空。
+<ul><li><b>{{tp|multiplayer.disconnect.invalid_public_key_signature.new}}</b> – 无法验证个人信息公钥签名。</li></ul>
+* '''{{tp|multiplayer.disconnect.invalid_vehicle_movement}}''' – 载具位置包含无效值。
+* '''{{tp|multiplayer.disconnect.ip_banned}}''' – 玩家的IP被{{cmd|ban-ip}}命令封禁。
+* '''{{tp|multiplayer.disconnect.kicked}}''' – 玩家被{{cmd|kick}}命令踢出。<ref group="注">请注意{{cmd|kick}}命令能用自定义消息断开客户端连接。</ref>
+* '''{{tp|multiplayer.disconnect.name_taken}}''' – 已有使用该用户名的玩家。
+* '''{{tp|multiplayer.disconnect.not_whitelisted}}''' – 玩家不在服务器白名单中。
+* '''{{tp|multiplayer.disconnect.out_of_order_chat}}''' – 聊天消息链中的时间戳顺序不正确。
+* '''{{tp|multiplayer.disconnect.server_full}}''' – 服务器人数已到达服务器人数上限。
+* '''{{tp|multiplayer.disconnect.slow_login}}''' – 登录过程总共超过了30秒。
+* '''{{tp|multiplayer.disconnect.too_many_pending_chats}}''' – 超过4096条聊天消息未被确认。
+* '''{{tp|multiplayer.disconnect.transfers_disabled}}''' – 该服务器不接受转移。
+* '''{{tp|multiplayer.disconnect.unexpected_query_response}}''' – 从客户端收到未知的自定义数据。
+* '''{{tp|multiplayer.disconnect.unverified_username}}''' – 尝试加入无效会话。
+
+=== 画廊 ===
+{{More images|缺少部分图像|section=1}}
+[[File:Unable to connect to the server (JAVA version).png|thumb|168x168px|客户端不兼容]]
+{{gallery|
+<!--File:Java Edition disconnect closed.png|convert|“{{tp|multiplayer.disconnect.server_shutdown}}”
+File:Java Edition end Of Stream.png|convert|“{{tp|disconnect.endOfStream}}”
+File:Java Edition exceeded packet rate.png|convert|“{{tp|disconnect.exceeded_packet_rate}}”
+File:Java Edition ignoring status request.png|convert|“{{tp|disconnect.ignoring_status_request}}”
+-->File:Java Edition login Failed Info invalid Session.png|convert|“{{tp|disconnect.loginFailedInfo.invalidSession}}”
+File:Java Edition login Failed Info servers Unavailable.png|convert|“{{tp|disconnect.loginFailedInfo.serversUnavailable}}”
+}}
+
+== 参见 ==
+* [[命令]]
+* [[基岩版专用服务器]]
+* [[Realms]]
+
+== 注释 ==
+
+{{notelist}}
+
+== 外部链接 ==
+* 维基百科上的[[wzh:Minecraft服务器|Minecraft服务器]]
+* [https://findmcserver.com/ 官方服务器{{tr|列表|清單}}]
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{Navbox Bedrock Edition}}
+
+[[Category:服务器|*]]
+
+[[de:Minecraft-Server]]
+[[en:Server]]
+[[es:Servidor]]
+[[fr:Serveur]]
+[[hu:Szerver]]
+[[it:Server]]
+[[ja:サーバー]]
+[[ko:서버]]
+[[nl:Server]]
+[[pl:Serwer]]
+[[pt:Servidor]]
+[[ru:Сервер]]
+[[th:เซิร์ฟเวอร์]]
+[[uk:Сервер]]

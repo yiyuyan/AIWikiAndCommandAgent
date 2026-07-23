@@ -1,0 +1,149 @@
+# 页面: 通用唯一识别码
+# 来源: https://zh.minecraft.wiki/w/%E9%80%9A%E7%94%A8%E5%94%AF%E4%B8%80%E8%AF%86%E5%88%AB%E7%A0%81
+# 分类: Java版, 使用计算器的页面, 游戏术语
+# 抓取时间: 2026-07-14 17:37:09
+# 原始 Wikitext 内容:
+
+'''通用唯一识别码（Universally Unique Identifier, UUID）'''，是128位长的数字，在Minecraft中用来区分不同的对象{{tr|实例|個體}}。
+
+== 表示方式 ==
+* '''有连字符的十六进制（Hyphenated hexadecimal）'''：RFC 9562规定的字符串表示。<ref>https://datatracker.ietf.org/doc/html/rfc9562#section-4</ref>UUID的一种十六进制表示方式，中间用连字符将其划分为几个部分。通常的一种划分格式是将UUID分成<code>8-4-4-4-12</code>格式的数字，其中每个数字代表对应区间内的十六进制字符个数。进一步详细信息在[[#技术型方面|技术型方面]]段落中。其中的一个代表示例是<code>f81d4fae-7dec-11d0-a765-00a0c91e6bf6</code>。
+** 由于每一部分都是单独作为一个数字处理的，因此每个部分开头可以为空。例如，<code>00000001-0002-0003-0004-000000000005</code>和<code>1-2-3-4-5</code>会被看作相同的UUID。
+* '''十六进制（Hexadecimal）'''：和有连字符的十六进制表示方法相同，只是每个部分之间没有连字符用来分隔。这种表示方式的一个示例是，<code>00000001000200030004000000000005</code>。和常规的字符串不同，里面的0不能被省略。
+* '''高低位（Most/Least）'''：将高64位和低64位分开表示。两个数字分开存储，并在游戏内使用<code>Long</code>（长整型）数据类型。这种格式仅用于[[Java版1.16|1.16]]之前，并完全被整型数组格式取代。这种表示方法的一个示例是<code>UUIDMost:-568210367123287600</code>与<code>UUIDLeast:-6384696206158828554</code>。
+* '''整型数组（int-array）'''：用4个32位数字表示。每一部分存储在由高到低的整型数组中。这种表示方式的一个示例为<code>[I;-132296786,2112623056,-1486552928,-920753162]</code>。
+
+== 出现场合 ==
+下面的表格展示了所有玩家在游戏中可以接触到的使用UUID的地方：
+{| class="wikitable"
+|+ 实体UUID及其引用
+! 使用的实体 !! [[NBT路径]] !! 格式 !! 用途
+|-
+| 所有实体 || <code>UUID</code> || 整型数组 || 实体UUID
+|-
+| 可驯服动物 || <code>Owner</code> || 整型数组 || 主人
+|-
+| 信任玩家的生物 || <code>Trusted</code> || 整型数组 || 标记部分生物信任的玩家
+|-
+| 弹射物 || <code>Owner</code> || 整型数组 || 发射该弹射物的实体
+|-
+| [[物品实体]] || <code>Owner</code> || 整型数组 || {{cmd|give}}命令的目标玩家
+|-
+| [[物品实体]] || <code>Thrower</code> || 整型数组 || 扔出物品的实体
+|-
+| [[潜影弹]] || <code>Target</code> || 整型数组 || 攻击的目标实体
+|-
+| AI生物 || <code>Leash.UUID</code> || 整型数组 || 牵引拴着此生物的实体
+|-
+| [[动物]] || <code>LoveCause</code> || 整型数组 || 喂养此生物的玩家
+|-
+| [[僵尸村民]] || <code>ConversionPlayer</code> || 整型数组 || 治疗此僵尸村民的玩家
+|-
+| 中立生物 ||<code>angry_at</code> || 整型数组 || 攻击该中立生物的实体
+|-
+| [[生物]] || <code>last_hurt_by_mob</code> || 整型数组 || 伤害此生物的实体
+|-
+| [[生物]] || <code>last_hurt_by_player</code> || 整型数组 || 伤害此生物的玩家
+|-
+| [[村民]] || <code>Gossips[].Target</code> || 整型数组 || 引发言论的玩家
+|-
+| [[玩家]] || <code>RootVehicle.Attach</code> || 整型数组 || 玩家骑乘的实体
+|}
+{| class="wikitable"
+|+ 方块实体中的UUID
+! 方块实体 !! NBT路径 !! 格式 !! 用途
+|-
+| [[潮涌核心]] || <code>Target</code> || 整型数组 || 攻击的目标实体
+|-
+| [[生物头颅#玩家皮肤|玩家头颅]] || <code>profile.id</code> || 整型数组 || 皮肤的所有者
+|-
+| [[幽匿感测体]]、[[校频幽匿感测体]]与[[幽匿尖啸体]] || <code>listener.event.projectile_owner</code> || 整型数组 || 正在监听的游戏事件，投掷此弹射物的实体的UUID（若有）
+|-
+| [[幽匿感测体]]、[[校频幽匿感测体]]与[[幽匿尖啸体]] || <code>listener.event.source</code> || 整型数组 || 正在监听的游戏事件，产生振动的实体的UUID
+|-
+| [[校频幽匿感测体]] || <code>listener.selector.projectile_owner</code> || 整型数组 || 候选的游戏事件，投掷此弹射物的实体的UUID（若有）
+|-
+| [[校频幽匿感测体]] || <code>listener.selector.source</code> || 整型数组 || 候选的游戏事件，产生振动的实体的UUID
+|-
+| [[宝库]] || <code>server_data.rewarded_players[]</code> || 整型数组 || 已经接受奖励的玩家
+|-
+| [[宝库]] || <code>shared_data.connected_players[]</code> || 整型数组 || 与此宝库相关联的玩家，用于渲染相应的粒子
+|-
+| [[嘎枝之心]] || <code>creaking</code> || 整型数组 || 绑定的嘎枝
+|}
+
+{| class="wikitable"
+|+ 其他数据中的UUID
+! 位置（通用） !! 位置（路径） !! 格式 !! 用途
+|-
+| [[生物头颅#玩家皮肤|玩家头颅]]（物品堆叠组件） || <code>"minecraft:profile".id</code> || 整型数组 || 皮肤的所有者
+|-
+| [[参数类型#minecraft:entity|目标选择器]]（命令） || - || 有连字符的十六进制 || 选中的实体
+|-
+|}
+
+{{Calculator|playerUuid|player=MinecraftWiki}}
+
+== 技术型方面 ==
+=== 值域 ===
+每个UUID都可以被表示为128位整数，也就是说其支持从<math>-2^{127}</math>到<math>2^{127}-1</math>的所有整数值。需要注意的是，上述并不指向游戏内生成的值的值域，只是为了强调这种格式的容量。
+
+=== 带连字符的十六进制格式各部分的名称 ===
+带{{text anchor|连字符}}的十六进制格式UUID遵循<code>xxxxxxxx-xxxx-Axxx-Bxxx-xxxxxxxxxxxx</code>的格式。
+{| class="wikitable"
+|-
+! rowspan="2" | 部分名称 !! colspan="4" | 比特位区间
+|-
+! 起始 !! 结束 !! 大小 !! 字符
+|- style="text-align:right;"
+| style="text-align:left;" | time-low|| 96 || 127 || 32 || 8
+|- style="text-align:right;"
+| style="text-align:left;" | time-mid || 80 || 95 || 16 || 4
+|- style="text-align:right;"
+| style="text-align:left;" | time-high-and-version || 54 || 79 || 16 ||4
+|- style="text-align:right;"
+| style="text-align:left;" | clock-seq-and-reserved  || 36 || 53 || 8 || 2
+|- style="text-align:right;"
+| style="text-align:left;" | clock-seq-low  || 48 || 45 || 8 || 2
+|- style="text-align:right;"
+| style="text-align:left;" | node || 0 || 47 || 48 || 12
+|}
+（这些名称只对第1、第2版的UUID有意义，但是沿袭到了其他全部的UUID形式。）
+
+=== 版本和变种 ===
+UUID有五个版本。第1、2版基于当前的时间和MAC地址，第3、5版基于字符串哈希值，第4版基于完全随机的生成。“版本”值占4位，位于UUID字符串格式内，位置由一个“A”指定。
+
+“B”位置是UUID的变种（格式）。占用1到3位，取决于具体变种：
+* 0xx是Apollo NCS 1.5的“变种0”，一种非常旧的UUID类型。
+* 10x是IETF RFC 4122（Leach-Salz）的“变种1”。Java内为“变种2”。
+* 110是旧的Microsoft product的“变种2”。Java内为“变种6”。
+* 111是“保留变种”。Java内称为“变种7”。
+
+=== Minecraft中 ===
+Minecraft使用了第4版、变种1（RFC）的UUID，也就是说除了元数据（版本与变种）外，整串数字都是随机生成的。Java的{{code|UUID.randomUUID()}}方法负责处理这一项任务。
+
+{{LoadPage|通用唯一识别码/metadata|逐位展开版本|h4}}
+{{LoadPage|通用唯一识别码/metadata1|折叠版本|h4}}
+
+== 外部工具 ==
+* [https://www.uuidtools.com/generate/minecraft 生成带有连字符的十六进制格式的UUID]
+* [https://www.uuidgenerator.net/version4 生成带有连字符的十六进制格式的UUID]
+* [https://www.soltoder.com/mc-uuid-converter/ 转换与生成所有不同格式，其中没有连字符的十六进制格式仅用于输入]
+* [https://luo.vg/zh_cn/uuid/ UUID格式转换的汉化版本]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Java Edition}}
+
+[[Category:游戏术语]]
+
+[[de:UUID]]
+[[en:UUID]]
+[[fr:Identifiant unique universel]]
+[[ja:Universally unique identifier]]
+[[pt:UUID]]
+[[ru:Универсальный уникальный идентификатор]]
+[[uk:UUID]]

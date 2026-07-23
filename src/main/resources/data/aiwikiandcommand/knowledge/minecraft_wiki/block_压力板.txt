@@ -1,0 +1,154 @@
+# 页面: 压力板
+# 来源: https://zh.minecraft.wiki/w/%E5%8E%8B%E5%8A%9B%E6%9D%BF
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, 基岩版即将到来/26.40, 基岩版即将移除/26.40, 实验性内容/2026 年第 3 次更新, 方块, 机制, 红石, 红石机制
+# 抓取时间: 2026-07-14 17:20:57
+# 原始 Wikitext 内容:
+
+[[File:All Pressure Plates.png|thumb|所有种类的压力板{{in update|drop 3 2026|t=unt}}]]
+'''压力板（Pressure Plate）'''是一种可以用来探测[[玩家]]、[[生物]]等[[实体]]的[[方块]]。
+
+== 方块列表 ==
+总共有以下{{in update|drop 3 2026|for=16|template=unt}}/{{in update|drop 3 2026|for=17}}种压力板：
+* [[木压力板]]：可以探测所有实体，发出15信号强度，有{{in update|drop 3 2026|for=12|template=unt}}/{{in update|drop 3 2026|for=13}}种变种。
+** {{BlockLink|Oak Pressure Plate}}
+** {{BlockLink|Spruce Pressure Plate}}
+** {{BlockLink|Birch Pressure Plate}}
+** {{BlockLink|Jungle Pressure Plate}}
+** {{BlockLink|Acacia Pressure Plate}}
+** {{BlockLink|Dark Oak Pressure Plate}}
+** {{BlockLink|Mangrove Pressure Plate}}
+** {{BlockLink|Cherry Pressure Plate}}
+** {{BlockLink|Pale Oak Pressure Plate}}
+** {{BlockLink|Poplar Pressure Plate}}{{in update|drop 3 2026}}
+** {{BlockLink|Bamboo Pressure Plate}}
+** {{BlockLink|Crimson Pressure Plate}}
+** {{BlockLink|Warped Pressure Plate}}
+* {{BlockLink|Stone Pressure Plate}}、{{BlockLink|Polished Blackstone Pressure Plate}}：只能探测[[生物]]，发出15信号强度。
+* {{BlockLink|Light Weighted Pressure Plate}}：可以探测所有实体，信号强度随着实体数量的增加而增加。
+* {{BlockLink|Heavy Weighted Pressure Plate}}：与轻质相似，但增加信号强度需要的实体数量更多。
+
+== 用途 ==
+[[File:Pressure plate as power source.png|缩略图|压力板的放置和行为]]
+[[File:Pressure plate.png|缩略图|栅栏上的压力板]]
+
+压力板必须{{ctrl|放置}}于[[方块支撑形状]]上表面中心完整或边缘完整的方块上方（包括[[漏斗]]、[[栅栏]]、[[侦测器]]等），不能放置于任何方块的侧面与底部。
+
+尝试在无效的表面放置压力板会使其附着到这块空间内最近的有效附着表面（如有）。如尝试在地面上的栅栏侧面放置压力板会使其附着到栅栏周围地面方块的顶部。
+
+当压力板附着的方块变动（移动、破坏、替代等），不再允许附着时或有[[活塞]]试图推动它或将方块推入其位置时，压力板会掉落为方块物品。
+
+[[沙子]]或[[沙砾]]这类受重力影响的方块正下方为压力板时不会开始下落。下落到压力板的位置时，它会掉落为方块物品。
+
+=== 红石元件 ===
+{{see also|红石元件}}
+
+压力板可探测其上方的实体（玩家，生物，[[物品实体]]等）。
+
+==== 开启 ====
+压力板上方（具体为在压力板所在方块的（0.125,0,0.125）到（0.875,0.25,0.875）这个长方体区域内）有符合对应压力板要求的[[实体]]时（即使实体的碰撞箱只有一小部分在其中），压力板会被'''开启'''。
+
+<!--开启的-->木压力板、石头压力板、磨制黑石压力板每{{convert|20}}更新一次状态；轻质测重压力板、重质测重压力板每{{convert|10}}更新一次状态。
+
+==== 行为 ====
+压力板开启时会：
+* 为毗邻的[[红石线]]提供对应信号强度。
+* 为毗邻且朝向正确（主输入端面向压力板）的[[红石比较器]]和[[红石中继器]]提供对应信号强度。
+* 激活毗邻且朝向正确（若需要，如[[活塞]]）的任何[[红石元件#机械元件|机械元件]]。
+* “[[强充能]]”自身附着的[[红石导体]]至对应充能等级。
+
+压力板没有碰撞箱，不会阻碍实体移动。压力板附着的方块能在它下面提供一个固体阻碍（让生物走过，让物体落在上面等等），但压力板放置在碰撞箱较小（如栅栏）的方块上时，实体可能在开启压力板时穿过压力板。因此压力板可以用来探测实体而不阻碍它们的运动。
+
+压力板关闭时高0.0625个方块（方块的{{frac|1|16}}），开启时高0.03125个方块（方块的{{frac|1|32}}），但它没有碰撞箱，所以不会影响它上方的实体（如压力板上的玩家其实是站在它下面的方块上）。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年5月21日|link={{notch|110762705/my-list-on-tile-types-so-far}}|[[Notch]]展示出加入压力板的兴趣。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.1|加入了木压力板和石头压力板。
+{{Collapse|title=合成配方|content=
+<div style="display:inline-block">{{Crafting Table
+|A2= Oak Planks
+|B2= Oak Planks
+|C2= Oak Planks
+|Output= Oak Pressure Plate
+}}</div><div style="display:inline-block">
+{{Crafting Table
+|A2= Stone
+|B2= Stone
+|C2= Stone
+|Output= Stone Pressure Plate
+}}</div>
+}}}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.3|压力板现在只需要用两个[[木板]]或[[石头]]来制作，而在之前的版本需要三个（这个配方现在用来制作木或石[[台阶]]）。}}
+|{{HistoryLine||1.6|dev=Test Build 3|现在压力板可以因支撑[[方块]]的消失而掉落。
+|压力板不再能放在[[树叶]]或[[TNT]]上了。之前放在这些方块上的压力板会在被触发后掉落而可以重新收集。}}
+|{{HistoryLine||1.8|dev=pre1|现在压力板可以放置在[[栅栏]]上，虽然在这种放置方式中它们不会发挥压力板的作用。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|现在当压力板放置在栅栏顶部时起作用了。}}
+|{{HistoryLine||1.5|dev=13w01a|加入了测重压力板。}}
+|{{HistoryLine||1.8|dev=正式版|压力板现在有自己的物品名称了。<ref>{{bug|MC-66247|||Fixed}}</ref>}}
+|{{HistoryLine||1.9|dev=15w46a|生物不再生成于压力板上。}}
+|{{HistoryLine||1.13|dev=17w47a|橡木压力板的ID从<code>wooden_pressure_plate</code> 更改为<code>oak_pressure_plate</code>。
+|木质压力板现在有了6种原木的变种。
+|将原来的木质压力板重命名为<原木类型>压力板。
+|在[[扁平化]]前，这些方块的数字ID分别是70、72、147和148。}}
+|{{HistoryLine||1.14.3|dev=pre3|压力板现在可以放在[[铁栏杆]]和[[玻璃板]]上了。}}
+|{{HistoryLine||1.16|dev=20w06a|加入了绯红木压力板和诡异木压力板。}}
+|{{HistoryLine|||dev=20w15a|加入了磨制黑石压力板。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了红树木压力板。}}
+|{{HistoryLine||1.19.3|exp=update_1_20|dev=22w42a|加入了竹压力板。}}
+|{{HistoryLine||1.19.4|exp=update_1_20|dev=23w07a|加入了樱花木压力板。}}
+|{{HistoryLine||1.20|dev=23w12a|樱花木压力板和竹压力板不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|exp=winter_drop|dev=24w40a|加入了苍白橡木压力板。}}
+|{{HistoryLine||1.21.4|dev=24w44a|苍白橡木压力板不再属于[[实验性内容]]。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了杨木压力板。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.13.0|dev=build 1|加入了压力板和测重压力板。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.14.2|木质压力板现在有了6种原木的变种。
+|现在压力板可以含水。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|加入了绯红木压力板和诡异木压力板。}}
+|{{HistoryLine|||dev=1.16.0.57|加入了磨制黑石压力板。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|加入了红树木压力板。}}
+|{{HistoryLine||1.19.50|exg=next_major_update|dev=1.19.50.21|加入了竹压力板。}}
+|{{HistoryLine||1.19.80|exg=next_major_update|dev=1.19.80.20|加入了樱花木压力板。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|樱花木压力板和竹压力板不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|加入了苍白橡木压力板。}}
+|{{HistoryLine||26.40|dev=26.40.27|exg=y_2026_drop_3|加入了杨木压力板。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了压力板。}}
+|{{HistoryLine||xbox=TU5|现在可在[[栅栏]]上放置压力板。}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|加入了测重压力板。}}
+|{{HistoryLine||xbox=TU69|xbone=CU57|ps3=1.76|psvita=1.76|ps4=1.76|wiiu=Patch 38|木质压力板现在有了6种原木的变种。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|加入了压力板。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|building blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[Category:机制]]
+
+[[Category:红石机制]]
+
+[[cs:Nášlapná deska]]
+[[de:Druckplatte]]
+[[en:Pressure Plate]]
+[[es:Placa de presión]]
+[[fr:Plaque de pression]]
+[[hu:Nyomólapok]]
+[[it:Pedana a pressione]]
+[[ja:感圧板]]
+[[ko:압력판]]
+[[nl:Drukplaat]]
+[[pl:Płytka naciskowa]]
+[[pt:Placa de Pressão]]
+[[ru:Нажимная пластина]]
+[[th:แป้นเหยียบ]]
+[[tr:Basınç Plakası]]
+[[uk:Натискна плита]]

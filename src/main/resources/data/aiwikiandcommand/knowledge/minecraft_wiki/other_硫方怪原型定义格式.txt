@@ -1,0 +1,75 @@
+# 页面: 硫方怪原型定义格式
+# 来源: https://zh.minecraft.wiki/w/%E7%A1%AB%E6%96%B9%E6%80%AA%E5%8E%9F%E5%9E%8B%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:57
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|串列}}{{exclusive|java}}
+'''硫方怪原型定义文件'''是'''[[硫方怪原型]]（Sulfur cube archetype）'''在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+硫方怪原型在游戏内使用<code>SULFUR_CUBE_ARCHETYPE</code>注册表，数据包路径为{{filepath|sulfur_cube_archetype}}，即所有硫方怪原型定义文件都需要在{{filepath|data/<''命名空间''>/sulfur_cube_archetype}}目录内定义，硫方怪原型标签则需要在{{filepath|data/<''命名空间''>/tags/sulfur_cube_archetype}}目录内定义。
+
+硫方怪原型定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string}}{{nbt|list|items|required=1}}：对硫方怪使用何种物品后其会获得此硫方怪原型。可以为单个物品ID、一个物品ID的列表，或一个带<code>#</code>前缀的物品标签。
+** {{nbt|list|attribute_modifiers|required=1}}：此硫方怪原型对硫方怪应用的[[属性修饰符]]。
+*** {{nbt|compound}}
+**** {{nbt|string|attribute|required=1|existonsave=1}}：（命名空间ID）属性的命名空间ID。指定硫方怪不具有的属性没有任何作用。
+**** {{nbt|string|id|required=1|existonsave=1}}：（命名空间ID）属性修饰符的命名空间ID。
+**** {{nbt|double|amount|required=1|existonsave=1}}：计算中修饰符调整基础值的数值。
+**** {{nbt|string|operation|required=1|existonsave=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算模式]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。如果设置值无效，则为<code>add_value</code>（Op0）。
+** {{nbt|boolean|buoyant}}：（默认为<code>false</code>）此硫方怪原型是否允许硫方怪在流体中漂浮。
+** {{nbt|compound|explosion}}：如果存在，则此硫方怪原型允许如同TNT一样激活，且会禁用任何交互行为。
+*** {{nbt|int|power|required=1}}：（{{interval|left_open=0}}）硫方怪造成的爆炸的[[爆炸威力]]。
+*** {{nbt|bool|causes_fire|required=1}}：硫方怪造成的爆炸是否会产生火。
+*** {{nbt|int|fuse|required=1}}：（{{interval|left_open=0}}）硫方怪激活后的引爆时间的最大值。
+** {{nbt|compound|contact_damage}}：如果存在，则此硫方怪原型会对与其碰撞的实体造成伤害。
+*** {{nbt|string|damage_type|required=1}}：造成的伤害的[[伤害类型]]。
+*** {{nbt|float}}{{nbt|compound|amount|required=1}}：（{{interval|left=0}}）单次造成的伤害。
+**** {{nbt inherit/float provider}}
+*** {{nbt|boolean|attribute_to_source|required=1}}：是否将伤害视为硫方怪造成的，如果为<code>false</code>则不存在伤害来源实体。
+** {{nbt|compound|knockback_modifiers|required=1}}：硫方怪受到伤害被击退后，对击退大小的修饰。
+*** {{nbt|float|horizontal_power|required=1}}：水平方向的击退速度修饰。
+*** {{nbt|float|vertical_power|required=1}}：竖直方向的击退速度修饰。
+** {{nbt|compound|sound_settings|required=1}}：硫方怪原型的音效设置。
+*** {{nbt|string}}{{nbt|compound|hit_sound|required=1}}：硫方怪被击打时播放的声音事件。
+**** {{nbt inherit/sound event}}
+*** {{nbt|string}}{{nbt|compound|push_sound|required=1}}：硫方怪被推动时播放的声音事件。
+**** {{nbt inherit/sound event}}
+*** {{nbt|float|push_sound_impulse_threshold|required=1}}：硫方怪播放推动音效所需的最低冲量。
+*** {{nbt|float|push_sound_cooldown|required=1}}：硫方怪播放推动音效的冷却时间，单位为秒。如果冷却时间不大于0，则游戏忽略冷却时间检查。
+</div>
+
+== 定义行为 ==
+硫方怪原型定义数据仅在服务端启动时被加载一次，使用{{cmd|reload}}命令不可以使硫方怪原型定义被重新加载，而必须重启服务端。
+
+当硫方怪吸收物品后，游戏会对物品进行判定，赋予硫方怪对应的原型。如果物品同时符合多个原型的检查，则：
+* 硫方怪的属性修饰符按照硫方怪原型的加载顺序依次应用。
+* 只要有一个原型允许硫方怪漂浮在水上，则硫方怪就会漂浮在水上。
+* 只要有一个原型允许硫方怪爆炸，则硫方怪就可以爆炸，而具体的爆炸数据使用最后一个加载的硫方怪原型的数据。
+* 硫方怪接触后造成伤害的行为，各个原型独立计算。
+* 硫方怪的击退修饰，使用最后一个加载的硫方怪原型的数据。
+* 硫方怪的音效设置，使用最后一个加载的硫方怪原型的数据。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了硫方怪原型。}}
+|{{HistoryLine|||dev=snapshot-5|加入了{{nbt|int|explosion_fuse}}，用来决定硫方怪点燃后的爆炸时间。}}
+|{{HistoryLine|||dev=snapshot-6|加入了{{nbt|compound|explosion}}、{{nbt|compound|contact_damage}}和{{nbt|compound|knockback_modifiers}}。
+|移除了{{nbt|int|explosion_fuse}}。}}
+|{{HistoryLine|||dev=pre-1|加入了{{nbt|compound|sound_settings}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Schwefelwürfel-Archetyp-Definition]]
+[[en:Sulfur cube archetype definition]]
+[[ja:サルファーキューブの種類のカスタマイズ]]
+[[ru:Определение архетипа серного куба]]

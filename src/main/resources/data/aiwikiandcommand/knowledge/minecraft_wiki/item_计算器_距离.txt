@@ -1,0 +1,48 @@
+# 页面: 计算器/距离
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%A1%E7%AE%97%E5%99%A8/%E8%B7%9D%E7%A6%BB
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+该工具可以计算两点间的[[距离]]。
+
+<onlyinclude>{| class="wikitable calculator-container calculatorgadget-enabled" style="display: none; {{{style|}}}"
+|+ 距离计算器
+! 点 !! A !! B
+|-
+! X
+| {{Simplecalc|type=number|id=ax|size=6|default=0}}
+| {{Simplecalc|type=number|id=bx|size=6|default=0}}{{Simplecalc|type=hidden|id=dx|formula=abs(ax-bx)|default=0}}
+|-
+! Y
+| {{Simplecalc|type=number|id=ay|size=6|default=0}}
+| {{Simplecalc|type=number|id=by|size=6|default=0}}{{Simplecalc|type=hidden|id=dy|formula=ifzero(horizontal,abs(ay-by))|default=0}}
+|-
+! Z
+| {{Simplecalc|type=number|id=az|size=6|default=0}}
+| {{Simplecalc|type=number|id=bz|size=6|default=0}}{{Simplecalc|type=hidden|id=dz|formula=abs(az-bz)|default=0}}
+|-
+! 类型
+| colspan="2" | {{Simplecalc|id=absolute|name=distype|type=radio|default=1}} {{Simplecalc label|for=absolute|label=绝对距离}} {{Simplecalc|id=horizontal|name=distype|type=radio|default=0}} {{Simplecalc label|for=horizontal|label=水平距离}}
+|-
+! 欧几里得
+| colspan="2" | {{Simplecalc|type=plain|decimals=5|formula=sqrt(dx*dx+dy*dy+dz*dz)|default=0.00000}}
+|-
+! 曼哈顿
+| colspan="2" | {{Simplecalc|type=plain|formula=dx+dy+dz|default=0}}
+|-
+! 切比雪夫
+| colspan="2" | {{Simplecalc|type=plain|formula=max(dx,dy,dz)|default=0}}
+|}</onlyinclude>
+
+== 导航 ==
+{{Navbox calculators}}
+
+[[en:Calculators/Distance]]
+[[fr:Calculateurs/Distance]]
+[[ja:計算機/距離]]
+[[lzh:算械/距]]
+[[pt:Calculadoras/Distância]]
+[[ru:Калькуляторы/Расстояние]]
+[[th:เครื่องคำนวณ/ระยะทาง]]
+[[uk:Калькулятори/Відстань]]

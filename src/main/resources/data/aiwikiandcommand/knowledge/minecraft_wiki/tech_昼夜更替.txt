@@ -1,0 +1,568 @@
+# 页面: 昼夜更替
+# 来源: https://zh.minecraft.wiki/w/%E6%98%BC%E5%A4%9C%E6%9B%B4%E6%9B%BF
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用DynamicPageList4的页面, 使用计算器的页面, 基岩版独有信息, 实验性内容/2026 年第 3 次更新, 嵌入Bilibili视频的页面, 未确定的译名, 环境, 需要验证
+# 抓取时间: 2026-07-14 17:28:27
+# 原始 Wikitext 内容:
+
+[[File:Day Night.gif|right|400px|一个完整的昼夜更替过程]]
+
+'''昼夜更替（Daylight Cycle）'''是[[主世界]]中2个主要[[亮度]]设置的交替过程，周期20分钟。
+
+== 行为 ==
+{{see also|太阳|月亮}}
+
+在昼夜更替中，[[太阳]]和[[月亮]]围绕着玩家旋转，分别在正午和午夜出现在玩家的正上方。太阳和月亮相对于星星和彼此总是保持在相同的位置。因此，日食不可能出现，而月亮显示的样式取决于经过的夜晚数量。
+
+在单人游戏中，当游戏暂停或{{only|for=打开[[命令方块]]、[[拼图方块]]、[[测试方块]]的GUI窗口|je}}时，昼夜更替会暂停；除此之外，只要未关闭{{gamerule|advance_time|doDaylightCycle}}，昼夜更替永远不会暂停。
+
+在多人游戏中，只要服务器正在运行且未关闭{{gamerule|advance_time|doDaylightCycle}}，昼夜更替就始终会正常进行。
+
+当玩家处于[[下界]]或[[末地]]时，昼夜更替会一直进行，但这些维度本身不会发生改变，直到[[主世界]]被再次加载。在另一个维度创建的[[村庄]]若被加载，其中的[[村民]]仍会遵循正常的村庄时间表。
+
+== 时间换算 ==
+[[File:Day Night Clock 24h.png|240px|thumb|right|Minecraft时间与现实时间的大约换算图]]
+
+[[Minecraft]]中时间正好是现实时间流逝的速度的72倍。这是由于现实中1天有1440分钟（24小时），而1个完整的Minecraft天只有20分钟，{{frac|1440|20}} = 72。时间单位的换算如下：
+
+=== Minecraft时间至现实时间 ===
+{|class=wikitable data-description="Minecraft时间至现实时间"
+!Minecraft时间!!Minecraft[[刻]]!!现实时间
+|-
+|1秒 ||<math>0.2\dot{7}</math>||<math>0.013\dot8</math>秒
+|-
+|1分钟 ||<math>16.\dot{6}</math>||<math>0.8\dot{3}</math>秒
+|-
+|1小时 || 1,000||50秒
+|-
+|1天 || 24,000||20分钟
+|-
+|1周（7天）|| 168,000||<math>2.\dot{3}</math>小时
+|-
+|1个月（30天）|| 720,000||10小时
+|-
+|1年（365.25 天）|| 8,766,000||121.75小时（<math>5.07291\dot{6}</math>天）
+|}
+
+=== 现实时间至Minecraft时间 ===
+现实时间对比Minecraft时间的近似值：
+{|class=wikitable data-description="现实时间至Minecraft时间"
+!现实时间!!Minecraft时间
+|-
+|{{frac|1|20}}秒（1游戏刻） || 3.6秒
+|-
+|1秒 || 1分钟12秒（72秒）
+|-
+|10秒 || 12分钟（720秒）
+|-
+|50秒 || 1小时（60分，3600秒）
+|-
+|1分钟 || 1小时12分钟
+|-
+|1小时 || 3天
+|-
+|1天 || 2.4个月 = 72天
+|-
+|1周 || 约1.385年 ≈ 17个月 = 72周 = 504天
+|-
+|1个月 || 6年 = 72个月 ≈ 308.5周 = 2,160天
+|-
+|1年 || 72年 ≈ 876.5个月 ≈ 3,757周 ≈ 26,297.5天
+|}
+
+{{Calculator|tick}}
+
+== 24小时制下的Minecraft日 ==
+{| class="wikitable" style="text-align:center;" data-description="24-hour Minecraft day"
+! 图像
+! Minecraft<br>一天中的时间
+! Minecraft<br>刻
+! 现实时间<br>（分钟）
+! 事件
+|-
+| style="background-color: #709DED; border-bottom-color: #709DED;" |{{ClockPhase|0}}
+| 06:00:00.0
+| 0<br>（24000）
+| 0:00<br>（20:00）
+| '''Minecraft中一天的开始。'''<br>村民醒来并起床。<br>上午06:00:00.0。
+|-
+| style="background-color: #709DED; border-bottom-color: #709DED;" |{{ClockPhase|167}}
+| 06:10:01.2
+| 167
+| 0:08.35
+| 月亮完全消失于地平线。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|450}}
+| 06:27:00.0
+| 450
+| 0:22.5
+| 日出结束。<br>地平线颜色不再变化。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|1000}}
+| 07:00:00.0
+| 1000
+| 0:50
+| {{cmd|time set day}}命令设置的时间。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|2000}}
+| 08:00:00.0
+| 2000
+| 1:40
+| 村民开始工作日程。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|3000}}
+| 09:00:00.0
+| 3000
+| 2:30
+| 上午09:00:00.0。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|4000}}
+| 10:00:00.0
+| 4000
+| 3:20
+| 上午10:00:00.0。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|4283}}
+| 10:17:00.0
+| <math>4283.\dot{3}</math>
+| <math>3:34.1\dot{6}</math>
+| [[内部天空光照]]达到最大值15。{{verify}}
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|5000}}
+| 11:00:00.0
+| 5000
+| 4:10
+| 上午11:00:00.0。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|5723}}
+| 11:43:22.8
+| 5723
+| 4:46.15
+| 时钟指向中午。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|6000}}
+| 12:00:00.0
+| 6000
+| 5:00
+| '''正午'''：太阳位于最高处。<br>{{cmd|time set noon}}命令设置的时间。<br>下午12:00.00.0。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|7000}}
+| 13:00:00.0
+| 7000
+| 5:50
+| 下午01:00:00.0。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|8000}}
+| 14:00:00.0
+| 8000
+| 6:40
+| 下午02:00:00.0
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|9000}}
+| 15:00:00.0
+| 9000
+| 7:30
+| 村民结束工作日程，开始社交日程。<br>下午03:00:00.0。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|10000}}
+| 16:00:00.0
+| 10000
+| 8:20
+| 下午04:00:00.0。
+|-
+| style="background-color: #78A9FF; border-bottom-color: #78A9FF;" |{{ClockPhase|11000}}
+| 17:00:00.0
+| 11000
+| 9:10
+| 下午05:00:00.0。
+|-
+| style="background-color: #709DED; border-bottom-color: #709DED;" |{{ClockPhase|11617}}
+| 17:37:00.0
+| <math>11616.\dot{6}</math>
+| <math>9:40.8\dot{3}</math>
+| '''日落开始。'''<br>地平线开始昏暗。
+|-
+| style="background-color: #709DED; border-bottom-color: #709DED;" |{{ClockPhase|11834}}
+| 17:50:02.4
+| 11834
+| 9:51.7
+| 月亮出现在地平线上。
+|-
+| style="background-color: #709DED; border-bottom-color: #709DED;" |{{ClockPhase|12000}}
+| 18:00:00.0
+| 12000
+| 10:00
+| {{only|bedrock|for={{cmd|time set sunset}}命令设置的时间。}}<br>村民上床睡觉。<br>下午06:00:00.0。
+|-
+| style="background-color: #709DED; border-bottom-color: #709DED;" |{{ClockPhase|12010}}
+| 18:00:36.0
+| 12010
+| 10:00.5
+| 雨天时可以开始上床睡觉，内部天空光照开始降低。
+|-
+| style="background-color: #709DED; border-bottom-color: #709DED;" |{{ClockPhase|12040}}
+| 18:02:24.0
+| 12040
+| 10:02
+| 晴天时内部天空光照开始降低。
+|-
+| style="background-color: #4C6BA2; border-bottom-color: #4C6BA2;" |{{ClockPhase|12544}}
+| 18:32:38.4
+| 12544
+| 10:27.2
+| 晴天时可以开始上床睡觉，蜜蜂进入蜂巢或蜂箱过夜，亡灵生物不再燃烧。
+|-
+| style="background-color: #4C6BA2; border-bottom-color: #4C6BA2;" |{{ClockPhase|12600}}
+| 18:36:00.0
+| 12600
+| 10:30
+| [[闭合的眼眸花]]开始转变为[[张开的眼眸花]]。
+|-
+| style="background-color: #3C547F; border-bottom-color: #3C547F; " |{{ClockPhase|12610}}
+| 18:36:36.0
+| 12610
+| 10:30.5
+| 时钟指向黄昏。
+|-
+| style="background-color: #3C547F; border-bottom-color: #3C547F; " |{{ClockPhase|12769}}
+| 18:46:08.4
+| 12769
+| 10:38.4
+| 雨天时户外自然生成敌对生物的第一刻。
+|-
+| style="background-color: #2D4061; border-bottom-color: #2D4061;" |{{ClockPhase|13000}}
+| 19:00:00.0
+| 13000
+| 10:50
+| '''夜晚。'''<br>{{cmd|time set night}}命令设置的时间。<br>下午07:00:00。
+|-
+| style="background-color: #212E46; border-bottom-color: #212E46;" |{{ClockPhase|13188}}
+| 19:11:16.8
+| 13188
+| 10:59.4
+| 晴天时户外自然生成敌对生物的第一刻。
+|-
+| style="background-color: #212E46; border-bottom-color: #212E46;" |{{ClockPhase|13670}}
+| 19:40:12.0
+| 13670
+| 11:23.5
+| 内部天空光照达到最低值4。
+|-
+| style="background-color: #212E46; border-bottom-color: #212E46;" |{{ClockPhase|13702}}
+| 19:42:07.2
+| 13702
+| 11:25.1
+| 太阳完全消失于地平线。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|13800}}
+| 19:48:00.0
+| 13800
+| 11:30
+| 日落结束。<br>地平线颜色不再变化。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|14000}}
+| 20:00:00.0
+| 14000
+| 11:40
+| 下午08:00:00。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|15000}}
+| 21:00:00.0
+| 15000
+| 12:30
+| 下午09:00:00。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|16000}}
+| 22:00:00.0
+| 16000
+| 13:20
+| 下午10:00:00。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|17000}}
+| 23:00:00.0
+| 17000
+| 14:10
+| 下午11:00:00。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|17843}}
+| 23:50:34.8
+| 17843
+| 14:52.7
+| 时钟指向午夜。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|18000}}
+| 00:00:00.0
+| 18000
+| 15:00
+| '''午夜'''：月亮处于正中。<br>{{cmd|time set midnight}}命令设置的时间。<br>上午00:00:00。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|19000}}
+| 01:00:00.0
+| 19000
+| 15:50
+| 上午01:00:00。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|20000}}
+| 02:00:00.0
+| 20000
+| 16:40
+| 上午02:00:00。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|21000}}
+| 03:00:00.0
+| 21000
+| 17:30
+| 上午03:00:00。
+|-
+| style="background-color: #000000; border-bottom-color: #000000;" |{{ClockPhase|22000}}
+| 04:00:00.0
+| 22000
+| 18:20
+| 上午04:00:00。
+|-
+| style="background-color: #212E46; border-bottom-color: #212E46;" |{{ClockPhase|22200}}
+| 04:12:00.0
+| 22200
+| 18:30
+| '''日出开始。'''<br>地平线开始变亮。
+|-
+| style="background-color: #212E46; border-bottom-color: #212E46;" |{{ClockPhase|22300}}
+| 04:18:00.0
+| 22300
+| 18:35
+| 太阳出现在地平线上。
+|-
+| style="background-color: #212E46; border-bottom-color: #212E46;" |{{ClockPhase|22331}}
+| 04:19:51.8
+| 22331
+| 18:36.55
+| 内部天空光照开始增加。
+|-
+| style="background-color: #212E46; border-bottom-color: #212E46;" |{{ClockPhase|22812}}
+| 04:48:43.2
+| 22812
+| 19:00.6
+| {{only|je|for=晴天时户外自然生成敌对生物的最后一刻。}}
+|-
+| style="background-color: #212E46; border-bottom-color: #212E46;" |{{ClockPhase|22813}}
+| 04:48:46.8
+| 22813
+| 19:00.65
+| {{only|be|for=晴天时户外自然生成敌对生物的最后一刻。}}
+|-
+| style="background-color: #2D4061; border-bottom-color: #2D4061;" |{{ClockPhase|23000}}
+| 05:00:00.0
+| 23000
+| 19:10
+| {{only|bedrock|for={{cmd|time set sunrise}}命令设置的时间。}}<br>上午05:00:00。
+|-
+| style="background-color: #2D4061; border-bottom-color: #2D4061;" |{{ClockPhase|23031}}
+| 05:01:51.6
+| 23031
+| 19:11.6
+| 雨天时户外自然生成敌对生物的最后一刻，时钟指向黎明。
+|-
+| style="background-color: #4C6BA2; border-bottom-color: #4C6BA2;" |{{ClockPhase|23400}}
+| 05:24:00.0
+| 23400
+| 19:30
+| [[张开的眼眸花]]开始转变为[[闭合的眼眸花]]。
+|-
+| style="background-color: #4C6BA2; border-bottom-color: #4C6BA2;" |{{ClockPhase|23460}}
+| 05:27:36.0
+| 23460
+| 19:33
+| 晴天时不再能使用床，蜜蜂离开蜂巢或蜂箱，亡灵生物开始燃烧。
+|-
+| style="background-color: #6F9CEC; border-bottom-color: #6F9CEC;" |{{ClockPhase|23961}}
+| 05:57:39.6
+| 23961
+| 19:58.1
+| 晴天时内部天空光照达到最大值15。
+|-
+| style="background-color: #6F9CEC;" |{{ClockPhase|23992}}
+| 05:59:31.2
+| 23992
+| 19:59.6
+| 雨天时不再能使用床，内部天空光照达到最大值12。
+|}
+
+=== 白天 ===
+[[File:Survival.png|thumb|right|300px|一天的开始]]
+
+白天是一天周期中最长的一节，持续10分钟。
+
+开始：0刻（早上06:00:00.0）
+
+中午：6000刻（下午12:00:00.0）
+
+结束：12000刻（下午06:00:00.0）
+
+玩家在一个[[单人游戏]]中的新世界首次出生时，时间总会处于白天的开始（0:00）。大多数[[多人游戏]]的[[服务器]]时间也是从这个时间开始，但昼夜更替会持续进行，不会受玩家加入影响。
+
+白天时，[[太阳]]会逐渐升到蓝天的中央。天空的具体颜色取决于当前所在的[[生物群系]]。例如，[[沙漠]]的天空比[[草原]]蓝色更淡。
+
+在将近正午的时候，所有直接暴露于天空下的方块均被内部天空光照为最大值15的阳光照射。阳光提供了[[树苗]]、[[草方块|草]]和[[农作物]]生长所需的充足阳光。直接暴露在阳光下的大部分[[亡灵生物]]（不处于阴凉处、水和[[细雪]]，且不戴[[头盔]]）开始自燃。另外，阳光会使尚未追逐玩家的[[蜘蛛]]进入中立状态，使[[末影人]]靠近玩家时随机传送并保持对玩家的中立。
+
+在白天持续期间，[[阳光探测器]]的信号输出强度保持最大。
+
+=== 日落 ===
+[[File:A sunset.png|300px|thumb|在地图的高处看到的日落]]
+
+日落是介于白天和夜晚之间的时间段，持续1.5分钟。
+
+* 开始：12000刻（下午06:00:00.0）
+* 中点：12900刻（下午06:54:00.0）
+* 结束：13800刻（下午07:48:00.0）
+
+日落时，[[太阳]]从西边降落，[[月亮]]从东边升起。下落的太阳附近的天空会有红晕。日落时的太阳看上去还会渐渐变大。
+
+所有直接暴露在天空之下的、未被其他光源照亮的方块，每10秒钟亮度降低1级。
+
+在日落和日出之间的时间段，玩家可以睡在[[床]]或{{in update|drop 3 2026|for={{pa|Straw Bed|}}}}上。在[[单人游戏]]中，睡觉会直接将昼夜更替快进到日出，且将[[天气]]转为晴朗。多人游戏中也可以实现，只需要所有的在线玩家都睡在床上，或睡在床上玩家的比例达到{{gamerule|players_sleeping_percentage|playersSleepingPercentage}}所设定的值即可。然而，游戏中许多机制中时间并不会随之流逝：比如，农作物不会生长，[[熔炉]]中的物品[[烧炼]]进度也不会改变。
+
+=== 夜晚 ===
+[[File:TundraNight.png|300px|thumb|[[冻原]]的夜晚；可以看到多种生物]]
+
+夜晚持续7分钟。
+
+* 开始：13800刻（下午07:48:00.0）
+* 午夜：18000刻（早上12:00:00.0）
+* 结束：22200刻（早上04:12:00.0）
+
+晴朗的夜晚时，玩家可以在12542刻（下午06:32:31.2）到23459刻（早上05:27:32.4）时睡觉。在雨天，玩家可以在12010刻（下午06:00:36.0）到23991刻（早上05:59:27.6）时睡觉。
+
+亡灵生物不再在12210（下午06:12:36.0）至23791刻（早上05:47:27.6）燃烧。
+
+夜晚时，[[月亮]]会逐渐升到天空的中央，黑蓝色的天空布满了微小而白亮的[[星星]]。星星会随着月亮移动，日落即将结束的时候会先于月亮出现。
+
+夜晚期间，整个世界被黑暗掩盖，内部天空光照最低降至4，从而使[[敌对生物]]会在地表生成。允许敌对生物生成的精确时间为9625刻。虽然夜晚的亮度低，但农作物仍会生长，除非玩家睡在[[床]]或{{in update|drop 3 2026|for={{pa|Straw Bed|}}}}上度过夜晚。
+
+=== 日出/黎明 ===
+[[File:Sunrise.png|300px|thumb|太阳从地平线上升起]]
+
+日出是介于夜晚和白天之间的时间段，持续1.5分钟。
+
+* 开始：22200刻（早上04:12:00.0）
+* 中点：23100刻（早上05:06:00.0）
+* 结束：24000（0）刻（早上06:00:00.0）
+
+日出时，月亮往西方地平线方向降落，太阳从东方地平线上升起。升起的太阳附近的天空会有红晕。升起的太阳看上去会渐渐变大，但最后会随着高度增加而慢慢缩小至8×8像素。
+
+所有直接暴露在天空之下的方块每隔10秒亮度增加1。最终，阳光的威力再一次展现，大部分怪物的威胁被驱除。
+
+日出的曙光开始于22009刻（04:00:32）。精确的停止刷怪时间为{{only|je|for=22812刻（04:48:43）}}或{{only|be|for=22813刻（04:48:47）}}，雨天则推迟至23031刻（05:01:08）。<ref group="注" name="redstone-before-spawn">测量值来源于敌对生物生成周期状态变化前最后一次执行的[[命令]]的时间戳。在[[雷暴]]的持续时间内，敌对生物可在一天的任何时刻生成。</ref>
+
+[[File:WatchCycle.gif|right]]
+
+== 时钟 ==
+{{main|时钟}}
+
+[[时钟]]是显示游戏内时间的物品，查看时钟可以得知当前昼夜更替的阶段。
+
+== 命令 ==
+{{Main|命令/time}}
+可以使用{{cmd|time}}命令修改时间。要启用或禁用昼夜更替机制，可使用命令{{cmd|gamerule}}调整游戏规则{{gamerule|advance_time|doDaylightCycle}}。
+
+=== 设置时间 ===
+可用{{cmd|time set}}命令将时间设置为特定值。
+
+:语法：<code>-{}-'''/time''' set <''时间值'' | day | noon | night | midnight></code>
+
+示例：
+
+:{{cmd|time set 0}} - 将时间设为日出。
+:{{cmd|time set day}} - 将时间设为白日（{{only|JE|for=1000刻}}/{{only|BE|for=下一日的1000刻}}）。
+:{{cmd|time set 6000}} - 将时间设为中午。
+:{{cmd|time set 12000}} - 将时间设为日落。
+:{{cmd|time set night}} - 将时间设为夜晚（{{only|JE|for=13000刻}}/{{only|BE|for=下一日的13000刻}}）。
+:{{cmd|time set midnight}} - 将时间设为午夜（{{only|JE|for=18000刻}}/{{only|BE|for=下一日的18000刻}}）。
+:{{cmd|time set 18000}} - 将时间设为午夜。
+
+=== 月相 ===
+游戏中每过一天，时间计数便会增加24000刻。虽然每天的交替是一样的，但[[月亮]]会经历8种月相。虽然没有命令直接更改月相，但{{cmd|time add 24000}}命令可以快进至下一个月相。进一步而言，使用以下命令可以直接指定不同的月相：
+
+:{{cmd|time set 13000}}或{{cmd|time set night}} - 满月
+:{{cmd|time set 38000}} - 亏凸月
+:{{cmd|time set 62000}} - 下弦月
+:{{cmd|time set 86000}} - 残月
+:{{cmd|time set 110000}} - 新月
+:{{cmd|time set 134000}} - 娥眉月
+:{{cmd|time set 158000}} - 上弦月
+: {{cmd|time set 182000}} - 盈凸月
+
+== 成就 ==
+{{load achievements|passing-the-time;free-diver;castaway;sleep-with-the-fishes}}
+
+== 视频 ==
+{{bv|BV11A411Y73H}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||20100211-2327|加入了昼夜更替机制以及[[太阳]]和[[月亮]]。
+|一天约为15分钟，白天和夜晚各为7.5分钟。}}
+|{{HistoryLine||20100212-1210|一天增加至20分钟。
+|夜晚的天空会出现星星了。}}
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100227-1414|移除了昼夜更替机制。}}
+|{{HistoryLine||20100313|重新加入了昼夜更替机制，但目前一天只有16分钟。}}
+|{{HistoryLine||20100316|一天重新改为20分钟。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|夜晚的星星变得更暗了。}}
+|{{HistoryLine||1.8|dev=pre1|在泄露的1.8预发布版中，玩家可以按{{key|F6}}倒流时间，按{{key|F7}}加速时间。
+|昼夜更替不再需要区块更新，而是平滑过渡。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre4|[[Notch]]提到Minecraft的太阳实际上是从北边升起的。<ref>{{Tweet|notch|88155424880201728}}</ref>这是一个漏洞且在Beta 1.9-pre4修复，太阳和月亮由此从东边升起。<ref>{{Tweet|notch|124414532847284224}}</ref>这同时也把西南规则改为了[[东南规则]]。
+|加入了[[月相]]。<ref>{{Tweet|notch|124251105277386752}}</ref><ref>https://www.reddit.com/r/Minecraft/comments/la87q/notch_is_implementing_moon_phases/c2r4hjg</ref>}}
+|{{HistoryLine||1.3.1|dev=12w21a|夜晚的星星更加真实了（更小更亮）。}}
+|{{HistoryLine||1.5|dev=13w01a|阳光传感器通过输出红石信号反映时间。}}
+|{{HistoryLine||1.6.1|dev=13w24a|加入了[[游戏规则]]{{cd|doDaylightCycle}}，用于控制昼夜更替。}}
+|{{HistoryLine||1.21.11|dev=25w44a|将游戏规则doDaylightCycle重命名为advance_time。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.2.0|加入了昼夜更替机制，一天为12分钟。}}
+|{{HistoryLine||0.4.0|白天变得更长，一天从12分钟增加至16分钟。}}
+|{{HistoryLine||0.5.0|下界反应堆会调时间为夜晚。}}
+|{{HistoryLine||0.7.3|加入日出，日落，太阳，月亮与星星。}}
+|{{HistoryLine||0.10.0|dev=build 1|向创造模式加入昼夜更替。
+|多人游戏中的时间同步更加精确。
+|昼夜更替不再需要区块更新，而是平滑过渡。}}
+|{{HistoryLine||0.11.0|dev=build 1|在创造模式中加入了禁用昼夜更替的选项。}}
+|{{HistoryLine||0.12.1|dev=build 1|将一天增加至24,000刻。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|太阳和月亮现在会东升西落了（之前是北升南落）；并加入了游戏规则doDaylightCycle。}}
+}}
+
+== 你知道吗 ==
+* [[主世界]]的昼夜更替在玩家处于[[下界]]或[[末地]]时也会继续，不过产生的变化只会在重新加载主世界后才会发生。下界和末地中[[村民]]的行为也会受时间影响。
+* 背景[[音乐]]会在昼夜更替中特定的时间响起。{{verify}}
+[[File:Time reset after overflowing BE.gif|thumb|right|{{in|be}}时间溢出后会被重置]]
+* {{cmd|time set}}命令能设置的最大时间值为2,147,483,647（2<sup>31</sup> - 1），这也是{{el|be}}中时间的极限；{{in|je}}使用NBT编辑器可达的最大时间值为9,223,372,036,854,775,807（2<sup>63</sup> - 1）。
+** 时间超过最大值后，因数据溢出，昼夜更替无法正常继续，而会使时间倒退回{{only|for=-2,147,483,648|be}}或{{only|for=-9,223,372,036,854,775,808|je}}。
+*** {{in|be}}-2,147,483,648（-2<sup>31</sup>）也是命令能够设置的最小时间值。小于该值时，游戏时间会变回最大值。
+** 在游戏中正常达到这两个时刻需要很长时间：
+*** 上述提到的2,147,483,647值在游戏中相当于：天数 = 89,478；当天刻 = 11,467；相当于现实时间的 [年/月/日（时:分:秒:毫秒）] = 1581/12/25（11:28:58:800）（考虑闰年导致的8天6小时修正），不考虑闰年则为 1582/1/1（17:28:58:800）。要达到此值，现实流逝时间约为1,242天18小时。
+*** 上述提到的9,223,372,036,854,775,807相当于游戏中的384,307,168,202,282天，大约10,522亿年。要达到此值，现实流逝时间约为146亿年。
+* {{in|be}}当游戏时间为-2,147,483,648至-24,000，且游戏规则<code>[[游戏规则/showDaysPlayed|showDaysPlayed]]</code>为<code>true</code>时，游玩的天数会显示为“{{tr|数不胜数！|多到數不清了！}}”。
+
+== 注释 ==
+{{notelist|注}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[cs:Cyklus dne a noci]]
+[[de:Tag-Nacht-Rhythmus]]
+[[en:Daylight cycle]]
+[[es:Ciclo de día y noche]]
+[[fr:Cycle jour-nuit]]
+[[it:Ciclo giorno-notte]]
+[[ja:昼夜サイクル]]
+[[ko:밤낮의 순환]]
+[[pl:Cykl dnia i nocy]]
+[[pt:Ciclo de dia e noite]]
+[[ru:Цикл дня и ночи]]
+[[th:วัฏจักรเวลา]]
+[[uk:Цикл день/ніч]]

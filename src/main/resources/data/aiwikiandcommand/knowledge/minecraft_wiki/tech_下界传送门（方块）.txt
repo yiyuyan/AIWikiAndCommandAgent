@@ -1,0 +1,177 @@
+# 页面: 下界传送门（方块）
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%8B%E7%95%8C%E4%BC%A0%E9%80%81%E9%97%A8%EF%BC%88%E6%96%B9%E5%9D%97%EF%BC%89
+# 分类: Java版独有信息, 使用简单计算器的页面, 基岩版独有信息, 方块, 有未知版本的History模板的页面/携带版Alpha, 本地化模块需更新, 没有方块物品的方块, 需要信息, 需要整理, 需要验证
+# 抓取时间: 2026-07-14 17:19:31
+# 原始 Wikitext 内容:
+
+{{about|能提供传送功能的方块|整个结构|下界传送门}}
+{{Infobox block
+|title=下界传送门
+|image=Nether Portal.gif
+|image2=Nether Portal BE.gif
+|imagecaption={{el|je}}
+|image2caption={{el|be}}
+|invimage=[传送门]Nether Portal.gif<!-- 适用于基岩版，请勿移除 -->
+|noitem=1
+|light=11
+}}
+
+'''下界传送门（Nether Portal）'''方块是一种构成[[下界传送门]]的半透明方块，能够传送玩家进出[[下界]]。
+
+== 生成 ==
+=== 下界传送门 ===
+下界传送门方块是激活的下界传送门结构的一部分。
+
+== 获取 ==
+{{in|je}}下界传送门方块没有对应的物品形式。
+
+{{in|be}}下界传送门方块的物品形式只能通过编辑物品栏获得。
+
+== 破坏 ==
+下界传送门不能被挖掘破坏。
+
+{{Breaking table|下界传送门}}
+
+下界传送门被破坏后不会掉落。
+
+== 用途 ==
+{{see also|下界传送门}}
+
+[[File:NetherPortal.gif|缩略图|下界传送门方块的动画|class=pixel-image]]
+
+{{in|je}}下界传送门不能被[[凋灵]]破坏。
+
+下界传送门方块只能够在下界传送门结构里出现。当此方块被更新（{{in|je}}需要平行方向的[[方块更新#PP更新|PP更新]]），同时被检测到不处于下界传送门中时会被移除。
+
+下界传送门方块可以用于进入或离开下界。当非[[创造模式]]玩家在[[主世界]]或下界时，持续处于一个下界传送门方块的位置{{convert|80}}，玩家就会被传送到另一个维度。玩家能够在传送门播放完毕传送动画之前，离开传送门以取消传送。在创造模式中的玩家在接触下界传送门方块时会被瞬间传送到其他维度。如果在一定范围内（在主世界，游戏会查找257×257的区域；在下界，则查找33×33的区域）有一个'''已激活'''的传送门，那么玩家就会被传送到那个传送门。否则，会在相应的坐标处临近范围内（水平距离不超过16格）选择一个合适的地点生成一个传送门。由命令生成的单独的下界传送门方块仍可以将实体传送到下界，也可以创建传送门，但是不一定传送至传送门内部。
+
+下界传送门方块会发出独特的呼啸声，并散发类似雪花的紫色粒子：{{only|je|for=<code>minecraft:portal</code>}}或{{only|be|for=分为<code>portal_east_west</code>和<code>portal_north_south</code>两个定向版本}}（这种粒子也会由[[末影人]]、[[末影螨]]、[[末影珍珠]]和[[末影箱]]生成）。
+
+不同于大多数不可挖掘的方块，下界传送门方块的[[爆炸抗性]]只有0。因此，任何能够破坏方块的爆炸会能在波及下界传送门方块时将其破坏，并关闭整个下界传送门。一次[[恶魂]]火球的攻击就足以关闭下界传送门。
+
+液体在流动时会避开下界传送门方块。发射器或{{only|je|for=玩家}}在下界传送门方块的位置放置任意液体会破坏下界传送门。
+
+下界传送门方块无法被[[活塞]]或[[黏性活塞]]移动。
+
+{{in|je}}放置在[[末地]]或其他[[自定义维度]]的传送门方块能够像在主世界当中一样运作，坐标的换算比同样为1:8，并连接到下界的一个传送门，若无则生成一个传送门。当玩家进入如此生成的传送门后，又会在主世界正常生成一个传送门。
+
+{{in|be}}放置在末地的传送门方块会将玩家传送至主世界出生点的Y=-64处<ref>{{bug|MCPE-34142}}</ref>，玩家此时无法与世界正常交互，渲染也会出现一些错误，但玩家重新进入世界后又会恢复正常。在基岩版服务器内进行测试出现的现象如下：
+* 玩家在使用{{cmd|tp}}命令回到地面后，虽然玩家可以自由走动，但玩家对世界的交互皆以传送后的坐标为中心，而不是自己所看到的玩家实体所在的坐标为中心。生物攻击时依旧以此坐标为玩家中心，并且生物会与看起来并不存在的玩家实体碰撞箱交互，并且能够攻击玩家，但玩家血量并不会变化。
+* 玩家依旧可以离开该范围自由走动，直到那个坐标所能加载到的区块边界，玩家的强加载区域以最后一次传送的坐标进行正常判断。
+* 在加载范围内，玩家能与生物互动。此时{{cmd|kill}}不能杀死玩家，但依旧可以踢出此玩家。玩家处于此状态时无法进入传送门。
+* 与最后一次传送坐标处玩家正常触及范围外的带UI方块的交互。玩家无法开启范围外的容器，但依旧能正常使用砂轮。熔炉作为一个容器依旧可在交互后展示熔炉UI，玩家也可以正常操作其内的燃料和被熔炼的物品。但并不会正常展示熔炉UI内熔炼进度条以及燃料消耗情况，不过熔炉会切换正常的燃烧纹理。
+
+{{in|je}}如果一个[[自定义]]世界没有定义{{cd|dimensions/minecraft:the_nether}}，仍然可以激活下界传送门并生成此方块，但无法传送任何实体。
+
+=== 光源 ===
+下界传送门方块会发出[[亮度]]等级为11的光。
+
+=== 疣猪兽 ===
+[[疣猪兽]]会远离附近的下界传送门。
+
+== 音效 ==
+{{Sound table/Block/Glass
+|suffix-je=
+{{Sound table
+|sound=Nether Portal ambient.ogg
+|subtitle={{tp|subtitles.block.portal.ambient}}
+|source={{tp|soundCategory.block}}
+|description=被激活后的循环音效
+|id=block.portal.ambient
+|translationkey=subtitles.block.portal.ambient}}
+{{Sound table
+|sound=Nether Portal trigger.ogg
+|subtitle={{tp|subtitles.block.portal.trigger}}
+|source={{tp|soundCategory.ambient}}
+|description=玩家站在传送门里
+|id=block.portal.trigger
+|translationkey=subtitles.block.portal.trigger
+}}
+{{Sound table
+|sound=Nether_Portal_travel.ogg
+|subtitle={{tp|subtitles.block.portal.travel}}
+|description=玩家被传送后
+|source={{tp|soundCategory.ambient}}
+|id=block.portal.travel
+|translationkey=subtitles.block.portal.travel
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=portal.portal.wav
+|source=方块
+|description=被激活后的循环音效
+|id=portal.portal
+|typeid=portal
+|soundvolume=0.25
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=portal.trigger.wav
+|source=环境
+|description=玩家站在传送门里
+|id=portal.trigger
+|typeid=portal.trigger
+|soundvolume=0.25
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=portal.travel.wav
+|source=环境
+|description=被传送后播放
+|id=portal.travel
+|typeid=portal.travel
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|spritetype=block | Nether Portal
+|nameid=nether_portal
+|showblocktags=je
+|blocktags={{GameTag|block|nether_portal}}
+|foot=1
+}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|spritetype=block | Nether Portal
+|nameid=portal
+|foot=1
+}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table|下界传送门}}
+
+== 历史 ==
+{{Rewrite|应该写下界传送门'''（方块）'''的历史，而非使用[[下界传送门]]的历史。|section=1}}
+{{:下界传送门}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[en:Nether Portal (block)]]
+[[es:Portal del Nether (bloque)]]
+[[fr:Portail du Nether (bloc)]]
+[[ja:ネザーポータル (ブロック)]]
+[[ko:네더 차원문 (블록)]]
+[[pt:Portal do Nether (bloco)]]
+[[ru:Блок портала Нижнего мира]]
+[[uk:Портал Незеру (блок)]]

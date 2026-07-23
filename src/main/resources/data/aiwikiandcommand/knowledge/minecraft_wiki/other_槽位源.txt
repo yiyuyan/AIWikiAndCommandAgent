@@ -1,0 +1,132 @@
+# 页面: 槽位源
+# 来源: https://zh.minecraft.wiki/w/%E6%A7%BD%E4%BD%8D%E6%BA%90
+# 分类: 
+# 抓取时间: 2026-07-14 17:29:20
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|串列}}
+{{wip}}
+{{exclusive|java}}
+
+'''槽位源（Slot Source）'''允许游戏从指定的[[方块实体]]或[[实体]]等具有[[槽位]]的游戏对象中获取特定的槽位。其在战利品表和命令参数中均有使用。
+
+== 定义格式 ==
+{{inUntil|JE 26.3}}槽位源仅可以在[[战利品表]]中使用。
+
+{{inUpcoming|je 26.3}}槽位源在游戏内使用{{cd|SLOT_SOURCE}}注册表，数据包路径为{{filepath|slot_source}}，即所有槽位源定义文件都需要在{{filepath|-{}-data/<''命名空间''>/slot_source}}目录内定义，槽位源则需要在{{filepath|-{}-data/<''命名空间''>/tags/slot_source}}目录内定义。
+
+槽位源定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}}{{nbt|list}} 槽位源{{until|je 26.3}}/JSON文件根节点{{upcoming|je 26.3}}
+** {{nbt condition|如果{{tr|类型|型別}}为{{nbt|compound|{{tr|对象|物件}}}}：则表示单个槽位源，格式如下：}}
+** {{nbt|string|required=1}}：槽位源类型。
+** 其他字段与槽位源类型相关。
+** {{nbt condition|如果{{tr|类型|型別}}为{{nbt|list|列表}}：则为多个槽位源组成的数组，行为同槽位源类型<code>group</code>的行为。}}
+** {{nbt|compound}}：单个槽位源，递归定义。
+</div>
+
+== 槽位源类型 ==
+=== group ===
+将多个槽位源合并为一个槽位源。此槽位源会提供一个槽位源列表，游戏会按列表顺序拼接合并槽位源。即使出现了相同的槽位，游戏也会照常拼接，而不是只出现一次。
+
+例如，若列表内的两个槽位源的槽位分别是<code>[a, b]</code>和<code>[a, c]</code>，则拼接后的槽位源是<code>[a, b, a, c]</code>。
+
+实际上，对于所有列表格式指定的多个槽位源，游戏都会拼接合并为一个槽位源。
+
+<div class="treeview">
+* {{nbt|compound}} 槽位源根节点
+** {{nbt|string|type|required=1}}：<code>group</code>
+** {{nbt|list|terms}}：槽位源列表。
+*** {{nbt|compound}}{{nbt|list}}：一个槽位源，递归定义。
+</div>
+
+=== filtered ===
+对目标槽位进行过滤，过滤掉所有测试失败的槽位。
+
+<div class="treeview">
+* {{nbt|compound}} 槽位源根节点
+** {{nbt|string|type|required=1}}：<code>filtered</code>
+** {{nbt|compound|item_filter|required=1}}：测试每个槽位的物品谓词。如果某个槽位的物品测试失败，则丢弃此槽位。
+*** {{nbt inherit/item predicate}}
+** {{nbt|compound}}{{nbt|list|slot_source|required=1}}：一个槽位源，递归定义。表示即将进行过滤的槽位。
+</div>
+
+=== limit_slots ===
+限制槽位的数量。按照槽位源提供槽位的顺序，任何在限制数量之外的槽位都将被丢弃。
+
+例如，如果限制数量为3，则<code>[a, b, c, d]</code>将限制为<code>[a, b, c]</code>。
+
+<div class="treeview">
+* {{nbt|compound}} 槽位源根节点
+** {{nbt|string|type|required=1}}：<code>limit_slots</code>
+** {{nbt|int|limit|required=1}}：槽位的最大数量。
+** {{nbt|compound}}{{nbt|list|slot_source|required=1}}：一个槽位源，递归定义。表示即将限制数量的槽位。
+</div>
+
+=== slot_range ===
+从实体或方块实体的槽位范围里选择槽位。
+
+{{inUpcoming|je 26.3}}此类型的槽位源也是[[参数类型]]<code>slot_source</code>直接指定槽位范围时，游戏将其转化为槽位源而使用的槽位源类型——{{nbt|string|source}}来自命令提供的<code>container</code>战利品上下文参数，{{nbt|string|slots}}来自命令提供的槽位范围。
+
+<div class="treeview">
+* {{nbt|compound}} 槽位源根节点
+** {{nbt|string|type|required=1}}：<code>slot_range</code>
+** {{nbt|string|source|required=1}}{{until|je 26.3}}：作为来源的实体或方块实体，从[[战利品上下文]]获取。取值可以为<code>block_entity</code>、<code>this</code>、<code>attacking_entity</code>、<code>last_damage_player</code>、<code>direct_attacker</code>、<code>target_entity</code>或<code>interacting_entity</code>。
+** {{nbt|string|source}}{{upcoming|je 26.3}}：（默认为<code>container</code>）作为来源的实体或方块实体等槽位对象，从[[战利品上下文]]获取。取值可以为<code>block_entity</code>、<code>this</code>、<code>attacking_entity</code>、<code>last_damage_player</code>、<code>direct_attacker</code>、<code>target_entity</code>，<code>interacting_entity</code>或<code>container</code>。
+** {{nbt|string|slots|required=1}}：槽位范围，见{{slink|槽位|命令参数}}。格式为<code>-{}-<''槽位类型''></code>或<code>-{}-<''槽位类型''>.<''槽位编号''></code>，例如<code>armor.chest</code>和<code>container.*</code>。
+</div>
+
+=== contents ===
+从容器组件中选择槽位。
+
+游戏会获取输入的槽位源中槽位的物品，再从这些物品中获取容器组件的槽位。如果输入槽位源中的槽位不存在物品、物品不存在对应的组件，或对应的组件内部没有任何物品，则视为没有槽位。
+
+<div class="treeview">
+* {{nbt|compound}} 槽位源根节点
+** {{nbt|string|type|required=1}}：<code>contents</code>
+** {{nbt|string|component|required=1}}：（命名空间ID）要获取槽位的容器组件。取值可以为<code>bundle_contents</code>、<code>charged_projectiles</code>或<code>container</code>。
+** {{nbt|compound}}{{nbt|list|slot_source|required=1}}：一个槽位源，递归定义。游戏将从这些槽位的物品的容器组件中获取槽位。
+</div>
+
+{{inUpcoming|je 26.3}}当{{cmd|item}}命令需要获取容器组件的槽位时，对于目标槽位源<code><slots></code>，即使输入槽位源中的槽位不存在物品或物品不存在对应的组件，游戏也会先对物品设置对应的组件，然后再获取槽位源；当选择到空气时，命令即使无法产生实质性更改，也会正常设置组件并计数。如果修改物品的是{{cmd|item (fill{{!}}override)}}子命令，则目标槽位源<code><slots></code>会获取组件内所有可用的槽位。<code>bundle_contents</code>组件会自动按照槽位顺序塞入物品，当下一个槽位的物品塞入会导致收纳袋容量溢出时，物品塞入终止。
+
+=== reference ===
+{{added in development|jev=26.3|section=1}}
+引用一个槽位源文件，循环引用会导致解析失败。
+
+<div class="treeview">
+* {{nbt|compound}} 槽位源根节点
+** {{nbt|string|type|required=1}}：<code>reference</code>
+** {{nbt|string|name|required=1}}：（命名空间ID）要引用的槽位源。
+</div>
+
+=== empty ===
+不选择任何槽位。
+
+<div class="treeview">
+* {{nbt|compound}} 槽位源根节点
+** {{nbt|string|type|required=1}}：<code>empty</code>
+</div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.11|dev=25w44a|加入了槽位源。}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在槽位源可以作为单独的文件定义在数据包中。
+|现在槽位源不仅可以用于战利品表，还可以用于槽位相关的命令中。
+|加入了槽位源类型<code>reference</code>。
+|槽位源类型<code>slot_range</code>的<code>source</code>字段现在是可选的。
+|槽位源类型<code>contents</code>现在可以选中空槽位。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Inventarplatzquelle]]
+[[en:Slot sources]]
+[[ja:スロット供与子]]
+[[pt:Fontes de espaço]]
+[[ru:Источники слотов]]

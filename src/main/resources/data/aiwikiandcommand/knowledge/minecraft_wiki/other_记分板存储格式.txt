@@ -1,0 +1,82 @@
+# 页面: 记分板存储格式
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%B0%E5%88%86%E6%9D%BF%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''记分板存储文件'''是存档用于保存[[记分板]]与[[队伍]]数据的文件。
+
+== 存储格式 ==
+记分板存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/scoreboard.dat}}。
+
+记分板存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：记分板存储数据。
+*** {{nbt|compound|DisplaySlots}}：当前各个显示位置正在显示的记分板。
+**** {{nbt|string|<''显示位置''>}}：指定[[记分板#显示位置|显示位置]]正在显示的记分板的名称。
+*** {{nbt|list|Objectives|existonsave=1|required=1}}：当前有效的所有记分项信息。
+**** {{nbt|compound}}：一个记分项。
+***** {{nbt|string|CriteriaName|existonsave=1|required=1}}：记分项使用的[[记分板#准则|准则]]。如果准则无效，游戏会在日志中警告<code>-{}-Unknown scoreboard criteria <''准则''>, replacing with dummy</code>，并将此记分项的准则替换为<code>dummy</code>。
+***** {{nbt|bool|display_auto_update|existonsave=1|required=1}}：记分项更新时，如果分数持有者的显示名称发生了变化，是否自动更新分数中分数持有者的名称。
+***** {{nbt|string}}{{nbt|compound}}{{nbt|list|DisplayName|existonsave=1|required=1}}：（[[文本组件]]）记分项的显示名称。
+***** {{nbt|compound|format}}：记分项在显示为数字时的显示模式。
+****** {{nbt|string|type|existonsave=1|required=1}}：记分项显示模式的类型。
+****** {{nbt condition|如果{{nbt|string|type}}为<code>blank</code>，则不显示数字。}}
+****** {{nbt condition|如果{{nbt|string|type}}为<code>fixed</code>，则固定显示一个文本组件：}}
+****** {{nbt|string}}{{nbt|compound}}{{nbt|list|value|existonsave=1|required=1}}：（文本组件）要显示的文本组件。
+****** {{nbt condition|如果{{nbt|string|type}}为<code>styled</code>，则按照一定样式显示数字：}}
+****** 见{{slink|文本组件|组件样式}}。
+***** {{nbt|string|Name|existonsave=1|required=1}}：记分项的名称。游戏使用此名称识别记分项。
+***** {{nbt|string|RenderType|existonsave=1|required=1}}：记分项的显示模式。可以为<code>integer</code>（数字，当{{nbt|compound|format}}存在时使用对应的显示模式）或<code>hearts</code>（心）。
+*** {{nbt|list|PlayerScores|existonsave=1|required=1}}：所有分数数据。
+**** {{nbt|compound}}：一项分数数据。
+***** {{nbt|string}}{{nbt|compound}}{{nbt|list|display|existonsave=1}}：（文本组件）分数的显示名称。
+***** {{nbt|compound|format}}：设置分数的显示模式。
+****** {{nbt|string|type|existonsave=1|required=1}}：分数显示模式的类型。
+****** {{nbt condition|如果{{nbt|string|type}}为<code>blank</code>，则不显示数字。}}
+****** {{nbt condition|如果{{nbt|string|type}}为<code>fixed</code>，则固定显示一个文本组件：}}
+****** {{nbt|string}}{{nbt|list}}{{nbt|compound|value|existonsave=1|required=1}}：（文本组件）要显示的文本组件。
+****** {{nbt condition|如果{{nbt|string|type}}为<code>styled</code>，则按照一定样式显示数字：}}
+****** 见{{slink|文本组件|组件样式}}。
+***** {{nbt|bool|Locked|existonsave=1|required=1}}：此分数是否已经锁定。除了<code>trigger</code>准则外，此项都为<code>true</code>。如果此项为<samp>true</samp>则无法使用此分数运行{{cmd|trigger}}。
+***** {{nbt|string|Name|existonsave=1|required=1}}：分数持有者的名称。
+***** {{nbt|string|Objective|existonsave=1|required=1}}：此分数使用的记分项。如果对应记分项不存在，则游戏在日志中报错<code>-{}-Unknown objective <''记分项名称''> for name <''分数持有者名称''>, ignoring</code>。
+***** {{nbt|int|Score|existonsave=1|required=1}}：当前记录的分数数字。
+*** {{nbt|list|Teams|existonsave=1}}：所有队伍的数据。
+**** {{nbt|compound}}：一个队伍的数据。
+***** {{nbt|bool|AllowFriendlyFire|existonsave=1}}：表示队伍内的玩家是否可以攻击同一个队伍的玩家。不存在时游戏解析为<code>true</code>。
+***** {{nbt|string|CollisionRule|existonsave=1}}：队伍内实体互相碰撞的规则。可以为<code>always</code>（总是进行碰撞，不存在此标签时默认）、<code>never</code>（不进行碰撞）、<code>pushOtherTeams</code>（可以与其他队伍碰撞）和<code>pushOwnTeam</code>（只与本队成员碰撞）。
+***** {{nbt|string|DeathMessageVisibility|existonsave=1}}：队伍内玩家死亡消息的可见性。可以为<code>always</code>（总能看到，不存在此标签时默认）、<code>never</code>（不能看到）、<code>hideForOtherTeams</code>（对其他队伍隐藏）和<code>hideForOwnTeam</code>（对自身队伍隐藏）。
+***** {{nbt|string}}{{nbt|compound}}{{nbt|list|DisplayName|existonsave=1}}：（文本组件）队伍的显示名称。
+***** {{nbt|string}}{{nbt|compound}}{{nbt|list|MemberNamePrefix|existonsave=1}}：（文本组件）表示加在队伍内实体名称前的前缀。
+***** {{nbt|string}}{{nbt|compound}}{{nbt|list|MemberNameSuffix|existonsave=1}}：（文本组件）表示加在队伍内实体名称后的后缀。
+***** {{nbt|string|Name|existonsave=1|required=1}}：队伍名称。
+***** {{nbt|string|NameTagVisibility|existonsave=1}}：队伍内生物名称标签的可见性。可以为<code>always</code>（总能看到，不存在此标签时默认）、<code>never</code>（不能看到）、<code>hideForOtherTeams</code>（对其他队伍隐藏）和<code>hideForOwnTeam</code>（对自身队伍隐藏）。
+***** {{nbt|list|Players|existonsave=1|required=1}}：在此队伍内的实体。
+****** {{nbt|string}}：一个实体的名称。
+***** {{nbt|bool|SeeFriendlyInvisibles|existonsave=1}}：表示队伍内的玩家是否可以看到同一队伍的隐身的实体。不存在时游戏解析为<code>true</code>。
+***** {{nbt|string|TeamColor}}：队伍颜色。使用[[格式化代码]]中的颜色名称。
+** {{nbt|int|DataVersion|existonsave=1|required=1}}：保存此记分板存储文件的游戏的[[数据版本]]。
+</div>
+
+== 存储行为 ==
+记分板存储文件在每个存档中都存在，即使本存档没有任何记分板相关的操作（加入、删除记分项，加入队伍等）。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.18|dev=21w37a|记分项、分数持有者和队伍的名称不再截断至16个字符。}}
+|{{HistoryLine||1.20.3|dev=23w46a|为记分板存储格式内添加了{{nbt|bool|display_auto_update}}和{{nbt|compound|format}}。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将记分板数据从{{filepath|<''存档根目录''>/data/scoreboard.dat}}移动到{{filepath|<''存档根目录''>/data/minecraft/scoreboard.dat}}，且现在即使没有任何记分板也会被创建。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Anzeigetafeldaten]]

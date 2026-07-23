@@ -1,0 +1,84 @@
+# 页面: 在线验证
+# 来源: https://zh.minecraft.wiki/w/%E5%9C%A8%E7%BA%BF%E9%AA%8C%E8%AF%81
+# 分类: Java版, Java版独有信息, 基岩版, 基岩版独有信息, 待扩充页面
+# 抓取时间: 2026-07-14 17:22:39
+# 原始 Wikitext 内容:
+
+{{stub|<ul><!--
+--><li>对于{{in|be|nc=1}}的内容{{Verify|bedrock=1}}</li><!--
+--><li>对于历史{{Verify|history=1}}</li></ul>}}
+
+'''在线验证'''，又称'''正版验证'''，是[[服务器]]上一种默认开启的功能，用于确保仅有正版玩家能够进入服务器。
+
+== 影响 ==
+开启此功能的服务器将会要求客户端进行身份验证{{only|je|for=并在服务端进行二次验证}}，以确保只有正版玩家才可加入服务器，非正版玩家无法加入并会显示{{only|for=“{{tp|disconnect.loginFailedInfo|{{tp|disconnect.loginFailedInfo.invalidSession}}}}”|je}}或{{only|for=“{{tr|您必须通过 Microsoft 服务身份验证。|您必須向 Microsoft 服務完成驗證。}}”|be}}。
+
+通过开启此功能可以最大限度地确保玩家在服务端的用户数据不会因恶意冒用他人用户名或用户名恰巧相同的离线玩家而被篡改，因为必须在[[启动器]]以输入密码等方式完成正版登录后才可通过在线验证，这在合法情况下通常只有玩家本人或受其信任者能做到。
+未开启此功能的离线服务器则需要通过登录插件或[[模组]]才能达到上述效果，这较为繁琐且会对玩家的体验造成一定程度的负面影响。
+
+一些开启在线验证的优秀服务器的存在，也在一定程度上促进了玩家购买正版游戏。
+但与之相对地，一些无力购买游戏的离线玩家的游玩体验会遭到部分破坏。
+
+因此，服主应当慎重考量是否开启该功能。
+
+== 控制 ==
+在{{filename|[[server.properties]]}}文件中，由<code>online-mode</code>选项控制：
+* 当它为<code>true</code>时，在线验证将开启，此时只有正版玩家才可加入，这也是默认选项；
+* 当它为<code>false</code>时，在线验证将关闭，此时离线玩家也可加入。
+
+== 原理 ==
+{{see also|Java版网络协议#登录验证}}
+
+{{in|je}}开启在线验证的[[服务器]]会在玩家登入时要求[[客户端]]通过会话服务器（Yggdrasil）验证，然后服务器再独立核实。玩家须已在启动器中登录Microsoft账户并获得有效<code>accessToken</code>，否则无法完成进服验证。没有有效会话的玩家（比如使用离线登录）无法通过上述验证，因此不能进入开启在线验证的服务器。
+
+服务器进行在线验证时可以简述为以下步骤：
+# 客户端连接服务器。
+# 客户端声明用户名和UUID。
+# 服务器发送公钥和随机挑战值。
+# 客户端生成共享密钥。
+# 客户端计算登录摘要。
+# 客户端用访问令牌向官方认证服务登记加入该摘要。
+# 客户端把共享密钥和挑战值加密发给服务器。
+# 服务器解密并验证挑战值。
+# 服务器计算相同摘要。
+# 服务器向官方认证服务查询该玩家是否已加入该摘要。
+# 官方服务返回经过认证的玩家资料。
+# 服务器执行封禁、白名单、人数上限等本地检查。
+# 服务器启用压缩和加密后的后续流程。
+# 客户端确认登录完成。
+# 连接进入配置阶段，随后进入游戏。
+
+{{in|be}}开启在线验证的服务器会要求客户端进行[[Microsoft]]验证，如果未登录Microsoft账户或账户未拥有{{el|be}}，则验证不通过，无法进入服务器。
+
+== 服务器日志 ==
+在{{filename|latest.log}}文件中，服务器踢出非在线验证玩家的日志为：
+<pre>-{}-
+[HH:MM:SS] [Server thread/INFO]: <玩家名称> (/<IP地址>:<端口号>) lost connection: Disconnected
+</pre>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.17a|加入在线验证的前身<code>verify-name</code>。{{Verify|确认是前身吗？|java=1|history=1}}}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.16|加入在线验证功能。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||?|现在在线验证失败的消息被更改为“{{tr|登录失败：无效会话（请尝试重启游戏及启动器）|登入失敗：無效的 session（請嘗試重開您的遊戲與啟動器）|登入失敗：無效連接階段（請嘗試重新啟動遊戲與啟動器）}}”。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.6.1|加入在线验证功能。}}
+|{{HistoryLine||?|验证从Xbox验证改为Microsoft验证。}}
+}}
+
+== 你知道吗 ==
+* 在客户端无法访问minecraft.net时，也会显示上述错误页面。
+
+== 画廊 ==
+{{More images|缺少更多图像及基岩版繁体图像|section=1}}
+{{gallery|
+File:Java Edition login Failed Info invalid Session.png|convert|Java版的正版验证失败屏幕
+File:OnlineCheckFailScreen BE.png|基岩版的正版验证失败屏幕
+}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+{{Navbox Bedrock Edition}}

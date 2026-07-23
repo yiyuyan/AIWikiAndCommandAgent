@@ -1,0 +1,180 @@
+# 页面: 漏斗矿车
+# 来源: https://zh.minecraft.wiki/w/%E6%BC%8F%E6%96%97%E7%9F%BF%E8%BD%A6
+# 分类: Java版独有信息, 储物, 可再生资源, 基岩版独有信息, 实体, 物品, 载具, 需要测试/基岩版
+# 抓取时间: 2026-07-14 17:31:12
+# 原始 Wikitext 内容:
+
+{{Infobox item
+|image=Minecart with Hopper.png
+|invimage=Minecart with Hopper
+|size=高度：0.7格<br>宽度：0.98格
+}}
+{{relevant tutorial|矿车储存}}
+'''漏斗矿车（Minecart with Hopper）'''是一种装着[[漏斗]]且功能与其相似的矿车，但吸取物品实体的速度更快。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|Hopper
+|Minecart
+|Output= Minecart with Hopper
+|type= Transportation
+|foot=1
+}}
+
+== 用途 ==
+[[File:Pulling range of Minecart with Hopper in Bedrock Edition.png|thumb|基岩版中漏斗矿车三次遍历物品实体的范围示意图]]
+[[File:Operation logic of Hopper and Minecart with Hopper in Bedrock Edition.png|thumb|基岩版中漏斗及漏斗矿车的工作逻辑]]
+
+漏斗矿车的放置方法与其他[[矿车]]类似。
+
+{{in|je}}一个漏斗矿车会吸取掉落在附近的物品实体（吸取范围略比车身大，约{{frac|1|3}}个方块）和漏斗矿车正上方一个方块内{{needs testing|bedrock=1}}的容器（投影位置有重合部分{{needs testing|bedrock=1}}的容器，包括漏斗矿车或[[运输矿车]]{{needs testing|bedrock=1}}）里的物品，吸取物品速度最大可达20个物品/秒，比普通的[[漏斗]]快得多。<ref name="MC-65029">{{bug|MC-65029|||WAI}}</ref>同时，它也能吸到掉落在漏斗矿车上方隔着一个完整方块上的物品（当漏斗矿车位于铁轨上时）。
+
+{{in|be}}一个漏斗矿车会吸取掉落在附近的物品实体（吸取范围略比车身大{{frac|1|4}}个方块）和铁轨正上方容器里的物品，吸取物品速度最大可达10个物品/秒。漏斗矿车每次工作至多尝试吸取三次物品实体，其具体范围如图所示。同时，{{in|be|nc=1}}的漏斗矿车可能会从斜上方的另一个漏斗矿车中吸取物品<ref>{{bug|MCPE-57637}}</ref>。
+
+物品不会自动从矿车里转移到另一个容器中，但可以通过在漏斗矿车正下方放一个漏斗来将物品取出。
+
+漏斗矿车可以通过放置一个[[激活铁轨]]开启或停止吸取物品。当一个漏斗矿车经过充能的激活铁轨时会被上锁，它将停止吸取物品实体和容器中的物品，这种锁定在离开充能的激活铁轨时仍然会保持；当经过未充能的激活铁轨会被解锁。
+
+漏斗矿车会在被两个已经被充能的[[动力铁轨]]启动后（甚至当前面有一辆矿车时）连续地滑行85格远（而一个普通矿车只能滑行不到12格）。但是，漏斗矿车所在铁轨上滑行的距离很大程度上取决于它本身所载的物品数量。用一个已经被充能的动力铁轨启动后，完全空的漏斗矿车可以滑行64格远（而一个普通矿车只能滑行8格）。漏斗矿车的可滑行距离随着漏斗中物品的增多呈非直线性缩短，当漏斗被装满时，它只能滑行16格远。
+
+[[红石比较器]]可以检测[[探测铁轨]]上的漏斗矿车存储物品的数量。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Minecart base.ogg
+|subtitle=MC-181831
+|source=友好生物<ref group="音效" name="oddcats">{{bug|MC-42132}}</ref>
+|description=矿车行进
+|id=entity.minecart.riding
+|translationkey=-
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Minecart base.ogg
+|source=友好生物
+|description=矿车行进
+|id=minecart.base
+|typeid=minecart.base
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Minecart with Hopper
+|spritetype=item
+|nameid=hopper_minecart
+|foot=1}}
+{{ID table
+|generatetranslationkeys=java
+|Minecart with Hopper
+|spritetype=entity
+|nameid=hopper_minecart
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Minecart with Hopper
+|spritetype=item
+|nameid=hopper_minecart
+|foot=1}}
+{{ID table
+|generatetranslationkeys=bedrock
+|Minecart with Hopper
+|spritetype=entity
+|nameid=hopper_minecart
+|foot=1}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+
+漏斗矿车有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w03a|[[File:Minecart with Hopper JE1 BE1.png|32px]] [[File:Minecart with Hopper (item) JE1 BE1.png|32px]] 加入了漏斗矿车。}}
+|{{HistoryLine|||dev=13w04a|现在创造模式下攻击漏斗矿车会使漏斗矿车直接消失而不会掉落，但[[重命名]]后的矿车仍会掉落。}}
+|{{HistoryLine||1.9|dev=15w43a|加入了战利品表。漏斗矿车现在可以使用战利品表。}}
+|{{HistoryLine||1.9.1|dev=pre2|漏斗矿车在物品栏显示的英文名称从“Hopper minecart”改成“Minecart with Hopper”。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID由<code>MinecartHopper</code>变为<code>hopper_minecart</code>。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，此物品的数字ID是408。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Minecart with Hopper JE2 BE2.png|32px]] [[File:Minecart with Hopper (item) JE2 BE2.png|32px]] 更改了漏斗矿车的纹理。}}
+|{{HistoryLine||1.16.2|dev=pre1|现在成年[[猪灵]]会与附近打开或破坏漏斗矿车的玩家敌对。}}
+|{{HistoryLine||1.19|dev=22w13a|现在漏斗矿车的合成配方是无序的。
+|现在漏斗矿车被破坏时会掉落其自身，而不再会分解成矿车和漏斗。}}
+|{{HistoryLine||1.19.4|dev=23w03a|漏斗矿车不会再因为其方块坐标为(0,0,0)而降低物品收集频率。<ref name="MC-65029"/><ref>{{bug|MC-235260|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=23w06a|成年猪灵不再会与附近打开或破坏漏斗矿车的玩家敌对。}}
+|{{HistoryLine||1.20.3|dev=23w41a|现在创造模式下攻击重命名过的漏斗矿车也会使漏斗矿车直接消失而不会掉落。}}
+|{{HistoryLine||1.21.5|dev=25w07a|移除了漏斗矿车实体数据中的{{nbt|boolean|CustomDisplayTile}}字段，此前此项为<samp>false</samp>时漏斗矿车不会展示自定义方块。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.14.0|dev=build 1|[[File:Minecart with Hopper JE1 BE1.png|32px]] [[File:Minecart with Hopper (item) JE1 BE1.png|32px]] 加入了漏斗矿车。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|实体ID由<code>minecarthopper</code>变为<code>hopper_minecart</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Minecart with Hopper JE2 BE2.png|32px]] [[File:Minecart with Hopper (item) JE2 BE2.png|32px]] 更改了漏斗矿车的纹理。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.28|现在漏斗矿车的合成配方是无序的。}}
+|{{HistoryLine|||dev=1.19.0.30|现在漏斗矿车被破坏时会掉落其自身，而不再会分解成矿车和漏斗。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1|switch=1.0.1|[[File:Minecart with Hopper JE1 BE1.png|32px]] [[File:Minecart with Hopper (item) JE1 BE1.png|32px]] 加入了漏斗矿车。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Minecart with Hopper JE2 BE2.png|32px]] [[File:Minecart with Hopper (item) JE2 BE2.png|32px]] 更改了漏斗矿车的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Minecart with Hopper JE1 BE1.png|32px]] [[File:Minecart with Hopper (item) JE1 BE1.png|32px]] 加入了漏斗矿车。
+|漏斗矿车被破坏时会冒出烟粒子。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:First hopper Minecart Image.png|[[Dinnerbone]]公布的第一张漏斗矿车截图<ref>[[Dinnerbonetweet:291215700213772289]]</ref>
+File:13w03a.png|13w03a横幅展示了一辆漏斗矿车和一个[[投掷器]]
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox items|Tools & Utilities}}
+{{Navbox entities|Non-mobs}}
+
+[[Category:载具]]
+[[Category:储物]]
+
+[[cs:Vozík s násypkou]]
+[[de:Trichterlore]]
+[[en:Minecart with Hopper]]
+[[es:Vagoneta con tolva]]
+[[fr:Wagonnet à entonnoir]]
+[[hu:Tölcsér csille]]
+[[it:Carrello da miniera]]
+[[ja:ホッパー付きトロッコ]]
+[[ko:호퍼가 실린 광산 수레]]
+[[nl:Mijnkar met trechter]]
+[[pl:Wagonik z lejem]]
+[[pt:Carrinho de mina com funil]]
+[[ru:Вагонетка с воронкой]]
+[[uk:Вагонетка з лійкою]]

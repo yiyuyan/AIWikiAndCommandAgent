@@ -1,0 +1,711 @@
+# 页面: Java版指南/战斗更新
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%8C%87%E5%8D%97/%E6%88%98%E6%96%97%E6%9B%B4%E6%96%B0
+# 分类: Java版指南
+# 抓取时间: 2026-07-14 17:15:22
+# 原始 Wikitext 内容:
+
+{{Infobox guide
+|edition=Java版
+|name=战斗更新
+|vers=*[[Java版1.9|1.9]],[[Java版1.9.1|1.9.1]],[[Java版1.9.2|1.9.2]],[[Java版1.9.3|1.9.3]],[[Java版1.9.4|1.9.4]]
+|prev=缤纷更新
+|next=霜炙更新
+}}
+这篇指南是[[战斗更新]]（Java版1.9.x）的简要概述。本指南假定读者对[[缤纷更新]]（Java版1.8.x）的内容有基本了解。
+
+== 生物 ==
+=== 新内容 ===
+{|class="wikitable"
+! 名称 !! 外观 !! 生成于 !! 掉落 !! 备注
+|-
+|{{EntityLink|Shulker}}||{{Animate|Shulker JE1 BE1.png;Shulker Box JE1 BE1.png|84px}}||
+* 潜影贝随末地城一起生成。
+||
+||
+* 潜影贝可以像[[方块]]一样站上去。
+* 潜影贝会打开壳并射出白海胆外观的弹射物进行攻击。
+* 潜影贝不会在和平难度下消失，但这时它不会以玩家为目标并攻击。
+|-
+|{{EntitySprite|skeleton-horse}}[[骷髅陷阱]]马||[[File:Skeleton Trap JE1 BE1.png|128px]]||
+* 骷髅陷阱马在[[雷暴]]里有概率在一道闪电中生成。
+||
+[[骷髅马]]：
+{{Drop|Item|Bone|0|2}}
+[[骷髅]]：
+{{Drop|Item|Arrow|0|2}}
+{{Drop|Item|Bone|0|2}}
+'''生成时装备'''
+{{drop|item|iron helmet|text=附魔铁头盔}}
+{{drop|item|bow|text=附魔弓}}
+||
+* 当玩家与骷髅陷阱马的距离小于等于10格时，[[闪电]]会击中该马。
+** 击中时，骷髅陷阱马会变成骷髅骑手。
+** 它的附近会额外生成三个骷髅骑手。
+* 每个骷髅都带有附魔的[[铁头盔]]和[[弓]]，并且生成后有3秒钟的[[受击后伤害免疫]]效果。
+* 如果没有被激活，骷髅陷阱马会在15分钟后消失。
+|}
+
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+|所有[[生物]]||
+* 改进了AI。
+* 生物现在可以推动其他生物。
+* 添加/更改了部分生物的音效。
+* 有概率生成左撇子生物。
+|-
+|{{EntityLink|Creeper}}、{{EntityLink|skeleton}}和{{EntityLink|zombie}}||
+* 现在需要靠得更近才会发现戴着生物[[头颅]]的玩家。
+|-
+|驯服的{{EntityLink|wolf}}和{{EntityLink|ocelot}}||
+* 现在在死亡时会在聊天窗口向它们的主人发送信息，即使它们没有命名。
+|-
+|{{EntityLink|Ender dragon}}||
+* 末影龙可以通过在返回传送门的每一边放置一个[[末地水晶]]来重生。
+** 重生时，这些水晶将射出光柱，使所有的黑曜石柱重置。完成后将会产生爆炸并重生末影龙。
+** 后来生成的龙在死亡时也会生成新的折跃门，最多生成20个，但不会创造新的[[龙蛋]]，且只掉落500[[经验值]]。
+** 末影龙重生后，黑曜石柱和末地水晶都会重新出现。
+* [[雪球]]、[[鸡蛋]]和[[钓鱼竿]]不再可以伤害末影龙。
+* 更改了末影龙的攻击方式：
+** 冲刺攻击将造成大量的击退。
+** 在传送门顶部时会喷出叫做“龙息”的火/紫色粒子。
+*** 在攻击时，它会击退并伤害所有邻近的玩家（即使攻击其他身体部位）。
+**** 之后会立刻冲向玩家。
+*** 用空的[[玻璃瓶]]按下{{Control|使用}}键会装上龙息。
+** 向玩家射出特殊的火球。
+*** 撞击时会产生龙息，且会在地面上产生[[火]]。
+** 在传送门顶部时会反弹射向末影龙的箭矢，而射击的玩家将会被末影龙设为目标。
+* 更改了末影龙的AI：
+** 有时会回到岛屿中心的传送门顶部“栖息”并射出龙息。
+*** 之后将会继续冲刺。
+** 会更多地保护[[黑曜石柱]]，使战斗进一步发展。
+** 在被杀死时会飞回到传送门上方，完成击杀动画。
+|-
+|{{EntityLink|Iron golem}}||
+* 铁傀儡现在有100%的[[击退抗性]]。
+|-
+|{{EntityLink|Pig}}||
+* 除胡萝卜外，还能使用[[马铃薯]]和[[甜菜根]]来吸引和繁殖。
+|-
+|{{EntityLink|Rabbit}}||
+* 兔子现在只在{{tooltip|特定的生物群系|沙漠，繁花森林，针叶林，大型针叶林，冷针叶林，冰原，冰山，冰刺之地，以及它们的“山脉”和“M”变种生物群系。}}里生成。即使是在这些生物群系，生成的概率也下降了。
+* 兔子破坏[[胡萝卜]]作物现在会减少1级生长阶段，只当生长阶段为0时移除作物方块。
+|-
+|{{EntityLink|Snow golem}}||
+* 雪傀儡的[[南瓜]]现在可以用剪刀移除。
+** 不会掉落南瓜。
+|-
+|{{EntityLink|Zombie villager}}||
+* 僵尸村民现在拥有了不同的纹理，纹理基于原来村民的职业。
+** 职业会在治愈后恢复，但不会恢复原来的交易。
+|}
+
+== 方块 ==
+=== 新内容 ===
+霜冰在Java版没有物品形式，因此此处使用的物品栏图标为基岩版。
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=战斗更新新增方块
+|rows=2
+| 0=Chain Command Block | Repeating Command Block | Chorus Flower | Chorus Plant | Dragon Head | End Rod | End Stone Bricks | [霜冰]Frosted Ice BE | Grass Path | Purpur Block | Purpur Pillar | Purpur Stairs | Purpur Slab | Structure Block
+}}
+|战斗更新新增方块一览
+}}
+{|class="wikitable"
+! 名称 !! 外观 !! 获得方法 !! 采集工具 !! 用途
+
+|-
+|{{BlockLink|Chain Command Block}}
+||[[File:Chain Command Block Revision 1.png|84px]]
+||
+* 该物品仅能通过创造模式物品栏获取。
+||生存模式下无法破坏。
+||
+* 用于储存和执行命令。
+|-
+|{{BlockLink| Repeating Command Block}}
+|[[File:Repeating Command Block Revision 1.png|84px]]
+||
+* 该物品仅能通过创造模式物品栏获取。
+||生存模式下无法破坏。
+||
+* 用于储存和执行命令。
+|-
+|{{BlockLink|Chorus flower}}||{{Animate|Chorus Flower JE1.png;Chorus Flower Dead JE1.png|84px}}||
+* 紫颂花在紫颂树顶端生成。
+||紫颂花可以使用任何工具采集（包括空手），但斧是最快的。||
+* 如果下方的支撑方块被破坏，紫颂花也会被破坏。
+** 只有直接开采才会掉落紫颂花。
+* 紫颂花能种在任意维度的[[末地石]]上。
+* 紫颂花在停止生长时会改变纹理。
+|-
+|{{BlockLink|Chorus plant}}||[[File:Chorus Plant JE1 BE1.png|84px]]||
+* 紫颂植株作为紫颂树的一部分生成。
+||紫颂植株可以使用任何工具采集（包括空手），但斧是最快的。它们被采集后会掉落紫颂果。||
+* 当支撑紫颂植株的方块被破坏时，它也会快速地被破坏。
+|-
+|{{BlockLink|Dragon head}}||[[File:Dragon Head JE1 BE1.png|84px]]||
+* 龙首会在末地船船首生成。
+||龙首可以使用任何工具采集（包括空手）。||
+* 当一个玩家装备龙首并移动时，龙首的嘴将会不停的开合。
+* 当用[[红石]]充能放在固体方块上的龙首时，嘴也会不停的开合。
+** 在断开充能后会保持其在断开充能的瞬间张开的角度。
+|-
+|{{BlockLink|End rod}}||[[File:End Rod JE1 BE1.png|84px]]||
+{{Crafting|B2=Blaze Rod|B3=Popped Chorus Fruit|Output=End Rod,4}}
+* 末地烛会在末地城中生成。
+||末地烛可以使用任何工具采集（包括空手）。||
+* 末地烛可以水平或垂直放置。
+* 末地烛可以用作光源，亮度等同于火把。
+* 不像火把，末地烛具有碰撞箱。
+|-
+|{{BlockLink|End stone bricks}}||[[File:End Stone Bricks JE1 BE1.png|84px]]||
+{{Crafting|A1=End Stone|B1=End Stone|A2=End Stone|B2=End Stone|Output=End Stone Bricks,4}}
+* 末地石砖会在末地城中生成。
+||末地石砖可以使用镐采集。||
+* 末地石砖可用作装饰方块。
+|-
+|{{BlockLink|Grass path}}||[[File:Grass Path JE1 BE1.png|84px]]||
+* 可以通过用任意种类的[[锹]]右击[[草方块]]产生草径。这将消耗锹的1点耐久。
+||草径可以使用任何工具采集（包括空手），但锹是最快的。它们被采集后会掉落[[泥土]]。||
+* 草径可用作装饰方块。
+|-
+|{{BlockLink|Purpur block}}||[[File:Purpur Block JE1 BE1.png|84px]]||
+{{Crafting|A1=Popped Chorus Fruit|B1=Popped Chorus Fruit|A2=Popped Chorus Fruit|B2=Popped Chorus Fruit|Output=Purpur Block}}
+* 紫珀块会在末地城中生成。
+||紫珀块可以使用镐采集。||
+* 紫珀块可用作装饰方块。
+|-
+|{{BlockLink|Purpur pillar}}||[[File:Purpur Pillar (UD) JE1 BE1.png|84px]]||
+{{Crafting|B1=Purpur Slab|B2=Purpur Slab|Output=Purpur Pillar}}
+* 紫珀柱会在末地城中生成。
+||紫珀柱可以使用镐采集。||
+* 紫珀柱可用作装饰方块。
+|-
+|{{BlockLink|Purpur Slab}}<br>和<br>{{BlockLink|Purpur Stairs}}||[[File:Purpur Slab JE1 BE1.png|84px]]<br>[[File:Purpur Stairs JE1 BE1.png|84px]]||
+{{Crafting|A2=Purpur Block|B2=Purpur Block|C2=Purpur Block|Output=Purpur Slab,6}}
+{{Crafting|A1=Purpur Block|A2=Purpur Block|B2=Purpur Block|A3=Purpur Block|B3=Purpur Block|C3=Purpur Block|Output=Purpur Stairs,4}}
+* 紫珀台阶和紫珀楼梯会在末地城中生成。
+||紫珀台阶和紫珀楼梯可以使用镐采集。||
+* 紫珀台阶和紫珀楼梯可用作装饰方块。
+|}
+
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+|所有[[方块]]||
+* 添加/更改了部分方块的音效。
+|-
+|{{BlockLink|Anvil}}||
+* 重命名物品不再增加修复成本，以便将来修理/重命名。
+|-
+|{{BlockLink|Beacon}}||
+* 信标会掉落放入其中的物品且在重新加载世界后会保留物品。
+* 信标在关闭界面时会掉落它所包含的物品。
+* 效果持续时间现在基于信标的等级，为9秒+每级2秒（之前是固定的9秒）。
+* 信标现在放置于合法的金字塔上时会立即激活。
+|-
+|{{BlockLink|Brewing stand}}||
+* 酿造台现在需要[[烈焰粉]]作为燃料。
+** 一个烈焰粉可以为酿造台提供20点能量。
+** 每次将原料放入酿造台时都会消耗1点能量。
+|-
+|{{BlockLink|Cactus}}||
+* 当靠近[[熔岩]]时，仙人掌将会被破坏。
+* 当上方为[[水]]或熔岩时，仙人掌也会被破坏。
+|-
+|{{BlockLink|Cauldron}}||
+* [[铁桶]]现在可以从满的炼药锅中填充。
+|-
+|{{BlockLink|Cobweb}}||
+* 使用[[剪刀]]采集时，蜘蛛网将会掉落自身。
+|-
+|{{BlockLink|Daylight sensor}}||
+* 阳光传感器在夜晚有足够的阴影时不再发出信号。
+|-
+|{{BlockLink|Dead bush}}||
+* 枯萎的灌木现在掉落0-2根[[木棍]]。
+|-
+|{{BlockLink|Dispenser}}||
+* 发射器现在会把[[南瓜]]装备到[[玩家]]、[[生物]]或[[盔甲架]]的头部。
+|-
+|{{BlockLink|id=oak-door|Door}}||
+* 门现在放置时根据你点击的方块的左侧或右侧决定门轴的方向，除非相邻的门使其按某种方式放置。
+|-
+|{{BlockLink|id=glass|Glass pane}}和{{BlockLink|Iron bars}}||
+* 没有连接任何方块的玻璃板及铁栏杆现在尺寸为2x2像素。
+|-
+|{{BlockLink|Hay bale}}||
+* 跌落在干草捆上时只会造成正常[[跌落伤害]]的20%。
+|-
+|{{BlockLink|id=oak-trapdoor|Trapdoor}}||
+* 活板门不再需要支撑的方块。
+* 如果下方有与活板门同侧的[[梯子]]，开启时活板门可以像攀登梯子那样爬上去。
+|}
+
+== 物品 ==
+=== 新内容 ===
+{{FakeImage|align=center|
+{{Inventory
+|type=generic
+|title=战斗更新新增物品
+|rows=8
+| 0=Beetroot | Beetroot Soup | Beetroot Seeds | Chorus Fruit | Dragon's Breath | Elytra | End Crystal | Awkward Potion | Thick Potion | Mundane Potion | Uncraftable Potion | Awkward Splash Potion | Thick Splash Potion | Mundane Splash Potion | Uncraftable Splash Potion | Lingering Water Bottle | Awkward Lingering Potion | Thick Lingering Potion | Mundane Lingering Potion | Uncraftable Lingering Potion | Lingering Potion of Regeneration | Lingering Potion of Swiftness | Lingering Potion of Fire Resistance | Lingering Potion of Poison | Lingering Potion of Healing | Lingering Potion of Night Vision | Lingering Potion of Weakness | Lingering Potion of Strength | Lingering Potion of Slowness | Lingering Potion of Leaping | Lingering Potion of Harming | Lingering Potion of Water Breathing | Lingering Potion of Invisibility | Lingering Potion of Luck | Splash Water Bottle | Splash Potion of Luck | Potion of Luck | Popped Chorus Fruit | Shield | Shulker Spawn Egg | Spectral Arrow | Arrow of Splashing | Tipped Arrow | Uncraftable Tipped Arrow | Arrow of Regeneration | Arrow of Swiftness | Arrow of Fire Resistance | Arrow of Poison | Arrow of Healing | Arrow of Night Vision | Arrow of Weakness | Arrow of Strength | Arrow of Slowness | Arrow of Leaping | Arrow of Harming | Arrow of Water Breathing | Arrow of Invisibility | Arrow of Luck | Spruce Boat | Birch Boat | Jungle Boat | Acacia Boat | Dark Oak Boat | Enchanted Book[&7冰霜行者 I] | Enchanted Book[&7冰霜行者 II] | Enchanted Book[&7经验修补]
+}}
+|战斗更新新增物品一览
+}}
+{|class="wikitable"
+! 名称 !! 外观 !! 获得方法 !! 用途
+|-
+|{{ItemLink|Beetroot}}||[[File:Beetroot JE1 BE1.png|84px]]||
+甜菜根可以通过成熟的甜菜作物获得。
+||
+* 每个甜菜根食用后补充{{hunger|1}}饥饿值。
+* 甜菜根可用于合成甜菜汤。
+* 甜菜根也可用于合成[[玫瑰红]]。
+|-
+|{{ItemLink|Beetroot soup}}||[[File:Beetroot Soup JE1 BE1.png|84px]]||
+{{Crafting|A1=Beetroot|B1=Beetroot|C1=Beetroot|A2=Beetroot|B2=Beetroot|C2=Beetroot|B3=Bowl|Output=Beetroot Soup|shapeless=true}}
+||
+* 每碗甜菜汤食用后补充{{hunger|6}}饥饿值。
+|-
+|{{ItemLink|Beetroot seeds}}||[[File:Beetroot Seeds JE1 BE1.png|84px]]||
+甜菜种子可以通过成熟的甜菜作物获得。此外甜菜种子可以在村庄或战利品箱子里发现。
+||
+* 甜菜种子用于种植甜菜根。
+|-
+|{{ItemLink|Chorus fruit}}||[[File:Chorus Fruit JE1 BE1.png|84px]]||
+紫颂果可以通过破坏紫颂植株获得。
+||
+* 每个紫颂果食用后补充{{hunger|4}}饥饿值。
+* 食用紫颂果后会像[[末影人]]一样随机传送到附近的地点。
+* 即使玩家的饥饿条是满的也可以食用紫颂果，与[[金苹果]]类似。
+* 紫颂果能在熔炉里烹饪来获得爆裂紫颂果。
+|-
+|{{ItemLink|Dragon's breath}}||[[File:Dragon's Breath JE1 BE1.png|84px]]||
+龙息可以通过使用[[玻璃瓶]]收集末影龙的龙息攻击或末影龙火球产生的云获得。
+||
+* 龙息可以用于将[[喷溅药水]]酿造为滞留药水。
+|-
+|{{ItemLink|Elytra}}||[[File:Elytra (item) JE1 BE1.png|84px]][[File:Broken Elytra (item) JE1 BE1.png|84px]]||
+装入[[物品展示框]]里的鞘翅可以在末地船里发现。
+||
+* 将鞘翅装备在胸甲栏时，玩家可以进入滑翔状态。
+* 使用时鞘翅每秒损失1点耐久度。
+* 当耐久值达到1时，鞘翅会在被修复前停止工作。鞘翅永远不会彻底损坏。
+** 使用[[皮革]]修复鞘翅。
+* 如果玩家拥有[[披风]]，鞘翅将显示为披风的纹理。
+|-
+|{{ItemLink|End crystal}}||[[File:End Crystal (item) JE1 BE1.png|84px]]||
+{{Crafting|A1=Glass|B1=Glass|C1=Glass|A2=Glass|B2=Eye of Ender|C2=Glass|A3=Glass|B3=Ghast Tear|C3=Glass|Output= End Crystal}}
+||
+* [[末地水晶]]的物品形式。
+* 在[[基岩]]或[[黑曜石]]上使用时将会生成一个末地水晶。
+** 不像普通的末地水晶，被生成的末地水晶没有底座。
+|-
+|{{ItemLink|Popped chorus fruit}}||[[File:Popped Chorus Fruit JE1 BE1.png|84px]]||
+{{Smelting|Chorus Fruit|Popped Chorus Fruit}}
+||
+* 爆裂紫颂果不可食用。
+* 爆裂紫颂果可用于合成紫珀块。
+|-
+|{{ItemLink|Shield}}||[[File:Shield JE1.png|84px]]||
+{{Crafting|A1=Any Planks|B1=Iron Ingot|C1=Any Planks|A2=Any Planks|B2=Any Planks|C2=Any Planks|B3=Any Planks|Output=Shield}}
+||
+* 用于阻挡攻击的新工具。
+** 如果玩家在被攻击时按住右键，造成的伤害将会减少且盾牌会损失一定的耐久度。
+* 使用[[斧]]攻击盾牌有概率使盾牌在5秒内无法使用。
+* 盾牌可以和[[旗帜]]结合以显示旗帜的图案。
+* 使用[[木板]]修复盾牌。
+|-
+|{{ItemLink|Tipped arrow}}<br>和<br>{{ItemLink|Spectral arrow}}||[[File:Arrow of Luck JE1.png|84px]][[File:Spectral Arrow (item) JE1.png|84px]]||
+{{Crafting|A1=Arrow|A2=Arrow|A3=Arrow|B1=Arrow|B2=Matching Lingering Potion|B3=Arrow|C1=Arrow|C2=Arrow|C3=Arrow|Output=Matching Tipped Arrow,8}}
+{{Crafting|A2=Glowstone Dust|B1=Glowstone Dust|B2=Arrow|B3=Glowstone Dust|C2=Glowstone Dust|Output=Spectral Arrow,2}}
+||
+* [[箭]]的新种类。
+* 当药箭击中生物或玩家时，它们将会获得[[药水效果]]。
+** 光灵箭将会使生物获得10秒的[[发光]]状态效果。
+* 药水效果的持续时间为原药水的{{frac|1|8}}。
+|-
+|冰霜行者[[附魔书]]
+|[[File:Enchanted Book.gif|84px]]
+|可通过与图书管理员交易，钓鱼或箱子战利品获得。
+|
+* 可使玩家在水上行走时在脚下生成霜冰。
+|-
+|经验修补[[附魔书]]
+|[[File:Enchanted Book.gif|84px]]
+|可通过与图书管理员交易，钓鱼或箱子战利品获得。
+|
+* 可将经验球转化为物品耐久度。
+|}
+
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+|所有[[物品]]||
+* 加入了部分物品的音效。
+* 部分物品现在在热键栏/物品栏里显示其变体状态的动画。
+|-
+|{{ItemLink|id=iron-chestplate|盔甲}}||
+* 护甲值更少了，因为攻击强度增加了：每{{health|2}}点攻击会减少{{armor|1}}点有效护甲值，但不会低于护甲值的20%。
+|-
+|{{ItemLink|Axe}}||
+* 使用斧攻击一个使用盾牌格挡的玩家有概率使盾牌在5秒内无法使用。
+|-
+|{{ItemLink|Boat}}||
+* 加入了云杉、白桦、丛林、金合欢和深色橡木变种。
+** 使用5个相同种类的木板合成，位置与之前相同。
+** 原来的“船”现在叫做“橡木船”。
+* 船有了新的模型，现在船上有一对桨。
+|-
+|{{ItemLink|Enchanted golden apple}}||
+* 附魔金苹果现在不可合成。
+* 现在给予20秒的{{EffectLink|Regeneration}}II（共回复{{health|16}}）和2分钟的{{EffectLink|Absorption}}IV（给予{{hp|16|absorption=1}}点的伤害吸收）。
+|-
+|{{ItemLink|Ender pearl}}||
+* 末影珍珠现在可以在[[创造模式]]里扔出。
+* 末影珍珠在每次使用后都有冷却时间。
+|-
+|{{ItemLink|Glowstone dust}}和{{ItemLink|Redstone}}||
+* 它们不再可以被分别加入延长版和II级药水中。
+|-
+|{{ItemLink|Shears}}||
+* 剪刀不再可以附上[[精准采集]]。
+* 剪刀现在在破坏任何方块时都会损失耐久值。
+* 使用剪刀采集时，蜘蛛网将会掉落自身。
+|-
+|{{ItemLink|Sword}}||
+* 剑不再可以用于格挡。
+* 在潜行或站立时挥剑会出现新的防御性攻击“横扫”。
+** 在攻击者旁边的生物将会被击退并受到{{hp|1}}点伤害。
+|-
+|{{ItemLink|id=splash-potion|link=喷溅药水|喷溅型水瓶}}||
+* 喷溅型水瓶会扑灭任何扔向的[[火]]方块，并扑灭附近最多5个火方块。
+|}
+
+== 非生物实体 ==
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+|所有[[实体]]||
+* 添加了部分实体的音效。
+|-
+|{{EntityLink|Arrow}}||
+* 箭现在会从创造模式玩家身上弹开，之前它会直接穿过。
+* 射出的箭现在会考虑射击者的速度。
+|-
+|{{EntityLink|Boat}}||
+* 船更快了，且不再在撞到岸边时损毁。
+* 现在使用{{control|向左移动}}键和{{control|向右移动}}键使船转向。
+** 使用鼠标不再可以使船转向。
+** 使用鼠标玩家可以向左或向右看90度，但不能看向后面。
+** 按住{{control|疾跑}}键不再会有任何效果。
+* 船现在在被水淹没后会往下沉，而不是向上浮起。
+* 当船移动时，玩家不能使用物品或进行攻击。
+* 生物和盔甲架可以进入船，最多可以搭载两个。
+* 船现在不再会让害怕水的生物免疫水的伤害，也不再会防止会在阳光底下燃烧的生物燃烧。
+|-
+|[[弹射物]]||
+* 弹射物现在会考虑投掷者的速度。
+|}
+
+== 状态效果 ==
+=== 新内容 ===
+{|class="wikitable"
+! 名称 !! 外观 !! 获得方法 !! 描述
+|-
+|{{EffectLink|Glowing}}||[[File:Glowing JE1.png|84px]]||
+发光可以通过被光灵箭击中获得。
+||
+使实体的轮廓发光；光可以透过不透明方块。
+|-
+|{{EffectLink|Levitation}}||[[File:Levitation JE1 BE1.png|84px]]
+||
+飘浮可以通过被潜影贝弹射物击中获得。
+||
+使实体不受控制地向上飘浮。
+|-
+|{{EffectLink|Luck}}||[[File:Luck JE1.png|84px]]||
+幸运可以通过幸运药水获得。
+||
+每等级增加1幸运属性。
+|-
+|{{EffectLink|Bad Luck}}||[[File:Bad Luck JE1.png|84px]]||
+霉运不能通过正常途径获得。
+||
+每等级减少1幸运属性。
+|}
+
+== 药水 ==
+=== 新内容 ===
+{|class="wikitable"
+! 名称 !! 获得方法 !! 效果
+|-
+|{{ItemLink|Lingering potion}}
+|
+{{brewing
+|showname=1
+|name=对应[[滞留药水]]
+|ingredients=[[龙息]]+对应[[喷溅药水]]
+|Dragon's Breath
+|Lingering Water Bottle; Mundane Lingering Potion; Thick Lingering Potion; Awkward Lingering Potion; Lingering Potion of Regeneration; Lingering Potion of Swiftness; Lingering Potion of Fire Resistance; Lingering Potion of Poison; Lingering Potion of Healing; Lingering Potion of Night Vision; Lingering Potion of Weakness; Lingering Potion of Strength; Lingering Potion of Slowness; Lingering Potion of Leaping; Lingering Potion of Harming; Lingering Potion of Water Breathing; Lingering Potion of Invisibility; Lingering Potion of Luck
+|base=Splash Water Bottle; Mundane Splash Potion; Thick Splash Potion; Awkward Splash Potion; Splash Potion of Regeneration; Splash Potion of Swiftness; Splash Potion of Fire Resistance; Splash Potion of Poison; Splash Potion of Healing; Splash Potion of Night Vision; Splash Potion of Weakness; Splash Potion of Strength; Splash Potion of Slowness; Splash Potion of Leaping; Splash Potion of Harming; Splash Potion of Water Breathing; Splash Potion of Invisibility; Splash Potion of Luck
+}}
+|
+* 与原来的[[喷溅药水]]的状态效果相同。
+* 像喷溅药水一样抛出。
+** 撞击时会留下药水粒子。
+*** 进入粒子的实体将会获得状态效果。
+|-
+|{{ItemLink|Potion of Luck}}||
+只能在创造模式物品栏里获得。
+||
+* {{EffectLink|Luck}}（5:00）
+|-
+|{{ItemLink|Uncraftable potion}}||
+不能通过正常途径获得。
+||
+* 没有效果。
+|}
+
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+|延长版{{ItemLink|potion of Poison}}和延长版{{ItemLink|potion of Regeneration}}
+||
+* 减少了这些药水的持续时间。
+** 更改为1:30，以前是2:00。
+|-
+|{{ItemLink|Potion of Harming}}
+||
+* 伤害药水不再可以通过[[抗火药水]]获得。
+|-
+|{{ItemLink|Potion of Slowness}}
+||
+* 迟缓药水不再可以通过[[水肺药水]]获得。
+|-
+|{{ItemLink|Potion of Strength}}
+||
+* 力量药水更改为增加{{health|3}}点伤害，以前是增加130%伤害。
+|-
+|{{ItemLink|Potion of Weakness}}
+||
+* 移除了所有虚弱药水的配方，除了通过[[水瓶]]酿造的配方。
+* 虚弱药水更改为减少{{health|4}}点伤害，以前是减少0.5（{{hp|2|notag=1}}×{{frac|1|4}}）点伤害。
+|}
+
+== 结构 ==
+=== 新内容 ===
+{|class="wikitable"
+! 名称 !! 外观 !! 生成于 !! 包含 !! 描述
+|-
+|{{BiomeLink|id=end-barrens|link=末地#外岛|末地外岛}}||[[File:Small End Islands.png|278x278px]]||末地外岛可以生成于主岛的各个方向，间隔约1000个方块。||
+* {{BlockLink|End stone}}
+* {{BlockLink|Chorus plant}}
+* {{BlockLink|Chorus flower}}
+* {{EntityLink|Enderman}}
+||
+* 紫颂树和末地城在这里生成。
+|-
+|{{EnvLink|End gateway}}||[[File:End Midlands.png|278x278px]]||一个新的末地折跃门将会在每次[[末影龙]]死亡时生成在主岛的边缘附近。||
+* {{BlockLink|Bedrock}}
+* {{BlockLink|End gateway}}
+||
+* 是前往末地外岛的路径。
+* 最多可以生成20个折跃门。
+|-
+|{{EnvLink|Chorus tree}}||[[File:ChorusPlants.png|278x278px]]||紫颂树会在末地外岛生成。||
+* {{BlockLink|Chorus plant}}
+* {{BlockLink|Chorus flower}}
+||
+* 紫颂树由紫颂植株和紫颂花组成；紫颂花生成在每个枝端的顶部。
+* 将紫颂花种在末地石上将会种出紫颂树。
+|-
+|{{EnvLink|End city}}||[[File:End Highlands.png|278x278px]]||末地城会在末地外岛生成。||
+* {{BlockLink|End Stone Bricks}}
+* {{BlockLink|Purpur block}}
+* {{BlockLink|End rod}}
+* {{BlockLink|Magenta stained glass}}
+* {{BlockLink|id=chest|link=箱子战利品|战利品箱子}}
+* {{BlockLink|Ender chest}}
+* {{BlockLink|Ladder}}
+* {{EntityLink|Shulker}}
+||
+* 末地城是地牢似的结构，形似有分支的塔。
+|-
+|[[末地船]]||[[File:LonelyEndShip.png|278x278px]]||末地船有80%的概率随末地城一起生成。||
+* {{BlockLink|End Stone Bricks}}
+* {{BlockLink|Purpur block}}
+* {{BlockLink|End rod}}
+* {{BlockLink|Magenta stained glass}}
+* {{BlockLink|id=chest|link=箱子战利品|战利品箱子}}
+* {{BlockLink|Ender chest}}
+* {{BlockLink|Ladder}}
+* {{BlockLink|Obsidian}}
+* {{ItemLink|Brewing stand}}
+* {{ItemLink|Elytra}}
+* {{BlockLink|Dragon head}}
+* {{EntityLink|Shulker}}
+||
+* 末地船像是从一个码头驶出的样子。
+|-
+|{{EnvLink|Igloo}}||[[File:MountainIgloo.png|278x278px]][[File:Igloobasement.png|278x278px]]||雪屋在会在[[冰原]]和[[冷针叶林]]（不包括丘陵变种）随机生成。||
+* {{BlockLink|Snow}}
+* {{BlockLink|Ice}}
+* {{BlockLink|id=white-carpet|Carpet}}
+* {{BlockLink|Redstone torch}}
+* {{BlockLink|Furnace}}
+* {{BlockLink|Crafting table}}
+* {{BlockLink|id=red-bed|Bed}}
+* {{BlockLink|Oak trapdoor}}
+* {{BlockLink|Ladder}}
+* {{BlockLink|Torch}}
+* {{BlockLink|Stone bricks}}
+* {{BlockLink|id=chest|link=箱子战利品|战利品箱子}}
+** {{ItemLink|Golden apple}}
+* {{BlockLink|Brewing Stand}}
+** {{ItemLink|Splash potion of Weakness}}
+* {{BlockLink|Cauldron}}
+* {{ItemLink|id=oak-sign|Sign}}
+* {{BlockLink|Iron bars}}
+* {{EntityLink|Villager}}
+* {{EntityLink|Zombie villager}}
+||
+* 雪屋可以成为玩家的庇护所。
+* 部分雪屋会有石砖地下室。
+** 一个牧师村民和一个牧师僵尸村民将会生成在铁笼里。
+** 总是会生成喷溅型[[虚弱药水]]和[[金苹果]]，暗示玩家将僵尸村民转化为村民。
+|}
+
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+|所有[[结构]]||
+* 重新平衡了[[箱子战利品]]。
+|-
+|{{EnvLink|Obsidian pillar}}||
+* 黑曜石柱现在围绕着返回传送门呈圆形生成。
+* 一些较矮的黑曜石柱现在带着铁栏杆生成。
+|-
+|{{EnvLink|Exit portal}}||
+* 返回传送门现在会提前生成，但没有[[龙蛋]]和传送门方块。
+|-
+|{{EnvLink|Village}}||
+* 农田现在包含甜菜作物。
+|-
+|{{EnvLink|Witch hut}}||
+* 女巫小屋现在总是生成一个[[女巫]]。
+|}
+
+== 游戏内容 ==
+=== 新内容 ===
+{|class="wikitable"
+! 名称 !! 描述
+|-
+|{{EffectLink|id=weakness|攻击冷却}}||
+* 在切换物品或攻击后会显示一个计量器。
+* 攻击伤害现在取决于计量器有多满。在计量器填充时攻击会造成正常伤害的20%-100%。
+* {{EffectLink|Haste}}和{{EffectLink|Mining Fatigue}}将会分别使计量器填充地更快和更慢。
+|-
+|{{EnvLink|id=items|双持}}||
+* 玩家现在可以使用两只手通过左右键执行不同的动作。
+** 例如，如果有一个玩家主手拿着镐子且副手拿着火把，右键时将会放置火把。
+* 添加了称作副手槽的额外的物品栏槽位。
+* 按下{{key|F}}将会交换热键栏内被选择的物品和副手内的物品（没有物品也能交换）。
+* 副手槽在持有物品时会显示在热键栏的旁边（右手为主手的玩家将会显示在左边，反之亦然）。
+* 只有主手可以用于破坏方块或攻击。
+|-
+|{{ItemLink|id=elytra|滑翔}}||
+* 装备了鞘翅的玩家可以滑翔。
+* 玩家需要在半空中按下{{ctrl|跳跃}}键，之后鞘翅像昆虫翅膀一样展开且玩家进入滑翔状态。
+* 玩家可以转动他们的视野来转向或调整高度。降低高度会增加速度，且增加高度会降低速度。
+** 尝试太高的高度会减少玩家的升力。
+* 在滑翔时直接撞击任何表面将会造成与飞行速度成比例的伤害。
+|}
+
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+|{{ItemLink|id=book|成就|link=成就/Java版}}||
+* 君临天下
+** 描述由“合成一个附魔金苹果”更改为“吃下一个附魔金苹果”。
+|-
+|{{EffectLink|id=strength|伤害}}||
+* [[工具]] 造成的伤害被更改了：
+{{#invoke:Weapon info|infoTable}}
+{{notelist|dummy=1}}
+|-
+|{{ItemLink|id=fishing-rod|钓鱼}}||
+* [[海之眷顾]]和幸运效果现在又会影响钓鱼了，且两种效果会叠加。每点会为宝藏的权重增加2，鱼类和垃圾的权重分别降低1和2。
+|-
+|{{healthbar|2|18px|hardcore=1}} [[极限模式]]||
+* 现在玩家死亡后可以选择进入[[旁观模式]] 来观察世界，而不是删除世界。
+|-
+|[[平视显示器]]||
+* [[状态效果]]的图标现在会显示在HUD的右上角。
+** 这些图标会按照影响时间自右向左排列。
+** 正面状态效果会显示在顶行，而负面状态效果会显示在底行。
+** 即将消失的状态效果的图标会闪烁。
+|-
+|{{EffectLink|id=hunger|饥饿}}||
+* 当饱和度不为0且饥饿值为20时，生命值会恢复得更快。
+* 恢复生命现在更加消耗体力。
+|}
+
+== 魔咒 ==
+=== 新内容 ===
+{|class="wikitable"
+! 名称 !! 最高等级 !! 适用物品 !! 相容物品 !! 不兼容魔咒 !! 描述
+|-
+|[[冰霜行者]]||II||||{{ItemSprite|Diamond Boots|link=Boots}}||[[深海探索者]]||
+* 在地面上移动（不处于掉落、跳跃或飞行状态）时，以当前方块位置为圆心，等级+2半径的区域内所有暴露在空气下的静止的[[水]]方块将会变为[[霜冰]]。
+** 霜冰不能通过正常途径获得。
+** 霜冰在光源旁时会更快地融化，且融化时会显示被破坏时的纹理。
+|-
+|[[经验修补]]||I||||{{ItemSprite|Diamond Helmet|link=Helmet}}{{ItemSprite|Diamond Chestplate|link=Chestplate}}{{ItemSprite|Diamond Leggings|link=Leggings}}{{ItemSprite|Diamond Boots|link=Boots}}{{ItemSprite|Diamond Pickaxe|link=Pickaxe}}{{ItemSprite|Diamond Shovel|link=Shovel}}{{ItemSprite|Diamond Axe|link=Axe}}{{ItemSprite|Fishing Rod|link=Fishing Rod}}{{ItemSprite|Diamond Sword|link=Sword}}{{ItemSprite|Bow|link=Bow}}{{ItemSprite|Diamond Hoe|link=Hoe}}{{ItemSprite|Shears|link=Shears}}{{ItemSprite|Flint and Steel|link=Flint and Steel}}{{ItemSprite|Carrot on a Stick|link=Carrot on a Stick}}{{ItemSprite|Shield|link=Shield}}{{ItemSprite|Elytra|link=Elytra}}||||
+* 手持或装备（在主手、副手或盔甲栏里时）附有该魔咒的物品时，收集的[[经验球]]将不会添加至玩家的经验栏里，而是以每个经验修复2耐久的成本修复该物品。
+|}
+
+=== 更改 ===
+{|class="wikitable"
+! 名称 !! 更改
+|-
+|[[饵钓]]||
+* 饵钓魔咒不再影响获得物品的概率，只会影响时间。
+|-
+|[[保护]]||
+* 保护魔咒现在呈线型增加而非呈平方增加。
+|-
+|[[锋利]]||
+* 现在第一级增加{{Health|1}}伤害，之后每等级额外增加0.5（{{health|2|notag=1}}×0.25）伤害，而不是之前每等级增加1.25（{{health|2|notag=1}}×0.625）伤害。
+|-
+|[[精准采集]]||
+* 精准采集不再可以被附在[[剪刀]]上。
+|}
+
+== 其他 ==
+=== 新内容 ===
+{|class="wikitable"
+! 名称 !! 描述
+|-
+|[[字幕]]||
+* 字幕主要为听力障碍、失聪及关闭声音的玩家显示每个声音。它也可以用来听很轻的声音。
+** [[生物]]拥有独特的字幕，如“{{tr|苦力怕：嘶~|苦力怕嘶嘶聲}}”。
+** 当声音在屏幕外时会有“<”或“>”展现声音来源的方向。
+|}
+
+== 导航 ==
+{{Navbox guides|je}}
+
+[[en:Java Edition guides/Combat Update]]
+[[es:Guías de Java Edition/Combat Update]]
+[[ja:ガイド/Java Edition/コンバット・アップデート]]

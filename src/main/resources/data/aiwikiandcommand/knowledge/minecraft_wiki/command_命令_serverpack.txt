@@ -1,0 +1,66 @@
+# 页面: 命令/serverpack
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/serverpack
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}{{debug feature warning}}
+{{Infobox command
+|oplevel=2
+|others=仅[[wzh:集成开发环境|IDE]]或启用[[调试工具#DEV_COMMANDS|调试工具<code>MC_DEBUG_DEV_COMMANDS</code>]]
+}}
+
+管理服务端指定资源包。
+
+此命令只会发出资源包加载或卸载{{tr|数据包|封包}}，资源包能否加载或卸载成功取决于{{tr|数据包|封包}}是否有效和游戏是否可下载文件等多种因素。
+
+== 用法 ==
+{{see also|下载缓存目录}}
+<code>/serverpack push</code>子命令将要求客户端是否要使用指定的资源包。各参数的意义如下：
+
+* <code><url></code>：资源包URL。
+* <code><uuid></code>：资源包UUID。如果不存在，则使用UUIDv4算法使用资源包URL作为输入生成UUID。
+* <code><hash></code>：资源包的SHA-1散列值。如果不存在，则为空。
+
+资源包选择提示默认为空，是否必选默认为<code>false</code>，不受此命令的控制。
+
+== 语法 ==
+: <code>serverpack pop <uuid></code>
+:: 卸载服务端指定资源包。
+: <code>serverpack push <url> [<uuid>] [<hash>]</code>
+:: 加载服务端指定资源包。
+
+== 参数 ==
+{{argument|uuid|uuid}}
+: {{arg desc|je=uuid}}
+
+{{argument|url|string}}
+: {{arg desc|je=string|type=phrase}}
+
+{{argument|hash|string}}
+: {{arg desc|je=string|type=word}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|{{info needed}}|0|0}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.3|dev=pre1|加入了{{cmd|serverpack|link=none}}，仅在IDE中可用。}}
+|{{HistoryLine||1.21.9|dev=pre1|现在{{cmd|serverpack|link=none}}命令在启用[[调试工具#DEV_COMMANDS|调试工具<code>MC_DEBUG_DEV_COMMANDS</code>]]时可用。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/serverpack]]
+[[en:Commands/serverpack]]

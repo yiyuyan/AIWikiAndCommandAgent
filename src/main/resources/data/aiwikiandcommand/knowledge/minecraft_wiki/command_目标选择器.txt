@@ -1,0 +1,587 @@
+# 页面: 目标选择器
+# 来源: https://zh.minecraft.wiki/w/%E7%9B%AE%E6%A0%87%E9%80%89%E6%8B%A9%E5%99%A8
+# 分类: Java版独有信息, 使用计算器的页面, 命令, 基岩版独有信息, 教育版独有信息
+# 抓取时间: 2026-07-14 17:32:40
+# 原始 Wikitext 内容:
+
+{{relevant tutorial|目标选择器}}
+
+'''目标选择器（Target Selector）'''又名'''实体选择器（Entity Selector）'''，可在无需指定确切的玩家名称或UUID的情况下在[[命令]]中选择任意[[玩家]]与[[实体]]。目标选择器变量可以选择一个或多个实体，目标选择器参数可以根据特定条件筛选目标。
+
+请注意，Java版和基岩版的目标选择器有较大的区别，部分语法仅适用于两者之一。
+
+== 目标选择器变量 ==
+{| class="floatright wikitable" style="clear:none;margin-left:1em;"
+|+ 所有目标选择器变量汇总
+! 变量 !! 功能
+|-
+| <code>@p</code> || 距离最近的玩家
+|-
+| <code>@r</code> || 随机玩家
+|-
+| <code>@a</code> || 所有玩家
+|-
+| <code>@e</code> || 所有实体
+|-
+| <code>@s</code> || 命令的执行者
+|-
+| <code>@n</code> || 最近的实体
+|-
+| <code>@c</code> || {{only|for=自己的[[智能体]]|EE}}
+|-
+| <code>@v</code> || {{only|for=所有智能体|EE}}
+|-
+| <code>@initiator</code> || {{only|for=正在与[[NPC]]交互的玩家|BE|EE}}
+|}
+
+目标选择器变量用于指定待选目标的大致分类。共有9种变量：
+
+=== @p ===
+: <code>@p</code> — 选择最近的玩家。
+: 在服务器控制台中输入，默认基准点为[[世界出生点]]。若有多个最近的玩家，与基准点距离完全相同，会选择其中最晚进入服务器的玩家。
+: <code>type</code>参数不适用于<code>@p</code>。
+: {{in|be}}<code>@p</code>只选择活着的玩家。
+
+=== @r ===
+: <code>@r</code> — 选择一名随机玩家。
+: {{in|bedrock}}可通过<code>type</code>选择非玩家实体。{{in|java}}可通过<code>@e[sort=random,limit=1]</code>随机选择一个实体。
+: {{in|be}}<code>@r</code>只选择活着的实体。
+
+=== @a ===
+: <code>@a</code> — 选择所有玩家，无论死活。
+: <code>type</code>参数不适用于<code>@a</code>。
+
+=== @e ===
+: <code>@e</code> — 选择已加载区块中所有活着的实体（包含玩家）。
+: 无法选中濒死的实体。
+
+=== @s ===
+: <code>@s</code> — 只选择1个实体：该命令的执行者，无论是否濒死。
+:若命令执行者为命令方块或服务器控制台执行命令，则此选择器不会选中任何东西。
+
+=== @n ===
+: <code>@n</code> — 选择最近的一个实体。
+: 无法选中濒死的实体。
+
+=== @c ===
+{{exclusive|EE|section=1}}
+: <code>@c</code> — 选择自己的[[智能体]]。
+
+=== @v ===
+{{exclusive|EE|section=1}}
+: <code>@v</code> — 选择所有的智能体。
+:[[#目标选择器参数|目标选择器参数]]可以用于标记所有的智能体。例如，{{cmd|remove @v}}将移除所有的智能体。
+
+=== @initiator ===
+{{exclusive|BE|EE|section=1}}
+:<code>@initiator</code> — 选择当前与[[NPC]]交互的玩家。
+:对于NPC[[NPC#定制|内置的命令界面]]，有一个特有的选择器变量为<code>@initiator</code>，用于选择当前与该NPC进行交互（例如打开NPC对话框、使用NPC按钮和关闭NPC对话框）的玩家。如果该选择器用于外置命令，则不会报错，但不会选择任何玩家。
+
+== 目标选择器参数 ==
+{| class="floatright wikitable" style="clear:none;margin-left:1em;"
+|+ 目标选择器参数汇总
+! colspan="2" | 通过[[坐标]]
+|-
+! 参数 !! 选择标准
+|-
+| <code>x</code>, <code>y</code>, <code>z</code>
+| [[#原点|原点]]
+|-
+| {{only|for=<code>distance</code>|je}}<br>{{only|for=<code>r</code>、<code>rm</code>|be}}
+| [[#距离|距离]]
+|-
+| <code>dx</code>, <code>dy</code>, <code>dz</code>
+| [[#体积尺寸|体积尺寸]]
+|-
+! colspan="2" | 通过[[记分板]]参数
+|-
+! 参数 !! 选择标准
+|-
+| <code>scores</code>
+| [[#记分项分数|记分项分数]]
+|-
+| <code>tag</code>
+| [[#记分板标签|记分板标签]]
+|-
+| <code>team</code>{{only|je}}
+| [[#队伍名称|队伍名称]]
+|-
+! colspan="2" | 通过实体种类
+|-
+! 参数 !! 选择标准
+|-
+| <code>name</code>
+| [[#实体名称|实体名称]]
+|-
+| <code>type</code>
+| [[#实体类型|实体类型]]
+|-
+| <code>family</code>{{only|be}}
+| [[#族|族]]
+|-
+| <code>predicate</code>{{only|je}}
+| [[#谓词|谓词]]
+|-
+! colspan="2" | 通过实体数据
+|-
+! 参数 !! 选择标准
+|-
+| {{only|for=<code>x_rotation</code>|je}}<br>{{only|for=<code>rx</code>、<code>rxm</code>|be}}
+| [[#垂直旋转角度|垂直旋转角度]]
+|-
+| {{only|for=<code>y_rotation</code>|je}}<br>{{only|for=<code>ry</code>、<code>rym</code>|be}}
+| [[#水平旋转角度|水平旋转角度]]
+|-
+| <code>nbt</code>{{only|je}}
+| [[#实体的NBT标签|实体的NBT标签]]
+|-
+| <code>hasitem</code>{{only|be}}
+| [[#物品|物品]]
+|-
+| <code>has_property</code>{{only|be}}
+|[[#属性|实体属性]]
+|-
+! colspan="2" | 通过玩家数据
+|-
+! 参数 !! 选择标准
+|-
+| {{only|for=<code>level</code>|je}}<br>{{only|for=<code>l</code>、<code>lm</code>|be}}
+| [[#经验等级|经验等级]]
+|-
+| <code>gamemode</code>{{only|je}}<br><code>m</code>{{only|be}}
+| [[#游戏模式|游戏模式]]
+|-
+| <code>advancements</code>{{only|je}}
+| [[#进度|进度]]
+|-
+| <code>haspermission</code>{{only|be}}
+| [[#权限|权限]]
+|-
+! colspan="2" | 通过其他特性
+|-
+! 参数 !! 选择标准
+|-
+| {{only|for=<code>limit</code>、<code>sort</code>|je}}<br>{{only|for=<code>c</code>|be}}
+| [[#数量|数量]]
+|}
+
+在使用目标选择器之后，可以用参数限定所要选择的群组。当使用<code>@a</code>或<code>@e</code>时，参数会从全体目标中筛选出特定的少数目标作为待选目标。当使用<code>@p</code>或<code>@r</code>时，参数会从完整的待选列表中缩小范围，得到到被筛选后的待选列表。当使用<code>@s</code>时，命令执行者只有在所有参数都满足时才会被选择，否则命令将执行失败。
+
+在目标选择器变量之后附加键值对构成的逗号分隔，并包含在方括号中：
+
+: <code>-{}-@<''变量''>[<''参数''>=<''值''>,<''参数''>=<''值''>,…]</code>
+
+参数和值{{only|for=区分大小写|je}}，括号、等号和逗号旁可以有空格（目标选择器和第一个方括号之间除外）。键值对只能用逗号分隔。
+
+=== 原点 ===
+: <code>-{}-[x=<''值''>,y=<''值''>,z=<''值''>]</code> — 定义目标选择器的原点。
+
+: 这个位置将成为'''目标选择器原点'''（不修改命令执行位置），这意味着<code>@p</code>与<code>@n</code>所选择的目标可能发生改变。
+: 如果其中任意参数未定义，则默认使用[[命令/execute#at|命令执行位置]]的坐标。
+: {{IN|java}}如果定义了其中任意一个参数，则此目标选择器不能跨维度选择目标。
+: 可用于<code>distance</code>参数或<code>dx</code>、<code>dy</code>和<code>dz</code>参数，以平移选择范围。
+: 坐标可以是整数或像<code>12.34</code>这样的小数（具体为双精度浮点数）且不会进行中心校正（center-corrected），这意味着<code>x=0</code>不再自动更正为<code>x=0.5</code>。{{in|be}}[[坐标#相对坐标|波浪号]]可用于此参数。
+
+: 示例：
+:* <code>@p[x=0,y=0,z=0]</code> — 选择距离世界中心点最近的玩家。
+:* <code>@e[limit=3,sort=nearest,dx=10,dz=10]</code> — 在执行位置向东南方向延伸14.14米的范围内，选择距离最近的3个实体。{{only|je}}
+:* <code>@e[c=3,x=~10,z=~10]</code> — 从往东南方向延伸14.14米的位置开始，选择距离最近的3个实体。{{only|be}}
+
+=== 距离 ===
+<div style="float: right">[[File:The_distance_r_rm_Of_Entity_Selector.svg|thumb|绿色部分即距离参数形成的检测区域；蓝色部分为某实体的判定箱，红色圆点表示其脚部坐标。图中红色点位于绿色区域内，故可选中该实体|200px]]</div>
+
+: 距离选择器以原点参数为中心，根据到某点的[[欧几里得距离]]过滤目标，形成一个球形选择区。
+: <code>[distance=<''值''>]</code> — 球形选择区范围，只允许使用非负数，支持使用范围表示，以定义球形区域。{{only|je}}
+: <code>[r=''R'']</code> — 球形选择区最大半径，只选择所有小于等于R个方块的目标执行命令。{{only|be}}
+: <code>[rm=''RM'']</code> — 球形选择区最小半径，只选择所有大于等于RM个方块的目标执行命令。{{only|be}}
+
+: 如果原点参数未定义，则相对于命令执行的位置计算。注意，距离参数是一个空间参数，它不能跨维度选择目标。
+
+: 示例：
+:; Java版
+:* <code>@e[distance=10]</code> — 选择所有距离执行位置等于10个方块的实体。
+:* <code>@e[distance=10..12]</code> — 选择所有距离执行位置大于等于10，且小于等于12个方块的实体。
+:* <code>@e[distance=5..]</code> — 选择所有距离执行位置大于等于5个方块的实体。
+:* <code>@e[distance=..15]</code> — 选择所有距离执行位置小于等于15个方块的实体。
+:; 基岩版
+:* <code>@e[r=10.55]</code> — 选择所有距离执行位置小于10.55个方块的实体。
+:* <code>@e[rm=5]</code> — 选择所有距离执行位置大于等于5个方块的实体。
+:* <code>@e[rm=10,r=12]</code> — 选择所有距离执行位置大于等于10，且小于等于12个方块的实体。
+:* <code>@e[rm=0]</code> — 选择当前维度所有的实体。
+
+=== 体积尺寸 ===
+[[File:The dx dy dz Of Entity Selector.svg|thumb|绿色方块即dx dy dz所形成的检测区域，蓝色方块表示某实体的判定箱，紫色区域即它们的相交部分]]
+
+: <code>[dx=<''值''>,dy=<''值''>,dz=<''值''>]</code> — 在同一个维度内，选择实体判定箱与指定长方体相交的所有实体。如果没有指定原点参数<code>[x=<''值''>,y=<''值''>,z=<''值''>]</code>，则以命令的执行位置来计算所选长方体区域。这三个参数可以为负数和小数，且都不可以重复使用。
+: 取值范围：<code>dx</code>、<code>dy</code>、<code>dz</code>均在{{cd|double}}范围内。
+: 默认值：如果指定了<code>dx</code>，<code>dy</code>或<code>dz</code>的其中1个或2个，则剩余没有指定的参数默认为0。
+: 实际效果（假定无其他选择器参数）：
+:: 确定一个长方体区域（该长方体的三边均平行于X、Y、Z轴），选择实体判定箱与此长方体区域相交的所有实体。长方体区域由其顶点的最小坐标和最大坐标（互为对顶点）<ref>{{bug|MC-123441}}</ref><ref>{{bug|MCPE-174949|||Won't Fix}}</ref>来确定。简单来说，这个长方体区域是这样计算的：
+::* 获取执行坐标为<math>(x, y, z)</math>，获取<math>(x+dx, y+dy, z+dz)</math>，这两点可以确定一个长方体，其最小坐标点为<math>(\min(x, x+dx), \min(y, y+dy), \min(z, z+dz))</math>，最大坐标点为<math>(\max(x, x+dx), \max(y, y+dy), \max(z, z+dz))</math>。
+::* 之后，将该长方体的长宽高朝<math>+x</math>、<math>+y</math>、<math>+z</math>方向分别扩展一格，得到的长方体即为指定的长方体区域。
+:: 如果用公式表示，长方体两个坐标的计算公式如下：
+::* 最小坐标：<math>(\min(x, x+dx), \min(y, y+dy), \min(z, z+dz))</math>
+::* 最大坐标：<math>(\max(x, x+dx)+1, \max(y, y+dy)+1, \max(z, z+dz)+1)</math>
+::* 所选长方体在3个轴方向上的边长总是为：<math>\left|dx\right|+1</math>、<math>\left|dy\right|+1</math>、<math>\left|dz\right|+1</math>。
+
+: 示例：
+:* <code>@e[x=1,y=2,z=3,dx=4,dy=5,dz=6]</code> — 选择判定箱与区域(1, 2, 3)至(6, 8, 10)（或以数学表达式表示，范围是<math>\left\{(x, y, z) | x \in [1, 6), y \in [2, 8), z \in [3, 10)\right\}</math>）有重叠的所有实体。
+:* <code>@e[x=1,y=2,z=3,dx=0,dy=0,dz=0]</code> — 选择判定箱和方块坐标区域(1, 2, 3)至(2, 3, 4)有重叠的所有实体。
+:* <code>@e[x=0,y=0,z=0,dx=-1,dy=-2,dz=-3]</code> — 选择判定箱和方块坐标区域(1, 1, 1)至(-1, -2, -3)有重叠的所有实体。
+:* <code>@a[x=0,y=0,z=0,dx=-0.5,dy=0,dz=0.5]</code> — 选择判定箱和区域<math>\left\{(x, y, z) | x \in [-0.5, 1), y \in [0, 1), z \in [0, 1.5)\right\}</math>有重叠的所有玩家。
+:* <code>@s[y=320,dy=100]</code> — 该命令的X、Z坐标和命令执行坐标相同。如果执行者判定箱与世界最高点的方块上空101格内的区域相交，则选择该执行者。
+
+=== 记分项分数 ===
+{{see also|记分板#记分项|命令/scoreboard}}
+: <code>-{}-[scores={<''记分项''>=<''值''>,...}]</code> — 根据指定目标的分数过滤目标。
+
+: 所有的记分项都放在一个单独的标签中，并这个标签中分别列出分数选择器。此选择器支持使用范围，{{in|be}}还可使用不等号（=!）。
+
+: 示例：
+:* <code>@e[scores={myscore=10}]</code> — 选择所有记分项''myscore''分数为10的目标。
+:* <code>@e[scores={myscore=10..12}]</code> — 选择所有记分项''myscore''分数为10到12之间（包含）的目标。
+:* <code>@e[scores={myscore=5..}]</code> — 选择所有记分项''myscore''分数为5及以上的目标。
+:* <code>@e[scores={myscore=..15}]</code> — 选择所有记分项''myscore''分数为15及以下的目标。
+:* <code>@e[scores={myscore=!10}]</code> — 选择所有记分项''myscore''分数不为空（即存在），且不为10的目标。{{only|be}}
+:* <code>@e[scores={foo=10,bar=1..5}]</code> — 选择所有记分项''foo''分数为10，且记分项''bar''分数为1到5之间（包含）的目标。
+
+=== 记分板标签 ===
+{{see also|命令/tag}}
+取值范围：必须为由{{cd|-|+|.|_|A-Z|a-z|0-9|d=pretty}}字符组成的字符串。这是目标选择器参数的限制，记分板标签自身可以为任意字符组成的字符串，因而并非所有的记分板标签都可以被选中。
+: <code>-{}-[tag=<''标签名称''>]</code> — 选择所有有标签“''标签名称''”的目标。
+: <code>-{}-[tag=!<''标签名称''>]</code> — 选择所有没有标签“''标签名称''”的目标。
+: <code>[tag=]</code> — 选择所有没有标签的目标。
+: <code>[tag=!]</code> — 选择所有有标签的目标。
+
+: 允许使用多个参数。被选择的实体必须满足所有的参数条件。
+
+: 示例：
+:* <code>@e[tag=a,tag=b,tag=!c]</code> — 选择所有拥有标签a和b，但没有标签c的目标。
+:* <code>@r[tag=a]</code> — 选择一个有标签a的随机玩家。
+
+=== 队伍名称 ===
+{{see also|命令/team}}
+{{exclusive|java|section=1}}
+: <code>-{}-[team=<''某队伍''>]</code> — 选择所有属于队伍“''某队伍''”的目标。
+: <code>-{}-[team=!<''某队伍''>]</code> — 选择所有不属队伍“''某队伍''”的目标。
+: <code>[team=]</code> — 选择所有不属于任何队伍的目标。
+: <code>[team=!]</code> — 选择所有属于任意队伍的目标。
+
+: 示例：
+:* <code>@a[team=red]</code> — 选择所有属于red队伍的玩家。
+:* <code>@e[team=red,team=blue]</code>是非法的，因为一个实体只能加入一个队伍。
+
+=== 实体名称 ===
+: <code>-{}-[name=<''某名称''>]</code> — 选择所有名字为“''某名称''”的目标。
+: <code>-{}-[name=!<''某名称''>]</code> — 选择所有名字不为“''某名称''”的目标。
+
+: 这是一个字符串，包含空格时应当用双引号括起。不能为[[JSON]]格式的文本组件。
+
+: 示例：
+:* <code>@e[name=!Steve]</code> — 选择不叫“Steve”的目标。
+:* <code>@e[name=""]</code> — 选择所有没有名字的实体（例如：[[箭]]、[[下落的方块]]、未被命名的[[猪]]）。
+
+=== 实体类型 ===
+: <code>-{}-[type=<''实体类型''>]</code> — 选择所有特定的实体类型的目标。
+: <code>-{}-[type=!<''实体类型''>]</code> — 选择所有不是特定的实体类型的目标。
+
+: 实体类型必须使用有效的[[实体ID]]或{{only|for=[[Java版标签/实体类型|实体标签]]|je}}。如果实体ID的命名空间为<code>minecraft</code>则可以省略命名空间。{{in|je}}实体ID或标签区分大小写。
+: {{in|be}}当与<code>@r</code>一起使用时，原本用来选择玩家的命令也可以被用来选择其他实体。
+
+: 示例：
+:* <code>@e[type=minecart]</code> — 选择所有普通[[矿车]]。
+:* <code>@e[type=skeleton]</code> — 选择所有[[骷髅]]。
+:* <code>@e[type=!chicken,type=!cow]</code> — 选择所有除[[鸡]]和[[牛]]之外的目标。
+:* <code>@e[type=chicken,type=cow]</code> — 无效选择：选择所有既是鸡又是牛的目标（不存在）。
+:* <code>@e[type=#skeletons]</code> — 选择所有在标签<code>#skeletons</code>内的目标（骷髅、[[流浪者]]、[[凋灵骷髅]]、[[骷髅马]]、[[沼骸]]和[[焦骸]]）。{{only|je}}
+
+=== 族 ===
+{{see also|族}}
+{{exclusive|bedrock|section=1}}
+: <code>[family=<''族''>]</code> — 选择属于指定的族的实体。
+: <code>[family=!<''族''>]</code> — 选择不属于指定的族的实体。
+
+: 给定的实体的族可以是任何字符串，但不包括命名空间。这些实体的族在[[基岩版实体文档#minecraft:type_family|实体类型的族]]行为组件中定义，且单个实体可以属于多个族。
+: 原版行为包使用的默认值包括：
+:* 更广泛的大型族（例如<code>mob</code>、<code>inanimate</code>、<code>monster</code>、<code>undead</code>）
+:* 更具体的小型族（例如<code>zombie</code>、<code>skeleton</code>）
+:* 单个生物的族（例如<code>wandering_trader</code>、<code>enderman</code>、<code>creeper</code>）
+:* 与[[生成事件]]有挂钩的族（例如<code>farmer</code>、<code>baby_turtle</code>）
+
+: 示例：
+:* <code>@e[family=skeleton]</code> — 选择所有[[骷髅（消歧义）|骷髅及其变种]]和[[凋灵]]。
+:* <code>@e[family=mob,family=!monster]</code> — 选择所有不是[[敌对生物]]的[[生物]]（例如：会选中[[牛]]和[[猪]]，但不会选中[[僵尸]]和[[骷髅]]）。
+:* <code>@e[family=monster,family=undead]</code> — 选择所有是[[亡灵生物]]的敌对生物（例如：会选中僵尸和骷髅，但不会选中[[苦力怕]]和[[末影人]]）。
+:* <code>@e[family=pacified]</code> — 选择所有失去螫针的[[蜜蜂]]。
+
+=== 谓词 ===
+{{exclusive|java|section=1}}
+: <code>-{}-[predicate=<''命名空间ID''>]</code> — 选择所有匹配该[[谓词]]的目标。
+: <code>-{}-[predicate=!<''命名空间ID''>]</code> — 选定所有不匹配该谓词的目标。
+
+: 示例：
+:* <code>@a[predicate=example:test_predicate]</code> — 选择所有匹配谓词<samp>example:test_predicate</samp>的玩家。
+:* <code>@e[predicate=!minecraft-wiki:smart_entity]</code> — 选择所有不匹配谓词<samp>minecraft-wiki:smart_entity</samp>的实体。
+
+=== 垂直旋转角度 ===
+[[File:The_x_rotation_rxm_rx_Of_Entity_Selector.svg|thumb|500px|黄色空心箭头Z<sub>local</sub>代表当前实体朝向；如图绿色区域为rxm=-90,rx=90时（x_rotation=-90..90）所表示的角度范围。由于实体朝向处在绿色角度范围内，故可选中该实体]]
+
+: <code>[x_rotation=<''值''>]</code> — 根据指定目标的垂直旋转角度过滤目标。{{only|je}}
+: <code>[rx=''RX'']</code> — 垂直旋转角度最大值，仅选择所有垂直旋转角度小于''RX''的目标。{{only|be}}
+: <code>[rxm=''RXM'']</code> — 垂直旋转角度最小值，仅选择所有垂直旋转角度大于''RXM''的目标。{{only|be}}
+
+: 更具体地说，垂直旋转角度是旋转高度与地平线的夹角，以度为单位，正方向向脚下。垂直旋转值从-90（垂直向上）向上增加，之后增加到0（水平），最后增加到90（竖直向下）（因此垂直旋转值随着'''向下'''旋转而增加）。
+: {{in|je}}此选择器支持范围。
+
+: 示例：
+:; Java版
+:* <code>@e[x_rotation=0]</code> — 选择所有看向地平线的目标。
+:* <code>@e[x_rotation=30..60]</code> — 选择所有看向地平线偏下30°至60°（包含）的目标。
+:* <code>@e[x_rotation=45..]</code> — 选择所有看向地平线偏下45°及更低的目标。
+:* <code>@e[x_rotation=..0]</code> — 选择所有看向地平线偏上的目标。
+:; 基岩版
+:* <code>@e[rxm=45]</code> — 选择所有看向地平线偏下45°及更低的目标。
+:* <code>@e[rxm=-60,rx=60]</code> — 选择所有看向与地平线夹角在60°及以内的目标。
+
+=== 水平旋转角度 ===
+[[File:The_y_rotation_rym_ry_Of_Entity_Selector.svg|thumb|500px|黄色空心箭头Z<sub>local</sub>代表当前实体朝向，Z'代表实体朝向在XZ平面上的投影；绿色区域为rym=-45,ry=45时（y_rotation=-45..45）所表示的角度范围。由于Z'投影处在绿色角度范围内，故该实体可被选中]]
+
+: <code>[y_rotation=<''值''>]</code> — 根据指定目标的水平旋转角度过滤目标。{{only|je}}
+: <code>[ry=''RY'']</code> — 仅选择最大水平旋转为''RY''的目标。{{only|be}}
+: <code>[rym=''RYM'']</code> — 仅选择最小水平旋转为''RYM''的目标。{{only|be}}
+
+: 其角度以正南（或正Z轴方向）为基准顺时针旋转。水平旋转值从-180（面向正北）开始，到-90（面向正东），再到0（面向正南），再到90（面向正西），最后到180（再次面向正北）。
+: {{in|je}}此选择器支持范围。
+
+: 示例：
+:; Java版
+:* <code>@a[y_rotation=0]</code> — 选择所有看向正南的玩家。
+:* <code>@a[y_rotation=45]</code> — 选择所有看向南偏西45°的玩家。
+:* <code>@a[y_rotation=96]</code> — 选择所有看向西偏北6°的玩家。
+:* <code>@a[y_rotation=-90..0]</code> — 选择所有看向正东和正南之间（包含）的玩家。
+:* <code>@a[y_rotation=-90..90]</code> — 选择所有看向正东和正西之间（包含）的玩家，区域穿过正南。
+:* <code>@a[y_rotation=90..-90]</code> — 选择所有看向正东和正西之间（包含）的玩家，区域穿过正北。
+:* <code>@a[y_rotation=0..]</code> — 选择所有不看向南方（包含）和东方之间的玩家。
+:; 基岩版
+:* <code>@a[rym=0,ry=90]</code> — 选择所有看向正西和正南之间（包含）的玩家。
+:* <code>@a[rym=-135,ry=-135]</code> — 选择所有看向北偏东45°的玩家。
+:* <code>@a[ry=0]</code> — 选择所有看向正南和正北之间（包含）的玩家，区域穿过正东。
+
+=== 实体的NBT标签 ===
+{{exclusive|java|section=1}}
+: <code>[nbt=<''NBT''>]</code> — 选择具有指定NBT的所有目标。<code><''NBT''></code>应是一个遵守[[SNBT格式]]的复合标签，测试参见{{slink|NBT格式|测试NBT标签}}。
+
+: 示例：
+:* <code><nowiki>@a[nbt={SelectedItem:{id:"minecraft:diamond_sword"}}]</nowiki></code> — 选择所有手持钻石剑的玩家。
+:* <code>@e[type=sheep,nbt={Color:0b}]</code> — 选择所有白色的绵羊。
+:* <code>@e[type=item,nbt={Item:{id:"minecraft:slime_ball"}}]</code> — 选择所有黏液球物品实体。
+:* <code>@e[nbt={Tags:["a","b"]}]</code>与<code>@e[tag=a,tag=b]</code>的效果相同。后者更简单，且减少了CPU的负载。
+
+: 注意：当匹配字符串内的[[命名空间ID]]时，不得省略其命名空间。
+:: 因此<code>@e[type=item,nbt={Item:{id:"slime_ball"}}]</code>找不到任何东西，因为{{nbt|string|id}}字段始终包含一个[[命名空间ID#输出为字符串|已经被转换的命名空间ID字符串]]。
+
+=== 物品 ===
+{{exclusive|bedrock|section=1}}
+: <code>-{}-[hasitem={<''参数1''>=<''值1''>,<''参数2''>=<''值2''>,...}]</code> — 根据指定目标的物品栏过滤目标。
+: <code>-{}-[hasitem=[{<''参数A''>=<''值A''>,...},{<''参数B''>=<''值B''>,...}]]</code> — 选择所有物品栏满足项目A条件和项目B条件的目标。
+
+: 根据指定目标的物品栏是否满足条件过滤目标。<code>hasitem</code>参数在一个目标选择器中不能重复使用，但可以在参数中指定多个条件项目。
+: <code>hasitem</code>给定的值必须用<code>{}</code>框起来，如果条件项目多于一个则必须用<code>,</code>将各个项目隔开，并用<code>[]</code>框起来。
+: 条件项目中可以重复使用相同的参数，但后来添加的参数会覆盖掉之前的，所以它只会使用最后一个参数中的值。
+
+: 条件项目中所有可用参数：
+:* <code>item</code>
+::: 指定要检测的物品，此参数的值必须填入一个有效的[[基岩版数据值/物品ID|物品ID]]，或一个存在物品形态的有效的[[基岩版数据值/方块ID|方块ID]]。此参数为必要参数。如果未定义，命令将执行失败。
+:* <code>data</code>
+::: 可选，指定要检测的物品的[[基岩版数据值|数据值]]，此参数的值必须是<code>0</code>至<code>32767</code>之间（包含）的整数。如果填入的值无效，可能造成游戏崩溃，如果未定义，则默认为<code>0</code>。
+::: 目前不适用于方块类物品。对于方块类物品，<code>data</code>参数的值始终为默认值<code>0</code>，且搜索到的方块类物品的数据值也会自动转换为0。
+:* <code>quantity</code>
+::: 可选，限制范围内的所有槽位中符合条件的物品的总和数量，此参数支持使用范围及不等式（=!）。如果未定义，则默认为<code>1..</code>。
+::: 当此参数的值为<code>0</code>，则选择所有没有符合条件的物品的目标。当此参数的值为<code>0..</code>，则当前条件项目不做过滤。
+::: 物品栏中[[空气]]的数量始终是0个。
+:* <code>location</code>
+::: 可选，指定要检测的物品栏，此参数的值必须是一个有效的[[命令/replaceitem#参数|物品栏]]。如果未定义，则检测目标的所有物品栏。
+::: 即便指定目标没有指定的物品栏，当前条件项目仍然会对该目标进行过滤。这意味着如果<code>quantity</code>的值的范围包括<code>0</code>，该目标将被当前条件项目选中。
+:* <code>slot</code>
+::: 可选，使用时必须使用<code>location</code>参数，用于指定要检测的[[命令/replaceitem#参数|槽位]]范围，此参数支持使用范围及不等式（=!）。如果未定义则默认为<code>slot=0..</code>。
+
+: 示例：
+:* <code>@e[hasitem={item=apple}]</code> — 选择所有拥有苹果的实体。
+:* <code>@a[hasitem={item=stone,quantity=192,location=slot.hotbar,slot=0..2}]</code> — 选择所有工具栏前3格填满石头的玩家。
+:* <code>@a[hasitem=[{item=diamond,quantity=3..},{item=stick,quantity=2..}]]</code> — 选择所有同时拥有至少3颗钻石和2根木棍的玩家。
+
+=== 经验等级 ===
+: <code>[level=<''值''>]</code> — 根据指定目标的经验等级过滤目标，支持使用范围，这将自动过滤非玩家目标。{{only|je}}
+: <code>[l=''L'']</code> — 只选择所有经验等级低于''L''的目标（包含）。{{only|be}}
+: <code>[lm=''LM'']</code> — 只选择所有经验等级高于''LM''的目标（包含）。{{only|be}}
+
+: 示例：
+:; Java版
+:* <code>@a[level=5]</code> — 选择所有5级的玩家。
+:* <code>@a[level=5..15]</code> — 选择所有5级与15级之间（包含）的玩家。
+:* <code>@a[level=5..]</code> — 选择所有至少为5级的玩家。
+:* <code>@a[level=..15]</code> — 选择所有至多为15级的玩家。
+:; 基岩版
+:* <code>@a[lm=5,l=5]</code> — 选择所有5级的玩家。
+:* <code>@a[lm=5,l=15]</code> — 选择所有5级与15级之间（包含）的玩家。
+:* <code>@a[lm=5]</code> — 选择所有至少为5级的玩家。
+:* <code>@a[l=15]</code> — 选择所有至多为15级的玩家。
+
+=== 游戏模式 ===
+: <code>-{}-[gamemode=<''游戏模式''>]</code> — 选择所有处于指定[[游戏模式]]的目标。{{only|je}}
+: <code>-{}-[gamemode=!<''游戏模式''>]</code> — 选择所有不处于指定游戏模式的目标。{{only|je}}
+: <code>[m=''M'']</code> — 选择所有处于指定游戏模式的玩家。{{only|be}}
+: <code>[m=!''M'']</code> — 选择所有不处于指定游戏模式的玩家。{{only|be}}
+
+: 游戏模式的值可以为<code>spectator</code>、<code>adventure</code>、<code>creative</code>、<code>survival</code>和{{only|for=<code>default</code>|be}}。
+: 这将自动过滤非玩家目标。
+: {{in|BE}}''M''可以是全称，也可以是数字（0=生存模式，1=创造模式，2=冒险模式，5=默认模式）或缩写（s=生存模式，c=创造模式，a=冒险模式，d=默认模式）。
+
+: 示例：
+:* {{only|for=<code>@a[gamemode=survival]</code>|je}}或{{only|for=<code>@a[m=0]</code>、<code>@a[m=s]</code>或<code>@a[m=survival]</code>|be}} — 选择所有生存模式的玩家。
+:* {{only|for=<code>@a[gamemode=spectator]</code>|je}}或{{only|for=<code>@a[m=spectator]</code>|be}} — 选择所有旁观模式的玩家。
+:* {{only|for=<code>@a[gamemode=!survival,gamemode=!adventure]</code>|je}} — 选择所有既不是[[生存模式]]又不是[[冒险模式]]的[[玩家]]。
+
+=== 进度 ===
+{{exclusive|java|section=1}}
+: <code>[advancements={<''进度ID''>=<''值''>},...]</code> — 根据指定目标的指定[[进度]]是否达成过滤目标。
+: <code>[advancements={<''进度ID''>={<''准则名称''>=<''值''>,...},...]</code> — 根据指定目标的指定进度中的准则是否达成过滤目标。
+: <code><''值''></code>可以为<code>true</code>或<code>false</code>，代表此进度或准则是否达成。
+: 由于{{bug|MC-139908}}，含有部分字符（如<code>:</code>）的准则名称不能填入其中。
+
+: 示例：
+:* <code>@a[advancements={story/form_obsidian=true}]</code> — 选择所有已达成进度“冰桶挑战”的玩家。
+:* <code>@a[advancements={story/form_obsidian=false}]</code> — 选择所有未达成进度“冰桶挑战”的玩家。
+:* <code>@a[advancements={story/obtain_armor={iron_helmet=true}}]</code> — 选择所有已达成进度“整装上阵”中<code>iron_helmet</code>准则的玩家。即物品栏中'''曾'''存在过[[铁头盔]]的玩家，实际选择到的玩家的物品栏中不一定存在铁头盔。
+:* <code>@a[advancements={story/follow_ender_eye=true}]</code> — 选择所有已达成进度“隔墙有眼”的玩家。其与<code>@a[advancements={story/follow_ender_eye={in_stronghold=true}}]</code>的效果相同，因为此进度中只有<code>in_stronghold</code>这一个准则。
+
+=== 权限===
+{{Exclusive|bedrock|section=1}}
+: <code>-{}-[haspermission={<''权限''>=<''状态''>,...}]</code> — 根据指定目标的权限（可通过{{cmd|inputpermission}}命令修改）过滤目标。这将自动过滤非玩家目标。
+
+: 示例：
+:*<code>@a[haspermission={camera=enabled}]</code> — 选择已启用相机视角权限的玩家。
+:*<code>@a[haspermission={movement=disabled}]</code> — 选择已禁用移动权限的玩家。
+:*<code>@a[haspermission={camera=disabled,movement=enabled}]</code> — 选择已禁用相机视角权限且启用移动权限的玩家。
+
+=== 数量 ===
+: <code>[limit=<''值''>]</code> — 仅选择指定数量的目标。{{only|je}}
+: <code>[c=<''值''>]</code> — 选择指定数量的目标，并以距离命令执行点的顺序排列。{{only|be}}
+
+: 当使用<code>@p</code>、<code>@r</code>或<code>@n</code>变量时，此参数默认为1。对它们使用{{only|for=<code>limit</code>|je}}或{{only|for=<code>c</code>|be}}参数时会增加选择最近或随机目标的数量。当使用<code>@a</code>或<code>@e</code>变量时，此参数会限制目标数量。
+: 当满足条件的目标少于指定的数量时，不影响命令的执行。
+: 注意，数量参数与[[#距离|距离参数]]和[[#体积尺寸|体积尺寸参数]]不同，数量参数可以跨维度选择目标。
+: {{in|be}}当输入的值为负值时，目标的顺序会被反转。举例来说，<code>@p[c=-3]</code> 会回传3个''最远的''目标，而且，如果所有目标距离都一样远，<code>@e[c=-3]</code> 会选择3个刚加载/生成的目标。
+
+: <code>[limit=<''值''>,sort=(nearest|furthest|random|arbitrary)]</code> — 选择指定数量的目标，并指定优先级。{{only|je}}
+:* <code>sort=nearest</code> — 将目标由近到远排序。（<code>@p</code>和<code>@n</code>的默认排序方式）
+:* <code>sort=furthest</code> — 将目标由远到近排序。
+:* <code>sort=random</code> — 将目标随机排序。（<code>@r</code>的默认排序方式）
+:* <code>sort=arbitrary</code> — 将目标按生成时间由远到近排序。（<code>@a</code>和<code>@e</code>的默认排序方式）
+
+: 示例：
+:; Java版
+:* <code>@p[limit=3]</code> — 选择距离最近的3名玩家。
+:* <code>@a[limit=4,sort=furthest]</code> — 选择距离最远的4名玩家。
+:* <code>@r[limit=2]</code> — 随机选择2名玩家。
+:; 基岩版
+:* <code>@p[c=3]</code> — 选择距离最近的3名玩家。
+:* <code>@p[c=-4]</code> — 选择距离最远的4名玩家。
+:* <code>@r[c=2]</code> — 随机选择2名玩家。
+
+=== 属性 ===
+{{exclusive|bedrock|section=1}}
+{{see also|属性}}
+: <code>-{}-[has_property={<''参数''>=<''条件''>,...}]</code> — 根据实体属性规定的条件过滤目标。
+
+: 实体属性是行为包的实体定义文件中为实体所定义的数据字段。在某个实体上定义单个实体属性时，该实体类型的每个实体都将具有该属性，且实体对自身属性值的修改不会影响其他同类实体的同一个属性值。<ref>https://learn.microsoft.com/en-us/minecraft/creator/documents/introductiontoentityproperties?view=minecraft-bedrock-experimental</ref>
+
+: <code>has_property</code>支持的语法：
+:* <code>-{}-[has_property={property=<''属性名''>,...}]</code> — 选择实体属性中存在<code>-{}-<''属性名''></code>的目标。
+:* <code>-{}-[has_property={property=!<''属性名''>,...}]</code> — 选择实体属性中不存在<code>-{}-<''属性名''></code>的目标。
+:* <code>-{}-[has_property={<''属性名''>=<''值''>,...}]</code> — 选择实体属性中<code>-{}-<''属性名''></code>为<code><''值''></code>的目标。<code><''值''></code>可以为布尔值、范围、浮点数、首尾带有双引号的字符串。
+::: 注意：<code><''值''></code>的数据类型必须与实体属性的数据类型一致，否则实体不会被选中。例如，<code>[has_property={minecraft:abc=1.0}]</code>不会选中<code>minecraft:abc</code>属性值为整数1的实体。
+
+: 示例：
+:*<code>@e[has_property={property=minecraft:has_nectar}]</code> — 选择存在<code>minecraft:has_nectar</code>属性的实体。
+:*<code>@e[has_property={property=!minecraft:is_rolled_up}]</code> — 选择不存在<code>minecraft:is_rolled_up</code>属性的实体。
+:*<code>@e[has_property={minecraft:is_rolled_up=true}]</code> — 选择<code>minecraft:is_rolled_up</code>属性值为<code>true</code>的实体。
+:*<code>@e[has_property={minecraft:is_rolled_up=10..}]</code> — 选择<code>minecraft:is_rolled_up</code>属性值在<code>10..</code>范围内的实体。
+:*<code>@e[has_property={minecraft:is_rolled_up="abc"}]</code> — 选择<code>minecraft:is_rolled_up</code>属性值为字符串<code>abc</code>的实体。
+
+== 互动式编辑器 ==
+{{Calculator|targetSelector}}
+
+== 命令参数限制 ==
+=== 必须为玩家类型 ===
+某些命令参数要求选择器必须仅能选择玩家而不选其他实体类型。
+
+受到此限制的选择器须符合以下条件之一：
+* 变量为<code>@e</code>，且包含参数<code>type=player</code>
+* 变量为{{cd|@a|@p|@r|d=、|fd=或}}，且不包含<code>type</code>参数或<code>type</code>参数为<code>type=player</code>
+若命令参数要求选择器必须为玩家类型，但输入的不符合条件，{{in|je}}命令将无法解析；{{in|be}}命令可以解析，但执行失败。
+
+=== 必须单一数量 ===
+{{exclusive|java|section=1}}
+某些命令参数要求选择器只允许选择单一实体。此限制可以与必须为玩家类型同时出现。
+
+受到此限制的选择器须符合以下条件之一：
+* 变量为{{cd|@a|@e|d=、|fd=或}}，且包含<code>limit=1</code>参数
+* 变量为<code>@s</code>，且不包含<code>limit</code>参数
+* 变量为{{cd|@p|@r|@n|d=、|fd=或}}，且不包含<code>limit</code>参数或<code>limit</code>参数为<code>limit=1</code>
+若命令参数要求选择器必须为单一数量，但输入的不符合条件，命令将无法解析。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了目标选择器。}}
+|{{HistoryLine||1.8|dev=14w02a|加入了目标选择器<code>@e</code>。}}
+|{{HistoryLine|||dev=14w03a|目标选择器加入了<code>dx</code>、<code>dy</code>和<code>dz</code>参数。}}
+|{{HistoryLine||1.9|dev=16w02a|目标选择器参数<code>m</code>接受游戏模式的全称及其缩写，如<code>a</code>和<code>adventure</code>，且可以将其反选，如<code>@a[m{{=}}!a]</code>。}}
+|{{HistoryLine||1.11|dev=16w38a|移除了隐式目标选择器参数（如<code>@e[167,28,454,5]</code>现在必须写成<code>@e<nowiki>[x=167,y=28,z=454,r=5]</nowiki></code>）。
+|无效的目标选择器（如<code>@e[Type{{=}}creeper]</code>、<code>@e[asdf{{=}}nonexistent]</code>和<code>@e[malformed]</code>）现在会产生错误，而不再被静默忽略。}}
+|{{HistoryLine||1.12|dev=17w16b|加入了目标选择器<code>@s</code>，用于选择命令执行者。}}
+|{{HistoryLine||1.13|dev=17w45a|在目标选择器中加入了<code>nbt</code>。
+|对目标选择器参数进行了大幅度修改。}}
+|{{HistoryLine||1.15|dev=19w38a|加入了目标选择器参数<code>predicate</code>。}}
+|{{HistoryLine||1.21|dev=24w21a|加入了目标选择器<code>@n</code>。}}
+|{{HistoryLine|||dev=pre1|现在<code>@n</code>不再能够选中濒死的实体。}}
+|{{HistoryLine||1.21.5|dev=25w05a|<code>team</code>選擇器現在可以選中非生物實體。<ref>{{bug|MC-108495|||Fixed}}</ref>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了命令功能以及目标选择器。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了目标选择器<code>@s</code>。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.55|加入了目标选择器参数<code>family</code>。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.22|加入了目标选择器<code>@initiator</code>。}}
+|{{HistoryLine||1.18.30|dev=1.18.20.21|加入了目标选择器参数<code>hasitem</code>。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.21|{{cd|d=pretty|dx|dy|dz}}目标选择器参数现在会选择判定箱与体积方框相重叠的所有实体，而不是脚部坐标与体积方框相重叠的实体。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|加入了目标选择器参数<code>haspermission</code>。}}
+|{{HistoryLine||1.20.70|dev=1.20.70.21|加入了目标选择器参数<code>has_property</code>。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.21|加入了目标选择器<code>@n</code>。}}
+}}
+
+== 参见 ==
+* [[命令]]
+* [[实体数据格式]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl]]
+[[en:Target selectors]]
+[[es:Comandos]]
+[[fr:Commandes]]
+[[hu:Szerverparancsok]]
+[[it:Comandi]]
+[[ja:コマンド]]
+[[ko:명령어]]
+[[nl:Opdrachten]]
+[[pl:Polecenia]]
+[[pt:Comandos]]
+[[ru:Команды консоли]]
+[[th:คำสั่ง]]
+[[tr:Komutlar]]
+[[uk:Команди консолі]]

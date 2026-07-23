@@ -1,0 +1,120 @@
+# 页面: 命令/experience
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/experience
+# 分类: Java版独有信息, 命令, 基岩版独有信息
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{about|命令|玩家在战斗和生产活动中获得的可消耗资源|经验}}
+{{Infobox command
+|name=experience<small>（{{el|je}}）</small>
+|oplevel=2
+|alias={{cmd|xp}}
+}}
+{{Infobox command
+|name=xp<small>（{{el|be}}）</small>
+|oplevel=1
+|cheat=1
+}}
+
+给予玩家[[经验]]。
+
+== 语法 ==
+* '''Java版'''
+: <code>experience add <targets> <amount> [levels|points]</code>
+:: 增加或减少玩家的经验值或经验等级。
+::* 若增加或减少经验值，则会计入玩家的[[经验#分数|分数]]。
+::* 若增加或减少经验等级，则不会计入玩家的分数。当前经验条中的经验值按比例缩放，保持经验条的进度不变。
+: <code>experience set <targets> <amount> [levels|points]</code>
+:: 设置玩家的经验值或经验等级，不会改变玩家的分数。
+::* 若设置经验值，则不会改变经验等级，若指定的经验值大于等于一玩家当前经验条的剩余容量，则无法设置该玩家的经验值。
+::* 若设置经验等级，则当前经验条中的经验值按比例缩放，保持经验条的进度不变。
+: <code>experience query <targets> (levels|points)</code>
+:: 查询玩家的经验等级或当前经验条中的经验值。
+
+* '''基岩版'''
+: <code>xp <amount: int> [player: target]</code>
+:: 增加玩家的经验值。
+: <code>xp <amount: int>L [player: target]</code>
+:: 增加或减少玩家的经验等级。当前经验条中的经验值按比例缩放，保持经验条的进度不变。
+
+== 参数 ==
+{{el|je|short=1}}：{{argument|amount|integer}}（仅<code>add</code>模式下）
+: 指定要给予玩家的经验值或经验等级的数量。负数表示移除玩家的经验。
+: {{arg desc|je=integer}}
+
+{{el|je|short=1}}：{{argument|amount|integer}}（仅<code>set</code>模式下）
+: 指定要设置成的经验值数量或经验等级。
+: {{arg desc|je=integer|min=0}}
+
+{{el|be|short=1}}：{{argument|be=1|amount: int|int}}
+: 指定要给予玩家的经验值或经验等级的数量。
+: 如果在后面加上<code>L</code>，则会给予或移除指定数量的经验等级，否则给予或移除经验值。负数表示移除玩家的经验。
+: {{arg desc|be=int}}如果是经验值（没有<code>L</code>后缀），则应大于零0。
+
+{{el|je|short=1}}：{{argument|targets|entity}}（在<code>add</code>和<code>set</code>模式下）<br>
+{{el|be|short=1}}：{{argument|be=1|player: target|CommandSelector<Player>}}
+: 指定命令作用的目标实体。{{IN|bedrock}}若未指定，默认为命令执行者。
+: {{arg desc|je=entity|amount=multiple|type=players|be=player}}
+
+{{el|je|short=1}}：{{argument|targets|entity}}（<code>query</code>模式）
+: 指定要查询的目标实体。
+: {{arg desc|je=entity|amount=single|type=players}}
+
+{{el|je|short=1}}: {{cd|levels{{!}}points}}
+: 指定命令将影响获取经验等级还是经验值。<code>levels</code>表示经验等级，<code>points</code>表示经验值。
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|unparseable|unparseable}}
+{{Result table|cmd=/... add ...<br>/... set ...|<code><targets></code>未能选中在线玩家|fail|N/A}}
+{{Result table|cmd=/... query ...|<code><targets></code>未能选中在线玩家}}
+{{Result table|cmd=/... set ...|<code><amount></code>大于等于所有指定玩家的当前经验条的剩余容量}}
+{{Result table|cmd=|<code>player: target</code>未能选中在线玩家|N/A|fail}}
+{{Result table|未指定<code>player: target</code>，且命令执行者不是玩家}}
+{{Result table|<code>player: target</code>是[[目标选择器#命令参数限制|非玩家类型]]的目标选择器}}
+{{Result table|<code>amount: int</code>后无{{cd|L}}且小于0}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|失败|0|0|0}}
+{{Output table|cmd=/... query ...|成功|1|1|玩家拥有的经验值或经验等级}}
+{{Output table|cmd=/... add ...<br>/... set ...|成功|1|1|目标玩家的个数}}
+{{Output table|cmd=|edition=be|失败|0}}
+{{Output table|成功|给予或移除经验的玩家数量}}
+{{Output table}}
+
+== 示例 ==
+* 显示Steve当前的经验等级：<code>experience query Steve levels</code>{{only|je}}
+* 为自己增加7点经验值：<code>experience add @s 7</code>{{only|je}}或<code>xp 7</code>{{only|be}}
+* 将Alice的等级提升3级：<code>experience add Alice 3 levels</code>{{only|je}}或<code>xp 3L Alice</code>{{only|be}}
+* 将所有玩家的等级归零：<code>experience set @a 0</code>{{only|je}}或<code>experience set @a 0 levels</code>{{only|je}}或<code>xp -2147483648L @a</code>{{only|be}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre5|加入了{{cmd|xp|link=none}}。}}
+|{{HistoryLine||1.3.1|dev=12w16a|{{cmd|xp|link=none}}命令现在能在单人游戏中使用。
+|更改了语法，现在是等级参数在前，玩家参数在后，并且玩家参数是可选的。}}
+|{{HistoryLine||1.4.2|dev=12w39a|加入了<code>L</code>符号。等级可以减少，但经验值不可以且会报错“不能给予玩家负数值的经验”。 
+|{{cmd|xp|link=none}}的上限现在为2,147,483,647（2<sup>31</sup>&minus;1）而不是5000。}}
+|{{HistoryLine||1.13|dev=17w45a|加入了{{cmd|experience|link=none}}并且{{cmd|xp|link=none}}变成了简称。
+|语法被重构为{{cmd|experience add|link=none}}、{{cmd|experience set|link=none}}和{{cmd|experience query|link=none}}。
+|现在支持负数值。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|xp|link=none}}。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/experience]]
+[[en:Commands/xp]]
+[[es:Comandos/xp]]
+[[fr:Commandes/xp]]
+[[ja:コマンド/experience]]
+[[pt:Comandos/xp]]
+[[ru:Команды консоли/experience]]
+[[th:คำสั่ง/experience]]
+[[uk:Команди консолі/xp]]

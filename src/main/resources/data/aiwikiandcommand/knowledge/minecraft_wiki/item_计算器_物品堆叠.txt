@@ -1,0 +1,50 @@
+# 页面: 计算器/物品堆叠
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%A1%E7%AE%97%E5%99%A8/%E7%89%A9%E5%93%81%E5%A0%86%E5%8F%A0
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+该工具可以计算一定数量的[[物品]]是多少组、以及可以填满多少个容器。
+
+<onlyinclude>{| class="wikitable calculator-container"
+! 最大堆叠
+| {{Simplecalc|type=radio|id=size1|name=maxStackSize}} {{Simplecalc label|1|for=size1}} {{Simplecalc|type=radio|id=size16|name=maxStackSize}} {{Simplecalc label|16|for=size16}} {{Simplecalc|type=radio|id=size64|name=maxStackSize|default=1}} {{Simplecalc label|64|for=size64}}{{Simplecalc|type=hidden|id=size|formula=size1*1+size16*16+size64*64|default=64}} 
+|-
+! 物品数
+| {{Simplecalc|id=items|min=0|size=7|default=0}}
+|-
+! 组数
+| {{Simplecalc|type=plain|id=stacks|formula=items/size|decimals=2|default=0}}（{{Simplecalc|type=plain|formula=floor(stacks)|default=0}}组+{{Simplecalc|type=plain|formula=items%size|default=0}}个）
+|-
+! [[箱子]]及其变种/[[运输矿车]]/[[运输船]]/[[木桶]]/[[潜影盒]]数
+| {{Simplecalc|type=plain|id=chestful|formula=stacks/27|decimals=2|default=0}}（{{Simplecalc|type=plain|formula=floor(chestful)|default=0}}箱+{{Simplecalc|type=plain|formula=floor(stacks%27)|default=0}}组+{{Simplecalc|type=plain|formula=items%size|default=0}}个）
+|-
+! 大型箱子/大型陷阱箱/大型铜箱子数
+| {{Simplecalc|type=plain|id=big_chestful|formula=stacks/54|decimals=2|default=0}}（{{Simplecalc|type=plain|formula=floor(big_chestful)|default=0}}大箱+{{Simplecalc|type=plain|formula=floor(stacks%54)|default=0}}组+{{Simplecalc|type=plain|formula=items%size|default=0}}个）
+|-
+! [[发射器]]/[[投掷器]]/[[合成器]]数
+| {{Simplecalc|type=plain|id=dispensers|formula=stacks/9|decimals=2|default=0}}（{{Simplecalc|type=plain|formula=floor(dispensers)|default=0}}台+{{Simplecalc|type=plain|formula=floor(stacks%9)|default=0}}组+{{Simplecalc|type=plain|formula=items%size|default=0}}个）
+|-
+! [[漏斗]]/[[漏斗矿车]]数
+| {{Simplecalc|type=plain|id=hopper|formula=stacks/5|decimals=2|default=0}}（{{Simplecalc|type=plain|formula=floor(hopper)|default=0}}斗+{{Simplecalc|type=plain|formula=floor(stacks%5)|default=0}}组+{{Simplecalc|type=plain|formula=items%size|default=0}}个）
+|-
+! [[物品栏]]数（不计入副手）
+| {{Simplecalc|type=plain|id=Inventory|formula=stacks/36|decimals=2|default=0}}（{{Simplecalc|type=plain|formula=floor(Inventory)|default=0}}栏+{{Simplecalc|type=plain|formula=floor(stacks%36)|default=0}}组+{{Simplecalc|type=plain|formula=items%size|default=0}}个）
+|-
+! 装满潜影盒的箱子（箱盒）数
+| {{Simplecalc|type=plain|id=csb<!--Chest of Shulker Box-->|formula=stacks/729|decimals=2|default=0}}（{{Simplecalc|type=plain|formula=floor(csb)|default=0}}箱盒+{{Simplecalc|type=plain|formula=floor(stacks%27)|default=0}}盒+{{Simplecalc|type=plain|formula=floor(stacks%729)|default=0}}组+{{Simplecalc|type=plain|formula=items%size|default=0}}个）
+|}
+</onlyinclude>
+
+== 导航 ==
+{{Navbox calculators}}
+
+[[en:Calculators/Item stack]]
+[[fr:Calculateurs/Pile d'objets]]
+[[ja:計算機/スタック数]]
+[[ko:계산기/아이템 수량]]
+[[lzh:算械/疊物之數]]
+[[pt:Calculadoras/Pilha de itens]]
+[[ru:Калькуляторы/Стопка предметов]]
+[[th:เครื่องคำนวณ/กองไอเทม]]
+[[uk:Калькулятори/Стіс предметів]]

@@ -1,0 +1,507 @@
+# 页面: 战利品上下文
+# 来源: https://zh.minecraft.wiki/w/%E6%88%98%E5%88%A9%E5%93%81%E4%B8%8A%E4%B8%8B%E6%96%87
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有特性
+# 抓取时间: 2026-07-14 17:26:17
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''战利品上下文（Loot Context）'''是一些用于[[战利品表]]、[[谓词]]、[[物品修饰器]]以及数值提供器等的参数构成的集合。尽管名为战利品上下文，但游戏也会在战利品表以外的系统使用战利品上下文，例如[[进度定义格式|进度]]、[[魔咒定义格式|魔咒]]和[[命令]]等。
+
+{{TOC|right}}
+
+== 参数 ==
+战利品上下文中总共含有15{{until|je 26.3}}/16{{upcoming|je 26.3}}种参数，这些参数根据战利品上下文类型的不同可能不存在：
+{{loot context
+|this_entity=default
+|interacting_entity=default
+|target_entity=default
+|last_damage_player=default
+|attacking_entity=default
+|direct_attacking_entity=default
+|block_state=default
+|block_entity=default
+|damage_source=default
+|explosion_radius=default
+|origin=default
+|tool=default
+|enchantment_active=default
+|enchantment_level=default
+}}
+* <code>additional_cost_component_allowed</code>
+* <code>container</code>{{upcoming|je 26.3}}：方块实体或实体等'''槽位提供者'''
+
+游戏在谓词和物品修饰器等场合也需要从战利品上下文引用参数，但这些参数的名称可能和战利品上下文的参数名称不同：
+* '''{{vanchor|实体目标}}'''
+** <code>this</code>：引用战利品上下文参数<code>this_entity</code>。
+** <code>target_entity</code>：引用战利品上下文参数<code>target_entity</code>。
+** <code>interacting_entity</code>：引用战利品上下文参数<code>interacting_entity</code>。
+** <code>attacking_player</code>：引用战利品上下文参数<code>last_damage_player</code>。
+** <code>attacker</code>：引用战利品上下文参数<code>attacking_entity</code>。
+** <code>direct_attacker</code>：引用战利品上下文参数<code>direct_attacking_entity</code>。
+* '''{{vanchor|物品堆叠目标}}'''
+** <code>tool</code>：引用战利品上下文参数<code>tool</code>。
+* '''{{vanchor|方块实体目标}}'''
+** <code>block_entity</code>：引用战利品上下文参数<code>block_entity</code>。
+
+除上述参数外，战利品上下文也控制了战利品表中幸运值的来源和计算，详见{{slink|战利品表|随机池}}。
+
+== 参数集 ==
+游戏会在不同的场合使用不同的战利品上下文参数集。由于不同的战利品上下文可能具有不同的参数，故战利品上下文可以用于判定是否使用了此战利品上下文不提供的战利品上下文参数。这使得数据包在加载阶段就可以检查完相关参数，而非在运行时。
+
+对于数据包中的战利品表，游戏将使用其{{nbt|string|type}}字段来检查此战利品表使用的上下文参数。如果战利品表用于特定上下文，则指定类型字段允许游戏检查战利品表文件是否使用了该上下文中不会提供的参数，而无需在游戏中实际应用它们。
+
+对于非战利品表系统，其验证使用的战利品上下文参数集是硬编码的。
+
+下列是游戏内所有的战利品上下文参数集，以及他们提供的参数和使用情况：
+
+=== 用于战利品表 ===
+==== empty ====
+; 空参数集。
+: '''提供'''的上下文参数：
+:* 无。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 在战利品表中指定为{{cd|"type":"empty"}}表示在此战利品表中无法使用任何战利品上下文参数。
+: 使用情境：
+:* 试炼刷怪笼生成奖励物品时。
+:* 不祥试炼刷怪笼生成不祥之物生成器内的物品时。
+
+==== generic ====
+; 通用参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=、|this_entity|last_damage_player|attacking_entity|direct_attacking_entity|block_entity|block_state|damage_source|explosion_radius|origin|tool|additional_cost_component_allowed}}和<code>container</code>{{upcoming|je 26.3}}。
+:* {{cd|d=pretty|origin|container}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 在战利品表中指定为{{cd|"type":"generic"}}表示在此战利品表中可以使用除<code>additional_cost_component_allowed</code>外战利品表系统使用的所有上下文参数（不包括<code>target_entity</code>和<code>interacting_entity</code>）。
+: 使用情境：
+:* 游戏验证未指定战利品上下文参数集的战利品表时。
+
+==== advancement_reward ====
+; 进度奖励参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|origin}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 玩家获得[[进度定义格式|进度奖励]]时。
+:** <code>this_entity</code>：完成进度的玩家。
+:** <code>origin</code>：玩家获得进度的位置。
+
+==== archaeology ====
+; 考古战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|origin|tool}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 刷扫已设置战利品表的[[可疑的方块]]时。
+:** <code>this_entity</code>：刷扫方块的实体。
+:** <code>origin</code>：可疑的方块的中心位置。
+:** <code>tool</code>：扫刷可疑的方块的刷子工具。
+
+==== barter ====
+; 以物易物战利品参数集。
+: '''提供'''的上下文参数：
+:* <code>this_entity</code>。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 与猪灵[[以物易物]]时。
+:** <code>this_entity</code>：与玩家交易的猪灵。
+
+==== block ====
+; 方块战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|block_state|origin|tool}}。
+: '''可能提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|block_entity|explosion_radius}}。
+: 使用情境：
+:* 方块被破坏时。
+:** <code>this_entity</code>：破坏方块的玩家。若方块被爆炸破坏，则为引起爆炸的实体。
+:** <code>block_entity</code>：若为方块实体，则为此方块实体。
+:** <code>block_state</code>：被破坏方块的方块状态。
+:** <code>explosion_radius</code>：若方块被爆炸破坏，且导致方块爆炸的爆炸对应的游戏规则允许此爆炸概率不掉落掉落物，则为爆炸半径。
+:** <code>origin</code>：被破坏的方块的中心。
+:** <code>tool</code>：破坏时使用的工具。
+:* 使用{{cmd|loot … mine <pos>}}命令时。
+:** <code>this_entity</code>：命令执行者实体。
+:** <code>block_entity</code>：若为方块实体，则为此方块实体。
+:** <code>block_state</code>：方块的方块状态。
+:** <code>origin</code>：方块的中心。
+:** <code>tool</code>：命令指定的工具。
+:* 搬起方块的末影人死亡时。
+:** <code>this_entity</code>：此末影人。
+:** <code>block_state</code>：末影人搬起的方块。
+:** <code>origin</code>：末影人死亡时的位置。
+:** <code>tool</code>：附魔钻石斧。由[[魔咒提供器]]<code>enderman_loot_drop</code>附魔，默认精准采集I。
+
+==== block_interact ====
+; 方块交互战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|block_state}}。
+: '''可能提供'''的上下文参数：
+:* {{cd|d=pretty|interacting_entity|block_entity|tool}}。
+: 使用情境：
+:* 修剪南瓜时。
+:** <code>interacting_entity</code>：修剪南瓜的实体。
+:** <code>block_state</code>：南瓜。
+:** <code>block_entity</code>：南瓜所在位置的方块实体。
+:** <code>tool</code>：修剪南瓜使用的剪刀工具。
+:* 修剪蜂巢或蜂箱时。
+:** <code>interacting_entity</code>：修剪蜂巢或蜂箱的实体。
+:** <code>block_state</code>：蜂巢或蜂箱。
+:** <code>block_entity</code>：蜂巢或蜂箱。
+:** <code>tool</code>：修剪蜂巢或蜂箱使用的剪刀工具。
+:* 玩家采摘发光浆果时。
+:** <code>interacting_entity</code>：采摘发光浆果的玩家。
+:** <code>block_state</code>：洞穴藤蔓或洞穴藤蔓植株。
+:** <code>block_entity</code>：洞穴藤蔓或洞穴藤蔓植株所在位置的方块实体。
+:* 玩家采摘甜浆果时。
+:** <code>interacting_entity</code>：采摘甜浆果丛的玩家。
+:** <code>block_state</code>：甜浆果丛。
+:** <code>block_entity</code>：甜浆果丛所在位置的方块实体。
+:* {{InUpcoming|je 26.3}}填充堆肥桶时。
+:** <code>interacting_entity</code>：向堆肥桶填充物品的实体。
+:** <code>block_state</code>：堆肥桶。
+
+==== chest ====
+; 容器战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|origin}}。
+: '''可能提供'''的上下文参数：
+:* {{cd|this_entity}}。
+: 使用情境：
+:* 打开带有战利品表的容器时。容器可以是{{BlockLink|barrel}}、{{BlockLink|chest}}、{{BlockLink|trapped-chest}}、{{BlockLink|hopper}}、{{EntityLink|boat-with-chest}}、{{EntityLink|minecart-with-chest}}、{{EntityLink|minecart-with-hopper}}、{{BlockLink|dispenser}}、{{BlockLink|dropper}}、{{BlockLink|crafter}}、{{BlockLink|shulker-box}}和{{BlockLink|decorated-pot}}。
+:** {{cd|this_entity}}：打开容器的实体。
+:** {{cd|origin}}：容器的中心位置。
+:* 使用{{cmd|loot … loot <loot_table>}}命令时。
+:** {{cd|this_entity}}：命令执行者实体。
+:** {{cd|origin}}：命令执行坐标。
+
+==== entity ====
+; 生物死亡战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|damage_source|origin}}。
+: '''可能提供'''的上下文参数：
+:* {{cd|d=pretty|direct_attacking_entity|last_damage_player|attacking_entity}}。
+: 使用情境：
+:* 生物死亡时。
+:** <code>this_entity</code>：死亡的实体。
+:** <code>direct_attacking_entity</code>：直接导致实体死亡的实体。
+:** <code>last_damage_player</code>：伤害死亡实体的最后玩家。
+:** <code>attacking_entity</code>：给实体造成最后伤害的来源实体。
+:** <code>damage_source</code>：导致实体死亡的伤害来源。
+:** <code>origin</code>：死亡位置。
+:* 使用{{cmd|loot … kill <target>}}命令时。
+:** <code>this_entity</code>：命令指定的实体。
+:** <code>direct_attacking_entity</code>：命令执行者实体。
+:** <code>last_damage_player</code>：如果命令执行者实体是玩家，则为此玩家。
+:** <code>attacking_entity</code>：命令执行者实体。
+:** <code>damage_source</code>：<code>magic</code>伤害类型。
+:** <code>origin</code>：死亡位置。
+
+==== entity_interact ====
+; 生物交互战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|target_entity|tool}}。
+: '''可能提供'''的上下文参数：
+:* {{cd|d=pretty|interacting_entity}}。
+: 使用情境：
+:* 扫刷犰狳时。
+:** <code>target_entity</code>：犰狳。
+:** <code>interacting_entity</code>：扫刷犰狳的实体。
+:** <code>tool</code>：扫刷使用的刷子工具。
+
+==== equipment ====
+; 装备战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|origin}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 当任何种类的刷怪笼生成实体，且使用战利品表为生物穿上装备时。
+:** <code>this_entity</code>：生成的生物。
+:** <code>origin</code>：生成的生物位置。
+
+==== fishing ====
+; 钓鱼战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|origin|tool}}。
+: '''可能提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity}}。
+: 使用情境：
+:* [[钓鱼]]时。
+:** <code>this_entity</code>：[[浮漂]]实体。
+:** <code>origin</code>：浮漂的位置。
+:** <code>tool</code>：玩家使用的钓鱼竿工具。
+:* 使用{{cmd|loot … fish <loot_table>}}命令时。
+:** <code>this_entity</code>：命令执行者实体。
+:** <code>origin</code>：命令指定的位置的方块中心。
+:** <code>tool</code>：命令指定的工具。
+
+==== gift ====
+; 礼物战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|origin}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* [[猫]]给予玩家礼物时。
+:* [[村民]]给予玩家礼物时。
+:* [[嗅探兽]]刨挖时。
+:* [[鸡]]下蛋时。
+:* [[犰狳]]随机掉落犰狳鳞甲时。
+:* [[熊猫]]打喷嚏时。
+:* 幼年[[海龟]]成年时。
+:** <code>this_entity</code>：猫、村民等上述实体。
+:** <code>origin</code>：猫、村民等上述实体的位置。
+
+==== shearing ====
+; 修剪战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|origin|tool}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 剪去[[沼骸]]的蘑菇时。
+:* 剪去[[绵羊]]的羊毛时。
+:* 剪去[[哞菇]]的蘑菇时。
+:* 剪去[[雪傀儡]]的南瓜头时。
+:** <code>this_entity</code>：被修剪的生物。
+:** <code>origin</code>：被修剪的生物位置。
+:** <code>tool</code>：修剪使用的[[剪刀]]工具。
+
+==== vault ====
+; 宝库战利品参数集。
+: '''提供'''的上下文参数：
+:* {{cd|origin}}。
+: '''可能提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|tool}}。
+: 使用情境：
+:* [[宝库]]展示物品时。
+:** <code>origin</code>：宝库方块的中心位置。
+:* 宝库产生战利品时。
+:** <code>this_entity</code>：打开宝库的玩家。
+:** <code>origin</code>：宝库方块的中心位置。
+:** <code>tool</code>：解锁宝库的物品。
+
+=== 仅用于谓词 ===
+==== advancement_entity ====
+; 进度实体谓词参数集。
+: 不用于战利品表，写为{{cd|"type":"advancement_entity"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|tool}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 进度判定实体条件时。
+::* <code>this_entity</code>：被检查的实体。
+::* <code>origin</code>：将获得进度的玩家位置。
+
+==== advancement_location ====
+; 进度位置谓词参数集。
+: 不用于战利品表，写为{{cd|"type":"advancement_location"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|block_state|origin|tool}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 进度触发器<code>allay_drop_item_on_block</code>判定位置条件时。
+::* <code>this_entity</code>：给予悦灵物品的玩家。
+::* <code>block_state</code>：悦灵将物品投掷到的方块。
+::* <code>origin</code>：物品被投掷到的方块的中心位置。
+::* <code>tool</code>：悦灵持有的物品。
+:* 进度触发器<code>any_block_use</code>和<code>item_used_on_block</code>判定位置条件时。
+::* <code>this_entity</code>：与方块交互的玩家。
+::* <code>block_state</code>：被交互的方块。
+::* <code>origin</code>：被交互的方块的中心位置。
+::* <code>tool</code>：与方块交互使用的物品。
+:* 进度触发器<code>placed_block</code>判定位置条件时。
+::* <code>this_entity</code>：放置方块的玩家。
+::* <code>block_state</code>：被放置的方块。
+::* <code>origin</code>：被放置的方块的中心位置。
+::* <code>tool</code>：放置方块时使用的物品。
+
+==== block_use ====
+; 方块默认交互信息谓词参数集。
+* 不用于战利品表，写为{{cd|"type":"block_use"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|block_state|origin}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+* 使用情境：
+:* 进度触发器<code>default_block_use</code>判定位置条件时。
+::* <code>this_entity</code>：与方块交互的玩家。
+::* <code>block_state</code>：被交互的方块。
+::* <code>origin</code>：被交互的方块的中心。
+
+==== command ====
+; 命令参数集。
+* 不用于战利品表，写为{{cd|"type":"command"}}是无效的。
+: '''提供'''的上下文参数：
+:* <code>origin</code>。
+: '''可能提供'''的上下文参数：
+:* <code>this_entity</code>。
+* 使用情境：
+:* 使用{{cmd|execute (if{{!}}unless) predicate}}命令进行谓词判断时。
+::* <code>this_entity</code>：命令的执行实体。
+::* <code>origin</code>：命令的执行位置。
+:* 使用{{cmd|item}}命令修饰物品时。
+::* <code>this_entity</code>：命令的执行实体。
+::* <code>origin</code>：命令的执行位置。
+
+==== command_slot_source ====
+{{added in development|jev=26.3|section=1}}
+; 命令槽位源参数集。
+* 不用于战利品表，写为{{cd|"type":"command_slot_source"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|origin|container}}。
+: '''可能提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity}}。
+* 使用情境：
+:* 命令获取槽位源时。
+::* <code>origin</code>：命令的执行位置。
+::* <code>container</code>：命令的目标槽位。
+::* <code>this_entity</code>：命令执行者实体。
+
+==== enchanted_damage ====
+; 魔咒伤害效果参数集。
+: 不用于战利品表，写为{{cd|"type":"enchanted_damage"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|damage_source|origin|enchantment_level}}。
+: '''可能提供'''的上下文参数：
+:* {{cd|d=pretty|attacking_entity|direct_attacking_entity}}。
+* 使用情境：
+:* 魔咒效果组件{{cd|d=pretty|armor_effectiveness|damage|damage_immunity|damage_protection|equipment_drops|knockback|post_attack|smash_damage_per_fallen_block}}计算生效条件时。
+::* <code>this_entity</code>：受伤或死亡的实体。
+::* <code>attacking_entity</code>：伤害的来源实体。
+::* <code>direct_attacking_entity</code>：伤害的直接实体。
+::* <code>damage_source</code>：造成这次伤害的伤害来源。
+::* <code>origin</code>：对应实体的位置。
+::* <code>enchantment_level</code>：魔咒等级。
+
+==== enchanted_entity ====
+; 魔咒实体效果参数集。
+: 不用于战利品表，写为{{cd|"type":"enchanted_entity"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|origin|enchantment_level}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 魔咒效果组件{{cd|d=pretty|fishing_luck_bonus|fishing_time_reduction|mob_experience|post_piercing_attack|projectile_count|projectile_spawned|projectile_spread|tick|trident_return_acceleration}}计算生效条件时。
+::* <code>this_entity</code>：对应的实体。
+:::* <code>fishing_luck_bonus</code>：钓鱼的玩家
+:::* <code>fishing_time_reduction</code>：钓鱼的玩家
+:::* <code>mob_experience</code>：死亡的实体
+:::* <code>post_piercing_attack</code>：进行戳刺攻击的生物
+:::* <code>projectile_count</code>：装填弓弩的生物
+:::* <code>projectile_spawned</code>：发射的弹射物
+:::* <code>projectile_spread</code>：使用弓弩的生物
+:::* <code>tick</code>：使魔咒生效的实体
+:::* <code>trident_return_acceleration</code>：三叉戟
+::* <code>origin</code>：对应的实体的位置。
+::* <code>enchantment_level</code>：魔咒等级。
+
+==== enchanted_item ====
+; 魔咒物品效果参数集。
+: 不用于战利品表，写为{{cd|"type":"enchanted_item"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|tool|enchantment_level}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 魔咒效果组件{{cd|d=pretty|ammo_use|block_experience|item_damage|projectile_piercing|repair_with_xp}}计算生效条件时。
+::* <code>tool</code>：带有魔咒的物品。
+::* <code>enchantment_level</code>：魔咒等级。
+
+==== enchanted_location ====
+; 魔咒位置效果参数集。
+: 不用于战利品表，写为{{cd|"type":"enchanted_location"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|origin|enchantment_active|enchantment_level}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 魔咒效果组件<code>location_changed</code>计算生效条件时。
+::* <code>this_entity</code>：使魔咒生效的实体。
+::* <code>origin</code>：使魔咒生效的实体的位置。
+::* <code>enchantment_active</code>：魔咒是否已经生效。
+::* <code>enchantment_level</code>：魔咒等级。
+
+==== hit_block ====
+; 魔咒击中方块效果参数集。
+: 不用于战利品表，写为{{cd|"type":"hit_block"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|block_state|origin|enchantment_level}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 魔咒效果组件<code>hit_block</code>计算生效条件时。
+::* <code>this_entity</code>：击中方块的实体。
+::* <code>block_state</code>：击中的方块。
+::* <code>origin</code>：击中的方块的位置。
+::* <code>enchantment_level</code>：魔咒等级。
+
+==== selector ====
+; 目标选择器参数集。
+: 不用于战利品表，写为{{cd|"type":"selector"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|origin}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* [[目标选择器]]使用谓词筛选实体时。
+::* <code>this_entity</code>：被检测的实体。
+::* <code>origin</code>：被检测实体的位置。
+
+==== villager_trade ====
+; 村民交易参数集。
+: 不用于战利品表，写为{{cd|"type":"villager_trade"}}是无效的。
+: '''提供'''的上下文参数：
+:* {{cd|d=pretty|this_entity|origin}}。
+: '''可能提供'''的上下文参数：
+:* 无。
+: 使用情境：
+:* 村民生成交易时。
+::* <code>this_entity</code>：生成交易的村民。
+::* <code>origin</code>：生成交易的村民的位置。
+::* <code>additional_cost_component_allowed</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w43a|加入了战利品上下文。}}
+|{{HistoryLine|||dev=18w44a|加入了战利品上下文参数集<code>gift</code>。}}
+|{{HistoryLine||1.15|dev=19w38a|加入了战利品上下文参数集<code>command</code>和<code>selector</code>。}}
+|{{HistoryLine||1.16|dev=20w07a|加入了战利品上下文参数集<code>barter</code>。}}
+|{{HistoryLine|||dev=20w18a|加入了战利品上下文参数集<code>advancement_entity</code>。
+|加入了战利品上下文参数<code>origin</code>。}}
+|{{HistoryLine||1.16.2|dev=pre2|移除了战利品上下文参数<code>position</code>。}}
+|{{HistoryLine||1.19.4|dev=23w07a|加入了战利品上下文参数集<code>archaeology</code>。}}
+|{{HistoryLine||1.20|dev=23w18a|加入了战利品上下文参数集<code>advancement_location</code>。}}
+|{{HistoryLine||1.20.5|dev=24w03a|加入了战利品上下文参数集<code>block_use</code>。}}
+|{{HistoryLine|||dev=24w05a|加入了战利品上下文参数集<code>vault</code>。}}
+|{{HistoryLine|||dev=24w09a|加入了战利品上下文参数集<code>shearing</code>。}}
+|{{HistoryLine|||dev=24w13a|加入了战利品上下文参数集<code>equipment</code>。}}
+|{{HistoryLine||1.21|dev=24w18a|加入了战利品上下文参数{{cd|d=pretty|enchantment_active|enchantment_level}}。
+|加入了战利品上下文参数集{{cd|d=pretty|enchanted_damage|enchanted_entity|enchanted_item|enchanted_location}}。}}
+|{{HistoryLine|||dev=24w21a|加入了战利品上下文参数集<code>hit_block</code>。}}
+|{{HistoryLine||1.21.2|dev=24w37a|现在战利品上下文参数集{{cd|d=pretty|archaeology|shearing|vault}}可以提供<code>tool</code>参数。}}
+|{{HistoryLine||1.21.9|dev=25w31a|加入了战利品上下文参数{{cd|d=pretty|interacting_entity|target_entity}}。
+|加入了战利品上下文参数集{{cd|d=pretty|entity_interact|block_interact}}。}}
+|{{HistoryLine||26.1|dev=snapshot-1|加入了战利品上下文参数集<code>villager_trade</code>。}}
+|{{HistoryLine|||dev=snapshot-3|加入了战利品上下文参数<code>additional_cost_component_allowed</code>。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了战利品上下文参数集<code>command_slot_source</code>。
+|加入了战利品上下文参数<code>container</code>。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[de:Beutekontext]]
+[[en:Loot context]]
+[[fr:Contexte de butin]]
+[[ja:ルート文脈]]
+[[pt:Contexto de saque]]

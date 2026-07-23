@@ -1,0 +1,149 @@
+# 页面: 智能体
+# 来源: https://zh.minecraft.wiki/w/%E6%99%BA%E8%83%BD%E4%BD%93
+# 分类: 友好生物, 基岩版独有信息, 基岩版独有特性, 实体, 教育版独有信息, 教育版独有特性, 教育版生物, 未使用的特性, 未使用的生物, 本地化模块需更新
+# 抓取时间: 2026-07-14 17:28:30
+# 原始 Wikitext 内容:
+
+{{for|控制智能体的命令|命令/agent}}
+{{exclusive|education|bedrock}}
+{{Infobox entity
+|image=Agent.png
+|imagesize=100px
+|invimage=Agent Spawn Egg
+|behavior=友好生物
+|size='''正常状态：'''<br>高度：0.93格<br>宽度：0.6格<br>'''隐藏状态：'''<br>高度：0.0格<br>宽度：0.0格
+|spawn=见{{slink||生成}}
+|damage='''主人执行{{cmd|agent attack}}'''：<br>{{hp|5}}
+|noje=1
+}}
+'''智能体（Agent）'''可以通过编程来控制，以帮助玩家学习编程。它一般被认为是一种[[教育版]]独有[[生物]]，但实际上在[[基岩版]]同样可以被召唤。
+
+== 生成 ==
+智能体不会自然生成，但是能通过{{only|for=[[刷怪蛋]]|ee}}或[[命令]]生成。
+
+{{in|be}}不能直接使用{{cmd|agent}}来生成或控制智能体，而是需要利用[[NPC]]执行{{cmd|execute as @p run agent ...}}，或使用WebSocket执行{{cd|/agent ...}}。
+
+如果智能体被结构方块保存并由另一位玩家加载时，所加载的智能体会变为那位加载结构的玩家所有。但那位玩家无法使用{{cmd|link=none|agent}}控制。当其由命令方块使用{{cmd|structure}}加载时，智能体会被隐藏。
+
+智能体也可以在基岩版中使用[https://github.com/mcpews/MyAgent MyAgent]等工具创建，详见[[Tutorial:WebSocket]]。
+
+== 掉落物 ==
+智能体死亡时不会掉落任何[[物品]]和[[经验]]。
+
+== 行为 ==
+智能体是一种生物，但没有生物行为。
+
+智能体不能被任何影响移动的效果移动，不会[[摔落|下落]]，不会被[[水流]]移动，不会被[[爆炸]]推动。
+
+智能体未接收到来自WebSocket端的命令时，如果脚下没有方块则会在原地上下飘浮，如果有方块则会站在方块上。
+
+智能体的名称会保持显示并且被随机赋予颜色，名字格式为：<code>-{}-主人名称.Agent</code>，示例：Steve.Agent。
+
+智能体能破坏所有有掉落物形式的方块。
+
+智能体无论是否在未加载的区块中，当玩家作为执行者执行<code>/agent tp</code>时都可将其传送至玩家所在坐标。
+
+智能体免疫[[状态效果]]。
+
+智能体在主人传送到另外一个维度时，会被传送到传送门旁边。
+
+{{in|be}}智能体无法被[[目标选择器]]选中。
+
+=== 隐藏 ===
+智能体会随着主人退出游戏而在原地隐藏，在主人重新进入游戏时出现。
+
+智能体在隐藏状态时名字会被一起隐藏。
+
+智能体隐藏时没有碰撞箱，但即便如此也不能在智能体所在坐标放置方块。
+
+=== 用法 ===
+智能体通常与适用于Minecraft的[[代码连接]]配合使用，并且可以通过可视化[[wzh:Scratch|ScratchX]]编程。
+
+智能体拥有自己的27个物品的物品栏，可以由玩家编程使用命令来操作，或直接由玩家可以在游戏中访问的GUI进行编辑。
+
+可视化界面允许玩家将命令、结构建筑及其他组件拖放至一个序列中，并将此序列与一个自定义名称的消息命令（ChatCommand）相关联，这个命令可以以发送消息的方式在控制台中执行。
+
+=== 受伤害行为 ===
+智能体免疫伤害。
+
+=== 智能体命令 ===
+{{main|命令/agent}}
+
+== 音效 ==
+{{Sound table
+|bedrock=1
+|sound=Random.anvil land.wav
+|source=友好生物
+|description=智能体生成
+|id=mob.agent.spawn
+|typeid=mob.agent.spawn
+|soundvolume
+|soundpitch
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=bedrock
+|Agent
+|spritetype=entity
+|nameid=agent
+|foot=1}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了智能体。}}
+|{{HistoryLine|||dev=build 2|移除了智能体。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|智能体被重新加入，并且隐藏在游戏中。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.7.0|dev=1.7.0.2|由于一个错误，智能体无法被创建了，试图创建时总是返回“无法创建智能体”；但在之前创建的智能体不会消失。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|{{InvSprite|Spawn Agent}} 加入了智能体刷怪蛋的纹理，但刷怪蛋本身无法使用。}}
+|{{HistoryLine||1.9.0|dev=1.9.0.0|智能体的创建恢复正常了。}}
+|{{HistoryLine|education}}
+|{{HistoryLine||1.0.1|智能体以“代码学习吉祥物（Learn to code mascot）”的名称加入游戏。}}
+|{{HistoryLine||1.0.2|实体ID从<code>learn_to_code_mascot</code>改为<code>agent</code>。}}
+|{{HistoryLine||1.4.0|智能体的名称默认颜色变为蓝色。}}
+|{{HistoryLine||1.7|智能体现在能被{{cmd|remove}}从游戏中移除了。|玩家现在能在[[HUD]]中看到智能体的坐标了。|{{cmd|summon agent}}现在能用来创建智能体或把智能体传送到自己的坐标了。
+|加入了智能体的刷怪蛋。}}
+}}
+
+== 你知道吗 ==
+* 智能体的模型与[[铁傀儡]]的很相似，但其更小，纹理也与铁傀儡不同。
+* 智能体出现在了[[教育版]]的官方图片中。
+
+== 画廊 ==
+<gallery>
+File:Learn to code mascot.png|一个智能体
+File:Agent - 2.jpg|智能体在官方图片中的形象
+File:agentcreated.png|多人游戏中，智能体也可以被创建并由主人控制
+File:agenthidden.png|智能体在被强行生成、刷怪蛋放置、主人退出游戏时被隐藏，但并未消失。图示为执行开发者命令/aigoals之后显示出来的状态条
+</gallery>
+
+== 参考 ==
+* [https://github.com/mcpews/MyAgent MyAgent]
+* [[Tutorial:WebSocket]]
+* [https://education.minecraft.net/ 教育版官网]
+
+== 导航 ==
+{{Navbox entities|Mobs}}
+{{Navbox unused features}}
+
+[[Category:友好生物]]
+[[Category:教育版生物]]
+[[Category:未使用的生物]]
+
+[[de:Agent]]
+[[en:Agent]]
+[[es:Agente]]
+[[fr:Agent]]
+[[ja:エージェント]]
+[[ko:에이전트]]
+[[pl:Agent]]
+[[pt:Agente]]
+[[ru:Агент]]
+[[th:เอเจนต์]]
+[[uk:Агент]]

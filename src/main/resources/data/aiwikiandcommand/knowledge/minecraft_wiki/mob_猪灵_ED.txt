@@ -1,0 +1,24 @@
+# 页面: 猪灵/ED
+# 来源: https://zh.minecraft.wiki/w/%E7%8C%AA%E7%81%B5/ED
+# 分类: 实体数据值页面
+# 抓取时间: 2026-07-14 17:32:05
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt inherit/mob}}
+** {{nbt|bool|CannotHunt}}：（此值为<samp>true</samp>时存在）表示猪灵是否不会攻击疣猪兽。
+** {{nbt|list|Inventory|required=1|existonsave=1}}：猪灵存储的物品栏，此标签最多容纳8组物品。当读取时，如果列表数量超过8，则超出范围的物品尝试与范围内的物品合并，如果无法合并则被删除。 
+*** {{nbt|compound}}：物品栏中的一个物品。
+**** {{nbt inherit/itemnoslot}}
+** {{nbt|bool|IsBaby}}：（此值为<samp>true</samp>时存在）表示此猪灵是否为幼年个体。
+** {{nbt|bool|IsImmuneToZombification}}：（此值为<samp>true</samp>时存在）表示猪灵在主世界是否不会变成僵尸猪灵。当此项为<samp>true</samp>时，{{nbt|int|TimeInOverworld}}会被重置为0且不会增加。
+** {{nbt|int|TimeInOverworld|required=1|existonsave=1}}：猪灵在对猪灵不安全的维度（默认为下界以外的维度）停留的总时间。如果此值大于{{convert|300}}，猪灵会转化成僵尸猪灵。当回到对猪灵安全的维度时此值重置为0。
+</div><noinclude>
+[[Category:实体数据值页面]]
+[[en:Piglin#Entity data]]
+[[fr:Piglin/ED]]
+[[ja:ピグリン/ED]]
+[[pt:Piglin/ED]]
+[[ru:Пиглин/ДС]]
+</noinclude>

@@ -1,0 +1,544 @@
+# 页面: Java版16w32a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8816w32a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:17
+# 原始 Wikitext 内容:
+
+{{Dangerous version|选择语言时游戏可能会崩溃。<ref>{{bug|MC-105948|||Fixed}}</ref>}}
+{{Infobox version
+|title=16w32a
+|image=16w32a.png
+|image2=Java Edition 16w32a.png
+|edition=Java
+|type=Snapshot
+|date=2016年8月10日
+|jsonhash=78178d605ec7bb141b91b4eed36adb9ffdf82527
+|clienthash=198124cb36e4284feec3204f8e20f14f6a531cc3
+|serverhash=b1309cff6c574e9487e3413773841ef5eb260587
+|parent=1.11
+|prevparent=1.10.2
+|prev=
+|next=16w32b
+|nextparent=1.11.1
+}}<onlyinclude>
+
+'''16w32a'''是[[Java版1.11]]的首个快照，发布于2016年8月10日<ref name="blogpost_16w32a">{{cite|url=http://mojang.com/2016/08/minecraft-snapshot-16w32a/|archive-url=1|archive=1|title=Minecraft snapshot 16w32b|author=Searge|website=Mojang.com|date=August 10, 2016}}</ref>，重新加入了一些刷怪蛋（除了[[豹猫|猫]]）和新的闪烁标语，并修复了一些漏洞。
+
+== 新内容 ==
+=== 物品 ===
+'''[[刷怪蛋]]'''
+* 在[[Java版1.10-pre2]]中移除的刷怪蛋被重新加入游戏，除了[[豹猫|猫]]刷怪蛋，包括：
+** [[凋灵骷髅]]
+** [[骡]]
+** [[骷髅马]]
+** [[僵尸马]]
+** [[驴]]
+** [[远古守卫者]]
+** [[流浪者]]
+** [[尸壳]]
+* 加入了[[僵尸村民]]的刷怪蛋。
+
+=== 常规 ===
+'''[[闪烁标语]]'''
+* “Javalicious edition”
+
+'''[[国际化]]'''
+* 游戏内的更多字符串可用于国际化：
+** 世界选择的错误信息。
+** [[自定义/Java版1.13前|自定义]]（世界类型）的预设名称。
+** [[旁观模式]]特有的选项和信息。
+** 在[[选项]]中的文本“chunks”和“fps”。
+** 在物品的工具提示中的文本“Color:”、“NBT: ”和“Durability: ”。
+** {{key|F3+Q}}快捷键的显示文本，以及和其他{{key|F3}}操作有关的文本。
+** 关于选择[[资源包]]的文本。
+
+== 更改 ==
+=== 物品 ===
+'''[[刷怪蛋]]'''
+* 现在在创造模式物品栏中按名称排序。
+
+'''堆叠'''
+* 以拖动方式放置物品时不再出现一叠0个物品。
+
+=== 生物 ===
+'''[[苦力怕]]'''
+* 如果苦力怕身上有药水效果，它的爆炸会留下具有该药水效果的[[区域效果云]]。
+
+'''[[尸壳]]'''
+* 现在会试图避开水。
+
+'''[[雪傀儡]]'''
+* 现在会保存南瓜头是否被剪下（在此之前只是游戏中的视觉效果）。
+
+'''[[骷髅陷阱马]]'''
+* 雷暴天气中的生成概率减至原来的{{frac|1|5}}。
+
+=== 命令格式 ===
+'''{{cmd|give}}'''
+* 现在会忽略特定物品的堆叠限制。<ref>{{bug|MC-105965|||WAI}}</ref>
+'''[[方块状态]]'''
+* 方块状态目前可以在{{cmd|execute}}、{{cmd|fill}}、{{cmd|setblock}}和{{cmd|testforblock}}命令中使用
+** 例如：
+*** <code>/setblock ~ ~ ~ minecraft:stone variant=granite</code>可以替代<code>/setblock ~ ~ ~ minecraft:stone 1</code>
+*** <code>/setblock ~ ~ ~ wool color=blue</code>可以替代<code>/setblock ~ ~ ~ minecraft:wool 11</code>
+*** <code>/setblock ~ ~ ~ minecraft:planks variant=acacia</code>可以替代<code>/setblock ~ ~ ~ minecraft:planks 4</code>
+*** <code>/setblock ~ ~ ~ minecraft:birch_fence_gate facing=west,open=true</code>
+
+=== 游戏内容 ===
+'''[[消耗度]]'''
+{| class="wikitable sortable" data-description="Exhaustion"
+! class="unsortable" | 行动
+! 旧比率
+! 新比率
+! 单位
+|-
+| 潜行
+| style="text-align: right;" | 0.005
+| style="text-align: right;" data-sort-value="0" | —   
+| 每米
+|-
+| 步行
+| style="text-align: right;" | 0.01 
+| style="text-align: right;" data-sort-value="0" | —   
+| 每米
+|-
+| 游泳
+| style="text-align: right;" | 0.015
+| style="text-align: right;" | 0.01 
+| 每米
+|-
+| 摧毁一个[[方块]]
+| style="text-align: right;" | 0.025
+| style="text-align: right;" | 0.005
+| 每个方块
+|-
+| 跳跃
+| style="text-align: right;" | 0.2  
+| style="text-align: right;" | 0.05 
+| 每次跳跃
+|-
+| 攻击一个敌人
+| style="text-align: right;" | 0.3  
+| style="text-align: right;" | 0.1  
+| 每一击
+|-
+| 受到正常[[盔甲机制|盔甲会保护的伤害]]
+| style="text-align: right;" | 0.3  
+| style="text-align: right;" | 0.1  
+| 每次受到符合的伤害
+|-
+| [[饥饿]]状态效果
+| style="text-align: right;" | 0.5  
+| style="text-align: right;" | 0.1  
+| 每秒，每饥饿效果等级
+|-
+| 疾跑时跳跃
+| style="text-align: right;" | 0.8  
+| style="text-align: right;" | 0.2  
+| 每次跳跃
+|-
+| 在{{hunger|18|notag=1}}或更高时回复生命，<br>或因<code>naturalRegeneration=true</code>
+| style="text-align: right;" | 4.0  
+| style="text-align: right;" | 6.0  
+| 每{{hp|1}}回复
+|}
+
+'''[[动作栏]]'''
+* 一些警告会在快捷栏上方出现，类似于“按下[按键]来脱离”：
+** “你只能在晚上睡觉”
+** “你现在不能休息，周围有怪物在游荡”
+** “这张床已被占用”
+** “建筑的高度限制是256格”
+** “无法打开：战利品尚未生成。”
+
+=== 常规 ===
+'''[[资源包]]'''
+* 版本号更改为{{cd|3}}。
+** 版本{{cd|3}}的资源包需要所有文件名使用小写字母。
+
+'''实体ID、方块ID与物品ID'''
+* 现在不再区分大小写。
+** 大写字母自动改为小写字母。
+
+'''实体ID'''
+* 使用下划线分离单词, 取代大小写混合使用单词。
+* 可选择使用<code>minecraft:</code>作前缀，正如方块与物品ID一样。然而它不适用于EntityTag和刷怪笼的生成命令。<ref>{{bug|MC-106199|||Fixed}}</ref>
+* 更改下列名称：
+{| class="wikitable sortable" data-description="changed names"
+! class="unsortable" |
+! 旧名称
+! 新名称
+! 改变
+! 种类
+|-
+| {{EffectSprite|Particle Speed}}
+| <code>AreaEffectCloud</code>
+| <code>area_effect_cloud</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{ItemSprite|Armor Stand}}
+| <code>ArmorStand</code>
+| <code>armor_stand</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{BlockSprite|Brewing Stand}}
+| <code>Cauldron</code>
+| <code>brewing_stand</code>
+| {{tc|rarely|重命名}}
+| {{tc|planned|方块实体}}
+|-
+| {{EntitySprite|Cave Spider}}
+| <code>CaveSpider</code>
+| <code>cave_spider</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Minecart with Chest}}
+| <code>MinecartChest</code>
+| <code>chest_minecart</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{BlockSprite|Command Block}}
+| <code>Control</code>
+| <code>command_block</code>
+| {{tc|rarely|重命名}}
+| {{tc|planned|方块实体}}
+|-
+| {{EntitySprite|Minecart with Command Block}}
+| <code>MinecartCommandBlock</code>
+| <code>commandblock_minecart</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{BlockSprite|Daylight Sensor}}
+| <code>DLDetector</code>
+| <code>daylight_detector</code>
+| {{tc|rarely|重命名}}
+| {{tc|planned|方块实体}}
+|-
+| {{BlockSprite|Dispenser}}
+| <code>Trap</code>
+| <code>dispenser</code>
+| {{tc|rarely|重命名}}
+| {{tc|planned|方块实体}}
+|-
+| {{EntitySprite|Dragon Fireball}}
+| <code>DragonFireball</code>
+| <code>dragon_fireball</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Egg}}
+| <code>ThrownEgg</code>
+| <code>egg</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{BlockSprite|Enchantment Table}}
+| <code>EnchantTable</code>
+| <code>enchanting_table</code>
+| {{tc|rarely|重命名}}
+| {{tc|planned|方块实体}}
+|-
+| {{BlockSprite|End Gateway}}
+| <code>EndGateway</code>
+| <code>end_gateway</code>
+| {{tc|neutral|下划线}}
+| {{tc|planned|方块实体}}
+|-
+| {{BlockSprite|End Portal}}
+| <code>AirPortal</code>
+| <code>end_portal</code>
+| {{tc|rarely|重命名}}
+| {{tc|planned|方块实体}}
+|-
+| {{BlockSprite|Ender Chest}}
+| <code>EnderChest</code>
+| <code>ender_chest</code>
+| {{tc|neutral|下划线}}
+| {{tc|planned|方块实体}}
+|-
+| {{EntitySprite|Ender Crystal}}
+| <code>EnderCrystal</code>
+| <code>ender_crystal</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Ender Dragon}}
+| <code>EnderDragon</code>
+| <code>ender_dragon</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Ender Pearl}}
+| <code>ThrownEnderpearl</code>
+| <code>ender_pearl</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Eye of Ender}}
+| <code>EyeOfEnderSignal</code>
+| <code>eye_of_ender_signal</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Sand}}
+| <code>FallingSand</code>
+| <code>falling_block</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{ItemSprite|Firework Rocket}}
+| <code>FireworksRocketEntity</code>
+| <code>fireworks_rocket</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{BlockSprite|Flower Pot}}
+| <code>FlowerPot</code>
+| <code>flower_pot</code>
+| {{tc|neutral|下划线}}
+| {{tc|planned|方块实体}}
+|-
+| {{EntitySprite|Minecart with Furnace}}
+| <code>MinecartFurnace</code>
+| <code>furnace_minecart</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Minecart with Hopper}}
+| <code>MinecartHopper</code>
+| <code>hopper_minecart</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Horse}}
+| <code>EntityHorse</code>
+| <code>horse</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Item Frame}}
+| <code>ItemFrame</code>
+| <code>item_frame</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{BlockSprite|Jukebox}}
+| <code>RecordPlayer</code>
+| <code>jukebox</code>
+| {{tc|rarely|重命名}}
+| {{tc|planned|方块实体}}
+|-
+| {{EntitySprite|Leash Knot}}
+| <code>LeashKnot</code>
+| <code>leash_knot</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Lightning}}
+| <code>LightningBolt</code>
+| <code>lightning_bolt</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Magma Cube}}
+| <code>LavaSlime</code>
+| <code>magma_cube</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Minecart}}
+| <code>MinecartRideable</code>
+| <code>minecart</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{BlockSprite|Monster Spawner}}
+| <code>MobSpawner</code>
+| <code>mob_spawner</code>
+| {{tc|neutral|下划线}}
+| {{tc|planned|方块实体}}
+|-
+| {{EntitySprite|Mooshroom}}
+| <code>MushroomCow</code>
+| <code>mooshroom</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{BlockSprite|Note Block}}
+| <code>Music</code>
+| <code>noteblock</code>
+| {{tc|rarely|重命名}}
+| {{tc|planned|方块实体}}
+|-
+| {{EntitySprite|Ocelot}}
+| <code>Ozelot</code>
+| <code>ocelot</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Polar Bear}}
+| <code>PolarBear</code>
+| <code>polar_bear</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Shulker Bullet}}
+| <code>ShulkerBullet</code>
+| <code>shulker_bullet</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Fireball}}
+| <code>SmallFireball</code>
+| <code>small_fireball</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Spectral Arrow}}
+| <code>SpectralArrow</code>
+| <code>spectral_arrow</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Splash Potion}}
+| <code>ThrownPotion</code>
+| <code>potion</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Minecart with Spawner}}
+| <code>MinecartSpawner</code>
+| <code>spawner_minecart</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{BlockSprite|Structure Block}}
+| <code>Structure</code>
+| <code>structure_block</code>
+| {{tc|rarely|重命名}}
+| {{tc|planned|方块实体}}
+|-
+| {{EntitySprite|TNT}}
+| <code>PrimedTnt</code>
+| <code>tnt</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Minecart with TNT}}
+| <code>MinecartTNT</code>
+| <code>tnt_minecart</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Iron Golem}}
+| <code>VillagerGolem</code>
+| <code>villager_golem</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Wither}}
+| <code>WitherBoss</code>
+| <code>wither</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Wither Skull}}
+| <code>WitherSkull</code>
+| <code>wither_skull</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Bottle o' Enchanting}}
+| <code>ThrownExpBottle</code>
+| <code>xp_bottle</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|experience-orb}}
+| <code>XPOrb</code>
+| <code>xp_orb</code>
+| {{tc|neutral|下划线}}
+| {{tc|unknown|实体}}
+|-
+| {{EntitySprite|Zombie Pigman}}
+| <code>PigZombie</code>
+| <code>zombie_pigman</code>
+| {{tc|rarely|重命名}}
+| {{tc|unknown|实体}}
+|}
+* 马的实体ID按各自类型分为<code>horse</code>、<code>donkey</code>、<code>mule</code>、<code>skeleton_horse</code>和<code>zombie_horse</code>。
+* 骷髅的实体ID按各自类型分为<code>skeleton</code>、<code>stray</code>和<code>wither_skeleton</code>。
+* 僵尸的实体ID按各自类型分为<code>zombie</code>、<code>zombie_villager</code>和<code>husk</code>。
+* 守卫者的实体ID按各自类型分为<code>guardian</code>和<code>elder_guardian</code>。
+* 未使用的存档ID<code>Mob</code>（[[生物（已移除实体）|生物]]）和 <code>Monster</code>（[[怪物（已移除实体）|怪物]]）被移除。
+
+'''[[NBT标签]]'''
+* 对于所有马，<code>HasReproduced</code>、<code>Type</code>和<code>Saddle</code>被移除。
+* <code>ChestedHorse</code>和<code>Items</code>标签现在只会附加于<code>mule</code>和<code>donkey</code>。
+* <code>SkeletonTrap</code>和<code>SkeletonTrapTime</code>标签现在只会附加于<code>skeleton_horse</code>。
+* 从<code>guardian</code>和<code>elder_guardian</code>移除<code>Elder</code>标签。
+* <code>ZombieType</code>标签从所有类型的僵尸中移除。
+* <code>ConversionTime</code>和<code>Profession</code>标签现仅适用于<code>zombie_villager</code>。
+* <code>SkeletonType</code>标签从所有类型的骷髅中移除。
+* <code>Pumpkin</code>字节标签加入<code>snowman</code>。
+
+'''[[战利品表]]'''
+* 驴、骡、尸壳和僵尸村民现在会从它们各自的战利品表中抽取物品，而不是从马和僵尸的战利品表中抽取。
+
+== 修复 ==
+{{fixes|fixedin=16w32a|prefix=Minecraft|showdesc=1
+|;old
+|9|因下落而损坏的铁砧不会发出对应音效。
+|87|使用纸对地图进行缩放时，若通过{{key|Shift}}+鼠标左键的方式取回缩放后的地图，则该地图不会被正确缩放。
+|679|从下界返回主世界后，指南针会指向错误的方向。
+|1555|若物品栏已满，则使用{{key|Shift}}+鼠标左键取回合成的成品时该物品会消失。
+|2153|鸡颈部的纹理不显示。
+|8293|发射器生成的生物的Y轴偏移量不正确。
+|11834|生成带有无效ID的物品时服务器控制台窗口中会被信息“Item entity # has no item?!”刷屏。
+|14640|乘船或矿车时玩家的饥饿条不会显示。
+|26690|阳光下的凋灵骷髅的着火效果会不断闪烁。
+|46341|部分游戏文本并未被翻译且在Crowdin上不可用。
+|83185|副手中的钓鱼竿在出竿后，其浮漂会消失。
+|83571|自定义名称Boss生物的Boss栏名称仍显示为“凋灵”或“末影龙”。
+|85320|地图中末地石砖、紫珀块、紫颂植株、骨块和结构方块的颜色显示不正确。
+|87034|粒子效果为“最少”时无法看见药水云粒子。
+|88096|对栅栏或墙使用刷怪蛋会使生成的生物卡在其内部。
+|89064|当游戏规则<code>doMobSpawning</code>或<code>spawn-monsters</code>为{{cd|false}}时，骷髅陷阱马被闪电击中后仍会生成骷髅骑士。
+|90191|盔甲架、蠹虫和末影螨乘船时会不停地旋转。
+|91728|瞬间治疗和瞬间伤害药箭并未正确生效。
+|93619|创造模式中发射药箭会减少其数量。
+|93648|剪去南瓜头的雪傀儡在世界重载后又会重新戴上南瓜头。
+|94978|发射器在前两个游戏刻内发射的弹射物不会击中生物。
+|95922|破坏矿车后的掉落物的名称显示为其本地化键名。
+|96954|乘坐在乘客位上的生物在区块重新渲染后会脱离所骑乘的实体。
+|97916|物品在因方块挤压而弹开时的动能过大。
+|101441|弓的耐久度为0 / 384时会显示在副手上。
+|102047|对生物变种按{{control|选取方块}}键会获得其原变种的刷怪蛋。
+|103043|凋灵骷髅、流浪者、远古守卫者和僵尸猪人的实体名称不正确。
+|105560|区块边界处的漏斗在重载世界后会停止传输物品。
+|105787|结构空位有未使用的模型文件。
+|;other
+|1.|手持无效物品时，游戏更稳定了。<ref name="blogpost_16w32a"/>
+:: 降低了复制漏洞出现的概率。</onlyinclude>
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:16w32a]]
+[[en:Java Edition 16w32a]]
+[[es:Java Edition 16w32a]]
+[[fr:Édition Java 16w32a]]
+[[it:Java Edition 16w32a]]
+[[ja:Java Edition 16w32a]]
+[[nl:16w32a]]
+[[pt:Edição Java 16w32a]]
+[[ru:16w32a (Java Edition)]]

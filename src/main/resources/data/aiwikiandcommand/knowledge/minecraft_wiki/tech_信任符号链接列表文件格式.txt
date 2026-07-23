@@ -1,0 +1,61 @@
+# 页面: 信任符号链接列表文件格式
+# 来源: https://zh.minecraft.wiki/w/%E4%BF%A1%E4%BB%BB%E7%AC%A6%E5%8F%B7%E9%93%BE%E6%8E%A5%E5%88%97%E8%A1%A8%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:20:09
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''信任符号链接列表文件'''是游戏保证读写存档数据安全的游戏配置文件。
+
+== 文件格式 ==
+信任符号链接列表文件位于{{filepath|-{}-<''游戏数据根目录''>/allowed_symlinks.txt}}，是一个文本文件。
+
+此文件内每一行都代表了一个检查条件，'''前后的空格不会被自动删除'''，并遵照下列的格式：
+* 如果这一行为空行或只包含空白字符，则这一行会被忽略。
+* 如果这一行以<code>#</code>开头，则这一行被判断为注释，也会被忽略。
+* 如果这一行不以<code>[</code>开头，则这一行会被解析为'''前缀检查'''，即链接目标路径以此行字符串为前缀的符号链接测试成功，其他文件测试失败。
+* 如果这一行以<code>[</code>开头：
+** 如果这一行不包含<code>]</code>字符，则文件格式错误，游戏报错<code>-{}-Unterminated type in line '<''这一行''>'</code>。
+** 如果这一行以<code>[prefix]</code>（大小写敏感）开头，则这一行为前缀检查，后续字符串会被作为测试链接目标路径的前缀字符串。
+** 如果这一行以<code>[glob]</code>（大小写敏感）开头，则这一行被解析为'''通配符路径检查'''，即链接目标路径被后续字符串所代表的通配符路径包含时符号链接测试成功。这种检查方式与文件系统有关，具体见[https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/FileSystem.html#getPathMatcher(java.lang.String) 此文档]。
+** 如果这一行以<code>[regex]</code>（大小写敏感）开头，则这一行被解析为'''正则表达式检查'''，即链接目标路径满足后续字符串所代表的正则表达式时符号链接测试成功。这种检查方式与文件系统有关，具体见[https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/FileSystem.html#getPathMatcher(java.lang.String) 此文档]。
+** 如果这一行不以上方任何一种开头，则文件格式错误，游戏报错<code>-{}-Unsupported definition type in line '<''检查类型''>'</code>。
+
+== 文件行为 ==
+当游戏打开存档进入世界之前，游戏会对存档内所有文件进行检查，过滤出所有[[wzh:符号链接|符号链接]]，并对这些符号链接指向的目标路径进行检查。只要有一条检查满足，目标路径就满足条件；但如果所有检查都不满足，游戏就会禁止使用这个符号链接。只要存档内有一个符号链接被禁止，游戏就会报错<code>-{}-Failed to validate '<''存档根目录''>'. Found forbidden symlinks: <''禁止的符号链接列表''></code>，并阻止游戏加载存档。
+
+游戏加载[[资源包]]或[[数据包]]时，也会使用此文件检查包内的符号链接，如果有被禁止的符号链接游戏也会报错并中止包加载。
+
+如果游戏数据根目录内不存在信任符号链接列表文件，那么所有存档、资源包和数据包内都不允许出现符号链接，阻止这些具有符号链接的存档和包被加载。
+
+以下列文件举例：
+
+<pre>-{}-
+# 这是一行注释，游戏不会解析这一行
+D:\test1
+[prefix]D:\test2
+[glob]D:\\test3\\*.nbt
+[regex]D:\\test[4-5]\\.*\.mca
+</pre>
+
+对于下列符号链接，游戏使用上方的文件检查会有下列处理：
+
+<pre>
+D:\test1\a.dat 成功，匹配第二行
+D:\test2\b.mcc 成功，匹配第三行
+D:\test3\c.nbt 成功，匹配第四行
+D:\test5\d.mca 成功，匹配第五行
+</pre>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20|dev=pre7|加入了信任符号链接列表文件，用于检查存档文件中的符号链接。}}
+|{{HistoryLine||1.20.2|dev=23w31a|现在游戏对数据包和资源包也会检查符号链接。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

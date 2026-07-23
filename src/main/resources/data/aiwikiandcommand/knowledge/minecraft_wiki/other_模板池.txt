@@ -1,0 +1,122 @@
+# 页面: 模板池
+# 来源: https://zh.minecraft.wiki/w/%E6%A8%A1%E6%9D%BF%E6%B1%A0
+# 分类: 
+# 抓取时间: 2026-07-14 17:29:23
+# 原始 Wikitext 内容:
+
+{{exclusive|java|customtext=基岩版模板池请参见[https://learn.microsoft.com/en-us/minecraft/creator/reference/content/worldgenreference/examples/jigsawtemplatepools 官方文档]}}
+'''模板池（Template Pool）'''，也被称为'''结构池（Structure Pool）'''或'''拼图池（Jigsaw Pool）'''，是[[结构定义格式#jigsaw|拼图结构]]生成抽取子结构的基本单元。'''模板池定义文件'''是模板池在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+模板池在游戏中使用<code>TEMPLATE_POOL</code>注册表，数据包路径为{{filepath|worldgen/template_pool}}，即所有的模板池定义文件都需要在{{filepath|data/<''命名空间''>/worldgen/template_pool}}目录下定义，模板池标签则需要在{{filepath|data/<''命名空间''>/tags/worldgen/template_pool}}目录下定义。
+
+模板池定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|string|fallback|required=1}}：回落池。在结构生成结束后会从此模板池中选取一项作为终止拼图结构。
+** {{nbt|list|elements|required=1}}：模板池可供选择的结构元素列表。
+*** {{nbt|compound}}
+**** {{nbt|compound|element|required=1}}：此结构元素的属性。
+***** {{nbt|string|element_type|required=1}}：模板池元素类型。
+***** 依模板池元素类型的附加字段，见下文。
+**** {{nbt|int|weight|required=1}}：（{{interval|left=1|right=150}}）此结构元素的权重。
+</div>
+
+=== 模板池元素类型 ===
+模板池元素类型决定了游戏如何处理模板池中的元素。
+
+==== empty_pool_element ====
+空元素，什么也不生成。
+
+<div class="treeview">
+* {{nbt|compound|element|required=1}} 模板池元素
+** {{nbt|string|element_type|required=1}}：<code>empty_pool_element</code>
+</div>
+
+==== feature_pool_element ====
+生成一个[[地物]]。
+
+<div class="treeview">
+* {{nbt|compound|element|required=1}} 模板池元素
+** {{nbt|string|element_type|required=1}}：<code>feature_pool_element</code>
+** {{nbt|string|projection|required=1}}：决定生成的结构元素是否匹配地形高度。取值可以为<code>rigid</code>（不调整）或<code>terrain_matching</code>（根据地形高度对进行偏移）。
+** {{nbt|string}}{{nbt|compound|feature|required=1}}：一个[[已放置的地物]]，决定要生成的地物。
+</div>
+
+游戏放置地物时会假定地物具有拼图方块，此拼图方块的名称是<code>minecraft:bottom</code>，连接类型为允许旋转，{{nbt|string|final_state}}为空气，方块状态为<code>orientation=down_south</code>。
+
+==== list_pool_element ====
+按照列表顺序依次放置结构元素，使其重叠生成。
+
+<div class="treeview">
+* {{nbt|compound|element|required=1}} 模板池元素
+** {{nbt|string|element_type|required=1}}：<code>list_pool_element</code>
+** {{nbt|string|projection|required=1}}：决定生成的结构元素是否匹配地形高度。取值可以为<code>rigid</code>（不调整）或<code>terrain_matching</code>（根据地形高度对进行偏移）。
+** {{nbt|list|elements|required=1}}：一个结构元素列表。
+*** {{nbt|compound}}：一个模板池元素。
+**** 与此结构相同，递归定义。
+</div>
+
+==== single_pool_element ====
+使用[[结构模板]]生成结构。
+
+<div class="treeview">
+* {{nbt|compound|element|required=1}} 模板池元素
+** {{nbt|string|element_type|required=1}}：<code>single_pool_element</code>
+** {{nbt|string|projection|required=1}}：决定生成的结构元素是否匹配地形高度。取值可以为<code>rigid</code>（不调整）或<code>terrain_matching</code>（根据地形高度对进行偏移）。
+** {{nbt|string|location|required=1}}：（命名空间ID）要放置的结构模板。
+** {{nbt|string|override_liquid_settings}}：（默认为<code>apply_waterlogging</code>）用于覆盖父模板池的液体设置。可以为<code>apply_waterlogging</code>（将可含水方块转换为含水方块）和<code>ignore_waterlogging</code>（直接替代液体方块）。
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|processors|required=1}}：结构模板放置前要应用的[[处理器列表]]，命名空间ID或内联定义均可。
+</div>
+
+游戏准备放置结构模板时，会先转化[[拼图方块]]并移除所有[[结构空位]]，然后处理结构片段内的液体并使用处理器列表对结构模板进行后处理，处理完毕后才会真正放置结构片段。被移除的结构空位和空气的位置会保留结构生成前的方块。
+
+==== legacy_single_pool_element ====
+使用结构模板生成结构。与<code>single_pool_element</code>类似，但会额外移除空气。
+
+<div class="treeview">
+* {{nbt|compound|element|required=1}} 模板池元素
+** {{nbt|string|element_type|required=1}}：<code>legacy_single_pool_element</code>
+** {{nbt|string|projection|required=1}}：决定生成的结构元素是否匹配地形高度。取值可以为<code>rigid</code>（不调整）或<code>terrain_matching</code>（根据地形高度对进行偏移）。
+** {{nbt|string|location|required=1}}：（命名空间ID）要放置的结构模板。
+** {{nbt|string|override_liquid_settings}}：（默认为<code>apply_waterlogging</code>）用于覆盖父模板池的液体设置。可以为<code>apply_waterlogging</code>（将可含水方块转换为含水方块）和<code>ignore_waterlogging</code>（直接替代液体方块）。
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|processors|required=1}}：结构模板放置前要应用的处理器列表。
+</div>
+
+== 定义行为 ==
+模板池定义数据仅在服务端启动时加载一次，使用{{cmd|reload}}命令不可以重新加载模板池定义，而必须重启服务端。
+
+模板池用于<code>[[结构定义格式#jigsaw|jigsaw]]</code>结构类型的结构生成。每个[[拼图方块]]都指定了目标池，游戏在生成结构时会从目标池的结构元素中选取一项生成。由于拼图方块需要拼接，因此拼接时只会生成带有对应拼图方块的结构。模板池也可以被{{cmd|place jigsaw}}直接调用。
+
+游戏将从模板池中随机选取一个元素。在起始模板池中，若指定了起始拼图方块名称，但该元素没有找到对应名称的拼图方块，则结构地物生成失败；在非起始模板池中，满足以下条件才能成功生成：
+# 存在对应名称、对应方向（水平的拼图方块相互对应、朝上和朝下的拼图方块相互对应）的拼图方块。
+# 将生成的该元素方块与结构起始点的三维切比雪夫距离不会超过该已配置结构地物中指定的最大距离，或使用命令或拼图方块GUI生成时不超过128。
+# 将生成的该元素不会与生成的其他拼图发生重叠，除非拼图方块指向的方块位于当前拼图内部。
+# 拼图方块指向的方块位于当前拼图内部，则该元素与之后生成的所有拼图都必须完全位于该拼图方块所在拼图的内部。
+若无法成功生成，将会再去尝试该列表中的其他元素，如果全部都无法成功生成，将尝试使用回落池。
+
+回落池中定义的模板会在以下两种情况下生成：
+# 当拼图方块生成达到预定层数时，回落池会生成在最后一层的末尾。
+# 当拼图方块试图加载的模板池中所有元素都无法成功生成。
+以上两种情况下，游戏会试图从回落池加载一个模板来替代原先的模板进行生成。当回落池中的模板尝试生成时，如果该回落池中任意一个元素也都无法成功生成，则不会生成任何东西。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16.2|dev=20w28a|为数据包中模板池定义加入了实验性支持。}}
+|{{HistoryLine|||dev=pre1|模板池从{{filepath|-{}-data/minecraft/template_pool/<''命名空间''>/<''路径''>}}移动到{{filepath|-{}-data/<''命名空间''>/template_pool/<''路径''>}}，和其他资源保持一致。}}
+|{{HistoryLine||1.18|dev=pre1|现在模板池元素类型<code>feature_pool_element</code>改为引用已放置的地物，而不是已配置的地物。}}
+|{{HistoryLine||1.19.3|dev=22w44a|移除了模板池的{{nbt|string|name}}字段，此前为必填项但无任何作用。}}
+|{{HistoryLine||1.21|dev=24w19a|向模板池元素加入了{{nbt|string|override_liquid_settings}}字段。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Vorlagenpool]]
+[[en:Template pool]]
+[[fr:Groupe de modèles]]
+[[pt:Conjunto de modelos]]

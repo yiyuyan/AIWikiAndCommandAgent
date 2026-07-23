@@ -1,0 +1,63 @@
+# 页面: 命令/debugconfig
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/debugconfig
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}{{debug feature warning}}
+{{Infobox command
+|oplevel=3
+|others=仅专用服务器<br>仅[[wzh:集成开发环境|IDE]]或启用[[调试工具#MC_DEBUG_DEV_COMMANDS|调试工具<code>DEV_COMMANDS</code>]]
+}}
+
+控制玩家进出配置阶段。
+
+== 语法 ==
+: <code>debugconfig config <target></code>
+:: 将玩家的网络阶段切换为配置阶段。
+
+: <code>debugconfig dialog <target> <dialog></code>
+:: 向网络阶段处于配置阶段的玩家发送对话框。
+
+: <code>debugconfig unconfig <target></code>
+:: 将网络状态处于配置阶段的玩家加入世界。
+
+== 参数 ==
+{{argument|target|entity}}（在<code>/debugconfig config</code>中）
+: 指定要切换到配置阶段的玩家。
+: {{arg desc|je=entity|type=players|amount=single}}
+
+{{argument|target|uuid}}（不在<code>/debugconfig config</code>中）
+: 指定一个玩家UUID，将尝试根据此UUID解析为在配置阶段中的玩家。
+: {{arg desc|je=uuid}}
+
+{{argument|dialog|dialog}}
+: 指定要展示的对话框。由于网络阶段为配置阶段，事实上只有内联定义的对话框才可被解析。
+: {{arg desc|je=dialog}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=debugconfig dialog...<br>debugconfig unconfig ...|<code><target></code>无法找到对应玩家|fail}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了{{cmd|debugconfig|link=none}}，仅在IDE中可用。}}
+|{{HistoryLine||1.21.6|dev=25w21a||加入了{{cmd|debugconfig dialog|link=none}}子命令。}}
+|{{HistoryLine||1.21.9|dev=pre1|现在{{cmd|debugconfig|link=none}}命令在启用[[调试工具#DEV_COMMANDS|调试工具<code>MC_DEBUG_DEV_COMMANDS</code>]]时可用。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/debugconfig]]
+[[en:Commands/debugconfig]]

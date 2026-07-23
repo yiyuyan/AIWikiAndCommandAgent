@@ -1,0 +1,200 @@
+# 页面: 微光之门
+# 来源: https://zh.minecraft.wiki/w/%E5%BE%AE%E5%85%89%E4%B9%8B%E9%97%A8
+# 分类: 不可再生资源, 使用简单计算器的页面, 愚人节玩笑特性, 方块, 本地化模块需更新, 红石, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:26:02
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|微光|微光|閃光}}{{Joke feature|update=25w14craftmine}}
+{{Infobox block
+|group1=原始外观
+|1-1=Shimmering Door.png<!--Iron Door JE5.png，但窗口是黑色不透明的-->
+|group2=游戏内外观
+|2-1=Shimmering_Door.webp
+|imagesize=x150px
+|invimage = [微光之门]Shimmering Door
+|block-breaking-tool = ''无''
+|block-hardness = -1
+|block-blast-resistance = 3,600,000
+|block-lava-flammable = 否
+|block-suffocating = 否
+|block-redstone-conductor = 否
+|block-java-solid = 是
+|block-replaceable = 否
+|block-push-reaction = 不可推动，不可拉动
+|block-instrument = 竖琴/钢琴
+|block-map-color={{color|#334CB2}}
+|item-creative-tab = {{tp|itemGroup.functional}}
+|maxStack = 64
+|item-renewable = 否
+|light = 15
+|block-id-raw = shimmering_door
+|item-id-raw = shimmering_door
+|nobe = 1
+}}
+
+'''微光之门（Shimmering Door）'''是一种需要用[[微光钥匙]]打开的[[门]]。
+
+== 生成 ==
+=== 自然生成 ===
+微光之门会自然生成于[[大厅]]结构中。
+
+== 获取 ==
+微光之门不能在生存模式中正常获得，但可以通过[[创造模式物品栏]]、[[创造模式]]中使用{{ctrl|选取方块}}或[[命令]]获得。
+
+== 破坏 ==
+微光之门不能被挖掘破坏。
+
+{{Breaking table/manual|only=je|nocopper=1
+|{{BlockSprite|Shimmering Door}} 微光之门|-1}}
+
+微光之门被破坏后不会掉落。
+
+== 用途 ==
+与[[天空（方块）|天空]]类似，微光之门也会被渲染成与其方块所在维度的天空效果相同的视觉效果，但偶尔会显示出铁门的纹理。
+
+微光之门只能被红石信号切换开关状态。
+
+=== 交互行为 ===
+手持试炼钥匙或不祥试炼钥匙时与微光之门交互会获得[[奖杯（25w14craftmine）|奖杯]]，其描述为“差点意思”奖牌（"Close But No" Medal）。
+
+其他情况下，尝试与微光之门交互客户端动作栏会显示“门渴望着钥匙！”（Doors yearn for the keys!）。
+
+手持微光钥匙与关闭的微光之门交互时，游戏会尝试生成结构，见下文。
+
+微光之门可以通过红石信号开启，但此时不会生成结构。
+
+=== 生成结构 ===
+[[File:Shimmering Door Something Wrong GUI.png|thumb|“出错了”屏幕]]
+[[File:Shimmering Door Boring Corridor Room GUI.png|thumb|结构预览屏幕]]
+微光钥匙记录了自身开启微光之门后可以生成的结构。当玩家手持微光钥匙与开启的微光之门交互后，会显示一个预览屏幕。预览屏幕左上角的微光钥匙即玩家使用的钥匙，右上角的“↑E”只有装饰用途，不具有任何含义。
+
+为方便下文表述，若一扇关闭的微光之门的与其方块状态<code>facing</code>相反的方向上存在另一扇关闭的微光之门，且这两扇门的方块状态<code>facing</code>的值在方位上相反，则称这两扇微光之门配对。
+
+如果微光钥匙指定的结构不存在、指定的结构没有可配对的微光之门或微光之门背后的空间不足以生成结构，则屏幕会显示出一个死亡的颜文字，悬浮文本为“出错了”（Something Wrong）。
+
+否则，游戏会显示出生成结构的伪俯视图预览。各方块颜色的意义如下：
+* 绿色：结构中存在地面且非边缘区域，悬浮文本为“房间”（Room）。
+* 黄绿色：结构中存在地面且为边缘区域，悬浮文本为“墙”（Wall）。
+* 紫色：结构中的微光之门。悬浮文本为“门”（Door）”。
+* 灰色：世界中已存在的方块，悬浮文本为“现有的墙”（Existing wall）。
+* 红色：世界中已存在的微光之门，且这扇微光之门可以与结构内的微光之门配对。悬浮文本为“现有的门”（Existing Door）。
+* 黄色：玩家交互的微光之门，悬浮文本为“你刚刚点击的门“（The Door You Just Clicked）。
+
+黄色方块有且只有一个，根据玩家交互的微光之门的方向按照上北下南左西右东的方位显示在预览图最边缘。游戏会优先配对结构内与玩家交互的微光之门方向相反的微光之门。
+
+如果结构中不只存在一个可以配对的微光之门，则预览屏幕还会显示“上一个”（Previous）和“下一个”（Next）两个按钮以供玩家选择开启结构中的哪扇微光之门。在“下一个”的切换顺序下，切换顺序依次为：同XZ坐标，但更高Y坐标的门；以预览屏幕为准，逆时针方向查找到的下一扇门。
+
+微光之门开启后，将生成指定的结构，其本身和与之配对的微光之门会永久开启（但仍会被红石信号影响）。被标记为红色的门和其配对的门一样会永久开启。
+
+=== 光源 ===
+微光之门会发出亮度等级为15的光。
+
+== 音效 ==
+{{Sound table
+|sound=Iron break1.ogg
+|sound2=Iron break2.ogg
+|sound3=Iron break3.ogg
+|sound4=Iron break4.ogg
+|sound5=Iron break5.ogg
+|sound6=Iron break6.ogg
+|sound7=Iron break7.ogg
+|sound8=Iron break8.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source=方块
+|description=破坏方块
+|id=block.iron.break
+|translationkey=subtitles.block.generic.break}}
+{{Sound table
+|sound=Iron step1.ogg
+|sound2=Iron step2.ogg
+|sound3=Iron step3.ogg
+|sound4=Iron step4.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.iron.fall
+|translationkey=subtitles.block.generic.fall}}
+{{Sound table
+|sound=Iron step1.ogg
+|sound2=Iron step2.ogg
+|sound3=Iron step3.ogg
+|sound4=Iron step4.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source=方块
+|description=挖掘方块
+|id=block.iron.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Iron break1.ogg
+|sound2=Iron break2.ogg
+|sound3=Iron break3.ogg
+|sound4=Iron break4.ogg
+|sound5=Iron break5.ogg
+|sound6=Iron break6.ogg
+|sound7=Iron break7.ogg
+|sound8=Iron break8.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source=方块
+|description=放置方块
+|id=block.iron.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Iron step1.ogg
+|sound2=Iron step2.ogg
+|sound3=Iron step3.ogg
+|sound4=Iron step4.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.iron.step
+|translationkey=subtitles.block.generic.footsteps}}
+{{Sound table
+|sound=Iron Door open1.ogg
+|sound2=Iron Door open2.ogg
+|sound3=Iron Door open3.ogg
+|sound4=Iron Door open4.ogg
+|subtitle={{tp|subtitles.block.door.toggle}}
+|source=方块
+|description=打开微光之门
+|id=block.iron_door.open
+|translationkey=subtitles.block.door.toggle
+|volume=0.9}}
+{{Sound table
+|sound=Iron Door close1.ogg
+|sound2=Iron Door close2.ogg
+|sound3=Iron Door close3.ogg
+|sound4=Iron Door close4.ogg
+|subtitle={{tp|subtitles.block.door.toggle}}
+|source=方块
+|description=关闭微光之门
+|id=block.iron_door.close
+|translationkey=subtitles.block.door.toggle
+|volume=0.9
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|Shimmering Door
+|spritetype=block
+|nameid=shimmering_door
+|generatetranslationkeys=java
+|foot=1}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{bst|facing|north|north|方块朝向北方|south|方块朝向南方|west|方块朝向西方|east|方块朝向东方}}
+{{bst|half|lower|upper|此方块是两格高方块组合的上半部分|lower|此方块是两格高方块组合的下半部分}}
+{{bst|hinge|left|left|门轴位于门的左侧|right|门轴位于门的右侧}}
+{{bst|open|false|true|方块处于打开状态|false|方块处于关闭状态}}
+{{bst|powered|false|true|方块接收到了红石信号|false|方块未接收到红石信号|foot=1}}
+
+== 导航 ==
+{{Navbox jokes|25w14craftmine}}
+
+[[Category:方块]]
+[[Category:红石]]
+
+[[en:Shimmering Door]]
+[[ja:Shimmering Door]]

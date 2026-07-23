@@ -1,0 +1,167 @@
+# 页面: Etho台阶
+# 来源: https://zh.minecraft.wiki/w/Etho%E5%8F%B0%E9%98%B6
+# 分类: 不可再生资源, 使用简单计算器的页面, 台阶, 含空白段落的条目, 愚人节玩笑特性, 方块, 本地化模块需更新, 覆写自动值的页面
+# 抓取时间: 2026-07-14 17:12:20
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=Java版2.0|nowarn=1}}
+{{Infobox block
+|group1=底层
+|1-1=Etho Slab.png
+|group2=顶层
+|2-1=Etho Slab (Top).png
+|group3=双层
+|3-1=Double_Etho_Slab.png
+|invimage=[Etho台阶]Etho Slab
+|renewable=否
+|maxstack=64
+|breaking-tool=''无''
+|blast-resistance=6
+|hardness=5
+|lava-flammable=否
+|suffocating='''双台阶'''：是<br>'''单台阶'''：否
+|redstone-conductor=否
+|java-solid=是
+|replaceable=否
+|push-reaction=被推动破坏，不可拉动
+|instrument=竖琴/钢琴
+|block-map-color={{color|#ff0000}}
+|block-id-raw='''Etho台阶'''：160<br>'''双层Etho台阶'''：159
+|nobe=1
+|creative-tab=装饰性方块
+|item-id-raw=160
+}}
+'''Etho台阶（Etho Slab）'''是用[[TNT]]材料制作的[[台阶]]。
+
+== 生成 ==
+Etho台阶不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting|nocat=1
+|A3= TNT |B3= TNT |C3= TNT
+|Output=[Etho台阶]Etho Slab, 6
+|Olink=none
+|ignoreusage=1
+}}
+
+== 破坏 ==
+没有工具能加速对Etho台阶的挖掘。
+
+{{Breaking table/manual|only=je|{{BlockSprite|Etho Slab}} Etho台阶|5|none}}
+
+Etho台阶被破坏后会掉落自身。
+
+== 用途 ==
+玩家尝试破坏Etho台阶时，Etho台阶有概率发出对话气泡。
+
+=== 爆炸 ===
+Etho台阶有多种方式被激活。一旦Etho台阶被激活，就会消失并在Etho台阶方块的中心（+0.5，+0.5，+0.5）生成一个[[被激活的TNT]]实体。
+
+Etho台阶被以下方式激活时，会在{{convert|80}}后爆炸：
+* 玩家对其{{ctrl|使用}}[[打火石]]或[[火焰弹]]。
+* 被[[红石信号]]激活（详见下文）。
+* 被发射器中的[[打火石]]激活。
+
+Etho台阶是[[红石元件#机械元件|机械元件]]，可被下列形式激活：
+* 毗邻的开启的[[红石元件#电源|电源]]（例外：[[红石火把]]不会激活其所附着的Etho台阶）。
+* 毗邻的[[红石电路/充能与激活|充能方块]]。
+* 毗邻的指向Etho台阶且激活的[[红石中继器]]、[[红石比较器]]或[[红石粉]]（包括Etho台阶上方的红石粉）；毗邻但未指向Etho台阶的红石粉不会激活Etho台阶。
+
+Etho台阶被爆炸破坏时，会在{{convert|10}}到{{convert|29}}后爆炸。
+
+=== 生成铁砧 ===
+当Etho台阶爆炸后，它会在爆炸范围内的玩家上方生成一个[[铁砧]]。
+
+== 音效 ==
+{{empty section}}
+
+== 数据值 ==
+=== ID ===
+{| class="wikitable" style="text-align:center"
+|-
+! 名称 || 数字ID || 本地化键名
+|-
+| {{BlockSprite|tnt|text=Etho Slab}} || <code>159</code> || <code>tile.ethoSlab.tntUnlit.name</code>
+|-
+| {{BlockSprite|tnt|text=Etho Slab (Lit??)}} || <code>159</code> || <code>tile.ethoSlab.tntLit.name</code>
+|-
+| {{BlockSprite|Etho Slab|text=Etho Slab}} || <code>160</code> || <code>tile.ethoSlab.tntUnlit.name</code>
+|-
+| {{BlockSprite|Etho Slab|text=Etho Slab (Lit??)}} || <code>160</code> || <code>tile.ethoSlab.tntLit.name</code>
+|}
+{| class="wikitable" style="text-align:center"
+|-
+! 名称 || 数字ID || 本地化键名
+|-
+| {{EntityLink|id=TNT|link=none|TNT}} || <code>20</code> || <code>entity.Tnt.name</code>
+|}
+
+=== 方块数据 ===
+{| class="wikitable"
+! 位
+! 描述（双层Etho台阶）
+! 描述（Etho台阶）
+|-
+| 0x1
+| rowspan="4" | <span style="color:silver">（未使用）</span>
+| 0x2位和0x4位均为0时，Etho台阶被破坏时是否立刻激活。
+|-
+| 0x2
+| <span style="color:silver">（未使用）</span>
+|-
+| 0x4
+| <span style="color:silver">（未使用）</span>
+|-
+| 0x8
+| Etho台阶是否是上半台阶。
+|}
+
+=== 实体数据 ===
+{{main|实体数据格式}}
+被激活的TNT有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+<div class="treeview">
+* {{nbt|compound}} 实体数据
+** {{nbt collapsed|实体共通标签|
+** {{nbt|string|id|existonsave=1|required=1}}：实体类型。此数据仅在持久化保存（存储入区块文件或作为乘客实体保存）时存在。
+** {{nbt|short|Air|existonsave=1}}：（{{interval|left=-20|right=实体最大空气值}}）当前实体所剩的空气值。在指定环境中每刻增加4直至实体最大空气值；在可窒息环境中逐渐减少直至-20，达到-20后如果实体仍然在可窒息环境中则会受到伤害，并将此值重置为0，继续减少进行循环。此值不存在时游戏默认为实体最大空气值。
+** {{nbt|int|Dimension|existonsave=1|required=1}}：实体所处的维度。
+** {{nbt|float|fallDistance|existonsave=1|required=1}}：当前实体已经摔落的距离。值越大，实体落地时受到的摔落伤害越大。
+** {{nbt|short|Fire|existonsave=1|required=1}}：正值代表距离火熄灭剩余的时间，负值表示当前实体能够在火中站立而不着火的时间，单位为游戏刻。未着火且未接触火时，玩家为-{{convert|20}}，其他实体为-{{convert|1}}。
+** {{nbt|bool|Invulnerable|existonsave=1|required=1}}：实体是否能抵抗绝大多数伤害。如果为<samp>true</samp>，实体只会受到来自[[创造模式]]玩家或{{cmd|kill}}等造成的伤害。
+** {{nbt|list|Motion|existonsave=1|required=1}}：当前实体的速度，代表了下一游戏刻实体将要移动的距离向量。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）X轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Y轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+*** {{nbt|double}}：（{{interval|left=-10|right=10}}）Z轴速度分量。如果此值超过值域，则加载时会被重置为0。如果为非数（NaN），游戏不做处理正常加载。
+** {{nbt|bool|OnGround|existonsave=1|required=1}}：实体是否正在接触地面。
+** {{nbt|compound|Riding}}：此实体当前正在骑乘的实体。注意：如果实体处于骑乘状态，堆叠中“最高”的实体拥有{{nbt|list|Pos}}标签，而该标签指定了“最低”的实体的坐标。同样，“最低”的实体控制这堆实体的运动；当实体堆叠由刷怪笼生成时，生成条件由最上方的实体决定。
+*** 见[[实体数据格式]]。
+** {{nbt|int|PortalCooldown|existonsave=1|required=1}}：距离当前实体下一次可以穿过[[下界传送门]]传送的时间，以游戏刻计。在使用下界传送门传送后，此项根据玩家游戏模式和当前游戏规则设置冷却。当实体不接触下界传送门方块时，此值每游戏刻减1直至0，此时才可以再次使用下界传送门传送。
+** {{nbt|list|Pos|existonsave=1|required=1}}：当前实体的坐标。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）X轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-20000000|right=20000000}}）Y轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+*** {{nbt|double}}：（{{interval|left=-30000512|right=30000512}}）Z轴坐标。如果此值超过值域，则被强制修改坐标以回到值域。如果为非数（NaN），则加载此实体时会产生错误。
+** {{nbt|list|Rotation|existonsave=1|required=1}}：实体的旋转角度，使用角度制。如果角度值为无限或非数（NaN），则对应角度会被修改为0度。
+*** {{nbt|float}}：（{{interval|left=0|right=360}}）当前实体以Y轴为中心，与正南方以顺时针方向旋转的视角角度（即偏转角）。如果角度值超出对应值域，则在按照相同朝向重新限制到值域内。
+*** {{nbt|float}}：（{{interval|left=-90|right=90}}）当前实体与视角与水平面之间的倾斜角（即俯仰角）。水平面为0，正值表示面朝下方，相反则为上方。如果此值超过值域，则被强制修改以回到值域。
+** {{nbt|long|UUIDLeast|existonsave=1|required=1}}：实体的UUID最低有效位。
+** {{nbt|long|UUIDMost|existonsave=1|required=1}}：实体的UUID最高有效位。
+}}
+** {{nbt|byte|Fuse|existonsave=1|required=1}}：（默认为80，单位为刻，即4秒）在爆炸之前要经过的时间，负值则在游戏刻计算时立刻爆炸。
+</div>
+
+== 你知道吗 ==
+* Etho台阶的名称参考了YouTube用户[https://www.youtube.com/user/EthosLab EthosLab]，这一名称源于[[wikipedia:mondegreen|误听]]（即把原本的语句听成其他单词的语言现象）。
+
+== 导航 ==
+{{Navbox slab}}
+{{Navbox jokes|2.0}}
+
+[[Category:方块]]
+
+[[en:Etho Slab]]
+[[fr:Etho Slab]]
+[[ja:Etho Slab]]
+[[pt:Edição Java 2.0/Etho Slab]]
+[[uk:Плита з динаміту]]

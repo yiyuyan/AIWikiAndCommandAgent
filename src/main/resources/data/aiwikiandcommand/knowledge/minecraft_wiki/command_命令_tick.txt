@@ -1,0 +1,99 @@
+# 页面: 命令/tick
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/tick
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{distinguish|刻|命令/kick}}
+{{exclusive|java}}
+{{Infobox command
+|name=tick
+|oplevel=3
+|nocmdblock=1
+}}
+
+停止或开始[[游戏刻]]的流逝，或更改游戏刻速率。
+
+== 语法 ==
+: <code>tick query</code>
+:: 查询当前的游戏刻流逝状态及目标游戏刻速率，以及有关游戏刻的性能数据，包括每游戏刻的平均用时和用时的[[wzh:百分位数|百分位数]]。
+: <code>tick rate <rate></code>
+:: 设置目标游戏刻速率。
+: <code>tick freeze</code>
+:: 冻结游戏刻的流逝和所有游戏元素，玩家及玩家骑乘的实体除外。
+: <code>tick unfreeze</code>
+:: 取消冻结游戏刻。
+: <code>tick step [<nowiki><time></nowiki>]</code>
+:: 取消冻结后，进行步进特定数量的游戏刻，然后恢复冻结。仅能在已冻结的情况下使用。
+: <code>tick step stop</code>
+:: 停止正在进行的游戏刻步进，并重新冻结游戏。
+: <code>tick sprint <nowiki>[<time>]</nowiki></code>
+:: 快进。忽略目标游戏刻速率，使游戏刻的流逝尽可能快，并在指定时间后恢复至此命令执行之前的游戏刻流逝状态。恢复后游戏会显示此过程中的游戏刻性能信息。
+: <code>tick sprint stop</code>
+:: 停止正在进行的快进。
+
+== 参数 ==
+{{argument|rate|float}}
+: 指定要设置的目标游戏刻频率，单位为游戏刻每秒（TPS）。
+: {{arg desc|je=float|min=1.0|max=10000.0}}
+
+{{argument|time|time}}
+: 指定要步进或快进的时长。若未指定，默认为1游戏刻。
+: {{arg desc|je=time|min=1}}
+
+{{Calculator|tick}}
+
+== 结果 ==
+[[Java版26.3]]前：<!-- {{until|JE 26.3}} -->
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|succeed}}
+{{Result table}}
+
+[[Java版26.3]]后：<!-- {{upcoming|JE 26.3}} -->
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/tick step|未冻结游戏|fail}}
+{{Result table|cmd=/tick step stop|不存在执行中的步进}}
+{{Result table|cmd=/tick sprint stop|不存在执行中的快进}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/tick query|执行成功|1|1|当前的目标游戏刻速率}}
+{{Output table|cmd=/tick rate ...|执行成功|1|1|指定的目标游戏刻速率}}
+{{Output table|cmd=/tick unfreeze|执行成功|1|1|0}}
+{{Output table|cmd=/tick step stop|执行成功|1|1|如果在步进的过程中下执行，为1；否则为0}}
+{{Output table|cmd=/tick sprint stop|执行成功|1|1|如果在快进的过程中执行，为1；否则为0}}
+{{Output table|cmd=other|执行成功|1|1|1}}
+{{Output table}}
+
+== 示例 ==
+* 将目标游戏刻速率设置为30 TPS：<code>/tick rate 30</code>
+* 快进1游戏日：<code>/tick sprint 1d</code>
+* 快进5秒：<code>/tick sprint 5s</code>
+* 在冻结时前进1630游戏刻：<code>/tick step 1630</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.3|dev=23w43a|加入了{{cmd|tick|link=none}}命令。}}
+|{{HistoryLine|||dev=23w44a|命令中的<code><nowiki><time></nowiki></code>现在为可选参数，默认值为<code>1</code>。}}
+|{{HistoryLine|||dev=pre3|当游戏卡顿时，{{cmd|tick query|link=none}}命令现在会显示“{{tp|commands.tick.status.lagging}}”。}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在{{cd|/tick step|/tick step stop|/tick sprint stop|d=pretty}}会在失败时返回错误而不是打印错误信息并返回0。}}
+}}
+
+== 你知道吗 ==
+* 该指令最早源自开发者[[Gnembon]]所制作的[https://github.com/gnembon/fabric-carpet Carpet Mod]。
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/tick]]
+[[en:Commands/tick]]
+[[ja:コマンド/tick]]
+[[lzh:令/tick]]
+[[pt:Comandos/tick]]
+[[ru:Команды консоли/tick]]

@@ -1,0 +1,328 @@
+# 页面: 嘎枝之心
+# 来源: https://zh.minecraft.wiki/w/%E5%98%8E%E6%9E%9D%E4%B9%8B%E5%BF%83
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:32
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|group1=失活
+|1-1=Creaking Heart.png
+|group2=休眠
+|2-1=Dormant Creaking Heart.png
+|group3=激活
+|3-1=Active Creaking Heart.png
+|invimage=Creaking Heart
+|light=0
+}}
+
+'''嘎枝之心（Creaking Heart）'''是一种激活后可以生成[[嘎枝]]的方块。
+
+== 生成 ==
+=== 自然生成 ===
+嘎枝之心罕见地生成于[[苍白之园]]生物群系中[[嘎枝苍白橡树]]的树干顶端，其六个面均被苍白橡木原木包围。由树苗生成的苍白橡树中不会出现嘎枝之心。
+
+{{in update|drop 3 2026|for=嘎枝之心还会生成于苍白之园[[废弃营地]]，作为营地变种3的一部分生成，位于结构自带的苍白橡树的树干且暴露在外。}}
+
+{{Block distribution}}
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|B1= Pale Oak Log
+|B2= Block of Resin
+|B3= Pale Oak Log
+|Output= Creaking Heart
+|type= Miscellaneous
+}}
+
+== 破坏 ==
+挖掘嘎枝之心的合适工具是斧。
+
+{{Breaking table}}
+
+没有被具有[[精准采集]]的工具挖掘破坏时，嘎枝之心被破坏后会掉落1-3个[[树脂团]]。挖掘工具的[[时运]]魔咒会使树脂团额外等概率掉落0-<魔咒等级>个树脂团，但掉落总数不超过9个。
+
+被具有精准采集的工具挖掘破坏时，嘎枝之心被破坏后会掉落自身。
+
+'''自然生成'''的嘎枝之心在直接或间接被玩家破坏后，还会掉落{{xp|20|24}}。
+
+嘎枝之心被破坏时，将清除绑定的嘎枝。{{in|je}}如果是被玩家挖掘直接或间接破坏的，则还会触发玩家的{{code|player_killed_entity}}[[进度定义格式#player_killed_entity|击杀触发器]]。
+
+== 用途 ==
+{{see also|嘎枝}}
+{{FakeImage|align=right|width=240px|{{BlockGrid|nolink=1|scale=2|p=Pale oak log|c=Creaking heart active|q=Pale oak log horizontal|d=Creaking heart active horizontal| p | c  qdq| p }}|可以使嘎枝之心激活的两种结构示意图}}
+嘎枝之心可以放置在不同的方向，类似于[[原木]]。它具有失活、休眠和激活状态，其中初始处于休眠状态。当嘎枝之心两端的方块都是[[苍白橡木原木]]、[[苍白橡木|{{tr|苍白橡木|蒼白橡木塊|蒼白橡木}}]]或它们的去皮变种，且朝向与嘎枝之心一致时，嘎枝之心就会脱离失活状态。
+
+=== 周期检查 ===
+嘎枝之心每{{range|20|24}}游戏刻检查其所处环境，以及绑定的嘎枝的状态。
+
+每次检查中，嘎枝之心会先更新自身状态。如其不处于有效结构中，且没有绑定嘎枝，其将进入失活状态；否则，嘎枝之心在[[主世界]]的夜晚{{fn|当前[[时间]]满足{{interval|left=12600|right=23400}}。}}进入激活状态，其他情况进入休眠状态。如该步中嘎枝之心从其他状态转变到失活状态，则其不会执行后续检查。
+
+随后，嘎枝之心会根据是否绑定嘎枝，执行以下检查：
+
+; 已绑定嘎枝时
+
+如果以下条件有至少一条满足，则将清除绑定的嘎枝：
+* 当前时间不为夜晚，且嘎枝没有因为被命名等原因被标记为不能自然删除{{fn|{{in|je}}{{nbt|boolean|PersistenceRequired}}标签设置为<code>true</code>。}}。
+* 嘎枝到嘎枝之心底面中心的[[欧几里得距离]]超过34格。
+* 在连续5次检查中，嘎枝的边界箱都与某位玩家的视平线相交。
+
+; 未绑定嘎枝时
+如满足以下所有条件，嘎枝之心将在周围33×17×33的范围内寻找随机位置生成[[嘎枝]]并与之绑定。
+* 嘎枝之心处于激活状态。
+* 游戏难度不为和平，且游戏规则{{gamerule|spawn_mobs|doMobSpawning}}不为<code>false</code>。
+* {{only|je|for=有生存模式或冒险模式下的玩家处在嘎枝之心的[[欧几里得距离]]32格范围内。}}
+
+能够生成嘎枝的合适位置需同时满足以下所有条件：
+* 下方的方块顶面是完整的，且不能为[[树叶]]。
+* 待生成的位置不能被不完整方块的[[碰撞箱]]占据，例如[[地毯]]可以阻止嘎枝生成，但[[按钮]]不会。
+* {{only|for=待生成的位置不能是[[水]]或[[熔岩]]。|JE}}
+* 待生成的位置不能被其他实体的碰撞箱占据。
+
+=== 生成树脂团 ===
+[[File:Creaking linked to a creaking heart.jpg|thumb|被玩家攻击的嘎枝与其绑定的嘎枝之心之间产生粒子效果并生成树脂团]]
+当绑定的嘎枝受到来自玩家或驯服的[[狼]]的伤害时，处于激活状态的嘎枝之心会尝试在周围的{{tr|苍白橡木|蒼白橡木塊|蒼白橡木}}、苍白橡木原木、去皮苍白橡木和去皮苍白橡木原木上生成{{range|2|3}}个[[树脂团]]。每次生成后有{{convert|100}}的冷却期，期间不再能生成树脂团。
+
+; 生成细节
+该过程中，嘎枝之心将会进行{{range|2|3}}次生成尝试；每次尝试时，以自身为中心、沿相邻的具有{{TagLink|block|pale_oak_logs}}标签的方块执行广度优先搜索，最大深度为2；对搜索过程中非自身的方块，将会按随机顺序依次选取一个方向尝试生成树脂团，如生成成功则结束本次生成尝试。
+
+=== 红石比较器 ===
+嘎枝之心可被[[红石比较器]]检测，输出取决于该嘎枝之心与其绑定的[[嘎枝]]的距离。
+
+若不存在绑定的嘎枝，红石信号强度为零；否则，红石信号强度为<math>15 - \left\lfloor\frac{\min\{d,32\}}{32}\times 15\right\rfloor</math>，其中<math>\lfloor x \rfloor</math>表示向下取整，<math>d</math>为嘎枝之心底面中心至相应嘎枝的[[欧几里得距离]]。
+{| class="wikitable sortable collapsible collapsed"
+!输出红石信号!!所需最小距离
+|-
+|0||32
+|-
+|1||29.8667
+|-
+|2||27.7333
+|-
+|3||25.6
+|-
+|4||23.4667
+|-
+|5||21.3333
+|-
+|6||19.2
+|-
+|7||17.0667
+|-
+|8||14.9333
+|-
+|9||12.8
+|-
+|10||10.6667
+|-
+|11||8.53333
+|-
+|12||6.4
+|-
+|13||4.26667
+|-
+|14||2.13333
+|-
+|15||0
+|}
+
+=== 闲置音效 ===
+在夜晚，嘎枝之心处于激活或休眠状态，且六面均被苍白橡木原木、{{tr|苍白橡木|蒼白橡木塊|蒼白橡木}}或它们的去皮变种包围时，会播放[[#音效|闲置音效]]。
+
+== 音效 ==
+{{more sounds|基岩版音效|section=1}}
+{{el|je}}：
+{{Sound table
+|sound=Creaking_heart_break.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source={{tp|soundCategory.block}}
+|description=破坏方块
+|id=block.creaking_heart.break
+|translationkey=subtitles.block.generic.break
+}}
+{{Sound table
+|sound=Creaking_heart_fall.ogg
+|source=[[声音#实体依赖分类|实体依赖]]
+|subtitle={{tp|subtitles.block.generic.fall}}
+|description=带有摔落伤害时摔落在方块上
+|id=block.creaking_heart.fall
+|translationkey=subtitles.block.generic.fall
+}}
+{{Sound table
+|sound=Creaking_heart_hit1.ogg
+|sound2=Creaking_heart_hit2.ogg
+|sound3=Creaking_heart_hit3.ogg
+|sound4=Creaking_heart_hit4.ogg
+|sound5=Creaking_heart_hit5.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source={{tp|soundCategory.block}}
+|description=挖掘方块
+|id=block.creaking_heart.hit
+|translationkey=subtitles.block.generic.hit
+}}
+{{Sound table
+|sound=Creaking_heart_place1.ogg
+|sound2=Creaking_heart_place2.ogg
+|sound3=Creaking_heart_place3.ogg
+|sound4=Creaking_heart_place4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source={{tp|soundCategory.block}}
+|description=放置方块
+|id=block.creaking_heart.place
+|translationkey=subtitles.block.generic.place
+}}
+{{Sound table
+|sound=Creaking_heart_step1.ogg
+|sound2=Creaking_heart_step2.ogg
+|sound3=Creaking_heart_step3.ogg
+|sound4=Creaking_heart_step4.ogg
+|sound5=Creaking_heart_step5.ogg
+|sound6=Creaking_heart_step6.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.creaking_heart.step
+|translationkey=subtitles.block.generic.footsteps
+}}
+{{Sound table
+|sound=Creaking heart trail1.ogg
+|sound2=Creaking heart trail2.ogg
+|sound3=Creaking heart trail3.ogg
+|sound4=Creaking heart trail4.ogg
+|sound5=Creaking heart trail5.ogg
+|sound6=Creaking heart trail6.ogg
+|sound7=Creaking heart trail7.ogg
+|subtitle={{tp|subtitles.block.creaking_heart.hurt}}
+|source={{tp|soundCategory.block}}
+|description=绑定的嘎枝受伤
+|id=block.creaking_heart.hurt
+|translationkey=subtitles.block.creaking_heart.hurt
+}}
+{{Sound table
+|sound=Creaking heart idle1.ogg
+|sound2=Creaking heart idle2.ogg
+|sound3=Creaking heart idle3.ogg
+|sound4=Creaking heart idle4.ogg
+|subtitle={{tp|subtitles.ambient.sound}}
+|source={{tp|soundCategory.block}}
+|description=见{{slink||闲置音效}}
+|id=block.creaking_heart.idle
+|translationkey=subtitles.ambient.sound
+}}
+{{Sound table
+|sound=Creaking heart spawnmob.ogg
+|subtitle={{tp|subtitles.block.creaking_heart.spawn}}
+|source={{tp|soundCategory.block}}
+|description=成功生成嘎枝时
+|id=block.creaking_heart.spawn
+|translationkey=subtitles.block.creaking_heart.spawn
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java |nocat=1
+|spritetype=block | Creaking Heart
+|nameid=creaking_heart
+|showblocktags=je
+|blocktags={{GameTag|blocks|creaking_heart}}
+|foot=1
+}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|spritetype=block
+|Creaking Heart
+|nameid=creaking_heart
+|showblocktags=be
+|blocktags={{GameTagBE|block|creaking_heart}}
+|foot=1
+}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+每个嘎枝之心都有相对应的方块实体，储存了关于嘎枝之心的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{load achievements|heart-transplanter;monster-hunter}}
+
+== 进度 ==
+{{load advancements|adventure.root;adventure.kill_a_mob;adventure.kill_all_mobs;adventure.heart_transplanter}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2024年9月28日|link=Minecraft Live 2024|[[Minecraft Live 2024]]展示了嘎枝之心。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.2|dev=24w40a|exp=winter_drop|[[File:Creaking Heart JE1 BE1.png|32px]] [[File:Active Creaking Heart JE1 BE1.png|32px]] 加入了嘎枝之心。}}
+|{{HistoryLine|||dev=pre1|现在嘎枝之心会根据其绑定的[[嘎枝]]的距离产生不同的[[红石比较器]]输出。}}
+|{{HistoryLine||1.21.4|dev=24w44a|嘎枝之心不再属于[[实验性内容]]。
+|[[File:Creaking Heart JE2 BE2.png|32px]] 更改了未激活的嘎枝之心的顶面纹理，使其与其激活状态更加一致。
+|现在嘎枝之心没有被具有[[精准采集]]的工具挖掘破坏时，被破坏后会掉落1-3个[[树脂团]]。
+|现在自然生成的嘎枝之心被破坏后还会掉落{{xp|20|24}}。
+|现在嘎枝之心可以由树脂块和苍白橡木原木合成了。
+|现在嘎枝之心拥有专属的放置音效{{sound||Creaking heart place1 JE2.ogg|Creaking heart place2 JE2.ogg|Creaking heart place3 JE2.ogg|Creaking heart place4 JE2.ogg}}而非先前的{{sound||Creaking heart place1 JE1.ogg|Creaking heart place2 JE1.ogg|Creaking heart place3 JE1.ogg|Creaking heart place4 JE1.ogg}}。
+|现在嘎枝之心的<code>creaking</code>方块状态被<code>active</code>取代，以匹配{{el|BE}}。
+|加入了<code>natural</code>方块状态。
+|现在[[爆炸#风爆|风爆]]能使范围内的嘎枝之心清除其绑定的嘎枝<ref name=MC-278004>{{bug|MC-278004|||Fixed}}</ref>。}}
+|{{HistoryLine|||dev=24w45a|[[爆炸#风爆|风爆]]不再使范围内的嘎枝之心清除其绑定的嘎枝<ref name=MC-278004/>。}}
+|{{HistoryLine|||dev=24w46a|将嘎枝之心的硬度和爆炸抗性由5更改为10。
+|嘎枝之心现在能在水下生成树脂团了。
+|加入了{{nbt|int array|creaking}}数据字段。}}
+|{{HistoryLine||1.21.5|dev=25w02a|修改了嘎枝之心的状态，现在其有{{cd|d=pretty|uprooted|dormant|awake}}三个状态。
+|[[File:Dormant Creaking Heart JE1 BE1.png|32px]] 现在处于<code>dormant</code>状态的嘎枝之心有独特的纹理。
+|现在嘎枝之心在白天不会试图移除因被命名等原因被标记为不自然删除的嘎枝。
+|现在处于<code>dormant</code>状态的嘎枝之心不会试图生成树脂团，也不会试图生成嘎枝。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了[[废弃营地]]，嘎枝之心会作为其的一部分自然生成。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|[[File:Creaking Heart JE1 BE1.png|32px]] [[File:Active Creaking Heart JE1 BE1.png|32px]] 加入了嘎枝之心。}}
+|{{HistoryLine|||dev=1.21.50.24|嘎枝之心不再可以被活塞推拉。
+|嘎枝之心不再可以用作燃料。}}
+|{{HistoryLine|||dev=1.21.50.25|[[File:Creaking Heart JE2 BE2.png|32px]] 更改了未激活的嘎枝之心的顶面纹理，使其与其激活状态更加一致。
+|现在嘎枝之心没有被带有[[精准采集]]的工具挖掘破坏时，被破坏后会掉落1-3个[[树脂团]]。
+|现在自然生成的嘎枝之心被破坏后还会掉落{{xp|20|24}}。
+|现在嘎枝之心可以由树脂块和苍白橡木原木合成了。}}
+|{{HistoryLine|||dev=1.21.50.28|现在使用带有[[时运]]魔咒的工具破坏嘎枝之心时会增加[[树脂团]]的掉落数量。}}
+|{{HistoryLine|||dev=1.21.50.29|将嘎枝之心的硬度和爆炸抗性由5更改为10。}}
+|{{HistoryLine||1.21.51|嘎枝之心现在会更频繁地生成。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.25|修改了嘎枝之心的状态，现在其有{{cd|d=pretty|uprooted|dormant|awake}}三个状态。
+|[[File:Dormant Creaking Heart JE1 BE1.png|32px]] 现在处于<code>dormant</code>状态的嘎枝之心有独特的纹理。
+|现在嘎枝之心在白天不会试图移除因被命名等原因被标记为不自然删除的嘎枝。
+|现在处于<code>dormant</code>状态的嘎枝之心不会试图生成树脂团，也不会试图生成嘎枝。}}
+|{{HistoryLine||26.40|exg=y_2026_drop_3|dev=26.40.27|加入了废弃营地，嘎枝之心会作为其的一部分自然生成。}}
+}}
+
+== 注释 ==
+{{Fnlist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[de:Knarzherz]]
+[[en:Creaking Heart]]
+[[es:Corazón de crepitante]]
+[[fr:Coeur de grinceur]]
+[[ja:クリーキングの心臓]]
+[[ko:크리킹 심장]]
+[[pl:Trzeszczące serce]]
+[[pt:Coração de Rangente]]
+[[ru:Скрипцевина]]
+[[uk:Серце скрипня]]

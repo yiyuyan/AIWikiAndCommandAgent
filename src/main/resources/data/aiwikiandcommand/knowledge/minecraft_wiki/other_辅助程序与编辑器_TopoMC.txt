@@ -1,0 +1,85 @@
+# 页面: 辅助程序与编辑器/TopoMC
+# 来源: https://zh.minecraft.wiki/w/%E8%BE%85%E5%8A%A9%E7%A8%8B%E5%BA%8F%E4%B8%8E%E7%BC%96%E8%BE%91%E5%99%A8/TopoMC
+# 分类: 自定义软件
+# 抓取时间: 2026-07-14 17:36:52
+# 原始 Wikitext 内容:
+
+{{disclaimer}}
+{{Infobox 3rd party tool
+| title = TopoMC
+| image = none
+| name = TopoMC
+| author = Mathuin
+| platform = {{OS|win|linux|mac}}
+| programming language = Python
+| version = 1.0.3
+| date = 2012年10月18日
+| source available = 是
+| license = MIT许可协议
+| minecraft version = 1.4.2
+| forum = http://www.minecraftforum.net/topic/143187-topomc-generating-minecraft-worlds-from-topographic-data/
+| website = http://mathuin.org/TopoMC/
+}}
+[[File:TopoMC-Example.png|256px|缩略图|右|Sample rendering of Block Island, RI]]
+
+TopoMC项目可利用USGS的数据生成更真实的Minecraft世界，尤其适用于NED和NLCD数据集。
+
+== 主要更改 ==
+* 得益于@codewarrior0对MCEdit/pymclevel的改进，TopoMC现在可生成256方块高度限制的Anvil格式地图。
+* TopoMC现已支持在Windows系统运行，且在作者的机器上可正常工作！更多信息详见[https://github.com/mathuin/TopoMC/wiki/RunningOnWindows 此处]。
+* 数组和数据代码已被基于region的代码替代，提升了保存CPU和内存数据时的精准度，下载、预备和构建region的新命令已附说明文档。
+* 新增GPGPU支持，显卡可协助构建Minecraft世界！该功能依赖PyOpenCl的最新功能及相关依赖，但部分系统可能不支持。
+* 重写土地覆盖代码，支持将MCEdit schematics作为某片区域的模板，尤其适用于耕地（农场）和已探索区域，更多信息见[https://github.com/mathuin/TopoMC/wiki/UsingSchematics 这里]。
+* 包含pymclevel作为子模块，该正式版pymclevel含加速NBT模块，使用前需编译NBT模块，详见下文。
+* 移除测试数据集。
+* 移除安全屋，但默认生成点仍位于数据集的最高点。
+
+== 运行TopoMC之前 ==
+运行TopoMC前，需在系统上安装一些附加软件。在Ubuntu（precise pangolin）系统中，需安装以下包：
+
+git gdal-bin python-scipy python-gdal python-suds python-yaml
+
+其他操作系统需使用各自的包管理系统，错误信息会提示缺少的组件，便于查找并安装。
+
+== 如何使用TopoMC ==
+最佳方法是通过谷歌地图获取经纬度。选择目标区域（目前仅限美国及相关区域），右击左上角的经纬度标记和右下角需建模的区域，基于最大和最小经纬度值（模型中对应Y和X）进行建模。
+
+步骤如下：
+<pre>-{}-
+# 导入pymclevel子模块，此步骤必须优先进行。
+
+jmt@belle:~/git/TopoMC$ git submodule init
+jmt@belle:~/git/TopoMC$ git submodule update
+
+# （可选）在pymclevel中编译加速NBT模块。
+
+jmt@belle:~/git/TopoMC$ (cd pymclevel && python setup_nbt.py build)
+
+# 从USGS检索区域。
+
+jmt@belle:~/git/TopoMC$ ./GetRegion.py --name Provincetown --ymax 42.0901 --xmin -70.2611 --ymin 42.0091 --xmax -70.1100
+
+# 准备处理区域。
+
+jmt@belle:~/git/TopoMC$ ./PrepRegion.py --name Provincetown
+
+# 将区域构建到Minecraft世界中。
+
+jmt@belle:~/git/TopoMC$ ./BuildRegion.py --name Provincetown
+</pre>
+
+== GetRegion.py的可选参数 ==
+GetRegion.py有以下可选参数：
+
+* 改变贴图尺寸：默认尺寸为256x256，可修改，值需为16的倍数，例如“--tilesize 64”。
+* 改变水平比例尺和垂直比例尺：默认均为6，可分别修改，垂直比例尺限制为1-30，水平比例尺取决于地区最高点与海平面的高度差，例如“--scale 1 --vscale 1”，设置超限时软件会提示并调整至最大值。
+* 改变海平面和最大深度：若最小水平比例尺过高，可降低海平面（默认64），如设为16或8，同时也应降低最大深度，注意这可能影响矿石分布，示例：“--sealevel 16 --maxdepth 8”。
+* 削减高度：若降低海平面仍无法达到所需水平比例尺，可削减多余高度（指区域内海平面与最低点之间的高度），例如某区域高于海平面200-300米，可降低200米至海平面及地图最低点的高度，示例：“--trim 200”，设置超限时软件会提示并调整至最大值。
+
+== 我做错了什么？ ==
+此处将发布一些故障排除报告。
+
+== 许可协议 ==
+TopoMC遵循MIT许可协议，源码可在[https://github.com/mathuin/TopoMC/ 这里]获取。
+
+[[Category:自定义软件]]

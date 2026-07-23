@@ -1,0 +1,76 @@
+# 页面: 命令/publish
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/publish
+# 分类: Java版独有特性, 命令
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox command
+|name=publish
+|oplevel=4
+|nocmdblock=1
+|noserver=1
+}}
+
+将单人游戏世界开放到多人游戏。
+
+== 语法 ==
+:<code>publish [<allowCommands>] [<gamemode>] [<port>]</code>
+
+== 参数 ==
+{{argument|allowCommands|bool}}
+: 是否允许[[作弊]]。若未指定，默认为<code>false</code>。
+: {{arg_desc|je=bool}}
+
+{{argument|gamemode|gamemode}}
+: 新玩家进入世界后的默认[[游戏模式]]。若未指定，新玩家进入世界后的游戏模式为此单人世界的游戏模式。
+: {{arg_desc|je=gamemode}}
+
+{{argument|port|integer}}
+: 主机所在的[[wzh:端口|端口]]。若未指定，则自动分配端口，一般会自动分配在临时端口范围。
+: {{arg desc|je=integer|min=0|max=65535}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|世界已经开放到多人游戏|fail}}
+{{Result table|无法绑定到指定端口（是一个保留的端口或被其他程序使用）}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|N/A|0|0}}
+{{Output table|执行成功|N/A|1|指定的或自动分配的端口号}}
+{{Output table}}
+
+== 示例 ==
+* 对局域网开放，禁用作弊：<code>publish false</code>
+* 对局域网开放，启用作弊，其他玩家以旁观模式加入游戏，指定端口为65531：<code>publish true spectator 65531</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w24a|加入了{{cmd|publish|link=none}}命令。}}
+|{{HistoryLine||1.13|dev=17w45a|{{cmd|link=none|publish}}命令现在支持可选参数<code>port</code>。
+|{{cmd|link=none|publish}}命令现在可以在[[命令方块]]上执行。}}
+|{{HistoryLine|||dev=18w01a|{{cmd|link=none|publish}}命令现在不再能在命令方块上执行。}}
+|{{HistoryLine||1.19.3|dev=22w45a|{{cmd|link=none|publish}}命令现在支持可选参数<code>allowCommands</code>与<code>gamemode</code>。}}
+|{{HistoryLine||26.2|dev=snapshot-8|{{cmd|link=none|publish}}命令现在支持可选参数<code>online</code>。}}
+|{{HistoryLine|||dev=pre-1|回退了上个版本的更改。}}
+}}
+
+== 参见 ==
+* {{cmd|unpublish}} — 停止开放到多人游戏。
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/publish]]
+[[en:Commands/publish]]
+[[es:Comandos/publish]]
+[[fr:Commandes/publish]]
+[[ja:コマンド/publish]]
+[[lzh:令/publish]]
+[[pt:Comandos/publish]]
+[[ru:Команды консоли/publish]]

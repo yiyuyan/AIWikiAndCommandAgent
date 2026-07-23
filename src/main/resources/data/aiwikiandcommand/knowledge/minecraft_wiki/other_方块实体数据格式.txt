@@ -1,0 +1,296 @@
+# 页面: 方块实体数据格式
+# 来源: https://zh.minecraft.wiki/w/%E6%96%B9%E5%9D%97%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F
+# 分类: Java版即将到来/26.3, Java版即将移除/26.3, Java版独有特性, 开发
+# 抓取时间: 2026-07-14 17:28:18
+# 原始 Wikitext 内容:
+
+{{for|基岩版中的方块实体格式|基岩版存档格式/方块实体格式}}
+{{exclusive|je}}
+
+[[方块实体]]是对方块状态有穷集合的补充，扩展了方块的行为。
+
+{{TOC|limit=2|none}}
+
+== 数据格式 ==
+
+所有方块实体都有一部分相同的数据格式，以保存方块实体的最基础的信息： 
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt transclude|编码格式/BlockEntity|codec_block_entity}}
+</div>
+
+关于各方块实体对数据组件的继承序列化处理，详见{{slink|数据组件|方块实体组件}}。
+
+=== 方块实体数据列表 ===
+各种不同的方块实体在这个数据格式的基础上，附加了自身额外的信息。下列是{{el|je}}中所有方块实体的数据格式：
+
+{{CollapseH}}
+
+{| class="wikitable" style="position:relative; z-index:1; float:right; margin-right:0" data-description="方块实体ID"
+|-
+! 方块实体ID
+! 名称
+|-
+| banner
+| [[旗帜]]
+|-
+| barrel
+| [[木桶]]
+|-
+| beacon
+| [[信标]]
+|-
+| bed
+| [[床]]
+|-
+| beehive
+| [[蜂巢（方块）|蜂巢]]、[[蜂箱]]
+|-
+| bell
+| [[钟]]
+|-
+| blast_furnace
+| [[高炉]]
+|-
+| brewing_stand
+| [[酿造台]]
+|-
+| brushable_block
+| [[可疑的沙子]]、[[可疑的沙砾]]
+|-
+| calibrated_sculk_sensor
+| [[校频幽匿感测体]]
+|-
+| campfire
+| [[营火]]
+|-
+| chest
+| [[箱子]]、[[铜箱子]]
+|-
+| chiseled_bookshelf
+| [[雕纹书架]]
+|-
+| command_block
+| [[命令方块]]
+|-
+| comparator
+| [[红石比较器]]
+|-
+| conduit
+| [[潮涌核心]]
+|-
+| copper_golem_statue
+| [[铜傀儡像]]
+|-
+| crafter
+| [[合成器]]
+|-
+| creaking_heart
+| [[嘎枝之心]]
+|-
+| daylight_detector
+| [[阳光探测器]]
+|-
+| decorated_pot
+| [[饰纹陶罐]]
+|-
+| dispenser
+| [[发射器]]
+|-
+| dropper
+| [[投掷器]]
+|-
+| enchanting_table
+| [[附魔台]]
+|-
+| end_gateway
+| [[末地折跃门]]
+|-
+| end_portal
+| [[末地传送门]]
+|-
+| ender_chest
+| [[末影箱]]
+|-
+| furnace
+| [[熔炉]]
+|-
+| hanging_sign
+| [[悬挂式告示牌]]
+|-
+| hopper
+| [[漏斗]]
+|-
+| jigsaw
+| [[拼图方块]]
+|-
+| jukebox
+| [[唱片机]]
+|-
+| lectern
+| [[讲台]]
+|-
+| mob_spawner
+| [[刷怪笼]]
+|-
+| piston
+| [[移动的活塞]]
+|-
+| sculk_catalyst
+| [[幽匿催发体]]
+|-
+| sculk_sensor
+| [[幽匿感测体]]
+|-
+| sculk_shrieker
+| [[幽匿尖啸体]]
+|-
+| shelf
+| [[展示架]]
+|-
+| shulker_box
+| [[潜影盒]]
+|-
+| sign
+| [[告示牌]]
+|-
+| skull
+| [[生物头颅]]
+|-
+| smoker
+| [[烟熏炉]]
+|-
+| structure_block
+| [[结构方块]]
+|-
+| test_block
+| [[测试方块]]
+|-
+| test_instance_block
+| [[测试实例方块]]
+|-
+| trial_spawner
+| [[试炼刷怪笼]]
+|-
+| trapped_chest
+| [[陷阱箱]]
+|-
+| vault
+| [[宝库]]
+|}
+
+下面为Java版中所有的方块实体。
+
+{{data transclude|block|旗帜/BE|title=banners}}
+{{data transclude|block|木桶/BE|title=barrel}}
+{{data transclude|block|信标/BE|title=beacon}}
+{{data transclude|block|床/BE|title=beds}}
+{{data transclude|block|蜂巢（方块）/BE|title=beehive}}
+{{data transclude|block|钟/BE|title=bell}}
+{{data transclude|block|高炉/BE|title=blast-furnace}}
+{{data transclude|block|酿造台/BE|title=brewing-stand}}
+{{data transclude|block|可疑的沙子/BE|title=suspicious-sand}}
+{{data transclude|block|校频幽匿感测体/BE|title=calibrated-sculk-sensor}}
+{{data transclude|block|营火/BE|title=campfire}}
+{{data transclude|block|箱子/BE|title=chest}}
+{{data transclude|block|雕纹书架/BE|title=chiseled-bookshelf}}
+{{data transclude|block|命令方块/BE|title=command-block}}
+{{data transclude|block|红石比较器/BE|title=redstone-comparator}}
+{{data transclude|block|潮涌核心/BE|title=conduit}}
+{{data transclude|block|铜傀儡像/BE|title=copper-golem-statue}}
+{{data transclude|block|合成器/BE|title=crafter}}
+{{data transclude|block|嘎枝之心/BE|title=creaking-heart}}
+{{data transclude|block|阳光探测器/BE|title=daylight-detector}}
+{{data transclude|block|饰纹陶罐/BE|title=decorated-pot}}
+{{data transclude|block|发射器/BE|title=dispenser}}
+{{data transclude|block|投掷器/BE|title=dropper}}
+{{data transclude|block|附魔台/BE|title=enchanting-table}}
+{{data transclude|block|末地折跃门（方块）/BE|title=end-gateway}}
+{{data transclude|block|末地传送门（方块）/BE|title=end-portal}}
+{{data transclude|block|末影箱/BE|title=ender-chest}}
+{{data transclude|block|熔炉/BE|title=furnace}}
+{{data transclude|block|告示牌/BE|title=hanging-signs}}
+{{data transclude|block|漏斗/BE|title=hopper}}
+{{data transclude|block|拼图方块/BE|title=jigsaw-block}}
+{{data transclude|block|唱片机/BE|title=jukebox}}
+{{data transclude|block|讲台/BE|title=lectern}}
+{{data transclude|block|刷怪笼/BE|title=spawner}}
+{{data transclude|block|移动的活塞/BE|title=moving-piston}}
+{{data transclude|block|幽匿催发体/BE|title=sculk-catalyst}}
+{{data transclude|block|幽匿感测体/BE|title=sculk-sensor}}
+{{data transclude|block|幽匿尖啸体/BE|title=sculk-shrieker}}
+{{data transclude|block|展示架/BE|title=shelf}}
+{{data transclude|block|潜影盒/BE|title=shulker-box}}
+{{data transclude|block|告示牌/BE|title=signs}}
+{{data transclude|block|生物头颅/BE|title=heads}}
+{{data transclude|block|烟熏炉/BE|title=smoker}}
+{{data transclude|block|结构方块/BE|title=structure-block}}
+{{data transclude|block|测试方块/BE|title=test-block}}
+{{data transclude|block|测试实例方块/BE|title=test-instance-block}}
+{{data transclude|block|试炼刷怪笼/BE|title=trial-spawner}}
+{{data transclude|block|箱子/BE|title=trapped-chest}}
+{{data transclude|block|宝库/BE|title=vault}}
+
+{{CollapseE}}
+
+== 存储格式 ==
+
+所有方块实体都保存在区块数据中，位于区块数据的{{nbt|list|block_entities}}标签内。
+
+存储格式与数据格式类似，但附加了[[世界生成]]相关信息：
+
+<div class="treeview">
+* {{nbt|compound}} 方块实体根标签。
+** {{nbt|bool|keepPacked|existonsave=1|required=1}}：此方块实体是否为纯数据形式，即还未真正加入世界。在世界中可访问的方块实体此项为<samp>false</samp>。
+** 其他标签与数据格式相同。
+</div>
+
+当世界生成时，世界生成过程中放置的方块如果具有方块实体数据，游戏就会以{{nbt|bool|keepPacked}}为<samp>true</samp>、{{nbt|string|id}}为<code>DUMMY</code>的形式写入区块数据中，此时这些方块实体还不可访问，仅仅是保存了这些数据但没有加入到世界中。当原型区块转换为世界区块，或作为世界区块访问获取对应位置的方块实体数据时，这些数据会被立刻反序列化为方块实体并加入世界，在加入世界后{{nbt|bool|keepPacked}}就会被设置为<samp>false</samp>。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w21a|从刷怪笼中移除了<code>MaxExperience</code>、<code>RemainingExperience</code>、<code>ExperienceRegenTick</code>、<code>ExperienceRegenRate</code>和<code>ExperienceRegenAmount</code>。}}
+|{{HistoryLine||1.7.2|dev=13w39a|加入命令方块。}}
+|{{HistoryLine||1.8|dev=14w02a|为箱子加入了<code>Lock</code>。
+|现在指定了NBT数据时不再使用物品ID。}}
+|{{HistoryLine|||dev=14w25a|为告示牌加入了<code>Text1</code>、<code>Text2</code>、<code>Text3</code>和<code>Text4</code>。
+|告示牌现在不再有字符数量限制（16个），现在其限制取决于字符的宽度。}}
+|{{HistoryLine|||dev=14w27a|为[[命令方块]]和[[告示牌]]加入了<code>CommandStats</code>。}}
+|{{HistoryLine||1.9|dev=15w31a|加入末地折跃门方块和结构方块。}}
+|{{HistoryLine|||dev=15w33a|为末地折跃门方块加入<code>ExactTeleport</code>并且重命名<code>Life</code>为<code>Age</code>。}}
+|{{HistoryLine|||dev=15w34a|向命令方块方块实体加入了<code>conditional</code>字节标签。
+|为[[刷怪笼]]中的<code>SpawnData</code>加入了<code>id</code>。}}
+|{{HistoryLine|||dev=15w42a|为酿造台加入了<code>Fuel</code>。}}
+|{{HistoryLine|||dev=15w43a|为箱子加入了<code>LootTable</code>和<code>LootTableSeed</code>。}}
+|{{HistoryLine|||dev=15w47a|为信标加入了<code>PaymentItem</code>。}}
+|{{HistoryLine|||dev=15w49a|从信标中移除了<code>PaymentItem</code>。
+|为了使告示牌接受文字，所有4个标签（“Text 1”、“Text 2”、“Text 3”和“Text 4”）都必须存在。}}
+|{{HistoryLine||1.10|dev=16w20a|为结构方块加入<code>powered</code>、<code>showboundingbox</code>和<code>showair</code>。}}
+|{{HistoryLine|||dev=16w21a|为结构方块加入<code>integrity</code>和<code>seed</code>。}}
+|{{HistoryLine||1.11|dev=16w35a|为旗帜加入了<code>CustomName</code>。}}
+|{{HistoryLine||1.13|dev=17w47a|移动的活塞的<code>BlockId</code>和<code>BlockData</code>标签被并入到<code>blockState</code>标签中。
+|移除了音符盒和花盆方块实体。
+|陷阱箱现在有了它们自己的方块实体<code>trapped_chest</code>。
+|从旗帜中移除了<code>Base</code>。
+|从生物头颅中移除了<code>Rot</code>。
+|从唱片机中移除了<code>Record</code>。}}
+|{{HistoryLine|||dev=17w47b|陷阱箱不再拥有它们自己的方块实体，转而再次使用<code>chest</code>。}}
+|{{HistoryLine||1.20.2|dev=23w32a|更改了信标的NBT格式。}}
+|{{HistoryLine||1.20.5|dev=24w09a|旗帜的{{nbt|list|Patterns}}被{{nbt|list|pattern}}取代。}}
+|{{HistoryLine|||dev=24w13a|向所有方块实体加入{{nbt|compound|components}}字段以存储放置此方块实体的物品的非继承序列化处理的组件数据。}}
+|{{HistoryLine||1.21.2|dev=24w39a|所有的{{nbt|string|Lock}}标签被{{nbt|object|lock}}取代。}}
+|{{HistoryLine||1.21.4|dev=24w46a|向嘎枝之心加入了{{nbt|int-array|creaking}}标签。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Java files}}
+
+[[Category:开发]]
+
+[[en:Block entity format]]
+[[ja:ブロックエンティティフォーマット]]
+[[ko:블록 개체 형식]]
+[[uk:Формат блока-сутности]]

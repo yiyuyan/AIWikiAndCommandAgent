@@ -1,0 +1,1465 @@
+# 页面: 死亡消息
+# 来源: https://zh.minecraft.wiki/w/%E6%AD%BB%E4%BA%A1%E6%B6%88%E6%81%AF
+# 分类: Java版即将到来/26.3, Java版独有信息, 基岩版独有信息, 快照转换内容, 游戏内容, 需要补充的条目
+# 抓取时间: 2026-07-14 17:29:38
+# 原始 Wikitext 内容:
+
+{{Filetr|Death message bad respawn point.png|332px|缩略图|在{{el|java}}中，出现在聊天屏幕中的死亡消息}}
+'''死亡消息（Death Message）'''是生物死亡时报告其死因的文本。
+
+== 机制 ==
+{{Filetr|Hardcore Death.png|200px|缩略图|在{{el|java}}的[[极限模式]]中，出现在死亡界面上的死亡消息}}
+生物死亡时可能会产生死亡消息，报告该生物的死因。
+
+在[[游戏规则]]{{gamerule|show_death_messages|showDeathMessages}}为{{code|true}}时，死亡消息会出现在[[聊天屏幕]]中：
+* {{in|je}}[[玩家]]的死亡消息广播取决于[[队伍]]的设置。若玩家不属于任何队伍，死亡消息会广播给[[世界]]中的每一个玩家。
+* {{in|be}}[[玩家]]的死亡消息总是广播给世界中的每一个玩家。
+* {{in|je}}驯服的[[狼]]、[[猫]]、[[鹦鹉]]、[[鹦鹉螺]]和[[僵尸鹦鹉螺]]的死亡消息<ref>{{bug|MC-71778||驯服的[[马]]、[[驴]]、[[骡]]和[[羊驼]]被杀死时不显示死亡消息}}</ref>会通知其主人。
+* {{in|be}}驯服的狼、猫、[[马]]、[[驴]]、[[骡]]、[[僵尸马]]、[[羊驼]]、[[行商羊驼]]、鹦鹉、鹦鹉螺和僵尸鹦鹉螺的死亡消息会广播给世界中的每一个玩家。<ref>{{bug|MCPE-69255|||WAI}}</ref>
+
+玩家死亡时，死亡消息会显示在死亡的玩家的死亡界面上。
+
+游戏的日志会记录被命名的生物的死亡消息。这也是不使用{{cmd|damage}}的情况下一些死亡消息唯一的出现方式，如[[烈焰人]]被[[雪球]]杀死，[[鱼]]脱水而死，以及[[蜜蜂]]失去螫针而死。
+
+死亡消息不包含随机内容，复现相同的死因始终会绑定至同一条文本。
+
+=== 非伤害死亡 ===
+如果生物死亡但没有受到过伤害，则不会产生任何死亡消息。在生成时生命值或最大生命值不超过{{hp|0}}的生物，在生成后就会死亡。修改生物的实体数据，使生命值被修改到{{hp|0}}或更低的值，可以在不造成伤害的情况下杀死生物。
+
+如果玩家因此死亡，死亡界面上不会有死亡消息。
+
+=== 死亡消息文本结构 ===
+死亡消息文本包含三个变量：
+* <u>'''死者'''</u>是产生该死亡消息的死亡的生物。
+* <u>'''击杀者'''</u>是造成死者死亡的实体，在统计中视为被该实体杀死。
+** 如果生物是被有实体来源的伤害杀死的，击杀者是该伤害的来源实体。此时不使用<code>.player</code>死亡消息。
+** 如果生物是被没有实体来源的伤害杀死的，击杀者是死者在死亡前5秒内最后一次对其造成伤害的实体。此时使用<code>.player</code>死亡消息。
+** [[弹射物]]造成伤害时，若其有实体数据<code>Owner</code>则伤害来源为该实体，否则伤害来源是弹射物自身。
+** [[被激活的TNT]]造成伤害时，若其有实体来源则伤害来源为该实体，否则伤害来源是被激活的TNT自身。
+** 部分死亡事件有击杀者，但是死亡消息文本中没有击杀者，例如[[蜜蜂]]的近战攻击、[[烟花火箭]]的爆裂和[[监守者]]的远程攻击造成的死亡。
+* <u>'''物品'''</u>是击杀者在造成死亡的伤害事件发生时持有的物品，被视为使用该物品造成击杀，仅在物品具有自定义名称时才会在死亡消息中出现。
+** {{in|je}}生物必须受到来自击杀者的伤害致死才能产生包含物品的死亡消息。生物被击杀者攻击过，然后被没有实体来源的伤害杀死时，物品不会出现在死亡消息中。
+** {{in|je}}该变量显示为<code>-{}-[物品名称]</code>，且包含悬浮事件，显示该物品的全部信息。
+** {{in|be}}物品相关的死亡消息未使用。
+
+死者和击杀者可以是同一生物，如生物被自己使用的弹射物或TNT杀死。
+
+=== 死亡消息选择 ===
+==== Java版 ====
+死亡消息的基本选择方式是根据[[伤害类型]]来选择死亡消息名称，然后使用<code>-{}-death.attack.''消息名称''</code>作为死亡消息。
+
+如果伤害没有实体来源，但生物在最近5秒内受到过来自实体的伤害，则死亡消息改为<code>-{}-death.attack.''消息名称''.player</code>。
+
+如果伤害有实体来源，且伤害来源实体持有命名的物品，则死亡消息改为<code>-{}-death.attack.''消息名称''.item</code>。
+
+此外，有两种特殊的死亡消息：
+* <code>intentional_game_design</code>：由<code>bad_respawn_point</code>伤害类型使用，相关死亡消息使用<code>death.attack.badRespawnPoint.message</code>，永远不会使用<code>.player</code>或<code>.item</code>。
+* <code>fall_variants</code>：由<code>fall</code>伤害类型使用，有一系列特殊条件的摔死死亡消息<code>-{}-death.fell.''名称''</code>，如果这些死亡消息的条件成立，那么就会改用摔死的死亡消息而非<code>death.attack.fall</code>及其<code>.player</code>和<code>.item</code>变种。
+
+使用{{cmd|damage}}可以使生物对其他生物造成一些通常情况下生物不能造成的伤害类型，或对生物造成通常有实体来源但是没有实体来源的伤害，这会导致字符串不能正常显示：
+* 如果伤害类型通常只能是实体来源的，而伤害没有实体来源，产生的死亡消息会因缺少击杀者变量而不能正常完成格式化，如<code>{{tp|death.attack.mob|%1$s|%2$s}}</code>（<code>death.attack.mob</code>）。
+* 如果伤害类型通常只能是实体来源的，而伤害没有实体来源，并且生物在最后5秒内受到过实体来源的伤害，那么<code>.player</code>同样会被应用。如果对应的<code>-{}-death.attack.''消息名称''.player</code>死亡消息不存在，那么未翻译的本地化键名会被直接显示出来。
+* 如果此时击杀者持有命名的物品，<code>.item</code>同样会被应用。如果对应的<code>-{}-death.attack.''消息名称''.item</code>死亡消息不存在，那么未翻译的本地化键名会被直接显示出来。
+
+==== 基岩版 ====
+死亡消息的基本选择方式是根据[[伤害类型]]来选择死亡消息名称，然后使用<code>-{}-death.attack.''消息名称''</code>作为死亡消息。
+
+尽管有<code>.player</code>和<code>.item</code>消息存在于语言文件中，这些消息不会被使用。
+
+此外，死于<code>fall</code>伤害类型的伤害的生物如果在死亡时下落高度超过5格，则改为使用<code>death.fell.accident.generic</code>死亡消息。
+
+== 死亡消息文本 ==
+=== Java版 ===
+{| class="wikitable collapsible" style="width:100%;"
+|+ [[Java版]]死亡消息
+|-
+! style="width:25%;" | 死亡消息
+! style="width:25%;" | 本地化键名
+! style="width:25%;" | 伤害类型
+! style="width:25%;" | 说明
+|-
+! colspan = "4" | 暴力行为
+|-
+| {{tp|death.attack.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.player</code>
+| rowspan = "2" | <code>player_attack</code>
+| rowspan = "2" | 生物被[[玩家]]的[[近战攻击]]杀死。
+|-
+| {{tp|death.attack.player.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.player.item</code>
+|-
+| {{tp|death.attack.mob|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.mob</code>
+| rowspan = "2" | <code>mob_attack</code><br/><code>mob_attack_no_aggro</code><br/><code>mob_projectile</code>
+| rowspan = "2" | 生物被非玩家生物的[[近战攻击]]攻击杀死，或被[[潜影弹]]或[[羊驼唾沫]]杀死。
+|-
+| {{tp|death.attack.mob.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.mob.item</code>
+|-
+| {{tp|death.attack.sting|<u>'''死者'''</u>}}
+| <code>death.attack.sting</code>
+| rowspan = "3" | <code>sting</code>
+| rowspan = "3" | 生物被[[蜜蜂]]的[[近战攻击]]杀死。<br><code>.player</code>消息只能通过{{cmd|damage}}来产生。
+|-
+| {{tp|death.attack.sting.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.sting.item</code>
+|-
+| {{tp|death.attack.sting.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.sting.player</code>
+|-
+| {{tp|death.attack.arrow|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.arrow</code>
+| rowspan = "2" | <code>arrow</code>
+| rowspan = "2" | 生物被[[箭]]杀死。
+|-
+| {{tp|death.attack.arrow.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.arrow.item</code>
+|-
+| {{tp|death.attack.trident|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.trident</code>
+| rowspan = "2" | <code>trident</code>
+| rowspan = "2" | 生物被[[三叉戟]]杀死。
+|-
+| {{tp|death.attack.trident.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.trident.item</code>
+|-
+| {{tp|death.attack.fireball|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.fireball</code>
+| rowspan = "2" | <code>fireball</code>
+| rowspan = "2" | 生物被有发射者的[[火球]]或[[小火球]]杀死。
+|-
+| {{tp|death.attack.fireball.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.fireball.item</code>
+|-
+| {{tp|death.attack.thrown|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.thrown</code>
+| rowspan = "2" | <code>thrown</code>
+| rowspan = "2" | 生物被[[雪球]]、[[鸡蛋]]或[[末影珍珠]]杀死。
+|-
+| {{tp|death.attack.thrown.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.thrown.item</code>
+|-
+| {{tp|death.attack.fireworks|<u>'''死者'''</u>}}
+| <code>death.attack.fireworks</code>
+| rowspan = "3" | <code>fireworks</code>
+| rowspan = "3" | 生物被[[烟花火箭]]杀死。<br><code>.player</code>消息只能通过{{cmd|damage}}来产生。
+|-
+| {{tp|death.attack.fireworks.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.fireworks.item</code>
+|-
+| {{tp|death.attack.fireworks.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.fireworks.player</code>
+|-
+| {{tp|death.attack.witherSkull|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.witherSkull</code>
+| rowspan = "2" | <code>wither_skull</code>
+| rowspan = "2" | 生物被[[凋灵之首]]杀死。
+|-
+| {{tp|death.attack.witherSkull.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.witherSkull.item</code>
+|-
+| {{tp|death.attack.thorns|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.thorns</code>
+| rowspan = "2" | <code>thorns</code>
+| rowspan = "2" | 生物被[[荆棘]]魔咒或[[守卫者]]的尖-{}-刺效果的伤害杀死。
+|-
+| {{tp|death.attack.thorns.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.thorns.item</code>
+|-
+| {{tp|death.attack.indirectMagic|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.indirectMagic</code>
+| rowspan = "2" | <code>indirect_magic</code>
+| rowspan = "2" | 生物被其他生物的攻击造成的[[伤害#魔法伤害|魔法伤害]]杀死。
+|-
+| {{tp|death.attack.indirectMagic.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.indirectMagic.item</code>
+|-
+| {{tp|death.attack.sonic_boom|<u>'''死者'''</u>}}
+| <code>death.attack.sonic_boom</code>
+| rowspan = "3" | <code>sonic_boom</code>
+| rowspan = "3" | 生物被[[监守者]]的远程攻击杀死。<br><code>.player</code>消息只能通过{{cmd|damage}}来产生。
+|-
+| {{tp|death.attack.sonic_boom.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.sonic_boom.item</code>
+|-
+| {{tp|death.attack.sonic_boom.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.sonic_boom.player</code>
+|-
+| {{tp|death.attack.dragonBreath|<u>'''死者'''</u>}}
+| <code>death.attack.dragonBreath</code>
+| rowspan = "2" | <code>dragon_breath</code>
+| rowspan = "2" | 在[[15w31c]]前，末影龙的龙息攻击使用<code>dragon_breath</code>伤害类型，但之后则改为了<code>indirect_magic</code>伤害类型。<br>目前没有伤害源会造成<code>dragon_breath</code>伤害类型的伤害，因此该消息只能通过{{cmd|damage}}来产生。<br>见{{bug|MC-84595}}。
+|-
+| {{tp|death.attack.dragonBreath.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.dragonBreath.player</code>
+|-
+| {{tp|death.attack.mace_smash|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.mace_smash</code>
+| rowspan = "2" | <code>mace_smash</code>
+| rowspan = "2" | 生物被[[重锤]]猛击杀死。
+|-
+| {{tp|death.attack.mace_smash.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.mace_smash.item</code>
+|-
+| {{tp|death.attack.spear|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.spear</code>
+| rowspan = "2" | <code>spear</code>
+| rowspan = "2" | 生物被[[矛]]刺死。
+|-
+| {{tp|death.attack.spear.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.spear.item</code>
+|-
+! colspan = "4" | 负面效果
+|-
+| {{tp|death.attack.onFire|<u>'''死者'''</u>}}
+| <code>death.attack.onFire</code>
+| rowspan = "3" | <code>on_fire</code><br><code>unattributed_fireball</code>
+| rowspan = "3" | 生物被[[着火]]杀死，或被没有发射者的[[火球]]或[[小火球]]杀死。<br><code>.item</code>消息只能通过{{cmd|damage}}来产生。
+|-
+| {{tp|death.attack.onFire.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.onFire.item</code>
+|-
+| {{tp|death.attack.onFire.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.onFire.player</code>
+|-
+| {{tp|death.attack.magic|<u>'''死者'''</u>}}
+| <code>death.attack.magic</code>
+| rowspan = "2" | <code>magic</code>
+| rowspan = "2" | 生物被没有实体来源的[[伤害#魔法伤害|魔法伤害]]杀死，如饮用瞬间伤害[[药水]]或{{cmd|effect}}给予的[[瞬间伤害]]效果，[[发射器]]射出或由{{cmd|summon}}召唤的[[伤害之箭]]、[[喷溅型伤害药水]]、[[滞留型伤害药水]]和瞬间伤害[[区域效果云]]给予的瞬间伤害效果，或{{cmd|summon}}召唤的唤魔者尖牙，或被[[潮涌核心]]杀死。
+|-
+| {{tp|death.attack.magic.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.magic.player</code>
+|-
+| {{tp|death.attack.wither|<u>'''死者'''</u>}}
+| <code>death.attack.wither</code>
+| rowspan = "2" | <code>wither</code>
+| rowspan = "2" | 生物被[[凋零]]杀死。
+|-
+| {{tp|death.attack.wither.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.wither.player</code>
+|-
+| {{tp|death.attack.starve|<u>'''死者'''</u>}}
+| <code>death.attack.starve</code>
+| rowspan = "2" | <code>starve</code>
+| rowspan = "2" | 玩家被[[饥饿]]耗尽而受到的伤害杀死，或[[恼鬼]]被存在时间过长而受到的伤害杀死。
+|-
+| {{tp|death.attack.starve.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.starve.player</code>
+|-
+! colspan = "4" | 危险环境
+|-
+| {{tp|death.attack.cactus|<u>'''死者'''</u>}}
+| <code>death.attack.cactus</code>
+| rowspan = "2" | <code>cactus</code>
+| rowspan = "2" | 生物被[[仙人掌]]杀死。
+|-
+| {{tp|death.attack.cactus.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.cactus.player</code>
+|-
+| {{tp|death.attack.inFire|<u>'''死者'''</u>}}
+| <code>death.attack.inFire</code>
+| rowspan = "2" | <code>in_fire</code>
+| rowspan = "2" | 生物被[[火]]杀死。
+|-
+| {{tp|death.attack.inFire.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.inFire.player</code>
+|-
+| {{tp|death.attack.lava|<u>'''死者'''</u>}}
+| <code>death.attack.lava</code>
+| rowspan = "2" | <code>lava</code>
+| rowspan = "2" | 生物被[[熔岩]]杀死。
+|-
+| {{tp|death.attack.lava.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.lava.player</code>
+|-
+| {{tp|death.attack.hotFloor|<u>'''死者'''</u>}}
+| <code>death.attack.hotFloor</code>
+| rowspan = "2" | <code>hot_floor</code>
+| rowspan = "2" | 生物被[[岩浆块]]杀死。
+|-
+| {{tp|death.attack.hotFloor.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.hotFloor.player</code>
+|-
+| {{tp|death.attack.sulfurCubeHot|<u>'''死者'''</u>}}
+| <code>death.attack.sulfurCubeHot</code>
+| rowspan = "3" | <code>sulfur_cube_hot</code>
+| rowspan = "3" | 生物被吸收了[[岩浆块]]的[[硫方怪]]杀死。
+|-
+| {{tp|death.attack.sulfurCubeHot.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}{{upcoming|je 26.3}}
+| <code>death.attack.sulfurCubeHot.item</code>
+|-
+| {{tp|death.attack.sulfurCubeHot.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.sulfurCubeHot.player</code>
+|-
+|-
+| {{tp|death.attack.sweetBerryBush|<u>'''死者'''</u>}}
+| <code>death.attack.sweetBerryBush</code>
+| rowspan = "2" | <code>sweet_berry_bush</code>
+| rowspan = "2" | 生物被[[甜浆果丛]]杀死。
+|-
+| {{tp|death.attack.sweetBerryBush.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.sweetBerryBush.player</code>
+|-
+| {{tp|death.attack.inWall|<u>'''死者'''</u>}}
+| <code>death.attack.inWall</code>
+| rowspan = "2" | <code>in_wall</code>
+| rowspan = "2" | 生物被[[窒息]]杀死。
+|-
+| {{tp|death.attack.inWall.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.inWall.player</code>
+|-
+| {{tp|death.attack.drown|<u>'''死者'''</u>}}
+| <code>death.attack.drown</code>
+| rowspan = "2" | <code>drown</code>
+| rowspan = "2" | 生物被[[溺水]]杀死。
+|-
+| {{tp|death.attack.drown.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.drown.player</code>
+|-
+| {{tp|death.attack.dryout|<u>'''死者'''</u>}}
+| <code>death.attack.dryout</code>
+| rowspan = "2" | <code>dryout</code>
+| rowspan = "2" | 生物被[[脱水]]杀死。
+|-
+| {{tp|death.attack.dryout.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.dryout.player</code>
+|-
+| {{tp|death.attack.freeze|<u>'''死者'''</u>}}
+| <code>death.attack.freeze</code>
+| rowspan = "2" | <code>freeze</code>
+| rowspan = "2" | 生物被[[冰冻]]杀死。
+|-
+| {{tp|death.attack.freeze.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.freeze.player</code>
+|-
+| {{tp|death.attack.cramming|<u>'''死者'''</u>}}
+| <code>death.attack.cramming</code>
+| rowspan = "2" | <code>cramming</code>
+| rowspan = "2" | 生物被[[挤压]]杀死。
+|-
+| {{tp|death.attack.cramming.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.cramming.player</code>
+|-
+| {{tp|death.attack.lightningBolt|<u>'''死者'''</u>}}
+| <code>death.attack.lightningBolt</code>
+| rowspan = "2" | <code>lightning_bolt</code>
+| rowspan = "2" | 生物被[[闪电]]杀死。
+|-
+| {{tp|death.attack.lightningBolt.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.lightningBolt.player</code>
+|-
+| {{tp|death.attack.outsideBorder|<u>'''死者'''</u>}}
+| <code>death.attack.outsideBorder</code>
+| rowspan = "2" | <code>outside_border</code>
+| rowspan = "2" | 生物被[[世界边界]]杀死。
+|-
+| {{tp|death.attack.outsideBorder.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.outsideBorder.player</code>
+|-
+| {{tp|death.attack.outOfWorld|<u>'''死者'''</u>}}
+| <code>death.attack.outOfWorld</code>
+| rowspan = "2" | <code>out_of_world</code>
+| rowspan = "2" | 生物被[[虚空]]杀死。
+|-
+| {{tp|death.attack.outOfWorld.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.outOfWorld.player</code>
+|-
+! colspan = "4" | 意外事故
+|-
+| {{tp|death.attack.fall|<u>'''死者'''</u>}}
+| <code>death.attack.fall</code>
+| rowspan = "2" | <code>fall</code>
+| rowspan = "2" | 生物被[[伤害#摔落伤害|摔落伤害]]杀死。
+|-
+| {{tp|death.attack.fall.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.fall.player</code>
+|-
+| {{tp|death.attack.stalagmite|<u>'''死者'''</u>}}
+| <code>death.attack.stalagmite</code>
+| rowspan = "2" | <code>stalagmite</code>
+| rowspan = "2" | 生物摔落到作为石笋顶端的[[滴水石锥]]上而被摔落伤害杀死。
+|-
+| {{tp|death.attack.stalagmite.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.stalagmite.player</code>
+|-
+| {{tp|death.attack.anvil|<u>'''死者'''</u>}}
+| <code>death.attack.anvil</code>
+| rowspan = "2" | <code>falling_anvil</code>
+| rowspan = "2" | 生物被下落的[[铁砧]]杀死。
+|-
+| {{tp|death.attack.anvil.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.anvil.player</code>
+|-
+| {{tp|death.attack.fallingStalactite|<u>'''死者'''</u>}}
+| <code>death.attack.fallingStalactite</code>
+| rowspan = "2" | <code>falling_stalactite</code>
+| rowspan = "2" | 生物被下落的[[滴水石锥]]杀死。
+|-
+| {{tp|death.attack.fallingStalactite.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.fallingStalactite.player</code>
+|-
+| {{tp|death.attack.fallingBlock|<u>'''死者'''</u>}}
+| <code>death.attack.fallingBlock</code>
+| rowspan = "2" | <code>falling_block</code>
+| rowspan = "2" | 生物被其他的[[下落的方块]]杀死。
+|-
+| {{tp|death.attack.fallingBlock.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.fallingBlock.player</code>
+|-
+| {{tp|death.attack.flyIntoWall|<u>'''死者'''</u>}}
+| <code>death.attack.flyIntoWall</code>
+| rowspan = "2" | <code>fly_into_wall</code>
+| rowspan = "2" | 生物在使用[[鞘翅]]滑翔时撞击方块侧面而被杀死。
+|-
+| {{tp|death.attack.flyIntoWall.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.flyIntoWall.player</code>
+|-
+! colspan = "4" | 摔死
+|-
+| {{tp|death.fell.accident.generic|<u>'''死者'''</u>}}
+| <code>death.fell.accident.generic</code>
+| rowspan = "13" | <code>fall</code>
+| 生物下落高度超过5格时被摔落伤害杀死。
+|-
+| {{tp|death.fell.accident.ladder|<u>'''死者'''</u>}}
+| <code>death.fell.accident.ladder</code>
+| 生物从[[梯子]]上脱离后被摔落伤害杀死。
+|-
+| {{tp|death.fell.accident.scaffolding|<u>'''死者'''</u>}}
+| <code>death.fell.accident.scaffolding</code>
+| 生物从[[脚手架]]上脱离后被摔落伤害杀死。
+|-
+| {{tp|death.fell.accident.vines|<u>'''死者'''</u>}}
+| <code>death.fell.accident.vines</code>
+| 生物从[[藤蔓]]上脱离后被摔落伤害杀死。
+|-
+| {{tp|death.fell.accident.weeping_vines|<u>'''死者'''</u>}}
+| <code>death.fell.accident.weeping_vines</code>
+| 生物从[[垂泪藤]]上脱离后被摔落伤害杀死。
+|-
+| {{tp|death.fell.accident.twisting_vines|<u>'''死者'''</u>}}
+| <code>death.fell.accident.twisting_vines</code>
+| 生物从[[缠怨藤]]上脱离后被摔落伤害杀死。
+|-
+| {{tp|death.fell.accident.other_climbable|<u>'''死者'''</u>}}
+| <code>death.fell.accident.other_climbable</code>
+| 生物从其他可攀爬方块上脱离后被摔落伤害杀死。
+|-
+| death.fell.accident.water{{note|group=说明|由于{{bug|MC-195467}}，该死亡消息未被翻译。在1.16以前，这条消息被翻译为“{{tr|<u>'''死者'''</u>从水中掉了下来|<u>'''死者'''</u> 從水中跌出|<u>'''死者'''</u> 喺水入面跌咗出嚟}}”。}}
+| <code>death.fell.accident.water</code>
+| 生物处于[[水]]中时被摔落伤害杀死。{{note|group=说明|尽管水会消除下落高度，生物乘坐的实体受到的摔落伤害可以传递给骑乘着的处于水中的生物，使其在水中受到摔落伤害。此死亡消息还能通过命令、利用客户端服务端不同步问题、乘坐[[矿车]]摔到含水[[台阶]]上、或在深水中使用附魔了高等级[[激流]]的三叉戟等方法来实现。}}
+|-
+| {{tp|death.fell.killer|<u>'''死者'''</u>}}
+| <code>death.fell.killer</code>
+| rowspan="5" | 生物受到非摔落伤害后，在{{convert|300}}内被摔落伤害杀死，且此时生物下落高度超过5格。<br>摔落伤害有实体来源时，使用<code>death.fell.finish</code>死亡消息，但由于只有摔落会造成<code>fall</code>伤害类型的伤害，该死亡消息只能通过{{cmd|damage}}产生。<br>由于{{bug|MC-121048|MC-121048}}，在[[23w03a]]前都无法出现此死亡消息。
+|-
+| {{tp|death.fell.assist|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.fell.assist</code>
+|-
+| {{tp|death.fell.assist.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.fell.assist.item</code>
+|-
+| {{tp|death.fell.finish|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.fell.finish</code>
+|-
+| {{tp|death.fell.finish.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.fell.finish.item</code>
+|-
+! colspan = "4" | 炸死
+|-
+| {{tp|death.attack.explosion|<u>'''死者'''</u>}}
+| <code>death.attack.explosion</code>
+| rowspan = "2" | <code>explosion</code>
+| rowspan = "2" | 生物被没有实体来源的[[爆炸]]杀死。
+|-
+| {{tp|death.attack.explosion.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.explosion.player</code>
+|-
+| {{tp|death.attack.explosion.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.explosion.player</code>
+| rowspan = "2" | <code>player_explosion</code>
+| rowspan = "2" | 生物被有实体来源的[[爆炸]]杀死。
+|-
+| {{tp|death.attack.explosion.player.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.explosion.player.item</code>
+|-
+| {{tp|death.attack.badRespawnPoint.message|<u>'''死者'''</u>|[{{tp|death.attack.badRespawnPoint.link}}]}}
+| <code>death.attack.badRespawnPoint.message</code>
+| <code>bad_respawn_point</code>
+| 生物被[[床]]或[[重生锚]]的爆炸杀死。<br>包括点击事件链接，点击[{{tp|death.attack.badRespawnPoint.link}}]会跳转到{{bug|MCPE-28723}}页面。
+|-
+! colspan = "4" | 杂项
+|-
+| {{tp|death.attack.generic|<u>'''死者'''</u>}}
+| <code>death.attack.generic</code>
+| rowspan = "2" | <code>generic</code>
+| rowspan = "2" | 蜜蜂被因失去螫针而受到的伤害杀死，[[鹦鹉]]被使用[[曲奇]]而受到的伤害杀死。<br>使用{{cmd|damage}}未指定伤害类型时使用此伤害类型。
+|-
+| {{tp|death.attack.generic.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.generic.player</code>
+|-
+| {{tp|death.attack.genericKill|<u>'''死者'''</u>}}
+| <code>death.attack.genericKill</code>
+| rowspan = "2" | <code>generic_kill</code>
+| rowspan = "2" | 生物被{{cmd|kill}}杀死。
+|-
+| {{tp|death.attack.genericKill.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.genericKill.player</code>
+|-
+! colspan = "4" | 消息太长
+|-
+| {{tp|death.attack.even_more_magic|<u>'''死者'''</u>}}
+| <code>death.attack.even_more_magic</code>
+| ''无''
+| 包括悬浮事件链接，光标悬浮于文本上时会显示<code>-{}-{{tp|death.attack.message_too_long|<''被截断的信息''>}}</code>。<br>这条死亡消息的触发条件是：玩家在多人游戏中死亡，并且死亡消息序列化为[[JSON]]格式的[[文本组件]]后长度超过262144个字符。此时服务器会将死亡消息替换为这条消息，并把原先的死亡消息截断到256个字符并发送给玩家。{{note|group=说明|这条死亡消息几乎不可能在任何未修改过且没有加[[数据包]]的服务端上出现：由于从文件中读取的[[NBT]]字符串的长度不会超过65536个字符，且死亡消息中最多只有三个参数，导致最终序列化的JSON文本长度无法超过触发条件中的262144个字符。在原版中，唯一可以产生这条死亡消息的办法是使用命令修改实体或物品的名称使其长度略微小于262144，从而导致最终序列化后的长度超过这一数字满足触发条件。}}
+|-
+|}
+{{notelist|group=说明}}
+
+==== 13w02a ====
+{{Outdated|edition=java|section=1}}
+在{{edition|java}}快照[[13w02a]]到[[13w04a]]中，存在一个复杂的系统来显示摔死或摔落后被其他东西杀死的死亡消息。
+
+有两种消息：“<u>'''死者'''</u> <u>'''开头'''</u>”和“<u>'''死者'''</u>  <u>'''开头'''</u> and <u>'''结尾'''</u>”
+
+<u>'''开头'''</u>可以是：
+* fell (off a ladder|off some vines|out of the water|from a high place)
+* was (shot|pummeled|blown|fireballed|knocked) (off a ladder|off some vines|out of the water|from a high place)
+* was (shot|pummeled|blown|fireballed|knocked) (off a ladder|off some vines|out of the water|from a high place) by <u>'''击杀者'''</u>
+
+<u>'''结尾'''</u>可以是：
+* into a pool of lava
+* fell out of the world
+* into a patch of fire
+* into a patch of cacti
+* got finished off by <u>'''击杀者'''</u>
+* got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* got finished off using <u>'''物品'''</u>
+
+一共有352种不同的死亡消息。
+
+（在<samp>en_US.lang</samp>文件中有416种，因为动词“blown”出现了两次。）
+
+{{collapse|title='''所有摔落死亡消息'''|content=
+* <u>'''死者'''</u> fell off a ladder
+* <u>'''死者'''</u> fell off some vines
+* <u>'''死者'''</u> fell out of the water
+* <u>'''死者'''</u> fell from a high place
+* <u>'''死者'''</u> was shot off a ladder
+* <u>'''死者'''</u> was shot off some vines
+* <u>'''死者'''</u> was shot out of the water
+* <u>'''死者'''</u> was shot from a high place
+* <u>'''死者'''</u> was pummeled off a ladder
+* <u>'''死者'''</u> was pummeled off some vines
+* <u>'''死者'''</u> was pummeled out of the water
+* <u>'''死者'''</u> was pummeled from a high place
+* <u>'''死者'''</u> was blown off a ladder
+* <u>'''死者'''</u> was blown off some vines
+* <u>'''死者'''</u> was blown out of the water
+* <u>'''死者'''</u> was blown from a high place
+* <u>'''死者'''</u> was fireballed off a ladder
+* <u>'''死者'''</u> was fireballed off some vines
+* <u>'''死者'''</u> was fireballed out of the water
+* <u>'''死者'''</u> was fireballed from a high place
+* <u>'''死者'''</u> was knocked off a ladder
+* <u>'''死者'''</u> was knocked off some vines
+* <u>'''死者'''</u> was knocked out of the water
+* <u>'''死者'''</u> was knocked from a high place
+* <u>'''死者'''</u> was shot off a ladder by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot off some vines by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot out of the water by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot from a high place by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled off a ladder by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled off some vines by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled out of the water by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled from a high place by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown off a ladder by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown off some vines by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown out of the water by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown from a high place by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed off a ladder by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed off some vines by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed out of the water by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed from a high place by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked off a ladder by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked off some vines by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked out of the water by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked from a high place by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> fell off a ladder and into a pool of lava
+* <u>'''死者'''</u> fell off some vines and into a pool of lava
+* <u>'''死者'''</u> fell out of the water and into a pool of lava
+* <u>'''死者'''</u> fell from a high place and into a pool of lava
+* <u>'''死者'''</u> was shot off a ladder and into a pool of lava
+* <u>'''死者'''</u> was shot off some vines and into a pool of lava
+* <u>'''死者'''</u> was shot out of the water and into a pool of lava
+* <u>'''死者'''</u> was shot from a high place and into a pool of lava
+* <u>'''死者'''</u> was pummeled off a ladder and into a pool of lava
+* <u>'''死者'''</u> was pummeled off some vines and into a pool of lava
+* <u>'''死者'''</u> was pummeled out of the water and into a pool of lava
+* <u>'''死者'''</u> was pummeled from a high place and into a pool of lava
+* <u>'''死者'''</u> was blown off a ladder and into a pool of lava
+* <u>'''死者'''</u> was blown off some vines and into a pool of lava
+* <u>'''死者'''</u> was blown out of the water and into a pool of lava
+* <u>'''死者'''</u> was blown from a high place and into a pool of lava
+* <u>'''死者'''</u> was fireballed off a ladder and into a pool of lava
+* <u>'''死者'''</u> was fireballed off some vines and into a pool of lava
+* <u>'''死者'''</u> was fireballed out of the water and into a pool of lava
+* <u>'''死者'''</u> was fireballed from a high place and into a pool of lava
+* <u>'''死者'''</u> was knocked off a ladder and into a pool of lava
+* <u>'''死者'''</u> was knocked off some vines and into a pool of lava
+* <u>'''死者'''</u> was knocked out of the water and into a pool of lava
+* <u>'''死者'''</u> was knocked from a high place and into a pool of lava
+* <u>'''死者'''</u> was shot off a ladder by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was shot off some vines by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was shot out of the water by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was shot from a high place by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was pummeled off a ladder by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was pummeled off some vines by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was pummeled out of the water by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was pummeled from a high place by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was blown off a ladder by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was blown off some vines by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was blown out of the water by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was blown from a high place by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was fireballed off a ladder by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was fireballed off some vines by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was fireballed out of the water by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was fireballed from a high place by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was knocked off a ladder by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was knocked off some vines by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was knocked out of the water by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> was knocked from a high place by <u>'''击杀者'''</u> and into a pool of lava
+* <u>'''死者'''</u> fell off a ladder and fell out of the world
+* <u>'''死者'''</u> fell off some vines and fell out of the world
+* <u>'''死者'''</u> fell out of the water and fell out of the world
+* <u>'''死者'''</u> fell from a high place and fell out of the world
+* <u>'''死者'''</u> was shot off a ladder and fell out of the world
+* <u>'''死者'''</u> was shot off some vines and fell out of the world
+* <u>'''死者'''</u> was shot out of the water and fell out of the world
+* <u>'''死者'''</u> was shot from a high place and fell out of the world
+* <u>'''死者'''</u> was pummeled off a ladder and fell out of the world
+* <u>'''死者'''</u> was pummeled off some vines and fell out of the world
+* <u>'''死者'''</u> was pummeled out of the water and fell out of the world
+* <u>'''死者'''</u> was pummeled from a high place and fell out of the world
+* <u>'''死者'''</u> was blown off a ladder and fell out of the world
+* <u>'''死者'''</u> was blown off some vines and fell out of the world
+* <u>'''死者'''</u> was blown out of the water and fell out of the world
+* <u>'''死者'''</u> was blown from a high place and fell out of the world
+* <u>'''死者'''</u> was fireballed off a ladder and fell out of the world
+* <u>'''死者'''</u> was fireballed off some vines and fell out of the world
+* <u>'''死者'''</u> was fireballed out of the water and fell out of the world
+* <u>'''死者'''</u> was fireballed from a high place and fell out of the world
+* <u>'''死者'''</u> was knocked off a ladder and fell out of the world
+* <u>'''死者'''</u> was knocked off some vines and fell out of the world
+* <u>'''死者'''</u> was knocked out of the water and fell out of the world
+* <u>'''死者'''</u> was knocked from a high place and fell out of the world
+* <u>'''死者'''</u> was shot off a ladder by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was shot off some vines by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was shot out of the water by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was shot from a high place by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was pummeled off a ladder by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was pummeled off some vines by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was pummeled out of the water by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was pummeled from a high place by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was blown off a ladder by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was blown off some vines by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was blown out of the water by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was blown from a high place by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was fireballed off a ladder by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was fireballed off some vines by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was fireballed out of the water by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was fireballed from a high place by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was knocked off a ladder by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was knocked off some vines by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was knocked out of the water by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> was knocked from a high place by <u>'''击杀者'''</u> and fell out of the world
+* <u>'''死者'''</u> fell off a ladder and into a patch of fire
+* <u>'''死者'''</u> fell off some vines and into a patch of fire
+* <u>'''死者'''</u> fell out of the water and into a patch of fire
+* <u>'''死者'''</u> fell from a high place and into a patch of fire
+* <u>'''死者'''</u> was shot off a ladder and into a patch of fire
+* <u>'''死者'''</u> was shot off some vines and into a patch of fire
+* <u>'''死者'''</u> was shot out of the water and into a patch of fire
+* <u>'''死者'''</u> was shot from a high place and into a patch of fire
+* <u>'''死者'''</u> was pummeled off a ladder and into a patch of fire
+* <u>'''死者'''</u> was pummeled off some vines and into a patch of fire
+* <u>'''死者'''</u> was pummeled out of the water and into a patch of fire
+* <u>'''死者'''</u> was pummeled from a high place and into a patch of fire
+* <u>'''死者'''</u> was blown off a ladder and into a patch of fire
+* <u>'''死者'''</u> was blown off some vines and into a patch of fire
+* <u>'''死者'''</u> was blown out of the water and into a patch of fire
+* <u>'''死者'''</u> was blown from a high place and into a patch of fire
+* <u>'''死者'''</u> was fireballed off a ladder and into a patch of fire
+* <u>'''死者'''</u> was fireballed off some vines and into a patch of fire
+* <u>'''死者'''</u> was fireballed out of the water and into a patch of fire
+* <u>'''死者'''</u> was fireballed from a high place and into a patch of fire
+* <u>'''死者'''</u> was knocked off a ladder and into a patch of fire
+* <u>'''死者'''</u> was knocked off some vines and into a patch of fire
+* <u>'''死者'''</u> was knocked out of the water and into a patch of fire
+* <u>'''死者'''</u> was knocked from a high place and into a patch of fire
+* <u>'''死者'''</u> was shot off a ladder by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was shot off some vines by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was shot out of the water by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was shot from a high place by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was pummeled off a ladder by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was pummeled off some vines by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was pummeled out of the water by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was pummeled from a high place by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was blown off a ladder by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was blown off some vines by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was blown out of the water by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was blown from a high place by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was fireballed off a ladder by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was fireballed off some vines by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was fireballed out of the water by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was fireballed from a high place by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was knocked off a ladder by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was knocked off some vines by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was knocked out of the water by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> was knocked from a high place by <u>'''击杀者'''</u> and into a patch of fire
+* <u>'''死者'''</u> fell off a ladder and into a patch of cacti
+* <u>'''死者'''</u> fell off some vines and into a patch of cacti
+* <u>'''死者'''</u> fell out of the water and into a patch of cacti
+* <u>'''死者'''</u> fell from a high place and into a patch of cacti
+* <u>'''死者'''</u> was shot off a ladder and into a patch of cacti
+* <u>'''死者'''</u> was shot off some vines and into a patch of cacti
+* <u>'''死者'''</u> was shot out of the water and into a patch of cacti
+* <u>'''死者'''</u> was shot from a high place and into a patch of cacti
+* <u>'''死者'''</u> was pummeled off a ladder and into a patch of cacti
+* <u>'''死者'''</u> was pummeled off some vines and into a patch of cacti
+* <u>'''死者'''</u> was pummeled out of the water and into a patch of cacti
+* <u>'''死者'''</u> was pummeled from a high place and into a patch of cacti
+* <u>'''死者'''</u> was blown off a ladder and into a patch of cacti
+* <u>'''死者'''</u> was blown off some vines and into a patch of cacti
+* <u>'''死者'''</u> was blown out of the water and into a patch of cacti
+* <u>'''死者'''</u> was blown from a high place and into a patch of cacti
+* <u>'''死者'''</u> was fireballed off a ladder and into a patch of cacti
+* <u>'''死者'''</u> was fireballed off some vines and into a patch of cacti
+* <u>'''死者'''</u> was fireballed out of the water and into a patch of cacti
+* <u>'''死者'''</u> was fireballed from a high place and into a patch of cacti
+* <u>'''死者'''</u> was knocked off a ladder and into a patch of cacti
+* <u>'''死者'''</u> was knocked off some vines and into a patch of cacti
+* <u>'''死者'''</u> was knocked out of the water and into a patch of cacti
+* <u>'''死者'''</u> was knocked from a high place and into a patch of cacti
+* <u>'''死者'''</u> was shot off a ladder by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was shot off some vines by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was shot out of the water by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was shot from a high place by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was pummeled off a ladder by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was pummeled off some vines by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was pummeled out of the water by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was pummeled from a high place by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was blown off a ladder by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was blown off some vines by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was blown out of the water by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was blown from a high place by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was fireballed off a ladder by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was fireballed off some vines by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was fireballed out of the water by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was fireballed from a high place by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was knocked off a ladder by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was knocked off some vines by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was knocked out of the water by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> was knocked from a high place by <u>'''击杀者'''</u> and into a patch of cacti
+* <u>'''死者'''</u> fell off a ladder and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> fell off some vines and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> fell out of the water and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> fell from a high place and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot off a ladder and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot off some vines and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot out of the water and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot from a high place and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled off a ladder and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled off some vines and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled out of the water and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled from a high place and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown off a ladder and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown off some vines and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown out of the water and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown from a high place and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed off a ladder and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed off some vines and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed out of the water and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed from a high place and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked off a ladder and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked off some vines and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked out of the water and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked from a high place and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was shot from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was pummeled from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was blown from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was fireballed from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> was knocked from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u>
+* <u>'''死者'''</u> fell off a ladder and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> fell off some vines and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> fell out of the water and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> fell from a high place and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot off a ladder and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot off some vines and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot out of the water and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot from a high place and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled off a ladder and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled off some vines and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled out of the water and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled from a high place and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown off a ladder and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown off some vines and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown out of the water and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown from a high place and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed off a ladder and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed off some vines and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed out of the water and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed from a high place and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked off a ladder and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked off some vines and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked out of the water and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked from a high place and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked off a ladder by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked off some vines by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked out of the water by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked from a high place by <u>'''击杀者'''</u> and got finished off by <u>'''击杀者'''</u> using <u>'''物品'''</u>
+* <u>'''死者'''</u> fell off a ladder and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> fell off some vines and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> fell out of the water and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> fell from a high place and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot off a ladder and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot off some vines and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot out of the water and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot from a high place and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled off a ladder and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled off some vines and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled out of the water and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled from a high place and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown off a ladder and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown off some vines and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown out of the water and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown from a high place and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed off a ladder and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed off some vines and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed out of the water and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed from a high place and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked off a ladder and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked off some vines and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked out of the water and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked from a high place and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot off a ladder by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot off some vines by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot out of the water by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was shot from a high place by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled off a ladder by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled off some vines by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled out of the water by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was pummeled from a high place by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown off a ladder by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown off some vines by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown out of the water by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was blown from a high place by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed off a ladder by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed off some vines by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed out of the water by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was fireballed from a high place by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked off a ladder by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked off some vines by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked out of the water by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+* <u>'''死者'''</u> was knocked from a high place by <u>'''击杀者'''</u> and got finished off using <u>'''物品'''</u>
+}}
+
+=== Java版愚人节快照 ===
+{{Joke feature|section=1}}
+==== 3D Shareware v1.34 ====
+{| class="wikitable collapsible" style="width:100%;"
+|+ [[3D Shareware v1.34]]死亡消息
+|-
+! style="width:25%;" | 死亡消息
+! style="width:25%;" | 本地化键名
+! style="width:50%;" | 说明
+|-
+| <u>'''死者'''</u>对于这个世界来说太弱小了<br><small><u>'''死者'''</u> was too soft for this world</small>
+| <code>death.attack.nightmare</code>
+| rowspan = "2" | 玩家被强制梦魇模式中持续造成的伤害杀死。
+|-
+| <u>'''死者'''</u>对于这个世界来说太弱小了（<u>'''击杀者'''</u>帮助时）<br><small><u>'''死者'''</u> was too soft for this world (<u>'''击杀者'''</u> helped)</small>
+| <code>death.attack.nightmare.player</code>
+|-
+|}
+
+==== 23w13a_or_b ====
+{| class="wikitable collapsible" style="width:100%;"
+|+ [[23w13a_or_b]]死亡消息
+|-
+! style="width:25%;" | 死亡消息
+! style="width:25%;" | 本地化键名
+! style="width:25%;" | 伤害类型
+! style="width:25%;" | 说明
+|-
+| <u>'''死者'''</u>体验到了月球的黑暗面<br><small><u>'''死者'''</u> experienced the dark side of the moon</small>
+| <code>death.attack.onMoon</code>
+| rowspan = "2" | <code>on_moon</code>
+| rowspan = "2" | 在[[月球]]维度中被窒息引发的伤害杀死。<br><code>.player</code>消息可以正常触发，但语言文件中没有对应的文本。
+|-
+| death.attack.onMoon.player
+| <code>death.attack.onMoon.player</code>
+|-
+| <u>'''死者'''</u>变成了金子<br><small><u>'''死者'''</u> was turned into gold</small>
+| <code>death.midas.turned_into_gold</code>
+| <code>midas_curse</code>
+| 规则<code>minecraft:midas_touch</code>启用时被玩家触碰而被杀死。<br>伤害类型<code>minecraft:midas_curse</code>使用了死亡消息类型<code>midas_curse</code>，没有<code>.player</code>和<code>.item</code>变种。
+|-
+|}
+
+==== 24w14potato ====
+{| class="wikitable collapsible" style="width:100%;"
+|+ [[24w14potato]]死亡消息
+|-
+! style="width:25%;" | 死亡消息
+! style="width:25%;" | 本地化键名
+! style="width:25%;" | 伤害类型
+! style="width:25%;" | 说明
+|-
+| <u>'''死者'''</u>被烫手洋芋烫熟了。<br><small><u>'''死者'''</u>  held the hot potato for too long.</small>
+| <code>death.attack.potato_heat</code>
+| rowspan = "2" | <code>potato_heat</code>
+| rowspan = "2" | 玩家被[[烫手洋芋]]造成的伤害杀死。<br><code>.player</code>消息可以正常触发，但语言文件中没有对应的文本。
+|-
+| death.attack.potato_heat.player
+| <code>death.attack.potato_heat.player</code>
+|-
+| <u>'''死者'''</u>被坏脾气马铃薯杀死了<br><small><u>'''死者'''</u> was killed by a bad-tempered potato</small>
+| <code>death.attack.potato_magic</code>
+| rowspan = "2" | <code>potato_magic</code>
+| rowspan = "2" | 生物被[[马铃薯电池]]或[[恶毒马铃薯]]杀死。<br><code>.player</code>消息可以正常触发，但语言文件中没有对应的文本。
+|-
+| death.attack.potato_magic.player
+| <code>death.attack.potato_magic.player</code>
+|-
+|}
+
+==== 25w14craftmine ====
+{| class="wikitable collapsible" style="width:100%;"
+|+ [[25w14craftmine]]死亡消息
+|-
+! style="width:25%;" | 死亡消息
+! style="width:25%;" | 本地化键名
+! style="width:25%;" | 伤害类型
+! style="width:25%;" | 说明
+|-
+| <u>'''死者'''</u>被吃掉了<br><small><u>'''死者'''</u> was devoured</small>
+| <code>death.attack.devour</code>
+| rowspan = "3" | <code>devour</code>
+| rowspan = "3" | 玩家在启用了“周三青蛙”[[矿境效果]]的世界中被[[青蛙]]击杀。
+|-
+| <u>'''死者'''</u>被<u>'''击杀者'''</u>吃掉了<br><small><u>'''死者'''</u> was devoured by <u>'''击杀者'''</u></small>
+| <code>death.attack.devour.player</code>
+|-
+| <u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>吃掉了<br><small><u>'''死者'''</u> was devoured by <u>'''击杀者'''</u> using <u>'''物品'''</u></small>
+| <code>death.attack.devour.item</code>
+|}
+
+=== 基岩版 ===
+{{UsesInGameTranslations|be|section=1}}
+{| class="wikitable collapsible" style="width:100%;"
+|+ [[基岩版]]死亡消息
+|-
+! style="width:25%;" | 死亡消息
+! style="width:25%;" | 本地化键名
+! style="width:50%;" | 说明
+|-
+! colspan = "3" | 暴力行为
+|-
+| {{tp|death.attack.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.player</code>
+| 生物被[[玩家]]的[[近战攻击]]杀死。
+|-
+| {{tp|death.attack.mob|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.mob</code>
+| 生物被非玩家的[[近战攻击]]攻击杀死。
+|-
+| <u>'''死者'''</u>被<u>'''击杀者'''</u>吹了纸团
+| <code>death.attack.spit</code>
+| 生物被[[羊驼唾沫]]杀死。
+|-
+| {{tp|death.attack.arrow|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.arrow</code>
+| 生物被[[箭]]杀死。
+|-
+| {{tp|death.attack.trident|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.trident</code>
+| 生物被[[三叉戟]]杀死。
+|-
+| {{tp|death.attack.fireball|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.fireball</code>
+| 生物被[[小火球]]杀死。
+|-
+| <u>'''死者'''</u>被<u>'''击杀者'''</u>狙击了
+| <code>death.attack.bullet</code>
+| 生物被[[潜影弹]]杀死。
+|-
+| {{tp|death.attack.thrown|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.thrown</code>
+| 生物被[[雪球]]、[[鸡蛋]]或[[末影珍珠]]杀死。
+|-
+| {{tp|death.attack.fireworks|<u>'''死者'''</u>}}
+| <code>death.attack.fireworks</code>
+| 生物被[[烟花火箭]]杀死。
+|-
+| {{tp|death.attack.thorns|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.thorns</code>
+| 生物被[[荆棘]]魔咒或[[守卫者]]的尖-{}-刺效果的伤害杀死。
+|-
+| {{tp|death.attack.indirectMagic|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.indirectMagic</code>
+| 生物被其他生物的攻击造成的[[伤害#魔法伤害|魔法伤害]]杀死。
+|-
+| {{tp|death.attack.sonic_boom|<u>'''死者'''</u>}}
+| <code>death.attack.sonicBoom</code>
+| 生物被[[监守者]]的远程攻击杀死。
+|-
+! colspan = "3" | 负面效果
+|-
+| {{tp|death.attack.onFire|<u>'''死者'''</u>}}
+| <code>death.attack.onFire</code>
+| 生物被[[着火]]杀死。
+|-
+| {{tp|death.attack.magic|<u>'''死者'''</u>}}
+| <code>death.attack.magic</code>
+| 生物被没有实体来源的[[伤害#魔法伤害|魔法伤害]]杀死，如饮用瞬间伤害[[药水]]或{{cmd|effect}}给予的[[瞬间伤害]]效果，[[发射器]]射出或由{{cmd|summon}}召唤的[[伤害之箭]]、[[喷溅型伤害药水]]、[[滞留型伤害药水]]和瞬间伤害[[区域效果云]]给予的瞬间伤害效果，或{{cmd|summon}}召唤的唤魔者尖牙。
+|-
+| {{tp|death.attack.wither|<u>'''死者'''</u>}}
+| <code>death.attack.wither</code>
+| 生物被[[凋零]]杀死。
+|-
+| {{tp|death.attack.freeze|<u>'''死者'''</u>}}
+| <code>death.attack.freeze</code>
+| 生物被[[冰冻]]杀死。
+|-
+! colspan = "3" | 危险环境
+|-
+| {{tp|death.attack.cactus|<u>'''死者'''</u>}}
+| <code>death.attack.cactus</code>
+| 生物被[[仙人掌]]杀死。
+|-
+| {{tp|death.attack.inFire|<u>'''死者'''</u>}}
+| <code>death.attack.inFire</code>
+| 生物被[[火]]杀死。
+|-
+| {{tp|death.attack.lava|<u>'''死者'''</u>}}
+| <code>death.attack.lava</code>
+| 生物被[[熔岩]]杀死。
+|-
+| {{tp|death.attack.hotFloor|<u>'''死者'''</u>}}
+| <code>death.attack.magma</code>
+| 生物被[[岩浆块]]杀死。
+|-
+| {{tp|death.attack.sweetBerryBush|<u>'''死者'''</u>}}
+| <code>death.attack.sweetBerryBush</code>
+| 生物被[[甜浆果丛]]杀死。
+|-
+| {{tp|death.attack.inWall|<u>'''死者'''</u>}}
+| <code>death.attack.inWall</code>
+| 生物被[[窒息]]杀死。
+|-
+| {{tp|death.attack.lightningBolt|<u>'''死者'''</u>}}
+| <code>death.attack.lightningBolt</code>
+| 生物被[[闪电]]杀死。
+|-
+| {{tp|death.attack.drown|<u>'''死者'''</u>}}
+| <code>death.attack.drown</code>
+| 生物被[[溺水]]杀死。
+|-
+| {{tp|death.attack.dryout|<u>'''死者'''</u>}}
+| <code>death.attack.dehydration</code>
+| 生物被[[脱水]]杀死。
+|-
+! colspan = "3" | 意外事故
+|-
+| {{tp|death.attack.fall|<u>'''死者'''</u>}}
+| <code>death.attack.fall</code>
+| 生物被[[伤害#摔落伤害|摔落伤害]]杀死。
+|-
+| {{tp|death.attack.stalagmite|<u>'''死者'''</u>}}
+| <code>death.attack.stalagmite</code>
+| 生物摔落到作为石笋顶端的[[滴水石锥]]上而被摔落伤害杀死。
+|-
+| {{tp|death.fell.accident.generic|<u>'''死者'''</u>}}
+| <code>death.fell.accident.generic</code>
+| 生物下落高度超过5格时被摔落伤害杀死。
+|-
+| {{tp|death.attack.anvil|<u>'''死者'''</u>}}
+| <code>death.attack.anvil</code>
+| 生物被下落的[[铁砧]]杀死。
+|-
+| {{tp|death.attack.fallingStalactite|<u>'''死者'''</u>}}
+| <code>death.attack.stalactite</code>
+| 生物被下落的[[滴水石锥]]杀死。
+|-
+| {{tp|death.attack.fallingBlock|<u>'''死者'''</u>}}
+| <code>death.attack.fallingBlock</code>
+| 生物被其他的[[下落的方块]]杀死。
+|-
+| {{tp|death.attack.flyIntoWall|<u>'''死者'''</u>}}
+| <code>death.attack.flyIntoWall</code>
+| 生物在使用[[鞘翅]]滑翔时撞击方块侧面而被杀死。
+|-
+! colspan = "3" | 杂项
+|-
+| {{tp|death.attack.starve|<u>'''死者'''</u>}}
+| <code>death.attack.starve</code>
+| 玩家被[[饥饿]]耗尽而受到的伤害杀死。
+|-
+| {{tp|death.attack.explosion|<u>'''死者'''</u>}}
+| <code>death.attack.explosion</code>
+| 生物被没有实体来源的[[爆炸]]杀死。
+|-
+| {{tr|<u>'''死者'''</u>被 [刻意的游戏设计] 杀死了|<u>'''死者'''</u> 被 [蓄意遊戲設計] 殺死}}
+| <code>death.attack.explosion.by.bed</code>
+| 生物被床、重生锚或末地水晶的[[爆炸]]杀死。
+|-
+| {{tp|death.attack.explosion.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.explosion.player</code>
+| 生物被有实体来源的[[爆炸]]杀死。
+|-
+| {{tp|death.attack.outOfWorld|<u>'''死者'''</u>}}
+| <code>death.attack.outOfWorld</code>
+| 生物被[[虚空]]杀死。
+|-
+| {{tp|death.attack.generic|<u>'''死者'''</u>}}
+| <code>death.attack.generic</code>
+| 生物被{{cmd|kill}}杀死。
+|-
+! colspan = "3" | 未使用的死亡消息
+|-
+| {{tp|death.attack.player.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.player.item</code>
+| rowspan = "0" | 这些死亡消息存在于语言文件中，但是没有任何情况会使用它们。
+|-
+| {{tp|death.attack.mob.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.mob.item</code>
+|-
+| {{tp|death.attack.arrow.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.arrow.item</code>
+|-
+| {{tp|death.attack.fireball.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.fireball.item</code>
+|-
+| {{tp|death.attack.thrown.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.thrown.item</code>
+|-
+| {{tp|death.attack.indirectMagic.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.attack.indirectMagic.item</code>
+|-
+| {{tp|death.attack.sonic_boom.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.sonicBoom.player</code>
+|-
+| {{tp|death.attack.onFire.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.onFire.player</code>
+|-
+| {{tp|death.attack.cactus.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.cactus.player</code>
+|-
+| {{tp|death.attack.inFire.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.inFire.player</code>
+|-
+| {{tp|death.attack.lava.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.lava.player</code>
+|-
+| {{tp|death.attack.hotFloor.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.magma.player</code>
+|-
+| {{tp|death.attack.drown.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.attack.drown.player</code>
+|-
+| {{tp|death.fell.accident.ladder|<u>'''死者'''</u>}}
+| <code>death.fell.accident.ladder</code>
+|-
+| {{tp|death.fell.accident.vines|<u>'''死者'''</u>}}
+| <code>death.fell.accident.vines</code>
+|-
+| {{tr|<u>'''死者'''</u>从水中掉了下来|<u>'''死者'''</u> 從水中跌出|<u>'''死者'''</u> 喺水入面跌咗出嚟}}
+| <code>death.fell.accident.water</code>
+|-
+| {{tp|death.fell.killer|<u>'''死者'''</u>}}
+| <code>death.fell.killer</code>
+|-
+| {{tp|death.fell.assist|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.fell.assist</code>
+|-
+| {{tp|death.fell.assist.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.fell.assist.item</code>
+|-
+| {{tp|death.fell.finish|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+| <code>death.fell.finish</code>
+|-
+| {{tp|death.fell.finish.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+| <code>death.fell.finish.item</code>
+|-
+|}
+
+== 历史 ==
+{{info needed section|缺失基岩版历史、缺失繁中数据}}
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了死亡消息。
+|目前，死亡消息仅显示在[[多人游戏]]服务器中。
+|加入了下列死亡消息：
+* <u>'''死者'''</u>浴火焚身
+* <u>'''死者'''</u>被烧死了
+* <u>'''死者'''</u>试图在熔岩里游泳
+* <u>'''死者'''</u>在墙里窒息而亡
+* <u>'''死者'''</u>淹死了
+* <u>'''死者'''</u>饿死了
+* <u>'''死者'''</u>被戳死了
+* <u>'''死者'''</u>落地过猛
+* <u>'''死者'''</u>掉出了这个世界
+* <u>'''死者'''</u>死了
+* <u>'''死者'''</u>爆炸了
+* <u>'''死者'''</u>被魔法杀死了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>杀死了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>射杀
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>用火球烧死了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>给砸死了}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre4|加入了死亡消息“<u>'''死者'''</u>被<u>'''击杀者'''</u>杀死了”，在生物被[[喷溅型伤害药水]]杀死时触发。}}
+|{{HistoryLine||1.3.1|dev=12w16a|死亡消息“<u>'''死者'''</u>死了”现在是未使用的。}}
+|{{HistoryLine|||dev=12w18a|由于[[单人游戏]]世界现在在内部服务器中运行，死亡消息也会在单人游戏中显示。}}
+|{{HistoryLine||1.4.2|dev=12w34a|加入了死亡消息“<u>'''死者'''</u>凋零了”。}}
+|{{HistoryLine|||dev=12w41a|加入了死亡消息“<u>'''死者'''</u>被坠落的铁砧压扁了”。}}
+|{{HistoryLine|||dev=12w42a|加入了死亡消息“<u>'''死者'''</u>被下落的方块压扁了”。}}
+|{{HistoryLine||1.4.6|dev=12w50a|加入了死亡消息“<u>'''死者'''</u>在试图伤害<u>'''击杀者'''</u>时被杀”。}}
+|{{HistoryLine||1.5|dev=13w01a|加入了死亡消息“<u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>杀死了”。}}
+|{{HistoryLine|||dev=13w02a|重写了死亡消息的翻译字符串系统。
+|由摔落[[伤害]]产生的死亡消息现在会通过一个能够产生352种（在en_US.lang中为416种）不同死亡消息的系统来显示。
+|加入了下列死亡消息：
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时踏入了火中
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时被烤得酥脆
+* <u>'''死者'''</u>在逃离<u>'''击杀者'''</u>时试图在熔岩里游泳
+* <u>'''死者'''</u>在试图逃离<u>'''击杀者'''</u>时淹死了
+* <u>'''死者'''</u>在试图逃离<u>'''击杀者'''</u>时撞上了仙人掌
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>炸死了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>射杀
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>发射的火球烧死了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>给砸死了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>杀死了
+|死亡消息“<u>'''死者'''</u>被<u>'''击杀者'''</u>杀死了”被修改为“<u>'''死者'''</u>被<u>'''击杀者'''</u>使用的魔法杀死了”。}}
+|{{HistoryLine|||dev=13w05a|由于相关死亡消息无法被翻译，移除了生成摔落死亡消息的系统。<ref>{{bug|MC-8647|||Fixed}}</ref>
+|下列死亡消息属于上述系统的一部分，但并未被移除：
+* <u>'''死者'''</u>从高处摔了下来
+* <u>'''死者'''</u>从梯子上摔了下来
+* <u>'''死者'''</u>从藤蔓上摔了下来
+* <u>'''死者'''</u>从水中掉了下来（未使用）
+|加入了下列死亡消息：
+* <u>'''死者'''</u>因为<u>'''击杀者'''</u>注定要摔死
+* <u>'''死者'''</u>因为<u>'''击杀者'''</u>使用了<u>'''物品'''</u>注定要摔死
+|加入了下列未使用的死亡消息：
+* <u>'''死者'''</u>注定要摔死
+* <u>'''死者'''</u>摔伤得太重并被<u>'''击杀者'''</u>完结了生命
+* <u>'''死者'''</u>摔伤得太重并被<u>'''击杀者'''</u>用<u>'''物品'''</u>完结了生命}}
+|{{HistoryLine||1.6.1|dev=13w21b|修改了下列未使用死亡消息的英文原文：
+* 将“<u>'''死者'''</u> ''was'' fell too far and was finished by <u>'''击杀者'''</u>”改为“<u>'''死者'''</u> fell too far and was finished by <u>'''击杀者'''</u>”
+* 将“<u>'''死者'''</u> ''was'' fell too far and was finished by <u>'''击杀者'''</u> using <u>'''物品'''</u>”改为“<u>'''死者'''</u> fell too far and was finished by <u>'''击杀者'''</u> using <u>'''物品'''</u>”}}
+|{{HistoryLine||1.7.4|dev=13w47a|下列死亡消息现在是未使用的：
+* <u>'''死者'''</u>因为<u>'''击杀者'''</u>注定要摔死
+* <u>'''死者'''</u>因为<u>'''击杀者'''</u>使用了<u>'''物品'''</u>注定要摔死}}
+|{{HistoryLine||1.8|dev=14w10a|加入了游戏规则{{cd|showDeathMessages}}。}}
+|{{HistoryLine|||dev=14w32a|加入了死亡消息“<u>'''死者'''</u>被闪电击中”。}}
+|{{HistoryLine||1.9|dev=15w31a|现在死亡消息会显示在死亡屏幕上。}}
+|{{HistoryLine|||dev=15w31c|加入了死亡消息“<u>'''死者'''</u>被龙息烤熟了”。}}
+|{{HistoryLine|||dev=15w32a|死亡消息“<u>'''死者'''</u>被龙息烤熟了”现在是未使用的。}}
+|{{HistoryLine|||dev=15w42a|加入了死亡消息“<u>'''死者'''</u>感受到了动能”。}}
+|{{HistoryLine||1.10|dev=16w20a|加入了下列死亡消息：
+* <u>'''死者'''</u>发现了地板是熔岩做的
+* <u>'''死者'''</u>因<u>'''击杀者'''</u>而步入危险之地}}
+|{{HistoryLine||1.11|dev=16w43a|加入了死亡消息“<u>'''死者'''</u>因被过度挤压而死”。}}
+|{{HistoryLine||1.11.1|dev=16w50a|加入了死亡消息“<u>'''死者'''</u>随着一声巨响消失了”。}}
+|{{HistoryLine||1.13|dev=17w48a|加入了死亡消息“<u>'''死者'''</u>被[刻意的游戏设计]杀死了”。}}
+|{{HistoryLine|||dev=18w01a|加入了下列死亡消息：
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时被闪电击中
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时在墙里窒息而亡
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>挤扁了
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时饿死了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>炸死了
+* death.attack.magic.player
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时凋零了
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时被坠落的铁砧压扁了
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时被下落的方块压扁了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>杀死了
+* <u>'''死者'''</u>在试图伤害<u>'''击杀者'''</u>时被<u>'''物品'''</u>杀死
+* <u>'''死者'''</u>在试图逃离<u>'''击杀者'''</u>时落地过猛
+* <u>'''死者'''</u>与<u>'''击杀者'''</u>不共戴天
+* <u>'''死者'''</u>在试图逃离<u>'''击杀者'''</u>时感受到了动能
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时随着一声巨响消失了
+|加入了下列未使用的死亡消息：
+* <u>'''死者'''</u>死于<u>'''击杀者'''</u>
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>的龙息烤熟了}}
+|{{HistoryLine|||dev=18w07a|加入了下列死亡消息：
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>刺穿了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>刺穿了}}
+|{{HistoryLine|||dev=18w15a|加入了下列未使用的死亡消息：
+* death.attack.dryout
+* death.attack.dryout.player}}
+|{{HistoryLine|||dev=18w20b|修改了下列死亡消息的英文原文：
+* 将“<u>'''死者'''</u> was ''slaim'' by <''mob''> using <u>'''物品'''</u>”改为“<u>'''死者'''</u> was slain by <''mob''> using <u>'''物品'''</u>”
+* 将“<u>'''死者'''</u> discovered floor was lava”改为“<u>'''死者'''</u> discovered the floor was lava”}}
+|{{HistoryLine|||dev=pre5|死亡消息“<u>'''死者'''</u>从水中掉了下来”现在可以在实际游戏中出现。}}
+|{{HistoryLine||1.13.1|dev=18w31a|加入了'''未使用的'''死亡消息“<u>'''死者'''</u>被不为人知的魔法杀死了”，以及这条消息的悬停事件：“抱歉！消息过长，无法完整显示。截断后的消息为：<''被截断的消息''>”}}
+|{{HistoryLine||1.14|dev=18w49a|加入了下列死亡消息：
+* <u>'''死者'''</u>被甜浆果丛刺死了
+* <u>'''死者'''</u>在试图逃离<u>'''击杀者'''</u>时被甜浆果丛刺死了}}
+|{{HistoryLine||1.15|dev=19w34a|加入了下列死亡消息：
+* <u>'''死者'''</u>被蛰死了
+* death.attack.sting.item
+|加入了'''未使用的'''死亡消息“<u>'''死者'''</u>被<u>'''击杀者'''</u>蛰死了”。}}
+|{{HistoryLine||1.16|dev=20w07a|死亡消息“death.attack.magic.player”被修改为“<u>'''死者'''</u>在试图逃离<u>'''击杀者'''</u>时被魔法杀死了”。}}
+|{{HistoryLine|||dev=20w09a|加入了下列死亡消息：
+* <u>'''死者'''</u>从垂泪藤上摔了下来
+* <u>'''死者'''</u>在攀爬时摔了下来
+* death.attack.fireworks.item
+|移除了死亡消息“<u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时随着一声巨响消失了”，但其翻译字符串仍然存在。}}
+|{{HistoryLine|||dev=20w11a|加入了下列死亡消息：
+* <u>'''死者'''</u>从缠怨藤上摔了下来
+* <u>'''死者'''</u>从脚手架上摔了下来}}
+|{{HistoryLine|||dev=20w12a|移除了死亡消息“<u>'''死者'''</u> fell out of the water”的翻译字符串，现在它显示为“death.fell.accident.water”。}}
+|{{HistoryLine|||dev=20w13a|由于死亡消息“<u>'''死者'''</u>被[刻意的游戏设计]杀死了”现在也会在玩家被主世界或末地中的重生锚的爆炸杀死时出现，其原始翻译字符串“death.attack.netherBed.<message/link>”被改为"death.attack.badRespawnPoint.<message/link>"。}}
+|{{HistoryLine|||dev=20w18a|修改了下列死亡消息：
+* 将“<u>'''死者'''</u> fell off a scaffolding”的英文原文改为“<u>'''死者'''</u> fell off scaffolding”
+* 将“death.attack.fireworks.item”改为“<u>'''死者'''</u>随着<u>'''击杀者'''</u>用<u>'''物品'''</u>发射的烟花发出的巨响消失了”}}
+|{{HistoryLine|||dev=20w22a|加入了下列死亡消息：
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>发射的头颅射杀
+* death.attack.witherSkull.item}}
+|{{HistoryLine||1.16.2|dev=20w30a|死亡消息“<u>'''死者'''</u>被<u>'''击杀者'''</u>发射的头颅射杀”的英文原文“<u>'''死者'''</u> was shot by a <u>'''击杀者'''</u>'s skull”被修改为“<u>'''死者'''</u> was shot by a skull from <u>'''击杀者'''</u>”。}}
+|{{HistoryLine||1.17|dev=20w46a|加入了下列死亡消息：
+* <u>'''死者'''</u>被冻死了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>冻死了}}
+|{{HistoryLine|||dev=20w49a|加入了下列死亡消息：
+* <u>'''死者'''</u>被坠落的钟乳石刺穿了
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时被钟乳石刺穿了}}
+|{{HistoryLine|||dev=21w03a|加入了下列死亡消息：
+* <u>'''死者'''</u>被石笋刺穿了
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时被石笋刺穿了}}
+|{{HistoryLine||1.17.1|dev=pre2|下列死亡消息现在可以在实际游戏中出现：
+* death.attack.dryout
+* death.attack.dryout.player
+* <u>'''死者'''</u>死了
+* <u>'''死者'''</u>死于<u>'''击杀者'''</u>}}
+|{{HistoryLine|||dev=rc1|修改了下列死亡消息：
+* 将“death.attack.dryout”改为“<u>'''死者'''</u>因脱水而死”
+* 将“death.attack.dryout.player”改为“<u>'''死者'''</u>在试图逃离<u>'''击杀者'''</u>时因脱水而死”}}
+|{{HistoryLine||1.19|dev=22w17a|加入了下列死亡消息：
+* <u>'''死者'''</u>被一道音波尖啸抹除了
+* <u>'''死者'''</u>在试图逃离<u>'''击杀者'''</u>被一道音波尖啸抹除了}}
+|{{HistoryLine|||dev=22w19a|加入了死亡消息“death.attack.sonic_boom.item”。
+|移除了死亡消息“<u>'''死者'''</u>在试图逃离<u>'''击杀者'''</u>时被一道音波尖啸抹除了”，但其翻译字符串仍然存在。}}
+|{{HistoryLine|||dev=pre2|加入了死亡消息“<u>'''死者'''</u>在与持有<u>'''物品'''</u>的<u>'''击杀者'''</u>战斗时被烤得酥脆”，但其无法在实际游戏中出现，只存在于游戏代码中。
+|修改了下列死亡消息：
+* 将“death.attack.sting.item”改为“<u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>蛰死了”
+* 将“death.attack.witherSkull.item”改为“<u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>发射的头颅射杀”
+* 将“death.attack.sonic_boom.item”改为“<u>'''死者'''</u>在试图逃离持有<u>'''物品'''</u>的<u>'''击杀者'''</u>时被一道音波尖啸抹除了”}}
+|{{HistoryLine||1.19.3|dev=22w43a|加入了下列死亡消息：
+* death.attack.anvil.item
+* death.attack.fallingBlock.item
+* death.attack.fallingStalactite.item
+|移除了下列死亡消息，但它们的翻译字符串仍然存在：
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时被坠落的铁砧压扁了
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时被下落的方块压扁了
+* <u>'''死者'''</u>在与<u>'''击杀者'''</u>战斗时被坠落的钟乳石刺穿了}}
+|{{HistoryLine||1.19.4|dev=23w03a|下列死亡消息现在可以在实际游戏中出现：
+* <u>'''死者'''</u>注定要摔死
+* <u>'''死者'''</u>因为<u>'''击杀者'''</u>注定要摔死
+* <u>'''死者'''</u>因为<u>'''击杀者'''</u>使用了<u>'''物品'''</u>注定要摔死}}
+|{{HistoryLine|||dev=23w06a|由于{{cmd|damage}}命令的加入，所有有对应伤害类型的消息名称的死亡消息、及其无击杀者、{{code|.player}}或{{code|.item}}变种都可以产生。
+|以下存在于语言文件中的死亡消息现在可以通过{{cmd|damage}}来产生：
+* {{tp|death.attack.sting.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+* {{tp|death.attack.fireworks.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+* {{tp|death.attack.sonic_boom.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+* {{tp|death.attack.dragonBreath|<u>'''死者'''</u>}}
+* {{tp|death.attack.dragonBreath.player|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+* {{tp|death.attack.onFire.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}
+* {{tp|death.fell.finish|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+* {{tp|death.fell.finish.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}}}
+|{{HistoryLine|||dev=pre4|修改了下列死亡消息的英文原文：
+* 将“<u>'''死者'''</u> walked into danger zone due to <u>'''击杀者'''</u>”改为“<u>'''死者'''</u> walked into the danger zone due to <u>'''击杀者'''</u>”
+* 将“<u>'''死者'''</u> was roasted in dragon breath”改为“<u>'''死者'''</u> was roasted in dragon's breath”
+* 将“<u>'''死者'''</u> was roasted in dragon breath by <u>'''击杀者'''</u>”改为“<u>'''死者'''</u> was roasted in dragon's breath by <u>'''击杀者'''</u>”}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了被[[重锤]]猛击杀死时的死亡消息：
+* {{tp|death.attack.mace_smash|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+* {{tp|death.attack.mace_smash.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了被[[矛]]刺死时的死亡消息：
+* {{tp|death.attack.spear|<u>'''死者'''</u>|<u>'''击杀者'''</u>}}
+* {{tp|death.attack.spear.item|<u>'''死者'''</u>|<u>'''击杀者'''</u>|<u>'''物品'''</u>}}}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了死亡消息。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.4|dev=1.0.4.0|加入了死亡消息“<u>'''死者'''</u>感受到了动能”。}}
+|{{HistoryLine||1.1.3|dev=1.1.3.0|加入了下列死亡消息：
+* <u>'''死者'''</u>发现了地板是熔岩做的
+* <u>'''死者'''</u>因<u>'''击杀者'''</u>而步入危险之地（未使用）}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了死亡消息“<u>'''死者'''</u>随着一声巨响消失了”。}}
+|{{HistoryLine||1.16.200|dev=1.16.200.51|加入了下列死亡消息：
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>狙击了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>吹了纸团}}
+|{{HistoryLine||1.16.210|dev=1.16.210.53|加入了死亡消息“<u>'''死者'''</u>被冻死了”。}}
+|{{HistoryLine||1.16.220|dev=1.16.220.50|加入了死亡消息“<u>'''死者'''</u>被坠落的钟乳石刺穿了”。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.21|加入了关于甜浆果丛的死亡消息：
+* “<死者> 被甜浆果灌木丛刺死了”
+|现在死亡消息会显示在死亡屏幕上。}}
+|{{HistoryLine||1.20.50|dev=1.20.50.20|加入了被[[床]]或[[重生锚]]炸死时的死亡消息：
+* “{{tr|<死者>被[Intentional Game Design]杀死了{{sic}}|<死者> 被 [蓄意遊戲設計] 殺死}}”
+|将被[[岩浆块]]杀死时的死亡消息由“{{tr|<死者> 发现地面是熔岩|<死者>已探索的地面是熔岩}}”更改为“{{tr|<死者>发现了地面是熔岩|<死者> 發現地面是熔岩}}”。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.22|加入了被[[重锤]]猛击杀死时的死亡消息：
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>击碎了
+* <u>'''死者'''</u>被<u>'''击杀者'''</u>用<u>'''物品'''</u>击碎了}}
+|{{HistoryLine||26.30|dev=26.30.29|加入了因接触吸收了[[岩浆块]]的[[硫方怪]]而被杀死时的死亡消息：
+* “<u>'''死者'''</u> died because not just the floor is lava”}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU5|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了死亡消息。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.88|wiiu=none|switch=none|加入了隐藏死亡消息的选项。}}
+}}
+
+== 你知道吗 ==
+* 与[[岩浆块]]相关的死亡消息引用了经典的肢体游戏“[[wikipedia:The floor is lava|The floor is lava]]”（地板是熔岩/地上有岩浆）：参与者须将地板视作熔岩，避免与之接触。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:游戏内容]]
+
+[[en:Death messages]]
+[[es:Mensajes de muerte]]
+[[ja:死亡メッセージ]]
+[[lzh:訃]]
+[[nl:Overlijdensbericht]]
+[[pt:Mensagens de morte]]

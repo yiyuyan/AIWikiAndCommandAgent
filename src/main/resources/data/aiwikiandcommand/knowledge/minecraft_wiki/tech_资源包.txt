@@ -1,0 +1,322 @@
+# 页面: 资源包
+# 来源: https://zh.minecraft.wiki/w/%E8%B5%84%E6%BA%90%E5%8C%85
+# 分类: Java版, Java版独有特性, 游戏文件, 资源包
+# 抓取时间: 2026-07-14 17:36:29
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|列表|清單}}
+{{tr|mode=H|全局|全域}}
+{{tr|mode=H|代码|代碼}}
+{{about|{{el|je}}中的资源包，[[纹理包]]的替代品|{{el|be}}中的资源包|附加包|其他用法|包}}
+{{exclusive|je}}
+{{relevant tutorial|制作资源包}}
+
+[[File:TexturesComparison.png|thumb|right|300px|左侧为默认纹理，右侧为自定义资源包（Rodrigo's Pack 8x）]]
+'''资源包（Resource Pack）'''系统允许玩家自定义游戏内绝大多数的视觉、听觉效果，而不需要修改游戏的{{tr|代码|程式}}。
+
+== 使用资源包 ==
+{{Filetr|Select_resource_pack.png|thumb|默认的资源包配置}}
+资源包可以使用[[选项]]菜单中的“{{tp|options.resourcepack}}”进行设置。在游戏加载资源包时，会按照列表上的顺序依次加载它们的资源。上层资源包可以替代、合并或移除下层资源包的资源，因此资源包的位置顺序会影响游戏对某些资源的读取和使用。
+
+=== 全局资源包 ===
+全局资源包需要放置在{{filepath|[[.minecraft]]}}内的{{filename|resourcepacks}}文件夹，每个全局资源包都必须是一个子文件夹或一个[[wzh:ZIP格式|{{filename|.zip}}文件]]，其他文件格式会被忽略。全局资源包可以被禁用、启用或者调整位置。资源包的显示名称即为该文件夹或{{filename|.zip}}文件的名称（含扩展名），可使用[[格式化代码]]。
+
+=== 世界指定资源包 ===
+资源包可以与[[世界]]捆绑在一起。将资源包重命名为{{filename|resources.zip}}，再将这个文件放入{{filename|<''存档根目录''>/resourcepacks}}中，这个资源包就会成为世界指定资源包。
+
+当玩家进入这个世界时，这个资源包将作为最上层资源包被加载，且无法被禁用或调整位置。其名称将显示为“{{tp|resourcePack.server.name}}”。
+
+=== 服务器指定资源包 ===
+在服务器属性文件{{filename|[[server.properties]]}}中指定<code>resource-pack</code>更改为一个{{filename|.zip}}文件的下载链接就能设置服务器的指定资源包。玩家可以选择使用资源包或不下载这个资源包。
+
+如果选择使用资源包，这个资源包将作为最上层资源包被加载，且无法被禁用或调整位置。其名称将显示为“{{tp|resourcePack.server.name}}”。
+
+=== 默认资源包 ===
+[[File:Default pack.png|32px]] <code>{{tp|resourcePack.vanilla.name}}</code>资源包即游戏内默认的外观资源包。它无法被禁用，仅可以调整位置。
+
+=== 内置资源包 ===
+游戏提供了两个内置的资源包，玩家可以选择启用、禁用和调整位置。
+
+[[File:Programmer Art pack.png|32px]] {{anchor|Programmer Art}}<code>{{tp|resourcePack.programmer_art.name}}</code>资源包是一个还原[[纹理更新]]前纹理和模型的资源包。这些内容的视觉效果不会随着版本而更新。
+
+[[File:HC pack.png|32px]] <code>{{tp|resourcePack.high_contrast.name}}</code>资源包为游戏的GUI提供了高对比度版本的纹理。此资源包亦可在辅助功能设置中开启。
+
+== 目录结构 ==
+<div class="treeview">
+* {{file|archive}}{{file|directory|<''资源包名称''>}}：根目录。
+** {{file|file|pack.mcmeta}}：[[#资源包元数据|资源包元数据]]。
+** {{file|file|pack.png}}：[[#资源包图标|资源包图标]]。
+** {{file|directory|assets}}
+*** {{file|directory|<''命名空间''>}}
+**** {{file|directory|atlases}}：[[纹理图集]]文件目录。
+**** {{file|directory|blockstates}}：[[模型#方块状态映射|方块状态映射]]文件目录。
+**** {{file|directory|equipment}}：[[装备资产]]文件目录。
+**** {{file|file|gpu_warnlist.json}}：[[#GPU警告列表|GPU警告列表]]文件。
+**** {{file|directory|font}}：[[自定义字体|字体定义]]文件目录。
+**** {{file|directory|items}}：[[物品模型映射|物品模型映射]]文件目录。
+**** {{file|directory|lang}}：[[#语言|语言]]文件目录。
+**** {{file|directory|models}}：[[烘焙模型]]文件目录。
+**** {{file|directory|particles}}：[[#粒子|粒子纹理定义]]文件目录。
+**** {{file|directory|post_effect}}：[[着色器#后处理管线|后处理管线]]程序目录。
+**** {{file|file|regional_compliancies.json}}：[[#地区合规性警告|地区合规性警告文件]]。
+**** {{file|directory|sounds}}：声音资源目录，应均为{{filepath|.ogg}}文件。
+**** {{file|file|sounds.json}}：[[Java版声音事件#声音事件定义|声音事件定义文件]]。
+**** {{file|directory|shaders}}：[[着色器]]文件目录，不包括后处理管线。
+**** {{file|directory|texts}}：[[#文本|文本]]目录。
+**** {{file|directory|textures}}：[[#纹理|纹理资源]]目录，除元数据外应均为{{filepath|.png}}文件。
+**** {{file|directory|waypoint_style}}：[[路径点样式]]文件目录。
+</div>
+
+== 资源包基础结构 ==
+=== 资源包元数据{{anchor|pack.mcmeta}} ===
+{{main|pack.mcmeta}}
+资源包需要指定对应的元数据，游戏才可以正常加载和解析资源包。资源包元数据位于资源包根目录，其名称为{{filename|pack.mcmeta}}，使用[[JSON]]格式，并具有下列元素：
+
+<div class="treeview">
+{{#lst:pack.mcmeta|resource}}
+</div>
+
+==== 示例 ====
+如下为{{filename|pack.mcmeta}}示例：
+{{tabber|1=
+支持1.21.11及其以上版本 =
+{{pack.mcmeta|"我的测试资源包"|75|9999|type=new}}
+{{!}}-{{!}} 支持1.21.1~1.21.11 =
+{{pack.mcmeta|"我的测试资源包"|34|75}}
+{{!}}-{{!}} 支持1.21.8- =
+{{pack.mcmeta|"我的测试资源包"|16|64|type=old}}
+}}
+
+=== 资源包格式版本 ===
+{{:资源包/版本}}
+
+=== 资源包图标 ===
+[[File:Unknown pack.png|thumb|未知资源包的纹理]]
+资源包根目录下可以添加一个{{filename|pack.png}}作为资源包的图标，这个图标会在选项菜单中资源包列表中渲染。
+
+在游戏读取资源包时，资源包的图标会在游戏内分配一个独特的命名空间ID，其命名格式为<code>-{}-minecraft:pack/<''去除非[a-z0-9-_./]的资源包名称''>/<''资源包名称的[[wzh:SHA-1|SHA-1]]散列字符串''>/icon</code>。当游戏导出动态纹理时，游戏会按照此图标文件的命名空间ID，将<code>/</code>和<code>:</code>替换为<code>_</code>，以此字符串加上后缀名<code>.png</code>作为导出纹理的名称。
+
+如果资源包没有图标，或图标加载错误，游戏会使用未知资源包纹理{{filepath|assets/minecraft/textures/misc/unknown_pack.png}}作为此资源包的图标。
+
+== 资源包内容 ==
+=== 纹理图集 ===
+{{main|纹理图集}}
+资源包可以修改纹理图集的内容，使游戏在使用纹理图集时引用不同的纹理。修改纹理图集内容的文件都位于{{filepath|assets/minecraft/atlases}}目录下。
+
+=== 纹理 ===
+{{main|纹理}}
+资源包内可以定义许多纹理，用于修改游戏内各种方块、物品、实体、GUI的显示。纹理都位于{{filepath|-{}-assets/<''命名空间''>/textures}}的各个子目录内。
+
+=== 模型 ===
+{{main|模型|物品模型映射}}
+烘焙模型可以修改方块和物品的形状和对应的纹理绑定。烘焙模型文件位于{{filepath|-{}-assets/<''命名空间''>/models}}内。
+
+为了确定方块或物品使用何种模型，游戏提供了模型选择机制，方块位于{{filepath|-{}-assets/<''命名空间''>/blockstates}}内，物品位于{{filepath|-{}-assets/<''命名空间''>/items}}内。
+
+=== 装备资产 ===
+{{main|装备资产}}
+装备资产定义了各个预设模型层使用何种纹理的映射，可以修改和定义装备的纹理。装备资产文件位于{{filepath|-{}-assets/<''命名空间''>/equipment}}内。
+
+=== 字体 ===
+{{main|自定义字体}}
+资源包可以修改已有的[[字体]]和添加自定义字体，修改各处文本的渲染。字体都在{{filepath|-{}-assets/<''命名空间''>/font}}的各个子目录下。
+
+=== 粒子 ===
+{{see also|粒子#类型}}
+资源包可以修改粒子使用的纹理，但不能添加新的粒子类型或修改粒子的生成、着色等。特定ID的粒子类型可以使用的纹理由资源包的{{filepath|-{}-assets/minecraft/particles/<''粒子类型ID''>.json}}控制，格式如下：
+
+<div class="treeview">
+* {{nbt|object}}：根对象
+** {{nbt|list|textures}}：此粒子类型可以使用的纹理。
+*** {{nbt|string}}：（命名空间ID）一个粒子纹理。
+</div>
+
+=== 着色器 ===
+{{main|着色器}}
+着色器是资源包改变游戏渲染方式的一种方式，使用OpenGL着色器语言（GLSL）编写，位于{{filepath|assets/minecraft/shaders}}。
+
+后处理管线也是一种渲染效果，位于{{filepath|assets/minecraft/post_effect}}。
+
+=== 声音 ===
+{{main|Java版声音事件}}
+资源包可以修改游戏内的声音和对应的声音事件定义。资源包可以定义{{filepath|assets/minecraft/sounds.json}}以修改原版的声音，也可以在{{filepath|-{}-assets/<''命名空间''>/sounds}}内修改声音文件。
+
+=== 语言 ===
+{{see also|文本组件#本地化文本组件}}
+资源包可以添加或修改语言。语言文件用于定义翻译文本，按照下面的格式定义：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根元素
+** {{nbt|string|<''本地化键名''>}}：设置对应本地化键名的文本。
+</div>
+
+本地化键名是游戏读取一个文本所需要的标识符，通常具有一定的命名格式。例如，游戏在读取石头的名称时就会使用到<code>block.minecraft.stone</code>这个本地化键名，假设当前语言环境是<code>en_us</code>，在查找语言文件后，游戏就可以找出此本地化键名对应的文本<code>Stone</code>，并将这个文本作为石头的名称。
+
+每个本地化键名对应的文本也有它的格式要求。因为文本可能带有参数，所以文本本身是一个格式化字符串。格式可以参考[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Formatter.html Java文档]。然而，游戏实际上通常并没有使用上述Java标准库；如果格式化字符串内包含有<code>%f</code>或者<code>%d</code>及它们的带序号形式，游戏在加载语言文件时会自动将这些格式字符串中的<code>f</code>和<code>d</code>替换为<code>s</code>。所以，真正起效的格式字符串只有<code>%s</code>和<code>%%</code>和它们的带有序号的形式。游戏不会替换其他格式字符串，但游戏在解析这些字符串时会产生<code>TranslatableFormatException</code>异常，报错信息为<code>-{}-Unsupported format: '<''格式字符串''>'</code>。
+
+当有多个资源包同时定义了同一个语言文件时，例如多个资源包内都存在{{filepath|assets/minecraft/lang/en_us.json}}，那么游戏就会按照资源包的顺序从上到下找到第一个定义了某个本地化键名的语言文件，并将对应的文本作为最终的翻译文本。如果所有资源包内都不存在这个本地化键名，游戏会直接使用本地化键名本身作为翻译文本。这种读取模式使得资源包不必要定义所有本地化键名，只需要定义需要的本地化键名就可以达到效果，未定义的本地化键名将自动使用其他资源包的文本。
+
+与修改或添加本地化键名不同，添加一个语言需要两个步骤：
+# 在资源包元数据中定义要添加的语言。
+# 编写对应的语言文件。
+
+假设在资源包元数据中定义了<code>zh_meme</code>语言，那么需要定义{{filepath|-{}-assets/<''命名空间''>/lang/zh_meme.json}}语言文件，其中命名空间是什么不会影响语言加载，游戏会遍历所有可能的命名空间以加载语言文件。
+
+==== 键排除与替换 ====
+
+除英语（美国）的语言文件外，游戏自带的语言文件以[[散列资源文件]]的形式在多个游戏版本间共享。为在各游戏版本中选择正确的翻译内容，各版本[[客户端核心文件|客户端文件]]中存在一个文件，位于{{filepath|assets/minecraft/lang/deprecated.json}}，标记了此版本中被替换或排除的语言文件中的翻译键名。此文件无法被资源包更改。该文件的格式如下：
+
+<div class="treeview">
+* {{nbt|compound}} 根元素
+** {{nbt|list|removed}}：将排除的键。
+*** {{nbt|string}}：该键的名称。
+** {{nbt|compound|renamed}}：将替换的键。
+*** {{nbt|string|<旧键名>}}：将替换到的新键名。
+</div>
+
+加载各语言的语言文件时，游戏会先将{{nbt|list|removed}}中的键全部排除，然后依次替换{{nbt|compound|renamed}}中的各项键名。替换过程中，如旧键不存在，即便新键已存在，游戏也不会应用新键。
+
+=== 文本 ===
+{{see also|胜利屏幕#技术性细节}}
+在{{filepath|assets/minecraft/texts}}内有4个文件，分别为3个文本文件和1个JSON文件。游戏会从上到下扫描资源包，找到第一次出现的对应文件进行加载，而下层资源包的文件会被忽略。
+
+{{filename|splashes.txt}}控制了游戏的[[标题屏幕]]内的[[闪烁标语]]，内部的每句闪烁标语都以行分隔符分隔开。闪烁标语在解析时会自动去除两端的空白字符，并且可以使用[[格式化代码]]为文本添加格式。如果一行闪烁标语的[https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html#hashCode() 哈希码]为125780783，那么这一句闪烁标语将永远无法显示。
+
+{{filename|end.txt}}包含[[终末之诗]]，即玩家第一次从末地进入末地传送门返回主世界时显示的文本。{{filename|postcredits.txt}}包含[[鸣谢名单]]显示完毕后出现的引言。这两个文件具有同样的格式：文本内的所有<code>PLAYERNAME</code>都会被替换为当前玩家的名称，且可以使用格式化代码为文本添加格式。如果一行内的显示宽度超出了256，则游戏在解析时自动换行以保证不会超出屏幕渲染。
+
+{{filename|credits.json}}包含了Minecraft的[[制作人员名单]]，并且有以下的格式：
+
+<div class="treeview">
+* {{nbt|list}} JSON文件根数组
+** {{nbt|compound}}：制作人员名单中的一个部分。
+*** {{nbt|string|section|required=1}}：此部分的标题。
+*** {{nbt|list|disciplines|required=1}}：各个部门。
+**** {{nbt|compound}}：一个部门的信息。
+***** {{nbt|string|discipline|required=1}}：部门名称。
+***** {{nbt|list|titles|required=1}}：职位列表。
+****** {{nbt|compound}}：职位列表中的一个职位。
+******* {{nbt|string|title|required=1}}：此职位的名称。
+******* {{nbt|list|names|required=1}}：职员列表。
+******** {{nbt|string}}：一位职员的姓名。
+</div>
+
+=== GPU警告列表 ===
+[[File:Fabulous setting warning for OpenGL 2.1 on macOS.png|thumb|原版游戏极佳画质的警告]]
+游戏可以检查当前使用的渲染器情况，并根据{{filepath|assets/minecraft/gpu_warnlist.json}}判断是否警告玩家当前游戏使用的渲染环境可能不能支持或不完全支持Minecraft的渲染。这个文件拥有下列文件格式：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根元素
+** {{nbt|list|renderer|required=1}}：当渲染器名称匹配内部任何一个[[wzh:正则表达式|正则表达式]]时，游戏将给出渲染器警告。
+*** {{nbt|string}}：一条正则表达式。
+** {{nbt|list|version|required=1}}：当渲染器版本匹配内部任何一个正则表达式时，游戏将给出渲染器版本警告。
+*** {{nbt|string}}：一条正则表达式。
+** {{nbt|list|vendor|required=1}}：当渲染器厂商名称匹配内部任何一个正则表达式时，游戏将给出渲染器厂商警告。
+*** {{nbt|string}}：一条正则表达式。
+</div>
+
+=== 地区合规性警告 ===
+{{filepath|assets/minecraft/regional_compliancies.json}}文件可以根据游戏运行时间定时弹出[[弹窗]]。这个文件具有下面的结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根元素
+** {{nbt|list|<''[[wzh:ISO 3166-1三位字母代码|ISO 3166-1三位字母地区代-{}-码]]''>}}：对于指定的系统地区，设置对应的定时弹窗。
+*** {{nbt|compound}}：一项弹窗设置。
+**** {{nbt|long|delay}}：（默认为0）第一次弹出弹窗的游戏运行时间，以分钟为单位。
+**** {{nbt|long|period|required=1}}：弹出弹窗的周期，以分钟为单位。
+**** {{nbt|string|title|required=1}}：弹窗标题的本地化键名。
+**** {{nbt|string|message|required=1}}：弹窗信息的本地化键名。
+</div>
+
+=== 路径点样式 ===
+{{main|路径点样式}}
+资源包可以修改和定义路径点样式，生物拥有这些路径点样式时会在[[定位栏]]上显示不同的指示器图标。路径点样式文件位于{{filepath|assets/<''命名空间''>/waypoint_style}}。
+
+== 历史 ==
+{{for|资源包版本历史|资源包/版本}}
+
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w24a|加入了资源包，以取代纹理包的功能。Mojang提供了[http://s3.amazonaws.com/Minecraft.Download/utilities/TextureEnder.jar Minecraft Texture Ender]，用于把可编译的1.5纹理包转换为资源包。}}
+|{{HistoryLine||1.7.2|dev=13w36a|现在可以同时使用多个资源包。}}
+|{{HistoryLine|||dev=13w42a|将{{filepath|assets/minecraft/music}}移至{{filepath|assets/minecraft/sounds/music}}，{{filepath|assets/minecraft/sound}}里的文件也移动到{{filepath|assets/minecraft/sounds}}。}}
+|{{HistoryLine||1.8|dev=14w07a|现在世界可以指定对应的资源包。}}
+|{{HistoryLine||1.8.8|dev=pre|现在可以识别资源包版本并显示错误。此时，资源包需要的版本号是<code>1</code>。}}
+|{{HistoryLine||1.9|dev=15w31a|因模型系统更改（如加入[[物品标签谓词]]、加入Multipart、更改显示标签），资源包版本号更改为<code>2</code>。}}
+|{{HistoryLine|||dev=15w43a|加入了150多个声音事件，原有的声音事件也被重命名。}}
+|{{HistoryLine||1.11|dev=16w32a|资源包版本号更改为<code>3</code>，要求资源包内所有文件名使用小写字母。}}
+|{{HistoryLine||1.13|dev=17w43a|默认资源包现在可以像其他资源包一样上下移动位置了。}}
+|{{HistoryLine|||dev=17w48a|由于[[扁平化]]，资源包版本号更改为<code>4</code>。}}
+|{{HistoryLine|||dev=pre3|资源包文件夹<code>textures/blocks</code>重命名为<code>textures/block</code>。
+|资源包文件夹<code>textures/items</code>重命名为<code>textures/item</code>。}}
+|{{HistoryLine||1.14|dev=18w45a|加入了“Programmer Art”内置资源包，可供切换回[[纹理更新]]前的旧纹理。}}
+|{{HistoryLine|||dev=19w06a|明显提升了资源包加载的速度。<ref>{{tweet|Dinnerbone|1093575528794214400|It should have already affected resource pack loading! It's all the same thing internally.|February 7th, 2019}}</ref>}}
+|{{HistoryLine|||dev=19w09a|现在粒子使用的纹理可由资源包修改。}}
+|{{HistoryLine||1.15|dev=pre1|由于之前快照中[[旗帜图案]]、[[盾牌]]、[[附魔]]光效与[[箱子]]等贴图机制的改动，资源包版本更改为<code>5</code>。}}
+|{{HistoryLine||1.16|dev=pre5|加入了{{filepath|assets/minecraft/gpu_warnlist.json}}，用于记录GPU警告列表。}}
+|{{HistoryLine||1.16.2|dev=rc1|为解决{{bug|MC-197275}}，资源包版本号更改为<code>6</code>。}}
+|{{HistoryLine||1.17|dev=20w45a|由于部分纹理文件名称的更改，资源包版本号更改为<code>7</code>。}}
+|{{HistoryLine|||dev=pre1|{{filepath|assets/minecraft/texts}}中的{{filename|credits.txt}}被更改为{{filename|credits.json}}，格式同时从纯文本变为有结构的JSON格式。}}
+|{{HistoryLine||1.18|dev=21w39a|资源包版本号更改为<code>8</code>，因为{{filename|inventory.png}}现在包含一个额外的图示，用于物品栏中状态效果列表的精简版。}}
+|{{HistoryLine||1.18.2|dev=22w06a|加入了{{filepath|assets/minecraft/regional_compliancies.json}}，用于控制游玩计时器和提示文本，以遵守韩国法律要求（默认仅适用于韩国）。}}
+|{{HistoryLine||1.19|dev=22w11a|在{{filename|pack.mcmeta}}中加入了{{cd|filter}}字段，用于按命名空间和正则表达式忽略低优先级数据包中的匹配内容。
+|资源包版本号更改为<code>9</code>。}}
+|{{HistoryLine||1.19.3|dev=22w42a|资源包版本号更改为<code>11</code>。
+|移除了适用于版本号为<code>3</code>和<code>4</code>（即扁平化前的版本）的资源包的自动升级功能，即游戏不再会尝试将这些版本的资源包调整为当前版本。}}
+|{{HistoryLine||1.19.4|dev=pre1|加入了“高对比度”内置资源包，用于提高UI控件的对比度。}}
+|{{HistoryLine||1.20|dev=23w17a|修改了{{filename|credits.json}}的格式。}}
+|{{HistoryLine||1.20.2|dev=23w31a|现在资源包可以与多个游戏版本兼容。
+|加入了对叠加目录的支持，允许同一资源包在不同的游戏版本中加载不同的资源，并需要{{filename|pack.mcmeta}}中的<code>overlays</code>部分来定义。}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了{{filepath|assets/minecraft/lang/deprecated.json}}用以标记此版本被弃用和修改的翻译键名。}}
+|{{HistoryLine||1.21.6|dev=25w15a|将部分生物的声音资源文件由{{cd|entity}}移至{{cd|mob}}文件夹下。}}
+|{{HistoryLine|||dev=25w17a|加入了{{filepath|waypoint_style}}文件夹。}}
+|{{HistoryLine||1.21.9|dev=25w31a|为资源包版本号引入了次要版本的概念，一并修改了{{filepath|pack.mcmeta}}的格式。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将世界指定资源包由{{filepath|<''存档根目录''>/resources.zip}}移动到{{filepath|<''存档根目录''>/resourcepacks/resources.zip}}。}}
+}}
+
+== 你知道吗 ==
+[[File:Alpha v1.2.2 pack.png|thumb|{{filename|pack.png}}截图所在的世界，加载于Alpha v1.2.2]]
+
+* 旧版默认资源包的{{filename|pack.png}}取自[[Java版Alpha v1.2.2]]，种子{{cd|3257840388504953787}}。<ref>{{ytl|ea6py9q46QU|Pack.PNG has been FOUND! - Here's how they did it.|SalC1|September 7, 2020}}</ref>
+** 截图在坐标约X=49、Z=0，面向RX=-119.23、RY=-8.297处拍摄。
+** 如何生成完全相同的世界并制作完全相同的截图：[https://pastebin.com/CmsEKDev]。<ref>https://www.reddit.com/r/MinecraftAtHome/comments/iocx6f/packpng_seed_was_found_explanation_tutorial_and</ref>
+** 它在2020年9月5日 4:04（UTC）<ref>https://discord.com/channels/720723932738486323/734822247235059793/752017401587040277<br>Tomlacko.dat 2020年9月6日4:08（UTC）<br>Fun fact, the seed was found at 4:04 UTC<br>404 seed <del>not</del> found :kekw~1:</ref>被“Minecraft@Home”社区的玩家发现。此时，距离它的发布已经过去了近10年的时间。<ref>{{ytl|wZGPg6Ckp3Q}}</ref>
+* 未知资源包的纹理使用了[[18w43a]]更新后，至[[18w50a]]更新前的圆石纹理。
+{{-}}
+
+== 画廊 ==
+<gallery>
+Pack.png|旧版{{filename|pack.png}}文件
+Unknown server.png|当前仍被游戏使用的灰度变种。用于未知服务器或不存在{{filename|icon.png}}的存档的图标
+NotchTexturePacks.png|Notch在纹理包选择菜单中发布的第一张图像
+Default pack.png|默认资源包图标
+</gallery>
+
+== 参见 ==
+* [[Tutorial:制作资源包]]
+* [[辅助程序与编辑器/资源包制作器]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Java Edition}}
+
+[[Category:资源包|*]]
+[[Category:游戏文件]]
+
+[[cs:Balíček modifikací]]
+[[de:Ressourcenpaket]]
+[[en:Resource pack]]
+[[es:Paquete de recursos]]
+[[fr:Pack de ressources]]
+[[it:Pacchetto di risorse]]
+[[ja:リソースパック (Java Edition)]]
+[[ko:리소스 팩]]
+[[lzh:資囊]]
+[[nl:Bronpakket]]
+[[pl:Paczki zasobów]]
+[[pt:Pacote de recursos]]
+[[ru:Пакет ресурсов]]
+[[th:รีซอร์ซแพ็ก]]
+[[uk:Пакет ресурсів]]

@@ -1,0 +1,48 @@
+# 页面: 唱片机曲目定义格式
+# 来源: https://zh.minecraft.wiki/w/%E5%94%B1%E7%89%87%E6%9C%BA%E6%9B%B2%E7%9B%AE%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:24
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''唱片机曲目（Jukebox Song）'''决定了物品插入[[唱片机]]后播放[[音乐]]的行为。'''唱片机曲目定义文件'''是唱片机曲目在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+唱片机曲目在游戏内使用<code>JUKEBOX_SONG</code>[[注册表]]，数据包路径为{{filepath|jukebox_song}}，即所有唱片机曲目定义文件都需要在{{filepath|-{}-data/<''命名空间''>/jukebox_song}}目录内定义，唱片机曲目标签则需要在{{filepath|-{}-data/<''命名空间''>/tags/jukebox_song}}目录内定义。
+
+唱片机曲目定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|int|comparator_output|required=1}}: （{{interval|left=0|right=15}}）唱片机播放该曲目时，通过[[红石比较器]]输出的红石信号强度。
+** {{nbt|string}}{{nbt|compound}}{{nbt|list|description|required=1}}：（[[文本组件]]），用于在提示框中显示曲目名称。
+** {{nbt|float|length_in_seconds|required=1}}：（{{interval|left_open=0}}）歌曲的播放时长，以秒为单位。游戏实际使用时将此值按TPS为20转换为游戏刻，并额外增加20游戏刻作为最终时长。此值可以与声音事件内的声音长度不同，游戏只使用此值控制唱片机的停止时间。
+** {{nbt|string}}{{nbt|compound|sound_event|required=1}}：唱片机曲目播放的[[Java版声音事件|声音事件]]。此声音播放无视客户端传播距离。
+*** {{nbt inherit/sound event}}
+</div>
+
+== 定义行为 ==
+唱片机曲目定义数据仅在服务端启动时被加载一次，使用{{cmd|reload}}命令不可以使唱片机曲目定义被重新加载，而必须重启服务端。
+
+当[[唱片机]]内插入带有<code>jukebox_playable</code>[[物品堆叠组件]]的物品堆叠时，游戏会读取组件内的唱片机曲目信息，并进行播放。如果组件内的唱片机曲目不存在则什么也不会发生。
+
+唱片机播放的音乐归属<code>record</code>（{{tp|soundCategory.record}}）分类，声音实例音量为4，实例音高为1，立刻播放，音量线性衰减。玩家能听到唱片音乐的最远距离为声音事件引用{{nbt|string|sound_id}}定义的{{nbt|int|attenuation_distance}}值乘上音量4，即默认为64格；而声音事件内的{{nbt|float|range}}在此不参与声音计算，游戏以世界事件发送唱片机播放信息，因此无视声音事件传播距离。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21|dev=24w21a|向数据包中加入了唱片机曲目。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Plattenspielermusikdefinition]]
+[[en:Jukebox song definition]]
+[[fr:Définition de chanson de jukebox]]
+[[ko:주크박스 곡 정의]]
+[[pt:Definição de música do toca-discos]]
+[[uk:Визначення пісні програвача]]

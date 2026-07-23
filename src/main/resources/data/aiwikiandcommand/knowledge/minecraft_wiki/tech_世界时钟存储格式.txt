@@ -1,0 +1,45 @@
+# 页面: 世界时钟存储格式
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%96%E7%95%8C%E6%97%B6%E9%92%9F%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:19:45
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+'''世界时钟存储文件'''是游戏存储[[世界时钟]]实例数据所用的文件。
+
+== 存储格式 ==
+世界时钟存储文件位于{{filepath|-{}-<''存档根目录''>/data/minecraft/world_clocks.dat}}。
+
+世界时钟存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|compound|<''世界时钟命名空间ID''>}}：一项世界时钟。
+**** {{nbt|long|total_ticks|existonsave=1|required=1}}：此世界时钟的总时间，单位为刻。
+**** {{nbt|float|partial_tick}}：（默认为0）流逝速率不为整数时，单次滴答后多出的不足整数的小数时间。
+**** {{nbt|float|rate}}：（默认为0，{{interval|left_open=0}}）世界时钟流逝的速率。
+**** {{nbt|boolean|paused}}：（默认为<code>false</code>）此世界时钟是否正在暂停流逝。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此世界时钟存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+游戏会在服务端启动时读取此文件，并获取所有的世界时钟实例，以进行相关的[[世界时钟定义格式#定义行为|游戏行为计算]]。
+
+如果世界时钟存储文件不存在，则游戏默认所有世界时钟的时间为0。如果找到了不存在的世界时钟，则报错并立刻清除此数据。
+
+如果服务端存在[[数据包]]添加的自定义世界时钟，则游戏会从0开始计时，并在存档保存时一同保存到存储文件中。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||26.1|dev=snapshot-3|加入了世界时钟存储数据。
+|此时，世界时钟存储数据位于{{filename|[[level.dat]]}}的{{nbt|compound|world_clock}}标签中。}}
+|{{HistoryLine|||dev=snapshot-6|加入了单独的世界时钟存储文件，世界时钟数据不再存储于{{filename|level.dat}}中。}}
+|{{HistoryLine|||dev=pre-1|加入了{{nbt|float|partial_tick}}和{{nbt|float|rate}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

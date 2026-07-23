@@ -1,0 +1,2527 @@
+# 页面: 游戏事件
+# 来源: https://zh.minecraft.wiki/w/%E6%B8%B8%E6%88%8F%E4%BA%8B%E4%BB%B6
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 待更新条目, 游戏内容, 需要测试, 需要补充的条目
+# 抓取时间: 2026-07-14 17:30:54
+# 原始 Wikitext 内容:
+
+{{needs update|需要确认基岩版的上下文是否包括方块。}}
+'''游戏事件（Game Event）'''由世界的一系列行为活动产生，其产生的'''振动（Vibration）'''大多可由[[幽匿感测体]]检测。
+
+{{TOC|right}}
+
+== 游戏事件 ==
+当世界内发生某项活动时，就可能产生一个游戏事件。游戏事件会记录自身的产生坐标和参与此游戏事件的上下文实体（也可称为来源实体）及上下文方块（也可称为来源方块），其中上下文实体和上下文方块可能不存在，例如门被红石信号打开的事件就不存在上下文实体。
+
+游戏事件产生的同时也会创造一个振动。振动会记录产生此振动的游戏事件并使用游戏事件的产生坐标为振动源，同时会检查游戏事件的来源实体，若存在且为[[弹射物]]则会将发射此弹射物的实体作为振动的来源实体。
+
+每个游戏事件都定义了自己的'''振动频率（Vibration Frequency）'''，振动频率的值可体现在幽匿感测体与[[红石比较器]]互动时产生的红石信号强度。
+
+除紫水晶块的共振外，游戏事件与振动频率的大致关系如下：
+
+{| class="wikitable collapsible"
+! 振动频率 !! 振动种类
+|-
+| 0 || -
+|-
+| 1 || 实体在各种介质中运动
+|-
+| 2 || 实体入水、弹射物击中某物
+|-
+| 3 || 与物品互动
+|-
+| 4 || 鞘翅滑翔、实体的独有动作、卸下装备
+|-
+| 5 || 离开坐骑及装备物品
+|-
+| 6 || 骑上坐骑、实体互动
+|-
+| 7 || 实体受伤
+|-
+| 8 || 进食、饮用
+|-
+| 9 || 方块取消激活
+|-
+| 10 || 方块激活
+|-
+| 11 || 方块变化
+|-
+| 12 || 破坏方块
+|-
+| 13 || 放置方块
+|-
+| 14 || 放置实体、传送
+|-
+| 15 || 实体死亡、爆炸
+|}
+
+== 监测 ==
+游戏事件的检测方式可以分为振动系统和非振动系统两种。
+
+=== 非振动系统 ===
+非振动系统的检测数据不会保存到区块数据中，当区块被卸载时立刻丢失。
+
+[[幽匿催发体]]会检测自身半径{{only|short=1|je|for=8}}/{{only|short=1|be|for=10}}格内的<code>entity_die</code>游戏事件，用来计算蔓延幽匿类方块的经验。
+
+{{in|je}}悦灵会检测自身半径10格内的<code>jukebox_play</code>和<code>jukebox_stop_play</code>游戏事件，用来计算悦灵是否可以跳舞。
+
+=== 振动系统 ===
+振动系统的检测数据会被保存到区块数据中，并且视觉上会渲染振动粒子以“显示”振动的接收情况。当振动可以被接收时，振动接收者会在同一游戏刻内选择一个振动接收。优先选取距离最近的振动，若相同则选择振动频率最大的振动。
+
+振动系统由'''振动监听器（Vibration Listener）'''管理。每一个振动监听器都有自己的检测半径和“可监听的游戏事件”来限制可检测的振动，振动接收者也会添加一定的限制以限制可检测的振动。
+
+目前游戏内共有下列振动接收者：
+* [[幽匿感测体]]：检测半径8，可监听几乎所有游戏事件。额外条件如下：
+** 如果幽匿感测体被除监守者以外的实体踩踏，那么这个幽匿感测体会强制接收由此实体触发的{{only|short=1|je|for=<code>step</code>}}/{{only|short=1|be|for=<code>sculk_patch</code>}}游戏事件，无视常规规则。
+** 不会检测自身被放置或破坏时产生的<code>block_place</code>或<code>block_destroy</code>游戏事件。
+* [[校频幽匿感测体]]：与幽匿感测体相比，检测半径为16，且受到输入红石信号的限制。
+* [[幽匿尖啸体]]：检测半径8，可监听游戏事件<code>sculk_sensor_tendrils_clicking</code>。额外条件参见{{slink|幽匿尖啸体|用途}}。
+* [[悦灵]]：检测半径16，可监听游戏事件<code>note_block_play</code>。
+* [[监守者]]：检测半径16，可监听几乎所有游戏事件。
+
+能被振动监听器检测的振动需满足如下条件：
+* 振动源与此振动监听器的距离在此振动监听器的检测半径内。
+* 产生此振动的游戏事件属于此振动监听器可监听的游戏事件。
+* 若此振动存在来源实体：
+** 此实体不能是监守者。
+** 此实体不能是进入旁观模式的玩家。
+** 此实体潜行时，游戏事件类型不能是<code>hit_ground</code>、<code>projectile_shoot</code>、<code>step</code>、<code>swim</code>、<code>item_interact_start</code>或<code>item_interact_finish</code>。
+** 此实体为物品实体时，其包含的物品不能是羊毛或地毯。
+* 若此振动存在来源方块：
+** 此方块不能是羊毛或地毯。
+* 振动源与振动监听器的位置之间不能有羊毛阻挡。
+
+当有符合上述条件的振动发生时，振动监听器会记录此振动发生时的游戏时间，以及此振动的振动源、此振动与振动监听器的距离、产生此振动的游戏事件。若此游戏事件由实体产生，则还会记录来源实体。
+
+振动监听器一次只能接收一个振动，但同一刻内可能有多个振动满足检测条件。为了确定本次接收的振动，振动数据会暂时保存到'''振动选择器（Vibration Selector）'''内，待决定本次接收的振动后才会正式移出。游戏会优先选择同一刻内距离振动监听器最近的振动，若有多个距离相同的振动，则优先选择振动频率最大的振动。
+
+振动监听器决定本次接收的振动后，振动数据还需要一段延迟时间才能真正用于游戏计算后续行为。延迟时间的数值为振动到振动监听器的距离向下取整得到。同时游戏会渲染振动粒子，粒子的起始位置为振动源，目标位置为振动监听器的坐标，运动时间为延迟时间。由于延迟时间和粒子渲染时间相同，因此振动粒子到达振动监听器的时候振动监听器也正好接收到了振动。
+
+== 游戏事件列表 ==
+{{incomplete section|基岩版上下文}}
+{{in|je}}当振动源为方块时，其坐标为方块的中心坐标；振动源为实体时，其坐标通常为实体脚部的坐标。
+
+{{in|be}}振动源总是位于方块坐标的中心坐标。如果振动由实体引起，则选取此实体当前所在的方块坐标。例如玩家进食时，其振动源为玩家头部所在的方块坐标；而行走时则为玩家脚部所在的方块坐标。
+
+下文中，对于可能不存在的上下文，表格将以特殊样式标记。这些上下文不存在通常是因为被发射器或其他红石元件执行，或者风爆引起导致没有实体参与。
+
+对于共振事件{{anchor|resonate_1}}{{anchor|resonate_2}}{{anchor|resonate_3}}{{anchor|resonate_4}}{{anchor|resonate_5}}{{anchor|resonate_6}}{{anchor|resonate_7}}{{anchor|resonate_8}}{{anchor|resonate_9}}{{anchor|resonate_10}}{{anchor|resonate_11}}{{anchor|resonate_12}}{{anchor|resonate_13}}{{anchor|resonate_14}}{{anchor|resonate_15}}而言：
+{{Game event table|showentity=1|showblock=1
+|event=紫水晶块共振
+|pos=紫水晶块
+|entity=触发使其共振的幽匿感测体的实体
+|block=紫水晶块{{needs testing|基岩版}}
+|entitynullable=1
+|foot=1
+}}
+
+对于非共振事件而言：
+
+=== block_activate ===
+此事件由方块的激活行为产生，振动频率为10。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=拉杆开启
+|pos=拉杆
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=压力板激活
+|pos=压力板
+|entity=触发压力板的实体
+|block=-
+}}
+{{Game event table
+|event=按钮激活
+|pos=按钮
+|entity=触发按钮的实体
+|entitynullable=1
+|block=-
+}}
+{{Game event table
+|event=绊线钩激活
+|pos=绊线钩
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=发射器发射失败
+|pos=发射器
+|entity=-
+|block=发射器
+}}
+{{Game event table
+|event=活塞伸出
+|pos=活塞
+|entity=-
+|block=活塞
+}}
+{{Game event table
+|event=展示架激活
+|pos=展示架
+|entity=-
+|block=展示架
+}}
+{{Game event table
+|event=间歇泉喷发
+|pos=烈性硫黄
+|entity=-
+|block=烈性硫黄
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=拉杆开启
+|pos=拉杆
+}}
+{{Game event table
+|event=压力板激活
+|pos=压力板
+}}
+{{Game event table
+|event=按钮激活
+|pos=按钮
+}}
+{{Game event table
+|event=绊线钩激活
+|pos=绊线钩
+}}
+{{Game event table
+|event=展示架激活
+|pos=展示架
+|foot=1
+}}
+
+=== block_attach ===
+此事件由方块的连接行为产生，振动频率为10。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=绊线形成有效连接
+|pos=绊线钩
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=玩家把拴绳拴在方块上
+|pos=对应方块
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=玩家把拴绳从方块上取下
+|pos=对应方块
+|entity=玩家
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=绊线形成有效连接
+|pos=绊线钩
+}}
+{{Game event table
+|event=玩家把拴绳拴在方块上
+|pos=对应方块
+|foot=1
+}}
+
+=== block_change ===
+此事件由方块变化行为产生，振动频率为11。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=点燃营火、蜡烛、插上蜡烛的蛋糕
+|pos=对应方块
+|entity=玩家
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=使用喷溅型水瓶熄灭营火
+|pos=营火
+|entity=玩家
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=使用锹熄灭营火
+|pos=营火
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=向营火放置食物
+|pos=营火
+|entity=玩家
+|block=营火
+}}
+{{Game event table
+|event=营火弹出食物
+|pos=营火
+|entity=-
+|block=营火
+}}
+{{Game event table
+|event=将蜡烛插到蛋糕上
+|pos=蛋糕
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=蜡烛、插上蜡烛的蛋糕熄灭
+|pos=对应方块
+|entity=玩家
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=狐狸采摘甜浆果
+|pos=甜浆果丛
+|entity=狐狸
+|block=-
+}}
+{{Game event table
+|event=兔子摧毁胡萝卜
+|pos=胡萝卜
+|entity=兔子
+|block=-
+}}
+{{Game event table
+|event=使用斧转化方块<br>（去皮、除锈、脱蜡等）
+|pos=对应方块
+|entity=玩家
+|block=转化后的方块
+}}
+{{Game event table
+|event=使用锄转化方块
+|pos=对应方块
+|entity=玩家
+|block=转化前的方块
+}}
+{{Game event table
+|event=使用锹转化方块
+|pos=对应方块
+|entity=玩家
+|block=转化后的方块
+}}
+{{Game event table
+|event=使用蜜脾给铜质方块上蜡
+|pos=对应方块
+|entity=玩家
+|block=转化后的方块
+}}
+{{Game event table
+|event=修剪植物
+|pos=对应方块
+|entity=玩家
+|block=对应方块
+}}
+{{Game event table
+|event=使用刷怪蛋设置刷怪笼
+|pos=对应方块
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=钟敲响
+|pos=钟
+|entity=玩家
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=大型垂滴叶折下、升起
+|pos=大型垂滴叶
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=玩家采摘发光浆果
+|pos=对应方块
+|entity=玩家
+|block=洞穴藤蔓植株
+}}
+{{Game event table
+|event=狐狸采摘发光浆果
+|pos=对应方块
+|entity=狐狸
+|block=洞穴藤蔓植株
+}}
+{{Game event table
+|event=向雕纹书架取书、放书
+|pos=雕纹书架
+|entity=-
+|block=雕纹书架
+}}
+{{Game event table
+|event=向雕纹书架取书失败
+|pos=雕纹书架
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=堆肥桶增加等级、释放骨粉
+|pos=堆肥桶
+|entity=使用堆肥桶的实体
+|block=堆肥桶
+|entitynullable=1
+}}
+{{Game event table
+|event=阳光探测器切换检测状态
+|pos=阳光探测器
+|entity=玩家
+|block=阳光探测器
+}}
+{{Game event table
+|event=玩家与饰纹陶罐交互
+|pos=饰纹陶罐
+|entity=玩家
+|block=饰纹陶罐
+}}
+{{Game event table
+|event=眼眸花转化
+|pos=眼眸花转化
+|entity=-
+|block=转化前的方块
+}}
+{{Game event table
+|event=耕地退化
+|pos=耕地
+|entity=踩踏耕地的实体
+|block=泥土
+|entitynullable=1
+}}
+{{Game event table
+|event=向花盆放入、取出植物
+|pos=花盆、对应盆栽
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=向讲台取书、放书
+|pos=讲台
+|entity=玩家
+|block=讲台
+}}
+{{Game event table
+|event=泥巴转化为黏土
+|pos=黏土
+|entity=-
+|block=黏土
+}}
+{{Game event table
+|event=重生锚充能
+|pos=重生锚
+|entity=玩家
+|block=重生锚
+}}
+{{Game event table
+|event=向告示牌使用墨囊、染料等物品
+|pos=告示牌
+|entity=玩家
+|block=告示牌
+}}
+{{Game event table
+|event=甜浆果丛生长
+|pos=甜浆果丛
+|entity=-
+|block=甜浆果丛生长
+}}
+{{Game event table
+|event=玩家采摘甜浆果
+|pos=甜浆果丛
+|entity=狐玩家
+|block=甜浆果丛
+}}
+{{Game event table
+|event=蜜蜂进入、离开蜂巢或蜂箱
+|pos=蜂巢或蜂箱
+|entity=蜜蜂
+|block=蜂巢或蜂箱
+}}
+{{Game event table
+|event=唱片机插入音乐唱片
+|pos=唱片机
+|entity=玩家及不存在
+|block=唱片机
+}}
+{{Game event table
+|event=唱片机弹出音乐唱片
+|pos=唱片机
+|entity=-
+|block=唱片机
+}}
+{{Game event table
+|event=失水恶魂改变浸湿状态
+|pos=对应方块
+|entity=-
+|block=失水恶魂
+}}
+{{Game event table
+|event=铜傀儡像改变姿势
+|pos=铜傀儡像
+|entity=玩家
+|block=-
+|foot=1
+}}
+
+若对大型[[铜箱子]]涂蜡、脱蜡，此事件会在每半块铜箱子上产生一次。
+
+由于物品展示框不是方块，且炼药锅类方块的转化行为较复杂，因此单独列出：
+{{Game event table|showentity=1|showblock=1
+|event=破坏物品展示框
+|pos=物品展示框
+|entity=[[伤害来源|伤害源发实体]]
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=放置、旋转、移除物品展示框的内容物
+|pos=物品展示框
+|entity=玩家
+|block=-
+|foot=1
+}}
+{{Game event table|showentity=1|showblock=1
+|event=炼药锅因降水转化为装有水的炼药锅或装有细雪的炼药锅
+|pos=对应方块
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=炼药锅因滴水石锥转化为装有水的炼药锅或装有熔岩的炼药锅
+|pos=对应方块
+|entity=-
+|block=转化后的方块
+}}
+{{Game event table
+|event=装有水的炼药锅因洗去部分物品的颜色改变液体等级
+|pos=对应方块
+|entity=-
+|block=转化后的方块
+}}
+{{Game event table
+|event=装有细雪的炼药锅增加细雪等级
+|pos=对应方块
+|entity=-
+|block=转化后的方块
+}}
+{{Game event table
+|event=装有水的炼药锅或装有细雪的炼药锅因着火的实体而改变方块状态
+|pos=对应方块
+|entity=-
+|block=转化后的方块
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=点燃营火、蜡烛、插上蜡烛的蛋糕
+|pos=对应方块
+}}
+{{Game event table
+|event=使用喷溅型水瓶熄灭营火
+|pos=营火
+}}
+{{Game event table
+|event=使用锹熄灭营火
+|pos=营火
+}}
+{{Game event table
+|event=向营火放置食物
+|pos=营火
+}}
+{{Game event table
+|event=营火弹出食物
+|pos=营火
+}}
+{{Game event table
+|event=将蜡烛插到蛋糕上
+|pos=蛋糕
+}}
+{{Game event table
+|event=蜡烛、插上蜡烛的蛋糕熄灭
+|pos=对应方块
+}}
+{{Game event table
+|event=狐狸采摘甜浆果
+|pos=甜浆果丛
+}}
+{{Game event table
+|event=兔子摧毁胡萝卜
+|pos=胡萝卜
+}}
+{{Game event table
+|event=使用斧转化方块<br>（去皮、除锈、脱蜡等）
+|pos=对应方块
+}}
+{{Game event table
+|event=使用锄转化方块
+|pos=对应方块
+}}
+{{Game event table
+|event=使用锹转化方块
+|pos=对应方块
+}}
+{{Game event table
+|event=使用蜜脾给铜质方块上蜡
+|pos=对应方块
+}}
+{{Game event table
+|event=使用刷怪蛋设置刷怪笼
+|pos=对应方块
+}}
+{{Game event table
+|event=钟敲响
+|pos=钟
+}}
+{{Game event table
+|event=大型垂滴叶折下、升起
+|pos=大型垂滴叶
+}}
+{{Game event table
+|event=玩家采摘发光浆果
+|pos=对应方块
+}}
+{{Game event table
+|event=狐狸采摘发光浆果
+|pos=对应方块
+}}
+{{Game event table
+|event=向雕纹书架取书、放书
+|pos=雕纹书架
+}}
+{{Game event table
+|event=放置雕纹书架
+|pos=雕纹书架
+}}
+{{Game event table
+|event=放置台阶形成双台阶
+|pos=台阶
+}}
+{{Game event table
+|event=堆肥桶增加等级、释放骨粉
+|pos=堆肥桶
+}}
+{{Game event table
+|event=阳光探测器切换检测状态
+|pos=阳光探测器
+}}
+{{Game event table
+|event=玩家与饰纹陶罐交互
+|pos=饰纹陶罐
+}}
+{{Game event table
+|event=眼眸花转化
+|pos=眼眸花转化
+}}
+{{Game event table
+|event=耕地退化
+|pos=耕地
+}}
+{{Game event table
+|event=向花盆放入、取出植物
+|pos=花盆、对应盆栽
+}}
+{{Game event table
+|event=向讲台取书、放书
+|pos=讲台
+}}
+{{Game event table
+|event=泥巴转化为黏土
+|pos=黏土
+}}
+{{Game event table
+|event=重生锚充能
+|pos=重生锚
+}}
+{{Game event table
+|event=甜浆果丛生长
+|pos=甜浆果丛
+}}
+{{Game event table
+|event=玩家采摘甜浆果
+|pos=甜浆果丛
+}}
+{{Game event table
+|event=蜜蜂进入、离开蜂巢或蜂箱
+|pos=蜂巢或蜂箱
+}}
+{{Game event table
+|event=唱片机插入、弹出音乐唱片
+|pos=唱片机
+}}
+{{Game event table
+|event=蠹虫钻入方块形成虫蚀方块
+|pos=虫蚀方块
+}}
+{{Game event table
+|event=向炼药锅中的水染色
+|pos=炼药锅
+}}
+{{Game event table
+|event=向末地传送门框架插入末影之眼
+|pos=末地传送门框架
+}}
+{{Game event table
+|event=放置、旋转、移除物品展示框的内容物
+|pos=物品展示框
+}}
+{{Game event table
+|event=失水恶魂改变浸湿状态
+|pos=对应方块
+}}
+{{Game event table
+|event=铜傀儡像改变姿势
+|pos=铜傀儡像
+|foot=1
+}}
+
+=== block_close ===
+此事件由方块的关闭行为产生，振动频率为9。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=门关闭
+|pos=被操作的半侧门
+|entity=关门的实体
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=活板门关闭
+|pos=活板门
+|entity=关闭活板门的实体
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=栅栏门不因风爆关闭
+|pos=栅栏门
+|entity=关闭栅栏门的实体
+|entitynullable=1
+|block=-
+}}
+{{Game event table
+|event=栅栏门因风爆关闭
+|pos=栅栏门
+|entity=-
+|block=活板门
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=门关闭
+|pos=被操作的半侧门
+}}
+{{Game event table
+|event=活板门关闭
+|pos=活板门
+}}
+{{Game event table
+|event=栅栏门关闭
+|pos=栅栏门
+|foot=1
+}}
+
+=== block_deactivate ===
+此事件由方块的取消激活行为产生，振动频率为9。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=拉杆关闭
+|pos=拉杆
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=压力板取消激活
+|pos=压力板
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=按钮取消激活
+|pos=按钮
+|entity=触发按钮的实体
+|entitynullable=1
+|block=-
+}}
+{{Game event table
+|event=绊线钩取消激活
+|pos=绊线钩
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=活塞收回
+|pos=活塞
+|entity=-
+|block=移动的活塞
+}}
+{{Game event table
+|event=展示架取消激活
+|pos=展示架
+|entity=-
+|block=展示架
+}}
+{{Game event table
+|event=间歇泉停止喷发
+|pos=烈性硫黄
+|entity=-
+|block=烈性硫黄
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=拉杆关闭
+|pos=拉杆
+}}
+{{Game event table
+|event=压力板取消激活
+|pos=压力板
+}}
+{{Game event table
+|event=按钮取消激活
+|pos=按钮
+}}
+{{Game event table
+|event=绊线钩取消激活
+|pos=绊线钩
+}}
+{{Game event table
+|event=展示架取消激活
+|pos=展示架
+|foot=1
+}}
+
+=== block_destroy ===
+此事件由方块的破坏行为产生，振动频率为12。
+
+由水流冲毁的方块不会触发此事件。<ref>{{bug|MC-207410}}</ref>
+
+需要附着方块的方块，例如红石线、红石比较器和铁轨等，因附着方块不存在而被破坏不会触发此事件。<ref>{{bug|MC-207411}}</ref>
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=可疑的方块因落地破碎
+|pos=下落的方块
+|entity=下落的方块
+|block=-
+}}
+{{Game event table
+|event=蛋糕食用完毕
+|pos=蛋糕
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=海龟蛋数量减少、孵化完毕
+|pos=海龟蛋
+|entity=-
+|block=海龟蛋
+}}
+{{Game event table
+|event=末影人搬起方块
+|pos=被搬起的方块
+|entity=末影人
+|block=被搬起的方块
+}}
+{{Game event table
+|event=玩家破坏方块
+|pos=被破坏的方块
+|entity=玩家
+|block=被破坏的方块
+}}
+{{Game event table
+|event=活塞推动破坏方块
+|pos=被破坏的方块
+|entity=-
+|block=被破坏的方块
+}}
+{{Game event table
+|event=其他各种无实体参与的破坏方块行为
+|pos=被破坏的方块
+|entity=-
+|block=被破坏的方块
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=蛋糕食用完毕
+|pos=蛋糕
+}}
+{{Game event table
+|event=海龟蛋数量减少、孵化完毕
+|pos=海龟蛋
+}}
+{{Game event table
+|event=末影人搬起方块
+|pos=被搬起的方块
+}}
+{{Game event table
+|event=玩家破坏方块
+|pos=被破坏的方块
+}}
+{{Game event table
+|event=活塞推动破坏方块
+|pos=被破坏的方块
+}}
+{{Game event table
+|event=其他各种无实体参与的破坏方块行为
+|pos=被破坏的方块
+|foot=1
+}}
+
+=== block_detach ===
+此事件由方块的断开连接行为产生，振动频率为9。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=用剪刀切断有效绊线连接
+|pos=绊线钩
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=破坏有效绊线连接的绊线钩
+|pos=绊线钩
+|entity=-
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=用剪刀切断有效绊线连接
+|pos=绊线钩
+}}
+{{Game event table
+|event=将拴绳从方块上取下
+|pos=对应方块
+|foot=1
+}}
+
+=== block_open ===
+此事件由方块的打开行为产生，振动频率为10。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=门打开
+|pos=被操作的半侧门
+|entity=打开门的实体
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=活板门打开
+|pos=活板门
+|entity=打开活板门的实体
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=栅栏门不因风爆打开
+|pos=栅栏门
+|entity=打开栅栏门的实体
+|entitynullable=1
+|block=-
+}}
+{{Game event table
+|event=栅栏门因风爆打开
+|pos=栅栏门
+|entity=-
+|block=活板门
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=门打开
+|pos=被操作的半侧门
+}}
+{{Game event table
+|event=活板门打开
+|pos=活板门
+}}
+{{Game event table
+|event=栅栏门打开
+|pos=栅栏门
+|foot=1
+}}
+
+=== block_place ===
+此事件由方块的放置行为产生，振动频率为13。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体放置方块
+|pos=被放置的方块
+|entity=放置方块的实体
+|block=被放置的方块
+}}
+{{Game event table
+|event=种植作物
+|pos=被放置的方块
+|entity=种植作物的实体
+|block=被放置的方块
+}}
+{{Game event table
+|event=打火石、火焰弹点火
+|pos=被交互的方块
+|entity=玩家
+|entitynullable=1
+|block=-
+}}
+{{Game event table
+|event=冰霜行者魔咒冻结水为霜冰
+|pos=水
+|entity=使魔咒生效的实体
+|block=-
+}}
+{{Game event table
+|event=其他各种无实体参与的放置方块行为
+|pos=被放置的方块
+|entity=-
+|block=被放置的方块
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体放置方块
+|pos=被放置的方块
+}}
+{{Game event table
+|event=种植作物
+|pos=被放置的方块
+}}
+{{Game event table
+|event=打火石、火焰弹点火
+|pos=被交互的方块
+}}
+{{Game event table
+|event=其他各种无实体参与的放置方块行为
+|pos=被放置的方块
+|foot=1
+}}
+
+=== bounce ===
+此事件由实体和方块或可碰撞实体碰撞后未完全损失速度产生，振动频率为2。
+{{Game event table|showentity=1|showblock=1
+|event=实体和方块或可碰撞实体碰撞，且未完全损失速度
+|pos=运动的实体
+|entity=此实体
+|block=-
+|foot=1
+}}
+
+=== container_close ===
+此事件由容器的关闭行为产生，振动频率为9。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=潜影贝关闭外壳
+|pos=潜影贝
+|entity=潜影贝
+|block=-
+}}
+{{Game event table
+|event=关闭运输矿车、运输船等容器实体
+|pos=容器实体
+|entity=关闭容器的玩家
+|block=-
+}}
+{{Game event table
+|event=关闭箱子、木桶等容器方块
+|pos=容器方块
+|entity=关闭容器的实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=潜影贝关闭外壳
+|pos=潜影贝
+}}
+{{Game event table
+|event=关闭运输矿车、运输船等容器实体
+|pos=容器实体
+}}
+{{Game event table
+|event=关闭箱子、木桶等容器方块
+|pos=容器方块
+|foot=1
+}}
+
+=== container_open ===
+此事件由容器的打开行为产生，振动频率为10。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=潜影贝打开外壳
+|pos=潜影贝
+|entity=潜影贝
+|block=-
+}}
+{{Game event table
+|event=打开运输矿车、运输船等容器实体
+|pos=容器实体
+|entity=打开容器的玩家
+|block=-
+}}
+{{Game event table
+|event=打开箱子、木桶等容器方块
+|pos=容器方块
+|entity=打开容器的实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=潜影贝打开外壳
+|pos=潜影贝
+}}
+{{Game event table
+|event=打开运输矿车、运输船等容器实体
+|pos=容器实体
+}}
+{{Game event table
+|event=打开箱子、木桶等容器方块
+|pos=容器方块
+|foot=1
+}}
+
+=== dispense_fail ===
+{{exclusive|be|section=1}}
+此事件由发射器发射失败产生，振动频率为10。<ref name="bedrock_name">此名称来自Windows基岩版文件'''.rdata'''。</ref>
+{{Game event table
+|event=发射器发射失败
+|pos=发射器
+|foot=1
+}}
+
+=== drink ===
+此事件由实体的饮用动作产生，振动频率为8。
+
+{{in|je}}使用任何<code>consumable</code>组件指定物品使用动画为<code>drink</code>的物品都可以触发此事件。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=女巫饮用药水
+|pos=女巫
+|entity=女巫
+|block=-
+}}
+{{Game event table
+|event=饮用物品
+|pos=饮用物品的实体
+|entity=饮用物品的实体
+|block=-
+}}
+{{Game event table
+|event=使用不祥之瓶
+|pos=玩家
+|entity=玩家
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=饮用物品
+|pos=饮用物品的实体
+}}
+{{Game event table
+|event=使用不祥之瓶
+|pos=玩家
+|foot=1
+}}
+
+=== eat ===
+此事件由实体的食用动作产生，振动频率为8。
+
+{{in|je}}使用任何<code>consumable</code>组件指定使用动画不为<code>drink</code>的物品都可以触发此事件。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=食用物品
+|pos=食用物品的实体
+|entity=食用物品的实体
+|block=-
+}}
+{{Game event table
+|event=熊猫进食完毕
+|pos=熊猫
+|entity=熊猫
+|block=-
+}}
+{{Game event table
+|event=喂食马、骆驼等
+|pos=马、骆驼
+|entity=马、骆驼
+|block=-
+}}
+{{Game event table
+|event=绵羊吃草
+|pos=绵羊
+|entity=绵羊
+|block=-
+}}
+{{Game event table
+|event=食用蛋糕
+|pos=蛋糕
+|entity=玩家
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=食用物品
+|pos=食用物品的实体
+}}
+{{Game event table
+|event=熊猫进食
+|pos=熊猫
+}}
+{{Game event table
+|event=喂食动物
+|pos=动物
+}}
+{{Game event table
+|event=绵羊吃草
+|pos=绵羊
+}}
+{{Game event table
+|event=食用蛋糕
+|pos=蛋糕
+|foot=1
+}}
+
+=== elytra_glide ===
+此事件由实体的滑翔动作产生，振动频率为4。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体滑翔
+|pos=滑翔的实体
+|entity=滑翔的实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体滑翔
+|pos=滑翔的实体
+|foot=1
+}}
+
+=== entity_act ===
+{{exclusive|be|section=1}}
+此事件由生物的各种动作产生，振动频率为6。
+{{Game event table
+|event=海龟挖沙子
+|pos=海龟
+}}
+{{Game event table
+|event=犰狳蜷缩、起身
+|pos=犰狳
+}}
+{{Game event table
+|event=骆驼冲刺、坐下、起身
+|pos=骆驼
+}}
+{{Game event table
+|event=嗅探兽抛挖
+|pos=嗅探兽
+}}
+{{Game event table
+|event=狼甩动身体抖水
+|pos=狼
+}}
+{{Game event table
+|event=嘎枝因是否被玩家观察切换驻足和行动状态
+|pos=嘎枝
+}}
+{{Game event table
+|event=嘎枝因周围是否有玩家切换激活与失活状态
+|pos=嘎枝
+}}
+{{Game event table
+|event=玩家攻击与嘎枝之心绑定的嘎枝
+|pos=嘎枝
+|foot=1
+}}
+
+=== entity_action ===
+{{exclusive|je|section=1}}
+此事件由生物的各种动作产生，振动频率为6。
+{{Game event table|showentity=1|showblock=1
+|event=海龟挖沙子
+|pos=海龟
+|entity=海龟
+|block=-
+}}
+{{Game event table
+|event=犰狳蜷缩、起身
+|pos=犰狳
+|entity=犰狳
+|block=-
+}}
+{{Game event table
+|event=骆驼冲刺、坐下、起身
+|pos=骆驼
+|entity=骆驼
+|block=-
+}}
+{{Game event table
+|event=嗅探兽抛挖
+|pos=嗅探兽
+|entity=嗅探兽
+|block=-
+}}
+{{Game event table
+|event=狼甩动身体抖水
+|pos=狼
+|entity=狼
+|block=-
+}}
+{{Game event table
+|event=嘎枝因是否被玩家观察切换驻足和行动状态
+|pos=嘎枝
+|entity=嘎枝
+|block=-
+}}
+{{Game event table
+|event=嘎枝因周围是否有玩家切换激活与失活状态
+|pos=嘎枝
+|entity=嘎枝
+|block=-
+}}
+{{Game event table
+|event=玩家攻击与嘎枝之心绑定的嘎枝
+|pos=嘎枝
+|entity=嘎枝
+|block=-
+}}
+{{Game event table
+|event=玩家将两个实体拴住
+|pos=第二个被拴住的实体所在的方块坐标
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=鹦鹉螺（包括僵尸鹦鹉螺）冲刺
+|pos=鹦鹉螺冲刺前的位置
+|entity=鹦鹉螺
+|block=-
+|foot=1
+}}
+
+=== entity_damage ===
+此事件由实体受到伤害产生，振动频率为7。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=生物受伤
+|pos=受伤的生物
+|entity=受伤的生物
+|block=-
+}}
+{{Game event table
+|event=矿车、船、运输船受伤
+|pos=受伤的实体
+|entity=受伤的实体
+|block=-
+}}
+{{Game event table
+|event=潜影弹摧毁
+|pos=潜影弹
+|entity=潜影弹
+|block=-
+}}
+{{Game event table
+|event=物品实体受到伤害
+|pos=物品实体
+|entity=物品实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=生物受伤
+|pos=受伤的生物
+}}
+{{Game event table
+|event=矿车、船、运输船受伤
+|pos=受伤的实体
+}}
+{{Game event table
+|event=物品实体受到伤害
+|pos=物品实体
+|foot=1
+}}
+
+=== entity_die ===
+此事件由实体死亡产生，振动频率为15。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体死亡
+|pos=死亡的实体
+|entity=死亡的实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体死亡
+|pos=死亡的实体
+|foot=1
+}}
+
+=== entity_dismount ===
+此事件由实体离开坐骑产生，振动频率为5。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体离开坐骑
+|pos=坐骑实体
+|entity=坐骑实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体离开坐骑
+|pos=坐骑实体
+|foot=1
+}}
+
+=== entity_interact ===
+此事件由玩家与实体之间的交互动作产生，振动频率为6。
+
+交互动作包括：给予或收回悦灵手中的物品；喂食动物；使用水桶收集鱼类等获得生物桶；使用铁锭修复铁傀儡；对虚弱的僵尸村民使用金苹果；尝试与村民或流浪商人交易；修剪生物；通过交互给生物装上装备；玩家乘上马等坐骑；命令狼或猫坐下或起身；使用命名牌命名生物等。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=扫刷犰狳
+|pos=犰狳
+|entity=犰狳
+|block=-
+}}
+{{Game event table
+|event=玩家解开实体上的拴绳连接
+|pos=被交互的实体
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=玩家与展示架交换物品栏
+|pos=展示架
+|entity=-
+|block=展示架
+}}
+{{Game event table
+|event=其他大多数玩家对实体{{ctrl|交互}}的操作
+|pos=被交互的实体
+|entity=玩家
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=扫刷犰狳
+|pos=犰狳
+}}
+{{Game event table
+|event=玩家解开实体上的拴绳连接
+|pos=被交互的实体
+}}
+{{Game event table
+|event=其他大多数玩家对实体{{ctrl|交互}}的操作
+|pos=被交互的实体
+|foot=1
+}}
+
+=== entity_mount ===
+此事件由实体乘上坐骑产生，振动频率为6。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体乘上坐骑
+|pos=坐骑实体
+|entity=坐骑实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体乘上坐骑
+|pos=坐骑实体
+|foot=1
+}}
+
+=== entity_move ===
+{{exclusive|be|section=1}}
+此事件由实体在某个平面上移动产生，振动频率为1。<ref name="bedrock_name"/>
+{{Game event table
+|event=实体行走
+|pos=行走的实体
+|foot=1
+}}
+
+=== entity_place ===
+此事件由实体的放置行为产生，振动频率为14。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=发射器发射刷怪蛋
+|pos=发射器
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=发射器发射TNT
+|pos=发射器前方一格
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=不祥之物生成器生成物品
+|pos=物品实体
+|entity=物品实体
+|block=-
+}}
+{{Game event table
+|event=鸡下蛋
+|pos=鸡
+|entity=鸡
+|block=-
+}}
+{{Game event table
+|event=犰狳随机掉落犰狳鳞甲
+|pos=犰狳
+|entity=犰狳
+|block=-
+}}
+{{Game event table
+|event=唤魔者召唤尖牙、恼鬼
+|pos=尖牙、恼鬼
+|entity=唤魔者
+|block=-
+}}
+{{Game event table
+|event=使用刷怪蛋放置实体
+|pos=放置刷怪蛋的方块
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=使用除刷怪蛋和矿车以外的物品放置实体
+|pos=放出的实体
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=放置矿车
+|pos=矿车所在的方块坐标
+|entity=玩家
+|block=铁轨下方的方块
+}}
+{{Game event table
+|event=生物桶放出生物
+|pos=放出的生物
+|entity=玩家
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=刷怪笼生成实体
+|pos=生成的实体
+|entity=生成的实体
+|block=-
+}}
+{{Game event table
+|event=嘎枝之心生成嘎枝
+|pos=嘎枝
+|entity=嘎枝
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=发射器发射刷怪蛋
+|pos=发射器
+}}
+{{Game event table
+|event=发射器发射TNT
+|pos=发射器前方一格
+}}
+{{Game event table
+|event=不祥之物生成器生成物品
+|pos=物品实体
+}}
+{{Game event table
+|event=鸡下蛋
+|pos=鸡
+}}
+{{Game event table
+|event=犰狳随机掉落犰狳鳞甲
+|pos=犰狳
+}}
+{{Game event table
+|event=唤魔者召唤尖牙、恼鬼
+|pos=尖牙、恼鬼
+}}
+{{Game event table
+|event=使用可放置实体的物品放置实体
+|pos=放出的实体
+}}
+{{Game event table
+|event=刷怪笼生成实体
+|pos=生成的实体
+}}
+{{Game event table
+|event=嘎枝之心生成嘎枝
+|pos=嘎枝
+|foot=1
+}}
+
+=== entity_roar ===
+{{exclusive|be|section=1}}
+此事件由劫掠兽咆哮产生，振动频率为6。<ref name="bedrock_name"/>
+{{Game event table
+|event=劫掠兽咆哮
+|pos=劫掠兽
+|foot=1
+}}
+
+=== equip ===
+此事件由实体装备物品产生，振动频率为5。
+
+游戏不会检测玩家的主手副手的物品变化。除装备盔甲可触发外，还包括：
+* 村民交易展示、替换、收回物品
+* 女巫拿出的药水
+* 流浪商人拿出的药水、奶桶
+* 悦灵手持的物品
+* 熊猫捡起的竹子和蛋糕
+* 狐狸叼起的物品
+* 猪灵端详的物品
+* 海豚在水中撞开物品
+{{in|je}} “穿上装备”检查的是装备槽位是否被替换为具有<code>equippable</code>组件的物品。即使生物装备了没有<code>equippable</code>组件的物品从动作上属于穿上装备，游戏也只触发卸下装备（[[#unequip|unequip]]）事件。
+
+{{in|be}}即使生物收回物品也会触发此事件。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体穿上装备
+|pos=穿上装备的实体
+|entity=穿上装备的实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体穿上装备，拿出、收回物品
+|pos=此实体
+|foot=1
+}}
+
+=== explode ===
+此事件由爆炸产生，振动频率为15。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=爆炸
+|pos=爆炸中心
+|entity=造成爆炸的实体
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=烟花火箭爆炸
+|pos=爆炸中心
+|entity=发射烟花火箭的实体
+|block=-
+|entitynullable=1
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=爆炸
+|pos=爆炸中心
+}}
+{{Game event table
+|event=烟花火箭爆炸
+|pos=爆炸中心
+|foot=1
+}}
+
+=== flap ===
+此事件由实体在空气中移动产生，振动频率为1。
+
+可触发此事件的实体包括鸡、悦灵、鹦鹉、幻翼、末影龙、蜜蜂、蝙蝠{{only|je|for=和恼鬼}}。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体拍打翅膀
+|pos=此实体
+|entity=此实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体拍打翅膀
+|pos=此实体
+|foot=1
+}}
+
+=== fluid_pickup ===
+此事件由流体的收集行为产生，振动频率为12。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=玻璃瓶收集龙息
+|pos=区域效果云
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=玻璃瓶收集水、蜂蜜
+|pos=被操作的方块
+|entity=玩家
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=使用铁桶收集水（不包括收集生物）、熔岩、细雪
+|pos=被操作的方块
+|entity=玩家
+|block=-
+|entitynullable=1
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=玻璃瓶收集龙息
+|pos=区域效果云
+}}
+{{Game event table
+|event=玻璃瓶收集水、蜂蜜
+|pos=被操作的方块
+}}
+{{Game event table
+|event=使用铁桶收集水（不包括收集生物）、熔岩、细雪
+|pos=被操作的方块
+}}
+{{Game event table
+|event=使用装有染色水的炼药锅给物品染色
+|pos=炼药锅
+}}
+{{Game event table
+|event=使用装有药水的炼药锅制作药箭、收集药水
+|pos=炼药锅
+|foot=1
+}}
+
+=== fluid_place ===
+此事件由流体的放置行为产生，振动频率为13。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=使用各种桶放置液体（不包括放出生物）
+|pos=被操作的方块
+|entity=玩家
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=使用水瓶使炼药锅增加液体等级、转化泥巴
+|pos=被操作的方块
+|entity=玩家
+|block=-
+|entitynullable=1
+}}
+{{Game event table
+|event=发射器放置细雪
+|pos=发射器
+|entity=-
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=使用各种桶放置液体（不包括放出生物）
+|pos=被操作的方块
+}}
+{{Game event table
+|event=使用水瓶使炼药锅增加液体等级、转化泥巴
+|pos=被操作的方块
+}}
+{{Game event table
+|event=发射器放置细雪
+|pos=发射器
+}}
+{{Game event table
+|event=炼药锅因降水转化为装有水的炼药锅或装有细雪的炼药锅
+|pos=炼药锅
+|foot=1
+}}
+
+=== hit_ground ===
+此事件由实体落到某个平面上时产生，振动频率为2。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体落到方块上
+|pos=落地的实体
+|entity=落地的实体
+|block=实体落地时的支撑方块
+|entitynullable=1
+}}
+{{Game event table
+|event=实体落到实体上
+|pos=落地的实体
+|entity=落地的实体
+|block=实体落地时所在的方块{{note|name=entity_block|例如，若船的上表面在空气中，则落到船上时则视为空气}}
+|entitynullable=1
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体落到方块上
+|pos=落地的实体
+}}
+{{Game event table
+|event=实体落到实体上
+|pos=落地的实体
+|foot=1
+}}
+
+=== instrument_play ===
+{{exclusive|je|section=1}}
+此事件由玩家吹奏山羊角产生，振动频率为3。
+{{Game event table|showentity=1|showblock=1
+|event=吹奏山羊角
+|pos=玩家
+|entity=玩家
+|block=-
+|foot=1
+}}
+
+=== item_interact_finish ===
+此事件由实体结束使用物品的动作产生，振动频率为3。
+
+{{in|je}}物品是否能产生此事件取决于<code>use_effects</code>组件，在原版定义下[[矛]]不会产生此事件。
+
+{{in|je}}任何玩家持有的具有<code>death_protection</code>组件的物品生效都可以触发此事件。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=生物停止使用物品
+|pos=使用物品的实体
+|entity=使用物品的实体
+|block=-
+}}
+{{Game event table
+|event=玩家使用骨粉成功
+|pos=玩家
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=玩家的不死图腾生效
+|pos=玩家
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=玩家向展示架放置、收回物品
+|pos=展示架
+|entity=-
+|block=展示架
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=玩家停止使用物品
+|pos=玩家
+}}
+{{Game event table
+|event=玩家使用骨粉成功
+|pos=玩家
+|foot=1
+}}
+
+=== item_interact_start ===
+此事件由实体开始使用物品的动作产生。
+
+{{in|je}}物品是否能产生此事件取决于<code>use_effects</code>组件，在原版定义下矛不会产生此事件。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=生物开始使用物品
+|pos=使用物品的实体
+|entity=使用物品的实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=玩家开始使用物品
+|pos=玩家
+|foot=1
+}}
+
+=== jukebox_play ===
+{{exclusive|je|section=1}}
+此事件由唱片机播放音乐唱片产生。唱片机播放时，每游戏刻发出一次此事件。
+{{Game event table|showentity=1|showblock=1
+|event=唱片机播放音乐唱片
+|pos=唱片机
+|entity=-
+|block=唱片机
+|foot=1
+}}
+
+=== jukebox_stop_play ===
+{{exclusive|je|section=1}}
+此事件由唱片机停止播放音乐唱片产生。
+{{Game event table|showentity=1|showblock=1
+|event=唱片机停止播放音乐唱片
+|pos=唱片机
+|entity=-
+|block=唱片机
+}}
+{{Game event table|showentity=1|showblock=1
+|event=唱片机的内容物被移出
+|pos=唱片机
+|entity=-
+|block=唱片机
+|foot=1
+}}
+
+=== lightning_strike ===
+此事件由雷击产生，振动频率为14。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=闪电生成
+|pos=闪电束
+|entity=闪电束
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=闪电生成
+|pos=闪电束
+|foot=1
+}}
+
+=== multi_item_swap ===
+{{exclusive|bedrock|section=1}}
+此事件由玩家将物品栏中物品与展示架的物品交换时产生，振动频率为6。<ref name="bedrock_name"/>
+{{Game event table
+|event=玩家与展示架交换多个物品
+|pos=展示架
+|foot=1
+}}
+
+=== note_block_play ===
+此事件由音符盒奏响产生，振动频率为10。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=奏响音符盒
+|pos=音符盒
+|entity=玩家
+|block=-
+|entitynullable=1
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=奏响音符盒
+|pos=音符盒
+|foot=1
+}}
+
+=== piston_contract ===
+{{exclusive|be|section=1}}
+此事件由活塞收回产生，振动频率为9。<ref name="bedrock_name"/>
+{{Game event table
+|event=活塞收回
+|pos=活塞
+|foot=1
+}}
+
+=== piston_extend ===
+{{exclusive|be|section=1}}
+此事件由活塞伸出产生，振动频率为10。<ref name="bedrock_name"/>
+{{Game event table
+|event=活塞伸出
+|pos=活塞
+|foot=1
+}}
+
+=== prime_fuse ===
+此事件由引爆动作产生，振动频率为10。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=引爆苦力怕
+|pos=苦力怕
+|entity=苦力怕
+|block=-
+}}
+{{Game event table
+|event=引爆TNT
+|pos=TNT
+|entity=玩家
+|block=-
+|entitynullable=1
+|foot=1
+}}
+{{Game event table
+|event=引爆硫方怪
+|pos=硫方怪
+|entity=硫方怪
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=引爆苦力怕
+|pos=苦力怕
+}}
+{{Game event table
+|event=引爆TNT
+|pos=TNT
+}}
+{{Game event table
+|event=引爆TNT矿车
+|pos=TNT矿车
+}}
+{{Game event table
+|event=发射风弹
+|pos=发射的位置
+|foot=1
+}}
+
+=== projectile_land ===
+此事件由弹射物击中某物产生，振动频率为2。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=弹射物击中方块
+|pos=被击中的方块
+|entity=弹射物
+|block=被击中的方块
+}}
+{{Game event table
+|event=弹射物击中实体
+|pos=被击中的实体
+|entity=弹射物
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=弹射物击中方块
+|pos=被击中的方块
+}}
+{{Game event table
+|event=弹射物击中实体
+|pos=被击中的实体
+|foot=1
+}}
+
+=== projectile_shoot ===
+此事件由弹射物发射产生，振动频率为3。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=发射弹射物
+|pos=生成弹射物实体的位置
+|entity=发射弹射物的实体
+|block=-
+}}
+{{Game event table
+|event=末影之眼飞出
+|pos=生成末影之眼实体的位置
+|entity=玩家
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=发射弹射物
+|pos=生成弹射物实体的位置
+}}
+{{Game event table
+|event=末影之眼飞出
+|pos=生成末影之眼实体的位置
+|foot=1
+}}
+
+=== sculk_patch ===
+{{exclusive|be|section=1}}
+此事件由实体踩踏幽匿感测体产生，振动频率为1。<ref name="bedrock_name"/>默认仅能被被踩踏的幽匿感测体检测。
+{{Game event table
+|event=踩踏幽匿感测体
+|pos=幽匿感测体
+|foot=1
+}}
+
+=== sculk_sensor_tendrils_clicking ===
+此事件由幽匿感测体激活产生。默认仅能被幽匿尖啸体检测。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=幽匿感测体被触发
+|pos=幽匿感测体
+|entity=触发此幽匿感测体的实体
+|block=-
+|entitynullable=1
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=幽匿感测体被触发
+|pos=幽匿感测体
+|foot=1
+}}
+
+=== shear ===
+此事件由修剪动作产生，振动频率为6。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=发射器修剪实体或南瓜
+|pos=发射器前方一格
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=玩家修剪生物
+|pos=被修剪的生物
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=玩家修剪南瓜、收获蜜脾
+|pos=对应方块
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=拴绳被玩家切断连接
+|pos=被操作的方块或实体
+|entity=玩家
+|block=-
+}}
+{{Game event table
+|event=拴绳被发射器切断连接
+|pos=发射器前方一格
+|entity=-
+|block=-
+}}
+{{Game event table
+|event=玩家使用剪刀卸下装备
+|pos=被卸下装备的实体
+|entity=玩家
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=发射器修剪实体或南瓜
+|pos=发射器前方一格
+}}
+{{Game event table
+|event=玩家修剪生物
+|pos=被修剪的生物
+}}
+{{Game event table
+|event=玩家修剪南瓜、收获蜜脾
+|pos=对应方块
+}}
+{{Game event table
+|event=修剪植物
+|pos=对应方块
+}}
+{{Game event table
+|event=拴绳被玩家切断连接
+|pos=被操作的方块或实体
+}}
+{{Game event table
+|event=拴绳被发射器切断连接
+|pos=发射器前方一格
+}}
+{{Game event table
+|event=玩家使用剪刀卸下装备
+|pos=被卸下装备的实体
+|foot=1
+}}
+
+=== shriek ===
+此事件由幽匿尖啸体激活产生。{{in|je|nc=1}}默认仅能被监守者检测。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=幽匿尖啸体被触发
+|pos=幽匿尖啸体
+|entity=触发此幽匿尖啸体的实体
+|block=-
+|entitynullable=1
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=幽匿尖啸体被触发
+|pos=幽匿尖啸体
+|foot=1
+}}
+
+=== single_item_swap ===
+{{exclusive|bedrock|section=1}}
+此事件由玩家与展示架之间仅交换单个物品产生，振动频率为3。<ref name="bedrock_name"/>
+{{Game event table
+|event=玩家与展示架交换单个物品
+|pos=展示架
+|foot=1
+}}
+
+=== splash ===
+此事件由实体从空气移动到水中时产生，振动频率为2。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体入水
+|pos=此实体
+|entity=此实体
+|block=-
+}}
+{{Game event table
+|event=气泡柱冲击船
+|pos=船
+|entity=船
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体入水
+|pos=此实体
+}}
+{{Game event table
+|event=气泡柱冲击船
+|pos=船
+|foot=1
+}}
+
+=== step ===
+{{exclusive|je|section=1}}
+此事件由实体踩踏动作产生，振动频率为1。
+{{Game event table|showentity=1|showblock=1
+|event=实体在方块上行走
+|pos=此实体
+|entity=此实体
+|block=实体脚下的方块
+}}
+{{Game event table
+|event=实体在实体上行走
+|pos=此实体
+|entity=此实体
+|block=实体所在的方块{{note|name=entity_block}}
+}}
+{{Game event table
+|event=踩踏幽匿感测体
+|pos=幽匿感测体
+|entity=此实体
+|block=-
+|foot=1
+}}
+
+=== swim ===
+此事件由实体在水中游泳产生，振动频率为1。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体游泳
+|pos=此实体
+|entity=此实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体游泳
+|pos=此实体
+|foot=1
+}}
+
+=== teleport ===
+此事件由实体传送产生，振动频率为14。
+
+{{cmd|tp}}或末影珍珠造成的传送不会产生此事件。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体传送
+|pos=此实体传送前的位置
+|entity=此实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体传送
+|pos=此实体传送前的位置
+|foot=1
+}}
+
+=== unequip ===
+此事件由实体卸下物品产生，振动频率为4。
+
+{{in|je}}检测机制同[[#equip|equip]]。{{in|be}}只有卸下盔甲等装备才可触发。
+
+{{el|je}}：
+{{Game event table|showentity=1|showblock=1
+|event=实体卸下装备
+|pos=卸下装备的实体
+|entity=卸下装备的实体
+|block=-
+|foot=1
+}}
+
+{{el|be}}：
+{{Game event table
+|event=实体卸下装备
+|pos=此实体
+|foot=1
+}}
+
+== 数据值 ==
+{{/DV}}
+
+== 成就 ==
+{{Load achievements|sneak-100}}
+
+== 进度 ==
+{{Load advancements|prefix=adventure|avoid_vibration}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=20w49a|加入了游戏事件。}}
+|{{HistoryLine|||dev=20w51a|幽匿感测体不再检测羊毛物品实体掉落和在羊毛上行走的事件。
+|移除了游戏事件<code>eating_start</code>。曾经它由玩家进食开始动作产生，振动频率为7。
+|将游戏事件{{cd|entity_hit}}的振动频率由9调整为8。
+|将游戏事件{{cd|container_close}}的振动频率由10调整为14。
+|将游戏事件{{cd|container_open}}的振动频率由11调整为15。}}
+|{{HistoryLine|||dev=21w05a|移除了游戏事件{{cd|d=pretty|armor_stand_add_item|eating_finish|entity_hit|flint_and_steel_use}}，现在对应的动作会分别触发游戏事件{{cd|d=pretty|equip|eat|entity_damaged|block_place}}。
+|加入了游戏事件{{cd|d=pretty|minecart_moving|ring_bell|block_change|drinking_finish|prime_fuse|eat|mob_interact|entity_damaged|equip|shear|ravager_roar|entity_place|entity_killed|shulker_close|shulker_open}}。
+|现在末影人搬起方块会产生游戏事件<code>block_destroy</code>。
+|现在猫和豹猫的潜行也会被监听系统视为有效潜行。}}
+|{{HistoryLine||1.19|dev=22w12a|加入了游戏事件{{cd|d=pretty|sculk_sensor_tendrils_clicking|shriek}}。
+|振动监听器的数据可以被{{cmd|data|link=none}}获取了。}}
+|{{HistoryLine|||dev=22w13a|加入了游戏事件{{cd|d=pretty|block_activate|block_deactivate}}。
+|移除了游戏事件<code>minecart_moving</code>。曾经它不可产生，振动频率为6。
+|移除了游戏事件{{cd|d=pretty|block_press|block_switch}}，现在对应的动作会触发游戏事件{{cd|d=pretty|block_activate}}。
+|移除了游戏事件{{cd|d=pretty|block_depress|block_unswitch}}，现在对应的动作会触发游戏事件{{cd|d=pretty|block_deactivate}}。
+|移除了游戏事件<code>ring_bell</code>，现在对应的动作会触发游戏事件<code>block_change</code>。
+|移除了游戏事件{{cd|d=pretty|shulker_open|shulker_close}}，现在对应的动作会分别触发游戏事件{{cd|d=pretty|container_open|container_close}}。
+|将游戏事件{{cd|d=pretty|drinking_finish|entity_killed|entity_damaged|elytra_free_fall|fishing_rod_cast|fishing_rod_reel_in|mob_interact|ravager_roar|wolf_shaking}}分别重命名为{{cd|d=pretty|drink|entity_die|entity_damage|elytra_glide|item_interact_start|item_interact_finish|entity_interact|entity_roar|entity_shake}}。
+|现在游戏会更频繁地调用游戏事件<code>entity_interact</code>，以使绝大部分生物交互行为被触发。
+|现在流浪商人和女巫饮用物品会产生游戏事件<code>drink</code>。
+|现在唤魔者召唤恼鬼会产生游戏事件<code>entity_place</code>。}}
+|{{HistoryLine|||dev=22w14a|现在马的喂食会产生游戏事件<code>eat</code>。}}
+|{{HistoryLine|||dev=22w17a|现在末地水晶爆炸会产生游戏事件<code>explode</code>。}}
+|{{HistoryLine|||dev=pre1|现在更多物品的使用动作可以触发游戏事件{{cd|d=pretty|item_interact_start|item_interact_finish}}。
+|加入了游戏事件{{cd|d=pretty|note_block_play|instrument_play}}。
+|玩家的主手副手的物品变化不再触发游戏事件<code>equip</code>。
+|现在矿车放在羊毛上的铁轨时不再产生振动。
+|现在方块被活塞推动破坏会产生游戏事件<code>block_destroy</code>。}}
+|{{HistoryLine|||dev=pre2|加入了游戏事件{{cd|teleport}}。
+|现在使用锄转化方块、使用锹铲除土径、向营火放置食物、唱片机的唱片的插入与移出、采摘甜浆果、脱蜡、涂蜡、炼药锅被天气或滴水石锥填充会产生游戏事件<code>block_change</code>。
+|现在村民种植作物和雪傀儡产生雪会产生游戏事件<code>block_place</code>。}}
+|{{HistoryLine|||dev=pre3|将游戏事件{{cd|item_interact_start}}的振动频率由15调整为0。
+|现在切换阳光探测器模式和蜜蜂出入蜂巢会产生游戏事件<code>block_change</code>。
+|现在鸡下蛋会产生游戏事件<code>entity_place</code>。
+|现在海龟蛋即使数量减少也会产生游戏事件<code>block_destroy</code>。}}
+|{{HistoryLine||1.19.1|dev=22w24a|加入了游戏事件{{cd|d=pretty|jukebox_play|jukebox_stop_play}}。}}
+|{{HistoryLine||1.19.3|dev=22w42a|加入了振动选择器。}}
+|{{HistoryLine||1.19.4|dev=23w06a|加入了游戏事件{{cd|d=pretty|entity_dismount|entity_mount}}。
+|现在修剪植物、采摘发光浆果、从讲台上取书、与两种物品展示框的物品互动、将耕地踩踏为泥土、重生锚充能和堆肥桶的交互会产生游戏事件<code>block_change</code>。
+|现在海龟和青蛙产卵会产生游戏事件<code>block_place</code>。
+|现在关闭运输船和运输矿车会产生游戏事件<code>container_close</code>。
+|现在给羊染色、使用拴绳会产生游戏事件<code>entity_interact</code>。}}
+|{{HistoryLine|||dev=pre1|将游戏事件{{cd|item_interact_finish}}的振动频率由14调整为2。}}
+|{{HistoryLine||1.20|dev=23w12a|加入了15个共振游戏事件。
+|移除了游戏事件{{cd|piston_contract}}，现在对应的动作会触发游戏事件{{cd|block_deactivate}}。
+|移除了游戏事件{{cd|d=pretty|piston_extend|dispense_fail}}，现在对应的动作会触发游戏事件{{cd|block_activate}}。
+|重新整理了各游戏事件的振动频率以避免干扰。}}
+|{{HistoryLine|||dev=23w16a|振动监听器的位置不再能被{{cmd|data|link=none}}获取。}}
+|{{HistoryLine|||dev=23w17a|现在嗅探兽挖掘会产生游戏事件<code>entity_shake</code>。}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了游戏事件<code>entity_action</code>。
+|移除了游戏事件{{cd|entity_roar}}和{{cd|entity_shake}}，现在对应的动作会触发游戏事件{{cd|entity_action}}。
+|现在不死图腾激活会产生游戏事件<code>entity_damage</code>。}}
+|{{HistoryLine|||dev=23w32a|现在若有振动被计划接收，则振动数据会在临近所有区块被完全加载前停留在计算队列中，以防止因模拟距离限制而丢失。
+|加入了游戏事件<code>unequip</code>。
+|现在兔子啃食胡萝卜、雕纹书架与漏斗和投掷器的交互、狐狸采摘甜浆果、海龟蛋开裂会产生游戏事件<code>block_change</code>。
+|现在火被喷溅型水瓶熄灭和海龟蛋孵化会产生游戏事件<code>block_destroy</code>。
+|现在唤魔者召唤尖牙会产生游戏事件<code>entity_place</code>。
+|现在使用骨粉会产生游戏事件<code>item_interact_finish</code>。
+|现在骆驼吃仙人掌会产生游戏事件<code>eat</code>而不是<code>entity_interact</code>。}}
+|{{HistoryLine||1.20.3|dev=23w41a|现在与饰纹陶罐互动会产生游戏事件<code>block_change</code>。}}
+|{{HistoryLine||1.21|dev=24w19a|现在冰霜行者魔咒生效时会产生游戏事件<code>block_place</code>。}}
+|{{HistoryLine||1.21.4|dev=24w45a|现在嘎枝之心生成树脂团会产生游戏事件<code>block_place</code>。}}
+|{{HistoryLine||1.21.5|dev=25w02a|现在玩家攻击被观察的嘎枝会产生游戏事件<code>entity_action</code>。}}
+|{{HistoryLine|||dev=25w10a|振动频率为0的游戏事件产生的振动不再能被幽匿感测体检测。}}
+|{{HistoryLine||1.21.6|dev=25w17a|现在使用剪刀切断拴绳连接会产生游戏事件<code>shear</code>而不是<code>block_attach</code>。}}
+|{{HistoryLine|||dev=pre1|现在失水恶魂改变浸湿阶段会产生游戏事件<code>block_change</code>。
+|现在使用剪刀剪下装备会产生游戏事件<code>shear</code>。}}
+|{{HistoryLine||1.21.11|dev=25w46a|现在<code>use_effects</code>组件可以控制物品是否能产生<code>item_interact_start</code>和<code>item_interact_finish</code>游戏事件。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了<code>bounce</code>游戏事件。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.210|dev=1.16.210.56|加入了游戏事件。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|加入了一些游戏事件以同步Java版。}}
+|{{HistoryLine|||dev=1.19.0.28|现在抛出钓鱼竿会产生游戏事件。}}
+|{{HistoryLine|||dev=1.19.0.30|现在海龟蛋与台阶放置于自身、船移动、船受气泡柱冲击、使用水瓶转化泥巴会产生游戏事件。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.20|现在大型垂滴叶即使是升起也会产生游戏事件。
+|现在使用锄耕地会产生游戏事件。
+|玩家的主手副手的物品变化不再产生游戏事件。}}
+|{{HistoryLine|||dev=1.19.10.21|现在打开或关闭运输船、玩家饮用奶、收集细雪、盔甲架穿戴物品和在蜘蛛网或细雪上行走会产生游戏事件。
+|区分了流体放置事件和流体收起事件，振动频率分别为12和13。}}
+|{{HistoryLine||1.19.20|dev=1.19.20.20|将末地水晶与苦力怕爆炸的振动频率改为15，此前为7；将放置生物桶与发射器发射TNT的振动频率改为12。}}
+|{{HistoryLine|||dev=1.19.20.22|现在蜜蜂、鸡、悦灵、幻翼和末影龙的飞行也会触发拍打事件，此前只有鹦鹉可以触发。}}
+|{{HistoryLine||1.19.20|dev=1.19.20.20|振动接收者现在改为侦测最近的振动，而非之前的1刻内的首个振动信号。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.20|将游戏事件{{cd|item_interact_finish}}的振动频率由14调整为2。
+|游戏事件{{cd|item_interact_start}}无法再被检测。
+|现在抛出钓鱼竿会产生游戏事件<code>projectile_shoot</code>。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|重新整理了各游戏事件的振动频率以避免干扰，以匹配Java版。}}
+|{{HistoryLine||1.20.10|dev=1.20.10.20|现在将物品放入物品展示框、旋转或取下物品展示框中的物品、重生锚充能、铜块除蜡或涂蜡、转换阳光探测器的模式、将食物放入营火、唱片机插入或取出音乐唱片、泥巴转变为黏土、采摘甜浆果或发光浆果、将末影之眼放在末地传送门框架、蜜蜂进出蜂巢或蜂箱、与堆肥桶交互、连接或解开拴绳、给绵羊染色、耕地转变为泥土、对刷怪笼使用刷怪蛋、蠹虫钻入方块、对缠根泥土使用锄、使用锹制造土径、放置门、在耕地上种植、摧毁潜影弹、末影人或潜影贝瞬移会产生游戏事件。}}
+|{{HistoryLine||1.20.30|dev=1.20.30.20|现在投掷末影之眼、使用水桶收集鱼等生物、非玩家装备盾牌、使用炼药锅染色、制作药箭、清洗物品等会产生游戏事件。}}
+|{{HistoryLine|||dev=1.20.30.21|现在使用命名牌、唤魔者召唤恼鬼或尖牙、鸡下蛋、海龟和青蛙产卵、使用骨粉、漏斗将书放入雕纹书架中、熄灭火、搭乘或取消搭乘载具、兔子啃食胡萝卜作物、狐狸吃掉甜浆果丛上的甜浆果、放置海泡菜和增加海泡菜的放置数量、海龟蛋破裂以及放置旗帜、竹笋、生物头颅、睡莲和青蛙卵方块会产生游戏事件。}}
+|{{HistoryLine||1.20.40|dev=1.20.40.20|现在关闭运输船或运输矿车会产生游戏事件。}}
+|{{HistoryLine||1.20.50|dev=1.20.50.20|现在与饰纹陶罐互动会产生游戏事件。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.28|现在眼眸花转化会产生游戏事件。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.21|现在嘎枝之心放置树脂团会产生游戏事件。}}
+|{{HistoryLine|||dev=1.21.60.25|现在玩家攻击被观察的嘎枝会产生游戏事件。}}
+}}
+
+=== 1.20的更改 ===
+在Java版23w12a中，振动频率分布被完全重置，以避免更多干扰。
+
+{|class="wikitable"
+! 振动频率 !! 修改前 !! 修改后
+|-
+! 1
+| {{cd|'''step'''}}
+| {{cd|d=pretty|flap|'''step'''|swim}}
+|-
+! 2
+| {{cd|d=pretty|flap|item_interact_finish}}
+| {{cd|d=pretty|hit_ground|projectile_land|splash}}
+|-
+! 3
+| {{cd|swim}}
+| {{cd|d=pretty|instrument_play|item_interact_finish|projectile_shoot}}
+|-
+! 4
+| {{cd|'''elytra_glide'''}}
+| {{cd|d=pretty|'''elytra_glide'''|entity_roar|entity_shake}}
+|-
+! 5
+| {{cd|d=pretty|hit_ground|teleport}}
+| {{cd|d=pretty|equip|entity_dismount}}
+|-
+! 6
+| {{cd|d=pretty|block_change|entity_shake|entity_dismount|note_block_play|splash}}
+| {{cd|d=pretty|entity_interact|entity_mount|shear}}
+|-
+! 7
+| {{cd|d=pretty|drink|entity_mount|prime_fuse|projectile_shoot}}
+| {{cd|entity_damage}}
+|-
+! 8
+| {{cd|d=pretty|'''eat'''|entity_damage|entity_interact|projectile_land}}
+| {{cd|d=pretty|'''eat'''|drink}}
+|-
+! 9
+| {{cd|d=pretty|entity_roar|equip|shear}}
+| {{cd|d=pretty|block_close|block_deactivate|block_detach|container_close}}
+|-
+! 10
+| {{cd|d=pretty|block_close|block_deactivate|block_detach|dispense_fail}}
+| {{cd|d=pretty|block_activate|block_attach|block_open|container_open|note_block_play|prime_fuse}}
+|-
+! 11
+| {{cd|d=pretty|block_activate|block_attach|block_open}}
+| {{cd|block_change}}
+|-
+! 12
+| {{cd|d=pretty|block_place|fluid_place|entity_place}}
+| {{cd|d=pretty|block_destroy|fluid_pickup}}
+|-
+! 13
+| {{cd|d=pretty|block_destroy|fluid_pickup|entity_die}}
+| {{cd|d=pretty|block_place|fluid_place}}
+|-
+! 14
+| {{cd|d=pretty|container_close|piston_contract}}
+| {{cd|d=pretty|entity_place|lightning_strike|teleport}}
+|-
+! 15
+| {{cd|d=pretty|container_open|'''explode'''|instrument_play|lightning_strike|piston_extend}}
+| {{cd|d=pretty|entity_die|'''explode'''}}
+|}
+
+== 注释 ==
+{{notelist|columns=2}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}

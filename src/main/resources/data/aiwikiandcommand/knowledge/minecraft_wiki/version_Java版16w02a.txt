@@ -1,0 +1,136 @@
+# 页面: Java版16w02a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8816w02a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:17
+# 原始 Wikitext 内容:
+
+{{Infobox version 
+|title=16w02a
+|image=16w02a.png
+|image2=Java Edition 16w02a Simplified.png\Java Edition 16w02a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2016年1月13日
+|jsonhash=2f6007d145fb6dc0406bedc21e1d5345c84cd5d7
+|clienthash=efdeb1a9736db56e5ff319bdf62dfa6fa6395bee
+|serverhash=c574c54826489e1c04dd54d634da83945824337b
+|exehash=9c2924a8763f34387029bab4907bf22804075ae8
+|parent=1.9
+|prevparent=1.8.9
+|prev=15w51b
+|next=16w03a
+|nextparent=1.9.1
+}}<onlyinclude>
+
+'''16w02a'''是[[Java版1.9]]的第49个快照，发布于2016年1月13日<ref>{{cite|url=http://mojang.com/2016/01/minecraft-snapshot-16w02a/|archive-url=1|archive=1|title=Minecraft 1.9 snapshot 16w02a|author=Searge|website=Mojang.com|date=Jan 13, 2016}}</ref>，加入了一个新的声音选项，并修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''[[选项]]'''
+* 在“音乐和声音...”下加入了“Voice/Speech”（说话声）的音量滑条。
+** 计划用于自定义地图的配音。<ref>{{tweet|SeargeDP|687741330995429376}}</ref>
+
+== 更改 ==
+=== 命令格式 ===
+'''常规'''
+* 加入了[[目标选择器参数]]<code>m</code>。
+** 支持反选和英文字数值，例如：<code>@p[m=!1]</code>、<code>@p[m=c]</code>和<code>@p[m=!spectator]</code>。
+
+'''{{cmd|playsound}}'''
+* 接受一个声音<code>-{}-<来源></code>作为第二个参数。
+
+=== 方块 ===
+'''[[基岩]]'''
+* 不再能使自身掉落成物品。
+
+'''[[空气]]'''
+* 能被翻译成其他语言，这是为了在自定义超平坦世界时使用。
+
+'''[[信标]]'''
+* 放在有效的金字塔结构上会被立刻激活。
+
+'''[[石质按钮]]'''
+* 现在用[[镐]]破坏会更快些。
+
+'''[[木质按钮]]'''
+* 现在用[[斧]]破坏会更快些。
+
+'''[[金合欢木楼梯]]和[[深色橡木楼梯]]'''
+* 现在可以被点燃。
+
+=== 物品 ===
+'''[[盔甲]]'''
+* 再次更改了[[护甲值]]以使玩家抵御偷袭的[[苦力怕]]。
+** 因攻击力度而降低的有效防御值不再在护甲值低于25%时生效。
+** 最大护甲值{{armor|20}}的减伤率再次变为80%（[[15w36a]]里为66%）。
+
+=== 生物 ===
+'''常规'''
+* 生物会因为非实体伤害（例如[[仙人掌]]）而被击退。
+
+'''[[末影龙]]'''
+* 用{{cmd|summon EnderDragon}}生成的末影龙会停留在原地。
+** 和以<code>{NoAI:1b}</code>生成的末影龙不同，它仍会挥动它的翼。
+** 这些末影龙不会显示它们的[[生命值]]，也不会受到{{cmd|kill}}以外的伤害。
+
+=== 非生物实体 ===
+'''[[盔甲架]]'''
+* 被标记的<code>ArmorStand</code>受[[发光]]效果影响时只会有装备的轮廓。
+
+== 修复 ==
+{{fixes|fixedin=16w02a|prefix=Minecraft|showdesc=1
+|;old
+|233|穿过传送门时播放的音效<code>travel.ogg</code>和<code>trigger.ogg</code>文件发生交换/音效在错误的时间播放。
+|1072|超平坦世界自定义选项中，空气没有其对应的翻译。
+|2324|玩家不能脱离流动水。
+|4040|玩家在红石线上边疾跑边跳跃时，产生的粒子是灰色的。
+|4661|鸡（以及其他小型生物）站在栅栏里或附近时不会寻路。
+|14722|具有特定属性的僵尸死亡后，生成新僵尸的进程不会受到<code>doMobSpawning</code>游戏规则的影响。
+|23952|使用宽Unicode字符时，有对齐问题。
+|27912|有一些印地语文本没有对齐。
+|41542|使用繁体中文时，“Mipmap级别”选项的滑块有错位。
+|44140|金合欢木楼梯和深色橡木楼梯不会燃烧，也不能被打火石点燃。
+|46258|“ø”字符上有多余的像素。
+|46690|玩家在旁观模式中死亡后，经验和背包中的物品会掉落。
+|60692|游戏模式选择器中的数字前有“!”字符时不能正常工作。
+|73304|记分板项目<code>teamkill."color"</code>不注册实体。
+|74072|Unicode字符“有一划的小写H”（ħ）中一个像素太高。
+|74392|复制成书会出现堆叠数为0的物品，并且会复制原始物品。
+|76313|在飞行时按下蹲键会使得玩家飞行速度变慢。
+|78557|与压力板相比，破坏按钮没有被分配专门的工具。
+|79604|爆炸不会使得创造模式玩家被击退。
+|81687|村民交易中，即使两个物品格中的物品比村民提出的要价要少，村民也会接受交易。
+|82677|执行{{cmd|give @p minecraft:anvil 1 3|link=none}}命令会导致游戏崩溃。
+|;dev
+|85304|在任何世界类型中，末影龙生成后都会飞向这个世界坐标为0,0,0的位置。
+|87894|苦力怕伤害不成比例。
+|88268|具有自定义名称的发光物品显示出的名字是模糊的。
+|88668|具有<code>Enabled:0b</code>属性的老漏洞矿车不收集物品。
+|89592|游戏规则<code>showDeathMessages</code>设置为<code>false</code>时，死亡屏幕上的死亡消息不会被隐藏。
+|89917|对各种船使用选取键只会得到橡木船。
+|92208|使用{{cmd|summon|link=none}}命令生成的漏斗矿车会默认将<code>Enabled</code>设置为<code>0b</code>。
+|92783|将命令方块的最后一次输出设置为一个无效的JSON字符串会导致游戏崩溃。
+|93083|声音滑块对新声音不起作用。
+|93093|控制台上刷：<code>PLAYER is sending move packets too frequently (19 packets since last tick)</code>。
+|93119|生存模式玩家可以获得基岩。
+|;previous
+|94466|僵尸不会爬楼梯。
+|94776|鸡不会跟随手持种子且在楼梯上的玩家。
+|95129|僵尸不想在方块上行走（某些情况下）。
+|;private
+|59196|玩家可以随意tick自己。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:16w02a]]
+[[en:Java Edition 16w02a]]
+[[es:Java Edition 16w02a]]
+[[fr:Édition Java 16w02a]]
+[[ja:Java Edition 16w02a]]
+[[pt:Edição Java 16w02a]]
+[[ru:16w02a (Java Edition)]]

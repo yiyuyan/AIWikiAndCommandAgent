@@ -1,0 +1,233 @@
+# 页面: 兴趣点
+# 来源: https://zh.minecraft.wiki/w/%E5%85%B4%E8%B6%A3%E7%82%B9
+# 分类: Java版, Java版独有信息, 需要补充的条目
+# 抓取时间: 2026-07-14 17:20:22
+# 原始 Wikitext 内容:
+
+{{for}}
+{{missing information|需要基岩版信息}}
+'''兴趣点（Point of Interest, POI）'''是游戏用于快速查找特定类别的[[方块]]和计算方块被占有数量的机制。
+
+== 兴趣点类型 ==
+世界上记录的每个兴趣点都有其'''兴趣点类型（POI Type）'''属性，其决定兴趣点的作用。每种兴趣点类型都具有以下属性：
+
+'''匹配方块状态'''：与该兴趣点类型相对应的一系列方块状态，用于兴趣点的创建和删除。
+
+'''最大认领数量'''：可以认领此兴趣点的[[生物]]的数量上限。
+
+'''认领范围'''：生物可认领此兴趣点的最大范围。
+
+兴趣点类型也可以带有[[Java版标签/兴趣点类型|标签]]，多数情况下游戏实际上检索的是兴趣点类型标签，而不是某种特定的兴趣点类型。
+
+下列为游戏内所有有效的兴趣点类型和它们的作用，兴趣点类型是硬编码的，只能通过[[Mod]]修改：
+
+{| class="wikitable sortable"
+! 兴趣点类型ID || 匹配方块状态 || 最大认领数量 || 认领范围 || 标签 || 作用
+|-
+| {{cd|armorer}}
+| {{BlockLink|Blast Furnace}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|armorer}}
+| 作为村民的工作站点
+|-
+| {{cd|bee_nest}}
+| {{BlockLink|Bee nest}}
+| 0
+| 1
+| {{GameTag|point_of_interest_type|bee_nest}}
+| 快速索引蜂巢使得[[蜜蜂]]可以回到蜂巢内
+|-
+| {{cd|beehive}}
+| {{BlockLink|Beehive}}
+| 0
+| 1
+| {{GameTag|point_of_interest_type|beehive}}
+| 快速索引蜂箱使得蜜蜂可以回到蜂箱内
+|-
+| {{cd|butcher}}
+| {{BlockLink|Smoker}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|butcher}}
+| 作为村民的工作站点
+|-
+| {{cd|cartographer}}
+| {{BlockLink|Cartography Table}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|cartographer}}
+| 作为村民的工作站点
+|-
+| {{cd|cleric}}
+| {{BlockLink|Brewing Stand}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|cleric}}
+| 作为村民的工作站点
+|-
+| {{cd|farmer}}
+| {{BlockLink|Composter}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|farmer}}
+| 作为村民的工作站点
+|-
+| {{cd|fisherman}}
+| {{BlockLink|Barrel}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|fisherman}}
+| 作为村民的工作站点
+|-
+| {{cd|fletcher}}
+| {{BlockLink|Fletching Table}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|fletcher}}
+| 作为村民的工作站点
+|-
+| {{cd|home}}
+| {{BlockLink|Beds}}（所有种类，且位于床头）
+| 1
+| 1
+| {{GameTag|point_of_interest_type|home}}
+| 用于村民睡眠的[[床]]
+|-
+| {{cd|leatherworker}}
+| {{BlockLink|Cauldron}}<br>{{BlockLink|Lava Cauldron}}<br>{{BlockLink|Water Cauldron}}<br>{{BlockLink|Powder Snow Cauldron}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|leatherworker}}
+| 作为村民的工作站点
+|-
+| {{cd|librarian}}
+| {{BlockLink|Lectern}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|librarian}}
+| 作为村民的工作站点
+|-
+| {{cd|lightning_rod}}
+| {{BlockLink|Lightning Rod}}（所有种类）
+| 0
+| 1
+| —
+| 闪电快速索引避雷针位置
+|-
+| {{cd|lodestone}}
+| {{BlockLink|Lodestone}}
+| 0
+| 1
+| —
+| [[磁石指针]]快速索引[[磁石]]位置
+|-
+| {{cd|mason}}
+| {{BlockLink|Stonecutter}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|mason}}
+| 作为村民的工作站点
+|-
+| {{cd|meeting}}
+| {{BlockLink|Bell}}
+| 32
+| 6
+| {{GameTag|point_of_interest_type|meeting}}
+| 作为村民的会合点
+|-
+| {{cd|nether_portal}}
+| {{BlockLink|Nether Portal}}
+| 0
+| 1
+| —
+| [[下界传送门]]快速索引绑定传送连接
+|-
+| {{cd|shepherd}}
+| {{BlockLink|Loom}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|shepherd}}
+| 作为村民的工作站点
+|-
+| {{cd|test_instance}}
+| {{BlockLink|Test Instance Block}}
+| 0
+| 1
+| —
+| 测试结构快速索引[[测试实例方块]]的位置
+|-
+| {{cd|toolsmith}}
+| {{BlockLink|Smithing Table}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|toolsmith}}
+| 作为村民的工作站点
+|-
+| {{cd|weaponsmith}}
+| {{BlockLink|Grindstone}}
+| 1
+| 1
+| {{GameTag|point_of_interest_type|weaponsmith}}
+| 作为村民的工作站点
+|}
+
+== 机制 ==
+具有其对应的兴趣点类型的方块被放置或被破坏时，该位置上会相应地创建或删除兴趣点。
+
+=== 检索方块 ===
+
+在很多情景下，游戏需要检索某位置附近一定范围内是否存在某些特定的方块或者查询其数量。由于兴趣点以[[子区块]]为单位存储，相当于一个存储单元包含了16×16×16=4096个方块的信息，且带有兴趣点类型的方块仅占所有方块中的极少数，使用兴趣点机制进行检索能大大提升检索效率。
+
+=== 认领 ===
+一个兴趣点的'''可认领数'''在创建时设为其类型的最大可认领数，每当其被认领或被取消认领时，可认领数相应减少或增加1。可认领数减至0时，该兴趣点不可再被认领。兴趣点本身不记录认领自己的具体生物。
+
+{{in|je}}生物认领兴趣点的行为有：
+
+* [[村民]]尝试繁殖时会寻找<code>home</code>类型的兴趣点并尝试为幼年村民认领。
+* 村民认领工作站点。
+
+== 用途 ==
+
+=== 村庄 ===
+兴趣点是判定一个位置是否位于村庄区域的主要依据。一个位置被认定为位于村庄区域，当且仅当以其所在子区块为中心的3×3×3子区块范围内存在一个已被认领的带有<code>village</code>标签的兴趣点。
+
+村民的大部分[[生物AI|AI]]行为会检索自身中心一定范围内的某些兴趣点，然后将其位置设置为寻路目的地。
+
+[[猫]]在村庄中生成时需要大于4张被村民认领的床，实质上为检测生成位置半径48格内是否有大于4个已被认领的<code>home</code>类型兴趣点。
+
+[[流浪商人]]在村庄会合点附近生成，实质上为检索生成点半径48格内的<code>meeting</code>类型兴趣点。
+
+[[袭击]]触发时，检索触发位置半径64格内已被认领的带有<code>village</code>标签的兴趣点，用于计算袭击中心位置。
+
+=== 下界传送门 ===
+下界传送门会创建<code>nether_portal</code>类型的兴趣点。[[实体]]通过下界传送门前往其他维度时，会在目标位置检索水平[[切比雪夫距离]]128格内最近的该类型兴趣点，若有则不再创建新的下界传送门而直接将目的地设置为该位置。
+
+=== 蜜蜂 ===
+蜜蜂归巢时，检索带有<code>bee_home</code>标签的兴趣点来获取其巢穴的位置来进行寻路。
+
+=== 避雷针 ===
+避雷针会创建<code>lightning_rod</code>类型的兴趣点。[[闪电束]]生成时，会检索生成点半径128格内最近的该类型兴趣点，若有则将生成点设置在该兴趣点的位置。
+
+=== 磁石指针 ===
+磁石会创建<code>lodestone</code>类型的兴趣点。磁石指针通过每刻检测其绑定位置是否存在该类型兴趣点来判定追踪是否失效。
+
+== 存储格式 ==
+{{main|兴趣点存储格式}}
+兴趣点存储文件是一种区块数据，以[[区域文件格式]]为载体，存储于{{filepath|-{}-<''维度根目录''>/poi}}内。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=19w11a|加入了兴趣点。}}
+|{{HistoryLine||1.19|dev=22w19a|现在可以利用{{cmd|locate poi}}命令来定位兴趣点。}}
+|{{HistoryLine||1.21.6|dev=25w16a|加入了<code>test_instance</code>兴趣点。}}
+}}
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[de:Zielpunkt]]
+[[en:Point of Interest]]
+[[ja:関心地点]]
+[[lzh:要位]]

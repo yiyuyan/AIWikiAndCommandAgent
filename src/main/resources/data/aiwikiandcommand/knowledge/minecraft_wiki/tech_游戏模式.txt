@@ -1,0 +1,110 @@
+# 页面: 游戏模式
+# 来源: https://zh.minecraft.wiki/w/%E6%B8%B8%E6%88%8F%E6%A8%A1%E5%BC%8F
+# 分类: Java版独有信息, 基岩版独有信息, 有未知版本的History模板的页面/基岩版, 游戏内容, 游戏模式
+# 抓取时间: 2026-07-14 17:30:54
+# 原始 Wikitext 内容:
+
+{{for|对其进行设置的命令|命令/gamemode|直接影响游戏的难易程度的一个选项|难度}}
+'''游戏模式（Game Mode）'''是控制[[玩家]]进行游戏的方式的系统。<!--极限模式不是玩家游戏模式，而是世界设置，不应被添加至此条目 -->
+
+== 机制 ==
+{{main|生存模式|创造模式|冒险模式|旁观模式}}
+游戏中总共有四种游戏模式：
+* 在[[生存模式]]中，玩家可以放置与挖掘方块，使用所有可用的工具。敌对生物会主动攻击玩家。玩家受到[[生命]]、[[饥饿]]等多种因素的限制，并且挖掘方块会耗费一定的时间。
+* 在[[创造模式]]中，玩家不受任何生存因素的制约。玩家可以任意获取绝大多数物品和方块，并无限地使用这些资源。玩家可以瞬间挖掘方块、通过双击{{ctrl|跳跃}}[[飞行]]，并具有大幅增强的互动范围。所有生物不会攻击玩家，玩家也不会受到伤害{{only|for=（除了掉进虚空和{{cmd|kill}}）|je}}。
+* 在[[冒险模式]]中，玩家的大多数游戏内容与生存模式一致。不同的是，玩家不能挖掘或放置任何方块，除非手上持有的工具拥有对应方块的<code>can_destroy</code>[[组件]]，或者拥有对应方块的 <code>can_place_on</code>组件。处于这个模式下的玩家在生成时将直接被精准地放置到世界出生点上而不是其周围的随机位置。
+* 在[[旁观模式]]中，玩家会始终处于飞行状态，可以穿过方块、{{only|for=打开物品栏、在[[实体]]内部使用其视角观察世界|JE}}，但不能挖掘方块或修改物品栏，无法与世界做出任何互动。{{in|je}}旁观模式也是[[调试模式]]世界类型下的默认游戏模式。
+
+=== 世界游戏模式 ===
+{{Filetr|Gamemodes.gif|218px|有框|右|展示不同游戏模式的动画}}
+
+在创建一个世界时，可以选择世界的默认游戏模式。如果创建了一个[[极限模式]]世界，那么游戏模式将会是生存模式。
+
+{{in|je}}旁观模式的世界只能通过创建一个[[调试模式]]的世界来选择。
+
+每一个世界都有自己默认的游戏模式。这个游戏模式会影响每一个首次进入世界的玩家的游戏模式，但不会影响这些玩家在切换了游戏模式之后的游戏内容。
+
+{{in|je}}世界的游戏模式可以通过{{cmd|defaultgamemode}}来更改；{{in|be}}世界的游戏模式可以在游戏设置中修改，也可以通过修改存档文件来修改。
+
+在存档屏幕，世界默认的游戏模式也会显示在世界名称的下方。
+
+=== 玩家游戏模式 ===
+对于每一个玩家，其实体数据<code>playerGameType</code>记录了玩家当前的游戏模式。
+
+变更玩家游戏模式的基本方式是{{cmd|gamemode}}。
+
+玩家在[[极限模式]]的世界中死亡后，此玩家的游戏模式会被变更为旁观模式。
+
+{{in|je}}[[权限等级]]至少为{{cd|2}}的玩家还可以通过{{key|F3}}+{{key|F4}}来快捷切换游戏模式，或使用{{key|F3}}+{{key|N}}来快捷切换到旁观模式或上一个游戏模式（若无则为创造模式）。
+
+{{in|je}}所有的[[进度]]都可以在任意游戏模式中获得。
+
+{{in|be}}玩家可以在自己的游戏设置中变更自己的游戏模式。
+
+{{in|be}}所有的[[成就]]都只能在生存模式中获得。
+
+[[目标选择器]]可以筛选处于指定游戏模式的玩家。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java pre-Classic}}
+|{{HistoryLine||rd-131655|最初，“Minecraft” 是一款沙盒创造建筑类游戏，还没有游戏模式的概念。}}
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||2009年5月16日|link={{notch|108596899/some-thoughts-on-game-modes}}|Notch讨论了他为游戏设想的各种游戏模式。}}
+|{{HistoryLine||2009年6月14日|link={{notch|123343045/my-vision-for-survival}}|Notch讨论了他对生存模式如何运作的看法。}}
+|{{HistoryLine||2009年8月4日|link={{notch|155882307/a-video-showing-what-i-did-today-are-vids-like}}|生存模式测试开始。}}
+|{{HistoryLine||0.24 SURVIVAL TEST|隐藏了创造模式，在[[生存测试]]中加入了生存模式。在此期间，死亡是永久性的，这意味着玩家不能重生除非有之前保存的存档。
+|直至Beta后期，生存模式是单人游戏中唯一可用的模式，除了[[Java版Classic|Classic]]中的创造模式。}}
+|{{HistoryLine||0.28|创造模式更新，恢复了Classic版本的创造模式。}}
+|{{HistoryLine||2010年7月7日|link={{notch|779956568/the-rationale-for-redstone}}|冒险模式，原来被叫做'''地下城与拉杆（Dungeons and Levers）'''，为[[Notch]]在2010年7月7日宣布的新模式。<ref name="AdventureBreakdown">{{notch|779956568/the-rationale-for-redstone|The rationale for Redstone|July 7, 2010}}</ref>Notch暗示四个玩家会在冒险模式中竞赛。
+冒险模式也许会包括类似于[[极限模式]]的“永久死亡”，使其本质与[[Wikipedia:Rogue (video game)|Rogue]]相似，<ref>http://www.gamebandits.com/news/pc/minecraft-1-9-hardcore-mode-bring-it-on-17345/</ref>同时此模式也许会带有随机生成的地图/任务的系统。<ref>http://www.gameinformer.com/b/features/archive/2011/06/14/notch-and-todd-howard-the-one-on-one-interview.aspx</ref>}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20091223-0040|再次隐藏了创造模式，被生存模式取代。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||2011年6月28日|link={{tweet|notch|85801912754118658}}|[[Notch]]发帖说明创造模式将是玩家可选择的一种游戏模式。}}
+|{{HistoryLine||1.8|dev=pre1|独立的创造模式在[[冒险更新]]中发布。
+|加入了命令{{cmd|gamemode}}，用于变更玩家的游戏模式。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w22a|加入了冒险模式。}}
+|{{HistoryLine||1.8|dev=2014年1月27日|slink={{tweet|Dinnerbone|427795613733126144}}|Dinnerbone发了一条有关旁观模式的推文。}}
+|{{HistoryLine|||dev=14w05a|加入了旁观模式。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|加入了创造模式。}}
+|{{HistoryLine||0.2.0|加入了生存模式。}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了命令{{cmd|gamemode}}，用于变更玩家的游戏模式。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|加入了冒险模式。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||?|加入了旁观模式。
+|玩家仅能通过附加包或修改游戏文件进入旁观模式。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.20|现在可通过{{cmd|gamemode 6}}进入旁观模式。}}
+|{{HistoryLine||1.18.31|exg=spectator_mode|现在旁观模式属于[[实验性玩法]]。
+|现在可通过{{cmd|gamemode spectator}}进入旁观模式。}}
+|{{HistoryLine||1.19.30|exg=spectator_mode|dev=1.19.30.20|不再可通过{{cmd|gamemode 6}}进入旁观模式。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.20|旁观模式不再属于[[实验性玩法]]。
+|现在开启作弊后，玩家可以在游戏设置中将个人游戏模式切换为旁观模式。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了生存模式。}}
+|{{HistoryLine||xbox=TU5|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了创造模式。}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.10|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了冒险模式。}}
+}}
+
+== 你知道吗 ==
+* [[极限模式]]是创建世界时，游戏模式的其中一个选项，其本质上是一个世界设置而非真正的玩家游戏模式。
+* 以“游戏模式”为创作题材，''Minecraft''有其衍生游戏[[Minecraft: Story Mode|Minecraft: Story Mode（Minecraft：故事模式）]]。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:游戏模式|*]]
+
+[[de:Spielmodus]]
+[[en:Game mode]]
+[[es:Modo de juego]]
+[[lzh:法]]
+[[pl:Tryby gry]]
+[[pt:Modo de jogo]]
+[[uk:Режим гри]]

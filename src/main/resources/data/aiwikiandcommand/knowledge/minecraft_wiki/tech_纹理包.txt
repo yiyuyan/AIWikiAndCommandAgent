@@ -1,0 +1,162 @@
+# 页面: 纹理包
+# 来源: https://zh.minecraft.wiki/w/%E7%BA%B9%E7%90%86%E5%8C%85
+# 分类: Minecraft, UI, 游戏内容, 游戏文件, 皮肤, 过时内容, 需要整理
+# 抓取时间: 2026-07-14 17:34:19
+# 原始 Wikitext 内容:
+
+{{About|已移除的自定义游戏纹理的方式|玩家皮肤|皮肤|纹理包的替代品|资源包|{{el|be}}中的资源包|附加包}}
+{{Outdated|edition=je}}
+{{cleanup}}
+{{Upcoming in draft}}
+
+[[File:JoliCraft_example.png|缩略图|300px|JoliCraft纹理包（图片中部）与默认纹理包]]
+
+'''纹理包（Texture Pack，旧译为“材质包”）'''是一种可以更改游戏中[[方块]]、[[物品]]、[[生物]]和界面纹理贴图的文件包。它们是由{{cd|.png}}图片和{{filename|pack.txt}}文件组成的{{cd|[[wzh:ZIP格式|.zip]]}}压缩包。 纹理贴图的默认分辨率是16×16，但32×32、64×64、128×128、256×256、512×512或更高分辨率的高清纹理包也可以通过第三方[[Mods]]加载。
+
+在[[Java版1.6.1]]中，纹理包被替换为[[资源包]]，提供对纹理和其他游戏功能（如音乐和文本）的更多控制。
+
+== 安装纹理包 ==
+# 在网站中下载你心仪的纹理包。由于其文件并非为一个文件夹，大部分的纹理包均为{{cd|.zip}}文件格式。如果你自行创建纹理包，你可以在必要的时候将其压缩为{{cd|.zip}}格式。你可以在[[Tutorial:制作纹理包]]页面获取关于制作纹理包的更多深度信息。然而，zip压缩并不是必要的，在[[12w32a]]后，只要有{{filename|pack.txt}}存在，就会被认为是一个纹理包。
+# 运行Minecraft。如果你已经打开了Minecraft，请确保你保存并关闭世界：你至少需要返回至主菜单才能进行下一步操作。
+# 点击“材质包{{sic}}”按钮。
+# 点击“打开材质文件夹{{sic}}”按钮，此时会打开一个存有Minecraft所有纹理包的文件夹。如果没有成功打开文件夹，你需要手动进行寻找，纹理包文件夹的路径与你的操作系统有关：
+:* Windows: {{filepath|%appdata%\.minecraft\texturepacks}}
+:* GNU/Linux: {{filepath|~/.minecraft/texturepacks}}（这一文件夹有可能为隐藏模式。）
+:* macOS: {{filepath|~/Library/Application Support/minecraft/texturepacks}}（这一文件夹有可能为隐藏模式。）
+# 你不需要关闭Minecraft即可成功的在所打开的文件夹中放置纹理包。
+# 稍等几秒后即可在Minecraft中出现对应的纹理包，选择该纹理包并点击“确定”即可应用此纹理包。你可以重新载入世界观察变化。如果Minecraft没有刷新，只需要退出并重新打开纹理包菜单即可。
+
+=== 提示 ===
+* 纹理包可能只会修改其中的某些纹理。所以当你发现在使用某一款纹理包后主菜单未发生变化，这并不代表纹理包未正常工作。如果你认为开始菜单需要加以改变，请联系纹理包的作者，或者自行修改。
+* 你可能会安装许多款纹理包，不同的纹理包可以通过鼠标滚轮上下滑动进行浏览。
+* Minecraft可能会锁定当前使用的纹理包（如，该纹理包包含用户界面时），此时纹理包不能被覆盖。如果你需要更新此纹理包，你可以暂时使用默认纹理，并对你所希望更新的纹理包进行覆盖。
+* 如果你希望在Minecraft中将未经压缩的文件夹识别为一个纹理包，你需要在该目录下放置一个{{filename|pack.txt}}文件（现为{{filename|pack.mcmeta}}文本文件）。这一功能在12w32a之前无法实现。
+* 需要注意，如果你下载了一个{{cd|.zip}}文件形式的纹理包，其中可能会包含另一个包含有实际纹理包所在位置的文件夹。在这种情况下，你需要要么复制、要么剪切，或者将这一文件夹拖拽至纹理包文件夹内。
+
+== 原主机版 ==
+{{main|纹理包/DLC}}
+
+在[[原主机版]]中，纹理包能够作为从Xbox商城、PlayStation商店和Nintendo eShop中可购买并下载的内容或者作为游戏中可下载的内容部分，除此之外还有游戏中默认的纹理。它们包含在了免费的混搭包中。
+
+== 纹理包的创建 ==
+{{main|Tutorial:制作纹理包}}
+[[File:TerrainGuide.png|缩略图|在[[Java版1.4.5]]中，{{filename|terrain.png}}文件各个子图所代表的含义]]
+要创建一个纹理包，你需要使用[http://www.7-zip.org/ 7-Zip]或[http://www.win-rar.com/ WinRAR]对{{filename|[[minecraft.jar]]}}文件进行解压缩，修改对应的文件。可以通过任意一款图像编辑软件对PNG文件进行编辑及设置透明度。推荐使用[http://www.gimp.org/ GIMP]、[http://www.pixlr.com/ Pixlr]以及[http://www.getpaint.net/ Paint.NET]进行编辑，这些软件都是免费的。Microsoft自带的画图软件并不提供透明度编辑功能，会以颜色（或纯色）替换透明区域。使用这类软件会将冰块变为纯色。然而，是可以只通过Windows画图绘制纹理包的。
+
+所修改的每一份{{cd|.png}}文件需要被保存成32位{{cd|.png}}格式并包含透明度信息。接下来将修改过的文件打包成一个{{cd|.zip}}文件，记得保留原有的文件格式，虽然这并不是必须的。任何省略的文件都会被默认纹理所替换。如果你在选择你的纹理包后未发生变换，请确保文件放置的位置是正确的（通常都是这一问题）。
+
+=== 可以被修改的文件列表 ===
+{| class="wikitable"
+|-
+! 文件
+! 说明
+! 简介
+|-
+| {{filename|[[terrain.png]]}}
+| 所有的方块。
+| 液体的改动只能在高清纹理中生效。
+|-
+| {{filename|particles.png}}
+| 所有的粒子。
+| 红石粒子的颜色不能改变。
+|-
+| {{filename|pack.png}}
+| 纹理包的微缩图。
+| 大小为128×128像素。
+|-
+| {{filename|pack.txt}}
+| 纹理包可选的描述。
+| 描述文字不宜过长，否则会无法显示。
+|-
+| {{filename|/title}}
+| 客户端的介绍和主菜单的画面。
+| 
+|-
+| {{filename|/environment}}
+| 雪，雨和[[云]]。
+| 
+|-
+| {{filename|/font}}
+| 游戏中的字体。
+| 
+|-
+| {{filename|/terrain}}
+| [[太阳]]和[[月亮]]。
+| 图片会在游戏中水平来回显示。（也就是说会在日落前倒序显示，之后正序显示）
+|-
+| {{filename|item\}}
+| 游戏模型中的[[告示牌]]、[[矿车]]、[[船]]和[[弓箭]]。
+| [[门]]的文件暂时无法使用。
+|-
+| {{filename|gui\}}
+| 背包背景、logo、菜单等，还有[[物品]]。
+| 
+|-
+| {{filename|art\}}
+| 存放图画的目录。
+| 
+|-
+| {{filename|mob\}}
+| 存放怪物、玩家模型的目录。
+| 
+|-
+| {{filename|armor\}}
+| 存放盔甲的目录。
+| 
+|-
+| {{filename|achievement\}}
+| [[成就]]的屏幕界面。
+| 
+|-
+| {{filename|misc\}}
+| [[生物群系]]中草/树叶的颜色，[[南瓜]]头盔的样式，[[时钟]]和[[地图]]的背景。
+| 
+|-
+| {{filename|/title/bg}}
+| Minecraft中[[主菜单]]的[[全景图]]。
+| 即{{filename|panorama0.png}} - {{filename|panorama5.png}}。
+|}
+
+你可以在MOD文件夹中找到为该[[Mods|MOD]]所使用的纹理。对于modloader的mod，{{filename|terrain.png}}在toomanyitems里。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.2.2|加入了官方支持的16×16纹理包，在此之前，玩家需要手动更改纹理包通过覆盖他们的{{filename|[[minecraft.jar]]}}文件或者使用一个补丁。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.8|高清纹理引起的漏洞被修复了，但它们仍不能在未打补丁的客户端中正常工作。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w23a|文件夹内的纹理包（未压缩）被认可和纹理包的图片能够被显示出来（对于文件夹，未压缩）。}}
+|{{HistoryLine|||dev=12w24a|打开纹理包文件夹的按钮现在在Mac系统正常工作。}}
+|{{HistoryLine||1.5|dev=13w02a|{{filename|terrain.png}}和{{filename|gui/items.png}}文件被单个的方块和物品图片所取代，从而允许使用高清和动态纹理。不同分辨率的纹理包能够被混合和配对使用。}}
+|{{HistoryLine||1.6.1|dev=13w24a|纹理包不再被支持，并且被[[资源包]]所取代。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU12|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了对纹理包的支持。}}
+}}
+
+== 你知道吗 ==
+* 所选择的纹理包名称被保存在{{filename|.minecraft}}文件夹下{{filename|options.txt}}文件中，这样你可以手动修改<code>skin:</code>的值。这在主菜单因纹理包发生崩溃时非常有用。因为在此时，由于主菜单崩溃无法进入纹理选择界面。只需移除文件中的名字将其重置为默认纹理即可。
+* 修改{{filename|FoliageColor.png}}、{{filename|GrassColor.png}}或{{filename|WaterColor.png}}（均在{{filename|misc}}文件夹中）的尺寸可能会引发在生成世界时出现严重的错误。这是由于在世界生成时会被中断并转至其他纹理包中，进而引发“所保存的区块”崩溃的问题。
+* 你也可以创建包含有动画形式图片的纹理包，而且整个世界中所有方块上的动画将会同步播放。
+
+== 导航 ==
+{{Navbox Minecraft}}
+
+[[Category:皮肤]]
+[[Category:UI]]
+[[Category:游戏内容]]
+[[Category:游戏文件]]
+
+[[de:Texturenpaket]]
+[[en:Texture pack]]
+[[es:Paquete de texturas]]
+[[fr:Pack de textures]]
+[[hu:Textúracsomagok]]
+[[ja:テクスチャパック]]
+[[ko:리소스 팩]]
+[[nl:Thema]]
+[[pl:Paczki tekstur]]
+[[pt:Pacote de textura]]
+[[ru:Пакет текстур]]
+[[th:เทกซ์เจอร์แพ็ก]]
+[[tr:Doku Paketi]]

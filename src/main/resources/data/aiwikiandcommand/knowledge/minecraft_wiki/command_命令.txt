@@ -1,0 +1,1207 @@
+# 页面: 命令
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4
+# 分类: Java版, Java版即将到来/26.3, Java版独有信息, 命令, 基岩版, 基岩版独有信息, 教育版独有信息, 有未知版本的History模板的页面/Java版Indev, 有未知版本的History模板的页面/基岩版, 服务器, 需要信息
+# 抓取时间: 2026-07-14 17:22:02
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|宏|巨集}}{{about||愚人节快照26w14a中的实体|活化方块命令}}
+{{quote|{{tr|您知道吗？Minecraft 有一套神奇的咒语，使用这些咒语，您便可传送到世界各地，定位生物群系和建筑，生成物品、生物、方块，设置天气和时间等等？
+
+没错，纯粹的魔法！使用“命令”（有时也叫做“斜杠命令”），您可以改变 Minecraft 的游戏体验，从召唤生物到改变世界的天气状况，无所不能。|您知道 Minecraft 有一系列魔法咒語，可讓您在世界中傳送；尋找特定生態域和建築；產生物品、生物和方塊；設定天氣和當天時間等不同行動嗎？
+
+沒錯，就是純粹的巫術！「指令」（或有時被稱為「slash 指令」）讓您能改變 Minecraft 體驗，從召喚生物到調整世界天氣條件等，無所不能。}}|[[Duncan Geere]]<ref>{{article|minecraft-commands|How to use commands in Minecraft|September 22, 2023}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''命令（Command）'''是通过输入特定文本字符串使用的進階功能。
+
+== 使用 ==
+[[File:Select UUID.gif|缩略图|右|{{in|Java|nc=1}}选取实体的[[UUID]]]]
+在客户端中，命令通过Minecraft的[[聊天]]窗口输入。按下{{key|T}}键、{{key|/}}键（默认）、{{only|for=[[File:Chat_button.png|25px|class=pixel-image]]或{{Xbutton|onedpad-right}}|be}}可以唤出聊天窗口。使用{{key|/}}键会同时输入命令'''必需'''的前缀斜杠（<code>/</code>），因此是个实用的快捷键。{{key|Up}}和{{key|Down}}键可浏览之前输入的文本，包含所有之前执行的命令。在输入命令时按下{{key|Tab}}键会循环显示当前可用的命令或参数，也可以快速输入准星当前指向方块的坐标（{{in|Java|nc=1}}输入实体参数时，如果准星指向某个实体，则可以直接输入其[[UUID]]）。当光标在某些参数（比如一个ID）的对应位置时，在文本框上方会展示一个可用值的列表。若该命令或参数已经输入了前面的部分内容，这个列表则只会展示包含当前输入内容的值。
+
+在[[命令方块]]中，命令'''可以'''以前缀斜杠开头，但不是必须的。
+
+命令也可以在多人[[服务器]]的控制台中输入，但是'''不該'''加入前缀<code>/</code>。
+
+命令可通过以下方式执行：
+* 玩家直接通过聊天框输入命令。
+* 通过[[命令方块]]或者[[命令方块矿车]]。
+* 在专用[[服务器]]中，通过控制台键入命令。
+* 在[[函数]]中，作为{{only|je|for=[[数据包]]}}或{{only|be|for=[[行为包]]}}的一部分。
+* {{in|be}}在行为包的脚本中。
+* {{in|be}}在行为包的动画控制器中。
+* {{in|be}}在行为包的方块事件响应中。
+* {{in|be}}在行为包的实体事件响应中。
+* {{in|je}}点击具有<code>run_command</code>行为的[[文本组件]]。
+* {{in|be}}由连接到客户端的WebSocket服务器请求执行。
+* {{in|be}}通过[[NPC]]对话框执行。
+
+== 命令指引 ==
+=== 语法表示 ===
+每条命令都由若干以空格隔开的片段组成。以下格式用以辅助表示命令语法中各片段的含义。关于某条命令的具体语法，请点击[[#命令列表及其概述|命令列表]]中的链接。
+
+{{el|je}}：
+{| class="wikitable" style="text-align:center" data-description="输入项"
+! 输入项 !! 含义
+|-
+| {{code|字面量}} || 按'''原样'''输入的内容。
+|-
+| {{code|-{}-<参数>}} || 需使用一个或一组合适的值来替换的参数。
+|}
+{| class="wikitable" style="text-align:center" data-description="修饰符"
+! 修饰符 !! 含义
+|-
+| {{code|-{}-[输入项]}} || 该输入项是'''可选'''的。
+|-
+| {{code|-{}-(输入项{{!}}输入项)}} || 必选，选择其中'''一个'''输入项填写。
+|-
+| {{code|-{}-[输入项{{!}}输入项]}} || 可选，选择其中'''一个'''输入项填写。
+|-
+| {{code|{{tr|省略号|刪節號}} ...}} || 在游戏中表示需后接一个完整的命令。<br>在此wiki中表示省略了一些必选的部分。
+|}
+例如，<code>[<size>]</code>是可选的参数，而<code>[size]</code>是可选的字面量。
+
+以<code>advancement (grant|revoke) <targets> only <advancement> [<criterion>]</code>为例，其中<code>advancement</code>和<code>only</code>是需要原样输入的字面量，<code>(grant|revoke)</code>是需要从<code>grant</code>和<code>revoke</code>中选择一个输入的字面量，<code><targets></code>和<code><advancement></code>是必需的以合适值替换的参数，<code>[<criterion>]</code>是可选的以合适值替换的参数。
+
+{{el|bedrock}}：
+{| class="wikitable" style="text-align:center" data-description="输入项"
+! 输入项 !! 含义
+|-
+| {{code|字面量}} || 按'''原样'''输入的内容。
+|-
+| {{code|-{}-名称: 类型}} || 需要使用一个或一组合适的值来替换的参数。
+|-
+| {{code|<nowiki>字面量|字面量</nowiki>}} || 选择其中'''一个'''字面量填写。
+|}
+{| class="wikitable" style="text-align:center" data-description="修饰符"
+! 修饰符 !! 含义
+|-
+| {{code|-{}-<输入项>}} || 该输入项是'''必选的'''。
+|-
+| {{code|-{}-[输入项]}} || 该输入项是'''可选的'''。
+|-
+| {{code|-{}-省略号 ...}} || 在此wiki中表示省略了一些必选的部分。
+|}
+其中尖括号修饰符（{{code|-{}-<输入项>}}）一般不修饰{{code|字面量}}，必选的字面量不需添加修饰符。例如，<code>set</code>和<code><set></code>都表示必选的字面量，但后者不会在游戏中出现。而<code><size: int></code>是必选的参数。
+
+在{{el|je}}和{{el|be}}中，方括号都表示可选。被方括号修饰的输入项只能位于命令末尾，不会出现在命令中间。命令结尾允许并列出现多个方括号，如位于命令结尾的<code>a [b] [c]</code>表示只有<code>a</code>、<code>a b</code>和<code>a b c</code>三者是合法的。
+
+=== 限制条件 ===
+绝大部分命令要求执行上下文要有足够的[[权限等级]]，这就意味着在单人游戏中，大部分命令在启用作弊的情况下可以被使用，并且在多人游戏服务器中需要玩家是管理员时才能使用。详见[[权限等级]]。
+
+一些命令对当前的游戏和世界有限制。
+* '''无'''：无限制条件。
+* '''启用作弊'''：仅适用于基岩版。当由'''服务端或脚本'''（控制台、[[命令/schedule|计划执行的函数]]、[[函数|tick.json中的函数]]）、命令方块或命令方块矿车执行时，无论是否启用作弊均可执行相应命令。当以其他方式执行时，相应命令仅在存档启用作弊时才可用。禁用作弊后，除非由服务端或脚本、命令方块或命令方块矿车执行，否则即使执行者具有较高的[[权限等级]]也无法使用相应命令。
+** {{in|je}}作弊影响玩家的[[权限等级]]。权限等级还受其他因素的影响，只要拥有足够高的权限等级，无论此存档是否开启作弊，玩家都可以使用相应命令。
+* '''仅专用服务器'''：此命令只能在专用服务器中执行。
+* '''非专用服务器'''：此命令不能在专用服务器中执行。
+
+==== 作弊 ====
+[[创建新的世界]]时，可以通过{{only|je|for=“{{tp|selectWorld.allowCommands.new}}”}}或{{only|be|for=“{{tr|无敌模式|作弊}}”}}选项启用作弊。
+
+{{in|je}}创建新的世界时的“{{tp|selectWorld.allowCommands.new}}”选项仅影响离线单人世界的玩家或局域网世界的所有者。{{tp|menu.shareToLan}}时的“{{tp|selectWorld.allowCommands.new}}”选项会影响局域网世界中的所有玩家。
+
+{{in|je}}若当前的离线单人游戏未开启作弊，可在公开目前的游戏至局域网时将“{{tp|selectWorld.allowCommands.new}}”设为开而暂时开启作弊。若要永久开启作弊，必须修改[[level.dat]]文件。
+
+{{in|be}}若世界不处于[[极限模式]]等情况下，作弊便可以使用设置菜单中的选项切换。开启作弊会导致玩家在该世界永远无法获得[[成就]]，即使后来再关闭作弊也一样。
+
+=== 参数类型 ===
+{{main|参数类型}}
+命令的参数有不同的参数类型。[[坐标]]、[[目标选择器]]、[[SNBT]]、[[文本组件]]等是参数中常用的格式。
+
+=== 解析与执行 ===
+游戏服务端处理命令的过程分为'''解析（Parsing）'''和'''执行（Execution）'''两个阶段。在解析阶段，游戏将字符串识别为某个命令，并检查命令是否完整以及参数被是否正确地指定。在执行阶段，命令发挥其功能。
+
+当玩家在聊天框、[[命令方块]]或者[[命令方块矿车]]中输入命令时，命令也会先在'''客户端'''解析，以提供自动补全并帮助玩家提前发现错误。
+* 当在聊天栏输入参数时，若一个参数无法'''被客户端'''解析，则会向玩家发出提示。然而，能被客户端解析，并不能保证此参数能被服务端解析。
+** {{in|je}}若某一个参数无法被客户端解析，该参数及之后的所有部分都将被标记为红色，聊天栏上方会显示语法错误信息。
+** {{in|be}}若某一个参数无法被客户端解析，则语法提示中的下一个参数将从灰色变为白色。若已输入所有参数（包括可选参数），那么整个语法提示都将从白色变为灰色。
+* {{in|je}}在[[命令方块]]中输入命令也有如上的行为。{{in|be}}在[[命令方块]]中输入命令只会提供自动补全而无语法提示。
+* {{in|je}}在聊天框输入命令时，若某两个参数之间存在多个空格，行为同上，但会在执行时和命令历史中将其修正为单个空格。
+
+{{IN|bedrock}}当在一个命令方块中输入命令，并在关闭命令方块界面后，命令立即在服务端进行解析。若无法解析，会把一个错误信息输出到命令方块的输出框中。
+
+当尝试执行一个无法解析的命令时，游戏将显示错误信息。
+* {{in|je}}提示信息的末尾为“''{{tp|command.context.here}}''”。
+* {{in|be}}提示信息为“{{tr|未知的命令|不明的指令}}”或“{{tr|语法错误：意外的“''错误''”：出现在“''错误所在位置''”|語法錯誤：預期外的「''錯誤''」：於「''錯誤所在位置''」}}”。
+
+[[函数]]中的命令会在加载函数时全部解析，如有任一行命令无法解析，则此函数将无法被加载到游戏中。{{in|je}}宏行则是在函数尝试运行时再根据提供的参数进行解析，详见{{slink|Java版函数#宏}}和{{slink|Java版函数#加载与解析}}。
+
+{{in|be}}如果脚本中存在无法解析的命令，则在尝试执行该命令时会抛出错误。
+
+==== 输出 ====
+命令在尝试执行时会产生'''输出值（Output）'''。输出值包括'''成功次数（Success Count）'''和{{only|je|for='''储存值（Stored Values）'''}}。
+
+成功次数是指命令在命令方块{{only|be|for=或脚本}}中执行时传出的值。传给命令方块后，成功次数可以由背对命令方块的红石比较器检测（两者可间隔一个[[红石导体]]方块），比较器的输入信号强度等于最后一次执行的命令的成功次数。即便命令方块取消激活，成功次数依旧保留，直到再次执行命令，因此比较器能够持续接收同一信号强度的输入。{{in|je}}无法在命令方块中执行的命令没有成功次数。{{in|be}}即使该命令无法被命令方块或脚本执行，它依旧存在成功次数，只不过无法获取。{{in|je}}命令的成功次数通常是0或1，唯一例外是{{cmd|execute}}命令。{{in|be}}成功次数为0到2,147,483,647（含）之间的整数，与所执行的命令有关（例如，被命令所影响的玩家数、改变的方块数等）。
+
+{{in|je}}储存值有两个：'''{{cd|success}}值'''和'''{{cd|result}}值'''，是{{cmd|execute}}命令在执行其他命令的过程中，其他命令传给{{cmd|execute}}命令的值。这两个值可以由{{cmd|execute}}命令中的{{cd|store}}子命令储存到指定位置。{{cd|success}}值只能为0或1。{{cd|result}}则是一个整数（若不是，则会被向下取整）。所有命令在执行后都有这两个储存值，除了两个例外：{{cmd|execute}}本身在不包含<code>if</code>或<code>unless</code>子命令时没有这两个储存值；{{cmd|function}}命令在特定情况下没有这两个储存值。
+
+==== 结果{{anchor|效果}} ====
+尝试执行命令后会产生不同的结果，包括无法解析、执行失败、执行成功、{{only|je|for=Void、执行中断、执行出错}}。
+
+; 无法解析
+: 在服务端解析命令时，当前游戏、世界或执行上下文不满足命令的[[#限制条件|限制条件]]，或输入的命令不完整，或存在无法解析的参数，此命令就无法解析。
+
+; 执行出错{{only|je}}
+: 若一个命令执行出错，则意味着该命令存在明显的漏洞。此时会输出“{{tp|command.failed}}”，并可能会出现其他的副作用（如[[崩溃]]），{{cmd|execute}}命令也会被中途打断，导致分支未能全部执行。
+: 从技术上来说，执行出错即该命令在执行时抛出了除<samp>brigadier.exceptions.CommandSyntaxException</samp>以外的异常。
+
+; Void{{only|je}}
+: 仅存在于{{cmd|function}}命令。命令没有{{cd|result}}值和{{cd|success}}值可供{{cmd|execute store}}命令存储时，称该命令执行结果为Void（无返回值）。
+
+; 执行中断{{only|je}}
+: 仅存在于{{cmd|execute}}命令。即在执行一个{{cmd|execute}}命令的过程中，[[命令/execute#执行分支|执行分支]]数量变成了0，在执行末尾的子命令前就已经停止，称为执行中断。
+: 比如在命令方块中执行{{cmd|execute as @s run ...}}，由于命令方块不是实体，无法被[[目标选择器]]选中，因此该命令中断于{{cd|as @s}}。
+
+; 执行失败和执行成功
+: 若命令不是无法解析、执行错误、Void或执行中断，则该命令的结果可分为执行失败或执行成功。若此时该命令的成功次数为0，则命令执行失败。否则，命令执行成功。
+:* {{in|je}}如果该命令无法被命令方块执行，则当{{cmd|execute store success ... run ...}}储存<code>0</code>时命令失败，当{{cmd|execute store success ... run ...}}储存<code>1</code>时命令成功。
+:* {{in|be}}即使该命令无法被命令方块或脚本执行，它依旧存在成功次数，只不过无法获取。
+: 请注意：
+:*只有在命令不是无法解析、执行错误、Void或执行中断时，才存在执行失败和执行成功。尽管当无法解析、执行出错、Void或执行中断时，命令的成功次数为0，但它不被视为执行失败，也不是执行成功。
+:*并非所有的“执行成功”的命令都会使世界有所改变，“执行失败”的命令也不意味着命令什么也没有做。
+
+== 命令-{}-列表及其概述 ==
+{{anchor|命令列表及其概述}}
+下表列出了所有可用命令，包括即将到来的命令。点击表头可以排序。
+
+点击每一{{tr|行|列}}第一格中的链接可以查看命令的具体用法。
+
+=== Java版 ===
+{| class="sortable wikitable stikitable collapsible" style="text-align:center;width:100%"
+! style="text-align:left;"|命令
+! style="text-align:left;" class="unsortable"|描述
+! style="padding:0.4em;"|{{Tooltip|minetip=1|需要的[[权限等级]]|执行命令所需的权限等级}}
+! style="padding:0.4em;"|{{Tooltip|minetip=1|仅[[Java版网络协议#逻辑端|专用服务端]]|仅在专用服务端中可用的命令}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|blocks}}|修改或查询方块的命令}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|mobs}}|修改或查询实体的命令（生物、掉落物等）}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|player}}|修改或查询玩家的命令}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|default}}|修改或查询世界的命令}}
+{{CommandRow|advancement|添加、移除或查询玩家的[[进度]]。
+|perm=2|player=1}}
+{{CommandRow|attribute|修改或查询[[生物]]的[[属性]]。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|ban|将玩家加入封禁列表。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|ban-ip|将IP地址加入封禁列表。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|banlist|显示封禁列表。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|bossbar|修改或查询Boss栏。
+|perm=2|player=1|world=1}}
+{{CommandRow|clear|从玩家[[物品栏]]中删除物品。
+|perm=2|player=1}}
+{{CommandRow|clone|将特定区域的方块复制到另一处。
+|perm=2|blocks=1}}
+{{CommandRow|damage|对实体造成伤害。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|data|获取、合并、修改或移除[[方块实体]]、[[实体]]或[[命令存储存储格式|命令存储]]的NBT数据。
+|perm=2|blocks=1|mobs=1|player=1}}
+{{CommandRow|datapack|控制或列出加载的数据包。
+|perm=2|world=1}}
+{{CommandRow|debug|开始或结束{{tr|刻分析器|刻點分析器}}或对[[Java版函数|函数]]进行调试。
+|perm=3}}
+{{CommandRow|defaultgamemode|更改默认的[[游戏模式]]。
+|perm=2|world=1}}
+{{CommandRow|deop|撤销玩家的管理员权限。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|dialog|向玩家展示或清除[[对话框]]。
+|perm=2|player=1}}
+{{CommandRow|difficulty|设置[[难度]]等级。
+|perm=2|world=1}}
+{{CommandRow|effect|添加或移除[[状态效果]]。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|enchant|为玩家当前所选物品添加[[魔咒]]。
+|perm=2|player=1}}
+{{CommandRow|execute|检测、改变[[命令上下文]]并执行命令。
+|perm=2|blocks=1|mobs=1|player=1|world=1}}
+{{CommandRow|experience|{{cmd|xp}}的替代命令，给予玩家经验。
+|perm=2|player=1}}
+{{CommandRow|fetchprofile|获取玩家[[档案]]。
+|perm=2|player=1}}
+{{CommandRow|fill|填充某个区域为特定方块。
+|perm=2|blocks=1}}
+{{CommandRow|fillbiome|将区域设置为指定生物群系。
+|perm=2|world=1}}
+{{CommandRow|forceload|强制加载区块或取消区块强制加载。
+|perm=2|world=1}}
+{{CommandRow|function|运行[[函数]]。
+|perm=2|world=1}}
+{{CommandRow|gamemode|更改玩家的[[游戏模式]]。
+|perm=2|player=1}}
+{{CommandRow|gamerule|更改或查询[[游戏规则]]。
+|perm=2|world=1}}
+{{CommandRow|give|给予玩家物品。
+|perm=2|player=1}}
+{{CommandRow|help|{{cmd|?}}的替代命令，用于查询命令语法。
+|perm=0|player=1}}
+{{CommandRow|item|修改[[方块]]或[[实体]]物品栏内的物品。
+|perm=2|blocks=1|mobs=1|player=1}}
+{{CommandRow|jfr|开始或结束JFR分析。
+|perm=4}}
+{{CommandRow|kick|将玩家踢出服务器。
+|perm=3|player=1}}
+{{CommandRow|kill|清除[[实体]]。	
+|perm=2|mobs=1|player=1}}
+{{CommandRow|list|列出服务器中的玩家。	
+|perm=0|player=1}}
+{{CommandRow|locate|显示最近的给定结构、[[生物群系]]或[[兴趣点]]的坐标。
+|perm=2|blocks=1|mobs=1|world=1}}
+{{CommandRow|loot|将指定的战利品放入物品栏或生成在世界中。
+|perm=2|blocks=1|mobs=1|player=1}}
+{{CommandRow|me|显示一条关于命令执行者自己的信息。
+|perm=0|player=1}}
+{{CommandRow|msg|{{cmd|tell}}和{{cmd|w}}的替代命令，向另一玩家发送私信。
+|perm=0|player=1}}
+{{CommandRow|op|授予玩家管理员权限。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|pardon|解封玩家。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|pardon-ip|从封禁列表中解封指定IP。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|particle|创建粒子。
+|perm=2|player=1}}
+{{CommandRow|perf|记录并保存性能分析数据（10秒内）。
+|perm=4|dedicated=1|world=1}}
+{{CommandRow|place|在满足条件的指定位置放置一个[[已配置的地物]]、拼图或[[结构]]。
+|perm=2|blocks=1|world=1}}
+{{CommandRow|playsound|播放[[音效]]。
+|perm=2|player=1}}
+{{CommandRow|posteffect|tag={{upcoming|JE 26.3}}|管理玩家使用的[[着色器#后处理管线|后处理效果]]。
+|perm=2|player=1}}
+{{CommandRow|publish|向局域网开放单人游戏世界。
+|perm=4|dedicated=0|world=1}}
+{{CommandRow|random|生成随机值或控制随机序列。
+|perm=0（不涉及序列）<br>2（涉及序列）}}
+{{CommandRow|recipe|给予或剥夺合成配方。
+|perm=2|player=1}}
+{{CommandRow|reload|从硬盘中重新加载数据包中的函数、进度等文件（不包括魔咒等需要重新进入世界加载的内容）。
+|perm=2|world=1}}
+{{CommandRow|return|在函数内跳过后续命令并更改函数返回值。
+|perm=2}}
+{{CommandRow|ride|控制一个实体的骑乘状态。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|rotate|更改实体的旋转角度。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|save-all|保存服务器世界状态到硬盘。
+|perm=4|dedicated=1|world=1}}
+{{CommandRow|save-off|关闭服务器自动保存。
+|perm=4|dedicated=1|world=1}}
+{{CommandRow|save-on|开启服务器自动保存。
+|perm=4|dedicated=1|world=1}}
+{{CommandRow|say|向多个玩家发送消息。
+|perm=2|player=1}}
+{{CommandRow|schedule|安排函数在特定的游戏刻后运行。
+|perm=2}}
+{{CommandRow|scoreboard|管理记分板的{{tr|记分项|目標|記分項}}和分数持有者。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|seed|显示世界[[种子（世界生成）|种子]]。
+|perm=0（仅集成服务端）<br>2（仅专用服务端）|world=1}}
+{{CommandRow|setblock|将方块替换为其他方块。
+|perm=2|blocks=1}}
+{{CommandRow|setidletimeout|设置无操作玩家被踢出的延时。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|setworldspawn|设置[[世界出生点]]。
+|perm=2|world=1}}
+{{CommandRow|spawnpoint|设置一个玩家的出生地点。
+|perm=2|player=1}}
+{{CommandRow|spectate|使一个处于旁观模式的玩家旁观一个实体。
+|perm=2|player=1}}
+{{CommandRow|spreadplayers|将实体传送到随机位置。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|stop|关闭服务器。
+|perm=4|world=1}}
+{{CommandRow|stopsound|停止声音播放。|perm=2|player=1}}
+{{CommandRow|stopwatch|管理[[秒表存储格式#秒表|秒表]]。
+|perm=2}}
+{{CommandRow|swing|控制[[实体]]的手臂挥动。
+|perm=2|mobs=1}}
+{{CommandRow|summon|生成一个实体。
+|perm=2|mobs=1}}
+{{CommandRow|tag|修改实体的标签。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|team|修改队伍。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|teammsg|{{cmd|tm}}的替代命令，指定要发送给队伍的消息。
+|perm=0|player=1}}
+{{CommandRow|teleport|{{cmd|tp}}的替代命令，传送实体。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|tell|{{cmd|msg}}和{{cmd|w}}的替代命令，向另一个玩家发送私信。
+|perm=0|player=1}}
+{{CommandRow|tellraw|向玩家发送以[[文本组件]]表示的消息。
+|perm=2|player=1}}
+{{CommandRow|test|管理和运行[[游戏测试]]。
+|perm=2}}
+{{CommandRow|tick|停止或开始游戏刻的流逝，或更改游戏刻速率。
+|perm=3|world=1}}
+{{CommandRow|time|更改或查询游戏中的世界时间。
+|perm=2|world=1}}
+{{CommandRow|title|管理屏幕上的标题。
+|perm=2|player=1}}
+{{CommandRow|tm|{{cmd|teammsg}}命令的别名，指定要发送给队伍的消息。
+|perm=0|player=1}}
+{{CommandRow|tp|{{cmd|teleport}}命令的别名，传送实体。
+|perm=2|mobs=1|player=1}}
+{{CommandRow|transfer|将玩家转移到另一个服务器上。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|trigger|设置一个触发器。
+|perm=0|player=1}}
+{{CommandRow|unpublish|停止将单人游戏世界开放到[[多人游戏]]。
+|perm=4|dedicated=0|world=1}}
+{{CommandRow|version|输出游戏版本信息。
+|perm=0（仅集成服务端）<br>2（仅专用服务端）|player=1}}
+{{CommandRow|w|{{cmd|msg}}和{{cmd|tell}}命令的别名，向另一玩家发送私信。
+|perm=0|player=1}}
+{{CommandRow|waypoint|列出或更改路径点。
+|perm=2|player=1}}
+{{CommandRow|weather|设置[[天气]]。
+|perm=2|world=1}}
+{{CommandRow|whitelist|管理服务器白名单。
+|perm=3|dedicated=1|player=1}}
+{{CommandRow|worldborder|管理[[世界边界]]。
+|perm=2|world=1}}
+{{CommandRow|xp|{{cmd|experience}}命令的别名，增加或减少一个玩家的[[经验]]。
+|perm=2|player=1}}
+|}
+
+==== 调试命令 ====
+{{debug feature warning|section=1}}
+
+以下命令仅当启用[[调试工具#DEV_COMMANDS|调试工具<code>MC_DEBUG_DEV_COMMANDS</code>]]时可用。
+{| class="sortable wikitable stikitable" style="text-align:center;width:100%"
+! style="text-align:left;"|命令
+! style="text-align:left;" class="unsortable"|描述
+! style="padding:0.4em;"|{{Tooltip|minetip=1|需要的[[权限等级]]|执行命令所需的权限等级}}
+! style="padding:0.4em;"|{{Tooltip|minetip=1|仅专用服务端|仅在专用服务端中可用的命令}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|blocks}}|修改或查询方块的命令}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|mobs}}|修改或查询实体的命令（生物、掉落物等）}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|player}}|修改或查询玩家的命令}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|default}}|修改或查询世界的命令}}
+{{CommandRow|warden_spawn_tracker|设置[[幽匿尖啸体]]生成[[监守者]]之前应接收到多少次振动。
+|perm=2|player=1}}
+{{CommandRow|debugpath|计算并测试指定生物是否能够[[寻路]]到指定位置。
+|perm=2|mobs=1}}
+{{CommandRow|debugmobspawning|指定位置上进行一次生物的[[周期生成]]。
+|perm=2}}
+{{CommandRow|raid|管理执行者处的[[袭击]]。
+|perm=3}}
+{{CommandRow|serverpack|配置服务端指定资源包。
+|perm=2}}
+{{CommandRow|spawn_armor_trims|生成所有不同图案、材料和盔甲类型可能组合出的盔甲纹饰。
+|perm=2}}
+{{CommandRow|debugconfig|调试网络阶段的[[Java版网络协议#网络阶段|配置阶段]]。
+|perm=3|multiplay=only}}
+|}
+
+以下命令仅当启用[[调试工具#CHASE_COMMAND|调试工具<code>MC_DEBUG_CHASE_COMMAND</code>]]时可用。
+{| class="sortable wikitable stikitable" style="text-align:center;width:100%"
+! style="text-align:left;"|命令
+! style="text-align:left;" class="unsortable"|描述
+! style="padding:0.4em;"|{{Tooltip|minetip=1|需要的[[权限等级]]|执行命令所需的权限等级}}
+! style="padding:0.4em;"|{{Tooltip|minetip=1|仅专用服务端|仅在专用服务端中可用的命令}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|blocks}}|修改或查询方块的命令}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|mobs}}|修改或查询实体的命令（生物、掉落物等）}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|player}}|修改或查询玩家的命令}}
+! style="padding:0.2em;"|{{Tooltip|minetip=1|{{EnvSprite|default}}|修改或查询世界的命令}}
+{{CommandRow|chase|同步不同游戏实例的玩家的移动。
+|perm=0}}
+|}
+
+=== 基岩版和教育版 ===
+{| class="wikitable sortable stikitable collapsible" style="text-align:center;width:100%"
+! style="text-align:left;"|命令
+! style="text-align:left;" class="unsortable"|描述
+! {{Tooltip|minetip=1|BE|基岩版可用}}
+! {{Tooltip|minetip=1|EDU|教育版可用}}
+! {{Tooltip|minetip=1|需要的[[权限等级]]|执行命令所需的权限等级}}
+! {{Tooltip|minetip=1|仅专用服务端|仅在专用服务端中可用的指令}}
+! {{Tooltip|minetip=1|{{EnvSprite|blocks}}|修改或查询方块的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|mobs}}|修改或查询实体的命令（生物、掉落的物品等）}}
+! {{Tooltip|minetip=1|{{EnvSprite|player}}|修改或查询玩家的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|default}}|修改或查询世界的命令}}
+{{CommandRow|?|{{cmd|help}}命令的别名，提供命令使用帮助。
+|be=1|edu=1|perm=0}}
+{{CommandRow|ability|赋予或剥夺[[玩家]]的能力。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|allowlist|{{cmd|whitelist}}命令的别名。管理服务器白名单。
+|be=1|edu=0|perm=4|dedicated=1|player=1}}
+{{CommandRow|aimassist|修改玩家的瞄准辅助。
+|be=1|edu=0|perm=1|player=1}}
+{{CommandRow|alwaysday|{{cmd|daylock}}命令的别名，锁定或解锁[[昼夜更替|日夜循环]]。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|camera|切换到自定义相机视角并淡出屏幕。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|camerashake|启用镜头抖动效果。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|changesetting|更改正在运行的服务器的设置。
+|be=1|edu=0|perm=4|dedicated=1}}
+{{CommandRow|clear|从玩家[[物品栏]]中删除物品。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|clearspawnpoint|从世界中移除出生点。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|clone|将特定区域的方块复制到另一处。
+|be=1|edu=1|perm=1|blocks=1}}
+{{CommandRow|connect|{{cmd|wsserver}}命令的别名，连接至WebSocket服务器。
+|be=1|edu=1|perm=0（{{el|ee}}）<br>2（{{el|be}}） }}
+{{CommandRow|controlscheme|修改相机预设的控制方案。
+|be=1|edu=0|perm=1|mobs=1|player=1}}
+{{CommandRow|damage|对指定实体造成伤害。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|daylock|{{cmd|alwaysday}}命令的别名，锁定或解锁[[昼夜更替|日夜循环]]。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|dedicatedwsserver|尝试连接一个WebSocket服务器。
+|be=1|edu=0|perm=0|dedicated=1}}
+{{CommandRow|deop|撤销玩家的管理员权限。
+|be=1|edu=1|perm=2|player=1}}
+{{CommandRow|dialogue|打开一个玩家的NPC对话。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|difficulty|设置[[难度]]等级。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|effect|添加或移除[[状态效果]]。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|enchant|给实体的物品添加[[魔咒]]。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|event|用于触发实体的事件。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|execute|更改执行环境并执行另一条命令。
+|be=1|edu=1|perm=1|blocks=1|mobs=1|player=1|world=1}}
+{{CommandRow|fill|在某个区域填充特定方块。
+|be=1|edu=1|perm=1|blocks=1}}
+{{CommandRow|fog|用于更改玩家当前的雾设置。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|function|运行一个[[函数]]。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|gamemode|更改玩家的[[游戏模式]]。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|gamerule|更改或查询[[游戏规则]]。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|gametest|用于测试GameTest功能。
+|be=1|edu=0|perm=1}}
+{{CommandRow|gametips|启用或禁用此设备上的[[游戏提示]]。
+|be=1|edu=0|perm=0}}
+{{CommandRow|give|给予玩家物品。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|help|{{cmd|?}}命令的别名，提供命令使用帮助。
+|be=1|edu=1|perm=0}}
+{{CommandRow|hud|修改[[HUD]]的可见性。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|immutableworld|设置世界的不可变状态。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|inputpermission|对玩家的权限状态进行指定操作。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|kick|将玩家踢出服务器。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|kill|清除[[实体]]。	
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|list|列出服务器中的玩家。
+|be=1|edu=1|perm=0|player=1}}
+{{CommandRow|locate|显示最近的给定结构、[[生物群系]]坐标。
+|be=1|edu=1|perm=1|blocks=1|mobs=1|world=1}}
+{{CommandRow|loot|将指定的战利品放入物品栏或生成在世界中。
+|be=1|edu=1|perm=1|blocks=1|mobs=1|player=1}}
+{{CommandRow|me|显示一条关于命令执行者自己的信息。
+|be=1|edu=1|perm=0|player=1}}
+{{CommandRow|mobevent|控制或查询允许运行的生物事件。
+|be=1|edu=1|perm=1|mobs=1}}<!-- ? -->
+{{CommandRow|msg|{{cmd|tell}}和{{cmd|w}}命令的别名，向另一玩家发送私信。
+|be=1|edu=1|perm=0|player=1}}
+{{CommandRow|music|设置玩家是否能控制当前播放的[[音乐]]。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|op|授予玩家管理员权限。
+|be=1|edu=1|perm=2|player=1}}
+{{CommandRow|ops|{{cmd|permission}}命令的别名，重载并应用权限。
+|be=1|edu=1|perm=4|dedicated=1|player=1}}
+{{CommandRow|packstack|显示[[附加包|资源包]]和[[行为包]]数据。
+|be=1|edu=1|perm=0}}
+{{CommandRow|particle|创建[[粒子]]。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|permission|{{cmd|ops}}命令的别名，重载并应用权限。
+|be=1|edu=1|perm=4|dedicated=1|player=1}}
+{{CommandRow|place|在满足条件的指定位置放置一个[[已配置的地物]]、拼图或[[结构]]。
+|be=1|edu=0|perm=2|blocks=1|world=1}}
+{{CommandRow|playanimation|播放一次性[[动画]]。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|playsound|播放[[音效]]。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|project|该命令包含用于管理[[编辑器]]项目的工具。
+|be=1|edu=0|perm=1}}
+{{CommandRow|recipe|给予或剥夺合成[[配方]]。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|reload|从硬盘中重新加载[[行为包]]中的函数与脚本。
+|be=1|edu=1|perm=2|world=1}}
+{{CommandRow|reloadconfig|重新加载与变量、权限等相关的配置文件。
+|be=1|edu=0|perm=4|world=1}}
+{{CommandRow|reloadpacketlimitconfig|重新加载{{filename|packetlimitconfig.json}}配置文件。
+|be=1|edu=0|perm=4|world=1}}
+{{CommandRow|remove|移除[[实体]]。<!-- ? -->
+|be=0|edu=1|perm=2|mobs=1}}
+{{CommandRow|replaceitem|替换物品栏中的物品。
+|be=1|edu=1|perm=1|blocks=1|mobs=1|player=1}}
+{{CommandRow|resourceuri|设定或清除暂停菜单下的资源链接。
+|be=0|edu=1|perm=1|world=1}}
+{{CommandRow|ride|控制一个实体的[[骑乘]]状态。可以让坐骑脱离骑乘者或者召唤一个坐骑或骑乘者。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|save|准备备份，查询其状态或恢复。
+|be=1|edu=0|perm=4|world=1}}
+{{CommandRow|say|向多个玩家发送消息。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|schedule|安排函数在特定的游戏刻后运行。
+|be=1|edu=0|perm=1}}
+{{CommandRow|scoreboard|管理[[记分板]]的{{tr|记分项|目標|記分項}}和分数持有者。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|script|调试GameTest框架选项。
+|be=1|edu=1|perm=2}}
+{{CommandRow|scriptevent|通过ID和消息来触发脚本事件。
+|be=1|edu=1|perm=1}}
+{{CommandRow|sendshowstoreoffer|向玩家发送显示商店特惠的请求。
+|be=1|edu=0|perm=4}}
+{{CommandRow|setblock|将方块替换为其他方块。
+|be=1|edu=1|perm=1|blocks=1}}
+{{CommandRow|setmaxplayers|设置可加入游戏的玩家数量上限。
+|be=1|edu=1|perm=3|player=1}}
+{{CommandRow|setworldspawn|设置[[世界出生点]]。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|spawnpoint|设置一个玩家的出生地点。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|spreadplayers|将实体传送到随机位置。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|stop|关闭服务器。
+|be=1|edu=0|perm=4|world=1}}
+{{CommandRow|stopsound|停止[[音效]]。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|structure|无需结构方块即可保存和加载结构。
+|be=1|edu=1|perm=1|blocks=1|mobs=1|world=1}}
+{{CommandRow|summon|生成一个实体。
+|be=1|edu=1|perm=1|mobs=1|world=1}}
+{{CommandRow|tag|控制实体的标签。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|teleport|{{cmd|tp}}命令的别名，传送实体。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|tell|{{cmd|msg}}和{{cmd|w}}命令的别名，向另一个玩家发送私信。
+|be=1|edu=1|perm=0|player=1}}
+{{CommandRow|tellraw|向玩家发送[[JSON文本]]表示的消息。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|testfor|统计符合给定条件的实体。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|testforblock|检测某方块是否在某位置。
+|be=1|edu=1|perm=1|blocks=1}}
+{{CommandRow|testforblocks|检测两个区域中的方块是否相同。
+|be=1|edu=1|perm=1|blocks=1}}
+{{CommandRow|tickingarea|添加、删除或列出常加载区域。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|time|更改或查询游戏中的世界时间。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|title|管理屏幕上的标题。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|titleraw|使用JSON管理屏幕上的标题。
+|be=1|edu=1|perm=1|player=1}}
+{{CommandRow|toggledownfall|切换天气。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|tp|{{cmd|teleport}}命令的别名，传送实体。
+|be=1|edu=1|perm=1|mobs=1|player=1}}
+{{CommandRow|transfer|将玩家转移到另一个服务器上。
+|be=1|edu=1|perm=4|dedicated=1|player=1}}
+{{CommandRow|w|{{cmd|msg}}和{{cmd|tell}}命令的别名，向另一玩家发送私信。
+|be=1|edu=1|perm=0|player=1}}
+{{CommandRow|wb|{{cmd|worldbuilder}}命令的别名，给予能编辑受限制方块的能力。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|weather|设置天气。	
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|whitelist|{{cmd|allowlist}}命令的别名。管理服务器白名单。
+|be=1|edu=0|perm=4|dedicated=1|player=1}}
+{{CommandRow|worldbuilder|{{cmd|wb}}命令的别名，给予能编辑受限制方块的能力。
+|be=1|edu=1|perm=1|world=1}}
+{{CommandRow|wsserver|{{cmd|connect}}命令的别名，连接至WebSocket服务器。
+|be=1|edu=1|perm=0（{{el|ee}}）<br>2（{{el|be}}） }}
+{{CommandRow|xp|增加或减少一个玩家的[[经验]]。
+|be=1|edu=1|perm=1|player=1}}
+|}
+
+==== 隐藏命令 ====
+这类命令通常需要使用WebSocket服务器代为执行，在游戏界面中无法被执行。
+
+{| class="sortable wikitable stikitable collapsible collapsed" style="text-align:center;width:100%"
+! style="text-align:left;"|命令
+! class="unsortable" style="text-align:left;"|描述
+! {{Tooltip|minetip=1|BE|基岩版内可用的命令}}
+! {{Tooltip|minetip=1|EDU|教育版内可用的命令}}
+! {{Tooltip|minetip=1|BE及EDU权限等级|基岩版及教育版中执行命令所需的权限等级}}
+! {{Tooltip|minetip=1|仅专用服务端|仅在专用服务端中可用的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|blocks}}|编辑或查询方块的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|mobs}}|编辑或查询实体（生物和掉落物等）的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|player}}|编辑或查询玩家的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|default}}|编辑或查询世界的命令}}
+{{CommandRow|agent|控制智能体。
+|be=ws|edu=ws|perm=0{{only|ee|short=1}}<br>1{{only|be|short=1}}|mobs=1}}
+{{CommandRow|classroommode|允许编辑受限制的方块。
+|be=0|edu=1|perm=0}}
+{{CommandRow|clearrealmevents|清除世界数据中存储的所有Realms事件。
+|be=1|edu=0|perm=4}}
+{{CommandRow|closechat|如果聊天框已打开，则关闭它。
+|be=0|edu=1|perm=0}}
+{{CommandRow|closewebsocket|断开已连接的WebSocket服务器。
+|be=ws|edu=ws|perm=0}}
+{{CommandRow|code|启动代码编辑器。
+|be=0|edu=ws|perm=0}}
+{{CommandRow|codebuilder|设置一个玩家的代码编辑状态。
+|be=0|edu=1|perm=1}}
+{{CommandRow|codebuilder_actorinfo|{{info needed}}
+|be=1|edu=1|perm=1}}
+{{CommandRow|enableencryption|为当前WebSocket连接启用加密。
+|be=ws|edu=ws|perm=0}}
+{{CommandRow|getchunkdata|获得特定区块的数据。
+|be=0|edu=1|perm=3|world=1}}
+{{CommandRow|getchunks|获得已加载区块列表。
+|be=0|edu=1|perm=3|world=1}}
+{{CommandRow|geteduclientinfo|显示有关客户端的数据。
+|be=0|edu=1|perm=0}}
+{{CommandRow|geteduserverinfo|显示有关服务端的数据。
+|be=0|edu=1|perm=0|mlutiplayer=1}}
+{{CommandRow|getlocalplayername|显示本地玩家姓名。
+|be=1|edu=1|perm=0|player=1}}
+{{CommandRow|getspawnpoint|获得特定玩家的出生地点。
+|be=0|edu=1|perm=3|player=1}}
+{{CommandRow|gettopsolidblock|获得特定位置以下最高的非空气方块。
+|be=1|edu=1|perm=0{{only|ee|short=1}}<br>1{{only|be|short=1}}|block=1 }}
+{{CommandRow|globalpause|查询或设置所有玩家的世界暂停状态。
+|be=0|edu=1|perm=3|player=1}}
+{{CommandRow|lesson|处理教育版课程报告。
+|be=0|edu=1|perm=0}}
+{{CommandRow|listd|回傳当前在线玩家及其信息。
+|be=1|edu=ws|perm=3|player=1}}
+{{CommandRow|querytarget|回傳指定实体的详细信息。
+|be=1|edu=ws|perm=0{{only|ee|short=1}}<br>2{{only|be|short=1}}|mobs=1|player=1}}
+{{CommandRow|sendshowstoreoffer|向玩家发送显示商店特惠的请求。
+|be=1|edu=0|perm=4}}
+{{CommandRow|spawnitem|在特定位置生成一个物品实体。
+|be=0|edu=1|perm=0|mobs=1}}
+{{CommandRow|takepicture|从一个玩家的角度拍摄另一个玩家的照片。
+|be=0|edu=1|perm=1|world=1}}
+|}
+
+=== 已移除的命令 ===
+{| class="sortable wikitable stikitable collapsible collapsed" style="text-align:center;width:100%"
+! style="text-align:left;" | 命令
+! class="unsortable" style="text-align:left;" | 描述
+! 移除版本
+! class="unsortable" style="text-align:left;" | 移除原因
+! {{Tooltip|minetip=1|BE|基岩版内可用的命令}}
+! {{Tooltip|minetip=1|EDU|教育版内可用的命令}}
+! {{Tooltip|minetip=1|JE|Java版内可用的命令}}
+! {{Tooltip|minetip=1|JE权限等级|Java版中执行命令所需的权限等级}}
+! {{Tooltip|minetip=1|BE及EDU权限等级|基岩版及教育版中执行命令所需的权限等级}}
+! {{Tooltip|minetip=1|仅专用服务端|仅在专用服务端中可用的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|blocks}}|编辑或查询方块的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|mobs}}|编辑或查询实体（生物和掉落物等）的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|player}}|编辑或查询玩家的命令}}
+! {{Tooltip|minetip=1|{{EnvSprite|default}}|编辑或查询世界的命令}}
+|-
+| style="text-align:left;" | {{cmd|achievement}}
+| style="text-align:left;" | 给予或剥夺玩家的成就。
+| data-sort-value="4 1.12 17w13a" | {{nowrap|[[Java版1.12]]}}<br>（[[17w13a]]）
+| style="text-align:left;" | [[Java版1.12]]中，[[成就/Java版]]系统被[[进度]]替代。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|player}}}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|banip}}
+| style="text-align:left;" | 将IP地址加入封禁列表。
+| data-sort-value="2 0.31" | {{nowrap|[[Java版Indev 0.31]]}}
+| style="text-align:left;" | 被整理进{{cmd|ban-ip}}。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+|  '''?''' || {{tc|-}} || {{tc|yes}}
+| {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|player}}}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|blockdata}}
+| style="text-align:left;" | 修改方块的NBT标签。
+| data-sort-value="4 1.13 17w47a" | {{nowrap|[[Java版1.13]]}}<br>（[[17w47a]]）
+| style="text-align:left;" | 被整理进{{cmd|data}}。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|yes|{{EnvSprite|blocks}}}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|broadcast}}
+| style="text-align:left;" | 在整个服务器中广播消息。
+| data-sort-value="1 0.0.16a_01" | {{nowrap|[[Java版Classic 0.0.16a_01]]}}
+| style="text-align:left;" | 被整理进{{cmd|say}}。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|1}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|chunk}}
+| style="text-align:left;" | 控制一个区块是否常加载。
+| data-sort-value="4 1.13.1 pre1" | {{nowrap|[[Java版1.13.1-pre1]]}}
+| style="text-align:left;" | 被整理进{{cmd|forceload}}。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|default}}}}
+|-
+| style="text-align:left;" | {{cmd|clearfixedinv}}
+| style="text-align:left;" | 清除固定的物品栏。
+| data-sort-value="5 0.16.0" | {{nowrap|[[携带版Alpha 0.16.0]]}}<br>（[[携带版0.16.0.b2|build 2]]）
+| '''?'''
+| {{tc|-|已移除}} || {{tc|-|已移除}} || {{tc|-}}
+| {{tc|-}} || '''?''' || '''?'''
+| {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|player}}}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|detect}}
+| style="text-align:left;" | 当限制条件满足时执行命令。
+| data-sort-value="5 1.2.0" | {{nowrap|[[基岩版1.2.0]]}}
+| style="text-align:left;" | 被整理进{{cmd|execute}}。
+| {{tc|-|已移除}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|1}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|entitydata}}
+| style="text-align:left;" | 修改实体的NBT标签。
+| data-sort-value="4 1.13 17w45b" | {{nowrap|[[Java版1.13]]}}<br>（[[17w45b]]）
+| style="text-align:left;" | 被整理进{{cmd|data}}。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|{{EnvSprite|mobs}}}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{nowrap|{{cmd|executeasself}}}}
+| style="text-align:left;" | 执行一个命令。
+| data-sort-value="5 ?" | '''?'''
+| '''?'''
+| {{tc|-|已移除}} || {{tc|-|已移除}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|0}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|home}}
+| style="text-align:left;" | 将玩家召唤到[[世界出生点]]。
+| data-sort-value="3 1.2.5" | {{nowrap|[[Java版Alpha v1.2.5]]}}
+| style="text-align:left;" | 世界生成点现在基于生成区块了，而不是单一位置。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|0}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|iron}}
+| style="text-align:left;" | 掉落4块铁锭。
+| data-sort-value="4 1.2.0" | {{nowrap|[[Java版Alpha v1.2.0]]}}
+| style="text-align:left;" | 疑似调试用途。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+|  '''?''' || {{tc|-}} || {{tc|yes}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|locatebiome}}
+| style="text-align:left;" | 显示最近的给定生物群系的坐标。
+| data-sort-value="4 1.19 22w19a" | {{nowrap|[[Java版1.19]]}}<br>（[[22w19a]]）
+| style="text-align:left;" | 被整理进{{cmd|locate}}。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|default}}}}
+|-
+| style="text-align:left;" | {{cmd|mixer}}
+| style="text-align:left;" | Mixer交互性控制。
+| data-sort-value="5 1.16.210.58" | {{nowrap|[[基岩版1.16.210]]}}<br>（[[基岩版1.16.210.58|1.16.210.58]]）
+| style="text-align:left;" | Mixer已停止运营。
+| {{tc|-|已移除}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|0}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|placefeature}}
+| style="text-align:left;" | 在满足条件的指定位置放置一个已配置地物。
+| data-sort-value="4 1.19 22w18a" | {{nowrap|[[Java版1.19]]}}<br>（[[22w18a]]）
+| style="text-align:left;" | 被整理进{{cmd|place}}。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|yes|{{EnvSprite|blocks}}}} || {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|default}}}}
+|-
+| style="text-align:left;" | {{cmd|position}}
+| style="text-align:left;" | 控制是否在HUD中显示玩家坐标。
+| data-sort-value="6 1.0.21" | {{nowrap|[[教育版1.0.21]]}}
+| style="text-align:left;" | 被整理进{{cmd|gamerule}}。
+| {{tc|-}} || {{tc|-|已移除}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|0}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|replaceitem}}
+| style="text-align:left;" | 替换物品栏中的物品。
+| data-sort-value="4 1.17 20w46a" | {{nowrap|[[Java版1.17]]}}<br>（[[20w46a]]）
+| style="text-align:left;" | 被整理进{{cmd|item}}。
+| {{tc|yes|可用}} || {{tc|yes|可用}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|yes|{{EnvSprite|blocks}}}} || {{tc|yes|{{EnvSprite|mobs}}}} || {{tc|yes|{{EnvSprite|player}}}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|resupply}}
+| style="text-align:left;" | 村民重新补给。
+| data-sort-value="9 ?" | '''?'''
+| '''?'''
+| {{tc|-|已移除}}|| {{tc|-}} || {{tc|-}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|{{EnvSprite|mobs}}}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|set_movement_authority}}
+| style="text-align:left;" | 控制客户端或服务端检查玩家的移动。
+| data-sort-value="5 1.21.60.27" | {{nowrap|[[基岩版1.21.60]]}}<br>（[[基岩版1.21.60.27|1.21.60.27]]）
+| '''?'''
+| {{tc|-|已移除}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|1}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|player}}}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|setfixedinvslot}}
+| style="text-align:left;" | 以一个物品设置固定的物品栏。
+| data-sort-value="5 0.16.0" | {{nowrap|[[携带版Alpha 0.16.0]]}}<br>（[[携带版0.16.0.b2|build 2]]）
+| '''?'''
+| {{tc|-|已移除}} || {{tc|-|已移除}} || {{tc|-}}
+| {{tc|-}} || '''?''' || '''?'''
+| {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|player}}}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|setfixedinvslots}}
+| style="text-align:left;" | 设置固定物品栏数量。
+| data-sort-value="5 0.16.0" | {{nowrap|[[携带版Alpha 0.16.0]]}}<br>（[[携带版0.16.0.b2|build 2]]）
+| '''?'''
+| {{tc|-|已移除}} || {{tc|-|已移除}} || {{tc|-}}
+| {{tc|-}} || '''?''' || '''?'''
+| {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|player}}}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|setspawn}}
+| style="text-align:left;" | 将当前位置设为新玩家默认的生成点。
+| data-sort-value="2 0.31" | {{nowrap|[[Java版Indev 0.31]]}}
+| style="text-align:left;" | 世界生成点现在基于生成区块了，而不是单一位置。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|solid}}
+| style="text-align:left;" | 在放置石头和放置基岩间切换。
+| data-sort-value="2 0.31" | {{nowrap|[[Java版Indev 0.31]]}}
+| style="text-align:left;" | 放置的方块现在由物品栏决定。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|stats}}
+| style="text-align:left;" | 更新命令结果产生的记分项。
+| data-sort-value="4 1.13 17w45a" | {{nowrap|[[Java版1.13]]}}<br>（[[17w45a]]）
+| style="text-align:left;" | 被整理进{{cmd|execute}}。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|yes|{{EnvSprite|blocks}}}} || {{tc|yes|{{EnvSprite|mobs}}}} || {{tc|yes|{{EnvSprite|player}}}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|toggledownfall}}
+| style="text-align:left;" | 切换天气。
+| data-sort-value="4 1.13 17w45a" | {{nowrap|[[Java版1.13]]}}<br>（[[17w45a]]）
+| style="text-align:left;" | 与{{cmd|weather}}功能重复。
+| {{tc|yes|可用}} || {{tc|yes|可用}} || {{tc|-|已移除}}
+| {{tc|yes|2}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|default}}}}
+|-
+| style="text-align:left;" | {{cmd|transferserver}}
+| style="text-align:left;" | 将玩家转送至另一服务器。
+| data-sort-value="5 1.2.0.2" | {{nowrap|[[基岩版1.2.0.2]]}}
+| '''?'''
+| {{tc|-|已移除}} || {{tc|-|已移除}} || {{tc|-}}
+| {{tc|-}} ||'''?'''|| {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|unban}}
+| style="text-align:left;" | 从封禁列表中移除封禁项目。
+| data-sort-value="3 1.0.16" | {{nowrap|[[Java版Alpha v1.0.16]]}}
+| style="text-align:left;" | 被整理进{{cmd|pardon}}。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| {{tc|yes|3}} || {{tc|-}} || {{tc|yes}}
+| {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|player}}}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|videostream}}
+| style="text-align:left;" | 连接一个WebSocket服务器，并进行视频推流。
+| data-sort-value="9 ?" | '''?'''
+| '''?'''
+| {{tc|-}} || {{tc|-|已移除}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|1}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|videostreamaction}}
+| style="text-align:left;" | 尝试在视频推流上执行操作。
+| data-sort-value="9 ?" | '''?'''
+| '''?'''
+| {{tc|-}} || {{tc|-|已移除}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|1}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|-
+| style="text-align:left;" | {{cmd|volumearea}}
+| style="text-align:left;" | 添加、删除或列出功能域。
+| data-sort-value="5 1.21.10.22" | {{nowrap|[[基岩版1.21.20]]}}<br>（[[基岩版1.21.10.22|1.21.10.22]]）
+| style="text-align:left;" | 功能域已被弃用。
+| {{tc|-|已移除}} || {{tc|-}} || {{tc|-}}
+| {{tc|-}} || {{tc|yes|1}} || {{tc|-}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|yes|{{EnvSprite|default}}}}
+|-
+| style="text-align:left;" |
+{{cmd|wood}}
+| style="text-align:left;" | 掉落4个树苗。
+| data-sort-value="4 1.2.0" | {{nowrap|[[Java版Alpha v1.2.0]]}}
+| style="text-align:left;" | 疑似调试用途。
+| {{tc|-}} || {{tc|-}} || {{tc|-|已移除}}
+| '''?''' || {{tc|-}} || {{tc|yes}}
+| {{tc|-}} || {{tc|-}} || {{tc|-}} || {{tc|-}}
+|}
+
+==== 基岩版开发者命令 ====
+{{Main|基岩版开发者命令}}
+基岩版开发者命令是供游戏的开发和测试使用的，在正式版本中玩家通常无法看见并执行这些命令。
+
+==== 智能体命令 ====
+{{education feature|section=1}}
+以下命令已由{{cmd|agent}}取代：
+* {{cmd|attack}}
+* {{cmd|collect}}
+* {{cmd|createagent}}
+* {{cmd|destroy}}
+* {{cmd|detectredstone}}
+* {{cmd|detect}}
+* {{cmd|dropall}}
+* {{cmd|drop|link=命令/drop（基岩版）}}
+* {{cmd|getitemcount}}
+* {{cmd|getitemdetail}}
+* {{cmd|getitemspace}}
+* {{cmd|inspectdata}}
+* {{cmd|inspect}}
+* {{cmd|move}}
+* {{cmd|place|link=命令/place（已移除）}}
+* {{cmd|till}}
+* {{cmd|tpagent}}
+* {{cmd|link=命令/transfer（教育版）|transfer}}
+* {{cmd|turn}}
+
+=== 愚人节命令 ===
+{{exclusive|java|section=1}}
+
+以下命令仅存在于部分[[愚人节]]版本中。
+* {{cmd|debugdim}}
+* {{cmd|transform}}
+* {{cmd|vote}}
+* {{cmd|warp}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.15a| 加入了{{cmd|ban}}、{{cmd|banip}}、{{cmd|broadcast}}、{{cmd|deop}}、{{cmd|kick}}、{{cmd|op}}、{{cmd|tp}}和{{cmd|unban}}命令。}}
+|{{HistoryLine||0.0.16a_01|将{{cmd|broadcast}}命令重命名为{{cmd|say}}。}}
+|{{HistoryLine||0.0.17a|加入了{{cmd|setspawn}}命令。}}
+|{{HistoryLine||0.0.20a|加入了{{cmd|solid}}命令。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=?|移除了所有命令。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.15|加入了{{cmd|wood}}、{{cmd|iron}}命令。}}
+|{{HistoryLine||v1.0.16|加入了{{cmd|ban}}、{{cmd|ban-ip}}、{{cmd|banlist}}、{{cmd|deop}}、{{cmd|home}}、{{cmd|kick}}、{{cmd|op}}、{{cmd|pardon}}、{{cmd|pardon-ip}}、{{cmd|say}}和{{cmd|stop}}命令。}}
+|{{HistoryLine||v1.0.16_01|加入了{{cmd|save-all}}、{{cmd|save-on}}、{{cmd|save-off}}和{{cmd|tp}}命令。}}
+|{{HistoryLine||v1.0.16_02|加入了{{cmd|list}}和{{cmd|msg}}命令。}}
+|{{HistoryLine||v1.2.0|移除了{{cmd|wood}}、{{cmd|iron}}命令。}}
+|{{HistoryLine||v1.2.5|移除了{{cmd|home}}命令。}}
+|{{HistoryLine||v1.2.6|加入了{{cmd|kill}}命令。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.3|加入了{{cmd|whitelist}}命令。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=12w16a|加入了作弊模式和{{cmd|gamemode}}、{{cmd|give}}、{{cmd|time}}、{{cmd|toggledownfall}}和{{cmd|xp}}命令。
+|目前仅在[[创造模式]]中可用。}}
+|{{HistoryLine|||dev=12w17a|加入了{{cmd|help}}命令。}}
+|{{HistoryLine|||dev=12w18a|输入命令时游戏不再暂停。}}
+|{{HistoryLine|||dev=12w21a|加入了{{cmd|seed}}命令。}}
+|{{HistoryLine|||dev=12w22a|加入了{{cmd|defaultgamemode}}命令。}}
+|{{HistoryLine|||dev=12w24a|加入了{{cmd|publish}}命令。}}
+|{{HistoryLine|||dev=12w25a|现在可以在将世界开放到局域网时开关作弊模式。}}
+|{{HistoryLine|||dev=12w27a|加入了{{cmd|debug}}命令。}}
+|{{HistoryLine||1.4.2|dev=12w32a|加入了{{cmd|difficulty}}、{{cmd|gamerule}}、{{cmd|spawnpoint}}和{{cmd|weather}}命令。}}
+|{{HistoryLine|||dev=12w37a|加入了{{cmd|clear}}命令。}}
+|{{HistoryLine||1.4.4|dev=pre|加入了{{cmd|enchant}}命令。}}
+|{{HistoryLine||1.5|dev=13w03a|加入了{{cmd|testfor}}命令。}}
+|{{HistoryLine|||dev=13w04a|加入了{{cmd|scoreboard}}命令。}}
+|{{HistoryLine|||dev=13w09b|加入了{{cmd|effect}}命令。}}
+|{{HistoryLine||1.6.1|dev=13w23a|加入了{{cmd|spreadplayers}}命令。}}
+|{{HistoryLine|||dev=1.6.1-pre|加入了{{cmd|playsound}}命令。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了{{cmd|summon}}命令。
+|加入了{{cmd|achievement}}命令。}}
+|{{HistoryLine|||dev=13w37a|加入了{{cmd|setblock}}、{{cmd|tellraw}}和{{cmd|testforblock}}命令。}}
+|{{HistoryLine|||dev=13w38a|加入了{{cmd|setidletimeout}}命令。}}
+|{{HistoryLine|||dev=13w43a|加入了{{cmd|setworldspawn}}命令。}}
+|{{HistoryLine||1.8|dev=14w02a|加入了{{cmd|blockdata}}命令。}}
+|{{HistoryLine|||dev=14w03a|加入了{{cmd|clone}}和{{cmd|fill}}命令。}}
+|{{HistoryLine|||dev=14w04a|加入了{{cmd|particle}}命令。}}
+|{{HistoryLine|||dev=14w06a|加入了{{cmd|trigger}}命令。}}
+|{{HistoryLine|||dev=14w07a|加入了{{cmd|execute}}和{{cmd|testforblocks}}命令。}}
+|{{HistoryLine|||dev=14w17a|加入了{{cmd|worldborder}}命令。}}
+|{{HistoryLine|||dev=14w20a|加入了{{cmd|title}}命令。}}
+|{{HistoryLine|||dev=14w26a|加入了{{cmd|replaceitem}}命令。}}
+|{{HistoryLine|||dev=14w28a|加入了{{cmd|stats}}命令。}}
+|{{HistoryLine|||dev=14w32b|加入了{{cmd|entitydata}}命令。}}
+|{{HistoryLine||1.9.3|dev=pre2|加入了{{cmd|stopsound}}命令。}}
+|{{HistoryLine||1.10|dev=pre1|加入了{{cmd|teleport}}命令。与{{cmd|tp}}效果类似，但必须指定传送目标、无法直接传送到其他玩家身上，且相对坐标基于命令执行者而非传送目标。}}
+|{{HistoryLine||1.11|dev=16w32a|{{cmd|execute}}、{{cmd|fill}}、{{cmd|setblock}}和{{cmd|testforblock}}命令加入了[[方块状态]]支持。}}
+|{{HistoryLine|||dev=16w39a|加入了{{cmd|locate}}命令。}}
+|{{HistoryLine||1.12|dev=17w13a|加入了{{cmd|recipe}}和{{cmd|advancement}}命令。
+|移除了{{cmd|achievement}}命令。}}
+|{{HistoryLine|||dev=17w18a|加入了{{cmd|reload}}命令。}}
+|{{HistoryLine|||dev=pre1|加入了{{cmd|function}}命令。}}
+|{{HistoryLine||1.13|dev=17w45a|命令中不同的部分现在由不同颜色标示，即使不执行命令，错误部分也将会显示为红色。
+|在大部分情况下命令将不再允许出现大写字母，并优化了命令解析器的性能。
+|修改了部分命令的语法。
+|加入了{{cmd|tag}}与{{cmd|team}}命令。
+|移除了{{cmd|enchant}}、{{cmd|stats}}、{{cmd|testfor}}、{{cmd|testforblock}}、{{cmd|testforblocks}}与{{cmd|toggledownfall}}命令。
+|重写了{{cmd|execute}}命令。
+|{{cmd|tp}}现在是{{cmd|teleport}}的缩写。}}
+|{{HistoryLine|||dev=17w45b|加入了{{cmd|data}}命令。
+|移除了{{cmd|entitydata}}命令。}}
+|{{HistoryLine|||dev=17w46a|加入了{{cmd|datapack}}命令。
+|加入了选项以切换命令自动补全的模式。
+|命令界面的UI样式标准更新，并重新在多人游戏中工作。}}
+|{{HistoryLine|||dev=17w47a|移除了{{cmd|blockdata}}命令。
+|在聊天选项中加入了切换自动命令建议。}}
+|{{HistoryLine|||dev=17w48a|调整了命令补全界面的UI。
+|现在Tab键能够补全完整的坐标。}}
+|{{HistoryLine|||dev=17w50a|现在可在命令里使用局部坐标<code>^</code>。
+|现在Tab键在没有指向方块时用<code>~ ~ ~</code>补全。}}
+|{{HistoryLine|||dev=18w02a|命令中的错误现在拥有更详细的错误信息。
+|加入了{{cmd|execute}}的子命令用于允许对于命令的进一步控制。}}
+|{{HistoryLine|||dev=18w03a|优化了命令解析器，命令和函数的性能更好了。
+|为分析器加入了{{cmd|debug}}命令。}}
+|{{HistoryLine|||dev=18w05a|加入了{{cmd|bossbar}}命令。
+|为命令UI加入了基本的目标选择器。
+|现在为不明确的命令提示。}}
+|{{HistoryLine|||dev=18w06a|重新加入了{{cmd|enchant}}命令。
+|为实体选择器加入了命令建议。}}
+|{{HistoryLine||1.13.1|dev=18w31a|加入了{{cmd|chunk}}命令。}}
+|{{HistoryLine|||dev=pre1|将{{cmd|chunk}}命令重命名为{{cmd|forceload}}。}}
+|{{HistoryLine||2018年9月26日|link={{tweet|dinner|1044870699465216001}}|据MIT许可证[https://github.com/Mojang/brigadier 开源]（曾在数据库网站提供了源代码，未指定许可证）。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了{{cmd|drop}}和{{cmd|schedule}}命令。}}
+|{{HistoryLine|||dev=18w45a|{{cmd|drop}}命令重命名为{{cmd|loot}}并重写。}}
+|{{HistoryLine|||dev=19w02a|加入了{{cmd|teammsg}}命令。}}
+|{{HistoryLine||1.15|dev=19w34a|加入了{{cmd|test}}命令，仅在IDE中可用。}}
+|{{HistoryLine||1.16|dev=20w06a|加入了{{cmd|locatebiome}}命令。}}
+|{{HistoryLine|||dev=20w17a|加入了{{cmd|attribute}}命令。}}
+|{{HistoryLine||1.17|dev=20w46a|移除了{{cmd|replaceitem}}命令。
+|加入了{{cmd|item}}命令。}}
+|{{HistoryLine|||dev=pre1|加入了{{cmd|perf}}命令。}}
+|{{HistoryLine||1.18|dev=21w37a|加入了{{cmd|jfr}}命令。}}
+|{{HistoryLine||1.18.2|dev=22w03a|加入了{{cmd|placefeature}}命令。}}
+|{{HistoryLine||1.19|dev=exp1|加入了{{cmd|warden_spawn_tracker}}命令。}}
+|{{HistoryLine|||dev=22w11a|现在无法在游戏中使用{{cmd|warden_spawn_tracker}}命令。}}
+|{{HistoryLine|||dev=22w18a|移除了{{cmd|placefeature}}命令，其功能由{{cmd|place feature}}子命令继承。}}
+|{{HistoryLine|||dev=22w19a|将{{cmd|locatebiome}}作为子命令{{cmd|locate biome}}并入了{{cmd|locate}}，{{cmd|locate}}的原有功能由{{cmd|locate structure}}继承。}}
+|{{HistoryLine||1.19.3|dev=22w46a|加入了{{cmd|fillbiome}}命令。}}
+|{{HistoryLine||1.19.4|dev=23w03a|加入了{{cmd|ride}}命令。}}
+|{{HistoryLine|||dev=23w06a|加入了{{cmd|damage}}命令。}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了{{cmd|random}}命令。}}
+|{{HistoryLine||1.20.3|dev=23w43a|加入了{{cmd|tick}}命令。
+|现在可以通过IDE使用{{cmd|warden_spawn_tracker}}命令。}}
+|{{HistoryLine||1.20.5|dev=24w04a|加入了{{cmd|transfer}}命令。
+|将“{{tr|允许作弊|允許作弊|容許作弊}}”选项重命名为“允许命令”。
+|将世界描述“作弊”重命名为“命令”。}}
+|{{HistoryLine||1.21.2|dev=24w40a|加入了{{cmd|rotate}}命令。}}
+|{{HistoryLine||1.21.5|dev=25w03a|现在{{cmd|test}}命令在游戏内可用。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了{{cmd|version}}命令。}}
+|{{HistoryLine|||dev=25w15a|exp=locator_bar|加入了{{cmd|waypoint}}命令。}}
+|{{HistoryLine|||dev=25w17a|exp=none|{{cmd|waypoint}}命令不再属于[[实验性内容]]。}}
+|{{HistoryLine|||dev=25w20a|加入了{{cmd|dialog}}命令。}}
+|{{HistoryLine||1.21.9|dev=25w34a|加入了{{cmd|fetchprofile}}命令。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了{{cmd|stopwatch}}命令。}}
+|{{HistoryLine||26.1|dev=snapshot-1|加入了{{cmd|swing}}命令。}}
+|{{HistoryLine||26.2|dev=snapshot-8|加入了{{cmd|unpublish}}命令。}}
+|{{HistoryLine||26.3|dev=snapshot-3|加入了{{cmd|posteffect}}命令。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.7.4|加入了对命令的支持，但尚未实现任何命令的执行。}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|clearfixedinv}}、{{cmd|clone}}、{{cmd|deop}}、{{cmd|execute}}、{{cmd|fill}}、{{cmd|gamemode}}、{{cmd|give}}、{{cmd|help}}（及其别名{{cmd|?}}）、{{cmd|kill}}、{{cmd|list}}、{{cmd|op}}、{{cmd|say}}、{{cmd|setblock}}、{{cmd|setfixedinvslot}}、{{cmd|setworldspawn}}、{{cmd|spawnpoint}}、{{cmd|summon}}、{{cmd|tell}}（及其别名{{cmd|msg}}和{{cmd|w}}）、{{cmd|testforblock}}、{{cmd|testforblocks}}、{{cmd|time}}、{{cmd|toggledownfall}}、{{cmd|tp}}（及其别名{{cmd|teleport}}）、{{cmd|weather}}、{{cmd|wsserver}}和{{cmd|xp}}命令。
+|大部分命令的功能与Java版1.10相同。}}
+|{{HistoryLine|||dev=build 2|移除了{{cmd|clearfixedinv}}、{{cmd|setfixedinvslot}}及其他[[教育版]]相关的命令。}}
+|{{HistoryLine|||dev=build 5|加入了{{cmd|enchant}}命令。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了{{cmd|locate}}和{{cmd|connect}}命令。}}
+|{{HistoryLine|||dev=0.17.0.2|移除了{{cmd|locate}}命令。
+|将{{cmd|mascot|link=none}}命令重命名为{{cmd|agent}}。}}
+|{{HistoryLine|||dev=1.0.0.0|重新加入了{{cmd|locate}}命令，仅能用于查找要塞。}}
+|{{HistoryLine||1.0.3|dev=1.0.3.0|加入了{{cmd|transferserver}}命令。}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了{{cmd|clear}}、{{cmd|difficulty}}、{{cmd|effect}}、{{cmd|gamerule}}、{{cmd|me}}、{{cmd|particle}}、{{cmd|playsound}}、{{cmd|replaceitem}}、{{cmd|spreadplayers}}、{{cmd|stopsound}}、{{cmd|testfor}}和{{cmd|title}}命令。}}
+|{{HistoryLine|||dev=1.0.5.3|移除了{{cmd|particle}}命令。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.3|加入了{{cmd|setmaxplayers}}命令。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|加入了{{cmd|tickingarea}}命令。}}
+|{{HistoryLine||1.4.0|dev=?|将{{cmd|transferserver}}移动到开发者命令，玩家不再能够正常使用。}}
+|{{HistoryLine||1.5.0|dev=1.5.0.0|为启用教育版功能的世界加入了5个新命令。}}
+|{{HistoryLine||1.7.0|dev=1.7.0.2|加入了{{cmd|scoreboard}}命令。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|重新加入了{{cmd|particle}}命令。
+|加入了{{cmd|reload}}和{{cmd|function}}命令。}}
+|{{HistoryLine||1.9.0|dev=1.9.0.0|加入了{{cmd|tellraw}}命令。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|加入了{{cmd|resupply}}，但尚未具有功能。}}
+|{{HistoryLine|||dev=1.11.0.3|加入了{{cmd|mobevent}}命令。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|为地图制作及Add-ons加入了新命令。}}
+|{{HistoryLine||?|移除了{{cmd|resupply}}命令。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|加入了{{cmd|kick}}命令。}}
+|{{HistoryLine|||dev=正式版|加入了{{cmd|whitelist}}命令。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.52|加入了{{cmd|playanimation}}、{{cmd|ride}}和{{cmd|structure}}命令。}}
+|{{HistoryLine|||dev=1.16.100.54|加入了{{cmd|fog}}命令。}}
+|{{HistoryLine|||dev=1.16.100.57|加入了{{cmd|camerashake}}、{{cmd|clearspawnpoint}}和{{cmd|event}}命令。}}
+|{{HistoryLine|||dev=1.16.100.58|加入了{{cmd|music}}命令。}}
+|{{HistoryLine|||dev=1.16.100.59|加入了{{cmd|schedule}}命令。}}
+|{{HistoryLine||1.16.210|dev=1.16.210.53|移除了{{cmd|mixer}}命令。}}
+|{{HistoryLine|||dev=1.16.210.54|重新加入了{{cmd|mixer}}命令。}}
+|{{HistoryLine|||dev=1.16.210.58|再次移除了{{cmd|mixer}}命令。}}
+|{{HistoryLine|||dev=1.16.210.60|exg=gametest_v1|加入了{{cmd|gametest}}命令。}}
+|{{HistoryLine||1.17.0|dev=1.16.230.50|将{{cmd|whitelist}}命令重命名为{{cmd|allowlist}}。}}
+|{{HistoryLine|||dev=正式版|将{{cmd|allowlist}}命令重命名为{{cmd|whitelist}}。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.22|加入了{{cmd|dialogue}}命令。}}
+|{{HistoryLine||1.17.30|dev=1.17.30.23|exg=gametest_v1|加入了{{cmd|script}}命令。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.21|加入了{{cmd|loot}}命令。}}
+|{{HistoryLine|||dev=1.18.0.22|移除了{{cmd|loot}}命令。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.21|重新加入了{{cmd|loot}}命令。}}
+|{{HistoryLine|||dev=1.18.10.26|加入了{{cmd|damage}}命令。
+|再次将{{cmd|whitelist}}命令重命名为{{cmd|allowlist}}，并且{{cmd|whitelist}}命令仍然可用。}}
+|{{HistoryLine||1.18.30|dev=1.18.20.21|加入了{{cmd|volumearea}}命令。}}
+|{{HistoryLine|||dev=1.18.20.25|加入了{{cmd|placefeature}}命令。}}
+|{{HistoryLine|||dev=1.18.20.27|移除了{{cmd|placefeature}}命令。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.22|{{cmd|gametest}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.22|exg=gametest|加入了{{cmd|scriptevent}}命令。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.21|{{cmd|script}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|加入了{{cmd|inputpermission}}命令。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.22|exg=cameras|加入了{{cmd|camera}}命令。}}
+|{{HistoryLine||1.20.10|dev=1.20.10.21|exg=recipe_unlocking|加入了{{cmd|recipe}}命令。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.20|{{cmd|scriptevent}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.20.20.21|{{cmd|recipe}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.20.20.22|{{cmd|camera}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.20.30.22|加入了{{cmd|transfer}}命令。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.23|exg=upcoming_creator_features|加入了{{cmd|hud}}命令。}}
+|{{HistoryLine||1.20.80|dev=1.20.80.20|加入了{{cmd|gametips}}命令。}}
+|{{HistoryLine|||dev=1.20.80.23|{{cmd|hud}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.22|移除了{{cmd|volumearea}}命令。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|加入了{{cmd|set_movement_authority}}命令。}}
+|{{HistoryLine|||dev=1.21.50.25|exg=camera_aim_assist|加入了{{cmd|aimassist}}命令。}}
+|{{HistoryLine|||dev=1.21.50.26|exg=jigsaw_structures|加入了{{cmd|place}}命令。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.27|移除了{{cmd|set_movement_authority}}命令。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.22|{{cmd|place}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.70.23|{{cmd|aimassist}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.27|exg=experimental_creator_cameras|加入了{{cmd|controlscheme}}命令。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.23|{{cmd|controlscheme}}命令不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.20|加入了{{cmd|reloadpacketlimitconfig}}命令。}}
+|{{HistoryLine||26.0|dev=26.0.23|加入了{{cmd|packstack}}命令。}}
+}}
+
+== 参见 ==
+* [[格式化代码]]
+* [[实体数据格式]]
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+{{Navbox Java Edition}}
+{{Navbox Bedrock Edition}}
+{{Navbox Java customizable}}
+
+[[Category:命令|*]]
+[[Category:服务器]]
+
+[[de:Befehl]]
+[[en:Commands]]
+[[es:Comandos]]
+[[fr:Commandes]]
+[[hu:Szerverparancsok]]
+[[it:Comandi]]
+[[ja:コマンド]]
+[[ko:명령어]]
+[[lzh:令]]
+[[nl:Opdrachten]]
+[[pl:Polecenia]]
+[[pt:Comandos]]
+[[ru:Команды консоли]]
+[[th:คำสั่ง]]
+[[tr:Komutlar]]
+[[uk:Команди консолі]]

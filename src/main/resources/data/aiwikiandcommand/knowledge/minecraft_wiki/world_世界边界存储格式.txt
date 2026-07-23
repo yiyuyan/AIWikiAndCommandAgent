@@ -1,0 +1,72 @@
+# 页面: 世界边界存储格式
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%96%E7%95%8C%E8%BE%B9%E7%95%8C%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:19:48
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+
+'''世界边界存储文件'''是游戏存储每个维度[[世界边界]]信息所用的文件。
+
+== 存储格式 ==
+世界边界存储文件位于{{filepath|-{}-<''维度根目录''>/data/minecraft/world_border.dat}}。例如，主世界的世界边界存储文件位于{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/overworld/data/minecraft/world_border.dat}}，下界的位于{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/the_nether/data/minecraft/world_border.dat}}。
+
+世界边界存储文件使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：存储数据。
+*** {{nbt|double|center_x|existonsave=1}}：世界边界中心的X坐标。如果此项不存在则游戏默认为0。
+*** {{nbt|double|center_z|existonsave=1}}：世界边界中心的Z坐标。如果此项不存在则游戏默认为0。
+*** {{nbt|double|damage_per_block|existonsave=1}}：越过世界边界的安全区后，玩家每远离安全区一格增加的伤害值。如果此项不存在则游戏默认为0.2。
+*** {{nbt|double|safe_zone|existonsave=1}}：越过世界边界后，玩家仍然不会受到伤害的安全区的宽度。如果此项不存在则游戏默认为5。
+*** {{nbt|double|size|existonsave=1}}：世界边界的宽度。如果此项不存在则游戏默认为59999968。
+*** {{nbt|double|lerp_target|existonsave=1}}：世界边界过渡到目标位置的宽度。如果此项不存在则游戏默认为59999968。
+*** {{nbt|long|lerp_time|existonsave=1}}：世界边界的过渡时间。如果此项不存在则游戏默认为0。
+*** {{nbt|int|warning_blocks|existonsave=1}}：玩家靠近世界边界出现红色警告框的最大距离。如果此项不存在则游戏默认为5。
+*** {{nbt|int|warning_time|existonsave=1}}：当玩家接近边界距离小于边界过渡速度乘以此值时渲染出现红色警告框。如果此项不存在则游戏默认为300。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此世界边界存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+所有维度都有对应的世界边界存储文件，保存了自身维度的世界边界信息。
+
+如果世界边界存储文件不存在或数据无效，游戏会将世界边界的所有属性视为默认值计算。游戏只会在存档保存时更新此文件。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w17a|加入了世界边界数据。
+|此时世界边界数据存储于{{filename|[[level.dat]]}}中。}}
+|{{HistoryLine|||dev=14w19a|加入了{{nbt|double|BorderDamagePerBlock}}、{{nbt|double|BorderSafeZone}}、{{nbt|double|BorderSizeLerpTarget}}、{{nbt|int|BorderSizeLerpTime}}、{{nbt|double|BorderWarningBlocks}}和{{nbt|double|BorderWarningTime}}。}}
+|{{HistoryLine|||dev=14w31a|将{{cd|BorderSizeLerpTime}}的数据类型更改为长整型{{nbt|long}}。}}
+|{{HistoryLine||1.21.9|dev=25w36a|加入了单独的世界边界存储文件，世界边界数据不再存储于{{filename|level.dat}}中。
+|此前格式如下：
+<div class{{=}}"treeview">
+* {{nbt|compound}} '''level.dat根标签'''
+** {{nbt|compound|Data}}
+*** {{nbt|double|BorderCenterX|existonsave=1}}：世界边界中心的X坐标。如果此项不存在则游戏默认为0。
+*** {{nbt|double|BorderCenterZ|existonsave=1}}：世界边界中心的Z坐标。如果此项不存在则游戏默认为0。
+*** {{nbt|double|BorderDamagePerBlock|existonsave=1}}：超出边界安全区后，玩家每远离安全区一格增加的伤害值。如果此项不存在则游戏默认0.2。
+*** {{nbt|double|BorderSafeZone|existonsave=1}}：超出边界后，玩家仍然不会受到伤害的安全区的宽度。如果此项不存在则游戏默认为5。
+*** {{nbt|double|BorderSize|existonsave=1}}：边界宽度。如果此项不存在则游戏默认为59999968。
+*** {{nbt|double|BorderSizeLerpTarget|existonsave=1}}：边界宽度过渡到的目标宽度。如果此项不存在则游戏默认为59999968。
+*** {{nbt|long|BorderSizeLerpTime|existonsave=1}}：边界宽度的过渡时间。如果此项不存在则游戏默认为0。
+*** {{nbt|double|BorderWarningBlocks|existonsave=1}}：玩家接近边界渲染出现红色警告框的最大距离。如果此项不存在则游戏默认为5。
+*** {{nbt|double|BorderWarningTime|existonsave=1}}：当玩家接近边界距离小于边界过渡速度乘以此值时渲染出现红色警告框。如果此项不存在则游戏默认为15。
+</div>
+}}
+|{{HistoryLine|||dev=25w44a|{{nbt|long|lerp_time}}和{{nbt|int|warning_time}}的单位现在是游戏刻，而不是秒。
+|{{nbt|int|warning_time}}的默认值由15改为300。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将主世界的世界边界数据从{{filepath|<''存档根目录''>/data/world_border.dat}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/overworld/data/minecraft/world_border.dat}}。
+|将下界的世界边界数据从{{filepath|<''存档根目录''>/DIM-1/data/world_border.dat}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_nether/data/minecraft/world_border.dat}}。
+|将末地的世界边界数据从{{filepath|<''存档根目录''>/DIM1/data/world_border.dat}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_end/data/minecraft/world_border.dat}}。
+|将其他维度的世界边界数据从{{filepath|<''维度根目录''>/data/world_border.dat}}移动到{{filepath|<''维度根目录''>/data/minecraft/world_border.dat}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Weltbarrieredaten]]

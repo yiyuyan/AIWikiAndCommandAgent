@@ -1,0 +1,53 @@
+# 页面: 属性/最大行走高度
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/%E6%9C%80%E5%A4%A7%E8%A1%8C%E8%B5%B0%E9%AB%98%E5%BA%A6
+# 分类: Java版独有特性, 属性
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox attribute}}
+
+'''最大行走高度（Step Height）'''是控制生物移动的[[属性]]。
+
+== 行为 ==
+[[File:Zombie With Step Height 3.0.gif|thumb|300px|最大行走高度为3的僵尸]]
+{{main|走上方块}}
+最大行走高度是实体数据<code>OnGround</code>为<code>true</code>的生物不用[[跳跃]]可以直接走上的最大高度，也是玩家[[潜行]]时不会走下方块的最小高度差。
+
+* 如果在地面上行走的生物被方块挡住，且此方块顶部与地面的高度差小于或等于“最大行走高度”，则此生物不用跳跃就可走上此方块。
+** 大多数生物在[[寻路]]时会将高出最多1格的方块列入路径，在穿越时如果方块的高度大于“最大行走高度”，则生物会通过向前跳跃来登上方块。
+* 如果地面与玩家[[边界箱]]最低处（或称所站方块的顶面）的高度差大于或等于“最大行走高度”，则玩家可以在方块边缘处潜行而不[[摔落]]。
+
+== 适用的生物 ==
+{| class="wikitable sortable"
+! 生物
+! 基值
+|-
+| {{EntityLink|Camel}}
+| 1.5
+|-
+| {{EntityLink|Creaking}}
+| 1.0625
+|-
+| {{EntityLink|Axolotl}}<br>{{EntityLink|Copper Golem}}<br>{{EntityLink|Donkey}}<br>{{EntityLink|Drowned}}<br>{{EntityLink|Enderman}}<br>{{EntityLink|Frog}}<br>{{EntityLink|Horse}}<br>{{EntityLink|Iron Golem}}<br>{{EntityLink|Llama}}<br>{{EntityLink|Mule}}<br>{{EntityLink|Ravager}}<br>{{EntityLink|Skeleton Horse}}<br>{{EntityLink|Trader Llama}}<br>{{EntityLink|Turtle}}<br>{{EntityLink|Zombie Horse}}
+| 1
+|-
+| {{EntityLink|Armor Stand}}
+| 0
+|-
+| 其他所有生物
+| 0.6
+|}
+
+== 已知修饰符 ==
+最大行走高度没有已知修饰符。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|dev=23w51a|加入了最大行走高度属性。}}
+|{{HistoryLine||1.21.2|dev=24w33a|最大行走高度属性的ID从<code>generic.step_height</code>重命名为<code>step_height</code>。}}
+}}
+
+== 导航 ==
+{{Navbox attributes}}

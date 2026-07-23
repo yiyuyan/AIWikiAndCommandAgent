@@ -1,0 +1,70 @@
+# 页面: 袭击存储格式
+# 来源: https://zh.minecraft.wiki/w/%E8%A2%AD%E5%87%BB%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:35:49
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''袭击存储文件'''是存档保存维度内正在发生的[[袭击]]的文件。
+
+== 存储格式 ==
+袭击存储文件位于{{filepath|-{}-<''维度根目录''>/data/minecraft/raids.dat}}。
+
+袭击存储文件使用使用GZip压缩的[[NBT]]文件格式保存，其内部有下列NBT结构： 
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|compound|data|existonsave=1|required=1}}：袭击数据。
+*** {{nbt|int|next_id|existonsave=1|required=1}}：下次袭击发生时游戏将使用的编号。每创建一次新的袭击此编号自增1，如果维度内还未发生过袭击则为1。
+*** {{nbt|int|tick|existonsave=1|required=1}}：游戏从存档被创建到此文件保存时非停滞状态（即{{cmd|tick freeze}}）运行的游戏[[刻]]数。
+*** {{nbt|list|raids|existonsave=1|required=1}}：此维度当前存在的袭击数据。
+**** {{nbt|compound}}：一次袭击数据。
+***** {{nbt|int|id|existonsave=1|required=1}}：袭击的编号。
+***** {{nbt|bool|active|existonsave=1|required=1}}：袭击目前是否处于激活状态。
+***** {{nbt|bool|started|existonsave=1|required=1}}：袭击目前是否已经开始，即是否已经开始生成第一波袭击生物。
+***** {{nbt|int|raid_omen_level|existonsave=1|required=1}}：此次袭击的[[袭击之兆]]等级。影响袭击中生成生物的总波次和生物装备的魔咒质量。
+***** {{nbt|int-array|center|existonsave=1|required=1}}：袭击中心的坐标。内部3个整数分别代表XYZ坐标。
+***** {{nbt|int|groups_spawned|existonsave=1|required=1}}：这次袭击已生成的波数。
+***** {{nbt|int|group_count|existonsave=1|required=1}}：这次袭击要生成的总波数。
+***** {{nbt|list|heroes_of_the_village|existonsave=1|required=1}}：袭击胜利后将要给予[[村庄英雄]]状态效果的玩家。
+****** {{nbt|int-array}}：一个玩家的[[UUID]]。
+***** {{nbt|int|cooldown_ticks|existonsave=1|required=1}}：距离下一波生物生成所等待的游戏刻数。袭击的上一波生物全部死亡后，或袭击开始时，此值被设置为{{convert|300}}。
+***** {{nbt|int|post_raid_ticks|existonsave=1|required=1}}：袭击所有波次结束后，游戏宣布袭击胜利并给予玩家村庄英雄状态效果的冷却时间。此值不小于{{convert|40}}时袭击被判定为胜利。
+***** {{nbt|string|status|existonsave=1|required=1}}：袭击当前的状态。可以为<code>ongoing</code>（正在进行）、<code>victory</code>（胜利，庆祝阶段）、<code>loss</code>（失败，庆祝阶段）和<code>stopped</code>（已结束）。
+***** {{nbt|int|ticks_active|existonsave=1|required=1}}：袭击开始到此文件保存时非停滞状态运行的游戏刻数。当此值超过{{convert|48000}}时袭击将以平局结束。
+***** {{nbt|int|total_health|existonsave=1|required=1}}：本次袭击波次中生物的总最大生命值。
+** {{nbt|int|DataVersion|existonsave=1}}：保存此袭击存储文件的游戏的[[数据版本]]。如果此项不存在则游戏认为此项是1343（[[Java版1.12.2]]）。
+</div>
+
+== 存储行为 ==
+所有维度都有对应的袭击存储文件和对应的袭击信息，即使袭击可能无法在这个维度触发。例如下界，虽然下界无法触发袭击，但它对应的袭击存储文件{{filepath|-{}-<''存档根目录''>/dimensions/minecraft/the_nether/data/minecraft/raids.dat}}会被游戏创建和读取。此项也适用于任何自定义的维度，即使整个维度不存在环境属性[[环境属性#gameplay/can_start_raid|<code>gameplay/can_start_raid</code>]]为<code>true</code>的区域，游戏也会读取并加载袭击存储文件。
+
+袭击存储文件内的袭击数据会被游戏完整地加载进入内存，并且不会检查这个维度是否可以触发袭击。换言之，只需要按照存储格式修改袭击存储文件，就可以在维度内“创建”出一个新的袭击，即使这个维度无法触发袭击。
+
+如果袭击存储文件内有多个袭击数据使用同一个编号，则游戏只会识别最后一个使用此编号的袭击数据，其他袭击数据被丢弃。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.14|dev=18w47a|现在所有维度的[[袭击]]数据都使用袭击存储格式保存。}}
+|{{HistoryLine||1.14|dev=19w13a|添加{{nbt|list|HeroesOfTheVillage}}以保存玩家列表。}}
+|{{HistoryLine||1.16|dev=pre3|下界的袭击存储文件从{{filename|raids_nether.dat}}重命名为{{filename|raids.dat}}。但为保证兼容性，末地的袭击存储文件并未重命名。}}
+|{{HistoryLine||1.21.5|dev=25w05a|修改了所有标签的名称。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将主世界的袭击数据从{{filepath|<''存档根目录''>/data/raids.dat}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/overworld/data/minecraft/raids.dat}}。
+|将下界的袭击数据从{{filepath|<''存档根目录''>/DIM-1/data/raids.dat}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_nether/data/minecraft/raids.dat}}，尽管原版游戏没有使用它。
+|将末地的袭击数据从{{filepath|<''存档根目录''>/DIM1/data/'''raids_end.dat'''}}移动到{{filepath|<''存档根目录''>/dimensions/minecraft/the_end/data/minecraft/raids.dat}}。但如果存在文件{{filepath|<''存档根目录''>/DIM1/data/'''raids.dat'''}}，则丢弃末地的袭击数据。
+|将其他维度的袭击数据从{{filepath|<''维度根目录''>/data/raids.dat}}移动到{{filepath|<''维度根目录''>/data/minecraft/raids.dat}}。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Überfalldaten]]
+[[en:Raids.dat format]]
+[[fr:Format raids.dat]]
+[[ja:Raids.datフォーマット]]
+[[lzh:存襲範式]]
+[[pt:Formato raids.dat]]

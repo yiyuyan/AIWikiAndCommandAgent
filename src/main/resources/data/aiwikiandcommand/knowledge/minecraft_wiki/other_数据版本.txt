@@ -1,0 +1,104 @@
+# 页面: 数据版本
+# 来源: https://zh.minecraft.wiki/w/%E6%95%B0%E6%8D%AE%E7%89%88%E6%9C%AC
+# 分类: Java版, Java版独有特性
+# 抓取时间: 2026-07-14 17:28:11
+# 原始 Wikitext 内容:
+
+{{distinguish|数据包版本}}
+{{exclusive|java}}
+'''数据版本（Data Version）'''，又称'''世界版本（World Version）'''<ref><samp>[https://minecraft.net/download/server server.jar]</samp>或<samp>[https://libraries.minecraft.net/com/mojang/javabridge/1.0.22/javabridge-1.0.22-sources.jar javabridge library source]</samp>，位于<samp>com.mojang.bridge.game.GameVersion</samp>类中。</ref><ref>出现在[[#version.json|<samp>version.json</samp>格式]]中。</ref>，是保存世界数据中使用的正整数，用于表示特定版本。
+
+== 用途 ==
+{{Filetr|World Selection Upgrading Warning.png|thumb|游戏提示玩家是否备份旧的世界}}
+在选择和加载单人模式的世界时，若客户端的数据版本新于或旧于世界的数据版本，游戏会弹出“{{tp|selectWorld.versionQuestion}}”界面，提醒玩家备份存档：
+* 若客户端数据版本比世界版本较新，且客户端是[[版本格式#快照（Snapshot）|快照]]版本，则会显示消息“{{tp|selectWorld.backupWarning.snapshot|''世界版本''|''客户端版本''}}”
+* 反之若客户端数据版本比世界版本更旧，会显示消息“{{tp|selectWorld.backupWarning.downgrade|''世界版本''|''客户端版本''}}”
+
+== 版本 ==
+自[[15w32a]]以来的每个[[Java版]]版本，包括小更新和快照版本，都有自己的数据版本。不像客户端版本那样，数据版本采用不断增加的正整数形式。客户端版本通常不能直接比较，因为它们使用不同的格式（例如，“1.14”和“19w02a”无法比较），所以数据版本是必要的。数据版本可能会在主要版本之间跳过一些数字。
+
+== 储存位置 ==
+数据版本存储在多个位置。
+
+=== <samp>options.txt</samp> ===
+{{main|客户端选项文件格式}}
+{{filename|options.txt}}的第一行显示数据版本，名为{{cd|version}}。
+
+=== <samp>level.dat</samp> ===
+{{main|存档基础数据存储格式}}
+{{filename|level.dat}}是一个NBT文件，位于每一个存档的根目录下。该文件存储着该存档所有的宏观信息，可以使用特定的工具进行查看和编辑。
+
+一个世界存档的{{filename|level.dat}}文件内有两个地方存放了数据版本：复合标签{{cd|Data}}下称为{{cd|DataVersion}}的标签和复合标签{{cd|Version}}下称为{{cd|Id}}的标签。
+
+<div class="treeview">
+* {{nbt|compound}} level.dat
+** {{nbt|compound|Data}}：文件<samp>level.dat</samp>的信息
+*** {{nbt|int|DataVersion}}：显示数据版本的整数。
+*** {{nbt|compound|Version}}：关于上次保存世界的时间的版本信息。
+**** {{nbt|int|Id}}：显示数据版本的整数。
+</div>
+
+=== 区域文件 ===
+{{main|区域文件格式}}
+区域文件内的每个区块都包含上次加载时的数据版本信息，保存于{{filepath|[[.minecraft]]/saves/<''世界名称''>/region/r.<''区域X''>.<''区域Z''>.mca}}。
+
+<div class="treeview">
+* {{nbt|compound|r.''x''.''z''.mca}}：在指定区域坐标[''x'',''z'']处的区域信息（1区域=32×32区块）
+** {{nbt|compound|区块[''x<sub>1</sub>'',''y<sub>1</sub>'']，位于世界的(''x<sub>2</sub>'',''y<sub>2</sub>'')}}：在相对于区域的坐标[''x<sub>1</sub>'',''y<sub>1</sub>'']处的区块信息，此区块位于世界区块坐标(''x<sub>2</sub>'',''y<sub>2</sub>'')（1区块=16×16方块）
+*** {{nbt|int|DataVersion}}：显示数据版本的整数。
+</div>
+
+=== <samp>.dat</samp>和<samp>.nbt</samp>文件 ===
+所有的{{filename|.dat}}和{{filename|.nbt}}文件在最后一次保存时在根标签下包含数据版本。
+
+<div class="treeview">
+* {{nbt|compound|''文件名''}}
+** {{nbt|int|DataVersion}}：显示数据版本的整数。
+</div>
+
+=== 进度存储文件 ===
+{{main|进度存储格式}}
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|int|DataVersion|existonsave=1}}：显示数据版本的整数。
+</div>
+
+=== <samp>version.json</samp> ===
+{{main|版本信息文件格式}}
+自[[18w47b]]以后的每个Minecraft版本都在{{filename|version.json}}文件内指定了当前版本的数据版本，其位于[[客户端]]和[https://minecraft.net/download/server 服务端]jar文件的根目录下。
+<div class="treeview">
+* {{nbt|compound}} version.json
+** {{nbt|int|world_version}}：此版本的数据版本。
+</div>
+
+== 数据版本列表 ==
+{{/Latest}}
+{{CollapseH}}
+{{Protocol version/Table|Java版|愚人节版本|hideprotocol=1|hiderespack=1|hidedatpack=1|lastvers=15w32a,Java版1.RV-Pre1}}
+{{CollapseE}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w32a|添加了数据版本，从版本“100”开始。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 参见 ==
+* [[协议版本]]
+* [[al_version]]
+
+== 导航 ==
+{{Navbox Java Edition}}
+
+[[de:Versionsdaten]]
+[[en:Data version]]
+[[es:Versión de datos]]
+[[fr:Version de données]]
+[[ja:データバージョン]]
+[[ko:데이터 버전]]
+[[pt:Versão de dados]]
+[[ru:Версия данных]]
+[[uk:Версія даних]]

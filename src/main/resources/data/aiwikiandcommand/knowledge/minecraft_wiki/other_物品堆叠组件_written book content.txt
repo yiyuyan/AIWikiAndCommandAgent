@@ -1,0 +1,26 @@
+# 页面: 物品堆叠组件/written book content
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%A0%86%E5%8F%A0%E7%BB%84%E4%BB%B6/written%20book%20content
+# 分类: 已弃用的模板
+# 抓取时间: 2026-07-14 17:31:56
+# 原始 Wikitext 内容:
+
+<noinclude>{{deprecated|type=模板|historical=1|text=请使用[[编码格式/DataComponent]]代替。}}</noinclude>
+<div class="treeview">
+** {{nbt|compound|written_book_content}} 物品堆叠组件
+*** {{nbt|string|author|existonsave=1|required=1}}：成书的作者。
+*** {{nbt|int|generation}}：（默认为<code>0</code>）决定成书是否为{{tr|副本|複本}}。可以为<code>0</code>（{{tp|book.generation.0}}），<code>1</code>（{{tp|book.generation.1}}），<code>2</code>（{{tp|book.generation.2}}），<code>3</code>（{{tp|book.generation.3}}）。
+*** {{nbt|list|pages}}：成书内存储的页信息，文本必须使用以下格式之一。
+**** {{nbt|string}}{{nbt|object}}{{nbt|list}}：成书内一页的信息，使用文本组件格式。如果开启过滤，则代表过滤后文本信息与原信息一致。
+**** {{nbt|object}}：成书页内信息的另一种格式。只要定义了{{nbt|string}}{{nbt|object}}{{nbt|list|raw}}字段就会忽略以{{nbt|object}}格式定义的文本组件。
+***** {{nbt|string}}{{nbt|object}}{{nbt|list|filtered}}：已过滤的文本信息。在开启过滤时，此内容优先级高于{{nbt|string}}{{nbt|object}}{{nbt|list|raw}}。
+***** {{nbt|string}}{{nbt|object}}{{nbt|list|raw|existonsave=1|required=1}}：未过滤的原始信息。
+*** {{nbt|bool|resolved}}：（默认为<code>false</code>）表示这本成书是否已经被解析，决定是否在打开成书时进行成书内文本的解析。
+*** {{nbt|string}}{{nbt|compound|title|existonsave=1|required=1}}：（长度不超过32）成书的标题信息。为{{nbt|string}}时，如果开启过滤，则代表此标题过滤后与原标题一致。
+**** {{nbt|string|filtered}}：（长度不超过32）已过滤的标题信息。在开启过滤时，此字符串优先级高于{{nbt|string|raw}}。
+**** {{nbt|string|raw|existonsave=1|required=1}}：（长度不超过32）未过滤的标题原始信息。
+</div><noinclude>
+[[en:Data component format/written book content]]
+[[fr:Format de composant de données/written book content]]
+[[ja:アイテムフォーマット/written book content]]
+[[pt:Formato de componente de dado/written book content]]
+</noinclude>

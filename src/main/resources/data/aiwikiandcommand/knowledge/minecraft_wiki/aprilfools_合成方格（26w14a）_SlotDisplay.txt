@@ -1,0 +1,55 @@
+# 页面: 合成方格（26w14a）/SlotDisplay
+# 来源: https://zh.minecraft.wiki/w/%E5%90%88%E6%88%90%E6%96%B9%E6%A0%BC%EF%BC%8826w14a%EF%BC%89/SlotDisplay
+# 分类: 
+# 抓取时间: 2026-07-14 17:21:19
+# 原始 Wikitext 内容:
+
+<div class="treeview"><onlyinclude>
+** {{nbt|string|type|required=1|existonsave=1}}：（命名空间ID）预览槽位类型。
+** {{nbt condition|如果{{nbt|string|type}}为<code>empty</code>，则不预览任何物品。}}
+** {{nbt condition|如果{{nbt|string|type}}为<code>any_fuel</code>，则预览一种烧炼材料。}}
+** {{nbt condition|如果{{nbt|string|type}}为<code>with_any_potion</code>，则预览具有药水效果的物品：}}
+** {{nbt|compound|contents|required=1|existonsave=1}}：作为输入物品的预览槽位。
+*** {{nbt collapsed link|预览槽位}}
+** {{nbt condition|如果{{nbt|string|type}}为<code>only_with_component</code>，则排除不具有指定组件的物品：}}
+** {{nbt|compound|contents|required=1|existonsave=1}}：作为输入物品的预览槽位。
+*** {{nbt collapsed link|预览槽位}}
+** {{nbt|string|component|required=1|existonsave=1}}：（命名空间ID）数据组件类型。
+** {{nbt condition|如果{{nbt|string|type}}为<code>item</code>，则预览单个物品：}}
+** {{nbt|string|item|required=1|existonsave=1}}：（命名空间ID）要预览的物品。
+** {{nbt condition|如果{{nbt|string|type}}为<code>item_stack</code>，则预览一个物品堆叠：}}
+** {{nbt|string}}{{nbt|compound|item|required=1|existonsave=1}}：（命名空间ID）要预览的物品堆叠。
+*** {{nbt collapsed|物品模板|
+** {{nbt condition|如果指定为{{nbt|string|字符串}}，则为一个物品的命名空间ID，此时物品的数量为1，物品堆叠的所有组件均使用默认值。此格式只用于定义，游戏只保存为{{tr|对象|物件}}格式。}}
+** {{nbt condition|如果指定为{{nbt|compound|{{tr|对象|物件}}}}，则可以指定物品堆叠的数量和组件修订。此物品堆叠必须满足严格性验证，否则定义物品时解析失败，加载物品时认为是空气。}}
+** {{nbt|string|id|required=1|existonsave=1}}：（命名空间ID）表示某种类的物品堆叠，不允许为空气。
+** {{nbt|compound|components}}：当前物品的组件修订，将修改物品的数据组件信息。
+*** {{nbt|any|<''数据组件ID''>}}：要设置的数据组件。该标签的内容为相应的组件数据，将覆盖物品的默认组件。设置组件数据时可以不写命名空间，但游戏在导出时会自行加上<code>minecraft:</code>前缀。
+*** {{nbt|compound|!<''数据组件ID''>}}：要移除的数据组件。该标签的内容将被忽略，物品不会具有该组件。设置组件数据时可以不写命名空间，但游戏在导出时会自行加上<code>minecraft:</code>前缀。
+** {{nbt|int|count}}：（默认为1，{{interval|left=0|right=99}}）物品的堆叠数。
+}}
+** {{nbt condition|如果{{nbt|string|type}}为<code>tag</code>，则轮换预览单个物品标签内的物品：}}
+** {{nbt|string|tag|required=1|existonsave=1}}：一个不带有<code>#</code>前缀的物品标签ID。
+** {{nbt condition|如果{{nbt|string|type}}为<code>dyed</code>，则预览被染色后的物品，默认为白色：}}
+** {{nbt|compound|dye|required=1|existonsave=1}}：作为染料的预览槽位。
+*** {{nbt collapsed link|预览槽位}}
+** {{nbt|compound|target|required=1|existonsave=1}}：作为目标物品的预览槽位。
+*** {{nbt collapsed link|预览槽位}}
+** {{nbt condition|如果{{nbt|string|type}}为<code>smithing_trim</code>，则预览附有盔甲纹饰的物品：}}
+** {{nbt|compound|base|required=1|existonsave=1}}：作为装备的预览槽位。
+*** {{nbt collapsed link|预览槽位}}
+** {{nbt|compound|material|required=1|existonsave=1}}：作为锻造原材料的预览槽位。
+*** {{nbt collapsed link|预览槽位}}
+** {{nbt|string}}{{nbt|compound|pattern|required=1|existonsave=1}}：要添加的盔甲纹饰图案。
+** {{nbt condition|如果{{nbt|string|type}}为<code>with_remainder</code>，则表示此物品具有合成后返还物品属性：}}
+** {{nbt|compound|input|required=1|existonsave=1}}：作为合成原料的预览槽位。
+*** {{nbt collapsed link|预览槽位}}
+** {{nbt|compound|remainder|required=1|existonsave=1}}：作返还物品的预览槽位。
+*** {{nbt collapsed link|预览槽位}}
+** {{nbt condition|如果{{nbt|string|type}}为<code>composite</code>，则轮换预览物品：}}
+** {{nbt|list|contents|required=1|existonsave=1}}：一个预览槽位的{{tr|列表|串列}}，表示要预览的物品。
+*** {{nbt|compound}}：一个预览槽位。
+**** {{nbt collapsed link|预览槽位}}
+</onlyinclude></div><noinclude>
+[[Category:数据页面]]
+</noinclude>

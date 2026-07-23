@@ -1,0 +1,42 @@
+# 页面: 调试选项文件格式
+# 来源: https://zh.minecraft.wiki/w/%E8%B0%83%E8%AF%95%E9%80%89%E9%A1%B9%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:24
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+'''调试选项文件'''是游戏记录[[调试选项]]使用何种调试档案或自定义设置的游戏配置文件。
+
+== 存储格式 ==
+调试选项文件位于{{filepath|<''客户端根目录''>/debug-profile.json}}。此文件使用JSON文件格式保存，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|compound|custom}}：玩家自定义的调试选项。
+*** {{nbt|string|<''调试选项命名空间ID''>}}：此项调试选项的状态。取值只能为<code>alwaysOn</code>（{{tp|debug.entry.always}}）、<code>inOverlay</code>（{{tp|debug.entry.overlay}}）或<code>never</code>（{{tp|options.off}}）。
+** {{nbt|string|profile}}：游戏内置的调试档案。取值只能为<code>default</code>（{{tp|debug.options.profile.default}}）或<code>performance</code>（{{tp|debug.options.profile.performance}}）。
+</div>
+
+== 存储行为 ==
+游戏在游戏启动时会尝试读取调试选项文件，以获取调试选项配置。
+
+* 如果调试选项文件不存在，则游戏静默处理，并使用默认配置。
+* 如果调试选项文件存在，则加载此文件：
+** 如果文件无法加载，或文件格式错误，则游戏日志报错<code>-{}-Couldn't read debug profile file <''此文件''>, resetting to default</code>，并重置调试配置为默认配置。
+** 如果存在{{nbt|string|profile}}，则直接使用其指定的调试档案配置。
+** 否则，读取{{nbt|compound|custom}}的内容加载调试选项，任何未指定的调试选项均被视为<code>never</code>。
+
+只要玩家对调试选项进行了任何更改，此文件就会立刻保存。如果文件无法保存，则游戏日志报错<code>-{}-Failed to save debug profile file <''此文件''></code>，并重置调试配置为默认配置。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.9|dev=25w31a|加入了调试选项文件。}}
+|{{HistoryLine||1.21.11|dev=25w41a|将<code>inF3</code>重命名为<code>inOverlay</code>。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]

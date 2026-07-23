@@ -1,0 +1,73 @@
+# 页面: 命令/reload
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/reload
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 需要测试/基岩版
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=reload
+|oplevel=2
+|becheat=1
+|others=不在[[命令方块]]上执行{{only|be}}
+}}
+
+{{in|java|nc=1}}重新加载[[数据包]]，{{in|bedrock|nc=1}}重新加载[[行为包]]中的[[基岩版函数|函数]]和脚本。
+
+== 用法 ==
+如果数据包或行为包含有无效数据（例如错误的配方格式），更改将不会应用，游戏会使用先前的数据。{{Needs testing|bedrock=1}}
+
+{{in|java}}数据包的{{cd|d=pretty|damage_type|dimension|dimension_type|enchantment|jukebox_song|trim_material|trim_pattern|worldgen}}等实验性注册项的数据必须依赖于世界加载。<ref>{{bug|MC-187938|||Invalid}}</ref><ref>{{bug|MC-260446|||Invalid}}</ref><ref>{{bug|MC-260452|||Invalid}}</ref><ref>{{bug|MC-272540|||WAI}}</ref><ref>{{bug|MC-273807|||Invalid}}</ref>这些注册项不能使用<code>/reload</code>命令重新加载，只能在重新进入世界时加载。
+
+== 语法 ==
+* '''Java版'''
+: <code>reload</code>
+* '''基岩版'''
+: <code>reload [all: reload_all]</code>
+
+== 参数 ==
+{{el|be|short=1}}：{{argument|be=1|all: reload_all|enum}}
+: 必须为<code>all</code>，使玩家退出并重新加入世界，同时重载所有行为包和[[资源包]]。仅非[[BDS]]可用。
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数未正确指定|N/A|unparseable}}
+{{Result table|数据包内含有无效数据|fail|N/A}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行成功|1|1|0}}
+{{Output table|执行失败|0|0|0}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=17w18a|加入了{{cmd|reload|link=none}}命令。}}
+|{{HistoryLine||1.14.4|dev=pre4|现在运行{{cmd|reload|link=none}}仅需要2级及以上的权限。}}
+|{{HistoryLine||1.16|dev=20w22a|现在如果数据包内含有无效数据（例如错误的配方格式），更改将不会应用。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|加入了{{cmd|reload|link=none}}。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.20|为[[基岩版编辑器]]模式下运行的{{cmd|reload|link=none}}命令加入了{{cd|all}}可选参数，可对整个编辑器进行完整的热重载。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.22|加入了{{cd|all: reload_all}}参数。}}
+}}
+
+== 你知道吗 ==
+* 使用{{cmd|datapack disable}}和{{cmd|datapack enable}}命令也能够重新加载数据包。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/reload]]
+[[en:Commands/reload]]
+[[es:Comandos/reload]]
+[[fr:Commandes/reload]]
+[[ja:コマンド/reload]]
+[[nl:Opdrachten/reload]]
+[[pt:Comandos/reload]]
+[[ru:Команды консоли/reload]]
+[[uk:Команди консолі/reload]]

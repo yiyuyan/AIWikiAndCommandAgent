@@ -1,0 +1,483 @@
+# 页面: 刷怪笼
+# 来源: https://zh.minecraft.wiki/w/%E5%88%B7%E6%80%AA%E7%AC%BC
+# 分类: Java版独有信息, 不可再生资源, 使用简单计算器的页面, 使用计算器的页面, 基岩版独有信息, 嵌入Bilibili视频的页面, 已过期的视频, 方块, 需要测试/基岩版
+# 抓取时间: 2026-07-14 17:20:38
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|渲染|繪製}}{{about|普通的刷怪笼|试炼密室中的刷怪笼|试炼刷怪笼|Minecraft Dungeons中的刷怪笼|MCD:刷怪笼}}
+{{Infobox block
+|image=Spawner.png
+|image2=Spawner BE.png
+|imagecaption={{el|je}}
+|image2caption={{el|be}}
+|invimage1=Monster Spawner
+|invimage2=----
+|invimage3=Monster Spawner BE.png
+}}
+{{relevant tutorial|刷怪笼陷阱}}
+'''刷怪笼（Monster Spawner）'''是可以生成[[实体]]的[[方块]]，内含一个缩小并旋转着的实体模型。
+
+== 生成 ==
+=== 自然生成 ===
+[[File:Example monster spawner - Spider.png|缩略图|刷怪房中的蜘蛛刷怪笼]]
+刷怪笼可在以下结构和地物中自然生成，实体的种类取决于所在的结构或地物：
+;[[刷怪房]]
+:可能是一个[[僵尸]]刷怪笼（50%概率）、[[骷髅]]刷怪笼（25%概率）或[[蜘蛛]]刷怪笼（25%概率）。
+;[[废弃矿井]]
+:被[[蜘蛛网]]环绕的[[洞穴蜘蛛]]刷怪笼。
+;[[林地府邸]]
+:很小概率会生成一座内部具有被[[蜘蛛网]]环绕的[[蜘蛛]]刷怪笼的[[林地府邸/结构/战利品房间#蜘蛛房|小房间]]。
+;[[要塞]]
+:[[蠹虫]]刷怪笼，位于[[末地传送门]]房间。每个要塞只有1个。
+;[[下界要塞]]
+:[[烈焰人]]刷怪笼，位于有楼梯引领上去的瞭望台上。每个下界要塞一般有2个。
+;[[堡垒遗迹]]
+:[[岩浆怪]]刷怪笼，被[[铁链]]挂在藏宝室的天花板上。只会生成在堡垒遗迹的藏宝室，并且只有1个。
+
+{{Block distribution}}
+
+== 获取 ==
+{{see also|Tutorial:获取任意物品}}
+刷怪笼无法在未开启[[作弊]]的[[生存模式]]的世界中获取。使用[[创造模式]]或启用[[作弊]]，刷怪笼可以通过[[创造模式物品栏]]、[[创造模式]]中使用{{ctrl|选取方块}}或[[命令]]等方式获得。
+
+== 破坏 ==
+挖掘刷怪笼的合适工具是镐。刷怪笼需要木镐或品质更好的镐来挖掘，否则挖掘时间将延长且不会掉落。
+
+{{Breaking table}}
+
+刷怪笼被破坏后会掉落15-43点[[经验]]。
+
+== 用途 ==
+非自然生成的刷怪笼默认为空，可对着刷怪笼{{ctrl|使用}}[[刷怪蛋]]来设置或改变要生成的生物类型，但不会写入刷怪蛋中生物的附加数据。
+
+{{in|je}}和平[[难度]]下，刷怪笼生成的除了[[猪灵]]、[[潜影贝]]和[[末影龙]]以外的任何[[敌对生物]]都会在它们生成后立刻消失，而[[僵尸猪灵]]和[[恶魂]]完全不会生成。
+
+{{in|be}}和平难度下，刷怪笼无法生成除了猪灵、疣猪兽、潜影贝和末影龙以外的任何敌对生物。
+
+{{in|je}}若游戏规则{{gamerule|spawner_blocks_work}}为<code>false</code>，刷怪笼无法运作并生成生物。
+
+=== 机制 ===
+[[File:Spawnerrange.png|thumb|俯视视角下，刷怪笼生成生物的范围（{{el|je}}为白色+红色羊毛区域，{{el|be}}为白色羊毛区域）]]
+玩家距离刷怪笼16个方块内时（含刷怪笼），刷怪笼才会运作。刷怪笼运作时，会在一个以刷怪笼为中心的空间体积内生成对应实体，实体的底面中心点会在这个区域内。{{in|je}}这个空间体积范围为垂直距离1格、水平[[切比雪夫距离]]4格；{{in|be}}这个空间体积范围为垂直距离1格、水平[[曼哈顿距离]]4格<ref>{{ytl|hAXPnt6V7K4}}</ref>。
+
+刷怪笼内有一个微缩的实体模型，在激活时会逆时针旋转，旋转速度与下一次将要生成的时间有关，最大速度可以达到16.7RPM。其中旋转的生物可能会穿着[[盔甲]]、也可能携带[[不祥旗帜]]。
+
+刷怪笼方块会尝试在这个有效区域内随机选择的4个位置（作为实体的脚部坐标）分别尝试生成1个实体，每次生成后会等待200-799游戏刻（10-39.95秒）。在等待时，刷怪笼中的实体模型的旋转速度会加快。除了可生成方块地面这一常规生成要求不需要被满足，生物的其他生成要求必须要满足（见下文[[#生成需求|生成需求]]），因此刷怪笼常常不能生成超过4个实体。当刷怪笼生成了实体时，它会产生烟雾和火焰[[粒子]]效果。如果刷怪笼在有效区域内找不到任何符合要求的位置生成实体，则每一[[刻]]都会尝试一次。
+
+如果6个或更多刷怪笼类型的实体的碰撞箱{{only|je|for=与以刷怪笼为中心的9×9×9范围相交|short=1}}或{{only|be|for=与以刷怪笼西北角最低点为中心的16×10×16范围相交|short=1}}，那么刷怪笼内会产生火焰粒子（表示已经“生成”了新的实体），但实际上生成过程被跳过，进入下一个周期。{{needs testing|bedrock=1|}}这在4次尝试生成之前都会检查。
+
+实体更有可能生成在靠近刷怪笼而不是远离刷怪笼的地方。
+
+==== 生成需求 ====
+刷怪笼会去除对地面必须为可生成方块的生成需求，但实体的其他生成需求（碰撞箱、亮度）仍需要满足。也就是说，对于一些在生成区域边缘生成的实体来说，必须远离方块的[[碰撞箱]]以确保可以容纳实体的高度和宽度。
+
+{| class="wikitable"
+|+ 一个普通刷怪笼的最大生成区域总览
+|-
+! 生物形态
+! 不产生碰撞的需求空间
+! 垂直<br>对齐
+|-
+| {{EntityLink|Pig}}
+| 8.9 × 2.9 × 8.9
+| {{BlockGrid|s=Spawner|a=Cauldron+top|a|s|a}}
+|-
+| {{EntityLink|Cave Spider}}
+| 8.7 × 2.5 × 8.7
+| {{BlockGrid|s=Spawner|a=Cauldron+top|a|s|a}}
+|-
+| {{EntityLink|Silverfish}}
+| 8.3 × 2.7 × 8.3
+| {{BlockGrid|s=Spawner|a=Cauldron+top|a|s|a}}
+|-
+| {{EntityLink|Zombie}}
+| 8.6 × 3.95 × 8.6
+| {{BlockGrid|s=Spawner|a=Cauldron+top|a|a|s|a}}
+|-
+| {{EntityLink|Skeleton}}
+| 8.6 × 3.99 × 8.6
+| {{BlockGrid|s=Spawner|a=Cauldron+top|a|a|s|a}}
+|-
+| {{EntityLink|Blaze}}
+| 8.6 × 3.8 × 8.6
+| {{BlockGrid|s=Spawner|a=Cauldron+top|a|a|s|a}}
+|-
+| {{EntityLink|Spider}}
+| 9.4 × 2.9 × 9.4
+| {{BlockGrid|s=Spawner|a=Cauldron+top|a|s|a}}
+|-
+| {{EntityLink|Magma Cube}}
+| 10.05 × 4.09 × 10.05
+| {{BlockGrid|s= Spawner|a=Cauldron+top|a|a|a|s|a}}
+|}
+
+对于表中所有列出的生成区域，其水平面是以刷怪笼方块为中心的。虽然猪的不产生碰撞的需求区域是8.9×2.9×8.9，{{only|je|for=但是猪生成时脚下必须有草方块}}，导致实际成功生成区域的大小减小到8.9×0.9×8.9。生成不要求脚下方块的生物可以生成在空中，忽略对地面的普通生成规则。
+
+刷怪笼生成生物时无视[[生物群系]]指定的自然生成生物，大部分生物的生成需求也不含生物群系，所以刷怪笼可以把生物放置在它们不会正常生成的地方。处于[[蘑菇岛]]生物群系的刷怪笼能生成敌对生物，[[虚空（生物群系）|虚空]]生物群系中的刷怪笼也能正常生成任何生物。同时，[[哞菇]]刷怪笼在平原生物群系里，只要生成区域有[[菌丝体]]，那么哞菇刷怪笼就会生成哞菇。{{in|be}}刷怪笼只有任意一面接触[[水源]]才可以生成[[鱼]]。
+
+刷怪笼的运作不受[[游戏规则]]{{gamerule|spawn_mobs|doMobSpawning}}的影响，也不受生成上限的影响。
+
+==== 禁用 ====
+{{see also|亮度#生物}}
+[[File:Blaze Spawner Blocking Pattern.png|thumb|right|用[[荧石]]禁用烈焰人刷怪笼的方式]]
+[[File:Magma Cube Spawner Blocking Pattern.png|thumb|right|岩浆怪刷怪笼的禁用方式]]
+禁用刷怪笼所需的条件取决于生物的种类。
+
+对于只在黑暗中生成的生物，让生成区域[[亮度]]等级大于0可防止刷怪。在刷怪笼周围放置[[火把]]即可。
+
+对于[[烈焰人]]和[[蠹虫]]刷怪笼，阻止它刷怪需要至少12的亮度等级。例如：
+* 使用至少9个亮度为15的方块围起来。
+* 在和刷怪笼同一高度使用7×7格火把紧密围起。
+* 由于基岩版的刷怪笼只在菱形区域生成生物，在刷怪笼四边各放一个亮度15的[[南瓜灯]]即可禁用。
+
+将刷怪笼的刷怪范围完全用有碰撞箱的方块填满也可以有效将其禁用。例如虽然[[岩浆怪]]刷怪笼无法通过提高-{}-亮度等级禁用，但由于其在生成时一律以大型岩浆怪的尺寸检测可用空间，岩浆怪刷怪笼可以简单地通过9个固体方块禁用。
+
+=== 自定义刷怪笼 ===
+用[[命令]]可以自定义刷怪笼：
+* 用于生成任何种类的实体。
+* 可以随机生成多种不同的实体。
+* 可以设置生成的实体的属性。
+* 可以改变刷怪笼本身的部分运作机制，如生成实体的范围、每隔多久尝试一次生成实体。
+
+关于自定义刷怪笼的详细技术性信息详见{{slink||数据值}}。
+
+=== 安全保护 ===
+{{exclusive|je|section=1}}
+{{Filetr|Spawner warning.png|thumb|300px|刷怪笼的物品提示框警告信息}}
+{{in|je}}刷怪笼属于“仅管理员可设置数据”的方块。
+
+非管理员玩家对刷怪笼按下{{key|Ctrl}}+{{control|选取方块}}时不会复制方块实体数据，放置物品栏中已有的带有方块实体数据的刷怪笼也不会将数据实际加载。
+
+管理员玩家的物品栏中带有方块实体数据的刷怪笼的物品[[提示框]]中会显示警告信息。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Spawner break1.ogg
+|sound2=Spawner break2.ogg
+|sound3=Spawner break3.ogg
+|sound4=Spawner break4.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source={{tp|soundCategory.block}}
+|description=破坏方块
+|id=block.spawner.break
+|translationkey=subtitles.block.generic.break
+}}
+{{Sound table
+|sound=Spawner step1.ogg
+|sound2=Spawner step2.ogg
+|sound3=Spawner step3.ogg
+|sound4=Spawner step4.ogg
+|sound5=Spawner step5.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.spawner.fall
+|translationkey=subtitles.block.generic.fall}}
+{{Sound table
+|sound=Spawner step1.ogg
+|sound2=Spawner step2.ogg
+|sound3=Spawner step3.ogg
+|sound4=Spawner step4.ogg
+|sound5=Spawner step5.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source={{tp|soundCategory.block}}
+|description=挖掘方块
+|id=block.spawner.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Spawner break1.ogg
+|sound2=Spawner break2.ogg
+|sound3=Spawner break3.ogg
+|sound4=Spawner break4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source={{tp|soundCategory.block}}
+|description=放置方块
+|id=block.spawner.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Spawner step1.ogg
+|sound2=Spawner step2.ogg
+|sound3=Spawner step3.ogg
+|sound4=Spawner step4.ogg
+|sound5=Spawner step5.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.spawner.step
+|translationkey=subtitles.block.generic.footsteps
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=block.mob_spawner.step1.wav
+|sound2=block.mob_spawner.step2.wav
+|sound3=block.mob_spawner.step3.wav
+|sound4=block.mob_spawner.step4.wav
+|sound5=block.mob_spawner.step5.wav
+|source=方块
+|description=方块作为物品使用时发出的音效
+|id=block.mob_spawner.step
+|typeid=item.use.on
+}}
+{{Sound table
+|bedrock=1
+|sound=block.mob_spawner.break1.wav
+|sound2=block.mob_spawner.break2.wav
+|sound3=block.mob_spawner.break3.wav
+|sound4=block.mob_spawner.break4.wav
+|source=方块
+|description=破坏方块
+|id=block.mob_spawner.break
+|typeid=break
+|soundpitch=0.8
+}}
+{{Sound table
+|bedrock=1
+|sound=block.mob_spawner.step1.wav
+|sound2=block.mob_spawner.step2.wav
+|sound3=block.mob_spawner.step3.wav
+|sound4=block.mob_spawner.step4.wav
+|sound5=block.mob_spawner.step5.wav
+|source=方块
+|description=挖掘方块
+|id=block.mob_spawner.step
+|typeid=hit
+|soundvolume=0.4
+|soundpitch=0.5
+}}
+{{Sound table
+|bedrock=1
+|sound=block.mob_spawner.break1.wav
+|sound2=block.mob_spawner.break2.wav
+|sound3=block.mob_spawner.break3.wav
+|sound4=block.mob_spawner.break4.wav
+|source=方块
+|description=放置方块
+|id=block.mob_spawner.break
+|typeid=place
+|soundpitch=0.8
+}}
+{{Sound table
+|bedrock=1
+|sound=block.mob_spawner.step1.wav
+|sound2=block.mob_spawner.step2.wav
+|sound3=block.mob_spawner.step3.wav
+|sound4=block.mob_spawner.step4.wav
+|sound5=block.mob_spawner.step5.wav
+|source=方块
+|description=带有摔落伤害时摔落在方块上
+|id=block.mob_spawner.step
+|typeid=fall
+}}
+{{Sound table
+|bedrock=1
+|sound=block.mob_spawner.step1.wav
+|sound2=block.mob_spawner.step2.wav
+|sound3=block.mob_spawner.step3.wav
+|sound4=block.mob_spawner.step4.wav
+|sound5=block.mob_spawner.step5.wav
+|source=方块
+|description=在方块上行走
+|id=block.mob_spawner.step
+|typeid=step
+|soundvolume=0.2
+}}
+{{Sound table
+|bedrock=1
+|sound=block.mob_spawner.step1.wav
+|sound2=block.mob_spawner.step2.wav
+|sound3=block.mob_spawner.step3.wav
+|sound4=block.mob_spawner.step4.wav
+|sound5=block.mob_spawner.step5.wav
+|source=方块
+|description=在方块上跳跃
+|id=block.mob_spawner.step
+|typeid=jump
+|soundvolume=1.1
+|soundpitch=0.12
+}}
+{{Sound table
+|bedrock=1
+|sound=block.mob_spawner.step1.wav
+|sound2=block.mob_spawner.step2.wav
+|sound3=block.mob_spawner.step3.wav
+|sound4=block.mob_spawner.step4.wav
+|sound5=block.mob_spawner.step5.wav
+|source=方块
+|description=在方块上着陆
+|id=block.mob_spawner.step
+|typeid=land
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Spawner
+|spritetype=block
+|nameid=spawner
+|showblocktags=je
+|blocktags={{GameTag|block|spawner}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=spawner
+|spritetype=block
+|nameid=mob_spawner
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Spawner
+|spritetype=block
+|nameid=mob_spawner
+|showblocktags=be
+|blocktags={{GameTagBE|block|mob_spawner}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=spawner
+|spritetype=block
+|nameid=MobSpawner
+|foot=1
+}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+刷怪笼拥有一个与其关联的方块实体，该方块实体保存了关于该刷怪笼的附加数据。刷怪笼的方块实体ID为<code>mob_spawner</code>。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 视频 ==
+{{video note|[[Java版1.19.3]]後，生怪磚放置時不再有預設的實體類型。|outdated}}
+{{bv|BV1Ht411u7EW}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100625-1917|[[File:Spawner JE1.png|32px]] 加入了刷怪笼。
+|刷怪笼可以每隔一段时间生成特定生物，内含对应生物的微缩模型，激活时还会逆时针旋转。
+|刷怪笼能够放入[[物品栏]]中，放置时默认会生成[[猪]]。}}
+|{{HistoryLine||20100627|刷怪笼现在拥有独立的ID，以减少游戏崩溃。}}
+|{{HistoryLine|java alpha}}
+|{{HistoryLine||v1.0.1|刷怪笼被开采后不再掉落自身。}}
+|{{HistoryLine||v1.1.0|出于[[多人游戏]]中的一个漏洞，暂时移除了刷怪笼内的微缩生物模型。}}
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.2|重新加入了刷怪笼内的微缩生物模型。}}
+|{{HistoryLine||1.8|dev=pre1|[[洞穴蜘蛛]]刷怪笼现在会自然生成在[[废弃矿井]]中。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|[[File:Spawner JE2.png|32px]] 更改了刷怪笼的纹理，现在颜色更深。
+|[[烈焰人]]刷怪笼现在会自然生成在[[下界要塞]]。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|[[蠹虫]]刷怪笼现在会自然生成于[[要塞]]的传送门房间中。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|刷怪笼又可以放入物品栏中了。
+|现在使用附有[[精准采集]]魔咒的工具开采刷怪笼时会使之掉落自身。}}
+|{{HistoryLine|||dev=Beta 1.9-pre5|[[鱿鱼]]刷怪笼现在仅在高度46-62格处生效。
+|使用附有精准采集魔咒的工具开采不再会使刷怪笼掉落。}}
+|{{HistoryLine|||dev=Beta 1.9-pre6|刷怪笼现在破坏所需时间更短，且与工具品质相关。}}
+|{{HistoryLine||1.2.1|dev=12w06a|刷怪笼现在可以在多人游戏中正常显示对应生物的微缩模型，此前只会显示猪。}}
+|{{HistoryLine||1.3.1|dev=12w21a|不再可以通过{{control|选取方块}}将刷怪笼放入物品栏中。}}
+|{{HistoryLine|||dev=12w22a|现在刷怪笼被破坏后会掉落经验。}}
+|{{HistoryLine|||dev=12w26a|刷怪笼现在支持指定所生成生物的额外数据。}}
+|{{HistoryLine||1.8|dev=14w26c|刷怪笼的水平生成范围现在是从方块中心处开始计算而不是从西北角处计算。
+|排除区域大小被减少了：对于一个默认的刷怪笼，要防止生成生物，必须在9×9×9而不是在17×9×17的区域内存在6只生物。}}
+|{{HistoryLine|||dev=14w28b|现在可以对着刷怪笼{{control|使用}}[[刷怪蛋]]来改变刷怪笼的类型。}}
+|{{HistoryLine||1.9|dev=16w02a|生成大型生物的刷怪笼现在会调整内含缩小版生物的尺寸来与刷怪笼的尺寸相适应。}}
+|{{HistoryLine||1.11|dev=16w32a|方块实体ID从<code>MobSpawner</code>更改为<code>mob_spawner</code>。}}
+|{{HistoryLine|||dev=16w39a|一种内有[[蜘蛛网]]环绕的[[蜘蛛]]刷怪笼的封闭房间可以罕见地生成于[[林地府邸]]内。}}
+|{{HistoryLine||1.13|dev=17w47a|英文名称由“Monster Spawner”更改为“Spawner”。
+|在[[扁平化]]前，此方块的数字ID为52。}}
+|{{HistoryLine|||dev=pre5|ID更改为<code>spawner</code>。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Spawner JE3.png|32px]] 更改了刷怪笼的纹理。}}
+|{{HistoryLine||1.16|dev=20w16a|[[岩浆怪]]刷怪笼现在会生成于[[堡垒遗迹]]的藏宝室内。}}
+|{{HistoryLine||1.18|dev=exp2|将僵尸、骷髅、蜘蛛和洞穴蜘蛛刷怪笼刷怪区域的[[方块光照]]等级上限由7提高到11。}}
+|{{HistoryLine|||dev=21w37a|回退了exp2中的更改。}}
+|{{HistoryLine|||dev=21w40a|刷怪笼现在只能在水中生成鱿鱼或发光鱿鱼。}}
+|{{HistoryLine||1.19.3|dev=22w43a|现在刷怪笼可从创造模式物品栏中获取。<ref>{{bug|MC-132820|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=22w44a|刷怪笼放置时不再有默认的实体类型，此前默认为猪。
+|没有定义实体类型的刷怪笼不再发出火焰[[粒子]]。
+|英文名称改回“Monster Spawner”，以与{{el|be}}保持一致，并不再用紫色文本显示。
+|现在又可以通过{{ctrl|选取方块}}将刷怪笼放入物品栏中了。<ref>{{bug|MC-50605|||Fixed}}</ref>
+|被定义的实体类型现在会在其物品描述中显示，如尚未定义实体类型，会在其描述中介绍如何设置一个生物类型。}}
+|{{HistoryLine||1.20.3|dev=23w45a|[[File:Spawner JE4.png|32px]] 刷怪笼现在可以渲染内部的面。}}
+|{{HistoryLine||1.21.2|dev=24w33a|为刷怪笼加入了独有音效，不再使用[[铁块]]的音效。
+|该版本中，在刷怪笼上行走的脚步声的字幕本地化键被错误地写为<code>subtitles.block.generic.step</code>。<ref name="MC-275275">{{bug|MC-275275|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=24w35a|修正了在刷怪笼上行走的脚步声的字幕本地化键。<ref name="MC-275275" />}}
+|{{HistoryLine||1.21.4|dev=24w44a|加入了刷怪笼的安全保护提示。}}
+|{{HistoryLine|||dev=24w46a|补充了摔落到刷怪笼上的音效的[[Java版声音事件|声音事件定义]]<ref name="MC-275274">{{bug|MC-275274|||Fixed}}</ref>。}}
+|{{HistoryLine||1.21.9|dev=25w37a|加入了游戏规则<code>[[游戏规则/spawnerBlocksEnabled|spawnerBlocksEnabled]]</code>，用于控制刷怪笼有效性。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.9.0|dev=build 1|[[File:Spawner BE1.png|32px]] 加入了刷怪笼，当放置刷怪笼时会生成猪。}}
+|{{HistoryLine|||dev=build 2|在创造模式物品栏中加入了刷怪笼，并且可以用[[刷怪蛋]]改变刷怪笼的类型。
+|刷怪笼放置时不再有默认的实体类型，此前默认为猪。}}
+|{{HistoryLine|||dev=build 9|刷怪笼现在会发光了。}}
+|{{HistoryLine||0.12.1|dev=build 1|[[烈焰人]]刷怪笼现在会生成在[[下界要塞]]中。
+|刷怪笼现在使用[[镐]]开采时会掉落[[经验球]]。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|[[蜘蛛]]刷怪笼现在会生成在[[林地府邸]]中。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.13.60|使用TNT摧毁刷怪笼时会掉落刷怪笼。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Spawner BE2.png|32px]] 更改了刷怪笼的纹理。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.59|[[岩浆怪]]刷怪笼现在会生成于[[堡垒遗迹]]的藏宝室内。}}
+|{{HistoryLine||1.17.30|dev=1.17.30.21|刷怪笼不再会发光。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.20|现在刷怪笼仅在被镐或TNT破坏时掉落经验。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.23|为刷怪笼加入了独有音效，不再使用[[铁块]]的音效。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Spawner JE1.png|32px]] 加入了刷怪笼。}}
+|{{HistoryLine||xbox=TU5|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Spawner JE2.png|32px]] 更改了刷怪笼的纹理。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|现在可以用[[刷怪蛋]]改变刷怪笼的类型。}}
+|{{HistoryLine||xbox=TU69|ps3=1.76|psvita=1.76|ps4=1.76|wiiu=Patch 38|switch=none|刷怪笼现在可以在创造模式[[物品栏]]中找到，也能用{{ctrl|选取方块}}键获得。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Spawner JE3.png|32px]] 更改了刷怪笼的纹理。}}
+}}
+
+== 你知道吗 ==
+* {{in|je}}如果自然生成的[[埋藏的宝藏]]的箱子生成在了刷怪笼的位置上，箱子会取代刷怪笼且不包含任何战利品，同时在箱子的周围生成5个空刷怪笼。但在1.19.3以后，埋藏的宝藏先于任何自然生成的刷怪笼生成，这个特性在原版中实际上无法触发。<ref name=empty>{{bug|MC-234396}}</ref>
+
+== 画廊 ==
+<gallery>
+File:Blaze-spawner.png|[[下界要塞]]中的一个[[烈焰人]]刷怪笼
+File:Two Spawners.png|两个相连的[[刷怪房]]和两个刷怪笼
+File:Giant Spawner.png|一个[[巨人]]刷怪笼
+File:Ghast Spawner.png|一个[[恶魂]]刷怪笼
+File:Zombie in armor spawner.png|被修改为生成穿着钻石盔甲的[[僵尸]]的刷怪笼
+File:Blazespawner.png|禁用烈焰人刷怪笼的亮度要求
+File:Skeleton Dungeon.png|一个被禁用的生成[[骷髅]]的刷怪笼
+File:Buried Treasure with Pig Spawner.png|围绕着[[埋藏的宝藏]]的5个[[猪]]刷怪笼<ref name=empty/>
+File:Floating cave spider monster spawner.png|恶地矿井中一个浮空的洞穴蜘蛛刷怪笼
+</gallery>
+
+== 参见 ==
+* [[Tutorial:刷怪笼陷阱|刷怪笼陷阱]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}
+
+[[cs:Líheň oblud]]
+[[de:Spawner]]
+[[en:Monster Spawner]]
+[[es:Generador de criaturas]]
+[[fr:Générateur de créatures]]
+[[hu:Szörnyidéző]]
+[[it:Generatore di mostri]]
+[[ja:モンスタースポナー]]
+[[ko:몬스터 생성기]]
+[[lzh:孳衍籠]]
+[[nl:Monsterkooi]]
+[[pl:Przyzywacz potworów]]
+[[pt:Gerador de Criaturas]]
+[[ru:Спаунер мобов]]
+[[uk:Породжувач монстрів]]

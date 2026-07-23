@@ -1,0 +1,4228 @@
+# 页面: 客户端选项文件格式
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%89%E9%A1%B9%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F
+# 分类: 基岩版, 待扩充段落, 待扩充页面, 游戏文件, 需要信息, 需要补充的条目, 需要验证
+# 抓取时间: 2026-07-14 17:25:19
+# 原始 Wikitext 内容:
+
+{{stub}}
+'''客户端选项文件'''（'''{{filename|options.txt}}'''）是一个用来存储所有可以在游戏[[选项]]中改变的设定的文件，同时也会存储游戏退出后需要保存的信息。它在[[Java版]]中位于{{filename|[[.minecraft]]}}文件夹中，在[[基岩版]]中位于{{filepath|[[com.mojang]]/minecraftpe}}文件夹中。你可以使用任何文本编辑工具来编辑它，以达到改变设定的效果。值得注意的是，大部分设定你都可以直接在游戏中更改，但仍有少数设定只能通过编辑该文件来修改。
+
+== 选项 ==
+=== Java版 ===
+每一行代表一个选项或一个数据，从左到右依次是选项名称、冒号、对应值。“true”意为真（开启），“false”意为假（关闭）。所有可用的按键代码可以在[[键控代码]]找到。<!--
+尚未发布的正式版的快照中添加的选项需使用“&ndash;”代替实际的行号，待正式版发布后再给予编号。 -->
+{| class="wikitable sortable" style="width: 100%" data-description="选项列表"
+|-
+! scope="col" style="width: 5%;" | #{{note|name=numbering|此为{{filename|options.txt}}文件中的对应行号；{{filename|options.txt}}中的选项本身不带行号。}}
+! scope="col" | 选项名称
+! scope="col" class="unsortable" | 解释
+! scope="col" | 有效值
+! scope="col" | 默认值
+! scope="col" | 加入的版本
+|-
+! scope="row" | 1
+| version
+| 选项文件自身的版本号；用于升级默认设置。（数字）
+| 
+| {{data version|Java版{{v|java|link=none}}}}<br>（此处为{{v|java}}的数据版本）
+| [[Java版1.10-pre1|1.10-pre1]]（[[Java版1.10|1.10]]）
+|-
+! scope="row" | 2
+| ao
+| 平滑光照
+| 布尔值
+| true
+|
+|-
+! scope="row" | 3
+| biomeBlendRadius
+| 生物群系过渡时的混合半径
+| {{range|0|7}}
+| 2
+| [[18w15a]]（[[Java版1.13|1.13]]）
+|-
+! scope="row" | 4
+| chunkSectionFadeInTime
+| 区块淡入时长（以秒计）
+| {{range|0|2}}
+| 0.75
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 5
+| cutoutLeaves
+| 控制树叶是否可透视
+| 布尔值
+| false
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 6
+| enableVsync
+| 是否开启[[wikipedia:Screen tearing#V-sync|v-sync]]（垂直同步）
+| 布尔值
+| false
+|
+|-
+! scope="row" | 7
+| entityDistanceScaling
+| 实体渲染距离的最大值
+| {{range|0.5|5.0}}
+| 1.0
+|
+|-
+! scope="row" | 8
+| entityShadows
+| 是否显示实体阴影
+| 布尔值
+| true
+|
+|-
+! scope="row" | 9
+| forceUnicodeFont
+| 是否强制使用Unicode字体
+| 布尔值
+| false
+|
+|-
+! scope="row" | 10
+| japaneseGlyphVariants
+| 是否打开{{tp|options.japaneseGlyphVariants}}
+| 布尔值
+| false
+| [[24w06a]]（[[Java版1.20.5|1.20.5]]）
+|-
+! scope="row" | 11
+| fov
+| 视角大小（浮点数）。游戏中的视角是以度数计量的，但{{filename|options.txt}}不是。这是浮点数转化度数的公式<code>-{}-度数=40×浮点数+70</code>
+| {{range|-1|1}}
+| 0.0
+|
+|-
+! scope="row" | 12
+| fovEffectScale
+| 视场角效果（疾跑、[[迅捷]]、[[缓慢|{{tr|缓慢|緩速|緩慢}}]]等对视野范围的影响）的轻重程度
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 13
+| darknessEffectScale
+| {{tp|options.darknessEffectScale.tooltip}}
+| {{range|0|1}}
+| 1.0
+| [[22w15a]]（[[Java版1.19|1.19]]）
+|-
+! scope="row" | 14
+| glintSpeed
+| {{tp|options.glintSpeed.tooltip}}
+| {{range|0|1}}
+| 0.5
+| [[23w05a]]（[[Java版1.19.4|1.19.4]]）
+|-
+! scope="row" | 15
+| glintStrength
+| {{tp|options.glintStrength.tooltip}}
+| {{range|0|1}}
+| 0.75
+| [[23w05a]]（[[Java版1.19.4|1.19.4]]）
+|-
+! scope="row" | &ndash;
+| preferredGraphicsBackend
+| 控制渲染优先使用的图形API，游戏重启后生效
+| default（默认）、opengl（OpenGL）或vulkan（Vulkan）
+| default（默认）
+| [[26.2-snapshot-1]]（[[Java版26.2|26.2]]）
+|-
+! scope="row" | 16
+| graphicsPreset
+| “品质与性能”预设
+| fast(流畅)、fancy(高品质)、fabulous（''极佳！''）或custom（自定义）
+| fancy（高品质）
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 17
+| prioritizeChunkUpdates
+| 更新区块策略
+| {{range|0|2}}（{{tr|线程化|依執行緒|執行緒}}、半阻塞、全阻塞）
+| 0（{{tr|线程化|依執行緒|執行緒}}）
+| [[21w37a]]（[[Java版1.18|1.18]]）
+|-
+! scope="row" | 18
+| fullscreen
+| 游戏是否在启动时尝试全屏
+| 布尔值
+| false
+|
+|-
+! scope="row" | 19
+| exclusiveFullscreen
+| 游戏是否独占全屏
+| 布尔值
+| false
+| [[26.1-pre-2]]（[[Java版26.1|26.1]]）
+|-
+! scope="row" | 20
+| gamma
+| 亮度
+| {{range|0|1}}（范围以外的值无效，即使编辑{{filename|options.txt}}，也无法设定为无效值。<ref>{{bug|MC-51418|||Fixed}}</ref>）
+| 0.5
+|
+|-
+! scope="row" | 21
+| guiScale
+| [[GUI]]的尺寸
+| 0（自适应）或{{range|1|4}}（对应的尺寸）
+| 0（自适应）
+|
+|-
+! scope="row" | 22
+| maxAnisotropyBit
+| 各向异性过滤级别
+| 2/4/8
+| 4
+| [[1.21.11-pre1]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 23
+| textureFiltering
+| 纹理过滤类型
+| {{range|0|2}}
+| 0（无）
+| [[1.21.11-pre1]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 24
+| maxFps
+| 最大帧率
+| {{range|10|260}}
+| 120
+|
+|-
+! scope="row" | 25
+| improvedTransparency
+| 是否开启改进透明显示
+| 布尔值
+| false
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 26
+| inactivityFpsLimit
+| 在指定条件下降低帧率。当选项为"afk"时，若超过1分钟无操作，帧率将被限制至30。9分钟后进一步降至10；当选项为"minimized"时，仅在游戏窗口最小化时限制帧率
+| afk（无操作时）或minimized（最小化时）
+| afk（无操作时）
+|
+|-
+! scope="row" | 27
+| mipmapLevels
+| 抗锯齿等级
+| {{range|0|4}}
+| 4
+|
+|-
+! scope="row" | 28
+| narrator
+| 复述功能的设置
+| {{range|0|3}}：'关'，'复述所有'，'复述聊天消息'，'复述系统消息'
+| 0（关）
+| [[17w06a]]（[[Java版1.12|1.12]]）
+|-
+! scope="row" | 29
+| particles
+| 粒子数量（雨、药水效果，等等）
+| {{range|0|2}}：'全部'，'少量'，'最少'
+| 0（全部）
+|
+|-
+! scope="row" | 30
+| reducedDebugInfo
+| 是否简化[[调试屏幕]]上的调试信息
+| 布尔值
+| false
+|
+|-
+! scope="row" | 31
+| renderClouds
+| [[云]]的显示模式
+| true（高品质）/false（关）/fast（流畅）
+| true（高品质）
+|
+|-
+! scope="row" | 32
+| cloudRange
+| {{tp|options.renderCloudsDistance}}
+| {{range|2|128}}
+| 128
+|
+|-
+! scope="row" | 33
+| renderDistance
+| {{tp|options.renderDistance}}
+| {{range|2|32}}（若不借助外部编辑）32位或内存小于1GB的电脑上最大为16
+| 12（64位），8（32位）
+| [[25w17a]]（[[Java版1.21.6|1.21.6]]）
+|-
+! scope="row" | 34
+| simulationDistance
+| {{tp|options.simulationDistance}}
+| {{range|5|32}}（若不借助外部编辑）32位或内存小于1GB的电脑上最大为16
+| 12（64位），8（32位）
+| [[21w38a]]（[[Java版1.18|1.18]]）
+|-
+! scope="row" | 35
+| screenEffectScale
+| {{tp|options.screenEffectScale}}强度
+| {{range|0|1}}
+| 0.0
+|
+|-
+! scope="row" | 36
+| soundDevice
+| 要使用的音频输出设备
+| 字符串
+| （空）
+| [[21w37a]]（[[Java版1.18|1.18]]）
+|-
+! scope="row" | 37
+| vignette
+| 是否显示晕影
+| 布尔值
+| true
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 38
+| weatherRadius
+| {{tp|options.weatherRadius}}
+| {{range|3|10}}
+| 10
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 39
+| autoJump
+| 自动跳跃是否启用
+| 布尔值
+| false
+| 
+|-
+! scope="row" | 40
+| rotateWithMinecart
+| 是否在矿车转动时同步转动玩家视角
+| 布尔值
+| false
+|
+|-
+! scope="row" | 41
+| operatorItemsTab
+| 是否在[[创造模式物品栏]]中启用{{tp|options.operatorItemsTab}}类别
+| 布尔值
+| false
+| [[22w45a]]（[[Java版1.19.3|1.19.3]]）
+|-
+! scope="row" | 42
+| autoSuggestions
+| 如果始终显示命令补充UI，而不是只在按{{key|tab}}键时显示，则为True。
+| 布尔值
+| true
+| [[17w47a]]（[[Java版1.13|1.13]]）
+|-
+! scope="row" | 43
+| chatColors
+| 是否允许彩色聊天信息
+| 布尔值
+| true
+|
+|-
+! scope="row" | 44
+| chatLinks
+| 聊天栏里的链接显示是否为链接且是否不是纯文本
+| 布尔值
+| true
+|
+|-
+! scope="row" | 45
+| chatLinksPrompt
+| 在聊天中点击链接是否需要确认后才能打开
+| 布尔值
+| true
+|
+|-
+! scope="row" | 46
+| discrete_mouse_scroll
+| 是否忽略操作系统中对鼠标滚轮的设置
+| 布尔值
+| false
+|
+|-
+! scope="row" | 47
+| invertXMouse
+| 是否反转鼠标X轴
+| 布尔值
+| false
+| [[25w31a]]（[[Java版1.21.9|1.21.9]]）
+|-
+! scope="row" | 48
+| invertYMouse
+| 是否反转鼠标Y轴
+| 布尔值
+| false
+|
+|-
+! scope="row" | 49
+| realmsNotifications
+| 是否在主菜单显示Realms的邀请
+| 布尔值
+| true
+|
+|-
+! scope="row" | 50
+| showSubtitles
+| 是否显示[[字幕]]
+| 布尔值
+| false
+|
+|-
+! scope="row" | 51
+| directionalAudio
+| 是否启用{{tp|options.directionalAudio}}。开关此选项时，会立刻停止当前正在播放的音效
+| 布尔值
+| false
+| [[22w11a]]（[[Java版1.19|1.19]]）
+|-
+! scope="row" | 52
+| bobView
+| 是否启用{{tp|options.viewBobbing}}
+| 布尔值
+| true
+| 
+|-
+! scope="row" | 53
+| toggleCrouch
+| 控制玩家是否能够在按下潜行键后保持潜行状态
+| 布尔值
+| false
+|
+|-
+! scope="row" | 54
+| toggleSprint
+| 控制玩家是否能够在按下疾跑键后保持疾跑状态
+| 布尔值
+| false
+|
+|-
+! scope="row" | 55
+| toggleAttack
+| 控制玩家是否能够在按下攻击/摧毁键后保持攻击/摧毁
+| 布尔值
+| false
+| [[25w31a]]（[[Java版1.21.9|1.21.9]]）
+|-
+! scope="row" | 56
+| toggleUse
+| 控制玩家是否能够在按下使用物品/放置方块键后保持使用物品/放置
+| 布尔值
+| false
+| [[25w31a]]（[[Java版1.21.9|1.21.9]]）
+|-
+! scope="row" | 57
+| sprintWindow
+| 疾跑间隔（以刻计）
+| {{range|0|10}}
+| 7
+| [[25w31a]]（[[Java版1.21.9|1.21.9]]）
+|-
+! scope="row" | 58
+| darkMojangStudiosBackground
+| 将Mojang Studios加载界面的背景颜色更改为黑色
+| 布尔值
+| false
+| [[21w13a]]（[[Java版1.17|1.17]]）
+|-
+! scope="row" | 59
+| hideLightningFlashes
+| 隐藏闪电的闪烁效果（视觉效果）
+| 布尔值
+| false
+| [[21w37a]]（[[Java版1.18|1.18]]）
+|-
+! scope="row" | 60
+| hideSplashTexts
+| 隐藏[[闪烁标语]]
+| 布尔值
+| false
+| [[21w37a]]（[[Java版1.18|1.18]]）
+|-
+! scope="row" | 61
+| mouseSensitivity
+| 鼠标灵敏度
+| {{range|0|1}}
+| 0.5
+|
+|-
+! scope="row" | 62
+| damageTiltStrength
+| {{tp|options.damageTiltStrength.tooltip}}
+| {{range|0|1}}
+| 1.0
+| [[23w06a]]（[[Java版1.19.4|1.19.4]]）
+|-
+! scope="row" | 63
+| highContrast
+| {{tp|options.accessibility.high_contrast.tooltip}}
+| 布尔值
+| false
+| [[Java版1.19.4-pre1|1.19.4-pre1]]（[[Java版1.19.4|1.19.4]]）
+|-
+! scope="row" | 64
+| highContrastBlockOutline
+| 提高选中方块的轮廓对比度
+| 布尔值
+| false
+|
+|-
+! scope="row" | 65
+| narratorHotkey
+| {{tp|options.accessibility.narrator_hotkey.tooltip}}
+| 布尔值
+| true
+| [[23w33a]]（[[Java版1.20.2|1.20.2]]）
+|-
+! scope="row" | 66
+| resourcePacks
+| 正在使用的资源包的列表，包名以字符串表示，用逗号分隔。如果只加载默认资源包，则为空
+| 字符串
+| （空）
+|
+|-
+! scope="row" | 67
+| incompatibleResourcePacks
+| 被标记为与当前Minecraft版本不兼容的已使用的资源包列表，用逗号分隔；如果没有被标记为不兼容，则为空
+| 字符串
+| （空）
+|
+|-
+! scope="row" | 68
+| lastServer
+| 直接连接使用的最后一台服务器的地址
+| 字符串
+| （空）
+|
+|-
+! scope="row" | 69
+| lang
+| 正在使用的语言
+| 字符串
+| en_US
+|
+|-
+! scope="row" | 70
+| chatVisibility
+| 聊天栏是否显示
+| {{range|0|2}}：'显示'，'仅命令'，'隐藏'
+| 0（显示）
+|
+|-
+! scope="row" | 71
+| chatOpacity
+| 聊天栏的不透明度
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 72
+| chatLineSpacing
+| 聊天栏的行距
+| {{range|0|1}}
+| 0.0
+|
+|-
+! scope="row" | 73
+| textBackgroundOpacity
+| 聊天栏文本背景的透明度
+| {{range|0|1}}
+| 0.5
+|
+|-
+! scope="row" | 74
+| backgroundForChatOnly
+| 控制文本背景出现的位置（聊天栏或全局）
+| 布尔值
+| true
+|
+|-
+! scope="row" | 75
+| hideServerAddress
+| 服务器地址是否默认隐藏；在[[多人游戏]]菜单中使用{{key|F1}}进行切换
+| 布尔值
+| false
+|
+|-
+! scope="row" | 76
+| advancedItemTooltips
+| 是否在物品栏中显示鼠标指针所悬停物品的[[Java版数据值|ID]]和[[耐久度]]，使用{{key|F3+H}}切换
+| 布尔值
+| false
+|
+|-
+! scope="row" | 77
+| pauseOnLostFocus
+| 当不按{{key|Esc}}切出游戏或打开游戏内界面时，游戏是否暂停; 使用{{key|F3+P}}切换
+| 布尔值
+| true
+|
+|-
+! scope="row" | 78
+| overrideWidth
+| 打开Minecraft时界面的宽度，以像素为单位（设置为0时使用Minecraft的默认设定）；不在游戏内部设置
+| 整型
+| 0
+|
+|-
+! scope="row" | 79
+| overrideHeight
+| 打开Minecraft时界面的高度，以像素为单位（设置为0时使用Minecraft的默认设定）；不在游戏内部设置
+| 整型
+| 0
+|
+|-
+! scope="row" | 80
+| chatHeightFocused
+| 聊天栏的高度
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 81
+| chatDelay
+| 聊天栏文本延迟
+| {{range|0|6}}
+| 0.0
+|
+|-
+! scope="row" | 82
+| chatHeightUnfocused
+| 当显示聊天栏按钮没有被按下时，最高的聊天栏高度
+| {{range|0|1}}
+| 0.4375
+|
+|-
+! scope="row" | 83
+| chatScale
+| 聊天栏中文字的大小
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 84
+| chatWidth
+| 聊天栏的宽度
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 85
+| notificationDisplayTime
+| 通知显示时长
+| {{range|0.5|10.0}}
+| 1.0
+| [[23w03a]]（[[Java版1.19.4|1.19.4]]）
+|-
+! scope="row" | 86
+| useNativeTransport
+| 是否使用[https://netty.io/4.1/api/io/netty/channel/epoll/EpollSocketChannel.html Netty EpollSocketChannel]连接到服务器，而不是[https://netty.io/4.1/api/io/netty/channel/socket/nio/NioSocketChannel.html NioSocketChannel]（仅当EPOLL在用户系统上可用时适用）
+| 布尔值
+| true
+|
+|-
+! scope="row" | 87
+| mainHand
+| 主手是左手还是右手
+| left/right
+| right
+|
+|-
+! scope="row" | 88
+| attackIndicator
+| 当攻击时，攻击指示器如何显示
+| {{range|0|2}}: '关'，'十字准星'，'快捷栏'
+| 1（十字准星）
+|
+|-
+! scope="row" | 89
+| tutorialStep
+| 下一阶段的[[教学提示]]的显示
+| movement, find_tree, punch_tree, open_inventory, craft_planks, none
+| movement
+|[[17w06a]]（[[Java版1.12|1.12]]）
+|-
+! scope="row" | 90
+| mouseWheelSensitivity
+| 鼠标滚轮的灵敏度（见{{bug|MC-123773}}）
+| {{range|1|10}}
+| 1.0
+| [[18w21a]]（[[Java版1.13|1.13]]）
+|-
+! scope="row" | 91
+| rawMouseInput
+| 忽略系统的鼠标加速效果
+| 布尔值
+| true
+|
+|-
+! scope="row" | 92
+| allowCursorChanges
+| {{tp|options.allowCursorChanges}}
+| 布尔值
+| true
+| [[25w35a]]（[[Java版1.21.9|1.21.9]]）
+|-
+! scope="row" | 93
+| glDebugVerbosity
+| OpenGL日志信息级别（仅当前上下文中支持[https://registry.khronos.org/OpenGL/extensions/KHR/KHR_debug.txt GL_KHR_debug]或[https://registry.khronos.org/OpenGL/extensions/ARB/ARB_debug_output.txt GL_ARB_debug_output]扩展时生效）
+| {{range|0|4}}（none, HIGH, MEDIUM, LOW, NOTIFICATION）
+| 1
+| [[Java版1.13-pre2|1.13-pre2]]（[[Java版1.13|1.13]]）
+|-
+! scope="row" | 94
+| skipMultiplayerWarning
+| 是否跳过进入多人游戏时的免责声明
+| 布尔值
+| false
+| [[Java版1.15.2-pre1|1.15.2-pre1]]（[[Java版1.15.2|1.15.2]]）
+|-
+! scope="row" | 95
+| skipFriendsListPromo
+| 是否跳过进入好友列表时的同意界面
+| 布尔值
+| false
+| [[26.2-snapshot-7]]（[[Java版26.2|26.2]]）
+|-
+! scope="row" | 96
+| hideMatchedNames
+| 一些服务器以非标准格式发送聊天消息。 启用此选项后，游戏将尝试通过匹配消息中的文本来隐藏聊天消息。
+| 布尔值
+| true
+| [[Java版1.16.4-rc1|1.16.4-rc1]]（[[Java版1.16.4|1.16.4]]）
+|-
+! scope="row" | 97
+| joinedFirstServer
+| 如果为true，只有第一次加入服务器时会出现社交屏幕教学提示。如果为false，每次加入服务器时都会出现社交屏幕教学提示。
+| 布尔值
+| false
+| [[Java版1.16.4-rc1|1.16.4-rc1]]（[[Java版1.16.4|1.16.4]]）
+|-
+! scope="row" | 98
+| syncChunkWrites
+| 是否打开同步模式下的区域文件
+| 布尔值
+| true（Windows）/ false（其他系统）
+| [[21w42a]]（[[Java版1.18|1.18]]）
+|-
+! scope="row" | 99
+| showAutosaveIndicator
+| 是否在屏幕右下方显示自动保存指示器
+| 布尔值
+| true
+| [[21w42a]]（[[Java版1.18|1.18]]）
+|-
+! scope="row" | 100
+| allowServerListing
+| 是否在服务器在线玩家列表中显示玩家的ID
+| 布尔值
+| true
+| [[Java版1.18-pre2|1.18-pre2]]（[[Java版1.18|1.18]]）
+|-
+! scope="row" | 101
+| inGameNotification
+| 是否在游戏内显示好友列表通知
+| 布尔值
+| false
+| [[26.2-snapshot-7]]（[[Java版26.2|26.2]]）
+|-
+! scope="row" | 102
+| sharePresence
+| 控制好友列表中在线状态显示的类型
+| none（总显示为“Offline”）、limited（仅显示是否在线）或all（显示是否在线，在线时显示游玩状态）
+| all（显示是否在线，在线时显示游玩状态）
+| [[26.2-snapshot-7]]（[[Java版26.2|26.2]]）
+|-
+! scope="row" | 103
+| onlyShowSecureChat
+| 是否仅显示被签过名的原始聊天消息
+| 布尔值
+| false
+| [[22w19a]]（[[Java版1.19|1.19]]）
+|-
+! scope="row" | 104
+| onlyShowSecureChat
+| 是否{{tp|options.chat.drafts}}
+| 布尔值
+| false
+| [[25w33a]]（[[Java版1.21.9|1.21.9]]）
+|-
+! scope="row" | 105
+| panoramaScrollSpeed
+| 主菜单全景图的滚动速度
+| {{range|0|1}}
+| 1.0
+| [[22w43a]]（[[Java版1.19.3|1.19.3]]）
+|-
+! scope="row" | 106
+| telemetryOptInExtra
+| 是否发送额外的可选遥测数据
+| 布尔值
+| false
+| [[22w46a]]（[[Java版1.19.3|1.19.3]]）
+|-
+! scope="row" | 107
+| onboardAccessibility
+| 是否在游戏启动时显示辅助功能引导屏幕。
+| 布尔值
+| false
+| [[23w03a]]（[[Java版1.19.4|1.19.4]]）
+|-
+! scope="row" | 108
+| menuBackgroundBlurriness
+| {{tp|options.accessibility.menu_background_blurriness}}
+| {{range|0|10}}
+| 5
+| [[24w09a]]（[[Java版1.20.5|1.20.5]]）
+|-
+! scope="row" | 109
+| startedCleanly
+| 游戏上次是否正常启动。如果为false，游戏启动时会强制窗口化，并将警告记录到日志。游戏加载时，此选项会被设为false，等到加载完成后，选项才会设置为true。
+| 布尔值
+| true
+| [[25w02a]]（[[Java版1.21.5|1.21.5]]）
+|-
+! scope="row" | 110
+| musicToast
+| 是否显示{{tp|options.musicToast}}
+| never（不显示）、pause（游戏菜单）或pause_and_toast（游戏菜单和弹窗）
+| never
+| [[25w20a]]（[[Java版1.21.6|1.21.6]]）
+|-
+! scope="row" | 111
+| musicFrequency
+| {{tp|options.music_frequency}}
+| DEFAULT（默认）、FREQUENT（频繁）或CONSTANT(持续)
+| DEFAULT（默认）
+| [[25w20a]]（[[Java版1.21.6|1.21.6]]）
+|-
+! scope="row" | 112
+| key_key.attack
+| 攻击
+| 键控代码
+| key.mouse.left
+|
+|-
+! scope="row" | 113
+| key_key.use
+| 使用
+| 键控代码
+| key.mouse.right
+|
+|-
+! scope="row" | 114
+| key_key.forward
+| 向前移动
+| 键控代码
+| key.keyboard.w
+|
+|-
+! scope="row" | 115
+| key_key.left
+| 向左移动
+| 键控代码
+| key.keyboard.a
+|
+|-
+! scope="row" | 116
+| key_key.back
+| 向后移动
+| 键控代码
+| key.keyboard.s
+|
+|-
+! scope="row" | 117
+| key_key.right
+| 向右移动
+| 键控代码
+| key.keyboard.d
+|
+|-
+! scope="row" | 118
+| key_key.jump
+| 跳跃
+| 键控代码
+| key.keyboard.space
+|
+|-
+! scope="row" | 119
+| key_key.sneak
+| 潜行
+| 键控代码
+| key.keyboard.left.shift
+|
+|-
+! scope="row" | 120
+| key_key.sprint
+| 疾跑
+| 键控代码
+| key.keyboard.left.control
+|
+|-
+! scope="row" | 121
+| key_key.drop
+| 丢弃
+| 键控代码
+| key.keyboard.q
+|
+|-
+! scope="row" | 122
+| key_key.inventory
+| 物品栏
+| 键控代码
+| key.keyboard.e
+|
+|-
+! scope="row" | 123
+| key_key.chat
+| 聊天栏
+| 键控代码
+| key.keyboard.t
+|
+|-
+! scope="row" | 124
+| key_key.playerlist
+| 玩家列表
+| 键控代码
+| key.keyboard.tab
+|
+|-
+! scope="row" | 125
+| key_key.pickItem
+| 选取方块
+| 键控代码
+| key.mouse.middle
+|
+|-
+! scope="row" | 126
+| key_key.command
+| 命令
+| 键控代码
+| key.keyboard.slash
+|
+|-
+! scope="row" | 127
+| key_key.friends
+| 好友列表
+| 键控代码
+| key.keyboard.o
+| [[26.2-snapshot-7]]（[[Java版26.2|26.2]]）
+|-
+! scope="row" | 128
+| key_key.socialInteractions
+| 社交屏幕
+| 键控代码
+| key.keyboard.p
+|
+|-
+! scope="row" | 129
+| key_key.toggleGui
+| 切换[[HUD]]是否显示
+| 键控代码
+| key.keyboard.f1
+|
+|-
+! scope="row" | 130
+| key_key.toggleGui
+| 切换旁观者着色器效果
+| 键控代码
+| key.keyboard.f1
+|
+|-
+! scope="row" | 131
+| key_key.screenshot
+| 截屏
+| 键控代码
+| key.keyboard.f2
+|
+|-
+! scope="row" | 132
+| key_key.togglePerspective
+| 切换视角
+| 键控代码
+| key.keyboard.f5
+|
+|-
+! scope="row" | 133
+| key_key.smoothCamera
+| 电影视角
+| 键控代码
+| key.keyboard.unknown
+|
+|-
+! scope="row" | 134
+| key_key.fullscreen
+| 全屏
+| 键控代码
+| key.keyboard.f11
+|
+|-
+! scope="row" | 135
+| key_key.spectatorOutlines
+| 旁观模式高亮玩家
+| 键控代码
+| key.keyboard.unknown
+|
+|-
+! scope="row" | 136
+| key_key.spectatorHotbar
+| 旁观模式快捷栏
+| 键控代码
+| key.mouse.middle
+|
+|-
+! scope="row" | 137
+| key_key.swapOffhand
+| 切换主副手物品
+| 键控代码
+| key.keyboard.f
+|
+|-
+! scope="row" | 138
+| key_key.saveToolbarActivator
+| 保存快捷栏（创造模式）
+| 键控代码
+| key.keyboard.c
+| [[17w06a]]（[[Java版1.12|1.12]]）
+|-
+! scope="row" | 139
+| key_key.loadToolbarActivator
+| 加载物品栏（创造模式）
+| 键控代码
+| key.keyboard.x
+| [[17w06a]]（[[Java版1.12|1.12]]）
+|-
+! scope="row" | 140
+| key_key.advancements
+| 打开[[进度]]界面
+| 键控代码
+| key.keyboard.l
+| [[17w06a]]（[[Java版1.12|1.12]]）
+|-
+! scope="row" | 141
+| key_key.quickActions
+| 对话框快捷操作
+| 键控代码
+| key.keyboard.g
+| [[1.21.6-pre1]]（[[Java版1.21.6|1.21.6]]）
+|-
+! scope="row" | 142
+| key_key.debug.overlay
+| 切换叠加层
+| 键控代码
+| key.keyboard.f3
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 143
+| key_key.debug.modifier
+| 调试修饰键
+| 键控代码
+| key.keyboard.f3
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 144
+| key_key.hotbar.1
+| 快捷栏1
+| 键控代码
+| key.keyboard.1
+|
+|-
+! scope="row" | 145
+| key_key.hotbar.2
+| 快捷栏2
+| 键控代码
+| key.keyboard.2
+|
+|-
+! scope="row" | 146
+| key_key.hotbar.3
+| 快捷栏3
+| 键控代码
+| key.keyboard.3
+|
+|-
+! scope="row" | 147
+| key_key.hotbar.4
+| 快捷栏4
+| 键控代码
+| key.keyboard.4
+|
+|-
+! scope="row" | 148
+| key_key.hotbar.5
+| 快捷栏5
+| 键控代码
+| key.keyboard.5
+|
+|-
+! scope="row" | 149
+| key_key.hotbar.6
+| 快捷栏6
+| 键控代码
+| key.keyboard.6
+|
+|-
+! scope="row" | 150
+| key_key.hotbar.7
+| 快捷栏7
+| 键控代码
+| key.keyboard.7
+|
+|-
+! scope="row" | 151
+| key_key.hotbar.8
+| 快捷栏8
+| 键控代码
+| key.keyboard.8
+|
+|-
+! scope="row" | 152
+| key_key.hotbar.9
+| 快捷栏9
+| 键控代码
+| key.keyboard.9
+|
+|-
+! scope="row" | 153
+| key_key.debug.reloadChunk
+| （与{{key|''调试修饰键''}}同时按下）重新加载区块
+| 键控代码
+| key.keyboard.a
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 154
+| key_key.debug.showHitboxes
+| （与{{key|''调试修饰键''}}同时按下）显示判定箱
+| 键控代码
+| key.keyboard.b
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 155
+| key_key.debug.clearChat
+| （与{{key|''调试修饰键''}}同时按下）清除聊天消息
+| 键控代码
+| key.keyboard.d
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 156
+| key_key.debug.crash
+| （与{{key|''调试修饰键''}}同时按下）调试崩溃
+| 键控代码
+| key.keyboard.c
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 157
+| key_key.debug.showChunkBorders
+| （与{{key|''调试修饰键''}}同时按下）显示区块边界
+| 键控代码
+| key.keyboard.g
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 158
+| key_key.debug.showAdvancedTooltips
+| （与{{key|''调试修饰键''}}同时按下）显示高级提示框
+| 键控代码
+| key.keyboard.h
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 159
+| key_key.debug.copyRecreateCommand
+| （与{{key|''调试修饰键''}}同时按下）复制数据
+| 键控代码
+| key.keyboard.i
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 160
+| key_key.debug.spectate
+| （与{{key|''调试修饰键''}}同时按下）循环切换旁观模式
+| 键控代码
+| key.keyboard.n
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 161
+| key_key.debug.switchGameMode
+| （与{{key|''调试修饰键''}}同时按下）游戏模式切换器
+| 键控代码
+| key.keyboard.f4
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 162
+| key_key.debug.debugOptions
+| （与{{key|''调试修饰键''}}同时按下）调试选项
+| 键控代码
+| key.keyboard.f6
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 163
+| key_key.debug.focusPause
+| （与{{key|''调试修饰键''}}同时按下）切换失去焦点时暂停
+| 键控代码
+| key.keyboard.p
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 164
+| key_key.debug.dumpDynamicTextures
+| （与{{key|''调试修饰键''}}同时按下）转储动态纹理
+| 键控代码
+| key.keyboard.s
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 165
+| key_key.debug.reloadResourcePacks
+| （与{{key|''调试修饰键''}}同时按下）重新加载资源包
+| 键控代码
+| key.keyboard.t
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 166
+| key_key.debug.profiling
+| （与{{key|''调试修饰键''}}同时按下）开始/停止分析
+| 键控代码
+| key.keyboard.l
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 167
+| key_key.debug.copyLocation
+| （与{{key|''调试修饰键''}}同时按下）复制位置
+| 键控代码
+| key.keyboard.c
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 168
+| key_key.debug.dumpVersion
+| （与{{key|''调试修饰键''}}同时按下）转储版本信息
+| 键控代码
+| key.keyboard.v
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 169
+| key_key.debug.key_key.debug.profilingChart
+| （与{{key|''调试修饰键''}}同时按下）分析图表
+| 键控代码
+| key.keyboard.1
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 170
+| key_key.debug.fpsCharts
+| （与{{key|''调试修饰键''}}同时按下）FPS图表
+| 键控代码
+| key.keyboard.2
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 171
+| key_key.debug.networkCharts
+| （与{{key|''调试修饰键''}}同时按下）网络图表
+| 键控代码
+| key.keyboard.3
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 172
+| key_key.debug.lightmapTexture
+| （与{{key|''调试修饰键''}}同时按下）显示光照贴图纹理
+| 键控代码
+| key.keyboard.4
+| [[25w41a]]（[[Java版1.21.11|1.21.11]]）
+|-
+! scope="row" | 173
+| soundCategory_master
+| 主音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 174
+| soundCategory_music
+| 游戏音乐音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 175
+| soundCategory_record
+| 音符盒和唱片机的音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 176
+| soundCategory_weather
+| 天气音效音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 177
+| soundCategory_block
+| 方块音效音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 178
+| soundCategory_hostile
+| 敌对生物音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 179
+| soundCategory_neutral
+| 被动生物音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 180
+| soundCategory_player
+| 玩家音效音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 181
+| soundCategory_ambient
+| 烟花和洞穴音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 182
+| soundCategory_voice
+| 复述音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 183
+| soundCategory_ui
+| 用户界面音量
+| {{range|0|1}}
+| 1.0
+|
+|-
+! scope="row" | 184
+| modelPart_cape
+| 是否显示披风
+| 布尔值
+| true
+|
+|-
+! scope="row" | 185
+| modelPart_jacket
+| 是否显示身体部分的外层皮肤
+| 布尔值
+| true
+|
+|-
+! scope="row" | 186
+| modelPart_left_sleeve
+| 是否显示左手臂的外层皮肤
+| 布尔值
+| true
+|
+|-
+! scope="row" | 187
+| modelPart_right_sleeve
+| 是否显示右手臂的外层皮肤
+| 布尔值
+| true
+|
+|-
+! scope="row" | 188
+| modelPart_left_pants_leg
+| 是否显示左腿的外层皮肤
+| 布尔值
+| true
+|
+|-
+! scope="row" | 189
+| modelPart_right_pants_leg
+| 是否显示右腿的外层皮肤
+| 布尔值
+| true
+|
+|-
+! scope="row" | 190
+| modelPart_hat
+| 是否显示头部的外层皮肤
+| 布尔值
+| true
+|
+|-
+! scope="row" | {{tooltip|191|默认出现在文件的最后一行。}}
+| fullscreenResolution
+| 更改全屏模式下游戏的分辨率。仅用户显示器支持的模式才有效，在操作系统设置中更改屏幕分辨率时显示。如设置为一个不被显示器支持的模式时，此选项会变为“当前分辨率”。如设置为“当前分辨率”时，此选项则不会在此文件中出现。
+| <宽度>x<高度>@<刷新率>:<色彩深度>
+| （无）
+|
+|}
+
+=== 基岩版 ===
+{{Stub|section=1}}
+{| class="wikitable sortable" style="width: 100%" data-description="选项列表"
+|-
+! scope="col" style="width: 5%;" | #{{note|name=numbering}}
+! scope="col" | 选项名称
+! scope="col" class="unsortable" | 解释
+! scope="col" | 有效值
+! scope="col" | 默认值
+! scope="col" | 加入的版本
+|-
+! scope="row" | 1
+| mp_username
+| 玩家的名字。
+| 
+| Steve
+|[[携带版0.7.0|0.7.0]]
+|-
+! scope="row" | 2
+| game_difficulty_new
+| 创建新的世界时默认的难度。
+| {{range|0|3}}
+| 1
+|[[携带版0.12.1|0.12.1]]（[[携带版0.12.1.b10|build 10]]）
+|-
+! scope="row" | 3
+| game_thirdperson
+| 摄像机视角。第一人称，第三人称背面或第三人称正面。
+| 0/1/2
+| 0
+|[[携带版0.7.0|0.7.0]]
+|-
+! scope="row" | 4
+| gfx_dpadscale
+| {{info needed}}
+| {{info needed}}
+| 0.5
+|[[携带版0.11.0|0.11.0]]（[[携带版0.11.0.b1|build 1]]）
+|-
+! scope="row" | 5
+| mp_server_visible
+| 默认服务器可见性。
+| {{info needed}}
+| 1
+|[[携带版0.7.0|0.7.0]]
+|-
+! scope="row" | 6
+| mp_xboxlive_visible
+| {{info needed}}
+| {{info needed}}
+| 1
+|[[携带版0.12.1|0.12.1]]（[[携带版0.12.1.b1|build 1]]）
+|-
+! scope="row" | 7
+| mp_nex_visible
+| {{info needed}}
+| {{info needed}}
+| 1
+|
+|-
+! scope="row" | 8
+| mp_psn_visible
+| {{info needed}}
+| {{info needed}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 9
+| game_language
+| 游戏的语言。{{info needed|How is this determined based on the value?}}
+| {{info needed}}
+| 空{{note|name=empty|此字段默认为空。}}
+|[[携带版0.11.0|0.11.0]]（[[携带版0.11.0.b1|build 1]]）
+|-
+! scope="row" | 10
+| game_skintypefull
+| 当前使用皮肤的唯一标识符。{{verify}}
+| 
+| {{info needed}}
+|[[携带版0.11.0|0.11.0]]（[[携带版0.11.0.b4|build 4]]）
+|-
+! scope="row" | 11
+| game_lastcustomskinnew
+| 游戏最后的自定义皮肤{{verify}}
+| {{info needed}}
+| Standard.Dummy
+|[[携带版0.11.0|0.11.0]]（[[携带版0.11.0.b4|build 4]]）
+|-
+! scope="row" | 12
+| game_recentskin1
+| 在上次更改之前使用的皮肤。{{verify|Is this the correct order, or is it reversed?}}
+| 
+| 空{{note|name=empty}}
+|[[携带版0.15.0|0.15.0]]（[[携带版0.15.0.b1|build 1]]）
+|-
+! scope="row" | 13
+| game_recentskin2
+| 第二个最近使用的皮肤。{{verify}}
+| 
+| 空{{note|name=empty}}
+|[[携带版0.15.0|0.15.0]]（[[携带版0.15.0.b1|build 1]]）
+|-
+! scope="row" | 14
+| game_recentskin3
+| 第三个最近使用的皮肤。{{verify}}
+| 
+| 空{{note|name=empty}}
+|[[携带版0.15.0|0.15.0]]（[[携带版0.15.0.b1|build 1]]）
+|-
+! scope="row" | 15
+| game_haseverloggedintoxbl
+| 用户曾经是否登入Xbox Live。
+| 0/1
+| 0
+|[[携带版0.15.0|0.15.0]]（[[携带版0.15.0.b1|build 1]]）
+|-
+! scope="row" | 16
+| game_haschosennottosignintoxbl
+| 用户当前是否登出Xbox Live。
+| 0/1
+| 1
+|[[携带版0.15.0|0.15.0]]（[[携带版0.15.0.b1|build 1]]）
+|-
+! scope="row" | 17
+| dvce_filestoragelocation
+| 文件存储位置。
+| 1外部存储/2内部存储
+| 2{{verify|This is the default value on iOS. Not sure if it varies from platform to platform.}}
+|
+|-
+! scope="row" | 18
+| ctrl_islefthanded
+| {{info needed}}
+| 0/1
+| 0
+|[[携带版0.7.0|0.7.0]]
+|-
+! scope="row" | 19
+| ctrl_usetouchjoypad
+| {{info needed}}
+| 0/1
+| 0
+|[[携带版0.7.0|0.7.0]]
+|-
+! scope="row" | 20
+| ctrl_swapjumpandsneak
+| 是否交换跳跃与潜行键。
+| 0/1
+| 0
+|[[携带版0.12.1|0.12.1]]（[[携带版0.12.1.b2|build 2]]）
+|-
+! scope="row" | 21
+| gfx_viewdistance
+| 玩家的渲染距离，以每方块为单位测距。
+| 如果不修改此值可用距离取决于设备性能。最小值为80，{{verify}}会给予5个区块距离。
+| 因设备而异
+| 
+|-
+! scope="row" | 22
+| gfx_particleviewdistance
+| 粒子能见度
+| {{range|0|100}}
+| 0
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 23
+| gfx_viewbobbing
+| 切换视角摇晃。
+| 0/1
+| 1
+|[[携带版0.12.1|0.12.1]]（[[携带版0.12.1.b1|build 1]]）
+|-
+! scope="row" | 24
+| gfx_fancygraphics
+| 切换精美图像。
+| 0/1
+| 1
+|[[携带版0.7.0|0.7.0]]
+|-
+! scope="row" | 25
+| gfx_transparentleaves
+| 玩家视角能否透过[[树叶]]。
+| 0/1
+| 1
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 26
+| gfx_vr_transparentleaves
+| 当使用VR时玩家视角能否透过树叶。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 27
+| gfx_smoothlighting
+| 切换平滑光照。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 28
+| gfx_vr_smoothlighting
+| 当使用VR时切换平滑光照。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 29
+| gfx_fancyskies
+| 是否开启美丽的天空。
+| 0/1
+| 1
+|[[携带版0.7.0|0.7.0]]
+|-
+! scope="row" | 30
+| gfx_field_of_view
+| 玩家的角视场，以度为单位。
+| {{range|30|110}} 
+| 60
+|[[携带版0.12.1|0.12.1]]（[[携带版0.12.1.b3|build 3]]）
+|-
+! scope="row" | 31
+| gfx_msaa
+| 是否开启抗锯齿
+| 0/1{{verify}}
+| 1
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 32
+| gfx_texel_aa_2
+| 是否开启纹素抗锯齿
+| 0/1
+| 0
+|
+|-
+! scope="row" | 33
+| gfx_gamma
+| 游戏界面的亮度。
+| {{range|0|1}}
+| 0.5
+|[[携带版0.10.0|0.10.0]]（[[携带版0.11.0.b1|build 1]]）
+|-
+! scope="row" | 34
+| gfx_multithreaded_renderer
+| 是否使用多线程渲染画面。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 35
+| gfx_vsync
+| 是否启用[[wzh:畫面撕裂#垂直同步|垂直同步]]。
+| {{range|0|2}}
+| 1
+|[[基岩版1.9.0|1.9.0]]
+|-
+! scope="row" | 36
+| gfx_async_texture_loads
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 37
+| gfx_show_async_texture_loads
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|[[基岩版1.13.0|1.13.0]]
+
+|-
+! scope="row" | 38
+| gfx_max_dequed_textures_per_frame
+| {{info needed}}
+| {{info needed}}
+| 16{{verify|This is the default value on iOS. Not sure if it varies from platform to platform.}} 
+|[[基岩版1.14.0|1.14.0]]
+|-
+! scope="row" | 39
+| gfx_texture_load_delay
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|[[基岩版1.14.0|1.14.0]]
+|-
+! scope="row" | 40
+| dev_file_watcher
+| 开启文件监视器。
+| 0/1
+| 1
+|[[基岩版1.9.0|1.9.0]]
+|-
+! scope="row" | 41
+| gfx_max_framerate
+| 最大帧率。
+| {{range|0|250}}
+| 0{{verify}}
+|
+|-
+! scope="row" | 42
+| gfx_fullscreen
+| 是否启用全屏。
+| 0/1{{verify}}
+| 0{{verify}}
+|[[携带版0.12.1|0.12.1]]（[[携带版0.12.1.b1|build 1]]）
+|-
+! scope="row" | 43
+| show_advanced_video_settings
+| 显示高级视频设置。
+| 0/1
+| 0
+|
+|-
+! scope="row" | 44
+| gfx_guiscale_offset
+| GUI标度修正。
+| 负整数/0
+| 0
+|
+|-
+! scope="row" | 45
+| gfx_splitscreen_guiscale_offset
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 46
+| gfx_safe_zone_x
+| 安全区X轴大小。
+| {{range|0|1}}
+| 1
+|[[基岩版1.2.9|1.2.9]]
+|-
+! scope="row" | 47
+| gfx_safe_zone_y
+| 安全区Y轴大小。
+| {{range|0|1}}
+| 1
+|[[基岩版1.2.9|1.2.9]]
+|-
+! scope="row" | 48
+| gfx_ui_profile
+| 是否使用Pocket UI来代替传统UI。
+| {{range|0|1}}
+| 1（移动平台），0（其他平台）。{{info needed|Nintendo Switch上的默认值是什么？}}
+|
+|-
+!49
+|audio_main
+|主要音量。
+|{{range|0|1}}
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+! scope="row" | 50
+| audio_sound
+| 音效音量。
+| {{range|0|1}}
+| 1
+|[[携带版0.7.0|0.7.0]]
+|-
+! scope="row" | 51
+| audio_music
+| 音乐音量。
+| {{range|0|1}}
+| 1
+|[[携带版0.12.1|0.12.1]]（[[携带版0.12.1.b1|build 1]]）
+|-
+!52
+|audio_ambient
+|环境音量。
+|{{range|0|1}}
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+!53
+|audio_block
+|方块音量。
+|{{range|0|1}}
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+!54
+|audio_hostile
+|敌对生物音量。
+|{{range|0|1}}
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+!55
+|audio_neutral
+|友好生物音量。
+|{{range|0|1}}
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+!56
+|audio_record
+|唱片机/音符盒音量。
+|{{range|0|1}}
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+!57
+|audio_player
+|玩家音量。
+|{{range|0|1}}
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+!58
+|audio_weather
+|天气音量。
+|{{range|0|1}}
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+! scope="row" | 59
+| vr_sensitivity
+| 在使用VR时的灵敏度。
+| {{range|0|1}}
+| 0.5
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 60
+| vr_gamma
+| 在使用VR时游戏界面的亮度。
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 61
+| vr_particle_view_dist
+| 在使用VR游玩时的粒子显示距离。
+| {{info needed}}
+| 0.25
+|
+|-
+! scope="row" | 62
+| vr_stutter_turn
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 63
+| vr_stutter_turn_sound
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 64
+| vr_hmd_displacement
+| {{info needed}}
+| {{info needed}} 
+| 0
+|
+|-
+! scope="row" | 65
+| vr_renderdistance
+| 在使用VR时的视距。
+| 必须是一个数值。{{info needed|可用的值的范围是多少？}}
+| 128{{verify|This is default on iOS, which does not actually support VR.}}
+|
+|-
+! scope="row" | 66
+| vr_autojump
+| 在使用VR时切换自动跳跃。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 67
+| vr_head_steering
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 68
+| vr_stutter_turn_constant_time
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 69
+| vr_stereorendering
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 70
+| vr_use_normal_hit
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 71
+| vr_use_red_flash
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 72
+| vr_rstick_pitch_assist
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 73
+| vr_rstick_gazedjust
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 74
+| vr_gaze_pitch_boost
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[携带版0.14.2|0.14.2]]
+|-
+! scope="row" | 75
+| vr_hud_drift
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 76
+| vr_living_room_cursor_centered
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 77
+| vr_linear_jump
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 78
+| vr_linear_motion
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 79
+| vr_sticky_mining
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 80
+| vr_sticky_mining_hand
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 81
+| vr_tap_turn
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 82
+| vr_tap_turn_sensitivity
+| {{info needed}}
+| {{range|0|1}}{{verify}}
+| 0.375
+|
+|-
+! scope="row" | 83
+| vr_wheelturn_sensitivity
+| {{info needed}}
+| {{info needed}}
+| 50
+|
+|-
+! scope="row" | 84
+| vr_wheelturning_withLowDeadzone_controller
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 85
+| vr_180_turns
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 86
+| vr_use_comfort_controls_2
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 87
+| vr_show_comfort_select_screen
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 88
+| vr_livingroom_hint_time
+| {{info needed}}
+| {{info needed}}
+| 32000
+|[[携带版0.15.0|0.15.0]]（[[携带版0.15.0.b1|build 1]]）
+|-
+! scope="row" | 89
+| vr_mirror_texture
+| VR镜子纹理
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 90
+| vr_hand_controls_item
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 91
+| vr_hand_controls_hud
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 92
+| vr_hand_pointer
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 93
+| vr_hands_visible
+| VR手臂隐藏
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 94
+| vr_ui_mouse_sensitivity
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 95
+| vr_msaa
+| 使用VR时的抗锯齿
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 96
+| store_has_purchased_coins
+| 玩家是否购买过[[市场|minecoins]]。
+| 0/1
+| 0
+|
+|-
+! scope="row" | 97
+| switch_coin_debug
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 98
+| old_game_version_major
+| 当前版本中的第一个数字。
+|
+| 0
+|[[携带版0.8.1|0.8.1]]
+|-
+! scope="row" | 99
+| old_game_version_minor
+| 当前版本中的第二个数字，用于存储主要更新。
+|
+| 0
+|[[携带版0.8.1|0.8.1]]
+|-
+! scope="row" | 100
+| old_game_version_patch
+| 当前版本中的第三个数字，用于存储次要更新/修补程序。
+|
+| 0
+|[[携带版0.8.1|0.8.1]]
+|-
+! scope="row" | 101
+| old_game_version_revision
+| 当前版本中的第四个数字，用于内部版本控制。
+|
+| 0
+|[[基岩版1.12.0|1.12.0]]
+|-
+! scope="row" | 102
+| old_game_version_beta
+| 当前版本中的第五个数字，用于测试版（如果不玩测试版，则为0）。
+|
+|
+|[[携带版0.8.1|0.8.1]]
+|-
+! scope="row" | 103
+| realms_show_friend_invites_only
+| Realms的邀请列表是否仅显示来自Xbox Live好友的邀请。
+| 0/1
+| 1
+|[[携带版0.15.0|0.15.0]]（[[携带版0.15.0.b2|build 2]]）
+|-
+! scope="row" | 104
+| number_of_owned_realms
+| 玩家拥有的Realms数量。
+|
+| 0
+|
+|-
+! scope="row" | 105
+| number_of_friends_realms
+| {{info needed}}
+|
+| 0
+|
+|-
+! scope="row" | 106
+| realms_view_upsell_screen_count
+| {{info needed}}
+|
+| 3
+|
+|-
+! scope="row" | 107
+| shown_ratings_prompt
+| {{info needed}}
+| {{info needed}}
+| 0
+|[[基岩版1.5.0|1.5.0]]
+|-
+! scope="row" | 108
+| save_and_quit_count 
+| 玩家保存并退出世界的次数。{{verify}}
+|
+| 1
+|[[基岩版1.5.0|1.5.0]]
+|-
+! scope="row" | 109
+| show_worlds_trial_button
+| 实验性玩法开关。
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 110
+| allow_cellular_data
+| 是否使用划分的数据。{{info needed|如果启用此功能，划分的数据将用于什么？}}
+| 0/1
+| 0
+|
+|-
+! scope="row" | 111
+| auto_update_mode
+| 是否自动更新。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 112
+| auto_update_enabled
+| 是否自动更新。{{info needed|auto_update_mode和auto_update_enabled之间的区别是什么？}}
+| 0/1
+| 1
+|
+|-
+! scope="row" | 113
+| websocket_encryption
+| 使用加密的websocket。
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 114
+| text_to_speech_discovered
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|[[基岩版1.11.0|1.11.0]]
+|-
+! scope="row" | 115
+| monitor_platform_text_to_speech
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 116
+| chat_text_to_speech
+| 聊天文本转语音。
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 117
+| ui_text_to_speech
+| UI文本转语音。
+| 0/1{{verify}}
+| 0
+| [[基岩版1.11.0|1.11.0]]
+|-
+! scope="row" | 118
+| open_chat_message
+| 打开聊天消息
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 119
+| ctrl_sensitivity2_mouse 
+| 使用鼠标时的灵敏度。
+| {{range|0|1}}
+| 0.6
+|
+|-
+! scope="row" | 120
+| ctrl_sensitivity_touch
+| 使用触屏时的灵敏度。
+| {{range|0|1}}
+| 0.6
+|
+|-
+! scope="row" | 121
+| ctrl_sensitivity2_gamepad
+| 使用主机控制器时的灵敏度。
+| {{range|0|1}}
+| 0.6
+|
+|-
+! scope="row" | 122
+| ctrl_sensitivity2_motioncontroller
+| 使用主机控制器时的灵敏度。{{info needed|gamepad和motioncontroller之间的区别是什么？后者并不是VR。}}
+| {{range|0|1}}
+| 0.6
+|
+|-
+! scope="row" | 123
+| ctrl_smoothrotationseed
+| {{info needed}}
+| {{range|0|1}}{{verify}}
+| 0.1
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 124
+| ctrl_invertmouse_mouse
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 125
+| ctrl_invertmouse_touch
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 126
+| ctrl_invertmouse_gamepad
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 127
+| ctrl_invertmouse_motioncontroller
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 128
+| ctrl_autojump_mouse
+| 切换鼠标的自动跳跃。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 129
+| ctrl_autojump_touch
+| 切换触屏的自动跳跃。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 130
+| ctrl_autojump_gamepad
+| 切换主机控制器的自动跳跃。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 131
+| ctrl_autojump_motioncontroller
+| 切换主机控制器的自动跳跃{{info needed|gamepad和motioncontroller之间的区别是什么？后者并不是VR。}}
+| 0/1
+| 1
+|
+|-
+! scope="row" | 132
+| ctrl_fullkeyboardgameplay
+| 切换全键盘游戏。 如果设置为1，则所有控件都在键盘上，不使用鼠标。
+| 0/1
+| 0
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 133
+| feedback_vibration_mouse
+| 是否打开在键盘/鼠标操作时破坏方块的振动。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 134
+| feedback_vibration_touch
+| 是否打开在触屏操作时破坏方块的振动。
+| 0/1
+| 0
+|
+|-
+! scope="row" | 135
+| feedback_vibration_gamepad
+| 是否打开在主机控制器操作时破坏方块的振动。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 136
+| feedback_vibration_motioncontroller
+| 是否打开在主机控制器操作时破坏方块的振动。{{info needed|gamepad和motioncontroller之间的区别是什么？后者并不是VR。}}
+| 0/1
+| 1
+|
+|-
+! scope="row" | 137
+| gfx_toggleclouds
+| 是否显示云。（注：<code>gfx_fancyskies</code>也必须开启）。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 138
+| ctrl_togglecrouch_mouse
+| 在使用键盘控制时，是否使用潜行键切换潜行，而不是按住按钮进行潜行。
+| 0/1
+| 0
+|
+|-
+! scope="row" | 139
+| ctrl_togglecrouch_touch
+| 在使用触屏控制时，是否使用潜行按钮切换潜行，而不是按住按钮进行潜行。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 140
+| ctrl_togglecrouch_gamepad
+| 在使用主机控制器时，是否使用潜行按钮切换潜行，而不是按住按钮进行潜行。
+| 0/1
+| 0
+|
+|-
+! scope="row" | 141
+| ctrl_togglecrouch_motioncontroller
+| 在使用主机控制器时，是否使用潜行按钮切换潜行，而不是按住按钮进行潜行。{{info needed|gamepad和motioncontroller之间的区别是什么？后者并不是VR。}}
+| 0/1
+| 0
+|
+|-
+! scope="row" | 142
+| crossplatform_toggle
+| 跨平台游戏。{{Info needed}}{{Verify}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 143
+| last_xuid
+| 最后登记的xuid登录信息。{{info needed}}{{Verify}}
+|
+| 空{{note|name=empty}}
+|
+|-
+! scope="row" | 144
+| gfx_hidepaperdoll
+| 是否隐藏纸娃娃。若开启，[[HUD]]也必须显示。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 145
+| hide_keyboard_tootips
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.8.0|1.8.0]]
+|-
+! scope="row" | 146
+| hide_keyboard_tooltips_overrridden
+| 是否显示云。
+| 0/1{{verify}}
+| 0
+|[[基岩版1.8.0|1.8.0]]
+|-
+! scope="row" | 147
+| gfx_tooltips
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 148
+| gfx_classic_box_selection
+| {{info needed}}
+| 0/1
+| 0
+|
+|-
+! scope="row" | 149
+| gfx_vr_classic_box_selection
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 150
+| gfx_splitscreen
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 151
+| gfx_hidehud
+| 是否隐藏[[平视显示器]]。如果关闭，玩家的手仍然可见，但坐标和纸娃娃不可见。
+| 0/1
+| 0
+|
+|-
+! scope="row" | 152
+| gfx_hidehand
+| 是否隐藏玩家的手。 如果开启，玩家的手会出现，且无论<code>gfx_hidehud</code>是否开启。
+| 0/1
+| 0
+|
+|-
+! scope="row" | 153
+| vr_hide_hud
+| 在使用VR时是否隐藏HUD。
+| 0/1
+| 0
+|
+|-
+! scope="row" | 154
+| vr_hide_hand
+| 在使用VR时是否隐藏玩家的手。
+| 0/1
+| 0
+|
+|-
+! scope="row" | 155
+| gfx_ingame_player_names
+| 游戏内显示玩家名称。{{Verify}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 156
+| gfx_splitscreen_ingame_player_names
+| 分屏画面游戏内显示玩家名称。{{info needed}}{{Verify}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 157
+| gfx_interface_opacity
+| HUD界面不透明度。{{Verify}}
+| {{range|0|1}}{{verify}}
+| 1
+|
+|-
+! scope="row" | 158
+| gfx_splitcreen_interface_opacity
+| 分屏画面HUD界面不透明度。{{info needed}}{{Verify}}
+| {{range|0|1}}{{verify}}
+| 1
+|
+|-
+! scope="row" | 159
+| gfx_text_background_opacity
+| 文本背景的不透明度。{{Verify}}
+| {{range|0|1}}{{verify}}
+| 0
+| [[基岩版1.16.0|1.16.0]]
+|-
+! scope="row" | 160
+| game_ackautosave
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 161
+| realmsplus_upgradenotice_state
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 162
+| gfx_showautosaveicon
+| 显示自动保存图标。{{Verify}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 163
+| gfx_has_set_safe_zone
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 164
+| gfx_field_of_view_toggle
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 165
+| gfx_gamepad_cursor
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 166
+| hdr_brightness
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|
+|-
+! scope="row" | 167
+| has_set_hdr_brightness
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 168
+| ctrl_hotbarOnlyTouch
+| 触摸控件是否应仅用于快捷栏。
+| 0/1
+| 0
+|[[基岩版1.2.13|1.2.13]]
+|-
+! scope="row" | 169
+| gfx_gamepad_cursor_sensitivity
+| {{info needed}}
+| {{range|0|1}}{{verify}}
+| 1
+|[[基岩版1.2.10|1.2.10]]
+|-
+! scope="row" | 170
+| game_hasshownpatchnotice
+| 游戏是否显示最近更新的通知。{{verify}}
+| 0/1
+| 0
+|
+|-
+! scope="row" | 171
+| game_lastshownrealmsenddate
+| {{info needed}}
+|
+| {{range|1970|01}}-01T00:00:00Z
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 172
+| has_shown_begin_sunset_notice
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+| [[基岩版1.16.10|1.16.10]]
+|-
+! scope="row" | 173
+| has_shown_sunset_notice
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+| [[基岩版1.16.10|1.16.10]]
+|-
+! scope="row" | 174
+| game_showplatformnetworkconnect
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|
+|-
+! scope="row" | 175
+| screen_animations
+| 屏幕动画
+| 0/1
+| 1
+|[[基岩版1.2.13|1.2.13]]
+|-
+! scope="row" | 176
+| ctrl_swap_gamepad_ab_buttons
+| 是否交换控制器上A和B的按键（默认情况下，A与B键分别是跳跃和潜行）
+| 0/1{{verify}}
+| 0
+|[[基岩版1.2.13|1.2.13]]
+|-
+! scope="row" | 177
+| ctrl_swap_gamepad_xy_buttons
+| 是否交换控制器上X和Y的按键（默认情况下，X与Y键分别是合成和物品栏）
+| 0/1
+| 0
+|[[基岩版1.2.13|1.2.13]]
+|-
+! scope="row" | 178
+| gfx_bubble_particles
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|[[基岩版1.5.0|1.5.0]]
+|-
+! scope="row" | 179
+| game_showplatformpremiumupsell
+| {{info needed}}
+| 0/1
+| 0
+|[[基岩版1.5.0|1.5.0]]
+|-
+! scope="row" | 180
+| chat_color_code
+| 聊天栏使用的字体颜色。查看[[格式化代码]]来获取更多信息。
+|
+| *f
+|[[基岩版1.8.0|1.8.0]]
+|-
+! scope="row" | 181
+| chat_font_size
+| 聊天栏使用的字体大小。
+|
+| 12
+|[[基岩版1.10.0|1.10.0]]
+|-
+! scope="row" | 182
+| chat_line_spacing
+| 聊天栏的行距。
+|
+| 1
+|[[基岩版1.7.0|1.7.0]]
+|-
+! scope="row" | 183
+| chat_mentions_color_code
+| 用于提及其他玩家的颜色。（例如, <player>加入了游戏）。查看[[格式化代码]]页面来获得详细信息。
+| 0/1
+| 0
+|[[基岩版1.8.0|1.8.0]]
+|-
+! scope="row" | 184
+| chat_typeface
+| 字体使用Mojangles或Nono Sans。
+| {{info needed}}
+| 1
+|[[基岩版1.10.0|1.10.0]]
+|-
+! scope="row" | 185
+| content_log_file
+| 启用日志文件。{{Verify}}
+| 0/1{{Verify}}
+| 0
+|[[基岩版1.12.0|1.12.0]]
+|-
+! scope="row" | 186
+| content_log_gui
+| 启用日志文件GUI。{{Verify}}
+| 0/1{{Verify}}
+| 0
+|[[基岩版1.12.0|1.12.0]]
+|-
+! scope="row" | 187
+| gameplay_tips_enabled
+| 显示游戏提示。{{Verify}}
+| 0/1{{verify}}
+| 0
+|[[基岩版1.9.0|1.9.0]]
+|-
+! scope="row" | 188
+| gameplay_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.9.0|1.9.0]]
+|-
+! scope="row" | 189
+| iap_owning_account
+| {{info needed}}
+|
+| 空{{note|name=empty}}
+|[[基岩版1.9.0|1.9.0]]
+|-
+! scope="row" | 190
+| last_minecraft_id
+| {{info needed}}
+|
+| 空{{note|name=empty}}
+|[[基岩版1.9.0|1.9.0]]
+|-
+! scope="row" | 191
+| control_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.9.0|1.9.0]]
+|-
+! scope="row" | 192
+| inventory_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.10.0|1.10.0]]
+|-
+! scope="row" | 193
+| tree_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.10.0|1.10.0]]
+|-
+! scope="row" | 194
+| open_inventory_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.12.0|1.12.0]]
+|-
+! scope="row" | 195
+| day_one_experience_completed
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 196
+| select_craftable_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 197
+| place_craftable_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 198
+| use_craftable_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 199
+| make_craftable_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 200
+| need_more_materials_tips_should_be_shown
+| {{info needed}}
+| 0/1{{verify}}
+| 99
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 201
+| is_legacy_player
+| {{info needed}}
+| 0/1{{verify}}
+| 1
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 202
+| dev_texture_hot_reloader
+| 启用材质热重载器。
+| 0/1
+| 1
+|
+|-
+! scope="row" | 203
+| playfab_commerce_enabled
+| {{info needed}}
+| 0/1{{verify}}
+| 0
+|[[基岩版1.13.0|1.13.0]]
+|-
+! scope="row" | 204
+| do_not_show_multiplayer_online_safety_warning
+| 游戏是否应显示在线安全警告。
+| 0/1
+| 0
+|[[基岩版1.14.60|1.14.60]]
+|-
+! scope="row" | 205
+| only_show_trusted_skins
+| 仅显示已信任的皮肤。（例如：市场售卖的皮肤包等）{{Verify}}
+| {{info needed}}
+| 1
+|[[基岩版1.14.60|1.14.60]]
+|-
+!206
+|camera_shake
+|是否启用“摄像机摇晃”功能。
+|0/1
+|1
+|[[基岩版1.16.100|1.16.100]]
+|-
+!207
+|berwick_enabled
+|{{info needed}}
+|0/1
+|0
+|
+|-
+!208
+|gfx_raytracing
+|为已支持的设备启用光线追踪。
+|0/1
+|0
+|[[基岩版1.16.200|1.16.200]]
+|-
+!209
+|raytracing_viewdistance
+|光线追踪渲染距离区块数量。
+|理论上无限制（自1.19.32起，不受设备限制）。
+|因设备而异
+|[[基岩版1.16.200|1.16.200]]
+|-
+!210
+|gfx_upscaling
+|缩放功能。
+|0/1
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+!211
+|do_not_show_gfx_driver_outdated
+|{{info needed}}
+|0/1
+|1
+|[[基岩版1.16.200|1.16.200]]
+|-
+!212
+|do_not_show_gfx_driver_outdated_version
+|{{info needed}}
+|{{info needed}}
+|空{{note|name=empty}}
+|[[基岩版1.16.200|1.16.200]]
+|-
+! scope="row" | 213
+| gamepadMappingVersion
+| {{info needed}}
+| {{info needed}}
+| 1
+|
+|-
+! scope="row" | 214
+| ctrl_type_0_key.jump
+| 控制器的跳跃键。
+|
+| 1
+|
+|-
+! scope="row" | 215
+| ctrl_type_0_key.drop
+| 控制器的丢弃物品键。
+|
+| 6
+|
+|-
+! scope="row" | 216
+| ctrl_type_0_key.attack
+| 控制器的攻击键。
+|
+| -99
+|
+|-
+! scope="row" | 217
+| ctrl_type_0_key.use
+| 控制器的使用键。
+|
+| -100
+|
+|-
+! scope="row" | 218
+| ctrl_type_0_container.crafting
+| 控制器的合成键。
+|
+| 3
+|
+|-
+! scope="row" | 219
+| ctrl_type_0_key.inventory
+| 控制器的打开物品栏键。
+|
+| 4
+|
+|-
+! scope="row" | 220
+| ctrl_type_0_key.cycleItemLeft
+| 控制器的向左循环物品键。
+|
+| 11
+|
+|-
+! scope="row" | 221
+| ctrl_type_0_key.cycleItemRight
+| 控制器的向右循环物品键。
+|
+| 12
+|
+|-
+! scope="row" | 222
+| ctrl_type_0_key.togglePerspective
+| 控制器的切换视角键。
+|
+| 5
+|
+|-
+! scope="row" | 223
+| ctrl_type_0_key.sneak
+| 控制器的潜行键。
+|
+| 2
+|
+|-
+! scope="row" | 224
+| ctrl_type_0_key.sprint
+| 控制器的疾跑键。
+|
+| 9
+|
+|-
+! scope="row" | 225
+| ctrl_type_0_key.flyUpSlow
+| 控制器的向上飞键。
+|
+| 0
+|
+|-
+! scope="row" | 226
+| ctrl_type_0_key.flyDownSlow
+| 控制器的向下飞键。
+|
+| 10
+|
+|-
+! scope="row" | 227
+| ctrl_type_0_key.emote
+| 控制器的表情键。
+|
+| 7
+| [[基岩版1.16.0|1.16.0]]
+|-
+! scope="row" | 228
+| ctrl_type_0_key.mobeffectsandinteractwithtoast
+| 控制器的状态效果和开启通知键。
+|
+| 7
+|
+|-
+! scope="row" | 229
+| ctrl_type_0_key.chat
+| 控制器的打开聊天键。
+|
+| 8
+|
+|-
+! scope="row" | 230
+| ctrl_type_0_key.left
+| 控制器的向左移动键。
+|
+| 0
+|
+|-
+! scope="row" | 231
+| ctrl_type_0_key.right
+| 控制器的向右移动键。
+|
+| 0
+|
+|-
+! scope="row" | 232
+| ctrl_type_0_key.back
+| 控制器的向后移动键。
+|
+| 0
+|
+|-
+! scope="row" | 233
+| ctrl_type_0_key.forward
+| 控制器的前进键。
+|
+| 0
+|
+|-
+! scope="row" | 234
+| ctrl_type_0_key.pickItem
+| 控制器的选取方块键。
+|
+| 0
+|
+|-
+! scope="row" | 235
+| ctrl_type_1_key.jump
+| 控制器的跳跃键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 1
+|
+|-
+! scope="row" | 236
+| ctrl_type_1_key.drop
+| 控制器的丢弃物品键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 6
+|
+|-
+! scope="row" | 237
+| ctrl_type_1_key.attack
+| 控制器的攻击键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 12
+|
+|-
+! scope="row" | 238
+| ctrl_type_1_key.use
+| 控制器的使用键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 11
+|
+|-
+! scope="row" | 239
+| ctrl_type_1_container.crafting
+| 控制器的合成键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 3
+|
+|-
+! scope="row" | 240
+| ctrl_type_1_key.inventory
+| 控制器的打开物品栏键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 4
+|
+|-
+! scope="row" | 241
+| ctrl_type_1_key.cycleItemLeft
+| 控制器的向左循环物品键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 7
+|
+|-
+! scope="row" | 242
+| ctrl_type_1_key.cycleItemRight
+| 控制器的向右循环物品键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 8
+|
+|-
+! scope="row" | 243
+| ctrl_type_1_key.togglePerspective
+| 控制器的切换视角键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 15
+|
+|-
+! scope="row" | 244
+| ctrl_type_1_key.sneak
+| 控制器的潜行键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 2
+|
+|-
+! scope="row" | 245
+| ctrl_type_1_key.sprint
+| 控制器的疾跑键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 9
+|
+|-
+! scope="row" | 246
+| ctrl_type_1_key.flyUpSlow
+| 控制器的向上飞键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 247
+| ctrl_type_1_key.flyDownSlow
+| 控制器的向下飞键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 10
+|
+|-
+! scope="row" | 248
+| ctrl_type_1_key.mobEffects
+| 控制器的视图状态效果键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 249
+| ctrl_type_1_key.chat
+| 控制器的打开聊天键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 8
+|
+|-
+! scope="row" | 250
+| ctrl_type_1_key.left
+| 控制器的向左移动键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 251
+| ctrl_type_1_key.right
+| 控制器的向右移动键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 252
+| ctrl_type_1_key.back
+| 控制器的向后移动键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 253
+| ctrl_type_1_key.forward
+| 控制器的前进键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 254
+| ctrl_type_1_key.pickItem
+| 控制器的选取方块键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 255
+| ctrl_type_1_key.interactwithtoast
+| 使用控制器时打开通知键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 13
+|
+|-
+! scope="row" | 256
+| ctrl_type_1_key.emote
+| 控制器的表情键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+| [[基岩版1.16.0|1.16.0]]
+|-
+! scope="row" | 257
+| ctrl_type_2_key.jump
+| 控制器的跳跃键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 1
+|
+|-
+! scope="row" | 258
+| ctrl_type_2_key.drop
+| 控制器的丢弃物品键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 6
+|
+|-
+! scope="row" | 259
+| ctrl_type_2_key.attack
+| 控制器的攻击键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| -99
+|
+|-
+! scope="row" | 260
+| ctrl_type_2_key.use
+| 控制器的使用键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| -100
+|
+|-
+! scope="row" | 261
+| ctrl_type_2_container.crafting
+| 控制器的合成键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 3
+|
+|-
+! scope="row" | 262
+| ctrl_type_2_key.inventory
+| 控制器的打开物品栏键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 4
+|
+|-
+! scope="row" | 263
+| ctrl_type_2_key.cycleItemLeft
+| 控制器的向左循环物品键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 11
+|
+|-
+! scope="row" | 264
+| ctrl_type_2_key.cycleItemRight
+| 控制器的向右循环物品键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 12
+|
+|-
+! scope="row" | 265
+| ctrl_type_2_key.togglePerspective
+| 控制器的切换视角键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 15
+|
+|-
+! scope="row" | 266
+| ctrl_type_2_key.sneak
+| 控制器的潜行键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 2
+|
+|-
+! scope="row" | 267
+| ctrl_type_2_key.sprint
+| 控制器的疾跑键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 9
+|
+|-
+! scope="row" | 268
+| ctrl_type_2_key.flyUpSlow
+| 控制器的向上飞键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 269
+| ctrl_type_2_key.flyDownSlow
+| 控制器的向下飞键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 10
+|
+|-
+! scope="row" | 270
+| ctrl_type_2_key.mobEffects
+| 控制器的视图状态效果键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 7
+|
+|-
+! scope="row" | 271
+| ctrl_type_2_key.chat
+| 控制器的打开聊天键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 8
+|
+|-
+! scope="row" | 272
+| ctrl_type_2_key.left
+| 控制器的向左移动键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 273
+| ctrl_type_2_key.right
+| 控制器的向右移动键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 274
+| ctrl_type_2_key.back
+| 控制器的向后移动键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 275
+| ctrl_type_2_key.forward
+| 控制器的前进键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 276
+| ctrl_type_2_key.pickItem
+| 控制器的选取方块键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 277
+| ctrl_type_2_key.interactwithtoast
+| 使用控制器时打开通知键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 13
+|
+|-
+! scope="row" | 278
+| ctrl_type_2_key.emote
+| 控制器的表情键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+| [[基岩版1.16.0|1.16.0]]
+|-
+! scope="row" | 279
+| ctrl_type_3_key.jump
+| 控制器的跳跃键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 1
+|
+|-
+! scope="row" | 280
+| ctrl_type_3_key.attack
+| 控制器的攻击键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| -99
+|
+|-
+! scope="row" | 281
+| ctrl_type_3_key.use
+| 控制器的使用键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 12
+|
+|-
+! scope="row" | 282
+| ctrl_type_3_key.inventory
+| 控制器的打开物品栏键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 2
+|
+|-
+! scope="row" | 283
+| ctrl_type_3_key.cycleItemLeft
+| 控制器的向左循环物品键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 11
+|
+|-
+! scope="row" | 284
+| ctrl_type_3_key.cycleItemRight
+| 控制器的向右循环物品键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| -100
+|
+|-
+! scope="row" | 285
+| ctrl_type_3_key.togglePerspective
+| 控制器的切换视角键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 4
+|
+|-
+! scope="row" | 286
+| ctrl_type_3_key.sneak
+| 控制器的潜行键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 3
+|
+|-
+! scope="row" | 287
+| ctrl_type_3_key.sprint
+| 控制器的疾跑键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 9
+|
+|-
+! scope="row" | 288
+| ctrl_type_3_key.drop
+| 控制器的丢弃物品键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 10
+|
+|-
+! scope="row" | 289
+| ctrl_type_3_key.pickItem
+| 控制器的选取方块键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+|
+|-
+! scope="row" | 290
+| ctrl_type_3_key.emote
+| 控制器的表情键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 0
+| [[基岩版1.16.0|1.16.0]]
+|-
+! scope="row" | 291
+| ctrl_type_3_key.mobeffectsandinteractwithtoast
+| 控制器的状态效果和开启通知键。{{info needed|这和ctrl_type_0有什么区别？}}
+|
+| 13
+|
+|-
+! scope="row" | 292
+| keyboard_type_0_key.attack
+| 鼠标和键盘的攻击键。
+|
+| -99
+|
+|-
+! scope="row" | 293
+| keyboard_type_0_key.pickItem
+| 鼠标和键盘的选取物品键。
+|
+| -97
+|
+|-
+! scope="row" | 294
+| keyboard_type_0_key.use
+| 鼠标和键盘的使用键。
+|
+| -98
+|
+|-
+! scope="row" | 295
+| keyboard_type_0_key.drop
+| 鼠标和键盘的丢弃物品键。
+|
+| 81
+|
+|-
+! scope="row" | 296
+| keyboard_type_0_key.hotbar.1
+| 鼠标和键盘的快捷键1。
+|
+| 49
+|
+|-
+! scope="row" | 297
+| keyboard_type_0_key.hotbar.2
+| 鼠标和键盘的快捷键2。
+|
+| 50
+|
+|-
+! scope="row" | 298
+| keyboard_type_0_key.hotbar.3
+| 鼠标和键盘的快捷键3。
+|
+| 51
+|
+|-
+! scope="row" | 299
+| keyboard_type_0_key.hotbar.4
+| 鼠标和键盘的快捷键4。
+|
+| 52
+|
+|-
+! scope="row" | 300
+| keyboard_type_0_key.hotbar.5
+| 鼠标和键盘的快捷键5。
+|
+| 53
+|
+|-
+! scope="row" | 301
+| keyboard_type_0_key.hotbar.6
+| 鼠标和键盘的快捷键6。
+|
+| 54
+|
+|-
+! scope="row" | 302
+| keyboard_type_0_key.hotbar.7
+| 鼠标和键盘的快捷键7。
+|
+| 55
+|
+|-
+! scope="row" | 303
+| keyboard_type_0_key.hotbar.8
+| 鼠标和键盘的快捷键8。
+|
+| 56
+|
+|-
+! scope="row" | 304
+| keyboard_type_0_key.hotbar.9
+| 鼠标和键盘的快捷键9。
+|
+| 57
+|
+|-
+! scope="row" | 305
+| keyboard_type_0_key.inventory
+| 鼠标和键盘的打开物品栏键。
+|
+| 69
+|
+|-
+! scope="row" | 306
+| keyboard_type_0_key.togglePerspective
+| 鼠标和键盘的切换视角键。
+|
+| 116
+|
+|-
+! scope="row" | 307
+| keyboard_type_0_key.jump
+| 鼠标和键盘的跳跃键。
+|
+| 32
+|
+|-
+! scope="row" | 308
+| keyboard_type_0_key.sneak
+| 鼠标和键盘的潜行键。
+|
+| 16
+|
+|-
+! scope="row" | 309
+| keyboard_type_0_key.sprint
+| 鼠标和键盘的疾跑键。
+|
+| 17
+|
+|-
+! scope="row" | 310
+| keyboard_type_0_key.left
+| 鼠标和键盘的向左移动键。
+|
+| 65
+|
+|-
+! scope="row" | 311
+| keyboard_type_0_key.right
+| 鼠标和键盘的向右移动键。
+|
+| 86
+|
+|-
+! scope="row" | 312
+| keyboard_type_0_key.back
+| 鼠标和键盘的向后移动键。
+|
+| 83
+|
+|-
+! scope="row" | 313
+| keyboard_type_0_key.forward
+| 鼠标和键盘的向前移动键。
+|
+| 87
+|
+|-
+! scope="row" | 314
+| keyboard_type_0_key.mobEffects
+| 鼠标和键盘的状态效果键。
+|
+| 90
+|
+|-
+! scope="row" | 315
+| keyboard_type_0_key.chat
+| 鼠标和键盘的聊天栏键。
+|
+| 84, 13
+|
+|-
+! scope="row" | 316
+| keyboard_type_0_key.command
+| 鼠标和键盘的命令键。
+|
+| 191
+|
+|-
+! scope="row" | 317
+| keyboard_type_0_key.emote
+| 鼠标和键盘的表情键。
+|
+| 0
+| [[基岩版1.16.0|1.16.0]]
+|-
+! scope="row" | 318
+| keyboard_type_0_key.menuTabLeft
+| 鼠标和键盘的菜单左选项卡键。
+|
+| 219
+|[[基岩版1.6.0|1.6.0]]
+|-
+! scope="row" | 319
+| keyboard_type_0_key.menuTabLeft
+| 鼠标和键盘的菜单右选项卡键。
+|
+| 221
+|[[基岩版1.6.0|1.6.0]]
+|-
+! scope="row" | 320
+| keyboard_type_1_key.lookUpSlight
+| 全键盘玩法的稍稍向上看键。
+|
+| 109
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 321
+| keyboard_type_1_key.lookDownSlight
+| 全键盘玩法的稍稍向下看键。
+|
+| 107
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 322
+| keyboard_type_1_key.lookUpRight
+| 全键盘玩法的向右上看键。
+|
+| 105
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 323
+| keyboard_type_1_key.lookUp
+| 全键盘玩法的向上看键。
+|
+| 104
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 324
+| keyboard_type_1_key.lookUpLeft
+| 全键盘玩法的向左上看键。
+|
+| 103
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 325
+| keyboard_type_1_key.lookRight
+| 全键盘玩法的向右看键。
+|
+| 102
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 326
+| keyboard_type_1_key.lookCenter
+| 全键盘玩法的向中心看键。
+|
+| 101,35,220
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 327
+| keyboard_type_1_key.lookLeft
+| 全键盘玩法的向左看键。
+|
+| 100
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 328
+| keyboard_type_1_key.lookDownRight
+| 全键盘玩法的向右下看键。
+|
+| 99
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 329
+| keyboard_type_1_key.lookDown
+| 全键盘玩法的向下看键。
+|
+| 98
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 330
+| keyboard_type_1_key.lookDownLeft
+| 全键盘玩法的向左下看键。
+|
+| 97
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 331
+| keyboard_type_1_key.lookUpSmooth
+| 全键盘玩法的平稳地向上看键。
+|
+| 38
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 332
+| keyboard_type_1_key.lookDownSmooth
+| 全键盘玩法的平稳地向下看键。
+|
+| 40
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 333
+| keyboard_type_1_key.lookLeftSmooth
+| 全键盘玩法的平稳地向左看键。
+|
+| 37
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 334
+| keyboard_type_1_key.lookUpRightSmooth
+| 全键盘玩法的平稳地向右看键。
+|
+| 39
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 335
+| keyboard_type_1_key.cycleItemLeft
+| 全键盘玩法的向左循环物品键。
+|
+| 33
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 336
+| keyboard_type_1_key.cycleItemRight
+| 全键盘玩法的向右循环物品键。
+|
+| 34
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 337
+| keyboard_type_1_key.attack
+| 全键盘玩法的攻击键。
+|
+| 81
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 338
+| keyboard_type_1_key.pickItem
+| 全键盘玩法的选取物品键。
+|
+| 88
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 339
+| keyboard_type_1_key.use
+| 全键盘玩法的使用键。
+|
+| 69
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 340
+| keyboard_type_1_key.drop
+| 全键盘玩法的丢弃键。
+|
+| 90
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 341
+| keyboard_type_1_key.hotbar.1
+| 全键盘玩法的快捷键1。
+|
+| 49
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 342
+| keyboard_type_1_key.hotbar.2
+| 全键盘玩法的快捷键2。
+|
+| 50
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 343
+| keyboard_type_1_key.hotbar.3
+| 全键盘玩法的快捷键3。
+|
+| 51
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 344
+| keyboard_type_1_key.hotbar.4
+| 全键盘玩法的快捷键4。
+|
+| 52
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 345
+| keyboard_type_1_key.hotbar.5
+| 全键盘玩法的快捷键5。
+|
+| 53
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 346
+| keyboard_type_1_key.hotbar.6
+| 全键盘玩法的快捷键6。
+|
+| 54
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 347
+| keyboard_type_1_key.hotbar.7
+| 全键盘玩法的快捷键7。
+|
+| 55
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 348
+| keyboard_type_1_key.hotbar.8
+| 全键盘玩法的快捷键8。
+|
+| 56
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 349
+| keyboard_type_1_key.hotbar.9
+| 全键盘玩法的快捷键9。
+|
+| 57
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 350
+| keyboard_type_1_key.inventory
+| 全键盘玩法的开启物品栏键。
+|
+| 67
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 351
+| keyboard_type_1_key.togglePerspective
+| 全键盘玩法的切换视角键。
+|
+| 116
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 352
+| keyboard_type_1_key.jump
+| 全键盘玩法的跳跃键。
+|
+| 32
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 353
+| keyboard_type_1_key.sneak
+| 全键盘玩法的潜行键。
+|
+| 16
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 354
+| keyboard_type_1_key.sprint
+| 全键盘玩法的疾跑键。
+|
+| 17
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 355
+| keyboard_type_1_key.left
+| 全键盘玩法的向左移动键。
+|
+| 65
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 356
+| keyboard_type_1_key.right
+| 全键盘玩法的向右移动键。
+|
+| 68
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 357
+| keyboard_type_1_key.back
+| 全键盘玩法的向后移动键。
+|
+| 83
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 358
+| keyboard_type_1_key.forward
+| 全键盘玩法的向前移动键。
+|
+| 87
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 359
+| keyboard_type_1_key.mobEffects
+| 全键盘玩法的状态效果键。
+|
+| 9
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 360
+| keyboard_type_1_key.chat
+| 全键盘玩法的聊天栏键。
+|
+| 84, 13
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 361
+| keyboard_type_1_key.command
+| 全键盘玩法的命令键。
+|
+| 191
+|[[基岩版1.4.0|1.4.0]]
+|-
+! scope="row" | 362
+| keyboard_type_1_key.emote
+| 全键盘玩法的表情键。
+|
+| 66
+| [[基岩版1.16.0|1.16.0]]
+|-
+! scope="row" | 363
+| keyboard_type_1_key.menuTabLeft
+| 全键盘玩法的菜单选项卡左键。
+|
+| 219
+|
+|-
+! scope="row" | 364
+| keyboard_type_1_key.menuTabRight
+| 全键盘玩法的菜单选项卡右键。
+|
+| 221
+|
+|-
+|}
+
+== 已移除的选项 ==
+{{info needed section|已移除的选项}}
+
+=== Java版 ===
+{| class="wikitable sortable" style="width: 100%" data-description="List of options"
+|-
+! scope="col" style="width: 5%;" | #{{note|name=numbering}}
+! scope="col" | 选项名称
+! scope="col" class="unsortable" | 解释
+! scope="col" | 有效值
+! scope="col" | 默认值
+! scope="col" | 加入版本
+! scope="col" | 移除版本
+|-
+! scope="row" | 
+| anaglyph3d
+| 是否开启3D模式
+| true/false
+| false
+|
+| [[17w43a]]（[[Java版1.13|1.13]]）
+|-
+! scope="row" | 
+| anisotropicFiltering
+|
+|
+| 1
+|
+| [[14w25a]]（[[Java版1.8|1.8]]）
+|-
+! scope="row" | 
+| allowBlockAlternatives
+| 是否使用可选方块模型
+| true/false
+| true
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| fboEnable
+| 帧缓冲对象（FBO）是否启用
+| true/false
+| false
+|
+|
+|-
+! scope="row" | 
+| saturation
+| 饱和度，无法在游戏中设置
+|
+| 0.0
+|
+|
+|-
+! scope="row" | 
+| streamBytesPerPixel
+| 直播每个像素输出的总字节数（BPP）
+| {{range|0|1}}
+| 0.5
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamMicVolume
+| 直播时麦克风的输出音量
+| {{range|0|1}}
+| 1.0
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamSystemVolume
+| 直播时系统的输出音量
+| {{range|0|1}}
+| 1.0
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamKbps
+| 直播时的比特率（单位为Kbps）
+|
+| 0.5412844
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamFps
+| 直播时的FPS输出
+|
+| {{Tooltip|0.31690142|作为浮点数等于45/142，可用滑块调节。}}
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamCompression
+| 是否对直播的视频输出进行压缩
+| 0/1（false/true）
+| 1
+|
+|[[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamSendMetadata
+| 是否在直播中发送额外的元数据
+| true/false
+| true
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamPreferredServer
+| 直播时的首选录制服务器。
+|
+|
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamChatEnabled
+| Twitch的聊天内容是否复制到Minecraft聊天栏中
+| 0/1（是/否）
+| 0
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamChatUserFilter
+| 以上的内容是否要经过审核
+| 0/1（是/否）
+| 0
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| streamMicToggleBehavior
+| 是否使用热键切换麦克风输出
+| 0/1（是/否）
+| 0
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| key_key.streamStartStop
+| 开始/停止直播
+|
+| 64（F6）
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| key_key.streamPauseUnpause
+| 暂停/继续直播
+|
+| 65（F7）
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| key_key.streamCommercial
+| 直播商业管制
+|
+| 0（无）
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| key_key.streamToggleMic
+| 麦克风输入控制
+|
+| 0（无）
+|
+| [[15w31a]]（[[Java版1.9|1.9]]）
+|-
+! scope="row" | 
+| showInventoryAchievementHint
+| 第一次进入世界时屏幕右上角显示“按‘E’键打开物品栏”文本；不在游戏中控制
+| true/false
+| true
+|
+| [[17w06a]]（[[Java版1.12|1.12]]）
+|-
+! scope="row" | 
+| useVbo
+| 顶点缓冲对象（VBO）是否启用
+| true/false
+| false
+|
+| [[18w44a]]（[[Java版1.14|1.14]]）
+|-
+! scope="row" | 
+| fancyGraphics
+| 高（更多细节）图像品质是否开启
+| true/false
+| true
+|
+| [[Java版1.16-pre1|1.16-pre1]]（[[Java版1.16|1.16]]）
+|-
+! scope="row" | 
+| key_key.swapHands
+| 在双手的控制之间交换物品
+| 
+| true
+|
+|
+|-
+! scope="row" | 
+| snooperEnabled
+| 是否开启监听功能
+| true/false
+| true
+| 
+| [[21w43a]]（[[Java版1.18|1.18]]）
+|-
+! scope="row" |
+| difficulty
+| 游戏难度
+| {{range|0|3}}：和平，简单，普通，困难
+| 2（普通）
+| 
+| [[22w12a]]（[[Java版1.19|1.19]]）
+|-
+! scope="row" |
+| chatPreview
+| 是否启用聊天预览功能，或启用后聊天预览功能的模式
+| {{range|0|2}}（{{tr|关|關閉|關}}，输入时，{{tr|发送时|傳送時}}）
+| 1
+| [[22w19a]]（[[Java版1.19|1.19]]）
+| [[22w42a]]（[[Java版1.19.3|1.19.3]]）
+|-
+! scope="row" |
+| skipRealms32bitWarning
+| 是否跳过进入Realms时的32位运行环境警告
+| true/false
+| false
+| [[Java版1.18.2-pre1|1.18.2-pre1]]（[[Java版1.18.2|1.18.2]]）
+| {{info needed}}
+|-
+! scope="row |
+| heldItemTooltips
+| 物品之间的切换是否显示物品名称；不在游戏内部设置
+| true/false
+| true
+| [[12w50a]]（[[Java版1.4.6|1.4.6]]）
+| [[23w06a]]（[[Java版1.19.4|1.19.4]]）
+|-
+! scope="row" |
+| hideBundleTutorial
+| 玩家在尝试使用收纳袋时是否已经看到收纳袋的教程提示。
+| true/false
+| false
+| [[21w05a]]（[[Java版1.17|1.17]]）
+| [[24w33a]]（[[Java版1.21.2|1.21.2]]）
+|}
+
+=== 基岩版 ===
+{| class="wikitable sortable" style="width: 100%" data-description="List of options"
+|-
+! scope="col" style="width: 5%;" | #{{note|name=numbering}}
+! scope="col" | 选项名称
+! scope="col" class="unsortable" | 解释
+! scope="col" | 有效值
+! scope="col" | 默认值
+! scope="col" | 加入版本
+! scope="col" | 移除版本
+|-
+! scope="row" | 
+| keyboard_type_1_key.lookUpSlight
+| 全键盘玩法的稍稍向上看键。
+| 
+| 109
+|
+| [[基岩版1.16.0|1.16.0]]
+|}
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java files}}
+{{Navbox Bedrock Edition}}
+
+[[Category:游戏文件]]
+
+[[de:Options.txt]]
+[[en:Options.txt]]
+[[es:Options.txt]]
+[[fr:Options.txt]]
+[[it:Options.txt]]
+[[ja:Options.txt]]
+[[nl:Options.txt]]
+[[pl:Options.txt]]
+[[pt:Options.txt]]
+[[ru:Options.txt]]
+[[th:Options.txt]]
+[[uk:Options.txt]]

@@ -1,0 +1,160 @@
+# 页面: 稀有度
+# 来源: https://zh.minecraft.wiki/w/%E7%A8%80%E6%9C%89%E5%BA%A6
+# 分类: Java版独有信息, 基岩版独有信息, 游戏内容
+# 抓取时间: 2026-07-14 17:33:09
+# 原始 Wikitext 内容:
+
+{{for}}
+'''稀有度（Rarity）'''是应用于[[物品]]的属性之一，表示它们的价值和获得难度。
+
+== 机制 ==
+稀有度的主要效果是影响物品的物品名称的颜色，除非这些物品的自定义名称设置了颜色，如[[Java版1.21.2]]前的[[不祥旗帜]]<ref>{{bug|MC-274657|||Fixed}}</ref>。
+
+物品具有任何[[魔咒]]时稀有度会提升，由常见（Common）或少见（Uncommon）变为稀有（Rare）、或由稀有（Rare）变为史诗（Epic）。
+
+物品的稀有度会在以下的场景中影响物品名称的颜色：
+* 在物品栏中选中物品，出现在[[提示框]]中的物品名称。
+* 在[[平视显示器#快捷栏|快捷栏]]中选中物品，出现在快捷栏上方的物品名称。
+* {{only|for=在物品被包含在[[JSON文本]]消息中时显示的物品名称。这包括死亡界面中的[[死亡消息]]，聊天栏中的死亡消息，以及{{cmd|tellraw}}和{{cmd|give}}的文本。|JE}}
+
+物品的稀有度'''不会'''在以下的场景中影响物品名称的颜色：
+* [[物品展示框]]显示的其中被命名的物品名称。<ref>{{bug|MC-132199}}</ref>
+* 在物品栏中选中[[潜影盒]]时，提示框显示其内容物的物品名称。<ref>{{bug|MC-132201}}</ref>
+* {{only|for=[[统计]]屏幕中的物品名称。<ref>{{bug|MC-139386}}</ref>|JE}}
+* {{only|for=[[成就]]|BE}}或{{only|for=[[进度]]|JE}}系统中涉及的物品名称，如[[信标]]等。
+
+{{in|JE}}稀有度是一种物品属性，由[[物品堆叠组件]]控制，因此在物品栏中选中具有<code>can_place_on</code>或<code>can_break</code>物品组件的物品时提示框显示的方块名称<ref>{{bug|MC-227915|||Invalid}}</ref>和[[超平坦]]自定义屏幕中的方块名称<ref>{{bug|MC-227928|||Invalid}}</ref>，即使有对应的[[方块物品]]也不会适用稀有度颜色。
+
+== 稀有度等级 ==
+{| class="wikitable" data-description="物品稀有度"
+! 稀有度 !! 颜色 !! 物品列表
+|-
+| style="background-color: #1E0F1E" | {{mcfont|&f常见<br>Common}}
+| style="background-color: #fff" | <span style="color: black;">白色</span><br><code>#FFFFFF</code>
+|| 所有未在下方列出的物品
+|-
+| style="background-color: #1E0F1E" | {{mcfont|&e少见<br>Uncommon}}
+| style="background-color: #ff5" | <span style="color: black;">黄色</span><br><code>#FFFF55</code>
+|| {{columns-list|colwidth=15em|
+* {{only|for={{ItemLink|Book}}|BE}}<ref name="MCPE-184806">{{bug|MCPE-184806}}</ref>
+* {{ItemLink|Bottle o' Enchanting}}
+* {{ItemSprite|Chainmail Helmet}}{{ItemSprite|Chainmail Chestplate}}{{ItemSprite|Chainmail Leggings}}{{ItemSprite|Chainmail Boots}} [[锁链盔甲]]
+* {{BlockLink|Conduit}}
+* {{ItemLink|Creeper Charge Banner Pattern}}
+* {{ItemLink|Disc Fragment 5|唱片残片''5''}}
+* {{ItemLink|Dragon's Breath}}
+* {{ItemLink|Echo Shard}}
+* {{ItemLink|Goat Horn}}
+* {{ItemLink|Heart of the Sea}}
+* {{ItemLink|Nautilus Shell}}
+* {{BlockLink|Ominous Banner}}
+* {{ItemLink|Ominous Bottle}}
+* {{ItemLink|Pottery Sherd}}
+* {{ItemLink|Recovery Compass}}
+* {{BlockLink|Sniffer Egg}}
+* {{ItemLink|Snout Banner Pattern}}
+* {{ItemLink|Totem of Undying}}
+* [[音乐唱片]]（[[Pigstep]]、[[otherside]]、[[Creator]]、{{only|for=[[Lava Chicken]]|JE}}<ref name="MC-299357">{{bug|MC-299357}}</ref>除外）
+* [[锻造模板]]（[[监守盔甲纹饰]]、[[眼眸盔甲纹饰]]、[[恼鬼盔甲纹饰]]、[[尖塔盔甲纹饰]]、[[幽静盔甲纹饰]]除外）
+* [[生物头颅]]（[[凋灵骷髅头颅]]、[[龙首]]除外）
+}}
+|-
+| style="background-color: #1E0F1E" | {{mcfont|&b稀有<br>Rare}}
+| style="background-color: #5ff" | <span style="color: black;">青色</span><br><code>#55FFFF</code>
+|| {{columns-list|colwidth=15em|
+* [[附魔]]的常见和少见物品
+* {{only|for={{ItemLink|Enchanted Book}}|JE}}<ref name="MCPE-184791">{{bug|MCPE-184791}}</ref>
+* {{BlockLink|Beacon}}
+* {{ItemLink|Enchanted Golden Apple}}
+* {{ItemLink|Nether Star}}
+* {{ItemLink|Trident}}
+* {{BlockLink|Wither Skeleton Skull}}
+* [[旗帜图案]]（[[涡流旗帜图案|涡流]]、[[旋风旗帜图案|旋风]]、[[Mojang徽标旗帜图案|Mojang徽标]]、[[头颅盾徽旗帜图案|头颅盾徽]]）
+* [[音乐唱片]]（[[Pigstep]]、[[otherside]]、[[Creator]]、{{only|for=[[Lava Chicken]]|JE}}<ref name="MC-299357"/>）
+* [[锻造模板]]（[[监守盔甲纹饰]]、[[眼眸盔甲纹饰]]、[[恼鬼盔甲纹饰]]、[[尖塔盔甲纹饰]]）
+}}
+|-
+| style="background-color: #1E0F1E" | {{mcfont|&d史诗<br>Epic}}
+| style="background-color: #f5f" | <span style="color: black;">品红色</span><br><code>#FF55FF</code>
+|| {{columns-list|colwidth=15em|
+* [[附魔]]的稀有和史诗物品
+* {{only|JE|for={{BlockLink|Barrier}}}}
+* {{only|JE|for={{ItemLink|Debug Stick}}}}
+* {{BlockLink|Dragon Egg}}
+* {{BlockLink|Dragon Head}}
+* {{ItemLink|Elytra}}
+* {{BlockLink|Heavy Core}}
+* {{only|JE|for={{BlockLink|Jigsaw Block}}}}
+* {{only|JE|for={{ItemLink|Knowledge Book}}}}
+* {{only|JE|for={{BlockLink|Light}}}}
+* {{ItemLink|Mace}}
+* {{only|JE|for={{BlockLink|Command Blocks}}}}
+* {{only|JE|for={{ItemLink|Minecart with Command Block}}}}
+* {{ItemLink|Silence Armor Trim Smithing Template}}
+* {{only|JE|for={{BlockLink|Structure Block}}}}
+* {{only|JE|for={{BlockLink|Structure Void}}}}
+* {{only|JE|for={{BlockLink|Test Blocks}}}}
+* {{only|JE|for={{BlockLink|Test Instance Block}}}}
+}}
+|}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|金苹果的提示文本现在为品红色，使其成为拥有非白色提示文本的首个物品。}}
+|{{HistoryLine||1.3.1|dev=12w21a|金苹果的提示文本变为青色。
+|加入了附魔金苹果，其提示文本为金苹果先前的品红色。}}
+|{{HistoryLine||1.13|dev=18w21a|为某些物品加入了基于其稀有度的有色提示文本。}}
+|{{HistoryLine|||dev=pre2|稀有度的颜色会显示在快捷栏上了。<ref>{{bug|MC-130145|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.3|dev=22w44a|取消了[[刷怪笼]]的品红色提示文本。}}
+|{{HistoryLine||1.21|dev=pre2|现在猪鼻旗帜图案的稀有度为“少见”，涡流旗帜图案和旋风旗帜图案的稀有度为“稀有”，沉重核心、三叉戟和重锤的稀有度为“史诗”，此前均为“常见”。}}
+|{{HistoryLine||1.21.2|dev=24w33a|重新评估并更改了一些物品的稀有度：
+* 金苹果和末地水晶的稀有度由“稀有”更改为“常见”。
+* 幽静盔甲纹饰的稀有度由“常见”更改为“史诗”。
+* 鞘翅和龙首的稀有度由“少见”更改为“史诗”。
+* 附魔金苹果、三叉戟和Mojang徽标旗帜图案的稀有度由“史诗”更改为“稀有”。
+* 监守盔甲纹饰、眼眸盔甲纹饰、恼鬼盔甲纹饰和尖塔盔甲纹饰的稀有度由“常见”更改为“稀有”。
+* 下界之星、凋灵骷髅头颅和头颅盾徽旗帜图案的稀有度由“少见”更改为“稀有”。
+* 嗅探兽蛋、锁链头盔、锁链胸甲、锁链护腿、锁链靴子、追溯指针、唱片残片''5''、鹦鹉螺壳、回响碎片、山羊角、陶片、不祥之瓶、不祥旗帜以及其余锻造模板的稀有度由“常见”更改为“少见”。
+* 除了''Pigstep''、''otherside''和''Creator''以外，其余音乐唱片和潮涌核心的稀有度由“稀有”更改为“少见”。}}
+|{{HistoryLine||1.21.9|dev=25w34a|现在附魔书的稀有度由“少见”更改为“稀有”。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|附魔书的提示框内的名字现在是黄色的，附魔的物品是蓝色的，这些是第一批拥有白色以外名字的物品。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|音乐唱片现在有蓝色物品标签了。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.9|金苹果现在有蓝色的物品标签了，附魔金苹果则为品红色。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.22|现在苦力怕盾徽、头颅盾徽和猪鼻旗帜图案的稀有度为“少见”，涡流旗帜图案和旋风旗帜图案的稀有度为“稀有”，Mojang旗帜图案、沉重核心、三叉戟和重锤的稀有度为“史诗”，此前均为“常见”。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.21|重新评估并更改了一些物品的稀有度：<!-- 空一行以使列表正常显示 -->
+
+* [[金苹果]]的稀有度由“稀有”更改为“常见”。
+* 所有[[附魔书]]的稀有度由“少见”更改为“常见”。<ref name="MCPE-184791"/>
+* [[鞘翅]]、[[龙首]]、[[龙蛋]]和幽静盔甲纹饰的稀有度由“常见”更改为“史诗”。
+* [[附魔金苹果]]、[[三叉戟]]和Mojang徽标[[旗帜图案]]的稀有度由“史诗”更改为“稀有”。
+* [[信标]]、[[下界之星]]、监守盔甲纹饰、眼眸盔甲纹饰、恼鬼盔甲纹饰、尖塔盔甲纹饰和[[凋灵骷髅头颅]]的稀有度由“常见”更改为“稀有”。
+* [[嗅探兽蛋]]、[[锁链头盔]]、[[锁链胸甲]]、[[锁链护腿]]、[[锁链靴子]]、[[追溯指针]]、[[唱片残片]]''5''、[[鹦鹉螺壳]]、[[回响碎片]]、[[山羊角]]、[[陶片]]、[[不祥之瓶]]、[[不祥旗帜]]、[[书]]<ref name="MCPE-184806"/>、[[龙息]]、[[海洋之心]]、[[潮涌核心]]、[[附魔之瓶]]、[[不死图腾]]以及其余[[锻造模板]]和[[生物头颅]]的稀有度由“常见”更改为“少见”。
+* 除了''Pigstep''、''otherside''和''Creator''以外，其余[[音乐唱片]]的稀有度由“稀有”更改为“少见”。
+* 头颅盾徽旗帜图案的稀有度由“少见”更改为“稀有”。
+|现在物品具有[[魔咒]]时稀有度会提升，由常见或少见变为稀有，或由稀有变为史诗。}}
+}}
+
+== 你知道吗 ==
+* [[愚人节玩笑]]版本[[24w14potato]]加入了Potato稀有度，提示文本显示为绿色（<code>#55FF55</code>）：{{mcfont|&aPotato}}。
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[en:Rarity]]
+[[es:Rareza]]
+[[fr:Rareté]]
+[[it:Rarità]]
+[[ja:希少度]]
+[[ko:희귀도]]
+[[lzh:罕]]
+[[pl:Rzadkość]]
+[[pt:Raridade]]
+[[ru:Редкость]]
+[[th:ความหายาก]]
+[[uk:Рідкісність]]

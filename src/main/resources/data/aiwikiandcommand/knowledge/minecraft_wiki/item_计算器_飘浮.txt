@@ -1,0 +1,32 @@
+# 页面: 计算器/飘浮
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%A1%E7%AE%97%E5%99%A8/%E9%A3%98%E6%B5%AE
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+該工具可以計算給定[[懸浮]]等級與持續時間的飄浮距離。
+
+<onlyinclude>{|- class="wikitable calculator-container calculatorgadget-enabled" data-calculator-refresh-on-load="true" style="display: none; {{{style|}}}"
+! colspan=2 | 懸浮
+|-
+| 等級 || {{Simplecalc|type=range|min=1|max=256|step=1|id=l|formula=l2|default=1}} {{Simplecalc|type=number|min=1|max=256|step=1|id=l2|formula=l|default=1}}{{Simplecalc|type=hidden|id=gfd1f|formula=-49/1080*l}}
+|-
+| 持續時間（秒） || {{Simplecalc|type=number|min=0|id=sec|default=10|step=0.05}}{{Simplecalc|type=hidden|id=t|formula=floor(sec*20)|default=200}}{{Simplecalc|type=hidden|id=ft1|formula=1-pow(0.784,t)}}
+|-
+| 移動距離（持續時間中） || {{Simplecalc|type=plain|decimals=4|id=d|formula=gfd1f*(ft1/0.216-t)}}{{Simplecalc|type=hidden|id=vt|formula=-gfd1f*ft1}}{{Simplecalc|type=hidden|id=tp|formula=ceil(-log(25/98*vt+1)/log(0.98))}}{{Simplecalc|type=hidden|id=vt2|formula=vt*0.98-0.0784}}{{Simplecalc|type=hidden|id=tp2|formula=ceil(-log(25/98*vt2+1)/log(0.98))}}
+|-
+| 最高高度（考慮慣性） || {{Simplecalc|type=plain|decimals=4|formula=d+50*((vt+3.92)*(1-pow(0.98,tp))-0.0784*tp)}}或{{Simplecalc|type=plain|decimals=4|formula=d+50*((vt2+3.92)*(1-pow(0.98,tp2))-0.0784*tp2)}}
+|}</onlyinclude>
+
+== 導覽 ==
+{{Navbox calculators}}
+
+[[en:Calculators/Levitation]]
+[[fr:Calculateurs/Lévitation]]
+[[ja:計算機/浮遊距離]]
+[[ko:계산기/공중 부양]]
+[[lzh:算械/浮]]
+[[pt:Calculadoras/Levitação]]
+[[ru:Калькуляторы/Левитация]]
+[[th:เครื่องคำนวณ/ลอยตัว]]
+[[uk:Калькулятори/Левітація]]

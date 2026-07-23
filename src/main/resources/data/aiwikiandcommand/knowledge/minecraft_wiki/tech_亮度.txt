@@ -1,0 +1,763 @@
+# 页面: 亮度
+# 来源: https://zh.minecraft.wiki/w/%E4%BA%AE%E5%BA%A6
+# 分类: Java版独有信息, 基岩版独有信息, 待扩充段落, 教育版独有信息, 有未知版本的History模板的页面/Java版, 有未知版本的History模板的页面/Java版Alpha, 机制, 环境
+# 抓取时间: 2026-07-14 17:19:59
+# 原始 Wikitext 内容:
+
+{{TOC|right}}
+{{redirect|光|英文名为Light的方块|光源方块{{!}}{{tr|光源方块|光源|光（方塊）}}}}
+'''亮度（Light/Lighting）'''会影响视觉、[[生物]]生成及[[植物]]的生长。它包括三个方面：光照等级，内部光照等级和渲染亮度。
+
+== 光照等级 ==
+{{in|je}}调试屏幕上会显示光照等级。有两种类型的光照：天空光照和方块光照。'''光照等级（Light level）'''共有16级，以0（最小）至15（最大）的整数表示。
+
+=== 方块光照 ===
+'''方块光照（Block Light）'''即方块发出的光，它会按照[[wzh:Flood fill|Flood Fill]]算法传播。
+
+光源产生方块光照向毗邻的六个方块传播时会衰减1光照等级，直到衰减为0。由此可知，光照衰减依照方块坐标的“[[曼哈顿距离]]”（两个点在坐标系上的绝对轴距总和）计算。例如：
+* 假如地上插着一支火把（光照等级14），则在同一平面上，火把四周的方块的光照等级均为13，火把对角的方块的光照等级均为12。
+* 假如在地面上方一格的墙上插一支火把，则地板上方且与火把斜对角的方块（即不接触墙壁的方块）的光照等级为11（譬如，西北下方方块的光照等级为，14-1（向西）-1（向北）-1（向下））。
+
+上述这种衰减特性会使光源周围光照的扩散近似呈正八面体。{{in|be}}半透明方块可以使方块光照衰减更多（详见下文）。
+
+在计算光照时，光照系统会检查方块是否是[[#光照透明方块|透明]]的。如果是，则可以通过这个方块传播光线；如果不是，则光线被遮挡。{{in|je}}有些方块在一些位置上可以透过光照，而有些位置不能，这类部分透明的方块会检查光线射入或射出方块的方向是否是方块的完整[[遮挡形状|遮挡面]]。如果遮挡面完整，光线就不能从这个面射入，同样也不能从这个面射出，即计算方块光照时不考虑遮挡面完整方向上的光照输入，也不会向遮挡面完整的方向上传播光照。
+
+=== 天空光照 ===
+在主世界中，所有露天位置的'''天空光照（Sky Light）'''等级为15，之后会按照[[wzh:Flood fill|Flood Fill]]算法传播，光照计算类似于方块光照。和内部天空光照不同，'''天空光照与时间无关，它不会随着[[昼夜更替]]或[[天气更替]]而变化'''。
+
+{{in|je}}如果一个等级为15的天空光照向下穿过一个散射天空光的方块，那么它的光照等级会减1；当穿过一个非散射天空光的光照透明方块，它的光照等级不变。
+
+简单来说，天空光照反映某个位置的'''露天程度'''，而不是明暗程度。
+
+=== 光照透明方块 ===
+每个方块都有能否遮挡光照的属性。如果一个方块完全不能遮挡光照，它就是'''光照透明方块'''。入射光照和出射光照不受遮挡穿过这些方块传播。如果一个方块遮挡形状完整，那么它就是'''光照不透明方块'''，或'''完全固体渲染方块'''。
+
+所有没有[[碰撞箱]]和绝大多数[[遮挡形状]]不完整的方块都是光照透明方块。另外以下方块也不会进行光照遮挡计算：
+{{columns-list|columns=2|
+* {{BlockLink|Glass}}和{{BlockLink|Stained Glass}}
+* {{BlockLink|Glass Pane}}和{{BlockLink|Stained Glass Panes}}
+* {{BlockLink|Azalea}}和{{BlockLink|Flowering Azalea}}
+* {{BlockLink|Bamboo}}
+* {{BlockLink|Chorus Plant}}
+* {{BlockLink|Chorus Flower}}
+* {{BlockLink|Cocoa}}
+* {{BlockLink|Lily Pad}}
+* {{BlockLink|Mangrove Roots}}
+* {{BlockLink|Sea Pickle}}
+* {{BlockLink|Campfire}}和{{BlockLink|Soul Campfire}}
+* {{BlockLink|Candle}}
+* {{BlockLink|Beds}}
+* {{BlockLink|Doors}}
+* {{BlockLink|Flower Pot}}
+* {{BlockLink|Ladder}}
+* {{BlockLink|Lantern}}、{{BlockLink|Soul Lantern}}和{{BlockLink|Copper Lantern}}
+* {{BlockLink|Trapdoors}}
+* {{BlockLink|Iron Chain}}和{{BlockLink|Copper Chain}}
+* {{BlockLink|Conduit}}
+* {{BlockLink|Decorated Pot}}
+* {{BlockLink|Dragon Egg}}和{{BlockLink|Turtle Egg}}
+* {{BlockLink|End Rod}}
+* {{BlockLink|Iron Bars}}
+* {{BlockLink|Lightning Rod}}
+* {{BlockLink|Moving Piston}}
+* {{BlockLink|Slime Block}}
+* {{BlockLink|Honey Block}}
+* {{BlockLink|Monster Spawner}}
+* {{BlockLink|Barrier}}
+* {{BlockLink|Light Block}}
+* {{BlockLink|Amethyst Cluster}}
+* {{BlockLink|Pointed Dripstone}}
+* {{BlockLink|Frogspawn}}
+* {{BlockLink|Shulker Box}}
+* {{BlockLink|Copper Grates}}
+* {{BlockLink|Trial Spawner}}
+* {{BlockLink|Vault}}
+}}
+
+下列方块仅{{in|je|nc=1}}属于光照透明方块，{{in|be|}}它们属于[[#半透明方块|半透明方块]]：
+{{columns-list|columns=2|
+* {{BlockLink|Ice}}和{{BlockLink|Frosted Ice}}
+* {{BlockLink|Leaves}}
+* {{BlockLink|Beacon}}
+* {{BlockLink|Brewing Stand}}
+* {{BlockLink|Cauldron}}
+}}
+
+下列是有遮挡形状，但遮挡形状不完整的方块。这类方块也属于光照透明方块：
+{{columns-list|columns=2|
+* {{BlockLink|Sniffer Egg}}
+* {{BlockLink|Moss Carpet}}
+* {{BlockLink|Anvil}}
+* {{BlockLink|Bell}}
+* {{BlockLink|Composter}}
+* {{BlockLink|Grindstone}}
+* {{BlockLink|Scaffolding}}
+* {{BlockLink|Carpets}}
+* {{BlockLink|Chest}}、{{BlockLink|Copper Chest}}、{{BlockLink|Ender Chest}}和{{BlockLink|Trapped Chest}}
+* {{BlockLink|Mob Heads}}
+* {{BlockLink|Fences}}
+* {{BlockLink|Fence Gates}}
+* {{BlockLink|Walls}}
+* {{BlockLink|Hopper}}
+}}
+
+==== 散射 ====
+{{exclusive|je|section=1}}
+有些光照透明方块会“散射”天空光，即天空光射入这些方块后亮度等级减1而不是保持不变。下列光照透明方块具有这种属性：
+* 大多数[[轮廓箱]]完整的方块，例如{{BlockLink|Leaves}}、{{BlockLink|Ice}}、{{BlockLink|Slime Block}}等，但不包括{{BlockLink|Copper Grates}}、{{BlockLink|Glass}}、{{BlockLink|Stained Glass}}和{{BlockLink|Barrier}}
+* {{BlockLink|Lava}}、{{BlockLink|Water}}和所有[[含水]]的方块
+* {{BlockLink|Chorus Flower}}和{{BlockLink|Chorus Plant}}
+
+==== 部分光照透明 ====
+[[File:Light for non light transparency block.png|''左''：光照从讲台顶面传入，只有底面不会传出<br>''右''：光照从讲台底面传入，其余面都不能传出|thumb]]
+[[File:Light for partial light transparency block.png|''左''：漏斗（光照透明方块）与雪的接触面拼合后仍不完整，光照可以通过<br>''右''：上半台阶与雪的接触面拼合后完整，光照不能通过|thumb]]
+{{exclusive|je|section=1}}
+一些方块虽然遮挡形状不完整，但存在至少一个完整的遮挡面。这种方块就是'''部分光照透明方块'''，光照只会在尝试从完整遮挡面射入或射出时被阻挡，其余面则不受阻碍。下列方块都是部分光照透明方块：
+{{columns-list|columns=2|
+* {{BlockLink|Daylight Detector}}
+* {{BlockLink|Dirt Path}}
+* {{BlockLink|Enchantment Table}}
+* {{BlockLink|End Portal Frame}}
+* {{BlockLink|Farmland}}
+* {{BlockLink|Lectern}}
+* {{BlockSprite|Piston Top|text=伸出的活塞|link=活塞}}和{{BlockLink|Piston Head}}
+* {{BlockLink|Sculk Sensor}}和{{BlockLink|Calibrated Sculk Sensor}}
+* {{BlockLink|Sculk Shrieker}}
+* {{BlockLink|Slabs}}（不包含双层台阶）
+* {{BlockLink|Snow}}（不包含8层雪）
+* {{BlockLink|Stairs}}
+* {{BlockLink|Stonecutter}}
+}}
+两个相邻的部分光照透明方块的接触面若能拼合成完整的遮挡面，也能在这一面上阻止光照传播。
+
+例如，讲台是一个部分光照透明方块，它的底面遮挡面完整而其他遮挡面不完整，所以它可以阻挡从它下方射入的光线，也会阻止向下方射出光线。上半台阶是部分光照透明方块，上面遮挡面是完整的，即光线不能从上面射入或射出；侧面遮挡面是1×0.5的长方形，如果入射光线只在这个范围内光线也会被遮挡。泥土是光照不透明方块，也就是所有光线都不能透过它进行传播。
+{{-}}
+=== 半透明方块 ===
+{{exclusive|be|section=1}}
+一些方块会对通过的光照造成不同程度的削减，它们是'''半透明方块'''。
+
+天空光通过这些方块后也会开始像方块提供的光照那样衰减。
+{| class="wikitable sortable" data-description="半透明方块"
+! 方块
+! 减少值
+|-
+| {{BlockLink|beacon}}
+| 14
+|-
+| {{BlockLink|anvil}}
+| rowspan="6"| 3
+|-
+| {{BlockLink|brewing-stand}}
+|-
+| {{BlockLink|cauldron}}
+|-
+| {{BlockLink|hopper}}
+|-
+| {{BlockLink|ice|}}
+|-
+| {{BlockLink|frosted-ice}}
+|-
+| {{BlockLink|water}}
+| rowspan="1"| 2
+|-
+| {{BlockLink|cobweb}}
+| rowspan="4"| 1
+|-
+| {{BlockLink|leaves}}
+|-
+| {{BlockLink|powder-snow}}
+|-
+| {{BlockLink|slabs}}
+|}
+
+=== 发光方块 ===
+[[File:LightEmittingBlocks.png|缩略图|300px|不同[[方块]]散发的光照等级的对比]]
+以下数值为方块本身的亮度：
+
+{| class="wikitable sortable" data-description="方块亮度"
+|+
+! 图标
+! 方块
+! 光照等级
+|-
+! [[File:Beacon.png|25px]]
+| [[信标]]
+| rowspan="19" | 15
+|-
+! [[File:Lava Cauldron.png|25px]]
+| 装有熔岩的[[炼药锅]]
+|-
+! [[File:End Gateway.gif|25px]]
+| [[末地折跃门方块]]
+|-
+! [[File:End Portal.png|25px]]
+| [[末地传送门方块]]
+|-
+! [[File:Fire.gif|25px]]
+| [[火]]
+|-
+! [[File:Campfire.gif|25px]]
+| [[营火]]
+|-
+! [[File:Glowstone.png|25px]]
+| [[荧石]]
+|-
+! [[File:Jack o'Lantern.png|25px]]
+| [[南瓜灯]]
+|-
+! [[File:Lava.gif|25px]]
+| [[熔岩]]
+|-
+! [[File:Lit Redstone Lamp.png|25px]]
+| 点亮的[[红石灯]]
+|-
+! [[File:Sea Lantern.png|25px]]
+| [[海晶灯]]
+|-
+! [[File:Sea Pickle 4.png|25px]]
+| 4个[[海泡菜]]（在水中）
+|-
+! [[File:Conduit.png|25px]]
+| [[潮涌核心]]
+|-
+! [[File:Lantern.png|25px]]
+| [[灯笼]] 
+|-
+! [[File:Shroomlight.png|25px]]
+| [[菌光体]]
+|-
+! [[File:Respawn Anchor Charges 4.gif|25px]]
+| [[重生锚]]（4级能量）
+|-
+! {{Animate|Ochre Froglight.png;Pearlescent Froglight.png;Verdant Froglight.png|25px}}
+| [[蛙明灯]]
+|-
+! [[File:Lit Copper Bulb.png|25px]]
+| 点亮的[[铜灯]]
+|-
+! [[File:Copper Lantern.gif|25px]]
+| [[铜灯笼]]
+|-
+! [[File:End Rod.png|25px]]
+| [[末地烛]]
+| rowspan="6" | 14
+|-
+! [[File:Torch.png|25px]]
+| [[火把]]
+|-
+! [[File:Underwater Torch.png|25px]]
+| {{only|be|ee|for=[[水下火把]]|short=1}}
+|-
+! {{animate|Purple Torch.png;Blue Torch.png;Green Torch.png;Red Torch.png|25px}}
+| {{only|be|ee|for=[[彩色火把]]|short=1}}
+|-
+! {{animate|Cave Vines Plant (berries).png;Cave Vines (berries).png|25px}}
+| 结果的[[发光浆果|洞穴藤蔓]]
+|-
+! [[File:Copper Torch.png|25px]]
+| [[铜火把]]
+|-
+! [[File:Lit Furnace.png|25px]]
+| 燃烧中的[[熔炉|熔炉]]
+| rowspan="3" | 13
+|-
+! [[File:Lit Blast Furnace.png|25px]]
+| 燃烧中的[[高炉|高炉]]
+|-
+! [[File:Lit Smoker.png|25px]]
+| 燃烧中的[[烟熏炉|烟熏炉]]
+|-
+! [[File:Glowing Obsidian.png|25px]]
+| {{only|be|for=[[发光的黑曜石]]|short=1}}
+| rowspan="7" | 12
+|-
+! [[File:Sea Pickle 3.png|25px]]
+| 3个海泡菜（在水中）
+|-
+! [[File:Four Candles (lit).png|25px]]
+| 4个点燃的[[蜡烛]] 
+|-
+! [[File:Lit Exposed Copper Bulb.png|25px]]
+| 点亮的[[铜灯|斑驳的铜灯]]
+|-
+! [[File:Vault.png|25px]]
+| [[宝库]]（激活时）
+|-
+! [[File:Unlocking Vault.png|25px]]
+| 宝库（解锁时）
+|-
+! [[File:Ejecting Vault.png|25px]]
+| 宝库（喷出战利品时）
+|-
+! [[File:Portal.png|25px]]
+| [[下界传送门方块]]
+| rowspan="2" | 11
+|-
+! [[File:Respawn Anchor Charges 3.gif|25px]]
+| 重生锚（3级能量）
+|-
+! [[File:Soul Fire.gif|25px]]
+| [[灵魂火]]
+| rowspan="5" | 10
+|-
+! [[File:Soul Torch.png|25px]]
+| [[灵魂火把]]
+|-
+! [[File:Soul Lantern.png|25px]]
+| [[灵魂灯笼]]
+|-
+! [[File:Crying Obsidian.png|25px]]
+| [[哭泣的黑曜石]]
+|-
+! [[File:Soul Campfire.gif|25px]]
+| [[灵魂营火]]
+|-
+! [[File:Redstone_Ore_JE4_BE3.png|25px]]
+| 点亮的[[红石矿石]]
+| rowspan="4" | 9
+|-
+! [[File:Sea Pickle 2.png|25px]]
+| 2个海泡菜（在水中）
+|-
+! [[File:Three Candles (lit).png|25px]]
+| 3个点燃的蜡烛
+|-
+! [[File:Deepslate Redstone Ore.png|25px]] <!-- 应使用 File:Redstone (Deepslate, Ore, Glowing).png -->
+| 点亮的[[深层红石矿石]] 
+|-
+! [[File:Lit Weathered Copper Bulb.png|25px]]
+| 点亮的[[锈蚀的铜灯]]
+| rowspan="3" | 8
+|-
+! [[File:Trial Spawner.png|25px]]
+| [[试炼刷怪笼]]（激活时）
+|-
+! [[File:Trial Spawner (ejecting).png|25px]]
+| 试炼刷怪笼（喷出战利品时）
+|-
+! [[File:Enchanting_Table.gif|25px]]
+| [[附魔台]]
+| rowspan="5" | 7
+|-
+! [[File:Ender Chest.png|25px]]
+| [[末影箱]]
+|-
+! [[File:Redstone Torch.png|25px]]
+| 点亮的[[红石火把]]
+|-
+! [[File:Respawn Anchor Charges 2.gif|25px]]
+| 重生锚（2级能量）
+|-
+! {{animate|Glow Lichen (D).png; Glow Lichen (E).png;Glow Lichen (N).png;Glow Lichen (S).png;Glow Lichen (U).png;Glow Lichen (W).png|25px}}
+| [[发光地衣]]
+|-
+! [[File:Sea Pickle.png|25px]]
+| 1个海泡菜（在水中）
+| rowspan="4" | 6
+|-
+! [[File:Two Candles (lit).png|25px]]
+| 2个点燃的蜡烛
+|-
+! [[File:Sculk Catalyst.png|25px]]
+| [[幽匿催发体]]
+|-
+! [[File:Inactive Vault.png|25px]]
+| [[宝库]]（未激活时）
+|-
+! [[File:Amethyst Cluster.png|25px]]
+| [[紫水晶簇]]
+| 5
+|-
+! [[File:Large Amethyst Bud.png|25px]]
+| [[大型紫晶芽]]
+| rowspan="3" | 4
+|-
+! [[File:Lit Oxidized Copper Bulb.png|25px]]
+| 点亮的[[氧化的铜灯]]
+|-
+! [[File:Trial Spawner (inactive).png|25px]]
+| 试炼刷怪笼（等待玩家时）
+|-
+! [[File:Magma Block.png|25px]]
+| [[岩浆块]]
+| rowspan="4" | 3
+|-
+! [[File:Respawn Anchor Charges 1.gif|25px]]
+| 重生锚（1级能量）
+|-
+! [[File:Candle (lit).png|25px]]
+| 1个点燃的[[蜡烛]]
+|-
+! {{animate|Candle Cake (lit).png; White Candle Cake (lit).png; Orange Candle Cake (lit).png; Magenta Candle Cake (lit).png; Light Blue Candle Cake (lit).png; Yellow Candle Cake (lit).png; Lime Candle Cake (lit).png; Pink Candle Cake (lit).png; Gray Candle Cake (lit).png; Light Gray Candle Cake (lit).png; Cyan Candle Cake (lit).png; Purple Candle Cake (lit).png; Blue Candle Cake (lit).png; Brown Candle Cake (lit).png; Green Candle Cake (lit).png; Red Candle Cake (lit).png; Black Candle Cake (lit).png|25px}}
+| 插着点燃的蜡烛的[[蛋糕]]
+|-
+! [[File:Medium Amethyst Bud.png|25px]]
+| [[中型紫晶芽]]
+| rowspan="2" | 2
+|-
+! [[File:Firefly Bush.gif|25px]]
+| [[萤火虫灌木丛]]
+|-
+! [[File:Brewing Stand.png|25px]]
+| [[酿造台]]
+| rowspan="7" | 1
+|-
+! [[File:Brown Mushroom.png|25px]]
+| [[棕色蘑菇]]
+|-
+! [[File:Dragon Egg.png|25px]]
+| [[龙蛋]]
+|-
+! [[File:End Portal Frame.png|25px]]
+| [[末地传送门框架]]
+|-
+! [[File:Small Amethyst Bud.png|25px]]
+| [[小型紫晶芽]]
+|-
+! [[File:Sculk Sensor.gif|25px]]
+| [[幽匿感测体]]
+|-
+! [[File:Calibrated Sculk Sensor.gif|25px]]
+| [[校频幽匿感测体]]
+|-
+! {{animate|Light 0 BE1.png;Light 1 BE1.png;Light 2 BE1.png;Light 3 BE1.png;Light 4 BE1.png;Light 5 BE1.png;Light 6 BE1.png;Light 7 BE1.png;Light 8 BE1.png;Light 9 BE1.png;Light 10 BE1.png;Light 11 BE1.png;Light 12 BE1.png;Light 13 BE1.png;Light 14 BE1.png;Light 15 BE1.png|25px}}{{animate|Light 0 JE2.png;Light 1 JE2.png;Light 2 JE2.png;Light 3 JE2.png;Light 4 JE2.png;Light 5 JE2.png;Light 6 JE2.png;Light 7 JE2.png;Light 8 JE2.png;Light 9 JE2.png;Light 10 JE2.png;Light 11 JE2.png;Light 12 JE2.png;Light 13 JE2.png;Light 14 JE2.png;Light 15 JE2.png|25px}}
+| [[光源方块]]
+| 0 - 15
+''<sub>详细内容见[[光源方块]]页面</sub>''
+|}
+
+== 内部光照 ==
+'''内部光照等级'''用于游戏的内部计算。游戏采用一个方块的位置的内部光照等级来计算游戏内容，包括[[生物生成]]、[[作物机制#作物生长|植物生长]]、[[阳光探测器]]的输出等。它同样也是一个整数，最大等级为15，最小为0。
+
+[[File:Internal light with time and sky light.gif|thumb|400px|内部天空光照与时间和天空光照的关系图像]]
+
+游戏使用'''天空光照、时间和天气'''来计算'''{{text anchor|内部天空光照}}（internal sky-light）'''，然后取方块光照<math>L_b</math>和内部天空光照<math>L_i</math>二者等级的较大值作为'''内部光照'''等级（公式：<math>\max \left\{ L_b, L_i \right\}</math>） 。
+{{-}}
+
+{| class="wikitable" style="text-align:center"
+|+ 天空光照为15的情况下的内部天空光照
+! colspan=3 | 晴天
+! colspan=3 | 降雨或降雪
+! colspan=3 | 雷暴
+|-
+! 时间 '''↓''' !! 时间 '''↑''' !! 内部天空光照
+! 时间 '''↓''' !! 时间 '''↑''' !! 内部天空光照
+! 时间 '''↓''' !! 时间 '''↑''' !! 内部天空光照
+|-
+| colspan="2" | 13670 - 22330 || 4
+| colspan="2" | 13670 - 22330 || 4
+| colspan="2" | 13670 - 22330 || 4
+|-
+| 22331 - 22491 || 13509 - 13669 || 5
+| 22331 - 22565 || 13436 - 13669 || 5
+| 22331 - 22671 || 13330 - 13669 || 5
+|-
+| 22492 - 22652 || 13348 - 13508 || 6
+| 22566 - 23798 || 13203 - 13435 || 6
+| 22672 - 23010 || 12990 - 13329 || 6
+|-
+| {{only|je|for=22653 - 22812|short=1}}<br>{{only|be|for=22653 - 22813|short=1}} || 13188 - 13347 || 7
+| 23799 - 23031 || 12969 - 13202 || 7
+| 23011 - 23352 || 12648 - 12989 || 7
+|-
+| {{only|je|for=22813 - 22973|short=1}}<br>{{only|be|for=22814 - 22973|short=1}} || 13027 - 13187 || 8
+| 23032 - 23266 || 12734 - 12968 || 8
+| 23353 - 23700 || 12300 - 12647 || 8
+|-
+| 22974 - 23134 || 12867 - 13026 || 9
+| 23267 - 23504 || 12497 - 12733 || 9
+| 23701 - 59 || {{only|je|for=11941 - 12299|short=1}}<br>{{only|be|for=11942 - 12299|short=1}} || 9
+|-
+| 23135 - 23296 || 12705 - 12866 || 10
+| 23505 - 23745 || 12256 - 12496 || 10
+| colspan="2" | {{only|je|for=60 - 11940|short=1}}<br>{{only|be|for=60 - 11941|short=1}} || 10
+|-
+| 23297 - 23459 || 12542 - 12704 || 11
+| 23746 - 23991 || 12010 - 12255 || 11
+| colspan="3" | N/A
+|-
+| {{only|je|for=23460 - 23623|short=1}}<br>{{only|be|for=23460 - 23624|short=1}} || 12377 - 12541 || 12
+| colspan="2" | 23992 - 12009 || 12
+| colspan="3" | N/A
+|-
+| {{only|je|for=23624 - 23790|short=1}}<br>{{only|be|for=23625 - 23790|short=1}} || 12210 - 12376 || 13
+| colspan="3" | N/A
+| colspan="3" | N/A
+|-
+| 23791 - 23960 || 12041 - 12209 || 14
+| colspan="3" | N/A
+| colspan="3" | N/A
+|-
+| colspan="2" |23961 -12040 || 15
+| colspan="3" | N/A
+| colspan="3" | N/A
+|}
+
+{| class="wikitable"
+! 图标
+! 时间
+! 当天空光照为15时的内部天空光照
+|-
+! {{EnvSprite|sun}}
+| 中午，晴天时
+| 15
+|-
+! {{EnvSprite|rain}}<br>{{EnvSprite|snowfall}}
+| 中午，[[降雨]]或[[降雪]]时
+| 12
+|-
+! {{EnvSprite|thunderstorm}}
+| 中午，[[雷暴]]时
+| 10<ref group="雷暴">在雷暴期间，部分敌对生物生成系统会将内部天空光照视为天空光照减10，从而允许此生物可以在一天的任何时间中在地面上生成。</ref>
+|-
+! {{EnvSprite|moon}}
+| 午夜，晴天时
+| 4
+|}
+
+{{notelist|雷暴}}
+
+=== 内部光照的影响 ===
+'''注意：'''光照等级只是影响生物[[生成]]和植物生长的其中一个因素。
+
+==== 生物 ====
+{{stub|section=7|需要修正基岩版内容}}
+{| class="wikitable" style="text-align:center" data-description="光照等级对生物的影响"
+|-
+! style="border:0;background:none" |
+! width="20%" | {{range|0|3}}级
+! width="20%" | {{range|4|7}}级
+! width="20%" | {{range|8|11}}级
+! width="20%" | {{range|12|15}}级
+|-
+! {{EntityLink|Bat}}
+| {{tc|yes|在主世界中生成}}
+| colspan="3" {{tc|unknown|不生成}}
+|-
+! rowspan="2" | {{EntityLink|Slime}}
+| colspan="2" {{tc|yes|在[[沼泽]]生物群系中生成于Y{{=}}51~69}}
+| colspan="2" {{tc|unknown|在沼泽生物群系中Y{{=}}51~69处不生成}}
+|-
+| colspan="4" {{tc|neutral|在大多数[[生物群系]]中（除[[蘑菇岛]]、[[深暗之域]]、[[虚空（生物群系）|虚空]]以及[[下界]]和[[末地]]所有生物群系外）的[[史莱姆#史莱姆区块|特定区块]]中生成于Y<40}}
+|- 
+! {{EntityLink|Creeper}}<br>{{EntityLink|Witch}}<br>{{EntityLink|Husk}}<br>{{EntityLink|Camel Husk}}
+| colspan="2" {{tc|yes|在主世界中生成}}<ref group="注" name="overworld-monster">这些敌对生物要求主世界生成地点'''方块亮度'''必须为0，'''内部光照等级'''不大于7。当雷暴时，这些生物生成系统会认为内部天空光照等级为天空光照等级减10级，从而允许其在雷暴时于地面上生成。</ref>
+| colspan="2" {{tc|neutral|敌对，不生成}}
+|-
+! {{EntityLink|Zombie}}<br>{{EntityLink|Zombie Horse}}<br>{{EntityLink|Zombie Villager}}<br>{{EntityLink|Drowned}}<br>{{EntityLink|Zombie Nautilus}}
+| colspan="2" {{tc|yes|在主世界中生成}}<ref group="注" name="overworld-monster"/>
+| {{tc|neutral|敌对，不生成}}
+| {{tc|never|敌对，[[阳光]]下自燃}}
+|-
+! {{EntityLink|Skeleton}}
+| colspan="2" {{tc|yes|在主世界和下界中生成}}<ref group="注" name="overworld-monster"/>
+| {{tc|neutral|敌对，不生成}}
+| {{tc|never|敌对，阳光下自燃}}
+|-
+! {{EntityLink|Phantom}}
+| colspan="2" {{tc|yes|主世界下的玩家在3游戏日后仍未睡觉时生成}}
+| {{tc|neutral|敌对，不生成}}
+| {{tc|never|敌对，阳光下自燃}}
+|-
+! {{EntityLink|Spider}}
+| colspan="2" {{tc|yes|在主世界中生成}}<ref group="注" name="overworld-monster"/>
+| {{tc|neutral|敌对，不生成}}
+| {{tc|unknown|不生成，不主动攻击其他生物}}
+|-
+! {{EntityLink|Cave Spider}}
+| colspan="2" {{tc|yes|由[[刷怪笼]]生成}}
+| {{tc|neutral|敌对，不生成}}
+| {{tc|unknown|不生成，不主动攻击其他生物}}
+|-
+! {{EntityLink|Silverfish}}
+| colspan="3" {{tc|yes|由刷怪笼生成}}
+| {{tc|neutral|敌对，不生成}}
+|-
+! {{EntityLink|Wither Skeleton}}
+| colspan="2" {{tc|yes|生成于下界要塞}}
+| colspan="2" {{tc|neutral|敌对，不生成}}
+|-
+! {{EntityLink|Zombified Piglin}}
+| colspan="3" {{tc|yes|在下界中生成}}
+| {{tc|unknown|不生成，不主动攻击其他生物}}
+|-
+! {{EntityLink|Piglin}}
+| colspan="3" {{tc|yes|在下界中生成}}
+| {{tc|unknown|不生成}}
+|-
+! {{EntityLink|blaze}}
+| colspan="3" {{tc|yes|生成于下界要塞}}
+| {{tc|neutral|敌对，不生成}}
+|-
+! rowspan="2" | {{EntityLink|Enderman}}
+| colspan="2" rowspan="2" {{tc|yes|在主世界、下界和末地中生成}}
+| colspan="2" {{only|for={{tc|planned|不生成，在阳光下随机传送}}|be}}
+|-
+| colspan="2" {{only|for={{tc|yes|在末地中生成}}|je}}
+|}
+
+{{notelist|注}}
+
+==== 方块 ====
+{| class="wikitable" style="text-align:center" data-description="光照等级对方块的影响"
+|-
+! style="border:0;background:none" |
+! width="28%" | {{range|0|7}}级
+! width="8%" | 8级
+! width="8%" | 9级
+! width="8%" | 10级
+! width="8%" | 11级
+! width="8%" | 12级
+! width="20%" | {{range|13|15}}级
+|-
+! {{BlockLink|Snow}}<ref group="注" name="snow_and_ice">阳光不影响雪和冰，它们只使用方块光照。此处为假设雪和冰所处位置是[[空气]]时的光照等级。</ref>
+| colspan="3" {{tc|yes|形成且不融化}}
+| colspan="2" {{tc|neutral|既不形成也不融化<ref group="注">{{bug|MC-217420}}</ref>}}
+| colspan="3" {{tc|no|融化}}
+|-
+! {{BlockLink|Ice}}<ref group="注" name="snow_and_ice"/>
+| colspan="3" {{tc|yes|形成且不融化}}
+| {{tc|neutral|既不形成也不融化<ref group="注">{{bug|MC-217424}}</ref>}}
+| colspan="4" {{tc|no|融化}}
+|-
+! {{BlockLink|Mushrooms}}<ref group="注" name="no-internal-light">这些方块使用的光照等级不是内部光照等级，而是方块光与天空光的较大值。</ref>
+| colspan="6" {{tc|yes|蔓延}}
+| colspan="2" {{tc|no|若不在[[菌丝体]]、[[灰化土]]或[[菌岩]]上，接收方块更新时掉落为物品}}
+|-
+! {{BlockLink|Saplings}}<ref group="注" name="no-internal-light"/><ref group="注" name="upper-light">参考的光照等级为方块上方方块的光照等级，而不是方块本身位置的光照等级。</ref><br>{{BlockLink|Pumpkin Stem}}<ref group="注" name="no-internal-light"/><br>{{BlockLink|Melon Stem}}<ref group="注" name="no-internal-light"/>
+| colspan="2" {{tc|neutral|停止生长}}
+| colspan="6" {{tc|yes|生长}}
+|-
+! {{BlockLink|Grass Block}}<ref group="注" name="upper-light"/><br>{{BlockLink|Mycelium}}<ref group="注" name="upper-light"/>
+| colspan="2" {{tc|neutral|不蔓延}}
+| colspan="6" {{tc|yes|可以蔓延至附近的泥土}}
+|-
+! {{BlockLink|Wheat Crops}}<ref group="注" name="no-internal-light"/><br>{{BlockLink|Torchflower Crop}}<ref group="注" name="no-internal-light"/><br>{{BlockLink|Carrots}}<ref group="注" name="no-internal-light"/><br>{{BlockLink|Potatoes}}<ref group="注" name="no-internal-light"/><br>{{BlockLink|beetroots}}<ref group="注" name="no-internal-light"/>
+| {{tc|no|接收方块更新时掉落为物品}}
+| {{tc|neutral|停止生长}}
+| colspan="5" {{tc|yes|生长}}
+|-
+! {{BlockLink|Pitcher Crop}}<ref group="注" name="no-internal-light"/>
+| {{tc|no|接收方块更新时掉落为物品}}
+| colspan="6" {{tc|yes|生长}}
+|-
+! {{BlockLink|Frosted Ice}}
+| colspan="8" | 详见[[霜冰]]页面
+|-
+! {{BlockLink|Daylight detector}}
+| colspan="8" | 详见[[阳光探测器]]页面
+|}
+
+{{notelist|注}}
+
+==== 其他 ====
+{{In|java}}[[战利品表条件]]中所判断是光照就是内部光照等级。
+
+== 渲染亮度 ==
+[[File:1.9 lighting curves (gamma=0).png|缩略图|右|亮度曲线。水平坐标轴为方块光照，垂直坐标轴为天空光照]]
+方块或实体渲染出的亮度取决于光照等级、天空光照颜色、方块光照颜色、夜视效果颜色、环境光照颜色、时间和天气。
+
+正如上文所述，天空光照并不是白天高晚上低，它不随时间变化，随时间变化的是亮度曲线本身。[[生物]]也会产生一个圆形的影子，但这与方块的渲染无关。
+
+总体而言，同样等级中，方块光照显得比天空光照更亮，但方块光照最高也只能到14级（固体方块光源的发光等级是15，但仅仅是光源本身所在位置是这个等级），而露天处的天空光照会到15级，因此可以实现平衡。方块光照在中等级时偏橙，而[[主世界]]白天的天空光照是白色的。
+
+在亮度设置为“昏暗”的[[主世界]]中，日光最强时亮度<ref name="luma" group="luma">此处的明亮度指[[wikipedia:Rec. 601|ITU-R BT.601]]中的明亮度（Luminance, Luma），亦即灰阶值。</ref>达到98%，夜晚时降至17%<ref name="luma" group="luma"/>且泛蓝。完全黑暗时的明亮度约为5%<ref name="luma" group="luma"/>。
+
+在[[下界]]中，由于本来就没有天空光照，因此也不再产生影响（如果有，会达到约99%的明亮度<ref name="luma" group="luma"/>）。在亮度设置为“昏暗”下，完全黑暗时的明亮度约为25%<ref name="luma" group="luma"/>，此值仅比主世界中光照等级7、无天空光照的情况稍微黑一点，且会像方块光照一样泛橙。
+
+在[[末地]]中，天空光照无论是否存在都不会造成任何影响（可以通过在末地中召唤[[闪电]]观察到，末地中不会出现其他维度中出现的天空闪烁效果）。在亮度设置为“昏暗”下，完全黑暗时的明亮度大约为28%<ref name="luma" group="luma"/>，且有些偏蓝绿色。
+
+{{notelist|luma}}
+
+=== 平滑光照 ===
+[[File:SmoothAnimSmal.gif|有框|开启和关闭平滑光照的差别]]
+
+平滑光照（其中包括[[Wikipedia:Ambient occlusion|环境光遮蔽]]以及方块间的插值照明）是一个平滑亮度差、加黑方块边角从而实现更真实的阴影和光线的光照引擎。平滑光照只会对世界渲染到屏幕的过程有影响，不会对亮度等级造成影响。因此平滑光照不会对生物生成或农作物生长造成影响。平滑光照默认是开启的。
+
+{{in|java}}[[画]]不受平滑光照的影响。<ref>{{bug|MC-1531}}</ref>
+
+平滑光照可以在[[选项]]菜单的“视频设置”中将其设置为开启或关闭。
+{{-}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java pre-Classic}}
+|{{HistoryLine||rd-131655|加入了光照引擎，有2种光照等级：明亮和黑暗。}}
+|{{HistoryLine||2009年5月26日|link=wordofnotch:113224701|Notch讨论了在一定范围里动态光照的可行性，以提供定义像熔岩那样能提供光照的方块的可能。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=20091223-0040|加入了9级亮度，其中第8级为白天的最高亮度，而第0级为几乎完全黑暗。亮度与“明亮度”间呈线性关系，明亮度除以8即为明亮度百分比。}}
+|{{HistoryLine||0.31|dev=20100109-1939|加入了16级亮度，其中第15级为白天的最高亮度，而第0级为几乎完全黑暗。
+|日光现在会发出15的亮度等级。}}
+|{{HistoryLine||20100212-1210|日光的亮度等级会在黄昏时逐渐减少，直到值降到4为止，此时为月光的亮度等级。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||unknown|亮度不再呈线性关系。
+|亮度每降1级，明亮度降低至上一级的80%。例如，14级的明亮度是15级的80%，13级的明亮度是15级的64%。
+|阳光拥有其独立的光照矩阵并得到优化，使日出和日落时的光照过渡得更自然。在日落、夜晚和日出时，天空光照还会减去不同的“黑暗”值，营造出一天不同时段的不同效果。}}
+|{{HistoryLine||v1.2.0|dev=preview|加入了[[下界]]，其中的亮度每降1级，明亮度降低至上一级的90%，而非80%。
+|往地下越深，攻击型生物可在更高光照等级下生成，其光照等级要求为16−(层数÷8)以下。在第8层及更深处，这些生物甚至可以在阳光下生成。}}
+|{{HistoryLine||v1.2.1|Notch将新的生物生成机制撤销，并称“这个机制太烦人了。我有更好地处理这个问题的计划。”}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.3|在MrMessiah的协助下，加入了平滑光照引擎。<ref>{{notch|3446675806/minecraft-beta-1-3|Minecraft Beta 1.3|February 22, 2011}}</ref>}}
+|{{HistoryLine||1.8|dev=pre1|引入了新的光照引擎。方块会泛出附近光源的暖色。
+|昼夜更替不再依赖区块更新，且平滑过渡。
+|人造光源会出现微弱的摇曳闪烁。
+|加入了虚空雾，使地底深处更为黑暗。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w39a|Dinnerbone修复了世界生成中产生的黑色小片，<ref>{{Tweet|Dinnerbone|250952827608915969}}</ref>并开始大修光照系统，譬如改变方块光照逻辑，以实现定向照明。<ref name="furnace directional lighting">{{Tweet|Dinnerbone|250904989885661184}}</ref><ref>http://www.reddit.com/r/Minecraft/comments/10g4mi/dinnerbone_at_this_point_i_think_its_almost/</ref>}}
+|{{HistoryLine||1.5|dev=13w05a|改善了楼梯处的光照逻辑。}}
+|{{HistoryLine|||dev=13w06a|数项光照优化。}}
+|{{HistoryLine|||dev=13w09a|平滑光照加入了3个等级：关闭、最小和最大。“最小”使用旧版平滑光照系统，而“最大”修复了楼梯的光照问题。}}
+|{{HistoryLine||1.7.2|dev=?|世界生成中产生的黑色小片大幅减少。<ref>{{tweet|jeb|362559336033165312}}</ref>}}
+|{{HistoryLine||1.8|dev=14w30a|光照系统得到明显改善，世界生成中产生的黑色小片进一步减少。}}
+|{{HistoryLine|||dev=14w34c|虚空雾及其粒子效果因性能问题被移除。}}
+|{{HistoryLine||1.14|dev=18w43a|重写了光照系统。}}
+|{{HistoryLine|||dev=18w46a|增加了对方块的方向性不透明度的支持。}}
+|{{HistoryLine||1.14.2|dev=pre4|现在第一次打开以前版本保存的世界时会重新计算光照。}}
+|{{HistoryLine||1.17|dev=21w13a|加入了[[光源方块]]，可以自定义方块亮度。}}
+|{{HistoryLine|||dev=pre2|平滑光照在水下能够正常运作了。<ref>{{bug|MC-68129|||Fixed}}</ref>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.7.0|加入了可切换的平滑光照。}}
+|{{HistoryLine||0.8.0|dev=build 2|因不明原因移除了可切换的平滑光照。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|在图像设置中加入平滑光照设置。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.13.0|dev=1.13.0.9|加入了[[光源方块]]，可以自定义方块亮度。}}
+|{{HistoryLine||1.17.30|dev=1.17.20.22|exg=caves_and_cliffs|现在按照普通机制生成的主世界[[敌对生物]]都只会在方块光照等级为0时自然生成，此版本之前它们在光照等级不高于7时即可生成。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.20|新的主世界生物生成机制不再属于[[实验性玩法]]。}}
+}}
+
+== 你知道吗 ==
+* {{in|be}}发光方块的六个面亮度一致，与{{el|je}}略有不同，这样看上去更有发光的感觉。烈焰人也是如此。
+* 在游戏代码中，“明亮度（Luminescence）”被定义为浮点型。然而，这些数值均为16的商，却被乘以15得到最终的整数光照等级。
+** 这意味着{{frac|0|16}}和{{frac|1|16}}（0.0和0.0625）均对应光照等级0。
+* 发光方块被[[活塞]]推动时会变成[[移动的活塞]]，此时它们会短暂停止发光。
+
+== 画廊 ==
+<gallery>
+File:Lighting Moody.png|阳光下的羊毛方块（亮度设置为“昏暗”）
+File:Lighting Bright.png|阳光下的羊毛方块(亮度设置为“明亮”）
+File:Void Lighting.png|虚空中的光照。粒子与实体的渲染基于光照等级0
+File:Coral reef at night.png|海泡菜、海晶灯、以及岩浆块发出的光照
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[Category:机制]]
+
+[[de:Licht]]
+[[en:Light]]
+[[es:Luz]]
+[[fr:Éclairage]]
+[[it:Luce]]
+[[ja:明るさ]]
+[[ko:밝기]]
+[[nl:Licht]]
+[[pl:Światło]]
+[[pt:Iluminação]]
+[[ru:Свет]]
+[[th:แสง]]
+[[uk:Світло]]

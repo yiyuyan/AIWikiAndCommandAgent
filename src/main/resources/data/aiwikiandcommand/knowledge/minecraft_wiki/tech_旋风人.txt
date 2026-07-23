@@ -1,0 +1,403 @@
+# 页面: 旋风人
+# 来源: https://zh.minecraft.wiki/w/%E6%97%8B%E9%A3%8E%E4%BA%BA
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 基岩版独有信息, 实体, 嵌入Bilibili视频的页面, 敌对生物, 教育版独有信息, 需要验证
+# 抓取时间: 2026-07-14 17:28:21
+# 原始 Wikitext 内容:
+
+{{Infobox entity
+|image1=Breeze.gif
+|image1caption={{el|JE}}
+|image2=Breeze BE.gif
+|image2caption={{el|BE}}
+|defaultimageclass=drop-shadow-light
+|invimage=Breeze Spawn Egg
+|health={{hp|30}}
+|behavior=敌对生物
+|damage='''弹射物（{{EntityLink|Wind Charge}}）：'''<br>{{AutoDmg|1}}
+|size=高度：1.77格<br>宽度：0.6格
+|spawn={{EnvLink|Trial Chambers}}内[[试炼刷怪笼]]
+|usableitems={{ItemLink|Name Tag}}
+}}
+
+'''旋风人（Breeze）'''是一种只在[[试炼密室]]的特定决斗室内生成的[[敌对生物]]，同时也是[[旋风棒]]的唯一来源。
+
+== 生成 ==
+旋风人只能由[[试炼密室]]决斗室结构的[[试炼刷怪笼]]生成，旋风人试炼刷怪笼的周围标有[[雕纹凝灰岩]]。
+
+== 掉落物 ==
+{{DropTable|name=Breeze
+|{{DropLine|name=Breeze Rod|notes=player_or_pet|quantity=1-2|lootingquantity=1-2}}
+}}
+被[[玩家]]或驯服的[[狼]]杀死后会掉落{{xp|10}}。
+
+== 行为 ==
+旋风人的眼睛与眉毛拥有发亮的纹理，在暗处也清楚可见，但不会影响周围方块的实际[[亮度]]。{{in|je}}[[隐身]]状态下的旋风人的眉毛、眼睛和风场是可见的。
+
+空闲状态下的旋风人使用滑行的方式移动，滑行时脚部持续产生其脚下方块对应的[[粒子]]。
+
+旋风人不会受到除[[风弹]]以外的任何[[弹射物]]的直接伤害，命中旋风人的任何除风弹<ref>{{bug|MCPE-178900|||WAI}}</ref>和{{only|for=冰弹|BE|EE|short=1}}以外的弹射物会被减速{{verify|如何减速？减速后的速度能预测或计算吗？}}<ref>{{bug|MC-267948||旋风人反射的箭仅对实体造成{{hp|2}}-{{hp|4}}伤害。|WAI}}</ref>并朝发射者的方向弹回。
+
+不同于其他生物，旋风人在[[船]]上时仍然能随意转动身体。
+
+旋风人不会受到摔落伤害。
+
+旋风人处于[[水]]或[[熔岩]]中时会{{only|for=迅速上浮|JE|short=1}}/{{only|for=缓慢上浮|BE|short=1}}。
+
+{{in|je}}旋风人不会被涡流的[[气泡柱]]向下拉。
+
+=== 攻击 ===
+{{see also|风弹#行为}}
+旋风人会尝试锁定半径24格内的[[玩家]]和[[铁傀儡]]，并向半径16格内的玩家和铁傀儡发射风弹。准备发射风弹时，旋风人体表的风场会先向后倾斜，随后风场前倾射出风弹。
+
+旋风人攻击时会通过滑行和[[跳跃]]与目标保持一定距离。旋风人准备跳跃时，会先像弹簧一样压缩自己，然后突然释放。旋风人跳跃最大垂直速度为1.4格/gt，因此它最多可跳5格高、15格远{{verify|该数字仅为直播画面中推断出的结果}}。
+
+[[骷髅]]、[[流浪者]]、[[沼骸]]、{{only|for=[[焦骸]]|BE|short=1}}、[[僵尸]]、[[尸壳]]、[[蜘蛛]]、[[洞穴蜘蛛]]和[[史莱姆]]被旋风人的风弹命中时不会反击旋风人，旋风人也不会对{{only|for=任何生物|JE|short=1}}<ref>{{bug|MC-273018}}</ref>/{{only|for=上述生物|BE|short=1}}的攻击进行反击。
+
+[[溺尸]]、[[僵尸村民]]、{{only|for=[[焦骸]]|JE|short=1}}、[[凋灵骷髅]]和[[凋灵]]被旋风人的风弹命中时会反击旋风人，但是旋风人不会对它们的攻击进行反击。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Breeze idle1.ogg
+|sound2=Breeze idle2.ogg
+|sound3=Breeze idle3.ogg
+|sound4=Breeze idle4.ogg
+|subtitle={{tp|subtitles.entity.breeze.idle_ground}}
+|source=敌对生物
+|description=在地面上且处于空闲状态时随机播放此音效
+|id=entity.breeze.idle_ground
+|translationkey=subtitles.entity.breeze.idle_ground}}
+{{Sound table
+|sound=Breeze idle air1.ogg
+|sound2=Breeze idle air2.ogg
+|sound3=Breeze idle air3.ogg
+|sound4=Breeze idle air4.ogg
+|subtitle={{tp|subtitles.entity.breeze.idle_air}}
+|source=敌对生物
+|description=不在地面上且处于空闲状态时随机播放此音效
+|id=entity.breeze.idle_air
+|translationkey=subtitles.entity.breeze.idle_air}}
+{{Sound table
+|sound=Breeze whirl.ogg
+|subtitle={{tp|subtitles.entity.breeze.whirl}}
+|source=敌对生物
+|description=空闲时随机播放此音效
+|id=entity.breeze.whirl
+|translationkey=subtitles.entity.breeze.whirl}}
+{{Sound table
+|sound=Breeze death1.ogg
+|sound2=Breeze death2.ogg
+|subtitle={{tp|subtitles.entity.breeze.death}}
+|source=敌对生物
+|description=死亡
+|id=entity.breeze.death
+|translationkey=subtitles.entity.breeze.death}}
+{{Sound table
+|sound=Breeze hurt1.ogg
+|sound2=Breeze hurt2.ogg
+|sound3=Breeze hurt3.ogg
+|subtitle={{tp|subtitles.entity.breeze.hurt}}
+|source=敌对生物
+|description=受伤
+|id=entity.breeze.hurt
+|translationkey=subtitles.entity.breeze.hurt}}
+{{Sound table
+|sound=Breeze inhale1.ogg
+|sound2=Breeze inhale2.ogg
+|subtitle={{tp|subtitles.entity.breeze.inhale}}
+|source=敌对生物
+|description=预备发射风弹
+|id=entity.breeze.inhale
+|translationkey=subtitles.entity.breeze.inhale}}
+{{Sound table
+|sound=Breeze charge1.ogg
+|sound2=Breeze charge2.ogg
+|sound3=Breeze charge3.ogg
+|subtitle={{tp|subtitles.entity.breeze.charge}}
+|source=敌对生物
+|description=预备跳跃
+|id=entity.breeze.charge
+|translationkey=subtitles.entity.breeze.charge}}
+{{Sound table
+|sound=Breeze shoot.ogg
+|subtitle={{tp|subtitles.entity.breeze.shoot}}
+|source=敌对生物
+|description=发射风弹
+|id=entity.breeze.shoot
+|translationkey=subtitles.entity.breeze.shoot}}
+{{Sound table
+|sound=Breeze jump1.ogg
+|sound2=Breeze jump2.ogg
+|subtitle={{tp|subtitles.entity.breeze.jump}}
+|source=敌对生物
+|description=跳跃
+|id=entity.breeze.jump
+|translationkey=subtitles.entity.breeze.jump}}
+{{Sound table
+|sound=Breeze land1.ogg
+|sound2=Breeze land2.ogg
+|subtitle={{tp|subtitles.entity.breeze.land}}
+|source=敌对生物
+|description=从超过3格高的地方着陆
+|id=entity.breeze.land
+|translationkey=subtitles.entity.breeze.land}}
+{{Sound table
+|sound=Breeze slide1.ogg
+|sound2=Breeze slide2.ogg
+|sound3=Breeze slide3.ogg
+|sound4=Breeze slide4.ogg
+|subtitle={{tp|subtitles.entity.breeze.slide}}
+|source=敌对生物
+|description=在地面上滑行
+|id=entity.breeze.slide
+|translationkey=subtitles.entity.breeze.slide
+}}
+{{Sound table
+|sound=Breeze deflect1.ogg
+|sound2=Breeze deflect2.ogg
+|sound3=Breeze deflect3.ogg
+|subtitle={{tp|subtitles.entity.breeze.deflect}}
+|source=敌对生物
+|description=反弹弹射物
+|id=entity.breeze.deflect
+|translationkey=subtitles.entity.breeze.deflect
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Breeze idle1.ogg
+|sound2=Breeze idle2.ogg
+|sound3=Breeze idle3.ogg
+|sound4=Breeze idle4.ogg
+|source=敌对生物
+|description=在地面上且处于空闲状态时随机播放此音效
+|id=mob.breeze.idle_ground
+|typeid=ambient}}
+{{Sound table
+|sound=Breeze idle air1.ogg
+|sound2=Breeze idle air2.ogg
+|sound3=Breeze idle air3.ogg
+|sound4=Breeze idle air4.ogg
+|source=敌对生物
+|description=不在地面上且处于空闲状态时随机播放此音效
+|id=mob.breeze.idle_air
+|typeid=ambient.in.air}}
+{{Sound table
+|sound=Breeze whirl1.wav
+|sound2=Breeze whirl2.wav
+|sound3=Breeze whirl3.wav
+|sound4=Breeze whirl4.wav
+|sound5=Breeze whirl5.wav
+|source=敌对生物
+|description=空闲时随机播放此音效
+|id=mob.breeze.whirl
+|typeid=whirl}}
+{{Sound table
+|sound=Breeze death1.ogg
+|sound2=Breeze death2.ogg
+|source=敌对生物
+|description=死亡
+|id=mob.breeze.death
+|typeid=death}}
+{{Sound table
+|sound=Breeze hurt1.ogg
+|sound2=Breeze hurt2.ogg
+|sound3=Breeze hurt3.ogg
+|source=敌对生物
+|description=受伤
+|id=mob.breeze.hurt
+|typeid=hurt}}
+{{Sound table
+|sound=Breeze inhale1.ogg
+|sound2=Breeze inhale2.ogg
+|source=敌对生物
+|description=预备发射风弹
+|id=mob.breeze.inhale
+|typeid=inhale
+|soundpitch=1.0-1.1/1.1-1.21<ref group="音效">这里代表两条音效文件会以两种不同的音高播放。</ref>}}
+{{Sound table
+|sound=Breeze charge1.ogg
+|sound2=Breeze charge2.ogg
+|sound3=Breeze charge3.ogg
+|source=敌对生物
+|description=预备跳跃
+|id=mob.breeze.charge
+|typeid=charge}}
+{{Sound table
+|sound=Breeze shoot.ogg
+|source=敌对生物
+|description=发射风弹
+|id=mob.breeze.shoot
+|typeid=shoot
+|soundvolume=1.5
+|soundpitch=1.0-1.2
+|sounddistance=24}}
+{{Sound table
+|sound=Breeze jump1.ogg
+|sound2=Breeze jump2.ogg
+|source=敌对生物
+|description=跳跃
+|id=mob.breeze.jump
+|typeid=jump}}
+{{Sound table
+|sound=Breeze land1.ogg
+|sound2=Breeze land2.ogg
+|source=敌对生物
+|description=从超过3格高的地方着陆
+|id=mob.breeze.land
+|typeid=land}}
+{{Sound table
+|sound=Breeze slide1.ogg
+|sound2=Breeze slide2.ogg
+|sound3=Breeze slide3.ogg
+|sound4=Breeze slide4.ogg
+|source=敌对生物
+|description=在地面上滑行
+|id=mob.breeze.slide
+|typeid=slide
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Breeze
+|spritetype=entity
+|nameid=breeze
+|showentitytags=1|entitytags={{GameTag|entity|breeze}}
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Breeze
+|spritetype=entity
+|nameid=breeze
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+旋风人有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|Monster-Hunter;it-spreads;adventure.spear_many_mobs}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.kill_a_mob;adventure.kill_all_mobs;adventure.kill_mob_near_sculk_catalyst;adventure.blowback}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 视频 ==
+{{bv|BV1ZM4dzBEK8}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2023年10月15日|link={{ytl|DnY5xz11lR0}}|[[Minecraft Live 2023]]中展示了旋风人。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.3|dev=23w45a|exp=update_1_21|[[File:Breeze JE1.webp|32px]] 加入了旋风人。}}
+|{{HistoryLine|||dev=pre1|现在旋风人能在[[船]]上转动身体。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=23w51a|加入了旋风人空闲时旋转、跳跃前蓄力和反射弹射物的音效。
+|调整了旋风人已有的音效。
+|将旋风人单独的眼睛纹理合并到了头部纹理中。}}
+|{{HistoryLine|||dev=24w03a|更改了旋风人的杆的底面纹理，由[[File:Breeze (facing NWU) JE1.png|32px]]更改为[[File:Breeze (facing NWU) JE2.png|32px]]，使之更契合相邻纹理的颜色。
+|现在旋风人被玩家或驯服的狼杀死后会掉落10点经验，而不是5点。
+|现在旋风人会反弹所有弹射物，而不仅仅是箭和三叉戟；并且反弹的弹射物会朝发射者的方向重新射出，而非随机偏转。}}
+|{{HistoryLine|||dev=24w04a|现在旋风人会主动攻击[[铁傀儡]]。
+|现在旋风人受到非玩家生物攻击后会尝试反击<ref>{{bug|MC-266449|||Fixed}}</ref>，但不会反击[[骷髅]]、[[流浪者]]、[[僵尸]]、[[尸壳]]、[[蜘蛛]]、[[洞穴蜘蛛]]和[[史莱姆]]。
+|现在骷髅、流浪者、僵尸、尸壳、蜘蛛、洞穴蜘蛛和史莱姆被旋风人的[[风弹（实体）|风弹]]伤害后不再反击旋风人。}}
+|{{HistoryLine|||dev=24w06a|现在旋风人被杀死后会掉落4-6个[[风弹（物品）|风弹]]。}}
+|{{HistoryLine|||dev=24w07a|现在旋风人被杀死后[[抢夺]]魔咒会使其掉落更多风弹。
+|现在旋风人会正确地反射弹射物。此前，弹射物总是向下反射。}}
+|{{HistoryLine|||dev=24w11a|现在旋风人被杀死后会掉落1-2个[[旋风棒]]，不再掉落风弹。}}
+|{{HistoryLine||1.21|dev=24w18a|旋风人不再属于[[实验性内容]]。}}
+|{{HistoryLine|||dev=24w21a|旋风人受到攻击后不再会尝试反击。}}
+|{{HistoryLine||1.21.2|dev=24w33a|旋风人的跳跃动画现在拥有更高的保真度。
+|旋风人现在不再具有能攻击生物的最小距离。}}
+|{{HistoryLine|||dev=pre2|旋风人不再能在[[蜂蜜块]]上起跳。<ref>{{bug|MC-266480|||Fixed}}</ref>
+|旋风人的跳跃高度现在会受到[[跳跃提升]]状态效果的影响。<ref>{{bug|MC-266494|||Fixed}}</ref>
+|[[File:Breeze JE3.webp|32px]] 修改了旋风人在空闲状态下的动画，以匹配{{el|be}}。<ref>{{bug|MC-269851|||Fixed}}</ref>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.60|dev=1.20.60.20|exg=updateAnnouncedLive2023|[[File:Breeze BE1.webp|32px]] 加入了旋风人。}}
+|{{HistoryLine|||dev=1.20.60.23|调整了旋风人已有的音效。
+|加入了旋风人空闲时旋转和跳跃前蓄力的音效。}}
+|{{HistoryLine|||dev=1.20.60.24|现在旋风人站在水中时可以进行跳跃。
+|现在旋风人在寻路时会避开活板门。
+|现在旋风人被玩家或驯服的狼杀死后会掉落10点经验，而不是1-3点。
+|加入了旋风人反射弹射物的音效。}}
+|{{HistoryLine|||dev=1.20.60.25|现在旋风人会反射所有弹射物。}}
+|{{HistoryLine||1.20.70|exg=updateAnnouncedLive2023|dev=1.20.70.21|现在旋风人会主动攻击铁傀儡。
+|现在旋风人不再反击骷髅、流浪者、僵尸、尸壳、蜘蛛、洞穴蜘蛛和史莱姆，这些生物被旋风人的风弹伤害后也不再反击旋风人。
+|现在旋风人不再反击溺尸、僵尸村民、凋灵骷髅和凋灵。}}
+|{{HistoryLine|||dev=1.20.70.24|现在旋风人被杀死后会掉落4-6个[[风弹（物品）|风弹]]。}}
+|{{HistoryLine||1.20.80|exg=updateAnnouncedLive2023|dev=1.20.80.22|现在旋风人被杀死后会掉落1-2个[[旋风棒]]，不再掉落风弹。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|旋风人不再属于[[实验性玩法]]。
+|现在旋风人会在战斗时滑行。}}
+|{{HistoryLine||1.21.30|dev=1.21.30.23|旋风人不再具有能攻击生物的最小距离限制。<ref>{{bug|MCPE-183011|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.40|dev=1.21.40.22|旋风人不再能在[[蜂蜜块]]上起跳。<ref>{{bug|MCPE-176991|||Fixed}}</ref>
+|旋风人的跳跃高度现在会受到[[跳跃提升]]状态效果的影响。<ref>{{bug|MCPE-176922|||Fixed}}</ref>}}
+}}
+
+== 画廊 ==
+<gallery>
+Breeze teaser 01.jpg|在Minecraft Live 2023中展示的旋风人，正在使用风弹攻击玩家<ref>{{tweet|Minecraft|1713611654196531488|New Mob from #MinecraftLive: The Breeze The Breeze is a playful (but dangerous) hostile mob you can find during your journey through the Trial Chamber. It uses attacks like wind charge & wind burst that’ll transform the room you’re fighting in.|October 15, 2023}}</ref>
+Breeze on spawner.png|新生成的旋风人站在试炼刷怪笼上
+Breeze fight.png|玩家正在与旋风人战斗
+Breeze and blaze.png|[[烈焰人]]与旋风人
+Breeze on Fire.png|着火的旋风人
+</gallery>
+
+=== 渲染图 ===
+<gallery>
+Breeze.png|{{only|je|for=旋风人}}
+Breeze BE.png|{{only|be|for=旋风人}}
+Breeze without Wind.png|没有风环的旋风人
+Wind Charge (entity).png|旋风人发射的风弹
+Breeze jump.webp|旋风人跳跃
+Breeze shoot.webp|旋风人发射风弹
+Breeze slide.webp|旋风人滑行
+</gallery>
+
+=== 艺术作品 ===
+<gallery>
+Bogged and Breeze Artwork.jpg|[[沼骸]]和旋风人的官方艺术作品
+Breeze artwork.png|旋风人的官方艺术作品
+Breeze artwork 2.png|同前图
+</gallery>
+
+=== 其他媒体 ===
+<gallery>
+Spotify Banner May 2024.jpg|Spotify的Minecraft艺术作品，从左至右分别是：[[MCLG:行动|行动]]、旋风人和[[MCD:奇厄教主|奇厄教主]]
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|mobs}}
+
+[[Category:敌对生物]]
+
+[[de:Böe]]
+[[en:Breeze]]
+[[es:Breeze]]
+[[fr:Breeze]]
+[[it:Brezza]]
+[[ja:ブリーズ]]
+[[ko:브리즈]]
+[[pl:Wichrzyk]]
+[[pt:Vórtice]]
+[[ru:Вихрь]]
+[[th:บรีซ]]
+[[uk:Вітрень]]

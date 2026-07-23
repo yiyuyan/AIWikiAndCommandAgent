@@ -1,0 +1,396 @@
+# 页面: 实体谓词
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9E%E4%BD%93%E8%B0%93%E8%AF%8D
+# 分类: Java版独有特性, 通过Nbt inherit加载的页面
+# 抓取时间: 2026-07-14 17:25:16
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|对象|物件}}<!--修改前须知：本页面的部分段落为其他页面嵌入，请谨慎修改段落标记-->
+{{exclusive|java}}
+{{TOC|right}}
+'''实体谓词（Entity predicate）'''是一种关于实体的谓词，用于判定某个实体是否满足条件，在[[进度定义格式|进度准则]]等中使用。
+
+== 数据格式 ==
+类似于[[数据组件]]映射，实体谓词的结构为多个“实体子谓词-值”的映射。即：
+
+<div class="treeview">
+* {{nbt|compound}} 实体谓词根节点
+** {{nbt|any|<''实体子谓词类型''>}}：要检查的内容。
+</div>
+
+目前游戏中有下列实体子谓词：
+
+{| class="wikitable sortable mw-collapsible"
+! 命名空间ID !! 检查内容
+|-
+| [[#entity_type|entity_type]] || 实体类型
+|-
+| [[#location|location]] || 实体的位置
+|-
+| [[#stepping_on|stepping_on]] || 实体脚下的位置
+|-
+| [[#movement_affected_by|movement_affected_by]] || 会影响实体运动的位置
+|-
+| [[#distance|distance]] || 实体到执行检测处的距离
+|-
+| [[#movement|movement]] || 实体的运动状况
+|-
+| [[#effects|effects]] || 实体的[[状态效果]]
+|-
+| [[#nbt|nbt]] || 实体的NBT数据
+|-
+| [[#flags|flags]] || 实体的某些特质
+|-
+| [[#equipment|equipment]] || 实体[[装备槽位]]的[[物品]]
+|-
+| [[#periodic_tick|periodic_tick]] || 约束检查成功的频率，在指定周期内只检查成功一次
+|-
+| [[#vehicle|vehicle]] || 实体的[[坐骑]]
+|-
+| [[#passenger|passenger]] || 实体的[[乘客]]
+|-
+| [[#targeted_entity|targeted_entity]] || 实体正在瞄准攻击的实体
+|-
+| [[#team|team]] || 实体的[[队伍]]
+|-
+| [[#slots|slots]] || 实体任意槽位的物品
+|-
+| [[#components|components]] || 实体的[[数据组件]]
+|-
+| [[#predicates|predicates]] || 检查实体的数据组件是否满足某种条件
+|-
+| [[#entity_tags|entity_tags]] || [[记分板标签]]
+|-
+| [[#type_specific/lightning|type_specific/lightning]] || [[闪电束]]的某些信息
+|-
+| [[#type_specific/fishing_hook|type_specific/fishing_hook]] || [[浮漂]]的某些信息
+|-
+| [[#type_specific/player|type_specific/player]] || [[玩家]]的某些信息
+|-
+| [[#type_specific/cube_mob|type_specific/cube_mob]] || [[史莱姆]]、[[岩浆怪]]和[[硫方怪]]的某些信息
+|-
+| [[#type_specific/raider|type_specific/raider]] || 袭击者的某些信息
+|-
+| [[#type_specific/sheep|type_specific/sheep]] || [[绵羊]]的某些信息
+|}
+
+以下为总格式预览。
+
+<div class="treeview">
+* {{nbt|compound}} 实体谓词根节点
+** {{nbt inherit/entity predicate}}
+</div>
+
+=== entity_type ===
+检查实体的实体类型。
+
+<div class="treeview"><section begin="entity_type"/>
+** {{nbt|string}}{{nbt|compound|minecraft:entity_type}}：要检查的实体类型。可以为单个实体类型ID、一个实体类型ID的列表或一个带<code>#</code>前缀的实体类型标签。若指定的实体类型包含待检查实体的实体类型，则检查成功。
+<section end="entity_type"/></div>
+
+=== location ===
+检查实体所在的位置。
+
+<div class="treeview"><section begin="location"/>
+** {{nbt|compound|minecraft:location}}：检查实体所在的位置。
+*** {{nbt inherit/location predicate}}
+<section end="location"/></div>
+
+=== stepping_on ===
+检查实体站立的位置。
+
+<div class="treeview"><section begin="stepping_on"/>
+** {{nbt|compound|minecraft:stepping_on}}：检查实体脚下站立的位置。如果实体没有站在某个平面上则直接检查失败。
+*** {{nbt inherit/location predicate}}
+<section end="stepping_on"/></div>
+
+=== movement_affected_by ===
+检查影响实体运动的位置。
+
+<div class="treeview"><section begin="movement_affected_by"/>
+** {{nbt|compound|minecraft:movement_affected_by}}：检查影响实体移动速度的方块位置，此位置最低不超过实体位置0.5格以下。
+*** {{nbt inherit/location predicate}}
+<section end="movement_affected_by"/></div>
+
+=== distance ===
+检查实体到执行位置的距离。
+
+<div class="treeview"><section begin="distance"/>
+** {{nbt|compound|minecraft:distance}}：检查实体到执行位置的距离。执行位置在伤害来源谓词中为对应的实体的位置，在进度中为玩家的位置，在其他场景中检查会直接失败。
+*** {{nbt inherit/distance predicate}}
+<section end="distance"/></div>
+
+=== movement ===
+检查实体的运动状况。
+
+<div class="treeview"><section begin="movement"/>
+** {{nbt|compound|minecraft:movement}}：检查实体的运动状况，所有速度单位均为米每秒。
+*** {{nbt|double}}{{nbt|compound|fall_distance}}：检查摔落高度。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|horizontal_speed}}：检查水平速度分量。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|speed}}：检查速度。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|vertical_speed}}：检查垂直速度分量绝对值。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|x}}：检查X轴运动向量分量。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|y}}：检查Y轴运动向量分量。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|double}}{{nbt|compound|z}}：检查Z轴运动向量分量。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds doubles}}
+<section end="movement"/></div>
+
+=== effects ===
+检查实体的状态效果。
+
+<div class="treeview"><section begin="effects"/>
+** {{nbt|compound|minecraft:effects}}：检查实体的状态效果。
+*** {{nbt inherit/mob effects predicate}}
+<section end="effects"/></div>
+
+=== nbt ===
+检查实体的NBT数据。
+
+<div class="treeview"><section begin="nbt"/>
+** {{nbt|string}}{{nbt|compound|minecraft:nbt}}：匹配实体的任意NBT数据。可以为复合标签或字符串包裹的SNBT，格式参见{{slink|NBT格式#测试NBT标签}}和{{slink|NBT格式|转换}}。
+<section end="nbt"/></div>
+
+=== flags ===
+检查实体的某些特质，其也被称为标志谓词。
+
+<div class="treeview"><section begin="flags"/>
+** {{nbt|compound|minecraft:flags}}：检查实体特质。
+*** {{nbt|bool|is_baby}}：检查该实体是否是幼体。如果该实体是盔甲架，则以是否是小型盔甲架来判断。
+*** {{nbt|bool|is_flying}}：检查该实体是否正在飞行。
+*** {{nbt|bool|is_on_ground}}：检查该实体是否正立在地面上。
+*** {{nbt|bool|is_on_fire}}：检查该实体是否正在着火。
+*** {{nbt|bool|is_sneaking}}：检查该实体是否正在潜行。
+*** {{nbt|bool|is_sprinting}}：检查该实体是否正在疾跑。
+*** {{nbt|bool|is_swimming}}：检查该实体是否正在游泳。
+*** {{nbt|bool|is_in_water}}：检查该实体是否正在接触水。对气泡柱等方块也有效。
+*** {{nbt|bool|is_fall_flying}}：检查该实体是否正在用鞘翅滑翔。
+<section end="flags"/></div>
+
+=== equipment ===
+检查实体装备槽位内的物品。
+
+<div class="treeview"><section begin="equipment"/>
+** {{nbt|compound|minecraft:equipment}}：检查实体身上的装备。
+*** {{nbt|compound|body}}：检查动物身体槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|chest}}：检查胸甲槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|feet}}：检查靴子槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|head}}：检查头盔槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|legs}}：检查护腿槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|mainhand}}：检查主手槽位物品。
+**** {{nbt inherit/item predicate}}
+*** {{nbt|compound|offhand}}：检查副手槽位物品。
+**** {{nbt inherit/item predicate}}
+<section end="equipment"/></div>
+
+=== periodic_tick ===
+约束实体检查成功的频率。
+
+<div class="treeview"><section begin="periodic_tick"/>
+** {{nbt|int|minecraft:periodic_tick}}：（{{interval|left=0}}，单位为刻）根据实体已经加载的时间，以此值为周期，一个周期内只可能检查成功一次。
+<section end="periodic_tick"/></div>
+
+=== vehicle ===
+检查实体的坐骑。
+
+<div class="treeview"><section begin="vehicle"/>
+** {{nbt|compound|minecraft:vehicle}}：检查此实体正在骑乘的实体。
+*** {{nbt inherit/entity predicate}}
+<section end="vehicle"/></div>
+
+=== passenger ===
+检查实体的乘客。
+
+<div class="treeview"><section begin="passenger"/>
+** {{nbt|compound|minecraft:passenger}}：检查正在骑乘此实体的实体。
+*** {{nbt inherit/entity predicate}}
+<section end="passenger"/></div>
+
+=== targeted_entity ===
+检查实体正要瞄准攻击的实体。
+
+<div class="treeview"><section begin="targeted_entity"/>
+** {{nbt|compound|minecraft:targeted_entity}}：检查实体正要瞄准攻击的实体。如果本实体不是除玩家、玩家模型和盔甲架外的生物，或不存在攻击目标，则检查直接失败。
+*** {{nbt inherit/entity predicate}}
+<section end="targeted_entity"/></div>
+
+=== team ===
+检查实体的队伍。
+
+<div class="treeview"><section begin="team"/>
+** {{nbt|string|minecraft:team}}：检查实体属于的[[记分板#队伍|队伍]]。
+<section end="team"/></div>
+
+=== slots ===
+检查实体某个槽位范围内的物品。
+
+<div class="treeview"><section begin="slots"/>
+** {{nbt|compound|minecraft:slots}}：检查实体某些槽位内的物品。
+*** {{nbt|compound|<[[参数类型#minecraft:item_slots|''槽位范围'']]>}}：检查对应槽位范围内的物品。
+**** {{nbt inherit/item predicate}}
+<section end="slots"/></div>
+
+=== components ===
+检查实体的数据组件。
+
+<div class="treeview"><section begin="components"/>
+** {{nbt|compound|minecraft:components}}：检查实体的[[数据组件#实体组件|数据组件]]。当从实体获取的组件内容与检测内容完全相同时测试成功。
+*** {{nbt|any|<''数据组件ID''>}}：一项组件及检测内容。
+<section end="components"/></div>
+
+=== predicates ===
+测试实体的数据组件是否满足某项条件。
+
+<div class="treeview"><section begin="predicates"/>
+** {{nbt|compound|minecraft:predicates}}：检查实体的某个[[数据组件#实体组件|数据组件]]是否满足某种条件。
+*** {{nbt|any|<''数据组件谓词类型ID''>}}：一个组件的检查。具体格式详见[[数据组件谓词]]。
+<section end="predicates"/></div>
+
+=== entity_tags ===
+检查实体的计分板标签。
+
+<div class="treeview"><section begin="entity_tags"/>
+** {{nbt|compound|minecraft:entity_tags}}：检查实体的[[记分板标签]]。
+*** {{nbt|list|any_of}}：如果指定，则要匹配的实体必须至少有其中一个标签。
+**** {{nbt|string}}：一个字符串，表示要测试的实体标签。
+*** {{nbt|list|all_of}}：如果指定，则要匹配的实体必须有其中的全部标签。
+**** {{nbt|string}}：一个字符串，表示要测试的实体标签。
+*** {{nbt|list|none_of}}：如果指定，则要匹配的实体必须不具有其中任何一个标签。
+**** {{nbt|string}}：一个字符串，表示要测试的实体标签。
+<section end="entity_tags"/></div>
+
+=== type_specific/lightning ===
+闪电束谓词，检查[[闪电束]]。
+
+<div class="treeview"><section begin="type_specific_lightning"/>
+** {{nbt|compound|minecraft:type_specific/lightning}}：检查[[闪电束]]。如果实体不是闪电束则检查直接失败。
+*** {{nbt|int}}{{nbt|compound|blocks_set_on_fire}}：检查被该闪电束点燃的方块数。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds ints}}
+*** {{nbt|compound|entity_struck}}：检查被该闪电束击中的实体。
+**** {{nbt inherit/entity predicate}}
+<section end="type_specific_lightning"/></div>
+
+=== type_specific/fishing_hook ===
+浮漂谓词，检查[[浮漂]]。
+
+<div class="treeview"><section begin="type_specific_fishing_hook"/>
+** {{nbt|compound|minecraft:type_specific/fishing_hook}}：检查[[浮漂]]。
+*** {{nbt|boolean|in_open_water}}：检查浮漂是否位于[[钓鱼#垃圾与宝藏|开阔水域]]。如果实体不是浮漂，则检查失败。
+<section end="type_specific_fishing_hook"/></div>
+
+=== type_specific/player ===
+玩家谓词，检查[[玩家]]。
+
+<div class="treeview"><section begin="type_specific_player"/>
+** {{nbt|compound|minecraft:type_specific/player}}：检查[[玩家]]。如果实体不是玩家则检查直接失败。
+*** {{nbt|int}}{{nbt|compound|level}}：检查玩家的经验等级。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds ints}}
+*** {{nbt|compound|food}}：食物谓词，检查玩家的[[饥饿#机制|食物数据]]。
+**** {{nbt|int}}{{nbt|compound|level}}：检查玩家的饥饿度等级。
+***** {{nbt inherit/minmax bounds ints}}
+**** {{nbt|double}}{{nbt|compound|saturation}}：检查玩家的饱和度。
+***** {{nbt inherit/minmax bounds doubles}}
+*** {{nbt|list|gamemode}}：检查玩家的[[游戏模式]]，当玩家当前的游戏模式在此列表中时测试成功。
+**** {{nbt|string}}：一个游戏模式。必须是<code>survival</code>（生存模式）、<code>adventure</code>（冒险模式）、<code>creative</code>（创造模式）或<code>spectator</code>（旁观模式）。
+*** {{nbt|list|stats}}：检查玩家的[[统计信息]]。
+**** {{nbt|compound}}：要检查的一项统计。统计类型与统计名称的取值及意义参见{{slink|统计信息|命名空间ID}}。
+***** {{nbt|string|type|required=1}}：统计类型。
+***** {{nbt|string|stat|required=1}}：统计名称。
+***** {{nbt|int}}{{nbt|compound|value}}：检查此项统计的值。匹配一个精确值，或者检测数值是否在范围之间。
+****** {{nbt inherit/minmax bounds ints}}
+*** {{nbt|compound|recipes}}：检查玩家获得的[[配方]]。
+**** {{nbt|boolean|<''配方ID''>}}：检查玩家是否获得此配方。
+*** {{nbt|compound|advancements}}：匹配玩家获得的[[进度]]。
+**** {{nbt|bool}}{{nbt|compound|<''进度ID''>}}：可以为{{nbt|bool|布尔值}}以直接检查此进度是否获得，也可以为{{nbt|compound|对象}}格式检查此进度内部准则的达成情况。
+***** {{nbt|bool|<''进度准则ID''>}}：检查此项进度准则是否已达成。
+*** {{nbt|compound|looking_at}}：检查玩家正在观察的实体，需要其可见且在100个方块内。
+**** {{nbt inherit/entity predicate}}
+*** {{nbt|compound|input}}：检查玩家是否按下相应的控制按键。
+**** {{nbt|bool|forward}}：{{tp|key.forward}}。
+**** {{nbt|bool|backward}}：{{tp|key.back}}。
+**** {{nbt|bool|left}}：{{tp|key.left}}。
+**** {{nbt|bool|right}}：{{tp|key.right}}。
+**** {{nbt|bool|jump}}：{{tp|key.jump}}。
+**** {{nbt|bool|sneak}}：{{tp|key.sneak}}。
+**** {{nbt|bool|sprint}}：{{tp|key.sprint}}。
+<section end="type_specific_player"/></div>
+
+=== type_specific/cube_mob ===
+史莱姆谓词，检查[[史莱姆]]、[[岩浆怪]]和[[硫方怪]]的部分信息。
+
+<div class="treeview"><section begin="type_specific_cube_mob"/>
+** {{nbt|compound|minecraft:type_specific/cube_mob}}：检查[[史莱姆]]、[[岩浆怪]]或[[硫方怪]]。如果实体不是上述实体则检查直接失败。
+*** {{nbt|int}}{{nbt|compound|size}}：检查史莱姆或岩浆怪的[[史莱姆#实体数据|大小]]。匹配一个精确值，或者检测数值是否在范围之间。
+**** {{nbt inherit/minmax bounds ints}}
+<section end="type_specific_cube_mob"/></div>
+
+=== type_specific/raider ===
+袭击者谓词，检查袭击者的部分信息。
+
+<div class="treeview"><section begin="type_specific_raider"/>
+** {{nbt|compound|minecraft:type_specific/raider}}：检查袭击者（[[卫道士]]、[[唤魔者]]、[[幻术师]]、[[掠夺者]]、[[女巫]]或[[劫掠兽]]）。如果实体不属于上述实体则检查直接失败。
+*** {{nbt|boolean|has_raid}}：（默认为<samp>false</samp>）检查袭击者是否正处于一场袭击中。
+*** {{nbt|boolean|is_captain}}：（默认为<samp>false</samp>）检查袭击者是否是[[袭击队长]]。
+<section end="type_specific_raider"/></div>
+
+=== type_specific/sheep ===
+绵羊谓词，检查[[绵羊]]的部分信息。
+
+<div class="treeview"><section begin="type_specific_sheep"/>
+** {{nbt|compound|minecraft:type_specific/sheep}}：检查[[绵羊]]。如果实体不是绵羊则检查直接失败。
+*** {{nbt|boolean|sheared}}：检查绵羊是否已被修剪羊毛。
+<section end="type_specific_sheep"/></div>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=17w18a|向实体谓词加入{{nbt|compound|distance}}字段。}}
+|{{HistoryLine|||dev=pre1|向实体谓词加入{{nbt|string|nbt}}、{{nbt|compound|effects}}和{{nbt|compound|location}}字段。}}
+|{{HistoryLine||1.14|dev=18w43a|现在实体谓词的{{nbt|string|type}}字段接受标签。
+|向实体谓词加入{{nbt|compound|flags}}字段。}}
+|{{HistoryLine||1.15|dev=19w38a|向实体谓词加入了{{nbt|object|player}}和{{nbt|string|team}}字段。}}
+|{{HistoryLine||1.16|dev=20w12a|向实体谓词加入了{{nbt|object|fishing_hook}}字段。}}
+|{{HistoryLine|||dev=20w20a|向实体谓词加入了{{nbt|object|vehicle}}和{{nbt|object|targeted_entity}}字段。}}
+|{{HistoryLine||1.17|dev=pre1|向实体谓词加入了{{nbt|object|passenger}}、{{nbt|object|stepping_on}}和{{nbt|object|lightning_bolt}}字段。
+|向实体谓词的{{nbt|object|player}}字段加入了{{nbt|object|looking_at}}字段。}}
+|{{HistoryLine||1.19|dev=22w14a|移除了实体谓词的{{nbt|object|player}}、{{nbt|object|fishing_hook}}、{{nbt|object|lightning_bolt}}和{{nbt|string|catType}}字段，被实体子谓词{{nbt|object|type_specific}}代替。
+|加入了实体子谓词类型{{cd|d=pretty|any|player|fishing_hook|lightning_bolt|cat|slime|frog}}。}}
+|{{HistoryLine||1.19.3|dev=pre1|加入了实体子谓词类型{{cd|d=pretty|axolotl|boat|fox|mooshroom|painting|rabbit|horse|llama|villager|parrot|tropical_fish}}。}}
+|{{HistoryLine||1.20.5|dev=24w09a|将实体谓词{{nbt|string|type}}更改为{{nbt|string}}{{nbt|list|type}}以支持实体类型ID的数组。}}
+|{{HistoryLine|||dev=24w10a|向实体谓词加入了{{nbt|object|slots}}字段。}}
+|{{HistoryLine|||dev=24w11a|移除了实体子谓词类型{{cd|any}}。
+|现在实体子谓词类型使用命名空间ID的格式。}}
+|{{HistoryLine|||dev=24w12a|将实体子谓词类型{{cd|d=pretty|cat|forg|painting}}的附加字段{{nbt|string|variant}}更改为{{nbt|string}}{{nbt|list|variant}}以支持ID、ID数组及标签。
+|加入了实体子谓词类型{{cd|wolf}}。}}
+|{{HistoryLine|||dev=24w13a|加入了实体子谓词类型{{cd|raider}}。}}
+|{{HistoryLine|||dev=pre1|向实体谓词的{{nbt|object|equipment}}字段加入新可选槽位{{cd|body}}。}}
+|{{HistoryLine||1.21|dev=24w18a|向实体谓词加入了{{nbt|int|periodic_ticks}}和{{nbt|object|movement}}字段。
+|向实体谓词的{{nbt|object|flags}}字段加入了{{nbt|boolean|is_on_ground}}和{{nbt|boolean|is_flying}}。}}
+|{{HistoryLine||1.21.2|dev=24w35a|加入了实体子谓词类型{{cd|sheep}}。}}
+|{{HistoryLine|||dev=24w36a|向实体子谓词类型{{cd|player}}中加入了{{nbt|object|input}}字段。}}
+|{{HistoryLine|||dev=24w37a|加入了实体子谓词类型{{cd|salmon}}。}}
+|{{HistoryLine|||dev=24w39a|移除了实体子谓词类型{{cd|boat}}。}}
+|{{HistoryLine||1.21.5|dev=25w02a|加入了实体子谓词类型{{cd|pig}}。}}
+|{{HistoryLine|||dev=25w03a|向实体谓词加入{{nbt|object|components}}字段。
+|移除了实体子谓词类型{{cd|d=pretty|axolotl|fox|mooshroom|rabbit|horse|llama|villager|parrot|salmon|tropical_fish|painting|cat|frog|wolf|pig}}。
+|移除了实体子谓词类型{{cd|sheep}}的{{nbt|string|color}}字段。}}
+|{{HistoryLine|||dev=25w07a|现在实体谓词的{{nbt|object|stepping_on}}字段在实体未站在地面时永远测试失败。}}
+|{{HistoryLine|||dev=25w10a|向实体谓词加入{{nbt|object|predicates}}字段。}}
+|{{HistoryLine||26.2|dev=snapshot-3|重新设计了实体谓词，现在实体谓词是多个实体子谓词的映射；实体子谓词也不再是{{nbt|compound|type_specific}}下的类型字段。
+|加入了实体子谓词类型<code>entity_tags</code>。}}
+|{{HistoryLine|||dev=snapshot-4|将实体子谓词<code>type_specific/slime</code>重命名为<code>type_specific/cube_mob</code>。}}
+}}
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:通过Nbt inherit加载的页面]]

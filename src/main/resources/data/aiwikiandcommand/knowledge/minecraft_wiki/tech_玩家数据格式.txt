@@ -1,0 +1,80 @@
+# 页面: 玩家数据格式
+# 来源: https://zh.minecraft.wiki/w/%E7%8E%A9%E5%AE%B6%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 使用计算器的页面, 游戏文件
+# 抓取时间: 2026-07-14 17:32:08
+# 原始 Wikitext 内容:
+
+{{redirect|player.dat|[[携带版Alpha 0.2.0]]前的玩家数据存储文件|基岩版存档格式/历史#player.dat}}
+{{exclusive|je}}
+
+'''玩家数据格式'''是游戏内用于存储玩家数据规定的数据格式。
+
+== 数据格式 ==
+玩家数据属于一种实体数据。除普通实体具有的数据外，还包含了很多玩家的特有数据。
+
+玩家数据具有下列的NBT结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+{{#lst:编码格式/Entity|codec_server_player}}
+</div>
+
+下图为玩家物品栏槽位编号：
+
+[[File:Items slot number.png|300px|玩家物品栏槽位编号]]
+
+== 存储格式 ==
+玩家数据存储在{{filepath|-{}-<''存档根目录''>/players/data/<''玩家UUID''>.dat}}内，每个玩家都对应一个玩家数据文件。此文件可能具有副本。
+
+{{Calculator|playerUuid|player=MinecraftWiki}}
+
+对于单独存储玩家数据的玩家数据存储文件，它使用GZip压缩的[[NBT]]文件格式保存，其NBT结构与玩家数据结构一致。
+
+== 存储行为 ==
+当玩家数据被保存时，游戏按照下列步骤创建备份：
+# 先将新的数据写入到{{filename|-{}-<''玩家UUID''>-<''随机字符串''>.dat}}内。
+# 将原先的{{filename|-{}-<''玩家UUID''>.dat}}移动到{{filename|-{}-<''玩家UUID''>.dat_old}}。
+# 删除{{filename|-{}-<''玩家UUID''>.dat}}。
+# 将刚才写入的{{filename|-{}-<''玩家UUID''>-<''随机字符串''>.dat}}移动到{{filename|-{}-<''玩家UUID''>.dat}}。
+# 如果有任何一步出错，都将{{filename|-{}-<''玩家UUID''>.dat_old}}移动回{{filename|-{}-<''玩家UUID''>.dat}}。
+
+加载时如果主文件损坏，那么游戏会尝试使用旧版本自动修复文件：
+# 将原先的{{filename|-{}-<''玩家UUID''>.dat}}复制到{{filename|-{}-<''玩家UUID''>_corrupted_<''时间戳''>.dat}}。
+# 加载{{filename|-{}-<''玩家UUID''>.dat_old}}。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.12|dev=pre1|对玩家加入了{{nbt|compound|enteredNetherPosition}}，用于进度触发器<code>-{}-[[进度定义格式#nether_travel|nether_travel]]</code>。}}
+|{{HistoryLine||1.16|dev=20w12a|对玩家加入了{{nbt|string|SpawnDimension}}、{{nbt|bool|SpawnForced}}、{{nbt|int|SpawnX}}、{{nbt|int|SpawnY}}和{{nbt|int|SpawnZ}}标签，用于控制玩家重生点。}}
+|{{HistoryLine|||dev=20w21a|对玩家加入了{{nbt|string|Dimension}}标签表示玩家所在的维度。}}
+|{{HistoryLine|||dev=pre6|对玩家加入了{{nbt|float|SpawnAngle}}标签表示玩家重生时的角度。}}
+|{{HistoryLine||1.16.2|dev=20w29a|对玩家加入了{{nbt|int|previousPlayerGameType}}标签表示切换之前的游戏模式。}}
+|{{HistoryLine||1.19|dev=22w14a|对玩家加入了{{nbt|compound|LastDeathLocation}}标签。}}
+|{{HistoryLine||1.19.3|dev=22w42a|对玩家加入了{{nbt|compound|warden_spawn_tracker}}标签控制监守者的生成。}}
+|{{HistoryLine||1.20.5|dev=24w06a|对玩家加入了{{nbt|double|ignore_fall_damage_above_y}}标签控制摔落伤害。}}
+|{{HistoryLine|||dev=24w11a|对玩家加入了{{nbt|bool|spawn_extra_particles_on_fall}}标签指定摔落时是否有额外粒子。}}
+|{{HistoryLine|||dev=24w12a|移除了{{nbt|double|ignore_fall_damage_above_y}}，使用新的{{nbt|list|current_explosion_impact_pos}}和{{nbt|bool|ignore_fall_damage_from_current_explosion}}代替。}}
+|{{HistoryLine|||dev=24w13a|对玩家加入了{{nbt|int-array|raid_omen_position}}标签保存触发袭击之兆的位置。}}
+|{{HistoryLine||1.21|dev=pre1|对玩家加入了{{nbt|int|current_impulse_context_reset_grace_time}}记录{{nbt|list|current_explosion_impact_pos}}的有效时间。}}
+|{{HistoryLine||1.21.2|dev=24w37a|对玩家加入了{{nbt|list|ender_pearls}}标签记录与玩家绑定的末影珍珠数据。}}
+|{{HistoryLine||1.21.5|dev=25w06a|现在玩家除主手槽位外的装备数据移到{{nbt|compound|equipment}}标签内。}}
+|{{HistoryLine|||dev=25w07a|将{{nbt|compound|enteredNetherPosition}}重做为{{nbt|list|entered_nether_pos}}。
+|修改了玩家重生数据的格式。}}
+|{{HistoryLine||1.21.9|dev=pre1|现在玩家重生数据不再有水平方向属性，而是俯仰角和偏转角属性。}}
+|{{HistoryLine||26.1|dev=snapshot-2|移除了{{nbt|bool|ignore_fall_damage_from_current_explosion}}。}}
+|{{HistoryLine||26.1|dev=snapshot-6|将玩家数据目录从{{filepath|<''存档根目录''>/playerdata}}移动到{{filepath|<''存档根目录''>/players/data}}。
+|由于{{filename|level.dat}}中的{{nbt|compound|Player}}被替换为{{nbt|int array|singleplayer_uuid}}，因而对于单人游戏存档而言游戏也使用玩家数据目录中的数据，而非优先使用{{filename|level.dat}}中的玩家数据。}}
+}}
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Spielerdaten]]
+[[en:Player.dat format]]
+[[fr:Format player.dat]]
+[[ja:Player.datフォーマット]]
+[[nl:Player.dat formaat]]
+[[pt:Formato Player.dat]]

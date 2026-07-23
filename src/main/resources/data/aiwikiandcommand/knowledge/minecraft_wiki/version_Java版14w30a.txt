@@ -1,0 +1,138 @@
+# 页面: Java版14w30a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w30a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:14
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=14w30a
+|image=Java Edition 14w30a Simplified.png\Java Edition 14w30a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年7月23日
+|jsonhash=8d57966d0f23a9f97af540709f1b51bd8d02b21d
+|clienthash=e335e50b527fe15c82242a0a8ce8ad4e5fdcf513
+|serverhash=cb7bd4bebcb40c128a571c8f15fe1990b1f50a32
+|exehash=b9912d88d068bb60df5b1b37f7ee75118e83a042
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w29b
+|next=14w30b
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w30a'''是[[Java版1.8]]的第38个快照，发布于2014年7月23日<ref>{{cite|url=http://mojang.com/2014/07/minecraft-snapshot-14w30a/|archive-url=1|archive=1|title=Minecraft snapshot 14w30c|author=Dinnerbone|website=Mojang.com|date=Jul 23, 2014}}</ref>，加入了旗帜、新的NBT标签和新的统计信息，并修复了一些漏洞。
+
+== 新内容 ==
+=== 方块 ===
+'''[[旗帜]]'''
+* 一种装饰性方块，拥有16种底色。
+* 使用6个对应[[羊毛]]和[[木棍]]合成。
+* 能够通过在[[工作台]]上用某种方式排列染料来为其添加大多数图案。
+** 可使用[[苦力怕的头]]、[[凋灵骷髅头颅]]、[[红砖块]]和[[滨菊]]分别添加4种特殊图案：苦力怕盾徽、头颅盾徽、砖纹和花朵盾徽。若添加特殊图案时没有放置染料则会添加上黑色的图案，若有则添加染料对应的颜色。
+** 图案可以层叠至6层。
+** 拥有超过16×400<sup>6</sup>（6.5536×10<sup>16</sup>）可能的图案组合。
+** 最上层的图案可以对装有水的[[炼药锅]]使用以去除。
+* 可以用一个空白的拥有相同底色的旗帜来复制。
+* 可以堆叠至16个。
+* 可以放置在方块的侧面和顶面上。
+
+=== 命令格式 ===
+'''[[NBT标签]]'''
+* 给予生物新的<code>Silent</code>标签。
+** 设置为{{cd|1}}可禁用由该实体产生的音效，例如空闲和伤害的音效。
+
+=== 常规 ===
+'''[[统计]]'''
+* <code>stat.talkedToVillager</code>
+** 检测玩家与[[村民]]交谈的次数（打开交易GUI）。
+* <code>stat.tradedWithVillager</code>
+** 检测玩家与村民交易的次数。
+
+== 更改 ==
+=== 方块 ===
+'''[[生物头颅]]'''
+* 现在[[苦力怕]]、[[骷髅]]、[[凋灵骷髅]]和[[僵尸]]在被闪电苦力怕杀死后会掉落对应的头颅。
+* 戴在头上的头颅现在更大了，所以第二层的皮肤也不再显示了。
+* 玩家和生物在物品栏中，由生物/玩家控制，现在显示实际的头部。
+
+=== 命令格式 ===
+'''{{cmd|summon}}'''
+* 现在可以用{{cmd|summon LightningBolt}}召唤闪电。
+
+=== 游戏内容 ===
+'''亮度'''
+* 完全修复了黑点存在的漏洞。
+* 需要重新加载旧的世界让它们修复。<ref>{{tweet|SeargeDP|491938604827295744}}</ref>
+
+=== 常规 ===
+'''[[调试屏幕]]'''
+* 现在可以显示当前正在显示多少区块，以及百分比视图、OpenGL版本、显示尺寸、供应商和GPU。
+* “Vanilla”添加到版本号之后，指代[[教程:游戏术语|原版]]游戏，例如：“Minecraft 14w30b (14w30b/Vanilla)”
+** 若游戏被[[加载器Mod|模组化]]，则显示可能会不同。{{more info}}
+* {{key|F3+H}}工具按键现在会显示一个物品有多少NBT标签。
+* 方块名称不再包含在名称旁边的括号内的方块状态数据（在屏幕右侧的方块名称和数据的视图中）。
+** 数据仍然显示在名称下面的单独行中。
+ 
+'''[[设置]]'''
+* 视频设置
+** 当使用64位Java时，最高渲染距离会上升到32个区块。
+*** 需要分配2GB的内存。
+** 移除了高级OpenGL（Advanced OpenGL）选项。
+* 性能改进：
+** 重写区块排序。
+** 通过携带版的可见性选择代码进行移植，以避免呈现不可见的内容。
+** 多线程区块重建。
+
+== 修复 ==
+{{fixes|fixedin=14w30a|prefix=Minecraft|showdesc=1
+|;old
+|7508|由于<code>Chunk.heightMap</code>忽略了一个<code>ExtendedBlockStroage</code>实例的最高层方块，导致亮度计算错误（偏移一格错误）。
+|30568|{{cmd|summon|link=none}}命令不能生成闪电。
+|32514|沙漠村庄中的水井是使用错误的材料（或圆石）制成的。
+|58823|对在视频设置中没有高级OpenGL选项的显卡中，旧版本创建的<code>options.txt</code>中的<code>advancedOpengl:true</code>选项依然存在。
+|;dev
+|46225|落沙可以替换和摧毁活塞。
+|56897|<code>options.txt</code>中的<code>advancedOpengl</code>选项设置为<code>true</code>时，区块不渲染。
+|57895|楼梯在创造模式物品栏以及快捷栏中显示的是它们的背面。
+|58790|带{{cmd|give|link=none}}或{{cmd|replaceitem|link=none}}的告示牌在点击后，玩家的背包没有变化。
+|59259|破坏高植物下的方块会得到两个高植物。
+|59979|调试屏幕中的信息有重复。
+|60301|试图启动14w27a或14w27b时，由于纹理包损坏，导致游戏崩溃。
+|60552|1.7中放置的具有元数据的花盆在1.8快照中不显示，同时其元数据没有被删除。
+|61191|沙漠村庄中，构成房屋的砂岩楼梯的方向有误。
+|62127|关闭垂直同步导致游戏崩溃。
+|62138|<code>#PLAYER</code>会显示在边栏上。
+|62180|{{cmd|testfor @p|link=none}}不再考虑坐标。
+|62493|在执行{{cmd|worldborder add|link=none}}命令后执行{{cmd|worldborder get|link=none}}可以显示出无效大小。 
+|62655|方形选择器中，如果被选区域中实体数大于31时，被选中的一直是玩家。
+|;prev
+|62170|地毯的高度不正确。
+|62223|在视频设置中点击垂直同步导致游戏崩溃。
+|62240|命令选择器的<code>dx</code>，<code>dy</code>以及<code>dz</code>参数不工作。
+|62267|尝试开启垂直同步时游戏崩溃。
+|62342|在冒险模式中，具有<code>CanPlaceOn</code>标签的台阶不能被放置。
+|62349|<code>Hopper: java.lang.NullPointerException: Saving entity NBT</code>。
+|62379|刷怪笼可以在将生物生成在世界边界外。
+|62419|<code><nowiki>Hopper: java.lang.IllegalArgumentException: Cannot get property bcy{name{{=}}half, clazz=class ats, values{{=}}[upper, lower]} as it does not exist in bch{block=minec</nowiki></code>。
+|62499|{{cmd|replaceitem block|link=none}}命令语法不正确。
+|62504|执行{{cmd|kill adds 214748364|link=none}}（0xCCCCCCC）后，在统计信息中，承受伤害的值是负数。
+|62507|重叠地牢的生成不正确。
+|62558|14w29b中，即使空区块（或立方体）也会被渲染（调试屏幕中的C值不正确）。
+|62736|通过命令告示牌执行的{{cmd|replaceitem|link=none}}命令不造成更改。
+|62789|含有画的区块在加载时可能被清除并被重新生成。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:14w30a]]
+[[en:Java Edition 14w30a]]
+[[es:Java Edition 14w30a]]
+[[fr:Édition Java 14w30a]]
+[[ja:Java Edition 14w30a]]
+[[pt:Edição Java 14w30a]]
+[[ru:14w30a (Java Edition)]]

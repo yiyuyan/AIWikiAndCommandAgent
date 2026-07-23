@@ -1,0 +1,146 @@
+# 页面: Java版25w43a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8825w43a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:36
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|应用|套用}}
+{{Infobox version
+|title=25w43a
+|image=25w43a.png
+|image2=Java Edition 25w43a Simplified.png\Java Edition 25w43a Traditional.png\Java Edition 25w43a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2025年10月21日
+|jsonhash=43cba33b0e7bc673fb6eb6ba042c022bdaf6cf9e
+|clienthash=be2ec6160a466eb16ae9ce9ee7261622f4efdd06
+|clientmap=f223a23f98f167149950334ac406b73565da99a1
+|serverhash=dac322a1091905430e2a6ade129a4915552455d0
+|servermap=2f4b171bcf237fb46692f4dc26639bf82665bea5
+|parent=1.21.11
+|prevparent=1.21.10
+|prev=25w42a
+|next=25w44a
+|nextparent=26.1
+}}<onlyinclude>
+
+'''25w43a'''是[[Java版1.21.11]]的第3个快照，发布于2025年10月21日<ref>{{snap|25w43a|Oct 21, 2025}}</ref>，修复了一些漏洞。
+
+== 新内容 ==
+=== 生物 ===
+'''[[鹦鹉螺]]和[[僵尸鹦鹉螺]]'''
+* 加入了在水中装备鞍的音效：<code>item.underwater_saddle.equip</code>。
+
+=== 常规 ===
+'''[[物品修饰器]]'''
+* 加入了物品修饰器<code>discard</code>。
+** 将物品堆叠替换为空堆叠，无额外字段。
+
+'''[[魔咒定义格式]]'''
+* 加入了魔咒效果<code>apply_exhaustion</code>，用于对目标实体赋予额外的[[消耗度]]。格式如下：
+** <code>amount</code>：要套用的消耗度的等级依赖函数，仅对玩家有实际作用。
+
+== 更改 ==
+=== 物品 ===
+'''[[矛]]'''
+* 增加了玩家和生物进行冲锋攻击造成的伤害。
+* 略微增大了模型。
+* 现在进行冲锋攻击击中目标时会有视觉反馈。
+* 现在增加攻击伤害的[[属性修饰符]]只应用于主手而非双手。
+
+=== 生物 ===
+'''[[鹦鹉螺]]和[[僵尸鹦鹉螺]]'''
+* 现在不再能上船。
+
+=== 游戏内容 ===
+'''[[魔咒]]'''
+* 现在[[突进]]魔咒不再额外消耗矛的耐久度，而是像疾跑和跳跃那样消耗玩家的[[饱和度]]和饥饿值。
+** I级消耗{{hunger|3}}，II级消耗{{hunger|4}}，III级消耗{{hunger|5}}。
+** 现在只有玩家有大于{{hunger|6}}的饥饿值时，突进魔咒才会发挥作用。
+
+'''[[世界边界]]'''
+* 现在世界边界插值取决于游戏刻而不是现实时间。
+** 因此，游戏暂停时世界边界不再会移动。
+** 这也意味着世界边界插值也会被{{cmd|tick}}影响。
+
+=== 命令格式 ===
+'''{{cmd|worldborder}}'''
+* <code>time</code>参数现在以刻而不是秒-{}-表示。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|91.0}}。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|71.0}}。
+
+'''[[物品修饰器]]'''
+* <code>filtered</code>：
+** 将<code>modifier</code>替换下以下两个字段：
+*** <code>on_pass</code>：当<code>item_filter</code>测试成功时应用的战利品表函数或其{{tr|列表|串列}}。
+*** <code>on_fail</code>：当<code>item_filter</code>测试失败时应用的战利品表函数或其{{tr|列表|串列}}。
+
+'''[[纹理]]'''
+* 移除了纹理元数据属性{{nbt|boolean|darked_cutout_mipmap}}，由{{nbt|string|mipmap_strategy}}取代。新字段是一个枚举值，可用值如下：
+** <code>mean</code>：计算当前MipMap等级下颜色和透明度的平均值，每四个像素为一组，以生成下一等级的MipMap像素。这曾经是并将继续是绝大多数固体或半透明完整方块的方法。
+** <code>dark_cutout</code>：与<code>mean</code>相似，但混合颜色的方式会使cutout像素变暗。这曾经是并将继续是红树根和沾泥的红树根的方法，来模拟较黑暗的方块内部。
+** <code>cutout</code>：新方法，基于原始纹理而不是上一MipMap等级的纹理生成MipMap纹理。在此版本中用于绝大多数cutout方块。
+** <code>strict_cutout</code>：<code>cutout</code>的变种，使用更严格的透明通道截止值，会导致使用此值的纹理在高MipMap等级时不可见。它被用于花等方块来避免伪影。
+** <code>auto</code>：默认值，使游戏选择不包含完全透明像素的所有像素的平均值，并对其余像素进行<code>cutout</code>处理。
+* 现在方块的动态纹理再次在所有MipMap等级下动态显示。
+* 信标和红石粉现在支持透明纹理。
+
+'''[https://www.lwjgl.org/ LWJGL]'''
+* 将LWJGL从版本3.3.3更新到了3.3.6。
+
+== 修复 ==
+{{fixes|fixedin=25w43a|showdesc=1|new=1
+|;old
+|53491|游戏暂停时能改变世界边界的大小。
+|;1.21.10的漏洞
+|302695|游戏暂停时可以使用游戏模式切换器并取消暂停。
+|302854|从远处看时，玻璃的透明度减小。
+|303381|尝试序列化偏航角或俯仰角超出范围的玩家出生点时，游戏崩溃。
+|303382|旋转角超出范围的玩家出生点没有被序列化。
+|;dev
+|302669|从特定角度观察旗帜时，其显示不正确的纹理。
+|302675|在升级存档后，一些物品展示框无法正确渲染其中的物品。
+|302691|世界中有旗帜时，手持和掉落的物品有时没有正确渲染。
+|302719|调试组合键绑定说明没有正确大写。
+|302724|{{cd|debug.entry.overlay}}字符串没有正确大写。
+|302737|使用游戏模式切换器后要按两次{{key|F3}}才能显示调试屏幕。
+|302769|部分方块在距离较近时变得不可见。
+|302790|{{cd|minecraft:apply_impulse}}效果无法在{{cd|minecraft:location_changed}}上使用。
+|302849|持有矛的生物造成的伤害较低。
+|302872|不同mipmap级别的熔岩颜色差异较大。
+|302887|在第一人称视角下，矛在主手和副手的冲锋动画没有完美对称。
+|302912|和其他亡灵生物不同，僵尸鹦鹉螺离开水时会窒息。
+|302915|对cutout的纹理应用mipmap会导致它们看起来比预期更大。<!-- cutout的写法参考了版本1176196的更改-常规-纹理 -->
+|302963|击杀被玩家骑乘的鹦鹉螺会导致玩家短暂向上移动，不受重力影响。
+|302984|副手持有矛时攻击实体，矛的伤害会叠加在主手的伤害上。
+|303032|幼年和未驯服的鹦鹉螺可以被正常控制。
+|;prev
+|303138|猪灵和疣猪兽可以在下界僵尸化。
+|303150|{{cd|can_sleep}}设为{{cd|always}}且游戏规则{{cd|playerSleepPercentage}}设为大于等于101时，在白天无法躺在床上。
+|303157|{{cd|remove_binomial}}效果可能会产生超出范围的值。
+|303166|{{cmd|stopwatch create|link=none}}会提供和已有秒表相同的建议。
+|303181|矛对主手和副手都有一个{{cd|attack_damage}}的属性修饰符，尽管冲锋攻击没有使用它。
+|303201|僵尸猪灵尝试攻击创造模式玩家。
+|303266|鹦鹉螺和僵尸鹦鹉螺可以进入船。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:25w43a]]
+[[en:Java Edition 25w43a]]
+[[es:Java Edition 25w43a]]
+[[fr:Édition Java 25w43a]]
+[[ja:Java Edition 25w43a]]
+[[lzh:爪哇版二五週四三甲]]
+[[pt:Edição Java 25w43a]]
+[[ru:25w43a (Java Edition)]]
+[[uk:25w43a (Java Edition)]]

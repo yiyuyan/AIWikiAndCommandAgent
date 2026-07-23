@@ -1,0 +1,112 @@
+# 页面: 材料/properties row
+# 来源: https://zh.minecraft.wiki/w/%E6%9D%90%E6%96%99/properties%20row
+# 分类: 基于Lua的模板, 表格模板
+# 抓取时间: 2026-07-14 17:28:49
+# 原始 Wikitext 内容:
+
+<includeonly>{{#invoke: Materials row | properties }}</includeonly><noinclude>
+{{documentation|content=
+{{lua|Materials row}}
+该模板用于创建材料属性表，以展示各个[[材料]]的特征。
+
+== Usage ==
+The parameter is set to the title to display in the first column.
+
+The parameter {{p|rgb}} contains three color values separated by commas to display as a colored cell and text. It should be set based on the material's map color. If unset, it defaults to a white color and the text "None"
+
+=== Properties ===
+The table contains the following properties. They are set to 1 for true, and 0 for false.
+{{pipe escape|
+{| class{{=}}"wikitable"
+! Name
+! Subclass only?
+! Description
+! Default
+|-
+| {{p|liquid}}
+| {{tc|no|yes}}
+| The block allows the player to swim.
+| 0
+|-
+| {{p|solid}}
+| {{tc|no|yes}}
+| This block allows block dependent blocks to be placed on it, and is considered when spawning various structures.
+| 1
+|-
+| {{p|blocklight}}
+| {{tc|no|yes}}
+| This block reduces the level of light passing through it (often blocking it entirely).
+| 1
+|-
+| {{p|blockmove}}
+| {{tc|no|yes}}
+| This block prevents movement through it, and usually suffocates entities inside of it.
+| 1
+|-
+| {{p|opaque}}
+| {{tc|yes|no}}
+| This block cannot be seen through.
+| {{p|blockmove}}
+|-
+| {{p|tool}}
+| {{tc|yes|no}}
+| This block requires a tool to give a drop.
+| 0
+|-
+| {{p|burn}}
+| {{tc|yes|no}}
+| This block can become lit from lava.
+| 0
+|-
+| {{p|replace}}
+| {{tc|yes|no}}
+| This block will be replaced from {{control|using}} another block on it.
+| 0
+|-
+| {{p|adventureExempt}}
+| {{tc|yes|no}}
+| Does not seem to be used anywhere in Minecraft, and is not displayed in the table.
+| 0
+|}
+}}
+
+Subclasses can also be set using {{p|subclass}} for to change the defaults based on coded subclasses. Values include:
+* <code>liquid</code>
+** defaults {{p|liquid}} and {{p|replace}} to 1
+** defaults {{p|blockmove}} and {{p|solid}} to 0
+** defaults {{p|piston}} to "replace"
+* <code>nonsolid</code>
+** defaults {{p|adventureExempt}} to 1
+** defaults {{p|solid}}, {{p|blocklight}} and {{p|blockmove}} to 0
+* <code>portal</code>
+** defaults {{p|solid}}, {{p|blocklight}} and {{p|blockmove}} to 0
+* <code>liquid</code>
+** defaults {{p|replace}} to 1
+** defaults {{p|solid}}, {{p|blocklight}} and {{p|blockmove}} to 0
+* <code>cobweb</code>
+** defaults {{p|blockmove}} to 1
+
+The parameter {{p|piston}} can be set to determine the interaction when a piston pushes the block. Options are as follows:
+* <code>pushed</code> - pushes the block, default
+* <code>replace</code> - breaks the block being pushed
+* <code>blocked</code> - stops the piston from extending
+
+== Code ==
+The parameters generally correspond to the actual structure of the code.
+* {{p|subclass}} refers to actual subclasses of the <code>Material</code> class. Names mostly match, but "nonsolid" is <code>MaterialLogic</code>, while "cobweb" is the inline class used for the <code>web</code> material.
+* {{p|liquid}} refers to the <code>isLiquid()</code> method.
+* {{p|solid}} refers to the <code>isSolid()</code> method.
+* {{p|blocklight}} refers to the <code>blocksLight()</code> method.
+* {{p|blockmove}} refers to the <code>blocksMovement()</code> method.
+* {{p|opaque}} refers to the <code>setTranslucent()</code> and <code>isOpaque()</code> methods.
+* {{p|tool}} refers to the <code>setRequiresTool()</code> and <code>isToolNotRequired()</code> methods.
+* {{p|burn}} refers to the <code>setBurning()</code> and <code>getCanBurn()</code> methods.
+* {{p|replace}} refers to the <code>setReplaceable()</code> and <code>isReplaceable()</code> methods.
+* {{p|adventureExempt}} refers to the <code>setAdventureModeExempt()</code> method.
+* {{p|piston}} refers to the <code>setNoPushMobility()</code>, <code>setImmovableMobility()</code>, and <code>getMaterialMobility()</code> methods.
+
+[[Category:表格模板]]
+}}
+<noinclude>
+[[en:Materials/properties row]]
+</noinclude>

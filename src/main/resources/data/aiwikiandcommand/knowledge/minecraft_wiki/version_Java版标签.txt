@@ -1,0 +1,212 @@
+# 页面: Java版标签
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E6%A0%87%E7%AD%BE
+# 分类: Java版
+# 抓取时间: 2026-07-14 17:15:25
+# 原始 Wikitext 内容:
+
+{{for|基岩版的标签|基岩版标签}}
+{{exclusive|je}}
+'''标签（Tag）'''允许玩家使用JSON文件将游戏资源分组。
+
+== 定义 ==
+=== 目录结构 ===
+标签定义文件的文件路径与其定义的标签类型相关。
+
+标签位于数据包的{{filepath|data/<''命名空间''>/tags/<''数据包路径''>}}目录下。除进度和配方外，所有的[[注册表]]内容都可以定义相应的标签（尽管游戏并非为每种注册表标签提供调用方法）。例如方块标签的文件路径为{{filepath|data/<''命名空间''>/tags/block}}。
+
+[[Java版函数|函数]]不属于注册表内容，但其目录仍位于同一层级。
+
+<div class="treeview">
+*{{File|archive}}/{{File|directory|<数据包名称>}}
+**{{File|file|[[数据包#pack.mcmeta|pack.mcmeta]]}}
+**{{File|directory|data}}
+***{{File|directory|<命名空间>}}
+****{{File|directory|tags}}
+*****{{File|directory|'''<[[注册表#可用注册表|某注册表的数据包路径]]>'''}}
+******{{File|file|'''<注册表标签名>.json'''}}
+*****{{File|directory|function}}
+******{{File|file|'''<函数标签名>.json'''}}
+****[[数据包#目录结构|更多目录...]]
+</div>
+
+=== 命名空间ID ===
+标签的ID也遵守[[命名空间ID]]的格式。为了与非标签元素作区分，在游戏中使用标签时，通常会在其ID前加上“<code>#</code>”前缀。例如，对于方块注册表的元素而言，<code>minecraft:air</code>代表了一个方块，而<code>#minecraft:air</code>代表了一个方块标签。
+
+=== 文件格式 ===
+标签定义文件使用[[JSON]]格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} 根标签。
+** {{nbt|boolean|replace}}：（默认为<code>false</code>）此标签是否完全覆盖较低优先级数据包同命名空间下的同名标签。为<code>false</code>时则为此标签进行补充。
+** {{nbt|list|values|required=1}}：一个游戏资源的列表，代表此标签的内容。
+*** {{nbt|string}}：一项游戏资源，格式应为<code>-{}-<''命名空间''>:<''路径''></code>。
+*** {{nbt|string}}：一项游戏资源的标签，格式应为<code>-{}-#<''命名空间''>:<''路径''></code>。循环引用会导致标签加载失败。
+*** {{nbt|compound}}：带有附加选项的格式。
+**** {{nbt|string|id|required=1}}：一个游戏资源的ID或其标签ID，格式同上。
+**** {{nbt|boolean|required}}：（默认为<code>true</code>）{{nbt|string|id|required=1}}指定的游戏资源是否是必须的。为<code>false</code>时，即使{{nbt|string|id|required=1}}所述内容不存在，游戏也只会静默忽略，而不会使标签加载失败。
+</div>
+
+=== 加载行为 ===
+不同数据包可能会对同一标签重复定义。游戏会自下而上加载标签：
+* 如果标签的某个必要元素不存在，或标签出现循环引用，则此标签加载无效。
+* 如果标签的某个非必要元素（{{nbt|boolean|required}}为<code>false</code>）不存在，则游戏静默忽略，否则正常添加到标签列表中。
+* 如果上层数据包定义的标签的{{nbt|boolean|replace}}为<code>true</code>，则此丢弃下层数据包的数据。即使下层数据包定义的标签无效，游戏也会正常加载上层数据包的标签。
+* 如果上层数据包定义的标签的{{nbt|boolean|replace}}为<code>false</code>，则合并上层和下层的数据。但如果下层数据包定义的标签无效，则此标签加载无效。
+
+== 使用 ==
+在不同的场合调用标签会有不同的效果。其广泛的使用方式是测试某资源对象是否在某标签内，只要资源对象符合标签内定义的任意一个资源对象，测试就会成功。
+
+每个原版标签都可能在游戏源码中作为某些执行和调用行为的限定条件，故标签可直接影响其所包含对象的行为。例如，原版方块标签可用于控制和判断各种方块的行为（比如方块是否能被攀爬），原版物品标签可用于控制和判断物品的行为（比如物品是否能被染料染色），原版实体类型标签可用于控制和判断各种生物的行为（比如是否被视为节肢生物，继而影响节肢杀手魔咒）。原版的进度和配方等文件也使用标签从而实现某些条件判断。
+
+原版游戏中不存在函数，默认也不存在函数标签，不过数据包定义的函数文件可以被游戏正常读取。
+
+=== 原版标签 ===
+有关原版标签的列表及详细说明，请相应点击以下目录图标旁的链接，链接点击后会跳转到相应的详细页面。
+<div class="treeview">
+** {{File|directory|data}}
+*** {{File|directory|minecraft}}
+**** {{File|directory|tags}}
+***** {{File|directory|[[/旗帜图案|banner_pattern]]}}：[[旗帜图案]]标签。
+***** {{File|directory|[[/方块|block]]}}：[[方块]]标签。
+***** {{File|directory|[[/伤害类型|damage_type]]}}：[[伤害类型]]标签。
+***** {{File|directory|[[/对话框|dialog]]}}：[[对话框]]标签。
+***** {{File|directory|[[/魔咒|enchantment]]}}：[[魔咒]]标签。
+***** {{File|directory|[[/实体类型|entity_type]]}}：[[实体]]类型标签。
+***** {{File|directory|[[/流体|fluid]]}}：[[流体]]标签。
+***** {{File|directory|[[/函数|function]]}}：[[Java版函数|函数]]标签。注意：游戏并不会在{{filepath|[[client.jar]]}}等文件中预置函数标签。
+***** {{File|directory|[[/游戏事件|game_event]]}}：[[游戏事件]]标签。
+***** {{File|directory|[[/山羊角乐器|instrument]]}}：[[山羊角乐器]]标签。
+***** {{File|directory|[[/物品|item]]}}：[[物品]]标签。
+***** {{File|directory|[[/画变种|painting_variant]]}}：[[画变种]]标签。
+***** {{File|directory|[[/兴趣点类型|point_of_interest_type]]}}：[[兴趣点类型]]标签。
+***** {{File|directory|[[/药水效果|potion]]}}：[[药水效果]]标签。
+***** {{File|directory|[[/时间线|timeline]]}}：[[时间线]]标签。
+***** {{File|directory|[[/村民交易|villager_trade]]}}：[[村民交易定义格式|村民交易]]标签。
+***** {{File|directory|worldgen}}
+****** {{File|directory|[[/生物群系|biome]]}}：[[生物群系]]标签。
+****** {{File|directory|[[/已配置的地物|configured_feature]]}}{{until|je 26.3}}：[[已配置的地物]]标签。
+****** {{File|directory|[[/已配置的地物|feature]]}}{{upcoming|je 26.3}}：[[已配置的地物]]标签。
+****** {{File|directory|[[/超平坦世界生成预设|flat_level_generator_preset]]}}：[[超平坦世界#原版中的预设|超平坦世界生成预设]]标签。
+****** {{File|directory|[[/结构|structure]]}}：[[结构]]标签。
+****** {{File|directory|[[/世界预设|world_preset]]}}：[[世界预设]]标签。
+***** {{nbt condition|下列标签游戏不再使用：}}
+***** {{File|directory|[[/猫变种|cat_variant]]}}：[[猫变种]]标签。
+</div>
+
+=== 示例 ===
+'''定义新标签'''
+{{file display|data/example/tags/block/my_logs.json|json|
+{
+  "values": [
+    "minecraft:oak_log",
+    "minecraft:birch_log",
+    "minecraft:spruce_log"
+  ]
+}
+}}
+
+在命令中通过<code>#example:my_logs</code>来使用。例如使用{{cmd|fill ~-5 ~-5 ~-5 ~5 ~5 ~5 air replace #example:my_logs}}将玩家周围5格的这些方块替换为空气。
+
+'''在标签中引用另外的标签'''
+{{file display|data/example/tags/block/logs_and_tnt.json|json|
+{
+  "values": [
+    "#minecraft:logs",
+    "minecraft:tnt"
+  ]
+}
+}}
+
+此标签文件同时包括{{TagLink|block|logs}}方块标签和{{cd|tnt}}方块。
+
+'''标签中的可选项'''
+{{file display|data/example/tags/item/my_items.json|json|
+{
+  "values": [
+    { "id": "example:custom_item", "required": false }
+  ]
+}
+}}
+
+这使得{{cd|example:custom_item}}不存在时（比如，在不同的模组环境下时），不会出现加载错误。
+
+'''扩展原版标签'''
+{{file display|data/minecraft/tags/block/sword_efficient.json|json|
+{
+  "values": [
+    "#minecraft:wool"
+  ]
+}
+}}
+
+在{{TagLink|block|sword_efficient}}的基础上添加了{{cd|#minecraft:wool}}标签中的所有内容，使得[[羊毛]]可被[[剑]]更快地破坏。
+
+'''替换原版标签'''
+{{file display|data/minecraft/tags/block/beacon_base_blocks.json|json|
+{
+  "replace": true,
+  "values": [
+    "minecraft:lodestone"
+  ]
+}
+}}
+
+这将完全覆盖低优先级数据包下的同名文件{{TagLink|block|beacon_base_blocks}}，使得[[信标#金字塔|信标基座]]只能用[[磁石]]搭建。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.13|dev=17w49a|加入了方块和物品标签。}}
+|{{HistoryLine|||dev=17w49b|加入了函数标签。}}
+|{{HistoryLine|||dev=17w50a|现在可以包含其他标签，如<code>#foo:bar</code>。
+|现在可以通过<code>"replace": true</code>替换标签而不是添加。}}
+|{{HistoryLine|||dev=18w19a|加入了流体标签。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了实体类型标签。}}
+|{{HistoryLine||1.16.2|dev=20w30a|可以用{{cd|required}}属性使标签内的一项内容不在必需。}}
+|{{HistoryLine||1.17|dev=20w49a|加入了游戏事件标签。}}
+|{{HistoryLine||1.18.2|dev=22w06a|现在可以为注册表中的所有类型定义标签，而不像之前仅有方块、物品、液体、实体类型、游戏事件和函数可以定义标签。}}
+|{{HistoryLine|||dev=22w07a|加入了生物群系标签。}}
+|{{HistoryLine|||dev=pre1|加入了已配置的结构地物标签。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了世界预设标签和超平坦生成器预设标签。
+|将“已配置的结构地物”标签更名为“结构”标签。}}
+|{{HistoryLine|||dev=22w14a|加入了猫变种标签。}}
+|{{HistoryLine|||dev=22w16a|加入了画变种标签。}}
+|{{HistoryLine|||dev=22w17a|加入了旗帜图案标签。
+|新加入了乐器标签。}}
+|{{HistoryLine|||dev=22w19a|加入了兴趣点类型标签。}}
+|{{HistoryLine||1.19.4|dev=23w06a|加入了伤害类型标签。}}
+|{{HistoryLine||1.20.5|dev=pre1|加入了魔咒标签。}}
+|{{HistoryLine||1.21|dev=24w19a|将以下目录重命名：
+*{{filepath|items}} → {{filepath|item}}
+*{{filepath|blocks}} → {{filepath|block}}
+*{{filepath|entity_types}} → {{filepath|entity_type}}
+*{{filepath|fluids}} → {{filepath|fluid}}
+*{{filepath|game_events}} → {{filepath|game_event}}}}
+|{{HistoryLine|||dev=24w21a|将{{filepath|functions}}目录重命名为{{filepath|function}}。}}
+|{{HistoryLine||1.21.5|dev=25w04a|移除了猫变种标签。}}
+|{{HistoryLine||1.21.6|dev=25w20a|加入了对话框标签。}}
+|{{HistoryLine||26.1|dev=snapshot-1|加入了村民交易标签和药水效果标签。}}
+|{{HistoryLine|||dev=pre-1|加入了已配置的地物标签。}}
+|{{HistoryLine||26.3|dev=snapshot-1|将已配置的地物标签由{{filepath|worldgen/configured_feature}}移动到{{filepath|worldgen/feature}}。}}
+}}
+
+== 参见 ==
+* [[基岩版标签]]
+
+== 导航 ==
+{{Navbox Java customizable}}
+{{Navbox Java Edition}}
+
+[[Category:数据包]]
+
+[[de:Aliasdaten]]
+[[en:Tag_(Java_Edition)]]
+[[es:Etiqueta (técnico)]]
+[[fr:Tag]]
+[[ja:タグ]]
+[[ko:태그]]
+[[lzh:爪哇版籤]]
+[[pt:Marcação (Edição Java)]]
+[[ru:Тег]]
+[[th:แท็ก]]
+[[uk:Теґ]]

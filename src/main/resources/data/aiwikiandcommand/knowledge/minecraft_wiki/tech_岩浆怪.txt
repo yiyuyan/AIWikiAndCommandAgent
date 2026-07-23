@@ -1,0 +1,452 @@
+# 页面: 岩浆怪
+# 来源: https://zh.minecraft.wiki/w/%E5%B2%A9%E6%B5%86%E6%80%AA
+# 分类: Java版独有信息, 下界生物, 使用DynamicPageList4的页面, 使用简单计算器的页面, 基岩版独有信息, 实体, 敌对生物
+# 抓取时间: 2026-07-14 17:25:35
+# 原始 Wikitext 内容:
+
+{{About|Minecraft中的敌对生物|其他游戏中的相似生物|Dungeons:岩浆怪|或|Legends:岩浆怪|下界生成的固体方块|岩浆块}}
+{{Infobox entity
+|group1=Java版
+|1-1=Magma Cube.png
+|group2=基岩版
+|2-1=Magma Cube BE.png
+|invimage=Magma Cube Spawn Egg
+|health=
+大型：{{hp|16}}<br>
+中型：{{hp|4}}<br>
+小型：{{hp|1}}
+|behavior=敌对生物
+|armor=
+大型：{{armor|12}}<br>
+中型：{{armor|6}}<br>
+小型：{{armor|3}}
+|damage=
+'''近战攻击（低延迟，多选目标）（大型）：'''<br>{{AutoDmg|6}}<br>
+'''近战攻击（低延迟，多选目标）（中型）：'''<br>{{AutoDmg|4}}<br>
+'''近战攻击（低延迟，多选目标）（小型）：'''<br>{{AutoDmg|3}}
+|size=
+'''大型'''：<br>高度：2.08格<br>宽度：2.08格<br>
+'''中型'''：<br>高度：1.04格<br>宽度：1.04格<br>
+'''小型'''：<br>高度：0.52格<br>宽度：0.52格
+|spawn=
+{{BiomeLink|Nether Wastes}}<br>
+{{BiomeLink|Basalt Deltas}}<br>
+{{EnvLink|Fortress}}<br>
+{{EnvLink|Bastion remnant}}内[[刷怪笼]]
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{relevant tutorial|岩浆怪陷阱}}
+{{quote|被岩浆怪盯上是致命的危险。恐怖的红黑色朝你无情地弹跳过来，那弹簧般的身体藏不住熔融的熔岩核心——那热量将灼痛你的身体。友好的拥抱还是免了吧。|[[Tom Stone]]<ref name="meet-magma-cube">{{article|meet-magma-cube|Meet the Magma Cube|Feb 21, 2017}}</ref>||Tom Stone Mojavatar.png}}
+
+'''岩浆怪（Magma Cube）'''是一种在[[下界]]生成的行为类似于[[史莱姆]]的敌对生物。
+
+== 生成 ==
+{{see also|生成#周期生成}}
+岩浆怪可以自然生成在[[下界]]的[[玄武岩三角洲]]和[[下界荒地]]生物群系，不受亮度等级的限制。{{in|be}}非[[下界要塞]]中的岩浆怪不能生成在[[下界疣块]]或[[菌光体]]上。
+
+生成一个岩浆怪需要2.08×2.08×2.08的空间，它们生成的区域必须没有任何液体和方块碰撞。岩浆怪生成时统一以大型岩浆怪的尺寸判断空间是否充足，因此任何尺寸的岩浆怪都无法在小于2.08×2.08×2.08的空间生成。
+
+岩浆怪在生成时的尺寸受[[副区域难度]]影响，三种尺寸的概率分别为小型16.5%-33%，中型33%，大型33%-49.5%。
+
+=== 下界要塞 ===
+岩浆怪较为常见地生成于[[下界要塞]]。
+
+=== 刷怪笼 ===
+岩浆怪的[[刷怪笼]]可生成于[[堡垒遗迹]]的藏宝室内。
+
+== 掉落物 ==
+{{DropTable|name=Magma Cube
+|{{DropLine|name=Magma Cream|edition=java|notes=medium_cube,not_frog|quantity=-2-1|lootingquantity=0-1}}
+|{{DropLine|name=Magma Cream|edition=bedrock|notes=medium_cube,not_frog|quantity=0-2|lootingquantity=0-1}}
+|{{DropLine|name=Verdant Froglight|notes=cold_frog}}
+|{{DropLine|name=Ochre Froglight|notes=temperate_frog}}
+|{{DropLine|name=Pearlescent Froglight|notes=warm_frog}}
+|notes=
+medium_cube = 僅中型或大型岩漿立方怪。
+not_frog = 僅當'''不'''由[[青蛙]]擊殺時。
+cold_frog = 僅當由寒帶[[青蛙]]擊殺時。
+temperate_frog = 僅當由溫帶[[青蛙]]擊殺時。
+warm_frog = 僅當由熱帶[[青蛙]]擊殺時。
+}}
+* 大型岩浆怪：
+** {{xp|4}}（被[[玩家]]或驯服的[[狼]]杀死时'''额外'''掉落）
+* 中型岩浆怪：
+** {{xp|2}}（被玩家或驯服的狼杀死时'''额外'''掉落）
+* 小型岩浆怪：
+** {{xp|1}}（被玩家或驯服的狼杀死时掉落）
+
+== 行为 ==
+{{seealso|史莱姆#行为}}
+[[File:Magma Cube jumping.gif|thumb|right|upright|跳跃的岩浆怪]]
+岩浆怪通过跳跃移动，每过一段时间跳跃一下。不像其他生物，岩浆怪在附近没有玩家时不会停止移动。
+
+岩浆怪的生命值等于它们尺寸<ref group="注">为了方便表述，定义'''尺寸'''的值为<code>Size</code>+1。</ref>的平方，它的每个方向的大小是它尺寸的0.52倍，近战攻击伤害等于它的尺寸+3，护甲值则是它们尺寸的3倍。
+
+岩浆怪跳跃的距离取决于它们的尺寸；一只岩浆怪跳跃的高度等价于它们以方块为单位的尺寸。这意味着4尺寸的岩浆怪将会跳到4方块的高度并且比2尺寸的岩浆怪移动得还要快，2尺寸的1次只能跳到2个方块，1尺寸（极小的）移动得很慢，1次只能跳到1个方块。 4尺寸的岩浆怪可以跳约5.5格远距离，2尺寸的岩浆怪可以跳约3.5格远的距离，1尺寸的岩浆怪可以跳约2格远的距离。它们会在跳跃以及着陆时发出明显的声音，但空闲时不会发出声音。着陆时，会出现一定量的火焰粒子，其尺寸为外表尺寸的{{fraction|1|8}}。
+
+岩浆怪会在16格半径（球形）内搜索玩家或[[铁傀儡]]。如果找不到目标，它们会等待40-120刻（2-6秒）。它们会随机向左或向右转，改变方向的角度最大为57.26°（1弧度），跳跃，然后重复这个过程。如果找到目标，那么等待的时间将会变为未找到目标的{{fraction|1|3}}（13-40刻），然后就会在跳跃前将方向对准最近的目标。
+
+不像其他生物，岩浆怪完全没有路径搜索能力，只会尝试向目标方向跳跃着前进。这意味着它们在追逐目标时，会掉下悬崖且不能绕过墙壁。
+
+{{in|je}}与其他生物不同，岩浆怪的近战攻击没有频率限制，会持续执行攻击，且会同时对攻击距离内的所有目标进行攻击。[[受击后伤害免疫]]使岩浆怪对目标生物每秒只能造成两次伤害，但使用[[盾牌]]阻挡伤害时将不会触发受击后伤害免疫并极快速地耗尽盾牌的耐久度。
+
+{{in|be}}岩浆怪也会持续执行攻击，同时对攻击距离内的所有目标进行攻击，但每次攻击有0.5秒的冷却时间。
+
+尺寸大于1的岩浆怪死亡时，岩浆怪会死亡并分裂出2-4只新的岩浆怪，它们的尺寸会除以2，并向下取整。由岩浆怪死亡后分裂而产生的新岩浆怪不会继承原有的状态效果。当一个已被命名的大岩浆怪分裂成小岩浆怪时，小岩浆怪的名字将会与大岩浆怪的名字相同。
+
+岩浆怪不会[[着火]]，免疫[[伤害#火焰伤害|火焰伤害]]和[[伤害#摔落伤害|摔落伤害]]。
+
+岩浆怪不会被[[熔岩]]伤害或减速，它能在熔岩里逆流而上。{{In|JE}}岩浆怪会浮在熔岩上；{{In|BE}}岩浆怪会沉入熔岩。
+
+在[[细雪]]中进入冰冻状态的岩浆怪每2秒受到{{hp|5}}伤害，这是多数生物所受伤害的5倍。
+
+岩浆怪会主动远离[[水]]，但它们可以游泳。
+
+{{in|je}}岩浆怪不会阻止玩家睡觉，但玩家仍会因受到岩浆怪攻击而惊醒。<ref>{{bug|MC-92719}}</ref>
+
+岩浆怪拥有发亮的纹理，在暗处也清楚可见，但不会影响周围方块的实际[[亮度]]。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Slime attack1.ogg
+|sound2=Slime attack2.ogg
+|subtitle={{tp|subtitles.entity.slime.attack}}<ref group="音效">岩浆怪重复使用史莱姆的音效事件而不是独立的音效事件。参见{{bug|MC-98316}}。</ref>
+|source=敌对生物
+|description=攻击
+|id=entity.slime.attack
+|translationkey=subtitles.entity.slime.attack
+}}
+{{Sound table
+|sound = Slime big1.ogg
+|sound2 = Slime big2.ogg
+|sound3 = Slime big3.ogg
+|sound4 = Slime big4.ogg
+|subtitle = {{tp|subtitles.entity.magma_cube.death}}
+|source = 敌对生物
+|description = 大型或中型岩浆怪死亡
+|id = entity.magma_cube.death
+|translationkey = subtitles.entity.magma_cube.death
+}}
+{{Sound table
+|sound = Slime small1.ogg
+|sound2 = Slime small2.ogg
+|sound3 = Slime small3.ogg
+|sound4 = Slime small4.ogg
+|sound5 = Slime small5.ogg
+|subtitle = {{tp|subtitles.entity.magma_cube.death}}
+|source = 敌对生物
+|description = 小型岩浆怪死亡
+|id = entity.magma_cube.death_small
+|translationkey = subtitles.entity.magma_cube.death
+}}
+{{Sound table
+|sound = Slime big1.ogg
+|sound2 = Slime big2.ogg
+|sound3 = Slime big3.ogg
+|sound4 = Slime big4.ogg
+|subtitle = {{tp|subtitles.entity.magma_cube.hurt}}
+|source = 敌对生物
+|description = 大型或中型岩浆怪受伤
+|id = entity.magma_cube.hurt
+|translationkey = subtitles.entity.magma_cube.hurt
+}}
+{{Sound table
+|sound = Slime small1.ogg
+|sound2 = Slime small2.ogg
+|sound3 = Slime small3.ogg
+|sound4 = Slime small4.ogg
+|sound5 = Slime small5.ogg
+|subtitle = {{tp|subtitles.entity.magma_cube.hurt}}
+|source = 敌对生物
+|description = 小型岩浆怪受伤
+|id = entity.magma_cube.hurt_small
+|translationkey = subtitles.entity.magma_cube.hurt
+}}
+{{Sound table
+|sound = Magmacube jump1.ogg
+|sound2 = Magmacube jump2.ogg
+|sound3 = Magmacube jump3.ogg
+|sound4 = Magmacube jump4.ogg
+|subtitle = {{tp|subtitles.entity.magma_cube.squish}}
+|source = 敌对生物
+|description = 岩浆怪跳跃
+|id = entity.magma_cube.jump
+|translationkey = subtitles.entity.magma_cube.squish
+}}
+{{Sound table
+|sound = Magmacube big1.ogg
+|sound2 = Magmacube big2.ogg
+|sound3 = Magmacube big3.ogg
+|sound4 = Magmacube big4.ogg
+|subtitle = {{tp|subtitles.entity.magma_cube.squish}}
+|source = 敌对生物
+|description = 大型或中型岩浆怪落地
+|id = entity.magma_cube.squish
+|translationkey = subtitles.entity.magma_cube.squish
+}}
+{{Sound table
+|sound = Magmacube small1.ogg
+|sound2 = Magmacube small2.ogg
+|sound3 = Magmacube small3.ogg
+|sound4 = Magmacube small4.ogg
+|sound5 = Magmacube small5.ogg
+|subtitle = {{tp|subtitles.entity.magma_cube.squish}}
+|source = 敌对生物
+|description = 小型岩浆怪落地
+|id = entity.magma_cube.squish_small
+|translationkey = subtitles.entity.magma_cube.squish
+|foot = 1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=-
+|source=敌对生物
+|description=空声音事件
+|id=-
+|typeid=ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.magmacube.small1.wav
+|sound2=mob.magmacube.small2.wav
+|sound3=mob.magmacube.small3.wav
+|sound4=mob.magmacube.small4.wav
+|sound5=mob.magmacube.small5.wav
+|source=敌对生物
+|description=岩浆怪受伤
+|id=mob.magmacube.small
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.magmacube.small1.wav
+|sound2=mob.magmacube.small2.wav
+|sound3=mob.magmacube.small3.wav
+|sound4=mob.magmacube.small4.wav
+|sound5=mob.magmacube.small5.wav
+|source=敌对生物
+|description=岩浆怪死亡
+|id=mob.magmacube.small
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.magmacube.big1.wav
+|sound2=mob.magmacube.big2.wav
+|sound3=mob.magmacube.big3.wav
+|sound4=mob.magmacube.big4.wav
+|source=敌对生物
+|description=大型或中型岩浆怪跳跃
+|id=mob.magmacube.big
+|typeid=squish.big
+|soundvolume
+|soundpitch=0.512-1.152
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.magmacube.small1.wav
+|sound2=mob.magmacube.small2.wav
+|sound3=mob.magmacube.small3.wav
+|sound4=mob.magmacube.small4.wav
+|sound5=mob.magmacube.small5.wav
+|source=敌对生物
+|description=小型岩浆怪跳跃
+|id=mob.magmacube.small
+|typeid=squish.small
+|soundvolume
+|soundpitch=0.512-1.152
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.magmacube.big1.wav
+|sound2=mob.magmacube.big2.wav
+|sound3=mob.magmacube.big3.wav
+|sound4=mob.magmacube.big4.wav
+|source=敌对生物
+|description=所有种类的岩浆怪落地
+|id=mob.magmacube.big
+|typeid=slime_landing
+|soundvolume
+|soundpitch=0.512-1.152
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=-
+|source=敌对生物
+|description=攻击
+|id=mob.attack
+|typeid=attack
+|soundvolume
+|soundpitch=0.64-1.44
+|sounddistance
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Magma Cube
+|spritetype=entity
+|nameid=magma_cube
+|showentitytags=1|entitytags={{GameTag|entity|magma_cube}}
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Magma Cube
+|spritetype=entity
+|nameid=magma_cube
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+岩浆怪有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|Monster-Hunter;it-spreads}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.kill_a_mob;adventure.kill_all_mobs;husbandry.froglights;adventure.kill_mob_near_sculk_catalyst}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|[[File:Magma Cube JE1 BE1.png|52px]] [[File:Magma Cube JE1 BE1.png|42px]] [[File:Magma Cube JE1 BE1.png|32px]] 加入了岩浆怪。}}
+|{{HistoryLine|||dev=Beta 1.9-pre2|岩浆怪变得更罕见了。}}
+|{{HistoryLine|||dev=rc1|为岩浆怪加入了音效。}}
+|{{HistoryLine||1.1|dev=正式版|岩浆怪现在会掉落[[岩浆膏]]。}}
+|{{HistoryLine||1.3.1|dev=12w18a|在多人模式下，岩浆怪的动画并未被正确地显现。}}
+|{{HistoryLine||1.3.1|dev=12w23a|现在多人模式下，岩浆怪的动画会被正确地显现。}}
+|{{HistoryLine||1.8|dev=14w06b|由于更新了AI，现在岩浆怪会游泳了。
+|岩浆怪现在会经常随机变换方向了，以减少被卡在角落或墙里的概率。
+|现在玩家不在岩浆怪32个方块内时，岩浆怪会随机消失了。
+|岩浆怪的跳跃机能更改了。现在它们跳远的距离相当于它们的长度；它们会跳近似于它们长度1.5倍的长度。例如，1尺寸极小的岩浆怪会跳得非常慢，而4尺寸大的则会非常快。岩浆怪会在玩家攻击它时转身面对玩家。}}
+|{{HistoryLine||1.10|dev=16w20a|生成率大约提升到原来的两倍（生成率从{{frac|1|151}})提升到{{frac|2|153}}）。}}
+|{{HistoryLine||1.11|dev=16w32a|岩浆怪的实体ID由<code>LavaSlime</code>更改为<code>magma_cube</code>。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Magma Cube JE2.png|52px]] [[File:Magma Cube JE2.png|42px]] [[File:Magma Cube JE2.png|32px]] 更改了岩浆怪的纹理。}}
+|{{HistoryLine|||dev=18w44a|[[File:Magmacube texture change 18w43a to 18w44a.gif|48px]] 稍微修改了岩浆怪的纹理，其透明像素的颜色通道现在填充为黑色。}}
+|{{HistoryLine||1.16|dev=20w06a|小型岩浆怪重新拥有移动音效。<ref>{{bug|MC-97958|||Fixed}}</ref>}}
+|{{HistoryLine||1.16|dev=20w15a|现在岩浆怪会自然生成于[[玄武岩三角洲]]生物群系。}}
+|{{HistoryLine|||dev=20w16a|现在[[堡垒遗迹]]的藏宝室内会自然生成岩浆怪[[刷怪笼]]。}}
+|{{HistoryLine||1.17|dev=21w13a|现在岩浆怪在[[细雪]]中受到的冰冻伤害是其他生物（除[[炽足兽]]、[[烈焰人]]外）的5倍。}}
+|{{HistoryLine||1.19|dev=22w11a|现在岩浆怪会被[[青蛙]]捕食，被吞食后掉落[[蛙明灯]]。}}
+|{{HistoryLine||1.20|dev=23w18a|现在岩浆怪会受到[[跳跃提升]]效果影响。<ref>{{bug|MC-48923||史莱姆和岩浆怪不受跳跃提升效果影响|Fixed}}</ref>}}
+|{{HistoryLine||1.21.4|dev=24w44a|更改了岩浆怪内部纹理的UV映射。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Magma Cube JE1 BE1.png|52px]] 加入了岩浆怪。
+|除非修改游戏，否则它们是不可生成的。}}
+|{{HistoryLine|||dev=build 8|现在可以使用刷怪蛋生成岩浆怪。}}
+|{{HistoryLine||0.12.1|dev=build 1|现在岩浆怪可以在[[下界]]正常生成。
+|岩浆怪可以正常分裂了。
+|[[File:Magma Cube JE1 BE1.png|42px]] [[File:Magma Cube JE1 BE1.png|32px]] 现在岩浆怪死亡时会分裂。}}
+|{{HistoryLine||0.14.0|dev=build 1|岩浆怪核心的发亮效果从[[File:Magma Cube (inner) BE1.png|32px]]变成了[[File:Magma Cube (inner) BE2.png|32px]]。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|岩浆怪的实体ID由<code>lavaslime</code>变为<code>magma_cube</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Magma Cube BE2.png|52px]] [[File:Magma Cube BE2.png|42px]] [[File:Magma Cube BE2.png|32px]] 更改了岩浆怪的纹理。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|岩浆怪会自然生成于玄武岩三角洲生物群系。}}
+|{{HistoryLine|||dev=1.16.0.59|堡垒遗迹的藏宝室内会自然生成岩浆怪刷怪笼。}}
+|{{HistoryLine||1.17.0|dev=1.16.230.54|现在岩浆怪会受到{{hp|5}}点的冰冻伤害。}}
+|{{HistoryLine||1.17.30|dev=1.17.30.20|现在岩浆怪使用与其他生物相同的方块碰撞检测功能。}}
+|{{HistoryLine||1.18.0|dev=1.18.0.24|现在岩浆怪会主动攻击铁傀儡。}}
+|{{HistoryLine||1.18.10|dev=1.18.10.26|现在岩浆怪会被[[青蛙]]捕食，被吞食后掉落[[蛙明灯]]。}}
+|{{HistoryLine||1.18.30|dev=1.18.20.27|小型岩浆怪的攻击伤害由{{hp|2}}更改为{{hp|3}}，以匹配{{el|je}}。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.22|现在岩浆怪能够同时攻击多个目标。
+|现在岩浆怪能够对铁傀儡和雪傀儡造成伤害。
+|现在岩浆怪每攻击一次会有0.5秒的冷却时间。}}
+|{{HistoryLine||1.19.60|dev=1.19.60.24|将岩浆怪的生成所需空间更改为2.08×2.08×2.08。}}
+|{{HistoryLine||1.20.10|dev=1.20.10.20|现在岩浆怪会受到[[跳跃提升]]效果影响。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.28|更改了岩浆怪内部纹理的UV映射。}}
+|{{HistoryLine||1.21.80|dev=1.21.80.20|现在岩浆怪会在分裂后保留其名称。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.23|现在分裂出的岩浆怪不再会被高速弹出。
+|现在岩浆怪死亡时不再会对目标造成伤害。<ref>{{bug|MCPE-166394|||Fixed}}</ref>}}
+|{{HistoryLine||26.30|dev=26.30.20|加入了岩浆怪落地时的定制声音事件。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU7|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Magma Cube JE1 BE1.png|52px]] [[File:Magma Cube JE1 BE1.png|42px]] [[File:Magma Cube JE1 BE1.png|32px]] 加入了岩浆怪。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Magma Cube JE2.png|52px]] [[File:Magma Cube JE2.png|42px]] [[File:Magma Cube JE2.png|32px]] 更改了岩浆怪的纹理。}}
+|{{HistoryLine|new 3ds}}
+|{{HistoryLine||0.1.0|[[File:Magma Cube JE1 BE1.png|52px]] [[File:Magma Cube JE1 BE1.png|42px]] [[File:Magma Cube JE1 BE1.png|32px]] 加入了岩浆怪。}}
+}}
+
+== 你知道吗 ==
+* 据[[Jeb]]所述，在设计岩浆怪期间，起初只是将史莱姆的纹理替换为下界风格，但他想让岩浆怪更加独特，于是加入了分层效果。<ref name="meet-magma-cube"/>
+
+== 画廊 ==
+<gallery>
+File:Magma Cube Swarm.png|大型岩浆怪
+File:Magma Cube Size.png|大型岩浆怪与玩家
+File:Magmacube.png|岩浆怪着陆时生成了小火焰粒子
+File:MagmaCubeFamily.png|一些小型岩浆怪
+File:Stretched Magma Cube.png|岩浆怪跳跃时身体拉伸，露出了里面的岩浆核心
+File:Magmacubelava.png|跳出熔岩的岩浆怪
+File:Magma Cube Mobestiary.jpg|岩浆怪的生物图鉴
+File:Magma Cube in Basalt deltas.png|自然生成于玄武岩三角洲的岩浆怪
+</gallery>
+
+=== 渲染图 ===
+<gallery>
+File:Magma Cube without Outer.png|{{in|je}}去除外层皮肤后的岩浆怪
+File:Magma Cube without Outer BE.png|{{in|be}}去除外层皮肤后的岩浆怪
+</gallery>
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|mobs}}
+
+[[Category:敌对生物]]
+[[Category:下界生物]]
+
+[[cs:Magmaslizoun]]
+[[de:Magmawürfel]]
+[[en:Magma Cube]]
+[[es:Cubo de magma]]
+[[fr:Cube de magma]]
+[[hu:Magmakocka]]
+[[it:Cubo di magma]]
+[[ja:マグマキューブ]]
+[[ko:마그마 큐브]]
+[[nl:Magmakubus]]
+[[pl:Kostka magmy]]
+[[pt:Cubo de Magma]]
+[[ru:Магмовый куб]]
+[[th:สไลม์ไฟ]]

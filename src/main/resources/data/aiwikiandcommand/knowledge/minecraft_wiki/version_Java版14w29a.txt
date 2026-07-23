@@ -1,0 +1,121 @@
+# 页面: Java版14w29a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w29a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:14
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|访问|存取}}
+{{Infobox version
+|title=14w29a
+|image=Java Edition 14w29a Simplified.png\Java Edition 14w29a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年7月16日
+|jsonhash=5222c2bfda606abf4c181bd4d2da5c2f583da9cb
+|clienthash=e8775d2214111c9600daffb5fcc15f8e6381f9a8
+|serverhash=c16a61be653b5921391c55b337640ddfd7a5b472
+|exehash=65b3fdb3dbc4a8f8bb5f4418f7a37fe28ca74afe
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w28b
+|next=14w29b
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w29a'''是[[Java版1.8]]的第36个快照，发布于2014年7月16日<ref>{{cite|url=http://mojang.com/2014/07/minecraft-snapshot-14w29a/|archive-url=1|archive=1|title=Minecraft snapshot 14w29b|author=Searge|website=Mojang.com|date=Jul 16, 2014}}</ref>，添加了1条新的游戏规则和游戏规则变量的机制，此快照大幅优化了加载性能，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''[[游戏规则]]'''
+* <code>reducedDebugInfo</code>
+** 可以启用/禁用按{{key|F3}}时是否显示调试屏幕简略信息的游戏规则。
+** 与“简化调试信息”在多人游戏设置中切换不同。
+** 在客户端中重写设置“简化调试信息”。
+* 创建游戏规则变量的能力。<ref>http://www.reddit.com/r/Minecraft/comments/2aw5nh/new_queryresults_and_gamerule_variables/</ref>
+** 这些假的游戏规则不会实质上影响世界，但是能被{{cmd|stats}}使用<code>QueryResults</code>检测来基于游戏规则的值更新记分板目标的参数。
+** 使用{{cmd|gamerule <新游戏规则> <值>}}创建。
+** 使用{{cmd|gamerule <新游戏规则>}}访问。
+
+=== 常规 ===
+'''[[设置]]'''
+* 多人游戏设置
+** “简化调试信息”设置在启用时简化[[调试屏幕]]（{{keys|F3}}）的调试信息。
+* 视频设置
+** “使用顶点缓冲器”设置为启用时启用顶点缓冲。
+** 当设置为启用时，可提供大约10%的性能提升。
+
+== 更改 ==
+=== 方块 ===
+'''[[告示牌]]、[[箱子]]、[[信标]]、[[床]]、[[头颅]]和[[末影箱]]'''
+* 现在显示破坏动画。
+* 床之前确实显示了破坏动画，但顶部和底部没有显示。
+
+'''[[楼梯]]'''
+* 将物品栏里的纹理翻转到原始方向。
+
+=== 世界生成 ===
+'''[[矿石生成]]'''
+* 矿石生成数量增加了两倍。<ref>{{tweet|SeargeDP|488715162086813696}}</ref>
+
+=== 命令格式 ===
+'''{{cmd|time}}'''
+* {{cmd|time query <值>}}来检查时间点。
+** 时间点可以是<code>daytime</code>或<code>gametime</code>检查自开始日出的游戏刻数或自世界创建以来的游戏刻数。
+
+'''{{cmd|worldborder}}'''
+* {{cmd|worldborder get}}可以显示边界当前大小。
+
+'''{{cmd|particle}}'''
+* 加入了<code>force</code>参数在<code>count</code>之后，可以设置为<code>normal</code>或<code>force</code>。
+* 强制粒子显示，即使玩家的“{{tr|粒子效果|粒子密度}}”切换被设定为最小或少量。
+
+'''[[记分板]]'''
+* 记分板侧边栏现在也按名称的字母顺序排序。
+
+== 修复 ==
+{{fixes|fixedin=14w29a|prefix=Minecraft|showdesc=1
+|;old
+|71|在X和Z坐标都为负的坐标处，生物不会生成在水流旁边。
+|393|饥饿导致玩家不能正常在床上睡觉。
+|404|隐身状态下，玩家可以看到自己手持地图的手。
+|455|玩家站在坐标X{{=}}0，Z{{=}}0处时，不能放置或破坏西北方向的方块。
+|486|僵尸和骷髅在台阶上不会燃烧。
+|506|可以用平滑砂岩合成平滑砂岩。
+|665|矿车和被点燃的TNT不能被水流推动。
+|676|告示牌和箱子不显示破坏动画。
+|5525|有些声音的播放音量很小。
+|61586|多人游戏中，被卸载的区块附近的方块的不透明度改变时，客户端大概会有1秒左右的卡顿。
+|;dev
+|45046|高度高于254.3时，玩家皮肤不显示。
+|45512|实体会在虚空中消失。
+|53033|不能禁用处于旁观模式下玩家的<code>nameTagVisilibity</code>属性。
+|57516|<code>CustomNameVisible</code>不工作。
+|59052|不能像记分板队伍中添加假玩家或已被命名的实体。
+|59634|当<code>sendCommandFeedback</code>设置为<code>false</code>时，玩家也可以得到“你的游戏模式已更新”的提示。
+|59946|东西朝向的铁活板门被打开时，会出现在被放置一侧的对面。
+|60279|被充能的探测铁轨显示是未充能的状态。
+|61033|{{cmd|particle|link=none}}命令不工作。
+|;prev
+|61451|14w28b中出现帧率下降。
+|61453|使用{{cmd|title|link=none}}命令时会向服务器日志输出错误信息。
+|61505|刷怪笼计算最小/最大生成延迟的速率为10而不是1。
+|61519|在沙漠神殿中的箱子，应该为东西朝向的，实际上朝北。
+|61577|非管理员玩家右键点击命令告示牌时，<code>CommandStats</code>的值没有变化。
+|61666|不能使用{{cmd|setblock|link=none}}或{{cmd|fill|link=none}}命令放置末影箱。
+|61711|如果显示项的数量超过边栏的上限时，显示的不是最高数值，而是最低数值。
+|61795|使用黏性活塞反复推拉任何种类的铁轨（或者将它推入实体中）时会导致附近玩家的客户端崩溃。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:14w29a]]
+[[en:Java Edition 14w29a]]
+[[es:Java Edition 14w29a]]
+[[fr:Édition Java 14w29a]]
+[[ja:Java Edition 14w29a]]
+[[pt:Edição Java 14w29a]]
+[[ru:14w29a (Java Edition)]]

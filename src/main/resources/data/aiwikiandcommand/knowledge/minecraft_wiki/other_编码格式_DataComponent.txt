@@ -1,0 +1,934 @@
+# 页面: 编码格式/DataComponent
+# 来源: https://zh.minecraft.wiki/w/%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F/DataComponent
+# 分类: 
+# 抓取时间: 2026-07-14 17:34:35
+# 原始 Wikitext 内容:
+
+{{exclusive|je}}
+
+此条目记录了所有的数据组件。
+
+{{TOC|RIGHT}}
+
+本条目的所有结构名称均来自[[混淆映射表|游戏源代码]]的<samp>net.minecraft.core.component.DataComponents</samp>，各结构以结构名 - 值的方式书写。
+
+各组件结构及其引用方式均遵守下列格式：
+
+{| class="wikitable"
+! 结构名称 !! 引用名称
+|-
+| <组件ID> || codec_<组件ID>_component（<code>/</code>均视为<code>_</code>）
+|}
+
+本页面部分内容合并自其他页面，见[[#注释|注释]]。
+
+== 当前版本 ==
+=== additional_trade_cost ===
+<div class="treeview"><section begin="codec_additional_trade_cost_component"/>
+** {{nbt|int|minecraft:additional_trade_cost}}：村民收购物品的增加量。
+<section end="codec_additional_trade_cost_component"/></div>
+
+=== attack_range ===
+<div class="treeview"><section begin="codec_attack_range_component"/>
+** {{nbt|compound|minecraft:attack_range}}：生物持有此物品时的攻击距离，会覆写玩家的[[属性/实体交互距离|实体交互距离]]属性。
+*** {{nbt|float|min_reach}}：（{{interval|left=0|right=64}}，默认为0）攻击者到目标的最小有效距离。以攻击者眼睛位置、沿视角方向到被攻击者攻击判定箱的最小距离计算。
+*** {{nbt|float|max_reach}}：（{{interval|left=0|right=64}}，默认为3）攻击者到目标的最大有效距离。以攻击者眼睛位置、沿视角方向到被攻击者攻击判定箱的最小距离计算。
+*** {{nbt|float|min_creative_reach}}：（{{interval|left=0|right=64}}，默认为0）创造模式玩家到目标的最小有效距离，计算方式同上。
+*** {{nbt|float|max_creative_reach}}：（{{interval|left=0|right=64}}，默认为5）创造模式玩家到目标的最大有效距离，计算方式同上。
+*** {{nbt|float|hitbox_margin}}：（{{interval|left=0|right=1}}，默认为0.3）决定攻击判定箱的大小。游戏将实体的碰撞箱向各个方向扩展此距离得到攻击判定箱。
+*** {{nbt|float|mob_factor}}：（{{interval|left=0|right=2}}，默认为1.0）对于非玩家生物，其使用的最小有效距离和最大有效距离的缩放乘数。
+<section end="codec_attack_range_component"/></div>
+
+=== attribute_modifiers ===
+<div class="treeview"><section begin="codec_attribute_modifiers_component"/>
+** {{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|compound}}：一个修饰符。
+**** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+**** {{nbt|compound|display}}：属性修饰符在提示框的显示方式。
+***** {{nbt|string|type|existonsave=1|required=1}}：显示类型，枚举值见下。
+***** {{nbt condition|当{{nbt|string|type}}为{{cd|default}}时，显示此项计算后的属性修饰符值。此项也为默认值。}}
+***** {{nbt condition|当{{nbt|string|type}}为{{cd|hidden}}时，不显示此项属性修饰符值。}}
+***** {{nbt condition|当{{nbt|string|type}}为{{cd|override}}时，替换所显示的属性修饰符文本，附加字段如下：}}
+***** {{nbt|string}}{{nbt|compound}}{{nbt|list|value|existonsave=1|required=1}}：（[[文本组件]]）替换后的文本。
+**** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）当前[[属性修饰符]]的ID。
+**** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+**** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+**** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+<section end="codec_attribute_modifiers_component"/></div>
+
+=== axolotl/variant ===
+<div class="treeview"><section begin="codec_axolotl_variant_component"/>
+** {{nbt|string|minecraft:axolotl/variant}}：[[美西螈]]的变种。取值只能为<code>lucy</code>（粉红色）、<code>wild</code>（棕色）、<code>gold</code>（金色）、<code>cyan</code>（青色）或<code>blue</code>（蓝色）。
+<section end="codec_axolotl_variant_component"/></div>
+
+=== banner_patterns ===
+<div class="treeview"><section begin="codec_banner_patterns_component"/>
+** {{nbt|list|minecraft:banner_patterns}}：旗帜图案的{{tr|列表|串列}}。
+*** {{nbt|compound}}：一层图案。
+**** {{nbt|string|color|existonsave=1|required=1}}：这一层图案的颜色。取值为[[染料颜色]]，即{{cd|d=、|fd=或|white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black}}。
+**** {{nbt|string}}{{nbt|compound|pattern|existonsave=1|required=1}}：这一层图案的样式。可以为旗帜图案的ID，也可以是旗帜图案的内联格式，见{{slink|旗帜|方块实体}}。
+***** {{nbt inherit/banner pattern}}
+<section end="codec_banner_patterns_component"/></div>
+
+=== base_color ===
+<div class="treeview"><section begin="codec_base_color_component"/>
+** {{nbt|string|minecraft:base_color}}：[[盾牌]]的基础颜色，同时影响盾牌的名称。取值为[[染料颜色]]，即{{cd|d=、|fd=或|white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black}}。
+<section end="codec_base_color_component"/></div>
+
+=== bees ===
+<div class="treeview"><section begin="codec_bees_component"/>
+** {{nbt|list|minecraft:bees}}：[[蜂巢（方块）]]和[[蜂箱]]的蜜蜂数据。
+*** {{nbt|compound}}：一只蜜蜂的数据。
+**** {{nbt|string}}{{nbt|compound|entity_data}}：蜜蜂的部分实体数据。如果采用字符串格式进行定义，则游戏会将字符串的内容视为[[SNBT]]加载，游戏只保存为复合标签格式。
+***** 见[[实体数据格式]]。下列标签不会被保存，也不会被加载：{{nbt|short|Air}}、{{nbt|compound|drop_chances}}、{{nbt|compound|equipment}}、{{nbt|compound|Brain}}、{{nbt|bool|CanPickUpLoot}}、{{nbt|short|DeathTime}}、{{nbt|float|fall_distance}}、{{nbt|bool|FallFlying}}、{{nbt|short|Fire}}、{{nbt|int|HurtByTimestamp}}、{{nbt|short|HurtTime}}、{{nbt|bool|LeftHanded}}、{{nbt|list|Motion}}、{{nbt|bool|NoGravity}}、{{nbt|bool|OnGround}}、{{nbt|int|PortalCooldown}}、{{nbt|list|Pos}}、{{nbt|list|Rotation}}、{{nbt|int array|sleeping_pos}}、{{nbt|int|CannotEnterHiveTicks}}、{{nbt|int|TicksSincePollination}}、{{nbt|int|CropsGrownSincePollination}}、{{nbt|int-array|hive_pos}}、{{nbt|list|Passengers}}、{{nbt|int-array}}{{nbt|compound|leash}}、{{nbt|int-array|UUID}}。
+**** {{nbt|int|min_ticks_in_hive|existonsave=1|required=1}}：蜜蜂会在巢内滞留的最短时间。
+**** {{nbt|int|ticks_in_hive|existonsave=1|required=1}}：蜜蜂在巢内已滞留的时间。
+<section end="codec_bees_component"/></div>
+
+=== block_entity_data ===
+<div class="treeview"><section begin="codec_block_entity_data_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:block_entity_data}}：物品放置方块时将套用到方块实体的数据。如果采用字符串格式进行定义，则游戏会将字符串的内容视为[[SNBT]]加载，游戏只保存为复合标签格式。
+*** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）方块实体。
+*** 若干与该方块对应的方块实体数据标签，见[[方块实体数据格式]]。
+<section end="codec_block_entity_data_component"/></div>
+
+=== block_state ===
+<div class="treeview"><section begin="codec_block_state_component"/>
+** {{nbt|compound|minecraft:block_state}}：物品放置方块时将要设置的[[方块状态]]。
+*** {{nbt|string|<''方块属性''>}}：此项方块属性的值。
+<section end="codec_block_state_component"/></div>
+
+=== block_transformer ===
+{{added in development|jev=26.3|section=1}}
+<div class="treeview"><section begin="codec_block_transformer_component"/>
+** {{nbt|list|minecraft:block_transformer}}：当使用物品与方块交互时的方块变换效果，至多有200项效果。
+*** {{nbt|compound}}：一项方块变换效果。
+**** {{nbt|compound|block_state_provider|existonsave=1|required=1}}：方块将要变换为的状态。
+***** {{Nbt inherit/block state provider}}
+**** {{nbt|string}}{{nbt|compound|block_sound}}：（默认为空）成功变换方块时播放的声音事件。
+***** {{nbt inherit/sound event}}
+**** {{nbt|string|particle}}：（默认为<code>none</code>）成功变换方块时产生的粒子效果。取值可以为<code>none</code>（无粒子效果）、<code>scrape</code>（除锈的粒子效果）、<code>wax_on</code>（上蜡的粒子效果）或<code>wax_off</code>（除蜡的粒子效果）。
+**** {{nbt|list|disallowed_faces}}：（默认为空）与方块交互时不会触发方块变换的面。
+***** {{nbt|string}}：不会触发方块变换的面。取值可以为<code>up</code>（上）、<code>down</code>（下）、<code>north</code>（北）、<code>south</code>（南）、<code>west</code>（西）或<code>east</code>（东）。
+**** {{nbt|string|loot}}：（命名空间ID）成功变换方块时产生的掉落物的战利品表。
+**** {{nbt|string|drop_strategy}}：（默认为<code>from_middle</code>）成功变换方块时掉落物生成的方式。取值可以为<code>clicked_face</code>（生成于交互面）或<code>from_middle</code>（生成于方块中心）。
+**** {{nbt|bool|update_from_neighbors}}：（默认为<code>true</code>）决定变换后的方块是否要根据临近的方块更新自身。
+**** {{nbt|string|transform_type}}：（默认为<code>single_block</code>）决定方块变换的类型。取值可以为<code>single_block</code>或<code>copper_chest</code>。
+**** {{nbt|bool|consume_on_use}}：（默认为<code>true</code>）使用的物品是否会消耗。
+**** {{nbt|int|item_damage_per_use}}：（值≥0，默认为0）使用的物品消耗的耐久度。
+<section end="codec_block_transformer_component"/></div>
+
+=== blocks_attacks ===
+<div class="treeview"><section begin="codec_blocks_attacks_component"/>
+** {{nbt|compound|minecraft:blocks_attacks}}：物品使用时的格挡行为。
+*** {{nbt|float|block_delay_seconds}}：（{{interval|left=0}}，默认为<code>0</code>）成功阻挡攻击前需要按住右键的秒数。
+*** {{nbt|string}}{{nbt|compound|block_sound}}：成功阻挡攻击时播放的声音事件。
+**** {{nbt inherit/sound event}}
+*** {{nbt|string}}{{nbt|list|bypassed_by}}：可以无视此物品的阻挡而造成实际伤害的伤害类型。可以为一个伤害类型ID、一个伤害类型标签ID，或一个伤害类型标签。
+*** {{nbt|list|damage_reductions}}：控制可阻挡多少伤害。未指定时，可阻挡一切伤害。
+**** {{nbt|compound}}：控制可挡下的伤害量和伤害类型。阻挡成功时，伤害减少<code>-{}-clamp(base + factor * ''所受攻击伤害'', 0, ''所受攻击伤害'')</code>。
+***** {{nbt|float|base|required=1|existonsave=1}}：固定阻挡的伤害。
+***** {{nbt|float|factor|required=1|existonsave=1}}：应被阻挡的伤害比例。
+***** {{nbt|float|horizontal_blocking_angle}}：（{{interval|left_open=0}}，角度制，默认为<code>90</code>）在水平方向上，以当前玩家视角的水平分量向量为基准，如果受伤害方向与基准方向夹角小于此角度则伤害可被阻挡，否则不能阻挡。<br>任何无来源伤害均被视为需要<code>180</code>度才能阻挡。
+***** {{nbt|string}}{{nbt|list|type}}：可阻挡的伤害类型。允许单个ID、列表或标签。未指定则表示对所有伤害有效。
+*** {{nbt|float|disable_cooldown_scale}}：（{{interval|left=0}}，默认为<code>1</code>）被可停-{}-用阻挡的攻击击中时，物品冷却时长的乘数。为<code>0</code>时，此物品不能被攻击停用。
+*** {{nbt|string}}{{nbt|compound|disabled_sound}}：此物品被攻击停用时播放的声音事件。
+**** {{nbt inherit/sound event}}
+*** {{nbt|compound|item_damage}}：控制攻击对物品造成的耐久损耗。未指定时，每次攻击损耗物品1点耐久。物品耐久最终损耗<code>-{}-floor(threshold, base + factor * ''所受攻击伤害'')</code>。最终值可以为负数以使物品修复。
+**** {{nbt|float|base|required=1|existonsave=1}}：损耗物品固定耐久度。
+**** {{nbt|float|factor|required=1|existonsave=1}}：所受攻击伤害的乘数。
+**** {{nbt|float|threshold|required=1|existonsave=1}}：（{{interval|left=0}}）攻击对此物品造成的最低耐久度损耗。
+<section end="codec_blocks_attacks_component"/></div>
+
+=== break_sound ===
+<div class="treeview"><section begin="codec_break_sound_component"/>
+** {{nbt|string}}{{nbt|object|minecraft:break_sound}}：物品耐久度耗尽时播放的声音事件。
+*** {{nbt inherit/sound event}}
+<section end="codec_break_sound_component"/></div>
+
+=== bucket_entity_data ===
+<div class="treeview"><section begin="codec_bucket_entity_data_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:bucket_entity_data}}：生物桶对桶中生物的部分实体数据。如果采用字符串格式进行定义，则游戏会将字符串的内容视为[[SNBT]]加载，游戏只保存为复合标签格式。
+*** {{nbt|bool|Glowing}}：表示桶中生物是否有发光的轮廓线。
+*** {{nbt|float|Health}}：桶中生物的生命值。
+*** {{nbt|bool|Invulnerable}}：表示桶中生物是否能抵抗绝大多数伤害。
+*** {{nbt|bool|NoAI}}：表示桶中生物的AI是否被禁用。
+*** {{nbt|bool|NoGravity}}：表示桶中生物是否不受重力影响。
+*** {{nbt|bool|Silent}}：表示桶中生物是否不会发出任何声音。
+*** {{nbt condition|如果桶中生物是[[蝌蚪]]，则有下列2个额外标签：}}
+*** {{nbt|int|Age}}：桶中蝌蚪的年龄。大于等于24000时，蝌蚪会长大成青蛙。
+*** {{nbt|boolean|AgeLocked}}：表示蝌蚪的年龄是否不会随时间自然增长。
+*** {{nbt condition|如果桶中生物是[[美西螈]]，则有下列3个额外标签：}}
+*** {{nbt|int|Age}}：桶中美西螈的年龄。生物为幼体时为负值；生物为成体时为正值或0，如果为正值则表示距离生物能再次繁衍的时间。
+*** {{nbt|boolean|AgeLocked}}：表示美西螈的年龄是否不会随时间自然增长或减少。
+*** {{nbt|long|HuntingCooldown}}：桶中美西螈[[生物记忆]]<code>has_hunting_cooldown</code>的过期倒计时。
+*** {{nbt condition|如果桶中生物是[[硫方怪]]，则有下列2个额外标签：}}
+*** {{nbt|int|<s>age</s>|existonsave=1}}：（默认为0）表示桶中的硫方怪的年龄。原版游戏未使用。
+*** {{nbt|boolean|<s>age_locked</s>|existonsave=1}}：（默认为<code>false</code>）表示硫方怪的年龄是否不会随时间自然增长。原版游戏未使用。
+<section end="codec_bucket_entity_data_component"/></div>
+
+=== bundle_contents ===
+<div class="treeview"><section begin="codec_bundle_contents_component"/>
+** {{nbt|list|minecraft:bundle_contents}}：[[收纳袋]]的内部物品栏。
+*** {{nbt|string}}{{nbt|compound}}：一个物品。后加入的物品在列表前方，先加入的物品在列表后方。
+**** {{nbt inherit/item template}}
+<section end="codec_bundle_contents_component"/></div>
+
+=== can_break ===
+<div class="treeview"><section begin="codec_can_break_component"/>
+** {{nbt|compound}}{{nbt|list|minecraft:can_break}}：检查被破坏的方块是否满足指定的方块谓词，作为列表时内部元素与此标签作为复合标签时相同。
+*** {{nbt inherit/block predicate}}
+<section end="codec_can_break_component"/></div>
+
+=== can_place_on ===
+<div class="treeview"><section begin="codec_can_place_on_component"/>
+** {{nbt|compound}}{{nbt|list|minecraft:can_place_on}}：检查被交互的方块是否满足指定的方块谓词，作为列表时内部元素与此标签作为复合标签时相同。
+*** {{nbt inherit/block predicate}}
+<section end="codec_can_place_on_component"/></div>
+
+=== cat/collar ===
+<div class="treeview"><section begin="codec_cat_collar_component"/>
+** {{nbt|string|minecraft:cat/collar}}：猫的项圈颜色。取值为[[染料颜色]]，即{{cd|d=、|fd=或|white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black}}。
+<section end="codec_cat_collar_component"/></div>
+
+=== cat/sound_variant ===
+<div class="treeview"><section begin="codec_cat_sound_variant_component"/>
+** {{nbt|string|minecraft:cat/sound_variant}}：（命名空间ID）猫的音效变种。
+<section end="codec_cat_sound_variant_component"/></div>
+
+=== cat/variant ===
+<div class="treeview"><section begin="codec_cat_variant_component"/>
+** {{nbt|string|minecraft:cat/variant}}：（命名空间ID）[[猫]]的变种。
+<section end="codec_cat_variant_component"/></div>
+
+=== charged_projectiles ===
+<div class="treeview"><section begin="codec_charged_projectiles_component"/>
+** {{nbt|list|minecraft:charged_projectiles}}：[[弩]]的内部物品栏，表示弩的装填物。最多只能有1024个元素。
+*** {{nbt|string}}{{nbt|compound}}：一个物品。
+**** {{nbt inherit/item template}}
+<section end="codec_charged_projectiles_component"/></div>
+
+=== chicken/sound_variant ===
+<div class="treeview"><section begin="codec_chicken_sound_variant_component"/>
+** {{nbt|string|minecraft:chicken/sound_variant}}：（命名空间ID）鸡的音效变种。
+<section end="codec_chicken_sound_variant_component"/></div>
+
+=== chicken/variant ===
+<div class="treeview"><section begin="codec_chicken_variant_component"/>
+** {{nbt|string|minecraft:chicken/variant}}：（命名空间ID）[[鸡]]的变种。
+<section end="codec_chicken_variant_component"/></div>
+
+=== compostable ===
+{{in development|jev=26.3|section=1}}
+<div class="treeview"><section begin="codec_compostable_component"/>
+** {{nbt|compound|minecraft:compostable}}：物品的堆肥行为。
+*** {{nbt|string|layers}}：（命名空间ID）表示物品堆肥时增加层数的[[数值提供器]]。<!-- ResourceKey<NumberProvider> -->
+<section end="codec_compostable_component"/></div>
+
+=== consumable ===
+<div class="treeview"><section begin="codec_consumable_component"/>
+** {{nbt|compound|minecraft:consumable}}：物品的消耗使用行为。
+*** {{nbt|string|animation}}：（默认为<code>eat</code>）物品使用时的动画。可以为<code>none</code>（无动作）、<code>eat</code>（吃）、<code>drink</code>（饮用）、<code>block</code>（格挡）、<code>bow</code>（拉弓）、<code>brush</code>（清刷）、<code>crossbow</code>（弩上弦）、<code>spear</code>（矛蓄力）、<code>trident</code>（三叉戟投掷）、<code>spyglass</code>（看望远镜）、<code>toot_horn</code>（吹山羊角）和<code>bundle</code>（使用收纳袋）。
+*** {{nbt|float|consume_seconds}}：（{{interval|left=0}}，默认为1.6）物品使用的时间，单位为秒。当此值为0时，物品立刻使用，不会像拉弓等操作需要等待时间。
+*** {{nbt|bool|has_consume_particles}}：（默认为<code>true</code>）物品在使用时是否产生物品破碎粒子。
+*** {{nbt|list|on_consume_effects}}：当物品被使用后产生的效果列表。
+**** {{nbt|compound}}：一项消耗使用效果。
+***** {{nbt|string|type|existonsave=1|required=1}}：消耗使用效果类型。
+***** {{nbt condition|如果{{nbt|string|type}}为<code>apply_effects</code>，则对使用此物品的生物添加状态效果：}}
+***** {{nbt|list|effects|existonsave=1|required=1}}：物品使用后添加的状态效果。
+****** {{nbt|compound}}：一项状态效果。
+******* {{nbt inherit/effect}}
+***** {{nbt|float|probability}}：（{{interval|left=0|right=1}}，默认为1）食用后施加此状态效果的概率。
+***** {{nbt condition|如果{{nbt|string|type}}为<code>clear_all_effects</code>，则对使用此物品的生物移除所有状态效果。}}
+***** {{nbt condition|如果{{nbt|string|type}}为<code>play_sound</code>，则播放指定的声音：}}
+***** {{nbt|string}}{{nbt|compound|sound|existonsave=1|required=1}}：要播放的声音。
+****** {{nbt inherit/sound event}}
+***** {{nbt condition|如果{{nbt|string|type}}为<code>remove_effects</code>，则对使用此物品的生物移除指定状态效果：}}
+***** {{nbt|string}}{{nbt|list|effects|existonsave=1|required=1}}：物品使用后要移除的状态效果。可以为以<code>#</code>开头的[[状态效果]]标签、一个状态效果ID、或以多个状态效果ID组成的列表。
+***** {{nbt condition|如果{{nbt|string|type}}为<code>teleport_randomly</code>，则对使用此物品的生物进行随机传送：}}
+***** {{nbt|float|diameter}}：（{{interval|left_open=0}}，默认为16）随机传送的半径，以传送前的位置作为原点。
+*** {{nbt|string}}{{nbt|compound|sound}}：（默认为<code>entity.generic.eat</code>）使用物品时产生的声音。
+**** {{nbt inherit/sound event}}
+<section end="codec_consumable_component"/></div>
+
+=== container ===
+<div class="treeview"><section begin="codec_container_component"/>
+** {{nbt|list|minecraft:container}}：方块物品的内部物品栏。
+*** {{nbt|compound}}：一个槽位上的物品堆叠数据。
+**** {{nbt|string}}{{nbt|compound|item|existonsave=1|required=1}}：此槽位的物品堆叠数据。
+***** {{nbt inherit/item template}}
+**** {{nbt|int|slot|existonsave=1|required=1}}：（{{interval|left=0|right=255}}）物品堆叠所在的槽位。
+<section end="codec_container_component"/></div>
+
+=== container_loot ===
+<div class="treeview"><section begin="codec_container_loot_component"/>
+** {{nbt|compound|minecraft:container_loot}}：战利品容器方块的战利品表数据。
+*** {{nbt|string|loot_table|existonsave=1|required=1}}：（命名空间ID）生成战利品使用的[[战利品表]]。
+*** {{nbt|long|seed}}：（默认为0）生成战利品使用的种子，0或不输入将使用[[随机序列]]。
+<section end="codec_container_loot_component"/></div>
+
+=== cow/sound_variant ===
+<div class="treeview"><section begin="codec_cow_sound_variant_component"/>
+** {{nbt|string|minecraft:cow/sound_variant}}：（命名空间ID）牛的音效变种。
+<section end="codec_cow_sound_variant_component"/></div>
+
+=== cow/variant ===
+<div class="treeview"><section begin="codec_cow_variant_component"/>
+** {{nbt|string|minecraft:cow/variant}}：（命名空间ID）[[牛]]的变种。
+<section end="codec_cow_variant_component"/></div>
+
+=== creative_slot_lock ===
+<div class="treeview"><section begin="codec_creative_slot_lock_component"/>
+** {{nbt|compound|minecraft:creative_slot_lock}}：空标签，此组件存在时此物品若在创造模式物品栏内则玩家无法与其交互。
+<section end="codec_creative_slot_lock_component"/></div>
+
+=== custom_data ===
+<div class="treeview"><section begin="codec_custom_data_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:custom_data}}：自定义的数据。如果采用字符串格式进行定义，则游戏会将字符串的内容视为[[SNBT]]加载，游戏只保存为复合标签格式。
+*** {{nbt|any|<''自定义标签名''>}}：一个可以为任意类型的自定义标签。
+<section end="codec_custom_data_component"/></div>
+
+=== custom_model_data ===
+<div class="treeview"><section begin="codec_custom_model_data_component"/>
+** {{nbt|compound|minecraft:custom_model_data}}：自定义物品模型数据。
+*** {{nbt|list|colors}}：定义物品模型映射中的[[物品模型映射#model|着色]]列表。
+**** {{nbt|int}}{{nbt|list}}：一个颜色。可以直接使用整数定义颜色，也可以使用RGB三个分量定义颜色，游戏只保存为整数形式。
+***** {{nbt inherit/rgb color}}
+*** {{nbt|list|flags}}：定义<code>[[物品模型映射#condition|condition]]</code>物品模型映射类型的布尔值列表。
+**** {{nbt|bool}}：一个布尔值。
+*** {{nbt|list|floats}}：定义<code>[[物品模型映射#range_dispatch|range_dispatch]]</code>物品模型映射类型的浮点数列表。
+**** {{nbt|float}}：一个浮点数。
+*** {{nbt|list|strings}}：定义<code>[[物品模型映射#select|select]]</code>物品模型映射类型的字符串列表。
+**** {{nbt|string}}：一个字符串。
+<section end="codec_custom_model_data_component"/></div>
+
+=== custom_name ===
+<div class="treeview"><section begin="codec_custom_name_component"/>
+** {{nbt|string}}{{nbt|object}}{{nbt|list|minecraft:custom_name}}：（[[文本组件]]）自定义名称。
+<section end="codec_custom_name_component"/></div>
+
+=== damage ===
+<div class="treeview"><section begin="codec_damage_component"/>
+** {{nbt|int|minecraft:damage}}：（{{interval|left=0}}）物品的损坏值。
+<section end="codec_damage_component"/></div>
+
+=== damage_resistant ===
+<div class="treeview"><section begin="codec_damage_resistant_component"/>
+** {{nbt|compound|minecraft:damage_resistant}}：物品免疫的伤害类型。
+*** {{nbt|string}}{{nbt|list|types|existonsave=1|required=1}}：物品免疫的伤害。可以为一个伤害类型ID、一个伤害类型标签ID，或一个伤害类型标签。
+<section end="codec_damage_resistant_component"/></div>
+
+=== damage_type ===
+<div class="treeview"><section begin="codec_damage_type_component"/>
+** {{nbt|string|minecraft:damage_type}}：（命名空间ID）使用此物品攻击时造成的伤害类型。
+<section end="codec_damage_type_component"/></div>
+
+=== death_protection ===
+<div class="treeview"><section begin="codec_death_protection_component"/>
+** {{nbt|compound|minecraft:death_protection}}：持有者将要死亡时阻止生物死亡后的效果。
+*** {{nbt|list|death_effects}}：（默认为空）触发此物品后产生的效果。
+**** {{nbt|compound}}：一项效果。
+***** {{nbt|string|type|existonsave=1|required=1}}：消耗使用效果类型。
+***** {{nbt condition|如果{{nbt|string|type}}为<code>apply_effects</code>，则对使用此物品的生物添加状态效果：}}
+***** {{nbt|list|effects|existonsave=1|required=1}}：物品使用后添加的状态效果。
+****** {{nbt|compound}}：一项状态效果。
+******* {{nbt inherit/effect}}
+***** {{nbt|float|probability}}：（{{interval|left=0|right=1}}，默认为1）食用后施加此状态效果的概率。
+***** {{nbt condition|如果{{nbt|string|type}}为<code>clear_all_effects</code>，则对使用此物品的生物移除所有状态效果。}}
+***** {{nbt condition|如果{{nbt|string|type}}为<code>play_sound</code>，则播放指定的声音：}}
+***** {{nbt|string}}{{nbt|compound|sound|existonsave=1|required=1}}：要播放的声音。
+****** {{nbt inherit/sound event}}
+***** {{nbt condition|如果{{nbt|string|type}}为<code>remove_effects</code>，则对使用此物品的生物移除指定状态效果：}}
+***** {{nbt|string}}{{nbt|list|effects|existonsave=1|required=1}}：物品使用后要移除的状态效果。可以为以<code>#</code>开头的[[状态效果]]标签、一个状态效果ID、或以多个状态效果ID组成的列表。
+***** {{nbt condition|如果{{nbt|string|type}}为<code>teleport_randomly</code>，则对使用此物品的生物进行随机传送：}}
+***** {{nbt|float|diameter}}：（{{interval|left_open=0}}，默认为16）随机传送的半径，以传送前的位置作为原点。
+<section end="codec_death_protection_component"/></div>
+
+=== debug_stick_state ===
+<div class="treeview"><section begin="codec_debug_stick_state_component"/>
+** {{nbt|compound|minecraft:debug_stick_state}}：[[调试棒]]的调试数据。
+*** {{nbt|string|<''方块命名空间ID''>}}：一个方块和此方块将要修改的方块属性的键值对。
+<section end="codec_debug_stick_state_component"/></div>
+
+=== dye ===
+<div class="treeview"><section begin="codec_dye_component"/>
+** {{nbt|string|minecraft:dye}}：物品的[[染料颜色]]数据。取值为{{cd|d=、|fd=或|white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black}}。
+<section end="codec_dye_component"/></div>
+
+=== dyed_color ===
+<div class="treeview"><section begin="codec_dyed_color_component"/>
+** {{nbt|int}}{{nbt|list|minecraft:dyed_color}}：物品的颜色。只使用后24位，每个颜色通道占用8位，按RGB依次存储。
+*** {{nbt inherit/rgb color}}
+<section end="codec_dyed_color_component"/></div>
+
+=== enchantable ===
+<div class="treeview"><section begin="codec_enchantable_component"/>
+** {{nbt|compound|minecraft:enchantable}}
+*** {{nbt|int|value|existonsave=1|required=1}}：（{{interval|left=1}}）物品的[[附魔能力]]。
+<section end="codec_enchantable_component"/></div>
+
+=== enchantment_glint_override ===
+<div class="treeview"><section begin="codec_enchantment_glint_override_component"/>
+** {{nbt|bool|minecraft:enchantment_glint_override}}：是否显示[[光效]]。
+<section end="codec_enchantment_glint_override_component"/></div>
+
+=== enchantments ===
+<div class="treeview"><section begin="codec_enchantments_component"/>
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+<section end="codec_enchantments_component"/></div>
+
+=== entity_data ===
+<div class="treeview"><section begin="codec_entity_data_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:entity_data}}：物品放出实体时套用到实体上的数据。如果采用字符串格式进行定义，则游戏会将字符串的内容视为[[SNBT]]加载，游戏只保存为复合标签格式。
+*** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）实体类型。
+*** 若干与该实体对应的实体数据标签，见[[实体数据格式]]。
+<section end="codec_entity_data_component"/></div>
+
+=== equippable ===
+<div class="treeview"><section begin="codec_equippable_component"/>
+** {{nbt|compound|minecraft:equippable}}：物品被穿戴的行为。
+*** {{nbt|string}}{{nbt|list|allowed_entities}}：（默认为全部生物）可以穿戴此物品的生物。可以为以<code>#</code>开头的实体类型标签、一个实体类型ID、或以多个实体类型ID组成的字符串列表。
+*** {{nbt|string|asset_id}}：（命名空间ID）物品被穿戴时的[[装备资产]]。此值不存在时，若装备在头部则根据物品模型渲染物品，否则什么也不会渲染。
+*** {{nbt|string|camera_overlay}}：（命名空间ID）当此项存在且物品被玩家穿戴时，玩家第一人称视角将渲染指定的纹理遮罩。此遮罩可以使用多个设置此标签的物品互相叠加，每个物品指定的遮罩都会被渲染，且渲染顺序按照主手、副手、头盔、胸甲、护腿、靴子、身体、鞍的顺序依次叠加渲染。当遮罩纹理渲染时，遮罩纹理被视为'''独立纹理'''，即无法作为动态纹理或GUI纹理渲染，但可以指定纹理过滤方式。
+*** {{nbt|boolean|can_be_sheared}}：（默认为<code>false</code>）满足未被骑乘等其他条件时，玩家是否可以对装备此物品的生物进行修剪来卸下此物品。
+*** {{nbt|bool|damage_on_hurt}}：（默认为<code>true</code>）生物在受到会影响损害盔甲的伤害时此物品是否会受损而减少耐久。
+*** {{nbt|bool|equip_on_interact}}：（默认为<code>false</code>）对生物使用此物品时，是否可以让被交互的生物在允许的空槽位上穿戴此物品。
+*** {{nbt|string}}{{nbt|compound|equip_sound}}：（默认为<code>item.armor.equip_generic</code>，默认可装备鞍的生物的鞍除外）物品被穿戴时的声音。
+**** {{nbt inherit/sound event}}
+*** {{nbt|bool|dispensable}}：（默认为<code>true</code>）是否可以使用[[发射器]]使生物穿戴此物品。如果物品本身有特殊的发射器行为则此项无效。
+*** {{nbt|string}}{{nbt|compound|shearing_sound}}：（默认为<code>item.shears.snip</code>）被玩家使用剪刀卸下此物品时播放的声音。
+**** {{nbt inherit/sound event}}
+*** {{nbt|string|slot|existonsave=1|required=1}}：物品可被穿戴的[[装备槽位]]。
+*** {{nbt|bool|swappable}}：（默认为<code>true</code>）物品是否可以直接{{ctrl|使用}}穿戴。
+<section end="codec_equippable_component"/></div>
+
+=== firework_explosion ===
+<div class="treeview"><section begin="codec_firework_explosion_component"/>
+** {{nbt|compound|minecraft:firework_explosion}}：[[烟火之星]]的数据。
+*** {{nbt|int-array|colors}}：（默认为空数组）表示爆裂时的粒子颜色，只使用后24位，每个颜色通道占用8位，按RGB依次存储。如果颜色没有对应的染料颜色，游戏将在[[提示框]]中显示为“自定义”，但爆裂时会产生正确的颜色。当存在多个值时，每个爆裂粒子在渲染时会随机选择一种颜色用于渲染。不存在或数组为空时被视为黑色。
+*** {{nbt|int-array|fade_colors}}：（默认为空数组）表示爆裂后的淡化粒子颜色，只使用后24位，每个颜色通道占用8位，按RGB依次存储。当存在多个值时，每个爆裂粒子在渲染时会随机选择一种颜色用于渲染。
+*** {{nbt|bool|has_trail}}：（默认为<code>false</code>）表示烟火是否有拖曳痕迹（使用[[钻石]]合成时）。
+*** {{nbt|bool|has_twinkle}}：（默认为<code>false</code>）表示烟火是否出现闪烁效果（使用[[荧石粉]]合成时）。
+*** {{nbt|string|shape|existonsave=1|required=1}}：爆裂时的形态。可以为<code>small_ball</code>（{{tp|item.minecraft.firework_star.shape.small_ball}}）、<code>large_ball</code>（{{tp|item.minecraft.firework_star.shape.large_ball}}）、<code>star</code>（{{tp|item.minecraft.firework_star.shape.star}}）、<code>creeper</code>（{{tp|item.minecraft.firework_star.shape.creeper}}）、<code>burst</code>（{{tp|item.minecraft.firework_star.shape.burst}}）。
+<section end="codec_firework_explosion_component"/></div>
+
+=== fireworks ===
+<div class="treeview"><section begin="codec_fireworks_component"/>
+** {{nbt|compound|minecraft:fireworks}}：[[烟花火箭]]的数据。
+*** {{nbt|byte|flight_duration}}：（无符号8位整数，默认为0）烟花火箭的飞行的时间，单位为“火药”（即表现为和在工作台上合成烟花火箭时所用的火药数相等）。
+*** {{nbt|list|explosions}}：（最多256个元素）烟花火箭对应的烟火之星的数据，控制烟花火箭飞行结束时产生的爆裂烟花渲染。
+**** {{nbt|compound}}：一个烟火之星的数据。
+***** {{nbt|int-array|colors}}：（默认为空数组）表示爆裂时的粒子颜色，只使用后24位，每个颜色通道占用8位，按RGB依次存储。如果颜色没有对应的染料颜色，游戏将在[[提示框]]中显示为“自定义”，但爆裂时会产生正确的颜色。当存在多个值时，每个爆裂粒子在渲染时会随机选择一种颜色用于渲染。不存在或数组为空时被视为黑色。
+***** {{nbt|int-array|fade_colors}}：（默认为空数组）表示爆裂后的淡化粒子颜色，只使用后24位，每个颜色通道占用8位，按RGB依次存储。当存在多个值时，每个爆裂粒子在渲染时会随机选择一种颜色用于渲染。
+***** {{nbt|bool|has_trail}}：（默认为<code>false</code>）表示烟火是否有拖曳痕迹（使用[[钻石]]合成时）。
+***** {{nbt|bool|has_twinkle}}：（默认为<code>false</code>）表示烟火是否出现闪烁效果（使用[[荧石粉]]合成时）。
+***** {{nbt|string|shape|existonsave=1|required=1}}：爆裂时的形态。可以为<code>small_ball</code>（{{tp|item.minecraft.firework_star.shape.small_ball}}）、<code>large_ball</code>（{{tp|item.minecraft.firework_star.shape.large_ball}}）、<code>star</code>（{{tp|item.minecraft.firework_star.shape.star}}）、<code>creeper</code>（{{tp|item.minecraft.firework_star.shape.creeper}}）、<code>burst</code>（{{tp|item.minecraft.firework_star.shape.burst}}）。
+<section end="codec_fireworks_component"/></div>
+
+=== food ===
+<div class="treeview"><section begin="codec_food_component"/>
+** {{nbt|compound|minecraft:food}}：物品的食物属性。
+*** {{nbt|bool|can_always_eat}}：（默认为<code>false</code>）表示物品是否可以无视当前饥饿值食用。
+*** {{nbt|int|nutrition|existonsave=1|required=1}}：（{{interval|left=0}}）食用物品时增加的饥饿值。
+*** {{nbt|float|saturation|existonsave=1|required=1}}：食用物品时增加的饱和度。
+<section end="codec_food_component"/></div>
+
+=== fox/variant ===
+<div class="treeview"><section begin="codec_fox_variant_component"/>
+** {{nbt|string|minecraft:fox/variant}}：[[狐狸]]的变种。取值只能为<code>red</code>（红色）、<code>snow</code>（白色）。
+<section end="codec_fox_variant_component"/></div>
+
+=== frog/variant ===
+<div class="treeview"><section begin="codec_frog_variant_component"/>
+** {{nbt|string|minecraft:frog/variant}}：（命名空间ID）[[青蛙]]的变种。
+<section end="codec_frog_variant_component"/></div>
+
+=== glider ===
+<div class="treeview"><section begin="codec_glider_component"/>
+** {{nbt|compound|minecraft:glider}}：空标签，此组件存在时若被生物装备则可以[[滑翔]]，且滑翔时此物品每1秒消耗1耐久度。
+<section end="codec_glider_component"/></div>
+
+=== horse/variant ===
+<div class="treeview"><section begin="codec_horse_variant_component"/>
+** {{nbt|string|minecraft:horse/variant}}：[[马]]的基础毛色。取值只能为<code>white</code>（白色）、<code>creamy</code>（奶油色）、<code>chestnut</code>（栗色）、<code>brown</code>（褐色）、<code>black</code>（黑色）、<code>gray</code>（灰色）或<code>dark_brown</code>（深褐色）。
+<section end="codec_horse_variant_component"/></div>
+
+=== instrument ===
+<div class="treeview"><section begin="codec_instrument_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:instrument}}：玩家吹奏[[山羊角]]时使用的[[山羊角乐器]]。命名空间ID或内联定义均可。
+*** {{nbt inherit/instrument component}}
+<section end="codec_instrument_component"/></div>
+
+=== intangible_projectile ===
+<div class="treeview"><section begin="codec_intangible_projectile_component"/>
+** {{nbt|compound|minecraft:intangible_projectile}}：空标签，此组件存在时若作为箭射出，则射出后只能被创造模式玩家捡起。
+<section end="codec_intangible_projectile_component"/></div>
+
+=== item_model ===
+<div class="treeview"><section begin="codec_item_model_component"/>
+** {{nbt|string|minecraft:item_model}}：（[[命名空间ID]]）为当前物品绑定一个[[物品模型映射]]。
+<section end="codec_item_model_component"/></div>
+
+=== item_name ===
+<div class="treeview"><section begin="codec_item_name_component"/>
+** {{nbt|string}}{{nbt|object}}{{nbt|list|minecraft:item_name}}：（[[文本组件]]）物品的默认名称。
+<section end="codec_item_name_component"/></div>
+
+=== jukebox_playable ===
+<div class="treeview"><section begin="codec_jukebox_playable_component"/>
+** {{nbt|string|minecraft:jukebox_playable}}：（命名空间ID）[[唱片机曲目]]。此组件存在时物品可插进唱片机中播放。
+<section end="codec_jukebox_playable_component"/></div>
+
+=== kinetic_weapon ===
+<div class="treeview"><section begin="codec_kinetic_weapon_component"/>
+** {{nbt|compound|minecraft:kinetic_weapon}}：设置物品的冲锋攻击。
+*** {{nbt|int|delay_ticks}}：（{{interval|left=0}}，默认为0）武器生效前的时间，单位为游戏刻。
+*** {{nbt|float|forward_movement}}：（默认为0）动画期间脱离手的距离。
+*** {{nbt|float|damage_multiplier}}：（默认为1）攻击轴相对速度的最终伤害倍率。此处及下文的“攻击轴速度”定义为：上个游戏刻的位移向量（对于玩家）或速度改变量（对于非生物实体，等于{{nbt|list|Motion}}）对攻击者视角向量的投影，是一个向量；“攻击轴相对速度”即攻击者攻击轴速度与被攻击者攻击轴速度之差，如果此差值小于0则游戏认为是0。
+*** {{nbt|string}}{{nbt|compound|sound}}：使用此武器时播放的声音。
+**** {{nbt inherit/sound event}}
+*** {{nbt|string}}{{nbt|compound|hit_sound}}：此武器攻击到生物时播放的声音。
+**** {{nbt inherit/sound event}}
+*** {{nbt|compound|dismount_conditions|required=1|existonsave=1}}：将目标强制脱离骑乘的条件。
+**** {{nbt|int|max_duration_ticks|required=1|existonsave=1}}：不再检查条件的时间，单位为刻，从{{nbt|int|delay_ticks}}开始计算。
+**** {{nbt|float|min_speed}}：（默认为0）攻击者的最低攻击轴速度。对于非玩家实体，实际最小速度为规定值的20%。
+**** {{nbt|float|min_relative_speed}}：（默认为0）最小攻击轴相对速度。对于非玩家实体，实际最小速度为规定值的20%。
+*** {{nbt|compound|knockback_conditions|required=1|existonsave=1}}：将目标击退的条件。
+**** 格式同{{nbt|compound|dismount_conditions}}。
+*** {{nbt|compound|damage_conditions|required=1|existonsave=1}}：对目标造成伤害的条件。
+**** 格式同{{nbt|compound|dismount_conditions}}。
+*** {{nbt|int|contact_cooldown_ticks}}：（{{interval|left_open=0}}，默认为10）攻击的冷却时间，在此时间内无法与任何实体交互。
+<section end="codec_kinetic_weapon_component"/></div>
+
+=== llama/variant ===
+<div class="treeview"><section begin="codec_llama_variant_component"/>
+** {{nbt|string|minecraft:llama/variant}}：[[羊驼]]的变种。取值只能为<code>creamy</code>（沙褐色）、<code>white</code>（奶油色）、<code>brown</code>（棕色）或<code>gray</code>（灰色）。[[行商羊驼]]也使用此组件。
+<section end="codec_llama_variant_component"/></div>
+
+=== lock ===
+<div class="treeview"><section begin="codec_lock_component"/>
+** {{nbt|compound|minecraft:lock}}：容器方块的上锁数据。
+*** {{nbt inherit/item predicate}}
+<section end="codec_lock_component"/></div>
+
+=== lodestone_tracker ===
+<div class="treeview"><section begin="codec_lodestone_tracker_component"/>
+** {{nbt|compound|minecraft:lodestone_tracker}}：若指南针拥有此组件，则指南针将变为[[磁石指针]]。
+*** {{nbt|compound|target}}：磁石指针指向的位置。
+**** {{nbt|string|dimension|existonsave=1|required=1}}：磁石指针指向位置的所在维度。
+**** {{nbt|int-array|pos|existonsave=1|required=1}}：磁石指针指向的坐标。内部的三个整数分别代表了位置的XYZ坐标值。
+*** {{nbt|bool|tracked}}：（默认为<code>true</code>）表示磁石指针是否追踪绑定的磁石。为<samp>false</samp>时，当磁石被破坏后此组件不会被移除，磁石指针仍然指向对应位置。
+<section end="codec_lodestone_tracker_component"/></div>
+
+=== lore ===
+<div class="treeview"><section begin="codec_lore_component"/>
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}{{nbt|object}}{{nbt|list}}：（[[文本组件]]）一行描述信息。
+<section end="codec_lore_component"/></div>
+
+=== map_color ===
+<div class="treeview"><section begin="codec_map_color_component"/>
+** {{nbt|int|minecraft:map_color}}：（默认为4603950）物品栏内地图纹理上的颜色，在二进制形式下，只使用后24位，每个颜色通道占用8位，按RGB依次存储。
+<section end="codec_map_color_component"/></div>
+
+=== map_decorations ===
+<div class="treeview"><section begin="codec_map_decorations_component"/>
+** {{nbt|compound|minecraft:map_decorations}}：地图图标数据。
+*** {{nbt|compound|<''图标名称''>}}：一个图标的信息。
+**** {{nbt|float|rotation|existonsave=1|required=1}}：图标的旋转角度，按顺时针角度计。游戏并不能真正显示所有角度，每经过22.5°，在地图上才会有区别。与图标纹理中的外观相比，旋转角度为0所显示的图标上下颠倒。
+**** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）此图标显示的[[地图#地图图标|地图图标类型]]。
+**** {{nbt|double|x|existonsave=1|required=1}}：图标在世界上所在的X坐标。如果超出地图所展示的范围且图标类型不是玩家，则图标无法添加到地图中。如果图标类型是玩家，位置超出显示范围但地图可以无限追踪玩家，那么图标类型会被修改为<code>player_off_limits</code>，且位置会显示在对应边；如果距离显示范围较近，则图标类型会被修改为<code>player_off_map</code>，且位置会显示在对应边；如果距离显示范围很远，则移除此图标。
+**** {{nbt|double|z|existonsave=1|required=1}}：图标在世界上所在的Z坐标。如果超出地图所展示的范围且图标类型不是玩家，则图标无法添加到地图中。如果图标类型是玩家，位置超出显示范围但地图可以无限追踪玩家，那么图标类型会被修改为<code>player_off_limits</code>，且位置会显示在对应边；如果距离显示范围较近，则图标类型会被修改为<code>player_off_map</code>，且位置会显示在对应边；如果距离显示范围很远，则移除此图标。
+<section end="codec_map_decorations_component"/></div>
+
+=== map_id ===
+<div class="treeview"><section begin="codec_map_id_component"/>
+** {{nbt|int|minecraft:map_id}}：地图编号。
+<section end="codec_map_id_component"/></div>
+
+=== map_post_processing ===
+<div class="treeview"><section begin="codec_map_post_processing_component"/>
+** {{nbt|int|minecraft:map_post_processing}}：为0时使<code>map_id</code>组件额外增加“{{tp|filled_map.locked}}”行；为1时使<code>map_id</code>组件使用“{{nbt|byte|scale}}+1”而不是{{nbt|byte|scale}}显示地图比例缩放信息。
+<section end="codec_map_post_processing_component"/></div>
+
+=== max_damage ===
+<div class="treeview"><section begin="codec_max_damage_component"/>
+** {{nbt|int|minecraft:max_damage}}：（{{interval|left_open=0}}）物品的最大耐久度。
+<section end="codec_max_damage_component"/></div>
+
+=== max_stack_size ===
+<div class="treeview"><section begin="codec_max_stack_size_component"/>
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+<section end="codec_max_stack_size_component"/></div>
+
+=== minimum_attack_charge ===
+<div class="treeview"><section begin="codec_minimum_attack_charge_component"/>
+** {{nbt|float|minecraft:minimum_attack_charge}}：（{{interval|left=0|right=1}}）玩家使用此物品进行近战攻击或穿刺攻击所需要[[近战攻击#攻击冷却|攻击冷却完成度]]的最小值。若添加了该组件，并且值大于0，则会影响[[魔咒效果组件]]{{cd|post_piercing_attack}}的触发间隔。
+<section end="codec_minimum_attack_charge_component"/></div>
+
+=== mooshroom/variant ===
+<div class="treeview"><section begin="codec_mooshroom_variant_component"/>
+** {{nbt|string|minecraft:mooshroom/variant}}：[[哞菇]]的变种。取值只能为<code>red</code>（红色）或<code>brown</code>（棕色）。
+<section end="codec_mooshroom_variant_component"/></div>
+
+=== note_block_sound ===
+<div class="treeview"><section begin="codec_note_block_sound_component"/>
+** {{nbt|string|minecraft:note_block_sound}}：[[玩家的头]]被放置在音符盒上时播放的声音。应为一个来自资源包{{filename|[[sounds.json]]}}内定义的声音事件。
+<section end="codec_note_block_sound_component"/></div>
+
+=== ominous_bottle_amplifier ===
+<div class="treeview"><section begin="codec_ominous_bottle_amplifier_component"/>
+** {{nbt|int|minecraft:ominous_bottle_amplifier}}：（{{interval|left=0|right=4}}）玩家使用物品后获得的[[不祥之兆]]状态效果倍率。
+<section end="codec_ominous_bottle_amplifier_component"/></div>
+
+=== painting/variant ===
+<div class="treeview"><section begin="codec_painting_variant_component"/>
+** {{nbt|string|minecraft:painting/variant}}：（命名空间ID）[[画]]的变种。
+<section end="codec_painting_variant_component"/></div>
+
+=== parrot/variant ===
+<div class="treeview"><section begin="codec_parrot_variant_component"/>
+** {{nbt|string|minecraft:parrot/variant}}：[[鹦鹉]]的变种。取值只能为<code>red_blue</code>（红色）、<code>blue</code>（蓝色）、<code>green</code>（绿色）、<code>yellow_blue</code>（青色）或<code>gray</code>（灰色）。
+<section end="codec_parrot_variant_component"/></div>
+
+=== piercing_weapon ===
+<div class="treeview"><section begin="codec_piercing_weapon_component"/>
+** {{nbt|compound|minecraft:piercing_weapon}}：设置物品的戳刺攻击，跳过玩家对方块的点击和持续破坏行为。该组件也是触发[[魔咒效果组件]]{{cd|post_piercing_attack}}的条件之一。
+*** {{nbt|string}}{{nbt|compound|sound}}：使用此武器时播放的声音。
+**** {{nbt inherit/sound event}}
+*** {{nbt|string}}{{nbt|compound|hit_sound}}：此武器攻击到生物时播放的声音。
+**** {{nbt inherit/sound event}}
+*** {{nbt|boolean|deals_knockback}}：（默认为<code>true</code>）攻击是否造成击退。
+*** {{nbt|boolean|dismounts}}：（默认为<code>false</code>）攻击是否将目标强制脱离骑乘。
+<section end="codec_piercing_weapon_component"/></div>
+
+=== pig/sound_variant ===
+<div class="treeview"><section begin="codec_pig_sound_variant_component"/>
+** {{nbt|string|minecraft:pig/sound_variant}}：（命名空间ID）猪的音效变种。
+<section end="codec_pig_sound_variant_component"/></div>
+
+=== pig/variant ===
+<div class="treeview"><section begin="codec_pig_variant_component"/>
+** {{nbt|string|minecraft:pig/variant}}：（命名空间ID）[[猪]]的变种。
+<section end="codec_pig_variant_component"/></div>
+
+=== pot_decorations ===
+<div class="treeview"><section begin="codec_pot_decorations_component"/>
+** {{nbt|list|minecraft:pot_decorations}}{{until|je 26.3}}：[[饰纹陶罐]]的陶片数据。此{{tr|列表|串列}}应仅有四个元素，依次代表饰纹陶罐背面、左面、右面和前面的物品。默认每个面均为红砖。
+*** {{nbt|string}}：（命名空间ID）饰纹陶罐这一个面的陶片物品。
+** {{nbt|compound|minecraft:pot_decorations}}{{upcoming|je 26.3}}：饰纹陶罐各个面的陶片物品。如果对应面的物品不存在[[数据组件#provides_pottery_pattern|<code>provides_pottery_pattern</code>]]组件，则此面在渲染上没有额外样式。
+*** {{nbt|string}}{{nbt|compound|back}}：背面陶片样式。
+**** {{Nbt inherit/item template}}
+*** {{nbt|string}}{{nbt|compound|left}}：左面陶片样式。
+**** {{Nbt inherit/item template}}
+*** {{nbt|string}}{{nbt|compound|right}}：右面陶片样式。
+**** {{Nbt inherit/item template}}
+*** {{nbt|string}}{{nbt|compound|front}}：正面陶片样式。
+**** {{Nbt inherit/item template}}
+<section end="codec_pot_decorations_component"/></div>
+
+=== potion_contents ===
+<div class="treeview"><section begin="codec_potion_contents_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:potion_contents}}：物品的药水和自定义状态效果数据。如果设置此组件为字符串，则等价于只设置复合标签形式中的{{nbt|string|potion}}，游戏在保存时只会保存为复合标签形式。
+*** {{nbt|int|custom_color}}：物品渲染中，药水部分使用的颜色。只使用后24位，每个颜色通道占用8位，按RGB依次存储。
+*** {{nbt|list|custom_effects}}：当前物品所含有的自定义[[状态效果]]。
+**** {{nbt|compound}}：一项状态效果。
+***** {{nbt inherit/effect}}
+*** {{nbt|string|custom_name}}：覆盖物品的默认名称，游戏将以<code>-{}-<''药水物品名称翻译键''>.effect.<''此值''></code>翻译键作为物品的名称，对于原版的药水物品而言就是<code>-{}-item.minecraft.<''药水物品类型''>.effect.<''此值''></code>。
+*** {{nbt|string|potion}}：（命名空间ID）[[药水效果]]，也会影响物品的名称和纹理。
+<section end="codec_potion_contents_component"/></div>
+
+=== potion_duration_scale ===
+<div class="treeview"><section begin="codec_potion_duration_scale_component"/>
+** {{nbt|float|minecraft:potion_duration_scale}}：（{{interval|left=0}}）控制<code>potion_contents</code>组件存储的状态效果时长缩放倍率。此组件不存在时默认为1。
+<section end="codec_potion_duration_scale_component"/></div>
+
+=== profile ===
+<div class="treeview"><section begin="codec_profile_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:profile}}：玩家档案数据。
+*** {{nbt inherit/resolvable_profile}}
+<section end="codec_profile_component"/></div>
+
+=== provides_banner_patterns ===
+<div class="treeview"><section begin="codec_provides_banner_patterns_component"/>
+** {{nbt|string|minecraft:provides_banner_patterns}}：控制物品能否放进[[织布机]]的旗帜图案槽位，以及可以制作的图案。可以为一个旗帜图案ID、一个旗帜图案标签，或一个旗帜图案ID的列表。
+<section end="codec_provides_banner_patterns_component"/></div>
+
+=== provides_pottery_pattern ===
+<div class="treeview"><section begin="codec_provides_pottery_pattern_component"/>
+** {{nbt|string|minecraft:provides_pottery_pattern}}：（命名空间ID）[[饰纹陶罐图案]]。游戏在渲染饰纹陶罐时，会读取<code>pot_decorations</code>组件内部物品的此组件来决定渲染样式。
+<section end="codec_provides_pottery_pattern_component"/></div>
+
+=== provides_trim_material ===
+<div class="treeview"><section begin="codec_provides_trim_material_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:provides_trim_material}}：控制物品在锻造台上使用盔甲纹饰配方时为输出物品提供的盔甲纹饰材料。命名空间ID或内联定义均可。
+*** {{nbt inherit/trim material}}
+<section end="codec_provides_trim_material_component"/></div>
+
+=== rabbit/variant ===
+<div class="treeview"><section begin="codec_rabbit_variant_component"/>
+** {{nbt|string|minecraft:rabbit/variant}}：[[兔子]]的变种。取值只能为<code>brown</code>（褐色）、<code>white</code>（白色）、<code>black</code>（黑色）、<code>white_splotched</code>（黑白相间）、<code>gold</code>（金色）、<code>salt</code>（胡椒盐色）或<code>evil</code>（杀手兔）。
+<section end="codec_rabbit_variant_component"/></div>
+
+=== rarity ===
+<div class="treeview"><section begin="codec_rarity_component"/>
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+<section end="codec_rarity_component"/></div>
+
+=== recipes ===
+<div class="treeview"><section begin="codec_recipes_component"/>
+** {{nbt|list|minecraft:recipes}}：[[知识之书]]保存的配方数据。
+*** {{nbt|string}}：（命名空间ID）一个配方ID。
+<section end="codec_recipes_component"/></div>
+
+=== repair_cost ===
+<div class="treeview"><section begin="codec_repair_cost_component"/>
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+<section end="codec_repair_cost_component"/></div>
+
+=== repairable ===
+<div class="treeview"><section begin="codec_repairable_component"/>
+** {{nbt|compound|minecraft:repairable}}：物品被铁砧进行原材料修复的有效物品。不论此值为何，物品永远可以被合并物品修复。
+*** {{nbt|string}}{{nbt|list|items|existonsave=1|required=1}}：可用于修复的物品。可以为一个<code>#</code>开头的物品标签、一个物品ID、或一个物品ID的列表。
+<section end="codec_repairable_component"/></div>
+
+=== salmon/size ===
+<div class="treeview"><section begin="codec_salmon_size_component"/>
+** {{nbt|string|minecraft:salmon/size}}：鲑鱼的体型尺寸。取值只能为<code>small</code>（小型）、<code>medium</code>（中型）或<code>large</code>（大型）。
+<section end="codec_salmon_size_component"/></div>
+
+=== sheep/color ===
+<div class="treeview"><section begin="codec_sheep_color_component"/>
+** {{nbt|string|minecraft:sheep/color}}：绵羊的毛色。取值为[[染料颜色]]，即{{cd|d=、|fd=或|white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black}}。
+<section end="codec_sheep_color_component"/></div>
+
+=== shulker/color ===
+<div class="treeview"><section begin="codec_shulker_color_component"/>
+** {{nbt|string|minecraft:shulker/color}}：潜影贝的外壳颜色，如果此组件不存在，则潜影贝使用默认的颜色。取值为[[染料颜色]]，即{{cd|d=、|fd=或|white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black}}。
+<section end="codec_shulker_color_component"/></div>
+
+=== stored_enchantments ===
+<div class="treeview"><section begin="codec_stored_enchantments_component"/>
+** {{nbt|compound|minecraft:stored_enchantments}}：[[附魔书]]保存的魔咒。
+*** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+<section end="codec_stored_enchantments_component"/></div>
+
+=== sulfur_cube_content ===
+<div class="treeview"><section begin="codec_sulfur_cube_content_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:sulfur_cube_content}}：表示[[硫磺史萊姆|硫方怪]]吸收的物品。
+*** {{Nbt inherit/item template}}
+<section end="codec_sulfur_cube_content_component"/></div>
+
+=== suspicious_stew_effects ===
+<div class="treeview"><section begin="codec_suspicious_stew_effects_component"/>
+** {{nbt|list|minecraft:suspicious_stew_effects}}：[[谜之炖菜]]的状态效果信息。
+*** {{nbt|compound}}：一项状态效果信息。
+**** {{nbt|int|duration}}：（默认为160）状态效果的时长，单位为[[刻]]。
+**** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）状态效果。
+<section end="codec_suspicious_stew_effects_component"/></div>
+
+=== swing_animation ===
+<div class="treeview"><section begin="codec_swing_animation_component"/>
+** {{nbt|compound|minecraft:swing_animation}}：使用此物品攻击时的动画。
+*** {{nbt|string|type}}：（默认为<code>whack</code>）摇摆动画类型。取值只能为<code>none</code>（轻微左右摇摆，第一人称下仅为物品上下略微移动）、<code>whack</code>（向前猛击，剑的默认攻击动画）、<code>stab</code>（矛戳刺攻击，被部分生物持有时还会有独特的手部动画）。
+*** {{nbt|int|duration}}：（默认为6）动画播放的周期。
+<section end="codec_swing_animation_component"/></div>
+
+=== tool ===
+<div class="treeview"><section begin="codec_tool_component"/>
+** {{nbt|compound|minecraft:tool}}：物品的挖掘工具属性。
+*** {{nbt|boolean|can_destroy_blocks_in_creative}}：（默认为<code>true</code>）[[创造模式]]玩家能否使用此物品破坏方块。
+*** {{nbt|int|damage_per_block}}：（{{interval|left=0}}，默认为1）破坏硬度非0的方块时物品损失的耐久度。
+*** {{nbt|float|default_mining_speed}}：（{{interval|left=0}}，默认为1）挖掘方块时的速度。
+*** {{nbt|list|rules|existonsave=1|required=1}}：物品与对应可以挖掘的方块的映射列表。
+**** {{nbt|compound}}：一项物品与方块列表的挖掘配置数据。
+***** {{nbt|string}}{{nbt|list|blocks|existonsave=1|required=1}}：此配置指定的有效方块。可以为一个<code>#</code>开头的[[方块标签]]、一个[[Java版数据值|方块ID]]、或一个方块ID的列表。
+***** {{nbt|bool|correct_for_drops}}：此物品是否是所有上方指定方块的合适挖掘工具。
+***** {{nbt|float|speed}}：覆盖所有上方指定方块的使用此物品挖掘时的挖掘速度。
+<section end="codec_tool_component"/></div>
+
+=== tooltip_display ===
+<div class="treeview"><section begin="codec_tooltip_display_component"/>
+** {{nbt|object|minecraft:tooltip_display}}：物品提示框的显示数据。
+*** {{nbt|boolean|hide_tooltip}}：（默认为<code>false</code>）物品提示框是否总是隐藏。
+*** {{nbt|list|hidden_components}}：（默认为空列表）一个物品组件ID列表，列表内的所有组件提供的提示框文本都会被隐藏。如果组件不提供提示框文本，则对其没有效果。
+**** {{nbt|string}}：（命名空间ID）一个物品组件。
+<section end="codec_tooltip_display_component"/></div>
+
+=== tooltip_style ===
+<div class="treeview"><section begin="codec_tooltip_style_component"/>
+** {{nbt|string|minecraft:tooltip_style}}：（命名空间ID）物品提示框外观。提示框外观分为两部分：背景由<code>-{}-<''命名空间''>:tooltip/<''路径''>_background</code>精灵图渲染，边框由<code>-{}-<''命名空间''>:tooltip/<''路径''>_frame</code>精灵图渲染。这两个精灵图都属于[[纹理#GUI纹理|GUI纹理]]，默认会被解析为{{filepath|-{}-assets/<''命名空间''>/textures/gui/sprites/tooltip/<''路径''>_background.png}}和{{filepath|-{}-assets/<''命名空间''>/textures/gui/sprites/tooltip/<''路径''>_frame.png}}。
+<section end="codec_tooltip_style_component"/></div>
+
+=== trim ===
+<div class="treeview"><section begin="codec_trim_component"/>
+** {{nbt|compound|minecraft:trim}}：物品的[[盔甲纹饰]]信息。
+*** {{nbt|string}}{{nbt|compound|material|existonsave=1|required=1}}：此盔甲纹饰的材料，命名空间ID或内联定义均可。
+**** {{nbt inherit/trim material}}
+*** {{nbt|string}}{{nbt|compound|pattern|existonsave=1|required=1}}：此盔甲纹饰的图案，命名空间ID或内联定义均可。
+**** {{nbt inherit/trim pattern}}
+<section end="codec_trim_component"/></div>
+
+=== tropical_fish/base_color ===
+<div class="treeview"><section begin="codec_tropical_fish_base_color_component"/>
+** {{nbt|string|minecraft:tropical_fish/base_color}}：热带鱼的基础颜色。取值为[[染料颜色]]，即{{cd|d=、|fd=或|white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black}}。
+<section end="codec_tropical_fish_base_color_component"/></div>
+
+=== tropical_fish/pattern ===
+<div class="treeview"><section begin="codec_tropical_fish_pattern_component"/>
+** {{nbt|string|minecraft:tropical_fish/pattern}}：热带鱼的花纹类型。取值只能为<code>kob</code>（{{tp|entity.minecraft.tropical_fish.type.kob}}）、<code>sunstreak</code>（{{tp|entity.minecraft.tropical_fish.type.sunstreak}}）、<code>snooper</code>（{{tp|entity.minecraft.tropical_fish.type.snooper}}）、<code>dasher</code>（{{tp|entity.minecraft.tropical_fish.type.dasher}}）、<code>brinely</code>（{{tp|entity.minecraft.tropical_fish.type.brinely}}）、<code>spotty</code>（{{tp|entity.minecraft.tropical_fish.type.spotty}}）、<code>flopper</code>（{{tp|entity.minecraft.tropical_fish.type.flopper}}）、<code>stripey</code>（{{tp|entity.minecraft.tropical_fish.type.stripey}}）、<code>glitter</code>（{{tp|entity.minecraft.tropical_fish.type.glitter}}）、<code>blockfish</code>（{{tp|entity.minecraft.tropical_fish.type.blockfish}}）、<code>betty</code>（{{tp|entity.minecraft.tropical_fish.type.betty}}）或<code>clayfish</code>（{{tp|entity.minecraft.tropical_fish.type.clayfish}}）。
+<section end="codec_tropical_fish_pattern_component"/></div>
+
+=== tropical_fish/pattern_color ===
+<div class="treeview"><section begin="codec_tropical_fish_pattern_color_component"/>
+** {{nbt|string|minecraft:tropical_fish/pattern_color}}：热带鱼的花纹颜色。取值为[[染料颜色]]，即{{cd|d=、|fd=或|white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black}}。
+<section end="codec_tropical_fish_pattern_color_component"/></div>
+
+=== unbreakable ===
+<div class="treeview"><section begin="codec_unbreakable_component"/>
+** {{nbt|compound|minecraft:unbreakable}}：空标签，此组件存在时物品无法破坏，不存在耐久度。
+<section end="codec_unbreakable_component"/></div>
+
+=== use_cooldown ===
+<div class="treeview"><section begin="codec_use_cooldown_component"/>
+** {{nbt|compound|minecraft:use_cooldown}}：设置物品的使用冷却行为。冷却时间会作用在一个“冷却组”上。
+*** {{nbt|string|cooldown_group}}：（命名空间ID）设置物品冷却组。同冷却组的物品会同时受到同一个物品冷却影响，在冷却时间内所有同冷却组的物品都无法使用。如果此值不存在，游戏将以物品的命名空间ID作为冷却组ID使用。
+*** {{nbt|float|seconds|existonsave=1|required=1}}：（{{interval|left_open=0}}）物品使用后的冷却时间，单位为秒。
+<section end="codec_use_cooldown_component"/></div>
+
+=== use_effects ===
+<div class="treeview"><section begin="codec_use_effects_component"/>
+** {{nbt|compound|minecraft:use_effects}}：设置物品被使用时的部分行为。
+*** {{nbt|bool|can_sprint}}：（默认为<code>false</code>）玩家在使用此物品时是否可以疾跑。
+*** {{nbt|boolean|interact_vibrations}}：（默认为<code>true</code>）生物使用此物品时是否会发出<code>item_interact_finish</code>和<code>item_interact_start</code>[[游戏事件]]。此值为<code>false</code>或者此组件不存在时使用此物品不会发出这两个游戏事件。
+*** {{nbt|float|speed_multiplier}}：（{{interval|left=0|right=1}}，默认为0.2）玩家使用此物品时的速度倍率。
+<section end="codec_use_effects_component"/></div>
+
+=== use_remainder ===
+<div class="treeview"><section begin="codec_use_remainder_component"/>
+** {{nbt|string}}{{nbt|compound|minecraft:use_remainder}}：控制物品在消耗使用且物品数量减少后游戏返还的物品。如果玩家物品栏在欲返还物品时已满，则掉落成为物品实体。
+*** {{nbt inherit/item template}}
+<section end="codec_use_remainder_component"/></div>
+
+=== villager/variant ===
+<div class="treeview"><section begin="codec_villager_variant_component"/>
+** {{nbt|string|minecraft:villager/variant}}：（命名空间ID）[[村民]]类型，取值可以为<code>desert</code>（沙漠）、<code>jungle</code>（丛林）、<code>plains</code>（默认）、<code>savanna</code>（热带草原）、<code>snow</code>（雪原）、<code>swamp</code>（沼泽）和<code>taiga</code>（针叶林）。
+<section end="codec_villager_variant_component"/></div>
+
+=== weapon ===
+<div class="treeview"><section begin="codec_weapon_component"/>
+** {{nbt|compound|minecraft:weapon}}：设置物品的武器数据。此组件存在时物品使用次数统计信息会在用此物品攻击时增加。
+*** {{nbt|float|disable_blocking_for_seconds}}：（{{interval|left=0}}，默认为0）攻击成功停用目标盾牌的秒数。
+*** {{nbt|int|item_damage_per_attack}}：（{{interval|left=0}}，默认为1）每次攻击对此物品造成的损伤值，即损耗的耐久度。
+<section end="codec_weapon_component"/></div>
+
+=== wolf/collar ===
+<div class="treeview"><section begin="codec_wolf_collar_component"/>
+** {{nbt|string|minecraft:wolf/collar}}：狼的项圈颜色。取值为[[染料颜色]]，即{{cd|d=、|fd=或|white|orange|magenta|light_blue|yellow|lime|pink|gray|light_gray|cyan|purple|blue|brown|green|red|black}}。
+<section end="codec_wolf_collar_component"/></div>
+
+=== wolf/sound_variant ===
+<div class="treeview"><section begin="codec_wolf_sound_variant_component"/>
+** {{nbt|string|minecraft:wolf/sound_variant}}：（命名空间ID）狼的音效变种。
+<section end="codec_wolf_sound_variant_component"/></div>
+
+=== wolf/variant ===
+<div class="treeview"><section begin="codec_wolf_variant_component"/>
+** {{nbt|string|minecraft:wolf/variant}}：（命名空间ID）[[狼]]的变种。
+<section end="codec_wolf_variant_component"/></div>
+
+=== writable_book_content ===
+<div class="treeview"><section begin="codec_writable_book_content_component"/>
+** {{nbt|compound|minecraft:writable_book_content}}：[[书与笔]]的数据。
+*** {{nbt|list|pages}}：（最多100个元素）书与笔内存储的页信息，必须为以下格式之一。
+**** {{nbt|string}}：（长度不超过1024）书与笔内一页的文本信息。如果开启过滤，则代表文本信息与原信息一致。
+**** {{nbt|compound}}：书与笔内一页的信息。
+***** {{nbt|string|filtered}}：（长度不超过1024）已过滤的文本信息。在开启过滤时，此字符串的优先级高于原始文本。被开启过滤的玩家更新时会删除原始文本并将此过滤文本作为原始文本，而被未开启过滤的玩家更新时会被移除。
+***** {{nbt|string|raw|existonsave=1|required=1}}：（长度不超过1024）未过滤的文本原始信息。
+<section end="codec_writable_book_content_component"/></div>
+
+=== written_book_content ===
+<div class="treeview"><section begin="codec_written_book_content_component"/>
+** {{nbt|compound|minecraft:written_book_content}}：[[成书]]的数据。
+*** {{nbt|string|author|existonsave=1|required=1}}：成书的作者。
+*** {{nbt|int|generation}}：（默认为<code>0</code>）决定成书的复制程度。可以为<code>0</code>（{{tp|book.generation.0}}），<code>1</code>（{{tp|book.generation.1}}），<code>2</code>（{{tp|book.generation.2}}），<code>3</code>（{{tp|book.generation.3}}）。
+*** {{nbt|list|pages}}：成书内存储的页信息，必须使用以下格式之一。
+**** {{nbt|string}}{{nbt|object}}{{nbt|list}}：（[[文本组件]]）成书内一页的信息。如果开启过滤，则代表过滤后文本信息与原信息一致。
+**** {{nbt|object}}：成书页内信息的另一种格式。如果采用复合标签定义文本组件，则只要存在<code>raw</code>字段就会以此格式解析。
+***** {{nbt|string}}{{nbt|object}}{{nbt|list|filtered}}：（文本组件）已过滤的文本信息。在开启过滤时，此文本的优先级高于原始文本。被开启过滤的玩家更新时会删除原始文本并将此过滤文本作为原始文本，而被未开启过滤的玩家更新时会被移除。
+***** {{nbt|string}}{{nbt|object}}{{nbt|list|raw|existonsave=1|required=1}}：（文本组件）未过滤的原始信息。
+*** {{nbt|bool|resolved}}：（默认为<code>false</code>）表示这本成书是否已经被解析，决定是否在打开成书时进行成书内文本的解析。
+*** {{nbt|string}}{{nbt|compound|title|existonsave=1|required=1}}：（长度不超过32）成书的标题信息。为{{nbt|string}}格式时，如果开启过滤，则代表此标题过滤后与原标题一致。
+**** {{nbt|string|filtered}}：（长度不超过32）已过滤的标题信息。在开启过滤时，此字符串优先级高于{{nbt|string|raw}}。
+**** {{nbt|string|raw|existonsave=1|required=1}}：（长度不超过32）未过滤的标题原始信息。
+<section end="codec_written_book_content_component"/></div>
+
+=== zombie_nautilus/variant ===
+<div class="treeview"><section begin="codec_zombie_nautilus_variant_component"/>
+** {{nbt|string|minecraft:zombie_nautilus/variant}}：（命名空间ID）[[僵尸鹦鹉螺]]的变种。
+<section end="codec_zombie_nautilus_variant_component"/></div>
+
+== 已移除的组件 ==
+=== fire_resistant ===
+<div class="treeview"><section begin="codec_fire_resistant_component"/>
+** {{nbt|compound|minecraft:fire_resistant}}：空标签，此组件存在时物品不受火焰伤害影响。
+<section end="codec_fire_resistant_component"/></div>
+
+=== hide_additional_tooltip ===
+<div class="treeview"><section begin="codec_hide_additional_tooltip_component"/>
+** {{nbt|compound|minecraft:hide_additional_tooltip}}：空标签，此组件存在时提示框不会显示附加信息。
+<section end="codec_hide_additional_tooltip_component"/></div>
+
+=== hide_tooltip ===
+<div class="treeview"><section begin="codec_hide_tooltip_component"/>
+** {{nbt|compound|minecraft:hide_tooltip}}：空标签，此组件存在时不会渲染提示框。
+<section end="codec_hide_tooltip_component"/></div>
+
+== 注释 ==
+本条目的合并来源条目如下：
+* [[数据组件]]
+{{collapseH}}
+* [[物品堆叠组件/attribute modifiers]]
+* [[物品堆叠组件/banner patterns]]
+* [[物品堆叠组件/bees]]
+* [[物品堆叠组件/block entity data]]
+* [[物品堆叠组件/block state]]
+* [[物品堆叠组件/blocks attacks]]
+* [[物品堆叠组件/bucket entity data]]
+* [[物品堆叠组件/bundle contents]]
+* [[物品堆叠组件/can place on]]
+* [[物品堆叠组件/charged projectiles]]
+* [[物品堆叠组件/consumable]]
+* [[物品堆叠组件/container]]
+* [[物品堆叠组件/container loot]]
+* [[物品堆叠组件/custom data]]
+* [[物品堆叠组件/damage resistant]]
+* [[物品堆叠组件/death protection]]
+* [[物品堆叠组件/debug stick state]]
+* [[物品堆叠组件/dyed color]]
+* [[物品堆叠组件/enchantments]]
+* [[物品堆叠组件/entity data]]
+* [[物品堆叠组件/equippable]]
+* [[物品堆叠组件/firework explosion]]
+* [[物品堆叠组件/fireworks]]
+* [[物品堆叠组件/food]]
+* [[物品堆叠组件/instrument]]
+* [[物品堆叠组件/jukebox playable]]
+* [[物品堆叠组件/lodestone tracker]]
+* [[物品堆叠组件/lore]]
+* [[物品堆叠组件/map decorations]]
+* [[物品堆叠组件/pot decorations]]
+* [[物品堆叠组件/potion contents]]
+* [[物品堆叠组件/profile]]
+* [[物品堆叠组件/recipes]]
+* [[物品堆叠组件/suspicious stew effects]]
+* [[物品堆叠组件/tool]]
+* [[物品堆叠组件/trim]]
+* [[物品堆叠组件/unbreakable]]
+* [[物品堆叠组件/use cooldown]]
+* [[物品堆叠组件/writable book content]]
+* [[物品堆叠组件/written book content]]
+{{collapseE}}
+
+[[Category:顶级数据值页面]]

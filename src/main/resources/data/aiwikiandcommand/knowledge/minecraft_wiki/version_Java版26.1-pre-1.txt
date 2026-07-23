@@ -1,0 +1,179 @@
+# 页面: Java版26.1-pre-1
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8826.1-pre-1
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:36
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=26.1-pre-1
+|image=26.1-pre-1.jpg
+|image2=Java Edition 26.1-pre-1 Simplified.png\Java Edition 26.1-pre-1 Traditional.png\Java Edition 26.1-pre-1 Traditional HK.png
+|edition=Java
+|type=Pre-release
+|date=2026年3月10日
+|jsonhash=7563f53aad922463b14d8192dfea989e6abb0ff3
+|clienthash=a623b4ac667739eb36956494a3e7ce98ff4da095
+|serverhash=07127fc27cad5f29b326cb9c5ef8bb24599e2c11
+|parent=26.1
+|prevparent=1.21.11
+|prev=26.1-snapshot-11
+|next=26.1-pre-2
+|nextparent=26.1.1
+}}<onlyinclude>
+
+'''26.1-pre-1'''是[[Java版26.1]]的首个预发布版，发布于2026年3月10日<ref>{{article|minecraft-26-1-pre-release-1|Minecraft 26.1 Pre-Release 1|Mar 10, 2026}}</ref>，更新了全景图，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|time}}'''
+* 加入了<code>time [of <clock>] rate <rate></code>子命令，设定时钟步进的速率乘数。
+** 注意：这只会影响世界时钟及其相关时间线内部时钟的速率。
+*** 例如，对于时钟<code>minecraft:overworld</code>，速率设定为更大的值时昼夜更替更加快，但实际的游戏模拟不会加速，不会像<code>/tick rate</code>那样。
+** <code>rate</code>为1时对应正常速度。
+** <code>rate</code>是一个浮点数，在0（不包含）和1000（包含）之间。
+
+=== 常规 ===
+'''[[谓词]]'''
+* 加入了战利品表谓词<code>minecraft:environment_attribute_check</code>。
+** 在指定的位置上精确匹配环境属性的值。
+** 如果环境属性可以随位置变化，则需要具有参数<code>origin</code>的战利品上下文。
+** 格式：
+*** <code>attribute</code>：要测试的环境属性的ID。
+*** <code>value</code>：要匹配的环境属性的精确值。
+** 示例：<code>{condition: 'environment_attribute_check', attribute: 'gameplay/piglins_zombify', value: true}</code>。
+
+'''[[数值提供器]]'''
+* 加入了<code>minecraft:environment_attribute</code>。
+** 获取并提供可以代表数值的环境属性的值。
+** 如果环境属性可以随位置变化，则需要具有参数<code>origin</code>的战利品上下文。
+** 格式：
+*** <code>attribute</code>：要获取的环境属性的ID。
+** 示例：<code>{type: 'environment_attribute', attribute: 'gameplay/sky_light_level'}</code>。
+
+'''整数提供器'''
+* 加入了整数提供器<code>trapezoid</code>。
+** 类似于浮点提供器<code>trapezoid</code>，根据梯形分布选择随机数。
+** 格式：
+*** <code>min</code>：整数，生成值的最小值。
+*** <code>max</code>：整数，生成值的最大值。
+*** <code>plateau</code>：整数，整个分布中概率相同的“平台”宽度。
+**** 为0时代表三角分布。
+**** 为<code>max - min</code>时代表均匀分布。
+
+'''[[Java版标签|标签]]'''
+* 加入了已配置的地物标签：
+** <code>#can_spawn_from_bone_meal</code>：可以通过使用骨粉在生物群系中生成的地物。地物本身必须在对应的生物群系中引用。
+
+'''[[物品模型映射]]'''
+* <code>minecraft:end_cube</code>特殊模型类型
+** 新的特殊模型类型，用相同的纹理效果渲染一个立方体，就像末地传送门和末地折跃门方块那样。
+** 格式：
+*** <code>effect</code>：纹理效果，必须为<code>portal</code>或<code>gateway</code>之一。
+
+== 更改 ==
+=== 方块 ===
+'''[[滴水石锥]]'''
+* 现在当下表面附着滴水石锥的[[滴水石块]]上方为[[含水]]方块时，下方的滴水石锥可以生长。
+
+=== 生物 ===
+'''[[狼]]'''
+* 更改了幼年狼的尾巴的纹理映射。
+* 更改了幼年狼的纹理来修复重叠纹理的漏洞。
+
+'''[[僵尸猪灵]]'''
+* 更改了幼年僵尸猪灵的鼻子的纹理。
+
+=== 常规 ===
+'''[[全景图]]'''
+* 更新了主菜单全景图以匹配[[小鬼当家]]。
+** 其使用种子{{cd|-1701815224735573849}}在坐标为X=-256, Y=126, Z=-2007的地方拍摄。<ref>{{ytl|TN_D2Ciln4I|Minecraft 26.1 Panorama FOUND!|Minecraft@Home|March 21, 2026}}</ref>
+
+'''[[数据包]]'''
+* 将数据包版本号更改为<code>101.0</code>。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为<code>84.0</code>。
+
+'''[[数据组件]]'''
+* 更改了<code>minecraft:provides_banner_patterns</code>组件：
+** 此组件现在除了接受标签外，还接受ID或ID的{{tr|列表|串列}}。
+* 更改了<code>minecraft:blocks_attacks</code>组件：
+** <code>bypassed_by</code>字段现在除了接受标签外，还接受ID或ID的{{tr|列表|串列}}。
+* 更改了<code>minecraft:damage_resistant</code>组件：
+** <code>types</code>字段现在除了接受标签外，还接受ID或ID的{{tr|列表|串列}}。
+
+'''[[战利品表函数]]'''
+* 更改了<code>minecraft:set_instrument</code>：
+** <code>options</code>字段现在除了接受标签外，还接受ID或ID的{{tr|列表|串列}}。
+
+'''[[已配置的地物]]'''
+* 通过使用骨粉生成的地物现在不再要求是<code>flower</code>地物类型，而是改为使用已配置的地物标签<code>#can_spawn_from_bone_meal</code>来控制。
+* 移除了<code>flower</code>、<code>flower_no_bonemeal</code>、和<code>random_patch</code>地物类型。
+** 作为替代，斑块可以表达为一个<code>count</code>和<code>random_offset</code>放置修饰器组成的序列。
+
+'''[[文本组件]]'''
+* 对<code>object</code>类型的更改：<!--官网日志写法不明所以，不用-->
+** 加入了新的可选字段<code>fallback</code>，内容为文本组件，当{{tr|对象|物件}}组件无法渲染时使用，例如在服务器控制台打印消息或复述文本。
+* <code>player</code>类型的{{tr|对象|物件}}组件（渲染玩家的头）不再可以在服务器状态消息（MotD）中使用。
+** 所有此类型的组件都将被替换为回落文本。
+
+'''[[数据生成器]]'''
+* 默认组件报告生成器不再生成不存在任何组件的项目的输出文件。
+
+'''方块状态渲染'''
+* 末地传送门和末地折跃门现在在放置在世界中和在方块展示实体渲染中应该看起来相同。
+
+'''[[着色器]]和后处理管线'''
+* 移除了着色器<code>core/rendertype_translucent_moving_block</code>，以支持<code>core/block</code>。
+
+== 修复 ==
+{{fixes|fixedin=26.1 Pre-Release 1|showdesc=1|new=1
+|;26.1前正式版的漏洞
+|195237|末影人手持的或作为方块展示实体的末地传送门方块和末地折跃门方块不渲染，但下界传送门方块渲染。
+|230746|滴水石锥上方2格是含水方块时，可以填充炼药锅，但不会生长。
+|;dev
+|305518|幼年狼的尾巴使用错误的UV映射。
+|305702|僵尸及其变种手持矛时不会播放独有动画。
+|305914|对玩家执行{{cmd|swing|link=none}}时，玩家无法看到自己的手臂在挥动。
+|306056|打开并关闭游戏规则屏幕时，选定难度的文字没有更新。
+|306232|旗帜的方块破坏动画颜色变深了。
+|306315|幼年狼头部左侧没有对齐，导致出现缝隙和纹理错误。
+|306338|幼年僵尸猪灵的鼻子模型大小是3×3×1，但其纹理是针对4×3×1的模型设计的。
+|306341|幼年人形生物转动头部时，穿戴的头盔会偏离中心。
+|306427|手持有空{{cd|kinetic_weapon}}组件物品的生物找到目标时，游戏崩溃。
+|306532|资源包使用过大的纹理时，日志中的报错现在难以理解。
+|306571|{{cd|CommandEncoder#copyTextureToBuffer}}的参数验证语句有误。
+|306612|现在幼年僵尸、尸壳和溺尸手持物品的动作和玩家一样。
+|306624|多种半透明物体现在会被名称标签挡住。
+|306631|对着成年个体使用刷怪蛋生成的幼年僵尸、尸壳、溺尸和僵尸猪灵不能捡起物品。
+|306633|“切换界面”键绑定鼠标按键时无法使用。
+|306653|名称标签现在无法通过视觉不透明方块看到。
+|;prev
+|306705|非默认姿势的铜傀儡像在物品栏中上下颠倒。
+|306706|游戏在失去焦点时卡死。
+|306708|{{cd|left}}和{{cd|right}}方块状态的箱子使用单个箱子的纹理进行渲染。
+|306713|渐淡旗帜中最透明的像素不再可见。
+|306742|渲染有{{cd|oversized_in_gui}}的空物品模型会导致游戏崩溃。
+|306748|出现{{cd|Profiler tick ended before path was fully popped (remainder: 'root'). Mismatched push/pop?}}错误。
+|306796|{{cd|see_through}}为1的文本展示实体与自身发生深度冲突。
+}}</onlyinclude>
+
+== 影片 ==
+由[[slicedlime]]製作的影片：
+{{yt|a_yMZeNl_14}}
+{{yt|LtD-CMxDW2Q}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|2026}}
+
+[[de:26.1-pre-1]]
+[[en:Java Edition 26.1 Pre-Release 1]]
+[[es:Java Edition 26.1 Pre-Release 1]]
+[[fr:Édition Java 26.1 Pre-Release 1]]
+[[it:Java Edition 26.1 Pre-Release 1]]
+[[ja:Java Edition 26.1 Pre-Release 1]]
+[[pt:Edição Java 26.1 Pre-Release 1]]
+[[ru:26.1 Pre-Release 1 (Java Edition)]]

@@ -1,0 +1,123 @@
+# 页面: 知识之薯
+# 来源: https://zh.minecraft.wiki/w/%E7%9F%A5%E8%AF%86%E4%B9%8B%E8%96%AF
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:46
+# 原始 Wikitext 内容:
+
+{{distinguish|知识之书}}
+{{Joke feature|update=24w14potato}}{{Infobox item
+|image=Potato of Knowledge.png
+|invimage1=[知识之薯]Potato of Knowledge[容量：10]
+|invimage2=[知识之薯]Potato of Knowledge[容量：50]
+|invimage3=[知识之薯]Potato of Knowledge[容量：100]
+|nobe=1
+|creative-tab=马铃薯（Potatoes）
+|maxstack=16
+|renewable=是
+|item-id-raw=potato_of_knowledge
+}}
+
+'''知识之薯（Potato of Knowledge）'''是一种可存储[[经验]]的物品。
+
+== 获取 ==
+在[[创造模式物品栏]]中可以获取经验容量为10、50、100的知识之薯。
+
+=== 大脑 ===
+[[大脑]]被破坏后会掉落自身和一个与其吸收经验值等同经验的知识之薯。
+
+如果大脑已吸收的经验值达到1000，储存的经验值会清空，且立即掉落一个包含1000经验的知识之薯。
+
+== 用途 ==
+知识之薯具有[[光效]]。
+
+=== 储存经验 ===
+[[File:Potato of Knowledge Tooltip.png|thumb|一个储存了100点经验的知识之薯]]
+知识之薯可以存储经验，储存的经验数量会以“Amount: <''XP''>”（容量：<''经验数''>）的格式显示在其[[提示框]]中。
+
+长按{{ctrl|使用}}键可以食用知识之薯，食用的动作与其他食物略有不同，时长为{{convert|20}}。食用后，玩家会获得指定数量的经验，但不会回复[[饥饿值]]与[[饱和度]]。
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=java
+|Potato of Knowledge
+|spritetype=item
+|nameid=potato_of_knowledge
+|foot=1}}
+
+=== 物品数据 ===
+{{see also|物品格式}}
+
+{| class="" style="width:100%"
+| style="padding:0;" |
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;background-color: var(--custom-nbt-inherit-color);"
+|-
+! style="text-align:left;" | 默认[[数据组件]]结构和字段<span>[</span>[[编码格式/DataComponent|源页面]]<span>]</span>
+|-
+|
+<div class="treeview">
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="物品共通组件">物品共通组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="物品共通组件">
+** {{nbt|compound}}{{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|list|modifiers}}：提供的属性修饰符。
+**** {{nbt|compound}}：一个修饰符。
+***** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+***** {{nbt|string|name|existonsave=1|required=1}}：当前[[属性修饰符]]的名称。
+***** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+***** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+***** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+***** {{nbt|int array|uuid|existonsave=1|required=1}}：当前属性修饰符的UUID。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示属性修饰符的提示框。
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|compound|levels}}：魔咒数据。
+**** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示魔咒的提示框。
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}：（[[文本组件]]）一行描述信息。
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+</div>
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="该物品的其他组件">该物品的其他组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="该物品的其他组件">
+** {{nbt|bool|minecraft:enchantment_glint_override}}：是否显示[[光效]]。
+** {{nbt|int|minecraft:xp}}：（默认为10）知识之薯储存的经验值。
+</div>
+</div>
+|}
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;"
+|-
+! style="text-align:left;" | JSON
+|-
+|
+<syntaxhighlight copy="1" lang="json">{
+    "minecraft:enchantments": {
+        "levels": {}
+    },
+    "minecraft:attribute_modifiers": {
+        "modifiers": []
+    },
+    "minecraft:lore": [],
+    "minecraft:max_stack_size": 64,
+    "minecraft:repair_cost": 0,
+    "minecraft:rarity": "common",
+    "minecraft:enchantment_glint_override" : true,
+    "minecraft:xp": 10
+}</syntaxhighlight>
+|}
+|}
+
+在默认组件的基础上，知识之薯使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt|int|minecraft:xp}}：（默认为10）知识之薯储存的经验值。
+</div>
+
+== 导航 ==
+{{Navbox jokes|24w14potato}}
+
+[[Category:物品]]
+
+[[en:Potato_of_Knowledge]]
+[[ja:Potato of Knowledge]]

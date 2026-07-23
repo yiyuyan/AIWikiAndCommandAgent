@@ -1,0 +1,24 @@
+# 页面: 物品堆叠组件/tool
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%A0%86%E5%8F%A0%E7%BB%84%E4%BB%B6/tool
+# 分类: 已弃用的模板
+# 抓取时间: 2026-07-14 17:31:52
+# 原始 Wikitext 内容:
+
+<noinclude>{{deprecated|type=模板|historical=1|text=请使用[[编码格式/DataComponent]]代替。}}</noinclude>
+<div class="treeview">
+** {{nbt|compound|tool}} 物品堆叠组件
+*** {{nbt|boolean|can_destroy_blocks_in_creative}}：（默认为<code>true</code>）[[创造模式]]玩家能否使用此物品破坏方块。
+*** {{nbt|int|damage_per_block}}：（{{interval|left=0}}，默认为1）破坏硬度非0的方块时物品损失的耐久度。
+*** {{nbt|float|default_mining_speed}}：（{{interval|left=0}}，默认为1）挖掘方块时的速度。
+*** {{nbt|list|rules|existonsave=1|required=1}}：物品与对应可以挖掘的方块的映射列表。
+**** {{nbt|compound}}：一项物品与方块列表的挖掘配置数据。
+***** {{nbt|string}}{{nbt|list|blocks|existonsave=1|required=1}}：当为字符串时，表示包含指定方块（即检查是否为同一个[[命名空间ID]]）或具有指定的方块[[标签]]的方块（需要在标签名前方写明<code>#</code>）。当为列表时，则包含下列指定方块列表内的所有方块。
+****** {{nbt|string}}：一个方块的命名空间ID。
+***** {{nbt|bool|correct_for_drops}}：设置此物品是所有上方指定方块的合适挖掘工具，并在该方块的[[战利品表]]需要匹配正确工具时掉落物品。
+***** {{nbt|float|speed}}：覆盖所有上方指定方块的使用此物品挖掘时的挖掘速度。
+</div><noinclude>
+[[en:Data component format/tool]]
+[[fr:Format de composant de données/tool]]
+[[ja:アイテムフォーマット/tool]]
+[[pt:Formato de componente de dado/tool]]
+</noinclude>

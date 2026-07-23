@@ -1,0 +1,80 @@
+# 页面: 属性/minecraft：attack damage
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7/minecraft%EF%BC%9Aattack%20damage
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{exclusive|be}}
+{{Infobox attribute
+|bedrock=1
+|attribute-id-raw=<samp>minecraft:attack_damage</samp>
+|redefinition-mode=更新至新的默认值
+|syncable=否
+|legacy-name=<samp>attackDamage</samp><br><samp>generic.attackDamage</samp>}}
+
+'''<samp>minecraft:attack_damage</samp>'''是控制生物近战攻击伤害的[[属性]]。
+
+== 行为 ==
+此属性会参与部分生物的近战攻击伤害计算。它不同于实体行为包中的<samp>minecraft:attack</samp>组件,后者也能直接指定攻击伤害，但不一定通过此属性实例实现。
+
+[[力量（状态效果）|力量]]和[[虚弱]]状态效果会向此属性添加修饰符。
+
+== 使用场景 ==
+{| class="wikitable sortable" style="width:100%"
+! 来源
+! 默认最小值
+! 默认最大值
+! 默认值
+! 备注
+|-
+| {{EntityLink|Ocelot}}
+| 0
+| 单精度浮点数极限
+| 3
+|
+|-
+| {{EntityLink|Cat}}
+| 0
+| 单精度浮点数极限
+| 4
+|
+|}
+
+== 已知修饰符 ==
+{| class="wikitable collapsible" style="width:100%"
+! 名称
+! UUID
+! 操作
+! 运算数
+! 值
+! 数据持久化
+! 来源
+|-
+| <samp>DamageBoost</samp>
+| <samp>648D7064-6A60-4F59-8ABE-C2C23A6DD7A9</samp>
+| add_multiplied_total（Op2）
+| 当前值
+| 2.5
+| 否
+| [[力量（状态效果）|力量]]状态效果
+|-
+| <samp>Weakness</samp>
+| <samp>22653B89-116E-49DC-9B6B-9971489B5BE5</samp>
+| add_value（Op0）
+| 当前值
+| 2.0
+| 否
+| [[虚弱]]状态效果
+|}
+
+== 已知增益 ==
+当前原版未使用此属性的已知增益。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||?|加入了<samp>minecraft:attack_damage</samp>属性。}}
+}}
+
+== 导航 ==
+{{Navbox attributes|bedrock}}

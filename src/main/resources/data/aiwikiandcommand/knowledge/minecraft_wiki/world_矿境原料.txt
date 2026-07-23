@@ -1,0 +1,333 @@
+# 页面: 矿境原料
+# 来源: https://zh.minecraft.wiki/w/%E7%9F%BF%E5%A2%83%E5%8E%9F%E6%96%99
+# 分类: 
+# 抓取时间: 2026-07-14 17:32:54
+# 原始 Wikitext 内容:
+
+{{Joke feature|update=25w14craftmine}}
+{{Infobox item
+|image=Mine Ingredient.png
+|invimage=[&e矿境原料]Mine Ingredient
+|nobe=1
+|rarity=少见
+|renewable=是
+|creative-tab=''无''
+|item-id-raw=mine_ingredient}}
+
+'''矿境原料（Mine Ingredient）'''是一种可以解锁[[矿境效果]]以及合成新[[矿境]]的[[物品]]。
+
+== 获取 ==
+=== 交易 ===
+[[叛徒]]（Traitor）[[村民]]有100%概率分别在新手、学徒、老手、专家和大师级别以5个[[绿宝石]]的价格出售矿境原料，其矿境效果分别为Pillagers（掠夺者）、Vindicators（卫道士）、Evokers（唤魔者）、Ravagers（劫掠兽）和Illusioners（幻术师）。
+
+=== 其他 ===
+{{main|矿境效果}}
+玩家与方块交互、与生物交互、达成进度、获得物品等游戏行为都有概率获取矿境原料。矿境原料的获取概率、获取方式及其包含的矿境效果取决于当前世界矿境效果解锁状态。
+
+== 用途 ==
+玩家获得的矿境原料通常只包含一个矿境效果，且被命名为“Mine Ingredient: <''矿境效果名''>”（矿境效果：<''矿境效果名''>），提示框中还会显示“Bring this item to the Mine exit to unlock as a Mine ingredient”（将此物品带到矿境出口，可解锁为矿境原料）。矿境原料也会根据其包含的矿境效果切换物品模型以指示包含的矿境效果。
+
+若当前世界未解锁某矿境效果，则矿境原料提示框内此效果的描述会显示为“???”而不是对应的矿境效果描述。
+
+玩家从矿境返回主世界时可以解锁离开前持有的所有矿境原料的矿境效果，而玩家对矿境合成台{{ctrl|使用}}矿境原料可以解锁此矿境原料的矿境效果。不论是哪种解锁方式，都只能解锁当前世界未解锁且能在矿境合成台上使用的矿境效果。
+
+玩家可以在[[矿境合成台]]上使用已解锁的矿境效果的矿境原料合成新[[矿境]]。
+
+矿境合成台界面右侧的矿境原料只用于提示此矿境效果如何解锁，而玩家在矿境中时游戏屏幕左上角的矿境原料只用于提示此矿境的矿境效果。这些矿境原料只用于信息提示。
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|Mine Ingredient
+|spritetype=item
+|nameid=mine_ingredient
+|generatetranslationkeys=java
+|foot=1}}
+
+=== 物品数据 ===
+{{see also|物品格式}}
+
+{| class="" style="width:100%"
+| style="padding:0;" |
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;background-color: var(--custom-nbt-inherit-color);"
+|-
+! style="text-align:left;" | 默认[[数据组件]]结构和字段<span>[</span>[[编码格式/DataComponent|源页面]]<span>]</span>
+|-
+|
+<div class="treeview">
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="物品共通组件">物品共通组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="物品共通组件">
+** {{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|compound}}：一个修饰符。
+**** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+**** {{nbt|string|id|existonsave=1|required=1}}：（命名空间ID）当前[[属性修饰符]]的ID。
+**** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+**** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+**** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+** {{nbt|string}}{{nbt|object|minecraft:break_sound}}：物品耐久度耗尽时播放的声音事件。
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+** {{nbt|string|minecraft:item_model}}：（[[命名空间ID]]）为当前物品绑定一个[[物品模型映射]]。
+** {{nbt|string}}{{nbt|object}}{{nbt|list|minecraft:item_name}}：（[[文本组件]]）物品的默认名称。
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}{{nbt|object}}{{nbt|list}}：（[[文本组件]]）一行描述信息。
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+** {{nbt|object|minecraft:tooltip_display}}：物品提示框的显示数据。
+*** {{nbt|boolean|hide_tooltip}}：（默认为<code>false</code>）物品提示框是否总是隐藏。
+*** {{nbt|list|hidden_components}}：（默认为空列表）一个物品组件ID列表，列表内的所有组件提供的提示框文本都会被隐藏。如果组件不提供提示框文本，则对其没有效果。
+**** {{nbt|string}}：（命名空间ID）一个物品组件。
+</div>
+</div>
+|}
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;"
+|-
+! style="text-align:left;" | JSON
+|-
+|
+<syntaxhighlight copy="1" lang="json">{
+    "minecraft:attribute_modifiers": [],
+    "minecraft:break_sound": "minecraft:entity.item.break",
+    "minecraft:enchantments": {},
+    "minecraft:item_model": "minecraft:mine_ingredient",
+    "minecraft:item_name": {
+      "translate": "block.minecraft.mine_ingredient"
+    },
+    "minecraft:lore": [],
+    "minecraft:max_stack_size": 64,
+    "minecraft:rarity": "uncommon",
+    "minecraft:repair_cost": 0,
+    "minecraft:tooltip_display": {}
+}</syntaxhighlight>
+|}
+|}
+
+在默认组件的基础上，矿境原料使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt|compound|minecraft:world_effect_uhint}}：空标签，用于显示矿境效果的提示文本。
+** {{nbt|compound|minecraft:world_effect_unlock}}：空标签，表示此矿境原料是否能解锁矿境效果。
+** {{nbt|compound|minecraft:world_modifiers}} 数据组件
+*** {{nbt|list|effects|required=1|existonsave=1}}：此矿境原料的矿境效果。
+**** {{nbt|string}}：（命名空间ID）一项矿境效果。
+*** {{nbt|boolean|include_description|required=1|existonsave=1}}：是否不在提示框中显示矿境效果列表。
+</div>
+
+矿境原料会根据其<code>world_modifiers</code>组件<code>effects</code>列表的第一个矿境效果在基础物品模型上渲染额外模型，具体对应关系如下：
+
+{| class="wikitable sortable collapsible collapsed"
+! 矿境效果ID || 物品模型映射ID
+|-
+| minecraft:surface_world || minecraft:surface_world
+|-
+| minecraft:floating_islands_world || minecraft:floating_islands_world
+|-
+| minecraft:amplified || minecraft:amplified
+|-
+| minecraft:cave_world || minecraft:cave_world
+|-
+| minecraft:shattered_blocks_world || minecraft:shattered_blocks
+|-
+| minecraft:grid_world || minecraft:grid_world
+|-
+| minecraft:dark_cave_world || minecraft:dark_cave_world
+|-
+| minecraft:surface_exits || minecraft:surface_exits
+|-
+| minecraft:cave_exits || minecraft:cave_exits
+|-
+| minecraft:rare_surface_exits || minecraft:rare_surface_exits
+|-
+| minecraft:event_exit || -
+|-
+| minecraft:plains || minecraft:grass_block
+|-
+| minecraft:savannas || minecraft:acacia_saping
+|-
+| minecraft:forests || minecraft:oak_sapling
+|-
+| minecraft:taigas || minecraft:spruce_sapling
+|-
+| minecraft:jungles || minecraft:jungles_sapling
+|-
+| minecraft:snowy || minecraft:snowball
+|-
+| minecraft:desert || minecraft:sand
+|-
+| minecraft:badlands || minecraft:gray_terracotta
+|-
+| minecraft:swamps || minecraft:mangrove_roots
+|-
+| minecraft:dark_forests || minecraft:creaking_heart
+|-
+| minecraft:ice_spikes || minecraft:packed_ice
+|-
+| minecraft:mushroom_fields || minecraft:red_mushroom
+|-
+| minecraft:nether_barrens || minecraft:netherrack
+|-
+| minecraft:nether_forests || minecraft:warped_fungus
+|-
+| minecraft:deep_dark || minecraft:sculk
+|-
+| minecraft:end || minecraft:end_stone
+|-
+| minecraft:dry_land || minecraft:bucket
+|-
+| minecraft:sheep || minecraft:sheep_spawn_egg
+|-
+| minecraft:cows || minecraft:cow_spawn_egg
+|-
+| minecraft:pigs || minecraft:pig_spawn_egg
+|-
+| minecraft:chickens || minecraft:chicken_spawn_egg
+|-
+| minecraft:frogs || minecraft:frog_spawn_egg
+|-
+| minecraft:foxes || minecraft:fox_spawn_egg
+|-
+| minecraft:goats || minecraft:goat_spawn_egg
+|-
+| minecraft:ocelots || minecraft:ocelot_spawn_egg
+|-
+| minecraft:axolotls || minecraft:axolotl_spawn_egg
+|-
+| minecraft:armadillos || minecraft:armadillo_spawn_egg
+|-
+| minecraft:mooshrooms || minecraft:mooshroom_spawn_egg
+|-
+| minecraft:pandas || minecraft:panda_spawn_egg
+|-
+| minecraft:parrots || minecraft:parrot_spawn_egg
+|-
+| minecraft:rabbits || minecraft:rabbit_spawn_egg
+|-
+| minecraft:sniffers || minecraft:sniffer_spawn_egg
+|-
+| minecraft:striders || minecraft:strider_spawn_egg
+|-
+| minecraft:zombies || minecraft:zombie_spawn_egg
+|-
+| minecraft:skeletons || minecraft:skeleton_spawn_egg
+|-
+| minecraft:spiders || minecraft:spider_spawn_egg
+|-
+| minecraft:cave_spiders || minecraft:cave_spider_spawn_egg
+|-
+| minecraft:creepers || minecraft:creeper_spawn_egg
+|-
+| minecraft:slimes || minecraft:slime_spawn_egg
+|-
+| minecraft:endermen || minecraft:enderman_spawn_egg
+|-
+| minecraft:witches || minecraft:witch_spawn_egg
+|-
+| minecraft:magma_cubes || minecraft:magma_cube_spawn_egg
+|-
+| minecraft:blazes || minecraft:blaze_spawn_egg
+|-
+| minecraft:breezes || minecraft:breeze_spawn_egg
+|-
+| minecraft:pillagers || minecraft:pillager_spawn_egg
+|-
+| minecraft:vindicators || minecraft:vindicator_spawn_egg
+|-
+| minecraft:evokers || minecraft:evoker_spawn_egg
+|-
+| minecraft:ravagers || minecraft:ravager_spawn_egg
+|-
+| minecraft:illusioners || minecraft:illusioners
+|-
+| minecraft:guardians || minecraft:guardian_spawn_egg
+|-
+| minecraft:endermites || minecraft:endermite_spawn_egg
+|-
+| minecraft:shulkers || minecraft:shulker_spawn_egg
+|-
+| minecraft:ghasts || minecraft:ghast_spawn_egg
+|-
+| minecraft:zombified_piglins || minecraft:zombified_piglin_spawn_egg
+|-
+| minecraft:wither_skeletons || minecraft:zombified_piglin_spawn_egg
+|-
+| minecraft:bees || minecraft:bee_spawn_egg
+|-
+| minecraft:hoglins || minecraft:hoglin_spawn_egg
+|-
+| minecraft:zoglins || minecraft:zoglin_spawn_egg
+|-
+| minecraft:icy || minecraft:blue_ice
+|-
+| minecraft:bouncy || minecraft:slime_block
+|-
+| minecraft:base_stone || minecraft:stone
+|-
+| minecraft:base_blackstone || minecraft:blackstone
+|-
+| minecraft:base_diorite || minecraft:diorite
+|-
+| minecraft:base_andesite || minecraft:andesite
+|-
+| minecraft:base_granite || minecraft:granite
+|-
+| minecraft:base_tuff || minecraft:tuff
+|-
+| minecraft:base_deepslate || minecraft:deepslate
+|-
+| minecraft:base_end_stone || minecraft:end_stone
+|-
+| minecraft:one_hp || minecraft:potion
+|-
+| minecraft:wednesday_frogs || minecraft:frog_spawn_egg
+|-
+| minecraft:universal_anger || minecraft:rotten_flesh
+|-
+| minecraft:soul_link || minecraft:lead
+|-
+| minecraft:insomniacs || minecraft:phantom_spawn_egg
+|-
+| minecraft:no_drops || minecraft:dirt
+|-
+| minecraft:ultrawarm || minecraft:lava_bucket
+|-
+| minecraft:explosive_traps || minecraft:tnt
+|-
+| minecraft:fish_out_of_water || minecraft:tropical_fish
+|-
+| minecraft:kuiper_world || minecraft:kuiper_world{{note|此模型映射也被进度“Spaaaaace!”（太——空！）作为进度图标渲染使用。}}
+|-
+| minecraft:ender_dragon_boss_fight || minecraft:end_dragon_spawn_egg
+|-
+| minecraft:angry_ghast_boss_fight || minecraft:ghast_tear
+|-
+| minecraft:raid || minecraft:ominous_bottle
+|-
+| minecraft:wither_boss_fight || minecraft:wither_spawn_egg
+|-
+| minecraft:the_enderman_boss_fight || minecraft:ender_pearl
+|-
+| minecraft:spooky_scary_skeletons_boss_fight || minecraft:skeleton_skull
+|-
+| minecraft:warden_boss_fight || minecraft:warden_spawn_egg
+|-
+| minecraft:small_but_deadly_boss_fight || minecraft:silverfish_spawn_egg
+|}
+
+== 进度 ==
+{{Load advancements|page=进度/25w14craftmine|mine.get_mine_ingredient;mine.cash_in}}
+
+== 你知道吗 ==
+* 鼠标指针悬停于[[矿境合成台]]GUI中未选择的矿境原料时按{{ctrl|交换物品}}键，或按{{ctrl|丢弃}}键后拾起，即可在物品栏中获得该矿境原料。
+
+== 注释 ==
+{{notelist}}
+
+== 导航 ==
+{{Navbox jokes|25w14craftmine}}
+
+[[Category:物品]]
+
+[[en:Mine Ingredient]]
+[[ja:Mine Ingredient]]

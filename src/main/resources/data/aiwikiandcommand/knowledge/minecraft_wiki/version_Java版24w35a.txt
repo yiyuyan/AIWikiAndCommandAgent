@@ -1,0 +1,195 @@
+# 页面: Java版24w35a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8824w35a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:33
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=24w35a
+|image=24w35a.png
+|image2=Java Edition 24w35a Simplified.png\Java Edition 24w35a Traditional.png\Java Edition 24w35a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2024年8月28日
+|jsonhash=ef1297730167607cf1dcf755d86efed837185dea
+|clienthash=23e08d90ceee1b4c8864946479a766e7074f449f
+|clientmap=8c59c979b5606a811f45aacfe955d5e99f903187
+|serverhash=93d259fdba93aa7d3c1763cfb0136295087e0de3
+|servermap=df0bf2c451408f0add7440923142212574d5e0d3
+|parent=1.21.2
+|prevparent=1.21.1
+|prev=24w34a
+|next=24w36a
+|nextparent=1.21.3
+}}<onlyinclude>
+
+'''24w35a'''是[[Java版1.21.2]]的第3个快照，发布于2024年8月28日<ref>{{snap|24w35a|August 28, 2024}}</ref>，修复了一些漏洞。
+
+== 新内容 ==
+=== 常规 ===
+'''实体子谓词'''
+* 加入了实体子谓词{{cd|sheep}}，用于测试绵羊的毛色。
+<div class="treeview">
+:** {{nbt|bool|sheared}}：羊毛是否已被剪下。
+:** {{nbt|string|color}}：绵羊的毛色。
+</div>
+
+== 更改 ==
+=== 方块 ===
+'''[[红石灯]]'''
+* 现在红石灯具有[[地图基色]]<code>TERRACOTTA_ORANGE</code>。
+
+'''[[小麦植株]]'''
+* 方块状态<code>age</code>大于等于6时，方块地图基色现在会变为<code>COLOR_YELLOW</code>。
+
+'''[[试炼刷怪笼]]'''
+* 字段{{cd|d=pretty|normal_config|ominous_config}}现在还可写为字符串，以填写设置数据的命名空间ID。
+
+=== 物品 ===
+'''[[蜂巢（方块）|蜂巢]]和[[蜂箱]]'''
+* 现在会显示蜜蜂数和方块状态<code>honey_level</code>的值。
+* 现在会在物品中储存的方块状态<code>honey_level</code>为5时显示满蜜纹理。
+
+'''[[末影珍珠]]和[[风弹（物品）|风弹]]'''
+* 消耗冷却不再硬编码，现在使用<code>use_cooldown</code>组件。
+
+=== 生物 ===
+'''[[溺尸]]'''
+* 不再尝试在水面游泳。
+
+'''[[鲑鱼]]'''
+* 小、中、大三种体型的鲑鱼的判定箱现在会分别缩放至0.5、1、1.5倍。
+* 鲑鱼的<code>type</code>字段现在能被鲑鱼桶保存。
+
+'''[[行商羊驼]]'''
+* 行商羊驼现在会主动攻击[[僵尸]]、溺尸、[[尸壳]]、[[僵尸村民]]和[[灾厄村民]]。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 更改了“{{Advancement name|husbandry.safely_harvest_honey|zh|rev=1}}”进度的描述。
+
+'''[[魔咒]]'''
+* [[灵魂疾行]]魔咒现在不再在生物飞行、未落地或骑乘实体时对其[[属性/移动效率|移动效率]]属性应用<code>enchantment.soul_speed/feet</code>[[属性修饰符]]。
+
+'''[[袭击]]'''
+* 袭击现在会在开始前尝试生成5次而非3次，尝试生成的范围也不再与生成次数相关联，而是受{{nbt|int|PreRaidTicks}}影响。
+* 袭击者如果不能在目标村庄中心垂直96格内找到可生成位置，则袭击不会开始。
+* 降低了袭击时袭击者无法找到可生成位置的概率。
+
+=== 命令格式 ===
+'''{{cmd|loot}}'''
+* 现在会在尝试生成无对应战利品表的方块掉落物时报错。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|51}}。
+* 加入了{{filename|trial_spawner}}子文件夹以用于配置[[试炼刷怪笼]]。
+
+'''实体数据'''
+* 实体在X轴上的<code>rotation</code>现在会被钳制于-90至90间。
+
+'''[[试炼刷怪笼#数据驱动|试炼刷怪笼设置数据]]'''
+* 试炼刷怪笼现在可由数据包定义。
+* 每个设置子文件夹中具有{{filename|normal.json}}和{{filename|ominous.json}}文件。
+<div class="treeview">
+:* {{nbt|compound}} 父标签
+:** {{nbt|int|spawn_range}}：（{{interval|left=1|right=128}}，默认为<samp>4</samp>）生物的生成范围。
+:** {{nbt|list|loot_tables_to_eject}}：（默认使用<code>consumable</code>和<code>key</code>战利品表）完成试炼后弹出的战利品。
+:*** {{nbt|compound}}：一组战利品表设置。
+:**** {{nbt|string|data|existonsave=1|required=1}}：战利品表路径。
+:**** {{nbt|int|weight|existonsave=1|required=1}}：（{{interval|left_open=0}}）使用此战利品表的权重。
+:** {{nbt|string|items_to_drop_when_ominous}}：不祥状态的试炼刷怪笼激活状态时生成的不祥之物生成器实体内的物品。
+:** {{nbt|float|simultaneous_mobs}}：（{{interval|left=0}}，默认为<samp>2.0</samp>）同时生成的生物的种类数量。
+:** {{nbt|float|simultaneous_mobs_added_per_player}}：（{{interval|left=0}}，默认为<samp>1.0</samp>）每多一个玩家加入试炼，单次额外生成的生物数量。
+:** {{nbt|list|spawn_potentials}}：（默认为空）试炼刷怪笼的生成势。尝试生成时，随机选取其中一项{{nbt|compound|data}}覆盖{{nbt|compound|spawn_data}}。
+:*** {{nbt|compound}}：一组生物生成数据。
+:**** {{nbt|compound|data|existonsave=1|required=1}}：实体数据，与试炼刷怪笼的{{nbt|compound|spawn_data}}数据格式相同。
+:**** {{nbt|int|weight|existonsave=1|required=1}}：（{{interval|left_open=0}}）此生物被选中的权重。
+:** {{nbt|int|ticks_between_spawn}}：（{{interval|left=0}}，默认为<samp>40</samp>）生成间隔。
+:** {{nbt|float|total_mobs}}：（{{interval|left=0}}，默认为<samp>6.0</samp>）生成生物的总数量。
+:** {{nbt|float|total_mobs_added_per_player}}：（{{interval|left=0}}，默认为<samp>2.0</samp>）每多一个玩家加入试炼，生成生物的额外数量。
+</div>
+
+'''[[物品堆叠组件]]'''
+* <code>use_cooldown</code>组件中<code>cooldownGroup</code>字段现被重命名为<code>cooldown_group</code>。
+
+'''[[战利品表]]'''
+* 移除了<code>empty</code>战利品表。
+* [[绵羊]]的击杀掉落物现在只使用<code>entities/sheep</code>战利品表。
+** 表示羊毛掉落的战利品表存储在<code>-{}-entities/sheep/<颜色></code>子表中，由主表统一引用。绵羊的其他掉落物直接存储在主表中。
+* 为绵羊和[[哞菇]]引入了独立的战利品表{{cd|d=pretty|shearing/sheep|shearing/mooshroom}}。
+** 现在绵羊剪毛和哞菇剪蘑菇的掉落物受战利品表{{cd|d=pretty|shearing/sheep|shearing/mooshroom}}控制了。
+** 各种变种所对应的不同战利品表存储在{{cd|d=pretty|shearing/sheep/<颜色>|shearing/mooshroom/<变种>}}子表中，由主表统一引用。
+
+== 更改（实验性） ==
+=== 物品 ===
+'''[[收纳袋]]'''
+* 不再能通过数字键选择物品，现在仅能通过滚轮选择物品。
+* 收纳袋的容量条现在具有新的独立纹理，可以在[[资源包]]中修改。
+
+== 修复 ==
+{{fixes|fixedin=24w35a|veralias=1|showdesc=1
+|;old
+|124331|红石灯不在地图上显示。
+|129298|1格深水中的溺尸不会追逐玩家。
+|146805|行商羊驼不攻击僵尸、溺尸、尸壳、僵尸村民和灾厄村民。
+|148982|小麦的地图颜色错误。
+|167906|物品栏或手中储蜜量为满的蜂箱物品不会呈现蜂蜜。
+|168329|部分情况下，下界/末地中的蜜蜂不会离开它们的巢。
+|168546|蜂巢/箱物品没有具体信息。
+|203382|“{{Advancement name|husbandry.safely_harvest_honey|zh|rev=1}}”进度描述仅表明需要蜂箱解锁。
+|270113|试炼刷怪笼的<code>ominous_config</code>不会将设置值作为默认值保存。
+|270742|展示实体旋转到179到180间时出现异常。
+|272345|部分不祥试炼刷怪笼不会生成额外的旋风人。
+|273601|引雷魔咒不再影响无<code>Owner</code>的三叉戟。
+|273745|在灵魂沙上跳跃时，灵魂疾行动量重置。
+|;dev
+|275204|海岸盔甲纹饰使用通用“锻造模板”名称。
+|275208|快捷键不能向或从物品栏中移动收纳袋。
+|275220|铁桶捕鲑鱼不保存其大小。
+|275222|鲑鱼不论大小如何都总具有一样的判定箱。
+|275256|雪傀儡对天/地而非对生物发射。
+|275275|刷怪笼上的脚步声创造了缺失的字幕。
+|275279|即使村庄周围存在足够近的小岛，袭击者也不会生成。
+|275322|离开和进入部分下界传送门时能获得“{{Advancement name|nether.fast_travel|zh|rev=1}}”。
+|275353|自24w33a起，物品展示框或荧光物品展示框的<code>Fixed</code>标签表现怪异。
+|275358|已重命名的收纳袋中的内容物未居中。
+|275409|用命令将过多物品塞入收纳袋会导致容量条溢出。
+|275410|在创造模式下飞行不再免疫气泡柱推力。
+|275417|即使<code>mobGriefing</code>被设为<samp>false</samp>，苦力怕也能破坏交通工具。
+|275521|高海草能从一格水中被骨粉催出。
+|275523|减少盾牌光效也影响其物品外观。
+|275586|收纳袋中高亮的重命名物品未呈现斜体。
+|275612|收纳袋中高亮的具备稀有度的物品未显示其稀有度颜色。
+|275778|收纳袋满度条的纹理和颜色被硬编码。
+|275838|溺尸倒持三叉戟。
+|;prev
+|275752|<code>CanPickUpLoot</code>标签设为<samp>0b</samp>时，村民在物品周围矗立。
+|275754|偶现随机堆栈跟踪。
+|275755|试图右键更换盔甲会将换下的盔甲删除。
+|275757|大多数情况下{{ctrl|使用}}桶类物品会将铁桶删除。
+|275774|侦测器不再侦测红石粉的供能或断能。
+|275800|半透明层次序损坏。
+|275801|使用冷却在未消耗物品时触发。
+|275828|着色器路径无效时游戏崩溃。
+|275837|<code>use_cooldown</code>组件使用<code>cooldownGroup</code>而非<code>cooldown_group</code>字段。
+|275843|在生存模式下{{ctrl|使用}}一个空地图（单物品堆叠组）不会创建一个地图。
+|275851|<code>teleport_randomly</code>消耗效果中的<code>diameter</code>被忽略。
+|275959|溺尸不再抬手攻击。
+|276053|对水源方块{{ctrl|使用}}的玻璃瓶会被删除。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:24w35a]]
+[[en:Java Edition 24w35a]]
+[[es:Java Edition 24w35a]]
+[[fr:Édition Java 24w35a]]
+[[ja:Java Edition 24w35a]]
+[[pt:Edição Java 24w35a]]
+[[ru:24w35a (Java Edition)]]
+[[uk:24w35a (Java Edition)]]

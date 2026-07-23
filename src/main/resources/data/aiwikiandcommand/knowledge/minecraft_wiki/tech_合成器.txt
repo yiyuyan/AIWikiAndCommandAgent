@@ -1,0 +1,300 @@
+# 页面: 合成器
+# 来源: https://zh.minecraft.wiki/w/%E5%90%88%E6%88%90%E5%99%A8
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 可再生资源, 基岩版独有信息, 方块, 红石
+# 抓取时间: 2026-07-14 17:21:19
+# 原始 Wikitext 内容:
+
+{{distinguish|工作台}}
+{{Infobox block
+|group1=闲置
+|1-1= Crafter.png
+|group2=激活
+|2-1=Crafter Triggered.png
+|group3=输出
+|3-1=Crafter Crafting.png
+| invimage = Crafter
+}}
+
+'''合成器（Crafter）'''是一种在接收到红石信号时自动[[合成]]并丢出产物的类似[[工作台]]的[[方块]]。
+
+== 生成 ==
+合成器不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1=Iron Ingot    |B1=Iron Ingot     |C1=Iron Ingot
+|A2=Iron Ingot    |B2=Crafting Table |C2=Iron Ingot
+|A3=Redstone Dust |B3=Dropper        |C3=Redstone Dust
+|Output=Crafter
+|type=Redstone
+}}
+
+== 破坏 ==
+挖掘合成器的合适工具是镐。
+
+{{Breaking table}}
+
+合成器被破坏后会掉落自身。
+
+== 用途 ==
+合成器是[[红石元件]]，可以合成物品或作为特殊的容器。
+
+合成器的放置方式类似于[[活塞]]，放置后其正面（即输出口的一端）会朝向玩家。
+
+{{in|je}}合成器不能被活塞移动。
+
+[[水]]和[[熔岩]]流会绕开合成器。
+
+=== 容器 ===
+{{Filetr|Crafter GUI.png|thumb|250px|合成器的界面}}
+{{Filetr|Slot Disabling.png|thumb|250px|点击槽位可以禁用，使物品摆放成配方的顺序}}
+[[File:InsertingLeather.gif|thumb|250px|漏斗向合成器的未禁用槽位中填入皮革]]
+对着合成器按下{{ctrl|使用}}可以打开其界面。合成器拥有3×3的合成方格，它们亦可用作物品储存槽位，允许多名玩家同时操作。
+
+合成方格的每个槽位都可以被单独禁用：
+* 空手单击槽位可禁用该槽位，再次点击可取消禁用。
+* 尝试向已禁用的槽位放置物品时将取消禁用该槽位，同时置入物品。
+
+[[漏斗]]、[[投掷器]]和其他合成器可以与合成器的任何一面互动，将物品转入合成器的'''未禁用'''槽位。
+* 接收的物品从左到右，从上到下依次填满空的未禁用槽位。
+* 如果没有空的槽位，新物品则按左上至右下的顺序优先填入同类物品堆叠数最小的槽位。
+* 若新物品未能填入合适的槽位，按容器已满处理。
+
+漏斗和[[漏斗矿车]]从合成器中取出物品的顺序与其他容器一致。
+
+[[红石比较器]]可以检测合成器被禁用及被物品占用的槽位数量，并输出对应强度的红石信号。
+
+合成器界面的标题默认为“合成器”，可以在放置前使用[[铁砧]]重命名来进行更改，{{in|je}}也可以通过使用{{cmd|data}}命令修改合成器的<code>CustomName</code>标签进行更改（例如，要将坐标(0,64,0)处的合成器命名为“Alice's Crafter”，可以使用命令{{cmd|data merge block 0 64 0 {CustomName:"\"Alice's Crafter\""} }}）。
+
+{{in|je}}合成器可以被<code>lock</code>标签上锁。如果合成器的该标签不是空白的，那么这个合成器必须使用符合该标签表示的物品谓词的物品打开。
+
+=== 红石元件 ===
+{{see also|红石电路}}
+
+'''激活'''
+
+合成器是[[红石元件#机械元件|机械元件]]，可被下列形式激活：
+* 毗邻的开启的'''[[红石元件#电源|电源]]'''（例外：[[红石火把]]不会激活其所附着的合成器，[[侦测器]]只会激活指向的合成器）。
+* 毗邻的'''[[红石电路/充能与激活|充能方块]]'''。
+* 毗邻的指向合成器且激活的[[红石中继器]]、[[红石比较器]]或[[红石粉]]（包括合成器上方的红石粉）；毗邻但未指向合成器的红石粉不会激活合成器。
+
+{{in|je}}与发射器和投掷器不同，合成器不受[[Tutorial:半连接性|半连接性]]影响。
+
+{{in|be}}在同一红石刻内，电容器更新阶段前存在，但在电容器更新阶段被取消的信号无法激活合成器。
+
+'''行为'''
+
+依照合成配方在合成方格内摆放物品时，右边的输出槽会显示产物，但不能像[[工作台]]一样直接取走产物，产物也不能被漏斗提取。
+
+被激活后，合成器会产生1个计划刻，在延时2红石刻（4游戏刻，0.2秒）后合成器会消耗合成方格中的材料合成一份产物。若配方不能合成任何物品，那么材料会保留在合成器内。
+
+合成产物后，合成器会以[[物品（实体）|掉落物]]形式从正面掷出产物。但若合成器前方存在[[容器]]（可为另一个合成器），且容器的槽位允许接收该产物，那么产物会直接存入容器（类似于投掷器，详见{{slink|投掷器|红石元件}}）。但也与投掷器不同，若容器空间不足以容纳全部产物时，多余产物会直接被掷出。
+
+若一个配方会在合成方格中留有物品（如合成[[蛋糕]]时留下的3个[[铁桶]]、合成[[蜂蜜块]]时留下的4个[[玻璃瓶]]、合成复制[[成书]]时留下的原本成书），那么这些物品会跟随产物一起被投掷。
+
+合成器被激活时，两个顶点处的红石纹理会亮起并发出一个音调稍高的清脆响声。合成器成功合成物品时，其顶部的合成方格纹理也会亮起并发出清脆响声，同时敞开正面的输出口并产生[[粒子#white_smoke|白烟粒子]]。合成器的音效最远可在16格听到。合成器向容器传递物品时不发出响声。
+
+合成器只在激活信号到达（[[红石电路#信号与脉冲|上升沿]]）时合成物品，保持激活时不会连续合成物品。若要连续合成物品，需用[[时钟电路]]反复激活合成器。
+
+合成器是[[红石导体]]，因此可以充能合成器，被充能的合成器也能作为充能方块激活毗邻的其他元件，这导致漏斗和投掷器无法向被激活的合成器中连续传输物品。
+
+若以恰当的顺序控制合成器的内容物，合成器可自动完成游戏中任意配方的合成操作。
+
+== 音效 ==
+{{Sound table/Block/Stone
+|suffix-je=
+{{Sound table
+|sound=Crafter craft.ogg
+|subtitle={{tp|subtitles.block.crafter.craft}}
+|source={{tp|soundCategory.block}}
+|description=成功合成物品
+|id=block.crafter.craft
+|translationkey=subtitles.block.crafter.craft
+|volume=1.0
+|pitch=1.0/0.96/1.04
+|distance=5}}
+{{Sound table
+|sound=Crafter fail.ogg
+|subtitle={{tp|subtitles.block.crafter.fail}}
+|source={{tp|soundCategory.block}}
+|description=合成物品失败
+|id=block.crafter.fail
+|translationkey=subtitles.block.crafter.fail
+|volume=1.0
+|pitch=1.0/0.96/1.04
+|distance=3
+|foot=1}}
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=Crafter craft.ogg
+|source=方块
+|description=成功合成物品
+|id=crafter.craft
+|typeid=crafter.craft
+|soundvolume
+|soundpitch=0.96/1.04<ref group="音效" name="2pitch">这里代表此音效文件分别以2种不同的音高播放。</ref>
+|sounddistance=5
+}}
+{{Sound table
+|bedrock=1
+|sound=Crafter fail.ogg
+|source=方块
+|description=合成物品失败
+|id=crafter.fail
+|typeid=crafter.fail
+|soundvolume
+|soundpitch=0.96/1.04<ref group="音效" name="2pitch"/>
+|sounddistance=3
+}}
+{{Sound table
+|bedrock=1
+|sound=Click.ogg
+|source=声音
+|description=启用合成器槽位
+|id=random.click
+|typeid=random.click
+|soundvolume=0.4
+|soundpitch
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=Click pitch0.75.ogg
+|source=方块
+|description=禁用合成器槽位
+|id=crafter.disable_slot
+|typeid=crafter.disable_slot
+|soundvolume=0.4
+|soundpitch=0.75
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Crafter
+|spritetype=block
+|showblocktags=je
+|blocktags={{GameTag|block|crafter}}
+|nameid=crafter
+|foot=1}}
+{{ID table
+|Crafter
+|displayname=方块实体
+|spritetype=block
+|nameid=crafter
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Crafter
+|spritetype=block
+|nameid=crafter
+|showblocktags=be
+|blocktags={{GameTagBE|block|crafter}}
+|foot=1
+}}
+{{ID table
+|Crafter
+|displayname=方块实体
+|spritetype=block
+|nameid=Crafter
+|foot=1
+}}
+
+=== 方块状态 ===
+{{See also|方块状态}}
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+合成器的方块实体包含了合成器的更多数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 成就 ==
+{{Load achievements|crafters-crafting-crafters}}
+
+== 进度 ==
+{{Load advancements|adventure.crafters_crafting_crafters}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2023年10月15日|link={{ytl|DnY5xz11lR0}}|[[File:Crafter JE1.png|32px]] [[File:Crafter Triggered JE1.png|32px]] [[File:Crafter Crafting JE1.png|32px]] [[Minecraft Live 2023]]展示了合成器。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.3|exp=update_1_21|dev=23w42a|[[File:Crafter JE1.png|32px]] [[File:Crafter Triggered JE1.png|32px]] [[File:Crafter Crafting JE1.png|32px]] 加入了合成器。
+|此时合成器输出物品的频率为1游戏刻。}}
+|{{HistoryLine|||dev=23w43a|[[File:Crafter JE2.png|32px]] [[File:Crafter Triggered JE2.png|32px]] [[File:Crafter Crafting JE2.png|32px]] 更改了合成器的纹理。}}
+|{{HistoryLine|||dev=23w46a|[[File:Crafter JE3.png|32px]] [[File:Crafter Triggered JE3.png|32px]] [[File:Crafter Crafting JE3.png|32px]] 再次更改了合成器的纹理。
+|现在合成器输出物品的频率为4游戏刻，与发射器、投掷器相同。}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w03a|[[File:Crafter JE4 BE3.png|32px]] [[File:Crafter Triggered JE4 BE3.png|32px]] [[File:Crafter Crafting JE4 BE3.png|32px]] 更改了合成器的模型UV映射，现在顶面纹理不再反转。<ref>{{bug|MC-267149|||Fixed}}</ref>}}
+|{{HistoryLine||1.21|dev=24w18a|合成器不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|dev=24w39a|表示合成器锁定的方块实体数据更改为物品谓词{{nbt|compound|lock}}。先前，合成器用{{nbt|string|Lock}}表示其被锁定；如该标签存在，该合成器只能用自定义名称与该标签相同的物品打开。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.50|exg=updateAnnouncedLive2023|dev=1.20.50.21|[[File:Crafter BE1.png|32px]] [[File:Crafter Triggered BE1.png|32px]] [[File:Crafter Crafting BE1.png|32px]] 加入了合成器。}}
+|{{HistoryLine|||dev=1.20.50.23|[[File:Crafter BE2.png|32px]] [[File:Crafter Triggered BE2.png|32px]] [[File:Crafter Crafting BE2.png|32px]] 更改了合成器的纹理。}}
+|{{HistoryLine||1.20.60|exg=updateAnnouncedLive2023|dev=1.20.60.20|[[File:Crafter JE4 BE3.png|32px]] [[File:Crafter Triggered JE4 BE3.png|32px]] [[File:Crafter Crafting JE4 BE3.png|32px]] 再次更改了合成器的纹理。}}
+|{{HistoryLine||1.21.0|dev=1.21.0.22|合成器不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.22|将合成器的{{cd|d=pretty|crafter.craft|crafter.fail}}音效的衰减距离由16格减少至5格。}}
+|{{HistoryLine|||dev=1.21.20.21|调整了合成器的{{cd|d=pretty|crafter.craft|crafter.fail}}音效的音高和衰减距离。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|现在任何镐都能够加速挖掘合成器。此前合成器需要石镐或品质更好的镐来挖掘，否则挖掘时间将延长，但仍然会掉落。<ref>{{bug|MCPE-176374|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=1.21.50.24|现在合成器不再会在不使用镐挖掘时延长挖掘时间。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.27|现在合成器不再能同时拥有多个计划刻。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.22|回退了1.21.60.27中的变更。<ref>{{bug|MCPE-189895|||Fixed}}</ref>}}
+}}
+
+== 画廊 ==
+=== 开发截图 ===
+<gallery>
+MCLive Crafter.png|[[Minecraft Live 2023]]展示的合成器
+Crafter teaser 01.jpg|一个合成器被激活并丢出[[悬挂式樱花木告示牌]]<ref>{{tweet|Minecraft|1713611651826774207|New Utility Block from #MinecraftLive: The Crafter Try out the new Crafter to automate crafting with Redstone pulses. Whether you’re experienced with Redstone or a beginner, you can use the Crafter to make simple or intricate machines to create your own item factory.|October 15, 2023}}</ref>
+</gallery>
+
+=== 概念艺术 ===
+<gallery>
+Crafter Concept art.png|合成器的概念艺术
+Crafter Concept Art.png|合成器的概念图
+Crafter UI Developement.png|同前图
+Crafter Early Texture.png|合成器的早期纹理
+</gallery>
+
+=== 艺术作品 ===
+<gallery>
+Efe and Crafter Artwork.png|Efe用合成器合成[[蛋糕]]的艺术作品
+</gallery>
+
+== 参见 ==
+* {{BlockLink|Crafting Table}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|redstone blocks}}
+{{Navbox redstone}}
+
+[[de:Werker]]
+[[en:Crafter]]
+[[es:Fabricador]]
+[[fr:Fabricateur]]
+[[ja:自動作業台]]
+[[ko:제작기]]
+[[lzh:製械]]
+[[pl:Wytwarzacz]]
+[[pt:Bancada Automática]]
+[[ru:Сборщик]]
+[[uk:Майструвач]]

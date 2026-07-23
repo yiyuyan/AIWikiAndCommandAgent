@@ -1,0 +1,578 @@
+# 页面: 移动
+# 来源: https://zh.minecraft.wiki/w/%E7%A7%BB%E5%8A%A8
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 待更新条目, 游戏内容, 需要验证
+# 抓取时间: 2026-07-14 17:33:09
+# 原始 Wikitext 内容:
+
+{{About|实现和控制玩家移动的方式|玩家主动的移动|玩家#移动|实体|实体#运动|运输物品|Tutorial:物品运输|运输生物|Tutorial:生物运输}}
+{{for|愚人节快照[[26w14a]]中的物品|移动（26w14a）}}
+{{tr|{{Redirect|运输|带有箱子的船和矿车|运输船|和|运输矿车}}|}}
+[[File:RideableMinecart.png|缩略图|300px|矿车，其中一种移动方式]]
+
+'''移动（Transportation）'''包含了玩家在[[主世界|世界]]或[[:Category:维度|不同维度之间]]（[[主世界]]、[[下界]]和[[末地]]）移动的方式。
+
+== 方式 ==
+{{needs update|下表中几乎只有可骑乘生物的速度准确而可信。|section=1}}
+'''注意：'''在任何一种移动方式中的速度测量，所有速度以国际单位表示。1立方米代表1个方块，所以1米每秒等于每秒一格。下表速度的测量不考虑{{EffectLink|speed}}或{{EffectLink|slowness}}等[[状态效果]]、[[灵魂疾行]]或[[迅捷潜行]]等[[魔咒]]。某些方式不受状态效果的影响。如果玩家具有缓降状态效果，则仅鞘翅比下面列出的要慢，其他不变。
+
+{| class="wikitable center" style="width: auto;" data-description="速度"
+! 方式
+! 条件
+! 疾跑可加速
+! data-sort-type="number" | 平均速度（米/秒）
+! data-sort-type="number" | 平均速度（公里/小时）
+! 在下界中适用
+! data-sort-type="number" | 等价的主世界平均速度（米/秒）<ref group="注">有些移动方式在下界也是有效的。由于下界的一格等于主世界的八格，有效地使用下界移动会将移动速度乘以八。</ref>
+! data-sort-type="number" | 等价的主世界平均速度（公里/小时）
+|-
+| {{ItemSprite|iron-boots}} 行走
+| 平地
+| {{tc|no}}
+| 4.317 
+| 15.5412 
+| {{tc|yes}}
+| 34.536 
+| 124.3296
+|-
+| {{EffectSprite|speed}} [[疾跑]]
+| 平地
+| {{tc|no}}
+| 5.612 
+| 20.2032 
+| {{tc|yes}}
+| 44.896 
+| 161.6256
+|-
+| {{EffectSprite|Jump Boost}} 疾跑时跳跃
+| 平地
+| {{tc|no}}
+| 7.5
+| 27
+| {{tc|yes}}
+| 60
+| 216
+|-
+| {{EffectSprite|slowness}} [[潜行]]
+| 平地
+| {{tc|no}}
+| 1.2951 
+| 4.66236 
+| {{tc|yes}}
+| 10.3608 
+| 37.29888
+|-
+|矿车
+|普通铁轨
+|{{tc|no}}
+|0.2
+|0.72
+|{{tc|yes}}
+|28.8
+|28.8
+|-
+| rowspan="2" | {{ItemLink|Minecart}}
+| {{BlockSprite|powered-rail-on}} [[Tutorial:矿车#合理使用|动力铁轨]]
+| {{tc|partial|是，小}}
+| 8.0 
+| 28.8 
+| {{tc|yes}}
+| 64.0 
+| 230.4
+|-
+| {{frac|1|4}}斜率铁轨
+| {{tc|no}}
+| 7.1 
+| 25.6 
+| {{tc|yes}}
+| 56.8 
+| 204.8
+|-
+| rowspan="5" | {{ItemLink|Boat}}<ref group="注">使船达到最高速度需要9.4秒—疾跑开始与否相差的时间是一半，即4.7秒。</ref>
+| {{frac|1|4}}斜率急流
+| {{tc|partial|是，小}}
+| 7.3 
+| 26.4 
+| {{tc|no|否，不使用命令不能放置水}}
+| 58.4
+| 211.2
+|- 
+| {{frac|1|4}}斜率急流
+| {{tc|no}}
+| 7.0 
+| 25.2 
+| {{tc|no|否，不使用命令不能放置水}}
+| 56.0
+| 201.6
+|-
+| {{BlockLink|Ice|平坦的冰}} {{BlockLink|Packed Ice|平坦的浮冰}} {{BlockLink|Frosted Ice|平坦的霜冰}}
+| {{tc|no}}
+| 40.0
+| 144.0
+| {{tc|yes}}
+| 320
+| 1152
+|-
+| {{BlockLink|Blue Ice|平坦的蓝冰}}
+| {{tc|no}}
+| 72.73
+| 261.82
+| {{tc|yes|是}}
+| 560
+| 2016
+|-
+| {{BlockLink|Water|平坦的水}}
+| {{tc|no}}
+| 8.0
+| 28.8
+| {{tc|no|否，不使用命令不能放置水}}
+| 64.0
+| 230.4
+|-
+| rowspan="2" | 带有{{ItemLink|Saddle}}的{{EntityLink|pig}} 
+| 平地 
+| {{tc|no}}
+| 2.478
+| 8.921
+| {{tc|yes}}
+| 19.824
+| 71.366
+|-
+| 平地，使用{{ItemLink|carrot on a stick}}，长期平均值
+| {{tc|no}}
+| 3.767
+| 13.562
+| {{tc|yes}}
+| 30.148
+| 108.497
+|-
+| rowspan="2" | {{EntityLink|Horse}} <ref group="注">不同的马速度不同。它们是在平地上最快的移动方式，比在创造模式飞更快。</ref> 
+| 平地
+| {{tc|no}}
+| 9.675
+| 34.83
+| {{tc|yes}}
+| 77.4
+| 278.6
+|-
+| 平地，最快的马品种
+| {{tc|no}}
+| 14.57
+| 52.45
+| {{tc|yes}}
+| 116.6 
+| 419.6
+|-
+| {{EntityLink|Donkey}}<br>{{EntityLink|Mule}}
+| 平地  
+| {{tc|no}}
+| 7.525
+| 27.125
+| {{tc|yes}}
+| 60.2
+| 217.0
+|- 
+| {{EntityLink|Skeleton horse}}<br>{{EntityLink|Zombie horse}}
+| 平地
+| {{tc|no}}
+| 8.62
+| 31.03
+| {{tc|yes}}
+| 68.9
+| 248.2
+|- 
+| rowspan="2" | {{EntityLink|Strider}}
+| 熔岩表面
+| {{tc|no}}
+| 4.240
+| 15.264
+| {{tc|yes}}
+| 33.92
+| 122.112
+|-
+| 熔岩表面，使用{{ItemLink|warped fungus on a stick}}，长期平均值
+| {{tc|no}}
+| 6.446
+| 23.206
+| {{tc|yes}}
+| 51.568
+| 185.644
+|- 
+| rowspan="2" | {{EntityLink|Camel}}<br>{{EntityLink|Camel Husk}}
+| 平地，正常行走
+| {{tc|no}}
+| 3.885
+| 13.986
+| {{tc|yes}}
+| 31.08
+| 111.888
+|-
+| 平地，疾跑时
+| {{tc|no}}
+| 8.203
+| 29.531
+| {{tc|yes}}
+| 65.624
+| 236.246
+|-
+| {{EntityLink|happy-ghast}}
+| 飞行
+| {{tc|no}}
+| 3.611
+| 13.000
+| {{tc|yes}}
+| 28.889
+| 103.997
+|- 
+| {{EntityLink|Nautilus}}
+| 水中
+| {{tc|no}}
+| 6.488
+| 23.357
+| {{tc|no|否，不使用命令不能放置水}}
+| 51.904
+| 186.854
+|-
+| {{EntityLink|Zombie Nautilus}}
+| 水中
+| {{tc|no}}
+| 7.150
+| 25.74
+| {{tc|no|否，不使用命令不能放置水}}
+| 57.200
+| 205.92
+|-
+| rowspan="7" | {{EffectSprite|water-breathing}} 游泳
+| 静止水面<ref group="注">游泳速度不受迅捷药水影响，水面速度指按着{{Control|Jump|text=跳跃键}}“漂”过水-{面}-。</ref>
+| {{tc|no}}
+| 2.20
+| 7.92
+| {{tc|no|否，不使用命令不能放置水}}
+| 17.6
+| 63.36
+|-
+| 静止水底<ref group="注">水底指身体任何一部分浸在水中并在平地上行走。不管水是1格或2格深，玩家的移动速度都是相同的。</ref> 
+| {{tc|no}}
+| 1.97
+| 7.09
+| {{tc|no|否，不使用命令不能放置水}}
+| 15.76
+| 56.72
+|-
+| 在水下往上游
+| {{tc|no}}
+| 0.39
+| 1.40
+| {{tc|no|否，不使用命令不能放置水}}
+| 3.12
+| 11.2
+|-
+| 在水下往下游
+| {{tc|no}}
+| 1.81
+| 6.51 
+| {{tc|no|否，不使用命令不能放置水}}
+| 14.48
+| 52.16
+|-
+| 潜水
+| {{tc|no}}
+| 0.39
+| 1.40
+| {{tc|no|否，不使用命令不能放置水}}
+| 3.12
+| 11.2
+|-
+| 站在水下往下游
+| {{tc|no}}
+| 1.37
+| 4.93
+| {{tc|no|否，不使用命令不能放置水}} 
+| 10.96
+| 39.44
+|-
+| [[海豚的恩惠]]状态效果
+| {{tc|no}}
+| 8.0
+| 28.8
+| {{tc|no|否，不使用命令不能放置水}} 
+| 64.0
+| 230.4
+|-
+| rowspan="2" | {{ItemSprite|feather}} [[飞行]]（水平）<ref group="注">飞行速度可能不相同。</ref>
+| {{BlockSprite|crafting-table}} [[创造模式]]<br>{{BlockSprite|barrier}} [[旁观模式]]
+| {{tc|yes}} 
+| 11.0
+| 39.6
+| {{tc|yes}} 
+| 88.0
+| 316.8
+|-
+| 疾跑式飞行
+| {{tc|yes}}
+| 22.0
+| 79.2
+| {{tc|yes}}
+| 176.0
+| 633.6
+|-
+| rowspan="2" | {{ItemLink|Ender Pearl}}
+| 向水平线上15°丢
+| {{tc|no}} 
+| data-sort-value="23.0" | ~23.0
+| data-sort-value="82.8" | ~82.8
+| {{tc|yes}}
+| data-sort-value="184.0" | ~184.0
+| data-sort-value="662.4" | ~662.4
+|-
+| 以TNT珍珠炮发射<ref group="注">数据源于[https://youtu.be/79Cqxz1-2f8 此处]，实际上TNT珍珠炮能达到的速度和射程仅取决于TNT的数量。</ref>
+| {{tc|yes}}
+| data-sort-value="1760000" |1760000
+| data-sort-value="6336000" | 6336000
+| {{tc|yes}}
+| data-sort-value="14080000" | 14080000
+| data-sort-value="50688000" | 50688000
+|-
+| rowspan="4" | {{ItemLink|Elytra}}
+| 以0°俯仰角滑行
+| {{tc|partial|是，小}}
+| 30.0
+| 108.0
+| {{tc|yes}}
+| 240.0
+| 864.0
+|-
+| 持续的火箭加速
+| {{tc|no}}
+| 33.5
+| 120.6
+| {{tc|yes}}
+| 268.0
+| 964.8
+|-
+| 以52°俯冲
+| {{tc|yes}}
+| 67.3
+| 242.3
+| {{tc|yes}}
+| 538.4
+| 1938.2
+|- 
+| 投掷附魔了[[激流]]III的{{ItemLink|trident}}在雨中飞行<ref group="注">此方式的速度实取决于CPU配置，因为其速度往往快过CPU加载区块速度以至于撞上未加载区块墙导致减速。</ref>
+| {{tc|no}}
+| 390<ref group="注">经过20秒的持续加速后，速度会稳定在370~450m/s区间内，此处取平均。</ref>
+| 1404
+| {{tc|no|否，无法在下界生成雨}}
+| 无
+| 无
+|}
+
+{{notelist|注}}
+
+=== 状态效果 ===
+使用[[药水]][[状态效果#效果列表|效果]]（包括[[信标]]效果），行走和疾跑的速度变得可与其他移动方式的速度具有可比性。
+
+每一级{{EffectLink|Speed}}允许玩家的行走速度与前一级的疾跑速度几乎相同，带有速度II时疾跑只比矿车全速运行和骑猪时加速稍微慢一点。拥有充足的食物和药水支持的话，疾跑可能比建造高速交通系统更有效果。
+
+{| class="wikitable center" style="width: auto;" data-description="Potion effects"
+! 效果等级
+! 行走速度（m/s） 
+! 疾跑速度（m/s）
+|-
+| 无
+|  4.317
+|  5.612
+|-
+| {{EffectLink|Speed}} 
+|  5.181 
+|  6.735
+|-
+| {{EffectLink|Speed|迅捷II}} 
+|  6.044
+|  7.857
+|}
+
+=== 命令 ===
+使用{{cmd|effect}}可达到极高或极低的速度。此时，玩家移动可能比区块加载的速度快。
+
+{| class="wikitable center" style="width: auto;" data-description="命令"
+! 效果等级
+! 潜行速度（m/s）
+! 行走速度（m/s）
+! 疾跑速度（m/s）
+|-
+| {{EffectLink|Speed|迅捷50}} 
+| 14.25
+| 47.49  
+| 61.74
+|-
+| {{EffectLink|Speed|迅捷127}} 
+| 34.19 
+| 113.97  
+| 148.17
+|-
+| {{EffectLink|Speed|迅捷256}} 
+| 67.61  
+| 225.36  
+| 292.96
+|}
+
+=== 魔咒 ===
+[[深海探索者]]能减少水中的减速，同时减小流水推动玩家的动力。[[灵魂疾行]]能提高玩家在[[灵魂沙]]和[[灵魂土]]上的移动速度。[[迅捷潜行]]能提高玩家[[潜行]]时的移动速度。
+
+=== 垂直移动 ===
+以下是纯粹垂直移动的例子：
+
+{| class="wikitable center sortable" style="width: auto;" data-description="垂直速度"
+! 方式
+! 条件
+! data-sort-type="number" | 平均速度（m/s）
+|-
+| {{EffectSprite|Jump Boost}}跳跃<ref group="注">玩家可以跳{{frac|1|1|4}}格。{{EffectLink|Jump Boost|跳跃提升I}}增加到{{frac|1|7|8}}格，{{EffectLink|Jump Boost|跳跃提升II}}增加到{{frac|2|1|2}}格。</ref>
+| 爬没有楼梯的斜坡、[[支柱跳跃]]等
+| 2.0
+|-
+| rowspan="2" | {{BlockLink|Stairs}}
+| 往上
+| 3.2
+|-
+| 往下
+| 3.6
+|-
+| rowspan="2" | {{BlockLink|Ladder}}
+| 往上
+| 2.35
+|-
+| 往下
+| 3.0
+|-
+| rowspan="3" | {{BlockLink|Water|瀑布}}
+| 没有相邻方块
+| 2.0
+|-
+| 往上，有相邻方块
+| 0.6
+|-
+| 往下，有相邻方块
+| 3.4
+|-
+| {{BlockLink|Lava|熔岩瀑布}}
+| 使用[[抗火药水]]（不想受伤的话）
+| 0.8
+|-
+| {{EffectSprite|particle-levitation}} [[飘浮]]
+| 1等级
+| 0.9
+|-
+| {{ItemSprite|Feather}} [[飞行]]
+| {{BlockSprite|crafting-table}} [[创造模式]]
+| 7.5{{Verify}}
+|-
+|{{EffectSprite|Slow Falling}} 掉落
+|没有方块支撑玩家，且无[[缓降]]效果
+| 78.4
+|-
+| {{EffectSprite|water-breathing}} [[游泳]]
+| {{BlockLink|Water}}
+| 0.39
+|-
+|rowspan="2"|{{EffectSprite|water-breathing}} [[气泡柱]]
+| {{BlockLink|Water}}，往上
+|11
+|-
+| {{BlockLink|Water}}，往下
+|4.9
+|}
+{{notelist|注}}
+
+掉落速度更复杂：每刻（{{frac|1|20}}秒），不在飞行状态的玩家和生物的垂直速度会减少（更少向上动力，更多向下动力）0.08格每刻（1.6米每秒），再乘以0.98。这'''将会'''产生每刻3.92格或每秒78.4米的极限速度。然而，世界的最大建筑高度不够高，无法达到此速度：从第256层掉落到基岩需要5.5秒，落地时速度为每刻3.5格（每秒70米）。但是可以用[[鞘翅]]和[[烟花火箭]]等方式来达到更高的高度，以获得更大的落地速度。
+
+以下函数可用于计算一个自由落下<math>t</math>刻的玩家的速度<math>v</math>（米/刻）：<math>v = 3.92 \times (0.98^t - 1)</math>。计算结果为负数代表速度方向向下。
+
+结合上方的函数能计算出自由落体t刻下落距离<math>d</math>（米）的公式：<math>d = 3.92 \times (99 - 49.50 \times (0.98^t + 1) - t) </math>。掉落距离为负数代表位移方向向下。<!-- 修复了移位公式，现在适用于256格天空限制内的所有移位。 -->在[https://docs.google.com/document/d/1mMNaxMQM2tojSABmi4D0k2SyLrYyr0-QihPe9-fstDQ/edit 此处]可以找到该距离的粗略推导，以及用于生成精确距离的Java代码。
+
+=== 其他移动方式 ===
+* 玩家也可以用[[活塞]]来移动。
+** 用活塞、[[红石块]]和[[黏液块]]制造[[Tutorial:飞行器|复杂的飞行机械]]是可行的。
+* [[生命#死亡|死亡]]是会带玩家到[[床]]、[[重生锚]]或[[出生点]]的即时移动方式（除非是[[极限模式]]），但代价是暂时丢失所有[[物品]]和大多数[[经验]]（除非[[游戏规则]]{{gamerule|keep_inventory|keepInventory}}为<code>true</code>）。
+** 如果玩家在激活的[[返回传送门]]附近，玩家可以进入传送门，离开[[末地]]，从而在不死亡的情况下即时传送到他们的床、重生锚或出生点。
+*** {{in|je}}看过[[胜利屏幕]]的玩家可以将[[末影珍珠]]投入返回传送门，末影珍珠会将其传送到世界出生点附近。
+* 身处一场[[爆炸]]旁边会基于爆炸的强度，使玩家飞行一段距离。
+** {{in|je}}在和平难度下，爆炸不会对玩家造成伤害。
+** {{in|be}}在水中发生的爆炸不会对生物造成伤害。
+** TNT对水平方向玩家的推力似乎远远低于垂直方向玩家的推力，因此虽然将人炸上百米高空轻而易举，但是其不适合用于远距离水平投送玩家。{{verify}}
+* 只要[[矿车]]和[[船]]是在玩家的4-5格内，都可以坐上去。把矿车放在一条直线上允许极快的移动（也就是矿车链瞬移），但在下界修一条冰道并用船行驶可以更快地移动。这也适用于带有鞍的猪，只要它们停留在适当的位置（放在栅栏上）。
+* {{in|be}}[[船]]存在一种运用气泡柱与水流的组合加速到极高速度（理论上限取决于区块加载速度和设备性能，可以达到200米每秒）的特殊交通方式，被称为[[Tutorial:光速船|光速船]]。
+* {{in|je}}玩家能被[[碰撞箱]]完整的方块和实体弹出，实体挤压的伤害可以用[[梯子]]等方块消除。
+
+== 成就 ==
+{{Load achievements|on-a-rail;beam-me-up;super-sonic}}
+
+== 进度 ==
+{{load advancements|nether.fast_travel}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java pre-Classic}}
+|{{HistoryLine||rd-132211|加入了步行，作为第一种运动方式。}}
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.12a|加入了水和熔岩，从而引入了“游泳（更像是在蹚水）”。}}
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100618|加入了[[矿车]]。在此之前，行走是唯一的移动方式。}}
+|{{HistoryLine||20100625-1917|加入了[[鞍]]，允许玩家用猪作为一种移动方式。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.6|加入了[[船]]。}}
+|{{HistoryLine||v1.1.1|加入了[[潜行]]。}}
+|{{HistoryLine||v1.2.0|加入了[[下界]]，可作为快速移动方式，因为任何在下界的距离在主世界会乘以8。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|加入了[[动力铁轨]]，使矿车不需要推进器。}}
+|{{HistoryLine||1.8|dev=pre1|加入了[[疾跑]]和[[飞行]]。
+|修复了在方块的边缘行走会积累脚步声，并在接触固体地面时快速播放它们的漏洞。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|加入了可丢的[[末影珍珠]]，传送玩家到它降落的地点。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|加入了迅捷药水，允许更快的移动。}}
+|{{HistoryLine||1.3.1|dev=12w23a|船变得更快。}}
+|{{HistoryLine||1.4.2|dev=12w36a|加入了[[胡萝卜钓竿]]，用于控制带有鞍的猪。<ref>{{tweet|dinnerbone|240428477856231424}}</ref>它们开始移动时慢，但最后会增加到每秒5格（每秒5米）。<ref>{{tweet|dinnerbone|240429280469856256}}</ref>
+|在此次更新前，玩家不能控制猪的移动，所以这不是可行的远距离移动方式。然而，在此次更新后，猪在被控制时不会跳，所以移动仍然被限制（到相同的高度或下坡方向）。}}
+|{{HistoryLine|||dev=12w37a|带有鞍的猪被胡萝卜钓竿引导时会跳上方块。}}
+|{{HistoryLine|||dev=12w38a|在创造模式现在会瞬间穿越下界传送门。}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了[[马]]。}}
+|{{HistoryLine|||dev=13w16b|使马移动更慢并减少了滑行量。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入在矿车、船、马和在创造模式飞行时疾跑的能力，这会稍微增加速度。}}
+|{{HistoryLine||1.8|dev=14w05a|加入[[旁观模式]]，它是最快的移动方式之一，因为它有无限制的移动和可调整的飞行速度。}}
+|{{HistoryLine||1.9|dev=15w41a|加入[[鞘翅]]，它是游戏中最快的合理移动方式。}}
+|{{HistoryLine||1.13|dev=18w07a|加入了玩家在水中疾跑的能力，即游泳。这种移动方式比之前的要快得多。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.1.0|玩家选择可以步行和在水里面游动。}}
+|{{HistoryLine||0.2.0|加入了飞行。}}
+|{{HistoryLine||0.8.0|dev=build 1|加入了轨道。}}
+|{{HistoryLine|||dev=build 2|加入了矿车。}}
+|{{HistoryLine||0.11.0|dev=build 1|加入了船。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了潜行和疾跑。}}
+|{{HistoryLine||0.14.0|dev=build 1|加入了末影珍珠。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了马。
+|加入了鞍，可以骑马、猪。
+|现在可以通过胡萝卜钓竿来骑猪。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了鞘翅。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.4.0|dev=1.2.13.8|加入了玩家在水中疾跑的能力，即游泳。这种移动方式比之前的要快得多。}}
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[cs:Doprava]]
+[[de:Fortbewegungsmittel]]
+[[en:Transportation]]
+[[es:Transporte]]
+[[fr:Transport]]
+[[ja:運送]]
+[[ko:수송]]
+[[nl:Transport]]
+[[pl:Transport]]
+[[pt:Transporte]]
+[[ru:Способы передвижения]]
+[[th:การขนส่ง]]

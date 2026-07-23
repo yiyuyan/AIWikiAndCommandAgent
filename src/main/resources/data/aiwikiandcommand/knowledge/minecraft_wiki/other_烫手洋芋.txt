@@ -1,0 +1,196 @@
+# 页面: 烫手洋芋
+# 来源: https://zh.minecraft.wiki/w/%E7%83%AB%E6%89%8B%E6%B4%8B%E8%8A%8B
+# 分类: 
+# 抓取时间: 2026-07-14 17:31:28
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|烫手洋芋|燙手洋芋|辣手薯仔}}{{for|相同愚人节玩笑版本中加入的同名的画|24w14potato#非生物实体}}{{Joke feature|update=24w14potato}}
+{{Infobox item
+|image=Hot potato.png
+|invimage=[烫手洋芋]Hot potato
+|renewable=是
+|maxstack=1
+|nobe=1
+|creative-tab={{tp|itemGroup.foodAndDrink}}、马铃薯（Potatoes）
+|item-id-raw=hot_potato
+|food-properties={{fp|5|6}}
+}}
+
+'''烫手洋芋（Hot potato{{sic}}）'''是一种用于合成[[悬浮马铃薯推进器]]的[[食物]]类[[物品]]。
+
+== 获取 ==
+=== 熔岩 ===
+[[马铃薯]]、[[烤马铃薯]]或[[毒马铃薯]]{{note|由物品标签<code>#heatable_potatos</code>控制}}的物品实体在[[熔岩]]中时会变为烫手洋芋。
+
+=== 合成 ===
+{{Crafting
+|Potato; Baked Potato; Poisonous Potato
+|Lava Bucket
+|Output=[烫手洋芋]Hot potato
+|description=合成后，熔岩桶会变为[[铁桶]]。
+|showdescription=1
+|Olink=none
+|ignoreusage=1}}
+
+== 用途 ==
+[[File:Hot potato Jumping in Lava.gif|thumb|烫手洋芋在熔岩中跳动]]
+
+[[物品实体]]形式的烫手洋芋免疫火焰伤害，在[[火]]或熔岩中不会被烧毁，且在接触熔岩时会向随机方向弹射。
+
+=== 火焰伤害 ===
+物品栏中存在烫手洋芋的玩家会受到[[火焰伤害]]。持有{{convert|20}}后开始受到每次{{health|1}}的伤害，之后每过{{convert|40}}使每次伤害增加{{health|1}}，每次伤害的最大值为{{health|5}}。
+
+将烫手洋芋移动到另一个槽位可以使伤害重新开始累积，但扔出后重新拾起则不能。
+
+=== 食物 ===
+手持烫手洋芋按住{{ctrl|使用}}键即可食用，每个烫手洋芋可以回复{{fp|5|6}}，并使玩家额外着火{{convert|1000000}}，这个值超过了{{nbt|short|short}}类型的支持范围，因此玩家的{{nbt|short|Fire}}数据在保存时只会取对后16位对32768取模的值。
+
+玩家在[[饥饿值]]为满的状态下也可以食用烫手洋芋。
+
+=== 堆肥 ===
+将烫手洋芋放入[[堆肥桶]]中，会有85%的概率增加一层堆肥层。
+
+=== 合成材料 ===
+{{Crafting
+|showname=1
+|name=[[悬浮马铃薯推进器]]
+|ingredients=[[毒马铃薯]] +<br>[[悬浮马铃薯]] +<br>'''烫手洋芋'''
+|A1=Poisonous Potato |B1=Poisonous Potato |C1=Poisonous Potato
+|A2=[悬浮马铃薯]Floatato      |B2=[烫手洋芋]Hot potato     |C2=[悬浮马铃薯]Floatato
+|A3=[悬浮马铃薯]Floatato      |B3=[悬浮马铃薯]Floatato      |C3=[悬浮马铃薯]Floatato
+|Output=[悬浮马铃薯推进器]Floatater
+|Ilink=none
+|ignoreusage=1}}
+
+== 音效 ==
+{{Sound table
+|sound=Eat1.ogg
+|sound2=Eat2.ogg
+|sound3=Eat3.ogg
+|subtitle={{tp|subtitles.entity.generic.eat}}
+|description=吃一种固体食物
+|id=entity.generic.eat
+|source=玩家
+|translationkey=subtitles.entity.generic.eat
+}}
+{{Sound table
+|sound=Burp.ogg
+|subtitle={{tp|subtitles.entity.player.burp}}
+|description=吃完一种食物
+|id=entity.generic.burp
+|source=玩家
+|translationkey=subtitles.entity.generic.burp
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=java
+|Hot potato
+|spritetype=item
+|nameid=hot_potato
+|foot=1}}
+
+=== 物品数据 ===
+{{see also|物品格式}}
+
+{| class="" style="width:100%"
+| style="padding:0;" |
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;background-color: var(--custom-nbt-inherit-color);"
+|-
+! style="text-align:left;" | 默认[[数据组件]]结构和字段<span>[</span>[[编码格式/DataComponent|源页面]]<span>]</span>
+|-
+|
+<div class="treeview">
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="物品共通组件">物品共通组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="物品共通组件">
+** {{nbt|compound}}{{nbt|list|minecraft:attribute_modifiers}}：物品为持有者提供的[[属性修饰符]]。
+*** {{nbt|list|modifiers}}：提供的属性修饰符。
+**** {{nbt|compound}}：一个修饰符。
+***** {{nbt|double|amount|existonsave=1|required=1}}：计算中修饰符调整基础值的数值。
+***** {{nbt|string|name|existonsave=1|required=1}}：当前[[属性修饰符]]的名称。
+***** {{nbt|string|operation|existonsave=1|required=1}}：定义修饰符对属性的基础值的[[属性#运算模式|运算方法]]。可以为<code>add_value</code>（Op0）、<code>add_multiplied_base</code>（Op1）、<code>add_multiplied_total</code>（Op2）。
+***** {{nbt|string|slot}}：（默认为<code>any</code>）一个[[装备槽位组]]，指定修饰符的有效槽位。
+***** {{nbt|string|type|existonsave=1|required=1}}：（命名空间ID）一个[[属性]]的ID，表示当前属性修饰符要修饰的属性。
+***** {{nbt|int array|uuid|existonsave=1|required=1}}：当前属性修饰符的UUID。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示属性修饰符的提示框。
+** {{nbt|compound|minecraft:enchantments}}：物品的魔咒数据。
+*** {{nbt|compound|levels}}：魔咒数据。
+**** {{nbt|int|<''魔咒命名空间ID''>}}：（{{interval|left=1|right=255}}）一个[[魔咒]]和对应魔咒的等级。
+*** {{nbt|boolean|show_in_tooltip}}：（默认为<code>false</code>）是否显示魔咒的提示框。
+** {{nbt|list|minecraft:lore}}：物品的自定义描述信息，共计不允许超过256行。
+*** {{nbt|string}}：（[[文本组件]]）一行描述信息。
+** {{nbt|int|minecraft:max_stack_size}}：（{{interval|left=0|right=99}}）物品的最大堆叠数量。如果此组件不存在，则游戏默认为1。
+** {{nbt|string|minecraft:rarity}}：物品的基础[[稀有度]]。可以为<code>common</code>（常见）、<code>uncommon</code>（少见）、<code>rare</code>（稀有）、<code>epic</code>（史诗）。
+** {{nbt|int|minecraft:repair_cost}}：（{{interval|left=0}}）物品在[[铁砧]]上修理、合并或重命名时在基础经验等级消耗之上额外增加的累积惩罚。
+</div>
+**<li class="treeview-header nbttree-inherited" data-nbt-collapsed-id="该物品的其他组件">该物品的其他组件</li>
+<div class="nbt-collapsed nbttree-inherited" style="display: none" data-nbt-collapsed-id="该物品的其他组件">
+** {{nbt|compound|minecraft:food}}：物品的食物属性。
+*** {{nbt|bool|can_always_eat}}：（默认为<code>false</code>）表示物品是否可以无视当前饥饿值食用。
+*** {{nbt|float|eat_seconds}}：（默认为1.6）物品食用所需要的时间，以秒为单位。小于{{convert|0.05|秒|游戏刻}}时无法被食用。
+*** {{nbt|string}}{{nbt|compound|eat_cound|existonsave=1|required=1}}：物品被食用后的音效。
+*** {{nbt|list|effects}}：物品被食用后可能被赋予的状态效果。
+**** {{nbt|compound}}：一项可能施加的状态效果。
+***** {{nbt|compound|effect|existonsave=1|required=1}}：一项状态效果。
+****** {{nbt|string|id|existonsave=1|required=1}}：状态效果的[[命名空间ID]]。
+****** {{nbt|bool|ambient}}：表示状态效果是否是被信标添加的。如果不存在则为<code>false</code>。
+****** {{nbt|byte|amplifier}}：（无符号8位整数，不小于0且不大于255）状态效果的等级。0表示等级1，以此类推。由于此数字为无符号整数，当值超过127时显示为负数但实际为正数，保存数字''s''和实际代表数字''a''的关系为<math>a=256+s</math>。如果不存在则为0。
+****** {{nbt|int|duration}}：距离状态效果失效的时间刻数。如果此值为-1，则此状态效果不会失效。如果不存在则为0。
+****** {{nbt|bool|show_icon}}：表示是否显示状态效果的图标。如果不存在则与{{nbt|bool|show_particles}}值相同。
+****** {{nbt|bool|show_particles}}：表示是否显示粒子效果。如果不存在则为<code>true</code>。
+***** {{nbt|float|probability}}：（{{interval|left=0|right=1}}，默认为1）食用后施加此状态效果的概率。
+*** {{nbt|int|nutrition|existonsave=1|required=1}}：（{{interval|left=0}}）食用物品时增加的饥饿值。
+*** {{nbt|float|saturation_modifier|existonsave=1|required=1}}：物品的营养价值。
+</div>
+</div>
+|}
+{| class="wikitable collapsible collapsed" style="width:100%;margin:1px;"
+|-
+! style="text-align:left;" | JSON
+|-
+|
+<syntaxhighlight copy="1" lang="json">{
+    "minecraft:enchantments": {
+        "levels": {}
+    },
+    "minecraft:attribute_modifiers": {
+        "modifiers": []
+    },
+    "minecraft:lore": [],
+    "minecraft:max_stack_size": 1,
+    "minecraft:food": {
+        "can_always_eat": true,
+        "eat_sound": "minecraft:entity.generic.eat",
+        "nutrition": 5,
+        "saturation_modifier": 0.6
+    },
+    "minecraft:repair_cost": 0,
+    "minecraft:rarity": "common"
+}</syntaxhighlight>
+|}
+|}
+
+在默认组件的基础上，烫手洋芋使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt|compound|minecraft:heat}} 数据组件
+*** {{nbt|int|heat|existonsave=1|required=1}}：烫手洋芋在玩家物品栏时每刻增加1，最大为200，将影响对生物造成的伤害。当{{nbt|int-array|owner|existonsave=1|required=1}}或{{nbt|int|slot|existonsave=1|required=1}}任一变化或不在生物身上时归零。
+*** {{nbt|int-array|owner|existonsave=1|required=1}}：上一个持有此烫手洋芋的生物的UUID。
+*** {{nbt|int|slot|existonsave=1|required=1}}：烫手洋芋在玩家物品栏内的编号，不在玩家身上时为上一次在物品栏内的编号。
+</div>
+
+== 注释 ==
+{{notelist}}
+
+== 进度 ==
+{{Load advancements|page=进度/24w14potato|husbandry.root|main=进度}}
+
+== 导航 ==
+{{Navbox jokes|24w14potato}}
+
+[[Category:物品]]
+
+[[en:Hot potato]]
+[[ja:Hot potato]]

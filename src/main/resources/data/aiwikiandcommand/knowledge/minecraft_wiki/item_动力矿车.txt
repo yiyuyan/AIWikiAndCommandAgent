@@ -1,0 +1,188 @@
+# 页面: 动力矿车
+# 来源: https://zh.minecraft.wiki/w/%E5%8A%A8%E5%8A%9B%E7%9F%BF%E8%BD%A6
+# 分类: Java版独有特性, 可再生资源, 实体, 物品, 载具
+# 抓取时间: 2026-07-14 17:20:48
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{Infobox item
+|image=Minecart with Furnace.png
+|invimage=Minecart with Furnace
+|nobe=1
+|size=高度：0.7格<br>宽度：0.98格
+}}
+
+'''动力矿车（Minecart with Furnace）'''是载有[[熔炉]]的半自动[[矿车]]，可以用于驱动其他的矿车。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|Furnace
+|Minecart
+|Output= Minecart with Furnace
+|type= Transportation
+|description={{only|je}}
+|foot=1
+}}
+
+== 用途 ==
+动力矿车的放置方式与其他矿车一样。尽管动力矿车的外观是一个装着[[熔炉]]的矿车，动力矿车并没有[[烧炼]]功能，也没有交互界面。
+
+动力矿车可以蓄能，方法就是对着动力矿车按下{{Control|使用}}键填充燃料（[[煤炭]]或[[木炭]]）。填充燃料后，燃料将被立即消耗，动力矿车将会在以和玩家点击时的方向一致的方向铁轨上开始移动。按{{control|使用}}键总是会使矿车转变为该方向，即使手中没有煤。
+
+每填充一次燃料，动力矿车就会增加{{convert|3600}}的行进时间，如果增加后达到{{convert|32000}}则不再增加。
+
+蓄能后，动力矿车会以240米/分钟（约4米/秒，略低于行走速度）的速度移动，每份燃料能让其最多移动720米。它们不会被下坡和激活的[[动力铁轨]]加速，也不会被上坡和未激活的动力铁轨或推拉其他矿车所减速。
+
+如果动力矿车脱轨然后推回到轨道之上，它会开始再次向它脱轨前的方向移动。
+
+只要燃料未耗尽，动力矿车就可以爬上斜坡并同时推动其他矿车。如果一辆动力矿车在拉动另一辆矿车的同时到达斜坡，被拉动的矿车将会调换顺序到动力矿车的前面，这样它就可以沿斜坡推动而不是拉动，但这样会破坏列车组。
+
+当动力矿车撞上另一个矿车时，另一个矿车会以更快的速度被推出去，而动力矿车会以原速度继续行驶。因为速度差，一些矿车可能会最终停留在直轨道上未加载的区块内。
+
+=== 列车机制 ===
+{{Schematic
+|caption=弱牵引的单车厢列车。最后的矿车仅用于形成列车，不会跟随列车。
+|AB|mc-$ew|mc-$ew|mc/Fu-$ew|-
+|AB|ra-$wu|ra-$ew|ra-$ew|ra-$ew|ellipsis-ew
+}}
+{{Schematic
+|caption=强牵引的单车厢列车。必须先将斜坡的铁轨替换为水平的铁轨后，才可以为动力矿车蓄能。
+|AB|mc-$ew||mc/Fu-$ew|-
+|AB|ra-$ew|ra-$ew|ra-$eu|ra-$ew|ra-$ew|ellipsis-ew
+}}
+
+[[File:FurnaceMinecartTrain.png|thumb|right|一列动力矿车驱动的矿车列车|alt=]]
+
+行驶速度比动力矿车快的矿车遇上同方向行驶的动力矿车就会形成弱牵引，但弱牵引结构非常脆弱，容易断开。有的方法能够形成强牵引，例如将矿车和未蓄能的动力矿车首尾相连，然后为动力矿车蓄能，此时会形成以动力矿车为车头的强牵引列车组。
+
+无论是强牵引还是弱牵引，在转弯的时候列车组总是会断开。<ref>{{bug|MC-158363}}</ref>
+
+一辆动力矿车最多可以牵引四辆矿车，被动力矿车牵引的矿车都会以动力矿车的速度匀速行驶。牵引[[TNT矿车]]会导致其爆炸。
+
+{| class="wikitable"
+|+车厢行为
+!条件
+!结果
+|-
+|动力耗尽/失速||牵引解除
+|-
+|轨道上坡||向前抛出
+|-
+|轨道下坡||向前抛出（强牵引）或牵引解除（弱牵引）
+|-
+|90°转弯||向后抛出
+|-
+|由轴向转45°至斜向||部分牵引解除
+|-
+|由斜向转45°至轴向||向前抛出，若未被阻挡可能脱轨
+|-
+|从错误方向蓄能||牵引解除
+|}
+
+=== 属性 ===
+煤炭或木炭并非作为物品存储在实体中，而是存储在燃料属性中的对象数据中作为刻数。 {{cd|Fuel}}是一个short值，即最多32767个[[刻]]，小于30分钟。然而，{{cmd|summon furnace_minecart ~ ~ ~ {Fuel:32000} }}并不会让动力矿车行驶，因为没有指定方向。可以在铁轨上按{{control|使用}}键以给予方向，也可以在召唤时设置<code>PushX</code>和<code>PushZ</code>，这些属性负责方向。请注意，每个实体都具有的<code>Motion</code>属性允许玩家移动矿车，但它不会为矿车提供自己移动所需的方向。
+
+== 音效 ==
+{{Sound table
+|sound=Minecart base.ogg
+|subtitle=MC-181831
+|source=友好生物<ref group="音效" name="oddcats">{{bug|MC-42132}}</ref>
+|description=矿车行进
+|id=entity.minecart.riding
+|translationkey=-
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=java
+|Minecart with Furnace
+|spritetype=item
+|nameid=furnace_minecart
+|foot=1}}
+{{ID table
+|generatetranslationkeys=java
+|Minecart with Furnace
+|spritetype=entity
+|nameid=furnace_minecart
+|foot=1}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+=== 实体数据 ===
+{{main|实体数据格式}}
+
+动力矿车有与之相联系的包含许多该[[实体]]属性的存档数据。
+
+{{/ED}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.14|[[File:Minecart with Furnace JE1.png|32px]] [[File:Minecart with Furnace (item) JE1.png|32px]] 加入了动力矿车，暂时没有正式名称，因此也被称作“熔炉矿车”。
+|无论添加多少燃料，动力矿车提供动力的时间永远不超过3分钟。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.0|正式命名为“动力矿车”。}}
+|{{HistoryLine||1.2|[[File:Minecart with Furnace JE2.png|32px]] 更改了实体纹理。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|每一个煤可以让动力矿车提供3分钟的动力，因此添加多个煤可以让动力矿车提供不止3分钟的动力。一组煤（64块）现在可以让动力矿车提供192分钟的动力。
+|动力矿车现在在平地轨道的速度是204米/分钟。}}
+|{{HistoryLine||1.3.1|dev=12w15a|在创造模式下右键点击一个动力矿车会给予其一个煤炭。}}
+|{{HistoryLine||1.5|dev=13w04a|现在创造模式下攻击动力矿车会使矿车直接消失而不会掉落，但[[重命名]]后的动力矿车仍会掉落。}}
+|{{HistoryLine||1.8|dev=14w11a|动力矿车现在能更快的推动其他矿车了。
+|现在当有动力时，动力矿车经过未充能的[[动力铁轨]]时不会停下来。}}
+|{{HistoryLine|||dev=14w17a|回退了[[14w11a]]中对动力矿车的修改。}}
+|{{HistoryLine||1.11|dev=16w32a|实体ID由<code>MinecartFurnace</code>变为<code>furnace_minecart</code>。}}
+|{{HistoryLine||1.13|dev=17w47a|在[[扁平化]]之前，此物品的数字ID是343。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Minecart with Furnace JE3.png|32px]] [[File:Minecart with Furnace (item) JE2.png|32px]] 更改了纹理。}}
+|{{HistoryLine||1.15.2|dev=pre1|动力矿车现在可以正常直角转弯。}}
+|{{HistoryLine||1.19|dev=22w13a|现在动力矿车的合成配方是无序的。
+|现在动力矿车被破坏时会掉落其自身，而不再会分解成矿车和熔炉。}}
+|{{HistoryLine||1.20.3|dev=23w41a|现在创造模式下攻击重命名过的动力矿车也会使动力矿车直接消失而不会掉落。}}
+|{{HistoryLine||1.21.5|dev=25w07a|移除了动力矿车实体数据中的{{nbt|boolean|CustomDisplayTile}}字段，此前此项为<samp>false</samp>时动力矿车不会展示自定义方块。}}
+|{{HistoryLine||1.21.9|dev=25w33a|手中没有可作为燃料的物品或燃料充足时，按{{ctrl|使用}}键与其交互不再使动力矿车方向改变为玩家点击时的方向。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|[[File:Minecart with Furnace JE2.png|32px]] [[File:Minecart with Furnace (item) JE1.png|32px]] 加入了动力矿车。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.90|wiiu=none|switch=none|[[File:Minecart with Furnace.png|32px]] [[File:Minecart with Furnace (item).png|32px]] 更改了纹理。}}
+}}
+
+== 你知道吗 ==
+* [[Jeb]]曾发推文说考虑将动力矿车从{{el|je}}中移除。<ref>{{tweet|jeb|699241247391772672|I think we will phase out the furnace minecraft|15 Feb 2016}}</ref>
+* 虽然动力矿车并未实装在{{el|be}}中，但其物品纹理仍然存在于原版游戏文件内。
+* 将[[原主机版]]的世界转换为基岩版的世界后，动力矿车会被转换成普通的[[矿车]]。
+* [[Minecraft Live 2022]]的预告片中出现了动力矿车。
+
+== 画廊 ==
+<gallery>
+File:Running Powered Minecart.png|一辆移动中的动力矿车
+</gallery>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox items|Tools & Utilities}}
+{{Navbox entities|Non-mobs}}
+
+[[Category:载具]]
+
+[[cs:Parní vozík]]
+[[de:Antriebslore]]
+[[en:Minecart with Furnace]]
+[[es:Vagoneta con horno]]
+[[fr:Wagonnet motorisé]]
+[[hu:Gőzmeghajtású csille]]
+[[ja:かまど付きのトロッコ]]
+[[ko:화로가 실린 광산 수레]]
+[[nl:Mijnkar met oven]]
+[[pl:Napędzany wagonik]]
+[[ru:Вагонетка с печью]]
+[[uk:Вагонетка з піччю]]

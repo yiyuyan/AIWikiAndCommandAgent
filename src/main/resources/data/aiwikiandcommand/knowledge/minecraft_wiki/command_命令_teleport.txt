@@ -1,0 +1,156 @@
+# 页面: 命令/teleport
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/teleport
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 有未知版本的History模板的页面/Java版Indev, 有未知版本的History模板的页面/携带版Alpha
+# 抓取时间: 2026-07-14 17:22:14
+# 原始 Wikitext 内容:
+
+{{about|当前版本的命令（[[Java版1.13]]快照[[17w45a]]之后）|旧版本的命令|命令/tp/Java版17w45a前}}{{Infobox command
+|name=teleport
+|alias=
+* {{cmd|tp|link=none}}
+|oplevel=2\1
+|becheat=1
+}}
+
+传送实体（玩家、生物等）到指定的地点，并修改其旋转角度。
+
+不像大多数只能影响已经生成的区块的命令，{{cmd|teleport|link=none}}可以将实体传送到尚未生成的区块中，传送前游戏会生成目标位置所在区块。
+
+若一个骑乘着[[矿车]]、[[船]]或其他[[生物]]的生物被{{cmd|teleport|link=none}}传送，则骑乘者会从其载具上脱离，并被单独传送至目标位置，而原有的载具会留在原地，不受影响。反之，若一个正被生物骑乘的矿车、船或生物被{{cmd|teleport|link=none}}传送，骑乘在载具上的生物会跟随载具一同被传送至目标，并保持骑乘状态。
+
+== 语法 ==
+* '''Java版'''
+: <code>teleport <destination></code>
+: <code>teleport <targets> <destination></code>
+:: 将执行者或指定的实体传送到另一个实体所在的位置，并使其旋转角度与该实体一致。
+: <code>teleport <location></code>
+:: 将执行者传送到指定的坐标，并使其旋转角度与命令执行角度一致。
+: <code>teleport <targets> <location></code>
+:: 将指定的实体传送到一个确定的坐标位置，但不会修改其旋转角度。
+: <code>teleport <targets> <location> <rotation></code>
+: <code>teleport <targets> <location> facing <facingLocation></code>
+: <code>teleport <targets> <location> facing entity <facingEntity> [<facingAnchor>]</code>
+:: 将指定的实体传送到一个确定的坐标位置，并使其旋转角度与指定的一致。
+
+* '''基岩版'''
+: <code>teleport <destination: target></code>
+: <code>teleport <victim: target> <destination: target> [checkForBlocks: Boolean]</code>
+:: 将执行者或指定的实体传送到另一个实体所在的位置，并使其水平旋转角度与该实体一致，视角水平（垂直旋转角度为零）。
+: <code>teleport <destination: x y z> [checkForBlocks: Boolean]</code>
+: <code>teleport <victim: target> <destination: x y z> [checkForBlocks: Boolean]</code>
+:: 将指定的实体传送到一个确定的坐标位置，但不会修改其旋转角度。
+: <code>teleport <destination: x y z> [yRot: value] [xRot: value] [checkForBlocks: Boolean]</code>
+: <code>teleport <destination: x y z> facing <lookAtPosition: x y z> [checkForBlocks: Boolean]</code>
+: <code>teleport <destination: x y z> facing <lookAtEntity: target> [checkForBlocks: Boolean]</code>
+: <code>teleport <victim: target> <destination: x y z> [yRot: value] [xRot: value] [checkForBlocks: Boolean]</code>
+: <code>teleport <victim: target> <destination: x y z> facing <lookAtPosition: x y z> [checkForBlocks: Boolean]</code>
+: <code>teleport <victim: target> <destination: x y z> facing <lookAtEntity: target> [checkForBlocks: Boolean]</code>
+:: 将指定的实体传送到一个确定的坐标位置，并使其旋转角度与指定的一致。
+
+== 参数 ==
+{{argument|targets|entity|victim: target|CommandSelector<Actor>}}
+: 指定要被传送的实体。如果未指定，默认为命令执行者。
+: {{arg desc|je=entity|amount=multiple|type=entities|be=actor}}
+
+{{argument|location|vec3|destination: x y z|CommandPositionFloat}}
+: 指定要被传送到的坐标。
+: {{arg desc|je=vec3|be=CommandPositionFloat}}
+
+{{argument|destination|entity|destination: target|CommandSelector<Actor>}}
+: 指定要被传送到的实体。
+: {{arg desc|je=entity|amount=single|type=entities|be=actor}}
+
+{{el|je|short=1}}：{{argument|rotation|rotation}}<br>
+{{el|be|short=1}}：{{argument|be=1|yRot: value|RelativeFloat}}、{{argument|be=1|xRot: value|RelativeFloat}}
+: 指定实体传送后的旋转角度。
+: {{arg desc|je=rotation|be=RelativeFloat}}
+
+{{argument|facingLocation|vec3|lookAtPosition: x y z|CommandPositionFloat}}
+: 指定实体传送后朝向的坐标。
+: {{arg desc|je=vec3|be=CommandPositionFloat}}
+
+{{argument|facingEntity|entity|lookAtEntity: target|CommandSelector<Actor>}}
+: 指定实体传送后朝向的实体。
+: {{arg desc|je=entity|amount=multiple|type=entities|be=actor}}
+
+{{el|je|short=1}}：{{argument|facingAnchor|entity_anchor}}
+: 指定实体传送后应朝向实体的眼睛还是足部。如果未指定，默认为眼睛。{{IN|bedrock}}总是朝向眼睛。
+: {{arg desc|je=entity_anchor}}
+
+{{el|be|short=1}}：{{argument|be=1|checkForBlocks: Boolean|enum}}
+: {{arg desc|be=bool}}
+: 如果为<code>true</code>，只当目的地不会被方块碰撞箱阻挡时，传送才会生效。如果为<code>false</code>或未指定，则不进行该检查，直接进行传送。
+
+== 结果 ==
+{{Result table}}
+{{Result table|命令不完整或参数未正确指定|unparseable|unparseable}}
+{{Result table|<code><targets></code>或<code>victim: target</code>未能选中至少一个实体（指定的玩家必须在线上）|fail|fail}}
+{{Result table|<code><destination></code>、<code><facingEntity></code>、<code>destination: target</code>或<code>lookAtEntity: target</code>未能选出单个实体（指定的玩家必须在线上）}}
+{{Result table|目的地坐标的<''x''>或<''z''>超出[-30000000, 30000000)或<''y''>超出(-20000000, 20000000]||success}}
+{{Result table|<code>checkForBlocks: Boolean</code>为<code>true</code>且目标位置被方块阻挡|N/A|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|传送的实体数目}}
+{{Output table|edition=be|cmd=|执行失败|0}}
+{{Output table|cmd=/teleport <destination: x y z> ...|执行成功|1}}
+{{Output table|cmd=/teleport <victim: target> <destination: x y z> ...|执行成功|传送目标的数目}}
+{{Output table|cmd=/teleport <destination: target> ...|执行成功|2}}
+{{Output table|cmd=/teleport <victim: target> <destination: target> ...|执行成功|传送目标的数目+1}}
+{{Output table}}
+
+== 示例 ==
+* 将执行实体传送到Alice：<syntaxhighlight lang="mcfunction" inline>teleport Alice</syntaxhighlight>
+* 将所有玩家传送到命令执行实体：<syntaxhighlight lang="mcfunction" inline>teleport @a @s</syntaxhighlight>
+* 将执行实体传送到{{cd|1=x=100|2=z=100|d=、}}的位置，且高于其现在所在位置三格方块：<syntaxhighlight lang="mcfunction" inline>teleport 100 ~3 100</syntaxhighlight>
+* 使最近玩家向右转向10度，但不改变他的位置：<syntaxhighlight lang="mcfunction" inline>execute as @p at @s run teleport @s ~ ~ ~ ~10 ~</syntaxhighlight>
+* 通过{{cmd|execute in}}命令，还可以将实体传送到指定的维度中（如[[主世界]]、[[下界]]和[[末地]]）。
+** 将执行实体传送到下界中坐标与其目前所在主世界坐标相同的位置（X和Z坐标将自动除以8）：
+***<syntaxhighlight lang="mcfunction" inline>execute in minecraft:the_nether run teleport ~ ~ ~</syntaxhighlight>{{only|java}}
+***<syntaxhighlight lang="mcfunction" inline>execute in nether run teleport ~ ~ ~</syntaxhighlight>{{only|bedrock}}
+** 将所有玩家传送到末地中{{cd|1=x=84|2=y=57|3=z=79|d=、}}的位置：
+*** <syntaxhighlight lang="mcfunction" inline>execute as @a in minecraft:the_end run teleport 84 57 79</syntaxhighlight>{{only|java}}
+***<syntaxhighlight lang="mcfunction" inline>execute as @a in the_end run teleport 84 57 79</syntaxhighlight>{{only|bedrock}}
+** 将Alice传送到主世界中{{cd|1=x=251|2=y=64|3=z=-160|d=、}}的位置：
+*** <syntaxhighlight lang="mcfunction" inline>execute as Alice in minecraft:overworld run teleport 251 64 -160</syntaxhighlight>{{only|java}}
+*** <syntaxhighlight lang="mcfunction" inline>execute as Alice in overworld run teleport 251 64 -160</syntaxhighlight>{{only|bedrock}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.0.15a| 加入了{{cmd|tp|link=none}}命令。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||0.31|dev=?|移除了所有命令。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.10|dev=pre1|加入了{{cmd|teleport|link=none}}，其与{{cmd|tp|link=none}}相似，但{{cmd|teleport|link=none}}中一定要指定将被传送的实体，而“传送至其他玩家”的用法是不可用的，并且相对坐标的使用是相对于命令的执行位置而言，而不是相对于目标而言。}}
+|{{HistoryLine||1.13|dev=17w45a|{{cmd|tp|link=none}}现在用法与{{cmd|teleport|link=none}}没有任何区别，作为{{cmd|teleport|link=none}}的别名。}}
+|{{HistoryLine|||dev=18w01a|加入了<code>facing</code>模式，用于指定传送后目标的朝向。}}
+|{{HistoryLine|||dev=18w02a|简化了{{cmd|teleport|link=none}}的语法，并且命令现在能将实体传送至其他维度中。}}
+|{{HistoryLine||1.16|dev=20w06a|{{cmd|teleport|link=none}}现在当目的地坐标的<''x''>或<''z''>超出[-30000000, 30000000)或<''y''>超出(-20000000, 20000000]时不会进行传送。}}
+
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|tp|link=none}}。}}
+|{{HistoryLine||?|加入了<code>facing</code>模式。
+|加入了<code>checkForBlocks: Boolean</code>参数。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.5|dev=1.2.5.15|{{cmd|teleport|link=none}}能指定的坐标最大值从∞被缩减为30,000,000。
+|试图传送到大于最大坐标的位置不再输出一个错误信息。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.13|加入了<code>checkForBlocks: Boolean</code>参数。}}
+|{{HistoryLine||1.19.40|exg=upcoming_creator_features|dev=1.19.40.23|现在{{cmd|teleport|link=none}}命令能将实体传送至其他维度中。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.23|{{cmd|teleport|link=none}}命令将实体传送至其他维度的特性不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.20|{{cmd|teleport|link=none}}命令的旋转角度现在相对于命令执行者，而不是目标。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.21|移除了{{cmd|teleport|link=none}}命令传送执行者至指定实体时的{{cd|checkForBlocks: Boolean}}参数。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/teleport]]
+[[en:Commands/teleport]]
+[[es:Comandos/tp]]
+[[ja:コマンド/teleport]]
+[[pt:Comandos/teleport]]
+[[ru:Команды консоли/teleport]]

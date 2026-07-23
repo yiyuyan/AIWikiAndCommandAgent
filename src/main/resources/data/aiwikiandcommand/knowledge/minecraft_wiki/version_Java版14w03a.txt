@@ -1,0 +1,149 @@
+# 页面: Java版14w03a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w03a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:11
+# 原始 Wikitext 内容:
+
+{{Dangerous version|放置花盆会导致游戏崩溃。<ref>{{bug|MC-45004|||Fixed}}</ref>}}
+{{Infobox version
+|title=14w03a
+|image=14w03a.png
+|image2=Java Edition 14w03a Simplified.png\Java Edition 14w03a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年1月16日
+|jsonhash=6ee35b2eb136f1ec3246ff71e357149be156e64f
+|clienthash=c1932528d91f084be73651509804d2266fd4c24d
+|serverhash=5cbd5319a7b1198f049286d443148f1b88ff7bc7
+|exehash=eb1148c22e2b399ffcc7487fbe45de0371d227b4
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w02c
+|next=14w03b
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w03a'''是[[Java版1.8]]的第4个快照，发布于2014年1月16日<ref>{{cite|url=http://mojang.com/2014/01/minecraft-snapshot-14w03a/|archive-url=1|archive=1|title=Minecraft Snapshot 14w03b|author=Dinnerbone|website=Mojang.com|date=Jan 16, 2014}}</ref>，加入了{{cmd|fill}}、{{cmd|clone}}命令以及一条新的游戏规则，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|clone}}'''
+* 将指定空间内的方块（非实体）复制到不同的指定空间内。
+* 一次最多能复制4096个方块。
+* 此命令有两种模式：
+** {{cd|replace}}会复制每一个方块。
+** {{cd|masked}}只会复制非空气方块。
+* 用法：{{cmd|clone <x1> <y1> <z1> <x2> <y2> <z2> <x> <y> <z> [模式]}}。
+* 例子：{{cmd|clone 1001 3 1002 1011 3 992 1001 5 992 masked}}。
+
+'''{{cmd|fill}}'''
+* 在指定的空间内填充指定的方块。
+* 一次最多能填充4096个方块。
+* 旧方块处理方式参数与{{cmd|setblock}}相同，但有额外的选项：{{cd|hollow}}来在外层填充方块，而在内部填充空气，{{cd|outline}}来在外层填充方块，并忽视内部方块。
+* 工作原理与{{cmd|setblock}}相似。
+* 用法： {{cmd|fill <x1> <y1> <z1> <x2> <y2> <z2> <方块名> [数据值] [旧处理方式] <数据标签>}}。
+* 例子：{{cmd|fill 1001 3 1002 1011 5 992 wool 6 replace}}。
+
+'''{{cmd|gamerule}}'''
+* <code>logAdminCommands</code>
+** 如果设置为{{cd|false}}，所有的命令方块的输出信息将被阻止传输到客户端。如果在服务器内使用，它也不会在服务器记录内记录玩家执行过的命令。玩家'''仍'''会在聊天栏内看到执行的命令。
+
+== 更改 ==
+=== 方块 ===
+'''[[玩家的头]]'''
+* 不再只显示一层。
+
+=== 生物 ===
+'''[[铁傀儡]]'''
+* 现在仅在被玩家杀死时掉落[[铁锭]]，这可以通过攻击，[[药水]]，或玩家触发的机关（如手动激活的[[TNT]]）来达成。
+* 不受玩家干涉下死亡，则只会掉落[[虞美人]]。
+
+'''[[村民]]'''
+* 被闪电击中的村民将会变成[[女巫]]。
+* 牧师村民不再购买[[末影珍珠]]。
+
+'''[[僵尸猪人]]'''
+* 现在仅在被玩家杀死时掉落[[金粒]]和稀有掉落物，这可以通过攻击，药水，或玩家触发的机关（如手动激活的TNT）来达成。
+* 不受玩家干涉下死亡，则只会掉落[[腐肉]]。
+
+=== 世界生成 ===
+'''[[沙漠神殿]]'''
+* 现在会生成染色[[陶瓦]]而不是[[羊毛]]。
+
+'''[[村庄]]'''
+* 现在会在沙砾路下生成[[圆石]]。
+
+=== 命令格式 ===
+'''{{cmd|tp}}'''
+* 加入了旋转参数。
+** 例子：{{cmd|tp @p ~ ~ ~ ~20 ~40}}传送后会将玩家的脸部/视角向右旋转20度并向下旋转40度。
+
+'''目标选择器'''
+* 现在支持立方区域。
+** 例子：<code>@e[x=0,y=0,z=0,dx=10,dy=10,dz=10]</code>将选择在0,0,0至10,10,10之间的所有实体。
+* 半径数值现在是根据方块的中心点扩散的。
+** 半径为0将检测精准的方块位置。
+
+=== 游戏内容 ===
+'''物品标签'''
+* 现在会显示用于命令中的内部名称（{{key|F3+H}}模式）。
+
+=== 常规 ===
+'''方块ID'''
+* 在命令中的NBT数据现在可以使用方块/物品名来代替数字ID了。
+* 旧的ID仍可使用，但在被慢慢地淘汰。
+* 其他需要方块/物品ID的命令将需要名字ID。
+* 常规的ID在命令中不再运作，{{cmd|give [玩家] 1}}现在必须是{{cmd|give [玩家] stone}}。
+
+'''调试按钮'''
+* {{key|F3}} + {{key|D}}：清除聊天记录（包括之前的使用命令）。
+
+'''[[皮肤]]'''
+* 现使用不同布局和规格的{{filename|char.png}}文件。
+** 文件的规格增加至64×64。
+* 左右边手脚纹理现在可以被分开编辑。
+* 帽子层被延伸至全身，可以设为透明。
+** 手臂，腿部，头部，和身体的覆盖层分别被称为袖子，裤腿，帽子，和外套。
+* 对旧的皮肤反向兼容。
+** 旧的皮肤仍可使用，但不会有新功能。
+** 在14w02a之前的版本使用新皮肤会和旧皮肤一样。
+* 在选项菜单内新增“自定义皮肤”按钮。
+** 披风的可见度现在在此处切换。
+** 也可以切换覆盖层的可视度，每个身体部位都可分别切换。
+
+== 修复 ==
+{{fixes|fixedin=14w03a|prefix=Minecraft|showdesc=1
+|;old
+|34919|<code>Hopper: java.lang.NullPointerException: Rendering screen</code>。
+|36494|使用{{cmd|setworldspawn|link=none}}命令不会使得指南针指向新的世界出生点。
+|44881|命令方块对于“半径”的处理方式不是正方体而是球体。
+|;dev
+|44389|树叶不会根据群系更改颜色。
+|44684|14w02a中对传送方式的更改，对末影人的传送有副作用。
+|;previous
+|44556|{{cmd|clear|link=none}}命令不会清空盔甲栏中的物品，并且会{{tr|抛出|丟擲|投擲}}<code>Null Pointer Exception</code>异常。
+|44618|{{cmd|spawnpoint|link=none}}命令不能使用<code>@a</code>，<code>@p</code>和<code>@r</code>。
+|44758|命令方块中的各种选择器都偏离中心。
+|44785|命令方块中，<code>r{{=}}65536</code>不再工作。
+|44824|{{code|Hopper: java.lang.NullPointerException: Rendering Block Entity}}。
+|44848|{{code|Hopper: java.lang.NullPointerException: Unexpected error}}。
+}}</onlyinclude>
+
+== 你知道吗 ==
+* 此版本曾经在[[启动器]]中移除，但在2018年9月重新加入。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:14w03a]]
+[[en:Java Edition 14w03a]]
+[[es:Java Edition 14w03a]]
+[[fr:Édition Java 14w03a]]
+[[ja:Java Edition 14w03a]]
+[[ko:Java Edition 14w03a]]
+[[pt:Edição Java 14w03a]]
+[[ru:14w03a (Java Edition)]]
+[[uk:14w03a (Java Edition)]]

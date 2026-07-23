@@ -1,0 +1,657 @@
+# 页面: 移动的活塞
+# 来源: https://zh.minecraft.wiki/w/%E7%A7%BB%E5%8A%A8%E7%9A%84%E6%B4%BB%E5%A1%9E
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用简单计算器的页面, 基岩版独有信息, 实验性内容/2026 年第 3 次更新, 方块, 有未知版本的History模板的页面/Java版, 有未知版本的History模板的页面/基岩版, 没有方块物品的方块, 需要信息
+# 抓取时间: 2026-07-14 17:33:09
+# 原始 Wikitext 内容:
+
+{{Infobox block
+|image=none
+|invimage=Moving Block
+|movingpiston=1
+|noitem=1
+}}
+
+{{only|je|for='''移动的活塞（Moving Piston）'''}}或{{only|be|for='''移动的方块（Moving Block）'''}}，又称'''36号方块（Block 36）'''{{note|此名称来源于移动的活塞在[[扁平化]]前的方块ID。}}，是用于组成'''移动方块结构'''的方块，在活塞推拉行为的过程中代替正在移动中的方块。工作的[[活塞]]或[[黏性活塞]]会让方块被推动或拉动，从而使这些方块及其关联的方块跟随活塞的推拉而移动，而移动的活塞负责了此过程的行为。此方块存在于方块正在进入的位置，而非方块正在离开的位置。
+
+== 生成 ==
+[[活塞]]或[[黏性活塞]]推拉[[方块]]时，方块需要进入或离开网格单元而占据了每个不同方块网格，因此不能被存储为正常方块。活塞推拉方块的过程中，移动方块结构内的所有方块都被替换为“移动的活塞”方块，原先的方块数据全部存储入方块实体数据中。在活塞推拉到位后，移动的活塞方块会被重新复原为原先的方块。
+
+活塞在伸出时，会在面前生成一个方块为对应[[活塞头]]的移动的活塞，而活塞本身会保持存在。活塞在收回时，会将自身所在位置替换为移动的活塞，在就位后变为对应的活塞。
+
+{{in|je}}只有[[活塞]]和[[黏性活塞]]能够创建和设置移动的活塞的[[方块实体]]；任何其他方式，如[[命令]]、[[结构方块]]等方式放置的移动的活塞不会创建方块实体，使得此移动的活塞永远保持当前状态不会自动转变为正常方块。
+
+=== 活塞推动行为 ===
+一个方块将要被推动或拉动时，会产生不同的行为。方块的推拉行为有下列四类：
+* 方块可推动或拉动。
+* 方块可推动，但不可拉动。
+* 方块推动时会被破坏，且不可拉动。
+* 方块不可推动或拉动。
+
+所有方块的活塞推动行为包括：
+<ul><li>不可推动，不可拉动：
+{{columns-list|colwidth=20em|
+* {{BlockLink|Barrier}}
+* {{BlockLink|Beacon}}
+* {{BlockLink|Bedrock}}
+* {{BlockLink|Calibrated Sculk Sensor}}
+* {{BlockLink|Command Block}}
+* {{BlockLink|Creaking Heart}}
+* {{BlockLink|Crying Obsidian}}
+* {{BlockLink|Enchantment Table}}
+* {{BlockLink|End Gateway}}
+* {{BlockLink|End Portal}}
+* {{BlockLink|End Portal Frame}}
+* {{BlockLink|Ender Chest}}
+* {{BlockLink|Grindstone}}
+* {{BlockLink|Jigsaw Block}}
+* {{BlockLink|Jukebox}}
+* {{BlockLink|Lodestone}}
+* {{BlockLink|Monster Spawner}}
+* {{BlockLink|Moving Piston}}
+* {{BlockLink|Nether portal}}
+* {{BlockLink|Obsidian}}
+* {{BlockLink|Ominous Trial Spawner}}
+* {{BlockLink|Ominous Vault}}
+* {{BlockLink|id=Piston Top|text=已推出的活塞|link=活塞}}
+* {{BlockLink|Piston Head}}
+* {{BlockLink|Potent Sulfur}}
+* {{BlockLink|Reinforced Deepslate}}
+* {{BlockLink|Respawn Anchor}}
+* {{BlockLink|Sculk Catalyst}}
+* {{BlockLink|Sculk Sensor}}
+* {{BlockLink|Sculk Shrieker}}
+* {{BlockLink|Structure Block}}
+* {{BlockLink|Trial Spawner}}
+* {{BlockLink|Vault}}
+* {{only|je|for={{BlockLink|Anvil}}}}
+* {{only|je|for={{BlockLink|Banners}}}}
+* {{only|je|for={{BlockLink|Barrel}}}}
+* {{only|je|for={{BlockLink|Bee Nest}}}}
+* {{only|je|for={{BlockLink|Beehive}}}}
+* {{only|je|for={{BlockLink|Blast Furnace}}}}
+* {{only|je|for={{BlockLink|Brewing Stand}}}}
+* {{only|je|for={{BlockLink|Campfire}}}}
+* {{only|je|for={{BlockLink|Chest}}}}
+* {{only|je|for={{BlockLink|Chiseled Bookshelf}}}}
+* {{only|je|for={{BlockLink|Conduit}}}}
+* {{only|je|for={{BlockLink|Copper Chest}}}}
+* {{only|je|for={{BlockLink|Crafter}}}}
+* {{only|je|for={{BlockLink|Daylight Detectors}}}}
+* {{only|je|for={{BlockLink|Dispenser}}}}
+* {{only|je|for={{BlockLink|Dropper}}}}
+* {{only|je|for={{BlockLink|Furnace}}}}
+* {{only|je|for={{BlockLink|Hanging Signs}}}}
+* {{only|je|for={{BlockLink|Hopper}}}}
+* {{only|je|for={{BlockLink|Lectern}}}}
+* {{only|je|for={{BlockLink|Light}}}}
+* {{only|je|for={{BlockLink|Shelf}}}}
+* {{only|je|for={{BlockLink|Signs}}}}
+* {{only|je|for={{BlockLink|Smoker}}}}
+* {{only|je|for={{BlockLink|Soul Campfire}}}}
+* {{only|je|for={{BlockLink|Test Block}}}}
+* {{only|je|for={{BlockLink|Test Instance Block}}}}
+* {{only|je|for={{BlockLink|Trapped Chest}}}}
+* {{only|be|for={{BlockLink|Allow}}}}
+* {{only|be|for={{BlockLink|Border}}}}
+* {{only|be|for={{BlockLink|Chalkboard}}}}
+* {{only|be|for={{BlockLink|Client Request Placeholder Block}}}}
+* {{only|be|for={{BlockLink|Deny}}}}
+* {{only|be|for={{BlockLink|Invisible Bedrock}}}}
+* {{only|be|for={{BlockLink|Structure Void}}}}
+}}</li>
+<li>被推动破坏，不可拉动：
+{{columns-list|colwidth=20em|
+* {{BlockLink|Air}}
+* {{BlockLink|Amethyst Bud}}
+* {{BlockLink|Amethyst Cluster}}
+* {{BlockLink|Azalea}}
+* {{BlockLink|Bamboo}}
+* {{BlockLink|Beds}}
+* {{BlockLink|Beetroots}}
+* {{BlockLink|Big Dripleaf}}
+* {{BlockLink|Bubble Column}}
+* {{BlockLink|Budding Amethyst}}
+* {{BlockLink|Bush}}
+* {{BlockLink|Buttons}}
+* {{BlockLink|Cactus}}
+* {{BlockLink|Cactus Flower}}
+* {{BlockLink|Cake}}
+* {{BlockLink|Carrots}}
+* {{BlockLink|Carved Pumpkin}}
+* {{BlockLink|Cave Vines}}
+* {{BlockLink|Chorus Flower}}
+* {{BlockLink|Chorus Plant}}
+* {{BlockLink|Cobweb}}
+* {{BlockLink|Cocoa}}
+* {{BlockLink|Copper Golem Statue}}
+* {{BlockLink|Copper Torch}}
+* {{BlockLink|Coral}}
+* {{BlockLink|Coral Fans}}
+* {{BlockLink|Crimson Fungus}}
+* {{BlockLink|Crimson Roots}}
+* {{BlockLink|Dead Bush}}
+* {{BlockLink|Decorated Pot}}
+* {{BlockLink|Doors}}
+* {{BlockLink|Dragon Egg}}
+* {{BlockLink|Fern}}
+* {{BlockLink|Fire}}
+* {{BlockLink|Firefly Bush}}
+* {{BlockLink|Flower Pot}}
+* {{BlockLink|Flowering Azalea}}
+* {{BlockLink|Flowers}}
+* {{BlockLink|Frogspawn}}
+* {{BlockLink|Glow Lichen}}
+* {{BlockLink|Hanging Roots}}
+* {{BlockLink|Heads}}
+* {{BlockLink|Jack o'Lantern}}
+* {{BlockLink|Kelp}}
+* {{BlockLink|Ladder}}
+* {{BlockLink|Large Fern}}
+* {{BlockLink|Lava}}
+* {{BlockLink|Leaf Litter}}
+* {{BlockLink|Leaves}}
+* {{BlockLink|Lever}}
+* {{BlockLink|Lily Pad}}
+* {{BlockLink|Mangrove Propagule}}
+* {{BlockLink|Melon}}
+* {{BlockLink|Melon Stem}}
+* {{BlockLink|Moss Block}}
+* {{BlockLink|Moss Carpet}}
+* {{BlockLink|Mushrooms}}
+* {{BlockLink|Nether Sprouts}}
+* {{BlockLink|Nether Wart}}
+* {{BlockLink|Pale Hanging Moss}}
+* {{BlockLink|Pale Moss Block}}
+* {{BlockLink|Pale Moss Carpet}}
+* {{BlockLink|Pink Petals}}
+* {{BlockLink|Pitcher Crop}}
+* {{BlockLink|Pointed Dripstone}}
+* {{BlockLink|Potatoes}}
+* {{BlockLink|Pressure Plates}}
+* {{BlockLink|Pumpkin}}
+* {{BlockLink|Pumpkin Stem}}
+* {{in update|26d3|for={{BlockLink|Red Shrub}}}}
+* {{BlockLink|Redstone Comparator}}
+* {{BlockLink|Redstone Repeater}}
+* {{BlockLink|Redstone Torch}}
+* {{BlockLink|Redstone Wire}}
+* {{BlockLink|Resin Clump}}
+* {{BlockLink|Saplings}}
+* {{BlockLink|Scaffolding}}
+* {{BlockLink|Sculk Vein}}
+* {{BlockLink|Sea Pickle}}
+* {{BlockLink|Seagrass}}
+* {{in update|26d3|for={{BlockLink|Shelf Mushroom}}}}
+* {{BlockLink|Short Dry Grass}}
+* {{BlockLink|Short Grass}}
+* {{BlockLink|Shulker Box}}
+* {{BlockLink|Small Dripleaf}}
+* {{BlockLink|Snow}}
+* {{BlockLink|Soul Fire}}
+* {{BlockLink|Soul Torch}}
+* {{BlockLink|Spore Blossom}}
+* {{BlockLink|Sugar Cane}}
+* {{BlockLink|Sulfur Spike}}
+* {{BlockLink|Suspicious Gravel}}
+* {{BlockLink|Suspicious Sand}}
+* {{BlockLink|Sweet Berry Bush}}
+* {{BlockLink|Tall Dry Grass}}
+* {{BlockLink|Tall Grass}}
+* {{BlockLink|Torch}}
+* {{BlockLink|Torchflower Crop}}
+* {{BlockLink|Tripwire}}
+* {{BlockLink|Tripwire Hook}}
+* {{BlockLink|Turtle Egg}}
+* {{BlockLink|Twisting Vines}}
+* {{BlockLink|Vines}}
+* {{BlockLink|Warped Fungus}}
+* {{BlockLink|Warped Roots}}
+* {{BlockLink|Water}}
+* {{BlockLink|Weeping Vines}}
+* {{BlockLink|Wheat Crops}}
+* {{BlockLink|Wildflowers}}
+* {{only|je|for={{BlockLink|Bell}}}}
+* {{only|je|for={{BlockLink|Candle}}}}
+* {{only|je|for={{BlockLink|Copper Lantern}}}}
+* {{only|je|for={{BlockLink|Lantern}}}}
+* {{only|je|for={{BlockLink|Soul Lantern}}}}
+* {{only|je|for={{BlockLink|Structure Void}}}}
+* {{only|be|for={{BlockLink|Banners}}}}
+* {{only|be|for={{BlockLink|Campfire}}}}
+* {{only|be|for={{BlockLink|Colored Torches}}}}
+* {{only|be|for={{BlockLink|Dead Coral}}}}
+* {{only|be|for={{BlockLink|Dead Coral Fans}}（不包括墙上变种）}}
+* {{only|be|for={{BlockLink|Hanging Signs}}}}
+* {{only|be|for={{BlockLink|Item Frame}}}}
+* {{only|be|for={{BlockLink|Signs}}}}
+* {{only|be|for={{BlockLink|Soul Campfire}}}}
+* {{only|be|for={{BlockLink|Underwater Torch}}}}
+}}</li><li>可推动，不可拉动：
+{{columns-list|colwidth=20em|
+* {{BlockLink|Glazed Terracotta}}
+* {{only|be|for={{BlockLink|Heavy Core}}}}
+}}</li><li>可推动，可拉动：
+{{columns-list|colwidth=20em|
+* 除上述方块外的其他所有方块
+}}</li></ul>
+
+当活塞本身正在伸出、正在收回或已经伸出时，它不可推动和拉动；但当活塞处于收回状态时，它可推动和拉动。[[黏液块]]和[[蜂蜜块]]之间不能相互拉动。
+
+{{in|je}}拥有[[方块实体]]的方块默认不可推动或拉动，但[[潜影盒]]等方块被推动后会被破坏。<!--代码中对任何未指定推动行为的方块实体的默认行为为不可推动，不可拉动，这句话不可混淆两种情况-->
+
+=== 生成规则 ===
+工作的活塞会让方块被推动或拉动，从而使这些方块及其关联的方块跟随活塞的推拉而移动。
+
+当下列情况发生时，方块会尝试被推动：
+* 方块正位于将要推出的活塞前方；
+* 方块位于另一个方块的移动方向前方时。
+
+当下列情况发生时，方块会尝试被拉动：
+* 方块正位于将要拉回的黏性活塞活塞头前方；
+* 方块位于将要移动的[[黏液块]]或[[蜂蜜块]]移动方向的侧方或后方时会尝试被拉动。
+
+若一个方块既符合推动条件又符合拉动条件，我们将它视为推动。
+
+下方的原理图展示了不同情况下各个方块的推拉状况：
+{{Schematic|caption=
+'''活塞推出时的方块推拉状况（1）''' — T代表推，L代表拉。
+|style=display:inline-block;float:none;vertical-align:text-top
+||MB+L||||-
+|MB+L|SL+L|SL+L|||-
+||MB+L|SL+L|MB+T||-
+||pi-e|SL+T|SL+T|MB+T|-
+||||MB+L|
+}}
+{{Schematic|caption=
+'''活塞推出时的方块推拉状况（2）''' — T代表推，L代表拉，不考虑不可拉动的方块。
+|style=display:inline-block;float:none;vertical-align:text-top
+||||MB+L|SL+L||-
+|pi-e|SL+T|SL+T|MB+T|SL+T|MB+T|-
+|||MB+L|MB+T|MB+T|
+}}
+{{Schematic|caption=
+'''活塞推出时的方块推拉状况（3）''' — T代表推，L代表拉，X代表不参与推拉行为的方块。
+|style=display:inline-block;float:none;vertical-align:text-top
+||||MB+L|SL+L||-
+|pi-e|SL+T|SL+T|MB+T|SL+T|MB+T|-
+|||gt+X|MB+X|MB+L|
+}}
+{{Schematic|caption=
+'''活塞拉回时的方块推拉状况（1）''' — T代表推，L代表拉。
+|style=display:inline-block;float:none;vertical-align:text-top
+||MB+L||||-
+|MB+T|SL+T|SL+L|||-
+||MB+T|SL+L|MB+L||-
+|sp-e!|se-e|SL+L|SL+L|MB+L|-
+||||MB+L|
+}}
+{{Schematic|caption=
+'''活塞拉回时的方块推拉状况（2）''' — T代表推，L代表拉，不考虑不可拉动的方块。
+|style=display:inline-block;float:none;vertical-align:text-top
+|SL+L|se-w|sp-w!|MB+L|SL+L||-
+|SL+L|SL+T|SL+T|MB+T|SL+T|MB+T|-
+|||MB+L|MB+T|MB+T|
+}}
+{{Schematic|caption=
+'''活塞拉回时的方块推拉状况（3）''' — T代表推，L代表拉，X代表不参与推拉行为的方块。
+|style = display:inline-block;float:none;vertical-align:text-top
+|SL+L|se-w|sp-w!|MB+L|SL+L||-
+|SL+L|SL+T|SL+T|MB+T|SL+T|MB+T|-
+|||gt+X|MB+X|MB+L|
+}}
+
+活塞推出或拉回所带动的方块结构就是移动方块结构，下列原理图用<code>*</code>标记了活塞推出时的移动方块结构。
+
+{{Schematic|caption=
+'''活塞移动方块结构（1）''' — 被推动的方块和被黏液块拉动的方块被移动。
+|style=display:inline-block;float:none;vertical-align:text-top
+|pi-e|SL+*|MB+*|MB+*|MB+*|-
+||MB+*||MB|
+}}
+{{Schematic|caption=
+'''活塞移动方块结构（2）''' — 不可拉动的方块无法被黏液块拉动。
+|style=display:inline-block;float:none;vertical-align:text-top
+|MB+*||pi-e|SL+*|MB+*|-
+|SL+*|SL+*|SL+*|SL+*||-
+|MB+*|gt+*||gt|
+}}
+{{Schematic|caption=
+'''活塞移动方块结构（3）''' — 黏液块与蜂蜜块不会互相拉动。
+|style=display:inline-block;float:none;vertical-align:text-top
+|pi-e|SL+*|SL+*|MB+*|-
+||hn|SL+*|hn+*|-
+|||hn|MB+*
+}}
+
+活塞的移动方块受到多种条件限制。在下列情况下，活塞无法推动方块，黏性活塞无法拉回方块但可以收回活塞头：
+* 移动方块结构的方块总数超过12个。
+* 黏性活塞尝试拉回不可拉动的方块。
+* 移动方块结构会被移动超过建筑高度上限或建筑高度下限。
+* 移动方块结构移动方向前方有不可推动的方块。
+
+{{Schematic|caption=
+'''无法移动的情况（1）''' — 移动方块总数超过12个。
+|style=display:inline-block;float:none;vertical-align:text-top
+|pi-e|SL|MB|MB|MB|MB|MB|MB|-
+||SL|MB|MB|MB|MB|MB|MB
+}}
+{{Schematic|caption=
+'''无法移动的情况（2）''' — 黏性活塞尝试拉动不可拉动的方块。
+|style=display:inline-block;float:none;vertical-align:text-top
+|sp-e!|se-e|gt
+}}
+{{Schematic|caption=
+'''无法移动的情况（3）''' — 移动方块结构被不可推动的方块阻挡。
+|style=display:inline-block;float:none;vertical-align:text-top
+|pi-e|SL|MB|MB||-
+||SL|MB|MB|obsidian
+}}
+
+当移动的活塞生成后，附着于这个方块结构上的附着性方块会被破坏，移动方向前方的推动破坏方块也会被破坏并被移动的活塞取代，整个结构变为移动状态。
+
+== 获取 ==
+{{in|je}}移动的活塞没有对应的[[方块物品]]。
+
+{{in|be}}移动的方块只能通过存档编辑或[[附加包]]获得。
+
+== 破坏 ==
+移动的活塞没有轮廓箱，因此不能挖掘移动的活塞。
+
+移动的活塞不能被挖掘破坏。
+
+{{Breaking table}}
+
+移动的活塞被破坏后会掉落其表示的方块的方块物品。
+
+== 用途 ==
+除了作为移动方块结构的一部分，移动的活塞作为一个方块，还具有以下性质：
+* 移动的活塞无法继承其代表的方块的任何特征。<ref>{{bug|MC-123217}}</ref>例如，发光的方块被活塞移动的瞬间会短暂变暗，[[亮度#光照透明方块|光照不透明]]的方块被移动的瞬间则能够透光。
+* 它不会使用其代表的方块的[[方块基本属性]]，而是有其自身的固定的方块基本属性，如硬度为{{Autovalue|type=block hardness|移动的活塞}}，爆炸抗性为{{Autovalue|type=block blast resistance|移动的活塞}}，不被[[火]]破坏，地图颜色为{{Autovalue|type=block map color|移动的活塞}}等。
+* 当玩家踩上移动的活塞时，移动的活塞发出石头的声音，与储存的方块无关。
+* {{in|java}}[[末影龙]]和[[凋灵]]不能破坏移动的活塞。
+* 它本身不可见，但其方块实体可见且渲染为储存的方块的移动动画。
+* 它本身没有[[碰撞箱]]，但它会使用其方块实体中保存的方块碰撞箱，随方块移动程度改变碰撞箱的位置。
+* 它没有[[轮廓箱]]，玩家无法选中它。
+* 它是[[不可替代方块]]，玩家不能在它所在的位置直接放置方块。
+* 在不使用命令的情况下，它只能被爆炸破坏。它的爆炸抗性为0，与储存的方块无关。在这种情况下，某些方块（如[[远古残骸]]）可能本身爆炸抗性很高，但如果被推动时产生爆炸，则会因为移动的活塞的爆炸抗性为0而被破坏。
+* 由于没有[[方块支撑形状]]，附着于移动的活塞的方块会被破坏。
+* 它不能使耕地转化为泥土，这是{{in|je|nc=1}}唯一一个不会压坏耕地的[[固体方块]]。
+
+通常情况下，{{convert|2}}后移动的活塞到位，整个结构回到普通的方块状态。
+
+{{in|je}}黏性活塞接受短于{{convert|3}}信号时会在下一个方块事件阶段开始收回（如果下一个方块事件阶段在下一刻，那么2刻信号与3刻信号无异），并且将前方一个方块直接到位（即为'''瞬间到位'''）。此情况下黏性活塞无法完整推拉结构。
+
+=== 推动实体 ===
+在移动的活塞正在移动时，它会对在移动范围内的实体施加推力，从而使这些实体跟随着方块结构的移动而移动。如果实体被推动后无法向着对应方向移动，移动的方块可能会推入实体中。如果方块是一个[[窒息方块]]，方块被推入生物后可能造成生物窒息而亡。
+
+绝大多数实体都可以被推动，但[[区域效果云]]、{{only|je|for={{nbt|bool|Marker}}为<samp>true</samp>的[[盔甲架]]、[[展示实体]]、[[交互实体]]和[[标记]]}}不会被推动。
+
+如果实体被正在移动的[[黏液块]]推动，则会以较高的速度被弹开。
+
+== 过程细节 ==
+=== Java版 ===
+; 创建移动方块结构
+当活塞推出，黏性活塞推出或收回时，系统会以活塞前方的方块作为“起始点”递归创建一个移动方块结构，并计算这个结构是否能被移动和移动这个方块结构需破坏周围什么方块。创建移动方块结构的流程如下：
+# 确定移动方向。若活塞正在推出，那么方向与活塞一致；若活塞正在收回，则方向与活塞相反。
+# 创建移动列表和破坏列表。移动列表负责储存将移动的方块，破坏列表负责储存方块结构移动开始时将破坏的方块。
+# 若起始点是一个推动破坏的方块，且活塞正在推出，则在破坏列表中加入该方块，中止创建移动方块结构。
+# 从起始点向后方（移动方向的反向）查找可以被拉动的方块，从远到近依次编号，添加入移动列表中，直到找到空气或即将移动的活塞本身。
+#* 若查找过程中移动列表大小超过12，则中止创建移动方块结构，整个方块结构无法被移动。
+# 从起始点向前（移动方向）查找方块，从近到远依次编号添加入移动列表中，直到找到空气、即将移动的活塞本身、推动破坏的方块、不可推动的方块或已经存在于移动列表中的方块。
+#* 若查找过程中移动列表大小超过12，则中止创建移动方块结构，整个方块结构无法被移动。
+#* 若查找到推动破坏的方块而中止查找，则将该方块添加入破坏列表中。
+#* 若查找到不可推动的方块或即将移动的活塞本身而中止查找，则说明整个移动方块结构被阻挡，无法移动。此时创建移动方块结构中止，整个方块结构都不会移动。
+#* 若查找到已存在于移动列表中的方块而中止查找，说明当前移动列表的元素顺序出现了问题，需要将目前计算的这列方块插入到造成查找中止的方块前方。
+# 按照移动列表内元素的顺序，依次遍历各个元素（包括将在这个循环中添加的方块）：
+## 检查方块是否为黏液块或蜂蜜块。若不是，不执行接下来的分支创建；若是，执行下面的流程：
+## 按照'''下、上、北、南、西、东'''的顺序，尝试添加分支：
+##* 若当前方向正好为推动方向或推动方向的反向，则不创建在这个方向上的分支。
+##* 若对应方向上的方块无法拉动（包括黏液块和蜂蜜块之间不可拉动），则不创建在这个方向上的分支。
+##* 以对应方向上的方块为新的起始点，执行外层的4、5步骤。
+# 遍历元素结束后，移动列表和破坏列表就被填充完毕，创建移动方块结构完毕。
+
+从这个流程可以看出，活塞移动方块结构内的编号顺序是按照移动方向依次递增的。垂直于移动方向上来看，沿着移动方块结构移动的方块计算距离，离活塞越近，编号也越小。
+
+{{Schematic
+|caption='''活塞移动方块结构编号（1）''' — 活塞向东推动，水平方向。
+|style = display:inline-block;float:none;vertical-align:text-top
+|||MB+5|MB+6|ole+2||-
+|pi-e|SL+1|SL+2|SL+3|SL+4|ole+1|-
+|||MB+7|SL+8|ole+3||-
+||||MB+9|ole+4|
+}}
+{{Schematic
+|caption='''活塞移动方块结构编号（2）''' — 活塞向西推动，水平方向。
+|style = display:inline-block;float:none;vertical-align:text-top
+||ole+2|MB+6|MB+5|||-
+|ole+1|SL+4|SL+3|SL+2|SL+1|pi-w|-
+||ole+3|SL+8|MB+7|||-
+||ole+4|MB+9|||
+}}
+{{Schematic
+|caption='''活塞移动方块结构编号（3）''' — 活塞向东推动，垂直方向。
+|style = display:inline-block;float:none;vertical-align:text-top
+|||MB+7|MB+8|ole+3||-
+|pi-e|SL+1|SL+2|SL+3|SL+4|ole+1|-
+|||MB+5|SL+6|ole+2||-
+||||MB+9|ole+4|
+}}
+
+; 产生更新
+当活塞开始伸出或收回时，它会与移动方块结构按照一定的顺序发出方块更新。
+
+若活塞未伸出，但当前具有红石信号，那么活塞被激活并尝试推出：
+# 若活塞不可推出，则不产生更新。
+# 计算移动方块结构，获得移动列表和破坏列表。
+# '''逆序'''破坏破坏列表内的方块，此过程不产生NC更新和PP更新。
+# '''逆序'''在移动后的位置放置移动的活塞方块，存储移动方块的信息，此过程不产生NC更新。
+# 活塞应该产生活塞头的位置放置移动的活塞，保存活塞头信息，此过程不产生NC更新。
+# 对于移动方块后留下的“空位”，以位置的哈希码大小排序从小到大将它们设置为空气，此过程不产生NC更新和PP更新。设置完成后，再按照这个顺序遍历一次这些方块产生PP更新。其中，位置的哈希码计算公式为<code>x+31y+961z</code>，取最后32位有符号整数作为这个位置的哈希码。
+# '''逆序'''对破坏方块列表内的方块产生间接PP更新和NC更新，再'''逆序'''对移动方块列表内的方块产生NC更新，最后在活塞头产生NC更新。
+# 移动准备结束，活塞设置自身方块状态，产生NC更新和PP更新。
+
+若活塞已伸出，但当前没有红石信号，那么活塞被取消激活并尝试收回：
+# 若活塞头位置是移动的活塞方块实体，则瞬间到位。
+# 设置自身状态为移动的活塞，此时不产生NC更新和PP更新。之后添加方块实体，并产生NC更新和PP更新。
+# 若活塞是普通的活塞，则设置活塞头方块为空气，产生NC更新和PP更新，移动准备结束。
+# 若活塞是黏性活塞，检查对应方向前方的第二格方块（即黏性活塞可能拉回的方块）：
+#* 若这个方块是一个移动的活塞方块实体，并且方向与黏性活塞相同，并处于正在推出状态，则瞬间到位。
+#* 否则，检查前方方块是否为移动的活塞方块实体：
+#** 若是，并且方向与黏性活塞相同，并正在推出，推动进度小于一半或刚刷新一次推动进度或此事件发生在计划刻和方块事件阶段内，则设置活塞头位置为空气，产生NC更新和PP更新，不拉回方块。
+#** 若不是或没有满足上述条件，则再次检查前方的第二格方块是否为活塞可拉动的方块（但不立即检查移动方块结构）：
+#*** 若不是可拉动的方块，则设置活塞头位置为空气，产生NC更新和PP更新。
+#*** 若是可拉动的方块，且移动方块结构也可以被拉动，则先设置活塞头位置为空气（随后将被移动的活塞覆盖，其主要影响是可配合时机合适的更新引起[[地毯复制]]），再与上文推出类似，创建移动列表和破坏列表，创建移动方块结构，并进行对应的NC更新和PP更新。
+#*** 若是可拉动的方块，但移动方块结构不能被拉动，则只会设置活塞头位置为空气，不产生NC更新和PP更新。附着在活塞头上的方块将进入收到特定更新时破坏的[[BUD]]状态。
+
+; 到位
+在移动过程中，方块转变为移动的活塞方块，历经两次方块实体游戏刻计算后，在第三次调用刻计算时，执行普通到位。若从活塞开始伸出的那一游戏刻记为第0游戏刻开始计算，普通到位会在第2游戏刻的方块实体阶段被调用。
+
+若在移动过程中移动的活塞被破坏，则会瞬间到位。
+
+普通到位的流程如下：
+# 删除方块实体。
+# 检查当前方块是否为移动的活塞，若不是，则中止流程。
+# 检查移动的活塞内部包含的要到位的方块到位后是否能成功附着或是否能在到位位置上存在，并矫正方块的形状。此过程约等于周围6个方块对本方块产生PP更新。
+#* 若检查失败，则先设置本方块位置为要到位的方块，设置过程不产生NC更新和PP更新，最后再产生NC更新和PP更新。
+#* 若检查成功，先将要到位的方块的含水状态清除，然后将本方块位置设置为要到位的方块，此过程产生NC更新和PP更新，再对本方块本身接收一次NC更新。
+
+瞬间到位的流程如下：
+# 删除方块实体。
+# 检查当前方块是否为移动的活塞，如果不是，则中止流程。
+# 检查自身是否为活塞头或活塞。
+#* 若是，则将本方块位置设置为空气，此过程产生NC更新和PP更新，再对本方块本身接收一次NC更新。
+#* 若不是，则将要到位的方块转换为最后要到位的方块，此过程约等于周围6个方块对本方块产生PP更新，用于矫正方块的形状和检查方块是否能在到位位置上存在。之后设置本方块位置为最后要到位的方块，此过程产生NC更新和PP更新，再对本方块本身接收一次NC更新。
+
+瞬间到位和普通到位最明显的差异是是否清除方块的含水状态。当含水的方块被普通到位时，含水状态会被清除；而被瞬间到位时，含水状态不会被清除。
+
+方块被活塞移动到位时可以执行放置的额外运算，产生[[自更新]]等现象。
+
+=== 基岩版 ===
+; 活塞方块实体更新
+# 初始化。
+#: 活塞在被放置后的第一次更新中，活塞会设置一些关于活塞头、推出方向等的值并在完成后发送通知。在第一次更新后直到被删除前，该活塞都不会继续执行这一段代码。
+# 根据活塞的红石状态同步和改变自身的推出状态。
+# 计算活塞的浮点坐标，设置碰撞箱。
+# 若活塞推出状态的值是1（即活塞需要推出）则执行推出检查函数<code>pistonblockactor::_checkAttachedBlocks</code>。若返回值为0，则本函数直接返回，意味着活塞推出失败。
+#: 同步活塞红石状态（并非信号状态）和推出状态。
+#: 调用<code>pistonblockactor::_spawnmovingblocks</code>函数，该函数为活塞推出方块、破坏方块一系列行为执行的主函数。
+# 向活塞的六个面发送NC更新。
+# 若活塞的推出状态不是1和3，而是2，则执行对推出的每个位置的移动的方块转方块的函数。
+#: 调用<code>pistonblockactor::_spawnblocks</code>，该函数为遍历列表使移动的方块转方块的主函数。
+# 若活塞的推出状态是3（即活塞需要收回），则执行和4相近的内容，仅在活塞收回中多出了一个删除方块的操作（可能是删除活塞头位置的方块）。
+# 收回转方块和推出转方块类似。
+
+; 活塞推出检查
+<code>checkattachedblocks</code>函数用于检查活塞是否能推出，实际上这个函数更多的是计算一些位置、方向、发送事件和释放内存，同时调用真正的检查函数<code>pistonblockactor::attachedblockwalker</code>。这个函数会递归搜寻检查要被活塞推出的方块，检查每一个可能位置上的方块，并把可推出或破坏的方块加入列表，逻辑如下：
+
+: 检查函数的参数是一个方块实体对象、一个<code>blocksource</code>对象，正在检查的方块的三维向量（递归搜寻，所以只是一个方块的坐标），还有两个指针。
+:# 遍历一次已加入列表的方块，若参数中的三维坐标在列表已经存在，则立即返回1。
+:# 计算正在检查的方块移动后的新坐标是否突破了高度限制。
+:# 计算活塞坐标和正在检查的坐标是否满足某种关系，并检查这个坐标是否为移动的方块，若是则通过检查{{Info needed}}。
+:# 处理液体方块。
+:# 检查所检查位置是否有方块实体，若有则检查该方块实体是否为可移动的方块实体。
+:# 检查这个位置是否为空气，若是则通过检查。
+:# 处理黏性链接<code>handleslimeconnection</code>函数。
+:# 再次处理液体方块。
+:# 调用<code>attachedblockwalker</code>函数自身，并检查返回值，若返回值为0（即不能推出），自身也返回0（不能推出）。
+
+; 活塞推出方块主函数
+# 调用<code>pistonblockactor::sortattachedblocks</code>函数排序方块推出列表中的方块。
+# 检查列表是否过长以至于溢出。
+# 生成一个<code>random</code>对象，也就是处理随机数的，用于处理活塞推方块掉落物品。
+# 遍历破坏列表里的方块，生成破坏后的掉落物并破坏方块。
+# 遍历移动列表里的方块，对每个遍历到的坐标执行<code>pistonblockactor::spawnmovingblock</code>函数。
+# 一些检查，释放内存。
+
+; 活塞移动方块函数
+# 判断被移动的方块是否有方块实体，而且方块实体是“2LL”类方块实体（应该是容器）。
+#: 强制关闭箱子，若是大型箱子，则断开连接。
+# 检查成就。
+# 判断被移动的方块是否为空气，具有方块实体。方块实体是“19LL”类，即移动的方块。
+#: 若是，将这个MB方块实体里的方块直接替换掉这个位置的方块（注意，和放置不同，这里的替换甚至不会发出NC更新）。
+# 构造一个<code>movingblock</code>，并放置在目标位置。
+# 若被移动的方块有方块实体，则将该方块实体的两个值记录到另两个变量里，将它们本身改成0（可能是与移动状态相关的），然后移除该方块实体。
+# 若没有，也要移除一遍该位置的方块实体，即使根本就没有。
+# 若新建的<code>movingblock</code>的位置没有成功地新建<code>movingblock</code>的方块实体，则直接跳到最后（删除原位置的方块）。
+# 处理活塞移动的一些特殊情况。
+# 若被移动的方块含有别的方块，而且该方块没有“0x2000000L”性质（液体方块具有这个性质），就一起移动，记录到<code>movingblock</code>里。
+# 发送一些通知，并调用新创建的<code>movingblock</code>的函数移动碰撞的实体。
+# 删除原位置的方块。
+
+; 活塞处理方块转方块函数
+# 检查活塞状态，若不是0和2状态，就执行转方块。
+#: 遍历活塞推动方块的列表。
+# 检查正在处理的方块是否为移动的方块。
+# 若被推动的方块含液体方块，则检查相邻方块有没有液体方块，处理连接[[渲染]]状态。
+# 将被移动的方块含的方块，即<code>extrablock</code>，放置出来。
+# 将被移动的方块放出来。
+
+; 移动的方块实体更新函数
+# 作为方块实体类的子类，调用<code>blockactor::tick</code>。
+# 判断自身记录的方块是否为移动的方块（也就是被移动的<code>movingblock</code>），若是，则把记录的<code>movingblock</code>直接替换成空气，它的<code>extrablock</code>也会被替换。
+# 若检查自身记录的活塞位置没有活塞，则转方块。
+
+== 音效 ==
+{{Sound table/Block/Stone}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Moving Piston
+|spritetype=block
+|nameid=moving_piston
+|showblocktags=je
+|rowspan=1
+|blocktags={{GameTag|blocks|moving_piston}}
+|foot=1}}
+{{ID table
+|Moving Piston
+|displayname=移动的活塞方块实体
+|spritetype=block
+|nameid=piston
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|showaliasids=y
+|generatetranslationkeys=bedrock
+|Moving Block
+|spritetype=block
+|nameid=moving_block
+|aliasid=movingBlock
+|foot=1}}
+{{ID table
+|Moving Piston
+|displayname=移动的活塞方块实体
+|spritetype=block
+|nameid=MovingBlock
+|foot=1}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+移动的活塞具有与其相关联的保存了其附加数据的方块实体。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.7|加入了移动的活塞。}}
+|{{HistoryLine||1.7_01|黏性活塞不再会在它们缩回时黏住方块。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||?|移动的活塞的[[轮廓箱]]现在与其[[碰撞箱]]对齐。}}
+|{{HistoryLine||1.3.1|dev=12w27a|活塞现在需要2[[红石刻]]（4[[游戏刻]]）的时间来伸缩，但它们仍然会瞬间缩回。}}
+|{{HistoryLine||1.7.2|dev=13w37a|移动的活塞（36号方块）从{{cmd|give}}命令中移除。}}
+|{{HistoryLine||1.8|dev=14w18a|现在创建移动方块结构时，[[黏液块]]会带动与其相邻的、可以被推动的方块。
+|现在正在向上移动的移动的活塞若是[[黏液块]]，则会将黏液块上的[[实体]]（[[生物]]、[[玩家]]、[[掉落物]]、已发射的[[箭]]等）弹射到空中。}}
+|{{HistoryLine|||dev=14w19a|现在创建移动方块结构时，黏液块可以推动侧面的和下面的方块。}}
+|{{HistoryLine|||dev=14w32a|移动的活塞头不再拥有碰撞箱。}}
+|{{HistoryLine||1.11.1|dev=16w50a|为移动的活塞的方块实体<code>piston_extension</code>添加了一个名为<code>source</code>的新字节标签，当方块代表活塞头部时为true，而代表被推动的方块时为false。易位被修复了。}}
+|{{HistoryLine||1.12|dev=17w16a|[[带釉陶瓦]]不再可以拉动。
+|现在创建移动方块结构时，黏液块时不会推动附着在黏液块侧面的带釉陶瓦。}}
+|{{HistoryLine|||dev=pre3|黏液块不再能推动在它任何一侧的带釉陶瓦。}}
+|{{HistoryLine||1.13|dev=17w47a|[[音符盒]]可以推动和拉动。
+|移动的活塞的方块ID由<code>piston_extension</code>改变为<code>moving_piston</code>。
+|在[[扁平化]]之前，移动的活塞的数字ID为36。}}
+|{{HistoryLine|||dev=pre6|[[带釉陶瓦]]现在再次可以拉动。}}
+|{{HistoryLine|||dev=pre8|带釉陶瓦不再可以拉动。}}
+|{{HistoryLine||1.21.5|dev=25w10a|现在被移动方块结构破坏的方块会播放其破坏音效。<ref>{{bug|MC-203550|||Fixed}}</ref>}}
+|{{HistoryLine||26.1|dev=snapshot-5|生物不再能在移动的活塞上生成。<ref>{{bug|MC-163978|||Fixed}}</ref>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了移动的方块。}}
+|{{HistoryLine|Bedrock}}
+|{{HistoryLine||1.16.0|dev=1.15.0.55|现在含水方块被移动将使其失去含水状态。}}
+|{{HistoryLine||?|移动的方块<code>movingblock</code>不再能够使用[[命令]]放置。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.26|移动的方块的ID由{{cd|movingblock}}更改为{{cd|moving_block}}。}}
+|{{HistoryLine||1.19.50|dev=1.19.50.20|现在活塞头与黏性活塞头推出和收回的动画更加流畅。<ref>{{bug|MCPE-155987|||Fixed}}</ref>
+|现在移动的方块的动画更加流畅。<ref>{{bug|MCPE-146597|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.51|方块在作为移动的方块时被破坏后不再会重新出现。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|移动的方块的爆炸抗性由3,600,000改为0。}}|{{HistoryLine|console}}|{{HistoryLine||xbox=TU3|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了移动的活塞。}}|{{HistoryLine||xbox=TU14|ps3=1.04|psvita=1.00|ps4=1.00|活塞现在花费双倍的时间（2红石刻或4[[游戏刻]]）来延长，但它们仍然立即收缩。}}|{{HistoryLine|3ds}}|{{HistoryLine||0.1.0|加入了移动的方块。}}}}
+
+== 画廊 ==
+<gallery>
+File:Glassp.gif|移动的玻璃板
+File:Sticky_piston_rails.gif|移动的铁轨，注意其存储的方块的方块状态在就位前不会改变
+File:Sticky_piston_fence.gif|移动的栅栏，注意其存储的方块的方块状态在就位前不会改变
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|others}}

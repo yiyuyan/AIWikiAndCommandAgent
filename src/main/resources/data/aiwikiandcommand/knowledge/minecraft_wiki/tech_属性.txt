@@ -1,0 +1,597 @@
+# 页面: 属性
+# 来源: https://zh.minecraft.wiki/w/%E5%B1%9E%E6%80%A7
+# 分类: Java版独有信息, 基岩版独有信息, 属性, 游戏内容
+# 抓取时间: 2026-07-14 17:25:28
+# 原始 Wikitext 内容:
+
+{{Tr|mode=H|基值|基礎值}}
+{{about|生物的属性|命令|命令/attribute|世界系统中的属性|环境属性}}
+'''属性（Attributes）'''是[[生物]]的增益/减益特性系统。属性也存在'''修饰符（Modifiers）'''{{only|be|for=和'''增益（Buffs）'''}}，用于调整属性的强度。
+
+== 属性 ==
+每个独立的属性都控制着生物的一些能力，例如攻击伤害和速度等。所有的属性值都是[[参数类型#double|双精度浮点数]]{{only|je}}/[[参数类型#float|单精度浮点数]]{{only|be}}。
+
+{{in|je}}属性有以下基本属性：
+* '''值域'''是属性的计算值不能逾越的范围，计算值在值域外时会被钳制至值域的最小值或最大值。
+* '''类型'''表示属性效果的好坏，影响其修饰符在提示框中的颜色：
+** 增加正面属性值的修饰符为蓝色，减少正面属性值的修饰符为红色。
+** 增加负面属性值的修饰符为红色，减少负面属性值的修饰符为蓝色。
+** 中性属性值的修饰符为灰色。
+* 属性有其'''适用的生物'''，在非适用的生物上不存在。
+* 属性的'''默认值'''是每一个属性实例的基值的默认值。
+
+每一个生物上的每一个属性有以下数据：
+* '''基值（Base）'''是该属性对于该生物，被应用修饰符前的值。
+* '''修饰符（Modifiers）'''用于修饰属性，改变其计算值。
+
+生物的属性最终以'''计算值'''生效。
+
+{{in|be}}属性有以下基本属性：
+* '''重定义模式'''是属性在通过组件组重新[[定义]]时如何更新自己的当前值。
+** '''保持当前值'''意味着重新定义时，当前值不会随着默认值被修改而改变。当前值恰好等于当前最大值、当前值比新定义的默认最小值还小、确实存在属性修饰符并导致计算值与默认值不同时除外，此时当前值分别会被设置为新的默认值、设置为新的默认最小值和设置为计算值。
+** '''更新至新的默认值'''意味着重新定义时，当前值会被直接更新为新的默认值。确实存在属性修饰符并且计算值与默认值相同时除外，此时当前值会保留旧的值不变。
+* '''是否同步'''表示属性是否会随着网络在服务器与客户端之间同步。
+* 属性有其'''适用的生物'''，默认在非适用的生物上不存在。但是通过[[附加包]]，可以使任何游戏内存在的属性类型在任何[[生物]]上存在。
+
+每一个生物上的每一个属性有以下数据：
+* '''默认最小值'''、'''默认最大值'''和'''默认值'''是该属性对于该生物，被应用修饰符前的值，这里的第三个值也可以称作'''基值（Base）'''。
+* '''当前最小值'''、'''当前最大值'''和'''当前值'''是该属性对于该生物，被应用修饰符和增益之后的值。在应用修饰符和增益期间，'''运算数'''取0、1、2分别代表修改最小值、最大值和当前值，该数字会在持久化时存储在修饰符和增益对应的NBT标签中。
+* '''修饰符（Modifiers）'''用于修饰属性，计算得到当前最小值、当前最大值和一个计算值，其中计算值会根据重定义模式来确定是否会被前二者钳制后应用至当前值。
+* '''增益（Buffs）'''用于临时对一个属性的三种'''当前'''类型的值直接进行修改。
+** '''瞬时增益'''在添加到属性上时便瞬时生效，然后结束其生命周期。
+** '''临时增益'''在添加到属性上后每游戏刻检查生效，并在既定的生命周期结束后从属性上移除。
+
+生物的属性最终以'''当前值'''生效。
+
+== 已知属性项 ==
+=== Java版 ===
+{| class="wikitable mw-collapsible" style="width:100%"
+! 属性名称
+! 属性ID
+! 类型
+! 描述
+|-
+| [[属性/空气阻力修正系数|{{tp|attribute.name.air_drag_modifier|nocat=1}}]]
+| <code>[[属性/空气阻力修正系数|air_drag_modifier]]</code>
+| 正面
+| 生物在空气中运动时受到的速度损失
+|-
+| [[属性/护甲值|{{tp|attribute.name.armor}}]]
+| <code>[[属性/护甲值|armor]]</code>
+| 正面
+| 护甲值与盔甲韧性共同作用，减少生物受到的伤害
+|-
+| [[属性/盔甲韧性|{{tp|attribute.name.armor_toughness}}]]
+| <code>[[属性/盔甲韧性|armor_toughness]]</code>
+| 正面
+| 护甲值与盔甲韧性共同作用，减少生物受到的伤害
+|-
+| [[属性/攻击伤害|{{tp|attribute.name.attack_damage}}]]
+| <code>[[属性/攻击伤害|attack_damage]]</code>
+| 正面
+| 生物的近战攻击伤害
+|-
+| [[属性/击退|{{tp|attribute.name.attack_knockback}}]]
+| <code>[[属性/击退|attack_knockback]]</code>
+| 正面
+| 生物的攻击造成的击退强度的增量
+|-
+| [[属性/攻击速度|{{tp|attribute.name.attack_speed}}]]
+| <code>[[属性/攻击速度|attack_speed]]</code>
+| 正面
+| 玩家的攻击速度
+|-
+| [[属性/名牌分数距离|{{tp|attribute.name.below_name_distance|nocat=1}}]]
+| <code>[[属性/名牌分数距离|below_name_distance]]</code>
+| 正面
+| 生物<code>below_name</code>记分板显示位置的最大可见距离
+|-
+| [[属性/方块破坏速度|{{tp|attribute.name.block_break_speed}}]]
+| <code>[[属性/方块破坏速度|block_break_speed]]</code>
+| 正面
+| 玩家破坏方块的速度乘数
+|-
+| [[属性/方块交互距离|{{tp|attribute.name.block_interaction_range}}]]
+| <code>[[属性/方块交互距离|block_interaction_range]]</code>
+| 正面
+| 玩家可以与方块交互的距离
+|-
+| [[属性/弹性|{{tp|attribute.name.bounciness|nocat=1}}]]
+| <code>[[属性/弹性|bounciness]]</code>
+| 正面
+| 生物碰撞后水平方向上的速度保留率
+|-
+| [[属性/着火时间|{{tp|attribute.name.burning_time}}]]
+| <code>[[属性/着火时间|burning_time]]</code>
+| 负面
+| 设置生物剩余着火时间效果的乘数
+|-
+| [[属性/摄像机距离|{{tp|attribute.name.camera_distance}}]]
+| <code>[[属性/摄像机距离|camera_distance]]</code>
+| 中性
+| 设置第三人称视角下摄像机与玩家或被旁观实体的距离
+|-
+| [[属性/实体交互距离|{{tp|attribute.name.entity_interaction_range}}]]
+| <code>[[属性/实体交互距离|entity_interaction_range]]</code>
+| 正面
+| 玩家可以与实体交互的距离
+|-
+| [[属性/爆炸击退抗性|{{tp|attribute.name.explosion_knockback_resistance}}]]
+| <code>[[属性/爆炸击退抗性|explosion_knockback_resistance]]</code>
+| 正面
+| 生物对爆炸击退的抵抗强度
+|-
+| [[属性/摔落伤害倍数|{{tp|attribute.name.fall_damage_multiplier}}]]
+| <code>[[属性/摔落伤害倍数|fall_damage_multiplier]]</code>
+| 负面
+| 生物受到的摔落伤害的乘数
+|-
+| [[属性/飞行速度|{{tp|attribute.name.flying_speed}}]]
+| <code>[[属性/飞行速度|flying_speed]]</code>
+| 正面
+| 生物的飞行移动的速度
+|-
+| [[属性/生物跟随距离|{{tp|attribute.name.follow_range}}]]
+| <code>[[属性/生物跟随距离|follow_range]]</code>
+| 正面
+| 生物AI可追踪和寻路的最大范围
+|-
+| [[属性/摩擦力修正系数|{{tp|attribute.name.friction_modifier|nocat=1}}]]
+| <code>[[属性/摩擦力修正系数|friction_modifier]]</code>
+| 正面
+| 生物在空气中的某个平面上运动时受到的速度损失
+|-
+| [[属性/重力|{{tp|attribute.name.gravity}}]]
+| <code>[[属性/重力|gravity]]</code>
+| 中性
+| 生物在垂直方向上持续受到的向下加速的加速度
+|-
+| [[属性/跳跃力度|{{tp|attribute.name.jump_strength}}]]
+| <code>[[属性/跳跃力度|jump_strength]]</code>
+| 正面
+| 生物进行跳跃时获得的垂直速度
+|-
+| [[属性/击退抗性|{{tp|attribute.name.knockback_resistance}}]]
+| <code>[[属性/击退抗性|knockback_resistance]]</code>
+| 正面
+| 生物对击退的抵抗强度
+|-
+| [[属性/幸运值|{{tp|attribute.name.luck}}]]
+| <code>[[属性/幸运值|luck]]</code>
+| 正面
+| 高幸运值使玩家获得更好的战利品
+|-
+| [[属性/最大伤害吸收值|{{tp|attribute.name.max_absorption}}]]
+| <code>[[属性/最大伤害吸收值|max_absorption]]</code>
+| 正面
+| 生物的最大伤害吸收值
+|-
+| [[属性/最大生命值|{{tp|attribute.name.max_health}}]]
+| <code>[[属性/最大生命值|max_health]]</code>
+| 正面
+| 生物的最大生命值
+|-
+| [[属性/挖掘效率|{{tp|attribute.name.mining_efficiency}}]]
+| <code>[[属性/挖掘效率|mining_efficiency]]</code>
+| 正面
+| 玩家的挖掘速度增量
+|-
+| [[属性/移动效率|{{tp|attribute.name.movement_efficiency}}]]
+| <code>[[属性/移动效率|movement_efficiency]]</code>
+| 正面
+| 生物对脚下方块影响移动效果的抵抗
+|-
+| [[属性/速度|{{tp|attribute.name.movement_speed}}]]
+| <code>[[属性/速度|movement_speed]]</code>
+| 正面
+| 生物的地面移动速度
+|-
+| [[属性/名牌距离|{{tp|attribute.name.nameplate_distance|nocat=1}}]]
+| <code>[[属性/名牌距离|name_tag_distance]]</code>
+| 正面
+| 生物名称的最大可见距离
+|-
+| [[属性/额外氧气|{{tp|attribute.name.oxygen_bonus}}]]
+| <code>[[属性/额外氧气|oxygen_bonus]]</code>
+| 正面
+| 生物抵抗氧气下降的能力
+|-
+| [[属性/安全摔落高度|{{tp|attribute.name.safe_fall_distance}}]]
+| <code>[[属性/安全摔落高度|safe_fall_distance]]</code>
+| 正面
+| 生物不受摔落伤害的高度
+|-
+| [[属性/尺寸|{{tp|attribute.name.scale}}]]
+| <code>[[属性/尺寸|scale]]</code>
+| 中性
+| 生物的尺寸乘数
+|-
+| [[属性/僵尸增援|{{tp|attribute.name.spawn_reinforcements}}]]
+| <code>[[属性/僵尸增援|spawn_reinforcements]]</code>
+| 正面
+| 僵尸生成僵尸增援的能力
+|-
+| [[属性/潜行速度|{{tp|attribute.name.sneaking_speed}}]]
+| <code>[[属性/潜行速度|sneaking_speed]]</code>
+| 正面
+| 玩家的潜行时的速度乘数
+|-
+| [[属性/最大行走高度|{{tp|attribute.name.step_height}}]]
+| <code>[[属性/最大行走高度|step_height]]</code>
+| 正面
+| 生物不需要跳跃就可以走上的最大高度
+|-
+| [[属性/水下挖掘速度|{{tp|attribute.name.submerged_mining_speed}}]]
+| <code>[[属性/水下挖掘速度|submerged_mining_speed]]</code>
+| 正面
+| 玩家浸没在水中时的挖掘速度乘数
+|-
+| [[属性/横扫伤害比率|{{tp|attribute.name.sweeping_damage_ratio}}]]
+| <code>[[属性/横扫伤害比率|sweeping_damage_ratio]]</code>
+| 正面
+| 玩家的横扫伤害与近战伤害的比例
+|-
+| [[属性/生物引诱范围|{{tp|attribute.name.tempt_range}}]]
+| <code>[[属性/生物引诱范围|tempt_range]]</code>
+| 正面
+| 生物能被玩家引诱的最大距离
+|-
+| [[属性/水中移动效率|{{tp|attribute.name.water_movement_efficiency}}]]
+| <code>[[属性/水中移动效率|water_movement_efficiency]]</code>
+| 正面
+| 生物对水影响移动效果的抵抗
+|-
+| [[属性/路径点传输距离|{{tp|attribute.name.waypoint_transmit_range}}]]
+| <code>[[属性/路径点传输距离|waypoint_transmit_range]]</code>
+| 中性
+| 设置玩家路径点传输距离，用于定位栏
+|-
+| [[属性/路径点接收距离|{{tp|attribute.name.waypoint_receive_range}}]]
+| <code>[[属性/路径点接收距离|waypoint_receive_range]]</code>
+| 中性
+| 设置玩家路径点接收距离，用于定位栏
+|}
+
+=== 基岩版 ===
+'''旧版名称'''是每个属性在旧版本中持久化时的曾用名，使用旧版名称的存档会在游戏重新保存时改写为当前名称。
+{| class="wikitable sortable mw-collapsible" style="width:100%"
+! 属性ID
+! 重定义模式
+! 是否同步
+! 描述
+! 旧版名称
+|-
+| [[属性/minecraft：health|<samp>minecraft:health</samp>]]
+| {{tc|neutral|保持当前值}}
+| {{tc|yes}}
+| 生物的生命值
+| <samp>health</samp><br><samp>generic.health</samp>
+|-
+| [[属性/minecraft：follow_range|<samp>minecraft:follow_range</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|no}}
+| 生物AI可追踪和寻路的最大范围
+| <samp>followRange</samp><br><samp>generic.followRange</samp>
+|-
+| [[属性/minecraft：knockback_resistance|<samp>minecraft:knockback_resistance</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|no}}
+| 生物对击退的抵抗强度
+| <samp>knockbackResistance</samp><br><samp>generic.knockbackResistance</samp>
+|-
+| [[属性/minecraft：movement|<samp>minecraft:movement</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|yes}}
+| 生物的地面移动速度
+| <samp>movementSpeed</samp><br><samp>generic.movementSpeed</samp>
+|-
+| [[属性/minecraft：underwater_movement|<samp>minecraft:underwater_movement</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|yes}}
+| 生物在水下的移动速度
+| <samp>generic.underwaterMovementSpeed</samp>
+|-
+| [[属性/minecraft：lava_movement|<samp>minecraft:lava_movement</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|yes}}
+| 生物在熔岩中的移动速度
+| <samp>generic.lavaMovementSpeed</samp>
+|-
+| [[属性/minecraft：attack_damage|<samp>minecraft:attack_damage</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|no}}
+| 生物的近战攻击伤害
+| <samp>attackDamage</samp><br><samp>generic.attackDamage</samp>
+|-
+| [[属性/minecraft：fall_damage|<samp>minecraft:fall_damage</samp>]]
+| {{tc|partial|已弃用}}
+| {{tc|partial|已弃用}}
+| 旧版实体定义中控制生物是否受到摔落伤害的属性
+| {{tc|n/a}}
+|-
+| [[属性/minecraft：absorption|<samp>minecraft:absorption</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|yes}}
+| 生物的伤害吸收值
+| <samp>absorption</samp><br><samp>generic.absorption</samp>
+|-
+| [[属性/minecraft：luck|<samp>minecraft:luck</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|yes}}
+| 高幸运值使玩家获得更好的战利品
+| {{tc|n/a}}
+|-
+| [[属性/minecraft：horse.jump_strength|<samp>minecraft:horse.jump_strength</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|yes}}
+| 生物进行跳跃时获得的垂直速度
+| <samp>horse.jumpStrength</samp>
+|-
+| [[属性/minecraft：player.hunger|<samp>minecraft:player.hunger</samp>]]
+| {{tc|neutral|保持当前值}}
+| {{tc|yes}}
+| 玩家的饥饿值
+| <samp>player.hunger</samp>
+|-
+| [[属性/minecraft：player.saturation|<samp>minecraft:player.saturation</samp>]]
+| {{tc|neutral|保持当前值}}
+| {{tc|yes}}
+| 玩家的饱和度
+| <samp>player.saturation</samp>
+|-
+| [[属性/minecraft：player.exhaustion|<samp>minecraft:player.exhaustion</samp>]]
+| {{tc|neutral|保持当前值}}
+| {{tc|yes}}
+| 玩家的消耗度
+| <samp>player.exhaustion</samp>
+|-
+| [[属性/minecraft：player.level|<samp>minecraft:player.level</samp>]]
+| {{tc|neutral|保持当前值}}
+| {{tc|yes}}
+| 玩家的经验等级
+| <samp>player.level</samp>
+|-
+| [[属性/minecraft：player.experience|<samp>minecraft:player.experience</samp>]]
+| {{tc|neutral|保持当前值}}
+| {{tc|yes}}
+| 玩家的经验进度
+| <samp>player.experience</samp>
+|-
+| [[属性/minecraft：zombie.spawn_reinforcements|<samp>minecraft:zombie.spawn_reinforcements</samp>]]
+| {{tc|green|更新至新的默认值}}
+| {{tc|no}}
+| 僵尸生成增援的能力
+| <samp>zombie.spawnReinforcements</samp>
+|}
+
+== 修饰符 ==
+修饰符会修饰一个属性的{{only|je|for='''基值'''}}/{{only|be|for=三种'''默认'''类型的值，并以此更新三种'''当前'''类型的值}}。
+
+{{in|je}}和属性一样，修饰符也具有'''命名空间ID'''（<code>id</code>）。修饰符的ID或名称与它的具体效果无关，而由它的'''作用属性类型'''（<code>type</code>）、'''运算模式'''（<code>operation</code>）和'''修饰值'''（<code>amount</code>）决定。{{in|be}}修饰符具有一个'''UUID'''、一个'''名称'''、一个'''运算模式'''和一个'''运算数'''四种基本属性，以及一个'''修饰值'''。
+
+任意修饰值的极限即为[[参数类型#double|双精度浮点数]]{{only|je}}/[[参数类型#float|单精度浮点数]]{{only|be}}的极限。但无论总修饰值为多少，修饰后的计算值仍会被钳制于该属性的值域间。
+
+=== 来源 ===
+除命令外，生物会受物品（包括其上的[[魔咒]]）、[[状态效果]]、所处位置和实体数据的影响添加或移除属性修饰符。
+
+属性修饰符的来源为物品时，此物品必须置于指定生物槽位中。如果物品有耐久度，则剩余耐久度为0时，修饰符也不会生效。<ref>{{bug|MC-276606|||WAI}}</ref>
+
+如果两个修饰符{{only|je|for=具有相同的ID}}/{{only|be|for=四种基本属性完全相同}}且作用于同一个属性，那么后加入的修饰符会{{only|je|for=替代先加入的修饰符生效}}/{{only|be|for=失效}}，而不会将它们相叠加。
+
+=== 持久化 ===
+不是所有修饰符都会持久地保留在生物的数据中。{{in|je}}可持久化的修饰符可以通过{{cmd|data}}等命令获取，而不可持久化的修饰符无法通过{{cmd|attribute}}之外的命令获取。无论修饰符是否能持久化，其对属性计算值的影响无差异。生物在持久化保存到文件时不会带有这些不可持久化的修饰符数据，即不可持久化的修饰符只存在于内存中。
+
+所有魔咒属性效果修饰符、物品修饰符都属于不可持久化的修饰符，而所有状态效果修饰符都是可持久化的修饰符。
+
+=== 行为 ===
+在使用某项属性时，系统会使用这项属性的基值{{only|je}}/三种默认值{{only|be}}与所有对此属性生效的修饰符进行计算，得出{{only|be|for='''最终的当前最小值'''、'''最终的当前最大值'''和'''当前值的'''}}'''计算值'''{{only|be|for=，并根据重定义模式决定是否将计算值赋给当前值}}。
+
+{{in|je}}一般情况下，提示框会显示物品能赋予的修饰符。
+
+* 这些修饰符包括：
+** 物品堆叠组件<code>-{}-[[物品堆叠组件#attribute_modifiers|attribute_modifiers]]</code>中指定ID的修饰符
+** [[魔咒数据格式#属性效果|魔咒属性效果]]中的修饰符
+** 状态效果生效时赋予的修饰符
+* 修饰值在提示框中保留2位小数。
+* 如果修饰符的值为0，提示框中不会显示修饰值。
+* 如果<code>attribute_modifiers</code>组件中的修饰符ID为<code>base_attack_damage</code>或<code>base_attack_speed</code>，此修饰符会无视其类型和零值对显示的影响，在提示框中显示为深绿色。相较非基础修饰符，这些修饰符向右偏移一个空白，同时不显示“+”号（负号会正常显示）。
+** <code>base_attack_damage</code>修饰符在提示框的显示值为此物品修饰值与<code>attack_damage</code>属性基值的和。
+** <code>base_attack_speed</code>修饰符在提示框的显示值为此物品修饰值与<code>attack_speed</code>属性基值的和。
+* 被解析为<code>Infinity</code>或<code>-Infinity</code>的修饰值在提示框中分别显示为“∞”或“-∞”。
+
+=== 运算模式 ===
+属性修饰符的'''运算模式（Operation）'''决定了它修改基值{{only|je}}/三种类型的值{{only|be}}的方式。游戏按照固定顺序{{only|be|for=同时分别对三种类型的值}}执行以下三种操作：
+
+;增量操作（add_value，Op0）
+:属性基值{{only|je}}/某一种类型的默认值{{only|be}}加上指定增量值。
+:设该操作运算后的值为<math>Result0</math>，则<math>Result0 = base + \sum Op0_i</math>，其中<math>base</math>代表被该操作修饰前的属性基值，<math>Op0_i</math>代表第i个参与运算的Op0修饰符的值。
+:例：给定增量操作<code>{amount:2,operation:'add_value'}</code>和<code>{amount:4,operation:'add_value'}</code>，它们一同修饰基值为3的某个属性，则修饰过程为<code>3+('''2'''+'''4''')=9</code>。
+
+;倍率操作（add_multiplied_base，Op1）
+:对增量操作完成后的值进行加倍。
+:设该操作运算后的值为<math>Result1</math>，则<math>Result1 = Result0 \times (1 + \sum Op1_i)</math>，其中<math>Op1_i</math>代表第i个参与运算的Op1修饰符的值。
+:例：在上一例的基础上又给定倍率操作<code>{amount:3,operation:'add_multiplied_base'}</code>和<code>{amount:6,operation:'add_multiplied_base'}</code>，则修饰过程为<code>9×(1+'''3'''+'''6''')=90</code>。
+
+;最终倍乘操作（add_multiplied_total，Op2）
+:对倍率操作完成后的值进行连续加倍。
+:设该操作运算后的值为<math>Result2</math>，则<math>Result2 = Result1 \times \prod (1 + Op2_i)</math>，其中<math>Op2_i</math>代表第i个参与运算的Op2修饰符的值。
+:例：在上一例的基础上又给定最终倍乘操作<code>{amount:2,operation:'add_multiplied_total'}</code>和<code>{amount:4,operation:'add_multiplied_total'}</code>，则修饰过程为<code>90×(1+'''2''')×(1+'''4''')=1350</code>。
+
+总公式：<math>(base + \sum Op0_i) \times (1 + \sum Op1_j) \times \prod (1 + Op2_k)</math>，其中<math>base</math>代表属性基值，<math>Op0_i, Op1_j, Op2_k</math>分别代表参与运算的第i个Op0修饰符的值、第j个参与运算的Op1修饰符的值、第k个参与运算的Op2修饰符的值。
+
+{{in|be}}对于'''当前值的计算值'''，还会检测重定义模式，并且依据不同的重定义模式决定保留旧的当前值还是使用新的计算值作为当前值。在此之后，最终还会当前的当前值对进行清洗操作：
+
+;清洗操作（cap，Op3）
+:对计算值设置封顶并进行钳制。
+:设该操作运算后的值为<math>Result3</math>，则<math>Result3 = \mathrm{clamp}(Result2_{current}, Result2_{currentMin}, \min(Result2_{currentMax}, Op3_i))</math>，其中<math>Op3_i</math>代表第i个参与运算的Op3修饰符的值。
+
+== 增益 ==
+{{exclusive|bedrock|section=1}}
+增益分为'''瞬时增益（Instantaneous Buff）'''和'''临时增益（Temporal Buff）'''，用于增加或减少三种'''当前'''类型的值。增益具有一个'''ID'''（可能会由一个'''名称'''使用FNV-1a哈希算法生成，也可能直接赋予）、一个'''类型'''和一个'''运算数'''三种基本属性，以及一个'''增益值'''。临时增益还额外有'''持续时间'''基本属性，以及一个当前的'''生命周期'''计时器。虽然增益理论上可以施加在任意运算数上，但游戏内目前只有施加在'''当前值'''上的情况的使用情景。一些增益还会带有一个'''伤害来源'''的基本属性，这包含来源的实体和一个[[伤害类型#基岩版|伤害类型]]。
+
+=== 持久化 ===
+
+无论如何，瞬时增益都不可持久化。而对于临时增益，只有一部分可持久化。无论一个临时增益是否能持久化，其对属性增益值的影响无差异。生物在持久化保存到文件时不会带有这些不可持久化的增益数据，即不可持久化的增益只存在于内存中。
+
+=== 类型 ===
+
+每种类型具有一个整数作为ID，用于在持久化时存储在对应的NBT标签中。
+
+{| class="wikitable mw-collapsible" style="width:100%"
+! ID
+! 类型名
+! 描述
+|-
+| 0
+| 饥饿
+| [[饥饿值]]相关增益
+|-
+| 1
+| 饱和
+| [[饱和度]]相关增益
+|-
+| 2
+| 恢复
+| {{EffectLink|Regeneration}}提供的增益
+|-
+| 3
+| 治疗
+| {{EffectLink|Instant Health}}提供的增益
+|-
+| 4
+| 伤害
+| {{EffectLink|Instant Damage}}提供的增益
+|-
+| 5
+| 魔法
+| 魔法[[伤害类型]]相关增益。
+|-
+| 6
+| 凋零
+| {{EffectLink|Wither}}提供的增益
+|-
+| 7
+| 中毒
+| {{EffectLink|Poison}}提供的增益
+|-
+| 8
+| 剧毒
+| {{EffectLink|Fatal Poison}}提供的增益
+|-
+| 9
+| 自愈
+| 自我恢复[[生命值]]的增益
+|-
+| 10
+| 自毁
+| 自我失去生命值的增益
+|-
+| 11
+| 不死图腾
+| 来自于[[不死图腾]]的增益
+|-
+| 12
+| 未知
+| 用途未知的增益
+|-
+| 13
+| 无
+| 不属于其他类型的增益
+|}
+
+=== 行为 ===
+
+值的增益通过加法的方式作用，但允许加一个负值以实现减法的效果，例如对于{{cd|minecraft:health}}属性，正值和负值分别代表治疗和伤害。增益可能不会成功生效，也有可能不以默认方式生效，例如{{cd|minecraft:damage_sensor}}组件可能会阻挡添加到{{cd|minecraft:health}}属性上的增益，{{cd|minecraft:absorption}}属性可能会“转移”添加到{{cd|minecraft:health}}属性上的增益到自身，手持不死图腾可能会直接使该增益的效果变为“将当前值设置为{{cd|1.0}}”等等。
+
+== 应用 ==
+{{see also|命令/attribute|数据组件#attribute_modifiers}}
+当属性修饰符应用到一个物品或生物时，它可以将拥有者的某项属性进行修正。<ref>{{tweet|dinnerbone|337540303647027201}}</ref><ref>{{tweet|dinnerbone|337543314435878913}}</ref>
+
+下面的命令会给予命令执行者一个属性修饰符，以使其变大：
+{{cmd|attribute @s minecraft:scale modifier add scale_bonus 0.25 add_value|long=1}}
+
+下面的命令将给予命令执行者一把在主手中增加{{hp|20}}点额外伤害的钻石剑：
+
+{{cmd|give @s <nowiki>diamond_sword[attribute_modifiers=[{type:"attack_damage", id:"minecraft:base_attack_damage", slot:"mainhand", amount:20, operation:"add_value"}]]</nowiki>|long=1}}
+
+下面的命令将召唤一个僵尸，当玩家接近它100格时就会被它发现，而不是通常的35格：
+
+{{cmd|summon zombie ~ ~ ~ {attributes:[{id:"follow_range",base:100.0d}]}|long=1}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.6.1|dev=13w16a|加入了属性。}}
+|{{HistoryLine|||dev=13w17a|为僵尸加入了<code>Spawn Reinforcements Chance</code>属性。
+|加入了<code>Zombie reinforcement charge</code>（增援能力消耗）、<code>Random zombie-spawn bonus</code>（随机僵尸生成修饰）和<code>Leader zombie bonus</code>（领头僵尸加成）。}}
+|{{HistoryLine|||dev=13w18a|将<code>Zombie reinforcement charge</code>改为了<code>Zombie reinforcement caller/callee charge</code>。}}
+|{{HistoryLine|||dev=13w21a|属性现在可以由NBT决定了。
+|属性现在具有ID和相应的转换值了。
+|修饰符现在会显示在物品上了。
+|加入了<code>generic.attackDamage</code>属性，且<code>Speed</code>被重命名为<code>generic.movementSpeed</code>且变得通用了。
+|加入了{{cd|potion.moveSpeed|potion.moveSlowdown|potion.damageBoost|potion.weakness|d=pretty}}修饰符。
+|加入了{{cd|Sprinting speed boost|Fleeing speed bonus|Attacking speed boost|Drinking speed penalty|Baby speed boost|d=pretty}}修饰符。
+|加入{{cd|Tool modifier|Weapon modifier|d=pretty}}修饰符。}}
+|{{HistoryLine|||dev=13w23b|加入<code>potion.healthBoost</code>修饰符。}}
+|{{HistoryLine||1.7.2|dev=13w36a|属性/修饰符可以在没有第三方的情况下使用NBT加入NBT标签{{cmd|give}}和{{cmd|summon}}加入到物品或者生物。}}
+|{{HistoryLine||1.9|dev=15w34b|加入了攻击速度属性。}}
+|{{HistoryLine|||dev=15w36d|加入了盔甲属性。}}
+|{{HistoryLine|||dev=15w44b|加入了幸运值属性。}}
+|{{HistoryLine||1.9.1|dev=pre1|加入了盔甲韧性属性。}}
+|{{HistoryLine||1.14|dev=18w43a|加入了击退距离属性。}}
+|{{HistoryLine||1.16|dev=20w14a|更改了部分属性的ID。|物品和实体不再会保留未知的属性。
+|重命名了属性的名字以满足[[命名空间ID]]的要求（即小写、由下划线分隔而不是原来的驼峰命名法）。
+|重命名{{cd|generic.maxHealth|d=到|generic.max_health}}。
+|重命名{{cd|zombie.spawnReinforcements|d=到|zombie.spawn_reinforcements}}。
+|重命名{{cd|horse.jumpStrength|d=到|horse.jump_strength}}。
+|重命名{{cd|generic.followRange|d=到|generic.follow_range}}。
+|重命名{{cd|generic.knockbackResistance|d=到|generic.knockback_resistance}}。
+|重命名{{cd|generic.movementSpeed|d=到|generic.movement_speed}}。
+|重命名{{cd|generic.flyingSpeed|d=到|generic.flying_speed}}。
+|重命名{{cd|generic.attackDamage|d=到|generic.attack_damage}}。
+|重命名{{cd|generic.attackKnockback|d=到|generic.attack_knockback}}。
+|重命名{{cd|generic.attackSpeed|d=到|generic.attack_speed}}。
+|重命名{{cd|generic.armorToughness|d=到|generic.armor_toughness}}。}}
+|{{HistoryLine|||dev=20w17a|加入了{{cmd|attribute}}以更改或读取属性。}}
+|{{HistoryLine||1.20.2|dev=23w31a|加入了{{cd|generic.max_absorption}}属性。}}
+|{{HistoryLine||1.20.5|dev=23w51a|加入了{{cd|d=pretty|generic.scale|generic.block_interaction_range|generic.entity_interaction_range|generic.step_height}}属性。}}
+|{{HistoryLine|||dev=24w03a|重命名{{cd|d=pretty|generic.block_interaction_range|generic.entity_interaction_range}}为{{cd|d=pretty|player.block_interaction_range|player.entity_interaction_range}}。}}
+|{{HistoryLine|||dev=24w05a|移除了<code>Horse armor bonus</code>（马匹盔甲修饰）修饰符。}}
+|{{HistoryLine|||dev=24w06a|加入了{{cd|d=pretty|generic.gravity|generic.safe_fall_distance|generic.fall_damage_multiplier|player.block_break_speed}}属性。
+|修改{{cd|horse.jump_strength}}为{{cd|generic.jump_strength}}，并将应用对象扩展到了所有生物。}}
+|{{HistoryLine||1.21|dev=24w18a|加入了{{cd|d=pretty|generic.burning_time|generic.explosion_knockback_resistance|generic.movement_efficiency|generic.oxygen_bonus|generic.water_movement_efficiency|player.mining_efficiency|player.sneaking_speed|player.submerged_mining_speed|player.sweeping_damage_ratio}}属性。}}
+|{{HistoryLine|||dev=24w19a|将{{cd|d=pretty|generic.burning_time|generic.fall_damage_multiplier}}更改为负面属性，{{cd|d=pretty|generic.gravity|generic.scale}}更改为中性属性。
+|现在属性会根据类型更改文本颜色。}}
+|{{HistoryLine|||dev=24w20a|玩家进入返回传送门和重生时不再重置属性基值。}}
+|{{HistoryLine|||dev=24w21a|将所有属性修饰符重命名、合并或拆分。
+{{Collapse|title='''此前的已知属性修饰符'''|content={{:属性/24w21a前已知修饰符}}}}
+|移除了属性修饰符的<code>name</code>和<code>uuid</code>，取而代之的是唯一命名空间ID<code>id</code>。}}
+|{{HistoryLine||1.21.2|dev=24w33a|加入了<code>tempt_range</code>属性，单位为格，表示可被发现的生物的引诱范围。
+|移除了所有属性ID的{{cd|d=、|fd=或|generic.|player.|zombie.}}前缀。}}
+|{{HistoryLine|||dev=24w36a|[[盔甲材料]]不再直接为穿上盔甲的生物提供属性修饰符，而会为盔甲物品提供<code>attribute_modifiers</code>[[物品堆叠组件]]。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了{{cd|d=pretty|camera_distance|waypoint_transmit_range|waypoint_receive_range}}属性。}}
+|{{HistoryLine||26.2|dev=snapshot-1|加入了{{cd|d=pretty|air_drag_modifier|bounciness|friction_modifier}}属性。}}
+|{{HistoryLine|||dev=snapshot-4|加入了{{cd|d=pretty|below_name_distance|nameplate_distance}}属性。}}
+|{{HistoryLine|||dev=snapshot-5|将从<code>nameplate_distance</code>重命名为<code>name_tag_distance</code>。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了属性。}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox attributes|all}}
+{{Navbox gameplay}}
+{{Navbox Java customizable}}
+
+[[Category:属性|*]]
+
+[[de:Attribut]]
+[[en:Attribute]]
+[[es:Atributo]]
+[[fr:Attribut]]
+[[ja:属性]]
+[[ko:속성]]
+[[pl:Atrybuty]]
+[[pt:Atributo]]

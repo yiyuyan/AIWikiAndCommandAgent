@@ -1,0 +1,139 @@
+# 页面: 清单文件
+# 来源: https://zh.minecraft.wiki/w/%E6%B8%85%E5%8D%95%E6%96%87%E4%BB%B6
+# 分类: 
+# 抓取时间: 2026-07-14 17:30:51
+# 原始 Wikitext 内容:
+
+{{undecided translation|cn=1|tw=1|hk=1}}
+{{stub}}
+{{exclusive|bedrock}}
+'''清单文件（manifest file）'''<ref>https://learn.microsoft.com/minecraft/creator/documents/resourcepack</ref>，也即'''{{filename|manifest.json}}'''，是游戏用于识别[[附加包|资源包]]、[[行为包]]、世界模板或[[皮肤包]]的标识文件。
+
+== 文件格式 ==
+<div class="treeview">
+* {{nbt|compound}} JSON文件根元素
+** {{nbt|int|format_version|required=1}}：（不小于1）{{filename|manifest.json}}的格式版本。
+** {{nbt|compound|header|required=1}}：包的外部信息。
+*** {{nbt|string|name|required=1}}：包的显示名称，可以为本地化键名。
+*** {{nbt|string|description|required=1}}：包的显示描述，可以为本地化键名。
+*** {{nbt|string|uuid|required=1}}：包的UUID。
+*** {{nbt|int array}}{{nbt|string|version|required=1}}：包的语义化版本。{{cd|format_version}}为1或3时分别只能使用数组或字符串。
+*** {{nbt|int array}}{{nbt|string|min_engine_version}}：包最低支持的语义化游戏版本。{{cd|format_version}}为3时使用字符串，否则使用整数数组。
+**** 高于1.13.0时{{cd|format_version}}需要至少为2。
+**** 对于资源包，高于1.21.10时，如果{{cd|capabilities}}不含{{cd|pbr}}，则会与{{pa|Vibrant Visuals|}}不兼容。
+**** 对于资源包，低于1.26.10时生物使用[[小鬼当家]]前的模型。
+*** {{nbt|string|pack_scope}}：（默认为{{cd|any}}）资源包的作用域。可以为{{cd|any}}（任意）、{{cd|world}}（[[附加包#世界附加包|世界指定资源包]]）、{{cd|global}}（[[全局资源|{{tr|全局资源|全球資源套件}}]]）。
+*** {{nbt|bool|platform_locked}}：（默认为{{cd|false}}）是否禁止该包在其他玩家的世界或服务器上使用。
+*** {{nbt|int array}}{{nbt|string|base_game_version}}：世界模板基于的语义化游戏版本。{{cd|format_version}}为3时使用字符串，否则使用整数数组。
+*** {{nbt|bool|allow_random_seed}}：（默认为{{cd|false}}）世界模板是否使用随机种子。
+*** {{nbt|bool|lock_template_options}}：对于世界模板，是否默认禁止玩家修改世界选项。
+** {{nbt|list|modules|required=1}}：包提供的模块。
+*** {{nbt|compound}}：
+**** {{nbt|string|type|required=1}}：模块的类型。可以为{{cd|resources}}（资源包）、{{cd|data}}（行为包）、{{cd|script}}（脚本）、{{cd|world_template}}（世界模板）、{{cd|skin_pack}}（皮肤包）、{{cd|persona_piece}}（角色创建器或披风）。
+**** {{nbt|string|uuid|required=1}}：模块的UUID。
+**** {{nbt|int array}}{{nbt|string|version|required=1}}：模块的语义化版本。{{cd|format_version}}为1或3时分别只能使用数组或字符串。
+**** {{nbt|string|language}}：当{{cd|type}}为{{cd|script}}时可用，用于指定脚本的编程语言。只能为javascript。
+**** {{nbt|string|entry}}：当{{cd|type}}为{{cd|script}}时可用，用于指定脚本的相对路径。
+**** {{nbt|string|description}}：模块的描述。
+** {{nbt|list|dependencies}}：包的依赖项。
+*** {{nbt|compound}}：一个包依赖项。
+**** {{nbt|string|uuid|required=1}}：依赖的包UUID。
+**** {{nbt|string|name}}：包的名称，可以为本地化键名。
+**** {{nbt|int array}}{{nbt|string|version|required=1}}：依赖的语义化包版本。{{cd|format_version}}为1或3时分别只能使用数组或字符串。
+*** {{nbt|compound}}：一个脚本依赖项。
+**** {{nbt|string|module_name}}：依赖的脚本模块名称。
+**** {{nbt|string|uuid}}：依赖的脚本模块UUID。
+**** {{nbt|int array}}{{nbt|string|version|required=1}}：依赖的语义化脚本模块版本。{{cd|format_version}}为1或3时分别只能使用数组或字符串。
+** {{nbt|list|capabilities}}：当{{cd|format_version}}至少为2时可用，用于指定包的额外功能。
+*** {{nbt|string}}：要使用的额外功能。
+**** {{cd|chemistry}} - 使用[[教育版]]功能。
+**** {{cd|editorExtension}} - 使用[[基岩版编辑器|编辑器]]功能，可用于导入{{cd|@minecraft/server-editor}}脚本模块。<ref>https://wiki.bedrock.dev/scripting/api-modules#module-referencing</ref>
+**** {{cd|experimental_custom_ui}} - 使用HTML UI，自[[基岩版1.18.10.28|1.18.10.28]]起不可用。<ref>https://bedrock.dev/docs/1.18.0.0/1.18.10.28/UI</ref>
+**** {{cd|pbr}} - 通过MERS支持，使用特定于{{pa|Vibrant Visuals|}}的PBR功能。
+**** {{cd|raytraced}} - 使用特定于[[光线追踪]]的PBR功能，该功能仅支持MER子集，与{{pa|Vibrant Visuals}}相兼容。
+**** {{cd|script_eval}} - 允许在脚本内使用{{cd|eval}}或{{cd|new Function}}。
+** {{nbt|list|subpacks}}：当{{cd|format_version}}至少为2时可用，用于指定可用的子包。
+*** {{nbt|compound}}
+**** {{nbt|string|name|required=1}}：子包的显示名称。
+**** {{nbt|string|folder_name|required=1}}：子包的文件夹名称。
+**** {{nbt|string|memory_tier|required=1}}：（不小于0）子包的RAM级别。
+**** {{nbt|string|memory_performance_tier}}：子包的最优平台（0-5）。
+** {{nbt|list|settings}}：当{{cd|format_version}}至少为2时可用，用于指定附加包的设置。
+*** {{nbt|compound}}：一个标签。
+**** {{nbt|string|type|required=1}}：{{cd|"label"}}
+**** {{nbt|string|text}}：标签的显示文本。
+*** {{nbt|compound}}：一个输入框。
+**** {{nbt|string|type|required=1}}：{{cd|"input"}}
+**** {{nbt|string|text}}：输入框的显示标题。
+**** {{nbt|string|name|required=1}}：输入框的标识符。
+**** {{nbt|string|default}}：输入框的默认文本。
+*** {{nbt|compound}}：一个开关。
+**** {{nbt|string|type|required=1}}：{{cd|"toggle"}}
+**** {{nbt|string|text}}：开关的显示文本。
+**** {{nbt|string|name|required=1}}：开关的标识符。
+**** {{nbt|bool|default}}：开关的默认值。
+*** {{nbt|compound}}：一个滑块。
+**** {{nbt|string|type|required=1}}：{{cd|"slider"}}
+**** {{nbt|string|text}}：滑块的显示标题。
+**** {{nbt|string|name|required=1}}：滑块的标识符。
+**** {{nbt|double|min}}：滑块的最小值。
+**** {{nbt|double|max}}：滑块的最大值。
+**** {{nbt|double|step}}：滑块的步长。
+**** {{nbt|double|default}}：滑块的默认值。
+*** {{nbt|compound}}：一个下拉列表。
+**** {{nbt|string|type|required=1}}：{{cd|"dropdown"}}
+**** {{nbt|string|text}}：下拉列表的显示标题。
+**** {{nbt|string|name|required=1}}：下拉列表的标识符。
+**** {{nbt|list|options}}：下拉列表的选项列表。
+***** {{nbt|string}}：一个名称和标识符相同的选项。
+***** {{nbt|compound}}：一个名称和标识符不同的选项。
+****** {{nbt|string|text}}：选项的显示文本。
+****** {{nbt|string|name|required=1}}：选项的标识符。
+**** {{nbt|string|default}}：下拉列表的默认选项。
+** {{nbt|compound|metadata}}：当{{cd|format_version}}至少为2时可用，用于指定包的元数据。
+*** {{nbt|list|authors}}：包的作者列表。
+**** {{nbt|string}}：一个作者名字。
+*** {{nbt|string|license}}：包的授权协议。
+*** {{nbt|compound|generated_with}}：指示生成该{{filename|manifest.json}}的工具。
+**** {{nbt|string|''工具名称''}}：工具的语义化版本列表。
+***** {{nbt|int array}}{{nbt|string}}：一个语义化版本。
+*** {{nbt|string|product_type}}：包的产品类型。
+**** {{cd|addon}} - 表示该包是附加包的一部分。这类行为包在被激活时不会禁用成就。
+*** {{nbt|string|url}}：包的URL。
+</div>
+
+== 历史 ==
+{{stub|section=1}}
+{{HistoryTable
+|{{HistoryLine|pocket}}
+|{{HistoryLine||0.16.0|dev=?|加入了格式版本0的支持。}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|为清单文件加入了更强的验证。}}
+|{{HistoryLine||1.0.4|dev=1.0.4.0|加入了格式版本1的支持。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.13.0|dev=?|加入了格式版本2的支持。
+|现在{{cd|min_engine_version}}高于1.13.0时格式版本需要至少为2。}}
+|{{HistoryLine||1.17.30|dev=1.17.20.23|资源包和行为包中的{{cd|min_engine_version}}现在转为[[Molang]]并进行解析。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.30|GameTest模块类别由{{cd|javascript}}改为{{cd|script}}。|加入了{{cd|language}}属性，目前仅支持{{cd|javascript}}。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.20|为世界模板的清单文件加入了{{cd|allow_random_seed}}。}}
+|{{HistoryLine||1.21.10|dev=?|对于资源包，现在{{cd|min_engine_version}}高于1.21.10时，如果{{cd|capabilities}}不含{{cd|pbr}}，则会与延迟渲染不兼容。}}
+|{{HistoryLine||1.21.70|dev=1.21.70.25|现在{{cd|metadata.product_type}}为{{cd|addon}}的行为包不会禁用成就。}}
+|{{HistoryLine||1.21.110|dev=?|加入了格式版本3的支持。}}
+|{{HistoryLine||1.21.120|dev=1.21.120.20|现在可以将脚本模块的{{cd|version}}属性设置为{{cd|beta}}以始终选择最新beta版本。}}
+}}
+
+== 外部链接 ==
+* [[bedev:清单文件|Minecraft基岩版开发Wiki:清单文件]]
+* https://learn.microsoft.com/en-us/minecraft/creator/reference/content/addonsreference/packmanifest
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+
+[[Category:附加包]]
+
+[[en:Manifest.json]]
+[[es:Manifest.json]]
+[[pt:Manifest.json]]
+[[uk:Manifest.json]]

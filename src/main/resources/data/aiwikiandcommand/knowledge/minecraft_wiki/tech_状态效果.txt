@@ -1,0 +1,692 @@
+# 页面: 状态效果
+# 来源: https://zh.minecraft.wiki/w/%E7%8A%B6%E6%80%81%E6%95%88%E6%9E%9C
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 教育版独有信息, 有未知版本的History模板的页面/Java版, 有未知版本的History模板的页面/携带版Alpha, 游戏内容, 状态效果
+# 抓取时间: 2026-07-14 17:31:59
+# 原始 Wikitext 内容:
+
+{{Tr|mode=H|缓慢|緩速}}
+{{Tr|mode=H|中毒|劇毒}}
+{{About||藥水的內容物|药水效果|Minecraft Dungeons中的状态效果|MCD:状态效果}}
+'''状态效果（Status Effect/Mob Effect）'''，或简称'''效果（Effect）'''，是一种作用于[[生物]]并对其产生正面、负面或中性影响的游戏机制。
+
+== 监测 ==
+{{in|je}}状态效果以及它们的等级和持续时间会显示在[[物品栏]]右侧，如果右侧空间不足（例如分辨率较低时）会显示为小图标，没有被隐藏粒子效果的状态效果会在屏幕右上角标记出来。
+
+{{in|be}}状态效果展示在一个单独的窗口里，它可以通过按下{{ctrl|生物效果}}键或点击状态效果图标来打开。状态效果图标可使用{{cmd|hud}}命令修改其可见性。若状态效果图标HUD未被隐藏，屏幕右上方会显示所有拥有的状态效果，无论粒子效果是否被隐藏。
+
+当状态效果的持续时间小于10秒时，状态效果图标将以每秒2次的频率闪动。{{in|je}}亮度幅值随剩余时间减少逐渐增强。{{in|be}}亮度幅值不变。
+
+{{gallery|widths=240|
+PackInventoryWindowWithEffect.png|convert|{{el|je}}中有状态效果时的物品栏
+CreativePackWithEffect.png|{{el|je}}中空间不足时状态效果的紧凑显示
+BE Mob Effects.png|convert|{{el|be}}中的生物效果屏幕
+}}
+
+== 机制 ==
+受状态效果影响的生物会在一段时间内受到不同方面的影响。在这段时间内，旋转的粒子会从受影响的生物的位置发出。
+
+状态效果有多种获取途径，包括饮用[[药水]]、食用某些[[食物]]、进入[[信标]]和[[潮涌核心]]的作用范围、靠近[[生物]]、被特定[[生物]]攻击、接触[[区域效果云]]。{{cmd|effect}}命令可以用于为生物添加或移除状态效果。
+
+任何数量的不同状态效果能够同时在一个生物上生效，即使是像力量和虚弱这种拥有反效果的效果。在生物身上应用一个已生效的效果时，新等级将覆盖旧等级，同等级时持续时间长的覆盖时间短的。同种效果不能被应用多次，即使等级不同。
+
+能够直接造成伤害的状态效果会造成[[伤害#魔法伤害|魔法伤害]]。
+
+=== 效果等级 ===
+{{Anchor|倍率}}
+状态效果具有等级。对于大多数状态效果，等级越高，效果越强。
+
+在游戏内部、[[命令]]{{cmd|effect}}与[[药水]]的修饰NBT标签，游戏保存的是“倍率”（amplifier）值而不是等级。倍率比等级小1，例如力量II的倍率为1。
+
+{{anchor|negativelevels|负等级}}状态效果的倍率不能为负数。{{in|je}}负数状态效果倍率会被视为0倍率（1等级）；{{in|be}}倍率使用无符号整数。
+
+{{in|je}}当强状态效果覆盖弱状态效果时，弱效果会保留但处于隐藏状态。如果弱效果比强效果有着更长的持续时间，它将在强效果终止后重新出现。这使得通过应用一刻的高等级效果来制作自定义药水解毒剂是不可行的。{{in|be}}当强状态效果覆盖弱状态效果时，弱效果会被删除，无法重新出现。<ref>{{bug|MCPE-74059}}</ref>
+
+=== 效果持续时间 ===
+状态效果有持续时间。在持续时间结束后，状态效果就会从生物上消失。[[伤害吸收]]会在伤害吸收值被消耗完后立刻消失。
+
+通过{{cmd|effect}}可以获得无限持续时间的状态效果。
+
+=== 免疫状态效果 ===
+少数生物会免疫特定的状态效果，即不能被任何方式添加该状态效果。{{in|je}}使用{{cmd|effect}}为生物添加其免疫的状态效果会导致命令执行失败。{{in|be}}使用{{cmd|effect}}为生物添加其免疫的状态效果后清除该效果会导致命令执行失败。
+
+*[[蜘蛛]]、[[洞穴蜘蛛]]、[[鹦鹉螺]]和[[亡灵生物]]免疫[[中毒]]。
+*亡灵生物免疫[[生命恢复]]。
+*[[凋灵骷髅]]免疫[[凋零]]。
+*[[史莱姆]]免疫[[渗浆]]。
+*[[蠹虫]]免疫[[寄生]]。
+*[[焦骸]]免疫[[虚弱]]。
+*[[凋灵]]免疫{{only|je|for=全部状态效果}}或{{only|be|for=[[瞬间治疗]]和[[瞬间伤害]]之外的全部状态效果}}。
+*[[末影龙]]、{{only|be|edu|for=[[智能体]]和[[NPC]]}}免疫全部状态效果。
+
+=== 即时生效效果 ===
+[[瞬间治疗]]、[[瞬间伤害]]、[[饱和]]是即时生效效果。
+
+使用{{cmd|effect}}为生物添加即时生效效果时，持续时间参数为游戏刻而非秒数。
+
+即时生效效果的[[喷溅药水]]或[[区域效果云]]不施加状态效果，而是直接应用它们的效果（伤害、治疗、增加饥饿值和饱和度），应用伤害时还会使用自身的来源作为伤害来源。这也导致了末影龙虽然免疫瞬间伤害，却会受到喷溅型伤害药水的魔法伤害。喷溅药水每次施加效果时，会随距离衰减效果强度；区域效果云每次施加效果时，效果强度减半。
+
+=== 状态效果分类 ===
+状态效果可被分为三类：正面、中性、负面。
+
+在[[提示框]]中，正面和中性的效果是蓝色的，负面的效果是红色的。
+
+{{in|je}}在[[平视显示器]]中，正面的效果显示在第一行，中性和负面的效果显示在第二行。
+
+=== 解除效果 ===
+以下方式可以解除所有状态效果：
+* 饮用[[奶]]。
+* 玩家[[死亡]]后[[重生]]。
+* 激活[[不死图腾]]的效果。
+* 使用{{cmd|effect clear}}{{only|java}}或{{cmd|effect <player: target> clear}}{{only|bedrock}}。
+
+以下方式可以解除特定状态效果；
+* [[不祥之兆]]触发[[不祥事件]]时会解除不祥之兆。
+* 杀死[[美西螈]]的攻击目标可以解除[[挖掘疲劳]]。
+* 饮用[[蜂蜜瓶]]{{only|be|ee|for=或[[解毒剂]]}}可以解除[[中毒]]。
+* {{in|be|ee}}饮用[[补药]]可以解除[[反胃]]。
+* {{in|be|ee}}饮用[[眼药水]]可以解除[[失明]]。
+* {{in|be|ee}}饮用[[灵药]]可以解除[[虚弱]]。
+
+== 状态效果列表 ==
+{{see also|Java版数据值#状态效果|基岩版数据值#状态效果ID}}
+{| class="sortable wikitable" data-description="状态效果" 
+! class="unsortable" |图标
+! 名称
+! ID
+! 数字ID（{{el|be|short=1}}）
+! 效果
+! 分类
+! 颜色 #hex (十进位)
+! class="unsortable" | 粒子
+|-
+| style="text-align:center" | {{EffectSprite|speed}}
+| [[迅捷]]
+| <code>speed</code>
+| <code>1</code>
+| 增加移动速度
+| 正面
+|{{color|#33EBFF}} (3402751)
+|{{tint|particle-effect|#33EBFF}}
+|-
+| style="text-align:center" | {{EffectSprite|slowness}}
+| [[缓慢|{{tr|缓慢|緩速|緩慢}}]]
+| <code>slowness</code>
+| <code>2</code>
+| 降低移动速度
+| 负面
+|{{color|#8BAFE0}} (9154528)
+|{{tint|particle-effect|#8BAFE0}}
+|-
+| style="text-align:center" | {{EffectSprite|haste}}
+| [[急迫]]
+| <code>haste</code>
+| <code>3</code>
+| 增加挖掘速度<br>{{in|je}}增加攻击速度
+| 正面
+|{{color|#D9C043}} (14270531)
+|{{tint|particle-effect|#D9C043}}
+|-
+| style="text-align:center" | {{EffectSprite|mining-fatigue}}
+| [[挖掘疲劳]]
+| <code>mining_fatigue</code>
+| <code>4</code>
+| 降低挖掘速度<br>{{in|je}}降低攻击速度
+| 负面
+|{{color|#4A4217}} (4866583)
+|{{tint|particle-effect|#4A4217}}
+|-
+| style="text-align:center" | {{EffectSprite|strength}}
+| [[力量（状态效果）|力量]]
+| <code>strength</code>
+| <code>5</code>
+| 增加[[近战攻击]]伤害
+| 正面
+|{{color|#FFC700}} (16762624)
+|{{tint|particle-effect|#FFC700}}
+|-
+| style="text-align:center" | {{EffectSprite|instant-health}}
+| [[瞬间治疗]]
+| <code>instant_health</code>
+| <code>6</code>
+| 治疗非亡灵生物，伤害亡灵生物
+| 正面
+|{{color|#F82423}} (16262179)
+|{{tint|particle-effect|#F82423}}
+|-
+| style="text-align:center" | {{EffectSprite|instant-damage}}
+| [[瞬间伤害]]
+| <code>instant_damage</code>
+| <code>7</code>
+| 伤害非亡灵生物，治疗亡灵生物
+| 负面
+|{{color|#A9656A}} (11101546)
+|{{tint|particle-effect|#A9656A}}
+|-
+| style="text-align:center" | {{EffectSprite|jump-boost}}
+| [[跳跃提升]]
+| <code>jump_boost</code>
+| <code>8</code>
+| 增加跳跃高度，降低摔落伤害
+| 正面
+|{{color|#FDFF84}} (16646020)
+|{{tint|particle-effect|#FDFF84}}
+|-
+| style="text-align:center" | {{EffectSprite|nausea}}
+| [[反胃]]
+| <code>nausea</code>
+| <code>9</code>
+| 导致视野晃动扭曲
+| 负面
+|{{color|#551D4A}} (5578058)
+|{{tint|particle-effect|#551D4A}}
+|- 
+| style="text-align:center" | {{EffectSprite|regeneration}}
+| [[生命恢复]]
+| <code>regeneration</code>
+| <code>10</code>
+| 随时间恢复生命
+| 正面
+|{{color|#CD5CAB}} (13458603)
+|{{tint|particle-effect|#CD5CAB}}
+|-
+| style="text-align:center" | {{EffectSprite|resistance}}
+| [[抗性提升]]
+| <code>resistance</code>
+| <code>11</code>
+| 降低受到的伤害
+| 正面
+|{{color|#9146F0}} (9520880)
+|{{tint|particle-effect|#9146F0}}
+|-
+| style="text-align:center" | {{EffectSprite|fire-resistance}}
+| [[抗火]]
+| <code>fire_resistance</code>
+| <code>12</code>
+| 免疫火焰伤害、增加熔岩下视野、{{in|be|nc=1}}使生物不能着火
+| 正面
+|{{color|#FF9900}} (16750848)
+|{{tint|particle-effect|#FF9900}}
+|-
+| style="text-align:center" | {{EffectSprite|water-breathing}}
+| [[水下呼吸（状态效果）|水下呼吸]]
+| <code>water_breathing</code>
+| <code>13</code>
+| {{only|for=在水下时|je}}恢复氧气
+| 正面
+|{{color|#98DAC0}} (10017472)
+|{{tint|particle-effect|#98DAC0}}
+|-
+| style="text-align:center" | {{EffectSprite|invisibility}}
+| [[隐身]]
+| <code>invisibility</code>
+| <code>14</code>
+| 使外观不可见，降低被生物探测到的范围
+| 正面
+|{{color|#F6F6F6}} (16185078)
+|{{tint|particle-effect|#F6F6F6}}
+|-
+| style="text-align:center" | {{EffectSprite|blindness}}
+| [[失明]]
+| <code>blindness</code>
+| <code>15</code>
+| 削弱视野，停用[[疾跑]]，停用[[近战攻击#暴击|近战攻击暴击]]
+| 负面
+|{{color|#1F1F23}} (2039587)
+|{{tint|particle-effect|#1F1F23}}
+|-
+| style="text-align:center" | {{EffectSprite|night-vision}}
+| [[夜视]]
+| <code>night_vision</code>
+| <code>16</code>
+| 调亮视野
+| 正面
+|{{color|#C2FF66}} (12779366)
+|{{tint|particle-effect|#C2FF66}}
+|-
+| style="text-align:center" | {{EffectSprite|hunger}}
+| [[饥饿（状态效果）|饥饿]]
+| <code>hunger</code>
+| <code>17</code>
+| 持续增加[[饥饿#机制|消耗度]]
+| 负面
+|{{color|#587653}} (5797459)
+|{{tint|particle-effect|#587653}}
+|-
+| style="text-align:center" | {{EffectSprite|weakness}}
+| [[虚弱]]
+| <code>weakness</code>
+| <code>18</code>
+| 降低[[近战攻击]]伤害
+| 负面
+|{{color|#484D48}} (4738376)
+|{{tint|particle-effect|#484D48}}
+|-
+| style="text-align:center" | {{EffectSprite|poison}}
+| [[中毒]]
+| <code>poison</code>
+| <code>19</code>
+| 生命值高于{{hp|1}}时，持续受到伤害
+| 负面
+|{{color|#87A363}} (8889187)
+|{{tint|particle-effect|#87A363}}
+|-
+| style="text-align:center" | {{EffectSprite|wither}}
+| [[凋零]]
+| <code>wither</code>
+| <code>20</code>
+| 持续受到伤害，直到死亡
+| 负面
+|{{color|#736156}} (7561558)
+|{{tint|particle-effect|#736156}}
+|-
+| style="text-align:center" | {{EffectSprite|health-boost}}
+| [[生命提升]]
+| <code>health_boost</code>
+| <code>21</code>
+| 增加最大生命值
+| 正面
+|{{color|#F87D23}} (16284963)
+|{{tint|particle-effect|#F87D23}}
+|-
+| style="text-align:center" | {{EffectSprite|absorption}}
+| [[伤害吸收]]
+| <code>absorption</code>
+| <code>22</code>
+| 增加[[伤害吸收值]]
+| 正面
+|{{color|#2552A5}} (2445989)
+|{{tint|particle-effect|#2552A5}}
+|-
+| style="text-align:center" | {{EffectSprite|saturation}}
+| [[饱和]]
+| <code>saturation</code>
+| <code>23</code>
+| 恢复饥饿值<br>{{in|je}}恢复饱和度
+| 正面
+|{{color|#F82423}} (16262179)
+|{{tint|particle-effect|#F82423}}
+|-
+| style="text-align:center" | {{EffectSprite|glowing}}
+| [[发光]]{{only|je}}
+| <code>glowing</code>
+| &ndash;
+| 高亮生物轮廓线，生物本身被遮挡时亦可见
+| 中性
+|{{color|#94A061}} (9740385)
+|{{tint|particle-effect|#94A061}}
+|-
+| style="text-align:center" | {{EffectSprite|levitation}}
+| [[飘浮]]
+| <code>levitation</code>
+| <code>24</code>
+| 持续覆盖生物垂直速度，向上飘浮
+| 负面
+|{{color|#CEFFFF}} (13565951)
+|{{tint|particle-effect|#CEFFFF}}
+|-
+| style="text-align:center" | {{EffectSprite|luck}}
+| [[幸运]]{{only|je}}
+| <code>luck</code>
+| &ndash;
+| 增加获得高质量战利品概率
+| 正面
+|{{color|#59C106}} (5882118)
+|{{tint|particle-effect|#59C106}}
+|-
+| style="text-align:center" | {{EffectSprite|unluck}}
+| [[霉运]]{{only|je}}
+| <code>unluck</code>
+| &ndash;
+| 降低获得高质量战利品概率
+| 负面
+|{{color|#C0A44D}} (12624973)
+|{{tint|particle-effect|#C0A44D}}
+|-
+| style="text-align:center" | {{EffectSprite|poison}}
+| [[中毒（致命）]]{{only|be}}
+| <code>fatal_poison</code>
+| <code>25</code>
+| 持续受到伤害，直到死亡
+| 负面
+|{{color|#4E9331}} (5149489)
+|{{tint|particle-effect|#4E9331}}
+|-
+| style="text-align:center" | {{EffectSprite|slow-falling}}
+| [[缓降]]
+| <code>slow_falling</code>
+| <code>27</code>
+| 大幅降低生物下落时的重力加速度和终端速度，使生物不会受到摔落伤害
+| 正面
+|{{color|#F3CFB9}} (15978425)
+|{{tint|particle-effect|#F3CFB9}}
+|-
+| style="text-align:center" | {{EffectSprite|conduit-power}}
+| [[潮涌能量]]
+| <code>conduit_power</code>
+| <code>26</code>
+| 调亮{{only|java|for=水下}}视野，增加挖掘速度，恢复氧气
+| 正面
+|{{color|#1DC2D1}} (1950417)
+|{{tint|particle-effect|#1DC2D1}}
+|-
+| style="text-align:center" | {{EffectSprite|dolphins-grace}}
+| [[海豚的恩惠]]{{only|java}}{{note|{{in|be}}海豚同樣能提升玩家的游泳速度，但由其他方式實現，不存在這一狀態效果。}}
+| <code>dolphins_grace</code>
+| &ndash;
+| 增加游泳速度
+| 正面
+|{{color|#88A3BE}} (8954814)
+|{{tint|particle-effect|#88A3BE}}
+|-
+| style="text-align:center" | {{EffectSprite|bad-omen}}
+| [[不祥之兆]]
+| <code>bad_omen</code>
+| <code>28</code>
+| 进入[[村庄]]时获得袭击之兆，接近普通[[试炼刷怪笼]]时获得试炼之兆
+| 中性
+|{{color|#0B6138}} (745784)
+|{{tint|particle-effect|#0B6138}}
+|-
+| style="text-align:center" | {{EffectSprite|hero-of-the-village}}
+| [[村庄英雄]]
+| <code>hero_of_the_village</code>{{only|je}}<br><code>village_hero</code>{{only|be}}
+| <code>29</code>
+| 在与[[村民]]和{{only|for=[[流浪商人]]|be}}交易时获得折扣
+| 正面
+|{{color|#44FF44}} (4521796)
+|{{tint|particle-effect|#44FF44}}
+|-
+| style="text-align:center" | {{EffectSprite|darkness}}
+| [[黑暗]]
+| <code>darkness</code>
+| <code>30</code>
+| 导致视野忽明忽暗
+| 负面
+|{{color|#292721}} (2696993)
+|{{tint|particle-effect|#292721}}
+|-
+| style="text-align:center" | {{EffectSprite|trial-omen}}
+| [[试炼之兆]]
+| <code>trial_omen</code>
+| <code>31</code>
+| 将附近的普通[[试炼刷怪笼]]变为不祥试炼刷怪笼
+| 中性
+|{{color|#16A6A6}} (1484454)
+|{{tint|particle-effect|#16A6A6}}
+|-
+| style="text-align:center" | {{EffectSprite|wind-charged}}
+| [[蓄风]]
+| <code>wind_charged</code>
+| <code>32</code>
+| 死亡后产生[[爆炸#风爆|风爆]]
+| 负面
+|{{color|#BDC9FF}} (12438015)
+|{{tint|particle-effect|#BDC9FF}}
+|-
+| style="text-align:center" | {{EffectSprite|weaving}}
+| [[盘丝]]
+| <code>weaving</code>
+| <code>33</code>
+| 死亡后放置[[蜘蛛网]]
+| 负面
+|{{color|#78695A}} (7891290)
+|{{tint|particle-effect|#78695A}}
+|-
+| style="text-align:center" | {{EffectSprite|oozing}}
+| [[渗浆]]
+| <code>oozing</code>
+| <code>34</code>
+| 死亡后生成[[史莱姆]]
+| 负面
+|{{color|#99FFA3}} (10092451)
+|{{tint|particle-effect|#99FFA3}}
+|-
+| style="text-align:center" | {{EffectSprite|infested}}
+| [[寄生]]
+| <code>infested</code>
+| <code>35</code>
+| 受到伤害时概率生成[[蠹虫]]
+| 负面
+|{{color|#8C9B8C}} (9214860)
+|{{tint|particle-effect|#8C9B8C}}
+|-
+| style="text-align:center" | {{EffectSprite|raid-omen}}
+| [[袭击之兆]]
+| <code>raid_omen</code>
+| <code>36</code>
+| 触发[[袭击]]
+| 中性
+|{{color|#DE4058}} (14565464)
+|{{tint|particle-effect|#DE4058}}
+|-
+| style="text-align:center" | {{EffectSprite|Breath of the Nautilus}}
+| [[鹦鹉螺之息]]
+| <code>breath_of_the_nautilus</code>
+| <code>37</code>
+| 停止氧气消耗
+| 正面
+|{{Color|#00FFEE}} (65518)
+|{{tint|particle-effect|#00FFEE}}
+|}
+
+== 作用对立的效果 ==
+一些效果之间彼此的影响是相互对立的，下表显示了会彼此产生对立影响的效果。
+{|class="wikitable"
+!效果
+!与之对立的效果
+|-
+|{{EffectLink|Speed}}
+|{{EffectLink|Slowness}}
+|-
+|{{EffectLink|Strength}}
+|{{EffectLink|Weakness}}
+|-
+|{{EffectLink|Instant Health}}
+|{{EffectLink|Instant Damage}}
+|-
+|{{EffectLink|Regeneration}}
+|{{EffectLink|Poison}}、{{EffectLink|wither}}、{{only|bedrock|short=1|for={{EffectLink|Fatal Poison}}}}
+|-
+|{{EffectLink|Luck}}{{only|java|short=1}}
+|{{EffectLink|Bad Luck}}{{only|java|short=1}}
+|-
+|{{EffectLink|Haste}}
+|{{EffectLink|Mining Fatigue}}
+|-
+|{{EffectLink|Saturation}}
+|{{EffectLink|Hunger}}
+|}
+
+== 成就 ==
+{{load achievements|stayin-frosty;free-diver;great-view-from-up-here;ive-got-a-bad-feeling-about-this}}
+
+== 进度 ==
+{{load advancements|end.levitate;nether.all_potions;nether.all_effects;story.cure_zombie_villager}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了[[速度]]、[[缓慢]]、[[急迫]]、[[挖掘疲劳]]、[[力量（状态效果）|力量]]、[[瞬间治疗]]、[[瞬间伤害]]、[[跳跃提升]]、[[反胃]]、[[生命恢复]]、[[抗性提升]]、[[抗火]]、[[水下呼吸（状态效果）|水下呼吸]]、[[隐身]]、[[失明]]、[[夜视]]、[[饥饿（状态效果） |饥饿]]、[[虚弱]]、[[中毒]]共19种状态效果，其中跳跃提升、力量、抗性提升、抗火、隐身、失明、夜视、虚弱还暂未具有实际作用。尚未加入任何药水，因此少数可以获得的状态效果分别是生命恢复（金苹果）、饥饿（生鸡肉和腐肉）和中毒（洞穴蜘蛛）。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre2|加入了药水，暂时只能通过物品栏编辑器获得。所有状态效果都可以通过药水来获得，但是隐身和夜视仍然没有实际作用。
+|饮用[[奶]]可以清除所有的状态效果。
+|[[File:Speed JE1 BE1.png|32px]] [[File:Slowness JE1 BE1.png|32px]] [[File:Haste JE1 BE1.png|32px]] [[File:Mining Fatigue JE1 BE1.png|32px]] [[File:Strength JE1 BE1.png|32px]] [[File:Jump Boost JE1 BE1.png|32px]] [[File:Nausea JE1 BE1.png|32px]] [[File:Regeneration JE1 BE1.png|32px]] [[File:Resistance JE1 BE1.png|32px]] [[File:Fire Resistance JE1 BE1.png|32px]] [[File:Water Breathing JE1 BE1.png|32px]] [[File:Invisibility JE1 BE1.png|32px]] [[File:Blindness JE1 BE1.png|32px]] [[File:Night Vision JE1 BE1.png|32px]] [[File:Hunger JE1 BE1.png|32px]] [[File:Wither (effect) JE1 BE1.png|32px]] [[File:Weakness JE1 BE1.png|32px]] [[File:Poison JE1 BE1.png|32px]] 加入了迅捷、缓慢、急迫、挖掘疲劳、力量、跳跃提升、反胃、生命恢复、抗性提升、抗火、水下呼吸、隐身、失明、夜视、饥饿、凋零、虚弱和中毒的图标。}}
+|{{HistoryLine|||dev=Beta 1.9-pre3|药水被重做且可以被制作。作为状态效果的一部分，急迫、挖掘疲劳、跳跃提升、反胃、水下呼吸、隐身、夜视、饥饿共8种状态效果不再能被饮用药水获得，并归为未使用状态效果。}}
+|{{HistoryLine|||dev=Beta 1.9-pre4|加入了喷溅药水。}}
+|{{HistoryLine||1.3.1|dev=12w21a|加入了用金块制作的附魔金苹果，它可提供之前未使用的抗性提升效果。}}
+|{{HistoryLine|||dev=12w26a|[[刷怪笼]]能通过第三方修改器修改并生成拥有状态效果的生物。}}
+|{{HistoryLine||1.4.2|dev=12w32a|[[夜视]]现在有作用了，在创造模式添加了夜视药水和喷溅夜视药水。
+|加入了[[信标]]，可用于给予周围的玩家多个尚未有对应药水的效果。一些尚未有对应药水的效果现在可以由信标释放了。包括之前未使用的急迫，跳跃提升效果。
+|受到虚弱效果的僵尸村民现可用金苹果来治疗。}}
+|{{HistoryLine|||dev=12w34a|[[隐身]]现在有作用了，可使生物变为不可视。在此效果下的玩家无法被其他玩家侦测到。在创造模式中添加了隐身药水和喷溅隐身药水。
+|加入了凋零效果，它能通过[[凋灵]]的凋灵之首施加。}}
+|{{HistoryLine|||dev=12w39a|通过外部程序，[[药水]]能给予任何持续时间的不同或多个效果。}}
+|{{HistoryLine||1.5|dev=13w09b|使用{{cmd|effect}}能够给予玩家不同的效果，等级上限为4。}}
+|{{HistoryLine|||dev=13w09c|现在{{cmd|effect}}的等级上限为255。}}
+|{{HistoryLine||1.6.1|dev=13w23a|[[生命恢复]]和瞬间恢复效果被削弱，再生效率减半，瞬间恢复效果减少33%的恢复效果。}}
+|{{HistoryLine|||dev=13w23b|[[File:Health Boost JE1 BE1.png|32px]] 加入了[[生命提升]]效果。通过食用普通金苹果能获得此效果，附魔金苹果不会提供此效果。
+|普通金苹果给予的再生效果等级从1级提升至2级，附魔金苹果则从4级提升至5级。}}
+|{{HistoryLine|||dev=13w24a|蜘蛛在困难[[难度]]下有机会带有状态效果生成。}}
+|{{HistoryLine|||dev=13w24b|[[File:Absorption JE1 BE1.png|32px]] 加入了伤害吸收效果。
+|食用金苹果不再提供生命提升效果，而是2分钟的伤害吸收效果。}}
+|{{HistoryLine|||dev=pre|加入了饱和效果。}}
+|{{HistoryLine||1.6.2|dev=unknown|伤害吸收效果不再每30秒自动补充一次。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了水肺药水。}}
+|{{HistoryLine||1.8|dev=14w06a|增加了禁用药水粒子的能力。}}
+|{{HistoryLine|||dev=14w25a|修改了[[挖掘疲劳]]效果，不再每等级降低20%的效率。}}
+|{{HistoryLine|||dev=14w27a|加入了跳跃药水，可以使用兔子脚来酿造。
+|跳跃提升现在改用浅绿色的粒子，在此之前是浅紫色的粒子。}}
+|{{HistoryLine|||dev=14w28a|{{cmd|effect}}现在可以使用英文id。}}
+|{{HistoryLine||1.9|dev=15w31a|加入了药箭。
+|[[File:Levitation JE1 BE1.png|32px]] 加入了[[飘浮]]效果，被[[潜影弹]]击中获得。
+|[[File:Glowing JE1.png|32px]] 加入了[[发光]]效果，被[[光灵箭]]击中获得。
+|状态效果现在会显示在HUD，而并不只是物品栏里。}}
+|{{HistoryLine|||dev=15w33a|加入了滞留药水。
+|加入了滞留型水瓶，以及平凡药水、浓稠药水与粗制药水的滞留型变种。
+|改变力量和虚弱效果。}}
+|{{HistoryLine|||dev=15w34b|急迫和挖掘疲劳影响新属性 - <code>attackSpeed</code>。}}
+|{{HistoryLine|||dev=15w44b|[[File:Luck JE1.png|32px]] [[File:Bad Luck JE1.png|32px]] 加入了幸运和霉运效果。
+|药箭会像药水一样显示效果的持续时间了。
+|药箭能在生存模式获得。}}
+|{{HistoryLine|||dev=15w49a|[[File:Absorption JE2 BE2.png|32px]] [[File:Health Boost JE2 BE2.png|32px]] 更改了伤害吸收和生命提升效果图标的纹理，以更好地区分二者。}}
+|{{HistoryLine||1.13|dev=18w08b|水下呼吸效果不再增强玩家水下视觉。}}
+|{{HistoryLine|||dev=18w14a|[[File:Slow Falling JE1 BE1.png|32px]] 加入缓降效果，由饮用[[缓降药水]]和被[[箭|缓降药箭]]击中获得。}}
+|{{HistoryLine|||dev=18w15a|[[File:Conduit Power JE1 BE1.png|32px]] 加入潮涌能量效果，由[[潮涌核心]]释放。}}
+|{{HistoryLine|||dev=18w16a|潮涌能量现在可以给予玩家不同效果。}}
+|{{HistoryLine|||dev=18w19a|[[File:Dolphin's Grace JE1.png|32px]] 加入海豚的恩惠效果，玩家在海豚身边游泳即可获得该效果。}}
+|{{HistoryLine||1.14|dev=18w43a|[[File:Mining Fatigue JE2.png|32px]] [[File:Speed JE2.png|32px]] [[File:Slowness JE2.png|32px]] [[File:Haste JE2.png|32px]] [[File:Strength JE2.png|32px]] [[File:Weakness JE2.png|32px]] [[File:Poison JE2.png|32px]] [[File:Dolphin's_Grace_JE1.png|32px]] [[File:Conduit Power JE2.png|32px]] [[File:Blank.png|32px]] [[File:Jump Boost JE2 BE2.png|32px]] [[File:Nausea JE2.png|32px]] [[File:Regeneration JE3 BE2.png|32px]] [[File:Resistance JE2 BE2.png|32px]] [[File:Fire Resistance JE2 BE2.png|32px]] [[File:Water Breathing JE2 BE2.png|32px]] [[File:Invisibility JE2 BE2.png|32px]] [[File:Blindness JE2 BE2.png|32px]] [[File:Night Vision JE2 BE2.png|32px]] [[File:Hunger JE2 BE2.png|32px]] [[File:Wither (effect) JE2 BE2.png|32px]] [[File:Health Boost JE3 BE3.png|32px]] [[File:Absorption JE3 BE3.png|32px]] [[File:Glowing JE2.png|32px]] [[File:Levitation JE2 BE2.png|32px]] [[File:Luck JE2.png|32px]] [[File:Bad Luck JE2.png|32px]] 更改了[[挖掘疲劳]]、[[迅捷]]、[[缓慢]]、[[急迫]]、[[力量（状态效果）|力量]]、[[虚弱]]、[[中毒]]、[[缓降]]、[[潮涌能量]]、[[海豚的恩惠]]、[[跳跃提升]]、[[反胃]]、[[生命恢复]]、[[抗性提升]]、[[抗火]]、[[水下呼吸（状态效果）|水下呼吸]]、[[隐身]]、[[失明]]、[[夜视]]、[[饥饿]]、[[凋零]]、[[生命提升]]、[[伤害吸收]]、[[发光]]、[[飘浮]]、[[幸运]]和[[霉运]]的图标纹理。}}
+|{{HistoryLine|||dev=18w43b|[[File:Mining Fatigue JE3 BE2.png|32px]] [[File:Speed JE3 BE2.png|32px]] [[File:Slowness JE3 BE2.png|32px]] [[File:Haste JE3 BE2.png|32px]] [[File:Strength JE3 BE2.png|32px]] [[File:Weakness JE3 BE2.png|32px]] [[File:Poison JE3 BE2.png|32px]] [[File:Slow Falling JE1 BE1.png|32px]] [[File:Conduit Power JE1 BE1.png|32px]] [[File:Dolphin's Grace JE1.png|32px]] 修复了挖掘疲劳、迅捷、缓慢、急迫、力量、虚弱、中毒、缓降、潮涌能量和海豚的恩惠的图标纹理。
+|现在大于Ⅳ级的状态效果会正常在物品栏界面显示等级。<ref>{{bug|MC-130847|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=18w47a|[[File:Bad Omen JE1 BE1.png|32px]] 加入了不祥之兆效果，此效果在玩家杀死[[灾厄巡逻队]]首领时获得。}}
+|{{HistoryLine|||dev=19w08a|状态效果的纹理图标被拆分成一个个独立的文件。
+|[[File:Bad Omen JE2 BE2.png|32px]] [[File:Nausea JE3 BE2.png|32px]] [[File:Luck JE3.png|32px]] [[File:Bad Luck JE3.png|32px]] 更改了不祥之兆、反胃、幸运、霉运效果的图标。}}
+|{{HistoryLine|||dev=19w13a|[[File:Hero of the Village JE1 BE2.png|32px]] 加入了村庄英雄效果，此效果在玩家击败由不祥之兆引发的[[袭击]]后获得。}}
+|{{HistoryLine||1.15|dev=19w41a|[[File:Instant Health JE1.png|32px]] [[File:Instant Damage JE1.png|32px]] [[File:Saturation JE1.png|32px]] 加入了瞬间治疗、瞬间伤害和饱和效果的图标。}}
+|{{HistoryLine||1.15.2|dev=pre1|现在状态效果被更高等级的同类效果覆盖时会被存储。例如，[[信标]]所给予的状态效果只会暂时覆盖较低等级的状态效果，信标效果作用结束后，状态效果会继续产生作用。}}
+|{{HistoryLine||?|负倍率现在会被读取为0，因此不再有0级或负等级状态效果。}}
+|{{HistoryLine||1.19|dev=exp1|[[File:Darkness.png|32px]] 加入了黑暗效果。}}
+|{{HistoryLine|||dev=22w12a|在常规快照中加入了黑暗效果。}}
+|{{HistoryLine||1.19.3|dev=22w46a|现在状态效果的持续时间能正常显示了。在此之前，如果一个效果持续时间超过32766，即2<sup>15</sup>−2刻（27分钟18秒或1638秒），它将展示为<code>**:**</code>，但仍然继续计时，直到终止。<ref>{{bug|MC-121865|||Fixed}}</ref>}}
+|{{HistoryLine||1.19.4|dev=23w05a|现在状态效果可以拥有无限的持续时间。}}
+|{{HistoryLine|||dev=pre3|更改了[[抗火]]、[[瞬间伤害]]、[[隐身]]、[[跳跃提升]]、[[幸运]]、[[夜视]]、[[中毒]]、[[抗性提升]]、[[缓慢|{{tr|缓慢|緩速|緩慢}}]]、[[迅捷]]、[[力量（状态效果）|力量]]、[[水下呼吸（状态效果）|水下呼吸]]的药水（所有形式）和药箭的颜色。}}
+|{{HistoryLine||1.20|dev=23w14a|[[File:Slowness JE4.png|32px]] 略微更改了缓慢图标的纹理。<ref>{{bug|MC-254588|||Fixed}}</ref>}}
+|{{HistoryLine||1.20.2|dev=23w32a|修改了状态效果的保存格式，不再使用数字ID。}}
+|{{HistoryLine||1.20.5|dev=24w05b|现在放大倍率被限制在0到127之间。}}
+|{{HistoryLine|||dev=24w06a|现在放大倍率再次被限制在0到255之间，且放大倍率超过127的跳跃提升、飘浮和挖掘疲劳效果可使用新[[属性]]代替。}}
+|{{HistoryLine|||dev=24w11a|状态效果粒子不再混合为一种颜色，现在多个状态效果的粒子会分别渲染。
+|降低了实体发出状态效果粒子的频率。}}
+|{{HistoryLine|||dev=24w13a|[[File:Raid Omen JE1.png|32px]] [[File:Trial Omen JE1 BE1.png|32px]] [[File:Wind Charged JE1 BE1.png|32px]] [[File:Weaving JE1 BE1.png|32px]] [[File:Oozing JE1 BE1.png|32px]] [[File:Infested JE1 BE1.png|32px]] 加入了袭击之兆、试炼之兆、蓄风、盘丝、渗浆和寄生共6种状态效果。}}
+|{{HistoryLine|||dev=pre1|[[File:Raid Omen JE2 BE1.png|32px]] 更改了袭击之兆的图标，将其改为[[纹理更新]]后[[唤魔者]]的纹理。<ref>{{bug|MC-269949|||Fixed}}</ref>}}
+|{{HistoryLine|||exp=update_1_21|dev=24w13a|[[File:Bad Omen JE3 BE3.png|32px]] 修改了不祥之兆的图标、效果和获取方式。}}
+|{{HistoryLine||1.21|dev=24w18a|24w13a中的变更不再属于[[实验性内容]]。}}
+|{{HistoryLine|||dev=24w20a|进入[[返回传送门]]不再移除状态效果。<ref>{{bug|MC-6431|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.11|dev=25w41a|[[File:Breath of the Nautilus JE1 BE1.png|32px]] 加入了[[鹦鹉螺之息]]状态效果。
+|现在物品栏右侧显示状态效果的UI长度会随着其中内容的长度而变化。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||2014年12月2日|link={{tweet|jeb_|539822336422465536}}|[[Jeb]]在推特上发表了一张开发中的状态效果的图片。|当玩家获得了一个状态效果，它们会在屏幕右侧显示出来。|Jeb证实由于药水没有被加入，可以在游戏中获得的状态效果只有中毒和反胃。}}
+|{{HistoryLine||2014年12月4日|link={{tweet|jeb_|540540728347475968}}|Jeb在推特上发表了状态效果界面的图片，似乎是在选中一个“项目”的时候显示的。}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Speed JE1 BE1.png|32px]] [[File:Slowness JE1 BE1.png|32px]] [[File:Haste JE1 BE1.png|32px]] [[File:Mining Fatigue JE1 BE1.png|32px]] [[File:Strength JE1 BE1.png|32px]] [[File:Jump Boost JE1 BE1.png|32px]] [[File:Nausea JE1 BE1.png|32px]] [[File:Regeneration JE1 BE1.png|32px]] [[File:Resistance JE1 BE1.png|32px]] [[File:Fire Resistance JE1 BE1.png|32px]] [[File:Water Breathing JE1 BE1.png|32px]] [[File:Invisibility JE1 BE1.png|32px]] [[File:Blindness JE1 BE1.png|32px]] [[File:Night Vision JE1 BE1.png|32px]] [[File:Hunger JE1 BE1.png|32px]] [[File:Weakness JE1 BE1.png|32px]] [[File:Poison JE1 BE1.png|32px]] [[File:Absorption JE1 BE1.png|32px]] 加入了迅捷、缓慢、急迫、挖掘疲劳、力量、瞬间治疗、瞬间伤害、跳跃提升、反胃、生命恢复、抗性提升、抗火、水下呼吸、隐身、失明、夜视、饥饿、虚弱、中毒、伤害吸收效果。
+|在该版本，因为药水没有被加入，只有来自[[洞穴蜘蛛]]，[[腐肉]]和[[河豚（物品）|河豚]]的[[中毒]]、来自[[生鸡肉]]的[[饥饿（状态效果）|饥饿]]、来自河豚的[[反胃]]可用。}}
+|{{HistoryLine|||dev=build 4|现在饮用[[奶]]后会移除所有的状态效果。}}
+|{{HistoryLine|||dev=build 12|[[盔甲]]不能再减少状态效果所造成的伤害。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了喷溅药水。
+|大多数状态效果现在正常使用，并添加了一些新效果。跳跃提升无法获得，因为[[兔子]]还没有加入。
+|状态效果现在能通过饮用药水获得。
+|因[[饥饿（状态效果）|饥饿]]效果的加入，现在食用腐肉会正确的触发饥饿效果而不是中毒。
+|由于饥饿值和饱和度的加入，现在饥饿效果能正常的工作了。}}
+|{{HistoryLine|||dev=unknown|修复了触摸范围被修改后的状态效果栏的漏洞。}}
+|{{HistoryLine||0.13.0|dev=build 1|由于加入兔子，因此可以在生存模式中获得跳跃提升状态效果。}}
+|{{HistoryLine||0.15.0|dev=build 1|加入了药箭，可通过手持箭点击盛有药水的[[炼药锅]]获得。}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了独有衰变药水，包括喷溅型和药水和药箭，由于缺乏酿造方法，因此无法在生存模式里获得。
+|[[远古守卫者]]现在能给予处于生存模式的玩家挖掘疲劳效果。}}
+|{{HistoryLine|||dev=build 4|凋零效果现在能由[[凋灵]]释放。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|加入了滞留药水。
+|[[File:Levitation JE1 BE1.png|32px]] 加入了飘浮效果，被[[潜影弹]]击中获得。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|[[File:Poison JE1 BE1.png|32px]] 加入了[[中毒（致命）]]。}}
+|{{HistoryLine||1.5.0|dev=1.5.0.1|[[File:Conduit Power JE1 BE1.png|32px]] 加入了潮涌能量效果，由玩家在[[潮涌核心]]附近活动即可获得。}}
+|{{HistoryLine||1.6.0|dev=1.6.0.5|[[File:Slow Falling JE1 BE1.png|32px]] 加入了缓降效果，由饮用[[缓降药水]]和被[[缓降之箭]]击中获得。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.10|[[File:Absorption JE2 BE2.png|32px]] [[File:Health Boost JE2 BE2.png|32px]] 更改了伤害吸收和生命提升效果图标的纹理，以更好地区分二者。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|[[File:Health Boost JE3 BE3.png|32px]] [[File:Absorption JE3 BE3.png|32px]] 更改了生命提升和伤害吸收效果图标的纹理。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|[[File:Bad Omen JE1 BE1.png|32px]] [[File:Hero of the Village BE1.png|32px]] 加入了不祥之兆和村庄英雄效果。
+|[[File:Levitation JE2 BE2.png|32px]] 更改了飘浮效果图标的纹理。}}
+|{{HistoryLine|||dev=1.11.0.3|[[File:Bad Omen JE2 BE2.png|32px]] [[File:Mining Fatigue JE3 BE2.png|32px]] [[File:Hero of the Village JE1 BE2.png|32px]] 更改了不祥之兆、挖掘疲劳和村庄英雄效果图标的纹理。}}
+|{{HistoryLine|||dev=1.11.0.5|[[File:Night Vision JE2 BE2.png|32px]] [[File:Speed JE3 BE2.png|32px]] [[File:Slowness JE3 BE2.png|32px]] [[File:Haste JE3 BE2.png|32px]] [[File:Strength JE3 BE2.png|32px]] [[File:Jump Boost JE2 BE2.png|32px]] [[File:Nausea JE3 BE2.png|32px]] [[File:Regeneration JE3 BE2.png|32px]] [[File:Resistance JE2 BE2.png|32px]] [[File:Fire Resistance JE2 BE2.png|32px]] [[File:Water Breathing JE2 BE2.png|32px]] [[File:Invisibility JE2 BE2.png|32px]] [[File:Blindness JE2 BE2.png|32px]] [[File:Hunger JE2 BE2.png|32px]] [[File:Wither (effect) JE2 BE2.png|32px]] [[File:Weakness JE3 BE2.png|32px]] [[File:Poison JE3 BE2.png|32px]] [[File:Poison JE3 BE2.png|32px]] 更改了[[夜视]]、[[迅捷]]、[[缓慢]]、[[急迫]]、[[力量（状态效果）|力量]]、[[跳跃提升]]、[[反胃]]、[[生命恢复]]、[[抗性提升]]、[[抗火]]、[[水下呼吸（状态效果）]]、[[隐身]]、[[失明]]、[[饥饿]]、[[凋零]]、[[虚弱]]、[[中毒]]和[[中毒（致命）]]效果图标的纹理。}} 
+|{{HistoryLine|||dev=1.11.0.7|[[File:Bad Omen Bedrock Animation.gif|32px]] [[File:Hero of the Village Bedrock Animation.gif|32px]] 现在当玩家获得不祥之兆或村庄英雄时，屏幕上将播放一个动画。}}
+|{{HistoryLine||1.18.0|exg=vanilla_experiments|dev=1.18.0.22|[[File:Darkness.png|32px]] 加入了黑暗效果。}}
+|{{HistoryLine||1.18.10|exg=wild_update|dev=1.18.10.21|现在黑暗效果属于[[实验性玩法]]中的“荒野更新”部分。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|黑暗效果不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.20.80|exg=upcoming_creator_features|dev=1.20.80.21|现在可以通过{{cmd|hud}}命令修改状态效果图标的可见性。}}
+|{{HistoryLine|||exg=none|dev=1.20.80.23|1.20.80.21中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.0|exg=updateAnnouncedLive2023|dev=1.21.0.20|[[File:Trial Omen JE1 BE1.png|32px]] [[File:Wind Charged JE1 BE1.png|32px]] [[File:Weaving JE1 BE1.png|32px]] [[File:Oozing JE1 BE1.png|32px]] [[File:Infested JE1 BE1.png|32px]] 加入了试炼之兆、蓄风、盘丝、渗浆和寄生共5种状态效果，并修改了不祥之兆的效果和获取方式。}}
+|{{HistoryLine|||dev=1.21.0.21|[[File:Raid Omen JE2 BE1.png|32px]] 加入了袭击之兆状态效果。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|1.21.0.20和1.21.0.21中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.20|[[File:Breath of the Nautilus JE1 BE1.png|32px]] 加入了鹦鹉螺之息状态效果。}}
+|{{HistoryLine|||dev=1.21.130.26|现在由[[信标]]、[[潮涌核心]]、[[鹦鹉螺]]和[[僵尸鹦鹉螺]]给予的状态效果的图标会显示蓝色边框，以同步{{el|je}}。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU5|wiiu=Patch 1|加入了状态效果。由于没有添加药水，所以只能通过金苹果、生鸡肉、腐肉和洞穴蜘蛛来给予状态效果。}}
+|{{HistoryLine||xbox=TU7|状态效果现在能通过饮用药水获得。}}
+|{{HistoryLine||xbox=TU7|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了喷溅药水。|现在饮用[[奶]]后会移除所有的状态效果。}}
+|{{HistoryLine||xbox=TU14|ps3=1.04|psvita=1.00|ps4=1.00|加入了由金块合成的附魔金苹果，并且会给予了之前未使用的抗性提升效果。}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|夜视现在有作用了，在创造模式添加了夜视药水和喷溅夜视药水。
+|同时也添加了[[信标]]，可用于给予周围的玩家多个尚未有对应药水的效果。
+|当僵尸村民在虚弱的效果下可以使用金苹果治疗它。
+|隐身现在有作用了，可使生物变为不可视。在此效果下的玩家无法被其他玩家侦测到。添加了隐身药水和喷溅隐身药水。并加入到创造模式。
+|加入了凋零效果，它能通过[[凋灵]]的凋灵之首施加。
+|加入了伤害吸收效果，当食用任何金苹果都会给予2分钟此效果。}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|加入了药箭。
+|加入了滞留药水。
+|加入飘浮效果，被[[潜影贝]]的弹射物击中获得。}}
+|{{HistoryLine||xbox=TU69|ps3=1.76|psvita=1.76|ps4=1.76|wiiu=Patch 38|加入了缓降效果，由饮用缓降药水和被缓降药箭击中获得。}}
+|{{HistoryLine||xbox=none|xbone=none|ps3=none|psvita=none|ps4=1.91|wiiu=none|switch=none|[[File:Bad Omen JE2 BE2.png|32px]] [[File:Hero of the Village JE1 BE2.png|32px]] 加入了不祥之兆和村庄英雄状态效果。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|加入了药箭。}}
+|{{HistoryLine||1.7.10|加入了滞留药水。}}
+}}
+
+== 画廊 ==
+<gallery>
+File:Status Effect.png|食用[[腐肉]]后的状态效果
+File:Golden Apple Effect.png|食用金苹果后的状态效果
+File:Inventory Weakness.png|喝下虚弱药水后的状态效果
+File:Hearts.png|生命提升和伤害吸收一起附加到玩家身上时的最大值
+File:Dying Dragon.png|夜视效果视角的[[末地]]
+File:Eat Pufferfish.png|食用[[河豚（物品）|河豚]]后的反胃和中毒效果
+File:Status Effect.png|饥饿效果
+File:Glowing effect.png|使用[[命令]]向所有生物加入了发光效果
+File:Invisible Phantom.png|在隐身效果下，[[幻翼]]的身体会消失，但它的眼睛和烟雾粒子仍然可见
+File:All the status effects....png|玩家拥有所有效果时的图片
+File:Achievement A Furious Cocktail.png|“{{Advancement name|nether.all_potions|zh}}”进度要求拥有的状态效果，及对应药水的酿造原材料
+File:BE armor stand hurt.png|{{in|be}}[[盔甲架]]会被喷溅药水和药水效果云产生的状态效果影响
+File:Effects Classic.jpg|过去未紧凑显示的状态效果<ref>{{tweet|Dinnerbone|1443272922748051467}}</ref>
+File:Effects Compact.png|紧凑显示的状态效果
+</gallery>
+
+== 註釋 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox effects}}
+{{Navbox gameplay}}
+
+[[Category:状态效果|*]]
+
+[[de:Statuseffekt]]
+[[en:Effect]]
+[[es:Efecto]]
+[[fr:Effet]]
+[[hu:Állapot hatás]]
+[[it:Effetto]]
+[[ja:ステータス効果]]
+[[ko:효과]]
+[[lzh:態效]]
+[[nl:Statuseffect]]
+[[pl:Efekty]]
+[[pt:Efeito]]
+[[ru:Эффект]]
+[[th:เอฟเฟกต์]]
+[[uk:Ефект]]

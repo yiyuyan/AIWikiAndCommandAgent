@@ -1,0 +1,125 @@
+# 页面: Java版16w21a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8816w21a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:17
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=16w21a
+|image=16w21a.png
+|image2=Java Edition 16w21a Simplified.png\Java Edition 16w21a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2016年5月25日
+|jsonhash=ccdf81a69335bc84fae0ae69663ae82f9e277a0d
+|clienthash=a48f966d00c5d9bf300c2b8407efb98df743bde8
+|serverhash=12d65aa459d3e93643746dce14c100b05fbcdddf
+|parent=1.10
+|prevparent=1.9.4
+|prev=16w20a
+|next=16w21b
+|nextparent=1.10.1
+}}<onlyinclude>
+
+'''16w21a'''是[[Java版1.10]]的第2个快照，发布于2016年5月25日<ref>{{cite|url=http://mojang.com/2016/05/minecraft-snapshot-16w21a/|archive-url=1|archive=1|title=Minecraft snapshot 16w21b|author=Searge|website=Mojang.com|date=May 25, 2016}}</ref>，加入了新的NBT标签，并修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''NBT标签'''
+* <code>FallFlying</code>
+** 允许怪物使用鞘翅飞行。
+*** 怪物会在接触地面后失去飞行能力。
+
+== 更改 ==
+=== 方块 ===
+'''[[结构方块]]'''
+* 向加载模式加入了“结构完整性和种子”选项。
+
+'''[[骨块]]'''
+* 不再透明。
+
+'''[[紫颂果]]'''
+* 现在可以正常传送骑着动物的玩家（被骑乘的动物不会被传送）。
+
+'''[[发射器]]'''
+* 现在可以给实体装备盾牌。
+
+'''[[铁轨]] （任何种类）'''
+* 上坡铁轨的碰撞箱现在为1个方块。（以前只有{{frac|5|32}}格高）。
+
+=== 物品 ===
+'''[[末影珍珠]]'''
+* 现在可以正常传送骑着动物的玩家（被骑乘的动物不会被传送）。
+
+'''[[末地传送门]]'''
+* 在激活时会替换任何被末地传送门框架围着的方块。
+
+'''[[钓鱼竿]]'''
+* 现在可以将物品拉向玩家。
+
+'''[[矿车]]'''
+* 碰撞到实体时会再次乘载实体了。
+
+=== 生物 ===
+'''[[狼]]'''
+* 不再消失。
+
+=== 世界生成 ===
+'''[[村庄]]'''
+* 生成在热带草原的村庄铁匠铺会生成圆石以避免被熔岩烧毁。
+
+=== 命令格式 ===
+'''NBT标签'''
+* <code>IsVillager</code>和<code>VillagerProfession</code>标签被完全移除，它们被在[[16w20a]]中首次加入的<code>ZombieType</code>代替。
+
+=== 游戏内容 ===
+'''[[粒子]]'''
+* <code>fallingdust</code>现在可以被生成了，利用像<code>blockcrack</code>等一些粒子类型的<code>params</code>参数。
+** 使用命令{{cmd|particle fallingdust ~ ~ ~ 0 0 0 0 1 0 @p 10}}会生成熔岩颜色的粒子。
+
+== 修复 ==
+{{fixes|fixedin=16w21a|prefix=Minecraft|showdesc=1
+|;old
+|10046|随机目的地的计算方法得出的结果在统计上有小的统计趋势，表明此点偏重于向西北方向移动。
+|28424|未驯服的狼和豹猫会消失。
+|82425|{{cmd|tellraw|link=none}}命令中的<code>insertion</code>标签在服务器上不工作。
+|84422|玩家在载具上不能使用紫颂果和末影珍珠传送。
+|93642|在玩家收集经验球之前，经验球的纹理变成灰色。
+|93830|狼尾巴显示的高度不基于<code>health</code>与<code>maxHealth</code>的比值。
+|95910|中间有非空气方块时，不能激活末地传送门。
+|95973|成年马或驴的寻路问题：在特定配置中，1格高被视为“不可遍历”的地形。
+|96131|{{cmd|execute|link=none}}命令<code>detect</code>模式导致区块中实体的记分板被重置。<!--此漏洞目前被标记为“无法复现”，所以修复状态不可知，但仍然保留在此。（By: Anterdc99, 2021.01.29）-->
+|96269|在船上的骷髅、流髑、女巫、烈焰人、守卫者以及雪人不能射击（投掷）。
+|97201|鞘翅在重新登录后停止工作。
+|97526|当告示牌、旗帜、头颅以及箱子附近有物品刷怪笼时，它们会闪烁。
+|97602|{{key|shift}}+鼠标左键点击一个背包中的盾牌可以把它放到盾牌位上。
+|99945|带有数字ID的熟鱼未正确导入。
+|101001|钓鱼竿不能拉物品。
+|101680|批处理区块。
+|;prev
+|102052|结构方块不能被正确保存。
+|102068|<code>fallingdust</code>粒子看起来不工作。
+|102069|骨块被视为透明方块。
+|102085|北极熊会卡在站立姿态。
+|102091|方块的碰撞箱和准星（调试模式开启时）有问题。
+|102103|热带草原村庄中的铁匠铺会自燃。
+|102125|具有<code>fallingdust</code>粒子的<code>AreaEffectCloud</code>导致客户端崩溃：<code>Exception while adding particle</code>。
+|102209|结构方块可以融化雪。
+|102238|在除平顶山及其变种群系之外的其他群系中，废弃矿井会生成在其表层。
+}}</onlyinclude>
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:16w21a]]
+[[en:Java Edition 16w21a]]
+[[es:Java Edition 16w21a]]
+[[fr:Édition Java 16w21a]]
+[[ja:Java Edition 16w21a]]
+[[nl:16w21a]]
+[[pt:Edição Java 16w21a]]
+[[ru:16w21a (Java Edition)]]
+[[uk:16w21a (Java Edition)]]

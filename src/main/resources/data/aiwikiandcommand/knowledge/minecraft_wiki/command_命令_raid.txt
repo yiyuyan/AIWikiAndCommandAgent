@@ -1,0 +1,76 @@
+# 页面: 命令/raid
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/raid
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:11
+# 原始 Wikitext 内容:
+
+{{Exclusive|java}}{{debug feature warning}}
+{{Infobox command
+|name=raid
+|oplevel=3
+|nocmdblock=1
+|others=仅[[wzh:集成开发环境|IDE]]或启用[[调试工具#DEV_COMMANDS|调试工具{{cd|MC_DEBUG_DEV_COMMANDS}}]]
+}}
+管理执行者处的[[袭击]]。
+
+== 语法 ==
+: <code>raid check</code>
+:: 检查袭击状态。若存在袭击，则输出事件信息。
+: <code>raid glow</code>
+:: 对袭击者施加1000秒的2级[[发光]]效果。
+: <code>raid setomen <level></code>
+:: 设定袭击的[[袭击#袭击之兆等级|袭击之兆等级]]。
+: <code>raid sound <type></code>
+:: 播放袭击音效。
+: <code>raid spawnleader</code>
+:: 生成[[袭击队长]]。
+: <code>raid start <omenlvl></code>
+:: [[袭击#袭击触发|触发]]袭击，若存在袭击队长则不经过首轮冷却。
+: <code>raid stop</code>
+:: [[袭击#停战|停止]]袭击。
+
+== 参数 ==
+{{argument|level|integer}}和{{argument|omenlvl|integer}}
+: 指定袭击的[[袭击#袭击之兆等级|袭击之兆等级]]。
+: {{arg desc|je=integer|min=0}}
+
+{{argument|type|component}}
+: {{arg desc|je=component}}仅当值为{{cd|local}}时才会真正播放音效。
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/raid check,/raid glow,/raid setomen ...,/raid start ...,/raid stop|执行者不是[[玩家]]|fail}}
+{{Result table|cmd=/raid check,/raid setomen ...,/raid stop|不存在正在进行的袭击}}
+{{Result table|cmd=/raid start ...|存在正在进行的袭击}}
+{{Result table|执行者处于[[旁观模式]]}}
+{{Result table|[[游戏规则/raids|游戏规则{{cd|raids}}]]为{{samp|false}}}}
+{{Result table|执行者位于环境属性[[环境属性#gameplay/can_start_raid|<code>gameplay/can_start_raid</code>]]为<code>false</code>的区域{{note|默认只有[[下界]]符合该条件。}}}}
+{{Result table|cmd=/raid setomen ...|{{cd|<level>}}大于5}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|cmd=/raid start ...|因存在正在进行的袭击而执行失败|N/A|1|-1}}
+{{Output table|在其他情况下执行失败|N/A|1|1}}
+{{Output table|cmd=/raid stop|执行失败|N/A|1|-1}}
+{{Output table|cmd=/raid check|执行失败|N/A|1|0}}
+{{Output table|cmd=|执行成功|N/A|1|1}}
+{{Output table}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.3|dev=23w43a|加入了{{cmd|raid|link=none}}，仅在[[wzh:集成开发环境|IDE]]中可用。}}
+|{{HistoryLine||1.21.9|dev=pre1|现在{{cmd|raid|link=none}}命令在启用[[调试工具#DEV_COMMANDS|调试工具{{cd|MC_DEBUG_DEV_COMMANDS}}]]时可用。}}
+}}
+
+== 注释 ==
+{{Notelist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/raid]]
+[[en:Commands/raid]]

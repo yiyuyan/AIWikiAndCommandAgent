@@ -1,0 +1,152 @@
+# 页面: 潜行
+# 来源: https://zh.minecraft.wiki/w/%E6%BD%9C%E8%A1%8C
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 有未知版本的History模板的页面/Java版, 游戏内容
+# 抓取时间: 2026-07-14 17:31:12
+# 原始 Wikitext 内容:
+
+<div style="float: right; height: 225px; width: 145px">{{animate|Sneaking Steve.png;Sneaking Alex.png|x250px}}</div>
+'''潜行（Sneaking）'''是一种游戏机制，可以帮助玩家躲避敌人、免于摔落，还有其他[[#效果|有用的特性]]。
+
+== 控制 ==
+在键盘控制中，潜行的默认按键为{{key|LShift}}。在触摸控制中，潜行状态的切换可以通过单击（摇杆模式）或双击（方向键模式）潜行按钮。在手柄控制中，按下{{xbtn|b}}/{{psbtn|o}}或{{xbtn|thumb-right-click}}以切换潜行状态。
+
+== 效果 ==
+[[File:Sneakoverthelava.png|右|缩略图|223px|玩家在一个坑的边缘潜行，以防止落入[[熔岩]]]]
+
+在潜行时：
+* 玩家无法走下高度差等于或大于{{only|for=0.625格|BE}}或{{only|for=属性<code>generic.step_height</code>的值（默认为0.6格方块）<ref name="MC-268917">{{bug|MC-268917|||WAI}}</ref>|JE}}的平面边界（包括[[方块]]、[[潜影贝]]与[[船]]的[[碰撞箱]]或其他玩家可持续站立的表面）。这为玩家在空中向外搭建建筑结构时提供了安全保障。
+** 在潜行的同时跳跃仍然可以脱离这个平面。
+** 当玩家脚部悬空时，该限制将暂时失效。因此，若玩家从[[楼梯]]或其他潜行时也能走下的低矮平面边界走下并进入悬空状态，此时若持续前进且速度过快（如装备了附魔[[迅捷潜行]]的[[靴子]]）或下落时间较长，导致水平位移超出了该支撑面的边缘，玩家可能会因此“走下”本在潜行时无法走下的低矮平面边界，这可能导致玩家坠落。
+* 视线高度会降低0.35格方块。
+** 玩家的人物模型会弯下腰。这个变化可以通过第三人称视角{{only|for=和纸娃娃（关闭“隐藏纸娃娃”选项）|BE}}来观察到。
+* 玩家的移动速度会减慢到正常行走速度的30%（没有装备附魔[[迅捷潜行]]的[[护腿]]时），大约是1.31米/秒。
+* 玩家的水平跳跃速度和单次跳跃的距离会降低。
+* 潜行中的玩家移动时不会有脚步声。
+* 能够被[[敌对生物]]察觉的距离减少20%。
+* 在水中潜行时，玩家将会以更快的速度下沉。
+* 玩家的碰撞箱体积从1.8格降低至{{only|for=1.5|JE}}或{{only|for=1.49|BE}}格，使其可以进入[[台阶]]下方等更矮的空间。
+* 手持方块时对方块按下{{control|使用}}键总是会放置方块，而并非与之互动（如把[[漏斗]]放在箱子上，把[[火把]]插在[[熔炉]]上，把[[红石粉]]放在[[命令方块]]上）。
+* 潜行中的玩家可以对驯服的[[马]]、[[驴]]、[[骡]]、[[僵尸马]]、[[羊驼]]、[[行商羊驼]]、[[鹦鹉螺]]、[[僵尸鹦鹉螺]]，以及[[骆驼]]、[[骆驼尸壳]]、[[运输船]]按下{{control|使用}}键打开对应的GUI而非骑乘。
+* 玩家如果在[[梯子]]或[[藤蔓]]上潜行，则不会向下移动，视觉上像是紧紧抓住梯子横木或是藤蔓。
+** 由于悬空，此时破坏方块的速度仍会下降至原来的{{frac|1|5}}。
+* 在[[岩浆块]]上潜行不会受到伤害。
+* 潜行时踩在[[红石矿石]]上不会使其发光。
+* 玩家在穿着[[皮革靴子]]行走在[[细雪]]上时，可以按下潜行键下降。
+* 多人游戏中，潜行玩家的名字会比正常情况下更浅淡，且在距离32个方块后不可见，同时，其他玩家无法透过固体[[方块]]看到潜行中的玩家的名字。
+* 多人游戏中，潜行玩家不会在[[定位栏]]上显示。
+
+潜行'''不会'''影响：
+* 玩家的跳跃高度以及跳起时的垂直速度。
+* [[耕地]]和作物因跳跃而被踩坏。
+
+== 强制潜行 ==
+玩家的头部到脚部的距离大于等于{{only|for=1.5|JE}}或{{only|for=1.49|BE}}格并小于1.8格时，即使未按下{{ctrl|潜行}}键，也会被强制进入潜行姿态。
+
+在强制潜行时，除非同时主动潜行，否则移动速度变慢和碰撞体积变小外的[[#效果|其他效果]]无法生效。
+
+== 成就 ==
+{{load achievements|sneak-100}}
+
+== 进度 ==
+{{Load advancements|adventure.avoid_vibration}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年5月18日|link=http://forums.tigsource.com/index.php?topic=6273.msg201207#msg201207|潜行机制在TIGSource论坛上被首次提起。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.1.1|加入了潜行机制。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.4|潜行中的玩家可以停在梯子上。}}
+|{{HistoryLine||1.6|dev=Test Build 3|潜行中的玩家也能在半格方块高的台阶边缘上下行走。}}
+|{{HistoryLine||1.6.5|现在潜行时玩家视角的Y轴会降低{{frac|1|16}}格，在此之前是{{frac|3|16}}格。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.3.1|dev=?|潜行中的玩家不再能够跨越方块的边缘，这使得潜行键被松开时玩家不会从方块上掉下去。}}
+|{{HistoryLine||1.4.6|dev=12w49a|玩家可以在潜行中把诸如[[红石粉]]、[[拉杆]]等物品放在可互动方块上了。}}
+|{{HistoryLine||1.6.1|dev=13w16a|潜行现在可用于使玩家离开所有的运输工具，如[[船]]、[[马]]和[[矿车]]。}}
+|{{HistoryLine|||dev=?|潜行玩家手臂位置会移动。}}
+|{{HistoryLine||1.8|dev=?|现在潜行时玩家视角会瞬间降低，在此之前视角会平滑地降低。}}
+|{{HistoryLine||1.9|dev=15w42a|潜行玩家的碰撞箱体积从1.8格降低至1.65格。}}
+|{{HistoryLine|||dev=15w49a|潜行对饥饿值消耗度的增加从0.01/米调整为0.005/米，为步行的一半。}}
+|{{HistoryLine||1.11|dev=16w32a|潜行和普通步行不再影响饥饿值消耗度。}}
+|{{HistoryLine|||dev=16w44a|现在潜行玩家无法走下高度差等于或大于{{frac|5|8}}格方块的平面边界，之前为1格。}}
+|{{HistoryLine||1.13|dev=18w07c|[[玩家]]潜行时的画面过渡得更流畅了。}}
+|{{HistoryLine||1.14|dev=19w12a|现在潜行时玩家的碰撞箱降低至1.5格。}}
+|{{HistoryLine|||dev=19w14a|现在玩家进入1.5-2格高的地方时会使用潜行姿势。}}
+|{{HistoryLine|||dev=pre1|现在玩家进入1.5-2格高的地方时会使用真正的潜行。}}
+|{{HistoryLine||1.17|dev=20w46a|现在玩家在穿着[[皮革靴子]]时，可以通过潜行来沉入[[细雪]]中。}}
+|{{HistoryLine||1.20.5|dev=23w51a|现在潜行保护玩家不走下方块的最小高度差由属性<code>generic.step_height</code>控制（默认为0.6格方块）<ref name="MC-268917" />，此前为{{frac|5|8}}格方块。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.5.0|加入了潜行机制，但仅能通过Xperia PLAY设备上的按键来切换潜行状态。}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了潜行按钮，所有的设备都可以切换潜行状态了。}}
+|{{HistoryLine||0.16.0|dev=build 1|玩家向下飞行时会使用潜行姿态。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|现在可以使用潜行来打开[[羊驼]]的物品栏。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=1.2.0.2|现在可以使用潜行来调整[[盔甲架]]的姿势。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.20|现在潜行时玩家的碰撞箱降低至1.49格。
+|现在玩家进入1.49-2格高的地方时会进入潜行状态。}}
+|{{HistoryLine|||dev=1.19.70.24|暂时回退了玩家潜行时碰撞箱降低至1.49格的相关更改。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.20|exg=short_sneaking_v1|重新加入了玩家潜行时碰撞箱降低至1.49格的相关更改。}}
+|{{HistoryLine||1.20.10|dev=1.20.10.23|玩家潜行时碰撞箱降低至1.49格的相关更改不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.20|现在玩家骑行时会强制取消潜行。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了潜行机制。}}
+}}
+
+== 你知道吗 ==
+* 在[[创造模式]]中，如果玩家按住潜行键并双击空格键试图飞行，玩家将卡在跳起来的高度上直到玩家松开空格键。然而这并不是一个漏洞，因为潜行键同时也是降低飞行高度的按键，所以同时按下这两个键不会使玩家移动。
+* {{in|bedrock}}飞行时降低高度会使玩家展现出潜行姿态。此时的玩家还可以直接在可以互动的方块（箱子、熔炉等）上放置方块；这表明玩家确实处在一种独特的潜行状态。{{in|java}}玩家在向下飞行时不会展现出潜行姿态，但按下{{ctrl|使用}}键时依然不会与方块互动，而是会放置方块，与潜行时一致。
+* {{in|bedrock}}如果当前没有选中任何方块，玩家可以通过尝试向平台外放置方块，效果等同于潜行在方块边缘向后看并放置方块。这一特性在玩家没有潜行时也有效。<ref>{{ytl|Yc6xgkuCdRQ|t=4m5s}}</ref>
+** {{in|java}}玩家必须走到方块的边缘（通常是潜行）并向后看才能放置下一个方块。
+* 如果玩家在[[疾跑]]之后立即潜行，其潜行速度将比没有冲刺的快。
+
+== 画廊 ==
+<gallery>
+Sneaking third person view.png|潜行的侧面视图
+</gallery>
+
+=== Steve ===
+<gallery>
+Sneaking Steve.png
+Sneaking Tennis Steve.png
+Sneaking Tuxedo Steve.png
+Sneaking Athlete Steve.png
+Sneaking Scottish Steve.png
+Sneaking Prisoner Steve.png
+Sneaking Cyclist Steve.png
+Sneaking Boxer Steve.png
+Sneaking Developer Steve.png
+Sneaking Party Steve.png
+</gallery>
+
+=== Alex ===
+<gallery>
+Sneaking Alex.png
+Sneaking Tennis Alex.png
+Sneaking Tuxedo Alex.png
+Sneaking Athlete Alex.png
+Sneaking Swedish Alex.png
+Sneaking Prisoner Alex.png
+Sneaking Cyclist Alex.png
+Sneaking Boxer Alex.png
+Sneaking Developer Alex.png
+Sneaking Party Alex.png
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[de:Schleichen]]
+[[en:Sneaking]]
+[[es:Agacharse]]
+[[fr:S'accroupir]]
+[[ja:スニーク]]
+[[ko:웅크리기]]
+[[nl:Sluipen]]
+[[pl:Skradanie]]
+[[pt:Agachar]]
+[[ru:Приседание]]
+[[uk:Присідання]]

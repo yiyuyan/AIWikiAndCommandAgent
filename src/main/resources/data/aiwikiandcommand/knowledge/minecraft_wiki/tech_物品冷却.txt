@@ -1,0 +1,47 @@
+# 页面: 物品冷却
+# 来源: https://zh.minecraft.wiki/w/%E7%89%A9%E5%93%81%E5%86%B7%E5%8D%B4
+# 分类: Java版独有信息, 基岩版独有信息, 教育版独有信息, 游戏内容
+# 抓取时间: 2026-07-14 17:31:52
+# 原始 Wikitext 内容:
+
+{{About|物品使用后的冷却机制|在[[Java版]]中武器的攻击冷却|攻击冷却||冷却}}
+'''物品冷却''' （也被称为'''使用冷却'''）是在一段时间内限制物品使用的机制。
+
+== 机制 ==
+对于大部分拥有冷却的物品，物品冷却在{{control|使用}}后触发。物品冷却表现为在[[快捷栏]]和[[物品栏]]中，物品不断下降的透明白色进度条。当冷却进度条下降到底部时，物品冷却完毕。物品冷却会影响玩家物品栏中的所有同类物品。当玩家用[[盾牌]]格挡[[斧]]或[[监守者]]的近战攻击后，盾牌会被停用，进入5秒冷却。在[[基岩版]]中，使用[[矛]]进行一次戳刺后，矛会进入冷却。
+
+== 数据组件 ==
+{{exclusive|je|section=1}}
+数据组件<code>[[数据组件#use_cooldown|use_cooldown]]</code>可以控制物品的冷却时间。如{{cmd|give @s snowball[use_cooldown{{=}}{seconds:1}]}}可以给予玩家一个冷却时间为1秒的雪球。如果没有定义{{nbt|string|cooldown_group}}，该物品会使用物品的ID作为冷却组ID；否则使用{{nbt|string|cooldown_group}}的值。
+
+数据组件<code>[[数据组件#block_attacks|block_attacks]]</code>中，{{nbt|float|disable_cooldown_scale}}可以控制物品被可停用格挡的攻击击中时，物品冷却时长的乘数。如果该值为<code>0</code>，则物品不能被攻击停用。
+
+== 受冷却影响的物品 ==
+以下是受冷却影响的物品：
+* {{ItemLink|Ender Pearl}}（{{convert|20}}）
+* {{ItemLink|Chorus Fruit}}（{{convert|20}}）
+* {{ItemLink|Ice Bomb}}（{{convert|20}}）{{Only|Bedrock|Education}}
+* {{ItemLink|Wind Charge}}（{{convert|20}}）
+* {{ItemLink|Goat Horn}}（{{convert|140}}）
+* {{ItemLink|Shield}}（{{convert|100}}）
+* {{ItemLink|Wooden Spear}}（{{convert|13}}）{{Only|Bedrock}}
+* {{ItemLink|Stone Spear}}（{{convert|15}}）{{Only|Bedrock}}
+* {{ItemLink|Copper Spear}}（{{convert|17}}）{{Only|Bedrock}}
+* {{ItemLink|Iron Spear}}（{{convert|19}}）{{Only|Bedrock}}
+* {{ItemLink|Golden Spear}}（{{convert|19}}）{{Only|Bedrock}}
+* {{ItemLink|Diamond Spear}}（{{convert|21}}）{{Only|Bedrock}}
+* {{ItemLink|Netherite Spear}}（{{convert|23}}）{{Only|Bedrock}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.9|dev=15w34c|为[[末影珍珠]]和[[紫颂果]]加入冷却。}}
+|{{HistoryLine||1.21.2|dev=24w34a|加入了<code>use_cooldown</code>[[数据组件]]。}}
+}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[en:Use cooldown]]
+[[fr:Temps de chargement d'utilisation]]
+[[pt:Tempo de uso]]

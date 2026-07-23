@@ -1,0 +1,808 @@
+# 页面: 监守者
+# 来源: https://zh.minecraft.wiki/w/%E7%9B%91%E5%AE%88%E8%80%85
+# 分类: Java版即将到来/26.3, Java版独有信息, 使用DynamicPageList4的页面, 使用简单计算器的页面, 基岩版独有信息, 实体, 实验性内容/2026 年第 3 次更新, 敌对生物, 教育版独有信息
+# 抓取时间: 2026-07-14 17:32:37
+# 原始 Wikitext 内容:
+
+{{about|常规版本中的监守者|25w14craftmine中的监守者|监守者/25w14craftmine}}
+{{about|由幽匿尖啸体召唤的生物|其他用途|守卫（消歧义）}}
+{{Infobox entity
+|image=Warden.gif
+|invimage=Warden Spawn Egg
+|health={{Hp|500}}
+|behavior=敌对生物
+|damage=
+'''近战攻击：'''<br>{{AutoDmg|30|jed=停用目标的[[盾牌]]}}<br>
+'''直接伤害（音波）（无视[[盔甲机制#保护魔咒机制|保护魔咒]]和盾牌）：'''<br>{{AutoDmg|10}}
+|size='''正常：'''<br>高度：2.9格<br>宽度：0.9格<br>
+'''现身或钻地时：'''<br>高度：{{only|je|for=1.0格}}或{{only|be|for=2.9格}}<br>宽度：0.9格
+|spawn=见[[#生成|生成]]
+|usableitems={{ItemLink|Name Tag}}
+}}
+{{Relevant tutorial|探索深暗之域和远古城市/击杀监守者}}
+
+'''监守者（Warden）'''是一种高大而危险的[[敌对生物]]，会根据振动和气息判断[[生物]]的位置。
+
+== 生成 ==
+当自然生成的[[幽匿尖啸体]]（{{cd|can_summon}}值为{{cd|true}}）被激活后，玩家的警告等级达到4且该幽匿尖啸体半径24格内不存在其他监守者时，监守者便会尝试生成于以该幽匿尖啸体为中心的11×13×11格范围内。满足生成条件的方块必须是上表面完整的；且'''在范围内'''该方块上方的方块均无[[碰撞箱]]（例如[[空气]]、[[花]]），也不存在其他[[生物]]。[[亮度]]等级不会影响监守者的生成。每次激活最多会尝试生成监守者20次，若范围内没有可选方块，则视作生成失败。
+
+监守者的生成动画表现为缓慢从方块中“钻出”（共持续6.7秒），期间自该方块上产生其破坏粒子，但不会实际破坏方块。
+
+{{in|je}}当游戏规则{{gamerule|spawn_wardens}}设为{{cd|false}}时，幽匿尖啸体无法生成监守者。
+
+== 掉落物 ==
+{{DropTable|name=Warden
+|{{DropLine|name=Sculk Catalyst}}
+}}
+* {{xp|5}}（若被[[玩家]]或驯服的[[狼]]杀死）
+
+== 行为 ==
+=== 探测 ===
+==== 振动感知 ====
+[[File:Attracted Warden.png|缩略图|由于持续感知到振动，监守者不能钻地]]
+监守者没有视力，但能感知球形半径16格内的物体振动并寻找振动源的位置，感知到振动时会有[[粒子#vibration|信号粒子]]从振动源传向其触角，有2秒的冷却时间。{{in|be}}监守者不能感知到飞行生物的振动。<ref>{{bug|MCPE-154055}}<!--未完全修复--></ref>
+
+监守者不会检测[[潜行]]的生物发出的部分振动（如行走、摔落或掷出弹射物时发出的振动；潜行时踩踏[[伏聆振測器]]、[[校频幽匿感测体]]的振动除外）和其他监守者发出的所有振动。[[羊毛]]会吸收经过的信号，被吸收的信号不会被监守者接收。此外，羊毛、{{in update|for=[[羊毛楼梯]]、[[羊毛台阶]]|drop 3 2026}}、[[地毯]]的[[物品实体]]掉在地上，在上述方块上行走以及放置上述方块发出的振动不会被检测。
+
+==== 嗅探 ====
+以监守者为中心的49×51×49格范围内存在生物时，监守者每隔5-10秒会嗅探一次周围的气味（动画共持续4.2秒）。嗅探动画结束后能够探测到水平半径6格、垂直半径20格内的绝大多数[[生物]]，并且会朝最近的生物走去。当第二次嗅探后探测到的生物仍然在原位置，则会增加其愤怒值。
+
+==== 探测无果 ====
+在没有检测到目标时，监守者会缓慢地在一定范围内来回走动并摆动其身体。如果连续60秒没有锁定目标且未感知到振动，监守者会钻入脚下的任意方块并消失（动画共持续5秒）。被命名的监守者不会钻地。<ref>{{bug|MC-250252|||WAI}}</ref>
+
+{{in|je}}由于一个漏洞，使用[[命令]]召唤的带有[[NBT格式|NBT]]的监守者会立刻钻地，即使这个NBT的内容是空的、这个监守者被命名或它被设置不可消失<ref>{{bug|MC-249393|||Won't Fix}}</ref>，除非手动修改监守者的记忆。
+
+=== 愤怒值 ===
+监守者对可疑目标的愤怒值（{{cd|anger}}）在0-150之间。
+
+监守者空闲音效的愤怒程度会随着愤怒值增加而增加。愤怒值达到40以上时，空闲音效会变得愤怒；愤怒值达到80以上时，空闲音效会变得狂怒。
+
+愤怒值从非0值开始增加时，监守者会播放察觉音效。愤怒值低于40时，{{in|JE|nc=1}}[[字幕]]提示“{{tp|subtitles.entity.warden.listening}}”；愤怒值不低于40时，{{in|JE|nc=1}}字幕提示“{{tp|subtitles.entity.warden.listening_angry}}”。
+
+{| class="wikitable"
+|-
+! 事件 !! 愤怒值变化 !! 描述
+|-
+| [[弹射物]]发出第一次振动 || +10 || 愤怒的目标将会是该弹射物本身。
+|-
+| 锁定目标 || +20 || &dash;
+|-
+| 生物发出振动 || rowspan="4" |+35 || &dash;
+|-
+| 在同一位置被监守者嗅探到一次 || &dash;
+|-
+| 每秒内与监守者发生接触一次 || &dash;
+|-
+| 5秒内监守者感知到2次弹射物振动 || 愤怒将转移至发射该弹射物的实体。
+|-
+| 对监守者发起近战攻击 || rowspan="2" |+100 || rowspan="2" |监守者将跳过怒吼动画并立即反击。
+|-
+| 距离监守者5格以内时发起弹射物攻击
+|-
+| 距离监守者5格以外发起弹射物攻击 || +130 || &dash;
+|-
+| 每秒被动递减 || -1 || &dash;
+|-
+| 目标离开范围 || rowspan="3" |归零 || &dash;
+|-
+| 目标死亡 || &dash;
+|-
+| 目标玩家切换为[[创造模式]]或[[旁观模式]] || &dash;
+|-
+|}
+
+监守者胸前闪动的核心会发出低沉的心跳声。其有锁定目标时，闪动频率和心跳声会加快。
+
+=== 锁定目标 ===
+监守者对某一目标的愤怒值达80及以上时，会锁定该目标；对其愤怒值降至80以下则取消锁定。锁定目标时，监守者将确定目标准确位置并发出持续4.2秒的怒吼，对其增加20愤怒值，然后直接迅速上前发动攻击。
+
+如果锁定目标的监守者附近没有对其愤怒值达到80及以上的玩家，则监守者不会转移目标。当存在对其愤怒值达到80及以上的玩家时，监守者会将目标转移至该玩家，并进行攻击。监守者转移目标时将停止当下的攻击行为并再次怒吼，除非目标激怒监守者的方式会让其跳过怒吼动画并立即反击。
+
+监守者追逐锁定目标的移动速度近似于玩家疾跑，且无论目标是否处于封闭空间、是否发出振动都不会影响监守者对目标的追逐。
+
+=== 近战攻击 ===
+监守者对锁定目标每0.9秒尝试发动一次近战攻击，使用[[盾牌]]格挡其近战攻击会使盾牌进入5秒的冷却时间。
+
+=== 远程攻击 ===
+[[File:Particle sonic boom.png|缩略图|监守者的远程攻击方式]]
+若目标与监守者之间有方块阻隔，或目标持续逃跑，监守者将会开始蓄力并发动远程攻击。
+
+具体需要满足以下条件：
+* 目标位于监守者水平半径15格、垂直半径20格距离内。
+* 在监守者无法使用近战攻击的情况下超过10秒。
+* 监守者距上一次对目标发动近战攻击后至少{{only|for=2秒|je}}或{{only|for=5秒|be}}。
+* 监守者距上一次对目标发动远程攻击后2秒以上。
+
+发动远程攻击前，监守者会低头并蓄力1.7秒，监守者纹理中的“胸骨”将会张开，一道声波状的[[粒子#sonic_boom|攻击波粒子]]会自其胸前发出，之后进入长1.3秒的攻击后摇，后摇结束后会进入2秒的冷却时间，随后再次蓄力并发动远程攻击。监守者发动远程攻击时仍然会追赶目标。如果目标在监守者蓄力期间退出远程攻击的范围，则蓄力过程会立即终止，在蓄力期间监守者无法发动近战攻击。
+
+{{in|be}}监守者的攻击动画和蓄力计时会因目标脱离远程攻击范围而截止。但目标重新进入攻击范围时，监守者仅会恢复被截止的蓄力计时，然后立即发动一次远程攻击。
+
+远程攻击可以穿过任何方块（包括[[羊毛]]）且不可被盾牌阻挡。虽看似有粒子效果构成的弹道，但此攻击直接作用于一个目标且处于作用范围内时无法回避。被击中的目标默认会在水平方向被击退7格、垂直方向被击飞0.5格。
+
+远程攻击的伤害类型为{{cd|sonic_boom}}。该类型的伤害无视[[护甲值]]、[[保护]]类魔咒和盾牌的阻挡，{{only|for=不能触发[[荆棘]]魔咒<ref>{{bug|MC-250157|||WAI}}</ref>，且[[女巫]]会使该伤害降低85%|JE}}。
+
+=== 特殊情况 ===
+{{in|je}}监守者不会攻击[[美西螈#装死|装死]]中的[[美西螈]]，但能察觉到它的存在。
+
+监守者之间永远不会互相攻击。
+
+{{in|je}}监守者不会攻击处于同一[[队伍]]的生物。
+
+=== 其他 ===
+每隔{{convert|6|秒}}，监守者会搜寻半径20格内[[黑暗]]效果剩余时间低于{{convert|10|秒}}的[[生存]]或[[冒险]]模式玩家，对其施加{{convert|13|秒}}的黑暗效果。
+
+监守者产生的任何振动都不会被[[幽匿感测体]]检测。
+
+监守者具有100%[[伤害#击退抗性|击退抗性]]，但{{in|je|nc=1}}能被爆炸和[[末影龙]]的冲撞强行击飞（包括现身和钻地期间）。
+
+监守者免疫火焰伤害，无法着火。但进入[[细雪]]仍会颤抖并受到冰冻伤害。
+
+监守者不会主动进入[[船]]或[[矿车]]，寻路时不会避开[[铁轨]]、[[细雪]]和[[岩浆块]]。
+
+监守者在[[水]]和[[熔岩]]中会上浮。
+
+监守者胸前闪动的核心和感知到震动时的卷须拥有发亮纹理，在暗处也清楚可见，但不会影响周围方块的实际[[亮度]]。
+
+监守者在探测目标时寻路会避开悬崖。
+
+监守者不会探测其他监守者、[[盔甲架]]、[[船]]等非生物实体{{Only|BE}}、{{only|be|ee|for=[[智能体]]}}、[[创造模式]]的玩家和[[旁观模式]]的玩家。
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Warden agitated1.ogg
+|sound2=Warden agitated2.ogg
+|sound3=Warden agitated3.ogg
+|sound4=Warden agitated4.ogg
+|sound5=Warden agitated5.ogg
+|sound6=Warden agitated6.ogg
+|subtitle={{tp|subtitles.entity.warden.agitated}}
+|source=敌对生物
+|description=感到可疑时随机播放
+|id=entity.warden.agitated
+|translationkey=subtitles.entity.warden.agitated
+}}
+{{Sound table
+|sound=Warden ambient1.ogg
+|sound2=Warden ambient2.ogg
+|sound3=Warden ambient3.ogg
+|sound4=Warden ambient4.ogg
+|sound5=Warden ambient5.ogg
+|sound6=Warden ambient6.ogg
+|sound7=Warden ambient7.ogg
+|sound8=Warden ambient8.ogg
+|sound9=Warden ambient9.ogg
+|sound10=Warden ambient10.ogg
+|sound11=Warden ambient11.ogg
+|sound12=Warden ambient12.ogg
+|subtitle={{tp|subtitles.entity.warden.ambient}}
+|source=敌对生物
+|description=空闲时随机播放
+|id=entity.warden.ambient
+|translationkey=subtitles.entity.warden.ambient
+}}
+{{Sound table
+|sound=Warden angry1.ogg
+|sound2=Warden angry2.ogg
+|sound3=Warden angry3.ogg
+|sound4=Warden angry4.ogg
+|sound5=Warden angry5.ogg
+|sound6=Warden angry6.ogg
+|subtitle={{tp|subtitles.entity.warden.angry}}
+|source=敌对生物
+|description=锁定目标后随机播放
+|id=entity.warden.angry
+|translationkey=subtitles.entity.warden.angry
+}}
+{{Sound table
+|sound=Warden attack impact1.ogg
+|sound2=Warden attack impact2.ogg
+|subtitle={{tp|subtitles.entity.warden.attack_impact}}
+|source=敌对生物
+|description=攻击生物
+|id=entity.warden.attack_impact
+|translationkey=subtitles.entity.warden.attack_impact
+}}
+{{Sound table
+|sound=Warden death1.ogg
+|sound2=Warden death2.ogg
+|subtitle={{tp|subtitles.entity.warden.death}}
+|source=敌对生物
+|description=死亡
+|id=entity.warden.death
+|translationkey=subtitles.entity.warden.death
+}}
+{{Sound table
+|sound=Warden dig.ogg
+|subtitle={{tp|subtitles.entity.warden.dig}}
+|source=敌对生物
+|description=钻回地底
+|id=entity.warden.dig
+|translationkey=subtitles.entity.warden.dig
+}}
+{{Sound table
+|sound=Warden emerge.ogg
+|subtitle={{tp|subtitles.entity.warden.emerge}}
+|source=敌对生物
+|description=从地下钻出
+|id=entity.warden.emerge
+|translationkey=subtitles.entity.warden.emerge
+}}
+{{Sound table
+|sound=Warden heartbeat1.ogg
+|sound2=Warden heartbeat2.ogg
+|sound3=Warden heartbeat3.ogg
+|sound4=Warden heartbeat4.ogg
+|subtitle={{tp|subtitles.entity.warden.heartbeat}}
+|source=敌对生物
+|description=核心闪动时播放
+|id=entity.warden.heartbeat
+|translationkey=subtitles.entity.warden.heartbeat
+}}
+{{Sound table
+|sound=Warden hurt1.ogg
+|sound2=Warden hurt2.ogg
+|sound3=Warden hurt3.ogg
+|sound4=Warden hurt4.ogg
+|subtitle={{tp|subtitles.entity.warden.hurt}}
+|source=敌对生物
+|description=受伤
+|id=entity.warden.hurt
+|translationkey=subtitles.entity.warden.hurt
+}}
+{{Sound table
+|sound=Warden listening1.ogg
+|sound2=Warden listening2.ogg
+|sound3=Warden listening3.ogg
+|sound4=Warden listening4.ogg
+|sound5=Warden listening5.ogg
+|subtitle={{tp|subtitles.entity.warden.listening}}
+|source=敌对生物
+|description=侦测到生物存在且未进入狂暴状态
+|id=entity.warden.listening
+|translationkey=subtitles.entity.warden.listening
+}}
+{{Sound table
+|sound=Warden listening angry1.ogg
+|sound2=Warden listening angry2.ogg
+|sound3=Warden listening angry3.ogg
+|sound4=Warden listening angry4.ogg
+|sound5=Warden listening angry5.ogg
+|subtitle={{tp|subtitles.entity.warden.listening_angry}}
+|source=敌对生物
+|description=生成失败或侦测到生物存在且已经进入狂暴状态
+|id=entity.warden.listening_angry
+|translationkey=subtitles.entity.warden.listening_angry
+}}
+{{Sound table
+|sound=Warden nearby close1.ogg
+|sound2=Warden nearby close2.ogg
+|sound3=Warden nearby close3.ogg
+|sound4=Warden nearby close4.ogg
+|subtitle={{tp|subtitles.entity.warden.nearby_close}}
+|source=敌对生物
+|description=收到幽匿尖啸体的信号1次
+|id=entity.warden.nearby_close
+|translationkey=subtitles.entity.warden.nearby_close
+}}
+{{Sound table
+|sound=Warden nearby closer1.ogg
+|sound2=Warden nearby closer2.ogg
+|sound3=Warden nearby closer3.ogg
+|subtitle={{tp|subtitles.entity.warden.nearby_closer}}
+|source=敌对生物
+|description=收到幽匿尖啸体的信号2次
+|id=entity.warden.nearby_closer
+|translationkey=subtitles.entity.warden.nearby_closer
+}}
+{{Sound table
+|sound=Warden nearby closest1.ogg
+|sound2=Warden nearby closest2.ogg
+|sound3=Warden nearby closest3.ogg
+|subtitle={{tp|subtitles.entity.warden.nearby_closest}}
+|source=敌对生物
+|description=收到幽匿尖啸体的信号3次
+|id=entity.warden.nearby_closest
+|translationkey=subtitles.entity.warden.nearby_closest
+}}
+{{Sound table
+|sound=Warden roar1.ogg
+|sound2=Warden roar2.ogg
+|sound3=Warden roar3.ogg
+|sound4=Warden roar4.ogg
+|sound5=Warden roar5.ogg
+|subtitle={{tp|subtitles.entity.warden.roar}}
+|source=敌对生物
+|description=锁定目标
+|id=entity.warden.roar
+|translationkey=subtitles.entity.warden.roar
+}}
+{{Sound table
+|sound=Warden sniff1.ogg
+|sound2=Warden sniff2.ogg
+|sound3=Warden sniff3.ogg
+|sound4=Warden sniff4.ogg
+|subtitle={{tp|subtitles.entity.warden.sniff}}
+|source=敌对生物
+|description=嗅气味
+|id=entity.warden.sniff
+|translationkey=subtitles.entity.warden.sniff
+}}
+{{Sound table
+|sound=Warden sonic boom1.ogg
+|sound2=Warden sonic boom2.ogg
+|sound3=Warden sonic boom3.ogg
+|sound4=Warden sonic boom4.ogg
+|subtitle={{tp|subtitles.entity.warden.sonic_boom}}
+|source=敌对生物
+|description=进行远程攻击
+|id=entity.warden.sonic_boom
+|translationkey=subtitles.entity.warden.sonic_boom
+}}
+{{Sound table
+|sound=Warden sonic charge1.ogg
+|sound2=Warden sonic charge2.ogg
+|sound3=Warden sonic charge3.ogg
+|sound4=Warden sonic charge4.ogg
+|subtitle={{tp|subtitles.entity.warden.sonic_charge}}
+|source=敌对生物
+|description=准备远程攻击
+|id=entity.warden.sonic_charge
+|translationkey=subtitles.entity.warden.sonic_charge
+}}
+{{Sound table
+|sound=Warden step1.ogg
+|sound2=Warden step2.ogg
+|sound3=Warden step3.ogg
+|sound4=Warden step4.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=敌对生物
+|description=行走
+|id=entity.warden.step
+|translationkey=subtitles.block.generic.footsteps
+}}
+{{Sound table
+|sound=Warden tendril clicks1.ogg
+|sound2=Warden tendril clicks2.ogg
+|sound3=Warden tendril clicks3.ogg
+|sound4=Warden tendril clicks4.ogg
+|sound5=Warden tendril clicks5.ogg
+|sound6=Warden tendril clicks6.ogg
+|subtitle={{tp|subtitles.entity.warden.tendril_clicks}}
+|source=敌对生物
+|description=侦测到振动
+|id=entity.warden.tendril_clicks
+|translationkey=subtitles.entity.warden.tendril_clicks
+|foot=1
+}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Warden agitated1.ogg
+|sound2=Warden agitated2.ogg
+|sound3=Warden agitated3.ogg
+|sound4=Warden agitated4.ogg
+|sound5=Warden agitated5.ogg
+|sound6=Warden agitated6.ogg
+|source=敌对生物
+|description=感到可疑时随机播放
+|id=mob.warden.agitated
+|typeid=agitated
+|sounddistance=80
+|soundvolume=10.0
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden angry1.ogg
+|sound2=Warden angry2.ogg
+|sound3=Warden angry3.ogg
+|sound4=Warden angry4.ogg
+|sound5=Warden angry5.ogg
+|sound6=Warden angry6.ogg
+|source=敌对生物
+|description=锁定目标后随机播放
+|id=mob.warden.angry
+|typeid=angry
+|sounddistance=80
+|soundvolume=10.0
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden attack impact1.ogg
+|sound2=Warden attack impact2.ogg
+|source=敌对生物
+|description=攻击生物
+|id=mob.warden.attack
+|typeid=attack
+|sounddistance=80
+|soundvolume=10.0
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden tendril clicks1.ogg
+|sound2=Warden tendril clicks2.ogg
+|sound3=Warden tendril clicks3.ogg
+|sound4=Warden tendril clicks4.ogg
+|sound5=Warden tendril clicks5.ogg
+|sound6=Warden tendril clicks6.ogg
+|source=敌对生物
+|description=侦测到振动
+|id=mob.warden.clicking
+|typeid=clicking
+|sounddistance=80
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden death1.ogg
+|sound2=Warden death2.ogg
+|source=敌对生物
+|description=死亡
+|id=mob.warden.death
+|typeid=death
+|soundpitch=0.8-1.0
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden heartbeat1.ogg
+|sound2=Warden heartbeat2.ogg
+|sound3=Warden heartbeat3.ogg
+|sound4=Warden heartbeat4.ogg
+|source=敌对生物
+|description=核心闪动时播放
+|id=mob.warden.heartbeat
+|typeid=heartbeat
+|sounddistance=80
+|soundvolume=5.0
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden hurt1.ogg
+|sound2=Warden hurt2.ogg
+|sound3=Warden hurt3.ogg
+|sound4=Warden hurt4.ogg
+|source=敌对生物
+|description=受伤
+|id=mob.warden.hurt
+|typeid=hurt
+|soundpitch=0.8-1.0
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden listening1.ogg
+|sound2=Warden listening2.ogg
+|sound3=Warden listening3.ogg
+|sound4=Warden listening4.ogg
+|sound5=Warden listening5.ogg
+|source=敌对生物
+|description=侦测到生物存在且未进入狂暴状态
+|id=mob.warden.listening
+|typeid=listening
+|sounddistance=160
+|soundvolume=10.0
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden listening angry1.ogg
+|sound2=Warden listening angry2.ogg
+|sound3=Warden listening angry3.ogg
+|sound4=Warden listening angry4.ogg
+|sound5=Warden listening angry5.ogg
+|source=敌对生物
+|description=生成失败或侦测到生物存在且已经进入狂暴状态
+|id=mob.warden.listening_angry
+|typeid=listening_angry
+|sounddistance=160
+|soundvolume=10.0
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden nearby close1.ogg
+|sound2=Warden nearby close2.ogg
+|sound3=Warden nearby close3.ogg
+|sound4=Warden nearby close4.ogg
+|source=敌对生物
+|description=收到幽匿尖啸体的信号1次
+|id=mob.warden.nearby_close
+|typeid=nearby_close
+|sounddistance=80
+|soundvolume=5.0
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden nearby closer1.ogg
+|sound2=Warden nearby closer2.ogg
+|sound3=Warden nearby closer3.ogg
+|source=敌对生物
+|description=收到幽匿尖啸体的信号2次
+|id=mob.warden.nearby_closer
+|typeid=nearby_closer
+|sounddistance=80
+|soundvolume=5.0
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden nearby closest1.ogg
+|sound2=Warden nearby closest2.ogg
+|sound3=Warden nearby closest3.ogg
+|source=敌对生物
+|description=收到幽匿尖啸体的信号3次
+|id=mob.warden.nearby_closest
+|typeid=nearby_closest
+|sounddistance=80
+|soundvolume=5.0
+|soundpitch=0.8-1.2
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden roar1.ogg
+|sound2=Warden roar2.ogg
+|sound3=Warden roar3.ogg
+|sound4=Warden roar4.ogg
+|sound5=Warden roar5.ogg
+|source=敌对生物
+|description=锁定目标
+|id=mob.warden.roar
+|typeid=roar
+|sounddistance=48
+|soundvolume=5.0
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden sonic boom1.ogg
+|sound2=Warden sonic boom2.ogg
+|sound3=Warden sonic boom3.ogg
+|sound4=Warden sonic boom4.ogg
+|source=敌对生物
+|description=进行远程攻击
+|id=mob.warden.sonic_boom
+|typeid=sonic_boom
+|sounddistance=160
+|soundvolume=3.0
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden sonic charge1.ogg
+|sound2=Warden sonic charge2.ogg
+|sound3=Warden sonic charge3.ogg
+|sound4=Warden sonic charge4.ogg
+|source=敌对生物
+|description=准备远程攻击
+|id=mob.warden.sonic_charge
+|typeid=sonic_charge
+|sounddistance=160
+|soundvolume=3.0
+|soundpreload=1
+}}
+{{Sound table
+|sound=Warden step1.ogg
+|sound2=Warden step2.ogg
+|sound3=Warden step3.ogg
+|sound4=Warden step4.ogg
+|source=敌对生物
+|description=行走
+|id=mob.warden.step
+|typeid=step
+|sounddistance=160
+|soundvolume=10.0
+|soundpreload=1
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Warden
+|spritetype=entity
+|nameid=warden
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Warden
+|spritetype=entity
+|nameid=warden
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+监守者有与之相联系的包含许多该生物属性的存档数据。 
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|Monster-Hunter;it-spreads}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{Load advancements|adventure.avoid_vibration;adventure.kill_mob_near_sculk_catalyst}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2020年|link=https://www.youtube.com/watch?v=cd7cVNeb0Uk|设计了监守者的前身“Shade”、[[File:Warden (pre-release 1).png|32px]][[File:Stalker transform.gif|32px]]“Stalker”和 [[File:Warden (pre-release 3).png|32px]]“Hollowed”。}}
+|{{HistoryLine||2020年10月3日|link=https://www.youtube.com/watch?v=DWZIfsaIgtE|[[File:Warden JE1 BE1.png|32px]] [[Minecraft Live 2020]]展示了监守者，其最初计划为[[洞穴与山崖]]的一部分。}}
+|{{HistoryLine||2021年10月16日|link=https://www.youtube.com/watch?v=w6zLprHHZOk|[[Minecraft Live 2021]]再次展示了监守者，其被推迟到了[[荒野更新]]。}}
+|{{HistoryLine||2021年12月18日|link={{tweet|kingbdogz|1472119177712447490}}|[[Brandon Pearce]]展示了监守者的行为。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19|dev=exp1|[[File:Warden JE1 BE1.png|32px]] 加入了监守者。}}
+|{{HistoryLine|||dev=22w12a|在常规快照中加入了监守者。
+|增加了监守者的攻击距离。
+|监守者不再属于[[亡灵生物]]。
+|监守者现在免疫火焰伤害，并且会在流体中迅速上浮。
+|监守者现在有新的攻击动画。}}
+|{{HistoryLine|||dev=22w14a|现在所有与监守者发生接触的生物都会将其激怒，不再限于玩家。
+|降低了监守者在流体中的上浮速度。
+|增大了监守者的阴影尺寸。}}
+|{{HistoryLine|||dev=22w15a|加入了监守者的远程攻击方式。
+|增加了监守者的嗅探范围，并将嗅闻时垂直方向的敌对范围由6格改为20格。}}
+|{{HistoryLine|||dev=22w17a|对监守者的远程攻击作以下调整：
+* 现在无视[[盾牌]]和[[护甲值]]。
+* 造成的伤害由之前的{{hp|30}}（基准值，受难度影响）减为{{hp|10}}（统一值，不受难度影响）。
+* 发动攻击的冷却时间由5秒减至2秒。
+* 现在玩家由此死亡时会显示特有的[[死亡消息]]：{{tp|death.attack.sonic_boom|''<死者>''}}
+|现在死亡时会掉落1个[[幽匿催发体]]。}}
+|{{HistoryLine|||dev=22w18a|更改了监守者的音波尖啸粒子纹理。
+|监守者现在会侦测最近的振动信号，而非之前的1刻内的首个振动信号。}}
+|{{HistoryLine|||dev=22w19a|现在监守者只会生成在固体方块上。
+|现在监守者远程攻击造成的伤害受难度影响，基准值与之前相同。}}
+|{{HistoryLine|||dev=pre1|监守者现在只会在具有完整固体表面的方块上生成。}}
+|{{HistoryLine|||dev=pre2|监守者现在会在卡在液体中时直接消失，而不是钻入地底。}}
+|{{HistoryLine|||dev=pre3|监守者的远程攻击现在会无视可减伤的魔咒。}}
+|{{HistoryLine||1.20|dev=23w14a|现在监守者能侦测到[[紫水晶块]]的共振。}}
+|{{HistoryLine||26.1|dev=snapshot-4|由于漏洞，现在监守者锁定[[恶魂]]后只会不断地怒吼，而不会对其发起攻击。<ref name="MC-306972">{{bug|MC-306972|||Fixed}}</ref>}}
+|{{HistoryLine||26.2|dev=snapshot-7|现在监守者锁定恶魂后会在怒吼完后对其发起攻击，而不再会持续怒吼。<ref name="MC-306972"/>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||2021年12月9日|link={{tweet|kingbdogz|1469019573936656385}}|将监守者的代码移植到了基岩版。}}
+|{{HistoryLine||2021年12月17日|link={{tweet|marcio_os|1471913396228534282}}|Marcio展示了监守者钻入地面的动画。}}
+|{{HistoryLine||1.18.30|dev=1.18.30.32|exg=next_major_update|[[File:Warden JE1 BE1.png|32px]] 加入了监守者。}}
+|{{HistoryLine||1.19.0|dev=1.19.0.20|监守者不再属于[[实验性玩法]]。
+|为监守者加入了新音效。
+|监守者不再会被其他监守者或非生物实体激怒。
+|监守者现在会对离开其视线的目标实体保存愤怒值。
+|监守者处于阳光下时不再会立即钻回地面。
+|监守者现在会被接触它的玩家所激怒。
+|现在监守者会在和平难度下消失。}}
+|{{HistoryLine|||dev=1.19.0.24|增加了监守者的嗅探范围，由16格更改为24格。
+|现在监守者被玩家或驯服的狼杀死后会掉5点经验，而不是1-3点。}}
+|{{HistoryLine|||dev=1.19.0.26|加入了监守者的远程攻击方式。
+|将监守者嗅闻时垂直方向的敌对范围由6格改为20格。
+|现在所有与监守者发生接触的生物都会将其激怒，不再限于玩家。}}
+|{{HistoryLine|||dev=1.19.0.28|对监守者的远程攻击作以下调整：<ul>
+* 现在无视盾牌和护甲值。
+* 造成的伤害由之前的{{hp|30}}减为{{hp|10}}。
+* 发动攻击的冷却时间由5秒减至2秒。
+* 现在玩家由此死亡时会显示特有的死亡消息。</ul>
+|现在死亡时会掉落1个[[幽匿催发体]]。
+|现在被弹射物分散注意力时，其愤怒值会相应增加。非频繁投掷会增加10，频繁投掷会增加30。}}
+|{{HistoryLine|||dev=1.19.0.30|更改了监守者的音波尖啸粒子纹理。
+|现在监守者会每隔6秒给予玩家一次黑暗效果，而不是不断施加黑暗效果。}}
+|{{HistoryLine||1.19.10|dev=1.19.10.20|监守者现在会在卡在液体中时直接消失，而不是钻入地底。}}
+|{{HistoryLine|||dev=1.19.10.21|监守者的远程攻击现在会无视可减伤的魔咒。}}
+|{{HistoryLine||1.19.20|dev=1.19.20.20|监守者现在会侦测最近的振动信号，而非之前的1刻内的首个振动信号。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|现在监守者能侦测到紫水晶块的共振。}}
+}}
+
+== 你知道吗 ==
+* 监守者的概念最早出现于[[下界更新]]中，起初为一种新[[猪灵]]变种的废稿：它们没有视力但能对声音作出反应，<ref name="mcnet">{{article|meet-warden|Meet the Warden}}</ref>会生成于下界深处的某种生物群系，会利用嗅觉寻找并尝试挖掘周围的金矿石。<ref>{{ytl|uraHCIYRjsM|Podcast: Warden Iterations with kingbdogz §Warden origins|Minecraft Ideas Academy|November 22, 2022|t=2728s}}</ref>
+* 监守者拥有三个被弃用的设计：
+** 监守者的最初设计「Shade」是一种深色的人-{}-形生物，有着发光的眼睛。玩家离得越近，它的透明度越高，并且会在玩家身后发出其他生物的音效。<ref name="shade&stalker">{{ytl|uraHCIYRjsM|Podcast: Warden Iterations with kingbdogz §The Shade and Stalker|Minecraft Ideas Academy|November 22, 2022|t=2861s}}</ref>
+** 监守者的第二个设计「Stalker」有不对称的外观，原计划生成于一种遍布图腾的生物群系。其自身也会伪装成图腾雕塑，在玩家试图挖掘其胸口的发光水晶时苏醒并追踪玩家。<ref name="mcnet"/>它能通过变换身形钻入1格宽、1格高的通道。<ref name="mcnet"/><ref name="shade&stalker"/>然而它由于看起来过于笨拙而被弃用了。<ref>{{tweet|kingbdogz|1484953764205318147|Some ideas we had for early iterations of the Warden. stalkers were going to have a glowing item in the middle of its chest that you would also randomly find throughout the biome floating on totems. The idea was stalkers would stand perfectly still to "fake" those glowing items.|January 22, 2022}}</ref>
+*** 该变种后来成为[[嘎枝]]的原型<ref>{{ytl|qnX6sPFjXnA|t=1548s|Minecraft Live 2024|Minecraft|September 28, 2024}}</ref>。
+** 监守者的第三个设计「Hollowed」浑身有着许多孔洞，由于过于惊悚而被弃用了。<ref>{{ytl|9leQqqlWwU0|146 - From Modding to Mojang with Kingbdogz // The Spawn Chunks: A Minecraft Podcast|The Spawn Chunks @ 2:55|June 21, 2021|t=5264}}</ref>
+* 监守者还有一些被弃用的能力：
+** 使用“控心”，<ref>{{tweet|kingbdogz|1320772725066076165|I think something a little more.. mind altering.|October 26, 2020}}</ref>导致玩家无规律移动或造成的伤害延时——因机制过于复杂而被弃用。<ref name="cheesingthewarden">{{ytl|uraHCIYRjsM|Podcast: Warden Iterations with kingbdogz § Cheesing the Warden|Minecraft Ideas Academy|November 22, 2022|t=4531s}}</ref>
+** 穿墙——因难以实现而被否决。<ref name="cheesingthewarden"/>
+** 破坏方块——为限制游戏中“破坏性”生物的数量而被否决。<ref name="cheesingthewarden"/>
+** 隐藏玩家的生命条和饥饿条。<ref>{{Tweet|CagilMartin|1554743654182715392|Fun fact: One warden prototype hid your hunger and health bar. That would have been scary Source: Minecraft Ideas Academy|August 3, 2022}}</ref>
+** 免疫伤害，以阻止玩家与之战斗。<ref>{{Tweet|CagilMartin|1556533751571947520|Fun fact: Kingbdogz originally wanted the warden to be invincible to discourage combat but he scrapped that idea. Source: Minecraft Ideas Academy|August 8, 2022}}</ref>
+*** 后来这一点也出现在了嘎枝上。
+* 监守者的设计受到{{w|洛夫克拉夫特式恐怖}}的启发，表现的是神秘而未知的恐惧，而非传统的{{w|突发惊吓}}。<ref>{{ytl|rpKieiahBBU|Minecraft 1.19: The Deep Dark – Not So Scary After All! (If You’re The Warden)|Minecraft|August 11, 2022|t=60s}}</ref>
+* [[Brandon Pearce]]在推文中表示，监守者胸口的灵魂对其故事非常重要。<ref>{{Tweet|kingbdogz|1484988496876126210|In terms of character, the souls in its chest were incredibly important to its lore and, likewise with the color palette. It all comes together to tell a story that I think can be really more unsettling than any of these previous iterations, despite it being less "gory".|January 23, 2022}}</ref>
+** 他还表示监守者的灵感来源于[[音乐唱片]]11结尾处听到的“怪物”声响。<ref>{{ytl|pH_6-ZVOUAk|Ask Mojang #11: All About Caves & Cliffs|Minecraft|October 30, 2020}}</ref>
+* 开发者将监守者视作一种“自然的力量”而非Boss生物，<ref>{{Tweet|kingbdogz|1312579202076626944|I'd actually consider it something entirely new. The Warden is a force of a nature, not a boss. When a tornado is barreling towards you, you don't try to kill it - you run away! The Warden is exactly the same.|October 4, 2020}}</ref>监守者被设计得很强是为了让玩家避免与之战斗。<ref>{{tweet|kingbdogz|1427339602784931840|You shouldn't be killing Wardens, they are designed to be unkillable|August 17, 2021}}</ref>因此，{{Advancement name|adventure.kill_a_mob|zh}}和{{Advancement name|adventure.kill_all_mobs|zh}}这2个[[进度]]不要求击杀监守者。<ref>{{tweet|kingbdogz|1412819085239492616|No|July 7, 2021}}</ref>
+** 然而在Minecraft 15周年年表上，监守者被当作一种Boss生物。<ref>{{cite|url=https://www.minecraft.net/15th-anniversary|title=Celebrate Minecraft’s 15th Anniversary with Sales & Giveaways|website=Minecraft.net}}</ref>
+* 监守者施加[[黑暗]]效果的方式与[[远古守卫者]]造成[[挖掘疲劳]]的方式相似。
+* 由于驯服的[[狼]]具有{{hp|40}}点的较高生命值，监守者的近战攻击需要两次才能杀死一只已驯服的狼。<ref>{{bug|MC-250237|||WAI}}</ref>
+* 虽然监守者在设定上没有视力，但玩家使用[[旁观模式]]进入它的视角时仍然有正常的视觉。
+* 如果监守者在钻出地面时被命令传送到其他地方，其产生的方块粒子仍然是原钻出方块的粒子。
+* {{in|be}}监守者可以在[[虚空地板]]上钻地。
+
+== 画廊 ==
+=== 渲染图 ===
+<gallery>
+Warden Bioluminescent Layer.png|监守者身上的发光纹理
+Warden emerging.gif|监守者在生成时从地底钻出
+Warden digging.gif|监守者在准备消失时钻入地底
+Warden move.gif|监守者移动
+Warden shiver.gif|监守者的卷须颤动
+Warden sniffing.gif|监守者嗅闻
+Warden roar.gif|监守者咆哮
+Warden Sonic Boom Attack 22w15a.gif|监守者进行远程音爆攻击（22w15a-22w17a）
+Warden sonic boom attack.gif|监守者进行远程音爆攻击（22w18a以后）
+Warden attacking.gif|监守者进行近战攻击
+Warden Hurt BE.gif|[[基岩版1.19.10.23]]前监守者奇怪的受伤动画<ref>{{bug|MCPE-153967|||Fixed}}</ref>
+</gallery>
+
+=== 开发者截图 ===
+<gallery>
+Warden&Golem.jpg|监守者和铁傀儡并排站立<ref>{{Tweet|kingbdogz|1313449116068917249|Looking kinda short there, Iron Golem.|October 5, 2020}}</ref>
+Player and Warden.jpg|监守者和玩家并排站立
+1.17 Dev Warden and rabbit.jpg|监守者被[[兔子]]激怒
+Warden sonic boom alternative.png|开发者Chi Wong制作的监守者Dabbing动作
+The Stalker Sculk With The Stalker Incarnation.jpg|监守者的旧设计"Stalker"<ref>{{Tweet|kingbdogz|1484992032481423377|That Sculk with a version of the Stalker|January 22, 2022}}</ref>
+Warden concept model.jpg|未绘制纹理的"Stalker"模型
+Wardenprototype.png|监守者的另一个旧设计"Hollowed"
+</gallery>
+
+=== 概念图 ===
+<gallery>
+Warden concept art.png|[[Minecraft Live 2020]]上展示的监守者的概念图
+Concept art axolotl warden.png|[[美西螈]]和监守者的概念图
+Concept art axolotl goat warden.png|美西螈、[[山羊]]和监守者的概念图
+Warden animation concept.png|监守者的动画设计
+Wardenearly4.png|监守者的3种耳朵设计
+Warden designs.png|监守者的一些早期设计
+Wardenearly1.png|同前图
+Warden concept art 6.png|高大幽灵状的监守者设计，名为"Shade"
+Wardenearly2.png|瘦长且无五官的监守者设计，名为"Stalker"
+Warden concept art 9.jpg|"Stalker"的两种形态
+Wardenearly6.png|4种腐化的监守者设计，名为"Hollowed"
+Wardenearly3.png|长有鳞片以及身体腐化的"Hollowed"设计
+Wardenearly5.png|散发粒子的"Hollowed"设计
+Warden concept art 7.png|利用鬼魂悬浮的监守者设计
+Warden concept art 8.png|有翅膀的监守者设计
+</gallery>
+
+=== 艺术作品 ===
+<gallery>
+Warden and Ancient city artwork.png|监守者与[[远古城市]]的官方艺术作品
+MC-The-Wild-Update Warden.png|监守者的官方艺术作品
+</gallery>
+
+=== 其他媒体 ===
+<gallery>
+LEGO Warden.png|[[乐高Minecraft]]中的监守者
+Warden Sticker.png|来自Minecraft Discord频道的监守者表情
+Warden Action Figure.jpg|{{w|Mattel}}出品的监守者可动人偶
+Warden pixel art uniqlo.png|{{w|UNIQLO}}出品的监守者T恤，图案由Mojang美工Nekofresa设计
+Warden pixel art uniqlo 2.png
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|Mobs}}
+
+[[Category:敌对生物]]
+
+[[de:Wärter]]
+[[en:Warden]]
+[[es:Warden]]
+[[fr:Warden]]
+[[it:Sorvegliante]]
+[[ja:ウォーデン]]
+[[ko:워든]]
+[[lzh:監守]]
+[[pl:Nadzorca]]
+[[pt:Defensor]]
+[[ru:Хранитель]]
+[[uk:Боронитель]]

@@ -1,0 +1,299 @@
+# 页面: 蜂箱
+# 来源: https://zh.minecraft.wiki/w/%E8%9C%82%E7%AE%B1
+# 分类: 
+# 抓取时间: 2026-07-14 17:35:39
+# 原始 Wikitext 内容:
+
+{{more images|缺少其他朝向的蜂箱渲染图，以及渲染图章节。<!--不可以盲目搬运英文wiki的渲染图，那些渲染图大了一圈-->}}
+{{for|自然生成的蜜蜂-{}-巢穴|蜂巢（方块）}}
+{{Infobox block
+|group1=未充满蜂蜜
+|1-1=Beehive.png
+|group2=充满蜂蜜
+|2-1=Beehive Honey.png
+|invimage2=Beehive
+}}
+'''蜂箱（Beehive）'''是可通过合成获取的可作为蜜蜂-{}-巢穴的方块，功能上与[[蜂巢（方块）|蜂巢]]类似。
+
+== 生成 ==
+蜂箱不会生成在世界中。
+
+== 获取 ==
+=== 合成 ===
+{{Crafting
+|A1=Any Planks |B1=Any Planks  |C1=Any Planks
+|A2=Honeycomb  |B2=Honeycomb   |C2=Honeycomb 
+|A3=Any Planks |B3=Any Planks  |C3=Any Planks
+|Output=Beehive
+|type=Decoration block
+}}
+
+== 破坏 ==
+挖掘蜂箱的合适工具是[[斧]]。
+
+{{Breaking table}}
+
+没有被具有[[精准采集]]的工具挖掘破坏时，蜂箱被破坏后会掉落自身，蜂箱中的蜜蜂会以激怒状态被释放出来，同时还会激怒附近的所有蜜蜂。
+
+被具有精准采集的工具挖掘破坏时，蜂箱被破坏后会掉落自身，并装着其中的蜜蜂。
+
+在[[创造模式]]下破坏装有蜜蜂的蜂箱时，该蜂箱会掉落并装着其中的蜜蜂，并保留其<code>honey_level</code>数据。<ref>{{bug|MC-160457|||WAI}}</ref>
+
+== 用途 ==
+蜂箱有一项方块状态<code>honey_level</code>，可以取0—5中的一个值。新放置的蜂箱的<code>honey_level</code>为0。
+
+<code>honey_level</code>为5的蜂箱会使用充满了蜂蜜的纹理，表明蜂箱可以收获。若该方块的下表面未被遮挡，还会产生滴落的蜂蜜[[粒子]]。
+
+=== 容纳蜜蜂 ===
+蜂箱最多同时容纳3只[[蜜蜂]]。蜜蜂可以从蜂箱的任何一面进去，但只能从正面出来。
+
+蜜蜂在工作完成后，会不带花蜜离巢，并使蜂箱的<code>honey_level</code>增加1，至多增加至5。
+
+与蜂箱相邻的任何一个方块是[[火]]时，其中所有的蜜蜂都会逃离。
+
+=== 收获 ===
+对<code>honey_level</code>为5的蜂箱{{control|使用}}[[剪刀]]会使其掉落3个[[蜜脾]]，使用[[玻璃瓶]]则会使玻璃瓶变为[[蜂蜜瓶]]，随后其<code>honey_level</code>会变为0。
+
+若玩家从蜂箱收获时，蜂箱的正下方6格内没有点燃的[[营火]]或[[灵魂营火]]，或二者之间被其他方块阻挡，则其中所有的蜜蜂都会被释放出来并与该玩家敌对。用[[发射器]]进行收集不会将蜜蜂释放出来。玩家在创造模式或[[难度#和平|和平难度]]下收获时，蜜蜂仍然会被释放出来，但不会攻击玩家。
+
+=== 红石信号 ===
+当[[红石比较器]]连接至蜂箱时，会输出与其方块状态<code>honey_level</code>相同数值强度的红石信号。
+
+== 音效 ==
+{{Sound table/Block/Wood
+|suffix-je=
+{{Sound table
+|sound=Beehive drip1.ogg
+|sound2=Beehive drip2.ogg
+|sound3=Beehive drip3.ogg
+|sound4=Beehive drip4.ogg
+|sound5=Beehive drip5.ogg
+|sound6=Beehive drip6.ogg
+|subtitle={{tp|subtitles.block.beehive.drip}}
+|source={{tp|soundCategory.block}}
+|description=蜂蜜粒子接触到方块
+|id=block.beehive.drip
+|translationkey=subtitles.block.beehive.drip}}
+{{Sound table
+|sound=Beehive enter.ogg
+|subtitle={{tp|subtitles.block.beehive.enter}}
+|source={{tp|soundCategory.block}}
+|description=蜜蜂进入蜂巢
+|id=block.beehive.enter
+|translationkey=subtitles.block.beehive.enter
+}}
+{{Sound table
+|sound=Beehive exit.ogg
+|subtitle={{tp|subtitles.block.beehive.exit}}
+|source={{tp|soundCategory.block}}
+|description=蜜蜂离开蜂巢
+|id=block.beehive.exit
+|translationkey=subtitles.block.beehive.exit}}
+{{Sound table
+|sound=Beehive shear.ogg
+|subtitle={{tp|subtitles.block.beehive.shear}}
+|source={{tp|soundCategory.block}}
+|description=收集蜜脾
+|id=block.beehive.shear
+|translationkey=subtitles.block.beehive.shear}}
+{{Sound table
+|sound=Beehive work1.ogg
+|sound2=Beehive work2.ogg
+|sound3=Beehive work3.ogg
+|sound4=Beehive work4.ogg
+|subtitle={{tp|subtitles.block.beehive.work}}
+|source={{tp|soundCategory.block}}
+|description=当蜜蜂在巢内时随机播放
+|id=block.beehive.work
+|translationkey=subtitles.block.beehive.work
+|foot=1
+}}
+<!---->
+|suffix-be=
+{{Sound table
+|bedrock=1
+|sound=block.beehive.enter.wav
+|source=方块
+|description=蜜蜂进入蜂巢
+|id=block.beehive.enter
+|typeid=block.beehive.enter
+|soundvolume=0.75
+|soundpitch=0.7-0.8
+|sounddistance=14
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=block.beehive.exit.wav
+|source=方块
+|description=蜜蜂离开蜂巢
+|id=block.beehive.exit
+|typeid=block.beehive.exit
+|soundvolume=0.75
+|soundpitch=0.9-1.1
+|sounddistance=14
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=block.beehive.shear.wav
+|source=方块
+|description=收集蜜脾
+|id=block.beehive.shear
+|typeid=block.beehive.shear
+|soundvolume=0.8
+|soundpitch=0.8-1.0
+|sounddistance
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=block.beehive.work1.wav
+|sound2=block.beehive.work2.wav
+|sound3=block.beehive.work3.wav
+|sound4=block.beehive.work4.wav
+|source=方块
+|description=当蜜蜂在巢内时随机播放
+|id=block.beehive.work
+|typeid=block.beehive.work
+|soundvolume=0.6
+|soundpitch=1.0
+|sounddistance=12
+|soundpreload=1
+}}
+{{Sound table
+|bedrock=1
+|sound=block.beehive.drip1.wav
+|sound2=block.beehive.drip2.wav
+|sound3=block.beehive.drip3.wav
+|sound4=block.beehive.drip4.wav
+|source=方块
+|description=蜂蜜粒子接触到方块
+|id=block.beehive.drip
+|typeid=block.beehive.drip
+|soundvolume=0.3
+|soundpitch=0.7-0.9
+|sounddistance=9
+|soundpreload=1
+|foot=1
+}}
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Beehive
+|spritetype=block
+|nameid=beehive
+|showblocktags=je
+|blocktags={{GameTag|block|beehive}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=beehives
+|spritetype=block
+|nameid=beehive
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Beehive
+|spritetype=block
+|nameid=beehive
+|showblocktags=be
+|blocktags={{GameTagBE|block|beehive}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=beehives
+|nameid=Beehive
+|spritetype=block
+|foot=1
+}}
+
+=== 方块状态 ===
+{{Block states table|蜂箱}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+蜂箱有与之关联的方块实体，用于存储附加信息。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{:蜂巢（方块）/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+=== 物品数据 ===
+{{el|je}}：
+{{see also|物品格式}}
+
+{{Default item components}}
+
+在默认组件的基础上，蜂箱使用下列组件来保存附加数据：
+
+<div class="treeview">
+* {{nbt|compound|components}}：物品附加的[[数据组件]]信息。
+** {{nbt transclude|编码格式/DataComponent|codec_bees_component}}
+** {{nbt|compound|minecraft:block_state}} 数据组件
+*** {{nbt|string|honey_level}}：<code>honey_level</code>等级，不存在时默认为<code>0</code>。
+</div>
+
+{{el|be}}：
+{{see also|基岩版存档格式/物品格式}}
+
+== 成就 ==
+{{load achievements|bee-our-guest}}
+
+== 进度 ==
+{{load advancements|prefix=husbandry|safely_harvest_honey}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.15|dev=19w34a|[[File:Beehive (S) JE1 BE1.png|32px]] [[File:Beehive Honey (S) JE1 BE1.png|32px]] 加入了蜂箱。}}
+|{{HistoryLine|||dev=19w35a|现在蜂箱是可燃的。}}
+|{{HistoryLine|||dev=19w36a|[[File:Beehive Honey (S) JE2.png|32px]] [[File:Beehive Honey (S) (facing NWU) JE2.png|32px]] 更改了装满蜂蜜的蜂箱的顶部和底部纹理。<ref>{{bug|MC-160456|||Fixed}}</ref>
+|现在在创造模式下破坏蜂箱会使蜂箱以物品形式掉落。}}
+|{{HistoryLine|||dev=19w37a|[[File:Beehive Honey (S) JE1 BE1.png|32px]] 回退了19w36a中的更改。}}
+|{{HistoryLine|||dev=19w41a|将蜂箱的英文名称由“Bee hive”重命名为“Beehive”。}}
+|{{HistoryLine||1.21.2|dev=24w35a|蜂箱现在会显示蜜蜂数和方块状态<code>honey_level</code>的值。
+|蜂箱现在会在物品中储存的方块状态<code>honey_level</code>为5时显示满蜜纹理。}}
+|{{HistoryLine||1.21.5|dev=25w04a|现在蜂箱物品默认具有<code>block_state</code>组件。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.14.0|dev=1.14.0.1| [[File:Beehive (S) JE1 BE1.png|32px]] [[File:Beehive Honey (S) JE1 BE1.png|32px]] 加入了蜂箱。}}
+|{{HistoryLine||1.20.30|dev=1.20.20.21|蜂箱的爆炸抗性由5.4改为0.6。}}
+|{{HistoryLine||1.20.60|dev=1.20.60.21|带有[[精准采集]]魔咒的[[附魔书]]不再能对蜂箱产生精准采集魔咒的效果。}}
+|{{HistoryLine||1.21.40|dev=1.21.40.20|现在蜂箱不再能作为[[烧炼#燃料效率|燃料]]使用。<ref>{{bug|MCPE-128393|||Fixed}}</ref>}}
+}}
+
+== 画廊 ==
+=== 艺术作品 ===
+<gallery>
+Alex Buzzy Bees.png|Alex与蜂箱的官方艺术作品
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks}}
+
+[[de:Bienenstock]]
+[[en:Beehive]]
+[[es:Colmena]]
+[[fr:Ruche]]
+[[it:Alveare]]
+[[ja:ミツバチの巣]]
+[[ko:벌통]]
+[[pl:Pszczele gniazdo i pszczeli ul]]
+[[pt:Colmeia artificial]]
+[[ru:Улей]]
+[[th:รังผึ้ง]]
+[[uk:Вулик]]

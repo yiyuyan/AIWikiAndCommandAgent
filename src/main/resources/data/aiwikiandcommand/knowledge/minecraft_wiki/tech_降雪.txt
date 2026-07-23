@@ -1,0 +1,119 @@
+# 页面: 降雪
+# 来源: https://zh.minecraft.wiki/w/%E9%99%8D%E9%9B%AA
+# 分类: Java版独有信息, 基岩版独有信息, 有未知版本的History模板的页面/基岩版, 环境, 需要验证
+# 抓取时间: 2026-07-14 17:38:14
+# 原始 Wikitext 内容:
+
+[[File:Snowing.png|缩略图|300px|一幅降雪时的山坡景象]]
+'''降雪（Snowfall）'''是[[Minecraft]]中偶尔出现的一种[[天气]]。
+
+== 行为 ==
+降雪会在[[主世界]]中[[生物群系#温度|寒冷生物群系]]和部分生物群系的特定[[高度]]替代[[降雨]]生成。炎热或干燥的生物群系、[[虚空（生物群系）|虚空]]生物群系和其他维度中永远不会下雪。
+
+尽管{{only|je|for=[[调试屏幕]]}}中NoiseRouter行的T表示当前位置的温度，但用于计算降雪的[[温度]]仅与该位置所在生物群系和高度有关。当Y≤80时，一个位置的温度就是其所在生物群系的基础温度。在Y=81处，温度会通过一个噪声函数在基础温度上随机浮动-0.00875（-{{frac|7|800}}）至0.01125（{{frac|9|800}}）；然后以此作为基础，任何位于Y≥81区域内的位置每相对于Y=80升高1格，温度就下降0.00125（{{frac|1|800}}）。当一个位置的温度小于0.15时，该位置的降雨就会被降雪替代。
+
+{{in|je}}{{BiomeLink|Frozen Ocean}}和{{BiomeLink|Deep Frozen Ocean}}内部分随机区域的基础温度会受另一个噪声函数的影响而被视为0.2，从而改变雪线高度。
+
+{| class="wikitable" style="text-align:center" data-description="有降水生物群系的雪线高度"
+|+[[生物群系#降水类型|有降水]]生物群系的雪线高度
+|-
+! 生物群系
+! 温度
+! 雪线高度
+|-
+| {{BiomeLink|Snowy Plains|text=寒冷生物群系|link=生物群系#温度}}
+| <0.15
+| <-64<br>（即虚空以上的位置均可降雪）
+|-
+| {{BiomeLink|Frozen Ocean}}<br>{{BiomeLink|Deep Frozen Ocean}}
+| 0.0<br>{{only|je|short=1|for=部分区域为0.2}}
+| <-64<br>{{only|je|short=1|for=部分区域为120±8}}
+|-
+| {{BiomeLink|Windswept Gravelly Hills}}<br>{{BiomeLink|Windswept Forest}}<br>{{BiomeLink|Windswept Hills}}<br>{{BiomeLink|Stony Shore}}<ref name="MC-240697">{{bug|MC-240697||石岸生物群系在Y{{=}}118或更高位置开始降雪}}</ref><br>{{only|be|short=1|for={{BiomeLink|Dripstone Caves}}}}<ref>{{bug|MCPE-142225||溶洞生物群系的温度值过低}}</ref>
+| 0.2
+| 120±8
+|-
+| {{BiomeLink|Old Growth Spruce Taiga}}<br>{{BiomeLink|Taiga}}
+| 0.25
+| 160±8
+|-
+| {{BiomeLink|Old Growth Pine Taiga}}<br>{{only|be|short=1|for={{BiomeLink|Meadow}}}}<br>{{only|be|short=1|for={{BiomeLink|Cherry Grove}}}}
+| 0.3
+| 200±8
+|-
+| {{BiomeLink|Plains|text=其他生物群系|link=生物群系}}
+| 因生物群系而异
+| >319<br>（即[[高度#建筑高度限制|建筑高度限制]]内均不会降雪）
+|}
+
+平均每场降雪持续0.5-1个[[昼夜更替#时间换算|游戏日]]，两场降雪间隔0.5-7.5个游戏日。降雪有较小的概率变为[[雷暴]]。
+
+玩家可以在晚上睡觉来跳过降雪。雷暴发生时，也能在白天睡觉进行跳过。
+
+== 效果 ==
+[[File:Snowfalltundra.png|缩略图|250px|针叶林里的一场降雪]]
+[[File:Frostontheleaves.jpg|thumb|250x250px|基岩版中结霜的针叶林]]
+
+降雪会使整个世界变暗，导致来自[[太阳]]的[[光照]]等级降低3，即在白天的亮度等级降为12。但在夜晚亮度等级并没有降低，亮度等级仍然为4。天空会变黑以至看不见天体（即使在不下雪的生物群系里）。<ref>{{tweet|notch|55982751265988610}}</ref>云从白色变为灰色。虽然太阳在雪中不可见，但黎明和黄昏时地平线上的曙光和暮光仍然可见。
+
+{{in|be}}在下雪且图像品质为高时，部分生物群系的[[树叶]]会逐渐结霜。
+
+降雪时，雪会尝试在所有露天的、方块亮度小于10的、上表面完整的[[固体方块]]上方积雪。雪可以互相堆积，直至达到{{only|for=1层|je}}或{{only|for=7层|be}}雪。{{IN|java}}雪的最高堆积高度可由[[游戏规则]]{{gamerule|max_snow_accumulation_height}}控制。
+
+放置在降雪范围内的[[炼药锅]]会逐渐装满[[细雪]]。
+
+[[快乐恶魂]]在降雪时可以加快恢复[[生命值]]的速度。
+
+=== 雪花粒子 ===
+在所有可降雪区域的露天空气中都能够看见下落的雪花[[粒子]]。不像雨那样，任何[[着火]]的实体与雪接触不会扑灭它们身上的火。由于雪花只掉在一个方块的两条中线上，因此不会看见雪花掉在[[玩家]]头上。
+
+雪花会穿过非[[阻止运动方块]]，如[[梯子]]、[[藤蔓]]、[[地毯]]、[[红石中继器]]、[[雪]]、[[生物头颅]]、[[花盆]]和[[蜘蛛网]]。雪花不会穿过阻止运动方块，如[[告示牌]]、[[旗帜]]、[[门]]、[[栅栏门]]、[[活板门]]、[[压力板]]、[[玻璃板]]和[[铁栏杆]]。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年5月20日|link={{notch|110593679}}|[[Notch]]简略地提到了降雪：“冬天是一个好主意，我能看着雪和方块逐渐被一层层雪覆盖，还能看见湖上的冰。 :D”}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.4|加入了冬天模式，创建世界时有25%的概率生成永远处于降雪状态的世界。}}
+|{{HistoryLine||v1.2.0|dev=preview|移除了冬天模式，现在不再会生成处于降雪状态的世界。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||2011年4月8日|link={{ytl|qy882ILYJMM}}|在预告视频中展示了降雨和降雪。}}
+|{{HistoryLine||1.5|加入了降雪。}}
+|{{HistoryLine||1.8|dev=pre1|由于漏洞，降雪不再会出现在任何生物群系。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|加入了冰原，现在降雪再次能够生成。{{verify|经过测试，海拔较高的山地（地表覆雪）依旧能将降雨转为降雪，降雪再次能够生成只有冰原加入这一个原因而已吗？或是1.8-pre1的漏洞是否属实？}}
+|现在降雪会摧毁[[红石线]]、[[火把]]、[[树苗]]和所有种类的[[铁轨（消歧义）|铁轨]]了。}}
+|{{HistoryLine|||dev=Beta 1.9-pre5|修复了pre1中降雪的漏洞。}}
+|{{HistoryLine||1.7.2|dev=13w36a|现在降雪可以在某些海拔较高的生物群系生成。}}
+|{{HistoryLine||1.17|dev=20w46a|现在降雪可以使[[炼药锅]]逐渐积累[[细雪]]。}}
+|{{HistoryLine||1.18|dev=exp4|上调了降雨转为降雪的海拔高度。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了降雪。}}
+|{{HistoryLine|||dev=build 9|现在下雪时的雾化效果更加明显。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.17.0|dev=1.17.0.52|现在降雪可以使炼药锅逐渐积累细雪。}}
+|{{HistoryLine||1.18.0|dev=?|上调了降雨转为降雪的海拔高度。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了降雪。}}
+}}
+
+== 你知道吗 ==
+* 雪在云层上也会存在。Notch的解释是云层之上的灰色区域才是雪真正的来源。<ref>{{tweet|notch|130230769347067905}}</ref>
+* {{in|be}}和雨类似，雪最低也能落到[[虚空]]里一格（Y=-65）。
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[Category:环境]]
+
+[[de:Schneefall]]
+[[en:Snowfall]]
+[[es:Nevada]]
+[[fr:Chute de neige]]
+[[ja:降雪]]
+[[ko:강설]]
+[[pl:Śnieg (opad)]]
+[[pt:Nevasca]]
+[[ru:Погода#Снегопад]]

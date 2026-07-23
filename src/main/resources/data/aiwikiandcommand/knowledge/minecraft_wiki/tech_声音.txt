@@ -1,0 +1,296 @@
+# 页面: 声音
+# 来源: https://zh.minecraft.wiki/w/%E5%A3%B0%E9%9F%B3
+# 分类: Java版独有信息, 基岩版独有信息, 环境
+# 抓取时间: 2026-07-14 17:24:58
+# 原始 Wikitext 内容:
+
+{{for|游戏内声音的具体实现|声音（消歧义）}}
+'''声音（Sound）'''主要用于为游戏提供背景氛围，其也可作为信息源指示世界的变化。
+
+== 机制 ==
+游戏会在特定场景中播放声音。例如石头被破坏时，游戏会播放石头的破坏音效；玩家在一些生物群系中时，游戏会播放此生物群系独有的[[音乐]]。
+
+声音播放也可以由命令控制，{{cmd|playsound}}可以主动播放一条声音，{{cmd|stopsound}}可以主动中止声音播放。
+
+游戏播放声音时并不是简单地播放声音文件，而是构建声音实例播放声音。每个声音实例都包括调用的声音事件、播放位置、音量、音高和声音分类等属性。
+
+绝大多数声音都以声音来源为播放位置，且最多传播16格。以下为常见的例外：
+* 游戏背景声音，只给特定的玩家播放，每个玩家接收到的声音不同。
+* [[音符盒]]激活时的音效，默认传播48格。
+* [[唱片机]]的音乐，默认传播64格。
+* [[山羊角]]吹奏的音效，默认传播256格。
+* 全局声音事件，这些声音向所有玩家播放。{{in|je}}可以通过{{gamerule|global_sound_events}}游戏规则来控制。
+** [[末影龙]]死亡声音。
+** [[凋灵]]召唤声音。
+** [[末地传送门]]激活声音。
+
+关于声音实例的详细信息，可参见{{slink|Java版声音事件#声音播放}}。
+
+{{in|je}}每个玩家最多可以接收255条声音，其中常规声音上限247条，流式播放声音上限8条，具体的数据可以在[[调试屏幕]]的<code>sound_mood</code>选项中查看。
+
+{{in|be}}每个玩家最多可以接收32条声音。<ref>{{cite|url=https://learn.microsoft.com/en-us/minecraft/creator/documents/introductiontosound}}</ref>当超出该数量的声音被接收，最先播放的声音会被截断。
+
+== 声音分类 ==
+'''声音分类（Sound Source/Sound Category）'''控制了声音播放的分类，以归入[[选项]]中的音量控制。
+
+{|class="wikitable"
+! 游戏内名称 !! ID !! 使用此声音分类的声音
+|-
+| {{tp|soundCategory.master}}
+| <code>master</code>
+| 由{{cmd|playsound}}播放且未指定声音分类的声音
+|-
+| {{tp|soundCategory.music}}
+| <code>music</code>
+| 音乐
+|-
+| {{tp|soundCategory.record}}
+| <code>record</code>
+| 唱片机音乐；音符盒音效；山羊角吹奏声音
+|-
+| {{tp|soundCategory.weather}}
+| <code>weather</code>
+| 雨水的落地音效；末地闪光音效；闪电音效
+|-
+| {{tp|soundCategory.block}}
+| <code>block</code>
+| 与方块相关的声音，如挖掘、破坏和放置的音效
+|-
+| {{tp|soundCategory.hostile}}
+| <code>hostile</code>
+| 与敌对生物相关的声音
+|-
+| {{tp|soundCategory.neutral}}
+| <code>neutral</code>
+| 与友好生物相关的声音
+|-
+| {{tp|soundCategory.player}}
+| <code>player</code>
+| 与玩家相关的声音
+|-
+| {{tp|soundCategory.ambient}}
+| <code>ambient</code>
+| 环境音效；烟花火箭、经验球、物品实体声音；部分由方块发出的环境音效
+|-
+| {{tp|soundCategory.voice}}
+| <code>voice</code>
+| “{{tp|options.narrator}}”开启后的用户界面文字朗读声音；预留给自定义内容的配音<ref>{{tweet|SeargeDP|687741330995429376}}</ref>
+|-
+| {{tp|soundCategory.ui}}
+| <code>ui</code>
+| 按钮和弹窗等用户界面声音
+|}
+
+'''{{el|be}}'''
+{|class="wikitable"
+! 游戏内名称 !! ID !! 使用此声音分类的声音
+|-
+| {{tr|全局|全域}}
+| <code>main</code>
+| ''无''
+|-
+| 音乐
+| <code>music</code>
+| 音乐
+|-
+| 音乐方块
+| <code>record</code>
+| 唱片机音乐；音符盒音效；山羊角吹奏声音
+|-
+| 天气
+| <code>weather</code>
+| 雨水的落地音效；末地闪光音效；闪电音效
+|-
+| 方块
+| <code>block</code>
+| 与方块相关的声音，如挖掘、破坏和放置的音效
+|-
+| 敌对生物
+| <code>hostile</code>
+| 与敌对生物相关的声音
+|-
+| {{tr|友好生物|友善生物}}
+| <code>neutral</code>
+| 与友好生物相关的声音
+|-
+| 其他玩家
+| <code>player</code>
+| 与玩家相关的声音；物品声音；水下环境音效；部分方块行走、摔落和跳跃的音效
+|-
+| {{tr|环境音频|環境音效}}
+| <code>ambient</code>
+| 环境音效；烟花火箭声音；部分方块发出的环境音效
+|-
+| {{tr|文字转语音|文字轉語音輸出}}
+| <code>texttospeech</code>
+| 用户界面的文字朗读声音
+|-
+| {{tr|声音|音效}}
+| <code>sound</code>
+| 不属于其他声音分类的声音，例如用户界面声音
+|}
+
+=== 实体依赖分类 ===
+{{Exclusive|je|section=1}}
+{{in|be}}声音事件定义直接定义了声音分类。{{in|je}}声音事件定义不会定义声音分类，游戏会根据播放场景选择声音分类。这使得{{in|je|nc=1}}同一个声音事件在不同的场景下会使用不同的声音分类，此现象经常出现在与实体相关联的声音上。
+
+以方块的踩踏音效为例，{{in|je}}它是一个典型的依赖于来源实体的声音。当玩家踩踏石头时，声音分类为{{tp|soundCategory.player}}；而当僵尸踩踏石头时，声音分类为{{tp|soundCategory.hostile}}。而{{in|be}}它的声音分类永远是玩家。
+
+以下为Java版中各个实体使用的默认声音分类。
+{|class="wikitable collapsible"
+! 实体 !! 声音分类
+|-
+|
+* {{EntityLink|Player}}
+| {{tp|soundCategory.player}}
+|-
+|
+* {{EntityLink|Experience Orb}}
+* {{EntityLink|Item}}
+| {{tp|soundCategory.ambient}}
+|-
+|
+* {{EntityLink|Lightning Bolt}}
+| {{tp|soundCategory.weather}}
+|-
+|
+<div class="div-col columns" style="column-count:3">
+* {{EntityLink|Blaze}}
+* {{EntityLink|Bogged}}
+* {{EntityLink|Breeze}}
+* {{EntityLink|Cave Spider}}
+* {{EntityLink|Creaking}}
+* {{EntityLink|Creeper}}
+* {{EntityLink|Drowned}}
+* {{EntityLink|Elder Guardian}}
+* {{EntityLink|EnderMan}}
+* {{EntityLink|EnderMite}}
+* {{EntityLink|Ender Dragon}}
+* {{EntityLink|Evoker}}
+* {{EntityLink|Ghast}}
+* {{EntityLink|Giant}}
+* {{EntityLink|Guardian}}
+* {{EntityLink|Hoglin}}
+* {{EntityLink|Husk}}
+* {{EntityLink|Illusioner}}
+* {{EntityLink|Killer Bunny}}
+* {{EntityLink|Magma Cube}}
+* {{EntityLink|Parched}}
+* {{EntityLink|Phantom}}
+* {{EntityLink|Piglin}}
+* {{EntityLink|Piglin Brute}}
+* {{EntityLink|Pillager}}
+* {{EntityLink|Ravager}}
+* {{EntityLink|Shulker}}
+* {{EntityLink|Shulker Bullet}}
+* {{EntityLink|Silverfish}}
+* {{EntityLink|Skeleton}}
+* {{EntityLink|Slime}}
+* {{EntityLink|Spider}}
+* {{EntityLink|Stray}}
+* {{EntityLink|Vex}}
+* {{EntityLink|Vindicator}}
+* {{EntityLink|Warden}}
+* {{EntityLink|Witch}}
+* {{EntityLink|Wither}}
+* {{EntityLink|Wither Skeleton}}
+* {{EntityLink|Zoglin}}
+* {{EntityLink|Zombie}}
+* {{EntityLink|Zombie Villager}}
+* {{EntityLink|Zombified Piglin}}
+</div>
+| {{tp|soundCategory.hostile}}
+|-
+| 其他所有未列出的实体，不包括为杀手兔变种的兔子
+| {{tp|soundCategory.neutral}}
+|}
+
+== 字幕 ==
+{{main|隐藏式字幕}}
+部分声音具有字幕，当游戏播放这个声音的时候，屏幕上会显示此声音的字幕以及大致方位。字幕可通过选项{{only|je|short=1}}或设置{{only|be|short=1}}来启用。
+
+== 数据值 ==
+{{main|Java版声音事件|基岩版声音事件}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2009年6月4日|link=https://web.archive.org/web/20210705014707/https://www.youtube.com/watch?v=UIFkQMEz9X8|[[C418]]上传了一段演示视频，展示了他为游戏配音设计的音效。视频的配音是剪辑处理的，画面中的并不是真正的开发者版本。}}
+|{{HistoryLine|java classic}}
+|{{HistoryLine||0.0.22a|加入了声音。}}
+|{{HistoryLine||0.0.23a|加入了控制音效和音乐的选项。}}
+|{{HistoryLine|java indev}}
+|{{HistoryLine||0.31|dev=20100104-2154|加入了由[https://web.archive.org/web/20140427013818/http://www.paulscode.com/ Paul Lamb]制作的新声音引擎。}}
+|{{HistoryLine||20100207-1057|声音系统现在使用[[wzh:OpenAL|OpenAL]]。}}
+|{{HistoryLine|java alpha}}
+|{{HistoryLine||v1.1.1|现在音效和音乐的音量可由滑动条控制。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w38b|更新了声音引擎。}}
+|{{HistoryLine||1.6.1|dev=pre|加入了命令{{cmd|playsound}}。}}
+|{{HistoryLine||1.7.2|dev=13w36a|拆分了音量滑条，现在每个声音分类都可以单独控制。}}
+|{{HistoryLine|||dev=13w42a|重写了声音系统，现在资源包可以定义声音。}}
+|{{HistoryLine||1.9|dev=15w43b|加入了字幕。}}
+|{{HistoryLine|||dev=16w02a|加入了声音分类<code>voice</code>。}}
+|{{HistoryLine||1.9.3|dev=pre2|加入了命令{{cmd|stopsound}}。}}
+|{{HistoryLine||1.14|dev=19w12a|重写了声音系统，减少了播放声音的延迟。}}
+|{{HistoryLine|||dev=19w14a|现在调试屏幕会显示声音信息。}}
+|{{HistoryLine||1.19|dev=22w11a|加入了{{tr|定向音频|定向音效|環繞音訊}}选项，允许支持HRTF的设置播放更精确的立体音效。}}
+|{{HistoryLine||1.19.3|dev=22w44a|加入了游戏规则<code>globalSoundEvents</code>。}}
+|{{HistoryLine||1.20|dev=23w12a|现在在部分方块上行走的音效会和其下方方块的行走音效混合播放。}}
+|{{HistoryLine|||dev=23w18a|现在在没有碰撞箱的方块上行走时不再发出行走音效。<ref>{{bug|MC-2604||Walking on non-solid blocks with no collision plays their respective walking sounds|Fixed}}</ref>
+|现在在方块边缘行走会发出正确的行走音效。<ref>{{bug|MC-1133||Whether or not a player experiences some effect is calculated based on the block under the center of the player|Fixed}}</ref>}}
+|{{HistoryLine||1.21.5|dev=25w10a|被活塞推动破坏的方块现在会播放破坏音效。}}
+|{{HistoryLine||1.21.6|dev=pre2|更改了下列声音分类的英文名称：
+* Friendly Creatures -> Friendly Mobs
+* Hostile Creatures -> Hostile Mobs}}
+|{{HistoryLine|||dev=pre3|加入了声音分类<code>ui</code>。}}
+|{{HistoryLine||1.21.9|dev=25w31a|现在声音的音量会遵守选项中声音分类的音量，如{{cmd|playsound}}播放的声音现在会受选项影响。
+|将声音分类“{{tr|声音/语音|聲音／語音}}”重命名为“{{tr|复述功能/语音|朗讀功能／語音}}”。}}
+|{{HistoryLine|||dev=25w37a|现在在选项中设置音量时会播放预览音效，以同步基岩版。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||Demo|加入了声音。<ref>{{YouTubeLink|jxfj84mdfl8}}</ref>}}
+|{{HistoryLine||0.1.2|现在可以控制声音的开关。}}
+|{{HistoryLine||0.7.0|加入了音量滑条。}}
+|{{HistoryLine||0.12.1|dev=build 1|更改了声音引擎，现在可以播放混合声音。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.4|dev=1.0.4.1|现在音乐和音效可以被资源包更改。}}
+|{{HistoryLine||1.0.5|dev=1.0.5.0|加入了命令{{cmd|playsound}}和{{cmd|stopsound}}。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|为脚本API添加了声音事件。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|现在音效可以被动画事件触发了。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.58|加入了命令{{cmd|music}}。}}
+|{{HistoryLine||1.16.200|dev=1.16.200.53|加入了更多声音分类。}}
+|{{HistoryLine||1.20.10|dev=1.20.10.20|声音的位置现在基于摄像机的位置，而不是玩家的位置和朝向。即第三人称正面视角下声音的来源现在和第一人称下相反。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.20|更改了下列声音分类的名称：
+* {{tr|将“声音”的英文名称由“Sound”重命名为“Sound effects”。|將「聲音」重新命名為「音效」。}}
+* 将“环境”重命名为“{{tr|环境音频|環境音效}}”。
+* 将“敌对生物”的英文名称由“Hostile Creatures”重命名为“Hostile mobs”。
+* {{tr|将“友好生物”的英文名称由“Friendly Creatures”重命名为“Friendly mobs”。|將「友好生物」重新命名為「友善生物」。}}
+* 将“玩家”重命名为“其他玩家”。
+* 将“{{tr|唱片机/音符盒|點唱機/音符塊}}”重命名为“音乐方块”。
+* {{tr|将“文字转语音输出”重命名为“文字转语音”。|將「文字轉語音輸出」的英文名稱由「Text to Speech」重新命名為「Text to speech」 。}}
+|将主音量的默认值改为50%，音乐改为30%。}}
+|{{HistoryLine||26.0|dev=26.0.25|加入了隐藏式字幕。}}
+|{{HistoryLine|||dev=正式版|隐藏式字幕在正式版中不可用。}}
+}}
+
+== 画廊 ==
+{{gallery|
+File:Sound Options Screen.png|convert|Java版声音设置界面
+File:BE Settings Audio.png|convert|基岩版声音设置界面
+}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[de:Geräusch]]
+[[en:Sound]]
+[[es:Sonido]]
+[[fr:Son]]
+[[it:Suono]]
+[[ja:サウンド]]
+[[ko:소리]]
+[[pt:Sons]]
+[[ru:Звук]]

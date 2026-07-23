@@ -1,0 +1,254 @@
+# 页面: 命令/item
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/item
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{for|基岩版和教育版中功能大致相同的命令|命令/replaceitem}}
+{{Redirect|Item|命名空间ID为{{code|item}}的实体|物品（实体）|存在于[[物品栏]]中的物品|物品}}
+{{exclusive|java}}
+{{Infobox command
+|name=item
+|oplevel=2
+}}
+
+修改或复制[[方块]]（如[[容器]]）或[[实体]]物品栏内的[[物品]]。
+
+== 语法 ==
+* '''[[Java版26.3]]前'''
+: <code>'''item modify''' (block <pos>|entity <targets>) <slot> <modifier></code>
+:: 对指定槽位的物品施加指定的[[物品修饰器]]。
+: <code>'''item replace''' (block <pos>|entity <targets>) <slot> '''from''' (block|entity) <-{}-source> <sourceSlot> [<modifier>]</code>
+:: 将源槽位的物品替换到目标槽位，可以同时施加指定的[[物品修饰器]]。
+: <code>'''item replace''' (block <pos>|entity <targets>) <slot> '''with''' <item> [<count>]</code>
+:: 将指定槽位的物品替换为指定的物品。
+* '''[[Java版26.3]]起'''
+: <code>'''item fill''' (block|entity) <target> <slots> '''from''' (block|entity) <-{}-source> <sourceSlots> [<modifier>]</code>
+:: 将源槽位的物品填充到目标槽位，可以同时施加指定的[[物品修饰器]]。当目标槽位比来源物品多时，来源物品序列会被重复直至填充所有目标槽位。
+:: 例如，使用物品{{cd|(ABC)}}替换槽位{{cd|[12345]}}会得到{{cd|[ABCAB]}}。
+: <code>'''item fill''' (block|entity) <target> <slots> '''with''' <item> [<count>]</code>
+:: 将指定槽位全部填充为指定物品。
+: <code>'''item modify''' (block|entity) <target> <slots> <modifier></code>
+:: 对指定槽位的物品施加指定的[[物品修饰器]]。
+: <code>'''item override''' (block|entity) <target> <slots> '''from''' (block|entity) <-{}-source> <sourceSlots> [<modifier>]</code>
+:: 将源槽位的物品覆写到目标槽位，可以同时施加指定的[[物品修饰器]]。当目标槽位比来源物品多时，多余的槽位内的物品会被清空。
+:: 例如，使用物品{{cd|(ABC)}}替换槽位{{cd|[12345]}}会得到{{cd|[ABC__]}}，{{cd|_}}表示空槽位。
+: <code>'''item override''' (block|entity) <target> <slots> '''with''' <item> [<count>]</code>
+:: 将指定槽位全部覆写为指定物品。
+: <code>'''item replace''' (block|entity) <target> <slots> '''from''' (block|entity) <-{}-source> <sourceSlots> [<modifier>]</code>
+:: 将源槽位的物品替换到目标槽位，可以同时施加指定的[[物品修饰器]]。目标槽位中的物品会逐一被来源物品替换，顺序和槽位源所指定的相同。
+:: 当目标槽位比来源物品多时，多余的槽位会被忽略；当目标槽位比来源物品少时，多余的物品会被忽略。
+: <code>'''item replace''' (block|entity) <target> <slots> '''with''' <item> [<count>]</code>
+:: 将指定槽位全部替换为指定物品。
+
+'''语法的其他表示方式：'''
+:{| class="collapsible collapsed collapse-button-none" data-description="simple_tree"
+|-
+! style="text-align:left" | 简化的语法树：
+|-
+|
+* <code>/'''item''' ...</code>
+** <code>-{}-... '''modify''' <''目标''> <slot> <modifier></code>
+** <code>-{}-... <'''''替换方式'''''> <''目标''> <slot></code>
+*** <code>... '''with''' <item> [<count>]</code>
+*** <code>-{}-... '''from''' <''来源''> <sourceSlot> [<modifier>]</code>
+: {{inUntil|JE 26.3}}上述可代入参数为：
+:: <code>-{}-<''目标''></code> = <code>block <pos>|entity <targets></code>
+:: <code>-{}-<''替换方式''></code> = <code>replace</code>
+:: <code>-{}-<''来源''></code> = <code>(block|entity) <-{}-source></code>
+: {{inUpcoming|JE 26.3}}上述可代入参数为：
+:: <code>-{}-<''目标''></code> = <code>(block|entity) <target></code>
+:: <code>-{}-<''替换方式''></code> = <code>fill|override|replace</code>
+:: <code>-{}-<''来源''></code> = <code>(block|entity) <-{}-source></code>
+|}
+:{| class="collapsible collapsed collapse-button-none"
+|-
+! style="text-align:left" | 精简版：
+|-
+|
+: <code>/item (modify (block <pos>|entity <targets>) <slot> <modifier>|replace (block <pos>|entity <targets>) <slot> (with <item> [<count>]|from (block|entity) <-{}-source> <sourceSlot> [<modifier>]))</code>{{until|JE 26.3}}
+: <code>/item (modify (block|entity) <target> <slots> <modifier>|(fill|override|replace) (block|entity) <target> <slots> (with <item> [<count>]|from (block|entity) <-{}-source> <sourceSlots> [<modifier>]))</code>{{upcoming|JE 26.3}}
+|}
+:{| class="collapsible collapsed collapse-button-none"
+|-
+! style="text-align:left" | 展开版（[[Java版26.3|26.3]]前）：
+|-
+|
+: <code>item modify block <pos> <slot> <modifier></code>
+: <code>item modify entity <targets> <slot> <modifier></code>
+: <code>item replace block <pos> <slot> with <item> [<count>]</code>
+: <code>item replace block <pos> <slot> from block <-{}-source> <sourceSlot> [<modifier>]</code>
+: <code>item replace block <pos> <slot> from entity <-{}-source> <sourceSlot> [<modifier>]</code>
+: <code>item replace entity <targets> <slot> with <item> [<count>]</code>
+: <code>item replace entity <targets> <slot> from block <-{}-source> <sourceSlot> [<modifier>]</code>
+: <code>item replace entity <targets> <slot> from entity <-{}-source> <sourceSlot> [<modifier>]</code>
+|}
+:{| class="collapsible collapsed collapse-button-none"
+|-
+! style="text-align:left" | 展开版（[[Java版26.3|26.3]]起）：
+|-
+|
+: <code>item modify block <target> <slots> <modifier></code>
+: <code>item modify entity <target> <slots> <modifier></code>
+: <code>item fill block <target> <slots> with <item> [<count>]</code>
+: <code>item fill block <target> <slots> from block <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item fill block <target> <slots> from entity <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item fill entity <target> <slots> with <item> [<count>]</code>
+: <code>item fill entity <target> <slots> from block <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item fill entity <target> <slots> from entity <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item override block <target> <slots> with <item> [<count>]</code>
+: <code>item override block <target> <slots> from block <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item override block <target> <slots> from entity <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item override entity <target> <slots> with <item> [<count>]</code>
+: <code>item override entity <target> <slots> from block <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item override entity <target> <slots> from entity <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item replace block <target> <slots> with <item> [<count>]</code>
+: <code>item replace block <target> <slots> from block <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item replace block <target> <slots> from entity <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item replace entity <target> <slots> with <item> [<count>]</code>
+: <code>item replace entity <target> <slots> from block <-{}-source> <sourceSlots> [<modifier>]</code>
+: <code>item replace entity <target> <slots> from entity <-{}-source> <sourceSlots> [<modifier>]</code>
+|}
+
+== 参数 ==
+<!-- {{until|JE 26.3}} 以下参数移除 -->
+{{argument|pos|block_pos}}
+: 指定要改变的方块的位置。
+: {{arg desc|je=block_pos}}
+
+{{argument|targets|entity}}
+: 指定一个或多个要改变的实体。
+: {{arg desc|je=entity|amount=multiple|type=entities}}
+
+{{argument|slot|item_slot}}
+: 指定要改变的[[槽位]]。有效值取决于要改变的方块或实体。
+: {{arg desc|je=item_slot}}
+
+{{argument|sourceSlot|item_slot}}
+: 指定要复制其中物品的[[槽位]]。有效值取决于要改变的方块或实体。
+: {{arg desc|je=item_slot}}
+
+----<!-- {{upcoming|JE 26.3}} 以下参数新增 -->
+{{argument|target|block_pos}}（{{cd|block <target>}}时）
+: 指定要改变的方块的位置。
+: {{arg desc|je=block_pos}}
+
+{{argument|target|entity}}（{{cd|entity <target>}}时）
+: 指定一个或多个要改变的实体。
+: {{arg desc|je=entity|amount=multiple|type=entities}}
+
+{{argument|slots|slot_source}}
+: 指定要改变的[[槽位]]或[[槽位源]]。槽位有效值取决于要改变的方块或实体。
+: {{arg desc|je=slot_source}}
+
+{{argument|sourceSlots|slot_source}}
+: 指定要复制其中物品的[[槽位]]或[[槽位源]]。槽位有效值取决于要改变的方块或实体。
+: {{arg desc|je=slot_source}}
+
+----<!-- 发版后需要移除此行 -->
+{{argument|source|block_pos}}（{{cd|block <-{}-source>}}时）
+: 指定要复制其中物品的方块的位置。
+: {{arg desc|je=block_pos}}
+
+{{argument|source|entity}}（{{cd|entity <-{}-source>}}时）
+: 指定要复制其中物品的单个实体。
+: {{arg desc|je=entity|amount=single}}
+
+{{argument|modifier|loot_modifier}}
+: 指定使用的[[物品修饰器]]。
+: {{arg desc|je=loot_modifier}}
+
+{{argument|item|item_stack}}
+: 指定放置于方块或实体的槽位内的物品。
+: {{arg desc|je=item_stack}}
+
+{{argument|count|integer}}
+: 指定放置的物品的数量。
+: {{arg desc|je=integer|min=1|max=99}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|cmd=/item ... from ...,/item modify ...|<code><modifier></code>不满足以下所有条件：
+* 若为命名空间ID，则应是一个存在的物品修饰器ID
+* 若为字符串NBT标签，则应是一个有效的[[命名空间ID]]，且该ID是一个存在的物品修饰器ID
+* 若为非字符串NBT标签，则应正确地定义了一个物品修饰器|fail}}
+{{Result table|cmd=/item fill block ...,/item modify block ...,/item override block ...,/item replace block ...|指定的位置未被加载或在世界外}}
+{{Result table|指定位置处的方块不是容器}}
+{{Result table|{{cd|<slots>}}不是指定位置处的方块的有效槽位}}
+{{Result table|cmd=/item fill entity ...,/item modify entity ...,/item override entity ...,/item replace entity ...|<code><targets></code>{{until|JE 26.3}}/<code><target></code>{{upcoming|JE 26.3}}无法选中一个或多个实体（被指定的玩家必须在线上）}}
+{{Result table|指定的所有实体都满足以下条件中的至少一个：
+* 不是目标实体的有效槽位（如僵尸没有<code>player.cursor</code>槽位）
+* 指定物品无法放置于目标实体的指定槽位（如在玩家的<code>armor.chest</code>槽位放置石头）}}
+{{Result table|cmd=/... with <item> <count>|<code><count></code>超过了指定物品的堆叠上限}}
+{{Result table|cmd=/... from block ...|<code><-{}-source></code>未被加载或在世界外}}
+{{Result table|<code><-{}-source></code>处的方块不是容器}}
+{{Result table|{{cd|<slots>}}不是<code><-{}-source></code>处的方块的有效槽位}}
+{{Result table|cmd=/... from entity ...|<code><-{}-source></code>无法选出单个实体（被指定的玩家必须在线上）}}
+{{Result table|{{cd|<slots>}}不是<code><-{}-source></code>实体的有效槽位（如僵尸没有<code>player.cursor</code>槽位）}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{inUntil|je 26.3|nc=1}}：
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|cmd=/item (modify&#124;replace) block ...|执行成功|1|1|1}}
+{{Output table|cmd=/item (modify&#124;replace) entity ...|执行成功|1|1|被替换了物品的实体的数量}}
+{{Output table}}
+
+{{inUpcoming|je 26.3|nc=1}}：
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|<code><slots></code>选中的槽位中被成功替换的数量}}
+{{Output table}}
+
+== 示例 ==
+* 将上方2格处的一个小型箱子右下角槽位内的物品替换成4棵云杉树苗：
+** <code>/item replace block ~ ~2 ~ container.26 with minecraft:spruce_sapling 4</code>
+* 将最近玩家的快捷栏最右槽位内的物品替换成4棵云杉树苗：
+** <code>/item replace entity @p hotbar.8 with minecraft:spruce_sapling 4</code>
+* 定义一个内联物品修饰器，尝试将执行者主手上的可以放进熔炉烧制的物品替换为其烧制之后的物品（比如生猪排将替换为熟猪排）：
+** <code>/item modify entity @s weapon.mainhand {function:"furnace_smelt"}</code>
+* 定义一个内联物品修饰器，尝试移除玩家头盔栏内物品上的绑定诅咒和消失诅咒魔咒：
+** <code>/item modify entity @s armor.head {function:"set_enchantments", enchantments:{"binding_curse":0, "vanishing_curse":0}, add:false}</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2017年11月8日|link=https://www.minecraft.net/en-us/article/minecraft-snapshot-17w45a|[[Java版17w45a|17w45a]]的更新日志中提及了名为{{cmd|modifyitem|link=none}}的命令，最初计划用其取代{{cmd|enchant}}。}}
+|{{HistoryLine||2018年2月9日|link=https://www.minecraft.net/en-us/article/minecraft-snapshot-18w06a|在[[Java版18w06a|18w06a]]的更新日志中，[[Dinnerbone]]表示团队已搁置{{cmd|modifyitem|link=none}}这一想法，但未来可能会重新考虑。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.17|dev=20w46a|加入了<code>/item</code>以取代{{cmd|replaceitem}}。}}
+|{{HistoryLine|||dev=21w19a|更改了<code>/item</code>的语法。}}
+|{{HistoryLine||1.19|dev=pre1|现在使用<code>/item</code>替换副手槽位后不再产生[[振动]]。}}
+|{{HistoryLine||1.20.2|dev=23w31a|现在可用于替换[[唱片机]]中的物品。
+|现在可用于移除[[雕纹书架]]中的物品。}}
+|{{HistoryLine||1.20.5|dev=24w09a|[[参数类型#item_stack|item_stack参数类型]]更改了语法，现在不再使用物品<code>-{}-''NBT标签''</code>，而是<code>-{}-''物品堆叠组件''</code>。}}
+|{{HistoryLine|||dev=24w12a|现在接受SNBT格式的内联物品修饰器定义。}}
+|{{HistoryLine|||dev=24w14a|现在<code><count></code>参数最大值从64改为99。}}
+|{{HistoryLine|||dev=pre1|现在使用{{cmd|item|link=none}}应用物品修饰器后，物品数量如果超过其最大堆叠数量，则只会返回最大堆叠数量的物品。}}
+|{{HistoryLine||26.3|dev=snapshot-1|加入了{{cd|fill}}和{{cd|override}}子命令，语法和{{cd|/item replace}}相同。
+|现在{{cd|replace}}子命令有新语义：目标槽位中的物品会逐一被来源物品替换，顺序和槽位源所指定的相同。
+|之前接受[[槽位]]的参数现在改为接受槽位源。
+* 将使用新的[[战利品上下文]]{{cd|minecraft:command_slot_source}}解析。
+* 可以引用一个槽位源，也可以内联指定。
+* 可以使用有多个目标的槽位源。
+* 字符串形式的槽位范围写法仍然有效。
+|现在{{cd|from entity}}的物品来源实体参数接受选中多个实体的[[目标选择器]]。
+|现在选中多个实体时，来自各个实体的槽位将会被串联。}}
+}}
+
+== 参见 ==
+* {{cmd|data}} - 通过修改NBT来替换一个容器或实体物品栏中的物品。
+* {{cmd|give}} - 直接给予玩家物品，但不指定具体的槽位或覆盖原有物品。
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/item]]
+[[en:Commands/item]]
+[[es:Comandos/item]]
+[[fr:Commandes/item]]
+[[ja:コマンド/item]]
+[[pt:Comandos/item]]
+[[ru:Команды консоли/item]]

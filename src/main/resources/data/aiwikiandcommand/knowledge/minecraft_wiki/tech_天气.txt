@@ -1,0 +1,186 @@
+# 页面: 天气
+# 来源: https://zh.minecraft.wiki/w/%E5%A4%A9%E6%B0%94
+# 分类: Java版即将到来/26.3, Java版独有信息, 基岩版独有信息, 实验性内容/2026 年第 3 次更新, 有未知版本的History模板的页面/Java版, 有未知版本的History模板的页面/携带版, 未确定的译名, 环境
+# 抓取时间: 2026-07-14 17:25:04
+# 原始 Wikitext 内容:
+
+{{for|对其进行设置的命令|命令/weather}}
+[[File:Weather preview.png|thumb]]
+[[File:UVNCC.jpg|缩略图|250px|2个[[生物群系]]中的天气]]
+
+'''天气（Weather）'''是发生在[[世界]]中的全局性状态。<ref>{{Tweet|notch|55984678875836416|It's temporal and global|April 07, 2011}}</ref>
+
+== 机制 ==
+[[File:WeatherSkyComparison.png|缩略图|125px|不同天气下天空亮度等级的对比]]
+
+天气影响所有维度中的所有位置。天气不是局部发生的，因此不会出现不同位置有不同天气的情况。
+
+世界的天气可以是以下三种天气之一：'''晴天（Clear）'''，'''降雨（Rain）'''，'''雷暴（Thunder）'''。在发生降雨或雷暴时，天气在特定位置上的具体表现则受到生物群系和位置的影响，分为三类：'''降雨'''，'''降雪'''，'''阴天'''。
+
+所有的[[下界]]和[[末地]]的生物群系都只能发生阴天，而这些维度没有阳光，因此无法察觉世界天气的变化。不过，如果玩家将能够发生降雨或降雪的生物群系生成在下界或末地，就能观察到天气。
+
+游戏中有两个计时器控制天气：降雨计时器和雷暴计时器。降雨计时器激活时世界会开始下雨，通常每次降雨持续随机持续3~13分钟，而晴天随机持续10-150分钟。若降雨计时器和雷暴计时器同时处于激活状态，则天气变为雷暴。平均有{{fraction|109|121}}的时间处于晴天天气，有{{fraction|1|11}}的时间处于降雨天气，有{{fraction|1|121}}的时间处于雷暴天气。
+
+[[玩家]]使用[[床]]或{{in update|drop 3 2026|for={{pa|Straw Bed|}}}}完成一次睡觉并跳过了时间后，天气总是会被设置为晴天。
+
+使用{{cmd|weather}}可以改变天气。通过{{cmd|weather}}改变天气会导致降雨计时器和雷暴计时器变为相同值，因此晴天结束后必然会进入雷暴天气。{{in|be}}{{cmd|toggledownfall}}命令会使天气在恶劣天气和晴天中相互切换。
+
+[[游戏规则]]{{gamerule|advance_weather|doWeatherCycle}}控制了天气是否会变化。该游戏规则为<code>false</code>时，天气不能被{{cmd|weather}}和{{only|for={{cmd|toggledownfall}}|be}}以外的方式改变。
+
+== 世界天气 ==
+=== 晴天 ===
+晴天是没有特殊天气现象的天气。[[太阳]]、[[月亮]]和[[星星]]只在晴天时是可见的。晴天的[[云]]是白色的。[[村民]]只在晴天时进行工作。<ref>{{Tweet|notch|55982751265988610|You can't see sun/moon/stars while it's raining, and days are one level darker.|April 07, 2011}}</ref>
+
+晴天时，玩家可以使用床或{{in update|drop 3 2026|for={{pa|Straw Bed}}}}睡觉的时间范围为12542-23459刻。
+
+=== 降雨 ===
+{{Main|降雨}}
+降雨是少见的天气。降雨发生时，太阳、月亮、星星会变得不可见，且云和天空的颜色会变为灰色。降雨也会导致村民停止工作并回到它们的家中。
+
+降雨时，玩家可以使用床或{{in update|drop 3 2026|for={{pa|Straw Bed}}}}睡觉的时间范围为12010-23991刻。
+
+降雨时，受[[昼夜更替]]影响的[[亮度#内部光照|内部天空光照]]不会超过12。
+
+=== 雷暴 ===
+{{Main|雷暴}}
+[[File:LightningStrike.gif|thumb|闪电击中了一棵树]]
+
+雷暴是十分罕见的恶劣天气，在降雨的效果外追加了更多的效果。
+
+雷暴时，玩家可以在一天中的任何时候使用床或{{in update|drop 3 2026|for={{pa|Straw Bed}}}}睡觉，从而结束雷暴天气。
+
+雷暴时，受昼夜更替影响的[[亮度#内部光照|内部天空光照]]不会超过10。在[[敌对生物]]生成系统中，雷暴时天空光照还会被视为降低了10级，这使得敌对生物可以在一天中的任何时间生成。<ref>{{Tweet|notch|57363403102105600|MUOAHAHA! Thunder Storms lower the brightness. That means daytime monsters during storms. This is freakily atmospheric.|April 11, 2011}}</ref>
+
+雷暴时，天气表现为降雨的位置会有概率生成[[闪电]]。
+{{-}}
+
+== 天气表现 ==
+在天气为降雨和雷暴时，不同位置会出现不同的天气表现。
+
+[[生物群系]]有两种降水类型：无降水与有降水。无降水的生物群系只能出现阴天；有降水的生物群系，温度大于0.15时会出现降雨，否则会出现降雪。
+
+由于温度受到高度的影响，在不同高度上也会出现不同的天气表现。
+
+=== 降雨 ===
+{{Main|降雨}}
+[[File:Rainy Hills.png|缩略图|250px|降雨时的山景]]
+
+降雨发生时，降雨粒子从天空中快速落下，降雨粒子在碰到一个方块时会发出响亮的雨声，这些声音能在远至16格以外的地方听见。这些粒子（及其相关的声音）可以通过[[视频设置]]菜单中设置{{tp|options.particles}}为“{{tp|options.particles.minimal}}”来关闭。
+
+雨水对与其接触的实体或方块有许多效果：
+* 与雨水接触会消除实体的[[着火]]状态。
+* [[火]]暴露在雨水中会显著增加其熄灭速率，但不会影响不会熄灭的火，如[[下界岩]]上的火。<ref>{{tweet|notch|56265234951831552|it will not!|April 08, 2011}}</ref>
+* [[熔岩]]与雨水接触时会显著增加其喷发粒子的生成频率，但不会变为[[黑曜石]]。<ref>{{tweet|notch|55977565839564800|I'm not making it solidify lava, as that would ruin all surface lava structures when the first rain hits. But it does put out fires.|April 07, 2011}}</ref>
+* [[末影人]]、[[雪傀儡]]、[[烈焰人]]和[[炽足兽]]在接触雨水时会持续受到[[伤害]]。
+* [[钓鱼]]时，[[浮漂]]与雨水接触会降低钓鱼需要的等待时间。<ref>{{tweet|notch|55981125994156032|Higher odds of catching fish while raining.. Good one. :D I'll try making it fill small holes with water, but it might be annoying.. brb|April 07, 2011}}</ref>
+* [[狼]]在雨水会变湿，在静止时甩干。
+* 干的[[耕地]]会变湿。<ref>{{tweet|notch|55972362432151552|Wolves get wet in the rain. Crops will get watered. Anything else it should affect?|April 07, 2011}}</ref>
+* [[炼药锅]]会逐渐被[[水]]填充。
+* {{in|be}}使用[[打火石]]点火，火将会立刻熄灭。
+* 在雷暴时，闪电会随机生成在有雨水落下的位置。
+* 与雨水接触可以使用[[三叉戟]]的[[激流]]效果。
+* 在雷暴时，有[[引雷]]魔咒的三叉戟在击中与雨水接触的实体或[[避雷针]]时会生成闪电。
+{{-}}
+=== 降雪 ===
+{{Main|降雪}}
+[[File:Snowing.png|缩略图|250px|一场降雪]]
+
+降雪发生时，降雪粒子从天空中缓慢落下。降雪不会产生雨声。
+
+降雪的标志性特征是[[雪]]的生成。除了8层的雪，所有暴露在天空下且上表面完整的方块均会开始出现雪。<ref>{{tweet|notch|55919635593306112|Ice and snow will regrow, farms will autowater|April 07, 2011}}</ref>{{in|be}}降雪还会导致已有的雪增加层数。
+
+暴露在天空下的[[炼药锅]]在降雪时会逐渐被[[细雪]]填充。
+
+不像降雨，降雪不能消除着火，也不能激活三叉戟的激流效果。
+{{-}}
+=== 阴天 ===
+阴天时不会有雨或雪出现。这意味着除了太阳、月亮、星星的可见性、云的颜色、天空的颜色和亮度等级的变化以外，阴天没有和晴天的其他区别。
+
+所有下界和末地的生物群系都只会发生阴天，因此在这些维度中，天气的变化是无法被观测到的。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Classic}}
+|{{HistoryLine||0.26_SURVIVAL_TEST|加入了降雨，目前没有实际用途。它的加入只是为了测试降雨时方块对下方的遮蔽作用。}}
+|{{HistoryLine||0.27_SURVIVAL_TEST|现在可以通过按下{{key|F5}}来控制是否降雨。}}
+|{{HistoryLine||0.29_01|现在只可以在创造模式中控制是否降雨。}}
+|{{HistoryLine|java Indev}}
+|{{HistoryLine||20100212-1210|{{key|F5}}不再能够控制是否降雨。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.4|加入了[[冬天模式]]。生成世界时，有25%的概率生成降雪的世界，在这个世界中会一直降雪。该特性最终由于[[生物群系]]的加入而被移除。}}
+|{{HistoryLine||v1.2.0|dev=preview|移除了[[冬天模式]]，其被[[生物群系]]取代。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|引入了天气。降雨、降雪和雷暴是在预告片发布的一年后引入的。<ref>http://www.youtube.com/watch?v=qy882ILYJMM</ref>降雨与Classic版的降雨看起来一样，但播放的音效文件不同。
+|现在闪电击中苦力怕，苦力怕会变成闪电苦力怕。闪电击中猪，猪会变成僵尸猪人。}}
+|{{HistoryLine||1.5_01|修复了雨会穿过像[[草]]、[[楼梯]]和[[台阶]]之类的方块。}}
+|{{HistoryLine||1.6|dev=Test Build 3|修复了在沿着[[梯子]]向下爬直至更改方向或到达底部时雨滴似乎会卡死的漏洞，这表明可能玩家爬梯子的速度与降雨的速度相当。
+|修复了雨和雪会掉进水下的漏洞。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre1|降雪会摧毁[[红石]]、[[火把]]、[[树苗]]和[[铁轨]]。}}
+|{{HistoryLine|||dev=Beta 1.9-pre5|修复了上述漏洞。}}
+|{{HistoryLine||1.3.1|dev=12w22a|现在在降雨或雷暴可以使[[炼药锅]]内水量增加。}}
+|{{HistoryLine|||dev=12w23a|加入了天气过渡。}}
+|{{HistoryLine||1.7.2|dev=13w39a|渲染的亮度现在会在雷暴时减少。之前，天空会变黑，即使怪物可以生成，但地面不会变黑。
+|云与天空在雷暴时会变得更暗。}}
+|{{HistoryLine||1.8|dev=14w03a|闪电会把村民变成女巫。}}
+|{{HistoryLine|||dev=14w30a|闪电现在可用{{cmd|summon LightningBolt}}命令生成。}}
+|{{HistoryLine||1.9|dev=15w38a|闪电击中后有机会（取决于[[区域难度]]）生成一只[[骷髅陷阱马]]。}}
+|{{HistoryLine|||dev=16w04a|更新了降雨音效。现在降雨时更融入背景，音效变得更真实。}}
+|{{HistoryLine||1.13|dev=?|现在天气不再基于[[世界种子]]进行随机。<ref>{{bug|MC-309009|||Invalid}}</ref>}}
+|{{HistoryLine||1.18|dev=21w44a|现在仅在降雨或雷暴时睡觉才会重置天气循环。<ref>{{bug|MC-63340|||Fixed}}</ref>}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.12.1|dev=build 1|加入了天气与天气过渡。}}
+|{{HistoryLine|||dev=build 2|在下雪的针叶林的树叶现在在降雪时会被冰冻。}}
+|{{HistoryLine|||dev=build 9|降雨现在不会在水下可见。
+|降雨会造成些许延迟。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=?|恶劣天气现在可以通过睡觉跳过。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入了天气。}}
+|{{HistoryLine||xbox=TU5|改善了雨的边角（当在降雨中向上看时）。}}
+|{{HistoryLine||xbox=TU25|xbone=CU14|ps3=1.17|psvita=1.17|ps4=1.17|雷暴发生时云现在会变黑，从而得知降雨与雷暴的区别。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|加入了天气过渡。}}
+}}
+{{-}}
+
+== 你知道吗 ==
+[[File:Void Rain.png|缩略图|200px|雨滴掉进虚空]]
+* 雨和雪仍然在云的上方掉下。Notch对此的解释是雷暴时云上面的灰色部分是另一层云，这一层云是降雨的来源。<ref>{{tweet|notch|130230769347067905|there's another layer of clouds above the low one! That's why the sky turns gray.|October 29, 2011}}</ref>
+* 降雨和降雪实际上会掉进虚空中（-64层）<!-- 经过测试，降雪粒子不会像1.18以前的版本一样穿过基岩层而抵达y=-65处 -->。这可以在创造模式中飞行在虚空中看到。注意雨滴没有发出粒子，因为其下方没有方块。
+* {{in|be}}降雨时天空会变暗，但有时仍然能看得见太阳。
+{{-}}
+
+== 画廊 ==
+<gallery>
+File:Stormforest.png|森林中的降雨及雷暴
+File:Snowfalltundra.png|针叶林中的降雪
+File:Dark Rain.png|天气效果使天空变暗，[[太阳]]被遮蔽
+File:Dry Rain.png|沙漠边界处的阴天
+File:RainAndSnow.gif|雨和雪
+File:Savanna won't rain.png|热带草原中的阴天（旁边正在下雨的是河流群系）
+File:Rain and Snow.jpg|在河流上面的一场降雨，而在河流两侧则是降雪
+File:Void Thunder.png|闪电击中时的虚空
+File:Lightning fire.png|闪电生成的火焰
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox environment}}
+
+[[Category:环境]]
+
+[[cs:Počasí]]
+[[de:Wetter (Begriffsklärung)]]
+[[en:Weather]]
+[[es:Clima]]
+[[fr:Météo]]
+[[it:Tempo atmosferico]]
+[[ja:天候]]
+[[ko:날씨]]
+[[nl:Weer]]
+[[pl:Pogoda]]
+[[pt:Clima]]
+[[ru:Погода]]
+[[uk:Погода]]

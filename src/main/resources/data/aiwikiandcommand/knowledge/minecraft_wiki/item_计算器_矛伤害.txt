@@ -1,0 +1,60 @@
+# 页面: 计算器/矛伤害
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%A1%E7%AE%97%E5%99%A8/%E7%9F%9B%E4%BC%A4%E5%AE%B3
+# 分类: 
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+此互動式計算機可以計算給定速度下玩家使用[[矛]]冲锋攻击能造成的傷害（已包含玩家的1点基础伤害），單位為格每秒。
+
+<onlyinclude><div style="border: 1px solid #ccc; border-radius: 4px; display: block; width: 100%; padding: 1em; box-sizing: border-box;" class="calculator-container">
+'''計算矛冲锋攻击傷害'''
+<div style="display: flex; flex-flow: wrap; justify-content: space-between; align-items: center; gap: 1rem;>
+<div style="gap: .25rem;flex-direction: column;display: flex;">
+<div style="display: flex; flex-direction: row; align-items: center; gap: 1rem;">
+{{simplecalc label|{{tooltip|版本|影响锋利的伤害}}：|for=edition}} <div class="cdx-text-input">{{simplecalc|id=edition|type=select|class=cdx-select|mapping={
+  "Java版": 1,
+  "基岩版": 0
+} |default=1}}</div>
+</div>
+<div style="display: flex; flex-direction: row; align-items: center; gap: 1rem;">
+{{simplecalc label|材料：|for=tier}} <div class="cdx-text-input">{{simplecalc|id=tier|type=select|class=cdx-select|mapping={
+  "木矛": 1,
+  "金矛": 2,
+  "石矛": 3,
+  "{{lan|zh=銅矛|zh-cn=铜矛}}": 4,
+  "{{lan|zh=鐵矛|zh-cn=铁矛}}": 5,
+  "{{lan|zh=鑽石矛|zh-cn=钻石矛}}": 6,
+  "{{lan|zh=獄髓矛|zh-tw=獄髓矛|zh-cn=下界合金矛|zh-hk=地獄合金矛}}": 7
+} |default=5}}{{simplecalc|id=multiplier|type=hidden|formula=switch(tier, 1,0.7, 2,0.7, 3,0.82, 4,0.82, 5,0.95, 6,1.075, 7,1.2)|default=0.95}}{{simplecalc|id=base|type=hidden|default=1}}</div>
+</div>
+<div style="display: flex; flex-direction: row; align-items: center; gap: 1rem;">
+{{simplecalc label|速度（m/s）：|for=speed}} <div class="cdx-text-input">{{simplecalc|id=speed|type=number|default=5.612|min=4.6|step=0.1|decimals=2|class-live=cdx-text-input__input|formula=speedp}}</div>
+</div>
+<div style="display: flex; flex-direction: row; align-items: center; gap: 1rem;">
+{{simplecalc label|[[锋利]]等级：|for=sharpness}} <div class="cdx-text-input">{{simplecalc|id=sharpness|type=number|default=0|min=0|max=5|class-live=cdx-text-input__input}}{{simplecalc|id=sharpbonus|type=hidden|formula=(edition*(sign(sharpness)+sharpness)/2)+((1-edition)*floor(1.25*sharpness))|default=0}}</div>
+</div>
+<div style="display: flex; flex-direction: row; align-items: center; gap: 1rem;">
+{{simplecalc label|造成傷害：|for=damage}} <div class="cdx-text-input">{{simplecalc|id=damage|type=number|default=6|min=0|class-live=cdx-text-input__input|formula=ifgreaterorequal(speed, 4.2, base+sharpbonus+floor(speed*multiplier), 0)}}{{simplecalc|id=speedp|type=hidden|formula=ifequal(damage, base+sharpbonus+floor((speed+0.01)*multiplier), speed, max(ceil(damage-base-sharpbonus)/multiplier, 4.6))}}</div>
+</div>
+</div>
+{{simplecalc-hideifzero|starthidden=1|formula=ifequal(tier, 1)|[[File:Wooden Spear.png|64x64px|class=pixel-image]]}}
+{{simplecalc-hideifzero|starthidden=1|formula=ifequal(tier, 2)|[[File:Golden Spear.png|64x64px|class=pixel-image]]}}
+{{simplecalc-hideifzero|starthidden=1|formula=ifequal(tier, 3)|[[File:Stone Spear.png|64x64px|class=pixel-image]]}}
+{{simplecalc-hideifzero|starthidden=1|formula=ifequal(tier, 4)|[[File:Copper Spear.png|64x64px|class=pixel-image]]}}
+{{simplecalc-hideifzero|formula=ifequal(tier, 5)|[[File:Iron Spear.png|64x64px|class=pixel-image]]}}
+{{simplecalc-hideifzero|starthidden=1|formula=ifequal(tier, 6)|[[File:Diamond Spear.png|64x64px|class=pixel-image]]}}
+{{simplecalc-hideifzero|starthidden=1|formula=ifequal(tier, 7)|[[File:Netherite Spear.png|64x64px|class=pixel-image]]}}
+</div>
+</div></onlyinclude>
+
+== 導覽 ==
+{{Navbox calculators}}
+
+[[en:Calculators/Spear damage]]
+[[fr:Calculateurs/Dégâts de la lance]]
+[[ja:計算機/槍]]
+[[ko:계산기/창 피해]]
+[[lzh:算械/槊所傷]]
+[[pt:Calculadoras/Dano da lança]]
+[[ru:Калькуляторы/Урон копьём]]
+[[uk:Калькулятори/Шкода списа]]

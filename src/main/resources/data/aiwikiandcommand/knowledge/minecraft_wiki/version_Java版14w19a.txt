@@ -1,0 +1,88 @@
+# 页面: Java版14w19a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8814w19a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:11
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=14w19a
+|image=Java Edition 14w19a Simplified.png\Java Edition 14w19a Traditional.png
+|edition=Java
+|type=Snapshot
+|date=2014年5月8日
+|jsonhash=14bb3b1e4b05852ba81e3fccf55e36cf1b731eef
+|clienthash=1d498b388c98ec363cfaa19cec3fcc9717d7ac35
+|serverhash=a7df79e00c4d75e3916438658839785a476bd6ac
+|exehash=d4d240fb82eac62425a8febee305874975ad6c57
+|parent=1.8
+|prevparent=1.7.10
+|prev=14w18b
+|next=14w20a
+|nextparent=1.8.1
+}}<onlyinclude>
+
+'''14w19a'''是[[Java版1.8]]的第22个快照，发布于2014年5月8日<ref>{{cite|url=http://mojang.com/2014/05/minecraft-snapshot-14w19a/|archive-url=1|archive=1|title=Minecraft snapshot 14w19a|author=Dinnerbone|website=Mojang.com|date=May 8, 2014}}</ref>，修复了一些漏洞。
+
+== 更改 ==
+=== 方块 ===
+'''[[活塞]]与[[黏液块]]'''
+* 黏液块现在可以横向或向下推动玩家。
+** 在地面上的实体要比在空中的实体受力更小。
+
+=== 世界生成 ===
+'''[[世界边界]]'''
+* '''警示'''，一个在世界边界近处时可以看到的红色光晕。
+** 仅在高品质模式中可见。
+** 在边界外时，警示的效果保持在最大。
+** 在边界内时，警示的效果随着玩家接近边界时变大。
+** 如果边界是静态的，警示会在玩家进入警示距离时出现，默认距离为5米。
+** 如果边界正在缩小，警示将在边界在警示时间内抵达时开始出现，默认时间为15秒。
+* 新的选项
+** {{cmd|worldborder damage <buffer{{!}}amount>}}
+*** <code>buffer</code>是玩家在越过边界后会开始受伤害前的距离（默认为{{cd|5}}）。
+*** <code>amount</code>是玩家每越过边界缓冲段一米所受到的伤害（默认为{{cd|0.2}}）。
+** {{cmd|worldborder warning <time{{!}}distance>}}
+*** <code>time</code>为给玩家的提前提示时间（秒），游戏将会使用红色的边框来提醒边界正在逐渐缩减到他们的位置（默认为{{cd|15}}）。
+*** <code>distance</code>为红色边框会离边界显示的距离（米）（默认为{{cd|5}}）。
+* 在[[下界]]的边界大小现与和[[主世界]]的相同。
+* 下界传送门
+** 传送到下界时将不会在边界外创造新的传送门。
+** 玩家仍可能传送到在边界外的传送门。
+
+=== 游戏内容 ===
+'''[[旁观模式]]'''
+* 旁观者现有一个用于传送到别的玩家的界面。
+** 通过鼠标中键或数字键触发。
+* 当可传送的玩家超过8名时，两边会改为箭头。
+* 当队伍创建后，队伍可以选择只显示那队的玩家。
+* 数字键和“捡起方块”键再加上滚轮可以用来控制界面。
+* 可以跨维度传送。
+** “距离完成还有段时间。”
+
+== 修复 ==
+{{fixes|fixedin=14w19a|prefix=Minecraft|showdesc=1
+|;old
+|49656|圆石墙的纹理有误。
+|;dev
+|51109|文件{{filename|mob_spawner.json}}丢失。
+|52814|投掷器内部生成的物品，由于没有速度导致乱飞。
+|53555|下界的传送门设置在边界外。
+|53557|退出并重进游戏后，世界边界不再变化。
+|54125|执行{{cmd|worldborder set 100 10|link=none}}命令回显的是10000秒而不是10秒。
+|54358|黏性活塞推拉不可移动的方块时，会将其破坏。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.8}}
+
+[[de:14w19a]]
+[[en:Java Edition 14w19a]]
+[[es:Java Edition 14w19a]]
+[[fr:Édition Java 14w19a]]
+[[it:Java Edition 14w19a]]
+[[ja:Java Edition 14w19a]]
+[[pt:Edição Java 14w19a]]
+[[ru:14w19a (Java Edition)]]

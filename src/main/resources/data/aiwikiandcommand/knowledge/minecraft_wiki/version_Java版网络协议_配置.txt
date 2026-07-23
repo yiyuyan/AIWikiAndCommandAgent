@@ -1,0 +1,246 @@
+# 页面: Java版网络协议/配置
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/%E9%85%8D%E7%BD%AE
+# 分类: Java版独有特性, 使用计算器的页面, 网络协议
+# 抓取时间: 2026-07-14 17:15:28
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|数据包|封包}}<!-- 全文中不会出现Data pack数据包，均代表网络数据包 -->
+{{exclusive|je}}
+
+'''配置阶段（Configuration）'''是Java版网络协议中的一个网络阶段，位于登录阶段和游戏阶段之间。客户端完成登录阶段后，服务器会在配置阶段向客户端同步进入世界前所需的数据，包括[[实验性内容|功能开关]]、[[注册表]]、[[Java版标签|标签]]、服务器[[资源包]]、服务器链接、Cookie等内容。
+
+配置阶段也可以在游戏阶段中途重新进入。服务器可以要求客户端从游戏阶段切换回配置阶段，用于重新同步部分连接状态。
+
+== 阶段位置 ==
+
+在普通多人游戏连接中，客户端与服务器的网络阶段通常按下列顺序变化：
+
+# 建立网络连接。
+# 进入握手阶段。
+# 进入登录阶段。
+# 进入配置阶段。
+# 进入游戏阶段。
+
+登录阶段完成后，服务器会向客户端发送<code>login_finished</code>S2C包。客户端接收后发送<code>login_acknowledged</code>C2S包，随后客户端切换到配置阶段。服务器接收<code>login_acknowledged</code>C2S包后，也切换到配置阶段。
+
+配置阶段完成后，服务器发送<code>finish_configuration</code>S2C包。客户端接收后发送<code>finish_configuration</code>C2S包，随后双方切换到游戏阶段。
+
+== 协议内容 ==
+{{Calculator|protocol|packets=login/client/login_finished;login/server/login_acknowledged;configuration/server/client_information;configuration/server/cookie_response;configuration/server/custom_payload;configuration/server/finish_configuration;configuration/server/keep_alive;configuration/server/pong;configuration/server/resource_pack;configuration/server/select_known_packs;configuration/server/custom_click_action;configuration/server/accept_code_of_conduct;configuration/client/cookie_request;configuration/client/custom_payload;configuration/client/disconnect;configuration/client/finish_configuration;configuration/client/keep_alive;configuration/client/ping;configuration/client/reset_chat;configuration/client/registry_data;configuration/client/resource_pack_pop;configuration/client/resource_pack_push;configuration/client/store_cookie;configuration/client/transfer;configuration/client/update_enabled_features;configuration/client/update_tags;configuration/client/select_known_packs;configuration/client/custom_report_details;configuration/client/server_links;configuration/client/clear_dialog;configuration/client/show_dialog;configuration/client/code_of_conduct}}
+
+配置阶段中的数据包分为C2S和S2C两个方向。
+
+C2S数据包由客户端发送到服务器，配置阶段中包含下列类型：
+* <code>client_information</code>：发送客户端设置信息。
+* <code>cookie_response</code>：响应服务器的Cookie请求。
+* <code>custom_payload</code>：发送自定义负载。
+* <code>finish_configuration</code>：通知服务器客户端配置阶段处理完成。
+* <code>keep_alive</code>：响应服务器保活。
+* <code>pong</code>：响应服务器ping。
+* <code>resource_pack</code>：发送服务器资源包处理状态。
+* <code>select_known_packs</code>：发送客户端接受的已知资源包列表。
+* <code>custom_click_action</code>：发送自定义点击操作。
+* <code>accept_code_of_conduct</code>：确认接受服务器行为准则。
+
+S2C数据包由服务器发送到客户端，配置阶段中包含下列类型：
+* <code>cookie_request</code>：请求客户端返回指定Cookie。
+* <code>custom_payload</code>：发送自定义负载。
+* <code>disconnect</code>：断开配置阶段连接。
+* <code>finish_configuration</code>：通知客户端配置阶段完成。
+* <code>keep_alive</code>：发送保活请求。
+* <code>ping</code>：发送ping请求。
+* <code>reset_chat</code>：重置聊天状态。
+* <code>registry_data</code>：发送注册表数据。
+* <code>resource_pack_pop</code>：移除服务器资源包。
+* <code>resource_pack_push</code>：推送服务器资源包。
+* <code>store_cookie</code>：要求客户端存储Cookie。
+* <code>transfer</code>：要求客户端转移到其他服务器。
+* <code>update_enabled_features</code>：同步启用的功能开关。
+* <code>update_tags</code>：同步标签数据。
+* <code>select_known_packs</code>：请求客户端选择已知资源包。
+* <code>custom_report_details</code>：发送自定义报告信息。
+* <code>server_links</code>：发送[[对话框定义格式#server_links|服务器链接]]。
+* <code>clear_dialog</code>：清除[[对话框]]。
+* <code>show_dialog</code>：显示对话框。
+* <code>code_of_conduct</code>：发送服务器行为准则。
+
+== 配置任务 ==
+
+服务器进入配置阶段后，会按顺序执行配置任务。配置任务同一时间只会执行一个，当前任务结束后才会开始下一个任务。
+
+普通连接中，配置阶段通常包含下列任务：
+# 同步注册表。
+# 发送服务器行为准则，前提是服务器配置了行为准则。
+# 推送服务器资源包，前提是服务器配置了服务器资源包。
+# 准备玩家出生点。
+# 完成配置阶段。
+
+在任务开始前，服务器还会向客户端发送部分通用数据：
+* 服务器铭牌。
+* 服务器链接。
+* 启用的功能开关。
+
+== 功能开关 ==
+
+服务器会在配置阶段向客户端发送当前世界启用的[[实验性内容|功能开关]]。客户端接收后，会将服务器发送的功能名称转换为本地功能开关集合。
+
+功能开关用于决定客户端和服务器在后续游戏阶段中可使用的游戏内容。部分物品、方块或数据内容会根据启用的功能开关判断是否可用。
+
+== 已知资源包协商 ==
+
+注册表同步开始时，服务器会先发送<code>select_known_packs</code>S2C包。该数据包包含服务器希望客户端识别的一组已知资源包。
+
+客户端接收后，会在本地可信资源包仓库中查找这些已知资源包。客户端能够识别的资源包会被加入选择结果，并通过<code>select_known_packs</code>C2S包返回给服务器。
+
+如果客户端返回的已知资源包列表与服务器请求列表一致，服务器会按照该协商结果打包注册表数据。如果客户端未完整接受服务器请求的已知资源包列表，服务器会按照空已知资源包集合打包注册表数据。
+
+== 注册表同步 ==
+
+[[注册表]]同步用于将服务器侧的网络同步注册表发送给客户端。服务器会将注册表内容拆分为一个或多个<code>registry_data</code>S2C包发送。
+
+<code>registry_data</code>S2C包包含下列内容：
+* 注册表键。
+* 注册表条目列表。
+
+注册表条目以网络可同步的形式发送，条目内容使用NBT作为序列化数据。客户端接收后会先收集这些注册表数据，而不是立刻进入游戏阶段。
+
+服务器发送完注册表数据后，还会发送<code>update_tags</code>S2C包同步标签数据。
+
+== 标签同步 ==
+
+<code>update_tags</code>S2C包用于同步[[Java版标签|注册表标签]]。标签数据按注册表分组，每个注册表对应一组标签网络数据。
+
+客户端接收标签数据后，会先将其保存到配置阶段的注册表收集器中。客户端收到<code>finish_configuration</code>S2C包后，才会把注册表内容和标签数据合并为游戏阶段使用的注册表视图。
+
+如果配置阶段没有收到新的注册表内容，而只收到标签数据，客户端会在已有注册表上应用标签更新。
+
+== 服务器行为准则 ==
+
+如果服务器配置了[[服务器文件目录#服务器行为准则|行为准则]]，服务器会在配置阶段向客户端发送<code>code_of_conduct</code>S2C包。该数据包包含服务器选择的行为准则文本。
+
+服务器选择行为准则文本时，会优先使用客户端语言对应的文本。如果没有对应语言文本，则使用<code>en_us</code>文本。如果仍不存在，则使用服务器配置中的任意一个行为准则文本。
+
+客户端接收行为准则后，如果该服务器的该文本已被接受，客户端会直接发送<code>accept_code_of_conduct</code>C2S包。如果尚未接受，客户端会显示行为准则界面。玩家接受后，客户端发送<code>accept_code_of_conduct</code>C2S包；玩家拒绝后，客户端断开连接。
+
+服务器收到<code>accept_code_of_conduct</code>C2S包后，当前行为准则任务结束。
+
+== 服务器资源包 ==
+
+如果服务器配置了[[下载缓存目录|服务器资源包]]，服务器会在配置阶段发送<code>resource_pack_push</code>S2C包。该数据包包含下列内容：
+* 资源包UUID。
+* 资源包URL。
+* 资源包哈希。
+* 是否强制使用。
+* 可选提示文本。
+
+客户端会通过<code>resource_pack</code>C2S包返回资源包处理状态。服务器在收到终止状态后结束资源包任务。
+
+资源包处理状态包括接受、拒绝、下载成功、下载失败、应用成功等结果。具体状态由客户端资源包处理过程决定。
+
+== 准备出生点 ==
+
+配置阶段进入后期时，服务器会准备玩家进入世界所需的出生信息。
+
+服务器会读取玩家保存数据，并确定下列内容：
+* 玩家所在维度。
+* 玩家位置。
+* 玩家朝向。
+* 如果没有保存位置，则使用世界出生点。
+* 如果需要查找出生位置，则执行出生点搜索。
+
+服务器确定出生点后，会加载出生点附近区块。普通流程中，服务器会以出生区块为中心，准备半径为3的区块范围。区块准备完成后，出生点准备任务结束。
+
+在配置阶段尚未结束时，服务器会维持出生区块加载状态。
+
+== 完成配置 ==
+
+所有配置任务完成后，服务器发送<code>finish_configuration</code>S2C包。
+
+客户端收到后，会执行下列操作：
+# 整合配置阶段收集的注册表数据。
+# 应用标签数据。
+# 更新数据组件相关内容。
+# 创建游戏阶段使用的注册表视图。
+# 切换入站协议到游戏阶段。
+# 发送<code>finish_configuration</code>C2S包。
+# 切换出站协议到游戏阶段。
+
+服务器收到<code>finish_configuration</code>C2S包后，会执行下列操作：
+# 结束完成配置任务。
+# 切换出站协议到游戏阶段。
+# 检查是否存在相同UUID的在线玩家。
+# 再次执行本地登录检查。
+# 使用准备好的出生信息创建玩家。
+# 将玩家加入世界。
+# 切换连接到游戏阶段处理流程。
+
+== 重新配置 ==
+
+客户端进入游戏阶段后，服务器仍可以要求客户端重新进入配置阶段。
+
+重新配置由服务器在游戏阶段发送<code>start_configuration</code>S2C包开始。服务器发送该数据包后，会移除玩家当前世界状态，并将出站协议切换到配置阶段。
+
+客户端收到<code>start_configuration</code>S2C包后，会执行下列操作：
+# 发送聊天确认。
+# 保存聊天窗口状态。
+# 清除当前客户端世界。
+# 切换入站协议到配置阶段。
+# 发送<code>configuration_acknowledged</code>C2S包。
+# 切换出站协议到配置阶段。
+
+服务器收到<code>configuration_acknowledged</code>C2S包后，会将入站协议切换到配置阶段，并重新创建配置阶段处理流程。
+
+== Cookie ==
+{{main|Java版网络协议/Cookie}}
+配置阶段支持Cookie数据交换。服务器可以发送<code>store_cookie</code>S2C包要求客户端存储指定Cookie，也可以发送<code>cookie_request</code>S2C包请求客户端返回指定Cookie。
+
+客户端接收Cookie请求后，会通过<code>cookie_response</code>C2S包返回对应数据。如果客户端没有对应Cookie，则返回空数据。
+
+Cookie数据可以在转移连接中继续携带，用于服务器之间传递连接状态。
+
+== 转移 ==
+
+配置阶段中服务器可以发送<code>transfer</code>S2C包要求客户端连接到其他服务器。客户端接收该数据包后，会根据数据包中的目标地址和端口发起新的连接。
+
+转移连接在握手阶段使用转移意图。服务器接收转移意图后，会检查是否允许转移连接。如果服务器不接受转移连接，会在登录阶段断开该连接。
+
+== 保活 ==
+
+配置阶段使用通用保活数据包维持连接。服务器会向客户端发送保活请求，客户端返回对应响应。配置阶段也支持ping和pong数据包。
+
+配置阶段可能包含注册表加载、资源包处理、行为准则确认和出生区块准备等过程，因此连接会在配置阶段继续执行保活处理。
+
+== 配置阶段流程 ==
+
+普通连接中，从登录阶段结束到进入游戏阶段的配置流程如下：
+
+# 客户端接收<code>login_finished</code>S2C包。
+# 客户端发送<code>login_acknowledged</code>C2S包。
+# 客户端切换到配置阶段。
+# 服务器接收<code>login_acknowledged</code>C2S包。
+# 服务器切换到配置阶段。
+# 服务器发送服务器铭牌。
+# 服务器发送服务器链接，前提是服务器存在服务器链接。
+# 服务器发送<code>update_enabled_features</code>S2C包。
+# 服务器发送<code>select_known_packs</code>S2C包。
+# 客户端返回<code>select_known_packs</code>C2S包。
+# 服务器发送一个或多个<code>registry_data</code>S2C包。
+# 服务器发送<code>update_tags</code>S2C包。
+# 服务器发送<code>code_of_conduct</code>S2C包，前提是服务器配置了行为准则。
+# 客户端发送<code>accept_code_of_conduct</code>C2S包，前提是客户端接受行为准则。
+# 服务器发送<code>resource_pack_push</code>S2C包，前提是服务器配置了服务器资源包。
+# 客户端发送<code>resource_pack</code>C2S包，直到资源包处理达到终止状态。
+# 服务器准备玩家出生点并加载出生点附近区块。
+# 服务器发送<code>finish_configuration</code>S2C包。
+# 客户端加载注册表和标签。
+# 客户端切换到游戏阶段入站协议。
+# 客户端发送<code>finish_configuration</code>C2S包。
+# 客户端切换到游戏阶段出站协议。
+# 服务器接收<code>finish_configuration</code>C2S包。
+# 服务器切换到游戏阶段出站协议。
+# 服务器将玩家加入世界。
+
+== 导航 ==
+{{Navbox protocol}}
+
+[[Category:网络协议]]

@@ -1,0 +1,64 @@
+# 页面: 命令/dialog
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/dialog
+# 分类: 
+# 抓取时间: 2026-07-14 17:22:05
+# 原始 Wikitext 内容:
+
+{{about|[[Java版]]中的控制[[对话框]]的命令|[[基岩版]]和[[教育版]]中类似名称的命令|命令/dialogue}}
+{{Exclusive|JE}}
+{{Infobox command
+|name=dialog
+|oplevel=2
+}}
+
+向[[玩家]]展示或清除对话框。
+
+== 语法 ==
+: <code>dialog clear <targets></code>
+:: 清除对话框。
+: <code>dialog show <targets> <dialog></code>
+:: 展示对话框。
+
+== 参数 ==
+{{argument|targets|entity}}
+: {{arg desc|je=entity|amount=multiple|type=players}}
+
+{{argument|dialog|dialog}}
+: 指定要展示的对话框。
+: {{arg desc|je=dialog}}
+
+== 结果 ==
+{{Result table|onlyje=1}}
+{{Result table|命令不完整或参数未正确指定|unparseable}}
+{{Result table|<code><targets></code>未能选中一个或多个玩家|fail}}
+{{Result table|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|已展示/清除的对话框的数量}}
+{{Output table}}
+
+== 示例 ==
+* 向最近的玩家展示位于数据包{{filepath|data/custom/dialog/example/test.json}}中的对话框：
+** <code>/dialog show @p custom:example/test</code>
+* 向所有玩家展示一个标题为“你好”，正文为“很高兴认识你！”的对话框：
+** <code>-{}-/dialog show @a {type:"minecraft:notice", title:"你好", body:[{type:"minecraft:plain_message", contents:"很高兴认识你！"}]}</code>
+* 为所有玩家清除任何可见对话框：
+** <code>/dialog clear @a</code>
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.6|dev=25w20a|加入了{{cmd|link=none|dialog}}命令。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/dialog]]
+[[en:Commands/dialog]]
+[[es:Comandos/dialog]]
+[[ja:コマンド/dialog]]
+[[pt:Comandos/dialog]]

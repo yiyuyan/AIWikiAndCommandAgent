@@ -1,0 +1,1021 @@
+# 页面: 参数类型
+# 来源: https://zh.minecraft.wiki/w/%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B
+# 分类: Java版即将到来/26.3, 命令
+# 抓取时间: 2026-07-14 17:21:07
+# 原始 Wikitext 内容:
+
+此页面列出了所有命令的'''参数类型（Argument Type）'''。
+{{TOC|right}}
+
+== Java版 ==
+=== brigadier:{{text anchor|bool}} ===
+{{Arg desc|je=bool}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|true}}
+* {{cd|false}}
+</div></div>
+
+=== brigadier:{{text anchor|double}} ===
+{{Arg desc|je=double}}
+
+数轴上各处的精度不同，取值范围为-(2-2<sup>-52</sup>)×2<sup>1023</sup>至(2-2<sup>-52</sup>)×2<sup>1023</sup>，约为±1.8×10<sup>308</sup>。
+
+每种双精度浮点参数都有自定义的最小值与最大值。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0}}
+* {{cd|1.2}}
+* {{cd|.5}}
+* {{cd|-1}}
+* {{cd|-.5}}
+* {{cd|-1234.56}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|double|max}}：当前双精度参数的最大值。
+** {{nbt|double|min}}: 当前双精度参数的最小值。
+</div></div>
+
+=== brigadier:{{text anchor|float}} ===
+{{Arg desc|je=float}}
+
+数轴上各处的精度不同，取值范围为-(2-2<sup>-23</sup>)×2<sup>127</sup>至(2-2<sup>-23</sup>)×2<sup>127</sup>，约为±3.4×10<sup>38</sup>。
+
+每种单精度浮点参数都有自定义的最小值与最大值。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0}}
+* {{cd|1.2}}
+* {{cd|.5}}
+* {{cd|-1}}
+* {{cd|-.5}}
+* {{cd|-1234.56}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|float|max}}：当前单精度参数的最大值。
+** {{nbt|float|min}}：当前单精度参数的最小值。
+</div></div>
+
+=== brigadier:{{text anchor|integer}} ===
+{{Arg desc|je=integer}}
+
+取值范围为-2147483648（-2<sup>31</sup>）至2147483647（2<sup>31</sup>-1）。
+
+每种整数参数都有自定义的最小值与最大值。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0}}
+* {{cd|123}}
+* {{cd|-123}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|int|max}}：当前整型参数的最大值。
+** {{nbt|int|min}}：当前整型参数的最小值。
+</div></div>
+
+=== brigadier:{{text anchor|long}} ===
+{{Arg desc|je=long}}
+
+注意：虽然长整型数据类型存在于[[Brigadier]]中，但是Minecraft并不使用此数据类型。
+
+取值范围是&minus;2<sup>63</sup>至2<sup>63</sup>&minus;1，即&minus;9,223,372,036,854,775,808至9,223,372,036,854,775,807。
+
+每种长整型参数都有自定义的最小值和最大值。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0}}
+* {{cd|123}}
+* {{cd|-123}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}: 属性的根对象。
+** {{nbt|long|max}}: 当前长整型参数的最大值。
+** {{nbt|long|min}}: 当前长整型参数的最小值。
+</div></div>
+
+=== brigadier:{{text anchor|string}} ===
+{{Arg desc|je=string}}
+
+每种字符串参数都可以接受单个词（不含空格）、词组（单个单词或者引号括起的字符串）或者贪婪词组（将命令的剩余部分全部作为字符串参数）。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+单个词（word）
+* {{cd|word}}
+* {{cd|word_with_underscores}}
+词组（phrase）
+* {{cd|"quoted phrase"}}
+* {{cd|word}}
+* {{cd|""}}
+贪婪词组（greedy）
+* {{cd|word}}
+* {{cd|words with spaces}}
+* {{cd|"and symbols"}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|string|type}}：当前字符串参数的类型。可以是{{cd|word}}、{{cd|phrase}}或{{cd|greedy}}之一。
+</div></div>
+
+=== minecraft:{{text anchor|angle}} ===
+{{Arg desc|je=angle}}
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0}}
+* {{cd|~}}
+* {{cd|~-0.5}}
+</div></div>
+
+=== minecraft:{{text anchor|block_pos}} ===
+{{Arg desc|je=block_pos}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0 0 0}}
+* {{cd|~ ~ ~}}
+* {{cd|^ ^ ^}}
+* {{cd|^1 ^ ^-5}}
+* {{cd|~0.5 ~1 ~-5}}
+</div></div>
+
+=== minecraft:{{text anchor|block_predicate}} ===
+表示某个方块的特征。格式为<code>-{}-<''方块ID''><''方块属性列表''><''方块实体NBT''></code>。
+* <code>-{}-<''方块ID''></code>必选。表示匹配的方块的类型。
+* <code>-{}-<''方块属性列表''></code>可选。表示匹配方块的一系列方块属性。
+* <code>-{}-<''方块实体NBT''></code>可选。表示匹配方块对应方块实体的NBT数据。
+* <code>-{}-<''方块ID''></code>必选，如果没有指定命名空间则使用默认命名空间<code>minecraft</code>。
+** 也可以填写带<code>#</code>前缀的[[Java版标签/方块|方块标签]]的命名空间ID，如<code>#minecraft:planks</code>。
+* 编写方块属性列表时，最外层必须有一对方括号（<code>[]</code>），方括号中有1个或多个<code>-{}-<''测试项''></code>，相邻<code>-{}-<''测试项''></code>之间使用逗号（<code>,</code>）连接。
+**<code>-{}-<''测试项''></code>的格式为：
+*** <code>-{}-<''方块属性名称''>=<''值''></code>：检测该方块的属性及该属性对应的取值。
+**** <code>minecraft:stone[doesntexist=purpleberry]</code>有语法错误，因为<code>stone</code>（石头）没有<code>doesntexist</code>属性。
+**** <code>minecraft:redstone_wire[power=tuesday]</code>有语法错误，因为<code>redstone_wire</code>（红石线）的<code>power</code>属性的值必须为一个在0和15之间的数字。
+* <code>-{}-<''方块实体NBT''></code>可选。表示将要检测的方块对应的方块实体的NBT数据，为[[SNBT]]格式。
+* 当检测方块时，只会检测参数内指定了的方块属性与方块的NBT数据是否符合。
+** 如当使用命令检测方块<code>redstone_wire[power=15]</code>时，将只会检测<code>power</code>属性是否为<code>15</code>，而忽略其他方块属性，如<code>north</code>属性。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|stone}}
+* {{cd|minecraft:stone}}
+* <code>stone[foo=bar]</code>
+* {{cd|#stone}}
+* <code>#stone[foo=bar]{baz:nbt}</code>
+</div></div>
+
+=== minecraft:{{text anchor|block_state}} ===
+格式为<code>-{}-<''方块ID''><''方块属性列表''><''方块实体NBT''></code>。
+* <code>-{}-<''方块ID''></code>必选。表示方块的类型。
+* <code>-{}-<''方块属性列表''></code>可选。表示方块的一系列[[方块属性]]。
+* <code>-{}-<''方块实体NBT''></code>可选。表示方块对应[[方块实体]]的[[方块实体数据格式|NBT数据]]。
+* 编写方块属性列表时，最外层必须有一对方括号（<code>[]</code>），方括号中有1个或多个<code>-{}-<''属性项''></code>，相邻<code>-{}-<''属性项''></code>之间使用逗号（<code>,</code>）连接。
+**<code>-{}-<''属性项''></code>的格式为：
+*** <code>-{}-<''方块属性名称''>=<''值''></code>：设置该方块的属性及该属性对应的取值。
+**** <code>minecraft:stone[doesntexist=purpleberry]</code>有语法错误，因为<code>stone</code>（石头）没有<code>doesntexist</code>属性。
+**** <code>minecraft:redstone_wire[power=tuesday]</code>有语法错误，因为<code>redstone_wire</code>（红石线）的<code>power</code>属性的值必须为一个在0和15之间的数字。
+* <code>-{}-<''方块实体NBT''></code>可选。表示将要设置的方块对应的方块实体的NBT数据，为[[SNBT]]格式。
+* 当放置方块时，只会设置参数内指定了的方块属性与NBT数据，而其他未提供的方块属性与NBT数据则会被设为默认值。
+** 如当使用命令放置方块<code>redstone_wire[power=15]</code>时，将只会设置<code>power</code>属性的值为<code>15</code>，其他方块属性设为默认值，如<code>north</code>属性将被设为<code>none</code>。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|stone}}
+* {{cd|minecraft:stone}}
+* <code>stone[foo=bar]</code>
+* <code>foo{bar:baz}</code>
+</div></div>
+
+=== minecraft:{{text anchor|column_pos}} ===
+{{Arg desc|je=column_pos}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0 0}}
+* {{cd|~ ~}}
+* {{cd|~1 ~-2}}
+* {{cd|^ ^}}{{sic}}
+* {{cd|^-1 ^0}}{{sic}}
+</div></div>
+
+=== minecraft:{{text anchor|component}} ===
+{{Arg desc|je=component}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|"hello world"}}
+* {{cd|""}}
+* {{cd|"{"text":"hello world"}"}}
+* {{cd|[""]}}
+</div></div>
+
+=== minecraft:{{text anchor|dialog}} ===
+必须为[[对话框]]的[[命名空间ID]]或[[SNBT]]编码形式的对话框。对于这种直接定义在命令中的对话框，也可称为内联对话框（Inline Dialog Definition）。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+示例
+<div class="collapsible-content">
+* <code>{type:"notice", title:"Hello"}</code>
+</div></div>
+
+=== minecraft:{{text anchor|dimension}} ===
+{{Arg desc|je=dimension}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|minecraft:overworld}}
+* {{cd|minecraft:the_nether}}
+</div></div>
+
+=== minecraft:{{text anchor|entity}} ===
+{{Arg desc|je=entity}}
+
+每个实体参数都可以限制选中的实体数量（一个/多个）或者选中的实体种类（玩家/任何实体）。
+ 
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|Player}}
+* {{cd|0123}}
+* {{cd|@e}}
+* <code>@e[type=foo]</code>
+* {{cd|dd12be42-52a9-4a91-a8a1-11c01849e498}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|string|amount}}：可以选中的实体数量。可以是{{cd|single}}或{{cd|multiple}}。
+** {{nbt|string|type}}：可以选中的实体类型。可以是{{cd|players}}或{{cd|entities}}。
+</div></div>
+
+=== minecraft:{{text anchor|entity_anchor}} ===
+{{Arg desc|je=entity_anchor}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|eyes}}
+* {{cd|feet}}
+</div></div>
+
+=== minecraft:{{text anchor|feature}} ===
+{{added in development|section=1|jev=26.3}}
+必须为[[已配置的地物|已配置地物]]的[[命名空间ID]]或[[SNBT]]编码形式的[[已配置的地物|已配置地物]]。对于这种直接定义在命令中的已配置地物，也可称为内联已配置地物（Inline Configured Feature Definition）。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+示例
+<div class="collapsible-content">
+* <code>{type: "vines"}</code>
+</div></div>
+
+=== minecraft:{{text anchor|float_range}} ===
+{{Arg desc|je=float_range}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0..5.2}}
+* {{cd|0}}
+* {{cd|-5.4}}
+* {{cd|-100.76..}}
+* {{cd|..100}}
+</div></div>
+
+=== minecraft:{{text anchor|function}} ===
+{{Arg desc|je=function}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo:bar}}
+* {{cd|#foo}}
+</div></div>
+
+=== minecraft:{{text anchor|game_profile}} ===
+{{Arg desc|je=game_profile}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|Player}}
+* {{cd|0123}}
+* {{cd|dd12be42-52a9-4a91-a8a1-11c01849e498}}
+* {{cd|@e}}
+</div></div>
+
+=== minecraft:{{text anchor|gamemode}} ===
+{{Arg desc|je=gamemode}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|survival}}
+* {{cd|creative}}
+</div></div>
+
+=== minecraft:{{text anchor|heightmap}}===
+{{Arg desc|je=heightmap}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|world_surface}}
+* {{cd|ocean_floor}}
+</div></div>
+
+=== minecraft:{{text anchor|hex_color}}===
+{{Arg desc|je=hex_color}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|F00}}
+* {{cd|FF0000}}
+</div></div>
+
+=== minecraft:{{text anchor|int_range}} ===
+{{Arg desc|je=int_range}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0..5}}
+* {{cd|0}}
+* {{cd|-5}}
+* {{cd|-100..}}
+* {{cd|..100}}
+</div></div>
+
+=== minecraft:{{text anchor|item_predicate}} ===
+指定某个物品需要满足的特征。格式为<code>-{}-<''物品ID''><''测试项列表''></code>。
+* <code>-{}-<''物品ID''></code>必选。用于匹配物品的类型。可以为物品ID、带有<code>#</code>前缀的物品标签ID或<code>*</code>（表示任意物品）。
+* <code>-{}-<''测试项列表''></code>可选。编写测试项列表时，最外层必须有一对方括号（<code>[]</code>），方括号中有1个或多个<code>-{}-<''测试项''></code>，相邻<code>-{}-<''测试项''></code>之间使用<code>-{}-<''测试项连接符''></code>连接。
+** <code>-{}-<''测试项''></code>可以为以下几种格式：
+*** <code>-{}-<''基础测试项''></code>
+*** <code>-{}-!<''基础测试项''></code>：对单个基础测试项取反。若该基础测试项不满足，则该取反后的测试项满足；反之则不满足。注：此处的<code>-{}-<''基础测试项''></code>中不得包含取反符号<code>!</code>。
+*** <code>-{}-<''基础测试项''></code>可以为以下几种格式：
+**** <code>-{}-<''数据组件ID''></code>：匹配一个[[数据组件]]，要求被检测的物品包含该数据组件。
+**** <code>-{}-<''数据组件ID''>=<''值''></code>：'''精确'''匹配一个数据组件，即要求该基础测试项的值与该数据组件的值完全相同。<code><''值''></code>为SNBT格式。
+**** <code>-{}-<''数据组件谓词ID''>~<''值''></code>：使用数据组件谓词匹配一个数据组件。<code><''值''></code>为SNBT格式的[[数据组件谓词]]的值。
+**** <code>count</code>：检测是否存在<code>count</code>属性（由于任意物品堆叠都拥有<code>count</code>属性，该测试永远成功）。
+**** <code>count=<''正整型值''></code>或<code>count~<''正整型值''></code>：仅当物品的堆叠数等于该值时满足。<code><''正整型值''></code>为SNBT格式。
+**** <code>-{}-count~<''整型范围''></code>：当物品的堆叠数在指定范围内时满足。<code>-{}-<''整型范围''></code>为SNBT格式，内容为<code>{ min: <''最小值''>, max: <''最大值''> }</code>，其中<code>min</code>和<code>max</code>字段均可选，省略时，则分别默认为整型的最小值和最大值。
+** <code>-{}-<''测试项连接符''></code>可以为：
+*** 逗号（<code>,</code>）：表示'''与'''的关系，即被连接的测试项必须都满足时测试才能成功。
+*** 管道符（<code>|</code>）：表示'''或'''的关系，即被连接的测试项中至少满足1个时测试即可成功。
+**** <code>|</code>（或）的优先级大于<code>,</code>（与），即可将使用管道符连接的多个测试项整体当作1个测试项。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* <code>*[damage~{durability: {min: 3}}]</code>用于匹配剩余至少可用3次的任意物品堆叠。
+* <code>*[count~{max: 2}]</code>将会匹配堆叠数小于等于2的任意物品堆叠。
+* <code>*[!count=1]</code>将会匹配数量非1的任意物品堆叠。
+* <code>*[!damage|damage=0]</code>将会寻找没有<code>damage</code>组件'''或'''此组件值为<code>0</code>的物品。
+* {{cd|stick}}
+* {{cd|minecraft:stick}}
+* {{cd|#stick}}
+* <code>#stick[minecraft:custom_data={foo: bar}]</code>
+</div></div>
+
+=== minecraft:{{text anchor|item_slot}} ===
+{{Arg desc|je=item_slot}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|container.5}}
+* {{cd|weapon}}
+</div></div>
+
+=== minecraft:{{text anchor|item_slots}} ===
+{{Arg desc|je=item_slots}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|container.*}}
+* {{cd|container.5}}
+* {{cd|weapon}}
+</div></div>
+
+=== minecraft:{{text anchor|item_stack}} ===
+格式为<code>-{}-<''物品ID''><''数据组件列表''></code>。
+* <code><''物品ID''></code>必选。表示物品的类型。
+* <code><''数据组件列表''></code>可选。用于设置物品的数据组件。
+* [[物品]]和[[数据组件]]的[[命名空间ID|命名空间]]可选，如果没有指定命名空间则将使用默认命名空间<code>minecraft</code>。
+* 编写数据组件列表时，最外层必须有一对方括号（<code>[]</code>），方括号中有1个或多个<code>-{}-<''组件项''></code>，相邻<code>-{}-<''组件项''></code>之间使用逗号（<code>,</code>）分隔。
+** <code>-{}-<''组件项''></code>可以为以下几种格式：
+*** <code>-{}-<''数据组件ID''>=<''值''></code>：设置一个数据组件的值。<code><''值''></code>使用SNBT格式。
+*** <code>-{}-!<''数据组件ID''></code>：移除该物品的一个默认数据组件。
+* 当给予物品时，所提供的组件都会被设置，而未提供的组件会被设为默认值。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|stick}}
+* {{cd|minecraft:stick}}
+* <code>stick{foo=bar}</code>{{sic}}（正确应为<code>stick[foo=bar]</code>）
+</div></div>
+
+=== minecraft:{{text anchor|loot_modifier}} ===
+必须为[[物品修饰器]][[命名空间ID]]或[[SNBT]]编码形式的物品修饰器。对于这种直接定义在命令中的物品修饰器，也可称为内联物品修饰器（Inline Item Modifier Definition）。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+示例
+<div class="collapsible-content">
+* <code>{function: "minecraft:set_count", add: 1b, count: 2}</code>
+</div></div>
+
+=== minecraft:{{text anchor|loot_predicate}} ===
+必须为[[谓词]][[命名空间ID]]或[[SNBT]]编码形式的谓词。对于这种直接定义在命令中的谓词，也可称为内联谓词（Inline Predicate Definition）。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+示例
+<div class="collapsible-content">
+* <code>{condition: "weather_check", raining: 0b}</code>
+</div></div>
+
+=== minecraft:{{text anchor|loot_table}} ===
+必须为[[战利品表]][[命名空间ID]]或[[SNBT]]编码形式的战利品表。对于这种直接定义在命令中的战利品表，也可称为内联战利品表（Inline Loot Table Definition）。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+示例
+<div class="collapsible-content">
+* <code>{pools: [{rolls: 1, entries: [{type: "item", name: "minecraft:apple"}]}]}</code>
+</div></div>
+
+=== minecraft:{{text anchor|message}} ===
+{{Arg desc|je=message}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|Hello world!}}
+* {{cd|foo}}
+* {{cd|@e}}
+* {{cd|Hello @p :)}}
+</div></div>
+
+=== minecraft:{{text anchor|nbt_compound_tag}} ===
+{{Arg desc|je=nbt_compound_tag}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* <code>{}</code>
+* <code>{foo:bar}</code>
+</div></div>
+
+=== minecraft:{{text anchor|nbt_path}} ===
+{{Arg desc|je=nbt_path}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+示例
+<div class="collapsible-content">
+<div class="treeview">
+* {{nbt|compound|foo}}
+** {{nbt|list|bar}}
+*** {{nbt|compound}}
+**** {{nbt|compound|A [crazy name]}}
+***** {{nbt|int|baz}}
+*** {{nbt|compound}}
+</div>
+以上树状图中的baz标签的NBT路径为：{{cd|foo.bar[0]."A [crazy name]".baz}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo.bar}}
+* {{cd|foo[0]}}
+* {{cd|[0]}}
+* <code>[]</code>
+* <code>{foo=bar}</code>{{sic}}（正确应为<code>{foo:bar}</code>）
+</div></div>
+
+=== minecraft:{{text anchor|nbt_tag}} ===
+{{Arg desc|je=nbt_tag}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0}}
+* {{cd|0b}}
+* {{cd|0l}}
+* {{cd|0.0}}
+* {{cd|"foo"}}
+* <code>{foo:bar}</code>
+</div></div>
+
+=== minecraft:{{text anchor|objective}} ===
+{{Arg desc|je=objective}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|*}}
+* {{cd|012}}
+</div></div>
+
+=== minecraft:{{text anchor|objective_criteria}} ===
+{{Arg desc|je=objective_criteria}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo.bar.baz}}
+* {{cd|minecraft:foo}}
+</div></div>
+
+=== minecraft:{{text anchor|operation}} ===
+{{Arg desc|je=operation}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* <code>=</code>
+* {{cd|>}}
+* {{cd|<}}
+</div></div>
+
+=== minecraft:{{text anchor|particle}} ===
+{{Arg desc|je=particle}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo:bar}}
+* <code>particle{foo:1}</code>
+* <code>particle{foo:bar}</code>
+* <code>particle{foo:[0,1,2]}</code>
+* <code>particle{foo:{foo1:bar}}</code>
+</div></div>
+
+=== minecraft:{{text anchor|resource}} ===
+{{Arg desc|je=resource}}
+ 
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo:bar}}
+* {{cd|012}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|string|registry}}：注册表的ID
+</div></div>
+
+=== minecraft:{{text anchor|resource_key}} ===
+{{Arg desc|je=resource_key}}
+ 
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo:bar}}
+* {{cd|012}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|string|registry}}：注册表的ID。
+</div></div>
+
+=== minecraft:{{text anchor|resource_location}} ===
+{{Arg desc|je=resource_location}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo:bar}}
+* {{cd|012}}
+</div></div>
+
+=== minecraft:{{text anchor|resource_or_tag}} ===
+{{Arg desc|je=resource_or_tag}}
+ 
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo:bar}}
+* {{cd|012}}
+* {{cd|#skeletons}}
+* {{cd|#minecraft:skeletons}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|string|registry}}：注册表的ID。
+</div></div>
+
+=== minecraft:{{text anchor|resource_or_tag_key}} ===
+{{Arg desc|je=resource_or_tag_key}}
+ 
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo:bar}}
+* {{cd|012}}
+* {{cd|#skeletons}}
+* {{cd|#minecraft:skeletons}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|string|registry}}：注册表的ID。
+</div></div>
+
+=== minecraft:{{text anchor|resource_selector}} ===
+{{Arg desc|je=resource_selector}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|*:*}}
+* {{cd|*}}
+* {{cd|custom:folder/*_test_?}}
+</div></div>
+
+=== minecraft:{{text anchor|rotation}} ===
+{{Arg desc|je=rotation}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0 0}}
+* {{cd|~ ~}}
+* {{cd|~-5 ~5}}
+</div></div>
+
+=== minecraft:{{text anchor|score_holder}} ===
+{{Arg desc|je=score_holder}}
+
+每种分数的持有者参数都可以指定为选择一个或多个分数持有者。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|Player}}
+* {{cd|0123}}
+* {{cd|*}}
+* {{cd|@e}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}：属性的根对象。
+** {{nbt|string|amount}}：可以选择的分数持有者数量。可以是{{cd|single}}或{{cd|multiple}}。
+</div></div>
+
+=== minecraft:{{text anchor|scoreboard_slot}} ===
+{{Arg desc|je=scoreboard_slot}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|sidebar}}
+* {{cd|foo.bar}}
+</div></div>
+
+=== minecraft:{{text anchor|slot_source}} ===
+{{added in development|jev=26.3|section=1}}
+必须为单个槽位的槽位名或[[槽位源]]。指定槽位名时，由槽位类型和槽位编号组成。对于具体的槽位名和槽位编号，参见[[槽位]]。格式为<code>-{}-<槽位类型></code>或<code>-{}-<槽位类型>.<槽位编号></code>，游戏会自动将其视为<code>slot_range</code>类型的槽位源。指定槽位源时，必须是槽位源的[[命名空间ID]]或[[SNBT]]编码形式的槽位源。对于这种直接定义在命令中的槽位源，也可称为内联槽位源（Inline Slot Source Definition）。
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|foo:bar}}
+* {{cd|012}}
+* <code>{}</code>
+* {{cd|true}}
+* {{cd|container.*}}
+* {{cd|container.5}}
+* {{cd|weapon}}
+</div></div>
+
+=== minecraft:{{text anchor|style}} ===
+{{Arg desc|je=style}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* <code>{"bold": true}</code>
+</div></div>
+
+=== minecraft:{{text anchor|swizzle}} ===
+{{Arg desc|je=swizzle}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|xyz}}
+* {{cd|x}}
+</div></div>
+
+=== minecraft:{{text anchor|team}} ===
+{{Arg desc|je=team}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|foo}}
+* {{cd|123}}
+</div></div>
+
+=== minecraft:{{text anchor|team_color}} ===
+{{Arg desc|je=team_color}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|red}}
+* {{cd|green}}
+</div></div>
+
+=== minecraft:{{text anchor|template_mirror}} ===
+{{Arg desc|je=template_mirror}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|none}}
+* {{cd|left_right}}
+</div></div>
+
+=== minecraft:{{text anchor|template_rotation}} ===
+{{Arg desc|je=template_rotation}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|none}}
+* {{cd|clockwise_90}}
+</div></div>
+
+=== minecraft:{{text anchor|time}} ===
+{{Arg desc|je=time}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0d}}
+* {{cd|0s}}
+* {{cd|0t}}
+* {{cd|0}}
+</div></div>
+
+<div class="collapsible collapsed collapsetoggle-inline">
+命令语法输出中的JSON属性
+<div class="collapsible-content treeview">
+* {{nbt|compound|properties}}: The root properties object.
+** {{nbt|int|min}}: The minimum time in game ticks.
+</div></div>
+
+=== minecraft:{{text anchor|uuid}} ===
+{{Arg desc|je=uuid}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|dd12be42-52a9-4a91-a8a1-11c01849e498}}
+</div></div>
+
+=== minecraft:{{text anchor|vec2}} ===
+{{Arg desc|je=vec2}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0 0}}
+* {{cd|~ ~}}
+* {{cd|0.1 -0.5}}
+* {{cd|~1 ~-2}}
+</div></div>
+
+=== minecraft:{{text anchor|vec3}} ===
+{{Arg desc|je=vec3}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|0 0 0}}
+* {{cd|~ ~ ~}}
+* {{cd|^ ^ ^}}
+* {{cd|^1 ^ ^-5}}
+* {{cd|0.1 -0.5 .9}}
+* {{cd|~0.5 ~1 ~-5}}
+</div></div>
+
+=== 已移除 ===
+{{outdated|edition=java|section=1}}
+==== minecraft:{{text anchor|color}} ====
+{{Arg desc|je=color}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|red}}
+* {{cd|green}}
+</div></div>
+
+==== minecraft:{{text anchor|entity_summon}} ====
+{{Arg desc|je=entity_summon}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|minecraft:pig}}
+* {{cd|cow}}
+</div></div>
+
+==== minecraft:{{text anchor|item_enchantment}} ====
+{{Arg desc|je=item_enchantment}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|unbreaking}}
+* {{cd|silk_touch}}
+</div></div>
+
+==== minecraft:{{text anchor|mob_effect}} ====
+{{Arg desc|je=mob_effect}}
+
+<div class="collapsible collapsed collapsetoggle-inline">
+官方示例
+<div class="collapsible-content">
+* {{cd|spooky}}
+* {{cd|effect}}
+</div></div>
+
+== 基岩版 ==
+<!-- Note: This list is from  disassembly code of BDS (CommandRegistry::parse<T>), and https://github.com/Mojang/bedrock-samples/blob/main/metadata/command_modules/mojang-commands.json.-->
+
+=== std::vector<{{text anchor|BlockStateCommandParam}}> ===
+又名BLOCK_STATE_ARRAY。
+
+{{Arg desc|be=BlockStateCommandParam}}
+
+=== CommandCompareOperator ===
+又名COMPAREOPERATOR。
+
+{{Arg desc|be=CommandCompareOperator}}
+
+=== CommandFilePath ===
+又名PATHCOMMAND。
+
+{{Arg desc|be=CommandFilePath}}
+
+===CommandIntegerRange===
+又名FULLINTEGERRANGE。
+
+{{Arg desc|be=CommandIntegerRange}}
+
+=== CommandItem ===
+又名ITEM。
+
+{{Arg desc|be=CommandItem}}
+
+=== CommandMessage ===
+又名MESSAGE_ROOT。
+
+{{Arg desc|be=CommandMessage}}
+
+=== CommandOperator ===
+又名OPERATOR。
+
+{{Arg desc|be=CommandOperator}}
+
+=== CommandPosition ===
+又名POSITION。
+
+{{Arg desc|be=CommandPosition}}
+
+=== CommandPositionFloat ===
+又名POSITION_FLOAT。
+
+{{Arg desc|be=CommandPositionFloat}}
+
+=== CommandRawText ===
+又名RAWTEXT。
+
+=== {{text anchor|CommandSelector<Actor>}}和{{text anchor|CommandSelector<Player>}} ===
+又名SELECTION。
+
+CommandSelector<Actor>用于指定任意实体。{{Arg desc|be=CommandSelector<Actor>}}
+
+CommandSelector<Player>用于指定玩家实体。{{Arg desc|be=CommandSelector<Player>}}
+
+=== CommandWildcardInt ===
+又名WILDCARDINT。
+
+必须为一个32位整数，或者一个星号（{{cd|*}}）来代表{{cd|MIN_INT}}（-2,147,483,648）。
+
+=== float{{anchor|float_2|float_be}} ===
+又名VAL。
+
+{{Arg desc|be=float}}
+
+=== int ===
+又名INT。
+
+{{Arg desc|be=int}}
+
+=== Json::Value ===
+又名JSON_OBJECT。
+
+{{Arg desc|be=Json::Value}}
+
+=== RelativeFloat ===
+又名RVAL。
+
+{{Arg desc|be=RelativeFloat}}
+
+=== std::{{text anchor|basic_string}} ===
+又名ID。
+
+{{Arg desc|be=basic_string}}
+
+=== std::{{text anchor|unique_ptr<Command>}} ===
+又名SLASHCOMMAND。
+
+表示一条完整的命令。
+
+=== WildcardCommandSelector<Actor> ===
+又名WILDCARDSELECTION。
+
+{{Arg desc|be=WildcardCommandSelector<Actor>}}
+
+=== Enum{{anchor|enum}} ===
+{{arg desc|be=enum}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[en:Argument types]]
+[[fr:Types d'arguments]]
+[[ja:引数の型]]
+[[lzh:附項之類]]
+[[pt:Tipos de argumentos]]
+[[ru:Типы аргументов]]

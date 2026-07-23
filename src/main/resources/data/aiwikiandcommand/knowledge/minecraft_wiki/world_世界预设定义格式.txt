@@ -1,0 +1,63 @@
+# 页面: 世界预设定义格式
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%96%E7%95%8C%E9%A2%84%E8%AE%BE%E5%AE%9A%E4%B9%89%E6%A0%BC%E5%BC%8F
+# 分类: 
+# 抓取时间: 2026-07-14 17:19:48
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+{{tr|mode=H|预设|方案}}
+'''世界预设定义文件'''是'''[[世界预设]]（World Preset）'''在[[数据包]]中的数据驱动定义文件。
+
+== 定义格式 ==
+世界预设在游戏中使用<code>WORLD_PRESET</code>注册表，数据包路径为{{filepath|worldgen/world_preset}}，即所有世界预设定义文件都需要在{{filepath|data/<''命名空间''>/worldgen/world_preset}}目录下定义，世界预设标签则需要在{{filepath|data/<''命名空间''>/tags/worldgen/world_preset}}目录下定义。
+
+世界预设定义文件使用JSON格式，并具有下列结构：
+
+<div class="treeview">
+* {{nbt|compound}} JSON文件根对象
+** {{nbt|compound|dimensions|required=1}}：此世界预设的维度集合。必须包含主世界维度<code>overworld</code>。
+*** {{nbt|compound|<''维度命名空间ID''>}}：一个维度。
+**** 见[[维度定义格式]]。
+</div>
+
+== 定义行为 ==
+世界预设定义数据只在服务端启动时加载一次，使用{{cmd|reload}}命令不可以使世界预设定义被重新加载，而必须重启服务端。
+
+世界预设的主要作用是提供一个预先配置好的维度集合以直接在菜单屏幕上选择，因此只在创建世界前才真正有效。一旦世界被创建后即使通过数据包修改世界预设定义文件对于世界生成而言也已没有任何作用。
+
+=== 使用 ===
+世界预设可以在“{{tp|createWorld.tab.world.title}}”屏幕使用。游戏会将世界预设定义的维度集合加载到{{filepath|[[level.dat]]}}中，如果数据包同时提供了维度定义文件，则维度定义文件定义的同命名空间ID的维度会覆盖世界预设内的设置。
+
+世界预设通常已定义了世界可用的所有维度的信息，但游戏硬编码了两个世界预设以允许对主世界进行再次修改，分别是[[超平坦]]（<code>flat</code>）和[[单一生物群系]]（<code>single_biome_surface</code>）。此修改的优先级依旧低于维度定义文件。
+* 在{{tp|generator.minecraft.flat}}的“{{tp|createWorld.customize.flat.title}}”和“{{tp|createWorld.customize.presets.title}}”屏幕，可以指定主世界使用超平坦生成器，以及超平坦的设置。
+* 在{{tp|generator.minecraft.single_biome_surface}}的“{{tp|createWorld.customize.buffet.title}}”屏幕，可以指定主世界的生物群系。
+
+=== 标签 ===
+世界预设文件只能注册新的世界预设，而不能将其直接展示在世界选择屏幕上以供选择。游戏定义了下列标签以控制是否可以在屏幕上选择世界预设：
+* {{TagLink|world_preset|extended}}：按住{{key|Alt}}键后可选择的世界预设。
+* {{TagLink|world_preset|normal}}：无需按住{{key|Alt}}键即可选择的世界预设。
+
+如果世界预设标签为空，则所有已注册的世界预设都会显示在“{{tp|createWorld.tab.world.title}}”屏幕上。
+
+=== 文本 ===
+世界预设的翻译键名为<code>-{}-generator.<''命名空间''>.<''路径''></code>，选择预设的按钮会以此显示为“{{tp|options.generic_value|{{tp|selectWorld.mapType}}|generator.<''命名空间''>.<''路径''>}}”。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.19|dev=22w11a|引入了世界预设的概念，加入了世界预设定义文件。}}
+}}
+
+== 参见 ==
+* [[维度定义格式]]
+* [[世界生成设置存储格式]]
+
+== 导航 ==
+{{Navbox Java customizable}}
+
+[[Category:数据包]]
+
+[[de:Weltvorlagendefinition]]
+[[en:World preset definition]]
+[[fr:Définition de préréglage de monde]]
+[[ja:カスタムワールドプリセット]]

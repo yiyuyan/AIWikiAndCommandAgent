@@ -1,0 +1,559 @@
+# 页面: 交易/村庄与掠夺前
+# 来源: https://zh.minecraft.wiki/w/%E4%BA%A4%E6%98%93/%E6%9D%91%E5%BA%84%E4%B8%8E%E6%8E%A0%E5%A4%BA%E5%89%8D
+# 分类: 
+# 抓取时间: 2026-07-14 17:19:59
+# 原始 Wikitext 内容:
+
+{{about|村庄与掠夺版本前的交易系统|1.8版本前的交易系统|交易/Java版1.8前|当前版本的交易系统|交易}}
+{{Outdated}}
+在[[村庄与掠夺]]中，交易被完全更改了。本页面主要说明[[Java版1.14]]、[[基岩版1.11.0]]前的村民交易。{{Verify|此页面也适用于原主机版吗？|console=1}}<!--由于原主机版只有[[PlayStation 4版]]接收了村庄与掠夺更新，此页面也适用于其他平台上原主机版的村民交易。-->
+
+== 与新版的差异 ==
+* 有不同的交易选项。
+* 交易界面不相同。
+* [[村民]]在进行交易时随机解锁新的交易层，而不是基于经验。
+** 并非所有职业都有5个等级。
+** 级别没有显示在交易GUI中，也不显示在它们的外形上。
+* 村民在进行其他交易时随机重新提供交易。
+* 交易价格是在交易解锁时确定的，并且不会改变。
+* 当村民变成[[僵尸村民]]时会丢失原先的交易选项。
+* [[流浪商人]]、{{only|for=石匠村民|java}}和失业村民尚未加入。
+
+== 机制 ==
+对[[村民]]按下{{control|使用}}键会弹出交易的GUI界面，从而允许玩家与村民交易。村民会依其职业提供不同的交易选项。点击向左与向右的箭头可以看到其他的选项。几乎所有选项都把[[绿宝石]]当做货币，而且一些交易[[物品]]与村民职业相关。交易系统的出现大大简化了为了取得某些难以取得的资源所付出的努力。这也是在[[生存模式]]中合理获取[[探险家地图|林地宅邸探险地图]]和[[探险家地图|海底神殿探险地图]]的唯一途径。
+
+[[File:Trading paper clean GUI.png|thumb|200px|left|这个交易界面展示了用28张[[纸]]换1个[[绿宝石]]的交易]]
+[[File:LCE trading GUI Legacy.png|thumb|200px|left|这个[[原主机版]]交易界面展示了用32张纸换一个绿宝石的交易]]
+
+村民有不同的职业，可以通过交易界面看见。例如，穿棕色长袍的村民可能是制箭师或渔夫，铁匠可能是盔甲商或武器商等。村民刚生成时的等级为1级，包含初始状态下已解锁的2到4个交易选项。每个等级包含了一组预设的交易选项，相同职业有相同的等级划分（见下面的表格）。当现存的选项交易后，村民可以解锁新的等级。要使村民解锁新等级，交易界面必须先关闭。当它们解锁新等级时，会受到{{EffectLink|Regeneration}}的状态效果，并被紫色和绿色的粒子围绕几秒钟。每个职业有固定的等级顺序，且只会解锁有限的交易选项。
+
+当某个交易选项被使用一定次数后，村民会使此选项失效。交易选项的可交易次数是随机的，但一个选项在失效之前一定至少可以使用2次。当一个交易选项被使用了12次后，这个选项一定会失效。交易其他的选项可能会重新激活一个失效的选项。当一个选项失效后，一个红色的X会出现在交易界面上。
+
+当一个选项'''第一次'''被交易时，一定能重新激活失效的选项（以及解锁一个等级，如果有些等级还没有解锁）。后续交易只有20%的概率能激活失效选项。例如，一个农民村民有一个收购8个南瓜来出售1个绿宝石的选项，而玩家共交易了1组（64个）南瓜，这会被算作8次交易，每次交易有20%的概率重新激活此村民的其他失效交易，则激活的概率约为83.2%（1 - (1 - 0.2)<sup>8</sup>）。
+
+村民会区分损害值，因此不同颜色的[[羊毛]]'''不能'''替代白色羊毛，木炭不能替代煤炭，损坏的工具不能用于交易完好无损的工具。不过，[[NBT]]数据会被忽略，因此[[成书]]的内容是无关紧要的。
+
+在[[Java版]]中，所有的交易都会给予玩家3-6[[经验值]]，或是当村民有繁殖意愿时给予8-11经验值。在[[基岩版]]中亦是如此，除了一些特定的交易：农民的第一级交易，与牧师交易腐肉，与屠夫交易生猪排，与制箭师交易线。
+
+{{-}}
+
+== 交易 ==
+完整的村民职业和等级如下：
+
+=== 农民 ===
+[[File:Farmer.png|right|125px]]
+
+; 农民{{only|bedrock|for=（草帽）}}：
+{{Anchor|农民}}
+{| class="wikitable" style="text-align:center" data-description="Farmer purchases"
+! width="100px" | 农民
+! colspan="3" | 收购
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+|-
+! rowspan="3" | 1
+| {{ItemLink|Wheat}} || 18 - 22 || 1
+|-
+| {{ItemLink|Potato}} || 15 - 19 || 1
+|-
+| {{ItemLink|Carrot}} || 15 - 19 || 1
+|-
+! 2
+| {{BlockLink|Pumpkin}} || 8 - 13 || 1
+|-
+! 3
+| {{BlockLink|Melon}} || 7 - 12 || 1
+|}
+
+{| class="wikitable" style="text-align:center" data-description="Farmer sales"
+! width="100px" | 农民
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Bread}} || 1 || 2 - 4
+|-
+! 2
+| {{ItemLink|Pumpkin Pie}} || 1 || 2 - 3
+|-
+! 3
+| {{ItemLink|Apple}} || 1 || 5 - 7
+|-
+! rowspan="2" | 4
+| {{ItemLink|Cookie}} || 1 || 6 - 10
+|-
+| {{ItemLink|Cake}} || 1 || 1
+|}
+
+; 渔夫{{only|bedrock|for=（渔夫帽和吊着鱼的围裙）}}：
+{{Anchor|渔夫}}
+{| class="wikitable" style="text-align:center" data-description="Fisherman purchases"
+! width="100px" | 渔夫
+! colspan="3" | 收购
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+|-
+! rowspan="2" | 1
+| {{ItemLink|String}} || 15 - 20 || 1
+|-
+| {{ItemLink|Coal}} || 16 - 24 || 1
+|}
+
+{| class="wikitable" style="text-align:center" data-description="Fisherman sales"
+! width="100px" | 渔夫
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Cooked Fish}} || 6 {{ItemLink|Raw Fish|Fish}} <br> 1 {{ItemLink|Emerald}} || 6
+|-
+! 2
+| style="color: purple;" | 附魔的<ref group="注" name="enchant-1.8">当创建有附魔物品的交易选项时，游戏将随机使用5-19级的附魔。若想得知在这些等级中会出现的附魔，请见[[附魔机制]]。</ref>{{ItemLink|Fishing Rod}} || 7 - 8 || 1
+|}
+
+; 牧羊人{{only|bedrock|for=（棕色帽子和白色围裙）}}：
+{{Anchor|牧羊人}}
+{| class="wikitable" style="text-align:center" data-description="Shepherd purchases"
+! width="100px" | 牧羊人
+! colspan="3" | 收购
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+|-
+! 1
+| {{BlockLink|White Wool}} || 16 - 22 || 1
+|}
+
+{| class="wikitable" style="text-align:center" data-description="Shepherd sales"
+! width="100px" | 牧羊人
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Shears}} || 3 - 4 || 1
+|-
+! 2
+|
+{{BlockSprite|White-Wool}}
+{{BlockSprite|Light-Gray-Wool}}
+{{BlockSprite|Gray-Wool}}
+{{BlockSprite|Black-Wool}}
+{{BlockSprite|Brown-Wool}}
+{{BlockSprite|Orange-Wool}}
+{{BlockSprite|Yellow-Wool}}
+{{BlockSprite|Lime-Wool}}<br>
+{{BlockSprite|Green-Wool}}
+{{BlockSprite|Cyan-Wool}}
+{{BlockSprite|Blue-Wool}}
+{{BlockSprite|Light-Blue-Wool}}
+{{BlockSprite|Purple-Wool}}
+{{BlockSprite|Magenta-Wool}}
+{{BlockSprite|Pink-Wool}}
+{{BlockSprite|Red-Wool}}
+<br>彩色[[羊毛]]
+<br>16个选项包含每种颜色的羊毛。<ref group="注">每种颜色的羊毛价格是相等的。</ref>
+| 1 - 2
+| 1
+|}
+
+; 制箭师{{only|bedrock|for=（帽子上的羽毛和围裙上的羽毛）}}：
+{{Anchor|制箭师}}
+{| class="wikitable" style="text-align:center" data-description="Fletcher purchases"
+! width="100px" | 制箭师
+! colspan="3" | 收购
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+|-
+! 1
+| {{ItemLink|String}} || 15 - 20 || 1
+|}
+
+{| class="wikitable" style="text-align:center" data-description="Fletcher sales"
+! width="100px" | 制箭师
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Arrow}} || 1 || 8 - 12
+|-
+! rowspan="2" | 2
+| {{ItemLink|Bow}} || 2 - 3 || 1
+|-
+| {{ItemLink|Flint}} || 10 {{BlockLink|Gravel}} <br> 1 {{ItemLink|Emerald}} || 6 - 10 
+|}
+
+=== 图书管理员 ===
+[[File:Librarian.png|right|125px]]
+
+; 图书管理员{{only|bedrock|for=（眼镜和书形帽子）}}：
+{{Anchor|图书管理员}}
+{| class="wikitable" style="text-align:center" data-description="Librarian purchases"
+! width="100px" | 图书管理员
+! colspan="3" | 收购
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+|-
+! 1
+| {{ItemLink|Paper}} || 24 - 36 || 1
+|-
+! 2
+| {{ItemLink|Book}} || 8 - 10 || 1
+|-
+! 3
+| {{ItemLink|Written Book}}<ref group="注">两本成书必须堆叠，因此必须完全相同。</ref> || 2 ||1
+|}
+
+{| class="wikitable" style="text-align:center" data-description="Librarian sales"
+! width="100px" | 图书管理员
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Enchanted Book}}<ref group="注" name="book-1.8">书只会有1种附魔。附魔会随机选择，所有附魔选项的出现概率和所有等级的出现概率都相同。价格取决于附魔等级和“宝藏”程度。价格的范围为等级I：5–19个绿宝石；等级II：8-32个绿宝石；等级III：11-45个绿宝石；等级IV：14-58个绿宝石；等级V：17-71个绿宝石。“宝藏”附魔会使价格翻倍。由于价格上限为64，等级V的实际价格为17-64个绿宝石，但价格通常都会偏贵。</ref> || 1 {{ItemLink|Book}} <br> 5 - 64 {{ItemLink|Emerald}} || 1
+|-
+! rowspan="2" | 2
+| {{ItemLink|Compass}} || 10 - 12 || 1
+|-
+| {{BlockLink|Bookshelf}} || 3 - 4 || 1
+|-
+! rowspan="2" | 3
+| {{ItemLink|Clock}} || 10 - 12 || 1
+|-
+| {{BlockLink|Glass}} || 1 || 3 - 5
+|-
+! 4
+| {{ItemLink|Enchanted Book}}<ref group="注" name="book-1.8"/><ref group="注" name="Enchanted Book-1.8">图书管理员会提供三次不同的交易。</ref> || 1 {{ItemLink|Book}} <br> 5 - 64 {{ItemLink|Emerald}} || 1
+|- <!-- Leave these separate; they really are exactly two different levels. Don't rowspan them either, please -->
+! 5
+| {{ItemLink|Enchanted Book}}<ref group="注" name="book-1.8"/><ref group="注" name="Enchanted Book-1.8"/> || 1 {{ItemLink|Book}} <br> 5 - 64 {{ItemLink|Emerald}} || 1
+|-
+! 6
+| {{ItemLink|Name Tag}} || 20 - 22 || 1
+|}
+
+; 制图师{{only|bedrock|for=（金色单片眼镜）}}：
+{{Anchor|制图师}}
+{| class="wikitable" style="text-align:center" data-description="Cartographer purchases"
+! width="100px" | 制图师
+! colspan="3" | 收购
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+|-
+! 1
+| {{ItemLink|Paper}} || 24 - 36 || 1
+|-
+! 2
+| {{ItemLink|Compass}} || 1 || 1
+|}
+
+{| class="wikitable" style="text-align:center" data-description="Cartographer sales"
+! width="100px" | 制图师
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 3
+| {{ItemLink|Empty Map}} || 7 - 11 || 1
+|-
+! rowspan="2" | 4
+| {{ItemLink|Ocean Explorer Map}}<ref group="注" name="cartographer-limits">这个交易''不能''在超平坦或不包含预设结构的自定义世界中解锁。当村民位于[[下界]]或[[末地]]时也''不能''被解锁。不过，在“生成结构”设置为“否”的世界中或在将特定结构生成设置为“否”的自定义世界中这个交易仍然''可以''被解锁。</ref> || 1 {{ItemLink|Compass}} <br> 12 - 20 {{ItemLink|Emerald}} || 1
+|-
+| {{ItemLink|Woodland Explorer Map}}<ref group="注" name="cartographer-limits" /> || 1 {{ItemLink|Compass}} <br> 16 - 28 {{ItemLink|Emerald}} || 1
+|}
+
+=== 牧师 ===
+[[File:Priest.png|right|125px]]
+
+; 牧师{{only|bedrock|for=（紫色围裙和紫色带有苦力怕图案的外套）}}：
+{{Anchor|牧师}}
+{| class="wikitable" style="text-align:center" data-description="Cleric trades"
+! width="100px" | 牧师
+! colspan="3" | 收购
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! rowspan="2" | 1
+| {{ItemLink|Rotten Flesh}} || 36 - 40 || 1
+! rowspan="2" colspan="3" |
+|-
+| {{ItemLink|Gold Ingot}} || 8 - 10 || 1
+|-
+! rowspan="2" | 2
+! colspan="3" rowspan="2" |
+| {{ItemLink|Redstone Dust}} || 1 || 1 - 4
+|-
+| {{ItemLink|Lapis Lazuli}} || 1 || 1 - 2
+|-
+! rowspan="2" | 3
+! colspan="3" rowspan="2" |
+| {{ItemLink|Ender Pearl}} || 4 - 7 || 1
+|-
+| {{BlockLink|Glowstone}} || 1 || 1 - 3
+|-
+! rowspan="1" | 4
+! colspan="3" rowspan="1" |
+| {{ItemLink|Bottle o' Enchanting}} || 3 - 11 || 1
+|}
+
+=== 铁匠 ===
+[[File:Blacksmith.png|right|125px]]
+
+; 盔甲匠{{only|bedrock|for=（黑色围裙和焊接面罩）}}：
+{{Anchor|盔甲匠}}
+{| class="wikitable" style="text-align:center" data-description="Armorer trades"
+! width="100px" | 盔甲匠
+! colspan="3" | 收购
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Coal}} || 16 - 24 || 1 || {{ItemLink|Iron Helmet}} || 4 - 6 || 1
+|-
+! 2
+| {{ItemLink|Iron Ingot}} || 7 - 9 || 1 || {{ItemLink|Iron Chestplate}} || 10 - 14 || 1
+|-
+! 3
+| {{ItemLink|Diamond}} || 3 - 4 || 1 || style="color: purple;" | 附魔的<ref group="注" name="enchant-1.8"/> {{ItemLink|Diamond Chestplate}} || 16 - 19 || 1
+|-
+! rowspan="4" | 4
+! colspan="3" rowspan="4" |
+| {{ItemLink|Chainmail Boots}} || 5 - 7 || 1
+|-
+| {{ItemLink|Chainmail Leggings}} || 9 - 11 || 1
+|-
+| {{ItemLink|Chainmail Helmet}} || 5 - 7 || 1
+|-
+| {{ItemLink|Chainmail Chestplate}} || 11 - 15 || 1
+|}
+
+; 武器匠{{only|bedrock|for=（黑色围裙和海盗眼罩）}}：
+{{Anchor|武器匠}}
+{| class="wikitable" style="text-align:center" data-description="Weapon smith trades"
+! width="100px" | 武器匠
+! colspan="3" | 收购
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Coal}} || 16 - 24 || 1 || {{ItemLink|Iron Axe}} || 6 - 8 || 1
+|-
+! 2
+| {{ItemLink|Iron Ingot}} || 7 - 9 || 1 || style="color: purple;" | 附魔的<ref group="注" name="enchant-1.8"/> {{ItemLink|Iron Sword}} || 9 - 10 || 1
+|-
+! rowspan="2" | 3
+| rowspan="2" | {{ItemLink|Diamond}} || rowspan="2" | 3 - 4 || rowspan="2" | 1 || style="color: purple;" | 附魔的<ref group="注" name="enchant-1.8"/> {{ItemLink|Diamond Sword}} || 12 - 15 || 1
+|-
+| style="color: purple;" | 附魔的<ref group="注" name="enchant-1.8"/> {{ItemLink|Diamond Axe}} || 9 - 12 || 1
+|}
+
+; 工具匠{{only|bedrock|for=（黑色围裙）}}：
+{{Anchor|工具匠}}
+{| class="wikitable" style="text-align:center" data-description="Tool smith trades"
+! width="100px" | 工具匠
+! colspan="3" | 收购
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Coal}} || 16 - 24 || 1 || style="color: purple;" | 附魔的<ref group="注" name="enchant-1.8"/> {{ItemLink|Iron Shovel}} || 5 - 7 || 1
+|-
+! 2
+| {{ItemLink|Iron Ingot}} || 7 - 9 || 1 || style="color: purple;" | 附魔的<ref group="注" name="enchant-1.8"/> {{ItemLink|Iron Pickaxe}} || 9 - 11 || 1
+|-
+! 3
+| {{ItemLink|Diamond}} || 3 - 4 || 1 || style="color: purple;" | 附魔的<ref group="注" name="enchant-1.8"/> {{ItemLink|Diamond Pickaxe}} || 12 - 15 || 1
+|}
+
+=== 屠夫 ===
+[[File:Butcher.png|right|125px]]
+
+; 屠夫{{only|bedrock|for=（白色围裙和红色头巾）}}：
+{{Anchor|屠夫}}
+{| class="wikitable" style="text-align:center" data-description="Butcher trades"
+! width="100px" | 屠夫
+! colspan="3" | 收购
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! rowspan="2" | 1
+| {{ItemLink|Raw Porkchop}} || 14 - 18 || 1
+! colspan="3" rowspan="2" |
+|-
+| {{ItemLink|Raw Chicken}} || 14 - 18 || 1
+|-
+! rowspan="2" | 2
+| rowspan="2" | {{ItemLink|Coal}} || rowspan="2" | 16 - 24 || rowspan="2" | 1 || {{ItemLink|Cooked Porkchop}} || 1 || 5 - 7
+|-
+| {{ItemLink|Cooked Chicken}} || 1 || 6 - 8
+|}
+
+; 皮匠{{only|bedrock|for=（棕色围裙和棕色手套）}}：
+{{Anchor|皮匠}}
+{| class="wikitable" style="text-align:center" data-description="Leatherworker trades"
+! width="100px" | 皮匠
+! colspan="3" | 收购
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Leather}} || 9 - 12 || 1 || 	{{ItemLink|Leather Pants}} || 2 - 4 || 1
+|-
+! 2
+! colspan="3" |
+| style="color: purple;" | 附魔的<ref group="注" name="enchant-1.8"/> {{ItemLink|Leather Tunic}} || 7 - 12 || 1
+|-
+! 3
+! colspan="3" |
+| {{ItemLink|Saddle}} || 8 - 10 || 1
+|}
+
+=== 傻子 ===
+[[File:Nitwit.png|right|125px]]
+
+傻子是一个披有{{only|for=绿色外套|bedrock}}或绿色长袍的村民，它们没有交易。
+{{-}}
+
+=== 石匠 ===
+[[File:Plains Villager Stone Mason.png|right|125px]]
+{{Anchor|石匠}}
+
+注意：此处石匠的交易内容仅适用于[[基岩版1.10.0]]。
+
+{| class="wikitable" style="text-align:center" data-description="Stone Mason trades"
+! width="100px" | 石匠
+! colspan="3" | 收购
+! colspan="3" | 出售
+|-
+! 等级
+! width="190px" | 物品
+! width="80px" | 数量
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="190px" | 物品
+! width="80px" | {{ItemSprite|emerald}} 价格
+! width="80px" | 数量
+|-
+! 1
+| {{ItemLink|Clay Ball}} || 10 - 13 || 1 |1
+| {{ItemLink|Brick}} || 1 - 2 || 16
+|-
+! 2
+| {{BlockLink|Stone}} || 20 - 26 || 1 |1
+| {{BlockLink|Chiseled Stone Bricks}} || 1 - 2 || 4
+|-
+! 3
+| {{BlockLink|Granite}}<br> {{BlockLink|Andesite}}<br> {{BlockLink|Diorite}} || 16 - 21 || 1 |1
+| {{BlockLink|Polished Granite}}<br> {{BlockLink|Polished Andesite}}<br> {{BlockLink|Polished Diorite}} || 1 - 2 || 4
+|-
+! 4
+| {{ItemLink|Nether Quartz}} || 20 - 26 || 1 |1
+! colspan="3"|
+|-
+! 5
+! colspan="3"|
+| {{BlockLink|Quartz Pillar}} || 1 - 2 || 1
+|- 
+|}
+
+== 画廊 ==
+<gallery>
+Villagertradinggui.png|被移除所有物品后的交易界面
+VillagerLockout.png|一个村民的唯一交易被锁定
+Trading GUI2.jpg|[[基岩版]]中的旧版交易界面
+</gallery>
+
+== 注释 ==
+{{notelist|注}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[de:Handel/Vor 1.14]]
+[[en:Trading/Before Village & Pillage]]
+[[es:Comercio/Antes de Village & Pillage]]
+[[ja:取引/ヴィレッジ・アンド・ピレッジ以前]]
+[[ko:거래/옛날]]
+[[pt:Comércio/Antes da Village and Pillage]]
+[[ru:Торговля/до 1.14]]
+[[uk:Торгівля/до 1.14]]

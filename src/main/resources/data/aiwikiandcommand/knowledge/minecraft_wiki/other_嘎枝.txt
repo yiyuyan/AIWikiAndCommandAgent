@@ -1,0 +1,372 @@
+# 页面: 嘎枝
+# 来源: https://zh.minecraft.wiki/w/%E5%98%8E%E6%9E%9D
+# 分类: Java版即将到来/26.3
+# 抓取时间: 2026-07-14 17:22:32
+# 原始 Wikitext 内容:
+
+{{Infobox entity
+|image = Creaking.png
+|imagesize = 100px
+|invimage = Creaking Spawn Egg
+|size=高度：2.7格<br>宽度：0.9格
+|health = {{hp|1}}
+|behavior = 敌对生物
+|damage = '''近战攻击'''：<br>{{AutoDmg|3}}
+|spawn = 由[[嘎枝之心]]在夜晚或雷暴时生成
+|usableitems={{ItemLink|Name Tag}}
+}}
+
+'''嘎枝（Creaking）'''是一种由[[嘎枝之心]]生成且免疫伤害的[[敌对生物]]。当其被[[玩家]]看见时不能进行攻击或移动，仅能通过破坏嘎枝之心来杀死。
+
+== 生成 ==
+{{see also|嘎枝之心#周期检查}}
+嘎枝之心被激活后，在[[夜晚]]或[[雷暴]]时每{{range|20|24}}游戏刻尝试在周围33×17×33的范围内寻找随机位置生成嘎枝直至成功，并在该位置生成嘎枝。玩家{{only|je|for=32格}}或{{only|be|for=[[模拟距离]]}}以外的嘎枝之心不会进入生成周期。
+
+能够生成嘎枝的合适位置需同时满足以下所有条件：
+* 下方的方块顶面是完整的，且不能为[[树叶]]。
+* 待生成的位置不能被不完整方块的[[碰撞箱]]占据，例如[[地毯]]可以阻止嘎枝生成，但[[按钮]]不会。
+* {{only|for=待生成的位置不能是[[水]]或[[熔岩]]。|JE}}
+* 待生成的位置不能被其他实体的碰撞箱占据。
+
+== 掉落物 ==
+嘎枝在死亡时不会掉落任何物品或[[经验]]。
+
+== 行为 ==
+嘎枝是一种[[敌对生物]]，会阻止附近的玩家使用[[床]]睡觉。嘎枝只在{{tr|激活|活化}}时与玩家敌对，不会反击其他任何生物。
+
+嘎枝无法进入[[船]]{{only|for=和[[矿车]]|BE}}中。
+
+嘎枝可以直接走上{{only|for=1格|BE}}或{{only|for={{frac|1|1|16}}格|JE}}高的方块而无需跳跃。
+
+{{in|be}}嘎枝不会[[溺水]]。
+
+[[灾厄村民]]会主动远离自身位置半径8格内的嘎枝。<ref>{{bug|MC-277138|||WAI}}</ref>
+
+激活的嘎枝的眼睛拥有发亮的纹理，在暗处也清楚可见，但不会影响周围方块的实际[[亮度]]。
+
+=== 被玩家观察 ===
+[[File:Creaking Chasing Player.gif|thumb|未被玩家观察时，嘎枝会追赶玩家]]
+一名玩家满足以下条件时，嘎枝会认为该玩家正在观察自己：
+* 玩家处于[[生存模式]]或[[冒险模式]]。<ref>{{bug|MCPE-187328|||WAI}}</ref>
+* {{only|for=玩家与嘎枝不属于同一[[队伍]]。|JE}}
+* 嘎枝与玩家之间无[[固体方块]]阻挡，且距离不超过32格。
+** [[玻璃]]、[[染色玻璃]]、[[遮光玻璃]]、[[铁栏杆]]、[[铜栏杆]]、[[细雪]]和[[铜格栅]]不被视为阻挡。
+* 嘎枝与玩家的连线和该玩家视线间的夹角小于60°。
+
+正在被未戴有[[雕刻南瓜]]的玩家观察的嘎枝不能移动、转身、进行近战攻击、[[骑乘]]实体或被实体推动。未被观察时，嘎枝会以约8m/s的速度{{more info|具体速度？}}追赶玩家。
+
+=== {{tr|激活|活化}}与失-{}-活{{anchor|激活与失活}} ===
+嘎枝默认处于失-{}-活状态，失-{}-活的嘎枝在被距离自身12格内的玩家观察时，会被该玩家{{tr|激活|活化}}。{{tr|已激活|活化}}的嘎枝如果没有被任何玩家观察且无攻击目标则会失-{}-活。
+
+失-{}-活的嘎枝的眼眸较为暗淡，不会攻击任何生物，并会发出[[#音效|闲置音效]]。
+
+{{tr|已激活|活化}}的嘎枝具有更明亮且不被[[隐身]]状态效果隐藏的眼眸，会以与玩家[[疾跑]]相当的速度追逐并攻击半径32格内的玩家。
+
+=== 绑定嘎枝之心 ===
+嘎枝可以绑定一个嘎枝之心。由嘎枝之心生成的嘎枝在生成时即与生成它的嘎枝之心绑定。
+
+{{in|je}}嘎枝绑定的嘎枝之心的位置存储在其{{nbt|int-array|home_pos}}实体数据中。可以通过{{cmd|summon}}命令、使用经命令修改的刷怪蛋或[[刷怪笼]]生成具有{{nbt|int-array|home_pos}}实体数据的嘎枝，但同一刻内此实体数据对应的嘎枝之心必须也绑定此嘎枝，否则嘎枝会因为绑定无效而立刻死亡。此时死亡的嘎枝会触发[[蓄风]]、[[盘丝]]和[[渗浆]]效果，但仍不触发[[寄生]]。
+
+绑定了嘎枝之心的嘎枝会有以下特殊行为：
+
+'''绑定破坏'''
+
+当嘎枝绑定的嘎枝之心被破坏时，嘎枝会抽搐2.25秒并消失。
+
+{{in|je}}如果该嘎枝之心由玩家直接或间接破坏，则同时会触发[[玩家]]的{{code|player_killed_entity}}[[进度定义格式#player_killed_entity|击杀触发器]]。该过程不会触发嘎枝的蓄风、盘丝、寄生和渗浆效果。
+
+'''消失'''
+{{see also|嘎枝之心#周期检查}}
+绑定了嘎枝之心时，嘎枝在下列情况下会被嘎枝之心在执行周期性检查时移除：
+* 当前处在[[主世界]]的白天{{fn|当前[[时间]]满足{{interval|right_open=12600}}或{{interval|left_open=23400}}。}}，且嘎枝没有因为被命名等原因被标记为不能自然删除。
+* 连续5次检查时，嘎枝的[[边界箱]]都与某位[[玩家]]的[[视平线]]相交。
+* 到该嘎枝之心底面中心的[[欧几里得距离]]超过34格。
+
+上述检查每{{range|20|24}}游戏刻执行一次。
+
+'''伤害免疫'''
+[[File:Creaking linked to a creaking heart.jpg|thumb|被玩家攻击的嘎枝与其绑定的嘎枝之心之间产生粒子效果并生成树脂团]]
+绑定了嘎枝之心时，嘎枝不受除虚空和{{cmd|kill}}外的伤害，不会[[着火]]，{{upcoming|je 26.3|o=be|for=也不会被[[伤害#击退|击退]]}}<ref name="MC-308849"/>，但仍会被[[铁傀儡]]、[[僵尸疣猪兽]]等击飞或受到[[爆炸击退]]。
+
+被玩家直接或间接攻击时，嘎枝会轻微晃动身体，其与其绑定的嘎枝之心之间会产生粒子效果以指示嘎枝之心的位置，且如嘎枝之心的状态为<code>awake</code>，在相应嘎枝之心周围会生成[[树脂团]]。
+
+'''其他'''
+
+绑定了嘎枝之心时，嘎枝不会穿过[[下界传送门]]和[[末地传送门]]。
+
+绑定了嘎枝之心时，嘎枝不会躲避[[仙人掌]]、[[甜浆果丛]]、[[细雪]]和[[熔岩]]，也不会尝试走到距离与其绑定的嘎枝之心32格外的地方。
+
+== 音效 ==
+{{more sounds|基岩版音效|section=1}}
+{{el|je}}：
+{{Sound table
+|sound=Creaking activate.ogg
+|subtitle={{tp|subtitles.entity.creaking.activate}}
+|description=发现玩家
+|id=entity.creaking.activate
+|source=敌对生物
+|translationkey=subtitles.entity.creaking.activate
+}}
+{{Sound table
+|sound=Creaking idle1.ogg
+|sound2=Creaking idle2.ogg
+|sound3=Creaking idle3.ogg
+|sound4=Creaking idle4.ogg
+|sound5=Creaking idle5.ogg
+|sound6=Creaking idle6.ogg
+|subtitle={{tp|subtitles.entity.creaking.ambient}}
+|description=失-{}-活的嘎枝空闲时随机播放此声音
+|id=entity.creaking.ambient
+|source=敌对生物
+|translationkey=subtitles.entity.creaking.ambient
+}}
+{{Sound table
+|sound=Creaking attack1.ogg
+|sound2=Creaking attack2.ogg
+|sound3=Creaking attack3.ogg
+|sound4=Creaking attack4.ogg
+|subtitle={{tp|subtitles.entity.creaking.attack}}
+|description=攻击
+|id=entity.creaking.attack
+|source=敌对生物
+|translationkey=subtitles.entity.creaking.attack
+}}
+{{Sound table
+|sound=Creaking deactivate.ogg
+|subtitle={{tp|subtitles.entity.creaking.deactivate}}
+|description=失去目标
+|id=entity.creaking.deactivate
+|source=敌对生物
+|translationkey=subtitles.entity.creaking.deactivate
+}}
+{{Sound table
+|sound=Creaking death.ogg
+|subtitle={{tp|subtitles.entity.creaking.death}}
+|id=entity.creaking.death
+|description=死亡
+|source=敌对生物
+|translationkey=subtitles.entity.creaking.death
+}}
+{{Sound table
+|sound=Creaking freeze1.ogg
+|sound2=Creaking freeze2.ogg
+|sound3=Creaking freeze3.ogg
+|sound4=Creaking freeze4.ogg
+|subtitle={{tp|subtitles.entity.creaking.freeze}}
+|description=进入玩家视野
+|id=entity.creaking.freeze
+|source=敌对生物
+|translationkey=subtitles.entity.creaking.freeze
+}}
+{{Sound table
+|sound=Creaking step1.ogg
+|sound2=Creaking step2.ogg
+|sound3=Creaking step3.ogg
+|sound4=Creaking step4.ogg
+|sound5=Creaking step5.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|description=行走
+|id=entity.creaking.step
+|source=敌对生物
+|translationkey=subtitles.entity.creaking.step
+}}
+{{Sound table
+|sound=Creaking sway.ogg
+|subtitle={{tp|subtitles.entity.creaking.sway}}
+|description=与嘎枝之心绑定的嘎枝因受击而摇晃
+|source=敌对生物
+|id=entity.creaking.sway
+|translationkey=subtitles.entity.creaking.sway
+}}
+{{Sound table
+|sound=Creaking unfreeze1.ogg
+|sound2=Creaking unfreeze2.ogg
+|sound3=Creaking unfreeze3.ogg
+|subtitle={{tp|subtitles.entity.creaking.unfreeze}}
+|description=离开玩家视野
+|source=敌对生物
+|id=entity.creaking.unfreeze
+|translationkey=subtitles.entity.creaking.unfreeze
+}}
+{{Sound table
+|sound=Player hurt1.ogg
+|sound2=Player hurt2.ogg
+|sound3=Player hurt3.ogg
+|subtitle={{tp|subtitles.entity.generic.hurt}}
+|description=未绑定嘎枝之心的嘎枝受伤
+|source=敌对生物
+|id=entity.hostile.hurt
+|translationkey=subtitles.entity.generic.hurt
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|Creaking
+|spritetype=entity
+|nameid=creaking
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Creaking
+|spritetype=entity
+|nameid=creaking
+|foot=1}}
+
+=== 实体数据 ===
+{{el|je}}：
+{{main|实体数据格式}}
+嘎枝有与之相联系的包含许多该[[生物]]属性的存档数据。
+
+{{/ED}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/实体格式|基岩版存档格式/实体格式/组件}}
+
+== 成就 ==
+{{Load achievements|monster-hunter}}
+
+以下成就适用于所有生物：
+{{Load achievements|mob-kabob;over-overkill;overkill|main=none}}
+
+== 进度 ==
+{{load advancements|adventure.kill_a_mob;adventure.kill_all_mobs}}
+
+以下进度适用于所有生物：
+{{Load advancements|adventure.arbalistic;adventure.overoverkill;adventure.root;adventure.shoot_arrow;adventure.spear_many_mobs;adventure.throw_trident|main=none}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2024年9月24日|link=https://web.archive.org/web/20240924180401/https://www.minecraft.net/en-us/live|嘎枝在官网的Minecraft Live文章中被公布。但该版本的文章在几个小时后被删除。}}
+|{{HistoryLine||2024年9月25日|link=https://twitter.com/Minecraft/status/1838959093538590841|Minecraft官方发布了一张隐藏着新特性的图片，其中包含一张嘎枝的图片。}}
+|{{HistoryLine||2024年9月28日|link=https://www.youtube.com/watch?v=qnX6sPFjXnA|[[File:Creaking JE1 BE1.png|32px]] 在[[Minecraft Live 2024]]中展示了嘎枝。}}
+|{{HistoryLine||2024年9月28日|link=https://twitter.com/Minecraft/status/1840081316261306745|[[File:Creaking (pre-relaese).png|32px]] 官方的推文中展示了嘎枝的旧纹理。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.21.2|exp=winter_drop|dev=24w40a|[[File:Creaking JE1 BE1.png|32px]] 加入了嘎枝。
+|此时的嘎枝分为临时嘎枝和持久化嘎枝，实体ID分别为<code>creaking_transient</code>和<code>creaking</code>。
+|临时嘎枝不会被存储和加载。
+|临时嘎枝可以由嘎枝之心生成，持久化嘎枝由嘎枝刷怪蛋或命令生成。}}
+|{{HistoryLine|||dev=pre1|现在嘎枝不再会因周围的[[创造模式]]玩家而激活和停止。
+|临时嘎枝不再能够被[[命名牌]]命名。}}
+|{{HistoryLine||1.21.4|dev=24w44a|嘎枝不再属于[[实验性内容]]。
+|嘎枝的攻击伤害由{{hp|2}}提升至{{hp|3}}。
+|嘎枝的速度由0.3提升到0.4。
+|持久化嘎枝不再免疫火焰伤害。
+|加入了流泪、眨眼和抽动动画。
+|临时嘎枝现在只会在被生物或弹射物伤害时做出反应，并在原地摇摆。
+|临时嘎枝现在免疫仙人掌、甜浆果丛、细雪和熔岩的伤害，且能从中穿过。
+|临时嘎枝现在会在与玩家边界箱相交5秒后消失。<ref name=bug>{{bug|MC-277123|||Fixed}}</ref>
+|现在临时嘎枝的生命值会在嘎枝之心被破坏后归零。
+|嘎枝现在不再因为被同队伍玩家看到而驻足了。<ref>{{bug|MC-277815|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=24w45a|嘎枝现在被[[生存模式]]或[[冒险模式]]玩家观察时拥有完全的击退抗性。}}
+|{{HistoryLine|||dev=24w46a|重新实现了嘎枝，不再分为临时嘎枝和持久化嘎枝，唯一的嘎枝实体的ID为<code>creaking</code>。
+|加入了{{nbt|int array|home_pos}}数据字段，具有此实体数据的嘎枝具有此前的临时嘎枝的行为。
+|嘎枝之心生成的嘎枝（此前的临时嘎枝）现在能够被命名牌命名。
+|嘎枝之心生成的嘎枝（此前的临时嘎枝）现在会被保存和加载，不再会在重载世界后消失。}}
+|{{HistoryLine|||dev=pre1|嘎枝之心生成的嘎枝不再能够被命名牌命名。<ref>{{bug|MC-278312|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=pre2|现在未与嘎枝之心绑定的嘎枝受到伤害时会发出敌对生物的通用受伤音效而非晃动音效。}}
+|{{HistoryLine||1.21.5|dev=25w02a|嘎枝之心生成的嘎枝又能够被命名牌命名。
+|上述嘎枝被命名后，不再在白天被移除，但仍会因与玩家重合或远离嘎枝之心而被移除。嘎枝的其他绑定特性不受影响。}}
+|{{HistoryLine||1.21.11|dev=25w41a|嘎枝现在可以使用命令骑乘。}}
+|{{HistoryLine||26.2|dev=pre-4|由于漏洞，现在绑定了嘎枝之心的嘎枝可以被击退。<ref name="MC-308849">{{bug|MC-308849|||Fixed}}</ref>}}
+|{{HistoryLine||26.3|dev=snapshot-1|现在绑定了嘎枝之心的嘎枝不再可以被击退。<ref name="MC-308849"/>}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.21.50|dev=1.21.50.20|[[File:Creaking JE1 BE1.png|32px]] 加入了嘎枝。}}
+|{{HistoryLine|||dev=1.21.50.25|提高了嘎枝的速度。
+|嘎枝的攻击伤害由{{hp|2}}提升至{{hp|3}}。
+|现在当所绑定的嘎枝之心被破坏时，嘎枝会在消失前抽搐2.25秒。
+|现在绑定了嘎枝之心的嘎枝会在与玩家处于同一格方块内超过5秒时消失。
+|更改了嘎枝的行走动画和攻击动画。
+|绑定了嘎枝之心的嘎枝不再会避开能够造成伤害的方块。
+|未绑定嘎枝之心的嘎枝不再免疫火焰伤害。
+|未绑定嘎枝之心的嘎枝现在会避开能够造成伤害的方块。
+|降低了嘎枝的攻击速度以匹配{{el|je}}。<ref>{{bug|MCPE-187309|||Fixed}}</ref>}}
+|{{HistoryLine|||dev=1.21.50.26|降低了无攻击目标的嘎枝的速度。
+|只有脚部被观察到或脚部位于[[灵魂沙]]或[[泥巴]]上时，嘎枝不再能够移动。
+|现在嘎枝被[[弹射物]]击中时会摇摆。
+|现在嘎枝可以靠近向下看的玩家，只有进入玩家视野内后才会停止追逐。
+|平滑处理了嘎枝的攻击动画，使其动作更加自然。}}
+|{{HistoryLine||1.21.60|dev=1.21.60.21|嘎枝之心生成的嘎枝现在会被保存和加载，不再会在重载世界后消失。<ref>{{bug|MCPE-188352|||Fixed}}</ref>
+|嘎枝现在会在其绑定的嘎枝之心被命令强制停用时消失。}}
+|{{HistoryLine|||dev=1.21.60.23|现在已激活的嘎枝拥有不受[[隐身]]效果影响的眼眸。}}
+|{{HistoryLine|||dev=1.21.60.25|现在嘎枝能被命名牌命名，被命名的嘎枝不会在白天消失。
+|现在嘎枝能够在雪层上生成。<ref>{{bug|MCPE-187368|||Fixed}}</ref>}}
+}}
+
+== 你知道吗 ==
+* 嘎枝的简体中文和台湾正体译名“嘎-{}-枝”为“嘎吱作响”与“树枝”的谐音混成词。
+* 嘎枝的外形参考了监守者的早期设计“[[监守者#你知道吗|Stalker]]”，其外观设计得不对称是为了增加“怪异感”。<ref name="intro">{{ytl|qnX6sPFjXnA|t=1548s|Minecraft Live 2024|Minecraft|September 28, 2024}}</ref>
+** 嘎枝面部上的三条橙色横线像是构成了位置怪异的眼睛和嘴部，但实际上三条横线都是嘎枝的眼睛，类似于[[Minecraft Dungeons]]的[[看守灵]]。
+* 在游戏设定上，嘎枝是[[嘎枝之心]]的“傀儡”（puppet）；<ref name="intro"/>并且嘎枝的脚是“扎根在地里的”，<ref>{{ytl|rez5M40j5fg|t=3m57s|Minecraft Live 2024: Developer After-Show|Minecraft|September 28, 2024}}</ref>这可以从其脚部的根须纹理以及交替迈出下肢的移动动画看出。
+* 嘎枝的部分音效是用牙齿、枯枝和树叶、吱吱作响的椅子、桌子、椒盐卷饼棒<ref>{{ytl|qnX6sPFjXnA|t=1635s|Minecraft Live 2024|Minecraft|September 28, 2024}}</ref>以及指关节<ref>{{tweet|Anthony_Toczek|1944792298388103241|Sounds of my knuckles cracking were recorded and incorporated into the creaking sound effects in Minecraft.|July 14, 2025}}</ref>发出的。
+* 如果使用指令强行把嘎枝传送到下界或者末地，其会在传送后立即死亡（而不是因为失-{}-活而碎裂），即使在对应维度存在符合嘎枝{{nbt|int-array|home_pos}}实体数据字段并且已经激活的嘎枝之心。
+** 因此死亡的嘎枝会触发[[蓄风]]、[[盘丝]]和[[渗浆]]效果，但仍不触发[[寄生]]效果。
+
+== 画廊 ==
+=== 渲染图 === 
+<gallery>
+Creaking JE2 BE2 Walk Animation.gif|嘎枝移动
+Creaking JE2 BE1 Sway Animation.gif|嘎枝被生物或弹射物伤害时摇摆
+Creaking JE2 BE2 Attack Animation.gif|{{el|JE}}嘎枝攻击
+Creaking BE3 Attack Animation.gif|{{el|BE}}嘎枝攻击
+Creaking JE1 BE1 Twitch Animation.gif|嘎枝在消失前抽搐
+</gallery>
+
+==== 测试版 ====
+<gallery>
+Creaking BE1 Walk Animation.gif|嘎枝移动（[[基岩版1.21.50.25]]前）
+Creaking BE1 Attack Animation.gif|嘎枝攻击（[[基岩版1.21.50.25]]前）
+</gallery>
+
+=== 纹理 ===
+<gallery class="pixel-image">
+Creaking (texture).png|嘎枝的纹理
+</gallery>
+
+=== 概念艺术 ===
+<gallery>
+Creaking concept art.png|嘎枝的概念艺术
+The Garden Awakens Creaking Artwork.png|嘎枝的艺术作品
+</gallery>
+
+=== 开发截图 ===
+<gallery>
+Minecraft Live 2024 - YouTube Closeup of The Creaking in the Pale Garden.png|[[Minecraft Live 2024]]中展示的嘎枝
+Minecraft Live 2024 Creaking showcase 3.jpeg|白天的嘎枝
+MCL24 Recap article Creaking1.jpg
+Minecraft Live 2024 Creaking Heart and Creaking.jpg|嘎枝之心与嘎枝
+</gallery>
+
+=== 其他媒体 ===
+<gallery>
+Minecraft Live 2024 photographic teaser.png|嘎枝的一张预告照片
+</gallery>
+
+== 注释 ==
+{{notelist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox entities|Mobs}}
+
+[[Category:敌对生物]]
+
+[[de:Knarz]]
+[[en:Creaking]]
+[[es:Crepitante]]
+[[fr:Grinceur]]
+[[it:Scricchio]]
+[[ja:クリーキング]]
+[[ko:크리킹]]
+[[lzh:䦪鬼]]
+[[pl:Trzeszcz]]
+[[pt:Rangente]]
+[[ru:Скрипун]]
+[[uk:Скрипень]]

@@ -1,0 +1,199 @@
+# 页面: Java版1.21.11-pre1
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%881.21.11-pre1
+# 分类: 
+# 抓取时间: 2026-07-14 17:13:45
+# 原始 Wikitext 内容:
+
+{{Dangerous version|不存在{{cd|[[options.txt]]}}文件时，启动游戏会导致游戏崩溃。<ref>{{bug|MC-304369|||Fixed}}</ref>}}{{Launcher unavailable|unobfuscated}}
+{{Infobox version
+|title=1.21.11-pre1
+|group1=常规版本
+|1-1=1.21.11-pre1.png
+|1-2=Java Edition 1.21.11-pre1 Simplified.png\Java Edition 1.21.11-pre1 Traditional.png\Java Edition 1.21.11-pre1 Traditional HK.png
+|group2=未混淆版本
+|2-1=1.21.11-pre1.png
+|2-2=Java Edition 1.21.11-pre1 Unobfuscated Simplified.png\Java Edition 1.21.11-pre1 Unobfuscated Traditional.png\Java Edition 1.21.11-pre1 Unobfuscated Traditional HK.png
+|edition=Java
+|type=Pre-release
+|date=2025年11月19日
+|downloads=
+; 常规版本
+: {{dl|e9b472f991278db704df8ce3eb803af57f26ed07|client}}（{{dl|9696c8840e4a9f6783e154bf6b67ba049ace5d3d|json|name=1.21.11-pre1}}）
+: {{dl|1087f90b4d73209318d87aa8deecfaae24861004|server}}
+; 未混淆版本
+: {{dl|37e6d1aa9d8ae06f3ea1d186b30d2abed784ab3f|client}}（{{dl|f98a0c053a8246cce12f8f29f2ba4ce00872fd53|custom|name=1_21_11-pre1_unobfuscated.zip|title=.zip}}{{fn|解压至<samp>[[.minecraft]]/versions</samp>目录}} · {{dl|9c267f8dda2728bae55201a753cdd07b584709f1|json|name=1.21.11-pre1_unobfuscated}}）
+: {{dl|ffd25fe7eb268ec94a70ca0a672cadf7f62d20c9|server}}
+|clientmap=dbda7a8747caf92e948ff44d0ed01cf0fb3e5854
+|servermap=e434a6854aa28c14f9103695485be4ab417fbae2
+|parent=1.21.11
+|prevparent=1.21.10
+|prev=25w46a
+|next=1.21.11-pre2
+|nextparent=26.1
+}}<onlyinclude>
+
+'''1.21.11-pre1'''是[[Java版1.21.11]]的首个预发布版，发布于2025年11月19日<ref>{{article|minecraft-1-21-11-pre-release-1|Minecraft 1.21.11 Pre-Release 1|Nov 19, 2025}}</ref>，修复了一些漏洞。
+
+此版本也额外发布了未经混淆的版本，称为'''1.21.11 Pre-Release 1 Unobfuscated'''（启动器内称'''1.21.11-pre1_unobfuscated'''），旨在过渡至后续小更新时移除混淆。<ref>{{article|removing-obfuscation-in-java-edition|Removing obfuscation in Java Edition|Oct 29, 2025}}</ref>
+
+== 新内容 ==
+=== 常规 ===
+'''[[闪烁标语]]'''
+* 加入了以下闪烁标语：
+** Music by Hyper Potions!
+
+'''[[选项]]'''
+* 在视频设置中加入了“纹理过滤”选项。
+** 此选项也控制“各向异性过滤”选项是否可用。
+** 控制在从一定角度或远处观察纹理时所采用的采样方法。
+** 可用数值有“无”“RGSS”和“各向异性”。
+** 默认设置取决于设备的图形预设和硬件。
+** RGSS（Rotated Grid Super Sampling）是一种基于着色器的过滤方法，能够牺牲适度性能提升纹理清晰度。
+*** 所有硬件均可使用此设置。
+** 各向异性是一种基于硬件的过滤方法，能够提供最佳的纹理清晰度。
+
+'''[[数据组件]]'''
+* 加入了物品组件<code>attack_range</code>。
+** 允许物品具有自定义的交互范围。
+** 会覆盖玩家的实体交互距离属性。
+** 生物的普通近战攻击范围是根据目标碰撞箱与攻击者碰撞箱的距离计算的。该组件通过调整攻击判定箱的最小和最大填充来调整距离判定。
+** 使用带有<code>minecraft:kinetic_weapon</code>组件的物品的生物的攻击范围会与玩家相同。
+<div class="treeview">
+:* {{nbt|compound|attack_range}}
+:** {{nbt|float|min_range}}：（{{interval|left=0.0|right=64.0}}，默认为0.0）攻击者到目标的最小有效距离。以攻击者眼睛位置、沿视角方向到被攻击者攻击判定箱的最小距离计算。
+:** {{nbt|float|max_range}}：（{{interval|left=0.0|right=64.0}}，默认为3.0）攻击者到目标的最大有效距离。以攻击者眼睛位置、沿视角方向到被攻击者攻击判定箱的最小距离计算。
+:** {{nbt|float|hitbox_margin}}：（{{interval|left=0.0|right=1.0}}，默认为0.3）决定攻击判定箱的大小。游戏将实体的碰撞箱向各个方向扩展此距离得到攻击判定箱。
+:** {{nbt|float|mob_factor}}：（{{interval|left=0.0|right=2.0}}，默认为1.0）对于非玩家生物，其使用的最小有效距离和最大有效距离的缩放乘数。
+</div>
+
+'''[[纹理]]'''
+* 拆分了马铠纹理，分为底层和着色覆盖层。
+** 新增了物品纹理<code>item/leather_horse_armor_overlay</code>。
+** 新增了实体纹理<code>entity/equipment/horse_body/leather_overlay.png</code>。
+* 纹理元数据属性新增了{{nbt|float|alpha_cutoff_bias}}，用于控制cutout纹理的alpha偏置。
+** 技术上而言这个值没有值域限制，可以是负数，但设置高于1.0或低于-1.0不适合，因为纹理会变得完全不透明或完全透明。
+** 默认为0.0，对于远距离时过于透明或过于薄弱的纹理可以提高，否则纹理将很“不透明”。
+** 建议精细调整这个值以找到最佳取值，例如0.1用于海带纹理，防止它们在远处时完全透明。
+** 仅用于cutout纹理的较低MipMap级别，不会改变第一MipMap级别的透明通道值，也不影响其他纹理。
+
+'''[[Java版声音事件|声音事件]]'''
+* 为鹦鹉螺添加了新的声音事件：
+** <code>entity.baby_nautilus.ambient_land</code>
+** <code>entity.baby_nautilus.death_land</code>
+** <code>entity.baby_nautilus.hurt_land</code>
+** <code>entity.nautilus.ambient_land</code>
+** <code>entity.nautilus.dash_land</code>
+** <code>entity.nautilus.dash_ready_land</code>
+** <code>entity.nautilus.death_land</code>
+** <code>entity.nautilus.hurt_land</code>
+* 为僵尸鹦鹉螺添加了新的声音事件：
+** <code>entity.zombie_nautilus.ambient_land</code>
+** <code>entity.zombie_nautilus.dash_land</code>
+** <code>entity.zombie_nautilus.dash_ready_land</code>
+** <code>entity.zombie_nautilus.death_land</code>
+** <code>entity.zombie_nautilus.hurt_land</code>
+
+== 更改 ==
+=== 方块 ===
+'''[[树叶]]'''
+* 现在“{{tr|可透视树叶|透視樹葉|可透視樹葉}}”选项为关时，树叶的透明部分是与树叶相近的颜色而不是黑色。
+
+=== 物品 ===
+'''[[皮革马铠]]'''
+* 更改了纹理以与{{el|be}}保持一致。
+
+'''[[矛]]'''
+* 将矛的物品切换动画的速度倍率由1.9更改为1.95。
+* 生物使用矛进行攻击后若持续冲锋，那么可以继续对目标造成伤害。
+
+=== 生物 ===
+'''[[鹦鹉螺]]和[[僵尸鹦鹉螺]]'''
+* 更改了音效。
+* 其头部现在穿过外壳时在视觉上的遮挡减少。
+
+'''[[猪灵]]'''
+* 现在会把金矛视为首选武器了。
+* 现在会用矛进行冲锋。
+
+'''[[骷髅]]及其变种和[[溺尸]]'''
+* 现在无法拾取矛。
+
+=== 游戏内容 ===
+'''[[进度]]'''
+* 进度“[[进度#advancements-anchor-adventure.spear_many_mobs|{{Advancement name|adventure.spear_many_mobs|zh|rev=1}}]]”由挑战进度改为目标进度。
+
+'''[[创造模式物品栏]]'''
+* 矛的位置现在在剑之后。
+
+=== 常规 ===
+'''[[数据包]]'''
+* 将数据包版本号更改为{{cd|94.0}}。
+
+'''[[资源包]]'''
+* 将资源包版本号更改为{{cd|75.0}}。
+
+'''[[选项]]'''
+* 现在“各向异性过滤”选项由“纹理过滤”选项控制是否可用。
+
+'''[[数据组件]]'''
+* 将字段<code>min_reach</code>、<code>max_reach</code>和<code>hitbox_margin</code>从物品组件<code>piercing_weapon</code>和<code>kinetic_weapon</code>移到新组件<code>attack_range</code>中，使得所有近战武器都能使用上述字段。
+
+'''[[Java版标签|标签]]'''
+* 向物品标签<code>#piglin_preferred_weapons</code>中加入了[[金矛]]。
+
+== 修复 ==
+{{fixes|fixedin=1.21.11 Pre-Release 1|showdesc=1|new=1
+|;old
+|276382|皮革马铠的护腿和帽子部分没有纹理。
+|299136|Hyper Potions（Ian Tsuchiura）没有在鸣谢名单和闪烁标语中提及。
+|302209|切换维度时调试渲染器停止工作。
+|;dev
+|302677|攻击指示器和矛的攻击距离不符。
+|302836|僵尸马头部纹理不对称。
+|302840|装备在僵尸马上的鞍缺失一部分纹理。
+|302882|和基岩版不同，猪灵手持矛时不会冲锋攻击。
+|302900|矛的攻击距离覆盖了玩家的实体交互距离。
+|303052|蜘蛛网和甜浆果丛会阻止玩家使用矛突进。
+|303174|鹦鹉螺掉落鹦鹉螺壳的概率不受抢夺影响。
+|303467|手持金矛生成且能够捡起物品的僵尸猪灵会用任何其他物品替换其手中的矛。
+|303476|鹦鹉螺在陆地上突进时播放水下的音效。
+|303524|手持金矛生成的猪灵会用任何金质物品替换其手中的矛。
+|303657|骆驼尸壳只在被骑乘时会在水中下沉。
+|303664|mipmap等级禁用后，使用平面纹理的方块会出现轮廓箱。
+|303812|手持矛生成的僵尸会用任何其他物品替换其手中的矛。
+|303838|存在末影龙迷雾时，雨会在末地渲染。
+|303846|{{cmd|gamerule|link=none}}无法识别游戏规则的完整资源路径。
+|303919|在梯子上使用突进会浪费耐久和饥饿。
+|303942|{{Advancement name|adventure.spear_many_mobs|zh|rev=1}}进度不会给予玩家经验值。
+|303950|速度不再能正确增加矛的伤害。
+|304029|降雨天气发生时，亡灵生物不再会于无降水的生物群系中在阳光下燃烧。
+|304042|一次冲锋攻击连续击中一个末影龙五次可以获得{{Advancement name|adventure.spear_many_mobs|zh|rev=1}}进度。
+|304058|较低的{{cd|fog_end_distance}}环境属性值会使降雨时的迷雾效果急剧增加。
+|304095|手持矛会阻止玩家与交互实体通过攻击交互。
+|304116|区块淡入选项开启时，实体和方块实体不会正确淡入。
+|304127|三次贝塞尔曲线参数的浮动范围不符合更新日志。
+|;prev
+|304163|启用高级提示框时按住{{key|shift}}并左键单击实体的名称不再会在聊天栏插入实体的UUID。
+|304170|关闭音乐时将“音乐弹窗”选项设置为“{{tr|暂停菜单和弹窗|暫停選單與通知}}”会显示音乐弹窗。
+|304190|鱼桶现在有一个不合理的{{cd|consumable}}数据组件。
+|304191|狐狸可以吃鱼桶，铁桶会直接消失，且狐狸不会被给予状态效果。
+|304196|涂蜡的切制铜台阶合成涂蜡的雕纹铜块的配方会输出2个物品而不是1个。
+|304212|被骑乘的僵尸鹦鹉螺仍然可以被拴住，不像僵尸马和骆驼尸壳。
+}}</onlyinclude>
+
+== 注释 ==
+{{Notelist}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.21}}
+
+[[de:1.21.11-pre1]]
+[[en:Java Edition 1.21.11 Pre-Release 1]]
+[[es:Java Edition 1.21.11 Pre-Release 1]]
+[[fr:Édition Java 1.21.11 Pre-Release 1]]
+[[ja:Java Edition 1.21.11 Pre-Release 1]]
+[[pt:Edição Java 1.21.11 Pre-Release 1]]
+[[ru:1.21.11 Pre-Release 1 (Java Edition)]]

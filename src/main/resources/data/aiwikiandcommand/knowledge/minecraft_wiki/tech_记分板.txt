@@ -1,0 +1,250 @@
+# 页面: 记分板
+# 来源: https://zh.minecraft.wiki/w/%E8%AE%B0%E5%88%86%E6%9D%BF
+# 分类: Java版独有信息, 基岩版独有信息, 游戏内容, 需要验证
+# 抓取时间: 2026-07-14 17:36:13
+# 原始 Wikitext 内容:
+
+{{about|记分板的具体特性|管理记分板的命令|命令/scoreboard}}
+{{redirect|分数|死亡界面中显示的分数|经验#分数}}
+{{redirect|准则|用于完成进度的条件|进度定义格式#准则触发器}}
+
+[[File:Scoreboard.png|缩略图|350px|一张记分板的截图]]
+{{relevant tutorial|记分板}}
+'''记分板（Scoreboard）'''系统是一套通过[[命令]]操纵的复杂游戏机制。主要为地图作者与[[服务器]]运营者准备，记分板可用多种形式追踪、设置并列出玩家及实体的分数。
+
+== 记分项 ==
+{| class="wikitable" align="right"
+|+ 常见的译名分歧
+|-
+! 原文 !! 游戏内译名 !! 游戏曾用译名 !! 社区常见译名
+|-
+| Objective || {{tr|记分项|目標}} || {{tr|对象、目标|-}} || {{tr|变量、项目|變數、計分項}} 
+|-
+| Criteria || {{tr|准则|條件}} || - || {{tr|判据|判據、準則}} 
+|-
+| Trigger || {{tr|触发器|觸發項目}} || - || {{tr|-|觸發器}} 
+|-
+| (Display) Slot || {{tr|（显示）位置|（顯示）區}} || - || {{tr|显示区|顯示位置}} 
+|}
+
+'''记分项（Objective）'''主要由三部分组成：名称、显示名称、准则。记分项可追踪或监听游戏内的某些物体或事件，并将该物体或事件的部分属性转化为可存储于实体内的分数。在游戏内部，记分板分数为一个32位整型数字，故不能为小数，取值范围为-2,147,483,648至2,147,483,647（闭区间）。
+
+记分项'''名称（Name）'''：记分项的唯一标识名，用于在命令、目标选择器参数以及某些文件格式内部引用记分项。记分项名称区分大小写，{{in|java}}名称可以包含所有的大小写字母、数字、下划线、点、减号和加号。{{in|bedrock}}可以是任何字符。
+
+'''显示名称（Display name）'''：用于在不同场合显示记分项。允许不同记分项拥有相同的显示名称。{{in|je}}为一个[[文本组件]]；{{in|be}}只能是一个文本。
+
+'''准则（Criterion，复数为Criteria）'''：决定记分项应追踪游戏内的哪些物体或事件，该记分项的分数将根据指定的准则进行更新。下方的表格列举了所有的准则。
+
+'''分数（Score）'''：除只读型（参见{{slink||准则}}）的记分项外，所有记分项的分数都可以被命令修改。可以指定增加或减少的值，也可以直接设置为某一特定值。
+
+'''分数持有者（Score holder）'''：已被一个记分项记录的，拥有确定分值的玩家的名称或实体[[UUID]]。其中，玩家名不一定是一个实际存在的玩家。非玩家实体的分数只能通过命令修改，而不能通过游戏系统修改。和玩家不同，非玩家实体死亡后，其分数会被删除（对应一个记分项从内存中释放）。整个记分板系统中所有的分数持有者统称为'''被追踪的实体（Tracked entity/entities）'''。
+
+命令可以通过[[目标选择器]]的{{cd|scores}}参数来检查实体的记分项分数，语法为{{cd|-{}-scores{{=}}{<名称>{{=}}<最小值>..<最大值>}<nowiki/>}}。其中，{{cd|-{}-<名称>}}即为记分项的唯一标识名。
+
+比如，在[[命令方块]]中输入{{cmd|1=execute if entity @a[scores={deaths=1..5}]}}会让比较器或条件制约的命令方块在有玩家于<code>deaths</code>记分板上拥有1至5分时提供输出。
+
+=== 准则 ===
+==== [[Java版]] ====
+准则定义了记分项的记分行为，是记分项必不可少的部分。以下介绍记分项在各类准则约束下的记分行为。
+
+===== 单一准则 =====
+{| class="wikitable" style="width:100%" data-description="Criteria"
+! 准则名称
+! 描述
+! 能否被修改
+|-
+| dummy<br><small>虚拟型</small>
+| 分数只能通过命令修改，不被实体死亡等游戏事件影响。可用作事件标志、状态映射、货币等等。 
+| {{tc|yes|style=text-align:center}}
+|-
+| trigger<br><small>触发器</small>
+| 分数只能通过命令修改，不被实体死亡等游戏事件影响。玩家都能够使用{{cmd|trigger}}命令对其相关联的触发器准则记分项进行分数增减——前提是该记分项对该玩家“开放”。默认状态下，触发器记分项禁止玩家通过{{cmd|trigger}}修改。当玩家成功使用{{cmd|trigger}}改变某记分项分数后，该记分项便会回归到“禁止”状态。值得注意的是，{{cmd|trigger}}可以在不允许作弊的情况下被非管理员的普通玩家使用。这可配合{{cmd|tellraw}}命令实现玩家输入接口。
+| {{tc|yes|style=text-align:center}}
+|-
+| deathCount<br><small>死亡次数</small>
+| 当玩家死亡时，分数会自动增加。
+| {{tc|yes|style=text-align:center}}
+|-
+| playerKillCount<br><small>杀死玩家总量</small>
+| 当玩家杀死其他玩家时分数会自动增加。
+| {{tc|yes|style=text-align:center}}
+|-
+| totalKillCount<br><small>杀死生物总量</small>
+| 当玩家杀死其他生物（包括玩家）时分数会自动增加。
+| {{tc|yes|style=text-align:center}}
+|-
+| health<br><small>生命值</small>
+| 玩家的[[生命值]]和[[伤害吸收值]]之和。
+| {{tc|no|style=text-align:center}}
+|-
+| xp<br><small>经验值</small>
+| 对应玩家拥有的[[经验值]]。
+| {{tc|no|style=text-align:center}}
+|-
+| level<br><small>等级</small>
+| 对应玩家当前的经验等级。
+| {{tc|no|style=text-align:center}}
+|-
+| food<br><small>饥饿值</small>
+| 代表玩家的[[饥饿值]]，取值范围0~20。玩家的{{cd|foodLevel}}首次变化前可能会显示为0。
+| {{tc|no|style=text-align:center}}
+|-
+| air<br><small>空气值</small>
+| 代表潜水的玩家剩余的空气，取值范围0~300。对应玩家的{{nbt|short|Air}}标签。
+| {{tc|no|style=text-align:center}}
+|-
+| armor<br><small>护甲值</small>
+| 代表玩家拥有的护甲值，取值范围0~20。在玩家第一次更换盔甲前可能会显示为0。
+| {{tc|no|style=text-align:center}}
+|}
+
+===== 复合准则 =====
+复合准则由多个部分构成，各部分间使用点号{{cd|.}}来分隔。例如， <code>minecraft.killed_by:minecraft.zombie</code>是一种复合准则，当玩家被僵尸杀死时才会增加分数。
+
+基于复合准则的所有分数都可以通过命令修改。
+
+任何[[统计信息#命名空间ID|统计信息的命名空间ID]]都可用作复合准则。<ref>{{tweet|Dinnerbone|364670393354694656}}</ref>玩家自身统计数据的存储与记分板分数的存储互相独立。当这些统计数据更新时，跟踪的记分项也会同步更新。
+
+除此之外，还有以下复合准则：
+{{#VARDEFINE:VALID_TEAM_COLOURS|
+black、dark_blue、dark_green、dark_aqua、dark_red、dark_purple、gold、gray、dark_gray、blue、green、aqua、red、light_purple、yellow和white}}
+{| class="wikitable" style="width:100%" data-description="Compound criteria"
+! 准则基础名称
+! 描述
+! 次级准则数
+|-
+| teamkill.
+|
+次级准则是队伍的颜色。玩家杀死特定颜色的队伍成员时增加。
+
+这些准则符合以下完整格式：{{cd|teamkill.<''队伍颜色''>}}，其中{{cd|<''队伍颜色''>}}接受以下列表中的颜色值：
+ {| class="collapsible collapsed collapse-button-none" data-description="Valid team colors"
+ |-
+ ! style="text-align:left" | 接受的颜色名称
+ |-
+ |
+ {{#VAR:VALID_TEAM_COLOURS}}
+ |}
+| style="text-align:center"|16
+|-
+| killedByTeam.
+| 次级准则包括队伍的颜色。玩家被特定颜色队伍的成员杀死时增加。
+
+这些准则符合以下完整格式：{{cd|killedByTeam.<''队伍颜色''>}}，其中{{cd|<''队伍颜色''>}}接受以下列表中的颜色值：
+ {| class="collapsible collapsed collapse-button-none" data-description="Valid team colors"
+ |-
+ ! style="text-align:left" | 接受的颜色名称
+ |-
+ |
+ {{#VAR:VALID_TEAM_COLOURS}}
+ |}
+| style="text-align:center"|16
+|-
+|}
+
+==== [[基岩版]] ====
+目前只支持{{cd|dummy}}准则，因此分数仅能由命令修改。
+
+== 显示位置 ==
+[[File:Scoreboard Display.png|缩略图|360px|以“列表”形式显示的某一玩家在这一记分项下获得了2点分数，同时在“侧边栏”模式中则为某一显示名称为“Quest Points”的记分项，其中该玩家没有获得分数]]
+每个“显示位置（Display Slot）”可以依次显示一个记分项，并且多个显示位置可以被用于相同或不同的记分项。
+* {{cmd|scoreboard objectives setdisplay}}命令可将记分项以及记分项中的分数以某些“形式”显示出来。
+* {{only|for={{cmd|scoreboard objectives modify <objective> displayname}}命令可以修改记分项的显示名称。|je}}
+* {{only|for={{cmd|scoreboard objectives modify <objective> rendertype}}命令可以修改记分项的渲染类型。|je}}
+
+{| class="wikitable" style="width:100%"
+! width="33%" align="center" | 显示位置
+! width="33%" align="center" | 描述
+! width="33%" align="left" | 显示效果
+|-
+|list</br><small>列表</small>|| 在玩家列表中以黄色文字在玩家名称后显示分数信息（默认为{{key|tab}}键），并不会显示记分项名称。{{only|java}}<br>在游戏菜单的玩家列表显示分数信息。{{only|bedrock}}
+|[[File:Scoreboard Display List Integer.png|缩略图|250px|list显示位置的显示效果，渲染类型为integer]][[File:Scoreboard Display List Hearts.gif|缩略图|250px|list显示位置的显示效果，渲染类型为hearts]]
+|-
+|sidebar</br><small>侧边栏</small>|| 在屏幕的右侧显示。在列表的最上方显示记分项的'''显示名称（display name）'''，并显示玩家的高分榜。值得注意的是，即使玩家离线，如果在该记分项下存在一定分数也会在“侧边栏”中进行显示，并且没有痕迹的玩家也不会被显示。除此之外，以“<code>#</code>”开头的伪造的玩家名称在任何情况下都不会在侧边栏可见。
+|[[File:Scoreboard Display Sidebar.png|缩略图|250px|sidebar显示位置的显示效果]]
+|-
+|sidebar.team.<''color''></br><small>{{only|for=侧边栏.队伍.<''颜色''>|java}}</small>|| 有16个的具体队伍的侧边栏显示形式。它们和标准的侧边栏同样操作，但只有指定颜色的队伍中的玩家可以看见（例如"sidebar.team.green"绿色队伍中的玩家可以看见）。有效的颜色是："black", "dark_blue", "dark_green", "dark_aqua", "dark_red", "dark_purple", "gold", "gray", "dark_gray", "blue", "green", "aqua", "red", "light_purple", "yellow" 和 "white"。注意，该显示位置的优先级高于{{cd|sidebar}}，故会占用原有的{{cd|sidebar}}内容。
+|[[File:Scoreboard Display Sidebar.png|缩略图|250px|sidebar显示位置的显示效果]]
+|-
+|{{only|for=below_name|JE}}<br>{{only|for=belowname|BE}}</br><small>名称下方</small>|| 在玩家的名称牌之下，在他们的头之上，于记分项的'''显示名称（display name）'''前面显示分数。在10个方块以外、玩家[[潜行]]时隐藏。这一显示位置在单人游戏中不可见。
+|[[File:Scoreboard Display Below Name.png|缩略图|250px|below_name显示位置的显示效果]]
+|-
+|}
+
+== 队伍 ==
+{{main|队伍|命令/team}}
+{{exclusive|java|section=1}}
+'''队伍（Team）'''是记分板系统管理的一套机制，可以将玩家和其他实体进行分组，形成联合的整体。
+
+== 存储格式 ==
+{{main|记分板存储格式}}
+{{exclusive|java|section=1}}
+
+记分板数据存储在{{filepath|-{}-<''存档根目录''>/data/minecraft/scoreboard.dat}}。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.5|dev=13w04a|加入了记分板。}}
+|{{HistoryLine|||dev=13w05a|加入了队伍相关功能。}}
+|{{HistoryLine||1.7.2|dev=13w36a|加入了统计相关记分项准则。}}
+|{{HistoryLine||1.8|dev=14w02a|除了玩家外的实体也能加入队伍并拥有记分项分数了。}}
+|{{HistoryLine|||dev=14w06a|加入了{{cd|trigger}}队伍击杀相关记分项准则。
+|加入了{{cmd|scoreboard players enable<includeonly>|link=none</includeonly>}}命令。
+|"*" 可以用作玩家名称参数代表所有正被记分板追踪的玩家了。
+|为{{cmd|scoreboard players reset<includeonly>|link=none</includeonly>}}命令加入了{{cd|objective}}参数。
+|统计记分项准则使用ID名而不使用ID了。
+|加入了{{cd|achievement.overpowered}}记分项准则。}}
+|{{HistoryLine|||dev=14w07a|加入了{{cmd|scoreboard players operation<includeonly>|link=none</includeonly>}}与{{cd|scoreboard players test}}命令。
+|以"#"开头的虚拟玩家的分数不再显示于侧边栏。
+|加入了指定队伍的侧边栏显示位置。
+|加入了{{cd|nametagVisibility}}队伍选项。}}
+|{{HistoryLine|||dev=14w10a|加入了{{cd|deathMessageVisibility}}队伍选项。
+|为{{cmd|scoreboard players set<includeonly>|link=none</includeonly>}}、{{cmd|scoreboard players add<includeonly>|link=none</includeonly>}}和{{cmd|scoreboard players remove<includeonly>|link=none</includeonly>}}命令加入了{{cd|dataTag}}参数。
+|加入了{{cd|d=pretty|stat.crouchOneCm|stat.sprintOneCm|stat.timeSinceDeath}}记分项准则。}}
+|{{HistoryLine|||dev=14w25a|为{{cmd|scoreboard players operation<includeonly>|link=none</includeonly>}}命令加入了{{cd|d=pretty|{{=}}|<|>}}。}}
+|{{HistoryLine|||dev=14w26a|为{{cmd|scoreboard players operation<includeonly>|link=none</includeonly>}}加入了{{cd|><}}。{{verify}}}}
+|{{HistoryLine|||dev=14w29a|玩家/实体在侧边栏名字的第二顺序依照字母表储存。}}
+|{{HistoryLine|||dev=14w30a|加入了{{cd|d=pretty|stat.talkedToVillager|stat.tradedWithVillager}}记分项准则。}}
+|{{HistoryLine||1.8.2|加入了{{cd|d=pretty|cauldronFilled|stat.cauldronUsed|stat.armorCleaned|stat.bannerCleaned|stat.brewingstandInteraction|stat.beaconInteraction|stat.dropperInspected|stat.hopperInspected|stat.dispenserInspected|stat.noteblockPlayed|stat.noteblockTuned|stat.flowerPotted|stat.trappedChestTriggered|stat.enderchestOpened|stat.itemEnchanted|stat.recordPlayed|stat.furnaceInteraction|stat.craftingTableInteraction|stat.chestOpened}}记分项准则。}}
+|{{HistoryLine||1.9|dev=15w32a|加入了{{cd|stat.sneakTime}}记分项准则。}}
+|{{HistoryLine|||dev=15w32b|加入了{{cmd|scoreboard players tag<includeonly>|link=none</includeonly>}}命令。
+|加入了{{cd|d=pretty|xp|food|air}}记分项类型。}}
+|{{HistoryLine|||dev=15w33a|加入了{{cd|d=pretty|stat.pickup|stat.drop}}记分项准则。
+|加入了{{cd|d=pretty|armor|level}}记分项类型。}}
+|{{HistoryLine|||dev=15w36a|加入了{{cd|collisionRule}}。}}
+|{{HistoryLine||1.13|dev=17w45a|移除了{{cmd|scoreboard players tag<includeonly>|link=none</includeonly>}}和{{cmd|scoreboard teams<includeonly>|link=none</includeonly>}}，分别被{{cmd|tag}}和{{cmd|team}}替代。|记分板名称不再能包含{{cd|:}}等字符。{{verify}}}}
+|{{HistoryLine|||dev=pre7|加入了{{cmd|scoreboard objectives modify<includeonly>|link=none</includeonly>}}。}}
+|{{HistoryLine|||dev=pre8|加入了语法{{cmd|scoreboard objectives modify <''记分项''> rendertype ''hearts''<includeonly>|link=none</includeonly>}}，使记分项分数在玩家列表中显示为心形。
+|加入了语法{{cmd|scoreboard objectives modify <''记分项''> rendertype ''integer''<includeonly>|link=none</includeonly>}}，使记分项分数在玩家列表中显示为黄色的数字。
+|记分项名称现在为文本组件，而不是纯字符串。}}
+|{{HistoryLine||1.13.1|dev=18w31a|现在计算{{cd|%{{=}}}}的方式由{{cd|x&ensp;% y}}改为{{cd|Math.floorMod(x, y)}}，意味着计算结果由取被除数的符号更改为取除数的符号。}}
+|{{HistoryLine||1.18|dev=21w37a|取消了记分项名称与分数持有者的16个字符的长度限制。}}
+|{{HistoryLine||1.20.2|dev=23w31a|将显示位置{{cd|belowName}}重命名为{{cd|below_name}}。}}
+|{{HistoryLine||1.20.3|dev=23w46a|添加了新的子命令，用于更改特定记分项在侧边栏中的显示。}}
+|{{HistoryLine||1.21.5|dev=25w05a|现在{{cmd|scoreboard<includeonly>|link=none</includeonly>}}中的文本组件会以<code>@s</code>为执行者[[文本组件#组件解析|解析]]。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.7.0|exg=1|dev=1.7.0.2|加入了记分板部分功能。
+|加入了{{cd|dummy}}准则。}}
+|{{HistoryLine|||exg=none|dev=1.7.0.7|记分板不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.19.80|dev=1.19.80.20|取消了记分项的16个字符的长度限制。}}
+|{{HistoryLine||1.21.120|dev=1.21.120.21|由于[[游戏菜单]]的更新，{{cd|list}}显示位置不再能正确显示。<ref>{{bug|MCPE-230225}}</ref>}}
+}}
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[de:Anzeigetafel]]
+[[en:Scoreboard]]
+[[es:Marcador]]
+[[fr:Tableau de score]]
+[[ja:スコアボード]]
+[[ko:스코어보드]]
+[[nl:Scorebord]]
+[[pl:Tablica wyników]]
+[[pt:Placar]]
+[[ru:Система счёта игровых событий]]
+[[uk:Таблиця рахунків]]

@@ -1,0 +1,936 @@
+# 页面: 附加包
+# 来源: https://zh.minecraft.wiki/w/%E9%99%84%E5%8A%A0%E5%8C%85
+# 分类: Mod, 基岩版, 基岩版独有特性, 失效链接, 实验性内容/测试版 API, 待扩充段落, 待更新条目, 游戏文件, 缺少理由的待更新条目, 附加包, 需要补充的条目
+# 抓取时间: 2026-07-14 17:38:11
+# 原始 Wikitext 内容:
+
+{{For|[[Java版]]中自带的游戏自定义功能|数据包|Java版中使用相应加载器修改游戏的功能|载入器Mod}}
+{{exclusive|bedrock}}
+{{relevant tutorial|制作资源附加包|制作行为包}}
+{{TOC|right}}
+{{quote|一般来说，附加包基本就是一捆让你更改Minecraft世界运行规则的文件。想要身长八尺的小鸡？当然可以！想招募一支身着褶裙、听命于你的僵尸猪人大军？怪是够怪的，不过也可以！若你还想了解更多有关于附加包功能的示例，来看看我们的[https://www.minecraft.net/addons 附加包]单独页面。它们真的太给力了！|Michael Ott<ref>https://minecraft.net/article/add-ons-whats-name</ref>||Minecraft.net Generic Enderman Avatar.png}}
+
+'''附加包（Add-on）'''是[[基岩版]]加入新内容或修改原有内容的一种手段，受[[Mojang]]官方支持。
+
+== 概述 ==
+附加包允许玩家更改世界的纹理样貌、实体的模型、行为规则等，是实现全版本自定义（即数据驱动）的坚实一步。
+
+行为包是一种用于改变实体的行为、掉落物、生成规则、物品合成配方与村民交易表等的附加包。行为包不仅可以改变现有内容，还可以创建新的实体、方块及物品。为了实现版本控制，基岩版的部分新内容便是以附加包形式实现的，这些附加包在选项内被统一归类为“原版附加包”而无法移除。强制移除它们会导致游戏出现图形或者崩溃问题。
+
+资源包属于附加包的一部分，和行为包并列，同时区分原版资源包与自定义资源包。原版资源包用于为游戏加入新内容而准备。
+
+除了玩家社区自定义的玩法外，基岩版[[市场]]中的地图也常常会使用附加包。市场中的内容均由Minecraft官方合作伙伴提供，并经内容团队审核。购买地图后，其所需要的所有附加包会在下载时被自动下载并添加到世界中。这些附加包依然可以被用于其他地图，但这始终取决于它的开发者是否允许。
+
+== 使用附加包 ==
+资源包可以使用[[设置]]中的“{{tr|全局资源|全球資源套件}}”进行设置，也可使用“世界”设置中“附加包”的“资源包”选项进行设置。在游戏加载资源包时，会按照列表上的顺序依次加载它们的资源。上层资源包可以替代、合并或移除下层资源包的资源，因此资源包的位置顺序会影响游戏对某些资源的读取和使用。
+
+=== 全局资源包 ===
+{{for|{{el|je}}中的类似功能|资源包#全局资源包}}
+
+在游戏内称为“{{tr|全局资源|全球資源套件}}”。全局资源包需要放置在{{file|directory|[[com.mojang]]}}内的{{file|directory|resource_packs}}或{{file|directory|development_resource_packs}}文件夹，每个全局资源包都必须是一个子文件夹、或一个以<code>Deflate</code>算法压缩或不压缩的[[wzh:ZIP格式|{{filename|.zip}}文件]]，其他文件格式会被忽略、其他压缩算法压缩的{{filename|.zip}}文件会因无法解析而使游戏在加载相应资源包时崩溃。全局资源包可以被禁用、启用或者调整位置，亦可在世界中单独禁用（详见下文）。
+
+=== 世界附加包 ===
+附加包可以与[[世界]]捆绑在一起。将这个文件放入世界文件夹中，这个附加包就会成为世界附加包。
+
+当玩家进入这个世界时，世界资源包将作为最上层资源包被加载，且无法被禁用或调整位置。如果在世界设置启用了“{{tr|共享包|共用套件}}”，则玩家还将被要求下载世界资源包，并禁用玩家的全局资源包。
+
+玩家可以使用{{cmd|packstack}}获取世界资源包、世界行为包和脚本模块列表。
+
+=== 服务器指定资源包 ===
+与世界资源包类似，如果{{filename|[[server.properties]]}}中的属性{{cd|texturepack-required}}为{{cd|true}}，则玩家将被要求下载世界资源包，并禁用玩家的全局资源包。
+
+=== 默认附加包 ===
+“{{tr|Minecraft 材质包|Minecraft 材質套件}}”和“默认”分别是游戏内默认的资源包和行为包。它无法被禁用，且固定最先加载。
+
+== 结构层次 ==
+{{Incomplete section|部分结构、部分包类型的结构}}
+附加包有行为包、资源包、[[皮肤包]]与世界模板等不同的形式，它们的结构层次也各不相同。要构成一个有效的附加包，这个文件夹的根目录必须包含一个有效的{{file|file|[[manifest.json]]}}文件。多个附加包可以整合到一起。
+
+=== 资源包 ===
+资源包一般存储于{{file|directory|[[com.mojang]]}}文件夹中的{{file|directory|resource_packs}}文件夹。
+<div class="treeview">
+* {{file|directory|<''资源包名称或其内部ID''>}}
+** {{file|directory|animation_controllers}}
+** {{file|directory|animations}}
+** {{file|directory|attachables}}
+** {{file|directory|biomes}}
+** {{file|directory|cameras}}
+** {{file|directory|entity}}
+** {{file|directory|fogs}}
+** {{file|directory|font}}
+** {{file|directory|items}}
+** {{file|directory|library}}
+** {{file|directory|materials}}
+** {{file|directory|models}}
+** {{file|directory|particles}}
+** {{file|directory|render_controllers}}
+** {{file|directory|sounds}}
+*** {{file|file|[[music_definitions.json]]}}
+*** {{file|file|[[sound_definitions.json]]}}
+** {{file|directory|texts}}
+*** {{file|file|language_names.json}}
+*** {{file|file|languages.json}}
+** {{file|directory|textures}}
+*** {{file|file|flipbook_textures.json}}
+*** {{file|file|item_texture.json}}
+*** {{file|file|terrain_texture.json}}
+*** {{file|file|textures_list.json}}
+** {{file|directory|ui}}
+** {{file|file|biomes_client.json}}
+** {{file|file|blocks.json}}
+** {{file|file|bug_pack_icon.png}}
+** {{file|file|contents.json}}
+** {{file|file|loading_messages.json}}
+** {{file|file|[[manifest.json]]}}
+** {{file|file|manifest_publish.json}}
+** {{file|file|pack_icon.png}}
+** {{file|file|signatures.json}}
+** {{file|file|[[基岩版声音事件|sounds.json]]}}
+** {{file|file|splashes.json}}
+</div>
+
+=== 行为包 ===
+行为包一般存储于{{file|directory|[[com.mojang]]}}文件夹中的{{file|directory|behavior_packs}}文件夹。
+<div class="treeview">
+* {{file|directory|<''行为包名称或其内部ID''>}}
+** {{file|directory|aim_assist}}
+** {{file|directory|animation_controllers}}
+** {{file|directory|animations}}
+** {{file|directory|behavior_trees}}
+** {{file|directory|biomes}}
+** {{file|directory|blocks}}
+** {{file|directory|cameras}}
+** {{file|directory|dimensions}}
+** {{file|directory|entities}}
+** {{file|directory|feature_rules}}
+** {{file|directory|features}}
+** {{file|directory|functions}}
+** {{file|directory|item_catalog}}
+** {{file|directory|items}}
+** {{file|directory|loot_tables}}
+** {{file|directory|recipes}}
+** {{file|directory|scripts}}
+** {{file|directory|spawn_rules}}
+** {{file|directory|structures}}
+** {{file|directory|texts}}
+*** {{file|file|language_names.json}}
+*** {{file|file|languages.json}}
+** {{file|directory|trading}}
+** {{file|directory|worldgen}}
+*** {{file|directory|processors}}
+*** {{file|directory|structure_sets}}
+*** {{file|directory|structures}}
+*** {{file|directory|template_pools}}
+** {{file|file|contents.json}}
+** {{file|file|[[manifest.json]]}}
+** {{file|file|manifest_publish.json}}
+** {{file|file|pack_icon.png}}
+** {{file|file|signatures.json}}
+</div>
+
+== 文档索引 ==
+* [https://docs.microsoft.com/minecraft/creator/reference/content/addonsreference/ 基岩版附加包文档]{{dead link}}
+* [https://docs.microsoft.com/minecraft/creator/reference/content/animationsreference/ 基岩版动画文档]{{dead link}}
+* [[基岩版生物群系文档]]
+* [[基岩版方块文档]]
+* [[基岩版物品文档]]
+* [[基岩版实体文档]]
+* [[基岩版Molang文档]]
+* [[基岩版粒子文档]]
+* [[基岩版配方文档]]
+* [[基岩版模式文档]]
+* [[基岩版地物文档]]
+* [[基岩版脚本API文档]]
+
+== 教程 ==
+* [[Tutorial:基岩版开发指南|基岩版开发指南]]
+* [[Tutorial:制作行为包|制作行为包]]
+* [[Tutorial:制作资源附加包|制作资源包]]
+* [[Tutorial:自定义物品|自定义物品]]
+* [[Tutorial:自定义方块|自定义方块]]
+* [[Tutorial:自定义实体|自定义实体]]
+* [[Tutorial:自定义音效|自定义音效]]
+* [[Tutorial:修改实体模型|修改实体模型]]
+
+== 模板 ==
+=== 资源包和行为包实例 ===
+* [https://github.com/Mojang/bedrock-samples 资源包和行为包样例]
+
+=== 脚本API实例 ===
+{{Experimental|gametest|section=1}}
+* [https://github.com/microsoft/minecraft-gametests <code>@minecraft/server-gametest</code>样例]
+* [https://github.com/microsoft/minecraft-scripting-samples <code>@minecraft/server</code>样例]
+
+== 组件 ==
+{{needs update|section=1}}
+'''组件（Component）'''是基岩版附加包中自定义一个对象的重要手段，大部分可自定义的对象都可以由一些组件在JSON文件中拼接而成，这些组件在游戏内部通过'''ECS（Entity-Component-System'''，'''实体-组件-系统）'''架构被添加至自定义的对象上，并成为其属性的一部分。有一些自定义对象的组件较为特殊，但它们仍然在形式上或本质上是一种组件。比如实体的生成规则中的'''条件（Condition）'''，其本质是一种组件。组件被分为很多种，除了比较特殊的条件之外，组件一般有最一般的基础组件、触发器、属性（Property）、特性（[[属性|Attribute]]）、AI意向等。有些分类是因为其在游戏内部的本质不同，比如属性（Property）和特性（Attribute），有些分类则单纯是因为其表现有异。
+
+=== 物品 ===
+{{main|bedev:Manual:数据驱动/物品{{!}}Minecraft基岩版开发Wiki:Manual:数据驱动/物品}}
+
+'''基础组件'''
+{| class="sortable wikitable collapsible"
+!名称
+!<div style="white-space:nowrap;">可用性</div>
+!<div style="white-space:nowrap;">实验性玩法</div>
+!<div style="white-space:nowrap;">走出实验版本</div>
+!<div style="padding:0em 4em 0em 4em; white-space:nowrap;">描述</div>
+|-
+|{{samp|[[bedev:Manual:minecraft:allow_off_hand|minecraft:allow_off_hand]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|允许物品装备在副手槽。
+|-
+|{{samp|[[bedev:Manual:minecraft:armor|minecraft:armor]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|决定护甲物品的防护等级。
+|-
+|{{samp|[[bedev:Manual:minecraft:block_placer|minecraft:block_placer]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|该物品在指定方块上可以放置出什么方块。
+|-
+|{{samp|[[bedev:Manual:minecraft:bundle_interaction|minecraft:bundle_interaction]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|bundles|exg=1}}}}
+|{{tc|yes|1.21.40}}
+|为物品启用收纳袋的交互模式和物品提示。
+|-
+|{{samp|[[bedev:Manual:minecraft:can_destroy_in_creative|minecraft:can_destroy_in_creative]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|设置挥舞此物品时是否能在创造模式下破坏方块。
+|-
+|{{samp|[[bedev:Manual:minecraft:chargeable|minecraft:chargeable]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置物品为可蓄力物品。
+|-
+|{{samp|[[bedev:Manual:minecraft:compostable|minecraft:compostable]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|yes|1.21.60}}
+|设置物品为可堆肥的。
+|-
+|{{samp|[[bedev:Manual:minecraft:cooldown|minecraft:cooldown]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|设置物品的使用类型，并且设置使用后的冷却时间。
+|-
+|{{samp|[[bedev:Manual:minecraft:creative_category_(物品组件)|minecraft:creative_category]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|注册物品到创造模式物品栏及其分组。
+|-
+|{{samp|[[bedev:Manual:minecraft:custom_components|minecraft:custom_components]]}}
+|{{tc|partial|已弃用}}
+|{{tc|yes|{{experiment|gametest|exg=1}}}}
+|{{tc|yes|1.21.20}}
+|设置物品的自定义组件。
+|-
+|{{samp|[[bedev:Manual:minecraft:damage|minecraft:damage]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|设置物品的攻击伤害。
+|-
+|{{samp|[[bedev:Manual:minecraft:damage_absorption|minecraft:damage_absorption]]}}
+|{{tc|yes|可用}}
+|{{tc|n/a}}
+|{{tc|yes|1.21.20}}
+|设置物品的伤害吸收值。
+|-
+|{{samp|[[bedev:Manual:minecraft:digger|minecraft:digger]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|设置物品的挖掘属性。
+|-
+|{{samp|[[bedev:Manual:minecraft:display_name|minecraft:display_name]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.0}}
+|设置物品的本地化键名。
+|-
+|{{samp|[[bedev:Manual:minecraft:durability|minecraft:durability]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.0}}
+|设置物品的耐久度。
+|-
+|{{samp|[[bedev:Manual:minecraft:durability_sensor|minecraft:durability_sensor]]}}
+|{{tc|yes|可用}}
+|{{tc|n/a}}
+|{{tc|yes|1.21.20}}
+|使物品在损伤时触发效果。
+|-
+|{{samp|[[bedev:Manual:minecraft:dye_powder|minecraft:dye_powder]]}}
+|{{tc|yes|可用}}
+|{{tc|unknown}}
+|{{tc|unknown}}
+|设置可作为染料使用。
+|-
+|{{samp|[[bedev:Manual:minecraft:dyeable|minecraft:dyeable]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.21.30}}
+|设置物品为可被染色。
+|-
+|{{samp|[[bedev:Manual:minecraft:enchantable|minecraft:enchantable]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.30}}
+|设置物品的附魔属性。
+|-
+|{{samp|[[bedev:Manual:minecraft:entity_placer|minecraft:entity_placer]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.0}}
+|设置生成指定实体。
+|-
+|{{samp|[[bedev:Manual:minecraft:explodable|minecraft:explodable]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置物品的实体形式是否可以被爆炸摧毁。
+|-
+|{{samp|[[bedev:Manual:minecraft:food|minecraft:food]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.30}}
+|设置物品为食物。
+|-
+|{{samp|[[bedev:Manual:minecraft:frame_count|minecraft:frame_count]]}}
+|{{tc|yes|可用}}
+|{{tc|unknown}}
+|{{tc|unknown}}
+|设置物品的动画帧数。
+|-
+|{{samp|[[bedev:Manual:minecraft:fuel|minecraft:fuel]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.0}}
+|设置物品为燃料。
+|-
+|{{samp|[[bedev:Manual:minecraft:glint|minecraft:glint]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.0}}
+|使物品拥有附魔光泽。
+|-
+|{{samp|[[bedev:Manual:minecraft:hand_equipped|minecraft:hand_equipped]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|设置物品是否以工具或武器的方式渲染（即手持时贴图竖直渲染）。
+|-
+|{{samp|[[bedev:Manual:minecraft:hover_text_color|minecraft:hover_text_color]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|设置物品悬浮文本的颜色。
+|-
+|{{samp|[[bedev:Manual:minecraft:icon|minecraft:icon]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.0}}
+|设置物品的图标纹理。
+|-
+|{{samp|[[bedev:Manual:minecraft:interact_button|minecraft:interact_button]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.30}}
+|设置物品的移动端HUD交互按钮。
+|-
+|{{samp|[[bedev:Manual:minecraft:kinetic_weapon|minecraft:kinetic_weapon]]}}
+|{{tc|yes|可用}}
+|{{tc|n/a}}
+|{{tc|yes|1.21.130}}
+|允许物品造成运动伤害及其效果。
+|-
+|{{samp|[[bedev:Manual:minecraft:kinetic_weapon_kinetic_effect_conditions|minecraft:kinetic_weapon_kinetic_effect_conditions]]}}
+|{{tc|yes|可用}}
+|{{tc|unknown}}
+|{{tc|unknown}}
+|使用运动攻击武器的特定效果需要满足的条件。
+|-
+|{{samp|[[bedev:Manual:minecraft:knockback_resistance|minecraft:knockback_resistance]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|物品的击退抗性。
+|-
+|{{samp|[[bedev:Manual:minecraft:liquid_clipped|minecraft:liquid_clipped]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|设置物品是否可与流体互动。
+|-
+|{{samp|[[bedev:Manual:minecraft:max_stack_size|minecraft:max_stack_size]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|设置物品的最大堆叠数量。
+|-
+|{{samp|[[bedev:Manual:minecraft:mining_speed|minecraft:mining_speed]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置物品挖掘速度。
+|-
+|{{samp|[[bedev:Manual:minecraft:portfolio|minecraft:portfolio]]}}
+|{{tc|yes|可用}}
+|{{tc|unknown}}
+|{{tc|unknown}}
+|设置物品为公文包。
+|-
+|{{samp|[[bedev:Manual:Minecraft:projectile_(物品组件)|minecraft:projectile]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|允许物品作为弹射物的物品形式。
+|-
+|{{samp|[[bedev:Manual:minecraft:rarity|minecraft:rarity]]}}
+|{{tc|yes|可用}}
+|{{tc|n/a}}
+|{{tc|yes|1.21.30}}
+|设置物品的稀有度。
+|-
+|{{samp|[[bedev:Manual:minecraft:record|minecraft:record]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|设置物品为唱片。
+|-
+|{{samp|[[bedev:Manual:minecraft:render_offsets|minecraft:render_offsets]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置物品的渲染偏移量。
+|-
+|{{samp|[[bedev:Manual:minecraft:repairable|minecraft:repairable]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|允许物品被修复。
+|-
+|{{samp|[[bedev:Manual:minecraft:shooter (物品组件)|minecraft:shooter]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|设置物品可被装填（即远程填装发射武器，例如弓）。
+|-
+|{{samp|[[bedev:Manual:minecraft:should_despawn|minecraft:should_despawn]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|设置物品的实体形式是否可以超时消失。
+|-
+|{{samp|[[bedev:Manual:minecraft:stacked_by_data|minecraft:stacked_by_data]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|是否根据数据值堆叠物品。
+|-
+|{{samp|[[bedev:Manual:minecraft:storage_item|minecraft:storage_item]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|bundles|exg=1}}}}
+|{{tc|yes|1.21.40}}
+|设置物品为可存储其他数据的物品。
+|-
+|{{samp|[[bedev:Manual:minecraft:storage_weight_limit|minecraft:storage_weight_limit]]}}
+|{{tc|yes|可用}}
+|{{tc|n/a}}
+|{{tc|yes|1.21.60}}
+|设置物品存储其他物品的最大容量。
+|-
+|{{samp|[[bedev:Manual:minecraft:storage_weight_modifier|minecraft:storage_weight_modifier]]}}
+|{{tc|yes|可用}}
+|{{tc|n/a}}
+|{{tc|yes|1.21.60}}
+|设置物品在其他可存储物品内的占用容量。
+|-
+|{{samp|[[bedev:Manual:minecraft:swing_duration|minecraft:swing_duration]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.21.120}}
+|挖掘或攻击时播放的物品挥动动画的持续时间，以秒为单位。
+|-
+|{{samp|[[bedev:Manual:minecraft:swing_sounds|minecraft:swing_sounds]]}}
+|{{tc|yes|可用}}
+|{{tc|n/a}}
+|{{tc|yes|1.21.130}}
+|覆盖玩家发出的挥动音效。
+|-
+|{{samp|[[bedev:Manual:minecraft:tags|minecraft:tags]]}}
+|{{tc|yes|可用}}
+|{{tc|n/a}}
+|{{tc|yes|1.20.50}}
+|设置物品的标签。
+|-
+|{{samp|[[bedev:Manual:minecraft:throwable|minecraft:throwable]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.10}}
+|设置物品为投掷物。
+|-
+|{{samp|[[bedev:Manual:minecraft:use_animation|minecraft:use_animation]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|设置物品的使用动画。
+|-
+|{{samp|[[bedev:Manual:minecraft:use_modifiers|minecraft:use_modifiers]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|设置物品的使用时间。
+|-
+|{{samp|[[bedev:Manual:minecraft:weapon|minecraft:weapon]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置物品为武器。这会自动添加伤害信息和攻击事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:wearable|minecraft:wearable]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.20.20}}
+|设置物品为装备。
+|}
+
+'''触发器'''
+{| class="sortable wikitable collapsible"
+!名称
+!<div style="white-space:nowrap;">可用性</div>
+!<div style="white-space:nowrap;">实验性玩法</div>
+!<div style="white-space:nowrap;">移出实验版本</div>
+!<div style="white-space:nowrap; padding:0em 8em 0em 8em;">描述</div>
+|-
+|{{samp|[[bedev:Manual:minecraft:on_use|minecraft:on_use]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未移出}}
+|物品使用后触发事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:on_use_on|minecraft:on_use_on]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未移出}}
+|物品在方块上使用后触发事件。
+|}
+
+=== 方块 ===
+{{main|bedev:Manual:数据驱动/方块{{!}}Minecraft基岩版开发Wiki:Manual:数据驱动/方块}}
+
+'''基础组件'''
+{| class="wikitable sortable"
+!名称
+!<div style="white-space:nowrap;">可用性</div>
+!<div style="white-space:nowrap;">实验性玩法</div>
+!走出实验版本
+!<div style="white-space:nowrap; padding:0em 8em 0em 8em;">描述</div>
+|-
+|{{samp|[[bedev:Manual:minecraft:breakonpush|minecraft:breakonpush]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置该方块被活塞推动时是否被破坏。
+|-
+|{{samp|[[bedev:Manual:minecraft:breathability|minecraft:breathability]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置该方块的透气性，以及是否将其视为固体或空气的属性。
+|-
+|{{samp|[[bedev:Manual:minecraft:collision_box|minecraft:collision_box]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.19.50}}
+|设置方块的碰撞箱。
+|-
+|{{samp|[[bedev:Manual:minecraft:crafting_table (方块组件)|minecraft:crafting_table]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.19.50}}
+|设置与方块互动时打开一个合成界面。
+|-
+|{{samp|[[bedev:Manual:minecraft:creative_category (方块组件)|minecraft:creative_category]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|注册方块到创造模式物品栏及其分组。
+|-
+|{{samp|[[bedev:Manual:minecraft:custom_components (方块组件)|minecraft:custom_components]]}}
+|{{tc|partial|已弃用}}
+|{{tc|yes|{{experiment|gametest|exg=1}}}}
+|{{tc|yes|1.21.20}}
+|设置方块的自定义组件。
+|-
+|{{samp|[[bedev:Manual:minecraft:destructible_by_explosion|minecraft:destructible_by_explosion]]}}
+|{{tc|yes|可用}}
+|{{tc|none}}
+|{{tc|none}}
+|设置方块是否可被爆炸破坏以及防爆属性。
+|-
+|{{samp|[[bedev:Manual:minecraft:destructible_by_mining|minecraft:destructible_by_mining]]}}
+|{{tc|yes|可用}}
+|{{tc|none}}
+|{{tc|none}}
+|设置方块是否可被挖掘破坏以及破坏时间。
+|-
+|{{samp|[[bedev:Manual:minecraft:destruction_particles|minecraft:destruction_particles]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|yes|1.21.70}}
+|设置方块是否可被挖掘破坏以及破坏时间。
+|-
+|{{samp|[[bedev:Manual:minecraft:display_name (方块组件)|minecraft:display_name]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.19.60}}
+|设置方块物品显示的悬浮文本。
+|-
+|{{samp|[[bedev:Manual:minecraft:embedded_visual|minecraft:embedded_visual]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|yes|1.21.120}}
+|该方块嵌入其他方块时，用于渲染该方块的几何和材质的描述标识符。
+|-
+|{{samp|[[bedev:Manual:minecraft:entity_fall_on|minecraft:entity_fall_on]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|gametest|exg=1}}}}
+|{{tc|yes|1.21.20}}
+|设置实体必须从多高的高度摔落才能触发自定义方块组件的<code>onEntityFallOn</code>事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:flammable|minecraft:flammable]]}}
+|{{tc|yes|可用}}
+|{{tc|none}}
+|{{tc|none}}
+|设置方块的可燃性。
+|-
+|{{samp|[[bedev:Manual:minecraft:flower_pottable|minecraft:flower_pottable]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|yes|1.21.120}}
+|表明方块可被放在花盆中。
+|-
+|{{samp|[[bedev:Manual:minecraft:friction|minecraft:friction]]}}
+|{{tc|yes|可用}}
+|{{tc|none}}
+|{{tc|none}}
+|设置方块的摩擦力。
+|-
+|{{samp|[[bedev:Manual:minecraft:geometry (方块组件)|minecraft:geometry]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.19.40}}
+|设置方块模型。
+|-
+|{{samp|[[bedev:Manual:minecraft:item_visual|minecraft:item_visual]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|yes|1.21.60}}
+|设置在物品栏内渲染该方块的方法。
+|-
+|{{samp|[[bedev:Manual:minecraft:immovable|minecraft:immovable]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置该方块能否不被活塞推动。
+|-
+|{{samp|[[bedev:Manual:minecraft:light_dampening|minecraft:light_dampening]]}}
+|{{tc|yes|可用}}
+|{{tc|none}}
+|{{tc|none}}
+|设置方块减弱的光照强度。(调整方块的透光强度，如果不设置，默认为不透光)
+|-
+|{{samp|[[bedev:Manual:minecraft:light_emission|minecraft:light_emission]]}}
+|{{tc|yes|可用}}
+|{{tc|none}}
+|{{tc|none}}
+|设置方块发出的光照强度。
+|-
+|{{samp|[[bedev:Manual:minecraft:liquid_detection|minecraft:liquid_detection]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|yes|1.21.60}}
+|设置方块在接触到液体后的表现。
+|-
+|{{samp|[[bedev:Manual:minecraft:loot|minecraft:loot]]}}
+|{{tc|yes|可用}}
+|{{tc|none}}
+|{{tc|none}}
+|设置方块的掉落物。
+|-
+|{{samp|[[bedev:Manual:minecraft:map_color|minecraft:map_color]]}}
+|{{tc|yes|可用}}
+|{{tc|none}}
+|{{tc|none}}
+|设置方块在地图上显示的颜色。
+|-
+|{{samp|[[bedev:Manual:minecraft:material_instances|minecraft:material_instances]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.19.40}}
+|将模型文件中的面或渲染映射到实际的纹理。
+|-
+|{{samp|[[bedev:Manual:minecraft:movable|minecraft:movable]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|no|未走出}}
+|方块是否能被活塞推动。
+|-
+|{{samp|[[bedev:Manual:minecraft:onlypistonpush|minecraft:onlypistonpush]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置该方块是否不被黏性活塞拉动。
+|-
+|{{samp|[[bedev:Manual:minecraft:part_visibility|minecraft:part_visibility]]}}
+|{{tc|partial|已弃用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|no|未走出}}
+|设置方块在指定条件下显示部分模型。
+|-
+|{{samp|[[bedev:Manual:minecraft:placement_filter|minecraft:placement_filter]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.19.60}}
+|设置方块被放置时应满足的条件。
+|-
+|{{samp|[[bedev:Manual:minecraft:preventsjumping|minecraft:preventsjumping]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置行动对象在该方块上行走时是否被阻止跳跃。
+|-
+|{{samp|[[bedev:Manual:minecraft:precipitation_interactions|minecraft:precipitation_interactions]]}}
+|{{tc|yes|可用}}
+|{{tc|unknown}}
+|{{tc|no|未走出}}
+|该方块如何与雨雪交互。
+|-
+|{{samp|[[bedev:Manual:minecraft:queued_ticking|minecraft:queued_ticking]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|计划刻计时器。
+|-
+|{{samp|[[bedev:Manual:minecraft:random_offset|minecraft:random_offset]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|no|未走出}}
+|允许方块贴图随机偏移。
+|-
+|{{samp|[[bedev:Manual:minecraft:random_ticking|minecraft:random_ticking]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|随机刻计时器。
+|-
+|{{samp|[[bedev:Manual:minecraft:redstone_conductivity|minecraft:redstone_conductivity]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|yes|1.21.30}}
+|设置方块的红石导体属性。
+|-
+|{{samp|[[bedev:Manual:minecraft:redstone_producer|minecraft:redstone_producer]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|yes|1.21.120}}
+|使该方块提供红石信号。
+|-
+|{{samp|[[bedev:Manual:minecraft:replaceable|minecraft:replaceable]]}}
+|{{tc|yes|可用}}
+|{{tc|none}}
+|{{tc|yes|1.21.70}}
+|设置方块是否可被别的方块顶替（像水或空气一样）。
+|-
+|{{samp|[[bedev:Manual:minecraft:rotation|minecraft:rotation]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置方块围绕方块中心的旋转角度。
+|-
+|{{samp|[[bedev:Manual:minecraft:selection_box|minecraft:selection_box]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|yes|1.19.60}}
+|设置方块的击中箱。
+|-
+|{{samp|[[bedev:Manual:minecraft:support|minecraft:support]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|ucft|exg=1}}}}
+|{{tc|yes|1.21.130}}
+|定义方块的支撑形状。
+|-
+|{{samp|[[bedev:Manual:minecraft:tag|minecraft:tick]]}}
+|{{tc|yes|可用}}
+|{{tc|yes|{{experiment|gametest|exg=1}}}}
+|{{tc|yes|1.21.20}}
+|设置方块更新频率并触发<code>onTick</code>事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:transformation|minecraft:transformation]]}}
+|{{tc|yes|可用}}
+|{{tc|n/a}}
+|{{tc|yes|1.19.80}}
+|设置方块的平移、旋转、缩放表现。
+|-
+|{{samp|[[bedev:Manual:minecraft:unit_cube|minecraft:unit_cube]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置方块为单位方块。
+|-
+|{{samp|[[bedev:Manual:minecraft:unwalkable|minecraft:unwalkable]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未走出}}
+|设置该方块是否不能被越过。
+|}
+
+'''触发器'''
+{| class="sortable wikitable"
+!名称
+!<div style="white-space:nowrap;">可用性</div>
+!<div style="white-space:nowrap;">实验性玩法</div>
+!移出实验版本
+!<div style="white-space:nowrap; padding:0em 8em 0em 8em;">描述</div>
+|-
+|{{samp|[[bedev:Manual:minecraft:on_fall_on|minecraft:on_fall_on]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未移出}}
+|设置活动对象摔落到该方块上时执行的事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:on_interact|minecraft:on_interact]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未移出}}
+|设置玩家与该方块互动（例如右键点击）时执行的事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:on_placed|minecraft:on_placed]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未移出}}
+|设置该方块被放置时执行的事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:on_player_destroyed|minecraft:on_player_destroyed]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未移出}}
+|设置玩家破坏该方块时执行的事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:on_player_placing|minecraft:on_player_placing]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未移出}}
+|设置玩家放置该方块时执行的事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:on_step_off|minecraft:on_step_off]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未移出}}
+|当实体离开该方块时执行的事件。
+|-
+|{{samp|[[bedev:Manual:minecraft:on_step_on|minecraft:on_step_on]]}}
+|{{tc|no|已移除}}
+|{{tc|yes|{{experiment|ddi_|exg=1}}}}
+|{{tc|no|未移出}}
+|当实体踩上该方块时执行的事件。
+|}
+
+=== 实体 ===
+{{main|基岩版实体组件|bedev:Manual:数据驱动/实体{{!}}Minecraft基岩版开发Wiki:Manual:数据驱动/实体|基岩版存档格式/实体格式/组件}}
+
+与物品和方块组件不同，一些实体组件通过JSON文件定义后会在游戏内部被挂接在实体实例上，并随实体一同保存至存档中。一些实体组件在JSON文件中可以通过分组的形式打包在一起，被称为实体的'''组件组（Component Group）'''。一个实体在世界中活动时，会通过某些逻辑向自己添加或移除一些组件组，并通过该方式更新自己的组件，这些添加和移除操作也会作为一个实体的[[定义]]一并存储在实体的存档中。
+
+== 脚本API ==
+{{See also|基岩版脚本API文档}}
+{{Experimental|gametest|section=1}}
+'''脚本API'''（'''Script API'''，简称'''SAPI'''），亦称'''脚本（Scripting）'''，它允许用户编写一套程序化指令，使游戏在特定时间或响应事件时执行自定义行为。<ref name="scripting-intro">{{cite|url=https://learn.microsoft.com/minecraft/creator/documents/scripting/introduction|title=Introduction to Scripting in Minecraft|website=Microsoft Learn|date=2025-07-17}}</ref>它可以控制实体、方块、物品，以及整个世界的特征等。<ref name="scripting-intro"></ref>脚本文件存储在附加包的<code>scripts</code>目录内。
+
+脚本API为用户提供模块用于和游戏交互，每个模块都必须作为依赖添加在{{filename|[[manifest.json]]}}中，以下是一些常用的模块：
+{| class="wikitable"
+|-
+! 名称 !! 描述
+|-
+| <code>[https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/common/minecraft-common @minecraft/common]</code> || 提供一些通用的类、接口以及枚举，例如错误类。
+|-
+| <code>[https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server/minecraft-server @minecraft/server]</code> || 提供与游戏内容的接口，使脚本可以控制实体、方块、物品，以及整个世界的特征。
+|-
+| <code>[https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server-ui/minecraft-server-ui @minecraft/server-ui]</code> || 提供一些简单的UI接口。
+|-
+| <code>[https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server-net/minecraft-server-net @minecraft/server-net]</code> || 提供HTTP相关接口。仅[[BDS]]可用。
+|-
+| <code>[https://learn.microsoft.com/minecraft/creator/scriptapi/minecraft/server-gametest/minecraft-server-gametest @minecraft/server-gametest]</code> || 提供有关[[游戏测试]]框架的接口以供用户测试脚本。
+|}
+
+还有一些较为特殊的模块，这些模块需要从[https://www.npmjs.com npm]中导入，并且不内置在游戏中。这意味着它们可以被用在任意JavaScript项目中，但是在游戏中使用则需要打包。
+{| class="wikitable"
+|-
+! 名称 !! 描述
+|-
+| <code>[https://www.npmjs.com/package/@minecraft/math @minecraft/math]</code> || 提供一些与坐标相关的数学工具。
+|}
+
+脚本API允许用户自定义命令。<ref>{{cite|url=https://learn.microsoft.com/minecraft/creator/documents/scripting/custom-commands|title=Scripting Custom Commands Overview|website=Microsoft Learn|date=2025-11-5}}</ref>
+
+== 历史 ==
+{{stub|section=1}}
+{{HistoryTable
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.15.0|加入了资源包。游戏内有两个市场资源包，塑料资源包和城市资源包。}}
+|{{HistoryLine||0.15.7|加入了自然资源包。}}
+|{{HistoryLine||0.15.8|加入了魔幻资源包。}}
+|{{HistoryLine||0.16.2|加入了卡通资源包。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.3|加入了糖果资源包。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|资源包现在和世界模板分离，并能在现存世界中独立更新。}}
+|{{HistoryLine||1.21.100|dev=1.21.100.22|将行为包目录{{file|directory|worldgen/jigsaw_structures}}重命名为{{file|directory|worldgen/structures}}。}}
+}}
+
+== 参见 ==
+* [[基岩版函数]]
+* [[辅助程序与编辑器/资源包制作器]]
+* [[Tutorial:制作资源附加包]]
+
+== 外部链接 ==
+* [https://feedback.minecraft.net/hc/en-us/community/topics/360000791812-Add-ons 附加包反馈链接]
+* [http://minecraft.net/en-us/addons/ 在Minecraft.net上的附加包相关内容]
+* [https://minecraft.curseforge.com/mc-addons 在CurseForge上的附加包]
+* [https://mcpedl.com/category/mods/addons/ 在MCPEDL上的附加包]
+* [https://minecraft.net/en-us/article/add-ons-whats-name 有关于不同种类的包的Minecraft.net博文贴]
+* [[bedev:脚本API]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox Bedrock Edition}}
+{{Navbox mods}}
+
+[[Category:附加包|*]]
+[[Category:游戏文件]]
+
+[[de:Add-on]]
+[[en:Add-on]]
+[[es:Add-on]]
+[[fr:Extension]]
+[[ja:Add-on]]
+[[ko:애드온]]
+[[lzh:附囊]]
+[[pt:Complemento]]
+[[ru:Дополнения]]
+[[th:แอดออน]]
+[[uk:Доповнення]]

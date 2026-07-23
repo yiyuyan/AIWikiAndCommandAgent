@@ -1,0 +1,96 @@
+# 页面: 世界预设
+# 来源: https://zh.minecraft.wiki/w/%E4%B8%96%E7%95%8C%E9%A2%84%E8%AE%BE
+# 分类: 
+# 抓取时间: 2026-07-14 17:19:48
+# 原始 Wikitext 内容:
+
+{{tr|mode=H|预设|方案}}
+{{for|基岩版中类似的概念|世界类型}}
+{{exclusive|java}}
+
+'''世界预设（World Preset）'''用来决定该世界所拥有的维度，可以由[[数据包]]控制。在{{tr|创建|建立}}新世界时，可以在“{{tp|createWorld.tab.world.title}}”屏幕中选择要使用的世界预设。
+
+== 用法 ==
+在初次打开“{{tp|createWorld.tab.world.title}}”屏幕时，“{{tp|selectWorld.mapType}}”按钮显示为“{{tp|generator.minecraft.normal}}”，此时默认拥有主世界、末地、下界三个原版维度。
+
+除世界预设外，数据包的维度文件夹也可以修改世界中的维度，维度文件的优先级高于世界预设，可以修改默认的三个维度或者增加新维度，但无法删除主世界维度。
+
+== 原版世界预设 ==
+{| class="wikitable" data-description="世界预设"
+! style="width: 140px;" | 预设
+! 描述
+! 图像
+|-
+| {{anchor|默认}} {{EnvSprite|default}} '''默认'''
+| 在主世界中各式各样的地形景观基于[[生物群系]]生成。
+| [[File:Overworld.jpg|300px]]
+|-
+| {{anchor|超平坦}} {{EnvSprite|superflat}} '''[[超平坦]]'''
+| 此世界预设会使主世界维度变为一个完全平坦，且只有一种生物群系的世界。在默认的超平坦世界中，主世界的地面[[高度]]为Y=-60，生物群系为[[平原]]；方块构成自下而上为1层[[基岩]]、2层[[泥土]]和1层[[草方块]]。[[生物]]照常生成。
+
+同时，通过各种超平坦世界自定义屏幕与[[超平坦世界生成预设]]可以进一步定制超平坦世界，包括更改地形的组成结构、控制[[树木]]、大型[[村庄]]、[[要塞]]的生成，等等。
+| [[File:Flatland.png|300px]]
+|-
+| {{anchor|放大化}} {{EnvSprite|amplified}} '''[[放大化]]'''
+| 放大化世界的主世界维度会生成许多与默认世界预设中[[山地]]生物群系一般的大型山脉，附有一些矮小植物。这些山脉会经常达到世界高度限制。深深的[[洞穴]]会经常直通[[基岩]]层。由于充斥着极度陡峭的岩壁和严苛的地形，玩家要在这种世界预设中生存下去就必须小心谨慎。某些生物群系（即[[沼泽]]、[[海洋]]和[[河流]]）不会在高度上有明显的变化。[[村庄]]以及其他结构仍然会无视地面平整度生成，从而出现各种奇特的景象。
+| [[File:AMPLIFIED.png|300px]]
+|-
+| {{anchor|巨型生物群系}} {{EnvSprite|large-biomes}} '''[[巨型生物群系]]'''
+| 主世界的生物群系尺寸在X和Z轴上大致放大了4倍，导致各个[[生物群系]]的大小大致变为原来的16倍。
+| [[File:Large Biome.png|300px]]
+|-
+| {{anchor|单一生物群系}} {{EnvSprite|biomes}} '''[[单一生物群系]]'''
+| 主世界只有一种生物群系。这个生物群系默认为[[平原]]，且可以由玩家自行选择。
+| [[File:Plains.png|300px]]
+|-
+| {{anchor|调试模式}} {{EnvSprite|debug-mode}} '''[[调试模式]]'''
+| 为方便观察方块而提供的世界类型。其中在主世界，所有方块的所有方块状态都会网格对齐于Y=70上，Y=60处有以屏障构成的地板，完全无法放置和破坏方块。
+
+此世界预设可通过按住{{Key|Alt}}选择世界类型来选取。
+| [[File:Debug World.png|300px]]
+|-
+| {{anchor|全维度平坦}} {{EnvSprite|Flat All Dimensions}} '''[[全维度平坦]]'''
+| 主世界、下界和末地均为超平坦的世界预设。
+* 主世界：1层基岩、67层砂岩，生物群系沙漠。
+* 下界：1层基岩、3层玄武岩，生物群系玄武岩三角洲。
+* 末地：1层基岩、3层末地石，生物群系末地。
+
+3个维度均不生成熔岩湖和地物，同时照常生成各种结构。
+
+此世界预设默认不可通过创建新的世界屏幕选中，必须将其加入[[#技术性|下列标签]]中才可在创建新的世界屏幕中使用。
+|[[File:Flat All Dimensions.png|300px]]
+|}
+
+== 技术性 ==
+{{see also|世界预设定义格式}}
+世界预设选项以[[JSON]]文件的形式存储在[[数据包]]的{{filepath|data/<''命名空间''>/worldgen/world_preset}}目录下。
+* 标签<code>normal</code>包含通常可选的世界预设，其默认值为{{code|d=pretty|minecraft:normal|minecraft:flat|minecraft:large_biomes|minecraft:amplified|minecraft:single_biome_surface}}。
+* 标签<code>extended</code>包含按住{{key|Alt}}时可选的世界预设，其默认值为{{code|d=pretty|#minecraft:normal|minecraft:debug_all_block_states}}。
+
+“自定义超平坦世界”预设以JSON文件的形式存储在数据包的{{filepath|data/<''命名空间''>/worldgen/flat_level_generator_preset}}目录下。
+* 标签<code>visible</code>包含在预设菜单上显示的预设，其默认值为{{code|d=pretty|minecraft:classic_flat|minecraft:tunnelers_dream|minecraft:water_world|minecraft:overworld|minecraft:snowy_kingdom|minecraft:bottomless_pit|minecraft:desert|minecraft:redstone_ready|minecraft:the_void}}。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w21a|加入了世界预设的概念，取代了以前的[[世界类型]]。
+|将“默认”“超平坦”“放大化”“巨型生物群系”和“调试模式”世界类型重新整理为世界预设。
+|拆分了[[自选世界类型]]为3个独立的世界预设：“单一生物群系”“洞穴”和“空岛”。}}
+|{{HistoryLine||1.18|dev=exp1|移除了“放大化”和“巨型生物群系”世界预设。}}
+|{{HistoryLine|||dev=pre1|重新加入了“放大化”和“巨型生物群系”世界预设，并进行了修改以使它们适应1.18新地形。
+|移除了“洞穴”和“空岛”世界预设。}}
+|{{HistoryLine||1.19|dev=22w11a|现在世界预设以及创建新的世界屏幕上可选的世界预设可以通过数据包自定义。}}
+|{{HistoryLine||26.2|dev=pre-1|加入了“全维度平坦”世界预设，但不会在创造世界界面中显示。}}
+}}
+
+== 参见 ==
+* [[世界大小]]：用于更改世界大小的世界类型。
+* [[选项]]：更深入自定义玩家的Minecraft体验。
+
+== 导航 ==
+{{Navbox environment}}
+
+[[Category:世界类型|*]]
+
+[[en:World preset]]
+[[ja:ワールドプリセット]]

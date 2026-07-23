@@ -1,0 +1,78 @@
+# 页面: 服务器列表存储格式
+# 来源: https://zh.minecraft.wiki/w/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%97%E8%A1%A8%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F
+# 分类: Java版独有特性, 游戏文件
+# 抓取时间: 2026-07-14 17:28:33
+# 原始 Wikitext 内容:
+
+{{exclusive|java}}
+
+'''服务器列表存储文件'''用于储存玩家添加到[[服务器列表]]的[[多人游戏]][[服务器]]的数据。
+
+== 存储格式 ==
+
+服务器列表存储文件位于{{filepath|-{}-<''客户端根目录''>/servers.dat}}，具有备份。此文件使用未压缩的[[NBT]]文件格式保存，其内部有下列NBT结构： 
+
+<div class="treeview">
+* {{nbt|compound}} 根标签
+** {{nbt|list|servers|existonsave=1|required=1}}：所有已保存的服务器的列表。
+*** {{nbt|compound}}：一个已保存的服务器信息。
+**** {{nbt|bool|acceptTextures}}：是否接受服务器的资源包。如果此项不存在，则在进入服务器时询问是否接受。
+**** {{nbt|bool|hidden|existonsave=1|required=1}}：此服务器信息是否在隐藏服务器列表内，反之则在可见服务器列表内。
+**** {{nbt|string|icon}}：以[[wzh:Base64|Base64]]编码的服务器图标的PNG数据。
+**** {{nbt|string|ip|existonsave=1|required=1}}：服务器的IP地址及端口。
+**** {{nbt|string|name|existonsave=1|required=1}}：玩家定义的服务器名字。
+</div>
+
+== 存储行为 ==
+
+服务器列表存储文件默认不存在，仅在游戏在服务器列表内添加过服务器或进入过任何服务器后此文件才会被创建。
+
+服务器列表本质上有两个列表：
+* 可见服务器列表：在游戏的服务器列表屏幕中可见的服务器。这些服务器游戏会主动获取信息以同步当前服务器的信息。
+* 隐藏服务器列表：在游戏中不可见，但它们会被保存到服务器列表存储文件中，最多有16个。这些服务器游戏不会主动同步信息。
+
+游戏可以通过编辑服务器列表的方式添加或删除可见服务器列表的服务器。如果添加的服务器已经在隐藏服务器列表中，则隐藏服务器列表中的服务器会转移到可见服务器列表中显现。
+
+隐藏服务器列表通过两种方式添加服务器：
+* 使用快速进入游戏（Quick Play）功能进入一个服务器，且此服务器不在可见服务器列表内。
+* 直接进入一个服务器，且此服务器不在可见服务器列表内。
+
+服务器列表中的服务器数据会在下列情况下更新：
+* 对于可见服务器列表，服务器数据可以使用“刷新”重新同步服务器信息进行更新。
+* 对于所有服务器列表，当游戏进入一个服务器后，服务器会发送一个<code>server_data</code>网络数据包以同步服务器信息。
+
+无论什么情况下，只要服务器列表数据有修改，游戏就会保存一次服务器列表。服务器列表的保存类似于玩家数据和存档基础数据的保存，具有备份，但不会在损坏时主动使用备份替换损坏的文件。保存时的流程如下：
+# 先将新的数据写入到{{filename|-{}-servers<''随机字符串''>.dat}}内。
+# 将原先的{{filename|servers.dat}}移动到{{filename|servers.dat_old}}。
+# 删除{{filename|servers.dat}}。
+# 将刚才写入的{{filename|-{}-servers<''随机字符串''>.dat}}移动到{{filename|servers.dat}}。
+# 如果有任何一步出错，都将{{filename|servers.dat_old}}移动回{{filename|servers.dat}}。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java beta}}
+|{{HistoryLine||1.8|dev=pre1|加入了{{filename|server.dat}}，包含<code>ip</code>和<code>name</code>标签，分别用于存储服务器地址和名称。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w42a|加入了<code>hideAddress</code>标签，用于指定服务器地址是否要在列表中隐藏。}}
+|{{HistoryLine||1.7.2|dev=13w41a|加入了<code>icon</code>标签，用于存储服务器图标。}}
+|{{HistoryLine||1.7.6|dev=pre1|加入了<code>acceptTextures</code>标签，用于指定客户端对服务器资源包的处理方式。
+|移除了<code>hideAddress</code>标签。}}
+|{{HistoryLine||1.8|dev=14w17a|加入了<code>acceptTextures</code>标签，用于指定客户端对服务器资源包的处理方式。
+|移除了<code>hideAddress</code>标签。}}
+}}
+
+== 参见 ==
+* [[服务器列表]]
+* [[服务器]]
+
+== 导航 ==
+{{Navbox Java files}}
+
+[[Category:游戏文件]]
+
+[[de:Servers Format]]
+[[en:Servers.dat format]]
+[[fr:Format servers.dat]]
+[[ja:servers.datフォーマット]]
+[[nl:Servers.dat formaat]]
+[[pt:Formato servers.dat]]

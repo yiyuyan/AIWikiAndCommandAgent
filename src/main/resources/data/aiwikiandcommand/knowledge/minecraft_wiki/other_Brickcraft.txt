@@ -1,0 +1,221 @@
+# 页面: Brickcraft
+# 来源: https://zh.minecraft.wiki/w/Brickcraft
+# 分类: 未发布的游戏, 游戏, 社区
+# 抓取时间: 2026-07-14 17:11:17
+# 原始 Wikitext 内容:
+
+{{Italic title}}{{Infobox program
+|author=
+* [[File:Mojang Studios logo.svg|x20px|link=Mojang Studios]] [[Mojang Studios]]
+* [[wzh:Lego|乐高集团]]
+|title=''Brickcraft''
+|image=Brickcraft.png
+|date=从未发布
+|source available=N/A
+|license=N/A
+|size=≈ 85.0 MiB（开发版）
+|ratings=N/A
+|version=N/A
+|publisher=N/A
+|platform=PC
+|programming language={{OS|c++}} {{w|C++}}
+|customlinks=
+* 由Omniarchive[https://vault.omniarchive.uk/archive/misc/Rex-2012-06-28.zip 存档的下载]
+}}
+
+'''''Brickcraft'''''（代号为“'''''Project Rex Kwon Do'''''”<ref>{{tweet|notch|110597995900305408|Secret project Rex Kwon Do begins today! It will involve caffeine and giggling.|September 5, 2011}}</ref>）是由[[Mojang AB]]和[[wzh:樂高集團|乐高集团]]于2011年9月5日开始开发的一款游戏，直到2012年7月19日被取消。
+
+== 游戏内容 ==
+游戏的开发目标是创建一个乐高积木世界，其中包含基于不同乐高套装的生物群落。游戏内容有点类似于[[Minecraft]]，但玩家将使用各种形状和大小的乐高积木建造，而不是方块。<ref name="bitsnbricks">https://www.lego.com/cdn/cs/set/assets/bltf87fd15a8f67c6fd/bits_n_bricks_s01e01_minecraft_feature_and_transcript.pdf</ref>
+
+该游戏以程序生成的乐高世界为特色。地形下方是一个无限的灰色底板。玩家可以使用键盘在世界各地移动，放置或打破积木。玩家的物品栏由以下5种类型的积木组成：
+* 3005砖1×1 
+* 3004砖1×2
+* 3003砖2×2
+* 3001砖2×4
+* 3040斜面砖45度2×1
+
+玩家生成时携带每种类型的积木10,000块。打破现有积木会增加该类型积木的可用数量。在世界中放置积木会消耗积木。积木可以放置和旋转。使用滚轮可在不同的颜色之间切换，其中总共有39种颜色，每种都对应于实际的乐高积木颜色。<ref>https://www.mecabricks.com/docs/colour_chart.pdf</ref>
+
+玩家可以在世界各地移动、疾跑和跳跃。坐标显示在左下角，建筑高度限制为底板上方80块积木。
+
+游戏在客户端（{{filename|Rex-Kwon-Do.exe}}可执行文件）和服务器（{{filename|Rex-Kwon-Do Server.exe}}可执行文件）之间分配。客户端没有内部服务器，因此即使是单人游戏也需要服务器。该服务端还允许多人游戏。
+
+游戏使用UDP协议（以[[:en:RakNet|RakNet]]为上层）进行传输。服务器侦听所有IPv4地址，端口37373。客户端连接到服务器，其IPv4地址或名称解析为<code>connection.cfg</code>文件中列出的IPv4地址，端口37373。
+
+世界文件{{filename|world.db}}是一个SQLite3数据库。
+
+游戏支持从LXFML文件（由Lego Digital Designer使用）导入结构。该发行版包括两个LXFML文件：{{filename|test.lxfml}}，一棵树和{{filename|test_brick_import.lxfml}}，分别由每类积木组成的几个彩色小柱子。
+
+游戏使用的着色器无效，使其只能在Nvidia显卡上运行。在AMD和Intel显卡上运行[https://omniarchive.uk/news/file/brickcraft-shaders-fix.zip 需要一个补丁]。<ref name="omniarchive"/>
+
+=== 控制 ===
+游戏使用鼠标和键盘进行。
+* {{Key|W}}：向前移动
+* {{Key|S}}：向后移动
+* {{Key|A}}：向左移动
+* {{Key|D}}：向右移动
+* {{Key|Shift}}：疾跑
+* {{Key|Space}}：跳跃
+* {{Key|Tab}}：切换放置模式和破坏模式
+* {{Key|E}}：切换到上一个积木颜色
+* {{Key|Q}}：切换到下一个积木颜色
+* {{Key|I}}：从选定的LXFML文件导入结构
+* {{Key|R}}：导入上次导入的结构。如果在会话期间没有导入任何结构，则服务端将崩溃。
+* {{Key|Z}}：删除上次导入的结构
+* {{Key|Esc}}：退出游戏
+* 鼠标：移动相机
+* 向上滚动滚轮：选择下一个积木类型
+* 向下滚动滚轮：选择上一个积木类型
+* 鼠标左键
+** 在放置模式下：将当前选定的积木放置在目标空间中。按住并拖动鼠标可调整放置位置。
+** 在破坏模式下：打破目标积木
+* 鼠标右键
+** 在放置模式下：选择备用积木旋转角度
+** 在破坏模式下：切换到放置模式
+
+=== 命令 ===
+服务器接受对其标准输入的命令。这些命令可以使用Lua API定义。
+
+默认情况下，服务器定义了一些命令。
+
+{| class="wikitable"
+|-
+! 命令 !! 游戏内帮助文本 !! 翻译 !! 描述
+|-
+| '''listcommands''' || I list commands :) || 我列出所有命令:) || 将所有已定义命令的列表和帮助文本打印到服务器标准输出
+|-
+| '''msg''' ''message'' || I relay what you said to everyone :) || 我把你说的转告给所有人:) || 将“message”打印到服务器标准输出
+|-
+| '''reloadscripts''' || I reload all lua scripts :) || 我重载Lua脚本:) || 重载Lua脚本
+|-
+| '''spawnentity''' || I spawn a simple box in the game :) || 我在游戏中生成一个简易盒子:) || 生成测试实体
+|-
+| '''testlxfml''' || I import a test LXFML file onto the server || 我将一个测试LXFML文件导入服务器 || 从名为<code>test.lxfml</code>的LXFML文件导入结构
+|-
+| '''importlxfml''' ''data'' || I import a base64-encoded LXFML file onto the server || 我将一个base64编码的LXFML文件导入服务器 ||从base64编码的LXFML“data”导入结构
+|-
+|'''alias''' ''command'' ''alias''	|| I create an alias for a command :) || 我为命令创建别名:) || 为命令“command”创建别名“alias”
+|-
+| '''unalias''' ''alias'' || I remove an alias for a command :) || 我为命令移除别名:) || 为命令“command”移除别名“alias”
+|-
+| '''undoimport''' || I undo the last import made by the player who calls the command || 我撤销最后一个执行命令的玩家所做的导入 || 不执行任何操作
+|}
+
+还有一些命令被注释了，但如果它们没有被注释，则它们将正常工作。
+
+{| class="wikitable"
+|-
+! 命令 !! 游戏内帮助文本!! 翻译 !! 描述
+|-
+| '''listplayers''' || I list connected players :) || 我列出所有连接的玩家:) || 将所有连接的玩家的列表打印到服务器标准输出
+|-
+| '''addjectpack''' || I give players jetpacks! :) || 我给予玩家喷气背包:) ||将喷气背包物品分配给所有连接的玩家
+|}
+
+=== Lua API ===
+服务器支持使用Lua编程语言的有限修改的API。此API可用于定义可调用的命令和影响玩家实体行为的玩家物品。
+
+=== 目录结构 ===
+<div class="treeview">
+* {{File|directory|Game}}
+** {{File|directory|assets}}
+*** {{File|directory|gui}}
+**** {{File|file|test.swf}}：未使用的Adobe Flash程序，可能用于HUD
+*** {{File|directory|lua}}：用于Mod API的Lua脚本
+**** {{File|file|Item.lua}}
+**** {{File|file|Main.lua}}
+*** {{File|directory|shaders}}：GLSL着色器
+**** {{File|file|chunk.frag}}
+**** {{File|file|chunk.vert}}
+**** {{File|file|floor.frag}}
+**** {{File|file|floor.vert}}
+**** {{File|file|preview.frag}}
+**** {{File|file|preview.vert}}
+**** {{File|file|screen.frag}}
+**** {{File|file|screen.vert}}
+*** {{File|directory|textures}}: Textures
+**** {{File|file|LegoColors.bmp}}：用于积木的1x1纹理图集。BMP3格式。
+**** {{File|file|peg.png}}：积木楔子纹理。PNG格式。
+*** {{File|file|unispace.ttf}}：用于HUD的TrueType字体
+** {{File|directory|bin}}
+*** {{File|directory|win32}}
+**** {{File|file|connection.cfg}}：定义客户端连接到的服务器地址的ASCII文本文件
+**** {{File|file|FreeImage.dll}}
+**** {{File|file|glew32.dll}}
+**** {{File|file|libfreetype-6.dll}}
+**** {{File|file|lua.debug.pdb}}
+**** {{File|file|lua.release.pdb}}
+**** {{File|file|luabind.debug.pdb}}
+**** {{File|file|luabind.dll}}
+**** {{File|file|luabind.release.pdb}}
+**** {{File|file|msvcp100.dll}}
+**** {{File|file|msvcr100.dll}}
+**** {{File|file|RakNet.dll}}
+**** {{File|file|RakNetDebug.dll}}
+**** {{File|file|Rew-Kwon-Do.instr.pdb}}{{sic}}
+**** {{File|file|Rex-Kwon-Do.exe}}：客户端可执行文件
+**** {{File|file|Rex-Kwon-Do.exp}}
+**** {{File|file|Rex-Kwon-Do.instr.pdb}}
+**** {{File|file|Rex-Kwon-Do.lib}}
+**** {{File|file|Rex-Kwon-Do.pdb}}
+**** {{File|file|Rex-Kwon-Do Server.exe}}：服务端可执行文件
+**** {{File|file|Rex-Kwon-Do Server.exp}}
+**** {{File|file|Rex-Kwon-Do Server.lib}}
+**** {{File|file|Rex-Kwon-Do Server.pdb}}
+**** {{File|file|Rex-Kwon-Do Server.sln.docstates.suo}}
+**** {{File|file|Rex-Kwon-Do Server.suo}}
+**** {{File|file|SDL.dll}}
+**** {{File|file|sqlite3.dll}}
+**** {{File|file|test.lxfml}}：包含一棵树的LXFML文件
+**** {{File|file|test_brick_import.lxfml}}：包含分别由每类积木组成的几个小的彩色柱子的LXFML文件
+**** {{File|file|TestClient.bat}}
+**** {{File|file|Window.swf}}
+**** {{File|file|world.db}}：世界文件。运行后生成，而不是原文件的一部分。
+**** {{File|file|zlib1.dll}}
+**** {{File|file|zlibwapi.dll}}
+*** {{File|directory|win64}}
+**** {{File|file|glew32.dll}}
+**** {{File|file|libfreetype-6.dll}}
+**** {{File|file|SDL.dll}}
+**** {{File|file|zlib1.dll}}
+**** {{File|file|zlibwapi.dll}}
+</div>
+
+== 历史 ==
+[[Notch]]和[[Kappische]]设想了Minecraft和乐高积木的混合体，并联系了乐高集团与他们合作开发一款游戏，代号为“Project Rex Kwon Do”，参考电影《[[wzh:拿破崙炸藥|大人物拿破仑]]》。Mojang聘请了两名新程序员来开发游戏，Notch创建了一个原型。
+
+在游戏达到重要的发展阶段之前，Mojang取消了合作，专注于开发自己的游戏：[[Minecraft]]，[[Scrolls]]，和[[0x10c|0x10<sup>c</sup>]]。<ref>{{tweet|notch|226020149742927873|Remember Project Rex Kwon Do? We cancelled it to focus on Minecraft, Scrolls and eventually 0x10c that we own 100% ourselves instead.|July 19, 2012}}</ref>Notch当时声称该游戏是一款第一人称射击游戏。<ref>{{cite|url=https://web.archive.org/web/20120728085043/http://www.joystiq.com/2012/07/26/canceled-mojang-project-was-a-first-person-shooter/|title=Canceled Mojang project was a first-person shooter|website=joystiq|author=Jessica Conditt|date=July 26, 2012}}</ref>
+
+直到2020年12月，乐高集团为庆祝第一款乐高电子游戏发布25周年而创建的Bits N' Bricks播客的一集中揭示了Brickcraft的存在，该游戏的真实性质才为公众所知。当时的乐高集团员工Daniel Mathiasen将取消归咎于乐高集团为保护该产品的家庭友好形象而设置的一系列法律障碍，Daniel Kaplan声称Mojang的员工感觉更像是该项目的顾问，而不是设计师。
+
+尽管被取消，乐高集团仍与Mojang合作生产[[乐高Minecraft]]套装，并短暂考虑收购Mojang，但根据乐高游戏亚太区高级总监Ronny Scherer的说法，他们决定不这样做，因为Minecraft“仍在兴起”，他们“无法保证它最终会成为它所成为的文化现象”。<ref>{{Citation|url=https://www.pcgamer.com/the-lego-minecraft-videogame-brickcraft-that-was-greenlit-and-why-it-never-happened/|title=A Lego Minecraft game called 'Brickcraft' was prototyped and greenlit – here's why it never happened|author=Rich Stanton|website=PCGamer|date=December 9, 2020}}</ref><ref>https://www.lego.com/en-us/legogames-25</ref><ref name="bitsnbricks"/>
+
+2025年6月24日，2012年6月28日的Brickcraft开发版本被重新发现并上传到Omniarchive网站。<ref name="omniarchive">{{Cite|url=https://omniarchive.uk/news/#brickcraft|title=Brickcraft|author=DEJVOSS|website=Omniarchive|date=June 26, 2025}}</ref>
+
+== 画廊 ==
+<gallery>
+Project Rex Kwon Do.jpg|Notch发布的“Project Rex Kwon Do”的截图，后来被发现是Brickcraft
+Brickcraft Player.png|玩家模型
+Brickcraft Tree.png|树结构（{{filename|test.lxfml}}）
+Brickcraft Thing.png|其他结构（{{filename|test_brick_import.lxfml}}）
+Brickcraft Baseplate.png|一个移除了所有积木的世界
+Brickcraft Acacia.png|一棵玩家建造的树
+Brickcraft 1.png|一张屏幕截图，在早期版本中没有斜面砖
+Brickcraft 2.png|同上
+Brickcraft 3.png|同上
+Brickcraft Screenshot.png|一张游戏截图
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox community}}
+
+[[Category:游戏]]
+[[Category:未发布的游戏]]
+
+[[en:Brickcraft]]
+[[fr:Brickcraft]]
+[[pt:Brickcraft]]

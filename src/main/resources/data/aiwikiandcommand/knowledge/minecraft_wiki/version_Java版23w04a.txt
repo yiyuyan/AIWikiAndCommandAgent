@@ -1,0 +1,205 @@
+# 页面: Java版23w04a
+# 来源: https://zh.minecraft.wiki/w/Java%E7%89%8823w04a
+# 分类: 
+# 抓取时间: 2026-07-14 17:14:30
+# 原始 Wikitext 内容:
+
+{{Infobox version
+|title=23w04a
+|image=23w04a.png
+|image2=Java Edition 23w04a Simplified.png\Java Edition 23w04a Traditional.png\Java Edition 23w04a Traditional HK.png
+|edition=Java
+|type=Snapshot
+|date=2023年1月24日
+|jsonhash=6805751cb57fcb5a2f6fc24740d22b073e1536be
+|clienthash=2623aee01948e8ed29b3a52e5504c4d1fd63c7ae
+|clientmap=4ef420245e54a29c2bbd38caf3d8d66964610756
+|serverhash=2f31a8584ec1e70abd2d8b22d976feb52a6a3e31
+|servermap=868745891d933db0ae97afd7046416a2af961e86
+|parent=1.19.4
+|prevparent=1.19.3
+|prev=23w03a
+|next=23w05a
+|nextparent=1.20
+}}<onlyinclude>
+
+'''23w04a'''是[[Java版1.19.4]]的第2个快照，发布于2023年1月24日<ref>{{snap|23w04a|January 24, 2023}}</ref>，在内置实验性数据包中加入了[[锻造模板]]，修复了一些漏洞。
+
+== 新内容 ==
+=== 命令格式 ===
+'''{{cmd|execute}}'''
+* 为{{cmd|execute on}}加入了{{cd|origin}}关系。
+** 若执行实体为[[弹射物]]，则选择对应发射者。
+** 若执行实体为[[物品（实体）|物品]]，则选择对应掷出者。
+** 若执行实体为[[区域效果云]]，则选择对应效果的来源者。
+** 若执行实体为[[被激活的TNT]]，则选择对应点燃者。
+** 若执行实体为[[唤魔者尖牙]]或[[恼鬼]]，则选择对应召唤者。
+
+== 更改 ==
+=== 物品 ===
+'''常规'''
+* 更改了物品和[[盔甲]]的附魔光效，现在变得更淡。
+
+=== 常规 ===
+'''用户界面'''
+* 调亮了各槽位占位符图标（[[织布机]]未受影响）。
+
+== 新内容（实验性）==
+=== 物品 ===
+'''[[锻造模板]]'''
+* 一类新物品，可用于装饰盔甲与锻造下界合金装备，在[[锻造台]]上使用。
+* 一次消耗一个锻造模板。
+* 无法直接合成，但可以在工作台中用7个[[钻石]]、1个锻造模板和1个对应复制材料来复制1个。
+* 共有以下12种（一些种类的盔甲纹饰会更稀有）：
+:{| class="wikitable"
+! 类别
+! 名称 !! 获取途径 !! 对应复制材料
+|-
+! 下界合金升级
+| 下界合金升级 || [[堡垒遗迹]]的战利品箱 || [[下界岩]]
+|-
+! rowspan=11 | 盔甲纹饰
+| 海岸盔甲纹饰 || [[沉船]]的战利品箱 || [[圆石]]
+|-
+| 沙丘盔甲纹饰 || [[沙漠神殿]]的战利品箱 || [[砂岩]]
+|-
+| 眼眸盔甲纹饰 || [[要塞]]的走廊、图书馆箱子 || [[末地石]]
+|-
+| 肋骨盔甲纹饰 || [[下界要塞]]的战利品箱 || [[下界岩]]
+|-
+| 哨兵盔甲纹饰 || [[掠夺者前哨站]]的战利品箱 || [[圆石]]
+|-
+| 猪鼻盔甲纹饰 || [[堡垒遗迹]]的战利品箱 || [[黑石]]
+|-
+| 尖塔盔甲纹饰 || [[末地城]]的战利品箱 || [[紫珀块]]
+|-
+| 潮汐盔甲纹饰 || [[远古守卫者]]死亡后掉落 || [[海晶石]]
+|-
+| 恼鬼盔甲纹饰 || [[林地府邸]]的战利品箱 || [[圆石]]
+|-
+| 监守盔甲纹饰 || [[远古城市]]的战利品箱 || [[深板岩圆石]]
+|-
+| 荒野盔甲纹饰 || [[丛林神庙]]的战利品箱 || [[苔石]]
+|}
+
+=== 常规 ===
+'''[[数据包]]'''
+* 加入了{{cd|trim_pattern}}和{{cd|trim_material}}注册项。
+** 新的纹饰和锻造原材料可以通过这两个注册项添加。
+** 玩家加入服务端时，这些数据会自动同步到客户端上，但需要客户端有对应资源包才能显示纹理。
+** 纹理路径根据纹饰的JSON文件名推断，并会在与纹饰的{{cd|name}}字段相同的命名空间中查找。
+** {{cd|trim_pattern}}定义了以下数据：
+*** {{cd|asset_id}}：纹理的命名空间ID，用于推断纹理存储位置及定位。
+*** {{cd|template_item}}：锻造模板物品的命名空间ID，用于应用纹饰。
+*** {{cd|description}}：文本组件，用于在悬停提示中显示纹饰名称。
+** {{cd|trim_material}}定义了以下数据：
+*** {{cd|asset_name}}：字符串，用作盔甲纹饰纹理位置的后缀。
+*** {{cd|ingredient}}：锻造原材料的命名空间ID，用于指定要应用到纹饰上的调色板。
+*** {{cd|item_model_index}}：浮点数，用于定义物品模型覆写，以改变盔甲物品的显示。
+*** {{cd|incompatible_armor_material}}：可选，无法应用该锻造原材料的盔甲材料命名空间ID。
+*** {{cd|description}}：文本组件，用于在悬停提示中显示锻造原材料名称。
+**** 此描述中定义的样式也可用于纹饰的{{cd|description}}字段。
+
+'''[[物品格式]]'''
+* 为{{cd|HideFlags}}NBT字段加入了旗标（值为{{cd|128}}），用于隐藏盔甲纹饰的工具提示。
+
+'''[[配方]]'''
+* 为新的工具锻造机制加入了{{cd|d=pretty|smithing_transform|smithing_trim}}配方序列化器，分别用于新的下界合金升级配方和盔甲锻造配方。
+
+'''[[资源包]]'''
+* 加入了{{cd|paletted_permutations}}图集配置资源，可以通过调色板在内存中动态生成新纹理，而不再需要为每个纹理变种单独制作纹理。其拥有以下参数：
+** {{cd|textures}}：基础纹理的命名空间地址列表。
+** {{cd|palette_key}}：指定需要被调色板中的颜色替换的像素。
+** {{cd|permutations}}：将前缀对应到调色板的命名空间地址的排列映射。
+*** 前缀位于输出纹理目标地址之前，与基础纹理名称以{{cd|_}}隔开。
+*** 调色板为一用作替换基础纹理文件中符合调色板键的像素的纹理文件，像素数量须与{{cd|palette_key}}的定义相同。
+*** 键配对的过程为比较{{cd|palette_key}}与调色板中像素的RGB值。Alpha通道在键配对的过程中会被忽略，但在配对完成后会与调色板的Alpha通道相乘。
+*** 不符合{{cd|palette_key}}的像素会被直接复制到输出纹理中。
+** 定义了{{cd|paletted_permutations}}，这些输出的纹理可以被资源包中的其他资源引用。
+*** 如定义了以下{{cd|paletted_permutations}}：
+**** <syntaxhighlight lang="json">
+{
+    "type": "paletted_permutations",
+    "textures": [
+        "minecraft:item/leather_helmet",
+        "minecraft:item/leather_chestplate",
+        "minecraft:item/leather_leggings",
+        "minecraft:item/leather_boots"
+    ],
+    "palette_key": "minecraft:colormap/color_palettes/leather_armor_color_key",
+    "permutations": {
+        "red": "minecraft:colormap/color_palettes/red",
+        "green": "minecraft:colormap/color_palettes/green",
+        "blue": "minecraft:colormap/color_palettes/blue"
+    }
+}
+</syntaxhighlight>
+*** 可在其他资源中通过下面的方式引用：
+**** <syntaxhighlight lang="json">
+{
+    "textures": {
+        "layer0": "minecraft:item/leather_helmet_red",
+        "layer1": "minecraft:item/leather_chestplate_green",
+        "layer2": "minecraft:item/leather_boots_blue"
+    }
+}
+</syntaxhighlight>
+
+'''[[Java版标签|标签]]'''
+* 加入了以下物品标签：
+** {{cd|#trim_materials}}：{{cd|d=pretty|amethyst_shard|copper_ingot|diamond|emerald|gold_ingot|iron_ingot|lapis_lazuli|netherite_ingot|quartz|redstone}}。
+** {{cd|#trim_templates}}：{{cd|d=pretty|coast_armor_trim_smithing_template|dune_armor_trim_smithing_template|eye_armor_trim_smithing_template|rib_armor_trim_smithing_template|sentry_armor_trim_smithing_template|snout_armor_trim_smithing_template|spire_armor_trim_smithing_template|tide_armor_trim_smithing_template|vex_armor_trim_smithing_template|ward_armor_trim_smithing_template|wild_armor_trim_smithing_template}}。
+** {{cd|#trimmable_armor}}：{{cd|d=pretty|chainmail_boots|chainmail_chestplate|chainmail_helmet|chainmail_leggings|diamond_boots|diamond_chestplate|diamond_helmet|diamond_leggings|golden_boots|golden_chestplate|golden_helmet|golden_leggings|iron_boots|iron_chestplate|iron_helmet|iron_leggings|netherite_boots|netherite_chestplate|netherite_helmet|netherite_leggings|turtle_helmet}}。
+
+== 更改（实验性） ==
+=== 物品 ===
+'''[[盔甲]]'''
+* 现在非皮革质盔甲可以通过[[锻造台]]消耗锻造模板和以下10种原材料中的一种进行锻造：
+** [[紫水晶碎片]]
+** [[铜锭]]
+** [[钻石]]
+** [[绿宝石]]
+** [[金锭]]
+** [[铁锭]]
+** [[青金石]]
+** [[下界石英]]
+** [[下界合金锭]]
+** [[红石粉]]
+* 锻造结果不会提供任何[[属性]]增益。
+* 锻造模板决定锻造后盔甲纹饰图案，原材料决定纹饰颜色。
+* 无法将锻造原材料应用于相同质地的盔甲。
+* 重复锻造将会覆盖上一次的锻造结果。
+* 锻造后的盔甲，其纹饰和锻造原材料名称会在物品提示框中以原材料颜色显示。
+* 不同的纹饰在物品栏图标中显示的是相同的纹理，实际展示出来的是类似于荒野盔甲纹饰的样式；不同的纹饰颜色在物品栏图标中显示的纹饰颜色不同。
+
+=== 游戏内容 ===
+'''锻造机制'''
+* 更改了锻造台的UI，现在拥有三个输入槽位，第一个槽位为锻造模板，其次为装备，最后为锻造原材料，需要先放入锻造模板才可进一步操作。
+** 锻造模板控制可在后两个槽位中放置的物品种类。
+* 现在锻造下界合金工具需要“下界合金升级”锻造模板才能完成。
+* 将旧菜单重命名为{{cd|legacy_smithing}}（将在新菜单不再为实验性功能时移除），新菜单使用原名{{cd|smithing}}。
+
+== 修复 ==
+{{fixes|fixedin=23w04a|showdesc=1
+|;1.19前正式版的漏洞
+|198809|除非魔咒等级非常高，否则爆炸保护魔咒不削弱爆炸击退。
+|;previous
+|259189|{{tr|复述功能|朗讀功能}}不可用时，辅助功能引导屏幕上的对应按钮不变灰。
+|259204|所有山羊角均显示并播放的是“沉思”这一种。
+|259211|无法使用键盘导航功能在资源包菜单中选中不兼容资源包。
+}}</onlyinclude>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox Java Edition versions|1.17}}
+
+[[de:23w04a]]
+[[en:Java Edition 23w04a]]
+[[es:Java Edition 23w04a]]
+[[fr:Édition Java 23w04a]]
+[[ja:Java Edition 23w04a]]
+[[lzh:爪哇版二三週〇四甲]]
+[[pt:Edição Java 23w04a]]
+[[ru:23w04a (Java Edition)]]

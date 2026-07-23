@@ -1,0 +1,208 @@
+# 页面: 脉冲电路/脉冲稳定器
+# 来源: https://zh.minecraft.wiki/w/%E8%84%89%E5%86%B2%E7%94%B5%E8%B7%AF/%E8%84%89%E5%86%B2%E7%A8%B3%E5%AE%9A%E5%99%A8
+# 分类: Ajax载入页面, Java版独有信息, 基岩版独有信息, 红石电路
+# 抓取时间: 2026-07-14 17:34:46
+# 原始 Wikitext 内容:
+
+{{Schematic
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''中继器链脉冲稳定器（瞬时版)'''
+
+2×N×2
+平面，静音
+
+'''电路延迟：'''0
+'''输出脉冲长度：'''最长每中继器4刻
+
+ | input+rd-ew | rd-ew | rr-e4 | SB | rr-e4 | ellipsis-ew | SB | |-
+ | | ts+rd-ne | SB+rd-ew | rd-ew | rd-ew | ellipsis-ew | rd-ew | output+rd-ew
+
+}}
+{{Schematic
+
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''中继器链脉冲稳定器（延迟版)'''
+
+2×N×2
+平面，静音
+
+''电路延迟：''4刻
+''输出脉冲长度：''最长每中继器4刻（不包括第一刻）
+
+ | input+rd-ew | rr-e4 | SB | rr-e4 | SB | rr-e4 | ellipsis-ew | SB | |-
+ | | | rd-ew | rd-ew | rd-ew | rd-ew | ellipsis-ew | rd-ew | output+rd-ew
+
+}}
+{{Schematic
+
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''投掷器-锁存器脉冲稳定器'''
+
+2×6×2（24方块）
+平面，静音
+
+''电路延迟：''5刻
+''输出脉冲长度：''5刻-256秒
+
+投掷器包含单个物品。根据所需的脉冲持续持续时间，中间的漏斗应包含一个或多个物品。
+
+ | input+rd-ew | Dr-s | rc-e! | rr-e1! | SB | rt-w | | |-
+ | | ho-n | rr-w4! | rc-w! | ho-e | ho-w | rc-e | output+rd-ew
+
+}}
+{{Schematic
+
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''漏斗时钟脉冲稳定器（平面）'''
+
+2×6×2（24方块）
+平面
+
+''电路延迟：''{{Only|for=1刻+启动延迟|java}}或{{Only|for=2刻|bedrock}}
+''输出脉冲长度：''4刻-256秒
+
+
+
+ | input+rd-ew | rd-ew! | sp-e | BR | | pi-w | rd-ew | output+rd-ew |-
+ | | SB | rc-w! | ho-e | ho-w | rc-e | SB |
+
+}}
+{{Schematic
+
+ | caption =
+
+'''漏斗时钟脉冲稳定器（1格宽）'''
+
+1×6×3（18方块）
+1格宽（单片）
+
+''电路延迟：''{{Only|for=1刻+启动延迟|java}}或{{Only|for=2刻|bedrock}}
+''输出脉冲长度：''4刻-256秒
+
+ | | rd-$! | sp-$e | BR | | pi-$w | rd-$ | |-
+ | rd-$+&rarr; | SB | rc-$w! | ho-$e | ho-$w | rc-$e | SB | rd-$+&rarr; |-
+ | input | GB-$ | SB | GB-$ | GB-$ | SB | GB-$ | output
+
+}}
+{{Schematic
+
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''RS锁存器脉冲稳定器'''
+
+3×N×3
+静音
+
+''电路延迟：''2刻
+''输出脉冲长度：''每中继器8刻
+
+ | | rd-se | rd-sw | | |-
+ | | rr-s1 | rt-s | rd-sw | |-
+ | input+rd-ew | SB+rt-d! | SB+rd-ew | rd-ne+SB-u | output+rd-ew |-
+ | | rr-s4 | rr-n4 | | |-
+ | | ellipsis-ns | ellipsis-ns | | |-
+ | | SB | rd-ns | |
+
+}}
+{{Schematic
+
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''对置活塞SR锁存器脉冲稳定器'''
+
+3×N×2
+平面
+
+''电路延迟：''{{Only|for=1刻+启动延迟|java}}或{{Only|for=2刻|bedrock}}
+''输出脉冲长度：''每中继器8刻
+
+ | | | | rd-ew | rr-e4 | rr-e4 | ellipsis-ew | rd-sw |-
+ | input+rd-ew | pi-e | BR | | pi-w | | | rr-s4 |-
+ | | | | rd-ns | SB | rr-w4 | ellipsis-ew | rd-nw |-
+ | | | | output+rd-ns | | | |
+
+}}
+{{Schematic
+
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''衰减器脉冲稳定器'''
+
+2×N×2
+平面，静音
+
+''电路延迟：''0刻
+''输出脉冲长度：''最长每比较器14刻
+
+ | output+rd-ns |-
+ | rd-nse | rc-w | rc-w | ellipsis-ew | rc-w | rd-ew |-
+ | rd-nse | rc-e | rc-e | ellipsis-ew | rc-e | SB |-
+ | input+rd-ns |-
+
+}}
+{{Schematic
+
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''MHC脉冲稳定器'''
+
+6×6×2（72方块）
+平面
+
+''电路延迟：''{{Only|for=3刻|java}}或{{Only|for=4刻|bedrock}}
+''输出脉冲长度：''最长22小时
+
+ | | SB | rc-w | ho-e | ho-w | rc-e! | SB |-
+ | | rd-nsew | sp-e! | se-e | BR | sp-w | rd-nsew! |-
+ | | | rt-s! | rd-sew! | rd-nsw! | | |-
+ | input+rd-ew | rd-ew | SB | rr-s1! | rr-s1! | | |-
+ | | SB | rc-w | ho-e | ho-w | rc-e! | SB |-
+ | output+rd-ew | rd-ew | sp-e | BR | se-w | sp-w! | rd-nsew!
+
+}}
+{{Schematic
+
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''MHDC脉冲稳定器'''
+
+5×7×2（70方块)
+平面
+
+''电路延迟：''{{Only|for=6刻|java}}或{{Only|for=7刻|bedrock}}
+''输出脉冲长度：''最长81小时
+
+ | | | SB | rc-w | ho-e | ho-w | rc-e! | SB |-
+ | | rt-s! | rd-ew! | sp-e! | se-e | BR | sp-w | rd-nsew! |-
+ | input+rd-ew | SB | | | rd-nsew | | | |-
+ | | rd-nsew | SB | rc-w | Dr-e | Dr-w | rc-e! | SB |-
+ | output+rd-ew | rr-w1 | rd-ew | sp-e | BR | se-w | sp-w! | rd-nsew! |-
+
+}}
+{{Schematic
+
+ | style = display: inline-block; float: none; vertical-align: text-top;
+ | caption =
+'''衰减器脉冲稳定器（单片）'''
+
+3×1×4（12方块）
+单片
+
+''电路延迟：''0
+''输出脉冲长度：''8刻起
+
+ | | | rd-$ |-
+ | input | rd-$ | SB | rd-$ | output |-
+ | | SB | rc-$e | SB
+
+}}
+<noinclude>
+[[Category:Ajax载入页面]]
+[[Category:红石电路]]
+
+[[en:Redstone circuits/Pulse/pulse extender]]
+</noinclude>

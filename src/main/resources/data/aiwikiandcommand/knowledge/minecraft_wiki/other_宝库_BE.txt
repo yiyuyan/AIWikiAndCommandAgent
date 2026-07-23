@@ -1,0 +1,37 @@
+# 页面: 宝库/BE
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9D%E5%BA%93/BE
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:13
+# 原始 Wikitext 内容:
+
+<div class="treeview">
+* {{nbt|compound}} 方块实体数据
+** {{nbt inherit/blockentity}}
+** {{nbt|compound|config|existonsave=1}}：宝库的配置数据。
+*** {{nbt|double|activation_range}}：（默认为4）激活宝库的玩家检测范围。只要有一个没有领取奖励的玩家进入这个检测范围时，宝库就会被激活。
+*** {{nbt|double|deactivation_range}}：（默认为4.5，不小于{{nbt|double|activation_range}}）取消激活宝库的玩家检测范围。当没有任何没有领取奖励的玩家进入这个检测范围时，宝库被取消激活。
+*** {{nbt|compound|key_item}}：（默认为[[试炼钥匙]]）解锁宝库所需的物品。如果此项不存在则无法使用任何物品解锁宝库。
+**** {{nbt inherit/itemnoslot}}
+*** {{nbt|string|loot_table}}：（默认为<code>chests/trial_chambers/reward</code>）宝库使用的战利品表的[[命名空间ID]]。
+*** {{nbt|string|override_loot_table_to_display}}：覆盖奖励战利品表，设置用于展示物品的战利品表。
+** {{nbt|compound|server_data|existonsave=1}}：服务端用于计算宝库行为的数据。
+*** {{nbt|list|items_to_eject}}：将要喷出的奖励物品。
+**** {{nbt|compound}}：一项奖励物品。
+***** {{nbt inherit/itemnoslot}}
+*** {{nbt|list|rewarded_players}}：已经接受奖励的玩家列表，总长度不会超过128。
+**** {{nbt|int-array}}：玩家的[[UUID]]。
+*** {{nbt|long|state_updating_resumes_at}}：下一次更新宝库状态的时间。此项不存在时游戏默认为0。
+*** {{nbt|int|total_ejections_needed}}：本次奖励中将要喷出的奖励物品总数。此项不存在时游戏默认为0。
+** {{nbt|compound|shared_data|existonsave=1}}：客户端用于渲染宝库的数据。
+*** {{nbt|double|connected_particles_range}}：（默认为4.5）在此范围内与宝库相关联的玩家可以渲染相应的粒子。
+*** {{nbt|list|connected_players}}：与这个宝库相关联的玩家。
+**** {{nbt|int-array}}：玩家的[[UUID]]。
+*** {{nbt|compound|display_item}}：宝库内渲染的物品。
+**** {{nbt inherit/itemnoslot}}
+</div><noinclude>
+[[Category:方块实体页面]]
+
+[[en:Vault/BE]]
+[[fr:Coffre-fort/BE]]
+[[ja:宝物庫/BE]]
+</noinclude>

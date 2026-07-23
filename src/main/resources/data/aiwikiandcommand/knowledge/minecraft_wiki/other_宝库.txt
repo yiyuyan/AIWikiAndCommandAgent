@@ -1,0 +1,487 @@
+# 页面: 宝库
+# 来源: https://zh.minecraft.wiki/w/%E5%AE%9D%E5%BA%93
+# 分类: 
+# 抓取时间: 2026-07-14 17:25:13
+# 原始 Wikitext 内容:
+
+{{For|不祥变种|不祥宝库|试炼密室中有着相似纹理、会生成生物的方块|试炼刷怪笼}}
+{{Hatnote|如无特殊说明，下文中的“宝库”一词均不包括“不祥宝库”。}}
+{{Infobox block
+|group1=激活
+|1-1=Vault.png
+|group2=被解锁
+|2-1=Unlocking Vault.png
+|group3=喷出物品
+|3-1=Ejecting Vault.png
+|group4=未激活
+|4-1=Inactive Vault.png
+|invimage1=Vault
+|invimage2=----
+|invimage3=Vault BE
+|light = 
+'''未激活时'''：6<br>
+'''其他'''：12
+}}
+
+'''宝库（Vault）'''是一种生成在[[试炼密室]]中的方块，被[[试炼钥匙]]解锁后会喷出战利品。
+
+== 生成 ==
+{{Hatnote|注：方块每层分布中的“宝库”指的是方块ID为{{cd|minecraft:vault}}的所有方块，即包括宝库和不祥宝库。}}
+=== 自然生成 ===
+[[File:Vaultrender3.png|thumb|200px|[[试炼密室]]中未被激活的宝库]]
+宝库自然生成于[[试炼密室]]的入口、决斗室、Encounter和柱廊结构中。
+
+{{Block distribution}}
+
+== 获取 ==
+{{see also|Tutorial:获取任意物品}}
+宝库无法在未开启[[作弊]]的[[生存模式]]的世界中获取。使用[[创造模式]]或启用[[作弊]]，宝库可以通过[[创造模式物品栏]]、[[创造模式]]中使用{{ctrl|选取方块}}或[[命令]]等方式获得。
+
+== 破坏 ==
+没有工具可以加速对宝库的挖掘。
+
+{{Breaking table}}
+
+宝库被破坏后不会掉落。
+
+== 用途 ==
+{{see also|不祥宝库#用途}}
+
+未激活的宝库的半径4格内存在可以解锁该宝库的玩家时，它会被激活并播放燃起音效；激活的宝库的半径4.5格内不存在可以解锁该宝库的玩家时，宝库又会熄灭。
+
+宝库从未激活状态转为激活状态时，[[亮度]]会增加，其下端的灰色边角和正面的双眼纹理变为橙色，正面的嘴部纹理向下张开，并且有[[粒子#vault_connection|微小的橙色粒子]]从玩家身上运动到宝库的嘴部。此外，宝库的内部会出现火焰粒子和展示其战利品表的旋转[[物品实体]]，每秒随机更换一次物品，此时展示的物品与实际喷出的战利品无关。
+
+=== 光源 ===
+未激活的宝库会发出[[亮度]]等级为6的光。
+
+激活的宝库会发出亮度等级为12的光。
+
+=== 解锁战利品 ===
+对激活的宝库{{ctrl|使用}}[[试炼钥匙]]可以将其解锁。
+
+宝库会在方块实体数据中存储最后128-{}-位解锁了宝库的玩家，只有不在该记录中的玩家可以解锁宝库。在记录长度达到128时，解锁宝库会在添加新记录时删除最早的记录，使被删除了记录的玩家可以再次解锁这个宝库。<ref name="MC-274049">{{bug|MC-274049|||WAI}}</ref><ref name="MCPE-226578">{{bug|MCPE-226578|||WAI}}</ref>
+
+解锁宝库会消耗一个试炼钥匙，接着宝库张开的嘴会合上，宝库的内部展示的物品实体立刻更新为即将喷出的战利品，随后顶部的闸门开启。闸门开启时，宝库的内部展示的物品实体为下一次即将喷出的战利品，{{convert|1|sec}}后喷出战利品，并更新宝库内部展示的物品，以此循环，直到战利品投掷完毕，宝库内部不再展示物品，闸门关闭。
+
+每次解锁时，宝库都会从[[战利品表]]中随机抽取物品，具体如下：
+* 首先，有80%的概率从稀有战利品表抽取1次，20%概率从普通战利品表抽取1次；
+* 总是从普通战利品表抽取1-3次；
+* 有25%的成功概率从独有战利品表抽取1次。
+
+解锁宝库后，宝库的战利品会按照以下顺序从内部展示并且喷出：
+如果有抽取到独有战利品表，那么首先喷出的将会是1个独有战利品，其次是1～3个普通战利品，否则，首先喷出的将会是1～3个普通战利品，普通战利品喷完后，如果有抽取到稀有战利品表，那么最后喷出的将会是1个稀有战利品，否则，会再次喷出1个普通战利品。
+
+{{LootChest|reward_common|reward_rare|reward_unique}}
+{{Loot notelist}}
+
+== 音效 ==
+{{el|je}}：
+{{Sound table
+|sound=Vault break1.ogg
+|sound2=Vault break2.ogg
+|sound3=Vault break3.ogg
+|sound4=Vault break4.ogg
+|subtitle={{tp|subtitles.block.generic.break}}
+|source={{tp|soundCategory.block}}
+|description=破坏方块
+|id=block.vault.break
+|translationkey=subtitles.block.generic.break}}
+{{Sound table
+|sound=Vault step1.ogg
+|sound2=Vault step2.ogg
+|sound3=Vault step3.ogg
+|sound4=Vault step4.ogg
+|sound5=Vault step5.ogg
+|sound6=Vault step6.ogg
+|sound7=Vault step7.ogg
+|sound8=Vault step8.ogg
+|subtitle={{tp|subtitles.block.generic.fall}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=带有摔落伤害时摔落在方块上
+|id=block.vault.fall
+|translationkey=subtitles.block.generic.fall}}
+{{Sound table
+|sound=Vault step1.ogg
+|sound2=Vault step2.ogg
+|sound3=Vault step3.ogg
+|sound4=Vault step4.ogg
+|sound5=Vault step5.ogg
+|sound6=Vault step6.ogg
+|sound7=Vault step7.ogg
+|sound8=Vault step8.ogg
+|subtitle={{tp|subtitles.block.generic.hit}}
+|source={{tp|soundCategory.block}}
+|description=挖掘方块
+|id=block.vault.hit
+|translationkey=subtitles.block.generic.hit}}
+{{Sound table
+|sound=Vault place1.ogg
+|sound2=Vault place2.ogg
+|sound3=Vault place3.ogg
+|sound4=Vault place4.ogg
+|subtitle={{tp|subtitles.block.generic.place}}
+|source={{tp|soundCategory.block}}
+|description=放置方块
+|id=block.vault.place
+|translationkey=subtitles.block.generic.place}}
+{{Sound table
+|sound=Vault step1.ogg
+|sound2=Vault step2.ogg
+|sound3=Vault step3.ogg
+|sound4=Vault step4.ogg
+|sound5=Vault step5.ogg
+|sound6=Vault step6.ogg
+|sound7=Vault step7.ogg
+|sound8=Vault step8.ogg
+|subtitle={{tp|subtitles.block.generic.footsteps}}
+|source=[[声音#实体依赖分类|实体依赖]]
+|description=在方块上行走
+|id=block.vault.step
+|translationkey=subtitles.block.generic.footsteps}}
+{{Sound table
+|sound=Vault ambient1.ogg
+|sound2=Vault ambient2.ogg
+|sound3=Vault ambient3.ogg
+|subtitle={{tp|subtitles.block.vault.ambient}}
+|source={{tp|soundCategory.block}}
+|description=激活时随机播放
+|id=block.vault.ambient
+|translationkey=subtitles.block.vault.ambient}}
+{{Sound table
+|sound=Vault activate.ogg
+|subtitle={{tp|subtitles.block.vault.activate}}
+|source={{tp|soundCategory.block}}
+|description=激活
+|id=block.vault.activate
+|translationkey=subtitles.block.vault.activate}}
+{{Sound table
+|sound=Vault deactivate.ogg
+|subtitle={{tp|subtitles.block.vault.deactivate}}
+|source={{tp|soundCategory.block}}
+|description=取消激活
+|id=block.vault.deactivate
+|translationkey=subtitles.block.vault.deactivate}}
+{{Sound table
+|sound=Vault open shutter.ogg
+|subtitle={{tp|subtitles.block.vault.open_shutter}}
+|source={{tp|soundCategory.block}}
+|description=顶部的闸门开启
+|id=block.vault.open_shutter
+|translationkey=subtitles.block.vault.open_shutter}}
+{{Sound table
+|sound=Trial Spawner close shutter.ogg
+|subtitle={{tp|subtitles.block.vault.close_shutter}}
+|source={{tp|soundCategory.block}}
+|description=顶部的闸门关闭
+|id=block.vault.close_shutter
+|translationkey=subtitles.block.vault.close_shutter}}
+{{Sound table
+|sound=Vault eject1.ogg
+|sound2=Vault eject2.ogg
+|sound3=Vault eject3.ogg
+|subtitle={{tp|subtitles.block.vault.eject_item}}
+|source={{tp|soundCategory.block}}
+|description=喷出战利品
+|id=block.vault.eject_item
+|translationkey=subtitles.block.vault.eject_item}}
+{{Sound table
+|sound=Vault insert.ogg
+|subtitle={{tp|subtitles.block.vault.insert_item}}
+|source={{tp|soundCategory.block}}
+|description=使用试炼钥匙解锁
+|id=block.vault.insert_item
+|translationkey=subtitles.block.vault.insert_item}}
+{{Sound table
+|sound=Vault insert fail.ogg
+|subtitle={{tp|subtitles.block.vault.insert_item_fail}}
+|source={{tp|soundCategory.block}}
+|description=使用其他物品解锁
+|id=block.vault.insert_item_fail
+|translationkey=subtitles.block.vault.insert_item_fail}}
+{{Sound table
+|sound=Vault reject rewarded player.ogg
+|subtitle={{tp|subtitles.block.vault.reject_rewarded_player}}
+|source={{tp|soundCategory.block}}
+|description=拒绝已打开过宝库的玩家
+|id=block.vault.reject_rewarded_player
+|translationkey=subtitles.block.vault.reject_rewarded_player
+|foot=1}}
+
+{{el|be}}：
+{{Sound table
+|bedrock=1
+|sound=Vault break1.ogg
+|sound2=Vault break2.ogg
+|sound3=Vault break3.ogg
+|sound4=Vault break4.ogg
+|description=破坏方块
+|source=方块
+|id=vault.break
+|typeid=break
+|soundpitch=0.8}}
+{{Sound table
+|sound=Vault place1.ogg
+|sound2=Vault place2.ogg
+|sound3=Vault place3.ogg
+|sound4=Vault place4.ogg
+|description=放置方块
+|source=方块
+|id=vault.place
+|typeid=place
+|soundpitch=0.8}}
+{{Sound table
+|sound=Vault step1.ogg
+|sound2=Vault step2.ogg
+|sound3=Vault step3.ogg
+|sound4=Vault step4.ogg
+|sound5=Vault step5.ogg
+|sound6=Vault step6.ogg
+|sound7=Vault step7.ogg
+|sound8=Vault step8.ogg
+|description=挖掘方块
+|source=方块
+|id=vault.hit
+|typeid=hit
+|soundpitch=0.5}}
+{{Sound table
+|sound=Vault step1.ogg
+|sound2=Vault step2.ogg
+|sound3=Vault step3.ogg
+|sound4=Vault step4.ogg
+|sound5=Vault step5.ogg
+|sound6=Vault step6.ogg
+|sound7=Vault step7.ogg
+|sound8=Vault step8.ogg
+|description=带有摔落伤害时摔落在方块上
+|source=方块
+|id=vault.step
+|typeid=fall
+|soundvolume=0.4}}
+{{Sound table
+|sound=Vault step1.ogg
+|sound2=Vault step2.ogg
+|sound3=Vault step3.ogg
+|sound4=Vault step4.ogg
+|sound5=Vault step5.ogg
+|sound6=Vault step6.ogg
+|sound7=Vault step7.ogg
+|sound8=Vault step8.ogg
+|description=在方块上行走
+|source=方块
+|id=vault.step
+|typeid=step
+|soundvolume=0.15}}
+{{Sound table
+|sound=Vault step1.ogg
+|sound2=Vault step2.ogg
+|sound3=Vault step3.ogg
+|sound4=Vault step4.ogg
+|sound5=Vault step5.ogg
+|sound6=Vault step6.ogg
+|sound7=Vault step7.ogg
+|sound8=Vault step8.ogg
+|description=从方块上跳跃
+|source=方块
+|id=vault.step
+|typeid=jump
+|soundvolume=0.12}}
+{{Sound table
+|sound=Vault step1.ogg
+|sound2=Vault step2.ogg
+|sound3=Vault step3.ogg
+|sound4=Vault step4.ogg
+|sound5=Vault step5.ogg
+|sound6=Vault step6.ogg
+|sound7=Vault step7.ogg
+|sound8=Vault step8.ogg
+|description=在方块上着陆
+|source=方块
+|id=vault.step
+|typeid=land
+|soundvolume=0.2}}
+{{Sound table
+|sound=Vault ambient1.ogg
+|sound2=Vault ambient2.ogg
+|sound3=Vault ambient3.ogg
+|source=方块
+|description=激活时随机播放
+|id=vault.ambient
+|typeid=vault.ambient
+|soundvolume=0.75-1.0
+|soundpitch=0.5-1.5}}
+{{Sound table
+|sound=Vault activate.ogg
+|source=方块
+|description=激活
+|id=vault.activate
+|typeid=vault.activate
+|soundpitch=0.76-1.14}}
+{{Sound table
+|sound=Vault deactivate.ogg
+|source=方块
+|description=取消激活
+|id=vault.deactivate
+|typeid=vault.deactivate
+|soundpitch=0.8-1.2}}
+{{Sound table
+|sound=Vault open shutter.ogg
+|source=方块
+|description=顶部的闸门开启
+|id=vault.open_shutter
+|typeid=vault.open_shutter}}
+{{Sound table
+|sound=Trial Spawner close shutter.ogg
+|source=方块
+|description=顶部的闸门关闭
+|id=vault.close_shutter
+|typeid=vault.close_shutter}}
+{{Sound table
+|sound=Vault eject1.ogg
+|sound2=Vault eject2.ogg
+|sound3=Vault eject3.ogg
+|source=方块
+|description=喷出战利品
+|id=vault.eject_item
+|typeid=vault.eject_item
+|soundpitch=0.8-1.1}}
+{{Sound table
+|sound=Vault insert.ogg
+|source=方块
+|description=使用试炼钥匙解锁
+|id=vault.insert_item
+|typeid=vault.insert_item
+|soundpitch=0.8-1.1}}
+{{Sound table
+|sound=Vault insert fail.ogg
+|source=方块
+|description=使用其他物品解锁
+|id=vault.insert_item_fail
+|typeid=vault.insert_item_fail
+|soundpitch=0.8-1.1}}
+{{Sound table
+|sound=Vault reject rewarded player.ogg
+|source=方块
+|description=拒绝已打开过宝库的玩家
+|id=vault.reject_rewarded_player
+|typeid=vault.reject_rewarded_player
+|foot=1}}
+
+== 数据值 ==
+=== ID ===
+{{el|je}}：
+{{ID table
+|generatetranslationkeys=java
+|Vault
+|spritetype=block
+|nameid=vault
+|showblocktags=je
+|blocktags={{GameTag|block|vault}}
+|foot=1}}
+{{ID table
+|displayname=方块实体
+|spritename=vault
+|spritetype=block
+|nameid=vault
+|foot=1}}
+
+{{el|be}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|Vault
+|spritetype=block
+|nameid=vault
+|showblocktags=be
+|blocktags={{GameTagBE|block|vault}}
+|foot=1
+}}
+{{ID table
+|notnamespaced=y
+|displayname=方块实体
+|spritename=vault
+|spritetype=block
+|nameid=Vault
+|foot=1
+}}
+
+=== 方块状态 ===
+{{see also|方块状态}}
+{{Block states table}}
+
+=== 方块实体 ===
+{{see also|方块实体}}
+
+每个宝库都有相对应的方块实体，储存了关于宝库的附加数据。
+
+{{el|je}}：
+{{see also|方块实体数据格式}}
+{{/BE}}
+
+{{el|be}}：
+{{see also|基岩版存档格式/方块实体格式}}
+
+== 进度 ==
+{{Load advancements|adventure.under_lock_and_key}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine||2024年1月26日|link=https://www.youtube.com/watch?v=gbCSAffHr0w|在[[Minecraft Monthly]]上公布了宝库。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.20.5|exp=update_1_21|dev=24w05a|[[File:Vault JE1 BE1.png|32px]] [[File:Unlocking Vault JE1 BE1.png|32px]] [[File:Ejecting Vault JE1 BE1.png|32px]] [[File:Inactive Vault JE1 BE1.png|32px]] 加入了宝库。}}
+|{{HistoryLine|||dev=24w06a|[[File:Vault JE2 BE2.png|32px]] [[File:Unlocking Vault JE2 BE2.png|32px]] [[File:Ejecting Vault JE2 BE2.png|32px]] [[File:Inactive Vault JE2 BE2.png|32px]] 更改了宝库的纹理，以区别于试炼刷怪笼。}}
+|{{HistoryLine|||dev=24w09a|[[File:Vault JE3 BE3.png|32px]] [[File:Unlocking Vault JE3 BE3.png|32px]] [[File:Ejecting Vault JE3 BE3.png|32px]] [[File:Inactive Vault JE3 BE3.png|32px]] 再次更改了宝库的纹理，以进一步区别于试炼刷怪笼。}}
+|{{HistoryLine|||dev=24w10a|[[File:Inactive Vault JE4.png|32px]] 更改了未激活状态下宝库的纹理，以消除正面不一致的像素。}}
+|{{HistoryLine|||dev=24w11a|将宝库战利品表拆分为“普通”“稀有”和“独有”，并更改了一些抽取项。}}
+|{{HistoryLine|||dev=24w13a|加入了方块属性<code>ominous</code>，为<code>true</code>时其会渲染为[[不祥宝库]]。
+|[[File:Vault JE4 BE4.png|32px]] [[File:Unlocking Vault JE4 BE4.png|32px]] [[File:Ejecting Vault JE4 BE4.png|32px]] [[File:Inactive Vault JE5 BE4.png|32px]] 更改了宝库的纹理。
+|向宝库的战利品表中添加了[[不祥之瓶]]（I-II）和[[三叉戟]]，并移除了涡流[[旗帜图案]]、涡流盔甲纹饰[[锻造模板]]和[[沉重核心]]。}}
+|{{HistoryLine|||dev=pre1|[[File:Vault JE5 BE5.png|32px]] [[File:Unlocking Vault JE5 BE5.png|32px]] [[File:Ejecting Vault JE5 BE5.png|32px]] [[File:Inactive Vault JE6 BE5.png|32px]] 更改了宝库的纹理。}}
+|{{HistoryLine||1.21|dev=24w18a|宝库不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21.2|dev=24w40a|宝库不再需要木质工具或品质更好的工具来挖掘。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.20.70|exg=1.21|dev=1.20.70.21|[[File:Vault JE1 BE1.png|32px]] [[File:Unlocking Vault JE1 BE1.png|32px]] [[File:Ejecting Vault JE1 BE1.png|32px]] [[File:Inactive Vault JE1 BE1.png|32px]] 加入了宝库。}}
+|{{HistoryLine|||dev=1.20.70.22|[[File:Vault JE2 BE2.png|32px]] [[File:Unlocking Vault JE2 BE2.png|32px]] [[File:Ejecting Vault JE2 BE2.png|32px]] [[File:Inactive Vault JE2 BE2.png|32px]] 更改了宝库的纹理，以区别于试炼刷怪笼。}}
+|{{HistoryLine||1.20.80|exg=1.21|dev=1.20.80.20|[[File:Vault JE3 BE3.png|32px]] [[File:Unlocking Vault JE3 BE3.png|32px]] [[File:Ejecting Vault JE3 BE3.png|32px]] [[File:Inactive Vault JE3 BE3.png|32px]] 再次更改了宝库的纹理，以进一步区别于试炼刷怪笼。}}
+|{{HistoryLine|||dev=1.20.80.22|将宝库战利品表拆分为“普通”“稀有”和“独有”，并更改了一些抽取项。}}
+|{{HistoryLine||1.21.0|exg=1.21|dev=1.21.0.20|[[File:Vault JE4 BE4.png|32px]] [[File:Unlocking Vault JE4 BE4.png|32px]] [[File:Ejecting Vault JE4 BE4.png|32px]] [[File:Inactive Vault JE5 BE4.png|32px]] 更改了宝库的纹理。
+|向宝库的战利品表中添加了[[剧毒之箭]]、[[不祥之瓶]]（I-II）和[[三叉戟]]，并移除了[[伤害之箭]]、涡流[[旗帜图案]]、涡流盔甲纹饰[[锻造模板]]和[[沉重核心]]。}}
+|{{HistoryLine|||exg=none|dev=1.21.0.22|宝库不再属于[[实验性玩法]]。
+|[[File:Vault JE5 BE5.png|32px]] [[File:Unlocking Vault JE5 BE5.png|32px]] [[File:Ejecting Vault JE5 BE5.png|32px]] [[File:Inactive Vault JE6 BE5.png|32px]] 更改了宝库的纹理。}}
+|{{HistoryLine|||dev=1.21.0.23|更改了宝库的战利品表以近似匹配{{el|je}}。}}
+}}
+
+== 你知道吗 ==
+* 宝库可以被每个玩家打开无限次数<ref name="MC-274049"/><ref name="MCPE-226578"/>，这与Mojang声称的“每个宝库只能被每个玩家打开一次”相悖。
+** 由于[[试炼钥匙]]和[[不祥试炼钥匙]]是[[可再生资源]]，所以通过宝库和[[不祥宝库]]获取物品是一种可再生的获取方式。这也是[[钻石]]、[[附魔金苹果]]、[[沉重核心]]、[[涡流旗帜图案]]、[[旋风旗帜图案]]和[[风爆]][[附魔书]]唯一的[[可再生资源#宝库战利品|可再生获取方式]]。
+* 据开发者透露，宝库的灵感来源于扭蛋机。<ref>https://www.youtube.com/watch?v=bBr8BBrk1v8</ref>
+
+== 画廊 ==
+<gallery>
+Vault and Trial Key.png|宝库和[[试炼钥匙]]
+</gallery>
+
+=== 渲染图 ===
+<gallery>
+Trial Vault 2.png|[[24w13a]]之前的[[试炼密室]]中的宝库结构
+</gallery>
+
+=== 概念艺术 ===
+<gallery>
+Vault concept art.png|宝库的概念艺术
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox blocks|functional blocks}}
+
+[[de:Tresor]]
+[[en:Vault]]
+[[es:Arca]]
+[[fr:Coffre-fort]]
+[[ja:宝物庫]]
+[[ko:금고]]
+[[pl:Skarbiec]]
+[[pt:Cofre]]
+[[ru:Хранилище]]
+[[uk:Сховище]]

@@ -1,0 +1,131 @@
+# 页面: 命令/fill
+# 来源: https://zh.minecraft.wiki/w/%E5%91%BD%E4%BB%A4/fill
+# 分类: Java版独有信息, 命令, 基岩版独有信息, 有未知版本的History模板的页面/基岩版
+# 抓取时间: 2026-07-14 17:22:08
+# 原始 Wikitext 内容:
+
+{{Infobox command
+|name=fill
+|oplevel=2\1
+|becheat=1
+}}
+
+用特定方块填充一个区域的全部或部分。
+
+== 语法 ==
+* '''Java版'''
+: <code>fill <from> <to> <block> [outline|hollow|destroy|strict|replace|keep]</code>
+: <code>fill <from> <to> <block> replace <filter> [outline|hollow|destroy|strict]</code>
+
+* '''基岩版'''
+
+: <code>fill <from: x y z> <to: x y z> <tileName: Block> <blockStates: block states> [oldBlockHandling: FillMode]</code>
+
+: <code>fill <from: x y z> <to: x y z> <tileName: Block> [oldBlockHandling: FillMode]</code>
+
+<hr>
+
+:当<code>oldBlockHandling: FillMode</code>使用<code>replace</code>参数时的语法：
+
+: <code>fill <from: x y z> <to: x y z> <tileName: Block> <blockStates: block states> replace [replaceTileName: Block] [replaceBlockStates: block states]</code>
+
+: <code>fill <from: x y z> <to: x y z> <tileName: Block> replace [replaceTileName: Block] [replaceBlockStates: block states]</code>
+
+== 参数 ==
+{{el|je|short=1}}：{{argument|from|block_pos}}和{{argument|to|block_pos}}<br>
+{{el|be|short=1}}：{{argument|be=1|from: x y z|CommandPosition}}和{{argument|be=1|to: x y z|CommandPosition}}
+: 定义填充区域的两组对角方块坐标。
+: {{arg desc|je=block_pos|be=CommandPosition}}
+: 构成边角的方块在此方块的坐标正方向上延伸。因此，各轴上较小的坐标将会正好贴合区域边界，但较大的坐标将会超过边界1方块，源区域的体积则为(x<sub>大</sub> - x<sub>小</sub> + 1) × (y<sub>大</sub> - y<sub>小</sub> + 1) × (z<sub>大</sub> - z<sub>小</sub> + 1)。例如：<code>0 0 0 0 0 0</code>的体积为1方块，<code>0 0 0 1 1 1</code>与<code>1 1 1 0 0 0</code>都指定同一块8方块大小的区域。
+
+{{argument|block|block_state|tileName: Block|Block}}
+: 指定用于填充该区域的方块。
+: {{arg desc|je=block_state|be=Block}}
+
+{{el|be|short=1}}：{{argument|be=1|blockStates: block states|BlockStateCommandParam}}
+: 指定方块要使用的[[方块状态]]。
+: {{Arg desc|be=BlockStateCommandParam}}
+
+[[File:Command fill "destroy".jpg|缩略图|用destroy填充[[空气]]]]
+[[File:Command fill "hollow".jpg|缩略图|用hollow填充[[玻璃]]]]
+[[File:Command fill "outline".jpg|缩略图|用outline填充[[玻璃]]]]
+{{el|je|short=1}}：{{cd|d=pretty|outline{{!}}hollow{{!}}destroy{{!}}strict{{!}}replace{{!}}keep|replace|outline{{!}}hollow{{!}}destroy{{!}}strict}}<br>
+{{el|be|short=1}}：{{argument|be=1|oldBlockHandling: FillMode}}
+: 指定方块更改的处理方式，必须为以下其中之一：
+:* <code>destroy</code> — 用指定方块替换填充区域内所有方块（包括空气），原有方块视为被无附魔的下界合金[[锹]]或[[镐]]采掘而掉落对应的物品实体形式。（这意味着只能被[[剪刀]]采集的方块，如[[藤蔓]]，不会掉落；流体方块同理。）
+:* <code>hollow</code> — 仅用指定方块替换填充区域外层的方块。内部方块被替换为空气。若被填充的区域没有内部（长、宽、高至少一个不足3方格）时，与默认效果相似。
+:* <code>outline</code> — 仅用指定方块替换填充区域外层的方块。内部方块不受影响。若被填充的区域没有内部（长、宽、高至少一个不足3方格）时，与默认效果相似。
+:* <code>keep</code> — 仅用指定方块替换填充区域内的空气方块。
+:* <code>replace</code> — 单独使用时与默认效果相同，但在其后指定<code><filter></code>{{only|je|short=1}}或<code>tileName: Block</code>{{only|be|short=1}}可限制被替换的方块类型。
+:* <code>strict</code>{{only|je}} — 在放置方块时不触发自身及紧挨着的方块的方块更新和形状更新。
+: 若未指定，默认用指定方块替换填充区域内所有方块（包括空气），而不以实体形式掉落被替换的方块和方块内容物。
+
+{{argument|filter|block_predicate|tileName: Block|Block}}
+: 指定将要替换的方块。若未指定，将替换填充区域内的所有方块。
+: {{arg desc|je=block_predicate|be=Block}}
+
+{{el|be|short=1}}：{{argument|be=1|replaceBlockStates: block states|block states}}
+: 指定要替换的方块的方块状态。
+
+== 结果 ==
+{{Result table}}
+{{Result table|参数不正确|unparseable|unparseable}}
+{{Result table|至少一个指定的坐标位于世界外或未被加载|fail|fail}}
+{{Result table|填充区域方块数大于{{only|be|for=32768}}或<br>{{only|je|for={{gamerule|max_block_modifications}}的设定值}}}}
+{{Result table|cmd=/fill ... hollow<br>/fill ... keep<br>/fill ... outline<br>/fill ... replace ...<br>/fill ... strict|没有方块被更改}}
+{{Result table|cmd=/fill ... destroy|在原区域均为空气的情况下尝试填充空气}}
+{{Result table|cmd=|succeed}}
+{{Result table}}
+
+== 输出 ==
+{{Output table}}
+{{Output table|edition=je|执行失败|0|0|0}}
+{{Output table|执行成功|1|1|填充区域内被更改的方块数}}
+{{Output table|cmd=|edition=be|执行失败|0}}
+{{Output table|执行成功|1}}
+{{Output table}}
+
+== 示例 ==
+* <code>/fill 52 63 -1516 33 73 -1536 gold_block replace white_concrete</code>
+** 在指定坐标的区域内将[[白色混凝土]]替换为[[金块]]。
+* <code>/fill ~-3 ~-3 ~-3 ~3 ~-1 ~3 water</code>
+** 将玩家脚下为顶面中心7×3×7的区域替换为[[水]]。
+* <code>/fill ~-3 ~ ~-4 ~3 ~4 ~4 oak_planks hollow</code>
+** 在玩家四周生成由[[橡木木板]]组成的一个普通房间大小的盒子，并将内部替换为[[空气]]。
+* <code>/fill ~-15 ~-15 ~-15 ~15 ~15 ~15 stone</code>
+** 以玩家为中心生成一个实心的[[石头]]立方体。
+* <code>/fill ~ ~ ~ ~9 ~9 ~9 glass outline</code>
+** 在玩家所处位置上生成一个10×10×10的[[玻璃]]罩，并保留内部结构。
+* <code>/fill ~-1 ~ ~ ~1 ~ ~ prismarine_brick_stairs[facing=south,waterlogged=true]</code>{{only|Java}}
+** 将玩家周围指定位置的方块替换为面向南方且含水的[[海晶石砖楼梯]]。
+* <code>/fill ~-16 ~-14 ~-16 ~16 ~14 ~16 sandstone["sand_stone_type"="heiroglyphs"] replace netherrack</code>{{only|bedrock}}
+** 以玩家为中心将33×29×33区域内的[[下界岩]]替换为[[雕纹砂岩]]。
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.8|dev=14w03a|加入了{{cmd|fill|link=none}}命令。}}
+|{{HistoryLine||1.11|dev=16w32a|加入了[[方块状态]]的支持。}}
+|{{HistoryLine||1.19.4|dev=23w03a|现在可以通过{{cd|commandModificationBlockLimit}}游戏规则控制单次执行可更改的最大方块数。}}
+|{{HistoryLine||1.21.5|dev=25w02a|更改了处理方块实体数据的方式。
+|现在{{cd|replace}}选项可以在后面附加额外选项。
+|加入了{{cd|strict}}选项。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|加入了{{cmd|fill|link=none}}命令。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.2.0|dev=?|{{cmd|fill|link=none}}命令可更改的最大方块数现在为32768。}}
+|{{HistoryLine||1.16.210|dev=1.16.210.53|加入了{{cmd|fill|link=none}}中对[[方块状态]]的支持。}}
+|{{HistoryLine||1.19.70|dev=1.19.70.21|移除了{{cd|tileData: int}}和{{cd|replaceDataValue: int}}参数。}}
+}}
+
+== 导航 ==
+{{Navbox commands}}
+
+[[de:Befehl/fill]]
+[[en:Commands/fill]]
+[[es:Comandos/fill]]
+[[fr:Commandes/fill]]
+[[ja:コマンド/fill]]
+[[pt:Comandos/fill]]
+[[ru:Команды консоли/fill]]
+[[uk:Команди консолі/fill]]

@@ -1,0 +1,816 @@
+# 页面: 废弃传送门
+# 来源: https://zh.minecraft.wiki/w/%E5%BA%9F%E5%BC%83%E4%BC%A0%E9%80%81%E9%97%A8
+# 分类: Java版独有信息, 使用计算器的页面, 基岩版独有信息, 嵌入Bilibili视频的页面, 已过期的视频, 生成结构, 需要信息
+# 抓取时间: 2026-07-14 17:25:49
+# 原始 Wikitext 内容:
+
+{{Infobox structure
+| group1= 主世界
+| 1-1= Overworld Ruined Portal 1.png
+| 1-2= Overworld Giant Ruined Portal 1.png
+| group2= 下界
+| 2-1= Nether Ruined Portal 1.png
+| 2-2= Nether Giant Ruined Portal 1.png
+| *-1caption= 小型
+| *-2caption= 大型
+| *-1size= 250px
+| *-2size= 250px
+| biome= 
+{{EnvLink|Overworld}}除[[深暗之域]]之外的所有生物群系<br>{{EnvLink|The Nether}}的所有生物群系
+| blocks= 见{{slink||结构}}
+| id = 见{{slink||数据值}}
+}}
+{{quote|废弃传送门很好认出：它由黑曜石框架构成，一般附有装饰性方块，并且通常被下界岩包围。|[[Duncan Geere]]<ref>{{article|ruined-portal|Building Blocks: Ruined Portal|Dec 4, 2024}}</ref>||Duncan Geere Mojavatar.png}}
+
+'''废弃传送门（Ruined Portal）'''是在[[下界]]和[[主世界]]自然生成的小型结构，外观类似一架饱经沧桑的损坏的[[下界传送门]]，且周围伴有一些装饰。
+
+== 生成 ==
+[[File:Ruined Portal (facing NWU) in water.png|200px|right|thumb|废弃传送门结构的底部]]
+废弃传送门能够生成在[[下界]]和[[主世界]]当中除[[深暗之域]]以外的任何[[生物群系]]。它们既可以直接在地面上生成，也可以在地下、水下和下界的熔岩海下生成。如果废弃传送门生成在地下，则其周围会产生空穴。废弃传送门周围的地面以及正下方的一部分岩层由[[下界岩]]组成，形如钟乳石。
+
+大型废弃传送门有3种变种，而小型则有10种；前者的生成概率一共是5%，每个单独的传送门各1.67%，后者是95%，每个各9.5%。{{more info|平均几个区块会生成一个废弃传送门？}}
+
+废弃传送门在各类生物群系当中的特征如下表所示：
+
+{| class="wikitable" style="text-align:center" data-description="Ruined Portals"
+!rowspan = 2 |
+!colspan = 9 | 生物群系
+|-
+!colspan = 2 | 标准
+![[沙漠]]
+![[丛林]]{{fn|也包括[[稀疏丛林]]和[[竹林]]。}}
+![[沼泽]]{{fn|也包括[[红树林沼泽]]。}}
+!colspan = 2 | 山区{{fn|包括所有[[山地]]类生物群系、[[风袭丘陵]]、[[风袭森林]]、[[风袭沙砾丘陵]]、[[恶地]]、[[疏林恶地]]、[[风蚀恶地]]、[[热带高原]]、[[风袭热带草原]]和[[石岸]]。}}
+![[海洋]]{{fn|包括所有海洋类生物群系。}}
+![[生物群系#下界|下界]]
+|-
+!生成位置
+|地下<br>（50%）
+|地表<br>（50%）
+|半掩埋
+|地表
+|海床
+|山内<br>（50%）
+|地表<br>（50%）
+|海床
+|下界
+|-
+!{{tooltip|生苔率|石质方块被其生苔变种取代的概率}}
+| colspan=2 | 0.2
+|0
+|0.8
+|0.5
+| colspan=2 | 0.2
+|0.8
+|0
+|-
+!{{tooltip|空穴|废弃传送门周围是否产生空穴}}
+|{{tc|yes}}
+|{{tc|partial|50%}}
+|{{tc|no}}
+|{{tc|partial|50%}}
+|{{tc|no}}
+|{{tc|yes}}
+|{{tc|partial|50%}}
+|{{tc|no}}
+|{{tc|partial|50%}}
+|-
+!{{tooltip|树叶|丛林树叶是否会生长在废弃传送门上}}
+|colspan=2 {{tc|no}}
+|{{tc|no}}
+|{{tc|yes}}
+|{{tc|no}}
+|colspan=2 {{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+!{{tooltip|藤蔓|藤蔓是否会生长在废弃传送门上}}
+|colspan = 2 {{tc|no}}
+|{{tc|no}}
+|{{tc|yes}}
+|{{tc|yes}}
+|colspan = 2 {{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|-
+!{{tooltip|黑石|石头和石砖是否会被其黑石变种取代，以及铁栏杆是否会被铁链取代}}
+|colspan = 2 {{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|{{tc|no}}
+|colspan = 2 {{tc|no}}
+|{{tc|no}}
+|{{tc|yes}}
+|}
+
+所有废弃传送门都有最高生成高度''h<sub>max</sub>''和最低生成高度''h<sub>min</sub>''，如果最低生成高度高于最高生成高度，游戏将直接在最高生成高度''h<sub>max</sub>''（即更低的位置）生成废弃传送门。这使得废弃传送门不会完全悬空生成。
+
+生成在地下的废弃传送门的最低生成高度是{{cd|''h<sub>s</sub>''+15}}，最高生成高度是{{cd|''h''-''h<sub>r</sub>''}}，其中''h<sub>s</sub>''是世界最低建筑高度，''h''是该生成位置上最高非空气方块的Y坐标（即地形最高点），''h<sub>r</sub>''是整个废弃传送门的高度。
+
+生成在山内的废弃传送门的最低生成高度是70，最高生成高度是{{cd|''h''-''h<sub>r</sub>''}}。
+
+半掩埋的废弃传送门会生成在Y坐标为{{cd|''h''-''h<sub>r</sub>''}}加上一个2-8之间的随机整数的地方生成。这使得整个结构上端的2-8格会暴露在地表之上。
+
+生成在海床上的废弃传送门最低生成高度是{{cd|''h<sub>s</sub>''+15}}，最高生成高度是{{cd|''h<sub>o</sub>''-''h<sub>r</sub>''}}，其中''h<sub>o</sub>''是该生成位置上最高非阻挡运动方块的Y坐标。
+
+在下界，生成空穴的废弃传送门会生成在Y坐标32-100的区域，而不生成空穴的废弃传送门会生成在Y坐标27-29或29-100之间的区域，且生成在这两个区间的频率皆为50%。
+
+在寒冷（[[温度]]小于0.15）的[[生物群系]]中，废弃传送门结构中所有的[[熔岩]]都会被[[下界岩]]取代。而在海床上生成的结构中，[[熔岩]]会被[[岩浆块]]取代。
+
+废弃传送门中的许多方块都会在结构生成时被随机替换。下表列出了它们与对应的替换方块及替换概率。
+
+{| class="wikitable" style="text-align:center" data-description="Ruined Portals Replacement"
+! 原始方块
+! 替换方块
+! {{tooltip|概率|每个结构内原始方块被替换的概率}}
+|-
+|{{BlockLink|Block of Gold}}
+|{{BlockLink|Air}}
+|30%
+|-
+| rowspan = 2 | {{BlockLink|Lava}}
+|{{BlockLink|Magma Block}}
+|海床：100%<br>非海床：20%<br>寒冷：0%
+|-
+|{{BlockLink|Netherrack}}
+|寒冷：100%<br>非寒冷：0%
+|-
+|{{BlockLink|Netherrack}}{{fn|name=netherrack|这也包括生成时向外延伸出去的下界岩。}}
+|{{BlockLink|Magma Block}}
+|非寒冷：7%<br>寒冷：0%
+|-
+|{{BlockLink|Obsidian}}
+|{{BlockLink|Crying Obsidian}}
+|15%{{only|je}}或20%{{only|be}}
+|-
+| rowspan = 2 |
+{{BlockLink|Stone}}<br>
+{{BlockLink|Stone Bricks}}<br>
+{{BlockLink|Chiseled Stone Bricks}}
+|
+{{BlockLink|Cracked Stone Bricks}}<br>
+{{BlockLink|Stone Brick Stairs}}
+|50%×(1-''生苔率'')
+|-
+|
+{{BlockLink|Mossy Stone Bricks}}<br>
+{{BlockLink|Mossy Stone Brick Stairs}}
+|50%×''生苔率''
+|-
+|任何[[台阶]]
+|{{BlockLink|Mossy Stone Brick Slab}}
+|''生苔率''
+|-
+| rowspan = 2 |任何[[楼梯]]
+|
+{{BlockLink|Stone Slab}}<br>
+{{BlockLink|Stone Brick Slab}}
+|50%×(1-''生苔率'')
+|-
+|
+{{BlockLink|Mossy Stone Brick Stairs}}<br>
+{{BlockLink|Mossy Stone Brick Slab}}
+|50%×''生苔率''
+|-
+|任何[[墙]]
+|{{BlockLink|Mossy Stone Brick Wall}}
+|''生苔率''
+|}
+
+{{Calculator|chunkbase|pois=Rp|zoom=0.25}}
+{{Calculator|chunkbase|dimension=nether|pois=Rpn|zoom=0.25}}
+
+== 结构 ==
+{{Main|废弃传送门/结构}}
+
+废弃传送门的主体是未完成的下界传送门框架，由[[黑曜石]]和[[哭泣的黑曜石]]组成，尽管后者并非用于建造下界传送门的材料。<ref>{{bug|MC-178805|||WAI}}</ref>有些传送门框架生成时会平置在地面，就像是倒塌了一样。
+
+废弃传送门最多会生成1个[[箱子]]（有时候会被[[岩浆块]]替代，如果生成在熔岩内时也可能被熔岩替代），里面储存着各种金质物品，以及能建造下界传送门的物品，如黑曜石、[[打火石]]等。
+
+废弃传送门在主世界生成时会被[[石头]]、[[石砖]]和[[铁栏杆]]组成的结构环绕，在下界生成时则会被[[黑石]]变种和[[铁链]]围住。
+
+如果废弃传送门在水下生成，其附近可能会有[[岩浆块]]，由此产生向下的[[气泡柱]]。
+
+废弃传送门有13个变种：10种一般大小的传送门和3种巨型传送门，其毁坏程度各不相同。
+
+{{IN|Java}}用结构方块生成的废弃传送门会维持原貌，不会有任何方块被随机替代，但如果生成的位置上有方块，则必定产生空穴。
+
+所有变种的废弃传送门结构都不是合法的下界传送门框架。
+
+=== 结构目录 ===
+废弃传送门的结构文件存储在<samp>[[client.jar]]/data/minecraft/structure/ruined_portal</samp>{{only|je}}或<samp>data/behavior_packs/vanilla/structures/ruined_portal</samp>{{only|be}}中。
+{| class="collapsible collapsed collapse-button-none" data-description="结构目录"
+! 结构目录
+|-
+|<div class="file-hierarchy treeview">
+* ruined_portal
+** giant_portal_1.nbt
+** giant_portal_2.nbt
+** giant_portal_3.nbt
+** portal_1.nbt
+** portal_10.nbt
+** portal_2.nbt
+** portal_3.nbt
+** portal_4.nbt
+** portal_5.nbt
+** portal_6.nbt
+** portal_7.nbt
+** portal_8.nbt
+** portal_9.nbt
+
+</div>
+|}
+
+=== 传送门框架 ===
+下表列出了所有原始的废弃传送门结构，请勿与实际生成情况混淆。参见[[#生成|生成]]。
+
+==== 主世界 ====
+{| class="wikitable collapsible"
+! 结构名称
+! 描述
+! 包含
+! 图片
+|-
+|{{cd|ruined_portal/giant_portal_1}}
+|一个大型的、不完整的传送门。
+|
+263 {{BlockLink|Netherrack}}<br>
+63 {{BlockLink|Stone Bricks}}<br>
+38 {{BlockLink|Stone Brick Slab}}<br>
+31 {{BlockLink|Obsidian}}<br>
+20 {{BlockLink|Stone Brick Stairs}}<br>
+18 {{BlockLink|Iron Bars}}<br>
+11 {{BlockLink|Lava}}<br>
+4 {{BlockLink|Chiseled Stone Bricks}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Overworld Giant Ruined Portal 1.png|150px]]
+|-
+|{{cd|ruined_portal/giant_portal_2}}
+|一个大型的、不完整的传送门。
+|
+237 {{BlockLink|Netherrack}}<br>
+55 {{BlockLink|Stone Bricks}}<br>
+30 {{BlockLink|Stone Brick Slab}}<br>
+29 {{BlockLink|Obsidian}}<br>
+22 {{BlockLink|Iron Bars}}<br>
+19 {{BlockLink|Lava}}<br>
+18 {{BlockLink|Stone Brick Stairs}}<br>
+6 {{BlockLink|Chiseled Stone Bricks}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Overworld Giant Ruined Portal 2.png|150px]]
+|-
+|{{cd|ruined_portal/giant_portal_3}}
+|一个大型的、不完整的传送门，含有最多的金块。
+|
+324 {{BlockLink|Netherrack}}<br>
+51 {{BlockLink|Stone Bricks}}<br>
+40 {{BlockLink|Stone Brick Slab}}<br>
+33 {{BlockLink|Lava}}<br>
+25 {{BlockLink|Obsidian}}<br>
+22 {{BlockLink|Iron Bars}}<br>
+6 {{BlockLink|Block of Gold}}<br>
+6 {{BlockLink|Chiseled Stone Bricks}}<br>
+6 {{BlockLink|Stone Brick Stairs}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Overworld Giant Ruined Portal 3.png|150px]]
+|-
+|{{cd|ruined_portal/portal_1}}
+|一个小型的、不完整的传送门，含有石台阶但不含熔岩。
+|
+55 {{BlockLink|Netherrack}}<br>
+11 {{BlockLink|Obsidian}}<br>
+10 {{BlockLink|Stone Slab}}<br>
+9 {{BlockLink|Stone Bricks}}<br>
+7 {{BlockLink|Stone}}<br>
+6 {{BlockLink|Stone Brick Stairs}}<br>
+3 {{BlockLink|Chiseled Stone Bricks}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Cracked Stone Bricks}}<br>
+1 {{BlockLink|Stone Brick Slab}}
+|
+[[File:Overworld Ruined Portal 1.png|150px]]
+|-
+|{{cd|ruined_portal/portal_2}}
+|一个悬挂的、不完整的传送门。
+|
+115 {{BlockLink|Netherrack}}<br>
+26 {{BlockLink|Lava}}<br>
+19 {{BlockLink|Stone Bricks}}<br>
+14 {{BlockLink|Stone Brick Slab}}<br>
+11 {{BlockLink|Obsidian}}<br>
+10 {{BlockLink|Smooth Stone Slab}}<br>
+4 {{BlockLink|Stone Brick Stairs}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+2 {{BlockLink|Iron Bars}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Chiseled Stone Bricks}}<br>
+1 {{BlockLink|Mossy Stone Bricks}}
+|
+[[File:Overworld Ruined Portal 2.png|150px]]
+|-
+|{{cd|ruined_portal/portal_3}}
+|一个小型的、不完整的传送门，不含金块。
+|
+132 {{BlockLink|Netherrack}}<br>
+36 {{BlockLink|Stone Bricks}}<br>
+16 {{BlockLink|Stone Brick Slab}}<br>
+11 {{BlockLink|Obsidian}}<br>
+2 {{BlockLink|Lava}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Overworld Ruined Portal 3.png|150px]]
+|-
+|{{cd|ruined_portal/portal_4}}
+|一个小型的、不完整的传送门。
+|
+130 {{BlockLink|Netherrack}}<br>
+36 {{BlockLink|Stone Bricks}}<br>
+16 {{BlockLink|Stone Brick Slab}}<br>
+11 {{BlockLink|Obsidian}}<br>
+3 {{BlockLink|Lava}}<br>
+1 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Overworld Ruined Portal 4.png|150px]]
+|-
+|{{cd|ruined_portal/portal_5}}
+|一个顶部倒塌的、小型的传送门。
+|
+145 {{BlockLink|Netherrack}}<br>
+22 {{BlockLink|Stone Bricks}}<br>
+15 {{BlockLink|Obsidian}}<br>
+12 {{BlockLink|Stone Brick Slab}}<br>
+6 {{BlockLink|Stone}}<br>
+5 {{BlockLink|Stone Slab}}<br>
+3 {{BlockLink|Block of Gold}}<br>
+2 {{BlockLink|Mossy Stone Bricks}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Cracked Stone Bricks}}<br>
+1 {{BlockLink|Lava}}<br>
+1 {{BlockLink|Stone Brick Stairs}}
+|
+[[File:Overworld Ruined Portal 5.png|150px]]
+|-
+|{{cd|ruined_portal/portal_6}}
+|一个5×5的传送门，传送门顶部缺少一个黑曜石。
+|
+41 {{BlockLink|Netherrack}}<br>
+16 {{BlockLink|Obsidian}}<br>
+4 {{BlockLink|Stone Brick Slab}}<br>
+2 {{BlockLink|Stone Brick Stairs}}<br>
+1 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}<br>
+|
+[[File:Overworld Ruined Portal 6.png|150px]]
+|-
+|{{cd|ruined_portal/portal_7}}
+|一个淹没在熔岩中的、不完整的传送门。
+|
+92 {{BlockLink|Netherrack}}<br>
+21 {{BlockLink|Lava}}<br>
+12 {{BlockLink|Obsidian}}<br>
+3 {{BlockLink|Stone Brick Slab}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Stone Bricks}}<br>
+1 {{BlockLink|Stone Brick Stairs}}
+|
+[[File:Overworld Ruined Portal 7.png|150px]]
+|-
+|{{cd|ruined_portal/portal_8}}
+|一个顶部塌入熔岩的、不完整的传送门。
+|
+144 {{BlockLink|Netherrack}}<br>
+26 {{BlockLink|Lava}}<br>
+17 {{BlockLink|Obsidian}}<br>
+14 {{BlockLink|Stone Bricks}}<br>
+6 {{BlockLink|Stone Brick Stairs}}<br>
+4 {{BlockLink|Stone Brick Wall}}<br>
+3 {{BlockLink|Block of Gold}}<br>
+2 {{BlockLink|Chiseled Stone Bricks}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Stone Brick Slab}}
+|
+[[File:Overworld Ruined Portal 8.png|150px]]
+|-
+|{{cd|ruined_portal/portal_9}}
+|一个小型的、不完整的传送门。
+|
+63 {{BlockLink|Netherrack}}<br>
+12 {{BlockLink|Obsidian}}<br>
+11 {{BlockLink|Stone Brick Stairs}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Magma Block}}<br>
+1 {{BlockLink|Stone Brick Slab}}
+|
+[[File:Overworld Ruined Portal 9.png|150px]]
+|-
+|{{cd|ruined_portal/portal_10}}
+|一个顶部塌入熔岩的、不完整的传送门。
+|
+123 {{BlockLink|Netherrack}}<br>
+19 {{BlockLink|Lava}}<br>
+13 {{BlockLink|Obsidian}}<br>
+13 {{BlockLink|Stone Bricks}}<br>
+3 {{BlockLink|Chiseled Stone Bricks}}<br>
+3 {{BlockLink|Iron Bars}}<br>
+3 {{BlockLink|Stone Brick Stairs}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Overworld Ruined Portal 10.png|150px]]
+|}
+
+==== 下界 ====
+{| class="wikitable collapsible"
+! 结构名称
+! 描述
+! 包含
+! 图片
+|-
+|{{cd|ruined_portal/giant_portal_1}}
+|一个大型的、不完整的传送门。
+|
+263 {{BlockLink|Netherrack}}<br>
+63 {{BlockLink|Polished Blackstone Bricks}}<br>
+38 {{BlockLink|Polished Blackstone Brick Slab}}<br>
+31 {{BlockLink|Obsidian}}<br>
+20 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+18 {{BlockLink|Iron Chain}}<br>
+11 {{BlockLink|Lava}}<br>
+4 {{BlockLink|Chiseled Polished Blackstone}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Nether Giant Ruined Portal 1.png|center|150px]]
+|-
+|{{cd|ruined_portal/giant_portal_2}}
+|一个大型的、不完整的传送门。
+|
+237 {{BlockLink|Netherrack}}<br>
+55 {{BlockLink|Polished Blackstone Bricks}}<br>
+30 {{BlockLink|Polished Blackstone Brick Slab}}<br>
+29 {{BlockLink|Obsidian}}<br>
+22 {{BlockLink|Iron Chain}}<br>
+19 {{BlockLink|Lava}}<br>
+18 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+6 {{BlockLink|Chiseled Polished Blackstone}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Nether Giant Ruined Portal 2.png|center|150px]]
+|-
+|{{cd|ruined_portal/giant_portal_3}}
+|一个大型的、不完整的传送门，含有最多的金块。
+|
+324 {{BlockLink|Netherrack}}<br>
+51 {{BlockLink|Polished Blackstone Bricks}}<br>
+40 {{BlockLink|Polished Blackstone Brick Slab}}<br>
+33 {{BlockLink|Lava}}<br>
+25 {{BlockLink|Obsidian}}<br>
+22 {{BlockLink|Iron Chain}}<br>
+6 {{BlockLink|Block of Gold}}<br>
+6 {{BlockLink|Chiseled Polished Blackstone}}<br>
+6 {{BlockLink|Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Nether Giant Ruined Portal 3.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_1}}
+|一个小型的、不完整的传送门，含有磨制黑石台阶但不含熔岩。
+|
+55 {{BlockLink|Netherrack}}<br>
+11 {{BlockLink|Obsidian}}<br>
+10 {{BlockLink|Polished Blackstone Slab}}<br>
+9 {{BlockLink|Polished Blackstone Bricks}}<br>
+7 {{BlockLink|Polished Blackstone}}<br>
+6 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+3 {{BlockLink|Chiseled Polished Blackstone}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Polished Blackstone Brick Slab}}
+|
+[[File:Nether Ruined Portal 1.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_2}}
+|一个悬挂的、不完整的传送门。
+|
+115 {{BlockLink|Netherrack}}<br>
+26 {{BlockLink|Lava}}<br>
+20 {{BlockLink|Polished Blackstone Bricks}}<br>
+14 {{BlockLink|Polished Blackstone Slab}}<br>
+11 {{BlockLink|Obsidian}}<br>
+10 {{BlockLink|Polished Blackstone Slab}}<br>
+4 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+2 {{BlockLink|Iron Chain}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Chiseled Polished Blackstone}}<br>
+|
+[[File:Nether Ruined Portal 2.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_3}}
+|一个小型的、不完整的传送门，不含金块。
+|
+132 {{BlockLink|Netherrack}}<br>
+36 {{BlockLink|Polished Blackstone Bricks}}<br>
+16 {{BlockLink|Polished Blackstone Brick Slab}}<br>
+11 {{BlockLink|Obsidian}}<br>
+2 {{BlockLink|Lava}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Nether Ruined Portal 3.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_4}}
+|一个小型的、不完整的传送门。
+|
+130 {{BlockLink|Netherrack}}<br>
+36 {{BlockLink|Polished Blackstone Bricks}}<br>
+16 {{BlockLink|Polished Blackstone Brick Slab}}<br>
+11 {{BlockLink|Obsidian}}<br>
+3 {{BlockLink|Lava}}<br>
+1 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Nether Ruined Portal 4.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_5}}
+|一个顶部倒塌的、小型的传送门。
+|
+145 {{BlockLink|Netherrack}}<br>
+24 {{BlockLink|Polished Blackstone Bricks}}<br>
+15 {{BlockLink|Obsidian}}<br>
+12 {{BlockLink|Polished Blackstone Brick Slab}}<br>
+6 {{BlockLink|Polished Blackstone}}<br>
+5 {{BlockLink|Polished Blackstone Slab}}<br>
+3 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Cracked Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Lava}}<br>
+1 {{BlockLink|Polished Blackstone Brick Stairs}}
+|
+[[File:Nether Ruined Portal 5.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_6}}
+|一个5×5的传送门，传送门顶部缺少一个黑曜石。
+|
+41 {{BlockLink|Netherrack}}<br>
+16 {{BlockLink|Obsidian}}<br>
+4 {{BlockLink|Polished Blackstone Brick Slab}}<br>
+2 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+1 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}<br>
+|
+[[File:Nether Ruined Portal 6.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_7}}
+|一个淹没在熔岩中的、不完整的传送门。
+|
+92 {{BlockLink|Netherrack}}<br>
+21 {{BlockLink|Lava}}<br>
+12 {{BlockLink|Obsidian}}<br>
+3 {{BlockLink|Polished Blackstone Brick Slab}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Polished Blackstone Bricks}}<br>
+1 {{BlockLink|Polished Blackstone Brick Stairs}}
+|
+[[File:Nether Ruined Portal 7.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_8}}
+|一个顶部塌入熔岩的、不完整的传送门。
+|
+144 {{BlockLink|Netherrack}}<br>
+26 {{BlockLink|Lava}}<br>
+17 {{BlockLink|Obsidian}}<br>
+14 {{BlockLink|Polished Blackstone Bricks}}<br>
+6 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+4 {{BlockLink|Polished Blackstone Brick Wall}}<br>
+3 {{BlockLink|Block of Gold}}<br>
+2 {{BlockLink|Chiseled Polished Blackstone}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Polished Blackstone Slab}}
+|
+[[File:Nether Ruined Portal 8.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_9}}
+|一个小型的、不完整的传送门。
+|
+63 {{BlockLink|Netherrack}}<br>
+11 {{BlockLink|Obsidian}}<br>
+11 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}<br>
+1 {{BlockLink|Magma Block}}<br>
+1 {{BlockLink|Polished Blackstone Brick Slab}}
+|
+[[File:Nether Ruined Portal 9.png|center|150px]]
+|-
+|{{cd|ruined_portal/portal_10}}
+|一个顶部塌入熔岩的、不完整的传送门。
+|
+123 {{BlockLink|Netherrack}}<br>
+19 {{BlockLink|Lava}}<br>
+13 {{BlockLink|Obsidian}}<br>
+13 {{BlockLink|Polished Blackstone Bricks}}<br>
+3 {{BlockLink|Chiseled Polished Blackstone}}<br>
+3 {{BlockLink|Iron Chain}}<br>
+3 {{BlockLink|Polished Blackstone Brick Stairs}}<br>
+2 {{BlockLink|Block of Gold}}<br>
+1 {{BlockLink|Chest}}
+|
+[[File:Nether Ruined Portal 10.png|center|150px]]
+|}
+
+=== 构成方块 ===
+{| class="wikitable"
+! 通用 !! 主世界 !! 下界
+|- 
+|
+* {{BlockLink|Chest}}
+* {{BlockLink|Block of Gold}}
+* {{BlockLink|Obsidian}}
+* {{BlockLink|Crying Obsidian}}
+* {{BlockLink|Netherrack}}
+* {{BlockLink|Magma Block}}
+* {{BlockLink|Lava}}
+| 
+* {{BlockLink|Iron Bars}}
+* {{BlockLink|Stone}}
+* {{BlockLink|Stone Bricks}}
+* {{BlockLink|Mossy Stone Bricks}}
+* {{BlockLink|Cracked Stone Bricks}}
+* {{BlockLink|Chiseled Stone Bricks}}
+* {{BlockLink|Stone Slab}}
+* {{BlockLink|Smooth Stone Slab}}
+* {{BlockLink|Stone Brick Slab}}
+* {{BlockLink|Mossy Stone Brick Slab}}
+* {{BlockLink|Stone Brick Stairs}}
+* {{BlockLink|Mossy Stone Brick Stairs}}
+* {{BlockLink|Stone Brick Wall}}
+* {{BlockLink|Mossy Stone Brick Wall}}
+| 
+* {{BlockLink|Iron Chain}}
+* {{BlockLink|Polished Blackstone}}
+* {{BlockLink|Polished Blackstone Bricks}}
+* {{BlockLink|Cracked Polished Blackstone Bricks}}
+* {{BlockLink|Chiseled Polished Blackstone}}
+* {{BlockLink|Polished Blackstone Slab}}
+* {{BlockLink|Polished Blackstone Brick Slab}}
+* {{BlockLink|Polished Blackstone Brick Stairs}}
+* {{BlockLink|Polished Blackstone Brick Wall}}
+|}
+
+== 战利品 ==
+{{LootChest|ruined_portal}}
+{{Loot notelist}}
+
+== 数据值 ==
+=== ID ===
+为了便于表示，在下面列出了各结构名称，但这些名称实际上并不显示在游戏中。
+
+{{el|je}}：
+{{ID table
+|showstructuretags=1
+|spritename=overworld-ruined-portal
+|Ruined Portal
+|spritetype=env
+|nameid=ruined_portal
+|rowspan=7
+|structuretags={{GameTag|structure|ruined_portal}}
+}}
+{{ID table
+|spritename=overworld-ruined-portal
+|displayname={{Autolink|Ruined Portal|nolink}}（{{Autolink|Desert|nolink}}类）
+|spritetype=env
+|nameid=ruined_portal_desert
+}}
+{{ID table
+|spritename=overworld-ruined-portal
+|displayname={{Autolink|Ruined Portal|nolink}}（{{Autolink|Jungle|nolink}}类）
+|spritetype=env
+|nameid=ruined_portal_jungle
+}}
+{{ID table
+|spritename=overworld-ruined-portal
+|displayname={{Autolink|Ruined Portal|nolink}}（{{Autolink|Mountains|nolink}}类）
+|spritetype=env
+|nameid=ruined_portal_mountain
+}}
+{{ID table
+|spritename=the-nether-ruined-portal
+|displayname={{Autolink|Ruined Portal|nolink}}（{{Autolink|the Nether|nolink}}类）
+|spritetype=env
+|nameid=ruined_portal_nether
+}}
+{{ID table
+|spritename=overworld-ruined-portal
+|displayname={{Autolink|Ruined Portal|nolink}}（{{Autolink|Ocean|nolink}}类）
+|spritetype=env
+|nameid=ruined_portal_ocean
+}}
+{{ID table
+|spritename=overworld-ruined-portal
+|displayname={{Autolink|Ruined Portal|nolink}}（{{Autolink|Swamp|nolink}}类）
+|spritetype=env
+|nameid=ruined_portal_swamp
+|foot=1
+}}
+
+{{el|be}}：
+{{ID table
+|Ruined Portal
+|spritetype=env
+|nameid=ruinedportal<br>ruined_portal
+|foot=1
+}}
+
+== 视频 ==
+{{video note|廢棄傳送門不會生成在[[深淵]]。|outdated}}
+{{bv|BV12y4y1H7tN}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.16|dev=20w16a|加入了废弃传送门。}}
+|{{HistoryLine|||dev=20w17a|将废弃传送门的生成概率降低了30%。}}
+|{{HistoryLine|||dev=20w18a|废弃传送门的宝箱中的[[金苹果]]现在更稀有了。}}
+|{{HistoryLine||1.18.2|dev=pre1|随着ID类型由结构类型改为配置的结构，生成在沙漠、丛林、山地、下界、海洋和沼泽的废弃传送门拥有了独立ID，分别是<code>ruined_portal_desert</code>、<code>ruined_portal_jungle</code>、<code>ruined_portal_mountain</code>、<code>ruined_portal_nether</code>、<code>ruined_portal_ocean</code>和<code>ruined_portal_swamp</code>。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|加入了废弃传送门。}}
+|{{HistoryLine|||dev=1.16.0.59|废弃传送门现在更加稀有了。
+|现在废弃传送门在下界生成时会使用[[磨制黑石]]及其对应的楼梯和台阶以及[[裂纹磨制黑石砖]]，而不是[[下界砖块]]及其对应的楼梯和台阶。
+|调整了废弃传送门中宝箱的战利品表。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.54|现在废弃传送门的宝箱中会生成4-12片[[闪烁的西瓜片]]，而不是只有1片。}}
+|{{HistoryLine||1.19.30|dev=1.19.30.21|为废弃传送门加入了与{{el|je}}一致的ID<code>ruined_portal</code>。}}
+}}
+
+== 你知道吗 ==
+* 某些废弃传送门比较高，所以即便是以半掩埋的形式生成，整个结构仍有可能是完全裸露的。
+* 许多迹象暗示了废弃传送门与[[猪灵]]有关:
+** 废弃传送门的金块和箱子战利品中的金质物品皆为猪灵喜欢的物品；
+** 下界的废弃传送门会生成带有猪鼻图案的雕纹磨制黑石；
+** 废弃传送门的部分黑曜石会被哭泣的黑曜石取代，而获取哭泣的黑曜石的其他途径只有与猪灵[[以物易物]]以及在堡垒遗迹的箱子中获得两种方法；
+** 箱子战利品中的火焰弹、铁粒和黑曜石皆为猪灵的以物易物项目；
+** 衍生游戏[[Minecraft Legends]]和电影[[A Minecraft Movie]]的剧情涉及了猪灵经传送门侵袭主世界。
+
+== 画廊 ==
+<gallery>
+File:Ruined Portal chest loot example.png|一个废弃传送门的箱子战利品
+File:Underground ruined portal.png|地下的废弃传送门
+File:Desert ruined portal partially buried.png|[[沙漠]]中的废弃传送门。它最初被掩埋了一部分，玩家挖掘出了它的大部分结构
+File:MFPortal.png|[[蘑菇岛]]上的废弃传送门
+File:Ruined portal nether.png|[[绯红森林]]中的废弃传送门
+File:Ruined Portal Nether Waste.png|[[下界荒地]]中的废弃传送门
+File:Ruined Portal in Desert Village.png|沙漠[[村庄]]里的废弃传送门
+File:Buried Ruined Portal.png|僵尸村庄里的废弃传送门
+File:RuinedPortalInTheRavine.jpg|[[峡谷]]里的废弃传送门
+File:Underground Buried Ruined Portal.png|一个埋藏在地下的废弃传送门被玩家使用命令挖掘了出来
+File:Ruined Portal in Village.png|与村庄房屋重合的废弃传送门
+File:HalfPortalinthesea01.png|一半浸入水中的废弃传送门
+File:UnderwaterPortal.png|完全浸在水中的废弃传送门。水浇灭熔岩产生的黑曜石与组成传送门框架的黑曜石混在一起
+File:RuinedPortalWithLeaves.png|覆盖着丛林树叶的废弃传送门，熔岩点燃了部分树叶
+File:PortalAndTents.png|[[掠夺者前哨站]]帐篷旁边的废弃传送门
+File:ValleyPortal.png|[[裸岩山峰]]中的废弃传送门
+File:RuinedportalandOceanruin.png|与[[海底废墟]]生成在一起的废弃传送门
+File:Ruined Portal in Badlands.png|[[恶地]]中的废弃传送门
+File:Nether Ruined Portal in Lava.png|下界熔岩海中的废弃传送门
+File:Bottom of Ruined Portal in Lava.png|从熔岩海底看废弃传送门
+File:Ruined Portal in Basalt Deltas.png|生成在[[玄武岩石柱林]]中的废弃传送门
+File:Ruined Portal on Lava Sea.png|熔岩海表面的废弃传送门
+File:Ruined portal besides sea.png|生成在海边的废弃传送门，被水淹没了一部分
+File:Ruined Portal in Taiga.png|生成在针叶林山谷的废弃传送门
+File:GiantPortal.png|一个生成在村庄中的大型废弃传送门
+File:Ruined Portal in Woodland Mansion.png|生成在林地府邸中的废弃传送门
+File:Underwater Ruined Portal at Ocean Monument.png|生成在海底神殿入口处的废弃传送门
+</gallery>
+
+== 注释 ==
+{{fnlist}}
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox world features|structures}}
+
+[[de:Portalruine]]
+[[en:Ruined Portal]]
+[[es:Portal en ruinas]]
+[[fr:Portail en ruine]]
+[[it:Portale in rovina]]
+[[ja:荒廃したポータル]]
+[[ko:무너진 차원문]]
+[[lzh:廢焱門]]
+[[pl:Ruina portalu]]
+[[pt:Portal em Ruínas]]
+[[ru:Разрушенный портал Нижнего мира]]
+[[uk:Зруйнований портал]]

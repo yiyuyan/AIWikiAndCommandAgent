@@ -1,0 +1,169 @@
+# 页面: 凋零
+# 来源: https://zh.minecraft.wiki/w/%E5%87%8B%E9%9B%B6
+# 分类: Java版独有信息, 使用DynamicPageList4的页面, 基岩版独有信息, 状态效果
+# 抓取时间: 2026-07-14 17:20:28
+# 原始 Wikitext 内容:
+
+{{about|状态效果|Boss生物|凋灵||凋灵（消歧义）{{!}}{{tr|凋灵|凋零}}（消歧义）}}
+{{Infobox effect
+|image=Wither (effect).png
+|invimage=Potion of Decay
+|invimage2=Splash Potion of Decay
+|invimage3=Lingering Potion of Decay
+|invimage4=Arrow of Decay
+}}
+
+'''凋零（Wither）'''是一种使生物持续受到伤害，且会致命的[[状态效果]]。
+
+== 效果 ==
+受影响生物每隔一段时间受到无来源的{{hp|1}}伤害，间隔取决于效果等级。
+
+{| class="wikitable" style="text-align:right"
+ ! 等级 !! 伤害周期 !! 每秒伤害量
+ |-
+ | 1 || {{convert|40}} || {{hp|0.5}}
+ |-
+ | 2 || {{convert|20}} || {{hp|1}}
+ |-
+ | 3 || {{convert|10}} || {{hp|2}}
+ |-
+ | 4<ref group="注" name ="immunity">此时伤害间隔已经低于[[受击后伤害免疫]]的持续时间，在4级及以上时实际有效的伤害时段为10刻（0.5秒每次，每秒{{hp|2}}伤害）。</ref> || {{convert|5}} || {{hp|4}}
+ |-
+ | 5<ref group="注" name ="immunity" /> || {{convert|2}} || {{hp|10}}
+ |-
+ | 6+<ref group="注" name ="immunity /> || {{convert|1}} || {{hp|20}}
+|}
+
+{{fnlist|group=注}}
+
+当效果的剩余时间的游戏刻数是周期的整倍数时，执行一次效果。如果效果的剩余时间被持续设置，会导致伤害会持续进行或不进行。
+
+玩家具有该效果时，生命条中的心会变成棕红色边缘的黑色{{Healthbar|2|withered=1}}{{Healthbar|2|withered=1|hardcore=1}}。
+
+如果被赋予效果倍率值0-31（对应等级1-32）范围以外的值，实际生效的倍率值则取[[wikipedia:Modulo_operation|模除]]32后的值。
+
+== 来源 ==
+{| class="wikitable" data-description="Causes"
+ ! 来源
+ ! 效果等级
+ ! 时长
+ ! 伤害总量
+ ! 备注
+ |-
+ | {{ItemLink|Potion of Decay}}{{only|be}}
+ | II
+ | 0:40
+ | {{hp|40}}
+ | 需要其他的药水加成
+ |-
+ | {{ItemLink|Splash Potion of Decay}}{{only|be}}
+ | II
+ | 0:40
+ | {{hp|40}}
+ | 需要其他的药水加成
+ |-
+ | {{ItemLink|Lingering Potion of Decay}}{{only|be}}
+ | II
+ | 0:10
+ | {{hp|10}}
+ | 需要其他的药水加成
+ |-
+ | {{ItemLink|Arrow of Decay}}{{only|be}}
+ | II
+ | 0:05
+ | {{hp|5}}
+ | 需要其他的药水加成
+ |-
+ | {{EntityLink|Wither}}
+ | II
+ | 0:10（普通）<br>0:40（困难）
+ | {{hp|10}}（普通）<br>{{hp|40}}（困难）
+ | 在普通或困难[[难度]]中被[[凋灵之首]]直接击中
+ |-
+ | {{EntityLink|Wither Skeleton}}
+ | I
+ | 0:10
+ | {{hp|5}}
+ | 仅近战攻击
+ |-
+ | {{BlockLink|Wither Rose}}
+ | I
+ | 0:02
+ | {{hp|1}}
+ | 非和平难度下，生物边界箱与凋灵玫瑰所在方块相交时生效<br>蜜蜂对凋灵玫瑰{{tr|采粉|採粉}}或{{only|je|for=被喂食凋灵玫瑰}}时生效
+ |- 
+ | {{BlockLink|Wither Rose}}{{only|be}}
+ | I
+ | 0:40
+ | {{hp|20}}
+ | 喂食蜜蜂时生效
+ |-
+ | {{ItemLink|Suspicious Stew}}
+ | I
+ | 0:07
+ | {{hp|3}}
+ | 必须使用{{BlockLink|Wither Rose}}合成
+|}
+
+== 数据值 ==
+=== ID ===
+{{edition|java}}：
+{{ID table
+|generatetranslationkeys=java
+|displayname=凋零
+|spritetype=effect
+|spritename=wither
+|nameid=wither
+|foot=1}}
+
+{{edition|bedrock}}：
+{{ID table
+|generatetranslationkeys=bedrock
+|displayname=凋零
+|spritetype=effect
+|spritename=wither
+|nameid=wither
+|showaliasids=1
+|aliasid=20
+|foot=1}}
+
+== 进度 ==
+{{load advancements|nether.all_effects}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java}}
+|{{HistoryLine||1.4.2|dev=12w34a|[[File:Wither (effect) JE1 BE1.png|32px]] 加入了凋零。}}
+|{{HistoryLine|||dev=12w36a|凋零效果现在可由被[[凋灵骷髅]]攻击而获得。}}
+|{{HistoryLine||1.14|dev=18w43a|凋零效果现在可通过接触[[凋灵玫瑰]]或食用[[谜之炖菜]]获得。
+|[[File:Wither (effect) JE2 BE2.png|32px]] 更改了图标纹理。}}
+|{{HistoryLine||1.20|dev=23w12a|将凋零的颜色由{{color|#352A27}}改为{{color|#736156}}。}}
+|{{HistoryLine||1.20.2|dev=23w32a|在此版本前，凋零的存档ID是20。}}
+|{{HistoryLine||1.21.4|dev=24w44a|现在蜜蜂被喂食凋灵玫瑰时会获得凋零效果。}}
+|{{HistoryLine|||dev=24w45a|现在食用谜之炖菜获得的凋零效果的持续时间由8秒降低至7秒，以匹配{{el|be}}。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.11.0|dev=build 1|[[File:Wither (effect) JE1 BE1.png|32px]] 加入了凋零效果，但无法获得。}}
+|{{HistoryLine||0.12.1|dev=build 1|凋零效果现在可从[[凋灵骷髅]]的攻击获得。}}
+|{{HistoryLine||0.16.0|dev=build 4|凋零效果现在可从[[凋灵]]发射的头颅获得。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|凋零效果现在可从[[衰变药水]]获得。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.11.0|dev=1.11.0.5|[[File:Wither (effect) JE2 BE2.png|32px]] 更改了图标纹理。}} 
+|{{HistoryLine||1.13.0|dev=1.13.0.9|凋零效果现在可通过接触[[凋灵玫瑰]]或食用[[谜之炖菜]]获得。}}
+|{{HistoryLine||1.20.0|exg=next_major_update|dev=1.20.0.20|将凋零的颜色由{{color|#352A27}}改为{{color|#736156}}。}}
+|{{HistoryLine|||exg=none|dev=1.20.0.21|1.20.0.20中的变更不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.50|dev=1.21.50.28|现在蜜蜂被喂食凋灵玫瑰时会获得凋零效果。}}
+}}
+
+== 导航 ==
+{{Navbox effects}}
+
+[[de:Verdorrung]]
+[[en:Wither (effect)]]
+[[es:Descomposición]]
+[[fr:Décomposition]]
+[[it:Avvizzimento]]
+[[ja:衰弱]]
+[[ko:시듦]]
+[[pt:Decomposição]]
+[[ru:Иссушение]]

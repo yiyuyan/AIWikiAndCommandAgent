@@ -1,0 +1,293 @@
+# 页面: NPC
+# 来源: https://zh.minecraft.wiki/w/NPC
+# 分类: 友好生物, 基岩版独有信息, 基岩版独有特性, 失效链接, 实体, 教育版独有信息, 教育版独有特性, 教育版生物, 有未知版本的History模板的页面/教育版, 未使用的生物, 本地化模块需更新, 需要等轴渲染图的页面, 需要验证
+# 抓取时间: 2026-07-14 17:16:28
+# 原始 Wikitext 内容:
+
+{{distinguish|村民|玩家模型}}
+{{exclusive|education|bedrock}}
+{{needs render|第二种商务NPC渲染图缺失手臂。}}
+{{Infobox entity
+|image=NPC1pre.png
+|extratext={{tr|查看|檢視}}[[#渲染图|所有渲染图]]
+|invimage=NPC Spawn Egg
+|behavior=友好生物
+|size=高度：2.1格<br>宽度：0.6格
+|spawn=见{{slink||生成}}
+|noje=1
+}}
+
+'''NPC（非玩家控制角色，Non-Player Character）'''是一种外观与[[村民]]相似的可交互友好生物，属于[[教育版]]和[[基岩版]]的独有生物<ref>https://education.minecraft.net/support/knowledge-base/using-npcs/{{dead link}}</ref>。
+
+== 生成 ==
+NPC不会自然生成，仅能通过使用NPC[[刷怪蛋]]（输入{{cmd|give @p npc_spawn_egg}}{{only|ee}}或{{cmd|give @p spawn_egg 1 51}}获取）或用{{cmd|summon minecraft:npc ~ ~ ~}}[[命令]]来生成。若要通过[[刷怪蛋]]来生成NPC，玩家必须拥有世界建造者能力，{{only|for=此能力会自动授予[[创造模式]]玩家|be}}，也可使用{{cmd|worldbuilder}}命令来手动获取。
+
+NPC生成时头顶会自带一个[[格式化代码]]为黄色（{{cd|§e}}）的名称“NPC”，该名称不能用[[命名牌]]更改。
+
+== 掉落物 ==
+NPC死亡时不会掉落任何[[物品]]和[[经验]]。
+
+== 行为 ==
+NPC没有AI。它们既不能走动也不能被其他实体推动（[[船]]除外），大多数实体都可以直接穿过NPC。
+
+NPC免疫几乎所有伤害，也不受[[状态效果]]影响。
+
+与大多数[[生物]]相同的是，当玩家距离足够近时，NPC会慢慢转向并看着玩家。NPC能被[[活塞]]和[[水流]]推动，它们站在[[黏液块]]和[[蜂蜜块]]上时激活黏性活塞也能被拖动。NPC会受到[[风爆]]击退。
+
+NPC会受到[[僵尸疣猪兽]]、[[凋灵]]、[[监守者]]和“Johnny”[[卫道士]]的攻击，也会受到[[山羊]]的冲撞，尽管NPC不会受到任何伤害，[[箭]]也会穿过NPC。
+
+NPC可以被拥有世界管理员权限的[[玩家]]立即杀死或被命令{{cmd|kill}}杀死。它们在掉入[[虚空]]后也会立即死亡。
+
+== 界面 ==
+[[File:Npcpet.png|缩略图|当没有世界管理员权限时的NPC界面]]
+[[File:NPCs Talk page in pe.png|缩略图|当拥有世界管理员权限时的NPC界面]]
+
+右键NPC将显示其界面，它们只能被拥有世界管理员权限的玩家编辑。玩家可在该界面编辑NPC的对话框、名称和外观。当玩家没有世界管理员权限时，它将只显示对话框和按钮。
+
+=== 定制 ===
+; 名字
+: NPC的名字会在其头顶显示。默认的名字为“NPC”，在外观上显示的默认文字颜色为黄色（{{cd|§e}}）。在界面的“名字”一栏可以编辑NPC名字。名字最长32字，文字颜色可以使用[[格式化代码]]来改变。
+: 注意，该名字（NameTag）与[[命名牌#用途|实体名字]]（CustomName）是不同的，对NameTag的修改不会影响CustomName。
+
+; 对话
+: 对话框位于“名称”的正下方，通常用作向导工具。对话框的文本字数限制为256，尽管在某些情况下它为337。
+
+; 外观
+: NPC的外观是可选择的，只需左键单击你想要的皮肤即可改变皮肤。
+: 目前NPC拥有60个皮肤。
+
+; 高级设置
+: 高级NPC设置由命令组成。它们用于创建交互式按钮。目前可以添加的最大高级设置为6个。
+:; 命令
+:: 命令功能允许[[玩家]]在NPC中添加[[命令]]。命令可以在标题下面的第一个输入框中输入， 它不像[[命令方块]]，因为它可以同时执行多个命令，目前命令最多能输入1024个字符。
+:: 该命令可以作为按钮或直接命令来呈现。作为一个按钮，按钮名称或标签可以通过填写“按钮名称”来改变，标签的文本限制是16个字。只有当玩家的世界管理员权限被禁用时才能执行。
+:: 当不作为按钮添加时，右击NPC将执行该命令。相反地，按钮将被显示并且具有默认为浅灰色的标签颜色，并且可以使用格式化代码来改变颜色。
+:: 对于NPC内置的命令界面，有一个特有的选择器变量为{{cd|@initiator}}，它可以选择当前与该NPC进行交互（例如打开NPC对话框、使用NPC按钮和关闭NPC对话框）的玩家。如果该选择器用于外置命令，则不会报错，但不会选择到任何玩家。
+
+== 音效 ==
+{{Sound table
+|bedrock=1
+|sound=mob.villager.idle1.wav
+|sound2=mob.villager.idle2.wav
+|sound3=mob.villager.idle3.wav
+|source=友好生物
+|description=空闲时随机播放此声音
+|id=mob.villager.idle
+|typeid=ambient
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=mob.villager.hit1.wav
+|sound2=mob.villager.hit2.wav
+|sound3=mob.villager.hit3.wav
+|sound4=mob.villager.hit4.wav
+|source=友好生物
+|description=受伤
+|id=mob.villager.hit
+|typeid=hurt
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+}}
+{{Sound table
+|bedrock=1
+|sound=dig.wood1.wav
+|sound2=dig.wood2.wav
+|sound3=dig.wood3.wav
+|sound4=dig.wood4.wav
+|source=方块
+|description=死亡
+|id=dig.wood
+|typeid=death
+|soundvolume
+|soundpitch=0.8-1.2
+|sounddistance
+|soundpreload=1
+|foot=1
+}}
+
+== 数据值 ==
+=== ID ===
+{{ID table
+|generatetranslationkeys=bedrock
+|spritetype=entity | NPC
+|nameid=npc
+|foot=1
+}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.16.0|dev=build 1|[[File:NPC1pre.png|32px]] [[File:NPC2pre.png|32px]] [[File:NPC3pre.png|32px]] [[File:NPC4pre.png|32px]] [[File:NPC5pre.png|32px]] [[File:NPC6pre.png|32px]] [[File:NPC7pre.png|32px]] [[File:NPC8pre.png|32px]] [[File:NPC9pre.png|32px]] [[File:NPC10pre.png|32px]]<br>[[File:Scientist1pre.png|32px]] [[File:Scientist2pre.png|32px]] [[File:Scientist3pre.png|32px]] [[File:Scientist4pre.png|32px]] [[File:Scientist5pre.png|32px]] [[File:Scientist6pre.png|32px]] [[File:Scientist7pre.png|32px]][[File:Scientist8pre.png|32px]] [[File:Scientist9pre.png|32px]] [[File:Scientist10pre.png|32px]]加入了NPC。}}
+|{{HistoryLine|||dev=build 2|移除了NPC。然而，存档ID和刷怪蛋仍然存在。}}
+|{{HistoryLine|||dev=build 4|移除了NPC的刷怪蛋。}}
+|{{HistoryLine|||dev=build 5|NPC现在拥有了一个行为文件，它位于：server/entities/npc.json。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|重新加入了NPC。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|NPC此时没有功能。{{verify}}
+|现在能使用{{cmd|summon}}命令来生成，但它们并不像教育版一样起作用。}}
+|{{HistoryLine||1.10.0|dev=1.10.0.3|不再可以使用{{cmd|summon}}来召唤NPC，但是仍然可以通过生物编辑器来生成NPC，如果在以前的版本中生成了NPC，那么它仍然可以正常工作。|加入了NPC的对话和外貌设置。}}
+|{{HistoryLine||1.12.0|dev=1.12.0.2|对话和外貌设置被从NPC中移除。}}
+|{{HistoryLine||1.16.0|dev=1.15.0.51|重新加入了对话与外观设置。
+|NPC[[刷怪蛋]]现在能通过{{cmd|give <player> spawn_egg 1 51}}获得了。}}
+|{{HistoryLine|||dev=1.16.0.51|NPC现在又能通过{{cmd|summon}}[[命令]]生成了。}}
+|{{HistoryLine|||dev=1.16.0.60|NPC不再是20[[生命值]]了。}}
+|{{HistoryLine||1.17.10|dev=1.17.10.22|加入了[[目标选择器]]<code>@initiator</code>，仅在NPC内置的命令界面可用。}}
+|{{HistoryLine||1.18.30|dev=1.18.20.21|[[File:Apiary1pre.png|32px]] [[File:Apiary2pre.png|32px]] [[File:Apiary3pre.png|32px]] [[File:Apiary4pre.png|32px]] [[File:Apiary5pre.png|32px]] 加入了5种养蜂人主题的NPC皮肤。
+|[[File:Teacher1pre.png|32px]][[File:Teacher2pre.png|32px]][[File:Teacher3pre.png|32px]][[File:Teacher4pre.png|32px]][[File:Teacher5pre.png|32px]][[File:Construction1pre.png|32px]][[File:Construction2pre.png|32px]][[File:Construction3pre.png|32px]][[File:Construction4pre.png|32px]][[File:Construction5pre.png|32px]] 加入了5种教师主题和5种建筑工人主题的NPC皮肤。}}
+|{{HistoryLine||1.19.40|dev=1.19.40.21|[[File:Agriculture1pre.png|32px]][[File:Agriculture2pre.png|32px]][[File:Agriculture3pre.png|32px]][[File:Agriculture4pre.png|32px]][[File:Agriculture5pre.png|32px]][[File:Agriculture6pre.png|32px]][[File:Agriculture7pre.png|32px]][[File:Agriculture8pre.png|32px]][[File:Agriculture9pre.png|32px]][[File:Agriculture10pre.png|32px]][[File:EverydayBusiness1pre.png|32px]][[File:EverydayBusiness2pre.png|32px]][[File:EverydayBusiness3pre.png|32px]][[File:EverydayBusiness4pre.png|32px]][[File:EverydayBusiness5pre.png|32px]][[File:BusinessMob1pre.png|32px]][[File:BusinessMob2pre.png|32px]][[File:BusinessMob3pre.png|32px]][[File:BusinessMob4pre.png|32px]][[File:BusinessMob5pre.png|32px]][[File:Kiosk1pre.png|32px]][[File:Kiosk2pre.png|32px]][[File:Kiosk3pre.png|32px]][[File:Kiosk4pre.png|32px]][[File:Kiosk5pre.png|32px]]加入了10种农民主题、5种商务主题、5种商务兽人主题和5种街头设施主题，共25种NPC皮肤。}}
+|{{HistoryLine|education}}
+|{{HistoryLine||1.0|[[File:NPC1pre.png|32px]] [[File:NPC2pre.png|32px]] [[File:NPC3pre.png|32px]] [[File:NPC4pre.png|32px]] [[File:NPC5pre.png|32px]] [[File:NPC6pre.png|32px]] [[File:NPC7pre.png|32px]] [[File:NPC8pre.png|32px]] [[File:NPC9pre.png|32px]] [[File:NPC10pre.png|32px]]<br>[[File:Scientist1pre.png|32px]] [[File:Scientist2pre.png|32px]] [[File:Scientist3pre.png|32px]] [[File:Scientist4pre.png|32px]] [[File:Scientist5pre.png|32px]] [[File:Scientist6pre.png|32px]] [[File:Scientist7pre.png|32px]][[File:Scientist8pre.png|32px]] [[File:Scientist9pre.png|32px]] [[File:Scientist10pre.png|32px]]加入了NPC。
+|这些NPC是可编辑的，并可以给它们某些[[命令]]去做相对应的操作。}}
+|{{HistoryLine||1.0.2|改进了NPC的<code>Talk</code>页面。
+|为URL和命令添加按钮模式。}}
+|{{HistoryLine||1.14.31|[[File:Apiary1pre.png|32px]] [[File:Apiary2pre.png|32px]] [[File:Apiary3pre.png|32px]] [[File:Apiary4pre.png|32px]] [[File:Apiary5pre.png|32px]] 加入了5种养蜂人主题的NPC皮肤。}}
+|{{HistoryLine||1.14.70|dev=1.14.60|[[File:Teacher1pre.png|32px]][[File:Teacher2pre.png|32px]][[File:Teacher3pre.png|32px]][[File:Teacher4pre.png|32px]][[File:Teacher5pre.png|32px]][[File:Construction1pre.png|32px]][[File:Construction2pre.png|32px]][[File:Construction3pre.png|32px]][[File:Construction4pre.png|32px]][[File:Construction5pre.png|32px]]加入了5种教师主题和5种建筑工人主题的NPC皮肤。}}
+|{{HistoryLine||1.18.32|dev=?|[[File:Agriculture1pre.png|32px]][[File:Agriculture2pre.png|32px]][[File:Agriculture3pre.png|32px]][[File:Agriculture4pre.png|32px]][[File:Agriculture5pre.png|32px]][[File:Agriculture6pre.png|32px]][[File:Agriculture7pre.png|32px]][[File:Agriculture8pre.png|32px]][[File:Agriculture9pre.png|32px]][[File:Agriculture10pre.png|32px]][[File:EverydayBusiness1pre.png|32px]][[File:EverydayBusiness2pre.png|32px]][[File:EverydayBusiness3pre.png|32px]][[File:EverydayBusiness4pre.png|32px]][[File:EverydayBusiness5pre.png|32px]][[File:BusinessMob1pre.png|32px]][[File:BusinessMob2pre.png|32px]][[File:BusinessMob3pre.png|32px]][[File:BusinessMob4pre.png|32px]][[File:BusinessMob5pre.png|32px]][[File:Kiosk1pre.png|32px]][[File:Kiosk2pre.png|32px]][[File:Kiosk3pre.png|32px]][[File:Kiosk4pre.png|32px]][[File:Kiosk5pre.png|32px]]加入了10种农民主题、5种商务主题、5种商务兽人主题和5种街头设施主题，共25种NPC皮肤。}}
+}}
+
+{{-}}
+
+== 画廊 ==
+<gallery>
+File:NPC.jpg|一个NPC
+File:Npcpe.png|一个生成时名为{{mcfont|&eNPC}}的NPC
+File:Npcskinsinpe.png|1.14.70版本NPC的所有皮肤
+File:NPCBeeKeepers.png|养蜂人NPC
+File:NPCConstructionWorkers.png|建筑工人NPC
+File:NPCTeachers.png|教师NPC
+File:NPCAgriculture.png|农民NPC
+File:NPCEverydayBusiness.png|商务NPC
+File:NPCBusinessMobs.png|商务兽人NPC
+File:NPCKiosk.png|街头设施NPC
+</gallery>
+
+=== 渲染图 ===
+==== 普通NPC ====
+<gallery>
+File:NPC1pre.png
+File:NPC2pre.png
+File:NPC3pre.png
+File:NPC4pre.png
+File:NPC5pre.png
+File:NPC6pre.png
+File:NPC7pre.png
+File:NPC8pre.png
+File:NPC9pre.png
+File:NPC10pre.png
+</gallery>
+
+==== 科学家NPC ====
+<gallery>
+File:Scientist1pre.png
+File:Scientist2pre.png
+File:Scientist3pre.png
+File:Scientist4pre.png
+File:Scientist5pre.png
+File:Scientist6pre.png
+File:Scientist7pre.png
+File:Scientist8pre.png
+File:Scientist9pre.png
+File:Scientist10pre.png
+</gallery>
+
+==== 养蜂人NPC ====
+<gallery>
+File:Apiary1pre.png
+File:Apiary2pre.png
+File:Apiary3pre.png
+File:Apiary4pre.png
+File:Apiary5pre.png
+</gallery>
+
+==== 教师NPC ====
+<gallery>
+File:Teacher1pre.png
+File:Teacher2pre.png
+File:Teacher3pre.png
+File:Teacher4pre.png
+File:Teacher5pre.png
+</gallery>
+
+==== 建筑工人NPC ====
+<gallery>
+File:Construction1pre.png
+File:Construction2pre.png
+File:Construction3pre.png
+File:Construction4pre.png
+File:Construction5pre.png
+</gallery>
+
+==== 农民NPC ====
+<gallery>
+File:Agriculture1pre.png
+File:Agriculture2pre.png
+File:Agriculture3pre.png
+File:Agriculture4pre.png
+File:Agriculture5pre.png
+File:Agriculture6pre.png
+File:Agriculture7pre.png
+File:Agriculture8pre.png
+File:Agriculture9pre.png
+File:Agriculture10pre.png
+</gallery>
+
+==== 商务NPC ====
+<gallery>
+File:EverydayBusiness1pre.png
+File:EverydayBusiness2pre.png
+File:EverydayBusiness3pre.png
+File:EverydayBusiness4pre.png
+File:EverydayBusiness5pre.png
+</gallery>
+
+==== 商务兽人NPC ====
+<gallery>
+File:BusinessMob1pre.png
+File:BusinessMob2pre.png
+File:BusinessMob3pre.png
+File:BusinessMob4pre.png
+File:BusinessMob5pre.png
+</gallery>
+
+==== 街头设施NPC ====
+<gallery>
+File:Kiosk1pre.png
+File:Kiosk2pre.png
+File:Kiosk3pre.png
+File:Kiosk4pre.png
+File:Kiosk5pre.png
+</gallery>
+
+=== 官方艺术作品 ===
+<gallery>
+File:NPC Artwork.png|NPC的官方艺术作品
+</gallery>
+
+== 参考 ==
+{{Reflist}}
+
+== 导航 ==
+{{Navbox entities|Mobs}}
+
+[[Category:教育版生物]]
+[[Category:友好生物]]
+[[Category:未使用的生物]]
+
+[[de:NPC]]
+[[en:NPC]]
+[[es:NPC]]
+[[fr:PNJ]]
+[[it:PNG]]
+[[ja:NPC]]
+[[ko:NPC]]
+[[pl:NPC]]
+[[pt:NPC]]
+[[ru:Неигровой персонаж]]
+[[th:NPC]]
+[[tr:NPC]]
+[[uk:Неігровий персонаж]]

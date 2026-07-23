@@ -1,0 +1,539 @@
+# 页面: 骑乘
+# 来源: https://zh.minecraft.wiki/w/%E9%AA%91%E4%B9%98
+# 分类: 
+# 抓取时间: 2026-07-14 17:39:09
+# 原始 Wikitext 内容:
+
+[[File:Sunny Horseback.png|thumb|150px|正在騎馬的玩家]]
+'''骑乘（Ride）'''是实体被连接到另一个实体上的现象。
+
+== 机制 ==
+骑乘会使一个实体被连接到另一个实体上。骑乘着其他实体的实体被称为'''乘客（Passenger）'''，被骑乘的实体被称为'''坐骑（Mount）'''。一个实体可以同时是乘客和坐骑。一个实体只能骑乘至多一个实体。对于支持多个乘客的实体，若该实体支持接受乘客控制，那么只有第一个乘客有对坐骑的控制。
+
+坐骑的移动不受其乘客的碰撞箱的影响，因此对于坐骑来说可以进入的位置可能会将乘客置于危险的位置，如将乘客的头部置入方块的内部而导致其[[窒息]]。
+
+大多数实体的通常骑乘方式只支持一个乘客，[[船]]、[[竹筏]]、[[骆驼]]和[[骆驼尸壳]]支持两个乘客，[[快乐恶魂]]支持4个乘客。不过通过命令修改实体数据，一个实体可能被任意数量的实体骑乘。
+
+玩家与非玩家生物同时骑乘支持多个乘客的坐骑时，玩家总是会取得前排。
+
+[[玩家]]离开世界会导致与其有骑乘关系的实体全部随玩家从世界中消失，在玩家再次进入世界中时与玩家一同生成，除非受影响的实体有其他的玩家乘客。
+
+{{in|java}}[[标记]]不能被其他实体骑乘。
+
+乘客有以下的行为：
+* 乘客的位置被锁定在其坐骑上，即乘客不能被绝大多数效果影响位置和动量，包括实体之间的碰撞、实体和方块的碰撞、[[伤害#击退|击退]]、[[爆炸]]、{{only|for=[[钓鱼竿]]、[[末影珍珠]]、[[紫颂果]]|je}}、具有[[激流]]魔咒的[[三叉戟]]、[[末影人]]和[[潜影贝]]的传送能力、[[末地折跃门（方块）|末地折跃门]]的传送。
+* 乘客不会累积下落高度，且有下落高度时骑乘会重置下落高度。
+** 因此，乘客是玩家时，使用[[重锤]]攻击无法触发猛击。
+* {{only|for=乘客不能被[[下界传送门（方块）|下界传送门]]、[[末地传送门（方块）|末地传送门]]等跨维度传送方式传送。|BE}}
+* 乘客是玩家时，不能选中坐骑和坐骑的其他乘客，因此也不能对其进行[[近战攻击]]或交互。
+* 乘客是玩家且玩家在[[水]]或[[雨]]中使用带有[[激流]]附魔的[[三叉戟]]时，玩家不会飞出，而坐骑会受到玩家命中生物的伤害。
+* 乘客是玩家且坐骑是一种生物时，坐骑的[[生命]]会以生命条{{healthbar|2|mob=1}}的形式显示在玩家的[[平视显示器]]上玩家生命条的对侧。
+
+坐骑有以下的行为：
+* {{only|for=坐骑不能被[[下界传送门（方块）|下界传送门]]、[[末地传送门（方块）|末地传送门]]等跨维度传送方式传送。|BE}}
+* 坐骑受到[[伤害#摔落伤害|摔落伤害]]时会把自己受到的减免前的摔落伤害传递给所有乘客。
+** 如果坐骑免疫摔落伤害，伤害不会被传递给乘客。免疫摔落伤害的坐骑：
+*** {{EntityLink|Minecart}}
+*** {{EntityLink|Boat}}
+*** {{EntityLink|Boat with Chest}}
+* 坐骑是敌对生物且被骑乘时，不具有攻击性<ref>{{bug|MC-262182||Certain mobs with passengers are no longer able to attack}}</ref>
+
+以下坐骑会接受来自其玩家乘客的直接控制，乘客的移动输入会被用于指挥坐骑的移动：
+* {{EntityLink|Horse|装有鞍的成年马}}
+* {{EntityLink|Donkey|装有鞍的成年驴}}
+* {{EntityLink|Mule|装有鞍的成年骡}}
+* {{EntityLink|Camel|装有鞍的成年骆驼}}
+* {{EntityLink|Camel Husk|装有鞍的骆驼尸壳}}
+* {{EntityLink|Skeleton Horse|装有鞍的骷髅马}}{{only|JE}}或{{EntityLink|Skeleton Horse}}{{only|BE}}
+* {{EntityLink|Zombie Horse|装有鞍的僵尸马}}
+* {{EntityLink|Happy Ghast|装有挽具的快乐恶魂}}
+* {{EntityLink|Nautilus|装有鞍的成年鹦鹉螺}}
+* {{EntityLink|Zombie Nautilus|装有鞍的僵尸鹦鹉螺}}
+* {{EntityLink|Minecart}}
+* {{EntityLink|Boat}}
+* {{EntityLink|Boat with Chest}}
+
+以下坐骑有其他的控制方式：
+* {{EntityLink|Pig}}：玩家可以通过持有[[胡萝卜钓竿]]来控制。
+* {{EntityLink|Strider}}：玩家可以通过持有[[诡异菌钓竿]]来控制。
+
+以下坐骑有“跳跃蓄力”能力，玩家骑乘它们时，[[平视显示器]]上的经验条会被跳跃蓄力条取代：
+* {{EntityLink|Horse|装有鞍的成年马}}
+* {{EntityLink|Donkey|装有鞍的成年驴}}
+* {{EntityLink|Mule|装有鞍的成年骡}}
+* {{EntityLink|Skeleton Horse|装有鞍的骷髅马}}{{only|JE}}或{{EntityLink|Skeleton Horse}}{{only|BE}}
+* {{EntityLink|Zombie Horse|装有鞍的僵尸马}}
+
+以下坐骑有“冲刺蓄力”能力，玩家骑乘它们时，[[平视显示器]]上的经验条会被冲刺蓄力条取代：
+* {{EntityLink|Camel|装有鞍的成年骆驼}}
+* {{EntityLink|Camel Husk|装有鞍的骆驼尸壳}}
+* {{EntityLink|Nautilus|装有鞍的成年鹦鹉螺}}
+* {{EntityLink|Zombie Nautilus|装有鞍的僵尸鹦鹉螺}}
+
+玩家骑乘以下实体时，按下{{control|物品栏}}会打开这些生物的交互界面而非平常的物品栏界面：
+* {{EntityLink|Horse|驯服的成年马}}
+* {{EntityLink|Donkey|驯服的成年驴}}
+* {{EntityLink|Mule|驯服的成年骡}}
+* {{EntityLink|Llama|驯服的成年羊驼}}
+* {{EntityLink|Trader Llama|驯服的行商羊驼}}
+* {{EntityLink|Camel}}
+* {{EntityLink|Camel Husk}}
+* {{EntityLink|Skeleton Horse|驯服的骷髅马}}{{only|je}}
+* {{EntityLink|Zombie Horse|驯服的僵尸马}}
+* {{EntityLink|Nautilus|馴服的成年鹦鹉螺}}
+* {{EntityLink|Zombie Nautilus|馴服的僵尸鹦鹉螺}}
+* {{EntityLink|Boat with Chest}}
+
+{{inUpcoming|JE 26.3|BE 26.40}}玩家可以骑乘在{{EntityLink|Cushion}}上，但坐垫没有以上特殊行为。
+
+以下乘客有坐姿：
+{{columns-list|colwidth=20em|
+* {{EntityLink|Player}}
+* {{EntityLink|Zombie}}
+* {{EntityLink|Zombie Villager}}
+* {{EntityLink|Husk}}
+* {{EntityLink|Drowned}}
+* {{EntityLink|Skeleton}}
+* {{EntityLink|Stray}}
+* {{EntityLink|Parched|}}
+* {{EntityLink|Wither Skeleton}}
+* {{EntityLink|enderman}}{{only|je}}
+* {{EntityLink|Piglin}}
+* {{EntityLink|Piglin Brute}}
+* {{EntityLink|Zombified Piglin}}
+* {{EntityLink|Pillager}}
+* {{EntityLink|Vindicator}}
+* {{EntityLink|Evoker}}
+* {{EntityLink|Illusioner}}{{only|je}}
+* {{EntityLink|Giant}}{{only|je}}
+}}
+
+以下坐骑会因为具有乘客而改变移动行为：
+* 羊驼、行商羊驼在有乘客时不能游泳，会被压沉入水中，并且在此时会赶下它们的乘客。
+* 矿车有乘客时，从[[动力铁轨]]获得的速度会减少。
+
+== 解除骑乘方式 ==
+生物通常不会自行离开坐骑，不过有多种效果会使乘客（包括非自愿地）脱离自己的坐骑：
+* 乘客被另一个生物使用[[矛]]的冲锋攻击击中并且攻击者速度大于下表中的“击落所需攻击者速度” 。
+* {{in|be}}乘客被[[钓鱼竿]]牵引。
+* 对骑乘在任意实体上的生物使用[[拴绳]]。
+* 乘客是玩家时，玩家按下{{control|潜行}}。
+* 乘客的坐骑死亡或毁除。
+* 乘客骑乘未驯服的[[马]]、[[驴]]、[[骡]]、[[僵尸马]]、[[羊驼]]、[[行商羊驼]]时被这些生物赶下。
+* 乘客骑乘在[[水]]中的马、驴、骡、僵尸马、骆驼、骆驼尸壳、羊驼、行商羊驼导致其被水淹没而被这些生物赶下。
+* 乘客骑乘驶过激活的[[激活铁轨]]的矿车时被赶下。
+* 乘客被{{only|je|for={{cmd|ride <target> dismount}}}}或{{only|be|for={{cmd|ride <riders: target> stop_riding}}}}指定为目标。
+* {{in|be}}乘客的坐骑被{{cmd|ride <rides: target> evict_riders}}指定为目标。
+* 乘客被[[命令]]传送。
+* 乘客使用[[末影珍珠]]或[[紫颂果]]传送。
+{| class="wikitable"
+!物品
+!击落所需攻击者速度（公尺/秒）
+|-
+|{{ItemLink|Wooden Spear}}
+|14
+|-
+|{{ItemLink|Golden Spear}}
+|10
+|-
+|{{ItemLink|Stone Spear}}
+|10
+|-
+|{{ItemLink|Copper Spear}}
+|9
+|-
+|{{ItemLink|Iron Spear}}
+|8
+|-
+|{{ItemLink|Diamond Spear}}
+|7.5
+|-
+|{{ItemLink|Netherite Spear}}
+|7
+|}
+
+== 骑乘方式 ==
+=== 玩家坐骑 ===
+玩家可以通过对着实体按下{{control|使用}}的方式来骑乘以下实体：
+* {{EntityLink|Pig|装有鞍的成年猪}}
+* {{EntityLink|Strider|装有鞍的成年炽足兽}}
+* {{EntityLink|Happy Ghast|装有挽具的快乐恶魂}}
+* {{EntityLink|Nautilus|装有鞍的成年鹦鹉螺}}
+* {{EntityLink|Zombie Nautilus|装有鞍的僵尸鹦鹉螺}}
+* {{EntityLink|Horse|成年马}}
+* {{EntityLink|Donkey|成年驴}}
+* {{EntityLink|Mule|成年骡}}
+* {{EntityLink|Skeleton Horse}}
+* {{EntityLink|Zombie Horse}}
+* {{EntityLink|Llama|成年羊驼}}
+* {{EntityLink|Trader Llama}}
+* {{EntityLink|Camel|成年骆驼}}
+* {{EntityLink|Camel Husk}}
+* {{EntityLink|Minecart}}
+* {{EntityLink|Boat}}
+* {{EntityLink|Boat with Chest}}
+* {{EntityLink|Cushion}}{{in update|26d3}}
+
+=== 生物骑乘矿车或船 ===
+生物接触[[矿车]]、站在[[船]]或[[运输船]]上时会自动进入其中。
+
+以下生物不会进入矿车、船或运输船：
+* {{EntityLink|Ender Dragon}}
+* {{EntityLink|Warden}}
+* {{EntityLink|Wither}}
+* {{EntityLink|Armor Stand}}{{only|je}}
+* {{EntityLink|Iron Golem}}{{only|for=（除矿车）|BE}}
+* {{EntityLink|Creaking}}{{only|for=（除矿车）|JE}}
+* {{EntityLink|Elder Guardian}}（除矿车）
+
+=== 蜘蛛骑士 ===
+{{main|蜘蛛骑士}}
+
+'''蜘蛛骑士（Spider Jockey）'''<ref>https://plus.google.com/112518133011799486490/posts/1rY2RTRAg4t</ref>是一种罕见的由[[骷髅]]、{{only|be|for=[[流浪者]]、[[凋灵骷髅]]、[[沼骸]]或[[焦骸]]}}、骑乘着[[蜘蛛]]{{only|be|for=或[[洞穴蜘蛛]]}}的生物组合。
+
+每只[[蜘蛛]]（以及{{only|be|for=[[洞穴蜘蛛]]}}）在生成时都有1%的概率生成坐在它上面的骷髅并形成蜘蛛骑士。{{in|be}}在部分积雪的生物群系中这只骷髅有80%的概率会是流浪者，在下界中这只骷髅有80%的概率会是凋灵骷髅、在[[沼泽]]和[[红树林沼泽]]中这只骷髅有80%的概率会是沼骸，在[[沙漠]]中这只骷髅有80%的概率会是焦骸，其余情况则会是骷髅。
+
+{{in|je}}只会生成骷髅蜘蛛骑士。
+<gallery>
+Spider Jockey.png|骷髅骑乘着蜘蛛
+Spider Wither Jockey.png|凋灵骷髅骑乘着蜘蛛
+Stray spider jockey.png|流浪者骑乘着蜘蛛
+Spider Jockey (Bogged).png|沼骸骑乘着蜘蛛
+Spider Jockey (Parched).png|焦骸骑乘着蜘蛛
+Cave Spider Jockey.png|骷髅骑乘着洞穴蜘蛛
+Cave Spider Wither Jockey.png|凋灵骷髅骑乘着洞穴蜘蛛
+Stray cave spider jockey.png|流浪者骑乘着洞穴蜘蛛
+Cave Spider Jockey (Bogged).png|沼骸骑乘着洞穴蜘蛛
+Cave Spider Jockey (Parched).png|焦骸骑乘着洞穴蜘蛛
+</gallery>
+
+=== 鸡骑士 ===
+{{main|鸡骑士}}
+'''鸡骑士（Chicken Jockey）'''<ref>{{tweet|Dinnerbone|406775245765619712}}</ref>是幼年[[僵尸]]及其变种骑乘着[[鸡]]的生物组合。
+
+{{in|je}}每一只幼年僵尸、幼年[[尸壳]]、幼年[[僵尸村民]]、幼年[[溺尸]]或幼年[[僵尸猪灵]]都有5%的概率在生成时检测以生成地点为中心的10×6×10长方体区域里存在的鸡，如果存在鸡，则幼年僵尸会直接生成在任意一只鸡身上形成鸡骑士。如果没有检测到鸡，则会有额外5%的概率生成为骑着一只新的鸡的幼年僵尸。在一个无鸡的环境里，每只幼年僵尸都有0.25%的概率形成鸡骑士；如果在这个区域引入鸡，那么形成概率就会增加到0.4875%。
+
+{{in|be}}幼年僵尸、幼年尸壳和幼年溺尸有15%的概率骑乘变成一只鸡骑士。
+
+鸡骑士中的鸡不会下蛋。
+
+{{in|be}}鸡骑士中的鸡会获得乘客的速度和行为。
+<gallery>
+Chicken Jockey.png|幼年僵尸骑乘着鸡
+Chicken Husk Jockey.png|幼年尸壳骑乘着鸡
+Chicken Zombified Piglin Jockey.png|幼年僵尸猪灵骑乘着鸡
+Chicken Drowned Jockey.png|幼年溺尸骑乘着鸡
+Chicken Plains Zombie Villager Jockey.png|平原幼年僵尸村民骑乘着鸡
+Chicken Desert Zombie Villager Jockey.png|沙漠幼年僵尸村民骑乘着鸡
+Chicken Savanna Zombie Villager Jockey.png|热带草原幼年僵尸村民骑乘着鸡
+Chicken Taiga Zombie Villager Jockey.png|针叶林幼年僵尸村民骑乘着鸡
+Chicken Jungle Zombie Villager Jockey.png|丛林幼年僵尸村民骑乘着鸡
+Chicken Snowy Zombie Villager Jockey.png|雪原幼年僵尸村民骑乘着鸡
+Chicken Swamp Zombie Villager Jockey.png|沼泽幼年僵尸村民骑乘着鸡
+</gallery>
+
+=== 村民骑乘鸡 ===
+{{exclusive|je|section=1}}
+{{in|je}}治愈骑着鸡的幼年僵尸村民会形成骑着鸡的幼年村民<ref>{{bug|MC-200418}}</ref>，且有著很多與雞騎士不同的行為。
+
+* 村民无法主动从鸡上下来（即使其长大），但可以在速度大幅降低的情況下控制鸡的行動。
+* 騎在雞上的村民可以正常長大，綁定[[床]]與職業，進行[[交易]]與補貨，以及使用[[發射器]]裝備[[盔甲]]。
+* 騎在雞上的村民會嘗試躲避[[殭屍]]或[[掠奪者]]等會主動攻擊村民的敵對生物，即使因為移速緩慢而總是會被追上；亦會在夜晚回到綁定的床位，但仍無法上床睡覺。
+* 與雞騎士相同，被村民騎乘的雞會緩慢下落並且不會受到傷害，這點與普通雞一樣。
+* 與雞騎士相同，被村民騎乘的雞可進入1格高的空間，這可能會導致騎在雞上的村民在進屋或類似情況下受到[[窒息]]傷害，並可能在沒有保護的情況下因此死亡。
+* 與雞騎士相同，被村民騎乘的雞不會受到種子吸引，但使用[[拴绳|拴繩]]可以拴住雞，並以此拉動雞，此時騎乘在上方的村民會失去對雞的控制直到拴繩斷開。
+* 與雞騎士不同，被村民騎乘的雞依然可以正常下蛋。
+
+=== 幼年僵尸坐骑 ===
+{{main|鸡骑士}}
+{{exclusive|be|section=1}}
+幼年僵尸、幼年尸壳和幼年溺尸有15%的概率成为骑士并骑乘上以下生物：
+{{#lst:鸡骑士|be-rideable}}
+
+幼年溺尸还可骑乘未驯服的[[僵尸鹦鹉螺]]。
+
+这些生物被幼年僵尸、幼年尸壳和幼年溺尸骑乘时会获得乘客的速度和行为，如果这些生物可以被驯服，在乘客被逐出坐骑或被杀死前将不能被驯服。
+
+幼年僵尸村民和幼年僵尸猪灵存在骑士变种，但无法按预期生成。
+
+<gallery>
+Chicken Jockey.png|幼年僵尸骑乘着鸡
+Baby Zombie Riding Cow.png|幼年僵尸骑乘着牛
+Baby Zombie Riding Horse.png|幼年僵尸骑乘着马
+Baby Zombie Riding Ocelot.png|幼年僵尸骑乘着豹猫
+Baby Zombie Riding Panda.png|幼年僵尸骑乘着熊猫
+Baby Zombie Riding Pig.png|幼年僵尸骑乘着猪
+Baby Zombie Riding Sheep.png|幼年僵尸骑乘着绵羊
+Baby Zombie Riding Spider.png|幼年僵尸骑乘着蜘蛛
+Baby Zombie Riding Tuxedo Cat.png|幼年僵尸骑乘着猫
+Baby Zombie Riding Zombie Butcher.png|幼年僵尸骑乘着僵尸村民
+Baby Zombie Riding Wolf.png|幼年僵尸骑乘着狼
+Baby Zombie Riding Zombie.png|幼年僵尸骑乘着僵尸
+Baby Zombie Villager Jockeys.png|基岩版中幼年僵尸村民可骑乘的所有生物
+Baby Husk Jockeys.png|基岩版中幼年尸壳可骑乘的所有生物
+</gallery>
+
+=== 骷髅骑手 ===
+{{main|骷髅马}}
+'''骷髅骑手（Skeleton Horseman）'''是[[骷髅]]骑乘着[[骷髅马]]的生物组合。当骷髅陷阱被触发时，作为骷髅陷阱的骷髅马会生成一个骑乘着自身的骷髅以及三个骷髅骑手，所有的四个骷髅都装备着[[附魔]]的[[铁头盔]]和附魔的[[弓]]。
+<gallery>
+Skeleton Trap.png|装备着附魔的铁头盔和附魔的弓的骷髅骑乘着骷髅马
+</gallery>
+
+=== 猪灵骑乘疣猪兽 ===
+{{main|猪灵|疣猪兽}}
+幼年[[猪灵]]会和幼年[[疣猪兽]]玩耍，四处奔跑并骑乘。并且幼年猪灵在遇到一只骑着幼年疣猪兽的幼年猪灵时，会有一定的概率再次骑上幼年猪灵的肩膀上，最多3个叠在一起。幼年猪灵在一段时间后从幼年疣猪兽身上跳下来{{only|je}}。它们也会在受到攻击后下来。
+
+{{in|be}}只有10%的幼年猪灵会骑乘幼年疣猪兽。
+<gallery>
+Hoglin Jockey.png|幼年猪灵骑乘着幼年疣猪兽
+Hoglin Jockey with Two Baby Piglins.png|两只幼年猪灵叠在幼年疣猪兽上
+Hoglin Jockey with Three Baby Piglins.png|三只幼年猪灵叠在幼年疣猪兽上
+</gallery>
+
+=== 生物骑乘炽足兽 ===
+{{main|炽足兽|僵尸猪灵}}
+炽足兽在被生成时，幼年炽足兽有10%的概率会生成在成年炽足兽头上。[[僵尸猪灵]]有{{frac|1|30}}的概率会骑在炽足兽头上，此时炽足兽会装备鞍，且僵尸猪灵会手持[[诡异菌钓竿]]。炽足兽头上的僵尸猪灵不会自然消失。在和平难度下，僵尸猪灵会消失，只留下装备鞍的炽足兽。{{in|be}}骑乘炽足兽的僵尸猪灵无法按预期生成。<ref>{{bug|MCPE-236161}}</ref>
+<gallery>
+Baby Strider riding Strider.png|幼年炽足兽骑乘着成年炽足兽
+Strider Jockey.png|僵尸猪灵骑乘着成年炽足兽
+</gallery>
+
+=== 灾厄村民骑乘劫掠兽 ===
+{{main|劫掠兽}}
+在[[袭击]]中生成的[[劫掠兽]]在被生成时可能会同时生成骑乘着自身的[[掠夺者]]、[[卫道士]]或[[唤魔者]]。
+
+{{in|je}}一次袭击中可生成多达7只劫掠兽。非骑乘状态的劫掠兽生成在第3波，被掠夺者骑乘的生成在第5波和第8波，被卫道士骑乘的生成在第7波和第8波，被唤魔者骑乘的也生成在第7波和第8波。
+
+{{in|be}}一次袭击中可生成多达5只劫掠兽。非骑乘状态的劫掠兽生成在第3波和第5波，被掠夺者骑乘的生成在第5波和第7波，被唤魔者骑乘的生成在第7波。
+
+<gallery>
+File:Ravager Rider.png|掠夺者骑乘着劫掠兽
+File:Ravager Rider (Vindicator).png|卫道士骑乘着劫掠兽
+File:Ravager Rider (Evoker).png|唤魔者骑乘着劫掠兽
+File:Ravager Rider (Pillager) with Ominous Banner.png|作为[[袭击队长]]的掠夺者骑乘着劫掠兽
+File:Ravager Rider (Vindicator) with Ominous Banner.png|作为袭击队长的卫道士骑乘着劫掠兽
+File:Ravager Rider (Evoker) with Ominous Banner.png|作为袭击队长的唤魔者骑乘着劫掠兽
+</gallery>
+
+=== 溺尸骑乘僵尸鹦鹉螺 ===
+{{main|溺尸}}
+{{in|je}}当[[溺尸]]因自然生成或结构生成（例如[[海底废墟]]）而生成时，如果所处的[[生物群系]]不是[[河流]]或[[冻河]]，生成的溺尸不是幼年溺尸且主手持有三叉戟，则有50%的概率生成[[僵尸鹦鹉螺]]作为溺尸的坐骑。
+
+{{in|be}}海洋类生物群系中有小概率额外生成2-4只溺尸，其中会有一只成年溺尸主手持有三叉戟且骑着僵尸鹦鹉螺。
+
+<gallery>
+File:Zombie Nautilus Jockey.png|溺尸骑乘着僵尸鹦鹉螺
+</gallery>
+
+=== 僵尸骑手 ===
+{{anchor|僵尸骑乘僵尸马|僵尸马骑士|僵尸骑手}}
+{{main|僵尸马}}
+[[僵尸马]]会自然生成于[[热带草原]]、[[热带高原]]、[[风袭热带草原]]、[[平原]]、[[雪原]]和{{only|be|for=[[冰刺之地]]}}生物群系中，并生成一只[[僵尸]]作为乘客，组成'''僵尸骑手（Zombie Horseman）'''<ref>社区提出的名称，讨论[[Special:GoToComment/c-Eason5130-20251211022500|见此]]。</ref>。
+
+<gallery>
+File:Zombie Horseman.png|持有铁矛的僵尸骑乘着僵尸马
+</gallery>
+
+=== 尸壳和焦骸骑乘骆驼尸壳 ===
+{{main|骆驼尸壳}}
+{{in|je}}在[[沙漠]]生物群系中，[[尸壳]]生成时有10%概率骑着[[骆驼尸壳]]，并生成[[焦骸]]作为第二名乘客。
+
+{{in|be}}骆驼尸壳会自然生成于沙漠生物群系，并同时生成尸壳和焦骸作为第一个和第二个乘客。
+
+<gallery>
+File:Camel Husk Jockey.png|持有铁矛的尸壳和焦骸骑骑乘着骆驼尸壳
+</gallery>
+
+=== 命令 ===
+{{main|命令/ride}}
+{{cmd|ride}}可使实体骑乘或停止骑乘其他实体。{{in|be}}可使坐骑逐出其乘客，亦可召唤坐骑或乘客。
+
+该命令不能为玩家、{{only|for=[[标记]]|je}}、[[拴绳结]]、[[闪电束]]、[[浮漂]]和与[[嘎枝之心]]绑定的[[嘎枝]]添加乘客。
+
+== 成就 ==
+{{load achievements|when-pigs-fly;saddle-up;feels-like-Home}}
+
+== 进度 ==
+{{load advancements|husbandry.tame_an_animal;nether.ride_strider;nether.ride_strider_in_overworld_lava}}
+
+== 历史 ==
+{{HistoryTable
+|{{HistoryLine|java Infdev}}
+|{{HistoryLine||20100624|更改了矿车的机制，现在可以骑乘矿车，移除了矿车存储物品的功能。}}
+|{{HistoryLine||20100625-1917|加入了[[鞍]]，可用于骑猪。}}
+|{{HistoryLine|java Alpha}}
+|{{HistoryLine||v1.0.4|加入玩家骑猪时坐着的动画效果。
+|加入了乘坐矿车时的动画效果。}}
+|{{HistoryLine||v1.0.6|加入了船，玩家可以骑乘。}}
+|{{HistoryLine||2010年8月16日|link=http://forums.tigsource.com/index.php?topic=6273.msg276501#msg276501|Notch在TIGSource社区里的一个帖子里提到了蜘蛛骑士。}}
+|{{HistoryLine||v1.0.17|加入了蜘蛛骑士。}}
+|{{HistoryLine|java Beta}}
+|{{HistoryLine||1.5|玩家骑着猪掉下悬崖会获得一个[[成就/Java版|成就]]。}}
+|{{HistoryLine||1.6|dev=Test Build 3|矿车现在会将摔落伤害转移给乘坐者，矿车本身不会被摔落摧毁。}}
+|{{HistoryLine|java}}
+|{{HistoryLine||1.0.0|dev=Beta 1.9-pre3|加入了幼年猪，同样可以骑乘。}}
+|{{HistoryLine||1.2.4|现在无法再骑乘幼年猪。}}
+|{{HistoryLine||1.3.1|dev=12w21b|玩家在乘坐矿车时可以使用方向键来缓慢地挪动矿车。}}
+|{{HistoryLine||1.4.2|dev=12w36a|加入[[胡萝卜钓竿]]用于控制骑乘猪。}}
+|{{HistoryLine|||dev=12w37a|猪在被骑乘时能够跳跃。
+|使用胡萝卜钓竿控制猪一段时期之后，猪会吃掉胡萝卜，仅剩[[钓鱼竿]]，损耗速度可以反映在胡萝卜钓竿的耐久度上。
+|猪具有爆发速度时可以暂时收起胡萝卜钓竿。}}
+|{{HistoryLine||1.4.2|dev=12w34a|蜘蛛刷怪蛋现在有机会生成蜘蛛骑士。}}
+|{{HistoryLine|||dev=12w36a|在[[下界要塞]]使用蜘蛛刷怪蛋有机会生成[[凋灵骷髅]]蜘蛛骑士。}}
+|{{HistoryLine||1.5|dev=13w05a|凋灵不能再进入矿车或船。}}
+|{{HistoryLine|||dev=13w09a|蜘蛛骑士上的骷髅在重新加载世界时不再从蜘蛛上跳下来了。}}
+|{{HistoryLine||2013年4月4日|link={{tweet|jeb|319937646673674241}}|在Minecraft销量达到10,000,000后，[[Jeb]]暗示他正在给Minecraft加入马。}}
+|{{HistoryLine||1.6.1|dev=13w16a
+|加入了马，玩家可以骑乘。
+|加入了驴，玩家可以骑乘。
+|加入了骡，玩家可以骑乘。
+|加入了骷髅马，玩家可以骑乘。
+|加入了僵尸马，玩家可以骑乘。
+|玩家骑乘生物时会显示坐骑的生命值了。}}
+|{{HistoryLine||1.6.1|dev=13w16b|取消了船的方向键控制。}}
+|{{HistoryLine||1.7.2|dev=13w43a|重新加入了船的方向键控制机制。}}
+|{{HistoryLine||2013年11月29日|link=http://imgur.com/a/PbRh1|一个2张图片的画廊被上传到Imgur，里面展示了一只幼年僵尸在鸡'''里'''。这些图片也在Reddit上发布。}}
+|{{HistoryLine||2013年11月30日|link={{tweet|Dinnerbone|406775245765619712}}|Dinnerbone在看到Reddit上的画廊图片之后贴出了鸡骑士的截图。}}
+|{{HistoryLine||1.7.4|dev=13w49a|加入了鸡骑士。}}
+|{{HistoryLine||1.7.5|随着鸡骑士一起生成的鸡在乘客死亡后可以自然消失。}}
+|{{HistoryLine||1.8|dev=14w02a|鸡骑士不再下蛋。}}
+|{{HistoryLine|||dev=14w06a|骑乘船的生物可以控制船了，它们可以追逐或者逃离敌人、向食物移动、四处漫步以及其他在陆地上的行为。恶魂和蝙蝠除外，它们不能够控制船。}}
+|{{HistoryLine||1.9|dev=15w38a|加入了骷髅陷阱马，可以生成骷髅骑手。}}
+|{{HistoryLine|||dev=15w41a|船现在可以容纳2个乘客。
+|生物现在可以骑乘船。
+|骑乘船的生物不能控制船了。
+|更改了划船的机制，现在使用{{control|向右移动}}和{{control|向左移动}}控制船的双桨。同时按下两键船会前进，使用{{control|向右移动}}键拨动右桨使船向左转，反之亦然。鼠标不再能使船变向，{{control|向前移动}}和{{control|向后移动}}没有作用。
+|玩家现在在船完全停下前不能使用物品或作出攻击。
+|加入了所有种类的船。}}
+|{{HistoryLine|||dev=16w04a
+|船前进和后退现在分别使用{{control|向前移动}}和{{control|向后移动}}，向左右转向分别使用{{control|向左移动}}和{{control|向右移动}}。取消了15w41a引入的划桨机制。船的控制机制与重新设计前相似。
+|船现在不再能让接触[[水]]时会受到伤害的生物生物免疫这些伤害，也不再能防止会在阳光下着火的生物着火。
+|现在下船时会尝试把玩家放在陆地上。}}
+|{{HistoryLine|||dev=16w06a|骑乘实体的行为现在由客户端而非服务器运算。}}
+|{{HistoryLine||1.10|dev=16w20a|加入了幼年[[尸壳]]鸡骑士。|蜘蛛在寒冷的生物群系会生成[[骷髅|流浪者]]蜘蛛骑士。}}
+|{{HistoryLine||1.11|dev=16w32a|蜘蛛骑士不再会与流浪者蜘蛛骑士和凋灵骷髅蜘蛛骑士一同产生。 <ref>{{bug|MC-109415|||WAI}}</ref>}}
+|{{HistoryLine|||dev=16w39a|加入了羊驼，玩家可以骑乘。}}
+|{{HistoryLine||1.13|dev=18w11a|加入了幼年[[溺尸]]鸡骑士。}}
+|{{HistoryLine|||dev=pre5|蜘蛛骑士现在可以正常生成。|先前，由于一个漏洞，蜘蛛骑士在1.9.4之后不会生成。<ref>{{bug|MC-103516|||Fixed}}</ref>}}
+|{{HistoryLine||1.14|dev=18w45a|{{tr|灾厄之兽|窳獸}}能生成于[[灾厄巡逻队]]中，会同时生成骑乘自身的掠夺者或卫道士。}}
+|{{HistoryLine|||dev=18w46a|{{tr|灾厄之兽|窳獸}}不再生成于灾厄巡逻队中。}}
+|{{HistoryLine|||dev=18w47a|{{tr|灾厄之兽|窳獸}}现在能生成于[[袭击]]中，可能会同时生成骑乘自身的掠夺者或卫道士。}}
+|{{HistoryLine|||dev=19w05a|{{tr|灾厄之兽|窳獸}}被重命名为劫掠兽。
+|加入了行商羊驼，玩家可以骑乘。}}
+|{{HistoryLine|||dev=19w13a|现在劫掠兽生成时可能会同时生成骑乘自身的唤魔者。}}
+|{{HistoryLine||1.16|dev=20w09a|[[僵尸猪人]]鸡骑士被重命名为[[僵尸猪灵]]鸡骑士。
+|幼年猪灵现在可以骑乘幼年[[疣猪兽]]。}}
+|{{HistoryLine|||dev=20w12a|幼年猪灵现在可以坐在其他骑着幼年[[疣猪兽]]的幼年猪灵上。|link={{tweet|henrikkniberg|1202598609407135745}}}}
+|{{HistoryLine|||dev=20w13a|加入了炽足兽，玩家可以骑乘。}}
+|{{HistoryLine|||dev=20w18a|现在炽足兽生成时可能会同时生成骑乘自身的僵尸猪灵或幼年炽足兽。}}
+|{{HistoryLine||1.19.3|exp=update_1_20|dev=22w42a|加入了骆驼，玩家可以骑乘。
+|加入了竹筏，玩家可以骑乘。}}
+|{{HistoryLine||1.19.4|dev=23w03a|加入了{{cmd|ride}}。}}
+|{{HistoryLine|||dev=pre2|现在敌对生物被骑乘时不再攻击。<ref>{{bug|MC-262182}}</ref>}}
+|{{HistoryLine||1.20|dev=23w12a|可被骑乘的骆驼和竹筏不再属于[[实验性内容]]。}}
+|{{HistoryLine||1.21|dev=24w21a|加入了[[游戏规则]]<code>entitiesWithPassengersCanUsePortals</code>，用于控制带有乘客的实体能否穿过下界传送门。}}
+|{{HistoryLine|||dev=pre1|移除了游戏规则<code>entitiesWithPassengersCanUsePortals</code>，现在带有乘客的实体可以无延迟地穿过下界传送门。}}
+|{{HistoryLine||1.21.6|dev=25w15a|加入了快乐恶魂，玩家可以骑乘。}}
+|{{HistoryLine||1.21.11|dev=25w41a|加入了[[鹦鹉螺]]，玩家可以骑乘。
+|加入了[[僵尸鹦鹉螺]]，可以作为[[溺尸]]的坐骑自然生成，玩家可以骑乘。
+|现在[[僵尸马]]可以作为[[僵尸]]的坐骑自然生成。}}
+|{{HistoryLine|||dev=25w44a|加入了[[骆驼尸壳]]，可以作为尸壳和焦骸的坐骑自然生成，玩家可以骑乘。
+|现在马、驴、骡和骆驼被玩家在水里骑乘时不再会下沉。}}
+|{{HistoryLine||26.3|dev=snapshot-3|加入了[[坐垫]]，玩家可以骑乘。}}
+|{{HistoryLine|pocket alpha}}
+|{{HistoryLine||0.8.0|dev=build 2|加入了矿车，玩家可以骑乘。}}
+|{{HistoryLine||2014年9月19日|link={{tweet|_tomcc|512935629026770944}}|[[Tommaso Checchi]]在推特上发布了一张玩家坐着[[矿车]]的图片，并称最重要的事情是“正确地划船”。}}
+|{{HistoryLine||2015年1月26日|link={{tweet|_tomcc|559697958728654848}}|Tommaso Checchi在推特发布了一张多人乘“船”的图片。}}
+|{{HistoryLine||2015年2月20日|link={{tweet|_tomcc|568844305491730432}}|Tommaso Checchi在推特发布了一张只载有生物的多艘船的图片。}} 
+|{{HistoryLine||0.11.0|dev=build 1|加入了船和不同木材种类的变种，玩家可以骑乘。
+|船能承载2个乘客。
+|友好生物可以上船。
+|加入了蜘蛛骑士。
+|由骷髅骑着的[[洞穴蜘蛛]]现在会罕见的生成在矿井里，组成洞穴蜘蛛骑士。
+|幼年僵尸和幼年僵尸猪人有机会变成鸡骑士。}}
+|{{HistoryLine|||dev=build 9|敌对生物现在可以上船。<ref>{{tweet|_tomcc|597142440949260288}}</ref>}}
+|{{HistoryLine|||dev=build 12|现在可以从船上发射弹射物了。}}
+|{{HistoryLine||0.12.1|dev=build 1|幼年[[僵尸村民]]有机会变成鸡骑士。
+|加入了凋灵骷髅蜘蛛骑士，还有洞穴蜘蛛变种。}}
+|{{HistoryLine||0.14.0|dev=build 1|幼年僵尸和幼年僵尸村民都可以骑上蜘蛛和洞穴蜘蛛了。|幼年僵尸变种有15%的概率骑上鸡变成鸡骑士。}}
+|{{HistoryLine||0.15.0|dev=build 1
+|加入了马，玩家可以骑乘。
+|加入了驴，玩家可以骑乘。
+|加入了骡，玩家可以骑乘。
+|加入了骷髅马，玩家可以骑乘。
+|加入了僵尸马，玩家可以骑乘。
+|加入了骷髅陷阱马，可以生成骷髅骑手。
+|加入了骑猪和“Boost”（加速）按钮。
+|幼年尸壳有15%的概率骑上鸡变成鸡骑士。|幼年尸壳现在可骑乘成年尸壳、猪、蜘蛛、洞穴蜘蛛、[[马]]及其变种。
+|现在在寒冷生物群系里，蜘蛛骑士有80%的概率生成的是流浪者蜘蛛骑士，洞穴蜘蛛骑士也有80%的概率生成的是流浪者洞穴蜘蛛骑士。}}
+|{{HistoryLine|pocket}}
+|{{HistoryLine||1.0.0|dev=0.17.0.1|幼年僵尸现在可以骑乘[[北极熊]]。}}
+|{{HistoryLine||1.1.0|dev=1.1.0.0|幼年僵尸现在可以骑乘[[羊驼]]。}}
+|{{HistoryLine||?|link=none|成年僵尸猪人不再能被骑乘。}}
+|{{HistoryLine|bedrock}}
+|{{HistoryLine||1.5.0|dev=1.5.0.0|更改了当使用键盘和鼠标时船的操纵方向：{{key|W}}现在可以使船向前移动，{{key|S}}可以进行逆转。}}
+|{{HistoryLine||1.8.0|dev=1.8.0.8|幼年僵尸现在可以骑乘[[熊猫]]和成年流浪[[猫]]。}}
+|{{HistoryLine||1.11.0|dev=1.11.0.1|劫掠兽现在能生成于[[袭击]]中，可能会同时生成骑乘自身的掠夺者或卫道士。}}
+|{{HistoryLine|||dev=1.11.0.5|现在劫掠兽生成时可能会同时生成骑乘自身的唤魔者。}}
+|{{HistoryLine||1.13.0|dev=1.13.0.9|成年[[僵尸猪人]]再次能被僵尸骑乘。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.51|幼年猪灵现在可以骑乘幼年[[疣猪兽]]。}}
+|{{HistoryLine||1.16.0|dev=1.16.0.57|加入了炽足兽，玩家可以骑乘。
+|现在炽足兽生成时可能会同时生成骑乘自身的僵尸猪灵或幼年炽足兽。}}
+|{{HistoryLine||1.16.20|dev=1.16.20.50|现在不再会生成流浪者蜘蛛骑士和凋灵骷髅蜘蛛骑士。}}
+|{{HistoryLine||1.16.100|dev=1.16.100.52|加入了{{cmd|ride}}。}}
+|{{HistoryLine||1.19.50|exg=next_major_update|dev=1.19.50.21|加入了骆驼，玩家可以骑乘。
+|加入了竹筏，玩家可以骑乘。}}
+|{{HistoryLine||1.20.0|dev=1.20.0.21|可被骑乘的骆驼和竹筏不再属于[[实验性玩法]]。}}
+|{{HistoryLine||1.21.20|dev=1.21.10.21|更改了脱离位置的算法，以与移动中的坐骑更好地保持一致。}}
+|{{HistoryLine||1.21.80|exg=y_2025_drop_2|dev=1.21.80.25|加入了快乐恶魂，玩家可以骑乘。}}
+|{{HistoryLine||1.21.90|dev=1.21.90.20|可被骑乘的快乐恶魂不再属于[[实验性玩法]]。}}
+|{{HistoryLine|||dev=1.21.90.26|现在再次会生成流浪者蜘蛛骑士和凋灵骷髅蜘蛛骑士。<ref>{{bug|MCPE-89549|||Fixed}}</ref>}}
+|{{HistoryLine||1.21.100|dev=1.21.100.21|现在有概率在沼泽和红树林沼泽中生成沼骸蜘蛛骑士。}}
+|{{HistoryLine||1.21.130|dev=1.21.130.20|加入了[[鹦鹉螺]]，玩家可以骑乘。
+|加入了[[僵尸鹦鹉螺]]，可以作为[[溺尸]]的坐骑自然生成，玩家可以骑乘。
+|现在[[僵尸马]]可以作为[[僵尸]]的坐骑自然生成。}}
+|{{HistoryLine|||dev=1.21.130.24|加入了[[骆驼尸壳]]，玩家可以骑乘。
+|现在马、驴、骡和骆驼被玩家在水里骑乘时不再会下沉。}}
+|{{HistoryLine|||dev=1.21.130.26|现在幼年僵尸村民生成时不再有概率变成骑士并骑乘生物。}}
+|{{HistoryLine|||dev=1.21.130.27|现在有概率在沙漠中生成焦骸蜘蛛骑士。}}
+|{{HistoryLine||26.0|dev=26.0.27|现在幼年溺尸生成时有15%的概率变成骑士并骑乘鸡以及其他生物。
+|现在幼年僵尸猪灵存在无法按预期生成的骑士变种，能够骑乘鸡以及其他生物。
+|现在幼年尸壳生成时不再有概率变成骑士并骑乘生物。}}
+|{{HistoryLine||26.40|dev=26.40.30|exg=26d3|加入了[[坐垫]]，玩家可以骑乘。}}
+|{{HistoryLine|console}}
+|{{HistoryLine||xbox=TU1|xbone=CU1|ps3=1.00|psvita=1.00|ps4=1.00|wiiu=Patch 1|switch=1.0.1|加入了矿车，玩家可以骑乘。
+|加入了船，玩家可以骑乘。}}
+|{{HistoryLine||xbox=TU14|xbone=CU1|ps3=1.04|psvita=1.00|ps4=1.00|wiiu=Patch 1|加入[[胡萝卜钓竿]]用于控制骑乘猪。}}
+|{{HistoryLine||xbox=TU19|xbone=CU7|ps3=1.12|psvita=1.12|ps4=1.12|wiiu=Patch 1
+|加入了马，玩家可以骑乘。
+|加入了驴，玩家可以骑乘。
+|加入了骡，玩家可以骑乘。}}
+|{{HistoryLine||xbox=TU31|xbone=CU19|ps3=1.22|psvita=1.22|ps4=1.22|wiiu=Patch 3|加入了鸡骑士。}}
+|{{HistoryLine||xbox=TU46|xbone=CU36|ps3=1.38|psvita=1.38|ps4=1.38|wiiu=Patch 15|加入了骷髅陷阱马，可以生成骷髅骑手。}}
+|{{HistoryLine|3ds}}
+|{{HistoryLine||0.1.0|加入了矿车，玩家可以骑乘。
+|加入了船，玩家可以骑乘。
+|加入了马，玩家可以骑乘。
+|加入了驴，玩家可以骑乘。
+|加入了骡，玩家可以骑乘。
+|加入了骷髅马，玩家可以骑乘。
+|加入了僵尸马，玩家可以骑乘。
+|加入了骷髅陷阱马，可以生成骷髅骑手。
+|加入了鸡骑士。}}
+}}
+
+== 参见 ==
+* [[Tutorial:生成骑士]]
+
+== 参考 ==
+{{reflist}}
+
+== 导航 ==
+{{Navbox gameplay}}
+
+[[Category:生物组合]]
+
+[[en:Riding]]
+[[ja:騎乗]]
+[[pt:Montar]]
