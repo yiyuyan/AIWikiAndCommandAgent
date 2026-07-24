@@ -1,19 +1,107 @@
 package cn.ksmcbrigade.aiwiki_aca.util.agent;
 
 import com.google.gson.JsonObject;
+import org.jetbrains.java.decompiler.main.Fernflower;
+import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
+import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
+import org.jetbrains.java.decompiler.main.extern.IResultSaver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.tools.*;
 import java.io.*;
-import java.util.Collections;
-import java.util.List;
+import java.lang.instrument.UnmodifiableClassException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.jar.Manifest;
 
 public class CompilerUtils {
 
     public static final JavaCompiler COMPILER = ToolProvider.getSystemJavaCompiler();
+    public static final Logger LOGGER = LoggerFactory.getLogger(CompilerUtils.class);
 
     static {
-        if(COMPILER==null){
-            throw new RuntimeException("Failed to init JavaCompiler,The system java compiler is null.");
+        if (COMPILER == null) {
+            throw new RuntimeException("Failed to init JavaCompiler, The system java compiler is null.");
+        }
+    }
+
+    public static String getSource(String clazzStr) throws ClassNotFoundException, UnmodifiableClassException, IOException {
+        return getSource(Class.forName(clazzStr.replace("/", ".")));
+    }
+
+    public static String getSource(Class<?> clazz) throws UnmodifiableClassException, IOException {
+        byte[] bytes = InstUtils.getClassBytes(Objects.requireNonNull(InstUtils.getInst()), clazz);
+        return decompile(clazz.getName(), bytes);
+    }
+
+    private static String decompile(String className, byte[] classBytes) throws IOException {
+        LOGGER.info("Decompiling class '{}', bytecode size: {} bytes", className, classBytes.length);
+
+        Map<String, String> resultMap = new HashMap<>();
+        IResultSaver saver = new IResultSaver() {
+            @Override
+            public void saveClassFile(String path, String qualifiedName, String entryName,
+                                      String content, int[] mapping) {
+                resultMap.put(qualifiedName, content);
+            }
+            @Override public void saveFolder(String path) {}
+            @Override public void copyFile(String source, String path, String entryName) {}
+            @Override public void saveClassEntry(String path, String archiveName, String qualifiedName,
+                                                 String entryName, String content) {}
+            @Override public void saveDirEntry(String path, String archiveName, String entryName) {}
+            @Override public void createArchive(String path, String archiveName, Manifest manifest) {}
+            @Override public void closeArchive(String path, String archiveName) {}
+            @Override public void copyEntry(String source, String path, String archiveName, String entry) {}
+        };
+
+        Path tmpDir = null;
+        try {
+            tmpDir = Files.createTempDirectory("vineflower");
+            Path classFile = tmpDir.resolve(className.replace('.', '/') + ".class");
+            Files.createDirectories(classFile.getParent());
+            Files.write(classFile, classBytes);
+
+            Map<String, Object> options = new HashMap<>();
+            options.put("ignore-module-info", "1");
+            options.put(IFernflowerPreferences.INDENT_STRING, "    ");
+
+            Fernflower engine = new Fernflower(saver, options, IFernflowerLogger.NO_OP);
+
+            for (String pathEntry : System.getProperty("java.class.path").split(File.pathSeparator)) {
+                engine.addLibrary(new File(pathEntry));
+            }
+
+            engine.addSource(classFile.toFile());
+            engine.decompileContext();
+
+            className = className.replace(".","/");
+            String result = resultMap.get(className);
+            if (result == null) {
+                String simpleName = className.substring(className.lastIndexOf('/') + 1);
+                for (Map.Entry<String, String> entry : resultMap.entrySet()) {
+                    if (entry.getKey().endsWith("/" + simpleName)) {
+                        return entry.getValue();
+                    }
+                }
+            }
+            if (result == null) {
+                LOGGER.warn("No decompiled output produced for class '{}'", className);
+                return "// no sources were generated";
+            }
+            return result;
+        } finally {
+            if (tmpDir != null) {
+                try {
+                    Files.walk(tmpDir)
+                            .sorted(Comparator.reverseOrder())
+                            .map(Path::toFile)
+                            .forEach(File::delete);
+                } catch (IOException ignored) {
+                    LOGGER.debug("Failed to clean temp directory", ignored);
+                }
+            }
         }
     }
 
@@ -21,10 +109,8 @@ public class CompilerUtils {
         StringWriter writer = new StringWriter();
         DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
         try (StandardJavaFileManager fileManager = COMPILER.getStandardFileManager(null, null, null)) {
-
             Iterable<? extends JavaFileObject> units = fileManager.getJavaFileObjectsFromStrings(List.of(sources));
             Iterable<String> options = List.of("-proc:none");
-
             JavaCompiler.CompilationTask task = COMPILER.getTask(
                     writer,
                     fileManager,
@@ -34,12 +120,9 @@ public class CompilerUtils {
                     units
             );
             task.setProcessors(Collections.emptyList());
-
             boolean success = task.call();
-
             String info = buildDiagnosticMessage(diagnostics, writer.toString());
             return new CompileInfo(success, info);
-
         } catch (Exception e) {
             e.printStackTrace(new PrintWriter(writer));
             return new CompileInfo(false, writer.toString());
@@ -61,12 +144,11 @@ public class CompilerUtils {
         return sb.toString();
     }
 
-    public record CompileInfo(boolean success,String info){
-
-        public JsonObject toJson(){
+    public record CompileInfo(boolean success, String info) {
+        public JsonObject toJson() {
             JsonObject object = new JsonObject();
-            object.addProperty("success",success);
-            object.addProperty("info",info);
+            object.addProperty("success", success);
+            object.addProperty("info", info);
             return object;
         }
     }
