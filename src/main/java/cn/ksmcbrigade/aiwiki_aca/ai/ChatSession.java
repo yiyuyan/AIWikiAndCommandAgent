@@ -38,6 +38,22 @@ public class ChatSession {
                 3. read_knowledge(filename: string) - 读取知识文件完整内容
                 4. run_command(command: string) - 执行 Minecraft 指令（部分危险指令需要玩家批准）
                 5. ask_player(question: string) - 向玩家提问并等待回答
+                6. get_class_source(class_name: string) - 反编译已加载的JVM类并返回Java源码（较慢，仅在需要查看完整源码时使用）
+                7. redefine_class(class_name: string, new_source: string) - 运行时修改已加载的JVM类（需传入完整修改后源码，较慢）
+                8. replace_class(class_name: string, replacements: [{old, new}]) - 替换式重定义（推荐，最快）
+
+                代码修改工具选择（重要）：
+                - 修改类代码时，优先使用 replace_class，它在工具内部完成反编译→替换→编译→校验→热替换，只需一次调用，速度最快
+                - 仅当需要查看完整类源码时才使用 get_class_source（反编译较慢）
+                - 仅当需要重写整个类时才使用 redefine_class（需传入完整源码，较慢）
+                - replace_class 的 old 参数必须与反编译输出精确匹配，可先用 get_class_source 查看实际输出
+
+                replace_class 使用说明：
+                - 提供 class_name 和 replacements 数组，每个替换包含 old（要查找的代码）和 new（替换后的代码）
+                - old 必须与反编译源码精确匹配（包括空格、换行）
+                - 可一次替换多处，按数组顺序依次应用
+                - 不能新增字段或新增方法，仅允许替换已有方法体内的代码
+                - 使用 MixinHotSwap 缓冲：检测到新增成员会在 redefine 前拒绝
 
                 知识库文件命名规则：所有文件使用 {分类}_{文件名}.txt 格式。
                 分类包括：aprilfools, block, command, edition, item, mechanism, mob, other, tech, version, world, general, mod, minecraft_wiki, structure。
@@ -75,6 +91,22 @@ public class ChatSession {
                 3. read_knowledge(filename: string) - Read full content of a knowledge file
                 4. run_command(command: string) - Execute a Minecraft command (some dangerous commands require player approval)
                 5. ask_player(question: string) - Ask the player a question and wait for response
+                6. get_class_source(class_name: string) - Decompile a loaded JVM class (slow, only use when you need to inspect full source)
+                7. redefine_class(class_name: string, new_source: string) - Modify a loaded JVM class (requires full modified source, slow)
+                8. replace_class(class_name: string, replacements: [{old, new}]) - Targeted replace-and-redefine (recommended, fastest)
+
+                Code modification tool selection (important):
+                - For modifying class code, ALWAYS prefer replace_class. It decompiles→replaces→compiles→validates→hot-swaps in a single call. Much faster.
+                - Only use get_class_source when you need to inspect the full class source (decompilation is slow).
+                - Only use redefine_class when you need to rewrite the entire class (requires full source, slow).
+                - replace_class's 'old' must exactly match the decompiled output. Use get_class_source first if unsure.
+
+                replace_class usage:
+                - Provide class_name and a replacements array. Each replacement has 'old' (code to find) and 'new' (replacement code).
+                - 'old' must exactly match the decompiled source (including whitespace and newlines).
+                - Multiple replacements are applied sequentially in array order.
+                - Cannot add fields or methods — only replace code within existing method bodies.
+                - Uses MixinHotSwap as buffer: rejects if new members are detected.
 
                 Knowledge base file naming: All files use {category}_{filename}.txt format.
                 Categories: aprilfools, block, command, edition, item, mechanism, mob, other, tech, version, world, general, mod, minecraft_wiki, structure.

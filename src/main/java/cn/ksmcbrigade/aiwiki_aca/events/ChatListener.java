@@ -52,6 +52,9 @@ public class ChatListener {
         }
 
         String prefix = Config.AI_PREFIX.get();
+        boolean zh = "zh_cn".equalsIgnoreCase(Config.LANGUAGE.get());
+
+        player.sendSystemMessage(Component.literal(prefix + "§7" + (zh ? "正在处理中，请稍候..." : "Processing, please wait...")));
 
         McChatbot.AI_EXECUTOR.submit(() -> {
             try {

@@ -30,6 +30,39 @@ public class ToolDefinitions {
                 + " / 向玩家提问并等待回答。玩家通过 /ai <回答> 回复。",
                 "{\"type\":\"object\",\"properties\":{\"question\":{\"type\":\"string\",\"description\":\"The question to ask the player / 要问玩家的问题\"}},\"required\":[\"question\"]}"));
 
+        tools.add(createTool("get_class_source", "Decompile a loaded JVM class and return its Java source code. Use the fully qualified class name (e.g. java.lang.String)."
+                + " / 反编译已加载的JVM类并返回Java源码。使用全限定类名（如 java.lang.String）。",
+                "{\"type\":\"object\",\"properties\":{\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name (e.g. java.lang.String) / 全限定类名\"}},\"required\":[\"class_name\"]}"));
+
+        tools.add(createTool("redefine_class",
+                "Modify a loaded JVM class at runtime. The modified source MUST NOT add new fields or new methods compared to the original — "
+                + "only method bodies, field initializers, constructors, and static blocks may change. "
+                + "Uses MixinHotSwap as buffer: if schema-compatible the change is applied directly; "
+                + "if not (added members detected) the change is rejected before attempting redefine. "
+                + "SLOW: decompiles entire class. Prefer replace_class for targeted changes."
+                + " / 运行时修改已加载的JVM类。修改后的源码不能新增字段或方法。会反编译整个类，速度较慢。"
+                + " 定向修改请优先使用 replace_class。",
+                "{\"type\":\"object\",\"properties\":{"
+                + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name to redefine / 要修改的全限定类名\"},"
+                + "\"new_source\":{\"type\":\"string\",\"description\":\"The full modified Java source code of the class / 修改后的完整Java源码\"}"
+                + "},\"required\":[\"class_name\",\"new_source\"]}"));
+
+        tools.add(createTool("replace_class",
+                "TARGETED REDEFINE: Replace specific code blocks in a loaded JVM class. The tool decompiles the class internally, "
+                + "applies all old->new string replacements, recompiles, validates schema (no new fields/methods), "
+                + "and hot-swaps via MixinHotSwap. Much faster than get_class_source + redefine_class for targeted changes. "
+                + "Each 'old' must exactly match text in the decompiled source."
+                + " / 替换式重定义：将指定类中匹配的代码块替换为新代码块。工具内部完成反编译→替换→编译→校验→热替换。"
+                + " 比 get_class_source + redefine_class 快得多。old 必须与反编译输出精确匹配。",
+                "{\"type\":\"object\",\"properties\":{"
+                + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name / 全限定类名\"},"
+                + "\"replacements\":{\"type\":\"array\",\"description\":\"List of code block replacements to apply sequentially / 按顺序应用的替换列表\","
+                + "\"items\":{\"type\":\"object\",\"properties\":{"
+                + "\"old\":{\"type\":\"string\",\"description\":\"Exact code to find in decompiled source / 在反编译源码中查找的精确代码\"},"
+                + "\"new\":{\"type\":\"string\",\"description\":\"Replacement code / 替换后的代码\"}"
+                + "},\"required\":[\"old\",\"new\"]}}"
+                + "},\"required\":[\"class_name\",\"replacements\"]}"));
+
         return tools;
     }
 

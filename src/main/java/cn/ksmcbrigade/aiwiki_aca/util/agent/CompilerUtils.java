@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import javax.tools.*;
 import java.io.*;
 import java.lang.instrument.UnmodifiableClassException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -37,7 +38,7 @@ public class CompilerUtils {
     }
 
     private static String decompile(String className, byte[] classBytes) throws IOException {
-        LOGGER.info("Decompiling class '{}', bytecode size: {} bytes", className, classBytes.length);
+        LOGGER.debug("Decompiling class '{}', bytecode size: {} bytes", className, classBytes.length);
 
         Map<String, String> resultMap = new HashMap<>();
         IResultSaver saver = new IResultSaver() {
@@ -109,7 +110,20 @@ public class CompilerUtils {
         StringWriter writer = new StringWriter();
         DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
         try (StandardJavaFileManager fileManager = COMPILER.getStandardFileManager(null, null, null)) {
-            Iterable<? extends JavaFileObject> units = fileManager.getJavaFileObjectsFromStrings(List.of(sources));
+            JavaFileObject[] units = new JavaFileObject[sources.length];
+            for (int i = 0; i < sources.length; i++) {
+                String source = sources[i];
+                units[i] = new SimpleJavaFileObject(
+                        URI.create("string:///source" + i + JavaFileObject.Kind.SOURCE.extension),
+                        JavaFileObject.Kind.SOURCE
+                ) {
+                    @Override
+                    public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+                        return source;
+                    }
+                };
+            }
+            Iterable<? extends JavaFileObject> compilationUnits = Arrays.asList(units);
             Iterable<String> options = List.of("-proc:none");
             JavaCompiler.CompilationTask task = COMPILER.getTask(
                     writer,
@@ -117,7 +131,7 @@ public class CompilerUtils {
                     diagnostics,
                     options,
                     null,
-                    units
+                    compilationUnits
             );
             task.setProcessors(Collections.emptyList());
             boolean success = task.call();

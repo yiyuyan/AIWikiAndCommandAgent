@@ -42,7 +42,7 @@ public class Config {
         BUILDER.push("ai");
         TOOL_CALL_MAX_ROUNDS = BUILDER
                 .comment("Maximum number of tool call rounds the AI can perform per message / AI每轮消息最大工具调用次数")
-                .defineInRange("tool_call_max_rounds", 10, 1, 20);
+                .defineInRange("tool_call_max_rounds", 300, 1, 1000000);
         BUILDER.pop();
 
         BUILDER.push("command");
