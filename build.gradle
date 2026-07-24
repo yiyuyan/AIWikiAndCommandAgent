@@ -1,12 +1,21 @@
+buildscript {
+    dependencies {
+        classpath 'io.github.yiyuyan:SuperAccessTransformerPlugin:1.003'
+    }
+}
 plugins {
     id 'java-library'
     id 'maven-publish'
     id 'idea'
     id 'net.neoforged.moddev' version '2.0.142'
 }
-
+apply plugin: 'io.github.yiyuyan.sat-plugin'
 version = mod_version
 group = mod_group_id
+
+superAccessTransformer{
+    getPackages().set([])
+}
 
 repositories {
     mavenLocal()

@@ -63,6 +63,50 @@ public class ToolDefinitions {
                 + "},\"required\":[\"old\",\"new\"]}}"
                 + "},\"required\":[\"class_name\",\"replacements\"]}"));
 
+        tools.add(createTool("redefine_class_no_verify",
+                "NO-VERIFY redefine: same as redefine_class but SKIPS compilation pre-check and schema validation. "
+                + "Still compiles internally to produce bytecode, but does not reject on compilation errors or schema changes. "
+                + "MixinHotSwap handles schema changes via trampoline. USE WITH CAUTION."
+                + " / 无校验重定义：与 redefine_class 相同但跳过编译预检和 schema 校验。"
+                + " 仍会内部编译生成字节码，但不会因编译错误或 schema 变更而拒绝。MixinHotSwap 通过 trampoline 处理 schema 变更。请谨慎使用。",
+                "{\"type\":\"object\",\"properties\":{"
+                + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name / 全限定类名\"},"
+                + "\"new_source\":{\"type\":\"string\",\"description\":\"The full modified Java source code / 修改后的完整Java源码\"}"
+                + "},\"required\":[\"class_name\",\"new_source\"]}"));
+
+        tools.add(createTool("replace_class_no_verify",
+                "NO-VERIFY replace: same as replace_class but SKIPS compilation pre-check and schema validation. "
+                + "Still compiles internally to produce bytecode, but does not reject on compilation errors or schema changes. "
+                + "MixinHotSwap handles schema changes via trampoline. USE WITH CAUTION."
+                + " / 无校验替换式重定义：与 replace_class 相同但跳过编译预检和 schema 校验。"
+                + " 仍会内部编译生成字节码，但不会因编译错误或 schema 变更而拒绝。MixinHotSwap 通过 trampoline 处理 schema 变更。请谨慎使用。",
+                "{\"type\":\"object\",\"properties\":{"
+                + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name / 全限定类名\"},"
+                + "\"replacements\":{\"type\":\"array\",\"description\":\"List of code block replacements / 替换列表\","
+                + "\"items\":{\"type\":\"object\",\"properties\":{"
+                + "\"old\":{\"type\":\"string\",\"description\":\"Code to find / 要查找的代码\"},"
+                + "\"new\":{\"type\":\"string\",\"description\":\"Replacement code / 替换后的代码\"}"
+                + "},\"required\":[\"old\",\"new\"]}}"
+                + "},\"required\":[\"class_name\",\"replacements\"]}"));
+
+        tools.add(createTool("get_source_bytes",
+                "Get the raw bytecode of a loaded JVM class as a Base64 string. Useful for inspecting or transferring bytecode. "
+                + " / 获取已加载JVM类的原始字节码，以Base64字符串返回。可用于检查或传输字节码。",
+                "{\"type\":\"object\",\"properties\":{"
+                + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name / 全限定类名\"}"
+                + "},\"required\":[\"class_name\"]}"));
+
+        tools.add(createTool("redefine_class_by_bytes_no_verify",
+                "NO-VERIFY redefine by bytecode: redefine a loaded JVM class using raw bytecode (Base64 encoded). "
+                + "SKIPS compilation pre-check and schema validation. MixinHotSwap handles schema changes via trampoline. "
+                + "USE WITH CAUTION — only use when you have valid bytecode (e.g. from get_source_bytes + modifications)."
+                + " / 无校验字节码重定义：通过原始字节码（Base64编码）重定义已加载的JVM类。"
+                + " 跳过编译预检和 schema 校验。MixinHotSwap 通过 trampoline 处理 schema 变更。请谨慎使用。",
+                "{\"type\":\"object\",\"properties\":{"
+                + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name / 全限定类名\"},"
+                + "\"bytes\":{\"type\":\"string\",\"description\":\"Base64-encoded class bytecode / Base64编码的类字节码\"}"
+                + "},\"required\":[\"class_name\",\"bytes\"]}"));
+
         return tools;
     }
 

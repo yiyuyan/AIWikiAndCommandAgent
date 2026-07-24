@@ -41,19 +41,26 @@ public class ChatSession {
                 6. get_class_source(class_name: string) - 反编译已加载的JVM类并返回Java源码（较慢，仅在需要查看完整源码时使用）
                 7. redefine_class(class_name: string, new_source: string) - 运行时修改已加载的JVM类（需传入完整修改后源码，较慢）
                 8. replace_class(class_name: string, replacements: [{old, new}]) - 替换式重定义（推荐，最快）
+                9. redefine_class_no_verify(class_name: string, new_source: string) - 同 redefine_class 但跳过编译预检和 schema 校验（MixinHotSwap 通过 trampoline 处理 schema 变更）
+                10. replace_class_no_verify(class_name: string, replacements: [{old, new}]) - 同 replace_class 但跳过编译预检和 schema 校验
+                11. get_source_bytes(class_name: string) - 获取已加载类的原始字节码（Base64）
+                12. redefine_class_by_bytes_no_verify(class_name: string, bytes: string) - 通过字节码（Base64）重定义类，无验证，最快但需要自行提供正确字节码
 
                 代码修改工具选择（重要）：
                 - 修改类代码时，优先使用 replace_class，它在工具内部完成反编译→替换→编译→校验→热替换，只需一次调用，速度最快
+                - 如果 replace_class 因 schema 校验失败（如新增字段/方法），且确实需要修改 schema，使用 replace_class_no_verify
+                - 如果需要直接操作字节码，先用 get_source_bytes 获取，修改后用 redefine_class_by_bytes_no_verify 重定义（无校验，最快）
                 - 仅当需要查看完整类源码时才使用 get_class_source（反编译较慢）
                 - 仅当需要重写整个类时才使用 redefine_class（需传入完整源码，较慢）
+                - 仅当需要无校验地重写整个类时才使用 redefine_class_no_verify
                 - replace_class 的 old 参数必须与反编译输出精确匹配，可先用 get_class_source 查看实际输出
+                - 使用 redefine_class 时内部类源码也需一并传入
 
-                replace_class 使用说明：
+                replace_class / replace_class_no_verify 使用说明：
                 - 提供 class_name 和 replacements 数组，每个替换包含 old（要查找的代码）和 new（替换后的代码）
                 - old 必须与反编译源码精确匹配（包括空格、换行）
                 - 可一次替换多处，按数组顺序依次应用
-                - 不能新增字段或新增方法，仅允许替换已有方法体内的代码
-                - 使用 MixinHotSwap 缓冲：检测到新增成员会在 redefine 前拒绝
+                - replace_class 不能新增字段或新增方法，仅允许替换已有方法体内的代码；replace_class_no_verify 无此限制
 
                 知识库文件命名规则：所有文件使用 {分类}_{文件名}.txt 格式。
                 分类包括：aprilfools, block, command, edition, item, mechanism, mob, other, tech, version, world, general, mod, minecraft_wiki, structure。
@@ -94,19 +101,26 @@ public class ChatSession {
                 6. get_class_source(class_name: string) - Decompile a loaded JVM class (slow, only use when you need to inspect full source)
                 7. redefine_class(class_name: string, new_source: string) - Modify a loaded JVM class (requires full modified source, slow)
                 8. replace_class(class_name: string, replacements: [{old, new}]) - Targeted replace-and-redefine (recommended, fastest)
+                9. redefine_class_no_verify(class_name: string, new_source: string) - Like redefine_class but skips compilation pre-check and schema validation (MixinHotSwap handles schema changes via trampoline)
+                10. replace_class_no_verify(class_name: string, replacements: [{old, new}]) - Like replace_class but skips compilation pre-check and schema validation
+                11. get_source_bytes(class_name: string) - Get raw bytecode of a loaded class (Base64)
+                12. redefine_class_by_bytes_no_verify(class_name: string, bytes: string) - Redefine a class by raw bytecode (Base64), no verification, fastest but requires correct bytecode
 
                 Code modification tool selection (important):
                 - For modifying class code, ALWAYS prefer replace_class. It decompiles→replaces→compiles→validates→hot-swaps in a single call. Much faster.
+                - If replace_class fails due to schema validation (e.g. added fields/methods) and you truly need to change the schema, use replace_class_no_verify.
+                - If you need to work with bytecode directly, use get_source_bytes to get it, modify it, then redefine_class_by_bytes_no_verify to apply (no verification, fastest).
                 - Only use get_class_source when you need to inspect the full class source (decompilation is slow).
                 - Only use redefine_class when you need to rewrite the entire class (requires full source, slow).
+                - Only use redefine_class_no_verify when you need schema-changing full-class rewrites without validation.
                 - replace_class's 'old' must exactly match the decompiled output. Use get_class_source first if unsure.
+                - When using redefine_class,the source codes of the inner class also needs to be passed in together.
 
-                replace_class usage:
+                replace_class / replace_class_no_verify usage:
                 - Provide class_name and a replacements array. Each replacement has 'old' (code to find) and 'new' (replacement code).
                 - 'old' must exactly match the decompiled source (including whitespace and newlines).
                 - Multiple replacements are applied sequentially in array order.
-                - Cannot add fields or methods — only replace code within existing method bodies.
-                - Uses MixinHotSwap as buffer: rejects if new members are detected.
+                - replace_class cannot add fields or methods — only replace code within existing method bodies. replace_class_no_verify has no such restriction.
 
                 Knowledge base file naming: All files use {category}_{filename}.txt format.
                 Categories: aprilfools, block, command, edition, item, mechanism, mob, other, tech, version, world, general, mod, minecraft_wiki, structure.

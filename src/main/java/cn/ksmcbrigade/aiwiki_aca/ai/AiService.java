@@ -27,6 +27,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.*;
+import java.util.Base64;
 import java.util.stream.Collectors;
 
 public class AiService {
@@ -525,6 +526,181 @@ public class AiService {
                         return (isZh()
                                 ? "错误: 替换并重定义类 \"" + className + "\" 失败: " + e.getMessage()
                                 : "ERROR: Failed to replace and redefine class \"" + className + "\": " + e.getMessage());
+                    }
+                }
+                case "redefine_class_no_verify": {
+                    String className = args.get("class_name").getAsString();
+                    String newSource = args.get("new_source").getAsString();
+                    player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§7" + (isZh() ? "正在无校验重定义类: " : "Redefining (no-verify): ") + className + "..."));
+                    try {
+                        Instrumentation inst = InstUtils.getInst();
+                        if (inst == null) {
+                            String errMsg = isZh() ? "错误: Instrumentation 不可用。" : "ERROR: Instrumentation is not available.";
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + errMsg));
+                            return errMsg;
+                        }
+
+                        Class<?> targetClass = Class.forName(className.replace("/", "."));
+                        byte[] newBytes = compileAndGetClassBytes(newSource, className);
+                        if (newBytes == null) {
+                            String errMsg = (isZh()
+                                    ? "错误: 编译失败，无法生成字节码。"
+                                    : "ERROR: Compilation failed, cannot produce bytecode.");
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "编译失败: " : "Compilation failed: ") + className));
+                            return errMsg;
+                        }
+
+                        ClassDefinition pending = MixinHotSwap.replaceMixedClasses(targetClass, newBytes, inst, null);
+                        if (pending != null) {
+                            inst.redefineClasses(pending);
+                        }
+
+                        McChatbot.LOGGER.info("[redefine_class_no_verify] SUCCESS class={}", className);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "无校验重定义成功: " : "Redefined (no-verify): ") + className));
+                        return (isZh()
+                                ? "类 \"" + className + "\" 已成功重新定义（无校验模式）。"
+                                : "Class \"" + className + "\" successfully redefined (no-verify mode).");
+                    } catch (Exception e) {
+                        McChatbot.LOGGER.error("[redefine_class_no_verify] FAILED class={}", className, e);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "无校验重定义失败: " : "Redefine (no-verify) failed: ") + className + " - " + e.getMessage()));
+                        return (isZh()
+                                ? "错误: 无校验重定义类 \"" + className + "\" 失败: " + e.getMessage()
+                                : "ERROR: Failed to redefine class \"" + className + "\" (no-verify): " + e.getMessage());
+                    }
+                }
+                case "replace_class_no_verify": {
+                    String className = args.get("class_name").getAsString();
+                    JsonArray replacementsArray = args.getAsJsonArray("replacements");
+                    int replaceCount = replacementsArray != null ? replacementsArray.size() : 0;
+                    player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§7" + (isZh() ? "正在无校验替换并重定义: " : "Replacing (no-verify): ") + className + " (" + replaceCount + (isZh() ? "处替换)" : " replacements)") + "..."));
+                    try {
+                        Instrumentation inst = InstUtils.getInst();
+                        if (inst == null) {
+                            String errMsg = isZh() ? "错误: Instrumentation 不可用。" : "ERROR: Instrumentation is not available.";
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + errMsg));
+                            return errMsg;
+                        }
+
+                        Class<?> targetClass = Class.forName(className.replace("/", "."));
+                        String source = CompilerUtils.getSource(targetClass);
+
+                        List<String> notFound = new ArrayList<>();
+                        List<String> applied = new ArrayList<>();
+
+                        for (JsonElement elem : replacementsArray) {
+                            JsonObject r = elem.getAsJsonObject();
+                            String oldCode = r.get("old").getAsString();
+                            String newCode = r.get("new").getAsString();
+
+                            if (source.contains(oldCode)) {
+                                source = source.replace(oldCode, newCode);
+                                applied.add(shortDesc(oldCode));
+                            } else {
+                                String replacedSource = replaceByLineMatch(source, oldCode, newCode);
+                                if (replacedSource != null) {
+                                    source = replacedSource;
+                                    applied.add(shortDesc(oldCode));
+                                } else {
+                                    notFound.add(shortDesc(oldCode));
+                                }
+                            }
+                        }
+
+                        if (!notFound.isEmpty()) {
+                            String errMsg = (isZh()
+                                    ? "错误: 以下 " + notFound.size() + " 处代码块未找到:\n" + String.join("\n", notFound)
+                                    : "ERROR: " + notFound.size() + " code block(s) not found:\n" + String.join("\n", notFound));
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "替换失败: 未找到 " + notFound.size() + " 处代码块" : "Replace failed: " + notFound.size() + " code block(s) not found")));
+                            return errMsg;
+                        }
+
+                        byte[] newBytes = compileAndGetClassBytes(source, className);
+                        if (newBytes == null) {
+                            String errMsg = (isZh()
+                                    ? "错误: 编译失败，无法生成字节码。"
+                                    : "ERROR: Compilation failed, cannot produce bytecode.");
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "编译失败: " : "Compilation failed: ") + className));
+                            return errMsg;
+                        }
+
+                        ClassDefinition pending = MixinHotSwap.replaceMixedClasses(targetClass, newBytes, inst, null);
+                        if (pending != null) {
+                            inst.redefineClasses(pending);
+                        }
+
+                        McChatbot.LOGGER.info("[replace_class_no_verify] SUCCESS class={} applied={}", className, applied.size());
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "无校验替换成功: " : "Replaced (no-verify): ") + className + " §7(" + applied.size() + (isZh() ? " 处)" : " replacements)")));
+                        return (isZh()
+                                ? "类 \"" + className + "\" 已成功替换并重新定义（无校验模式）。已应用 " + applied.size() + " 处替换。"
+                                : "Class \"" + className + "\" successfully replaced and redefined (no-verify mode). " + applied.size() + " replacement(s) applied.");
+                    } catch (Exception e) {
+                        McChatbot.LOGGER.error("[replace_class_no_verify] FAILED class={}", className, e);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "无校验替换失败: " : "Replace (no-verify) failed: ") + className + " - " + e.getMessage()));
+                        return (isZh()
+                                ? "错误: 无校验替换并重定义类 \"" + className + "\" 失败: " + e.getMessage()
+                                : "ERROR: Failed to replace and redefine class \"" + className + "\" (no-verify): " + e.getMessage());
+                    }
+                }
+                case "get_source_bytes": {
+                    String className = args.get("class_name").getAsString();
+                    player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§7" + (isZh() ? "正在获取字节码: " : "Getting bytecode: ") + className + "..."));
+                    try {
+                        Instrumentation inst = InstUtils.getInst();
+                        if (inst == null) {
+                            String errMsg = isZh() ? "错误: Instrumentation 不可用。" : "ERROR: Instrumentation is not available.";
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + errMsg));
+                            return errMsg;
+                        }
+                        Class<?> targetClass = Class.forName(className.replace("/", "."));
+                        byte[] bytes = InstUtils.getClassBytes(inst, targetClass);
+                        String b64 = Base64.getEncoder().encodeToString(bytes);
+                        McChatbot.LOGGER.info("[get_source_bytes] SUCCESS class={} bytes={}", className, bytes.length);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "字节码获取成功: " : "Got bytecode: ") + className + " §7(" + bytes.length + " bytes, " + b64.length() + " B64 chars)"));
+                        return (isZh()
+                                ? "类 \"" + className + "\" 的字节码（Base64，" + bytes.length + " bytes）：\n" + b64
+                                : "Bytecode of class \"" + className + "\" (Base64, " + bytes.length + " bytes):\n" + b64);
+                    } catch (Exception e) {
+                        McChatbot.LOGGER.error("[get_source_bytes] FAILED class={}", className, e);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "字节码获取失败: " : "Get bytecode failed: ") + className + " - " + e.getMessage()));
+                        return (isZh()
+                                ? "错误: 获取类 \"" + className + "\" 字节码失败: " + e.getMessage()
+                                : "ERROR: Failed to get bytecode of class \"" + className + "\": " + e.getMessage());
+                    }
+                }
+                case "redefine_class_by_bytes_no_verify": {
+                    String className = args.get("class_name").getAsString();
+                    String b64 = args.get("bytes").getAsString();
+                    player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§7" + (isZh() ? "正在字节码重定义（无校验）: " : "Redefining by bytecode (no-verify): ") + className + "..."));
+                    try {
+                        Instrumentation inst = InstUtils.getInst();
+                        if (inst == null) {
+                            String errMsg = isZh() ? "错误: Instrumentation 不可用。" : "ERROR: Instrumentation is not available.";
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + errMsg));
+                            return errMsg;
+                        }
+                        byte[] newBytes = Base64.getDecoder().decode(b64);
+                        Class<?> targetClass = Class.forName(className.replace("/", "."));
+                        ClassDefinition pending = MixinHotSwap.replaceMixedClasses(targetClass, newBytes, inst, null);
+                        if (pending != null) {
+                            inst.redefineClasses(pending);
+                        }
+                        McChatbot.LOGGER.info("[redefine_class_by_bytes_no_verify] SUCCESS class={} bytes={}", className, newBytes.length);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "字节码重定义成功: " : "Redefined by bytecode (no-verify): ") + className));
+                        return (isZh()
+                                ? "类 \"" + className + "\" 已通过字节码成功重定义（无校验模式）。"
+                                : "Class \"" + className + "\" successfully redefined by bytecode (no-verify mode).");
+                    } catch (IllegalArgumentException e) {
+                        McChatbot.LOGGER.error("[redefine_class_by_bytes_no_verify] FAILED (bad Base64) class={}", className, e);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "Base64 解码失败: " : "Base64 decode failed: ") + e.getMessage()));
+                        return (isZh()
+                                ? "错误: Base64 解码失败，请检查 bytes 参数。" + e.getMessage()
+                                : "ERROR: Base64 decode failed. Check the bytes parameter. " + e.getMessage());
+                    } catch (Exception e) {
+                        McChatbot.LOGGER.error("[redefine_class_by_bytes_no_verify] FAILED class={}", className, e);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "字节码重定义失败: " : "Redefine by bytecode failed: ") + className + " - " + e.getMessage()));
+                        return (isZh()
+                                ? "错误: 通过字节码重定义类 \"" + className + "\" 失败: " + e.getMessage()
+                                : "ERROR: Failed to redefine class \"" + className + "\" by bytecode: " + e.getMessage());
                     }
                 }
                 default:
