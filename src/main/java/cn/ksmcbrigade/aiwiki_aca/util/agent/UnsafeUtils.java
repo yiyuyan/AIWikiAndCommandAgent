@@ -24,7 +24,7 @@ import java.util.*;
 @SuppressWarnings("removal")
 public class UnsafeUtils {
     public static final Unsafe UNSAFE = getUnsafe();
-    private static final MethodHandles.Lookup lookup = (MethodHandles.Lookup)getFieldValue(MethodHandles.Lookup.class, "IMPL_LOOKUP", MethodHandles.Lookup.class);
+    public static final MethodHandles.Lookup lookup = (MethodHandles.Lookup)getFieldValue(MethodHandles.Lookup.class, "IMPL_LOOKUP", MethodHandles.Lookup.class);
     private static final Object internalUNSAFE = getInternalUNSAFE();
     private static MethodHandle objectFieldOffsetInternal;
 

@@ -1,5 +1,6 @@
 package cn.ksmcbrigade.aiwiki_aca.util.agent;
 
+import cn.ksmcbrigade.aiwiki_aca.util.agent.compile.SelfForwardingJavaFileManager;
 import com.google.gson.JsonObject;
 import org.jetbrains.java.decompiler.main.Fernflower;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
@@ -7,10 +8,16 @@ import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spongepowered.tools.agent.MixinAgent;
 
 import javax.tools.*;
 import java.io.*;
 import java.lang.instrument.UnmodifiableClassException;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -143,6 +150,67 @@ public class CompilerUtils {
         }
     }
 
+    public static SingleCompileInfo compileSingle(String className,String source) {
+        StringWriter writer = new StringWriter();
+        DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
+        Map<String, ByteArrayOutputStream> outputStreamMap = new HashMap<>();
+        try (JavaFileManager fileManager = new SelfForwardingJavaFileManager(outputStreamMap,COMPILER.getStandardFileManager(null, null, null))) {
+            JavaFileObject[] units = new JavaFileObject[1];
+            units[0] = new SimpleJavaFileObject(
+                        URI.create("string:///source" + className.replace(".","/") + JavaFileObject.Kind.SOURCE.extension),
+                        JavaFileObject.Kind.SOURCE
+            ) {
+                @Override
+                public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+                    return source;
+                }
+            };
+            Iterable<? extends JavaFileObject> compilationUnits = Arrays.asList(units);
+            Iterable<String> options = List.of("-proc:none");
+            JavaCompiler.CompilationTask task = COMPILER.getTask(
+                    writer,
+                    fileManager,
+                    diagnostics,
+                    options,
+                    null,
+                    compilationUnits
+            );
+            task.setProcessors(Collections.emptyList());
+            boolean success = task.call();
+            String info = buildDiagnosticMessage(diagnostics, writer.toString());
+            ByteArrayOutputStream byteArrayOutputStream = null;
+            byteArrayOutputStream = outputStreamMap.getOrDefault(className,null);
+            if(byteArrayOutputStream==null) byteArrayOutputStream = outputStreamMap.getOrDefault(className.replace(".","/"),null);
+            return new SingleCompileInfo(success, info,byteArrayOutputStream==null?MixinAgent.ERROR_BYTECODE:byteArrayOutputStream.toByteArray());
+        } catch (Exception e) {
+            e.printStackTrace(new PrintWriter(writer));
+            return new SingleCompileInfo(false, writer.toString(), MixinAgent.ERROR_BYTECODE);
+        }
+    }
+
+    public static Class<?> defineClass(Class<?> targetClass,byte[] bytes) throws IllegalAccessException {
+        if (UnsafeUtils.lookup != null) {
+            MethodHandles.Lookup lookup = MethodHandles.privateLookupIn(targetClass,UnsafeUtils.lookup);
+            return lookup.defineClass(bytes);
+        }
+        throw new RuntimeException("Failed to get lookup.");
+    }
+
+    public static Class<?> compileSingleSourceIntoClass(String clazzName,String source,Class<?> targetClass) throws IllegalAccessException {
+        CompilerUtils.SingleCompileInfo info = CompilerUtils.compileSingle(clazzName,source);
+        if(!info.success) throw new RuntimeException("Failed to compile "+clazzName);
+        if(Arrays.equals(info.bytes, MixinAgent.ERROR_BYTECODE)) throw new RuntimeException("The class bytes is error");
+        return defineClass(targetClass, info.bytes);
+    }
+
+    public static Object compileSingleSourceIntoClassInstanceWithoutArgs(String clazzName,String source,Class<?> targetClass) throws Throwable {
+        if(UnsafeUtils.lookup==null) throw new RuntimeException("Failed to get lookup");
+        Class<?> clazz = compileSingleSourceIntoClass(clazzName,source,targetClass);
+        Constructor<?> constructor = clazz.getDeclaredConstructor();
+        constructor.setAccessible(true);
+        return constructor.newInstance();
+    }
+
     private static String buildDiagnosticMessage(DiagnosticCollector<JavaFileObject> diagnostics, String extraOutput) {
         StringBuilder sb = new StringBuilder();
         if (!extraOutput.isEmpty()) {
@@ -158,12 +226,7 @@ public class CompilerUtils {
         return sb.toString();
     }
 
-    public record CompileInfo(boolean success, String info) {
-        public JsonObject toJson() {
-            JsonObject object = new JsonObject();
-            object.addProperty("success", success);
-            object.addProperty("info", info);
-            return object;
-        }
-    }
+    public record CompileInfo(boolean success, String info) { }
+
+    public record SingleCompileInfo(boolean success, String info,byte[] bytes) { }
 }

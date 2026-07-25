@@ -1,11 +1,15 @@
 package cn.ksmcbrigade.aiwiki_aca;
 
 import cn.ksmcbrigade.aiwiki_aca.events.ChatListener;
+import cn.ksmcbrigade.aiwiki_aca.util.agent.CompilerUtils;
 import cn.ksmcbrigade.aiwiki_aca.util.agent.InstUtils;
+import net.minecraft.client.Minecraft;
 import net.neoforged.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.instrument.ClassFileTransformer;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -42,6 +46,36 @@ public class McChatbot {
             LOGGER.info("sources for title screen: {}", CompilerUtils.getSource(TitleScreen.class));
         } catch (Throwable e) {
             LOGGER.error("Failed to get sources",e);
+        }*/
+
+
+        /* debug CompileUtils
+        try {
+            ClassFileTransformer transformer = (ClassFileTransformer) CompilerUtils.compileSingleSourceIntoClassInstanceWithoutArgs("cn.ksmcbrigade.aiwiki_aca.TestTransformer", """
+                package cn.ksmcbrigade.aiwiki_aca;
+                
+                 import org.objectweb.asm.*;
+                 import java.lang.instrument.ClassFileTransformer;
+                 import java.security.ProtectionDomain;
+                
+                 public class TestTransformer implements ClassFileTransformer {
+                
+                     @Override
+                     public byte[] transform(ClassLoader loader,
+                                             String className,
+                                             Class<?> classBeingRedefined,
+                                             ProtectionDomain protectionDomain,
+                                             byte[] classfileBuffer) {
+                         System.out.println("Test transforming class: " + className);
+                         return null;
+                     }
+                 }
+                """, McChatbot.class);
+            Objects.requireNonNull(InstUtils.getInst()).addTransformer(transformer, true);
+            InstUtils.getInst().retransformClasses(Minecraft.class);
+            InstUtils.getInst().removeTransformer(transformer);
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
         }*/
     }
 
