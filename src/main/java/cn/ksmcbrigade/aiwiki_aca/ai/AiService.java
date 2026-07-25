@@ -20,6 +20,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.io.File;
 import java.lang.instrument.ClassDefinition;
+import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.Instrumentation;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -34,6 +35,10 @@ public class AiService {
     private static final String BUILTIN_API_URL = "https://opencode.ai/zen/v1";
     private static final String BUILTIN_API_KEY = "public";
     private static AiService INSTANCE;
+
+    private static class TransformerByteCapture {
+        static volatile byte[] lastTransformedBytes;
+    }
     private final HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(30))
             .build();
@@ -703,6 +708,156 @@ public class AiService {
                                 : "ERROR: Failed to redefine class \"" + className + "\" by bytecode: " + e.getMessage());
                     }
                 }
+                case "retransform_class": {
+                    String className = args.get("class_name").getAsString();
+                    String transformerSource = args.get("transformer_source").getAsString();
+                    player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§7" + (isZh() ? "正在编译并转换类: " : "Compiling transformer and retransforming: ") + className + "..."));
+                    try {
+                        Instrumentation inst = InstUtils.getInst();
+                        if (inst == null) {
+                            String errMsg = isZh() ? "错误: Instrumentation 不可用。" : "ERROR: Instrumentation is not available.";
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + errMsg));
+                            return errMsg;
+                        }
+
+                        Class<?> targetClass = Class.forName(className.replace("/", "."));
+
+                        String transformerFqn = extractFullyQualifiedClassName(transformerSource);
+                        if (transformerFqn == null) {
+                            String errMsg = (isZh()
+                                    ? "错误: 无法从源码中解析出类名。请确保源码中包含 class/interface/enum 声明。"
+                                    : "ERROR: Could not extract class name from source. Make sure source contains a class/interface/enum declaration.");
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "类名解析失败" : "Class name extraction failed")));
+                            return errMsg;
+                        }
+
+                        ClassFileTransformer transformer = (ClassFileTransformer) CompilerUtils.compileSingleSourceIntoClassInstanceWithoutArgs(
+                                transformerFqn, transformerSource, McChatbot.class);
+
+                        inst.addTransformer(transformer, true);
+                        try {
+                            inst.retransformClasses(targetClass);
+                        } finally {
+                            inst.removeTransformer(transformer);
+                        }
+
+                        McChatbot.LOGGER.info("[retransform_class] SUCCESS class={}", className);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "转换成功: " : "Retransformed: ") + className));
+                        return (isZh()
+                                ? "类 \"" + className + "\" 已通过 ClassFileTransformer 成功转换。转换器已自动移除。"
+                                : "Class \"" + className + "\" successfully retransformed via ClassFileTransformer. Transformer has been removed.");
+                    } catch (Throwable e) {
+                        McChatbot.LOGGER.error("[retransform_class] FAILED class={}", className, e);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "转换失败: " : "Retransform failed: ") + className + " - " + e.getMessage()));
+                        return (isZh()
+                                ? "错误: 编译或转换 ClassFileTransformer 失败: " + e.getMessage()
+                                : "ERROR: Failed to compile or apply ClassFileTransformer: " + e.getMessage());
+                    }
+                }
+                case "redefine_class_by_transformer": {
+                    String className = args.get("class_name").getAsString();
+                    String transformerSource = args.get("transformer_source").getAsString();
+                    player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§7" + (isZh() ? "正在编译转换器并重定义类: " : "Compiling transformer and redefining: ") + className + "..."));
+                    try {
+                        Instrumentation inst = InstUtils.getInst();
+                        if (inst == null) {
+                            String errMsg = isZh() ? "错误: Instrumentation 不可用。" : "ERROR: Instrumentation is not available.";
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + errMsg));
+                            return errMsg;
+                        }
+
+                        Class<?> targetClass = Class.forName(className.replace("/", "."));
+                        byte[] oldBytes = InstUtils.getClassBytes(inst, targetClass);
+
+                        String transformerFqn = extractFullyQualifiedClassName(transformerSource);
+                        if (transformerFqn == null) {
+                            String errMsg = (isZh()
+                                    ? "错误: 无法从源码中解析出类名。请确保源码中包含 class/interface/enum 声明。"
+                                    : "ERROR: Could not extract class name from source. Make sure source contains a class/interface/enum declaration.");
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "类名解析失败" : "Class name extraction failed")));
+                            return errMsg;
+                        }
+
+                        TransformerByteCapture.lastTransformedBytes = null;
+                        ClassFileTransformer capturingTransformer = (ClassFileTransformer) CompilerUtils.compileSingleSourceIntoClassInstanceWithoutArgs(
+                                transformerFqn, transformerSource, McChatbot.class);
+
+                        ClassFileTransformer wrapper = new ClassFileTransformer() {
+                            @Override
+                            public byte[] transform(Module module, ClassLoader loader, String cn,
+                                                     Class<?> classBeingRedefined,
+                                                     java.security.ProtectionDomain protectionDomain,
+                                                     byte[] classfileBuffer) {
+                                try {
+                                    byte[] result = capturingTransformer.transform(module, loader, cn,
+                                            classBeingRedefined, protectionDomain, classfileBuffer);
+                                    TransformerByteCapture.lastTransformedBytes = result;
+                                } catch (Exception e) {
+                                    McChatbot.LOGGER.error("[redefine_class_by_transformer] transform(6) failed", e);
+                                }
+                                return null;
+                            }
+
+                            @Override
+                            public byte[] transform(ClassLoader loader, String cn,
+                                                     Class<?> classBeingRedefined,
+                                                     java.security.ProtectionDomain protectionDomain,
+                                                     byte[] classfileBuffer) {
+                                try {
+                                    byte[] result = capturingTransformer.transform(loader, cn,
+                                            classBeingRedefined, protectionDomain, classfileBuffer);
+                                    TransformerByteCapture.lastTransformedBytes = result;
+                                } catch (Exception e) {
+                                    McChatbot.LOGGER.error("[redefine_class_by_transformer] transform(5) failed", e);
+                                }
+                                return null;
+                            }
+                        };
+
+                        inst.addTransformer(wrapper, true);
+                        try {
+                            inst.retransformClasses(targetClass);
+                        } finally {
+                            inst.removeTransformer(wrapper);
+                        }
+
+                        byte[] capturedBytes = TransformerByteCapture.lastTransformedBytes;
+                        TransformerByteCapture.lastTransformedBytes = null;
+
+                        if (capturedBytes == null) {
+                            String errMsg = (isZh()
+                                    ? "错误: ClassFileTransformer 返回了 null，未产生转换字节码。"
+                                    : "ERROR: ClassFileTransformer returned null — no transformed bytes produced.");
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "转换器返回 null: " : "Transformer returned null: ") + className));
+                            return errMsg;
+                        }
+
+                        if (Arrays.equals(capturedBytes, oldBytes)) {
+                            McChatbot.LOGGER.info("[redefine_class_by_transformer] No changes captured for class={}", className);
+                            player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "转换器未修改字节码: " : "Transformer did not modify bytecode: ") + className));
+                            return (isZh()
+                                    ? "类 \"" + className + "\" 的 ClassFileTransformer 已执行，但未修改字节码。"
+                                    : "ClassFileTransformer executed on \"" + className + "\" but did not modify bytecode.");
+                        }
+
+                        ClassDefinition pending = MixinHotSwap.replaceMixedClasses(targetClass, capturedBytes, inst, null);
+                        if (pending != null) {
+                            inst.redefineClasses(pending);
+                        }
+
+                        McChatbot.LOGGER.info("[redefine_class_by_transformer] SUCCESS class={} bytes={}", className, capturedBytes.length);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "通过转换器重定义成功: " : "Redefined via transformer: ") + className + " §7(" + capturedBytes.length + " bytes)"));
+                        return (isZh()
+                                ? "类 \"" + className + "\" 已通过 ClassFileTransformer 转换并成功重定义（" + capturedBytes.length + " 字节）。"
+                                : "Class \"" + className + "\" successfully redefined via ClassFileTransformer (" + capturedBytes.length + " bytes).");
+                    } catch (Throwable e) {
+                        McChatbot.LOGGER.error("[redefine_class_by_transformer] FAILED class={}", className, e);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "转换器重定义失败: " : "Transformer redefine failed: ") + className + " - " + e.getMessage()));
+                        return (isZh()
+                                ? "错误: 编译或通过 ClassFileTransformer 重定义类失败: " + e.getMessage()
+                                : "ERROR: Failed to compile or redefine class via ClassFileTransformer: " + e.getMessage());
+                    }
+                }
                 default:
                     return isZh() ? "未知工具: " + tc.functionName : "Unknown tool: " + tc.functionName;
             }
@@ -869,6 +1024,25 @@ public class AiService {
     private String shortDesc(String code) {
         code = code.replaceAll("\\s+", " ").trim();
         return code.length() > 50 ? code.substring(0, 47) + "..." : code;
+    }
+
+    private String extractFullyQualifiedClassName(String source) {
+        String pkg = null;
+        for (String line : source.split("\\r?\\n")) {
+            String trimmed = line.trim();
+            if (trimmed.startsWith("package ")) {
+                pkg = trimmed.replaceFirst("package\\s+", "")
+                        .replaceFirst(";\\s*$", "").trim()
+                        .replace('.', '/');
+                break;
+            }
+        }
+        java.util.regex.Matcher m = java.util.regex.Pattern
+                .compile("\\b(class|interface|enum)\\s+(\\w+)")
+                .matcher(source);
+        if (!m.find()) return null;
+        String simpleName = m.group(2);
+        return pkg != null ? pkg + "/" + simpleName : simpleName;
     }
 
     private void deleteDir(File dir) {

@@ -91,7 +91,11 @@ public class ToolDefinitions {
 
         tools.add(createTool("get_source_bytes",
                 "Get the raw bytecode of a loaded JVM class as a Base64 string. Useful for inspecting or transferring bytecode. "
-                + " / 获取已加载JVM类的原始字节码，以Base64字符串返回。可用于检查或传输字节码。",
+                + "WARNING: Only call this tool if you can actually decode and understand Base64-encoded bytecode. "
+                + "If you cannot interpret raw bytecode, use get_class_source instead to get human-readable Java source. "
+                + " / 获取已加载JVM类的原始字节码，以Base64字符串返回。可用于检查或传输字节码。"
+                + " 警告：只有在你能解码并理解 Base64 字节码时才应调用此工具。"
+                + " 如果无法解读原始字节码，请使用 get_class_source 获取可读的 Java 源码。",
                 "{\"type\":\"object\",\"properties\":{"
                 + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name / 全限定类名\"}"
                 + "},\"required\":[\"class_name\"]}"));
@@ -106,6 +110,49 @@ public class ToolDefinitions {
                 + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name / 全限定类名\"},"
                 + "\"bytes\":{\"type\":\"string\",\"description\":\"Base64-encoded class bytecode / Base64编码的类字节码\"}"
                 + "},\"required\":[\"class_name\",\"bytes\"]}"));
+
+        tools.add(createTool("retransform_class",
+                "Compile a ClassFileTransformer from Java source code at runtime, add it to Instrumentation, "
+                + "and retransform the target class. The source must define a public class implementing "
+                + "java.lang.instrument.ClassFileTransformer with a no-arg constructor. "
+                + "IMPORTANT: The source MUST declare package cn.ksmcbrigade.aiwiki_aca; and the class name in the source "
+                + "must match the generated name (e.g. public class Transformer_xxx). "
+                + "DO NOT use anonymous classes or local classes inside the transformer source — they will fail to compile at runtime. "
+                + "Use named top-level classes only. Lambdas are OK for simple functional interfaces but NOT for ClassFileTransformer itself. "
+                + "The transformer is automatically removed after retransform. "
+                + "Uses Instrumentation.retransformClasses() directly — NO MixinHotSwap fallback. "
+                + "If the transformer returns non-null bytes, those bytes replace the class via the standard retransform mechanism. "
+                + "If it returns null, the class is unchanged."
+                + " / 从Java源码编译 ClassFileTransformer 并通过 Instrumentation.retransformClasses() 转换目标类。"
+                + " 源码必须定义一个实现 ClassFileTransformer 的 public 类（无参构造器）。"
+                + " 重要：源码必须声明 package cn.ksmcbrigade.aiwiki_aca; 且源码中的类名必须与生成的类名一致。"
+                + " 禁止在 transformer 源码中使用匿名类或局部类，否则会导致运行时编译失败。请使用命名的顶层类。"
+                + " 转换器在 retransform 后自动移除。直接使用 Instrumentation API，无 MixinHotSwap 兜底。",
+                "{\"type\":\"object\",\"properties\":{"
+                + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name to retransform / 要转换的全限定类名\"},"
+                + "\"transformer_source\":{\"type\":\"string\",\"description\":\"Java source code of a ClassFileTransformer implementation (must declare package cn.ksmcbrigade.aiwiki_aca, no anonymous/local classes) / ClassFileTransformer 实现的Java源码（必须声明 package cn.ksmcbrigade.aiwiki_aca，禁止匿名类/局部类）\"}"
+                + "},\"required\":[\"class_name\",\"transformer_source\"]}"));
+
+        tools.add(createTool("redefine_class_by_transformer",
+                "Compile a ClassFileTransformer from Java source code at runtime, retransform the target class, "
+                + "capture the transformed bytecode, then apply it via MixinHotSwap (with trampoline fallback for schema changes). "
+                + "The source must define a public class implementing java.lang.instrument.ClassFileTransformer with a no-arg constructor. "
+                + "IMPORTANT: The source MUST declare package cn.ksmcbrigade.aiwiki_aca; and the class name in the source "
+                + "must match the generated name (e.g. public class CapturingTransformer_xxx). "
+                + "DO NOT use anonymous classes or local classes inside the transformer source — they will fail to compile at runtime. "
+                + "Use named top-level classes only. Lambdas are OK for simple functional interfaces but NOT for ClassFileTransformer itself. "
+                + "The transformer is automatically removed after capture. "
+                + "USE WITH CAUTION — the transformer has full control over the bytecode."
+                + " / 从Java源码编译 ClassFileTransformer，转换目标类并捕获转换后的字节码，"
+                + " 然后通过 MixinHotSwap 应用（支持 schema 变更的 trampoline 兜底）。"
+                + " 源码必须定义一个实现 ClassFileTransformer 的 public 类（无参构造器）。"
+                + " 重要：源码必须声明 package cn.ksmcbrigade.aiwiki_aca; 且源码中的类名必须与生成的类名一致。"
+                + " 禁止在 transformer 源码中使用匿名类或局部类，否则会导致运行时编译失败。请使用命名的顶层类。"
+                + " 转换器在捕获后自动移除。请谨慎使用。",
+                "{\"type\":\"object\",\"properties\":{"
+                + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name to redefine / 要重定义的全限定类名\"},"
+                + "\"transformer_source\":{\"type\":\"string\",\"description\":\"Java source code of a ClassFileTransformer implementation (must declare package cn.ksmcbrigade.aiwiki_aca, no anonymous/local classes) / ClassFileTransformer 实现的Java源码（必须声明 package cn.ksmcbrigade.aiwiki_aca，禁止匿名类/局部类）\"}"
+                + "},\"required\":[\"class_name\",\"transformer_source\"]}"));
 
         return tools;
     }

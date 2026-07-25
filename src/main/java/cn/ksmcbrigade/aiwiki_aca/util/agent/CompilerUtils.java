@@ -1,5 +1,6 @@
 package cn.ksmcbrigade.aiwiki_aca.util.agent;
 
+import cn.ksmcbrigade.aiwiki_aca.McChatbot;
 import cn.ksmcbrigade.aiwiki_aca.util.agent.compile.SelfForwardingJavaFileManager;
 import com.google.gson.JsonObject;
 import org.jetbrains.java.decompiler.main.Fernflower;
@@ -181,6 +182,7 @@ public class CompilerUtils {
             ByteArrayOutputStream byteArrayOutputStream = null;
             byteArrayOutputStream = outputStreamMap.getOrDefault(className,null);
             if(byteArrayOutputStream==null) byteArrayOutputStream = outputStreamMap.getOrDefault(className.replace(".","/"),null);
+            if(byteArrayOutputStream==null && !outputStreamMap.isEmpty()) byteArrayOutputStream = outputStreamMap.values().stream().findFirst().orElse(null);
             return new SingleCompileInfo(success, info,byteArrayOutputStream==null?MixinAgent.ERROR_BYTECODE:byteArrayOutputStream.toByteArray());
         } catch (Exception e) {
             e.printStackTrace(new PrintWriter(writer));
@@ -199,7 +201,7 @@ public class CompilerUtils {
     public static Class<?> compileSingleSourceIntoClass(String clazzName,String source,Class<?> targetClass) throws IllegalAccessException {
         CompilerUtils.SingleCompileInfo info = CompilerUtils.compileSingle(clazzName,source);
         if(!info.success) throw new RuntimeException("Failed to compile "+clazzName);
-        if(Arrays.equals(info.bytes, MixinAgent.ERROR_BYTECODE)) throw new RuntimeException("The class bytes is error");
+        if(Arrays.equals(info.bytes, MixinAgent.ERROR_BYTECODE)) throw new RuntimeException("The class bytes is error,compile info: "+info.info);
         return defineClass(targetClass, info.bytes);
     }
 
