@@ -3,6 +3,9 @@ package cn.ksmcbrigade.aiwiki_aca.ai;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.minecraft.client.renderer.LightmapRenderStateExtractor;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
 
 public class ToolDefinitions {
 
@@ -117,8 +120,10 @@ public class ToolDefinitions {
                 + "java.lang.instrument.ClassFileTransformer with a no-arg constructor. "
                 + "IMPORTANT: The source MUST declare package cn.ksmcbrigade.aiwiki_aca; and the class name in the source "
                 + "must match the generated name (e.g. public class Transformer_xxx). "
-                + "DO NOT use anonymous classes or local classes inside the transformer source — they will fail to compile at runtime. "
-                + "Use named top-level classes only. Lambdas are OK for simple functional interfaces but NOT for ClassFileTransformer itself. "
+                + "WARN & IMPORTANT: DO NOT use anonymous classes or local classes inside the transformer source — they will fail to compile at runtime. "
+                + "WARN & IMPORTANT: DO NOT use anonymous classes or local classes such as ClassVisitor,MethodVisitor,FieldVisitor and so on inside the transformer source — they will fail to compile at runtime. "
+                + "Use one named top-level class only. Lambdas are OK for simple functional interfaces but NOT for ClassFileTransformer itself. "
+                + "WARN: The class name used each time must not be the same as the previous one; otherwise, it may cause compilation errors."
                 + "The transformer is automatically removed after retransform. "
                 + "Uses Instrumentation.retransformClasses() directly — NO MixinHotSwap fallback. "
                 + "If the transformer returns non-null bytes, those bytes replace the class via the standard retransform mechanism. "
@@ -126,7 +131,9 @@ public class ToolDefinitions {
                 + " / 从Java源码编译 ClassFileTransformer 并通过 Instrumentation.retransformClasses() 转换目标类。"
                 + " 源码必须定义一个实现 ClassFileTransformer 的 public 类（无参构造器）。"
                 + " 重要：源码必须声明 package cn.ksmcbrigade.aiwiki_aca; 且源码中的类名必须与生成的类名一致。"
-                + " 禁止在 transformer 源码中使用匿名类或局部类，否则会导致运行时编译失败。请使用命名的顶层类。"
+                + " 重要：禁止在 transformer 源码中使用匿名类或局部类，否则会导致运行时编译失败。请使用命名的顶层类。"
+                + " 重要：禁止在 transformer 源码中使用如 ClassVisitor/MethodVisitor/FieldVisitor 等匿名匿名类或局部类，否则会导致运行时编译失败。请使用命名的顶层类。"
+                + " 警告：每次使用的类名不得与此前相同，否则将可能导致编译错误。"
                 + " 转换器在 retransform 后自动移除。直接使用 Instrumentation API，无 MixinHotSwap 兜底。",
                 "{\"type\":\"object\",\"properties\":{"
                 + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name to retransform / 要转换的全限定类名\"},"
@@ -139,20 +146,44 @@ public class ToolDefinitions {
                 + "The source must define a public class implementing java.lang.instrument.ClassFileTransformer with a no-arg constructor. "
                 + "IMPORTANT: The source MUST declare package cn.ksmcbrigade.aiwiki_aca; and the class name in the source "
                 + "must match the generated name (e.g. public class CapturingTransformer_xxx). "
-                + "DO NOT use anonymous classes or local classes inside the transformer source — they will fail to compile at runtime. "
-                + "Use named top-level classes only. Lambdas are OK for simple functional interfaces but NOT for ClassFileTransformer itself. "
+                + "WARN & IMPORTANT: DO NOT use anonymous classes or local classes inside the transformer source — they will fail to compile at runtime. "
+                + "WARN & IMPORTANT: DO NOT use anonymous classes or local classes such as ClassVisitor,MethodVisitor,FieldVisitor and so on inside the transformer source — they will fail to compile at runtime. "
+                + "Use named one top-level class only. Lambdas are OK for simple functional interfaces but NOT for ClassFileTransformer itself. "
+                + "WARN: The class name used each time must not be the same as the previous one; otherwise, it may cause compilation errors."
                 + "The transformer is automatically removed after capture. "
                 + "USE WITH CAUTION — the transformer has full control over the bytecode."
                 + " / 从Java源码编译 ClassFileTransformer，转换目标类并捕获转换后的字节码，"
                 + " 然后通过 MixinHotSwap 应用（支持 schema 变更的 trampoline 兜底）。"
                 + " 源码必须定义一个实现 ClassFileTransformer 的 public 类（无参构造器）。"
                 + " 重要：源码必须声明 package cn.ksmcbrigade.aiwiki_aca; 且源码中的类名必须与生成的类名一致。"
-                + " 禁止在 transformer 源码中使用匿名类或局部类，否则会导致运行时编译失败。请使用命名的顶层类。"
+                + " 重要：禁止在 transformer 源码中使用匿名类或局部类，否则会导致运行时编译失败。请使用命名的顶层类。"
+                + " 重要：禁止在 transformer 源码中使用如 ClassVisitor/MethodVisitor/FieldVisitor 等匿名匿名类或局部类，否则会导致运行时编译失败。请使用命名的顶层类。"
+                + " 警告：每次使用的类名不得与此前相同，否则将可能导致编译错误。"
                 + " 转换器在捕获后自动移除。请谨慎使用。",
                 "{\"type\":\"object\",\"properties\":{"
                 + "\"class_name\":{\"type\":\"string\",\"description\":\"Fully qualified class name to redefine / 要重定义的全限定类名\"},"
                 + "\"transformer_source\":{\"type\":\"string\",\"description\":\"Java source code of a ClassFileTransformer implementation (must declare package cn.ksmcbrigade.aiwiki_aca, no anonymous/local classes) / ClassFileTransformer 实现的Java源码（必须声明 package cn.ksmcbrigade.aiwiki_aca，禁止匿名类/局部类）\"}"
                 + "},\"required\":[\"class_name\",\"transformer_source\"]}"));
+
+        tools.add(createTool("is_mod_loaded",
+                "Check which of the given mod IDs are currently loaded. Returns the list of loaded mod IDs."
+                + " / 检查给定的 modId 中哪些已加载。返回已加载的 modId 列表。",
+                "{\"type\":\"object\",\"properties\":{\"mod_ids\":{\"type\":\"array\",\"description\":\"List of mod IDs to check / 要检查的 modId 列表\",\"items\":{\"type\":\"string\"}}},\"required\":[\"mod_ids\"]}"));
+
+        tools.add(createTool("get_mod_list",
+                "List all loaded mods with their display name, version, and mod ID."
+                + " / 列出所有已加载模组的显示名称、版本和 modId。",
+                "{\"type\":\"object\",\"properties\":{}}"));
+
+        tools.add(createTool("get_packages",
+                "List all packages in a given module via FMLLoader. Use this to discover what packages exist in a module."
+                + " / 列出指定模块中的所有包（通过 FMLLoader）。用于发现模块中存在哪些包。",
+                "{\"type\":\"object\",\"properties\":{\"module\":{\"type\":\"string\",\"description\":\"Module name to query (e.g. minecraft.all, java.base, ai_wiki_aca) / 要查询的模块名称\"}},\"required\":[\"module\"]}"));
+
+        tools.add(createTool("get_loaded_classes",
+                "List all currently loaded classes in the JVM. Optionally filter by a class name prefix."
+                + " / 列出 JVM 中当前已加载的所有类。可选按类名前缀过滤。",
+                "{\"type\":\"object\",\"properties\":{\"prefix\":{\"type\":\"string\",\"description\":\"Optional prefix to filter class names (e.g. cn.ksmcbrigade) / 可选的类名前缀过滤器\"}}}"));
 
         return tools;
     }

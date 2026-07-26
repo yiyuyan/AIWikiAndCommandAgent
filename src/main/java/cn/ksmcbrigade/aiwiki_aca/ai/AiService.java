@@ -1,6 +1,7 @@
 package cn.ksmcbrigade.aiwiki_aca.ai;
 
 import cn.ksmcbrigade.aiwiki_aca.mixin.ServerPlayerAccessor;
+import cn.ksmcbrigade.aiwiki_aca.util.agent.ClassUtils;
 import cn.ksmcbrigade.aiwiki_aca.util.agent.CompilerUtils;
 import cn.ksmcbrigade.aiwiki_aca.util.agent.InstUtils;
 import cn.ksmcbrigade.aiwiki_aca.util.agent.MixinHotSwap;
@@ -10,6 +11,7 @@ import cn.ksmcbrigade.aiwiki_aca.McChatbot;
 import cn.ksmcbrigade.aiwiki_aca.commands.CommandApproval;
 import cn.ksmcbrigade.aiwiki_aca.knowledge.KnowledgeManager;
 import cn.ksmcbrigade.aiwiki_aca.util.TextUtil;
+import net.neoforged.fml.ModList;
 import org.objectweb.asm.*;
 import org.objectweb.asm.tree.*;
 
@@ -856,6 +858,98 @@ public class AiService {
                         return (isZh()
                                 ? "错误: 编译或通过 ClassFileTransformer 重定义类失败: " + e.getMessage()
                                 : "ERROR: Failed to compile or redefine class via ClassFileTransformer: " + e.getMessage());
+                    }
+                }
+                case "is_mod_loaded": {
+                    JsonArray modIdsArray = args.getAsJsonArray("mod_ids");
+                    List<String> modIds = new ArrayList<>();
+                    for (JsonElement elem : modIdsArray) {
+                        modIds.add(elem.getAsString());
+                    }
+                    ModList modList = ModList.get();
+                    List<String> loaded = new ArrayList<>();
+                    List<String> notLoaded = new ArrayList<>();
+                    for (String modId : modIds) {
+                        if (modList != null && modList.isLoaded(modId)) {
+                            loaded.add(modId);
+                        } else {
+                            notLoaded.add(modId);
+                        }
+                    }
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(isZh() ? "已加载的 mod（" + loaded.size() + "/" + modIds.size() + "）：\n" : "Loaded mods (" + loaded.size() + "/" + modIds.size() + "):\n");
+                    for (String id : loaded) {
+                        sb.append("  ✓ ").append(id).append("\n");
+                    }
+                    if (!notLoaded.isEmpty()) {
+                        sb.append(isZh() ? "未加载的 mod（" + notLoaded.size() + "）：\n" : "Not loaded (" + notLoaded.size() + "):\n");
+                        for (String id : notLoaded) {
+                            sb.append("  ✗ ").append(id).append("\n");
+                        }
+                    }
+                    McChatbot.LOGGER.info("[is_mod_loaded] checked={} loaded={}", modIds.size(), loaded.size());
+                    //player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "检查完成: " : "Check complete: ") + loaded.size() + "/" + modIds.size() + (isZh() ? " 个 mod 已加载" : " mods loaded")));
+                    return sb.toString().trim();
+                }
+                case "get_mod_list": {
+                    ModList modListAll = ModList.get();
+                    if (modListAll == null) {
+                        String errMsg = isZh() ? "错误: ModList 不可用。" : "ERROR: ModList is not available.";
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + errMsg));
+                        return errMsg;
+                    }
+                    var allMods = modListAll.getMods();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(isZh() ? "已加载模组（" + allMods.size() + " 个）：\n" : "Loaded mods (" + allMods.size() + "):\n");
+                    for (var info : allMods) {
+                        sb.append("  - [").append(info.getModId()).append("] ")
+                                .append(info.getDisplayName()).append(" v")
+                                .append(info.getVersion()).append("\n")
+                                .append("    ").append(info.getDescription()).append("\n");
+                    }
+                    McChatbot.LOGGER.info("[get_mod_list] count={}", allMods.size());
+                    //player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "已加载模组: " : "Loaded mods: ") + allMods.size()));
+                    return sb.toString().trim();
+                }
+                case "get_packages": {
+                    String module = args.get("module").getAsString();
+                    player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§7" + (isZh() ? "正在获取模块包列表: " : "Listing packages for module: ") + module + "..."));
+                    try {
+                        var packages = ClassUtils.getAllPackages(module);
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(isZh() ? "模块 \"" + module + "\" 中的包（" + packages.size() + " 个）：\n" : "Packages in module \"" + module + "\" (" + packages.size() + "):\n");
+                        packages.stream().sorted().forEach(p -> sb.append("  - ").append(p).append("\n"));
+                        McChatbot.LOGGER.info("[get_packages] SUCCESS module={} count={}", module, packages.size());
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "获取成功: " : "Got packages: ") + module + " §7(" + packages.size() + (isZh() ? " 个包)" : " packages)")));
+                        return sb.toString().trim();
+                    } catch (Exception e) {
+                        McChatbot.LOGGER.error("[get_packages] FAILED module={}", module, e);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "获取失败: " : "Get packages failed: ") + module + " - " + e.getMessage()));
+                        return (isZh()
+                                ? "错误: 获取模块 \"" + module + "\" 的包列表失败: " + e.getMessage()
+                                : "ERROR: Failed to list packages for module \"" + module + "\": " + e.getMessage());
+                    }
+                }
+                case "get_loaded_classes": {
+                    String prefix = args.has("prefix") && !args.get("prefix").isJsonNull() ? args.get("prefix").getAsString() : null;
+                    player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§7" + (isZh() ? "正在获取已加载类列表..." : "Listing loaded classes...")));
+                    try {
+                        var classes = prefix != null && !prefix.isBlank()
+                                ? ClassUtils.getAllLoadedClasses(prefix)
+                                : ClassUtils.getAllLoadedClasses();
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(isZh() ? "已加载类（" + classes.size() + " 个" + (prefix != null ? "，前缀: " + prefix : "") + "）：\n"
+                                : "Loaded classes (" + classes.size() + (prefix != null ? ", prefix: " + prefix : "") + "):\n");
+                        classes.stream().sorted().forEach(c -> sb.append("  - ").append(c).append("\n"));
+                        McChatbot.LOGGER.info("[get_loaded_classes] SUCCESS prefix={} count={}", prefix, classes.size());
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§a" + (isZh() ? "获取成功: " : "Got loaded classes: ") + classes.size() + (isZh() ? " 个类" : " classes")));
+                        return sb.toString().trim();
+                    } catch (Exception e) {
+                        McChatbot.LOGGER.error("[get_loaded_classes] FAILED prefix={}", prefix, e);
+                        player.sendSystemMessage(Component.literal(Config.AI_PREFIX.get() + "§c" + (isZh() ? "获取已加载类列表失败: " : "Get loaded classes failed: ") + e.getMessage()));
+                        return (isZh()
+                                ? "错误: 获取已加载类列表失败: " + e.getMessage()
+                                : "ERROR: Failed to list loaded classes: " + e.getMessage());
                     }
                 }
                 default:
